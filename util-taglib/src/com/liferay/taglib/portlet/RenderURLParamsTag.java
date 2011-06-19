@@ -55,6 +55,7 @@ public class RenderURLParamsTag extends TagSupport {
 		return params;
 	}
 
+	@Override
 	public int doEndTag() throws JspException {
 		try {
 			doTag(_varImpl, pageContext);

@@ -57,6 +57,7 @@ public class BlogsEntryAssetRendererFactory extends BaseAssetRendererFactory {
 		return new BlogsEntryAssetRenderer(entry);
 	}
 
+	@Override
 	public AssetRenderer getAssetRenderer(long groupId, String urlTitle)
 		throws PortalException, SystemException {
 
@@ -73,6 +74,7 @@ public class BlogsEntryAssetRendererFactory extends BaseAssetRendererFactory {
 		return TYPE;
 	}
 
+	@Override
 	public PortletURL getURLAdd(
 			LiferayPortletRequest liferayPortletRequest,
 			LiferayPortletResponse liferayPortletResponse)
@@ -100,6 +102,7 @@ public class BlogsEntryAssetRendererFactory extends BaseAssetRendererFactory {
 		return portletURL;
 	}
 
+	@Override
 	public boolean hasPermission(
 			PermissionChecker permissionChecker, long classPK, String actionId)
 		throws Exception {
@@ -108,6 +111,7 @@ public class BlogsEntryAssetRendererFactory extends BaseAssetRendererFactory {
 			permissionChecker, classPK, actionId);
 	}
 
+	@Override
 	protected String getIconPath(ThemeDisplay themeDisplay) {
 		return themeDisplay.getPathThemeImages() + "/blogs/blogs.png";
 	}

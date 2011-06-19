@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.util.CentralizedThreadLocal;
 public class ClearThreadLocalThreadPoolHandler
 	extends ThreadPoolHandlerAdapter {
 
+	@Override
 	public void afterExecute(Runnable runnable, Throwable throwable) {
 		CentralizedThreadLocal.clearShortLivedThreadLocals();
 	}

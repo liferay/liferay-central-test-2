@@ -41,6 +41,7 @@ import java.sql.Types;
  */
 public class UpgradeUser extends UpgradeProcess {
 
+	@Override
 	protected void doUpgrade() throws Exception {
 
 		// User_

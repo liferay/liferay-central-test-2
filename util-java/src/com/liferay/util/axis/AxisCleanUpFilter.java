@@ -33,10 +33,12 @@ import org.apache.axis.utils.cache.MethodCache;
  */
 public class AxisCleanUpFilter extends BaseFilter {
 
+	@Override
 	protected Log getLog() {
 		return _log;
 	}
 
+	@Override
 	protected void processFilter(
 			HttpServletRequest request, HttpServletResponse response,
 			FilterChain filterChain)

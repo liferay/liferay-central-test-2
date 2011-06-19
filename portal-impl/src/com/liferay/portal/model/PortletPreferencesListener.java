@@ -25,10 +25,12 @@ import com.liferay.portal.servlet.filters.cache.CacheUtil;
 public class PortletPreferencesListener
 	extends BaseModelListener<PortletPreferences> {
 
+	@Override
 	public void onAfterRemove(PortletPreferences portletPreferences) {
 		clearCache(portletPreferences);
 	}
 
+	@Override
 	public void onAfterUpdate(PortletPreferences portletPreferences) {
 		clearCache(portletPreferences);
 	}

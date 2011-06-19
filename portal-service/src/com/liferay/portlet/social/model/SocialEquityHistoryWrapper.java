@@ -223,6 +223,7 @@ public class SocialEquityHistoryWrapper implements SocialEquityHistory {
 		_socialEquityHistory.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new SocialEquityHistoryWrapper((SocialEquityHistory)_socialEquityHistory.clone());
 	}
@@ -232,6 +233,7 @@ public class SocialEquityHistoryWrapper implements SocialEquityHistory {
 		return _socialEquityHistory.compareTo(socialEquityHistory);
 	}
 
+	@Override
 	public int hashCode() {
 		return _socialEquityHistory.hashCode();
 	}
@@ -240,6 +242,7 @@ public class SocialEquityHistoryWrapper implements SocialEquityHistory {
 		return new SocialEquityHistoryWrapper(_socialEquityHistory.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _socialEquityHistory.toString();
 	}

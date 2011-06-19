@@ -212,6 +212,7 @@ public class RatingsStatsWrapper implements RatingsStats {
 		_ratingsStats.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new RatingsStatsWrapper((RatingsStats)_ratingsStats.clone());
 	}
@@ -221,6 +222,7 @@ public class RatingsStatsWrapper implements RatingsStats {
 		return _ratingsStats.compareTo(ratingsStats);
 	}
 
+	@Override
 	public int hashCode() {
 		return _ratingsStats.hashCode();
 	}
@@ -229,6 +231,7 @@ public class RatingsStatsWrapper implements RatingsStats {
 		return new RatingsStatsWrapper(_ratingsStats.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _ratingsStats.toString();
 	}

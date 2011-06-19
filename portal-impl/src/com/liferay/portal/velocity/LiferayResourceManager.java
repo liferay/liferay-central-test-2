@@ -32,6 +32,7 @@ import org.apache.velocity.runtime.resource.ResourceManagerImpl;
  */
 public class LiferayResourceManager extends ResourceManagerImpl {
 
+	@Override
 	public String getLoaderNameForResource(String source) {
 
 		// Velocity's default implementation makes its cache useless because
@@ -49,6 +50,7 @@ public class LiferayResourceManager extends ResourceManagerImpl {
 		}
 	}
 
+	@Override
 	public Resource getResource(
 			String resourceName, int resourceType, String encoding)
 		throws Exception {
@@ -61,6 +63,7 @@ public class LiferayResourceManager extends ResourceManagerImpl {
 		}
 	}
 
+	@Override
 	public synchronized void initialize(RuntimeServices runtimeServices)
 		throws Exception {
 

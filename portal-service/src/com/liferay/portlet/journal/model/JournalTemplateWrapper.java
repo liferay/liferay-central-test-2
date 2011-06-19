@@ -457,6 +457,7 @@ public class JournalTemplateWrapper implements JournalTemplate {
 		_journalTemplate.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new JournalTemplateWrapper((JournalTemplate)_journalTemplate.clone());
 	}
@@ -466,6 +467,7 @@ public class JournalTemplateWrapper implements JournalTemplate {
 		return _journalTemplate.compareTo(journalTemplate);
 	}
 
+	@Override
 	public int hashCode() {
 		return _journalTemplate.hashCode();
 	}
@@ -474,6 +476,7 @@ public class JournalTemplateWrapper implements JournalTemplate {
 		return new JournalTemplateWrapper(_journalTemplate.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _journalTemplate.toString();
 	}

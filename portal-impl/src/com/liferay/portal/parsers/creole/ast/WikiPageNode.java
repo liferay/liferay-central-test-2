@@ -36,6 +36,7 @@ public class WikiPageNode extends BaseParentableNode {
 		super(collectionNode);
 	}
 
+	@Override
 	public void accept(ASTVisitor astVisitor) {
 		astVisitor.visit(this);
 	}

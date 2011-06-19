@@ -39,6 +39,7 @@ public abstract class ClientDataRequestImpl
 		return getHttpServletRequest().getContentType();
 	}
 
+	@Override
 	public String getMethod() {
 		return getHttpServletRequest().getMethod();
 	}

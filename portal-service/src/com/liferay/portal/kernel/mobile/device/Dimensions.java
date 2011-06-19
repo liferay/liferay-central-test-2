@@ -38,6 +38,7 @@ public class Dimensions implements Serializable {
 		return _width;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(5);
 

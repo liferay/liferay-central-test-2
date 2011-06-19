@@ -183,48 +183,21 @@ public class DDLRecordVersionWrapper implements DDLRecordVersion {
 	}
 
 	/**
-	* Returns the fully qualified class name of this d d l record version.
+	* Returns the d d m storage ID of this d d l record version.
 	*
-	* @return the fully qualified class name of this d d l record version
+	* @return the d d m storage ID of this d d l record version
 	*/
-	public java.lang.String getClassName() {
-		return _ddlRecordVersion.getClassName();
+	public long getDDMStorageId() {
+		return _ddlRecordVersion.getDDMStorageId();
 	}
 
 	/**
-	* Returns the class name ID of this d d l record version.
+	* Sets the d d m storage ID of this d d l record version.
 	*
-	* @return the class name ID of this d d l record version
+	* @param DDMStorageId the d d m storage ID of this d d l record version
 	*/
-	public long getClassNameId() {
-		return _ddlRecordVersion.getClassNameId();
-	}
-
-	/**
-	* Sets the class name ID of this d d l record version.
-	*
-	* @param classNameId the class name ID of this d d l record version
-	*/
-	public void setClassNameId(long classNameId) {
-		_ddlRecordVersion.setClassNameId(classNameId);
-	}
-
-	/**
-	* Returns the class p k of this d d l record version.
-	*
-	* @return the class p k of this d d l record version
-	*/
-	public long getClassPK() {
-		return _ddlRecordVersion.getClassPK();
-	}
-
-	/**
-	* Sets the class p k of this d d l record version.
-	*
-	* @param classPK the class p k of this d d l record version
-	*/
-	public void setClassPK(long classPK) {
-		_ddlRecordVersion.setClassPK(classPK);
+	public void setDDMStorageId(long DDMStorageId) {
+		_ddlRecordVersion.setDDMStorageId(DDMStorageId);
 	}
 
 	/**
@@ -475,6 +448,7 @@ public class DDLRecordVersionWrapper implements DDLRecordVersion {
 		_ddlRecordVersion.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new DDLRecordVersionWrapper((DDLRecordVersion)_ddlRecordVersion.clone());
 	}
@@ -484,6 +458,7 @@ public class DDLRecordVersionWrapper implements DDLRecordVersion {
 		return _ddlRecordVersion.compareTo(ddlRecordVersion);
 	}
 
+	@Override
 	public int hashCode() {
 		return _ddlRecordVersion.hashCode();
 	}
@@ -492,12 +467,19 @@ public class DDLRecordVersionWrapper implements DDLRecordVersion {
 		return new DDLRecordVersionWrapper(_ddlRecordVersion.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _ddlRecordVersion.toString();
 	}
 
 	public java.lang.String toXmlString() {
 		return _ddlRecordVersion.toXmlString();
+	}
+
+	public com.liferay.portlet.dynamicdatalists.model.DDLRecord getRecord()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _ddlRecordVersion.getRecord();
 	}
 
 	public DDLRecordVersion getWrappedDDLRecordVersion() {

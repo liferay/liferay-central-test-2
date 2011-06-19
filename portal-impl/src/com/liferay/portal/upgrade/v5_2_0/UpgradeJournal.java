@@ -35,6 +35,7 @@ import java.util.Iterator;
  */
 public class UpgradeJournal extends UpgradeProcess {
 
+	@Override
 	protected void doUpgrade() throws Exception {
 		Connection con = null;
 		PreparedStatement ps = null;

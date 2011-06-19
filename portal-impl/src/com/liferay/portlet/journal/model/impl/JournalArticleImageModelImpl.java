@@ -245,6 +245,7 @@ public class JournalArticleImageModelImpl extends BaseModelImpl<JournalArticleIm
 		_tempImage = tempImage;
 	}
 
+	@Override
 	public JournalArticleImage toEscapedModel() {
 		if (isEscapedModel()) {
 			return (JournalArticleImage)this;
@@ -255,6 +256,7 @@ public class JournalArticleImageModelImpl extends BaseModelImpl<JournalArticleIm
 		}
 	}
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(0,
@@ -264,10 +266,12 @@ public class JournalArticleImageModelImpl extends BaseModelImpl<JournalArticleIm
 		return _expandoBridge;
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		getExpandoBridge().setAttributes(serviceContext);
 	}
 
+	@Override
 	public Object clone() {
 		JournalArticleImageImpl journalArticleImageImpl = new JournalArticleImageImpl();
 
@@ -299,6 +303,7 @@ public class JournalArticleImageModelImpl extends BaseModelImpl<JournalArticleIm
 		}
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -323,10 +328,12 @@ public class JournalArticleImageModelImpl extends BaseModelImpl<JournalArticleIm
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		JournalArticleImageModelImpl journalArticleImageModelImpl = this;
 
@@ -347,6 +354,7 @@ public class JournalArticleImageModelImpl extends BaseModelImpl<JournalArticleIm
 		journalArticleImageModelImpl._originalLanguageId = journalArticleImageModelImpl._languageId;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(17);
 

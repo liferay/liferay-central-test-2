@@ -27,6 +27,7 @@ import java.sql.ResultSet;
  */
 public class UpgradeUUID extends UpgradeProcess {
 
+	@Override
 	protected void doUpgrade() throws Exception {
 		updateTable("BlogsEntry", "entryId");
 		updateTable("BookmarksEntry", "entryId");

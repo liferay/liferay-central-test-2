@@ -360,6 +360,7 @@ public class FreeMarkerVariablesImpl implements FreeMarkerVariables {
 				"xmlRequest",
 				new Object() {
 
+					@Override
 					public String toString() {
 						return PortletRequestUtil.toXML(
 							portletRequest, portletResponse);

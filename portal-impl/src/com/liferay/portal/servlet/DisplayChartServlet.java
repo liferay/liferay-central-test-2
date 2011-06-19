@@ -29,6 +29,7 @@ import org.jfree.chart.servlet.DisplayChart;
  */
 public class DisplayChartServlet extends DisplayChart {
 
+	@Override
 	public void service(
 			HttpServletRequest request, HttpServletResponse response)
 		throws IOException, ServletException {

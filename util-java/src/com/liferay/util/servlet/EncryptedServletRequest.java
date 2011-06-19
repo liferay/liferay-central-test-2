@@ -61,6 +61,7 @@ public class EncryptedServletRequest extends HttpServletRequestWrapper {
 		}
 	}
 
+	@Override
 	public String getParameter(String name) {
 		String[] values = _params.get(name);
 
@@ -72,10 +73,12 @@ public class EncryptedServletRequest extends HttpServletRequestWrapper {
 		}
 	}
 
+	@Override
 	public Map<String, String[]> getParameterMap() {
 		return Collections.unmodifiableMap(_params);
 	}
 
+	@Override
 	public String[] getParameterValues(String name) {
 		return _params.get(name);
 	}

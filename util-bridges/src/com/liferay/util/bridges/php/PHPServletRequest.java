@@ -83,46 +83,57 @@ public class PHPServletRequest extends HttpServletRequestWrapper {
 			JavaConstants.JAVAX_SERVLET_INCLUDE_SERVLET_PATH, _path);
 	}
 
+	@Override
 	public String getContextPath() {
 		return StringPool.SLASH;
 	}
 
+	@Override
 	public String getParameter(String name) {
 		return _renderRequest.getParameter(name);
 	}
 
+	@Override
 	public Map<String, String[]> getParameterMap() {
 		return _renderRequest.getParameterMap();
 	}
 
+	@Override
 	public Enumeration<String> getParameterNames() {
 		return _renderRequest.getParameterNames();
 	}
 
+	@Override
 	public String[] getParameterValues(String name) {
 		return _renderRequest.getParameterValues(name);
 	}
 
+	@Override
 	public String getPathInfo() {
 		return StringPool.BLANK;
 	}
 
+	@Override
 	public String getPathTranslated() {
 		return StringPool.BLANK;
 	}
 
+	@Override
 	public String getQueryString() {
 		return _queryString;
 	}
 
+	@Override
 	public String getRealPath(String path) {
 		return _servletConfig.getServletContext().getRealPath(path);
 	}
 
+	@Override
 	public String getRequestURI() {
 		return _path + StringPool.QUESTION + _queryString;
 	}
 
+	@Override
 	public StringBuffer getRequestURL() {
 		StringBuffer sb = new StringBuffer();
 
@@ -137,6 +148,7 @@ public class PHPServletRequest extends HttpServletRequestWrapper {
 		return sb;
 	}
 
+	@Override
 	public String getServletPath() {
 		return _path;
 	}

@@ -74,25 +74,39 @@ public class BlogsEntryAtomCollectionAdapter
 		return blogsEntry.getModifiedDate();
 	}
 
-	protected void doDeleteEntry(String resourceName) throws Exception {
+	public String getFeedTitle(AtomRequestContext atomRequestContext) {
+		return AtomUtil.createFeedTitleFromPortletName(
+			atomRequestContext, PortletKeys.BLOGS);
+	}
+
+	@Override
+	protected void doDeleteEntry(
+			String resourceName, AtomRequestContext atomRequestContext)
+		throws Exception {
+
 		long blogsEntryId = GetterUtil.getLong(resourceName);
 
 		BlogsEntryServiceUtil.deleteEntry(blogsEntryId);
 	}
 
-	protected BlogsEntry doGetEntry(String resourceName) throws Exception {
+	@Override
+	protected BlogsEntry doGetEntry(
+			String resourceName, AtomRequestContext atomRequestContext)
+		throws Exception {
+
 		long blogsEntryId = GetterUtil.getLong(resourceName);
 
 		return BlogsEntryServiceUtil.getEntry(blogsEntryId);
 	}
 
+	@Override
 	protected Iterable<BlogsEntry> doGetFeedEntries(
 			AtomRequestContext atomRequestContext)
 		throws Exception {
 
 		long groupId = atomRequestContext.getLongParameter("groupId");
-
 		int status = WorkflowConstants.STATUS_APPROVED;
+
 		int max = atomRequestContext.getIntParameter(
 			"max", SearchContainer.DEFAULT_DELTA);
 
@@ -133,13 +147,7 @@ public class BlogsEntryAtomCollectionAdapter
 		return Collections.emptyList();
 	}
 
-	protected String doGetFeedTitle(AtomRequestContext atomRequestContext)
-		throws Exception {
-
-		return AtomUtil.createFeedTitleFromPortletName(
-			atomRequestContext, PortletKeys.BLOGS);
-	}
-
+	@Override
 	protected BlogsEntry doPostEntry(
 			String title, String summary, String content, Date date,
 			AtomRequestContext atomRequestContext)
@@ -174,6 +182,7 @@ public class BlogsEntryAtomCollectionAdapter
 			serviceContext);
 	}
 
+	@Override
 	protected void doPutEntry(
 			BlogsEntry blogsEntry, String title, String summary, String content,
 			Date date, AtomRequestContext atomRequestContext)

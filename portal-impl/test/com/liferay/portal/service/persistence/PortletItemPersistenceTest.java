@@ -33,6 +33,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class PortletItemPersistenceTest extends BasePersistenceTestCase {
+	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -69,13 +70,21 @@ public class PortletItemPersistenceTest extends BasePersistenceTestCase {
 		PortletItem newPortletItem = _persistence.create(pk);
 
 		newPortletItem.setGroupId(nextLong());
+
 		newPortletItem.setCompanyId(nextLong());
+
 		newPortletItem.setUserId(nextLong());
+
 		newPortletItem.setUserName(randomString());
+
 		newPortletItem.setCreateDate(nextDate());
+
 		newPortletItem.setModifiedDate(nextDate());
+
 		newPortletItem.setName(randomString());
+
 		newPortletItem.setPortletId(randomString());
+
 		newPortletItem.setClassNameId(nextLong());
 
 		_persistence.update(newPortletItem, false);
@@ -236,13 +245,21 @@ public class PortletItemPersistenceTest extends BasePersistenceTestCase {
 		PortletItem portletItem = _persistence.create(pk);
 
 		portletItem.setGroupId(nextLong());
+
 		portletItem.setCompanyId(nextLong());
+
 		portletItem.setUserId(nextLong());
+
 		portletItem.setUserName(randomString());
+
 		portletItem.setCreateDate(nextDate());
+
 		portletItem.setModifiedDate(nextDate());
+
 		portletItem.setName(randomString());
+
 		portletItem.setPortletId(randomString());
+
 		portletItem.setClassNameId(nextLong());
 
 		_persistence.update(portletItem, false);

@@ -56,24 +56,24 @@ FileVersion fileVersion = null;
 
 long fileVersionId = 0;
 
-long documentTypeId = ParamUtil.getLong(request, "documentTypeId", -1);
+long fileEntryTypeId = ParamUtil.getLong(request, "fileEntryTypeId", -1);
 
 if (fileEntry != null) {
 	fileVersion = fileEntry.getLatestFileVersion();
 
 	fileVersionId = fileVersion.getFileVersionId();
 
-	if ((documentTypeId == -1) && (fileVersion.getModel() instanceof DLFileVersion)) {
+	if ((fileEntryTypeId == -1) && (fileVersion.getModel() instanceof DLFileVersion)) {
 		DLFileVersion dlFileVersion = (DLFileVersion)fileVersion.getModel();
 
-		documentTypeId = dlFileVersion.getDocumentTypeId();
+		fileEntryTypeId = dlFileVersion.getFileEntryTypeId();
 	}
 }
 
-DLDocumentType documentType = null;
+DLFileEntryType fileEntryType = null;
 
-if (documentTypeId > 0) {
-	documentType = DLDocumentTypeLocalServiceUtil.getDocumentType(documentTypeId);
+if (fileEntryTypeId > 0) {
+	fileEntryType = DLFileEntryTypeLocalServiceUtil.getFileEntryType(fileEntryTypeId);
 }
 
 long assetClassPK = 0;
@@ -85,12 +85,12 @@ else if (fileEntry != null) {
 	assetClassPK = fileEntry.getFileEntryId();
 }
 
-Boolean isLocked = Boolean.FALSE;
+Boolean isCheckedOut = Boolean.FALSE;
 Boolean hasLock = Boolean.FALSE;
 Lock lock = null;
 
 if (fileEntry != null) {
-	isLocked = fileEntry.isLocked();
+	isCheckedOut = fileEntry.isCheckedOut();
 	hasLock = fileEntry.hasLock();
 	lock = fileEntry.getLock();
 }
@@ -109,7 +109,7 @@ portletURL.setParameter("fileEntryId", String.valueOf(fileEntryId));
 	<liferay-util:include page="/html/portlet/document_library/top_links.jsp" />
 </c:if>
 
-<c:if test="<%= isLocked %>">
+<c:if test="<%= isCheckedOut %>">
 	<c:choose>
 		<c:when test="<%= hasLock %>">
 			<div class="portlet-msg-success">
@@ -130,7 +130,7 @@ portletURL.setParameter("fileEntryId", String.valueOf(fileEntryId));
 		</c:when>
 		<c:otherwise>
 			<div class="portlet-msg-error">
-				<%= LanguageUtil.format(pageContext, "you-cannot-modify-this-document-because-it-was-locked-by-x-on-x", new Object[] {HtmlUtil.escape(PortalUtil.getUserName(lock.getUserId(), String.valueOf(lock.getUserId()))), dateFormatDateTime.format(lock.getCreateDate())}, false) %>
+				<%= LanguageUtil.format(pageContext, "you-cannot-modify-this-document-because-it-was-checked-out-by-x-on-x", new Object[] {HtmlUtil.escape(PortalUtil.getUserName(lock.getUserId(), String.valueOf(lock.getUserId()))), dateFormatDateTime.format(lock.getCreateDate())}, false) %>
 			</div>
 		</c:otherwise>
 	</c:choose>
@@ -142,8 +142,8 @@ String header = LanguageUtil.get(pageContext, "new-document");
 if (fileVersion != null) {
 	header = fileVersion.getTitle();
 }
-else if (documentType != null) {
-	header = LanguageUtil.format(pageContext, "new-x", new Object[] {documentType.getName()});
+else if (fileEntryType != null) {
+	header = LanguageUtil.format(pageContext, "new-x", new Object[] {fileEntryType.getName()});
 }
 %>
 
@@ -193,7 +193,7 @@ else if (documentType != null) {
 	<aui:model-context bean="<%= fileVersion %>" model="<%= DLFileVersion.class %>" />
 
 	<c:if test="<%= fileVersion != null %>">
-		<aui:workflow-status status="<%= fileVersion.getStatus() %>" version="<%= fileVersion.getVersion() %>" />
+		<aui:workflow-status model="<%= DLFileEntry.class %>" status="<%= fileVersion.getStatus() %>" version="<%= fileVersion.getVersion() %>" />
 	</c:if>
 
 	<aui:fieldset>
@@ -265,19 +265,19 @@ else if (documentType != null) {
 			<aui:input name="description" />
 
 			<%
-			List<DLDocumentType> documentTypes = DLDocumentTypeServiceUtil.getDocumentTypes(scopeGroupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+			List<DLFileEntryType> fileEntryTypes = DLFileEntryTypeServiceUtil.getFileEntryTypes(scopeGroupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 			%>
 
 			<c:choose>
 				<c:when test="<%= !cmd.equals(Constants.ADD) %>">
-					<aui:select changesContext="<%= true %>" label="document-type" name="documentTypeId" onChange='<%= renderResponse.getNamespace() + "changeDocumentType();" %>'>
+					<aui:select changesContext="<%= true %>" label="document-type" name="fileEntryTypeId" onChange='<%= renderResponse.getNamespace() + "changeFileEntryType();" %>'>
 						<aui:option label="none" value="0" />
 
 						<%
-						for (DLDocumentType curDocumentType : documentTypes) {
+						for (DLFileEntryType curFileEntryType : fileEntryTypes) {
 						%>
 
-							<aui:option label="<%= curDocumentType.getName() %>" selected="<%= (documentTypeId == curDocumentType.getPrimaryKey()) %>" value="<%= curDocumentType.getPrimaryKey() %>" />
+							<aui:option label="<%= curFileEntryType.getName() %>" selected="<%= (fileEntryTypeId == curFileEntryType.getPrimaryKey()) %>" value="<%= curFileEntryType.getPrimaryKey() %>" />
 
 						<%
 						}
@@ -286,22 +286,22 @@ else if (documentType != null) {
 					</aui:select>
 				</c:when>
 				<c:otherwise>
-					<aui:input name="documentTypeId" type="hidden" value="<%= documentTypeId %>" />
+					<aui:input name="fileEntryTypeId" type="hidden" value="<%= fileEntryTypeId %>" />
 				</c:otherwise>
 			</c:choose>
 
 			<%
-			if (documentTypeId > 0) {
+			if (fileEntryTypeId > 0) {
 				try {
-					List<DDMStructure> ddmStructures = documentType.getDDMStructures();
+					List<DDMStructure> ddmStructures = fileEntryType.getDDMStructures();
 
 					for (DDMStructure ddmStructure : ddmStructures) {
 						Fields fields = null;
 
 						try {
-							DLDocumentMetadataSet documentMetadataSet = DLDocumentMetadataSetLocalServiceUtil.getDocumentMetadataSet(ddmStructure.getStructureId(), fileVersionId);
+							DLFileEntryMetadata fileEntryMetadata = DLFileEntryMetadataLocalServiceUtil.getFileEntryMetadata(ddmStructure.getStructureId(), fileVersionId);
 
-							fields = StorageEngineUtil.getFields(documentMetadataSet.getClassPK());
+							fields = StorageEngineUtil.getFields(fileEntryMetadata.getClassPK());
 						}
 						catch (Exception e) {
 						}
@@ -399,18 +399,20 @@ else if (documentType != null) {
 			%>
 
 			<c:if test="<%= PropsValues.DL_FILE_ENTRY_DRAFTS_ENABLED %>">
-				<aui:button disabled="<%= isLocked && !hasLock %>" onClick='<%= renderResponse.getNamespace() + "saveFileEntry(true);" %>' name="saveButton" value="<%= saveButtonLabel %>" />
+				<aui:button disabled="<%= isCheckedOut && !hasLock %>" onClick='<%= renderResponse.getNamespace() + "saveFileEntry(true);" %>' name="saveButton" value="<%= saveButtonLabel %>" />
 			</c:if>
 
-			<aui:button disabled="<%= isLocked && !hasLock || (pending && PropsValues.DL_FILE_ENTRY_DRAFTS_ENABLED) %>" name="publishButton" type="submit" value="<%= publishButtonLabel %>" />
+			<aui:button disabled="<%= isCheckedOut && !hasLock || (pending && PropsValues.DL_FILE_ENTRY_DRAFTS_ENABLED) %>" name="publishButton" type="submit" value="<%= publishButtonLabel %>" />
 
-			<c:if test="<%= (fileEntry != null) && ((isLocked && hasLock) || !isLocked) %>">
+			<c:if test="<%= (fileEntry != null) && ((isCheckedOut && hasLock) || !isCheckedOut) %>">
 				<c:choose>
 					<c:when test="<%= !hasLock %>">
-						<aui:button onClick='<%= renderResponse.getNamespace() + "lock();" %>' value="lock" />
+						<aui:button onClick='<%= renderResponse.getNamespace() + "checkOut();" %>' value="checkout" />
 					</c:when>
 					<c:otherwise>
-						<aui:button onClick='<%= renderResponse.getNamespace() + "unlock();" %>' value="unlock" />
+						<aui:button onClick='<%= renderResponse.getNamespace() + "cancelCheckOut();" %>' value="cancel-checkout" />
+
+						<aui:button onClick='<%= renderResponse.getNamespace() + "checkIn();" %>' value="checkin" />
 					</c:otherwise>
 				</c:choose>
 			</c:if>
@@ -427,13 +429,21 @@ else if (documentType != null) {
 />
 
 <aui:script>
-	function <portlet:namespace />changeDocumentType() {
+	function <portlet:namespace />changeFileEntryType() {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.PREVIEW %>";
 		submitForm(document.<portlet:namespace />fm);
 	}
 
-	function <portlet:namespace />lock() {
-		submitForm(document.hrefFm, "<portlet:actionURL><portlet:param name="struts_action" value="/document_library/edit_file_entry" /><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.LOCK %>" /><portlet:param name="redirect" value="<%= redirect %>" /><portlet:param name="fileEntryId" value="<%= String.valueOf(fileEntryId) %>" /></portlet:actionURL>");
+	function <portlet:namespace />cancelCheckOut() {
+		submitForm(document.hrefFm, "<portlet:actionURL><portlet:param name="struts_action" value="/document_library/edit_file_entry" /><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.CANCEL_CHECKOUT %>" /><portlet:param name="redirect" value="<%= redirect %>" /><portlet:param name="fileEntryId" value="<%= String.valueOf(fileEntryId) %>" /></portlet:actionURL>");
+	}
+
+	function <portlet:namespace />checkIn() {
+		submitForm(document.hrefFm, "<portlet:actionURL><portlet:param name="struts_action" value="/document_library/edit_file_entry" /><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.CHECKIN %>" /><portlet:param name="redirect" value="<%= redirect %>" /><portlet:param name="fileEntryId" value="<%= String.valueOf(fileEntryId) %>" /></portlet:actionURL>");
+	}
+
+	function <portlet:namespace />checkOut() {
+		submitForm(document.hrefFm, "<portlet:actionURL><portlet:param name="struts_action" value="/document_library/edit_file_entry" /><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.CHECKOUT %>" /><portlet:param name="redirect" value="<%= redirect %>" /><portlet:param name="fileEntryId" value="<%= String.valueOf(fileEntryId) %>" /></portlet:actionURL>");
 	}
 
 	function <portlet:namespace />removeFolder() {
@@ -483,10 +493,6 @@ else if (documentType != null) {
 		else {
 			social.hide();
 		}
-	}
-
-	function <portlet:namespace />unlock() {
-		submitForm(document.hrefFm, "<portlet:actionURL><portlet:param name="struts_action" value="/document_library/edit_file_entry" /><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.UNLOCK %>" /><portlet:param name="redirect" value="<%= redirect %>" /><portlet:param name="fileEntryId" value="<%= String.valueOf(fileEntryId) %>" /></portlet:actionURL>");
 	}
 
 	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">

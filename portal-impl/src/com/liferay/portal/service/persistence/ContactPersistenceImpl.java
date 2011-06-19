@@ -121,6 +121,7 @@ public class ContactPersistenceImpl extends BasePersistenceImpl<Contact>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(ContactImpl.class.getName());
@@ -138,6 +139,7 @@ public class ContactPersistenceImpl extends BasePersistenceImpl<Contact>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(Contact contact) {
 		EntityCacheUtil.removeResult(ContactModelImpl.ENTITY_CACHE_ENABLED,
 			ContactImpl.class, contact.getPrimaryKey());
@@ -166,6 +168,7 @@ public class ContactPersistenceImpl extends BasePersistenceImpl<Contact>
 	 * @throws com.liferay.portal.NoSuchModelException if a contact with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Contact remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
@@ -218,10 +221,12 @@ public class ContactPersistenceImpl extends BasePersistenceImpl<Contact>
 	 * @return the contact that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Contact remove(Contact contact) throws SystemException {
 		return super.remove(contact);
 	}
 
+	@Override
 	protected Contact removeImpl(Contact contact) throws SystemException {
 		contact = toUnwrappedModel(contact);
 
@@ -247,6 +252,7 @@ public class ContactPersistenceImpl extends BasePersistenceImpl<Contact>
 		return contact;
 	}
 
+	@Override
 	public Contact updateImpl(com.liferay.portal.model.Contact contact,
 		boolean merge) throws SystemException {
 		contact = toUnwrappedModel(contact);
@@ -327,6 +333,7 @@ public class ContactPersistenceImpl extends BasePersistenceImpl<Contact>
 	 * @throws com.liferay.portal.NoSuchModelException if a contact with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Contact findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
@@ -363,6 +370,7 @@ public class ContactPersistenceImpl extends BasePersistenceImpl<Contact>
 	 * @return the contact, or <code>null</code> if a contact with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Contact fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());

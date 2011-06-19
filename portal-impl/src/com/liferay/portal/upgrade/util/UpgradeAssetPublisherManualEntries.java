@@ -128,6 +128,7 @@ public class UpgradeAssetPublisherManualEntries
 		return assetEntryXmls;
 	}
 
+	@Override
 	protected String getUpdatePortletPreferencesWhereClause() {
 		StringBundler sb = new StringBundler(5);
 
@@ -140,6 +141,7 @@ public class UpgradeAssetPublisherManualEntries
 		return sb.toString();
 	}
 
+	@Override
 	protected String upgradePreferences(
 			long companyId, long ownerId, int ownerType, long plid,
 			String portletId, String xml)

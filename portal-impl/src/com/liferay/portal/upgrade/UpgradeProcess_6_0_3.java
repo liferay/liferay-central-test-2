@@ -30,10 +30,12 @@ import com.liferay.portal.upgrade.v6_0_3.UpgradeSitemap;
  */
 public class UpgradeProcess_6_0_3 extends UpgradeProcess {
 
+	@Override
 	public int getThreshold() {
 		return ReleaseInfo.RELEASE_6_0_3_BUILD_NUMBER;
 	}
 
+	@Override
 	protected void doUpgrade() throws Exception {
 		upgrade(UpgradeSchema.class);
 		upgrade(UpgradeAsset.class);

@@ -334,9 +334,22 @@ public class DDLRecordLocalServiceUtil {
 			orderByComparator);
 	}
 
+	public static java.util.List<com.liferay.portlet.dynamicdatalists.model.DDLRecord> getRecords(
+		long recordSetId, long userId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getRecords(recordSetId, userId);
+	}
+
 	public static int getRecordsCount(long recordSetId, int status)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getRecordsCount(recordSetId, status);
+	}
+
+	public static com.liferay.portlet.dynamicdatalists.model.DDLRecordVersion getRecordVersion(
+		long recordVersionId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().getRecordVersion(recordVersionId);
 	}
 
 	public static com.liferay.portlet.dynamicdatalists.model.DDLRecordVersion getRecordVersion(
@@ -344,6 +357,27 @@ public class DDLRecordLocalServiceUtil {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService().getRecordVersion(recordId, version);
+	}
+
+	public static java.util.List<com.liferay.portlet.dynamicdatalists.model.DDLRecordVersion> getRecordVersions(
+		long recordId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .getRecordVersions(recordId, start, end, orderByComparator);
+	}
+
+	public static int getRecordVersionsCount(long recordId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getRecordVersionsCount(recordId);
+	}
+
+	public static void revertRecordVersion(long recordId,
+		java.lang.String version,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().revertRecordVersion(recordId, version, serviceContext);
 	}
 
 	public static void updateAsset(long userId,
@@ -383,12 +417,12 @@ public class DDLRecordLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.dynamicdatalists.model.DDLRecord updateStatus(
-		long userId, long recordId, int status,
+		long userId, long recordVersionId, int status,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .updateStatus(userId, recordId, status, serviceContext);
+				   .updateStatus(userId, recordVersionId, status, serviceContext);
 	}
 
 	public static DDLRecordLocalService getService() {

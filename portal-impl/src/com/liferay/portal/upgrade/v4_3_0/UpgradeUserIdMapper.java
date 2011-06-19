@@ -30,6 +30,7 @@ import java.sql.Types;
  */
 public class UpgradeUserIdMapper extends UpgradeProcess {
 
+	@Override
 	protected void doUpgrade() throws Exception {
 
 		// UserIdMapper

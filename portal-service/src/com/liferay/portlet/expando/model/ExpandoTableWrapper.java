@@ -176,6 +176,7 @@ public class ExpandoTableWrapper implements ExpandoTable {
 		_expandoTable.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new ExpandoTableWrapper((ExpandoTable)_expandoTable.clone());
 	}
@@ -185,6 +186,7 @@ public class ExpandoTableWrapper implements ExpandoTable {
 		return _expandoTable.compareTo(expandoTable);
 	}
 
+	@Override
 	public int hashCode() {
 		return _expandoTable.hashCode();
 	}
@@ -193,6 +195,7 @@ public class ExpandoTableWrapper implements ExpandoTable {
 		return new ExpandoTableWrapper(_expandoTable.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _expandoTable.toString();
 	}

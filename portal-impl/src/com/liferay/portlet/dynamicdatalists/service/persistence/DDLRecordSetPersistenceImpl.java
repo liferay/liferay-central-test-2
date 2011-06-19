@@ -172,6 +172,7 @@ public class DDLRecordSetPersistenceImpl extends BasePersistenceImpl<DDLRecordSe
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(DDLRecordSetImpl.class.getName());
@@ -189,6 +190,7 @@ public class DDLRecordSetPersistenceImpl extends BasePersistenceImpl<DDLRecordSe
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(DDLRecordSet ddlRecordSet) {
 		EntityCacheUtil.removeResult(DDLRecordSetModelImpl.ENTITY_CACHE_ENABLED,
 			DDLRecordSetImpl.class, ddlRecordSet.getPrimaryKey());
@@ -233,6 +235,7 @@ public class DDLRecordSetPersistenceImpl extends BasePersistenceImpl<DDLRecordSe
 	 * @throws com.liferay.portal.NoSuchModelException if a d d l record set with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDLRecordSet remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
@@ -285,11 +288,13 @@ public class DDLRecordSetPersistenceImpl extends BasePersistenceImpl<DDLRecordSe
 	 * @return the d d l record set that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDLRecordSet remove(DDLRecordSet ddlRecordSet)
 		throws SystemException {
 		return super.remove(ddlRecordSet);
 	}
 
+	@Override
 	protected DDLRecordSet removeImpl(DDLRecordSet ddlRecordSet)
 		throws SystemException {
 		ddlRecordSet = toUnwrappedModel(ddlRecordSet);
@@ -331,6 +336,7 @@ public class DDLRecordSetPersistenceImpl extends BasePersistenceImpl<DDLRecordSe
 		return ddlRecordSet;
 	}
 
+	@Override
 	public DDLRecordSet updateImpl(
 		com.liferay.portlet.dynamicdatalists.model.DDLRecordSet ddlRecordSet,
 		boolean merge) throws SystemException {
@@ -451,6 +457,7 @@ public class DDLRecordSetPersistenceImpl extends BasePersistenceImpl<DDLRecordSe
 	 * @throws com.liferay.portal.NoSuchModelException if a d d l record set with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDLRecordSet findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
@@ -487,6 +494,7 @@ public class DDLRecordSetPersistenceImpl extends BasePersistenceImpl<DDLRecordSe
 	 * @return the d d l record set, or <code>null</code> if a d d l record set with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDLRecordSet fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());

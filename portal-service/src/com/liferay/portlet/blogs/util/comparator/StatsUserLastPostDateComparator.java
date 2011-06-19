@@ -37,6 +37,7 @@ public class StatsUserLastPostDateComparator extends OrderByComparator {
 		_ascending = ascending;
 	}
 
+	@Override
 	public int compare(Object obj1, Object obj2) {
 		BlogsStatsUser statsUser1 = (BlogsStatsUser)obj1;
 		BlogsStatsUser statsUser2 = (BlogsStatsUser)obj2;
@@ -52,6 +53,7 @@ public class StatsUserLastPostDateComparator extends OrderByComparator {
 		}
 	}
 
+	@Override
 	public String getOrderBy() {
 		if (_ascending) {
 			return ORDER_BY_ASC;
@@ -61,10 +63,12 @@ public class StatsUserLastPostDateComparator extends OrderByComparator {
 		}
 	}
 
+	@Override
 	public String[] getOrderByFields() {
 		return ORDER_BY_FIELDS;
 	}
 
+	@Override
 	public boolean isAscending() {
 		return _ascending;
 	}

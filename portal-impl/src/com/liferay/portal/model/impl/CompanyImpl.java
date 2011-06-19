@@ -49,6 +49,7 @@ public class CompanyImpl extends CompanyModelImpl implements Company {
 	public CompanyImpl() {
 	}
 
+	@Override
 	public int compareTo(Company company) {
 		String webId1 = getWebId();
 		String webId2 = company.getWebId();
@@ -226,6 +227,7 @@ public class CompanyImpl extends CompanyModelImpl implements Company {
 			PropsValues.COMPANY_SECURITY_STRANGERS_WITH_MX);
 	}
 
+	@Override
 	public void setKey(String key) {
 		_keyObj = null;
 

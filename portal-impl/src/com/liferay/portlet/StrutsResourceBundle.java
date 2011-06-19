@@ -33,14 +33,17 @@ public class StrutsResourceBundle extends ResourceBundle {
 		_locale = locale;
 	}
 
+	@Override
 	public Enumeration<String> getKeys() {
 		return null;
 	}
 
+	@Override
 	public Locale getLocale() {
 		return _locale;
 	}
 
+	@Override
 	protected Object handleGetObject(String key) {
 		if ((key != null) &&
 			(key.equals(JavaConstants.JAVAX_PORTLET_TITLE) ||

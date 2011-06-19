@@ -30,6 +30,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class AddressPersistenceTest extends BasePersistenceTestCase {
+	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -66,21 +67,37 @@ public class AddressPersistenceTest extends BasePersistenceTestCase {
 		Address newAddress = _persistence.create(pk);
 
 		newAddress.setCompanyId(nextLong());
+
 		newAddress.setUserId(nextLong());
+
 		newAddress.setUserName(randomString());
+
 		newAddress.setCreateDate(nextDate());
+
 		newAddress.setModifiedDate(nextDate());
+
 		newAddress.setClassNameId(nextLong());
+
 		newAddress.setClassPK(nextLong());
+
 		newAddress.setStreet1(randomString());
+
 		newAddress.setStreet2(randomString());
+
 		newAddress.setStreet3(randomString());
+
 		newAddress.setCity(randomString());
+
 		newAddress.setZip(randomString());
+
 		newAddress.setRegionId(nextLong());
+
 		newAddress.setCountryId(nextLong());
+
 		newAddress.setTypeId(nextInt());
+
 		newAddress.setMailing(randomBoolean());
+
 		newAddress.setPrimary(randomBoolean());
 
 		_persistence.update(newAddress, false);
@@ -219,21 +236,37 @@ public class AddressPersistenceTest extends BasePersistenceTestCase {
 		Address address = _persistence.create(pk);
 
 		address.setCompanyId(nextLong());
+
 		address.setUserId(nextLong());
+
 		address.setUserName(randomString());
+
 		address.setCreateDate(nextDate());
+
 		address.setModifiedDate(nextDate());
+
 		address.setClassNameId(nextLong());
+
 		address.setClassPK(nextLong());
+
 		address.setStreet1(randomString());
+
 		address.setStreet2(randomString());
+
 		address.setStreet3(randomString());
+
 		address.setCity(randomString());
+
 		address.setZip(randomString());
+
 		address.setRegionId(nextLong());
+
 		address.setCountryId(nextLong());
+
 		address.setTypeId(nextInt());
+
 		address.setMailing(randomBoolean());
+
 		address.setPrimary(randomBoolean());
 
 		_persistence.update(address, false);

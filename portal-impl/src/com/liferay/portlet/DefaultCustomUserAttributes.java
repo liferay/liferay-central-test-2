@@ -55,6 +55,7 @@ public class DefaultCustomUserAttributes implements CustomUserAttributes {
 		}
 	}
 
+	@Override
 	public Object clone() {
 		return new DefaultCustomUserAttributes();
 	}

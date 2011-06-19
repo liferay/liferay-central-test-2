@@ -28,6 +28,7 @@ import javax.servlet.jsp.tagext.TagSupport;
  */
 public class NamespaceTag extends TagSupport {
 
+	@Override
 	public int doStartTag() throws JspException {
 		try {
 			HttpServletRequest request =

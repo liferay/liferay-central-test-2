@@ -68,6 +68,7 @@ public class UpgradeSubscription extends UpgradeProcess {
 		}
 	}
 
+	@Override
 	protected void doUpgrade() throws Exception {
 		if (!PropsValues.DISCUSSION_SUBSCRIBE_BY_DEFAULT) {
 			return;

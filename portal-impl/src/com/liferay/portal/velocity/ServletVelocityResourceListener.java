@@ -32,6 +32,7 @@ import org.apache.velocity.exception.ResourceNotFoundException;
  */
 public class ServletVelocityResourceListener extends VelocityResourceListener {
 
+	@Override
 	public InputStream getResourceStream(String source)
 		throws ResourceNotFoundException {
 

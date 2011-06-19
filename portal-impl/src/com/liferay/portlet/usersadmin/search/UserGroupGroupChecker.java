@@ -34,6 +34,7 @@ public class UserGroupGroupChecker extends RowChecker {
 		_group = group;
 	}
 
+	@Override
 	public boolean isChecked(Object obj) {
 		UserGroup userGroup = (UserGroup)obj;
 

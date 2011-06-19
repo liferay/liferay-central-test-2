@@ -28,6 +28,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class LogMemoryUsageAction extends Action {
 
+	@Override
 	public void run(HttpServletRequest request, HttpServletResponse response) {
 		Runtime runtime = Runtime.getRuntime();
 

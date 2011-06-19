@@ -100,6 +100,7 @@ public class TaskQueueTest extends TestCase {
 
 		List<Object> list = new ArrayList<Object>() {
 
+			@Override
 			public boolean add(Object e) {
 				if (size() >= 2) {
 					throw new IllegalStateException();
@@ -182,6 +183,7 @@ public class TaskQueueTest extends TestCase {
 
 		Thread thread = new Thread() {
 
+			@Override
 			public void run() {
 				try {
 					taskQueue2.take();
@@ -205,6 +207,7 @@ public class TaskQueueTest extends TestCase {
 		final TaskQueue<Object> taskQueue3 = new TaskQueue<Object>(10);
 
 		thread = new Thread() {
+			@Override
 			public void run() {
 				try {
 					ReentrantLock takeLock = taskQueue3.getTakeLock();
@@ -356,6 +359,7 @@ public class TaskQueueTest extends TestCase {
 
 		Thread thread = new Thread() {
 
+			@Override
 			public void run() {
 				try {
 					for (int i = 0; i < 10; i++) {

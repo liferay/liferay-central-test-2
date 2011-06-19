@@ -530,6 +530,7 @@ public class JournalFeedWrapper implements JournalFeed {
 		_journalFeed.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new JournalFeedWrapper((JournalFeed)_journalFeed.clone());
 	}
@@ -539,6 +540,7 @@ public class JournalFeedWrapper implements JournalFeed {
 		return _journalFeed.compareTo(journalFeed);
 	}
 
+	@Override
 	public int hashCode() {
 		return _journalFeed.hashCode();
 	}
@@ -547,6 +549,7 @@ public class JournalFeedWrapper implements JournalFeed {
 		return new JournalFeedWrapper(_journalFeed.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _journalFeed.toString();
 	}

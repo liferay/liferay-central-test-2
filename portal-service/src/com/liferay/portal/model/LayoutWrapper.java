@@ -1092,6 +1092,7 @@ public class LayoutWrapper implements Layout {
 		_layout.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new LayoutWrapper((Layout)_layout.clone());
 	}
@@ -1100,6 +1101,7 @@ public class LayoutWrapper implements Layout {
 		return _layout.compareTo(layout);
 	}
 
+	@Override
 	public int hashCode() {
 		return _layout.hashCode();
 	}
@@ -1108,6 +1110,7 @@ public class LayoutWrapper implements Layout {
 		return new LayoutWrapper(_layout.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _layout.toString();
 	}

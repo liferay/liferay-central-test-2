@@ -55,6 +55,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class DynamicCSSFilter extends BasePortalFilter {
 
+	@Override
 	public void init(FilterConfig filterConfig) {
 		super.init(filterConfig);
 
@@ -228,6 +229,7 @@ public class DynamicCSSFilter extends BasePortalFilter {
 		return content;
 	}
 
+	@Override
 	protected void processFilter(
 			HttpServletRequest request, HttpServletResponse response,
 			FilterChain filterChain)

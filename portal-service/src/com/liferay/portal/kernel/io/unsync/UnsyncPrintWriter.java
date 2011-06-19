@@ -69,12 +69,14 @@ public class UnsyncPrintWriter extends PrintWriter {
 		_writer = writer;
 	}
 
+	@Override
 	public PrintWriter append(char c) {
 		write(c);
 
 		return this;
 	}
 
+	@Override
 	public PrintWriter append(CharSequence charSequence) {
 		if (charSequence == null) {
 			write(StringPool.NULL);
@@ -86,6 +88,7 @@ public class UnsyncPrintWriter extends PrintWriter {
 		return this;
 	}
 
+	@Override
 	public PrintWriter append(CharSequence charSequence, int start, int end) {
 		if (charSequence == null) {
 			charSequence = StringPool.NULL;
@@ -96,6 +99,7 @@ public class UnsyncPrintWriter extends PrintWriter {
 		return this;
 	}
 
+	@Override
 	public boolean checkError() {
 		if (_writer != null) {
 			flush();
@@ -104,6 +108,7 @@ public class UnsyncPrintWriter extends PrintWriter {
 		return _hasError;
 	}
 
+	@Override
 	public void close() {
 		try {
 			if (_writer == null) {
@@ -119,6 +124,7 @@ public class UnsyncPrintWriter extends PrintWriter {
 		}
 	}
 
+	@Override
 	public void flush() {
 		if (_writer == null) {
 			_hasError = true;
@@ -133,6 +139,7 @@ public class UnsyncPrintWriter extends PrintWriter {
 		}
 	}
 
+	@Override
 	public PrintWriter format(
 		Locale locale, String format, Object... arguments) {
 
@@ -150,10 +157,12 @@ public class UnsyncPrintWriter extends PrintWriter {
 		return this;
 	}
 
+	@Override
 	public PrintWriter format(String format, Object... arguments) {
 		return format(Locale.getDefault(), format, arguments);
 	}
 
+	@Override
 	public void print(boolean b) {
 		if (b) {
 			write(StringPool.TRUE);
@@ -163,34 +172,42 @@ public class UnsyncPrintWriter extends PrintWriter {
 		}
 	}
 
+	@Override
 	public void print(char c) {
 		write(c);
 	}
 
+	@Override
 	public void print(char[] chars) {
 		write(chars);
 	}
 
+	@Override
 	public void print(double d) {
 		write(String.valueOf(d));
 	}
 
+	@Override
 	public void print(float f) {
 		write(String.valueOf(f));
 	}
 
+	@Override
 	public void print(int i) {
 		write(String.valueOf(i));
 	}
 
+	@Override
 	public void print(long l) {
 		write(String.valueOf(l));
 	}
 
+	@Override
 	public void print(Object object) {
 		write(String.valueOf(object));
 	}
 
+	@Override
 	public void print(String string) {
 		if (string == null) {
 			string = StringPool.NULL;
@@ -199,16 +216,19 @@ public class UnsyncPrintWriter extends PrintWriter {
 		write(string);
 	}
 
+	@Override
 	public PrintWriter printf(
 		Locale locale, String format, Object... arguments) {
 
 		return format(locale, format, arguments);
 	}
 
+	@Override
 	public PrintWriter printf(String format, Object... arguments) {
 		return format(format, arguments);
 	}
 
+	@Override
 	public void println() {
 		if (_writer == null) {
 			_hasError = true;
@@ -228,55 +248,66 @@ public class UnsyncPrintWriter extends PrintWriter {
 		}
 	}
 
+	@Override
 	public void println(boolean b) {
 		print(b);
 		println();
 	}
 
+	@Override
 	public void println(char c) {
 		print(c);
 		println();
 	}
 
+	@Override
 	public void println(char[] chars) {
 		print(chars);
 		println();
 	}
 
+	@Override
 	public void println(double d) {
 		print(d);
 		println();
 	}
 
+	@Override
 	public void println(float f) {
 		print(f);
 		println();
 	}
 
+	@Override
 	public void println(int i) {
 		print(i);
 		println();
 	}
 
+	@Override
 	public void println(long l) {
 		print(l);
 		println();
 	}
 
+	@Override
 	public void println(Object object) {
 		print(object);
 		println();
 	}
 
+	@Override
 	public void println(String string) {
 		print(string);
 		println();
 	}
 
+	@Override
 	public void write(char[] chars) {
 		write(chars, 0, chars.length);
 	}
 
+	@Override
 	public void write(char[] chars, int offset, int length) {
 		if (_writer == null) {
 			_hasError = true;
@@ -296,6 +327,7 @@ public class UnsyncPrintWriter extends PrintWriter {
 		}
 	}
 
+	@Override
 	public void write(int c) {
 		if (_writer == null) {
 			_hasError = true;
@@ -315,6 +347,7 @@ public class UnsyncPrintWriter extends PrintWriter {
 		}
 	}
 
+	@Override
 	public void write(String string) {
 		if (_writer == null) {
 			_hasError = true;
@@ -334,6 +367,7 @@ public class UnsyncPrintWriter extends PrintWriter {
 		}
 	}
 
+	@Override
 	public void write(String string, int offset, int length) {
 		if (_writer == null) {
 			_hasError = true;

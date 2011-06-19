@@ -219,6 +219,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(${entity.name}Impl.class.getName());
@@ -236,6 +237,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(${entity.name} ${entity.varName}) {
 		EntityCacheUtil.removeResult(${entity.name}ModelImpl.ENTITY_CACHE_ENABLED, ${entity.name}Impl.class, ${entity.varName}.getPrimaryKey());
 
@@ -293,6 +295,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 	 * @throws com.liferay.portal.NoSuchModelException if a ${entity.humanName} with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ${entity.name} remove(Serializable primaryKey) throws NoSuchModelException, SystemException {
 		<#if entity.hasPrimitivePK(false)>
 			return remove(((${serviceBuilder.getPrimitiveObj("${entity.PKClassName}")})primaryKey).${entity.PKClassName}Value());
@@ -357,10 +360,12 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 	 * @return the ${entity.humanName} that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ${entity.name} remove(${entity.name} ${entity.varName}) throws SystemException {
 		return super.remove(${entity.varName});
 	}
 
+	@Override
 	protected ${entity.name} removeImpl(${entity.name} ${entity.varName}) throws SystemException {
 		${entity.varName} = toUnwrappedModel(${entity.varName});
 
@@ -435,6 +440,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 		return ${entity.varName};
 	}
 
+	@Override
 	public ${entity.name} updateImpl(${packagePath}.model.${entity.name} ${entity.varName}, boolean merge) throws SystemException {
 		${entity.varName} = toUnwrappedModel(${entity.varName});
 
@@ -658,6 +664,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 	 * @throws com.liferay.portal.NoSuchModelException if a ${entity.humanName} with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ${entity.name} findByPrimaryKey(Serializable primaryKey) throws NoSuchModelException, SystemException {
 		<#if entity.hasPrimitivePK(false)>
 			return findByPrimaryKey(((${serviceBuilder.getPrimitiveObj("${entity.PKClassName}")})primaryKey).${entity.PKClassName}Value());
@@ -695,6 +702,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 	 * @return the ${entity.humanName}, or <code>null</code> if a ${entity.humanName} with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ${entity.name} fetchByPrimaryKey(Serializable primaryKey) throws SystemException {
 		<#if entity.hasPrimitivePK(false)>
 			return fetchByPrimaryKey(((${serviceBuilder.getPrimitiveObj("${entity.PKClassName}")})primaryKey).${entity.PKClassName}Value());

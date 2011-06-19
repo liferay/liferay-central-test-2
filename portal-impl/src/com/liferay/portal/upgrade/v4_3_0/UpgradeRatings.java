@@ -39,6 +39,7 @@ import java.util.Map;
  */
 public class UpgradeRatings extends UpgradeProcess {
 
+	@Override
 	protected void doUpgrade() throws Exception {
 
 		// RatingsEntry

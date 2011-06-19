@@ -162,6 +162,7 @@ public class LiferayServletContext implements ServletContext {
 		_servletContext.setAttribute(name, value);
 	}
 
+	@Override
 	public String toString() {
 		return _servletContext.toString();
 	}

@@ -30,6 +30,7 @@ import javax.servlet.http.HttpServlet;
  */
 public class PortalDelegateServlet extends HttpServlet {
 
+	@Override
 	public void init(ServletConfig servletConfig) {
 		String servletClass = servletConfig.getInitParameter("servlet-class");
 
@@ -57,6 +58,7 @@ public class PortalDelegateServlet extends HttpServlet {
 		}
 	}
 
+	@Override
 	public void destroy() {
 		PortalDelegatorServlet.removeDelegate(_subContext);
 	}

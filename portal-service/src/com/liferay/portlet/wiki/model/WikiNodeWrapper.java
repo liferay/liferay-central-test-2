@@ -313,6 +313,7 @@ public class WikiNodeWrapper implements WikiNode {
 		_wikiNode.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new WikiNodeWrapper((WikiNode)_wikiNode.clone());
 	}
@@ -321,6 +322,7 @@ public class WikiNodeWrapper implements WikiNode {
 		return _wikiNode.compareTo(wikiNode);
 	}
 
+	@Override
 	public int hashCode() {
 		return _wikiNode.hashCode();
 	}
@@ -329,6 +331,7 @@ public class WikiNodeWrapper implements WikiNode {
 		return new WikiNodeWrapper(_wikiNode.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _wikiNode.toString();
 	}

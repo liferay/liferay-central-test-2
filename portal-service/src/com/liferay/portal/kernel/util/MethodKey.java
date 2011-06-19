@@ -63,6 +63,7 @@ public class MethodKey implements Serializable {
 		}
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -90,10 +91,12 @@ public class MethodKey implements Serializable {
 		return _parameterTypes;
 	}
 
+	@Override
 	public int hashCode() {
 		return toString().hashCode();
 	}
 
+	@Override
 	public String toString() {
 		return _toString();
 	}

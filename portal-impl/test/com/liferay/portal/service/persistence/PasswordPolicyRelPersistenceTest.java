@@ -31,6 +31,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class PasswordPolicyRelPersistenceTest extends BasePersistenceTestCase {
+	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -67,7 +68,9 @@ public class PasswordPolicyRelPersistenceTest extends BasePersistenceTestCase {
 		PasswordPolicyRel newPasswordPolicyRel = _persistence.create(pk);
 
 		newPasswordPolicyRel.setPasswordPolicyId(nextLong());
+
 		newPasswordPolicyRel.setClassNameId(nextLong());
+
 		newPasswordPolicyRel.setClassPK(nextLong());
 
 		_persistence.update(newPasswordPolicyRel, false);
@@ -222,7 +225,9 @@ public class PasswordPolicyRelPersistenceTest extends BasePersistenceTestCase {
 		PasswordPolicyRel passwordPolicyRel = _persistence.create(pk);
 
 		passwordPolicyRel.setPasswordPolicyId(nextLong());
+
 		passwordPolicyRel.setClassNameId(nextLong());
+
 		passwordPolicyRel.setClassPK(nextLong());
 
 		_persistence.update(passwordPolicyRel, false);

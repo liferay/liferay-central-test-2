@@ -320,6 +320,7 @@ public class OrganizationWrapper implements Organization {
 		_organization.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new OrganizationWrapper((Organization)_organization.clone());
 	}
@@ -328,6 +329,7 @@ public class OrganizationWrapper implements Organization {
 		return _organization.compareTo(organization);
 	}
 
+	@Override
 	public int hashCode() {
 		return _organization.hashCode();
 	}
@@ -336,6 +338,7 @@ public class OrganizationWrapper implements Organization {
 		return new OrganizationWrapper(_organization.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _organization.toString();
 	}

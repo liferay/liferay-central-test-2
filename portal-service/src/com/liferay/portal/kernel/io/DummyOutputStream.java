@@ -21,18 +21,23 @@ import java.io.OutputStream;
  */
 public class DummyOutputStream extends OutputStream {
 
+	@Override
 	public void close() {
 	}
 
+	@Override
 	public void flush() {
 	}
 
+	@Override
 	public void write(byte[] bytes) {
 	}
 
+	@Override
 	public void write(byte[] bytes, int offset, int length) {
 	}
 
+	@Override
 	public void write(int b) {
 	}
 

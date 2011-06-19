@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.poller.PollerResponse;
 public class PollerNotificationsBridgeMessageListener
 	extends BaseMessageListener {
 
+	@Override
 	protected void doReceive(Message message) throws Exception {
 		Object messagePayload = message.getPayload();
 

@@ -29,6 +29,7 @@ import java.util.List;
 public class CustomAttributesAvailableTag
 	extends ParamAndPropertyAncestorTagImpl {
 
+	@Override
 	public int doStartTag() {
 		try {
 			long companyId = _companyId;

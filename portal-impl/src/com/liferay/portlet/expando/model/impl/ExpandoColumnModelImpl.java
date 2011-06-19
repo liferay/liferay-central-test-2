@@ -241,6 +241,7 @@ public class ExpandoColumnModelImpl extends BaseModelImpl<ExpandoColumn>
 		_typeSettings = typeSettings;
 	}
 
+	@Override
 	public ExpandoColumn toEscapedModel() {
 		if (isEscapedModel()) {
 			return (ExpandoColumn)this;
@@ -251,6 +252,7 @@ public class ExpandoColumnModelImpl extends BaseModelImpl<ExpandoColumn>
 		}
 	}
 
+	@Override
 	public Object clone() {
 		ExpandoColumnImpl expandoColumnImpl = new ExpandoColumnImpl();
 
@@ -279,6 +281,7 @@ public class ExpandoColumnModelImpl extends BaseModelImpl<ExpandoColumn>
 		return 0;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -303,10 +306,12 @@ public class ExpandoColumnModelImpl extends BaseModelImpl<ExpandoColumn>
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		ExpandoColumnModelImpl expandoColumnModelImpl = this;
 
@@ -317,6 +322,7 @@ public class ExpandoColumnModelImpl extends BaseModelImpl<ExpandoColumn>
 		expandoColumnModelImpl._originalName = expandoColumnModelImpl._name;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(15);
 

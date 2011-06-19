@@ -172,6 +172,7 @@ public class ListTypeModelImpl extends BaseModelImpl<ListType>
 		_type = type;
 	}
 
+	@Override
 	public ListType toEscapedModel() {
 		if (isEscapedModel()) {
 			return (ListType)this;
@@ -182,6 +183,7 @@ public class ListTypeModelImpl extends BaseModelImpl<ListType>
 		}
 	}
 
+	@Override
 	public Object clone() {
 		ListTypeImpl listTypeImpl = new ListTypeImpl();
 
@@ -207,6 +209,7 @@ public class ListTypeModelImpl extends BaseModelImpl<ListType>
 		return 0;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -231,13 +234,16 @@ public class ListTypeModelImpl extends BaseModelImpl<ListType>
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return getPrimaryKey();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(7);
 

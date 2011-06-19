@@ -24,6 +24,7 @@ import com.liferay.portal.upgrade.v6_0_5.util.JournalArticleTable;
  */
 public class UpgradeJournal extends UpgradeProcess {
 
+	@Override
 	protected void doUpgrade() throws Exception {
 		try {
 			runSQL("alter_column_type JournalArticle title VARCHAR(300) null");

@@ -242,6 +242,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(SocialRelationImpl.class.getName());
@@ -259,6 +260,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(SocialRelation socialRelation) {
 		EntityCacheUtil.removeResult(SocialRelationModelImpl.ENTITY_CACHE_ENABLED,
 			SocialRelationImpl.class, socialRelation.getPrimaryKey());
@@ -298,6 +300,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 	 * @throws com.liferay.portal.NoSuchModelException if a social relation with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public SocialRelation remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
@@ -350,11 +353,13 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 	 * @return the social relation that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public SocialRelation remove(SocialRelation socialRelation)
 		throws SystemException {
 		return super.remove(socialRelation);
 	}
 
+	@Override
 	protected SocialRelation removeImpl(SocialRelation socialRelation)
 		throws SystemException {
 		socialRelation = toUnwrappedModel(socialRelation);
@@ -390,6 +395,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 		return socialRelation;
 	}
 
+	@Override
 	public SocialRelation updateImpl(
 		com.liferay.portlet.social.model.SocialRelation socialRelation,
 		boolean merge) throws SystemException {
@@ -483,6 +489,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 	 * @throws com.liferay.portal.NoSuchModelException if a social relation with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public SocialRelation findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
@@ -519,6 +526,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 	 * @return the social relation, or <code>null</code> if a social relation with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public SocialRelation fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());

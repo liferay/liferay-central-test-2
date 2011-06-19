@@ -25,16 +25,19 @@ public class SearchIteratorTag<R> extends SearchPaginatorTag<R> {
 		_paginate = paginate;
 	}
 
+	@Override
 	protected void cleanUp() {
 		super.cleanUp();
 
 		_paginate = true;
 	}
 
+	@Override
 	protected String getPage() {
 		return _PAGE;
 	}
 
+	@Override
 	protected void setAttributes(HttpServletRequest request) {
 		super.setAttributes(request);
 

@@ -31,6 +31,7 @@ public abstract class BaseWorkflowTaskUserIdComparator
 		_ascending = ascending;
 	}
 
+	@Override
 	public int compare(Object obj1, Object obj2) {
 		WorkflowTask workflowTask1 = (WorkflowTask)obj1;
 		WorkflowTask workflowTask2 = (WorkflowTask)obj2;
@@ -55,6 +56,7 @@ public abstract class BaseWorkflowTaskUserIdComparator
 		}
 	}
 
+	@Override
 	public boolean isAscending() {
 		return _ascending;
 	}

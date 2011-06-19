@@ -25,6 +25,7 @@ public class SafeProperties extends Properties {
 		super();
 	}
 
+	@Override
 	public synchronized Object get(Object key) {
 		Object value = super.get(key);
 
@@ -37,10 +38,12 @@ public class SafeProperties extends Properties {
 		return super.getProperty(key);
 	}
 
+	@Override
 	public String getProperty(String key) {
 		return (String)get(key);
 	}
 
+	@Override
 	public synchronized Object put(Object key, Object value) {
 		if (key == null) {
 			return null;
@@ -57,6 +60,7 @@ public class SafeProperties extends Properties {
 		}
 	}
 
+	@Override
 	public synchronized Object remove(Object key) {
 		if (key == null) {
 			return null;

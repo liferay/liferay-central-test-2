@@ -32,11 +32,13 @@ public class ModelContextTag extends IncludeTag {
 		_model = model;
 	}
 
+	@Override
 	protected void cleanUp() {
 		_bean = null;
 		_model = null;
 	}
 
+	@Override
 	protected void setAttributes(HttpServletRequest request) {
 		if (_model != null) {
 			pageContext.setAttribute("aui:model-context:bean", _bean);

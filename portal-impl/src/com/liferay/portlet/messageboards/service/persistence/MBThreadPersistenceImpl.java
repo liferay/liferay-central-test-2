@@ -255,6 +255,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(MBThreadImpl.class.getName());
@@ -272,6 +273,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(MBThread mbThread) {
 		EntityCacheUtil.removeResult(MBThreadModelImpl.ENTITY_CACHE_ENABLED,
 			MBThreadImpl.class, mbThread.getPrimaryKey());
@@ -303,6 +305,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 	 * @throws com.liferay.portal.NoSuchModelException if a message boards thread with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBThread remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
@@ -355,10 +358,12 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 	 * @return the message boards thread that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBThread remove(MBThread mbThread) throws SystemException {
 		return super.remove(mbThread);
 	}
 
+	@Override
 	protected MBThread removeImpl(MBThread mbThread) throws SystemException {
 		mbThread = toUnwrappedModel(mbThread);
 
@@ -389,6 +394,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		return mbThread;
 	}
 
+	@Override
 	public MBThread updateImpl(
 		com.liferay.portlet.messageboards.model.MBThread mbThread, boolean merge)
 		throws SystemException {
@@ -474,6 +480,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 	 * @throws com.liferay.portal.NoSuchModelException if a message boards thread with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBThread findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
@@ -510,6 +517,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 	 * @return the message boards thread, or <code>null</code> if a message boards thread with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBThread fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());

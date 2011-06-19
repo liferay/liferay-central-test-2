@@ -38,6 +38,7 @@ public class PortletActionAdapter extends PortletAction {
 		_strutsPortletAction = strutsPortletAction;
 	}
 
+	@Override
 	public void processAction(
 			ActionMapping actionMapping, ActionForm actionForm,
 			PortletConfig portletConfig, ActionRequest actionRequest,
@@ -56,6 +57,7 @@ public class PortletActionAdapter extends PortletAction {
 			actionResponse);
 	}
 
+	@Override
 	public ActionForward render(
 			ActionMapping actionMapping, ActionForm actionForm,
 			PortletConfig portletConfig, RenderRequest renderRequest,
@@ -86,6 +88,7 @@ public class PortletActionAdapter extends PortletAction {
 		return actionForward;
 	}
 
+	@Override
 	public void serveResource(
 			ActionMapping actionMapping, ActionForm actionForm,
 			PortletConfig portletConfig, ResourceRequest resourceRequest,

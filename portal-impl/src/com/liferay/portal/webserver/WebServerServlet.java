@@ -57,8 +57,8 @@ import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLAppServiceUtil;
 import com.liferay.portlet.documentlibrary.util.DLUtil;
 import com.liferay.portlet.documentlibrary.util.DocumentConversionUtil;
-import com.liferay.portlet.documentlibrary.util.PDFProcessorUtil;
-import com.liferay.portlet.documentlibrary.util.VideoProcessorUtil;
+import com.liferay.portlet.documentlibrary.util.PDFProcessor;
+import com.liferay.portlet.documentlibrary.util.VideoProcessor;
 import com.liferay.util.servlet.ServletResponseUtil;
 
 import java.io.File;
@@ -137,6 +137,7 @@ public class WebServerServlet extends HttpServlet {
 		return true;
 	}
 
+	@Override
 	public void service(
 			HttpServletRequest request, HttpServletResponse response)
 		throws IOException, ServletException {
@@ -385,44 +386,44 @@ public class WebServerServlet extends HttpServlet {
 			}
 		}
 		else if (documentThumbnail) {
-			File thumbnailFile = PDFProcessorUtil.getThumbnailFile(tempFileId);
+			File thumbnailFile = PDFProcessor.getThumbnailFile(tempFileId);
 
 			inputStream = new FileInputStream(thumbnailFile);
 
 			fileName = FileUtil.stripExtension(fileName).concat(
-				StringPool.PERIOD).concat(PDFProcessorUtil.THUMBNAIL_TYPE);
+				StringPool.PERIOD).concat(PDFProcessor.THUMBNAIL_TYPE);
 
 			converted = true;
 		}
 		else if (previewFileIndex > 0) {
-			File previewFile = PDFProcessorUtil.getPreviewFile(
+			File previewFile = PDFProcessor.getPreviewFile(
 				tempFileId, previewFileIndex);
 
 			inputStream = new FileInputStream(previewFile);
 
 			fileName = FileUtil.stripExtension(fileName).concat(
-				StringPool.PERIOD).concat(PDFProcessorUtil.PREVIEW_TYPE);
+				StringPool.PERIOD).concat(PDFProcessor.PREVIEW_TYPE);
 
 			converted = true;
 		}
 		else if (videoPreview) {
-			File previewFile = VideoProcessorUtil.getPreviewFile(tempFileId);
+			File previewFile = VideoProcessor.getPreviewFile(tempFileId);
 
 			inputStream = new FileInputStream(previewFile);
 
 			fileName = FileUtil.stripExtension(fileName).concat(
-				StringPool.PERIOD).concat(VideoProcessorUtil.PREVIEW_TYPE);
+				StringPool.PERIOD).concat(VideoProcessor.PREVIEW_TYPE);
 
 			converted = true;
 		}
 		else if (videoThumbnail) {
-			File thumbnailFile = VideoProcessorUtil.getThumbnailFile(
+			File thumbnailFile = VideoProcessor.getThumbnailFile(
 				tempFileId);
 
 			inputStream = new FileInputStream(thumbnailFile);
 
 			fileName = FileUtil.stripExtension(fileName).concat(
-				StringPool.PERIOD).concat(VideoProcessorUtil.THUMBNAIL_TYPE);
+				StringPool.PERIOD).concat(VideoProcessor.THUMBNAIL_TYPE);
 
 			converted = true;
 		}

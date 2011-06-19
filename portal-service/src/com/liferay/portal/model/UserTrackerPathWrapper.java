@@ -167,6 +167,7 @@ public class UserTrackerPathWrapper implements UserTrackerPath {
 		_userTrackerPath.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new UserTrackerPathWrapper((UserTrackerPath)_userTrackerPath.clone());
 	}
@@ -176,6 +177,7 @@ public class UserTrackerPathWrapper implements UserTrackerPath {
 		return _userTrackerPath.compareTo(userTrackerPath);
 	}
 
+	@Override
 	public int hashCode() {
 		return _userTrackerPath.hashCode();
 	}
@@ -184,6 +186,7 @@ public class UserTrackerPathWrapper implements UserTrackerPath {
 		return new UserTrackerPathWrapper(_userTrackerPath.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _userTrackerPath.toString();
 	}

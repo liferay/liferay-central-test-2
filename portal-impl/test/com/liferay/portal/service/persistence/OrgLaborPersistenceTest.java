@@ -29,6 +29,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class OrgLaborPersistenceTest extends BasePersistenceTestCase {
+	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -65,20 +66,35 @@ public class OrgLaborPersistenceTest extends BasePersistenceTestCase {
 		OrgLabor newOrgLabor = _persistence.create(pk);
 
 		newOrgLabor.setOrganizationId(nextLong());
+
 		newOrgLabor.setTypeId(nextInt());
+
 		newOrgLabor.setSunOpen(nextInt());
+
 		newOrgLabor.setSunClose(nextInt());
+
 		newOrgLabor.setMonOpen(nextInt());
+
 		newOrgLabor.setMonClose(nextInt());
+
 		newOrgLabor.setTueOpen(nextInt());
+
 		newOrgLabor.setTueClose(nextInt());
+
 		newOrgLabor.setWedOpen(nextInt());
+
 		newOrgLabor.setWedClose(nextInt());
+
 		newOrgLabor.setThuOpen(nextInt());
+
 		newOrgLabor.setThuClose(nextInt());
+
 		newOrgLabor.setFriOpen(nextInt());
+
 		newOrgLabor.setFriClose(nextInt());
+
 		newOrgLabor.setSatOpen(nextInt());
+
 		newOrgLabor.setSatClose(nextInt());
 
 		_persistence.update(newOrgLabor, false);
@@ -215,20 +231,35 @@ public class OrgLaborPersistenceTest extends BasePersistenceTestCase {
 		OrgLabor orgLabor = _persistence.create(pk);
 
 		orgLabor.setOrganizationId(nextLong());
+
 		orgLabor.setTypeId(nextInt());
+
 		orgLabor.setSunOpen(nextInt());
+
 		orgLabor.setSunClose(nextInt());
+
 		orgLabor.setMonOpen(nextInt());
+
 		orgLabor.setMonClose(nextInt());
+
 		orgLabor.setTueOpen(nextInt());
+
 		orgLabor.setTueClose(nextInt());
+
 		orgLabor.setWedOpen(nextInt());
+
 		orgLabor.setWedClose(nextInt());
+
 		orgLabor.setThuOpen(nextInt());
+
 		orgLabor.setThuClose(nextInt());
+
 		orgLabor.setFriOpen(nextInt());
+
 		orgLabor.setFriClose(nextInt());
+
 		orgLabor.setSatOpen(nextInt());
+
 		orgLabor.setSatClose(nextInt());
 
 		_persistence.update(orgLabor, false);

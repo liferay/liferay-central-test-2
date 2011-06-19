@@ -313,6 +313,7 @@ public class BookmarksFolderWrapper implements BookmarksFolder {
 		_bookmarksFolder.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new BookmarksFolderWrapper((BookmarksFolder)_bookmarksFolder.clone());
 	}
@@ -322,6 +323,7 @@ public class BookmarksFolderWrapper implements BookmarksFolder {
 		return _bookmarksFolder.compareTo(bookmarksFolder);
 	}
 
+	@Override
 	public int hashCode() {
 		return _bookmarksFolder.hashCode();
 	}
@@ -330,6 +332,7 @@ public class BookmarksFolderWrapper implements BookmarksFolder {
 		return new BookmarksFolderWrapper(_bookmarksFolder.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _bookmarksFolder.toString();
 	}

@@ -42,14 +42,17 @@ import javax.portlet.PortletPreferences;
  */
 public class DDMPortletDataHandlerImpl extends BasePortletDataHandler {
 
+	@Override
 	public PortletDataHandlerControl[] getExportControls() {
 		return new PortletDataHandlerControl[] {_structures, _templates};
 	}
 
+	@Override
 	public PortletDataHandlerControl[] getImportControls() {
 		return new PortletDataHandlerControl[] {_structures, _templates};
 	}
 
+	@Override
 	public boolean isAlwaysExportable() {
 		return _ALWAYS_EXPORTABLE;
 	}
@@ -232,6 +235,7 @@ public class DDMPortletDataHandlerImpl extends BasePortletDataHandler {
 			template, importedTemplate, _NAMESPACE);
 	}
 
+	@Override
 	protected PortletPreferences doDeleteData(
 			PortletDataContext portletDataContext, String portletId,
 			PortletPreferences portletPreferences)
@@ -250,6 +254,7 @@ public class DDMPortletDataHandlerImpl extends BasePortletDataHandler {
 		return portletPreferences;
 	}
 
+	@Override
 	protected String doExportData(
 			PortletDataContext portletDataContext, String portletId,
 			PortletPreferences portletPreferences)
@@ -299,6 +304,7 @@ public class DDMPortletDataHandlerImpl extends BasePortletDataHandler {
 		return document.formattedString();
 	}
 
+	@Override
 	protected PortletPreferences doImportData(
 			PortletDataContext portletDataContext, String portletId,
 			PortletPreferences portletPreferences, String data)

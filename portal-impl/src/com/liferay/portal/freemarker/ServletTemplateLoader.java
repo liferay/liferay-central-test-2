@@ -33,6 +33,7 @@ import javax.servlet.ServletContext;
  */
 public class ServletTemplateLoader extends URLTemplateLoader {
 
+	@Override
 	public URL getURL(String name) throws IOException {
 		URL url = null;
 

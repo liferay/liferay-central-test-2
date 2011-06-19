@@ -40,6 +40,7 @@ public class ReportCompilerRequestMessageListener extends BaseMessageListener {
 		_reportResultContainer = reportResultContainer;
 	}
 
+	@Override
 	protected void doReceive(Message message) throws Exception {
 		ReportRequest reportRequest = (ReportRequest)message.getPayload();
 

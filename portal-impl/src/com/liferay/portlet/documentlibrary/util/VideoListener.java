@@ -37,6 +37,7 @@ public class VideoListener extends MediaToolAdapter {
 		_width = width;
 	}
 
+	@Override
 	public void onAddStream(IAddStreamEvent iAddStreamEvent) {
 		IMediaCoder mediaCoder = iAddStreamEvent.getSource();
 
@@ -59,6 +60,7 @@ public class VideoListener extends MediaToolAdapter {
 		super.onAddStream(iAddStreamEvent);
 	}
 
+	@Override
 	public void onAudioSamples(IAudioSamplesEvent iAudioSamplesEvent) {
 		IAudioSamples iAudioSamples = iAudioSamplesEvent.getAudioSamples();
 

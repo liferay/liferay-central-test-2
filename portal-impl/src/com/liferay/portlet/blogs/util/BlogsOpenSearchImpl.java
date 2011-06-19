@@ -28,18 +28,22 @@ public class BlogsOpenSearchImpl extends HitsOpenSearchImpl {
 
 	public static final String TITLE = "Liferay Blogs Search: ";
 
+	@Override
 	public Indexer getIndexer() {
 		return IndexerRegistryUtil.getIndexer(BlogsEntry.class);
 	}
 
+	@Override
 	public String getPortletId() {
 		return BlogsIndexer.PORTLET_ID;
 	}
 
+	@Override
 	public String getSearchPath() {
 		return SEARCH_PATH;
 	}
 
+	@Override
 	public String getTitle(String keywords) {
 		return TITLE + keywords;
 	}

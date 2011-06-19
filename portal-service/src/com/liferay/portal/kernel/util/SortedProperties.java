@@ -49,12 +49,14 @@ public class SortedProperties extends Properties {
 		}
 	}
 
+	@Override
 	public void clear() {
 		super.clear();
 
 		_names.clear();
 	}
 
+	@Override
 	public void list(PrintStream out) {
 		System.out.println("-- listing properties --");
 
@@ -67,6 +69,7 @@ public class SortedProperties extends Properties {
 		}
 	}
 
+	@Override
 	public void list(PrintWriter out) {
 		System.out.println("-- listing properties --");
 
@@ -79,6 +82,7 @@ public class SortedProperties extends Properties {
 		}
 	}
 
+	@Override
 	public Enumeration<String> propertyNames() {
 		return Collections.enumeration(_names);
 	}
@@ -93,12 +97,14 @@ public class SortedProperties extends Properties {
 		return super.put(key, value);
 	}
 
+	@Override
 	public Object remove(Object key) {
 		_names.remove(key);
 
 		return super.remove(key);
 	}
 
+	@Override
 	public Object setProperty(String key, String value) {
 		return put(key, value);
 	}

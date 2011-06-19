@@ -564,6 +564,7 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage>
 		}
 	}
 
+	@Override
 	public WikiPage toEscapedModel() {
 		if (isEscapedModel()) {
 			return (WikiPage)this;
@@ -574,6 +575,7 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage>
 		}
 	}
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
@@ -583,10 +585,12 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage>
 		return _expandoBridge;
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		getExpandoBridge().setAttributes(serviceContext);
 	}
 
+	@Override
 	public Object clone() {
 		WikiPageImpl wikiPageImpl = new WikiPageImpl();
 
@@ -662,6 +666,7 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage>
 		return 0;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -686,10 +691,12 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage>
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		WikiPageModelImpl wikiPageModelImpl = this;
 
@@ -714,6 +721,7 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage>
 		wikiPageModelImpl._setOriginalVersion = false;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(47);
 

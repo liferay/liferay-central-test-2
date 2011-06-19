@@ -51,6 +51,7 @@ public class PluginSettingImpl
 	/**
 	 * Sets a string of ordered comma delimited plugin IDs.
 	 */
+	@Override
 	public void setRoles(String roles) {
 		_rolesArray = StringUtil.split(roles);
 

@@ -34,6 +34,7 @@ import java.util.List;
 public class DefaultUpgradeTableImpl
 	extends BaseUpgradeTableImpl implements UpgradeTable {
 
+	@Override
 	public String getExportedData(ResultSet rs) throws Exception {
 		StringBuilder sb = new StringBuilder();
 
@@ -81,6 +82,7 @@ public class DefaultUpgradeTableImpl
 		return sb.toString();
 	}
 
+	@Override
 	public void setColumn(
 			PreparedStatement ps, int index, Integer type, String value)
 		throws Exception {

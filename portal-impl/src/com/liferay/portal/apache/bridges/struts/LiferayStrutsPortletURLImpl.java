@@ -33,6 +33,7 @@ public class LiferayStrutsPortletURLImpl extends PortletURLImplWrapper {
 		super(portletResponseImpl, plid, lifecycle);
 	}
 
+	@Override
 	public void setParameter(String name, String value) {
 		super.setParameter(name, value);
 

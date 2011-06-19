@@ -23,6 +23,7 @@ public class FiniteUniqueStack<E> extends FiniteStack<E> {
 		super(maxSize);
 	}
 
+	@Override
 	public E push(E item) {
 		if (!contains(item)) {
 			super.push(item);

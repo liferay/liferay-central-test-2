@@ -73,6 +73,7 @@ public class NodeImpl implements Node {
 		}
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		org.dom4j.Node node = ((NodeImpl)obj).getWrappedNode();
 
@@ -155,6 +156,7 @@ public class NodeImpl implements Node {
 		return _node.hasContent();
 	}
 
+	@Override
 	public int hashCode() {
 		return _node.hashCode();
 	}
@@ -231,6 +233,7 @@ public class NodeImpl implements Node {
 		return _node.supportsParent();
 	}
 
+	@Override
 	public String toString() {
 		return _node.toString();
 	}

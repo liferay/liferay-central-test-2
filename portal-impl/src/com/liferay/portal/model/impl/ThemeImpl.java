@@ -107,6 +107,7 @@ public class ThemeImpl extends PluginBaseImpl implements Theme {
 		return getName().compareTo(theme.getName());
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -339,6 +340,7 @@ public class ThemeImpl extends PluginBaseImpl implements Theme {
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return _themeId.hashCode();
 	}

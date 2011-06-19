@@ -277,6 +277,7 @@ public class AssetLinkWrapper implements AssetLink {
 		_assetLink.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new AssetLinkWrapper((AssetLink)_assetLink.clone());
 	}
@@ -285,6 +286,7 @@ public class AssetLinkWrapper implements AssetLink {
 		return _assetLink.compareTo(assetLink);
 	}
 
+	@Override
 	public int hashCode() {
 		return _assetLink.hashCode();
 	}
@@ -293,6 +295,7 @@ public class AssetLinkWrapper implements AssetLink {
 		return new AssetLinkWrapper(_assetLink.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _assetLink.toString();
 	}

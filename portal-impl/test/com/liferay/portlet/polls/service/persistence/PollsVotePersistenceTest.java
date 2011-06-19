@@ -33,6 +33,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class PollsVotePersistenceTest extends BasePersistenceTestCase {
+	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -69,8 +70,11 @@ public class PollsVotePersistenceTest extends BasePersistenceTestCase {
 		PollsVote newPollsVote = _persistence.create(pk);
 
 		newPollsVote.setUserId(nextLong());
+
 		newPollsVote.setQuestionId(nextLong());
+
 		newPollsVote.setChoiceId(nextLong());
+
 		newPollsVote.setVoteDate(nextDate());
 
 		_persistence.update(newPollsVote, false);
@@ -212,8 +216,11 @@ public class PollsVotePersistenceTest extends BasePersistenceTestCase {
 		PollsVote pollsVote = _persistence.create(pk);
 
 		pollsVote.setUserId(nextLong());
+
 		pollsVote.setQuestionId(nextLong());
+
 		pollsVote.setChoiceId(nextLong());
+
 		pollsVote.setVoteDate(nextDate());
 
 		_persistence.update(pollsVote, false);

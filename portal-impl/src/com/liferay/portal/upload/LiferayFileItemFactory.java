@@ -30,6 +30,7 @@ public class LiferayFileItemFactory extends DiskFileItemFactory {
 		_tempDir = tempDir;
 	}
 
+	@Override
 	public FileItem createItem(
 		String fieldName, String contentType, boolean isFormField,
 		String fileName) {

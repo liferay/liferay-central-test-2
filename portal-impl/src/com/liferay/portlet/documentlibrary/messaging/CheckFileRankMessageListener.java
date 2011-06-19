@@ -23,6 +23,7 @@ import com.liferay.portlet.documentlibrary.service.DLFileRankLocalServiceUtil;
  */
 public class CheckFileRankMessageListener extends BaseMessageListener {
 
+	@Override
 	protected void doReceive(Message message) throws Exception {
 		DLFileRankLocalServiceUtil.checkFileRanks();
 	}

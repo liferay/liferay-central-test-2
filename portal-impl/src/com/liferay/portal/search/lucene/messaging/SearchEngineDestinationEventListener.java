@@ -36,6 +36,7 @@ import com.liferay.portal.util.PropsValues;
 public class SearchEngineDestinationEventListener
 	extends BaseDestinationEventListener {
 
+	@Override
 	public void messageListenerRegistered(
 		String destinationName, MessageListener messageListener) {
 
@@ -65,6 +66,7 @@ public class SearchEngineDestinationEventListener
 		}
 	}
 
+	@Override
 	public void messageListenerUnregistered(
 		String destinationName, MessageListener messageListener) {
 

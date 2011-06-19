@@ -65,6 +65,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class ImageServlet extends HttpServlet {
 
+	@Override
 	public void init(ServletConfig servletConfig) throws ServletException {
 		super.init(servletConfig);
 
@@ -72,6 +73,7 @@ public class ImageServlet extends HttpServlet {
 			servletConfig.getInitParameter("last_modified"), true);
 	}
 
+	@Override
 	public void service(
 			HttpServletRequest request, HttpServletResponse response)
 		throws IOException, ServletException {
@@ -300,6 +302,7 @@ public class ImageServlet extends HttpServlet {
 		return imageId;
 	}
 
+	@Override
 	protected long getLastModified(HttpServletRequest request) {
 		try {
 			Image image = getImage(request, false);

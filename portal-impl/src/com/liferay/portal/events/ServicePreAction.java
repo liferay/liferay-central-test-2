@@ -138,6 +138,7 @@ public class ServicePreAction extends Action {
 		initImportLARFiles();
 	}
 
+	@Override
 	public void run(HttpServletRequest request, HttpServletResponse response)
 		throws ActionException {
 
@@ -1785,7 +1786,12 @@ public class ServicePreAction extends Action {
 
 				themeDisplay.setURLPageSettings(pageSettingsURL);
 
-				themeDisplay.setShowManageSiteMembershipsIcon(true);
+				if (group.isSite()) {
+					themeDisplay.setShowManageSiteMembershipsIcon(true);
+				}
+				else {
+					themeDisplay.setShowManageSiteMembershipsIcon(false);
+				}
 
 				PortletURL manageSiteMembershipsURL = new PortletURLImpl(
 					request, PortletKeys.SITE_MEMBERSHIPS_ADMIN,

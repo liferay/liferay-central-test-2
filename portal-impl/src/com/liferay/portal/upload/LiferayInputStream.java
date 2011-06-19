@@ -46,6 +46,7 @@ public class LiferayInputStream extends ServletInputStreamWrapper {
 		_totalSize = request.getContentLength();
 	}
 
+	@Override
 	public int read(byte[] b, int off, int len) throws IOException {
 		int bytesRead = super.read(b, off, len);
 

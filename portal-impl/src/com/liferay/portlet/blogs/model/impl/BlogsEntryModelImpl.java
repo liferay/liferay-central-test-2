@@ -535,6 +535,7 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry>
 		}
 	}
 
+	@Override
 	public BlogsEntry toEscapedModel() {
 		if (isEscapedModel()) {
 			return (BlogsEntry)this;
@@ -545,6 +546,7 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry>
 		}
 	}
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
@@ -554,10 +556,12 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry>
 		return _expandoBridge;
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		getExpandoBridge().setAttributes(serviceContext);
 	}
 
+	@Override
 	public Object clone() {
 		BlogsEntryImpl blogsEntryImpl = new BlogsEntryImpl();
 
@@ -604,6 +608,7 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry>
 		return 0;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -628,10 +633,12 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry>
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		BlogsEntryModelImpl blogsEntryModelImpl = this;
 
@@ -644,6 +651,7 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry>
 		blogsEntryModelImpl._originalUrlTitle = blogsEntryModelImpl._urlTitle;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(47);
 

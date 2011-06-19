@@ -45,6 +45,7 @@ import java.sql.Statement;
  */
 public class GlobalShutdownAction extends SimpleAction {
 
+	@Override
 	public void run(String[] ids) {
 
 		// Hot deploy

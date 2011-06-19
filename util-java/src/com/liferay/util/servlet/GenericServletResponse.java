@@ -42,26 +42,31 @@ public class GenericServletResponse extends HttpServletResponseWrapper {
 		return _contentLength;
 	}
 
+	@Override
 	public void setContentLength(int length) {
 		super.setContentLength(length);
 
 		_contentLength = length;
 	}
 
+	@Override
 	public String getContentType() {
 		return _contentType;
 	}
 
+	@Override
 	public void setContentType(String type) {
 		super.setContentType(type);
 
 		_contentType = type;
 	}
 
+	@Override
 	public ServletOutputStream getOutputStream() {
 		return new GenericServletOutputStream(_ubaos);
 	}
 
+	@Override
 	public PrintWriter getWriter() {
 		return new UnsyncPrintWriter(getOutputStream());
 	}

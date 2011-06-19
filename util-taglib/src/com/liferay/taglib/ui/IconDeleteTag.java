@@ -32,6 +32,7 @@ public class IconDeleteTag extends IconTag {
 		_confirmation = confirmation;
 	}
 
+	@Override
 	protected String getPage() {
 		if (FileAvailabilityUtil.isAvailable(getServletContext(), _PAGE)) {
 			return _PAGE;

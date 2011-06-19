@@ -47,6 +47,7 @@ public class LiferayResourceLoader extends ResourceLoader {
 		}
 	}
 
+	@Override
 	public long getLastModified(Resource resource) {
 		if (_log.isDebugEnabled()) {
 			_log.debug("Get last modified for " + resource.getName());
@@ -55,6 +56,7 @@ public class LiferayResourceLoader extends ResourceLoader {
 		return 0;
 	}
 
+	@Override
 	public InputStream getResourceStream(String source)
 		throws ResourceNotFoundException {
 
@@ -85,12 +87,14 @@ public class LiferayResourceLoader extends ResourceLoader {
 		return is;
 	}
 
+	@Override
 	public void init(ExtendedProperties props) {
 		setModificationCheckInterval(
 			PropsValues.
 				VELOCITY_ENGINE_RESOURCE_MANAGER_MODIFICATION_CHECK_INTERVAL);
 	}
 
+	@Override
 	public boolean isSourceModified(Resource resource) {
 		if (_log.isDebugEnabled()) {
 			_log.debug("Check modified status for " + resource.getName());
@@ -99,6 +103,7 @@ public class LiferayResourceLoader extends ResourceLoader {
 		return false;
 	}
 
+	@Override
 	public boolean resourceExists(String resourceName) {
 		InputStream is = null;
 

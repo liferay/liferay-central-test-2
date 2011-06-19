@@ -398,8 +398,7 @@ create table DDLRecord (
 	versionUserName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
-	classNameId LONG,
-	classPK LONG,
+	DDMStorageId LONG,
 	recordSetId LONG,
 	version VARCHAR(75) null,
 	displayIndex INTEGER
@@ -428,8 +427,7 @@ create table DDLRecordVersion (
 	userId LONG,
 	userName VARCHAR(75) null,
 	createDate DATE null,
-	classNameId LONG,
-	classPK LONG,
+	DDMStorageId LONG,
 	recordSetId LONG,
 	recordId LONG,
 	version VARCHAR(75) null,
@@ -509,38 +507,10 @@ create table DLContent (
 	companyId LONG,
 	portletId VARCHAR(75) null,
 	repositoryId LONG,
-	path_ VARCHAR(75) null,
+	path_ VARCHAR(255) null,
 	version VARCHAR(75) null,
 	data_ BLOB,
 	size_ LONG
-);
-
-create table DLDocumentMetadataSet (
-	uuid_ VARCHAR(75) null,
-	documentMetadataSetId LONG not null primary key,
-	classNameId LONG,
-	classPK LONG,
-	DDMStructureId LONG,
-	documentTypeId LONG,
-	fileVersionId LONG
-);
-
-create table DLDocumentType (
-	documentTypeId LONG not null primary key,
-	groupId LONG,
-	companyId LONG,
-	userId LONG,
-	userName VARCHAR(75) null,
-	createDate DATE null,
-	modifiedDate DATE null,
-	name VARCHAR(75) null,
-	description STRING null
-);
-
-create table DLDocumentType_DDMStructure (
-	documentTypeId LONG not null,
-	structureId LONG not null,
-	primary key (documentTypeId, structureId)
 );
 
 create table DLFileEntry (
@@ -562,10 +532,39 @@ create table DLFileEntry (
 	title VARCHAR(255) null,
 	description STRING null,
 	extraSettings TEXT null,
-	documentTypeId LONG,
+	fileEntryTypeId LONG,
 	version VARCHAR(75) null,
 	size_ LONG,
 	readCount INTEGER
+);
+
+create table DLFileEntryMetadata (
+	uuid_ VARCHAR(75) null,
+	fileEntryMetadataId LONG not null primary key,
+	classNameId LONG,
+	classPK LONG,
+	DDMStructureId LONG,
+	fileEntryTypeId LONG,
+	fileEntryId LONG,
+	fileVersionId LONG
+);
+
+create table DLFileEntryType (
+	fileEntryTypeId LONG not null primary key,
+	groupId LONG,
+	companyId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null,
+	modifiedDate DATE null,
+	name VARCHAR(75) null,
+	description STRING null
+);
+
+create table DLFileEntryType_DDMStructure (
+	fileEntryTypeId LONG not null,
+	structureId LONG not null,
+	primary key (fileEntryTypeId, structureId)
 );
 
 create table DLFileRank (
@@ -610,7 +609,7 @@ create table DLFileVersion (
 	description STRING null,
 	changeLog VARCHAR(75) null,
 	extraSettings TEXT null,
-	documentTypeId LONG,
+	fileEntryTypeId LONG,
 	version VARCHAR(75) null,
 	size_ LONG,
 	status INTEGER,

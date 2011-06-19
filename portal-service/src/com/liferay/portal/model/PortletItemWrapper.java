@@ -304,6 +304,7 @@ public class PortletItemWrapper implements PortletItem {
 		_portletItem.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new PortletItemWrapper((PortletItem)_portletItem.clone());
 	}
@@ -312,6 +313,7 @@ public class PortletItemWrapper implements PortletItem {
 		return _portletItem.compareTo(portletItem);
 	}
 
+	@Override
 	public int hashCode() {
 		return _portletItem.hashCode();
 	}
@@ -320,6 +322,7 @@ public class PortletItemWrapper implements PortletItem {
 		return new PortletItemWrapper(_portletItem.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _portletItem.toString();
 	}

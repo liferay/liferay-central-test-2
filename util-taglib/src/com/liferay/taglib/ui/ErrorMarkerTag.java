@@ -32,11 +32,13 @@ public class ErrorMarkerTag extends IncludeTag {
 		_value = value;
 	}
 
+	@Override
 	protected void cleanUp() {
 		_key = null;
 		_value = null;
 	}
 
+	@Override
 	protected void setAttributes(HttpServletRequest request) {
 		if (Validator.isNotNull(_key) && Validator.isNotNull(_value)) {
 			request.setAttribute("liferay-ui:error-marker:key", _key);

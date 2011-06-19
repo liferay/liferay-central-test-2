@@ -121,6 +121,7 @@ public class ToggleTag extends IncludeTag {
 		requestDispatcher.include(request, response);
 	}
 
+	@Override
 	public int doEndTag() throws JspException {
 		try {
 			ServletContext servletContext = getServletContext();
@@ -166,6 +167,7 @@ public class ToggleTag extends IncludeTag {
 		_stateVar = stateVar;
 	}
 
+	@Override
 	protected String getPage() {
 		return _PAGE;
 	}

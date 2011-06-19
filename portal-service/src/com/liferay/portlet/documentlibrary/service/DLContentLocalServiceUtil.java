@@ -292,6 +292,12 @@ public class DLContentLocalServiceUtil {
 				   .getContent(companyId, portletId, repositoryId, path, version);
 	}
 
+	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLContent> getContentReferences(
+		long companyId, long repositoryId, java.lang.String path)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getContentReferences(companyId, repositoryId, path);
+	}
+
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLContent> getContents(
 		long companyId, java.lang.String portletId, long repositoryId,
 		java.lang.String path)
@@ -305,6 +311,14 @@ public class DLContentLocalServiceUtil {
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .hasContent(companyId, portletId, repositoryId, path, version);
+	}
+
+	public static void updateDLContent(long companyId, long oldRepositoryId,
+		long newRepositoryId, java.lang.String oldPath, java.lang.String newPath)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService()
+			.updateDLContent(companyId, oldRepositoryId, newRepositoryId,
+			oldPath, newPath);
 	}
 
 	public static DLContentLocalService getService() {

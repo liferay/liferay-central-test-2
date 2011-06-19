@@ -169,6 +169,7 @@ public class BrowserTrackerWrapper implements BrowserTracker {
 		_browserTracker.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new BrowserTrackerWrapper((BrowserTracker)_browserTracker.clone());
 	}
@@ -177,6 +178,7 @@ public class BrowserTrackerWrapper implements BrowserTracker {
 		return _browserTracker.compareTo(browserTracker);
 	}
 
+	@Override
 	public int hashCode() {
 		return _browserTracker.hashCode();
 	}
@@ -185,6 +187,7 @@ public class BrowserTrackerWrapper implements BrowserTracker {
 		return new BrowserTrackerWrapper(_browserTracker.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _browserTracker.toString();
 	}

@@ -25,6 +25,7 @@ import javax.servlet.jsp.tagext.VariableInfo;
  */
 public class UserDisplayTei extends TagExtraInfo {
 
+	@Override
 	public VariableInfo[] getVariableInfo(TagData tagData) {
 		return _variableInfo;
 	}

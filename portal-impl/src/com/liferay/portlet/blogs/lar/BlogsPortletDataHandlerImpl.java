@@ -51,26 +51,31 @@ import javax.portlet.PortletPreferences;
  */
 public class BlogsPortletDataHandlerImpl extends BasePortletDataHandler {
 
+	@Override
 	public PortletDataHandlerControl[] getExportControls() {
 		return new PortletDataHandlerControl[] {
 			_entries, _categories, _comments, _ratings, _tags
 		};
 	}
 
+	@Override
 	public PortletDataHandlerControl[] getImportControls() {
 		return new PortletDataHandlerControl[] {
 			_entries, _categories, _comments, _ratings, _tags, _wordpress
 		};
 	}
 
+	@Override
 	public boolean isAlwaysExportable() {
 		return _ALWAYS_EXPORTABLE;
 	}
 
+	@Override
 	public boolean isPublishToLiveByDefault() {
 		return PropsValues.BLOGS_PUBLISH_TO_LIVE_BY_DEFAULT;
 	}
 
+	@Override
 	protected PortletPreferences doDeleteData(
 			PortletDataContext portletDataContext, String portletId,
 			PortletPreferences portletPreferences)
@@ -86,6 +91,7 @@ public class BlogsPortletDataHandlerImpl extends BasePortletDataHandler {
 		return null;
 	}
 
+	@Override
 	protected String doExportData(
 			PortletDataContext portletDataContext, String portletId,
 			PortletPreferences portletPreferences)
@@ -111,6 +117,7 @@ public class BlogsPortletDataHandlerImpl extends BasePortletDataHandler {
 		return document.formattedString();
 	}
 
+	@Override
 	protected PortletPreferences doImportData(
 			PortletDataContext portletDataContext, String portletId,
 			PortletPreferences portletPreferences, String data)

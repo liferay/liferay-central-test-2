@@ -36,6 +36,7 @@ public class OrganizationNameComparator extends OrderByComparator {
 		_ascending = ascending;
 	}
 
+	@Override
 	public int compare(Object obj1, Object obj2) {
 		Organization organization1 = (Organization)obj1;
 		Organization organization2 = (Organization)obj2;
@@ -50,6 +51,7 @@ public class OrganizationNameComparator extends OrderByComparator {
 		}
 	}
 
+	@Override
 	public String getOrderBy() {
 		if (_ascending) {
 			return ORDER_BY_ASC;
@@ -59,10 +61,12 @@ public class OrganizationNameComparator extends OrderByComparator {
 		}
 	}
 
+	@Override
 	public String[] getOrderByFields() {
 		return ORDER_BY_FIELDS;
 	}
 
+	@Override
 	public boolean isAscending() {
 		return _ascending;
 	}

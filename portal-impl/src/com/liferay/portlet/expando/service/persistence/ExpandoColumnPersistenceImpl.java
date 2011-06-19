@@ -146,6 +146,7 @@ public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl<ExpandoCol
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(ExpandoColumnImpl.class.getName());
@@ -163,6 +164,7 @@ public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl<ExpandoCol
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(ExpandoColumn expandoColumn) {
 		EntityCacheUtil.removeResult(ExpandoColumnModelImpl.ENTITY_CACHE_ENABLED,
 			ExpandoColumnImpl.class, expandoColumn.getPrimaryKey());
@@ -198,6 +200,7 @@ public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl<ExpandoCol
 	 * @throws com.liferay.portal.NoSuchModelException if a expando column with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ExpandoColumn remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
@@ -250,11 +253,13 @@ public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl<ExpandoCol
 	 * @return the expando column that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ExpandoColumn remove(ExpandoColumn expandoColumn)
 		throws SystemException {
 		return super.remove(expandoColumn);
 	}
 
+	@Override
 	protected ExpandoColumn removeImpl(ExpandoColumn expandoColumn)
 		throws SystemException {
 		expandoColumn = toUnwrappedModel(expandoColumn);
@@ -290,6 +295,7 @@ public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl<ExpandoCol
 		return expandoColumn;
 	}
 
+	@Override
 	public ExpandoColumn updateImpl(
 		com.liferay.portlet.expando.model.ExpandoColumn expandoColumn,
 		boolean merge) throws SystemException {
@@ -377,6 +383,7 @@ public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl<ExpandoCol
 	 * @throws com.liferay.portal.NoSuchModelException if a expando column with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ExpandoColumn findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
@@ -413,6 +420,7 @@ public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl<ExpandoCol
 	 * @return the expando column, or <code>null</code> if a expando column with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ExpandoColumn fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());

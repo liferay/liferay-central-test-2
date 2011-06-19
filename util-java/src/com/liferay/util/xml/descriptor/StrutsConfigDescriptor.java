@@ -23,6 +23,7 @@ import org.dom4j.Document;
  */
 public class StrutsConfigDescriptor extends SimpleXMLDescriptor {
 
+	@Override
 	public boolean canHandleType(String doctype, Document root) {
 		if (doctype.indexOf("struts-config") != -1) {
 			return true;
@@ -32,18 +33,22 @@ public class StrutsConfigDescriptor extends SimpleXMLDescriptor {
 		}
 	}
 
+	@Override
 	public String[] getRootChildrenOrder() {
 		return _ROOT_ORDERED_CHILDREN;
 	}
 
+	@Override
 	public ElementIdentifier[] getElementsIdentifiedByAttribute() {
 		return _ELEMENTS_IDENTIFIED_BY_ATTR;
 	}
 
+	@Override
 	public String[] getUniqueElements() {
 		return _UNIQUE_ELEMENTS;
 	}
 
+	@Override
 	public String[] getJoinableElements() {
 		return _JOINABLE_ELEMENTS;
 	}

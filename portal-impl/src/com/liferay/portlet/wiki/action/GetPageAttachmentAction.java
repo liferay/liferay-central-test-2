@@ -14,7 +14,6 @@
 
 package com.liferay.portlet.wiki.action;
 
-import com.liferay.documentlibrary.service.DLLocalServiceUtil;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.MimeTypesUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -22,6 +21,7 @@ import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.documentlibrary.store.DLStoreUtil;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.service.WikiPageServiceUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
@@ -44,6 +44,7 @@ import org.apache.struts.action.ActionMapping;
  */
 public class GetPageAttachmentAction extends PortletAction {
 
+	@Override
 	public ActionForward strutsExecute(
 			ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response)
@@ -65,6 +66,7 @@ public class GetPageAttachmentAction extends PortletAction {
 		}
 	}
 
+	@Override
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
 			ActionRequest actionRequest, ActionResponse actionResponse)
@@ -105,9 +107,9 @@ public class GetPageAttachmentAction extends PortletAction {
 
 		String path = page.getAttachmentsDir() + "/" + fileName;
 
-		InputStream is = DLLocalServiceUtil.getFileAsStream(
+		InputStream is = DLStoreUtil.getFileAsStream(
 			page.getCompanyId(), CompanyConstants.SYSTEM, path);
-		long contentLength = DLLocalServiceUtil.getFileSize(
+		long contentLength = DLStoreUtil.getFileSize(
 			page.getCompanyId(), CompanyConstants.SYSTEM, path);
 		String contentType = MimeTypesUtil.getContentType(fileName);
 
@@ -115,6 +117,7 @@ public class GetPageAttachmentAction extends PortletAction {
 			request, response, fileName, is, contentLength, contentType);
 	}
 
+	@Override
 	protected boolean isCheckMethodOnProcessAction() {
 		return _CHECK_METHOD_ON_PROCESS_ACTION;
 	}

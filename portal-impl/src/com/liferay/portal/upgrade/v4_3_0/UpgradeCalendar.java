@@ -32,6 +32,7 @@ import java.sql.Types;
  */
 public class UpgradeCalendar extends UpgradeProcess {
 
+	@Override
 	protected void doUpgrade() throws Exception {
 
 		// Calendar

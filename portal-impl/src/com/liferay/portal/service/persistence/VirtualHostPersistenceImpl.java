@@ -134,6 +134,7 @@ public class VirtualHostPersistenceImpl extends BasePersistenceImpl<VirtualHost>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(VirtualHostImpl.class.getName());
@@ -151,6 +152,7 @@ public class VirtualHostPersistenceImpl extends BasePersistenceImpl<VirtualHost>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(VirtualHost virtualHost) {
 		EntityCacheUtil.removeResult(VirtualHostModelImpl.ENTITY_CACHE_ENABLED,
 			VirtualHostImpl.class, virtualHost.getPrimaryKey());
@@ -188,6 +190,7 @@ public class VirtualHostPersistenceImpl extends BasePersistenceImpl<VirtualHost>
 	 * @throws com.liferay.portal.NoSuchModelException if a virtual host with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public VirtualHost remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
@@ -240,11 +243,13 @@ public class VirtualHostPersistenceImpl extends BasePersistenceImpl<VirtualHost>
 	 * @return the virtual host that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public VirtualHost remove(VirtualHost virtualHost)
 		throws SystemException {
 		return super.remove(virtualHost);
 	}
 
+	@Override
 	protected VirtualHost removeImpl(VirtualHost virtualHost)
 		throws SystemException {
 		virtualHost = toUnwrappedModel(virtualHost);
@@ -282,6 +287,7 @@ public class VirtualHostPersistenceImpl extends BasePersistenceImpl<VirtualHost>
 		return virtualHost;
 	}
 
+	@Override
 	public VirtualHost updateImpl(
 		com.liferay.portal.model.VirtualHost virtualHost, boolean merge)
 		throws SystemException {
@@ -375,6 +381,7 @@ public class VirtualHostPersistenceImpl extends BasePersistenceImpl<VirtualHost>
 	 * @throws com.liferay.portal.NoSuchModelException if a virtual host with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public VirtualHost findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
@@ -411,6 +418,7 @@ public class VirtualHostPersistenceImpl extends BasePersistenceImpl<VirtualHost>
 	 * @return the virtual host, or <code>null</code> if a virtual host with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public VirtualHost fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());

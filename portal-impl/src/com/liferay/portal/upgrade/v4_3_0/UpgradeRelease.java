@@ -24,6 +24,7 @@ import com.liferay.portal.upgrade.v4_3_0.util.ReleaseTable;
  */
 public class UpgradeRelease extends UpgradeProcess {
 
+	@Override
 	protected void doUpgrade() throws Exception {
 
 		// Release

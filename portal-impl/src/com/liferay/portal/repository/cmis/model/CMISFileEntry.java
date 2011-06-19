@@ -78,6 +78,7 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 		return new HashMap<String, Serializable>();
 	}
 
+	@Override
 	public long getCompanyId() {
 		return _cmisRepository.getCompanyId();
 	}
@@ -228,7 +229,7 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 	}
 
 	public Lock getLock() {
-		if (!isLocked()) {
+		if (!isCheckedOut()) {
 			return null;
 		}
 
@@ -272,6 +273,7 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 		return DLFileEntry.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return DLFileEntry.class.getName();
 	}
@@ -280,6 +282,7 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 		return _document.getLastModificationDate().getTime();
 	}
 
+	@Override
 	public long getPrimaryKey() {
 		return _fileEntryId;
 	}
@@ -360,7 +363,7 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 	}
 
 	public boolean hasLock() {
-		if (!isLocked()) {
+		if (!isCheckedOut()) {
 			return false;
 		}
 
@@ -372,16 +375,16 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 		return allowableActionsSet.contains(Action.CAN_CHECK_IN);
 	}
 
+	public boolean isCheckedOut() {
+		return _document.isVersionSeriesCheckedOut();
+	}
+
 	public boolean isDefaultRepository() {
 		return false;
 	}
 
 	public boolean isEscapedModel() {
 		return false;
-	}
-
-	public boolean isLocked() {
-		return _document.isVersionSeriesCheckedOut();
 	}
 
 	public boolean isSupportsLocking() {
@@ -435,6 +438,7 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 		return this;
 	}
 
+	@Override
 	protected CMISRepository getCmisRepository() {
 		return _cmisRepository;
 	}

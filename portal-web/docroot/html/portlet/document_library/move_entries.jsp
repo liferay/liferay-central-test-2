@@ -57,7 +57,7 @@ List<FileEntry> invalidMoveFileEntries = new ArrayList<FileEntry>();
 
 if (!fileEntries.isEmpty()) {
 	for (FileEntry curFileEntry : fileEntries) {
-		boolean movePermission = DLFileEntryPermission.contains(permissionChecker, curFileEntry, ActionKeys.UPDATE) && (!curFileEntry.isLocked() || curFileEntry.hasLock());
+		boolean movePermission = DLFileEntryPermission.contains(permissionChecker, curFileEntry, ActionKeys.UPDATE) && (!curFileEntry.isCheckedOut() || curFileEntry.hasLock());
 
 		if (movePermission) {
 			validMoveFileEntries.add(curFileEntry);
@@ -217,8 +217,8 @@ else if (!folders.isEmpty()) {
 
 						<span class="error-message">
 							<c:choose>
-								<c:when test="<%= invalidMoveFileEntry.isLocked() && !invalidMoveFileEntry.hasLock() %>">
-									<%= LanguageUtil.format(pageContext, "you-cannot-modify-this-document-because-it-was-locked-by-x-on-x", new Object[] {HtmlUtil.escape(PortalUtil.getUserName(lock.getUserId(), String.valueOf(lock.getUserId()))), dateFormatDateTime.format(lock.getCreateDate())}, false) %>
+								<c:when test="<%= invalidMoveFileEntry.isCheckedOut() && !invalidMoveFileEntry.hasLock() %>">
+									<%= LanguageUtil.format(pageContext, "you-cannot-modify-this-document-because-it-was-checked-out-by-x-on-x", new Object[] {HtmlUtil.escape(PortalUtil.getUserName(lock.getUserId(), String.valueOf(lock.getUserId()))), dateFormatDateTime.format(lock.getCreateDate())}, false) %>
 								</c:when>
 								<c:otherwise>
 									<%= LanguageUtil.get(pageContext, "you-do-not-have-the-required-permissions") %>

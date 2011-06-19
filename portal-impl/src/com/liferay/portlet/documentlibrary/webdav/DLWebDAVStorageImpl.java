@@ -14,7 +14,6 @@
 
 package com.liferay.portlet.documentlibrary.webdav;
 
-import com.liferay.documentlibrary.DuplicateFileException;
 import com.liferay.portal.DuplicateLockException;
 import com.liferay.portal.InvalidLockException;
 import com.liferay.portal.NoSuchLockException;
@@ -22,7 +21,6 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.repository.model.FileEntry;
-import com.liferay.portal.kernel.repository.model.FileVersion;
 import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.util.ContentTypes;
@@ -39,13 +37,12 @@ import com.liferay.portal.kernel.webdav.Status;
 import com.liferay.portal.kernel.webdav.WebDAVException;
 import com.liferay.portal.kernel.webdav.WebDAVRequest;
 import com.liferay.portal.kernel.webdav.WebDAVUtil;
-import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.Lock;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.ServiceContext;
-import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.webdav.LockException;
 import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.DuplicateFileException;
 import com.liferay.portlet.documentlibrary.DuplicateFolderNameException;
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
@@ -67,6 +64,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
+	@Override
 	public int copyCollectionResource(
 			WebDAVRequest webDavRequest, Resource resource, String destination,
 			boolean overwrite, long depth)
@@ -133,6 +131,7 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		}
 	}
 
+	@Override
 	public int copySimpleResource(
 			WebDAVRequest webDavRequest, Resource resource, String destination,
 			boolean overwrite)
@@ -215,6 +214,7 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		}
 	}
 
+	@Override
 	public int deleteResource(WebDAVRequest webDavRequest)
 		throws WebDAVException {
 
@@ -329,10 +329,12 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		}
 	}
 
+	@Override
 	public boolean isSupportsClassTwo() {
 		return true;
 	}
 
+	@Override
 	public Status lockResource(
 			WebDAVRequest webDavRequest, String owner, long timeout)
 		throws WebDAVException {
@@ -389,8 +391,10 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			if (resource instanceof DLFileEntryResourceImpl) {
 				FileEntry fileEntry = (FileEntry)resource.getModel();
 
-				lock = DLAppServiceUtil.lockFileEntry(
+				fileEntry = DLAppServiceUtil.checkOutFileEntry(
 					fileEntry.getFileEntryId(), owner, timeout);
+
+				lock = fileEntry.getLock();
 			}
 			else {
 				boolean inheritable = false;
@@ -423,6 +427,7 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		return new Status(lock, status);
 	}
 
+	@Override
 	public Status makeCollection(WebDAVRequest webDavRequest)
 		throws WebDAVException {
 
@@ -472,6 +477,7 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		}
 	}
 
+	@Override
 	public int moveCollectionResource(
 			WebDAVRequest webDavRequest, Resource resource, String destination,
 			boolean overwrite)
@@ -527,6 +533,7 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		}
 	}
 
+	@Override
 	public int moveSimpleResource(
 			WebDAVRequest webDavRequest, Resource resource, String destination,
 			boolean overwrite)
@@ -629,6 +636,7 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		}
 	}
 
+	@Override
 	public int putResource(WebDAVRequest webDavRequest) throws WebDAVException {
 		File file = null;
 
@@ -677,11 +685,6 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 					contentType = MimeTypesUtil.getContentType(file);
 				}
-			}
-
-			if (PropsValues.DL_WEBDAV_SAVE_TO_SINGLE_VERSION) {
-				serviceContext.setWorkflowAction(
-					WorkflowConstants.ACTION_SAVE_DRAFT);
 			}
 
 			try {
@@ -757,6 +760,7 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		}
 	}
 
+	@Override
 	public Lock refreshResourceLock(
 			WebDAVRequest webDavRequest, String uuid, long timeout)
 		throws WebDAVException {
@@ -780,6 +784,7 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		return lock;
 	}
 
+	@Override
 	public boolean unlockResource(WebDAVRequest webDavRequest, String token)
 		throws WebDAVException {
 
@@ -789,15 +794,7 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			if (resource instanceof DLFileEntryResourceImpl) {
 				FileEntry fileEntry = (FileEntry)resource.getModel();
 
-				if (PropsValues.DL_WEBDAV_HOLD_LOCK) {
-					return true;
-				}
-
-				if (PropsValues.DL_WEBDAV_SAVE_TO_SINGLE_VERSION) {
-					publishFileEntry(fileEntry);
-				}
-
-				DLAppServiceUtil.unlockFileEntry(
+				DLAppServiceUtil.checkInFileEntry(
 					fileEntry.getFileEntryId(), token);
 
 				if (webDavRequest.isAppleDoubleRequest()) {
@@ -961,7 +958,7 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			// Client claims to know of a lock. Verify the lock UUID.
 
 			try {
-				boolean verified = DLAppServiceUtil.verifyFileEntryLock(
+				boolean verified = DLAppServiceUtil.verifyFileEntryCheckOut(
 					fileEntry.getRepositoryId(), fileEntry.getFileEntryId(),
 					lockUuid);
 
@@ -971,28 +968,6 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 				return false;
 			}
 		}
-	}
-
-	protected void publishFileEntry(FileEntry fileEntry) throws Exception {
-		FileVersion latestFileVersion = fileEntry.getLatestFileVersion();
-
-		if (latestFileVersion.getStatus() ==
-				WorkflowConstants.STATUS_APPROVED) {
-
-			return;
-		}
-
-		ServiceContext serviceContext = new ServiceContext();
-
-		serviceContext.setAddGroupPermissions(
-			isAddGroupPermissions(fileEntry.getRepositoryId()));
-		serviceContext.setAddGuestPermissions(true);
-
-		DLAppServiceUtil.updateFileEntry(
-			fileEntry.getFileEntryId(), fileEntry.getTitle(),
-			fileEntry.getMimeType(), fileEntry.getTitle(),
-			fileEntry.getDescription(), latestFileVersion.getDescription(),
-			true, null, 0, serviceContext);
 	}
 
 	protected Resource toResource(

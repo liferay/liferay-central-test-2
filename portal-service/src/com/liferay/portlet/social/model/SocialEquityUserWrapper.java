@@ -297,6 +297,7 @@ public class SocialEquityUserWrapper implements SocialEquityUser {
 		_socialEquityUser.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new SocialEquityUserWrapper((SocialEquityUser)_socialEquityUser.clone());
 	}
@@ -306,6 +307,7 @@ public class SocialEquityUserWrapper implements SocialEquityUser {
 		return _socialEquityUser.compareTo(socialEquityUser);
 	}
 
+	@Override
 	public int hashCode() {
 		return _socialEquityUser.hashCode();
 	}
@@ -314,6 +316,7 @@ public class SocialEquityUserWrapper implements SocialEquityUser {
 		return new SocialEquityUserWrapper(_socialEquityUser.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _socialEquityUser.toString();
 	}

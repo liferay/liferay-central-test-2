@@ -40,6 +40,7 @@ public class UnsyncBufferedInputStream extends UnsyncFilterInputStream {
 		buffer = new byte[size];
 	}
 
+	@Override
 	public int available() throws IOException {
 		if (inputStream == null) {
 			throw new IOException("Input stream is null");
@@ -48,6 +49,7 @@ public class UnsyncBufferedInputStream extends UnsyncFilterInputStream {
 		return inputStream.available() + (firstInvalidIndex - index);
 	}
 
+	@Override
 	public void close() throws IOException {
 		if (inputStream != null) {
 			inputStream.close();
@@ -57,6 +59,7 @@ public class UnsyncBufferedInputStream extends UnsyncFilterInputStream {
 		}
 	}
 
+	@Override
 	public void mark(int readLimit) {
 		if (readLimit <= 0) {
 			return;
@@ -87,10 +90,12 @@ public class UnsyncBufferedInputStream extends UnsyncFilterInputStream {
 		}
 	}
 
+	@Override
 	public boolean markSupported() {
 		return true;
 	}
 
+	@Override
 	public int read() throws IOException {
 		if (inputStream == null) {
 			throw new IOException("Input stream is null");
@@ -107,10 +112,12 @@ public class UnsyncBufferedInputStream extends UnsyncFilterInputStream {
 		return buffer[index++] & 0xff;
 	}
 
+	@Override
 	public int read(byte[] bytes) throws IOException {
 		return read(bytes, 0, bytes.length);
 	}
 
+	@Override
 	public int read(byte[] bytes, int offset, int length)
 		throws IOException {
 
@@ -151,6 +158,7 @@ public class UnsyncBufferedInputStream extends UnsyncFilterInputStream {
 		return read;
 	}
 
+	@Override
 	public void reset() throws IOException {
 		if (inputStream == null) {
 			throw new IOException("Input stream is null");
@@ -163,6 +171,7 @@ public class UnsyncBufferedInputStream extends UnsyncFilterInputStream {
 		index = 0;
 	}
 
+	@Override
 	public long skip(long skip) throws IOException {
 		if (inputStream == null) {
 			throw new IOException("Input stream is null");

@@ -64,6 +64,7 @@ public class LiferayResourceBundle extends ResourceBundle {
 		LanguageResources.fixValues(_map, properties);
 	}
 
+	@Override
 	public Object handleGetObject(String key) {
 		if (key == null) {
 			throw new NullPointerException();
@@ -72,6 +73,7 @@ public class LiferayResourceBundle extends ResourceBundle {
 		return _map.get(key);
 	}
 
+	@Override
 	public Enumeration<String> getKeys() {
 		final Set<String> keys = _map.keySet();
 

@@ -253,10 +253,12 @@ public class WeakValueConcurrentHashMap<K, V>
 
 	private class UnwrapEntrySet extends AbstractSet<Map.Entry<K, V>> {
 
+		@Override
 		public void clear() {
 			WeakValueConcurrentHashMap.this.clear();
 		}
 
+		@Override
 		public boolean contains(Object obj) {
 			if (!(obj instanceof Map.Entry<?, ?>)) {
 				return false;
@@ -274,10 +276,12 @@ public class WeakValueConcurrentHashMap<K, V>
 			}
 		}
 
+		@Override
 		public Iterator<Map.Entry<K, V>> iterator() {
 			return new UnwrapEntryIterator();
 		}
 
+		@Override
 		public boolean remove(Object obj) {
 			if (!(obj instanceof Map.Entry<?, ?>)) {
 				return false;
@@ -289,10 +293,12 @@ public class WeakValueConcurrentHashMap<K, V>
 				entry.getKey(), entry.getValue());
 		}
 
+		@Override
 		public int size() {
 			return WeakValueConcurrentHashMap.this.size();
 		}
 
+		@Override
 		public Object[] toArray() {
 			List<Map.Entry<K, V>> list = new ArrayList<Map.Entry<K, V>>(size());
 
@@ -305,6 +311,7 @@ public class WeakValueConcurrentHashMap<K, V>
 			return list.toArray();
 		}
 
+		@Override
 		public <T> T[] toArray(T[] array) {
 			List<Map.Entry<K, V>> list = new ArrayList<Map.Entry<K, V>>(size());
 
@@ -349,22 +356,27 @@ public class WeakValueConcurrentHashMap<K, V>
 
 	private class UnwrapValues extends AbstractCollection<V> {
 
+		@Override
 		public void clear() {
 			WeakValueConcurrentHashMap.this.clear();
 		}
 
+		@Override
 		public boolean contains(Object obj) {
 			return WeakValueConcurrentHashMap.this.containsValue(obj);
 		}
 
+		@Override
 		public Iterator<V> iterator() {
 			return new UnwrapValueIterator();
 		}
 
+		@Override
 		public int size() {
 			return WeakValueConcurrentHashMap.this.size();
 		}
 
+		@Override
 		public Object[] toArray() {
 			List<V> list = new ArrayList<V>();
 
@@ -377,6 +389,7 @@ public class WeakValueConcurrentHashMap<K, V>
 			return list.toArray();
 		}
 
+		@Override
 		public <T> T[] toArray(T[] a) {
 			List<V> list = new ArrayList<V>();
 

@@ -81,6 +81,7 @@ public class MethodWrapper implements Serializable {
 		return arguments;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(9);
 

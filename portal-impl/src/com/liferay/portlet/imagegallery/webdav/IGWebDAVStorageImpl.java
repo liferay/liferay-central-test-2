@@ -14,7 +14,6 @@
 
 package com.liferay.portlet.imagegallery.webdav;
 
-import com.liferay.documentlibrary.DuplicateFileException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
@@ -35,6 +34,7 @@ import com.liferay.portal.kernel.webdav.WebDAVUtil;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.DuplicateFileException;
 import com.liferay.portlet.imagegallery.DuplicateFolderNameException;
 import com.liferay.portlet.imagegallery.NoSuchFolderException;
 import com.liferay.portlet.imagegallery.NoSuchImageException;
@@ -58,6 +58,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class IGWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
+	@Override
 	public int copyCollectionResource(
 			WebDAVRequest webDavRequest, Resource resource, String destination,
 			boolean overwrite, long depth)
@@ -122,6 +123,7 @@ public class IGWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		}
 	}
 
+	@Override
 	public int copySimpleResource(
 			WebDAVRequest webDavRequest, Resource resource, String destination,
 			boolean overwrite)
@@ -197,6 +199,7 @@ public class IGWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		}
 	}
 
+	@Override
 	public int deleteResource(WebDAVRequest webDavRequest)
 		throws WebDAVException {
 
@@ -302,6 +305,7 @@ public class IGWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		}
 	}
 
+	@Override
 	public Status makeCollection(WebDAVRequest webDavRequest)
 		throws WebDAVException {
 
@@ -350,6 +354,7 @@ public class IGWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		}
 	}
 
+	@Override
 	public int moveCollectionResource(
 			WebDAVRequest webDavRequest, Resource resource, String destination,
 			boolean overwrite)
@@ -396,6 +401,7 @@ public class IGWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		}
 	}
 
+	@Override
 	public int moveSimpleResource(
 			WebDAVRequest webDavRequest, Resource resource, String destination,
 			boolean overwrite)
@@ -446,6 +452,7 @@ public class IGWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		}
 	}
 
+	@Override
 	public int putResource(WebDAVRequest webDavRequest) throws WebDAVException {
 		File file = null;
 

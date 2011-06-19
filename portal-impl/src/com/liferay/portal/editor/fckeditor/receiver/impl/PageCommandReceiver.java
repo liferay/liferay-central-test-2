@@ -36,10 +36,12 @@ import org.w3c.dom.Node;
  */
 public class PageCommandReceiver extends BaseCommandReceiver {
 
+	@Override
 	protected String createFolder(CommandArgument commandArgument) {
 		return "0";
 	}
 
+	@Override
 	protected String fileUpload(
 		CommandArgument commandArgument, String fileName, File file,
 		String extension) {
@@ -47,6 +49,7 @@ public class PageCommandReceiver extends BaseCommandReceiver {
 		return "0";
 	}
 
+	@Override
 	protected void getFolders(
 		CommandArgument commandArgument, Document document, Node rootNode) {
 
@@ -58,6 +61,7 @@ public class PageCommandReceiver extends BaseCommandReceiver {
 		}
 	}
 
+	@Override
 	protected void getFoldersAndFiles(
 		CommandArgument commandArgument, Document document, Node rootNode) {
 

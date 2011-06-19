@@ -266,6 +266,7 @@ public class TicketWrapper implements Ticket {
 		_ticket.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new TicketWrapper((Ticket)_ticket.clone());
 	}
@@ -274,6 +275,7 @@ public class TicketWrapper implements Ticket {
 		return _ticket.compareTo(ticket);
 	}
 
+	@Override
 	public int hashCode() {
 		return _ticket.hashCode();
 	}
@@ -282,6 +284,7 @@ public class TicketWrapper implements Ticket {
 		return new TicketWrapper(_ticket.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _ticket.toString();
 	}

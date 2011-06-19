@@ -108,6 +108,7 @@ public class ClusterGroupPersistenceImpl extends BasePersistenceImpl<ClusterGrou
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(ClusterGroupImpl.class.getName());
@@ -125,6 +126,7 @@ public class ClusterGroupPersistenceImpl extends BasePersistenceImpl<ClusterGrou
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(ClusterGroup clusterGroup) {
 		EntityCacheUtil.removeResult(ClusterGroupModelImpl.ENTITY_CACHE_ENABLED,
 			ClusterGroupImpl.class, clusterGroup.getPrimaryKey());
@@ -153,6 +155,7 @@ public class ClusterGroupPersistenceImpl extends BasePersistenceImpl<ClusterGrou
 	 * @throws com.liferay.portal.NoSuchModelException if a cluster group with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ClusterGroup remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
@@ -206,11 +209,13 @@ public class ClusterGroupPersistenceImpl extends BasePersistenceImpl<ClusterGrou
 	 * @return the cluster group that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ClusterGroup remove(ClusterGroup clusterGroup)
 		throws SystemException {
 		return super.remove(clusterGroup);
 	}
 
+	@Override
 	protected ClusterGroup removeImpl(ClusterGroup clusterGroup)
 		throws SystemException {
 		clusterGroup = toUnwrappedModel(clusterGroup);
@@ -237,6 +242,7 @@ public class ClusterGroupPersistenceImpl extends BasePersistenceImpl<ClusterGrou
 		return clusterGroup;
 	}
 
+	@Override
 	public ClusterGroup updateImpl(
 		com.liferay.portal.model.ClusterGroup clusterGroup, boolean merge)
 		throws SystemException {
@@ -292,6 +298,7 @@ public class ClusterGroupPersistenceImpl extends BasePersistenceImpl<ClusterGrou
 	 * @throws com.liferay.portal.NoSuchModelException if a cluster group with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ClusterGroup findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
@@ -328,6 +335,7 @@ public class ClusterGroupPersistenceImpl extends BasePersistenceImpl<ClusterGrou
 	 * @return the cluster group, or <code>null</code> if a cluster group with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ClusterGroup fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());

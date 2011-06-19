@@ -30,6 +30,7 @@ public class JDataStoreDB extends FirebirdDB {
 		return _instance;
 	}
 
+	@Override
 	public String buildSQL(String template) throws IOException {
 		template = convertTimestamp(template);
 		template = replaceTemplate(template, getTemplate());
@@ -47,10 +48,12 @@ public class JDataStoreDB extends FirebirdDB {
 		super(TYPE_JDATASTORE);
 	}
 
+	@Override
 	protected String getServerName() {
 		return "jdatastore";
 	}
 
+	@Override
 	protected String[] getTemplate() {
 		return _JDATASTORE;
 	}

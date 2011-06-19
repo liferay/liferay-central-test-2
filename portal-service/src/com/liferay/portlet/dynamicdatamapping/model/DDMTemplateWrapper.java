@@ -561,6 +561,7 @@ public class DDMTemplateWrapper implements DDMTemplate {
 		_ddmTemplate.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new DDMTemplateWrapper((DDMTemplate)_ddmTemplate.clone());
 	}
@@ -570,6 +571,7 @@ public class DDMTemplateWrapper implements DDMTemplate {
 		return _ddmTemplate.compareTo(ddmTemplate);
 	}
 
+	@Override
 	public int hashCode() {
 		return _ddmTemplate.hashCode();
 	}
@@ -578,6 +580,7 @@ public class DDMTemplateWrapper implements DDMTemplate {
 		return new DDMTemplateWrapper(_ddmTemplate.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _ddmTemplate.toString();
 	}

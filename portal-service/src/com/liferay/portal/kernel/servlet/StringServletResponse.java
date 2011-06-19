@@ -40,10 +40,12 @@ public class StringServletResponse extends HeaderCacheServletResponse {
 		super(response);
 	}
 
+	@Override
 	public int getBufferSize() {
 		return _bufferSize;
 	}
 
+	@Override
 	public ServletOutputStream getOutputStream() {
 		if (_calledGetWriter) {
 			throw new IllegalStateException(
@@ -91,6 +93,7 @@ public class StringServletResponse extends HeaderCacheServletResponse {
 		return _unsyncByteArrayOutputStream;
 	}
 
+	@Override
 	public PrintWriter getWriter() {
 		if (_calledGetOutputStream) {
 			throw new IllegalStateException(
@@ -123,6 +126,7 @@ public class StringServletResponse extends HeaderCacheServletResponse {
 		resetBuffer();
 	}
 
+	@Override
 	public void resetBuffer() {
 		if (_calledGetOutputStream) {
 			_calledGetOutputStream = false;
@@ -136,10 +140,12 @@ public class StringServletResponse extends HeaderCacheServletResponse {
 		}
 	}
 
+	@Override
 	public void setBufferSize(int bufferSize) {
 		_bufferSize = bufferSize;
 	}
 
+	@Override
 	public void setLocale(Locale locale) {
 	}
 

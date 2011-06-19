@@ -353,6 +353,7 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory>
 		_lastPostDate = lastPostDate;
 	}
 
+	@Override
 	public MBCategory toEscapedModel() {
 		if (isEscapedModel()) {
 			return (MBCategory)this;
@@ -363,6 +364,7 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory>
 		}
 	}
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
@@ -372,10 +374,12 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory>
 		return _expandoBridge;
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		getExpandoBridge().setAttributes(serviceContext);
 	}
 
+	@Override
 	public Object clone() {
 		MBCategoryImpl mbCategoryImpl = new MBCategoryImpl();
 
@@ -427,6 +431,7 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory>
 		return 0;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -451,10 +456,12 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory>
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		MBCategoryModelImpl mbCategoryModelImpl = this;
 
@@ -465,6 +472,7 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory>
 		mbCategoryModelImpl._setOriginalGroupId = false;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(31);
 

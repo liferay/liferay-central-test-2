@@ -142,6 +142,7 @@ public class ComparableRoute implements Comparable<ComparableRoute> {
 		return _pattern.compareTo(comparableRoute.getPattern());
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;

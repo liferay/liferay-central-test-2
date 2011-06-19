@@ -75,6 +75,7 @@ public class PasswordPolicyRelLocalServiceImpl
 		}
 	}
 
+	@Override
 	public void deletePasswordPolicyRel(long passwordPolicyRelId)
 		throws PortalException, SystemException {
 
@@ -101,6 +102,7 @@ public class PasswordPolicyRelLocalServiceImpl
 		}
 	}
 
+	@Override
 	public void deletePasswordPolicyRel(PasswordPolicyRel passwordPolicyRel)
 		throws SystemException {
 

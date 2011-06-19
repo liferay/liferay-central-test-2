@@ -28,14 +28,17 @@ public class WebDAVTag extends IncludeTag {
 		_path = path;
 	}
 
+	@Override
 	protected void cleanUp() {
 		_path = null;
 	}
 
+	@Override
 	protected String getPage() {
 		return _PAGE;
 	}
 
+	@Override
 	protected void setAttributes(HttpServletRequest request) {
 		request.setAttribute("liferay-ui:webdav:path", _path);
 	}

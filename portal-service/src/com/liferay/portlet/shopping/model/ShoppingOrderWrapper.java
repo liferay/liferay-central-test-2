@@ -1078,6 +1078,7 @@ public class ShoppingOrderWrapper implements ShoppingOrder {
 		_shoppingOrder.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new ShoppingOrderWrapper((ShoppingOrder)_shoppingOrder.clone());
 	}
@@ -1087,6 +1088,7 @@ public class ShoppingOrderWrapper implements ShoppingOrder {
 		return _shoppingOrder.compareTo(shoppingOrder);
 	}
 
+	@Override
 	public int hashCode() {
 		return _shoppingOrder.hashCode();
 	}
@@ -1095,6 +1097,7 @@ public class ShoppingOrderWrapper implements ShoppingOrder {
 		return new ShoppingOrderWrapper(_shoppingOrder.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _shoppingOrder.toString();
 	}

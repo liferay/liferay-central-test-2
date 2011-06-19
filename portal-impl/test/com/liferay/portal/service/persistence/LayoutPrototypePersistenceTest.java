@@ -29,6 +29,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class LayoutPrototypePersistenceTest extends BasePersistenceTestCase {
+	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -65,9 +66,13 @@ public class LayoutPrototypePersistenceTest extends BasePersistenceTestCase {
 		LayoutPrototype newLayoutPrototype = _persistence.create(pk);
 
 		newLayoutPrototype.setCompanyId(nextLong());
+
 		newLayoutPrototype.setName(randomString());
+
 		newLayoutPrototype.setDescription(randomString());
+
 		newLayoutPrototype.setSettings(randomString());
+
 		newLayoutPrototype.setActive(randomBoolean());
 
 		_persistence.update(newLayoutPrototype, false);
@@ -200,9 +205,13 @@ public class LayoutPrototypePersistenceTest extends BasePersistenceTestCase {
 		LayoutPrototype layoutPrototype = _persistence.create(pk);
 
 		layoutPrototype.setCompanyId(nextLong());
+
 		layoutPrototype.setName(randomString());
+
 		layoutPrototype.setDescription(randomString());
+
 		layoutPrototype.setSettings(randomString());
+
 		layoutPrototype.setActive(randomBoolean());
 
 		_persistence.update(layoutPrototype, false);

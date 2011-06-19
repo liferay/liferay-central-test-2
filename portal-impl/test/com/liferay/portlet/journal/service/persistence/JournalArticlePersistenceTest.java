@@ -34,6 +34,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class JournalArticlePersistenceTest extends BasePersistenceTestCase {
+	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -70,35 +71,65 @@ public class JournalArticlePersistenceTest extends BasePersistenceTestCase {
 		JournalArticle newJournalArticle = _persistence.create(pk);
 
 		newJournalArticle.setUuid(randomString());
+
 		newJournalArticle.setResourcePrimKey(nextLong());
+
 		newJournalArticle.setGroupId(nextLong());
+
 		newJournalArticle.setCompanyId(nextLong());
+
 		newJournalArticle.setUserId(nextLong());
+
 		newJournalArticle.setUserName(randomString());
+
 		newJournalArticle.setCreateDate(nextDate());
+
 		newJournalArticle.setModifiedDate(nextDate());
+
 		newJournalArticle.setClassNameId(nextLong());
+
 		newJournalArticle.setClassPK(nextLong());
+
 		newJournalArticle.setArticleId(randomString());
+
 		newJournalArticle.setVersion(nextDouble());
+
 		newJournalArticle.setTitle(randomString());
+
 		newJournalArticle.setUrlTitle(randomString());
+
 		newJournalArticle.setDescription(randomString());
+
 		newJournalArticle.setContent(randomString());
+
 		newJournalArticle.setType(randomString());
+
 		newJournalArticle.setStructureId(randomString());
+
 		newJournalArticle.setTemplateId(randomString());
+
 		newJournalArticle.setLayoutUuid(randomString());
+
 		newJournalArticle.setDisplayDate(nextDate());
+
 		newJournalArticle.setExpirationDate(nextDate());
+
 		newJournalArticle.setReviewDate(nextDate());
+
 		newJournalArticle.setIndexable(randomBoolean());
+
 		newJournalArticle.setSmallImage(randomBoolean());
+
 		newJournalArticle.setSmallImageId(nextLong());
+
 		newJournalArticle.setSmallImageURL(randomString());
+
 		newJournalArticle.setStatus(nextInt());
+
 		newJournalArticle.setStatusByUserId(nextLong());
+
 		newJournalArticle.setStatusByUserName(randomString());
+
 		newJournalArticle.setStatusDate(nextDate());
 
 		_persistence.update(newJournalArticle, false);
@@ -324,35 +355,65 @@ public class JournalArticlePersistenceTest extends BasePersistenceTestCase {
 		JournalArticle journalArticle = _persistence.create(pk);
 
 		journalArticle.setUuid(randomString());
+
 		journalArticle.setResourcePrimKey(nextLong());
+
 		journalArticle.setGroupId(nextLong());
+
 		journalArticle.setCompanyId(nextLong());
+
 		journalArticle.setUserId(nextLong());
+
 		journalArticle.setUserName(randomString());
+
 		journalArticle.setCreateDate(nextDate());
+
 		journalArticle.setModifiedDate(nextDate());
+
 		journalArticle.setClassNameId(nextLong());
+
 		journalArticle.setClassPK(nextLong());
+
 		journalArticle.setArticleId(randomString());
+
 		journalArticle.setVersion(nextDouble());
+
 		journalArticle.setTitle(randomString());
+
 		journalArticle.setUrlTitle(randomString());
+
 		journalArticle.setDescription(randomString());
+
 		journalArticle.setContent(randomString());
+
 		journalArticle.setType(randomString());
+
 		journalArticle.setStructureId(randomString());
+
 		journalArticle.setTemplateId(randomString());
+
 		journalArticle.setLayoutUuid(randomString());
+
 		journalArticle.setDisplayDate(nextDate());
+
 		journalArticle.setExpirationDate(nextDate());
+
 		journalArticle.setReviewDate(nextDate());
+
 		journalArticle.setIndexable(randomBoolean());
+
 		journalArticle.setSmallImage(randomBoolean());
+
 		journalArticle.setSmallImageId(nextLong());
+
 		journalArticle.setSmallImageURL(randomString());
+
 		journalArticle.setStatus(nextInt());
+
 		journalArticle.setStatusByUserId(nextLong());
+
 		journalArticle.setStatusByUserName(randomString());
+
 		journalArticle.setStatusDate(nextDate());
 
 		_persistence.update(journalArticle, false);

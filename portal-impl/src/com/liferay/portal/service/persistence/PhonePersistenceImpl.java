@@ -177,6 +177,7 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(PhoneImpl.class.getName());
@@ -194,6 +195,7 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(Phone phone) {
 		EntityCacheUtil.removeResult(PhoneModelImpl.ENTITY_CACHE_ENABLED,
 			PhoneImpl.class, phone.getPrimaryKey());
@@ -222,6 +224,7 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 	 * @throws com.liferay.portal.NoSuchModelException if a phone with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Phone remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
@@ -274,10 +277,12 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 	 * @return the phone that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Phone remove(Phone phone) throws SystemException {
 		return super.remove(phone);
 	}
 
+	@Override
 	protected Phone removeImpl(Phone phone) throws SystemException {
 		phone = toUnwrappedModel(phone);
 
@@ -303,6 +308,7 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 		return phone;
 	}
 
+	@Override
 	public Phone updateImpl(com.liferay.portal.model.Phone phone, boolean merge)
 		throws SystemException {
 		phone = toUnwrappedModel(phone);
@@ -365,6 +371,7 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 	 * @throws com.liferay.portal.NoSuchModelException if a phone with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Phone findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
@@ -401,6 +408,7 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 	 * @return the phone, or <code>null</code> if a phone with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Phone fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());

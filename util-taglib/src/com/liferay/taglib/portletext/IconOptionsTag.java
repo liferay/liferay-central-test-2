@@ -21,6 +21,7 @@ import com.liferay.taglib.ui.IconTag;
  */
 public class IconOptionsTag extends IconTag {
 
+	@Override
 	protected String getPage() {
 		return _PAGE;
 	}

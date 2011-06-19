@@ -34,6 +34,7 @@ public class InformixDB extends BaseDB {
 		return _instance;
 	}
 
+	@Override
 	public String buildSQL(String template) throws IOException {
 		template = convertTimestamp(template);
 		template = replaceTemplate(template, getTemplate());
@@ -48,6 +49,7 @@ public class InformixDB extends BaseDB {
 		super(TYPE_INFORMIX);
 	}
 
+	@Override
 	protected String buildCreateFileContent(
 			String sqlDir, String databaseName, int population)
 		throws IOException {
@@ -85,14 +87,17 @@ public class InformixDB extends BaseDB {
 		return sb.toString();
 	}
 
+	@Override
 	protected String getServerName() {
 		return "informix";
 	}
 
+	@Override
 	protected String[] getTemplate() {
 		return _INFORMIX_TEMPLATE;
 	}
 
+	@Override
 	protected String reword(String data) throws IOException {
 		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
 			new UnsyncStringReader(data));

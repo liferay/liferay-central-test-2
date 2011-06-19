@@ -52,6 +52,7 @@ public abstract class BaseUpgradeTableImpl extends Table {
 		_allowUniqueIndexes = allowUniqueIndexes;
 	}
 
+	@Override
 	public void setCreateSQL(String createSQL) throws Exception {
 		if (_calledUpdateTable) {
 			throw new UpgradeException(

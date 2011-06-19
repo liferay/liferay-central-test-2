@@ -1042,6 +1042,7 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 		}
 	}
 
+	@Override
 	public LayoutRevision toEscapedModel() {
 		if (isEscapedModel()) {
 			return (LayoutRevision)this;
@@ -1052,6 +1053,7 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 		}
 	}
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
@@ -1061,10 +1063,12 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 		return _expandoBridge;
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		getExpandoBridge().setAttributes(serviceContext);
 	}
 
+	@Override
 	public Object clone() {
 		LayoutRevisionImpl layoutRevisionImpl = new LayoutRevisionImpl();
 
@@ -1127,6 +1131,7 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 		return 0;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -1151,10 +1156,12 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		LayoutRevisionModelImpl layoutRevisionModelImpl = this;
 
@@ -1171,6 +1178,7 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 		layoutRevisionModelImpl._setOriginalPlid = false;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(63);
 

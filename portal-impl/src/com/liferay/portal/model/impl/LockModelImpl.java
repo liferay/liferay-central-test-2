@@ -251,6 +251,7 @@ public class LockModelImpl extends BaseModelImpl<Lock> implements LockModel {
 		_expirationDate = expirationDate;
 	}
 
+	@Override
 	public Lock toEscapedModel() {
 		if (isEscapedModel()) {
 			return (Lock)this;
@@ -261,6 +262,7 @@ public class LockModelImpl extends BaseModelImpl<Lock> implements LockModel {
 		}
 	}
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
@@ -270,10 +272,12 @@ public class LockModelImpl extends BaseModelImpl<Lock> implements LockModel {
 		return _expandoBridge;
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		getExpandoBridge().setAttributes(serviceContext);
 	}
 
+	@Override
 	public Object clone() {
 		LockImpl lockImpl = new LockImpl();
 
@@ -308,6 +312,7 @@ public class LockModelImpl extends BaseModelImpl<Lock> implements LockModel {
 		}
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -332,10 +337,12 @@ public class LockModelImpl extends BaseModelImpl<Lock> implements LockModel {
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		LockModelImpl lockModelImpl = this;
 
@@ -344,6 +351,7 @@ public class LockModelImpl extends BaseModelImpl<Lock> implements LockModel {
 		lockModelImpl._originalKey = lockModelImpl._key;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(23);
 

@@ -38,6 +38,7 @@ public class UserGroupRoleUserChecker extends RowChecker {
 		_role = role;
 	}
 
+	@Override
 	public boolean isChecked(Object obj) {
 		User user = (User)obj;
 

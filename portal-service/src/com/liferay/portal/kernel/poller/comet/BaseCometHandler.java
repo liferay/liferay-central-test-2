@@ -20,6 +20,7 @@ package com.liferay.portal.kernel.poller.comet;
  */
 public abstract class BaseCometHandler implements CometHandler {
 
+	@Override
 	public abstract CometHandler clone();
 
 	public void destroy() throws CometException {

@@ -111,6 +111,7 @@ public class CounterPersistenceImpl extends BasePersistenceImpl<Counter>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(CounterImpl.class.getName());
@@ -128,6 +129,7 @@ public class CounterPersistenceImpl extends BasePersistenceImpl<Counter>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(Counter counter) {
 		EntityCacheUtil.removeResult(CounterModelImpl.ENTITY_CACHE_ENABLED,
 			CounterImpl.class, counter.getPrimaryKey());
@@ -156,6 +158,7 @@ public class CounterPersistenceImpl extends BasePersistenceImpl<Counter>
 	 * @throws com.liferay.portal.NoSuchModelException if a counter with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Counter remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove((String)primaryKey);
@@ -207,10 +210,12 @@ public class CounterPersistenceImpl extends BasePersistenceImpl<Counter>
 	 * @return the counter that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Counter remove(Counter counter) throws SystemException {
 		return super.remove(counter);
 	}
 
+	@Override
 	protected Counter removeImpl(Counter counter) throws SystemException {
 		counter = toUnwrappedModel(counter);
 
@@ -236,6 +241,7 @@ public class CounterPersistenceImpl extends BasePersistenceImpl<Counter>
 		return counter;
 	}
 
+	@Override
 	public Counter updateImpl(com.liferay.counter.model.Counter counter,
 		boolean merge) throws SystemException {
 		counter = toUnwrappedModel(counter);
@@ -288,6 +294,7 @@ public class CounterPersistenceImpl extends BasePersistenceImpl<Counter>
 	 * @throws com.liferay.portal.NoSuchModelException if a counter with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Counter findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey((String)primaryKey);
@@ -324,6 +331,7 @@ public class CounterPersistenceImpl extends BasePersistenceImpl<Counter>
 	 * @return the counter, or <code>null</code> if a counter with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Counter fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey((String)primaryKey);

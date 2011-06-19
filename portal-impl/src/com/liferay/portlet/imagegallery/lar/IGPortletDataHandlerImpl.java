@@ -147,22 +147,26 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 		importImage(portletDataContext, imageElement, image, binPath);
 	}
 
+	@Override
 	public PortletDataHandlerControl[] getExportControls() {
 		return new PortletDataHandlerControl[] {
 			_foldersAndImages, _categories, _ratings, _tags
 		};
 	}
 
+	@Override
 	public PortletDataHandlerControl[] getImportControls() {
 		return new PortletDataHandlerControl[] {
 			_foldersAndImages, _categories, _ratings, _tags
 		};
 	}
 
+	@Override
 	public boolean isAlwaysExportable() {
 		return _ALWAYS_EXPORTABLE;
 	}
 
+	@Override
 	public boolean isPublishToLiveByDefault() {
 		return PropsValues.IG_PUBLISH_TO_LIVE_BY_DEFAULT;
 	}
@@ -537,6 +541,7 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 		return sb.toString();
 	}
 
+	@Override
 	protected PortletPreferences doDeleteData(
 			PortletDataContext portletDataContext, String portletId,
 			PortletPreferences portletPreferences)
@@ -556,6 +561,7 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 		return null;
 	}
 
+	@Override
 	protected String doExportData(
 			PortletDataContext portletDataContext, String portletId,
 			PortletPreferences portletPreferences)
@@ -594,6 +600,7 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 		return document.formattedString();
 	}
 
+	@Override
 	protected PortletPreferences doImportData(
 			PortletDataContext portletDataContext, String portletId,
 			PortletPreferences portletPreferences, String data)

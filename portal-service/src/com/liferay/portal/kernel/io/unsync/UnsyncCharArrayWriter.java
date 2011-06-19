@@ -37,12 +37,14 @@ public class UnsyncCharArrayWriter extends Writer {
 		buffer = new char[initialSize];
 	}
 
+	@Override
 	public Writer append(char c) {
 		write(c);
 
 		return this;
 	}
 
+	@Override
 	public Writer append(CharSequence charSequence) {
 		String string = null;
 
@@ -58,6 +60,7 @@ public class UnsyncCharArrayWriter extends Writer {
 		return this;
 	}
 
+	@Override
 	public Writer append(CharSequence charSequence, int start, int end) {
 		String string = null;
 
@@ -73,9 +76,11 @@ public class UnsyncCharArrayWriter extends Writer {
 		return this;
 	}
 
+	@Override
 	public void close() {
 	}
 
+	@Override
 	public void flush() {
 	}
 
@@ -91,14 +96,17 @@ public class UnsyncCharArrayWriter extends Writer {
 		return CharBuffer.wrap(buffer, 0, index);
 	}
 
+	@Override
 	public String toString() {
 		return new String(buffer, 0, index);
 	}
 
+	@Override
 	public void write(char[] chars) {
 		write(chars, 0, chars.length);
 	}
 
+	@Override
 	public void write(char[] chars, int offset, int length) {
 		if (length <= 0) {
 			return;
@@ -121,6 +129,7 @@ public class UnsyncCharArrayWriter extends Writer {
 		index = newIndex;
 	}
 
+	@Override
 	public void write(int c) {
 		int newIndex = index + 1;
 
@@ -139,10 +148,12 @@ public class UnsyncCharArrayWriter extends Writer {
 		index = newIndex;
 	}
 
+	@Override
 	public void write(String string) {
 		write(string, 0, string.length());
 	}
 
+	@Override
 	public void write(String string, int offset, int length) {
 		if (length <= 0) {
 			return;

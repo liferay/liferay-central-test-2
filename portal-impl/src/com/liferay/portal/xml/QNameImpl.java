@@ -26,6 +26,7 @@ public class QNameImpl implements QName {
 		_qName = qName;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		org.dom4j.QName qName = ((QNameImpl)obj).getWrappedQName();
 
@@ -67,10 +68,12 @@ public class QNameImpl implements QName {
 		return _qName;
 	}
 
+	@Override
 	public int hashCode() {
 		return _qName.hashCode();
 	}
 
+	@Override
 	public String toString() {
 		return _qName.toString();
 	}

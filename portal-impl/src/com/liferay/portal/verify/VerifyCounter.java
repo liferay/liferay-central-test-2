@@ -26,6 +26,7 @@ import com.liferay.portal.service.ResourceLocalServiceUtil;
  */
 public class VerifyCounter extends VerifyProcess {
 
+	@Override
 	protected void doVerify() throws Exception {
 
 		// Resource

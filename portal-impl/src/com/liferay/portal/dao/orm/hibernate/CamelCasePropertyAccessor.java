@@ -25,6 +25,7 @@ import org.hibernate.property.Setter;
 @SuppressWarnings("rawtypes")
 public class CamelCasePropertyAccessor extends BasicPropertyAccessor {
 
+	@Override
 	public Getter getGetter(Class clazz, String propertyName)
 		throws PropertyNotFoundException {
 
@@ -33,6 +34,7 @@ public class CamelCasePropertyAccessor extends BasicPropertyAccessor {
 		return super.getGetter(clazz, propertyName);
 	}
 
+	@Override
 	public Setter getSetter(Class clazz, String propertyName)
 		throws PropertyNotFoundException {
 

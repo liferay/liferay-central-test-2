@@ -61,6 +61,7 @@ public class RatingsTag extends IncludeTag {
 		_url = url;
 	}
 
+	@Override
 	protected void cleanUp() {
 		_className = null;
 		_classPK = 0;
@@ -73,14 +74,17 @@ public class RatingsTag extends IncludeTag {
 		_url = null;
 	}
 
+	@Override
 	protected String getPage() {
 		return _PAGE;
 	}
 
+	@Override
 	protected boolean isCleanUpSetAttributes() {
 		return _CLEAN_UP_SET_ATTRIBUTES;
 	}
 
+	@Override
 	protected void setAttributes(HttpServletRequest request) {
 		request.setAttribute("liferay-ui:ratings:className", _className);
 		request.setAttribute(

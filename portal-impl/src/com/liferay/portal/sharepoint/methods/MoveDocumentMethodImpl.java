@@ -34,10 +34,12 @@ public class MoveDocumentMethodImpl extends BaseMethodImpl {
 		return _METHOD_NAME;
 	}
 
+	@Override
 	public String getRootPath(SharepointRequest sharepointRequest) {
 		return sharepointRequest.getParameterValue("oldUrl");
 	}
 
+	@Override
 	protected List<ResponseElement> getElements(
 			SharepointRequest sharepointRequest)
 		throws Exception {

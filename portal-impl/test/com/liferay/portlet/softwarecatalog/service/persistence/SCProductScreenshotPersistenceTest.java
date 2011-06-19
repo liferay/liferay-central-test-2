@@ -32,6 +32,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class SCProductScreenshotPersistenceTest extends BasePersistenceTestCase {
+	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -68,10 +69,15 @@ public class SCProductScreenshotPersistenceTest extends BasePersistenceTestCase 
 		SCProductScreenshot newSCProductScreenshot = _persistence.create(pk);
 
 		newSCProductScreenshot.setCompanyId(nextLong());
+
 		newSCProductScreenshot.setGroupId(nextLong());
+
 		newSCProductScreenshot.setProductEntryId(nextLong());
+
 		newSCProductScreenshot.setThumbnailId(nextLong());
+
 		newSCProductScreenshot.setFullImageId(nextLong());
+
 		newSCProductScreenshot.setPriority(nextInt());
 
 		_persistence.update(newSCProductScreenshot, false);
@@ -231,10 +237,15 @@ public class SCProductScreenshotPersistenceTest extends BasePersistenceTestCase 
 		SCProductScreenshot scProductScreenshot = _persistence.create(pk);
 
 		scProductScreenshot.setCompanyId(nextLong());
+
 		scProductScreenshot.setGroupId(nextLong());
+
 		scProductScreenshot.setProductEntryId(nextLong());
+
 		scProductScreenshot.setThumbnailId(nextLong());
+
 		scProductScreenshot.setFullImageId(nextLong());
+
 		scProductScreenshot.setPriority(nextInt());
 
 		_persistence.update(scProductScreenshot, false);

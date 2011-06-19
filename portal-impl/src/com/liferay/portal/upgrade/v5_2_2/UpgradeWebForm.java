@@ -26,6 +26,7 @@ import java.sql.ResultSet;
  */
 public class UpgradeWebForm extends UpgradeProcess {
 
+	@Override
 	protected void doUpgrade() throws Exception {
 		long oldClassNameId = getClassNameId(_OLD_WEBFORM_CLASS_NAME);
 

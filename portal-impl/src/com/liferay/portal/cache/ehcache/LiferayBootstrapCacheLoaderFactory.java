@@ -47,6 +47,7 @@ public class LiferayBootstrapCacheLoaderFactory
 		}
 	}
 
+	@Override
 	public BootstrapCacheLoader createBootstrapCacheLoader(
 		Properties properties) {
 

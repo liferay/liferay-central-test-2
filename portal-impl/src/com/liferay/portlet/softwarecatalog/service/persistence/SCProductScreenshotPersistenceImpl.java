@@ -167,6 +167,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(SCProductScreenshotImpl.class.getName());
@@ -184,6 +185,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(SCProductScreenshot scProductScreenshot) {
 		EntityCacheUtil.removeResult(SCProductScreenshotModelImpl.ENTITY_CACHE_ENABLED,
 			SCProductScreenshotImpl.class, scProductScreenshot.getPrimaryKey());
@@ -224,6 +226,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 	 * @throws com.liferay.portal.NoSuchModelException if a s c product screenshot with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public SCProductScreenshot remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
@@ -277,11 +280,13 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 	 * @return the s c product screenshot that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public SCProductScreenshot remove(SCProductScreenshot scProductScreenshot)
 		throws SystemException {
 		return super.remove(scProductScreenshot);
 	}
 
+	@Override
 	protected SCProductScreenshot removeImpl(
 		SCProductScreenshot scProductScreenshot) throws SystemException {
 		scProductScreenshot = toUnwrappedModel(scProductScreenshot);
@@ -326,6 +331,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 		return scProductScreenshot;
 	}
 
+	@Override
 	public SCProductScreenshot updateImpl(
 		com.liferay.portlet.softwarecatalog.model.SCProductScreenshot scProductScreenshot,
 		boolean merge) throws SystemException {
@@ -446,6 +452,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 	 * @throws com.liferay.portal.NoSuchModelException if a s c product screenshot with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public SCProductScreenshot findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
@@ -483,6 +490,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 	 * @return the s c product screenshot, or <code>null</code> if a s c product screenshot with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public SCProductScreenshot fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());

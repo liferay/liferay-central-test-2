@@ -33,6 +33,7 @@ public abstract class DoAsUserThread extends Thread {
 		return _success;
 	}
 
+	@Override
 	public void run() {
 		try {
 			PrincipalThreadLocal.setName(_userId);

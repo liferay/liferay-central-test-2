@@ -908,6 +908,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		_sendShippingEmail = sendShippingEmail;
 	}
 
+	@Override
 	public ShoppingOrder toEscapedModel() {
 		if (isEscapedModel()) {
 			return (ShoppingOrder)this;
@@ -918,6 +919,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		}
 	}
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
@@ -927,10 +929,12 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		return _expandoBridge;
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		getExpandoBridge().setAttributes(serviceContext);
 	}
 
+	@Override
 	public Object clone() {
 		ShoppingOrderImpl shoppingOrderImpl = new ShoppingOrderImpl();
 
@@ -1006,6 +1010,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		return 0;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -1030,10 +1035,12 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		ShoppingOrderModelImpl shoppingOrderModelImpl = this;
 
@@ -1042,6 +1049,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		shoppingOrderModelImpl._originalPpTxnId = shoppingOrderModelImpl._ppTxnId;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(103);
 

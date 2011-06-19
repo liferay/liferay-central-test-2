@@ -38,6 +38,7 @@ import net.sf.ehcache.distribution.CacheManagerPeerProviderFactory;
 public class JGroupsCacheManagerPeerProviderFactory
 	extends CacheManagerPeerProviderFactory {
 
+	@Override
 	public CacheManagerPeerProvider createCachePeerProvider(
 		CacheManager cacheManager, Properties properties) {
 

@@ -57,6 +57,7 @@ public class ShoppingCartLocalServiceImpl
 		}
 	}
 
+	@Override
 	public void deleteShoppingCart(long cartId)
 		throws PortalException,	SystemException {
 
@@ -66,6 +67,7 @@ public class ShoppingCartLocalServiceImpl
 		deleteShoppingCart(cart);
 	}
 
+	@Override
 	public void deleteShoppingCart(ShoppingCart cart) throws SystemException {
 		shoppingCartPersistence.remove(cart);
 	}

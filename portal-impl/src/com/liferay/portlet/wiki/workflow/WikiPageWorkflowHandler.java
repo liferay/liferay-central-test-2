@@ -59,10 +59,13 @@ public class WikiPageWorkflowHandler extends BaseWorkflowHandler {
 		ServiceContext serviceContext = (ServiceContext)workflowContext.get(
 			"serviceContext");
 
+		WikiPage page = WikiPageLocalServiceUtil.getPageByPageId(classPK);
+
 		return WikiPageLocalServiceUtil.updateStatus(
-			userId, classPK, status, serviceContext);
+			userId, page, status, serviceContext);
 	}
 
+	@Override
 	protected String getIconPath(ThemeDisplay themeDisplay) {
 		return themeDisplay.getPathThemeImages() + "/common/pages.png";
 	}

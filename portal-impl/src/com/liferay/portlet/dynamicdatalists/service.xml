@@ -25,8 +25,7 @@
 
 		<!-- Other fields -->
 
-		<column name="classNameId" type="long" />
-		<column name="classPK" type="long" />
+		<column name="DDMStorageId" type="long" />
 		<column name="recordSetId" type="long" />
 		<column name="version" type="String" />
 		<column name="displayIndex" type="int" />
@@ -35,6 +34,10 @@
 
 		<finder name="RecordSetId" return-type="Collection">
 			<finder-column name="recordSetId" />
+		</finder>
+		<finder name="R_U" return-type="Collection">
+			<finder-column name="recordSetId" />
+			<finder-column name="userId" />
 		</finder>
 
 		<!-- References -->
@@ -61,8 +64,7 @@
 
 		<!-- Other fields -->
 
-		<column name="classNameId" type="long" />
-		<column name="classPK" type="long" />
+		<column name="DDMStorageId" type="long" />
 		<column name="recordSetId" type="long" />
 		<column name="recordId" type="long" />
 		<column name="version" type="String" />

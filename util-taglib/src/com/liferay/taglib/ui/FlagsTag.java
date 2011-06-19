@@ -47,6 +47,7 @@ public class FlagsTag extends IncludeTag {
 		_reportedUserId = reportedUserId;
 	}
 
+	@Override
 	protected void cleanUp() {
 		_className = null;
 		_classPK = 0;
@@ -56,10 +57,12 @@ public class FlagsTag extends IncludeTag {
 		_reportedUserId = 0;
 	}
 
+	@Override
 	protected String getPage() {
 		return _PAGE;
 	}
 
+	@Override
 	protected void setAttributes(HttpServletRequest request) {
 		request.setAttribute("liferay-ui:flags:className", _className);
 		request.setAttribute(

@@ -169,6 +169,7 @@ public class JournalArticleResourceModelImpl extends BaseModelImpl<JournalArticl
 		return GetterUtil.getString(_originalArticleId);
 	}
 
+	@Override
 	public JournalArticleResource toEscapedModel() {
 		if (isEscapedModel()) {
 			return (JournalArticleResource)this;
@@ -179,6 +180,7 @@ public class JournalArticleResourceModelImpl extends BaseModelImpl<JournalArticl
 		}
 	}
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(0,
@@ -188,10 +190,12 @@ public class JournalArticleResourceModelImpl extends BaseModelImpl<JournalArticl
 		return _expandoBridge;
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		getExpandoBridge().setAttributes(serviceContext);
 	}
 
+	@Override
 	public Object clone() {
 		JournalArticleResourceImpl journalArticleResourceImpl = new JournalArticleResourceImpl();
 
@@ -219,6 +223,7 @@ public class JournalArticleResourceModelImpl extends BaseModelImpl<JournalArticl
 		}
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -243,10 +248,12 @@ public class JournalArticleResourceModelImpl extends BaseModelImpl<JournalArticl
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		JournalArticleResourceModelImpl journalArticleResourceModelImpl = this;
 
@@ -259,6 +266,7 @@ public class JournalArticleResourceModelImpl extends BaseModelImpl<JournalArticl
 		journalArticleResourceModelImpl._originalArticleId = journalArticleResourceModelImpl._articleId;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(9);
 

@@ -15,13 +15,11 @@
 package com.liferay.portlet.documentlibrary.webdav;
 
 import com.liferay.portal.kernel.repository.model.FileEntry;
-import com.liferay.portal.kernel.repository.model.FileVersion;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.webdav.BaseResourceImpl;
 import com.liferay.portal.kernel.webdav.WebDAVException;
 import com.liferay.portal.kernel.webdav.WebDAVRequest;
 import com.liferay.portal.model.Lock;
-import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 
 import java.io.InputStream;
@@ -47,10 +45,12 @@ public class DLFileEntryResourceImpl extends BaseResourceImpl {
 		_fileEntry = fileEntry;
 	}
 
+	@Override
 	public boolean isCollection() {
 		return false;
 	}
 
+	@Override
 	public Lock getLock() {
 		try {
 			return _fileEntry.getLock();
@@ -61,6 +61,7 @@ public class DLFileEntryResourceImpl extends BaseResourceImpl {
 		return null;
 	}
 
+	@Override
 	public boolean isLocked() {
 		try {
 			return _fileEntry.hasLock();
@@ -71,22 +72,15 @@ public class DLFileEntryResourceImpl extends BaseResourceImpl {
 		return false;
 	}
 
+	@Override
 	public String getContentType() {
 		return _fileEntry.getMimeType();
 	}
 
+	@Override
 	public InputStream getContentAsStream() throws WebDAVException {
 		try {
 			String version = StringPool.BLANK;
-
-			if (PropsValues.DL_WEBDAV_HOLD_LOCK) {
-
-				// Get last version regardless of status
-
-				FileVersion fileVersion = _fileEntry.getLatestFileVersion();
-
-				version = fileVersion.getVersion();
-			}
 
 			return _fileEntry.getContentStream(version);
 		}
@@ -96,6 +90,5 @@ public class DLFileEntryResourceImpl extends BaseResourceImpl {
 	}
 
 	private FileEntry _fileEntry;
-	//private WebDAVRequest _webDavRequest;
 
 }

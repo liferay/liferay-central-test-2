@@ -30,6 +30,7 @@ public class InvokerSimpleAction extends SimpleAction {
 		_classLoader = classLoader;
 	}
 
+	@Override
 	public void run(String[] ids) throws ActionException {
 		Thread currentThread = Thread.currentThread();
 

@@ -322,6 +322,7 @@ public class SCFrameworkVersionWrapper implements SCFrameworkVersion {
 		_scFrameworkVersion.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new SCFrameworkVersionWrapper((SCFrameworkVersion)_scFrameworkVersion.clone());
 	}
@@ -331,6 +332,7 @@ public class SCFrameworkVersionWrapper implements SCFrameworkVersion {
 		return _scFrameworkVersion.compareTo(scFrameworkVersion);
 	}
 
+	@Override
 	public int hashCode() {
 		return _scFrameworkVersion.hashCode();
 	}
@@ -339,6 +341,7 @@ public class SCFrameworkVersionWrapper implements SCFrameworkVersion {
 		return new SCFrameworkVersionWrapper(_scFrameworkVersion.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _scFrameworkVersion.toString();
 	}

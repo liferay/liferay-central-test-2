@@ -27,6 +27,7 @@ import javax.portlet.PortletPreferences;
 public class CamelCaseUpgradePortletPreferences
 	extends BaseUpgradePortletPreferences {
 
+	@Override
 	protected String upgradePreferences(
 			long companyId, long ownerId, int ownerType, long plid,
 			String portletId, String xml)

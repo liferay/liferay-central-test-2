@@ -42,11 +42,15 @@ public interface AtomCollectionAdapter<E> {
 
 	public static final int SC_UNAUTHORIZED = 401;
 
-	public void deleteEntry(String resourceName) throws AtomException;
+	public void deleteEntry(
+			String resourceName, AtomRequestContext atomRequestContext)
+		throws AtomException;
 
 	public String getCollectionName();
 
-	public E getEntry(String resourceName) throws AtomException;
+	public E getEntry(
+			String resourceName, AtomRequestContext atomRequestContext)
+		throws AtomException;
 
 	public List<String> getEntryAuthors(E entry);
 

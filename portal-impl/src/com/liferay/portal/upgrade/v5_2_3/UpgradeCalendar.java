@@ -24,6 +24,7 @@ import com.liferay.portal.upgrade.v5_2_3.util.CalEventTable;
  */
 public class UpgradeCalendar extends UpgradeProcess {
 
+	@Override
 	protected void doUpgrade() throws Exception {
 		try {
 			runSQL("alter_column_type CalEvent remindBy INTEGER");

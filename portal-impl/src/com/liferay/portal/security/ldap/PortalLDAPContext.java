@@ -45,16 +45,19 @@ public class PortalLDAPContext extends DummyDirContext {
 		return _attributes;
 	}
 
+	@Override
 	public Attributes getAttributes(Name name) throws NamingException {
 		return getAttributes(name.toString());
 	}
 
+	@Override
 	public Attributes getAttributes(Name name, String[] ids)
 		throws NamingException {
 
 		return getAttributes(name.toString(), ids);
 	}
 
+	@Override
 	public Attributes getAttributes(String name) throws NamingException {
 		if (Validator.isNotNull(name)) {
 			throw new NameNotFoundException();
@@ -63,6 +66,7 @@ public class PortalLDAPContext extends DummyDirContext {
 		return (Attributes)_attributes.clone();
 	}
 
+	@Override
 	public Attributes getAttributes(String name, String[] ids)
 		throws NamingException {
 

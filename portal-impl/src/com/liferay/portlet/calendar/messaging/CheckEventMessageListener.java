@@ -24,6 +24,7 @@ import com.liferay.portlet.calendar.service.CalEventLocalServiceUtil;
  */
 public class CheckEventMessageListener extends BaseMessageListener {
 
+	@Override
 	protected void doReceive(Message message) throws Exception {
 		CalEventLocalServiceUtil.checkEvents();
 	}

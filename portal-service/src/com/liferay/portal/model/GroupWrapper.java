@@ -394,6 +394,7 @@ public class GroupWrapper implements Group {
 		_group.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new GroupWrapper((Group)_group.clone());
 	}
@@ -402,6 +403,7 @@ public class GroupWrapper implements Group {
 		return _group.compareTo(group);
 	}
 
+	@Override
 	public int hashCode() {
 		return _group.hashCode();
 	}
@@ -410,6 +412,7 @@ public class GroupWrapper implements Group {
 		return new GroupWrapper(_group.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _group.toString();
 	}

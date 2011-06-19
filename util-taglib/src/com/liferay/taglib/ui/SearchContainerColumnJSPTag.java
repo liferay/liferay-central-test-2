@@ -32,6 +32,7 @@ import javax.servlet.jsp.JspTagException;
  */
 public class SearchContainerColumnJSPTag<R> extends SearchContainerColumnTag {
 
+	@Override
 	public int doEndTag() {
 		try {
 			SearchContainerRowTag<R> searchContainerRowTag =
@@ -75,6 +76,7 @@ public class SearchContainerColumnJSPTag<R> extends SearchContainerColumnTag {
 		}
 	}
 
+	@Override
 	public int doStartTag() throws JspException {
 		SearchContainerRowTag<R> searchContainerRowTag =
 			(SearchContainerRowTag<R>)findAncestorWithClass(

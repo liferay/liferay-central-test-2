@@ -60,6 +60,7 @@ public class ThemeDeployer extends BaseDeployer {
 		super(wars, jars);
 	}
 
+	@Override
 	public void checkArguments() {
 		super.checkArguments();
 
@@ -74,6 +75,7 @@ public class ThemeDeployer extends BaseDeployer {
 		}
 	}
 
+	@Override
 	public String getExtraContent(
 			double webXmlVersion, File srcFile, String displayName)
 		throws Exception {
@@ -104,6 +106,7 @@ public class ThemeDeployer extends BaseDeployer {
 		return sb.toString();
 	}
 
+	@Override
 	public void processPluginPackageProperties(
 			File srcFile, String displayName, PluginPackage pluginPackage)
 		throws Exception {

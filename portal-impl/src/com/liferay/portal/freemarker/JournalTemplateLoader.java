@@ -36,6 +36,7 @@ import java.io.Reader;
  */
 public class JournalTemplateLoader extends FreeMarkerTemplateLoader {
 
+	@Override
 	public Object findTemplateSource(String name) throws IOException {
 		try {
 			int pos = name.indexOf(JOURNAL_SEPARATOR + StringPool.SLASH);
@@ -75,6 +76,7 @@ public class JournalTemplateLoader extends FreeMarkerTemplateLoader {
 		return null;
 	}
 
+	@Override
 	public long getLastModified(Object templateSource) {
 		if (templateSource instanceof JournalTemplate) {
 			JournalTemplate template = (JournalTemplate)templateSource;
@@ -85,6 +87,7 @@ public class JournalTemplateLoader extends FreeMarkerTemplateLoader {
 		return -1;
 	}
 
+	@Override
 	public Reader getReader(Object templateSource, String encoding)
 		throws IOException {
 

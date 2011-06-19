@@ -30,6 +30,7 @@ public class NoRedirectActionResponse extends ActionResponseWrapper {
 		return _redirectLocation;
 	}
 
+	@Override
 	public void sendRedirect(String location) {
 
 		// Disable send redirect

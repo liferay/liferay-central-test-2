@@ -49,6 +49,7 @@ import org.apache.bsf.BSFManager;
  */
 public abstract class BaseBSFPortlet extends GenericPortlet {
 
+	@Override
 	public void init() {
 		editFile = getInitParameter("edit-file");
 		helpFile = getInitParameter("help-file");
@@ -64,6 +65,7 @@ public abstract class BaseBSFPortlet extends GenericPortlet {
 		bsfManager = new BSFManager();
 	}
 
+	@Override
 	public void doDispatch(
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
@@ -78,6 +80,7 @@ public abstract class BaseBSFPortlet extends GenericPortlet {
 		}
 	}
 
+	@Override
 	public void doEdit(
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
@@ -90,6 +93,7 @@ public abstract class BaseBSFPortlet extends GenericPortlet {
 		}
 	}
 
+	@Override
 	public void doHelp(
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException {
@@ -97,6 +101,7 @@ public abstract class BaseBSFPortlet extends GenericPortlet {
 		include(helpFile, renderRequest, renderResponse);
 	}
 
+	@Override
 	public void doView(
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException {
@@ -104,6 +109,7 @@ public abstract class BaseBSFPortlet extends GenericPortlet {
 		include(viewFile, renderRequest, renderResponse);
 	}
 
+	@Override
 	public void processAction(
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws IOException {
@@ -111,6 +117,7 @@ public abstract class BaseBSFPortlet extends GenericPortlet {
 		include(actionFile, actionRequest, actionResponse);
 	}
 
+	@Override
 	public void serveResource(
 			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
 		throws IOException {

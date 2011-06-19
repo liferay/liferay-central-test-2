@@ -172,6 +172,7 @@ public class MBDiscussionModelImpl extends BaseModelImpl<MBDiscussion>
 		return _originalThreadId;
 	}
 
+	@Override
 	public MBDiscussion toEscapedModel() {
 		if (isEscapedModel()) {
 			return (MBDiscussion)this;
@@ -182,6 +183,7 @@ public class MBDiscussionModelImpl extends BaseModelImpl<MBDiscussion>
 		}
 	}
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(0,
@@ -191,10 +193,12 @@ public class MBDiscussionModelImpl extends BaseModelImpl<MBDiscussion>
 		return _expandoBridge;
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		getExpandoBridge().setAttributes(serviceContext);
 	}
 
+	@Override
 	public Object clone() {
 		MBDiscussionImpl mbDiscussionImpl = new MBDiscussionImpl();
 
@@ -222,6 +226,7 @@ public class MBDiscussionModelImpl extends BaseModelImpl<MBDiscussion>
 		}
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -246,10 +251,12 @@ public class MBDiscussionModelImpl extends BaseModelImpl<MBDiscussion>
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		MBDiscussionModelImpl mbDiscussionModelImpl = this;
 
@@ -266,6 +273,7 @@ public class MBDiscussionModelImpl extends BaseModelImpl<MBDiscussion>
 		mbDiscussionModelImpl._setOriginalThreadId = false;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(9);
 

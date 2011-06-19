@@ -46,6 +46,7 @@ public class MonitoringFilter extends BasePortalFilter {
 		_monitoringPortalRequest = monitoringPortalRequest;
 	}
 
+	@Override
 	public boolean isFilterEnabled() {
 		if (!super.isFilterEnabled()) {
 			return false;
@@ -58,6 +59,7 @@ public class MonitoringFilter extends BasePortalFilter {
 		return true;
 	}
 
+	@Override
 	protected void processFilter(
 			HttpServletRequest request, HttpServletResponse response,
 			FilterChain filterChain)

@@ -33,6 +33,7 @@ public class EhcachePortalCacheClusterReplicator implements CacheReplicator {
 		return true;
 	}
 
+	@Override
 	public Object clone() throws CloneNotSupportedException {
 		return super.clone();
 	}

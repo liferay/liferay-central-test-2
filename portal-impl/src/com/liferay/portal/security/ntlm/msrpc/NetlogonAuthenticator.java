@@ -31,6 +31,7 @@ public class NetlogonAuthenticator extends NdrObject {
 		_timestamp = timestamp;
 	}
 
+	@Override
 	public void decode(NdrBuffer ndrBuffer) {
 		ndrBuffer.align(4);
 
@@ -46,6 +47,7 @@ public class NetlogonAuthenticator extends NdrObject {
 			_credential[i] = (byte) ndrBuffer.dec_ndr_small();
 		}
 	}
+	@Override
 	public void encode(NdrBuffer ndrBuffer) {
 		ndrBuffer.align(4);
 

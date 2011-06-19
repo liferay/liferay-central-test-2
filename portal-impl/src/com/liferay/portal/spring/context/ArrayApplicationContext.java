@@ -31,6 +31,7 @@ public class ArrayApplicationContext extends ClassPathXmlApplicationContext {
 		super(configLocations);
 	}
 
+	@Override
 	protected void loadBeanDefinitions(XmlBeanDefinitionReader reader) {
 		String[] configLocations = getConfigLocations();
 

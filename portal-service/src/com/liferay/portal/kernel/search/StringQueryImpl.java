@@ -23,10 +23,12 @@ public class StringQueryImpl extends BaseQueryImpl implements Query {
 		_query = query;
 	}
 
+	@Override
 	public Object getWrappedQuery() {
 		return this;
 	}
 
+	@Override
 	public String toString() {
 		return _query;
 	}

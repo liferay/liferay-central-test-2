@@ -69,6 +69,7 @@ import org.springframework.web.context.ContextLoaderListener;
  */
 public class PortalContextLoaderListener extends ContextLoaderListener {
 
+	@Override
 	public void contextInitialized(ServletContextEvent servletContextEvent) {
 		HotDeployUtil.reset();
 		InstancePool.reset();
@@ -138,6 +139,7 @@ public class PortalContextLoaderListener extends ContextLoaderListener {
 		clearFilteredPropertyDescriptorsCache(autowireCapableBeanFactory);
 	}
 
+	@Override
 	public void contextDestroyed(ServletContextEvent event) {
 		PortalContextLoaderLifecycleThreadLocal.setDestroying(true);
 

@@ -32,6 +32,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class VirtualHostPersistenceTest extends BasePersistenceTestCase {
+	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -68,7 +69,9 @@ public class VirtualHostPersistenceTest extends BasePersistenceTestCase {
 		VirtualHost newVirtualHost = _persistence.create(pk);
 
 		newVirtualHost.setCompanyId(nextLong());
+
 		newVirtualHost.setLayoutSetId(nextLong());
+
 		newVirtualHost.setHostname(randomString());
 
 		_persistence.update(newVirtualHost, false);
@@ -217,7 +220,9 @@ public class VirtualHostPersistenceTest extends BasePersistenceTestCase {
 		VirtualHost virtualHost = _persistence.create(pk);
 
 		virtualHost.setCompanyId(nextLong());
+
 		virtualHost.setLayoutSetId(nextLong());
+
 		virtualHost.setHostname(randomString());
 
 		_persistence.update(virtualHost, false);

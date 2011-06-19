@@ -33,6 +33,7 @@ import org.apache.struts.config.ModuleConfig;
  */
 public class DynamicPortletAction extends PortletAction {
 
+	@Override
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
 			ActionRequest actionRequest, ActionResponse actionResponse)
@@ -50,6 +51,7 @@ public class DynamicPortletAction extends PortletAction {
 			mapping, form, portletConfig, actionRequest, actionResponse);
 	}
 
+	@Override
 	public ActionForward render(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
 			RenderRequest renderRequest, RenderResponse renderResponse)

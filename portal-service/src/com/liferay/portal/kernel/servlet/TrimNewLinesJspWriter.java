@@ -41,25 +41,31 @@ public class TrimNewLinesJspWriter extends JspWriter {
 		_printWriter = new UnsyncPrintWriter(writer);
 	}
 
+	@Override
 	public void clear() throws IOException {
 		throw new IOException();
 	}
 
+	@Override
 	public void clearBuffer() {
 	}
 
+	@Override
 	public void close() {
 		_printWriter.close();
 	}
 
+	@Override
 	public void flush() {
 		_printWriter.flush();
 	}
 
+	@Override
 	public int getRemaining() {
 		return 0;
 	}
 
+	@Override
 	public void newLine() {
 		if (!_lastNewLine) {
 			_printWriter.println();
@@ -68,12 +74,14 @@ public class TrimNewLinesJspWriter extends JspWriter {
 		}
 	}
 
+	@Override
 	public void print(boolean b) {
 		_printWriter.print(b);
 
 		_lastNewLine = false;
 	}
 
+	@Override
 	public void print(char c) {
 		boolean newLine = false;
 
@@ -90,42 +98,49 @@ public class TrimNewLinesJspWriter extends JspWriter {
 		}
 	}
 
+	@Override
 	public void print(char[] chars) {
 		_printWriter.print(chars);
 
 		_lastNewLine = false;
 	}
 
+	@Override
 	public void print(double d) {
 		_printWriter.print(d);
 
 		_lastNewLine = false;
 	}
 
+	@Override
 	public void print(float f) {
 		_printWriter.print(f);
 
 		_lastNewLine = false;
 	}
 
+	@Override
 	public void print(int i) {
 		_printWriter.print(i);
 
 		_lastNewLine = false;
 	}
 
+	@Override
 	public void print(long l) {
 		_printWriter.print(l);
 
 		_lastNewLine = false;
 	}
 
+	@Override
 	public void print(Object object) {
 		_printWriter.print(object);
 
 		_lastNewLine = false;
 	}
 
+	@Override
 	public void print(String string) {
 		String trim = trim(string);
 
@@ -136,6 +151,7 @@ public class TrimNewLinesJspWriter extends JspWriter {
 		}
 	}
 
+	@Override
 	public void println() {
 		if (!_lastNewLine) {
 			_printWriter.println();
@@ -144,54 +160,63 @@ public class TrimNewLinesJspWriter extends JspWriter {
 		}
 	}
 
+	@Override
 	public void println(boolean b) {
 		_printWriter.println(b);
 
 		_lastNewLine = true;
 	}
 
+	@Override
 	public void println(char c) {
 		_printWriter.println(c);
 
 		_lastNewLine = true;
 	}
 
+	@Override
 	public void println(char[] chars) {
 		_printWriter.println(chars);
 
 		_lastNewLine = true;
 	}
 
+	@Override
 	public void println(double d) {
 		_printWriter.println(d);
 
 		_lastNewLine = true;
 	}
 
+	@Override
 	public void println(float f) {
 		_printWriter.println(f);
 
 		_lastNewLine = true;
 	}
 
+	@Override
 	public void println(int i) {
 		_printWriter.println(i);
 
 		_lastNewLine = true;
 	}
 
+	@Override
 	public void println(long l) {
 		_printWriter.println(l);
 
 		_lastNewLine = true;
 	}
 
+	@Override
 	public void println(Object object) {
 		_printWriter.println(object);
 
 		_lastNewLine = true;
 	}
 
+	@Override
 	public void println(String string) {
 		String trim = trim(string);
 
@@ -202,18 +227,21 @@ public class TrimNewLinesJspWriter extends JspWriter {
 		}
 	}
 
+	@Override
 	public void write(char[] chars) {
 		_printWriter.write(chars);
 
 		_lastNewLine = false;
 	}
 
+	@Override
 	public void write(char[] chars, int offset, int length) {
 		_printWriter.write(chars, offset, length);
 
 		_lastNewLine = false;
 	}
 
+	@Override
 	public void write(int c) {
 		boolean newLine = false;
 
@@ -230,6 +258,7 @@ public class TrimNewLinesJspWriter extends JspWriter {
 		}
 	}
 
+	@Override
 	public void write(String string) {
 		String trim = trim(string);
 
@@ -240,6 +269,7 @@ public class TrimNewLinesJspWriter extends JspWriter {
 		}
 	}
 
+	@Override
 	public void write(String string, int offset, int length) {
 		String trim = trim(string.substring(offset, offset + length));
 

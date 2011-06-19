@@ -22,6 +22,7 @@ import com.liferay.portalweb.portal.util.SeleniumUtil;
  */
 public class StopSeleniumTest extends BaseTestCase {
 
+	@Override
 	public void tearDown() throws Exception {
 		SeleniumUtil.stopSelenium();
 	}

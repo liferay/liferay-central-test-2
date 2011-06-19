@@ -349,6 +349,7 @@ public class PhoneWrapper implements Phone {
 		_phone.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new PhoneWrapper((Phone)_phone.clone());
 	}
@@ -357,6 +358,7 @@ public class PhoneWrapper implements Phone {
 		return _phone.compareTo(phone);
 	}
 
+	@Override
 	public int hashCode() {
 		return _phone.hashCode();
 	}
@@ -365,6 +367,7 @@ public class PhoneWrapper implements Phone {
 		return new PhoneWrapper(_phone.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _phone.toString();
 	}

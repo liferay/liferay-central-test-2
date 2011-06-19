@@ -32,14 +32,17 @@ public class RenderURLLogic extends ActionURLLogic {
 		super(renderResponse);
 	}
 
+	@Override
 	public String getOpenTag() {
 		return OPEN_TAG;
 	}
 
+	@Override
 	public String getClose1Tag() {
 		return CLOSE_1_TAG;
 	}
 
+	@Override
 	public String getLifecycle() {
 		return _lifecycle;
 	}

@@ -36,6 +36,7 @@ import java.util.List;
  */
 public class MBMessageServiceTest extends BaseServiceTestCase {
 
+	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -81,6 +82,7 @@ public class MBMessageServiceTest extends BaseServiceTestCase {
 		_userIds = UserLocalServiceUtil.getGroupUserIds(group.getGroupId());
 	}
 
+	@Override
 	public void tearDown() throws Exception {
 		if (_category != null) {
 			MBCategoryServiceUtil.deleteCategory(
@@ -134,10 +136,12 @@ public class MBMessageServiceTest extends BaseServiceTestCase {
 			_subject = subject;
 		}
 
+		@Override
 		public boolean isSuccess() {
 			return true;
 		}
 
+		@Override
 		protected void doRun() throws Exception {
 			String body = "This is a test message.";
 			List<ObjectValuePair<String, byte[]>> files =

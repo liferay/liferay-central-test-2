@@ -37,6 +37,7 @@ import java.util.Map;
  */
 public class UserListener extends BaseModelListener<User> {
 
+	@Override
 	public void onAfterAddAssociation(
 			Object classPK, String associationClassName,
 			Object associationClassPK)
@@ -55,6 +56,7 @@ public class UserListener extends BaseModelListener<User> {
 		}
 	}
 
+	@Override
 	public void onAfterCreate(User user) throws ModelListenerException {
 		try {
 			exportToLDAP(user);
@@ -64,6 +66,7 @@ public class UserListener extends BaseModelListener<User> {
 		}
 	}
 
+	@Override
 	public void onAfterUpdate(User user) throws ModelListenerException {
 		try {
 			exportToLDAP(user);

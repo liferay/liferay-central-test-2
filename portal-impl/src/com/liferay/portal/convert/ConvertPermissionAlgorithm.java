@@ -96,14 +96,17 @@ import java.util.Set;
  */
 public class ConvertPermissionAlgorithm extends ConvertProcess {
 
+	@Override
 	public String getDescription() {
 		return "convert-legacy-permission-algorithm";
 	}
 
+	@Override
 	public String[] getParameterNames() {
 		return new String[] {"generate-custom-roles=checkbox"};
 	}
 
+	@Override
 	public boolean isEnabled() {
 		boolean enabled = false;
 
@@ -676,6 +679,7 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 		FileUtil.delete(legacyFile + _EXT_OTHER_ROLES);
 	}
 
+	@Override
 	protected void doConvert() throws Exception {
 		try {
 			BatchSessionUtil.setEnabled(true);

@@ -71,6 +71,7 @@ public class EntityColumn implements Cloneable {
 			localized, jsonEnabled);
 	}
 
+	@Override
 	public Object clone() {
 		return new EntityColumn(
 			getName(), getDBName(), getType(), isPrimary(), isFilterPrimary(),
@@ -80,6 +81,7 @@ public class EntityColumn implements Cloneable {
 			isJsonEnabled());
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		EntityColumn col = (EntityColumn)obj;
 
@@ -196,6 +198,7 @@ public class EntityColumn implements Cloneable {
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return _name.hashCode();
 	}

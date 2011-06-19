@@ -35,6 +35,7 @@ public class TagsCompilerFriendlyURLMapper extends BaseFriendlyURLMapper {
 		return null;
 	}
 
+	@Override
 	public boolean isCheckMappingWithPrefix() {
 		return _CHECK_MAPPING_WITH_PREFIX;
 	}

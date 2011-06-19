@@ -218,6 +218,7 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(MBMessageFlagImpl.class.getName());
@@ -235,6 +236,7 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(MBMessageFlag mbMessageFlag) {
 		EntityCacheUtil.removeResult(MBMessageFlagModelImpl.ENTITY_CACHE_ENABLED,
 			MBMessageFlagImpl.class, mbMessageFlag.getPrimaryKey());
@@ -270,6 +272,7 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 	 * @throws com.liferay.portal.NoSuchModelException if a message boards message flag with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessageFlag remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
@@ -322,11 +325,13 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 	 * @return the message boards message flag that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessageFlag remove(MBMessageFlag mbMessageFlag)
 		throws SystemException {
 		return super.remove(mbMessageFlag);
 	}
 
+	@Override
 	protected MBMessageFlag removeImpl(MBMessageFlag mbMessageFlag)
 		throws SystemException {
 		mbMessageFlag = toUnwrappedModel(mbMessageFlag);
@@ -362,6 +367,7 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 		return mbMessageFlag;
 	}
 
+	@Override
 	public MBMessageFlag updateImpl(
 		com.liferay.portlet.messageboards.model.MBMessageFlag mbMessageFlag,
 		boolean merge) throws SystemException {
@@ -448,6 +454,7 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 	 * @throws com.liferay.portal.NoSuchModelException if a message boards message flag with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessageFlag findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
@@ -484,6 +491,7 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 	 * @return the message boards message flag, or <code>null</code> if a message boards message flag with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessageFlag fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());

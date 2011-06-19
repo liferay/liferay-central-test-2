@@ -23,17 +23,12 @@
 <%@ page import="com.liferay.portal.LARFileException" %>
 <%@ page import="com.liferay.portal.LARTypeException" %>
 <%@ page import="com.liferay.portal.LayoutFriendlyURLException" %>
-<%@ page import="com.liferay.portal.LayoutHiddenException" %>
 <%@ page import="com.liferay.portal.LayoutImportException" %>
-<%@ page import="com.liferay.portal.LayoutNameException" %>
-<%@ page import="com.liferay.portal.LayoutParentLayoutIdException" %>
 <%@ page import="com.liferay.portal.LayoutSetVirtualHostException" %>
-<%@ page import="com.liferay.portal.LayoutTypeException" %>
 <%@ page import="com.liferay.portal.MembershipRequestCommentsException" %>
 <%@ page import="com.liferay.portal.NoSuchGroupException" %>
 <%@ page import="com.liferay.portal.NoSuchLayoutException" %>
 <%@ page import="com.liferay.portal.NoSuchLayoutSetException" %>
-<%@ page import="com.liferay.portal.NoSuchPortletException" %>
 <%@ page import="com.liferay.portal.NoSuchRoleException" %>
 <%@ page import="com.liferay.portal.RemoteExportException" %>
 <%@ page import="com.liferay.portal.RemoteOptionsException" %>
@@ -65,6 +60,7 @@
 <%@ page import="com.liferay.portal.security.permission.comparator.ActionComparator" %>
 <%@ page import="com.liferay.portal.security.permission.comparator.ModelResourceComparator" %>
 <%@ page import="com.liferay.portal.service.permission.PortalPermissionUtil" %>
+<%@ page import="com.liferay.portlet.rolesadmin.search.GroupRoleChecker" %>
 <%@ page import="com.liferay.portlet.rolesadmin.search.RoleSearch" %>
 <%@ page import="com.liferay.portlet.rolesadmin.search.RoleSearchTerms" %>
 <%@ page import="com.liferay.portlet.rolesadmin.util.RolesAdminUtil" %>
@@ -73,6 +69,7 @@
 <%@ page import="com.liferay.portlet.sites.search.UserGroupGroupRoleUserGroupChecker" %>
 <%@ page import="com.liferay.portlet.sites.search.UserGroupRoleRoleChecker" %>
 <%@ page import="com.liferay.portlet.sites.search.UserGroupRoleUserChecker" %>
+<%@ page import="com.liferay.portlet.sitesadmin.search.TeamDisplayTerms" %>
 <%@ page import="com.liferay.portlet.sitesadmin.search.TeamSearch" %>
 <%@ page import="com.liferay.portlet.sitesadmin.search.TeamSearchTerms" %>
 <%@ page import="com.liferay.portlet.sitesadmin.search.UserGroupTeamChecker" %>
@@ -91,6 +88,12 @@
 <%@ page import="com.liferay.portlet.usersadmin.util.UsersAdminUtil" %>
 
 <%
+boolean filterManageableGroups = true;
+
+if (permissionChecker.isCompanyAdmin()) {
+	filterManageableGroups = false;
+}
+
 long[] classNameIds = new long[] {PortalUtil.getClassNameId(Group.class), PortalUtil.getClassNameId(Organization.class)};
 
 Format dateFormatDate = FastDateFormatFactoryUtil.getDate(locale, timeZone);

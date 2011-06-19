@@ -36,6 +36,7 @@ public class OrganizationPasswordPolicyChecker extends RowChecker {
 		_passwordPolicy = passwordPolicy;
 	}
 
+	@Override
 	public boolean isChecked(Object obj) {
 		Organization organization = (Organization)obj;
 

@@ -153,6 +153,7 @@ public class CharPipeTest extends TestCase {
 
 		Thread thread = new Thread() {
 
+			@Override
 			public void run() {
 				try {
 					timestampBeforeClose.set(System.currentTimeMillis());

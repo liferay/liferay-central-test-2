@@ -543,6 +543,7 @@ public class DDLRecordSetWrapper implements DDLRecordSet {
 		_ddlRecordSet.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new DDLRecordSetWrapper((DDLRecordSet)_ddlRecordSet.clone());
 	}
@@ -552,6 +553,7 @@ public class DDLRecordSetWrapper implements DDLRecordSet {
 		return _ddlRecordSet.compareTo(ddlRecordSet);
 	}
 
+	@Override
 	public int hashCode() {
 		return _ddlRecordSet.hashCode();
 	}
@@ -560,6 +562,7 @@ public class DDLRecordSetWrapper implements DDLRecordSet {
 		return new DDLRecordSetWrapper(_ddlRecordSet.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _ddlRecordSet.toString();
 	}

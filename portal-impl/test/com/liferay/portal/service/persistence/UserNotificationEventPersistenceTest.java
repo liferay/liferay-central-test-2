@@ -30,6 +30,7 @@ import java.util.List;
  */
 public class UserNotificationEventPersistenceTest
 	extends BasePersistenceTestCase {
+	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -66,11 +67,17 @@ public class UserNotificationEventPersistenceTest
 		UserNotificationEvent newUserNotificationEvent = _persistence.create(pk);
 
 		newUserNotificationEvent.setUuid(randomString());
+
 		newUserNotificationEvent.setCompanyId(nextLong());
+
 		newUserNotificationEvent.setUserId(nextLong());
+
 		newUserNotificationEvent.setType(randomString());
+
 		newUserNotificationEvent.setTimestamp(nextLong());
+
 		newUserNotificationEvent.setDeliverBy(nextLong());
+
 		newUserNotificationEvent.setPayload(randomString());
 
 		_persistence.update(newUserNotificationEvent, false);
@@ -209,11 +216,17 @@ public class UserNotificationEventPersistenceTest
 		UserNotificationEvent userNotificationEvent = _persistence.create(pk);
 
 		userNotificationEvent.setUuid(randomString());
+
 		userNotificationEvent.setCompanyId(nextLong());
+
 		userNotificationEvent.setUserId(nextLong());
+
 		userNotificationEvent.setType(randomString());
+
 		userNotificationEvent.setTimestamp(nextLong());
+
 		userNotificationEvent.setDeliverBy(nextLong());
+
 		userNotificationEvent.setPayload(randomString());
 
 		_persistence.update(userNotificationEvent, false);

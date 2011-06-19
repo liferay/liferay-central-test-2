@@ -19,7 +19,6 @@ PortletPreferences preferences = renderRequest.getPreferences();
 
 long[] availableClassNameIds = AssetRendererFactoryRegistryUtil.getClassNameIds();
 
-boolean multiValued = true;
 boolean required = false;
 
 long[] selectedClassNameIds = null;
@@ -27,8 +26,6 @@ long[] requiredClassNameIds = null;
 
 if (vocabulary != null) {
 	UnicodeProperties settingsProperties = vocabulary.getSettingsProperties();
-
-	multiValued = GetterUtil.getBoolean(settingsProperties.getProperty("multiValued"), true);
 
 	selectedClassNameIds = StringUtil.split(settingsProperties.getProperty("selectedClassNameIds"), 0L);
 	requiredClassNameIds = StringUtil.split(settingsProperties.getProperty("requiredClassNameIds"), 0L);
@@ -47,7 +44,7 @@ if ((requiredClassNameIds == null) || (requiredClassNameIds.length == 0)) {
 }
 %>
 
-<aui:input cssClass="vocabulary-checkbox" helpMessage="multi-valued-help" label="allow-multiple-categories" name="multiValued" type="checkbox" value="<%= multiValued %>" />
+<aui:input cssClass="vocabulary-checkbox" helpMessage="multi-valued-help" label="allow-multiple-categories" name="multiValued" type="checkbox" value="<%= (vocabulary != null) ? vocabulary.isMultiValued() : true %>" />
 
 <liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="vocabularyExtraFieldsPanelContainer" persistState="<%= true %>" title="associated-asset-types">
 	<aui:fieldset id="extraFields">

@@ -33,6 +33,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class RatingsEntryPersistenceTest extends BasePersistenceTestCase {
+	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -69,12 +70,19 @@ public class RatingsEntryPersistenceTest extends BasePersistenceTestCase {
 		RatingsEntry newRatingsEntry = _persistence.create(pk);
 
 		newRatingsEntry.setCompanyId(nextLong());
+
 		newRatingsEntry.setUserId(nextLong());
+
 		newRatingsEntry.setUserName(randomString());
+
 		newRatingsEntry.setCreateDate(nextDate());
+
 		newRatingsEntry.setModifiedDate(nextDate());
+
 		newRatingsEntry.setClassNameId(nextLong());
+
 		newRatingsEntry.setClassPK(nextLong());
+
 		newRatingsEntry.setScore(nextDouble());
 
 		_persistence.update(newRatingsEntry, false);
@@ -230,12 +238,19 @@ public class RatingsEntryPersistenceTest extends BasePersistenceTestCase {
 		RatingsEntry ratingsEntry = _persistence.create(pk);
 
 		ratingsEntry.setCompanyId(nextLong());
+
 		ratingsEntry.setUserId(nextLong());
+
 		ratingsEntry.setUserName(randomString());
+
 		ratingsEntry.setCreateDate(nextDate());
+
 		ratingsEntry.setModifiedDate(nextDate());
+
 		ratingsEntry.setClassNameId(nextLong());
+
 		ratingsEntry.setClassPK(nextLong());
+
 		ratingsEntry.setScore(nextDouble());
 
 		_persistence.update(ratingsEntry, false);

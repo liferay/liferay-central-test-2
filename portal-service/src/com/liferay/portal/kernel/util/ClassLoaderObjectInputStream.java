@@ -33,6 +33,7 @@ public class ClassLoaderObjectInputStream extends ObjectInputStream {
 		_classLoader = classLoader;
 	}
 
+	@Override
 	protected Class<?> resolveClass(ObjectStreamClass osc)
 		throws ClassNotFoundException {
 

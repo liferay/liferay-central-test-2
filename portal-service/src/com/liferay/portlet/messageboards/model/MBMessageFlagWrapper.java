@@ -223,6 +223,7 @@ public class MBMessageFlagWrapper implements MBMessageFlag {
 		_mbMessageFlag.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new MBMessageFlagWrapper((MBMessageFlag)_mbMessageFlag.clone());
 	}
@@ -232,6 +233,7 @@ public class MBMessageFlagWrapper implements MBMessageFlag {
 		return _mbMessageFlag.compareTo(mbMessageFlag);
 	}
 
+	@Override
 	public int hashCode() {
 		return _mbMessageFlag.hashCode();
 	}
@@ -240,6 +242,7 @@ public class MBMessageFlagWrapper implements MBMessageFlag {
 		return new MBMessageFlagWrapper(_mbMessageFlag.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _mbMessageFlag.toString();
 	}

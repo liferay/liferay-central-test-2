@@ -229,6 +229,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 		}
 	}
 
+	@Override
 	public void deleteResource(long resourceId) throws SystemException {
 		try {
 			Resource resource = resourcePersistence.findByPrimaryKey(
@@ -243,6 +244,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 		}
 	}
 
+	@Override
 	public void deleteResource(Resource resource) throws SystemException {
 
 		// Permissions
@@ -314,6 +316,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 		}
 	}
 
+	@Override
 	public Resource getResource(long resourceId)
 		throws PortalException, SystemException {
 

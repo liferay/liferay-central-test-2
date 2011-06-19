@@ -153,6 +153,7 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(UserIdMapperImpl.class.getName());
@@ -170,6 +171,7 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(UserIdMapper userIdMapper) {
 		EntityCacheUtil.removeResult(UserIdMapperModelImpl.ENTITY_CACHE_ENABLED,
 			UserIdMapperImpl.class, userIdMapper.getPrimaryKey());
@@ -212,6 +214,7 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 	 * @throws com.liferay.portal.NoSuchModelException if a user ID mapper with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public UserIdMapper remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
@@ -265,11 +268,13 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 	 * @return the user ID mapper that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public UserIdMapper remove(UserIdMapper userIdMapper)
 		throws SystemException {
 		return super.remove(userIdMapper);
 	}
 
+	@Override
 	protected UserIdMapper removeImpl(UserIdMapper userIdMapper)
 		throws SystemException {
 		userIdMapper = toUnwrappedModel(userIdMapper);
@@ -312,6 +317,7 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 		return userIdMapper;
 	}
 
+	@Override
 	public UserIdMapper updateImpl(
 		com.liferay.portal.model.UserIdMapper userIdMapper, boolean merge)
 		throws SystemException {
@@ -422,6 +428,7 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 	 * @throws com.liferay.portal.NoSuchModelException if a user ID mapper with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public UserIdMapper findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
@@ -458,6 +465,7 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 	 * @return the user ID mapper, or <code>null</code> if a user ID mapper with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public UserIdMapper fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());

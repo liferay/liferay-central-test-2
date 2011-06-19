@@ -84,6 +84,7 @@ public class ShardSessionFactoryTargetSource implements TargetSource {
 	private static ThreadLocal<SessionFactory> _sessionFactory =
 		new ThreadLocal<SessionFactory>() {
 
+		@Override
 		protected SessionFactory initialValue() {
 			return _sessionFactories.get(PropsValues.SHARD_DEFAULT_NAME);
 		}

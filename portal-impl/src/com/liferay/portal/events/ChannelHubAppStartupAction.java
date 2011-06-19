@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
  */
 public class ChannelHubAppStartupAction extends SimpleAction {
 
+	@Override
 	public void run(String[] ids) throws ActionException {
 		try {
 			long companyId = GetterUtil.getLong(ids[0]);

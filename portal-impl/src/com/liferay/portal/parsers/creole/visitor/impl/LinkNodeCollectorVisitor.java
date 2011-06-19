@@ -21,6 +21,7 @@ import com.liferay.portal.parsers.creole.ast.link.LinkNode;
  */
 public class LinkNodeCollectorVisitor extends NodeCollectorVisitor {
 
+	@Override
 	public void visit(LinkNode linkNode) {
 		addNode(linkNode);
 	}

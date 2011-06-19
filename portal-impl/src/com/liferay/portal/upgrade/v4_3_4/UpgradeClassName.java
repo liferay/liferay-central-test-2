@@ -24,6 +24,7 @@ import com.liferay.portal.upgrade.v4_3_4.util.ClassNameTable;
  */
 public class UpgradeClassName extends UpgradeProcess {
 
+	@Override
 	protected void doUpgrade() throws Exception {
 
 		// Website

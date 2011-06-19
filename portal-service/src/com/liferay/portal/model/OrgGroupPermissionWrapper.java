@@ -150,6 +150,7 @@ public class OrgGroupPermissionWrapper implements OrgGroupPermission {
 		_orgGroupPermission.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new OrgGroupPermissionWrapper((OrgGroupPermission)_orgGroupPermission.clone());
 	}
@@ -159,6 +160,7 @@ public class OrgGroupPermissionWrapper implements OrgGroupPermission {
 		return _orgGroupPermission.compareTo(orgGroupPermission);
 	}
 
+	@Override
 	public int hashCode() {
 		return _orgGroupPermission.hashCode();
 	}
@@ -167,6 +169,7 @@ public class OrgGroupPermissionWrapper implements OrgGroupPermission {
 		return new OrgGroupPermissionWrapper(_orgGroupPermission.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _orgGroupPermission.toString();
 	}

@@ -271,7 +271,7 @@ public class WebDAVOSXTest extends BaseWebDAVTestCase {
 					HttpServletResponse.SC_CREATED,
 					serviceCopyOrMove(Method.MOVE, orig, dest, getLock(orig)));
 
-				moveLock(orig, dest);
+				unlock(orig);
 			}
 		}
 
@@ -317,6 +317,7 @@ public class WebDAVOSXTest extends BaseWebDAVTestCase {
 		return _lockMap.get(fileName);
 	}
 
+	@Override
 	protected String getUserAgent() {
 		return _USER_AGENT;
 	}

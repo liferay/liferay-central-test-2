@@ -179,6 +179,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(WikiNodeImpl.class.getName());
@@ -196,6 +197,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(WikiNode wikiNode) {
 		EntityCacheUtil.removeResult(WikiNodeModelImpl.ENTITY_CACHE_ENABLED,
 			WikiNodeImpl.class, wikiNode.getPrimaryKey());
@@ -235,6 +237,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 * @throws com.liferay.portal.NoSuchModelException if a wiki node with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiNode remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
@@ -287,10 +290,12 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 * @return the wiki node that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiNode remove(WikiNode wikiNode) throws SystemException {
 		return super.remove(wikiNode);
 	}
 
+	@Override
 	protected WikiNode removeImpl(WikiNode wikiNode) throws SystemException {
 		wikiNode = toUnwrappedModel(wikiNode);
 
@@ -331,6 +336,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 		return wikiNode;
 	}
 
+	@Override
 	public WikiNode updateImpl(
 		com.liferay.portlet.wiki.model.WikiNode wikiNode, boolean merge)
 		throws SystemException {
@@ -448,6 +454,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 * @throws com.liferay.portal.NoSuchModelException if a wiki node with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiNode findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
@@ -484,6 +491,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 * @return the wiki node, or <code>null</code> if a wiki node with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WikiNode fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());

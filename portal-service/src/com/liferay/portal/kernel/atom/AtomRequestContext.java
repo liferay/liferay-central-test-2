@@ -31,6 +31,8 @@ public interface AtomRequestContext {
 
 	public String getParameter(String name);
 
+	public String getParameter(String name, String defaultValue);
+
 	public Object getRequestAttribute(String name);
 
 	public Object getSessionAttribute(String name);

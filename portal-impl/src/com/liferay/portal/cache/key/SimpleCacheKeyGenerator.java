@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.util.StringBundler;
  */
 public class SimpleCacheKeyGenerator extends BaseCacheKeyGenerator {
 
+	@Override
 	public CacheKeyGenerator clone() {
 		return new SimpleCacheKeyGenerator();
 	}

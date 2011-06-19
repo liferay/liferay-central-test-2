@@ -175,6 +175,7 @@ public class ClassNameModelImpl extends BaseModelImpl<ClassName>
 		return GetterUtil.getString(_originalValue);
 	}
 
+	@Override
 	public ClassName toEscapedModel() {
 		if (isEscapedModel()) {
 			return (ClassName)this;
@@ -185,6 +186,7 @@ public class ClassNameModelImpl extends BaseModelImpl<ClassName>
 		}
 	}
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(0,
@@ -194,10 +196,12 @@ public class ClassNameModelImpl extends BaseModelImpl<ClassName>
 		return _expandoBridge;
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		getExpandoBridge().setAttributes(serviceContext);
 	}
 
+	@Override
 	public Object clone() {
 		ClassNameImpl classNameImpl = new ClassNameImpl();
 
@@ -223,6 +227,7 @@ public class ClassNameModelImpl extends BaseModelImpl<ClassName>
 		}
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -247,16 +252,19 @@ public class ClassNameModelImpl extends BaseModelImpl<ClassName>
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		ClassNameModelImpl classNameModelImpl = this;
 
 		classNameModelImpl._originalValue = classNameModelImpl._value;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(5);
 

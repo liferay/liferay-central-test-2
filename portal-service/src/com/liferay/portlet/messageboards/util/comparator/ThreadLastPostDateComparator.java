@@ -41,6 +41,7 @@ public class ThreadLastPostDateComparator extends OrderByComparator {
 		_ascending = ascending;
 	}
 
+	@Override
 	public int compare(Object obj1, Object obj2) {
 		MBThread thread1 = (MBThread)obj1;
 		MBThread thread2 = (MBThread)obj2;
@@ -76,6 +77,7 @@ public class ThreadLastPostDateComparator extends OrderByComparator {
 		}
 	}
 
+	@Override
 	public String getOrderBy() {
 		if (_ascending) {
 			return ORDER_BY_ASC;
@@ -85,10 +87,12 @@ public class ThreadLastPostDateComparator extends OrderByComparator {
 		}
 	}
 
+	@Override
 	public String[] getOrderByFields() {
 		return ORDER_BY_FIELDS;
 	}
 
+	@Override
 	public boolean isAscending() {
 		return _ascending;
 	}

@@ -80,6 +80,7 @@ public class PortletAction extends Action {
 		return portletNamespace.concat(WebKeys.PORTLET_STRUTS_FORWARD);
 	}
 
+	@Override
 	public ActionForward execute(
 			ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response)
@@ -202,6 +203,7 @@ public class PortletAction extends Action {
 			Globals.MESSAGES_KEY);
 	}
 
+	@Override
 	protected MessageResources getResources(HttpServletRequest request) {
 		return getResources();
 	}

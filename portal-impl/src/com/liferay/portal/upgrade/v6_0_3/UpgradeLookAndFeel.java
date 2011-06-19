@@ -25,10 +25,12 @@ import javax.portlet.PortletPreferences;
  */
 public class UpgradeLookAndFeel extends BaseUpgradePortletPreferences {
 
+	@Override
 	protected String getUpdatePortletPreferencesWhereClause() {
 		return "preferences like '%portlet-setup-link-to-%'";
 	}
 
+	@Override
 	protected String upgradePreferences(
 			long companyId, long ownerId, int ownerType, long plid,
 			String portletId, String xml)

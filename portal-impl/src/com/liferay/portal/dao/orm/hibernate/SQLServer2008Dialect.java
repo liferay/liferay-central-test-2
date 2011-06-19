@@ -29,6 +29,7 @@ import org.hibernate.dialect.SQLServerDialect;
  */
 public class SQLServer2008Dialect extends SQLServerDialect {
 
+	@Override
 	public String getLimitString(String sql, int offset, int limit) {
 		String sqlLowerCase = sql.toLowerCase();
 
@@ -89,6 +90,7 @@ public class SQLServer2008Dialect extends SQLServerDialect {
 		return sb.toString();
 	}
 
+	@Override
 	public boolean supportsLimitOffset() {
 		return _SUPPORTS_LIMIT_OFFSET;
 	}

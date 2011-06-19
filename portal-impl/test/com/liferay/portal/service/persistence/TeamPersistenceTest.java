@@ -33,6 +33,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class TeamPersistenceTest extends BasePersistenceTestCase {
+	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -69,12 +70,19 @@ public class TeamPersistenceTest extends BasePersistenceTestCase {
 		Team newTeam = _persistence.create(pk);
 
 		newTeam.setCompanyId(nextLong());
+
 		newTeam.setUserId(nextLong());
+
 		newTeam.setUserName(randomString());
+
 		newTeam.setCreateDate(nextDate());
+
 		newTeam.setModifiedDate(nextDate());
+
 		newTeam.setGroupId(nextLong());
+
 		newTeam.setName(randomString());
+
 		newTeam.setDescription(randomString());
 
 		_persistence.update(newTeam, false);
@@ -220,12 +228,19 @@ public class TeamPersistenceTest extends BasePersistenceTestCase {
 		Team team = _persistence.create(pk);
 
 		team.setCompanyId(nextLong());
+
 		team.setUserId(nextLong());
+
 		team.setUserName(randomString());
+
 		team.setCreateDate(nextDate());
+
 		team.setModifiedDate(nextDate());
+
 		team.setGroupId(nextLong());
+
 		team.setName(randomString());
+
 		team.setDescription(randomString());
 
 		_persistence.update(team, false);

@@ -38,16 +38,19 @@ public class JspFactoryWrapper extends JspFactory {
 		_jspFactory = jspFactory;
 	}
 
+	@Override
 	public JspEngineInfo getEngineInfo() {
 		return _jspFactory.getEngineInfo();
 	}
 
+	@Override
 	public JspApplicationContext getJspApplicationContext(
 		ServletContext servletContext) {
 
 		return _jspFactory.getJspApplicationContext(servletContext);
 	}
 
+	@Override
 	public PageContext getPageContext(
 		Servlet servlet, ServletRequest servletRequest,
 		ServletResponse servletResponse, String errorPageURL,
@@ -77,6 +80,7 @@ public class JspFactoryWrapper extends JspFactory {
 		return new PageContextWrapper(pageContext);
 	}
 
+	@Override
 	public void releasePageContext(PageContext pageContext) {
 		if (pageContext instanceof PageContextWrapper) {
 			PageContextWrapper pageContextWrapper =

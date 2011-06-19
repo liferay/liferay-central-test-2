@@ -230,6 +230,7 @@ public class SCLicenseWrapper implements SCLicense {
 		_scLicense.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new SCLicenseWrapper((SCLicense)_scLicense.clone());
 	}
@@ -239,6 +240,7 @@ public class SCLicenseWrapper implements SCLicense {
 		return _scLicense.compareTo(scLicense);
 	}
 
+	@Override
 	public int hashCode() {
 		return _scLicense.hashCode();
 	}
@@ -247,6 +249,7 @@ public class SCLicenseWrapper implements SCLicense {
 		return new SCLicenseWrapper(_scLicense.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _scLicense.toString();
 	}

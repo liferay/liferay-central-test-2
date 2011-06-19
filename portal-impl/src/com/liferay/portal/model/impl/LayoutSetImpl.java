@@ -56,6 +56,7 @@ public class LayoutSetImpl extends LayoutSetModelImpl implements LayoutSet {
 		return GroupLocalServiceUtil.getGroup(getGroupId());
 	}
 
+	@Override
 	public String getSettings() {
 		if (_settingsProperties == null) {
 			return super.getSettings();
@@ -159,6 +160,7 @@ public class LayoutSetImpl extends LayoutSetModelImpl implements LayoutSet {
 			true);
 	}
 
+	@Override
 	public void setSettings(String settings) {
 		_settingsProperties = null;
 

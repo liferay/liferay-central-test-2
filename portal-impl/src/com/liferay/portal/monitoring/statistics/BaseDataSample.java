@@ -118,6 +118,7 @@ public class BaseDataSample implements DataSample, Serializable {
 		_user = user;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(19);
 

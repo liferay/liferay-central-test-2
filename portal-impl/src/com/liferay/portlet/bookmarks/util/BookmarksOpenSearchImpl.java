@@ -28,18 +28,22 @@ public class BookmarksOpenSearchImpl extends HitsOpenSearchImpl {
 
 	public static final String TITLE = "Liferay Bookmarks Search: ";
 
+	@Override
 	public Indexer getIndexer() {
 		return IndexerRegistryUtil.getIndexer(BookmarksEntry.class);
 	}
 
+	@Override
 	public String getPortletId() {
 		return BookmarksIndexer.PORTLET_ID;
 	}
 
+	@Override
 	public String getSearchPath() {
 		return SEARCH_PATH;
 	}
 
+	@Override
 	public String getTitle(String keywords) {
 		return TITLE + keywords;
 	}

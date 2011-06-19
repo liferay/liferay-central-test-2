@@ -54,6 +54,7 @@ public class MBean implements Serializable {
 		_mBeanName = mBeanName;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;
@@ -116,6 +117,7 @@ public class MBean implements Serializable {
 		return _path;
 	}
 
+	@Override
 	public int hashCode() {
 		HashCode hashCode = HashCodeFactoryUtil.getHashCode();
 

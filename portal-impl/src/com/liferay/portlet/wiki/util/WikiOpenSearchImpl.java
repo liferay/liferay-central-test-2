@@ -28,18 +28,22 @@ public class WikiOpenSearchImpl extends HitsOpenSearchImpl {
 
 	public static final String TITLE = "Liferay Wiki Search: ";
 
+	@Override
 	public Indexer getIndexer() {
 		return IndexerRegistryUtil.getIndexer(WikiPage.class);
 	}
 
+	@Override
 	public String getPortletId() {
 		return WikiIndexer.PORTLET_ID;
 	}
 
+	@Override
 	public String getSearchPath() {
 		return SEARCH_PATH;
 	}
 
+	@Override
 	public String getTitle(String keywords) {
 		return TITLE + keywords;
 	}

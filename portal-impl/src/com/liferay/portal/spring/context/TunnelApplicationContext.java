@@ -30,6 +30,7 @@ import org.springframework.web.context.support.XmlWebApplicationContext;
  */
 public class TunnelApplicationContext extends XmlWebApplicationContext {
 
+	@Override
 	public void setParent(ApplicationContext parent) {
 		if (parent == null) {
 			BeanLocatorImpl beanLocatorImpl =
@@ -41,6 +42,7 @@ public class TunnelApplicationContext extends XmlWebApplicationContext {
 		super.setParent(parent);
 	}
 
+	@Override
 	protected void loadBeanDefinitions(XmlBeanDefinitionReader reader) {
 		String[] configLocations = getConfigLocations();
 

@@ -42,10 +42,12 @@ public class ResourceRequestImpl
 		return _cacheablity;
 	}
 
+	@Override
 	public String getETag() {
 		return null;
 	}
 
+	@Override
 	public String getLifecycle() {
 		return PortletRequest.RESOURCE_PHASE;
 	}
@@ -58,6 +60,7 @@ public class ResourceRequestImpl
 		return _resourceID;
 	}
 
+	@Override
 	protected void init(
 		HttpServletRequest request, Portlet portlet,
 		InvokerPortlet invokerPortlet, PortletContext portletContext,

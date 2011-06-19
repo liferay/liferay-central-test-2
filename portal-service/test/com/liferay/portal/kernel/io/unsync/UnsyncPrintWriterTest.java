@@ -30,6 +30,7 @@ import java.lang.reflect.Field;
  */
 public class UnsyncPrintWriterTest extends TestCase {
 
+	@Override
 	public void tearDown() throws Exception {
 		File testFile = new File(_TEST_FILE_NAME);
 

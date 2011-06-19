@@ -65,17 +65,17 @@ public class DLContentModelImpl extends BaseModelImpl<DLContent>
 			{ "data_", Types.BLOB },
 			{ "size_", Types.BIGINT }
 		};
-	public static final String TABLE_SQL_CREATE = "create table DLContent (contentId LONG not null primary key,groupId LONG,companyId LONG,portletId VARCHAR(75) null,repositoryId LONG,path_ VARCHAR(75) null,version VARCHAR(75) null,data_ BLOB,size_ LONG)";
+	public static final String TABLE_SQL_CREATE = "create table DLContent (contentId LONG not null primary key,groupId LONG,companyId LONG,portletId VARCHAR(75) null,repositoryId LONG,path_ VARCHAR(255) null,version VARCHAR(75) null,data_ BLOB,size_ LONG)";
 	public static final String TABLE_SQL_DROP = "drop table DLContent";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
 	public static final boolean ENTITY_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.entity.cache.enabled.com.liferay.portlet.documentlibrary.model.DLContent"),
-			true);
+			false);
 	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.documentlibrary.model.DLContent"),
-			true);
+			false);
 
 	public Class<?> getModelClass() {
 		return DLContent.class;
@@ -238,6 +238,7 @@ public class DLContentModelImpl extends BaseModelImpl<DLContent>
 		_size = size;
 	}
 
+	@Override
 	public DLContent toEscapedModel() {
 		if (isEscapedModel()) {
 			return (DLContent)this;
@@ -248,6 +249,7 @@ public class DLContentModelImpl extends BaseModelImpl<DLContent>
 		}
 	}
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
@@ -257,10 +259,12 @@ public class DLContentModelImpl extends BaseModelImpl<DLContent>
 		return _expandoBridge;
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		getExpandoBridge().setAttributes(serviceContext);
 	}
 
+	@Override
 	public Object clone() {
 		DLContentImpl dlContentImpl = new DLContentImpl();
 
@@ -293,6 +297,7 @@ public class DLContentModelImpl extends BaseModelImpl<DLContent>
 		}
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -317,10 +322,12 @@ public class DLContentModelImpl extends BaseModelImpl<DLContent>
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		DLContentModelImpl dlContentModelImpl = this;
 
@@ -339,6 +346,7 @@ public class DLContentModelImpl extends BaseModelImpl<DLContent>
 		dlContentModelImpl._originalVersion = dlContentModelImpl._version;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(19);
 

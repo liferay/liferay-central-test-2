@@ -65,6 +65,7 @@ public class PasswordPolicyToolkit extends BasicToolkit {
 		_completeCharset = sb.toString();
 	}
 
+	@Override
 	public String generate(PasswordPolicy passwordPolicy) {
 		if (PropsValues.PASSWORDS_PASSWORDPOLICYTOOLKIT_GENERATOR.equals(
 				"static")) {
@@ -76,6 +77,7 @@ public class PasswordPolicyToolkit extends BasicToolkit {
 		}
 	}
 
+	@Override
 	public void validate(
 			long userId, String password1, String password2,
 			PasswordPolicy passwordPolicy)

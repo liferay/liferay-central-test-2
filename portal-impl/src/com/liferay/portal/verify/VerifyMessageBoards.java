@@ -32,6 +32,7 @@ import java.util.List;
  */
 public class VerifyMessageBoards extends VerifyProcess {
 
+	@Override
 	protected void doVerify() throws Exception {
 		List<MBCategory> categories =
 			MBCategoryLocalServiceUtil.getMBCategories(

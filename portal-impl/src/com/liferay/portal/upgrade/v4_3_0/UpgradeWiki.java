@@ -35,6 +35,7 @@ import java.sql.Types;
  */
 public class UpgradeWiki extends UpgradeProcess {
 
+	@Override
 	protected void doUpgrade() throws Exception {
 
 		// WikiNode

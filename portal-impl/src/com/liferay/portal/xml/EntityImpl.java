@@ -28,10 +28,12 @@ public class EntityImpl extends NodeImpl implements Entity {
 		_entity = entity;
 	}
 
+	@Override
 	public <T, V extends Visitor<T>> T accept(V visitor) {
 		return visitor.visitEntity(this);
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		org.dom4j.Entity entity = ((EntityImpl)obj).getWrappedEntity();
 
@@ -42,10 +44,12 @@ public class EntityImpl extends NodeImpl implements Entity {
 		return _entity;
 	}
 
+	@Override
 	public int hashCode() {
 		return _entity.hashCode();
 	}
 
+	@Override
 	public String toString() {
 		return _entity.toString();
 	}

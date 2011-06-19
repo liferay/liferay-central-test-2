@@ -37,10 +37,12 @@ public class PrefsOwnerIdUpgradeColumnImpl extends TempUpgradeColumnImpl {
 		_userIdMapper = userIdMapper;
 	}
 
+	@Override
 	public Integer getNewColumnType(Integer defaultType) {
 		return new Integer(Types.BIGINT);
 	}
 
+	@Override
 	public Object getNewValue(Object oldValue) throws Exception {
 		_ownerType = null;
 		_oldGroupId = null;

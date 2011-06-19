@@ -29,6 +29,7 @@ import javax.servlet.jsp.PageContext;
  */
 public class TextSearchEntry extends SearchEntry {
 
+	@Override
 	public Object clone() {
 		TextSearchEntry textSearchEntry = new TextSearchEntry();
 
@@ -57,6 +58,7 @@ public class TextSearchEntry extends SearchEntry {
 		return _title;
 	}
 
+	@Override
 	public void print(PageContext pageContext) throws Exception {
 		if (_href == null) {
 			pageContext.getOut().print(_name);

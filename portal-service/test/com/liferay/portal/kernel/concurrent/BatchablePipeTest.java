@@ -283,6 +283,7 @@ public class BatchablePipeTest extends TestCase {
 			super(key, value);
 		}
 
+		@Override
 		public Integer doIncrease(Integer originalValue, Integer deltaValue) {
 			return originalValue + deltaValue;
 		}

@@ -37,6 +37,7 @@ public class LiferayTemplateModel extends SimpleHash {
 		_beanModel = new BeanModel(templateNode, (BeansWrapper)objectWrapper);
 	}
 
+	@Override
 	public TemplateModel get(String key) throws TemplateModelException {
 		TemplateModel templateModel = super.get(key);
 

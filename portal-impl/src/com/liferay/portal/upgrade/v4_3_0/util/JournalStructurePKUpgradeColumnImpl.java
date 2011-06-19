@@ -36,6 +36,7 @@ public class JournalStructurePKUpgradeColumnImpl extends PKUpgradeColumnImpl {
 		_journalStructureIdMapper = ValueMapperFactoryUtil.getValueMapper();
 	}
 
+	@Override
 	public Object getNewValue(Object oldValue) throws Exception {
 		Object newValue = super.getNewValue(oldValue);
 
@@ -52,6 +53,7 @@ public class JournalStructurePKUpgradeColumnImpl extends PKUpgradeColumnImpl {
 		return newValue;
 	}
 
+	@Override
 	public ValueMapper getValueMapper() {
 		return _journalStructureIdMapper;
 	}

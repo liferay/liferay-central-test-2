@@ -80,6 +80,7 @@ public class UserGroupGroupRoleLocalServiceImpl
 		PermissionCacheUtil.clearCache();
 	}
 
+	@Override
 	public void deleteUserGroupGroupRole(UserGroupGroupRole userGroupGroupRole)
 		throws SystemException {
 

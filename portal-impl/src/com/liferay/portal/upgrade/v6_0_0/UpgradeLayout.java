@@ -24,6 +24,7 @@ import com.liferay.portal.upgrade.v6_0_0.util.LayoutTable;
  */
 public class UpgradeLayout extends UpgradeProcess {
 
+	@Override
 	protected void doUpgrade() throws Exception {
 		try {
 			runSQL("alter_column_type Layout friendlyURL VARCHAR(255) null");

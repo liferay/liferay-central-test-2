@@ -230,6 +230,7 @@ public class CountryWrapper implements Country {
 		_country.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new CountryWrapper((Country)_country.clone());
 	}
@@ -238,6 +239,7 @@ public class CountryWrapper implements Country {
 		return _country.compareTo(country);
 	}
 
+	@Override
 	public int hashCode() {
 		return _country.hashCode();
 	}
@@ -246,6 +248,7 @@ public class CountryWrapper implements Country {
 		return new CountryWrapper(_country.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _country.toString();
 	}

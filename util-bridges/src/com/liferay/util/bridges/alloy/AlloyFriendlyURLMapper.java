@@ -36,6 +36,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class AlloyFriendlyURLMapper extends DefaultFriendlyURLMapper {
 
+	@Override
 	public String buildPath(LiferayPortletURL liferayPortletURL) {
 		Map<String, String> routeParameters = new HashMap<String, String>();
 
@@ -83,6 +84,7 @@ public class AlloyFriendlyURLMapper extends DefaultFriendlyURLMapper {
 		return friendlyURLPath;
 	}
 
+	@Override
 	public void populateParams(
 		String friendlyURLPath, Map<String, String[]> parameterMap,
 		Map<String, Object> requestContext) {

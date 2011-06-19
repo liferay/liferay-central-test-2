@@ -33,6 +33,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class LockPersistenceTest extends BasePersistenceTestCase {
+	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -69,14 +70,23 @@ public class LockPersistenceTest extends BasePersistenceTestCase {
 		Lock newLock = _persistence.create(pk);
 
 		newLock.setUuid(randomString());
+
 		newLock.setCompanyId(nextLong());
+
 		newLock.setUserId(nextLong());
+
 		newLock.setUserName(randomString());
+
 		newLock.setCreateDate(nextDate());
+
 		newLock.setClassName(randomString());
+
 		newLock.setKey(randomString());
+
 		newLock.setOwner(randomString());
+
 		newLock.setInheritable(randomBoolean());
+
 		newLock.setExpirationDate(nextDate());
 
 		_persistence.update(newLock, false);
@@ -224,14 +234,23 @@ public class LockPersistenceTest extends BasePersistenceTestCase {
 		Lock lock = _persistence.create(pk);
 
 		lock.setUuid(randomString());
+
 		lock.setCompanyId(nextLong());
+
 		lock.setUserId(nextLong());
+
 		lock.setUserName(randomString());
+
 		lock.setCreateDate(nextDate());
+
 		lock.setClassName(randomString());
+
 		lock.setKey(randomString());
+
 		lock.setOwner(randomString());
+
 		lock.setInheritable(randomBoolean());
+
 		lock.setExpirationDate(nextDate());
 
 		_persistence.update(lock, false);

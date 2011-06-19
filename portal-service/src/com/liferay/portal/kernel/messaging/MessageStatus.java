@@ -66,6 +66,7 @@ public class MessageStatus implements Serializable {
 		_endTime = System.currentTimeMillis();
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(11);
 

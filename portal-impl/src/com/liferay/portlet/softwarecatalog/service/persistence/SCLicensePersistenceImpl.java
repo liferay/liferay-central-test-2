@@ -147,6 +147,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(SCLicenseImpl.class.getName());
@@ -164,6 +165,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(SCLicense scLicense) {
 		EntityCacheUtil.removeResult(SCLicenseModelImpl.ENTITY_CACHE_ENABLED,
 			SCLicenseImpl.class, scLicense.getPrimaryKey());
@@ -192,6 +194,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	 * @throws com.liferay.portal.NoSuchModelException if a s c license with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public SCLicense remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
@@ -244,10 +247,12 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	 * @return the s c license that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public SCLicense remove(SCLicense scLicense) throws SystemException {
 		return super.remove(scLicense);
 	}
 
+	@Override
 	protected SCLicense removeImpl(SCLicense scLicense)
 		throws SystemException {
 		scLicense = toUnwrappedModel(scLicense);
@@ -284,6 +289,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 		return scLicense;
 	}
 
+	@Override
 	public SCLicense updateImpl(
 		com.liferay.portlet.softwarecatalog.model.SCLicense scLicense,
 		boolean merge) throws SystemException {
@@ -341,6 +347,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	 * @throws com.liferay.portal.NoSuchModelException if a s c license with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public SCLicense findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
@@ -377,6 +384,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	 * @return the s c license, or <code>null</code> if a s c license with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public SCLicense fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());

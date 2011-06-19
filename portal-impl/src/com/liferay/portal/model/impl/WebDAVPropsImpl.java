@@ -38,6 +38,7 @@ public class WebDAVPropsImpl
 	public WebDAVPropsImpl() {
 	}
 
+	@Override
 	public String getProps() {
 		String props = super.getProps();
 

@@ -1246,32 +1246,12 @@
 		<field name="companyId" type="long" />
 		<field name="portletId" type="String" />
 		<field name="repositoryId" type="long" />
-		<field name="path" type="String" />
+		<field name="path" type="String">
+			<hint name="max-length">255</hint>
+		</field>
 		<field name="version" type="String" />
 		<field name="data" type="Blob" />
 		<field name="size" type="long" />
-	</model>
-	<model name="com.liferay.portlet.documentlibrary.model.DLDocumentMetadataSet">
-		<field name="uuid" type="String" />
-		<field name="documentMetadataSetId" type="long" />
-		<field name="classNameId" type="long" />
-		<field name="classPK" type="long" />
-		<field name="DDMStructureId" type="long" />
-		<field name="documentTypeId" type="long" />
-		<field name="fileVersionId" type="long" />
-	</model>
-	<model name="com.liferay.portlet.documentlibrary.model.DLDocumentType">
-		<field name="documentTypeId" type="long" />
-		<field name="groupId" type="long" />
-		<field name="companyId" type="long" />
-		<field name="userId" type="long" />
-		<field name="userName" type="String" />
-		<field name="createDate" type="Date" />
-		<field name="modifiedDate" type="Date" />
-		<field name="name" type="String" />
-		<field name="description" type="String">
-			<hint-collection name="TEXTAREA" />
-		</field>
 	</model>
 	<model name="com.liferay.portlet.documentlibrary.model.DLFileEntry">
 		<field name="uuid" type="String" />
@@ -1300,10 +1280,33 @@
 		<field name="extraSettings" type="String">
 			<hint-collection name="CLOB" />
 		</field>
-		<field name="documentTypeId" type="long" />
+		<field name="fileEntryTypeId" type="long" />
 		<field name="version" type="String" />
 		<field name="size" type="long" />
 		<field name="readCount" type="int" />
+	</model>
+	<model name="com.liferay.portlet.documentlibrary.model.DLFileEntryMetadata">
+		<field name="uuid" type="String" />
+		<field name="fileEntryMetadataId" type="long" />
+		<field name="classNameId" type="long" />
+		<field name="classPK" type="long" />
+		<field name="DDMStructureId" type="long" />
+		<field name="fileEntryTypeId" type="long" />
+		<field name="fileEntryId" type="long" />
+		<field name="fileVersionId" type="long" />
+	</model>
+	<model name="com.liferay.portlet.documentlibrary.model.DLFileEntryType">
+		<field name="fileEntryTypeId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="name" type="String" />
+		<field name="description" type="String">
+			<hint-collection name="TEXTAREA" />
+		</field>
 	</model>
 	<model name="com.liferay.portlet.documentlibrary.model.DLFileRank">
 		<field name="fileRankId" type="long" />
@@ -1351,7 +1354,7 @@
 		<field name="extraSettings" type="String">
 			<hint-collection name="CLOB" />
 		</field>
-		<field name="documentTypeId" type="long" />
+		<field name="fileEntryTypeId" type="long" />
 		<field name="version" type="String" />
 		<field name="size" type="long" />
 		<field name="status" type="int" />
@@ -1391,8 +1394,7 @@
 		<field name="versionUserName" type="String" />
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
-		<field name="classNameId" type="long" />
-		<field name="classPK" type="long" />
+		<field name="DDMStorageId" type="long" />
 		<field name="recordSetId" type="long" />
 		<field name="version" type="String" />
 		<field name="displayIndex" type="int" />
@@ -1426,8 +1428,7 @@
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
-		<field name="classNameId" type="long" />
-		<field name="classPK" type="long" />
+		<field name="DDMStorageId" type="long" />
 		<field name="recordSetId" type="long" />
 		<field name="recordId" type="long" />
 		<field name="version" type="String" />

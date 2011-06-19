@@ -49,6 +49,7 @@ import org.apache.velocity.util.SimplePool;
  */
 public class VelocityPortlet extends GenericPortlet {
 
+	@Override
 	public void init(PortletConfig portletConfig) throws PortletException {
 		super.init(portletConfig);
 
@@ -68,6 +69,7 @@ public class VelocityPortlet extends GenericPortlet {
 			getInitParameter("view-template"));
 	}
 
+	@Override
 	public void processAction(
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws PortletException {
@@ -84,6 +86,7 @@ public class VelocityPortlet extends GenericPortlet {
 		}
 	}
 
+	@Override
 	public void serveResource(
 			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
 		throws PortletException, IOException {
@@ -103,6 +106,7 @@ public class VelocityPortlet extends GenericPortlet {
 		}
 	}
 
+	@Override
 	public void doEdit(
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
@@ -121,6 +125,7 @@ public class VelocityPortlet extends GenericPortlet {
 		}
 	}
 
+	@Override
 	public void doHelp(
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws PortletException {
@@ -133,6 +138,7 @@ public class VelocityPortlet extends GenericPortlet {
 		}
 	}
 
+	@Override
 	public void doView(
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws PortletException {

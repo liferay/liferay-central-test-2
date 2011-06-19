@@ -525,6 +525,7 @@ public class PollsQuestionWrapper implements PollsQuestion {
 		_pollsQuestion.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new PollsQuestionWrapper((PollsQuestion)_pollsQuestion.clone());
 	}
@@ -534,6 +535,7 @@ public class PollsQuestionWrapper implements PollsQuestion {
 		return _pollsQuestion.compareTo(pollsQuestion);
 	}
 
+	@Override
 	public int hashCode() {
 		return _pollsQuestion.hashCode();
 	}
@@ -542,6 +544,7 @@ public class PollsQuestionWrapper implements PollsQuestion {
 		return new PollsQuestionWrapper(_pollsQuestion.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _pollsQuestion.toString();
 	}

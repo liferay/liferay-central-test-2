@@ -25,6 +25,7 @@ import javax.servlet.jsp.tagext.TagSupport;
  */
 public class DefineObjectsTag extends TagSupport {
 
+	@Override
 	public int doStartTag() {
 		HttpServletRequest request =
 			(HttpServletRequest)pageContext.getRequest();

@@ -40,6 +40,7 @@ import org.apache.abdera.protocol.server.servlet.AbderaServlet;
  */
 public class AtomServlet extends AbderaServlet {
 
+	@Override
 	protected Provider createProvider() {
 		AtomProvider atomProvider = new AtomProvider();
 
@@ -57,6 +58,7 @@ public class AtomServlet extends AbderaServlet {
 		return atomProvider;
 	}
 
+	@Override
 	protected void service(
 			HttpServletRequest request, HttpServletResponse response)
 		throws ServletException {

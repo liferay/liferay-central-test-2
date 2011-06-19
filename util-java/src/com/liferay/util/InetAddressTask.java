@@ -29,6 +29,7 @@ import org.apache.tools.ant.Task;
  */
 public class InetAddressTask extends Task {
 
+	@Override
 	public void execute() throws BuildException {
 		try {
 			InetAddress localHost = InetAddress.getLocalHost();

@@ -26,6 +26,7 @@ import java.sql.ResultSet;
  */
 public class UpgradeExpando extends UpgradeProcess {
 
+	@Override
 	protected void doUpgrade() throws Exception {
 		updateTables();
 	}

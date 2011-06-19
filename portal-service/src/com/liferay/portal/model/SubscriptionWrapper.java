@@ -286,6 +286,7 @@ public class SubscriptionWrapper implements Subscription {
 		_subscription.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new SubscriptionWrapper((Subscription)_subscription.clone());
 	}
@@ -294,6 +295,7 @@ public class SubscriptionWrapper implements Subscription {
 		return _subscription.compareTo(subscription);
 	}
 
+	@Override
 	public int hashCode() {
 		return _subscription.hashCode();
 	}
@@ -302,6 +304,7 @@ public class SubscriptionWrapper implements Subscription {
 		return new SubscriptionWrapper(_subscription.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _subscription.toString();
 	}

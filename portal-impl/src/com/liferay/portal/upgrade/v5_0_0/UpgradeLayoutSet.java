@@ -24,6 +24,7 @@ import com.liferay.portal.upgrade.v5_0_0.util.LayoutSetTable;
  */
 public class UpgradeLayoutSet extends UpgradeProcess {
 
+	@Override
 	protected void doUpgrade() throws Exception {
 
 		// LayoutSet

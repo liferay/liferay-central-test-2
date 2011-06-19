@@ -30,6 +30,7 @@ import org.apache.catalina.core.StandardService;
  */
 public class PortalStandardService extends StandardService {
 
+	@Override
 	public void addConnector(Connector connector) {
 
 		try {

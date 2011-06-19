@@ -58,6 +58,7 @@ public class BookmarksIndexer extends BaseIndexer {
 		return CLASS_NAMES;
 	}
 
+	@Override
 	public void postProcessContextQuery(
 			BooleanQuery contextQuery, SearchContext searchContext)
 		throws Exception {
@@ -88,6 +89,7 @@ public class BookmarksIndexer extends BaseIndexer {
 		}
 	}
 
+	@Override
 	protected void doDelete(Object obj) throws Exception {
 		BookmarksEntry entry = (BookmarksEntry)obj;
 
@@ -99,6 +101,7 @@ public class BookmarksIndexer extends BaseIndexer {
 			entry.getCompanyId(), document.get(Field.UID));
 	}
 
+	@Override
 	protected Document doGetDocument(Object obj) throws Exception {
 		BookmarksEntry entry = (BookmarksEntry)obj;
 
@@ -112,6 +115,7 @@ public class BookmarksIndexer extends BaseIndexer {
 		return document;
 	}
 
+	@Override
 	protected Summary doGetSummary(
 		Document document, Locale locale, String snippet,
 		PortletURL portletURL) {
@@ -128,6 +132,7 @@ public class BookmarksIndexer extends BaseIndexer {
 		return new Summary(title, url, portletURL);
 	}
 
+	@Override
 	protected void doReindex(Object obj) throws Exception {
 		BookmarksEntry entry = (BookmarksEntry)obj;
 
@@ -136,12 +141,14 @@ public class BookmarksIndexer extends BaseIndexer {
 		SearchEngineUtil.updateDocument(entry.getCompanyId(), document);
 	}
 
+	@Override
 	protected void doReindex(String className, long classPK) throws Exception {
 		BookmarksEntry entry = BookmarksEntryLocalServiceUtil.getEntry(classPK);
 
 		doReindex(entry);
 	}
 
+	@Override
 	protected void doReindex(String[] ids) throws Exception {
 		long companyId = GetterUtil.getLong(ids[0]);
 
@@ -149,6 +156,7 @@ public class BookmarksIndexer extends BaseIndexer {
 		reindexRoot(companyId);
 	}
 
+	@Override
 	protected String getPortletId(SearchContext searchContext) {
 		return PORTLET_ID;
 	}

@@ -33,6 +33,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class AnnouncementsFlagPersistenceTest extends BasePersistenceTestCase {
+	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -69,8 +70,11 @@ public class AnnouncementsFlagPersistenceTest extends BasePersistenceTestCase {
 		AnnouncementsFlag newAnnouncementsFlag = _persistence.create(pk);
 
 		newAnnouncementsFlag.setUserId(nextLong());
+
 		newAnnouncementsFlag.setCreateDate(nextDate());
+
 		newAnnouncementsFlag.setEntryId(nextLong());
+
 		newAnnouncementsFlag.setValue(nextInt());
 
 		_persistence.update(newAnnouncementsFlag, false);
@@ -219,8 +223,11 @@ public class AnnouncementsFlagPersistenceTest extends BasePersistenceTestCase {
 		AnnouncementsFlag announcementsFlag = _persistence.create(pk);
 
 		announcementsFlag.setUserId(nextLong());
+
 		announcementsFlag.setCreateDate(nextDate());
+
 		announcementsFlag.setEntryId(nextLong());
+
 		announcementsFlag.setValue(nextInt());
 
 		_persistence.update(announcementsFlag, false);

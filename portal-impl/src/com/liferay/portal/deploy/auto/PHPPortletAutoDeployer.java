@@ -44,6 +44,7 @@ public class PHPPortletAutoDeployer extends PortletAutoDeployer {
 		}
 	}
 
+	@Override
 	public void copyXmls(
 			File srcFile, String displayName, PluginPackage pluginPackage)
 		throws Exception {

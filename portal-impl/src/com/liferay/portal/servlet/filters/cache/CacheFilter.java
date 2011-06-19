@@ -65,6 +65,7 @@ public class CacheFilter extends BasePortalFilter {
 
 	public static final String SKIP_FILTER = CacheFilter.class + "SKIP_FILTER";
 
+	@Override
 	public void init(FilterConfig filterConfig) {
 		super.init(filterConfig);
 
@@ -79,6 +80,7 @@ public class CacheFilter extends BasePortalFilter {
 		}
 	}
 
+	@Override
 	public boolean isFilterEnabled(
 		HttpServletRequest request, HttpServletResponse response) {
 
@@ -375,6 +377,7 @@ public class CacheFilter extends BasePortalFilter {
 		}
 	}
 
+	@Override
 	protected void processFilter(
 			HttpServletRequest request, HttpServletResponse response,
 			FilterChain filterChain)

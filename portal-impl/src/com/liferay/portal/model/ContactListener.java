@@ -31,6 +31,7 @@ import java.util.Map;
  */
 public class ContactListener extends BaseModelListener<Contact> {
 
+	@Override
 	public void onAfterCreate(Contact contact) throws ModelListenerException {
 		try {
 			exportToLDAP(contact);
@@ -40,6 +41,7 @@ public class ContactListener extends BaseModelListener<Contact> {
 		}
 	}
 
+	@Override
 	public void onAfterUpdate(Contact contact) throws ModelListenerException {
 		try {
 			exportToLDAP(contact);

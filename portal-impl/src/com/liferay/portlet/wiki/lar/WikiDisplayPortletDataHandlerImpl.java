@@ -45,18 +45,21 @@ import javax.portlet.PortletPreferences;
  */
 public class WikiDisplayPortletDataHandlerImpl extends BasePortletDataHandler {
 
+	@Override
 	public PortletDataHandlerControl[] getExportControls() {
 		return new PortletDataHandlerControl[] {
 			_nodesAndPages, _attachments, _categories, _comments, _tags
 		};
 	}
 
+	@Override
 	public PortletDataHandlerControl[] getImportControls() {
 		return new PortletDataHandlerControl[] {
 			_nodesAndPages, _attachments, _categories, _comments, _tags
 		};
 	}
 
+	@Override
 	public PortletPreferences importData(
 			PortletDataContext portletDataContext, String portletId,
 			PortletPreferences portletPreferences, String data)
@@ -73,6 +76,7 @@ public class WikiDisplayPortletDataHandlerImpl extends BasePortletDataHandler {
 		}
 	}
 
+	@Override
 	protected PortletPreferences doDeleteData(
 			PortletDataContext portletDataContext, String portletId,
 			PortletPreferences portletPreferences)
@@ -84,6 +88,7 @@ public class WikiDisplayPortletDataHandlerImpl extends BasePortletDataHandler {
 		return portletPreferences;
 	}
 
+	@Override
 	protected String doExportData(
 			PortletDataContext portletDataContext, String portletId,
 			PortletPreferences portletPreferences)
@@ -144,6 +149,7 @@ public class WikiDisplayPortletDataHandlerImpl extends BasePortletDataHandler {
 		return document.formattedString();
 	}
 
+	@Override
 	protected PortletPreferences doImportData(
 			PortletDataContext portletDataContext, String portletId,
 			PortletPreferences portletPreferences, String data)

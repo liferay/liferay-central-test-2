@@ -96,20 +96,24 @@ public class BranchImpl extends NodeImpl implements Branch {
 		return new ElementImpl(_branch.elementByID(elementID));
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		org.dom4j.Branch branch = ((BranchImpl)obj).getWrappedBranch();
 
 		return _branch.equals(branch);
 	}
 
+	@Override
 	public String formattedString() throws IOException {
 		return XMLFormatter.toString(_branch);
 	}
 
+	@Override
 	public String formattedString(String indent) throws IOException {
 		return XMLFormatter.toString(_branch, indent);
 	}
 
+	@Override
 	public String formattedString(String indent, boolean expandEmptyElements)
 		throws IOException {
 
@@ -120,6 +124,7 @@ public class BranchImpl extends NodeImpl implements Branch {
 		return _branch;
 	}
 
+	@Override
 	public int hashCode() {
 		return _branch.hashCode();
 	}
@@ -236,6 +241,7 @@ public class BranchImpl extends NodeImpl implements Branch {
 			SAXReaderImpl.toOldProcessingInstructions(processingInstructions));
 	}
 
+	@Override
 	public String toString() {
 		return _branch.toString();
 	}

@@ -32,7 +32,6 @@
 <%@ page import="com.liferay.portlet.asset.service.AssetTagServiceUtil" %>
 <%@ page import="com.liferay.portlet.asset.service.AssetVocabularyLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.asset.service.persistence.AssetEntryQuery" %>
-<%@ page import="com.liferay.portlet.asset.util.AssetUtil" %>
 <%@ page import="com.liferay.portlet.imagegallery.DuplicateFolderNameException" %>
 <%@ page import="com.liferay.portlet.imagegallery.DuplicateImageNameException" %>
 <%@ page import="com.liferay.portlet.imagegallery.FolderNameException" %>
@@ -49,9 +48,7 @@
 <%@ page import="com.liferay.portlet.imagegallery.service.IGImageServiceUtil" %>
 <%@ page import="com.liferay.portlet.imagegallery.service.permission.IGFolderPermission" %>
 <%@ page import="com.liferay.portlet.imagegallery.service.permission.IGImagePermission" %>
-<%@ page import="com.liferay.portlet.imagegallery.service.permission.IGPermission" %>
 <%@ page import="com.liferay.portlet.imagegallery.util.IGUtil" %>
-<%@ page import="com.liferay.portlet.imagegallery.webdav.IGWebDAVStorageImpl" %>
 
 <%
 PortletPreferences preferences = renderRequest.getPreferences();

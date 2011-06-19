@@ -90,6 +90,7 @@ public class ModuleId implements Serializable {
 		return _pluginVersion.isSameVersionAs(version);
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (!(obj instanceof ModuleId)) {
 			return false;
@@ -100,10 +101,12 @@ public class ModuleId implements Serializable {
 		return toString().equals(moduleId.toString());
 	}
 
+	@Override
 	public int hashCode() {
 		return toString().hashCode();
 	}
 
+	@Override
 	public String toString() {
 		return toString(
 			_groupId, _artifactId, _pluginVersion.toString(), _type);

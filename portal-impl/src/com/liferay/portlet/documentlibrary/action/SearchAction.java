@@ -30,6 +30,7 @@ import org.apache.struts.action.ActionMapping;
  */
 public class SearchAction extends PortletAction {
 
+	@Override
 	public void serveResource(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
 			ResourceRequest resourceRequest, ResourceResponse resourceResponse)

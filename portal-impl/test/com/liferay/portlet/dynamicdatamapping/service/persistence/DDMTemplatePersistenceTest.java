@@ -34,6 +34,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class DDMTemplatePersistenceTest extends BasePersistenceTestCase {
+	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -70,17 +71,29 @@ public class DDMTemplatePersistenceTest extends BasePersistenceTestCase {
 		DDMTemplate newDDMTemplate = _persistence.create(pk);
 
 		newDDMTemplate.setUuid(randomString());
+
 		newDDMTemplate.setGroupId(nextLong());
+
 		newDDMTemplate.setCompanyId(nextLong());
+
 		newDDMTemplate.setUserId(nextLong());
+
 		newDDMTemplate.setUserName(randomString());
+
 		newDDMTemplate.setCreateDate(nextDate());
+
 		newDDMTemplate.setModifiedDate(nextDate());
+
 		newDDMTemplate.setStructureId(nextLong());
+
 		newDDMTemplate.setName(randomString());
+
 		newDDMTemplate.setDescription(randomString());
+
 		newDDMTemplate.setType(randomString());
+
 		newDDMTemplate.setLanguage(randomString());
+
 		newDDMTemplate.setScript(randomString());
 
 		_persistence.update(newDDMTemplate, false);
@@ -239,17 +252,29 @@ public class DDMTemplatePersistenceTest extends BasePersistenceTestCase {
 		DDMTemplate ddmTemplate = _persistence.create(pk);
 
 		ddmTemplate.setUuid(randomString());
+
 		ddmTemplate.setGroupId(nextLong());
+
 		ddmTemplate.setCompanyId(nextLong());
+
 		ddmTemplate.setUserId(nextLong());
+
 		ddmTemplate.setUserName(randomString());
+
 		ddmTemplate.setCreateDate(nextDate());
+
 		ddmTemplate.setModifiedDate(nextDate());
+
 		ddmTemplate.setStructureId(nextLong());
+
 		ddmTemplate.setName(randomString());
+
 		ddmTemplate.setDescription(randomString());
+
 		ddmTemplate.setType(randomString());
+
 		ddmTemplate.setLanguage(randomString());
+
 		ddmTemplate.setScript(randomString());
 
 		_persistence.update(ddmTemplate, false);

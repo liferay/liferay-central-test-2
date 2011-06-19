@@ -32,10 +32,12 @@ public class AssetLinksTag extends IncludeTag {
 		return _classPK;
 	}
 
+	@Override
 	protected String getPage() {
 		return _PAGE;
 	}
 
+	@Override
 	protected void setAttributes(HttpServletRequest request) {
 		request.setAttribute("liferay-ui:asset-links:className", _className);
 		request.setAttribute(
@@ -50,6 +52,7 @@ public class AssetLinksTag extends IncludeTag {
 		_classPK = classPK;
 	}
 
+	@Override
 	protected void cleanUp() {
 		_className = StringPool.BLANK;
 		_classPK = 0;

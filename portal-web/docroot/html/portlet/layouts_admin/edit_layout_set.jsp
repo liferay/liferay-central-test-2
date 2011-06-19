@@ -59,8 +59,8 @@ if (!company.isCommunityLogo()) {
 String[][] categorySections = {mainSections};
 %>
 
-<div class="header-row">
-	<div class="header-row-content">
+<div class="lfr-header-row">
+	<div class="lfr-header-row-content">
 		<liferay-util:include page="/html/portlet/layouts_admin/add_layout.jsp" />
 
 		<aui:button-row cssClass="edit-toolbar" id='<%= liferayPortletResponse.getNamespace() + "layoutSetToolbar" %>'>
@@ -158,7 +158,7 @@ String[][] categorySections = {mainSections};
 					},
 				</c:if>
 
-				<c:if test="<%= (pagesCount > 0) && (liveGroup.isStaged() || selGroup.isLayoutSetPrototype() || selGroup.isStagingGroup() || portletName.equals(PortletKeys.COMMUNITIES) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.SITES_ADMIN) || portletName.equals(PortletKeys.USERS_ADMIN) || portletName.equals(PortletKeys.GROUP_PAGES)) %>">
+				<c:if test="<%= (pagesCount > 0) && (liveGroup.isStaged() || selGroup.isLayoutSetPrototype() || selGroup.isStagingGroup() || portletName.equals(PortletKeys.COMMUNITIES) || portletName.equals(PortletKeys.GROUP_PAGES) || portletName.equals(PortletKeys.SITES_ADMIN) || portletName.equals(PortletKeys.USERS_ADMIN)) %>">
 					<liferay-portlet:actionURL plid="<%= selPlid %>" portletName="<%= PortletKeys.MY_PLACES %>" var="viewPagesURL">
 						<portlet:param name="struts_action" value="/my_places/view" />
 						<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />

@@ -30,22 +30,27 @@ public class ButtonRowTag extends IncludeTag {
 		_cssClass = cssClass;
 	}
 
+	@Override
 	protected void cleanUp() {
 		_cssClass = null;
 	}
 
+	@Override
 	protected String getEndPage() {
 		return _END_PAGE;
 	}
 
+	@Override
 	protected String getStartPage() {
 		return _START_PAGE;
 	}
 
+	@Override
 	protected boolean isCleanUpSetAttributes() {
 		return _CLEAN_UP_SET_ATTRIBUTES;
 	}
 
+	@Override
 	protected int processEndTag() throws Exception {
 		JspWriter jspWriter = pageContext.getOut();
 
@@ -54,6 +59,7 @@ public class ButtonRowTag extends IncludeTag {
 		return EVAL_PAGE;
 	}
 
+	@Override
 	protected void setAttributes(HttpServletRequest request) {
 		request.setAttribute("aui:button-row:cssClass", _cssClass);
 		request.setAttribute(

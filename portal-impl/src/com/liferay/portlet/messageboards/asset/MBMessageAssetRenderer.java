@@ -63,6 +63,7 @@ public class MBMessageAssetRenderer extends BaseAssetRenderer {
 		return _message.getSubject();
 	}
 
+	@Override
 	public PortletURL getURLEdit(
 			LiferayPortletRequest liferayPortletRequest,
 			LiferayPortletResponse liferayPortletResponse)
@@ -80,6 +81,7 @@ public class MBMessageAssetRenderer extends BaseAssetRenderer {
 		return portletURL;
 	}
 
+	@Override
 	public String getURLViewInContext(
 		LiferayPortletRequest liferayPortletRequest,
 		LiferayPortletResponse liferayPortletResponse,
@@ -101,6 +103,7 @@ public class MBMessageAssetRenderer extends BaseAssetRenderer {
 		return _message.getUuid();
 	}
 
+	@Override
 	public boolean hasEditPermission(PermissionChecker permissionChecker)
 		throws PortalException, SystemException {
 
@@ -117,6 +120,7 @@ public class MBMessageAssetRenderer extends BaseAssetRenderer {
 		}
 	}
 
+	@Override
 	public boolean hasViewPermission(PermissionChecker permissionChecker)
 		throws PortalException, SystemException {
 
@@ -133,6 +137,7 @@ public class MBMessageAssetRenderer extends BaseAssetRenderer {
 		}
 	}
 
+	@Override
 	public boolean isPrintable() {
 		return true;
 	}
@@ -155,6 +160,7 @@ public class MBMessageAssetRenderer extends BaseAssetRenderer {
 		}
 	}
 
+	@Override
 	protected String getIconPath(ThemeDisplay themeDisplay) {
 		return themeDisplay.getPathThemeImages() + "/common/conversation.png";
 	}

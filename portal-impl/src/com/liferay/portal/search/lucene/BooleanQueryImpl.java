@@ -252,10 +252,12 @@ public class BooleanQueryImpl extends BaseBooleanQueryImpl {
 		return _booleanQuery;
 	}
 
+	@Override
 	public Object getWrappedQuery() {
 		return getBooleanQuery();
 	}
 
+	@Override
 	public String toString() {
 		return _booleanQuery.toString();
 	}

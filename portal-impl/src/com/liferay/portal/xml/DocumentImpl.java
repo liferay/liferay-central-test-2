@@ -32,6 +32,7 @@ public class DocumentImpl extends BranchImpl implements Document {
 		_document = document;
 	}
 
+	@Override
 	public <T, V extends Visitor<T>> T accept(V visitor) {
 		return visitor.visitDocument(this);
 	}
@@ -48,20 +49,24 @@ public class DocumentImpl extends BranchImpl implements Document {
 		return this;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		org.dom4j.Document document = ((DocumentImpl)obj).getWrappedDocument();
 
 		return _document.equals(document);
 	}
 
+	@Override
 	public String formattedString() throws IOException {
 		return XMLFormatter.toString(_document);
 	}
 
+	@Override
 	public String formattedString(String indent) throws IOException {
 		return XMLFormatter.toString(_document, indent);
 	}
 
+	@Override
 	public String formattedString(String indent, boolean expandEmptyElements)
 		throws IOException {
 
@@ -88,6 +93,7 @@ public class DocumentImpl extends BranchImpl implements Document {
 		return _document.getXMLEncoding();
 	}
 
+	@Override
 	public int hashCode() {
 		return _document.hashCode();
 	}
@@ -102,6 +108,7 @@ public class DocumentImpl extends BranchImpl implements Document {
 		_document.setXMLEncoding(encoding);
 	}
 
+	@Override
 	public String toString() {
 		return _document.toString();
 	}

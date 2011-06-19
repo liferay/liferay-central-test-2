@@ -45,6 +45,7 @@ public class ObjectValuePair<K, V> implements Serializable {
 		_value = value;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;
@@ -63,6 +64,7 @@ public class ObjectValuePair<K, V> implements Serializable {
 		return false;
 	}
 
+	@Override
 	public int hashCode() {
 		if (_key != null) {
 			return _key.hashCode();

@@ -175,6 +175,7 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(SubscriptionImpl.class.getName());
@@ -192,6 +193,7 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(Subscription subscription) {
 		EntityCacheUtil.removeResult(SubscriptionModelImpl.ENTITY_CACHE_ENABLED,
 			SubscriptionImpl.class, subscription.getPrimaryKey());
@@ -228,6 +230,7 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	 * @throws com.liferay.portal.NoSuchModelException if a subscription with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Subscription remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
@@ -281,11 +284,13 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	 * @return the subscription that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Subscription remove(Subscription subscription)
 		throws SystemException {
 		return super.remove(subscription);
 	}
 
+	@Override
 	protected Subscription removeImpl(Subscription subscription)
 		throws SystemException {
 		subscription = toUnwrappedModel(subscription);
@@ -322,6 +327,7 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 		return subscription;
 	}
 
+	@Override
 	public Subscription updateImpl(
 		com.liferay.portal.model.Subscription subscription, boolean merge)
 		throws SystemException {
@@ -414,6 +420,7 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	 * @throws com.liferay.portal.NoSuchModelException if a subscription with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Subscription findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
@@ -450,6 +457,7 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	 * @return the subscription, or <code>null</code> if a subscription with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Subscription fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());

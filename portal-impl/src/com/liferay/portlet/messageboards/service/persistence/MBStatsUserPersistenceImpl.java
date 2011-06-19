@@ -164,6 +164,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl<MBStatsUser>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(MBStatsUserImpl.class.getName());
@@ -181,6 +182,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl<MBStatsUser>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(MBStatsUser mbStatsUser) {
 		EntityCacheUtil.removeResult(MBStatsUserModelImpl.ENTITY_CACHE_ENABLED,
 			MBStatsUserImpl.class, mbStatsUser.getPrimaryKey());
@@ -215,6 +217,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl<MBStatsUser>
 	 * @throws com.liferay.portal.NoSuchModelException if a message boards stats user with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBStatsUser remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
@@ -267,11 +270,13 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl<MBStatsUser>
 	 * @return the message boards stats user that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBStatsUser remove(MBStatsUser mbStatsUser)
 		throws SystemException {
 		return super.remove(mbStatsUser);
 	}
 
+	@Override
 	protected MBStatsUser removeImpl(MBStatsUser mbStatsUser)
 		throws SystemException {
 		mbStatsUser = toUnwrappedModel(mbStatsUser);
@@ -306,6 +311,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl<MBStatsUser>
 		return mbStatsUser;
 	}
 
+	@Override
 	public MBStatsUser updateImpl(
 		com.liferay.portlet.messageboards.model.MBStatsUser mbStatsUser,
 		boolean merge) throws SystemException {
@@ -386,6 +392,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl<MBStatsUser>
 	 * @throws com.liferay.portal.NoSuchModelException if a message boards stats user with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBStatsUser findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
@@ -422,6 +429,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl<MBStatsUser>
 	 * @return the message boards stats user, or <code>null</code> if a message boards stats user with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBStatsUser fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());

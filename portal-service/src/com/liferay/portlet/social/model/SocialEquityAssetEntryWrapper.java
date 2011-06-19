@@ -242,6 +242,7 @@ public class SocialEquityAssetEntryWrapper implements SocialEquityAssetEntry {
 		_socialEquityAssetEntry.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new SocialEquityAssetEntryWrapper((SocialEquityAssetEntry)_socialEquityAssetEntry.clone());
 	}
@@ -251,6 +252,7 @@ public class SocialEquityAssetEntryWrapper implements SocialEquityAssetEntry {
 		return _socialEquityAssetEntry.compareTo(socialEquityAssetEntry);
 	}
 
+	@Override
 	public int hashCode() {
 		return _socialEquityAssetEntry.hashCode();
 	}
@@ -259,6 +261,7 @@ public class SocialEquityAssetEntryWrapper implements SocialEquityAssetEntry {
 		return new SocialEquityAssetEntryWrapper(_socialEquityAssetEntry.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _socialEquityAssetEntry.toString();
 	}

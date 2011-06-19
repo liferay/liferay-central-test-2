@@ -34,6 +34,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class AssetTagPropertyPersistenceTest extends BasePersistenceTestCase {
+	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -70,12 +71,19 @@ public class AssetTagPropertyPersistenceTest extends BasePersistenceTestCase {
 		AssetTagProperty newAssetTagProperty = _persistence.create(pk);
 
 		newAssetTagProperty.setCompanyId(nextLong());
+
 		newAssetTagProperty.setUserId(nextLong());
+
 		newAssetTagProperty.setUserName(randomString());
+
 		newAssetTagProperty.setCreateDate(nextDate());
+
 		newAssetTagProperty.setModifiedDate(nextDate());
+
 		newAssetTagProperty.setTagId(nextLong());
+
 		newAssetTagProperty.setKey(randomString());
+
 		newAssetTagProperty.setValue(randomString());
 
 		_persistence.update(newAssetTagProperty, false);
@@ -233,12 +241,19 @@ public class AssetTagPropertyPersistenceTest extends BasePersistenceTestCase {
 		AssetTagProperty assetTagProperty = _persistence.create(pk);
 
 		assetTagProperty.setCompanyId(nextLong());
+
 		assetTagProperty.setUserId(nextLong());
+
 		assetTagProperty.setUserName(randomString());
+
 		assetTagProperty.setCreateDate(nextDate());
+
 		assetTagProperty.setModifiedDate(nextDate());
+
 		assetTagProperty.setTagId(nextLong());
+
 		assetTagProperty.setKey(randomString());
+
 		assetTagProperty.setValue(randomString());
 
 		_persistence.update(assetTagProperty, false);

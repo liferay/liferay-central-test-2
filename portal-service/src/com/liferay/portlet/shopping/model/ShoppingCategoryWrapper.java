@@ -295,6 +295,7 @@ public class ShoppingCategoryWrapper implements ShoppingCategory {
 		_shoppingCategory.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new ShoppingCategoryWrapper((ShoppingCategory)_shoppingCategory.clone());
 	}
@@ -304,6 +305,7 @@ public class ShoppingCategoryWrapper implements ShoppingCategory {
 		return _shoppingCategory.compareTo(shoppingCategory);
 	}
 
+	@Override
 	public int hashCode() {
 		return _shoppingCategory.hashCode();
 	}
@@ -312,6 +314,7 @@ public class ShoppingCategoryWrapper implements ShoppingCategory {
 		return new ShoppingCategoryWrapper(_shoppingCategory.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _shoppingCategory.toString();
 	}

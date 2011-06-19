@@ -27,14 +27,17 @@ import com.liferay.portal.servlet.filters.cache.CacheUtil;
  */
 public class LayoutListener extends BaseModelListener<Layout> {
 
+	@Override
 	public void onAfterCreate(Layout layout) {
 		clearCache(layout);
 	}
 
+	@Override
 	public void onAfterRemove(Layout layout) {
 		clearCache(layout);
 	}
 
+	@Override
 	public void onBeforeRemove(Layout layout) throws ModelListenerException {
 		try {
 			if (!LayoutStagingUtil.isBranchingLayout(layout)) {
@@ -58,6 +61,7 @@ public class LayoutListener extends BaseModelListener<Layout> {
 		}
 	}
 
+	@Override
 	public void onAfterUpdate(Layout layout) {
 		clearCache(layout);
 	}

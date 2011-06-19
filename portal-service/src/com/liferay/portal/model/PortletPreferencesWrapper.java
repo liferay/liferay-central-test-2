@@ -203,6 +203,7 @@ public class PortletPreferencesWrapper implements PortletPreferences {
 		_portletPreferences.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new PortletPreferencesWrapper((PortletPreferences)_portletPreferences.clone());
 	}
@@ -212,6 +213,7 @@ public class PortletPreferencesWrapper implements PortletPreferences {
 		return _portletPreferences.compareTo(portletPreferences);
 	}
 
+	@Override
 	public int hashCode() {
 		return _portletPreferences.hashCode();
 	}
@@ -220,6 +222,7 @@ public class PortletPreferencesWrapper implements PortletPreferences {
 		return new PortletPreferencesWrapper(_portletPreferences.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _portletPreferences.toString();
 	}

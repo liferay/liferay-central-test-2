@@ -321,6 +321,7 @@ public class SocialRequestModelImpl extends BaseModelImpl<SocialRequest>
 		_status = status;
 	}
 
+	@Override
 	public SocialRequest toEscapedModel() {
 		if (isEscapedModel()) {
 			return (SocialRequest)this;
@@ -331,6 +332,7 @@ public class SocialRequestModelImpl extends BaseModelImpl<SocialRequest>
 		}
 	}
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
@@ -340,10 +342,12 @@ public class SocialRequestModelImpl extends BaseModelImpl<SocialRequest>
 		return _expandoBridge;
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		getExpandoBridge().setAttributes(serviceContext);
 	}
 
+	@Override
 	public Object clone() {
 		SocialRequestImpl socialRequestImpl = new SocialRequestImpl();
 
@@ -388,6 +392,7 @@ public class SocialRequestModelImpl extends BaseModelImpl<SocialRequest>
 		return 0;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -412,10 +417,12 @@ public class SocialRequestModelImpl extends BaseModelImpl<SocialRequest>
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		SocialRequestModelImpl socialRequestModelImpl = this;
 
@@ -446,6 +453,7 @@ public class SocialRequestModelImpl extends BaseModelImpl<SocialRequest>
 		socialRequestModelImpl._setOriginalReceiverUserId = false;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(27);
 

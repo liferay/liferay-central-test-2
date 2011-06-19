@@ -54,6 +54,7 @@ public class PortletLogic extends RuntimeLogic {
 		_renderResponse = renderResponse;
 	}
 
+	@Override
 	public String processContent(Map<String, String> attributes)
 		throws Exception {
 

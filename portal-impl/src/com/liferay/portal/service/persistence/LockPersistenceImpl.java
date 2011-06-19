@@ -147,6 +147,7 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(LockImpl.class.getName());
@@ -164,6 +165,7 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(Lock lock) {
 		EntityCacheUtil.removeResult(LockModelImpl.ENTITY_CACHE_ENABLED,
 			LockImpl.class, lock.getPrimaryKey());
@@ -199,6 +201,7 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 	 * @throws com.liferay.portal.NoSuchModelException if a lock with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Lock remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
@@ -249,10 +252,12 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 	 * @return the lock that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Lock remove(Lock lock) throws SystemException {
 		return super.remove(lock);
 	}
 
+	@Override
 	protected Lock removeImpl(Lock lock) throws SystemException {
 		lock = toUnwrappedModel(lock);
 
@@ -283,6 +288,7 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 		return lock;
 	}
 
+	@Override
 	public Lock updateImpl(com.liferay.portal.model.Lock lock, boolean merge)
 		throws SystemException {
 		lock = toUnwrappedModel(lock);
@@ -374,6 +380,7 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 	 * @throws com.liferay.portal.NoSuchModelException if a lock with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Lock findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
@@ -410,6 +417,7 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 	 * @return the lock, or <code>null</code> if a lock with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Lock fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());

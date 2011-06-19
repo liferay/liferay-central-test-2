@@ -45,6 +45,7 @@ import java.util.Map;
  */
 public class AddDefaultLayoutPrototypesAction extends SimpleAction {
 
+	@Override
 	public void run(String[] ids) throws ActionException {
 		try {
 			doRun(GetterUtil.getLong(ids[0]));

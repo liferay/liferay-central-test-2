@@ -31,6 +31,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class BrowserTrackerPersistenceTest extends BasePersistenceTestCase {
+	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -67,6 +68,7 @@ public class BrowserTrackerPersistenceTest extends BasePersistenceTestCase {
 		BrowserTracker newBrowserTracker = _persistence.create(pk);
 
 		newBrowserTracker.setUserId(nextLong());
+
 		newBrowserTracker.setBrowserKey(nextLong());
 
 		_persistence.update(newBrowserTracker, false);
@@ -208,6 +210,7 @@ public class BrowserTrackerPersistenceTest extends BasePersistenceTestCase {
 		BrowserTracker browserTracker = _persistence.create(pk);
 
 		browserTracker.setUserId(nextLong());
+
 		browserTracker.setBrowserKey(nextLong());
 
 		_persistence.update(browserTracker, false);

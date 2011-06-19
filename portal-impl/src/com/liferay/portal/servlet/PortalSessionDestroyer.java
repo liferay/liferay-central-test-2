@@ -48,9 +48,11 @@ public class PortalSessionDestroyer extends BasePortalLifecycle {
 		registerPortalLifecycle(METHOD_INIT);
 	}
 
+	@Override
 	protected void doPortalDestroy() {
 	}
 
+	@Override
 	protected void doPortalInit() {
 		if (PropsValues.SESSION_DISABLED) {
 			return;

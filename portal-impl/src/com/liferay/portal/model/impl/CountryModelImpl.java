@@ -263,6 +263,7 @@ public class CountryModelImpl extends BaseModelImpl<Country>
 		_active = active;
 	}
 
+	@Override
 	public Country toEscapedModel() {
 		if (isEscapedModel()) {
 			return (Country)this;
@@ -273,6 +274,7 @@ public class CountryModelImpl extends BaseModelImpl<Country>
 		}
 	}
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(0,
@@ -282,10 +284,12 @@ public class CountryModelImpl extends BaseModelImpl<Country>
 		return _expandoBridge;
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		getExpandoBridge().setAttributes(serviceContext);
 	}
 
+	@Override
 	public Object clone() {
 		CountryImpl countryImpl = new CountryImpl();
 
@@ -314,6 +318,7 @@ public class CountryModelImpl extends BaseModelImpl<Country>
 		return 0;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -338,10 +343,12 @@ public class CountryModelImpl extends BaseModelImpl<Country>
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		CountryModelImpl countryModelImpl = this;
 
@@ -352,6 +359,7 @@ public class CountryModelImpl extends BaseModelImpl<Country>
 		countryModelImpl._originalA3 = countryModelImpl._a3;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(15);
 

@@ -25,6 +25,7 @@ import org.apache.portals.bridges.struts.PortletServlet;
  */
 public class LiferayPortletServlet extends PortletServlet {
 
+	@Override
 	public ServletContext getServletContext() {
 		ServletContext servletContext = super.getServletContext();
 

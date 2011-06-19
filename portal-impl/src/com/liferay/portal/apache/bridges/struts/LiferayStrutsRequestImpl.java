@@ -54,6 +54,7 @@ public class LiferayStrutsRequestImpl extends HttpServletRequestWrapper {
 		}
 	}
 
+	@Override
 	public Object getAttribute(String name) {
 		Object value = null;
 
@@ -67,6 +68,7 @@ public class LiferayStrutsRequestImpl extends HttpServletRequestWrapper {
 		return value;
 	}
 
+	@Override
 	public void setAttribute(String name, Object value) {
 		if (name.startsWith(StrutsUtil.STRUTS_PACKAGE)) {
 			_strutsAttributes.put(name, value);
@@ -76,6 +78,7 @@ public class LiferayStrutsRequestImpl extends HttpServletRequestWrapper {
 		}
 	}
 
+	@Override
 	public Enumeration<String> getAttributeNames() {
 		List<String> attributeNames = new Vector<String>();
 
@@ -94,6 +97,7 @@ public class LiferayStrutsRequestImpl extends HttpServletRequestWrapper {
 		return Collections.enumeration(attributeNames);
 	}
 
+	@Override
 	public ServletInputStream getInputStream() throws IOException {
 		if (_bytes == null) {
 			InputStream is = super.getInputStream();

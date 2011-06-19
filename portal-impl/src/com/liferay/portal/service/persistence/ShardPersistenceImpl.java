@@ -132,6 +132,7 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(ShardImpl.class.getName());
@@ -149,6 +150,7 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(Shard shard) {
 		EntityCacheUtil.removeResult(ShardModelImpl.ENTITY_CACHE_ENABLED,
 			ShardImpl.class, shard.getPrimaryKey());
@@ -186,6 +188,7 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 	 * @throws com.liferay.portal.NoSuchModelException if a shard with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Shard remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
@@ -238,10 +241,12 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 	 * @return the shard that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Shard remove(Shard shard) throws SystemException {
 		return super.remove(shard);
 	}
 
+	@Override
 	protected Shard removeImpl(Shard shard) throws SystemException {
 		shard = toUnwrappedModel(shard);
 
@@ -278,6 +283,7 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 		return shard;
 	}
 
+	@Override
 	public Shard updateImpl(com.liferay.portal.model.Shard shard, boolean merge)
 		throws SystemException {
 		shard = toUnwrappedModel(shard);
@@ -370,6 +376,7 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 	 * @throws com.liferay.portal.NoSuchModelException if a shard with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Shard findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
@@ -406,6 +413,7 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 	 * @return the shard, or <code>null</code> if a shard with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Shard fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());

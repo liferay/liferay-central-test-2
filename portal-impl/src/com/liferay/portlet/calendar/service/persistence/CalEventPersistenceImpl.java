@@ -233,6 +233,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(CalEventImpl.class.getName());
@@ -250,6 +251,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(CalEvent calEvent) {
 		EntityCacheUtil.removeResult(CalEventModelImpl.ENTITY_CACHE_ENABLED,
 			CalEventImpl.class, calEvent.getPrimaryKey());
@@ -286,6 +288,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 * @throws com.liferay.portal.NoSuchModelException if a cal event with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public CalEvent remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
@@ -338,10 +341,12 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 * @return the cal event that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public CalEvent remove(CalEvent calEvent) throws SystemException {
 		return super.remove(calEvent);
 	}
 
+	@Override
 	protected CalEvent removeImpl(CalEvent calEvent) throws SystemException {
 		calEvent = toUnwrappedModel(calEvent);
 
@@ -375,6 +380,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 		return calEvent;
 	}
 
+	@Override
 	public CalEvent updateImpl(
 		com.liferay.portlet.calendar.model.CalEvent calEvent, boolean merge)
 		throws SystemException {
@@ -511,6 +517,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 * @throws com.liferay.portal.NoSuchModelException if a cal event with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public CalEvent findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
@@ -547,6 +554,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 * @return the cal event, or <code>null</code> if a cal event with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public CalEvent fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());

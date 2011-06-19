@@ -47,6 +47,7 @@ public class LiferayCacheEventListenerFactory
 		}
 	}
 
+	@Override
 	public CacheEventListener createCacheEventListener(Properties properties) {
 		return _cacheEventListenerFactory.createCacheEventListener(properties);
 	}

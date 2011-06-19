@@ -26,6 +26,7 @@ import java.util.List;
  */
 public class VerifyImageGallery extends VerifyProcess {
 
+	@Override
 	protected void doVerify() throws Exception {
 		List<IGImage> images = IGImageLocalServiceUtil.getNoAssetImages();
 

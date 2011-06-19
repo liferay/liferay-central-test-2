@@ -326,6 +326,7 @@ public class BooleanQueryImpl extends BaseBooleanQueryImpl {
 		return Collections.unmodifiableList(_clauses);
 	}
 
+	@Override
 	public Object getWrappedQuery() {
 		return this;
 	}

@@ -79,6 +79,7 @@ public class PortletColumnLogic extends RuntimeLogic {
 		}
 	}
 
+	@Override
 	public String processContent(Map<String, String> attributes)
 		throws Exception {
 

@@ -212,6 +212,7 @@ public class PluginSettingWrapper implements PluginSetting {
 		_pluginSetting.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new PluginSettingWrapper((PluginSetting)_pluginSetting.clone());
 	}
@@ -220,6 +221,7 @@ public class PluginSettingWrapper implements PluginSetting {
 		return _pluginSetting.compareTo(pluginSetting);
 	}
 
+	@Override
 	public int hashCode() {
 		return _pluginSetting.hashCode();
 	}
@@ -228,6 +230,7 @@ public class PluginSettingWrapper implements PluginSetting {
 		return new PluginSettingWrapper(_pluginSetting.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _pluginSetting.toString();
 	}

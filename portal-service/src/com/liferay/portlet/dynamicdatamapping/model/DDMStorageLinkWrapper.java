@@ -194,6 +194,7 @@ public class DDMStorageLinkWrapper implements DDMStorageLink {
 		_ddmStorageLink.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new DDMStorageLinkWrapper((DDMStorageLink)_ddmStorageLink.clone());
 	}
@@ -203,6 +204,7 @@ public class DDMStorageLinkWrapper implements DDMStorageLink {
 		return _ddmStorageLink.compareTo(ddmStorageLink);
 	}
 
+	@Override
 	public int hashCode() {
 		return _ddmStorageLink.hashCode();
 	}
@@ -211,6 +213,7 @@ public class DDMStorageLinkWrapper implements DDMStorageLink {
 		return new DDMStorageLinkWrapper(_ddmStorageLink.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _ddmStorageLink.toString();
 	}

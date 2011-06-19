@@ -202,6 +202,7 @@ public class RegionModelImpl extends BaseModelImpl<Region>
 		_active = active;
 	}
 
+	@Override
 	public Region toEscapedModel() {
 		if (isEscapedModel()) {
 			return (Region)this;
@@ -212,6 +213,7 @@ public class RegionModelImpl extends BaseModelImpl<Region>
 		}
 	}
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(0,
@@ -221,10 +223,12 @@ public class RegionModelImpl extends BaseModelImpl<Region>
 		return _expandoBridge;
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		getExpandoBridge().setAttributes(serviceContext);
 	}
 
+	@Override
 	public Object clone() {
 		RegionImpl regionImpl = new RegionImpl();
 
@@ -251,6 +255,7 @@ public class RegionModelImpl extends BaseModelImpl<Region>
 		return 0;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -275,13 +280,16 @@ public class RegionModelImpl extends BaseModelImpl<Region>
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(11);
 

@@ -235,16 +235,16 @@
 	<bean id="com.liferay.portlet.documentlibrary.service.DLContentLocalService" class="com.liferay.portlet.documentlibrary.service.impl.DLContentLocalServiceImpl" />
 	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLContentPersistence" class="com.liferay.portlet.documentlibrary.service.persistence.DLContentPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLContentFinder" class="com.liferay.portlet.documentlibrary.service.persistence.DLContentFinderImpl" parent="basePersistence" />
-	<bean id="com.liferay.portlet.documentlibrary.service.DLDocumentMetadataSetLocalService" class="com.liferay.portlet.documentlibrary.service.impl.DLDocumentMetadataSetLocalServiceImpl" />
-	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLDocumentMetadataSetPersistence" class="com.liferay.portlet.documentlibrary.service.persistence.DLDocumentMetadataSetPersistenceImpl" parent="basePersistence" />
-	<bean id="com.liferay.portlet.documentlibrary.service.DLDocumentTypeLocalService" class="com.liferay.portlet.documentlibrary.service.impl.DLDocumentTypeLocalServiceImpl" />
-	<bean id="com.liferay.portlet.documentlibrary.service.DLDocumentTypeService" class="com.liferay.portlet.documentlibrary.service.impl.DLDocumentTypeServiceImpl" />
-	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLDocumentTypePersistence" class="com.liferay.portlet.documentlibrary.service.persistence.DLDocumentTypePersistenceImpl" parent="basePersistence" />
-	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLDocumentTypeFinder" class="com.liferay.portlet.documentlibrary.service.persistence.DLDocumentTypeFinderImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.documentlibrary.service.DLFileEntryLocalService" class="com.liferay.portlet.documentlibrary.service.impl.DLFileEntryLocalServiceImpl" />
 	<bean id="com.liferay.portlet.documentlibrary.service.DLFileEntryService" class="com.liferay.portlet.documentlibrary.service.impl.DLFileEntryServiceImpl" />
 	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPersistence" class="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder" class="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinderImpl" parent="basePersistence" />
+	<bean id="com.liferay.portlet.documentlibrary.service.DLFileEntryMetadataLocalService" class="com.liferay.portlet.documentlibrary.service.impl.DLFileEntryMetadataLocalServiceImpl" />
+	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryMetadataPersistence" class="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryMetadataPersistenceImpl" parent="basePersistence" />
+	<bean id="com.liferay.portlet.documentlibrary.service.DLFileEntryTypeLocalService" class="com.liferay.portlet.documentlibrary.service.impl.DLFileEntryTypeLocalServiceImpl" />
+	<bean id="com.liferay.portlet.documentlibrary.service.DLFileEntryTypeService" class="com.liferay.portlet.documentlibrary.service.impl.DLFileEntryTypeServiceImpl" />
+	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryTypePersistence" class="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryTypePersistenceImpl" parent="basePersistence" />
+	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryTypeFinder" class="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryTypeFinderImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.documentlibrary.service.DLFileRankLocalService" class="com.liferay.portlet.documentlibrary.service.impl.DLFileRankLocalServiceImpl" />
 	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPersistence" class="com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFileRankFinder" class="com.liferay.portlet.documentlibrary.service.persistence.DLFileRankFinderImpl" parent="basePersistence" />

@@ -19,6 +19,7 @@ package com.liferay.portal.verify;
  */
 public class VerifyProcessSuite extends VerifyProcess {
 
+	@Override
 	protected void doVerify() throws Exception {
 		verify(new VerifyProperties());
 

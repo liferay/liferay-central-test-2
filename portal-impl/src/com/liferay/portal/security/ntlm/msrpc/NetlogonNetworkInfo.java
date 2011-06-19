@@ -32,9 +32,11 @@ public class NetlogonNetworkInfo extends NdrObject {
 		_lmChallengeResponse = lmChallengeResponse;
 	}
 
+	@Override
 	public void decode(NdrBuffer ndrBuffer) {
 	}
 
+	@Override
 	public void encode(NdrBuffer ndrBuffer) {
 		ndrBuffer.align(4);
 

@@ -81,18 +81,18 @@ public class PasswordPolicySearch extends SearchContainer<PasswordPolicy> {
 				Validator.isNotNull(orderByType)) {
 
 				preferences.setValue(
-					PortletKeys.ENTERPRISE_ADMIN,
+					PortletKeys.PASSWORD_POLICIES_ADMIN,
 					"password-policies-order-by-col", orderByCol);
 				preferences.setValue(
-					PortletKeys.ENTERPRISE_ADMIN,
+					PortletKeys.PASSWORD_POLICIES_ADMIN,
 					"password-policies-order-by-type", orderByType);
 			}
 			else {
 				orderByCol = preferences.getValue(
-					PortletKeys.ENTERPRISE_ADMIN,
+					PortletKeys.PASSWORD_POLICIES_ADMIN,
 					"password-policies-order-by-col", "name");
 				orderByType = preferences.getValue(
-					PortletKeys.ENTERPRISE_ADMIN,
+					PortletKeys.PASSWORD_POLICIES_ADMIN,
 					"password-policies-order-by-type", "asc");
 			}
 

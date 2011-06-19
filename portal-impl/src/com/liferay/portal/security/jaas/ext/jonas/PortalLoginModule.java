@@ -34,6 +34,7 @@ import javax.security.auth.login.LoginException;
  */
 public class PortalLoginModule extends BasicLoginModule {
 
+	@Override
 	public boolean commit() throws LoginException {
 		boolean commitValue = super.commit();
 
@@ -69,6 +70,7 @@ public class PortalLoginModule extends BasicLoginModule {
 		return commitValue;
 	}
 
+	@Override
 	protected Principal getPortalPrincipal(String name) throws LoginException {
 		try {
 			return (Principal)InstanceFactory.newInstance(

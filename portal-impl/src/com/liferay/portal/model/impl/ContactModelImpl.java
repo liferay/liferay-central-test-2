@@ -571,6 +571,7 @@ public class ContactModelImpl extends BaseModelImpl<Contact>
 		_hoursOfOperation = hoursOfOperation;
 	}
 
+	@Override
 	public Contact toEscapedModel() {
 		if (isEscapedModel()) {
 			return (Contact)this;
@@ -581,6 +582,7 @@ public class ContactModelImpl extends BaseModelImpl<Contact>
 		}
 	}
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
@@ -590,10 +592,12 @@ public class ContactModelImpl extends BaseModelImpl<Contact>
 		return _expandoBridge;
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		getExpandoBridge().setAttributes(serviceContext);
 	}
 
+	@Override
 	public Object clone() {
 		ContactImpl contactImpl = new ContactImpl();
 
@@ -647,6 +651,7 @@ public class ContactModelImpl extends BaseModelImpl<Contact>
 		}
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -671,13 +676,16 @@ public class ContactModelImpl extends BaseModelImpl<Contact>
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(61);
 

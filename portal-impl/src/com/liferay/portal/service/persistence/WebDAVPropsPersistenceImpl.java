@@ -123,6 +123,7 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl<WebDAVProps>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(WebDAVPropsImpl.class.getName());
@@ -140,6 +141,7 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl<WebDAVProps>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(WebDAVProps webDAVProps) {
 		EntityCacheUtil.removeResult(WebDAVPropsModelImpl.ENTITY_CACHE_ENABLED,
 			WebDAVPropsImpl.class, webDAVProps.getPrimaryKey());
@@ -174,6 +176,7 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl<WebDAVProps>
 	 * @throws com.liferay.portal.NoSuchModelException if a web d a v props with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WebDAVProps remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
@@ -226,11 +229,13 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl<WebDAVProps>
 	 * @return the web d a v props that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WebDAVProps remove(WebDAVProps webDAVProps)
 		throws SystemException {
 		return super.remove(webDAVProps);
 	}
 
+	@Override
 	protected WebDAVProps removeImpl(WebDAVProps webDAVProps)
 		throws SystemException {
 		webDAVProps = toUnwrappedModel(webDAVProps);
@@ -265,6 +270,7 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl<WebDAVProps>
 		return webDAVProps;
 	}
 
+	@Override
 	public WebDAVProps updateImpl(
 		com.liferay.portal.model.WebDAVProps webDAVProps, boolean merge)
 		throws SystemException {
@@ -347,6 +353,7 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl<WebDAVProps>
 	 * @throws com.liferay.portal.NoSuchModelException if a web d a v props with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WebDAVProps findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
@@ -383,6 +390,7 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl<WebDAVProps>
 	 * @return the web d a v props, or <code>null</code> if a web d a v props with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public WebDAVProps fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());

@@ -27,6 +27,7 @@ import javax.servlet.jsp.tagext.VariableInfo;
  */
 public class SearchContainerResultsTei extends TagExtraInfo {
 
+	@Override
 	public VariableInfo[] getVariableInfo(TagData tagData) {
 		String resultsVar = tagData.getAttributeString("resultsVar");
 

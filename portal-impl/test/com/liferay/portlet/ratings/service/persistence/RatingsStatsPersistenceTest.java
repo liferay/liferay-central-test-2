@@ -32,6 +32,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class RatingsStatsPersistenceTest extends BasePersistenceTestCase {
+	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -68,9 +69,13 @@ public class RatingsStatsPersistenceTest extends BasePersistenceTestCase {
 		RatingsStats newRatingsStats = _persistence.create(pk);
 
 		newRatingsStats.setClassNameId(nextLong());
+
 		newRatingsStats.setClassPK(nextLong());
+
 		newRatingsStats.setTotalEntries(nextInt());
+
 		newRatingsStats.setTotalScore(nextDouble());
+
 		newRatingsStats.setAverageScore(nextDouble());
 
 		_persistence.update(newRatingsStats, false);
@@ -217,9 +222,13 @@ public class RatingsStatsPersistenceTest extends BasePersistenceTestCase {
 		RatingsStats ratingsStats = _persistence.create(pk);
 
 		ratingsStats.setClassNameId(nextLong());
+
 		ratingsStats.setClassPK(nextLong());
+
 		ratingsStats.setTotalEntries(nextInt());
+
 		ratingsStats.setTotalScore(nextDouble());
+
 		ratingsStats.setAverageScore(nextDouble());
 
 		_persistence.update(ratingsStats, false);

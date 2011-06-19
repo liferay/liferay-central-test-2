@@ -167,6 +167,7 @@ public class ResourceActionWrapper implements ResourceAction {
 		_resourceAction.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new ResourceActionWrapper((ResourceAction)_resourceAction.clone());
 	}
@@ -175,6 +176,7 @@ public class ResourceActionWrapper implements ResourceAction {
 		return _resourceAction.compareTo(resourceAction);
 	}
 
+	@Override
 	public int hashCode() {
 		return _resourceAction.hashCode();
 	}
@@ -183,6 +185,7 @@ public class ResourceActionWrapper implements ResourceAction {
 		return new ResourceActionWrapper(_resourceAction.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _resourceAction.toString();
 	}

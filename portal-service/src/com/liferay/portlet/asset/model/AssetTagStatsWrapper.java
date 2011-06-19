@@ -176,6 +176,7 @@ public class AssetTagStatsWrapper implements AssetTagStats {
 		_assetTagStats.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new AssetTagStatsWrapper((AssetTagStats)_assetTagStats.clone());
 	}
@@ -185,6 +186,7 @@ public class AssetTagStatsWrapper implements AssetTagStats {
 		return _assetTagStats.compareTo(assetTagStats);
 	}
 
+	@Override
 	public int hashCode() {
 		return _assetTagStats.hashCode();
 	}
@@ -193,6 +195,7 @@ public class AssetTagStatsWrapper implements AssetTagStats {
 		return new AssetTagStatsWrapper(_assetTagStats.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _assetTagStats.toString();
 	}

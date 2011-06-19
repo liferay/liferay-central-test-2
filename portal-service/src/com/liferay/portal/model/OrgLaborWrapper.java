@@ -401,6 +401,7 @@ public class OrgLaborWrapper implements OrgLabor {
 		_orgLabor.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new OrgLaborWrapper((OrgLabor)_orgLabor.clone());
 	}
@@ -409,6 +410,7 @@ public class OrgLaborWrapper implements OrgLabor {
 		return _orgLabor.compareTo(orgLabor);
 	}
 
+	@Override
 	public int hashCode() {
 		return _orgLabor.hashCode();
 	}
@@ -417,6 +419,7 @@ public class OrgLaborWrapper implements OrgLabor {
 		return new OrgLaborWrapper(_orgLabor.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _orgLabor.toString();
 	}

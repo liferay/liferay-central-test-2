@@ -31,6 +31,7 @@ public class MonitoringMessageListener extends BaseMessageListener {
 		_dataSampleProcessor = dataSampleProcessor;
 	}
 
+	@Override
 	protected void doReceive(Message message) throws Exception {
 		DataSample dataSample = (DataSample)message.getPayload();
 

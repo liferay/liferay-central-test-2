@@ -59,6 +59,7 @@ public class LimitedInputStream extends InputStream {
 		}
 	}
 
+	@Override
 	public int available() throws IOException {
 		int available = _inputStream.available();
 
@@ -72,17 +73,21 @@ public class LimitedInputStream extends InputStream {
 		}
 	}
 
+	@Override
 	public void close() throws IOException {
 		_inputStream.close();
 	}
 
+	@Override
 	public void mark(int readLimit) {
 	}
 
+	@Override
 	public boolean markSupported() {
 		return false;
 	}
 
+	@Override
 	public int read() throws IOException {
 		if (_read >= _length) {
 			return -1;
@@ -97,6 +102,7 @@ public class LimitedInputStream extends InputStream {
 		return read;
 	}
 
+	@Override
 	public int read(byte[] bytes) throws IOException {
 		if (_read >= _length) {
 			return -1;
@@ -116,6 +122,7 @@ public class LimitedInputStream extends InputStream {
 		return read;
 	}
 
+	@Override
 	public int read(byte[] bytes, int offset, int length)
 		throws IOException {
 
@@ -137,9 +144,11 @@ public class LimitedInputStream extends InputStream {
 		return read;
 	}
 
+	@Override
 	public void reset() {
 	}
 
+	@Override
 	public long skip(long skip) throws IOException {
 		long allowed = _length - _read;
 

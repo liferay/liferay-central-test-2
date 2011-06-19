@@ -31,10 +31,12 @@ public class Base64InputStream extends InputStream {
 		_unitBuffer = new byte[3];
 	}
 
+	@Override
 	public int available() throws IOException {
 		return ((_inputStream.available() * 3) / 4) + _avaiableBytes;
 	}
 
+	@Override
 	public int read() throws IOException {
 		if (_avaiableBytes == 0) {
 			_avaiableBytes = decodeUnit(_unitBuffer, 0);
@@ -51,6 +53,7 @@ public class Base64InputStream extends InputStream {
 		return _unitBuffer[_unitBufferIndex++] & 0xff;
 	}
 
+	@Override
 	public int read(byte[] buffer, int offset, int length) throws IOException {
 		if ((length <= 0) || (offset < 0)) {
 			return -1;
@@ -105,6 +108,7 @@ public class Base64InputStream extends InputStream {
 		return initialLength - length;
 	}
 
+	@Override
 	public long skip(long skip) throws IOException {
 		long initialSkip = skip;
 

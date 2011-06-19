@@ -65,6 +65,7 @@ public class EditQuestionAction extends PortletAction {
 
 	public static final String CHOICE_NAME_PREFIX = "choiceName";
 
+	@Override
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
 			ActionRequest actionRequest, ActionResponse actionResponse)
@@ -110,6 +111,7 @@ public class EditQuestionAction extends PortletAction {
 		}
 	}
 
+	@Override
 	public ActionForward render(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
 			RenderRequest renderRequest, RenderResponse renderResponse)

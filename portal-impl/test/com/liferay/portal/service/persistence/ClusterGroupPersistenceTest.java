@@ -29,6 +29,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class ClusterGroupPersistenceTest extends BasePersistenceTestCase {
+	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -65,7 +66,9 @@ public class ClusterGroupPersistenceTest extends BasePersistenceTestCase {
 		ClusterGroup newClusterGroup = _persistence.create(pk);
 
 		newClusterGroup.setName(randomString());
+
 		newClusterGroup.setClusterNodeIds(randomString());
+
 		newClusterGroup.setWholeCluster(randomBoolean());
 
 		_persistence.update(newClusterGroup, false);
@@ -192,7 +195,9 @@ public class ClusterGroupPersistenceTest extends BasePersistenceTestCase {
 		ClusterGroup clusterGroup = _persistence.create(pk);
 
 		clusterGroup.setName(randomString());
+
 		clusterGroup.setClusterNodeIds(randomString());
+
 		clusterGroup.setWholeCluster(randomBoolean());
 
 		_persistence.update(clusterGroup, false);

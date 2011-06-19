@@ -29,6 +29,7 @@ import java.sql.ResultSet;
  */
 public class UpgradeLayout extends UpgradeProcess {
 
+	@Override
 	protected void doUpgrade() throws Exception {
 		String languageId = LocaleUtil.toLanguageId(LocaleUtil.getDefault());
 

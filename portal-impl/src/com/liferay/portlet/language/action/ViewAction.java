@@ -54,6 +54,7 @@ import org.apache.struts.action.ActionMapping;
  */
 public class ViewAction extends PortletAction {
 
+	@Override
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
 			ActionRequest actionRequest, ActionResponse actionResponse)
@@ -134,6 +135,7 @@ public class ViewAction extends PortletAction {
 		actionResponse.sendRedirect(redirect);
 	}
 
+	@Override
 	public ActionForward render(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
 			RenderRequest renderRequest, RenderResponse renderResponse)
@@ -142,6 +144,7 @@ public class ViewAction extends PortletAction {
 		return mapping.findForward("portlet.language.view");
 	}
 
+	@Override
 	protected boolean isCheckMethodOnProcessAction() {
 		return _CHECK_METHOD_ON_PROCESS_ACTION;
 	}

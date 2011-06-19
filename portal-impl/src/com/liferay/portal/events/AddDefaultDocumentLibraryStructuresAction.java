@@ -33,10 +33,10 @@ import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portlet.documentlibrary.model.DLDocumentMetadataSet;
-import com.liferay.portlet.documentlibrary.model.DLDocumentType;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
-import com.liferay.portlet.documentlibrary.service.DLDocumentTypeLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.model.DLFileEntryMetadata;
+import com.liferay.portlet.documentlibrary.model.DLFileEntryType;
+import com.liferay.portlet.documentlibrary.service.DLFileEntryTypeLocalServiceUtil;
 import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
 import com.liferay.portlet.dynamicdatamapping.service.DDMStructureLocalServiceUtil;
 import com.liferay.util.ContentUtil;
@@ -56,6 +56,7 @@ import java.util.Map;
  */
 public class AddDefaultDocumentLibraryStructuresAction extends SimpleAction {
 
+	@Override
 	public void run(String[] ids) throws ActionException {
 		try {
 			doRun(GetterUtil.getLong(ids[0]));
@@ -109,15 +110,15 @@ public class AddDefaultDocumentLibraryStructuresAction extends SimpleAction {
 
 			DDMStructureLocalServiceUtil.addStructure(
 				userId, groupId,
-				PortalUtil.getClassNameId(DLDocumentMetadataSet.class),
+				PortalUtil.getClassNameId(DLFileEntryMetadata.class),
 				ddmStructureKey, nameMap, descriptionMap, xsd, "xml",
 				serviceContext);
 		}
 	}
 
-	protected void addDLDocumentType(
-			long userId, long groupId, String dlDocumentTypeName,
-			String dlDocumentTypeDescription, String ddmStructureName,
+	protected void addDLFileEntryType(
+			long userId, long groupId, String dlFileEntryTypeName,
+			String dlFileEntryTypeDescription, String ddmStructureName,
 			ServiceContext serviceContext)
 		throws Exception {
 
@@ -132,26 +133,26 @@ public class AddDefaultDocumentLibraryStructuresAction extends SimpleAction {
 
 		long[] ddmStructureId = new long[] {ddmStructure.getStructureId()};
 
-		List<DLDocumentType> dlDocumentTypes =
-			DLDocumentTypeLocalServiceUtil.getDocumentTypes(
-				groupId, dlDocumentTypeName, dlDocumentTypeDescription);
+		List<DLFileEntryType> dlFileEntryTypes =
+			DLFileEntryTypeLocalServiceUtil.getFileEntryTypes(
+				groupId, dlFileEntryTypeName, dlFileEntryTypeDescription);
 
-		if (dlDocumentTypes.isEmpty()) {
-			DLDocumentTypeLocalServiceUtil.addDocumentType(
-				userId, groupId, dlDocumentTypeName, dlDocumentTypeDescription,
-				ddmStructureId,	serviceContext);
+		if (dlFileEntryTypes.isEmpty()) {
+			DLFileEntryTypeLocalServiceUtil.addFileEntryType(
+				userId, groupId, dlFileEntryTypeName,
+				dlFileEntryTypeDescription, ddmStructureId,	serviceContext);
 		}
 	}
 
-	protected void addDLDocumentTypes(
+	protected void addDLFileEntryTypes(
 			long userId, long groupId, ServiceContext serviceContext)
 		throws Exception {
 
-		addDLDocumentType(
+		addDLFileEntryType(
 			userId, groupId, "Image", "Image Document Type",
 			"Default Image's Metadata Set", serviceContext);
 
-		addDLDocumentType(
+		addDLFileEntryType(
 			userId, groupId, "Video", "Video Document Type",
 			"Default Videos's Metadata Set", serviceContext);
 	}
@@ -273,7 +274,7 @@ public class AddDefaultDocumentLibraryStructuresAction extends SimpleAction {
 
 		addDDMStructures(
 			defaultUserId, group.getGroupId(), serviceContext);
-		addDLDocumentTypes(defaultUserId, group.getGroupId(), serviceContext);
+		addDLFileEntryTypes(defaultUserId, group.getGroupId(), serviceContext);
 		addDLRawMetadataStructures(
 			defaultUserId, group.getGroupId(), serviceContext);
 	}

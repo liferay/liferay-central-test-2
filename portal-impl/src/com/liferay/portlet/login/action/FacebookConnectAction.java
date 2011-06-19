@@ -54,6 +54,7 @@ import org.apache.struts.action.ActionMapping;
  */
 public class FacebookConnectAction extends PortletAction {
 
+	@Override
 	public ActionForward render(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
 			RenderRequest renderRequest, RenderResponse renderResponse)
@@ -69,6 +70,7 @@ public class FacebookConnectAction extends PortletAction {
 		return mapping.findForward("portlet.login.facebook_login");
 	}
 
+	@Override
 	public ActionForward strutsExecute(
 			ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response)

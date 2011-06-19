@@ -16,8 +16,6 @@ package com.liferay.portlet.documentlibrary.service.base;
 
 import com.liferay.counter.service.CounterLocalService;
 
-import com.liferay.documentlibrary.service.DLLocalService;
-
 import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.bean.IdentifiableBean;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
@@ -39,18 +37,30 @@ import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.WebDAVPropsPersistence;
 import com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence;
 
+import com.liferay.portlet.asset.service.AssetCategoryLocalService;
+import com.liferay.portlet.asset.service.AssetCategoryService;
+import com.liferay.portlet.asset.service.AssetEntryLocalService;
+import com.liferay.portlet.asset.service.AssetEntryService;
 import com.liferay.portlet.asset.service.AssetLinkLocalService;
+import com.liferay.portlet.asset.service.AssetTagLocalService;
+import com.liferay.portlet.asset.service.AssetTagService;
+import com.liferay.portlet.asset.service.persistence.AssetCategoryFinder;
+import com.liferay.portlet.asset.service.persistence.AssetCategoryPersistence;
+import com.liferay.portlet.asset.service.persistence.AssetEntryFinder;
+import com.liferay.portlet.asset.service.persistence.AssetEntryPersistence;
 import com.liferay.portlet.asset.service.persistence.AssetLinkPersistence;
+import com.liferay.portlet.asset.service.persistence.AssetTagFinder;
+import com.liferay.portlet.asset.service.persistence.AssetTagPersistence;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.service.DLAppHelperLocalService;
 import com.liferay.portlet.documentlibrary.service.DLAppLocalService;
 import com.liferay.portlet.documentlibrary.service.DLAppService;
 import com.liferay.portlet.documentlibrary.service.DLContentLocalService;
-import com.liferay.portlet.documentlibrary.service.DLDocumentMetadataSetLocalService;
-import com.liferay.portlet.documentlibrary.service.DLDocumentTypeLocalService;
-import com.liferay.portlet.documentlibrary.service.DLDocumentTypeService;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalService;
+import com.liferay.portlet.documentlibrary.service.DLFileEntryMetadataLocalService;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryService;
+import com.liferay.portlet.documentlibrary.service.DLFileEntryTypeLocalService;
+import com.liferay.portlet.documentlibrary.service.DLFileEntryTypeService;
 import com.liferay.portlet.documentlibrary.service.DLFileRankLocalService;
 import com.liferay.portlet.documentlibrary.service.DLFileShortcutLocalService;
 import com.liferay.portlet.documentlibrary.service.DLFileShortcutService;
@@ -58,11 +68,11 @@ import com.liferay.portlet.documentlibrary.service.DLFolderLocalService;
 import com.liferay.portlet.documentlibrary.service.DLFolderService;
 import com.liferay.portlet.documentlibrary.service.persistence.DLContentFinder;
 import com.liferay.portlet.documentlibrary.service.persistence.DLContentPersistence;
-import com.liferay.portlet.documentlibrary.service.persistence.DLDocumentMetadataSetPersistence;
-import com.liferay.portlet.documentlibrary.service.persistence.DLDocumentTypeFinder;
-import com.liferay.portlet.documentlibrary.service.persistence.DLDocumentTypePersistence;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder;
+import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryMetadataPersistence;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPersistence;
+import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryTypeFinder;
+import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryTypePersistence;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileRankFinder;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPersistence;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutPersistence;
@@ -207,120 +217,6 @@ public abstract class DLFileEntryServiceBaseImpl extends PrincipalBean
 	}
 
 	/**
-	 * Returns the d l document metadata set local service.
-	 *
-	 * @return the d l document metadata set local service
-	 */
-	public DLDocumentMetadataSetLocalService getDLDocumentMetadataSetLocalService() {
-		return dlDocumentMetadataSetLocalService;
-	}
-
-	/**
-	 * Sets the d l document metadata set local service.
-	 *
-	 * @param dlDocumentMetadataSetLocalService the d l document metadata set local service
-	 */
-	public void setDLDocumentMetadataSetLocalService(
-		DLDocumentMetadataSetLocalService dlDocumentMetadataSetLocalService) {
-		this.dlDocumentMetadataSetLocalService = dlDocumentMetadataSetLocalService;
-	}
-
-	/**
-	 * Returns the d l document metadata set persistence.
-	 *
-	 * @return the d l document metadata set persistence
-	 */
-	public DLDocumentMetadataSetPersistence getDLDocumentMetadataSetPersistence() {
-		return dlDocumentMetadataSetPersistence;
-	}
-
-	/**
-	 * Sets the d l document metadata set persistence.
-	 *
-	 * @param dlDocumentMetadataSetPersistence the d l document metadata set persistence
-	 */
-	public void setDLDocumentMetadataSetPersistence(
-		DLDocumentMetadataSetPersistence dlDocumentMetadataSetPersistence) {
-		this.dlDocumentMetadataSetPersistence = dlDocumentMetadataSetPersistence;
-	}
-
-	/**
-	 * Returns the d l document type local service.
-	 *
-	 * @return the d l document type local service
-	 */
-	public DLDocumentTypeLocalService getDLDocumentTypeLocalService() {
-		return dlDocumentTypeLocalService;
-	}
-
-	/**
-	 * Sets the d l document type local service.
-	 *
-	 * @param dlDocumentTypeLocalService the d l document type local service
-	 */
-	public void setDLDocumentTypeLocalService(
-		DLDocumentTypeLocalService dlDocumentTypeLocalService) {
-		this.dlDocumentTypeLocalService = dlDocumentTypeLocalService;
-	}
-
-	/**
-	 * Returns the d l document type remote service.
-	 *
-	 * @return the d l document type remote service
-	 */
-	public DLDocumentTypeService getDLDocumentTypeService() {
-		return dlDocumentTypeService;
-	}
-
-	/**
-	 * Sets the d l document type remote service.
-	 *
-	 * @param dlDocumentTypeService the d l document type remote service
-	 */
-	public void setDLDocumentTypeService(
-		DLDocumentTypeService dlDocumentTypeService) {
-		this.dlDocumentTypeService = dlDocumentTypeService;
-	}
-
-	/**
-	 * Returns the d l document type persistence.
-	 *
-	 * @return the d l document type persistence
-	 */
-	public DLDocumentTypePersistence getDLDocumentTypePersistence() {
-		return dlDocumentTypePersistence;
-	}
-
-	/**
-	 * Sets the d l document type persistence.
-	 *
-	 * @param dlDocumentTypePersistence the d l document type persistence
-	 */
-	public void setDLDocumentTypePersistence(
-		DLDocumentTypePersistence dlDocumentTypePersistence) {
-		this.dlDocumentTypePersistence = dlDocumentTypePersistence;
-	}
-
-	/**
-	 * Returns the d l document type finder.
-	 *
-	 * @return the d l document type finder
-	 */
-	public DLDocumentTypeFinder getDLDocumentTypeFinder() {
-		return dlDocumentTypeFinder;
-	}
-
-	/**
-	 * Sets the d l document type finder.
-	 *
-	 * @param dlDocumentTypeFinder the d l document type finder
-	 */
-	public void setDLDocumentTypeFinder(
-		DLDocumentTypeFinder dlDocumentTypeFinder) {
-		this.dlDocumentTypeFinder = dlDocumentTypeFinder;
-	}
-
-	/**
 	 * Returns the d l file entry local service.
 	 *
 	 * @return the d l file entry local service
@@ -392,6 +288,120 @@ public abstract class DLFileEntryServiceBaseImpl extends PrincipalBean
 	 */
 	public void setDLFileEntryFinder(DLFileEntryFinder dlFileEntryFinder) {
 		this.dlFileEntryFinder = dlFileEntryFinder;
+	}
+
+	/**
+	 * Returns the d l file entry metadata local service.
+	 *
+	 * @return the d l file entry metadata local service
+	 */
+	public DLFileEntryMetadataLocalService getDLFileEntryMetadataLocalService() {
+		return dlFileEntryMetadataLocalService;
+	}
+
+	/**
+	 * Sets the d l file entry metadata local service.
+	 *
+	 * @param dlFileEntryMetadataLocalService the d l file entry metadata local service
+	 */
+	public void setDLFileEntryMetadataLocalService(
+		DLFileEntryMetadataLocalService dlFileEntryMetadataLocalService) {
+		this.dlFileEntryMetadataLocalService = dlFileEntryMetadataLocalService;
+	}
+
+	/**
+	 * Returns the d l file entry metadata persistence.
+	 *
+	 * @return the d l file entry metadata persistence
+	 */
+	public DLFileEntryMetadataPersistence getDLFileEntryMetadataPersistence() {
+		return dlFileEntryMetadataPersistence;
+	}
+
+	/**
+	 * Sets the d l file entry metadata persistence.
+	 *
+	 * @param dlFileEntryMetadataPersistence the d l file entry metadata persistence
+	 */
+	public void setDLFileEntryMetadataPersistence(
+		DLFileEntryMetadataPersistence dlFileEntryMetadataPersistence) {
+		this.dlFileEntryMetadataPersistence = dlFileEntryMetadataPersistence;
+	}
+
+	/**
+	 * Returns the d l file entry type local service.
+	 *
+	 * @return the d l file entry type local service
+	 */
+	public DLFileEntryTypeLocalService getDLFileEntryTypeLocalService() {
+		return dlFileEntryTypeLocalService;
+	}
+
+	/**
+	 * Sets the d l file entry type local service.
+	 *
+	 * @param dlFileEntryTypeLocalService the d l file entry type local service
+	 */
+	public void setDLFileEntryTypeLocalService(
+		DLFileEntryTypeLocalService dlFileEntryTypeLocalService) {
+		this.dlFileEntryTypeLocalService = dlFileEntryTypeLocalService;
+	}
+
+	/**
+	 * Returns the d l file entry type remote service.
+	 *
+	 * @return the d l file entry type remote service
+	 */
+	public DLFileEntryTypeService getDLFileEntryTypeService() {
+		return dlFileEntryTypeService;
+	}
+
+	/**
+	 * Sets the d l file entry type remote service.
+	 *
+	 * @param dlFileEntryTypeService the d l file entry type remote service
+	 */
+	public void setDLFileEntryTypeService(
+		DLFileEntryTypeService dlFileEntryTypeService) {
+		this.dlFileEntryTypeService = dlFileEntryTypeService;
+	}
+
+	/**
+	 * Returns the d l file entry type persistence.
+	 *
+	 * @return the d l file entry type persistence
+	 */
+	public DLFileEntryTypePersistence getDLFileEntryTypePersistence() {
+		return dlFileEntryTypePersistence;
+	}
+
+	/**
+	 * Sets the d l file entry type persistence.
+	 *
+	 * @param dlFileEntryTypePersistence the d l file entry type persistence
+	 */
+	public void setDLFileEntryTypePersistence(
+		DLFileEntryTypePersistence dlFileEntryTypePersistence) {
+		this.dlFileEntryTypePersistence = dlFileEntryTypePersistence;
+	}
+
+	/**
+	 * Returns the d l file entry type finder.
+	 *
+	 * @return the d l file entry type finder
+	 */
+	public DLFileEntryTypeFinder getDLFileEntryTypeFinder() {
+		return dlFileEntryTypeFinder;
+	}
+
+	/**
+	 * Sets the d l file entry type finder.
+	 *
+	 * @param dlFileEntryTypeFinder the d l file entry type finder
+	 */
+	public void setDLFileEntryTypeFinder(
+		DLFileEntryTypeFinder dlFileEntryTypeFinder) {
+		this.dlFileEntryTypeFinder = dlFileEntryTypeFinder;
 	}
 
 	/**
@@ -615,24 +625,6 @@ public abstract class DLFileEntryServiceBaseImpl extends PrincipalBean
 	 */
 	public void setCounterLocalService(CounterLocalService counterLocalService) {
 		this.counterLocalService = counterLocalService;
-	}
-
-	/**
-	 * Returns the d l local service.
-	 *
-	 * @return the d l local service
-	 */
-	public DLLocalService getDLLocalService() {
-		return dlLocalService;
-	}
-
-	/**
-	 * Sets the d l local service.
-	 *
-	 * @param dlLocalService the d l local service
-	 */
-	public void setDLLocalService(DLLocalService dlLocalService) {
-		this.dlLocalService = dlLocalService;
 	}
 
 	/**
@@ -893,6 +885,155 @@ public abstract class DLFileEntryServiceBaseImpl extends PrincipalBean
 	}
 
 	/**
+	 * Returns the asset category local service.
+	 *
+	 * @return the asset category local service
+	 */
+	public AssetCategoryLocalService getAssetCategoryLocalService() {
+		return assetCategoryLocalService;
+	}
+
+	/**
+	 * Sets the asset category local service.
+	 *
+	 * @param assetCategoryLocalService the asset category local service
+	 */
+	public void setAssetCategoryLocalService(
+		AssetCategoryLocalService assetCategoryLocalService) {
+		this.assetCategoryLocalService = assetCategoryLocalService;
+	}
+
+	/**
+	 * Returns the asset category remote service.
+	 *
+	 * @return the asset category remote service
+	 */
+	public AssetCategoryService getAssetCategoryService() {
+		return assetCategoryService;
+	}
+
+	/**
+	 * Sets the asset category remote service.
+	 *
+	 * @param assetCategoryService the asset category remote service
+	 */
+	public void setAssetCategoryService(
+		AssetCategoryService assetCategoryService) {
+		this.assetCategoryService = assetCategoryService;
+	}
+
+	/**
+	 * Returns the asset category persistence.
+	 *
+	 * @return the asset category persistence
+	 */
+	public AssetCategoryPersistence getAssetCategoryPersistence() {
+		return assetCategoryPersistence;
+	}
+
+	/**
+	 * Sets the asset category persistence.
+	 *
+	 * @param assetCategoryPersistence the asset category persistence
+	 */
+	public void setAssetCategoryPersistence(
+		AssetCategoryPersistence assetCategoryPersistence) {
+		this.assetCategoryPersistence = assetCategoryPersistence;
+	}
+
+	/**
+	 * Returns the asset category finder.
+	 *
+	 * @return the asset category finder
+	 */
+	public AssetCategoryFinder getAssetCategoryFinder() {
+		return assetCategoryFinder;
+	}
+
+	/**
+	 * Sets the asset category finder.
+	 *
+	 * @param assetCategoryFinder the asset category finder
+	 */
+	public void setAssetCategoryFinder(AssetCategoryFinder assetCategoryFinder) {
+		this.assetCategoryFinder = assetCategoryFinder;
+	}
+
+	/**
+	 * Returns the asset entry local service.
+	 *
+	 * @return the asset entry local service
+	 */
+	public AssetEntryLocalService getAssetEntryLocalService() {
+		return assetEntryLocalService;
+	}
+
+	/**
+	 * Sets the asset entry local service.
+	 *
+	 * @param assetEntryLocalService the asset entry local service
+	 */
+	public void setAssetEntryLocalService(
+		AssetEntryLocalService assetEntryLocalService) {
+		this.assetEntryLocalService = assetEntryLocalService;
+	}
+
+	/**
+	 * Returns the asset entry remote service.
+	 *
+	 * @return the asset entry remote service
+	 */
+	public AssetEntryService getAssetEntryService() {
+		return assetEntryService;
+	}
+
+	/**
+	 * Sets the asset entry remote service.
+	 *
+	 * @param assetEntryService the asset entry remote service
+	 */
+	public void setAssetEntryService(AssetEntryService assetEntryService) {
+		this.assetEntryService = assetEntryService;
+	}
+
+	/**
+	 * Returns the asset entry persistence.
+	 *
+	 * @return the asset entry persistence
+	 */
+	public AssetEntryPersistence getAssetEntryPersistence() {
+		return assetEntryPersistence;
+	}
+
+	/**
+	 * Sets the asset entry persistence.
+	 *
+	 * @param assetEntryPersistence the asset entry persistence
+	 */
+	public void setAssetEntryPersistence(
+		AssetEntryPersistence assetEntryPersistence) {
+		this.assetEntryPersistence = assetEntryPersistence;
+	}
+
+	/**
+	 * Returns the asset entry finder.
+	 *
+	 * @return the asset entry finder
+	 */
+	public AssetEntryFinder getAssetEntryFinder() {
+		return assetEntryFinder;
+	}
+
+	/**
+	 * Sets the asset entry finder.
+	 *
+	 * @param assetEntryFinder the asset entry finder
+	 */
+	public void setAssetEntryFinder(AssetEntryFinder assetEntryFinder) {
+		this.assetEntryFinder = assetEntryFinder;
+	}
+
+	/**
 	 * Returns the asset link local service.
 	 *
 	 * @return the asset link local service
@@ -928,6 +1069,79 @@ public abstract class DLFileEntryServiceBaseImpl extends PrincipalBean
 	public void setAssetLinkPersistence(
 		AssetLinkPersistence assetLinkPersistence) {
 		this.assetLinkPersistence = assetLinkPersistence;
+	}
+
+	/**
+	 * Returns the asset tag local service.
+	 *
+	 * @return the asset tag local service
+	 */
+	public AssetTagLocalService getAssetTagLocalService() {
+		return assetTagLocalService;
+	}
+
+	/**
+	 * Sets the asset tag local service.
+	 *
+	 * @param assetTagLocalService the asset tag local service
+	 */
+	public void setAssetTagLocalService(
+		AssetTagLocalService assetTagLocalService) {
+		this.assetTagLocalService = assetTagLocalService;
+	}
+
+	/**
+	 * Returns the asset tag remote service.
+	 *
+	 * @return the asset tag remote service
+	 */
+	public AssetTagService getAssetTagService() {
+		return assetTagService;
+	}
+
+	/**
+	 * Sets the asset tag remote service.
+	 *
+	 * @param assetTagService the asset tag remote service
+	 */
+	public void setAssetTagService(AssetTagService assetTagService) {
+		this.assetTagService = assetTagService;
+	}
+
+	/**
+	 * Returns the asset tag persistence.
+	 *
+	 * @return the asset tag persistence
+	 */
+	public AssetTagPersistence getAssetTagPersistence() {
+		return assetTagPersistence;
+	}
+
+	/**
+	 * Sets the asset tag persistence.
+	 *
+	 * @param assetTagPersistence the asset tag persistence
+	 */
+	public void setAssetTagPersistence(AssetTagPersistence assetTagPersistence) {
+		this.assetTagPersistence = assetTagPersistence;
+	}
+
+	/**
+	 * Returns the asset tag finder.
+	 *
+	 * @return the asset tag finder
+	 */
+	public AssetTagFinder getAssetTagFinder() {
+		return assetTagFinder;
+	}
+
+	/**
+	 * Sets the asset tag finder.
+	 *
+	 * @param assetTagFinder the asset tag finder
+	 */
+	public void setAssetTagFinder(AssetTagFinder assetTagFinder) {
+		this.assetTagFinder = assetTagFinder;
 	}
 
 	/**
@@ -1043,18 +1257,6 @@ public abstract class DLFileEntryServiceBaseImpl extends PrincipalBean
 	protected DLContentPersistence dlContentPersistence;
 	@BeanReference(type = DLContentFinder.class)
 	protected DLContentFinder dlContentFinder;
-	@BeanReference(type = DLDocumentMetadataSetLocalService.class)
-	protected DLDocumentMetadataSetLocalService dlDocumentMetadataSetLocalService;
-	@BeanReference(type = DLDocumentMetadataSetPersistence.class)
-	protected DLDocumentMetadataSetPersistence dlDocumentMetadataSetPersistence;
-	@BeanReference(type = DLDocumentTypeLocalService.class)
-	protected DLDocumentTypeLocalService dlDocumentTypeLocalService;
-	@BeanReference(type = DLDocumentTypeService.class)
-	protected DLDocumentTypeService dlDocumentTypeService;
-	@BeanReference(type = DLDocumentTypePersistence.class)
-	protected DLDocumentTypePersistence dlDocumentTypePersistence;
-	@BeanReference(type = DLDocumentTypeFinder.class)
-	protected DLDocumentTypeFinder dlDocumentTypeFinder;
 	@BeanReference(type = DLFileEntryLocalService.class)
 	protected DLFileEntryLocalService dlFileEntryLocalService;
 	@BeanReference(type = DLFileEntryService.class)
@@ -1063,6 +1265,18 @@ public abstract class DLFileEntryServiceBaseImpl extends PrincipalBean
 	protected DLFileEntryPersistence dlFileEntryPersistence;
 	@BeanReference(type = DLFileEntryFinder.class)
 	protected DLFileEntryFinder dlFileEntryFinder;
+	@BeanReference(type = DLFileEntryMetadataLocalService.class)
+	protected DLFileEntryMetadataLocalService dlFileEntryMetadataLocalService;
+	@BeanReference(type = DLFileEntryMetadataPersistence.class)
+	protected DLFileEntryMetadataPersistence dlFileEntryMetadataPersistence;
+	@BeanReference(type = DLFileEntryTypeLocalService.class)
+	protected DLFileEntryTypeLocalService dlFileEntryTypeLocalService;
+	@BeanReference(type = DLFileEntryTypeService.class)
+	protected DLFileEntryTypeService dlFileEntryTypeService;
+	@BeanReference(type = DLFileEntryTypePersistence.class)
+	protected DLFileEntryTypePersistence dlFileEntryTypePersistence;
+	@BeanReference(type = DLFileEntryTypeFinder.class)
+	protected DLFileEntryTypeFinder dlFileEntryTypeFinder;
 	@BeanReference(type = DLFileRankLocalService.class)
 	protected DLFileRankLocalService dlFileRankLocalService;
 	@BeanReference(type = DLFileRankPersistence.class)
@@ -1087,8 +1301,6 @@ public abstract class DLFileEntryServiceBaseImpl extends PrincipalBean
 	protected DLFolderFinder dlFolderFinder;
 	@BeanReference(type = CounterLocalService.class)
 	protected CounterLocalService counterLocalService;
-	@BeanReference(type = DLLocalService.class)
-	protected DLLocalService dlLocalService;
 	@BeanReference(type = LockLocalService.class)
 	protected LockLocalService lockLocalService;
 	@BeanReference(type = LockPersistence.class)
@@ -1117,10 +1329,34 @@ public abstract class DLFileEntryServiceBaseImpl extends PrincipalBean
 	protected WorkflowInstanceLinkLocalService workflowInstanceLinkLocalService;
 	@BeanReference(type = WorkflowInstanceLinkPersistence.class)
 	protected WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
+	@BeanReference(type = AssetCategoryLocalService.class)
+	protected AssetCategoryLocalService assetCategoryLocalService;
+	@BeanReference(type = AssetCategoryService.class)
+	protected AssetCategoryService assetCategoryService;
+	@BeanReference(type = AssetCategoryPersistence.class)
+	protected AssetCategoryPersistence assetCategoryPersistence;
+	@BeanReference(type = AssetCategoryFinder.class)
+	protected AssetCategoryFinder assetCategoryFinder;
+	@BeanReference(type = AssetEntryLocalService.class)
+	protected AssetEntryLocalService assetEntryLocalService;
+	@BeanReference(type = AssetEntryService.class)
+	protected AssetEntryService assetEntryService;
+	@BeanReference(type = AssetEntryPersistence.class)
+	protected AssetEntryPersistence assetEntryPersistence;
+	@BeanReference(type = AssetEntryFinder.class)
+	protected AssetEntryFinder assetEntryFinder;
 	@BeanReference(type = AssetLinkLocalService.class)
 	protected AssetLinkLocalService assetLinkLocalService;
 	@BeanReference(type = AssetLinkPersistence.class)
 	protected AssetLinkPersistence assetLinkPersistence;
+	@BeanReference(type = AssetTagLocalService.class)
+	protected AssetTagLocalService assetTagLocalService;
+	@BeanReference(type = AssetTagService.class)
+	protected AssetTagService assetTagService;
+	@BeanReference(type = AssetTagPersistence.class)
+	protected AssetTagPersistence assetTagPersistence;
+	@BeanReference(type = AssetTagFinder.class)
+	protected AssetTagFinder assetTagFinder;
 	@BeanReference(type = ExpandoValueLocalService.class)
 	protected ExpandoValueLocalService expandoValueLocalService;
 	@BeanReference(type = ExpandoValueService.class)

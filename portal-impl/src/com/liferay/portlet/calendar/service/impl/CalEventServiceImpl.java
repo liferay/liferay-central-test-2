@@ -17,6 +17,8 @@ package com.liferay.portlet.calendar.service.impl;
 import com.liferay.portal.kernel.cal.TZSRecurrence;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.ListUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.calendar.model.CalEvent;
@@ -26,6 +28,8 @@ import com.liferay.portlet.calendar.service.permission.CalendarPermission;
 
 import java.io.File;
 
+import java.util.Calendar;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -93,11 +97,49 @@ public class CalEventServiceImpl extends CalEventServiceBaseImpl {
 		return calEventLocalService.getEvent(eventId);
 	}
 
+	public List<CalEvent> getEvents(long groupId, Calendar cal, String type)
+		throws PortalException, SystemException {
+
+		return getEvents(groupId, cal, new String[] {type});
+	}
+
+	public List<CalEvent> getEvents(long groupId, Calendar cal, String[] types)
+		throws PortalException, SystemException {
+
+		List<CalEvent> events = calEventLocalService.getEvents(
+			groupId, cal, types);
+
+		events = ListUtil.copy(events);
+
+		Iterator<CalEvent> itr = events.iterator();
+
+		while (itr.hasNext()) {
+			CalEvent event = itr.next();
+
+			if (!CalEventPermission.contains(
+					getPermissionChecker(), event, ActionKeys.VIEW)) {
+
+				itr.remove();
+			}
+		}
+
+		return events;
+	}
+
+	public List<CalEvent> getEvents(
+			long groupId, String type, int start, int end)
+		throws SystemException {
+
+		return getEvents(groupId, new String[] {type}, start, end);
+	}
+
 	public List<CalEvent> getEvents(
 			long groupId, String[] types, int start, int end)
 		throws SystemException {
 
-		if ((types != null) && (types.length > 0)) {
+		if ((types != null) && (types.length > 0) &&
+			((types.length > 1) || Validator.isNotNull(types[0]))) {
+
 			return calEventPersistence.filterFindByG_T(
 				groupId, types, start, end);
 		}
@@ -106,14 +148,47 @@ public class CalEventServiceImpl extends CalEventServiceBaseImpl {
 		}
 	}
 
+	public int getEventsCount(long groupId, String type)
+		throws SystemException {
+
+		return getEventsCount(groupId, new String[] {type});
+	}
+
 	public int getEventsCount(long groupId, String[] types)
 		throws SystemException {
 
-		if ((types != null) && (types.length > 0)) {
+		if ((types != null) && (types.length > 0) &&
+			((types.length > 1) || Validator.isNotNull(types[0]))) {
+
 			return calEventPersistence.filterCountByG_T(groupId, types);
 		}
 		else {
 			return calEventPersistence.filterCountByGroupId(groupId);
+		}
+	}
+
+	public boolean hasEvents(long groupId, Calendar cal)
+		throws PortalException, SystemException {
+
+		return hasEvents(groupId, cal, new String[0]);
+	}
+
+	public boolean hasEvents(long groupId, Calendar cal, String type)
+		throws PortalException, SystemException {
+
+		return hasEvents(groupId, cal, new String[] {type});
+	}
+
+	public boolean hasEvents(long groupId, Calendar cal, String[] types)
+		throws PortalException, SystemException {
+
+		List<CalEvent> events = getEvents(groupId, cal, types);
+
+		if (events.isEmpty()) {
+			return false;
+		}
+		else {
+			return true;
 		}
 	}
 

@@ -35,6 +35,7 @@ public class ClusterBridgeMessageListener extends BaseMessageListener {
 		_priority = priority;
 	}
 
+	@Override
 	protected void doReceive(Message message) throws Exception {
 		if (!_active) {
 			return;

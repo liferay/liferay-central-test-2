@@ -134,6 +134,7 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(AssetTagImpl.class.getName());
@@ -151,6 +152,7 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(AssetTag assetTag) {
 		EntityCacheUtil.removeResult(AssetTagModelImpl.ENTITY_CACHE_ENABLED,
 			AssetTagImpl.class, assetTag.getPrimaryKey());
@@ -179,6 +181,7 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 	 * @throws com.liferay.portal.NoSuchModelException if a asset tag with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetTag remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
@@ -231,10 +234,12 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 	 * @return the asset tag that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetTag remove(AssetTag assetTag) throws SystemException {
 		return super.remove(assetTag);
 	}
 
+	@Override
 	protected AssetTag removeImpl(AssetTag assetTag) throws SystemException {
 		assetTag = toUnwrappedModel(assetTag);
 
@@ -270,6 +275,7 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 		return assetTag;
 	}
 
+	@Override
 	public AssetTag updateImpl(
 		com.liferay.portlet.asset.model.AssetTag assetTag, boolean merge)
 		throws SystemException {
@@ -330,6 +336,7 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 	 * @throws com.liferay.portal.NoSuchModelException if a asset tag with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetTag findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
@@ -366,6 +373,7 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 	 * @return the asset tag, or <code>null</code> if a asset tag with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetTag fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());

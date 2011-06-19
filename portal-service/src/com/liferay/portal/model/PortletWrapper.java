@@ -194,6 +194,7 @@ public class PortletWrapper implements Portlet {
 		_portlet.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new PortletWrapper((Portlet)_portlet.clone());
 	}
@@ -202,6 +203,7 @@ public class PortletWrapper implements Portlet {
 		return _portlet.compareTo(portlet);
 	}
 
+	@Override
 	public int hashCode() {
 		return _portlet.hashCode();
 	}
@@ -210,6 +212,7 @@ public class PortletWrapper implements Portlet {
 		return new PortletWrapper(_portlet.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _portlet.toString();
 	}

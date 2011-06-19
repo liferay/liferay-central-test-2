@@ -39,6 +39,7 @@ import org.springframework.web.context.support.XmlWebApplicationContext;
  */
 public class PortalApplicationContext extends XmlWebApplicationContext {
 
+	@Override
 	protected void loadBeanDefinitions(XmlBeanDefinitionReader reader) {
 		try {
 			super.loadBeanDefinitions(reader);

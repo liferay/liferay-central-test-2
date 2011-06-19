@@ -26,6 +26,7 @@ import com.liferay.portal.upgrade.v6_0_0.util.JournalTemplateTable;
  */
 public class UpgradeJournal extends UpgradeProcess {
 
+	@Override
 	protected void doUpgrade() throws Exception {
 		try {
 			runSQL(

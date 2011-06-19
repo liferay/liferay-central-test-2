@@ -29,10 +29,12 @@ public class ServiceTestSetup extends TestSetup {
 		super(test);
 	}
 
+	@Override
 	public void setUp() throws Exception {
 		ServiceTestUtil.initServices();
 	}
 
+	@Override
 	public void tearDown() throws Exception {
 		ServiceTestUtil.destroyServices();
 	}

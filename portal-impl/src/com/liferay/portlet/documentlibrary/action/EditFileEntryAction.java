@@ -14,16 +14,9 @@
 
 package com.liferay.portlet.documentlibrary.action;
 
-import com.liferay.documentlibrary.DuplicateFileException;
-import com.liferay.documentlibrary.FileExtensionException;
-import com.liferay.documentlibrary.FileNameException;
-import com.liferay.documentlibrary.FileSizeException;
-import com.liferay.documentlibrary.SourceFileNameException;
 import com.liferay.portal.DuplicateLockException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.messaging.DestinationNames;
-import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.servlet.ServletResponseConstants;
@@ -31,9 +24,9 @@ import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.repository.liferayrepository.model.LiferayFileEntry;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
@@ -42,13 +35,18 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.asset.AssetCategoryException;
 import com.liferay.portlet.asset.AssetTagException;
 import com.liferay.portlet.assetpublisher.util.AssetPublisherUtil;
+import com.liferay.portlet.documentlibrary.DuplicateFileException;
 import com.liferay.portlet.documentlibrary.DuplicateFolderNameException;
+import com.liferay.portlet.documentlibrary.FileExtensionException;
+import com.liferay.portlet.documentlibrary.FileNameException;
+import com.liferay.portlet.documentlibrary.FileSizeException;
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
-import com.liferay.portlet.documentlibrary.model.DLDocumentType;
+import com.liferay.portlet.documentlibrary.SourceFileNameException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
+import com.liferay.portlet.documentlibrary.model.DLFileEntryType;
 import com.liferay.portlet.documentlibrary.service.DLAppServiceUtil;
-import com.liferay.portlet.documentlibrary.service.DLDocumentTypeLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLFileEntryTypeLocalServiceUtil;
 import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
 import com.liferay.portlet.dynamicdatamapping.storage.Field;
 import com.liferay.portlet.dynamicdatamapping.storage.Fields;
@@ -79,6 +77,7 @@ import org.apache.struts.action.ActionMapping;
  */
 public class EditFileEntryAction extends PortletAction {
 
+	@Override
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
 			ActionRequest actionRequest, ActionResponse actionResponse)
@@ -93,17 +92,20 @@ public class EditFileEntryAction extends PortletAction {
 			else if (cmd.equals(Constants.DELETE)) {
 				deleteFileEntries(actionRequest);
 			}
-			else if (cmd.equals(Constants.LOCK)) {
-				lockFileEntries(actionRequest);
+			else if (cmd.equals(Constants.CANCEL_CHECKOUT)) {
+				cancelFileEntriesCheckOut(actionRequest);
+			}
+			else if (cmd.equals(Constants.CHECKIN)) {
+				checkInFileEntries(actionRequest);
+			}
+			else if (cmd.equals(Constants.CHECKOUT)) {
+				checkOutFileEntries(actionRequest);
 			}
 			else if (cmd.equals(Constants.MOVE)) {
 				moveFileEntries(actionRequest);
 			}
 			else if (cmd.equals(Constants.REVERT)) {
 				revertFileEntry(actionRequest);
-			}
-			else if (cmd.equals(Constants.UNLOCK)) {
-				unlockFileEntries(actionRequest);
 			}
 
 			WindowState windowState = actionRequest.getWindowState();
@@ -189,6 +191,7 @@ public class EditFileEntryAction extends PortletAction {
 		}
 	}
 
+	@Override
 	public ActionForward render(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
 			RenderRequest renderRequest, RenderResponse renderResponse)
@@ -215,6 +218,65 @@ public class EditFileEntryAction extends PortletAction {
 		return mapping.findForward(getForward(renderRequest, forward));
 	}
 
+	protected void cancelFileEntriesCheckOut(ActionRequest actionRequest)
+		throws Exception {
+
+		long fileEntryId = ParamUtil.getLong(actionRequest, "fileEntryId");
+
+		if (fileEntryId > 0) {
+			DLAppServiceUtil.cancelCheckOut(fileEntryId);
+		}
+		else {
+			long[] fileEntryIds = StringUtil.split(
+				ParamUtil.getString(actionRequest, "fileEntryIds"), 0L);
+
+			for (int i = 0; i < fileEntryIds.length; i++) {
+				DLAppServiceUtil.cancelCheckOut(fileEntryIds[i]);
+			}
+		}
+	}
+
+	protected void checkInFileEntries(ActionRequest actionRequest)
+		throws Exception {
+
+		long fileEntryId = ParamUtil.getLong(actionRequest, "fileEntryId");
+
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			actionRequest);
+
+		if (fileEntryId > 0) {
+			DLAppServiceUtil.checkInFileEntry(
+				fileEntryId, false, StringPool.BLANK, serviceContext);
+		}
+		else {
+			long[] fileEntryIds = StringUtil.split(
+				ParamUtil.getString(actionRequest, "fileEntryIds"), 0L);
+
+			for (int i = 0; i < fileEntryIds.length; i++) {
+				DLAppServiceUtil.checkInFileEntry(
+					fileEntryIds[i], false, StringPool.BLANK, serviceContext);
+			}
+		}
+	}
+
+	protected void checkOutFileEntries(ActionRequest actionRequest)
+		throws Exception {
+
+		long fileEntryId = ParamUtil.getLong(actionRequest, "fileEntryId");
+
+		if (fileEntryId > 0) {
+			DLAppServiceUtil.checkOutFileEntry(fileEntryId);
+		}
+		else {
+			long[] fileEntryIds = StringUtil.split(
+				ParamUtil.getString(actionRequest, "fileEntryIds"), 0L);
+
+			for (int i = 0; i < fileEntryIds.length; i++) {
+				DLAppServiceUtil.checkOutFileEntry(fileEntryIds[i]);
+			}
+		}
+	}
+
 	protected void deleteFileEntries(ActionRequest actionRequest)
 		throws Exception {
 
@@ -234,19 +296,19 @@ public class EditFileEntryAction extends PortletAction {
 	}
 
 	protected HashMap<String, Fields> getFieldsMap(
-			UploadPortletRequest uploadRequest, long documentTypeId)
+			UploadPortletRequest uploadRequest, long fileEntryTypeId)
 		throws PortalException, SystemException {
 
 		HashMap<String, Fields> fieldsMap = new HashMap<String, Fields>();
 
-		if (documentTypeId <= 0) {
+		if (fileEntryTypeId <= 0) {
 			return fieldsMap;
 		}
 
-		DLDocumentType documentType =
-			DLDocumentTypeLocalServiceUtil.getDocumentType(documentTypeId);
+		DLFileEntryType fileEntryType =
+			DLFileEntryTypeLocalServiceUtil.getFileEntryType(fileEntryTypeId);
 
-		List<DDMStructure> ddmStructures = documentType.getDDMStructures();
+		List<DDMStructure> ddmStructures = fileEntryType.getDDMStructures();
 
 		for (DDMStructure ddmStructure : ddmStructures) {
 			String namespace = String.valueOf(
@@ -273,24 +335,6 @@ public class EditFileEntryAction extends PortletAction {
 		}
 
 		return fieldsMap;
-	}
-
-	protected void lockFileEntries(ActionRequest actionRequest)
-		throws Exception {
-
-		long fileEntryId = ParamUtil.getLong(actionRequest, "fileEntryId");
-
-		if (fileEntryId > 0) {
-			DLAppServiceUtil.lockFileEntry(fileEntryId);
-		}
-		else {
-			long[] fileEntryIds = StringUtil.split(
-				ParamUtil.getString(actionRequest, "fileEntryIds"), 0L);
-
-			for (int i = 0; i < fileEntryIds.length; i++) {
-				DLAppServiceUtil.lockFileEntry(fileEntryIds[i]);
-			}
-		}
 	}
 
 	protected void moveFileEntries(ActionRequest actionRequest)
@@ -329,24 +373,6 @@ public class EditFileEntryAction extends PortletAction {
 		DLAppServiceUtil.revertFileEntry(fileEntryId, version, serviceContext);
 	}
 
-	protected void unlockFileEntries(ActionRequest actionRequest)
-		throws Exception {
-
-		long fileEntryId = ParamUtil.getLong(actionRequest, "fileEntryId");
-
-		if (fileEntryId > 0) {
-			DLAppServiceUtil.unlockFileEntry(fileEntryId);
-		}
-		else {
-			long[] fileEntryIds = StringUtil.split(
-				ParamUtil.getString(actionRequest, "fileEntryIds"), 0L);
-
-			for (int i = 0; i < fileEntryIds.length; i++) {
-				DLAppServiceUtil.unlockFileEntry(fileEntryIds[i]);
-			}
-		}
-	}
-
 	protected void updateFileEntry(
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
@@ -364,8 +390,8 @@ public class EditFileEntryAction extends PortletAction {
 		String title = ParamUtil.getString(uploadRequest, "title");
 		String description = ParamUtil.getString(uploadRequest, "description");
 		String changeLog = ParamUtil.getString(uploadRequest, "changeLog");
-		long documentTypeId = ParamUtil.getLong(
-			uploadRequest, "documentTypeId");
+		long fileEntryTypeId = ParamUtil.getLong(
+			uploadRequest, "fileEntryTypeId");
 		boolean majorVersion = ParamUtil.getBoolean(
 			uploadRequest, "majorVersion");
 
@@ -380,11 +406,11 @@ public class EditFileEntryAction extends PortletAction {
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			DLFileEntry.class.getName(), actionRequest);
 
-		serviceContext.setAttribute("documentTypeId", documentTypeId);
+		serviceContext.setAttribute("fileEntryTypeId", fileEntryTypeId);
 		serviceContext.setAttribute("sourceFileName", sourceFileName);
 
 		HashMap<String, Fields> fieldsMap = getFieldsMap(
-			uploadRequest, documentTypeId);
+			uploadRequest, fileEntryTypeId);
 
 		serviceContext.setAttribute("fieldsMap", fieldsMap);
 
@@ -416,12 +442,6 @@ public class EditFileEntryAction extends PortletAction {
 
 		AssetPublisherUtil.addRecentFolderId(
 			actionRequest, DLFileEntry.class.getName(), folderId);
-
-		if (fileEntry instanceof LiferayFileEntry) {
-			MessageBusUtil.sendMessage(
-				DestinationNames.DOCUMENT_LIBRARY_RAW_METADATA_PROCESSOR,
-				fileEntry.getModel());
-		}
 	}
 
 }

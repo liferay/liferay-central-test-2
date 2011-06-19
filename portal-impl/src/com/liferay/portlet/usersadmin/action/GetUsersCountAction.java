@@ -35,6 +35,7 @@ import org.apache.struts.action.ActionMapping;
  */
 public class GetUsersCountAction extends AJAXAction {
 
+	@Override
 	public String getText(
 			ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response)

@@ -30,6 +30,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class AccountPersistenceTest extends BasePersistenceTestCase {
+	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -66,19 +67,33 @@ public class AccountPersistenceTest extends BasePersistenceTestCase {
 		Account newAccount = _persistence.create(pk);
 
 		newAccount.setCompanyId(nextLong());
+
 		newAccount.setUserId(nextLong());
+
 		newAccount.setUserName(randomString());
+
 		newAccount.setCreateDate(nextDate());
+
 		newAccount.setModifiedDate(nextDate());
+
 		newAccount.setParentAccountId(nextLong());
+
 		newAccount.setName(randomString());
+
 		newAccount.setLegalName(randomString());
+
 		newAccount.setLegalId(randomString());
+
 		newAccount.setLegalType(randomString());
+
 		newAccount.setSicCode(randomString());
+
 		newAccount.setTickerSymbol(randomString());
+
 		newAccount.setIndustry(randomString());
+
 		newAccount.setType(randomString());
+
 		newAccount.setSize(randomString());
 
 		_persistence.update(newAccount, false);
@@ -216,19 +231,33 @@ public class AccountPersistenceTest extends BasePersistenceTestCase {
 		Account account = _persistence.create(pk);
 
 		account.setCompanyId(nextLong());
+
 		account.setUserId(nextLong());
+
 		account.setUserName(randomString());
+
 		account.setCreateDate(nextDate());
+
 		account.setModifiedDate(nextDate());
+
 		account.setParentAccountId(nextLong());
+
 		account.setName(randomString());
+
 		account.setLegalName(randomString());
+
 		account.setLegalId(randomString());
+
 		account.setLegalType(randomString());
+
 		account.setSicCode(randomString());
+
 		account.setTickerSymbol(randomString());
+
 		account.setIndustry(randomString());
+
 		account.setType(randomString());
+
 		account.setSize(randomString());
 
 		_persistence.update(account, false);

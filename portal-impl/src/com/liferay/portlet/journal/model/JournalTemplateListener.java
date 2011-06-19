@@ -28,10 +28,12 @@ import com.liferay.portlet.journalcontent.util.JournalContentUtil;
 public class JournalTemplateListener
 	extends BaseModelListener<JournalTemplate> {
 
+	@Override
 	public void onAfterRemove(JournalTemplate template) {
 		clearCache(template);
 	}
 
+	@Override
 	public void onAfterUpdate(JournalTemplate template) {
 		clearCache(template);
 	}

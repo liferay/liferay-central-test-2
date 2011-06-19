@@ -157,6 +157,7 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<Passwo
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(PasswordPolicyRelImpl.class.getName());
@@ -174,6 +175,7 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<Passwo
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(PasswordPolicyRel passwordPolicyRel) {
 		EntityCacheUtil.removeResult(PasswordPolicyRelModelImpl.ENTITY_CACHE_ENABLED,
 			PasswordPolicyRelImpl.class, passwordPolicyRel.getPrimaryKey());
@@ -215,6 +217,7 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<Passwo
 	 * @throws com.liferay.portal.NoSuchModelException if a password policy rel with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public PasswordPolicyRel remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
@@ -268,11 +271,13 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<Passwo
 	 * @return the password policy rel that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public PasswordPolicyRel remove(PasswordPolicyRel passwordPolicyRel)
 		throws SystemException {
 		return super.remove(passwordPolicyRel);
 	}
 
+	@Override
 	protected PasswordPolicyRel removeImpl(PasswordPolicyRel passwordPolicyRel)
 		throws SystemException {
 		passwordPolicyRel = toUnwrappedModel(passwordPolicyRel);
@@ -314,6 +319,7 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<Passwo
 		return passwordPolicyRel;
 	}
 
+	@Override
 	public PasswordPolicyRel updateImpl(
 		com.liferay.portal.model.PasswordPolicyRel passwordPolicyRel,
 		boolean merge) throws SystemException {
@@ -424,6 +430,7 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<Passwo
 	 * @throws com.liferay.portal.NoSuchModelException if a password policy rel with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public PasswordPolicyRel findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
@@ -461,6 +468,7 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<Passwo
 	 * @return the password policy rel, or <code>null</code> if a password policy rel with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public PasswordPolicyRel fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());

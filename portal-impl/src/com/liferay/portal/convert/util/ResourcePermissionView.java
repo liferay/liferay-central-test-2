@@ -64,6 +64,7 @@ public class ResourcePermissionView extends Table {
 		_name = name;
 	}
 
+	@Override
 	public String getSelectSQL() throws Exception {
 		StringBundler sb = new StringBundler(4);
 

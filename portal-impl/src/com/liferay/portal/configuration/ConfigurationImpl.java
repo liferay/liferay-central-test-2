@@ -72,7 +72,7 @@ public class ConfigurationImpl
 			if ((url != null) && url.getProtocol().equals("file")) {
 				String basePath = url.getPath();
 
-				int pos = name.lastIndexOf(
+				int pos = basePath.lastIndexOf(
 					StringPool.SLASH + name + Conventions.PROPERTIES_EXTENSION);
 
 				if (pos != -1) {

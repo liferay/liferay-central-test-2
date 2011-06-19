@@ -18,9 +18,9 @@ package com.liferay.portlet.documentlibrary.model;
  * <p>
  * This contains several utility methods for the purpose of determining folder
  * IDs and data repository IDs as used by back-end data systems like search and
- * Document Library hooks. These repository IDs should not be confused with the
- * repository ID used by in {@link
- * com.liferay.portal.kernel.repository.RepositoryFactory}.
+ * Document Library stores. These repository IDs should not be confused with the
+ * repository ID used by {@link
+ * com.liferay.portal.service.impl.RepositoryServiceImpl}.
  * </p>
  *
  * @author Samuel Kong

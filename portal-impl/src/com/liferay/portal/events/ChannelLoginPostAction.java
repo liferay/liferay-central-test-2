@@ -30,6 +30,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class ChannelLoginPostAction extends Action {
 
+	@Override
 	public void run(HttpServletRequest request, HttpServletResponse response) {
 		try {
 			User user = PortalUtil.getUser(request);

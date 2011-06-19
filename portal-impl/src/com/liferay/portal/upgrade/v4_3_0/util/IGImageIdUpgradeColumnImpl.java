@@ -31,6 +31,7 @@ public class IGImageIdUpgradeColumnImpl extends PKUpgradeColumnImpl {
 		_igImageIdMapper = ValueMapperFactoryUtil.getValueMapper();
 	}
 
+	@Override
 	public Object getNewValue(Object oldValue) throws Exception {
 		Object newValue = super.getNewValue(oldValue);
 
@@ -45,6 +46,7 @@ public class IGImageIdUpgradeColumnImpl extends PKUpgradeColumnImpl {
 		return newValue;
 	}
 
+	@Override
 	public ValueMapper getValueMapper() {
 		return _igImageIdMapper;
 	}

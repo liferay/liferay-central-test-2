@@ -38,6 +38,7 @@ public class LinkNode extends URLNode {
 		super(link);
 	}
 
+	@Override
 	public void accept(ASTVisitor astVisitor) {
 		astVisitor.visit(this);
 	}

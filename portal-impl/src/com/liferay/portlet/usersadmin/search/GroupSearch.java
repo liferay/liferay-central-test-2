@@ -79,19 +79,16 @@ public class GroupSearch extends SearchContainer<Group> {
 				Validator.isNotNull(orderByType)) {
 
 				preferences.setValue(
-					PortletKeys.ENTERPRISE_ADMIN, "groups-order-by-col",
-					orderByCol);
+					PortletKeys.USERS_ADMIN, "groups-order-by-col", orderByCol);
 				preferences.setValue(
-					PortletKeys.ENTERPRISE_ADMIN, "groups-order-by-type",
+					PortletKeys.USERS_ADMIN, "groups-order-by-type",
 					orderByType);
 			}
 			else {
 				orderByCol = preferences.getValue(
-					PortletKeys.ENTERPRISE_ADMIN, "groups-order-by-col",
-					"name");
+					PortletKeys.USERS_ADMIN, "groups-order-by-col", "name");
 				orderByType = preferences.getValue(
-					PortletKeys.ENTERPRISE_ADMIN, "groups-order-by-type",
-					"asc");
+					PortletKeys.USERS_ADMIN, "groups-order-by-type", "asc");
 			}
 
 			OrderByComparator orderByComparator =

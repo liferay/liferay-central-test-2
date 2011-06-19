@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.util.StringPool;
  */
 public class GroupSharepointStorageImpl extends BaseSharepointStorageImpl {
 
+	@Override
 	public Tree getFoldersTree(SharepointRequest sharepointRequest)
 		throws Exception {
 

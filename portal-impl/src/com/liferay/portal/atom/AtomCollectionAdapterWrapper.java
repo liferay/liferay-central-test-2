@@ -43,11 +43,13 @@ public class AtomCollectionAdapterWrapper<E>
 		_atomCollectionAdapter = atomCollectionAdapter;
 	}
 
+	@Override
 	public void deleteEntry(String resourceName, RequestContext requestContext)
 		throws ResponseContextException {
 
 		try {
-			_atomCollectionAdapter.deleteEntry(resourceName);
+			_atomCollectionAdapter.deleteEntry(
+				resourceName, new AtomRequestContextImpl(requestContext));
 		}
 		catch (AtomException ae) {
 			throw new ResponseContextException(
@@ -55,6 +57,7 @@ public class AtomCollectionAdapterWrapper<E>
 		}
 	}
 
+	@Override
 	public List<Person> getAuthors(E entry, RequestContext requestContext) {
 		List<Person> persons = new ArrayList<Person>();
 
@@ -75,6 +78,7 @@ public class AtomCollectionAdapterWrapper<E>
 		return persons;
 	}
 
+	@Override
 	public Object getContent(E entry, RequestContext requestContext) {
 		Abdera abdera = requestContext.getAbdera();
 
@@ -87,6 +91,7 @@ public class AtomCollectionAdapterWrapper<E>
 		return content;
 	}
 
+	@Override
 	public Iterable<E> getEntries(RequestContext requestContext)
 		throws ResponseContextException {
 
@@ -100,11 +105,13 @@ public class AtomCollectionAdapterWrapper<E>
 		}
 	}
 
+	@Override
 	public E getEntry(String resourceName, RequestContext requestContext)
 		throws ResponseContextException {
 
 		try {
-			return _atomCollectionAdapter.getEntry(resourceName);
+			return _atomCollectionAdapter.getEntry(
+				resourceName, new AtomRequestContextImpl(requestContext));
 		}
 		catch (AtomException ae) {
 			throw new ResponseContextException(
@@ -112,6 +119,7 @@ public class AtomCollectionAdapterWrapper<E>
 		}
 	}
 
+	@Override
 	public String getTitle(E entry) {
 		return _atomCollectionAdapter.getEntryTitle(entry);
 	}
@@ -121,10 +129,12 @@ public class AtomCollectionAdapterWrapper<E>
 			new AtomRequestContextImpl(requestContext));
 	}
 
+	@Override
 	public Date getUpdated(E entry) {
 		return _atomCollectionAdapter.getEntryUpdated(entry);
 	}
 
+	@Override
 	public E postEntry(
 			String title, IRI id, String summary, Date updated,
 			List<Person> authors, Content content,
@@ -142,6 +152,7 @@ public class AtomCollectionAdapterWrapper<E>
 		}
 	}
 
+	@Override
 	public void putEntry(
 			E entry, String title, Date updated, List<Person> authors,
 			String summary, Content content, RequestContext requestContext)
@@ -158,6 +169,7 @@ public class AtomCollectionAdapterWrapper<E>
 		}
 	}
 
+	@Override
 	protected String getEntryId(E entry) {
 		return _atomCollectionAdapter.getEntryId(entry);
 	}

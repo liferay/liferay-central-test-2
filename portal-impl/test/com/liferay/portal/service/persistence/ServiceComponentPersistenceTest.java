@@ -32,6 +32,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class ServiceComponentPersistenceTest extends BasePersistenceTestCase {
+	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -68,8 +69,11 @@ public class ServiceComponentPersistenceTest extends BasePersistenceTestCase {
 		ServiceComponent newServiceComponent = _persistence.create(pk);
 
 		newServiceComponent.setBuildNamespace(randomString());
+
 		newServiceComponent.setBuildNumber(nextLong());
+
 		newServiceComponent.setBuildDate(nextLong());
+
 		newServiceComponent.setData(randomString());
 
 		_persistence.update(newServiceComponent, false);
@@ -218,8 +222,11 @@ public class ServiceComponentPersistenceTest extends BasePersistenceTestCase {
 		ServiceComponent serviceComponent = _persistence.create(pk);
 
 		serviceComponent.setBuildNamespace(randomString());
+
 		serviceComponent.setBuildNumber(nextLong());
+
 		serviceComponent.setBuildDate(nextLong());
+
 		serviceComponent.setData(randomString());
 
 		_persistence.update(serviceComponent, false);

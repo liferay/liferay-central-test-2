@@ -45,6 +45,7 @@ public enum TimeUnit {
 		return _value;
 	}
 
+	@Override
 	public String toString() {
 		return _value;
 	}

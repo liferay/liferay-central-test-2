@@ -42,6 +42,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class ServletContextIncludeFilter extends BasePortalFilter {
 
+	@Override
 	public boolean isFilterEnabled(
 		HttpServletRequest request, HttpServletResponse response) {
 
@@ -123,6 +124,7 @@ public class ServletContextIncludeFilter extends BasePortalFilter {
 		return null;
 	}
 
+	@Override
 	protected void processFilter(
 			HttpServletRequest request, HttpServletResponse response,
 			FilterChain filterChain)

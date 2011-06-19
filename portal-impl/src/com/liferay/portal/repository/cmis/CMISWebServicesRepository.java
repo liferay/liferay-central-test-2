@@ -35,6 +35,7 @@ import org.apache.chemistry.opencmis.commons.enums.BindingType;
  */
 public class CMISWebServicesRepository extends CMISRepositoryHandler {
 
+	@Override
 	public Session getSession() throws PortalException, RepositoryException {
 		Map<String, String> parameters = new HashMap<String, String>();
 

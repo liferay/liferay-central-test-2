@@ -164,6 +164,7 @@ public class AssetTagStatsModelImpl extends BaseModelImpl<AssetTagStats>
 		_assetCount = assetCount;
 	}
 
+	@Override
 	public AssetTagStats toEscapedModel() {
 		if (isEscapedModel()) {
 			return (AssetTagStats)this;
@@ -174,6 +175,7 @@ public class AssetTagStatsModelImpl extends BaseModelImpl<AssetTagStats>
 		}
 	}
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(0,
@@ -183,10 +185,12 @@ public class AssetTagStatsModelImpl extends BaseModelImpl<AssetTagStats>
 		return _expandoBridge;
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		getExpandoBridge().setAttributes(serviceContext);
 	}
 
+	@Override
 	public Object clone() {
 		AssetTagStatsImpl assetTagStatsImpl = new AssetTagStatsImpl();
 
@@ -222,6 +226,7 @@ public class AssetTagStatsModelImpl extends BaseModelImpl<AssetTagStats>
 		return 0;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -246,10 +251,12 @@ public class AssetTagStatsModelImpl extends BaseModelImpl<AssetTagStats>
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		AssetTagStatsModelImpl assetTagStatsModelImpl = this;
 
@@ -262,6 +269,7 @@ public class AssetTagStatsModelImpl extends BaseModelImpl<AssetTagStats>
 		assetTagStatsModelImpl._setOriginalClassNameId = false;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(9);
 

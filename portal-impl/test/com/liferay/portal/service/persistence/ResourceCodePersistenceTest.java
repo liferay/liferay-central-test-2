@@ -32,6 +32,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class ResourceCodePersistenceTest extends BasePersistenceTestCase {
+	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -68,7 +69,9 @@ public class ResourceCodePersistenceTest extends BasePersistenceTestCase {
 		ResourceCode newResourceCode = _persistence.create(pk);
 
 		newResourceCode.setCompanyId(nextLong());
+
 		newResourceCode.setName(randomString());
+
 		newResourceCode.setScope(nextInt());
 
 		_persistence.update(newResourceCode, false);
@@ -211,7 +214,9 @@ public class ResourceCodePersistenceTest extends BasePersistenceTestCase {
 		ResourceCode resourceCode = _persistence.create(pk);
 
 		resourceCode.setCompanyId(nextLong());
+
 		resourceCode.setName(randomString());
+
 		resourceCode.setScope(nextInt());
 
 		_persistence.update(resourceCode, false);

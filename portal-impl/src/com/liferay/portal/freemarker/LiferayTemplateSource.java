@@ -34,6 +34,7 @@ public class LiferayTemplateSource {
 		_freeMarkerTemplateLoader.closeTemplateSource(_templateSource);
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj instanceof LiferayTemplateSource) {
 			LiferayTemplateSource liferayTemplateSource =
@@ -58,11 +59,13 @@ public class LiferayTemplateSource {
 		return _freeMarkerTemplateLoader.getReader(_templateSource, encoding);
 	}
 
+	@Override
 	public int hashCode() {
 		return _freeMarkerTemplateLoader.hashCode() +
 			(31 * _templateSource.hashCode());
 	}
 
+	@Override
 	public String toString() {
 		return _templateSource.toString();
 	}

@@ -31,6 +31,7 @@ import javax.servlet.http.HttpServletResponse;
 public class EventResponseImpl
 	extends StateAwareResponseImpl implements EventResponse {
 
+	@Override
 	public String getLifecycle() {
 		return PortletRequest.EVENT_PHASE;
 	}

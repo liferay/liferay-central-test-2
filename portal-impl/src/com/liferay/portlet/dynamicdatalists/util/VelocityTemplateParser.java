@@ -23,11 +23,13 @@ import com.liferay.util.ContentUtil;
 public class VelocityTemplateParser extends
 	com.liferay.portlet.journal.util.VelocityTemplateParser {
 
+	@Override
 	protected String getErrorTemplateContent() {
 		return ContentUtil.get(
 			PropsValues.DYNAMIC_DATA_LISTS_ERROR_TEMPLATE_VELOCITY);
 	}
 
+	@Override
 	protected String getErrorTemplateId() {
 		return PropsValues.DYNAMIC_DATA_LISTS_ERROR_TEMPLATE_VELOCITY;
 	}

@@ -253,6 +253,11 @@ public interface DLContentLocalService {
 			com.liferay.portlet.documentlibrary.NoSuchContentException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLContent> getContentReferences(
+		long companyId, long repositoryId, java.lang.String path)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.documentlibrary.model.DLContent> getContents(
 		long companyId, java.lang.String portletId, long repositoryId,
 		java.lang.String path)
@@ -261,5 +266,9 @@ public interface DLContentLocalService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public boolean hasContent(long companyId, java.lang.String portletId,
 		long repositoryId, java.lang.String path, java.lang.String version)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public void updateDLContent(long companyId, long oldRepositoryId,
+		long newRepositoryId, java.lang.String oldPath, java.lang.String newPath)
 		throws com.liferay.portal.kernel.exception.SystemException;
 }

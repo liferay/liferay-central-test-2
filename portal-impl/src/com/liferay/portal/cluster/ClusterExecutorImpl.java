@@ -76,6 +76,7 @@ public class ClusterExecutorImpl
 		_clusterEventListeners.addIfAbsent(clusterEventListener);
 	}
 
+	@Override
 	public void afterPropertiesSet() {
 		if (PropsValues.CLUSTER_EXECUTOR_DEBUG_ENABLED) {
 			addClusterEventListener(new DebuggingClusterEventListenerImpl());
@@ -84,6 +85,7 @@ public class ClusterExecutorImpl
 		super.afterPropertiesSet();
 	}
 
+	@Override
 	public void destroy() {
 		if (!isEnabled()) {
 			return;
@@ -247,6 +249,7 @@ public class ClusterExecutorImpl
 		return _clusterNodeAddresses.containsKey(clusterNodeId);
 	}
 
+	@Override
 	public boolean isEnabled() {
 		return PropsValues.CLUSTER_LINK_ENABLED;
 	}
@@ -304,6 +307,7 @@ public class ClusterExecutorImpl
 		return _futureClusterResponses.get(uuid);
 	}
 
+	@Override
 	protected void initChannels() {
 		Properties controlProperties = PropsUtil.getProperties(
 			PropsKeys.CLUSTER_LINK_CHANNEL_PROPERTIES_CONTROL, false);

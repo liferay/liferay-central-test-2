@@ -55,6 +55,7 @@ public class PortletContextListener
 		registerPortalLifecycle();
 	}
 
+	@Override
 	protected void doPortalDestroy() {
 		HotDeployUtil.fireUndeployEvent(
 			new HotDeployEvent(_servletContext, _portletClassLoader));
@@ -95,6 +96,7 @@ public class PortletContextListener
 		}
 	}
 
+	@Override
 	protected void doPortalInit() {
 		HotDeployUtil.fireDeployEvent(
 			new HotDeployEvent(_servletContext, _portletClassLoader));

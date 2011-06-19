@@ -35,6 +35,7 @@ import org.aopalliance.intercept.MethodInvocation;
 public class ThreadLocalCacheAdvice
 	extends AnnotationChainableMethodAdvice<ThreadLocalCachable> {
 
+	@Override
 	public void afterReturning(
 			MethodInvocation methodInvocation, Object result)
 		throws Throwable {
@@ -63,6 +64,7 @@ public class ThreadLocalCacheAdvice
 		}
 	}
 
+	@Override
 	public Object before(MethodInvocation methodInvocation) throws Throwable {
 		MethodTargetClassKey methodTargetClassKey = buildMethodTargetClassKey(
 			methodInvocation);
@@ -89,6 +91,7 @@ public class ThreadLocalCacheAdvice
 		return value;
 	}
 
+	@Override
 	public ThreadLocalCachable getNullAnnotation() {
 		return _nullThreadLocalCacheable;
 	}

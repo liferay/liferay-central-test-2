@@ -156,6 +156,7 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(ResourceCodeImpl.class.getName());
@@ -173,6 +174,7 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(ResourceCode resourceCode) {
 		EntityCacheUtil.removeResult(ResourceCodeModelImpl.ENTITY_CACHE_ENABLED,
 			ResourceCodeImpl.class, resourceCode.getPrimaryKey());
@@ -208,6 +210,7 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 	 * @throws com.liferay.portal.NoSuchModelException if a resource code with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ResourceCode remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
@@ -260,11 +263,13 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 	 * @return the resource code that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ResourceCode remove(ResourceCode resourceCode)
 		throws SystemException {
 		return super.remove(resourceCode);
 	}
 
+	@Override
 	protected ResourceCode removeImpl(ResourceCode resourceCode)
 		throws SystemException {
 		resourceCode = toUnwrappedModel(resourceCode);
@@ -301,6 +306,7 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 		return resourceCode;
 	}
 
+	@Override
 	public ResourceCode updateImpl(
 		com.liferay.portal.model.ResourceCode resourceCode, boolean merge)
 		throws SystemException {
@@ -387,6 +393,7 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 	 * @throws com.liferay.portal.NoSuchModelException if a resource code with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ResourceCode findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
@@ -423,6 +430,7 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 	 * @return the resource code, or <code>null</code> if a resource code with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ResourceCode fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());

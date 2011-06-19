@@ -281,6 +281,13 @@ public class DLContentLocalServiceWrapper implements DLContentLocalService {
 			repositoryId, path, version);
 	}
 
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLContent> getContentReferences(
+		long companyId, long repositoryId, java.lang.String path)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _dlContentLocalService.getContentReferences(companyId,
+			repositoryId, path);
+	}
+
 	public java.util.List<com.liferay.portlet.documentlibrary.model.DLContent> getContents(
 		long companyId, java.lang.String portletId, long repositoryId,
 		java.lang.String path)
@@ -294,6 +301,13 @@ public class DLContentLocalServiceWrapper implements DLContentLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _dlContentLocalService.hasContent(companyId, portletId,
 			repositoryId, path, version);
+	}
+
+	public void updateDLContent(long companyId, long oldRepositoryId,
+		long newRepositoryId, java.lang.String oldPath, java.lang.String newPath)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		_dlContentLocalService.updateDLContent(companyId, oldRepositoryId,
+			newRepositoryId, oldPath, newPath);
 	}
 
 	public DLContentLocalService getWrappedDLContentLocalService() {

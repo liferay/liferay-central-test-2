@@ -16,7 +16,6 @@ package com.liferay.portlet.dynamicdatalists.model;
 
 import com.liferay.portal.kernel.bean.AutoEscape;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.model.AttachedModel;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.GroupedModel;
 import com.liferay.portal.service.ServiceContext;
@@ -40,8 +39,7 @@ import java.util.Date;
  * @see com.liferay.portlet.dynamicdatalists.model.impl.DDLRecordModelImpl
  * @generated
  */
-public interface DDLRecordModel extends AttachedModel, BaseModel<DDLRecord>,
-	GroupedModel {
+public interface DDLRecordModel extends BaseModel<DDLRecord>, GroupedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -236,39 +234,18 @@ public interface DDLRecordModel extends AttachedModel, BaseModel<DDLRecord>,
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Returns the fully qualified class name of this d d l record.
+	 * Returns the d d m storage ID of this d d l record.
 	 *
-	 * @return the fully qualified class name of this d d l record
+	 * @return the d d m storage ID of this d d l record
 	 */
-	public String getClassName();
+	public long getDDMStorageId();
 
 	/**
-	 * Returns the class name ID of this d d l record.
+	 * Sets the d d m storage ID of this d d l record.
 	 *
-	 * @return the class name ID of this d d l record
+	 * @param DDMStorageId the d d m storage ID of this d d l record
 	 */
-	public long getClassNameId();
-
-	/**
-	 * Sets the class name ID of this d d l record.
-	 *
-	 * @param classNameId the class name ID of this d d l record
-	 */
-	public void setClassNameId(long classNameId);
-
-	/**
-	 * Returns the class p k of this d d l record.
-	 *
-	 * @return the class p k of this d d l record
-	 */
-	public long getClassPK();
-
-	/**
-	 * Sets the class p k of this d d l record.
-	 *
-	 * @param classPK the class p k of this d d l record
-	 */
-	public void setClassPK(long classPK);
+	public void setDDMStorageId(long DDMStorageId);
 
 	/**
 	 * Returns the record set ID of this d d l record.

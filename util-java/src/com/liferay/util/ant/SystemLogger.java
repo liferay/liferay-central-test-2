@@ -30,6 +30,7 @@ import org.apache.tools.ant.util.StringUtils;
  */
 public class SystemLogger extends DefaultLogger {
 
+	@Override
 	public void messageLogged(BuildEvent event) {
 		int priority = event.getPriority();
 

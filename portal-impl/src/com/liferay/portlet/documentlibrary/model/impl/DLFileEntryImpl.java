@@ -70,6 +70,7 @@ public class DLFileEntryImpl
 			getGroupId(), getFolderId());
 	}
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		try {
 			DLFileVersion dlFileVersion = getFileVersion();
@@ -83,6 +84,7 @@ public class DLFileEntryImpl
 		return null;
 	}
 
+	@Override
 	public String getExtraSettings() {
 		if (_extraSettingsProperties == null) {
 			return super.getExtraSettings();
@@ -204,9 +206,10 @@ public class DLFileEntryImpl
 		return false;
 	}
 
-	public boolean isLocked() {
+	public boolean isCheckedOut() {
 		try {
-			return DLFileEntryServiceUtil.isFileEntryLocked(getFileEntryId());
+			return DLFileEntryServiceUtil.isFileEntryCheckedOut(
+				getFileEntryId());
 		}
 		catch (Exception e) {
 		}
@@ -214,6 +217,7 @@ public class DLFileEntryImpl
 		return false;
 	}
 
+	@Override
 	public void setExtraSettings(String extraSettings) {
 		_extraSettingsProperties = null;
 

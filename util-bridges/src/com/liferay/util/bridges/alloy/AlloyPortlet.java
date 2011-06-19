@@ -46,6 +46,7 @@ import javax.portlet.RenderResponse;
  */
 public class AlloyPortlet extends GenericPortlet {
 
+	@Override
 	public void init(PortletConfig portletConfig) throws PortletException {
 		super.init(portletConfig);
 
@@ -62,6 +63,7 @@ public class AlloyPortlet extends GenericPortlet {
 		router.urlToParameters("GET", _defaultRouteParameters);
 	}
 
+	@Override
 	public void processAction(
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws IOException, PortletException {
@@ -71,6 +73,7 @@ public class AlloyPortlet extends GenericPortlet {
 		include(path, actionRequest, actionResponse);
 	}
 
+	@Override
 	public void render(
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {

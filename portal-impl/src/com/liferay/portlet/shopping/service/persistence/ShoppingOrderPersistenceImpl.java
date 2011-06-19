@@ -172,6 +172,7 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(ShoppingOrderImpl.class.getName());
@@ -189,6 +190,7 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(ShoppingOrder shoppingOrder) {
 		EntityCacheUtil.removeResult(ShoppingOrderModelImpl.ENTITY_CACHE_ENABLED,
 			ShoppingOrderImpl.class, shoppingOrder.getPrimaryKey());
@@ -223,6 +225,7 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 	 * @throws com.liferay.portal.NoSuchModelException if a shopping order with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ShoppingOrder remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
@@ -275,11 +278,13 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 	 * @return the shopping order that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ShoppingOrder remove(ShoppingOrder shoppingOrder)
 		throws SystemException {
 		return super.remove(shoppingOrder);
 	}
 
+	@Override
 	protected ShoppingOrder removeImpl(ShoppingOrder shoppingOrder)
 		throws SystemException {
 		shoppingOrder = toUnwrappedModel(shoppingOrder);
@@ -314,6 +319,7 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 		return shoppingOrder;
 	}
 
+	@Override
 	public ShoppingOrder updateImpl(
 		com.liferay.portlet.shopping.model.ShoppingOrder shoppingOrder,
 		boolean merge) throws SystemException {
@@ -449,6 +455,7 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 	 * @throws com.liferay.portal.NoSuchModelException if a shopping order with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ShoppingOrder findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
@@ -485,6 +492,7 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 	 * @return the shopping order, or <code>null</code> if a shopping order with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ShoppingOrder fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());

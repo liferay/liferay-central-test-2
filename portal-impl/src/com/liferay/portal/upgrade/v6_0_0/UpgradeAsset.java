@@ -387,6 +387,7 @@ public class UpgradeAsset extends UpgradeProcess {
 		}
 	}
 
+	@Override
 	protected void doUpgrade() throws Exception {
 		updateAssetEntries();
 		updateAssetCategories();

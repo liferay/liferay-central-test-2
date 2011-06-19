@@ -168,6 +168,7 @@ public class JournalArticleResourceWrapper implements JournalArticleResource {
 		_journalArticleResource.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new JournalArticleResourceWrapper((JournalArticleResource)_journalArticleResource.clone());
 	}
@@ -177,6 +178,7 @@ public class JournalArticleResourceWrapper implements JournalArticleResource {
 		return _journalArticleResource.compareTo(journalArticleResource);
 	}
 
+	@Override
 	public int hashCode() {
 		return _journalArticleResource.hashCode();
 	}
@@ -185,6 +187,7 @@ public class JournalArticleResourceWrapper implements JournalArticleResource {
 		return new JournalArticleResourceWrapper(_journalArticleResource.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _journalArticleResource.toString();
 	}

@@ -81,6 +81,7 @@ public class MembershipRequestLocalServiceImpl
 		return membershipRequest;
 	}
 
+	@Override
 	public void deleteMembershipRequest(long membershipRequestId)
 			throws PortalException, SystemException {
 
@@ -90,6 +91,7 @@ public class MembershipRequestLocalServiceImpl
 		deleteMembershipRequest(membershipRequest);
 	}
 
+	@Override
 	public void deleteMembershipRequest(MembershipRequest membershipRequest)
 		throws SystemException {
 
@@ -127,6 +129,7 @@ public class MembershipRequestLocalServiceImpl
 		}
 	}
 
+	@Override
 	public MembershipRequest getMembershipRequest(long membershipRequestId)
 		throws PortalException, SystemException {
 

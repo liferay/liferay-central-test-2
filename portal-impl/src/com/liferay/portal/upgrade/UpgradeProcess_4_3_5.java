@@ -24,10 +24,12 @@ import com.liferay.portal.upgrade.v4_3_5.UpgradePortletId;
  */
 public class UpgradeProcess_4_3_5 extends UpgradeProcess {
 
+	@Override
 	public int getThreshold() {
 		return ReleaseInfo.RELEASE_4_3_5_BUILD_NUMBER;
 	}
 
+	@Override
 	protected void doUpgrade() throws Exception {
 		upgrade(UpgradePermission.class);
 		upgrade(UpgradePortletId.class);

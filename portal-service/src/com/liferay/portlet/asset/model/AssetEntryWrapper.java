@@ -583,6 +583,7 @@ public class AssetEntryWrapper implements AssetEntry {
 		_assetEntry.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new AssetEntryWrapper((AssetEntry)_assetEntry.clone());
 	}
@@ -591,6 +592,7 @@ public class AssetEntryWrapper implements AssetEntry {
 		return _assetEntry.compareTo(assetEntry);
 	}
 
+	@Override
 	public int hashCode() {
 		return _assetEntry.hashCode();
 	}
@@ -599,6 +601,7 @@ public class AssetEntryWrapper implements AssetEntry {
 		return new AssetEntryWrapper(_assetEntry.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _assetEntry.toString();
 	}

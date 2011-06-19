@@ -31,6 +31,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class AnnouncementsEntryPersistenceTest extends BasePersistenceTestCase {
+	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -67,20 +68,35 @@ public class AnnouncementsEntryPersistenceTest extends BasePersistenceTestCase {
 		AnnouncementsEntry newAnnouncementsEntry = _persistence.create(pk);
 
 		newAnnouncementsEntry.setUuid(randomString());
+
 		newAnnouncementsEntry.setCompanyId(nextLong());
+
 		newAnnouncementsEntry.setUserId(nextLong());
+
 		newAnnouncementsEntry.setUserName(randomString());
+
 		newAnnouncementsEntry.setCreateDate(nextDate());
+
 		newAnnouncementsEntry.setModifiedDate(nextDate());
+
 		newAnnouncementsEntry.setClassNameId(nextLong());
+
 		newAnnouncementsEntry.setClassPK(nextLong());
+
 		newAnnouncementsEntry.setTitle(randomString());
+
 		newAnnouncementsEntry.setContent(randomString());
+
 		newAnnouncementsEntry.setUrl(randomString());
+
 		newAnnouncementsEntry.setType(randomString());
+
 		newAnnouncementsEntry.setDisplayDate(nextDate());
+
 		newAnnouncementsEntry.setExpirationDate(nextDate());
+
 		newAnnouncementsEntry.setPriority(nextInt());
+
 		newAnnouncementsEntry.setAlert(randomBoolean());
 
 		_persistence.update(newAnnouncementsEntry, false);
@@ -237,20 +253,35 @@ public class AnnouncementsEntryPersistenceTest extends BasePersistenceTestCase {
 		AnnouncementsEntry announcementsEntry = _persistence.create(pk);
 
 		announcementsEntry.setUuid(randomString());
+
 		announcementsEntry.setCompanyId(nextLong());
+
 		announcementsEntry.setUserId(nextLong());
+
 		announcementsEntry.setUserName(randomString());
+
 		announcementsEntry.setCreateDate(nextDate());
+
 		announcementsEntry.setModifiedDate(nextDate());
+
 		announcementsEntry.setClassNameId(nextLong());
+
 		announcementsEntry.setClassPK(nextLong());
+
 		announcementsEntry.setTitle(randomString());
+
 		announcementsEntry.setContent(randomString());
+
 		announcementsEntry.setUrl(randomString());
+
 		announcementsEntry.setType(randomString());
+
 		announcementsEntry.setDisplayDate(nextDate());
+
 		announcementsEntry.setExpirationDate(nextDate());
+
 		announcementsEntry.setPriority(nextInt());
+
 		announcementsEntry.setAlert(randomBoolean());
 
 		_persistence.update(announcementsEntry, false);

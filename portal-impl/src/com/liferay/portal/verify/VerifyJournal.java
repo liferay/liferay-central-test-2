@@ -42,6 +42,7 @@ public class VerifyJournal extends VerifyProcess {
 
 	public static final int NUM_OF_ARTICLES = 5;
 
+	@Override
 	protected void doVerify() throws Exception {
 
 		// Oracle new line

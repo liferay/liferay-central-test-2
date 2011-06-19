@@ -16,8 +16,5 @@
 
 <%@ include file="/html/portlet/init.jsp" %>
 
-<%@ page import="com.liferay.portal.plugin.PluginUtil" %>
-<%@ page import="com.liferay.portlet.ControlPanelEntry" %>
-
 <%@ page import="java.util.regex.Matcher" %>
 <%@ page import="java.util.regex.Pattern" %>

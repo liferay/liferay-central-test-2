@@ -38,10 +38,12 @@ import jcifs.util.Base64;
  */
 public class NtlmPostFilter extends BasePortalFilter {
 
+	@Override
 	protected Log getLog() {
 		return _log;
 	}
 
+	@Override
 	protected void processFilter(
 			HttpServletRequest request, HttpServletResponse response,
 			FilterChain filterChain)

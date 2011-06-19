@@ -87,6 +87,7 @@ public class PortletURLWrapper implements PortletURL {
 		_portletURL.setWindowState(windowState);
 	}
 
+	@Override
 	public String toString() {
 		return _portletURL.toString();
 	}

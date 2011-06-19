@@ -139,6 +139,7 @@ public class GlobalStartupAction extends SimpleAction {
 		return sandboxDeployListeners;
 	}
 
+	@Override
 	public void run(String[] ids) {
 
 		// Hot deploy

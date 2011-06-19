@@ -36,6 +36,7 @@ public class UserOrganizationChecker extends RowChecker {
 		_organization = organization;
 	}
 
+	@Override
 	public boolean isChecked(Object obj) {
 		User user = (User)obj;
 

@@ -39,6 +39,7 @@ public class SessionIdServletRequest extends HttpServletRequestWrapper {
 		_response = response;
 	}
 
+	@Override
 	public HttpSession getSession() {
 		HttpSession session = super.getSession();
 
@@ -47,6 +48,7 @@ public class SessionIdServletRequest extends HttpServletRequestWrapper {
 		return session;
 	}
 
+	@Override
 	public HttpSession getSession(boolean create) {
 		HttpSession session = super.getSession(create);
 

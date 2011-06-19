@@ -54,21 +54,21 @@ public class JournalArticleWorkflowHandler extends BaseWorkflowHandler {
 
 		long userId = GetterUtil.getLong(
 			(String)workflowContext.get(WorkflowConstants.CONTEXT_USER_ID));
-		long resourcePrimKey = GetterUtil.getLong(
+		long classPK = GetterUtil.getLong(
 			(String)workflowContext.get(
 				WorkflowConstants.CONTEXT_ENTRY_CLASS_PK));
 
 		ServiceContext serviceContext = (ServiceContext)workflowContext.get(
 			"serviceContext");
 
-		JournalArticle article =
-			JournalArticleLocalServiceUtil.getLatestArticle(
-				resourcePrimKey, WorkflowConstants.STATUS_ANY, false);
+		JournalArticle article = JournalArticleLocalServiceUtil.getArticle(
+			classPK);
 
 		return JournalArticleLocalServiceUtil.updateStatus(
 			userId, article, status, null, serviceContext);
 	}
 
+	@Override
 	protected String getIconPath(ThemeDisplay themeDisplay) {
 		return themeDisplay.getPathThemeImages() + "/common/history.png";
 	}

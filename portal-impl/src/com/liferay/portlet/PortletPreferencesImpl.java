@@ -57,12 +57,14 @@ public class PortletPreferencesImpl
 		_portletId = portletId;
 	}
 
+	@Override
 	public Object clone() {
 		return new PortletPreferencesImpl(
 			getCompanyId(), getOwnerId(), getOwnerType(), _plid, _portletId,
 			getOriginalPreferences());
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		PortletPreferencesImpl portletPreferences = (PortletPreferencesImpl)obj;
 
@@ -84,6 +86,7 @@ public class PortletPreferencesImpl
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		HashCode hashCode = HashCodeFactoryUtil.getHashCode();
 
@@ -97,6 +100,7 @@ public class PortletPreferencesImpl
 		return hashCode.toHashCode();
 	}
 
+	@Override
 	public void reset(String key) throws ReadOnlyException {
 		if (isReadOnly(key)) {
 			throw new ReadOnlyException(key);
@@ -133,6 +137,7 @@ public class PortletPreferencesImpl
 		}
 	}
 
+	@Override
 	public void store() throws IOException, ValidatorException {
 		if (_portletId == null) {
 			throw new UnsupportedOperationException();

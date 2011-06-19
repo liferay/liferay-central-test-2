@@ -23,10 +23,12 @@ import javax.portlet.RenderRequest;
 public class RenderRequestImpl
 	extends PortletRequestImpl implements RenderRequest {
 
+	@Override
 	public String getETag() {
 		return null;
 	}
 
+	@Override
 	public String getLifecycle() {
 		return PortletRequest.RENDER_PHASE;
 	}

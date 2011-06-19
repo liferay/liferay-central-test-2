@@ -46,6 +46,7 @@ public class InitialThreadLocal<T> extends CentralizedThreadLocal<T> {
 		}
 	}
 
+	@Override
 	public String toString() {
 		if (_name != null) {
 			return _name;
@@ -55,6 +56,7 @@ public class InitialThreadLocal<T> extends CentralizedThreadLocal<T> {
 		}
 	}
 
+	@Override
 	protected T initialValue() {
 		if (_cloneMethod != null) {
 			try {

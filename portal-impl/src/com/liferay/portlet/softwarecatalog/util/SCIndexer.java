@@ -65,6 +65,7 @@ public class SCIndexer extends BaseIndexer {
 		return CLASS_NAMES;
 	}
 
+	@Override
 	protected void doDelete(Object obj) throws Exception {
 		SCProductEntry productEntry = (SCProductEntry)obj;
 
@@ -76,6 +77,7 @@ public class SCIndexer extends BaseIndexer {
 			productEntry.getCompanyId(), document.get(Field.UID));
 	}
 
+	@Override
 	protected Document doGetDocument(Object obj) throws Exception {
 		SCProductEntry productEntry = (SCProductEntry)obj;
 
@@ -136,6 +138,7 @@ public class SCIndexer extends BaseIndexer {
 		return document;
 	}
 
+	@Override
 	protected Summary doGetSummary(
 		Document document, Locale locale, String snippet,
 		PortletURL portletURL) {
@@ -157,6 +160,7 @@ public class SCIndexer extends BaseIndexer {
 		return new Summary(title, content, portletURL);
 	}
 
+	@Override
 	protected void doReindex(Object obj) throws Exception {
 		SCProductEntry productEntry = (SCProductEntry)obj;
 
@@ -165,6 +169,7 @@ public class SCIndexer extends BaseIndexer {
 		SearchEngineUtil.updateDocument(productEntry.getCompanyId(), document);
 	}
 
+	@Override
 	protected void doReindex(String className, long classPK) throws Exception {
 		SCProductEntry productEntry =
 			SCProductEntryLocalServiceUtil.getProductEntry(classPK);
@@ -172,16 +177,19 @@ public class SCIndexer extends BaseIndexer {
 		doReindex(productEntry);
 	}
 
+	@Override
 	protected void doReindex(String[] ids) throws Exception {
 		long companyId = GetterUtil.getLong(ids[0]);
 
 		reindexProductEntries(companyId);
 	}
 
+	@Override
 	protected String getPortletId(SearchContext searchContext) {
 		return PORTLET_ID;
 	}
 
+	@Override
 	protected void postProcessFullQuery(
 			BooleanQuery fullQuery, SearchContext searchContext)
 		throws Exception {

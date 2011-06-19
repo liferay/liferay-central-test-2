@@ -34,6 +34,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class DDLRecordVersionPersistenceTest extends BasePersistenceTestCase {
+	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -70,19 +71,31 @@ public class DDLRecordVersionPersistenceTest extends BasePersistenceTestCase {
 		DDLRecordVersion newDDLRecordVersion = _persistence.create(pk);
 
 		newDDLRecordVersion.setGroupId(nextLong());
+
 		newDDLRecordVersion.setCompanyId(nextLong());
+
 		newDDLRecordVersion.setUserId(nextLong());
+
 		newDDLRecordVersion.setUserName(randomString());
+
 		newDDLRecordVersion.setCreateDate(nextDate());
-		newDDLRecordVersion.setClassNameId(nextLong());
-		newDDLRecordVersion.setClassPK(nextLong());
+
+		newDDLRecordVersion.setDDMStorageId(nextLong());
+
 		newDDLRecordVersion.setRecordSetId(nextLong());
+
 		newDDLRecordVersion.setRecordId(nextLong());
+
 		newDDLRecordVersion.setVersion(randomString());
+
 		newDDLRecordVersion.setDisplayIndex(nextInt());
+
 		newDDLRecordVersion.setStatus(nextInt());
+
 		newDDLRecordVersion.setStatusByUserId(nextLong());
+
 		newDDLRecordVersion.setStatusByUserName(randomString());
+
 		newDDLRecordVersion.setStatusDate(nextDate());
 
 		_persistence.update(newDDLRecordVersion, false);
@@ -102,10 +115,8 @@ public class DDLRecordVersionPersistenceTest extends BasePersistenceTestCase {
 		assertEquals(Time.getShortTimestamp(
 				existingDDLRecordVersion.getCreateDate()),
 			Time.getShortTimestamp(newDDLRecordVersion.getCreateDate()));
-		assertEquals(existingDDLRecordVersion.getClassNameId(),
-			newDDLRecordVersion.getClassNameId());
-		assertEquals(existingDDLRecordVersion.getClassPK(),
-			newDDLRecordVersion.getClassPK());
+		assertEquals(existingDDLRecordVersion.getDDMStorageId(),
+			newDDLRecordVersion.getDDMStorageId());
 		assertEquals(existingDDLRecordVersion.getRecordSetId(),
 			newDDLRecordVersion.getRecordSetId());
 		assertEquals(existingDDLRecordVersion.getRecordId(),
@@ -255,19 +266,31 @@ public class DDLRecordVersionPersistenceTest extends BasePersistenceTestCase {
 		DDLRecordVersion ddlRecordVersion = _persistence.create(pk);
 
 		ddlRecordVersion.setGroupId(nextLong());
+
 		ddlRecordVersion.setCompanyId(nextLong());
+
 		ddlRecordVersion.setUserId(nextLong());
+
 		ddlRecordVersion.setUserName(randomString());
+
 		ddlRecordVersion.setCreateDate(nextDate());
-		ddlRecordVersion.setClassNameId(nextLong());
-		ddlRecordVersion.setClassPK(nextLong());
+
+		ddlRecordVersion.setDDMStorageId(nextLong());
+
 		ddlRecordVersion.setRecordSetId(nextLong());
+
 		ddlRecordVersion.setRecordId(nextLong());
+
 		ddlRecordVersion.setVersion(randomString());
+
 		ddlRecordVersion.setDisplayIndex(nextInt());
+
 		ddlRecordVersion.setStatus(nextInt());
+
 		ddlRecordVersion.setStatusByUserId(nextLong());
+
 		ddlRecordVersion.setStatusByUserName(randomString());
+
 		ddlRecordVersion.setStatusDate(nextDate());
 
 		_persistence.update(ddlRecordVersion, false);

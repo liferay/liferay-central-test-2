@@ -20,6 +20,7 @@ package com.liferay.portal.kernel.scheduler.config;
 public class DefaultSchedulingConfigurator
 	extends AbstractSchedulingConfigurator{
 
+	@Override
 	protected ClassLoader getOperatingClassloader() {
 		Thread currentThread = Thread.currentThread();
 

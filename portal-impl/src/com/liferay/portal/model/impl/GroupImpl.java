@@ -255,6 +255,7 @@ public class GroupImpl extends GroupModelImpl implements Group {
 		return GroupConstants.getTypeLabel(getType());
 	}
 
+	@Override
 	public String getTypeSettings() {
 		if (_typeSettingsProperties == null) {
 			return super.getTypeSettings();
@@ -405,6 +406,7 @@ public class GroupImpl extends GroupModelImpl implements Group {
 		return hasClassName(UserGroup.class);
 	}
 
+	@Override
 	public void setTypeSettings(String typeSettings) {
 		_typeSettingsProperties = null;
 

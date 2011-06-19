@@ -195,6 +195,7 @@ public class SocialRelationModelImpl extends BaseModelImpl<SocialRelation>
 		return _originalType;
 	}
 
+	@Override
 	public SocialRelation toEscapedModel() {
 		if (isEscapedModel()) {
 			return (SocialRelation)this;
@@ -205,6 +206,7 @@ public class SocialRelationModelImpl extends BaseModelImpl<SocialRelation>
 		}
 	}
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
@@ -214,10 +216,12 @@ public class SocialRelationModelImpl extends BaseModelImpl<SocialRelation>
 		return _expandoBridge;
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		getExpandoBridge().setAttributes(serviceContext);
 	}
 
+	@Override
 	public Object clone() {
 		SocialRelationImpl socialRelationImpl = new SocialRelationImpl();
 
@@ -248,6 +252,7 @@ public class SocialRelationModelImpl extends BaseModelImpl<SocialRelation>
 		}
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -272,10 +277,12 @@ public class SocialRelationModelImpl extends BaseModelImpl<SocialRelation>
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		SocialRelationModelImpl socialRelationModelImpl = this;
 
@@ -292,6 +299,7 @@ public class SocialRelationModelImpl extends BaseModelImpl<SocialRelation>
 		socialRelationModelImpl._setOriginalType = false;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(15);
 

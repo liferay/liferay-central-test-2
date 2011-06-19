@@ -150,6 +150,7 @@ public class VerifySQLServer extends VerifyProcess {
 		runSQL(sb.toString());
 	}
 
+	@Override
 	protected void doVerify() throws Exception {
 		DB db = DBFactoryUtil.getDB();
 

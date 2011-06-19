@@ -25,6 +25,7 @@ public class AddressImpl implements com.liferay.portal.kernel.cluster.Address {
 		_address = address;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -55,10 +56,12 @@ public class AddressImpl implements com.liferay.portal.kernel.cluster.Address {
 		return _address;
 	}
 
+	@Override
 	public int hashCode() {
 		return _address.hashCode();
 	}
 
+	@Override
 	public String toString() {
 		return _address.toString();
 	}

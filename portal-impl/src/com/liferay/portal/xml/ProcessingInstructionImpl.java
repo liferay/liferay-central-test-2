@@ -33,10 +33,12 @@ public class ProcessingInstructionImpl
 		_processingInstruction = processingInstruction;
 	}
 
+	@Override
 	public <T, V extends Visitor<T>> T accept(V visitor) {
 		return visitor.visitProcessInstruction(this);
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		org.dom4j.ProcessingInstruction processingInstruction =
 			((ProcessingInstructionImpl)obj).getWrappedProcessingInstruction();
@@ -48,6 +50,7 @@ public class ProcessingInstructionImpl
 		return _processingInstruction.getTarget();
 	}
 
+	@Override
 	public String getText() {
 		return _processingInstruction.getText();
 	}
@@ -64,6 +67,7 @@ public class ProcessingInstructionImpl
 		return _processingInstruction;
 	}
 
+	@Override
 	public int hashCode() {
 		return _processingInstruction.hashCode();
 	}
@@ -84,6 +88,7 @@ public class ProcessingInstructionImpl
 		_processingInstruction.setValues(data);
 	}
 
+	@Override
 	public String toString() {
 		return _processingInstruction.toString();
 	}

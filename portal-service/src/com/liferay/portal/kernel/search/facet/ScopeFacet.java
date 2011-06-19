@@ -43,6 +43,7 @@ public class ScopeFacet extends MultiValueFacet {
 		setFieldName(Field.GROUP_ID);
 	}
 
+	@Override
 	protected BooleanClause doGetFacetClause() {
 		SearchContext searchContext = getSearchContext();
 

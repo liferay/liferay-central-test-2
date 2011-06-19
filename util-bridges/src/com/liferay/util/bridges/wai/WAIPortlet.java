@@ -30,6 +30,7 @@ import javax.portlet.RenderResponse;
  */
 public class WAIPortlet extends LiferayPortlet {
 
+	@Override
 	public void render(
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {

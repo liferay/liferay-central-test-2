@@ -59,6 +59,7 @@ public class PreviewTag extends IncludeTag {
 		requestDispatcher.include(request, response);
 	}
 
+	@Override
 	public int doEndTag() throws JspException {
 		try {
 			ServletContext servletContext = getServletContext();
@@ -92,6 +93,7 @@ public class PreviewTag extends IncludeTag {
 		_width = width;
 	}
 
+	@Override
 	protected String getPage() {
 		return _PAGE;
 	}

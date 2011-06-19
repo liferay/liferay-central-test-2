@@ -89,6 +89,7 @@ public class DynamicRenderRequest extends RenderRequestWrapper {
 		}
 	}
 
+	@Override
 	public String getParameter(String name) {
 		String[] values = _params.get(name);
 
@@ -104,6 +105,7 @@ public class DynamicRenderRequest extends RenderRequestWrapper {
 		}
 	}
 
+	@Override
 	public Map<String, String[]> getParameterMap() {
 		Map<String, String[]> map = new HashMap<String, String[]>();
 
@@ -118,6 +120,7 @@ public class DynamicRenderRequest extends RenderRequestWrapper {
 		return map;
 	}
 
+	@Override
 	public Enumeration<String> getParameterNames() {
 		Set<String> names = new LinkedHashSet<String>();
 
@@ -134,6 +137,7 @@ public class DynamicRenderRequest extends RenderRequestWrapper {
 		return Collections.enumeration(names);
 	}
 
+	@Override
 	public String[] getParameterValues(String name) {
 		String[] values = _params.get(name);
 

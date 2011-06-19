@@ -33,6 +33,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class ExpandoColumnPersistenceTest extends BasePersistenceTestCase {
+	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -69,10 +70,15 @@ public class ExpandoColumnPersistenceTest extends BasePersistenceTestCase {
 		ExpandoColumn newExpandoColumn = _persistence.create(pk);
 
 		newExpandoColumn.setCompanyId(nextLong());
+
 		newExpandoColumn.setTableId(nextLong());
+
 		newExpandoColumn.setName(randomString());
+
 		newExpandoColumn.setType(nextInt());
+
 		newExpandoColumn.setDefaultData(randomString());
+
 		newExpandoColumn.setTypeSettings(randomString());
 
 		_persistence.update(newExpandoColumn, false);
@@ -219,10 +225,15 @@ public class ExpandoColumnPersistenceTest extends BasePersistenceTestCase {
 		ExpandoColumn expandoColumn = _persistence.create(pk);
 
 		expandoColumn.setCompanyId(nextLong());
+
 		expandoColumn.setTableId(nextLong());
+
 		expandoColumn.setName(randomString());
+
 		expandoColumn.setType(nextInt());
+
 		expandoColumn.setDefaultData(randomString());
+
 		expandoColumn.setTypeSettings(randomString());
 
 		_persistence.update(expandoColumn, false);

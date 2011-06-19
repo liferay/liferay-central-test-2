@@ -137,6 +137,7 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(OrgGroupPermissionImpl.class.getName());
@@ -154,6 +155,7 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(OrgGroupPermission orgGroupPermission) {
 		EntityCacheUtil.removeResult(OrgGroupPermissionModelImpl.ENTITY_CACHE_ENABLED,
 			OrgGroupPermissionImpl.class, orgGroupPermission.getPrimaryKey());
@@ -182,6 +184,7 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 	 * @throws com.liferay.portal.NoSuchModelException if a org group permission with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public OrgGroupPermission remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove((OrgGroupPermissionPK)primaryKey);
@@ -235,11 +238,13 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 	 * @return the org group permission that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public OrgGroupPermission remove(OrgGroupPermission orgGroupPermission)
 		throws SystemException {
 		return super.remove(orgGroupPermission);
 	}
 
+	@Override
 	protected OrgGroupPermission removeImpl(
 		OrgGroupPermission orgGroupPermission) throws SystemException {
 		orgGroupPermission = toUnwrappedModel(orgGroupPermission);
@@ -266,6 +271,7 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 		return orgGroupPermission;
 	}
 
+	@Override
 	public OrgGroupPermission updateImpl(
 		com.liferay.portal.model.OrgGroupPermission orgGroupPermission,
 		boolean merge) throws SystemException {
@@ -322,6 +328,7 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 	 * @throws com.liferay.portal.NoSuchModelException if a org group permission with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public OrgGroupPermission findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey((OrgGroupPermissionPK)primaryKey);
@@ -360,6 +367,7 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 	 * @return the org group permission, or <code>null</code> if a org group permission with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public OrgGroupPermission fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey((OrgGroupPermissionPK)primaryKey);

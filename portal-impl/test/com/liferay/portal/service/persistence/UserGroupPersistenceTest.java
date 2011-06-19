@@ -32,6 +32,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class UserGroupPersistenceTest extends BasePersistenceTestCase {
+	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -68,9 +69,13 @@ public class UserGroupPersistenceTest extends BasePersistenceTestCase {
 		UserGroup newUserGroup = _persistence.create(pk);
 
 		newUserGroup.setCompanyId(nextLong());
+
 		newUserGroup.setParentUserGroupId(nextLong());
+
 		newUserGroup.setName(randomString());
+
 		newUserGroup.setDescription(randomString());
+
 		newUserGroup.setAddedByLDAPImport(randomBoolean());
 
 		_persistence.update(newUserGroup, false);
@@ -216,9 +221,13 @@ public class UserGroupPersistenceTest extends BasePersistenceTestCase {
 		UserGroup userGroup = _persistence.create(pk);
 
 		userGroup.setCompanyId(nextLong());
+
 		userGroup.setParentUserGroupId(nextLong());
+
 		userGroup.setName(randomString());
+
 		userGroup.setDescription(randomString());
+
 		userGroup.setAddedByLDAPImport(randomBoolean());
 
 		_persistence.update(userGroup, false);

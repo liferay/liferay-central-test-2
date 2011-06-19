@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.util.StringBundler;
  */
 public class IconDeactivateTag extends IconTag {
 
+	@Override
 	protected String getPage() {
 		if (FileAvailabilityUtil.isAvailable(getServletContext(), _PAGE)) {
 			return _PAGE;

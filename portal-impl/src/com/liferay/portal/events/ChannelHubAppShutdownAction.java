@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
  */
 public class ChannelHubAppShutdownAction extends SimpleAction {
 
+	@Override
 	public void run(String[] ids) {
 		try {
 			long companyId = GetterUtil.getLong(ids[0]);

@@ -350,6 +350,7 @@ public class JournalStructureModelImpl extends BaseModelImpl<JournalStructure>
 		_xsd = xsd;
 	}
 
+	@Override
 	public JournalStructure toEscapedModel() {
 		if (isEscapedModel()) {
 			return (JournalStructure)this;
@@ -360,6 +361,7 @@ public class JournalStructureModelImpl extends BaseModelImpl<JournalStructure>
 		}
 	}
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
@@ -369,10 +371,12 @@ public class JournalStructureModelImpl extends BaseModelImpl<JournalStructure>
 		return _expandoBridge;
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		getExpandoBridge().setAttributes(serviceContext);
 	}
 
+	@Override
 	public Object clone() {
 		JournalStructureImpl journalStructureImpl = new JournalStructureImpl();
 
@@ -407,6 +411,7 @@ public class JournalStructureModelImpl extends BaseModelImpl<JournalStructure>
 		return 0;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -431,10 +436,12 @@ public class JournalStructureModelImpl extends BaseModelImpl<JournalStructure>
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		JournalStructureModelImpl journalStructureModelImpl = this;
 
@@ -447,6 +454,7 @@ public class JournalStructureModelImpl extends BaseModelImpl<JournalStructure>
 		journalStructureModelImpl._originalStructureId = journalStructureModelImpl._structureId;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(27);
 

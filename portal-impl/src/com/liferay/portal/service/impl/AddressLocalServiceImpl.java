@@ -81,10 +81,12 @@ public class AddressLocalServiceImpl extends AddressLocalServiceBaseImpl {
 		return address;
 	}
 
+	@Override
 	public void deleteAddress(Address address) throws SystemException {
 		addressPersistence.remove(address);
 	}
 
+	@Override
 	public void deleteAddress(long addressId)
 		throws PortalException, SystemException {
 
@@ -106,6 +108,7 @@ public class AddressLocalServiceImpl extends AddressLocalServiceBaseImpl {
 		}
 	}
 
+	@Override
 	public Address getAddress(long addressId)
 		throws PortalException, SystemException {
 

@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.events.SimpleAction;
  */
 public class AppShutdownAction extends SimpleAction {
 
+	@Override
 	public void run(String[] ids) {
 	}
 

@@ -66,6 +66,7 @@ public class BookmarksEntryAssetRendererFactory
 		return TYPE;
 	}
 
+	@Override
 	public PortletURL getURLAdd(
 			LiferayPortletRequest liferayPortletRequest,
 			LiferayPortletResponse liferayPortletResponse)
@@ -98,6 +99,7 @@ public class BookmarksEntryAssetRendererFactory
 		return portletURL;
 	}
 
+	@Override
 	public boolean hasPermission(
 			PermissionChecker permissionChecker, long classPK, String actionId)
 		throws Exception {
@@ -106,6 +108,7 @@ public class BookmarksEntryAssetRendererFactory
 			permissionChecker, classPK, actionId);
 	}
 
+	@Override
 	protected String getIconPath(ThemeDisplay themeDisplay) {
 		return themeDisplay.getPathThemeImages() + "/ratings/star_hover.png";
 	}

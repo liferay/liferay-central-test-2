@@ -38,6 +38,7 @@ import org.apache.struts.action.ActionMapping;
  */
 public class ViewPageAction extends PortletAction {
 
+	@Override
 	public ActionForward render(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
 			RenderRequest renderRequest, RenderResponse renderResponse)
@@ -95,6 +96,7 @@ public class ViewPageAction extends PortletAction {
 		ActionUtil.getFirstVisibleNode(renderRequest);
 	}
 
+	@Override
 	protected boolean isCheckMethodOnProcessAction() {
 		return false;
 	}

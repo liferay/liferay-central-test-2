@@ -241,6 +241,7 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 		process(request, response);
 	}
 
+	@Override
 	protected void doForward(
 			String uri, HttpServletRequest request,
 			HttpServletResponse response)
@@ -249,6 +250,7 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 		doInclude(uri, request, response);
 	}
 
+	@Override
 	protected void doInclude(
 			String uri, HttpServletRequest request,
 			HttpServletResponse response)
@@ -291,6 +293,7 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 		}
 	}
 
+	@Override
 	protected Action processActionCreate(
 			HttpServletRequest request, HttpServletResponse response,
 			ActionMapping actionMapping)
@@ -319,6 +322,7 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 		return super.processActionCreate(request, response, actionMapping);
 	}
 
+	@Override
 	protected ActionForm processActionForm(
 		HttpServletRequest request, HttpServletResponse response,
 		ActionMapping actionMapping) {
@@ -336,6 +340,7 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 		return actionForm;
 	}
 
+	@Override
 	protected ActionForward processActionPerform(
 			HttpServletRequest request, HttpServletResponse response,
 			Action action, ActionForm actionForm, ActionMapping actionMapping)
@@ -361,6 +366,7 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 		}
 	}
 
+	@Override
 	protected void processForwardConfig(
 			HttpServletRequest request, HttpServletResponse response,
 			ForwardConfig forward)
@@ -382,6 +388,7 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 		super.processForwardConfig(request, response, forward);
 	}
 
+	@Override
 	public ActionMapping processMapping(
 		HttpServletRequest request, HttpServletResponse response, String path) {
 
@@ -463,6 +470,7 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 		return actionMapping;
 	}
 
+	@Override
 	protected HttpServletRequest processMultipart(HttpServletRequest request) {
 
 		// Disable Struts from automatically wrapping a multipart request
@@ -470,6 +478,7 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 		return request;
 	}
 
+	@Override
 	protected String processPath(
 		HttpServletRequest request, HttpServletResponse response) {
 
@@ -505,6 +514,7 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 		return path;
 	}
 
+	@Override
 	protected boolean processRoles(
 			HttpServletRequest request, HttpServletResponse response,
 			ActionMapping actionMapping)

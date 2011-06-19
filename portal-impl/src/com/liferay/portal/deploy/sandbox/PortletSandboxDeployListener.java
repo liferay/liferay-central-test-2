@@ -62,6 +62,7 @@ public class PortletSandboxDeployListener
 		_sandboxHandler.deploy(dir);
 	}
 
+	@Override
 	public String getDisplayName(File srcFile) {
 		String displayName = super.getDisplayName(srcFile);
 

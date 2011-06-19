@@ -32,6 +32,7 @@ import java.io.File;
  */
 public class IGImageServiceTest extends BaseServiceTestCase {
 
+	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -68,6 +69,7 @@ public class IGImageServiceTest extends BaseServiceTestCase {
 			serviceContext);
 	}
 
+	@Override
 	public void tearDown() throws Exception {
 		if (_folder != null) {
 			IGFolderServiceUtil.deleteFolder(_folder.getFolderId());

@@ -62,6 +62,7 @@ public class LayoutRevisionWorkflowHandler extends BaseWorkflowHandler {
 			userId, layoutRevisionId, status, serviceContext);
 	}
 
+	@Override
 	protected String getIconPath(ThemeDisplay themeDisplay) {
 		return themeDisplay.getPathThemeImages() + "/common/pages.png";
 	}

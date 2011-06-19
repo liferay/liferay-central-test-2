@@ -326,6 +326,7 @@ public class LayoutSetPrototypeWrapper implements LayoutSetPrototype {
 		_layoutSetPrototype.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new LayoutSetPrototypeWrapper((LayoutSetPrototype)_layoutSetPrototype.clone());
 	}
@@ -335,6 +336,7 @@ public class LayoutSetPrototypeWrapper implements LayoutSetPrototype {
 		return _layoutSetPrototype.compareTo(layoutSetPrototype);
 	}
 
+	@Override
 	public int hashCode() {
 		return _layoutSetPrototype.hashCode();
 	}
@@ -343,6 +345,7 @@ public class LayoutSetPrototypeWrapper implements LayoutSetPrototype {
 		return new LayoutSetPrototypeWrapper(_layoutSetPrototype.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _layoutSetPrototype.toString();
 	}

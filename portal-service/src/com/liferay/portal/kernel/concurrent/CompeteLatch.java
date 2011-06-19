@@ -113,6 +113,7 @@ public class CompeteLatch {
 
 	private class Sync extends AbstractQueuedSynchronizer {
 
+		@Override
 		protected int tryAcquireShared(int arg) {
 			if (getState() == 0) {
 				return 1;
@@ -122,6 +123,7 @@ public class CompeteLatch {
 			}
 		}
 
+		@Override
 		protected boolean tryReleaseShared(int arg) {
 			if (compareAndSetState(1, 0)) {
 				return true;

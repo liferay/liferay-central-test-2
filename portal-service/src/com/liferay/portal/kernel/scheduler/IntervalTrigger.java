@@ -46,6 +46,7 @@ public class IntervalTrigger extends BaseTrigger {
 		return _interval;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(5);
 

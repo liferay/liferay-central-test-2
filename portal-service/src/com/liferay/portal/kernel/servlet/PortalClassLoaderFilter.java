@@ -98,6 +98,7 @@ public class PortalClassLoaderFilter
 		return true;
 	}
 
+	@Override
 	protected void doPortalDestroy() {
 		Thread currentThread = Thread.currentThread();
 
@@ -114,6 +115,7 @@ public class PortalClassLoaderFilter
 		}
 	}
 
+	@Override
 	protected void doPortalInit() throws Exception {
 		ClassLoader classLoader = PortalClassLoaderUtil.getClassLoader();
 

@@ -35,6 +35,7 @@ public class CollectionNode extends ASTNode {
 		_astNodes = astNodes;
 	}
 
+	@Override
 	public void accept(ASTVisitor astVisitor) {
 		astVisitor.visit(this);
 	}

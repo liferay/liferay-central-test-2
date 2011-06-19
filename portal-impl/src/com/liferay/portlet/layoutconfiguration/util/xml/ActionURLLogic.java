@@ -39,14 +39,17 @@ public class ActionURLLogic extends RuntimeLogic {
 		_renderResponseImpl = (RenderResponseImpl)renderResponse;
 	}
 
+	@Override
 	public String getOpenTag() {
 		return OPEN_TAG;
 	}
 
+	@Override
 	public String getClose1Tag() {
 		return CLOSE_1_TAG;
 	}
 
+	@Override
 	public String processXML(String xml) throws Exception {
 		Document doc = SAXReaderUtil.read(xml);
 

@@ -119,6 +119,7 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(ClassNameImpl.class.getName());
@@ -136,6 +137,7 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(ClassName className) {
 		EntityCacheUtil.removeResult(ClassNameModelImpl.ENTITY_CACHE_ENABLED,
 			ClassNameImpl.class, className.getPrimaryKey());
@@ -167,6 +169,7 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 	 * @throws com.liferay.portal.NoSuchModelException if a class name with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ClassName remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
@@ -219,10 +222,12 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 	 * @return the class name that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ClassName remove(ClassName className) throws SystemException {
 		return super.remove(className);
 	}
 
+	@Override
 	protected ClassName removeImpl(ClassName className)
 		throws SystemException {
 		className = toUnwrappedModel(className);
@@ -254,6 +259,7 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 		return className;
 	}
 
+	@Override
 	public ClassName updateImpl(com.liferay.portal.model.ClassName className,
 		boolean merge) throws SystemException {
 		className = toUnwrappedModel(className);
@@ -324,6 +330,7 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 	 * @throws com.liferay.portal.NoSuchModelException if a class name with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ClassName findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
@@ -360,6 +367,7 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 	 * @return the class name, or <code>null</code> if a class name with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ClassName fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());

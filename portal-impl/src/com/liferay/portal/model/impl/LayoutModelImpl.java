@@ -957,6 +957,7 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 		_layoutPrototypeId = layoutPrototypeId;
 	}
 
+	@Override
 	public Layout toEscapedModel() {
 		if (isEscapedModel()) {
 			return (Layout)this;
@@ -967,6 +968,7 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 		}
 	}
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
@@ -976,10 +978,12 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 		return _expandoBridge;
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		getExpandoBridge().setAttributes(serviceContext);
 	}
 
+	@Override
 	public Object clone() {
 		LayoutImpl layoutImpl = new LayoutImpl();
 
@@ -1050,6 +1054,7 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 		return 0;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -1074,10 +1079,12 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		LayoutModelImpl layoutModelImpl = this;
 
@@ -1102,6 +1109,7 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 		layoutModelImpl._setOriginalIconImageId = false;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(55);
 

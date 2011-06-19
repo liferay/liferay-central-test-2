@@ -103,6 +103,7 @@ public abstract class BaseRegionWrapper implements CacheRegistryItem, Region {
 		return _ehcacheDataRegion.toMap();
 	}
 
+	@Override
 	public String toString() {
 		return _ehcacheDataRegion.toString();
 	}

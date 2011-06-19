@@ -33,6 +33,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class SitemapServlet extends HttpServlet {
 
+	@Override
 	public void service(
 			HttpServletRequest request, HttpServletResponse response)
 		throws IOException, ServletException {

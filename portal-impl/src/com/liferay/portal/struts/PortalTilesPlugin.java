@@ -22,6 +22,7 @@ import org.apache.struts.tiles.TilesPlugin;
  */
 public class PortalTilesPlugin extends TilesPlugin {
 
+	@Override
 	protected void initRequestProcessorClass(ModuleConfig moduleConfig) {
 	}
 

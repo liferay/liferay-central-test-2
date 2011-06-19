@@ -165,6 +165,7 @@ public class ResourceCodeModelImpl extends BaseModelImpl<ResourceCode>
 		return _originalScope;
 	}
 
+	@Override
 	public ResourceCode toEscapedModel() {
 		if (isEscapedModel()) {
 			return (ResourceCode)this;
@@ -175,6 +176,7 @@ public class ResourceCodeModelImpl extends BaseModelImpl<ResourceCode>
 		}
 	}
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
@@ -184,10 +186,12 @@ public class ResourceCodeModelImpl extends BaseModelImpl<ResourceCode>
 		return _expandoBridge;
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		getExpandoBridge().setAttributes(serviceContext);
 	}
 
+	@Override
 	public Object clone() {
 		ResourceCodeImpl resourceCodeImpl = new ResourceCodeImpl();
 
@@ -215,6 +219,7 @@ public class ResourceCodeModelImpl extends BaseModelImpl<ResourceCode>
 		}
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -239,10 +244,12 @@ public class ResourceCodeModelImpl extends BaseModelImpl<ResourceCode>
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		ResourceCodeModelImpl resourceCodeModelImpl = this;
 
@@ -257,6 +264,7 @@ public class ResourceCodeModelImpl extends BaseModelImpl<ResourceCode>
 		resourceCodeModelImpl._setOriginalScope = false;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(9);
 

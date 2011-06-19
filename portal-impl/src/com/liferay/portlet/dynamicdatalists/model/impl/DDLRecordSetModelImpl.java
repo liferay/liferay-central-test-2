@@ -498,6 +498,7 @@ public class DDLRecordSetModelImpl extends BaseModelImpl<DDLRecordSet>
 		_minDisplayRows = minDisplayRows;
 	}
 
+	@Override
 	public DDLRecordSet toEscapedModel() {
 		if (isEscapedModel()) {
 			return (DDLRecordSet)this;
@@ -508,6 +509,7 @@ public class DDLRecordSetModelImpl extends BaseModelImpl<DDLRecordSet>
 		}
 	}
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
@@ -517,10 +519,12 @@ public class DDLRecordSetModelImpl extends BaseModelImpl<DDLRecordSet>
 		return _expandoBridge;
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		getExpandoBridge().setAttributes(serviceContext);
 	}
 
+	@Override
 	public Object clone() {
 		DDLRecordSetImpl ddlRecordSetImpl = new DDLRecordSetImpl();
 
@@ -557,6 +561,7 @@ public class DDLRecordSetModelImpl extends BaseModelImpl<DDLRecordSet>
 		}
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -581,10 +586,12 @@ public class DDLRecordSetModelImpl extends BaseModelImpl<DDLRecordSet>
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		DDLRecordSetModelImpl ddlRecordSetModelImpl = this;
 
@@ -597,6 +604,7 @@ public class DDLRecordSetModelImpl extends BaseModelImpl<DDLRecordSet>
 		ddlRecordSetModelImpl._originalRecordSetKey = ddlRecordSetModelImpl._recordSetKey;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(27);
 

@@ -25,6 +25,7 @@ import java.sql.ResultSet;
  */
 public class ResourceDependencyManager extends DependencyManager {
 
+	@Override
 	public void update(
 			long oldPrimaryKeyValue, Object[] oldColumnValues,
 			Object[] oldExtraColumnValues, long newPrimaryKeyValue,

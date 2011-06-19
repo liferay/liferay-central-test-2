@@ -21,6 +21,7 @@ import javax.portlet.PortletRequest;
  */
 public class RenderURLTag extends ActionURLTag {
 
+	@Override
 	public String getLifecycle() {
 		return PortletRequest.RENDER_PHASE;
 	}

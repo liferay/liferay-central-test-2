@@ -48,14 +48,14 @@ for (int j = 0; j < fileEntryColumns.length; j++) {
 		<c:when test='<%= fileEntryColumn.equals("locked") %>'>
 
 			<%
-			boolean isLocked = fileEntry.isLocked();
+			boolean isCheckedOut = fileEntry.isCheckedOut();
 			%>
 
 			<liferay-ui:search-container-column-text
 				href="<%= rowHREF %>"
 				index="<%= j %>"
 				name="<%= fileEntryColumn %>"
-				value='<%= LanguageUtil.get(pageContext, isLocked ? "yes" : "no") %>'
+				value='<%= LanguageUtil.get(pageContext, isCheckedOut ? "yes" : "no") %>'
 			/>
 		</c:when>
 		<c:when test='<%= fileEntryColumn.equals("name") %>'>
@@ -65,7 +65,7 @@ for (int j = 0; j < fileEntryColumns.length; j++) {
 				name="<%= fileEntryColumn %>"
 			>
 				<c:choose>
-					<c:when test="<%= PDFProcessorUtil.hasImages(fileEntry) %>">
+					<c:when test="<%= PDFProcessor.hasImages(fileEntry) %>">
 						<div>
 							<img src="<%= themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + themeDisplay.getScopeGroupId() + StringPool.SLASH + fileEntry.getFolderId() + StringPool.SLASH + HttpUtil.encodeURL(HtmlUtil.unescape(fileEntry.getTitle())) + "?version=" + fileEntry.getVersion() + "&thumbnail=1" %>" />
 

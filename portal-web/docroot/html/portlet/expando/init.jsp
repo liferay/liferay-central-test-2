@@ -16,14 +16,7 @@
 
 <%@ include file="/html/portlet/init.jsp" %>
 
-<%@ page import="com.liferay.portal.ResourcePrimKeyException" %>
 <%@ page import="com.liferay.portal.service.permission.PortalPermissionUtil" %>
-<%@ page import="com.liferay.portlet.blogs.model.BlogsEntry" %>
-<%@ page import="com.liferay.portlet.bookmarks.model.BookmarksEntry" %>
-<%@ page import="com.liferay.portlet.bookmarks.model.BookmarksFolder" %>
-<%@ page import="com.liferay.portlet.calendar.model.CalEvent" %>
-<%@ page import="com.liferay.portlet.documentlibrary.model.DLFileEntryConstants" %>
-<%@ page import="com.liferay.portlet.documentlibrary.model.DLFolderConstants" %>
 <%@ page import="com.liferay.portlet.expando.ColumnNameException" %>
 <%@ page import="com.liferay.portlet.expando.ColumnTypeException" %>
 <%@ page import="com.liferay.portlet.expando.DuplicateColumnNameException" %>
@@ -33,19 +26,12 @@
 <%@ page import="com.liferay.portlet.expando.model.ExpandoBridge" %>
 <%@ page import="com.liferay.portlet.expando.model.ExpandoColumn" %>
 <%@ page import="com.liferay.portlet.expando.model.ExpandoColumnConstants" %>
-<%@ page import="com.liferay.portlet.expando.model.ExpandoTableConstants" %>
 <%@ page import="com.liferay.portlet.expando.model.ExpandoValue" %>
 <%@ page import="com.liferay.portlet.expando.model.impl.ExpandoValueImpl" %>
 <%@ page import="com.liferay.portlet.expando.service.ExpandoColumnLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.expando.service.permission.ExpandoColumnPermission" %>
 <%@ page import="com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil" %>
 <%@ page import="com.liferay.portlet.expando.util.comparator.CustomAttributesDisplayComparator" %>
-<%@ page import="com.liferay.portlet.imagegallery.model.IGFolder" %>
-<%@ page import="com.liferay.portlet.imagegallery.model.IGImage" %>
-<%@ page import="com.liferay.portlet.journal.model.JournalArticle" %>
-<%@ page import="com.liferay.portlet.messageboards.model.MBCategory" %>
-<%@ page import="com.liferay.portlet.messageboards.model.MBMessage" %>
-<%@ page import="com.liferay.portlet.wiki.model.WikiPage" %>
 
 <%
 PortalPreferences portalPreferences = PortletPreferencesFactoryUtil.getPortalPreferences(request);

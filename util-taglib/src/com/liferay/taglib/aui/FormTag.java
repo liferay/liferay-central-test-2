@@ -33,6 +33,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class FormTag extends BaseFormTag {
 
+	@Override
 	public String getAction() {
 		return super.getAction();
 	}
@@ -43,6 +44,7 @@ public class FormTag extends BaseFormTag {
 		}
 	}
 
+	@Override
 	protected void cleanUp() {
 		super.cleanUp();
 
@@ -59,10 +61,12 @@ public class FormTag extends BaseFormTag {
 		}
 	}
 
+	@Override
 	protected boolean isCleanUpSetAttributes() {
 		return _CLEAN_UP_SET_ATTRIBUTES;
 	}
 
+	@Override
 	protected void setAttributes(HttpServletRequest request) {
 		super.setAttributes(request);
 

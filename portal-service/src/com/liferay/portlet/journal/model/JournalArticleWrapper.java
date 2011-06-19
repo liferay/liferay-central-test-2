@@ -979,6 +979,7 @@ public class JournalArticleWrapper implements JournalArticle {
 		_journalArticle.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new JournalArticleWrapper((JournalArticle)_journalArticle.clone());
 	}
@@ -988,6 +989,7 @@ public class JournalArticleWrapper implements JournalArticle {
 		return _journalArticle.compareTo(journalArticle);
 	}
 
+	@Override
 	public int hashCode() {
 		return _journalArticle.hashCode();
 	}
@@ -996,6 +998,7 @@ public class JournalArticleWrapper implements JournalArticle {
 		return new JournalArticleWrapper(_journalArticle.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _journalArticle.toString();
 	}

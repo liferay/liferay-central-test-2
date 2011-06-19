@@ -31,10 +31,12 @@ public class ListDocumentsMethodImpl extends BaseMethodImpl {
 		return _METHOD_NAME;
 	}
 
+	@Override
 	public String getRootPath(SharepointRequest sharepointRequest) {
 		return sharepointRequest.getParameterValue("initialUrl");
 	}
 
+	@Override
 	protected List<ResponseElement> getElements(
 			SharepointRequest sharepointRequest)
 		throws Exception {

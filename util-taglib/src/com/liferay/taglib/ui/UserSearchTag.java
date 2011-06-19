@@ -40,20 +40,24 @@ public class UserSearchTag extends IncludeTag {
 		_userParams = userParams;
 	}
 
+	@Override
 	protected void cleanUp() {
 		_portletURL = null;
 		_rowChecker = null;
 		_userParams = null;
 	}
 
+	@Override
 	protected String getEndPage() {
 		return _END_PAGE;
 	}
 
+	@Override
 	protected String getStartPage() {
 		return _START_PAGE;
 	}
 
+	@Override
 	protected void setAttributes(HttpServletRequest request) {
 		request.setAttribute(
 			"liferay-ui:user-search:portletURL", _portletURL);

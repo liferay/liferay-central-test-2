@@ -61,6 +61,7 @@ public class I18nFilter extends BasePortalFilter {
 		_languageIds = Collections.unmodifiableSet(_languageIds);
 	}
 
+	@Override
 	public boolean isFilterEnabled(
 		HttpServletRequest request, HttpServletResponse response) {
 
@@ -214,6 +215,7 @@ public class I18nFilter extends BasePortalFilter {
 		}
 	}
 
+	@Override
 	protected void processFilter(
 			HttpServletRequest request, HttpServletResponse response,
 			FilterChain filterChain)

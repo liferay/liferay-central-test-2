@@ -29,10 +29,13 @@ public class ${entity.name}Wrapper implements ${entity.name} {
 
 	<#list methods as method>
 		<#if !method.isConstructor() && !method.isStatic() && method.isPublic() && !serviceBuilder.isDuplicateMethod(method, tempMap)>
-			${serviceBuilder.getJavadocComment(method)}
-			public ${serviceBuilder.getTypeGenericsName(method.returns)} ${method.name} (
-
 			<#assign parameters = method.parameters>
+
+			${serviceBuilder.getJavadocComment(method)}
+			<#if (method.name == "clone" || method.name == "hashCode" || method.name == "toString") && (parameters?size == 0)>
+				@Override
+			</#if>
+			public ${serviceBuilder.getTypeGenericsName(method.returns)} ${method.name} (
 
 			<#list parameters as parameter>
 				${serviceBuilder.getTypeGenericsName(parameter.type)} ${parameter.name}

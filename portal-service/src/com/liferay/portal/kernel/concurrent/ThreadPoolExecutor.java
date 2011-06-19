@@ -398,6 +398,7 @@ public class ThreadPoolExecutor extends AbstractExecutorService {
 		}
 	}
 
+	@Override
 	protected void finalize() {
 		shutdown();
 	}
@@ -605,6 +606,7 @@ public class ThreadPoolExecutor extends AbstractExecutorService {
 			}
 		}
 
+		@Override
 		protected boolean isHeldExclusively() {
 			if (getState() == 1) {
 				return true;
@@ -614,10 +616,12 @@ public class ThreadPoolExecutor extends AbstractExecutorService {
 			}
 		}
 
+		@Override
 		protected boolean tryAcquire(int unused) {
 			return compareAndSetState(0, 1);
 		}
 
+		@Override
 		protected boolean tryRelease(int unused) {
 			setState(0);
 

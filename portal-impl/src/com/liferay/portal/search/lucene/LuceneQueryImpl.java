@@ -30,10 +30,12 @@ public class LuceneQueryImpl extends BaseQueryImpl implements Query {
 		return _query;
 	}
 
+	@Override
 	public Object getWrappedQuery() {
 		return _query;
 	}
 
+	@Override
 	public String toString() {
 		return _query.toString();
 	}

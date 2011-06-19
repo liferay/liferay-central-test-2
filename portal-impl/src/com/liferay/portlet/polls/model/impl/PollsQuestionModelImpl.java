@@ -477,6 +477,7 @@ public class PollsQuestionModelImpl extends BaseModelImpl<PollsQuestion>
 		_lastVoteDate = lastVoteDate;
 	}
 
+	@Override
 	public PollsQuestion toEscapedModel() {
 		if (isEscapedModel()) {
 			return (PollsQuestion)this;
@@ -487,6 +488,7 @@ public class PollsQuestionModelImpl extends BaseModelImpl<PollsQuestion>
 		}
 	}
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
@@ -496,10 +498,12 @@ public class PollsQuestionModelImpl extends BaseModelImpl<PollsQuestion>
 		return _expandoBridge;
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		getExpandoBridge().setAttributes(serviceContext);
 	}
 
+	@Override
 	public Object clone() {
 		PollsQuestionImpl pollsQuestionImpl = new PollsQuestionImpl();
 
@@ -536,6 +540,7 @@ public class PollsQuestionModelImpl extends BaseModelImpl<PollsQuestion>
 		return 0;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -560,10 +565,12 @@ public class PollsQuestionModelImpl extends BaseModelImpl<PollsQuestion>
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		PollsQuestionModelImpl pollsQuestionModelImpl = this;
 
@@ -574,6 +581,7 @@ public class PollsQuestionModelImpl extends BaseModelImpl<PollsQuestion>
 		pollsQuestionModelImpl._setOriginalGroupId = false;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(25);
 

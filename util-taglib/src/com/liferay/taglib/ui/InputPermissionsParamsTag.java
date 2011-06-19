@@ -43,6 +43,7 @@ public class InputPermissionsParamsTag extends TagSupport {
 		}
 	}
 
+	@Override
 	public int doEndTag() throws JspException {
 		try {
 			doTag(_modelName, pageContext);

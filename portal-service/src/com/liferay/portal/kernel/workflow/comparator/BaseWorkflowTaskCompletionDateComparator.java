@@ -33,6 +33,7 @@ public abstract class BaseWorkflowTaskCompletionDateComparator
 		_ascending = ascending;
 	}
 
+	@Override
 	public int compare(Object obj1, Object obj2) {
 		WorkflowTask workflowTask1 = (WorkflowTask)obj1;
 		WorkflowTask workflowTask2 = (WorkflowTask)obj2;
@@ -57,6 +58,7 @@ public abstract class BaseWorkflowTaskCompletionDateComparator
 		}
 	}
 
+	@Override
 	public boolean isAscending() {
 		return _ascending;
 	}

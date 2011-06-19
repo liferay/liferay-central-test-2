@@ -23,6 +23,7 @@ import com.liferay.portal.model.impl.PasswordPolicyImpl;
  */
 public class PasswordPolicyToolkitTest extends TestCase {
 
+	@Override
 	public void setUp() throws Exception {
 		_passwordPolicyToolkit = new PasswordPolicyToolkit();
 

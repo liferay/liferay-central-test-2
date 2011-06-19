@@ -66,6 +66,7 @@ public class PluginPackageImpl
 		return getName().compareTo(pluginPackage.getName());
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (!(obj instanceof PluginPackage)) {
 			return false;
@@ -200,6 +201,7 @@ public class PluginPackageImpl
 		return _moduleId.getVersion();
 	}
 
+	@Override
 	public int hashCode() {
 		HashCodeBuilder hashCodeBuilder = new HashCodeBuilder();
 
@@ -291,6 +293,7 @@ public class PluginPackageImpl
 		_types = types;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(4);
 

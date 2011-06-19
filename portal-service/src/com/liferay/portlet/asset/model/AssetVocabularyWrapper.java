@@ -525,6 +525,7 @@ public class AssetVocabularyWrapper implements AssetVocabulary {
 		_assetVocabulary.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new AssetVocabularyWrapper((AssetVocabulary)_assetVocabulary.clone());
 	}
@@ -534,6 +535,7 @@ public class AssetVocabularyWrapper implements AssetVocabulary {
 		return _assetVocabulary.compareTo(assetVocabulary);
 	}
 
+	@Override
 	public int hashCode() {
 		return _assetVocabulary.hashCode();
 	}
@@ -542,6 +544,7 @@ public class AssetVocabularyWrapper implements AssetVocabulary {
 		return new AssetVocabularyWrapper(_assetVocabulary.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _assetVocabulary.toString();
 	}
@@ -552,6 +555,10 @@ public class AssetVocabularyWrapper implements AssetVocabulary {
 
 	public com.liferay.portal.kernel.util.UnicodeProperties getSettingsProperties() {
 		return _assetVocabulary.getSettingsProperties();
+	}
+
+	public boolean isMultiValued() {
+		return _assetVocabulary.isMultiValued();
 	}
 
 	public boolean isRequired(long classNameId) {

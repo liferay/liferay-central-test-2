@@ -48,6 +48,7 @@ public class TermRangeQueryImpl extends BaseQueryImpl
 		return _upperTerm;
 	}
 
+	@Override
 	public Object getWrappedQuery() {
 		return this;
 	}
@@ -60,6 +61,7 @@ public class TermRangeQueryImpl extends BaseQueryImpl
 		return _includesUpper;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(7);
 

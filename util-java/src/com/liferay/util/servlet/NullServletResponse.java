@@ -34,10 +34,12 @@ public class NullServletResponse extends HttpServletResponseWrapper {
 		_printWriter = new UnsyncPrintWriter(_servletOutputStream);
 	}
 
+	@Override
 	public ServletOutputStream getOutputStream() {
 		return _servletOutputStream;
 	}
 
+	@Override
 	public PrintWriter getWriter() {
 		return _printWriter;
 	}

@@ -33,6 +33,7 @@ public class HeaderCacheServletResponse extends HttpServletResponseWrapper {
 		super(response);
 	}
 
+	@Override
 	public void addDateHeader(String name, long value) {
 		List<Header> values = _headers.get(name);
 
@@ -52,6 +53,7 @@ public class HeaderCacheServletResponse extends HttpServletResponseWrapper {
 		super.addDateHeader(name, value);
 	}
 
+	@Override
 	public void addHeader(String name, String value) {
 		List<Header> values = _headers.get(name);
 
@@ -75,6 +77,7 @@ public class HeaderCacheServletResponse extends HttpServletResponseWrapper {
 		super.addHeader(name, value);
 	}
 
+	@Override
 	public void addIntHeader(String name, int value) {
 		List<Header> values = _headers.get(name);
 
@@ -94,10 +97,12 @@ public class HeaderCacheServletResponse extends HttpServletResponseWrapper {
 		super.addIntHeader(name, value);
 	}
 
+	@Override
 	public void flushBuffer() {
 		_committed = true;
 	}
 
+	@Override
 	public String getContentType() {
 		return _contentType;
 	}
@@ -122,37 +127,44 @@ public class HeaderCacheServletResponse extends HttpServletResponseWrapper {
 		return _status;
 	}
 
+	@Override
 	public boolean isCommitted() {
 		return _committed;
 	}
 
+	@Override
 	public void sendError(int status) throws IOException {
 		_status = status;
 
 		super.sendError(status);
 	}
 
+	@Override
 	public void sendError(int status, String msg) throws IOException {
 		_status = status;
 
 		super.sendError(status, msg);
 	}
 
+	@Override
 	public void sendRedirect(String location) throws IOException {
 		super.sendRedirect(location);
 
 		setStatus(SC_MOVED_TEMPORARILY);
 	}
 
+	@Override
 	public void setContentLength(int contentLength) {
 	}
 
+	@Override
 	public void setContentType(String contentType) {
 		_contentType = contentType;
 
 		super.setContentType(contentType);
 	}
 
+	@Override
 	public void setDateHeader(String name, long value) {
 		List<Header> values = new ArrayList<Header>();
 
@@ -168,6 +180,7 @@ public class HeaderCacheServletResponse extends HttpServletResponseWrapper {
 		super.setDateHeader(name, value);
 	}
 
+	@Override
 	public void setHeader(String name, String value) {
 		List<Header> values = new ArrayList<Header>();
 
@@ -187,6 +200,7 @@ public class HeaderCacheServletResponse extends HttpServletResponseWrapper {
 		super.setHeader(name, value);
 	}
 
+	@Override
 	public void setIntHeader(String name, int value) {
 		List<Header> values = new ArrayList<Header>();
 
@@ -202,6 +216,7 @@ public class HeaderCacheServletResponse extends HttpServletResponseWrapper {
 		super.setIntHeader(name, value);
 	}
 
+	@Override
 	public void setStatus(int status) {
 		_status = status;
 

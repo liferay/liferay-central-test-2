@@ -52,6 +52,7 @@ import java.util.Map;
  */
 public class UpgradeGroup extends UpgradeProcess {
 
+	@Override
 	protected void doUpgrade() throws Exception {
 
 		// Group_

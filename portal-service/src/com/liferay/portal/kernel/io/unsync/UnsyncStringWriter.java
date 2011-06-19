@@ -54,12 +54,14 @@ public class UnsyncStringWriter extends Writer {
 		this(true, initialCapacity);
 	}
 
+	@Override
 	public UnsyncStringWriter append(char c) {
 		write(c);
 
 		return this;
 	}
 
+	@Override
 	public UnsyncStringWriter append(CharSequence charSequence) {
 		if (charSequence == null) {
 			write(StringPool.NULL);
@@ -71,6 +73,7 @@ public class UnsyncStringWriter extends Writer {
 		return this;
 	}
 
+	@Override
 	public UnsyncStringWriter append(
 		CharSequence charSequence, int start, int end) {
 
@@ -83,9 +86,11 @@ public class UnsyncStringWriter extends Writer {
 		return this;
 	}
 
+	@Override
 	public void close() {
 	}
 
+	@Override
 	public void flush() {
 	}
 
@@ -106,6 +111,7 @@ public class UnsyncStringWriter extends Writer {
 		}
 	}
 
+	@Override
 	public String toString() {
 		if (stringBundler != null) {
 			return stringBundler.toString();
@@ -115,6 +121,7 @@ public class UnsyncStringWriter extends Writer {
 		}
 	}
 
+	@Override
 	public void write(char[] chars, int offset, int length) {
 		if (length <= 0) {
 			return;
@@ -128,11 +135,13 @@ public class UnsyncStringWriter extends Writer {
 		}
 	}
 
+	@Override
 	public void write(char[] chars) {
 		write(chars, 0, chars.length);
 
 	}
 
+	@Override
 	public void write(int c) {
 		if (stringBundler != null) {
 			char ch = (char)c;
@@ -149,6 +158,7 @@ public class UnsyncStringWriter extends Writer {
 		}
 	}
 
+	@Override
 	public void write(String string) {
 		if (stringBundler != null) {
 			stringBundler.append(string);
@@ -158,6 +168,7 @@ public class UnsyncStringWriter extends Writer {
 		}
 	}
 
+	@Override
 	public void write(String string, int offset, int length) {
 		if (stringBundler != null) {
 			stringBundler.append(string.substring(offset, offset + length));

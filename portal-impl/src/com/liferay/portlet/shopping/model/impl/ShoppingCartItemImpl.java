@@ -49,6 +49,7 @@ public class ShoppingCartItemImpl implements ShoppingCartItem {
 		return value;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -89,6 +90,7 @@ public class ShoppingCartItemImpl implements ShoppingCartItem {
 		return _item;
 	}
 
+	@Override
 	public int hashCode() {
 		HashCode hashCode = HashCodeFactoryUtil.getHashCode();
 

@@ -43,6 +43,7 @@ import org.springframework.orm.hibernate3.LocalSessionFactoryBean;
  */
 public class PortalHibernateConfiguration extends LocalSessionFactoryBean {
 
+	@Override
 	public SessionFactory buildSessionFactory() throws Exception {
 		return super.buildSessionFactory();
 	}
@@ -65,6 +66,7 @@ public class PortalHibernateConfiguration extends LocalSessionFactoryBean {
 		return PropsUtil.getArray(PropsKeys.HIBERNATE_CONFIGS);
 	}
 
+	@Override
 	protected Configuration newConfiguration() {
 		Configuration configuration = new Configuration();
 
@@ -118,6 +120,7 @@ public class PortalHibernateConfiguration extends LocalSessionFactoryBean {
 		return configuration;
 	}
 
+	@Override
 	protected void postProcessConfiguration(Configuration configuration) {
 
 		// Make sure that the Hibernate settings from PropsUtil are set. See the

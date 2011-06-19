@@ -31,6 +31,7 @@ import org.jamwiki.model.TopicType;
  */
 public class LiferayDataHandler extends DummyDataHandler {
 
+	@Override
 	public Namespace lookupNamespace(
 		String virtualWiki, String namespaceString) {
 
@@ -44,10 +45,12 @@ public class LiferayDataHandler extends DummyDataHandler {
 		}
 	}
 
+	@Override
 	public Namespace lookupNamespaceById(int namespaceId) {
 		return Namespace.DEFAULT_NAMESPACES.get(namespaceId);
 	}
 
+	@Override
 	public Topic lookupTopic(
 		String virtualWiki, String topicName, boolean deleteOK,
 		Connection conn) {
@@ -59,6 +62,7 @@ public class LiferayDataHandler extends DummyDataHandler {
 		return topic;
 	}
 
+	@Override
 	public Integer lookupTopicId(String virtualWiki, String topicName) {
 		long nodeId = getNodeId(virtualWiki);
 

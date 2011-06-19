@@ -33,6 +33,7 @@ import org.apache.lucene.search.TopDocs;
  */
 public class IndexAccessorImplTest extends BaseTestCase {
 
+	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -45,6 +46,7 @@ public class IndexAccessorImplTest extends BaseTestCase {
 		_indexAccessorImpl = new IndexAccessorImpl(_TEST_COMPANY_ID);
 	}
 
+	@Override
 	public void tearDown() throws Exception {
 		super.tearDown();
 

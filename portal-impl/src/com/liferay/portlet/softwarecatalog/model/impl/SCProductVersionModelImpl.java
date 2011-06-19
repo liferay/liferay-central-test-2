@@ -320,6 +320,7 @@ public class SCProductVersionModelImpl extends BaseModelImpl<SCProductVersion>
 		_repoStoreArtifact = repoStoreArtifact;
 	}
 
+	@Override
 	public SCProductVersion toEscapedModel() {
 		if (isEscapedModel()) {
 			return (SCProductVersion)this;
@@ -330,6 +331,7 @@ public class SCProductVersionModelImpl extends BaseModelImpl<SCProductVersion>
 		}
 	}
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
@@ -339,10 +341,12 @@ public class SCProductVersionModelImpl extends BaseModelImpl<SCProductVersion>
 		return _expandoBridge;
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		getExpandoBridge().setAttributes(serviceContext);
 	}
 
+	@Override
 	public Object clone() {
 		SCProductVersionImpl scProductVersionImpl = new SCProductVersionImpl();
 
@@ -379,6 +383,7 @@ public class SCProductVersionModelImpl extends BaseModelImpl<SCProductVersion>
 		return 0;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -403,16 +408,19 @@ public class SCProductVersionModelImpl extends BaseModelImpl<SCProductVersion>
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		SCProductVersionModelImpl scProductVersionModelImpl = this;
 
 		scProductVersionModelImpl._originalDirectDownloadURL = scProductVersionModelImpl._directDownloadURL;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(25);
 

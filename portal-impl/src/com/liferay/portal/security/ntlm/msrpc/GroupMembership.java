@@ -30,6 +30,7 @@ public class GroupMembership extends NdrObject {
 		_attributes = attributes;
 	}
 
+	@Override
 	public void decode(NdrBuffer ndrBuffer) {
 		ndrBuffer.align(4);
 
@@ -37,6 +38,7 @@ public class GroupMembership extends NdrObject {
 		_attributes = ndrBuffer.dec_ndr_long();
 	}
 
+	@Override
 	public void encode(NdrBuffer ndrBuffer) {
 		ndrBuffer.align(4);
 

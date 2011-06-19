@@ -46,6 +46,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class DLSharepointStorageImpl extends BaseSharepointStorageImpl {
 
+	@Override
 	public void addDocumentElements(
 			SharepointRequest sharepointRequest, Element element)
 		throws Exception {
@@ -74,6 +75,7 @@ public class DLSharepointStorageImpl extends BaseSharepointStorageImpl {
 		}
 	}
 
+	@Override
 	public void createFolder(SharepointRequest sharepointRequest)
 		throws Exception {
 
@@ -96,6 +98,7 @@ public class DLSharepointStorageImpl extends BaseSharepointStorageImpl {
 			groupId, parentFolderId, folderName, description, serviceContext);
 	}
 
+	@Override
 	public InputStream getDocumentInputStream(
 			SharepointRequest sharepointRequest)
 		throws Exception {
@@ -105,6 +108,7 @@ public class DLSharepointStorageImpl extends BaseSharepointStorageImpl {
 		return fileEntry.getContentStream();
 	}
 
+	@Override
 	public Tree getDocumentTree(SharepointRequest sharepointRequest)
 		throws Exception {
 
@@ -116,6 +120,7 @@ public class DLSharepointStorageImpl extends BaseSharepointStorageImpl {
 		return getFileEntryTree(fileEntry, parentFolderPath);
 	}
 
+	@Override
 	public Tree getDocumentsTree(SharepointRequest sharepointRequest)
 		throws Exception {
 
@@ -141,6 +146,7 @@ public class DLSharepointStorageImpl extends BaseSharepointStorageImpl {
 		return documentsTree;
 	}
 
+	@Override
 	public Tree getFolderTree(SharepointRequest sharepointRequest)
 		throws Exception {
 
@@ -156,6 +162,7 @@ public class DLSharepointStorageImpl extends BaseSharepointStorageImpl {
 		return getFolderTree(folder, parentFolderPath);
 	}
 
+	@Override
 	public Tree getFoldersTree(SharepointRequest sharepointRequest)
 		throws Exception {
 
@@ -180,6 +187,7 @@ public class DLSharepointStorageImpl extends BaseSharepointStorageImpl {
 		return foldersTree;
 	}
 
+	@Override
 	public void getParentFolderIds(
 			long groupId, String path, List<Long> folderIds)
 		throws Exception {
@@ -203,6 +211,7 @@ public class DLSharepointStorageImpl extends BaseSharepointStorageImpl {
 		}
 	}
 
+	@Override
 	public Tree[] moveDocument(SharepointRequest sharepointRequest)
 		throws Exception {
 
@@ -291,6 +300,7 @@ public class DLSharepointStorageImpl extends BaseSharepointStorageImpl {
 		return new Tree[] {movedDocsTree, movedDirsTree};
 	}
 
+	@Override
 	public void putDocument(SharepointRequest sharepointRequest)
 		throws Exception {
 
@@ -346,6 +356,7 @@ public class DLSharepointStorageImpl extends BaseSharepointStorageImpl {
 		}
 	}
 
+	@Override
 	public Tree[] removeDocument(SharepointRequest sharepointRequest) {
 		String parentFolderPath = sharepointRequest.getRootPath();
 

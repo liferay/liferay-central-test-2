@@ -60,6 +60,7 @@ public class LiferayFolder extends LiferayModel implements Folder {
 		return expandoBridge.getAttributes();
 	}
 
+	@Override
 	public long getCompanyId() {
 		return _dlFolder.getCompanyId();
 	}
@@ -72,6 +73,7 @@ public class LiferayFolder extends LiferayModel implements Folder {
 		return _dlFolder.getDescription();
 	}
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		return _dlFolder.getExpandoBridge();
 	}
@@ -96,6 +98,7 @@ public class LiferayFolder extends LiferayModel implements Folder {
 		return DLFolder.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return DLFolder.class.getName();
 	}
@@ -123,6 +126,7 @@ public class LiferayFolder extends LiferayModel implements Folder {
 		return _dlFolder.getParentFolderId();
 	}
 
+	@Override
 	public long getPrimaryKey() {
 		return _dlFolder.getPrimaryKey();
 	}

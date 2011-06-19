@@ -205,6 +205,7 @@ public class UserIdMapperWrapper implements UserIdMapper {
 		_userIdMapper.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new UserIdMapperWrapper((UserIdMapper)_userIdMapper.clone());
 	}
@@ -213,6 +214,7 @@ public class UserIdMapperWrapper implements UserIdMapper {
 		return _userIdMapper.compareTo(userIdMapper);
 	}
 
+	@Override
 	public int hashCode() {
 		return _userIdMapper.hashCode();
 	}
@@ -221,6 +223,7 @@ public class UserIdMapperWrapper implements UserIdMapper {
 		return new UserIdMapperWrapper(_userIdMapper.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _userIdMapper.toString();
 	}

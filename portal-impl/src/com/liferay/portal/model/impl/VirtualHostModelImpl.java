@@ -165,6 +165,7 @@ public class VirtualHostModelImpl extends BaseModelImpl<VirtualHost>
 		return GetterUtil.getString(_originalHostname);
 	}
 
+	@Override
 	public VirtualHost toEscapedModel() {
 		if (isEscapedModel()) {
 			return (VirtualHost)this;
@@ -175,6 +176,7 @@ public class VirtualHostModelImpl extends BaseModelImpl<VirtualHost>
 		}
 	}
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
@@ -184,10 +186,12 @@ public class VirtualHostModelImpl extends BaseModelImpl<VirtualHost>
 		return _expandoBridge;
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		getExpandoBridge().setAttributes(serviceContext);
 	}
 
+	@Override
 	public Object clone() {
 		VirtualHostImpl virtualHostImpl = new VirtualHostImpl();
 
@@ -215,6 +219,7 @@ public class VirtualHostModelImpl extends BaseModelImpl<VirtualHost>
 		}
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -239,10 +244,12 @@ public class VirtualHostModelImpl extends BaseModelImpl<VirtualHost>
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		VirtualHostModelImpl virtualHostModelImpl = this;
 
@@ -257,6 +264,7 @@ public class VirtualHostModelImpl extends BaseModelImpl<VirtualHost>
 		virtualHostModelImpl._originalHostname = virtualHostModelImpl._hostname;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(9);
 

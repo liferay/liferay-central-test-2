@@ -44,6 +44,7 @@ import org.apache.axis.utils.cache.MethodCache;
  */
 public class AxisServlet extends org.apache.axis.transport.http.AxisServlet {
 
+	@Override
 	public void destroy() {
 		if (ServerDetector.isWebLogic()) {
 			doDestroy();
@@ -73,6 +74,7 @@ public class AxisServlet extends org.apache.axis.transport.http.AxisServlet {
 		}
 	}
 
+	@Override
 	public void init(ServletConfig servletConfig) throws ServletException {
 		_servletConfig = servletConfig;
 
@@ -104,6 +106,7 @@ public class AxisServlet extends org.apache.axis.transport.http.AxisServlet {
 		}
 	}
 
+	@Override
 	public void service(
 			HttpServletRequest request, HttpServletResponse response)
 		throws IOException, ServletException {
@@ -247,6 +250,7 @@ public class AxisServlet extends org.apache.axis.transport.http.AxisServlet {
 			return _exception;
 		}
 
+		@Override
 		public void run() {
 			try {
 				doDestroy();
@@ -270,6 +274,7 @@ public class AxisServlet extends org.apache.axis.transport.http.AxisServlet {
 			return _exception;
 		}
 
+		@Override
 		public void run() {
 			try {
 				doInit();

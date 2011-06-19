@@ -28,6 +28,7 @@ import java.util.Map;
  */
 public class Message implements Cloneable, Serializable {
 
+	@Override
 	public Message clone() {
 		Message message = new Message();
 
@@ -188,6 +189,7 @@ public class Message implements Cloneable, Serializable {
 		_values = values;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(11);
 

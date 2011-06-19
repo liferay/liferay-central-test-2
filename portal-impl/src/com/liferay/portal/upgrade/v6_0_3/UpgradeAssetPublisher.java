@@ -51,10 +51,12 @@ public class UpgradeAssetPublisher extends BaseUpgradePortletPreferences {
 		return newAssetEntryXmls;
 	}
 
+	@Override
 	protected String[] getPortletIds() {
 		return new String[] {"101_INSTANCE_%"};
 	}
 
+	@Override
 	protected String upgradePreferences(
 			long companyId, long ownerId, int ownerType, long plid,
 			String portletId, String xml)

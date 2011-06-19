@@ -22,6 +22,7 @@ import java.io.Serializable;
  */
 public class SocialEquityActionMapping implements Serializable {
 
+	@Override
 	public SocialEquityActionMapping clone() {
 		SocialEquityActionMapping equityActionMapping =
 			new SocialEquityActionMapping();

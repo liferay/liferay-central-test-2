@@ -55,10 +55,12 @@ public class EntriesChecker extends RowChecker {
 		_permissionChecker = themeDisplay.getPermissionChecker();
 	}
 
+	@Override
 	public String getAllRowsCheckBox() {
 		return null;
 	}
 
+	@Override
 	public String getRowCheckBox(boolean checked, String primaryKey) {
 		DLFileShortcut dlFileShortcut = null;
 		FileEntry fileEntry = null;

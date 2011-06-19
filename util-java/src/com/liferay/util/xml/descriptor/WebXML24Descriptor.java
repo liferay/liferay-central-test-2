@@ -33,6 +33,7 @@ public class WebXML24Descriptor extends SimpleXMLDescriptor {
 			"jsp-config", new String[] {"taglib", "jsp-property-group"});
 	}
 
+	@Override
 	public boolean canHandleType(String doctype, Document root) {
 		if (doctype.indexOf("web-app") != -1) {
 			return true;
@@ -42,10 +43,12 @@ public class WebXML24Descriptor extends SimpleXMLDescriptor {
 		}
 	}
 
+	@Override
 	public String[] getRootChildrenOrder() {
 		return _ROOT_ORDERED_CHILDREN;
 	}
 
+	@Override
 	public String[] getChildrenOrder(Element parentElement) {
 		String parentName = parentElement.getQName().getName();
 
@@ -56,18 +59,22 @@ public class WebXML24Descriptor extends SimpleXMLDescriptor {
 		return new String[0];
 	}
 
+	@Override
 	public ElementIdentifier[] getElementsIdentifiedByAttribute() {
 		return _ELEMENTS_IDENTIFIED_BY_ATTR;
 	}
 
+	@Override
 	public ElementIdentifier[] getElementsIdentifiedByChild() {
 		return _ELEMENTS_IDENTIFIED_BY_CHILD;
 	}
 
+	@Override
 	public String[] getUniqueElements() {
 		return _UNIQUE_ELEMENTS;
 	}
 
+	@Override
 	public String[] getJoinableElements() {
 		return _JOINABLE_ELEMENTS;
 	}

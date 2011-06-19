@@ -31,6 +31,7 @@ import com.liferay.portal.poller.PollerRequestResponsePair;
  */
 public class PollerRequestMessageListener extends BaseMessageListener {
 
+	@Override
 	protected void doReceive(Message message) throws Exception {
 		PollerRequestResponsePair pollerRequestResponsePair =
 			(PollerRequestResponsePair)message.getPayload();

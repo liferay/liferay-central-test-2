@@ -29,6 +29,7 @@ import org.jmock.integration.junit4.JUnit4Mockery;
  */
 public class MessageBusManagerTest extends TestCase {
 
+	@Override
 	public void setUp() throws Exception {
 		_mBeanServer = ManagementFactory.getPlatformMBeanServer();
 		_mockery = new JUnit4Mockery();

@@ -47,6 +47,7 @@ public class LiferayFileUpload extends ServletFileUpload {
 		_session = request.getSession();
 	}
 
+	@Override
 	public List<LiferayFileItem> parseRequest(HttpServletRequest request)
 		throws FileUploadException {
 
@@ -59,6 +60,7 @@ public class LiferayFileUpload extends ServletFileUpload {
 	/**
 	 * @deprecated
 	 */
+	@Override
 	@SuppressWarnings("rawtypes")
 	protected FileItem createItem(Map headers, boolean formField)
 		throws FileUploadException {

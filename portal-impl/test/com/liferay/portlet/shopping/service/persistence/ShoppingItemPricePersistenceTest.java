@@ -30,6 +30,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class ShoppingItemPricePersistenceTest extends BasePersistenceTestCase {
+	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -66,13 +67,21 @@ public class ShoppingItemPricePersistenceTest extends BasePersistenceTestCase {
 		ShoppingItemPrice newShoppingItemPrice = _persistence.create(pk);
 
 		newShoppingItemPrice.setItemId(nextLong());
+
 		newShoppingItemPrice.setMinQuantity(nextInt());
+
 		newShoppingItemPrice.setMaxQuantity(nextInt());
+
 		newShoppingItemPrice.setPrice(nextDouble());
+
 		newShoppingItemPrice.setDiscount(nextDouble());
+
 		newShoppingItemPrice.setTaxable(randomBoolean());
+
 		newShoppingItemPrice.setShipping(nextDouble());
+
 		newShoppingItemPrice.setUseShippingFormula(randomBoolean());
+
 		newShoppingItemPrice.setStatus(nextInt());
 
 		_persistence.update(newShoppingItemPrice, false);
@@ -211,13 +220,21 @@ public class ShoppingItemPricePersistenceTest extends BasePersistenceTestCase {
 		ShoppingItemPrice shoppingItemPrice = _persistence.create(pk);
 
 		shoppingItemPrice.setItemId(nextLong());
+
 		shoppingItemPrice.setMinQuantity(nextInt());
+
 		shoppingItemPrice.setMaxQuantity(nextInt());
+
 		shoppingItemPrice.setPrice(nextDouble());
+
 		shoppingItemPrice.setDiscount(nextDouble());
+
 		shoppingItemPrice.setTaxable(randomBoolean());
+
 		shoppingItemPrice.setShipping(nextDouble());
+
 		shoppingItemPrice.setUseShippingFormula(randomBoolean());
+
 		shoppingItemPrice.setStatus(nextInt());
 
 		_persistence.update(shoppingItemPrice, false);

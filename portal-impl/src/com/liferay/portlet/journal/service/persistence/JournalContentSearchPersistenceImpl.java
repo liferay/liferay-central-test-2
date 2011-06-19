@@ -236,6 +236,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(JournalContentSearchImpl.class.getName());
@@ -253,6 +254,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(JournalContentSearch journalContentSearch) {
 		EntityCacheUtil.removeResult(JournalContentSearchModelImpl.ENTITY_CACHE_ENABLED,
 			JournalContentSearchImpl.class, journalContentSearch.getPrimaryKey());
@@ -292,6 +294,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 	 * @throws com.liferay.portal.NoSuchModelException if a journal content search with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public JournalContentSearch remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
@@ -345,11 +348,13 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 	 * @return the journal content search that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public JournalContentSearch remove(
 		JournalContentSearch journalContentSearch) throws SystemException {
 		return super.remove(journalContentSearch);
 	}
 
+	@Override
 	protected JournalContentSearch removeImpl(
 		JournalContentSearch journalContentSearch) throws SystemException {
 		journalContentSearch = toUnwrappedModel(journalContentSearch);
@@ -390,6 +395,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 		return journalContentSearch;
 	}
 
+	@Override
 	public JournalContentSearch updateImpl(
 		com.liferay.portlet.journal.model.JournalContentSearch journalContentSearch,
 		boolean merge) throws SystemException {
@@ -497,6 +503,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 	 * @throws com.liferay.portal.NoSuchModelException if a journal content search with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public JournalContentSearch findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
@@ -533,6 +540,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 	 * @return the journal content search, or <code>null</code> if a journal content search with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public JournalContentSearch fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());

@@ -95,6 +95,7 @@ public class UserTrackerImpl
 		return _paths.size();
 	}
 
+	@Override
 	public int compareTo(UserTracker userTracker) {
 		String userName1 = getFullName().toLowerCase();
 		String userName2 = userTracker.getFullName().toLowerCase();

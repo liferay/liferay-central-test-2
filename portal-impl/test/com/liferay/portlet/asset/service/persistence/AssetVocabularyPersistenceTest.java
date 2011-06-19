@@ -34,6 +34,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class AssetVocabularyPersistenceTest extends BasePersistenceTestCase {
+	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -70,15 +71,25 @@ public class AssetVocabularyPersistenceTest extends BasePersistenceTestCase {
 		AssetVocabulary newAssetVocabulary = _persistence.create(pk);
 
 		newAssetVocabulary.setUuid(randomString());
+
 		newAssetVocabulary.setGroupId(nextLong());
+
 		newAssetVocabulary.setCompanyId(nextLong());
+
 		newAssetVocabulary.setUserId(nextLong());
+
 		newAssetVocabulary.setUserName(randomString());
+
 		newAssetVocabulary.setCreateDate(nextDate());
+
 		newAssetVocabulary.setModifiedDate(nextDate());
+
 		newAssetVocabulary.setName(randomString());
+
 		newAssetVocabulary.setTitle(randomString());
+
 		newAssetVocabulary.setDescription(randomString());
+
 		newAssetVocabulary.setSettings(randomString());
 
 		_persistence.update(newAssetVocabulary, false);
@@ -248,15 +259,25 @@ public class AssetVocabularyPersistenceTest extends BasePersistenceTestCase {
 		AssetVocabulary assetVocabulary = _persistence.create(pk);
 
 		assetVocabulary.setUuid(randomString());
+
 		assetVocabulary.setGroupId(nextLong());
+
 		assetVocabulary.setCompanyId(nextLong());
+
 		assetVocabulary.setUserId(nextLong());
+
 		assetVocabulary.setUserName(randomString());
+
 		assetVocabulary.setCreateDate(nextDate());
+
 		assetVocabulary.setModifiedDate(nextDate());
+
 		assetVocabulary.setName(randomString());
+
 		assetVocabulary.setTitle(randomString());
+
 		assetVocabulary.setDescription(randomString());
+
 		assetVocabulary.setSettings(randomString());
 
 		_persistence.update(assetVocabulary, false);

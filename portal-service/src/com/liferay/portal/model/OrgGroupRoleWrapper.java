@@ -150,6 +150,7 @@ public class OrgGroupRoleWrapper implements OrgGroupRole {
 		_orgGroupRole.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new OrgGroupRoleWrapper((OrgGroupRole)_orgGroupRole.clone());
 	}
@@ -158,6 +159,7 @@ public class OrgGroupRoleWrapper implements OrgGroupRole {
 		return _orgGroupRole.compareTo(orgGroupRole);
 	}
 
+	@Override
 	public int hashCode() {
 		return _orgGroupRole.hashCode();
 	}
@@ -166,6 +168,7 @@ public class OrgGroupRoleWrapper implements OrgGroupRole {
 		return new OrgGroupRoleWrapper(_orgGroupRole.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _orgGroupRole.toString();
 	}

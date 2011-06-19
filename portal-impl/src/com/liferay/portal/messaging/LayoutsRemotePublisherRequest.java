@@ -47,50 +47,62 @@ public class LayoutsRemotePublisherRequest
 		_endDate = endDate;
 	}
 
+	@Override
 	public String getCronText() {
 		return _cronText;
 	}
 
+	@Override
 	public void setCronText(String cronText) {
 		_cronText = cronText;
 	}
 
+	@Override
 	public long getUserId() {
 		return _userId;
 	}
 
+	@Override
 	public void setUserId(long userId) {
 		_userId = userId;
 	}
 
+	@Override
 	public long getSourceGroupId() {
 		return _sourceGroupId;
 	}
 
+	@Override
 	public void setSourceGroupId(long sourceGroupId) {
 		_sourceGroupId = sourceGroupId;
 	}
 
+	@Override
 	public boolean isPrivateLayout() {
 		return _privateLayout;
 	}
 
+	@Override
 	public void setPrivateLayout(boolean privateLayout) {
 		_privateLayout = privateLayout;
 	}
 
+	@Override
 	public Map<Long, Boolean> getLayoutIdMap() {
 		return _layoutIdMap;
 	}
 
+	@Override
 	public void setLayoutIdMap(Map<Long, Boolean> layoutIdMap) {
 		_layoutIdMap = layoutIdMap;
 	}
 
+	@Override
 	public Map<String, String[]> getParameterMap() {
 		return _parameterMap;
 	}
 
+	@Override
 	public void setParameterMap(Map<String, String[]> parameterMap) {
 		_parameterMap = parameterMap;
 	}
@@ -135,26 +147,32 @@ public class LayoutsRemotePublisherRequest
 		_remotePrivateLayout = remotePrivateLayout;
 	}
 
+	@Override
 	public Date getStartDate() {
 		return _startDate;
 	}
 
+	@Override
 	public void setStartDate(Date startDate) {
 		_startDate = startDate;
 	}
 
+	@Override
 	public Date getEndDate() {
 		return _endDate;
 	}
 
+	@Override
 	public void setEndDate(Date endDate) {
 		_endDate = endDate;
 	}
 
+	@Override
 	public Date getScheduledFireTime() {
 		return _scheduledFireTime;
 	}
 
+	@Override
 	public void setScheduledFireTime(Date scheduledFireTime) {
 		_scheduledFireTime = scheduledFireTime;
 	}

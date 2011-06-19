@@ -20,6 +20,7 @@ package com.liferay.portal.util;
  */
 public class MemoryMultiValueMapTest extends MultiValueMapTestCase {
 
+	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 

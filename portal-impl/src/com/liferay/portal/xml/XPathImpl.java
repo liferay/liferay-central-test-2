@@ -37,6 +37,7 @@ public class XPathImpl implements XPath {
 		return _xPath.booleanValueOf(toOldContext(context));
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		org.dom4j.XPath xPath = ((XPathImpl)obj).getWrappedXPath();
 
@@ -55,6 +56,7 @@ public class XPathImpl implements XPath {
 		return _xPath;
 	}
 
+	@Override
 	public int hashCode() {
 		return _xPath.hashCode();
 	}
@@ -112,6 +114,7 @@ public class XPathImpl implements XPath {
 		_xPath.sort(SAXReaderImpl.toOldNodes(nodes), distinct);
 	}
 
+	@Override
 	public String toString() {
 		return _xPath.toString();
 	}

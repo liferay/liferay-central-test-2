@@ -20,6 +20,7 @@ package com.liferay.portal.upgrade.v5_2_0;
 public class UpgradePortletId
 	extends com.liferay.portal.upgrade.v4_3_5.UpgradePortletId {
 
+	@Override
 	protected String[][] getPortletIdsArray() {
 		return new String[][] {
 			new String[] {

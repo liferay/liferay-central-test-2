@@ -63,6 +63,7 @@ public class LocalContainerEntityManagerFactoryBean extends
 		setPersistenceUnitPostProcessors(persistenceUnitPostProcessors);
 	}
 
+	@Override
 	public void setDataSource(DataSource dataSource) {
 		Database database = DatabaseDetector.determineDatabase(dataSource);
 

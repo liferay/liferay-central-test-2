@@ -29,6 +29,7 @@ import javax.servlet.jsp.JspWriter;
  */
 public class SectionTag extends IncludeTag {
 
+	@Override
 	public int doStartTag() throws JspException {
 		try {
 			_tabsTag = (TabsTag)findAncestorWithClass(this, TabsTag.class);
@@ -89,14 +90,17 @@ public class SectionTag extends IncludeTag {
 		}
 	}
 
+	@Override
 	protected String getEndPage() {
 		return _END_PAGE;
 	}
 
+	@Override
 	protected String getStartPage() {
 		return _START_PAGE;
 	}
 
+	@Override
 	protected int processEndTag() throws Exception {
 		JspWriter jspWriter = pageContext.getOut();
 

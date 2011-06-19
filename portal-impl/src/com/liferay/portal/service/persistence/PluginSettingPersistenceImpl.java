@@ -148,6 +148,7 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl<PluginSett
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(PluginSettingImpl.class.getName());
@@ -165,6 +166,7 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl<PluginSett
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(PluginSetting pluginSetting) {
 		EntityCacheUtil.removeResult(PluginSettingModelImpl.ENTITY_CACHE_ENABLED,
 			PluginSettingImpl.class, pluginSetting.getPrimaryKey());
@@ -202,6 +204,7 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl<PluginSett
 	 * @throws com.liferay.portal.NoSuchModelException if a plugin setting with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public PluginSetting remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
@@ -255,11 +258,13 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl<PluginSett
 	 * @return the plugin setting that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public PluginSetting remove(PluginSetting pluginSetting)
 		throws SystemException {
 		return super.remove(pluginSetting);
 	}
 
+	@Override
 	protected PluginSetting removeImpl(PluginSetting pluginSetting)
 		throws SystemException {
 		pluginSetting = toUnwrappedModel(pluginSetting);
@@ -297,6 +302,7 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl<PluginSett
 		return pluginSetting;
 	}
 
+	@Override
 	public PluginSetting updateImpl(
 		com.liferay.portal.model.PluginSetting pluginSetting, boolean merge)
 		throws SystemException {
@@ -391,6 +397,7 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl<PluginSett
 	 * @throws com.liferay.portal.NoSuchModelException if a plugin setting with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public PluginSetting findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
@@ -427,6 +434,7 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl<PluginSett
 	 * @return the plugin setting, or <code>null</code> if a plugin setting with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public PluginSetting fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());

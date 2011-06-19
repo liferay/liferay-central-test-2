@@ -32,6 +32,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class ShardPersistenceTest extends BasePersistenceTestCase {
+	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -68,7 +69,9 @@ public class ShardPersistenceTest extends BasePersistenceTestCase {
 		Shard newShard = _persistence.create(pk);
 
 		newShard.setClassNameId(nextLong());
+
 		newShard.setClassPK(nextLong());
+
 		newShard.setName(randomString());
 
 		_persistence.update(newShard, false);
@@ -210,7 +213,9 @@ public class ShardPersistenceTest extends BasePersistenceTestCase {
 		Shard shard = _persistence.create(pk);
 
 		shard.setClassNameId(nextLong());
+
 		shard.setClassPK(nextLong());
+
 		shard.setName(randomString());
 
 		_persistence.update(shard, false);

@@ -27,10 +27,12 @@ public class BaseTestCase extends LiferaySeleneseTestCase {
 		InitUtil.initWithSpring();
 	}
 
+	@Override
 	public void setUp() throws Exception {
 		selenium = SeleniumUtil.getSelenium();
 	}
 
+	@Override
 	public void tearDown() throws Exception {
 	}
 

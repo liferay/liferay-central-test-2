@@ -25,5 +25,4 @@
 <%@ page import="com.liferay.portal.RemoteOptionsException" %>
 <%@ page import="com.liferay.portal.kernel.lar.PortletDataHandler" %>
 <%@ page import="com.liferay.portal.kernel.staging.StagingConstants" %>
-<%@ page import="com.liferay.portal.kernel.staging.StagingUtil" %>
 <%@ page import="com.liferay.portal.util.RobotsUtil" %>

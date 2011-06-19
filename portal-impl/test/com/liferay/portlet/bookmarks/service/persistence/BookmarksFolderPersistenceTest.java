@@ -34,6 +34,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class BookmarksFolderPersistenceTest extends BasePersistenceTestCase {
+	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -70,14 +71,23 @@ public class BookmarksFolderPersistenceTest extends BasePersistenceTestCase {
 		BookmarksFolder newBookmarksFolder = _persistence.create(pk);
 
 		newBookmarksFolder.setUuid(randomString());
+
 		newBookmarksFolder.setGroupId(nextLong());
+
 		newBookmarksFolder.setCompanyId(nextLong());
+
 		newBookmarksFolder.setUserId(nextLong());
+
 		newBookmarksFolder.setUserName(randomString());
+
 		newBookmarksFolder.setCreateDate(nextDate());
+
 		newBookmarksFolder.setModifiedDate(nextDate());
+
 		newBookmarksFolder.setParentFolderId(nextLong());
+
 		newBookmarksFolder.setName(randomString());
+
 		newBookmarksFolder.setDescription(randomString());
 
 		_persistence.update(newBookmarksFolder, false);
@@ -237,14 +247,23 @@ public class BookmarksFolderPersistenceTest extends BasePersistenceTestCase {
 		BookmarksFolder bookmarksFolder = _persistence.create(pk);
 
 		bookmarksFolder.setUuid(randomString());
+
 		bookmarksFolder.setGroupId(nextLong());
+
 		bookmarksFolder.setCompanyId(nextLong());
+
 		bookmarksFolder.setUserId(nextLong());
+
 		bookmarksFolder.setUserName(randomString());
+
 		bookmarksFolder.setCreateDate(nextDate());
+
 		bookmarksFolder.setModifiedDate(nextDate());
+
 		bookmarksFolder.setParentFolderId(nextLong());
+
 		bookmarksFolder.setName(randomString());
+
 		bookmarksFolder.setDescription(randomString());
 
 		_persistence.update(bookmarksFolder, false);

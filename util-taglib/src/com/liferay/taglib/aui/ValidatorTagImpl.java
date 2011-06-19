@@ -48,6 +48,7 @@ public class ValidatorTagImpl
 		_name = null;
 	}
 
+	@Override
 	public int doAfterBody() {
 		BodyContent bodyContent = getBodyContent();
 
@@ -58,6 +59,7 @@ public class ValidatorTagImpl
 		return SKIP_BODY;
 	}
 
+	@Override
 	public int doEndTag() {
 		InputTag inputTag = (InputTag)findAncestorWithClass(
 			this, InputTag.class);

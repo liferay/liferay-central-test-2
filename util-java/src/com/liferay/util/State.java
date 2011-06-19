@@ -50,6 +50,7 @@ public class State {
 		}
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		State state = (State)obj;
 
@@ -64,6 +65,7 @@ public class State {
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		HashCode hashCode = HashCodeFactoryUtil.getHashCode();
 

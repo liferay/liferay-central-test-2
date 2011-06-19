@@ -331,6 +331,7 @@ public class EmailAddressWrapper implements EmailAddress {
 		_emailAddress.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new EmailAddressWrapper((EmailAddress)_emailAddress.clone());
 	}
@@ -339,6 +340,7 @@ public class EmailAddressWrapper implements EmailAddress {
 		return _emailAddress.compareTo(emailAddress);
 	}
 
+	@Override
 	public int hashCode() {
 		return _emailAddress.hashCode();
 	}
@@ -347,6 +349,7 @@ public class EmailAddressWrapper implements EmailAddress {
 		return new EmailAddressWrapper(_emailAddress.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _emailAddress.toString();
 	}

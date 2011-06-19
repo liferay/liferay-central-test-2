@@ -23,6 +23,7 @@ import java.net.URL;
  */
 public class BaseServiceTestCase extends BaseTestCase {
 
+	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 

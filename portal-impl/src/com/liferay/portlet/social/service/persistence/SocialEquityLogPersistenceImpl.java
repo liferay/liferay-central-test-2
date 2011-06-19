@@ -239,6 +239,7 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(SocialEquityLogImpl.class.getName());
@@ -256,6 +257,7 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(SocialEquityLog socialEquityLog) {
 		EntityCacheUtil.removeResult(SocialEquityLogModelImpl.ENTITY_CACHE_ENABLED,
 			SocialEquityLogImpl.class, socialEquityLog.getPrimaryKey());
@@ -297,6 +299,7 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 	 * @throws com.liferay.portal.NoSuchModelException if a social equity log with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public SocialEquityLog remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
@@ -349,11 +352,13 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 	 * @return the social equity log that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public SocialEquityLog remove(SocialEquityLog socialEquityLog)
 		throws SystemException {
 		return super.remove(socialEquityLog);
 	}
 
+	@Override
 	protected SocialEquityLog removeImpl(SocialEquityLog socialEquityLog)
 		throws SystemException {
 		socialEquityLog = toUnwrappedModel(socialEquityLog);
@@ -395,6 +400,7 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 		return socialEquityLog;
 	}
 
+	@Override
 	public SocialEquityLog updateImpl(
 		com.liferay.portlet.social.model.SocialEquityLog socialEquityLog,
 		boolean merge) throws SystemException {
@@ -514,6 +520,7 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 	 * @throws com.liferay.portal.NoSuchModelException if a social equity log with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public SocialEquityLog findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
@@ -550,6 +557,7 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 	 * @return the social equity log, or <code>null</code> if a social equity log with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public SocialEquityLog fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());

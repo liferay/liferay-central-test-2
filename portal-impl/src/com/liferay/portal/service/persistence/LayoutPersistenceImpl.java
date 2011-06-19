@@ -266,6 +266,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(LayoutImpl.class.getName());
@@ -283,6 +284,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(Layout layout) {
 		EntityCacheUtil.removeResult(LayoutModelImpl.ENTITY_CACHE_ENABLED,
 			LayoutImpl.class, layout.getPrimaryKey());
@@ -336,6 +338,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 	 * @throws com.liferay.portal.NoSuchModelException if a layout with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Layout remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
@@ -388,10 +391,12 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 	 * @return the layout that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Layout remove(Layout layout) throws SystemException {
 		return super.remove(layout);
 	}
 
+	@Override
 	protected Layout removeImpl(Layout layout) throws SystemException {
 		layout = toUnwrappedModel(layout);
 
@@ -443,6 +448,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		return layout;
 	}
 
+	@Override
 	public Layout updateImpl(com.liferay.portal.model.Layout layout,
 		boolean merge) throws SystemException {
 		layout = toUnwrappedModel(layout);
@@ -616,6 +622,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 	 * @throws com.liferay.portal.NoSuchModelException if a layout with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Layout findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
@@ -652,6 +659,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 	 * @return the layout, or <code>null</code> if a layout with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Layout fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());

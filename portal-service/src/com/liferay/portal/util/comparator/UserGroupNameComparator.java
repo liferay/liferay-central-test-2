@@ -36,6 +36,7 @@ public class UserGroupNameComparator extends OrderByComparator {
 		_ascending = ascending;
 	}
 
+	@Override
 	public int compare(Object obj1, Object obj2) {
 		UserGroup userGroup1 = (UserGroup)obj1;
 		UserGroup userGroup2 = (UserGroup)obj2;
@@ -50,6 +51,7 @@ public class UserGroupNameComparator extends OrderByComparator {
 		}
 	}
 
+	@Override
 	public String getOrderBy() {
 		if (_ascending) {
 			return ORDER_BY_ASC;
@@ -59,10 +61,12 @@ public class UserGroupNameComparator extends OrderByComparator {
 		}
 	}
 
+	@Override
 	public String[] getOrderByFields() {
 		return ORDER_BY_FIELDS;
 	}
 
+	@Override
 	public boolean isAscending() {
 		return _ascending;
 	}

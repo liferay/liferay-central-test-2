@@ -41,6 +41,7 @@ public class AssetIndexer extends BaseIndexer {
 		return CLASS_NAMES;
 	}
 
+	@Override
 	public void postProcessSearchQuery(
 			BooleanQuery searchQuery, SearchContext searchContext)
 		throws Exception {
@@ -54,13 +55,16 @@ public class AssetIndexer extends BaseIndexer {
 		addSearchTerm(searchQuery, searchContext, Field.USER_NAME, true);
 	}
 
+	@Override
 	protected void doDelete(Object obj) {
 	}
 
+	@Override
 	protected Document doGetDocument(Object obj) {
 		return null;
 	}
 
+	@Override
 	protected Summary doGetSummary(
 		Document document, Locale locale, String snippet,
 		PortletURL portletURL) {
@@ -68,15 +72,19 @@ public class AssetIndexer extends BaseIndexer {
 		return null;
 	}
 
+	@Override
 	protected void doReindex(Object obj) {
 	}
 
+	@Override
 	protected void doReindex(String className, long classPK) {
 	}
 
+	@Override
 	protected void doReindex(String[] ids) {
 	}
 
+	@Override
 	protected String getPortletId(SearchContext searchContext) {
 		return PORTLET_ID;
 	}

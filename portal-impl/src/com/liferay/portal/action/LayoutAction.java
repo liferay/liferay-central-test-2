@@ -16,6 +16,8 @@ package com.liferay.portal.action;
 
 import com.liferay.portal.kernel.audit.AuditMessage;
 import com.liferay.portal.kernel.audit.AuditRouterUtil;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
 import com.liferay.portal.kernel.io.unsync.UnsyncStringWriter;
@@ -136,6 +138,7 @@ import org.apache.struts.action.ActionMapping;
  */
 public class LayoutAction extends Action {
 
+	@Override
 	public ActionForward execute(
 			ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response)
@@ -329,6 +332,34 @@ public class LayoutAction extends Action {
 		return layoutTypePortlets;
 	}
 
+	protected long getScopeGroupId(
+			HttpServletRequest request, LayoutTypePortlet layoutTypePortlet,
+			String portletId)
+		throws PortalException, SystemException {
+
+		long scopeGroupId = 0;
+
+		Layout layoutTypePortletLayout = layoutTypePortlet.getLayout();
+
+		Layout requestLayout = (Layout)request.getAttribute(WebKeys.LAYOUT);
+
+		try {
+			request.setAttribute(WebKeys.LAYOUT, layoutTypePortletLayout);
+
+			scopeGroupId = PortalUtil.getScopeGroupId(request, portletId);
+		}
+		finally {
+			request.setAttribute(WebKeys.LAYOUT, requestLayout);
+		}
+
+		if (scopeGroupId <= 0) {
+			scopeGroupId = PortalUtil.getScopeGroupId(
+				layoutTypePortletLayout, portletId);
+		}
+
+		return scopeGroupId;
+	}
+
 	protected void includeLayoutContent(
 			HttpServletRequest request, HttpServletResponse response,
 			ThemeDisplay themeDisplay, Layout layout)
@@ -448,22 +479,27 @@ public class LayoutAction extends Action {
 			portletMode = PortletMode.VIEW;
 		}
 
-		User user = stateAwareResponseImpl.getUser();
-		Layout layout = stateAwareResponseImpl.getLayout();
+		long scopeGroupId = getScopeGroupId(
+			request, layoutTypePortlet, portletId);
+
+		Layout layoutTypePortletLayout = layoutTypePortlet.getLayout();
 
 		PortletPreferences portletPreferences =
-			portletRequestImpl.getPreferencesImpl();
+			PortletPreferencesFactoryUtil.getPortletSetup(
+				scopeGroupId, layoutTypePortletLayout, portletId, null);
 
 		EventRequestImpl eventRequestImpl = EventRequestFactory.create(
 			request, portlet, invokerPortlet, portletContext, windowState,
-			portletMode, portletPreferences,
-			layoutTypePortlet.getLayout().getPlid());
+			portletMode, portletPreferences, layoutTypePortletLayout.getPlid());
 
 		eventRequestImpl.setEvent(
 			serializeEvent(event, invokerPortlet.getPortletClassLoader()));
 
+		Layout layout = stateAwareResponseImpl.getLayout();
+
 		EventResponseImpl eventResponseImpl = EventResponseFactory.create(
-			eventRequestImpl, response, portletId, user, layout);
+			eventRequestImpl, response, portletId,
+			stateAwareResponseImpl.getUser(), layout);
 
 		eventRequestImpl.defineObjects(portletConfig, eventResponseImpl);
 

@@ -383,12 +383,12 @@
 		<put name="portlet_content" value="/portlet/document_library/compare_versions.jsp" />
 	</definition>
 
-	<definition name="portlet.document_library.edit_document_type" extends="portlet.document_library">
-		<put name="portlet_content" value="/portlet/document_library/edit_document_type.jsp" />
-	</definition>
-
 	<definition name="portlet.document_library.edit_file_entry" extends="portlet.document_library">
 		<put name="portlet_content" value="/portlet/document_library/edit_file_entry.jsp" />
+	</definition>
+
+	<definition name="portlet.document_library.edit_file_entry_type" extends="portlet.document_library">
+		<put name="portlet_content" value="/portlet/document_library/edit_file_entry_type.jsp" />
 	</definition>
 
 	<definition name="portlet.document_library.edit_file_shortcut" extends="portlet.document_library">
@@ -447,12 +447,12 @@
 		<put name="portlet_content" value="/portlet/document_library/view.jsp" />
 	</definition>
 
-	<definition name="portlet.document_library.view_document_type" extends="portlet.document_library">
-		<put name="portlet_content" value="/portlet/document_library/view_document_type.jsp" />
-	</definition>
-
 	<definition name="portlet.document_library.view_file_entry" extends="portlet.document_library">
 		<put name="portlet_content" value="/portlet/document_library/view_file_entry.jsp" />
+	</definition>
+
+	<definition name="portlet.document_library.view_file_entry_type" extends="portlet.document_library">
+		<put name="portlet_content" value="/portlet/document_library/view_file_entry_type.jsp" />
 	</definition>
 
 	<definition name="portlet.document_library.view_file_shortcut" extends="portlet.document_library">
@@ -467,8 +467,8 @@
 		<put name="portlet_content" value="/portlet/document_library_display/search.jsp" />
 	</definition>
 
-	<definition name="portlet.document_library_display.select_document_type" extends="portlet.document_library_display">
-		<put name="portlet_content" value="/portlet/document_library_display/select_document_type.jsp" />
+	<definition name="portlet.document_library_display.select_file_entry_type" extends="portlet.document_library_display">
+		<put name="portlet_content" value="/portlet/document_library_display/select_file_entry_type.jsp" />
 	</definition>
 
 	<definition name="portlet.document_library_display.view" extends="portlet.document_library_display">
@@ -507,6 +507,14 @@
 		<put name="portlet_content" value="/portlet/dynamic_data_lists/view.jsp" />
 	</definition>
 
+	<definition name="portlet.dynamic_data_lists.view_record" extends="portlet.dynamic_data_lists">
+		<put name="portlet_content" value="/portlet/dynamic_data_lists/view_record.jsp" />
+	</definition>
+
+	<definition name="portlet.dynamic_data_lists.view_record_history" extends="portlet.dynamic_data_lists">
+		<put name="portlet_content" value="/portlet/dynamic_data_lists/view_record_history.jsp" />
+	</definition>
+
 	<definition name="portlet.dynamic_data_lists.view_record_set" extends="portlet.dynamic_data_lists">
 		<put name="portlet_content" value="/portlet/dynamic_data_lists/view_record_set.jsp" />
 	</definition>
@@ -541,14 +549,6 @@
 
 	<definition name="portlet.dynamic_data_mapping.view_template" extends="portlet.dynamic_data_mapping">
 		<put name="portlet_content" value="/portlet/dynamic_data_mapping/view_template.jsp" />
-	</definition>
-
-	<!-- Enterprise Admin -->
-
-	<definition name="portlet.enterprise_admin" extends="portlet" />
-
-	<definition name="portlet.enterprise_admin.view" extends="portlet.enterprise_admin">
-		<put name="portlet_content" value="/portlet/enterprise_admin/view.jsp" />
 	</definition>
 
 	<!-- Expando -->
@@ -907,20 +907,24 @@
 		<put name="portlet_content" value="/portlet/message_boards_admin/view.jsp" />
 	</definition>
 
-	<!-- My Account -->
-
-	<definition name="portlet.my_account" extends="portlet" />
-
-	<definition name="portlet.my_account.view" extends="portlet.my_account">
-		<put name="portlet_content" value="/portlet/my_account/view.jsp" />
-	</definition>
-
 	<!-- Monitoring -->
 
 	<definition name="portlet.monitoring" extends="portlet" />
 
 	<definition name="portlet.monitoring.edit_session" extends="portlet.monitoring">
 		<put name="portlet_content" value="/portlet/monitoring/edit_session.jsp" />
+	</definition>
+
+	<definition name="portlet.monitoring.view" extends="portlet.monitoring">
+		<put name="portlet_content" value="/portlet/monitoring/view.jsp" />
+	</definition>
+
+	<!-- My Account -->
+
+	<definition name="portlet.my_account" extends="portlet" />
+
+	<definition name="portlet.my_account.view" extends="portlet.my_account">
+		<put name="portlet_content" value="/portlet/my_account/view.jsp" />
 	</definition>
 
 	<!-- My Places -->
@@ -1023,6 +1027,10 @@
 		<put name="portlet_content" value="/portlet/password_policies_admin/error.jsp" />
 	</definition>
 
+	<definition name="portlet.password_policies_admin.view" extends="portlet.password_policies_admin">
+		<put name="portlet_content" value="/portlet/password_policies_admin/view.jsp" />
+	</definition>
+
 	<!-- Plugin Installer -->
 
 	<definition name="portlet.plugin_installer" extends="portlet" />
@@ -1045,6 +1053,10 @@
 
 	<definition name="portlet.plugins_admin.error" extends="portlet.plugins_admin">
 		<put name="portlet_content" value="/portlet/plugins_admin/error.jsp" />
+	</definition>
+
+	<definition name="portlet.plugins_admin.view" extends="portlet.plugins_admin">
+		<put name="portlet_content" value="/portlet/plugins_admin/view.jsp" />
 	</definition>
 
 	<!-- Polls -->
@@ -1230,6 +1242,10 @@
 
 	<definition name="portlet.roles_admin.select_site_role" extends="portlet.roles_admin">
 		<put name="portlet_content" value="/portlet/roles_admin/select_site_role.jsp" />
+	</definition>
+
+	<definition name="portlet.roles_admin.view" extends="portlet.roles_admin">
+		<put name="portlet_content" value="/portlet/roles_admin/view.jsp" />
 	</definition>
 
 	<!-- Site Settings -->
@@ -1520,7 +1536,7 @@
 		<put name="portlet_content" value="/portlet/users_admin/select_user_group.jsp" />
 	</definition>
 
-	<definition name="portlet.users_admin.view_users" extends="portlet.users_admin">
+	<definition name="portlet.users_admin.view" extends="portlet.users_admin">
 		<put name="portlet_content" value="/portlet/users_admin/view.jsp" />
 	</definition>
 

@@ -25,6 +25,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class HeaderTag extends IncludeTag {
 
+	@Override
 	protected void setAttributes(HttpServletRequest request) {
 		request.setAttribute("liferay-ui:header:backLabel", _backLabel);
 
@@ -43,6 +44,7 @@ public class HeaderTag extends IncludeTag {
 		request.setAttribute("liferay-ui:header:title", _title);
 	}
 
+	@Override
 	protected void cleanUp() {
 		_backLabel = null;
 		_backURL = null;
@@ -51,10 +53,12 @@ public class HeaderTag extends IncludeTag {
 		_title = null;
 	}
 
+	@Override
 	protected String getPage() {
 		return _PAGE;
 	}
 
+	@Override
 	protected boolean isCleanUpSetAttributes() {
 		return _CLEAN_UP_SET_ATTRIBUTES;
 	}

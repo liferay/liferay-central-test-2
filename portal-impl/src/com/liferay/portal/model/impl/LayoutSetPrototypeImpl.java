@@ -62,6 +62,7 @@ public class LayoutSetPrototypeImpl
 		return _settingsProperties;
 	}
 
+	@Override
 	public void setSettings(String settings) {
 		_settingsProperties = null;
 

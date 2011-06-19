@@ -55,6 +55,7 @@ public class PortalHostConfig extends HostConfig {
 		super();
 	}
 
+	@Override
 	protected void deployDescriptor(
 		String contextPath, File contextXml, String file) {
 
@@ -67,14 +68,17 @@ public class PortalHostConfig extends HostConfig {
 		super.deployDescriptor(contextPath, contextXml, file);
 	}
 
+	@Override
 	protected void deployDescriptors(File configBase, String[] files) {
 		super.deployDescriptors(configBase, sortFiles(files));
 	}
 
+	@Override
 	protected void deployDirectories(File appBase, String[] files) {
 		super.deployDirectories(appBase, sortFiles(files));
 	}
 
+	@Override
 	protected void deployWARs(File appBase, String[] files) {
 		super.deployWARs(appBase, sortFiles(files));
 	}

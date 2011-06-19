@@ -28,10 +28,12 @@ public class CommentImpl extends NodeImpl implements Comment {
 		_comment = comment;
 	}
 
+	@Override
 	public <T, V extends Visitor<T>> T accept(V visitor) {
 		return visitor.visitComment(this);
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		org.dom4j.Comment comment = ((CommentImpl)obj).getWrappedComment();
 
@@ -42,10 +44,12 @@ public class CommentImpl extends NodeImpl implements Comment {
 		return _comment;
 	}
 
+	@Override
 	public int hashCode() {
 		return _comment.hashCode();
 	}
 
+	@Override
 	public String toString() {
 		return _comment.toString();
 	}

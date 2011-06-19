@@ -251,6 +251,7 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(ResourcePermissionImpl.class.getName());
@@ -268,6 +269,7 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(ResourcePermission resourcePermission) {
 		EntityCacheUtil.removeResult(ResourcePermissionModelImpl.ENTITY_CACHE_ENABLED,
 			ResourcePermissionImpl.class, resourcePermission.getPrimaryKey());
@@ -320,6 +322,7 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 * @throws com.liferay.portal.NoSuchModelException if a resource permission with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ResourcePermission remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
@@ -373,11 +376,13 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 * @return the resource permission that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ResourcePermission remove(ResourcePermission resourcePermission)
 		throws SystemException {
 		return super.remove(resourcePermission);
 	}
 
+	@Override
 	protected ResourcePermission removeImpl(
 		ResourcePermission resourcePermission) throws SystemException {
 		resourcePermission = toUnwrappedModel(resourcePermission);
@@ -430,6 +435,7 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 		return resourcePermission;
 	}
 
+	@Override
 	public ResourcePermission updateImpl(
 		com.liferay.portal.model.ResourcePermission resourcePermission,
 		boolean merge) throws SystemException {
@@ -591,6 +597,7 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 * @throws com.liferay.portal.NoSuchModelException if a resource permission with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ResourcePermission findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
@@ -628,6 +635,7 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 * @return the resource permission, or <code>null</code> if a resource permission with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ResourcePermission fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());

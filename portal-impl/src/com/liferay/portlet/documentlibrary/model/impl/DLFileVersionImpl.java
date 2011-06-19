@@ -37,6 +37,7 @@ public class DLFileVersionImpl
 	public DLFileVersionImpl() {
 	}
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(
@@ -46,6 +47,7 @@ public class DLFileVersionImpl
 		return _expandoBridge;
 	}
 
+	@Override
 	public String getExtraSettings() {
 		if (_extraSettingsProperties == null) {
 			return super.getExtraSettings();
@@ -78,6 +80,7 @@ public class DLFileVersionImpl
 		return DLUtil.getFileIcon(getExtension());
 	}
 
+	@Override
 	public void setExtraSettings(String extraSettings) {
 		_extraSettingsProperties = null;
 

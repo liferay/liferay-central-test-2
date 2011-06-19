@@ -14,8 +14,6 @@
 
 package com.liferay.portlet.documentlibrary.service.impl;
 
-import com.liferay.documentlibrary.FileSizeException;
-import com.liferay.documentlibrary.NoSuchFileException;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -31,7 +29,9 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Lock;
 import com.liferay.portal.service.ServiceContext;
+import com.liferay.portlet.documentlibrary.FileSizeException;
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
+import com.liferay.portlet.documentlibrary.NoSuchFileException;
 import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.service.base.DLAppServiceBaseImpl;
@@ -51,12 +51,10 @@ import java.util.List;
  * third-party repositories. While the method signatures are universal for all
  * repositories, additional parameters may be specified in the serviceContext to
  * enable added flexibility, especially within Liferay's repository during
- * creation and update. In particular, noteworthy parameters include:
- * <ul>
- * <li>documentTypeId - ID for custom document type</li>
- * <li>fieldsMap - mapping for fields associated with custom document type</li>
- * <li>sourceFileName - original filename of file being uploaded</li>
- * </ul>
+ * creation and update. In particular, noteworthy parameters include: <ul> <li>
+ * fileEntryTypeId - ID for custom file entry type </li> <li> fieldsMap -
+ * mapping for fields associated with custom document type </li> <li>
+ * sourceFileName - original filename of file being uploaded </li> </ul>
  * </p>
  *
  * @author Alexander Chow
@@ -120,9 +118,13 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 
 		Repository repository = getRepository(repositoryId);
 
-		return repository.addFileEntry(
+		FileEntry fileEntry = repository.addFileEntry(
 			folderId, mimeType, title, description, changeLog, is, size,
 			serviceContext);
+
+		dlAppHelperLocalService.triggerProcesses(fileEntry);
+
+		return fileEntry;
 	}
 
 	public DLFileShortcut addFileShortcut(
@@ -143,6 +145,50 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 
 		return repository.addFolder(
 			parentFolderId, name, description, serviceContext);
+	}
+
+	public void cancelCheckOut(long fileEntryId)
+		throws PortalException, SystemException {
+
+		Repository repository = getRepository(0, fileEntryId, 0);
+
+		repository.cancelCheckOut(fileEntryId);
+	}
+
+	public void checkInFileEntry(long fileEntryId, String lockUuid)
+		throws PortalException, SystemException {
+
+		Repository repository = getRepository(0, fileEntryId, 0);
+
+		repository.checkInFileEntry(fileEntryId, lockUuid);
+	}
+
+	public void checkInFileEntry(
+			long fileEntryId, boolean major, String changeLog,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		Repository repository = getRepository(0, fileEntryId, 0);
+
+		repository.checkInFileEntry(
+			fileEntryId, major, changeLog, serviceContext);
+	}
+
+	public void checkOutFileEntry(long fileEntryId)
+		throws PortalException, SystemException {
+
+		Repository repository = getRepository(0, fileEntryId, 0);
+
+		repository.checkOutFileEntry(fileEntryId);
+	}
+
+	public FileEntry checkOutFileEntry(
+			long fileEntryId, String owner, long expirationTime)
+		throws PortalException, SystemException {
+
+		Repository repository = getRepository(0, fileEntryId, 0);
+
+		return repository.checkOutFileEntry(fileEntryId, owner, expirationTime);
 	}
 
 	public Folder copyFolder(
@@ -227,32 +273,32 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 	}
 
 	public List<FileEntry> getFileEntries(
-			long repositoryId, long folderId, long documentTypeId)
+			long repositoryId, long folderId, long fileEntryTypeId)
 		throws PortalException, SystemException {
 
 		return getFileEntries(
-			repositoryId, folderId, documentTypeId, QueryUtil.ALL_POS,
+			repositoryId, folderId, fileEntryTypeId, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS);
 	}
 
 	public List<FileEntry> getFileEntries(
-			long repositoryId, long folderId, long documentTypeId, int start,
+			long repositoryId, long folderId, long fileEntryTypeId, int start,
 			int end)
 		throws PortalException, SystemException {
 
 		return getFileEntries(
-			repositoryId, folderId, documentTypeId, start, end, null);
+			repositoryId, folderId, fileEntryTypeId, start, end, null);
 	}
 
 	public List<FileEntry> getFileEntries(
-			long repositoryId, long folderId, long documentTypeId, int start,
+			long repositoryId, long folderId, long fileEntryTypeId, int start,
 			int end, OrderByComparator obc)
 		throws PortalException, SystemException {
 
 		Repository repository = getRepository(repositoryId);
 
 		return repository.getFileEntries(
-			folderId, documentTypeId, start, end, obc);
+			folderId, fileEntryTypeId, start, end, obc);
 	}
 
 	public List<Object> getFileEntriesAndFileShortcuts(
@@ -284,12 +330,12 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 	}
 
 	public int getFileEntriesCount(
-			long repositoryId, long folderId, long documentTypeId)
+			long repositoryId, long folderId, long fileEntryTypeId)
 		throws PortalException, SystemException {
 
 		Repository repository = getRepository(repositoryId);
 
-		return repository.getFileEntriesCount(folderId, documentTypeId);
+		return repository.getFileEntriesCount(folderId, fileEntryTypeId);
 	}
 
 	public FileEntry getFileEntry(long fileEntryId)
@@ -520,24 +566,6 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 		return repository.getSubfolderIds(folderId, recurse);
 	}
 
-	public void lockFileEntry(long fileEntryId)
-		throws PortalException, SystemException {
-
-		Repository repository = getRepository(0, fileEntryId, 0);
-
-		repository.lockFileEntry(fileEntryId);
-	}
-
-	public Lock lockFileEntry(
-			long fileEntryId, String owner, long expirationTime)
-		throws PortalException, SystemException {
-
-		Repository repository = getRepository(0, fileEntryId, 0);
-
-		return repository.lockFileEntry(
-			fileEntryId, owner, expirationTime);
-	}
-
 	public Lock lockFolder(long repositoryId, long folderId)
 		throws PortalException, SystemException {
 
@@ -607,22 +635,6 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 		Repository repository = getRepository(0, fileEntryId, 0);
 
 		repository.revertFileEntry(fileEntryId, version, serviceContext);
-	}
-
-	public void unlockFileEntry(long fileEntryId)
-		throws PortalException, SystemException {
-
-		Repository repository = getRepository(0, fileEntryId, 0);
-
-		repository.unlockFileEntry(fileEntryId);
-	}
-
-	public void unlockFileEntry(long fileEntryId, String lockUuid)
-		throws PortalException, SystemException {
-
-		Repository repository = getRepository(0, fileEntryId, 0);
-
-		repository.unlockFileEntry(fileEntryId, lockUuid);
 	}
 
 	public void unlockFolder(long repositoryId, long folderId, String lockUuid)
@@ -695,9 +707,13 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 
 		Repository repository = getRepository(0, fileEntryId, 0);
 
-		return repository.updateFileEntry(
+		FileEntry fileEntry = repository.updateFileEntry(
 			fileEntryId, sourceFileName, mimeType, title, description,
 			changeLog, majorVersion, is, size, serviceContext);
+
+		dlAppHelperLocalService.triggerProcesses(fileEntry);
+
+		return fileEntry;
 	}
 
 	public DLFileShortcut updateFileShortcut(
@@ -720,14 +736,13 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 			folderId, name, description, serviceContext);
 	}
 
-	public boolean verifyFileEntryLock(
+	public boolean verifyFileEntryCheckOut(
 			long repositoryId, long fileEntryId, String lockUuid)
 		throws PortalException, SystemException {
 
 		Repository repository = getRepository(repositoryId);
 
-		return repository.verifyFileEntryLock(
-			fileEntryId, lockUuid);
+		return repository.verifyFileEntryCheckOut(fileEntryId, lockUuid);
 	}
 
 	public boolean verifyInheritableLock(

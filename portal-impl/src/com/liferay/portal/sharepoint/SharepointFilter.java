@@ -30,6 +30,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class SharepointFilter extends SecureFilter {
 
+	@Override
 	public void init(FilterConfig filterConfig) {
 		super.init(filterConfig);
 
@@ -54,6 +55,7 @@ public class SharepointFilter extends SecureFilter {
 		return false;
 	}
 
+	@Override
 	protected void processFilter(
 			HttpServletRequest request, HttpServletResponse response,
 			FilterChain filterChain)

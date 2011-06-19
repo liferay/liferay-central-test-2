@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.upgrade.UpgradeProcess;
  */
 public class UpgradePause extends UpgradeProcess {
 
+	@Override
 	protected void doUpgrade() throws Exception {
 		System.exit(0);
 	}

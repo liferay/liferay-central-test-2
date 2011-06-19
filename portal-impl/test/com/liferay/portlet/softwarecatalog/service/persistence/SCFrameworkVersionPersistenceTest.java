@@ -31,6 +31,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class SCFrameworkVersionPersistenceTest extends BasePersistenceTestCase {
+	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -67,14 +68,23 @@ public class SCFrameworkVersionPersistenceTest extends BasePersistenceTestCase {
 		SCFrameworkVersion newSCFrameworkVersion = _persistence.create(pk);
 
 		newSCFrameworkVersion.setGroupId(nextLong());
+
 		newSCFrameworkVersion.setCompanyId(nextLong());
+
 		newSCFrameworkVersion.setUserId(nextLong());
+
 		newSCFrameworkVersion.setUserName(randomString());
+
 		newSCFrameworkVersion.setCreateDate(nextDate());
+
 		newSCFrameworkVersion.setModifiedDate(nextDate());
+
 		newSCFrameworkVersion.setName(randomString());
+
 		newSCFrameworkVersion.setUrl(randomString());
+
 		newSCFrameworkVersion.setActive(randomBoolean());
+
 		newSCFrameworkVersion.setPriority(nextInt());
 
 		_persistence.update(newSCFrameworkVersion, false);
@@ -220,14 +230,23 @@ public class SCFrameworkVersionPersistenceTest extends BasePersistenceTestCase {
 		SCFrameworkVersion scFrameworkVersion = _persistence.create(pk);
 
 		scFrameworkVersion.setGroupId(nextLong());
+
 		scFrameworkVersion.setCompanyId(nextLong());
+
 		scFrameworkVersion.setUserId(nextLong());
+
 		scFrameworkVersion.setUserName(randomString());
+
 		scFrameworkVersion.setCreateDate(nextDate());
+
 		scFrameworkVersion.setModifiedDate(nextDate());
+
 		scFrameworkVersion.setName(randomString());
+
 		scFrameworkVersion.setUrl(randomString());
+
 		scFrameworkVersion.setActive(randomBoolean());
+
 		scFrameworkVersion.setPriority(nextInt());
 
 		_persistence.update(scFrameworkVersion, false);

@@ -664,6 +664,7 @@ public class ContactWrapper implements Contact {
 		_contact.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new ContactWrapper((Contact)_contact.clone());
 	}
@@ -672,6 +673,7 @@ public class ContactWrapper implements Contact {
 		return _contact.compareTo(contact);
 	}
 
+	@Override
 	public int hashCode() {
 		return _contact.hashCode();
 	}
@@ -680,6 +682,7 @@ public class ContactWrapper implements Contact {
 		return new ContactWrapper(_contact.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _contact.toString();
 	}

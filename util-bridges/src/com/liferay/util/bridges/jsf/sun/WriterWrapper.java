@@ -26,10 +26,12 @@ public class WriterWrapper extends Writer {
 		_writer = writer;
 	}
 
+	@Override
 	public void close() throws IOException {
 		_writer.close();
 	}
 
+	@Override
 	public void flush() {
 	}
 
@@ -37,6 +39,7 @@ public class WriterWrapper extends Writer {
 		_writer.write(cbuf);
 	}
 
+	@Override
 	public void write(char[] cbuf, int off, int len) throws IOException {
 		StringBuilder sb = new StringBuilder(len);
 
@@ -45,14 +48,17 @@ public class WriterWrapper extends Writer {
 		_writer.write(sb.toString());
 	}
 
+	@Override
 	public void write(int c) throws IOException {
 		_writer.write(c);
 	}
 
+	@Override
 	public void write(String str) throws IOException {
 		_writer.write(str);
 	}
 
+	@Override
 	public void write(String str, int off, int len) throws IOException {
 		_writer.write(str, off, len);
 	}

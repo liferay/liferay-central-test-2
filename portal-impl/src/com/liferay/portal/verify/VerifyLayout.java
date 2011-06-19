@@ -25,6 +25,7 @@ import java.util.List;
  */
 public class VerifyLayout extends VerifyProcess {
 
+	@Override
 	protected void doVerify() throws Exception {
 		List<Layout> layouts =
 			LayoutLocalServiceUtil.getNullFriendlyURLLayouts();

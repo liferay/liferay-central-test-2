@@ -36,6 +36,7 @@ import org.aopalliance.intercept.MethodInvocation;
 public class ClusterableAdvice
 	extends AnnotationChainableMethodAdvice<Clusterable> {
 
+	@Override
 	public void afterReturning(MethodInvocation methodInvocation, Object result)
 		throws Throwable {
 
@@ -80,6 +81,7 @@ public class ClusterableAdvice
 		ClusterExecutorUtil.execute(clusterRequest);
 	}
 
+	@Override
 	public boolean afterThrowing(
 			MethodInvocation methodInvocation, Throwable throwable)
 		throws Throwable {
@@ -98,6 +100,7 @@ public class ClusterableAdvice
 		}
 	}
 
+	@Override
 	public Clusterable getNullAnnotation() {
 		return _nullClusterable;
 	}

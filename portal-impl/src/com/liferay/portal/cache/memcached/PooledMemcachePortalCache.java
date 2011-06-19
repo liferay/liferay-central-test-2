@@ -46,6 +46,7 @@ public class PooledMemcachePortalCache extends BasePortalCache {
 		_timeoutTimeUnit = timeoutTimeUnit;
 	}
 
+	@Override
 	public void destroy() {
 		try {
 			_memcachedClientFactory.close();

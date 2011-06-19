@@ -59,6 +59,7 @@ import org.apache.struts.action.ActionMapping;
  */
 public class EditScopeAction extends EditConfigurationAction {
 
+	@Override
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
 			ActionRequest actionRequest, ActionResponse actionResponse)
@@ -96,6 +97,7 @@ public class EditScopeAction extends EditConfigurationAction {
 		}
 	}
 
+	@Override
 	public ActionForward render(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
 			RenderRequest renderRequest, RenderResponse renderResponse)

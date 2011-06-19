@@ -34,6 +34,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class AssetEntryPersistenceTest extends BasePersistenceTestCase {
+	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -70,28 +71,51 @@ public class AssetEntryPersistenceTest extends BasePersistenceTestCase {
 		AssetEntry newAssetEntry = _persistence.create(pk);
 
 		newAssetEntry.setGroupId(nextLong());
+
 		newAssetEntry.setCompanyId(nextLong());
+
 		newAssetEntry.setUserId(nextLong());
+
 		newAssetEntry.setUserName(randomString());
+
 		newAssetEntry.setCreateDate(nextDate());
+
 		newAssetEntry.setModifiedDate(nextDate());
+
 		newAssetEntry.setClassNameId(nextLong());
+
 		newAssetEntry.setClassPK(nextLong());
+
 		newAssetEntry.setClassUuid(randomString());
+
 		newAssetEntry.setVisible(randomBoolean());
+
 		newAssetEntry.setStartDate(nextDate());
+
 		newAssetEntry.setEndDate(nextDate());
+
 		newAssetEntry.setPublishDate(nextDate());
+
 		newAssetEntry.setExpirationDate(nextDate());
+
 		newAssetEntry.setMimeType(randomString());
+
 		newAssetEntry.setTitle(randomString());
+
 		newAssetEntry.setDescription(randomString());
+
 		newAssetEntry.setSummary(randomString());
+
 		newAssetEntry.setUrl(randomString());
+
 		newAssetEntry.setLayoutUuid(randomString());
+
 		newAssetEntry.setHeight(nextInt());
+
 		newAssetEntry.setWidth(nextInt());
+
 		newAssetEntry.setPriority(nextDouble());
+
 		newAssetEntry.setViewCount(nextInt());
 
 		_persistence.update(newAssetEntry, false);
@@ -274,28 +298,51 @@ public class AssetEntryPersistenceTest extends BasePersistenceTestCase {
 		AssetEntry assetEntry = _persistence.create(pk);
 
 		assetEntry.setGroupId(nextLong());
+
 		assetEntry.setCompanyId(nextLong());
+
 		assetEntry.setUserId(nextLong());
+
 		assetEntry.setUserName(randomString());
+
 		assetEntry.setCreateDate(nextDate());
+
 		assetEntry.setModifiedDate(nextDate());
+
 		assetEntry.setClassNameId(nextLong());
+
 		assetEntry.setClassPK(nextLong());
+
 		assetEntry.setClassUuid(randomString());
+
 		assetEntry.setVisible(randomBoolean());
+
 		assetEntry.setStartDate(nextDate());
+
 		assetEntry.setEndDate(nextDate());
+
 		assetEntry.setPublishDate(nextDate());
+
 		assetEntry.setExpirationDate(nextDate());
+
 		assetEntry.setMimeType(randomString());
+
 		assetEntry.setTitle(randomString());
+
 		assetEntry.setDescription(randomString());
+
 		assetEntry.setSummary(randomString());
+
 		assetEntry.setUrl(randomString());
+
 		assetEntry.setLayoutUuid(randomString());
+
 		assetEntry.setHeight(nextInt());
+
 		assetEntry.setWidth(nextInt());
+
 		assetEntry.setPriority(nextDouble());
+
 		assetEntry.setViewCount(nextInt());
 
 		_persistence.update(assetEntry, false);

@@ -142,6 +142,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(TeamImpl.class.getName());
@@ -159,6 +160,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(Team team) {
 		EntityCacheUtil.removeResult(TeamModelImpl.ENTITY_CACHE_ENABLED,
 			TeamImpl.class, team.getPrimaryKey());
@@ -190,6 +192,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	 * @throws com.liferay.portal.NoSuchModelException if a team with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Team remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
@@ -240,10 +243,12 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	 * @return the team that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Team remove(Team team) throws SystemException {
 		return super.remove(team);
 	}
 
+	@Override
 	protected Team removeImpl(Team team) throws SystemException {
 		team = toUnwrappedModel(team);
 
@@ -298,6 +303,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 		return team;
 	}
 
+	@Override
 	public Team updateImpl(com.liferay.portal.model.Team team, boolean merge)
 		throws SystemException {
 		team = toUnwrappedModel(team);
@@ -382,6 +388,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	 * @throws com.liferay.portal.NoSuchModelException if a team with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Team findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
@@ -418,6 +425,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	 * @return the team, or <code>null</code> if a team with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Team fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());

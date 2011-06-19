@@ -34,6 +34,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class DDMStructurePersistenceTest extends BasePersistenceTestCase {
+	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -70,17 +71,29 @@ public class DDMStructurePersistenceTest extends BasePersistenceTestCase {
 		DDMStructure newDDMStructure = _persistence.create(pk);
 
 		newDDMStructure.setUuid(randomString());
+
 		newDDMStructure.setGroupId(nextLong());
+
 		newDDMStructure.setCompanyId(nextLong());
+
 		newDDMStructure.setUserId(nextLong());
+
 		newDDMStructure.setUserName(randomString());
+
 		newDDMStructure.setCreateDate(nextDate());
+
 		newDDMStructure.setModifiedDate(nextDate());
+
 		newDDMStructure.setClassNameId(nextLong());
+
 		newDDMStructure.setStructureKey(randomString());
+
 		newDDMStructure.setName(randomString());
+
 		newDDMStructure.setDescription(randomString());
+
 		newDDMStructure.setXsd(randomString());
+
 		newDDMStructure.setStorageType(randomString());
 
 		_persistence.update(newDDMStructure, false);
@@ -248,17 +261,29 @@ public class DDMStructurePersistenceTest extends BasePersistenceTestCase {
 		DDMStructure ddmStructure = _persistence.create(pk);
 
 		ddmStructure.setUuid(randomString());
+
 		ddmStructure.setGroupId(nextLong());
+
 		ddmStructure.setCompanyId(nextLong());
+
 		ddmStructure.setUserId(nextLong());
+
 		ddmStructure.setUserName(randomString());
+
 		ddmStructure.setCreateDate(nextDate());
+
 		ddmStructure.setModifiedDate(nextDate());
+
 		ddmStructure.setClassNameId(nextLong());
+
 		ddmStructure.setStructureKey(randomString());
+
 		ddmStructure.setName(randomString());
+
 		ddmStructure.setDescription(randomString());
+
 		ddmStructure.setXsd(randomString());
+
 		ddmStructure.setStorageType(randomString());
 
 		_persistence.update(ddmStructure, false);

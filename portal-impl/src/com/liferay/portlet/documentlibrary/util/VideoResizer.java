@@ -35,6 +35,7 @@ public class VideoResizer extends MediaToolAdapter {
 		_width = width;
 	}
 
+	@Override
 	public void onAudioSamples(IAudioSamplesEvent iAudioSamplesEvent) {
 		IAudioSamples iAudioSamples = iAudioSamplesEvent.getAudioSamples();
 
@@ -62,6 +63,7 @@ public class VideoResizer extends MediaToolAdapter {
 		}
 	}
 
+	@Override
 	public void onVideoPicture(IVideoPictureEvent event) {
 		IVideoPicture iVideoPicture = event.getPicture();
 

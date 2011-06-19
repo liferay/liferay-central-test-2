@@ -47,6 +47,7 @@ public class PollerCometDelayedJobImpl
 		}
 	}
 
+	@Override
 	protected synchronized void doReceive(Message message) throws Exception {
 		synchronized (_pollerCometDelayedTasks) {
 			for (PollerCometDelayedTask pollerCometDelayedTask :
@@ -75,6 +76,7 @@ public class PollerCometDelayedJobImpl
 
 	private class PollerCometTimerTask extends TimerTask {
 
+		@Override
 		public void run() {
 			synchronized (_pollerCometDelayedTasks) {
 				for (PollerCometDelayedTask pollerCometDelayedTask :

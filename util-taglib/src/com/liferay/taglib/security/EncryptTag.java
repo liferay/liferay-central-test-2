@@ -44,6 +44,7 @@ import javax.servlet.jsp.tagext.TagSupport;
  */
 public class EncryptTag extends TagSupport {
 
+	@Override
 	public int doStartTag() throws JspException {
 		try {
 			StringBundler sb = new StringBundler();
@@ -147,6 +148,7 @@ public class EncryptTag extends TagSupport {
 		}
 	}
 
+	@Override
 	public int doEndTag() throws JspException {
 		try {
 			JspWriter jspWriter = pageContext.getOut();

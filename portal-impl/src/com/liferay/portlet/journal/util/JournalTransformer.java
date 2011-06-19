@@ -24,11 +24,13 @@ import com.liferay.portal.util.PropsUtil;
  */
 public class JournalTransformer extends BaseTransformer {
 
+	@Override
 	protected String getTemplateParserClassName(String langType) {
 		return PropsUtil.get(
 			PropsKeys.JOURNAL_TEMPLATE_LANGUAGE_PARSER, new Filter(langType));
 	}
 
+	@Override
 	protected String[] getTransformerListenersClassNames() {
 		return PropsUtil.getArray(PropsKeys.JOURNAL_TRANSFORMER_LISTENER);
 	}

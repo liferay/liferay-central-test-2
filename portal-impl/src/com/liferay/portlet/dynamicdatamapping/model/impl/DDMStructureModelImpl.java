@@ -527,6 +527,7 @@ public class DDMStructureModelImpl extends BaseModelImpl<DDMStructure>
 		_storageType = storageType;
 	}
 
+	@Override
 	public DDMStructure toEscapedModel() {
 		if (isEscapedModel()) {
 			return (DDMStructure)this;
@@ -537,6 +538,7 @@ public class DDMStructureModelImpl extends BaseModelImpl<DDMStructure>
 		}
 	}
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
@@ -546,10 +548,12 @@ public class DDMStructureModelImpl extends BaseModelImpl<DDMStructure>
 		return _expandoBridge;
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		getExpandoBridge().setAttributes(serviceContext);
 	}
 
+	@Override
 	public Object clone() {
 		DDMStructureImpl ddmStructureImpl = new DDMStructureImpl();
 
@@ -587,6 +591,7 @@ public class DDMStructureModelImpl extends BaseModelImpl<DDMStructure>
 		}
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -611,10 +616,12 @@ public class DDMStructureModelImpl extends BaseModelImpl<DDMStructure>
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		DDMStructureModelImpl ddmStructureModelImpl = this;
 
@@ -627,6 +634,7 @@ public class DDMStructureModelImpl extends BaseModelImpl<DDMStructure>
 		ddmStructureModelImpl._originalStructureKey = ddmStructureModelImpl._structureKey;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(29);
 

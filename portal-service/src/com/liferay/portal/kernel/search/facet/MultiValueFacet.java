@@ -41,6 +41,7 @@ public class MultiValueFacet extends BaseFacet {
 		super(searchContext);
 	}
 
+	@Override
 	protected BooleanClause doGetFacetClause() {
 		SearchContext searchContext = getSearchContext();
 

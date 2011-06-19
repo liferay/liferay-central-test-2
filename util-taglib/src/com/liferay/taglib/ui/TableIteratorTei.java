@@ -23,6 +23,7 @@ import javax.servlet.jsp.tagext.VariableInfo;
  */
 public class TableIteratorTei extends TagExtraInfo {
 
+	@Override
 	public VariableInfo[] getVariableInfo(TagData tagData) {
 		String listType = tagData.getAttributeString("listType");
 

@@ -34,6 +34,7 @@ public class GroupRoleChecker extends RowChecker {
 		_role = role;
 	}
 
+	@Override
 	public boolean isChecked(Object obj) {
 		Group group = (Group)obj;
 

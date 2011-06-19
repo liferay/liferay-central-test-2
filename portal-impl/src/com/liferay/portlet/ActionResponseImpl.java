@@ -23,6 +23,7 @@ import javax.portlet.PortletRequest;
 public class ActionResponseImpl
 	extends StateAwareResponseImpl implements ActionResponse {
 
+	@Override
 	public String getLifecycle() {
 		return PortletRequest.ACTION_PHASE;
 	}

@@ -27,6 +27,7 @@ public class LiferayMimeMessage extends MimeMessage {
 		super(session);
 	}
 
+	@Override
 	protected void updateMessageID() throws MessagingException {
 		String[] messageIds = getHeader("Message-ID");
 

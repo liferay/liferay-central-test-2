@@ -43,6 +43,7 @@ import javax.mail.internet.InternetAddress;
 public class POPNotificationsMessageListener
 	extends com.liferay.portal.kernel.messaging.BaseMessageListener {
 
+	@Override
 	protected void doReceive(
 			com.liferay.portal.kernel.messaging.Message message)
 		throws Exception {

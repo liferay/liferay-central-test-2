@@ -74,6 +74,7 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 		_lifecycle = _portletRequestImpl.getLifecycle();
 	}
 
+	@Override
 	public Object getAttribute(String name) {
 		if (_include || (name == null)) {
 			return _request.getAttribute(name);
@@ -127,14 +128,17 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 		return _request.getAttribute(name);
 	}
 
+	@Override
 	public Enumeration<String> getAttributeNames() {
 		return _request.getAttributeNames();
 	}
 
+	@Override
 	public String getAuthType() {
 		return _request.getAuthType();
 	}
 
+	@Override
 	public String getCharacterEncoding() {
 		if (_lifecycle.equals(PortletRequest.ACTION_PHASE) ||
 			_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
@@ -146,6 +150,7 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 		}
 	}
 
+	@Override
 	public int getContentLength() {
 		if (_lifecycle.equals(PortletRequest.ACTION_PHASE) ||
 			_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
@@ -157,6 +162,7 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 		}
 	}
 
+	@Override
 	public String getContentType() {
 		if (_lifecycle.equals(PortletRequest.ACTION_PHASE) ||
 			_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
@@ -168,30 +174,37 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 		}
 	}
 
+	@Override
 	public String getContextPath() {
 		return _portletRequest.getContextPath();
 	}
 
+	@Override
 	public Cookie[] getCookies() {
 		return _request.getCookies();
 	}
 
+	@Override
 	public long getDateHeader(String name) {
 		return GetterUtil.getLong(getHeader(name), -1);
 	}
 
+	@Override
 	public String getHeader(String name) {
 		return _request.getHeader(name);
 	}
 
+	@Override
 	public Enumeration<String> getHeaderNames() {
 		return _request.getHeaderNames();
 	}
 
+	@Override
 	public Enumeration<String> getHeaders(String name) {
 		return _request.getHeaders(name);
 	}
 
+	@Override
 	public ServletInputStream getInputStream() throws IOException {
 		if (_lifecycle.equals(PortletRequest.ACTION_PHASE) ||
 			_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
@@ -211,30 +224,37 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 		}
 	}
 
+	@Override
 	public int getIntHeader(String name) {
 		return GetterUtil.getInteger(getHeader(name));
 	}
 
+	@Override
 	public String getLocalAddr() {
 		return null;
 	}
 
+	@Override
 	public Locale getLocale() {
 		return _portletRequest.getLocale();
 	}
 
+	@Override
 	public Enumeration<Locale> getLocales() {
 		return _portletRequest.getLocales();
 	}
 
+	@Override
 	public String getLocalName() {
 		return null;
 	}
 
+	@Override
 	public int getLocalPort() {
 		return 0;
 	}
 
+	@Override
 	public String getMethod() {
 		if (_lifecycle.equals(PortletRequest.ACTION_PHASE) ||
 			_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
@@ -253,38 +273,47 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 		}
 	}
 
+	@Override
 	public String getParameter(String name) {
 		return _portletRequest.getParameter(name);
 	}
 
+	@Override
 	public Map<String, String[]> getParameterMap() {
 		return _portletRequest.getParameterMap();
 	}
 
+	@Override
 	public Enumeration<String> getParameterNames() {
 		return _portletRequest.getParameterNames();
 	}
 
+	@Override
 	public String[] getParameterValues(String name) {
 		return _portletRequest.getParameterValues(name);
 	}
 
+	@Override
 	public String getPathInfo() {
 		return _pathInfo;
 	}
 
+	@Override
 	public String getPathTranslated() {
 		return _request.getPathTranslated();
 	}
 
+	@Override
 	public String getProtocol() {
 		return "HTTP/1.1";
 	}
 
+	@Override
 	public String getQueryString() {
 		return _queryString;
 	}
 
+	@Override
 	public BufferedReader getReader() throws IOException {
 		if (_lifecycle.equals(PortletRequest.ACTION_PHASE) ||
 			_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
@@ -298,58 +327,72 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 		}
 	}
 
+	@Override
 	public String getRealPath(String path) {
 		return null;
 	}
 
+	@Override
 	public String getRemoteAddr() {
 		return null;
 	}
 
+	@Override
 	public String getRemoteHost() {
 		return null;
 	}
 
+	@Override
 	public int getRemotePort() {
 		return 0;
 	}
 
+	@Override
 	public String getRemoteUser() {
 		return _portletRequest.getRemoteUser();
 	}
 
+	@Override
 	public RequestDispatcher getRequestDispatcher(String path) {
 		return _request.getRequestDispatcher(path);
 	}
 
+	@Override
 	public String getRequestedSessionId() {
 		return _portletRequest.getRequestedSessionId();
 	}
 
+	@Override
 	public String getRequestURI() {
 		return _requestURI;
 	}
 
+	@Override
 	public StringBuffer getRequestURL() {
 		return null;
 	}
 
+	@Override
 	public String getScheme() {
 		return _portletRequest.getScheme();
 	}
 
+	@Override
 	public String getServerName() {
 		return _portletRequest.getServerName();
 	}
 
+	@Override
 	public int getServerPort() {
 		return _portletRequest.getServerPort();
 	}
 
+	@Override
 	public String getServletPath() {
 		return _servletPath;
 	}
 
+	@Override
 	public HttpSession getSession() {
 		HttpSession session = new PortletServletSession(
 			_request.getSession(), _portletRequestImpl);
@@ -366,6 +409,7 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 		return session;
 	}
 
+	@Override
 	public HttpSession getSession(boolean create) {
 		HttpSession session = new PortletServletSession(
 			_request.getSession(create), _portletRequestImpl);
@@ -382,10 +426,12 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 		return session;
 	}
 
+	@Override
 	public Principal getUserPrincipal() {
 		return _portletRequest.getUserPrincipal();
 	}
 
+	@Override
 	public boolean isRequestedSessionIdFromCookie() {
 		return _request.isRequestedSessionIdFromCookie();
 	}
@@ -393,34 +439,42 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 	/**
 	 * @deprecated
 	 */
+	@Override
 	public boolean isRequestedSessionIdFromUrl() {
 		return _request.isRequestedSessionIdFromUrl();
 	}
 
+	@Override
 	public boolean isRequestedSessionIdFromURL() {
 		return _request.isRequestedSessionIdFromURL();
 	}
 
+	@Override
 	public boolean isRequestedSessionIdValid() {
 		return _portletRequest.isRequestedSessionIdValid();
 	}
 
+	@Override
 	public boolean isSecure() {
 		return _portletRequest.isSecure();
 	}
 
+	@Override
 	public boolean isUserInRole(String role) {
 		return _portletRequest.isUserInRole(role);
 	}
 
+	@Override
 	public void removeAttribute(String name) {
 		_portletRequest.removeAttribute(name);
 	}
 
+	@Override
 	public void setAttribute(String name, Object obj) {
 		_portletRequest.setAttribute(name, obj);
 	}
 
+	@Override
 	public void setCharacterEncoding(String encoding)
 		throws UnsupportedEncodingException {
 

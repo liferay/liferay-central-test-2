@@ -25,10 +25,12 @@ import javax.servlet.jsp.JspWriter;
  */
 public class FieldsetTag extends BaseFieldsetTag {
 
+	@Override
 	protected boolean isCleanUpSetAttributes() {
 		return _CLEAN_UP_SET_ATTRIBUTES;
 	}
 
+	@Override
 	protected int processEndTag() throws Exception {
 		JspWriter jspWriter = pageContext.getOut();
 

@@ -24,6 +24,7 @@ import com.liferay.portal.upgrade.v6_1_0.util.AssetEntryTable;
  */
 public class UpgradeAsset extends UpgradeProcess {
 
+	@Override
 	protected void doUpgrade() throws Exception {
 		try {
 			runSQL("alter_column_type AssetEntry title STRING null");

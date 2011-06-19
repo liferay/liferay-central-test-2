@@ -33,6 +33,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class WikiPageResourcePersistenceTest extends BasePersistenceTestCase {
+	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -69,7 +70,9 @@ public class WikiPageResourcePersistenceTest extends BasePersistenceTestCase {
 		WikiPageResource newWikiPageResource = _persistence.create(pk);
 
 		newWikiPageResource.setUuid(randomString());
+
 		newWikiPageResource.setNodeId(nextLong());
+
 		newWikiPageResource.setTitle(randomString());
 
 		_persistence.update(newWikiPageResource, false);
@@ -216,7 +219,9 @@ public class WikiPageResourcePersistenceTest extends BasePersistenceTestCase {
 		WikiPageResource wikiPageResource = _persistence.create(pk);
 
 		wikiPageResource.setUuid(randomString());
+
 		wikiPageResource.setNodeId(nextLong());
+
 		wikiPageResource.setTitle(randomString());
 
 		_persistence.update(wikiPageResource, false);

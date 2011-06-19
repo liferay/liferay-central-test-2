@@ -163,6 +163,7 @@ public class UserGroupGroupRoleModelImpl extends BaseModelImpl<UserGroupGroupRol
 		_roleId = roleId;
 	}
 
+	@Override
 	public UserGroupGroupRole toEscapedModel() {
 		if (isEscapedModel()) {
 			return (UserGroupGroupRole)this;
@@ -173,6 +174,7 @@ public class UserGroupGroupRoleModelImpl extends BaseModelImpl<UserGroupGroupRol
 		}
 	}
 
+	@Override
 	public Object clone() {
 		UserGroupGroupRoleImpl userGroupGroupRoleImpl = new UserGroupGroupRoleImpl();
 
@@ -191,6 +193,7 @@ public class UserGroupGroupRoleModelImpl extends BaseModelImpl<UserGroupGroupRol
 		return getPrimaryKey().compareTo(primaryKey);
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -215,13 +218,16 @@ public class UserGroupGroupRoleModelImpl extends BaseModelImpl<UserGroupGroupRol
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return getPrimaryKey().hashCode();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(7);
 

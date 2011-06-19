@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.util.StringBundler;
  */
 public class DB2Dialect extends org.hibernate.dialect.DB2Dialect {
 
+	@Override
 	public String getLimitString(String sql, boolean hasOffset) {
 		if (!sql.startsWith("(")) {
 			return super.getLimitString(sql, hasOffset);

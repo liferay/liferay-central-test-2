@@ -87,6 +87,7 @@ public class MBSubscriptionSender extends SubscriptionSender {
 		return subject.concat(StringPool.SPACE).concat(mailId);
 	}
 
+	@Override
 	protected void processMailMessage(MailMessage mailMessage, Locale locale)
 		throws Exception {
 

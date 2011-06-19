@@ -31,6 +31,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class LayoutSetPersistenceTest extends BasePersistenceTestCase {
+	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -67,17 +68,29 @@ public class LayoutSetPersistenceTest extends BasePersistenceTestCase {
 		LayoutSet newLayoutSet = _persistence.create(pk);
 
 		newLayoutSet.setGroupId(nextLong());
+
 		newLayoutSet.setCompanyId(nextLong());
+
 		newLayoutSet.setPrivateLayout(randomBoolean());
+
 		newLayoutSet.setLogo(randomBoolean());
+
 		newLayoutSet.setLogoId(nextLong());
+
 		newLayoutSet.setThemeId(randomString());
+
 		newLayoutSet.setColorSchemeId(randomString());
+
 		newLayoutSet.setWapThemeId(randomString());
+
 		newLayoutSet.setWapColorSchemeId(randomString());
+
 		newLayoutSet.setCss(randomString());
+
 		newLayoutSet.setPageCount(nextInt());
+
 		newLayoutSet.setSettings(randomString());
+
 		newLayoutSet.setLayoutSetPrototypeId(nextLong());
 
 		_persistence.update(newLayoutSet, false);
@@ -234,17 +247,29 @@ public class LayoutSetPersistenceTest extends BasePersistenceTestCase {
 		LayoutSet layoutSet = _persistence.create(pk);
 
 		layoutSet.setGroupId(nextLong());
+
 		layoutSet.setCompanyId(nextLong());
+
 		layoutSet.setPrivateLayout(randomBoolean());
+
 		layoutSet.setLogo(randomBoolean());
+
 		layoutSet.setLogoId(nextLong());
+
 		layoutSet.setThemeId(randomString());
+
 		layoutSet.setColorSchemeId(randomString());
+
 		layoutSet.setWapThemeId(randomString());
+
 		layoutSet.setWapColorSchemeId(randomString());
+
 		layoutSet.setCss(randomString());
+
 		layoutSet.setPageCount(nextInt());
+
 		layoutSet.setSettings(randomString());
+
 		layoutSet.setLayoutSetPrototypeId(nextLong());
 
 		_persistence.update(layoutSet, false);

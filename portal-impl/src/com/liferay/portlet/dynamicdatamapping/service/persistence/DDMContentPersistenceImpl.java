@@ -164,6 +164,7 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(DDMContentImpl.class.getName());
@@ -181,6 +182,7 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(DDMContent ddmContent) {
 		EntityCacheUtil.removeResult(DDMContentModelImpl.ENTITY_CACHE_ENABLED,
 			DDMContentImpl.class, ddmContent.getPrimaryKey());
@@ -218,6 +220,7 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 	 * @throws com.liferay.portal.NoSuchModelException if a d d m content with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMContent remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
@@ -270,10 +273,12 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 	 * @return the d d m content that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMContent remove(DDMContent ddmContent) throws SystemException {
 		return super.remove(ddmContent);
 	}
 
+	@Override
 	protected DDMContent removeImpl(DDMContent ddmContent)
 		throws SystemException {
 		ddmContent = toUnwrappedModel(ddmContent);
@@ -308,6 +313,7 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 		return ddmContent;
 	}
 
+	@Override
 	public DDMContent updateImpl(
 		com.liferay.portlet.dynamicdatamapping.model.DDMContent ddmContent,
 		boolean merge) throws SystemException {
@@ -401,6 +407,7 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 	 * @throws com.liferay.portal.NoSuchModelException if a d d m content with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMContent findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
@@ -437,6 +444,7 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 	 * @return the d d m content, or <code>null</code> if a d d m content with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public DDMContent fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());

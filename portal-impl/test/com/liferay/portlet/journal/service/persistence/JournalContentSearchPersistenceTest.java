@@ -33,6 +33,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class JournalContentSearchPersistenceTest extends BasePersistenceTestCase {
+	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -69,10 +70,15 @@ public class JournalContentSearchPersistenceTest extends BasePersistenceTestCase
 		JournalContentSearch newJournalContentSearch = _persistence.create(pk);
 
 		newJournalContentSearch.setGroupId(nextLong());
+
 		newJournalContentSearch.setCompanyId(nextLong());
+
 		newJournalContentSearch.setPrivateLayout(randomBoolean());
+
 		newJournalContentSearch.setLayoutId(nextLong());
+
 		newJournalContentSearch.setPortletId(randomString());
+
 		newJournalContentSearch.setArticleId(randomString());
 
 		_persistence.update(newJournalContentSearch, false);
@@ -233,10 +239,15 @@ public class JournalContentSearchPersistenceTest extends BasePersistenceTestCase
 		JournalContentSearch journalContentSearch = _persistence.create(pk);
 
 		journalContentSearch.setGroupId(nextLong());
+
 		journalContentSearch.setCompanyId(nextLong());
+
 		journalContentSearch.setPrivateLayout(randomBoolean());
+
 		journalContentSearch.setLayoutId(nextLong());
+
 		journalContentSearch.setPortletId(randomString());
+
 		journalContentSearch.setArticleId(randomString());
 
 		_persistence.update(journalContentSearch, false);

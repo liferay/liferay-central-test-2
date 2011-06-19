@@ -67,6 +67,7 @@ public class IndexCommitMetaInfo implements Serializable {
 		return _empty;
 	}
 
+	@Override
 	public String toString() {
 		if (_empty) {
 			return StringPool.BLANK;
@@ -111,6 +112,7 @@ public class IndexCommitMetaInfo implements Serializable {
 			return _fileSize;
 		}
 
+		@Override
 		public String toString() {
 			StringBundler sb = new StringBundler(5);
 

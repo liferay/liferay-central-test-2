@@ -51,6 +51,7 @@ public class PortletContextLoaderListener extends ContextLoaderListener {
 			StringPool.PERIOD).concat(contextPath);
 	}
 
+	@Override
 	public void contextDestroyed(ServletContextEvent servletContextEvent) {
 		ClassLoader classLoader = PortletClassLoaderUtil.getClassLoader();
 
@@ -79,6 +80,7 @@ public class PortletContextLoaderListener extends ContextLoaderListener {
 		super.contextDestroyed(servletContextEvent);
 	}
 
+	@Override
 	public void contextInitialized(ServletContextEvent servletContextEvent) {
 		MethodCache.reset();
 
@@ -128,6 +130,7 @@ public class PortletContextLoaderListener extends ContextLoaderListener {
 			WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE);
 	}
 
+	@Override
 	protected ContextLoader createContextLoader() {
 		return new PortletContextLoader();
 	}

@@ -33,6 +33,7 @@ import javax.servlet.http.HttpServletResponse;
 public class RenderResponseImpl
 	extends MimeResponseImpl implements LiferayRenderResponse {
 
+	@Override
 	public String getLifecycle() {
 		return PortletRequest.RENDER_PHASE;
 	}
@@ -75,6 +76,7 @@ public class RenderResponseImpl
 		_useDefaultTemplate = useDefaultTemplate;
 	}
 
+	@Override
 	protected void init(
 		PortletRequestImpl portletRequestImpl, HttpServletResponse response,
 		String portletName, long companyId, long plid) {

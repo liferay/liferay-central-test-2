@@ -47,6 +47,7 @@ public class OracleDB extends BaseDB {
 		return _instance;
 	}
 
+	@Override
 	public String buildSQL(String template) throws IOException {
 		template = _preBuildSQL(template);
 		template = _postBuildSQL(template);
@@ -54,6 +55,7 @@ public class OracleDB extends BaseDB {
 		return template;
 	}
 
+	@Override
 	public void buildSQLFile(String sqlDir, String fileName)
 		throws IOException {
 
@@ -121,6 +123,7 @@ public class OracleDB extends BaseDB {
 			sqlDir + "/" + fileName + "/" + fileName + "-oracle.sql", oracle);
 	}
 
+	@Override
 	public List<Index> getIndexes() throws SQLException {
 		List<Index> indexes = new ArrayList<Index>();
 
@@ -164,6 +167,7 @@ public class OracleDB extends BaseDB {
 		return indexes;
 	}
 
+	@Override
 	public boolean isSupportsInlineDistinct() {
 		return _SUPPORTS_INLINE_DISTINCT;
 	}
@@ -172,6 +176,7 @@ public class OracleDB extends BaseDB {
 		super(TYPE_ORACLE);
 	}
 
+	@Override
 	protected String buildCreateFileContent(
 			String sqlDir, String databaseName, int population)
 		throws IOException {
@@ -200,14 +205,17 @@ public class OracleDB extends BaseDB {
 		return sb.toString();
 	}
 
+	@Override
 	protected String getServerName() {
 		return "oracle";
 	}
 
+	@Override
 	protected String[] getTemplate() {
 		return _ORACLE;
 	}
 
+	@Override
 	protected String replaceTemplate(String template, String[] actual) {
 
 		// LPS-12048
@@ -233,6 +241,7 @@ public class OracleDB extends BaseDB {
 		return super.replaceTemplate(template, actual);
 	}
 
+	@Override
 	protected String reword(String data) throws IOException {
 		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
 			new UnsyncStringReader(data));

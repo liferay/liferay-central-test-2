@@ -32,6 +32,7 @@ import java.util.Set;
  */
 public class UpgradeDocumentLibrary extends UpgradeProcess {
 
+	@Override
 	protected void doUpgrade() throws Exception {
 
 		// DLFolder

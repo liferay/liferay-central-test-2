@@ -37,6 +37,7 @@ import org.aopalliance.intercept.MethodInvocation;
 public class BufferedIncrementAdvice
 	extends AnnotationChainableMethodAdvice<BufferedIncrement> {
 
+	@Override
 	@SuppressWarnings("rawtypes")
 	public Object before(MethodInvocation methodInvocation) throws Throwable {
 		MethodTargetClassKey methodTargetClassKey = buildMethodTargetClassKey(
@@ -87,6 +88,7 @@ public class BufferedIncrementAdvice
 		return nullResult;
 	}
 
+	@Override
 	public BufferedIncrement getNullAnnotation() {
 		return _nullBufferedIncrement;
 	}

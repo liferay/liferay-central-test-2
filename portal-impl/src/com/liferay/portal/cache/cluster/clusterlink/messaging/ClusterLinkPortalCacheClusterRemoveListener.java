@@ -47,6 +47,7 @@ public class ClusterLinkPortalCacheClusterRemoveListener
 		_portalCacheManager = ehcachePortalCacheManager.getEhcacheManager();
 	}
 
+	@Override
 	protected void doReceive(Message message) throws Exception {
 		PortalCacheClusterEvent portalCacheClusterEvent =
 			(PortalCacheClusterEvent)message.getPayload();

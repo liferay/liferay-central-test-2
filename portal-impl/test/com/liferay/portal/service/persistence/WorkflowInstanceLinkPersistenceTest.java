@@ -30,6 +30,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class WorkflowInstanceLinkPersistenceTest extends BasePersistenceTestCase {
+	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -66,13 +67,21 @@ public class WorkflowInstanceLinkPersistenceTest extends BasePersistenceTestCase
 		WorkflowInstanceLink newWorkflowInstanceLink = _persistence.create(pk);
 
 		newWorkflowInstanceLink.setGroupId(nextLong());
+
 		newWorkflowInstanceLink.setCompanyId(nextLong());
+
 		newWorkflowInstanceLink.setUserId(nextLong());
+
 		newWorkflowInstanceLink.setUserName(randomString());
+
 		newWorkflowInstanceLink.setCreateDate(nextDate());
+
 		newWorkflowInstanceLink.setModifiedDate(nextDate());
+
 		newWorkflowInstanceLink.setClassNameId(nextLong());
+
 		newWorkflowInstanceLink.setClassPK(nextLong());
+
 		newWorkflowInstanceLink.setWorkflowInstanceId(nextLong());
 
 		_persistence.update(newWorkflowInstanceLink, false);
@@ -217,13 +226,21 @@ public class WorkflowInstanceLinkPersistenceTest extends BasePersistenceTestCase
 		WorkflowInstanceLink workflowInstanceLink = _persistence.create(pk);
 
 		workflowInstanceLink.setGroupId(nextLong());
+
 		workflowInstanceLink.setCompanyId(nextLong());
+
 		workflowInstanceLink.setUserId(nextLong());
+
 		workflowInstanceLink.setUserName(randomString());
+
 		workflowInstanceLink.setCreateDate(nextDate());
+
 		workflowInstanceLink.setModifiedDate(nextDate());
+
 		workflowInstanceLink.setClassNameId(nextLong());
+
 		workflowInstanceLink.setClassPK(nextLong());
+
 		workflowInstanceLink.setWorkflowInstanceId(nextLong());
 
 		_persistence.update(workflowInstanceLink, false);

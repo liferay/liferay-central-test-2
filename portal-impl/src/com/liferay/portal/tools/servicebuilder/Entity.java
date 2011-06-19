@@ -119,6 +119,7 @@ public class Entity {
 		}
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		Entity entity = (Entity)obj;
 
@@ -381,6 +382,7 @@ public class Entity {
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return _name.hashCode();
 	}

@@ -38,6 +38,7 @@ public class ProtectedRenderRequest extends RenderRequestWrapper {
 		}
 	}
 
+	@Override
 	public String getRemoteUser() {
 		if (_remoteUser != null) {
 			return _remoteUser;
@@ -47,6 +48,7 @@ public class ProtectedRenderRequest extends RenderRequestWrapper {
 		}
 	}
 
+	@Override
 	public Principal getUserPrincipal() {
 		if (_userPrincipal != null) {
 			return _userPrincipal;

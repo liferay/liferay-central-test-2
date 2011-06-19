@@ -21,18 +21,22 @@ import org.apache.lucene.search.DefaultSimilarity;
  */
 public class FieldWeightSimilarity extends DefaultSimilarity {
 
+	@Override
 	public float coord(int overlap, int maxOverlap) {
 		return 1;
 	}
 
+	@Override
 	public float idf(int docFreq, int numDocs) {
 		return 1;
 	}
 
+	@Override
 	public float lengthNorm(String fieldName, int numTerms) {
 		return 1;
 	}
 
+	@Override
 	public float queryNorm(float sumOfSquaredWeights) {
 		return 1;
 	}

@@ -56,6 +56,7 @@ public class DataSampleThreadLocal implements Cloneable {
 		_monitoringDataSampleThreadLocal = monitoringDataSampleThreadLocal;
 	}
 
+	@Override
 	public Object clone() {
 		return new DataSampleThreadLocal();
 	}

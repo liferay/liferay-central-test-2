@@ -64,6 +64,7 @@ public class DLFileEntryAssetRenderer extends BaseAssetRenderer {
 		}
 	}
 
+	@Override
 	public String getDiscussionPath() {
 		if (PropsValues.DL_FILE_ENTRY_COMMENTS_ENABLED) {
 			return "edit_file_entry_discussion";
@@ -85,6 +86,7 @@ public class DLFileEntryAssetRenderer extends BaseAssetRenderer {
 		return _fileVersion.getTitle();
 	}
 
+	@Override
 	public PortletURL getURLEdit(
 			LiferayPortletRequest liferayPortletRequest,
 			LiferayPortletResponse liferayPortletResponse)
@@ -102,6 +104,7 @@ public class DLFileEntryAssetRenderer extends BaseAssetRenderer {
 		return portletURL;
 	}
 
+	@Override
 	public PortletURL getURLExport(
 		LiferayPortletRequest liferayPortletRequest,
 		LiferayPortletResponse liferayPortletResponse) {
@@ -118,6 +121,7 @@ public class DLFileEntryAssetRenderer extends BaseAssetRenderer {
 		return portletURL;
 	}
 
+	@Override
 	public String getURLViewInContext(
 		LiferayPortletRequest liferayPortletRequest,
 		LiferayPortletResponse liferayPortletResponse,
@@ -141,6 +145,7 @@ public class DLFileEntryAssetRenderer extends BaseAssetRenderer {
 		return _fileEntry.getUuid();
 	}
 
+	@Override
 	public boolean hasEditPermission(PermissionChecker permissionChecker)
 		throws PortalException, SystemException {
 
@@ -148,6 +153,7 @@ public class DLFileEntryAssetRenderer extends BaseAssetRenderer {
 			permissionChecker, _fileEntry.getFileEntryId(), ActionKeys.UPDATE);
 	}
 
+	@Override
 	public boolean hasViewPermission(PermissionChecker permissionChecker)
 		throws PortalException, SystemException {
 
@@ -155,10 +161,12 @@ public class DLFileEntryAssetRenderer extends BaseAssetRenderer {
 			permissionChecker, _fileEntry.getFileEntryId(), ActionKeys.VIEW);
 	}
 
+	@Override
 	public boolean isConvertible() {
 		return true;
 	}
 
+	@Override
 	public boolean isPrintable() {
 		return false;
 	}
@@ -183,6 +191,7 @@ public class DLFileEntryAssetRenderer extends BaseAssetRenderer {
 		}
 	}
 
+	@Override
 	protected String getIconPath(ThemeDisplay themeDisplay) {
 		return themeDisplay.getPathThemeImages() + "/common/clip.png";
 	}

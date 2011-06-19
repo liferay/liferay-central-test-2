@@ -100,18 +100,18 @@ public class OrganizationSearch extends SearchContainer<Organization> {
 				Validator.isNotNull(orderByType)) {
 
 				preferences.setValue(
-					PortletKeys.ENTERPRISE_ADMIN, "organizations-order-by-col",
+					PortletKeys.USERS_ADMIN, "organizations-order-by-col",
 					orderByCol);
 				preferences.setValue(
-					PortletKeys.ENTERPRISE_ADMIN, "organizations-order-by-type",
+					PortletKeys.USERS_ADMIN, "organizations-order-by-type",
 					orderByType);
 			}
 			else {
 				orderByCol = preferences.getValue(
-					PortletKeys.ENTERPRISE_ADMIN, "organizations-order-by-col",
+					PortletKeys.USERS_ADMIN, "organizations-order-by-col",
 					"name");
 				orderByType = preferences.getValue(
-					PortletKeys.ENTERPRISE_ADMIN, "organizations-order-by-type",
+					PortletKeys.USERS_ADMIN, "organizations-order-by-type",
 					"asc");
 			}
 

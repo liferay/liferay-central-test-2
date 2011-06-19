@@ -144,6 +144,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(PermissionImpl.class.getName());
@@ -161,6 +162,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(Permission permission) {
 		EntityCacheUtil.removeResult(PermissionModelImpl.ENTITY_CACHE_ENABLED,
 			PermissionImpl.class, permission.getPrimaryKey());
@@ -195,6 +197,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 	 * @throws com.liferay.portal.NoSuchModelException if a permission with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Permission remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
@@ -247,10 +250,12 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 	 * @return the permission that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Permission remove(Permission permission) throws SystemException {
 		return super.remove(permission);
 	}
 
+	@Override
 	protected Permission removeImpl(Permission permission)
 		throws SystemException {
 		permission = toUnwrappedModel(permission);
@@ -315,6 +320,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 		return permission;
 	}
 
+	@Override
 	public Permission updateImpl(
 		com.liferay.portal.model.Permission permission, boolean merge)
 		throws SystemException {
@@ -396,6 +402,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 	 * @throws com.liferay.portal.NoSuchModelException if a permission with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Permission findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
@@ -432,6 +439,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 	 * @return the permission, or <code>null</code> if a permission with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Permission fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());

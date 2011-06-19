@@ -284,6 +284,13 @@ public class DLFileEntryLocalServiceWrapper implements DLFileEntryLocalService {
 			majorVersion, changeLog, serviceContext);
 	}
 
+	public void checkInFileEntry(long userId, long fileEntryId,
+		java.lang.String lockUuid)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_dlFileEntryLocalService.checkInFileEntry(userId, fileEntryId, lockUuid);
+	}
+
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry checkOutFileEntry(
 		long userId, long fileEntryId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -487,19 +494,10 @@ public class DLFileEntryLocalServiceWrapper implements DLFileEntryLocalService {
 		return _dlFileEntryLocalService.hasFileEntryLock(userId, fileEntryId);
 	}
 
-	public com.liferay.portal.model.Lock lockFileEntry(long userId,
-		long fileEntryId)
+	public boolean isFileEntryCheckedOut(long fileEntryId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _dlFileEntryLocalService.lockFileEntry(userId, fileEntryId);
-	}
-
-	public com.liferay.portal.model.Lock lockFileEntry(long userId,
-		long fileEntryId, java.lang.String owner, long expirationTime)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _dlFileEntryLocalService.lockFileEntry(userId, fileEntryId,
-			owner, expirationTime);
+		return _dlFileEntryLocalService.isFileEntryCheckedOut(fileEntryId);
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry moveFileEntry(
@@ -518,11 +516,6 @@ public class DLFileEntryLocalServiceWrapper implements DLFileEntryLocalService {
 			com.liferay.portal.kernel.exception.SystemException {
 		_dlFileEntryLocalService.revertFileEntry(userId, fileEntryId, version,
 			serviceContext);
-	}
-
-	public void unlockFileEntry(long fileEntryId)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		_dlFileEntryLocalService.unlockFileEntry(fileEntryId);
 	}
 
 	public com.liferay.portlet.asset.model.AssetEntry updateAsset(long userId,
@@ -550,12 +543,20 @@ public class DLFileEntryLocalServiceWrapper implements DLFileEntryLocalService {
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry updateStatus(
-		long userId, long fileEntryId, int status,
+		long userId, long fileVersionId, int status,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _dlFileEntryLocalService.updateStatus(userId, fileEntryId,
+		return _dlFileEntryLocalService.updateStatus(userId, fileVersionId,
 			status, serviceContext);
+	}
+
+	public boolean verifyFileEntryCheckOut(long fileEntryId,
+		java.lang.String lockUuid)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _dlFileEntryLocalService.verifyFileEntryCheckOut(fileEntryId,
+			lockUuid);
 	}
 
 	public DLFileEntryLocalService getWrappedDLFileEntryLocalService() {

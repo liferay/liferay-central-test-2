@@ -65,6 +65,7 @@ public class InputFieldTag extends IncludeTag {
 		_model = model;
 	}
 
+	@Override
 	protected void cleanUp() {
 		_bean = null;
 		_cssClass = null;
@@ -78,10 +79,12 @@ public class InputFieldTag extends IncludeTag {
 		_model = null;
 	}
 
+	@Override
 	protected String getPage() {
 		return _PAGE;
 	}
 
+	@Override
 	protected void setAttributes(HttpServletRequest request) {
 		request.setAttribute("liferay-ui:input-field:bean", _bean);
 		request.setAttribute("liferay-ui:input-field:cssClass", _cssClass);

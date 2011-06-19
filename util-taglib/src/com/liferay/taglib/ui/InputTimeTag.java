@@ -71,6 +71,7 @@ public class InputTimeTag extends IncludeTag {
 		_minuteValue = minuteValue;
 	}
 
+	@Override
 	protected void cleanUp() {
 		_amPmNullable = false;
 		_amPmParam = null;
@@ -86,10 +87,12 @@ public class InputTimeTag extends IncludeTag {
 		_minuteValue = 0;
 	}
 
+	@Override
 	protected String getPage() {
 		return _PAGE;
 	}
 
+	@Override
 	protected void setAttributes(HttpServletRequest request) {
 		request.setAttribute(
 			"liferay-ui:input-time:amPmNullable",

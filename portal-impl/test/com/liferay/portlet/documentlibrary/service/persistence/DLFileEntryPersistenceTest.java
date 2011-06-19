@@ -34,6 +34,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class DLFileEntryPersistenceTest extends BasePersistenceTestCase {
+	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -70,25 +71,45 @@ public class DLFileEntryPersistenceTest extends BasePersistenceTestCase {
 		DLFileEntry newDLFileEntry = _persistence.create(pk);
 
 		newDLFileEntry.setUuid(randomString());
+
 		newDLFileEntry.setGroupId(nextLong());
+
 		newDLFileEntry.setCompanyId(nextLong());
+
 		newDLFileEntry.setUserId(nextLong());
+
 		newDLFileEntry.setUserName(randomString());
+
 		newDLFileEntry.setVersionUserId(nextLong());
+
 		newDLFileEntry.setVersionUserName(randomString());
+
 		newDLFileEntry.setCreateDate(nextDate());
+
 		newDLFileEntry.setModifiedDate(nextDate());
+
 		newDLFileEntry.setRepositoryId(nextLong());
+
 		newDLFileEntry.setFolderId(nextLong());
+
 		newDLFileEntry.setName(randomString());
+
 		newDLFileEntry.setExtension(randomString());
+
 		newDLFileEntry.setMimeType(randomString());
+
 		newDLFileEntry.setTitle(randomString());
+
 		newDLFileEntry.setDescription(randomString());
+
 		newDLFileEntry.setExtraSettings(randomString());
-		newDLFileEntry.setDocumentTypeId(nextLong());
+
+		newDLFileEntry.setFileEntryTypeId(nextLong());
+
 		newDLFileEntry.setVersion(randomString());
+
 		newDLFileEntry.setSize(nextLong());
+
 		newDLFileEntry.setReadCount(nextInt());
 
 		_persistence.update(newDLFileEntry, false);
@@ -128,8 +149,8 @@ public class DLFileEntryPersistenceTest extends BasePersistenceTestCase {
 			newDLFileEntry.getDescription());
 		assertEquals(existingDLFileEntry.getExtraSettings(),
 			newDLFileEntry.getExtraSettings());
-		assertEquals(existingDLFileEntry.getDocumentTypeId(),
-			newDLFileEntry.getDocumentTypeId());
+		assertEquals(existingDLFileEntry.getFileEntryTypeId(),
+			newDLFileEntry.getFileEntryTypeId());
 		assertEquals(existingDLFileEntry.getVersion(),
 			newDLFileEntry.getVersion());
 		assertEquals(existingDLFileEntry.getSize(), newDLFileEntry.getSize());
@@ -277,25 +298,45 @@ public class DLFileEntryPersistenceTest extends BasePersistenceTestCase {
 		DLFileEntry dlFileEntry = _persistence.create(pk);
 
 		dlFileEntry.setUuid(randomString());
+
 		dlFileEntry.setGroupId(nextLong());
+
 		dlFileEntry.setCompanyId(nextLong());
+
 		dlFileEntry.setUserId(nextLong());
+
 		dlFileEntry.setUserName(randomString());
+
 		dlFileEntry.setVersionUserId(nextLong());
+
 		dlFileEntry.setVersionUserName(randomString());
+
 		dlFileEntry.setCreateDate(nextDate());
+
 		dlFileEntry.setModifiedDate(nextDate());
+
 		dlFileEntry.setRepositoryId(nextLong());
+
 		dlFileEntry.setFolderId(nextLong());
+
 		dlFileEntry.setName(randomString());
+
 		dlFileEntry.setExtension(randomString());
+
 		dlFileEntry.setMimeType(randomString());
+
 		dlFileEntry.setTitle(randomString());
+
 		dlFileEntry.setDescription(randomString());
+
 		dlFileEntry.setExtraSettings(randomString());
-		dlFileEntry.setDocumentTypeId(nextLong());
+
+		dlFileEntry.setFileEntryTypeId(nextLong());
+
 		dlFileEntry.setVersion(randomString());
+
 		dlFileEntry.setSize(nextLong());
+
 		dlFileEntry.setReadCount(nextInt());
 
 		_persistence.update(dlFileEntry, false);

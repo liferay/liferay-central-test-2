@@ -42,6 +42,7 @@ public class SearchContainerTag<R> extends ParamAndPropertyAncestorTagImpl {
 
 	public static final String DEFAULT_VAR = "searchContainer";
 
+	@Override
 	public int doEndTag() {
 		if (!ServerDetector.isResin()) {
 			_curParam = SearchContainer.DEFAULT_CUR_PARAM;
@@ -69,6 +70,7 @@ public class SearchContainerTag<R> extends ParamAndPropertyAncestorTagImpl {
 		return EVAL_PAGE;
 	}
 
+	@Override
 	public int doStartTag() throws JspException {
 		try {
 			HttpServletRequest request = getServletRequest();

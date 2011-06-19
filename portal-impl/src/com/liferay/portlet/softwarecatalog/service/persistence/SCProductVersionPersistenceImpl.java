@@ -149,6 +149,7 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl<SCProdu
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(SCProductVersionImpl.class.getName());
@@ -166,6 +167,7 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl<SCProdu
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(SCProductVersion scProductVersion) {
 		EntityCacheUtil.removeResult(SCProductVersionModelImpl.ENTITY_CACHE_ENABLED,
 			SCProductVersionImpl.class, scProductVersion.getPrimaryKey());
@@ -197,6 +199,7 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl<SCProdu
 	 * @throws com.liferay.portal.NoSuchModelException if a s c product version with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public SCProductVersion remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
@@ -250,11 +253,13 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl<SCProdu
 	 * @return the s c product version that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public SCProductVersion remove(SCProductVersion scProductVersion)
 		throws SystemException {
 		return super.remove(scProductVersion);
 	}
 
+	@Override
 	protected SCProductVersion removeImpl(SCProductVersion scProductVersion)
 		throws SystemException {
 		scProductVersion = toUnwrappedModel(scProductVersion);
@@ -296,6 +301,7 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl<SCProdu
 		return scProductVersion;
 	}
 
+	@Override
 	public SCProductVersion updateImpl(
 		com.liferay.portlet.softwarecatalog.model.SCProductVersion scProductVersion,
 		boolean merge) throws SystemException {
@@ -382,6 +388,7 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl<SCProdu
 	 * @throws com.liferay.portal.NoSuchModelException if a s c product version with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public SCProductVersion findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
@@ -418,6 +425,7 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl<SCProdu
 	 * @return the s c product version, or <code>null</code> if a s c product version with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public SCProductVersion fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());

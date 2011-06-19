@@ -40,6 +40,7 @@ import org.apache.struts.action.ActionMapping;
  */
 public class ViewAction extends WebContentAction {
 
+	@Override
 	public ActionForward render(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
 			RenderRequest renderRequest, RenderResponse renderResponse)

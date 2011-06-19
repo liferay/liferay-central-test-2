@@ -27,6 +27,7 @@ import com.liferay.portal.upgrade.v4_3_0.util.RoleTable;
  */
 public class UpgradeRole extends UpgradeProcess {
 
+	@Override
 	protected void doUpgrade() throws Exception {
 
 		// Role

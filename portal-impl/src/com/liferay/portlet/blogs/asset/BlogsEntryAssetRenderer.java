@@ -50,6 +50,7 @@ public class BlogsEntryAssetRenderer extends BaseAssetRenderer {
 		return _entry.getEntryId();
 	}
 
+	@Override
 	public String getDiscussionPath() {
 		if (PropsValues.BLOGS_ENTRY_COMMENTS_ENABLED) {
 			return "edit_entry_discussion";
@@ -71,6 +72,7 @@ public class BlogsEntryAssetRenderer extends BaseAssetRenderer {
 		return _entry.getTitle();
 	}
 
+	@Override
 	public PortletURL getURLEdit(
 			LiferayPortletRequest liferayPortletRequest,
 			LiferayPortletResponse liferayPortletResponse)
@@ -86,10 +88,12 @@ public class BlogsEntryAssetRenderer extends BaseAssetRenderer {
 		return portletURL;
 	}
 
+	@Override
 	public String getUrlTitle() {
 		return _entry.getUrlTitle();
 	}
 
+	@Override
 	public String getURLViewInContext(
 		LiferayPortletRequest liferayPortletRequest,
 		LiferayPortletResponse liferayPortletResponse,
@@ -113,16 +117,19 @@ public class BlogsEntryAssetRenderer extends BaseAssetRenderer {
 		return _entry.getUuid();
 	}
 
+	@Override
 	public boolean hasEditPermission(PermissionChecker permissionChecker) {
 		return BlogsEntryPermission.contains(
 			permissionChecker, _entry, ActionKeys.UPDATE);
 	}
 
+	@Override
 	public boolean hasViewPermission(PermissionChecker permissionChecker) {
 		return BlogsEntryPermission.contains(
 			permissionChecker, _entry, ActionKeys.VIEW);
 	}
 
+	@Override
 	public boolean isPrintable() {
 		return true;
 	}
@@ -144,6 +151,7 @@ public class BlogsEntryAssetRenderer extends BaseAssetRenderer {
 		}
 	}
 
+	@Override
 	protected String getIconPath(ThemeDisplay themeDisplay) {
 		return themeDisplay.getPathThemeImages() + "/blogs/blogs.png";
 	}

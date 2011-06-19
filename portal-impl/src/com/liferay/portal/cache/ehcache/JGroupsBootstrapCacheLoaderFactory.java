@@ -29,6 +29,7 @@ public class JGroupsBootstrapCacheLoaderFactory
 	extends
 		net.sf.ehcache.distribution.jgroups.JGroupsBootstrapCacheLoaderFactory {
 
+	@Override
 	public BootstrapCacheLoader createBootstrapCacheLoader(
 		Properties properties) {
 

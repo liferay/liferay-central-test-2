@@ -43,6 +43,7 @@ public class PKUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 		}
 	}
 
+	@Override
 	public Integer getNewColumnType(Integer defaultType) {
 		return _newColumnType;
 	}

@@ -178,6 +178,7 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(WebsiteImpl.class.getName());
@@ -195,6 +196,7 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(Website website) {
 		EntityCacheUtil.removeResult(WebsiteModelImpl.ENTITY_CACHE_ENABLED,
 			WebsiteImpl.class, website.getPrimaryKey());
@@ -223,6 +225,7 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 	 * @throws com.liferay.portal.NoSuchModelException if a website with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Website remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
@@ -275,10 +278,12 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 	 * @return the website that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Website remove(Website website) throws SystemException {
 		return super.remove(website);
 	}
 
+	@Override
 	protected Website removeImpl(Website website) throws SystemException {
 		website = toUnwrappedModel(website);
 
@@ -304,6 +309,7 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 		return website;
 	}
 
+	@Override
 	public Website updateImpl(com.liferay.portal.model.Website website,
 		boolean merge) throws SystemException {
 		website = toUnwrappedModel(website);
@@ -365,6 +371,7 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 	 * @throws com.liferay.portal.NoSuchModelException if a website with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Website findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
@@ -401,6 +408,7 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 	 * @return the website, or <code>null</code> if a website with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Website fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());

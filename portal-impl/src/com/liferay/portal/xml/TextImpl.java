@@ -28,10 +28,12 @@ public class TextImpl extends NodeImpl implements Text {
 		_text = text;
 	}
 
+	@Override
 	public <T, V extends Visitor<T>> T accept(V visitor) {
 		return visitor.visitText(this);
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		org.dom4j.Text text = ((TextImpl)obj).getWrappedText();
 
@@ -42,10 +44,12 @@ public class TextImpl extends NodeImpl implements Text {
 		return _text;
 	}
 
+	@Override
 	public int hashCode() {
 		return _text.hashCode();
 	}
 
+	@Override
 	public String toString() {
 		return _text.toString();
 	}

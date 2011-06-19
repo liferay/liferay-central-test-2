@@ -34,6 +34,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class MBMessagePersistenceTest extends BasePersistenceTestCase {
+	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -70,28 +71,51 @@ public class MBMessagePersistenceTest extends BasePersistenceTestCase {
 		MBMessage newMBMessage = _persistence.create(pk);
 
 		newMBMessage.setUuid(randomString());
+
 		newMBMessage.setGroupId(nextLong());
+
 		newMBMessage.setCompanyId(nextLong());
+
 		newMBMessage.setUserId(nextLong());
+
 		newMBMessage.setUserName(randomString());
+
 		newMBMessage.setCreateDate(nextDate());
+
 		newMBMessage.setModifiedDate(nextDate());
+
 		newMBMessage.setClassNameId(nextLong());
+
 		newMBMessage.setClassPK(nextLong());
+
 		newMBMessage.setCategoryId(nextLong());
+
 		newMBMessage.setThreadId(nextLong());
+
 		newMBMessage.setRootMessageId(nextLong());
+
 		newMBMessage.setParentMessageId(nextLong());
+
 		newMBMessage.setSubject(randomString());
+
 		newMBMessage.setBody(randomString());
+
 		newMBMessage.setFormat(randomString());
+
 		newMBMessage.setAttachments(randomBoolean());
+
 		newMBMessage.setAnonymous(randomBoolean());
+
 		newMBMessage.setPriority(nextDouble());
+
 		newMBMessage.setAllowPingbacks(randomBoolean());
+
 		newMBMessage.setStatus(nextInt());
+
 		newMBMessage.setStatusByUserId(nextLong());
+
 		newMBMessage.setStatusByUserName(randomString());
+
 		newMBMessage.setStatusDate(nextDate());
 
 		_persistence.update(newMBMessage, false);
@@ -265,28 +289,51 @@ public class MBMessagePersistenceTest extends BasePersistenceTestCase {
 		MBMessage mbMessage = _persistence.create(pk);
 
 		mbMessage.setUuid(randomString());
+
 		mbMessage.setGroupId(nextLong());
+
 		mbMessage.setCompanyId(nextLong());
+
 		mbMessage.setUserId(nextLong());
+
 		mbMessage.setUserName(randomString());
+
 		mbMessage.setCreateDate(nextDate());
+
 		mbMessage.setModifiedDate(nextDate());
+
 		mbMessage.setClassNameId(nextLong());
+
 		mbMessage.setClassPK(nextLong());
+
 		mbMessage.setCategoryId(nextLong());
+
 		mbMessage.setThreadId(nextLong());
+
 		mbMessage.setRootMessageId(nextLong());
+
 		mbMessage.setParentMessageId(nextLong());
+
 		mbMessage.setSubject(randomString());
+
 		mbMessage.setBody(randomString());
+
 		mbMessage.setFormat(randomString());
+
 		mbMessage.setAttachments(randomBoolean());
+
 		mbMessage.setAnonymous(randomBoolean());
+
 		mbMessage.setPriority(nextDouble());
+
 		mbMessage.setAllowPingbacks(randomBoolean());
+
 		mbMessage.setStatus(nextInt());
+
 		mbMessage.setStatusByUserId(nextLong());
+
 		mbMessage.setStatusByUserName(randomString());
+
 		mbMessage.setStatusDate(nextDate());
 
 		_persistence.update(mbMessage, false);

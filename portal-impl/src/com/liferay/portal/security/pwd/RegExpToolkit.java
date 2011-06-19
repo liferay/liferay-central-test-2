@@ -36,10 +36,12 @@ public class RegExpToolkit extends BasicToolkit {
 			PropsUtil.get(PropsKeys.PASSWORDS_REGEXPTOOLKIT_LENGTH));
 	}
 
+	@Override
 	public String generate(PasswordPolicy passwordPolicy) {
 		return PwdGenerator.getPassword(_charset, _length);
 	}
 
+	@Override
 	public void validate(
 			long userId, String password1, String password2,
 			PasswordPolicy passwordPolicy)

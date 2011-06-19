@@ -185,6 +185,7 @@ public class ServiceComponentWrapper implements ServiceComponent {
 		_serviceComponent.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new ServiceComponentWrapper((ServiceComponent)_serviceComponent.clone());
 	}
@@ -194,6 +195,7 @@ public class ServiceComponentWrapper implements ServiceComponent {
 		return _serviceComponent.compareTo(serviceComponent);
 	}
 
+	@Override
 	public int hashCode() {
 		return _serviceComponent.hashCode();
 	}
@@ -202,6 +204,7 @@ public class ServiceComponentWrapper implements ServiceComponent {
 		return new ServiceComponentWrapper(_serviceComponent.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _serviceComponent.toString();
 	}

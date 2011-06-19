@@ -53,6 +53,7 @@ public class UserAssetRendererFactory extends BaseAssetRendererFactory {
 		return TYPE;
 	}
 
+	@Override
 	public PortletURL getURLAdd(
 		LiferayPortletRequest liferayPortletRequest,
 		LiferayPortletResponse liferayPortletResponse) {
@@ -60,6 +61,7 @@ public class UserAssetRendererFactory extends BaseAssetRendererFactory {
 		return null;
 	}
 
+	@Override
 	public boolean hasPermission(
 			PermissionChecker permissionChecker, long classPK, String actionId)
 		throws Exception {
@@ -68,6 +70,7 @@ public class UserAssetRendererFactory extends BaseAssetRendererFactory {
 			permissionChecker, classPK, actionId);
 	}
 
+	@Override
 	protected String getIconPath(ThemeDisplay themeDisplay) {
 		return themeDisplay.getPathThemeImages() + "/common/user_icon.png";
 	}

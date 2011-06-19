@@ -86,6 +86,7 @@ public class LayoutSetPrototypeLocalServiceImpl
 		return layoutSetPrototype;
 	}
 
+	@Override
 	public void deleteLayoutSetPrototype(LayoutSetPrototype layoutSetPrototype)
 		throws PortalException, SystemException {
 
@@ -112,6 +113,7 @@ public class LayoutSetPrototypeLocalServiceImpl
 		PermissionCacheUtil.clearCache();
 	}
 
+	@Override
 	public void deleteLayoutSetPrototype(long layoutSetPrototypeId)
 		throws PortalException, SystemException {
 

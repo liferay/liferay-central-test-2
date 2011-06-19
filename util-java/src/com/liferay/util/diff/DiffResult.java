@@ -66,6 +66,7 @@ public class DiffResult {
 		_lineNumber = lineNumber;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		DiffResult diffResult = (DiffResult)obj;
 
@@ -78,6 +79,7 @@ public class DiffResult {
 		return false;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(_changedLines.size() * 2 + 3);
 

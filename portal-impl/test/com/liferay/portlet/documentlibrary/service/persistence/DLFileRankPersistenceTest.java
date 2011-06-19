@@ -33,6 +33,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class DLFileRankPersistenceTest extends BasePersistenceTestCase {
+	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -69,9 +70,13 @@ public class DLFileRankPersistenceTest extends BasePersistenceTestCase {
 		DLFileRank newDLFileRank = _persistence.create(pk);
 
 		newDLFileRank.setGroupId(nextLong());
+
 		newDLFileRank.setCompanyId(nextLong());
+
 		newDLFileRank.setUserId(nextLong());
+
 		newDLFileRank.setCreateDate(nextDate());
+
 		newDLFileRank.setFileEntryId(nextLong());
 
 		_persistence.update(newDLFileRank, false);
@@ -218,9 +223,13 @@ public class DLFileRankPersistenceTest extends BasePersistenceTestCase {
 		DLFileRank dlFileRank = _persistence.create(pk);
 
 		dlFileRank.setGroupId(nextLong());
+
 		dlFileRank.setCompanyId(nextLong());
+
 		dlFileRank.setUserId(nextLong());
+
 		dlFileRank.setCreateDate(nextDate());
+
 		dlFileRank.setFileEntryId(nextLong());
 
 		_persistence.update(dlFileRank, false);

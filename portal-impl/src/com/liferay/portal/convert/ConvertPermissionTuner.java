@@ -24,14 +24,17 @@ import com.liferay.portal.util.PropsValues;
  */
 public class ConvertPermissionTuner extends ConvertProcess {
 
+	@Override
 	public String getDescription() {
 		return "fine-tune-generated-roles";
 	}
 
+	@Override
 	public String getPath() {
 		return "/admin_server/edit_permissions";
 	}
 
+	@Override
 	public boolean isEnabled() {
 		boolean enabled = false;
 
@@ -52,6 +55,7 @@ public class ConvertPermissionTuner extends ConvertProcess {
 		return enabled;
 	}
 
+	@Override
 	protected void doConvert() throws Exception {
 	}
 

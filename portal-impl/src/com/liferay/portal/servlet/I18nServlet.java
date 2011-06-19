@@ -71,6 +71,7 @@ public class I18nServlet extends HttpServlet {
 		_languageIds = Collections.unmodifiableSet(_languageIds);
 	}
 
+	@Override
 	public void service(
 			HttpServletRequest request, HttpServletResponse response)
 		throws IOException, ServletException {

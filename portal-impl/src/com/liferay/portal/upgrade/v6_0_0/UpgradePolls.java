@@ -25,6 +25,7 @@ import com.liferay.portal.upgrade.v6_0_0.util.PollsQuestionTable;
  */
 public class UpgradePolls extends UpgradeProcess {
 
+	@Override
 	protected void doUpgrade() throws Exception {
 		try {
 			runSQL("alter_column_type PollsChoice description STRING null");

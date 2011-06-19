@@ -25,9 +25,11 @@ JournalArticleResource articleResource = JournalArticleResourceLocalServiceUtil.
 
 String languageId = LanguageUtil.getLanguageId(request);
 
+boolean workflowAssetPreview = GetterUtil.getBoolean((Boolean)request.getAttribute(WebKeys.WORKFLOW_ASSET_PREVIEW));
+
 JournalArticleDisplay articleDisplay = null;
 
-if (article.isApproved()) {
+if (!workflowAssetPreview && article.isApproved()) {
 	articleDisplay = JournalContentUtil.getDisplay(articleResource.getGroupId(), articleResource.getArticleId(), null, null, languageId, themeDisplay);
 }
 else {

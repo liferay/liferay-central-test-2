@@ -624,6 +624,7 @@ Liferay.Service.registerClass(
 		getEvent: true,
 		getEvents: true,
 		getEventsCount: true,
+		hasEvents: true,
 		updateEvent: true
 	}
 );
@@ -635,6 +636,9 @@ Liferay.Service.registerClass(
 	{
 		addFileShortcut: true,
 		addFolder: true,
+		cancelCheckOut: true,
+		checkInFileEntry: true,
+		checkOutFileEntry: true,
 		copyFolder: true,
 		deleteFileEntry: true,
 		deleteFileEntryByTitle: true,
@@ -654,31 +658,17 @@ Liferay.Service.registerClass(
 		getGroupFileEntries: true,
 		getGroupFileEntriesCount: true,
 		getSubfolderIds: true,
-		lockFileEntry: true,
 		lockFolder: true,
 		moveFileEntry: true,
 		moveFolder: true,
 		refreshFileEntryLock: true,
 		refreshFolderLock: true,
 		revertFileEntry: true,
-		unlockFileEntry: true,
 		unlockFolder: true,
 		updateFileShortcut: true,
 		updateFolder: true,
-		verifyFileEntryLock: true,
+		verifyFileEntryCheckOut: true,
 		verifyInheritableLock: true
-	}
-);
-
-Liferay.Service.registerClass(
-	Liferay.Service.DL, "DLDocumentType",
-	{
-		addDocumentType: true,
-		deleteDocumentType: true,
-		getDocumentType: true,
-		getDocumentTypes: true,
-		getDocumentTypesCount: true,
-		updateDocumentType: true
 	}
 );
 
@@ -700,13 +690,23 @@ Liferay.Service.registerClass(
 		getGroupFileEntries: true,
 		getGroupFileEntriesCount: true,
 		hasFileEntryLock: true,
-		isFileEntryLocked: true,
-		lockFileEntry: true,
+		isFileEntryCheckedOut: true,
 		moveFileEntry: true,
 		refreshFileEntryLock: true,
 		revertFileEntry: true,
-		unlockFileEntry: true,
-		verifyFileEntryLock: true
+		verifyFileEntryCheckOut: true
+	}
+);
+
+Liferay.Service.registerClass(
+	Liferay.Service.DL, "DLFileEntryType",
+	{
+		addFileEntryType: true,
+		deleteFileEntryType: true,
+		getFileEntryType: true,
+		getFileEntryTypes: true,
+		getFileEntryTypesCount: true,
+		updateFileEntryType: true
 	}
 );
 

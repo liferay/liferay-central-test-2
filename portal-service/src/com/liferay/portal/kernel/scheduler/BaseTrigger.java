@@ -76,6 +76,7 @@ public abstract class BaseTrigger implements Serializable, Trigger {
 		_triggerType = triggerType;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(11);
 

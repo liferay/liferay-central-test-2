@@ -31,6 +31,7 @@ public abstract class IncreasableEntry<K, V> {
 
 	public abstract V doIncrease(V originalValue, V deltaValue);
 
+	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;
@@ -67,6 +68,7 @@ public abstract class IncreasableEntry<K, V> {
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		int hash = 77;
 
@@ -106,6 +108,7 @@ public abstract class IncreasableEntry<K, V> {
 		}
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(5);
 

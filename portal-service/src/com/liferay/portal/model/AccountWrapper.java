@@ -403,6 +403,7 @@ public class AccountWrapper implements Account {
 		_account.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new AccountWrapper((Account)_account.clone());
 	}
@@ -411,6 +412,7 @@ public class AccountWrapper implements Account {
 		return _account.compareTo(account);
 	}
 
+	@Override
 	public int hashCode() {
 		return _account.hashCode();
 	}
@@ -419,6 +421,7 @@ public class AccountWrapper implements Account {
 		return new AccountWrapper(_account.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _account.toString();
 	}

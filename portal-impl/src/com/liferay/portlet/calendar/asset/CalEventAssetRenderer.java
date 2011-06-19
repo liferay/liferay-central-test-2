@@ -47,6 +47,7 @@ public class CalEventAssetRenderer extends BaseAssetRenderer {
 		return _event.getEventId();
 	}
 
+	@Override
 	public String getDiscussionPath() {
 		if (PropsValues.CALENDAR_EVENT_COMMENTS_ENABLED) {
 			return "edit_event_discussion";
@@ -68,6 +69,7 @@ public class CalEventAssetRenderer extends BaseAssetRenderer {
 		return _event.getTitle();
 	}
 
+	@Override
 	public PortletURL getURLEdit(
 			LiferayPortletRequest liferayPortletRequest,
 			LiferayPortletResponse liferayPortletResponse)
@@ -83,6 +85,7 @@ public class CalEventAssetRenderer extends BaseAssetRenderer {
 		return portletURL;
 	}
 
+	@Override
 	public String getURLViewInContext(
 		LiferayPortletRequest liferayPortletRequest,
 		LiferayPortletResponse liferayPortletResponse,
@@ -104,16 +107,19 @@ public class CalEventAssetRenderer extends BaseAssetRenderer {
 		return _event.getUuid();
 	}
 
+	@Override
 	public boolean hasEditPermission(PermissionChecker permissionChecker) {
 		return CalEventPermission.contains(
 			permissionChecker, _event, ActionKeys.UPDATE);
 	}
 
+	@Override
 	public boolean hasViewPermission(PermissionChecker permissionChecker) {
 		return CalEventPermission.contains(
 			permissionChecker, _event, ActionKeys.VIEW);
 	}
 
+	@Override
 	public boolean isPrintable() {
 		return true;
 	}
@@ -135,6 +141,7 @@ public class CalEventAssetRenderer extends BaseAssetRenderer {
 		}
 	}
 
+	@Override
 	protected String getIconPath(ThemeDisplay themeDisplay) {
 		return themeDisplay.getPathThemeImages() + "/common/date.png";
 	}

@@ -68,6 +68,7 @@ public class VerifyUUID extends VerifyProcess {
 				"' where " + pkColumnName + " = " + pk);
 	}
 
+	@Override
 	protected void doVerify() throws Exception {
 		for (String[] model : _MODELS) {
 			verifyModel(model[0], model[1]);

@@ -29,6 +29,7 @@ import java.sql.ResultSet;
  */
 public class UpgradePortletId extends UpgradeProcess {
 
+	@Override
 	protected void doUpgrade() throws Exception {
 
 		// This is only tested to work on instanceable portlets

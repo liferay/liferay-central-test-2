@@ -22,6 +22,7 @@ import com.liferay.portal.service.ClassNameLocalServiceUtil;
  */
 public class UpgradeClassName extends UpgradeProcess {
 
+	@Override
 	protected void doUpgrade() throws Exception {
 
 		// ClassName_

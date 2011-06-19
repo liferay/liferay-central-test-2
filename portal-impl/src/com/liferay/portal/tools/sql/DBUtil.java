@@ -18,8 +18,8 @@ import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 
 /**
- * @author	   Alexander Chow
- * @author	   Ganesh Ram
+ * @author     Alexander Chow
+ * @author     Ganesh Ram
  * @deprecated
  */
 public abstract class DBUtil implements DB {

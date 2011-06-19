@@ -333,6 +333,7 @@ public class DDMContentModelImpl extends BaseModelImpl<DDMContent>
 		_xml = xml;
 	}
 
+	@Override
 	public DDMContent toEscapedModel() {
 		if (isEscapedModel()) {
 			return (DDMContent)this;
@@ -343,6 +344,7 @@ public class DDMContentModelImpl extends BaseModelImpl<DDMContent>
 		}
 	}
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
@@ -352,10 +354,12 @@ public class DDMContentModelImpl extends BaseModelImpl<DDMContent>
 		return _expandoBridge;
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		getExpandoBridge().setAttributes(serviceContext);
 	}
 
+	@Override
 	public Object clone() {
 		DDMContentImpl ddmContentImpl = new DDMContentImpl();
 
@@ -390,6 +394,7 @@ public class DDMContentModelImpl extends BaseModelImpl<DDMContent>
 		}
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -414,10 +419,12 @@ public class DDMContentModelImpl extends BaseModelImpl<DDMContent>
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		DDMContentModelImpl ddmContentModelImpl = this;
 
@@ -428,6 +435,7 @@ public class DDMContentModelImpl extends BaseModelImpl<DDMContent>
 		ddmContentModelImpl._setOriginalGroupId = false;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(23);
 

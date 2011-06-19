@@ -221,6 +221,7 @@ public class ExpandoColumnWrapper implements ExpandoColumn {
 		_expandoColumn.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new ExpandoColumnWrapper((ExpandoColumn)_expandoColumn.clone());
 	}
@@ -230,6 +231,7 @@ public class ExpandoColumnWrapper implements ExpandoColumn {
 		return _expandoColumn.compareTo(expandoColumn);
 	}
 
+	@Override
 	public int hashCode() {
 		return _expandoColumn.hashCode();
 	}
@@ -238,6 +240,7 @@ public class ExpandoColumnWrapper implements ExpandoColumn {
 		return new ExpandoColumnWrapper(_expandoColumn.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _expandoColumn.toString();
 	}

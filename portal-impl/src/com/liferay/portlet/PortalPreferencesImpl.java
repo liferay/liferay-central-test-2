@@ -52,12 +52,14 @@ public class PortalPreferencesImpl
 		_signedIn = signedIn;
 	}
 
+	@Override
 	public Object clone() {
 		return new PortalPreferencesImpl(
 			getCompanyId(), getOwnerId(), getOwnerType(),
 			getOriginalPreferences(), isSignedIn());
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		PortalPreferencesImpl portalPreferences = (PortalPreferencesImpl)obj;
 
@@ -77,6 +79,7 @@ public class PortalPreferencesImpl
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		HashCode hashCode = HashCodeFactoryUtil.getHashCode();
 
@@ -92,6 +95,7 @@ public class PortalPreferencesImpl
 		return _signedIn;
 	}
 
+	@Override
 	public String getValue(String namespace, String key) {
 		return getValue(namespace, key, null);
 	}
@@ -114,6 +118,7 @@ public class PortalPreferencesImpl
 		return super.getValues(key, defaultValue);
 	}
 
+	@Override
 	public void reset(String key) throws ReadOnlyException {
 		if (isReadOnly(key)) {
 			throw new ReadOnlyException(key);
@@ -195,6 +200,7 @@ public class PortalPreferencesImpl
 		}
 	}
 
+	@Override
 	public void store() throws IOException {
 		try {
 			PortalPreferencesLocalServiceUtil.updatePreferences(

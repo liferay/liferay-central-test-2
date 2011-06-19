@@ -176,6 +176,7 @@ public class MBDiscussionWrapper implements MBDiscussion {
 		_mbDiscussion.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new MBDiscussionWrapper((MBDiscussion)_mbDiscussion.clone());
 	}
@@ -185,6 +186,7 @@ public class MBDiscussionWrapper implements MBDiscussion {
 		return _mbDiscussion.compareTo(mbDiscussion);
 	}
 
+	@Override
 	public int hashCode() {
 		return _mbDiscussion.hashCode();
 	}
@@ -193,6 +195,7 @@ public class MBDiscussionWrapper implements MBDiscussion {
 		return new MBDiscussionWrapper(_mbDiscussion.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _mbDiscussion.toString();
 	}

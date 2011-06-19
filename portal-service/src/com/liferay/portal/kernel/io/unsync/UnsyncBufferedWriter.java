@@ -41,6 +41,7 @@ public class UnsyncBufferedWriter extends Writer {
 		buffer = new char[size];
 	}
 
+	@Override
 	public void close() throws IOException {
 		if (writer == null) {
 			return;
@@ -59,6 +60,7 @@ public class UnsyncBufferedWriter extends Writer {
 		buffer = null;
 	}
 
+	@Override
 	public void flush() throws IOException {
 		if (writer == null) {
 			throw new IOException("Writer is null");
@@ -77,6 +79,7 @@ public class UnsyncBufferedWriter extends Writer {
 		write(_LINE_SEPARATOR);
 	}
 
+	@Override
 	public void write(char[] chars, int offset, int length)
 		throws IOException {
 
@@ -107,6 +110,7 @@ public class UnsyncBufferedWriter extends Writer {
 		count += length;
 	}
 
+	@Override
 	public void write(int c) throws IOException {
 		if (writer == null) {
 			throw new IOException("Writer is null");
@@ -121,6 +125,7 @@ public class UnsyncBufferedWriter extends Writer {
 		buffer[count++] = (char)c;
 	}
 
+	@Override
 	public void write(String string, int offset, int length)
 		throws IOException {
 

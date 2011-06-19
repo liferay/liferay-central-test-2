@@ -28,6 +28,7 @@ import javax.servlet.jsp.PageContext;
  */
 public class JSPSearchEntry extends SearchEntry {
 
+	@Override
 	public Object clone() {
 		JSPSearchEntry jspSearchEntry = new JSPSearchEntry();
 
@@ -52,6 +53,7 @@ public class JSPSearchEntry extends SearchEntry {
 		return _servletContext;
 	}
 
+	@Override
 	public void print(PageContext pageContext) throws Exception {
 		if (_servletContext != null) {
 			RequestDispatcher requestDispatcher =

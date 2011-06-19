@@ -34,6 +34,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class ThemePreviewFilter extends BasePortalFilter {
 
+	@Override
 	public boolean isFilterEnabled(
 		HttpServletRequest request, HttpServletResponse response) {
 
@@ -75,6 +76,7 @@ public class ThemePreviewFilter extends BasePortalFilter {
 		}
 	}
 
+	@Override
 	protected void processFilter(
 			HttpServletRequest request, HttpServletResponse response,
 			FilterChain filterChain)

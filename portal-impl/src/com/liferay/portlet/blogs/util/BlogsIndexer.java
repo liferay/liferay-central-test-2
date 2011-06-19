@@ -55,6 +55,7 @@ public class BlogsIndexer extends BaseIndexer {
 		return CLASS_NAMES;
 	}
 
+	@Override
 	public void postProcessContextQuery(
 			BooleanQuery contextQuery, SearchContext searchContext)
 		throws Exception {
@@ -68,6 +69,7 @@ public class BlogsIndexer extends BaseIndexer {
 		}
 	}
 
+	@Override
 	protected void doDelete(Object obj) throws Exception {
 		BlogsEntry entry = (BlogsEntry)obj;
 
@@ -79,6 +81,7 @@ public class BlogsIndexer extends BaseIndexer {
 			entry.getCompanyId(), document.get(Field.UID));
 	}
 
+	@Override
 	protected Document doGetDocument(Object obj) throws Exception {
 		BlogsEntry entry = (BlogsEntry)obj;
 
@@ -92,6 +95,7 @@ public class BlogsIndexer extends BaseIndexer {
 		return document;
 	}
 
+	@Override
 	protected Summary doGetSummary(
 		Document document, Locale locale, String snippet,
 		PortletURL portletURL) {
@@ -112,6 +116,7 @@ public class BlogsIndexer extends BaseIndexer {
 		return new Summary(title, content, portletURL);
 	}
 
+	@Override
 	protected void doReindex(Object obj) throws Exception {
 		BlogsEntry entry = (BlogsEntry)obj;
 
@@ -124,18 +129,21 @@ public class BlogsIndexer extends BaseIndexer {
 		SearchEngineUtil.updateDocument(entry.getCompanyId(), document);
 	}
 
+	@Override
 	protected void doReindex(String className, long classPK) throws Exception {
 		BlogsEntry entry = BlogsEntryLocalServiceUtil.getEntry(classPK);
 
 		doReindex(entry);
 	}
 
+	@Override
 	protected void doReindex(String[] ids) throws Exception {
 		long companyId = GetterUtil.getLong(ids[0]);
 
 		reindexEntries(companyId);
 	}
 
+	@Override
 	protected String getPortletId(SearchContext searchContext) {
 		return PORTLET_ID;
 	}

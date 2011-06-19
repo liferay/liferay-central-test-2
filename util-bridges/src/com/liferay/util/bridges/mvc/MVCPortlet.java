@@ -50,6 +50,7 @@ import javax.portlet.WindowState;
  */
 public class MVCPortlet extends LiferayPortlet {
 
+	@Override
 	public void doAbout(
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
@@ -57,6 +58,7 @@ public class MVCPortlet extends LiferayPortlet {
 		include(aboutJSP, renderRequest, renderResponse);
 	}
 
+	@Override
 	public void doConfig(
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
@@ -64,6 +66,7 @@ public class MVCPortlet extends LiferayPortlet {
 		include(configJSP, renderRequest, renderResponse);
 	}
 
+	@Override
 	public void doEdit(
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
@@ -76,6 +79,7 @@ public class MVCPortlet extends LiferayPortlet {
 		}
 	}
 
+	@Override
 	public void doEditDefaults(
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
@@ -88,6 +92,7 @@ public class MVCPortlet extends LiferayPortlet {
 		}
 	}
 
+	@Override
 	public void doEditGuest(
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
@@ -100,6 +105,7 @@ public class MVCPortlet extends LiferayPortlet {
 		}
 	}
 
+	@Override
 	public void doHelp(
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
@@ -107,6 +113,7 @@ public class MVCPortlet extends LiferayPortlet {
 		include(helpJSP, renderRequest, renderResponse);
 	}
 
+	@Override
 	public void doPreview(
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
@@ -114,6 +121,7 @@ public class MVCPortlet extends LiferayPortlet {
 		include(previewJSP, renderRequest, renderResponse);
 	}
 
+	@Override
 	public void doPrint(
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
@@ -121,6 +129,7 @@ public class MVCPortlet extends LiferayPortlet {
 		include(printJSP, renderRequest, renderResponse);
 	}
 
+	@Override
 	public void doView(
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
@@ -128,6 +137,7 @@ public class MVCPortlet extends LiferayPortlet {
 		include(viewJSP, renderRequest, renderResponse);
 	}
 
+	@Override
 	public void init() throws PortletException {
 		super.init();
 
@@ -193,6 +203,7 @@ public class MVCPortlet extends LiferayPortlet {
 			null, null, portletConfig, actionRequest, actionResponse);
 	}
 
+	@Override
 	public void processAction(
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws IOException, PortletException {
@@ -204,6 +215,7 @@ public class MVCPortlet extends LiferayPortlet {
 		}
 	}
 
+	@Override
 	public void serveResource(
 			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
 		throws IOException, PortletException {
@@ -220,6 +232,7 @@ public class MVCPortlet extends LiferayPortlet {
 		}
 	}
 
+	@Override
 	protected boolean callActionMethod(
 			ActionRequest request, ActionResponse response)
 		throws PortletException {
@@ -269,6 +282,7 @@ public class MVCPortlet extends LiferayPortlet {
 		}
 	}
 
+	@Override
 	protected void doDispatch(
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {

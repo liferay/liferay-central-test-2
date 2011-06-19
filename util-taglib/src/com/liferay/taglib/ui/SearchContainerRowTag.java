@@ -45,6 +45,7 @@ public class SearchContainerRowTag<R>
 
 	public static final String DEFAULT_ROW_VAR = "row";
 
+	@Override
 	public void addParam(String name, String value) {
 		if (name.equals("className")) {
 			_row.setClassName(value);
@@ -66,6 +67,7 @@ public class SearchContainerRowTag<R>
 		}
 	}
 
+	@Override
 	public int doAfterBody() {
 		if (!_headerNamesAssigned) {
 			SearchContainerTag<R> searchContainerTag =
@@ -97,6 +99,7 @@ public class SearchContainerRowTag<R>
 		}
 	}
 
+	@Override
 	public int doEndTag() {
 		_headerNames = null;
 		_headerNamesAssigned = false;
@@ -119,6 +122,7 @@ public class SearchContainerRowTag<R>
 		return EVAL_PAGE;
 	}
 
+	@Override
 	public int doStartTag() throws JspException {
 		SearchContainerTag<R> searchContainerTag =
 			(SearchContainerTag<R>)findAncestorWithClass(
@@ -248,6 +252,7 @@ public class SearchContainerRowTag<R>
 		_rowVar = rowVar;
 	}
 
+	@Override
 	public void setServletContext(ServletContext servletContext) {
 	}
 

@@ -19,7 +19,7 @@
 <%
 long folderId = GetterUtil.getLong((String)request.getAttribute("view.jsp-folderId"));
 
-long documentTypeId = ParamUtil.getLong(request, "documentTypeId");
+long fileEntryTypeId = ParamUtil.getLong(request, "fileEntryTypeId");
 
 String displayStyle = ParamUtil.getString(request, "displayStyle");
 
@@ -54,7 +54,7 @@ String keywords = ParamUtil.getString(request, "keywords");
 						</c:choose>
 
 						<portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" />
-						<portlet:param name="documentTypeId" value="<%= String.valueOf(documentTypeId) %>" />
+						<portlet:param name="fileEntryTypeId" value="<%= String.valueOf(fileEntryTypeId) %>" />
 						<portlet:param name="displayStyle" value="icon" />
 						<portlet:param name="saveDisplayStyle" value="<%= Boolean.TRUE.toString() %>" />
 					</portlet:resourceURL>
@@ -80,7 +80,7 @@ String keywords = ParamUtil.getString(request, "keywords");
 						</c:choose>
 
 						<portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" />
-						<portlet:param name="documentTypeId" value="<%= String.valueOf(documentTypeId) %>" />
+						<portlet:param name="fileEntryTypeId" value="<%= String.valueOf(fileEntryTypeId) %>" />
 						<portlet:param name="displayStyle" value="descriptive" />
 						<portlet:param name="saveDisplayStyle" value="<%= Boolean.TRUE.toString() %>" />
 					</portlet:resourceURL>
@@ -106,7 +106,7 @@ String keywords = ParamUtil.getString(request, "keywords");
 						</c:choose>
 
 						<portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" />
-						<portlet:param name="documentTypeId" value="<%= String.valueOf(documentTypeId) %>" />
+						<portlet:param name="fileEntryTypeId" value="<%= String.valueOf(fileEntryTypeId) %>" />
 						<portlet:param name="displayStyle" value="list" />
 						<portlet:param name="saveDisplayStyle" value="<%= Boolean.TRUE.toString() %>" />
 					</portlet:resourceURL>

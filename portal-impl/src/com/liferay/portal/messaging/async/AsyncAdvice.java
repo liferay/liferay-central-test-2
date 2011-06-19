@@ -34,6 +34,7 @@ import org.aopalliance.intercept.MethodInvocation;
  */
 public class AsyncAdvice extends AnnotationChainableMethodAdvice<Async> {
 
+	@Override
 	public Object before(final MethodInvocation methodInvocation)
 		throws Throwable {
 
@@ -82,6 +83,7 @@ public class AsyncAdvice extends AnnotationChainableMethodAdvice<Async> {
 					}
 				}
 
+				@Override
 				public String toString() {
 					return methodInvocation.toString();
 				}
@@ -95,6 +97,7 @@ public class AsyncAdvice extends AnnotationChainableMethodAdvice<Async> {
 		return _defaultDestinationName;
 	}
 
+	@Override
 	public Async getNullAnnotation() {
 		return _nullAsync;
 	}

@@ -34,6 +34,7 @@ public class ActionAdapter extends Action {
 		_strutsAction = strutsAction;
 	}
 
+	@Override
 	public ActionForward execute(
 			ActionMapping actionMapping, ActionForm actionForm,
 			HttpServletRequest request, HttpServletResponse response)

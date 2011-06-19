@@ -25,6 +25,7 @@ import com.liferay.portal.upgrade.v5_2_3.util.UserTable;
  */
 public class UpgradeUser extends UpgradeProcess {
 
+	@Override
 	protected void doUpgrade() throws Exception {
 		try {
 			runSQL("alter_column_type User_ greeting VARCHAR(255) null");

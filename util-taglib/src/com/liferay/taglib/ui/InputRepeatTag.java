@@ -33,15 +33,18 @@ public class InputRepeatTag extends IncludeTag {
 		_event = event;
 	}
 
+	@Override
 	protected void cleanUp() {
 		_cssClass = null;
 		_event = null;
 	}
 
+	@Override
 	protected String getPage() {
 		return _PAGE;
 	}
 
+	@Override
 	protected void setAttributes(HttpServletRequest request) {
 		request.setAttribute("liferay-ui:input-repeat:cssClass", _cssClass);
 		request.setAttribute("liferay-ui:input-repeat:event", _event);

@@ -29,6 +29,7 @@ import java.sql.Types;
  */
 public class UpgradeMappingTables extends UpgradeProcess {
 
+	@Override
 	protected void doUpgrade() throws Exception {
 
 		// Mappings

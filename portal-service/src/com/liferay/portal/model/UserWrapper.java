@@ -871,6 +871,7 @@ public class UserWrapper implements User {
 		_user.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new UserWrapper((User)_user.clone());
 	}
@@ -879,6 +880,7 @@ public class UserWrapper implements User {
 		return _user.compareTo(user);
 	}
 
+	@Override
 	public int hashCode() {
 		return _user.hashCode();
 	}
@@ -887,6 +889,7 @@ public class UserWrapper implements User {
 		return new UserWrapper(_user.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _user.toString();
 	}

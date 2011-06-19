@@ -30,6 +30,7 @@ public class UnsyncFilterOutputStream extends OutputStream {
 		this.outputStream = outputStream;
 	}
 
+	@Override
 	public void close() throws IOException {
 		try {
 			flush();
@@ -40,20 +41,24 @@ public class UnsyncFilterOutputStream extends OutputStream {
 		outputStream.close();
 	}
 
+	@Override
 	public void flush() throws IOException {
 		outputStream.flush();
 	}
 
+	@Override
 	public void write(byte[] bytes) throws IOException {
 		outputStream.write(bytes, 0, bytes.length);
 	}
 
+	@Override
 	public void write(byte[] bytes, int offset, int length)
 		throws IOException {
 
 		outputStream.write(bytes, offset, length);
 	}
 
+	@Override
 	public void write(int b) throws IOException {
 		outputStream.write(b);
 	}

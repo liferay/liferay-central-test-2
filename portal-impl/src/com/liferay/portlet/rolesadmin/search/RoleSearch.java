@@ -91,17 +91,16 @@ public class RoleSearch extends SearchContainer<Role> {
 				Validator.isNotNull(orderByType)) {
 
 				preferences.setValue(
-					PortletKeys.ENTERPRISE_ADMIN, "roles-order-by-col",
-					orderByCol);
+					PortletKeys.ROLES_ADMIN, "roles-order-by-col", orderByCol);
 				preferences.setValue(
-					PortletKeys.ENTERPRISE_ADMIN, "roles-order-by-type",
+					PortletKeys.ROLES_ADMIN, "roles-order-by-type",
 					orderByType);
 			}
 			else {
 				orderByCol = preferences.getValue(
-					PortletKeys.ENTERPRISE_ADMIN, "roles-order-by-col", "name");
+					PortletKeys.ROLES_ADMIN, "roles-order-by-col", "name");
 				orderByType = preferences.getValue(
-					PortletKeys.ENTERPRISE_ADMIN, "roles-order-by-type", "asc");
+					PortletKeys.ROLES_ADMIN, "roles-order-by-type", "asc");
 			}
 
 			OrderByComparator orderByComparator =

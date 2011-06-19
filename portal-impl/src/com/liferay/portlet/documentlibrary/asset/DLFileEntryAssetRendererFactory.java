@@ -29,7 +29,6 @@ import com.liferay.portlet.PortletURLFactoryUtil;
 import com.liferay.portlet.asset.model.AssetRenderer;
 import com.liferay.portlet.asset.model.BaseAssetRendererFactory;
 import com.liferay.portlet.assetpublisher.util.AssetPublisherUtil;
-import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.permission.DLFileEntryPermission;
@@ -58,19 +57,15 @@ public class DLFileEntryAssetRendererFactory extends BaseAssetRendererFactory {
 		FileEntry fileEntry = null;
 		FileVersion fileVersion = null;
 
-		try {
+		if (type == TYPE_LATEST) {
+			fileVersion = DLAppLocalServiceUtil.getFileVersion(classPK);
+
+			fileEntry = fileVersion.getFileEntry();
+		}
+		else {
 			fileEntry = DLAppLocalServiceUtil.getFileEntry(classPK);
 
-			if (type == TYPE_LATEST) {
-				fileVersion = fileEntry.getLatestFileVersion();
-			}
-			else {
-				fileVersion = fileEntry.getFileVersion();
-			}
-		}
-		catch (NoSuchFileEntryException nsfee) {
-			fileVersion = DLAppLocalServiceUtil.getFileVersion(classPK);
-			fileEntry = fileVersion.getFileEntry();
+			fileVersion = fileEntry.getFileVersion();
 		}
 
 		return new DLFileEntryAssetRenderer(fileEntry, fileVersion);
@@ -84,6 +79,7 @@ public class DLFileEntryAssetRendererFactory extends BaseAssetRendererFactory {
 		return TYPE;
 	}
 
+	@Override
 	public PortletURL getURLAdd(
 			LiferayPortletRequest liferayPortletRequest,
 			LiferayPortletResponse liferayPortletResponse)
@@ -118,6 +114,7 @@ public class DLFileEntryAssetRendererFactory extends BaseAssetRendererFactory {
 		return portletURL;
 	}
 
+	@Override
 	public boolean hasPermission(
 			PermissionChecker permissionChecker, long classPK, String actionId)
 		throws Exception {
@@ -126,6 +123,7 @@ public class DLFileEntryAssetRendererFactory extends BaseAssetRendererFactory {
 			permissionChecker, classPK, actionId);
 	}
 
+	@Override
 	protected String getIconPath(ThemeDisplay themeDisplay) {
 		return themeDisplay.getPathThemeImages() + "/common/clip.png";
 	}

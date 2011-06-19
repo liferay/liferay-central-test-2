@@ -30,6 +30,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class ShoppingItemFieldPersistenceTest extends BasePersistenceTestCase {
+	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -66,8 +67,11 @@ public class ShoppingItemFieldPersistenceTest extends BasePersistenceTestCase {
 		ShoppingItemField newShoppingItemField = _persistence.create(pk);
 
 		newShoppingItemField.setItemId(nextLong());
+
 		newShoppingItemField.setName(randomString());
+
 		newShoppingItemField.setValues(randomString());
+
 		newShoppingItemField.setDescription(randomString());
 
 		_persistence.update(newShoppingItemField, false);
@@ -196,8 +200,11 @@ public class ShoppingItemFieldPersistenceTest extends BasePersistenceTestCase {
 		ShoppingItemField shoppingItemField = _persistence.create(pk);
 
 		shoppingItemField.setItemId(nextLong());
+
 		shoppingItemField.setName(randomString());
+
 		shoppingItemField.setValues(randomString());
+
 		shoppingItemField.setDescription(randomString());
 
 		_persistence.update(shoppingItemField, false);

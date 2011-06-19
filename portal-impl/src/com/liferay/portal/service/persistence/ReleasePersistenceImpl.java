@@ -119,6 +119,7 @@ public class ReleasePersistenceImpl extends BasePersistenceImpl<Release>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(ReleaseImpl.class.getName());
@@ -136,6 +137,7 @@ public class ReleasePersistenceImpl extends BasePersistenceImpl<Release>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(Release release) {
 		EntityCacheUtil.removeResult(ReleaseModelImpl.ENTITY_CACHE_ENABLED,
 			ReleaseImpl.class, release.getPrimaryKey());
@@ -167,6 +169,7 @@ public class ReleasePersistenceImpl extends BasePersistenceImpl<Release>
 	 * @throws com.liferay.portal.NoSuchModelException if a release with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Release remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
@@ -219,10 +222,12 @@ public class ReleasePersistenceImpl extends BasePersistenceImpl<Release>
 	 * @return the release that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Release remove(Release release) throws SystemException {
 		return super.remove(release);
 	}
 
+	@Override
 	protected Release removeImpl(Release release) throws SystemException {
 		release = toUnwrappedModel(release);
 
@@ -253,6 +258,7 @@ public class ReleasePersistenceImpl extends BasePersistenceImpl<Release>
 		return release;
 	}
 
+	@Override
 	public Release updateImpl(com.liferay.portal.model.Release release,
 		boolean merge) throws SystemException {
 		release = toUnwrappedModel(release);
@@ -329,6 +335,7 @@ public class ReleasePersistenceImpl extends BasePersistenceImpl<Release>
 	 * @throws com.liferay.portal.NoSuchModelException if a release with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Release findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
@@ -365,6 +372,7 @@ public class ReleasePersistenceImpl extends BasePersistenceImpl<Release>
 	 * @return the release, or <code>null</code> if a release with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Release fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());

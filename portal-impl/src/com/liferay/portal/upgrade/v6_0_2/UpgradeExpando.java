@@ -92,6 +92,7 @@ public class UpgradeExpando extends UpgradeProcess {
 		}
 	}
 
+	@Override
 	protected void doUpgrade() throws Exception {
 		updateTables(
 			JournalArticle.class.getName(),

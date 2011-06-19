@@ -24,6 +24,7 @@ import com.liferay.portal.upgrade.v5_2_3.util.ResourceTable;
  */
 public class UpgradeResource extends UpgradeProcess {
 
+	@Override
 	protected void doUpgrade() throws Exception {
 		try {
 			runSQL("alter_column_type Resource_ primKey VARCHAR(255) null");

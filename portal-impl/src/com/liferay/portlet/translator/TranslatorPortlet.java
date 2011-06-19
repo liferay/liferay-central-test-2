@@ -30,6 +30,7 @@ import javax.portlet.PortletException;
  */
 public class TranslatorPortlet extends MVCPortlet {
 
+	@Override
 	public void processAction(
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws PortletException {

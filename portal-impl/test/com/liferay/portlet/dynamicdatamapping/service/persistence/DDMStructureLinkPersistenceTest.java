@@ -32,6 +32,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class DDMStructureLinkPersistenceTest extends BasePersistenceTestCase {
+	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -68,7 +69,9 @@ public class DDMStructureLinkPersistenceTest extends BasePersistenceTestCase {
 		DDMStructureLink newDDMStructureLink = _persistence.create(pk);
 
 		newDDMStructureLink.setClassNameId(nextLong());
+
 		newDDMStructureLink.setClassPK(nextLong());
+
 		newDDMStructureLink.setStructureId(nextLong());
 
 		_persistence.update(newDDMStructureLink, false);
@@ -212,7 +215,9 @@ public class DDMStructureLinkPersistenceTest extends BasePersistenceTestCase {
 		DDMStructureLink ddmStructureLink = _persistence.create(pk);
 
 		ddmStructureLink.setClassNameId(nextLong());
+
 		ddmStructureLink.setClassPK(nextLong());
+
 		ddmStructureLink.setStructureId(nextLong());
 
 		_persistence.update(ddmStructureLink, false);

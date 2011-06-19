@@ -238,6 +238,7 @@ public class MBMessageFlagModelImpl extends BaseModelImpl<MBMessageFlag>
 		return _originalFlag;
 	}
 
+	@Override
 	public MBMessageFlag toEscapedModel() {
 		if (isEscapedModel()) {
 			return (MBMessageFlag)this;
@@ -248,6 +249,7 @@ public class MBMessageFlagModelImpl extends BaseModelImpl<MBMessageFlag>
 		}
 	}
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(0,
@@ -257,10 +259,12 @@ public class MBMessageFlagModelImpl extends BaseModelImpl<MBMessageFlag>
 		return _expandoBridge;
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		getExpandoBridge().setAttributes(serviceContext);
 	}
 
+	@Override
 	public Object clone() {
 		MBMessageFlagImpl mbMessageFlagImpl = new MBMessageFlagImpl();
 
@@ -290,6 +294,7 @@ public class MBMessageFlagModelImpl extends BaseModelImpl<MBMessageFlag>
 		}
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -314,10 +319,12 @@ public class MBMessageFlagModelImpl extends BaseModelImpl<MBMessageFlag>
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		MBMessageFlagModelImpl mbMessageFlagModelImpl = this;
 
@@ -334,6 +341,7 @@ public class MBMessageFlagModelImpl extends BaseModelImpl<MBMessageFlag>
 		mbMessageFlagModelImpl._setOriginalFlag = false;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(13);
 

@@ -70,6 +70,7 @@ public class InputMoveBoxesTag extends IncludeTag {
 		_rightTitle = rightTitle;
 	}
 
+	@Override
 	protected void cleanUp() {
 		_cssClass = null;
 		_leftBoxName = null;
@@ -84,10 +85,12 @@ public class InputMoveBoxesTag extends IncludeTag {
 		_rightTitle = null;
 	}
 
+	@Override
 	protected String getPage() {
 		return _PAGE;
 	}
 
+	@Override
 	protected void setAttributes(HttpServletRequest request) {
 		request.setAttribute("liferay-ui:input-move-boxes:cssClass", _cssClass);
 		request.setAttribute(

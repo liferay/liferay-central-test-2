@@ -268,6 +268,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(SocialRequestImpl.class.getName());
@@ -285,6 +286,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(SocialRequest socialRequest) {
 		EntityCacheUtil.removeResult(SocialRequestModelImpl.ENTITY_CACHE_ENABLED,
 			SocialRequestImpl.class, socialRequest.getPrimaryKey());
@@ -332,6 +334,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 	 * @throws com.liferay.portal.NoSuchModelException if a social request with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public SocialRequest remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
@@ -384,11 +387,13 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 	 * @return the social request that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public SocialRequest remove(SocialRequest socialRequest)
 		throws SystemException {
 		return super.remove(socialRequest);
 	}
 
+	@Override
 	protected SocialRequest removeImpl(SocialRequest socialRequest)
 		throws SystemException {
 		socialRequest = toUnwrappedModel(socialRequest);
@@ -432,6 +437,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		return socialRequest;
 	}
 
+	@Override
 	public SocialRequest updateImpl(
 		com.liferay.portlet.social.model.SocialRequest socialRequest,
 		boolean merge) throws SystemException {
@@ -563,6 +569,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 	 * @throws com.liferay.portal.NoSuchModelException if a social request with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public SocialRequest findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
@@ -599,6 +606,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 	 * @return the social request, or <code>null</code> if a social request with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public SocialRequest fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());

@@ -34,6 +34,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class CalEventPersistenceTest extends BasePersistenceTestCase {
+	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -70,26 +71,47 @@ public class CalEventPersistenceTest extends BasePersistenceTestCase {
 		CalEvent newCalEvent = _persistence.create(pk);
 
 		newCalEvent.setUuid(randomString());
+
 		newCalEvent.setGroupId(nextLong());
+
 		newCalEvent.setCompanyId(nextLong());
+
 		newCalEvent.setUserId(nextLong());
+
 		newCalEvent.setUserName(randomString());
+
 		newCalEvent.setCreateDate(nextDate());
+
 		newCalEvent.setModifiedDate(nextDate());
+
 		newCalEvent.setTitle(randomString());
+
 		newCalEvent.setDescription(randomString());
+
 		newCalEvent.setLocation(randomString());
+
 		newCalEvent.setStartDate(nextDate());
+
 		newCalEvent.setEndDate(nextDate());
+
 		newCalEvent.setDurationHour(nextInt());
+
 		newCalEvent.setDurationMinute(nextInt());
+
 		newCalEvent.setAllDay(randomBoolean());
+
 		newCalEvent.setTimeZoneSensitive(randomBoolean());
+
 		newCalEvent.setType(randomString());
+
 		newCalEvent.setRepeating(randomBoolean());
+
 		newCalEvent.setRecurrence(randomString());
+
 		newCalEvent.setRemindBy(nextInt());
+
 		newCalEvent.setFirstReminder(nextInt());
+
 		newCalEvent.setSecondReminder(nextInt());
 
 		_persistence.update(newCalEvent, false);
@@ -258,26 +280,47 @@ public class CalEventPersistenceTest extends BasePersistenceTestCase {
 		CalEvent calEvent = _persistence.create(pk);
 
 		calEvent.setUuid(randomString());
+
 		calEvent.setGroupId(nextLong());
+
 		calEvent.setCompanyId(nextLong());
+
 		calEvent.setUserId(nextLong());
+
 		calEvent.setUserName(randomString());
+
 		calEvent.setCreateDate(nextDate());
+
 		calEvent.setModifiedDate(nextDate());
+
 		calEvent.setTitle(randomString());
+
 		calEvent.setDescription(randomString());
+
 		calEvent.setLocation(randomString());
+
 		calEvent.setStartDate(nextDate());
+
 		calEvent.setEndDate(nextDate());
+
 		calEvent.setDurationHour(nextInt());
+
 		calEvent.setDurationMinute(nextInt());
+
 		calEvent.setAllDay(randomBoolean());
+
 		calEvent.setTimeZoneSensitive(randomBoolean());
+
 		calEvent.setType(randomString());
+
 		calEvent.setRepeating(randomBoolean());
+
 		calEvent.setRecurrence(randomString());
+
 		calEvent.setRemindBy(nextInt());
+
 		calEvent.setFirstReminder(nextInt());
+
 		calEvent.setSecondReminder(nextInt());
 
 		_persistence.update(calEvent, false);

@@ -32,6 +32,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class SocialEquityUserPersistenceTest extends BasePersistenceTestCase {
+	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -68,12 +69,19 @@ public class SocialEquityUserPersistenceTest extends BasePersistenceTestCase {
 		SocialEquityUser newSocialEquityUser = _persistence.create(pk);
 
 		newSocialEquityUser.setGroupId(nextLong());
+
 		newSocialEquityUser.setCompanyId(nextLong());
+
 		newSocialEquityUser.setUserId(nextLong());
+
 		newSocialEquityUser.setContributionK(nextDouble());
+
 		newSocialEquityUser.setContributionB(nextDouble());
+
 		newSocialEquityUser.setParticipationK(nextDouble());
+
 		newSocialEquityUser.setParticipationB(nextDouble());
+
 		newSocialEquityUser.setRank(nextInt());
 
 		_persistence.update(newSocialEquityUser, false);
@@ -228,12 +236,19 @@ public class SocialEquityUserPersistenceTest extends BasePersistenceTestCase {
 		SocialEquityUser socialEquityUser = _persistence.create(pk);
 
 		socialEquityUser.setGroupId(nextLong());
+
 		socialEquityUser.setCompanyId(nextLong());
+
 		socialEquityUser.setUserId(nextLong());
+
 		socialEquityUser.setContributionK(nextDouble());
+
 		socialEquityUser.setContributionB(nextDouble());
+
 		socialEquityUser.setParticipationK(nextDouble());
+
 		socialEquityUser.setParticipationB(nextDouble());
+
 		socialEquityUser.setRank(nextInt());
 
 		_persistence.update(socialEquityUser, false);

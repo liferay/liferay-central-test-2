@@ -31,6 +31,7 @@ import com.liferay.portal.util.TestPropsValues;
  */
 public class ResourceLocalServiceTest extends BaseServiceTestCase {
 
+	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -82,10 +83,12 @@ public class ResourceLocalServiceTest extends BaseServiceTestCase {
 			super(userId);
 		}
 
+		@Override
 		public boolean isSuccess() {
 			return true;
 		}
 
+		@Override
 		protected void doRun() throws Exception {
 			try {
 				ResourceLocalServiceUtil.getResource(

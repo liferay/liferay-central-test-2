@@ -40,6 +40,7 @@ public class XMLMergerTask extends Task {
 		_type = type;
 	}
 
+	@Override
 	public void execute() throws BuildException {
 		_validateAttributes();
 

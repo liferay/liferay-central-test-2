@@ -30,6 +30,7 @@ public class ClusterNode implements Serializable {
 		_clusterNodeId = clusterNodeId;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;
@@ -64,6 +65,7 @@ public class ClusterNode implements Serializable {
 		return _port;
 	}
 
+	@Override
 	public int hashCode() {
 		return _clusterNodeId.hashCode();
 	}
@@ -80,6 +82,7 @@ public class ClusterNode implements Serializable {
 		_port = port;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(9);
 

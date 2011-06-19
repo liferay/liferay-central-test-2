@@ -40,6 +40,7 @@ public class GroupPermissionChecker extends RowChecker {
 		_actionId = actionId;
 	}
 
+	@Override
 	public boolean isChecked(Object obj) {
 		Group group = (Group)obj;
 

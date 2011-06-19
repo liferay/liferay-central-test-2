@@ -62,6 +62,7 @@ public class OrgLaborLocalServiceImpl extends OrgLaborLocalServiceBaseImpl {
 		return orgLabor;
 	}
 
+	@Override
 	public void deleteOrgLabor(long orgLaborId)
 		throws PortalException, SystemException {
 
@@ -70,10 +71,12 @@ public class OrgLaborLocalServiceImpl extends OrgLaborLocalServiceBaseImpl {
 		deleteOrgLabor(orgLabor);
 	}
 
+	@Override
 	public void deleteOrgLabor(OrgLabor orgLabor) throws SystemException {
 		orgLaborPersistence.remove(orgLabor);
 	}
 
+	@Override
 	public OrgLabor getOrgLabor(long orgLaborId)
 		throws PortalException, SystemException {
 

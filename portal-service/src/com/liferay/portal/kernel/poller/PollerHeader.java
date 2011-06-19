@@ -61,6 +61,7 @@ public class PollerHeader {
 		return _startPolling;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(13);
 

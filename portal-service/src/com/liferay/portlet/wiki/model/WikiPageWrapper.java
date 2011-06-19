@@ -614,6 +614,7 @@ public class WikiPageWrapper implements WikiPage {
 		_wikiPage.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new WikiPageWrapper((WikiPage)_wikiPage.clone());
 	}
@@ -622,6 +623,7 @@ public class WikiPageWrapper implements WikiPage {
 		return _wikiPage.compareTo(wikiPage);
 	}
 
+	@Override
 	public int hashCode() {
 		return _wikiPage.hashCode();
 	}
@@ -630,6 +632,7 @@ public class WikiPageWrapper implements WikiPage {
 		return new WikiPageWrapper(_wikiPage.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _wikiPage.toString();
 	}

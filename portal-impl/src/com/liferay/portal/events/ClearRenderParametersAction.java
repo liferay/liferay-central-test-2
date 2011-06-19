@@ -28,6 +28,7 @@ import javax.servlet.http.HttpSession;
  */
 public class ClearRenderParametersAction extends Action {
 
+	@Override
 	public void run(HttpServletRequest request, HttpServletResponse response) {
 
 		// Some users are confused by the behavior stated in the JSR 168 spec

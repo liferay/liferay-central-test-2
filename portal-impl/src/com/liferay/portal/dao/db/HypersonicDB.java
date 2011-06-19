@@ -33,6 +33,7 @@ public class HypersonicDB extends BaseDB {
 		return _instance;
 	}
 
+	@Override
 	public String buildSQL(String template) throws IOException {
 		template = convertTimestamp(template);
 		template = replaceTemplate(template, getTemplate());
@@ -47,20 +48,24 @@ public class HypersonicDB extends BaseDB {
 		super(TYPE_HYPERSONIC);
 	}
 
+	@Override
 	protected String buildCreateFileContent(
 		String sqlDir, String databaseName, int population) {
 
 		return null;
 	}
 
+	@Override
 	protected String getServerName() {
 		return "hypersonic";
 	}
 
+	@Override
 	protected String[] getTemplate() {
 		return _HYPERSONIC;
 	}
 
+	@Override
 	protected String reword(String data) throws IOException {
 		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
 			new UnsyncStringReader(data));

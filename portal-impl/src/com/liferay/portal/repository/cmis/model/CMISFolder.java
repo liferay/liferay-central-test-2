@@ -83,6 +83,7 @@ public class CMISFolder extends CMISModel implements Folder {
 		return new HashMap<String, Serializable>();
 	}
 
+	@Override
 	public long getCompanyId() {
 		return _cmisRepository.getCompanyId();
 	}
@@ -118,6 +119,7 @@ public class CMISFolder extends CMISModel implements Folder {
 		return DLFolder.class;
 	}
 
+	@Override
 	public String getModelClassName() {
 		return DLFolder.class.getName();
 	}
@@ -149,6 +151,7 @@ public class CMISFolder extends CMISModel implements Folder {
 		return _cmisFolder.getName();
 	}
 
+	@Override
 	public Folder getParentFolder() throws PortalException, SystemException {
 		Folder parentFolder = null;
 
@@ -207,6 +210,7 @@ public class CMISFolder extends CMISModel implements Folder {
 		return DLFolderConstants.DEFAULT_PARENT_FOLDER_ID;
 	}
 
+	@Override
 	public long getPrimaryKey() {
 		return _folderId;
 	}
@@ -345,6 +349,7 @@ public class CMISFolder extends CMISModel implements Folder {
 		return this;
 	}
 
+	@Override
 	protected CMISRepository getCmisRepository() {
 		return _cmisRepository;
 	}

@@ -1046,6 +1046,7 @@ public class Recurrence implements Serializable {
 	 *
 	 * @return String
 	 */
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler();
 

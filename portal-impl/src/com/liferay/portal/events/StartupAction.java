@@ -45,6 +45,7 @@ import com.liferay.portlet.messageboards.util.MBIndexer;
  */
 public class StartupAction extends SimpleAction {
 
+	@Override
 	public void run(String[] ids) throws ActionException {
 		try {
 			doRun(ids);

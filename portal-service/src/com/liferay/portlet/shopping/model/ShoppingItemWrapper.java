@@ -808,6 +808,7 @@ public class ShoppingItemWrapper implements ShoppingItem {
 		_shoppingItem.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new ShoppingItemWrapper((ShoppingItem)_shoppingItem.clone());
 	}
@@ -817,6 +818,7 @@ public class ShoppingItemWrapper implements ShoppingItem {
 		return _shoppingItem.compareTo(shoppingItem);
 	}
 
+	@Override
 	public int hashCode() {
 		return _shoppingItem.hashCode();
 	}
@@ -825,6 +827,7 @@ public class ShoppingItemWrapper implements ShoppingItem {
 		return new ShoppingItemWrapper(_shoppingItem.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _shoppingItem.toString();
 	}

@@ -17,11 +17,8 @@ package com.liferay.portlet.documentlibrary.service.impl;
 import com.liferay.portal.ExpiredLockException;
 import com.liferay.portal.InvalidLockException;
 import com.liferay.portal.NoSuchLockException;
-import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.Validator;
@@ -29,16 +26,13 @@ import com.liferay.portal.model.Lock;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
-import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
 import com.liferay.portlet.documentlibrary.service.base.DLFolderServiceBaseImpl;
 import com.liferay.portlet.documentlibrary.service.permission.DLFolderPermission;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * @author Brian Wing Shun Chan
@@ -385,54 +379,15 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 			long expirationTime)
 		throws PortalException, SystemException {
 
-		DLFolder dlFolder = dlFolderLocalService.getFolder(folderId);
-
 		if ((expirationTime <= 0) ||
 			(expirationTime > DLFolderImpl.LOCK_EXPIRATION_TIME)) {
 
 			expirationTime = DLFolderImpl.LOCK_EXPIRATION_TIME;
 		}
 
-		Lock lock = lockLocalService.lock(
+		return lockLocalService.lock(
 			getUserId(), DLFolder.class.getName(), folderId, owner,
 			inheritable, expirationTime);
-
-		Set<Long> fileFileEntryIds = new HashSet<Long>();
-
-		long groupId = dlFolder.getGroupId();
-
-		try {
-			List<DLFileEntry> dlFileEntries =
-				dlFileEntryLocalService.getFileEntries(
-					groupId, folderId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
-					null);
-
-			for (DLFileEntry dlFileEntry : dlFileEntries) {
-				dlFileEntryService.lockFileEntry(
-					dlFileEntry.getFileEntryId(), owner, expirationTime);
-
-				fileFileEntryIds.add(dlFileEntry.getFileEntryId());
-			}
-		}
-		catch (Exception e) {
-			for (long fileEntryId : fileFileEntryIds) {
-				dlFileEntryService.unlockFileEntry(fileEntryId);
-			}
-
-			unlockFolder(groupId, folderId, lock.getUuid());
-
-			if (e instanceof PortalException) {
-				throw (PortalException)e;
-			}
-			else if (e instanceof SystemException) {
-				throw (SystemException)e;
-			}
-			else {
-				throw new PortalException(e);
-			}
-		}
-
-		return lock;
 	}
 
 	protected void doUnlockFolder(long groupId, long folderId, String lockUuid)
@@ -458,24 +413,6 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 		}
 
 		lockLocalService.unlock(DLFolder.class.getName(), folderId);
-
-		try {
-			List<DLFileEntry> dlFileEntries =
-				dlFileEntryLocalService.getFileEntries(
-					groupId, folderId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
-					null);
-
-			for (DLFileEntry dlFileEntry : dlFileEntries) {
-				dlFileEntryService.unlockFileEntry(
-					dlFileEntry.getFileEntryId());
-			}
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(
-		DLFolderServiceImpl.class);
 
 }

@@ -228,6 +228,7 @@ public class JSONWebServiceActionsManagerImpl
 
 	private class PathBinarySearch extends BinarySearch<String> {
 
+		@Override
 		protected int compare(int index, String element) {
 			JSONWebServiceActionConfig jsonWebServiceActionConfig =
 				_jsonWebServiceActionConfigs.get(index);
@@ -237,6 +238,7 @@ public class JSONWebServiceActionsManagerImpl
 			return path.compareTo(element);
 		}
 
+		@Override
 		protected int getLastIndex() {
 			return _jsonWebServiceActionConfigs.size() - 1;
 		}

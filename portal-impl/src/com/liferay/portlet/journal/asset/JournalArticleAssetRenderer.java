@@ -53,6 +53,7 @@ public class JournalArticleAssetRenderer extends BaseAssetRenderer {
 		return _article;
 	}
 
+	@Override
 	public String[] getAvailableLocales() {
 		return _article.getAvailableLocales();
 	}
@@ -69,6 +70,7 @@ public class JournalArticleAssetRenderer extends BaseAssetRenderer {
 		}
 	}
 
+	@Override
 	public String getDiscussionPath() {
 		if (PropsValues.JOURNAL_ARTICLE_COMMENTS_ENABLED) {
 			return "edit_article_discussion";
@@ -90,6 +92,7 @@ public class JournalArticleAssetRenderer extends BaseAssetRenderer {
 		return _article.getTitle(locale);
 	}
 
+	@Override
 	public PortletURL getURLEdit(
 			LiferayPortletRequest liferayPortletRequest,
 			LiferayPortletResponse liferayPortletResponse)
@@ -109,6 +112,7 @@ public class JournalArticleAssetRenderer extends BaseAssetRenderer {
 		return portletURL;
 	}
 
+	@Override
 	public PortletURL getURLExport(
 		LiferayPortletRequest liferayPortletRequest,
 		LiferayPortletResponse liferayPortletResponse) {
@@ -124,10 +128,12 @@ public class JournalArticleAssetRenderer extends BaseAssetRenderer {
 		return portletURL;
 	}
 
+	@Override
 	public String getUrlTitle() {
 		return _article.getUrlTitle();
 	}
 
+	@Override
 	public String getURLViewInContext(
 			LiferayPortletRequest liferayPortletRequest,
 			LiferayPortletResponse liferayPortletResponse,
@@ -164,28 +170,34 @@ public class JournalArticleAssetRenderer extends BaseAssetRenderer {
 		return _article.getUuid();
 	}
 
+	@Override
 	public String getViewInContextMessage() {
 		return "view";
 	}
 
+	@Override
 	public boolean hasEditPermission(PermissionChecker permissionChecker) {
 		return JournalArticlePermission.contains(
 			permissionChecker,_article, ActionKeys.UPDATE);
 	}
 
+	@Override
 	public boolean hasViewPermission(PermissionChecker permissionChecker) {
 		return JournalArticlePermission.contains(
 			permissionChecker,_article, ActionKeys.VIEW);
 	}
 
+	@Override
 	public boolean isConvertible() {
 		return true;
 	}
 
+	@Override
 	public boolean isLocalizable() {
 		return true;
 	}
 
+	@Override
 	public boolean isPrintable() {
 		return true;
 	}
@@ -207,6 +219,7 @@ public class JournalArticleAssetRenderer extends BaseAssetRenderer {
 		}
 	}
 
+	@Override
 	protected String getIconPath(ThemeDisplay themeDisplay) {
 		return themeDisplay.getPathThemeImages() + "/common/history.png";
 	}

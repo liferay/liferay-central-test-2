@@ -448,6 +448,7 @@ public class ShoppingCouponWrapper implements ShoppingCoupon {
 		_shoppingCoupon.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new ShoppingCouponWrapper((ShoppingCoupon)_shoppingCoupon.clone());
 	}
@@ -457,6 +458,7 @@ public class ShoppingCouponWrapper implements ShoppingCoupon {
 		return _shoppingCoupon.compareTo(shoppingCoupon);
 	}
 
+	@Override
 	public int hashCode() {
 		return _shoppingCoupon.hashCode();
 	}
@@ -465,6 +467,7 @@ public class ShoppingCouponWrapper implements ShoppingCoupon {
 		return new ShoppingCouponWrapper(_shoppingCoupon.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _shoppingCoupon.toString();
 	}

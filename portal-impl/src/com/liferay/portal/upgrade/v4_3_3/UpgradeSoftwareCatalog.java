@@ -27,6 +27,7 @@ import com.liferay.portal.upgrade.v4_3_3.util.SCProductVersionTable;
  */
 public class UpgradeSoftwareCatalog extends UpgradeProcess {
 
+	@Override
 	protected void doUpgrade() throws Exception {
 
 		// SCFrameworkVersion

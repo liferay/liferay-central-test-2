@@ -205,23 +205,7 @@ body #banner .logo a {
 .nav-menu-style-arrows ul {
 	list-style-image: url(../images/navigation/bullet_selected.png);
 }
-#navigation .yui3-menu .yui3-menu-content {
-    background: transparent;
-    border: none;
-    font-size: 93%;
-    line-height: 1.5;
-    padding: 0;
-}
-#navigation .yui3-dd-drop ul {
-	-moz-border-radius: 4px;
-	-webkit-border-radius: 4px;
-	background: #4E5051;
-	border-radius: 4px;
-}
 
-#navigation .yui3-dd-drop li {
-	padding: 0 10 0 10;
-}
 /* ---------- Portlet wrapper and icons ---------- */
 
 .portlet {
@@ -335,21 +319,6 @@ body #banner .logo a {
 .lfr-portlet-title-editable-content .aui-field {
 	float: none;
 	display: inline;
-}
-
-.opens-new-window-accessible {
-	background: url(../images/common/open_window.png) no-repeat 3px 50%;
-	display: inline-block;
-	font-size: 0;
-	height: 20px;
-	overflow: hidden;
-	text-indent: -9999px;
-	width: 20px;
-}
-
-.webkit .opens-new-window-accessible {
-	position: relative;
-	top: -16px;
 }
 
 /* ---------- Extras ---------- */

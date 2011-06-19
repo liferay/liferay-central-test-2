@@ -141,6 +141,7 @@ MBThread thread = messageDisplay.getThread();
 
 			if (cmd == 'reply') {
 				addQuickReplyDiv.show();
+
 				addQuickReplyDiv.one('#<portlet:namespace />parentMessageId').val(messageId);
 				addQuickReplyDiv.one('textarea').focus();
 			}

@@ -120,6 +120,8 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.ControlPanelEntry;
 import com.liferay.portlet.DefaultControlPanelEntryFactory;
+import com.liferay.portlet.documentlibrary.store.Store;
+import com.liferay.portlet.documentlibrary.store.StoreFactory;
 import com.liferay.util.UniqueList;
 import com.liferay.util.log4j.Log4JUtil;
 
@@ -182,8 +184,8 @@ public class HookHotDeployListener
 		"convert.processes",
 		"default.landing.page.path",
 		"dl.file.entry.drafts.enabled",
-		"dl.hook.impl",
 		"dl.repository.impl",
+		"dl.store.impl",
 		"dl.webdav.hold.lock",
 		"dl.webdav.save.to.single.version",
 		"dockbar.add.portlets",
@@ -369,15 +371,15 @@ public class HookHotDeployListener
 			DefaultControlPanelEntryFactory.setInstance(null);
 		}
 
-		if (portalProperties.containsKey(PropsKeys.DL_HOOK_IMPL)) {
-			com.liferay.documentlibrary.util.HookFactory.setInstance(null);
-		}
-
 		if (portalProperties.containsKey(PropsKeys.DL_REPOSITORY_IMPL)) {
 			DLRepositoryContainer dlRepositoryContainer =
 				_dlRepositoryContainerMap.remove(servletContextName);
 
 			dlRepositoryContainer.unregisterRepositoryFactories();
+		}
+
+		if (portalProperties.containsKey(PropsKeys.DL_STORE_IMPL)) {
+			StoreFactory.setInstance(null);
 		}
 
 		if (portalProperties.containsKey(PropsKeys.IMAGE_HOOK_IMPL)) {
@@ -1545,19 +1547,6 @@ public class HookHotDeployListener
 			DefaultControlPanelEntryFactory.setInstance(controlPanelEntry);
 		}
 
-		if (portalProperties.containsKey(PropsKeys.DL_HOOK_IMPL)) {
-			String dlHookClassName = portalProperties.getProperty(
-				PropsKeys.DL_HOOK_IMPL);
-
-			com.liferay.documentlibrary.util.Hook dlHook =
-				(com.liferay.documentlibrary.util.Hook)newInstance(
-					portletClassLoader,
-					com.liferay.documentlibrary.util.Hook.class,
-					dlHookClassName);
-
-			com.liferay.documentlibrary.util.HookFactory.setInstance(dlHook);
-		}
-
 		if (portalProperties.containsKey(PropsKeys.DL_REPOSITORY_IMPL)) {
 			String[] dlRepositoryClassNames = StringUtil.split(
 				portalProperties.getProperty(PropsKeys.DL_REPOSITORY_IMPL));
@@ -1575,6 +1564,16 @@ public class HookHotDeployListener
 				dlRepositoryContainer.registerRepositoryFactory(
 					dlRepositoryClassName, repositoryFactory);
 			}
+		}
+
+		if (portalProperties.containsKey(PropsKeys.DL_STORE_IMPL)) {
+			String storeClassName = portalProperties.getProperty(
+				PropsKeys.DL_STORE_IMPL);
+
+			Store store = (Store)newInstance(
+				portletClassLoader, Store.class, storeClassName);
+
+			StoreFactory.setInstance(store);
 		}
 
 		if (portalProperties.containsKey(PropsKeys.IMAGE_HOOK_IMPL)) {

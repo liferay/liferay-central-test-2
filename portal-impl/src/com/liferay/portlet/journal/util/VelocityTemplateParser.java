@@ -64,10 +64,12 @@ public class VelocityTemplateParser extends BaseTemplateParser {
 		return sb.toString();
 	}
 
+	@Override
 	protected TemplateContext getTemplateContext() throws Exception {
 		return VelocityEngineUtil.getWrappedRestrictedToolsContext();
 	}
 
+	@Override
 	protected List<TemplateNode> getTemplateNodes(Element element)
 		throws Exception {
 
@@ -134,6 +136,7 @@ public class VelocityTemplateParser extends BaseTemplateParser {
 		return templateNodes;
 	}
 
+	@Override
 	protected boolean mergeTemplate(
 			TemplateContext templateContext,
 			UnsyncStringWriter unsyncStringWriter)
@@ -168,6 +171,7 @@ public class VelocityTemplateParser extends BaseTemplateParser {
 		}
 	}
 
+	@Override
 	protected void populateTemplateContext(TemplateContext templateContext)
 		throws Exception {
 

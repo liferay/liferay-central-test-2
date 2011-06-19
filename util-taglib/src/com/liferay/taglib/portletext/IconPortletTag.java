@@ -29,12 +29,14 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class IconPortletTag extends IconTag {
 
+	@Override
 	protected void cleanUp() {
 		super.cleanUp();
 
 		_portlet = null;
 	}
 
+	@Override
 	protected void setAttributes(HttpServletRequest request) {
 		super.setAttributes(request);
 
@@ -45,6 +47,7 @@ public class IconPortletTag extends IconTag {
 		_portlet = portlet;
 	}
 
+	@Override
 	protected String getPage() {
 		if (FileAvailabilityUtil.isAvailable(getServletContext(), _PAGE)) {
 			return _PAGE;

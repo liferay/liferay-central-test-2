@@ -27,6 +27,7 @@ public class DummyImpl extends BaseModelImpl<Dummy> implements Dummy {
 	public DummyImpl() {
 	}
 
+	@Override
 	public Object clone() {
 		return new DummyImpl();
 	}
@@ -50,6 +51,7 @@ public class DummyImpl extends BaseModelImpl<Dummy> implements Dummy {
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 	}
 
+	@Override
 	public void resetOriginalValues() {
 	}
 

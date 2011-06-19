@@ -40,6 +40,7 @@ import org.apache.struts.Globals;
  */
 public class LoginPostAction extends Action {
 
+	@Override
 	public void run(HttpServletRequest request, HttpServletResponse response)
 		throws ActionException {
 

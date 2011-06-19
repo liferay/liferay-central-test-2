@@ -41,6 +41,7 @@ public class MBDiscussionAssetRenderer extends MBMessageAssetRenderer {
 		_message = message;
 	}
 
+	@Override
 	public PortletURL getURLEdit(
 			LiferayPortletRequest liferayPortletRequest,
 			LiferayPortletResponse liferayPortletResponse)
@@ -64,6 +65,7 @@ public class MBDiscussionAssetRenderer extends MBMessageAssetRenderer {
 		return editPortletURL;
 	}
 
+	@Override
 	public String getURLViewInContext(
 		LiferayPortletRequest liferayPortletRequest,
 		LiferayPortletResponse liferayPortletResponse,
@@ -72,6 +74,7 @@ public class MBDiscussionAssetRenderer extends MBMessageAssetRenderer {
 		return null;
 	}
 
+	@Override
 	public String render(
 			RenderRequest renderRequest, RenderResponse renderResponse,
 			String template)

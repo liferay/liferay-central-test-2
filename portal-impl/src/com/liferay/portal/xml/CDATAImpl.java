@@ -28,10 +28,12 @@ public class CDATAImpl extends NodeImpl implements CDATA {
 		_cdata = cdata;
 	}
 
+	@Override
 	public <T, V extends Visitor<T>> T accept(V visitor) {
 		return visitor.visitCDATA(this);
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		org.dom4j.CDATA cdata = ((CDATAImpl)obj).getWrappedCDATA();
 
@@ -42,10 +44,12 @@ public class CDATAImpl extends NodeImpl implements CDATA {
 		return _cdata;
 	}
 
+	@Override
 	public int hashCode() {
 		return _cdata.hashCode();
 	}
 
+	@Override
 	public String toString() {
 		return _cdata.toString();
 	}

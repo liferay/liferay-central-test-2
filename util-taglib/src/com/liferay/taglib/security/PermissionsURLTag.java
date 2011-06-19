@@ -113,6 +113,7 @@ public class PermissionsURLTag extends TagSupport {
 		}
 	}
 
+	@Override
 	public int doEndTag() throws JspException {
 		try {
 			doTag(

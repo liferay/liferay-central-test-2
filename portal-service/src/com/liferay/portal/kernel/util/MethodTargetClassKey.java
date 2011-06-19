@@ -27,6 +27,7 @@ public class MethodTargetClassKey {
 		_targetClass = targetClass;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;
@@ -68,6 +69,7 @@ public class MethodTargetClassKey {
 		return _targetMethod;
 	}
 
+	@Override
 	public int hashCode() {
 		if (_hashCode == 0) {
 			int hashCode = 77;
@@ -90,6 +92,7 @@ public class MethodTargetClassKey {
 		return _hashCode;
 	}
 
+	@Override
 	public String toString() {
 		if (_toString == null) {
 			Class<?>[] parameterTypes = _method.getParameterTypes();

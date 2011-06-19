@@ -121,6 +121,7 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl<ListType>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(ListTypeImpl.class.getName());
@@ -138,6 +139,7 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl<ListType>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(ListType listType) {
 		EntityCacheUtil.removeResult(ListTypeModelImpl.ENTITY_CACHE_ENABLED,
 			ListTypeImpl.class, listType.getPrimaryKey());
@@ -166,6 +168,7 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl<ListType>
 	 * @throws com.liferay.portal.NoSuchModelException if a list type with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ListType remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Integer)primaryKey).intValue());
@@ -218,10 +221,12 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl<ListType>
 	 * @return the list type that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ListType remove(ListType listType) throws SystemException {
 		return super.remove(listType);
 	}
 
+	@Override
 	protected ListType removeImpl(ListType listType) throws SystemException {
 		listType = toUnwrappedModel(listType);
 
@@ -247,6 +252,7 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl<ListType>
 		return listType;
 	}
 
+	@Override
 	public ListType updateImpl(com.liferay.portal.model.ListType listType,
 		boolean merge) throws SystemException {
 		listType = toUnwrappedModel(listType);
@@ -300,6 +306,7 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl<ListType>
 	 * @throws com.liferay.portal.NoSuchModelException if a list type with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ListType findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Integer)primaryKey).intValue());
@@ -336,6 +343,7 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl<ListType>
 	 * @return the list type, or <code>null</code> if a list type with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ListType fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Integer)primaryKey).intValue());

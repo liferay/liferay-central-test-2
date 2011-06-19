@@ -45,6 +45,7 @@ public class NetrLogonSamLogon extends DcerpcMessage {
 		flags = DCERPC_FIRST_FRAG | DCERPC_LAST_FRAG;
 	}
 
+	@Override
 	public void decode_out(NdrBuffer ndrBuffer) throws NdrException {
 		int returnAuthenticator = ndrBuffer.dec_ndr_long();
 
@@ -65,6 +66,7 @@ public class NetrLogonSamLogon extends DcerpcMessage {
 		_status = ndrBuffer.dec_ndr_long();
 	}
 
+	@Override
 	public void encode_in(NdrBuffer ndrBuffer) {
 		ndrBuffer.enc_ndr_referent(_logonServer, 1);
 		ndrBuffer.enc_ndr_string(_logonServer);
@@ -94,6 +96,7 @@ public class NetrLogonSamLogon extends DcerpcMessage {
 		return _validationInformation;
 	}
 
+	@Override
 	public int getOpnum() {
 		return 2;
 	}

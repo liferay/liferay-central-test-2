@@ -73,13 +73,12 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 			{ "versionUserName", Types.VARCHAR },
 			{ "createDate", Types.TIMESTAMP },
 			{ "modifiedDate", Types.TIMESTAMP },
-			{ "classNameId", Types.BIGINT },
-			{ "classPK", Types.BIGINT },
+			{ "DDMStorageId", Types.BIGINT },
 			{ "recordSetId", Types.BIGINT },
 			{ "version", Types.VARCHAR },
 			{ "displayIndex", Types.INTEGER }
 		};
-	public static final String TABLE_SQL_CREATE = "create table DDLRecord (uuid_ VARCHAR(75) null,recordId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,versionUserId LONG,versionUserName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,recordSetId LONG,version VARCHAR(75) null,displayIndex INTEGER)";
+	public static final String TABLE_SQL_CREATE = "create table DDLRecord (uuid_ VARCHAR(75) null,recordId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,versionUserId LONG,versionUserName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,DDMStorageId LONG,recordSetId LONG,version VARCHAR(75) null,displayIndex INTEGER)";
 	public static final String TABLE_SQL_DROP = "drop table DDLRecord";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -110,8 +109,7 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 		model.setVersionUserName(soapModel.getVersionUserName());
 		model.setCreateDate(soapModel.getCreateDate());
 		model.setModifiedDate(soapModel.getModifiedDate());
-		model.setClassNameId(soapModel.getClassNameId());
-		model.setClassPK(soapModel.getClassPK());
+		model.setDDMStorageId(soapModel.getDDMStorageId());
 		model.setRecordSetId(soapModel.getRecordSetId());
 		model.setVersion(soapModel.getVersion());
 		model.setDisplayIndex(soapModel.getDisplayIndex());
@@ -305,30 +303,13 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 		_modifiedDate = modifiedDate;
 	}
 
-	public String getClassName() {
-		if (getClassNameId() <= 0) {
-			return StringPool.BLANK;
-		}
-
-		return PortalUtil.getClassName(getClassNameId());
-	}
-
 	@JSON
-	public long getClassNameId() {
-		return _classNameId;
+	public long getDDMStorageId() {
+		return _DDMStorageId;
 	}
 
-	public void setClassNameId(long classNameId) {
-		_classNameId = classNameId;
-	}
-
-	@JSON
-	public long getClassPK() {
-		return _classPK;
-	}
-
-	public void setClassPK(long classPK) {
-		_classPK = classPK;
+	public void setDDMStorageId(long DDMStorageId) {
+		_DDMStorageId = DDMStorageId;
 	}
 
 	@JSON
@@ -363,6 +344,7 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 		_displayIndex = displayIndex;
 	}
 
+	@Override
 	public DDLRecord toEscapedModel() {
 		if (isEscapedModel()) {
 			return (DDLRecord)this;
@@ -373,6 +355,7 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 		}
 	}
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
@@ -382,10 +365,12 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 		return _expandoBridge;
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		getExpandoBridge().setAttributes(serviceContext);
 	}
 
+	@Override
 	public Object clone() {
 		DDLRecordImpl ddlRecordImpl = new DDLRecordImpl();
 
@@ -399,8 +384,7 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 		ddlRecordImpl.setVersionUserName(getVersionUserName());
 		ddlRecordImpl.setCreateDate(getCreateDate());
 		ddlRecordImpl.setModifiedDate(getModifiedDate());
-		ddlRecordImpl.setClassNameId(getClassNameId());
-		ddlRecordImpl.setClassPK(getClassPK());
+		ddlRecordImpl.setDDMStorageId(getDDMStorageId());
 		ddlRecordImpl.setRecordSetId(getRecordSetId());
 		ddlRecordImpl.setVersion(getVersion());
 		ddlRecordImpl.setDisplayIndex(getDisplayIndex());
@@ -424,6 +408,7 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 		}
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -448,10 +433,12 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		DDLRecordModelImpl ddlRecordModelImpl = this;
 
@@ -462,8 +449,9 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 		ddlRecordModelImpl._setOriginalGroupId = false;
 	}
 
+	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(31);
+		StringBundler sb = new StringBundler(29);
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
@@ -485,10 +473,8 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 		sb.append(getCreateDate());
 		sb.append(", modifiedDate=");
 		sb.append(getModifiedDate());
-		sb.append(", classNameId=");
-		sb.append(getClassNameId());
-		sb.append(", classPK=");
-		sb.append(getClassPK());
+		sb.append(", DDMStorageId=");
+		sb.append(getDDMStorageId());
 		sb.append(", recordSetId=");
 		sb.append(getRecordSetId());
 		sb.append(", version=");
@@ -501,7 +487,7 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(49);
+		StringBundler sb = new StringBundler(46);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portlet.dynamicdatalists.model.DDLRecord");
@@ -548,12 +534,8 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 		sb.append(getModifiedDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>classNameId</column-name><column-value><![CDATA[");
-		sb.append(getClassNameId());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>classPK</column-name><column-value><![CDATA[");
-		sb.append(getClassPK());
+			"<column><column-name>DDMStorageId</column-name><column-value><![CDATA[");
+		sb.append(getDDMStorageId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>recordSetId</column-name><column-value><![CDATA[");
@@ -592,8 +574,7 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 	private String _versionUserName;
 	private Date _createDate;
 	private Date _modifiedDate;
-	private long _classNameId;
-	private long _classPK;
+	private long _DDMStorageId;
 	private long _recordSetId;
 	private String _version;
 	private int _displayIndex;

@@ -43,6 +43,7 @@ public class ProgressInputStream extends InputStream {
 		initProgress();
 	}
 
+	@Override
 	public int available() throws IOException {
 		return _is.available();
 	}
@@ -51,6 +52,7 @@ public class ProgressInputStream extends InputStream {
 		_portletSession.removeAttribute(_getPercentAttributeName());
 	}
 
+	@Override
 	public void close() throws IOException {
 		_is.close();
 	}
@@ -65,22 +67,27 @@ public class ProgressInputStream extends InputStream {
 			PortletSession.APPLICATION_SCOPE);
 	}
 
+	@Override
 	public void mark(int readlimit) {
 		_is.mark(readlimit);
 	}
 
+	@Override
 	public boolean markSupported() {
 		return _is.markSupported();
 	}
 
+	@Override
 	public int read() throws IOException {
 		return _is.read();
 	}
 
+	@Override
 	public int read(byte[] b) throws IOException {
 		return read(b, 0, b.length);
 	}
 
+	@Override
 	public int read(byte[] b, int off, int len) throws IOException {
 		int bytesRead = super.read(b, off, len);
 
@@ -101,10 +108,12 @@ public class ProgressInputStream extends InputStream {
 		os.close();
 	}
 
+	@Override
 	public void reset() throws IOException {
 		_is.reset();
 	}
 
+	@Override
 	public long skip(long n) throws IOException {
 		long result = _is.skip(n);
 

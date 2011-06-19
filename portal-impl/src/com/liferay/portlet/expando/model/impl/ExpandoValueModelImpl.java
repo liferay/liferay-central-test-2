@@ -273,6 +273,7 @@ public class ExpandoValueModelImpl extends BaseModelImpl<ExpandoValue>
 		_data = data;
 	}
 
+	@Override
 	public ExpandoValue toEscapedModel() {
 		if (isEscapedModel()) {
 			return (ExpandoValue)this;
@@ -283,6 +284,7 @@ public class ExpandoValueModelImpl extends BaseModelImpl<ExpandoValue>
 		}
 	}
 
+	@Override
 	public Object clone() {
 		ExpandoValueImpl expandoValueImpl = new ExpandoValueImpl();
 
@@ -348,6 +350,7 @@ public class ExpandoValueModelImpl extends BaseModelImpl<ExpandoValue>
 		return 0;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -372,10 +375,12 @@ public class ExpandoValueModelImpl extends BaseModelImpl<ExpandoValue>
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		ExpandoValueModelImpl expandoValueModelImpl = this;
 
@@ -396,6 +401,7 @@ public class ExpandoValueModelImpl extends BaseModelImpl<ExpandoValue>
 		expandoValueModelImpl._setOriginalClassPK = false;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(17);
 

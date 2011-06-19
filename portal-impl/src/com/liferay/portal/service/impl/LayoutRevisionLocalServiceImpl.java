@@ -144,6 +144,7 @@ public class LayoutRevisionLocalServiceImpl
 		}
 	}
 
+	@Override
 	public void deleteLayoutRevision(LayoutRevision layoutRevision)
 		throws PortalException, SystemException {
 
@@ -174,6 +175,7 @@ public class LayoutRevisionLocalServiceImpl
 		layoutRevisionPersistence.remove(layoutRevision);
 	}
 
+	@Override
 	public void deleteLayoutRevision(long layoutRevisionId)
 		throws PortalException, SystemException {
 
@@ -205,6 +207,7 @@ public class LayoutRevisionLocalServiceImpl
 		}
 	}
 
+	@Override
 	public LayoutRevision getLayoutRevision(long layoutRevisionId)
 		throws PortalException, SystemException {
 

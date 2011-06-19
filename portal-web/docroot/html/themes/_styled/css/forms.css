@@ -7,6 +7,10 @@ fieldset {
 	padding-top: 0;
 }
 
+.ie7 .aui-fieldset {
+	zoom: 1;
+}
+
 .aui-fieldset {
 	border-width: 0;
 	padding: 0;

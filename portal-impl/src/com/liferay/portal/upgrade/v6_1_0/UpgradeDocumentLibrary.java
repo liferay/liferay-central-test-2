@@ -37,6 +37,7 @@ import java.sql.ResultSet;
  */
 public class UpgradeDocumentLibrary extends UpgradeProcess {
 
+	@Override
 	protected void doUpgrade() throws Exception {
 		updateFileEntries();
 		updateFileRanks();

@@ -43,6 +43,7 @@ public class MetaTagsTag extends com.liferay.taglib.util.IncludeTag {
 		requestDispatcher.include(request, response);
 	}
 
+	@Override
 	protected String getPage() {
 		return _PAGE;
 	}

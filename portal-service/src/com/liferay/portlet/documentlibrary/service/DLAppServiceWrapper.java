@@ -80,6 +80,41 @@ public class DLAppServiceWrapper implements DLAppService {
 			description, serviceContext);
 	}
 
+	public void cancelCheckOut(long fileEntryId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_dlAppService.cancelCheckOut(fileEntryId);
+	}
+
+	public void checkInFileEntry(long fileEntryId, java.lang.String lockUuid)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_dlAppService.checkInFileEntry(fileEntryId, lockUuid);
+	}
+
+	public void checkInFileEntry(long fileEntryId, boolean major,
+		java.lang.String changeLog,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_dlAppService.checkInFileEntry(fileEntryId, major, changeLog,
+			serviceContext);
+	}
+
+	public void checkOutFileEntry(long fileEntryId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_dlAppService.checkOutFileEntry(fileEntryId);
+	}
+
+	public com.liferay.portal.kernel.repository.model.FileEntry checkOutFileEntry(
+		long fileEntryId, java.lang.String owner, long expirationTime)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _dlAppService.checkOutFileEntry(fileEntryId, owner,
+			expirationTime);
+	}
+
 	public com.liferay.portal.kernel.repository.model.Folder copyFolder(
 		long repositoryId, long sourceFolderId, long parentFolderId,
 		java.lang.String name, java.lang.String description,
@@ -146,29 +181,29 @@ public class DLAppServiceWrapper implements DLAppService {
 	}
 
 	public java.util.List<com.liferay.portal.kernel.repository.model.FileEntry> getFileEntries(
-		long repositoryId, long folderId, long documentTypeId)
+		long repositoryId, long folderId, long fileEntryTypeId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _dlAppService.getFileEntries(repositoryId, folderId,
-			documentTypeId);
+			fileEntryTypeId);
 	}
 
 	public java.util.List<com.liferay.portal.kernel.repository.model.FileEntry> getFileEntries(
-		long repositoryId, long folderId, long documentTypeId, int start,
+		long repositoryId, long folderId, long fileEntryTypeId, int start,
 		int end)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _dlAppService.getFileEntries(repositoryId, folderId,
-			documentTypeId, start, end);
+			fileEntryTypeId, start, end);
 	}
 
 	public java.util.List<com.liferay.portal.kernel.repository.model.FileEntry> getFileEntries(
-		long repositoryId, long folderId, long documentTypeId, int start,
+		long repositoryId, long folderId, long fileEntryTypeId, int start,
 		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _dlAppService.getFileEntries(repositoryId, folderId,
-			documentTypeId, start, end, obc);
+			fileEntryTypeId, start, end, obc);
 	}
 
 	public java.util.List<java.lang.Object> getFileEntriesAndFileShortcuts(
@@ -194,11 +229,11 @@ public class DLAppServiceWrapper implements DLAppService {
 	}
 
 	public int getFileEntriesCount(long repositoryId, long folderId,
-		long documentTypeId)
+		long fileEntryTypeId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _dlAppService.getFileEntriesCount(repositoryId, folderId,
-			documentTypeId);
+			fileEntryTypeId);
 	}
 
 	public com.liferay.portal.kernel.repository.model.FileEntry getFileEntry(
@@ -367,19 +402,6 @@ public class DLAppServiceWrapper implements DLAppService {
 		return _dlAppService.getSubfolderIds(repositoryId, folderId, recurse);
 	}
 
-	public void lockFileEntry(long fileEntryId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		_dlAppService.lockFileEntry(fileEntryId);
-	}
-
-	public com.liferay.portal.model.Lock lockFileEntry(long fileEntryId,
-		java.lang.String owner, long expirationTime)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _dlAppService.lockFileEntry(fileEntryId, owner, expirationTime);
-	}
-
 	public com.liferay.portal.model.Lock lockFolder(long repositoryId,
 		long folderId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -432,18 +454,6 @@ public class DLAppServiceWrapper implements DLAppService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_dlAppService.revertFileEntry(fileEntryId, version, serviceContext);
-	}
-
-	public void unlockFileEntry(long fileEntryId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		_dlAppService.unlockFileEntry(fileEntryId);
-	}
-
-	public void unlockFileEntry(long fileEntryId, java.lang.String lockUuid)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		_dlAppService.unlockFileEntry(fileEntryId, lockUuid);
 	}
 
 	public void unlockFolder(long repositoryId, long folderId,
@@ -517,11 +527,11 @@ public class DLAppServiceWrapper implements DLAppService {
 			serviceContext);
 	}
 
-	public boolean verifyFileEntryLock(long repositoryId, long fileEntryId,
+	public boolean verifyFileEntryCheckOut(long repositoryId, long fileEntryId,
 		java.lang.String lockUuid)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _dlAppService.verifyFileEntryLock(repositoryId, fileEntryId,
+		return _dlAppService.verifyFileEntryCheckOut(repositoryId, fileEntryId,
 			lockUuid);
 	}
 

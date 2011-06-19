@@ -14,7 +14,6 @@
 
 package com.liferay.portlet.documentlibrary.service;
 
-import com.liferay.documentlibrary.DuplicateFileException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
@@ -38,6 +37,7 @@ import com.liferay.portal.service.BaseServiceTestCase;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.TestPropsValues;
+import com.liferay.portlet.documentlibrary.DuplicateFileException;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
@@ -52,6 +52,7 @@ import java.util.List;
  */
 public class DLAppServiceTest extends BaseServiceTestCase {
 
+	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -75,6 +76,7 @@ public class DLAppServiceTest extends BaseServiceTestCase {
 			name, description, serviceContext);
 	}
 
+	@Override
 	public void tearDown() throws Exception {
 		if (_fileEntry != null) {
 			DLAppServiceUtil.deleteFileEntry(_fileEntry.getFileEntryId());
@@ -340,10 +342,12 @@ public class DLAppServiceTest extends BaseServiceTestCase {
 			_index = index;
 		}
 
+		@Override
 		public boolean isSuccess() {
 			return _success;
 		}
 
+		@Override
 		protected void doRun() throws Exception {
 			try {
 				FileEntry fileEntry = addFileEntry(
@@ -373,10 +377,12 @@ public class DLAppServiceTest extends BaseServiceTestCase {
 			_index = index;
 		}
 
+		@Override
 		public boolean isSuccess() {
 			return _success;
 		}
 
+		@Override
 		protected void doRun() throws Exception {
 			try {
 				FileEntry fileEntry = DLAppServiceUtil.getFileEntry(

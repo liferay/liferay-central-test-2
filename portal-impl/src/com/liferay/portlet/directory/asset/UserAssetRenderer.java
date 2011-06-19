@@ -46,6 +46,7 @@ public class UserAssetRenderer extends BaseAssetRenderer {
 		return _user.getPrimaryKey();
 	}
 
+	@Override
 	public String getDiscussionPath() {
 		return null;
 	}
@@ -62,6 +63,7 @@ public class UserAssetRenderer extends BaseAssetRenderer {
 		return _user.getFullName();
 	}
 
+	@Override
 	public PortletURL getURLEdit(
 			LiferayPortletRequest liferayPortletRequest,
 			LiferayPortletResponse liferayPortletResponse)
@@ -77,10 +79,12 @@ public class UserAssetRenderer extends BaseAssetRenderer {
 		return portletURL;
 	}
 
+	@Override
 	public String getUrlTitle() {
 		return _user.getFullName();
 	}
 
+	@Override
 	public String getURLViewInContext(
 		LiferayPortletRequest liferayPortletRequest,
 		LiferayPortletResponse liferayPortletResponse,
@@ -102,16 +106,19 @@ public class UserAssetRenderer extends BaseAssetRenderer {
 		return _user.getUuid();
 	}
 
+	@Override
 	public boolean hasEditPermission(PermissionChecker permissionChecker) {
 		return UserPermissionUtil.contains(
 			permissionChecker, _user.getUserId(), ActionKeys.UPDATE);
 	}
 
+	@Override
 	public boolean hasViewPermission(PermissionChecker permissionChecker) {
 		return UserPermissionUtil.contains(
 			permissionChecker, _user.getUserId(), ActionKeys.VIEW);
 	}
 
+	@Override
 	public boolean isPrintable() {
 		return false;
 	}
@@ -133,6 +140,7 @@ public class UserAssetRenderer extends BaseAssetRenderer {
 		}
 	}
 
+	@Override
 	protected String getIconPath(ThemeDisplay themeDisplay) {
 		return themeDisplay.getPathThemeImages() + "/common/user_icon.png";
 	}

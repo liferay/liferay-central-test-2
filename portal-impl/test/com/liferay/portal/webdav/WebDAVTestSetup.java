@@ -36,6 +36,7 @@ public class WebDAVTestSetup extends TestSetup {
 		super(test);
 	}
 
+	@Override
 	public void setUp() {
 		ServiceTestUtil.initServices();
 		ServiceTestUtil.initPermissions();
@@ -59,6 +60,7 @@ public class WebDAVTestSetup extends TestSetup {
 		}
 	}
 
+	@Override
 	public void tearDown() {
 		_baseWebDAVTestCase.service(Method.DELETE, "", null, null);
 

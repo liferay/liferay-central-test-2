@@ -204,6 +204,7 @@ public class PermissionModelImpl extends BaseModelImpl<Permission>
 		return _originalResourceId;
 	}
 
+	@Override
 	public Permission toEscapedModel() {
 		if (isEscapedModel()) {
 			return (Permission)this;
@@ -214,6 +215,7 @@ public class PermissionModelImpl extends BaseModelImpl<Permission>
 		}
 	}
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
@@ -223,10 +225,12 @@ public class PermissionModelImpl extends BaseModelImpl<Permission>
 		return _expandoBridge;
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		getExpandoBridge().setAttributes(serviceContext);
 	}
 
+	@Override
 	public Object clone() {
 		PermissionImpl permissionImpl = new PermissionImpl();
 
@@ -254,6 +258,7 @@ public class PermissionModelImpl extends BaseModelImpl<Permission>
 		}
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -278,10 +283,12 @@ public class PermissionModelImpl extends BaseModelImpl<Permission>
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		PermissionModelImpl permissionModelImpl = this;
 
@@ -292,6 +299,7 @@ public class PermissionModelImpl extends BaseModelImpl<Permission>
 		permissionModelImpl._setOriginalResourceId = false;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(9);
 

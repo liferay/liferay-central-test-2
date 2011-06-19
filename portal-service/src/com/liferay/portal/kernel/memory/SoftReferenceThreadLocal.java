@@ -21,6 +21,7 @@ import java.lang.ref.SoftReference;
  */
 public class SoftReferenceThreadLocal<T> extends ThreadLocal<T> {
 
+	@Override
 	public T get() {
 		SoftReference<T> softReference = _softReferenceThreadLocal.get();
 
@@ -43,10 +44,12 @@ public class SoftReferenceThreadLocal<T> extends ThreadLocal<T> {
 		return value;
 	}
 
+	@Override
 	public void remove() {
 		_softReferenceThreadLocal.remove();
 	}
 
+	@Override
 	public void set(T value) {
 		if (value == null) {
 			_softReferenceThreadLocal.set((SoftReference<T>)_nullSoftReference);

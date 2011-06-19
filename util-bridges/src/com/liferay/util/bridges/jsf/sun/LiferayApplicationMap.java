@@ -28,14 +28,17 @@ public class LiferayApplicationMap extends AbstractMap<String, Object> {
 		_servletContext = servletContext;
 	}
 
+	@Override
 	public Set<Entry<String, Object>> entrySet() {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public Object get(Object key) {
 		return _servletContext.getAttribute(key.toString());
 	}
 
+	@Override
 	public Object put(String key, Object value) {
 		Object previousValue = get(key);
 
@@ -44,6 +47,7 @@ public class LiferayApplicationMap extends AbstractMap<String, Object> {
 		return previousValue;
 	}
 
+	@Override
 	public Object remove(Object key) {
 		Object value = null;
 

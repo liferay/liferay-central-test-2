@@ -14,7 +14,7 @@
  */
 --%>
 
-<%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
+<%@ include file="/html/portlet/portal_settings/init.jsp" %>
 
 <%
 themeDisplay.setIncludeServiceJs(true);
@@ -24,6 +24,10 @@ String[] identificationSections = PropsValues.COMPANY_SETTINGS_FORM_IDENTIFICATI
 String[] miscellaneousSections = PropsValues.COMPANY_SETTINGS_FORM_MISCELLANEOUS;
 
 String[][] categorySections = {configurationSections, identificationSections, miscellaneousSections};
+
+PortletURL portletURL = renderResponse.createRenderURL();
+
+portletURL.setParameter("struts_action", "/portal_settings/view");
 
 request.setAttribute("addresses.className", Account.class.getName());
 request.setAttribute("emailAddresses.className", Account.class.getName());

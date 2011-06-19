@@ -225,6 +225,7 @@ public class StringBundler {
 		return _array[index];
 	}
 
+	@Override
 	public String toString() {
 		return toString(true);
 	}

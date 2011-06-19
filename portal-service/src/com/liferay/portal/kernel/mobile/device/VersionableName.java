@@ -70,6 +70,7 @@ public class VersionableName
 			versionableName.getName().toUpperCase());
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;
@@ -101,6 +102,7 @@ public class VersionableName
 		return Collections.unmodifiableSet(_versions);
 	}
 
+	@Override
 	public int hashCode() {
 		if (_name != null) {
 			return _name.hashCode();
@@ -110,6 +112,7 @@ public class VersionableName
 		}
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(5);
 

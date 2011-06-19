@@ -32,6 +32,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class SocialRelationPersistenceTest extends BasePersistenceTestCase {
+	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -68,10 +69,15 @@ public class SocialRelationPersistenceTest extends BasePersistenceTestCase {
 		SocialRelation newSocialRelation = _persistence.create(pk);
 
 		newSocialRelation.setUuid(randomString());
+
 		newSocialRelation.setCompanyId(nextLong());
+
 		newSocialRelation.setCreateDate(nextLong());
+
 		newSocialRelation.setUserId1(nextLong());
+
 		newSocialRelation.setUserId2(nextLong());
+
 		newSocialRelation.setType(nextInt());
 
 		_persistence.update(newSocialRelation, false);
@@ -222,10 +228,15 @@ public class SocialRelationPersistenceTest extends BasePersistenceTestCase {
 		SocialRelation socialRelation = _persistence.create(pk);
 
 		socialRelation.setUuid(randomString());
+
 		socialRelation.setCompanyId(nextLong());
+
 		socialRelation.setCreateDate(nextLong());
+
 		socialRelation.setUserId1(nextLong());
+
 		socialRelation.setUserId2(nextLong());
+
 		socialRelation.setType(nextInt());
 
 		_persistence.update(socialRelation, false);

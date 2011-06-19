@@ -99,10 +99,9 @@ public class DLAppHelperLocalServiceWrapper implements DLAppHelperLocalService {
 		return _dlAppHelperLocalService.getNoAssetFileEntries();
 	}
 
-	public void moveFileEntry(long oldFileEntryId, long newFileEntryId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		_dlAppHelperLocalService.moveFileEntry(oldFileEntryId, newFileEntryId);
+	public void triggerProcesses(
+		com.liferay.portal.kernel.repository.model.FileEntry fileEntry) {
+		_dlAppHelperLocalService.triggerProcesses(fileEntry);
 	}
 
 	public com.liferay.portlet.asset.model.AssetEntry updateAsset(long userId,

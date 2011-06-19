@@ -32,6 +32,7 @@ public class ServiceComponentImpl
 	public ServiceComponentImpl() {
 	}
 
+	@Override
 	public void setData(String data) {
 		super.setData(data);
 

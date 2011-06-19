@@ -149,6 +149,7 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(CountryImpl.class.getName());
@@ -166,6 +167,7 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(Country country) {
 		EntityCacheUtil.removeResult(CountryModelImpl.ENTITY_CACHE_ENABLED,
 			CountryImpl.class, country.getPrimaryKey());
@@ -203,6 +205,7 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 	 * @throws com.liferay.portal.NoSuchModelException if a country with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Country remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
@@ -255,10 +258,12 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 	 * @return the country that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Country remove(Country country) throws SystemException {
 		return super.remove(country);
 	}
 
+	@Override
 	protected Country removeImpl(Country country) throws SystemException {
 		country = toUnwrappedModel(country);
 
@@ -295,6 +300,7 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 		return country;
 	}
 
+	@Override
 	public Country updateImpl(com.liferay.portal.model.Country country,
 		boolean merge) throws SystemException {
 		country = toUnwrappedModel(country);
@@ -398,6 +404,7 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 	 * @throws com.liferay.portal.NoSuchModelException if a country with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Country findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
@@ -434,6 +441,7 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 	 * @return the country, or <code>null</code> if a country with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Country fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());

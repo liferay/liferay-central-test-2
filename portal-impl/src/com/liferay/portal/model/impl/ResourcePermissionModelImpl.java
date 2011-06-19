@@ -296,6 +296,7 @@ public class ResourcePermissionModelImpl extends BaseModelImpl<ResourcePermissio
 		return _originalActionIds;
 	}
 
+	@Override
 	public ResourcePermission toEscapedModel() {
 		if (isEscapedModel()) {
 			return (ResourcePermission)this;
@@ -306,6 +307,7 @@ public class ResourcePermissionModelImpl extends BaseModelImpl<ResourcePermissio
 		}
 	}
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
@@ -315,10 +317,12 @@ public class ResourcePermissionModelImpl extends BaseModelImpl<ResourcePermissio
 		return _expandoBridge;
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		getExpandoBridge().setAttributes(serviceContext);
 	}
 
+	@Override
 	public Object clone() {
 		ResourcePermissionImpl resourcePermissionImpl = new ResourcePermissionImpl();
 
@@ -350,6 +354,7 @@ public class ResourcePermissionModelImpl extends BaseModelImpl<ResourcePermissio
 		}
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -374,10 +379,12 @@ public class ResourcePermissionModelImpl extends BaseModelImpl<ResourcePermissio
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		ResourcePermissionModelImpl resourcePermissionModelImpl = this;
 
@@ -406,6 +413,7 @@ public class ResourcePermissionModelImpl extends BaseModelImpl<ResourcePermissio
 		resourcePermissionModelImpl._setOriginalActionIds = false;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(17);
 

@@ -140,6 +140,7 @@ public class Version implements Comparable<Version>, Serializable {
 		return getBuildNumber().compareTo(version.getBuildNumber());
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if ((obj == null) || (!(obj instanceof Version))) {
 			return false;
@@ -185,6 +186,7 @@ public class Version implements Comparable<Version>, Serializable {
 		return _minor;
 	}
 
+	@Override
 	public int hashCode() {
 		return toString().hashCode();
 	}
@@ -257,6 +259,7 @@ public class Version implements Comparable<Version>, Serializable {
 		}
 	}
 
+	@Override
 	public String toString() {
 		return _toString(_major, _minor, _bugFix, _buildNumber);
 	}

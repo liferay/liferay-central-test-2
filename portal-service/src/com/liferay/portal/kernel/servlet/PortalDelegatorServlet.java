@@ -56,6 +56,7 @@ public class PortalDelegatorServlet extends HttpServlet {
 		_delegates.remove(subContext);
 	}
 
+	@Override
 	public void service(
 			HttpServletRequest request, HttpServletResponse response)
 		throws IOException, ServletException {

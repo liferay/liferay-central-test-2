@@ -1637,41 +1637,6 @@
 			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
-	<mapped-superclass class="com.liferay.portlet.documentlibrary.model.impl.DLDocumentMetadataSetModelImpl">
-		<attributes>
-			<id name="documentMetadataSetId" />
-			<basic name="uuid">
-				<column name="UUID_" />
-			</basic>
-			<basic name="classNameId" />
-			<basic name="classPK" />
-			<basic name="DDMStructureId" />
-			<basic name="documentTypeId" />
-			<basic name="fileVersionId" />
-			<transient name="primaryKey" />
-			<transient name="primaryKeyObj" />
-		</attributes>
-	</mapped-superclass>
-	<mapped-superclass class="com.liferay.portlet.documentlibrary.model.impl.DLDocumentTypeModelImpl">
-		<attributes>
-			<id name="documentTypeId" />
-			<basic name="groupId" />
-			<basic name="companyId" />
-			<basic name="userId" />
-			<basic name="userName" />
-			<basic name="createDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="modifiedDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="name" />
-			<basic name="description" />
-			<transient name="primaryKey" />
-			<transient name="primaryKeyObj" />
-			<transient name="userUuid" />
-		</attributes>
-	</mapped-superclass>
 	<mapped-superclass class="com.liferay.portlet.documentlibrary.model.impl.DLFileEntryModelImpl">
 		<attributes>
 			<id name="fileEntryId" />
@@ -1698,7 +1663,7 @@
 			<basic name="title" />
 			<basic name="description" />
 			<basic name="extraSettings" />
-			<basic name="documentTypeId" />
+			<basic name="fileEntryTypeId" />
 			<basic name="version" />
 			<basic name="size">
 				<column name="SIZE_" />
@@ -1708,6 +1673,42 @@
 			<transient name="primaryKeyObj" />
 			<transient name="userUuid" />
 			<transient name="versionUserUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portlet.documentlibrary.model.impl.DLFileEntryMetadataModelImpl">
+		<attributes>
+			<id name="fileEntryMetadataId" />
+			<basic name="uuid">
+				<column name="UUID_" />
+			</basic>
+			<basic name="classNameId" />
+			<basic name="classPK" />
+			<basic name="DDMStructureId" />
+			<basic name="fileEntryTypeId" />
+			<basic name="fileEntryId" />
+			<basic name="fileVersionId" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portlet.documentlibrary.model.impl.DLFileEntryTypeModelImpl">
+		<attributes>
+			<id name="fileEntryTypeId" />
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="name" />
+			<basic name="description" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
 	<mapped-superclass class="com.liferay.portlet.documentlibrary.model.impl.DLFileRankModelImpl">
@@ -1774,7 +1775,7 @@
 			<basic name="description" />
 			<basic name="changeLog" />
 			<basic name="extraSettings" />
-			<basic name="documentTypeId" />
+			<basic name="fileEntryTypeId" />
 			<basic name="version" />
 			<basic name="size">
 				<column name="SIZE_" />
@@ -1838,8 +1839,7 @@
 			<basic name="modifiedDate">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
-			<basic name="classNameId" />
-			<basic name="classPK" />
+			<basic name="DDMStorageId" />
 			<basic name="recordSetId" />
 			<basic name="version" />
 			<basic name="displayIndex" />
@@ -1887,8 +1887,7 @@
 			<basic name="createDate">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
-			<basic name="classNameId" />
-			<basic name="classPK" />
+			<basic name="DDMStorageId" />
 			<basic name="recordSetId" />
 			<basic name="recordId" />
 			<basic name="version" />
@@ -3639,19 +3638,19 @@
 		<table name="DLContent" />
 		<attributes />
 	</entity>
-	<entity class="com.liferay.portlet.documentlibrary.model.impl.DLDocumentMetadataSetImpl" name="DLDocumentMetadataSet">
-		<table name="DLDocumentMetadataSet" />
-		<attributes />
-	</entity>
-	<entity class="com.liferay.portlet.documentlibrary.model.impl.DLDocumentTypeImpl" name="DLDocumentType">
-		<table name="DLDocumentType" />
-		<attributes />
-	</entity>
 	<entity class="com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl" name="DLFileEntry">
 		<table name="DLFileEntry" />
 		<attributes>
 			<transient name="extraSettingsProperties" />
 		</attributes>
+	</entity>
+	<entity class="com.liferay.portlet.documentlibrary.model.impl.DLFileEntryMetadataImpl" name="DLFileEntryMetadata">
+		<table name="DLFileEntryMetadata" />
+		<attributes />
+	</entity>
+	<entity class="com.liferay.portlet.documentlibrary.model.impl.DLFileEntryTypeImpl" name="DLFileEntryType">
+		<table name="DLFileEntryType" />
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portlet.documentlibrary.model.impl.DLFileRankImpl" name="DLFileRank">
 		<table name="DLFileRank" />

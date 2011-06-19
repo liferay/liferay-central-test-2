@@ -59,6 +59,7 @@ public class TZSRecurrence extends Recurrence {
 		return matchesByField(array, field, adjustedCandidate, allowNegative);
 	}
 
+	@Override
 	protected boolean matchesIndividualByDay(
 		Calendar candidate, DayAndPosition pos) {
 
@@ -73,21 +74,25 @@ public class TZSRecurrence extends Recurrence {
 		return super.matchesIndividualByDay(adjustedCandidate, pos);
 	}
 
+	@Override
 	protected boolean matchesByMonthDay(Calendar candidate) {
 		return matchesByField(
 			byMonthDay, Calendar.DATE, candidate, true, _timeZone);
 	}
 
+	@Override
 	protected boolean matchesByYearDay(Calendar candidate) {
 		return matchesByField(
 			byYearDay, Calendar.DAY_OF_YEAR, candidate, true, _timeZone);
 	}
 
+	@Override
 	protected boolean matchesByWeekNo(Calendar candidate) {
 		return matchesByField(
 			byWeekNo, Calendar.WEEK_OF_YEAR, candidate, true, _timeZone);
 	}
 
+	@Override
 	protected boolean matchesByMonth(Calendar candidate) {
 		return matchesByField(
 			byMonth, Calendar.MONTH, candidate, false, _timeZone);

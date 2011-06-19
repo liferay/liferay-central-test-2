@@ -35,6 +35,7 @@ public class TableOfContentsVisitor extends BaseASTVisitor {
 		return _headingNode;
 	}
 
+	@Override
 	public void visit(HeadingNode headingNode) {
 		addHeadingNode(_headingNode, headingNode);
 	}

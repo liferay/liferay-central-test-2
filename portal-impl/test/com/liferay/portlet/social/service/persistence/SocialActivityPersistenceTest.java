@@ -32,6 +32,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class SocialActivityPersistenceTest extends BasePersistenceTestCase {
+	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -68,14 +69,23 @@ public class SocialActivityPersistenceTest extends BasePersistenceTestCase {
 		SocialActivity newSocialActivity = _persistence.create(pk);
 
 		newSocialActivity.setGroupId(nextLong());
+
 		newSocialActivity.setCompanyId(nextLong());
+
 		newSocialActivity.setUserId(nextLong());
+
 		newSocialActivity.setCreateDate(nextLong());
+
 		newSocialActivity.setMirrorActivityId(nextLong());
+
 		newSocialActivity.setClassNameId(nextLong());
+
 		newSocialActivity.setClassPK(nextLong());
+
 		newSocialActivity.setType(nextInt());
+
 		newSocialActivity.setExtraData(randomString());
+
 		newSocialActivity.setReceiverUserId(nextLong());
 
 		_persistence.update(newSocialActivity, false);
@@ -245,14 +255,23 @@ public class SocialActivityPersistenceTest extends BasePersistenceTestCase {
 		SocialActivity socialActivity = _persistence.create(pk);
 
 		socialActivity.setGroupId(nextLong());
+
 		socialActivity.setCompanyId(nextLong());
+
 		socialActivity.setUserId(nextLong());
+
 		socialActivity.setCreateDate(nextLong());
+
 		socialActivity.setMirrorActivityId(nextLong());
+
 		socialActivity.setClassNameId(nextLong());
+
 		socialActivity.setClassPK(nextLong());
+
 		socialActivity.setType(nextInt());
+
 		socialActivity.setExtraData(randomString());
+
 		socialActivity.setReceiverUserId(nextLong());
 
 		_persistence.update(socialActivity, false);

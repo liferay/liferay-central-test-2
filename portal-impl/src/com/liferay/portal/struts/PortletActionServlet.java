@@ -29,6 +29,7 @@ import org.apache.struts.config.ModuleConfig;
  */
 public class PortletActionServlet extends ActionServlet {
 
+	@Override
 	public void init(ServletConfig servletConfig) throws ServletException {
 		super.init(servletConfig);
 

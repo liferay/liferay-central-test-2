@@ -75,6 +75,7 @@ public class ModifiableEhcacheWrapper implements Ehcache {
 		_ehcache.clearStatistics();
 	}
 
+	@Override
 	public Object clone() throws CloneNotSupportedException {
 		return _ehcache.clone();
 	}
@@ -87,6 +88,7 @@ public class ModifiableEhcacheWrapper implements Ehcache {
 		_ehcache.dispose();
 	}
 
+	@Override
 	public boolean equals(Object object) {
 		return _ehcache.equals(object);
 	}
@@ -254,6 +256,7 @@ public class ModifiableEhcacheWrapper implements Ehcache {
 		return _ehcache.getWriterManager();
 	}
 
+	@Override
 	public int hashCode() {
 		return _ehcache.hashCode();
 	}

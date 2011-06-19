@@ -34,6 +34,7 @@ public class OrderSearchTerms extends OrderDisplayTerms {
 		status = DAOParamUtil.getString(portletRequest, STATUS);
 	}
 
+	@Override
 	public String getStatus() {
 		if (status == null) {
 			return null;

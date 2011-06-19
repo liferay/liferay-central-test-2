@@ -32,6 +32,7 @@ public class InvokerSessionAction extends SessionAction {
 		_classLoader = classLoader;
 	}
 
+	@Override
 	public void run(HttpSession session) throws ActionException {
 		Thread currentThread = Thread.currentThread();
 

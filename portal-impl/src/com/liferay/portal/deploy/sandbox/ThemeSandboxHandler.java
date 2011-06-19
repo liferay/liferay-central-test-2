@@ -31,6 +31,7 @@ public class ThemeSandboxHandler extends BaseSandboxHandler {
 		super(deployer);
 	}
 
+	@Override
 	protected void clonePlugin(File dir, PluginPackage pluginPackage)
 		throws Exception {
 
@@ -41,6 +42,7 @@ public class ThemeSandboxHandler extends BaseSandboxHandler {
 			"/_diffs/**", true, true);
 	}
 
+	@Override
 	protected String getPluginType() {
 		return _PLUGIN_TYPE;
 	}

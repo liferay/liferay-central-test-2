@@ -19,8 +19,8 @@
 <%@ include file="/html/portlet/layouts_admin/init_attributes.jspf" %>
 
 <c:choose>
-	<c:when test="<%= portletName.equals(PortletKeys.COMMUNITIES) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.SITES_ADMIN) || portletName.equals(PortletKeys.USERS_ADMIN) || portletName.equals(PortletKeys.GROUP_PAGES) || portletName.equals(PortletKeys.MY_PAGES) %>">
-		<c:if test="<%= portletName.equals(PortletKeys.COMMUNITIES) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.SITES_ADMIN) || portletName.equals(PortletKeys.USERS_ADMIN) %>">
+	<c:when test="<%= portletName.equals(PortletKeys.COMMUNITIES) || portletName.equals(PortletKeys.GROUP_PAGES) || portletName.equals(PortletKeys.MY_PAGES) || portletName.equals(PortletKeys.SITES_ADMIN) || portletName.equals(PortletKeys.USERS_ADMIN) %>">
+		<c:if test="<%= portletName.equals(PortletKeys.COMMUNITIES) || portletName.equals(PortletKeys.SITES_ADMIN) || portletName.equals(PortletKeys.USERS_ADMIN) %>">
 			<liferay-ui:header
 				backURL="<%= backURL %>"
 				title="<%= liveGroup.getDescriptiveName() %>"
@@ -86,8 +86,8 @@ if ((selLayout != null) && !group.isLayoutPrototype()) {
 <aui:layout cssClass="manage-view">
 	<c:if test="<%= !group.isLayoutPrototype() %>">
 		<aui:column columnWidth="25" cssClass="manage-sitemap">
-			<div class="header-row">
-				<div class="header-row-content"> </div>
+			<div class="lfr-header-row">
+				<div class="lfr-header-row-content"> </div>
 			</div>
 
 			<liferay-util:include page="/html/portlet/layouts_admin/tree_js.jsp">

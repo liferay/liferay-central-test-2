@@ -32,6 +32,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class WebDAVPropsPersistenceTest extends BasePersistenceTestCase {
+	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -68,10 +69,15 @@ public class WebDAVPropsPersistenceTest extends BasePersistenceTestCase {
 		WebDAVProps newWebDAVProps = _persistence.create(pk);
 
 		newWebDAVProps.setCompanyId(nextLong());
+
 		newWebDAVProps.setCreateDate(nextDate());
+
 		newWebDAVProps.setModifiedDate(nextDate());
+
 		newWebDAVProps.setClassNameId(nextLong());
+
 		newWebDAVProps.setClassPK(nextLong());
+
 		newWebDAVProps.setProps(randomString());
 
 		_persistence.update(newWebDAVProps, false);
@@ -222,10 +228,15 @@ public class WebDAVPropsPersistenceTest extends BasePersistenceTestCase {
 		WebDAVProps webDAVProps = _persistence.create(pk);
 
 		webDAVProps.setCompanyId(nextLong());
+
 		webDAVProps.setCreateDate(nextDate());
+
 		webDAVProps.setModifiedDate(nextDate());
+
 		webDAVProps.setClassNameId(nextLong());
+
 		webDAVProps.setClassPK(nextLong());
+
 		webDAVProps.setProps(randomString());
 
 		_persistence.update(webDAVProps, false);

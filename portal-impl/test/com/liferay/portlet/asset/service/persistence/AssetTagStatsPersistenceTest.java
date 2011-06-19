@@ -32,6 +32,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class AssetTagStatsPersistenceTest extends BasePersistenceTestCase {
+	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -68,7 +69,9 @@ public class AssetTagStatsPersistenceTest extends BasePersistenceTestCase {
 		AssetTagStats newAssetTagStats = _persistence.create(pk);
 
 		newAssetTagStats.setTagId(nextLong());
+
 		newAssetTagStats.setClassNameId(nextLong());
+
 		newAssetTagStats.setAssetCount(nextInt());
 
 		_persistence.update(newAssetTagStats, false);
@@ -211,7 +214,9 @@ public class AssetTagStatsPersistenceTest extends BasePersistenceTestCase {
 		AssetTagStats assetTagStats = _persistence.create(pk);
 
 		assetTagStats.setTagId(nextLong());
+
 		assetTagStats.setClassNameId(nextLong());
+
 		assetTagStats.setAssetCount(nextInt());
 
 		_persistence.update(assetTagStats, false);

@@ -106,6 +106,7 @@ public class PipingServletResponse extends HttpServletResponseWrapper {
 		}
 	}
 
+	@Override
 	public ServletOutputStream getOutputStream() {
 		if (_servletOutputStream == null) {
 			if (_log.isDebugEnabled()) {
@@ -122,6 +123,7 @@ public class PipingServletResponse extends HttpServletResponseWrapper {
 		return  _servletOutputStream;
 	}
 
+	@Override
 	public PrintWriter getWriter() {
 		if (_printWriter == null) {
 			if (_log.isDebugEnabled()) {

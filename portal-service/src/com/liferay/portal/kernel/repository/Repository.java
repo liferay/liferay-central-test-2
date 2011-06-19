@@ -43,6 +43,24 @@ public interface Repository {
 			ServiceContext serviceContext)
 		throws PortalException, SystemException;
 
+	public void cancelCheckOut(long fileEntryId)
+		throws PortalException, SystemException;
+
+	public void checkInFileEntry(
+			long fileEntryId, boolean major, String changeLog,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException;
+
+	public void checkInFileEntry(long fileEntryId, String lockUuid)
+		throws PortalException, SystemException;
+
+	public FileEntry checkOutFileEntry(long fileEntryId)
+		throws PortalException, SystemException;
+
+	public FileEntry checkOutFileEntry(
+			long fileEntryId, String owner, long expirationTime)
+		throws PortalException, SystemException;
+
 	public void copyFileEntry(
 			long groupId, long fileEntryId, long destFolderId,
 			ServiceContext serviceContext)
@@ -65,7 +83,7 @@ public interface Repository {
 		throws SystemException;
 
 	public List<FileEntry> getFileEntries(
-			long folderId, long documentTypeId, int start, int end,
+			long folderId, long fileEntryTypeId, int start, int end,
 			OrderByComparator obc)
 		throws SystemException;
 
@@ -79,7 +97,7 @@ public interface Repository {
 	public int getFileEntriesCount(long folderId)
 		throws SystemException;
 
-	public int getFileEntriesCount(long folderId, long documentTypeId)
+	public int getFileEntriesCount(long folderId, long fileEntryTypeId)
 		throws SystemException;
 
 	public FileEntry getFileEntry(long fileEntryId)
@@ -131,13 +149,6 @@ public interface Repository {
 	public List<Long> getSubfolderIds(long folderId, boolean recurse)
 		throws SystemException;
 
-	public void lockFileEntry(long fileEntryId)
-		throws PortalException, SystemException;
-
-	public Lock lockFileEntry(
-			long fileEntryId, String owner, long expirationTime)
-		throws PortalException, SystemException;
-
 	public Lock lockFolder(long folderId)
 		throws PortalException, SystemException;
 
@@ -165,12 +176,6 @@ public interface Repository {
 			long fileEntryId, String version, ServiceContext serviceContext)
 		throws PortalException, SystemException;
 
-	public void unlockFileEntry(long fileEntryId)
-		throws PortalException, SystemException;
-
-	public void unlockFileEntry(long fileEntryId, String lockUuid)
-		throws PortalException, SystemException;
-
 	public void unlockFolder(long folderId, String lockUuid)
 		throws PortalException, SystemException;
 
@@ -189,7 +194,7 @@ public interface Repository {
 			ServiceContext serviceContext)
 		throws PortalException, SystemException;
 
-	public boolean verifyFileEntryLock(long fileEntryId, String lockUuid)
+	public boolean verifyFileEntryCheckOut(long fileEntryId, String lockUuid)
 		throws PortalException, SystemException;
 
 	public boolean verifyInheritableLock(long folderId, String lockUuid)

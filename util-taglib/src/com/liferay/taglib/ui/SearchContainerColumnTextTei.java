@@ -25,6 +25,7 @@ import javax.servlet.jsp.tagext.VariableInfo;
  */
 public class SearchContainerColumnTextTei extends TagExtraInfo {
 
+	@Override
 	public VariableInfo[] getVariableInfo(TagData tagData) {
 		String buffer = tagData.getAttributeString("buffer");
 

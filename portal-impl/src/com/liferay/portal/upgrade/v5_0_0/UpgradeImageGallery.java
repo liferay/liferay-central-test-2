@@ -29,6 +29,7 @@ import com.liferay.portal.upgrade.v5_0_0.util.IGImageTable;
  */
 public class UpgradeImageGallery extends UpgradeProcess {
 
+	@Override
 	protected void doUpgrade() throws Exception {
 
 		// IGFolder

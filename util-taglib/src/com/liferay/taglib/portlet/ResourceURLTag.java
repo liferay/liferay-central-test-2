@@ -21,6 +21,7 @@ import javax.portlet.PortletRequest;
  */
 public class ResourceURLTag extends ActionURLTag {
 
+	@Override
 	public String getLifecycle() {
 		return PortletRequest.RESOURCE_PHASE;
 	}

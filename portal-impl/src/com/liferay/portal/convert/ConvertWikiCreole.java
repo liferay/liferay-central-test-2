@@ -28,10 +28,12 @@ import java.util.List;
  */
 public class ConvertWikiCreole extends ConvertProcess {
 
+	@Override
 	public String getDescription() {
 		return "convert-wiki-pages-from-classic-wiki-to-creole-format";
 	}
 
+	@Override
 	public boolean isEnabled() {
 		boolean enabled = false;
 
@@ -50,6 +52,7 @@ public class ConvertWikiCreole extends ConvertProcess {
 		return enabled;
 	}
 
+	@Override
 	protected void doConvert() throws Exception {
 		List<WikiPage> pages = WikiPageLocalServiceUtil.getPages(
 			"classic_wiki");

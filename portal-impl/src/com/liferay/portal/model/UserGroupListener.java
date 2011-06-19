@@ -23,6 +23,7 @@ import com.liferay.portal.security.ldap.PortalLDAPExporterUtil;
  */
 public class UserGroupListener extends BaseModelListener<UserGroup> {
 
+	@Override
 	public void onAfterAddAssociation(
 			Object userGroupId, String associationClassName,
 			Object associationClassPK)

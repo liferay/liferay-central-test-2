@@ -104,6 +104,7 @@ public class CustomAttributes {
 		_sb.setIndex(0);
 	}
 
+	@Override
 	public String toString() {
 		return _sb.toString();
 	}

@@ -48,6 +48,7 @@ public class AssetCategoriesSelectorTag extends IncludeTag {
 		_hiddenInput = hiddenInput;
 	}
 
+	@Override
 	protected void cleanUp() {
 		_className = null;
 		_classPK = 0;
@@ -57,10 +58,12 @@ public class AssetCategoriesSelectorTag extends IncludeTag {
 		_hiddenInput = "assetCategoryIds";
 	}
 
+	@Override
 	protected String getPage() {
 		return _PAGE;
 	}
 
+	@Override
 	protected void setAttributes(HttpServletRequest request) {
 		request.setAttribute(
 			"liferay-ui:asset-categories-selector:className", _className);

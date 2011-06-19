@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.messaging.proxy.ProxyMessageListener;
 public class DeviceRecognitionProviderDestinationEventListener
 	extends BaseDestinationEventListener {
 
+	@Override
 	public void messageListenerRegistered(
 		String destinationName, MessageListener messageListener) {
 
@@ -39,6 +40,7 @@ public class DeviceRecognitionProviderDestinationEventListener
 			_proxyMessageListener);
 	}
 
+	@Override
 	public void messageListenerUnregistered(
 		String destinationName, MessageListener messageListener) {
 

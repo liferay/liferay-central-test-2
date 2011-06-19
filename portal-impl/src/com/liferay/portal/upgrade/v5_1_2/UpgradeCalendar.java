@@ -27,6 +27,7 @@ import com.liferay.portal.upgrade.v5_1_2.util.CalEventTable;
  */
 public class UpgradeCalendar extends UpgradeProcess {
 
+	@Override
 	protected void doUpgrade() throws Exception {
 		UpgradeColumn recurrenceColumn =
 			new CalEventRecurrenceUpgradeColumnImpl("recurrence");

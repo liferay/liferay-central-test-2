@@ -56,6 +56,7 @@ public class ToggleValueTag extends TagSupport {
 		jspWriter.write(value);
 	}
 
+	@Override
 	public int doEndTag() throws JspException {
 		try {
 			doTag(_id, _defaultValue, pageContext);
@@ -71,6 +72,7 @@ public class ToggleValueTag extends TagSupport {
 		_defaultValue = defaultValue;
 	}
 
+	@Override
 	public void setId(String id) {
 		_id = id;
 	}

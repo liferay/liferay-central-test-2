@@ -225,6 +225,7 @@ public class UpgradePermission extends UpgradeProcess {
 		}
 	}
 
+	@Override
 	protected void doUpgrade() throws Exception {
 		runSQL("delete from OrgGroupPermission");
 

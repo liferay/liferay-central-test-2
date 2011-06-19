@@ -24,6 +24,7 @@ import com.liferay.portal.upgrade.v6_1_0.util.LockTable;
  */
 public class UpgradeLock extends UpgradeProcess {
 
+	@Override
 	protected void doUpgrade() throws Exception {
 		try {
 			runSQL("alter_column_type Lock_ owner VARCHAR(300) null");

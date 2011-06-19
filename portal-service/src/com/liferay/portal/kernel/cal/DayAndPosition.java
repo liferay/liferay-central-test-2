@@ -141,6 +141,7 @@ public class DayAndPosition implements Cloneable, Serializable {
 	 *
 	 * @return boolean
 	 */
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -160,6 +161,7 @@ public class DayAndPosition implements Cloneable, Serializable {
 			   && (getDayPosition() == that.getDayPosition());
 	}
 
+	@Override
 	public int hashCode() {
 		HashCode hashCode = HashCodeFactoryUtil.getHashCode();
 
@@ -206,6 +208,7 @@ public class DayAndPosition implements Cloneable, Serializable {
 	 *
 	 * @return Object
 	 */
+	@Override
 	public Object clone() {
 		try {
 			DayAndPosition other = (DayAndPosition)super.clone();
@@ -225,6 +228,7 @@ public class DayAndPosition implements Cloneable, Serializable {
 	 *
 	 * @return String
 	 */
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(6);
 

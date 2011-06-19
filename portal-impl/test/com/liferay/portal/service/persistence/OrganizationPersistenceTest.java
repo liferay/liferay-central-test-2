@@ -32,6 +32,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class OrganizationPersistenceTest extends BasePersistenceTestCase {
+	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -68,14 +69,23 @@ public class OrganizationPersistenceTest extends BasePersistenceTestCase {
 		Organization newOrganization = _persistence.create(pk);
 
 		newOrganization.setCompanyId(nextLong());
+
 		newOrganization.setLeftOrganizationId(nextLong());
+
 		newOrganization.setRightOrganizationId(nextLong());
+
 		newOrganization.setName(randomString());
+
 		newOrganization.setType(randomString());
+
 		newOrganization.setRecursable(randomBoolean());
+
 		newOrganization.setRegionId(nextLong());
+
 		newOrganization.setCountryId(nextLong());
+
 		newOrganization.setStatusId(nextInt());
+
 		newOrganization.setComments(randomString());
 
 		_persistence.update(newOrganization, false);
@@ -234,14 +244,23 @@ public class OrganizationPersistenceTest extends BasePersistenceTestCase {
 		Organization organization = _persistence.create(pk);
 
 		organization.setCompanyId(nextLong());
+
 		organization.setLeftOrganizationId(nextLong());
+
 		organization.setRightOrganizationId(nextLong());
+
 		organization.setName(randomString());
+
 		organization.setType(randomString());
+
 		organization.setRecursable(randomBoolean());
+
 		organization.setRegionId(nextLong());
+
 		organization.setCountryId(nextLong());
+
 		organization.setStatusId(nextInt());
+
 		organization.setComments(randomString());
 
 		_persistence.update(organization, false);

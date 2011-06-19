@@ -27,6 +27,7 @@ public class MBMessageIdMapper extends ValueMapperWrapper {
 		super(valueMapper);
 	}
 
+	@Override
 	public Object getNewValue(Object oldValue) throws Exception {
 		PKParser pkParser = new PKParser((String)oldValue);
 

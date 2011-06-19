@@ -149,6 +149,7 @@ public class ExpandoRowModelImpl extends BaseModelImpl<ExpandoRow>
 		return _originalClassPK;
 	}
 
+	@Override
 	public ExpandoRow toEscapedModel() {
 		if (isEscapedModel()) {
 			return (ExpandoRow)this;
@@ -159,6 +160,7 @@ public class ExpandoRowModelImpl extends BaseModelImpl<ExpandoRow>
 		}
 	}
 
+	@Override
 	public Object clone() {
 		ExpandoRowImpl expandoRowImpl = new ExpandoRowImpl();
 
@@ -186,6 +188,7 @@ public class ExpandoRowModelImpl extends BaseModelImpl<ExpandoRow>
 		}
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -210,10 +213,12 @@ public class ExpandoRowModelImpl extends BaseModelImpl<ExpandoRow>
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		ExpandoRowModelImpl expandoRowModelImpl = this;
 
@@ -226,6 +231,7 @@ public class ExpandoRowModelImpl extends BaseModelImpl<ExpandoRow>
 		expandoRowModelImpl._setOriginalClassPK = false;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(9);
 

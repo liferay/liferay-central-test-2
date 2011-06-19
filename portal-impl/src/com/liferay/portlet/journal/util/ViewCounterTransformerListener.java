@@ -28,6 +28,7 @@ import java.util.Map;
  */
 public class ViewCounterTransformerListener extends BaseTransformerListener {
 
+	@Override
 	public String onOutput(String s) {
 		if (_log.isDebugEnabled()) {
 			_log.debug("onOutput");
@@ -36,6 +37,7 @@ public class ViewCounterTransformerListener extends BaseTransformerListener {
 		return replace(s);
 	}
 
+	@Override
 	public String onScript(String s) {
 		if (_log.isDebugEnabled()) {
 			_log.debug("onScript");
@@ -44,6 +46,7 @@ public class ViewCounterTransformerListener extends BaseTransformerListener {
 		return s;
 	}
 
+	@Override
 	public String onXml(String s) {
 		if (_log.isDebugEnabled()) {
 			_log.debug("onXml");

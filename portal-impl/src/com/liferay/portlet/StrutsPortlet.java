@@ -45,6 +45,7 @@ import javax.servlet.ServletException;
  */
 public class StrutsPortlet extends LiferayPortlet {
 
+	@Override
 	public void doAbout(
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
@@ -54,6 +55,7 @@ public class StrutsPortlet extends LiferayPortlet {
 		include(renderRequest, renderResponse);
 	}
 
+	@Override
 	public void doConfig(
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
@@ -63,6 +65,7 @@ public class StrutsPortlet extends LiferayPortlet {
 		include(renderRequest, renderResponse);
 	}
 
+	@Override
 	public void doEdit(
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
@@ -78,6 +81,7 @@ public class StrutsPortlet extends LiferayPortlet {
 		}
 	}
 
+	@Override
 	public void doEditDefaults(
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
@@ -93,6 +97,7 @@ public class StrutsPortlet extends LiferayPortlet {
 		}
 	}
 
+	@Override
 	public void doEditGuest(
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
@@ -108,6 +113,7 @@ public class StrutsPortlet extends LiferayPortlet {
 		}
 	}
 
+	@Override
 	public void doHelp(
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
@@ -117,6 +123,7 @@ public class StrutsPortlet extends LiferayPortlet {
 		include(renderRequest, renderResponse);
 	}
 
+	@Override
 	public void doPreview(
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
@@ -127,6 +134,7 @@ public class StrutsPortlet extends LiferayPortlet {
 		include(renderRequest, renderResponse);
 	}
 
+	@Override
 	public void doPrint(
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
@@ -136,6 +144,7 @@ public class StrutsPortlet extends LiferayPortlet {
 		include(renderRequest, renderResponse);
 	}
 
+	@Override
 	public void doView(
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
@@ -145,6 +154,7 @@ public class StrutsPortlet extends LiferayPortlet {
 		include(renderRequest, renderResponse);
 	}
 
+	@Override
 	public void init(PortletConfig portletConfig) throws PortletException {
 		super.init(portletConfig);
 
@@ -164,6 +174,7 @@ public class StrutsPortlet extends LiferayPortlet {
 		_portletConfig = (PortletConfigImpl)portletConfig;
 	}
 
+	@Override
 	public void processAction(
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws IOException, PortletException {
@@ -198,6 +209,7 @@ public class StrutsPortlet extends LiferayPortlet {
 		}
 	}
 
+	@Override
 	public void serveResource(
 			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
 		throws IOException, PortletException {

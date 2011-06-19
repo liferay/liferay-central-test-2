@@ -78,6 +78,7 @@ public class CronText {
 	public void setStartDate(Calendar startDate) {
 		_startDate = startDate;
 	}
+	@Override
 	public String toString() {
 		String second = String.valueOf(_startDate.get(Calendar.SECOND));
 		String minute = String.valueOf(_startDate.get(Calendar.MINUTE));

@@ -49,6 +49,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class LanguageFilter extends BasePortalFilter {
 
+	@Override
 	public void init(FilterConfig filterConfig) {
 		super.init(filterConfig);
 
@@ -71,6 +72,7 @@ public class LanguageFilter extends BasePortalFilter {
 			portlets.get(0), filterConfig.getServletContext());
 	}
 
+	@Override
 	protected void processFilter(
 			HttpServletRequest request, HttpServletResponse response,
 			FilterChain filterChain)

@@ -32,6 +32,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class GroupPersistenceTest extends BasePersistenceTestCase {
+	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -68,17 +69,29 @@ public class GroupPersistenceTest extends BasePersistenceTestCase {
 		Group newGroup = _persistence.create(pk);
 
 		newGroup.setCompanyId(nextLong());
+
 		newGroup.setCreatorUserId(nextLong());
+
 		newGroup.setClassNameId(nextLong());
+
 		newGroup.setClassPK(nextLong());
+
 		newGroup.setParentGroupId(nextLong());
+
 		newGroup.setLiveGroupId(nextLong());
+
 		newGroup.setName(randomString());
+
 		newGroup.setDescription(randomString());
+
 		newGroup.setType(nextInt());
+
 		newGroup.setTypeSettings(randomString());
+
 		newGroup.setFriendlyURL(randomString());
+
 		newGroup.setSite(randomBoolean());
+
 		newGroup.setActive(randomBoolean());
 
 		_persistence.update(newGroup, false);
@@ -260,17 +273,29 @@ public class GroupPersistenceTest extends BasePersistenceTestCase {
 		Group group = _persistence.create(pk);
 
 		group.setCompanyId(nextLong());
+
 		group.setCreatorUserId(nextLong());
+
 		group.setClassNameId(nextLong());
+
 		group.setClassPK(nextLong());
+
 		group.setParentGroupId(nextLong());
+
 		group.setLiveGroupId(nextLong());
+
 		group.setName(randomString());
+
 		group.setDescription(randomString());
+
 		group.setType(nextInt());
+
 		group.setTypeSettings(randomString());
+
 		group.setFriendlyURL(randomString());
+
 		group.setSite(randomBoolean());
+
 		group.setActive(randomBoolean());
 
 		_persistence.update(group, false);

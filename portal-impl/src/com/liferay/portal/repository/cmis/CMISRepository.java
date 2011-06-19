@@ -14,7 +14,6 @@
 
 package com.liferay.portal.repository.cmis;
 
-import com.liferay.documentlibrary.DuplicateFileException;
 import com.liferay.portal.NoSuchRepositoryEntryException;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -44,6 +43,7 @@ import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.persistence.RepositoryEntryUtil;
 import com.liferay.portal.util.PropsValues;
+import com.liferay.portlet.documentlibrary.DuplicateFileException;
 import com.liferay.portlet.documentlibrary.DuplicateFolderNameException;
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.NoSuchFileVersionException;
@@ -181,6 +181,87 @@ public class CMISRepository extends BaseCmisRepository {
 		}
 	}
 
+	public void cancelCheckOut(long fileEntryId) {
+		try {
+			Session session = getSession();
+
+			String versionSeriesId = toFileEntryId(fileEntryId);
+
+			Document document = (Document)session.getObject(versionSeriesId);
+
+			document = document.getObjectOfLatestVersion(false);
+
+			document.cancelCheckOut();
+
+			document = (Document)session.getObject(versionSeriesId);
+
+			document.refresh();
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+	}
+
+	public void checkInFileEntry(long fileEntryId, String lockUuid) {
+		checkInFileEntry(
+			fileEntryId, false, StringPool.BLANK, new ServiceContext());
+	}
+
+	public void checkInFileEntry(
+		long fileEntryId, boolean major, String changeLog,
+		ServiceContext serviceContext) {
+
+		try {
+			Session session = getSession();
+
+			String versionSeriesId = toFileEntryId(fileEntryId);
+
+			Document document = (Document)session.getObject(versionSeriesId);
+
+			document = document.getObjectOfLatestVersion(false);
+
+			document.checkIn(major, null, null, changeLog);
+
+			document = (Document)session.getObject(versionSeriesId);
+
+			document.refresh();
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+	}
+
+	public FileEntry checkOutFileEntry(long fileEntryId)
+		throws PortalException, SystemException {
+
+		try {
+			Session session = getSession();
+
+			String versionSeriesId = toFileEntryId(fileEntryId);
+
+			Document document = (Document)session.getObject(versionSeriesId);
+
+			document.refresh();
+
+			document.checkOut();
+
+			document = (Document)session.getObject(versionSeriesId);
+
+			document.refresh();
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+
+		return getFileEntry(fileEntryId);
+	}
+
+	public FileEntry checkOutFileEntry(
+		long fileEntryId, String owner, long expirationTime) {
+
+		throw new UnsupportedOperationException();
+	}
+
 	public void copyFileEntry(
 			long groupId, long fileEntryId, long destFolderId,
 			ServiceContext serviceContext)
@@ -293,7 +374,7 @@ public class CMISRepository extends BaseCmisRepository {
 	}
 
 	public List<FileEntry> getFileEntries(
-		long folderId, long documentTypeId, int start, int end,
+		long folderId, long fileEntryTypeId, int start, int end,
 		OrderByComparator obc) {
 
 		return new ArrayList<FileEntry>();
@@ -305,8 +386,8 @@ public class CMISRepository extends BaseCmisRepository {
 		return fileEntries.size();
 	}
 
-	public int getFileEntriesCount(long folderId, long documentTypeId) {
-		List<FileEntry> fileEntries = getFileEntries(folderId, documentTypeId);
+	public int getFileEntriesCount(long folderId, long fileEntryTypeId) {
+		List<FileEntry> fileEntries = getFileEntries(folderId, fileEntryTypeId);
 
 		return fileEntries.size();
 	}
@@ -492,6 +573,7 @@ public class CMISRepository extends BaseCmisRepository {
 		}
 	}
 
+	@Override
 	public List<Object> getFoldersAndFileEntries(
 			long folderId, int start, int end, OrderByComparator obc)
 		throws SystemException {
@@ -522,6 +604,7 @@ public class CMISRepository extends BaseCmisRepository {
 		}
 	}
 
+	@Override
 	public int getFoldersAndFileEntriesCount(long folderId)
 		throws SystemException {
 
@@ -550,6 +633,7 @@ public class CMISRepository extends BaseCmisRepository {
 		return count;
 	}
 
+	@Override
 	public String getLatestVersionId(String objectId) throws SystemException {
 		try {
 			Session session = getSession();
@@ -567,6 +651,7 @@ public class CMISRepository extends BaseCmisRepository {
 		}
 	}
 
+	@Override
 	public String getObjectName(String objectId)
 		throws PortalException, SystemException {
 
@@ -577,6 +662,7 @@ public class CMISRepository extends BaseCmisRepository {
 		return cmisObject.getName();
 	}
 
+	@Override
 	public List<String> getObjectPaths(String objectId)
 		throws PortalException, SystemException {
 
@@ -641,6 +727,7 @@ public class CMISRepository extends BaseCmisRepository {
 		return _cmisRepositoryHandler.getSupportedParameters();
 	}
 
+	@Override
 	public void initRepository() throws PortalException, SystemException {
 		try {
 			_sessionKey =
@@ -666,18 +753,21 @@ public class CMISRepository extends BaseCmisRepository {
 		}
 	}
 
+	@Override
 	public boolean isCancelCheckOutAllowable(String objectId)
 		throws PortalException, SystemException {
 
 		return isActionAllowable(objectId, Action.CAN_CANCEL_CHECK_OUT);
 	}
 
+	@Override
 	public boolean isCheckInAllowable(String objectId)
 		throws PortalException, SystemException {
 
 		return isActionAllowable(objectId, Action.CAN_CHECK_IN);
 	}
 
+	@Override
 	public boolean isCheckOutAllowable(String objectId)
 		throws PortalException, SystemException {
 
@@ -690,33 +780,6 @@ public class CMISRepository extends BaseCmisRepository {
 
 	public boolean isRefreshBeforePermissionCheck() {
 		return _cmisRepositoryHandler.isRefreshBeforePermissionCheck();
-	}
-
-	public void lockFileEntry(long fileEntryId) {
-		try {
-			Session session = getSession();
-
-			String versionSeriesId = toFileEntryId(fileEntryId);
-
-			Document document = (Document)session.getObject(versionSeriesId);
-
-			document.refresh();
-
-			document.checkOut();
-
-			document = (Document)session.getObject(versionSeriesId);
-
-			document.refresh();
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
-	}
-
-	public Lock lockFileEntry(
-		long fileEntryId, String owner, long expirationTime) {
-
-		throw new UnsupportedOperationException();
 	}
 
 	public Lock lockFolder(long folderId) {
@@ -908,6 +971,7 @@ public class CMISRepository extends BaseCmisRepository {
 		return new CMISFileEntry(this, uuid, fileEntryId, document);
 	}
 
+	@Override
 	public FileEntry toFileEntry(String objectId)
 		throws PortalException, SystemException {
 
@@ -938,6 +1002,7 @@ public class CMISRepository extends BaseCmisRepository {
 		return new CMISFolder(this, uuid, folderId, cmisFolder);
 	}
 
+	@Override
 	public Folder toFolder(String objectId)
 		throws PortalException, SystemException {
 
@@ -948,31 +1013,6 @@ public class CMISRepository extends BaseCmisRepository {
 				objectId);
 
 		return toFolder(cmisFolder);
-	}
-
-	public void unlockFileEntry(long fileEntryId) {
-		try {
-			Session session = getSession();
-
-			String versionSeriesId = toFileEntryId(fileEntryId);
-
-			Document document = (Document)session.getObject(versionSeriesId);
-
-			document = document.getObjectOfLatestVersion(false);
-
-			document.checkIn(false, null, null, StringPool.BLANK);
-
-			document = (Document)session.getObject(versionSeriesId);
-
-			document.refresh();
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
-	}
-
-	public void unlockFileEntry(long fileEntryId, String lockUuid) {
-		unlockFileEntry(fileEntryId);
 	}
 
 	public void unlockFolder(long folderId, String lockUuid) {
@@ -1068,6 +1108,7 @@ public class CMISRepository extends BaseCmisRepository {
 		}
 	}
 
+	@Override
 	public FileEntry updateFileEntry(
 			String objectId, String mimeType, Map<String, Object> properties,
 			InputStream is, String sourceFileName, long size,
@@ -1166,7 +1207,7 @@ public class CMISRepository extends BaseCmisRepository {
 		}
 	}
 
-	public boolean verifyFileEntryLock(long fileEntryId, String lockUuid) {
+	public boolean verifyFileEntryCheckOut(long fileEntryId, String lockUuid) {
 		throw new UnsupportedOperationException();
 	}
 

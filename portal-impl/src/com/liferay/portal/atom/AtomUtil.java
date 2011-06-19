@@ -36,14 +36,20 @@ import org.apache.abdera.protocol.server.RequestContext;
 public class AtomUtil {
 
 	public static String createFeedTitleFromPortletName(
-			AtomRequestContext atomRequestContext, String portletId)
-		throws PortalException, SystemException {
+		AtomRequestContext atomRequestContext, String portletId) {
 
-		Company company = getCompany();
+		String portletTitle = null;
+
+		try {
+			Company company = getCompany();
+
+			portletTitle = company.getName();
+		}
+		catch (Exception e) {
+			return null;
+		}
 
 		User user = getUser(atomRequestContext);
-
-		String portletTitle = company.getName();
 
 		portletTitle = portletTitle.concat(StringPool.SPACE);
 

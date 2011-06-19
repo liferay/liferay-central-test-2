@@ -52,6 +52,7 @@ public class NavigationTag extends IncludeTag {
 		_rootLayoutType = rootLayoutType;
 	}
 
+	@Override
 	protected void cleanUp() {
 		_bulletStyle = "1";
 		_displayStyle = "1";
@@ -62,10 +63,12 @@ public class NavigationTag extends IncludeTag {
 		_rootLayoutType = "absolute";
 	}
 
+	@Override
 	protected String getPage() {
 		return _PAGE;
 	}
 
+	@Override
 	protected void setAttributes(HttpServletRequest request) {
 		request.setAttribute("liferay-ui:navigation:bulletStyle", _bulletStyle);
 		request.setAttribute(

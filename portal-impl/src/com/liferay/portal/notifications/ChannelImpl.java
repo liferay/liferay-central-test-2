@@ -280,6 +280,7 @@ public class ChannelImpl extends BaseChannelImpl {
 		notifyChannelListeners();
 	}
 
+	@Override
 	protected void doCleanUp() throws Exception {
 		_reentrantLock.lock();
 

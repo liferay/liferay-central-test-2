@@ -45,6 +45,7 @@ public class VelocityPortletPreferences {
 		_portletPreferencesImpl.setValues(key, values);
 	}
 
+	@Override
 	public String toString() {
 		try {
 			return PortletPreferencesFactoryUtil.toXML(_portletPreferencesImpl);

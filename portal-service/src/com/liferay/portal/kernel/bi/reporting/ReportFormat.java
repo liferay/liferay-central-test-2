@@ -52,6 +52,7 @@ public enum ReportFormat {
 		return _value;
 	}
 
+	@Override
 	public String toString() {
 		return _value;
 	}

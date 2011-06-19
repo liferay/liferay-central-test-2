@@ -30,6 +30,7 @@ public class JournalArticleCustomAttributesDisplay
 		return CLASS_NAME;
 	}
 
+	@Override
 	public String getIconPath(ThemeDisplay themeDisplay) {
 		return themeDisplay.getPathThemeImages() + "/common/history.png";
 	}

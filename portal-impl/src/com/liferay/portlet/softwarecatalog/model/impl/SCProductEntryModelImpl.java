@@ -391,6 +391,7 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry>
 		return GetterUtil.getString(_originalRepoArtifactId);
 	}
 
+	@Override
 	public SCProductEntry toEscapedModel() {
 		if (isEscapedModel()) {
 			return (SCProductEntry)this;
@@ -401,6 +402,7 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry>
 		}
 	}
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
@@ -410,10 +412,12 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry>
 		return _expandoBridge;
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		getExpandoBridge().setAttributes(serviceContext);
 	}
 
+	@Override
 	public Object clone() {
 		SCProductEntryImpl scProductEntryImpl = new SCProductEntryImpl();
 
@@ -462,6 +466,7 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry>
 		return 0;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -486,10 +491,12 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry>
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		SCProductEntryModelImpl scProductEntryModelImpl = this;
 
@@ -498,6 +505,7 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry>
 		scProductEntryModelImpl._originalRepoArtifactId = scProductEntryModelImpl._repoArtifactId;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(33);
 

@@ -132,6 +132,7 @@ public class UpgradeAdminPortlets extends UpgradeProcess {
 		}
 	}
 
+	@Override
 	protected void doUpgrade() throws Exception {
 		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 5) {
 			updateAccessInControlPanelPermission_5(

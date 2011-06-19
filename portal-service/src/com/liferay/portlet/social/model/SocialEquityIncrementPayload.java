@@ -22,6 +22,7 @@ import com.liferay.portlet.asset.model.AssetEntry;
  */
 public class SocialEquityIncrementPayload {
 
+	@Override
 	public SocialEquityIncrementPayload clone() {
 		SocialEquityIncrementPayload socialEquityIncrementPayload =
 			new SocialEquityIncrementPayload();

@@ -78,17 +78,17 @@ public class WorkflowInstanceLinkLocalServiceImpl
 			long companyId, long groupId, String className, long classPK)
 		throws PortalException, SystemException {
 
-		try {
-			WorkflowInstanceLink workflowInstanceLink = getWorkflowInstanceLink(
-				companyId, groupId, className, classPK);
+		WorkflowInstanceLink workflowInstanceLink = fetchWorkflowInstanceLink(
+			companyId, groupId, className, classPK);
 
-			deleteWorkflowInstanceLink(workflowInstanceLink);
+		if (workflowInstanceLink == null) {
+			return;
+		}
 
-			WorkflowInstanceManagerUtil.deleteWorkflowInstance(
-				companyId, workflowInstanceLink.getWorkflowInstanceId());
-		}
-		catch (NoSuchWorkflowInstanceLinkException nswile) {
-		}
+		deleteWorkflowInstanceLink(workflowInstanceLink);
+
+		WorkflowInstanceManagerUtil.deleteWorkflowInstance(
+			companyId, workflowInstanceLink.getWorkflowInstanceId());
 	}
 
 	public void deleteWorkflowInstanceLinks(
@@ -105,6 +105,21 @@ public class WorkflowInstanceLinkLocalServiceImpl
 
 			WorkflowInstanceManagerUtil.deleteWorkflowInstance(
 				companyId, workflowInstanceLink.getWorkflowInstanceId());
+		}
+	}
+
+	public WorkflowInstanceLink fetchWorkflowInstanceLink(
+			long companyId, long groupId, String className, long classPK)
+		throws SystemException {
+
+		List<WorkflowInstanceLink> workflowInstanceLinks =
+			getWorkflowInstanceLinks(companyId, groupId, className, classPK);
+
+		if (!workflowInstanceLinks.isEmpty()) {
+			return workflowInstanceLinks.get(0);
+		}
+		else {
+			return null;
 		}
 	}
 
@@ -149,35 +164,35 @@ public class WorkflowInstanceLinkLocalServiceImpl
 
 	public boolean hasWorkflowInstanceLink(
 			long companyId, long groupId, String className, long classPK)
-		throws PortalException, SystemException {
+		throws SystemException {
 
-		try {
-			getWorkflowInstanceLink(companyId, groupId, className, classPK);
+		WorkflowInstanceLink workflowInstanceLink = fetchWorkflowInstanceLink(
+			companyId, groupId, className, classPK);
 
+		if (workflowInstanceLink != null) {
 			return true;
 		}
-		catch (NoSuchWorkflowInstanceLinkException nswile) {
-			return false;
-		}
+
+		return false;
 	}
 
 	public boolean isEnded(
 			long companyId, long groupId, String className, long classPK)
 		throws PortalException, SystemException {
 
-		try {
-			WorkflowInstanceLink workflowInstanceLink = getWorkflowInstanceLink(
-				companyId, groupId, className, classPK);
+		WorkflowInstanceLink workflowInstanceLink = fetchWorkflowInstanceLink(
+			companyId, groupId, className, classPK);
 
-			WorkflowInstance workflowInstance =
-				WorkflowInstanceManagerUtil.getWorkflowInstance(
-					companyId, workflowInstanceLink.getWorkflowInstanceId());
-
-			if (workflowInstance.getEndDate() != null) {
-				return true;
-			}
+		if (workflowInstanceLink == null) {
+			return false;
 		}
-		catch (NoSuchWorkflowInstanceLinkException nswile) {
+
+		WorkflowInstance workflowInstance =
+			WorkflowInstanceManagerUtil.getWorkflowInstance(
+				companyId, workflowInstanceLink.getWorkflowInstanceId());
+
+		if (workflowInstance.getEndDate() != null) {
+			return true;
 		}
 
 		return false;

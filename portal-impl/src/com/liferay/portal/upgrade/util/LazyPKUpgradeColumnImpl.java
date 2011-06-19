@@ -30,6 +30,7 @@ public class LazyPKUpgradeColumnImpl extends PKUpgradeColumnImpl {
 		super(name, oldColumnType, true);
 	}
 
+	@Override
 	public Object getNewValue(Object oldValue) throws Exception {
 		ValueMapper valueMapper = getValueMapper();
 

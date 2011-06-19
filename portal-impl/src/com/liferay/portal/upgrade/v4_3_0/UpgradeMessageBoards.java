@@ -48,6 +48,7 @@ import java.util.Map;
  */
 public class UpgradeMessageBoards extends UpgradeProcess {
 
+	@Override
 	protected void doUpgrade() throws Exception {
 
 		// MBCategory

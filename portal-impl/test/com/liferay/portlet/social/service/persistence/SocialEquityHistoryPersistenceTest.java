@@ -31,6 +31,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class SocialEquityHistoryPersistenceTest extends BasePersistenceTestCase {
+	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -67,9 +68,13 @@ public class SocialEquityHistoryPersistenceTest extends BasePersistenceTestCase 
 		SocialEquityHistory newSocialEquityHistory = _persistence.create(pk);
 
 		newSocialEquityHistory.setGroupId(nextLong());
+
 		newSocialEquityHistory.setCompanyId(nextLong());
+
 		newSocialEquityHistory.setUserId(nextLong());
+
 		newSocialEquityHistory.setCreateDate(nextDate());
+
 		newSocialEquityHistory.setPersonalEquity(nextInt());
 
 		_persistence.update(newSocialEquityHistory, false);
@@ -204,9 +209,13 @@ public class SocialEquityHistoryPersistenceTest extends BasePersistenceTestCase 
 		SocialEquityHistory socialEquityHistory = _persistence.create(pk);
 
 		socialEquityHistory.setGroupId(nextLong());
+
 		socialEquityHistory.setCompanyId(nextLong());
+
 		socialEquityHistory.setUserId(nextLong());
+
 		socialEquityHistory.setCreateDate(nextDate());
+
 		socialEquityHistory.setPersonalEquity(nextInt());
 
 		_persistence.update(socialEquityHistory, false);

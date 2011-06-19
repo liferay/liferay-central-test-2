@@ -28,6 +28,7 @@ public class GenericServletInputStream extends ServletInputStream {
 		_inputStream = inputStream;
 	}
 
+	@Override
 	public int read() throws IOException {
 		return _inputStream.read();
 	}

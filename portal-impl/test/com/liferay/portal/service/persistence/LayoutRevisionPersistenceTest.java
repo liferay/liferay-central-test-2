@@ -32,6 +32,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class LayoutRevisionPersistenceTest extends BasePersistenceTestCase {
+	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -68,34 +69,63 @@ public class LayoutRevisionPersistenceTest extends BasePersistenceTestCase {
 		LayoutRevision newLayoutRevision = _persistence.create(pk);
 
 		newLayoutRevision.setGroupId(nextLong());
+
 		newLayoutRevision.setCompanyId(nextLong());
+
 		newLayoutRevision.setUserId(nextLong());
+
 		newLayoutRevision.setUserName(randomString());
+
 		newLayoutRevision.setCreateDate(nextDate());
+
 		newLayoutRevision.setModifiedDate(nextDate());
+
 		newLayoutRevision.setLayoutSetBranchId(nextLong());
+
 		newLayoutRevision.setParentLayoutRevisionId(nextLong());
+
 		newLayoutRevision.setHead(randomBoolean());
+
 		newLayoutRevision.setMajor(randomBoolean());
+
 		newLayoutRevision.setVariationName(randomString());
+
 		newLayoutRevision.setPlid(nextLong());
+
 		newLayoutRevision.setPrivateLayout(randomBoolean());
+
 		newLayoutRevision.setName(randomString());
+
 		newLayoutRevision.setTitle(randomString());
+
 		newLayoutRevision.setDescription(randomString());
+
 		newLayoutRevision.setKeywords(randomString());
+
 		newLayoutRevision.setRobots(randomString());
+
 		newLayoutRevision.setTypeSettings(randomString());
+
 		newLayoutRevision.setIconImage(randomBoolean());
+
 		newLayoutRevision.setIconImageId(nextLong());
+
 		newLayoutRevision.setThemeId(randomString());
+
 		newLayoutRevision.setColorSchemeId(randomString());
+
 		newLayoutRevision.setWapThemeId(randomString());
+
 		newLayoutRevision.setWapColorSchemeId(randomString());
+
 		newLayoutRevision.setCss(randomString());
+
 		newLayoutRevision.setStatus(nextInt());
+
 		newLayoutRevision.setStatusByUserId(nextLong());
+
 		newLayoutRevision.setStatusByUserName(randomString());
+
 		newLayoutRevision.setStatusDate(nextDate());
 
 		_persistence.update(newLayoutRevision, false);
@@ -299,34 +329,63 @@ public class LayoutRevisionPersistenceTest extends BasePersistenceTestCase {
 		LayoutRevision layoutRevision = _persistence.create(pk);
 
 		layoutRevision.setGroupId(nextLong());
+
 		layoutRevision.setCompanyId(nextLong());
+
 		layoutRevision.setUserId(nextLong());
+
 		layoutRevision.setUserName(randomString());
+
 		layoutRevision.setCreateDate(nextDate());
+
 		layoutRevision.setModifiedDate(nextDate());
+
 		layoutRevision.setLayoutSetBranchId(nextLong());
+
 		layoutRevision.setParentLayoutRevisionId(nextLong());
+
 		layoutRevision.setHead(randomBoolean());
+
 		layoutRevision.setMajor(randomBoolean());
+
 		layoutRevision.setVariationName(randomString());
+
 		layoutRevision.setPlid(nextLong());
+
 		layoutRevision.setPrivateLayout(randomBoolean());
+
 		layoutRevision.setName(randomString());
+
 		layoutRevision.setTitle(randomString());
+
 		layoutRevision.setDescription(randomString());
+
 		layoutRevision.setKeywords(randomString());
+
 		layoutRevision.setRobots(randomString());
+
 		layoutRevision.setTypeSettings(randomString());
+
 		layoutRevision.setIconImage(randomBoolean());
+
 		layoutRevision.setIconImageId(nextLong());
+
 		layoutRevision.setThemeId(randomString());
+
 		layoutRevision.setColorSchemeId(randomString());
+
 		layoutRevision.setWapThemeId(randomString());
+
 		layoutRevision.setWapColorSchemeId(randomString());
+
 		layoutRevision.setCss(randomString());
+
 		layoutRevision.setStatus(nextInt());
+
 		layoutRevision.setStatusByUserId(nextLong());
+
 		layoutRevision.setStatusByUserName(randomString());
+
 		layoutRevision.setStatusDate(nextDate());
 
 		_persistence.update(layoutRevision, false);

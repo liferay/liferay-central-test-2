@@ -27,6 +27,7 @@ import java.sql.ResultSet;
  */
 public class UpgradeVirtualHost extends UpgradeProcess {
 
+	@Override
 	protected void doUpgrade() throws Exception {
 		updateCompany();
 		updateLayoutSet();

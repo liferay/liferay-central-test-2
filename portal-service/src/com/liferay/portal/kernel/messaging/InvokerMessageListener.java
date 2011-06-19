@@ -32,6 +32,7 @@ public class InvokerMessageListener implements MessageListener {
 		_classLoader = classLoader;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		InvokerMessageListener messageListenerInvoker =
 			(InvokerMessageListener)obj;
@@ -48,6 +49,7 @@ public class InvokerMessageListener implements MessageListener {
 		return _messageListener;
 	}
 
+	@Override
 	public int hashCode() {
 		return _messageListener.hashCode();
 	}

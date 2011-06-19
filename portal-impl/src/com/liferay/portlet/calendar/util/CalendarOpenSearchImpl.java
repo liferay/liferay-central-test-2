@@ -28,18 +28,22 @@ public class CalendarOpenSearchImpl extends HitsOpenSearchImpl {
 
 	public static final String TITLE = "Liferay Calendar Search: ";
 
+	@Override
 	public Indexer getIndexer() {
 		return IndexerRegistryUtil.getIndexer(CalEvent.class);
 	}
 
+	@Override
 	public String getPortletId() {
 		return CalIndexer.PORTLET_ID;
 	}
 
+	@Override
 	public String getSearchPath() {
 		return SEARCH_PATH;
 	}
 
+	@Override
 	public String getTitle(String keywords) {
 		return TITLE + keywords;
 	}

@@ -260,6 +260,7 @@ public class UserNotificationEventWrapper implements UserNotificationEvent {
 		_userNotificationEvent.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new UserNotificationEventWrapper((UserNotificationEvent)_userNotificationEvent.clone());
 	}
@@ -269,6 +270,7 @@ public class UserNotificationEventWrapper implements UserNotificationEvent {
 		return _userNotificationEvent.compareTo(userNotificationEvent);
 	}
 
+	@Override
 	public int hashCode() {
 		return _userNotificationEvent.hashCode();
 	}
@@ -277,6 +279,7 @@ public class UserNotificationEventWrapper implements UserNotificationEvent {
 		return new UserNotificationEventWrapper(_userNotificationEvent.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _userNotificationEvent.toString();
 	}

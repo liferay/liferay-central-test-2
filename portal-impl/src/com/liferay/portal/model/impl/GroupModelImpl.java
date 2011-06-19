@@ -423,6 +423,7 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 		_active = active;
 	}
 
+	@Override
 	public Group toEscapedModel() {
 		if (isEscapedModel()) {
 			return (Group)this;
@@ -433,6 +434,7 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 		}
 	}
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
@@ -442,10 +444,12 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 		return _expandoBridge;
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		getExpandoBridge().setAttributes(serviceContext);
 	}
 
+	@Override
 	public Object clone() {
 		GroupImpl groupImpl = new GroupImpl();
 
@@ -481,6 +485,7 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 		return 0;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -505,10 +510,12 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		GroupModelImpl groupModelImpl = this;
 
@@ -533,6 +540,7 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 		groupModelImpl._originalFriendlyURL = groupModelImpl._friendlyURL;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(29);
 

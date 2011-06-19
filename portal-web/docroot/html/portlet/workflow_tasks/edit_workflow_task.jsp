@@ -62,7 +62,20 @@ if (assetRendererFactory != null) {
 
 if (assetEntry != null) {
 	viewFullContentURL.setParameter("assetEntryId", String.valueOf(assetEntry.getEntryId()));
+	viewFullContentURL.setParameter("assetEntryVersionId", String.valueOf(classPK));
 }
+
+boolean showEditURL = false;
+
+if ((workflowTask.getAssigneeUserId() == user.getUserId()) && !workflowTask.isCompleted()) {
+	showEditURL = true;
+}
+
+viewFullContentURL.setParameter("showEditURL", String.valueOf(showEditURL));
+
+viewFullContentURL.setParameter("workflowAssetPreview", Boolean.TRUE.toString());
+
+request.setAttribute(WebKeys.WORKFLOW_ASSET_PREVIEW, Boolean.TRUE);
 %>
 
 <portlet:renderURL var="backURL">
@@ -182,12 +195,12 @@ if (assetEntry != null) {
 								%>
 
 								<c:choose>
-									<c:when test="<%= assetRenderer.hasEditPermission(permissionChecker) %>">
+									<c:when test="<%= assetRenderer.hasEditPermission(permissionChecker) && showEditURL %>">
 										<liferay-ui:icon image="edit" method="get" url="<%= editPortletURL.toString() %>" />
 									</c:when>
-									<c:otherwise>
+									<c:when test="<%= assetRenderer.hasEditPermission(permissionChecker) && !showEditURL && !workflowTask.isCompleted() %>">
 										<liferay-ui:icon-help message="please-assign-the-task-to-yourself-to-be-able-to-edit-the-content" />
-									</c:otherwise>
+									</c:when>
 								</c:choose>
 							</c:if>
 						</liferay-ui:icon-list>

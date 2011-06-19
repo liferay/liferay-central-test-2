@@ -45,40 +45,49 @@ public class PageContextWrapper extends PageContext {
 		_pageContext = pageContext;
 	}
 
+	@Override
 	public Object findAttribute(String name) {
 		return _pageContext.findAttribute(name);
 	}
 
+	@Override
 	public void forward(String relativeUrlPath)
 		throws IOException, ServletException {
 
 		_pageContext.forward(relativeUrlPath);
 	}
 
+	@Override
 	public Object getAttribute(String name) {
 		return _pageContext.getAttribute(name);
 	}
 
+	@Override
 	public Object getAttribute(String name, int scope) {
 		return _pageContext.getAttribute(name, scope);
 	}
 
+	@Override
 	public Enumeration<String> getAttributeNamesInScope(int scope) {
 		return _pageContext.getAttributeNamesInScope(scope);
 	}
 
+	@Override
 	public int getAttributesScope(String name) {
 		return _pageContext.getAttributesScope(name);
 	}
 
+	@Override
 	public ELContext getELContext() {
 		return _pageContext.getELContext();
 	}
 
+	@Override
 	public ErrorData getErrorData() {
 		return super.getErrorData();
 	}
 
+	@Override
 	public Exception getException() {
 		return _pageContext.getException();
 	}
@@ -86,34 +95,42 @@ public class PageContextWrapper extends PageContext {
 	/**
 	 * @deprecated
 	 */
+	@Override
 	public javax.servlet.jsp.el.ExpressionEvaluator getExpressionEvaluator() {
 		return _pageContext.getExpressionEvaluator();
 	}
 
+	@Override
 	public JspWriter getOut() {
 		return new PipingJspWriter(_pageContext.getOut());
 	}
 
+	@Override
 	public Object getPage() {
 		return _pageContext.getPage();
 	}
 
+	@Override
 	public ServletRequest getRequest() {
 		return _pageContext.getRequest();
 	}
 
+	@Override
 	public ServletResponse getResponse() {
 		return _pageContext.getResponse();
 	}
 
+	@Override
 	public ServletConfig getServletConfig() {
 		return _pageContext.getServletConfig();
 	}
 
+	@Override
 	public ServletContext getServletContext() {
 		return _pageContext.getServletContext();
 	}
 
+	@Override
 	public HttpSession getSession() {
 		return _pageContext.getSession();
 	}
@@ -121,6 +138,7 @@ public class PageContextWrapper extends PageContext {
 	/**
 	 * @deprecated
 	 */
+	@Override
 	public javax.servlet.jsp.el.VariableResolver getVariableResolver() {
 		return _pageContext.getVariableResolver();
 	}
@@ -129,30 +147,35 @@ public class PageContextWrapper extends PageContext {
 		return _pageContext;
 	}
 
+	@Override
 	public void handlePageException(Exception e)
 		throws IOException, ServletException {
 
 		_pageContext.handlePageException(e);
 	}
 
+	@Override
 	public void handlePageException(Throwable t)
 		throws IOException, ServletException {
 
 		_pageContext.handlePageException(t);
 	}
 
+	@Override
 	public void include(String relativeUrlPath)
 		throws IOException, ServletException {
 
 		_pageContext.include(relativeUrlPath);
 	}
 
+	@Override
 	public void include(String relativeUrlPath, boolean flush)
 		throws IOException, ServletException {
 
 		_pageContext.include(relativeUrlPath, flush);
 	}
 
+	@Override
 	public void initialize(
 			Servlet servlet, ServletRequest request, ServletResponse response,
 			String errorPageURL, boolean needsSession, int bufferSize,
@@ -164,10 +187,12 @@ public class PageContextWrapper extends PageContext {
 			autoFlush);
 	}
 
+	@Override
 	public JspWriter popBody() {
 		return _pageContext.popBody();
 	}
 
+	@Override
 	public BodyContent pushBody() {
 		UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter();
 
@@ -177,26 +202,32 @@ public class PageContextWrapper extends PageContext {
 		return new BodyContentWrapper(bodyContent, unsyncStringWriter);
 	}
 
+	@Override
 	public JspWriter pushBody(Writer writer) {
 		return _pageContext.pushBody(new PipingJspWriter(writer));
 	}
 
+	@Override
 	public void release() {
 		_pageContext.release();
 	}
 
+	@Override
 	public void removeAttribute(String name) {
 		_pageContext.removeAttribute(name);
 	}
 
+	@Override
 	public void removeAttribute(String name, int scope) {
 		_pageContext.removeAttribute(name, scope);
 	}
 
+	@Override
 	public void setAttribute(String name, Object value) {
 		_pageContext.setAttribute(name, value);
 	}
 
+	@Override
 	public void setAttribute(String name, Object value, int scope) {
 		_pageContext.setAttribute(name, value, scope);
 	}

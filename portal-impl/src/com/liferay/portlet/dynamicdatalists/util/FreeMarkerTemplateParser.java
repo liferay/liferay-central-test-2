@@ -23,11 +23,13 @@ import com.liferay.util.ContentUtil;
 public class FreeMarkerTemplateParser extends
 	com.liferay.portlet.journal.util.FreeMarkerTemplateParser {
 
+	@Override
 	protected String getErrorTemplateContent() {
 		return ContentUtil.get(
 			PropsValues.DYNAMIC_DATA_LISTS_ERROR_TEMPLATE_FREEMARKER);
 	}
 
+	@Override
 	protected String getErrorTemplateId() {
 		return PropsValues.DYNAMIC_DATA_LISTS_ERROR_TEMPLATE_FREEMARKER;
 	}

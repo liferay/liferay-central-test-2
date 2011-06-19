@@ -32,6 +32,7 @@ public class ReadWriteLockKey<T> {
 		_writeLock = writeLock;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -54,6 +55,7 @@ public class ReadWriteLockKey<T> {
 		return _key;
 	}
 
+	@Override
 	public int hashCode() {
 		return _key.hashCode();
 	}

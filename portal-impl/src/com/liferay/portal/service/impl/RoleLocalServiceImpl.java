@@ -189,6 +189,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		}
 	}
 
+	@Override
 	public void deleteRole(long roleId)
 		throws PortalException, SystemException {
 
@@ -197,6 +198,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		deleteRole(role);
 	}
 
+	@Override
 	public void deleteRole(Role role)
 		throws PortalException, SystemException {
 
@@ -293,6 +295,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 			companyId, name, scope, primKey, actionId);
 	}
 
+	@Override
 	public Role getRole(long roleId) throws PortalException, SystemException {
 		return rolePersistence.findByPrimaryKey(roleId);
 	}

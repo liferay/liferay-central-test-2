@@ -187,6 +187,7 @@ public class ResourceModelImpl extends BaseModelImpl<Resource>
 		return GetterUtil.getString(_originalPrimKey);
 	}
 
+	@Override
 	public Resource toEscapedModel() {
 		if (isEscapedModel()) {
 			return (Resource)this;
@@ -197,6 +198,7 @@ public class ResourceModelImpl extends BaseModelImpl<Resource>
 		}
 	}
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(0,
@@ -206,10 +208,12 @@ public class ResourceModelImpl extends BaseModelImpl<Resource>
 		return _expandoBridge;
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		getExpandoBridge().setAttributes(serviceContext);
 	}
 
+	@Override
 	public Object clone() {
 		ResourceImpl resourceImpl = new ResourceImpl();
 
@@ -236,6 +240,7 @@ public class ResourceModelImpl extends BaseModelImpl<Resource>
 		}
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -260,10 +265,12 @@ public class ResourceModelImpl extends BaseModelImpl<Resource>
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		ResourceModelImpl resourceModelImpl = this;
 
@@ -274,6 +281,7 @@ public class ResourceModelImpl extends BaseModelImpl<Resource>
 		resourceModelImpl._originalPrimKey = resourceModelImpl._primKey;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(7);
 

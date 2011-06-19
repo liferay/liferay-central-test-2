@@ -43,6 +43,7 @@ public class UnsyncBufferedReader extends Reader {
 		buffer = new char[size];
 	}
 
+	@Override
 	public void close() throws IOException {
 		if (reader != null) {
 			reader.close();
@@ -52,6 +53,7 @@ public class UnsyncBufferedReader extends Reader {
 		}
 	}
 
+	@Override
 	public void mark(int markLimit) throws IOException {
 		if (markLimit < 0) {
 			throw new IllegalArgumentException("Mark limit is less than 0");
@@ -89,10 +91,12 @@ public class UnsyncBufferedReader extends Reader {
 		}
 	}
 
+	@Override
 	public boolean markSupported() {
 		return true;
 	}
 
+	@Override
 	public int read() throws IOException {
 		if (reader == null) {
 			throw new IOException("Reader is null");
@@ -109,10 +113,12 @@ public class UnsyncBufferedReader extends Reader {
 		return buffer[index++];
 	}
 
+	@Override
 	public int read(char[] chars) throws IOException {
 		return read(chars, 0, chars.length);
 	}
 
+	@Override
 	public int read(char[] chars, int offset, int length)
 		throws IOException {
 
@@ -227,6 +233,7 @@ public class UnsyncBufferedReader extends Reader {
 		}
 	}
 
+	@Override
 	public boolean ready() throws IOException {
 		if (reader == null) {
 			throw new IOException("Reader is null");
@@ -235,6 +242,7 @@ public class UnsyncBufferedReader extends Reader {
 		return (index < firstInvalidIndex) || reader.ready();
 	}
 
+	@Override
 	public void reset() throws IOException {
 		if (reader == null) {
 			throw new IOException("Reader is null");
@@ -247,6 +255,7 @@ public class UnsyncBufferedReader extends Reader {
 		index = 0;
 	}
 
+	@Override
 	public long skip(long skip) throws IOException {
 		if (skip < 0) {
 			throw new IllegalArgumentException("Skip is less than 0");

@@ -41,12 +41,14 @@ public class LayoutRevisionAssetRendererFactory
 
 	public static final String TYPE = "layout_revision";
 
+	@Override
 	public AssetEntry getAssetEntry(long assetEntryId)
 		throws PortalException, SystemException {
 
 		return getAssetEntry(getClassName(), assetEntryId);
 	}
 
+	@Override
 	public AssetEntry getAssetEntry(String className, long classPK)
 		throws PortalException, SystemException {
 
@@ -101,6 +103,7 @@ public class LayoutRevisionAssetRendererFactory
 		return TYPE;
 	}
 
+	@Override
 	protected String getIconPath(ThemeDisplay themeDisplay) {
 		return themeDisplay.getPathThemeImages() + "/common/pages.png";
 	}

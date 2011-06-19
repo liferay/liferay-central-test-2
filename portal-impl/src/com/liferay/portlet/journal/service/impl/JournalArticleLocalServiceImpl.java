@@ -313,8 +313,8 @@ public class JournalArticleLocalServiceImpl
 		if (classNameId == 0) {
 			WorkflowHandlerRegistryUtil.startWorkflowInstance(
 				user.getCompanyId(), groupId, userId,
-				JournalArticle.class.getName(), article.getResourcePrimKey(),
-				article, serviceContext);
+				JournalArticle.class.getName(), article.getId(), article,
+				serviceContext);
 
 			if (serviceContext.getWorkflowAction() !=
 					WorkflowConstants.ACTION_PUBLISH) {
@@ -646,7 +646,7 @@ public class JournalArticleLocalServiceImpl
 		if (!article.isDraft()) {
 			workflowInstanceLinkLocalService.deleteWorkflowInstanceLink(
 				article.getCompanyId(), article.getGroupId(),
-				JournalArticle.class.getName(), article.getResourcePrimKey());
+				JournalArticle.class.getName(), article.getId());
 		}
 
 		int articlesCount = journalArticlePersistence.countByG_A(
@@ -2032,7 +2032,7 @@ public class JournalArticleLocalServiceImpl
 
 			WorkflowHandlerRegistryUtil.startWorkflowInstance(
 				user.getCompanyId(), groupId, userId,
-				JournalArticle.class.getName(), article.getResourcePrimKey(),
+				JournalArticle.class.getName(), article.getId(),
 				article, serviceContext);
 		}
 		else if (article.getVersion() ==
@@ -2234,12 +2234,12 @@ public class JournalArticleLocalServiceImpl
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
+		// Article
+
 		User user = userPersistence.findByPrimaryKey(userId);
 		Date now = new Date();
 
 		int oldStatus = article.getStatus();
-
-		// Article
 
 		article.setModifiedDate(serviceContext.getModifiedDate(now));
 

@@ -201,6 +201,7 @@ public class SCProductScreenshotModelImpl extends BaseModelImpl<SCProductScreens
 		return _originalPriority;
 	}
 
+	@Override
 	public SCProductScreenshot toEscapedModel() {
 		if (isEscapedModel()) {
 			return (SCProductScreenshot)this;
@@ -211,6 +212,7 @@ public class SCProductScreenshotModelImpl extends BaseModelImpl<SCProductScreens
 		}
 	}
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
@@ -220,10 +222,12 @@ public class SCProductScreenshotModelImpl extends BaseModelImpl<SCProductScreens
 		return _expandoBridge;
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		getExpandoBridge().setAttributes(serviceContext);
 	}
 
+	@Override
 	public Object clone() {
 		SCProductScreenshotImpl scProductScreenshotImpl = new SCProductScreenshotImpl();
 
@@ -274,6 +278,7 @@ public class SCProductScreenshotModelImpl extends BaseModelImpl<SCProductScreens
 		return 0;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -298,10 +303,12 @@ public class SCProductScreenshotModelImpl extends BaseModelImpl<SCProductScreens
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		SCProductScreenshotModelImpl scProductScreenshotModelImpl = this;
 
@@ -322,6 +329,7 @@ public class SCProductScreenshotModelImpl extends BaseModelImpl<SCProductScreens
 		scProductScreenshotModelImpl._setOriginalPriority = false;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(15);
 

@@ -54,9 +54,13 @@ if (record != null) {
 
 	<liferay-ui:error exception="<%= StorageFieldRequiredException.class %>" message="please-fill-out-all-required-fields" />
 
+	<aui:model-context bean="<%= recordVersion %>" model="<%= DDLRecordVersion.class %>" />
+
 	<c:if test="<%= recordVersion != null %>">
-		<aui:workflow-status status="<%= recordVersion.getStatus() %>" version="<%= recordVersion.getVersion() %>" />
+		<aui:workflow-status model="<%= DDLRecord.class %>" status="<%= recordVersion.getStatus() %>" version="<%= recordVersion.getVersion() %>" />
 	</c:if>
+
+	<liferay-util:include page="/html/portlet/dynamic_data_lists/record_toolbar.jsp" />
 
 	<aui:fieldset>
 
@@ -78,7 +82,7 @@ if (record != null) {
 		Fields fields = null;
 
 		if (recordVersion != null) {
-			fields = StorageEngineUtil.getFields(recordVersion.getClassPK());
+			fields = StorageEngineUtil.getFields(recordVersion.getDDMStorageId());
 		}
 		%>
 

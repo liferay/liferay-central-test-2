@@ -80,11 +80,11 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 
 	public static final String DIFF_RESULTS = "DIFF_RESULTS";
 
-	public static final String DOCUMENT_LIBRARY_DOCUMENT_TYPE = "DOCUMENT_LIBRARY_DOCUMENT_TYPE";
-
 	public static final String DOCUMENT_LIBRARY_FILE_ENTRIES = "DOCUMENT_LIBRARY_FILE_ENTRIES";
 
 	public static final String DOCUMENT_LIBRARY_FILE_ENTRY = "DOCUMENT_LIBRARY_FILE_ENTRY";
+
+	public static final String DOCUMENT_LIBRARY_FILE_ENTRY_TYPE = "DOCUMENT_LIBRARY_FILE_ENTRY_TYPE";
 
 	public static final String DOCUMENT_LIBRARY_FILE_SHORTCUT = "DOCUMENT_LIBRARY_FILE_SHORTCUT";
 
@@ -99,6 +99,8 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 	public static final String DYNAMIC_DATA_LISTS_RECORD = "DYNAMIC_DATA_LISTS_RECORD";
 
 	public static final String DYNAMIC_DATA_LISTS_RECORD_SET = "DYNAMIC_DATA_LISTS_RECORD_SET";
+
+	public static final String DYNAMIC_DATA_LISTS_RECORD_VERSION = "DYNAMIC_DATA_LISTS_RECORD_VERSION";
 
 	public static final String DYNAMIC_DATA_MAPPING_STRUCTURE = "DYNAMIC_DATA_MAPPING_STRUCTURE";
 
@@ -441,6 +443,8 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 	public static final String WIKI_TREE_WALKER_PARENT = "WIKI_TREE_WALKER_PARENT";
 
 	public static final String WORDS_LIST = "WORDS_LIST";
+
+	public static final String WORKFLOW_ASSET_PREVIEW = "WORKFLOW_ASSET_PREVIEW";
 
 	public static final String WORKFLOW_DEFINITION = "WORKFLOW_DEFINITION";
 

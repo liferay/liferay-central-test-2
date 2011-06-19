@@ -34,10 +34,12 @@ public class PhoneNumberConverterTag extends ConverterTag {
 		_unitedStatesFormat = unitedStatesFormat;
 	}
 
+	@Override
 	public void release() {
 		_unitedStatesFormat = null;
 	}
 
+	@Override
 	protected Converter createConverter() throws JspException {
 		PhoneNumberConverter converter =
 			(PhoneNumberConverter)super.createConverter();

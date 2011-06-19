@@ -49,6 +49,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class JSONWebServiceServlet extends JSONServlet {
 
+	@Override
 	public void service(
 			HttpServletRequest request, HttpServletResponse response)
 		throws IOException, ServletException {
@@ -119,6 +120,7 @@ public class JSONWebServiceServlet extends JSONServlet {
 		printWriter.close();
 	}
 
+	@Override
 	protected JSONAction getJSONAction(ServletContext servletContext) {
 		ClassLoader portletClassLoader =
 			(ClassLoader)servletContext.getAttribute(
@@ -132,6 +134,7 @@ public class JSONWebServiceServlet extends JSONServlet {
 		return jsonAction;
 	}
 
+	@Override
 	protected void resolveRemoteUser(HttpServletRequest request)
 		throws Exception {
 

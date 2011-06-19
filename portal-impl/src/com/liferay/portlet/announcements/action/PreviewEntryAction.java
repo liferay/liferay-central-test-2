@@ -41,6 +41,7 @@ import org.apache.struts.action.ActionMapping;
  */
 public class PreviewEntryAction extends PortletAction {
 
+	@Override
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
 			ActionRequest actionRequest, ActionResponse actionResponse)
@@ -94,6 +95,7 @@ public class PreviewEntryAction extends PortletAction {
 		actionRequest.setAttribute(WebKeys.ANNOUNCEMENTS_ENTRY, entry);
 	}
 
+	@Override
 	public ActionForward render(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
 			RenderRequest renderRequest, RenderResponse renderResponse)

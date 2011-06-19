@@ -173,6 +173,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(JournalArticleResourceImpl.class.getName());
@@ -190,6 +191,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(JournalArticleResource journalArticleResource) {
 		EntityCacheUtil.removeResult(JournalArticleResourceModelImpl.ENTITY_CACHE_ENABLED,
 			JournalArticleResourceImpl.class,
@@ -236,6 +238,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 	 * @throws com.liferay.portal.NoSuchModelException if a journal article resource with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public JournalArticleResource remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
@@ -289,12 +292,14 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 	 * @return the journal article resource that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public JournalArticleResource remove(
 		JournalArticleResource journalArticleResource)
 		throws SystemException {
 		return super.remove(journalArticleResource);
 	}
 
+	@Override
 	protected JournalArticleResource removeImpl(
 		JournalArticleResource journalArticleResource)
 		throws SystemException {
@@ -338,6 +343,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 		return journalArticleResource;
 	}
 
+	@Override
 	public JournalArticleResource updateImpl(
 		com.liferay.portlet.journal.model.JournalArticleResource journalArticleResource,
 		boolean merge) throws SystemException {
@@ -453,6 +459,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 	 * @throws com.liferay.portal.NoSuchModelException if a journal article resource with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public JournalArticleResource findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
@@ -489,6 +496,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 	 * @return the journal article resource, or <code>null</code> if a journal article resource with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public JournalArticleResource fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());

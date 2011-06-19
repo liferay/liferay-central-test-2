@@ -197,6 +197,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(BlogsStatsUserImpl.class.getName());
@@ -214,6 +215,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(BlogsStatsUser blogsStatsUser) {
 		EntityCacheUtil.removeResult(BlogsStatsUserModelImpl.ENTITY_CACHE_ENABLED,
 			BlogsStatsUserImpl.class, blogsStatsUser.getPrimaryKey());
@@ -248,6 +250,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	 * @throws com.liferay.portal.NoSuchModelException if a blogs stats user with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public BlogsStatsUser remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
@@ -300,11 +303,13 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	 * @return the blogs stats user that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public BlogsStatsUser remove(BlogsStatsUser blogsStatsUser)
 		throws SystemException {
 		return super.remove(blogsStatsUser);
 	}
 
+	@Override
 	protected BlogsStatsUser removeImpl(BlogsStatsUser blogsStatsUser)
 		throws SystemException {
 		blogsStatsUser = toUnwrappedModel(blogsStatsUser);
@@ -339,6 +344,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 		return blogsStatsUser;
 	}
 
+	@Override
 	public BlogsStatsUser updateImpl(
 		com.liferay.portlet.blogs.model.BlogsStatsUser blogsStatsUser,
 		boolean merge) throws SystemException {
@@ -424,6 +430,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	 * @throws com.liferay.portal.NoSuchModelException if a blogs stats user with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public BlogsStatsUser findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
@@ -460,6 +467,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	 * @return the blogs stats user, or <code>null</code> if a blogs stats user with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public BlogsStatsUser fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());

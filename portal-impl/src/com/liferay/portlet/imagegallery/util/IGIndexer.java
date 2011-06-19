@@ -60,6 +60,7 @@ public class IGIndexer extends BaseIndexer {
 		return CLASS_NAMES;
 	}
 
+	@Override
 	public void postProcessContextQuery(
 			BooleanQuery contextQuery, SearchContext searchContext)
 		throws Exception {
@@ -88,6 +89,7 @@ public class IGIndexer extends BaseIndexer {
 		}
 	}
 
+	@Override
 	protected void doDelete(Object obj) throws Exception {
 		IGImage image = (IGImage)obj;
 
@@ -99,6 +101,7 @@ public class IGIndexer extends BaseIndexer {
 			image.getCompanyId(), document.get(Field.UID));
 	}
 
+	@Override
 	protected Document doGetDocument(Object obj) throws Exception {
 		IGImage image = (IGImage)obj;
 
@@ -111,6 +114,7 @@ public class IGIndexer extends BaseIndexer {
 		return document;
 	}
 
+	@Override
 	protected Summary doGetSummary(
 		Document document, Locale locale, String snippet,
 		PortletURL portletURL) {
@@ -131,6 +135,7 @@ public class IGIndexer extends BaseIndexer {
 		return new Summary(title, content, portletURL);
 	}
 
+	@Override
 	protected void doReindex(Object obj) throws Exception {
 		IGImage image = (IGImage)obj;
 
@@ -139,12 +144,14 @@ public class IGIndexer extends BaseIndexer {
 		SearchEngineUtil.updateDocument(image.getCompanyId(), document);
 	}
 
+	@Override
 	protected void doReindex(String className, long classPK) throws Exception {
 		IGImage image = IGImageLocalServiceUtil.getImage(classPK);
 
 		doReindex(image);
 	}
 
+	@Override
 	protected void doReindex(String[] ids) throws Exception {
 		long companyId = GetterUtil.getLong(ids[0]);
 
@@ -152,6 +159,7 @@ public class IGIndexer extends BaseIndexer {
 		reindexRoot(companyId);
 	}
 
+	@Override
 	protected String getPortletId(SearchContext searchContext) {
 		return PORTLET_ID;
 	}

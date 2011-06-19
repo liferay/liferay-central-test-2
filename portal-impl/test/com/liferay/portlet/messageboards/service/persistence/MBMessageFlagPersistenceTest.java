@@ -33,6 +33,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class MBMessageFlagPersistenceTest extends BasePersistenceTestCase {
+	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -69,9 +70,13 @@ public class MBMessageFlagPersistenceTest extends BasePersistenceTestCase {
 		MBMessageFlag newMBMessageFlag = _persistence.create(pk);
 
 		newMBMessageFlag.setUserId(nextLong());
+
 		newMBMessageFlag.setModifiedDate(nextDate());
+
 		newMBMessageFlag.setThreadId(nextLong());
+
 		newMBMessageFlag.setMessageId(nextLong());
+
 		newMBMessageFlag.setFlag(nextInt());
 
 		_persistence.update(newMBMessageFlag, false);
@@ -222,9 +227,13 @@ public class MBMessageFlagPersistenceTest extends BasePersistenceTestCase {
 		MBMessageFlag mbMessageFlag = _persistence.create(pk);
 
 		mbMessageFlag.setUserId(nextLong());
+
 		mbMessageFlag.setModifiedDate(nextDate());
+
 		mbMessageFlag.setThreadId(nextLong());
+
 		mbMessageFlag.setMessageId(nextLong());
+
 		mbMessageFlag.setFlag(nextInt());
 
 		_persistence.update(mbMessageFlag, false);

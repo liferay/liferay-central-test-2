@@ -24,10 +24,12 @@ import com.liferay.portal.kernel.util.ReleaseInfo;
  */
 public class UpgradeProcess_ConvertPermissionAlgorithm extends UpgradeProcess {
 
+	@Override
 	public int getThreshold() {
 		return ReleaseInfo.RELEASE_6_0_0_BUILD_NUMBER;
 	}
 
+	@Override
 	protected void doUpgrade() throws Exception {
 		ConvertProcess convertProcess = new ConvertPermissionAlgorithm();
 

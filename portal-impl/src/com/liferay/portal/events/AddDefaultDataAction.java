@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.events.SimpleAction;
  */
 public class AddDefaultDataAction extends SimpleAction {
 
+	@Override
 	public void run(String[] ids) throws ActionException {
 		SimpleAction addDefaultDocumentLibraryStructuresAction =
 			new AddDefaultDocumentLibraryStructuresAction();

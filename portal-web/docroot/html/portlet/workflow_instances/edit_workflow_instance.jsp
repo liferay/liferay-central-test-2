@@ -42,10 +42,8 @@ if (assetRenderer != null) {
 String headerTitle = LanguageUtil.get(pageContext, workflowInstance.getWorkflowDefinitionName());
 
 if (assetEntry != null) {
-	headerTitle = headerTitle.concat(StringPool.COLON + StringPool.SPACE + assetEntry.getTitle());
+	headerTitle = headerTitle.concat(StringPool.COLON + StringPool.SPACE + assetRenderer.getTitle(locale));
 }
-
-PortletURL editPortletURL = workflowHandler.getURLEdit(classPK, liferayPortletRequest, liferayPortletResponse);
 
 PortletURL viewFullContentURL = renderResponse.createRenderURL();
 
@@ -55,7 +53,13 @@ viewFullContentURL.setParameter("type", assetRendererFactory.getType());
 
 if (assetEntry != null) {
 	viewFullContentURL.setParameter("assetEntryId", String.valueOf(assetEntry.getEntryId()));
+	viewFullContentURL.setParameter("assetEntryVersionId", String.valueOf(classPK));
 }
+
+viewFullContentURL.setParameter("showEditURL", Boolean.FALSE.toString());
+viewFullContentURL.setParameter("workflowAssetPreview", Boolean.TRUE.toString());
+
+request.setAttribute(WebKeys.WORKFLOW_ASSET_PREVIEW, Boolean.TRUE);
 %>
 
 <portlet:renderURL var="backURL">
@@ -95,25 +99,6 @@ if (assetEntry != null) {
 						<liferay-ui:icon-list>
 							<c:if test="<%= assetRenderer.hasViewPermission(permissionChecker) %>">
 								<liferay-ui:icon image="view" method="get" url="<%= viewFullContentURL.toString() %>" />
-							</c:if>
-
-							<c:if test="<%= editPortletURL != null %>">
-
-								<%
-								editPortletURL.setWindowState(WindowState.MAXIMIZED);
-								editPortletURL.setPortletMode(PortletMode.VIEW);
-
-								editPortletURL.setParameter("redirect", currentURL);
-								%>
-
-								<c:choose>
-									<c:when test="<%= assetRenderer.hasEditPermission(permissionChecker) %>">
-										<liferay-ui:icon image="edit" method="get" url="<%= editPortletURL.toString() %>" />
-									</c:when>
-									<c:otherwise>
-										<liferay-ui:icon-help message="please-assign-the-task-to-yourself-to-be-able-to-edit-the-content" />
-									</c:otherwise>
-								</c:choose>
 							</c:if>
 						</liferay-ui:icon-list>
 					</div>

@@ -570,6 +570,7 @@ public class DDMStructureWrapper implements DDMStructure {
 		_ddmStructure.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new DDMStructureWrapper((DDMStructure)_ddmStructure.clone());
 	}
@@ -579,6 +580,7 @@ public class DDMStructureWrapper implements DDMStructure {
 		return _ddmStructure.compareTo(ddmStructure);
 	}
 
+	@Override
 	public int hashCode() {
 		return _ddmStructure.hashCode();
 	}
@@ -587,6 +589,7 @@ public class DDMStructureWrapper implements DDMStructure {
 		return new DDMStructureWrapper(_ddmStructure.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _ddmStructure.toString();
 	}

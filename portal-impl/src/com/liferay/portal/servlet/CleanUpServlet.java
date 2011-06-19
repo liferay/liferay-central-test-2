@@ -23,10 +23,12 @@ import javax.servlet.http.HttpServlet;
  */
 public class CleanUpServlet extends HttpServlet {
 
+	@Override
 	public void destroy() {
 		CentralizedThreadLocal.clearShortLivedThreadLocals();
 	}
 
+	@Override
 	public void init() {
 		CentralizedThreadLocal.clearShortLivedThreadLocals();
 	}

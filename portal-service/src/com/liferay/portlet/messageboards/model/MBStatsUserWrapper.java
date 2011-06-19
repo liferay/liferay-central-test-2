@@ -225,6 +225,7 @@ public class MBStatsUserWrapper implements MBStatsUser {
 		_mbStatsUser.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new MBStatsUserWrapper((MBStatsUser)_mbStatsUser.clone());
 	}
@@ -234,6 +235,7 @@ public class MBStatsUserWrapper implements MBStatsUser {
 		return _mbStatsUser.compareTo(mbStatsUser);
 	}
 
+	@Override
 	public int hashCode() {
 		return _mbStatsUser.hashCode();
 	}
@@ -242,6 +244,7 @@ public class MBStatsUserWrapper implements MBStatsUser {
 		return new MBStatsUserWrapper(_mbStatsUser.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _mbStatsUser.toString();
 	}

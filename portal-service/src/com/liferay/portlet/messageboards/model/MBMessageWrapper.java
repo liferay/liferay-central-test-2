@@ -664,6 +664,7 @@ public class MBMessageWrapper implements MBMessage {
 		_mbMessage.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new MBMessageWrapper((MBMessage)_mbMessage.clone());
 	}
@@ -673,6 +674,7 @@ public class MBMessageWrapper implements MBMessage {
 		return _mbMessage.compareTo(mbMessage);
 	}
 
+	@Override
 	public int hashCode() {
 		return _mbMessage.hashCode();
 	}
@@ -681,6 +683,7 @@ public class MBMessageWrapper implements MBMessage {
 		return new MBMessageWrapper(_mbMessage.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _mbMessage.toString();
 	}

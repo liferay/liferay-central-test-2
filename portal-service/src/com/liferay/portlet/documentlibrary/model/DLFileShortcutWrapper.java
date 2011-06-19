@@ -448,6 +448,7 @@ public class DLFileShortcutWrapper implements DLFileShortcut {
 		_dlFileShortcut.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new DLFileShortcutWrapper((DLFileShortcut)_dlFileShortcut.clone());
 	}
@@ -457,6 +458,7 @@ public class DLFileShortcutWrapper implements DLFileShortcut {
 		return _dlFileShortcut.compareTo(dlFileShortcut);
 	}
 
+	@Override
 	public int hashCode() {
 		return _dlFileShortcut.hashCode();
 	}
@@ -465,6 +467,7 @@ public class DLFileShortcutWrapper implements DLFileShortcut {
 		return new DLFileShortcutWrapper(_dlFileShortcut.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _dlFileShortcut.toString();
 	}

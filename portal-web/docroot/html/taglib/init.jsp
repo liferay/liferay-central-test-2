@@ -16,7 +16,6 @@
 
 <%@ include file="/html/common/init.jsp" %>
 
-<%@ page import="com.liferay.portal.kernel.servlet.taglib.CustomAttributes" %>
 <%@ page import="com.liferay.taglib.aui.AUIUtil" %>
 <%@ page import="com.liferay.taglib.util.InlineUtil" %>
 

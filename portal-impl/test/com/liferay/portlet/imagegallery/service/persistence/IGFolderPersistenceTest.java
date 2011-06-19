@@ -34,6 +34,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class IGFolderPersistenceTest extends BasePersistenceTestCase {
+	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -70,14 +71,23 @@ public class IGFolderPersistenceTest extends BasePersistenceTestCase {
 		IGFolder newIGFolder = _persistence.create(pk);
 
 		newIGFolder.setUuid(randomString());
+
 		newIGFolder.setGroupId(nextLong());
+
 		newIGFolder.setCompanyId(nextLong());
+
 		newIGFolder.setUserId(nextLong());
+
 		newIGFolder.setUserName(randomString());
+
 		newIGFolder.setCreateDate(nextDate());
+
 		newIGFolder.setModifiedDate(nextDate());
+
 		newIGFolder.setParentFolderId(nextLong());
+
 		newIGFolder.setName(randomString());
+
 		newIGFolder.setDescription(randomString());
 
 		_persistence.update(newIGFolder, false);
@@ -234,14 +244,23 @@ public class IGFolderPersistenceTest extends BasePersistenceTestCase {
 		IGFolder igFolder = _persistence.create(pk);
 
 		igFolder.setUuid(randomString());
+
 		igFolder.setGroupId(nextLong());
+
 		igFolder.setCompanyId(nextLong());
+
 		igFolder.setUserId(nextLong());
+
 		igFolder.setUserName(randomString());
+
 		igFolder.setCreateDate(nextDate());
+
 		igFolder.setModifiedDate(nextDate());
+
 		igFolder.setParentFolderId(nextLong());
+
 		igFolder.setName(randomString());
+
 		igFolder.setDescription(randomString());
 
 		_persistence.update(igFolder, false);

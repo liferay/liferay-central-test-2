@@ -117,6 +117,7 @@ public class UploadPortletRequestImpl
 		return fullFileName;
 	}
 
+	@Override
 	public String getParameter(String name) {
 		String parameter = _uploadRequest.getParameter(_namespace + name);
 
@@ -127,6 +128,7 @@ public class UploadPortletRequestImpl
 		return parameter;
 	}
 
+	@Override
 	public Map<String, String[]> getParameterMap() {
 		Map<String, String[]> map = new HashMap<String, String[]>();
 
@@ -141,6 +143,7 @@ public class UploadPortletRequestImpl
 		return map;
 	}
 
+	@Override
 	public Enumeration<String> getParameterNames() {
 		List<String> parameterNames = new ArrayList<String>();
 
@@ -161,6 +164,7 @@ public class UploadPortletRequestImpl
 		return Collections.enumeration(parameterNames);
 	}
 
+	@Override
 	public String[] getParameterValues(String name) {
 		String[] parameterValues = _uploadRequest.getParameterValues(
 			_namespace + name);

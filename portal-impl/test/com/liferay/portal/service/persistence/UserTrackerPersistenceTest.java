@@ -30,6 +30,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class UserTrackerPersistenceTest extends BasePersistenceTestCase {
+	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -66,11 +67,17 @@ public class UserTrackerPersistenceTest extends BasePersistenceTestCase {
 		UserTracker newUserTracker = _persistence.create(pk);
 
 		newUserTracker.setCompanyId(nextLong());
+
 		newUserTracker.setUserId(nextLong());
+
 		newUserTracker.setModifiedDate(nextDate());
+
 		newUserTracker.setSessionId(randomString());
+
 		newUserTracker.setRemoteAddr(randomString());
+
 		newUserTracker.setRemoteHost(randomString());
+
 		newUserTracker.setUserAgent(randomString());
 
 		_persistence.update(newUserTracker, false);
@@ -206,11 +213,17 @@ public class UserTrackerPersistenceTest extends BasePersistenceTestCase {
 		UserTracker userTracker = _persistence.create(pk);
 
 		userTracker.setCompanyId(nextLong());
+
 		userTracker.setUserId(nextLong());
+
 		userTracker.setModifiedDate(nextDate());
+
 		userTracker.setSessionId(randomString());
+
 		userTracker.setRemoteAddr(randomString());
+
 		userTracker.setRemoteHost(randomString());
+
 		userTracker.setUserAgent(randomString());
 
 		_persistence.update(userTracker, false);

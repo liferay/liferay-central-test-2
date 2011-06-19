@@ -131,6 +131,7 @@ public class CounterWrapper implements Counter {
 		_counter.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new CounterWrapper((Counter)_counter.clone());
 	}
@@ -139,6 +140,7 @@ public class CounterWrapper implements Counter {
 		return _counter.compareTo(counter);
 	}
 
+	@Override
 	public int hashCode() {
 		return _counter.hashCode();
 	}
@@ -147,6 +149,7 @@ public class CounterWrapper implements Counter {
 		return new CounterWrapper(_counter.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _counter.toString();
 	}

@@ -173,6 +173,7 @@ public class ShardModelImpl extends BaseModelImpl<Shard> implements ShardModel {
 		return GetterUtil.getString(_originalName);
 	}
 
+	@Override
 	public Shard toEscapedModel() {
 		if (isEscapedModel()) {
 			return (Shard)this;
@@ -183,6 +184,7 @@ public class ShardModelImpl extends BaseModelImpl<Shard> implements ShardModel {
 		}
 	}
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(0,
@@ -192,10 +194,12 @@ public class ShardModelImpl extends BaseModelImpl<Shard> implements ShardModel {
 		return _expandoBridge;
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		getExpandoBridge().setAttributes(serviceContext);
 	}
 
+	@Override
 	public Object clone() {
 		ShardImpl shardImpl = new ShardImpl();
 
@@ -223,6 +227,7 @@ public class ShardModelImpl extends BaseModelImpl<Shard> implements ShardModel {
 		}
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -247,10 +252,12 @@ public class ShardModelImpl extends BaseModelImpl<Shard> implements ShardModel {
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		ShardModelImpl shardModelImpl = this;
 
@@ -265,6 +272,7 @@ public class ShardModelImpl extends BaseModelImpl<Shard> implements ShardModel {
 		shardModelImpl._originalName = shardModelImpl._name;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(9);
 

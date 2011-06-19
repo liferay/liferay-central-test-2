@@ -419,21 +419,21 @@ public class DLFileEntryWrapper implements DLFileEntry {
 	}
 
 	/**
-	* Returns the document type ID of this d l file entry.
+	* Returns the file entry type ID of this d l file entry.
 	*
-	* @return the document type ID of this d l file entry
+	* @return the file entry type ID of this d l file entry
 	*/
-	public long getDocumentTypeId() {
-		return _dlFileEntry.getDocumentTypeId();
+	public long getFileEntryTypeId() {
+		return _dlFileEntry.getFileEntryTypeId();
 	}
 
 	/**
-	* Sets the document type ID of this d l file entry.
+	* Sets the file entry type ID of this d l file entry.
 	*
-	* @param documentTypeId the document type ID of this d l file entry
+	* @param fileEntryTypeId the file entry type ID of this d l file entry
 	*/
-	public void setDocumentTypeId(long documentTypeId) {
-		_dlFileEntry.setDocumentTypeId(documentTypeId);
+	public void setFileEntryTypeId(long fileEntryTypeId) {
+		_dlFileEntry.setFileEntryTypeId(fileEntryTypeId);
 	}
 
 	/**
@@ -531,6 +531,7 @@ public class DLFileEntryWrapper implements DLFileEntry {
 		_dlFileEntry.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new DLFileEntryWrapper((DLFileEntry)_dlFileEntry.clone());
 	}
@@ -540,6 +541,7 @@ public class DLFileEntryWrapper implements DLFileEntry {
 		return _dlFileEntry.compareTo(dlFileEntry);
 	}
 
+	@Override
 	public int hashCode() {
 		return _dlFileEntry.hashCode();
 	}
@@ -548,6 +550,7 @@ public class DLFileEntryWrapper implements DLFileEntry {
 		return new DLFileEntryWrapper(_dlFileEntry.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _dlFileEntry.toString();
 	}
@@ -620,8 +623,8 @@ public class DLFileEntryWrapper implements DLFileEntry {
 		return _dlFileEntry.hasLock();
 	}
 
-	public boolean isLocked() {
-		return _dlFileEntry.isLocked();
+	public boolean isCheckedOut() {
+		return _dlFileEntry.isCheckedOut();
 	}
 
 	public void setExtraSettingsProperties(

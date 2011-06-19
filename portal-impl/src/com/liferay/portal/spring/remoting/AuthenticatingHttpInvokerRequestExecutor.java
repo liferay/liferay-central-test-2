@@ -63,6 +63,7 @@ public class AuthenticatingHttpInvokerRequestExecutor
 	 * the parent to setup the connection, and then adds an
 	 * <code>Authorization</code> HTTP header property for BASIC authentication.
 	 */
+	@Override
 	protected void prepareConnection(HttpURLConnection con, int contentLength)
 		throws IOException {
 

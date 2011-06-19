@@ -33,6 +33,7 @@ public class SAPDB extends BaseDB {
 		return _instance;
 	}
 
+	@Override
 	public String buildSQL(String template) throws IOException {
 		template = convertTimestamp(template);
 		template = replaceTemplate(template, getTemplate());
@@ -46,20 +47,24 @@ public class SAPDB extends BaseDB {
 		super(TYPE_SAP);
 	}
 
+	@Override
 	protected String buildCreateFileContent(
 		String sqlDir, String databaseName, int population) {
 
 		return null;
 	}
 
+	@Override
 	protected String getServerName() {
 		return "sap";
 	}
 
+	@Override
 	protected String[] getTemplate() {
 		return _SAP;
 	}
 
+	@Override
 	protected String reword(String data) throws IOException {
 		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
 			new UnsyncStringReader(data));

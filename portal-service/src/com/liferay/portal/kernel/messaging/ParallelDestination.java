@@ -51,6 +51,7 @@ public class ParallelDestination extends BaseAsyncDestination {
 		super(name, workersCoreSize, workersMaxSize);
 	}
 
+	@Override
 	protected void dispatch(
 		Set<MessageListener> messageListeners, final Message message) {
 

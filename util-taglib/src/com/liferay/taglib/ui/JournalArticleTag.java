@@ -59,6 +59,7 @@ public class JournalArticleTag extends IncludeTag {
 		_xmlRequest = xmlRequest;
 	}
 
+	@Override
 	protected void cleanUp() {
 		_articleId = null;
 		_articlePage = 1;
@@ -71,10 +72,12 @@ public class JournalArticleTag extends IncludeTag {
 		_xmlRequest = null;
 	}
 
+	@Override
 	protected String getPage() {
 		return _PAGE;
 	}
 
+	@Override
 	protected void setAttributes(HttpServletRequest request) {
 		request.setAttribute(
 			"liferay-ui:journal-article:articleId", _articleId);

@@ -31,12 +31,14 @@ public class Base64OutputStream extends OutputStream {
 		_outputBuffer = new byte[4];
 	}
 
+	@Override
 	public void close() throws IOException {
 		flush();
 
 		_outputStream.close();
 	}
 
+	@Override
 	public void flush() throws IOException {
 		if (_unitBufferIndex == 1) {
 			encodeUnit(_unitBuffer[0]);
@@ -50,10 +52,12 @@ public class Base64OutputStream extends OutputStream {
 		_outputStream.flush();
 	}
 
+	@Override
 	public void write(byte[] bytes) throws IOException {
 		write(bytes, 0, bytes.length);
 	}
 
+	@Override
 	public void write(byte[] bytes, int offset, int length) throws IOException {
 		if (length <= 0) {
 			return;
@@ -87,6 +91,7 @@ public class Base64OutputStream extends OutputStream {
 		}
 	}
 
+	@Override
 	public void write(int byteValue) throws IOException {
 		_unitBuffer[_unitBufferIndex++] = (byte)byteValue;
 

@@ -39,6 +39,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class AxisServlet extends com.liferay.util.axis.AxisServlet {
 
+	@Override
 	public void init(ServletConfig servletConfig) throws ServletException {
 		ServletContext servletContext = servletConfig.getServletContext();
 
@@ -65,6 +66,7 @@ public class AxisServlet extends com.liferay.util.axis.AxisServlet {
 		}
 	}
 
+	@Override
 	public void service(
 			HttpServletRequest request, HttpServletResponse response)
 		throws IOException, ServletException {

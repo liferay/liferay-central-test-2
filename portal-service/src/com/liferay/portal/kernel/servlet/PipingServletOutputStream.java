@@ -28,6 +28,7 @@ public class PipingServletOutputStream extends ServletOutputStream {
 		_outputStream = outputStream;
 	}
 
+	@Override
 	public void close() throws IOException {
 		super.close();
 
@@ -38,16 +39,19 @@ public class PipingServletOutputStream extends ServletOutputStream {
 		return _closed;
 	}
 
+	@Override
 	public void write(byte[] bytes) throws IOException {
 		_outputStream.write(bytes);
 	}
 
+	@Override
 	public void write(byte[] bytes, int offset, int length)
 		throws IOException {
 
 		_outputStream.write(bytes, offset, length);
 	}
 
+	@Override
 	public void write(int b) throws IOException {
 		_outputStream.write(b);
 	}

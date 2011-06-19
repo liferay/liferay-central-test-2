@@ -367,6 +367,7 @@ public class BookmarksEntryWrapper implements BookmarksEntry {
 		_bookmarksEntry.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new BookmarksEntryWrapper((BookmarksEntry)_bookmarksEntry.clone());
 	}
@@ -376,6 +377,7 @@ public class BookmarksEntryWrapper implements BookmarksEntry {
 		return _bookmarksEntry.compareTo(bookmarksEntry);
 	}
 
+	@Override
 	public int hashCode() {
 		return _bookmarksEntry.hashCode();
 	}
@@ -384,6 +386,7 @@ public class BookmarksEntryWrapper implements BookmarksEntry {
 		return new BookmarksEntryWrapper(_bookmarksEntry.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _bookmarksEntry.toString();
 	}

@@ -45,6 +45,7 @@ public class ClusterRequestReceiver extends BaseReceiver {
 		_clusterExecutorImpl = clusterExecutorImpl;
 	}
 
+	@Override
 	public void receive(Message message) {
 		org.jgroups.Address sourceAddress = message.getSrc();
 

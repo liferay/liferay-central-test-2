@@ -31,6 +31,7 @@ public class ResourceActionRowChecker extends RowChecker {
 		super(renderResponse);
 	}
 
+	@Override
 	public boolean isChecked(Object obj) {
 		try {
 			return doIsChecked(obj);

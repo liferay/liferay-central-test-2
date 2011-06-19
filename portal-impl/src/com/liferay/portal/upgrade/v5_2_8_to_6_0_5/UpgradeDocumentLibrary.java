@@ -14,7 +14,6 @@
 
 package com.liferay.portal.upgrade.v5_2_8_to_6_0_5;
 
-import com.liferay.documentlibrary.service.DLLocalServiceUtil;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.upgrade.util.UpgradeColumn;
@@ -31,6 +30,7 @@ import com.liferay.portal.upgrade.v6_0_0.util.DLFileRankTable;
 import com.liferay.portal.upgrade.v6_0_0.util.DLFileShortcutTable;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
+import com.liferay.portlet.documentlibrary.store.DLStoreUtil;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -43,6 +43,7 @@ import java.sql.ResultSet;
  */
 public class UpgradeDocumentLibrary extends UpgradeProcess {
 
+	@Override
 	protected void doUpgrade() throws Exception {
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -74,7 +75,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 					name);
 
 				if (!newName.equals(name)) {
-					DLLocalServiceUtil.updateFile(
+					DLStoreUtil.updateFile(
 						companyId, portletId, groupId, repositoryId, name,
 						newName, false);
 				}
@@ -135,8 +136,15 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 		upgradeTable.setCreateSQL(
 			StringUtil.replace(
 				DLFileVersionTable.TABLE_SQL_CREATE,
-				",title VARCHAR(75) null",
-				",title VARCHAR(255) null"));
+				new String[] {
+					",extraSettings VARCHAR(75) null",
+					",title VARCHAR(75) null"
+				},
+				new String [] {
+					",extraSettings STRING null",
+					",title VARCHAR(255) null"
+				}));
+
 		upgradeTable.setIndexesSQL(DLFileVersionTable.TABLE_SQL_ADD_INDEXES);
 
 		upgradeTable.updateTable();

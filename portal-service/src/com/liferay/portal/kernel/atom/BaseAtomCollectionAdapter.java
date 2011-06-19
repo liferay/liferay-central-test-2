@@ -14,9 +14,6 @@
 
 package com.liferay.portal.kernel.atom;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-
 import java.util.Date;
 
 /**
@@ -25,9 +22,12 @@ import java.util.Date;
 public abstract class BaseAtomCollectionAdapter<E>
 	implements AtomCollectionAdapter<E> {
 
-	public void deleteEntry(String resourceName) throws AtomException {
+	public void deleteEntry(
+			String resourceName, AtomRequestContext atomRequestContext)
+		throws AtomException {
+
 		try {
-			doDeleteEntry(resourceName);
+			doDeleteEntry(resourceName, atomRequestContext);
 		}
 		catch (Exception e) {
 			Class<?> clazz = e.getClass();
@@ -42,9 +42,12 @@ public abstract class BaseAtomCollectionAdapter<E>
 		}
 	}
 
-	public E getEntry(String resourceName) throws AtomException {
+	public E getEntry(
+			String resourceName, AtomRequestContext atomRequestContext)
+		throws AtomException {
+
 		try {
-			return doGetEntry(resourceName);
+			return doGetEntry(resourceName, atomRequestContext);
 		}
 		catch (Exception e) {
 			Class<?> clazz = e.getClass();
@@ -74,17 +77,6 @@ public abstract class BaseAtomCollectionAdapter<E>
 
 			throw new AtomException(SC_INTERNAL_SERVER_ERROR, e);
 		}
-	}
-
-	public String getFeedTitle(AtomRequestContext atomRequestContext) {
-		try {
-			return doGetFeedTitle(atomRequestContext);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
-
-		return null;
 	}
 
 	public E postEntry(
@@ -131,15 +123,15 @@ public abstract class BaseAtomCollectionAdapter<E>
 		}
 	}
 
-	protected abstract void doDeleteEntry(String resourceName) throws Exception;
-
-	protected abstract E doGetEntry(String resourceName) throws Exception;
-
-	protected abstract Iterable<E> doGetFeedEntries(
-			AtomRequestContext atomRequestContext)
+	protected abstract void doDeleteEntry(
+			String resourceName, AtomRequestContext atomRequestContext)
 		throws Exception;
 
-	protected abstract String doGetFeedTitle(
+	protected abstract E doGetEntry(
+			String resourceName, AtomRequestContext atomRequestContext)
+		throws Exception;
+
+	protected abstract Iterable<E> doGetFeedEntries(
 			AtomRequestContext atomRequestContext)
 		throws Exception;
 
@@ -152,8 +144,5 @@ public abstract class BaseAtomCollectionAdapter<E>
 			E entry, String title, String summary, String content, Date date,
 			AtomRequestContext atomRequestContext)
 		throws Exception;
-
-	private static Log _log = LogFactoryUtil.getLog(
-		BaseAtomCollectionAdapter.class);
 
 }

@@ -16,8 +16,6 @@
 
 <%@ include file="/html/taglib/init.jsp" %>
 
-<%@ page import="com.liferay.portal.model.impl.BaseModelImpl" %>
-
 <%@ page import="java.text.Format" %>
 
 <%

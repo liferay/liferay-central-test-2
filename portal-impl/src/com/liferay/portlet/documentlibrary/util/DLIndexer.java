@@ -14,7 +14,6 @@
 
 package com.liferay.portlet.documentlibrary.util;
 
-import com.liferay.documentlibrary.model.FileModel;
 import com.liferay.portal.kernel.portlet.LiferayPortletURL;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.search.BaseIndexer;
@@ -42,10 +41,12 @@ import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
+import com.liferay.portlet.documentlibrary.model.FileModel;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFolderServiceUtil;
 import com.liferay.portlet.documentlibrary.service.permission.DLFileEntryPermission;
+import com.liferay.portlet.documentlibrary.store.DLStoreIndexer;
 
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -66,14 +67,14 @@ public class DLIndexer extends BaseIndexer {
 	public static final String PORTLET_ID = PortletKeys.DOCUMENT_LIBRARY;
 
 	public DLIndexer() {
-		IndexerRegistryUtil.register(
-			new com.liferay.documentlibrary.util.DLIndexer());
+		IndexerRegistryUtil.register(new DLStoreIndexer());
 	}
 
 	public String[] getClassNames() {
 		return CLASS_NAMES;
 	}
 
+	@Override
 	public boolean hasPermission(
 			PermissionChecker permissionChecker, long entryClassPK,
 			String actionId)
@@ -83,10 +84,12 @@ public class DLIndexer extends BaseIndexer {
 			permissionChecker, entryClassPK, ActionKeys.VIEW);
 	}
 
+	@Override
 	public boolean isFilterSearch() {
 		return _FILTER_SEARCH;
 	}
 
+	@Override
 	public void postProcessContextQuery(
 			BooleanQuery contextQuery, SearchContext searchContext)
 		throws Exception {
@@ -123,14 +126,15 @@ public class DLIndexer extends BaseIndexer {
 		}
 	}
 
+	@Override
 	public void postProcessSearchQuery(
 			BooleanQuery searchQuery, SearchContext searchContext)
 		throws Exception {
 
 		addSearchTerm(searchQuery, searchContext, Field.USER_NAME, true);
 
-		addSearchTerm(searchQuery, searchContext, "documentTypeId", false);
 		addSearchTerm(searchQuery, searchContext, "extension", true);
+		addSearchTerm(searchQuery, searchContext, "fileEntryTypeId", false);
 		addSearchTerm(searchQuery, searchContext, "path", true);
 
 		LinkedHashMap<String, Object> params =
@@ -145,6 +149,7 @@ public class DLIndexer extends BaseIndexer {
 		}
 	}
 
+	@Override
 	protected void doDelete(Object obj) throws Exception {
 		DLFileEntry fileEntry = (DLFileEntry)obj;
 
@@ -160,6 +165,7 @@ public class DLIndexer extends BaseIndexer {
 		indexer.delete(fileModel);
 	}
 
+	@Override
 	protected Document doGetDocument(Object obj) throws Exception {
 		DLFileEntry fileEntry = (DLFileEntry)obj;
 
@@ -199,6 +205,7 @@ public class DLIndexer extends BaseIndexer {
 		return indexer.getDocument(fileModel);
 	}
 
+	@Override
 	protected Summary doGetSummary(
 		Document document, Locale locale, String snippet,
 		PortletURL portletURL) {
@@ -231,6 +238,7 @@ public class DLIndexer extends BaseIndexer {
 		return new Summary(title, content, portletURL);
 	}
 
+	@Override
 	protected void doReindex(Object obj) throws Exception {
 		DLFileEntry fileEntry = (DLFileEntry)obj;
 
@@ -241,6 +249,7 @@ public class DLIndexer extends BaseIndexer {
 		}
 	}
 
+	@Override
 	protected void doReindex(String className, long classPK) throws Exception {
 		DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(
 			classPK);
@@ -248,6 +257,7 @@ public class DLIndexer extends BaseIndexer {
 		doReindex(fileEntry);
 	}
 
+	@Override
 	protected void doReindex(String[] ids) throws Exception {
 		long companyId = GetterUtil.getLong(ids[0]);
 
@@ -255,6 +265,7 @@ public class DLIndexer extends BaseIndexer {
 		reindexRoot(companyId);
 	}
 
+	@Override
 	protected String getPortletId(SearchContext searchContext) {
 		return PORTLET_ID;
 	}

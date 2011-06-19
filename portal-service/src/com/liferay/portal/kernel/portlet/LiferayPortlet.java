@@ -49,6 +49,7 @@ import javax.portlet.WindowState;
  */
 public class LiferayPortlet extends GenericPortlet {
 
+	@Override
 	public void init() throws PortletException {
 		super.init();
 
@@ -56,6 +57,7 @@ public class LiferayPortlet extends GenericPortlet {
 			getInitParameter("add-process-action-success-action"), true);
 	}
 
+	@Override
 	public void processAction(
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws IOException, PortletException {
@@ -94,6 +96,7 @@ public class LiferayPortlet extends GenericPortlet {
 		}
 	}
 
+	@Override
 	public void serveResource(
 			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
 		throws IOException, PortletException {
@@ -179,6 +182,7 @@ public class LiferayPortlet extends GenericPortlet {
 		throw new PortletException("doConfig method not implemented");
 	}
 
+	@Override
 	protected void doDispatch(
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {

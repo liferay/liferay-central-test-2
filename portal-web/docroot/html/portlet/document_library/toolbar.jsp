@@ -29,47 +29,57 @@ String orderByType = ParamUtil.getString(request, "orderByType");
 
 <aui:input cssClass="select-documents aui-state-default" inline="<%= true %>" label="" name='<%= RowChecker.ALL_ROW_IDS %>' type="checkbox" />
 
-<span id="<portlet:namespace />actionsButtonContainer">
-	<liferay-ui:icon-menu align="left" cssClass="actions-button" direction="down" disabled="<%= true %>" icon="" message="actions" showExpanded="<%= false %>" showWhenSingleIcon="<%= false %>">
+<liferay-ui:icon-menu align="left" cssClass="actions-button" direction="down" disabled="<%= true %>" icon="" id="actionsButtonContainer" message="actions" showExpanded="<%= false %>" showWhenSingleIcon="<%= false %>">
 
-		<%
-		String taglibUrl = "javascript:" + renderResponse.getNamespace() + "editFileEntry('" + Constants.LOCK + "')";
-		%>
+	<%
+	String taglibUrl = "javascript:" + renderResponse.getNamespace() + "editFileEntry('" + Constants.CANCEL_CHECKOUT + "')";
+	%>
 
-		<liferay-ui:icon
-			image="lock"
-			url="<%= taglibUrl %>"
-		/>
+	<liferay-ui:icon
+		image="undo"
+		message="cancel-checkout"
+		url="<%= taglibUrl %>"
+	/>
 
-		<%
-		taglibUrl = "javascript:" + renderResponse.getNamespace() + "editFileEntry('" + Constants.UNLOCK + "')";
-		%>
+	<%
+	taglibUrl = "javascript:" + renderResponse.getNamespace() + "editFileEntry('" + Constants.CHECKIN + "')";
+	%>
 
-		<liferay-ui:icon
-			image="unlock"
-			url="<%= taglibUrl %>"
-		/>
+	<liferay-ui:icon
+		image="unlock"
+		message="checkin"
+		url="<%= taglibUrl %>"
+	/>
 
-		<%
-		taglibUrl = "javascript:" + renderResponse.getNamespace() + "editFileEntry('" + Constants.MOVE + "')";
-		%>
+	<%
+	taglibUrl = "javascript:" + renderResponse.getNamespace() + "editFileEntry('" + Constants.CHECKOUT + "')";
+	%>
 
-		<liferay-ui:icon
-			image="submit"
-			message="move"
-			url="<%= taglibUrl %>"
-		/>
+	<liferay-ui:icon
+		image="lock"
+		message="checkout"
+		url="<%= taglibUrl %>"
+	/>
 
-		<%
-		taglibUrl = "javascript:" + renderResponse.getNamespace() + "editFileEntry('" + Constants.DELETE + "')";
-		%>
+	<%
+	taglibUrl = "javascript:" + renderResponse.getNamespace() + "editFileEntry('" + Constants.MOVE + "')";
+	%>
 
-		<liferay-ui:icon-delete
-			confirmation="are-you-sure-you-want-to-delete-the-selected-entries"
-			url="<%= taglibUrl %>"
-		/>
-	</liferay-ui:icon-menu>
-</span>
+	<liferay-ui:icon
+		image="submit"
+		message="move"
+		url="<%= taglibUrl %>"
+	/>
+
+	<%
+	taglibUrl = "javascript:" + renderResponse.getNamespace() + "editFileEntry('" + Constants.DELETE + "')";
+	%>
+
+	<liferay-ui:icon-delete
+		confirmation="are-you-sure-you-want-to-delete-the-selected-entries"
+		url="<%= taglibUrl %>"
+	/>
+</liferay-ui:icon-menu>
 
 <span class="add-button" id="<portlet:namespace />addButtonContainer">
 	<liferay-util:include page="/html/portlet/document_library/add_button.jsp" />
@@ -83,7 +93,7 @@ String orderByType = ParamUtil.getString(request, "orderByType");
 	<liferay-ui:icon-menu align="left" direction="down" icon="" message="manage" showExpanded="<%= false %>" showWhenSingleIcon="<%= true %>">
 
 		<%
-		String taglibUrl = "javascript:" + renderResponse.getNamespace() + "openDocumentTypeView()";
+		String taglibUrl = "javascript:" + renderResponse.getNamespace() + "openFileEntryTypeView()";
 		%>
 
 		<liferay-ui:icon
@@ -105,7 +115,7 @@ String orderByType = ParamUtil.getString(request, "orderByType");
 </span>
 
 <aui:script>
-	function <portlet:namespace />openDocumentTypeView() {
+	function <portlet:namespace />openFileEntryTypeView() {
 		Liferay.Util.openWindow(
 			{
 				dialog: {
@@ -113,7 +123,7 @@ String orderByType = ParamUtil.getString(request, "orderByType");
 					width:820
 				},
 				title: '<liferay-ui:message key="document-types" />',
-				uri: '<liferay-portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/document_library/view_document_type" /><portlet:param name="redirect" value="<%= currentURL %>" /></liferay-portlet:renderURL>'
+				uri: '<liferay-portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/document_library/view_file_entry_type" /><portlet:param name="redirect" value="<%= currentURL %>" /></liferay-portlet:renderURL>'
 			}
 		);
 	}
@@ -128,7 +138,7 @@ String orderByType = ParamUtil.getString(request, "orderByType");
 				showManageTemplates: 'false',
 				storageType: 'xml',
 				structureName: 'metadata-set',
-				structureType: 'com.liferay.portlet.documentlibrary.model.DLDocumentMetadataSet',
+				structureType: 'com.liferay.portlet.documentlibrary.model.DLFileEntryMetadata',
 				title: '<liferay-ui:message key="metadata-sets" />'
 			}
 		);

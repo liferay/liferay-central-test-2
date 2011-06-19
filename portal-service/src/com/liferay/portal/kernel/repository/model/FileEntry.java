@@ -129,9 +129,9 @@ public interface FileEntry extends RepositoryModel<FileEntry> {
 
 	public boolean hasLock();
 
-	public boolean isDefaultRepository();
+	public boolean isCheckedOut();
 
-	public boolean isLocked();
+	public boolean isDefaultRepository();
 
 	public boolean isSupportsLocking();
 

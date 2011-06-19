@@ -27,14 +27,17 @@ public class MyPlacesTag extends IncludeTag {
 		_max = max;
 	}
 
+	@Override
 	protected void cleanUp() {
 		_max = 0;
 	}
 
+	@Override
 	protected String getPage() {
 		return _PAGE;
 	}
 
+	@Override
 	protected void setAttributes(HttpServletRequest request) {
 		request.setAttribute("liferay-ui:my_places:max", String.valueOf(_max));
 	}

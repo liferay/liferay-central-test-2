@@ -113,6 +113,7 @@ public class SocialEquityHistoryPersistenceImpl extends BasePersistenceImpl<Soci
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(SocialEquityHistoryImpl.class.getName());
@@ -130,6 +131,7 @@ public class SocialEquityHistoryPersistenceImpl extends BasePersistenceImpl<Soci
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(SocialEquityHistory socialEquityHistory) {
 		EntityCacheUtil.removeResult(SocialEquityHistoryModelImpl.ENTITY_CACHE_ENABLED,
 			SocialEquityHistoryImpl.class, socialEquityHistory.getPrimaryKey());
@@ -158,6 +160,7 @@ public class SocialEquityHistoryPersistenceImpl extends BasePersistenceImpl<Soci
 	 * @throws com.liferay.portal.NoSuchModelException if a social equity history with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public SocialEquityHistory remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
@@ -211,11 +214,13 @@ public class SocialEquityHistoryPersistenceImpl extends BasePersistenceImpl<Soci
 	 * @return the social equity history that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public SocialEquityHistory remove(SocialEquityHistory socialEquityHistory)
 		throws SystemException {
 		return super.remove(socialEquityHistory);
 	}
 
+	@Override
 	protected SocialEquityHistory removeImpl(
 		SocialEquityHistory socialEquityHistory) throws SystemException {
 		socialEquityHistory = toUnwrappedModel(socialEquityHistory);
@@ -242,6 +247,7 @@ public class SocialEquityHistoryPersistenceImpl extends BasePersistenceImpl<Soci
 		return socialEquityHistory;
 	}
 
+	@Override
 	public SocialEquityHistory updateImpl(
 		com.liferay.portlet.social.model.SocialEquityHistory socialEquityHistory,
 		boolean merge) throws SystemException {
@@ -301,6 +307,7 @@ public class SocialEquityHistoryPersistenceImpl extends BasePersistenceImpl<Soci
 	 * @throws com.liferay.portal.NoSuchModelException if a social equity history with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public SocialEquityHistory findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
@@ -337,6 +344,7 @@ public class SocialEquityHistoryPersistenceImpl extends BasePersistenceImpl<Soci
 	 * @return the social equity history, or <code>null</code> if a social equity history with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public SocialEquityHistory fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());

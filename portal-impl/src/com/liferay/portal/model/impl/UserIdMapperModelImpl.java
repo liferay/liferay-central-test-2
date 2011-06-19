@@ -192,6 +192,7 @@ public class UserIdMapperModelImpl extends BaseModelImpl<UserIdMapper>
 		return GetterUtil.getString(_originalExternalUserId);
 	}
 
+	@Override
 	public UserIdMapper toEscapedModel() {
 		if (isEscapedModel()) {
 			return (UserIdMapper)this;
@@ -202,6 +203,7 @@ public class UserIdMapperModelImpl extends BaseModelImpl<UserIdMapper>
 		}
 	}
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(0,
@@ -211,10 +213,12 @@ public class UserIdMapperModelImpl extends BaseModelImpl<UserIdMapper>
 		return _expandoBridge;
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		getExpandoBridge().setAttributes(serviceContext);
 	}
 
+	@Override
 	public Object clone() {
 		UserIdMapperImpl userIdMapperImpl = new UserIdMapperImpl();
 
@@ -243,6 +247,7 @@ public class UserIdMapperModelImpl extends BaseModelImpl<UserIdMapper>
 		}
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -267,10 +272,12 @@ public class UserIdMapperModelImpl extends BaseModelImpl<UserIdMapper>
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		UserIdMapperModelImpl userIdMapperModelImpl = this;
 
@@ -283,6 +290,7 @@ public class UserIdMapperModelImpl extends BaseModelImpl<UserIdMapper>
 		userIdMapperModelImpl._originalExternalUserId = userIdMapperModelImpl._externalUserId;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(11);
 

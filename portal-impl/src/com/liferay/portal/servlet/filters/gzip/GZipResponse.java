@@ -76,12 +76,14 @@ public class GZipResponse extends HttpServletResponseWrapper {
 		}
 	}
 
+	@Override
 	public void flushBuffer() throws IOException {
 		if (_servletOutputStream != null) {
 			_servletOutputStream.flush();
 		}
 	}
 
+	@Override
 	public ServletOutputStream getOutputStream() throws IOException {
 		if (_printWriter != null) {
 			throw new IllegalStateException();
@@ -104,6 +106,7 @@ public class GZipResponse extends HttpServletResponseWrapper {
 		return _servletOutputStream;
 	}
 
+	@Override
 	public PrintWriter getWriter() throws IOException {
 		if (_printWriter != null) {
 			return _printWriter;
@@ -126,6 +129,7 @@ public class GZipResponse extends HttpServletResponseWrapper {
 		return _printWriter;
 	}
 
+	@Override
 	public void setContentLength(int contentLength) {
 	}
 

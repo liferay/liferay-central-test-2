@@ -278,6 +278,7 @@ public class AssetCategoryPropertyWrapper implements AssetCategoryProperty {
 		_assetCategoryProperty.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new AssetCategoryPropertyWrapper((AssetCategoryProperty)_assetCategoryProperty.clone());
 	}
@@ -287,6 +288,7 @@ public class AssetCategoryPropertyWrapper implements AssetCategoryProperty {
 		return _assetCategoryProperty.compareTo(assetCategoryProperty);
 	}
 
+	@Override
 	public int hashCode() {
 		return _assetCategoryProperty.hashCode();
 	}
@@ -295,6 +297,7 @@ public class AssetCategoryPropertyWrapper implements AssetCategoryProperty {
 		return new AssetCategoryPropertyWrapper(_assetCategoryProperty.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _assetCategoryProperty.toString();
 	}

@@ -113,6 +113,7 @@ public class UserGroupRolePK implements Comparable<UserGroupRolePK>,
 		return 0;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -136,11 +137,13 @@ public class UserGroupRolePK implements Comparable<UserGroupRolePK>,
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (String.valueOf(userId) + String.valueOf(groupId) +
 		String.valueOf(roleId)).hashCode();
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(15);
 

@@ -16,31 +16,46 @@
 
 <c:if test="<%= DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.UPDATE) && fileEntry.isSupportsLocking() %>">
 	<c:choose>
-		<c:when test="<%= !fileEntry.isLocked() %>">
-			<portlet:actionURL var ="lockURL">
+		<c:when test="<%= !fileEntry.isCheckedOut() %>">
+			<portlet:actionURL var="checkOutURL">
 				<portlet:param name="struts_action" value="/document_library/edit_file_entry" />
-				<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.LOCK %>" />
+				<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.CHECKOUT %>" />
 				<portlet:param name="redirect" value="<%= currentURL %>" />
 				<portlet:param name="fileEntryId" value="<%= String.valueOf(fileEntry.getFileEntryId()) %>" />
 			</portlet:actionURL>
 
 			<liferay-ui:icon
 				image="lock"
-				url="<%= lockURL %>"
+				message="checkout"
+				url="<%= checkOutURL %>"
 			/>
 		</c:when>
 		<c:otherwise>
 			<c:if test="<%= fileEntry.hasLock() || permissionChecker.isGroupAdmin(fileEntry.getRepositoryId()) %>">
-				<portlet:actionURL var ="unlockURL">
+				<portlet:actionURL var="checkInURL">
 					<portlet:param name="struts_action" value="/document_library/edit_file_entry" />
-					<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.UNLOCK %>" />
+					<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.CHECKIN %>" />
 					<portlet:param name="redirect" value="<%= currentURL %>" />
-				<portlet:param name="fileEntryId" value="<%= String.valueOf(fileEntry.getFileEntryId()) %>" />
+					<portlet:param name="fileEntryId" value="<%= String.valueOf(fileEntry.getFileEntryId()) %>" />
 				</portlet:actionURL>
 
 				<liferay-ui:icon
 					image="unlock"
-					url="<%= unlockURL %>"
+					message="checkin"
+					url="<%= checkInURL %>"
+				/>
+
+				<portlet:actionURL var="cancelCheckOutURL">
+					<portlet:param name="struts_action" value="/document_library/edit_file_entry" />
+					<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.CANCEL_CHECKOUT %>" />
+					<portlet:param name="redirect" value="<%= currentURL %>" />
+					<portlet:param name="fileEntryId" value="<%= String.valueOf(fileEntry.getFileEntryId()) %>" />
+				</portlet:actionURL>
+
+				<liferay-ui:icon
+					image="undo"
+					message="cancel-checkout"
+					url="<%= cancelCheckOutURL %>"
 				/>
 			</c:if>
 		</c:otherwise>

@@ -260,6 +260,7 @@ public class UpgradeResource extends UpgradeProcess {
 		return classPKContainers;
 	}
 
+	@Override
 	protected void doUpgrade() throws Exception {
 
 		// Resource

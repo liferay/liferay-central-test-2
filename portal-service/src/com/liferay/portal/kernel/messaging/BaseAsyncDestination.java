@@ -55,6 +55,7 @@ public abstract class BaseAsyncDestination extends BaseDestination {
 		open();
 	}
 
+	@Override
 	public void close(boolean force) {
 		if (!_threadPoolExecutor.isShutdown()
 			&& !_threadPoolExecutor.isTerminating()) {
@@ -109,6 +110,7 @@ public abstract class BaseAsyncDestination extends BaseDestination {
 		return _workersMaxSize;
 	}
 
+	@Override
 	public void open() {
 		if ((_threadPoolExecutor == null) || _threadPoolExecutor.isShutdown()) {
 			ClassLoader classLoader = PortalClassLoaderUtil.getClassLoader();

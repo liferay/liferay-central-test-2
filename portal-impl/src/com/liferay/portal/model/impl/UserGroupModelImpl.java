@@ -243,6 +243,7 @@ public class UserGroupModelImpl extends BaseModelImpl<UserGroup>
 		_addedByLDAPImport = addedByLDAPImport;
 	}
 
+	@Override
 	public UserGroup toEscapedModel() {
 		if (isEscapedModel()) {
 			return (UserGroup)this;
@@ -253,6 +254,7 @@ public class UserGroupModelImpl extends BaseModelImpl<UserGroup>
 		}
 	}
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
@@ -262,10 +264,12 @@ public class UserGroupModelImpl extends BaseModelImpl<UserGroup>
 		return _expandoBridge;
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		getExpandoBridge().setAttributes(serviceContext);
 	}
 
+	@Override
 	public Object clone() {
 		UserGroupImpl userGroupImpl = new UserGroupImpl();
 
@@ -293,6 +297,7 @@ public class UserGroupModelImpl extends BaseModelImpl<UserGroup>
 		return 0;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -317,10 +322,12 @@ public class UserGroupModelImpl extends BaseModelImpl<UserGroup>
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		UserGroupModelImpl userGroupModelImpl = this;
 
@@ -331,6 +338,7 @@ public class UserGroupModelImpl extends BaseModelImpl<UserGroup>
 		userGroupModelImpl._originalName = userGroupModelImpl._name;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(13);
 

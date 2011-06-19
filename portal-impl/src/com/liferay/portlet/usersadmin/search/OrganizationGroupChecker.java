@@ -36,6 +36,7 @@ public class OrganizationGroupChecker extends RowChecker {
 		_group = group;
 	}
 
+	@Override
 	public boolean isChecked(Object obj) {
 		Organization organization = (Organization)obj;
 

@@ -38,12 +38,14 @@ public class GlobalDestinationEventListener
 		_ignoredDestinations = SetUtil.fromList(ignoredDestinations);
 	}
 
+	@Override
 	public void destinationAdded(Destination destination) {
 		if (!_ignoredDestinations.contains(destination.getName())) {
 			destination.register(_messageListener);
 		}
 	}
 
+	@Override
 	public void destinationRemoved(Destination destination) {
 		if (!_ignoredDestinations.contains(destination.getName())) {
 			destination.unregister(_messageListener);

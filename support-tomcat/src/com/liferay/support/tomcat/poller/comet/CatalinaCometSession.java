@@ -50,6 +50,7 @@ public class CatalinaCometSession extends BaseCometSession {
 		session.setAttribute(name, object);
 	}
 
+	@Override
 	protected void doClose() throws SystemException {
 		try {
 			_cometEvent.close();

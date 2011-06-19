@@ -27,6 +27,7 @@ public class FiniteStack<E> extends Stack<E> {
 		_maxSize = maxSize;
 	}
 
+	@Override
 	public E push(E item) {
 		super.push(item);
 

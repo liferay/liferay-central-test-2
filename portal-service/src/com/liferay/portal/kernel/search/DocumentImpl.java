@@ -534,6 +534,7 @@ public class DocumentImpl implements Document {
 		_fields = fields;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler();
 

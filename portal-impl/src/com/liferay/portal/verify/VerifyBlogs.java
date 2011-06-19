@@ -26,6 +26,7 @@ import java.util.List;
  */
 public class VerifyBlogs extends VerifyProcess {
 
+	@Override
 	protected void doVerify() throws Exception {
 		List<BlogsEntry> entries =
 			BlogsEntryLocalServiceUtil.getNoAssetEntries();

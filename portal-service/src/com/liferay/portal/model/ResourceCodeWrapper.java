@@ -167,6 +167,7 @@ public class ResourceCodeWrapper implements ResourceCode {
 		_resourceCode.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new ResourceCodeWrapper((ResourceCode)_resourceCode.clone());
 	}
@@ -175,6 +176,7 @@ public class ResourceCodeWrapper implements ResourceCode {
 		return _resourceCode.compareTo(resourceCode);
 	}
 
+	@Override
 	public int hashCode() {
 		return _resourceCode.hashCode();
 	}
@@ -183,6 +185,7 @@ public class ResourceCodeWrapper implements ResourceCode {
 		return new ResourceCodeWrapper(_resourceCode.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _resourceCode.toString();
 	}

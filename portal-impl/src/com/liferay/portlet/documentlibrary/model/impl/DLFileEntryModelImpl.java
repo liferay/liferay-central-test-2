@@ -81,12 +81,12 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 			{ "title", Types.VARCHAR },
 			{ "description", Types.VARCHAR },
 			{ "extraSettings", Types.CLOB },
-			{ "documentTypeId", Types.BIGINT },
+			{ "fileEntryTypeId", Types.BIGINT },
 			{ "version", Types.VARCHAR },
 			{ "size_", Types.BIGINT },
 			{ "readCount", Types.INTEGER }
 		};
-	public static final String TABLE_SQL_CREATE = "create table DLFileEntry (uuid_ VARCHAR(75) null,fileEntryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,versionUserId LONG,versionUserName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,repositoryId LONG,folderId LONG,name VARCHAR(255) null,extension VARCHAR(75) null,mimeType VARCHAR(75) null,title VARCHAR(255) null,description STRING null,extraSettings TEXT null,documentTypeId LONG,version VARCHAR(75) null,size_ LONG,readCount INTEGER)";
+	public static final String TABLE_SQL_CREATE = "create table DLFileEntry (uuid_ VARCHAR(75) null,fileEntryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,versionUserId LONG,versionUserName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,repositoryId LONG,folderId LONG,name VARCHAR(255) null,extension VARCHAR(75) null,mimeType VARCHAR(75) null,title VARCHAR(255) null,description STRING null,extraSettings TEXT null,fileEntryTypeId LONG,version VARCHAR(75) null,size_ LONG,readCount INTEGER)";
 	public static final String TABLE_SQL_DROP = "drop table DLFileEntry";
 	public static final String ORDER_BY_JPQL = " ORDER BY dlFileEntry.folderId ASC, dlFileEntry.name ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY DLFileEntry.folderId ASC, DLFileEntry.name ASC";
@@ -127,7 +127,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 		model.setTitle(soapModel.getTitle());
 		model.setDescription(soapModel.getDescription());
 		model.setExtraSettings(soapModel.getExtraSettings());
-		model.setDocumentTypeId(soapModel.getDocumentTypeId());
+		model.setFileEntryTypeId(soapModel.getFileEntryTypeId());
 		model.setVersion(soapModel.getVersion());
 		model.setSize(soapModel.getSize());
 		model.setReadCount(soapModel.getReadCount());
@@ -450,12 +450,12 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 	}
 
 	@JSON
-	public long getDocumentTypeId() {
-		return _documentTypeId;
+	public long getFileEntryTypeId() {
+		return _fileEntryTypeId;
 	}
 
-	public void setDocumentTypeId(long documentTypeId) {
-		_documentTypeId = documentTypeId;
+	public void setFileEntryTypeId(long fileEntryTypeId) {
+		_fileEntryTypeId = fileEntryTypeId;
 	}
 
 	@JSON
@@ -490,6 +490,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 		_readCount = readCount;
 	}
 
+	@Override
 	public DLFileEntry toEscapedModel() {
 		if (isEscapedModel()) {
 			return (DLFileEntry)this;
@@ -500,6 +501,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 		}
 	}
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
@@ -509,10 +511,12 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 		return _expandoBridge;
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		getExpandoBridge().setAttributes(serviceContext);
 	}
 
+	@Override
 	public Object clone() {
 		DLFileEntryImpl dlFileEntryImpl = new DLFileEntryImpl();
 
@@ -534,7 +538,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 		dlFileEntryImpl.setTitle(getTitle());
 		dlFileEntryImpl.setDescription(getDescription());
 		dlFileEntryImpl.setExtraSettings(getExtraSettings());
-		dlFileEntryImpl.setDocumentTypeId(getDocumentTypeId());
+		dlFileEntryImpl.setFileEntryTypeId(getFileEntryTypeId());
 		dlFileEntryImpl.setVersion(getVersion());
 		dlFileEntryImpl.setSize(getSize());
 		dlFileEntryImpl.setReadCount(getReadCount());
@@ -570,6 +574,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 		return 0;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -594,10 +599,12 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		DLFileEntryModelImpl dlFileEntryModelImpl = this;
 
@@ -616,6 +623,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 		dlFileEntryModelImpl._originalTitle = dlFileEntryModelImpl._title;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(45);
 
@@ -655,8 +663,8 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 		sb.append(getDescription());
 		sb.append(", extraSettings=");
 		sb.append(getExtraSettings());
-		sb.append(", documentTypeId=");
-		sb.append(getDocumentTypeId());
+		sb.append(", fileEntryTypeId=");
+		sb.append(getFileEntryTypeId());
 		sb.append(", version=");
 		sb.append(getVersion());
 		sb.append(", size=");
@@ -748,8 +756,8 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 		sb.append(getExtraSettings());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>documentTypeId</column-name><column-value><![CDATA[");
-		sb.append(getDocumentTypeId());
+			"<column><column-name>fileEntryTypeId</column-name><column-value><![CDATA[");
+		sb.append(getFileEntryTypeId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>version</column-name><column-value><![CDATA[");
@@ -800,7 +808,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 	private String _originalTitle;
 	private String _description;
 	private String _extraSettings;
-	private long _documentTypeId;
+	private long _fileEntryTypeId;
 	private String _version;
 	private long _size;
 	private int _readCount;

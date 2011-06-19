@@ -69,6 +69,7 @@ public class BreadcrumbTag extends IncludeTag {
 		_showPortletBreadcrumb = showPortletBreadcrumb;
 	}
 
+	@Override
 	protected void cleanUp() {
 		_displayStyle = _DISPLAY_STYLE;
 		_portletURL = null;
@@ -82,10 +83,12 @@ public class BreadcrumbTag extends IncludeTag {
 		_showPortletBreadcrumb = true;
 	}
 
+	@Override
 	protected String getPage() {
 		return _PAGE;
 	}
 
+	@Override
 	protected void setAttributes(HttpServletRequest request) {
 		request.setAttribute(
 			"liferay-ui:breadcrumb:displayStyle", _displayStyle);

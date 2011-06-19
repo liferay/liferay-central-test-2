@@ -92,6 +92,79 @@ app.server.glassfish.zip.url=http://download.java.net/glassfish/v3/release/${app
 		</antcall>
 	</target>
 
+	<target name="build-dist-language-hook">
+		<if>
+			<available file="${lp.plugins.dir}/hooks/liferay-language-${locale.current}-hook" />
+			<then>
+				<delete dir="${lp.plugins.dir}/hooks/liferay-language-${locale.current}-hook" />
+			</then>
+		</if>
+
+		<exec dir="${lp.plugins.dir}/hooks" executable="cmd.exe">
+			<arg line="/c create.bat liferay-language-${locale.current} &quot;Liferay Portal Language Pack ${locale.current}&quot;" />
+		</exec>
+
+		<echo file="${lp.plugins.dir}/hooks/liferay-language-${locale.current}-hook/docroot/WEB-INF/liferay-hook.xml"><![CDATA[<?xml version="1.0"?>
+<!DOCTYPE hook PUBLIC "-//Liferay//DTD Hook 6.1.0//EN" "http://www.liferay.com/dtd/liferay-hook_6_1_0.dtd">
+
+<hook>
+	<language-properties>content/Language-ext_${locale.current}.properties</language-properties>
+</hook>]]></echo>
+
+		<copy file="portal-impl/src/content/Language_${locale.current}.properties" tofile="${lp.plugins.dir}/hooks/liferay-language-${locale.current}-hook/docroot/WEB-INF/src/content/Language-ext_${locale.current}.properties" />
+
+		<if>
+			<not>
+				<equals arg1="${lp.plugins.minor.version}" arg2="1" />
+			</not>
+			<then>
+				<replace file="${lp.plugins.dir}/hooks/liferay-language-${locale.current}-hook/docroot/WEB-INF/liferay-plugin-package.properties">
+					<replacefilter token="module-incremental-version=1" value="module-incremental-version=${lp.plugins.minor.version}" />
+				</replace>
+			</then>
+		</if>
+
+		<ant dir="${lp.plugins.dir}/hooks/liferay-language-${locale.current}-hook" target="war" inheritAll="false" />
+	</target>
+
+	<target name="build-dist-language-hooks">
+		<exec executable="cmd">
+			<arg line="/c dir /b ${project.dir}\portal-impl\src\content\ > ${project.dir}\output.txt" />
+		</exec>
+
+		<loadfile property="output.txt.content" srcFile="${project.dir}\output.txt" />
+
+		<delete file="output.txt" />
+
+		<script classpathref="project.classpath" language="beanshell">
+			String outputTxtContent = project.getProperty("output.txt.content");
+
+			if (outputTxtContent.contains("File Not Found")) {
+				outputTxtContent = "";
+			}
+
+			String locales = outputTxtContent.replaceAll("\r\n", ",");
+
+			locales = locales.replaceAll("Language.properties,", "");
+			locales = locales.replaceAll("Language_", "");
+			locales = locales.replaceAll(".properties", "");
+
+			if (locales.endsWith(",")) {
+				locales = locales.substring(0, locales.length() - 1);
+			}
+
+			project.setProperty("locale.list", locales);
+		</script>
+
+		<for list="${locale.list}" param="locale.current">
+			<sequential>
+				<antcall target="build-dist-language-hook">
+					<param name="locale.current" value="@{locale.current}" />
+				</antcall>
+			</sequential>
+		</for>
+	</target>
+
 	<target name="build-dist-resin">
 		<antcall target="unzip-resin" />
 

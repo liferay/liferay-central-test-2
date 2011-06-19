@@ -389,6 +389,7 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread>
 		}
 	}
 
+	@Override
 	public MBThread toEscapedModel() {
 		if (isEscapedModel()) {
 			return (MBThread)this;
@@ -399,6 +400,7 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread>
 		}
 	}
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
 			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
@@ -408,10 +410,12 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread>
 		return _expandoBridge;
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		getExpandoBridge().setAttributes(serviceContext);
 	}
 
+	@Override
 	public Object clone() {
 		MBThreadImpl mbThreadImpl = new MBThreadImpl();
 
@@ -466,6 +470,7 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread>
 		return 0;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {
 			return false;
@@ -490,10 +495,12 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread>
 		}
 	}
 
+	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
+	@Override
 	public void resetOriginalValues() {
 		MBThreadModelImpl mbThreadModelImpl = this;
 
@@ -502,6 +509,7 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread>
 		mbThreadModelImpl._setOriginalRootMessageId = false;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(31);
 

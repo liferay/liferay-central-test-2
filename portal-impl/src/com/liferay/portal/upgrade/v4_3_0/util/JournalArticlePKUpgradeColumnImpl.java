@@ -37,6 +37,7 @@ public class JournalArticlePKUpgradeColumnImpl extends PKUpgradeColumnImpl {
 		_journalArticleIdMapper = ValueMapperFactoryUtil.getValueMapper();
 	}
 
+	@Override
 	public Object getNewValue(Object oldValue) throws Exception {
 		_resourcePrimKey = null;
 
@@ -59,6 +60,7 @@ public class JournalArticlePKUpgradeColumnImpl extends PKUpgradeColumnImpl {
 		return newValue;
 	}
 
+	@Override
 	public ValueMapper getValueMapper() {
 		return _journalArticleIdMapper;
 	}

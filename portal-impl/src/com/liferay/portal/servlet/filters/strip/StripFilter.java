@@ -64,6 +64,7 @@ public class StripFilter extends BasePortalFilter {
 		}
 	}
 
+	@Override
 	public void init(FilterConfig filterConfig) {
 		super.init(filterConfig);
 
@@ -72,6 +73,7 @@ public class StripFilter extends BasePortalFilter {
 		}
 	}
 
+	@Override
 	public boolean isFilterEnabled(
 		HttpServletRequest request, HttpServletResponse response) {
 
@@ -259,6 +261,7 @@ public class StripFilter extends BasePortalFilter {
 		outputCloseTag(charBuffer, writer, _MARKER_STYLE_CLOSE);
 	}
 
+	@Override
 	protected void processFilter(
 			HttpServletRequest request, HttpServletResponse response,
 			FilterChain filterChain)

@@ -259,6 +259,7 @@ public class UserTrackerWrapper implements UserTracker {
 		_userTracker.setExpandoBridgeAttributes(serviceContext);
 	}
 
+	@Override
 	public java.lang.Object clone() {
 		return new UserTrackerWrapper((UserTracker)_userTracker.clone());
 	}
@@ -267,6 +268,7 @@ public class UserTrackerWrapper implements UserTracker {
 		return _userTracker.compareTo(userTracker);
 	}
 
+	@Override
 	public int hashCode() {
 		return _userTracker.hashCode();
 	}
@@ -275,6 +277,7 @@ public class UserTrackerWrapper implements UserTracker {
 		return new UserTrackerWrapper(_userTracker.toEscapedModel());
 	}
 
+	@Override
 	public java.lang.String toString() {
 		return _userTracker.toString();
 	}

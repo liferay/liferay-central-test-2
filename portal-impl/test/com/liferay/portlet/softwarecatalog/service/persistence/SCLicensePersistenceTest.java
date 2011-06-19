@@ -30,6 +30,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class SCLicensePersistenceTest extends BasePersistenceTestCase {
+	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -66,9 +67,13 @@ public class SCLicensePersistenceTest extends BasePersistenceTestCase {
 		SCLicense newSCLicense = _persistence.create(pk);
 
 		newSCLicense.setName(randomString());
+
 		newSCLicense.setUrl(randomString());
+
 		newSCLicense.setOpenSource(randomBoolean());
+
 		newSCLicense.setActive(randomBoolean());
+
 		newSCLicense.setRecommended(randomBoolean());
 
 		_persistence.update(newSCLicense, false);
@@ -195,9 +200,13 @@ public class SCLicensePersistenceTest extends BasePersistenceTestCase {
 		SCLicense scLicense = _persistence.create(pk);
 
 		scLicense.setName(randomString());
+
 		scLicense.setUrl(randomString());
+
 		scLicense.setOpenSource(randomBoolean());
+
 		scLicense.setActive(randomBoolean());
+
 		scLicense.setRecommended(randomBoolean());
 
 		_persistence.update(scLicense, false);

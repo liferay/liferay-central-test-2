@@ -245,6 +245,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		}
 	}
 
+	@Override
 	public PortletDataHandlerControl[] getExportControls() {
 		return new PortletDataHandlerControl[] {
 			_articles, _structuresTemplatesAndFeeds, _embeddedAssets, _images,
@@ -252,6 +253,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		};
 	}
 
+	@Override
 	public PortletDataHandlerControl[] getImportControls() {
 		return new PortletDataHandlerControl[] {
 			_articles, _structuresTemplatesAndFeeds, _images, _categories,
@@ -259,10 +261,12 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		};
 	}
 
+	@Override
 	public boolean isAlwaysExportable() {
 		return _ALWAYS_EXPORTABLE;
 	}
 
+	@Override
 	public boolean isPublishToLiveByDefault() {
 		return PropsValues.JOURNAL_PUBLISH_TO_LIVE_BY_DEFAULT;
 	}
@@ -2263,6 +2267,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		}
 	}
 
+	@Override
 	protected PortletPreferences doDeleteData(
 			PortletDataContext portletDataContext, String portletId,
 			PortletPreferences portletPreferences)
@@ -2284,6 +2289,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		return portletPreferences;
 	}
 
+	@Override
 	protected String doExportData(
 			PortletDataContext portletDataContext, String portletId,
 			PortletPreferences portletPreferences)
@@ -2366,6 +2372,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		return document.formattedString();
 	}
 
+	@Override
 	protected PortletPreferences doImportData(
 			PortletDataContext portletDataContext, String portletId,
 			PortletPreferences portletPreferences, String data)

@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.util.StringUtil;
  */
 public class HashCodeCacheKeyGenerator extends BaseCacheKeyGenerator {
 
+	@Override
 	public CacheKeyGenerator clone() {
 		return new HashCodeCacheKeyGenerator();
 	}

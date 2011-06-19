@@ -509,7 +509,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		boolean visible = false;
 
-		if (entry.getStatus() == WorkflowConstants.STATUS_APPROVED) {
+		if (entry.isApproved()) {
 			visible = true;
 		}
 

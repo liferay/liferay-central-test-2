@@ -33,10 +33,12 @@ public class UnsyncStringReader extends Reader {
 		stringLength = string.length();
 	}
 
+	@Override
 	public void close() {
 		string = null;
 	}
 
+	@Override
 	public void mark(int readAheadLimit) throws IOException {
 		if (string == null) {
 			throw new IOException("String is null");
@@ -44,10 +46,12 @@ public class UnsyncStringReader extends Reader {
 		markIndex = index;
 	}
 
+	@Override
 	public boolean markSupported() {
 		return true;
 	}
 
+	@Override
 	public int read() throws IOException {
 		if (string == null) {
 			throw new IOException("String is null");
@@ -60,10 +64,12 @@ public class UnsyncStringReader extends Reader {
 		return string.charAt(index++);
 	}
 
+	@Override
 	public int read(char[] chars) throws IOException {
 		return read(chars, 0, chars.length);
 	}
 
+	@Override
 	public int read(char[] chars, int offset, int length)
 		throws IOException {
 
@@ -92,6 +98,7 @@ public class UnsyncStringReader extends Reader {
 		return read;
 	}
 
+	@Override
 	public int read(CharBuffer charBuffer) throws IOException {
 		int remaining = charBuffer.remaining();
 
@@ -106,6 +113,7 @@ public class UnsyncStringReader extends Reader {
 		return read;
 	}
 
+	@Override
 	public boolean ready() throws IOException {
 		if (string == null) {
 			throw new IOException("String is null");
@@ -114,6 +122,7 @@ public class UnsyncStringReader extends Reader {
 		return true;
 	}
 
+	@Override
 	public void reset() throws IOException {
 		if (string == null) {
 			throw new IOException("String is null");
@@ -122,6 +131,7 @@ public class UnsyncStringReader extends Reader {
 		index = markIndex;
 	}
 
+	@Override
 	public long skip(long skip) {
 		if (index >= stringLength) {
 			return 0;

@@ -29,6 +29,7 @@ import javax.servlet.jsp.tagext.TagSupport;
  */
 public class UserDisplayTag extends TagSupport {
 
+	@Override
 	public int doStartTag() throws JspException {
 		try {
 			HttpServletRequest request =
@@ -77,6 +78,7 @@ public class UserDisplayTag extends TagSupport {
 		}
 	}
 
+	@Override
 	public int doEndTag() throws JspException {
 		try {
 			PortalIncludeUtil.include(pageContext, getEndPage());

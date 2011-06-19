@@ -62,6 +62,7 @@ public class BlogsEntryWorkflowHandler extends BaseWorkflowHandler {
 			userId, classPK, status, serviceContext);
 	}
 
+	@Override
 	protected String getIconPath(ThemeDisplay themeDisplay) {
 		return themeDisplay.getPathThemeImages() + "/blogs/blogs.png";
 	}

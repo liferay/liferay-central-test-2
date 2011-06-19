@@ -33,6 +33,7 @@ import java.util.List;
  */
 public class SocialEquityAssetEntryPersistenceTest
 	extends BasePersistenceTestCase {
+	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -69,10 +70,15 @@ public class SocialEquityAssetEntryPersistenceTest
 		SocialEquityAssetEntry newSocialEquityAssetEntry = _persistence.create(pk);
 
 		newSocialEquityAssetEntry.setGroupId(nextLong());
+
 		newSocialEquityAssetEntry.setCompanyId(nextLong());
+
 		newSocialEquityAssetEntry.setUserId(nextLong());
+
 		newSocialEquityAssetEntry.setAssetEntryId(nextLong());
+
 		newSocialEquityAssetEntry.setInformationK(nextDouble());
+
 		newSocialEquityAssetEntry.setInformationB(nextDouble());
 
 		_persistence.update(newSocialEquityAssetEntry, false);
@@ -223,10 +229,15 @@ public class SocialEquityAssetEntryPersistenceTest
 		SocialEquityAssetEntry socialEquityAssetEntry = _persistence.create(pk);
 
 		socialEquityAssetEntry.setGroupId(nextLong());
+
 		socialEquityAssetEntry.setCompanyId(nextLong());
+
 		socialEquityAssetEntry.setUserId(nextLong());
+
 		socialEquityAssetEntry.setAssetEntryId(nextLong());
+
 		socialEquityAssetEntry.setInformationK(nextDouble());
+
 		socialEquityAssetEntry.setInformationB(nextDouble());
 
 		_persistence.update(socialEquityAssetEntry, false);

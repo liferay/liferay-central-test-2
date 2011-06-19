@@ -293,6 +293,13 @@ public class DLFileEntryLocalServiceUtil {
 			serviceContext);
 	}
 
+	public static void checkInFileEntry(long userId, long fileEntryId,
+		java.lang.String lockUuid)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().checkInFileEntry(userId, fileEntryId, lockUuid);
+	}
+
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry checkOutFileEntry(
 		long userId, long fileEntryId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -488,19 +495,10 @@ public class DLFileEntryLocalServiceUtil {
 		return getService().hasFileEntryLock(userId, fileEntryId);
 	}
 
-	public static com.liferay.portal.model.Lock lockFileEntry(long userId,
-		long fileEntryId)
+	public static boolean isFileEntryCheckedOut(long fileEntryId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getService().lockFileEntry(userId, fileEntryId);
-	}
-
-	public static com.liferay.portal.model.Lock lockFileEntry(long userId,
-		long fileEntryId, java.lang.String owner, long expirationTime)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return getService()
-				   .lockFileEntry(userId, fileEntryId, owner, expirationTime);
+		return getService().isFileEntryCheckedOut(fileEntryId);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry moveFileEntry(
@@ -520,11 +518,6 @@ public class DLFileEntryLocalServiceUtil {
 			com.liferay.portal.kernel.exception.SystemException {
 		getService()
 			.revertFileEntry(userId, fileEntryId, version, serviceContext);
-	}
-
-	public static void unlockFileEntry(long fileEntryId)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		getService().unlockFileEntry(fileEntryId);
 	}
 
 	public static com.liferay.portlet.asset.model.AssetEntry updateAsset(
@@ -555,12 +548,19 @@ public class DLFileEntryLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry updateStatus(
-		long userId, long fileEntryId, int status,
+		long userId, long fileVersionId, int status,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .updateStatus(userId, fileEntryId, status, serviceContext);
+				   .updateStatus(userId, fileVersionId, status, serviceContext);
+	}
+
+	public static boolean verifyFileEntryCheckOut(long fileEntryId,
+		java.lang.String lockUuid)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().verifyFileEntryCheckOut(fileEntryId, lockUuid);
 	}
 
 	public static DLFileEntryLocalService getService() {

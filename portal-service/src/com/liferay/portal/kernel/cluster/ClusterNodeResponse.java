@@ -92,6 +92,7 @@ public class ClusterNodeResponse implements Serializable {
 		_uuid = uuid;
 	}
 
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(9);
 

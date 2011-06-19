@@ -60,17 +60,17 @@ request.setAttribute("view.jsp-folderId", String.valueOf(folderId));
 request.setAttribute("view.jsp-repositoryId", String.valueOf(repositoryId));
 %>
 
-<div class="portlet-msg-error aui-helper-hidden" id="<portlet:namespace />errorContainer">
-	<liferay-ui:message key="your-request-failed-to-complete" />
-</div>
-
 <div id="<portlet:namespace />documentLibraryContainer">
 	<aui:layout cssClass="view">
 		<aui:column columnWidth="<%= 20 %>" cssClass="navigation-pane" first="<%= true %>">
-			<div class="header-row">
-				<div class="header-row-content" id="<portlet:namespace />parentFolderTitleContainer">
+			<div class="lfr-header-row">
+				<div class="lfr-header-row-content" id="<portlet:namespace />parentFolderTitleContainer">
 					<div class="parent-folder-title" id="<portlet:namespace />parentFolderTitle"></div>
 				</div>
+			</div>
+
+			<div class="portlet-msg-error aui-helper-hidden" id="<portlet:namespace />errorContainer">
+				<liferay-ui:message key="your-request-failed-to-complete" />
 			</div>
 
 			<div class="body-row">
@@ -79,9 +79,19 @@ request.setAttribute("view.jsp-repositoryId", String.valueOf(repositoryId));
 		</aui:column>
 
 		<aui:column columnWidth="<%= showFolderMenu ? 80 : 100 %>" cssClass="context-pane" last="<%= true %>">
-			<span class="search-button-container" id="<portlet:namespace />fileEntrySearchContainer">
-				<liferay-util:include page="/html/portlet/document_library/file_entry_search.jsp" />
-			</span>
+			<div class="lfr-header-row">
+				<div class="lfr-header-row-content">
+					<liferay-util:include page="/html/portlet/document_library/file_entry_search.jsp" />
+
+					<div class="toolbar">
+						<liferay-util:include page="/html/portlet/document_library/toolbar.jsp" />
+					</div>
+
+					<div class="display-style">
+						<span class="toolbar" id="<portlet:namespace />displayStyleToolbar"></span>
+					</div>
+				</div>
+			</div>
 
 			<liferay-portlet:renderURL varImpl="editFileEntryURL">
 				<portlet:param name="struts_action" value="/document_library/edit_file_entry" />
@@ -94,18 +104,6 @@ request.setAttribute("view.jsp-repositoryId", String.valueOf(repositoryId));
 				<aui:input name="folderIds" type="hidden" />
 				<aui:input name="fileEntryIds" type="hidden" />
 				<aui:input name="fileShortcutIds" type="hidden" />
-
-				<div class="header-row">
-					<div class="header-row-content">
-						<div class="toolbar">
-							<liferay-util:include page="/html/portlet/document_library/toolbar.jsp" />
-						</div>
-
-						<div class="display-style">
-							<span class="toolbar" id="<portlet:namespace />displayStyleToolbar"></span>
-						</div>
-					</div>
-				</div>
 
 				<div class="document-container" id="<portlet:namespace />documentContainer"></div>
 
@@ -164,7 +162,7 @@ if (folder != null) {
 		function() {
 			var A = AUI();
 
-			var actionsButton = A.one('#<portlet:namespace />actionsButtonContainer ul');
+			var actionsButton = A.one('#<portlet:namespace />actionsButtonContainer');
 
 			var disabled = (Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm2, '<portlet:namespace /><%= RowChecker.ALL_ROW_IDS %>Checkbox').length == 0);
 
@@ -172,6 +170,8 @@ if (folder != null) {
 		},
 		['liferay-util-list-fields']
 	);
+
+	<portlet:namespace />toggleActionsButton();
 </aui:script>
 
 <aui:script use="aui-dialog,aui-dialog-iframe">
@@ -243,10 +243,16 @@ if (folder != null) {
 				changeRequest: function(event) {
 					var state = event.state;
 
+					var before = state.before;
+
 					var page = state.page;
 					var rowsPerPage = state.rowsPerPage;
 
-					loadEntriesData(page, rowsPerPage);
+					if (!before ||
+						((page != before.page) || (rowsPerPage != before.rowsPerPage))) {
+
+						loadEntriesData(page, rowsPerPage);
+					}
 				}
 			}
 		}
@@ -302,7 +308,15 @@ if (folder != null) {
 
 						var folders = content.one('#<portlet:namespace />folderContainer');
 
-						listView.set('data', folders);
+						var currentFolders = listView.get('data');
+
+						var currentFolderId = currentFolders && currentFolders.attr('data-folderId');
+
+						var folderId = folders && folders.attr('data-folderId');
+
+						if (folders && (folderId != currentFolderId)) {
+							listView.set('data', folders);
+						}
 
 						var entries = content.one('#<portlet:namespace />entries')
 

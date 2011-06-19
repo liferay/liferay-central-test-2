@@ -45,6 +45,7 @@ public class PrettyDateFormat extends DateFormat {
 		this(locale, timeZone);
 	}
 
+	@Override
 	public StringBuffer format(Date date, StringBuffer sb, FieldPosition pos) {
 		String dateString = StringPool.NBSP;
 
@@ -85,6 +86,7 @@ public class PrettyDateFormat extends DateFormat {
 		return sb.append(dateString);
 	}
 
+	@Override
 	public Date parse(String source, ParsePosition pos) {
 		Format dateFormatDate = FastDateFormatFactoryUtil.getDate(
 			_locale, _timeZone);

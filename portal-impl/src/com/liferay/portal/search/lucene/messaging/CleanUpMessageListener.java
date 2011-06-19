@@ -24,6 +24,7 @@ import com.liferay.util.ant.DeleteTask;
  */
 public class CleanUpMessageListener extends BaseMessageListener {
 
+	@Override
 	protected void doReceive(Message message) throws Exception {
 
 		// LEP-2180

@@ -31,6 +31,7 @@ public abstract class BaseWorkflowInstanceStateComparator
 		_ascending = ascending;
 	}
 
+	@Override
 	public int compare(Object obj1, Object obj2) {
 		WorkflowInstance workflowInstance1 = (WorkflowInstance)obj1;
 		WorkflowInstance workflowInstance2 = (WorkflowInstance)obj2;
@@ -57,6 +58,7 @@ public abstract class BaseWorkflowInstanceStateComparator
 		}
 	}
 
+	@Override
 	public boolean isAscending() {
 		return _ascending;
 	}

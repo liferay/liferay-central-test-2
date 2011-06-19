@@ -29,18 +29,21 @@ public abstract class TranslatedList<E, F> extends ListWrapper<E> {
 		_oldList = oldList;
 	}
 
+	@Override
 	public boolean add(E o) {
 		_oldList.add(toOldObject(o));
 
 		return super.add(o);
 	}
 
+	@Override
 	public void add(int index, E element) {
 		_oldList.add(index, toOldObject(element));
 
 		super.add(index, element);
 	}
 
+	@Override
 	public boolean addAll(Collection<? extends E> c) {
 		for (E o : c) {
 			_oldList.add(toOldObject(o));
@@ -49,6 +52,7 @@ public abstract class TranslatedList<E, F> extends ListWrapper<E> {
 		return super.addAll(c);
 	}
 
+	@Override
 	public boolean addAll(int index, Collection<? extends E> c) {
 		for (E o : c) {
 			_oldList.add(index++, toOldObject(o));
@@ -57,18 +61,21 @@ public abstract class TranslatedList<E, F> extends ListWrapper<E> {
 		return super.addAll(c);
 	}
 
+	@Override
 	public boolean remove(Object o) {
 		_oldList.remove(toOldObject((E)o));
 
 		return super.remove(o);
 	}
 
+	@Override
 	public E remove(int index) {
 		_oldList.remove(index);
 
 		return super.remove(index);
 	}
 
+	@Override
 	public boolean removeAll(Collection<?> c) {
 		List<F> tempList = new ArrayList<F>();
 
@@ -81,6 +88,7 @@ public abstract class TranslatedList<E, F> extends ListWrapper<E> {
 		return super.removeAll(c);
 	}
 
+	@Override
 	public boolean retainAll(Collection<?> c) {
 		List<F> tempList = new ArrayList<F>();
 
@@ -93,12 +101,14 @@ public abstract class TranslatedList<E, F> extends ListWrapper<E> {
 		return super.retainAll(c);
 	}
 
+	@Override
 	public E set(int index, E element) {
 		_oldList.set(index, toOldObject(element));
 
 		return super.set(index, element);
 	}
 
+	@Override
 	public List<E> subList(int fromIndex, int toIndex) {
 		List<E> newList = super.subList(fromIndex, toIndex);
 		List<F> oldList = _oldList.subList(fromIndex, toIndex);

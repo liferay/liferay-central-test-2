@@ -408,6 +408,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(MBMessageImpl.class.getName());
@@ -425,6 +426,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
+	@Override
 	public void clearCache(MBMessage mbMessage) {
 		EntityCacheUtil.removeResult(MBMessageModelImpl.ENTITY_CACHE_ENABLED,
 			MBMessageImpl.class, mbMessage.getPrimaryKey());
@@ -462,6 +464,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portal.NoSuchModelException if a message-boards message with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return remove(((Long)primaryKey).longValue());
@@ -514,10 +517,12 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the message-boards message that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage remove(MBMessage mbMessage) throws SystemException {
 		return super.remove(mbMessage);
 	}
 
+	@Override
 	protected MBMessage removeImpl(MBMessage mbMessage)
 		throws SystemException {
 		mbMessage = toUnwrappedModel(mbMessage);
@@ -552,6 +557,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		return mbMessage;
 	}
 
+	@Override
 	public MBMessage updateImpl(
 		com.liferay.portlet.messageboards.model.MBMessage mbMessage,
 		boolean merge) throws SystemException {
@@ -690,6 +696,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @throws com.liferay.portal.NoSuchModelException if a message-boards message with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
 		return findByPrimaryKey(((Long)primaryKey).longValue());
@@ -726,6 +733,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @return the message-boards message, or <code>null</code> if a message-boards message with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public MBMessage fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		return fetchByPrimaryKey(((Long)primaryKey).longValue());

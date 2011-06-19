@@ -71,6 +71,7 @@ public class MBIndexer extends BaseIndexer {
 		return CLASS_NAMES;
 	}
 
+	@Override
 	public boolean hasPermission(
 			PermissionChecker permissionChecker, long entryClassPK,
 			String actionId)
@@ -80,10 +81,12 @@ public class MBIndexer extends BaseIndexer {
 			permissionChecker, entryClassPK, ActionKeys.VIEW);
 	}
 
+	@Override
 	public boolean isFilterSearch() {
 		return _FILTER_SEARCH;
 	}
 
+	@Override
 	public void postProcessContextQuery(
 			BooleanQuery contextQuery, SearchContext searchContext)
 		throws Exception {
@@ -129,6 +132,7 @@ public class MBIndexer extends BaseIndexer {
 		}
 	}
 
+	@Override
 	protected void doDelete(Object obj) throws Exception {
 		if (obj instanceof MBCategory) {
 			MBCategory category = (MBCategory)obj;
@@ -186,6 +190,7 @@ public class MBIndexer extends BaseIndexer {
 		}
 	}
 
+	@Override
 	protected Document doGetDocument(Object obj) throws Exception {
 		MBMessage message = (MBMessage)obj;
 
@@ -206,6 +211,7 @@ public class MBIndexer extends BaseIndexer {
 		return document;
 	}
 
+	@Override
 	protected Summary doGetSummary(
 		Document document, Locale locale, String snippet,
 		PortletURL portletURL) {
@@ -227,6 +233,7 @@ public class MBIndexer extends BaseIndexer {
 		return new Summary(title, content, portletURL);
 	}
 
+	@Override
 	protected void doReindex(Object obj) throws Exception {
 		MBMessage message = (MBMessage)obj;
 
@@ -241,6 +248,7 @@ public class MBIndexer extends BaseIndexer {
 		SearchEngineUtil.updateDocument(message.getCompanyId(), document);
 	}
 
+	@Override
 	protected void doReindex(String className, long classPK) throws Exception {
 		MBMessage message = MBMessageLocalServiceUtil.getMessage(classPK);
 
@@ -260,6 +268,7 @@ public class MBIndexer extends BaseIndexer {
 		}
 	}
 
+	@Override
 	protected void doReindex(String[] ids) throws Exception {
 		long companyId = GetterUtil.getLong(ids[0]);
 
@@ -267,6 +276,7 @@ public class MBIndexer extends BaseIndexer {
 		reindexRoot(companyId);
 	}
 
+	@Override
 	protected String getPortletId(SearchContext searchContext) {
 		return PORTLET_ID;
 	}
