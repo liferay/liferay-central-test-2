@@ -7,4 +7,4 @@ server's global classpath and are visible by all applications loaded by the
 application server.
 
 JARs in the portal directory are automatically copied to the portal classpath
-and are only visible by the portal..
+and are only visible by the portal.
