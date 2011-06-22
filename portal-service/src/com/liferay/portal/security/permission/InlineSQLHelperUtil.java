@@ -15,9 +15,8 @@
 package com.liferay.portal.security.permission;
 
 /**
- * Provides utility methods for filtering SQL queries by the user's permissions.
- *
  * @author Raymond Augé
+ * @see    InlineSQLHelper
  */
 public class InlineSQLHelperUtil {
 
@@ -25,50 +24,18 @@ public class InlineSQLHelperUtil {
 		return _inlineSQLPermission;
 	}
 
-	/**
-	 * Returns <code>true</code> if the inline SQL helper is enabled.
-	 *
-	 * @return <code>true</code> if the inline SQL helper is enabled;
-	 *         <code>false</code> otherwise
-	 */
 	public static boolean isEnabled() {
 		return getInlineSQLHelper().isEnabled();
 	}
 
-	/**
-	 * Returns <code>true</code> if the inline SQL helper is enabled for the
-	 * group.
-	 *
-	 * @param  groupId the primary key of the group
-	 * @return <code>true</code> if the inline SQL helper is enabled for the
-	 *         group; <code>false</code> otherwise
-	 */
 	public static boolean isEnabled(long groupId) {
 		return getInlineSQLHelper().isEnabled(groupId);
 	}
 
-	/**
-	 * Returns <code>true</code> if the inline SQL helper is enabled for the
-	 * groups.
-	 *
-	 * @param  groupIds the primary keys of the groups
-	 * @return <code>true</code> if the inline SQL helper is enabled for the
-	 *         groups; <code>false</code> otherwise
-	 */
 	public static boolean isEnabled(long[] groupIds) {
 		return getInlineSQLHelper().isEnabled(groupIds);
 	}
 
-	/**
-	 * Modifies the SQL query to only match resources that the user has
-	 * permission to view.
-	 *
-	 * @param sql the SQL query
-	 * @param className the fully qualified class name of the resources matched
-	 *        by the query
-	 * @param classPKField the name of the column containing the resource's
-	 *        primary key
-	 */
 	public static String replacePermissionCheck(
 		String sql, String className, String classPKField) {
 
@@ -76,18 +43,6 @@ public class InlineSQLHelperUtil {
 			sql, className, classPKField);
 	}
 
-	/**
-	 * Modifies the SQL query to only match resources that the user has
-	 * permission to view.
-	 *
-	 * @param sql the SQL query
-	 * @param className the fully qualified class name of the resources matched
-	 *        by the query
-	 * @param classPKField the name of the column containing the resource's
-	 *        primary key
-	 * @param groupId the primary key of the group containing the resources
-	 *        (optionally <code>null</code>)
-	 */
 	public static String replacePermissionCheck(
 		String sql, String className, String classPKField, long groupId) {
 
@@ -95,20 +50,6 @@ public class InlineSQLHelperUtil {
 			sql, className, classPKField, groupId);
 	}
 
-	/**
-	 * Modifies the SQL query to only match resources that the user has
-	 * permission to view.
-	 *
-	 * @param sql the SQL query
-	 * @param className the fully qualified class name of the resources matched
-	 *        by the query
-	 * @param classPKField the name of the column containing the resource's
-	 *        primary key
-	 * @param groupId the primary key of the group containing the resources
-	 *        (optionally <code>null</code>)
-	 * @param bridgeJoin an additional join clause to insert before the
-	 *        permission join (optionally <code>null</code>)
-	 */
 	public static String replacePermissionCheck(
 		String sql, String className, String classPKField, long groupId,
 		String bridgeJoin) {
@@ -117,18 +58,6 @@ public class InlineSQLHelperUtil {
 			sql, className, classPKField, groupId, bridgeJoin);
 	}
 
-	/**
-	 * Modifies the SQL query to only match resources that the user has
-	 * permission to view.
-	 *
-	 * @param sql the SQL query
-	 * @param className the fully qualified class name of the resources matched
-	 *        by the query
-	 * @param classPKField the name of the column containing the resource's
-	 *        primary key
-	 * @param groupIds the primary keys of the groups containing the resources
-	 *        (optionally <code>null</code>)
-	 */
 	public static String replacePermissionCheck(
 		String sql, String className, String classPKField, long[] groupIds) {
 
@@ -136,20 +65,6 @@ public class InlineSQLHelperUtil {
 			sql, className, classPKField, groupIds);
 	}
 
-	/**
-	 * Modifies the SQL query to only match resources that the user has
-	 * permission to view.
-	 *
-	 * @param sql the SQL query
-	 * @param className the fully qualified class name of the resources matched
-	 *        by the query
-	 * @param classPKField the name of the column containing the resource's
-	 *        primary key
-	 * @param groupIds the primary keys of the groups containing the resources
-	 *        (optionally <code>null</code>)
-	 * @param bridgeJoin an additional join clause to insert before the
-	 *        permission join (optionally <code>null</code>)
-	 */
 	public static String replacePermissionCheck(
 		String sql, String className, String classPKField, long[] groupIds,
 		String bridgeJoin) {
@@ -158,18 +73,6 @@ public class InlineSQLHelperUtil {
 			sql, className, classPKField, groupIds, bridgeJoin);
 	}
 
-	/**
-	 * Modifies the SQL query to only match resources that the user has
-	 * permission to view.
-	 *
-	 * @param sql the SQL query
-	 * @param className the fully qualified class name of the resources matched
-	 *        by the query
-	 * @param classPKField the name of the column containing the resource's
-	 *        primary key
-	 * @param userIdField the name of the column containing  the resource
-	 *        owner's primary key (optionally <code>null</code>)
-	 */
 	public static String replacePermissionCheck(
 		String sql, String className, String classPKField, String userIdField) {
 
@@ -177,20 +80,6 @@ public class InlineSQLHelperUtil {
 			sql, className, classPKField, userIdField);
 	}
 
-	/**
-	 * Modifies the SQL query to only match resources that the user has
-	 * permission to view.
-	 *
-	 * @param sql the SQL query
-	 * @param className the fully qualified class name of the resources matched
-	 *        by the query
-	 * @param classPKField the name of the column containing the resource's
-	 *        primary key
-	 * @param userIdField the name of the column containing  the resource
-	 *        owner's primary key (optionally <code>null</code>)
-	 * @param groupId the primary key of the group containing the resources
-	 *        (optionally <code>null</code>)
-	 */
 	public static String replacePermissionCheck(
 		String sql, String className, String classPKField, String userIdField,
 		long groupId) {
@@ -199,22 +88,6 @@ public class InlineSQLHelperUtil {
 			sql, className, classPKField, userIdField, groupId);
 	}
 
-	/**
-	 * Modifies the SQL query to only match resources that the user has
-	 * permission to view.
-	 *
-	 * @param sql the SQL query
-	 * @param className the fully qualified class name of the resources matched
-	 *        by the query
-	 * @param classPKField the name of the column containing the resource's
-	 *        primary key
-	 * @param userIdField the name of the column containing  the resource
-	 *        owner's primary key (optionally <code>null</code>)
-	 * @param groupId the primary key of the group containing the resources
-	 *        (optionally <code>null</code>)
-	 * @param bridgeJoin an additional join clause to insert before the
-	 *        permission join (optionally <code>null</code>)
-	 */
 	public static String replacePermissionCheck(
 		String sql, String className, String classPKField, String userIdField,
 		long groupId, String bridgeJoin) {
@@ -223,20 +96,6 @@ public class InlineSQLHelperUtil {
 			sql, className, classPKField, userIdField, groupId, bridgeJoin);
 	}
 
-	/**
-	 * Modifies the SQL query to only match resources that the user has
-	 * permission to view.
-	 *
-	 * @param sql the SQL query
-	 * @param className the fully qualified class name of the resources matched
-	 *        by the query
-	 * @param classPKField the name of the column containing the resource's
-	 *        primary key
-	 * @param userIdField the name of the column containing  the resource
-	 *        owner's primary key (optionally <code>null</code>)
-	 * @param groupIds the primary keys of the groups containing the resources
-	 *        (optionally <code>null</code>)
-	 */
 	public static String replacePermissionCheck(
 		String sql, String className, String classPKField, String userIdField,
 		long[] groupIds) {
@@ -245,22 +104,6 @@ public class InlineSQLHelperUtil {
 			sql, className, classPKField, userIdField, groupIds);
 	}
 
-	/**
-	 * Modifies the SQL query to only match resources that the user has
-	 * permission to view.
-	 *
-	 * @param sql the SQL query
-	 * @param className the fully qualified class name of the resources matched
-	 *        by the query
-	 * @param classPKField the name of the column containing the resource's
-	 *        primary key
-	 * @param userIdField the name of the column containing  the resource
-	 *        owner's primary key (optionally <code>null</code>)
-	 * @param groupIds the primary keys of the groups containing the resources
-	 *        (optionally <code>null</code>)
-	 * @param bridgeJoin an additional join clause to insert before the
-	 *        permission join (optionally <code>null</code>)
-	 */
 	public static String replacePermissionCheck(
 		String sql, String className, String classPKField, String userIdField,
 		long[] groupIds, String bridgeJoin) {
@@ -269,20 +112,6 @@ public class InlineSQLHelperUtil {
 			sql, className, classPKField, userIdField, groupIds, bridgeJoin);
 	}
 
-	/**
-	 * Modifies the SQL query to only match resources that the user has
-	 * permission to view.
-	 *
-	 * @param sql the SQL query
-	 * @param className the fully qualified class name of the resources matched
-	 *        by the query
-	 * @param classPKField the name of the column containing the resource's
-	 *        primary key
-	 * @param userIdField the name of the column containing  the resource
-	 *        owner's primary key (optionally <code>null</code>)
-	 * @param bridgeJoin an additional join clause to insert before the
-	 *        permission join (optionally <code>null</code>)
-	 */
 	public static String replacePermissionCheck(
 		String sql, String className, String classPKField, String userIdField,
 		String bridgeJoin) {
