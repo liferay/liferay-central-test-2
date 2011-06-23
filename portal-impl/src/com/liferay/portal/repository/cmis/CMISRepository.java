@@ -277,10 +277,10 @@ public class CMISRepository extends BaseCmisRepository {
 
 			validateTitle(session, destFolderId, document.getName());
 
-			Document documentCopy = document.copy(
+			Document newDocument = document.copy(
 				new ObjectIdImpl(destFolderObjectId));
 
-			return toFileEntry(documentCopy);
+			return toFileEntry(newDocument);
 		}
 		catch (PortalException pe) {
 			throw pe;
