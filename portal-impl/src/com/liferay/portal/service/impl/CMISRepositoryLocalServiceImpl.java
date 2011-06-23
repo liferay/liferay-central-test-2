@@ -88,7 +88,7 @@ public class CMISRepositoryLocalServiceImpl
 		}
 		else if (repositoryImpl instanceof BaseRepositoryProxyBean) {
 			BaseRepositoryProxyBean baseRepositoryProxyBean =
-				(BaseRepositoryProxyBean) repositoryImpl;
+				(BaseRepositoryProxyBean)repositoryImpl;
 
 			ClassLoaderBeanHandler classLoaderBeanHandler =
 				(ClassLoaderBeanHandler)Proxy.getInvocationHandler(
