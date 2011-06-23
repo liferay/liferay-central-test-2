@@ -1628,23 +1628,14 @@ public class DLFileEntryLocalServiceImpl
 					user.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
 					dlFileEntry.getGroupId(), dlFileEntry.getDataRepositoryId(),
 					dlFileEntry.getName(), dlFileEntry.getExtension(), false,
-					version, sourceFileName, dlFileEntry.getFileEntryId(),
-					dlFileEntry.getLuceneProperties(),
-					dlFileEntry.getModifiedDate(), serviceContext, is);
+					version, sourceFileName, serviceContext, is);
+
+				// Index
+
+				index(dlFileEntry, serviceContext);
 			}
 
-			DLStoreUtil.updateFile(
-				user.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
-				dlFileEntry.getGroupId(), dlFileEntry.getDataRepositoryId(),
-				dlFileEntry.getName(), dlFileEntry.getExtension(), false,
-				version, sourceFileName, serviceContext, is);
-
-			// Index
-
-			index(dlFileEntry, serviceContext);
-		}
-
-		// Asset
+			// Asset
 
 			updateAsset(
 				userId, dlFileEntry, dlFileVersion,
