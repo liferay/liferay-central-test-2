@@ -71,7 +71,7 @@ public class S3Store extends BaseStore {
 	public void addFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, ServiceContext serviceContext, InputStream is)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		try {
 			S3Object s3Object = new S3Object(
@@ -115,7 +115,7 @@ public class S3Store extends BaseStore {
 	public void deleteFile(
 			long companyId, String portletId, long repositoryId,
 			String fileName)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		try {
 			S3Object[] s3Objects = _s3Service.listObjects(
@@ -171,7 +171,6 @@ public class S3Store extends BaseStore {
 		}
 	}
 
-	@Override
 	public String[] getFileNames(long companyId, long repositoryId)
 		throws SystemException {
 
@@ -282,7 +281,7 @@ public class S3Store extends BaseStore {
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			long newRepositoryId, String fileName)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		try {
 			S3Object[] s3Objects = _s3Service.listObjects(
@@ -334,7 +333,7 @@ public class S3Store extends BaseStore {
 	public void updateFile(
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, String newFileName)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		try {
 			S3Object[] s3Objects = _s3Service.listObjects(
@@ -390,7 +389,7 @@ public class S3Store extends BaseStore {
 			long companyId, String portletId, long groupId, long repositoryId,
 			String fileName, String versionNumber, String sourceFileName,
 			ServiceContext serviceContext, InputStream is)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		try {
 			S3Object s3Object = new S3Object(

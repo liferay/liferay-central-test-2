@@ -314,9 +314,7 @@ public class DLStoreIndexer extends BaseIndexer {
 
 		String[] fileNames = hook.getFileNames(companyId, repositoryId);
 
-		for (int i = 0; i < fileNames.length; i++) {
-			String fileName = fileNames[i];
-
+		for (String fileName : fileNames) {
 			Indexer indexer = IndexerRegistryUtil.getIndexer(FileModel.class);
 
 			FileModel fileModel = new FileModel();

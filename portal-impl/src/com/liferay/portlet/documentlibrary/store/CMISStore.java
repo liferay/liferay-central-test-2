@@ -15,7 +15,6 @@
 package com.liferay.portlet.documentlibrary.store;
 
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -162,19 +161,17 @@ public class CMISStore extends BaseStore {
 		return document.getContentStream().getStream();
 	}
 
-	@Override
-	public String[] getFileNames(long companyId, long repositoryId)
-		throws SystemException {
+	public String[] getFileNames(long companyId, long repositoryId) {
+		Folder folder = getRepositoryFolder(companyId, repositoryId);
 
-		Folder repositoryFolderEntry = getRepositoryFolder(
-			companyId, repositoryId);
-
-		List<Folder> folders = getFolders(repositoryFolderEntry);
+		List<Folder> folders = getFolders(folder);
 
 		String[] fileNames = new String[folders.size()];
 
 		for (int i = 0; i < folders.size(); i++) {
-			fileNames[i] = folders.get(i).getName();
+			Folder curFolder = folders.get(i);
+
+			fileNames[i] = curFolder.getName();
 		}
 
 		return fileNames;
@@ -277,9 +274,8 @@ public class CMISStore extends BaseStore {
 
 	@Override
 	public void updateFile(
-			long companyId, String portletId, long groupId, long repositoryId,
-			long newRepositoryId, String fileName)
-		throws PortalException {
+		long companyId, String portletId, long groupId, long repositoryId,
+		long newRepositoryId, String fileName) {
 
 		Folder oldVersioningFolderEntry = getVersioningFolder(
 			companyId, repositoryId, fileName, true);
@@ -303,9 +299,8 @@ public class CMISStore extends BaseStore {
 	}
 
 	public void updateFile(
-			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, String newFileName)
-		throws PortalException {
+		long companyId, String portletId, long groupId, long repositoryId,
+		String fileName, String newFileName) {
 
 		Folder oldVersioningFolderEntry = getVersioningFolder(
 			companyId, repositoryId, fileName, true);

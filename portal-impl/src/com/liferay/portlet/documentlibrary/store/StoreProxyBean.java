@@ -14,7 +14,6 @@
 
 package com.liferay.portlet.documentlibrary.store;
 
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.messaging.proxy.BaseProxyBean;
 import com.liferay.portal.service.ServiceContext;
 
@@ -100,9 +99,7 @@ public class StoreProxyBean extends BaseProxyBean implements Store {
 		throw new UnsupportedOperationException();
 	}
 
-	public String[] getFileNames(long companyId, long repositoryId)
-		throws SystemException {
-
+	public String[] getFileNames(long companyId, long repositoryId) {
 		throw new UnsupportedOperationException();
 	}
 

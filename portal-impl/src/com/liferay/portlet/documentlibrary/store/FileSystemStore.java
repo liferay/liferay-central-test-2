@@ -159,10 +159,7 @@ public class FileSystemStore extends BaseStore {
 		}
 	}
 
-	@Override
-	public String[] getFileNames(long companyId, long repositoryId)
-		throws SystemException {
-
+	public String[] getFileNames(long companyId, long repositoryId) {
 		File repositoryDir = getRepositoryDir(companyId, repositoryId);
 
 		return FileUtil.listDirs(repositoryDir);
@@ -233,9 +230,8 @@ public class FileSystemStore extends BaseStore {
 
 	@Override
 	public void updateFile(
-			long companyId, String portletId, long groupId, long repositoryId,
-			long newRepositoryId, String fileName)
-		throws PortalException {
+		long companyId, String portletId, long groupId, long repositoryId,
+		long newRepositoryId, String fileName) {
 
 		File fileNameDir = getFileNameDir(companyId, repositoryId, fileName);
 		File newFileNameDir = getFileNameDir(
@@ -247,9 +243,8 @@ public class FileSystemStore extends BaseStore {
 	}
 
 	public void updateFile(
-			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, String newFileName)
-		throws PortalException {
+		long companyId, String portletId, long groupId, long repositoryId,
+		String fileName, String newFileName) {
 
 		File fileNameDir = getFileNameDir(companyId, repositoryId, fileName);
 		File newFileNameDir = getFileNameDir(

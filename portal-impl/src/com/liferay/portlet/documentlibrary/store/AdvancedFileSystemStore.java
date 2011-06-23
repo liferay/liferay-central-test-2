@@ -14,8 +14,6 @@
 
 package com.liferay.portlet.documentlibrary.store;
 
-import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -41,9 +39,7 @@ import java.util.List;
 public class AdvancedFileSystemStore extends FileSystemStore {
 
 	@Override
-	public String[] getFileNames(long companyId, long repositoryId)
-		throws SystemException {
-
+	public String[] getFileNames(long companyId, long repositoryId) {
 		File repositoryDir = getRepositoryDir(companyId, repositoryId);
 
 		String[] directories = FileUtil.listDirs(repositoryDir);
@@ -62,9 +58,8 @@ public class AdvancedFileSystemStore extends FileSystemStore {
 
 	@Override
 	public void updateFile(
-			long companyId, String portletId, long groupId, long repositoryId,
-			String fileName, String newFileName)
-		throws PortalException {
+		long companyId, String portletId, long groupId, long repositoryId,
+		String fileName, String newFileName) {
 
 		super.updateFile(
 			companyId, portletId, groupId, repositoryId, fileName, newFileName);
@@ -113,23 +108,8 @@ public class AdvancedFileSystemStore extends FileSystemStore {
 		return;
 	}
 
-	protected int getDepth(String path) {
-		String[] fragments = StringUtil.split(path, StringPool.SLASH);
-
-		return fragments.length;
-	}
-
-	@Override
-	protected File getDirNameDir(
-		long companyId, long repositoryId, String dirName) {
-
-		File repositoryDir = getRepositoryDir(companyId, repositoryId);
-
-		return new File(repositoryDir + StringPool.SLASH + dirName);
-	}
-
 	protected List<String> getAdvancedFileNames(
-		long companyId, long repositoryId, String fileName)  {
+		long companyId, long repositoryId, String fileName) {
 
 		List<String> fileNames = new ArrayList<String>();
 
@@ -156,6 +136,21 @@ public class AdvancedFileSystemStore extends FileSystemStore {
 		}
 
 		return fileNames;
+	}
+
+	protected int getDepth(String path) {
+		String[] fragments = StringUtil.split(path, StringPool.SLASH);
+
+		return fragments.length;
+	}
+
+	@Override
+	protected File getDirNameDir(
+		long companyId, long repositoryId, String dirName) {
+
+		File repositoryDir = getRepositoryDir(companyId, repositoryId);
+
+		return new File(repositoryDir + StringPool.SLASH + dirName);
 	}
 
 	@Override
