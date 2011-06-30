@@ -75,8 +75,8 @@ public abstract class BaseExplodedTomcatListener implements AutoDeployListener {
 
 			docBase = rootElement.attributeValue("docBase");
 
-			docBase = String.valueOf(PropertyConverter.interpolate(
-				docBase, _systemConfiguration));
+			docBase = String.valueOf(
+				PropertyConverter.interpolate(docBase, _systemConfiguration));
 		}
 		catch (Exception e) {
 			throw new AutoDeployException(e);
