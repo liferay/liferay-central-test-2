@@ -15,8 +15,8 @@
 package com.liferay.portal.servlet;
 
 import com.liferay.portal.kernel.util.ServerDetector;
-import com.liferay.portal.servlet.filters.sessionid.CompoundSessionIdFilter;
-import com.liferay.portal.servlet.filters.sessionid.CompoundSessionIdHttpSession;
+import com.liferay.portal.servlet.filters.compoundsessionid.CompoundSessionIdFilter;
+import com.liferay.portal.servlet.filters.compoundsessionid.CompoundSessionIdHttpSession;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
@@ -37,6 +37,7 @@ public class SharedSessionServletRequest extends HttpServletRequestWrapper {
 
 		if (CompoundSessionIdFilter.hasCompoundSessionId() &&
 			!(_portalSession instanceof CompoundSessionIdHttpSession)) {
+
 			_portalSession = new CompoundSessionIdHttpSession(_portalSession);
 		}
 
