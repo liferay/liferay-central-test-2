@@ -58,7 +58,7 @@ public class DirectServletRegistry {
 		_servletInfos.clear();
 	}
 
-	private long _getJspFileLastModified(String path, Servlet servlet) {
+	private long _getFileLastModified(String path, Servlet servlet) {
 		ServletConfig servletConfig = servlet.getServletConfig();
 
 		ServletContext servletContext = servletConfig.getServletContext();
@@ -80,7 +80,7 @@ public class DirectServletRegistry {
 		Servlet servlet = servletInfo.getServlet();
 
 		if (_DIRECT_SERVLET_CONTEXT_RELOAD) {
-			long lastModified = _getJspFileLastModified(path, servlet);
+			long lastModified = _getFileLastModified(path, servlet);
 
 			if ((lastModified == 0) ||
 				(lastModified > servletInfo.getLastModified())) {
@@ -90,61 +90,11 @@ public class DirectServletRegistry {
 				servlet = null;
 
 				if (_log.isDebugEnabled()) {
-					_log.debug("Reload jsp file : " + path);
+					_log.debug("Reload " + path);
 				}
 			}
-			else if (_doDependenceReload) {
-				try {
-					Method method = ReflectionUtil.getDeclaredMethod(
-						servlet.getClass(), "getDependants");
-
-					List<String> dependants = (List<String>)method.invoke(
-						servlet);
-
-					if (dependants != null) {
-						for (String dependant : dependants) {
-							lastModified = _getJspFileLastModified(
-								dependant, servlet);
-
-							if ((lastModified == 0) ||
-								(lastModified >
-									servletInfo.getLastModified())) {
-								_servletInfos.remove(path);
-
-								_touchJspFile(path, servlet);
-
-								servlet = null;
-
-								if (_log.isDebugEnabled()) {
-									_log.debug("Detected dependant file : " +
-										dependant + " updated, force reload " +
-										"parent jsp file : " + path);
-								}
-
-								break;
-							}
-						}
-					}
-				}
-				catch (NoSuchMethodException nsme) {
-					if (_log.isWarnEnabled()) {
-						_log.warn("You are seeing this warn message " +
-							"because JSP dependence (jspf files) " +
-							"reloading is not supported on non-Jasper " +
-							"JSP engine. You have to switch to use Japser" +
-							"(this normally is not possible), or disable " +
-							PropsKeys.DIRECT_SERVLET_CONTEXT_ENABLED +
-							" while doing development. You can still " +
-							"safely turn on the jsp servlet direct " +
-							"access feature on production server for " +
-							"performance.", nsme);
-					}
-
-					_doDependenceReload = false;
-				}
-				catch (Exception e) {
-					_log.error(e, e);
-				}
+			else {
+				servlet = _reloadDependents(path, servlet, servletInfo);
 			}
 		}
 
@@ -159,7 +109,7 @@ public class DirectServletRegistry {
 		long lastModified = 1;
 
 		if (_DIRECT_SERVLET_CONTEXT_RELOAD) {
-			lastModified = _getJspFileLastModified(path, servlet);
+			lastModified = _getFileLastModified(path, servlet);
 		}
 
 		if (lastModified > 0) {
@@ -172,7 +122,59 @@ public class DirectServletRegistry {
 		}
 	}
 
-	private void _touchJspFile(String path, Servlet servlet) {
+	private Servlet _reloadDependents(
+		String path, Servlet servlet, ServletInfo servletInfo) {
+
+		try {
+			if (!_reloadDependents) {
+				return servlet;
+			}
+
+			Method method = ReflectionUtil.getDeclaredMethod(
+				servlet.getClass(), "getDependants");
+
+			List<String> dependants = (List<String>)method.invoke(
+				servlet);
+
+			if (dependants == null) {
+				return servlet;
+			}
+
+			for (String dependant : dependants) {
+				long lastModified = _getFileLastModified(dependant, servlet);
+
+				if ((lastModified == 0) ||
+					(lastModified > servletInfo.getLastModified())) {
+
+					_servletInfos.remove(path);
+
+					_updateFileLastModified(path, servlet);
+
+					servlet = null;
+
+					if (_log.isDebugEnabled()) {
+						_log.debug("Reload dependent " + dependant);
+					}
+				}
+			}
+		}
+		catch (NoSuchMethodException nsme) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(
+					"Reloading of dependant JSP is disabled because your " +
+						"Servlet container is not a variant of Jasper");
+			}
+
+			_reloadDependents = false;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+
+		return servlet;
+	}
+
+	private void _updateFileLastModified(String path, Servlet servlet) {
 		ServletConfig servletConfig = servlet.getServletConfig();
 
 		ServletContext servletContext = servletConfig.getServletContext();
@@ -184,17 +186,17 @@ public class DirectServletRegistry {
 		file.setLastModified(System.currentTimeMillis());
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(
-		DirectServletRegistry.class);
-
 	private static boolean _DIRECT_SERVLET_CONTEXT_RELOAD =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.DIRECT_SERVLET_CONTEXT_RELOAD));
 
-	private static boolean _doDependenceReload = true;
+	private static Log _log = LogFactoryUtil.getLog(
+		DirectServletRegistry.class);
 
 	private static DirectServletRegistry _instance =
 		new DirectServletRegistry();
+
+	private static boolean _reloadDependents = true;
 
 	private Map<String, ServletInfo> _servletInfos =
 		new ConcurrentHashMap<String, ServletInfo>();
