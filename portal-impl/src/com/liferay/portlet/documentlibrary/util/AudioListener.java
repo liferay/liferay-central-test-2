@@ -32,7 +32,7 @@ public class AudioListener extends MediaToolAdapter {
 
 		int channels = iaudioSamples.getChannels();
 
-		if (channels <= 0){
+		if (channels <= 0) {
 			channels = 1;
 		}
 

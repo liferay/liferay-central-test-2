@@ -46,23 +46,22 @@ public class VideoResizer extends MediaToolAdapter {
 	public void onAddStream(IAddStreamEvent iAddStreamEvent) {
 		IMediaCoder mediaCoder = iAddStreamEvent.getSource();
 
-		IContainer container = mediaCoder.getContainer();
+		IContainer iContainer = mediaCoder.getContainer();
 
-		int streamIndex = iAddStreamEvent.getStreamIndex();
+		IStream iStream = iContainer.getStream(
+			iAddStreamEvent.getStreamIndex());
 
-		IStream stream = container.getStream(streamIndex);
+		IStreamCoder iStreamCoder = iStream.getStreamCoder();
 
-		IStreamCoder streamCoder = stream.getStreamCoder();
+		ICodec.Type iCodecType = iStreamCoder.getCodecType();
 
-		Type type= Type.YUV420P;
-
-		if (streamCoder.getCodecType() == ICodec.Type.CODEC_TYPE_AUDIO) {
-			streamCoder.setSampleRate(44100);
+		if (iCodecType == ICodec.Type.CODEC_TYPE_AUDIO) {
+			iStreamCoder.setSampleRate(44100);
 		}
-		else if (streamCoder.getCodecType() == ICodec.Type.CODEC_TYPE_VIDEO) {
-			streamCoder.setHeight(_height);
-			streamCoder.setWidth(_width);
-			streamCoder.setPixelType( type);
+		else if (iCodecType == ICodec.Type.CODEC_TYPE_VIDEO) {
+			iStreamCoder.setHeight(_height);
+			iStreamCoder.setPixelType(Type.YUV420P);
+			iStreamCoder.setWidth(_width);
 		}
 
 		super.onAddStream(iAddStreamEvent);

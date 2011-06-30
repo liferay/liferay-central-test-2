@@ -350,8 +350,9 @@ public class VideoProcessor extends DLProcessor {
 	private static VideoProcessor _instance = new VideoProcessor();
 
 	private static List<String> _videoMimeTypes = Arrays.asList(
-		"video/quicktime", "video/mpeg", "video/x-msvideo", "video/mp4",
-		"video/x-ms-wmv", "video/avi", "video/x-flv");
+		"video/avi", "video/mp4", "video/mpeg", "video/quicktime",
+		"video/x-flv", "video/x-ms-wmv", "video/x-msvideo"
+	);
 
 	private List<Long> _fileEntries = new Vector<Long>();
 
