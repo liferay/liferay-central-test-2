@@ -49,7 +49,7 @@ public class DLContentLocalServiceImpl extends DLContentLocalServiceBaseImpl {
 		dlContent.setPath(path);
 		dlContent.setVersion(version);
 
-		UnsyncByteArrayInputStream unsyncByteArrayInputStream = 
+		UnsyncByteArrayInputStream unsyncByteArrayInputStream =
 			new UnsyncByteArrayInputStream(bytes);
 
 		OutputBlob dataOutputBlob = new OutputBlob(
