@@ -16,6 +16,8 @@
 
 <%@ include file="/html/taglib/init.jsp" %>
 
+<%@ page import="com.liferay.portal.kernel.servlet.taglib.ui.BreadcrumbEntry" %>
+
 <%
 Layout selLayout = (Layout)request.getAttribute("liferay-ui:breadcrumb:selLayout");
 
