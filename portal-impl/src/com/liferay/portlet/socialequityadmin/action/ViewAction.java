@@ -20,7 +20,6 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.security.permission.comparator.ModelResourceComparator;
-import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
@@ -104,17 +103,6 @@ public class ViewAction extends PortletAction {
 			WebKeys.SOCIAL_EQUITY_ACTION_MAPPINGS_MAP, equityActionMappingsMap);
 
 		return mapping.findForward("portlet.social_equity_admin.view");
-	}
-
-	protected long getGroupId(ThemeDisplay themeDisplay) throws Exception {
-		Group group = GroupLocalServiceUtil.getGroup(
-			themeDisplay.getScopeGroupId());
-
-		if (group.getLiveGroupId() > 0) {
-			return group.getLiveGroupId();
-		}
-
-		return group.getGroupId();
 	}
 
 	protected SocialEquityActionMapping getMergedEquityActionMapping(
