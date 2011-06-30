@@ -12,24 +12,14 @@
  * details.
  */
 
-package com.liferay.portal.model.impl;
-
-import com.liferay.portal.model.BreadcrumbEntry;
+package com.liferay.portal.kernel.servlet.taglib.ui;
 
 import java.util.Map;
 
 /**
  * @author Sergio González
  */
-public class BreadcrumbEntryImpl implements BreadcrumbEntry {
-
-	public BreadcrumbEntryImpl(
-		String title, String url, Map<String, Object> data) {
-
-		_title = title;
-		_url = url;
-		_data = data;
-	}
+public class BreadcrumbEntry {
 
 	public Map<String, Object> getData() {
 		return _data;
@@ -39,7 +29,7 @@ public class BreadcrumbEntryImpl implements BreadcrumbEntry {
 		return _title;
 	}
 
-	public String getUrl() {
+	public String getURL() {
 		return _url;
 	}
 
@@ -51,7 +41,7 @@ public class BreadcrumbEntryImpl implements BreadcrumbEntry {
 		_title = title;
 	}
 
-	public void setUrl(String url) {
+	public void setURL(String url) {
 		_url = url;
 	}
 

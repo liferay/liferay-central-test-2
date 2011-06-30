@@ -44,6 +44,7 @@ import com.liferay.portal.kernel.servlet.ServletContextUtil;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.StringServletResponse;
 import com.liferay.portal.kernel.servlet.WebDirDetector;
+import com.liferay.portal.kernel.servlet.taglib.ui.BreadcrumbEntry;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.upload.UploadServletRequest;
 import com.liferay.portal.kernel.util.ArrayUtil;
@@ -74,7 +75,6 @@ import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.QName;
 import com.liferay.portal.model.BaseModel;
-import com.liferay.portal.model.BreadcrumbEntry;
 import com.liferay.portal.model.ClassName;
 import com.liferay.portal.model.ColorScheme;
 import com.liferay.portal.model.Company;
@@ -97,7 +97,6 @@ import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.Theme;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
-import com.liferay.portal.model.impl.BreadcrumbEntryImpl;
 import com.liferay.portal.model.impl.LayoutTypePortletImpl;
 import com.liferay.portal.plugin.PluginPackageUtil;
 import com.liferay.portal.security.auth.AuthException;
@@ -562,18 +561,24 @@ public class PortalImpl implements Portal {
 		HttpServletRequest request, String title, String url,
 		Map<String, Object> data) {
 
-		List<BreadcrumbEntry> portletBreadcrumbs =
+		List<BreadcrumbEntry> breadcrumbEntries =
 			(List<BreadcrumbEntry>)request.getAttribute(
 				WebKeys.PORTLET_BREADCRUMBS);
 
-		if (portletBreadcrumbs == null) {
-			portletBreadcrumbs = new ArrayList<BreadcrumbEntry>();
+		if (breadcrumbEntries == null) {
+			breadcrumbEntries = new ArrayList<BreadcrumbEntry>();
 
 			request.setAttribute(
-				WebKeys.PORTLET_BREADCRUMBS, portletBreadcrumbs);
+				WebKeys.PORTLET_BREADCRUMBS, breadcrumbEntries);
 		}
 
-		portletBreadcrumbs.add(new BreadcrumbEntryImpl(title, url, data));
+		BreadcrumbEntry breadcrumbEntry = new BreadcrumbEntry();
+
+		breadcrumbEntry.setData(data);
+		breadcrumbEntry.setTitle(title);
+		breadcrumbEntry.setURL(url);
+
+		breadcrumbEntries.add(breadcrumbEntry);
 	}
 
 	public void addPortletDefaultResource(
