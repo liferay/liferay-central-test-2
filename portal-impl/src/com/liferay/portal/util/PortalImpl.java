@@ -1158,7 +1158,8 @@ public class PortalImpl implements Portal {
 			group.getCompanyId());
 
 		sb.append(
-			getPortalURL(company.getVirtualHostname(), getPortalPort(), false));
+			getPortalURL(
+				company.getVirtualHostname(), getPortalPort(false), false));
 		sb.append(PortalUtil.getPathFriendlyURLPrivateGroup());
 		sb.append(GroupConstants.CONTROL_PANEL_FRIENDLY_URL);
 		sb.append(PropsValues.CONTROL_PANEL_LAYOUT_FRIENDLY_URL);
@@ -2080,16 +2081,14 @@ public class PortalImpl implements Portal {
 		}
 	}
 
-	/**
-	 * @deprecated {@link #getLayoutFullURL(long, String, boolean)}
-	 */
-
 	public String getLayoutFullURL(long groupId, String portletId)
-	throws PortalException, SystemException {
+		throws PortalException, SystemException {
+
 		return getLayoutFullURL(groupId, portletId, false);
-	}	
-	
-	public String getLayoutFullURL(long groupId, String portletId, boolean secure)
+	}
+
+	public String getLayoutFullURL(
+			long groupId, String portletId, boolean secure)
 		throws PortalException, SystemException {
 
 		long plid = getPlidFromPortletId(groupId, portletId);
@@ -2636,10 +2635,12 @@ public class PortalImpl implements Portal {
 	}
 
 	public int getPortalPort(boolean secure) {
-		if(secure) {
+		if (secure) {
 			return _securePortalPort.get();
 		}
-		return _portalPort.get();
+		else {
+			return _portalPort.get();
+		}
 	}
 
 	public Properties getPortalProperties() {
@@ -4669,20 +4670,20 @@ public class PortalImpl implements Portal {
 	 * Sets the port obtained on the first request to the portal.
 	 */
 	public void setPortalPort(HttpServletRequest request) {
-		if(request.isSecure()) {
-			if(_securePortalPort.get() == -1) {
+		if (request.isSecure()) {
+			if (_securePortalPort.get() == -1) {
 				int securePortalPort = request.getServerPort();
-				_securePortalPort.compareAndSet(-1, securePortalPort);
-				// No notification. Has never been done for https.
-				// not sure if a notification should happen here or in
-				// the non-secure part, once or once for each port.
-				// Please fix in review
-			}
-		} else if (_portalPort.get() == -1) {
-			int portalPort = request.getServerPort();
 
-			if (_portalPort.compareAndSet(-1, portalPort)) {
-				notifyPortalPortEventListeners(portalPort);
+				_securePortalPort.compareAndSet(-1, securePortalPort);
+			}
+		}
+		else {
+			if (_portalPort.get() == -1) {
+				int portalPort = request.getServerPort();
+
+				if (_portalPort.compareAndSet(-1, portalPort)) {
+					notifyPortalPortEventListeners(portalPort);
+				}
 			}
 		}
 	}
@@ -5372,13 +5373,13 @@ public class PortalImpl implements Portal {
 		new ConcurrentHashMap<String, Long>();
 	private String _portalLibDir;
 	private final AtomicInteger _portalPort = new AtomicInteger(-1);
-	private final AtomicInteger _securePortalPort = new AtomicInteger(-1);
 	private List<PortalPortEventListener> _portalPortEventListeners =
 		new ArrayList<PortalPortEventListener>();
 	private String _portalWebDir;
 	private Set<String> _portletAddDefaultResourceCheckWhitelist;
 	private Set<String> _portletAddDefaultResourceCheckWhitelistActions;
 	private Set<String> _reservedParams;
+	private final AtomicInteger _securePortalPort = new AtomicInteger(-1);
 	private String[] _sortedSystemGroups;
 	private String[] _sortedSystemOrganizationRoles;
 	private String[] _sortedSystemRoles;
