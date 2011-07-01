@@ -60,14 +60,14 @@ public class JournalTemplateListener
 
 		CacheUtil.clearCache(template.getCompanyId());
 
+		// Liferay resource cache
+
+		LiferayResourceCacheUtil.remove(
+			_RESOURCE_TEMPLATE_NAME_SPACE.concat(freeMarkerTemplateId));
+
 		// Velocity cache
 
 		VelocityEngineUtil.flushTemplate(freeMarkerTemplateId);
-
-		// Liferay Resource Cache
-
-		LiferayResourceCacheUtil.remove(_RESOURCE_TEMPLATE_NAME_SPACE.concat(
-			freeMarkerTemplateId));
 	}
 
 	private static String _RESOURCE_TEMPLATE_NAME_SPACE = String.valueOf(
