@@ -46,7 +46,7 @@ import java.util.Vector;
  * @author Juan González
  * @author Sergio González
  */
-public class AudioProcessor extends DLProcessor{
+public class AudioProcessor extends DLProcessor {
 
 	public static final String PREVIEW_TYPE = "mp3";
 
@@ -137,7 +137,7 @@ public class AudioProcessor extends DLProcessor{
 				destFile.getCanonicalPath(), iMediaReader);
 
 			iMediaWriter.addAudioStream(
-				0, 0, ICodec.ID.CODEC_ID_MP3, _channels, _sampleRate);
+				0, 0, ICodec.ID.CODEC_ID_MP3, _CHANNELS, _SAMPLE_RATE);
 
 			iMediaReader.addListener(iMediaWriter);
 
@@ -147,23 +147,6 @@ public class AudioProcessor extends DLProcessor{
 		catch (Exception e) {
 			throw new SystemException(e);
 		}
-	}
-
-	private File _getPreviewFile(String id) {
-		String filePath = _getPreviewFilePath(id);
-
-		return new File(filePath);
-	}
-
-	private String _getPreviewFilePath(String id) {
-		StringBundler sb = new StringBundler(4);
-
-		sb.append(_PREVIEW_PATH);
-		sb.append(id);
-		sb.append(StringPool.PERIOD);
-		sb.append(PREVIEW_TYPE);
-
-		return sb.toString();
 	}
 
 	private File _getAudioTmpFile(String id, String targetExtension) {
@@ -184,6 +167,23 @@ public class AudioProcessor extends DLProcessor{
 
 		sb.append(StringPool.PERIOD);
 		sb.append(targetExtension);
+
+		return sb.toString();
+	}
+
+	private File _getPreviewFile(String id) {
+		String filePath = _getPreviewFilePath(id);
+
+		return new File(filePath);
+	}
+
+	private String _getPreviewFilePath(String id) {
+		StringBundler sb = new StringBundler(4);
+
+		sb.append(_PREVIEW_PATH);
+		sb.append(id);
+		sb.append(StringPool.PERIOD);
+		sb.append(PREVIEW_TYPE);
 
 		return sb.toString();
 	}
@@ -236,28 +236,28 @@ public class AudioProcessor extends DLProcessor{
 		}
 	}
 
+	private static final int _CHANNELS = 2;
+
 	private static final String _PREVIEW_PATH =
 		SystemProperties.get(SystemProperties.TMP_DIR) +
 			"/liferay/document_preview/";
+
+	private static int _SAMPLE_RATE = 44100;
 
 	private static Log _log = LogFactoryUtil.getLog(AudioProcessor.class);
 
 	private static AudioProcessor _instance = new AudioProcessor();
 
 	private static List<String> _audioMimeTypes = Arrays.asList(
-		"audio/basic", "audio/mid", "audio/x-pn-realaudio", "audio/x-wav",
-		"audio/wav", "audio/midi", "audio/x-midi", "audio/x-mid", "audio/mod",
-		"audio/x-mod", "audio/x-realaudio", "audio/mpeg3", "audio/mpeg",
-		"audio/x-mpeg", "audio/mp3");
+		"audio/basic", "audio/mid", "audio/midi", "audio/mod", "audio/mp3",
+		"audio/mpeg", "audio/mpeg3", "audio/wav", "audio/x-mid", "audio/x-midi",
+		"audio/x-mod", "audio/x-mpeg", "audio/x-pn-realaudio",
+		"audio/x-realaudio", "audio/x-wav");
 
-	private static int _sampleRate = 44100;
-
-	private static int _channels = 2;
+	private List<Long> _fileEntries = new Vector<Long>();
 
 	static {
 		FileUtil.mkdirs(_PREVIEW_PATH);
 	}
-
-	private List<Long> _fileEntries = new Vector<Long>();
 
 }

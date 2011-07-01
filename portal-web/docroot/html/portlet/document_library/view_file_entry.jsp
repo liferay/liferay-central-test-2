@@ -330,12 +330,12 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 
 											so.addParam('allowFullScreen', 'true');
 
-											if (<%= supportedVideo %>) {
+											if (<%= supportedAudio %>) {
+												so.addVariable('<%= AudioProcessor.PREVIEW_TYPE %>', '<%= previewFileURL %>');
+											}
+											else if (<%= supportedVideo %>) {
 												so.addVariable('<%= VideoProcessor.PREVIEW_TYPE %>', '<%= previewFileURL %>');
 												so.addVariable('<%= VideoProcessor.THUMBNAIL_TYPE %>', '<%= videoThumbnailURL %>');
-											}
-											else if (<%= supportedAudio %>) {
-												so.addVariable('<%= AudioProcessor.PREVIEW_TYPE %>', '<%= previewFileURL %>');
 											}
 
 											so.write('<portlet:namespace />previewFileContent');
