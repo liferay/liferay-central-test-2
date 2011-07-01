@@ -1126,7 +1126,7 @@ AUI().add(
 					_onHistoryChange: function(event) {
 						var instance = this;
 
-						if (event.src === SRC_HASH || event.src === SRC_POPSTATE) {
+						if ((event.src === SRC_HASH) || (event.src === SRC_POPSTATE)) {
 							var changed = event.changed;
 							var removed = event.removed;
 
