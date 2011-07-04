@@ -381,7 +381,9 @@ public class PluginsEnvironmentBuilder {
 	}
 
 	private String[] _exec(String cmd) throws Exception {
-		Process process = Runtime.getRuntime().exec(cmd);
+		Runtime runtime = Runtime.getRuntime();
+
+		Process process = runtime.exec(cmd);
 
 		String[] stdout = _getExecOutput(process.getInputStream());
 		String[] stderr = _getExecOutput(process.getErrorStream());
