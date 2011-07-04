@@ -28,7 +28,6 @@ import com.liferay.portal.model.Group;
 import com.liferay.portal.repository.liferayrepository.model.LiferayFolder;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.ServiceContext;
-import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
@@ -175,8 +174,6 @@ public class DocumentCommandReceiver extends BaseCommandReceiver {
 			fileElement.setAttribute("size", getSize(fileEntry.getSize()));
 
 			StringBundler url = new StringBundler(6);
-
-			ThemeDisplay themeDisplay = commandArgument.getThemeDisplay();
 
 			url.append("/documents/");
 			url.append(group.getGroupId());
