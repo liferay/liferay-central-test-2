@@ -89,7 +89,7 @@ public class RSSAction extends PortletAction {
 			PortletRequest portletRequest, PortletResponse portletResponse,
 			String name, String description, String type, double version,
 			String displayStyle, String linkBehavior,
-			List<AssetEntry> assetEntries, String languageId)
+			List<AssetEntry> assetEntries)
 		throws Exception {
 
 		SyndFeed syndFeed = new SyndFeedImpl();
@@ -123,7 +123,11 @@ public class RSSAction extends PortletAction {
 			SyndEntry syndEntry = new SyndEntryImpl();
 
 			syndEntry.setAuthor(author);
+
+			String languageId = LanguageUtil.getLanguageId(portletRequest);
+
 			syndEntry.setTitle(assetEntry.getTitle(languageId, true));
+
 			syndEntry.setLink(link);
 			syndEntry.setUri(syndEntry.getLink());
 			syndEntry.setPublishedDate(assetEntry.getCreateDate());
@@ -302,12 +306,9 @@ public class RSSAction extends PortletAction {
 		List<AssetEntry> assetEntries = AssetEntryServiceUtil.getEntries(
 			assetEntryQuery);
 
-		String languageId = LanguageUtil.getLanguageId(portletRequest);
-
 		String rss = exportToRSS(
 			portletRequest, portletResponse, rssName, null, rssFormatType,
-			rssFormatVersion, rssDisplayStyle, assetLinkBehavior, assetEntries,
-			languageId);
+			rssFormatVersion, rssDisplayStyle, assetLinkBehavior, assetEntries);
 
 		return rss.getBytes(StringPool.UTF8);
 	}
