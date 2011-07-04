@@ -16,7 +16,7 @@ package com.liferay.portlet;
 
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
-import com.liferay.portal.kernel.util.ResourceBundleReplaceThreadLocal;
+import com.liferay.portal.kernel.util.ResourceBundleThreadLocal;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
 import com.liferay.portal.kernel.util.StringPool;
 
@@ -61,8 +61,8 @@ public class StrutsResourceBundle extends ResourceBundle {
 
 		String value = LanguageUtil.get(_locale, key);
 
-		if ((value == null) && ResourceBundleReplaceThreadLocal.isReplace()) {
-			value = ResourceBundleUtil.NULL_VALUE_PLACE_HOLDER;
+		if ((value == null) && ResourceBundleThreadLocal.isReplace()) {
+			value = ResourceBundleUtil.NULL_VALUE;
 		}
 
 		return value;

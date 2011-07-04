@@ -14,15 +14,44 @@
 
 package com.liferay.portal.kernel.util;
 
+import java.text.MessageFormat;
+
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 /**
  * @author Shuyang Zhou
+ * @author Neil Griffin
  */
 public class ResourceBundleUtil {
 
+	public static final String NULL_VALUE = "NULL_VALUE";
+
+	public static String getString(
+		ResourceBundle resourceBundle, Locale locale, String key,
+		Object[] arguments) {
+
+		String value = getString(resourceBundle, key);
+
+		if (value == null) {
+			return null;
+		}
+
+		// Get the value associated with the specified key, and substitute any
+		// arguuments like {0}, {1}, {2}, etc. with the specified argument
+		// values.
+
+		if ((arguments != null) && (arguments.length > 0)) {
+			MessageFormat messageFormat = new MessageFormat(value, locale);
+
+			value = messageFormat.format(arguments);
+		}
+
+		return value;
+	}
+
 	public static String getString(ResourceBundle resourceBundle, String key) {
-		ResourceBundleReplaceThreadLocal.setReplace(Boolean.TRUE);
+		ResourceBundleThreadLocal.setReplace(true);
 
 		String value = null;
 
@@ -30,17 +59,14 @@ public class ResourceBundleUtil {
 			value = resourceBundle.getString(key);
 		}
 		finally {
-			ResourceBundleReplaceThreadLocal.removeReplace();
+			ResourceBundleThreadLocal.setReplace(false);
 		}
 
-		if (NULL_VALUE_PLACE_HOLDER.equals(value)) {
+		if (NULL_VALUE.equals(value)) {
 			value = null;
 		}
 
 		return value;
 	}
-
-	public static final String NULL_VALUE_PLACE_HOLDER =
-		"NULL_VALUE_PLACE_HOLDER";
 
 }

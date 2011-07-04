@@ -15,7 +15,7 @@
 package com.liferay.portlet;
 
 import com.liferay.portal.kernel.util.JavaConstants;
-import com.liferay.portal.kernel.util.ResourceBundleReplaceThreadLocal;
+import com.liferay.portal.kernel.util.ResourceBundleThreadLocal;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
 import com.liferay.portal.model.PortletInfo;
 
@@ -38,6 +38,7 @@ public class PortletResourceBundle extends ResourceBundle {
 		ResourceBundle parentResourceBundle, PortletInfo portletInfo) {
 
 		parent = parentResourceBundle;
+
 		_portletInfo = portletInfo;
 	}
 
@@ -63,8 +64,8 @@ public class PortletResourceBundle extends ResourceBundle {
 			value = _getJavaxPortletString(key);
 		}
 
-		if ((value == null) && ResourceBundleReplaceThreadLocal.isReplace()) {
-			value = ResourceBundleUtil.NULL_VALUE_PLACE_HOLDER;
+		if ((value == null) && ResourceBundleThreadLocal.isReplace()) {
+			value = ResourceBundleUtil.NULL_VALUE;
 		}
 
 		return value;

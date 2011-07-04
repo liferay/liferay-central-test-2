@@ -17,24 +17,18 @@ package com.liferay.portal.kernel.util;
 /**
  * @author Shuyang Zhou
  */
-public class ResourceBundleReplaceThreadLocal {
+public class ResourceBundleThreadLocal {
 
-	public static Boolean isReplace() {
-		return _resourceBundleReplaceThreadLocal.get();
+	public static boolean isReplace() {
+		return _replace.get();
 	}
 
-	public static void removeReplace() {
-		_resourceBundleReplaceThreadLocal.remove();
+	public static void setReplace(boolean replace) {
+		_replace.set(replace);
 	}
 
-	public static void setReplace(Boolean logoutSession) {
-		_resourceBundleReplaceThreadLocal.set(logoutSession);
-	}
-
-	private static final ThreadLocal<Boolean>
-		_resourceBundleReplaceThreadLocal =
-			new AutoResetThreadLocal<Boolean>(
-				ResourceBundleReplaceThreadLocal.class +
-					"._resourceBundleReplaceThreadLocal", Boolean.FALSE);
+	private static ThreadLocal<Boolean> _replace =
+		new AutoResetThreadLocal<Boolean>(
+			ResourceBundleThreadLocal.class + "._replace", false);
 
 }
