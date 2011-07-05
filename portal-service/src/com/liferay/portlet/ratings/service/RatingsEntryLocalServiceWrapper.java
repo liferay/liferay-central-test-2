@@ -259,10 +259,10 @@ public class RatingsEntryLocalServiceWrapper implements RatingsEntryLocalService
 		return _ratingsEntryLocalService.getEntries(className, classPK);
 	}
 
-	public int getEntriesCount(long classNameId, long classPK, double score)
+	public java.util.List<com.liferay.portlet.ratings.model.RatingsEntry> getEntries(
+		java.lang.String className, long classPK, double score)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return _ratingsEntryLocalService.getEntriesCount(classNameId, classPK,
-			score);
+		return _ratingsEntryLocalService.getEntries(className, classPK, score);
 	}
 
 	public int getEntriesCount(java.lang.String className, long classPK,

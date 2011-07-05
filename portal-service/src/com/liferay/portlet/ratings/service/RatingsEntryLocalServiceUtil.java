@@ -268,10 +268,10 @@ public class RatingsEntryLocalServiceUtil {
 		return getService().getEntries(className, classPK);
 	}
 
-	public static int getEntriesCount(long classNameId, long classPK,
-		double score)
+	public static java.util.List<com.liferay.portlet.ratings.model.RatingsEntry> getEntries(
+		java.lang.String className, long classPK, double score)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getEntriesCount(classNameId, classPK, score);
+		return getService().getEntries(className, classPK, score);
 	}
 
 	public static int getEntriesCount(java.lang.String className, long classPK,
