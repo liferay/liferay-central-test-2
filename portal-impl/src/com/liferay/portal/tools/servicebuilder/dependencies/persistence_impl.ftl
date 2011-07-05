@@ -3871,8 +3871,6 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 		private static final String _FILTER_ENTITY_TABLE = "${entity.table}";
 
-		private static final String _FILTER_ENTITY_TABLE_PK_COLUMN = "${entity.alias}.${entity.PKVarName}";
-
 		private static final String _FILTER_ENTITY_TABLE_FILTER_PK_COLUMN = "${entity.alias}.${entity.filterPKColumn.name}";
 	</#if>
 
