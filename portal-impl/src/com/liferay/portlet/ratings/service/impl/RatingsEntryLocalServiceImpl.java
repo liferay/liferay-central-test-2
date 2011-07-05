@@ -98,11 +98,13 @@ public class RatingsEntryLocalServiceImpl
 		return ratingsEntryPersistence.findByC_C(classNameId, classPK);
 	}
 
-	public int getEntriesCount(long classNameId, long classPK, double score)
+	public List<RatingsEntry> getEntries(
+			String className, long classPK, double score)
 		throws SystemException {
 
-		return ratingsEntryPersistence.countByC_C_S(
-			classNameId, classPK, score);
+		long classNameId = PortalUtil.getClassNameId(className);
+
+		return ratingsEntryPersistence.findByC_C_S(classNameId, classPK, score);
 	}
 
 	public int getEntriesCount(String className, long classPK, double score)
@@ -110,7 +112,8 @@ public class RatingsEntryLocalServiceImpl
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		return getEntriesCount(classNameId, classPK, score);
+		return ratingsEntryPersistence.countByC_C_S(
+			classNameId, classPK, score);
 	}
 
 	public RatingsEntry getEntry(long userId, String className, long classPK)
