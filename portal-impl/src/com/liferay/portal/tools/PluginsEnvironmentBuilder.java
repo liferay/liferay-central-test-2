@@ -299,6 +299,7 @@ public class PluginsEnvironmentBuilder {
 	}
 
 	private static final String _BRANCH = "trunk";
-		private static FileImpl _fileUtil = FileImpl.getInstance();
+
+	private static FileImpl _fileUtil = FileImpl.getInstance();
 
 }
