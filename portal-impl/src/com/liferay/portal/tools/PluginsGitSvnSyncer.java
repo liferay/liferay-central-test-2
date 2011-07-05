@@ -241,12 +241,7 @@ public class PluginsGitSvnSyncer {
 			ignores.add("tmp");
 		}
 		else {
-			if (gitIgnoreFile.exists()) {
-				ignores = ListUtil.fromFile(gitIgnoreFile);
-			}
-			else {
-				ignores = new ArrayList<String>();
-			}
+			ignores = ListUtil.fromFile(gitIgnoreFile);
 
 			if (dirName.endsWith("/docroot/WEB-INF/")) {
 				if (!ignores.contains("classes")) {
