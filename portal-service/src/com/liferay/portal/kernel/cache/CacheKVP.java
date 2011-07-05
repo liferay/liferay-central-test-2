@@ -17,7 +17,7 @@ package com.liferay.portal.kernel.cache;
 import java.io.Serializable;
 
 /**
- * @author Brian Wing Shun Chan
+ * @author     Brian Wing Shun Chan
  * @deprecated
  */
 @Deprecated

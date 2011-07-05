@@ -237,9 +237,11 @@ public class FinderCacheImpl implements CacheRegistryItem, FinderCache {
 
 			return list;
 		}
-		else if (BaseModel.class.isAssignableFrom(finderPath.getModelClass())) {
+		else if (BaseModel.class.isAssignableFrom(
+					finderPath.getResultClass())) {
+
 			return EntityCacheUtil.loadResult(
-				finderPath.isEntityCacheEnabled(), finderPath.getModelClass(),
+				finderPath.isEntityCacheEnabled(), finderPath.getResultClass(),
 				(Serializable)primaryKey, sessionFactory);
 		}
 		else {
