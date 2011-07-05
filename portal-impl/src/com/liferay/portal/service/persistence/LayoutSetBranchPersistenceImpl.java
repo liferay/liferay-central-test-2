@@ -2675,7 +2675,6 @@ public class LayoutSetBranchPersistenceImpl extends BasePersistenceImpl<LayoutSe
 	private static final String _FILTER_SQL_COUNT_LAYOUTSETBRANCH_WHERE = "SELECT COUNT(DISTINCT layoutSetBranch.layoutSetBranchId) AS COUNT_VALUE FROM LayoutSetBranch layoutSetBranch WHERE ";
 	private static final String _FILTER_ENTITY_ALIAS = "layoutSetBranch";
 	private static final String _FILTER_ENTITY_TABLE = "LayoutSetBranch";
-	private static final String _FILTER_ENTITY_TABLE_PK_COLUMN = "layoutSetBranch.layoutSetBranchId";
 	private static final String _FILTER_ENTITY_TABLE_FILTER_PK_COLUMN = "layoutSetBranch.layoutSetBranchId";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "layoutSetBranch.";
 	private static final String _ORDER_BY_ENTITY_TABLE = "LayoutSetBranch.";

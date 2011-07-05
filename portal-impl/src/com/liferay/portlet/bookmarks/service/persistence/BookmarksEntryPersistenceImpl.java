@@ -4319,7 +4319,6 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 	private static final String _FILTER_SQL_COUNT_BOOKMARKSENTRY_WHERE = "SELECT COUNT(DISTINCT bookmarksEntry.entryId) AS COUNT_VALUE FROM BookmarksEntry bookmarksEntry WHERE ";
 	private static final String _FILTER_ENTITY_ALIAS = "bookmarksEntry";
 	private static final String _FILTER_ENTITY_TABLE = "BookmarksEntry";
-	private static final String _FILTER_ENTITY_TABLE_PK_COLUMN = "bookmarksEntry.entryId";
 	private static final String _FILTER_ENTITY_TABLE_FILTER_PK_COLUMN = "bookmarksEntry.entryId";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "bookmarksEntry.";
 	private static final String _ORDER_BY_ENTITY_TABLE = "BookmarksEntry.";

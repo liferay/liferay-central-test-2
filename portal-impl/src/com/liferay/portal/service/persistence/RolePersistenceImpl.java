@@ -6619,7 +6619,6 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	private static final String _FILTER_SQL_COUNT_ROLE_WHERE = "SELECT COUNT(DISTINCT role.roleId) AS COUNT_VALUE FROM Role_ role WHERE ";
 	private static final String _FILTER_ENTITY_ALIAS = "role";
 	private static final String _FILTER_ENTITY_TABLE = "Role_";
-	private static final String _FILTER_ENTITY_TABLE_PK_COLUMN = "role.roleId";
 	private static final String _FILTER_ENTITY_TABLE_FILTER_PK_COLUMN = "role.roleId";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "role.";
 	private static final String _ORDER_BY_ENTITY_TABLE = "Role_.";

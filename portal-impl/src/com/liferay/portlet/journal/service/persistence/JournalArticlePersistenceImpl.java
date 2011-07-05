@@ -15439,7 +15439,6 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	private static final String _FILTER_SQL_COUNT_JOURNALARTICLE_WHERE = "SELECT COUNT(DISTINCT journalArticle.id) AS COUNT_VALUE FROM JournalArticle journalArticle WHERE ";
 	private static final String _FILTER_ENTITY_ALIAS = "journalArticle";
 	private static final String _FILTER_ENTITY_TABLE = "JournalArticle";
-	private static final String _FILTER_ENTITY_TABLE_PK_COLUMN = "journalArticle.id";
 	private static final String _FILTER_ENTITY_TABLE_FILTER_PK_COLUMN = "journalArticle.id";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "journalArticle.";
 	private static final String _ORDER_BY_ENTITY_TABLE = "JournalArticle.";

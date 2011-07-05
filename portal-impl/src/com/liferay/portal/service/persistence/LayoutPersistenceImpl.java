@@ -6200,7 +6200,6 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 	private static final String _FILTER_SQL_COUNT_LAYOUT_WHERE = "SELECT COUNT(DISTINCT layout.plid) AS COUNT_VALUE FROM Layout layout WHERE ";
 	private static final String _FILTER_ENTITY_ALIAS = "layout";
 	private static final String _FILTER_ENTITY_TABLE = "Layout";
-	private static final String _FILTER_ENTITY_TABLE_PK_COLUMN = "layout.plid";
 	private static final String _FILTER_ENTITY_TABLE_FILTER_PK_COLUMN = "layout.plid";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "layout.";
 	private static final String _ORDER_BY_ENTITY_TABLE = "Layout.";

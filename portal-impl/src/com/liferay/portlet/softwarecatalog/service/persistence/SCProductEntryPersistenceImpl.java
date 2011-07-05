@@ -3688,7 +3688,6 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 	private static final String _FILTER_SQL_COUNT_SCPRODUCTENTRY_WHERE = "SELECT COUNT(DISTINCT scProductEntry.productEntryId) AS COUNT_VALUE FROM SCProductEntry scProductEntry WHERE ";
 	private static final String _FILTER_ENTITY_ALIAS = "scProductEntry";
 	private static final String _FILTER_ENTITY_TABLE = "SCProductEntry";
-	private static final String _FILTER_ENTITY_TABLE_PK_COLUMN = "scProductEntry.productEntryId";
 	private static final String _FILTER_ENTITY_TABLE_FILTER_PK_COLUMN = "scProductEntry.productEntryId";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "scProductEntry.";
 	private static final String _ORDER_BY_ENTITY_TABLE = "SCProductEntry.";

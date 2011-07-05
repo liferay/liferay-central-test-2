@@ -3079,7 +3079,6 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	private static final String _FILTER_SQL_COUNT_DLFILEENTRYTYPE_WHERE = "SELECT COUNT(DISTINCT dlFileEntryType.fileEntryTypeId) AS COUNT_VALUE FROM DLFileEntryType dlFileEntryType WHERE ";
 	private static final String _FILTER_ENTITY_ALIAS = "dlFileEntryType";
 	private static final String _FILTER_ENTITY_TABLE = "DLFileEntryType";
-	private static final String _FILTER_ENTITY_TABLE_PK_COLUMN = "dlFileEntryType.fileEntryTypeId";
 	private static final String _FILTER_ENTITY_TABLE_FILTER_PK_COLUMN = "dlFileEntryType.fileEntryTypeId";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "dlFileEntryType.";
 	private static final String _ORDER_BY_ENTITY_TABLE = "DLFileEntryType.";

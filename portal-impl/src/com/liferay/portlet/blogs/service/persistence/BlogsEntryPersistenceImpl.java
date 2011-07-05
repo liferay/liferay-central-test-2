@@ -10696,7 +10696,6 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	private static final String _FILTER_SQL_COUNT_BLOGSENTRY_WHERE = "SELECT COUNT(DISTINCT blogsEntry.entryId) AS COUNT_VALUE FROM BlogsEntry blogsEntry WHERE ";
 	private static final String _FILTER_ENTITY_ALIAS = "blogsEntry";
 	private static final String _FILTER_ENTITY_TABLE = "BlogsEntry";
-	private static final String _FILTER_ENTITY_TABLE_PK_COLUMN = "blogsEntry.entryId";
 	private static final String _FILTER_ENTITY_TABLE_FILTER_PK_COLUMN = "blogsEntry.entryId";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "blogsEntry.";
 	private static final String _ORDER_BY_ENTITY_TABLE = "BlogsEntry.";

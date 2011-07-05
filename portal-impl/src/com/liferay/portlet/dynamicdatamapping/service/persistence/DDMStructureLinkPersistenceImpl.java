@@ -2371,7 +2371,6 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 	private static final String _FILTER_SQL_COUNT_DDMSTRUCTURELINK_WHERE = "SELECT COUNT(DISTINCT ddmStructureLink.structureLinkId) AS COUNT_VALUE FROM DDMStructureLink ddmStructureLink WHERE ";
 	private static final String _FILTER_ENTITY_ALIAS = "ddmStructureLink";
 	private static final String _FILTER_ENTITY_TABLE = "DDMStructureLink";
-	private static final String _FILTER_ENTITY_TABLE_PK_COLUMN = "ddmStructureLink.structureLinkId";
 	private static final String _FILTER_ENTITY_TABLE_FILTER_PK_COLUMN = "ddmStructureLink.structureLinkId";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "ddmStructureLink.";
 	private static final String _ORDER_BY_ENTITY_TABLE = "DDMStructureLink.";

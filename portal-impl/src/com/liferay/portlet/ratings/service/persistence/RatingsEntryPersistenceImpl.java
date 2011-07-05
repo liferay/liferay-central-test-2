@@ -101,8 +101,8 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl<RatingsEntr
 				Long.class.getName(), Long.class.getName(), Long.class.getName()
 			});
 	public static final FinderPath FINDER_PATH_FIND_BY_C_C_S = new FinderPath(RatingsEntryModelImpl.ENTITY_CACHE_ENABLED,
-			RatingsEntryModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByC_C_S",
+			RatingsEntryModelImpl.FINDER_CACHE_ENABLED, RatingsEntryImpl.class,
+			FINDER_CLASS_NAME_LIST, "findByC_C_S",
 			new String[] {
 				Long.class.getName(), Long.class.getName(),
 				Double.class.getName(),
@@ -111,8 +111,8 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl<RatingsEntr
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			});
 	public static final FinderPath FINDER_PATH_COUNT_BY_C_C_S = new FinderPath(RatingsEntryModelImpl.ENTITY_CACHE_ENABLED,
-			RatingsEntryModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"countByC_C_S",
+			RatingsEntryModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST, "countByC_C_S",
 			new String[] {
 				Long.class.getName(), Long.class.getName(),
 				Double.class.getName()

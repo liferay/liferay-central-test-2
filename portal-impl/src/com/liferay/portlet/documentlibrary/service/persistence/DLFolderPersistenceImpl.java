@@ -4464,7 +4464,6 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	private static final String _FILTER_SQL_COUNT_DLFOLDER_WHERE = "SELECT COUNT(DISTINCT dlFolder.folderId) AS COUNT_VALUE FROM DLFolder dlFolder WHERE ";
 	private static final String _FILTER_ENTITY_ALIAS = "dlFolder";
 	private static final String _FILTER_ENTITY_TABLE = "DLFolder";
-	private static final String _FILTER_ENTITY_TABLE_PK_COLUMN = "dlFolder.folderId";
 	private static final String _FILTER_ENTITY_TABLE_FILTER_PK_COLUMN = "dlFolder.folderId";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "dlFolder.";
 	private static final String _ORDER_BY_ENTITY_TABLE = "DLFolder.";

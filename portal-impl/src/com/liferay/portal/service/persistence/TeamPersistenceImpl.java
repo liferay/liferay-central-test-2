@@ -3100,7 +3100,6 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	private static final String _FILTER_SQL_COUNT_TEAM_WHERE = "SELECT COUNT(DISTINCT team.teamId) AS COUNT_VALUE FROM Team team WHERE ";
 	private static final String _FILTER_ENTITY_ALIAS = "team";
 	private static final String _FILTER_ENTITY_TABLE = "Team";
-	private static final String _FILTER_ENTITY_TABLE_PK_COLUMN = "team.teamId";
 	private static final String _FILTER_ENTITY_TABLE_FILTER_PK_COLUMN = "team.teamId";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "team.";
 	private static final String _ORDER_BY_ENTITY_TABLE = "Team.";

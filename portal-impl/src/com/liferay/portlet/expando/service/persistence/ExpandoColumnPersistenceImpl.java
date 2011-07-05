@@ -1697,7 +1697,6 @@ public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl<ExpandoCol
 	private static final String _FILTER_SQL_COUNT_EXPANDOCOLUMN_WHERE = "SELECT COUNT(DISTINCT expandoColumn.columnId) AS COUNT_VALUE FROM ExpandoColumn expandoColumn WHERE ";
 	private static final String _FILTER_ENTITY_ALIAS = "expandoColumn";
 	private static final String _FILTER_ENTITY_TABLE = "ExpandoColumn";
-	private static final String _FILTER_ENTITY_TABLE_PK_COLUMN = "expandoColumn.columnId";
 	private static final String _FILTER_ENTITY_TABLE_FILTER_PK_COLUMN = "expandoColumn.columnId";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "expandoColumn.";
 	private static final String _ORDER_BY_ENTITY_TABLE = "ExpandoColumn.";

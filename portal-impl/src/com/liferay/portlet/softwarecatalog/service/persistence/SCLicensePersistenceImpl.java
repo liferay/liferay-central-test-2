@@ -2899,7 +2899,6 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	private static final String _FILTER_SQL_COUNT_SCLICENSE_WHERE = "SELECT COUNT(DISTINCT scLicense.licenseId) AS COUNT_VALUE FROM SCLicense scLicense WHERE ";
 	private static final String _FILTER_ENTITY_ALIAS = "scLicense";
 	private static final String _FILTER_ENTITY_TABLE = "SCLicense";
-	private static final String _FILTER_ENTITY_TABLE_PK_COLUMN = "scLicense.licenseId";
 	private static final String _FILTER_ENTITY_TABLE_FILTER_PK_COLUMN = "scLicense.licenseId";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "scLicense.";
 	private static final String _ORDER_BY_ENTITY_TABLE = "SCLicense.";

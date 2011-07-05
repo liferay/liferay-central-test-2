@@ -3359,7 +3359,6 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 	private static final String _FILTER_SQL_COUNT_SCFRAMEWORKVERSION_WHERE = "SELECT COUNT(DISTINCT scFrameworkVersion.frameworkVersionId) AS COUNT_VALUE FROM SCFrameworkVersion scFrameworkVersion WHERE ";
 	private static final String _FILTER_ENTITY_ALIAS = "scFrameworkVersion";
 	private static final String _FILTER_ENTITY_TABLE = "SCFrameworkVersion";
-	private static final String _FILTER_ENTITY_TABLE_PK_COLUMN = "scFrameworkVersion.frameworkVersionId";
 	private static final String _FILTER_ENTITY_TABLE_FILTER_PK_COLUMN = "scFrameworkVersion.frameworkVersionId";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "scFrameworkVersion.";
 	private static final String _ORDER_BY_ENTITY_TABLE = "SCFrameworkVersion.";

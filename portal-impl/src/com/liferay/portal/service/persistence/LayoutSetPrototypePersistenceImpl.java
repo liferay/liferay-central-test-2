@@ -3126,7 +3126,6 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl<Layou
 	private static final String _FILTER_SQL_COUNT_LAYOUTSETPROTOTYPE_WHERE = "SELECT COUNT(DISTINCT layoutSetPrototype.layoutSetPrototypeId) AS COUNT_VALUE FROM LayoutSetPrototype layoutSetPrototype WHERE ";
 	private static final String _FILTER_ENTITY_ALIAS = "layoutSetPrototype";
 	private static final String _FILTER_ENTITY_TABLE = "LayoutSetPrototype";
-	private static final String _FILTER_ENTITY_TABLE_PK_COLUMN = "layoutSetPrototype.layoutSetPrototypeId";
 	private static final String _FILTER_ENTITY_TABLE_FILTER_PK_COLUMN = "layoutSetPrototype.layoutSetPrototypeId";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "layoutSetPrototype.";
 	private static final String _ORDER_BY_ENTITY_TABLE = "LayoutSetPrototype.";

@@ -2074,7 +2074,6 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 	private static final String _FILTER_SQL_COUNT_ASSETTAG_WHERE = "SELECT COUNT(DISTINCT assetTag.tagId) AS COUNT_VALUE FROM AssetTag assetTag WHERE ";
 	private static final String _FILTER_ENTITY_ALIAS = "assetTag";
 	private static final String _FILTER_ENTITY_TABLE = "AssetTag";
-	private static final String _FILTER_ENTITY_TABLE_PK_COLUMN = "assetTag.tagId";
 	private static final String _FILTER_ENTITY_TABLE_FILTER_PK_COLUMN = "assetTag.tagId";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "assetTag.";
 	private static final String _ORDER_BY_ENTITY_TABLE = "AssetTag.";

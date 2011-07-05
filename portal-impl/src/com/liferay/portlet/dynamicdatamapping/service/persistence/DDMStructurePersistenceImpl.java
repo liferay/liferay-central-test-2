@@ -3838,7 +3838,6 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	private static final String _FILTER_SQL_COUNT_DDMSTRUCTURE_WHERE = "SELECT COUNT(DISTINCT ddmStructure.structureId) AS COUNT_VALUE FROM DDMStructure ddmStructure WHERE ";
 	private static final String _FILTER_ENTITY_ALIAS = "ddmStructure";
 	private static final String _FILTER_ENTITY_TABLE = "DDMStructure";
-	private static final String _FILTER_ENTITY_TABLE_PK_COLUMN = "ddmStructure.structureId";
 	private static final String _FILTER_ENTITY_TABLE_FILTER_PK_COLUMN = "ddmStructure.structureId";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "ddmStructure.";
 	private static final String _ORDER_BY_ENTITY_TABLE = "DDMStructure.";

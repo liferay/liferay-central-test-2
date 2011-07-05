@@ -2239,7 +2239,6 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl<Shoppin
 	private static final String _FILTER_SQL_COUNT_SHOPPINGCATEGORY_WHERE = "SELECT COUNT(DISTINCT shoppingCategory.categoryId) AS COUNT_VALUE FROM ShoppingCategory shoppingCategory WHERE ";
 	private static final String _FILTER_ENTITY_ALIAS = "shoppingCategory";
 	private static final String _FILTER_ENTITY_TABLE = "ShoppingCategory";
-	private static final String _FILTER_ENTITY_TABLE_PK_COLUMN = "shoppingCategory.categoryId";
 	private static final String _FILTER_ENTITY_TABLE_FILTER_PK_COLUMN = "shoppingCategory.categoryId";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "shoppingCategory.";
 	private static final String _ORDER_BY_ENTITY_TABLE = "ShoppingCategory.";

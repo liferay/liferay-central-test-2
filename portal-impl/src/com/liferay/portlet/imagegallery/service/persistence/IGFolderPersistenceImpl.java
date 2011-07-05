@@ -3729,7 +3729,6 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	private static final String _FILTER_SQL_COUNT_IGFOLDER_WHERE = "SELECT COUNT(DISTINCT igFolder.folderId) AS COUNT_VALUE FROM IGFolder igFolder WHERE ";
 	private static final String _FILTER_ENTITY_ALIAS = "igFolder";
 	private static final String _FILTER_ENTITY_TABLE = "IGFolder";
-	private static final String _FILTER_ENTITY_TABLE_PK_COLUMN = "igFolder.folderId";
 	private static final String _FILTER_ENTITY_TABLE_FILTER_PK_COLUMN = "igFolder.folderId";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "igFolder.";
 	private static final String _ORDER_BY_ENTITY_TABLE = "IGFolder.";

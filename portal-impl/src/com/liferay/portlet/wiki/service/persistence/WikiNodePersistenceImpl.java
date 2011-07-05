@@ -2857,7 +2857,6 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	private static final String _FILTER_SQL_COUNT_WIKINODE_WHERE = "SELECT COUNT(DISTINCT wikiNode.nodeId) AS COUNT_VALUE FROM WikiNode wikiNode WHERE ";
 	private static final String _FILTER_ENTITY_ALIAS = "wikiNode";
 	private static final String _FILTER_ENTITY_TABLE = "WikiNode";
-	private static final String _FILTER_ENTITY_TABLE_PK_COLUMN = "wikiNode.nodeId";
 	private static final String _FILTER_ENTITY_TABLE_FILTER_PK_COLUMN = "wikiNode.nodeId";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "wikiNode.";
 	private static final String _ORDER_BY_ENTITY_TABLE = "WikiNode.";

@@ -3994,7 +3994,6 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 	private static final String _FILTER_SQL_COUNT_ANNOUNCEMENTSENTRY_WHERE = "SELECT COUNT(DISTINCT announcementsEntry.entryId) AS COUNT_VALUE FROM AnnouncementsEntry announcementsEntry WHERE ";
 	private static final String _FILTER_ENTITY_ALIAS = "announcementsEntry";
 	private static final String _FILTER_ENTITY_TABLE = "AnnouncementsEntry";
-	private static final String _FILTER_ENTITY_TABLE_PK_COLUMN = "announcementsEntry.entryId";
 	private static final String _FILTER_ENTITY_TABLE_FILTER_PK_COLUMN = "announcementsEntry.entryId";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "announcementsEntry.";
 	private static final String _ORDER_BY_ENTITY_TABLE = "AnnouncementsEntry.";

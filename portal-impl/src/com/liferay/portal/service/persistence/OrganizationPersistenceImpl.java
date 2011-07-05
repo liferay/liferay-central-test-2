@@ -5032,7 +5032,6 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 	private static final String _FILTER_SQL_COUNT_ORGANIZATION_WHERE = "SELECT COUNT(DISTINCT organization.organizationId) AS COUNT_VALUE FROM Organization_ organization WHERE ";
 	private static final String _FILTER_ENTITY_ALIAS = "organization";
 	private static final String _FILTER_ENTITY_TABLE = "Organization_";
-	private static final String _FILTER_ENTITY_TABLE_PK_COLUMN = "organization.organizationId";
 	private static final String _FILTER_ENTITY_TABLE_FILTER_PK_COLUMN = "organization.organizationId";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "organization.";
 	private static final String _ORDER_BY_ENTITY_TABLE = "Organization_.";

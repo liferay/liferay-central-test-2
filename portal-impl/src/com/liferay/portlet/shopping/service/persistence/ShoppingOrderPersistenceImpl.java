@@ -2925,7 +2925,6 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 	private static final String _FILTER_SQL_COUNT_SHOPPINGORDER_WHERE = "SELECT COUNT(DISTINCT shoppingOrder.orderId) AS COUNT_VALUE FROM ShoppingOrder shoppingOrder WHERE ";
 	private static final String _FILTER_ENTITY_ALIAS = "shoppingOrder";
 	private static final String _FILTER_ENTITY_TABLE = "ShoppingOrder";
-	private static final String _FILTER_ENTITY_TABLE_PK_COLUMN = "shoppingOrder.orderId";
 	private static final String _FILTER_ENTITY_TABLE_FILTER_PK_COLUMN = "shoppingOrder.orderId";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "shoppingOrder.";
 	private static final String _ORDER_BY_ENTITY_TABLE = "ShoppingOrder.";
