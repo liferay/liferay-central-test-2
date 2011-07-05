@@ -51,6 +51,7 @@ import com.liferay.portlet.documentlibrary.DuplicateFileException;
 import com.liferay.portlet.documentlibrary.DuplicateFolderNameException;
 import com.liferay.portlet.documentlibrary.FileNameException;
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
+import com.liferay.portlet.documentlibrary.NoSuchFileEntryMetadataException;
 import com.liferay.portlet.documentlibrary.NoSuchFileException;
 import com.liferay.portlet.documentlibrary.NoSuchFileVersionException;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
@@ -388,7 +389,7 @@ public class DLFileEntryLocalServiceImpl
 
 		DLFileVersion dlFileVersion = getLatestFileVersion(fileEntryId);
 
-		long sourceFileVersionId = dlFileVersion.getFileVersionId();
+		long dlFileVersionId = dlFileVersion.getFileVersionId();
 
 		String version = dlFileVersion.getVersion();
 
@@ -397,8 +398,8 @@ public class DLFileEntryLocalServiceImpl
 
 			ServiceContext serviceContext = new ServiceContext();
 
-			serviceContext.setUserId(userId);
 			serviceContext.setCompanyId(user.getCompanyId());
+			serviceContext.setUserId(userId);
 
 			HashMap<Long, Fields> fieldsMap = new HashMap<Long, Fields>();
 
@@ -430,12 +431,10 @@ public class DLFileEntryLocalServiceImpl
 				DLFileEntryConstants.PRIVATE_WORKING_COPY_VERSION,
 				dlFileVersion.getTitle(), serviceContext);
 
-			// Metadata
-
-			copyDocumentMetadata(
-				user.getCompanyId(), fileEntryId,
-				dlFileVersion.getFileEntryTypeId(), sourceFileVersionId,
-				dlFileVersion.getFileVersionId(), serviceContext);
+			copyFileEntryMetadata(
+				dlFileEntry.getCompanyId(), dlFileVersion.getFileEntryTypeId(),
+				fileEntryId, dlFileVersionId, dlFileVersion.getFileVersionId(),
+				serviceContext);
 
 			// Index
 
@@ -1150,8 +1149,8 @@ public class DLFileEntryLocalServiceImpl
 		}
 	}
 
-	protected void copyDocumentMetadata(
-			long companyId, long fileEntryId, long fileEntryTypeId,
+	protected void copyFileEntryMetadata(
+			long companyId, long fileEntryTypeId, long fileEntryId,
 			long fromFileVersionId, long toFileVersionId,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
@@ -1161,16 +1160,15 @@ public class DLFileEntryLocalServiceImpl
 		List<DDMStructure> ddmStructures = null;
 
 		if (fileEntryTypeId > 0) {
-			DLFileEntryType fileEntryType =
+			DLFileEntryType dlFileEntryType =
 				dlFileEntryTypeLocalService.getFileEntryType(fileEntryTypeId);
 
-			ddmStructures = fileEntryType.getDDMStructures();
+			ddmStructures = dlFileEntryType.getDDMStructures();
 
 			for (DDMStructure ddmStructure : ddmStructures) {
 				DLFileEntryMetadata dlFileEntryMetadata =
 					dlFileEntryMetadataLocalService.getFileEntryMetadata(
-						ddmStructure.getStructureId(),
-						fromFileVersionId);
+						ddmStructure.getStructureId(), fromFileVersionId);
 
 				Fields fields = StorageEngineUtil.getFields(
 					dlFileEntryMetadata.getDDMStorageId());
@@ -1199,7 +1197,7 @@ public class DLFileEntryLocalServiceImpl
 
 				fieldsMap.put(ddmStructure.getStructureKey(), fields);
 			}
-			catch (PortalException pe) {
+			catch (NoSuchFileEntryMetadataException nsfme) {
 			}
 		}
 
