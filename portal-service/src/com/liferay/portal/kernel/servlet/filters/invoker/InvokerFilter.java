@@ -15,8 +15,6 @@
 package com.liferay.portal.kernel.servlet.filters.invoker;
 
 import com.liferay.portal.kernel.concurrent.ConcurrentLRUCache;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.BasePortalLifecycle;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
@@ -198,8 +196,6 @@ public class InvokerFilter extends BasePortalLifecycle implements Filter {
 
 	private static final int _INVOKER_FILTER_CHAIN_SIZE = GetterUtil.getInteger(
 		PropsUtil.get(PropsKeys.INVOKER_FILTER_CHAIN_SIZE));
-
-	private static Log _log = LogFactoryUtil.getLog(InvokerFilter.class);
 
 	private Dispatcher _dispatcher;
 	private ConcurrentLRUCache<Integer, InvokerFilterChain> _filterChains;
