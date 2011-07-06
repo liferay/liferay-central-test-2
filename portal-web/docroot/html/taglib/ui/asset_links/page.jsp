@@ -1,4 +1,3 @@
-<%@ page import="com.liferay.portlet.announcements.NoSuchEntryException" %>
 <%--
 /**
  * Copyright (c) 2000-2011 Liferay, Inc. All rights reserved.
