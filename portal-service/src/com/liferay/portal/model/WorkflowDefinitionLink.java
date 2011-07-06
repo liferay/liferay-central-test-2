@@ -25,7 +25,7 @@ package com.liferay.portal.model;
  */
 public interface WorkflowDefinitionLink extends WorkflowDefinitionLinkModel,
 	SaveableModel {
-	/**
+	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify this interface directly. Add methods to {@link com.liferay.portal.model.impl.WorkflowDefinitionLinkImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.

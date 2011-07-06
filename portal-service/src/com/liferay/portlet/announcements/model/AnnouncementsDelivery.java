@@ -27,7 +27,7 @@ import com.liferay.portal.model.SaveableModel;
  */
 public interface AnnouncementsDelivery extends AnnouncementsDeliveryModel,
 	SaveableModel {
-	/**
+	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify this interface directly. Add methods to {@link com.liferay.portlet.announcements.model.impl.AnnouncementsDeliveryImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.

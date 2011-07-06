@@ -26,7 +26,7 @@ import com.liferay.portal.model.SaveableModel;
  * @generated
  */
 public interface JournalTemplate extends JournalTemplateModel, SaveableModel {
-	/**
+	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify this interface directly. Add methods to {@link com.liferay.portlet.journal.model.impl.JournalTemplateImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.

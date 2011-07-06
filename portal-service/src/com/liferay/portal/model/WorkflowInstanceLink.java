@@ -25,7 +25,7 @@ package com.liferay.portal.model;
  */
 public interface WorkflowInstanceLink extends WorkflowInstanceLinkModel,
 	SaveableModel {
-	/**
+	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify this interface directly. Add methods to {@link com.liferay.portal.model.impl.WorkflowInstanceLinkImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.

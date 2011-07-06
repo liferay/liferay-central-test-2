@@ -27,7 +27,7 @@ import com.liferay.portal.model.SaveableModel;
  */
 public interface SocialEquityGroupSetting extends SocialEquityGroupSettingModel,
 	SaveableModel {
-	/**
+	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify this interface directly. Add methods to {@link com.liferay.portlet.social.model.impl.SocialEquityGroupSettingImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.

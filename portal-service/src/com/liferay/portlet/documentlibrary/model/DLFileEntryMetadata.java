@@ -27,7 +27,7 @@ import com.liferay.portal.model.SaveableModel;
  */
 public interface DLFileEntryMetadata extends DLFileEntryMetadataModel,
 	SaveableModel {
-	/**
+	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify this interface directly. Add methods to {@link com.liferay.portlet.documentlibrary.model.impl.DLFileEntryMetadataImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.

@@ -25,7 +25,7 @@ package com.liferay.portal.model;
  */
 public interface PortletPreferences extends PortletPreferencesModel,
 	SaveableModel {
-	/**
+	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify this interface directly. Add methods to {@link com.liferay.portal.model.impl.PortletPreferencesImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.

@@ -26,7 +26,7 @@ import com.liferay.portal.model.SaveableModel;
  * @generated
  */
 public interface RatingsStats extends RatingsStatsModel, SaveableModel {
-	/**
+	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify this interface directly. Add methods to {@link com.liferay.portlet.ratings.model.impl.RatingsStatsImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.

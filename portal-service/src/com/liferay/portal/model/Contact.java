@@ -24,7 +24,7 @@ package com.liferay.portal.model;
  * @generated
  */
 public interface Contact extends ContactModel, SaveableModel {
-	/**
+	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify this interface directly. Add methods to {@link com.liferay.portal.model.impl.ContactImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
