@@ -23,20 +23,19 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
 
-import org.compass.core.engine.spellcheck.SearchEngineSpellSuggestions;
-
 /**
  * @author Brian Wing Shun Chan
  */
 public class PortalSessionListener implements HttpSessionListener {
 
 	public void sessionCreated(HttpSessionEvent httpSessionEvent) {
-
 		if (CompoundSessionIdFilter.hasCompoundSessionId()) {
-			CompoundSessionIdHttpSession compoundSession =
-				new CompoundSessionIdHttpSession(httpSessionEvent.getSession());
+			CompoundSessionIdHttpSession compoundSessionIdHttpSession =
+				new CompoundSessionIdHttpSession(
+					httpSessionEvent.getSession());
 
-			httpSessionEvent = new HttpSessionEvent(compoundSession);
+			httpSessionEvent = new HttpSessionEvent(
+				compoundSessionIdHttpSession);
 		}
 
 		new PortalSessionCreator(httpSessionEvent);
@@ -50,10 +49,12 @@ public class PortalSessionListener implements HttpSessionListener {
 
 	public void sessionDestroyed(HttpSessionEvent httpSessionEvent) {
 		if (CompoundSessionIdFilter.hasCompoundSessionId()) {
-			CompoundSessionIdHttpSession compoundSession =
-				new CompoundSessionIdHttpSession(httpSessionEvent.getSession());
+			CompoundSessionIdHttpSession compoundSessionIdHttpSession =
+				new CompoundSessionIdHttpSession(
+					httpSessionEvent.getSession());
 
-			httpSessionEvent = new HttpSessionEvent(compoundSession);
+			httpSessionEvent = new HttpSessionEvent(
+				compoundSessionIdHttpSession);
 		}
 
 		new PortalSessionDestroyer(httpSessionEvent);
