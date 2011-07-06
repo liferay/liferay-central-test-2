@@ -161,15 +161,15 @@ public class ExpandoStorageAdapter extends BaseStorageAdapter {
 
 		int count = 0;
 
-		long[] rowIds = _getExpandoRowIds(ddmStructureId);
+		long[] expandoRowIds = _getExpandoRowIds(ddmStructureId);
 
-		for (long rowId : rowIds) {
+		for (long expandoRowId : expandoRowIds) {
 			List<ExpandoValue> expandoValues =
-				ExpandoValueLocalServiceUtil.getRowValues(rowId);
+				ExpandoValueLocalServiceUtil.getRowValues(expandoRowId);
 
 			if ((expression == null) ||
 				((expression != null) &&
-					_booleanValueOf(expression, expandoValues))) {
+				 _booleanValueOf(expression, expandoValues))) {
 
 				count++;
 			}
@@ -212,15 +212,17 @@ public class ExpandoStorageAdapter extends BaseStorageAdapter {
 		Expression expression, List<ExpandoValue> expandoValues) {
 
 		try {
-			StandardEvaluationContext context = new StandardEvaluationContext();
+			StandardEvaluationContext standardEvaluationContext =
+				new StandardEvaluationContext();
 
-			context.setBeanResolver(
+			standardEvaluationContext.setBeanResolver(
 				new ExpandoValueBeanResolver(expandoValues));
 
-			return expression.getValue(context, Boolean.class);
+			return expression.getValue(
+				standardEvaluationContext, Boolean.class);
 		}
 		catch (EvaluationException ee) {
-			_log.error("Error occurred during the expression evaluation.", ee);
+			_log.error("Unable to evaluate expression", ee);
 		}
 
 		return false;
@@ -289,7 +291,7 @@ public class ExpandoStorageAdapter extends BaseStorageAdapter {
 
 			if ((expression == null) ||
 				((expression != null) &&
-					_booleanValueOf(expression, expandoValues))) {
+				 _booleanValueOf(expression, expandoValues))) {
 
 				Fields fields = new Fields();
 
@@ -321,17 +323,18 @@ public class ExpandoStorageAdapter extends BaseStorageAdapter {
 	private long[] _getExpandoRowIds(long ddmStructureId)
 		throws SystemException {
 
-		List<Long> rowIds = new ArrayList<Long>();
+		List<Long> expandoRowIds = new ArrayList<Long>();
 
 		List<DDMStorageLink> ddmStorageLinks =
 			DDMStorageLinkLocalServiceUtil.getStructureStorageLinks(
 				ddmStructureId);
 
 		for (DDMStorageLink ddmStorageLink : ddmStorageLinks) {
-			rowIds.add(ddmStorageLink.getClassPK());
+			expandoRowIds.add(ddmStorageLink.getClassPK());
 		}
 
-		return ArrayUtil.toArray(rowIds.toArray(new Long[rowIds.size()]));
+		return ArrayUtil.toArray(
+			expandoRowIds.toArray(new Long[expandoRowIds.size()]));
 	}
 
 	private ExpandoTable _getExpandoTable(
@@ -361,12 +364,12 @@ public class ExpandoStorageAdapter extends BaseStorageAdapter {
 		String expression = _toExpression(condition);
 
 		try {
-			ExpressionParser parser = new SpelExpressionParser();
+			ExpressionParser expressionParser = new SpelExpressionParser();
 
-			return parser.parseExpression(expression);
+			return expressionParser.parseExpression(expression);
 		}
 		catch (ParseException pe) {
-			_log.error("The expression could not be parsed: " + expression, pe);
+			_log.error("Unable to parse expression " + expression, pe);
 		}
 
 		return null;
@@ -390,7 +393,6 @@ public class ExpandoStorageAdapter extends BaseStorageAdapter {
 		StringBundler sb = new StringBundler(5);
 
 		sb.append("(@");
-
 		sb.append(fieldCondition.getName());
 
 		ComparisonOperator comparisonOperator =
@@ -407,7 +409,6 @@ public class ExpandoStorageAdapter extends BaseStorageAdapter {
 			String.valueOf(fieldCondition.getValue()));
 
 		sb.append(value);
-
 		sb.append(StringPool.CLOSE_PARENTHESIS);
 
 		return sb.toString();

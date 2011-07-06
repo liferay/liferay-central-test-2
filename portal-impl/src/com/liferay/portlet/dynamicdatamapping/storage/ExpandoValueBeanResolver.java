@@ -16,13 +16,13 @@ package com.liferay.portlet.dynamicdatamapping.storage;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portlet.expando.model.ExpandoColumn;
 import com.liferay.portlet.expando.model.ExpandoValue;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.expression.AccessException;
 import org.springframework.expression.BeanResolver;
 import org.springframework.expression.EvaluationContext;
 
@@ -32,12 +32,13 @@ import org.springframework.expression.EvaluationContext;
 public class ExpandoValueBeanResolver implements BeanResolver {
 
 	public ExpandoValueBeanResolver(List<ExpandoValue> expandoValues) {
-		_expandoValueMap = new HashMap<String, ExpandoValue>();
+		_expandoValues = new HashMap<String, ExpandoValue>();
 
 		try {
 			for (ExpandoValue expandoValue : expandoValues) {
-				_expandoValueMap.put(
-					expandoValue.getColumn().getName(), expandoValue);
+				ExpandoColumn expandoColumn = expandoValue.getColumn();
+
+				_expandoValues.put(expandoColumn.getName(), expandoValue);
 			}
 		}
 		catch (Exception e) {
@@ -45,15 +46,13 @@ public class ExpandoValueBeanResolver implements BeanResolver {
 		}
 	}
 
-	public Object resolve(EvaluationContext context, String beanName)
-		throws AccessException {
-
-		return _expandoValueMap.get(beanName);
+	public Object resolve(EvaluationContext context, String beanName) {
+		return _expandoValues.get(beanName);
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(
 		ExpandoValueBeanResolver.class);
 
-	private Map<String, ExpandoValue> _expandoValueMap;
+	private Map<String, ExpandoValue> _expandoValues;
 
 }
