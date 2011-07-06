@@ -146,6 +146,7 @@ public class TransactionalPortalCacheHelper {
 
 	private static Map<PortalCache, Map<Serializable, Object>>
 		_peekPortalCacheMap() {
+
 		List<Map<PortalCache, Map<Serializable, Object>>> portalCacheList =
 			_portalCacheListThreadLocal.get();
 
@@ -154,6 +155,7 @@ public class TransactionalPortalCacheHelper {
 
 	private static Map<PortalCache, Map<Serializable, Object>>
 		_popPortalCacheMap() {
+
 		List<Map<PortalCache, Map<Serializable, Object>>> portalCacheList =
 			_portalCacheListThreadLocal.get();
 
@@ -170,12 +172,11 @@ public class TransactionalPortalCacheHelper {
 
 	private static ThreadLocal
 		<List<Map<PortalCache, Map<Serializable, Object>>>>
-			_portalCacheListThreadLocal =
-				new InitialThreadLocal
-					<List<Map<PortalCache, Map<Serializable, Object>>>>(
-						TransactionalPortalCacheHelper.class.getName() +
-							"._portalCacheListThreadLocal",
-						new ArrayList
-							<Map<PortalCache, Map<Serializable, Object>>>());
+			_portalCacheListThreadLocal = new InitialThreadLocal
+				<List<Map<PortalCache, Map<Serializable, Object>>>>(
+					TransactionalPortalCacheHelper.class.getName() +
+						"._portalCacheListThreadLocal",
+					new ArrayList
+						<Map<PortalCache, Map<Serializable, Object>>>());
 
 }

@@ -118,6 +118,7 @@ public class MemoryPortalCache extends BasePortalCache {
 
 	protected void notifyPutEvents(
 		Serializable key, Object value, boolean updated) {
+
 		if (updated) {
 			for (CacheListener cacheListener : _cacheListeners) {
 				cacheListener.notifyEntryUpdated(this, key, value);
