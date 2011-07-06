@@ -45,7 +45,10 @@ public class AmazonRankingsPreferencesValidator
 
 			if (amazonRankings == null) {
 				badIsbns.add(isbn);
-				_log.error("Invalid ISBN " + isbn);
+
+				if (_log.isInfoEnabled()) {
+					_log.info("Invalid ISBN " + isbn);
+				}
 			}
 		}
 

@@ -91,10 +91,8 @@ public class AmazonRankingsWebCacheItem implements WebCacheItem {
 			return null;
 		}
 
-		if (rootElement != null) {
-			if (hasErrorMessage(rootElement)) {
-				return null;
-			}
+		if (hasErrorMessage(rootElement)) {
+			return null;
 		}
 
 		Element itemsElement = rootElement.element("Items");
@@ -108,10 +106,8 @@ public class AmazonRankingsWebCacheItem implements WebCacheItem {
 		if (requestElement != null) {
 			Element errorsElement = requestElement.element("Errors");
 
-			if (errorsElement != null) {
-				if (hasErrorMessage(errorsElement)) {
-					return null;
-				}
+			if (hasErrorMessage(errorsElement)) {
+				return null;
 			}
 		}
 
@@ -197,22 +193,6 @@ public class AmazonRankingsWebCacheItem implements WebCacheItem {
 		return availabilityElement.elementText("Availability");
 	}
 
-	protected boolean hasErrorMessage(Element parentElement) {
-		
-		Element errorElement = parentElement.element("Error");
-
-		if (errorElement != null) {
-			Element messageElement = errorElement.element("Message");
-
-			if (messageElement != null) {
-				_log.error(messageElement.getText());
-				return true;
-			}
-		}
-		
-		return false;
-	}
-
 	protected String getImageURL(Element itemElement, String name) {
 		String imageURL = null;
 
@@ -266,6 +246,28 @@ public class AmazonRankingsWebCacheItem implements WebCacheItem {
 		}
 
 		return GetterUtil.getDate(releaseDateAsString, dateFormat);
+	}
+
+	protected boolean hasErrorMessage(Element element) {
+		if (element == null) {
+			return false;
+		}
+
+		Element errorElement = element.element("Error");
+
+		if (errorElement == null) {
+			return false;
+		}
+
+		Element messageElement = errorElement.element("Message");
+
+		if (messageElement == null) {
+			return false;
+		}
+
+		_log.error(messageElement.getText());
+
+		return true;
 	}
 
 	private static final long _REFRESH_TIME = Time.MINUTE * 20;

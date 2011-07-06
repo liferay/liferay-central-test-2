@@ -23,7 +23,6 @@ import java.net.URLEncoder;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
-import java.util.SortedMap;
 import java.util.TreeMap;
 
 import javax.crypto.Mac;
@@ -41,10 +40,7 @@ public class AmazonSignedRequestsUtil {
 			Map<String, String> parameters)
 		throws Exception {
 
-		SortedMap<String, String> sortedParameters =
-			new TreeMap<String, String>(parameters);
-
-		String canonicalizedParameters = _canonicalizeParameters(sortedParameters);
+		String canonicalizedParameters = _canonicalizeParameters(parameters);
 
 		String signature = _generateSignature(
 			"GET\necs.amazonaws.com\n/onca/xml\n" + canonicalizedParameters);
@@ -62,6 +58,8 @@ public class AmazonSignedRequestsUtil {
 		}
 
 		StringBundler sb = new StringBundler();
+
+		parameters = new TreeMap<String, String>(parameters);
 
 		Set<Map.Entry<String, String>> parametersSet = parameters.entrySet();
 
