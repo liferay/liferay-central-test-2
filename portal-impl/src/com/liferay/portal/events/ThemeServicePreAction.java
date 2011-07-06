@@ -19,9 +19,7 @@ import com.liferay.portal.kernel.events.ActionException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.BrowserSnifferUtil;
-import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.model.ColorScheme;
-import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Theme;
 import com.liferay.portal.model.impl.ColorSchemeImpl;
@@ -38,75 +36,82 @@ import javax.servlet.http.HttpServletResponse;
  * @author Edward Han
  */
 public class ThemeServicePreAction extends Action {
-	public void run(
-			HttpServletRequest request, HttpServletResponse response)
+
+	@Override
+	public void run(HttpServletRequest request, HttpServletResponse response)
 		throws ActionException {
 
 		try {
-			ThemeDisplay themeDisplay = (ThemeDisplay) request.getAttribute(
-				WebKeys.THEME_DISPLAY);
-
-			// Theme and color scheme
-
-			Theme theme = themeDisplay.getTheme();
-			ColorScheme colorScheme = themeDisplay.getColorScheme();
-
-			if (theme != null) {
-				if (_log.isInfoEnabled()) {
-					_log.info("Theme already set, skipping");
-				}
-
-				return;
-			}
-
-			Layout layout = themeDisplay.getLayout();
-
-			long companyId = themeDisplay.getCompanyId();
-
-			boolean wapTheme = BrowserSnifferUtil.isWap(request);
-
-			String contextPath = PortalUtil.getPathContext();
-
-			if (layout != null) {
-				if (wapTheme) {
-					theme = layout.getWapTheme();
-					colorScheme = layout.getWapColorScheme();
-				}
-				else {
-					theme = layout.getTheme();
-					colorScheme = layout.getColorScheme();
-				}
-			}
-			else {
-				String themeId = null;
-				String colorSchemeId = null;
-
-				if (wapTheme) {
-					themeId = ThemeImpl.getDefaultWapThemeId(companyId);
-					colorSchemeId = ColorSchemeImpl.getDefaultWapColorSchemeId();
-				}
-				else {
-					themeId = ThemeImpl.getDefaultRegularThemeId(companyId);
-					colorSchemeId =
-						ColorSchemeImpl.getDefaultRegularColorSchemeId();
-				}
-
-				theme = ThemeLocalServiceUtil.getTheme(
-					companyId, themeId, wapTheme);
-				colorScheme = ThemeLocalServiceUtil.getColorScheme(
-					companyId, theme.getThemeId(), colorSchemeId, wapTheme);
-			}
-
-			request.setAttribute(WebKeys.THEME, theme);
-			request.setAttribute(WebKeys.COLOR_SCHEME, colorScheme);
-
-			themeDisplay.setLookAndFeel(contextPath, theme, colorScheme);
+			servicePre(request, response);
 		}
 		catch (Exception e) {
 			throw new ActionException(e);
 		}
 	}
 
+	protected void servicePre(
+			HttpServletRequest request, HttpServletResponse response)
+		throws Exception {
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		Theme theme = themeDisplay.getTheme();
+		ColorScheme colorScheme = themeDisplay.getColorScheme();
+
+		if (theme != null) {
+			if (_log.isInfoEnabled()) {
+				_log.info("Theme is already set");
+			}
+
+			return;
+		}
+
+		Layout layout = themeDisplay.getLayout();
+
+		boolean wapTheme = BrowserSnifferUtil.isWap(request);
+
+		if (layout != null) {
+			if (wapTheme) {
+				theme = layout.getWapTheme();
+				colorScheme = layout.getWapColorScheme();
+			}
+			else {
+				theme = layout.getTheme();
+				colorScheme = layout.getColorScheme();
+			}
+		}
+		else {
+			String themeId = null;
+			String colorSchemeId = null;
+
+			if (wapTheme) {
+				themeId = ThemeImpl.getDefaultWapThemeId(
+					themeDisplay.getCompanyId());
+				colorSchemeId = ColorSchemeImpl.getDefaultWapColorSchemeId();
+			}
+			else {
+				themeId = ThemeImpl.getDefaultRegularThemeId(
+					themeDisplay.getCompanyId());
+				colorSchemeId =
+					ColorSchemeImpl.getDefaultRegularColorSchemeId();
+			}
+
+			theme = ThemeLocalServiceUtil.getTheme(
+				themeDisplay.getCompanyId(), themeId, wapTheme);
+			colorScheme = ThemeLocalServiceUtil.getColorScheme(
+				themeDisplay.getCompanyId(), theme.getThemeId(), colorSchemeId,
+				wapTheme);
+		}
+
+		request.setAttribute(WebKeys.THEME, theme);
+		request.setAttribute(WebKeys.COLOR_SCHEME, colorScheme);
+
+		themeDisplay.setLookAndFeel(
+			PortalUtil.getPathContext(), theme, colorScheme);
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(
 		ThemeServicePreAction.class);
+
 }

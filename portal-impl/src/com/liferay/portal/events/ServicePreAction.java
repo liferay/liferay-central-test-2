@@ -700,7 +700,7 @@ public class ServicePreAction extends Action {
 
 		if (group.isControlPanel()) {
 			if (PortalPermissionUtil.contains(
-				permissionChecker, ActionKeys.VIEW_CONTROL_PANEL)) {
+					permissionChecker, ActionKeys.VIEW_CONTROL_PANEL)) {
 
 				return true;
 			}
@@ -1425,6 +1425,8 @@ public class ServicePreAction extends Action {
 		long scopeGroupId = PortalUtil.getScopeGroupId(request);
 		long parentGroupId = PortalUtil.getParentGroupId(scopeGroupId);
 
+		// Theme and color scheme
+
 		Theme theme = null;
 		ColorScheme colorScheme = null;
 
@@ -1448,6 +1450,9 @@ public class ServicePreAction extends Action {
 				colorScheme = ThemeLocalServiceUtil.getColorScheme(
 					companyId, theme.getThemeId(), colorSchemeId, false);
 			}
+
+			request.setAttribute(WebKeys.THEME, theme);
+			request.setAttribute(WebKeys.COLOR_SCHEME, colorScheme);
 		}
 
 		boolean themeCssFastLoad = SessionParamUtil.getBoolean(
@@ -1526,14 +1531,7 @@ public class ServicePreAction extends Action {
 		themeDisplay.setI18nPath(i18nPath);
 		themeDisplay.setTimeZone(timeZone);
 		themeDisplay.setDevice(device);
-
-		if (theme != null) {
-			request.setAttribute(WebKeys.THEME, theme);
-			request.setAttribute(WebKeys.COLOR_SCHEME, colorScheme);
-
-			themeDisplay.setLookAndFeel(contextPath, theme, colorScheme);
-		}
-
+		themeDisplay.setLookAndFeel(contextPath, theme, colorScheme);
 		themeDisplay.setThemeCssFastLoad(themeCssFastLoad);
 		themeDisplay.setThemeImagesFastLoad(themeImagesFastLoad);
 		themeDisplay.setThemeJsBarebone(themeJsBarebone);
