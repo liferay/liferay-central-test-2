@@ -141,33 +141,33 @@ public class LiferayEhcacheRegionFactory extends EhCacheRegionFactory {
 	public void start(Settings settings, Properties properties)
 		throws CacheException {
 
-		Object transactionManager = getOnePhaseCommitSyncTransactionManager(
-			settings, properties);
-
 		try {
-			String configurationResourceName = null;
+			String configurationPath = null;
+
 			if (properties != null) {
-				configurationResourceName = (String) properties.get(
+				configurationPath = (String)properties.get(
 					NET_SF_EHCACHE_CONFIGURATION_RESOURCE_NAME);
 			}
 
-			if (Validator.isNull(configurationResourceName)) {
-				configurationResourceName =
-					_DEFAULT_CLUSTERED_EHCACHE_CONFIG_FILE;
+			if (Validator.isNull(configurationPath)) {
+				configurationPath = _DEFAULT_CLUSTERED_EHCACHE_CONFIG_FILE;
 			}
-
-			boolean usingDefault = configurationResourceName.equals(
-				_DEFAULT_CLUSTERED_EHCACHE_CONFIG_FILE);
 
 			Configuration configuration = null;
 
-			if (Validator.isNull(configurationResourceName)) {
+			if (Validator.isNull(configurationPath)) {
 				configuration = ConfigurationFactory.parseConfiguration();
 			}
 			else {
+				boolean usingDefault = configurationPath.equals(
+					_DEFAULT_CLUSTERED_EHCACHE_CONFIG_FILE);
+
 				configuration = EhcacheConfigurationUtil.getConfiguration(
-					configurationResourceName, true, usingDefault);
+					configurationPath, true, usingDefault);
 			}
+
+			Object transactionManager = getOnePhaseCommitSyncTransactionManager(
+				settings, properties);
 
 			configuration.setDefaultTransactionManager(transactionManager);
 
@@ -175,22 +175,8 @@ public class LiferayEhcacheRegionFactory extends EhCacheRegionFactory {
 
 			mbeanRegistrationHelper.registerMBean(manager, properties);
 		}
-		catch (net.sf.ehcache.CacheException e) {
-			if (e.getMessage().startsWith(
-				"Cannot parseConfiguration CacheManager. " +
-				"Attempt to create a new instance of CacheManager " +
-				"using the diskStorePath")) {
-
-				throw new CacheException(
-					"Attempt to restart an already started " +
-					"EhCacheRegionFactory.  Use sessionFactory.close() " +
-					"between repeated calls to buildSessionFactory. " +
-					"Consider using SingletonEhCacheRegionFactory." +
-					"Error from ehcache was: " + e.getMessage());
-			}
-			else {
-				throw new CacheException(e);
-			}
+		catch (net.sf.ehcache.CacheException ce) {
+			throw new CacheException(ce);
 		}
 	}
 
