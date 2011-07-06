@@ -2,11 +2,11 @@ package ${packagePath}.model.impl;
 
 import ${packagePath}.model.${entity.name};
 
-import com.liferay.portal.kernel.exception.SystemException;
-
 <#if entity.hasLocalService() && entity.hasColumns()>
 	import ${packagePath}.service.${entity.name}LocalServiceUtil;
 </#if>
+
+import com.liferay.portal.kernel.exception.SystemException;
 
 /**
  * The extended model base implementation for the ${entity.name} service. Represents a row in the &quot;${entity.table}&quot; database table, with each column mapped to a property of this class.
