@@ -723,9 +723,7 @@ public class SourceFormatter {
 				packagePath, File.separator, StringPool.PERIOD);
 
 			if (packagePath.endsWith(".model")) {
-				if (content.indexOf(
-						"extends " + className + "Model") != -1) {
-
+				if (content.indexOf("extends " + className + "Model") != -1) {
 					continue;
 				}
 			}

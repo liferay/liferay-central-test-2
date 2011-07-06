@@ -1722,8 +1722,8 @@ public class ServiceBuilder {
 
 			content = content.replaceAll(
 				"extends\\s+" + entity.getName() +
-				"ModelImpl\\s+implements\\s+" +	entity.getName(), "extends " +
-				entity.getName() + "BaseImpl");
+					"ModelImpl\\s+implements\\s+" +	entity.getName(),
+				"extends " + entity.getName() + "BaseImpl");
 
 			writeFileRaw(modelFile, content);
 		}
@@ -2193,17 +2193,16 @@ public class ServiceBuilder {
 		JavaClass modelJavaClass = _getJavaClass(
 			_serviceOutputPath + "/model/" + entity.getName() + "Model.java");
 
-		JavaClass extendedModelBaseImplJavaClass = _getJavaClass(
-			_outputPath + "/model/impl/" + entity.getName() +
-			"BaseImpl.java");
-
-		JavaClass extendedModelJavaClass = _getJavaClass(
-			_serviceOutputPath + "/model/" + entity.getName() + ".java");
-
 		Object[] methods = _getMethods(modelJavaClass);
+
+		JavaClass extendedModelBaseImplJavaClass = _getJavaClass(
+			_outputPath + "/model/impl/" + entity.getName() + "BaseImpl.java");
 
 		methods = ArrayUtil.append(
 			methods, _getMethods(extendedModelBaseImplJavaClass));
+
+		JavaClass extendedModelJavaClass = _getJavaClass(
+			_serviceOutputPath + "/model/" + entity.getName() + ".java");
 
 		methods = ArrayUtil.append(
 			methods, _getMethods(extendedModelJavaClass));
