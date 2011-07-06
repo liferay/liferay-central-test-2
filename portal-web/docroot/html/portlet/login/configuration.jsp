@@ -71,15 +71,23 @@ String emailFromAddress = ParamUtil.getString(request, "emailFromAddress", Login
 
 					<%
 					String emailParam = "emailPasswordSent";
-
+					String defaultSubjectParam = StringPool.BLANK;
+					String defaultBodyParam = StringPool.BLANK;
+					
 					if (tabs2.equals("password-reset-notification")) {
 						emailParam = "emailPasswordReset";
+						defaultSubjectParam = ContentUtil.get(PropsUtil.get(PropsKeys.ADMIN_EMAIL_PASSWORD_RESET_SUBJECT));
+						defaultBodyParam = ContentUtil.get(PropsUtil.get(PropsKeys.ADMIN_EMAIL_PASSWORD_RESET_BODY));
+					}
+					else if (tabs2.equals("password-changed-notification")) {
+						defaultSubjectParam = ContentUtil.get(PropsUtil.get(PropsKeys.ADMIN_EMAIL_PASSWORD_SENT_SUBJECT));
+						defaultBodyParam = ContentUtil.get(PropsUtil.get(PropsKeys.ADMIN_EMAIL_PASSWORD_SENT_BODY));
 					}
 
 					String currentLanguageId = LanguageUtil.getLanguageId(request);
-
-					String emailSubject = PrefsParamUtil.getString(preferences, request, emailParam + "Subject_" + currentLanguageId, StringPool.BLANK);
-					String emailBody = PrefsParamUtil.getString(preferences, request, emailParam + "Body_" + currentLanguageId, StringPool.BLANK);
+					
+					String emailSubject = PrefsParamUtil.getString(preferences, request, emailParam + "Subject_" + currentLanguageId, defaultSubjectParam);
+					String emailBody = PrefsParamUtil.getString(preferences, request, emailParam + "Body_" + currentLanguageId, defaultBodyParam);
 
 					editorParam = emailParam + "Body_" + currentLanguageId;
 					editorContent = emailBody;
