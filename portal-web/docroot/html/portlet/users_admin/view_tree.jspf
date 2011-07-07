@@ -23,7 +23,6 @@ if (organizationId != 0) {
 	organization = OrganizationServiceUtil.getOrganization(organizationId);
 }
 
-
 if (organization != null) {
 	Group organizationGroup = organization.getGroup();
 

@@ -31,8 +31,6 @@ if (Validator.isNotNull(viewUsersRedirect)) {
 pageContext.setAttribute("portletURL", portletURL);
 
 String portletURLString = portletURL.toString();
-
-long organizationGroupId = 0;
 %>
 
 <liferay-ui:error exception="<%= RequiredOrganizationException.class %>" message="you-cannot-delete-organizations-that-have-suborganizations-or-users" />
@@ -48,6 +46,8 @@ long organizationGroupId = 0;
 	</liferay-util:include>
 
 	<%
+	long organizationGroupId = 0;
+
 	String usersListView = ParamUtil.get(request, "usersListView", UserConstants.LIST_VIEW_TREE);
 	%>
 

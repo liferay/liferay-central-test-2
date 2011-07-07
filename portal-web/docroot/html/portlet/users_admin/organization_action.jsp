@@ -78,14 +78,14 @@ if (row == null) {
 	</c:if>--%>
 
 	<c:if test="<%= OrganizationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.MANAGE_STAGING) || OrganizationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.UPDATE) %>">
-		<liferay-portlet:actionURL var="editSettingsURL" portletName="<%=PortletKeys.SITE_SETTINGS%>">
+		<liferay-portlet:actionURL doAsGroupId="<%= organizationGroupId %>" portletName="<%= PortletKeys.SITE_SETTINGS %>" var="editSettingsURL">
 			<portlet:param name="struts_action" value="/site_settings/edit_settings" />
 		</liferay-portlet:actionURL>
 
 		<liferay-ui:icon
 			image="configuration"
 			message="manage-site"
-			url='<%= HttpUtil.setParameter(editSettingsURL, "doAsGroupId", organizationGroupId) %>'
+			url="<%= editSettingsURL %>"
 		/>
 	</c:if>
 

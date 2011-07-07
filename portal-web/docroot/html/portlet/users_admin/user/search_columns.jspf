@@ -57,22 +57,23 @@
 			while (itr.hasNext()) {
 				UserGroupRole userGroupRole = (UserGroupRole)itr.next();
 
-				Role _role = RoleLocalServiceUtil.getRole(userGroupRole.getRoleId());
+				Role curRole = RoleLocalServiceUtil.getRole(userGroupRole.getRoleId());
 
-				buffer.append(HtmlUtil.escape(_role.getTitle(locale)));
+				buffer.append(HtmlUtil.escape(curRole.getTitle(locale)));
 
 				if (itr.hasNext()) {
 					buffer.append(StringPool.COMMA_AND_SPACE);
 				}
 			}
 			%>
+
 		</liferay-ui:search-container-column-text>
   	</c:when>
 	<c:otherwise>
-			<liferay-ui:search-container-column-text
-				href="<%= rowURL %>"
-				name="organizations"
-			>
+		<liferay-ui:search-container-column-text
+			href="<%= rowURL %>"
+			name="organizations"
+		>
 			<liferay-ui:write bean="<%= user2 %>" property="organizations" />
 	</liferay-ui:search-container-column-text>
 	</c:otherwise>
