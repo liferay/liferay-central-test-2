@@ -478,6 +478,9 @@ public class EditLayoutsAction extends PortletAction {
 	protected void deleteLayoutRevision(ActionRequest actionRequest)
 		throws Exception {
 
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			actionRequest);
+
 		long layoutRevisionId = ParamUtil.getLong(
 			actionRequest, "layoutRevisionId");
 
@@ -490,9 +493,6 @@ public class EditLayoutsAction extends PortletAction {
 			actionRequest, "updateRecentLayoutRevisionId");
 
 		if (updateRecentLayoutRevisionId) {
-			HttpServletRequest request = PortalUtil.getHttpServletRequest(
-				actionRequest);
-
 			StagingUtil.setRecentLayoutRevisionId(
 				request, layoutRevision.getLayoutSetBranchId(),
 				layoutRevision.getPlid(),
@@ -584,6 +584,9 @@ public class EditLayoutsAction extends PortletAction {
 	protected void selectLayoutSetBranch(ActionRequest actionRequest)
 		throws Exception {
 
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			actionRequest);
+
 		long layoutSetBranchId = ParamUtil.getLong(
 			actionRequest, "layoutSetBranchId");
 
@@ -593,15 +596,15 @@ public class EditLayoutsAction extends PortletAction {
 			LayoutSetBranchLocalServiceUtil.getLayoutSetBranch(
 				layoutSetBranchId);
 
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			actionRequest);
-
 		StagingUtil.setRecentLayoutSetBranchId(
 			request, layoutSetBranch.getLayoutSetBranchId());
 	}
 
 	protected void selectLayoutVariation(ActionRequest actionRequest)
 		throws Exception {
+
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			actionRequest);
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
@@ -611,9 +614,6 @@ public class EditLayoutsAction extends PortletAction {
 
 		String variationName = ParamUtil.getString(
 			actionRequest, "variationName");
-
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			actionRequest);
 
 		StagingUtil.setRecentVariationName(
 			request, layoutSetBranchId, themeDisplay.getPlid(), variationName);

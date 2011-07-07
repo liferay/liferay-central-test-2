@@ -19,7 +19,7 @@
 <%
 long layoutSetBranchId = ParamUtil.getLong(request, "layoutSetBranchId");
 
-List<LayoutRevision> rootRevisions = LayoutRevisionLocalServiceUtil.getLayoutRevisions(layoutSetBranchId, LayoutRevisionConstants.DEFAULT_PARENT_LAYOUT_REVISION_ID, plid, QueryUtil.ALL_POS, QueryUtil.ALL_POS, new LayoutRevisionCreateDateComparator(true));
+List<LayoutRevision> layoutRevisions = LayoutRevisionLocalServiceUtil.getLayoutRevisions(layoutSetBranchId, LayoutRevisionConstants.DEFAULT_PARENT_LAYOUT_REVISION_ID, plid, QueryUtil.ALL_POS, QueryUtil.ALL_POS, new LayoutRevisionCreateDateComparator(true));
 
 long layoutRevisionId = StagingUtil.getRecentLayoutRevisionId(request, layoutSetBranchId, plid);
 %>
@@ -42,15 +42,15 @@ long layoutRevisionId = StagingUtil.getRecentLayoutRevisionId(request, layoutSet
 
 <liferay-ui:search-container>
 	<liferay-ui:search-container-results
-		results="<%= rootRevisions %>"
-		total="<%= rootRevisions.size() %>"
+		results="<%= layoutRevisions %>"
+		total="<%= layoutRevisions.size() %>"
 	/>
 
 	<liferay-ui:search-container-row
 		className="com.liferay.portal.model.LayoutRevision"
 		escapedModel="<%= true %>"
 		keyProperty="layoutRevisionId"
-		modelVar="curLayoutRevision"
+		modelVar="layoutRevision"
 	>
 
 		<liferay-ui:search-container-column-text
@@ -59,15 +59,15 @@ long layoutRevisionId = StagingUtil.getRecentLayoutRevisionId(request, layoutSet
 		>
 
 			<%
-			String variationName = curLayoutRevision.getVariationName();
+			String variationName = layoutRevision.getVariationName();
 
-			if (curLayoutRevision.isHead()) {
+			if (layoutRevision.isHead()) {
 				buffer.append("<strong>");
 			}
 
 			buffer.append(variationName);
 
-			if (curLayoutRevision.isHead()) {
+			if (layoutRevision.isHead()) {
 				buffer.append(" (*)</strong>");
 			}
 			%>

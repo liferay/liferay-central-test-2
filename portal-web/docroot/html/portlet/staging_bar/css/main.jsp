@@ -79,17 +79,17 @@
 			}
 
 			.backstage-info {
-            	font-size: 1.1em;
+				font-size: 1.1em;
 				margin-bottom: 1em;
 
-            	.backstage-description {
+				.backstage-description {
 					border-right: 1px solid #AAA;
 					padding: 0 0.5em 0;
-                	font-style: italic;
+					font-style: italic;
 				}
 
 				.backstage-pages {
-                	padding-left: 0.5em;
+					padding-left: 0.5em;
 				}
 			}
 
