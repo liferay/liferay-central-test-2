@@ -32,17 +32,6 @@ long folderId = fileEntry.getFolderId();
 String extension = fileEntry.getExtension();
 String title = fileEntry.getTitle();
 
-Boolean canEdit = DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.UPDATE);
-Boolean isCheckedOut = fileEntry.isCheckedOut();
-Boolean hasLock = fileEntry.hasLock();
-Lock lock = fileEntry.getLock();
-
-String[] conversions = new String[0];
-
-if (PrefsPropsUtil.getBoolean(PropsKeys.OPENOFFICE_SERVER_ENABLED, PropsValues.OPENOFFICE_SERVER_ENABLED)) {
-	conversions = (String[]) DocumentConversionUtil.getConversions(extension);
-}
-
 Folder folder = fileEntry.getFolder();
 FileVersion fileVersion = fileEntry.getFileVersion();
 
@@ -51,7 +40,7 @@ long fileVersionId = 0;
 long fileEntryTypeId = ParamUtil.getLong(request, "fileEntryTypeId");
 
 if (fileEntry != null) {
-	if ((user.getUserId() == fileEntry.getUserId()) || permissionChecker.isCompanyAdmin() || permissionChecker.isGroupAdmin(scopeGroupId) || canEdit) {
+	if ((user.getUserId() == fileEntry.getUserId()) || permissionChecker.isCompanyAdmin() || permissionChecker.isGroupAdmin(scopeGroupId) || DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.UPDATE)) {
 		fileVersion = fileEntry.getLatestFileVersion();
 	}
 
@@ -62,6 +51,14 @@ if (fileEntry != null) {
 
 		fileEntryTypeId = dlFileVersion.getFileEntryTypeId();
 	}
+}
+
+Lock lock = fileEntry.getLock();
+
+String[] conversions = new String[0];
+
+if (PrefsPropsUtil.getBoolean(PropsKeys.OPENOFFICE_SERVER_ENABLED, PropsValues.OPENOFFICE_SERVER_ENABLED)) {
+	conversions = (String[]) DocumentConversionUtil.getConversions(extension);
 }
 
 long assetClassPK = 0;
@@ -145,9 +142,9 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 				</div>
 			</div>
 
-			<c:if test="<%= isCheckedOut && canEdit %>">
+			<c:if test="<%= fileEntry.isCheckedOut() && DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.UPDATE) %>">
 				<c:choose>
-					<c:when test="<%= hasLock %>">
+					<c:when test="<%= fileEntry.hasLock() %>">
 						<div class="portlet-msg-lock portlet-msg-success">
 							<c:choose>
 								<c:when test="<%= lock.isNeverExpires() %>">
@@ -380,7 +377,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 
 			<div class="body-row asset-details">
 				<div class="asset-details-content">
-					<h3 class="version <%= isCheckedOut ? "document-locked" : StringPool.BLANK %>">
+					<h3 class="version <%= fileEntry.isCheckedOut() ? "document-locked" : StringPool.BLANK %>">
 						<liferay-ui:message key="version" /> <%= fileVersion.getVersion() %>
 					</h3>
 
@@ -601,7 +598,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 							for (int i = 0; i < results.size(); i++) {
 								FileVersion curFileVersion = (FileVersion)results.get(i);
 
-								ResultRow row = new ResultRow(new Object[] {fileEntry, curFileVersion, results.size(), conversions, isCheckedOut, hasLock}, String.valueOf(curFileVersion.getVersion()), i);
+								ResultRow row = new ResultRow(new Object[] {fileEntry, curFileVersion, results.size(), conversions, fileEntry.isCheckedOut(), fileEntry.hasLock()}, String.valueOf(curFileVersion.getVersion()), i);
 
 								StringBundler sb = new StringBundler(10);
 
@@ -748,7 +745,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 			activeState: false,
 			boundingBox: buttonRow,
 			children: [
-				<c:if test="<%= canEdit && (!isCheckedOut || hasLock) %>">
+				<c:if test="<%= DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.UPDATE) && (!fileEntry.isCheckedOut() || fileEntry.hasLock()) %>">
 					{
 
 						<portlet:renderURL var="editURL">
@@ -793,7 +790,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 
 					</c:if>
 
-					<c:if test="<%= fileEntry.isCheckedOut() && hasLock %>">
+					<c:if test="<%= fileEntry.isCheckedOut() && fileEntry.hasLock() %>">
 
 						{
 

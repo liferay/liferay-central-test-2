@@ -47,6 +47,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Vector;
 
@@ -289,8 +290,9 @@ public class PDFProcessor extends DLProcessor {
 
 				if (_log.isInfoEnabled() && generatePreview) {
 					_log.info(
-						"PDFBox generated " + _getPreviewFileCount(fileVersion) +
-							" preview pages for " + id);
+						"PDFBox generated " +
+							_getPreviewFileCount(fileVersion) +
+								" preview pages for " + id);
 				}
 			}
 			finally {
@@ -450,12 +452,13 @@ public class PDFProcessor extends DLProcessor {
 		String id = DLUtil.getTempFileId(
 			fileVersion.getFileEntryId(), fileVersion.getVersion());
 
-		long fileVersionModified = fileVersion.getStatusDate().getTime();
-
 		File previewFile = _getPreviewFile(id, 1);
 
-		if (previewFile.lastModified() < fileVersionModified) {
+		Date statusDate = fileVersion.getStatusDate();
+
+		if (previewFile.lastModified() < statusDate.getTime()) {
 			int previewFileCount = _getPreviewFileCount(fileVersion);
+
 			for (int i = 0; i < previewFileCount; i++) {
 				File file = _getPreviewFile(id, i + 1);
 
@@ -465,7 +468,7 @@ public class PDFProcessor extends DLProcessor {
 
 		File thumbnailFile = _getThumbnailFile(id);
 
-		if (thumbnailFile.lastModified() < fileVersionModified) {
+		if (thumbnailFile.lastModified() < statusDate.getTime()) {
 			thumbnailFile.delete();
 		}
 
@@ -542,7 +545,8 @@ public class PDFProcessor extends DLProcessor {
 				_fileEntries.add(fileVersion.getFileVersionId());
 
 				MessageBusUtil.sendMessage(
-					DestinationNames.DOCUMENT_LIBRARY_PDF_PROCESSOR, fileVersion);
+					DestinationNames.DOCUMENT_LIBRARY_PDF_PROCESSOR,
+					fileVersion);
 			}
 		}
 	}

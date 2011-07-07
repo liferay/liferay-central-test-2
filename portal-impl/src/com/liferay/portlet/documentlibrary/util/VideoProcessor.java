@@ -41,6 +41,7 @@ import java.io.File;
 import java.io.InputStream;
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.Vector;
 
@@ -160,7 +161,8 @@ public class VideoProcessor extends DLProcessor {
 				try {
 					InputStream inputStream =
 						DLFileEntryLocalServiceUtil.getFileAsStream(
-							fileVersion.getUserId(), fileVersion.getFileEntryId(),
+							fileVersion.getUserId(),
+							fileVersion.getFileEntryId(),
 							fileVersion.getVersion(), false);
 
 					FileUtil.write(tmpFile, inputStream);
@@ -295,17 +297,17 @@ public class VideoProcessor extends DLProcessor {
 		String id = DLUtil.getTempFileId(
 			fileVersion.getFileEntryId(), fileVersion.getVersion());
 
-		long fileVersionModified = fileVersion.getStatusDate().getTime();
-
 		File previewFile = _getPreviewFile(id);
 
-		if (previewFile.lastModified() < fileVersionModified) {
+		Date statusDate = fileVersion.getStatusDate();
+
+		if (previewFile.lastModified() < statusDate.getTime()) {
 			previewFile.delete();
 		}
 
 		File thumbnailFile = _getThumbnailFile(id);
 
-		if (thumbnailFile.lastModified() < fileVersionModified) {
+		if (thumbnailFile.lastModified() < statusDate.getTime()) {
 			thumbnailFile.delete();
 		}
 

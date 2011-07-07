@@ -47,12 +47,6 @@ public class DLFileEntryServiceWrapper implements DLFileEntryService {
 		_dlFileEntryService.cancelCheckOut(fileEntryId);
 	}
 
-	public void checkInFileEntry(long fileEntryId, java.lang.String lockUuid)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		_dlFileEntryService.checkInFileEntry(fileEntryId, lockUuid);
-	}
-
 	public void checkInFileEntry(long fileEntryId, boolean major,
 		java.lang.String changeLog,
 		com.liferay.portal.service.ServiceContext serviceContext)
@@ -60,6 +54,12 @@ public class DLFileEntryServiceWrapper implements DLFileEntryService {
 			com.liferay.portal.kernel.exception.SystemException {
 		_dlFileEntryService.checkInFileEntry(fileEntryId, major, changeLog,
 			serviceContext);
+	}
+
+	public void checkInFileEntry(long fileEntryId, java.lang.String lockUuid)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_dlFileEntryService.checkInFileEntry(fileEntryId, lockUuid);
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry checkOutFileEntry(
@@ -188,6 +188,13 @@ public class DLFileEntryServiceWrapper implements DLFileEntryService {
 			rootFolderId);
 	}
 
+	public com.liferay.portlet.documentlibrary.model.DLFileVersion getLatestFileVersion(
+		long fileEntryId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _dlFileEntryService.getLatestFileVersion(fileEntryId);
+	}
+
 	public boolean hasFileEntryLock(long fileEntryId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -198,13 +205,6 @@ public class DLFileEntryServiceWrapper implements DLFileEntryService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _dlFileEntryService.isFileEntryCheckedOut(fileEntryId);
-	}
-
-	public com.liferay.portlet.documentlibrary.model.DLFileVersion getLatestFileVersion(
-		long fileEntryId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _dlFileEntryService.getLatestFileVersion(fileEntryId);
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry moveFileEntry(
