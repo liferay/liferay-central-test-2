@@ -363,18 +363,23 @@ public class LockModelImpl extends BaseModelImpl<Lock> implements LockModel {
 
 		lockCacheModel.uuid = getUuid();
 
-		if ((lockCacheModel.uuid != null) &&
-				(lockCacheModel.uuid.length() == 0)) {
+		String uuid = lockCacheModel.uuid;
+
+		if ((uuid != null) && (uuid.length() == 0)) {
 			lockCacheModel.uuid = null;
 		}
 
 		lockCacheModel.lockId = getLockId();
+
 		lockCacheModel.companyId = getCompanyId();
+
 		lockCacheModel.userId = getUserId();
+
 		lockCacheModel.userName = getUserName();
 
-		if ((lockCacheModel.userName != null) &&
-				(lockCacheModel.userName.length() == 0)) {
+		String userName = lockCacheModel.userName;
+
+		if ((userName != null) && (userName.length() == 0)) {
 			lockCacheModel.userName = null;
 		}
 
@@ -386,21 +391,25 @@ public class LockModelImpl extends BaseModelImpl<Lock> implements LockModel {
 
 		lockCacheModel.className = getClassName();
 
-		if ((lockCacheModel.className != null) &&
-				(lockCacheModel.className.length() == 0)) {
+		String className = lockCacheModel.className;
+
+		if ((className != null) && (className.length() == 0)) {
 			lockCacheModel.className = null;
 		}
 
 		lockCacheModel.key = getKey();
 
-		if ((lockCacheModel.key != null) && (lockCacheModel.key.length() == 0)) {
+		String key = lockCacheModel.key;
+
+		if ((key != null) && (key.length() == 0)) {
 			lockCacheModel.key = null;
 		}
 
 		lockCacheModel.owner = getOwner();
 
-		if ((lockCacheModel.owner != null) &&
-				(lockCacheModel.owner.length() == 0)) {
+		String owner = lockCacheModel.owner;
+
+		if ((owner != null) && (owner.length() == 0)) {
 			lockCacheModel.owner = null;
 		}
 

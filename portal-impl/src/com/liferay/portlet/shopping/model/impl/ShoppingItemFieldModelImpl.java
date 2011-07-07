@@ -272,25 +272,30 @@ public class ShoppingItemFieldModelImpl extends BaseModelImpl<ShoppingItemField>
 		ShoppingItemFieldCacheModel shoppingItemFieldCacheModel = new ShoppingItemFieldCacheModel();
 
 		shoppingItemFieldCacheModel.itemFieldId = getItemFieldId();
+
 		shoppingItemFieldCacheModel.itemId = getItemId();
+
 		shoppingItemFieldCacheModel.name = getName();
 
-		if ((shoppingItemFieldCacheModel.name != null) &&
-				(shoppingItemFieldCacheModel.name.length() == 0)) {
+		String name = shoppingItemFieldCacheModel.name;
+
+		if ((name != null) && (name.length() == 0)) {
 			shoppingItemFieldCacheModel.name = null;
 		}
 
 		shoppingItemFieldCacheModel.values = getValues();
 
-		if ((shoppingItemFieldCacheModel.values != null) &&
-				(shoppingItemFieldCacheModel.values.length() == 0)) {
+		String values = shoppingItemFieldCacheModel.values;
+
+		if ((values != null) && (values.length() == 0)) {
 			shoppingItemFieldCacheModel.values = null;
 		}
 
 		shoppingItemFieldCacheModel.description = getDescription();
 
-		if ((shoppingItemFieldCacheModel.description != null) &&
-				(shoppingItemFieldCacheModel.description.length() == 0)) {
+		String description = shoppingItemFieldCacheModel.description;
+
+		if ((description != null) && (description.length() == 0)) {
 			shoppingItemFieldCacheModel.description = null;
 		}
 

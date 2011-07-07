@@ -329,13 +329,21 @@ public class SocialEquityUserModelImpl extends BaseModelImpl<SocialEquityUser>
 		SocialEquityUserCacheModel socialEquityUserCacheModel = new SocialEquityUserCacheModel();
 
 		socialEquityUserCacheModel.equityUserId = getEquityUserId();
+
 		socialEquityUserCacheModel.groupId = getGroupId();
+
 		socialEquityUserCacheModel.companyId = getCompanyId();
+
 		socialEquityUserCacheModel.userId = getUserId();
+
 		socialEquityUserCacheModel.contributionK = getContributionK();
+
 		socialEquityUserCacheModel.contributionB = getContributionB();
+
 		socialEquityUserCacheModel.participationK = getParticipationK();
+
 		socialEquityUserCacheModel.participationB = getParticipationB();
+
 		socialEquityUserCacheModel.rank = getRank();
 
 		return socialEquityUserCacheModel;

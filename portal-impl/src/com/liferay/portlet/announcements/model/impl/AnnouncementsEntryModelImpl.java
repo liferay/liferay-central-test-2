@@ -502,18 +502,23 @@ public class AnnouncementsEntryModelImpl extends BaseModelImpl<AnnouncementsEntr
 
 		announcementsEntryCacheModel.uuid = getUuid();
 
-		if ((announcementsEntryCacheModel.uuid != null) &&
-				(announcementsEntryCacheModel.uuid.length() == 0)) {
+		String uuid = announcementsEntryCacheModel.uuid;
+
+		if ((uuid != null) && (uuid.length() == 0)) {
 			announcementsEntryCacheModel.uuid = null;
 		}
 
 		announcementsEntryCacheModel.entryId = getEntryId();
+
 		announcementsEntryCacheModel.companyId = getCompanyId();
+
 		announcementsEntryCacheModel.userId = getUserId();
+
 		announcementsEntryCacheModel.userName = getUserName();
 
-		if ((announcementsEntryCacheModel.userName != null) &&
-				(announcementsEntryCacheModel.userName.length() == 0)) {
+		String userName = announcementsEntryCacheModel.userName;
+
+		if ((userName != null) && (userName.length() == 0)) {
 			announcementsEntryCacheModel.userName = null;
 		}
 
@@ -530,32 +535,38 @@ public class AnnouncementsEntryModelImpl extends BaseModelImpl<AnnouncementsEntr
 		}
 
 		announcementsEntryCacheModel.classNameId = getClassNameId();
+
 		announcementsEntryCacheModel.classPK = getClassPK();
+
 		announcementsEntryCacheModel.title = getTitle();
 
-		if ((announcementsEntryCacheModel.title != null) &&
-				(announcementsEntryCacheModel.title.length() == 0)) {
+		String title = announcementsEntryCacheModel.title;
+
+		if ((title != null) && (title.length() == 0)) {
 			announcementsEntryCacheModel.title = null;
 		}
 
 		announcementsEntryCacheModel.content = getContent();
 
-		if ((announcementsEntryCacheModel.content != null) &&
-				(announcementsEntryCacheModel.content.length() == 0)) {
+		String content = announcementsEntryCacheModel.content;
+
+		if ((content != null) && (content.length() == 0)) {
 			announcementsEntryCacheModel.content = null;
 		}
 
 		announcementsEntryCacheModel.url = getUrl();
 
-		if ((announcementsEntryCacheModel.url != null) &&
-				(announcementsEntryCacheModel.url.length() == 0)) {
+		String url = announcementsEntryCacheModel.url;
+
+		if ((url != null) && (url.length() == 0)) {
 			announcementsEntryCacheModel.url = null;
 		}
 
 		announcementsEntryCacheModel.type = getType();
 
-		if ((announcementsEntryCacheModel.type != null) &&
-				(announcementsEntryCacheModel.type.length() == 0)) {
+		String type = announcementsEntryCacheModel.type;
+
+		if ((type != null) && (type.length() == 0)) {
 			announcementsEntryCacheModel.type = null;
 		}
 
@@ -572,6 +583,7 @@ public class AnnouncementsEntryModelImpl extends BaseModelImpl<AnnouncementsEntr
 		}
 
 		announcementsEntryCacheModel.priority = getPriority();
+
 		announcementsEntryCacheModel.alert = getAlert();
 
 		return announcementsEntryCacheModel;

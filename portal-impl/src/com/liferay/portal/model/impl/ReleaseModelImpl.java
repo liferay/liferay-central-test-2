@@ -313,8 +313,9 @@ public class ReleaseModelImpl extends BaseModelImpl<Release>
 
 		releaseCacheModel.servletContextName = getServletContextName();
 
-		if ((releaseCacheModel.servletContextName != null) &&
-				(releaseCacheModel.servletContextName.length() == 0)) {
+		String servletContextName = releaseCacheModel.servletContextName;
+
+		if ((servletContextName != null) && (servletContextName.length() == 0)) {
 			releaseCacheModel.servletContextName = null;
 		}
 
@@ -327,10 +328,12 @@ public class ReleaseModelImpl extends BaseModelImpl<Release>
 		}
 
 		releaseCacheModel.verified = getVerified();
+
 		releaseCacheModel.testString = getTestString();
 
-		if ((releaseCacheModel.testString != null) &&
-				(releaseCacheModel.testString.length() == 0)) {
+		String testString = releaseCacheModel.testString;
+
+		if ((testString != null) && (testString.length() == 0)) {
 			releaseCacheModel.testString = null;
 		}
 

@@ -275,11 +275,14 @@ public class ResourceCodeModelImpl extends BaseModelImpl<ResourceCode>
 		ResourceCodeCacheModel resourceCodeCacheModel = new ResourceCodeCacheModel();
 
 		resourceCodeCacheModel.codeId = getCodeId();
+
 		resourceCodeCacheModel.companyId = getCompanyId();
+
 		resourceCodeCacheModel.name = getName();
 
-		if ((resourceCodeCacheModel.name != null) &&
-				(resourceCodeCacheModel.name.length() == 0)) {
+		String name = resourceCodeCacheModel.name;
+
+		if ((name != null) && (name.length() == 0)) {
 			resourceCodeCacheModel.name = null;
 		}
 

@@ -374,13 +374,18 @@ public class DLFileEntryTypeModelImpl extends BaseModelImpl<DLFileEntryType>
 		DLFileEntryTypeCacheModel dlFileEntryTypeCacheModel = new DLFileEntryTypeCacheModel();
 
 		dlFileEntryTypeCacheModel.fileEntryTypeId = getFileEntryTypeId();
+
 		dlFileEntryTypeCacheModel.groupId = getGroupId();
+
 		dlFileEntryTypeCacheModel.companyId = getCompanyId();
+
 		dlFileEntryTypeCacheModel.userId = getUserId();
+
 		dlFileEntryTypeCacheModel.userName = getUserName();
 
-		if ((dlFileEntryTypeCacheModel.userName != null) &&
-				(dlFileEntryTypeCacheModel.userName.length() == 0)) {
+		String userName = dlFileEntryTypeCacheModel.userName;
+
+		if ((userName != null) && (userName.length() == 0)) {
 			dlFileEntryTypeCacheModel.userName = null;
 		}
 
@@ -398,15 +403,17 @@ public class DLFileEntryTypeModelImpl extends BaseModelImpl<DLFileEntryType>
 
 		dlFileEntryTypeCacheModel.name = getName();
 
-		if ((dlFileEntryTypeCacheModel.name != null) &&
-				(dlFileEntryTypeCacheModel.name.length() == 0)) {
+		String name = dlFileEntryTypeCacheModel.name;
+
+		if ((name != null) && (name.length() == 0)) {
 			dlFileEntryTypeCacheModel.name = null;
 		}
 
 		dlFileEntryTypeCacheModel.description = getDescription();
 
-		if ((dlFileEntryTypeCacheModel.description != null) &&
-				(dlFileEntryTypeCacheModel.description.length() == 0)) {
+		String description = dlFileEntryTypeCacheModel.description;
+
+		if ((description != null) && (description.length() == 0)) {
 			dlFileEntryTypeCacheModel.description = null;
 		}
 

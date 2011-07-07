@@ -388,7 +388,9 @@ public class RepositoryModelImpl extends BaseModelImpl<Repository>
 		RepositoryCacheModel repositoryCacheModel = new RepositoryCacheModel();
 
 		repositoryCacheModel.repositoryId = getRepositoryId();
+
 		repositoryCacheModel.groupId = getGroupId();
+
 		repositoryCacheModel.companyId = getCompanyId();
 
 		Date createDate = getCreateDate();
@@ -404,31 +406,36 @@ public class RepositoryModelImpl extends BaseModelImpl<Repository>
 		}
 
 		repositoryCacheModel.classNameId = getClassNameId();
+
 		repositoryCacheModel.name = getName();
 
-		if ((repositoryCacheModel.name != null) &&
-				(repositoryCacheModel.name.length() == 0)) {
+		String name = repositoryCacheModel.name;
+
+		if ((name != null) && (name.length() == 0)) {
 			repositoryCacheModel.name = null;
 		}
 
 		repositoryCacheModel.description = getDescription();
 
-		if ((repositoryCacheModel.description != null) &&
-				(repositoryCacheModel.description.length() == 0)) {
+		String description = repositoryCacheModel.description;
+
+		if ((description != null) && (description.length() == 0)) {
 			repositoryCacheModel.description = null;
 		}
 
 		repositoryCacheModel.portletId = getPortletId();
 
-		if ((repositoryCacheModel.portletId != null) &&
-				(repositoryCacheModel.portletId.length() == 0)) {
+		String portletId = repositoryCacheModel.portletId;
+
+		if ((portletId != null) && (portletId.length() == 0)) {
 			repositoryCacheModel.portletId = null;
 		}
 
 		repositoryCacheModel.typeSettings = getTypeSettings();
 
-		if ((repositoryCacheModel.typeSettings != null) &&
-				(repositoryCacheModel.typeSettings.length() == 0)) {
+		String typeSettings = repositoryCacheModel.typeSettings;
+
+		if ((typeSettings != null) && (typeSettings.length() == 0)) {
 			repositoryCacheModel.typeSettings = null;
 		}
 

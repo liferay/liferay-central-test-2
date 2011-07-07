@@ -466,19 +466,25 @@ public class JournalStructureModelImpl extends BaseModelImpl<JournalStructure>
 
 		journalStructureCacheModel.uuid = getUuid();
 
-		if ((journalStructureCacheModel.uuid != null) &&
-				(journalStructureCacheModel.uuid.length() == 0)) {
+		String uuid = journalStructureCacheModel.uuid;
+
+		if ((uuid != null) && (uuid.length() == 0)) {
 			journalStructureCacheModel.uuid = null;
 		}
 
 		journalStructureCacheModel.id = getId();
+
 		journalStructureCacheModel.groupId = getGroupId();
+
 		journalStructureCacheModel.companyId = getCompanyId();
+
 		journalStructureCacheModel.userId = getUserId();
+
 		journalStructureCacheModel.userName = getUserName();
 
-		if ((journalStructureCacheModel.userName != null) &&
-				(journalStructureCacheModel.userName.length() == 0)) {
+		String userName = journalStructureCacheModel.userName;
+
+		if ((userName != null) && (userName.length() == 0)) {
 			journalStructureCacheModel.userName = null;
 		}
 
@@ -496,36 +502,41 @@ public class JournalStructureModelImpl extends BaseModelImpl<JournalStructure>
 
 		journalStructureCacheModel.structureId = getStructureId();
 
-		if ((journalStructureCacheModel.structureId != null) &&
-				(journalStructureCacheModel.structureId.length() == 0)) {
+		String structureId = journalStructureCacheModel.structureId;
+
+		if ((structureId != null) && (structureId.length() == 0)) {
 			journalStructureCacheModel.structureId = null;
 		}
 
 		journalStructureCacheModel.parentStructureId = getParentStructureId();
 
-		if ((journalStructureCacheModel.parentStructureId != null) &&
-				(journalStructureCacheModel.parentStructureId.length() == 0)) {
+		String parentStructureId = journalStructureCacheModel.parentStructureId;
+
+		if ((parentStructureId != null) && (parentStructureId.length() == 0)) {
 			journalStructureCacheModel.parentStructureId = null;
 		}
 
 		journalStructureCacheModel.name = getName();
 
-		if ((journalStructureCacheModel.name != null) &&
-				(journalStructureCacheModel.name.length() == 0)) {
+		String name = journalStructureCacheModel.name;
+
+		if ((name != null) && (name.length() == 0)) {
 			journalStructureCacheModel.name = null;
 		}
 
 		journalStructureCacheModel.description = getDescription();
 
-		if ((journalStructureCacheModel.description != null) &&
-				(journalStructureCacheModel.description.length() == 0)) {
+		String description = journalStructureCacheModel.description;
+
+		if ((description != null) && (description.length() == 0)) {
 			journalStructureCacheModel.description = null;
 		}
 
 		journalStructureCacheModel.xsd = getXsd();
 
-		if ((journalStructureCacheModel.xsd != null) &&
-				(journalStructureCacheModel.xsd.length() == 0)) {
+		String xsd = journalStructureCacheModel.xsd;
+
+		if ((xsd != null) && (xsd.length() == 0)) {
 			journalStructureCacheModel.xsd = null;
 		}
 

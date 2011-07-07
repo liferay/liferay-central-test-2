@@ -595,19 +595,25 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent>
 
 		calEventCacheModel.uuid = getUuid();
 
-		if ((calEventCacheModel.uuid != null) &&
-				(calEventCacheModel.uuid.length() == 0)) {
+		String uuid = calEventCacheModel.uuid;
+
+		if ((uuid != null) && (uuid.length() == 0)) {
 			calEventCacheModel.uuid = null;
 		}
 
 		calEventCacheModel.eventId = getEventId();
+
 		calEventCacheModel.groupId = getGroupId();
+
 		calEventCacheModel.companyId = getCompanyId();
+
 		calEventCacheModel.userId = getUserId();
+
 		calEventCacheModel.userName = getUserName();
 
-		if ((calEventCacheModel.userName != null) &&
-				(calEventCacheModel.userName.length() == 0)) {
+		String userName = calEventCacheModel.userName;
+
+		if ((userName != null) && (userName.length() == 0)) {
 			calEventCacheModel.userName = null;
 		}
 
@@ -625,22 +631,25 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent>
 
 		calEventCacheModel.title = getTitle();
 
-		if ((calEventCacheModel.title != null) &&
-				(calEventCacheModel.title.length() == 0)) {
+		String title = calEventCacheModel.title;
+
+		if ((title != null) && (title.length() == 0)) {
 			calEventCacheModel.title = null;
 		}
 
 		calEventCacheModel.description = getDescription();
 
-		if ((calEventCacheModel.description != null) &&
-				(calEventCacheModel.description.length() == 0)) {
+		String description = calEventCacheModel.description;
+
+		if ((description != null) && (description.length() == 0)) {
 			calEventCacheModel.description = null;
 		}
 
 		calEventCacheModel.location = getLocation();
 
-		if ((calEventCacheModel.location != null) &&
-				(calEventCacheModel.location.length() == 0)) {
+		String location = calEventCacheModel.location;
+
+		if ((location != null) && (location.length() == 0)) {
 			calEventCacheModel.location = null;
 		}
 
@@ -657,26 +666,35 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent>
 		}
 
 		calEventCacheModel.durationHour = getDurationHour();
+
 		calEventCacheModel.durationMinute = getDurationMinute();
+
 		calEventCacheModel.allDay = getAllDay();
+
 		calEventCacheModel.timeZoneSensitive = getTimeZoneSensitive();
+
 		calEventCacheModel.type = getType();
 
-		if ((calEventCacheModel.type != null) &&
-				(calEventCacheModel.type.length() == 0)) {
+		String type = calEventCacheModel.type;
+
+		if ((type != null) && (type.length() == 0)) {
 			calEventCacheModel.type = null;
 		}
 
 		calEventCacheModel.repeating = getRepeating();
+
 		calEventCacheModel.recurrence = getRecurrence();
 
-		if ((calEventCacheModel.recurrence != null) &&
-				(calEventCacheModel.recurrence.length() == 0)) {
+		String recurrence = calEventCacheModel.recurrence;
+
+		if ((recurrence != null) && (recurrence.length() == 0)) {
 			calEventCacheModel.recurrence = null;
 		}
 
 		calEventCacheModel.remindBy = getRemindBy();
+
 		calEventCacheModel.firstReminder = getFirstReminder();
+
 		calEventCacheModel.secondReminder = getSecondReminder();
 
 		return calEventCacheModel;

@@ -283,12 +283,16 @@ public class ShardModelImpl extends BaseModelImpl<Shard> implements ShardModel {
 		ShardCacheModel shardCacheModel = new ShardCacheModel();
 
 		shardCacheModel.shardId = getShardId();
+
 		shardCacheModel.classNameId = getClassNameId();
+
 		shardCacheModel.classPK = getClassPK();
+
 		shardCacheModel.name = getName();
 
-		if ((shardCacheModel.name != null) &&
-				(shardCacheModel.name.length() == 0)) {
+		String name = shardCacheModel.name;
+
+		if ((name != null) && (name.length() == 0)) {
 			shardCacheModel.name = null;
 		}
 

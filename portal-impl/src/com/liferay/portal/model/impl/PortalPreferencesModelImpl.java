@@ -265,12 +265,16 @@ public class PortalPreferencesModelImpl extends BaseModelImpl<PortalPreferences>
 		PortalPreferencesCacheModel portalPreferencesCacheModel = new PortalPreferencesCacheModel();
 
 		portalPreferencesCacheModel.portalPreferencesId = getPortalPreferencesId();
+
 		portalPreferencesCacheModel.ownerId = getOwnerId();
+
 		portalPreferencesCacheModel.ownerType = getOwnerType();
+
 		portalPreferencesCacheModel.preferences = getPreferences();
 
-		if ((portalPreferencesCacheModel.preferences != null) &&
-				(portalPreferencesCacheModel.preferences.length() == 0)) {
+		String preferences = portalPreferencesCacheModel.preferences;
+
+		if ((preferences != null) && (preferences.length() == 0)) {
 			portalPreferencesCacheModel.preferences = null;
 		}
 

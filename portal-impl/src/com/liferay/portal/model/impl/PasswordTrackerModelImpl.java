@@ -268,6 +268,7 @@ public class PasswordTrackerModelImpl extends BaseModelImpl<PasswordTracker>
 		PasswordTrackerCacheModel passwordTrackerCacheModel = new PasswordTrackerCacheModel();
 
 		passwordTrackerCacheModel.passwordTrackerId = getPasswordTrackerId();
+
 		passwordTrackerCacheModel.userId = getUserId();
 
 		Date createDate = getCreateDate();
@@ -278,8 +279,9 @@ public class PasswordTrackerModelImpl extends BaseModelImpl<PasswordTracker>
 
 		passwordTrackerCacheModel.password = getPassword();
 
-		if ((passwordTrackerCacheModel.password != null) &&
-				(passwordTrackerCacheModel.password.length() == 0)) {
+		String password = passwordTrackerCacheModel.password;
+
+		if ((password != null) && (password.length() == 0)) {
 			passwordTrackerCacheModel.password = null;
 		}
 

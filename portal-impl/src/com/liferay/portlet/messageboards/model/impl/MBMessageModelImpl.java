@@ -682,19 +682,25 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 
 		mbMessageCacheModel.uuid = getUuid();
 
-		if ((mbMessageCacheModel.uuid != null) &&
-				(mbMessageCacheModel.uuid.length() == 0)) {
+		String uuid = mbMessageCacheModel.uuid;
+
+		if ((uuid != null) && (uuid.length() == 0)) {
 			mbMessageCacheModel.uuid = null;
 		}
 
 		mbMessageCacheModel.messageId = getMessageId();
+
 		mbMessageCacheModel.groupId = getGroupId();
+
 		mbMessageCacheModel.companyId = getCompanyId();
+
 		mbMessageCacheModel.userId = getUserId();
+
 		mbMessageCacheModel.userName = getUserName();
 
-		if ((mbMessageCacheModel.userName != null) &&
-				(mbMessageCacheModel.userName.length() == 0)) {
+		String userName = mbMessageCacheModel.userName;
+
+		if ((userName != null) && (userName.length() == 0)) {
 			mbMessageCacheModel.userName = null;
 		}
 
@@ -711,42 +717,58 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 		}
 
 		mbMessageCacheModel.classNameId = getClassNameId();
+
 		mbMessageCacheModel.classPK = getClassPK();
+
 		mbMessageCacheModel.categoryId = getCategoryId();
+
 		mbMessageCacheModel.threadId = getThreadId();
+
 		mbMessageCacheModel.rootMessageId = getRootMessageId();
+
 		mbMessageCacheModel.parentMessageId = getParentMessageId();
+
 		mbMessageCacheModel.subject = getSubject();
 
-		if ((mbMessageCacheModel.subject != null) &&
-				(mbMessageCacheModel.subject.length() == 0)) {
+		String subject = mbMessageCacheModel.subject;
+
+		if ((subject != null) && (subject.length() == 0)) {
 			mbMessageCacheModel.subject = null;
 		}
 
 		mbMessageCacheModel.body = getBody();
 
-		if ((mbMessageCacheModel.body != null) &&
-				(mbMessageCacheModel.body.length() == 0)) {
+		String body = mbMessageCacheModel.body;
+
+		if ((body != null) && (body.length() == 0)) {
 			mbMessageCacheModel.body = null;
 		}
 
 		mbMessageCacheModel.format = getFormat();
 
-		if ((mbMessageCacheModel.format != null) &&
-				(mbMessageCacheModel.format.length() == 0)) {
+		String format = mbMessageCacheModel.format;
+
+		if ((format != null) && (format.length() == 0)) {
 			mbMessageCacheModel.format = null;
 		}
 
 		mbMessageCacheModel.attachments = getAttachments();
+
 		mbMessageCacheModel.anonymous = getAnonymous();
+
 		mbMessageCacheModel.priority = getPriority();
+
 		mbMessageCacheModel.allowPingbacks = getAllowPingbacks();
+
 		mbMessageCacheModel.status = getStatus();
+
 		mbMessageCacheModel.statusByUserId = getStatusByUserId();
+
 		mbMessageCacheModel.statusByUserName = getStatusByUserName();
 
-		if ((mbMessageCacheModel.statusByUserName != null) &&
-				(mbMessageCacheModel.statusByUserName.length() == 0)) {
+		String statusByUserName = mbMessageCacheModel.statusByUserName;
+
+		if ((statusByUserName != null) && (statusByUserName.length() == 0)) {
 			mbMessageCacheModel.statusByUserName = null;
 		}
 

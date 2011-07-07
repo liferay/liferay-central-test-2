@@ -381,8 +381,11 @@ public class MembershipRequestModelImpl extends BaseModelImpl<MembershipRequest>
 		MembershipRequestCacheModel membershipRequestCacheModel = new MembershipRequestCacheModel();
 
 		membershipRequestCacheModel.membershipRequestId = getMembershipRequestId();
+
 		membershipRequestCacheModel.groupId = getGroupId();
+
 		membershipRequestCacheModel.companyId = getCompanyId();
+
 		membershipRequestCacheModel.userId = getUserId();
 
 		Date createDate = getCreateDate();
@@ -393,15 +396,17 @@ public class MembershipRequestModelImpl extends BaseModelImpl<MembershipRequest>
 
 		membershipRequestCacheModel.comments = getComments();
 
-		if ((membershipRequestCacheModel.comments != null) &&
-				(membershipRequestCacheModel.comments.length() == 0)) {
+		String comments = membershipRequestCacheModel.comments;
+
+		if ((comments != null) && (comments.length() == 0)) {
 			membershipRequestCacheModel.comments = null;
 		}
 
 		membershipRequestCacheModel.replyComments = getReplyComments();
 
-		if ((membershipRequestCacheModel.replyComments != null) &&
-				(membershipRequestCacheModel.replyComments.length() == 0)) {
+		String replyComments = membershipRequestCacheModel.replyComments;
+
+		if ((replyComments != null) && (replyComments.length() == 0)) {
 			membershipRequestCacheModel.replyComments = null;
 		}
 
@@ -412,6 +417,7 @@ public class MembershipRequestModelImpl extends BaseModelImpl<MembershipRequest>
 		}
 
 		membershipRequestCacheModel.replierUserId = getReplierUserId();
+
 		membershipRequestCacheModel.statusId = getStatusId();
 
 		return membershipRequestCacheModel;

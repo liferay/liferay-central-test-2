@@ -461,27 +461,35 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 
 		ddlRecordCacheModel.uuid = getUuid();
 
-		if ((ddlRecordCacheModel.uuid != null) &&
-				(ddlRecordCacheModel.uuid.length() == 0)) {
+		String uuid = ddlRecordCacheModel.uuid;
+
+		if ((uuid != null) && (uuid.length() == 0)) {
 			ddlRecordCacheModel.uuid = null;
 		}
 
 		ddlRecordCacheModel.recordId = getRecordId();
+
 		ddlRecordCacheModel.groupId = getGroupId();
+
 		ddlRecordCacheModel.companyId = getCompanyId();
+
 		ddlRecordCacheModel.userId = getUserId();
+
 		ddlRecordCacheModel.userName = getUserName();
 
-		if ((ddlRecordCacheModel.userName != null) &&
-				(ddlRecordCacheModel.userName.length() == 0)) {
+		String userName = ddlRecordCacheModel.userName;
+
+		if ((userName != null) && (userName.length() == 0)) {
 			ddlRecordCacheModel.userName = null;
 		}
 
 		ddlRecordCacheModel.versionUserId = getVersionUserId();
+
 		ddlRecordCacheModel.versionUserName = getVersionUserName();
 
-		if ((ddlRecordCacheModel.versionUserName != null) &&
-				(ddlRecordCacheModel.versionUserName.length() == 0)) {
+		String versionUserName = ddlRecordCacheModel.versionUserName;
+
+		if ((versionUserName != null) && (versionUserName.length() == 0)) {
 			ddlRecordCacheModel.versionUserName = null;
 		}
 
@@ -498,11 +506,14 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 		}
 
 		ddlRecordCacheModel.DDMStorageId = getDDMStorageId();
+
 		ddlRecordCacheModel.recordSetId = getRecordSetId();
+
 		ddlRecordCacheModel.version = getVersion();
 
-		if ((ddlRecordCacheModel.version != null) &&
-				(ddlRecordCacheModel.version.length() == 0)) {
+		String version = ddlRecordCacheModel.version;
+
+		if ((version != null) && (version.length() == 0)) {
 			ddlRecordCacheModel.version = null;
 		}
 

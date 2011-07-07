@@ -388,12 +388,16 @@ public class AssetCategoryPropertyModelImpl extends BaseModelImpl<AssetCategoryP
 		AssetCategoryPropertyCacheModel assetCategoryPropertyCacheModel = new AssetCategoryPropertyCacheModel();
 
 		assetCategoryPropertyCacheModel.categoryPropertyId = getCategoryPropertyId();
+
 		assetCategoryPropertyCacheModel.companyId = getCompanyId();
+
 		assetCategoryPropertyCacheModel.userId = getUserId();
+
 		assetCategoryPropertyCacheModel.userName = getUserName();
 
-		if ((assetCategoryPropertyCacheModel.userName != null) &&
-				(assetCategoryPropertyCacheModel.userName.length() == 0)) {
+		String userName = assetCategoryPropertyCacheModel.userName;
+
+		if ((userName != null) && (userName.length() == 0)) {
 			assetCategoryPropertyCacheModel.userName = null;
 		}
 
@@ -410,17 +414,20 @@ public class AssetCategoryPropertyModelImpl extends BaseModelImpl<AssetCategoryP
 		}
 
 		assetCategoryPropertyCacheModel.categoryId = getCategoryId();
+
 		assetCategoryPropertyCacheModel.key = getKey();
 
-		if ((assetCategoryPropertyCacheModel.key != null) &&
-				(assetCategoryPropertyCacheModel.key.length() == 0)) {
+		String key = assetCategoryPropertyCacheModel.key;
+
+		if ((key != null) && (key.length() == 0)) {
 			assetCategoryPropertyCacheModel.key = null;
 		}
 
 		assetCategoryPropertyCacheModel.value = getValue();
 
-		if ((assetCategoryPropertyCacheModel.value != null) &&
-				(assetCategoryPropertyCacheModel.value.length() == 0)) {
+		String value = assetCategoryPropertyCacheModel.value;
+
+		if ((value != null) && (value.length() == 0)) {
 			assetCategoryPropertyCacheModel.value = null;
 		}
 

@@ -301,25 +301,30 @@ public class UserIdMapperModelImpl extends BaseModelImpl<UserIdMapper>
 		UserIdMapperCacheModel userIdMapperCacheModel = new UserIdMapperCacheModel();
 
 		userIdMapperCacheModel.userIdMapperId = getUserIdMapperId();
+
 		userIdMapperCacheModel.userId = getUserId();
+
 		userIdMapperCacheModel.type = getType();
 
-		if ((userIdMapperCacheModel.type != null) &&
-				(userIdMapperCacheModel.type.length() == 0)) {
+		String type = userIdMapperCacheModel.type;
+
+		if ((type != null) && (type.length() == 0)) {
 			userIdMapperCacheModel.type = null;
 		}
 
 		userIdMapperCacheModel.description = getDescription();
 
-		if ((userIdMapperCacheModel.description != null) &&
-				(userIdMapperCacheModel.description.length() == 0)) {
+		String description = userIdMapperCacheModel.description;
+
+		if ((description != null) && (description.length() == 0)) {
 			userIdMapperCacheModel.description = null;
 		}
 
 		userIdMapperCacheModel.externalUserId = getExternalUserId();
 
-		if ((userIdMapperCacheModel.externalUserId != null) &&
-				(userIdMapperCacheModel.externalUserId.length() == 0)) {
+		String externalUserId = userIdMapperCacheModel.externalUserId;
+
+		if ((externalUserId != null) && (externalUserId.length() == 0)) {
 			userIdMapperCacheModel.externalUserId = null;
 		}
 

@@ -321,6 +321,7 @@ public class TicketModelImpl extends BaseModelImpl<Ticket>
 		TicketCacheModel ticketCacheModel = new TicketCacheModel();
 
 		ticketCacheModel.ticketId = getTicketId();
+
 		ticketCacheModel.companyId = getCompanyId();
 
 		Date createDate = getCreateDate();
@@ -330,19 +331,24 @@ public class TicketModelImpl extends BaseModelImpl<Ticket>
 		}
 
 		ticketCacheModel.classNameId = getClassNameId();
+
 		ticketCacheModel.classPK = getClassPK();
+
 		ticketCacheModel.key = getKey();
 
-		if ((ticketCacheModel.key != null) &&
-				(ticketCacheModel.key.length() == 0)) {
+		String key = ticketCacheModel.key;
+
+		if ((key != null) && (key.length() == 0)) {
 			ticketCacheModel.key = null;
 		}
 
 		ticketCacheModel.type = getType();
+
 		ticketCacheModel.extraInfo = getExtraInfo();
 
-		if ((ticketCacheModel.extraInfo != null) &&
-				(ticketCacheModel.extraInfo.length() == 0)) {
+		String extraInfo = ticketCacheModel.extraInfo;
+
+		if ((extraInfo != null) && (extraInfo.length() == 0)) {
 			ticketCacheModel.extraInfo = null;
 		}
 

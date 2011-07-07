@@ -238,11 +238,14 @@ public class UserTrackerPathModelImpl extends BaseModelImpl<UserTrackerPath>
 		UserTrackerPathCacheModel userTrackerPathCacheModel = new UserTrackerPathCacheModel();
 
 		userTrackerPathCacheModel.userTrackerPathId = getUserTrackerPathId();
+
 		userTrackerPathCacheModel.userTrackerId = getUserTrackerId();
+
 		userTrackerPathCacheModel.path = getPath();
 
-		if ((userTrackerPathCacheModel.path != null) &&
-				(userTrackerPathCacheModel.path.length() == 0)) {
+		String path = userTrackerPathCacheModel.path;
+
+		if ((path != null) && (path.length() == 0)) {
 			userTrackerPathCacheModel.path = null;
 		}
 

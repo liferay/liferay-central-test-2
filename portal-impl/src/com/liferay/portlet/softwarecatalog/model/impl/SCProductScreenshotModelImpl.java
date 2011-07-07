@@ -340,11 +340,17 @@ public class SCProductScreenshotModelImpl extends BaseModelImpl<SCProductScreens
 		SCProductScreenshotCacheModel scProductScreenshotCacheModel = new SCProductScreenshotCacheModel();
 
 		scProductScreenshotCacheModel.productScreenshotId = getProductScreenshotId();
+
 		scProductScreenshotCacheModel.companyId = getCompanyId();
+
 		scProductScreenshotCacheModel.groupId = getGroupId();
+
 		scProductScreenshotCacheModel.productEntryId = getProductEntryId();
+
 		scProductScreenshotCacheModel.thumbnailId = getThumbnailId();
+
 		scProductScreenshotCacheModel.fullImageId = getFullImageId();
+
 		scProductScreenshotCacheModel.priority = getPriority();
 
 		return scProductScreenshotCacheModel;

@@ -272,14 +272,18 @@ public class DDMStorageLinkModelImpl extends BaseModelImpl<DDMStorageLink>
 
 		ddmStorageLinkCacheModel.uuid = getUuid();
 
-		if ((ddmStorageLinkCacheModel.uuid != null) &&
-				(ddmStorageLinkCacheModel.uuid.length() == 0)) {
+		String uuid = ddmStorageLinkCacheModel.uuid;
+
+		if ((uuid != null) && (uuid.length() == 0)) {
 			ddmStorageLinkCacheModel.uuid = null;
 		}
 
 		ddmStorageLinkCacheModel.storageLinkId = getStorageLinkId();
+
 		ddmStorageLinkCacheModel.classNameId = getClassNameId();
+
 		ddmStorageLinkCacheModel.classPK = getClassPK();
+
 		ddmStorageLinkCacheModel.structureId = getStructureId();
 
 		return ddmStorageLinkCacheModel;

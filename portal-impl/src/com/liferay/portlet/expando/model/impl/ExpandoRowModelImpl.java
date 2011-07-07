@@ -242,8 +242,11 @@ public class ExpandoRowModelImpl extends BaseModelImpl<ExpandoRow>
 		ExpandoRowCacheModel expandoRowCacheModel = new ExpandoRowCacheModel();
 
 		expandoRowCacheModel.rowId = getRowId();
+
 		expandoRowCacheModel.companyId = getCompanyId();
+
 		expandoRowCacheModel.tableId = getTableId();
+
 		expandoRowCacheModel.classPK = getClassPK();
 
 		return expandoRowCacheModel;

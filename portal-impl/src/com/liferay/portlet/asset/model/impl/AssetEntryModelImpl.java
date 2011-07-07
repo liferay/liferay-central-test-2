@@ -746,13 +746,18 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 		AssetEntryCacheModel assetEntryCacheModel = new AssetEntryCacheModel();
 
 		assetEntryCacheModel.entryId = getEntryId();
+
 		assetEntryCacheModel.groupId = getGroupId();
+
 		assetEntryCacheModel.companyId = getCompanyId();
+
 		assetEntryCacheModel.userId = getUserId();
+
 		assetEntryCacheModel.userName = getUserName();
 
-		if ((assetEntryCacheModel.userName != null) &&
-				(assetEntryCacheModel.userName.length() == 0)) {
+		String userName = assetEntryCacheModel.userName;
+
+		if ((userName != null) && (userName.length() == 0)) {
 			assetEntryCacheModel.userName = null;
 		}
 
@@ -769,11 +774,14 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 		}
 
 		assetEntryCacheModel.classNameId = getClassNameId();
+
 		assetEntryCacheModel.classPK = getClassPK();
+
 		assetEntryCacheModel.classUuid = getClassUuid();
 
-		if ((assetEntryCacheModel.classUuid != null) &&
-				(assetEntryCacheModel.classUuid.length() == 0)) {
+		String classUuid = assetEntryCacheModel.classUuid;
+
+		if ((classUuid != null) && (classUuid.length() == 0)) {
 			assetEntryCacheModel.classUuid = null;
 		}
 
@@ -805,49 +813,58 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 
 		assetEntryCacheModel.mimeType = getMimeType();
 
-		if ((assetEntryCacheModel.mimeType != null) &&
-				(assetEntryCacheModel.mimeType.length() == 0)) {
+		String mimeType = assetEntryCacheModel.mimeType;
+
+		if ((mimeType != null) && (mimeType.length() == 0)) {
 			assetEntryCacheModel.mimeType = null;
 		}
 
 		assetEntryCacheModel.title = getTitle();
 
-		if ((assetEntryCacheModel.title != null) &&
-				(assetEntryCacheModel.title.length() == 0)) {
+		String title = assetEntryCacheModel.title;
+
+		if ((title != null) && (title.length() == 0)) {
 			assetEntryCacheModel.title = null;
 		}
 
 		assetEntryCacheModel.description = getDescription();
 
-		if ((assetEntryCacheModel.description != null) &&
-				(assetEntryCacheModel.description.length() == 0)) {
+		String description = assetEntryCacheModel.description;
+
+		if ((description != null) && (description.length() == 0)) {
 			assetEntryCacheModel.description = null;
 		}
 
 		assetEntryCacheModel.summary = getSummary();
 
-		if ((assetEntryCacheModel.summary != null) &&
-				(assetEntryCacheModel.summary.length() == 0)) {
+		String summary = assetEntryCacheModel.summary;
+
+		if ((summary != null) && (summary.length() == 0)) {
 			assetEntryCacheModel.summary = null;
 		}
 
 		assetEntryCacheModel.url = getUrl();
 
-		if ((assetEntryCacheModel.url != null) &&
-				(assetEntryCacheModel.url.length() == 0)) {
+		String url = assetEntryCacheModel.url;
+
+		if ((url != null) && (url.length() == 0)) {
 			assetEntryCacheModel.url = null;
 		}
 
 		assetEntryCacheModel.layoutUuid = getLayoutUuid();
 
-		if ((assetEntryCacheModel.layoutUuid != null) &&
-				(assetEntryCacheModel.layoutUuid.length() == 0)) {
+		String layoutUuid = assetEntryCacheModel.layoutUuid;
+
+		if ((layoutUuid != null) && (layoutUuid.length() == 0)) {
 			assetEntryCacheModel.layoutUuid = null;
 		}
 
 		assetEntryCacheModel.height = getHeight();
+
 		assetEntryCacheModel.width = getWidth();
+
 		assetEntryCacheModel.priority = getPriority();
+
 		assetEntryCacheModel.viewCount = getViewCount();
 
 		return assetEntryCacheModel;

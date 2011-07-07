@@ -392,12 +392,16 @@ public class EmailAddressModelImpl extends BaseModelImpl<EmailAddress>
 		EmailAddressCacheModel emailAddressCacheModel = new EmailAddressCacheModel();
 
 		emailAddressCacheModel.emailAddressId = getEmailAddressId();
+
 		emailAddressCacheModel.companyId = getCompanyId();
+
 		emailAddressCacheModel.userId = getUserId();
+
 		emailAddressCacheModel.userName = getUserName();
 
-		if ((emailAddressCacheModel.userName != null) &&
-				(emailAddressCacheModel.userName.length() == 0)) {
+		String userName = emailAddressCacheModel.userName;
+
+		if ((userName != null) && (userName.length() == 0)) {
 			emailAddressCacheModel.userName = null;
 		}
 
@@ -414,15 +418,19 @@ public class EmailAddressModelImpl extends BaseModelImpl<EmailAddress>
 		}
 
 		emailAddressCacheModel.classNameId = getClassNameId();
+
 		emailAddressCacheModel.classPK = getClassPK();
+
 		emailAddressCacheModel.address = getAddress();
 
-		if ((emailAddressCacheModel.address != null) &&
-				(emailAddressCacheModel.address.length() == 0)) {
+		String address = emailAddressCacheModel.address;
+
+		if ((address != null) && (address.length() == 0)) {
 			emailAddressCacheModel.address = null;
 		}
 
 		emailAddressCacheModel.typeId = getTypeId();
+
 		emailAddressCacheModel.primary = getPrimary();
 
 		return emailAddressCacheModel;

@@ -306,6 +306,7 @@ public class WebDAVPropsModelImpl extends BaseModelImpl<WebDAVProps>
 		WebDAVPropsCacheModel webDAVPropsCacheModel = new WebDAVPropsCacheModel();
 
 		webDAVPropsCacheModel.webDavPropsId = getWebDavPropsId();
+
 		webDAVPropsCacheModel.companyId = getCompanyId();
 
 		Date createDate = getCreateDate();
@@ -321,11 +322,14 @@ public class WebDAVPropsModelImpl extends BaseModelImpl<WebDAVProps>
 		}
 
 		webDAVPropsCacheModel.classNameId = getClassNameId();
+
 		webDAVPropsCacheModel.classPK = getClassPK();
+
 		webDAVPropsCacheModel.props = getProps();
 
-		if ((webDAVPropsCacheModel.props != null) &&
-				(webDAVPropsCacheModel.props.length() == 0)) {
+		String props = webDAVPropsCacheModel.props;
+
+		if ((props != null) && (props.length() == 0)) {
 			webDAVPropsCacheModel.props = null;
 		}
 

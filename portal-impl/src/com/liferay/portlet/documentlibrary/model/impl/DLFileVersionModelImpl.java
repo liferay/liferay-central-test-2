@@ -557,13 +557,18 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion>
 		DLFileVersionCacheModel dlFileVersionCacheModel = new DLFileVersionCacheModel();
 
 		dlFileVersionCacheModel.fileVersionId = getFileVersionId();
+
 		dlFileVersionCacheModel.groupId = getGroupId();
+
 		dlFileVersionCacheModel.companyId = getCompanyId();
+
 		dlFileVersionCacheModel.userId = getUserId();
+
 		dlFileVersionCacheModel.userName = getUserName();
 
-		if ((dlFileVersionCacheModel.userName != null) &&
-				(dlFileVersionCacheModel.userName.length() == 0)) {
+		String userName = dlFileVersionCacheModel.userName;
+
+		if ((userName != null) && (userName.length() == 0)) {
 			dlFileVersionCacheModel.userName = null;
 		}
 
@@ -574,64 +579,78 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion>
 		}
 
 		dlFileVersionCacheModel.repositoryId = getRepositoryId();
+
 		dlFileVersionCacheModel.fileEntryId = getFileEntryId();
+
 		dlFileVersionCacheModel.extension = getExtension();
 
-		if ((dlFileVersionCacheModel.extension != null) &&
-				(dlFileVersionCacheModel.extension.length() == 0)) {
+		String extension = dlFileVersionCacheModel.extension;
+
+		if ((extension != null) && (extension.length() == 0)) {
 			dlFileVersionCacheModel.extension = null;
 		}
 
 		dlFileVersionCacheModel.mimeType = getMimeType();
 
-		if ((dlFileVersionCacheModel.mimeType != null) &&
-				(dlFileVersionCacheModel.mimeType.length() == 0)) {
+		String mimeType = dlFileVersionCacheModel.mimeType;
+
+		if ((mimeType != null) && (mimeType.length() == 0)) {
 			dlFileVersionCacheModel.mimeType = null;
 		}
 
 		dlFileVersionCacheModel.title = getTitle();
 
-		if ((dlFileVersionCacheModel.title != null) &&
-				(dlFileVersionCacheModel.title.length() == 0)) {
+		String title = dlFileVersionCacheModel.title;
+
+		if ((title != null) && (title.length() == 0)) {
 			dlFileVersionCacheModel.title = null;
 		}
 
 		dlFileVersionCacheModel.description = getDescription();
 
-		if ((dlFileVersionCacheModel.description != null) &&
-				(dlFileVersionCacheModel.description.length() == 0)) {
+		String description = dlFileVersionCacheModel.description;
+
+		if ((description != null) && (description.length() == 0)) {
 			dlFileVersionCacheModel.description = null;
 		}
 
 		dlFileVersionCacheModel.changeLog = getChangeLog();
 
-		if ((dlFileVersionCacheModel.changeLog != null) &&
-				(dlFileVersionCacheModel.changeLog.length() == 0)) {
+		String changeLog = dlFileVersionCacheModel.changeLog;
+
+		if ((changeLog != null) && (changeLog.length() == 0)) {
 			dlFileVersionCacheModel.changeLog = null;
 		}
 
 		dlFileVersionCacheModel.extraSettings = getExtraSettings();
 
-		if ((dlFileVersionCacheModel.extraSettings != null) &&
-				(dlFileVersionCacheModel.extraSettings.length() == 0)) {
+		String extraSettings = dlFileVersionCacheModel.extraSettings;
+
+		if ((extraSettings != null) && (extraSettings.length() == 0)) {
 			dlFileVersionCacheModel.extraSettings = null;
 		}
 
 		dlFileVersionCacheModel.fileEntryTypeId = getFileEntryTypeId();
+
 		dlFileVersionCacheModel.version = getVersion();
 
-		if ((dlFileVersionCacheModel.version != null) &&
-				(dlFileVersionCacheModel.version.length() == 0)) {
+		String version = dlFileVersionCacheModel.version;
+
+		if ((version != null) && (version.length() == 0)) {
 			dlFileVersionCacheModel.version = null;
 		}
 
 		dlFileVersionCacheModel.size = getSize();
+
 		dlFileVersionCacheModel.status = getStatus();
+
 		dlFileVersionCacheModel.statusByUserId = getStatusByUserId();
+
 		dlFileVersionCacheModel.statusByUserName = getStatusByUserName();
 
-		if ((dlFileVersionCacheModel.statusByUserName != null) &&
-				(dlFileVersionCacheModel.statusByUserName.length() == 0)) {
+		String statusByUserName = dlFileVersionCacheModel.statusByUserName;
+
+		if ((statusByUserName != null) && (statusByUserName.length() == 0)) {
 			dlFileVersionCacheModel.statusByUserName = null;
 		}
 

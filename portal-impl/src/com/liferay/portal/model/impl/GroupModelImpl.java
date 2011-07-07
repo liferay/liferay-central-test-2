@@ -551,42 +551,55 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 		GroupCacheModel groupCacheModel = new GroupCacheModel();
 
 		groupCacheModel.groupId = getGroupId();
+
 		groupCacheModel.companyId = getCompanyId();
+
 		groupCacheModel.creatorUserId = getCreatorUserId();
+
 		groupCacheModel.classNameId = getClassNameId();
+
 		groupCacheModel.classPK = getClassPK();
+
 		groupCacheModel.parentGroupId = getParentGroupId();
+
 		groupCacheModel.liveGroupId = getLiveGroupId();
+
 		groupCacheModel.name = getName();
 
-		if ((groupCacheModel.name != null) &&
-				(groupCacheModel.name.length() == 0)) {
+		String name = groupCacheModel.name;
+
+		if ((name != null) && (name.length() == 0)) {
 			groupCacheModel.name = null;
 		}
 
 		groupCacheModel.description = getDescription();
 
-		if ((groupCacheModel.description != null) &&
-				(groupCacheModel.description.length() == 0)) {
+		String description = groupCacheModel.description;
+
+		if ((description != null) && (description.length() == 0)) {
 			groupCacheModel.description = null;
 		}
 
 		groupCacheModel.type = getType();
+
 		groupCacheModel.typeSettings = getTypeSettings();
 
-		if ((groupCacheModel.typeSettings != null) &&
-				(groupCacheModel.typeSettings.length() == 0)) {
+		String typeSettings = groupCacheModel.typeSettings;
+
+		if ((typeSettings != null) && (typeSettings.length() == 0)) {
 			groupCacheModel.typeSettings = null;
 		}
 
 		groupCacheModel.friendlyURL = getFriendlyURL();
 
-		if ((groupCacheModel.friendlyURL != null) &&
-				(groupCacheModel.friendlyURL.length() == 0)) {
+		String friendlyURL = groupCacheModel.friendlyURL;
+
+		if ((friendlyURL != null) && (friendlyURL.length() == 0)) {
 			groupCacheModel.friendlyURL = null;
 		}
 
 		groupCacheModel.site = getSite();
+
 		groupCacheModel.active = getActive();
 
 		return groupCacheModel;

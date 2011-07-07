@@ -325,18 +325,22 @@ public class PortletModelImpl extends BaseModelImpl<Portlet>
 		PortletCacheModel portletCacheModel = new PortletCacheModel();
 
 		portletCacheModel.id = getId();
+
 		portletCacheModel.companyId = getCompanyId();
+
 		portletCacheModel.portletId = getPortletId();
 
-		if ((portletCacheModel.portletId != null) &&
-				(portletCacheModel.portletId.length() == 0)) {
+		String portletId = portletCacheModel.portletId;
+
+		if ((portletId != null) && (portletId.length() == 0)) {
 			portletCacheModel.portletId = null;
 		}
 
 		portletCacheModel.roles = getRoles();
 
-		if ((portletCacheModel.roles != null) &&
-				(portletCacheModel.roles.length() == 0)) {
+		String roles = portletCacheModel.roles;
+
+		if ((roles != null) && (roles.length() == 0)) {
 			portletCacheModel.roles = null;
 		}
 

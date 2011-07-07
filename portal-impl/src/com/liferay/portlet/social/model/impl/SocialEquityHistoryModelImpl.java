@@ -263,8 +263,11 @@ public class SocialEquityHistoryModelImpl extends BaseModelImpl<SocialEquityHist
 		SocialEquityHistoryCacheModel socialEquityHistoryCacheModel = new SocialEquityHistoryCacheModel();
 
 		socialEquityHistoryCacheModel.equityHistoryId = getEquityHistoryId();
+
 		socialEquityHistoryCacheModel.groupId = getGroupId();
+
 		socialEquityHistoryCacheModel.companyId = getCompanyId();
+
 		socialEquityHistoryCacheModel.userId = getUserId();
 
 		Date createDate = getCreateDate();

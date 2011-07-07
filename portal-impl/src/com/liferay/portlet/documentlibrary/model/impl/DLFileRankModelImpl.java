@@ -309,8 +309,11 @@ public class DLFileRankModelImpl extends BaseModelImpl<DLFileRank>
 		DLFileRankCacheModel dlFileRankCacheModel = new DLFileRankCacheModel();
 
 		dlFileRankCacheModel.fileRankId = getFileRankId();
+
 		dlFileRankCacheModel.groupId = getGroupId();
+
 		dlFileRankCacheModel.companyId = getCompanyId();
+
 		dlFileRankCacheModel.userId = getUserId();
 
 		Date createDate = getCreateDate();

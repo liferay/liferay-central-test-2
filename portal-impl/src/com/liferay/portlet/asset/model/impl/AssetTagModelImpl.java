@@ -358,13 +358,18 @@ public class AssetTagModelImpl extends BaseModelImpl<AssetTag>
 		AssetTagCacheModel assetTagCacheModel = new AssetTagCacheModel();
 
 		assetTagCacheModel.tagId = getTagId();
+
 		assetTagCacheModel.groupId = getGroupId();
+
 		assetTagCacheModel.companyId = getCompanyId();
+
 		assetTagCacheModel.userId = getUserId();
+
 		assetTagCacheModel.userName = getUserName();
 
-		if ((assetTagCacheModel.userName != null) &&
-				(assetTagCacheModel.userName.length() == 0)) {
+		String userName = assetTagCacheModel.userName;
+
+		if ((userName != null) && (userName.length() == 0)) {
 			assetTagCacheModel.userName = null;
 		}
 
@@ -382,8 +387,9 @@ public class AssetTagModelImpl extends BaseModelImpl<AssetTag>
 
 		assetTagCacheModel.name = getName();
 
-		if ((assetTagCacheModel.name != null) &&
-				(assetTagCacheModel.name.length() == 0)) {
+		String name = assetTagCacheModel.name;
+
+		if ((name != null) && (name.length() == 0)) {
 			assetTagCacheModel.name = null;
 		}
 

@@ -375,13 +375,18 @@ public class MBBanModelImpl extends BaseModelImpl<MBBan> implements MBBanModel {
 		MBBanCacheModel mbBanCacheModel = new MBBanCacheModel();
 
 		mbBanCacheModel.banId = getBanId();
+
 		mbBanCacheModel.groupId = getGroupId();
+
 		mbBanCacheModel.companyId = getCompanyId();
+
 		mbBanCacheModel.userId = getUserId();
+
 		mbBanCacheModel.userName = getUserName();
 
-		if ((mbBanCacheModel.userName != null) &&
-				(mbBanCacheModel.userName.length() == 0)) {
+		String userName = mbBanCacheModel.userName;
+
+		if ((userName != null) && (userName.length() == 0)) {
 			mbBanCacheModel.userName = null;
 		}
 

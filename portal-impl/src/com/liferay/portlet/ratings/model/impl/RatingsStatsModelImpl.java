@@ -290,10 +290,15 @@ public class RatingsStatsModelImpl extends BaseModelImpl<RatingsStats>
 		RatingsStatsCacheModel ratingsStatsCacheModel = new RatingsStatsCacheModel();
 
 		ratingsStatsCacheModel.statsId = getStatsId();
+
 		ratingsStatsCacheModel.classNameId = getClassNameId();
+
 		ratingsStatsCacheModel.classPK = getClassPK();
+
 		ratingsStatsCacheModel.totalEntries = getTotalEntries();
+
 		ratingsStatsCacheModel.totalScore = getTotalScore();
+
 		ratingsStatsCacheModel.averageScore = getAverageScore();
 
 		return ratingsStatsCacheModel;

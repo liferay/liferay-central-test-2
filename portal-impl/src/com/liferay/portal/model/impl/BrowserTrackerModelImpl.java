@@ -245,7 +245,9 @@ public class BrowserTrackerModelImpl extends BaseModelImpl<BrowserTracker>
 		BrowserTrackerCacheModel browserTrackerCacheModel = new BrowserTrackerCacheModel();
 
 		browserTrackerCacheModel.browserTrackerId = getBrowserTrackerId();
+
 		browserTrackerCacheModel.userId = getUserId();
+
 		browserTrackerCacheModel.browserKey = getBrowserKey();
 
 		return browserTrackerCacheModel;

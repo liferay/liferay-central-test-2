@@ -389,13 +389,18 @@ public class WorkflowDefinitionLinkModelImpl extends BaseModelImpl<WorkflowDefin
 		WorkflowDefinitionLinkCacheModel workflowDefinitionLinkCacheModel = new WorkflowDefinitionLinkCacheModel();
 
 		workflowDefinitionLinkCacheModel.workflowDefinitionLinkId = getWorkflowDefinitionLinkId();
+
 		workflowDefinitionLinkCacheModel.groupId = getGroupId();
+
 		workflowDefinitionLinkCacheModel.companyId = getCompanyId();
+
 		workflowDefinitionLinkCacheModel.userId = getUserId();
+
 		workflowDefinitionLinkCacheModel.userName = getUserName();
 
-		if ((workflowDefinitionLinkCacheModel.userName != null) &&
-				(workflowDefinitionLinkCacheModel.userName.length() == 0)) {
+		String userName = workflowDefinitionLinkCacheModel.userName;
+
+		if ((userName != null) && (userName.length() == 0)) {
 			workflowDefinitionLinkCacheModel.userName = null;
 		}
 
@@ -412,11 +417,15 @@ public class WorkflowDefinitionLinkModelImpl extends BaseModelImpl<WorkflowDefin
 		}
 
 		workflowDefinitionLinkCacheModel.classNameId = getClassNameId();
+
 		workflowDefinitionLinkCacheModel.classPK = getClassPK();
+
 		workflowDefinitionLinkCacheModel.workflowDefinitionName = getWorkflowDefinitionName();
 
-		if ((workflowDefinitionLinkCacheModel.workflowDefinitionName != null) &&
-				(workflowDefinitionLinkCacheModel.workflowDefinitionName.length() == 0)) {
+		String workflowDefinitionName = workflowDefinitionLinkCacheModel.workflowDefinitionName;
+
+		if ((workflowDefinitionName != null) &&
+				(workflowDefinitionName.length() == 0)) {
 			workflowDefinitionLinkCacheModel.workflowDefinitionName = null;
 		}
 

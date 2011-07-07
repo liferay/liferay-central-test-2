@@ -593,19 +593,25 @@ public class PollsQuestionModelImpl extends BaseModelImpl<PollsQuestion>
 
 		pollsQuestionCacheModel.uuid = getUuid();
 
-		if ((pollsQuestionCacheModel.uuid != null) &&
-				(pollsQuestionCacheModel.uuid.length() == 0)) {
+		String uuid = pollsQuestionCacheModel.uuid;
+
+		if ((uuid != null) && (uuid.length() == 0)) {
 			pollsQuestionCacheModel.uuid = null;
 		}
 
 		pollsQuestionCacheModel.questionId = getQuestionId();
+
 		pollsQuestionCacheModel.groupId = getGroupId();
+
 		pollsQuestionCacheModel.companyId = getCompanyId();
+
 		pollsQuestionCacheModel.userId = getUserId();
+
 		pollsQuestionCacheModel.userName = getUserName();
 
-		if ((pollsQuestionCacheModel.userName != null) &&
-				(pollsQuestionCacheModel.userName.length() == 0)) {
+		String userName = pollsQuestionCacheModel.userName;
+
+		if ((userName != null) && (userName.length() == 0)) {
 			pollsQuestionCacheModel.userName = null;
 		}
 
@@ -623,15 +629,17 @@ public class PollsQuestionModelImpl extends BaseModelImpl<PollsQuestion>
 
 		pollsQuestionCacheModel.title = getTitle();
 
-		if ((pollsQuestionCacheModel.title != null) &&
-				(pollsQuestionCacheModel.title.length() == 0)) {
+		String title = pollsQuestionCacheModel.title;
+
+		if ((title != null) && (title.length() == 0)) {
 			pollsQuestionCacheModel.title = null;
 		}
 
 		pollsQuestionCacheModel.description = getDescription();
 
-		if ((pollsQuestionCacheModel.description != null) &&
-				(pollsQuestionCacheModel.description.length() == 0)) {
+		String description = pollsQuestionCacheModel.description;
+
+		if ((description != null) && (description.length() == 0)) {
 			pollsQuestionCacheModel.description = null;
 		}
 

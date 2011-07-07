@@ -646,19 +646,25 @@ public class DDMStructureModelImpl extends BaseModelImpl<DDMStructure>
 
 		ddmStructureCacheModel.uuid = getUuid();
 
-		if ((ddmStructureCacheModel.uuid != null) &&
-				(ddmStructureCacheModel.uuid.length() == 0)) {
+		String uuid = ddmStructureCacheModel.uuid;
+
+		if ((uuid != null) && (uuid.length() == 0)) {
 			ddmStructureCacheModel.uuid = null;
 		}
 
 		ddmStructureCacheModel.structureId = getStructureId();
+
 		ddmStructureCacheModel.groupId = getGroupId();
+
 		ddmStructureCacheModel.companyId = getCompanyId();
+
 		ddmStructureCacheModel.userId = getUserId();
+
 		ddmStructureCacheModel.userName = getUserName();
 
-		if ((ddmStructureCacheModel.userName != null) &&
-				(ddmStructureCacheModel.userName.length() == 0)) {
+		String userName = ddmStructureCacheModel.userName;
+
+		if ((userName != null) && (userName.length() == 0)) {
 			ddmStructureCacheModel.userName = null;
 		}
 
@@ -675,38 +681,44 @@ public class DDMStructureModelImpl extends BaseModelImpl<DDMStructure>
 		}
 
 		ddmStructureCacheModel.classNameId = getClassNameId();
+
 		ddmStructureCacheModel.structureKey = getStructureKey();
 
-		if ((ddmStructureCacheModel.structureKey != null) &&
-				(ddmStructureCacheModel.structureKey.length() == 0)) {
+		String structureKey = ddmStructureCacheModel.structureKey;
+
+		if ((structureKey != null) && (structureKey.length() == 0)) {
 			ddmStructureCacheModel.structureKey = null;
 		}
 
 		ddmStructureCacheModel.name = getName();
 
-		if ((ddmStructureCacheModel.name != null) &&
-				(ddmStructureCacheModel.name.length() == 0)) {
+		String name = ddmStructureCacheModel.name;
+
+		if ((name != null) && (name.length() == 0)) {
 			ddmStructureCacheModel.name = null;
 		}
 
 		ddmStructureCacheModel.description = getDescription();
 
-		if ((ddmStructureCacheModel.description != null) &&
-				(ddmStructureCacheModel.description.length() == 0)) {
+		String description = ddmStructureCacheModel.description;
+
+		if ((description != null) && (description.length() == 0)) {
 			ddmStructureCacheModel.description = null;
 		}
 
 		ddmStructureCacheModel.xsd = getXsd();
 
-		if ((ddmStructureCacheModel.xsd != null) &&
-				(ddmStructureCacheModel.xsd.length() == 0)) {
+		String xsd = ddmStructureCacheModel.xsd;
+
+		if ((xsd != null) && (xsd.length() == 0)) {
 			ddmStructureCacheModel.xsd = null;
 		}
 
 		ddmStructureCacheModel.storageType = getStorageType();
 
-		if ((ddmStructureCacheModel.storageType != null) &&
-				(ddmStructureCacheModel.storageType.length() == 0)) {
+		String storageType = ddmStructureCacheModel.storageType;
+
+		if ((storageType != null) && (storageType.length() == 0)) {
 			ddmStructureCacheModel.storageType = null;
 		}
 

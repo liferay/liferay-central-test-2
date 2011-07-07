@@ -362,20 +362,26 @@ public class PortletPreferencesModelImpl extends BaseModelImpl<PortletPreference
 		PortletPreferencesCacheModel portletPreferencesCacheModel = new PortletPreferencesCacheModel();
 
 		portletPreferencesCacheModel.portletPreferencesId = getPortletPreferencesId();
+
 		portletPreferencesCacheModel.ownerId = getOwnerId();
+
 		portletPreferencesCacheModel.ownerType = getOwnerType();
+
 		portletPreferencesCacheModel.plid = getPlid();
+
 		portletPreferencesCacheModel.portletId = getPortletId();
 
-		if ((portletPreferencesCacheModel.portletId != null) &&
-				(portletPreferencesCacheModel.portletId.length() == 0)) {
+		String portletId = portletPreferencesCacheModel.portletId;
+
+		if ((portletId != null) && (portletId.length() == 0)) {
 			portletPreferencesCacheModel.portletId = null;
 		}
 
 		portletPreferencesCacheModel.preferences = getPreferences();
 
-		if ((portletPreferencesCacheModel.preferences != null) &&
-				(portletPreferencesCacheModel.preferences.length() == 0)) {
+		String preferences = portletPreferencesCacheModel.preferences;
+
+		if ((preferences != null) && (preferences.length() == 0)) {
 			portletPreferencesCacheModel.preferences = null;
 		}
 

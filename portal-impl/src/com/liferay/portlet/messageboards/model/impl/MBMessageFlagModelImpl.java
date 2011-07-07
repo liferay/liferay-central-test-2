@@ -352,6 +352,7 @@ public class MBMessageFlagModelImpl extends BaseModelImpl<MBMessageFlag>
 		MBMessageFlagCacheModel mbMessageFlagCacheModel = new MBMessageFlagCacheModel();
 
 		mbMessageFlagCacheModel.messageFlagId = getMessageFlagId();
+
 		mbMessageFlagCacheModel.userId = getUserId();
 
 		Date modifiedDate = getModifiedDate();
@@ -361,7 +362,9 @@ public class MBMessageFlagModelImpl extends BaseModelImpl<MBMessageFlag>
 		}
 
 		mbMessageFlagCacheModel.threadId = getThreadId();
+
 		mbMessageFlagCacheModel.messageId = getMessageId();
+
 		mbMessageFlagCacheModel.flag = getFlag();
 
 		return mbMessageFlagCacheModel;

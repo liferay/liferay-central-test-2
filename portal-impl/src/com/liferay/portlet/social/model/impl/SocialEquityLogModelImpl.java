@@ -427,26 +427,38 @@ public class SocialEquityLogModelImpl extends BaseModelImpl<SocialEquityLog>
 		SocialEquityLogCacheModel socialEquityLogCacheModel = new SocialEquityLogCacheModel();
 
 		socialEquityLogCacheModel.equityLogId = getEquityLogId();
+
 		socialEquityLogCacheModel.groupId = getGroupId();
+
 		socialEquityLogCacheModel.companyId = getCompanyId();
+
 		socialEquityLogCacheModel.userId = getUserId();
+
 		socialEquityLogCacheModel.assetEntryId = getAssetEntryId();
+
 		socialEquityLogCacheModel.actionId = getActionId();
 
-		if ((socialEquityLogCacheModel.actionId != null) &&
-				(socialEquityLogCacheModel.actionId.length() == 0)) {
+		String actionId = socialEquityLogCacheModel.actionId;
+
+		if ((actionId != null) && (actionId.length() == 0)) {
 			socialEquityLogCacheModel.actionId = null;
 		}
 
 		socialEquityLogCacheModel.actionDate = getActionDate();
+
 		socialEquityLogCacheModel.active = getActive();
+
 		socialEquityLogCacheModel.expiration = getExpiration();
+
 		socialEquityLogCacheModel.type = getType();
+
 		socialEquityLogCacheModel.value = getValue();
+
 		socialEquityLogCacheModel.extraData = getExtraData();
 
-		if ((socialEquityLogCacheModel.extraData != null) &&
-				(socialEquityLogCacheModel.extraData.length() == 0)) {
+		String extraData = socialEquityLogCacheModel.extraData;
+
+		if ((extraData != null) && (extraData.length() == 0)) {
 			socialEquityLogCacheModel.extraData = null;
 		}
 

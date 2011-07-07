@@ -368,12 +368,16 @@ public class SubscriptionModelImpl extends BaseModelImpl<Subscription>
 		SubscriptionCacheModel subscriptionCacheModel = new SubscriptionCacheModel();
 
 		subscriptionCacheModel.subscriptionId = getSubscriptionId();
+
 		subscriptionCacheModel.companyId = getCompanyId();
+
 		subscriptionCacheModel.userId = getUserId();
+
 		subscriptionCacheModel.userName = getUserName();
 
-		if ((subscriptionCacheModel.userName != null) &&
-				(subscriptionCacheModel.userName.length() == 0)) {
+		String userName = subscriptionCacheModel.userName;
+
+		if ((userName != null) && (userName.length() == 0)) {
 			subscriptionCacheModel.userName = null;
 		}
 
@@ -390,11 +394,14 @@ public class SubscriptionModelImpl extends BaseModelImpl<Subscription>
 		}
 
 		subscriptionCacheModel.classNameId = getClassNameId();
+
 		subscriptionCacheModel.classPK = getClassPK();
+
 		subscriptionCacheModel.frequency = getFrequency();
 
-		if ((subscriptionCacheModel.frequency != null) &&
-				(subscriptionCacheModel.frequency.length() == 0)) {
+		String frequency = subscriptionCacheModel.frequency;
+
+		if ((frequency != null) && (frequency.length() == 0)) {
 			subscriptionCacheModel.frequency = null;
 		}
 

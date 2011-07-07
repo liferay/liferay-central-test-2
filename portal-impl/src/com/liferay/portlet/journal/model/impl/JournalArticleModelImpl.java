@@ -1025,20 +1025,27 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 
 		journalArticleCacheModel.uuid = getUuid();
 
-		if ((journalArticleCacheModel.uuid != null) &&
-				(journalArticleCacheModel.uuid.length() == 0)) {
+		String uuid = journalArticleCacheModel.uuid;
+
+		if ((uuid != null) && (uuid.length() == 0)) {
 			journalArticleCacheModel.uuid = null;
 		}
 
 		journalArticleCacheModel.id = getId();
+
 		journalArticleCacheModel.resourcePrimKey = getResourcePrimKey();
+
 		journalArticleCacheModel.groupId = getGroupId();
+
 		journalArticleCacheModel.companyId = getCompanyId();
+
 		journalArticleCacheModel.userId = getUserId();
+
 		journalArticleCacheModel.userName = getUserName();
 
-		if ((journalArticleCacheModel.userName != null) &&
-				(journalArticleCacheModel.userName.length() == 0)) {
+		String userName = journalArticleCacheModel.userName;
+
+		if ((userName != null) && (userName.length() == 0)) {
 			journalArticleCacheModel.userName = null;
 		}
 
@@ -1055,68 +1062,80 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		}
 
 		journalArticleCacheModel.classNameId = getClassNameId();
+
 		journalArticleCacheModel.classPK = getClassPK();
+
 		journalArticleCacheModel.articleId = getArticleId();
 
-		if ((journalArticleCacheModel.articleId != null) &&
-				(journalArticleCacheModel.articleId.length() == 0)) {
+		String articleId = journalArticleCacheModel.articleId;
+
+		if ((articleId != null) && (articleId.length() == 0)) {
 			journalArticleCacheModel.articleId = null;
 		}
 
 		journalArticleCacheModel.version = getVersion();
+
 		journalArticleCacheModel.title = getTitle();
 
-		if ((journalArticleCacheModel.title != null) &&
-				(journalArticleCacheModel.title.length() == 0)) {
+		String title = journalArticleCacheModel.title;
+
+		if ((title != null) && (title.length() == 0)) {
 			journalArticleCacheModel.title = null;
 		}
 
 		journalArticleCacheModel.urlTitle = getUrlTitle();
 
-		if ((journalArticleCacheModel.urlTitle != null) &&
-				(journalArticleCacheModel.urlTitle.length() == 0)) {
+		String urlTitle = journalArticleCacheModel.urlTitle;
+
+		if ((urlTitle != null) && (urlTitle.length() == 0)) {
 			journalArticleCacheModel.urlTitle = null;
 		}
 
 		journalArticleCacheModel.description = getDescription();
 
-		if ((journalArticleCacheModel.description != null) &&
-				(journalArticleCacheModel.description.length() == 0)) {
+		String description = journalArticleCacheModel.description;
+
+		if ((description != null) && (description.length() == 0)) {
 			journalArticleCacheModel.description = null;
 		}
 
 		journalArticleCacheModel.content = getContent();
 
-		if ((journalArticleCacheModel.content != null) &&
-				(journalArticleCacheModel.content.length() == 0)) {
+		String content = journalArticleCacheModel.content;
+
+		if ((content != null) && (content.length() == 0)) {
 			journalArticleCacheModel.content = null;
 		}
 
 		journalArticleCacheModel.type = getType();
 
-		if ((journalArticleCacheModel.type != null) &&
-				(journalArticleCacheModel.type.length() == 0)) {
+		String type = journalArticleCacheModel.type;
+
+		if ((type != null) && (type.length() == 0)) {
 			journalArticleCacheModel.type = null;
 		}
 
 		journalArticleCacheModel.structureId = getStructureId();
 
-		if ((journalArticleCacheModel.structureId != null) &&
-				(journalArticleCacheModel.structureId.length() == 0)) {
+		String structureId = journalArticleCacheModel.structureId;
+
+		if ((structureId != null) && (structureId.length() == 0)) {
 			journalArticleCacheModel.structureId = null;
 		}
 
 		journalArticleCacheModel.templateId = getTemplateId();
 
-		if ((journalArticleCacheModel.templateId != null) &&
-				(journalArticleCacheModel.templateId.length() == 0)) {
+		String templateId = journalArticleCacheModel.templateId;
+
+		if ((templateId != null) && (templateId.length() == 0)) {
 			journalArticleCacheModel.templateId = null;
 		}
 
 		journalArticleCacheModel.layoutUuid = getLayoutUuid();
 
-		if ((journalArticleCacheModel.layoutUuid != null) &&
-				(journalArticleCacheModel.layoutUuid.length() == 0)) {
+		String layoutUuid = journalArticleCacheModel.layoutUuid;
+
+		if ((layoutUuid != null) && (layoutUuid.length() == 0)) {
 			journalArticleCacheModel.layoutUuid = null;
 		}
 
@@ -1139,21 +1158,28 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		}
 
 		journalArticleCacheModel.indexable = getIndexable();
+
 		journalArticleCacheModel.smallImage = getSmallImage();
+
 		journalArticleCacheModel.smallImageId = getSmallImageId();
+
 		journalArticleCacheModel.smallImageURL = getSmallImageURL();
 
-		if ((journalArticleCacheModel.smallImageURL != null) &&
-				(journalArticleCacheModel.smallImageURL.length() == 0)) {
+		String smallImageURL = journalArticleCacheModel.smallImageURL;
+
+		if ((smallImageURL != null) && (smallImageURL.length() == 0)) {
 			journalArticleCacheModel.smallImageURL = null;
 		}
 
 		journalArticleCacheModel.status = getStatus();
+
 		journalArticleCacheModel.statusByUserId = getStatusByUserId();
+
 		journalArticleCacheModel.statusByUserName = getStatusByUserName();
 
-		if ((journalArticleCacheModel.statusByUserName != null) &&
-				(journalArticleCacheModel.statusByUserName.length() == 0)) {
+		String statusByUserName = journalArticleCacheModel.statusByUserName;
+
+		if ((statusByUserName != null) && (statusByUserName.length() == 0)) {
 			journalArticleCacheModel.statusByUserName = null;
 		}
 

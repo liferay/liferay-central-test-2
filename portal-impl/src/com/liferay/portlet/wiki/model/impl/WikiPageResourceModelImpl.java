@@ -268,17 +268,21 @@ public class WikiPageResourceModelImpl extends BaseModelImpl<WikiPageResource>
 
 		wikiPageResourceCacheModel.uuid = getUuid();
 
-		if ((wikiPageResourceCacheModel.uuid != null) &&
-				(wikiPageResourceCacheModel.uuid.length() == 0)) {
+		String uuid = wikiPageResourceCacheModel.uuid;
+
+		if ((uuid != null) && (uuid.length() == 0)) {
 			wikiPageResourceCacheModel.uuid = null;
 		}
 
 		wikiPageResourceCacheModel.resourcePrimKey = getResourcePrimKey();
+
 		wikiPageResourceCacheModel.nodeId = getNodeId();
+
 		wikiPageResourceCacheModel.title = getTitle();
 
-		if ((wikiPageResourceCacheModel.title != null) &&
-				(wikiPageResourceCacheModel.title.length() == 0)) {
+		String title = wikiPageResourceCacheModel.title;
+
+		if ((title != null) && (title.length() == 0)) {
 			wikiPageResourceCacheModel.title = null;
 		}
 

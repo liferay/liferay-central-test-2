@@ -284,8 +284,11 @@ public class MBDiscussionModelImpl extends BaseModelImpl<MBDiscussion>
 		MBDiscussionCacheModel mbDiscussionCacheModel = new MBDiscussionCacheModel();
 
 		mbDiscussionCacheModel.discussionId = getDiscussionId();
+
 		mbDiscussionCacheModel.classNameId = getClassNameId();
+
 		mbDiscussionCacheModel.classPK = getClassPK();
+
 		mbDiscussionCacheModel.threadId = getThreadId();
 
 		return mbDiscussionCacheModel;

@@ -509,19 +509,25 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 
 		dlFolderCacheModel.uuid = getUuid();
 
-		if ((dlFolderCacheModel.uuid != null) &&
-				(dlFolderCacheModel.uuid.length() == 0)) {
+		String uuid = dlFolderCacheModel.uuid;
+
+		if ((uuid != null) && (uuid.length() == 0)) {
 			dlFolderCacheModel.uuid = null;
 		}
 
 		dlFolderCacheModel.folderId = getFolderId();
+
 		dlFolderCacheModel.groupId = getGroupId();
+
 		dlFolderCacheModel.companyId = getCompanyId();
+
 		dlFolderCacheModel.userId = getUserId();
+
 		dlFolderCacheModel.userName = getUserName();
 
-		if ((dlFolderCacheModel.userName != null) &&
-				(dlFolderCacheModel.userName.length() == 0)) {
+		String userName = dlFolderCacheModel.userName;
+
+		if ((userName != null) && (userName.length() == 0)) {
 			dlFolderCacheModel.userName = null;
 		}
 
@@ -538,19 +544,24 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 		}
 
 		dlFolderCacheModel.repositoryId = getRepositoryId();
+
 		dlFolderCacheModel.mountPoint = getMountPoint();
+
 		dlFolderCacheModel.parentFolderId = getParentFolderId();
+
 		dlFolderCacheModel.name = getName();
 
-		if ((dlFolderCacheModel.name != null) &&
-				(dlFolderCacheModel.name.length() == 0)) {
+		String name = dlFolderCacheModel.name;
+
+		if ((name != null) && (name.length() == 0)) {
 			dlFolderCacheModel.name = null;
 		}
 
 		dlFolderCacheModel.description = getDescription();
 
-		if ((dlFolderCacheModel.description != null) &&
-				(dlFolderCacheModel.description.length() == 0)) {
+		String description = dlFolderCacheModel.description;
+
+		if ((description != null) && (description.length() == 0)) {
 			dlFolderCacheModel.description = null;
 		}
 

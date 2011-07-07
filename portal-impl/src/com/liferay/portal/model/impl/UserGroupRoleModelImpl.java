@@ -247,7 +247,9 @@ public class UserGroupRoleModelImpl extends BaseModelImpl<UserGroupRole>
 		UserGroupRoleCacheModel userGroupRoleCacheModel = new UserGroupRoleCacheModel();
 
 		userGroupRoleCacheModel.userId = getUserId();
+
 		userGroupRoleCacheModel.groupId = getGroupId();
+
 		userGroupRoleCacheModel.roleId = getRoleId();
 
 		return userGroupRoleCacheModel;

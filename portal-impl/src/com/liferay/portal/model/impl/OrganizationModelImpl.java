@@ -432,32 +432,44 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization>
 		OrganizationCacheModel organizationCacheModel = new OrganizationCacheModel();
 
 		organizationCacheModel.organizationId = getOrganizationId();
+
 		organizationCacheModel.companyId = getCompanyId();
+
 		organizationCacheModel.parentOrganizationId = getParentOrganizationId();
+
 		organizationCacheModel.leftOrganizationId = getLeftOrganizationId();
+
 		organizationCacheModel.rightOrganizationId = getRightOrganizationId();
+
 		organizationCacheModel.name = getName();
 
-		if ((organizationCacheModel.name != null) &&
-				(organizationCacheModel.name.length() == 0)) {
+		String name = organizationCacheModel.name;
+
+		if ((name != null) && (name.length() == 0)) {
 			organizationCacheModel.name = null;
 		}
 
 		organizationCacheModel.type = getType();
 
-		if ((organizationCacheModel.type != null) &&
-				(organizationCacheModel.type.length() == 0)) {
+		String type = organizationCacheModel.type;
+
+		if ((type != null) && (type.length() == 0)) {
 			organizationCacheModel.type = null;
 		}
 
 		organizationCacheModel.recursable = getRecursable();
+
 		organizationCacheModel.regionId = getRegionId();
+
 		organizationCacheModel.countryId = getCountryId();
+
 		organizationCacheModel.statusId = getStatusId();
+
 		organizationCacheModel.comments = getComments();
 
-		if ((organizationCacheModel.comments != null) &&
-				(organizationCacheModel.comments.length() == 0)) {
+		String comments = organizationCacheModel.comments;
+
+		if ((comments != null) && (comments.length() == 0)) {
 			organizationCacheModel.comments = null;
 		}
 

@@ -610,19 +610,25 @@ public class AssetVocabularyModelImpl extends BaseModelImpl<AssetVocabulary>
 
 		assetVocabularyCacheModel.uuid = getUuid();
 
-		if ((assetVocabularyCacheModel.uuid != null) &&
-				(assetVocabularyCacheModel.uuid.length() == 0)) {
+		String uuid = assetVocabularyCacheModel.uuid;
+
+		if ((uuid != null) && (uuid.length() == 0)) {
 			assetVocabularyCacheModel.uuid = null;
 		}
 
 		assetVocabularyCacheModel.vocabularyId = getVocabularyId();
+
 		assetVocabularyCacheModel.groupId = getGroupId();
+
 		assetVocabularyCacheModel.companyId = getCompanyId();
+
 		assetVocabularyCacheModel.userId = getUserId();
+
 		assetVocabularyCacheModel.userName = getUserName();
 
-		if ((assetVocabularyCacheModel.userName != null) &&
-				(assetVocabularyCacheModel.userName.length() == 0)) {
+		String userName = assetVocabularyCacheModel.userName;
+
+		if ((userName != null) && (userName.length() == 0)) {
 			assetVocabularyCacheModel.userName = null;
 		}
 
@@ -640,29 +646,33 @@ public class AssetVocabularyModelImpl extends BaseModelImpl<AssetVocabulary>
 
 		assetVocabularyCacheModel.name = getName();
 
-		if ((assetVocabularyCacheModel.name != null) &&
-				(assetVocabularyCacheModel.name.length() == 0)) {
+		String name = assetVocabularyCacheModel.name;
+
+		if ((name != null) && (name.length() == 0)) {
 			assetVocabularyCacheModel.name = null;
 		}
 
 		assetVocabularyCacheModel.title = getTitle();
 
-		if ((assetVocabularyCacheModel.title != null) &&
-				(assetVocabularyCacheModel.title.length() == 0)) {
+		String title = assetVocabularyCacheModel.title;
+
+		if ((title != null) && (title.length() == 0)) {
 			assetVocabularyCacheModel.title = null;
 		}
 
 		assetVocabularyCacheModel.description = getDescription();
 
-		if ((assetVocabularyCacheModel.description != null) &&
-				(assetVocabularyCacheModel.description.length() == 0)) {
+		String description = assetVocabularyCacheModel.description;
+
+		if ((description != null) && (description.length() == 0)) {
 			assetVocabularyCacheModel.description = null;
 		}
 
 		assetVocabularyCacheModel.settings = getSettings();
 
-		if ((assetVocabularyCacheModel.settings != null) &&
-				(assetVocabularyCacheModel.settings.length() == 0)) {
+		String settings = assetVocabularyCacheModel.settings;
+
+		if ((settings != null) && (settings.length() == 0)) {
 			assetVocabularyCacheModel.settings = null;
 		}
 

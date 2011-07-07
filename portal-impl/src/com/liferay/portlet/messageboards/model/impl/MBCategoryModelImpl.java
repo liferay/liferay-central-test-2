@@ -484,19 +484,25 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory>
 
 		mbCategoryCacheModel.uuid = getUuid();
 
-		if ((mbCategoryCacheModel.uuid != null) &&
-				(mbCategoryCacheModel.uuid.length() == 0)) {
+		String uuid = mbCategoryCacheModel.uuid;
+
+		if ((uuid != null) && (uuid.length() == 0)) {
 			mbCategoryCacheModel.uuid = null;
 		}
 
 		mbCategoryCacheModel.categoryId = getCategoryId();
+
 		mbCategoryCacheModel.groupId = getGroupId();
+
 		mbCategoryCacheModel.companyId = getCompanyId();
+
 		mbCategoryCacheModel.userId = getUserId();
+
 		mbCategoryCacheModel.userName = getUserName();
 
-		if ((mbCategoryCacheModel.userName != null) &&
-				(mbCategoryCacheModel.userName.length() == 0)) {
+		String userName = mbCategoryCacheModel.userName;
+
+		if ((userName != null) && (userName.length() == 0)) {
 			mbCategoryCacheModel.userName = null;
 		}
 
@@ -513,28 +519,33 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory>
 		}
 
 		mbCategoryCacheModel.parentCategoryId = getParentCategoryId();
+
 		mbCategoryCacheModel.name = getName();
 
-		if ((mbCategoryCacheModel.name != null) &&
-				(mbCategoryCacheModel.name.length() == 0)) {
+		String name = mbCategoryCacheModel.name;
+
+		if ((name != null) && (name.length() == 0)) {
 			mbCategoryCacheModel.name = null;
 		}
 
 		mbCategoryCacheModel.description = getDescription();
 
-		if ((mbCategoryCacheModel.description != null) &&
-				(mbCategoryCacheModel.description.length() == 0)) {
+		String description = mbCategoryCacheModel.description;
+
+		if ((description != null) && (description.length() == 0)) {
 			mbCategoryCacheModel.description = null;
 		}
 
 		mbCategoryCacheModel.displayStyle = getDisplayStyle();
 
-		if ((mbCategoryCacheModel.displayStyle != null) &&
-				(mbCategoryCacheModel.displayStyle.length() == 0)) {
+		String displayStyle = mbCategoryCacheModel.displayStyle;
+
+		if ((displayStyle != null) && (displayStyle.length() == 0)) {
 			mbCategoryCacheModel.displayStyle = null;
 		}
 
 		mbCategoryCacheModel.threadCount = getThreadCount();
+
 		mbCategoryCacheModel.messageCount = getMessageCount();
 
 		Date lastPostDate = getLastPostDate();

@@ -520,13 +520,21 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread>
 		MBThreadCacheModel mbThreadCacheModel = new MBThreadCacheModel();
 
 		mbThreadCacheModel.threadId = getThreadId();
+
 		mbThreadCacheModel.groupId = getGroupId();
+
 		mbThreadCacheModel.companyId = getCompanyId();
+
 		mbThreadCacheModel.categoryId = getCategoryId();
+
 		mbThreadCacheModel.rootMessageId = getRootMessageId();
+
 		mbThreadCacheModel.rootMessageUserId = getRootMessageUserId();
+
 		mbThreadCacheModel.messageCount = getMessageCount();
+
 		mbThreadCacheModel.viewCount = getViewCount();
+
 		mbThreadCacheModel.lastPostByUserId = getLastPostByUserId();
 
 		Date lastPostDate = getLastPostDate();
@@ -536,12 +544,16 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread>
 		}
 
 		mbThreadCacheModel.priority = getPriority();
+
 		mbThreadCacheModel.status = getStatus();
+
 		mbThreadCacheModel.statusByUserId = getStatusByUserId();
+
 		mbThreadCacheModel.statusByUserName = getStatusByUserName();
 
-		if ((mbThreadCacheModel.statusByUserName != null) &&
-				(mbThreadCacheModel.statusByUserName.length() == 0)) {
+		String statusByUserName = mbThreadCacheModel.statusByUserName;
+
+		if ((statusByUserName != null) && (statusByUserName.length() == 0)) {
 			mbThreadCacheModel.statusByUserName = null;
 		}
 

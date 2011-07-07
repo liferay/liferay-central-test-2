@@ -333,27 +333,34 @@ public class ExpandoColumnModelImpl extends BaseModelImpl<ExpandoColumn>
 		ExpandoColumnCacheModel expandoColumnCacheModel = new ExpandoColumnCacheModel();
 
 		expandoColumnCacheModel.columnId = getColumnId();
+
 		expandoColumnCacheModel.companyId = getCompanyId();
+
 		expandoColumnCacheModel.tableId = getTableId();
+
 		expandoColumnCacheModel.name = getName();
 
-		if ((expandoColumnCacheModel.name != null) &&
-				(expandoColumnCacheModel.name.length() == 0)) {
+		String name = expandoColumnCacheModel.name;
+
+		if ((name != null) && (name.length() == 0)) {
 			expandoColumnCacheModel.name = null;
 		}
 
 		expandoColumnCacheModel.type = getType();
+
 		expandoColumnCacheModel.defaultData = getDefaultData();
 
-		if ((expandoColumnCacheModel.defaultData != null) &&
-				(expandoColumnCacheModel.defaultData.length() == 0)) {
+		String defaultData = expandoColumnCacheModel.defaultData;
+
+		if ((defaultData != null) && (defaultData.length() == 0)) {
 			expandoColumnCacheModel.defaultData = null;
 		}
 
 		expandoColumnCacheModel.typeSettings = getTypeSettings();
 
-		if ((expandoColumnCacheModel.typeSettings != null) &&
-				(expandoColumnCacheModel.typeSettings.length() == 0)) {
+		String typeSettings = expandoColumnCacheModel.typeSettings;
+
+		if ((typeSettings != null) && (typeSettings.length() == 0)) {
 			expandoColumnCacheModel.typeSettings = null;
 		}
 

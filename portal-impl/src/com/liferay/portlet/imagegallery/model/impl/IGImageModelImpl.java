@@ -528,19 +528,25 @@ public class IGImageModelImpl extends BaseModelImpl<IGImage>
 
 		igImageCacheModel.uuid = getUuid();
 
-		if ((igImageCacheModel.uuid != null) &&
-				(igImageCacheModel.uuid.length() == 0)) {
+		String uuid = igImageCacheModel.uuid;
+
+		if ((uuid != null) && (uuid.length() == 0)) {
 			igImageCacheModel.uuid = null;
 		}
 
 		igImageCacheModel.imageId = getImageId();
+
 		igImageCacheModel.groupId = getGroupId();
+
 		igImageCacheModel.companyId = getCompanyId();
+
 		igImageCacheModel.userId = getUserId();
+
 		igImageCacheModel.userName = getUserName();
 
-		if ((igImageCacheModel.userName != null) &&
-				(igImageCacheModel.userName.length() == 0)) {
+		String userName = igImageCacheModel.userName;
+
+		if ((userName != null) && (userName.length() == 0)) {
 			igImageCacheModel.userName = null;
 		}
 
@@ -557,23 +563,29 @@ public class IGImageModelImpl extends BaseModelImpl<IGImage>
 		}
 
 		igImageCacheModel.folderId = getFolderId();
+
 		igImageCacheModel.name = getName();
 
-		if ((igImageCacheModel.name != null) &&
-				(igImageCacheModel.name.length() == 0)) {
+		String name = igImageCacheModel.name;
+
+		if ((name != null) && (name.length() == 0)) {
 			igImageCacheModel.name = null;
 		}
 
 		igImageCacheModel.description = getDescription();
 
-		if ((igImageCacheModel.description != null) &&
-				(igImageCacheModel.description.length() == 0)) {
+		String description = igImageCacheModel.description;
+
+		if ((description != null) && (description.length() == 0)) {
 			igImageCacheModel.description = null;
 		}
 
 		igImageCacheModel.smallImageId = getSmallImageId();
+
 		igImageCacheModel.largeImageId = getLargeImageId();
+
 		igImageCacheModel.custom1ImageId = getCustom1ImageId();
+
 		igImageCacheModel.custom2ImageId = getCustom2ImageId();
 
 		return igImageCacheModel;

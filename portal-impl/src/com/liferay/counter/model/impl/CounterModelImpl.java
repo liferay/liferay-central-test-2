@@ -192,8 +192,9 @@ public class CounterModelImpl extends BaseModelImpl<Counter>
 
 		counterCacheModel.name = getName();
 
-		if ((counterCacheModel.name != null) &&
-				(counterCacheModel.name.length() == 0)) {
+		String name = counterCacheModel.name;
+
+		if ((name != null) && (name.length() == 0)) {
 			counterCacheModel.name = null;
 		}
 

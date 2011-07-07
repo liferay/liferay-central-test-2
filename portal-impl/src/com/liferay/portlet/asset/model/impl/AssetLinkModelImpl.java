@@ -350,12 +350,16 @@ public class AssetLinkModelImpl extends BaseModelImpl<AssetLink>
 		AssetLinkCacheModel assetLinkCacheModel = new AssetLinkCacheModel();
 
 		assetLinkCacheModel.linkId = getLinkId();
+
 		assetLinkCacheModel.companyId = getCompanyId();
+
 		assetLinkCacheModel.userId = getUserId();
+
 		assetLinkCacheModel.userName = getUserName();
 
-		if ((assetLinkCacheModel.userName != null) &&
-				(assetLinkCacheModel.userName.length() == 0)) {
+		String userName = assetLinkCacheModel.userName;
+
+		if ((userName != null) && (userName.length() == 0)) {
 			assetLinkCacheModel.userName = null;
 		}
 
@@ -366,8 +370,11 @@ public class AssetLinkModelImpl extends BaseModelImpl<AssetLink>
 		}
 
 		assetLinkCacheModel.entryId1 = getEntryId1();
+
 		assetLinkCacheModel.entryId2 = getEntryId2();
+
 		assetLinkCacheModel.type = getType();
+
 		assetLinkCacheModel.weight = getWeight();
 
 		return assetLinkCacheModel;

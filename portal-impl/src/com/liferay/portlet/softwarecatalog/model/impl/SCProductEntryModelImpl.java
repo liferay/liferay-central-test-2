@@ -516,13 +516,18 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry>
 		SCProductEntryCacheModel scProductEntryCacheModel = new SCProductEntryCacheModel();
 
 		scProductEntryCacheModel.productEntryId = getProductEntryId();
+
 		scProductEntryCacheModel.groupId = getGroupId();
+
 		scProductEntryCacheModel.companyId = getCompanyId();
+
 		scProductEntryCacheModel.userId = getUserId();
+
 		scProductEntryCacheModel.userName = getUserName();
 
-		if ((scProductEntryCacheModel.userName != null) &&
-				(scProductEntryCacheModel.userName.length() == 0)) {
+		String userName = scProductEntryCacheModel.userName;
+
+		if ((userName != null) && (userName.length() == 0)) {
 			scProductEntryCacheModel.userName = null;
 		}
 
@@ -540,64 +545,73 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry>
 
 		scProductEntryCacheModel.name = getName();
 
-		if ((scProductEntryCacheModel.name != null) &&
-				(scProductEntryCacheModel.name.length() == 0)) {
+		String name = scProductEntryCacheModel.name;
+
+		if ((name != null) && (name.length() == 0)) {
 			scProductEntryCacheModel.name = null;
 		}
 
 		scProductEntryCacheModel.type = getType();
 
-		if ((scProductEntryCacheModel.type != null) &&
-				(scProductEntryCacheModel.type.length() == 0)) {
+		String type = scProductEntryCacheModel.type;
+
+		if ((type != null) && (type.length() == 0)) {
 			scProductEntryCacheModel.type = null;
 		}
 
 		scProductEntryCacheModel.tags = getTags();
 
-		if ((scProductEntryCacheModel.tags != null) &&
-				(scProductEntryCacheModel.tags.length() == 0)) {
+		String tags = scProductEntryCacheModel.tags;
+
+		if ((tags != null) && (tags.length() == 0)) {
 			scProductEntryCacheModel.tags = null;
 		}
 
 		scProductEntryCacheModel.shortDescription = getShortDescription();
 
-		if ((scProductEntryCacheModel.shortDescription != null) &&
-				(scProductEntryCacheModel.shortDescription.length() == 0)) {
+		String shortDescription = scProductEntryCacheModel.shortDescription;
+
+		if ((shortDescription != null) && (shortDescription.length() == 0)) {
 			scProductEntryCacheModel.shortDescription = null;
 		}
 
 		scProductEntryCacheModel.longDescription = getLongDescription();
 
-		if ((scProductEntryCacheModel.longDescription != null) &&
-				(scProductEntryCacheModel.longDescription.length() == 0)) {
+		String longDescription = scProductEntryCacheModel.longDescription;
+
+		if ((longDescription != null) && (longDescription.length() == 0)) {
 			scProductEntryCacheModel.longDescription = null;
 		}
 
 		scProductEntryCacheModel.pageURL = getPageURL();
 
-		if ((scProductEntryCacheModel.pageURL != null) &&
-				(scProductEntryCacheModel.pageURL.length() == 0)) {
+		String pageURL = scProductEntryCacheModel.pageURL;
+
+		if ((pageURL != null) && (pageURL.length() == 0)) {
 			scProductEntryCacheModel.pageURL = null;
 		}
 
 		scProductEntryCacheModel.author = getAuthor();
 
-		if ((scProductEntryCacheModel.author != null) &&
-				(scProductEntryCacheModel.author.length() == 0)) {
+		String author = scProductEntryCacheModel.author;
+
+		if ((author != null) && (author.length() == 0)) {
 			scProductEntryCacheModel.author = null;
 		}
 
 		scProductEntryCacheModel.repoGroupId = getRepoGroupId();
 
-		if ((scProductEntryCacheModel.repoGroupId != null) &&
-				(scProductEntryCacheModel.repoGroupId.length() == 0)) {
+		String repoGroupId = scProductEntryCacheModel.repoGroupId;
+
+		if ((repoGroupId != null) && (repoGroupId.length() == 0)) {
 			scProductEntryCacheModel.repoGroupId = null;
 		}
 
 		scProductEntryCacheModel.repoArtifactId = getRepoArtifactId();
 
-		if ((scProductEntryCacheModel.repoArtifactId != null) &&
-				(scProductEntryCacheModel.repoArtifactId.length() == 0)) {
+		String repoArtifactId = scProductEntryCacheModel.repoArtifactId;
+
+		if ((repoArtifactId != null) && (repoArtifactId.length() == 0)) {
 			scProductEntryCacheModel.repoArtifactId = null;
 		}
 

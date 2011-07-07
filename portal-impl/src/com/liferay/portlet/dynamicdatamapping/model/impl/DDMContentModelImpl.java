@@ -447,19 +447,25 @@ public class DDMContentModelImpl extends BaseModelImpl<DDMContent>
 
 		ddmContentCacheModel.uuid = getUuid();
 
-		if ((ddmContentCacheModel.uuid != null) &&
-				(ddmContentCacheModel.uuid.length() == 0)) {
+		String uuid = ddmContentCacheModel.uuid;
+
+		if ((uuid != null) && (uuid.length() == 0)) {
 			ddmContentCacheModel.uuid = null;
 		}
 
 		ddmContentCacheModel.contentId = getContentId();
+
 		ddmContentCacheModel.groupId = getGroupId();
+
 		ddmContentCacheModel.companyId = getCompanyId();
+
 		ddmContentCacheModel.userId = getUserId();
+
 		ddmContentCacheModel.userName = getUserName();
 
-		if ((ddmContentCacheModel.userName != null) &&
-				(ddmContentCacheModel.userName.length() == 0)) {
+		String userName = ddmContentCacheModel.userName;
+
+		if ((userName != null) && (userName.length() == 0)) {
 			ddmContentCacheModel.userName = null;
 		}
 
@@ -477,22 +483,25 @@ public class DDMContentModelImpl extends BaseModelImpl<DDMContent>
 
 		ddmContentCacheModel.name = getName();
 
-		if ((ddmContentCacheModel.name != null) &&
-				(ddmContentCacheModel.name.length() == 0)) {
+		String name = ddmContentCacheModel.name;
+
+		if ((name != null) && (name.length() == 0)) {
 			ddmContentCacheModel.name = null;
 		}
 
 		ddmContentCacheModel.description = getDescription();
 
-		if ((ddmContentCacheModel.description != null) &&
-				(ddmContentCacheModel.description.length() == 0)) {
+		String description = ddmContentCacheModel.description;
+
+		if ((description != null) && (description.length() == 0)) {
 			ddmContentCacheModel.description = null;
 		}
 
 		ddmContentCacheModel.xml = getXml();
 
-		if ((ddmContentCacheModel.xml != null) &&
-				(ddmContentCacheModel.xml.length() == 0)) {
+		String xml = ddmContentCacheModel.xml;
+
+		if ((xml != null) && (xml.length() == 0)) {
 			ddmContentCacheModel.xml = null;
 		}
 

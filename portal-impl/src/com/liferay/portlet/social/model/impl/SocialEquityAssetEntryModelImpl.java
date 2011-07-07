@@ -286,11 +286,17 @@ public class SocialEquityAssetEntryModelImpl extends BaseModelImpl<SocialEquityA
 		SocialEquityAssetEntryCacheModel socialEquityAssetEntryCacheModel = new SocialEquityAssetEntryCacheModel();
 
 		socialEquityAssetEntryCacheModel.equityAssetEntryId = getEquityAssetEntryId();
+
 		socialEquityAssetEntryCacheModel.groupId = getGroupId();
+
 		socialEquityAssetEntryCacheModel.companyId = getCompanyId();
+
 		socialEquityAssetEntryCacheModel.userId = getUserId();
+
 		socialEquityAssetEntryCacheModel.assetEntryId = getAssetEntryId();
+
 		socialEquityAssetEntryCacheModel.informationK = getInformationK();
+
 		socialEquityAssetEntryCacheModel.informationB = getInformationB();
 
 		return socialEquityAssetEntryCacheModel;

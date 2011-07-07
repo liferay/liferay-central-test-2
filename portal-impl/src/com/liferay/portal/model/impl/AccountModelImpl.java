@@ -479,12 +479,16 @@ public class AccountModelImpl extends BaseModelImpl<Account>
 		AccountCacheModel accountCacheModel = new AccountCacheModel();
 
 		accountCacheModel.accountId = getAccountId();
+
 		accountCacheModel.companyId = getCompanyId();
+
 		accountCacheModel.userId = getUserId();
+
 		accountCacheModel.userName = getUserName();
 
-		if ((accountCacheModel.userName != null) &&
-				(accountCacheModel.userName.length() == 0)) {
+		String userName = accountCacheModel.userName;
+
+		if ((userName != null) && (userName.length() == 0)) {
 			accountCacheModel.userName = null;
 		}
 
@@ -501,66 +505,76 @@ public class AccountModelImpl extends BaseModelImpl<Account>
 		}
 
 		accountCacheModel.parentAccountId = getParentAccountId();
+
 		accountCacheModel.name = getName();
 
-		if ((accountCacheModel.name != null) &&
-				(accountCacheModel.name.length() == 0)) {
+		String name = accountCacheModel.name;
+
+		if ((name != null) && (name.length() == 0)) {
 			accountCacheModel.name = null;
 		}
 
 		accountCacheModel.legalName = getLegalName();
 
-		if ((accountCacheModel.legalName != null) &&
-				(accountCacheModel.legalName.length() == 0)) {
+		String legalName = accountCacheModel.legalName;
+
+		if ((legalName != null) && (legalName.length() == 0)) {
 			accountCacheModel.legalName = null;
 		}
 
 		accountCacheModel.legalId = getLegalId();
 
-		if ((accountCacheModel.legalId != null) &&
-				(accountCacheModel.legalId.length() == 0)) {
+		String legalId = accountCacheModel.legalId;
+
+		if ((legalId != null) && (legalId.length() == 0)) {
 			accountCacheModel.legalId = null;
 		}
 
 		accountCacheModel.legalType = getLegalType();
 
-		if ((accountCacheModel.legalType != null) &&
-				(accountCacheModel.legalType.length() == 0)) {
+		String legalType = accountCacheModel.legalType;
+
+		if ((legalType != null) && (legalType.length() == 0)) {
 			accountCacheModel.legalType = null;
 		}
 
 		accountCacheModel.sicCode = getSicCode();
 
-		if ((accountCacheModel.sicCode != null) &&
-				(accountCacheModel.sicCode.length() == 0)) {
+		String sicCode = accountCacheModel.sicCode;
+
+		if ((sicCode != null) && (sicCode.length() == 0)) {
 			accountCacheModel.sicCode = null;
 		}
 
 		accountCacheModel.tickerSymbol = getTickerSymbol();
 
-		if ((accountCacheModel.tickerSymbol != null) &&
-				(accountCacheModel.tickerSymbol.length() == 0)) {
+		String tickerSymbol = accountCacheModel.tickerSymbol;
+
+		if ((tickerSymbol != null) && (tickerSymbol.length() == 0)) {
 			accountCacheModel.tickerSymbol = null;
 		}
 
 		accountCacheModel.industry = getIndustry();
 
-		if ((accountCacheModel.industry != null) &&
-				(accountCacheModel.industry.length() == 0)) {
+		String industry = accountCacheModel.industry;
+
+		if ((industry != null) && (industry.length() == 0)) {
 			accountCacheModel.industry = null;
 		}
 
 		accountCacheModel.type = getType();
 
-		if ((accountCacheModel.type != null) &&
-				(accountCacheModel.type.length() == 0)) {
+		String type = accountCacheModel.type;
+
+		if ((type != null) && (type.length() == 0)) {
 			accountCacheModel.type = null;
 		}
 
 		accountCacheModel.size = getSize();
 
-		if ((accountCacheModel.size != null) &&
-				(accountCacheModel.size.length() == 0)) {
+		String size = accountCacheModel.size;
+
+		if ((size != null) && (size.length() == 0)) {
 			accountCacheModel.size = null;
 		}
 

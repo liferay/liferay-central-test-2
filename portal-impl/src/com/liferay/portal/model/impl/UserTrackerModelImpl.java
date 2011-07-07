@@ -303,7 +303,9 @@ public class UserTrackerModelImpl extends BaseModelImpl<UserTracker>
 		UserTrackerCacheModel userTrackerCacheModel = new UserTrackerCacheModel();
 
 		userTrackerCacheModel.userTrackerId = getUserTrackerId();
+
 		userTrackerCacheModel.companyId = getCompanyId();
+
 		userTrackerCacheModel.userId = getUserId();
 
 		Date modifiedDate = getModifiedDate();
@@ -314,29 +316,33 @@ public class UserTrackerModelImpl extends BaseModelImpl<UserTracker>
 
 		userTrackerCacheModel.sessionId = getSessionId();
 
-		if ((userTrackerCacheModel.sessionId != null) &&
-				(userTrackerCacheModel.sessionId.length() == 0)) {
+		String sessionId = userTrackerCacheModel.sessionId;
+
+		if ((sessionId != null) && (sessionId.length() == 0)) {
 			userTrackerCacheModel.sessionId = null;
 		}
 
 		userTrackerCacheModel.remoteAddr = getRemoteAddr();
 
-		if ((userTrackerCacheModel.remoteAddr != null) &&
-				(userTrackerCacheModel.remoteAddr.length() == 0)) {
+		String remoteAddr = userTrackerCacheModel.remoteAddr;
+
+		if ((remoteAddr != null) && (remoteAddr.length() == 0)) {
 			userTrackerCacheModel.remoteAddr = null;
 		}
 
 		userTrackerCacheModel.remoteHost = getRemoteHost();
 
-		if ((userTrackerCacheModel.remoteHost != null) &&
-				(userTrackerCacheModel.remoteHost.length() == 0)) {
+		String remoteHost = userTrackerCacheModel.remoteHost;
+
+		if ((remoteHost != null) && (remoteHost.length() == 0)) {
 			userTrackerCacheModel.remoteHost = null;
 		}
 
 		userTrackerCacheModel.userAgent = getUserAgent();
 
-		if ((userTrackerCacheModel.userAgent != null) &&
-				(userTrackerCacheModel.userAgent.length() == 0)) {
+		String userAgent = userTrackerCacheModel.userAgent;
+
+		if ((userAgent != null) && (userAgent.length() == 0)) {
 			userTrackerCacheModel.userAgent = null;
 		}
 

@@ -297,16 +297,22 @@ public class DLFileEntryMetadataModelImpl extends BaseModelImpl<DLFileEntryMetad
 
 		dlFileEntryMetadataCacheModel.uuid = getUuid();
 
-		if ((dlFileEntryMetadataCacheModel.uuid != null) &&
-				(dlFileEntryMetadataCacheModel.uuid.length() == 0)) {
+		String uuid = dlFileEntryMetadataCacheModel.uuid;
+
+		if ((uuid != null) && (uuid.length() == 0)) {
 			dlFileEntryMetadataCacheModel.uuid = null;
 		}
 
 		dlFileEntryMetadataCacheModel.fileEntryMetadataId = getFileEntryMetadataId();
+
 		dlFileEntryMetadataCacheModel.DDMStorageId = getDDMStorageId();
+
 		dlFileEntryMetadataCacheModel.DDMStructureId = getDDMStructureId();
+
 		dlFileEntryMetadataCacheModel.fileEntryTypeId = getFileEntryTypeId();
+
 		dlFileEntryMetadataCacheModel.fileEntryId = getFileEntryId();
+
 		dlFileEntryMetadataCacheModel.fileVersionId = getFileVersionId();
 
 		return dlFileEntryMetadataCacheModel;

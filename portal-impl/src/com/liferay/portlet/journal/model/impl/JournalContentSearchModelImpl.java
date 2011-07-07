@@ -339,21 +339,28 @@ public class JournalContentSearchModelImpl extends BaseModelImpl<JournalContentS
 		JournalContentSearchCacheModel journalContentSearchCacheModel = new JournalContentSearchCacheModel();
 
 		journalContentSearchCacheModel.contentSearchId = getContentSearchId();
+
 		journalContentSearchCacheModel.groupId = getGroupId();
+
 		journalContentSearchCacheModel.companyId = getCompanyId();
+
 		journalContentSearchCacheModel.privateLayout = getPrivateLayout();
+
 		journalContentSearchCacheModel.layoutId = getLayoutId();
+
 		journalContentSearchCacheModel.portletId = getPortletId();
 
-		if ((journalContentSearchCacheModel.portletId != null) &&
-				(journalContentSearchCacheModel.portletId.length() == 0)) {
+		String portletId = journalContentSearchCacheModel.portletId;
+
+		if ((portletId != null) && (portletId.length() == 0)) {
 			journalContentSearchCacheModel.portletId = null;
 		}
 
 		journalContentSearchCacheModel.articleId = getArticleId();
 
-		if ((journalContentSearchCacheModel.articleId != null) &&
-				(journalContentSearchCacheModel.articleId.length() == 0)) {
+		String articleId = journalContentSearchCacheModel.articleId;
+
+		if ((articleId != null) && (articleId.length() == 0)) {
 			journalContentSearchCacheModel.articleId = null;
 		}
 

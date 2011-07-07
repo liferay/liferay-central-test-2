@@ -432,19 +432,25 @@ public class BookmarksFolderModelImpl extends BaseModelImpl<BookmarksFolder>
 
 		bookmarksFolderCacheModel.uuid = getUuid();
 
-		if ((bookmarksFolderCacheModel.uuid != null) &&
-				(bookmarksFolderCacheModel.uuid.length() == 0)) {
+		String uuid = bookmarksFolderCacheModel.uuid;
+
+		if ((uuid != null) && (uuid.length() == 0)) {
 			bookmarksFolderCacheModel.uuid = null;
 		}
 
 		bookmarksFolderCacheModel.folderId = getFolderId();
+
 		bookmarksFolderCacheModel.groupId = getGroupId();
+
 		bookmarksFolderCacheModel.companyId = getCompanyId();
+
 		bookmarksFolderCacheModel.userId = getUserId();
+
 		bookmarksFolderCacheModel.userName = getUserName();
 
-		if ((bookmarksFolderCacheModel.userName != null) &&
-				(bookmarksFolderCacheModel.userName.length() == 0)) {
+		String userName = bookmarksFolderCacheModel.userName;
+
+		if ((userName != null) && (userName.length() == 0)) {
 			bookmarksFolderCacheModel.userName = null;
 		}
 
@@ -461,17 +467,20 @@ public class BookmarksFolderModelImpl extends BaseModelImpl<BookmarksFolder>
 		}
 
 		bookmarksFolderCacheModel.parentFolderId = getParentFolderId();
+
 		bookmarksFolderCacheModel.name = getName();
 
-		if ((bookmarksFolderCacheModel.name != null) &&
-				(bookmarksFolderCacheModel.name.length() == 0)) {
+		String name = bookmarksFolderCacheModel.name;
+
+		if ((name != null) && (name.length() == 0)) {
 			bookmarksFolderCacheModel.name = null;
 		}
 
 		bookmarksFolderCacheModel.description = getDescription();
 
-		if ((bookmarksFolderCacheModel.description != null) &&
-				(bookmarksFolderCacheModel.description.length() == 0)) {
+		String description = bookmarksFolderCacheModel.description;
+
+		if ((description != null) && (description.length() == 0)) {
 			bookmarksFolderCacheModel.description = null;
 		}
 

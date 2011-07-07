@@ -377,27 +377,34 @@ public class DLContentModelImpl extends BaseModelImpl<DLContent>
 		DLContentCacheModel dlContentCacheModel = new DLContentCacheModel();
 
 		dlContentCacheModel.contentId = getContentId();
+
 		dlContentCacheModel.groupId = getGroupId();
+
 		dlContentCacheModel.companyId = getCompanyId();
+
 		dlContentCacheModel.portletId = getPortletId();
 
-		if ((dlContentCacheModel.portletId != null) &&
-				(dlContentCacheModel.portletId.length() == 0)) {
+		String portletId = dlContentCacheModel.portletId;
+
+		if ((portletId != null) && (portletId.length() == 0)) {
 			dlContentCacheModel.portletId = null;
 		}
 
 		dlContentCacheModel.repositoryId = getRepositoryId();
+
 		dlContentCacheModel.path = getPath();
 
-		if ((dlContentCacheModel.path != null) &&
-				(dlContentCacheModel.path.length() == 0)) {
+		String path = dlContentCacheModel.path;
+
+		if ((path != null) && (path.length() == 0)) {
 			dlContentCacheModel.path = null;
 		}
 
 		dlContentCacheModel.version = getVersion();
 
-		if ((dlContentCacheModel.version != null) &&
-				(dlContentCacheModel.version.length() == 0)) {
+		String version = dlContentCacheModel.version;
+
+		if ((version != null) && (version.length() == 0)) {
 			dlContentCacheModel.version = null;
 		}
 

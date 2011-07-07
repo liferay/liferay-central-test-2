@@ -424,24 +424,31 @@ public class ResourcePermissionModelImpl extends BaseModelImpl<ResourcePermissio
 		ResourcePermissionCacheModel resourcePermissionCacheModel = new ResourcePermissionCacheModel();
 
 		resourcePermissionCacheModel.resourcePermissionId = getResourcePermissionId();
+
 		resourcePermissionCacheModel.companyId = getCompanyId();
+
 		resourcePermissionCacheModel.name = getName();
 
-		if ((resourcePermissionCacheModel.name != null) &&
-				(resourcePermissionCacheModel.name.length() == 0)) {
+		String name = resourcePermissionCacheModel.name;
+
+		if ((name != null) && (name.length() == 0)) {
 			resourcePermissionCacheModel.name = null;
 		}
 
 		resourcePermissionCacheModel.scope = getScope();
+
 		resourcePermissionCacheModel.primKey = getPrimKey();
 
-		if ((resourcePermissionCacheModel.primKey != null) &&
-				(resourcePermissionCacheModel.primKey.length() == 0)) {
+		String primKey = resourcePermissionCacheModel.primKey;
+
+		if ((primKey != null) && (primKey.length() == 0)) {
 			resourcePermissionCacheModel.primKey = null;
 		}
 
 		resourcePermissionCacheModel.roleId = getRoleId();
+
 		resourcePermissionCacheModel.ownerId = getOwnerId();
+
 		resourcePermissionCacheModel.actionIds = getActionIds();
 
 		return resourcePermissionCacheModel;

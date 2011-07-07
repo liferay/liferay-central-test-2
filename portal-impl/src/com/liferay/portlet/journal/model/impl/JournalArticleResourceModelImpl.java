@@ -278,17 +278,21 @@ public class JournalArticleResourceModelImpl extends BaseModelImpl<JournalArticl
 
 		journalArticleResourceCacheModel.uuid = getUuid();
 
-		if ((journalArticleResourceCacheModel.uuid != null) &&
-				(journalArticleResourceCacheModel.uuid.length() == 0)) {
+		String uuid = journalArticleResourceCacheModel.uuid;
+
+		if ((uuid != null) && (uuid.length() == 0)) {
 			journalArticleResourceCacheModel.uuid = null;
 		}
 
 		journalArticleResourceCacheModel.resourcePrimKey = getResourcePrimKey();
+
 		journalArticleResourceCacheModel.groupId = getGroupId();
+
 		journalArticleResourceCacheModel.articleId = getArticleId();
 
-		if ((journalArticleResourceCacheModel.articleId != null) &&
-				(journalArticleResourceCacheModel.articleId.length() == 0)) {
+		String articleId = journalArticleResourceCacheModel.articleId;
+
+		if ((articleId != null) && (articleId.length() == 0)) {
 			journalArticleResourceCacheModel.articleId = null;
 		}
 

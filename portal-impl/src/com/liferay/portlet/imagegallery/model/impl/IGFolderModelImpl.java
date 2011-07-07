@@ -455,19 +455,25 @@ public class IGFolderModelImpl extends BaseModelImpl<IGFolder>
 
 		igFolderCacheModel.uuid = getUuid();
 
-		if ((igFolderCacheModel.uuid != null) &&
-				(igFolderCacheModel.uuid.length() == 0)) {
+		String uuid = igFolderCacheModel.uuid;
+
+		if ((uuid != null) && (uuid.length() == 0)) {
 			igFolderCacheModel.uuid = null;
 		}
 
 		igFolderCacheModel.folderId = getFolderId();
+
 		igFolderCacheModel.groupId = getGroupId();
+
 		igFolderCacheModel.companyId = getCompanyId();
+
 		igFolderCacheModel.userId = getUserId();
+
 		igFolderCacheModel.userName = getUserName();
 
-		if ((igFolderCacheModel.userName != null) &&
-				(igFolderCacheModel.userName.length() == 0)) {
+		String userName = igFolderCacheModel.userName;
+
+		if ((userName != null) && (userName.length() == 0)) {
 			igFolderCacheModel.userName = null;
 		}
 
@@ -484,17 +490,20 @@ public class IGFolderModelImpl extends BaseModelImpl<IGFolder>
 		}
 
 		igFolderCacheModel.parentFolderId = getParentFolderId();
+
 		igFolderCacheModel.name = getName();
 
-		if ((igFolderCacheModel.name != null) &&
-				(igFolderCacheModel.name.length() == 0)) {
+		String name = igFolderCacheModel.name;
+
+		if ((name != null) && (name.length() == 0)) {
 			igFolderCacheModel.name = null;
 		}
 
 		igFolderCacheModel.description = getDescription();
 
-		if ((igFolderCacheModel.description != null) &&
-				(igFolderCacheModel.description.length() == 0)) {
+		String description = igFolderCacheModel.description;
+
+		if ((description != null) && (description.length() == 0)) {
 			igFolderCacheModel.description = null;
 		}
 

@@ -276,17 +276,20 @@ public class ResourceActionModelImpl extends BaseModelImpl<ResourceAction>
 		ResourceActionCacheModel resourceActionCacheModel = new ResourceActionCacheModel();
 
 		resourceActionCacheModel.resourceActionId = getResourceActionId();
+
 		resourceActionCacheModel.name = getName();
 
-		if ((resourceActionCacheModel.name != null) &&
-				(resourceActionCacheModel.name.length() == 0)) {
+		String name = resourceActionCacheModel.name;
+
+		if ((name != null) && (name.length() == 0)) {
 			resourceActionCacheModel.name = null;
 		}
 
 		resourceActionCacheModel.actionId = getActionId();
 
-		if ((resourceActionCacheModel.actionId != null) &&
-				(resourceActionCacheModel.actionId.length() == 0)) {
+		String actionId = resourceActionCacheModel.actionId;
+
+		if ((actionId != null) && (actionId.length() == 0)) {
 			resourceActionCacheModel.actionId = null;
 		}
 

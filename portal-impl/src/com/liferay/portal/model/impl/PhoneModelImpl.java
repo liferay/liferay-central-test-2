@@ -408,12 +408,16 @@ public class PhoneModelImpl extends BaseModelImpl<Phone> implements PhoneModel {
 		PhoneCacheModel phoneCacheModel = new PhoneCacheModel();
 
 		phoneCacheModel.phoneId = getPhoneId();
+
 		phoneCacheModel.companyId = getCompanyId();
+
 		phoneCacheModel.userId = getUserId();
+
 		phoneCacheModel.userName = getUserName();
 
-		if ((phoneCacheModel.userName != null) &&
-				(phoneCacheModel.userName.length() == 0)) {
+		String userName = phoneCacheModel.userName;
+
+		if ((userName != null) && (userName.length() == 0)) {
 			phoneCacheModel.userName = null;
 		}
 
@@ -430,22 +434,27 @@ public class PhoneModelImpl extends BaseModelImpl<Phone> implements PhoneModel {
 		}
 
 		phoneCacheModel.classNameId = getClassNameId();
+
 		phoneCacheModel.classPK = getClassPK();
+
 		phoneCacheModel.number = getNumber();
 
-		if ((phoneCacheModel.number != null) &&
-				(phoneCacheModel.number.length() == 0)) {
+		String number = phoneCacheModel.number;
+
+		if ((number != null) && (number.length() == 0)) {
 			phoneCacheModel.number = null;
 		}
 
 		phoneCacheModel.extension = getExtension();
 
-		if ((phoneCacheModel.extension != null) &&
-				(phoneCacheModel.extension.length() == 0)) {
+		String extension = phoneCacheModel.extension;
+
+		if ((extension != null) && (extension.length() == 0)) {
 			phoneCacheModel.extension = null;
 		}
 
 		phoneCacheModel.typeId = getTypeId();
+
 		phoneCacheModel.primary = getPrimary();
 
 		return phoneCacheModel;

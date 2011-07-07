@@ -628,19 +628,25 @@ public class DDMTemplateModelImpl extends BaseModelImpl<DDMTemplate>
 
 		ddmTemplateCacheModel.uuid = getUuid();
 
-		if ((ddmTemplateCacheModel.uuid != null) &&
-				(ddmTemplateCacheModel.uuid.length() == 0)) {
+		String uuid = ddmTemplateCacheModel.uuid;
+
+		if ((uuid != null) && (uuid.length() == 0)) {
 			ddmTemplateCacheModel.uuid = null;
 		}
 
 		ddmTemplateCacheModel.templateId = getTemplateId();
+
 		ddmTemplateCacheModel.groupId = getGroupId();
+
 		ddmTemplateCacheModel.companyId = getCompanyId();
+
 		ddmTemplateCacheModel.userId = getUserId();
+
 		ddmTemplateCacheModel.userName = getUserName();
 
-		if ((ddmTemplateCacheModel.userName != null) &&
-				(ddmTemplateCacheModel.userName.length() == 0)) {
+		String userName = ddmTemplateCacheModel.userName;
+
+		if ((userName != null) && (userName.length() == 0)) {
 			ddmTemplateCacheModel.userName = null;
 		}
 
@@ -657,38 +663,44 @@ public class DDMTemplateModelImpl extends BaseModelImpl<DDMTemplate>
 		}
 
 		ddmTemplateCacheModel.structureId = getStructureId();
+
 		ddmTemplateCacheModel.name = getName();
 
-		if ((ddmTemplateCacheModel.name != null) &&
-				(ddmTemplateCacheModel.name.length() == 0)) {
+		String name = ddmTemplateCacheModel.name;
+
+		if ((name != null) && (name.length() == 0)) {
 			ddmTemplateCacheModel.name = null;
 		}
 
 		ddmTemplateCacheModel.description = getDescription();
 
-		if ((ddmTemplateCacheModel.description != null) &&
-				(ddmTemplateCacheModel.description.length() == 0)) {
+		String description = ddmTemplateCacheModel.description;
+
+		if ((description != null) && (description.length() == 0)) {
 			ddmTemplateCacheModel.description = null;
 		}
 
 		ddmTemplateCacheModel.type = getType();
 
-		if ((ddmTemplateCacheModel.type != null) &&
-				(ddmTemplateCacheModel.type.length() == 0)) {
+		String type = ddmTemplateCacheModel.type;
+
+		if ((type != null) && (type.length() == 0)) {
 			ddmTemplateCacheModel.type = null;
 		}
 
 		ddmTemplateCacheModel.language = getLanguage();
 
-		if ((ddmTemplateCacheModel.language != null) &&
-				(ddmTemplateCacheModel.language.length() == 0)) {
+		String language = ddmTemplateCacheModel.language;
+
+		if ((language != null) && (language.length() == 0)) {
 			ddmTemplateCacheModel.language = null;
 		}
 
 		ddmTemplateCacheModel.script = getScript();
 
-		if ((ddmTemplateCacheModel.script != null) &&
-				(ddmTemplateCacheModel.script.length() == 0)) {
+		String script = ddmTemplateCacheModel.script;
+
+		if ((script != null) && (script.length() == 0)) {
 			ddmTemplateCacheModel.script = null;
 		}
 

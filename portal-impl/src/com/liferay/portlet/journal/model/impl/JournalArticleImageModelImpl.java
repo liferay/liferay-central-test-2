@@ -365,33 +365,40 @@ public class JournalArticleImageModelImpl extends BaseModelImpl<JournalArticleIm
 		JournalArticleImageCacheModel journalArticleImageCacheModel = new JournalArticleImageCacheModel();
 
 		journalArticleImageCacheModel.articleImageId = getArticleImageId();
+
 		journalArticleImageCacheModel.groupId = getGroupId();
+
 		journalArticleImageCacheModel.articleId = getArticleId();
 
-		if ((journalArticleImageCacheModel.articleId != null) &&
-				(journalArticleImageCacheModel.articleId.length() == 0)) {
+		String articleId = journalArticleImageCacheModel.articleId;
+
+		if ((articleId != null) && (articleId.length() == 0)) {
 			journalArticleImageCacheModel.articleId = null;
 		}
 
 		journalArticleImageCacheModel.version = getVersion();
+
 		journalArticleImageCacheModel.elInstanceId = getElInstanceId();
 
-		if ((journalArticleImageCacheModel.elInstanceId != null) &&
-				(journalArticleImageCacheModel.elInstanceId.length() == 0)) {
+		String elInstanceId = journalArticleImageCacheModel.elInstanceId;
+
+		if ((elInstanceId != null) && (elInstanceId.length() == 0)) {
 			journalArticleImageCacheModel.elInstanceId = null;
 		}
 
 		journalArticleImageCacheModel.elName = getElName();
 
-		if ((journalArticleImageCacheModel.elName != null) &&
-				(journalArticleImageCacheModel.elName.length() == 0)) {
+		String elName = journalArticleImageCacheModel.elName;
+
+		if ((elName != null) && (elName.length() == 0)) {
 			journalArticleImageCacheModel.elName = null;
 		}
 
 		journalArticleImageCacheModel.languageId = getLanguageId();
 
-		if ((journalArticleImageCacheModel.languageId != null) &&
-				(journalArticleImageCacheModel.languageId.length() == 0)) {
+		String languageId = journalArticleImageCacheModel.languageId;
+
+		if ((languageId != null) && (languageId.length() == 0)) {
 			journalArticleImageCacheModel.languageId = null;
 		}
 

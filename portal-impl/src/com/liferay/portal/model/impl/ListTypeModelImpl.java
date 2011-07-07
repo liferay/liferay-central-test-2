@@ -254,17 +254,20 @@ public class ListTypeModelImpl extends BaseModelImpl<ListType>
 		ListTypeCacheModel listTypeCacheModel = new ListTypeCacheModel();
 
 		listTypeCacheModel.listTypeId = getListTypeId();
+
 		listTypeCacheModel.name = getName();
 
-		if ((listTypeCacheModel.name != null) &&
-				(listTypeCacheModel.name.length() == 0)) {
+		String name = listTypeCacheModel.name;
+
+		if ((name != null) && (name.length() == 0)) {
 			listTypeCacheModel.name = null;
 		}
 
 		listTypeCacheModel.type = getType();
 
-		if ((listTypeCacheModel.type != null) &&
-				(listTypeCacheModel.type.length() == 0)) {
+		String type = listTypeCacheModel.type;
+
+		if ((type != null) && (type.length() == 0)) {
 			listTypeCacheModel.type = null;
 		}
 

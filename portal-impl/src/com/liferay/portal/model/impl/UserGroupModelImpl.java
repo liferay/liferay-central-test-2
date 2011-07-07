@@ -349,19 +349,24 @@ public class UserGroupModelImpl extends BaseModelImpl<UserGroup>
 		UserGroupCacheModel userGroupCacheModel = new UserGroupCacheModel();
 
 		userGroupCacheModel.userGroupId = getUserGroupId();
+
 		userGroupCacheModel.companyId = getCompanyId();
+
 		userGroupCacheModel.parentUserGroupId = getParentUserGroupId();
+
 		userGroupCacheModel.name = getName();
 
-		if ((userGroupCacheModel.name != null) &&
-				(userGroupCacheModel.name.length() == 0)) {
+		String name = userGroupCacheModel.name;
+
+		if ((name != null) && (name.length() == 0)) {
 			userGroupCacheModel.name = null;
 		}
 
 		userGroupCacheModel.description = getDescription();
 
-		if ((userGroupCacheModel.description != null) &&
-				(userGroupCacheModel.description.length() == 0)) {
+		String description = userGroupCacheModel.description;
+
+		if ((description != null) && (description.length() == 0)) {
 			userGroupCacheModel.description = null;
 		}
 

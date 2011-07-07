@@ -357,6 +357,7 @@ public class AnnouncementsFlagModelImpl extends BaseModelImpl<AnnouncementsFlag>
 		AnnouncementsFlagCacheModel announcementsFlagCacheModel = new AnnouncementsFlagCacheModel();
 
 		announcementsFlagCacheModel.flagId = getFlagId();
+
 		announcementsFlagCacheModel.userId = getUserId();
 
 		Date createDate = getCreateDate();
@@ -366,6 +367,7 @@ public class AnnouncementsFlagModelImpl extends BaseModelImpl<AnnouncementsFlag>
 		}
 
 		announcementsFlagCacheModel.entryId = getEntryId();
+
 		announcementsFlagCacheModel.value = getValue();
 
 		return announcementsFlagCacheModel;

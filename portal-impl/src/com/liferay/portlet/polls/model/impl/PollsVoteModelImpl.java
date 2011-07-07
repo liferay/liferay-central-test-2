@@ -326,8 +326,11 @@ public class PollsVoteModelImpl extends BaseModelImpl<PollsVote>
 		PollsVoteCacheModel pollsVoteCacheModel = new PollsVoteCacheModel();
 
 		pollsVoteCacheModel.voteId = getVoteId();
+
 		pollsVoteCacheModel.userId = getUserId();
+
 		pollsVoteCacheModel.questionId = getQuestionId();
+
 		pollsVoteCacheModel.choiceId = getChoiceId();
 
 		Date voteDate = getVoteDate();

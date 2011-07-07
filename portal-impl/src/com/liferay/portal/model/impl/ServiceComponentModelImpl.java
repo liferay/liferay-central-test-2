@@ -295,19 +295,24 @@ public class ServiceComponentModelImpl extends BaseModelImpl<ServiceComponent>
 		ServiceComponentCacheModel serviceComponentCacheModel = new ServiceComponentCacheModel();
 
 		serviceComponentCacheModel.serviceComponentId = getServiceComponentId();
+
 		serviceComponentCacheModel.buildNamespace = getBuildNamespace();
 
-		if ((serviceComponentCacheModel.buildNamespace != null) &&
-				(serviceComponentCacheModel.buildNamespace.length() == 0)) {
+		String buildNamespace = serviceComponentCacheModel.buildNamespace;
+
+		if ((buildNamespace != null) && (buildNamespace.length() == 0)) {
 			serviceComponentCacheModel.buildNamespace = null;
 		}
 
 		serviceComponentCacheModel.buildNumber = getBuildNumber();
+
 		serviceComponentCacheModel.buildDate = getBuildDate();
+
 		serviceComponentCacheModel.data = getData();
 
-		if ((serviceComponentCacheModel.data != null) &&
-				(serviceComponentCacheModel.data.length() == 0)) {
+		String data = serviceComponentCacheModel.data;
+
+		if ((data != null) && (data.length() == 0)) {
 			serviceComponentCacheModel.data = null;
 		}
 

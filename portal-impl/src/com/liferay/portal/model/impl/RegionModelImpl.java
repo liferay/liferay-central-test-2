@@ -300,18 +300,22 @@ public class RegionModelImpl extends BaseModelImpl<Region>
 		RegionCacheModel regionCacheModel = new RegionCacheModel();
 
 		regionCacheModel.regionId = getRegionId();
+
 		regionCacheModel.countryId = getCountryId();
+
 		regionCacheModel.regionCode = getRegionCode();
 
-		if ((regionCacheModel.regionCode != null) &&
-				(regionCacheModel.regionCode.length() == 0)) {
+		String regionCode = regionCacheModel.regionCode;
+
+		if ((regionCode != null) && (regionCode.length() == 0)) {
 			regionCacheModel.regionCode = null;
 		}
 
 		regionCacheModel.name = getName();
 
-		if ((regionCacheModel.name != null) &&
-				(regionCacheModel.name.length() == 0)) {
+		String name = regionCacheModel.name;
+
+		if ((name != null) && (name.length() == 0)) {
 			regionCacheModel.name = null;
 		}
 

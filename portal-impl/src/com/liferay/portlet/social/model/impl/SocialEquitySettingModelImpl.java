@@ -363,20 +363,29 @@ public class SocialEquitySettingModelImpl extends BaseModelImpl<SocialEquitySett
 		SocialEquitySettingCacheModel socialEquitySettingCacheModel = new SocialEquitySettingCacheModel();
 
 		socialEquitySettingCacheModel.equitySettingId = getEquitySettingId();
+
 		socialEquitySettingCacheModel.groupId = getGroupId();
+
 		socialEquitySettingCacheModel.companyId = getCompanyId();
+
 		socialEquitySettingCacheModel.classNameId = getClassNameId();
+
 		socialEquitySettingCacheModel.actionId = getActionId();
 
-		if ((socialEquitySettingCacheModel.actionId != null) &&
-				(socialEquitySettingCacheModel.actionId.length() == 0)) {
+		String actionId = socialEquitySettingCacheModel.actionId;
+
+		if ((actionId != null) && (actionId.length() == 0)) {
 			socialEquitySettingCacheModel.actionId = null;
 		}
 
 		socialEquitySettingCacheModel.dailyLimit = getDailyLimit();
+
 		socialEquitySettingCacheModel.lifespan = getLifespan();
+
 		socialEquitySettingCacheModel.type = getType();
+
 		socialEquitySettingCacheModel.uniqueEntry = getUniqueEntry();
+
 		socialEquitySettingCacheModel.value = getValue();
 
 		return socialEquitySettingCacheModel;

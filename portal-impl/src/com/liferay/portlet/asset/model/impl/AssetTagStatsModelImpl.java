@@ -280,8 +280,11 @@ public class AssetTagStatsModelImpl extends BaseModelImpl<AssetTagStats>
 		AssetTagStatsCacheModel assetTagStatsCacheModel = new AssetTagStatsCacheModel();
 
 		assetTagStatsCacheModel.tagStatsId = getTagStatsId();
+
 		assetTagStatsCacheModel.tagId = getTagId();
+
 		assetTagStatsCacheModel.classNameId = getClassNameId();
+
 		assetTagStatsCacheModel.assetCount = getAssetCount();
 
 		return assetTagStatsCacheModel;

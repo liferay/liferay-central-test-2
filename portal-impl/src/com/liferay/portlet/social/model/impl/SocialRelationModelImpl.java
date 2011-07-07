@@ -311,16 +311,22 @@ public class SocialRelationModelImpl extends BaseModelImpl<SocialRelation>
 
 		socialRelationCacheModel.uuid = getUuid();
 
-		if ((socialRelationCacheModel.uuid != null) &&
-				(socialRelationCacheModel.uuid.length() == 0)) {
+		String uuid = socialRelationCacheModel.uuid;
+
+		if ((uuid != null) && (uuid.length() == 0)) {
 			socialRelationCacheModel.uuid = null;
 		}
 
 		socialRelationCacheModel.relationId = getRelationId();
+
 		socialRelationCacheModel.companyId = getCompanyId();
+
 		socialRelationCacheModel.createDate = getCreateDate();
+
 		socialRelationCacheModel.userId1 = getUserId1();
+
 		socialRelationCacheModel.userId2 = getUserId2();
+
 		socialRelationCacheModel.type = getType();
 
 		return socialRelationCacheModel;

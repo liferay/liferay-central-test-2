@@ -352,25 +352,30 @@ public class PluginSettingModelImpl extends BaseModelImpl<PluginSetting>
 		PluginSettingCacheModel pluginSettingCacheModel = new PluginSettingCacheModel();
 
 		pluginSettingCacheModel.pluginSettingId = getPluginSettingId();
+
 		pluginSettingCacheModel.companyId = getCompanyId();
+
 		pluginSettingCacheModel.pluginId = getPluginId();
 
-		if ((pluginSettingCacheModel.pluginId != null) &&
-				(pluginSettingCacheModel.pluginId.length() == 0)) {
+		String pluginId = pluginSettingCacheModel.pluginId;
+
+		if ((pluginId != null) && (pluginId.length() == 0)) {
 			pluginSettingCacheModel.pluginId = null;
 		}
 
 		pluginSettingCacheModel.pluginType = getPluginType();
 
-		if ((pluginSettingCacheModel.pluginType != null) &&
-				(pluginSettingCacheModel.pluginType.length() == 0)) {
+		String pluginType = pluginSettingCacheModel.pluginType;
+
+		if ((pluginType != null) && (pluginType.length() == 0)) {
 			pluginSettingCacheModel.pluginType = null;
 		}
 
 		pluginSettingCacheModel.roles = getRoles();
 
-		if ((pluginSettingCacheModel.roles != null) &&
-				(pluginSettingCacheModel.roles.length() == 0)) {
+		String roles = pluginSettingCacheModel.roles;
+
+		if ((roles != null) && (roles.length() == 0)) {
 			pluginSettingCacheModel.roles = null;
 		}
 

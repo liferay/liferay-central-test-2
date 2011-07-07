@@ -733,20 +733,27 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage>
 
 		wikiPageCacheModel.uuid = getUuid();
 
-		if ((wikiPageCacheModel.uuid != null) &&
-				(wikiPageCacheModel.uuid.length() == 0)) {
+		String uuid = wikiPageCacheModel.uuid;
+
+		if ((uuid != null) && (uuid.length() == 0)) {
 			wikiPageCacheModel.uuid = null;
 		}
 
 		wikiPageCacheModel.pageId = getPageId();
+
 		wikiPageCacheModel.resourcePrimKey = getResourcePrimKey();
+
 		wikiPageCacheModel.groupId = getGroupId();
+
 		wikiPageCacheModel.companyId = getCompanyId();
+
 		wikiPageCacheModel.userId = getUserId();
+
 		wikiPageCacheModel.userName = getUserName();
 
-		if ((wikiPageCacheModel.userName != null) &&
-				(wikiPageCacheModel.userName.length() == 0)) {
+		String userName = wikiPageCacheModel.userName;
+
+		if ((userName != null) && (userName.length() == 0)) {
 			wikiPageCacheModel.userName = null;
 		}
 
@@ -763,57 +770,70 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage>
 		}
 
 		wikiPageCacheModel.nodeId = getNodeId();
+
 		wikiPageCacheModel.title = getTitle();
 
-		if ((wikiPageCacheModel.title != null) &&
-				(wikiPageCacheModel.title.length() == 0)) {
+		String title = wikiPageCacheModel.title;
+
+		if ((title != null) && (title.length() == 0)) {
 			wikiPageCacheModel.title = null;
 		}
 
 		wikiPageCacheModel.version = getVersion();
+
 		wikiPageCacheModel.minorEdit = getMinorEdit();
+
 		wikiPageCacheModel.content = getContent();
 
-		if ((wikiPageCacheModel.content != null) &&
-				(wikiPageCacheModel.content.length() == 0)) {
+		String content = wikiPageCacheModel.content;
+
+		if ((content != null) && (content.length() == 0)) {
 			wikiPageCacheModel.content = null;
 		}
 
 		wikiPageCacheModel.summary = getSummary();
 
-		if ((wikiPageCacheModel.summary != null) &&
-				(wikiPageCacheModel.summary.length() == 0)) {
+		String summary = wikiPageCacheModel.summary;
+
+		if ((summary != null) && (summary.length() == 0)) {
 			wikiPageCacheModel.summary = null;
 		}
 
 		wikiPageCacheModel.format = getFormat();
 
-		if ((wikiPageCacheModel.format != null) &&
-				(wikiPageCacheModel.format.length() == 0)) {
+		String format = wikiPageCacheModel.format;
+
+		if ((format != null) && (format.length() == 0)) {
 			wikiPageCacheModel.format = null;
 		}
 
 		wikiPageCacheModel.head = getHead();
+
 		wikiPageCacheModel.parentTitle = getParentTitle();
 
-		if ((wikiPageCacheModel.parentTitle != null) &&
-				(wikiPageCacheModel.parentTitle.length() == 0)) {
+		String parentTitle = wikiPageCacheModel.parentTitle;
+
+		if ((parentTitle != null) && (parentTitle.length() == 0)) {
 			wikiPageCacheModel.parentTitle = null;
 		}
 
 		wikiPageCacheModel.redirectTitle = getRedirectTitle();
 
-		if ((wikiPageCacheModel.redirectTitle != null) &&
-				(wikiPageCacheModel.redirectTitle.length() == 0)) {
+		String redirectTitle = wikiPageCacheModel.redirectTitle;
+
+		if ((redirectTitle != null) && (redirectTitle.length() == 0)) {
 			wikiPageCacheModel.redirectTitle = null;
 		}
 
 		wikiPageCacheModel.status = getStatus();
+
 		wikiPageCacheModel.statusByUserId = getStatusByUserId();
+
 		wikiPageCacheModel.statusByUserName = getStatusByUserName();
 
-		if ((wikiPageCacheModel.statusByUserName != null) &&
-				(wikiPageCacheModel.statusByUserName.length() == 0)) {
+		String statusByUserName = wikiPageCacheModel.statusByUserName;
+
+		if ((statusByUserName != null) && (statusByUserName.length() == 0)) {
 			wikiPageCacheModel.statusByUserName = null;
 		}
 

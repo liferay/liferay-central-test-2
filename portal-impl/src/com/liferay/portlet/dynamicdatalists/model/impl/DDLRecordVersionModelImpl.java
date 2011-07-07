@@ -447,13 +447,18 @@ public class DDLRecordVersionModelImpl extends BaseModelImpl<DDLRecordVersion>
 		DDLRecordVersionCacheModel ddlRecordVersionCacheModel = new DDLRecordVersionCacheModel();
 
 		ddlRecordVersionCacheModel.recordVersionId = getRecordVersionId();
+
 		ddlRecordVersionCacheModel.groupId = getGroupId();
+
 		ddlRecordVersionCacheModel.companyId = getCompanyId();
+
 		ddlRecordVersionCacheModel.userId = getUserId();
+
 		ddlRecordVersionCacheModel.userName = getUserName();
 
-		if ((ddlRecordVersionCacheModel.userName != null) &&
-				(ddlRecordVersionCacheModel.userName.length() == 0)) {
+		String userName = ddlRecordVersionCacheModel.userName;
+
+		if ((userName != null) && (userName.length() == 0)) {
 			ddlRecordVersionCacheModel.userName = null;
 		}
 
@@ -464,22 +469,30 @@ public class DDLRecordVersionModelImpl extends BaseModelImpl<DDLRecordVersion>
 		}
 
 		ddlRecordVersionCacheModel.DDMStorageId = getDDMStorageId();
+
 		ddlRecordVersionCacheModel.recordSetId = getRecordSetId();
+
 		ddlRecordVersionCacheModel.recordId = getRecordId();
+
 		ddlRecordVersionCacheModel.version = getVersion();
 
-		if ((ddlRecordVersionCacheModel.version != null) &&
-				(ddlRecordVersionCacheModel.version.length() == 0)) {
+		String version = ddlRecordVersionCacheModel.version;
+
+		if ((version != null) && (version.length() == 0)) {
 			ddlRecordVersionCacheModel.version = null;
 		}
 
 		ddlRecordVersionCacheModel.displayIndex = getDisplayIndex();
+
 		ddlRecordVersionCacheModel.status = getStatus();
+
 		ddlRecordVersionCacheModel.statusByUserId = getStatusByUserId();
+
 		ddlRecordVersionCacheModel.statusByUserName = getStatusByUserName();
 
-		if ((ddlRecordVersionCacheModel.statusByUserName != null) &&
-				(ddlRecordVersionCacheModel.statusByUserName.length() == 0)) {
+		String statusByUserName = ddlRecordVersionCacheModel.statusByUserName;
+
+		if ((statusByUserName != null) && (statusByUserName.length() == 0)) {
 			ddlRecordVersionCacheModel.statusByUserName = null;
 		}
 

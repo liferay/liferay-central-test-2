@@ -506,13 +506,18 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon>
 		ShoppingCouponCacheModel shoppingCouponCacheModel = new ShoppingCouponCacheModel();
 
 		shoppingCouponCacheModel.couponId = getCouponId();
+
 		shoppingCouponCacheModel.groupId = getGroupId();
+
 		shoppingCouponCacheModel.companyId = getCompanyId();
+
 		shoppingCouponCacheModel.userId = getUserId();
+
 		shoppingCouponCacheModel.userName = getUserName();
 
-		if ((shoppingCouponCacheModel.userName != null) &&
-				(shoppingCouponCacheModel.userName.length() == 0)) {
+		String userName = shoppingCouponCacheModel.userName;
+
+		if ((userName != null) && (userName.length() == 0)) {
 			shoppingCouponCacheModel.userName = null;
 		}
 
@@ -530,22 +535,25 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon>
 
 		shoppingCouponCacheModel.code = getCode();
 
-		if ((shoppingCouponCacheModel.code != null) &&
-				(shoppingCouponCacheModel.code.length() == 0)) {
+		String code = shoppingCouponCacheModel.code;
+
+		if ((code != null) && (code.length() == 0)) {
 			shoppingCouponCacheModel.code = null;
 		}
 
 		shoppingCouponCacheModel.name = getName();
 
-		if ((shoppingCouponCacheModel.name != null) &&
-				(shoppingCouponCacheModel.name.length() == 0)) {
+		String name = shoppingCouponCacheModel.name;
+
+		if ((name != null) && (name.length() == 0)) {
 			shoppingCouponCacheModel.name = null;
 		}
 
 		shoppingCouponCacheModel.description = getDescription();
 
-		if ((shoppingCouponCacheModel.description != null) &&
-				(shoppingCouponCacheModel.description.length() == 0)) {
+		String description = shoppingCouponCacheModel.description;
+
+		if ((description != null) && (description.length() == 0)) {
 			shoppingCouponCacheModel.description = null;
 		}
 
@@ -562,26 +570,32 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon>
 		}
 
 		shoppingCouponCacheModel.active = getActive();
+
 		shoppingCouponCacheModel.limitCategories = getLimitCategories();
 
-		if ((shoppingCouponCacheModel.limitCategories != null) &&
-				(shoppingCouponCacheModel.limitCategories.length() == 0)) {
+		String limitCategories = shoppingCouponCacheModel.limitCategories;
+
+		if ((limitCategories != null) && (limitCategories.length() == 0)) {
 			shoppingCouponCacheModel.limitCategories = null;
 		}
 
 		shoppingCouponCacheModel.limitSkus = getLimitSkus();
 
-		if ((shoppingCouponCacheModel.limitSkus != null) &&
-				(shoppingCouponCacheModel.limitSkus.length() == 0)) {
+		String limitSkus = shoppingCouponCacheModel.limitSkus;
+
+		if ((limitSkus != null) && (limitSkus.length() == 0)) {
 			shoppingCouponCacheModel.limitSkus = null;
 		}
 
 		shoppingCouponCacheModel.minOrder = getMinOrder();
+
 		shoppingCouponCacheModel.discount = getDiscount();
+
 		shoppingCouponCacheModel.discountType = getDiscountType();
 
-		if ((shoppingCouponCacheModel.discountType != null) &&
-				(shoppingCouponCacheModel.discountType.length() == 0)) {
+		String discountType = shoppingCouponCacheModel.discountType;
+
+		if ((discountType != null) && (discountType.length() == 0)) {
 			shoppingCouponCacheModel.discountType = null;
 		}
 

@@ -412,16 +412,24 @@ public class ExpandoValueModelImpl extends BaseModelImpl<ExpandoValue>
 		ExpandoValueCacheModel expandoValueCacheModel = new ExpandoValueCacheModel();
 
 		expandoValueCacheModel.valueId = getValueId();
+
 		expandoValueCacheModel.companyId = getCompanyId();
+
 		expandoValueCacheModel.tableId = getTableId();
+
 		expandoValueCacheModel.columnId = getColumnId();
+
 		expandoValueCacheModel.rowId = getRowId();
+
 		expandoValueCacheModel.classNameId = getClassNameId();
+
 		expandoValueCacheModel.classPK = getClassPK();
+
 		expandoValueCacheModel.data = getData();
 
-		if ((expandoValueCacheModel.data != null) &&
-				(expandoValueCacheModel.data.length() == 0)) {
+		String data = expandoValueCacheModel.data;
+
+		if ((data != null) && (data.length() == 0)) {
 			expandoValueCacheModel.data = null;
 		}
 

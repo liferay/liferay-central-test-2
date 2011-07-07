@@ -418,31 +418,37 @@ public class LayoutSetPrototypeModelImpl extends BaseModelImpl<LayoutSetPrototyp
 
 		layoutSetPrototypeCacheModel.uuid = getUuid();
 
-		if ((layoutSetPrototypeCacheModel.uuid != null) &&
-				(layoutSetPrototypeCacheModel.uuid.length() == 0)) {
+		String uuid = layoutSetPrototypeCacheModel.uuid;
+
+		if ((uuid != null) && (uuid.length() == 0)) {
 			layoutSetPrototypeCacheModel.uuid = null;
 		}
 
 		layoutSetPrototypeCacheModel.layoutSetPrototypeId = getLayoutSetPrototypeId();
+
 		layoutSetPrototypeCacheModel.companyId = getCompanyId();
+
 		layoutSetPrototypeCacheModel.name = getName();
 
-		if ((layoutSetPrototypeCacheModel.name != null) &&
-				(layoutSetPrototypeCacheModel.name.length() == 0)) {
+		String name = layoutSetPrototypeCacheModel.name;
+
+		if ((name != null) && (name.length() == 0)) {
 			layoutSetPrototypeCacheModel.name = null;
 		}
 
 		layoutSetPrototypeCacheModel.description = getDescription();
 
-		if ((layoutSetPrototypeCacheModel.description != null) &&
-				(layoutSetPrototypeCacheModel.description.length() == 0)) {
+		String description = layoutSetPrototypeCacheModel.description;
+
+		if ((description != null) && (description.length() == 0)) {
 			layoutSetPrototypeCacheModel.description = null;
 		}
 
 		layoutSetPrototypeCacheModel.settings = getSettings();
 
-		if ((layoutSetPrototypeCacheModel.settings != null) &&
-				(layoutSetPrototypeCacheModel.settings.length() == 0)) {
+		String settings = layoutSetPrototypeCacheModel.settings;
+
+		if ((settings != null) && (settings.length() == 0)) {
 			layoutSetPrototypeCacheModel.settings = null;
 		}
 

@@ -370,38 +370,44 @@ public class CountryModelImpl extends BaseModelImpl<Country>
 		CountryCacheModel countryCacheModel = new CountryCacheModel();
 
 		countryCacheModel.countryId = getCountryId();
+
 		countryCacheModel.name = getName();
 
-		if ((countryCacheModel.name != null) &&
-				(countryCacheModel.name.length() == 0)) {
+		String name = countryCacheModel.name;
+
+		if ((name != null) && (name.length() == 0)) {
 			countryCacheModel.name = null;
 		}
 
 		countryCacheModel.a2 = getA2();
 
-		if ((countryCacheModel.a2 != null) &&
-				(countryCacheModel.a2.length() == 0)) {
+		String a2 = countryCacheModel.a2;
+
+		if ((a2 != null) && (a2.length() == 0)) {
 			countryCacheModel.a2 = null;
 		}
 
 		countryCacheModel.a3 = getA3();
 
-		if ((countryCacheModel.a3 != null) &&
-				(countryCacheModel.a3.length() == 0)) {
+		String a3 = countryCacheModel.a3;
+
+		if ((a3 != null) && (a3.length() == 0)) {
 			countryCacheModel.a3 = null;
 		}
 
 		countryCacheModel.number = getNumber();
 
-		if ((countryCacheModel.number != null) &&
-				(countryCacheModel.number.length() == 0)) {
+		String number = countryCacheModel.number;
+
+		if ((number != null) && (number.length() == 0)) {
 			countryCacheModel.number = null;
 		}
 
 		countryCacheModel.idd = getIdd();
 
-		if ((countryCacheModel.idd != null) &&
-				(countryCacheModel.idd.length() == 0)) {
+		String idd = countryCacheModel.idd;
+
+		if ((idd != null) && (idd.length() == 0)) {
 			countryCacheModel.idd = null;
 		}
 

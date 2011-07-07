@@ -711,12 +711,16 @@ public class PasswordPolicyModelImpl extends BaseModelImpl<PasswordPolicy>
 		PasswordPolicyCacheModel passwordPolicyCacheModel = new PasswordPolicyCacheModel();
 
 		passwordPolicyCacheModel.passwordPolicyId = getPasswordPolicyId();
+
 		passwordPolicyCacheModel.companyId = getCompanyId();
+
 		passwordPolicyCacheModel.userId = getUserId();
+
 		passwordPolicyCacheModel.userName = getUserName();
 
-		if ((passwordPolicyCacheModel.userName != null) &&
-				(passwordPolicyCacheModel.userName.length() == 0)) {
+		String userName = passwordPolicyCacheModel.userName;
+
+		if ((userName != null) && (userName.length() == 0)) {
 			passwordPolicyCacheModel.userName = null;
 		}
 
@@ -733,42 +737,67 @@ public class PasswordPolicyModelImpl extends BaseModelImpl<PasswordPolicy>
 		}
 
 		passwordPolicyCacheModel.defaultPolicy = getDefaultPolicy();
+
 		passwordPolicyCacheModel.name = getName();
 
-		if ((passwordPolicyCacheModel.name != null) &&
-				(passwordPolicyCacheModel.name.length() == 0)) {
+		String name = passwordPolicyCacheModel.name;
+
+		if ((name != null) && (name.length() == 0)) {
 			passwordPolicyCacheModel.name = null;
 		}
 
 		passwordPolicyCacheModel.description = getDescription();
 
-		if ((passwordPolicyCacheModel.description != null) &&
-				(passwordPolicyCacheModel.description.length() == 0)) {
+		String description = passwordPolicyCacheModel.description;
+
+		if ((description != null) && (description.length() == 0)) {
 			passwordPolicyCacheModel.description = null;
 		}
 
 		passwordPolicyCacheModel.changeable = getChangeable();
+
 		passwordPolicyCacheModel.changeRequired = getChangeRequired();
+
 		passwordPolicyCacheModel.minAge = getMinAge();
+
 		passwordPolicyCacheModel.checkSyntax = getCheckSyntax();
+
 		passwordPolicyCacheModel.allowDictionaryWords = getAllowDictionaryWords();
+
 		passwordPolicyCacheModel.minAlphanumeric = getMinAlphanumeric();
+
 		passwordPolicyCacheModel.minLength = getMinLength();
+
 		passwordPolicyCacheModel.minLowerCase = getMinLowerCase();
+
 		passwordPolicyCacheModel.minNumbers = getMinNumbers();
+
 		passwordPolicyCacheModel.minSymbols = getMinSymbols();
+
 		passwordPolicyCacheModel.minUpperCase = getMinUpperCase();
+
 		passwordPolicyCacheModel.history = getHistory();
+
 		passwordPolicyCacheModel.historyCount = getHistoryCount();
+
 		passwordPolicyCacheModel.expireable = getExpireable();
+
 		passwordPolicyCacheModel.maxAge = getMaxAge();
+
 		passwordPolicyCacheModel.warningTime = getWarningTime();
+
 		passwordPolicyCacheModel.graceLimit = getGraceLimit();
+
 		passwordPolicyCacheModel.lockout = getLockout();
+
 		passwordPolicyCacheModel.maxFailure = getMaxFailure();
+
 		passwordPolicyCacheModel.lockoutDuration = getLockoutDuration();
+
 		passwordPolicyCacheModel.requireUnlock = getRequireUnlock();
+
 		passwordPolicyCacheModel.resetFailureCount = getResetFailureCount();
+
 		passwordPolicyCacheModel.resetTicketMaxAge = getResetTicketMaxAge();
 
 		return passwordPolicyCacheModel;

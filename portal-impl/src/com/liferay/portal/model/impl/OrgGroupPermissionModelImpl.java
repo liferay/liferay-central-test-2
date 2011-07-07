@@ -196,7 +196,9 @@ public class OrgGroupPermissionModelImpl extends BaseModelImpl<OrgGroupPermissio
 		OrgGroupPermissionCacheModel orgGroupPermissionCacheModel = new OrgGroupPermissionCacheModel();
 
 		orgGroupPermissionCacheModel.organizationId = getOrganizationId();
+
 		orgGroupPermissionCacheModel.groupId = getGroupId();
+
 		orgGroupPermissionCacheModel.permissionId = getPermissionId();
 
 		return orgGroupPermissionCacheModel;

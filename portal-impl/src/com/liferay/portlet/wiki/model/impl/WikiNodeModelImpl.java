@@ -427,19 +427,25 @@ public class WikiNodeModelImpl extends BaseModelImpl<WikiNode>
 
 		wikiNodeCacheModel.uuid = getUuid();
 
-		if ((wikiNodeCacheModel.uuid != null) &&
-				(wikiNodeCacheModel.uuid.length() == 0)) {
+		String uuid = wikiNodeCacheModel.uuid;
+
+		if ((uuid != null) && (uuid.length() == 0)) {
 			wikiNodeCacheModel.uuid = null;
 		}
 
 		wikiNodeCacheModel.nodeId = getNodeId();
+
 		wikiNodeCacheModel.groupId = getGroupId();
+
 		wikiNodeCacheModel.companyId = getCompanyId();
+
 		wikiNodeCacheModel.userId = getUserId();
+
 		wikiNodeCacheModel.userName = getUserName();
 
-		if ((wikiNodeCacheModel.userName != null) &&
-				(wikiNodeCacheModel.userName.length() == 0)) {
+		String userName = wikiNodeCacheModel.userName;
+
+		if ((userName != null) && (userName.length() == 0)) {
 			wikiNodeCacheModel.userName = null;
 		}
 
@@ -457,15 +463,17 @@ public class WikiNodeModelImpl extends BaseModelImpl<WikiNode>
 
 		wikiNodeCacheModel.name = getName();
 
-		if ((wikiNodeCacheModel.name != null) &&
-				(wikiNodeCacheModel.name.length() == 0)) {
+		String name = wikiNodeCacheModel.name;
+
+		if ((name != null) && (name.length() == 0)) {
 			wikiNodeCacheModel.name = null;
 		}
 
 		wikiNodeCacheModel.description = getDescription();
 
-		if ((wikiNodeCacheModel.description != null) &&
-				(wikiNodeCacheModel.description.length() == 0)) {
+		String description = wikiNodeCacheModel.description;
+
+		if ((description != null) && (description.length() == 0)) {
 			wikiNodeCacheModel.description = null;
 		}
 

@@ -388,12 +388,16 @@ public class TeamModelImpl extends BaseModelImpl<Team> implements TeamModel {
 		TeamCacheModel teamCacheModel = new TeamCacheModel();
 
 		teamCacheModel.teamId = getTeamId();
+
 		teamCacheModel.companyId = getCompanyId();
+
 		teamCacheModel.userId = getUserId();
+
 		teamCacheModel.userName = getUserName();
 
-		if ((teamCacheModel.userName != null) &&
-				(teamCacheModel.userName.length() == 0)) {
+		String userName = teamCacheModel.userName;
+
+		if ((userName != null) && (userName.length() == 0)) {
 			teamCacheModel.userName = null;
 		}
 
@@ -410,17 +414,20 @@ public class TeamModelImpl extends BaseModelImpl<Team> implements TeamModel {
 		}
 
 		teamCacheModel.groupId = getGroupId();
+
 		teamCacheModel.name = getName();
 
-		if ((teamCacheModel.name != null) &&
-				(teamCacheModel.name.length() == 0)) {
+		String name = teamCacheModel.name;
+
+		if ((name != null) && (name.length() == 0)) {
 			teamCacheModel.name = null;
 		}
 
 		teamCacheModel.description = getDescription();
 
-		if ((teamCacheModel.description != null) &&
-				(teamCacheModel.description.length() == 0)) {
+		String description = teamCacheModel.description;
+
+		if ((description != null) && (description.length() == 0)) {
 			teamCacheModel.description = null;
 		}
 

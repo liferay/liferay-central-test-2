@@ -283,8 +283,11 @@ public class PasswordPolicyRelModelImpl extends BaseModelImpl<PasswordPolicyRel>
 		PasswordPolicyRelCacheModel passwordPolicyRelCacheModel = new PasswordPolicyRelCacheModel();
 
 		passwordPolicyRelCacheModel.passwordPolicyRelId = getPasswordPolicyRelId();
+
 		passwordPolicyRelCacheModel.passwordPolicyId = getPasswordPolicyId();
+
 		passwordPolicyRelCacheModel.classNameId = getClassNameId();
+
 		passwordPolicyRelCacheModel.classPK = getClassPK();
 
 		return passwordPolicyRelCacheModel;

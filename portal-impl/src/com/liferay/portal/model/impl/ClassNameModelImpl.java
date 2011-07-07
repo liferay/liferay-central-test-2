@@ -275,10 +275,12 @@ public class ClassNameModelImpl extends BaseModelImpl<ClassName>
 		ClassNameCacheModel classNameCacheModel = new ClassNameCacheModel();
 
 		classNameCacheModel.classNameId = getClassNameId();
+
 		classNameCacheModel.value = getValue();
 
-		if ((classNameCacheModel.value != null) &&
-				(classNameCacheModel.value.length() == 0)) {
+		String value = classNameCacheModel.value;
+
+		if ((value != null) && (value.length() == 0)) {
 			classNameCacheModel.value = null;
 		}
 

@@ -362,13 +362,18 @@ public class ShoppingCartModelImpl extends BaseModelImpl<ShoppingCart>
 		ShoppingCartCacheModel shoppingCartCacheModel = new ShoppingCartCacheModel();
 
 		shoppingCartCacheModel.cartId = getCartId();
+
 		shoppingCartCacheModel.groupId = getGroupId();
+
 		shoppingCartCacheModel.companyId = getCompanyId();
+
 		shoppingCartCacheModel.userId = getUserId();
+
 		shoppingCartCacheModel.userName = getUserName();
 
-		if ((shoppingCartCacheModel.userName != null) &&
-				(shoppingCartCacheModel.userName.length() == 0)) {
+		String userName = shoppingCartCacheModel.userName;
+
+		if ((userName != null) && (userName.length() == 0)) {
 			shoppingCartCacheModel.userName = null;
 		}
 
@@ -386,19 +391,22 @@ public class ShoppingCartModelImpl extends BaseModelImpl<ShoppingCart>
 
 		shoppingCartCacheModel.itemIds = getItemIds();
 
-		if ((shoppingCartCacheModel.itemIds != null) &&
-				(shoppingCartCacheModel.itemIds.length() == 0)) {
+		String itemIds = shoppingCartCacheModel.itemIds;
+
+		if ((itemIds != null) && (itemIds.length() == 0)) {
 			shoppingCartCacheModel.itemIds = null;
 		}
 
 		shoppingCartCacheModel.couponCodes = getCouponCodes();
 
-		if ((shoppingCartCacheModel.couponCodes != null) &&
-				(shoppingCartCacheModel.couponCodes.length() == 0)) {
+		String couponCodes = shoppingCartCacheModel.couponCodes;
+
+		if ((couponCodes != null) && (couponCodes.length() == 0)) {
 			shoppingCartCacheModel.couponCodes = null;
 		}
 
 		shoppingCartCacheModel.altShipping = getAltShipping();
+
 		shoppingCartCacheModel.insure = getInsure();
 
 		return shoppingCartCacheModel;

@@ -337,20 +337,24 @@ public class ImageModelImpl extends BaseModelImpl<Image> implements ImageModel {
 
 		imageCacheModel.text = getText();
 
-		if ((imageCacheModel.text != null) &&
-				(imageCacheModel.text.length() == 0)) {
+		String text = imageCacheModel.text;
+
+		if ((text != null) && (text.length() == 0)) {
 			imageCacheModel.text = null;
 		}
 
 		imageCacheModel.type = getType();
 
-		if ((imageCacheModel.type != null) &&
-				(imageCacheModel.type.length() == 0)) {
+		String type = imageCacheModel.type;
+
+		if ((type != null) && (type.length() == 0)) {
 			imageCacheModel.type = null;
 		}
 
 		imageCacheModel.height = getHeight();
+
 		imageCacheModel.width = getWidth();
+
 		imageCacheModel.size = getSize();
 
 		return imageCacheModel;

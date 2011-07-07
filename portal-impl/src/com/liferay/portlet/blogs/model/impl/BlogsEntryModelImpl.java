@@ -663,19 +663,25 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry>
 
 		blogsEntryCacheModel.uuid = getUuid();
 
-		if ((blogsEntryCacheModel.uuid != null) &&
-				(blogsEntryCacheModel.uuid.length() == 0)) {
+		String uuid = blogsEntryCacheModel.uuid;
+
+		if ((uuid != null) && (uuid.length() == 0)) {
 			blogsEntryCacheModel.uuid = null;
 		}
 
 		blogsEntryCacheModel.entryId = getEntryId();
+
 		blogsEntryCacheModel.groupId = getGroupId();
+
 		blogsEntryCacheModel.companyId = getCompanyId();
+
 		blogsEntryCacheModel.userId = getUserId();
+
 		blogsEntryCacheModel.userName = getUserName();
 
-		if ((blogsEntryCacheModel.userName != null) &&
-				(blogsEntryCacheModel.userName.length() == 0)) {
+		String userName = blogsEntryCacheModel.userName;
+
+		if ((userName != null) && (userName.length() == 0)) {
 			blogsEntryCacheModel.userName = null;
 		}
 
@@ -693,29 +699,33 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry>
 
 		blogsEntryCacheModel.title = getTitle();
 
-		if ((blogsEntryCacheModel.title != null) &&
-				(blogsEntryCacheModel.title.length() == 0)) {
+		String title = blogsEntryCacheModel.title;
+
+		if ((title != null) && (title.length() == 0)) {
 			blogsEntryCacheModel.title = null;
 		}
 
 		blogsEntryCacheModel.urlTitle = getUrlTitle();
 
-		if ((blogsEntryCacheModel.urlTitle != null) &&
-				(blogsEntryCacheModel.urlTitle.length() == 0)) {
+		String urlTitle = blogsEntryCacheModel.urlTitle;
+
+		if ((urlTitle != null) && (urlTitle.length() == 0)) {
 			blogsEntryCacheModel.urlTitle = null;
 		}
 
 		blogsEntryCacheModel.description = getDescription();
 
-		if ((blogsEntryCacheModel.description != null) &&
-				(blogsEntryCacheModel.description.length() == 0)) {
+		String description = blogsEntryCacheModel.description;
+
+		if ((description != null) && (description.length() == 0)) {
 			blogsEntryCacheModel.description = null;
 		}
 
 		blogsEntryCacheModel.content = getContent();
 
-		if ((blogsEntryCacheModel.content != null) &&
-				(blogsEntryCacheModel.content.length() == 0)) {
+		String content = blogsEntryCacheModel.content;
+
+		if ((content != null) && (content.length() == 0)) {
 			blogsEntryCacheModel.content = null;
 		}
 
@@ -726,29 +736,38 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry>
 		}
 
 		blogsEntryCacheModel.allowPingbacks = getAllowPingbacks();
+
 		blogsEntryCacheModel.allowTrackbacks = getAllowTrackbacks();
+
 		blogsEntryCacheModel.trackbacks = getTrackbacks();
 
-		if ((blogsEntryCacheModel.trackbacks != null) &&
-				(blogsEntryCacheModel.trackbacks.length() == 0)) {
+		String trackbacks = blogsEntryCacheModel.trackbacks;
+
+		if ((trackbacks != null) && (trackbacks.length() == 0)) {
 			blogsEntryCacheModel.trackbacks = null;
 		}
 
 		blogsEntryCacheModel.smallImage = getSmallImage();
+
 		blogsEntryCacheModel.smallImageId = getSmallImageId();
+
 		blogsEntryCacheModel.smallImageURL = getSmallImageURL();
 
-		if ((blogsEntryCacheModel.smallImageURL != null) &&
-				(blogsEntryCacheModel.smallImageURL.length() == 0)) {
+		String smallImageURL = blogsEntryCacheModel.smallImageURL;
+
+		if ((smallImageURL != null) && (smallImageURL.length() == 0)) {
 			blogsEntryCacheModel.smallImageURL = null;
 		}
 
 		blogsEntryCacheModel.status = getStatus();
+
 		blogsEntryCacheModel.statusByUserId = getStatusByUserId();
+
 		blogsEntryCacheModel.statusByUserName = getStatusByUserName();
 
-		if ((blogsEntryCacheModel.statusByUserName != null) &&
-				(blogsEntryCacheModel.statusByUserName.length() == 0)) {
+		String statusByUserName = blogsEntryCacheModel.statusByUserName;
+
+		if ((statusByUserName != null) && (statusByUserName.length() == 0)) {
 			blogsEntryCacheModel.statusByUserName = null;
 		}
 

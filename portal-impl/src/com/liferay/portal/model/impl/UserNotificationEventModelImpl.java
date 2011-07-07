@@ -305,27 +305,35 @@ public class UserNotificationEventModelImpl extends BaseModelImpl<UserNotificati
 
 		userNotificationEventCacheModel.uuid = getUuid();
 
-		if ((userNotificationEventCacheModel.uuid != null) &&
-				(userNotificationEventCacheModel.uuid.length() == 0)) {
+		String uuid = userNotificationEventCacheModel.uuid;
+
+		if ((uuid != null) && (uuid.length() == 0)) {
 			userNotificationEventCacheModel.uuid = null;
 		}
 
 		userNotificationEventCacheModel.userNotificationEventId = getUserNotificationEventId();
+
 		userNotificationEventCacheModel.companyId = getCompanyId();
+
 		userNotificationEventCacheModel.userId = getUserId();
+
 		userNotificationEventCacheModel.type = getType();
 
-		if ((userNotificationEventCacheModel.type != null) &&
-				(userNotificationEventCacheModel.type.length() == 0)) {
+		String type = userNotificationEventCacheModel.type;
+
+		if ((type != null) && (type.length() == 0)) {
 			userNotificationEventCacheModel.type = null;
 		}
 
 		userNotificationEventCacheModel.timestamp = getTimestamp();
+
 		userNotificationEventCacheModel.deliverBy = getDeliverBy();
+
 		userNotificationEventCacheModel.payload = getPayload();
 
-		if ((userNotificationEventCacheModel.payload != null) &&
-				(userNotificationEventCacheModel.payload.length() == 0)) {
+		String payload = userNotificationEventCacheModel.payload;
+
+		if ((payload != null) && (payload.length() == 0)) {
 			userNotificationEventCacheModel.payload = null;
 		}
 

@@ -500,12 +500,16 @@ public class AddressModelImpl extends BaseModelImpl<Address>
 		AddressCacheModel addressCacheModel = new AddressCacheModel();
 
 		addressCacheModel.addressId = getAddressId();
+
 		addressCacheModel.companyId = getCompanyId();
+
 		addressCacheModel.userId = getUserId();
+
 		addressCacheModel.userName = getUserName();
 
-		if ((addressCacheModel.userName != null) &&
-				(addressCacheModel.userName.length() == 0)) {
+		String userName = addressCacheModel.userName;
+
+		if ((userName != null) && (userName.length() == 0)) {
 			addressCacheModel.userName = null;
 		}
 
@@ -522,46 +526,57 @@ public class AddressModelImpl extends BaseModelImpl<Address>
 		}
 
 		addressCacheModel.classNameId = getClassNameId();
+
 		addressCacheModel.classPK = getClassPK();
+
 		addressCacheModel.street1 = getStreet1();
 
-		if ((addressCacheModel.street1 != null) &&
-				(addressCacheModel.street1.length() == 0)) {
+		String street1 = addressCacheModel.street1;
+
+		if ((street1 != null) && (street1.length() == 0)) {
 			addressCacheModel.street1 = null;
 		}
 
 		addressCacheModel.street2 = getStreet2();
 
-		if ((addressCacheModel.street2 != null) &&
-				(addressCacheModel.street2.length() == 0)) {
+		String street2 = addressCacheModel.street2;
+
+		if ((street2 != null) && (street2.length() == 0)) {
 			addressCacheModel.street2 = null;
 		}
 
 		addressCacheModel.street3 = getStreet3();
 
-		if ((addressCacheModel.street3 != null) &&
-				(addressCacheModel.street3.length() == 0)) {
+		String street3 = addressCacheModel.street3;
+
+		if ((street3 != null) && (street3.length() == 0)) {
 			addressCacheModel.street3 = null;
 		}
 
 		addressCacheModel.city = getCity();
 
-		if ((addressCacheModel.city != null) &&
-				(addressCacheModel.city.length() == 0)) {
+		String city = addressCacheModel.city;
+
+		if ((city != null) && (city.length() == 0)) {
 			addressCacheModel.city = null;
 		}
 
 		addressCacheModel.zip = getZip();
 
-		if ((addressCacheModel.zip != null) &&
-				(addressCacheModel.zip.length() == 0)) {
+		String zip = addressCacheModel.zip;
+
+		if ((zip != null) && (zip.length() == 0)) {
 			addressCacheModel.zip = null;
 		}
 
 		addressCacheModel.regionId = getRegionId();
+
 		addressCacheModel.countryId = getCountryId();
+
 		addressCacheModel.typeId = getTypeId();
+
 		addressCacheModel.mailing = getMailing();
+
 		addressCacheModel.primary = getPrimary();
 
 		return addressCacheModel;

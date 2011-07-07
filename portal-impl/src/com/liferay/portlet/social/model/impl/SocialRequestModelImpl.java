@@ -465,28 +465,40 @@ public class SocialRequestModelImpl extends BaseModelImpl<SocialRequest>
 
 		socialRequestCacheModel.uuid = getUuid();
 
-		if ((socialRequestCacheModel.uuid != null) &&
-				(socialRequestCacheModel.uuid.length() == 0)) {
+		String uuid = socialRequestCacheModel.uuid;
+
+		if ((uuid != null) && (uuid.length() == 0)) {
 			socialRequestCacheModel.uuid = null;
 		}
 
 		socialRequestCacheModel.requestId = getRequestId();
+
 		socialRequestCacheModel.groupId = getGroupId();
+
 		socialRequestCacheModel.companyId = getCompanyId();
+
 		socialRequestCacheModel.userId = getUserId();
+
 		socialRequestCacheModel.createDate = getCreateDate();
+
 		socialRequestCacheModel.modifiedDate = getModifiedDate();
+
 		socialRequestCacheModel.classNameId = getClassNameId();
+
 		socialRequestCacheModel.classPK = getClassPK();
+
 		socialRequestCacheModel.type = getType();
+
 		socialRequestCacheModel.extraData = getExtraData();
 
-		if ((socialRequestCacheModel.extraData != null) &&
-				(socialRequestCacheModel.extraData.length() == 0)) {
+		String extraData = socialRequestCacheModel.extraData;
+
+		if ((extraData != null) && (extraData.length() == 0)) {
 			socialRequestCacheModel.extraData = null;
 		}
 
 		socialRequestCacheModel.receiverUserId = getReceiverUserId();
+
 		socialRequestCacheModel.status = getStatus();
 
 		return socialRequestCacheModel;

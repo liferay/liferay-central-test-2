@@ -384,24 +384,29 @@ public class PollsChoiceModelImpl extends BaseModelImpl<PollsChoice>
 
 		pollsChoiceCacheModel.uuid = getUuid();
 
-		if ((pollsChoiceCacheModel.uuid != null) &&
-				(pollsChoiceCacheModel.uuid.length() == 0)) {
+		String uuid = pollsChoiceCacheModel.uuid;
+
+		if ((uuid != null) && (uuid.length() == 0)) {
 			pollsChoiceCacheModel.uuid = null;
 		}
 
 		pollsChoiceCacheModel.choiceId = getChoiceId();
+
 		pollsChoiceCacheModel.questionId = getQuestionId();
+
 		pollsChoiceCacheModel.name = getName();
 
-		if ((pollsChoiceCacheModel.name != null) &&
-				(pollsChoiceCacheModel.name.length() == 0)) {
+		String name = pollsChoiceCacheModel.name;
+
+		if ((name != null) && (name.length() == 0)) {
 			pollsChoiceCacheModel.name = null;
 		}
 
 		pollsChoiceCacheModel.description = getDescription();
 
-		if ((pollsChoiceCacheModel.description != null) &&
-				(pollsChoiceCacheModel.description.length() == 0)) {
+		String description = pollsChoiceCacheModel.description;
+
+		if ((description != null) && (description.length() == 0)) {
 			pollsChoiceCacheModel.description = null;
 		}
 

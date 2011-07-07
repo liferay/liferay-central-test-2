@@ -308,10 +308,15 @@ public class SocialEquityGroupSettingModelImpl extends BaseModelImpl<SocialEquit
 		SocialEquityGroupSettingCacheModel socialEquityGroupSettingCacheModel = new SocialEquityGroupSettingCacheModel();
 
 		socialEquityGroupSettingCacheModel.equityGroupSettingId = getEquityGroupSettingId();
+
 		socialEquityGroupSettingCacheModel.groupId = getGroupId();
+
 		socialEquityGroupSettingCacheModel.companyId = getCompanyId();
+
 		socialEquityGroupSettingCacheModel.classNameId = getClassNameId();
+
 		socialEquityGroupSettingCacheModel.type = getType();
+
 		socialEquityGroupSettingCacheModel.enabled = getEnabled();
 
 		return socialEquityGroupSettingCacheModel;

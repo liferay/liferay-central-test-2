@@ -275,12 +275,16 @@ public class VirtualHostModelImpl extends BaseModelImpl<VirtualHost>
 		VirtualHostCacheModel virtualHostCacheModel = new VirtualHostCacheModel();
 
 		virtualHostCacheModel.virtualHostId = getVirtualHostId();
+
 		virtualHostCacheModel.companyId = getCompanyId();
+
 		virtualHostCacheModel.layoutSetId = getLayoutSetId();
+
 		virtualHostCacheModel.hostname = getHostname();
 
-		if ((virtualHostCacheModel.hostname != null) &&
-				(virtualHostCacheModel.hostname.length() == 0)) {
+		String hostname = virtualHostCacheModel.hostname;
+
+		if ((hostname != null) && (hostname.length() == 0)) {
 			virtualHostCacheModel.hostname = null;
 		}
 

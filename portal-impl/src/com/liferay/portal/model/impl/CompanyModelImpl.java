@@ -409,38 +409,47 @@ public class CompanyModelImpl extends BaseModelImpl<Company>
 		CompanyCacheModel companyCacheModel = new CompanyCacheModel();
 
 		companyCacheModel.companyId = getCompanyId();
+
 		companyCacheModel.accountId = getAccountId();
+
 		companyCacheModel.webId = getWebId();
 
-		if ((companyCacheModel.webId != null) &&
-				(companyCacheModel.webId.length() == 0)) {
+		String webId = companyCacheModel.webId;
+
+		if ((webId != null) && (webId.length() == 0)) {
 			companyCacheModel.webId = null;
 		}
 
 		companyCacheModel.key = getKey();
 
-		if ((companyCacheModel.key != null) &&
-				(companyCacheModel.key.length() == 0)) {
+		String key = companyCacheModel.key;
+
+		if ((key != null) && (key.length() == 0)) {
 			companyCacheModel.key = null;
 		}
 
 		companyCacheModel.mx = getMx();
 
-		if ((companyCacheModel.mx != null) &&
-				(companyCacheModel.mx.length() == 0)) {
+		String mx = companyCacheModel.mx;
+
+		if ((mx != null) && (mx.length() == 0)) {
 			companyCacheModel.mx = null;
 		}
 
 		companyCacheModel.homeURL = getHomeURL();
 
-		if ((companyCacheModel.homeURL != null) &&
-				(companyCacheModel.homeURL.length() == 0)) {
+		String homeURL = companyCacheModel.homeURL;
+
+		if ((homeURL != null) && (homeURL.length() == 0)) {
 			companyCacheModel.homeURL = null;
 		}
 
 		companyCacheModel.logoId = getLogoId();
+
 		companyCacheModel.system = getSystem();
+
 		companyCacheModel.maxUsers = getMaxUsers();
+
 		companyCacheModel.active = getActive();
 
 		return companyCacheModel;

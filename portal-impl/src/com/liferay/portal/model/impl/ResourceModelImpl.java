@@ -292,11 +292,14 @@ public class ResourceModelImpl extends BaseModelImpl<Resource>
 		ResourceCacheModel resourceCacheModel = new ResourceCacheModel();
 
 		resourceCacheModel.resourceId = getResourceId();
+
 		resourceCacheModel.codeId = getCodeId();
+
 		resourceCacheModel.primKey = getPrimKey();
 
-		if ((resourceCacheModel.primKey != null) &&
-				(resourceCacheModel.primKey.length() == 0)) {
+		String primKey = resourceCacheModel.primKey;
+
+		if ((primKey != null) && (primKey.length() == 0)) {
 			resourceCacheModel.primKey = null;
 		}
 

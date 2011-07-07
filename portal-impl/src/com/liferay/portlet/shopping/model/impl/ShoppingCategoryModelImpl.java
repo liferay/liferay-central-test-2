@@ -389,13 +389,18 @@ public class ShoppingCategoryModelImpl extends BaseModelImpl<ShoppingCategory>
 		ShoppingCategoryCacheModel shoppingCategoryCacheModel = new ShoppingCategoryCacheModel();
 
 		shoppingCategoryCacheModel.categoryId = getCategoryId();
+
 		shoppingCategoryCacheModel.groupId = getGroupId();
+
 		shoppingCategoryCacheModel.companyId = getCompanyId();
+
 		shoppingCategoryCacheModel.userId = getUserId();
+
 		shoppingCategoryCacheModel.userName = getUserName();
 
-		if ((shoppingCategoryCacheModel.userName != null) &&
-				(shoppingCategoryCacheModel.userName.length() == 0)) {
+		String userName = shoppingCategoryCacheModel.userName;
+
+		if ((userName != null) && (userName.length() == 0)) {
 			shoppingCategoryCacheModel.userName = null;
 		}
 
@@ -412,17 +417,20 @@ public class ShoppingCategoryModelImpl extends BaseModelImpl<ShoppingCategory>
 		}
 
 		shoppingCategoryCacheModel.parentCategoryId = getParentCategoryId();
+
 		shoppingCategoryCacheModel.name = getName();
 
-		if ((shoppingCategoryCacheModel.name != null) &&
-				(shoppingCategoryCacheModel.name.length() == 0)) {
+		String name = shoppingCategoryCacheModel.name;
+
+		if ((name != null) && (name.length() == 0)) {
 			shoppingCategoryCacheModel.name = null;
 		}
 
 		shoppingCategoryCacheModel.description = getDescription();
 
-		if ((shoppingCategoryCacheModel.description != null) &&
-				(shoppingCategoryCacheModel.description.length() == 0)) {
+		String description = shoppingCategoryCacheModel.description;
+
+		if ((description != null) && (description.length() == 0)) {
 			shoppingCategoryCacheModel.description = null;
 		}
 

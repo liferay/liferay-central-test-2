@@ -671,19 +671,25 @@ public class AssetCategoryModelImpl extends BaseModelImpl<AssetCategory>
 
 		assetCategoryCacheModel.uuid = getUuid();
 
-		if ((assetCategoryCacheModel.uuid != null) &&
-				(assetCategoryCacheModel.uuid.length() == 0)) {
+		String uuid = assetCategoryCacheModel.uuid;
+
+		if ((uuid != null) && (uuid.length() == 0)) {
 			assetCategoryCacheModel.uuid = null;
 		}
 
 		assetCategoryCacheModel.categoryId = getCategoryId();
+
 		assetCategoryCacheModel.groupId = getGroupId();
+
 		assetCategoryCacheModel.companyId = getCompanyId();
+
 		assetCategoryCacheModel.userId = getUserId();
+
 		assetCategoryCacheModel.userName = getUserName();
 
-		if ((assetCategoryCacheModel.userName != null) &&
-				(assetCategoryCacheModel.userName.length() == 0)) {
+		String userName = assetCategoryCacheModel.userName;
+
+		if ((userName != null) && (userName.length() == 0)) {
 			assetCategoryCacheModel.userName = null;
 		}
 
@@ -700,26 +706,32 @@ public class AssetCategoryModelImpl extends BaseModelImpl<AssetCategory>
 		}
 
 		assetCategoryCacheModel.parentCategoryId = getParentCategoryId();
+
 		assetCategoryCacheModel.leftCategoryId = getLeftCategoryId();
+
 		assetCategoryCacheModel.rightCategoryId = getRightCategoryId();
+
 		assetCategoryCacheModel.name = getName();
 
-		if ((assetCategoryCacheModel.name != null) &&
-				(assetCategoryCacheModel.name.length() == 0)) {
+		String name = assetCategoryCacheModel.name;
+
+		if ((name != null) && (name.length() == 0)) {
 			assetCategoryCacheModel.name = null;
 		}
 
 		assetCategoryCacheModel.title = getTitle();
 
-		if ((assetCategoryCacheModel.title != null) &&
-				(assetCategoryCacheModel.title.length() == 0)) {
+		String title = assetCategoryCacheModel.title;
+
+		if ((title != null) && (title.length() == 0)) {
 			assetCategoryCacheModel.title = null;
 		}
 
 		assetCategoryCacheModel.description = getDescription();
 
-		if ((assetCategoryCacheModel.description != null) &&
-				(assetCategoryCacheModel.description.length() == 0)) {
+		String description = assetCategoryCacheModel.description;
+
+		if ((description != null) && (description.length() == 0)) {
 			assetCategoryCacheModel.description = null;
 		}
 

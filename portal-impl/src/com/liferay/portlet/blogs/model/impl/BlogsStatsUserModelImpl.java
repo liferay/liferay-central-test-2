@@ -340,9 +340,13 @@ public class BlogsStatsUserModelImpl extends BaseModelImpl<BlogsStatsUser>
 		BlogsStatsUserCacheModel blogsStatsUserCacheModel = new BlogsStatsUserCacheModel();
 
 		blogsStatsUserCacheModel.statsUserId = getStatsUserId();
+
 		blogsStatsUserCacheModel.groupId = getGroupId();
+
 		blogsStatsUserCacheModel.companyId = getCompanyId();
+
 		blogsStatsUserCacheModel.userId = getUserId();
+
 		blogsStatsUserCacheModel.entryCount = getEntryCount();
 
 		Date lastPostDate = getLastPostDate();
@@ -352,7 +356,9 @@ public class BlogsStatsUserModelImpl extends BaseModelImpl<BlogsStatsUser>
 		}
 
 		blogsStatsUserCacheModel.ratingsTotalEntries = getRatingsTotalEntries();
+
 		blogsStatsUserCacheModel.ratingsTotalScore = getRatingsTotalScore();
+
 		blogsStatsUserCacheModel.ratingsAverageScore = getRatingsAverageScore();
 
 		return blogsStatsUserCacheModel;

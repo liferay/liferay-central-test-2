@@ -512,19 +512,25 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut>
 
 		dlFileShortcutCacheModel.uuid = getUuid();
 
-		if ((dlFileShortcutCacheModel.uuid != null) &&
-				(dlFileShortcutCacheModel.uuid.length() == 0)) {
+		String uuid = dlFileShortcutCacheModel.uuid;
+
+		if ((uuid != null) && (uuid.length() == 0)) {
 			dlFileShortcutCacheModel.uuid = null;
 		}
 
 		dlFileShortcutCacheModel.fileShortcutId = getFileShortcutId();
+
 		dlFileShortcutCacheModel.groupId = getGroupId();
+
 		dlFileShortcutCacheModel.companyId = getCompanyId();
+
 		dlFileShortcutCacheModel.userId = getUserId();
+
 		dlFileShortcutCacheModel.userName = getUserName();
 
-		if ((dlFileShortcutCacheModel.userName != null) &&
-				(dlFileShortcutCacheModel.userName.length() == 0)) {
+		String userName = dlFileShortcutCacheModel.userName;
+
+		if ((userName != null) && (userName.length() == 0)) {
 			dlFileShortcutCacheModel.userName = null;
 		}
 
@@ -541,14 +547,20 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut>
 		}
 
 		dlFileShortcutCacheModel.repositoryId = getRepositoryId();
+
 		dlFileShortcutCacheModel.folderId = getFolderId();
+
 		dlFileShortcutCacheModel.toFileEntryId = getToFileEntryId();
+
 		dlFileShortcutCacheModel.status = getStatus();
+
 		dlFileShortcutCacheModel.statusByUserId = getStatusByUserId();
+
 		dlFileShortcutCacheModel.statusByUserName = getStatusByUserName();
 
-		if ((dlFileShortcutCacheModel.statusByUserName != null) &&
-				(dlFileShortcutCacheModel.statusByUserName.length() == 0)) {
+		String statusByUserName = dlFileShortcutCacheModel.statusByUserName;
+
+		if ((statusByUserName != null) && (statusByUserName.length() == 0)) {
 			dlFileShortcutCacheModel.statusByUserName = null;
 		}
 

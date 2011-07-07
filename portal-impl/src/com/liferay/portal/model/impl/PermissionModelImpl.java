@@ -310,11 +310,14 @@ public class PermissionModelImpl extends BaseModelImpl<Permission>
 		PermissionCacheModel permissionCacheModel = new PermissionCacheModel();
 
 		permissionCacheModel.permissionId = getPermissionId();
+
 		permissionCacheModel.companyId = getCompanyId();
+
 		permissionCacheModel.actionId = getActionId();
 
-		if ((permissionCacheModel.actionId != null) &&
-				(permissionCacheModel.actionId.length() == 0)) {
+		String actionId = permissionCacheModel.actionId;
+
+		if ((actionId != null) && (actionId.length() == 0)) {
 			permissionCacheModel.actionId = null;
 		}
 

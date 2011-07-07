@@ -321,14 +321,23 @@ public class ShoppingItemPriceModelImpl extends BaseModelImpl<ShoppingItemPrice>
 		ShoppingItemPriceCacheModel shoppingItemPriceCacheModel = new ShoppingItemPriceCacheModel();
 
 		shoppingItemPriceCacheModel.itemPriceId = getItemPriceId();
+
 		shoppingItemPriceCacheModel.itemId = getItemId();
+
 		shoppingItemPriceCacheModel.minQuantity = getMinQuantity();
+
 		shoppingItemPriceCacheModel.maxQuantity = getMaxQuantity();
+
 		shoppingItemPriceCacheModel.price = getPrice();
+
 		shoppingItemPriceCacheModel.discount = getDiscount();
+
 		shoppingItemPriceCacheModel.taxable = getTaxable();
+
 		shoppingItemPriceCacheModel.shipping = getShipping();
+
 		shoppingItemPriceCacheModel.useShippingFormula = getUseShippingFormula();
+
 		shoppingItemPriceCacheModel.status = getStatus();
 
 		return shoppingItemPriceCacheModel;

@@ -461,51 +461,64 @@ public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet>
 		LayoutSetCacheModel layoutSetCacheModel = new LayoutSetCacheModel();
 
 		layoutSetCacheModel.layoutSetId = getLayoutSetId();
+
 		layoutSetCacheModel.groupId = getGroupId();
+
 		layoutSetCacheModel.companyId = getCompanyId();
+
 		layoutSetCacheModel.privateLayout = getPrivateLayout();
+
 		layoutSetCacheModel.logo = getLogo();
+
 		layoutSetCacheModel.logoId = getLogoId();
+
 		layoutSetCacheModel.themeId = getThemeId();
 
-		if ((layoutSetCacheModel.themeId != null) &&
-				(layoutSetCacheModel.themeId.length() == 0)) {
+		String themeId = layoutSetCacheModel.themeId;
+
+		if ((themeId != null) && (themeId.length() == 0)) {
 			layoutSetCacheModel.themeId = null;
 		}
 
 		layoutSetCacheModel.colorSchemeId = getColorSchemeId();
 
-		if ((layoutSetCacheModel.colorSchemeId != null) &&
-				(layoutSetCacheModel.colorSchemeId.length() == 0)) {
+		String colorSchemeId = layoutSetCacheModel.colorSchemeId;
+
+		if ((colorSchemeId != null) && (colorSchemeId.length() == 0)) {
 			layoutSetCacheModel.colorSchemeId = null;
 		}
 
 		layoutSetCacheModel.wapThemeId = getWapThemeId();
 
-		if ((layoutSetCacheModel.wapThemeId != null) &&
-				(layoutSetCacheModel.wapThemeId.length() == 0)) {
+		String wapThemeId = layoutSetCacheModel.wapThemeId;
+
+		if ((wapThemeId != null) && (wapThemeId.length() == 0)) {
 			layoutSetCacheModel.wapThemeId = null;
 		}
 
 		layoutSetCacheModel.wapColorSchemeId = getWapColorSchemeId();
 
-		if ((layoutSetCacheModel.wapColorSchemeId != null) &&
-				(layoutSetCacheModel.wapColorSchemeId.length() == 0)) {
+		String wapColorSchemeId = layoutSetCacheModel.wapColorSchemeId;
+
+		if ((wapColorSchemeId != null) && (wapColorSchemeId.length() == 0)) {
 			layoutSetCacheModel.wapColorSchemeId = null;
 		}
 
 		layoutSetCacheModel.css = getCss();
 
-		if ((layoutSetCacheModel.css != null) &&
-				(layoutSetCacheModel.css.length() == 0)) {
+		String css = layoutSetCacheModel.css;
+
+		if ((css != null) && (css.length() == 0)) {
 			layoutSetCacheModel.css = null;
 		}
 
 		layoutSetCacheModel.pageCount = getPageCount();
+
 		layoutSetCacheModel.settings = getSettings();
 
-		if ((layoutSetCacheModel.settings != null) &&
-				(layoutSetCacheModel.settings.length() == 0)) {
+		String settings = layoutSetCacheModel.settings;
+
+		if ((settings != null) && (settings.length() == 0)) {
 			layoutSetCacheModel.settings = null;
 		}
 

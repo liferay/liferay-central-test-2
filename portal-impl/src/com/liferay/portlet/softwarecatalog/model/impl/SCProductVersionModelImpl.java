@@ -431,12 +431,16 @@ public class SCProductVersionModelImpl extends BaseModelImpl<SCProductVersion>
 		SCProductVersionCacheModel scProductVersionCacheModel = new SCProductVersionCacheModel();
 
 		scProductVersionCacheModel.productVersionId = getProductVersionId();
+
 		scProductVersionCacheModel.companyId = getCompanyId();
+
 		scProductVersionCacheModel.userId = getUserId();
+
 		scProductVersionCacheModel.userName = getUserName();
 
-		if ((scProductVersionCacheModel.userName != null) &&
-				(scProductVersionCacheModel.userName.length() == 0)) {
+		String userName = scProductVersionCacheModel.userName;
+
+		if ((userName != null) && (userName.length() == 0)) {
 			scProductVersionCacheModel.userName = null;
 		}
 
@@ -453,31 +457,36 @@ public class SCProductVersionModelImpl extends BaseModelImpl<SCProductVersion>
 		}
 
 		scProductVersionCacheModel.productEntryId = getProductEntryId();
+
 		scProductVersionCacheModel.version = getVersion();
 
-		if ((scProductVersionCacheModel.version != null) &&
-				(scProductVersionCacheModel.version.length() == 0)) {
+		String version = scProductVersionCacheModel.version;
+
+		if ((version != null) && (version.length() == 0)) {
 			scProductVersionCacheModel.version = null;
 		}
 
 		scProductVersionCacheModel.changeLog = getChangeLog();
 
-		if ((scProductVersionCacheModel.changeLog != null) &&
-				(scProductVersionCacheModel.changeLog.length() == 0)) {
+		String changeLog = scProductVersionCacheModel.changeLog;
+
+		if ((changeLog != null) && (changeLog.length() == 0)) {
 			scProductVersionCacheModel.changeLog = null;
 		}
 
 		scProductVersionCacheModel.downloadPageURL = getDownloadPageURL();
 
-		if ((scProductVersionCacheModel.downloadPageURL != null) &&
-				(scProductVersionCacheModel.downloadPageURL.length() == 0)) {
+		String downloadPageURL = scProductVersionCacheModel.downloadPageURL;
+
+		if ((downloadPageURL != null) && (downloadPageURL.length() == 0)) {
 			scProductVersionCacheModel.downloadPageURL = null;
 		}
 
 		scProductVersionCacheModel.directDownloadURL = getDirectDownloadURL();
 
-		if ((scProductVersionCacheModel.directDownloadURL != null) &&
-				(scProductVersionCacheModel.directDownloadURL.length() == 0)) {
+		String directDownloadURL = scProductVersionCacheModel.directDownloadURL;
+
+		if ((directDownloadURL != null) && (directDownloadURL.length() == 0)) {
 			scProductVersionCacheModel.directDownloadURL = null;
 		}
 

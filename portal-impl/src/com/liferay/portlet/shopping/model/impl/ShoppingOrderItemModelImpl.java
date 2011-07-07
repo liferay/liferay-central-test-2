@@ -325,43 +325,51 @@ public class ShoppingOrderItemModelImpl extends BaseModelImpl<ShoppingOrderItem>
 		ShoppingOrderItemCacheModel shoppingOrderItemCacheModel = new ShoppingOrderItemCacheModel();
 
 		shoppingOrderItemCacheModel.orderItemId = getOrderItemId();
+
 		shoppingOrderItemCacheModel.orderId = getOrderId();
+
 		shoppingOrderItemCacheModel.itemId = getItemId();
 
-		if ((shoppingOrderItemCacheModel.itemId != null) &&
-				(shoppingOrderItemCacheModel.itemId.length() == 0)) {
+		String itemId = shoppingOrderItemCacheModel.itemId;
+
+		if ((itemId != null) && (itemId.length() == 0)) {
 			shoppingOrderItemCacheModel.itemId = null;
 		}
 
 		shoppingOrderItemCacheModel.sku = getSku();
 
-		if ((shoppingOrderItemCacheModel.sku != null) &&
-				(shoppingOrderItemCacheModel.sku.length() == 0)) {
+		String sku = shoppingOrderItemCacheModel.sku;
+
+		if ((sku != null) && (sku.length() == 0)) {
 			shoppingOrderItemCacheModel.sku = null;
 		}
 
 		shoppingOrderItemCacheModel.name = getName();
 
-		if ((shoppingOrderItemCacheModel.name != null) &&
-				(shoppingOrderItemCacheModel.name.length() == 0)) {
+		String name = shoppingOrderItemCacheModel.name;
+
+		if ((name != null) && (name.length() == 0)) {
 			shoppingOrderItemCacheModel.name = null;
 		}
 
 		shoppingOrderItemCacheModel.description = getDescription();
 
-		if ((shoppingOrderItemCacheModel.description != null) &&
-				(shoppingOrderItemCacheModel.description.length() == 0)) {
+		String description = shoppingOrderItemCacheModel.description;
+
+		if ((description != null) && (description.length() == 0)) {
 			shoppingOrderItemCacheModel.description = null;
 		}
 
 		shoppingOrderItemCacheModel.properties = getProperties();
 
-		if ((shoppingOrderItemCacheModel.properties != null) &&
-				(shoppingOrderItemCacheModel.properties.length() == 0)) {
+		String properties = shoppingOrderItemCacheModel.properties;
+
+		if ((properties != null) && (properties.length() == 0)) {
 			shoppingOrderItemCacheModel.properties = null;
 		}
 
 		shoppingOrderItemCacheModel.price = getPrice();
+
 		shoppingOrderItemCacheModel.quantity = getQuantity();
 
 		Date shippedDate = getShippedDate();

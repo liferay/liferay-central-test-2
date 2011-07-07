@@ -400,25 +400,30 @@ public class LayoutPrototypeModelImpl extends BaseModelImpl<LayoutPrototype>
 		LayoutPrototypeCacheModel layoutPrototypeCacheModel = new LayoutPrototypeCacheModel();
 
 		layoutPrototypeCacheModel.layoutPrototypeId = getLayoutPrototypeId();
+
 		layoutPrototypeCacheModel.companyId = getCompanyId();
+
 		layoutPrototypeCacheModel.name = getName();
 
-		if ((layoutPrototypeCacheModel.name != null) &&
-				(layoutPrototypeCacheModel.name.length() == 0)) {
+		String name = layoutPrototypeCacheModel.name;
+
+		if ((name != null) && (name.length() == 0)) {
 			layoutPrototypeCacheModel.name = null;
 		}
 
 		layoutPrototypeCacheModel.description = getDescription();
 
-		if ((layoutPrototypeCacheModel.description != null) &&
-				(layoutPrototypeCacheModel.description.length() == 0)) {
+		String description = layoutPrototypeCacheModel.description;
+
+		if ((description != null) && (description.length() == 0)) {
 			layoutPrototypeCacheModel.description = null;
 		}
 
 		layoutPrototypeCacheModel.settings = getSettings();
 
-		if ((layoutPrototypeCacheModel.settings != null) &&
-				(layoutPrototypeCacheModel.settings.length() == 0)) {
+		String settings = layoutPrototypeCacheModel.settings;
+
+		if ((settings != null) && (settings.length() == 0)) {
 			layoutPrototypeCacheModel.settings = null;
 		}
 

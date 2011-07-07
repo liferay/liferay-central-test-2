@@ -267,12 +267,16 @@ public class ExpandoTableModelImpl extends BaseModelImpl<ExpandoTable>
 		ExpandoTableCacheModel expandoTableCacheModel = new ExpandoTableCacheModel();
 
 		expandoTableCacheModel.tableId = getTableId();
+
 		expandoTableCacheModel.companyId = getCompanyId();
+
 		expandoTableCacheModel.classNameId = getClassNameId();
+
 		expandoTableCacheModel.name = getName();
 
-		if ((expandoTableCacheModel.name != null) &&
-				(expandoTableCacheModel.name.length() == 0)) {
+		String name = expandoTableCacheModel.name;
+
+		if ((name != null) && (name.length() == 0)) {
 			expandoTableCacheModel.name = null;
 		}
 

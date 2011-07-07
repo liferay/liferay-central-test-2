@@ -616,19 +616,25 @@ public class DDLRecordSetModelImpl extends BaseModelImpl<DDLRecordSet>
 
 		ddlRecordSetCacheModel.uuid = getUuid();
 
-		if ((ddlRecordSetCacheModel.uuid != null) &&
-				(ddlRecordSetCacheModel.uuid.length() == 0)) {
+		String uuid = ddlRecordSetCacheModel.uuid;
+
+		if ((uuid != null) && (uuid.length() == 0)) {
 			ddlRecordSetCacheModel.uuid = null;
 		}
 
 		ddlRecordSetCacheModel.recordSetId = getRecordSetId();
+
 		ddlRecordSetCacheModel.groupId = getGroupId();
+
 		ddlRecordSetCacheModel.companyId = getCompanyId();
+
 		ddlRecordSetCacheModel.userId = getUserId();
+
 		ddlRecordSetCacheModel.userName = getUserName();
 
-		if ((ddlRecordSetCacheModel.userName != null) &&
-				(ddlRecordSetCacheModel.userName.length() == 0)) {
+		String userName = ddlRecordSetCacheModel.userName;
+
+		if ((userName != null) && (userName.length() == 0)) {
 			ddlRecordSetCacheModel.userName = null;
 		}
 
@@ -645,24 +651,28 @@ public class DDLRecordSetModelImpl extends BaseModelImpl<DDLRecordSet>
 		}
 
 		ddlRecordSetCacheModel.DDMStructureId = getDDMStructureId();
+
 		ddlRecordSetCacheModel.recordSetKey = getRecordSetKey();
 
-		if ((ddlRecordSetCacheModel.recordSetKey != null) &&
-				(ddlRecordSetCacheModel.recordSetKey.length() == 0)) {
+		String recordSetKey = ddlRecordSetCacheModel.recordSetKey;
+
+		if ((recordSetKey != null) && (recordSetKey.length() == 0)) {
 			ddlRecordSetCacheModel.recordSetKey = null;
 		}
 
 		ddlRecordSetCacheModel.name = getName();
 
-		if ((ddlRecordSetCacheModel.name != null) &&
-				(ddlRecordSetCacheModel.name.length() == 0)) {
+		String name = ddlRecordSetCacheModel.name;
+
+		if ((name != null) && (name.length() == 0)) {
 			ddlRecordSetCacheModel.name = null;
 		}
 
 		ddlRecordSetCacheModel.description = getDescription();
 
-		if ((ddlRecordSetCacheModel.description != null) &&
-				(ddlRecordSetCacheModel.description.length() == 0)) {
+		String description = ddlRecordSetCacheModel.description;
+
+		if ((description != null) && (description.length() == 0)) {
 			ddlRecordSetCacheModel.description = null;
 		}
 

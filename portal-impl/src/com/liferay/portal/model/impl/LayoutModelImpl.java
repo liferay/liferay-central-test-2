@@ -1121,13 +1121,16 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 
 		layoutCacheModel.uuid = getUuid();
 
-		if ((layoutCacheModel.uuid != null) &&
-				(layoutCacheModel.uuid.length() == 0)) {
+		String uuid = layoutCacheModel.uuid;
+
+		if ((uuid != null) && (uuid.length() == 0)) {
 			layoutCacheModel.uuid = null;
 		}
 
 		layoutCacheModel.plid = getPlid();
+
 		layoutCacheModel.groupId = getGroupId();
+
 		layoutCacheModel.companyId = getCompanyId();
 
 		Date createDate = getCreateDate();
@@ -1143,103 +1146,123 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 		}
 
 		layoutCacheModel.privateLayout = getPrivateLayout();
+
 		layoutCacheModel.layoutId = getLayoutId();
+
 		layoutCacheModel.parentLayoutId = getParentLayoutId();
+
 		layoutCacheModel.name = getName();
 
-		if ((layoutCacheModel.name != null) &&
-				(layoutCacheModel.name.length() == 0)) {
+		String name = layoutCacheModel.name;
+
+		if ((name != null) && (name.length() == 0)) {
 			layoutCacheModel.name = null;
 		}
 
 		layoutCacheModel.title = getTitle();
 
-		if ((layoutCacheModel.title != null) &&
-				(layoutCacheModel.title.length() == 0)) {
+		String title = layoutCacheModel.title;
+
+		if ((title != null) && (title.length() == 0)) {
 			layoutCacheModel.title = null;
 		}
 
 		layoutCacheModel.description = getDescription();
 
-		if ((layoutCacheModel.description != null) &&
-				(layoutCacheModel.description.length() == 0)) {
+		String description = layoutCacheModel.description;
+
+		if ((description != null) && (description.length() == 0)) {
 			layoutCacheModel.description = null;
 		}
 
 		layoutCacheModel.keywords = getKeywords();
 
-		if ((layoutCacheModel.keywords != null) &&
-				(layoutCacheModel.keywords.length() == 0)) {
+		String keywords = layoutCacheModel.keywords;
+
+		if ((keywords != null) && (keywords.length() == 0)) {
 			layoutCacheModel.keywords = null;
 		}
 
 		layoutCacheModel.robots = getRobots();
 
-		if ((layoutCacheModel.robots != null) &&
-				(layoutCacheModel.robots.length() == 0)) {
+		String robots = layoutCacheModel.robots;
+
+		if ((robots != null) && (robots.length() == 0)) {
 			layoutCacheModel.robots = null;
 		}
 
 		layoutCacheModel.type = getType();
 
-		if ((layoutCacheModel.type != null) &&
-				(layoutCacheModel.type.length() == 0)) {
+		String type = layoutCacheModel.type;
+
+		if ((type != null) && (type.length() == 0)) {
 			layoutCacheModel.type = null;
 		}
 
 		layoutCacheModel.typeSettings = getTypeSettings();
 
-		if ((layoutCacheModel.typeSettings != null) &&
-				(layoutCacheModel.typeSettings.length() == 0)) {
+		String typeSettings = layoutCacheModel.typeSettings;
+
+		if ((typeSettings != null) && (typeSettings.length() == 0)) {
 			layoutCacheModel.typeSettings = null;
 		}
 
 		layoutCacheModel.hidden = getHidden();
+
 		layoutCacheModel.friendlyURL = getFriendlyURL();
 
-		if ((layoutCacheModel.friendlyURL != null) &&
-				(layoutCacheModel.friendlyURL.length() == 0)) {
+		String friendlyURL = layoutCacheModel.friendlyURL;
+
+		if ((friendlyURL != null) && (friendlyURL.length() == 0)) {
 			layoutCacheModel.friendlyURL = null;
 		}
 
 		layoutCacheModel.iconImage = getIconImage();
+
 		layoutCacheModel.iconImageId = getIconImageId();
+
 		layoutCacheModel.themeId = getThemeId();
 
-		if ((layoutCacheModel.themeId != null) &&
-				(layoutCacheModel.themeId.length() == 0)) {
+		String themeId = layoutCacheModel.themeId;
+
+		if ((themeId != null) && (themeId.length() == 0)) {
 			layoutCacheModel.themeId = null;
 		}
 
 		layoutCacheModel.colorSchemeId = getColorSchemeId();
 
-		if ((layoutCacheModel.colorSchemeId != null) &&
-				(layoutCacheModel.colorSchemeId.length() == 0)) {
+		String colorSchemeId = layoutCacheModel.colorSchemeId;
+
+		if ((colorSchemeId != null) && (colorSchemeId.length() == 0)) {
 			layoutCacheModel.colorSchemeId = null;
 		}
 
 		layoutCacheModel.wapThemeId = getWapThemeId();
 
-		if ((layoutCacheModel.wapThemeId != null) &&
-				(layoutCacheModel.wapThemeId.length() == 0)) {
+		String wapThemeId = layoutCacheModel.wapThemeId;
+
+		if ((wapThemeId != null) && (wapThemeId.length() == 0)) {
 			layoutCacheModel.wapThemeId = null;
 		}
 
 		layoutCacheModel.wapColorSchemeId = getWapColorSchemeId();
 
-		if ((layoutCacheModel.wapColorSchemeId != null) &&
-				(layoutCacheModel.wapColorSchemeId.length() == 0)) {
+		String wapColorSchemeId = layoutCacheModel.wapColorSchemeId;
+
+		if ((wapColorSchemeId != null) && (wapColorSchemeId.length() == 0)) {
 			layoutCacheModel.wapColorSchemeId = null;
 		}
 
 		layoutCacheModel.css = getCss();
 
-		if ((layoutCacheModel.css != null) &&
-				(layoutCacheModel.css.length() == 0)) {
+		String css = layoutCacheModel.css;
+
+		if ((css != null) && (css.length() == 0)) {
 			layoutCacheModel.css = null;
 		}
 
 		layoutCacheModel.priority = getPriority();
+
 		layoutCacheModel.layoutPrototypeId = getLayoutPrototypeId();
 
 		return layoutCacheModel;

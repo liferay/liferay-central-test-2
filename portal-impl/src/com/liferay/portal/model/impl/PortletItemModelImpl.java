@@ -375,13 +375,18 @@ public class PortletItemModelImpl extends BaseModelImpl<PortletItem>
 		PortletItemCacheModel portletItemCacheModel = new PortletItemCacheModel();
 
 		portletItemCacheModel.portletItemId = getPortletItemId();
+
 		portletItemCacheModel.groupId = getGroupId();
+
 		portletItemCacheModel.companyId = getCompanyId();
+
 		portletItemCacheModel.userId = getUserId();
+
 		portletItemCacheModel.userName = getUserName();
 
-		if ((portletItemCacheModel.userName != null) &&
-				(portletItemCacheModel.userName.length() == 0)) {
+		String userName = portletItemCacheModel.userName;
+
+		if ((userName != null) && (userName.length() == 0)) {
 			portletItemCacheModel.userName = null;
 		}
 
@@ -399,15 +404,17 @@ public class PortletItemModelImpl extends BaseModelImpl<PortletItem>
 
 		portletItemCacheModel.name = getName();
 
-		if ((portletItemCacheModel.name != null) &&
-				(portletItemCacheModel.name.length() == 0)) {
+		String name = portletItemCacheModel.name;
+
+		if ((name != null) && (name.length() == 0)) {
 			portletItemCacheModel.name = null;
 		}
 
 		portletItemCacheModel.portletId = getPortletId();
 
-		if ((portletItemCacheModel.portletId != null) &&
-				(portletItemCacheModel.portletId.length() == 0)) {
+		String portletId = portletItemCacheModel.portletId;
+
+		if ((portletId != null) && (portletId.length() == 0)) {
 			portletItemCacheModel.portletId = null;
 		}
 

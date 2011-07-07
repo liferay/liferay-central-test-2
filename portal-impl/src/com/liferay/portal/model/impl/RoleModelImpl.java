@@ -509,35 +509,44 @@ public class RoleModelImpl extends BaseModelImpl<Role> implements RoleModel {
 		RoleCacheModel roleCacheModel = new RoleCacheModel();
 
 		roleCacheModel.roleId = getRoleId();
+
 		roleCacheModel.companyId = getCompanyId();
+
 		roleCacheModel.classNameId = getClassNameId();
+
 		roleCacheModel.classPK = getClassPK();
+
 		roleCacheModel.name = getName();
 
-		if ((roleCacheModel.name != null) &&
-				(roleCacheModel.name.length() == 0)) {
+		String name = roleCacheModel.name;
+
+		if ((name != null) && (name.length() == 0)) {
 			roleCacheModel.name = null;
 		}
 
 		roleCacheModel.title = getTitle();
 
-		if ((roleCacheModel.title != null) &&
-				(roleCacheModel.title.length() == 0)) {
+		String title = roleCacheModel.title;
+
+		if ((title != null) && (title.length() == 0)) {
 			roleCacheModel.title = null;
 		}
 
 		roleCacheModel.description = getDescription();
 
-		if ((roleCacheModel.description != null) &&
-				(roleCacheModel.description.length() == 0)) {
+		String description = roleCacheModel.description;
+
+		if ((description != null) && (description.length() == 0)) {
 			roleCacheModel.description = null;
 		}
 
 		roleCacheModel.type = getType();
+
 		roleCacheModel.subtype = getSubtype();
 
-		if ((roleCacheModel.subtype != null) &&
-				(roleCacheModel.subtype.length() == 0)) {
+		String subtype = roleCacheModel.subtype;
+
+		if ((subtype != null) && (subtype.length() == 0)) {
 			roleCacheModel.subtype = null;
 		}
 

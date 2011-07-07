@@ -300,8 +300,11 @@ public class DDMStructureLinkModelImpl extends BaseModelImpl<DDMStructureLink>
 		DDMStructureLinkCacheModel ddmStructureLinkCacheModel = new DDMStructureLinkCacheModel();
 
 		ddmStructureLinkCacheModel.structureLinkId = getStructureLinkId();
+
 		ddmStructureLinkCacheModel.classNameId = getClassNameId();
+
 		ddmStructureLinkCacheModel.classPK = getClassPK();
+
 		ddmStructureLinkCacheModel.structureId = getStructureId();
 
 		return ddmStructureLinkCacheModel;

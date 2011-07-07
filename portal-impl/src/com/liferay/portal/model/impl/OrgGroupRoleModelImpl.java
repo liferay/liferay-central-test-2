@@ -196,7 +196,9 @@ public class OrgGroupRoleModelImpl extends BaseModelImpl<OrgGroupRole>
 		OrgGroupRoleCacheModel orgGroupRoleCacheModel = new OrgGroupRoleCacheModel();
 
 		orgGroupRoleCacheModel.organizationId = getOrganizationId();
+
 		orgGroupRoleCacheModel.groupId = getGroupId();
+
 		orgGroupRoleCacheModel.roleId = getRoleId();
 
 		return orgGroupRoleCacheModel;

@@ -392,12 +392,16 @@ public class WebsiteModelImpl extends BaseModelImpl<Website>
 		WebsiteCacheModel websiteCacheModel = new WebsiteCacheModel();
 
 		websiteCacheModel.websiteId = getWebsiteId();
+
 		websiteCacheModel.companyId = getCompanyId();
+
 		websiteCacheModel.userId = getUserId();
+
 		websiteCacheModel.userName = getUserName();
 
-		if ((websiteCacheModel.userName != null) &&
-				(websiteCacheModel.userName.length() == 0)) {
+		String userName = websiteCacheModel.userName;
+
+		if ((userName != null) && (userName.length() == 0)) {
 			websiteCacheModel.userName = null;
 		}
 
@@ -414,15 +418,19 @@ public class WebsiteModelImpl extends BaseModelImpl<Website>
 		}
 
 		websiteCacheModel.classNameId = getClassNameId();
+
 		websiteCacheModel.classPK = getClassPK();
+
 		websiteCacheModel.url = getUrl();
 
-		if ((websiteCacheModel.url != null) &&
-				(websiteCacheModel.url.length() == 0)) {
+		String url = websiteCacheModel.url;
+
+		if ((url != null) && (url.length() == 0)) {
 			websiteCacheModel.url = null;
 		}
 
 		websiteCacheModel.typeId = getTypeId();
+
 		websiteCacheModel.primary = getPrimary();
 
 		return websiteCacheModel;

@@ -320,13 +320,18 @@ public class WorkflowInstanceLinkModelImpl extends BaseModelImpl<WorkflowInstanc
 		WorkflowInstanceLinkCacheModel workflowInstanceLinkCacheModel = new WorkflowInstanceLinkCacheModel();
 
 		workflowInstanceLinkCacheModel.workflowInstanceLinkId = getWorkflowInstanceLinkId();
+
 		workflowInstanceLinkCacheModel.groupId = getGroupId();
+
 		workflowInstanceLinkCacheModel.companyId = getCompanyId();
+
 		workflowInstanceLinkCacheModel.userId = getUserId();
+
 		workflowInstanceLinkCacheModel.userName = getUserName();
 
-		if ((workflowInstanceLinkCacheModel.userName != null) &&
-				(workflowInstanceLinkCacheModel.userName.length() == 0)) {
+		String userName = workflowInstanceLinkCacheModel.userName;
+
+		if ((userName != null) && (userName.length() == 0)) {
 			workflowInstanceLinkCacheModel.userName = null;
 		}
 
@@ -343,7 +348,9 @@ public class WorkflowInstanceLinkModelImpl extends BaseModelImpl<WorkflowInstanc
 		}
 
 		workflowInstanceLinkCacheModel.classNameId = getClassNameId();
+
 		workflowInstanceLinkCacheModel.classPK = getClassPK();
+
 		workflowInstanceLinkCacheModel.workflowInstanceId = getWorkflowInstanceId();
 
 		return workflowInstanceLinkCacheModel;

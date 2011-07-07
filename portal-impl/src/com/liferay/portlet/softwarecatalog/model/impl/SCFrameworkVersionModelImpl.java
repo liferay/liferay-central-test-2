@@ -405,13 +405,18 @@ public class SCFrameworkVersionModelImpl extends BaseModelImpl<SCFrameworkVersio
 		SCFrameworkVersionCacheModel scFrameworkVersionCacheModel = new SCFrameworkVersionCacheModel();
 
 		scFrameworkVersionCacheModel.frameworkVersionId = getFrameworkVersionId();
+
 		scFrameworkVersionCacheModel.groupId = getGroupId();
+
 		scFrameworkVersionCacheModel.companyId = getCompanyId();
+
 		scFrameworkVersionCacheModel.userId = getUserId();
+
 		scFrameworkVersionCacheModel.userName = getUserName();
 
-		if ((scFrameworkVersionCacheModel.userName != null) &&
-				(scFrameworkVersionCacheModel.userName.length() == 0)) {
+		String userName = scFrameworkVersionCacheModel.userName;
+
+		if ((userName != null) && (userName.length() == 0)) {
 			scFrameworkVersionCacheModel.userName = null;
 		}
 
@@ -429,19 +434,22 @@ public class SCFrameworkVersionModelImpl extends BaseModelImpl<SCFrameworkVersio
 
 		scFrameworkVersionCacheModel.name = getName();
 
-		if ((scFrameworkVersionCacheModel.name != null) &&
-				(scFrameworkVersionCacheModel.name.length() == 0)) {
+		String name = scFrameworkVersionCacheModel.name;
+
+		if ((name != null) && (name.length() == 0)) {
 			scFrameworkVersionCacheModel.name = null;
 		}
 
 		scFrameworkVersionCacheModel.url = getUrl();
 
-		if ((scFrameworkVersionCacheModel.url != null) &&
-				(scFrameworkVersionCacheModel.url.length() == 0)) {
+		String url = scFrameworkVersionCacheModel.url;
+
+		if ((url != null) && (url.length() == 0)) {
 			scFrameworkVersionCacheModel.url = null;
 		}
 
 		scFrameworkVersionCacheModel.active = getActive();
+
 		scFrameworkVersionCacheModel.priority = getPriority();
 
 		return scFrameworkVersionCacheModel;

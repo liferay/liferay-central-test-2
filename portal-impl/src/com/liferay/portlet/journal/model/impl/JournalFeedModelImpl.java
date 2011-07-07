@@ -625,19 +625,25 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed>
 
 		journalFeedCacheModel.uuid = getUuid();
 
-		if ((journalFeedCacheModel.uuid != null) &&
-				(journalFeedCacheModel.uuid.length() == 0)) {
+		String uuid = journalFeedCacheModel.uuid;
+
+		if ((uuid != null) && (uuid.length() == 0)) {
 			journalFeedCacheModel.uuid = null;
 		}
 
 		journalFeedCacheModel.id = getId();
+
 		journalFeedCacheModel.groupId = getGroupId();
+
 		journalFeedCacheModel.companyId = getCompanyId();
+
 		journalFeedCacheModel.userId = getUserId();
+
 		journalFeedCacheModel.userName = getUserName();
 
-		if ((journalFeedCacheModel.userName != null) &&
-				(journalFeedCacheModel.userName.length() == 0)) {
+		String userName = journalFeedCacheModel.userName;
+
+		if ((userName != null) && (userName.length() == 0)) {
 			journalFeedCacheModel.userName = null;
 		}
 
@@ -655,93 +661,108 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed>
 
 		journalFeedCacheModel.feedId = getFeedId();
 
-		if ((journalFeedCacheModel.feedId != null) &&
-				(journalFeedCacheModel.feedId.length() == 0)) {
+		String feedId = journalFeedCacheModel.feedId;
+
+		if ((feedId != null) && (feedId.length() == 0)) {
 			journalFeedCacheModel.feedId = null;
 		}
 
 		journalFeedCacheModel.name = getName();
 
-		if ((journalFeedCacheModel.name != null) &&
-				(journalFeedCacheModel.name.length() == 0)) {
+		String name = journalFeedCacheModel.name;
+
+		if ((name != null) && (name.length() == 0)) {
 			journalFeedCacheModel.name = null;
 		}
 
 		journalFeedCacheModel.description = getDescription();
 
-		if ((journalFeedCacheModel.description != null) &&
-				(journalFeedCacheModel.description.length() == 0)) {
+		String description = journalFeedCacheModel.description;
+
+		if ((description != null) && (description.length() == 0)) {
 			journalFeedCacheModel.description = null;
 		}
 
 		journalFeedCacheModel.type = getType();
 
-		if ((journalFeedCacheModel.type != null) &&
-				(journalFeedCacheModel.type.length() == 0)) {
+		String type = journalFeedCacheModel.type;
+
+		if ((type != null) && (type.length() == 0)) {
 			journalFeedCacheModel.type = null;
 		}
 
 		journalFeedCacheModel.structureId = getStructureId();
 
-		if ((journalFeedCacheModel.structureId != null) &&
-				(journalFeedCacheModel.structureId.length() == 0)) {
+		String structureId = journalFeedCacheModel.structureId;
+
+		if ((structureId != null) && (structureId.length() == 0)) {
 			journalFeedCacheModel.structureId = null;
 		}
 
 		journalFeedCacheModel.templateId = getTemplateId();
 
-		if ((journalFeedCacheModel.templateId != null) &&
-				(journalFeedCacheModel.templateId.length() == 0)) {
+		String templateId = journalFeedCacheModel.templateId;
+
+		if ((templateId != null) && (templateId.length() == 0)) {
 			journalFeedCacheModel.templateId = null;
 		}
 
 		journalFeedCacheModel.rendererTemplateId = getRendererTemplateId();
 
-		if ((journalFeedCacheModel.rendererTemplateId != null) &&
-				(journalFeedCacheModel.rendererTemplateId.length() == 0)) {
+		String rendererTemplateId = journalFeedCacheModel.rendererTemplateId;
+
+		if ((rendererTemplateId != null) && (rendererTemplateId.length() == 0)) {
 			journalFeedCacheModel.rendererTemplateId = null;
 		}
 
 		journalFeedCacheModel.delta = getDelta();
+
 		journalFeedCacheModel.orderByCol = getOrderByCol();
 
-		if ((journalFeedCacheModel.orderByCol != null) &&
-				(journalFeedCacheModel.orderByCol.length() == 0)) {
+		String orderByCol = journalFeedCacheModel.orderByCol;
+
+		if ((orderByCol != null) && (orderByCol.length() == 0)) {
 			journalFeedCacheModel.orderByCol = null;
 		}
 
 		journalFeedCacheModel.orderByType = getOrderByType();
 
-		if ((journalFeedCacheModel.orderByType != null) &&
-				(journalFeedCacheModel.orderByType.length() == 0)) {
+		String orderByType = journalFeedCacheModel.orderByType;
+
+		if ((orderByType != null) && (orderByType.length() == 0)) {
 			journalFeedCacheModel.orderByType = null;
 		}
 
 		journalFeedCacheModel.targetLayoutFriendlyUrl = getTargetLayoutFriendlyUrl();
 
-		if ((journalFeedCacheModel.targetLayoutFriendlyUrl != null) &&
-				(journalFeedCacheModel.targetLayoutFriendlyUrl.length() == 0)) {
+		String targetLayoutFriendlyUrl = journalFeedCacheModel.targetLayoutFriendlyUrl;
+
+		if ((targetLayoutFriendlyUrl != null) &&
+				(targetLayoutFriendlyUrl.length() == 0)) {
 			journalFeedCacheModel.targetLayoutFriendlyUrl = null;
 		}
 
 		journalFeedCacheModel.targetPortletId = getTargetPortletId();
 
-		if ((journalFeedCacheModel.targetPortletId != null) &&
-				(journalFeedCacheModel.targetPortletId.length() == 0)) {
+		String targetPortletId = journalFeedCacheModel.targetPortletId;
+
+		if ((targetPortletId != null) && (targetPortletId.length() == 0)) {
 			journalFeedCacheModel.targetPortletId = null;
 		}
 
 		journalFeedCacheModel.contentField = getContentField();
 
-		if ((journalFeedCacheModel.contentField != null) &&
-				(journalFeedCacheModel.contentField.length() == 0)) {
+		String contentField = journalFeedCacheModel.contentField;
+
+		if ((contentField != null) && (contentField.length() == 0)) {
 			journalFeedCacheModel.contentField = null;
 		}
 
 		journalFeedCacheModel.feedType = getFeedType();
 
-		if ((journalFeedCacheModel.feedType != null) &&
-				(journalFeedCacheModel.feedType.length() == 0)) {
+		String feedType = journalFeedCacheModel.feedType;
+
+		if ((feedType != null) && (feedType.length() == 0)) {
 			journalFeedCacheModel.feedType = null;
 		}
 

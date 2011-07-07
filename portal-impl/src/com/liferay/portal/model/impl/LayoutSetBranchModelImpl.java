@@ -416,13 +416,18 @@ public class LayoutSetBranchModelImpl extends BaseModelImpl<LayoutSetBranch>
 		LayoutSetBranchCacheModel layoutSetBranchCacheModel = new LayoutSetBranchCacheModel();
 
 		layoutSetBranchCacheModel.layoutSetBranchId = getLayoutSetBranchId();
+
 		layoutSetBranchCacheModel.groupId = getGroupId();
+
 		layoutSetBranchCacheModel.companyId = getCompanyId();
+
 		layoutSetBranchCacheModel.userId = getUserId();
+
 		layoutSetBranchCacheModel.userName = getUserName();
 
-		if ((layoutSetBranchCacheModel.userName != null) &&
-				(layoutSetBranchCacheModel.userName.length() == 0)) {
+		String userName = layoutSetBranchCacheModel.userName;
+
+		if ((userName != null) && (userName.length() == 0)) {
 			layoutSetBranchCacheModel.userName = null;
 		}
 
@@ -439,17 +444,20 @@ public class LayoutSetBranchModelImpl extends BaseModelImpl<LayoutSetBranch>
 		}
 
 		layoutSetBranchCacheModel.privateLayout = getPrivateLayout();
+
 		layoutSetBranchCacheModel.name = getName();
 
-		if ((layoutSetBranchCacheModel.name != null) &&
-				(layoutSetBranchCacheModel.name.length() == 0)) {
+		String name = layoutSetBranchCacheModel.name;
+
+		if ((name != null) && (name.length() == 0)) {
 			layoutSetBranchCacheModel.name = null;
 		}
 
 		layoutSetBranchCacheModel.description = getDescription();
 
-		if ((layoutSetBranchCacheModel.description != null) &&
-				(layoutSetBranchCacheModel.description.length() == 0)) {
+		String description = layoutSetBranchCacheModel.description;
+
+		if ((description != null) && (description.length() == 0)) {
 			layoutSetBranchCacheModel.description = null;
 		}
 

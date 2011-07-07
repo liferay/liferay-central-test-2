@@ -457,18 +457,28 @@ public class SocialActivityModelImpl extends BaseModelImpl<SocialActivity>
 		SocialActivityCacheModel socialActivityCacheModel = new SocialActivityCacheModel();
 
 		socialActivityCacheModel.activityId = getActivityId();
+
 		socialActivityCacheModel.groupId = getGroupId();
+
 		socialActivityCacheModel.companyId = getCompanyId();
+
 		socialActivityCacheModel.userId = getUserId();
+
 		socialActivityCacheModel.createDate = getCreateDate();
+
 		socialActivityCacheModel.mirrorActivityId = getMirrorActivityId();
+
 		socialActivityCacheModel.classNameId = getClassNameId();
+
 		socialActivityCacheModel.classPK = getClassPK();
+
 		socialActivityCacheModel.type = getType();
+
 		socialActivityCacheModel.extraData = getExtraData();
 
-		if ((socialActivityCacheModel.extraData != null) &&
-				(socialActivityCacheModel.extraData.length() == 0)) {
+		String extraData = socialActivityCacheModel.extraData;
+
+		if ((extraData != null) && (extraData.length() == 0)) {
 			socialActivityCacheModel.extraData = null;
 		}
 

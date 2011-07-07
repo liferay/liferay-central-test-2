@@ -301,18 +301,23 @@ public class RepositoryEntryModelImpl extends BaseModelImpl<RepositoryEntry>
 
 		repositoryEntryCacheModel.uuid = getUuid();
 
-		if ((repositoryEntryCacheModel.uuid != null) &&
-				(repositoryEntryCacheModel.uuid.length() == 0)) {
+		String uuid = repositoryEntryCacheModel.uuid;
+
+		if ((uuid != null) && (uuid.length() == 0)) {
 			repositoryEntryCacheModel.uuid = null;
 		}
 
 		repositoryEntryCacheModel.repositoryEntryId = getRepositoryEntryId();
+
 		repositoryEntryCacheModel.groupId = getGroupId();
+
 		repositoryEntryCacheModel.repositoryId = getRepositoryId();
+
 		repositoryEntryCacheModel.mappedId = getMappedId();
 
-		if ((repositoryEntryCacheModel.mappedId != null) &&
-				(repositoryEntryCacheModel.mappedId.length() == 0)) {
+		String mappedId = repositoryEntryCacheModel.mappedId;
+
+		if ((mappedId != null) && (mappedId.length() == 0)) {
 			repositoryEntryCacheModel.mappedId = null;
 		}
 

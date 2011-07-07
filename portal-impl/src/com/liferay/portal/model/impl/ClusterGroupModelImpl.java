@@ -245,17 +245,20 @@ public class ClusterGroupModelImpl extends BaseModelImpl<ClusterGroup>
 		ClusterGroupCacheModel clusterGroupCacheModel = new ClusterGroupCacheModel();
 
 		clusterGroupCacheModel.clusterGroupId = getClusterGroupId();
+
 		clusterGroupCacheModel.name = getName();
 
-		if ((clusterGroupCacheModel.name != null) &&
-				(clusterGroupCacheModel.name.length() == 0)) {
+		String name = clusterGroupCacheModel.name;
+
+		if ((name != null) && (name.length() == 0)) {
 			clusterGroupCacheModel.name = null;
 		}
 
 		clusterGroupCacheModel.clusterNodeIds = getClusterNodeIds();
 
-		if ((clusterGroupCacheModel.clusterNodeIds != null) &&
-				(clusterGroupCacheModel.clusterNodeIds.length() == 0)) {
+		String clusterNodeIds = clusterGroupCacheModel.clusterNodeIds;
+
+		if ((clusterNodeIds != null) && (clusterNodeIds.length() == 0)) {
 			clusterGroupCacheModel.clusterNodeIds = null;
 		}
 

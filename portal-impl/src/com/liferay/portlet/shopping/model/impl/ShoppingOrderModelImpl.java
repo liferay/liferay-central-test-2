@@ -1060,13 +1060,18 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		ShoppingOrderCacheModel shoppingOrderCacheModel = new ShoppingOrderCacheModel();
 
 		shoppingOrderCacheModel.orderId = getOrderId();
+
 		shoppingOrderCacheModel.groupId = getGroupId();
+
 		shoppingOrderCacheModel.companyId = getCompanyId();
+
 		shoppingOrderCacheModel.userId = getUserId();
+
 		shoppingOrderCacheModel.userName = getUserName();
 
-		if ((shoppingOrderCacheModel.userName != null) &&
-				(shoppingOrderCacheModel.userName.length() == 0)) {
+		String userName = shoppingOrderCacheModel.userName;
+
+		if ((userName != null) && (userName.length() == 0)) {
 			shoppingOrderCacheModel.userName = null;
 		}
 
@@ -1084,239 +1089,284 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 
 		shoppingOrderCacheModel.number = getNumber();
 
-		if ((shoppingOrderCacheModel.number != null) &&
-				(shoppingOrderCacheModel.number.length() == 0)) {
+		String number = shoppingOrderCacheModel.number;
+
+		if ((number != null) && (number.length() == 0)) {
 			shoppingOrderCacheModel.number = null;
 		}
 
 		shoppingOrderCacheModel.tax = getTax();
+
 		shoppingOrderCacheModel.shipping = getShipping();
+
 		shoppingOrderCacheModel.altShipping = getAltShipping();
 
-		if ((shoppingOrderCacheModel.altShipping != null) &&
-				(shoppingOrderCacheModel.altShipping.length() == 0)) {
+		String altShipping = shoppingOrderCacheModel.altShipping;
+
+		if ((altShipping != null) && (altShipping.length() == 0)) {
 			shoppingOrderCacheModel.altShipping = null;
 		}
 
 		shoppingOrderCacheModel.requiresShipping = getRequiresShipping();
+
 		shoppingOrderCacheModel.insure = getInsure();
+
 		shoppingOrderCacheModel.insurance = getInsurance();
+
 		shoppingOrderCacheModel.couponCodes = getCouponCodes();
 
-		if ((shoppingOrderCacheModel.couponCodes != null) &&
-				(shoppingOrderCacheModel.couponCodes.length() == 0)) {
+		String couponCodes = shoppingOrderCacheModel.couponCodes;
+
+		if ((couponCodes != null) && (couponCodes.length() == 0)) {
 			shoppingOrderCacheModel.couponCodes = null;
 		}
 
 		shoppingOrderCacheModel.couponDiscount = getCouponDiscount();
+
 		shoppingOrderCacheModel.billingFirstName = getBillingFirstName();
 
-		if ((shoppingOrderCacheModel.billingFirstName != null) &&
-				(shoppingOrderCacheModel.billingFirstName.length() == 0)) {
+		String billingFirstName = shoppingOrderCacheModel.billingFirstName;
+
+		if ((billingFirstName != null) && (billingFirstName.length() == 0)) {
 			shoppingOrderCacheModel.billingFirstName = null;
 		}
 
 		shoppingOrderCacheModel.billingLastName = getBillingLastName();
 
-		if ((shoppingOrderCacheModel.billingLastName != null) &&
-				(shoppingOrderCacheModel.billingLastName.length() == 0)) {
+		String billingLastName = shoppingOrderCacheModel.billingLastName;
+
+		if ((billingLastName != null) && (billingLastName.length() == 0)) {
 			shoppingOrderCacheModel.billingLastName = null;
 		}
 
 		shoppingOrderCacheModel.billingEmailAddress = getBillingEmailAddress();
 
-		if ((shoppingOrderCacheModel.billingEmailAddress != null) &&
-				(shoppingOrderCacheModel.billingEmailAddress.length() == 0)) {
+		String billingEmailAddress = shoppingOrderCacheModel.billingEmailAddress;
+
+		if ((billingEmailAddress != null) &&
+				(billingEmailAddress.length() == 0)) {
 			shoppingOrderCacheModel.billingEmailAddress = null;
 		}
 
 		shoppingOrderCacheModel.billingCompany = getBillingCompany();
 
-		if ((shoppingOrderCacheModel.billingCompany != null) &&
-				(shoppingOrderCacheModel.billingCompany.length() == 0)) {
+		String billingCompany = shoppingOrderCacheModel.billingCompany;
+
+		if ((billingCompany != null) && (billingCompany.length() == 0)) {
 			shoppingOrderCacheModel.billingCompany = null;
 		}
 
 		shoppingOrderCacheModel.billingStreet = getBillingStreet();
 
-		if ((shoppingOrderCacheModel.billingStreet != null) &&
-				(shoppingOrderCacheModel.billingStreet.length() == 0)) {
+		String billingStreet = shoppingOrderCacheModel.billingStreet;
+
+		if ((billingStreet != null) && (billingStreet.length() == 0)) {
 			shoppingOrderCacheModel.billingStreet = null;
 		}
 
 		shoppingOrderCacheModel.billingCity = getBillingCity();
 
-		if ((shoppingOrderCacheModel.billingCity != null) &&
-				(shoppingOrderCacheModel.billingCity.length() == 0)) {
+		String billingCity = shoppingOrderCacheModel.billingCity;
+
+		if ((billingCity != null) && (billingCity.length() == 0)) {
 			shoppingOrderCacheModel.billingCity = null;
 		}
 
 		shoppingOrderCacheModel.billingState = getBillingState();
 
-		if ((shoppingOrderCacheModel.billingState != null) &&
-				(shoppingOrderCacheModel.billingState.length() == 0)) {
+		String billingState = shoppingOrderCacheModel.billingState;
+
+		if ((billingState != null) && (billingState.length() == 0)) {
 			shoppingOrderCacheModel.billingState = null;
 		}
 
 		shoppingOrderCacheModel.billingZip = getBillingZip();
 
-		if ((shoppingOrderCacheModel.billingZip != null) &&
-				(shoppingOrderCacheModel.billingZip.length() == 0)) {
+		String billingZip = shoppingOrderCacheModel.billingZip;
+
+		if ((billingZip != null) && (billingZip.length() == 0)) {
 			shoppingOrderCacheModel.billingZip = null;
 		}
 
 		shoppingOrderCacheModel.billingCountry = getBillingCountry();
 
-		if ((shoppingOrderCacheModel.billingCountry != null) &&
-				(shoppingOrderCacheModel.billingCountry.length() == 0)) {
+		String billingCountry = shoppingOrderCacheModel.billingCountry;
+
+		if ((billingCountry != null) && (billingCountry.length() == 0)) {
 			shoppingOrderCacheModel.billingCountry = null;
 		}
 
 		shoppingOrderCacheModel.billingPhone = getBillingPhone();
 
-		if ((shoppingOrderCacheModel.billingPhone != null) &&
-				(shoppingOrderCacheModel.billingPhone.length() == 0)) {
+		String billingPhone = shoppingOrderCacheModel.billingPhone;
+
+		if ((billingPhone != null) && (billingPhone.length() == 0)) {
 			shoppingOrderCacheModel.billingPhone = null;
 		}
 
 		shoppingOrderCacheModel.shipToBilling = getShipToBilling();
+
 		shoppingOrderCacheModel.shippingFirstName = getShippingFirstName();
 
-		if ((shoppingOrderCacheModel.shippingFirstName != null) &&
-				(shoppingOrderCacheModel.shippingFirstName.length() == 0)) {
+		String shippingFirstName = shoppingOrderCacheModel.shippingFirstName;
+
+		if ((shippingFirstName != null) && (shippingFirstName.length() == 0)) {
 			shoppingOrderCacheModel.shippingFirstName = null;
 		}
 
 		shoppingOrderCacheModel.shippingLastName = getShippingLastName();
 
-		if ((shoppingOrderCacheModel.shippingLastName != null) &&
-				(shoppingOrderCacheModel.shippingLastName.length() == 0)) {
+		String shippingLastName = shoppingOrderCacheModel.shippingLastName;
+
+		if ((shippingLastName != null) && (shippingLastName.length() == 0)) {
 			shoppingOrderCacheModel.shippingLastName = null;
 		}
 
 		shoppingOrderCacheModel.shippingEmailAddress = getShippingEmailAddress();
 
-		if ((shoppingOrderCacheModel.shippingEmailAddress != null) &&
-				(shoppingOrderCacheModel.shippingEmailAddress.length() == 0)) {
+		String shippingEmailAddress = shoppingOrderCacheModel.shippingEmailAddress;
+
+		if ((shippingEmailAddress != null) &&
+				(shippingEmailAddress.length() == 0)) {
 			shoppingOrderCacheModel.shippingEmailAddress = null;
 		}
 
 		shoppingOrderCacheModel.shippingCompany = getShippingCompany();
 
-		if ((shoppingOrderCacheModel.shippingCompany != null) &&
-				(shoppingOrderCacheModel.shippingCompany.length() == 0)) {
+		String shippingCompany = shoppingOrderCacheModel.shippingCompany;
+
+		if ((shippingCompany != null) && (shippingCompany.length() == 0)) {
 			shoppingOrderCacheModel.shippingCompany = null;
 		}
 
 		shoppingOrderCacheModel.shippingStreet = getShippingStreet();
 
-		if ((shoppingOrderCacheModel.shippingStreet != null) &&
-				(shoppingOrderCacheModel.shippingStreet.length() == 0)) {
+		String shippingStreet = shoppingOrderCacheModel.shippingStreet;
+
+		if ((shippingStreet != null) && (shippingStreet.length() == 0)) {
 			shoppingOrderCacheModel.shippingStreet = null;
 		}
 
 		shoppingOrderCacheModel.shippingCity = getShippingCity();
 
-		if ((shoppingOrderCacheModel.shippingCity != null) &&
-				(shoppingOrderCacheModel.shippingCity.length() == 0)) {
+		String shippingCity = shoppingOrderCacheModel.shippingCity;
+
+		if ((shippingCity != null) && (shippingCity.length() == 0)) {
 			shoppingOrderCacheModel.shippingCity = null;
 		}
 
 		shoppingOrderCacheModel.shippingState = getShippingState();
 
-		if ((shoppingOrderCacheModel.shippingState != null) &&
-				(shoppingOrderCacheModel.shippingState.length() == 0)) {
+		String shippingState = shoppingOrderCacheModel.shippingState;
+
+		if ((shippingState != null) && (shippingState.length() == 0)) {
 			shoppingOrderCacheModel.shippingState = null;
 		}
 
 		shoppingOrderCacheModel.shippingZip = getShippingZip();
 
-		if ((shoppingOrderCacheModel.shippingZip != null) &&
-				(shoppingOrderCacheModel.shippingZip.length() == 0)) {
+		String shippingZip = shoppingOrderCacheModel.shippingZip;
+
+		if ((shippingZip != null) && (shippingZip.length() == 0)) {
 			shoppingOrderCacheModel.shippingZip = null;
 		}
 
 		shoppingOrderCacheModel.shippingCountry = getShippingCountry();
 
-		if ((shoppingOrderCacheModel.shippingCountry != null) &&
-				(shoppingOrderCacheModel.shippingCountry.length() == 0)) {
+		String shippingCountry = shoppingOrderCacheModel.shippingCountry;
+
+		if ((shippingCountry != null) && (shippingCountry.length() == 0)) {
 			shoppingOrderCacheModel.shippingCountry = null;
 		}
 
 		shoppingOrderCacheModel.shippingPhone = getShippingPhone();
 
-		if ((shoppingOrderCacheModel.shippingPhone != null) &&
-				(shoppingOrderCacheModel.shippingPhone.length() == 0)) {
+		String shippingPhone = shoppingOrderCacheModel.shippingPhone;
+
+		if ((shippingPhone != null) && (shippingPhone.length() == 0)) {
 			shoppingOrderCacheModel.shippingPhone = null;
 		}
 
 		shoppingOrderCacheModel.ccName = getCcName();
 
-		if ((shoppingOrderCacheModel.ccName != null) &&
-				(shoppingOrderCacheModel.ccName.length() == 0)) {
+		String ccName = shoppingOrderCacheModel.ccName;
+
+		if ((ccName != null) && (ccName.length() == 0)) {
 			shoppingOrderCacheModel.ccName = null;
 		}
 
 		shoppingOrderCacheModel.ccType = getCcType();
 
-		if ((shoppingOrderCacheModel.ccType != null) &&
-				(shoppingOrderCacheModel.ccType.length() == 0)) {
+		String ccType = shoppingOrderCacheModel.ccType;
+
+		if ((ccType != null) && (ccType.length() == 0)) {
 			shoppingOrderCacheModel.ccType = null;
 		}
 
 		shoppingOrderCacheModel.ccNumber = getCcNumber();
 
-		if ((shoppingOrderCacheModel.ccNumber != null) &&
-				(shoppingOrderCacheModel.ccNumber.length() == 0)) {
+		String ccNumber = shoppingOrderCacheModel.ccNumber;
+
+		if ((ccNumber != null) && (ccNumber.length() == 0)) {
 			shoppingOrderCacheModel.ccNumber = null;
 		}
 
 		shoppingOrderCacheModel.ccExpMonth = getCcExpMonth();
+
 		shoppingOrderCacheModel.ccExpYear = getCcExpYear();
+
 		shoppingOrderCacheModel.ccVerNumber = getCcVerNumber();
 
-		if ((shoppingOrderCacheModel.ccVerNumber != null) &&
-				(shoppingOrderCacheModel.ccVerNumber.length() == 0)) {
+		String ccVerNumber = shoppingOrderCacheModel.ccVerNumber;
+
+		if ((ccVerNumber != null) && (ccVerNumber.length() == 0)) {
 			shoppingOrderCacheModel.ccVerNumber = null;
 		}
 
 		shoppingOrderCacheModel.comments = getComments();
 
-		if ((shoppingOrderCacheModel.comments != null) &&
-				(shoppingOrderCacheModel.comments.length() == 0)) {
+		String comments = shoppingOrderCacheModel.comments;
+
+		if ((comments != null) && (comments.length() == 0)) {
 			shoppingOrderCacheModel.comments = null;
 		}
 
 		shoppingOrderCacheModel.ppTxnId = getPpTxnId();
 
-		if ((shoppingOrderCacheModel.ppTxnId != null) &&
-				(shoppingOrderCacheModel.ppTxnId.length() == 0)) {
+		String ppTxnId = shoppingOrderCacheModel.ppTxnId;
+
+		if ((ppTxnId != null) && (ppTxnId.length() == 0)) {
 			shoppingOrderCacheModel.ppTxnId = null;
 		}
 
 		shoppingOrderCacheModel.ppPaymentStatus = getPpPaymentStatus();
 
-		if ((shoppingOrderCacheModel.ppPaymentStatus != null) &&
-				(shoppingOrderCacheModel.ppPaymentStatus.length() == 0)) {
+		String ppPaymentStatus = shoppingOrderCacheModel.ppPaymentStatus;
+
+		if ((ppPaymentStatus != null) && (ppPaymentStatus.length() == 0)) {
 			shoppingOrderCacheModel.ppPaymentStatus = null;
 		}
 
 		shoppingOrderCacheModel.ppPaymentGross = getPpPaymentGross();
+
 		shoppingOrderCacheModel.ppReceiverEmail = getPpReceiverEmail();
 
-		if ((shoppingOrderCacheModel.ppReceiverEmail != null) &&
-				(shoppingOrderCacheModel.ppReceiverEmail.length() == 0)) {
+		String ppReceiverEmail = shoppingOrderCacheModel.ppReceiverEmail;
+
+		if ((ppReceiverEmail != null) && (ppReceiverEmail.length() == 0)) {
 			shoppingOrderCacheModel.ppReceiverEmail = null;
 		}
 
 		shoppingOrderCacheModel.ppPayerEmail = getPpPayerEmail();
 
-		if ((shoppingOrderCacheModel.ppPayerEmail != null) &&
-				(shoppingOrderCacheModel.ppPayerEmail.length() == 0)) {
+		String ppPayerEmail = shoppingOrderCacheModel.ppPayerEmail;
+
+		if ((ppPayerEmail != null) && (ppPayerEmail.length() == 0)) {
 			shoppingOrderCacheModel.ppPayerEmail = null;
 		}
 
 		shoppingOrderCacheModel.sendOrderEmail = getSendOrderEmail();
+
 		shoppingOrderCacheModel.sendShippingEmail = getSendShippingEmail();
 
 		return shoppingOrderCacheModel;

@@ -387,12 +387,16 @@ public class AssetTagPropertyModelImpl extends BaseModelImpl<AssetTagProperty>
 		AssetTagPropertyCacheModel assetTagPropertyCacheModel = new AssetTagPropertyCacheModel();
 
 		assetTagPropertyCacheModel.tagPropertyId = getTagPropertyId();
+
 		assetTagPropertyCacheModel.companyId = getCompanyId();
+
 		assetTagPropertyCacheModel.userId = getUserId();
+
 		assetTagPropertyCacheModel.userName = getUserName();
 
-		if ((assetTagPropertyCacheModel.userName != null) &&
-				(assetTagPropertyCacheModel.userName.length() == 0)) {
+		String userName = assetTagPropertyCacheModel.userName;
+
+		if ((userName != null) && (userName.length() == 0)) {
 			assetTagPropertyCacheModel.userName = null;
 		}
 
@@ -409,17 +413,20 @@ public class AssetTagPropertyModelImpl extends BaseModelImpl<AssetTagProperty>
 		}
 
 		assetTagPropertyCacheModel.tagId = getTagId();
+
 		assetTagPropertyCacheModel.key = getKey();
 
-		if ((assetTagPropertyCacheModel.key != null) &&
-				(assetTagPropertyCacheModel.key.length() == 0)) {
+		String key = assetTagPropertyCacheModel.key;
+
+		if ((key != null) && (key.length() == 0)) {
 			assetTagPropertyCacheModel.key = null;
 		}
 
 		assetTagPropertyCacheModel.value = getValue();
 
-		if ((assetTagPropertyCacheModel.value != null) &&
-				(assetTagPropertyCacheModel.value.length() == 0)) {
+		String value = assetTagPropertyCacheModel.value;
+
+		if ((value != null) && (value.length() == 0)) {
 			assetTagPropertyCacheModel.value = null;
 		}
 

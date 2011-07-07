@@ -402,12 +402,16 @@ public class RatingsEntryModelImpl extends BaseModelImpl<RatingsEntry>
 		RatingsEntryCacheModel ratingsEntryCacheModel = new RatingsEntryCacheModel();
 
 		ratingsEntryCacheModel.entryId = getEntryId();
+
 		ratingsEntryCacheModel.companyId = getCompanyId();
+
 		ratingsEntryCacheModel.userId = getUserId();
+
 		ratingsEntryCacheModel.userName = getUserName();
 
-		if ((ratingsEntryCacheModel.userName != null) &&
-				(ratingsEntryCacheModel.userName.length() == 0)) {
+		String userName = ratingsEntryCacheModel.userName;
+
+		if ((userName != null) && (userName.length() == 0)) {
 			ratingsEntryCacheModel.userName = null;
 		}
 
@@ -424,7 +428,9 @@ public class RatingsEntryModelImpl extends BaseModelImpl<RatingsEntry>
 		}
 
 		ratingsEntryCacheModel.classNameId = getClassNameId();
+
 		ratingsEntryCacheModel.classPK = getClassPK();
+
 		ratingsEntryCacheModel.score = getScore();
 
 		return ratingsEntryCacheModel;

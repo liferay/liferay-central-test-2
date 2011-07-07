@@ -300,8 +300,11 @@ public class MBStatsUserModelImpl extends BaseModelImpl<MBStatsUser>
 		MBStatsUserCacheModel mbStatsUserCacheModel = new MBStatsUserCacheModel();
 
 		mbStatsUserCacheModel.statsUserId = getStatsUserId();
+
 		mbStatsUserCacheModel.groupId = getGroupId();
+
 		mbStatsUserCacheModel.userId = getUserId();
+
 		mbStatsUserCacheModel.messageCount = getMessageCount();
 
 		Date lastPostDate = getLastPostDate();

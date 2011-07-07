@@ -982,12 +982,14 @@ public class UserModelImpl extends BaseModelImpl<User> implements UserModel {
 
 		userCacheModel.uuid = getUuid();
 
-		if ((userCacheModel.uuid != null) &&
-				(userCacheModel.uuid.length() == 0)) {
+		String uuid = userCacheModel.uuid;
+
+		if ((uuid != null) && (uuid.length() == 0)) {
 			userCacheModel.uuid = null;
 		}
 
 		userCacheModel.userId = getUserId();
+
 		userCacheModel.companyId = getCompanyId();
 
 		Date createDate = getCreateDate();
@@ -1003,15 +1005,19 @@ public class UserModelImpl extends BaseModelImpl<User> implements UserModel {
 		}
 
 		userCacheModel.defaultUser = getDefaultUser();
+
 		userCacheModel.contactId = getContactId();
+
 		userCacheModel.password = getPassword();
 
-		if ((userCacheModel.password != null) &&
-				(userCacheModel.password.length() == 0)) {
+		String password = userCacheModel.password;
+
+		if ((password != null) && (password.length() == 0)) {
 			userCacheModel.password = null;
 		}
 
 		userCacheModel.passwordEncrypted = getPasswordEncrypted();
+
 		userCacheModel.passwordReset = getPasswordReset();
 
 		Date passwordModifiedDate = getPasswordModifiedDate();
@@ -1022,102 +1028,121 @@ public class UserModelImpl extends BaseModelImpl<User> implements UserModel {
 
 		userCacheModel.digest = getDigest();
 
-		if ((userCacheModel.digest != null) &&
-				(userCacheModel.digest.length() == 0)) {
+		String digest = userCacheModel.digest;
+
+		if ((digest != null) && (digest.length() == 0)) {
 			userCacheModel.digest = null;
 		}
 
 		userCacheModel.reminderQueryQuestion = getReminderQueryQuestion();
 
-		if ((userCacheModel.reminderQueryQuestion != null) &&
-				(userCacheModel.reminderQueryQuestion.length() == 0)) {
+		String reminderQueryQuestion = userCacheModel.reminderQueryQuestion;
+
+		if ((reminderQueryQuestion != null) &&
+				(reminderQueryQuestion.length() == 0)) {
 			userCacheModel.reminderQueryQuestion = null;
 		}
 
 		userCacheModel.reminderQueryAnswer = getReminderQueryAnswer();
 
-		if ((userCacheModel.reminderQueryAnswer != null) &&
-				(userCacheModel.reminderQueryAnswer.length() == 0)) {
+		String reminderQueryAnswer = userCacheModel.reminderQueryAnswer;
+
+		if ((reminderQueryAnswer != null) &&
+				(reminderQueryAnswer.length() == 0)) {
 			userCacheModel.reminderQueryAnswer = null;
 		}
 
 		userCacheModel.graceLoginCount = getGraceLoginCount();
+
 		userCacheModel.screenName = getScreenName();
 
-		if ((userCacheModel.screenName != null) &&
-				(userCacheModel.screenName.length() == 0)) {
+		String screenName = userCacheModel.screenName;
+
+		if ((screenName != null) && (screenName.length() == 0)) {
 			userCacheModel.screenName = null;
 		}
 
 		userCacheModel.emailAddress = getEmailAddress();
 
-		if ((userCacheModel.emailAddress != null) &&
-				(userCacheModel.emailAddress.length() == 0)) {
+		String emailAddress = userCacheModel.emailAddress;
+
+		if ((emailAddress != null) && (emailAddress.length() == 0)) {
 			userCacheModel.emailAddress = null;
 		}
 
 		userCacheModel.facebookId = getFacebookId();
+
 		userCacheModel.openId = getOpenId();
 
-		if ((userCacheModel.openId != null) &&
-				(userCacheModel.openId.length() == 0)) {
+		String openId = userCacheModel.openId;
+
+		if ((openId != null) && (openId.length() == 0)) {
 			userCacheModel.openId = null;
 		}
 
 		userCacheModel.portraitId = getPortraitId();
+
 		userCacheModel.languageId = getLanguageId();
 
-		if ((userCacheModel.languageId != null) &&
-				(userCacheModel.languageId.length() == 0)) {
+		String languageId = userCacheModel.languageId;
+
+		if ((languageId != null) && (languageId.length() == 0)) {
 			userCacheModel.languageId = null;
 		}
 
 		userCacheModel.timeZoneId = getTimeZoneId();
 
-		if ((userCacheModel.timeZoneId != null) &&
-				(userCacheModel.timeZoneId.length() == 0)) {
+		String timeZoneId = userCacheModel.timeZoneId;
+
+		if ((timeZoneId != null) && (timeZoneId.length() == 0)) {
 			userCacheModel.timeZoneId = null;
 		}
 
 		userCacheModel.greeting = getGreeting();
 
-		if ((userCacheModel.greeting != null) &&
-				(userCacheModel.greeting.length() == 0)) {
+		String greeting = userCacheModel.greeting;
+
+		if ((greeting != null) && (greeting.length() == 0)) {
 			userCacheModel.greeting = null;
 		}
 
 		userCacheModel.comments = getComments();
 
-		if ((userCacheModel.comments != null) &&
-				(userCacheModel.comments.length() == 0)) {
+		String comments = userCacheModel.comments;
+
+		if ((comments != null) && (comments.length() == 0)) {
 			userCacheModel.comments = null;
 		}
 
 		userCacheModel.firstName = getFirstName();
 
-		if ((userCacheModel.firstName != null) &&
-				(userCacheModel.firstName.length() == 0)) {
+		String firstName = userCacheModel.firstName;
+
+		if ((firstName != null) && (firstName.length() == 0)) {
 			userCacheModel.firstName = null;
 		}
 
 		userCacheModel.middleName = getMiddleName();
 
-		if ((userCacheModel.middleName != null) &&
-				(userCacheModel.middleName.length() == 0)) {
+		String middleName = userCacheModel.middleName;
+
+		if ((middleName != null) && (middleName.length() == 0)) {
 			userCacheModel.middleName = null;
 		}
 
 		userCacheModel.lastName = getLastName();
 
-		if ((userCacheModel.lastName != null) &&
-				(userCacheModel.lastName.length() == 0)) {
+		String lastName = userCacheModel.lastName;
+
+		if ((lastName != null) && (lastName.length() == 0)) {
 			userCacheModel.lastName = null;
 		}
 
 		userCacheModel.jobTitle = getJobTitle();
 
-		if ((userCacheModel.jobTitle != null) &&
-				(userCacheModel.jobTitle.length() == 0)) {
+		String jobTitle = userCacheModel.jobTitle;
+
+		if ((jobTitle != null) && (jobTitle.length() == 0)) {
 			userCacheModel.jobTitle = null;
 		}
 
@@ -1129,8 +1154,9 @@ public class UserModelImpl extends BaseModelImpl<User> implements UserModel {
 
 		userCacheModel.loginIP = getLoginIP();
 
-		if ((userCacheModel.loginIP != null) &&
-				(userCacheModel.loginIP.length() == 0)) {
+		String loginIP = userCacheModel.loginIP;
+
+		if ((loginIP != null) && (loginIP.length() == 0)) {
 			userCacheModel.loginIP = null;
 		}
 
@@ -1142,8 +1168,9 @@ public class UserModelImpl extends BaseModelImpl<User> implements UserModel {
 
 		userCacheModel.lastLoginIP = getLastLoginIP();
 
-		if ((userCacheModel.lastLoginIP != null) &&
-				(userCacheModel.lastLoginIP.length() == 0)) {
+		String lastLoginIP = userCacheModel.lastLoginIP;
+
+		if ((lastLoginIP != null) && (lastLoginIP.length() == 0)) {
 			userCacheModel.lastLoginIP = null;
 		}
 
@@ -1154,6 +1181,7 @@ public class UserModelImpl extends BaseModelImpl<User> implements UserModel {
 		}
 
 		userCacheModel.failedLoginAttempts = getFailedLoginAttempts();
+
 		userCacheModel.lockout = getLockout();
 
 		Date lockoutDate = getLockoutDate();
@@ -1163,7 +1191,9 @@ public class UserModelImpl extends BaseModelImpl<User> implements UserModel {
 		}
 
 		userCacheModel.agreedToTermsOfUse = getAgreedToTermsOfUse();
+
 		userCacheModel.emailAddressVerified = getEmailAddressVerified();
+
 		userCacheModel.status = getStatus();
 
 		return userCacheModel;

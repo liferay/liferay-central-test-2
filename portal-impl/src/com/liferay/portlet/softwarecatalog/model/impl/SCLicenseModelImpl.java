@@ -333,22 +333,27 @@ public class SCLicenseModelImpl extends BaseModelImpl<SCLicense>
 		SCLicenseCacheModel scLicenseCacheModel = new SCLicenseCacheModel();
 
 		scLicenseCacheModel.licenseId = getLicenseId();
+
 		scLicenseCacheModel.name = getName();
 
-		if ((scLicenseCacheModel.name != null) &&
-				(scLicenseCacheModel.name.length() == 0)) {
+		String name = scLicenseCacheModel.name;
+
+		if ((name != null) && (name.length() == 0)) {
 			scLicenseCacheModel.name = null;
 		}
 
 		scLicenseCacheModel.url = getUrl();
 
-		if ((scLicenseCacheModel.url != null) &&
-				(scLicenseCacheModel.url.length() == 0)) {
+		String url = scLicenseCacheModel.url;
+
+		if ((url != null) && (url.length() == 0)) {
 			scLicenseCacheModel.url = null;
 		}
 
 		scLicenseCacheModel.openSource = getOpenSource();
+
 		scLicenseCacheModel.active = getActive();
+
 		scLicenseCacheModel.recommended = getRecommended();
 
 		return scLicenseCacheModel;

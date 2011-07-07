@@ -365,17 +365,23 @@ public class AnnouncementsDeliveryModelImpl extends BaseModelImpl<AnnouncementsD
 		AnnouncementsDeliveryCacheModel announcementsDeliveryCacheModel = new AnnouncementsDeliveryCacheModel();
 
 		announcementsDeliveryCacheModel.deliveryId = getDeliveryId();
+
 		announcementsDeliveryCacheModel.companyId = getCompanyId();
+
 		announcementsDeliveryCacheModel.userId = getUserId();
+
 		announcementsDeliveryCacheModel.type = getType();
 
-		if ((announcementsDeliveryCacheModel.type != null) &&
-				(announcementsDeliveryCacheModel.type.length() == 0)) {
+		String type = announcementsDeliveryCacheModel.type;
+
+		if ((type != null) && (type.length() == 0)) {
 			announcementsDeliveryCacheModel.type = null;
 		}
 
 		announcementsDeliveryCacheModel.email = getEmail();
+
 		announcementsDeliveryCacheModel.sms = getSms();
+
 		announcementsDeliveryCacheModel.website = getWebsite();
 
 		return announcementsDeliveryCacheModel;
