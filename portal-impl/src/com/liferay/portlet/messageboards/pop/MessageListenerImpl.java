@@ -267,25 +267,25 @@ public class MessageListenerImpl implements MessageListener {
 	protected long getParentMessageId(String recipient, Message message)
 		throws Exception {
 
-		// Get the parent message ID from the recipient address
-
 		int pos = recipient.indexOf(CharPool.AT);
 
-		if (pos >= 0) {
-			long parentMessageId = 0;
+		if (pos < 0) {
+			return MBUtil.getParentMessageId(message);
+		}
 
-			String target = recipient.substring(
-				MBUtil.MESSAGE_POP_PORTLET_PREFIX.length(), pos);
+		String target = recipient.substring(
+			MBUtil.MESSAGE_POP_PORTLET_PREFIX.length(), pos);
 
-			String[] parts = StringUtil.split(target, StringPool.PERIOD);
+		String[] parts = StringUtil.split(target, StringPool.PERIOD);
 
-			if (parts.length == 2) {
-				parentMessageId = GetterUtil.getLong(parts[1]);
-			}
+		long parentMessageId = 0;
 
-			if (parentMessageId > 0) {
-				return parentMessageId;
-			}
+		if (parts.length == 2) {
+			parentMessageId = GetterUtil.getLong(parts[1]);
+		}
+
+		if (parentMessageId > 0) {
+			return parentMessageId;
 		}
 
 		return MBUtil.getParentMessageId(message);
