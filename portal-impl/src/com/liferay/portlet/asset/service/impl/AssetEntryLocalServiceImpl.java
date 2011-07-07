@@ -550,7 +550,7 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 		boolean oldVisible = false;
 
 		if (entry != null) {
-			oldVisible = entry.getVisible();
+			oldVisible = entry.isVisible();
 		}
 
 		if (entry == null) {
@@ -637,7 +637,7 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 			List<AssetTag> oldTags = assetEntryPersistence.getAssetTags(
 				entry.getEntryId());
 
-			if (entry.getVisible()) {
+			if (entry.isVisible()) {
 				boolean isNew = entry.isNew();
 
 				if (isNew) {
@@ -752,13 +752,13 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 		List<AssetTag> tags = assetEntryPersistence.getAssetTags(
 			entry.getEntryId());
 
-		if (visible && !entry.getVisible()) {
+		if (visible && !entry.isVisible()) {
 			for (AssetTag tag : tags) {
 				assetTagLocalService.incrementAssetCount(
 					tag.getTagId(), classNameId);
 			}
 		}
-		else if (!visible && entry.getVisible()) {
+		else if (!visible && entry.isVisible()) {
 			for (AssetTag tag : tags) {
 				assetTagLocalService.decrementAssetCount(
 					tag.getTagId(), classNameId);
