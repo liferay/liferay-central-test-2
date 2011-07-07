@@ -770,13 +770,17 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> imple
 			<#if column.type != "Blob">
 				<#if column.type == "Date">
 					Date ${column.name} = get${column.methodName}();
+
 					if (${column.name} != null) {
 						${entity.varName}CacheModel.${column.name} = ${column.name}.getTime();
 					}
 				<#else>
 					${entity.varName}CacheModel.${column.name} = get${column.methodName}();
+
 					<#if column.type == "String">
-						if ((${entity.varName}CacheModel.${column.name} != null) && (${entity.varName}CacheModel.${column.name}.length() == 0)) {
+						String ${column.name} = ${entity.varName}CacheModel.${column.name};
+
+						if ((${column.name} != null) && (${column.name}.length() == 0)) {
 							${entity.varName}CacheModel.${column.name} = null;
 						}
 					</#if>

@@ -1390,6 +1390,8 @@ public class SourceFormatter {
 
 		String[] excludes = {
 			"**\\bin\\**", "**\\model\\*Clp.java",
+			"**\\model\\impl\\*BaseImpl.java",
+			"**\\model\\impl\\*Model.java",
 			"**\\model\\impl\\*ModelImpl.java",
 			"**\\service\\**\\model\\*Model.java",
 			"**\\service\\**\\model\\*Soap.java",

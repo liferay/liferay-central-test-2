@@ -41,7 +41,6 @@ public class ${entity.name}CacheModel implements CacheModel<${entity.name}> {
 	}
 
 	public ${entity.name} toEntityModel() {
-
 		${entity.name}Impl ${entity.varName}Impl = new ${entity.name}Impl();
 
 		<#list entity.regularColList as column>

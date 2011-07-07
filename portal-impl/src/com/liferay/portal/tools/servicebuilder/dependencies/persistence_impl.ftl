@@ -3900,6 +3900,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 		public CacheModel<${entity.name}> toCacheModel() {
 			return _null${entity.name}CacheModel;
 		}
+
 	};
 
 	private static CacheModel<${entity.name}> _null${entity.name}CacheModel = new CacheModel<${entity.name}>() {

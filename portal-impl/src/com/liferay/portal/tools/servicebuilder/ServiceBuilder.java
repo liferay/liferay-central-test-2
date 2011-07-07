@@ -2080,7 +2080,7 @@ public class ServiceBuilder {
 		// Write file
 
 		File modelFile = new File(
-			_outputPath + "/model/impl/" + entity.getName() + 
+			_outputPath + "/model/impl/" + entity.getName() +
 				"CacheModel.java");
 
 		writeFile(modelFile, content, _author);
