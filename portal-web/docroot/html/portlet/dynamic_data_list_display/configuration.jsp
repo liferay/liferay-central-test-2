@@ -31,8 +31,9 @@ try {
 catch (NoSuchRecordSetException nsrse) {
 }
 
-request.setAttribute("record_set_action.jsp-chooseCallback", renderResponse.getNamespace().concat("selectRecordSet"));
 request.setAttribute("record_set_action.jsp-selRecordSet", selRecordSet);
+
+request.setAttribute("record_set_action.jsp-chooseCallback", renderResponse.getNamespace().concat("selectRecordSet"));
 %>
 
 <liferay-portlet:actionURL portletConfiguration="true" var="configurationURL" />
