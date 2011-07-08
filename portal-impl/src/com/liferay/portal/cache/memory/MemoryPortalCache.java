@@ -42,6 +42,7 @@ public class MemoryPortalCache implements PortalCache {
 
 	public void destroy() {
 		removeAll();
+
 		_cacheListeners = null;
 		_map = null;
 		_name = null;
