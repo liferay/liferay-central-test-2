@@ -504,7 +504,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 				company.getCompanyId(), name, roleName, actionId);
 		}
 	}
-	
+
 	public void setGroupPermissions(
 			long groupId, String[] actionIds, long resourceId)
 		throws PortalException, SystemException {

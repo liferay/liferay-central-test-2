@@ -425,7 +425,7 @@ public class ResourcePermissionLocalServiceImpl
 			}
 		}
 	}
-	
+
 	public void setOwnerResourcePermissions(
 			long companyId, String name, int scope, String primKey, long roleId,
 			long ownerId, String[] actionIds)
