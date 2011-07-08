@@ -23,8 +23,37 @@ import java.util.Comparator;
  */
 public class AssetTagNameComparator implements Comparator<AssetTag> {
 
-	public int compare(AssetTag assetTag1, AssetTag assetTag2) {
-		return assetTag1.getName().compareTo(assetTag2.getName());
+	public AssetTagNameComparator() {
+		this(true, false);
 	}
+
+	public AssetTagNameComparator(boolean ascending, boolean caseSensitive) {
+		_ascending = ascending;
+		_caseSensitive = caseSensitive;
+	}
+
+	public int compare(AssetTag assetTag1, AssetTag assetTag2) {
+		String name1 = assetTag1.getName();
+		String name2 = assetTag2.getName();
+
+		int value = 0;
+
+		if (_caseSensitive) {
+			value = name1.compareTo(name2);
+		}
+		else {
+			value = name1.compareToIgnoreCase(name2);
+		}
+
+		if (_ascending) {
+			return value;
+		}
+		else {
+			return -value;
+		}
+	}
+
+	private boolean _ascending;
+	private boolean _caseSensitive;
 
 }
