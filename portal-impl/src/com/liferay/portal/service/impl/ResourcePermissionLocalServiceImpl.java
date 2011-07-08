@@ -562,7 +562,9 @@ public class ResourcePermissionLocalServiceImpl
 					ResourceActionsUtil.getModelResourceGuestDefaultActions(
 						name);
 			}
-			else if (roleName.equals(RoleConstants.SITE_MEMBER)) {
+			else if (roleName.equals(RoleConstants.SITE_MEMBER) ||
+					 roleName.equals(RoleConstants.ORGANIZATION_USER)) {
+
 				defaultActionIds =
 					ResourceActionsUtil.getModelResourceGroupDefaultActions(
 						name);
