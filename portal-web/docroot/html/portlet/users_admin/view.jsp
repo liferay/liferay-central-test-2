@@ -89,16 +89,19 @@ String portletURLString = portletURL.toString();
 
 	function <portlet:namespace />doDeleteOrganizationOrUserGroup(className, id) {
 		var ids = id;
+		var status = <%= WorkflowConstants.STATUS_INACTIVE %>
 
 		<portlet:namespace />getUsersCount(
-			className, ids, false,
+			className, ids, status,
 			function(event, id, obj) {
 				var responseData = this.get('responseData');
 				var count = parseInt(responseData);
 
 				if (count > 0) {
+					status = <%= WorkflowConstants.STATUS_APPROVED %>
+
 					<portlet:namespace />getUsersCount(
-						className, ids, true,
+						className, ids, status,
 						function(event, id, obj) {
 							responseData = this.get('responseData')
 							count = parseInt(responseData);
@@ -241,16 +244,16 @@ String portletURLString = portletURL.toString();
 	Liferay.provide(
 		window,
 		'<portlet:namespace />getUsersCount',
-		function(className, ids, active, callback) {
+		function(className, ids, status, callback) {
 			var A = AUI();
 
 			A.io.request(
 				'<%= themeDisplay.getPathMain() %>/users_admin/get_users_count',
 				{
 					data: {
-						active: active,
 						className: className,
-						ids: ids
+						ids: ids,
+						status: status
 					},
 					on: {
 						success: callback
