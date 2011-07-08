@@ -305,7 +305,9 @@ public class UnsyncPrintWriter extends PrintWriter {
 	public void reset(Writer writer) {
 		_formatter = null;
 		_hasError = false;
-		out = _writer = writer;
+		_writer = writer;
+
+		out = _writer;
 	}
 
 	@Override
