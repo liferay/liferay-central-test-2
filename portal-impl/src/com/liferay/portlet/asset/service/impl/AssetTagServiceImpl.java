@@ -92,7 +92,7 @@ public class AssetTagServiceImpl extends AssetTagServiceBaseImpl {
 			groupsTags.addAll(groupTags);
 		}
 
-		return new ArrayList(groupsTags);
+		return new ArrayList<AssetTag>(groupsTags);
 	}
 
 	public List<AssetTag> getGroupTags(long groupId) throws SystemException {
