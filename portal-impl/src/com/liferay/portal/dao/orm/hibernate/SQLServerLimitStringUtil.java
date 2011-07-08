@@ -49,7 +49,7 @@ public class SQLServerLimitStringUtil {
 			orderBy = "CURRENT_TIMESTAMP";
 		}
 
-		String[] orderByColumns = getOrderByColumns(selectFrom, orderBy);
+		String[] orderByColumns = _getOrderByColumns(selectFrom, orderBy);
 
 		StringBundler sb = new StringBundler(11);
 
@@ -68,7 +68,7 @@ public class SQLServerLimitStringUtil {
 		return sb.toString();
 	}
 
-	protected static String[] getOrderByColumns(
+	private static String[] _getOrderByColumns(
 		String selectFrom, String orderBy) {
 
 		String[] orderByColumns = StringUtil.split(orderBy, StringPool.COMMA);
@@ -108,4 +108,5 @@ public class SQLServerLimitStringUtil {
 
 		return orderByColumns;
 	}
+
 }
