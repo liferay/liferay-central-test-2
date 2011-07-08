@@ -42,10 +42,6 @@ int firstDayOfWeek = GetterUtil.getInteger((String)request.getAttribute("liferay
 String imageInputId = GetterUtil.getString((String)request.getAttribute("liferay-ui:input-date:imageInputId"));
 boolean disabled = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:input-date:disabled"));
 
-boolean dayEmpty = false;
-boolean monthEmpty = false;
-boolean yearEmpty = false;
-
 if (Validator.isNull(imageInputId)) {
 	imageInputId = randomNamespace + "imageInputId";
 }
@@ -70,6 +66,8 @@ Calendar cal = new GregorianCalendar();
 
 cal.setTime(selectedDate);
 
+boolean dayEmpty = false;
+
 if (dayValue > 0) {
 	cal.set(Calendar.DATE, dayValue);
 }
@@ -77,12 +75,16 @@ else if (dayNullable) {
 	dayEmpty = true;
 }
 
+boolean monthEmpty = false;
+
 if (monthValue > -1) {
 	cal.set(Calendar.MONTH, monthValue);
 }
 else if (monthNullable) {
 	monthEmpty = true;
 }
+
+boolean yearEmpty = false;
 
 if (yearValue > 0) {
 	cal.set(Calendar.YEAR, yearValue);
@@ -168,7 +170,6 @@ else if (yearNullable) {
 					boundingBox: displayDateNode,
 					calendar: {
 						dates: [
-
 							<c:if test="<%= !monthEmpty && !dayEmpty && !yearEmpty %>">
 								new Date(
 									<%= cal.get(Calendar.YEAR) %>,
@@ -176,7 +177,6 @@ else if (yearNullable) {
 									<%= cal.get(Calendar.DATE) %>
 								)
 							</c:if>
-
 						],
 
 						<c:choose>
