@@ -59,10 +59,14 @@ public class SerialDestination extends BaseAsyncDestination {
 		Runnable runnable = new MessageRunnable(message) {
 
 			public void run() {
-				try {
-					Long companyId = message.getLong("companyId");
+				long companyId = CompanyThreadLocal.getCompanyId();
 
-					CompanyThreadLocal.setCompanyId(companyId);
+				try {
+					long messageCompanyId = message.getLong("companyId");
+
+					if (messageCompanyId > 0) {
+						CompanyThreadLocal.setCompanyId(messageCompanyId);
+					}
 
 					for (MessageListener messageListener : messageListeners) {
 						try {
@@ -75,7 +79,7 @@ public class SerialDestination extends BaseAsyncDestination {
 					}
 				}
 				finally {
-					CompanyThreadLocal.setCompanyId(0);
+					CompanyThreadLocal.setCompanyId(companyId);
 
 					CentralizedThreadLocal.clearShortLivedThreadLocals();
 				}
