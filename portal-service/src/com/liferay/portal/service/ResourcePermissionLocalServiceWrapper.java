@@ -398,10 +398,10 @@ public class ResourcePermissionLocalServiceWrapper
 	}
 
 	public void setContainerResourcePermissions(java.lang.String name,
-		java.lang.String roleName, long minimumBitwiseValue)
+		java.lang.String roleName, long actionIdsLong)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_resourcePermissionLocalService.setContainerResourcePermissions(name,
-			roleName, minimumBitwiseValue);
+			roleName, actionIdsLong);
 	}
 
 	public void setOwnerResourcePermissions(long companyId,

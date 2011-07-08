@@ -47,38 +47,47 @@ public class UpgradePermission extends UpgradeProcess {
 		throws Exception {
 
 		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
-			List<String> modelActions =
-				ResourceActionsUtil.getModelResourceActions(name);
-
-			ResourceActionLocalServiceUtil.checkResourceActions(
-				name, modelActions);
-
-			// Set minimum to VIEW
-
-			long minimumBitwiseValue = 1;
-
-			if (community) {
-				ResourcePermissionLocalServiceUtil.
-					setContainerResourcePermissions(
-						name, RoleConstants.SITE_MEMBER, minimumBitwiseValue);
-			}
-
-			if (guest) {
-				ResourcePermissionLocalServiceUtil.
-					setContainerResourcePermissions(
-						name, RoleConstants.GUEST, minimumBitwiseValue);
-			}
+			updatePermissions_6(name, community, guest);
 		}
 		else {
-			if (community) {
-				PermissionLocalServiceUtil.setContainerResourcePermissions(
-					name, RoleConstants.SITE_MEMBER, ActionKeys.VIEW);
-			}
+			updatePermissions_1to5(name, community, guest);
+		}
+	}
 
-			if (guest) {
-				PermissionLocalServiceUtil.setContainerResourcePermissions(
-					name, RoleConstants.GUEST, ActionKeys.VIEW);
-			}
+	protected void updatePermissions_1to5(
+			String name, boolean community, boolean guest)
+		throws Exception {
+
+		if (community) {
+			PermissionLocalServiceUtil.setContainerResourcePermissions(
+				name, RoleConstants.SITE_MEMBER, ActionKeys.VIEW);
+		}
+
+		if (guest) {
+			PermissionLocalServiceUtil.setContainerResourcePermissions(
+				name, RoleConstants.GUEST, ActionKeys.VIEW);
+		}
+	}
+
+	protected void updatePermissions_6(
+			String name, boolean community, boolean guest)
+		throws Exception {
+
+		List<String> modelActions =
+			ResourceActionsUtil.getModelResourceActions(name);
+
+		ResourceActionLocalServiceUtil.checkResourceActions(name, modelActions);
+
+		long actionIdsLong = 1;
+
+		if (community) {
+			ResourcePermissionLocalServiceUtil.setContainerResourcePermissions(
+				name, RoleConstants.SITE_MEMBER, actionIdsLong);
+		}
+
+		if (guest) {
+			ResourcePermissionLocalServiceUtil.setContainerResourcePermissions(
+				name, RoleConstants.GUEST, actionIdsLong);
 		}
 	}
 

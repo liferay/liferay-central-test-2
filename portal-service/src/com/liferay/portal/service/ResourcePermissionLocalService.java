@@ -340,7 +340,7 @@ public interface ResourcePermissionLocalService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public void setContainerResourcePermissions(java.lang.String name,
-		java.lang.String roleName, long minimumBitwiseValue)
+		java.lang.String roleName, long actionIdsLong)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void setOwnerResourcePermissions(long companyId,
