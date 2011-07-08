@@ -72,9 +72,8 @@ public class ActionUtil {
 
 				if (groupId != themeDisplay.getCompanyGroupId()) {
 					try {
-						structure =
-							JournalStructureServiceUtil.getStructure(
-								themeDisplay.getCompanyGroupId(), structureId);
+						structure = JournalStructureServiceUtil.getStructure(
+							themeDisplay.getCompanyGroupId(), structureId);
 					}
 					catch (NoSuchStructureException nsse2) {
 					}
