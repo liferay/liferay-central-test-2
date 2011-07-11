@@ -869,18 +869,18 @@ public class MainServlet extends ActionServlet {
 	protected void initResourceActions(List<Portlet> portlets)
 		throws Exception {
 
-		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM != 6) {
+		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM < 6) {
 			if (_log.isWarnEnabled()) {
 				StringBundler sb = new StringBundler(8);
 
 				sb.append("Liferay is configured to use permission algorithm ");
 				sb.append(PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM);
-				sb.append(". As of version 6.2, only permission algorithm 6 ");
-				sb.append("will be supported. Please log in as an ");
-				sb.append("administrator, go to the \"Server ");
-				sb.append("Administration\" control panel, select the \"Data ");
-				sb.append("Migration\" tab, and convert from this legacy ");
-				sb.append("permission algorithm as soon as possible.");
+				sb.append(". Versions after 6.1 will only support algorithm 6 ");
+				sb.append("and above. Please log in as an administrator, go "):
+				sb.append("to the Control Panel, select \"Server ");
+				sb.apppend("Administration\", select the \"Data Migration\" ");
+				sb.append("tab, and convert from this legacy permission ");
+				sb.append("algorithm as soon as possible.");
 
 				_log.warn(sb.toString());
 			}
