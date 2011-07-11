@@ -22,7 +22,6 @@ import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.MapUtil;
-import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
@@ -32,7 +31,7 @@ import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortletKeys;
-import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.documentlibrary.store.DLStoreUtil;
 import com.liferay.portlet.journal.lar.JournalPortletDataHandlerImpl;
 import com.liferay.portlet.wiki.NoSuchNodeException;
@@ -118,11 +117,10 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 			WikiNode existingNode = WikiNodeUtil.fetchByUUID_G(
 				node.getUuid(), portletDataContext.getScopeGroupId());
 
-			String initialNodeName =
-				PropsUtil.get(PropsKeys.WIKI_INITIAL_NODE_NAME);
+			String initialNodeName = PropsValues.WIKI_INITIAL_NODE_NAME;
 
 			if ((existingNode == null) &&
-				(node.getName().equals(initialNodeName))) {
+				initialNodeName.equals(node.getName())) {
 
 				try {
 					WikiNodeUtil.removeByG_N(
@@ -146,10 +144,9 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 			}
 		}
 		else {
-			String initialNodeName =
-				PropsUtil.get(PropsKeys.WIKI_INITIAL_NODE_NAME);
+			String initialNodeName = PropsValues.WIKI_INITIAL_NODE_NAME;
 
-			if (node.getName().equals(initialNodeName)) {
+			if (initialNodeName.equals(node.getName())) {
 				try {
 					WikiNodeUtil.removeByG_N(
 						portletDataContext.getScopeGroupId(), node.getName());
@@ -386,15 +383,12 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 			return name;
 		}
 
-		StringBundler sb = new StringBundler(3);
+		String nodeName = node.getName();
 
-		sb.append(node.getName());
-		sb.append(StringPool.SPACE);
-		sb.append(count);
-
-		name = sb.toString();
-
-		return getNodeName(portletDataContext, node, name, ++count);
+		return getNodeName(
+			portletDataContext, node,
+			nodeName.concat(StringPool.SPACE).concat(String.valueOf(count)),
+			++count);
 	}
 
 	protected static String getNodePath(
