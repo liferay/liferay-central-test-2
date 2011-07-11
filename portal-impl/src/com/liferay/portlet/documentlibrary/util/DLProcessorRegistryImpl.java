@@ -19,7 +19,8 @@ import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
 
-import java.util.concurrent.CopyOnWriteArraySet;
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * @author Mika Koivisto
@@ -36,8 +37,8 @@ public class DLProcessorRegistryImpl implements DLProcessorRegistry {
 		}
 
 		for (String processorClassName : _DL_FILE_ENTRY_PROCESSORS) {
-			DLProcessor dlProcessor =
-				(DLProcessor)InstancePool.get(processorClassName);
+			DLProcessor dlProcessor = (DLProcessor)InstancePool.get(
+				processorClassName);
 
 			dlProcessor.trigger(fileEntry);
 		}
@@ -54,7 +55,7 @@ public class DLProcessorRegistryImpl implements DLProcessorRegistry {
 	private static final String[] _DL_FILE_ENTRY_PROCESSORS =
 		PropsUtil.getArray(PropsKeys.DL_FILE_ENTRY_PROCESSORS);
 
-	private CopyOnWriteArraySet<DLProcessor> _dlProcessors =
-		new CopyOnWriteArraySet<DLProcessor>();
+	private List<DLProcessor> _dlProcessors =
+		new CopyOnWriteArrayList<DLProcessor>();
 
 }

@@ -29,18 +29,18 @@ public class DLProcessorRegistryUtil {
 		getDLProcessorRegistry().register(dlProcessor);
 	}
 
-	public void setDLProcessorRegistry(
-		DLProcessorRegistry dlProcessorRegistry) {
-
-		_dlProcessorRegistry = dlProcessorRegistry;
-	}
-
 	public static void trigger(FileEntry fileEntry) {
 		getDLProcessorRegistry().trigger(fileEntry);
 	}
 
 	public static void unregister(DLProcessor dlProcessor) {
 		getDLProcessorRegistry().unregister(dlProcessor);
+	}
+
+	public void setDLProcessorRegistry(
+		DLProcessorRegistry dlProcessorRegistry) {
+
+		_dlProcessorRegistry = dlProcessorRegistry;
 	}
 
 	private static DLProcessorRegistry _dlProcessorRegistry;
