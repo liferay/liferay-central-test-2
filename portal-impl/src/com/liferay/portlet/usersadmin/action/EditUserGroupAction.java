@@ -133,7 +133,6 @@ public class EditUserGroupAction extends PortletAction {
 
 		String name = ParamUtil.getString(actionRequest, "name");
 		String description = ParamUtil.getString(actionRequest, "description");
-
 		long publicLayoutSetPrototypeId = ParamUtil.getLong(
 			actionRequest, "publicLayoutSetPrototypeId");
 		long privateLayoutSetPrototypeId = ParamUtil.getLong(

@@ -88,7 +88,7 @@ long userGroupId = BeanParamUtil.getLong(userGroup, request, "userGroupId");
 				<aui:field-wrapper label="public-pages">
 					<c:choose>
 						<c:when test="<%= (publicLayoutSetPrototype == null) || ((userGroup == null) || (userGroupUserCount == 0)) && !layoutSetPrototypes.isEmpty() %>">
-							<aui:select inlineField="<%= true %>" name="publicLayoutSetPrototypeId" label="">
+							<aui:select inlineField="<%= true %>" label="" name="publicLayoutSetPrototypeId">
 								<aui:option label="none" selected="<%= true %>" value="" />
 
 								<%
@@ -104,7 +104,7 @@ long userGroupId = BeanParamUtil.getLong(userGroup, request, "userGroupId");
 							</aui:select>
 
 							<c:if test="<%= (publicLayoutSetPrototype != null) && LayoutSetPrototypePermissionUtil.contains(permissionChecker, publicLayoutSetPrototype.getPrimaryKey(), ActionKeys.UPDATE) %>">
-								<liferay-portlet:renderURL var="editLayoutSetPrototype" portletName="<%= PortletKeys.LAYOUT_SET_PROTOTYPE %>">
+								<liferay-portlet:renderURL portletName="<%= PortletKeys.LAYOUT_SET_PROTOTYPE %>" var="editLayoutSetPrototypeURL">
 									<portlet:param name="struts_action" value="/layout_set_prototypes/edit_layout_set_prototype" />
 									<portlet:param name="layoutSetPrototypeId" value="<%= String.valueOf(userGroup.getPublicLayoutSetPrototypeId()) %>" />
 								</liferay-portlet:renderURL>
@@ -113,16 +113,16 @@ long userGroupId = BeanParamUtil.getLong(userGroup, request, "userGroupId");
 									image="edit"
 									label="<%= true %>"
 									method="get"
-									url="<%= editLayoutSetPrototype %>"
+									url="<%= editLayoutSetPrototypeURL %>"
 								/>
 							</c:if>
 						</c:when>
 						<c:otherwise>
-							<aui:input type="hidden" name="privateLayoutSetPrototypeId" value="<%= String.valueOf(userGroup.getPublicLayoutSetPrototypeId()) %>" />
+							<aui:input name="publicLayoutSetPrototypeId" type="hidden" value="<%= String.valueOf(userGroup.getPublicLayoutSetPrototypeId()) %>" />
 
 							<c:choose>
 								<c:when test="<%= (userGroup != null) && (userGroupUserCount > 0) && (publicLayoutSetPrototype != null) && LayoutSetPrototypePermissionUtil.contains(permissionChecker, publicLayoutSetPrototype.getPrimaryKey(), ActionKeys.UPDATE) %>">
-									<liferay-portlet:renderURL var="editLayoutSetPrototype" portletName="<%= PortletKeys.LAYOUT_SET_PROTOTYPE %>">
+									<liferay-portlet:renderURL portletName="<%= PortletKeys.LAYOUT_SET_PROTOTYPE %>" var="editLayoutSetPrototypeURL">
 										<portlet:param name="struts_action" value="/layout_set_prototypes/edit_layout_set_prototype" />
 										<portlet:param name="layoutSetPrototypeId" value="<%= String.valueOf(userGroup.getPublicLayoutSetPrototypeId()) %>" />
 									</liferay-portlet:renderURL>
@@ -131,7 +131,7 @@ long userGroupId = BeanParamUtil.getLong(userGroup, request, "userGroupId");
 									String title = LanguageUtil.format(pageContext, "edit-x-site-template", publicLayoutSetPrototype.getName(locale));
 									%>
 
-									<aui:a href="<%= editLayoutSetPrototype %>" label="<%= publicLayoutSetPrototype.getName(locale) %>" title="<%= title %>" />
+									<aui:a href="<%= editLayoutSetPrototypeURL %>" label="<%= publicLayoutSetPrototype.getName(locale) %>" title="<%= title %>" />
 								</c:when>
 								<c:when test="<%= (userGroup != null) && (userGroupUserCount > 0) %>">
 									<%= publicLayoutSetPrototype.getName() %>
@@ -147,7 +147,7 @@ long userGroupId = BeanParamUtil.getLong(userGroup, request, "userGroupId");
 				<aui:field-wrapper label="private-pages">
 					<c:choose>
 						<c:when test="<%= (privateLayoutSetPrototype == null) || ((userGroup == null) || (userGroupUserCount == 0)) && !layoutSetPrototypes.isEmpty() %>">
-							<aui:select inlineField="<%= true %>" name="privateLayoutSetPrototypeId" label="">
+							<aui:select inlineField="<%= true %>" label="" name="privateLayoutSetPrototypeId">
 								<aui:option label="none" selected="<%= true %>" value="" />
 
 								<%
@@ -163,7 +163,7 @@ long userGroupId = BeanParamUtil.getLong(userGroup, request, "userGroupId");
 							</aui:select>
 
 							<c:if test="<%= (privateLayoutSetPrototype != null) && LayoutSetPrototypePermissionUtil.contains(permissionChecker, privateLayoutSetPrototype.getPrimaryKey(), ActionKeys.UPDATE) %>">
-								<liferay-portlet:renderURL var="editLayoutSetPrototype" portletName="<%= PortletKeys.LAYOUT_SET_PROTOTYPE %>">
+								<liferay-portlet:renderURL portletName="<%= PortletKeys.LAYOUT_SET_PROTOTYPE %>" var="editLayoutSetPrototypeURL">
 									<portlet:param name="struts_action" value="/layout_set_prototypes/edit_layout_set_prototype" />
 									<portlet:param name="layoutSetPrototypeId" value="<%= String.valueOf(userGroup.getPrivateLayoutSetPrototypeId()) %>" />
 								</liferay-portlet:renderURL>
@@ -172,16 +172,16 @@ long userGroupId = BeanParamUtil.getLong(userGroup, request, "userGroupId");
 									image="edit"
 									label="<%= true %>"
 									method="get"
-									url="<%= editLayoutSetPrototype %>"
+									url="<%= editLayoutSetPrototypeURL %>"
 								/>
 							</c:if>
 						</c:when>
 						<c:otherwise>
-							<aui:input type="hidden" name="privateLayoutSetPrototypeId" value="<%= String.valueOf(userGroup.getPrivateLayoutSetPrototypeId()) %>" />
+							<aui:input name="privateLayoutSetPrototypeId" type="hidden" value="<%= String.valueOf(userGroup.getPrivateLayoutSetPrototypeId()) %>" />
 
 							<c:choose>
 								<c:when test="<%= (userGroup != null) && (userGroupUserCount > 0) && (privateLayoutSetPrototype != null) && LayoutSetPrototypePermissionUtil.contains(permissionChecker, privateLayoutSetPrototype.getPrimaryKey(), ActionKeys.UPDATE) %>">
-									<liferay-portlet:renderURL var="editLayoutSetPrototype" portletName="<%= PortletKeys.LAYOUT_SET_PROTOTYPE %>">
+									<liferay-portlet:renderURL portletName="<%= PortletKeys.LAYOUT_SET_PROTOTYPE %>" var="editLayoutSetPrototypeURL">
 										<portlet:param name="struts_action" value="/layout_set_prototypes/edit_layout_set_prototype" />
 										<portlet:param name="layoutSetPrototypeId" value="<%= String.valueOf(userGroup.getPrivateLayoutSetPrototypeId()) %>" />
 									</liferay-portlet:renderURL>
@@ -190,7 +190,7 @@ long userGroupId = BeanParamUtil.getLong(userGroup, request, "userGroupId");
 									String title = LanguageUtil.format(pageContext, "edit-x-site-template", privateLayoutSetPrototype.getName(locale));
 									%>
 
-									<aui:a href="<%= editLayoutSetPrototype %>" label="<%= privateLayoutSetPrototype.getName(locale) %>" title="<%= title %>" />
+									<aui:a href="<%= editLayoutSetPrototypeURL %>" label="<%= privateLayoutSetPrototype.getName(locale) %>" title="<%= title %>" />
 								</c:when>
 								<c:when test="<%= (userGroup != null) && (userGroupUserCount > 0) %>">
 									<%= privateLayoutSetPrototype.getName() %>

@@ -87,10 +87,10 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 			UserGroupConstants.DEFAULT_PARENT_USER_GROUP_ID);
 		userGroup.setName(name);
 		userGroup.setDescription(description);
-		userGroup.setAddedByLDAPImport(
-			LDAPUserGroupTransactionThreadLocal.isOriginatesFromLDAP());
 		userGroup.setPublicLayoutSetPrototypeId(publicLayoutSetPrototypeId);
 		userGroup.setPrivateLayoutSetPrototypeId(privateLayoutSetPrototypeId);
+		userGroup.setAddedByLDAPImport(
+			LDAPUserGroupTransactionThreadLocal.isOriginatesFromLDAP());
 
 		userGroupPersistence.update(userGroup, false);
 
@@ -360,30 +360,26 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 
 		UserGroup userGroup = userGroupLocalService.getUserGroup(userGroupId);
 
-		LayoutSetPrototype layoutSetPrototype = null;
-
-		long groupId = 0;
-
 		if (userGroup.getPrivateLayoutSetPrototypeId() > 0) {
-			layoutSetPrototype =
+			LayoutSetPrototype layoutSetPrototype =
 				layoutSetPrototypeLocalService.getLayoutSetPrototype(
 					userGroup.getPrivateLayoutSetPrototypeId());
 
-			groupId = layoutSetPrototype.getGroup().getGroupId();
+			Group group = layoutSetPrototype.getGroup();
 
 			files[0] = layoutLocalService.exportLayoutsAsFile(
-				groupId, true, null, parameterMap, null, null);
+				group.getGroupId(), true, null, parameterMap, null, null);
 		}
 
 		if (userGroup.getPublicLayoutSetPrototypeId() > 0) {
-			layoutSetPrototype =
+			LayoutSetPrototype layoutSetPrototype =
 				layoutSetPrototypeLocalService.getLayoutSetPrototype(
 					userGroup.getPublicLayoutSetPrototypeId());
 
-			groupId = layoutSetPrototype.getGroup().getGroupId();
+			Group group = layoutSetPrototype.getGroup();
 
 			files[1] = layoutLocalService.exportLayoutsAsFile(
-				groupId, true, null, parameterMap, null, null);
+				group.getGroupId(), true, null, parameterMap, null, null);
 		}
 
 		return files;
