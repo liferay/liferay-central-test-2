@@ -49,8 +49,8 @@
 				<aui:input cssClass="first keywords lfr-search-combobox-item categories-admin-search" label="" name="categoriesAdminSearchInput" type="text" />
 
 				<aui:select cssClass="categories-admin-select-search" label="" name="categoriesAdminSelectSearch">
-					<aui:option label="categories"/>
-					<aui:option label="vocabularies" selected="<%= true %>"/>
+					<aui:option label="categories" />
+					<aui:option label="vocabularies" selected="<%= true %>" />
 				</aui:select>
 			</div>
 		</div>
