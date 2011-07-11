@@ -26,9 +26,9 @@ import com.liferay.portlet.messageboards.service.permission.MBCategoryPermission
 
 /**
  * @author Julio Camarero
- * @author Juan Fern·ndez
- * @author Raymond AugÈ
- * @author Sergio Gonz·lez
+ * @author Juan Fern√°ndez
+ * @author Raymond Aug√©
+ * @author Sergio Gonz√°lez
  * @author Jonathan Lee
  */
 public class MBCategoryAssetRendererFactory extends BaseAssetRendererFactory {

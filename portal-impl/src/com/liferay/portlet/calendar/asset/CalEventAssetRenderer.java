@@ -96,10 +96,9 @@ public class CalEventAssetRenderer extends BaseAssetRenderer {
 			PortletKeys.CALENDAR, PortletRequest.RENDER_PHASE);
 
 		portletURL.setWindowState(windowState);
-		portletURL.setParameter(
-			"struts_action", "/calendar/view_event");
-		portletURL.setParameter(
-			"eventId", String.valueOf(_event.getEventId()));
+
+		portletURL.setParameter("struts_action", "/calendar/view_event");
+		portletURL.setParameter("eventId", String.valueOf(_event.getEventId()));
 
 		return portletURL;
 	}

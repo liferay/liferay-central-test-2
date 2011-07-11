@@ -92,6 +92,7 @@ public class MBMessageAssetRenderer extends BaseAssetRenderer {
 			PortletKeys.MESSAGE_BOARDS, PortletRequest.RENDER_PHASE);
 
 		portletURL.setWindowState(windowState);
+
 		portletURL.setParameter(
 			"struts_action", "/message_boards/view_message");
 		portletURL.setParameter(

@@ -104,10 +104,9 @@ public class BlogsEntryAssetRenderer extends BaseAssetRenderer {
 			PortletKeys.BLOGS, PortletRequest.RENDER_PHASE);
 
 		portletURL.setWindowState(windowState);
-		portletURL.setParameter(
-			"struts_action", "/blogs/view_entry");
-		portletURL.setParameter(
-			"entryId", String.valueOf(_entry.getEntryId()));
+
+		portletURL.setParameter("struts_action", "/blogs/view_entry");
+		portletURL.setParameter("entryId", String.valueOf(_entry.getEntryId()));
 
 		return portletURL;
 	}

@@ -38,8 +38,8 @@ import javax.portlet.WindowState;
 
 /**
  * @author Julio Camarero
- * @author Juan Fern·ndez
- * @author Sergio Gonz·lez
+ * @author Juan Fern√°ndez
+ * @author Sergio Gonz√°lez
  * @author Jonathan Lee
  */
 public class MBCategoryAssetRenderer extends BaseAssetRenderer {
@@ -82,7 +82,6 @@ public class MBCategoryAssetRenderer extends BaseAssetRenderer {
 		return portletURL;
 	}
 
-
 	@Override
 	public PortletURL getURLView(
 			LiferayPortletResponse liferayPortletResponse,
@@ -93,8 +92,8 @@ public class MBCategoryAssetRenderer extends BaseAssetRenderer {
 			PortletKeys.MESSAGE_BOARDS, PortletRequest.RENDER_PHASE);
 
 		portletURL.setWindowState(windowState);
-		portletURL.setParameter(
-			"struts_action", "/message_boards/view");
+
+		portletURL.setParameter("struts_action", "/message_boards/view");
 		portletURL.setParameter(
 			"mbCategoryId", String.valueOf(_category.getCategoryId()));
 
@@ -113,7 +112,7 @@ public class MBCategoryAssetRenderer extends BaseAssetRenderer {
 
 		return themeDisplay.getPortalURL() + themeDisplay.getPathMain() +
 			"/message_boards/find_category?mbCategoryId=" +
-			_category.getCategoryId();
+				_category.getCategoryId();
 	}
 
 	public long getUserId() {

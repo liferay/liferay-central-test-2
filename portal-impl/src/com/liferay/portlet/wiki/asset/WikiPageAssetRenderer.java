@@ -133,6 +133,7 @@ public class WikiPageAssetRenderer extends BaseAssetRenderer {
 			PortletKeys.WIKI, PortletRequest.RENDER_PHASE);
 
 		portletURL.setWindowState(windowState);
+
 		portletURL.setParameter("struts_action", "/wiki/view");
 		portletURL.setParameter("nodeId", String.valueOf(_page.getNodeId()));
 		portletURL.setParameter("title", _page.getTitle());
