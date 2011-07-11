@@ -103,7 +103,7 @@ String chooseCallback = (String)request.getAttribute("record_set_action.jsp-choo
 		</portlet:resourceURL>
 
 		<%
-		StringBundler sb = new StringBundler(7);
+		StringBundler sb = new StringBundler(6);
 
 		sb.append("javascript:");
 		sb.append(renderResponse.getNamespace());

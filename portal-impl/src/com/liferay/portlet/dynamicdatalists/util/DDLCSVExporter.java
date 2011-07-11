@@ -83,9 +83,9 @@ public class DDLCSVExporter extends BaseDDLExporter {
 			sb.append(StringPool.NEW_LINE);
 		}
 
-		String document = sb.toString();
+		String csv = sb.toString();
 
-		return document.getBytes();
+		return csv.getBytes();
 	}
 
 }

@@ -50,26 +50,25 @@ public class ExportRecordSetAction extends PortletAction {
 			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
 		throws Exception {
 
+		HttpServletRequest request =
+			PortalUtil.getHttpServletRequest(resourceRequest);
+		HttpServletResponse response =
+			PortalUtil.getHttpServletResponse(resourceResponse);
+
 		ThemeDisplay themeDisplay = (ThemeDisplay)resourceRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
 		long recordSetId = ParamUtil.getLong(resourceRequest, "recordSetId");
 
-		String fileExtension = ParamUtil.getString(
-			resourceRequest, "fileExtension");
-
-		HttpServletRequest httpServletRequest =
-			PortalUtil.getHttpServletRequest(resourceRequest);
-
-		HttpServletResponse httpServletResponse =
-			PortalUtil.getHttpServletResponse(resourceResponse);
-
 		DDLRecordSet recordSet = DDLRecordSetServiceUtil.getRecordSet(
 			recordSetId);
 
+		String fileExtension = ParamUtil.getString(
+			resourceRequest, "fileExtension");
+
 		String fileName =
 			recordSet.getName(themeDisplay.getLocale()) + CharPool.PERIOD +
-			fileExtension;
+				fileExtension;
 
 		DDLExportFormat exportFormat = DDLExportFormat.parse(fileExtension);
 
@@ -81,8 +80,7 @@ public class ExportRecordSetAction extends PortletAction {
 		String contentType = MimeTypesUtil.getContentType(fileName);
 
 		ServletResponseUtil.sendFile(
-			httpServletRequest, httpServletResponse, fileName, bytes,
-			contentType);
+			request, response, fileName, bytes, contentType);
 	}
 
 }

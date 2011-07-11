@@ -36,10 +36,10 @@ public class DDLExporterFactory {
 		return exporter;
 	}
 
-	public void setDDLExporters(Map<String, DDLExporter> ddlExporters) {
+	public void setDDLExporters(Map<String, DDLExporter> exporters) {
 		_exporters = new HashMap<DDLExportFormat, DDLExporter>();
 
-		for (Map.Entry<String, DDLExporter> entry : ddlExporters.entrySet()) {
+		for (Map.Entry<String, DDLExporter> entry : exporters.entrySet()) {
 			DDLExportFormat exportFormat = DDLExportFormat.parse(
 				entry.getKey());
 
