@@ -23,19 +23,19 @@
 <%@ include file="/html/common/themes/top_meta.jspf" %>
 <%@ include file="/html/common/themes/top_meta-ext.jsp" %>
 
-<link rel="Shortcut Icon" href="<%= themeDisplay.getPathThemeImages() %>/<%= PropsValues.THEME_SHORTCUT_ICON %>" />
+<link href="<%= themeDisplay.getPathThemeImages() %>/<%= PropsValues.THEME_SHORTCUT_ICON %>" rel="Shortcut Icon" />
 
 <%-- Available Translations --%>
 
 <%
 Locale[] availableLocales = LanguageUtil.getAvailableLocales();
 
-for(Locale curLocale : availableLocales) {
-	if(!curLocale.equals(locale)){
-		String alternateFriendlyURL = PortalUtil.getLayoutFriendlyURL(layout, themeDisplay, curLocale) ;
+for (Locale curLocale : availableLocales) {
+	if (!curLocale.equals(locale)) {
+		String alternateFriendlyURL = PortalUtil.getLayoutFriendlyURL(layout, themeDisplay, curLocale);
 %>
 
-		<link rel="alternate" href="<%= alternateFriendlyURL %>" hreflang="<%= LocaleUtil.toW3cLanguageId(curLocale) %>" title="<%= layout.getHTMLTitle(curLocale) %>" />
+		<link href="<%= alternateFriendlyURL %>" hreflang="<%= LocaleUtil.toW3cLanguageId(curLocale) %>" rel="alternate" title="<%= layout.getHTMLTitle(curLocale) %>" />
 
 <%
 	}
