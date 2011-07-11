@@ -366,13 +366,6 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 	}
 
 	public List<Folder> getFolders(
-			long repositoryId, long parentFolderId, int start, int end)
-		throws PortalException, SystemException {
-
-		return getFolders(repositoryId, parentFolderId, true, start, end);
-	}
-
-	public List<Folder> getFolders(
 			long repositoryId, long parentFolderId, boolean includeMountFolders,
 			int start, int end)
 		throws PortalException, SystemException {
@@ -380,14 +373,6 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 		return getFolders(
 			repositoryId, parentFolderId, includeMountFolders,
 			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
-	}
-
-	public List<Folder> getFolders(
-			long repositoryId, long parentFolderId, int start, int end,
-			OrderByComparator obc)
-		throws PortalException, SystemException {
-
-		return getFolders(repositoryId, parentFolderId, true, start, end, obc);
 	}
 
 	public List<Folder> getFolders(
@@ -399,6 +384,21 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 
 		return localRepository.getFolders(
 			parentFolderId, includeMountFolders, start, end, obc);
+	}
+
+	public List<Folder> getFolders(
+			long repositoryId, long parentFolderId, int start, int end)
+		throws PortalException, SystemException {
+
+		return getFolders(repositoryId, parentFolderId, true, start, end);
+	}
+
+	public List<Folder> getFolders(
+			long repositoryId, long parentFolderId, int start, int end,
+			OrderByComparator obc)
+		throws PortalException, SystemException {
+
+		return getFolders(repositoryId, parentFolderId, true, start, end, obc);
 	}
 
 	public List<Object> getFoldersAndFileEntriesAndFileShortcuts(
@@ -481,8 +481,7 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 		return localRepository.getMountFolders(parentFolderId, start, end, obc);
 	}
 
-	public int getMountFoldersCount(
-			long repositoryId, long parentFolderId)
+	public int getMountFoldersCount(long repositoryId, long parentFolderId)
 		throws PortalException, SystemException {
 
 		LocalRepository localRepository = getLocalRepository(repositoryId);
