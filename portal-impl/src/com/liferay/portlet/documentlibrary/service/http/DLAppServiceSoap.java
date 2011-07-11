@@ -85,10 +85,13 @@ public class DLAppServiceSoap {
 		}
 	}
 
-	public static void checkInFileEntry(long fileEntryId,
-		java.lang.String lockUuid) throws RemoteException {
+	public static void checkInFileEntry(long fileEntryId, boolean major,
+		java.lang.String changeLog,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
 		try {
-			DLAppServiceUtil.checkInFileEntry(fileEntryId, lockUuid);
+			DLAppServiceUtil.checkInFileEntry(fileEntryId, major, changeLog,
+				serviceContext);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -97,13 +100,10 @@ public class DLAppServiceSoap {
 		}
 	}
 
-	public static void checkInFileEntry(long fileEntryId, boolean major,
-		java.lang.String changeLog,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws RemoteException {
+	public static void checkInFileEntry(long fileEntryId,
+		java.lang.String lockUuid) throws RemoteException {
 		try {
-			DLAppServiceUtil.checkInFileEntry(fileEntryId, major, changeLog,
-				serviceContext);
+			DLAppServiceUtil.checkInFileEntry(fileEntryId, lockUuid);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
