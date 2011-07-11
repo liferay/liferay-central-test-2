@@ -110,12 +110,6 @@ public class LiferayRepository
 		dlFileEntryService.cancelCheckOut(fileEntryId);
 	}
 
-	public void checkInFileEntry(long fileEntryId, String lockUuid)
-		throws PortalException, SystemException {
-
-		dlFileEntryService.checkInFileEntry(fileEntryId, lockUuid);
-	}
-
 	public void checkInFileEntry(
 			long fileEntryId, boolean major, String changeLog,
 			ServiceContext serviceContext)
@@ -123,6 +117,12 @@ public class LiferayRepository
 
 		dlFileEntryService.checkInFileEntry(
 			fileEntryId, major, changeLog, serviceContext);
+	}
+
+	public void checkInFileEntry(long fileEntryId, String lockUuid)
+		throws PortalException, SystemException {
+
+		dlFileEntryService.checkInFileEntry(fileEntryId, lockUuid);
 	}
 
 	public FileEntry checkOutFileEntry(long fileEntryId)

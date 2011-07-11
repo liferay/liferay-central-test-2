@@ -60,12 +60,13 @@ public class DLFolderFinderImpl
 	public static String FIND_FS_BY_G_F_S =
 		DLFolderFinder.class.getName() + ".findFS_ByG_F_S";
 
-	public int countF_FE_FS_ByG_F_S(long groupId, long folderId, int status,
-		boolean includeMountFolders)
+	public int countF_FE_FS_ByG_F_S(
+			long groupId, long folderId, int status,
+			boolean includeMountFolders)
 		throws SystemException {
 
-		return doCountF_FE_FS_ByG_F_S(groupId, folderId, status,
-			includeMountFolders, false);
+		return doCountF_FE_FS_ByG_F_S(
+			groupId, folderId, status, includeMountFolders, false);
 	}
 
 	public int countFE_FS_ByG_F_S(long groupId, long folderId, int status)

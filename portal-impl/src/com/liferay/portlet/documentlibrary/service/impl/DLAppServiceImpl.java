@@ -168,14 +168,6 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 		repository.cancelCheckOut(fileEntryId);
 	}
 
-	public void checkInFileEntry(long fileEntryId, String lockUuid)
-		throws PortalException, SystemException {
-
-		Repository repository = getRepository(0, fileEntryId, 0);
-
-		repository.checkInFileEntry(fileEntryId, lockUuid);
-	}
-
 	public void checkInFileEntry(
 			long fileEntryId, boolean major, String changeLog,
 			ServiceContext serviceContext)
@@ -185,6 +177,14 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 
 		repository.checkInFileEntry(
 			fileEntryId, major, changeLog, serviceContext);
+	}
+
+	public void checkInFileEntry(long fileEntryId, String lockUuid)
+		throws PortalException, SystemException {
+
+		Repository repository = getRepository(0, fileEntryId, 0);
+
+		repository.checkInFileEntry(fileEntryId, lockUuid);
 	}
 
 	public void checkOutFileEntry(long fileEntryId)
@@ -455,13 +455,6 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 	}
 
 	public List<Folder> getFolders(
-			long repositoryId, long parentFolderId, int start, int end)
-		throws PortalException, SystemException {
-
-		return getFolders(repositoryId, parentFolderId, start, end, null);
-	}
-
-	public List<Folder> getFolders(
 			long repositoryId, long parentFolderId, boolean includeMountFolders,
 			int start, int end)
 		throws PortalException, SystemException {
@@ -469,16 +462,6 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 		return getFolders(
 			repositoryId, parentFolderId, includeMountFolders, start, end,
 			null);
-	}
-
-	public List<Folder> getFolders(
-			long repositoryId, long parentFolderId, int start, int end,
-			OrderByComparator obc)
-		throws PortalException, SystemException {
-
-		Repository repository = getRepository(repositoryId);
-
-		return repository.getFolders(parentFolderId, true, start, end, obc);
 	}
 
 	public List<Folder> getFolders(
@@ -490,6 +473,23 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 
 		return repository.getFolders(
 			parentFolderId, includeMountFolders, start, end, obc);
+	}
+
+	public List<Folder> getFolders(
+			long repositoryId, long parentFolderId, int start, int end)
+		throws PortalException, SystemException {
+
+		return getFolders(repositoryId, parentFolderId, start, end, null);
+	}
+
+	public List<Folder> getFolders(
+			long repositoryId, long parentFolderId, int start, int end,
+			OrderByComparator obc)
+		throws PortalException, SystemException {
+
+		Repository repository = getRepository(repositoryId);
+
+		return repository.getFolders(parentFolderId, true, start, end, obc);
 	}
 
 	public List<Object> getFoldersAndFileEntriesAndFileShortcuts(

@@ -202,11 +202,6 @@ public class CMISRepository extends BaseCmisRepository {
 		}
 	}
 
-	public void checkInFileEntry(long fileEntryId, String lockUuid) {
-		checkInFileEntry(
-			fileEntryId, false, StringPool.BLANK, new ServiceContext());
-	}
-
 	public void checkInFileEntry(
 		long fileEntryId, boolean major, String changeLog,
 		ServiceContext serviceContext) {
@@ -229,6 +224,11 @@ public class CMISRepository extends BaseCmisRepository {
 		catch (Exception e) {
 			_log.error(e, e);
 		}
+	}
+
+	public void checkInFileEntry(long fileEntryId, String lockUuid) {
+		checkInFileEntry(
+			fileEntryId, false, StringPool.BLANK, new ServiceContext());
 	}
 
 	public FileEntry checkOutFileEntry(long fileEntryId)
@@ -639,19 +639,6 @@ public class CMISRepository extends BaseCmisRepository {
 		return count;
 	}
 
-	public List<Folder> getMountFolders(
-			long parentFolderId, int start, int end, OrderByComparator obc)
-		throws SystemException {
-
-		return new ArrayList<Folder>();
-	}
-
-	public int getMountFoldersCount(long parentFolderId)
-		throws SystemException {
-
-		return 0;
-	}
-
 	@Override
 	public String getLatestVersionId(String objectId) throws SystemException {
 		try {
@@ -668,6 +655,16 @@ public class CMISRepository extends BaseCmisRepository {
 		catch (Exception e) {
 			throw new RepositoryException(e);
 		}
+	}
+
+	public List<Folder> getMountFolders(
+		long parentFolderId, int start, int end, OrderByComparator obc) {
+
+		return new ArrayList<Folder>();
+	}
+
+	public int getMountFoldersCount(long parentFolderId) {
+		return 0;
 	}
 
 	@Override

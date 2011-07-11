@@ -228,14 +228,6 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 	}
 
 	public List<DLFolder> getFolders(
-			long groupId, long parentFolderId, int start, int end,
-			OrderByComparator obc)
-		throws SystemException {
-
-		return getFolders(groupId, parentFolderId, true, start, end, obc);
-	}
-
-	public List<DLFolder> getFolders(
 			long groupId, long parentFolderId, boolean includeMountfolders,
 			int start, int end,	OrderByComparator obc)
 		throws SystemException {
@@ -248,6 +240,14 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 			return dlFolderPersistence.findByG_P_M(
 				groupId, parentFolderId, false, start, end, obc);
 		}
+	}
+
+	public List<DLFolder> getFolders(
+			long groupId, long parentFolderId, int start, int end,
+			OrderByComparator obc)
+		throws SystemException {
+
+		return getFolders(groupId, parentFolderId, true, start, end, obc);
 	}
 
 	public List<Object> getFoldersAndFileEntriesAndFileShortcuts(

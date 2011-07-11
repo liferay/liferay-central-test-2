@@ -446,14 +446,14 @@
 			<finder-column name="groupId" />
 			<finder-column name="parentFolderId" />
 		</finder>
+		<finder name="P_N" return-type="Collection">
+			<finder-column name="parentFolderId" />
+			<finder-column name="name" />
+		</finder>
 		<finder name="G_P_M" return-type="Collection">
 			<finder-column name="groupId" />
 			<finder-column name="parentFolderId" />
 			<finder-column name="mountPoint" />
-		</finder>
-		<finder name="P_N" return-type="Collection">
-			<finder-column name="parentFolderId" />
-			<finder-column name="name" />
 		</finder>
 		<finder name="G_P_N" return-type="DLFolder" unique="true">
 			<finder-column name="groupId" />

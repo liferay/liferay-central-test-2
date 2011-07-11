@@ -150,21 +150,21 @@ public class BaseLocalRepositoryImpl implements LocalRepository {
 	}
 
 	public List<Object> getFoldersAndFileEntriesAndFileShortcuts(
-			long folderId, int status, int start, int end,
-			OrderByComparator obc)
-		throws SystemException {
-
-		return getFoldersAndFileEntriesAndFileShortcuts(
-			folderId, status, true, start, end, obc);
-	}
-
-	public List<Object> getFoldersAndFileEntriesAndFileShortcuts(
 			long folderId, int status, boolean includeMountFolders, int start,
 			int end, OrderByComparator obc)
 		throws SystemException {
 
 		return _repository.getFoldersAndFileEntriesAndFileShortcuts(
 			folderId, status, includeMountFolders, start, end, obc);
+	}
+
+	public List<Object> getFoldersAndFileEntriesAndFileShortcuts(
+			long folderId, int status, int start, int end,
+			OrderByComparator obc)
+		throws SystemException {
+
+		return getFoldersAndFileEntriesAndFileShortcuts(
+			folderId, status, true, start, end, obc);
 	}
 
 	public int getFoldersAndFileEntriesAndFileShortcutsCount(

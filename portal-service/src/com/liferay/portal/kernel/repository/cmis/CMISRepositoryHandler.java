@@ -66,12 +66,6 @@ public abstract class CMISRepositoryHandler extends BaseRepositoryImpl {
 		_baseCmisRepository.cancelCheckOut(fileEntryId);
 	}
 
-	public void checkInFileEntry(long fileEntryId, String lockUuid)
-		throws PortalException, SystemException {
-
-		_baseCmisRepository.checkInFileEntry(fileEntryId, lockUuid);
-	}
-
 	public void checkInFileEntry(
 			long fileEntryId, boolean major, String changeLog,
 			ServiceContext serviceContext)
@@ -79,6 +73,12 @@ public abstract class CMISRepositoryHandler extends BaseRepositoryImpl {
 
 		_baseCmisRepository.checkInFileEntry(
 			fileEntryId, major, changeLog, serviceContext);
+	}
+
+	public void checkInFileEntry(long fileEntryId, String lockUuid)
+		throws PortalException, SystemException {
+
+		_baseCmisRepository.checkInFileEntry(fileEntryId, lockUuid);
 	}
 
 	public FileEntry checkOutFileEntry(long fileEntryId)
