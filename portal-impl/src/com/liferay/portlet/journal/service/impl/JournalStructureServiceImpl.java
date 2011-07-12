@@ -104,6 +104,13 @@ public class JournalStructureServiceImpl
 			start, end, obc);
 	}
 
+	public int searchCount(long companyId, long[] groupIds, String keywords)
+		throws SystemException {
+
+		return journalStructureFinder.filterCountByKeywords(
+			companyId, groupIds, keywords);
+	}
+
 	public int searchCount(
 			long companyId, long[] groupIds, String structureId, String name,
 			String description, boolean andOperator)
@@ -111,13 +118,6 @@ public class JournalStructureServiceImpl
 
 		return journalStructureFinder.filterCountByC_G_S_N_D(
 			companyId, groupIds, structureId, name, description, andOperator);
-	}
-
-	public int searchCount(long companyId, long[] groupIds, String keywords)
-		throws SystemException {
-
-		return journalStructureFinder.filterCountByKeywords(
-			companyId, groupIds, keywords);
 	}
 
 	public JournalStructure updateStructure(
