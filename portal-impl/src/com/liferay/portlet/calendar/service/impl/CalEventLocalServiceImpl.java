@@ -904,6 +904,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 		Calendar eventCal = CalendarFactoryUtil.getCalendar(
 			TimeZoneUtil.getTimeZone(StringPool.UTC));
+
 		eventCal.setTime(event.getStartDate());
 
 		Calendar recurrenceCal = (Calendar)tzICal.clone();
