@@ -188,6 +188,24 @@ public class UpdateLayoutAction extends JSONAction {
 				updateLayout = false;
 			}
 		}
+		else if (cmd.equals("redo_layout_revision")) {
+			long layoutRevisionId = ParamUtil.getLong(
+				request, "layoutRevisionId");
+			long layoutSetBranchId = ParamUtil.getLong(
+				request, "layoutSetBranchId");
+
+			ServiceContext serviceContext = ServiceContextFactory.getInstance(
+				request);
+
+			LayoutRevisionLocalServiceUtil.updateStatus(
+				userId, layoutRevisionId, WorkflowConstants.STATUS_DRAFT,
+				serviceContext);
+
+			StagingUtil.setRecentLayoutRevisionId(
+				request, layoutSetBranchId, layout.getPlid(), layoutRevisionId);
+
+			updateLayout = false;
+		}
 		else if (cmd.equals("select_layout_revision")) {
 			long layoutRevisionId = ParamUtil.getLong(
 				request, "layoutRevisionId");
@@ -212,24 +230,6 @@ public class UpdateLayoutAction extends JSONAction {
 
 			layoutTypeSettingsProperties.putAll(formTypeSettingsProperties);
 		}
-		else if (cmd.equals("redo_layout_revision")) {
-			long layoutRevisionId = ParamUtil.getLong(
-				request, "layoutRevisionId");
-			long layoutSetBranchId = ParamUtil.getLong(
-				request, "layoutSetBranchId");
-
-			ServiceContext serviceContext = ServiceContextFactory.getInstance(
-				request);
-
-			LayoutRevisionLocalServiceUtil.updateStatus(
-				userId, layoutRevisionId, WorkflowConstants.STATUS_DRAFT,
-				serviceContext);
-
-			StagingUtil.setRecentLayoutRevisionId(
-				request, layoutSetBranchId, layout.getPlid(), layoutRevisionId);
-
-			updateLayout = false;
-		}
 		else if (cmd.equals("undo_layout_revision")) {
 			long layoutRevisionId = ParamUtil.getLong(
 				request, "layoutRevisionId");
@@ -241,8 +241,8 @@ public class UpdateLayoutAction extends JSONAction {
 
 			LayoutRevision layoutRevision =
 				LayoutRevisionLocalServiceUtil.updateStatus(
-				userId, layoutRevisionId, WorkflowConstants.STATUS_INACTIVE,
-				serviceContext);
+					userId, layoutRevisionId, WorkflowConstants.STATUS_INACTIVE,
+					serviceContext);
 
 			StagingUtil.setRecentLayoutRevisionId(
 				request, layoutSetBranchId, layout.getPlid(),

@@ -344,11 +344,11 @@ if (layout != null) {
 								<c:if test="<%= layoutRevision.hasChildren() %>">
 
 									<%
-									List<LayoutRevision> childRevisions = layoutRevision.getChildren();
+									List<LayoutRevision> childLayoutRevisions = layoutRevision.getChildren();
 
-									LayoutRevision firstChildRevision = childRevisions.get(0);
+									LayoutRevision firstChildLayoutRevision = childLayoutRevisions.get(0);
 
-									if (firstChildRevision.getStatus() == WorkflowConstants.STATUS_INACTIVE) {
+									if (firstChildLayoutRevision.getStatus() == WorkflowConstants.STATUS_INACTIVE) {
 									%>
 
 										var redoButton = dockbar.redoButton;
@@ -357,8 +357,8 @@ if (layout != null) {
 
 										redoButton.get('contentBox').attr(
 											{
-												'data-layoutRevisionId': '<%= firstChildRevision.getLayoutRevisionId() %>',
-												'data-layoutSetBranchId': '<%= firstChildRevision.getLayoutSetBranchId() %>'
+												'data-layoutRevisionId': '<%= firstChildLayoutRevision.getLayoutRevisionId() %>',
+												'data-layoutSetBranchId': '<%= firstChildLayoutRevision.getLayoutSetBranchId() %>'
 											}
 										);
 

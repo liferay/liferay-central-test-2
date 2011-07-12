@@ -173,7 +173,7 @@ public class LayoutStagingHandler implements InvocationHandler {
 							layoutRevisionId);
 
 					if (layoutRevision.getStatus() !=
-						WorkflowConstants.STATUS_INACTIVE) {
+							WorkflowConstants.STATUS_INACTIVE) {
 
 						return layoutRevision;
 					}
@@ -183,9 +183,8 @@ public class LayoutStagingHandler implements InvocationHandler {
 						LayoutRevisionConstants.
 							DEFAULT_PARENT_LAYOUT_REVISION_ID);
 
-					layoutRevisionId =
-						StagingUtil.getRecentLayoutRevisionId(
-							user, layoutSetBranchId, layout.getPlid());
+					layoutRevisionId = StagingUtil.getRecentLayoutRevisionId(
+						user, layoutSetBranchId, layout.getPlid());
 				}
 				catch (NoSuchLayoutRevisionException nslre) {
 				}
