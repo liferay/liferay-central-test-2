@@ -65,8 +65,7 @@ if (Validator.isNull(src)) {
 		sb.append(image);
 		sb.append(".png");
 
-		src = sb.toString();
-		src = StringUtil.replace(src, "common/../", "");
+		src = StringUtil.replace(sb.toString(), "common/../", "");
 	}
 }
 
