@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.util.Digester;
 import com.liferay.portal.kernel.util.DigesterUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PropsUtil;
 
@@ -32,6 +33,7 @@ import java.security.SecureRandom;
 import java.util.Random;
 
 import jodd.util.BCrypt;
+
 import org.vps.crypt.Crypt;
 
 /**
@@ -45,6 +47,11 @@ public class PwdEncryptor {
 			PropsKeys.PASSWORDS_ENCRYPTION_ALGORITHM)).toUpperCase();
 
 	public static final String TYPE_BCRYPT = "BCRYPT";
+
+	/**
+	 * @deprecated {@link #TYPE_UFC_CRYPT}
+	 */
+	public static final String TYPE_CRYPT = "CRYPT";
 
 	public static final String TYPE_MD2 = "MD2";
 
@@ -91,7 +98,9 @@ public class PwdEncryptor {
 
 			return encodePassword(algorithm, clearTextPassword, saltBytes);
 		}
-		else if (algorithm.equals(TYPE_UFC_CRYPT)) {
+		else if (algorithm.equals(TYPE_CRYPT) ||
+				 algorithm.equals(TYPE_UFC_CRYPT)) {
+
 			byte[] saltBytes = _getSaltFromCrypt(currentEncryptedPassword);
 
 			return encodePassword(algorithm, clearTextPassword, saltBytes);
@@ -118,7 +127,10 @@ public class PwdEncryptor {
 				String salt = new String(saltBytes);
 
 				return BCrypt.hashpw(clearTextPassword, salt);
-			} else if (algorithm.equals(TYPE_UFC_CRYPT)) {
+			}
+			else if (algorithm.equals(TYPE_CRYPT) ||
+					 algorithm.equals(TYPE_UFC_CRYPT)) {
+
 				return Crypt.crypt(
 					saltBytes, clearTextPassword.getBytes(Digester.ENCODING));
 			}
@@ -183,12 +195,12 @@ public class PwdEncryptor {
 			if (Validator.isNull(bcryptString)) {
 				String salt = BCrypt.gensalt();
 
-				saltBytes = salt.getBytes("UTF-8");
+				saltBytes = salt.getBytes(StringPool.UTF8);
 			}
 			else {
 				String salt = bcryptString.substring(0, 29);
 
-				saltBytes = salt.getBytes("UTF-8");
+				saltBytes = salt.getBytes(StringPool.UTF8);
 			}
 		}
 		catch (UnsupportedEncodingException uee) {
