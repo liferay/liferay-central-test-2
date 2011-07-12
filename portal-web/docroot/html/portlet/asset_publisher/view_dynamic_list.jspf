@@ -27,7 +27,7 @@ assetEntryQuery.setOrderByType1(orderByType1);
 assetEntryQuery.setOrderByType2(orderByType2);
 assetEntryQuery.setStart(start);
 
-List results = new ArrayList();
+List<AssetEntry> results = new ArrayList<AssetEntry>();
 int total = 0;
 
 if (!portletName.equals(PortletKeys.RELATED_ASSETS) || (mainJournalArticle != null)) {

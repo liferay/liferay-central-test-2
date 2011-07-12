@@ -43,8 +43,13 @@ Group scopeGroup = themeDisplay.getScopeGroup();
 	<aui:input name="assetEntryOrder" type="hidden" value="-1" />
 
 	<c:if test="<%= typeSelection.equals(StringPool.BLANK) %>">
+
+		<%
+		String rootPortletId = PortletConstants.getRootPortletId(portletResource);
+		%>
+
 		<c:choose>
-			<c:when test="<%= PortletConstants.getRootPortletId(portletResource).equals(PortletKeys.RELATED_ASSETS) %>" >
+			<c:when test="<%= rootPortletId.equals(PortletKeys.RELATED_ASSETS) %>">
 				<aui:input name="preferences--selectionStyle--" type="hidden" value="dynamic" />
 			</c:when>
 			<c:otherwise>

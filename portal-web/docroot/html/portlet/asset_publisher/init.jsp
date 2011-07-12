@@ -144,7 +144,7 @@ if (showOnlyLayoutAssets) {
 }
 
 JournalArticle mainJournalArticle = null;
-	
+
 if (portletName.equals(PortletKeys.RELATED_ASSETS)) {
 	mainJournalArticle = themeDisplay.getMainJournalArticle();
 
