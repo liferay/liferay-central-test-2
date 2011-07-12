@@ -94,8 +94,8 @@ public class JSONWebServiceConfigurator extends FindClass {
 				classPathFiles[0] = portalImplJarFile;
 			}
 			else {
-				classPathFiles =
-					ClassLoaderUtil.getDefaultClasspath(classLoader);
+				classPathFiles = ClassLoaderUtil.getDefaultClasspath(
+					classLoader);
 			}
 		}
 
