@@ -1059,7 +1059,6 @@
 			ddmURL.setParameter('scopeStorageType', config.storageType);
 			ddmURL.setParameter('scopeStructureName', config.structureName);
 			ddmURL.setParameter('scopeStructureType', config.structureType);
-			ddmURL.setParameter('structureId', config.structureId);
 
 			if (config.showManageTemplates) {
 				ddmURL.setParameter('showManageTemplates', config.showManageTemplates);
@@ -1069,6 +1068,7 @@
 				ddmURL.setParameter('showToolbar', config.showToolbar);
 			}
 
+			ddmURL.setParameter('structureId', config.structureId);
 			ddmURL.setParameter('struts_action', '/dynamic_data_mapping/view');
 
 			if (config.struts_action) {
