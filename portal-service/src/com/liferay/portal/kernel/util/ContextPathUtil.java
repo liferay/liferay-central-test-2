@@ -36,7 +36,7 @@ public class ContextPathUtil {
 	}
 
 	public static String getContextPath(ServletContext servletContext) {
-		String contextPath;
+		String contextPath = null;
 
 		if (ServletVersionDetector.is2_5()) {
 			contextPath = servletContext.getContextPath();
