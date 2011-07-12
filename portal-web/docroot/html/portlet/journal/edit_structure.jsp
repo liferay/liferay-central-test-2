@@ -71,7 +71,7 @@ if (Validator.isNull(xsd)) {
 	}
 }
 
-// Bug with dom4j requires you to remove "\r\n" and " " or else root.elements()
+// Bug with dom4j requires you to remove "\r\n" and "  " or else root.elements()
 // and root.content() will return different number of objects
 
 xsd = JS.decodeURIComponent(xsd);
