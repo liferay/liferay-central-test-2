@@ -68,7 +68,7 @@
 			%>
 
 		</liferay-ui:search-container-column-text>
-  	</c:when>
+ 	</c:when>
 	<c:otherwise>
 		<liferay-ui:search-container-column-text
 			href="<%= rowURL %>"
