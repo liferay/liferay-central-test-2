@@ -54,17 +54,18 @@ import com.liferay.portlet.documentlibrary.service.DLSyncServiceUtil;
  * @generated
  */
 public class DLSyncServiceHttp {
-	public static java.io.InputStream getFileDeltaAsStream(
-		HttpPrincipal httpPrincipal, long userId, long fileEntryId,
-		java.lang.String srcVersion, java.lang.String destVersion)
+	public static java.io.InputStream getFileEntryDeltaAsStream(
+		HttpPrincipal httpPrincipal, long fileEntryId,
+		java.lang.String sourceVersion, java.lang.String destinationVersion)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(DLSyncServiceUtil.class.getName(),
-					"getFileDeltaAsStream", _getFileDeltaAsStreamParameterTypes0);
+					"getFileEntryDeltaAsStream",
+					_getFileEntryDeltaAsStreamParameterTypes0);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey, userId,
-					fileEntryId, srcVersion, destVersion);
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					fileEntryId, sourceVersion, destinationVersion);
 
 			Object returnObj = null;
 
@@ -92,23 +93,22 @@ public class DLSyncServiceHttp {
 		}
 	}
 
-	public static com.liferay.portal.kernel.repository.model.FileEntry updateFileEntryDelta(
-		HttpPrincipal httpPrincipal, long userId, long fileEntryId,
+	public static com.liferay.portal.kernel.repository.model.FileEntry updateFileEntry(
+		HttpPrincipal httpPrincipal, long fileEntryId,
 		java.lang.String sourceFileName, java.lang.String mimeType,
 		java.lang.String title, java.lang.String description,
 		java.lang.String changeLog, boolean majorVersion,
-		java.io.InputStream deltaInputStream, long size,
+		java.io.InputStream inputStream, long size,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(DLSyncServiceUtil.class.getName(),
-					"updateFileEntryDelta", _updateFileEntryDeltaParameterTypes1);
+					"updateFileEntry", _updateFileEntryParameterTypes1);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey, userId,
+			MethodHandler methodHandler = new MethodHandler(methodKey,
 					fileEntryId, sourceFileName, mimeType, title, description,
-					changeLog, majorVersion, deltaInputStream, size,
-					serviceContext);
+					changeLog, majorVersion, inputStream, size, serviceContext);
 
 			Object returnObj = null;
 
@@ -137,15 +137,13 @@ public class DLSyncServiceHttp {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(DLSyncServiceHttp.class);
-	private static final Class<?>[] _getFileDeltaAsStreamParameterTypes0 = new Class[] {
-			long.class, long.class, java.lang.String.class,
-			java.lang.String.class
+	private static final Class<?>[] _getFileEntryDeltaAsStreamParameterTypes0 = new Class[] {
+			long.class, java.lang.String.class, java.lang.String.class
 		};
-	private static final Class<?>[] _updateFileEntryDeltaParameterTypes1 = new Class[] {
-			long.class, long.class, java.lang.String.class,
+	private static final Class<?>[] _updateFileEntryParameterTypes1 = new Class[] {
+			long.class, java.lang.String.class, java.lang.String.class,
 			java.lang.String.class, java.lang.String.class,
-			java.lang.String.class, java.lang.String.class, boolean.class,
-			java.io.InputStream.class, long.class,
-			com.liferay.portal.service.ServiceContext.class
+			java.lang.String.class, boolean.class, java.io.InputStream.class,
+			long.class, com.liferay.portal.service.ServiceContext.class
 		};
 }

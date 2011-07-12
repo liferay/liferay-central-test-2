@@ -37,28 +37,28 @@ public class DLSyncServiceUtil {
 	 *
 	 * Never modify this class directly. Add custom service methods to {@link com.liferay.portlet.documentlibrary.service.impl.DLSyncServiceImpl} and rerun ServiceBuilder to regenerate this class.
 	 */
-	public static java.io.InputStream getFileDeltaAsStream(long userId,
-		long fileEntryId, java.lang.String srcVersion,
-		java.lang.String destVersion)
+	public static java.io.InputStream getFileEntryDeltaAsStream(
+		long fileEntryId, java.lang.String sourceVersion,
+		java.lang.String destinationVersion)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .getFileDeltaAsStream(userId, fileEntryId, srcVersion,
-			destVersion);
+				   .getFileEntryDeltaAsStream(fileEntryId, sourceVersion,
+			destinationVersion);
 	}
 
-	public static com.liferay.portal.kernel.repository.model.FileEntry updateFileEntryDelta(
-		long userId, long fileEntryId, java.lang.String sourceFileName,
+	public static com.liferay.portal.kernel.repository.model.FileEntry updateFileEntry(
+		long fileEntryId, java.lang.String sourceFileName,
 		java.lang.String mimeType, java.lang.String title,
 		java.lang.String description, java.lang.String changeLog,
-		boolean majorVersion, java.io.InputStream deltaInputStream, long size,
+		boolean majorVersion, java.io.InputStream inputStream, long size,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .updateFileEntryDelta(userId, fileEntryId, sourceFileName,
-			mimeType, title, description, changeLog, majorVersion,
-			deltaInputStream, size, serviceContext);
+				   .updateFileEntry(fileEntryId, sourceFileName, mimeType,
+			title, description, changeLog, majorVersion, inputStream, size,
+			serviceContext);
 	}
 
 	public static DLSyncService getService() {

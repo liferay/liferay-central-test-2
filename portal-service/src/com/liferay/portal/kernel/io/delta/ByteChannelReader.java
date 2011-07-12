@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.kernel.ldiff;
+package com.liferay.portal.kernel.io.delta;
 
 import java.io.IOException;
 
@@ -24,54 +24,58 @@ import java.nio.channels.ReadableByteChannel;
  */
 public class ByteChannelReader {
 
-	public ByteChannelReader(ReadableByteChannel channel) throws IOException {
-		this(channel, 1024);
-	}
-
-	public ByteChannelReader(ReadableByteChannel channel, int bufferLength)
+	public ByteChannelReader(ReadableByteChannel readableByteChannel)
 		throws IOException {
 
-		_buffer = ByteBuffer.allocate(bufferLength);
-		_channel = channel;
+		this(readableByteChannel, 1024);
+	}
 
-		if (_channel.read(_buffer) == -1) {
+	public ByteChannelReader(
+			ReadableByteChannel readableByteChannel, int bufferLength)
+		throws IOException {
+
+		_readableByteChannel = readableByteChannel;
+
+		_byteBuffer = ByteBuffer.allocate(bufferLength);
+
+		if (_readableByteChannel.read(_byteBuffer) == -1) {
 			_eof = true;
 		}
 		else {
 			_eof = false;
 		}
 
-		_buffer.flip();
+		_byteBuffer.flip();
 	}
 
 	public void ensureData(int length) throws IOException {
-		if (_buffer.remaining() < length) {
+		if (_byteBuffer.remaining() < length) {
 			read();
 
-			if (_eof || _buffer.remaining() < length) {
+			if (_eof || (_byteBuffer.remaining() < length)) {
 				throw new IOException("Unexpected EOF");
 			}
 		}
 	}
 
 	public byte get() {
-		return _buffer.get();
+		return _byteBuffer.get();
 	}
 
 	public byte get(int offset) {
-		return _buffer.get(_buffer.position() + offset);
+		return _byteBuffer.get(_byteBuffer.position() + offset);
 	}
 
 	public ByteBuffer getBuffer() {
-		return _buffer;
+		return _byteBuffer;
 	}
 
 	public boolean hasRemaining() {
-		return _buffer.hasRemaining();
+		return _byteBuffer.hasRemaining();
 	}
 
 	public void maybeRead(int length) throws IOException {
-		if (!_eof && _buffer.remaining() < length) {
+		if (!_eof && (_byteBuffer.remaining() < length)) {
 			read();
 		}
 	}
@@ -81,45 +85,45 @@ public class ByteChannelReader {
 			return;
 		}
 
-		_buffer.compact();
+		_byteBuffer.compact();
 
-		if (_channel.read(_buffer) == -1) {
+		if (_readableByteChannel.read(_byteBuffer) == -1) {
 			_eof = true;
 		}
 		else {
 			_eof = false;
 		}
 
-		_buffer.flip();
+		_byteBuffer.flip();
 	}
 
 	public int remaining() {
-		return _buffer.remaining();
+		return _byteBuffer.remaining();
 	}
 
 	public void resizeBuffer(int minBufferLength) {
-		if (_buffer.capacity() >= minBufferLength) {
+		if (_byteBuffer.capacity() >= minBufferLength) {
 			return;
 		}
 
 		ByteBuffer newBuffer = ByteBuffer.allocate(minBufferLength);
 
-		newBuffer.put(_buffer);
+		newBuffer.put(_byteBuffer);
 		newBuffer.flip();
 
-		_buffer = newBuffer;
+		_byteBuffer = newBuffer;
 	}
 
 	public int skip(int length) {
-		length = Math.min(_buffer.remaining(), length);
+		length = Math.min(_byteBuffer.remaining(), length);
 
-		_buffer.position(_buffer.position() + length);
+		_byteBuffer.position(_byteBuffer.position() + length);
 
 		return length;
 	}
 
-	private ByteBuffer _buffer;
-	private ReadableByteChannel _channel;
-	private boolean _eof = false;
+	private ByteBuffer _byteBuffer;
+	private boolean _eof;
+	private ReadableByteChannel _readableByteChannel;
 
 }

@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.kernel.ldiff;
+package com.liferay.portal.kernel.io.delta;
 
 import java.io.IOException;
 
@@ -24,51 +24,57 @@ import java.nio.channels.WritableByteChannel;
  */
 public class ByteChannelWriter {
 
-	public ByteChannelWriter(WritableByteChannel channel) {
-		this(channel, 1024);
+	public ByteChannelWriter(WritableByteChannel writableByteChannel) {
+		this(writableByteChannel, 1024);
 	}
 
-	public ByteChannelWriter(WritableByteChannel channel, int bufferLength) {
-		_buffer = ByteBuffer.allocate(bufferLength);
-		_channel = channel;
+	public ByteChannelWriter(
+		WritableByteChannel writableByteChannel, int bufferLength) {
+
+		_writableByteChannel = writableByteChannel;
+
+		_byteBuffer = ByteBuffer.allocate(bufferLength);
 	}
 
 	public void ensureSpace(int length) throws IOException {
-		if (_buffer.remaining() < length) {
+		if (_byteBuffer.remaining() < length) {
 			write();
 		}
 	}
 
 	public void finish() throws IOException {
-		_buffer.flip();
-		_channel.write(_buffer);
+		_byteBuffer.flip();
+
+		_writableByteChannel.write(_byteBuffer);
 	}
 
 	public ByteBuffer getBuffer() {
-		return _buffer;
+		return _byteBuffer;
 	}
 
 	public void resizeBuffer(int minBufferLength) {
-		if (_buffer.capacity() >= minBufferLength) {
+		if (_byteBuffer.capacity() >= minBufferLength) {
 			return;
 		}
 
 		ByteBuffer newBuffer = ByteBuffer.allocate(minBufferLength);
 
-		_buffer.flip();
+		_byteBuffer.flip();
 
-		newBuffer.put(_buffer);
+		newBuffer.put(_byteBuffer);
 
-		_buffer = newBuffer;
+		_byteBuffer = newBuffer;
 	}
 
 	protected void write() throws IOException {
-		_buffer.flip();
-		_channel.write(_buffer);
-		_buffer.clear();
+		_byteBuffer.flip();
+
+		_writableByteChannel.write(_byteBuffer);
+
+		_byteBuffer.clear();
 	}
 
-	protected ByteBuffer _buffer;
-	protected WritableByteChannel _channel;
+	private ByteBuffer _byteBuffer;
+	private WritableByteChannel _writableByteChannel;
 
 }
