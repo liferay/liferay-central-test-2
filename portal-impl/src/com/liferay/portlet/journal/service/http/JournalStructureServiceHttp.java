@@ -307,16 +307,14 @@ public class JournalStructureServiceHttp {
 	}
 
 	public static int searchCount(HttpPrincipal httpPrincipal, long companyId,
-		long[] groupIds, java.lang.String structureId, java.lang.String name,
-		java.lang.String description, boolean andOperator)
+		long[] groupIds, java.lang.String keywords)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(JournalStructureServiceUtil.class.getName(),
 					"searchCount", _searchCountParameterTypes7);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
-					companyId, groupIds, structureId, name, description,
-					andOperator);
+					companyId, groupIds, keywords);
 
 			Object returnObj = null;
 
@@ -341,14 +339,16 @@ public class JournalStructureServiceHttp {
 	}
 
 	public static int searchCount(HttpPrincipal httpPrincipal, long companyId,
-		long[] groupIds, java.lang.String keywords)
+		long[] groupIds, java.lang.String structureId, java.lang.String name,
+		java.lang.String description, boolean andOperator)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(JournalStructureServiceUtil.class.getName(),
 					"searchCount", _searchCountParameterTypes8);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
-					companyId, groupIds, keywords);
+					companyId, groupIds, structureId, name, description,
+					andOperator);
 
 			Object returnObj = null;
 
@@ -445,11 +445,11 @@ public class JournalStructureServiceHttp {
 			com.liferay.portal.kernel.util.OrderByComparator.class
 		};
 	private static final Class<?>[] _searchCountParameterTypes7 = new Class[] {
-			long.class, long[].class, java.lang.String.class,
-			java.lang.String.class, java.lang.String.class, boolean.class
+			long.class, long[].class, java.lang.String.class
 		};
 	private static final Class<?>[] _searchCountParameterTypes8 = new Class[] {
-			long.class, long[].class, java.lang.String.class
+			long.class, long[].class, java.lang.String.class,
+			java.lang.String.class, java.lang.String.class, boolean.class
 		};
 	private static final Class<?>[] _updateStructureParameterTypes9 = new Class[] {
 			long.class, java.lang.String.class, java.lang.String.class,

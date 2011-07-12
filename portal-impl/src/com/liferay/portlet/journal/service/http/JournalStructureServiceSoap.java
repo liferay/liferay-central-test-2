@@ -183,12 +183,10 @@ public class JournalStructureServiceSoap {
 	}
 
 	public static int searchCount(long companyId, long[] groupIds,
-		java.lang.String structureId, java.lang.String name,
-		java.lang.String description, boolean andOperator)
-		throws RemoteException {
+		java.lang.String keywords) throws RemoteException {
 		try {
 			int returnValue = JournalStructureServiceUtil.searchCount(companyId,
-					groupIds, structureId, name, description, andOperator);
+					groupIds, keywords);
 
 			return returnValue;
 		}
@@ -200,10 +198,12 @@ public class JournalStructureServiceSoap {
 	}
 
 	public static int searchCount(long companyId, long[] groupIds,
-		java.lang.String keywords) throws RemoteException {
+		java.lang.String structureId, java.lang.String name,
+		java.lang.String description, boolean andOperator)
+		throws RemoteException {
 		try {
 			int returnValue = JournalStructureServiceUtil.searchCount(companyId,
-					groupIds, keywords);
+					groupIds, structureId, name, description, andOperator);
 
 			return returnValue;
 		}

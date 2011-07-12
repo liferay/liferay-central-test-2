@@ -88,18 +88,18 @@ public class JournalStructureServiceWrapper implements JournalStructureService {
 	}
 
 	public int searchCount(long companyId, long[] groupIds,
+		java.lang.String keywords)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _journalStructureService.searchCount(companyId, groupIds,
+			keywords);
+	}
+
+	public int searchCount(long companyId, long[] groupIds,
 		java.lang.String structureId, java.lang.String name,
 		java.lang.String description, boolean andOperator)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _journalStructureService.searchCount(companyId, groupIds,
 			structureId, name, description, andOperator);
-	}
-
-	public int searchCount(long companyId, long[] groupIds,
-		java.lang.String keywords)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return _journalStructureService.searchCount(companyId, groupIds,
-			keywords);
 	}
 
 	public com.liferay.portlet.journal.model.JournalStructure updateStructure(

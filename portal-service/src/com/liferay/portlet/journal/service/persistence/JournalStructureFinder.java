@@ -29,8 +29,11 @@ public interface JournalStructureFinder {
 
 	public int countByC_G_S_N_D(long companyId, long[] groupIds,
 		java.lang.String[] structureIds, java.lang.String[] names,
-		java.lang.String[] descriptions, boolean andOperator,
-		boolean inlineSQLHelper)
+		java.lang.String[] descriptions, boolean andOperator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public int filterCountByKeywords(long companyId, long[] groupIds,
+		java.lang.String keywords)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int filterCountByC_G_S_N_D(long companyId, long[] groupIds,
@@ -38,8 +41,14 @@ public interface JournalStructureFinder {
 		java.lang.String description, boolean andOperator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public int filterCountByKeywords(long companyId, long[] groupIds,
-		java.lang.String keywords)
+	public int filterCountByC_G_S_N_D(long companyId, long[] groupIds,
+		java.lang.String[] structureIds, java.lang.String[] names,
+		java.lang.String[] descriptions, boolean andOperator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.journal.model.JournalStructure> filterFindByKeywords(
+		long companyId, long[] groupIds, java.lang.String keywords, int start,
+		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portlet.journal.model.JournalStructure> filterFindByC_G_S_N_D(
@@ -49,9 +58,11 @@ public interface JournalStructureFinder {
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public java.util.List<com.liferay.portlet.journal.model.JournalStructure> filterFindByKeywords(
-		long companyId, long[] groupIds, java.lang.String keywords, int start,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public java.util.List<com.liferay.portlet.journal.model.JournalStructure> filterFindByC_G_S_N_D(
+		long companyId, long[] groupIds, java.lang.String[] structureIds,
+		java.lang.String[] names, java.lang.String[] descriptions,
+		boolean andOperator, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portlet.journal.model.JournalStructure> findByKeywords(
@@ -70,7 +81,6 @@ public interface JournalStructureFinder {
 		long companyId, long[] groupIds, java.lang.String[] structureIds,
 		java.lang.String[] names, java.lang.String[] descriptions,
 		boolean andOperator, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc,
-		boolean inlineSQLHelper)
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.kernel.exception.SystemException;
 }

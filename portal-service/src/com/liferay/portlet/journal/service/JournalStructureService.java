@@ -86,13 +86,13 @@ public interface JournalStructureService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int searchCount(long companyId, long[] groupIds,
-		java.lang.String structureId, java.lang.String name,
-		java.lang.String description, boolean andOperator)
+		java.lang.String keywords)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int searchCount(long companyId, long[] groupIds,
-		java.lang.String keywords)
+		java.lang.String structureId, java.lang.String name,
+		java.lang.String description, boolean andOperator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portlet.journal.model.JournalStructure updateStructure(

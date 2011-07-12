@@ -99,18 +99,18 @@ public class JournalStructureServiceUtil {
 	}
 
 	public static int searchCount(long companyId, long[] groupIds,
+		java.lang.String keywords)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().searchCount(companyId, groupIds, keywords);
+	}
+
+	public static int searchCount(long companyId, long[] groupIds,
 		java.lang.String structureId, java.lang.String name,
 		java.lang.String description, boolean andOperator)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .searchCount(companyId, groupIds, structureId, name,
 			description, andOperator);
-	}
-
-	public static int searchCount(long companyId, long[] groupIds,
-		java.lang.String keywords)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().searchCount(companyId, groupIds, keywords);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalStructure updateStructure(
