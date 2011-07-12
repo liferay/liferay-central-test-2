@@ -19,7 +19,7 @@
 <%
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
-LayoutRevision	layoutRevision = (LayoutRevision)row.getObject();
+LayoutRevision layoutRevision = (LayoutRevision)row.getObject();
 
 long layoutRevisionId = StagingUtil.getRecentLayoutRevisionId(request, layoutRevision.getLayoutSetBranchId(), layoutRevision.getPlid());
 
@@ -30,8 +30,6 @@ boolean updateRecentLayoutRevisionId = false;
 if (layoutRevision.getLayoutRevisionId() == layoutRevisionId) {
 	updateRecentLayoutRevisionId = true;
 }
-
-boolean isWorkflowEnabled = WorkflowDefinitionLinkLocalServiceUtil.hasWorkflowDefinitionLink(themeDisplay.getCompanyId(), scopeGroupId, LayoutRevision.class.getName());
 %>
 
 <liferay-ui:icon-menu showWhenSingleIcon="<%= true %>">
@@ -52,8 +50,8 @@ boolean isWorkflowEnabled = WorkflowDefinitionLinkLocalServiceUtil.hasWorkflowDe
 			%>
 
 			<liferay-ui:icon
-				image='<%= isWorkflowEnabled ? "../aui/shuffle" : "../aui/circle-check"  %>'
-				message='<%= isWorkflowEnabled ? "submit-for-publication" : "mark-as-ready-for-publication"  %>'
+				image='<%= WorkflowDefinitionLinkLocalServiceUtil.hasWorkflowDefinitionLink(themeDisplay.getCompanyId(), scopeGroupId, LayoutRevision.class.getName()) ? "../aui/shuffle" : "../aui/circle-check" %>'
+				message='<%= WorkflowDefinitionLinkLocalServiceUtil.hasWorkflowDefinitionLink(themeDisplay.getCompanyId(), scopeGroupId, LayoutRevision.class.getName()) ? "submit-for-publication" : "mark-as-ready-for-publication" %>'
 				url="<%= taglibURL %>"
 			/>
 		</c:if>

@@ -144,19 +144,6 @@ public class LayoutRevisionLocalServiceImpl
 		}
 	}
 
-	public void deleteLayoutRevisions(
-			long layoutSetBranchId, long plid, String variationName)
-		throws PortalException, SystemException {
-
-		List<LayoutRevision> layoutRevisions =
-			layoutRevisionPersistence.findByL_P_V(
-				layoutSetBranchId, plid, variationName);
-
-		for (LayoutRevision layoutRevision : layoutRevisions) {
-			layoutRevisionLocalService.deleteLayoutRevision(layoutRevision);
-		}
-	}
-
 	@Override
 	public void deleteLayoutRevision(LayoutRevision layoutRevision)
 		throws PortalException, SystemException {
@@ -204,6 +191,19 @@ public class LayoutRevisionLocalServiceImpl
 		for (LayoutRevision layoutRevision : getLayoutRevisions(
 				layoutSetBranchId, plid)) {
 
+			layoutRevisionLocalService.deleteLayoutRevision(layoutRevision);
+		}
+	}
+
+	public void deleteLayoutRevisions(
+			long layoutSetBranchId, long plid, String variationName)
+		throws PortalException, SystemException {
+
+		List<LayoutRevision> layoutRevisions =
+			layoutRevisionPersistence.findByL_P_V(
+				layoutSetBranchId, plid, variationName);
+
+		for (LayoutRevision layoutRevision : layoutRevisions) {
 			layoutRevisionLocalService.deleteLayoutRevision(layoutRevision);
 		}
 	}

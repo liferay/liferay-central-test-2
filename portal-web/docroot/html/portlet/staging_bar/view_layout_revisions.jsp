@@ -67,7 +67,6 @@ List<LayoutRevision> rootLayoutRevisions = LayoutRevisionLocalServiceUtil.getLay
 						keyProperty="layoutRevisionId"
 						modelVar="curLayoutRevision"
 					>
-
 						<liferay-ui:search-container-column-text
 							buffer="buffer"
 							cssClass='<%= (curLayoutRevision.getLayoutRevisionId() == currentLayoutRevisionId) ? "layout-revision-current" : StringPool.BLANK %>'
@@ -197,6 +196,7 @@ List<LayoutRevision> rootLayoutRevisions = LayoutRevisionLocalServiceUtil.getLay
 		<%
 		}
 		%>
+
 	</div>
 </c:if>
 

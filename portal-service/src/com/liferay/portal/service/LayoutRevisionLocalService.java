@@ -242,12 +242,12 @@ public interface LayoutRevisionLocalService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public void deleteLayoutRevisions(long layoutSetBranchId, long plid,
-		java.lang.String variationName)
+	public void deleteLayoutRevisions(long layoutSetBranchId, long plid)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public void deleteLayoutRevisions(long layoutSetBranchId, long plid)
+	public void deleteLayoutRevisions(long layoutSetBranchId, long plid,
+		java.lang.String variationName)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 

@@ -275,18 +275,18 @@ public class LayoutRevisionLocalServiceUtil {
 		getService().deleteLayoutLayoutRevisions(plid);
 	}
 
+	public static void deleteLayoutRevisions(long layoutSetBranchId, long plid)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().deleteLayoutRevisions(layoutSetBranchId, plid);
+	}
+
 	public static void deleteLayoutRevisions(long layoutSetBranchId, long plid,
 		java.lang.String variationName)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService()
 			.deleteLayoutRevisions(layoutSetBranchId, plid, variationName);
-	}
-
-	public static void deleteLayoutRevisions(long layoutSetBranchId, long plid)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		getService().deleteLayoutRevisions(layoutSetBranchId, plid);
 	}
 
 	public static void deleteLayoutSetBranchLayoutRevisions(

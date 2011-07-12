@@ -62,7 +62,7 @@ if (layout != null) {
 
 	<div class="staging-bar">
 		<ul class="aui-tabview-list staging-tabview-list">
-			<li class="aui-state-default aui-tab first <%= (!group.isStagingGroup() ? " aui-state-active  aui-tab-active" : StringPool.BLANK) %>">
+			<li class="aui-state-default aui-tab first <%= (!group.isStagingGroup() ? " aui-state-active aui-tab-active" : StringPool.BLANK) %>">
 				<span class="aui-tab-content">
 					<span class="aui-tab-label">
 						<aui:a href="<%= !group.isStagingGroup() ? null : liveFriendlyURL %>" label="live" />
@@ -93,7 +93,7 @@ if (layout != null) {
 							}
 
 							if (selected) {
-								cssClass += " aui-state-active  aui-tab-active";
+								cssClass += " aui-state-active aui-tab-active";
 							}
 						%>
 
@@ -164,7 +164,7 @@ if (layout != null) {
 						boolean selected = group.isStagingGroup() || group.isStagedRemotely();
 						%>
 
-						<li class="aui-state-default aui-tab last <%= (selected ? " aui-state-active  aui-tab-active" : StringPool.BLANK) %>">
+						<li class="aui-state-default aui-tab last <%= (selected ? " aui-state-active aui-tab-active" : StringPool.BLANK) %>">
 							<span class="aui-tab-content">
 								<span class="aui-tab-label">
 									<aui:a href="<%= selected ? null : stagingFriendlyURL %>" label="backstage" />
@@ -273,7 +273,7 @@ if (layout != null) {
 												}
 
 												if (selected) {
-													cssClass += " aui-state-active  aui-tab-active";
+													cssClass += " aui-state-active aui-tab-active";
 												}
 											%>
 
@@ -321,7 +321,7 @@ if (layout != null) {
 										}
 										%>
 
-										<aui:workflow-status helpMessage="<%= taglibHelpMessage  %>" status='<%= layoutRevision.getStatus() %>' statusMessage='<%= layoutRevision.isHead() ? "ready-for-publication" : null %>' version="<%= String.valueOf(layoutRevision.getLayoutRevisionId()) %>" />
+										<aui:workflow-status helpMessage="<%= taglibHelpMessage %>" status='<%= layoutRevision.getStatus() %>' statusMessage='<%= layoutRevision.isHead() ? "ready-for-publication" : null %>' version="<%= String.valueOf(layoutRevision.getLayoutRevisionId()) %>" />
 
 										<div class="layout-actions">
 											<span class="backstage-toolbar" id="<portlet:namespace />backstageToolbar"></span>
@@ -352,16 +352,11 @@ if (layout != null) {
 									%>
 
 									<c:if test="<%= pendingLayoutRevisions.isEmpty() && !layoutRevision.isHead() %>">
-
 										dockbar.backstageToolbar.add(
 											{
 												type: 'ToolbarSpacer'
 											}
 										);
-
-										<%
-										boolean isWorkflowEnabled = WorkflowDefinitionLinkLocalServiceUtil.hasWorkflowDefinitionLink(themeDisplay.getCompanyId(), scopeGroupId, LayoutRevision.class.getName());
-										%>
 
 										<portlet:actionURL var="publishURL">
 											<portlet:param name="struts_action" value="/staging_bar/edit_layouts" />
@@ -378,8 +373,8 @@ if (layout != null) {
 												handler: function(event) {
 													submitForm(document.hrefFm, '<%= publishURL %>');
 												},
-												icon: '<%= isWorkflowEnabled ? "shuffle" : "circle-check"  %>',
-												label: '<%= UnicodeLanguageUtil.get(pageContext, isWorkflowEnabled ? "submit-for-publication" : "mark-as-ready-for-publication") %>'
+												icon: '<%= WorkflowDefinitionLinkLocalServiceUtil.hasWorkflowDefinitionLink(themeDisplay.getCompanyId(), scopeGroupId, LayoutRevision.class.getName()) ? "shuffle" : "circle-check" %>',
+												label: '<%= UnicodeLanguageUtil.get(pageContext, WorkflowDefinitionLinkLocalServiceUtil.hasWorkflowDefinitionLink(themeDisplay.getCompanyId(), scopeGroupId, LayoutRevision.class.getName()) ? "submit-for-publication" : "mark-as-ready-for-publication") %>'
 											}
 										);
 									</c:if>
