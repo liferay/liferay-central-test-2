@@ -41,7 +41,9 @@ boolean showParentGroups = GetterUtil.getBoolean((String)request.getAttribute("l
 boolean showLayout = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:breadcrumb:showLayout"));
 boolean showPortletBreadcrumb = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:breadcrumb:showPortletBreadcrumb"));
 
-showLayout = showLayout && !selLayout.getGroup().isLayoutPrototype();
+Group group = selLayout.getGroup();
+
+showLayout = showLayout && !group.isLayoutPrototype();
 %>
 
 <%!
