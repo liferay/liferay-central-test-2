@@ -180,7 +180,8 @@ public class ConfigurationImpl
 	}
 
 	public boolean contains(String key) {
-		Object value = _cache.get(key);
+		Object value = _values.get(key);
+
 		if (value == null) {
 			ComponentProperties componentProperties = getComponentProperties();
 
@@ -190,7 +191,7 @@ public class ConfigurationImpl
 				value = _nullValue;
 			}
 
-			_cache.put(key, value);
+			_values.put(key, value);
 		}
 
 		if (value == _nullValue) {
@@ -202,7 +203,7 @@ public class ConfigurationImpl
 	}
 
 	public String get(String key) {
-		Object value = _cache.get(key);
+		Object value = _values.get(key);
 
 		if (value == null) {
 			ComponentProperties componentProperties = getComponentProperties();
@@ -213,7 +214,7 @@ public class ConfigurationImpl
 				value = _nullValue;
 			}
 
-			_cache.put(key, value);
+			_values.put(key, value);
 		}
 		else if (_PRINT_DUPLICATE_CALLS_TO_GET) {
 			System.out.println("Duplicate call to get " + key);
@@ -234,7 +235,7 @@ public class ConfigurationImpl
 	}
 
 	public String[] getArray(String key) {
-		Object value = _cache.get(key);
+		Object value = _values.get(key);
 
 		if (value == null) {
 			ComponentProperties componentProperties = getComponentProperties();
@@ -262,7 +263,7 @@ public class ConfigurationImpl
 				value = array;
 			}
 
-			_cache.put(key, value);
+			_values.put(key, value);
 		}
 
 		if (value instanceof String[]) {
@@ -369,7 +370,7 @@ public class ConfigurationImpl
 
 		componentProperties.setProperty(key, value);
 
-		_cache.put(key, value);
+		_values.put(key, value);
 	}
 
 	protected ComponentProperties getComponentProperties() {
@@ -454,12 +455,11 @@ public class ConfigurationImpl
 	private static Log _log = LogFactoryUtil.getLog(ConfigurationImpl.class);
 
 	private static String[] _emptyArray = new String[0];
-
 	private static Object _nullValue = new Object();
 
-	private Map<String, Object> _cache =
-		new ConcurrentHashMap<String, Object>();
 	private ComponentConfiguration _componentConfiguration;
 	private Set<String> _printedSources = new HashSet<String>();
+	private Map<String, Object> _values =
+		new ConcurrentHashMap<String, Object>();
 
 }
