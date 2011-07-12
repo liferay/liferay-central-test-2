@@ -35,6 +35,7 @@ import com.liferay.portlet.journal.model.impl.JournalArticleImpl;
 import com.liferay.util.dao.orm.CustomSQLUtil;
 
 import java.sql.Timestamp;
+
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
