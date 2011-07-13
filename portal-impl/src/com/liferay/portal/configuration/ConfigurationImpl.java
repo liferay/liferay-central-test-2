@@ -235,7 +235,7 @@ public class ConfigurationImpl
 	}
 
 	public String[] getArray(String key) {
-		String cacheKey = _arrayValuePrefix.concat(key);
+		String cacheKey = _ARRAY_KEY_PREFIX.concat(key);
 
 		Object value = _values.get(cacheKey);
 
@@ -452,11 +452,12 @@ public class ConfigurationImpl
 		}
 	}
 
+	private static final String _ARRAY_KEY_PREFIX = "ARRAY_";
+
 	private static final boolean _PRINT_DUPLICATE_CALLS_TO_GET = false;
 
 	private static Log _log = LogFactoryUtil.getLog(ConfigurationImpl.class);
 
-	private static String _arrayValuePrefix = "ARRAY_";
 	private static String[] _emptyArray = new String[0];
 	private static Object _nullValue = new Object();
 
