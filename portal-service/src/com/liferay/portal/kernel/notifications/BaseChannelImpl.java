@@ -118,7 +118,6 @@ public abstract class BaseChannelImpl implements Channel {
 
 	private List<ChannelListener> _channelListeners =
 		new CopyOnWriteArrayList<ChannelListener>();
-
 	private long _cleanUpInterval;
 	private long _companyId;
 	private AtomicLong _nextCleanUpTime = new AtomicLong();
