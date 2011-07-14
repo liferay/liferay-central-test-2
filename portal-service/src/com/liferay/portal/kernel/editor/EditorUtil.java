@@ -12,11 +12,12 @@
  * details.
  */
 
-package com.liferay.portal.kernel.util;
+package com.liferay.portal.kernel.editor;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.BrowserSnifferUtil;
+import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.PropsUtil;
+import com.liferay.portal.kernel.util.Validator;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -39,7 +40,7 @@ public class EditorUtil {
 				editorImpl = "simple";
 			}
 			else if (BrowserSnifferUtil.isSafari(request) &&
-				(editorImpl.indexOf("simple") == -1)) {
+					 !editorImpl.contains("simple")) {
 
 				editorImpl = "tinymce_simple";
 			}
@@ -57,7 +58,5 @@ public class EditorUtil {
 
 	private static final String _EDITOR_WYSIWYG_DEFAULT = PropsUtil.get(
 		PropsKeys.EDITOR_WYSIWYG_DEFAULT);
-
-	private static Log _log = LogFactoryUtil.getLog(EditorUtil.class);
 
 }

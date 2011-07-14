@@ -55,7 +55,6 @@ if (Validator.isNotNull(onChangeMethod)) {
 }
 
 boolean skipEditorLoading = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:input-editor:skipEditorLoading"));
-
 String toolbarSet = (String)request.getAttribute("liferay-ui:input-editor:toolbarSet");
 
 // To upgrade FCKEditor, download the latest version and unzip it to fckeditor.

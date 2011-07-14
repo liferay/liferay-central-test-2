@@ -14,7 +14,7 @@
 
 package com.liferay.taglib.ui;
 
-import com.liferay.portal.kernel.util.EditorUtil;
+import com.liferay.portal.kernel.editor.EditorUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.Portlet;
 import com.liferay.taglib.util.IncludeTag;
@@ -127,7 +127,7 @@ public class InputEditorTag extends IncludeTag {
 	private String _name = "editor";
 	private String _onChangeMethod;
 	private String _page;
-	private boolean _skipEditorLoading = false;
+	private boolean _skipEditorLoading;
 	private String _toolbarSet = "liferay";
 	private String _width;
 

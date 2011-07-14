@@ -24,8 +24,8 @@ String editorImpl = ParamUtil.getString(request, "editorImpl");
 String initMethod =	ParamUtil.getString(request, "initMethod");
 String name = ParamUtil.getString(request, "name");
 String onChangeMethod = ParamUtil.getString(request, "onChangeMethod");
-String toolbarSet = ParamUtil.getString(request, "toolbarSet");
 boolean skipEditorLoading = ParamUtil.getBoolean(request, "skipEditorLoading");
+String toolbarSet = ParamUtil.getString(request, "toolbarSet");
 %>
 
 <liferay-ui:input-editor
