@@ -20,8 +20,6 @@
 Group group = (Group)request.getAttribute("site.group");
 Long liveGroupId = (Long)request.getAttribute("site.liveGroupId");
 
-long groupId = group.getGroupId();
-
 String host = PortalUtil.getHost(request);
 
 String sitemapUrl = PortalUtil.getPortalURL(host, request.getServerPort(), request.isSecure()) + themeDisplay.getPathContext() + "/sitemap.xml";
@@ -31,7 +29,7 @@ String publicSitemapUrl = sitemapUrl;
 LayoutSet publicLayoutSet = LayoutSetLocalServiceUtil.getLayoutSet(liveGroupId, false);
 
 if (!host.equals(publicLayoutSet.getVirtualHostname())) {
-	publicSitemapUrl += "?groupId=" + groupId + "&privateLayout=" + false;
+	publicSitemapUrl += "?groupId=" + group.getGroupId() + "&privateLayout=" + false;
 }
 
 String privateSitemapUrl = sitemapUrl;
@@ -39,7 +37,7 @@ String privateSitemapUrl = sitemapUrl;
 LayoutSet privateLayoutSet = LayoutSetLocalServiceUtil.getLayoutSet(liveGroupId, true);
 
 if (!host.equals(privateLayoutSet.getVirtualHostname())) {
-	privateSitemapUrl += "?groupId=" + groupId + "&privateLayout=" + true;
+	privateSitemapUrl += "?groupId=" + group.getGroupId() + "&privateLayout=" + true;
 }
 %>
 

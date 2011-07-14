@@ -140,5 +140,4 @@ String privateVirtualHost = ParamUtil.getString(request, "privateVirtualHost", B
 			<input name="<portlet:namespace />stagingPrivateVirtualHost" size="50" type="text" value="<%= HtmlUtil.escape(stagingPrivateVirtualHost) %>" />
 		</aui:field-wrapper>
 	</aui:fieldset>
-
 </c:if>
