@@ -476,7 +476,7 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 
 		String[] values = doc.getValues(localizedName);
 
-		if (Validator.isNull(values)) {
+		if ((values == null) || (values.length == 0)) {
 			values = doc.getValues(field);
 		}
 
@@ -574,7 +574,9 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 				}
 
 				subsetDocument.addText(Field.SNIPPET, subsetSnippet);
+
 				subsetSnippets.add(subsetSnippet);
+
 				subsetDocs.add(subsetDocument);
 
 				Float subsetScore = hitDocs.getScore(i) / scoredFieldNamesCount;
