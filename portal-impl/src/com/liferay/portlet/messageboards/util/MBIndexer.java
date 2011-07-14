@@ -39,16 +39,16 @@ import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.util.PortletKeys;
+import com.liferay.portlet.messageboards.NoSuchDiscussionException;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBCategoryConstants;
-import com.liferay.portlet.messageboards.model.MBDiscussion;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBCategoryServiceUtil;
+import com.liferay.portlet.messageboards.service.MBDiscussionLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.permission.MBMessagePermission;
-import com.liferay.portlet.messageboards.service.persistence.MBDiscussionUtil;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -213,17 +213,17 @@ public class MBIndexer extends BaseIndexer {
 			document.remove(Field.USER_NAME);
 		}
 
-		document.addKeyword("threadId", message.getThreadId());
+		try {
+			MBDiscussionLocalServiceUtil.getThreadDiscussion(
+				message.getThreadId());
 
-		MBDiscussion discussion = MBDiscussionUtil.fetchByThreadId(
-			message.getThreadId());
-
-		if (discussion != null) {
 			document.addKeyword("discussion", true);
 		}
-		else {
+		catch (NoSuchDiscussionException nsde) {
 			document.addKeyword("discussion", false);
 		}
+
+		document.addKeyword("threadId", message.getThreadId());
 
 		return document;
 	}
