@@ -639,8 +639,8 @@ create table DLFolder (
 	name VARCHAR(100) null,
 	description STRING null,
 	lastPostDate DATE null,
-	overrideFileEntryTypes BOOLEAN,
-	defaultFileEntryTypeId LONG
+	defaultFileEntryTypeId LONG,
+	overrideFileEntryTypes BOOLEAN
 );
 
 create table EmailAddress (

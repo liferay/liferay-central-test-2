@@ -426,13 +426,6 @@ public class DLFolderLocalServiceUtil {
 		return getService().moveFolder(folderId, parentFolderId, serviceContext);
 	}
 
-	public static void setLastPostDate(long folderId,
-		java.util.Date lastPostDate)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		getService().setLastPostDate(folderId, lastPostDate);
-	}
-
 	public static com.liferay.portlet.documentlibrary.model.DLFolder updateFolder(
 		long folderId, long parentFolderId, java.lang.String name,
 		java.lang.String description,
@@ -462,6 +455,13 @@ public class DLFolderLocalServiceUtil {
 		return getService()
 				   .updateFolderAndFileEntryTypes(folderId, parentFolderId,
 			name, description, serviceContext);
+	}
+
+	public static void updateLastPostDate(long folderId,
+		java.util.Date lastPostDate)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().updateLastPostDate(folderId, lastPostDate);
 	}
 
 	public static DLFolderLocalService getService() {

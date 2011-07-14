@@ -1268,15 +1268,14 @@ public class DLFileEntryLocalServiceImpl
 					groupId, folderId);
 		}
 		else {
-			List<DLFileEntryType> fileEntryTypes =
-				dlFileEntryTypeLocalService.getFileEntryTypesByFolder(
+			List<DLFileEntryType> dlFileEntryTypes =
+				dlFileEntryTypeLocalService.getFolderFileEntryTypes(
 					groupId, folderId, true);
 
 			boolean found = false;
 
-			for (DLFileEntryType fileEntryType: fileEntryTypes) {
-				if (fileEntryType.getFileEntryTypeId() == fileEntryTypeId) {
-
+			for (DLFileEntryType dlFileEntryType : dlFileEntryTypes) {
+				if (dlFileEntryType.getFileEntryTypeId() == fileEntryTypeId) {
 					found = true;
 
 					break;
@@ -1285,8 +1284,8 @@ public class DLFileEntryLocalServiceImpl
 
 			if (!found) {
 				throw new InvalidFileEntryTypeException(
-					"FileEntryType " + fileEntryTypeId +
-						" invalid for folder " + folderId);
+					"Invalid file entry type " + fileEntryTypeId +
+						" for folder " + folderId);
 			}
 		}
 

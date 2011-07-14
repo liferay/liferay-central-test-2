@@ -96,9 +96,9 @@ public class DLFolderPersistenceTest extends BasePersistenceTestCase {
 
 		newDLFolder.setLastPostDate(nextDate());
 
-		newDLFolder.setOverrideFileEntryTypes(randomBoolean());
-
 		newDLFolder.setDefaultFileEntryTypeId(nextLong());
+
+		newDLFolder.setOverrideFileEntryTypes(randomBoolean());
 
 		_persistence.update(newDLFolder, false);
 
@@ -125,10 +125,10 @@ public class DLFolderPersistenceTest extends BasePersistenceTestCase {
 			newDLFolder.getDescription());
 		assertEquals(Time.getShortTimestamp(existingDLFolder.getLastPostDate()),
 			Time.getShortTimestamp(newDLFolder.getLastPostDate()));
-		assertEquals(existingDLFolder.getOverrideFileEntryTypes(),
-			newDLFolder.getOverrideFileEntryTypes());
 		assertEquals(existingDLFolder.getDefaultFileEntryTypeId(),
 			newDLFolder.getDefaultFileEntryTypeId());
+		assertEquals(existingDLFolder.getOverrideFileEntryTypes(),
+			newDLFolder.getOverrideFileEntryTypes());
 	}
 
 	public void testFindByPrimaryKeyExisting() throws Exception {
@@ -292,9 +292,9 @@ public class DLFolderPersistenceTest extends BasePersistenceTestCase {
 
 		dlFolder.setLastPostDate(nextDate());
 
-		dlFolder.setOverrideFileEntryTypes(randomBoolean());
-
 		dlFolder.setDefaultFileEntryTypeId(nextLong());
+
+		dlFolder.setOverrideFileEntryTypes(randomBoolean());
 
 		_persistence.update(dlFolder, false);
 

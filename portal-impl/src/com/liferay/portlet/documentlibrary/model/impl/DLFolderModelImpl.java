@@ -78,10 +78,10 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 			{ "name", Types.VARCHAR },
 			{ "description", Types.VARCHAR },
 			{ "lastPostDate", Types.TIMESTAMP },
-			{ "overrideFileEntryTypes", Types.BOOLEAN },
-			{ "defaultFileEntryTypeId", Types.BIGINT }
+			{ "defaultFileEntryTypeId", Types.BIGINT },
+			{ "overrideFileEntryTypes", Types.BOOLEAN }
 		};
-	public static final String TABLE_SQL_CREATE = "create table DLFolder (uuid_ VARCHAR(75) null,folderId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,repositoryId LONG,mountPoint BOOLEAN,parentFolderId LONG,name VARCHAR(100) null,description STRING null,lastPostDate DATE null,overrideFileEntryTypes BOOLEAN,defaultFileEntryTypeId LONG)";
+	public static final String TABLE_SQL_CREATE = "create table DLFolder (uuid_ VARCHAR(75) null,folderId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,repositoryId LONG,mountPoint BOOLEAN,parentFolderId LONG,name VARCHAR(100) null,description STRING null,lastPostDate DATE null,defaultFileEntryTypeId LONG,overrideFileEntryTypes BOOLEAN)";
 	public static final String TABLE_SQL_DROP = "drop table DLFolder";
 	public static final String ORDER_BY_JPQL = " ORDER BY dlFolder.parentFolderId ASC, dlFolder.name ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY DLFolder.parentFolderId ASC, DLFolder.name ASC";
@@ -118,8 +118,8 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 		model.setName(soapModel.getName());
 		model.setDescription(soapModel.getDescription());
 		model.setLastPostDate(soapModel.getLastPostDate());
-		model.setOverrideFileEntryTypes(soapModel.getOverrideFileEntryTypes());
 		model.setDefaultFileEntryTypeId(soapModel.getDefaultFileEntryTypeId());
+		model.setOverrideFileEntryTypes(soapModel.getOverrideFileEntryTypes());
 
 		return model;
 	}
@@ -377,6 +377,15 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 	}
 
 	@JSON
+	public long getDefaultFileEntryTypeId() {
+		return _defaultFileEntryTypeId;
+	}
+
+	public void setDefaultFileEntryTypeId(long defaultFileEntryTypeId) {
+		_defaultFileEntryTypeId = defaultFileEntryTypeId;
+	}
+
+	@JSON
 	public boolean getOverrideFileEntryTypes() {
 		return _overrideFileEntryTypes;
 	}
@@ -387,15 +396,6 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 
 	public void setOverrideFileEntryTypes(boolean overrideFileEntryTypes) {
 		_overrideFileEntryTypes = overrideFileEntryTypes;
-	}
-
-	@JSON
-	public long getDefaultFileEntryTypeId() {
-		return _defaultFileEntryTypeId;
-	}
-
-	public void setDefaultFileEntryTypeId(long defaultFileEntryTypeId) {
-		_defaultFileEntryTypeId = defaultFileEntryTypeId;
 	}
 
 	@Override
@@ -447,8 +447,8 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 		dlFolderImpl.setName(getName());
 		dlFolderImpl.setDescription(getDescription());
 		dlFolderImpl.setLastPostDate(getLastPostDate());
-		dlFolderImpl.setOverrideFileEntryTypes(getOverrideFileEntryTypes());
 		dlFolderImpl.setDefaultFileEntryTypeId(getDefaultFileEntryTypeId());
+		dlFolderImpl.setOverrideFileEntryTypes(getOverrideFileEntryTypes());
 
 		dlFolderImpl.resetOriginalValues();
 
@@ -610,9 +610,9 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 			dlFolderCacheModel.lastPostDate = Long.MIN_VALUE;
 		}
 
-		dlFolderCacheModel.overrideFileEntryTypes = getOverrideFileEntryTypes();
-
 		dlFolderCacheModel.defaultFileEntryTypeId = getDefaultFileEntryTypeId();
+
+		dlFolderCacheModel.overrideFileEntryTypes = getOverrideFileEntryTypes();
 
 		return dlFolderCacheModel;
 	}
@@ -649,10 +649,10 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 		sb.append(getDescription());
 		sb.append(", lastPostDate=");
 		sb.append(getLastPostDate());
-		sb.append(", overrideFileEntryTypes=");
-		sb.append(getOverrideFileEntryTypes());
 		sb.append(", defaultFileEntryTypeId=");
 		sb.append(getDefaultFileEntryTypeId());
+		sb.append(", overrideFileEntryTypes=");
+		sb.append(getOverrideFileEntryTypes());
 		sb.append("}");
 
 		return sb.toString();
@@ -722,12 +722,12 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 		sb.append(getLastPostDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>overrideFileEntryTypes</column-name><column-value><![CDATA[");
-		sb.append(getOverrideFileEntryTypes());
-		sb.append("]]></column-value></column>");
-		sb.append(
 			"<column><column-name>defaultFileEntryTypeId</column-name><column-value><![CDATA[");
 		sb.append(getDefaultFileEntryTypeId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>overrideFileEntryTypes</column-name><column-value><![CDATA[");
+		sb.append(getOverrideFileEntryTypes());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
@@ -762,8 +762,8 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 	private String _originalName;
 	private String _description;
 	private Date _lastPostDate;
-	private boolean _overrideFileEntryTypes;
 	private long _defaultFileEntryTypeId;
+	private boolean _overrideFileEntryTypes;
 	private transient ExpandoBridge _expandoBridge;
 	private DLFolder _escapedModelProxy;
 }

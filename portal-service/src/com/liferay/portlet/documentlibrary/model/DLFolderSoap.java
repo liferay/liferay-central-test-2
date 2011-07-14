@@ -45,8 +45,8 @@ public class DLFolderSoap implements Serializable {
 		soapModel.setName(model.getName());
 		soapModel.setDescription(model.getDescription());
 		soapModel.setLastPostDate(model.getLastPostDate());
-		soapModel.setOverrideFileEntryTypes(model.getOverrideFileEntryTypes());
 		soapModel.setDefaultFileEntryTypeId(model.getDefaultFileEntryTypeId());
+		soapModel.setOverrideFileEntryTypes(model.getOverrideFileEntryTypes());
 
 		return soapModel;
 	}
@@ -215,6 +215,14 @@ public class DLFolderSoap implements Serializable {
 		_lastPostDate = lastPostDate;
 	}
 
+	public long getDefaultFileEntryTypeId() {
+		return _defaultFileEntryTypeId;
+	}
+
+	public void setDefaultFileEntryTypeId(long defaultFileEntryTypeId) {
+		_defaultFileEntryTypeId = defaultFileEntryTypeId;
+	}
+
 	public boolean getOverrideFileEntryTypes() {
 		return _overrideFileEntryTypes;
 	}
@@ -225,14 +233,6 @@ public class DLFolderSoap implements Serializable {
 
 	public void setOverrideFileEntryTypes(boolean overrideFileEntryTypes) {
 		_overrideFileEntryTypes = overrideFileEntryTypes;
-	}
-
-	public long getDefaultFileEntryTypeId() {
-		return _defaultFileEntryTypeId;
-	}
-
-	public void setDefaultFileEntryTypeId(long defaultFileEntryTypeId) {
-		_defaultFileEntryTypeId = defaultFileEntryTypeId;
 	}
 
 	private String _uuid;
@@ -249,6 +249,6 @@ public class DLFolderSoap implements Serializable {
 	private String _name;
 	private String _description;
 	private Date _lastPostDate;
-	private boolean _overrideFileEntryTypes;
 	private long _defaultFileEntryTypeId;
+	private boolean _overrideFileEntryTypes;
 }

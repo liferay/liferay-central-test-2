@@ -86,26 +86,24 @@ public class DLFileEntryTypeLocalServiceImpl
 	public void cascadeFileEntryTypes(long userId, DLFolder dlFolder)
 		throws PortalException, SystemException {
 
-		long groupId = dlFolder.getGroupId();
-		long folderId = dlFolder.getFolderId();
+		List<DLFileEntryType> dlFileEntryTypes = getFolderFileEntryTypes(
+			dlFolder.getGroupId(), dlFolder.getFolderId(), true);
 
-		List<DLFileEntryType> fileEntryTypes =
-			getFileEntryTypesByFolder(groupId, folderId, true);
-
-		List<Long> fileEntryTypeIds = getFileEntryTypeIds(fileEntryTypes);
+		List<Long> fileEntryTypeIds = getFileEntryTypeIds(dlFileEntryTypes);
 
 		long defaultFileEntryTypeId = getDefaultFileEntryType(
-			groupId, folderId);
+			dlFolder.getGroupId(), dlFolder.getFolderId());
 
 		ServiceContext serviceContext = new ServiceContext();
 
-		serviceContext.setUserId(userId);
-		serviceContext.setScopeGroupId(groupId);
-		serviceContext.setCompanyId(dlFolder.getCompanyId());
 		serviceContext.setAttribute("fileEntryTypeId", defaultFileEntryTypeId);
+		serviceContext.setCompanyId(dlFolder.getCompanyId());
+		serviceContext.setScopeGroupId(dlFolder.getGroupId());
+		serviceContext.setUserId(userId);
 
 		cascadeFileEntryTypes(
-			groupId, folderId, fileEntryTypeIds, serviceContext);
+			dlFolder.getGroupId(), dlFolder.getFolderId(), fileEntryTypeIds,
+			serviceContext);
 	}
 
 	public void deleteFileEntryType(long fileEntryTypeId)
@@ -114,14 +112,13 @@ public class DLFileEntryTypeLocalServiceImpl
 		dlFileEntryTypePersistence.remove(fileEntryTypeId);
 	}
 
-	public void deleteFileEntryTypes(long folderId)
-		throws PortalException, SystemException {
-
-		List<DLFileEntryType> fileEntryTypes =
+	public void deleteFileEntryTypes(long folderId) throws SystemException {
+		List<DLFileEntryType> dlFileEntryTypes =
 			dlFolderPersistence.getDLFileEntryTypes(folderId);
 
-		for (DLFileEntryType fileEntryType : fileEntryTypes) {
-			dlFolderPersistence.removeDLFileEntryType(folderId, fileEntryType);
+		for (DLFileEntryType dlFileEntryType : dlFileEntryTypes) {
+			dlFolderPersistence.removeDLFileEntryType(
+				folderId, dlFileEntryType);
 		}
 	}
 
@@ -167,7 +164,7 @@ public class DLFileEntryTypeLocalServiceImpl
 			groupId, name, description);
 	}
 
-	public List<DLFileEntryType> getFileEntryTypesByFolder(
+	public List<DLFileEntryType> getFolderFileEntryTypes(
 			long groupId, long folderId, boolean inherited)
 		throws PortalException, SystemException {
 
@@ -175,21 +172,22 @@ public class DLFileEntryTypeLocalServiceImpl
 			return dlFolderPersistence.getDLFileEntryTypes(folderId);
 		}
 
-		List<DLFileEntryType> fileEntryTypes = null;
+		List<DLFileEntryType> dlFileEntryTypes = null;
 
 		folderId = getFileEntryTypesPrimaryFolderId(folderId);
 
 		if (folderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
-			fileEntryTypes = dlFolderPersistence.getDLFileEntryTypes(folderId);
+			dlFileEntryTypes = dlFolderPersistence.getDLFileEntryTypes(
+				folderId);
 		}
 
-		if (fileEntryTypes == null || fileEntryTypes.isEmpty()) {
-			fileEntryTypes = getFileEntryTypes(groupId);
+		if ((dlFileEntryTypes == null) || dlFileEntryTypes.isEmpty()) {
+			dlFileEntryTypes = getFileEntryTypes(groupId);
 
-			fileEntryTypes.add(new DLFileEntryTypeImpl());
+			dlFileEntryTypes.add(new DLFileEntryTypeImpl());
 		}
 
-		return fileEntryTypes;
+		return dlFileEntryTypes;
 	}
 
 	public List<DLFileEntryType> search(
@@ -226,12 +224,10 @@ public class DLFileEntryTypeLocalServiceImpl
 			fileEntryTypeId, ddmStructureIds);
 	}
 
-	public void updateFileEntryTypesByFolder(
+	public void updateFolderFileEntryTypes(
 			DLFolder dlFolder, List<Long> fileEntryTypeIds,
 			long defaultFileEntryTypeId, ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		// DLFolder
+		throws SystemException {
 
 		List<Long> originalFileEntryTypeIds = getFileEntryTypeIds(
 			dlFolderPersistence.getDLFileEntryTypes(dlFolder.getFolderId()));
@@ -256,26 +252,26 @@ public class DLFileEntryTypeLocalServiceImpl
 	}
 
 	protected void addFileEntryTypeResources(
-			DLFileEntryType fileEntryType, boolean addGroupPermissions,
+			DLFileEntryType dlFileEntryType, boolean addGroupPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		resourceLocalService.addResources(
-			fileEntryType.getCompanyId(), fileEntryType.getGroupId(),
-			fileEntryType.getUserId(), DLFileEntryType.class.getName(),
-			fileEntryType.getFileEntryTypeId(), false, addGroupPermissions,
+			dlFileEntryType.getCompanyId(), dlFileEntryType.getGroupId(),
+			dlFileEntryType.getUserId(), DLFileEntryType.class.getName(),
+			dlFileEntryType.getFileEntryTypeId(), false, addGroupPermissions,
 			addGuestPermissions);
 	}
 
 	protected void addFileEntryTypeResources(
-			DLFileEntryType fileEntryType, String[] groupPermissions,
+			DLFileEntryType dlFileEntryType, String[] groupPermissions,
 			String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		resourceLocalService.addModelResources(
-			fileEntryType.getCompanyId(), fileEntryType.getGroupId(),
-			fileEntryType.getUserId(), DLFileEntryType.class.getName(),
-			fileEntryType.getFileEntryTypeId(), groupPermissions,
+			dlFileEntryType.getCompanyId(), dlFileEntryType.getGroupId(),
+			dlFileEntryType.getUserId(), DLFileEntryType.class.getName(),
+			dlFileEntryType.getFileEntryTypeId(), groupPermissions,
 			guestPermissions);
 	}
 
@@ -315,12 +311,12 @@ public class DLFileEntryTypeLocalServiceImpl
 	}
 
 	protected List<Long> getFileEntryTypeIds(
-		List<DLFileEntryType> fileEntryTypes) {
+		List<DLFileEntryType> dlFileEntryTypes) {
 
 		List<Long> fileEntryTypeIds = new SortedArrayList<Long>();
 
-		for (DLFileEntryType fileEntryType : fileEntryTypes) {
-			fileEntryTypeIds.add(fileEntryType.getFileEntryTypeId());
+		for (DLFileEntryType dlFileEntryType : dlFileEntryTypes) {
+			fileEntryTypeIds.add(dlFileEntryType.getFileEntryTypeId());
 		}
 
 		return fileEntryTypeIds;

@@ -193,10 +193,10 @@ public class EditFolderAction extends PortletAction {
 		String name = ParamUtil.getString(actionRequest, "name");
 		String description = ParamUtil.getString(actionRequest, "description");
 
-		SortedArrayList<Long> fileEntryTypeIds = getLongList(
-			actionRequest, "fileEntryTypeSearchContainerPrimaryKeys");
 		long defaultFileEntryTypeId = ParamUtil.getLong(
 			actionRequest, "defaultFileEntryTypeId");
+		SortedArrayList<Long> fileEntryTypeIds = getLongList(
+			actionRequest, "fileEntryTypeSearchContainerPrimaryKeys");
 		boolean overrideFileEntryTypes = ParamUtil.getBoolean(
 			actionRequest, "overrideFileEntryTypes");
 

@@ -336,6 +336,24 @@ public class DLFolderWrapper implements DLFolder {
 	}
 
 	/**
+	* Returns the default file entry type ID of this document library folder.
+	*
+	* @return the default file entry type ID of this document library folder
+	*/
+	public long getDefaultFileEntryTypeId() {
+		return _dlFolder.getDefaultFileEntryTypeId();
+	}
+
+	/**
+	* Sets the default file entry type ID of this document library folder.
+	*
+	* @param defaultFileEntryTypeId the default file entry type ID of this document library folder
+	*/
+	public void setDefaultFileEntryTypeId(long defaultFileEntryTypeId) {
+		_dlFolder.setDefaultFileEntryTypeId(defaultFileEntryTypeId);
+	}
+
+	/**
 	* Returns the override file entry types of this document library folder.
 	*
 	* @return the override file entry types of this document library folder
@@ -360,24 +378,6 @@ public class DLFolderWrapper implements DLFolder {
 	*/
 	public void setOverrideFileEntryTypes(boolean overrideFileEntryTypes) {
 		_dlFolder.setOverrideFileEntryTypes(overrideFileEntryTypes);
-	}
-
-	/**
-	* Returns the default file entry type ID of this document library folder.
-	*
-	* @return the default file entry type ID of this document library folder
-	*/
-	public long getDefaultFileEntryTypeId() {
-		return _dlFolder.getDefaultFileEntryTypeId();
-	}
-
-	/**
-	* Sets the default file entry type ID of this document library folder.
-	*
-	* @param defaultFileEntryTypeId the default file entry type ID of this document library folder
-	*/
-	public void setDefaultFileEntryTypeId(long defaultFileEntryTypeId) {
-		_dlFolder.setDefaultFileEntryTypeId(defaultFileEntryTypeId);
 	}
 
 	public boolean isNew() {

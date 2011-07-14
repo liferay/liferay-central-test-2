@@ -28,7 +28,7 @@ public class FolderLastPostDateMessageListener extends BaseMessageListener {
 	protected void doReceive(Message message) throws Exception {
 		DLFileEntry dlFileEntry = (DLFileEntry)message.getPayload();
 
-		DLFolderLocalServiceUtil.setLastPostDate(
+		DLFolderLocalServiceUtil.updateLastPostDate(
 			dlFileEntry.getFolderId(), dlFileEntry.getModifiedDate());
 	}
 

@@ -21,7 +21,6 @@
 </liferay-portlet:renderURL>
 
 <aui:form action="<%= portletURL.toString() %>" method="post" name="fm">
-
 	<liferay-ui:header
 		title="document-types"
 	/>

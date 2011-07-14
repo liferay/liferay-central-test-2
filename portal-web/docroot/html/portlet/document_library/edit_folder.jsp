@@ -107,15 +107,9 @@ long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", D
 		<c:if test="<%= (folder != null) && (folder.getModel() instanceof DLFolder) %>">
 
 			<%
-			List<DLFileEntryType> folderFileEntryTypes = DLFileEntryTypeLocalServiceUtil.getFileEntryTypesByFolder(scopeGroupId, folderId, false);
-
-			String headerNames = "name,default,null";
-
 			DLFolder dlFolder = (DLFolder)folder.getModel();
 
-			boolean overrideFileEntryTypes = dlFolder.isOverrideFileEntryTypes();
-
-			long defaultFileEntryTypeId = dlFolder.getDefaultFileEntryTypeId();
+			List<DLFileEntryType> folderDLFileEntryTypes = DLFileEntryTypeLocalServiceUtil.getFolderFileEntryTypes(scopeGroupId, folderId, false);
 			%>
 
 			<aui:field-wrapper label="document-type-restrictions" helpMessage="document-type-restrictions-help">
@@ -126,7 +120,7 @@ long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", D
 							<liferay-ui:message key="override-inherited-restrictions" />
 						</td>
 						<td>
-							<liferay-ui:input-checkbox param="overrideFileEntryTypes" defaultValue="<%= overrideFileEntryTypes %>" />
+							<liferay-ui:input-checkbox defaultValue="<%= dlFolder.isOverrideFileEntryTypes() %>"  param="overrideFileEntryTypes" />
 						</td>
 					</tr>
 					</table>
@@ -135,30 +129,30 @@ long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", D
 				<div id="<portlet:namespace />overrideParentSettings">
 					<liferay-ui:search-container
 						id='<%= renderResponse.getNamespace() + "fileEntryTypeSearchContainer" %>'
-						headerNames="<%= headerNames %>"
+						headerNames="name,default,null"
 					>
 						<liferay-ui:search-container-results
-							results="<%= folderFileEntryTypes %>"
-							total="<%= folderFileEntryTypes != null ? folderFileEntryTypes.size() : 0 %>"
+							results="<%= folderDLFileEntryTypes %>"
+							total="<%= (folderDLFileEntryTypes != null) ? folderDLFileEntryTypes.size() : 0 %>"
 						/>
 
 						<liferay-ui:search-container-row
 							className="com.liferay.portlet.documentlibrary.model.DLFileEntryType"
 							escapedModel="<%= true %>"
 							keyProperty="fileEntryTypeId"
-							modelVar="fileEntryType"
+							modelVar="dlFileEntryType"
 						>
 							<liferay-ui:search-container-column-text
 								name="name"
-								value="<%= fileEntryType.getName() %>"
+								value="<%= dlFileEntryType.getName() %>"
 							/>
 
 							<liferay-ui:search-container-column-text name="default">
-								<input class="default-file-entry-type" type="radio" name="defaultFileEntryTypeId" <%= (defaultFileEntryTypeId == fileEntryType.getFileEntryTypeId()) ? "checked=\"true\"" : "" %> value="<%= fileEntryType.getFileEntryTypeId() %>" />
+								<input class="default-file-entry-type" type="radio" name="defaultFileEntryTypeId" <%= (dlFolder.getDefaultFileEntryTypeId() == dlFileEntryType.getFileEntryTypeId()) ? "checked=\"true\"" : "" %> value="<%= dlFileEntryType.getFileEntryTypeId() %>" />
 							</liferay-ui:search-container-column-text>
 
 							<liferay-ui:search-container-column-text>
-								<a class="modify-link" data-rowId="<%= fileEntryType.getFileEntryTypeId() %>" href="javascript:;"><%= removeFileEntryTypeIcon %></a>
+								<a class="modify-link" data-rowId="<%= dlFileEntryType.getFileEntryTypeId() %>" href="javascript:;"><%= removeFileEntryTypeIcon %></a>
 							</liferay-ui:search-container-column-text>
 						</liferay-ui:search-container-row>
 

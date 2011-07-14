@@ -82,8 +82,8 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 		dlFolder.setParentFolderId(parentFolderId);
 		dlFolder.setName(name);
 		dlFolder.setDescription(description);
-		dlFolder.setExpandoBridgeAttributes(serviceContext);
 		dlFolder.setOverrideFileEntryTypes(false);
+		dlFolder.setExpandoBridgeAttributes(serviceContext);
 
 		dlFolderPersistence.update(dlFolder, false);
 
@@ -355,16 +355,6 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 		return dlFolder;
 	}
 
-	public void setLastPostDate(long folderId, Date lastPostDate)
-		throws PortalException, SystemException {
-
-		DLFolder dlFolder = dlFolderPersistence.findByPrimaryKey(folderId);
-
-		dlFolder.setLastPostDate(lastPostDate);
-
-		dlFolderPersistence.update(dlFolder, false);
-	}
-
 	public DLFolder updateFolder(
 			long folderId, long parentFolderId, String name,
 			String description, ServiceContext serviceContext)
@@ -394,6 +384,12 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
+		// Folder
+
+		DLFolder dlFolder = dlFolderPersistence.findByPrimaryKey(folderId);
+
+		parentFolderId = getParentFolderId(dlFolder, parentFolderId);
+
 		long defaultFileEntryTypeId = GetterUtil.getLong(
 			serviceContext.getAttribute("defaultFileEntryTypeId"));
 		List<Long> fileEntryTypeIds =
@@ -401,12 +397,6 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 				"fileEntryTypeIds");
 		boolean overrideFileEntryTypes = GetterUtil.getBoolean(
 			serviceContext.getAttribute("overrideFileEntryTypes"));
-
-		// Folder
-
-		DLFolder dlFolder = dlFolderPersistence.findByPrimaryKey(folderId);
-
-		parentFolderId = getParentFolderId(dlFolder, parentFolderId);
 
 		validateFolder(folderId, dlFolder.getGroupId(), parentFolderId, name);
 
@@ -420,15 +410,25 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 
 		dlFolderPersistence.update(dlFolder, false);
 
-		// File Entry Type
+		// File entry type
 
 		if (fileEntryTypeIds != null) {
-			dlFileEntryTypeLocalService.updateFileEntryTypesByFolder(
+			dlFileEntryTypeLocalService.updateFolderFileEntryTypes(
 				dlFolder, fileEntryTypeIds, defaultFileEntryTypeId,
 				serviceContext);
 		}
 
 		return dlFolder;
+	}
+
+	public void updateLastPostDate(long folderId, Date lastPostDate)
+		throws PortalException, SystemException {
+
+		DLFolder dlFolder = dlFolderPersistence.findByPrimaryKey(folderId);
+
+		dlFolder.setLastPostDate(lastPostDate);
+
+		dlFolderPersistence.update(dlFolder, false);
 	}
 
 	protected void addFolderResources(

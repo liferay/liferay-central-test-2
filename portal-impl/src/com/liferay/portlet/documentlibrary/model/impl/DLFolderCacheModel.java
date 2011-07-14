@@ -62,10 +62,10 @@ public class DLFolderCacheModel implements CacheModel<DLFolder> {
 		sb.append(description);
 		sb.append(", lastPostDate=");
 		sb.append(lastPostDate);
-		sb.append(", overrideFileEntryTypes=");
-		sb.append(overrideFileEntryTypes);
 		sb.append(", defaultFileEntryTypeId=");
 		sb.append(defaultFileEntryTypeId);
+		sb.append(", overrideFileEntryTypes=");
+		sb.append(overrideFileEntryTypes);
 		sb.append("}");
 
 		return sb.toString();
@@ -132,8 +132,8 @@ public class DLFolderCacheModel implements CacheModel<DLFolder> {
 			dlFolderImpl.setLastPostDate(new Date(lastPostDate));
 		}
 
-		dlFolderImpl.setOverrideFileEntryTypes(overrideFileEntryTypes);
 		dlFolderImpl.setDefaultFileEntryTypeId(defaultFileEntryTypeId);
+		dlFolderImpl.setOverrideFileEntryTypes(overrideFileEntryTypes);
 
 		dlFolderImpl.resetOriginalValues();
 
@@ -154,6 +154,6 @@ public class DLFolderCacheModel implements CacheModel<DLFolder> {
 	public String name;
 	public String description;
 	public long lastPostDate;
-	public boolean overrideFileEntryTypes;
 	public long defaultFileEntryTypeId;
+	public boolean overrideFileEntryTypes;
 }

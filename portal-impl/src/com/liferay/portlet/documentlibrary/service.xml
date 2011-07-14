@@ -228,8 +228,8 @@
 
 		<!-- Relationships -->
 
+		<column name="folders" type="Collection" entity="DLFolder" mapping-table="DLFileEntryTypes_DLFolders" />
 		<column name="ddmStructure" type="Collection" entity="com.liferay.portlet.dynamicdatamapping.DDMStructure" mapping-table="DLFileEntryTypes_DDMStructures" />
-		<column name="fileEntryTypes" type="Collection" entity="DLFolder" mapping-table="DLFileEntryTypes_DLFolders" />
 
 		<!-- Finder methods -->
 
@@ -424,8 +424,8 @@
 		<column name="name" type="String" />
 		<column name="description" type="String" />
 		<column name="lastPostDate" type="Date" />
-		<column name="overrideFileEntryTypes" type="boolean" />
 		<column name="defaultFileEntryTypeId" type="long" />
+		<column name="overrideFileEntryTypes" type="boolean" />
 
 		<!-- Relationships -->
 
