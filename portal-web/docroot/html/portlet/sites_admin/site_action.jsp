@@ -32,6 +32,7 @@ Group group = (Group)row.getObject();
 
 		<liferay-ui:icon
 			image="edit"
+			message="edit-settings"
 			url="<%= editURL %>"
 		/>
 	</c:if>
@@ -61,20 +62,6 @@ Group group = (Group)row.getObject();
 			image="pages"
 			message="manage-pages"
 			url="<%= managePagesURL %>"
-		/>
-	</c:if>
-
-	<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, group.getGroupId(), ActionKeys.MANAGE_STAGING) || GroupPermissionUtil.contains(permissionChecker, group.getGroupId(), ActionKeys.UPDATE) %>">
-		<portlet:renderURL var="editSettingsURL">
-			<portlet:param name="struts_action" value="/sites_admin/edit_settings" />
-			<portlet:param name="redirect" value="<%= currentURL %>" />
-			<portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
-		</portlet:renderURL>
-
-		<liferay-ui:icon
-			image="configuration"
-			message="site-settings"
-			url="<%= editSettingsURL %>"
 		/>
 	</c:if>
 
