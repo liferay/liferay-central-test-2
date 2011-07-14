@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.scheduler.Trigger;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.messaging.LayoutsLocalPublisherRequest;
 import com.liferay.portal.messaging.LayoutsRemotePublisherRequest;
@@ -185,53 +186,56 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 			long groupId, boolean privateLayout, String portletId)
 		throws PortalException, SystemException {
 
-		if (groupId > 0) {
-			String scopeGroupLayoutUuid = null;
+		if (groupId <= 0) {
+			return LayoutConstants.DEFAULT_PLID;
+		}
 
-			Group group = groupLocalService.getGroup(groupId);
+		String scopeGroupLayoutUuid = null;
 
-			if (group.isLayout()) {
-				groupId = group.getParentGroupId();
+		Group group = groupLocalService.getGroup(groupId);
 
-				Layout scopeGroupLayout = layoutLocalService.getLayout(
-					group.getClassPK());
+		if (group.isLayout()) {
+			groupId = group.getParentGroupId();
 
-				scopeGroupLayoutUuid = scopeGroupLayout.getUuid();
+			Layout scopeGroupLayout = layoutLocalService.getLayout(
+				group.getClassPK());
+
+			scopeGroupLayoutUuid = scopeGroupLayout.getUuid();
+		}
+
+		List<Layout> layouts = layoutPersistence.filterFindByG_P(
+			groupId, privateLayout);
+
+		for (Layout layout : layouts) {
+			if (!layout.isTypePortlet()) {
+				continue;
 			}
 
-			List<Layout> layouts = layoutPersistence.filterFindByG_P(
-				groupId, privateLayout);
+			LayoutTypePortlet layoutTypePortlet =
+				(LayoutTypePortlet)layout.getLayoutType();
 
-			for (Layout layout : layouts) {
-				if (layout.isTypePortlet()) {
-					LayoutTypePortlet layoutTypePortlet =
-						(LayoutTypePortlet)layout.getLayoutType();
+			if (!layoutTypePortlet.hasPortletId(portletId)) {
+				continue;
+			}
 
-					if (layoutTypePortlet.hasPortletId(portletId)) {
-						javax.portlet.PortletPreferences jxPreferences =
-							PortletPreferencesFactoryUtil.getLayoutPortletSetup(
-								layout, portletId);
+			javax.portlet.PortletPreferences jxPreferences =
+				PortletPreferencesFactoryUtil.getLayoutPortletSetup(
+					layout, portletId);
 
-						if (group.isLayout()) {
-							String scopeLayoutUuid = GetterUtil.getString(
-								jxPreferences.getValue(
-									"lfrScopeLayoutUuid", null));
+			if (group.isLayout()) {
+				String scopeLayoutUuid = GetterUtil.getString(
+					jxPreferences.getValue("lfrScopeLayoutUuid", null));
 
-							if (scopeGroupLayoutUuid != null &&
-								scopeGroupLayoutUuid.equals(scopeLayoutUuid)) {
+				if (scopeGroupLayoutUuid.equals(scopeLayoutUuid)) {
+					return layout.getPlid();
+				}
+			}
+			else {
+				String scopeType = GetterUtil.getString(
+					jxPreferences.getValue("lfr-scope-type", null));
 
-								return layout.getPlid();
-							}
-						}
-						else {
-							String scopeType = GetterUtil.getString(
-								jxPreferences.getValue("lfr-scope-type", null));
-
-							if (scopeType == null || scopeType.length() == 0) {
-								return layout.getPlid();
-							}
-						}
-					}
+				if (Validator.isNull(scopeType)) {
+					return layout.getPlid();
 				}
 			}
 		}
