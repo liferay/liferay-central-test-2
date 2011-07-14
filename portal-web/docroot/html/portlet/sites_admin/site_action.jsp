@@ -24,11 +24,9 @@ Group group = (Group)row.getObject();
 
 <liferay-ui:icon-menu>
 	<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, group.getGroupId(), ActionKeys.UPDATE) %>">
-		<portlet:renderURL var="editURL">
-			<portlet:param name="struts_action" value="/sites_admin/edit_site" />
+		<liferay-portlet:renderURL doAsGroupId="<%= group.getGroupId() %>" portletName="<%= PortletKeys.SITE_SETTINGS %>" var="editURL">
 			<portlet:param name="redirect" value="<%= currentURL %>" />
-			<portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
-		</portlet:renderURL>
+		</liferay-portlet:renderURL>
 
 		<liferay-ui:icon
 			image="edit"
@@ -52,11 +50,9 @@ Group group = (Group)row.getObject();
 	</c:if>--%>
 
 	<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, group.getGroupId(), ActionKeys.MANAGE_LAYOUTS) %>">
-		<portlet:renderURL var="managePagesURL">
-			<portlet:param name="struts_action" value="/sites_admin/edit_layouts" />
+		<liferay-portlet:renderURL doAsGroupId="<%= group.getGroupId() %>" portletName="<%= PortletKeys.GROUP_PAGES %>" var="managePagesURL">
 			<portlet:param name="redirect" value="<%= currentURL %>" />
-			<portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
-		</portlet:renderURL>
+		</liferay-portlet:renderURL>
 
 		<liferay-ui:icon
 			image="pages"
@@ -66,11 +62,9 @@ Group group = (Group)row.getObject();
 	</c:if>
 
 	<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, group.getGroupId(), ActionKeys.ASSIGN_MEMBERS) %>">
-		<portlet:renderURL var="assignMembersURL">
-			<portlet:param name="struts_action" value="/sites_admin/edit_site_assignments" />
+		<liferay-portlet:renderURL doAsGroupId="<%= group.getGroupId() %>" portletName="<%= PortletKeys.SITE_MEMBERSHIPS_ADMIN %>" var="assignMembersURL">
 			<portlet:param name="redirect" value="<%= currentURL %>" />
-			<portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
-		</portlet:renderURL>
+		</liferay-portlet:renderURL>
 
 		<liferay-ui:icon
 			image="assign"
