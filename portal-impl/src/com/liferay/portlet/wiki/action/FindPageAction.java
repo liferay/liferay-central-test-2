@@ -66,25 +66,8 @@ public class FindPageAction extends Action {
 			WikiNode node = WikiNodeLocalServiceUtil.getNode(
 				pageResource.getNodeId());
 
-			Layout layout = LayoutLocalServiceUtil.getLayout(plid);
-
-			LayoutTypePortlet layoutTypePortlet =
-				(LayoutTypePortlet)layout.getLayoutType();
-
-			String portletId = null;
-
-			for (String curPortletId : layoutTypePortlet.getPortletIds()) {
-				if (curPortletId.startsWith(PortletKeys.WIKI) ||
-					curPortletId.startsWith(PortletKeys.WIKI_DISPLAY)) {
-
-					portletId = curPortletId;
-
-					break;
-				}
-			}
-
 			PortletURL portletURL = new PortletURLImpl(
-				request, portletId, plid, PortletRequest.RENDER_PHASE);
+				request, getPortletId(plid), plid, PortletRequest.RENDER_PHASE);
 
 			portletURL.setWindowState(WindowState.NORMAL);
 			portletURL.setPortletMode(PortletMode.VIEW);
@@ -114,11 +97,9 @@ public class FindPageAction extends Action {
 				LayoutTypePortlet layoutTypePortlet =
 					(LayoutTypePortlet)layout.getLayoutType();
 
-				if (layoutTypePortlet.hasPortletId(PortletKeys.WIKI)) {
-					return plid;
-				}
+				if (layoutTypePortlet.hasPortletId(PortletKeys.WIKI) ||
+					layoutTypePortlet.hasPortletId(PortletKeys.WIKI_DISPLAY)) {
 
-				if (layoutTypePortlet.hasPortletId(PortletKeys.WIKI_DISPLAY)) {
 					return plid;
 				}
 			}
@@ -146,10 +127,26 @@ public class FindPageAction extends Action {
 		if (plid != LayoutConstants.DEFAULT_PLID) {
 			return plid;
 		}
-		else {
-			throw new NoSuchLayoutException(
-				"No page was found with the Wiki portlet.");
+
+		throw new NoSuchLayoutException(
+			"No page was found with the Wiki portlet");
+	}
+
+	protected String getPortletId(long plid) throws Exception {
+		Layout layout = LayoutLocalServiceUtil.getLayout(plid);
+
+		LayoutTypePortlet layoutTypePortlet =
+			(LayoutTypePortlet)layout.getLayoutType();
+
+		for (String portletId : layoutTypePortlet.getPortletIds()) {
+			if (portletId.startsWith(PortletKeys.WIKI) ||
+				portletId.startsWith(PortletKeys.WIKI_DISPLAY)) {
+
+				return portletId;
+			}
 		}
+
+		return PortletKeys.WIKI;
 	}
 
 }

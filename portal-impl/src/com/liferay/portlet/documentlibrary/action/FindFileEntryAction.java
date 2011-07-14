@@ -56,26 +56,8 @@ public class FindFileEntryAction extends Action {
 
 			plid = getPlid(plid, fileEntryId);
 
-			Layout layout = LayoutLocalServiceUtil.getLayout(plid);
-
-			LayoutTypePortlet layoutTypePortlet =
-				(LayoutTypePortlet)layout.getLayoutType();
-
-			String portletId = null;
-
-			for (String curPortletId : layoutTypePortlet.getPortletIds()) {
-				if (curPortletId.startsWith(PortletKeys.DOCUMENT_LIBRARY) ||
-					curPortletId.startsWith(
-						PortletKeys.DOCUMENT_LIBRARY_DISPLAY)) {
-
-					portletId = curPortletId;
-
-					break;
-				}
-			}
-
 			PortletURL portletURL = new PortletURLImpl(
-				request, portletId, plid, PortletRequest.RENDER_PHASE);
+				request, getPortletId(plid), plid, PortletRequest.RENDER_PHASE);
 
 			portletURL.setWindowState(WindowState.NORMAL);
 			portletURL.setPortletMode(PortletMode.VIEW);
@@ -104,12 +86,8 @@ public class FindFileEntryAction extends Action {
 					(LayoutTypePortlet)layout.getLayoutType();
 
 				if (layoutTypePortlet.hasPortletId(
-						PortletKeys.DOCUMENT_LIBRARY)) {
-
-					return plid;
-				}
-
-				if (layoutTypePortlet.hasPortletId(
+						PortletKeys.DOCUMENT_LIBRARY) ||
+					layoutTypePortlet.hasPortletId(
 						PortletKeys.DOCUMENT_LIBRARY_DISPLAY)) {
 
 					return plid;
@@ -134,10 +112,26 @@ public class FindFileEntryAction extends Action {
 		if (plid != LayoutConstants.DEFAULT_PLID) {
 			return plid;
 		}
-		else {
-			throw new NoSuchLayoutException(
-				"No page was found with the Document Library portlet.");
+
+		throw new NoSuchLayoutException(
+			"No page was found with the Document Library portlet");
+	}
+
+	protected String getPortletId(long plid) throws Exception {
+		Layout layout = LayoutLocalServiceUtil.getLayout(plid);
+
+		LayoutTypePortlet layoutTypePortlet =
+			(LayoutTypePortlet)layout.getLayoutType();
+
+		for (String portletId : layoutTypePortlet.getPortletIds()) {
+			if (portletId.startsWith(PortletKeys.DOCUMENT_LIBRARY) ||
+				portletId.startsWith(PortletKeys.DOCUMENT_LIBRARY_DISPLAY)) {
+
+				return portletId;
+			}
 		}
+
+		return PortletKeys.DOCUMENT_LIBRARY;
 	}
 
 }
