@@ -190,7 +190,7 @@ public class BlogsPortletDataHandlerImpl extends BasePortletDataHandler {
 			return;
 		}
 
-		// Clone this article to make sure changes to its content are never
+		// Clone this entry to make sure changes to its content are never
 		// persisted
 
 		entry = (BlogsEntry)entry.clone();
@@ -202,11 +202,10 @@ public class BlogsPortletDataHandlerImpl extends BasePortletDataHandler {
 			entryElement = entriesElement.addElement("entry");
 		}
 
-		String content =
-			JournalPortletDataHandlerImpl.exportReferencedContent(
-				portletDataContext, dlFoldersElement, dlFileEntriesElement,
-				dlFileRanksElement, igFoldersElement, igImagesElement,
-				entryElement, entry.getContent(), checkDateRange);
+		String content = JournalPortletDataHandlerImpl.exportReferencedContent(
+			portletDataContext, dlFoldersElement, dlFileEntriesElement,
+			dlFileRanksElement, igFoldersElement, igImagesElement, entryElement,
+			entry.getContent(), checkDateRange);
 
 		entry.setContent(content);
 
@@ -232,7 +231,7 @@ public class BlogsPortletDataHandlerImpl extends BasePortletDataHandler {
 			entryElement, path, entry, _NAMESPACE);
 	}
 
-	protected static String getEntryImagePath(
+	protected String getEntryImagePath(
 			PortletDataContext portletDataContext, BlogsEntry entry)
 		throws Exception {
 
