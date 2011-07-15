@@ -60,12 +60,12 @@ public class Log4JUtil {
 			return;
 		}
 
-		Reader urlReader = new StringReader(urlContent);
-
 		// See LPS-6029 and LPS-8865
 
 		if (!ServerDetector.isJBoss()) {
 			DOMConfigurator domConfigurator = new DOMConfigurator();
+
+			Reader urlReader = new StringReader(urlContent);
 
 			domConfigurator.doConfigure(
 				urlReader, LogManager.getLoggerRepository());
@@ -83,6 +83,8 @@ public class Log4JUtil {
 
 		try {
 			SAXReader saxReader = new SAXReader();
+
+			Reader urlReader = new StringReader(urlContent);
 
 			Document document = saxReader.read(urlReader, url.toExternalForm());
 
