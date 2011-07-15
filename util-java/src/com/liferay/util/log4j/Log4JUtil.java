@@ -17,6 +17,7 @@ package com.liferay.util.log4j;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.ServerDetector;
+import com.liferay.portal.kernel.util.StreamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 
 import java.io.InputStream;
@@ -28,7 +29,7 @@ import java.net.URL;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -53,28 +54,10 @@ public class Log4JUtil {
 			return;
 		}
 
-		// Load file from URL and replace template variables
-		// of the form @variable@
+		String urlContent = _getURLContent(url);
 
-		Map<String, String> replacements = new HashMap<String, String>();
-		replacements.put("liferay.home", PropsUtil.get(PropsKeys.LIFERAY_HOME));
-
-		String urlContent = null;
-
-		try {
-			// Get content of the url as a string so we can replace @variables@
-			InputStream urlStream = url.openStream();
-			byte[] urlBytes = FileUtil.readAsByteArray(urlStream);
-			urlContent = new String(urlBytes, StringPool.UTF8);
-		} catch(Exception e) {
-			e.printStackTrace();
+		if (urlContent == null) {
 			return;
-		}
-
-		// Replace variables surrounded by @ symbols
-		for (Map.Entry<String, String> replacement : replacements.entrySet()) {
-			urlContent = urlContent.replaceAll(
-				"@" + replacement.getKey() + "@", replacement.getValue());
 		}
 
 		Reader urlReader = new StringReader(urlContent);
@@ -82,7 +65,9 @@ public class Log4JUtil {
 		// See LPS-6029 and LPS-8865
 
 		if (!ServerDetector.isJBoss()) {
-			new DOMConfigurator().doConfigure(
+			DOMConfigurator domConfigurator = new DOMConfigurator();
+
+			domConfigurator.doConfigure(
 				urlReader, LogManager.getLoggerRepository());
 		}
 
@@ -97,21 +82,20 @@ public class Log4JUtil {
 		}
 
 		try {
-			SAXReader reader = new SAXReader();
+			SAXReader saxReader = new SAXReader();
 
-			Document doc =
-				reader.read(urlReader, url.toExternalForm());
+			Document document = saxReader.read(urlReader, url.toExternalForm());
 
-			Element root = doc.getRootElement();
+			Element rootElement = document.getRootElement();
 
-			Iterator<Element> itr = root.elements("category").iterator();
+			List<Element> categoryElements = rootElement.elements("category");
 
-			while (itr.hasNext()) {
-				Element category = itr.next();
+			for (Element categoryElement : categoryElements) {
+				String name = categoryElement.attributeValue("name");
 
-				String name = category.attributeValue("name");
-				String priority =
-					category.element("priority").attributeValue("value");
+				Element priorityElement = categoryElement.element("priority");
+
+				String priority = priorityElement.attributeValue("value");
 
 				setLevel(name, priority);
 			}
@@ -145,6 +129,39 @@ public class Log4JUtil {
 		else {
 			return java.util.logging.Level.INFO;
 		}
+	}
+
+	private static String _getURLContent(URL url) {
+		Map<String, String> variables = new HashMap<String, String>();
+
+		variables.put("liferay.home", PropsUtil.get(PropsKeys.LIFERAY_HOME));
+
+		String urlContent = null;
+
+		InputStream inputStream = null;
+
+		try {
+			inputStream = url.openStream();
+
+			byte[] bytes = FileUtil.readAsByteArray(inputStream);
+
+			urlContent = new String(bytes, StringPool.UTF8);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+
+			return null;
+		}
+		finally {
+			StreamUtil.cleanUp(inputStream);
+		}
+
+		for (Map.Entry<String, String> variable : variables.entrySet()) {
+			urlContent = urlContent.replaceAll(
+				"@" + variable.getKey() + "@", variable.getValue());
+		}
+
+		return urlContent;
 	}
 
 }
