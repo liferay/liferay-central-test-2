@@ -289,11 +289,12 @@ public class AggregateClassLoader extends ClassLoader {
 				classLoader, name);
 		}
 		catch (InvocationTargetException ite) {
-			throw new IOException(
-				"Unable to get resources " + name, ite.getTargetException());
+			Throwable t = ite.getTargetException();
+
+			throw new IOException(t.getMessage());
 		}
 		catch (Exception e) {
-			throw new IOException("Unable to get resources " + name, e);
+			throw new IOException(e.getMessage());
 		}
 	}
 
