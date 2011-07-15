@@ -84,7 +84,7 @@ public class ServiceBeanAopProxy implements AopProxy, InvocationHandler {
 				new ServiceBeanMethodInvocation(
 					target, targetClass, method, arguments);
 
-			_installInterceptors(serviceBeanMethodInvocation);
+			_setMethodInterceptors(serviceBeanMethodInvocation);
 
 			Skip skip = ServiceMethodAnnotationCache.get(
 				serviceBeanMethodInvocation, Skip.class, null);
@@ -103,63 +103,72 @@ public class ServiceBeanAopProxy implements AopProxy, InvocationHandler {
 		}
 	}
 
-	private void _installInterceptors(
+	private List<MethodInterceptor> _getMethodInterceptors(
 		ServiceBeanMethodInvocation serviceBeanMethodInvocation) {
-		List<MethodInterceptor> interceptors = _interceptorsCache.get(
-			serviceBeanMethodInvocation);
 
-		if (interceptors == null) {
-			List<Object> list =
-				_advisorChainFactory.
-					getInterceptorsAndDynamicInterceptionAdvice(
-						_advisedSupport,
-							serviceBeanMethodInvocation.getMethod(),
-								serviceBeanMethodInvocation.getTargetClass());
+		List<Object> list =
+			_advisorChainFactory.getInterceptorsAndDynamicInterceptionAdvice(
+				_advisedSupport, serviceBeanMethodInvocation.getMethod(),
+				serviceBeanMethodInvocation.getTargetClass());
 
-			Iterator<Object> iterator = list.iterator();
+		Iterator<Object> itr = list.iterator();
 
-			while (iterator.hasNext()) {
-				Object obj = iterator.next();
+		while (itr.hasNext()) {
+			Object obj = itr.next();
 
-				if (!(obj instanceof MethodInterceptor)) {
-					if (_log.isWarnEnabled()) {
-						_log.warn(
-							"Skipping unsupported interceptor type " +
-								obj.getClass());
-					}
-
-					iterator.remove();
+			if (!(obj instanceof MethodInterceptor)) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(
+						"Skipping unsupported interceptor type " +
+							obj.getClass());
 				}
-			}
 
-			if (list.isEmpty()) {
-				interceptors = Collections.emptyList();
+				itr.remove();
 			}
-			else {
-				interceptors = new ArrayList<MethodInterceptor>(list.size());
-
-				for (Object obj : list) {
-					interceptors.add((MethodInterceptor)obj);
-				}
-			}
-
-			_interceptorsCache.put(
-				serviceBeanMethodInvocation.toCacheKeyModel(), interceptors);
 		}
 
-		serviceBeanMethodInvocation.setInterceptors(interceptors);
+		List<MethodInterceptor> methodInterceptors = null;
+
+		if (list.isEmpty()) {
+			methodInterceptors = Collections.emptyList();
+		}
+		else {
+			methodInterceptors = new ArrayList<MethodInterceptor>(list.size());
+
+			for (Object obj : list) {
+				methodInterceptors.add((MethodInterceptor)obj);
+			}
+		}
+
+		return methodInterceptors;
+	}
+
+	private void _setMethodInterceptors(
+		ServiceBeanMethodInvocation serviceBeanMethodInvocation) {
+
+		List<MethodInterceptor> methodInterceptors = _methodInterceptors.get(
+			serviceBeanMethodInvocation);
+
+		if (methodInterceptors == null) {
+			_getMethodInterceptors(serviceBeanMethodInvocation);
+
+			_methodInterceptors.put(
+				serviceBeanMethodInvocation.toCacheKeyModel(),
+				methodInterceptors);
+		}
+
+		serviceBeanMethodInvocation.setMethodInterceptors(methodInterceptors);
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(
 		ServiceBeanAopProxy.class);
 
-	private static final Map
-		<ServiceBeanMethodInvocation, List<MethodInterceptor>>
-			_interceptorsCache = new ConcurrentHashMap
-				<ServiceBeanMethodInvocation, List<MethodInterceptor>>();
+	private static Map <ServiceBeanMethodInvocation, List<MethodInterceptor>>
+		_methodInterceptors = new ConcurrentHashMap
+			<ServiceBeanMethodInvocation, List<MethodInterceptor>>();
 
-	private final AdvisedSupport _advisedSupport;
-	private final AdvisorChainFactory _advisorChainFactory;
-	private final MethodInterceptor _methodInterceptor;
+	private AdvisedSupport _advisedSupport;
+	private AdvisorChainFactory _advisorChainFactory;
+	private MethodInterceptor _methodInterceptor;
 
 }

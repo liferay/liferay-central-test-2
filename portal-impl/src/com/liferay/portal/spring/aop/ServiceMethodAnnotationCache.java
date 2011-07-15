@@ -59,6 +59,7 @@ public class ServiceMethodAnnotationCache {
 		if (methodInvocation instanceof ServiceBeanMethodInvocation) {
 			ServiceBeanMethodInvocation serviceBeanMethodInvocation =
 				(ServiceBeanMethodInvocation)methodInvocation;
+
 			methodInvocation = serviceBeanMethodInvocation.toCacheKeyModel();
 		}
 

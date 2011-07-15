@@ -97,11 +97,13 @@ public class ServiceBeanMethodInvocation implements MethodInvocation {
 	}
 
 	public Object proceed() throws Throwable {
-		if ((_interceptors != Collections.EMPTY_LIST) &&
-			(_index < _interceptors.size())) {
-			MethodInterceptor interceptor = _interceptors.get(_index++);
+		if ((_methodInterceptors != Collections.EMPTY_LIST) &&
+			(_index < _methodInterceptors.size())) {
 
-			return interceptor.invoke(this);
+			MethodInterceptor methodInterceptor = _methodInterceptors.get(
+				_index++);
+
+			return methodInterceptor.invoke(this);
 		}
 
 		try {
@@ -112,8 +114,10 @@ public class ServiceBeanMethodInvocation implements MethodInvocation {
 		}
 	}
 
-	public void setInterceptors(List<MethodInterceptor> interceptors) {
-		_interceptors = interceptors;
+	public void setMethodInterceptors(
+		List<MethodInterceptor> methodInterceptors) {
+
+		_methodInterceptors = methodInterceptors;
 	}
 
 	public ServiceBeanMethodInvocation toCacheKeyModel() {
@@ -168,8 +172,8 @@ public class ServiceBeanMethodInvocation implements MethodInvocation {
 	private Object[] _arguments;
 	private int _hashCode;
 	private int _index;
-	private List<MethodInterceptor> _interceptors;
 	private Method _method;
+	private List<MethodInterceptor> _methodInterceptors;
 	private Object _target;
 	private Class<?> _targetClass;
 	private String _toString;
