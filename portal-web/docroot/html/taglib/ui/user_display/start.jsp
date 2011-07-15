@@ -43,7 +43,7 @@ if (Validator.isNull(url) && (userDisplay != null)) {
 		</span>
 
 		<span class="user-name">
-			<%= userDisplay != null ? HtmlUtil.escape(userDisplay.getFullName()) : HtmlUtil.escape(userName) %>
+			<%= (userDisplay != null) ? HtmlUtil.escape(userDisplay.getFullName()) : HtmlUtil.escape(userName) %>
 		</span>
 	</aui:a>
 

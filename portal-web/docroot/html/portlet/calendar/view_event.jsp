@@ -234,7 +234,8 @@ request.setAttribute("view_event.jsp-event", event);
 		<div class="folder-icon">
 			<liferay-ui:icon
 				cssClass="folder-avatar"
-				image="../file_system/large/calendar" message=""
+				image="../file_system/large/calendar"
+				message=""
 			/>
 
 			<div class="event-name">

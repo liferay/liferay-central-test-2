@@ -15,17 +15,17 @@
 --%>
 
 .taglib-user-display {
-    padding: 0.5em;
+	padding: 0.5em;
 
 	&.display-style-1 {
-    	.user-profile-image {
-        	float: left;
-            margin-right: 1.5em;
+		.user-profile-image {
+			float: left;
+			margin-right: 1.5em;
 		}
 	}
 
 	&.display-style-2 {
-    	.user-profile-image, .user-name {
+		.user-profile-image, .user-name {
 			clear: both;
 			display: block;
 			text-align: center;
@@ -33,15 +33,15 @@
 	}
 
 	a .user-name {
-    	text-decoration: underline;
+		text-decoration: underline;
 	}
 
 	.user-name {
-    	font-size: 1.1em;
+		font-size: 1.1em;
 		font-weight: bold;
 	}
 
 	.user-details {
-    	margin-top: 1em;
+		margin-top: 1em;
 	}
 }
