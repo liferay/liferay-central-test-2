@@ -1044,7 +1044,7 @@ public class MainServlet extends ActionServlet {
 
 		Locale locale = LocaleUtil.getDefault();
 
-		String shutdownMessage = LanguageUtil.get(
+		String companyInactiveMessage = LanguageUtil.get(
 			locale,
 			"this-instance-is-inactive-please-contact-with-your-administrator");
 
@@ -1052,7 +1052,7 @@ public class MainServlet extends ActionServlet {
 			"com/liferay/portal/dependencies/company_inactive.html");
 
 		html = StringUtil.replace(
-			html, "[$COMPANY_INACTIVE_MESSAGE$]", shutdownMessage);
+			html, "[$COMPANY_INACTIVE_MESSAGE$]", companyInactiveMessage);
 
 		ServletOutputStream servletOutputStream = response.getOutputStream();
 
