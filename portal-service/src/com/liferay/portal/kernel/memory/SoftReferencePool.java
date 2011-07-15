@@ -38,6 +38,7 @@ public class SoftReferencePool<V, P> {
 
 	public SoftReferencePool(
 		PoolAction<V, P> poolAction, int maxIdleSize, boolean useWeakCounter) {
+
 		_poolAction = poolAction;
 		_maxIdleSize = maxIdleSize;
 		_useWeakCounter = useWeakCounter;
@@ -67,7 +68,7 @@ public class SoftReferencePool<V, P> {
 	}
 
 	public void returnObject(V value) {
-		if (getCount() < _maxIdleSize) {
+		if (_getCount() < _maxIdleSize) {
 			SoftReference<V> softReference = new SoftReference<V>(
 				value, _referenceQueue);
 
@@ -80,7 +81,7 @@ public class SoftReferencePool<V, P> {
 			}
 		}
 		else {
-			while (getCount() > _maxIdleSize) {
+			while (_getCount() > _maxIdleSize) {
 				if ((_softReferences.poll() != null) && _useWeakCounter) {
 					_weakCounter.getAndDecrement();
 				}
@@ -102,7 +103,7 @@ public class SoftReferencePool<V, P> {
 		}
 	}
 
-	private int getCount() {
+	private int _getCount() {
 		if (_useWeakCounter) {
 			return _weakCounter.get();
 		}
