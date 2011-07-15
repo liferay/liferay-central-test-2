@@ -201,10 +201,10 @@
 <%!
 private long _getClassPK(Object bean, long classPK) {
 	if ((bean != null) && (classPK <= 0)) {
-		if (bean instanceof BaseModel) {
-			BaseModel baseModel = (BaseModel)bean;
+		if (bean instanceof ClassedModel) {
+			ClassedModel classedModel = (ClassedModel)bean;
 
-			Serializable primaryKeyObj = baseModel.getPrimaryKeyObj();
+			Serializable primaryKeyObj = classedModel.getPrimaryKeyObj();
 
 			if (primaryKeyObj instanceof Long) {
 				classPK = (Long)primaryKeyObj;
@@ -212,11 +212,6 @@ private long _getClassPK(Object bean, long classPK) {
 			else {
 				classPK = GetterUtil.getLong(primaryKeyObj.toString());
 			}
-		}
-		else if (bean instanceof RepositoryModel) {
-			RepositoryModel repositoryModel = (RepositoryModel)bean;
-
-			classPK = repositoryModel.getPrimaryKey();
 		}
 	}
 

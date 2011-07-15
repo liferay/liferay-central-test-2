@@ -23,7 +23,6 @@ import com.liferay.portal.kernel.util.Tuple;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelHintsUtil;
 import com.liferay.taglib.aui.base.BaseInputTag;
-import com.liferay.taglib.util.IncludeTag;
 import com.liferay.util.PwdGenerator;
 
 import java.util.HashMap;
@@ -40,6 +39,14 @@ import javax.servlet.jsp.JspException;
  * @author Brian Wing Shun Chan
  */
 public class InputTag extends BaseInputTag {
+
+	@Override
+	protected void cleanUp() {
+		super.cleanUp();
+
+		_forLabel = null;
+		_validators = null;
+	}
 
 	@Override
 	public int doEndTag() throws JspException {
