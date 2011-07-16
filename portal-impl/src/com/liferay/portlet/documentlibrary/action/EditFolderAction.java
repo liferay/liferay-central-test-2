@@ -233,38 +233,48 @@ public class EditFolderAction extends PortletAction {
 			folder = DLAppServiceUtil.updateFolder(
 				folderId, name, description, serviceContext);
 
-			// Update workflow definitions
-
-			if (folder.getModel() instanceof DLFolder) {
-				List<ObjectValuePair<Long, String>> workflowDefinitions =
-					new ArrayList<ObjectValuePair<Long, String>>();
-
-				if (fileEntryTypeIds.isEmpty()) {
-					fileEntryTypeIds.add(new Long(0));
-				}
-				else {
-					workflowDefinitions.add(
-						new ObjectValuePair<Long, String>(
-							new Long(0), StringPool.BLANK));
-				}
-
-				for (long fileEntryTypeId : fileEntryTypeIds) {
-					String workflowDefinition = ParamUtil.getString(
-						actionRequest, "workflowDefinition" + fileEntryTypeId);
-
-					workflowDefinitions.add(
-						new ObjectValuePair<Long, String>(
-							fileEntryTypeId, workflowDefinition));
-				}
-
-				WorkflowDefinitionLinkLocalServiceUtil.
-					updateWorkflowDefinitionLinks(
-						serviceContext.getUserId(),
-						serviceContext.getCompanyId(), folder.getGroupId(),
-						DLFolder.class.getName(), folder.getFolderId(),
-						workflowDefinitions);
-			}
+			updateWorkflowDefinitions(actionRequest, folder, serviceContext);
 		}
+	}
+
+	protected void updateWorkflowDefinitions(
+			ActionRequest actionRequest, Folder folder,
+			ServiceContext serviceContext)
+		throws Exception {
+
+		if (!(folder.getModel() instanceof DLFolder)) {
+			return;
+		}
+
+		List<ObjectValuePair<Long, String>> workflowDefinitions =
+			new ArrayList<ObjectValuePair<Long, String>>();
+
+		SortedArrayList<Long> fileEntryTypeIds =
+			(SortedArrayList<Long>)serviceContext.getAttribute(
+				"fileEntryTypeIds");
+
+		if (fileEntryTypeIds.isEmpty()) {
+			fileEntryTypeIds.add(new Long(0));
+		}
+		else {
+			workflowDefinitions.add(
+				new ObjectValuePair<Long, String>(
+					new Long(0), StringPool.BLANK));
+		}
+
+		for (long fileEntryTypeId : fileEntryTypeIds) {
+			String workflowDefinition = ParamUtil.getString(
+				actionRequest, "workflowDefinition" + fileEntryTypeId);
+
+			workflowDefinitions.add(
+				new ObjectValuePair<Long, String>(
+					fileEntryTypeId, workflowDefinition));
+		}
+
+		WorkflowDefinitionLinkLocalServiceUtil.updateWorkflowDefinitionLinks(
+			serviceContext.getUserId(), serviceContext.getCompanyId(),
+			folder.getGroupId(), DLFolder.class.getName(), folder.getFolderId(),
+			workflowDefinitions);
 	}
 
 }

@@ -144,7 +144,6 @@ if (workflowEnabled) {
 				</div>
 
 				<div id="<portlet:namespace />overrideParentSettings">
-
 					<c:if test="<%= workflowEnabled %>">
 						<div class='<%= folderDLFileEntryTypes.isEmpty() ? StringPool.BLANK : "aui-helper-hidden" %>' id="<portlet:namespace />defaultWorkflow">
 							<aui:select label="default-workflow-for-all-document-types" name="workflowDefinition0">
@@ -193,7 +192,6 @@ if (workflowEnabled) {
 							keyProperty="fileEntryTypeId"
 							modelVar="dlFileEntryType"
 						>
-
 							<liferay-ui:search-container-column-text
 								name="name"
 								value="<%= dlFileEntryType.getName() %>"

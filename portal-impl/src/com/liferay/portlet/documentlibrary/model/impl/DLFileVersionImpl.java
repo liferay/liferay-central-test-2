@@ -76,11 +76,15 @@ public class DLFileVersionImpl extends DLFileVersionBaseImpl {
 	}
 
 	public DLFolder getFolder() throws PortalException, SystemException {
-		return getFileEntry().getFolder();
+		DLFileEntry dlFileEntry = getFileEntry();
+
+		return dlFileEntry.getFolder();
 	}
 
 	public long getFolderId() throws PortalException, SystemException {
-		return getFileEntry().getFolderId();
+		DLFileEntry dlFileEntry = getFileEntry();
+
+		return dlFileEntry.getFolderId();
 	}
 
 	public String getIcon() {

@@ -58,11 +58,9 @@ public class DLFileEntryWorkflowHandler extends BaseWorkflowHandler {
 		DLFileVersion dlFileVersion =
 			DLFileVersionLocalServiceUtil.getFileVersion(classPK);
 
-		long folderId = dlFileVersion.getFolderId();
-
 		return WorkflowDefinitionLinkLocalServiceUtil.getWorkflowDefinitionLink(
 			companyId, groupId, DLFolder.class.getName(),
-			folderId, dlFileVersion.getFileEntryTypeId());
+			dlFileVersion.getFolderId(), dlFileVersion.getFileEntryTypeId());
 	}
 
 	public DLFileEntry updateStatus(
