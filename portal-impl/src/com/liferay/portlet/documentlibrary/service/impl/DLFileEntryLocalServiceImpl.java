@@ -109,7 +109,7 @@ public class DLFileEntryLocalServiceImpl
 			InputStream is, long size, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		if (size == 0 && Validator.isNull(title)) {
+		if ((size == 0) && Validator.isNull(title)) {
 			throw new FileNameException();
 		}
 
