@@ -57,6 +57,14 @@ public class BaseSearchEngine implements SearchEngine {
 		_clusteredWritePriority = clusteredWritePriority;
 	}
 
+	public void setIndexSearcher(IndexSearcher indexSearcher) {
+		_indexSearcher = indexSearcher;
+	}
+
+	public void setIndexWriter(IndexWriter indexWriter) {
+		_indexWriter = indexWriter;
+	}
+
 	public void setLuceneBased(boolean luceneBased) {
 		_luceneBased = luceneBased;
 	}
@@ -65,16 +73,8 @@ public class BaseSearchEngine implements SearchEngine {
 		_name = name;
 	}
 
-	public void setSearcher(IndexSearcher searcher) {
-		_indexSearcher = searcher;
-	}
-
 	public void setVendor(String vendor) {
 		_vendor = vendor;
-	}
-
-	public void setWriter(IndexWriter writer) {
-		_indexWriter = writer;
 	}
 
 	private boolean _clusteredWrite;
