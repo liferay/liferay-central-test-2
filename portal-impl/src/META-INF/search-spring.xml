@@ -193,7 +193,7 @@
 
 	<!-- Configurator -->
 
-	<bean id="com.liferay.portal.kernel.search.DefaultSearchEngineConfigurator" class="com.liferay.portal.kernel.search.DefaultSearchEngineConfigurator">
+	<bean id="searchEngineConfigurator.core" class="com.liferay.portal.kernel.search.DefaultSearchEngineConfigurator">
 		<property name="indexSearcher" ref="com.liferay.portal.kernel.search.IndexSearcherProxyBean" />
 		<property name="indexWriter" ref="com.liferay.portal.kernel.search.IndexWriterProxyBean" />
 		<property name="messageBus" ref="com.liferay.portal.kernel.messaging.MessageBus" />
