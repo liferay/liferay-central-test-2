@@ -73,7 +73,7 @@ public class PortletSessionTracker
 	private PortletSessionTracker() {
 		_sessions = new ConcurrentHashMap<String, Set<HttpSession>>();
 
-		PortletSessionListenerManager.addListener(this);
+		PortletSessionListenerManager.addHttpSessionListener(this);
 	}
 
 	private void _add(HttpSession session) {

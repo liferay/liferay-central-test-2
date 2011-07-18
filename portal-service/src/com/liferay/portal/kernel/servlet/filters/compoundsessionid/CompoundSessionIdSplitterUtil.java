@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2000-2011 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
@@ -14,29 +14,33 @@
 
 package com.liferay.portal.kernel.servlet.filters.compoundsessionid;
 
-import com.liferay.portal.kernel.util.Validator;
-
 /**
  * @author Michael C. Han
  */
 public class CompoundSessionIdSplitterUtil {
 
+	public static CompoundSessionIdSplitter getCompoundSessionIdSplitter() {
+		return _compoundSessionIdSplitter;
+	}
+
 	public static String getSessionIdDelimiter() {
-		return _compoundSessionIdSplitter.getSessionIdDelimiter();
+		return getCompoundSessionIdSplitter().getSessionIdDelimiter();
 	}
 
 	public static boolean hasSessionDelimiter() {
-		return _compoundSessionIdSplitter.hasSessionDelimiter();
+		return getCompoundSessionIdSplitter().hasSessionDelimiter();
 	}
 
 	public static String parseSessionId(String sessionId) {
-		return _compoundSessionIdSplitter.parseSessionId(sessionId);
+		return getCompoundSessionIdSplitter().parseSessionId(sessionId);
 	}
 
 	public void setCompoundSessionIdSplitter(
 		CompoundSessionIdSplitter compoundSessionIdSplitter) {
+
 		_compoundSessionIdSplitter = compoundSessionIdSplitter;
 	}
 
 	private static CompoundSessionIdSplitter _compoundSessionIdSplitter;
+
 }

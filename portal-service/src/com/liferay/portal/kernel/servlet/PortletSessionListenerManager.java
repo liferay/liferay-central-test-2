@@ -18,7 +18,6 @@ import com.liferay.portal.kernel.servlet.filters.compoundsessionid.CompoundSessi
 import com.liferay.portal.kernel.servlet.filters.compoundsessionid.CompoundSessionIdSplitterUtil;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpSessionEvent;
@@ -34,12 +33,16 @@ import javax.servlet.http.HttpSessionListener;
  */
 public class PortletSessionListenerManager implements HttpSessionListener {
 
-	public static void addListener(HttpSessionListener listener) {
-		_listeners.add(listener);
+	public static void addHttpSessionListener(
+		HttpSessionListener httpSessionListener) {
+
+		_httpSessionListeners.add(httpSessionListener);
 	}
 
-	public static void removeListener(HttpSessionListener listener) {
-		_listeners.remove(listener);
+	public static void removeHttpSessionListener(
+		HttpSessionListener httpSessionListener) {
+
+		_httpSessionListeners.remove(httpSessionListener);
 	}
 
 	public void sessionCreated(HttpSessionEvent httpSessionEvent) {
@@ -50,17 +53,16 @@ public class PortletSessionListenerManager implements HttpSessionListener {
 		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
 
 		try {
-			Iterator<HttpSessionListener> itr = _listeners.iterator();
+			for (HttpSessionListener httpSessionListener :
+					_httpSessionListeners) {
 
-			while (itr.hasNext()) {
-				HttpSessionListener listener = itr.next();
+				Class<?> clazz = httpSessionListener.getClass();
 
-				ClassLoader listenerClassLoader =
-					listener.getClass().getClassLoader();
+				ClassLoader classLoader = clazz.getClassLoader();
 
-				currentThread.setContextClassLoader(listenerClassLoader);
+				currentThread.setContextClassLoader(classLoader);
 
-				listener.sessionCreated(httpSessionEvent);
+				httpSessionListener.sessionCreated(httpSessionEvent);
 			}
 		}
 		finally {
@@ -71,12 +73,8 @@ public class PortletSessionListenerManager implements HttpSessionListener {
 	public void sessionDestroyed(HttpSessionEvent httpSessionEvent) {
 		httpSessionEvent = getHttpSessionEvent(httpSessionEvent);
 
-		Iterator<HttpSessionListener> itr = _listeners.iterator();
-
-		while (itr.hasNext()) {
-			HttpSessionListener listener = itr.next();
-
-			listener.sessionDestroyed(httpSessionEvent);
+		for (HttpSessionListener httpSessionListener : _httpSessionListeners) {
+			httpSessionListener.sessionDestroyed(httpSessionEvent);
 		}
 	}
 
@@ -94,7 +92,7 @@ public class PortletSessionListenerManager implements HttpSessionListener {
 		return httpSessionEvent;
 	}
 
-	private static List<HttpSessionListener> _listeners =
+	private static List<HttpSessionListener> _httpSessionListeners =
 		new ArrayList<HttpSessionListener>();
 
 }
