@@ -68,7 +68,7 @@ public class DeviceRecognitionProviderDestinationEventListener
 
 		_proxyDeviceRecognitionProvider = proxyDeviceRecognitionProvider;
 	}
-	
+
 	protected boolean isProceed(
 		String destinationName, MessageListener messageListener) {
 
