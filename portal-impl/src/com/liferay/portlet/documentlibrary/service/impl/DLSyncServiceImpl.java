@@ -46,6 +46,20 @@ import java.util.Date;
  */
 public class DLSyncServiceImpl extends DLSyncServiceBaseImpl {
 
+	public DLSyncUpdate getDLSyncUpdate(
+			long companyId, long repositoryId, Date lastAccessDate)
+		throws SystemException {
+
+		Date now = new Date();
+
+		Collection<DLSync> dlSyncs = dlSyncPersistence.findByC_M_R(
+			companyId, lastAccessDate, repositoryId);
+
+		DLSyncUpdate dlSyncUpdate = new DLSyncUpdate(dlSyncs, now);
+
+		return dlSyncUpdate;
+	}
+
 	public InputStream getFileDeltaAsStream(
 			long fileEntryId, String sourceVersion, String destinationVersion)
 		throws PortalException, SystemException {
@@ -150,20 +164,6 @@ public class DLSyncServiceImpl extends DLSyncServiceBaseImpl {
 		}
 
 		return deltaInputStream;
-	}
-
-	public DLSyncUpdate getDLSyncUpdate(
-			long companyId, long repositoryId, Date lastAccessDate)
-		throws SystemException {
-
-		Date now = new Date();
-
-		Collection<DLSync> dlSyncs = dlSyncPersistence.findByC_M_R(
-			companyId, lastAccessDate, repositoryId);
-
-		DLSyncUpdate dlSyncUpdate = new DLSyncUpdate(dlSyncs, now);
-
-		return dlSyncUpdate;
 	}
 
 	public FileEntry updateFileEntry(

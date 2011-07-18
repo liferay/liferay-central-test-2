@@ -30,14 +30,19 @@ public class DLSyncLocalServiceImpl extends DLSyncLocalServiceBaseImpl {
 	public DLSync addSync(
 			String fileId, long companyId, long repositoryId,
 			String type)
-		throws PortalException, SystemException {
+		throws SystemException {
 
-		DLSync dlSync = dlSyncPersistence.create(fileId);
+		Date now = new Date();
+
+		long syncId = counterLocalService.increment();
+
+		DLSync dlSync = dlSyncPersistence.create(syncId);
 
 		dlSync.setCompanyId(companyId);
-		dlSync.setModifiedDate(new Date());
+		dlSync.setCreateDate(now);
+		dlSync.setModifiedDate(now);
 		dlSync.setRepositoryId(repositoryId);
-		dlSync.setEvent(DLSyncConstants.ADD);
+		dlSync.setEvent(DLSyncConstants.EVENT_ADD);
 		dlSync.setType(type);
 
 		dlSyncPersistence.update(dlSync, false);
@@ -48,7 +53,7 @@ public class DLSyncLocalServiceImpl extends DLSyncLocalServiceBaseImpl {
 	public DLSync updateSync(String fileId, String event)
 		throws PortalException, SystemException {
 
-		DLSync dlSync = dlSyncPersistence.findByPrimaryKey(fileId);
+		DLSync dlSync = dlSyncPersistence.findByFileId(fileId);
 
 		dlSync.setModifiedDate(new Date());
 		dlSync.setEvent(event);

@@ -644,22 +644,14 @@ create table DLFolder (
 );
 
 create table DLSync (
-	fileId VARCHAR(75) not null primary key,
+	syncId LONG not null primary key,
 	companyId LONG,
+	createDate DATE null,
 	modifiedDate DATE null,
+	fileId VARCHAR(75) null,
 	repositoryId LONG,
 	event VARCHAR(75) null,
 	type_ VARCHAR(75) null
-);
-
-create table DLSyncClient (
-	syncClientId VARCHAR(75) not null primary key,
-	companyId LONG,
-	userId LONG,
-	userName VARCHAR(75) null,
-	createDate DATE null,
-	modifiedDate DATE null,
-	name VARCHAR(75) null
 );
 
 create table EmailAddress (

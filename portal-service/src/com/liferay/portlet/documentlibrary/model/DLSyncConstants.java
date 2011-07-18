@@ -19,14 +19,14 @@ package com.liferay.portlet.documentlibrary.model;
  */
 public class DLSyncConstants {
 
-	public static final String ADD = "add";
+	public static final String EVENT_ADD = "add";
 
-	public static final String DELETE = "delete";
+	public static final String EVENT_DELETE = "delete";
 
-	public static final String FILE = "file";
+	public static final String EVENT_UPDATE = "update";
 
-	public static final String FOLDER = "folder";
+	public static final String TYPE_FILE = "file";
 
-	public static final String UPDATE = "update";
+	public static final String TYPE_FOLDER = "folder";
 
 }
