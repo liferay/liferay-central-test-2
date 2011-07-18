@@ -222,9 +222,7 @@ create index IX_CBC408D8 on DLFolder (uuid_);
 create unique index IX_3CC1DED2 on DLFolder (uuid_, groupId);
 
 create index IX_B53EC783 on DLSync (companyId, modifiedDate, repositoryId);
-create index IX_20656F03 on DLSync (companyId, repositoryId, modifiedDate);
-create index IX_9AF538D4 on DLSync (modifiedDate);
-create index IX_BC76140D on DLSync (repositoryId, modifiedDate);
+create unique index IX_F9821AB4 on DLSync (fileId);
 
 create index IX_1BB072CA on EmailAddress (companyId);
 create index IX_49D2DEC4 on EmailAddress (companyId, classNameId);

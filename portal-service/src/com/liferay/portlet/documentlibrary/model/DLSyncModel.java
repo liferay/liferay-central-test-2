@@ -50,29 +50,28 @@ public interface DLSyncModel extends BaseModel<DLSync> {
 	 *
 	 * @return the primary key of this d l sync
 	 */
-	public String getPrimaryKey();
+	public long getPrimaryKey();
 
 	/**
 	 * Sets the primary key of this d l sync.
 	 *
 	 * @param primaryKey the primary key of this d l sync
 	 */
-	public void setPrimaryKey(String primaryKey);
+	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Returns the file ID of this d l sync.
+	 * Returns the sync ID of this d l sync.
 	 *
-	 * @return the file ID of this d l sync
+	 * @return the sync ID of this d l sync
 	 */
-	@AutoEscape
-	public String getFileId();
+	public long getSyncId();
 
 	/**
-	 * Sets the file ID of this d l sync.
+	 * Sets the sync ID of this d l sync.
 	 *
-	 * @param fileId the file ID of this d l sync
+	 * @param syncId the sync ID of this d l sync
 	 */
-	public void setFileId(String fileId);
+	public void setSyncId(long syncId);
 
 	/**
 	 * Returns the company ID of this d l sync.
@@ -89,6 +88,20 @@ public interface DLSyncModel extends BaseModel<DLSync> {
 	public void setCompanyId(long companyId);
 
 	/**
+	 * Returns the create date of this d l sync.
+	 *
+	 * @return the create date of this d l sync
+	 */
+	public Date getCreateDate();
+
+	/**
+	 * Sets the create date of this d l sync.
+	 *
+	 * @param createDate the create date of this d l sync
+	 */
+	public void setCreateDate(Date createDate);
+
+	/**
 	 * Returns the modified date of this d l sync.
 	 *
 	 * @return the modified date of this d l sync
@@ -101,6 +114,21 @@ public interface DLSyncModel extends BaseModel<DLSync> {
 	 * @param modifiedDate the modified date of this d l sync
 	 */
 	public void setModifiedDate(Date modifiedDate);
+
+	/**
+	 * Returns the file ID of this d l sync.
+	 *
+	 * @return the file ID of this d l sync
+	 */
+	@AutoEscape
+	public String getFileId();
+
+	/**
+	 * Sets the file ID of this d l sync.
+	 *
+	 * @param fileId the file ID of this d l sync
+	 */
+	public void setFileId(String fileId);
 
 	/**
 	 * Returns the repository ID of this d l sync.

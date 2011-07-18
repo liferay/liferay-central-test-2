@@ -68,8 +68,7 @@ public class DLAppHelperLocalServiceUtil {
 	public static void addFolder(
 		com.liferay.portal.kernel.repository.model.Folder folder,
 		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getService().addFolder(folder, serviceContext);
 	}
 
@@ -109,6 +108,21 @@ public class DLAppHelperLocalServiceUtil {
 		return getService().getNoAssetFileEntries();
 	}
 
+	public static com.liferay.portlet.asset.model.AssetEntry updateAsset(
+		long userId,
+		com.liferay.portal.kernel.repository.model.FileEntry fileEntry,
+		com.liferay.portal.kernel.repository.model.FileVersion fileVersion,
+		long[] assetCategoryIds, java.lang.String[] assetTagNames,
+		long[] assetLinkEntryIds, java.lang.String mimeType,
+		boolean addDraftAssetEntry, boolean visible)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .updateAsset(userId, fileEntry, fileVersion,
+			assetCategoryIds, assetTagNames, assetLinkEntryIds, mimeType,
+			addDraftAssetEntry, visible);
+	}
+
 	public static void updateFileEntry(
 		com.liferay.portal.kernel.repository.model.FileEntry fileEntry,
 		com.liferay.portal.kernel.repository.model.FileVersion fileVersion,
@@ -124,21 +138,6 @@ public class DLAppHelperLocalServiceUtil {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService().updateFolder(folder, serviceContext);
-	}
-
-	public static com.liferay.portlet.asset.model.AssetEntry updateAsset(
-		long userId,
-		com.liferay.portal.kernel.repository.model.FileEntry fileEntry,
-		com.liferay.portal.kernel.repository.model.FileVersion fileVersion,
-		long[] assetCategoryIds, java.lang.String[] assetTagNames,
-		long[] assetLinkEntryIds, java.lang.String mimeType,
-		boolean addDraftAssetEntry, boolean visible)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return getService()
-				   .updateAsset(userId, fileEntry, fileVersion,
-			assetCategoryIds, assetTagNames, assetLinkEntryIds, mimeType,
-			addDraftAssetEntry, visible);
 	}
 
 	public static void updateStatus(long userId,

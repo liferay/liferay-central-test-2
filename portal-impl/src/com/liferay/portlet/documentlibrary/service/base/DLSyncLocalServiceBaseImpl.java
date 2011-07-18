@@ -127,23 +127,23 @@ public abstract class DLSyncLocalServiceBaseImpl implements DLSyncLocalService,
 	/**
 	 * Creates a new d l sync with the primary key. Does not add the d l sync to the database.
 	 *
-	 * @param fileId the primary key for the new d l sync
+	 * @param syncId the primary key for the new d l sync
 	 * @return the new d l sync
 	 */
-	public DLSync createDLSync(String fileId) {
-		return dlSyncPersistence.create(fileId);
+	public DLSync createDLSync(long syncId) {
+		return dlSyncPersistence.create(syncId);
 	}
 
 	/**
 	 * Deletes the d l sync with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param fileId the primary key of the d l sync
+	 * @param syncId the primary key of the d l sync
 	 * @throws PortalException if a d l sync with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public void deleteDLSync(String fileId)
+	public void deleteDLSync(long syncId)
 		throws PortalException, SystemException {
-		DLSync dlSync = dlSyncPersistence.remove(fileId);
+		DLSync dlSync = dlSyncPersistence.remove(syncId);
 
 		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
 
@@ -250,14 +250,14 @@ public abstract class DLSyncLocalServiceBaseImpl implements DLSyncLocalService,
 	/**
 	 * Returns the d l sync with the primary key.
 	 *
-	 * @param fileId the primary key of the d l sync
+	 * @param syncId the primary key of the d l sync
 	 * @return the d l sync
 	 * @throws PortalException if a d l sync with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public DLSync getDLSync(String fileId)
+	public DLSync getDLSync(long syncId)
 		throws PortalException, SystemException {
-		return dlSyncPersistence.findByPrimaryKey(fileId);
+		return dlSyncPersistence.findByPrimaryKey(syncId);
 	}
 
 	/**

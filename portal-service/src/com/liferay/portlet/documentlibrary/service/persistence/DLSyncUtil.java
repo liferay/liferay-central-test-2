@@ -139,27 +139,27 @@ public class DLSyncUtil {
 	/**
 	* Creates a new d l sync with the primary key. Does not add the d l sync to the database.
 	*
-	* @param fileId the primary key for the new d l sync
+	* @param syncId the primary key for the new d l sync
 	* @return the new d l sync
 	*/
 	public static com.liferay.portlet.documentlibrary.model.DLSync create(
-		java.lang.String fileId) {
-		return getPersistence().create(fileId);
+		long syncId) {
+		return getPersistence().create(syncId);
 	}
 
 	/**
 	* Removes the d l sync with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param fileId the primary key of the d l sync
+	* @param syncId the primary key of the d l sync
 	* @return the d l sync that was removed
 	* @throws com.liferay.portlet.documentlibrary.NoSuchSyncException if a d l sync with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public static com.liferay.portlet.documentlibrary.model.DLSync remove(
-		java.lang.String fileId)
+		long syncId)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchSyncException {
-		return getPersistence().remove(fileId);
+		return getPersistence().remove(syncId);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLSync updateImpl(
@@ -171,29 +171,70 @@ public class DLSyncUtil {
 	/**
 	* Returns the d l sync with the primary key or throws a {@link com.liferay.portlet.documentlibrary.NoSuchSyncException} if it could not be found.
 	*
-	* @param fileId the primary key of the d l sync
+	* @param syncId the primary key of the d l sync
 	* @return the d l sync
 	* @throws com.liferay.portlet.documentlibrary.NoSuchSyncException if a d l sync with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public static com.liferay.portlet.documentlibrary.model.DLSync findByPrimaryKey(
-		java.lang.String fileId)
+		long syncId)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchSyncException {
-		return getPersistence().findByPrimaryKey(fileId);
+		return getPersistence().findByPrimaryKey(syncId);
 	}
 
 	/**
 	* Returns the d l sync with the primary key or returns <code>null</code> if it could not be found.
 	*
-	* @param fileId the primary key of the d l sync
+	* @param syncId the primary key of the d l sync
 	* @return the d l sync, or <code>null</code> if a d l sync with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public static com.liferay.portlet.documentlibrary.model.DLSync fetchByPrimaryKey(
+		long syncId) throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().fetchByPrimaryKey(syncId);
+	}
+
+	/**
+	* Returns the d l sync where fileId = &#63; or throws a {@link com.liferay.portlet.documentlibrary.NoSuchSyncException} if it could not be found.
+	*
+	* @param fileId the file ID
+	* @return the matching d l sync
+	* @throws com.liferay.portlet.documentlibrary.NoSuchSyncException if a matching d l sync could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.documentlibrary.model.DLSync findByFileId(
+		java.lang.String fileId)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.documentlibrary.NoSuchSyncException {
+		return getPersistence().findByFileId(fileId);
+	}
+
+	/**
+	* Returns the d l sync where fileId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param fileId the file ID
+	* @return the matching d l sync, or <code>null</code> if a matching d l sync could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.documentlibrary.model.DLSync fetchByFileId(
 		java.lang.String fileId)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().fetchByPrimaryKey(fileId);
+		return getPersistence().fetchByFileId(fileId);
+	}
+
+	/**
+	* Returns the d l sync where fileId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param fileId the file ID
+	* @param retrieveFromCache whether to use the finder cache
+	* @return the matching d l sync, or <code>null</code> if a matching d l sync could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.documentlibrary.model.DLSync fetchByFileId(
+		java.lang.String fileId, boolean retrieveFromCache)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().fetchByFileId(fileId, retrieveFromCache);
 	}
 
 	/**
@@ -319,7 +360,7 @@ public class DLSyncUtil {
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param fileId the primary key of the current d l sync
+	* @param syncId the primary key of the current d l sync
 	* @param companyId the company ID
 	* @param modifiedDate the modified date
 	* @param repositoryId the repository ID
@@ -329,13 +370,13 @@ public class DLSyncUtil {
 	* @throws SystemException if a system exception occurred
 	*/
 	public static com.liferay.portlet.documentlibrary.model.DLSync[] findByC_M_R_PrevAndNext(
-		java.lang.String fileId, long companyId, java.util.Date modifiedDate,
+		long syncId, long companyId, java.util.Date modifiedDate,
 		long repositoryId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchSyncException {
 		return getPersistence()
-				   .findByC_M_R_PrevAndNext(fileId, companyId, modifiedDate,
+				   .findByC_M_R_PrevAndNext(syncId, companyId, modifiedDate,
 			repositoryId, orderByComparator);
 	}
 
@@ -389,6 +430,18 @@ public class DLSyncUtil {
 	}
 
 	/**
+	* Removes the d l sync where fileId = &#63; from the database.
+	*
+	* @param fileId the file ID
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void removeByFileId(java.lang.String fileId)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.documentlibrary.NoSuchSyncException {
+		getPersistence().removeByFileId(fileId);
+	}
+
+	/**
 	* Removes all the d l syncs where companyId = &#63; and modifiedDate &ge; &#63; and repositoryId = &#63; from the database.
 	*
 	* @param companyId the company ID
@@ -410,6 +463,18 @@ public class DLSyncUtil {
 	public static void removeAll()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeAll();
+	}
+
+	/**
+	* Returns the number of d l syncs where fileId = &#63;.
+	*
+	* @param fileId the file ID
+	* @return the number of matching d l syncs
+	* @throws SystemException if a system exception occurred
+	*/
+	public static int countByFileId(java.lang.String fileId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().countByFileId(fileId);
 	}
 
 	/**

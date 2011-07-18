@@ -32,14 +32,18 @@ import java.util.Date;
 public class DLSyncCacheModel implements CacheModel<DLSync> {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(13);
+		StringBundler sb = new StringBundler(17);
 
-		sb.append("{fileId=");
-		sb.append(fileId);
+		sb.append("{syncId=");
+		sb.append(syncId);
 		sb.append(", companyId=");
 		sb.append(companyId);
+		sb.append(", createDate=");
+		sb.append(createDate);
 		sb.append(", modifiedDate=");
 		sb.append(modifiedDate);
+		sb.append(", fileId=");
+		sb.append(fileId);
 		sb.append(", repositoryId=");
 		sb.append(repositoryId);
 		sb.append(", event=");
@@ -54,20 +58,28 @@ public class DLSyncCacheModel implements CacheModel<DLSync> {
 	public DLSync toEntityModel() {
 		DLSyncImpl dlSyncImpl = new DLSyncImpl();
 
-		if (fileId == null) {
-			dlSyncImpl.setFileId(StringPool.BLANK);
+		dlSyncImpl.setSyncId(syncId);
+		dlSyncImpl.setCompanyId(companyId);
+
+		if (createDate == Long.MIN_VALUE) {
+			dlSyncImpl.setCreateDate(null);
 		}
 		else {
-			dlSyncImpl.setFileId(fileId);
+			dlSyncImpl.setCreateDate(new Date(createDate));
 		}
-
-		dlSyncImpl.setCompanyId(companyId);
 
 		if (modifiedDate == Long.MIN_VALUE) {
 			dlSyncImpl.setModifiedDate(null);
 		}
 		else {
 			dlSyncImpl.setModifiedDate(new Date(modifiedDate));
+		}
+
+		if (fileId == null) {
+			dlSyncImpl.setFileId(StringPool.BLANK);
+		}
+		else {
+			dlSyncImpl.setFileId(fileId);
 		}
 
 		dlSyncImpl.setRepositoryId(repositoryId);
@@ -91,9 +103,11 @@ public class DLSyncCacheModel implements CacheModel<DLSync> {
 		return dlSyncImpl;
 	}
 
-	public String fileId;
+	public long syncId;
 	public long companyId;
+	public long createDate;
 	public long modifiedDate;
+	public String fileId;
 	public long repositoryId;
 	public String event;
 	public String type;

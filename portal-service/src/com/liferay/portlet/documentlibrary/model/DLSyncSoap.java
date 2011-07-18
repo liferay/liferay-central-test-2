@@ -31,9 +31,11 @@ public class DLSyncSoap implements Serializable {
 	public static DLSyncSoap toSoapModel(DLSync model) {
 		DLSyncSoap soapModel = new DLSyncSoap();
 
-		soapModel.setFileId(model.getFileId());
+		soapModel.setSyncId(model.getSyncId());
 		soapModel.setCompanyId(model.getCompanyId());
+		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
+		soapModel.setFileId(model.getFileId());
 		soapModel.setRepositoryId(model.getRepositoryId());
 		soapModel.setEvent(model.getEvent());
 		soapModel.setType(model.getType());
@@ -81,20 +83,20 @@ public class DLSyncSoap implements Serializable {
 	public DLSyncSoap() {
 	}
 
-	public String getPrimaryKey() {
-		return _fileId;
+	public long getPrimaryKey() {
+		return _syncId;
 	}
 
-	public void setPrimaryKey(String pk) {
-		setFileId(pk);
+	public void setPrimaryKey(long pk) {
+		setSyncId(pk);
 	}
 
-	public String getFileId() {
-		return _fileId;
+	public long getSyncId() {
+		return _syncId;
 	}
 
-	public void setFileId(String fileId) {
-		_fileId = fileId;
+	public void setSyncId(long syncId) {
+		_syncId = syncId;
 	}
 
 	public long getCompanyId() {
@@ -105,12 +107,28 @@ public class DLSyncSoap implements Serializable {
 		_companyId = companyId;
 	}
 
+	public Date getCreateDate() {
+		return _createDate;
+	}
+
+	public void setCreateDate(Date createDate) {
+		_createDate = createDate;
+	}
+
 	public Date getModifiedDate() {
 		return _modifiedDate;
 	}
 
 	public void setModifiedDate(Date modifiedDate) {
 		_modifiedDate = modifiedDate;
+	}
+
+	public String getFileId() {
+		return _fileId;
+	}
+
+	public void setFileId(String fileId) {
+		_fileId = fileId;
 	}
 
 	public long getRepositoryId() {
@@ -137,9 +155,11 @@ public class DLSyncSoap implements Serializable {
 		_type = type;
 	}
 
-	private String _fileId;
+	private long _syncId;
 	private long _companyId;
+	private Date _createDate;
 	private Date _modifiedDate;
+	private String _fileId;
 	private long _repositoryId;
 	private String _event;
 	private String _type;

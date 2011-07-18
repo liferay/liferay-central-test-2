@@ -44,25 +44,25 @@ public class DLSyncLocalServiceWrapper implements DLSyncLocalService {
 	/**
 	* Creates a new d l sync with the primary key. Does not add the d l sync to the database.
 	*
-	* @param fileId the primary key for the new d l sync
+	* @param syncId the primary key for the new d l sync
 	* @return the new d l sync
 	*/
 	public com.liferay.portlet.documentlibrary.model.DLSync createDLSync(
-		java.lang.String fileId) {
-		return _dlSyncLocalService.createDLSync(fileId);
+		long syncId) {
+		return _dlSyncLocalService.createDLSync(syncId);
 	}
 
 	/**
 	* Deletes the d l sync with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param fileId the primary key of the d l sync
+	* @param syncId the primary key of the d l sync
 	* @throws PortalException if a d l sync with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public void deleteDLSync(java.lang.String fileId)
+	public void deleteDLSync(long syncId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		_dlSyncLocalService.deleteDLSync(fileId);
+		_dlSyncLocalService.deleteDLSync(syncId);
 	}
 
 	/**
@@ -151,16 +151,16 @@ public class DLSyncLocalServiceWrapper implements DLSyncLocalService {
 	/**
 	* Returns the d l sync with the primary key.
 	*
-	* @param fileId the primary key of the d l sync
+	* @param syncId the primary key of the d l sync
 	* @return the d l sync
 	* @throws PortalException if a d l sync with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public com.liferay.portlet.documentlibrary.model.DLSync getDLSync(
-		java.lang.String fileId)
+		long syncId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _dlSyncLocalService.getDLSync(fileId);
+		return _dlSyncLocalService.getDLSync(syncId);
 	}
 
 	/**
@@ -240,8 +240,7 @@ public class DLSyncLocalServiceWrapper implements DLSyncLocalService {
 	public com.liferay.portlet.documentlibrary.model.DLSync addSync(
 		java.lang.String fileId, long companyId, long repositoryId,
 		java.lang.String type)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _dlSyncLocalService.addSync(fileId, companyId, repositoryId, type);
 	}
 

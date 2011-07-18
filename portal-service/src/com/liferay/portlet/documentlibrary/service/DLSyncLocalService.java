@@ -56,20 +56,20 @@ public interface DLSyncLocalService {
 	/**
 	* Creates a new d l sync with the primary key. Does not add the d l sync to the database.
 	*
-	* @param fileId the primary key for the new d l sync
+	* @param syncId the primary key for the new d l sync
 	* @return the new d l sync
 	*/
 	public com.liferay.portlet.documentlibrary.model.DLSync createDLSync(
-		java.lang.String fileId);
+		long syncId);
 
 	/**
 	* Deletes the d l sync with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param fileId the primary key of the d l sync
+	* @param syncId the primary key of the d l sync
 	* @throws PortalException if a d l sync with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public void deleteDLSync(java.lang.String fileId)
+	public void deleteDLSync(long syncId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -148,14 +148,14 @@ public interface DLSyncLocalService {
 	/**
 	* Returns the d l sync with the primary key.
 	*
-	* @param fileId the primary key of the d l sync
+	* @param syncId the primary key of the d l sync
 	* @return the d l sync
 	* @throws PortalException if a d l sync with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.documentlibrary.model.DLSync getDLSync(
-		java.lang.String fileId)
+		long syncId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -226,8 +226,7 @@ public interface DLSyncLocalService {
 	public com.liferay.portlet.documentlibrary.model.DLSync addSync(
 		java.lang.String fileId, long companyId, long repositoryId,
 		java.lang.String type)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portlet.documentlibrary.model.DLSync updateSync(
 		java.lang.String fileId, java.lang.String event)

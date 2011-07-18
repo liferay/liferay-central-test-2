@@ -28,19 +28,19 @@ public class DLSyncServiceWrapper implements DLSyncService {
 		_dlSyncService = dlSyncService;
 	}
 
+	public com.liferay.portlet.documentlibrary.model.DLSyncUpdate getDLSyncUpdate(
+		long companyId, long repositoryId, java.util.Date lastAccessDate)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _dlSyncService.getDLSyncUpdate(companyId, repositoryId,
+			lastAccessDate);
+	}
+
 	public java.io.InputStream getFileDeltaAsStream(long fileEntryId,
 		java.lang.String sourceVersion, java.lang.String destinationVersion)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _dlSyncService.getFileDeltaAsStream(fileEntryId, sourceVersion,
 			destinationVersion);
-	}
-
-	public com.liferay.portlet.documentlibrary.model.DLSyncUpdate getDLSyncUpdate(
-		long companyId, long repositoryId, java.util.Date lastAccessDate)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return _dlSyncService.getDLSyncUpdate(companyId, repositoryId,
-			lastAccessDate);
 	}
 
 	public com.liferay.portal.kernel.repository.model.FileEntry updateFileEntry(

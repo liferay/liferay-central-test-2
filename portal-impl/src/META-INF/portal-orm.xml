@@ -1831,11 +1831,15 @@
 	</mapped-superclass>
 	<mapped-superclass class="com.liferay.portlet.documentlibrary.model.impl.DLSyncModelImpl">
 		<attributes>
-			<id name="fileId" />
+			<id name="syncId" />
 			<basic name="companyId" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
 			<basic name="modifiedDate">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
+			<basic name="fileId" />
 			<basic name="repositoryId" />
 			<basic name="event" />
 			<basic name="type">

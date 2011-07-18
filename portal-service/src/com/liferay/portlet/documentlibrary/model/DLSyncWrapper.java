@@ -41,7 +41,7 @@ public class DLSyncWrapper implements DLSync {
 	*
 	* @return the primary key of this d l sync
 	*/
-	public java.lang.String getPrimaryKey() {
+	public long getPrimaryKey() {
 		return _dlSync.getPrimaryKey();
 	}
 
@@ -50,26 +50,26 @@ public class DLSyncWrapper implements DLSync {
 	*
 	* @param primaryKey the primary key of this d l sync
 	*/
-	public void setPrimaryKey(java.lang.String primaryKey) {
+	public void setPrimaryKey(long primaryKey) {
 		_dlSync.setPrimaryKey(primaryKey);
 	}
 
 	/**
-	* Returns the file ID of this d l sync.
+	* Returns the sync ID of this d l sync.
 	*
-	* @return the file ID of this d l sync
+	* @return the sync ID of this d l sync
 	*/
-	public java.lang.String getFileId() {
-		return _dlSync.getFileId();
+	public long getSyncId() {
+		return _dlSync.getSyncId();
 	}
 
 	/**
-	* Sets the file ID of this d l sync.
+	* Sets the sync ID of this d l sync.
 	*
-	* @param fileId the file ID of this d l sync
+	* @param syncId the sync ID of this d l sync
 	*/
-	public void setFileId(java.lang.String fileId) {
-		_dlSync.setFileId(fileId);
+	public void setSyncId(long syncId) {
+		_dlSync.setSyncId(syncId);
 	}
 
 	/**
@@ -91,6 +91,24 @@ public class DLSyncWrapper implements DLSync {
 	}
 
 	/**
+	* Returns the create date of this d l sync.
+	*
+	* @return the create date of this d l sync
+	*/
+	public java.util.Date getCreateDate() {
+		return _dlSync.getCreateDate();
+	}
+
+	/**
+	* Sets the create date of this d l sync.
+	*
+	* @param createDate the create date of this d l sync
+	*/
+	public void setCreateDate(java.util.Date createDate) {
+		_dlSync.setCreateDate(createDate);
+	}
+
+	/**
 	* Returns the modified date of this d l sync.
 	*
 	* @return the modified date of this d l sync
@@ -106,6 +124,24 @@ public class DLSyncWrapper implements DLSync {
 	*/
 	public void setModifiedDate(java.util.Date modifiedDate) {
 		_dlSync.setModifiedDate(modifiedDate);
+	}
+
+	/**
+	* Returns the file ID of this d l sync.
+	*
+	* @return the file ID of this d l sync
+	*/
+	public java.lang.String getFileId() {
+		return _dlSync.getFileId();
+	}
+
+	/**
+	* Sets the file ID of this d l sync.
+	*
+	* @param fileId the file ID of this d l sync
+	*/
+	public void setFileId(java.lang.String fileId) {
+		_dlSync.setFileId(fileId);
 	}
 
 	/**
