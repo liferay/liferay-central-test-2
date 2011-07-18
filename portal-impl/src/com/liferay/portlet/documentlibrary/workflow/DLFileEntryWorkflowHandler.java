@@ -65,7 +65,7 @@ public class DLFileEntryWorkflowHandler extends BaseWorkflowHandler {
 
 	@Override
 	public boolean isVisible() {
-		return false;
+		return _VISIBLE;
 	}
 
 	public DLFileEntry updateStatus(
@@ -89,5 +89,7 @@ public class DLFileEntryWorkflowHandler extends BaseWorkflowHandler {
 	protected String getIconPath(ThemeDisplay themeDisplay) {
 		return themeDisplay.getPathThemeImages() + "/common/clip.png";
 	}
+
+	private static final boolean _VISIBLE = false;
 
 }

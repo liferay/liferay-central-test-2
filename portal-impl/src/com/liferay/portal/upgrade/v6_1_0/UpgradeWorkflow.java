@@ -26,17 +26,14 @@ public class UpgradeWorkflow extends UpgradeProcess {
 
 	@Override
 	protected void doUpgrade() throws Exception {
-		upgradeDLWorkflowDefinitionLink();
-	}
-
-	protected void upgradeDLWorkflowDefinitionLink() throws Exception {
-		long fileEntryClassNameId = PortalUtil.getClassNameId(DLFileEntry.class);
+		long fileEntryClassNameId = PortalUtil.getClassNameId(
+			DLFileEntry.class);
 		long folderClassNameId = PortalUtil.getClassNameId(DLFolder.class);
 
 		runSQL(
 			"update WorkflowDefinitionLink set classNameId = " +
 				folderClassNameId + " where classNameId = " +
-				fileEntryClassNameId);
+					fileEntryClassNameId);
 	}
 
 }
