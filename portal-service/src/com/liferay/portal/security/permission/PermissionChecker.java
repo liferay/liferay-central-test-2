@@ -25,11 +25,6 @@ public interface PermissionChecker extends Cloneable {
 
 	public static final long[] DEFAULT_ROLE_IDS = {};
 
-	/**
-	 * Create a new PermissionChecker using the current impl class.
-	 *
-	 * @return the new PermissionChecker
-	 */
 	public PermissionChecker clone();
 
 	/**
