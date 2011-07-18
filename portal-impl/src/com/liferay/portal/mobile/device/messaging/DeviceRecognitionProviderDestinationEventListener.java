@@ -37,7 +37,10 @@ public class DeviceRecognitionProviderDestinationEventListener
 			return;
 		}
 
-		new DeviceDetectionUtil().setDeviceRecognitionProvider(_proxyProvider);
+		DeviceDetectionUtil deviceDetectionUtil = new DeviceDetectionUtil();
+
+		deviceDetectionUtil.setDeviceRecognitionProvider(
+			_proxyDeviceRecognitionProvider);
 	}
 
 	@Override
@@ -48,17 +51,24 @@ public class DeviceRecognitionProviderDestinationEventListener
 			return;
 		}
 
-		new DeviceDetectionUtil().setDeviceRecognitionProvider(_directProvider);
+		DeviceDetectionUtil deviceDetectionUtil = new DeviceDetectionUtil();
+
+		deviceDetectionUtil.setDeviceRecognitionProvider(
+			_directDeviceRecognitionProvider);
 	}
 
-	public void setDirectProvider(DeviceRecognitionProvider directProvider) {
-		_directProvider = directProvider;
+	public void setDirectDeviceRecognitionProvider(
+		DeviceRecognitionProvider directDeviceRecognitionProvider) {
+
+		_directDeviceRecognitionProvider = directDeviceRecognitionProvider;
 	}
 
-	public void setProxyProvider(DeviceRecognitionProvider proxyProvider) {
-		_proxyProvider = proxyProvider;
-	}
+	public void setProxyDeviceRecognitionProvider(
+		DeviceRecognitionProvider proxyDeviceRecognitionProvider) {
 
+		_proxyDeviceRecognitionProvider = proxyDeviceRecognitionProvider;
+	}
+	
 	protected boolean isProceed(
 		String destinationName, MessageListener messageListener) {
 
@@ -73,7 +83,7 @@ public class DeviceRecognitionProviderDestinationEventListener
 		}
 	}
 
-	private DeviceRecognitionProvider _directProvider;
-	private DeviceRecognitionProvider _proxyProvider;
+	private DeviceRecognitionProvider _directDeviceRecognitionProvider;
+	private DeviceRecognitionProvider _proxyDeviceRecognitionProvider;
 
 }

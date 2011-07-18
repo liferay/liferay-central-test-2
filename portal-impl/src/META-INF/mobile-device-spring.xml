@@ -28,15 +28,12 @@
 		</property>
 	</bean>
 
-	<!-- Default Impl -->
-
-	<bean id="com.liferay.portal.mobile.device.DefaultDeviceRecognitionProvider" class="com.liferay.portal.mobile.device.DefaultDeviceRecognitionProvider" />
-
 	<!-- Util -->
 
 	<bean id="com.liferay.portal.kernel.mobile.device.DeviceDetectionUtil" class="com.liferay.portal.kernel.mobile.device.DeviceDetectionUtil">
 		<property name="deviceRecognitionProvider" ref="com.liferay.portal.mobile.device.DefaultDeviceRecognitionProvider" />
 	</bean>
+	<bean id="com.liferay.portal.mobile.device.DefaultDeviceRecognitionProvider" class="com.liferay.portal.mobile.device.DefaultDeviceRecognitionProvider" />
 
 	<!-- Messaging -->
 
@@ -57,8 +54,8 @@
 				<entry key="liferay/device_recognition_provider">
 					<list>
 						<bean class="com.liferay.portal.mobile.device.messaging.DeviceRecognitionProviderDestinationEventListener">
-							<property name="directProvider" ref="com.liferay.portal.mobile.device.DefaultDeviceRecognitionProvider" />
-							<property name="proxyProvider" ref="com.liferay.portal.mobile.device.DeviceRecognitionProviderProxyBean" />
+							<property name="directDeviceRecognitionProvider" ref="com.liferay.portal.mobile.device.DefaultDeviceRecognitionProvider" />
+							<property name="proxyDeviceRecognitionProvider" ref="com.liferay.portal.mobile.device.DeviceRecognitionProviderProxyBean" />
 						</bean>
 					</list>
 				</entry>
