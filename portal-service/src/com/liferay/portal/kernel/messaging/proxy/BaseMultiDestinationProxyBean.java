@@ -21,22 +21,24 @@ import com.liferay.portal.kernel.messaging.sender.SynchronousMessageSender;
  * @author Michael C. Han
  */
 public abstract class BaseMultiDestinationProxyBean {
+
 	public abstract String getDestinationName(ProxyRequest proxyRequest);
 
 	public MessageSender getMessageSender() {
 		return _messageSender;
 	}
 
-	public void setMessageSender(MessageSender messageSender) {
-		_messageSender = messageSender;
-	}
-
 	public SynchronousMessageSender getSynchronousMessageSender() {
 		return _synchronousMessageSender;
 	}
 
+	public void setMessageSender(MessageSender messageSender) {
+		_messageSender = messageSender;
+	}
+
 	public void setSynchronousMessageSender(
 		SynchronousMessageSender synchronousMessageSender) {
+
 		_synchronousMessageSender = synchronousMessageSender;
 	}
 

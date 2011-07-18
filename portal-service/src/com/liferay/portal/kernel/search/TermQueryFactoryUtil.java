@@ -38,10 +38,10 @@ public class TermQueryFactoryUtil
 	public static TermQueryFactory getTermQueryFactory(
 		SearchContext searchContext) {
 
-		return _instance.getQueryFactory(searchContext);
+		return _termQueryFactoryUtil.getQueryFactory(searchContext);
 	}
 
 	@BeanReference(type = TermQueryFactoryUtil.class)
-	private static TermQueryFactoryUtil _instance;
+	private static TermQueryFactoryUtil _termQueryFactoryUtil;
 
 }

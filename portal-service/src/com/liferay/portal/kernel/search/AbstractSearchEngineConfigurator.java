@@ -33,113 +33,27 @@ import java.util.Set;
  * @author Michael C. Han
  */
 public abstract class AbstractSearchEngineConfigurator {
+
 	public void afterPropertiesSet() {
-		MessageBus messageBus = getMessageBus();
-
 		for (SearchEngine searchEngine : _searchEngines) {
-
-			SearchEngineRegistration searchEngineRegistration =
-				new SearchEngineRegistration(searchEngine);
-
-			_searchEngineRegistrations.add(searchEngineRegistration);
-
-			Destination searchReaderDestination = getSearchReaderDestination(
-				messageBus, searchEngine);
-			searchEngineRegistration.setSearchReaderDestinationName(
-				searchReaderDestination.getName());
-
-			Destination searchWriterDestination = getSearchWriterDestination(
-				messageBus, searchEngine);
-			searchEngineRegistration.setSearchWriterDestinationName(
-				searchWriterDestination.getName());
-
-			SearchEngine originalSearchEngine =
-				SearchEngineUtil.getSearchEngine(searchEngine.getName());
-
-			if (originalSearchEngine != null) {
-				searchEngineRegistration.setOverride(true);
-
-				searchEngineRegistration.setOriginalSearchEngineProxyWrapper(
-					(SearchEngineProxyWrapper)originalSearchEngine);
-
-				savePreviousSearchEngineListeners(
-					searchReaderDestination, searchWriterDestination,
-					searchEngineRegistration);
-
-				messageBus.removeDestination(searchReaderDestination.getName());
-				messageBus.removeDestination(searchWriterDestination.getName());
-
-				searchReaderDestination = getSearchReaderDestination(
-					messageBus, originalSearchEngine);
-				searchWriterDestination = getSearchWriterDestination(
-					messageBus, originalSearchEngine);
-			}
-
-			createSearchEngineListeners(
-				searchEngine, searchReaderDestination,
-				searchWriterDestination);
-
-			SearchEngineProxyWrapper searchEngineProxyWrapper =
-				new SearchEngineProxyWrapper(
-					searchEngine, getIndexSearcher(), getIndexWriter());
-
-			SearchEngineUtil.addSearchEngine(searchEngineProxyWrapper);
+			initSearchEngine(searchEngine);
 		}
 
 		_searchEngines.clear();
 	}
 
 	public void destroy() {
-		MessageBus messageBus = getMessageBus();
-
 		for (SearchEngineRegistration searchEngineRegistration :
 				_searchEngineRegistrations) {
 
-			String searchReaderDestinationName =
-				searchEngineRegistration.getSearchReaderDestinationName();
-
-			String searchWriterDestinationName =
-				searchEngineRegistration.getSearchWriterDestinationName();
-
-			messageBus.removeDestination(searchReaderDestinationName);
-			messageBus.removeDestination(searchWriterDestinationName);
-
-			String searchEngineName =
-				searchEngineRegistration.getSearchEngine().getName();
-
-			SearchEngineUtil.removeSearchEngine(searchEngineName);
-
-			if (searchEngineRegistration.isOverride()) {
-				SearchEngineProxyWrapper originalSearchEngineProxy =
-					searchEngineRegistration.
-						getOriginalSearchEngineProxyWrapper();
-
-				SearchEngine originalSearchEngine =
-					originalSearchEngineProxy.getSearchEngine();
-
-				Destination searchReaderDestination =
-					getSearchReaderDestination(
-						messageBus, originalSearchEngine);
-
-				registerInvokerMessageListener(
-					searchReaderDestination,
-					searchEngineRegistration.
-						getOriginalSearchReaderMessageListeners());
-
-				Destination searchWriterDestination =
-					getSearchWriterDestination(
-						messageBus, originalSearchEngine);
-
-				registerInvokerMessageListener(
-					searchWriterDestination,
-					searchEngineRegistration.
-						getOriginalSearchWriterMessageListeners());
-
-				SearchEngineUtil.addSearchEngine(originalSearchEngineProxy);
-			}
+			destroySearchEngine(searchEngineRegistration);
 		}
 
 		_searchEngineRegistrations.clear();
+	}
+
+	public void setSearchEngines(List<SearchEngine> searchEngines) {
+		_searchEngines = searchEngines;
 	}
 
 	protected void createSearchEngineListeners(
@@ -148,11 +62,12 @@ public abstract class AbstractSearchEngineConfigurator {
 
 		registerSearchEngineMessageListener(
 			searchEngine, searchReaderDestination,
-			new SearchReaderMessageListener(), searchEngine.getSearcher());
+			new SearchReaderMessageListener(),
+			searchEngine.getIndexSearcher());
 
 		registerSearchEngineMessageListener(
 			searchEngine, searchWriterDestination,
-			new SearchWriterMessageListener(), searchEngine.getWriter());
+			new SearchWriterMessageListener(), searchEngine.getIndexWriter());
 
 		if (searchEngine.isClusteredWrite()) {
 			ClusterBridgeMessageListener clusterBridgeMessageListener =
@@ -165,79 +80,72 @@ public abstract class AbstractSearchEngineConfigurator {
 		}
 	}
 
-	protected void registerInvokerMessageListener(
-		Destination destination,
-		List<InvokerMessageListener> invokerMessageListener) {
-
-		for (InvokerMessageListener searchReaderListener :
-				invokerMessageListener) {
-
-			destination.register(
-				searchReaderListener.getMessageListener(),
-				searchReaderListener.getClassLoader());
-		}
-	}
-
-	protected void registerSearchEngineMessageListener(
-		SearchEngine searchEngine, Destination destination,
-		BaseSearchEngineMessageListener baseSearchEngineMessageListener,
-		Object proxyManager) {
-
-		baseSearchEngineMessageListener.setManager(proxyManager);
-		baseSearchEngineMessageListener.setMessageBus(getMessageBus());
-		baseSearchEngineMessageListener.setSearchEngine(searchEngine);
-
-		destination.register(
-			baseSearchEngineMessageListener, getOperatingClassloader());
-
-	}
-
-	protected void savePreviousSearchEngineListeners(
-		Destination searchReaderDestination,
-		Destination searchWriterDestination,
+	protected void destroySearchEngine(
 		SearchEngineRegistration searchEngineRegistration) {
 
-		Set<MessageListener> readerMessageListeners =
-			searchReaderDestination.getMessageListeners();
+		MessageBus messageBus = getMessageBus();
 
-		for (MessageListener readerMessageListener : readerMessageListeners) {
+		messageBus.removeDestination(
+			searchEngineRegistration.getSearchReaderDestinationName());
 
-			InvokerMessageListener invokerMessageListener =
-				(InvokerMessageListener)readerMessageListener;
+		messageBus.removeDestination(
+			searchEngineRegistration.getSearchWriterDestinationName());
 
-			searchEngineRegistration.
-				addOriginalSearchReaderMessageListener(invokerMessageListener);
+		SearchEngine searchEngine = searchEngineRegistration.getSearchEngine();
+
+		SearchEngineUtil.removeSearchEngine(searchEngine.getName());
+
+		if (!searchEngineRegistration.isOverride()) {
+			return;
 		}
 
-		Set<MessageListener> writerMessageListeners =
-			searchWriterDestination.getMessageListeners();
+		SearchEngineProxyWrapper originalSearchEngineProxy =
+			searchEngineRegistration.getOriginalSearchEngineProxyWrapper();
 
-		for (MessageListener writerMessageListener : writerMessageListeners) {
+		SearchEngine originalSearchEngine =
+			originalSearchEngineProxy.getSearchEngine();
 
-			InvokerMessageListener invokerMessageListener =
-				(InvokerMessageListener)writerMessageListener;
+		Destination searchReaderDestination = getSearchReaderDestination(
+			messageBus, originalSearchEngine);
 
-			searchEngineRegistration.
-				addOriginalSearchWriterMessageListener(invokerMessageListener);
-		}
+		registerInvokerMessageListener(
+			searchReaderDestination,
+			searchEngineRegistration.getOriginalSearchReaderMessageListeners());
+
+		Destination searchWriterDestination = getSearchWriterDestination(
+			messageBus, originalSearchEngine);
+
+		registerInvokerMessageListener(
+			searchWriterDestination,
+			searchEngineRegistration.getOriginalSearchWriterMessageListeners());
+
+		SearchEngineUtil.addSearchEngine(originalSearchEngineProxy);
 	}
+
+	protected abstract IndexSearcher getIndexSearcher();
+
+	protected abstract IndexWriter getIndexWriter();
+
+	protected abstract MessageBus getMessageBus();
+
+	protected abstract ClassLoader getOperatingClassloader();
 
 	protected Destination getSearchReaderDestination(
 		MessageBus messageBus, SearchEngine searchEngine) {
 
-		String searchEngineId = searchEngine.getName();
-
 		String searchReaderDestinationName =
-			SearchEngineUtil.getSearchReaderDestinationName(searchEngineId);
+			SearchEngineUtil.getSearchReaderDestinationName(
+				searchEngine.getName());
 
-		Destination searchReaderDestination =
-			messageBus.getDestination(searchReaderDestinationName);
+		Destination searchReaderDestination = messageBus.getDestination(
+			searchReaderDestinationName);
 
 		if (searchReaderDestination == null) {
 			SynchronousDestination synchronousDestination =
 				new SynchronousDestination();
 
 			synchronousDestination.setName(searchReaderDestinationName);
+
 			synchronousDestination.open();
 
 			searchReaderDestination = synchronousDestination;
@@ -251,19 +159,18 @@ public abstract class AbstractSearchEngineConfigurator {
 	protected Destination getSearchWriterDestination(
 		MessageBus messageBus, SearchEngine searchEngine) {
 
-		String searchEngineId = searchEngine.getName();
-
 		String searchWriterDestinationName =
-			SearchEngineUtil.getSearchWriterDestinationName(searchEngineId);
+			SearchEngineUtil.getSearchWriterDestinationName(
+				searchEngine.getName());
 
-		Destination searchWriterDestination =
-			messageBus.getDestination(searchWriterDestinationName);
+		Destination searchWriterDestination = messageBus.getDestination(
+			searchWriterDestinationName);
 
 		if (searchWriterDestination == null) {
-			ParallelDestination parallelDestination =
-				new ParallelDestination();
+			ParallelDestination parallelDestination = new ParallelDestination();
 
 			parallelDestination.setName(searchWriterDestinationName);
+
 			parallelDestination.open();
 
 			searchWriterDestination = parallelDestination;
@@ -274,14 +181,121 @@ public abstract class AbstractSearchEngineConfigurator {
 		return searchWriterDestination;
 	}
 
-	public void setSearchEngines(List<SearchEngine> searchEngines) {
-		_searchEngines = searchEngines;
+	protected void initSearchEngine(SearchEngine searchEngine) {
+		SearchEngineRegistration searchEngineRegistration =
+			new SearchEngineRegistration(searchEngine);
+
+		_searchEngineRegistrations.add(searchEngineRegistration);
+
+		MessageBus messageBus = getMessageBus();
+
+		Destination searchReaderDestination = getSearchReaderDestination(
+			messageBus, searchEngine);
+
+		searchEngineRegistration.setSearchReaderDestinationName(
+			searchReaderDestination.getName());
+
+		Destination searchWriterDestination = getSearchWriterDestination(
+			messageBus, searchEngine);
+
+		searchEngineRegistration.setSearchWriterDestinationName(
+			searchWriterDestination.getName());
+
+		SearchEngine originalSearchEngine = SearchEngineUtil.getSearchEngine(
+			searchEngine.getName());
+
+		if (originalSearchEngine != null) {
+			searchEngineRegistration.setOverride(true);
+
+			searchEngineRegistration.setOriginalSearchEngineProxyWrapper(
+				(SearchEngineProxyWrapper)originalSearchEngine);
+
+			savePreviousSearchEngineListeners(
+				searchReaderDestination, searchWriterDestination,
+				searchEngineRegistration);
+
+			messageBus.removeDestination(searchReaderDestination.getName());
+
+			searchReaderDestination = getSearchReaderDestination(
+				messageBus, originalSearchEngine);
+
+			messageBus.removeDestination(searchWriterDestination.getName());
+
+			searchWriterDestination = getSearchWriterDestination(
+				messageBus, originalSearchEngine);
+		}
+
+		createSearchEngineListeners(
+			searchEngine, searchReaderDestination, searchWriterDestination);
+
+		SearchEngineProxyWrapper searchEngineProxyWrapper =
+			new SearchEngineProxyWrapper(
+				searchEngine, getIndexSearcher(), getIndexWriter());
+
+		SearchEngineUtil.addSearchEngine(searchEngineProxyWrapper);
 	}
 
-	protected abstract IndexSearcher getIndexSearcher();
-	protected abstract IndexWriter getIndexWriter();
-	protected abstract MessageBus getMessageBus();
-	protected abstract ClassLoader getOperatingClassloader();
+	protected void registerInvokerMessageListener(
+		Destination destination,
+		List<InvokerMessageListener> invokerMessageListeners) {
+
+		for (InvokerMessageListener invokerMessageListener :
+				invokerMessageListeners) {
+
+			destination.register(
+				invokerMessageListener.getMessageListener(),
+				invokerMessageListener.getClassLoader());
+		}
+	}
+
+	protected void registerSearchEngineMessageListener(
+		SearchEngine searchEngine, Destination destination,
+		BaseSearchEngineMessageListener baseSearchEngineMessageListener,
+		Object manager) {
+
+		baseSearchEngineMessageListener.setManager(manager);
+		baseSearchEngineMessageListener.setMessageBus(getMessageBus());
+		baseSearchEngineMessageListener.setSearchEngine(searchEngine);
+
+		destination.register(
+			baseSearchEngineMessageListener, getOperatingClassloader());
+	}
+
+	protected void savePreviousSearchEngineListeners(
+		Destination searchReaderDestination,
+		Destination searchWriterDestination,
+		SearchEngineRegistration searchEngineRegistration) {
+
+		Set<MessageListener> searchReaderMessageListeners =
+			searchReaderDestination.getMessageListeners();
+
+		for (MessageListener searchReaderMessageListener :
+				searchReaderMessageListeners) {
+
+			InvokerMessageListener invokerMessageListener =
+				(InvokerMessageListener)searchReaderMessageListener;
+
+			searchEngineRegistration.addOriginalSearchReaderMessageListener(
+				invokerMessageListener);
+		}
+
+		Set<MessageListener> searchWriterMessageListeners =
+			searchWriterDestination.getMessageListeners();
+
+		for (MessageListener searchWriterMessageListener :
+				searchWriterMessageListeners) {
+
+			InvokerMessageListener invokerMessageListener =
+				(InvokerMessageListener)searchWriterMessageListener;
+
+			searchEngineRegistration.addOriginalSearchWriterMessageListener(
+				invokerMessageListener);
+		}
+	}
+
+	private List<SearchEngineRegistration> _searchEngineRegistrations =
+		new ArrayList<SearchEngineRegistration>();
+	private List<SearchEngine> _searchEngines;
 
 	private class SearchEngineRegistration {
 
@@ -339,22 +353,22 @@ public abstract class AbstractSearchEngineConfigurator {
 			_originalSearchEngineProxyWrapper = searchEngineProxyWrapper;
 		}
 
+		public void setOverride(boolean override) {
+			_override = override;
+		}
+
 		public void setSearchReaderDestinationName(
 			String searchReaderDestinationName) {
+
 			_searchReaderDestinationName = searchReaderDestinationName;
 		}
 
 		public void setSearchWriterDestinationName(
 			String searchWriterDestinationName) {
+
 			_searchWriterDestinationName = searchWriterDestinationName;
 		}
 
-		public void setOverride(boolean override) {
-			_override = override;
-		}
-
-		private boolean _override;
-		private SearchEngine _searchEngine;
 		private SearchEngineProxyWrapper _originalSearchEngineProxyWrapper;
 		private List<InvokerMessageListener>
 			_originalSearchReaderMessageListeners =
@@ -362,12 +376,11 @@ public abstract class AbstractSearchEngineConfigurator {
 		private List<InvokerMessageListener>
 			_originalSearchWriterMessageListeners =
 				new ArrayList<InvokerMessageListener>();
+		private boolean _override;
+		private SearchEngine _searchEngine;
 		private String _searchReaderDestinationName;
 		private String _searchWriterDestinationName;
-	}
 
-	private List<SearchEngine> _searchEngines;
-	private List<SearchEngineRegistration> _searchEngineRegistrations =
-		new ArrayList<SearchEngineRegistration>();
+	}
 
 }

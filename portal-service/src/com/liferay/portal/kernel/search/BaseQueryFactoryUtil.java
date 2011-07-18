@@ -20,9 +20,8 @@ import com.liferay.portal.kernel.util.Validator;
  * @author Michael C. Han
  */
 public class BaseQueryFactoryUtil<T> {
-	public T getQueryFactory(
-		SearchContext searchContext) {
 
+	public T getQueryFactory(SearchContext searchContext) {
 		String searchEngineId = searchContext.getSearchEngineId();
 
 		SearchEngine searchEngine = null;
@@ -42,16 +41,15 @@ public class BaseQueryFactoryUtil<T> {
 		}
 	}
 
-	public void setLuceneBasedQueryFactory(T luceneBasedQueryFactory) {
-		_luceneBasedQueryFactory = luceneBasedQueryFactory;
-	}
-
 	public void setGenericQueryFactory(T genericQueryFactory) {
 		_genericQueryFactory = genericQueryFactory;
 	}
 
-	private T _luceneBasedQueryFactory;
+	public void setLuceneBasedQueryFactory(T luceneBasedQueryFactory) {
+		_luceneBasedQueryFactory = luceneBasedQueryFactory;
+	}
 
 	private T _genericQueryFactory;
+	private T _luceneBasedQueryFactory;
 
 }

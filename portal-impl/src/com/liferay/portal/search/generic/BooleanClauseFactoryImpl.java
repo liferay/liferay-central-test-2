@@ -43,4 +43,5 @@ public class BooleanClauseFactoryImpl implements BooleanClauseFactory {
 	}
 
 	private TermQueryFactory _termQueryFactory = new TermQueryFactoryImpl();
+
 }

@@ -512,6 +512,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 		try {
 			SearchContext searchContext = new SearchContext();
+
 			searchContext.setSearchEngineId(SearchEngineUtil.SYSTEM_ENGINE_ID);
 
 			BooleanQuery contextQuery = BooleanQueryFactoryUtil.create(

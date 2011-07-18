@@ -255,8 +255,8 @@ public class SearchPermissionCheckerImpl implements SearchPermissionChecker {
 	}
 
 	protected Query doGetPermissionQuery_5(
-		long companyId, long[] groupIds, long userId, String className,
-		Query query, SearchContext searchContext)
+			long companyId, long[] groupIds, long userId, String className,
+			Query query, SearchContext searchContext)
 		throws Exception {
 
 		PermissionCheckerBag bag = getUserBag(userId);
@@ -391,8 +391,8 @@ public class SearchPermissionCheckerImpl implements SearchPermissionChecker {
 	}
 
 	protected Query doGetPermissionQuery_6(
-		long companyId, long[] groupIds, long userId, String className,
-		Query query, SearchContext searchContext)
+			long companyId, long[] groupIds, long userId, String className,
+			Query query, SearchContext searchContext)
 		throws Exception {
 
 		PermissionCheckerBag bag = getUserBag(userId);

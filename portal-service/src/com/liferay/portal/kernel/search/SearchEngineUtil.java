@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
+import com.liferay.portal.kernel.util.StringPool;
 
 import java.util.Collection;
 import java.util.Map;
@@ -62,9 +63,10 @@ public class SearchEngineUtil {
 
 		SearchEngine searchEngine = _searchEngines.get(searchEngineId);
 
-		IndexWriter indexWriter = searchEngine.getWriter();
+		IndexWriter indexWriter = searchEngine.getIndexWriter();
 
 		SearchContext searchContext = new SearchContext();
+
 		searchContext.setCompanyId(companyId);
 		searchContext.setSearchEngineId(searchEngineId);
 
@@ -97,9 +99,10 @@ public class SearchEngineUtil {
 
 		SearchEngine searchEngine = _searchEngines.get(searchEngineId);
 
-		IndexWriter indexWriter = searchEngine.getWriter();
+		IndexWriter indexWriter = searchEngine.getIndexWriter();
 
 		SearchContext searchContext = new SearchContext();
+
 		searchContext.setCompanyId(companyId);
 		searchContext.setSearchEngineId(searchEngineId);
 
@@ -126,9 +129,10 @@ public class SearchEngineUtil {
 
 		SearchEngine searchEngine = _searchEngines.get(searchEngineId);
 
-		IndexWriter indexWriter = searchEngine.getWriter();
+		IndexWriter indexWriter = searchEngine.getIndexWriter();
 
 		SearchContext searchContext = new SearchContext();
+
 		searchContext.setCompanyId(companyId);
 		searchContext.setSearchEngineId(searchEngineId);
 
@@ -151,9 +155,10 @@ public class SearchEngineUtil {
 
 		SearchEngine searchEngine = _searchEngines.get(searchEngineId);
 
-		IndexWriter indexWriter = searchEngine.getWriter();
+		IndexWriter indexWriter = searchEngine.getIndexWriter();
 
 		SearchContext searchContext = new SearchContext();
+
 		searchContext.setCompanyId(companyId);
 		searchContext.setSearchEngineId(searchEngineId);
 
@@ -177,9 +182,10 @@ public class SearchEngineUtil {
 
 		SearchEngine searchEngine = _searchEngines.get(searchEngineId);
 
-		IndexWriter indexWriter = searchEngine.getWriter();
+		IndexWriter indexWriter = searchEngine.getIndexWriter();
 
 		SearchContext searchContext = new SearchContext();
+
 		searchContext.setCompanyId(companyId);
 		searchContext.setSearchEngineId(searchEngineId);
 
@@ -199,12 +205,12 @@ public class SearchEngineUtil {
 	}
 
 	public static String getSearchReaderDestinationName(String searchEngineId) {
-		return DestinationNames.SEARCH_READER.concat("/").concat(
+		return DestinationNames.SEARCH_READER.concat(StringPool.SLASH).concat(
 			searchEngineId);
 	}
 
 	public static String getSearchWriterDestinationName(String searchEngineId) {
-		return DestinationNames.SEARCH_WRITER.concat("/").concat(
+		return DestinationNames.SEARCH_WRITER.concat(StringPool.SLASH).concat(
 			searchEngineId);
 	}
 
@@ -222,6 +228,7 @@ public class SearchEngineUtil {
 		throws SearchException {
 
 		SearchContext searchContext = new SearchContext();
+
 		searchContext.setSearchEngineId(SearchEngineUtil.SYSTEM_ENGINE_ID);
 
 		if (userId > 0) {
@@ -239,6 +246,7 @@ public class SearchEngineUtil {
 		throws SearchException {
 
 		SearchContext searchContext = new SearchContext();
+
 		searchContext.setSearchEngineId(SearchEngineUtil.SYSTEM_ENGINE_ID);
 
 		if (userId > 0) {
@@ -255,6 +263,7 @@ public class SearchEngineUtil {
 		throws SearchException {
 
 		SearchContext searchContext = new SearchContext();
+
 		searchContext.setSearchEngineId(SearchEngineUtil.SYSTEM_ENGINE_ID);
 
 		if (userId > 0) {
@@ -295,7 +304,7 @@ public class SearchEngineUtil {
 		SearchEngine searchEngine = _searchEngines.get(
 			searchContext.getSearchEngineId());
 
-		IndexSearcher indexSearcher = searchEngine.getSearcher();
+		IndexSearcher indexSearcher = searchEngine.getIndexSearcher();
 
 		return indexSearcher.search(searchContext, query);
 	}
@@ -311,7 +320,7 @@ public class SearchEngineUtil {
 
 		SearchEngine searchEngine = _searchEngines.get(searchEngineId);
 
-		IndexSearcher indexSearcher = searchEngine.getSearcher();
+		IndexSearcher indexSearcher = searchEngine.getIndexSearcher();
 
 		return indexSearcher.search(
 			searchEngineId, companyId, query, SortFactoryUtil.getDefaultSorts(),
@@ -329,7 +338,7 @@ public class SearchEngineUtil {
 
 		SearchEngine searchEngine = _searchEngines.get(searchEngineId);
 
-		IndexSearcher indexSearcher = searchEngine.getSearcher();
+		IndexSearcher indexSearcher = searchEngine.getIndexSearcher();
 
 		return indexSearcher.search(
 			searchEngineId, companyId, query, new Sort[] {sort}, start, end);
@@ -346,7 +355,7 @@ public class SearchEngineUtil {
 
 		SearchEngine searchEngine = _searchEngines.get(searchEngineId);
 
-		IndexSearcher indexSearcher = searchEngine.getSearcher();
+		IndexSearcher indexSearcher = searchEngine.getIndexSearcher();
 
 		return indexSearcher.search(
 			searchEngineId, companyId, query, sorts, start, end);
@@ -378,9 +387,10 @@ public class SearchEngineUtil {
 
 		SearchEngine searchEngine = _searchEngines.get(searchEngineId);
 
-		IndexWriter indexWriter = searchEngine.getWriter();
+		IndexWriter indexWriter = searchEngine.getIndexWriter();
 
 		SearchContext searchContext = new SearchContext();
+
 		searchContext.setCompanyId(companyId);
 		searchContext.setSearchEngineId(searchEngineId);
 
@@ -413,9 +423,10 @@ public class SearchEngineUtil {
 
 		SearchEngine searchEngine = _searchEngines.get(searchEngineId);
 
-		IndexWriter indexWriter = searchEngine.getWriter();
+		IndexWriter indexWriter = searchEngine.getIndexWriter();
 
 		SearchContext searchContext = new SearchContext();
+
 		searchContext.setCompanyId(companyId);
 		searchContext.setSearchEngineId(searchEngineId);
 

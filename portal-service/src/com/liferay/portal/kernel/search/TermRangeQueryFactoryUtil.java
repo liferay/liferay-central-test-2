@@ -34,10 +34,10 @@ public class TermRangeQueryFactoryUtil
 	public static TermRangeQueryFactory getTermRangeQueryFactory(
 		SearchContext searchContext) {
 
-		return _instance.getQueryFactory(searchContext);
+		return _termRangeQueryFactoryUtil.getQueryFactory(searchContext);
 	}
 
 	@BeanReference(type = TermRangeQueryFactoryUtil.class)
-	private static TermRangeQueryFactoryUtil _instance;
+	private static TermRangeQueryFactoryUtil _termRangeQueryFactoryUtil;
 
 }

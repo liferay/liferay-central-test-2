@@ -143,6 +143,7 @@ public class MBIndexer extends BaseIndexer {
 	@Override
 	protected void doDelete(Object obj) throws Exception {
 		SearchContext searchContext = new SearchContext();
+
 		searchContext.setSearchEngineId(SearchEngineUtil.SYSTEM_ENGINE_ID);
 
 		if (obj instanceof MBCategory) {

@@ -22,31 +22,31 @@ import java.util.Collection;
 public interface IndexWriter {
 
 	public void addDocument(
-			SearchContext searchContext,Document document)
+			SearchContext searchContext, Document document)
 		throws SearchException;
 
 	public void addDocuments(
-			SearchContext searchContext,Collection<Document> documents)
+			SearchContext searchContext, Collection<Document> documents)
 		throws SearchException;
 
 	public void deleteDocument(
-			SearchContext searchContext,String uid)
+			SearchContext searchContext, String uid)
 		throws SearchException;
 
 	public void deleteDocuments(
-			SearchContext searchContext,Collection<String> uids)
+			SearchContext searchContext, Collection<String> uids)
 		throws SearchException;
 
 	public void deletePortletDocuments(
-			SearchContext searchContext,String portletId)
+			SearchContext searchContext, String portletId)
 		throws SearchException;
 
 	public void updateDocument(
-			SearchContext searchContext,Document document)
+			SearchContext searchContext, Document document)
 		throws SearchException;
 
 	public void updateDocuments(
-			SearchContext searchContext,Collection<Document> documents)
+			SearchContext searchContext, Collection<Document> documents)
 		throws SearchException;
 
 }

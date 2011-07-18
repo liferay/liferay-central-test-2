@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.cluster.Priority;
  * @author Michael C. Han
  */
 public class SearchEngineProxyWrapper implements SearchEngine {
+
 	public SearchEngineProxyWrapper(
 		SearchEngine searchEngine, IndexSearcher indexSearcher,
 		IndexWriter indexWriter) {
@@ -33,6 +34,14 @@ public class SearchEngineProxyWrapper implements SearchEngine {
 		return _searchEngine.getClusteredWritePriority();
 	}
 
+	public IndexSearcher getIndexSearcher() {
+		return _indexSearcher;
+	}
+
+	public IndexWriter getIndexWriter() {
+		return _indexWriter;
+	}
+
 	public String getName() {
 		return _searchEngine.getName();
 	}
@@ -41,16 +50,8 @@ public class SearchEngineProxyWrapper implements SearchEngine {
 		return _searchEngine;
 	}
 
-	public IndexSearcher getSearcher() {
-		return _indexSearcher;
-	}
-
 	public String getVendor() {
 		return _searchEngine.getVendor();
-	}
-
-	public IndexWriter getWriter() {
-		return _indexWriter;
 	}
 
 	public boolean isClusteredWrite() {

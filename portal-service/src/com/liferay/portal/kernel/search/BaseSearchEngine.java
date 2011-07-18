@@ -25,16 +25,16 @@ public class BaseSearchEngine implements SearchEngine {
 		return _clusteredWritePriority;
 	}
 
+	public IndexSearcher getIndexSearcher() {
+		return _indexSearcher;
+	}
+
+	public IndexWriter getIndexWriter() {
+		return _indexWriter;
+	}
+
 	public String getName() {
 		return _name;
-	}
-
-	public IndexSearcher getSearcher() {
-		return _searcher;
-	}
-
-	public IndexWriter getWriter() {
-		return _writer;
 	}
 
 	public String getVendor() {
@@ -66,7 +66,7 @@ public class BaseSearchEngine implements SearchEngine {
 	}
 
 	public void setSearcher(IndexSearcher searcher) {
-		_searcher = searcher;
+		_indexSearcher = searcher;
 	}
 
 	public void setVendor(String vendor) {
@@ -74,14 +74,15 @@ public class BaseSearchEngine implements SearchEngine {
 	}
 
 	public void setWriter(IndexWriter writer) {
-		_writer = writer;
+		_indexWriter = writer;
 	}
 
 	private boolean _clusteredWrite;
 	private Priority _clusteredWritePriority;
+	private IndexSearcher _indexSearcher;
+	private IndexWriter _indexWriter;
 	private boolean _luceneBased;
 	private String _name;
-	private IndexSearcher _searcher;
 	private String _vendor;
-	private IndexWriter _writer;
+
 }

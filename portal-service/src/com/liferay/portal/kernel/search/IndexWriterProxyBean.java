@@ -26,17 +26,30 @@ import java.util.Collection;
 public class IndexWriterProxyBean extends BaseMultiDestinationProxyBean
 	implements IndexWriter {
 
-	public void addDocument(SearchContext searchContext, Document document)
-		throws SearchException {
+	public void addDocument(SearchContext searchContext, Document document) {
 		throw new UnsupportedOperationException();
-
 	}
 
 	public void addDocuments(
-		SearchContext searchContext, Collection<Document> documents)
-		throws SearchException {
-		throw new UnsupportedOperationException();
+		SearchContext searchContext, Collection<Document> documents) {
 
+		throw new UnsupportedOperationException();
+	}
+
+	public void deleteDocument(SearchContext searchContext, String uid) {
+		throw new UnsupportedOperationException();
+	}
+
+	public void deleteDocuments(
+		SearchContext searchContext, Collection<String> uids) {
+
+		throw new UnsupportedOperationException();
+	}
+
+	public void deletePortletDocuments(
+		SearchContext searchContext, String portletId) {
+
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -50,35 +63,14 @@ public class IndexWriterProxyBean extends BaseMultiDestinationProxyBean
 		return SearchEngineUtil.getSearchWriterDestinationName(searchEngineId);
 	}
 
-	public void deleteDocument(SearchContext searchContext, String uid)
-		throws SearchException {
+	public void updateDocument(SearchContext searchContext, Document document) {
 		throw new UnsupportedOperationException();
-
-	}
-
-	public void deleteDocuments(
-		SearchContext searchContext, Collection<String> uids)
-		throws SearchException {
-		throw new UnsupportedOperationException();
-
-	}
-
-	public void deletePortletDocuments(
-		SearchContext searchContext, String portletId) throws SearchException {
-		throw new UnsupportedOperationException();
-
-	}
-
-	public void updateDocument(SearchContext searchContext, Document document)
-		throws SearchException {
-		throw new UnsupportedOperationException();
-
 	}
 
 	public void updateDocuments(
-		SearchContext searchContext, Collection<Document> documents)
-		throws SearchException {
-		throw new UnsupportedOperationException();
+		SearchContext searchContext, Collection<Document> documents) {
 
+		throw new UnsupportedOperationException();
 	}
+
 }

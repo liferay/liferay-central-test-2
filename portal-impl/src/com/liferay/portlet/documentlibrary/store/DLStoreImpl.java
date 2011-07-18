@@ -213,6 +213,7 @@ public class DLStoreImpl implements DLStore, IdentifiableBean {
 
 		try {
 			SearchContext searchContext = new SearchContext();
+
 			searchContext.setSearchEngineId(SearchEngineUtil.SYSTEM_ENGINE_ID);
 
 			BooleanQuery contextQuery = BooleanQueryFactoryUtil.create(

@@ -67,8 +67,7 @@ public class LuceneIndexWriterImpl implements IndexWriter {
 		}
 	}
 
-	public void deleteDocument(
-			SearchContext searchContext, String uid)
+	public void deleteDocument(SearchContext searchContext, String uid)
 		throws SearchException {
 
 		try {
@@ -127,8 +126,7 @@ public class LuceneIndexWriterImpl implements IndexWriter {
 	}
 
 	public void updateDocuments(
-			SearchContext searchContext,
-			Collection<Document> documents)
+			SearchContext searchContext, Collection<Document> documents)
 		throws SearchException {
 
 		for (Document document : documents) {

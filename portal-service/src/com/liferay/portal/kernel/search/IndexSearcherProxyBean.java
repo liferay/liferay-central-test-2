@@ -25,17 +25,6 @@ import com.liferay.portal.kernel.messaging.proxy.ProxyRequest;
 public class IndexSearcherProxyBean
 	extends BaseMultiDestinationProxyBean implements IndexSearcher {
 
-	public Hits search(
-			String searchEngineId, long companyId, Query query, Sort[] sort,
-			int start, int end)
-		throws SearchException {
-		throw new UnsupportedOperationException();
-	}
-
-	public Hits search(SearchContext searchContext, Query query) {
-		throw new UnsupportedOperationException();
-	}
-
 	@Override
 	public String getDestinationName(ProxyRequest proxyRequest) {
 		Object[] arguments = proxyRequest.getArguments();
@@ -44,6 +33,7 @@ public class IndexSearcherProxyBean
 
 		if (arguments[0] instanceof SearchContext) {
 			SearchContext searchContext = (SearchContext)arguments[0];
+
 			searchEngineId = searchContext.getSearchEngineId();
 		}
 		else {
@@ -51,6 +41,17 @@ public class IndexSearcherProxyBean
 		}
 
 		return SearchEngineUtil.getSearchReaderDestinationName(searchEngineId);
+	}
+
+	public Hits search(SearchContext searchContext, Query query) {
+		throw new UnsupportedOperationException();
+	}
+
+	public Hits search(
+		String searchEngineId, long companyId, Query query, Sort[] sort,
+		int start, int end) {
+
+		throw new UnsupportedOperationException();
 	}
 
 }

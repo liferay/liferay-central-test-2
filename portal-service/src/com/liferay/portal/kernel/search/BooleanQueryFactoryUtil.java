@@ -29,9 +29,10 @@ public class BooleanQueryFactoryUtil
 	public static BooleanQueryFactory getBooleanQueryFactory(
 		SearchContext searchContext) {
 
-		return _instance.getQueryFactory(searchContext);
+		return _booleanQueryFactoryUtil.getQueryFactory(searchContext);
 	}
 
 	@BeanReference(type = BooleanQueryFactoryUtil.class)
-	private static BooleanQueryFactoryUtil _instance;
+	private static BooleanQueryFactoryUtil _booleanQueryFactoryUtil;
+
 }

@@ -35,11 +35,6 @@ public class DefaultSearchEngineConfigurator
 	}
 
 	@Override
-	protected MessageBus getMessageBus() {
-		return _messageBus;
-	}
-
-	@Override
 	protected IndexSearcher getIndexSearcher() {
 		return _indexSearcher;
 	}
@@ -47,6 +42,11 @@ public class DefaultSearchEngineConfigurator
 	@Override
 	protected IndexWriter getIndexWriter() {
 		return _indexWriter;
+	}
+
+	@Override
+	protected MessageBus getMessageBus() {
+		return _messageBus;
 	}
 
 	@Override

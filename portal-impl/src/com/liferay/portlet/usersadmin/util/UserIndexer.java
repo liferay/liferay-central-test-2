@@ -89,7 +89,7 @@ public class UserIndexer extends BaseIndexer {
 					continue;
 				}
 
-				addContextQueryParams(contextQuery, key, value, searchContext);
+				addContextQueryParams(contextQuery, searchContext, key, value);
 			}
 		}
 	}
@@ -124,8 +124,8 @@ public class UserIndexer extends BaseIndexer {
 	}
 
 	protected void addContextQueryParams(
-			BooleanQuery contextQuery, String key, Object value,
-			SearchContext searchContext)
+			BooleanQuery contextQuery, SearchContext searchContext, String key,
+			Object value)
 		throws Exception {
 
 		if (key.equals("usersOrgs")) {
