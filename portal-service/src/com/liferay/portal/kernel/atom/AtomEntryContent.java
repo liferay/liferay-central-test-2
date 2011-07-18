@@ -26,12 +26,12 @@ public class AtomEntryContent {
 		_text = text;
 	}
 
-	public AtomEntryContent(Type type) {
+	public AtomEntryContent(String text, Type type) {
+		_text = text;
 		_type = type;
 	}
 
-	public AtomEntryContent(String text, Type type) {
-		_text = text;
+	public AtomEntryContent(Type type) {
 		_type = type;
 	}
 
