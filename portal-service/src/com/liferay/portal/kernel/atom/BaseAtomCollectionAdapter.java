@@ -85,10 +85,12 @@ public abstract class BaseAtomCollectionAdapter<E>
 		throw new UnsupportedOperationException();
 	}
 
+	@SuppressWarnings("unused")
 	public String getMediaName(E entry) throws AtomException {
 		throw new UnsupportedOperationException();
 	}
 
+	@SuppressWarnings("unused")
 	public InputStream getMediaStream(E entry) throws AtomException {
 		throw new UnsupportedOperationException();
 	}
@@ -116,8 +118,9 @@ public abstract class BaseAtomCollectionAdapter<E>
 	}
 
 	public E postMedia(
-		String mimeType, String slug, InputStream inputStream,
-		AtomRequestContext atomRequestContext) throws AtomException {
+			String mimeType, String slug, InputStream inputStream,
+			AtomRequestContext atomRequestContext)
+		throws AtomException {
 
 		try {
 			return doPostMedia(mimeType, slug, inputStream, atomRequestContext);

@@ -81,7 +81,8 @@ public interface AtomCollectionAdapter<E> {
 			AtomRequestContext atomRequestContext)
 		throws AtomException;
 
-	public E postMedia(String mimeType, String slug, InputStream inputStream,
+	public E postMedia(
+			String mimeType, String slug, InputStream inputStream,
 			AtomRequestContext atomRequestContext)
 		throws AtomException;
 

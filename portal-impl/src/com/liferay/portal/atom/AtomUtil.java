@@ -35,22 +35,29 @@ import org.apache.abdera.protocol.server.RequestContext;
  */
 public class AtomUtil {
 
-	public static String buildEntryLink(
+	public static String createEntryLink(
 		AtomRequestContext atomRequestContext, String collectionName,
 		String entryName) {
 
-		String resolvedUri = atomRequestContext.getResolvedUri();
-		System.out.println(resolvedUri);
+		StringBundler sb = new StringBundler(5);
 
 		String targetBasePath = atomRequestContext.getTargetBasePath();
 
-		String entryLink = targetBasePath + '/' + collectionName + '/' +
-			entryName;
+		sb.append(targetBasePath);
 
-		int index = resolvedUri.indexOf(targetBasePath);
+		sb.append(CharPool.SLASH);
+		sb.append(collectionName);
+		sb.append(CharPool.SLASH);
+		sb.append(entryName);
 
-		if (index != -1) {
-			entryLink = resolvedUri.substring(0, index) + entryLink;
+		String entryLink = sb.toString();
+
+		String resolvedUri = atomRequestContext.getResolvedUri();
+
+		int pos = resolvedUri.indexOf(targetBasePath);
+
+		if (pos != -1) {
+			entryLink = resolvedUri.substring(0, pos) + entryLink;
 		}
 
 		return entryLink;

@@ -85,33 +85,22 @@ public class AtomCollectionAdapterWrapper<E>
 
 	@Override
 	public Object getContent(E entry, RequestContext requestContext) {
-		Abdera abdera = requestContext.getAbdera();
-
-		AtomEntryContent atomContent =
+		AtomEntryContent atomEntryContent =
 			_atomCollectionAdapter.getEntryContent(
 				entry, new AtomRequestContextImpl(requestContext));
 
-		Factory factory = abdera.getFactory();
+		Content content = newContent(
+			atomEntryContent.getType(), requestContext);
 
-		Content content = null;
-
-		switch (atomContent.getType()) {
-			case HTML: content = factory.newContent(Content.Type.HTML); break;
-			case MEDIA: content = factory.newContent(Content.Type.MEDIA); break;
-			case TEXT: content = factory.newContent(Content.Type.TEXT); break;
-			case XHTML: content = factory.newContent(Content.Type.XHTML); break;
-			case XML: content = factory.newContent(Content.Type.XML); break;
+		if (atomEntryContent.getMimeType() != null) {
+			content.setMimeType(atomEntryContent.getMimeType());
 		}
 
-		content.setText(atomContent.getText());
-
-		if (atomContent.getSrcLink() != null) {
-			content.setSrc(atomContent.getSrcLink());
+		if (atomEntryContent.getSrcLink() != null) {
+			content.setSrc(atomEntryContent.getSrcLink());
 		}
 
-		if (atomContent.getMimeType() != null) {
-			content.setMimeType(atomContent.getMimeType());
-		}
+		content.setText(atomEntryContent.getText());
 
 		return content;
 	}
@@ -206,8 +195,9 @@ public class AtomCollectionAdapterWrapper<E>
 
 	@Override
 	public E postMedia(
-		MimeType mimeType, String slug, InputStream inputStream,
-		RequestContext requestContext) throws ResponseContextException {
+			MimeType mimeType, String slug, InputStream inputStream,
+			RequestContext requestContext)
+		throws ResponseContextException {
 
 		try {
 			return _atomCollectionAdapter.postMedia(
@@ -257,6 +247,34 @@ public class AtomCollectionAdapterWrapper<E>
 	@Override
 	protected String getEntryId(E entry) {
 		return _atomCollectionAdapter.getEntryId(entry);
+	}
+
+	protected Content newContent(
+		AtomEntryContent.Type atomEntryContentType,
+		RequestContext requestContext) {
+
+		Abdera abdera = requestContext.getAbdera();
+
+		Factory factory = abdera.getFactory();
+
+		if (atomEntryContentType == AtomEntryContent.Type.HTML) {
+			return factory.newContent(Content.Type.HTML);
+		}
+		else if (atomEntryContentType == AtomEntryContent.Type.MEDIA) {
+			return factory.newContent(Content.Type.MEDIA);
+		}
+		else if (atomEntryContentType == AtomEntryContent.Type.TEXT) {
+			return factory.newContent(Content.Type.TEXT);
+		}
+		else if (atomEntryContentType == AtomEntryContent.Type.XHTML) {
+			return factory.newContent(Content.Type.XHTML);
+		}
+		else if (atomEntryContentType == AtomEntryContent.Type.XML) {
+			return factory.newContent(Content.Type.XML);
+		}
+		else {
+			throw new IllegalArgumentException();
+		}
 	}
 
 	private AtomCollectionAdapter<E> _atomCollectionAdapter;

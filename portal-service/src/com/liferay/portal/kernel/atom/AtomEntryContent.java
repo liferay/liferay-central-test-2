@@ -20,16 +20,14 @@ package com.liferay.portal.kernel.atom;
 public class AtomEntryContent {
 
 	public AtomEntryContent() {
-		this._type = Type.HTML;
-	}
-
-	public AtomEntryContent(Type type) {
-		this._type = type;
 	}
 
 	public AtomEntryContent(String text) {
-		this._text = text;
-		this._type = Type.HTML;
+		_text = text;
+	}
+
+	public AtomEntryContent(Type type) {
+		_type = type;
 	}
 
 	public String getMimeType() {
@@ -49,32 +47,32 @@ public class AtomEntryContent {
 	}
 
 	public void setMimeType(String mimeType) {
-		this._mimeType = mimeType;
+		_mimeType = mimeType;
 	}
 
 	public void setSrcLink(String srcLink) {
-		this._srcLink = srcLink;
+		_srcLink = srcLink;
 	}
 
 	public void setText(String text) {
-		this._text = text;
+		_text = text;
 	}
 
 	public void setType(Type type) {
-		this._type = type;
+		_type = type;
 	}
 
 	public enum Type {
-		TEXT,
 		HTML,
+		MEDIA,
+		TEXT,
 		XHTML,
-		XML,
-		MEDIA
+		XML
 	}
 
 	private String _mimeType;
 	private String _srcLink;
 	private String _text;
-	private Type _type;
+	private Type _type = Type.HTML;
 
 }

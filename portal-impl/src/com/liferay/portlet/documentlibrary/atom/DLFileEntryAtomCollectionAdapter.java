@@ -62,15 +62,16 @@ public class DLFileEntryAtomCollectionAdapter
 	public AtomEntryContent getEntryContent(
 		DLFileEntry dlFileEntry, AtomRequestContext atomRequestContext) {
 
-		AtomEntryContent atomEntryContent =
-			new AtomEntryContent(AtomEntryContent.Type.MEDIA);
-
-		String srcLink = AtomUtil.buildEntryLink(atomRequestContext,
-			_COLLECTION_NAME, dlFileEntry.getFileEntryId() + "?media");
-
-		atomEntryContent.setSrcLink(srcLink);
+		AtomEntryContent atomEntryContent = new AtomEntryContent(
+			AtomEntryContent.Type.MEDIA);
 
 		atomEntryContent.setMimeType(dlFileEntry.getMimeType());
+
+		String srcLink = AtomUtil.createEntryLink(
+			atomRequestContext, _COLLECTION_NAME,
+			dlFileEntry.getFileEntryId() + "?media");
+
+		atomEntryContent.setSrcLink(srcLink);
 
 		return atomEntryContent;
 	}
@@ -98,7 +99,7 @@ public class DLFileEntryAtomCollectionAdapter
 	}
 
 	@Override
-	public String getMediaName(DLFileEntry dlFileEntry) throws AtomException {
+	public String getMediaName(DLFileEntry dlFileEntry) {
 		return dlFileEntry.getTitle();
 	}
 
@@ -139,11 +140,13 @@ public class DLFileEntryAtomCollectionAdapter
 			AtomRequestContext atomRequestContext)
 		throws Exception {
 
-		long folderId = atomRequestContext.getLongParameter("folderId");
 		long groupId = 0;
+
+		long folderId = atomRequestContext.getLongParameter("folderId");
 
 		if (folderId != 0) {
 			DLFolder dlFolder = DLFolderServiceUtil.getFolder(folderId);
+
 			groupId = dlFolder.getGroupId();
 		}
 		else {
@@ -155,8 +158,8 @@ public class DLFileEntryAtomCollectionAdapter
 
 		int page = atomRequestContext.getIntParameter("page");
 
-		int dlFileEntriesCount =
-			DLFileEntryServiceUtil.getFileEntriesCount(groupId, folderId);
+		int dlFileEntriesCount = DLFileEntryServiceUtil.getFileEntriesCount(
+			groupId, folderId);
 
 		AtomPager atomPager = new AtomPager(page, dlFileEntriesCount, max);
 
@@ -171,18 +174,20 @@ public class DLFileEntryAtomCollectionAdapter
 			AtomRequestContext atomRequestContext)
 		throws Exception {
 
-		long folderId = atomRequestContext.getLongParameter("folderId");
 		long groupId = 0;
 		long repositoryId = 0;
 
+		long folderId = atomRequestContext.getLongParameter("folderId");
+
 		if (folderId != 0) {
 			DLFolder dlFolder = DLFolderServiceUtil.getFolder(folderId);
-			repositoryId = dlFolder.getRepositoryId();
+
 			groupId = dlFolder.getGroupId();
+			repositoryId = dlFolder.getRepositoryId();
 		}
 		else {
-			repositoryId = atomRequestContext.getLongParameter("repositoryId");
 			groupId = atomRequestContext.getLongParameter("groupId");
+			repositoryId = atomRequestContext.getLongParameter("repositoryId");
 		}
 
 		String mimeType = atomRequestContext.getHeader("Media-Content-Type");
@@ -193,8 +198,8 @@ public class DLFileEntryAtomCollectionAdapter
 
 		byte[] contentDecoded = Base64.decode(content);
 
-		ByteArrayInputStream contentInputStream =
-			new ByteArrayInputStream(contentDecoded);
+		ByteArrayInputStream contentInputStream = new ByteArrayInputStream(
+			contentDecoded);
 
 		ServiceContext serviceContext = new ServiceContext();
 
@@ -211,33 +216,34 @@ public class DLFileEntryAtomCollectionAdapter
 			AtomRequestContext atomRequestContext)
 		throws Exception {
 
-		long folderId = atomRequestContext.getLongParameter("folderId");
 		long groupId = 0;
 		long repositoryId = 0;
 
+		long folderId = atomRequestContext.getLongParameter("folderId");
+
 		if (folderId != 0) {
 			DLFolder dlFolder = DLFolderServiceUtil.getFolder(folderId);
-			repositoryId = dlFolder.getRepositoryId();
+
 			groupId = dlFolder.getGroupId();
+			repositoryId = dlFolder.getRepositoryId();
 		}
 		else {
-			repositoryId = atomRequestContext.getLongParameter("repositoryId");
 			groupId = atomRequestContext.getLongParameter("groupId");
+			repositoryId = atomRequestContext.getLongParameter("repositoryId");
 		}
 
 		String title = atomRequestContext.getHeader("Title");
-
 		String description = atomRequestContext.getHeader("Summary");
 
-		ByteArrayOutputStream byteArrayOutputStream
-			= new ByteArrayOutputStream();
+		ByteArrayOutputStream byteArrayOutputStream =
+			new ByteArrayOutputStream();
 
 		StreamUtil.transfer(inputStream, byteArrayOutputStream);
 
 		byte[] content = byteArrayOutputStream.toByteArray();
 
-		ByteArrayInputStream contentInputStream =
-			new ByteArrayInputStream(content);
+		ByteArrayInputStream contentInputStream = new ByteArrayInputStream(
+			content);
 
 		ServiceContext serviceContext = new ServiceContext();
 
@@ -246,13 +252,13 @@ public class DLFileEntryAtomCollectionAdapter
 			contentInputStream, content.length, serviceContext);
 
 		return dlFileEntry;
-
 	}
 
 	@Override
 	protected void doPutEntry(
-		DLFileEntry dlFileEntry, String title, String summary, String content,
-		Date date, AtomRequestContext atomRequestContext) throws Exception {
+			DLFileEntry dlFileEntry, String title, String summary,
+			String content, Date date, AtomRequestContext atomRequestContext)
+		throws Exception {
 
 		String mimeType = atomRequestContext.getHeader("Media-Content-Type");
 
@@ -262,8 +268,8 @@ public class DLFileEntryAtomCollectionAdapter
 
 		byte[] contentDecoded = Base64.decode(content);
 
-		ByteArrayInputStream contentInputStream =
-			new ByteArrayInputStream(contentDecoded);
+		ByteArrayInputStream contentInputStream = new ByteArrayInputStream(
+			contentDecoded);
 
 		ServiceContext serviceContext = new ServiceContext();
 
@@ -279,18 +285,17 @@ public class DLFileEntryAtomCollectionAdapter
 		throws Exception {
 
 		String title = atomRequestContext.getHeader("Title");
-
 		String description = atomRequestContext.getHeader("Summary");
 
-		ByteArrayOutputStream byteArrayOutputStream
-			= new ByteArrayOutputStream();
+		ByteArrayOutputStream byteArrayOutputStream =
+			new ByteArrayOutputStream();
 
 		StreamUtil.transfer(inputStream, byteArrayOutputStream);
 
 		byte[] content = byteArrayOutputStream.toByteArray();
 
-		ByteArrayInputStream contentInputStream =
-			new ByteArrayInputStream(content);
+		ByteArrayInputStream contentInputStream = new ByteArrayInputStream(
+			content);
 
 		ServiceContext serviceContext = new ServiceContext();
 

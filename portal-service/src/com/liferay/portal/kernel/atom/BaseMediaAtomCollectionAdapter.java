@@ -33,12 +33,14 @@ public abstract class BaseMediaAtomCollectionAdapter<E>
 
 	@Override
 	protected abstract E doPostMedia(
-		String mimeType, String slug, InputStream inputStream,
-		AtomRequestContext atomRequestContext) throws Exception;
+			String mimeType, String slug, InputStream inputStream,
+			AtomRequestContext atomRequestContext)
+		throws Exception;
 
 	@Override
 	protected abstract void doPutMedia(
-		E entry, String mimeType, String slug, InputStream inputStream,
-		AtomRequestContext atomRequestContext) throws Exception;
+			E entry, String mimeType, String slug, InputStream inputStream,
+			AtomRequestContext atomRequestContext)
+		throws Exception;
 
 }
