@@ -61,6 +61,7 @@ public class HtmlImpl implements Html {
 		// #How_to_Protect_Yourself
 
 		StringBundler sb = null;
+
 		int lastReplacementIndex = 0;
 
 		for (int i = 0; i < text.length(); i++) {
