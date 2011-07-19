@@ -44,13 +44,11 @@ public class Encryptor {
 
 	public static final String ENCODING = Digester.ENCODING;
 
-	public static final String KEY_ALGORITHM =
-		GetterUtil.getString(PropsUtil.get(
-				PropsKeys.COMPANY_ENCRYPTION_ALGORITHM)).toUpperCase();
+	public static final String KEY_ALGORITHM = GetterUtil.getString(
+		PropsUtil.get(PropsKeys.COMPANY_ENCRYPTION_ALGORITHM)).toUpperCase();
 
-	public static final int KEY_SIZE =
-		GetterUtil.getInteger(PropsUtil.get(
-			PropsKeys.COMPANY_ENCRYPTION_KEY_SIZE));
+	public static final int KEY_SIZE = GetterUtil.getInteger(
+		PropsUtil.get(PropsKeys.COMPANY_ENCRYPTION_KEY_SIZE));
 
 	public static final String SUN_PROVIDER_CLASS =
 		"com.sun.crypto.provider.SunJCE";
@@ -70,10 +68,11 @@ public class Encryptor {
 		try {
 			Security.addProvider(getProvider());
 
-			KeyGenerator generator = KeyGenerator.getInstance(algorithm);
-			generator.init(KEY_SIZE, new SecureRandom());
+			KeyGenerator keyGenerator = KeyGenerator.getInstance(algorithm);
 
-			Key key = generator.generateKey();
+			keyGenerator.init(KEY_SIZE, new SecureRandom());
+
+			Key key = keyGenerator.generateKey();
 
 			return key;
 		}
