@@ -641,6 +641,125 @@ public interface LayoutRevisionPersistence extends BasePersistence<LayoutRevisio
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
+	* Returns all the layout revisions where layoutSetBranchId = &#63; and layoutBranchId = &#63; and plid = &#63;.
+	*
+	* @param layoutSetBranchId the layout set branch ID
+	* @param layoutBranchId the layout branch ID
+	* @param plid the plid
+	* @return the matching layout revisions
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.portal.model.LayoutRevision> findByL_L_P(
+		long layoutSetBranchId, long layoutBranchId, long plid)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns a range of all the layout revisions where layoutSetBranchId = &#63; and layoutBranchId = &#63; and plid = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param layoutSetBranchId the layout set branch ID
+	* @param layoutBranchId the layout branch ID
+	* @param plid the plid
+	* @param start the lower bound of the range of layout revisions
+	* @param end the upper bound of the range of layout revisions (not inclusive)
+	* @return the range of matching layout revisions
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.portal.model.LayoutRevision> findByL_L_P(
+		long layoutSetBranchId, long layoutBranchId, long plid, int start,
+		int end) throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns an ordered range of all the layout revisions where layoutSetBranchId = &#63; and layoutBranchId = &#63; and plid = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param layoutSetBranchId the layout set branch ID
+	* @param layoutBranchId the layout branch ID
+	* @param plid the plid
+	* @param start the lower bound of the range of layout revisions
+	* @param end the upper bound of the range of layout revisions (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching layout revisions
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.portal.model.LayoutRevision> findByL_L_P(
+		long layoutSetBranchId, long layoutBranchId, long plid, int start,
+		int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the first layout revision in the ordered set where layoutSetBranchId = &#63; and layoutBranchId = &#63; and plid = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param layoutSetBranchId the layout set branch ID
+	* @param layoutBranchId the layout branch ID
+	* @param plid the plid
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching layout revision
+	* @throws com.liferay.portal.NoSuchLayoutRevisionException if a matching layout revision could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.portal.model.LayoutRevision findByL_L_P_First(
+		long layoutSetBranchId, long layoutBranchId, long plid,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.NoSuchLayoutRevisionException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the last layout revision in the ordered set where layoutSetBranchId = &#63; and layoutBranchId = &#63; and plid = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param layoutSetBranchId the layout set branch ID
+	* @param layoutBranchId the layout branch ID
+	* @param plid the plid
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching layout revision
+	* @throws com.liferay.portal.NoSuchLayoutRevisionException if a matching layout revision could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.portal.model.LayoutRevision findByL_L_P_Last(
+		long layoutSetBranchId, long layoutBranchId, long plid,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.NoSuchLayoutRevisionException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the layout revisions before and after the current layout revision in the ordered set where layoutSetBranchId = &#63; and layoutBranchId = &#63; and plid = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param layoutRevisionId the primary key of the current layout revision
+	* @param layoutSetBranchId the layout set branch ID
+	* @param layoutBranchId the layout branch ID
+	* @param plid the plid
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next layout revision
+	* @throws com.liferay.portal.NoSuchLayoutRevisionException if a layout revision with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.portal.model.LayoutRevision[] findByL_L_P_PrevAndNext(
+		long layoutRevisionId, long layoutSetBranchId, long layoutBranchId,
+		long plid,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.NoSuchLayoutRevisionException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	/**
 	* Returns all the layout revisions where layoutSetBranchId = &#63; and parentLayoutRevisionId = &#63; and plid = &#63;.
 	*
 	* @param layoutSetBranchId the layout set branch ID
@@ -802,125 +921,6 @@ public interface LayoutRevisionPersistence extends BasePersistence<LayoutRevisio
 		long layoutSetBranchId, boolean head, long plid,
 		boolean retrieveFromCache)
 		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Returns all the layout revisions where layoutSetBranchId = &#63; and plid = &#63; and layoutBranchId = &#63;.
-	*
-	* @param layoutSetBranchId the layout set branch ID
-	* @param plid the plid
-	* @param layoutBranchId the layout branch ID
-	* @return the matching layout revisions
-	* @throws SystemException if a system exception occurred
-	*/
-	public java.util.List<com.liferay.portal.model.LayoutRevision> findByL_P_L(
-		long layoutSetBranchId, long plid, long layoutBranchId)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Returns a range of all the layout revisions where layoutSetBranchId = &#63; and plid = &#63; and layoutBranchId = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	* </p>
-	*
-	* @param layoutSetBranchId the layout set branch ID
-	* @param plid the plid
-	* @param layoutBranchId the layout branch ID
-	* @param start the lower bound of the range of layout revisions
-	* @param end the upper bound of the range of layout revisions (not inclusive)
-	* @return the range of matching layout revisions
-	* @throws SystemException if a system exception occurred
-	*/
-	public java.util.List<com.liferay.portal.model.LayoutRevision> findByL_P_L(
-		long layoutSetBranchId, long plid, long layoutBranchId, int start,
-		int end) throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Returns an ordered range of all the layout revisions where layoutSetBranchId = &#63; and plid = &#63; and layoutBranchId = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	* </p>
-	*
-	* @param layoutSetBranchId the layout set branch ID
-	* @param plid the plid
-	* @param layoutBranchId the layout branch ID
-	* @param start the lower bound of the range of layout revisions
-	* @param end the upper bound of the range of layout revisions (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @return the ordered range of matching layout revisions
-	* @throws SystemException if a system exception occurred
-	*/
-	public java.util.List<com.liferay.portal.model.LayoutRevision> findByL_P_L(
-		long layoutSetBranchId, long plid, long layoutBranchId, int start,
-		int end,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Returns the first layout revision in the ordered set where layoutSetBranchId = &#63; and plid = &#63; and layoutBranchId = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	* </p>
-	*
-	* @param layoutSetBranchId the layout set branch ID
-	* @param plid the plid
-	* @param layoutBranchId the layout branch ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the first matching layout revision
-	* @throws com.liferay.portal.NoSuchLayoutRevisionException if a matching layout revision could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public com.liferay.portal.model.LayoutRevision findByL_P_L_First(
-		long layoutSetBranchId, long plid, long layoutBranchId,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.portal.NoSuchLayoutRevisionException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Returns the last layout revision in the ordered set where layoutSetBranchId = &#63; and plid = &#63; and layoutBranchId = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	* </p>
-	*
-	* @param layoutSetBranchId the layout set branch ID
-	* @param plid the plid
-	* @param layoutBranchId the layout branch ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the last matching layout revision
-	* @throws com.liferay.portal.NoSuchLayoutRevisionException if a matching layout revision could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public com.liferay.portal.model.LayoutRevision findByL_P_L_Last(
-		long layoutSetBranchId, long plid, long layoutBranchId,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.portal.NoSuchLayoutRevisionException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Returns the layout revisions before and after the current layout revision in the ordered set where layoutSetBranchId = &#63; and plid = &#63; and layoutBranchId = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	* </p>
-	*
-	* @param layoutRevisionId the primary key of the current layout revision
-	* @param layoutSetBranchId the layout set branch ID
-	* @param plid the plid
-	* @param layoutBranchId the layout branch ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the previous, current, and next layout revision
-	* @throws com.liferay.portal.NoSuchLayoutRevisionException if a layout revision with the primary key could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public com.liferay.portal.model.LayoutRevision[] findByL_P_L_PrevAndNext(
-		long layoutRevisionId, long layoutSetBranchId, long plid,
-		long layoutBranchId,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.portal.NoSuchLayoutRevisionException,
-			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
 	* Returns all the layout revisions where layoutSetBranchId = &#63; and plid = &#63; and status = &#63;.
@@ -1131,6 +1131,17 @@ public interface LayoutRevisionPersistence extends BasePersistence<LayoutRevisio
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
+	* Removes all the layout revisions where layoutSetBranchId = &#63; and layoutBranchId = &#63; and plid = &#63; from the database.
+	*
+	* @param layoutSetBranchId the layout set branch ID
+	* @param layoutBranchId the layout branch ID
+	* @param plid the plid
+	* @throws SystemException if a system exception occurred
+	*/
+	public void removeByL_L_P(long layoutSetBranchId, long layoutBranchId,
+		long plid) throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
 	* Removes all the layout revisions where layoutSetBranchId = &#63; and parentLayoutRevisionId = &#63; and plid = &#63; from the database.
 	*
 	* @param layoutSetBranchId the layout set branch ID
@@ -1153,18 +1164,6 @@ public interface LayoutRevisionPersistence extends BasePersistence<LayoutRevisio
 	public void removeByL_H_P(long layoutSetBranchId, boolean head, long plid)
 		throws com.liferay.portal.NoSuchLayoutRevisionException,
 			com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Removes all the layout revisions where layoutSetBranchId = &#63; and plid = &#63; and layoutBranchId = &#63; from the database.
-	*
-	* @param layoutSetBranchId the layout set branch ID
-	* @param plid the plid
-	* @param layoutBranchId the layout branch ID
-	* @throws SystemException if a system exception occurred
-	*/
-	public void removeByL_P_L(long layoutSetBranchId, long plid,
-		long layoutBranchId)
-		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
 	* Removes all the layout revisions where layoutSetBranchId = &#63; and plid = &#63; and status = &#63; from the database.
@@ -1239,6 +1238,18 @@ public interface LayoutRevisionPersistence extends BasePersistence<LayoutRevisio
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
+	* Returns the number of layout revisions where layoutSetBranchId = &#63; and layoutBranchId = &#63; and plid = &#63;.
+	*
+	* @param layoutSetBranchId the layout set branch ID
+	* @param layoutBranchId the layout branch ID
+	* @param plid the plid
+	* @return the number of matching layout revisions
+	* @throws SystemException if a system exception occurred
+	*/
+	public int countByL_L_P(long layoutSetBranchId, long layoutBranchId,
+		long plid) throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
 	* Returns the number of layout revisions where layoutSetBranchId = &#63; and parentLayoutRevisionId = &#63; and plid = &#63;.
 	*
 	* @param layoutSetBranchId the layout set branch ID
@@ -1261,19 +1272,6 @@ public interface LayoutRevisionPersistence extends BasePersistence<LayoutRevisio
 	* @throws SystemException if a system exception occurred
 	*/
 	public int countByL_H_P(long layoutSetBranchId, boolean head, long plid)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Returns the number of layout revisions where layoutSetBranchId = &#63; and plid = &#63; and layoutBranchId = &#63;.
-	*
-	* @param layoutSetBranchId the layout set branch ID
-	* @param plid the plid
-	* @param layoutBranchId the layout branch ID
-	* @return the number of matching layout revisions
-	* @throws SystemException if a system exception occurred
-	*/
-	public int countByL_P_L(long layoutSetBranchId, long plid,
-		long layoutBranchId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**

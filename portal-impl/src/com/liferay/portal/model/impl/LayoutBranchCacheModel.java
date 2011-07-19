@@ -29,7 +29,7 @@ import com.liferay.portal.model.LayoutBranch;
 public class LayoutBranchCacheModel implements CacheModel<LayoutBranch> {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(19);
+		StringBundler sb = new StringBundler(21);
 
 		sb.append("{LayoutBranchId=");
 		sb.append(LayoutBranchId);
@@ -39,6 +39,8 @@ public class LayoutBranchCacheModel implements CacheModel<LayoutBranch> {
 		sb.append(companyId);
 		sb.append(", userId=");
 		sb.append(userId);
+		sb.append(", userName=");
+		sb.append(userName);
 		sb.append(", layoutSetBranchId=");
 		sb.append(layoutSetBranchId);
 		sb.append(", plid=");
@@ -61,6 +63,14 @@ public class LayoutBranchCacheModel implements CacheModel<LayoutBranch> {
 		layoutBranchImpl.setGroupId(groupId);
 		layoutBranchImpl.setCompanyId(companyId);
 		layoutBranchImpl.setUserId(userId);
+
+		if (userName == null) {
+			layoutBranchImpl.setUserName(StringPool.BLANK);
+		}
+		else {
+			layoutBranchImpl.setUserName(userName);
+		}
+
 		layoutBranchImpl.setLayoutSetBranchId(layoutSetBranchId);
 		layoutBranchImpl.setPlid(plid);
 
@@ -89,6 +99,7 @@ public class LayoutBranchCacheModel implements CacheModel<LayoutBranch> {
 	public long groupId;
 	public long companyId;
 	public long userId;
+	public String userName;
 	public long layoutSetBranchId;
 	public long plid;
 	public String name;

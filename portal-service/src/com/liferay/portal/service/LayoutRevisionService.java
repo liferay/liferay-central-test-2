@@ -53,8 +53,8 @@ public interface LayoutRevisionService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public void deleteLayoutRevisions(long layoutSetBranchId, long plid,
-		long layoutBranchId)
+	public void deleteLayoutRevisions(long layoutSetBranchId,
+		long layoutBranchId, long plid)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 }

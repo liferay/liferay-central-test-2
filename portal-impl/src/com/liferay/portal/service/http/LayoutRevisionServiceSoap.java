@@ -92,11 +92,11 @@ public class LayoutRevisionServiceSoap {
 		}
 	}
 
-	public static void deleteLayoutRevisions(long layoutSetBranchId, long plid,
-		long layoutBranchId) throws RemoteException {
+	public static void deleteLayoutRevisions(long layoutSetBranchId,
+		long layoutBranchId, long plid) throws RemoteException {
 		try {
 			LayoutRevisionServiceUtil.deleteLayoutRevisions(layoutSetBranchId,
-				plid, layoutBranchId);
+				layoutBranchId, plid);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

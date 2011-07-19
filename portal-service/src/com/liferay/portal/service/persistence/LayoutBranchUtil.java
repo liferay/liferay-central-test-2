@@ -198,6 +198,57 @@ public class LayoutBranchUtil {
 	}
 
 	/**
+	* Returns the layout branch where layoutSetBranchId = &#63; and plid = &#63; and master = &#63; or throws a {@link com.liferay.portal.NoSuchLayoutBranchException} if it could not be found.
+	*
+	* @param layoutSetBranchId the layout set branch ID
+	* @param plid the plid
+	* @param master the master
+	* @return the matching layout branch
+	* @throws com.liferay.portal.NoSuchLayoutBranchException if a matching layout branch could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portal.model.LayoutBranch findByL_P_M(
+		long layoutSetBranchId, long plid, boolean master)
+		throws com.liferay.portal.NoSuchLayoutBranchException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().findByL_P_M(layoutSetBranchId, plid, master);
+	}
+
+	/**
+	* Returns the layout branch where layoutSetBranchId = &#63; and plid = &#63; and master = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param layoutSetBranchId the layout set branch ID
+	* @param plid the plid
+	* @param master the master
+	* @return the matching layout branch, or <code>null</code> if a matching layout branch could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portal.model.LayoutBranch fetchByL_P_M(
+		long layoutSetBranchId, long plid, boolean master)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().fetchByL_P_M(layoutSetBranchId, plid, master);
+	}
+
+	/**
+	* Returns the layout branch where layoutSetBranchId = &#63; and plid = &#63; and master = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param layoutSetBranchId the layout set branch ID
+	* @param plid the plid
+	* @param master the master
+	* @param retrieveFromCache whether to use the finder cache
+	* @return the matching layout branch, or <code>null</code> if a matching layout branch could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portal.model.LayoutBranch fetchByL_P_M(
+		long layoutSetBranchId, long plid, boolean master,
+		boolean retrieveFromCache)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .fetchByL_P_M(layoutSetBranchId, plid, master,
+			retrieveFromCache);
+	}
+
+	/**
 	* Returns all the layout branchs.
 	*
 	* @return the layout branchs
@@ -247,6 +298,21 @@ public class LayoutBranchUtil {
 	}
 
 	/**
+	* Removes the layout branch where layoutSetBranchId = &#63; and plid = &#63; and master = &#63; from the database.
+	*
+	* @param layoutSetBranchId the layout set branch ID
+	* @param plid the plid
+	* @param master the master
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void removeByL_P_M(long layoutSetBranchId, long plid,
+		boolean master)
+		throws com.liferay.portal.NoSuchLayoutBranchException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getPersistence().removeByL_P_M(layoutSetBranchId, plid, master);
+	}
+
+	/**
 	* Removes all the layout branchs from the database.
 	*
 	* @throws SystemException if a system exception occurred
@@ -254,6 +320,21 @@ public class LayoutBranchUtil {
 	public static void removeAll()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().removeAll();
+	}
+
+	/**
+	* Returns the number of layout branchs where layoutSetBranchId = &#63; and plid = &#63; and master = &#63;.
+	*
+	* @param layoutSetBranchId the layout set branch ID
+	* @param plid the plid
+	* @param master the master
+	* @return the number of matching layout branchs
+	* @throws SystemException if a system exception occurred
+	*/
+	public static int countByL_P_M(long layoutSetBranchId, long plid,
+		boolean master)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().countByL_P_M(layoutSetBranchId, plid, master);
 	}
 
 	/**

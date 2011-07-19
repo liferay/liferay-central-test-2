@@ -54,7 +54,6 @@ import com.liferay.portal.service.GroupService;
 import com.liferay.portal.service.ImageLocalService;
 import com.liferay.portal.service.ImageService;
 import com.liferay.portal.service.LayoutBranchLocalService;
-import com.liferay.portal.service.LayoutBranchService;
 import com.liferay.portal.service.LayoutLocalService;
 import com.liferay.portal.service.LayoutPrototypeLocalService;
 import com.liferay.portal.service.LayoutPrototypeService;
@@ -145,7 +144,6 @@ import com.liferay.portal.service.persistence.EmailAddressPersistence;
 import com.liferay.portal.service.persistence.GroupFinder;
 import com.liferay.portal.service.persistence.GroupPersistence;
 import com.liferay.portal.service.persistence.ImagePersistence;
-import com.liferay.portal.service.persistence.LayoutBranchFinder;
 import com.liferay.portal.service.persistence.LayoutBranchPersistence;
 import com.liferay.portal.service.persistence.LayoutFinder;
 import com.liferay.portal.service.persistence.LayoutPersistence;
@@ -1185,24 +1183,6 @@ public abstract class UserLocalServiceBaseImpl implements UserLocalService,
 	}
 
 	/**
-	 * Returns the layout branch remote service.
-	 *
-	 * @return the layout branch remote service
-	 */
-	public LayoutBranchService getLayoutBranchService() {
-		return layoutBranchService;
-	}
-
-	/**
-	 * Sets the layout branch remote service.
-	 *
-	 * @param layoutBranchService the layout branch remote service
-	 */
-	public void setLayoutBranchService(LayoutBranchService layoutBranchService) {
-		this.layoutBranchService = layoutBranchService;
-	}
-
-	/**
 	 * Returns the layout branch persistence.
 	 *
 	 * @return the layout branch persistence
@@ -1219,24 +1199,6 @@ public abstract class UserLocalServiceBaseImpl implements UserLocalService,
 	public void setLayoutBranchPersistence(
 		LayoutBranchPersistence layoutBranchPersistence) {
 		this.layoutBranchPersistence = layoutBranchPersistence;
-	}
-
-	/**
-	 * Returns the layout branch finder.
-	 *
-	 * @return the layout branch finder
-	 */
-	public LayoutBranchFinder getLayoutBranchFinder() {
-		return layoutBranchFinder;
-	}
-
-	/**
-	 * Sets the layout branch finder.
-	 *
-	 * @param layoutBranchFinder the layout branch finder
-	 */
-	public void setLayoutBranchFinder(LayoutBranchFinder layoutBranchFinder) {
-		this.layoutBranchFinder = layoutBranchFinder;
 	}
 
 	/**
@@ -4611,12 +4573,8 @@ public abstract class UserLocalServiceBaseImpl implements UserLocalService,
 	protected LayoutFinder layoutFinder;
 	@BeanReference(type = LayoutBranchLocalService.class)
 	protected LayoutBranchLocalService layoutBranchLocalService;
-	@BeanReference(type = LayoutBranchService.class)
-	protected LayoutBranchService layoutBranchService;
 	@BeanReference(type = LayoutBranchPersistence.class)
 	protected LayoutBranchPersistence layoutBranchPersistence;
-	@BeanReference(type = LayoutBranchFinder.class)
-	protected LayoutBranchFinder layoutBranchFinder;
 	@BeanReference(type = LayoutPrototypeLocalService.class)
 	protected LayoutPrototypeLocalService layoutPrototypeLocalService;
 	@BeanReference(type = LayoutPrototypeService.class)

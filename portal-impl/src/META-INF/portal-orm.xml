@@ -311,6 +311,7 @@
 			<basic name="groupId" />
 			<basic name="companyId" />
 			<basic name="userId" />
+			<basic name="userName" />
 			<basic name="layoutSetBranchId" />
 			<basic name="plid" />
 			<basic name="name" />

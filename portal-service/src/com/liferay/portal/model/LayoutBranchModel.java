@@ -128,6 +128,21 @@ public interface LayoutBranchModel extends BaseModel<LayoutBranch> {
 	public void setUserUuid(String userUuid);
 
 	/**
+	 * Returns the user name of this layout branch.
+	 *
+	 * @return the user name of this layout branch
+	 */
+	@AutoEscape
+	public String getUserName();
+
+	/**
+	 * Sets the user name of this layout branch.
+	 *
+	 * @param userName the user name of this layout branch
+	 */
+	public void setUserName(String userName);
+
+	/**
 	 * Returns the layout set branch ID of this layout branch.
 	 *
 	 * @return the layout set branch ID of this layout branch

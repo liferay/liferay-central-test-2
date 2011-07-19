@@ -103,7 +103,7 @@ public class LayoutRevisionServiceHttp {
 	}
 
 	public static void deleteLayoutRevisions(HttpPrincipal httpPrincipal,
-		long layoutSetBranchId, long plid, long layoutBranchId)
+		long layoutSetBranchId, long layoutBranchId, long plid)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
@@ -112,7 +112,7 @@ public class LayoutRevisionServiceHttp {
 					_deleteLayoutRevisionsParameterTypes1);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
-					layoutSetBranchId, plid, layoutBranchId);
+					layoutSetBranchId, layoutBranchId, plid);
 
 			try {
 				TunnelUtil.invoke(httpPrincipal, methodHandler);

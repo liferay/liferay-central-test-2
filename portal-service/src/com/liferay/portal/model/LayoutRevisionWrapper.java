@@ -1292,12 +1292,6 @@ public class LayoutRevisionWrapper implements LayoutRevision {
 		_layoutRevision.persist();
 	}
 
-	public com.liferay.portal.model.LayoutBranch getLayoutBranch()
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _layoutRevision.getLayoutBranch();
-	}
-
 	public java.util.List<com.liferay.portal.model.LayoutRevision> getChildren()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _layoutRevision.getChildren();
@@ -1321,6 +1315,12 @@ public class LayoutRevisionWrapper implements LayoutRevision {
 
 	public java.lang.String getHTMLTitle(java.lang.String localeLanguageId) {
 		return _layoutRevision.getHTMLTitle(localeLanguageId);
+	}
+
+	public com.liferay.portal.model.LayoutBranch getLayoutBranch()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _layoutRevision.getLayoutBranch();
 	}
 
 	public com.liferay.portal.model.LayoutSet getLayoutSet()

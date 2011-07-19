@@ -147,6 +147,24 @@ public class LayoutBranchWrapper implements LayoutBranch {
 	}
 
 	/**
+	* Returns the user name of this layout branch.
+	*
+	* @return the user name of this layout branch
+	*/
+	public java.lang.String getUserName() {
+		return _layoutBranch.getUserName();
+	}
+
+	/**
+	* Sets the user name of this layout branch.
+	*
+	* @param userName the user name of this layout branch
+	*/
+	public void setUserName(java.lang.String userName) {
+		_layoutBranch.setUserName(userName);
+	}
+
+	/**
 	* Returns the layout set branch ID of this layout branch.
 	*
 	* @return the layout set branch ID of this layout branch
@@ -291,7 +309,7 @@ public class LayoutBranchWrapper implements LayoutBranch {
 		return new LayoutBranchWrapper((LayoutBranch)_layoutBranch.clone());
 	}
 
-	public int compareTo(LayoutBranch layoutBranch) {
+	public int compareTo(com.liferay.portal.model.LayoutBranch layoutBranch) {
 		return _layoutBranch.compareTo(layoutBranch);
 	}
 
@@ -300,11 +318,11 @@ public class LayoutBranchWrapper implements LayoutBranch {
 		return _layoutBranch.hashCode();
 	}
 
-	public com.liferay.portal.model.CacheModel<LayoutBranch> toCacheModel() {
+	public com.liferay.portal.model.CacheModel<com.liferay.portal.model.LayoutBranch> toCacheModel() {
 		return _layoutBranch.toCacheModel();
 	}
 
-	public LayoutBranch toEscapedModel() {
+	public com.liferay.portal.model.LayoutBranch toEscapedModel() {
 		return new LayoutBranchWrapper(_layoutBranch.toEscapedModel());
 	}
 

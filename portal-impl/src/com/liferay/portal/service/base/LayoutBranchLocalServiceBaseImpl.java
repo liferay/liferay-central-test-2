@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.LayoutBranch;
+import com.liferay.portal.model.PersistedModel;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountService;
 import com.liferay.portal.service.AddressLocalService;
@@ -51,7 +52,6 @@ import com.liferay.portal.service.GroupService;
 import com.liferay.portal.service.ImageLocalService;
 import com.liferay.portal.service.ImageService;
 import com.liferay.portal.service.LayoutBranchLocalService;
-import com.liferay.portal.service.LayoutBranchService;
 import com.liferay.portal.service.LayoutLocalService;
 import com.liferay.portal.service.LayoutPrototypeLocalService;
 import com.liferay.portal.service.LayoutPrototypeService;
@@ -79,6 +79,7 @@ import com.liferay.portal.service.PasswordPolicyService;
 import com.liferay.portal.service.PasswordTrackerLocalService;
 import com.liferay.portal.service.PermissionLocalService;
 import com.liferay.portal.service.PermissionService;
+import com.liferay.portal.service.PersistedModelLocalServiceRegistry;
 import com.liferay.portal.service.PhoneLocalService;
 import com.liferay.portal.service.PhoneService;
 import com.liferay.portal.service.PluginSettingLocalService;
@@ -141,7 +142,6 @@ import com.liferay.portal.service.persistence.EmailAddressPersistence;
 import com.liferay.portal.service.persistence.GroupFinder;
 import com.liferay.portal.service.persistence.GroupPersistence;
 import com.liferay.portal.service.persistence.ImagePersistence;
-import com.liferay.portal.service.persistence.LayoutBranchFinder;
 import com.liferay.portal.service.persistence.LayoutBranchPersistence;
 import com.liferay.portal.service.persistence.LayoutFinder;
 import com.liferay.portal.service.persistence.LayoutPersistence;
@@ -207,6 +207,8 @@ import com.liferay.portal.service.persistence.WebDAVPropsPersistence;
 import com.liferay.portal.service.persistence.WebsitePersistence;
 import com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence;
 import com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence;
+
+import java.io.Serializable;
 
 import java.util.List;
 
@@ -397,6 +399,11 @@ public abstract class LayoutBranchLocalServiceBaseImpl
 	public LayoutBranch getLayoutBranch(long LayoutBranchId)
 		throws PortalException, SystemException {
 		return layoutBranchPersistence.findByPrimaryKey(LayoutBranchId);
+	}
+
+	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
+		throws PortalException, SystemException {
+		return layoutBranchPersistence.findByPrimaryKey(primaryKeyObj);
 	}
 
 	/**
@@ -1145,24 +1152,6 @@ public abstract class LayoutBranchLocalServiceBaseImpl
 	}
 
 	/**
-	 * Returns the layout branch remote service.
-	 *
-	 * @return the layout branch remote service
-	 */
-	public LayoutBranchService getLayoutBranchService() {
-		return layoutBranchService;
-	}
-
-	/**
-	 * Sets the layout branch remote service.
-	 *
-	 * @param layoutBranchService the layout branch remote service
-	 */
-	public void setLayoutBranchService(LayoutBranchService layoutBranchService) {
-		this.layoutBranchService = layoutBranchService;
-	}
-
-	/**
 	 * Returns the layout branch persistence.
 	 *
 	 * @return the layout branch persistence
@@ -1179,24 +1168,6 @@ public abstract class LayoutBranchLocalServiceBaseImpl
 	public void setLayoutBranchPersistence(
 		LayoutBranchPersistence layoutBranchPersistence) {
 		this.layoutBranchPersistence = layoutBranchPersistence;
-	}
-
-	/**
-	 * Returns the layout branch finder.
-	 *
-	 * @return the layout branch finder
-	 */
-	public LayoutBranchFinder getLayoutBranchFinder() {
-		return layoutBranchFinder;
-	}
-
-	/**
-	 * Sets the layout branch finder.
-	 *
-	 * @param layoutBranchFinder the layout branch finder
-	 */
-	public void setLayoutBranchFinder(LayoutBranchFinder layoutBranchFinder) {
-		this.layoutBranchFinder = layoutBranchFinder;
 	}
 
 	/**
@@ -3768,6 +3739,16 @@ public abstract class LayoutBranchLocalServiceBaseImpl
 		this.counterLocalService = counterLocalService;
 	}
 
+	public void afterPropertiesSet() {
+		persistedModelLocalServiceRegistry.register("com.liferay.portal.model.LayoutBranch",
+			layoutBranchLocalService);
+	}
+
+	public void destroy() {
+		persistedModelLocalServiceRegistry.unregister(
+			"com.liferay.portal.model.LayoutBranch");
+	}
+
 	/**
 	 * Returns the Spring bean ID for this bean.
 	 *
@@ -3887,12 +3868,8 @@ public abstract class LayoutBranchLocalServiceBaseImpl
 	protected LayoutFinder layoutFinder;
 	@BeanReference(type = LayoutBranchLocalService.class)
 	protected LayoutBranchLocalService layoutBranchLocalService;
-	@BeanReference(type = LayoutBranchService.class)
-	protected LayoutBranchService layoutBranchService;
 	@BeanReference(type = LayoutBranchPersistence.class)
 	protected LayoutBranchPersistence layoutBranchPersistence;
-	@BeanReference(type = LayoutBranchFinder.class)
-	protected LayoutBranchFinder layoutBranchFinder;
 	@BeanReference(type = LayoutPrototypeLocalService.class)
 	protected LayoutPrototypeLocalService layoutPrototypeLocalService;
 	@BeanReference(type = LayoutPrototypeService.class)
@@ -4169,6 +4146,8 @@ public abstract class LayoutBranchLocalServiceBaseImpl
 	protected WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
 	@BeanReference(type = CounterLocalService.class)
 	protected CounterLocalService counterLocalService;
+	@BeanReference(type = PersistedModelLocalServiceRegistry.class)
+	protected PersistedModelLocalServiceRegistry persistedModelLocalServiceRegistry;
 	private static Log _log = LogFactoryUtil.getLog(LayoutBranchLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

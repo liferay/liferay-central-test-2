@@ -268,6 +268,7 @@
 		<field name="groupId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
+		<field name="userName" type="String" />
 		<field name="layoutSetBranchId" type="long" />
 		<field name="plid" type="long" />
 		<field name="name" type="String" />

@@ -21,7 +21,9 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.model.LayoutBranch;
+import com.liferay.portal.model.impl.LayoutBranchModelImpl;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+import com.liferay.portal.util.PropsValues;
 
 import java.util.List;
 
@@ -71,6 +73,8 @@ public class LayoutBranchPersistenceTest extends BasePersistenceTestCase {
 
 		newLayoutBranch.setUserId(nextLong());
 
+		newLayoutBranch.setUserName(randomString());
+
 		newLayoutBranch.setLayoutSetBranchId(nextLong());
 
 		newLayoutBranch.setPlid(nextLong());
@@ -93,6 +97,8 @@ public class LayoutBranchPersistenceTest extends BasePersistenceTestCase {
 			newLayoutBranch.getCompanyId());
 		assertEquals(existingLayoutBranch.getUserId(),
 			newLayoutBranch.getUserId());
+		assertEquals(existingLayoutBranch.getUserName(),
+			newLayoutBranch.getUserName());
 		assertEquals(existingLayoutBranch.getLayoutSetBranchId(),
 			newLayoutBranch.getLayoutSetBranchId());
 		assertEquals(existingLayoutBranch.getPlid(), newLayoutBranch.getPlid());
@@ -208,6 +214,25 @@ public class LayoutBranchPersistenceTest extends BasePersistenceTestCase {
 		assertEquals(0, result.size());
 	}
 
+	public void testResetOriginalValues() throws Exception {
+		if (!PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			return;
+		}
+
+		LayoutBranch newLayoutBranch = addLayoutBranch();
+
+		_persistence.clearCache();
+
+		LayoutBranchModelImpl existingLayoutBranchModelImpl = (LayoutBranchModelImpl)_persistence.findByPrimaryKey(newLayoutBranch.getPrimaryKey());
+
+		assertEquals(existingLayoutBranchModelImpl.getLayoutSetBranchId(),
+			existingLayoutBranchModelImpl.getOriginalLayoutSetBranchId());
+		assertEquals(existingLayoutBranchModelImpl.getPlid(),
+			existingLayoutBranchModelImpl.getOriginalPlid());
+		assertEquals(existingLayoutBranchModelImpl.getMaster(),
+			existingLayoutBranchModelImpl.getOriginalMaster());
+	}
+
 	protected LayoutBranch addLayoutBranch() throws Exception {
 		long pk = nextLong();
 
@@ -218,6 +243,8 @@ public class LayoutBranchPersistenceTest extends BasePersistenceTestCase {
 		layoutBranch.setCompanyId(nextLong());
 
 		layoutBranch.setUserId(nextLong());
+
+		layoutBranch.setUserName(randomString());
 
 		layoutBranch.setLayoutSetBranchId(nextLong());
 

@@ -947,6 +947,7 @@ create table LayoutBranch (
 	groupId LONG,
 	companyId LONG,
 	userId LONG,
+	userName VARCHAR(75) null,
 	layoutSetBranchId LONG,
 	plid LONG,
 	name VARCHAR(75) null,

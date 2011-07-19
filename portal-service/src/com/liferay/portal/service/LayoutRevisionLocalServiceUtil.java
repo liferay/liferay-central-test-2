@@ -288,12 +288,12 @@ public class LayoutRevisionLocalServiceUtil {
 		getService().deleteLayoutRevisions(layoutSetBranchId, plid);
 	}
 
-	public static void deleteLayoutRevisions(long layoutSetBranchId, long plid,
-		long layoutBranchId)
+	public static void deleteLayoutRevisions(long layoutSetBranchId,
+		long layoutBranchId, long plid)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService()
-			.deleteLayoutRevisions(layoutSetBranchId, plid, layoutBranchId);
+			.deleteLayoutRevisions(layoutSetBranchId, layoutBranchId, plid);
 	}
 
 	public static void deleteLayoutSetBranchLayoutRevisions(
@@ -301,6 +301,32 @@ public class LayoutRevisionLocalServiceUtil {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteLayoutSetBranchLayoutRevisions(layoutSetBranchId);
+	}
+
+	public static java.util.List<com.liferay.portal.model.LayoutRevision> getChildLayoutRevisions(
+		long layoutSetBranchId, long parentLayoutRevisionId, long plid)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .getChildLayoutRevisions(layoutSetBranchId,
+			parentLayoutRevisionId, plid);
+	}
+
+	public static java.util.List<com.liferay.portal.model.LayoutRevision> getChildLayoutRevisions(
+		long layoutSetBranchId, long parentLayoutRevision, long plid,
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .getChildLayoutRevisions(layoutSetBranchId,
+			parentLayoutRevision, plid, start, end, orderByComparator);
+	}
+
+	public static int getChildLayoutRevisionsCount(long layoutSetBranchId,
+		long parentLayoutRevision, long plid)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .getChildLayoutRevisionsCount(layoutSetBranchId,
+			parentLayoutRevision, plid);
 	}
 
 	public static com.liferay.portal.model.LayoutRevision getLayoutRevision(
@@ -311,11 +337,11 @@ public class LayoutRevisionLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.model.LayoutRevision getLayoutRevision(
-		long layoutSetBranchId, long plid, long layoutBranchId)
+		long layoutSetBranchId, long layoutBranchId, long plid)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .getLayoutRevision(layoutSetBranchId, plid, layoutBranchId);
+				   .getLayoutRevision(layoutSetBranchId, layoutBranchId, plid);
 	}
 
 	public static java.util.List<com.liferay.portal.model.LayoutRevision> getLayoutRevisions(
@@ -347,48 +373,22 @@ public class LayoutRevisionLocalServiceUtil {
 		return getService().getLayoutRevisions(layoutSetBranchId, plid, status);
 	}
 
-	public static java.util.List<com.liferay.portal.model.LayoutRevision> getChildLayoutRevisions(
-		long layoutSetBranchId, long parentLayoutRevisionId, long plid)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService()
-				   .getChildLayoutRevisions(layoutSetBranchId,
-			parentLayoutRevisionId, plid);
-	}
-
-	public static java.util.List<com.liferay.portal.model.LayoutRevision> getChildLayoutRevisions(
-		long layoutSetBranchId, long parentLayoutRevision, long plid,
-		int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService()
-				   .getChildLayoutRevisions(layoutSetBranchId,
-			parentLayoutRevision, plid, start, end, orderByComparator);
-	}
-
 	public static java.util.List<com.liferay.portal.model.LayoutRevision> getLayoutRevisions(
-		long layoutSetBranchId, long plid, long layoutBranchId, int start,
+		long layoutSetBranchId, long layoutBranchId, long plid, int start,
 		int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .getLayoutRevisions(layoutSetBranchId, plid, layoutBranchId,
+				   .getLayoutRevisions(layoutSetBranchId, layoutBranchId, plid,
 			start, end, orderByComparator);
 	}
 
-	public static int getChildLayoutRevisionsCount(long layoutSetBranchId,
-		long parentLayoutRevision, long plid)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService()
-				   .getChildLayoutRevisionsCount(layoutSetBranchId,
-			parentLayoutRevision, plid);
-	}
-
 	public static int getLayoutRevisionsCount(long layoutSetBranchId,
-		long plid, long layoutBranchId)
+		long layoutBranchId, long plid)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .getLayoutRevisionsCount(layoutSetBranchId, plid,
-			layoutBranchId);
+				   .getLayoutRevisionsCount(layoutSetBranchId, layoutBranchId,
+			plid);
 	}
 
 	public static com.liferay.portal.model.LayoutRevision updateLayoutRevision(

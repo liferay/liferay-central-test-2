@@ -164,6 +164,13 @@ public class LayoutBranchLocalServiceWrapper implements LayoutBranchLocalService
 		return _layoutBranchLocalService.getLayoutBranch(LayoutBranchId);
 	}
 
+	public com.liferay.portal.model.PersistedModel getPersistedModel(
+		java.io.Serializable primaryKeyObj)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _layoutBranchLocalService.getPersistedModel(primaryKeyObj);
+	}
+
 	/**
 	* Returns a range of all the layout branchs.
 	*
@@ -249,13 +256,13 @@ public class LayoutBranchLocalServiceWrapper implements LayoutBranchLocalService
 	}
 
 	public com.liferay.portal.model.LayoutBranch addLayoutBranch(
-		java.lang.String name, java.lang.String description, boolean master,
-		com.liferay.portal.model.LayoutRevision layoutRevision,
+		long layoutRevisionId, java.lang.String name,
+		java.lang.String description, boolean master,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _layoutBranchLocalService.addLayoutBranch(name, description,
-			master, layoutRevision, serviceContext);
+		return _layoutBranchLocalService.addLayoutBranch(layoutRevisionId,
+			name, description, master, serviceContext);
 	}
 
 	public com.liferay.portal.model.LayoutBranch getMasterLayoutBranch(

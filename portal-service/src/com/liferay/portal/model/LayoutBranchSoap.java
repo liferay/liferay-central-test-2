@@ -20,10 +20,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This class is used by SOAP remote services, specifically {@link com.liferay.portal.service.http.LayoutBranchServiceSoap}.
+ * This class is used by SOAP remote services.
  *
  * @author    Brian Wing Shun Chan
- * @see       com.liferay.portal.service.http.LayoutBranchServiceSoap
  * @generated
  */
 public class LayoutBranchSoap implements Serializable {
@@ -34,6 +33,7 @@ public class LayoutBranchSoap implements Serializable {
 		soapModel.setGroupId(model.getGroupId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
+		soapModel.setUserName(model.getUserName());
 		soapModel.setLayoutSetBranchId(model.getLayoutSetBranchId());
 		soapModel.setPlid(model.getPlid());
 		soapModel.setName(model.getName());
@@ -123,6 +123,14 @@ public class LayoutBranchSoap implements Serializable {
 		_userId = userId;
 	}
 
+	public String getUserName() {
+		return _userName;
+	}
+
+	public void setUserName(String userName) {
+		_userName = userName;
+	}
+
 	public long getLayoutSetBranchId() {
 		return _layoutSetBranchId;
 	}
@@ -171,6 +179,7 @@ public class LayoutBranchSoap implements Serializable {
 	private long _groupId;
 	private long _companyId;
 	private long _userId;
+	private String _userName;
 	private long _layoutSetBranchId;
 	private long _plid;
 	private String _name;
