@@ -18,7 +18,6 @@ import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.InfrastructureUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.PersistedModel;
-import com.liferay.portal.service.PersistedModelLocalService;
 import com.liferay.portal.service.PersistedModelLocalServiceRegistry;
 import com.liferay.portal.service.PersistedModelLocalServiceRegistryUtil;
 import com.liferay.portal.service.base.PrincipalBean;
@@ -78,7 +77,7 @@ import javax.sql.DataSource;
  * @see ${packagePath}.service.${entity.name}LocalServiceUtil
  * @generated
  */
-	public abstract class ${entity.name}LocalServiceBaseImpl implements ${entity.name}LocalService, IdentifiableBean<#if entity.hasColumns()>, PersistedModelLocalService</#if> {
+	public abstract class ${entity.name}LocalServiceBaseImpl implements ${entity.name}LocalService, IdentifiableBean {
 
 		/*
 		 * NOTE FOR DEVELOPERS:
@@ -107,7 +106,7 @@ import javax.sql.DataSource;
 		 */
 </#if>
 
-	<#if sessionTypeName == "Local" && entity.hasColumns()>
+	<#if (sessionTypeName == "Local") && entity.hasColumns()>
 		<#assign serviceBaseExceptions = serviceBuilder.getServiceBaseExceptions(methods, "add" + entity.name, [packagePath + ".model." + entity.name], ["SystemException"])>
 
 		/**
@@ -509,17 +508,17 @@ import javax.sql.DataSource;
 	</#list>
 
 	public void afterPropertiesSet() {
-		<#if sessionTypeName == "Local" && entity.hasColumns()>
+		<#if (sessionTypeName == "Local") && entity.hasColumns()>
 			<#if pluginName != "">
-				PersistedModelLocalServiceRegistryUtil.register("${packagePath}.model.${entity.name}", (PersistedModelLocalService)${entity.varName}LocalService);
+				PersistedModelLocalServiceRegistryUtil.register("${packagePath}.model.${entity.name}", ${entity.varName}LocalService);
 			<#else>
-				persistedModelLocalServiceRegistry.register("${packagePath}.model.${entity.name}", (PersistedModelLocalService)${entity.varName}LocalService);
+				persistedModelLocalServiceRegistry.register("${packagePath}.model.${entity.name}", ${entity.varName}LocalService);
 			</#if>
 		</#if>
 	}
 
 	public void destroy() {
-		<#if sessionTypeName == "Local" && entity.hasColumns()>
+		<#if (sessionTypeName == "Local") && entity.hasColumns()>
 			<#if pluginName != "">
 				PersistedModelLocalServiceRegistryUtil.unregister("${packagePath}.model.${entity.name}");
 			<#else>
