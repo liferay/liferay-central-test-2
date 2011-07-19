@@ -223,35 +223,44 @@ public class LocaleUtil {
 			locale = _locale;
 		}
 
-		String languageId = locale.getLanguage();
-		String countryId = locale.getCountry();
-		String variantId = locale.getVariant();
+		String country = locale.getCountry();
 
-		boolean hasCountryId = countryId.length() != 0;
-		boolean hasVariantId = variantId.length() != 0;
+		boolean hasCountry = false;
 
-		if ((!hasCountryId) && (!hasVariantId)) {
-			return languageId;
+		if (country.length() != 0) {
+			hasCountry = true;
+		}
+
+		String variant = locale.getVariant();
+
+		boolean hasVariant = false;
+
+		if (variant.length() != 0) {
+			hasCountry = true;
+		}
+
+		if (!hasCountry && !hasVariant) {
+			return locale.getLanguage();
 		}
 
 		int length = 3;
 
-		if (hasCountryId && hasVariantId) {
+		if (hasCountry && hasVariant) {
 			length = 5;
 		}
 
 		StringBundler sb = new StringBundler(length);
 
-		sb.append(languageId);
+		sb.append(locale.getLanguage());
 
-		if (hasCountryId) {
+		if (hasCountry) {
 			sb.append(StringPool.UNDERLINE);
-			sb.append(countryId);
+			sb.append(country);
 		}
 
-		if (hasVariantId) {
+		if (hasVariant) {
 			sb.append(StringPool.UNDERLINE);
-			sb.append(variantId);
+			sb.append(variant);
 		}
 
 		return sb.toString();
