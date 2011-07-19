@@ -151,6 +151,15 @@ public interface Staging {
 	public void schedulePublishToRemote(PortletRequest PortletRequest)
 		throws Exception;
 
+	public void setRecentLayoutBranchId(
+		HttpServletRequest request, long layoutSetBranchId, long plid,
+		long layoutBranchId)
+		throws SystemException;
+
+	public void setRecentLayoutBranchId(
+		User user, long layoutSetBranchId, long plid, long layoutBranchId)
+		throws SystemException;
+
 	public void setRecentLayoutRevisionId(
 			HttpServletRequest request, long layoutSetBranchId, long plid,
 			long layoutRevisionId)
@@ -164,15 +173,6 @@ public interface Staging {
 		HttpServletRequest request, long layoutSetBranchId);
 
 	public void setRecentLayoutSetBranchId(User user, long layoutSetBranchId)
-		throws SystemException;
-
-	public void setRecentLayoutBranchId(
-		HttpServletRequest request, long layoutSetBranchId, long plid,
-		long layoutBranchId)
-		throws SystemException;
-
-	public void setRecentLayoutBranchId(
-		User user, long layoutSetBranchId, long plid, long layoutBranchId)
 		throws SystemException;
 
 	public void unscheduleCopyFromLive(PortletRequest PortletRequest)

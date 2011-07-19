@@ -17,6 +17,8 @@
 <%@ include file="/html/portlet/staging_bar/init.jsp" %>
 
 <%
+String redirect = ParamUtil.getString(request, "redirect");
+
 LayoutSetBranch layoutSetBranch = null;
 
 long layoutSetBranchId = ParamUtil.getLong(request, "layoutSetBranchId");
@@ -24,11 +26,9 @@ long layoutSetBranchId = ParamUtil.getLong(request, "layoutSetBranchId");
 if (layoutSetBranchId > 0) {
 	layoutSetBranch = LayoutSetBranchLocalServiceUtil.getLayoutSetBranch(layoutSetBranchId);
 }
-
-String redirect = ParamUtil.getString(request, "redirect");
 %>
 
-<div class='<%= layoutSetBranch != null ? StringPool.BLANK : "aui-helper-hidden" %>' data-namespace="<portlet:namespace />" id="<portlet:namespace /><%= layoutSetBranch != null ? "updateBranch" : "addBranch" %>">
+<div class='<%= (layoutSetBranch != null) ? StringPool.BLANK : "aui-helper-hidden" %>' data-namespace="<portlet:namespace />" id="<portlet:namespace /><%= layoutSetBranch != null ? "updateBranch" : "addBranch" %>">
 	<aui:model-context bean="<%= layoutSetBranch %>" model="<%= LayoutSetBranch.class %>" />
 
 	<portlet:actionURL var="editLayoutSetBranchURL">
@@ -49,6 +49,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 			<aui:input name="description" />
 
 			<c:if test="<%= layoutSetBranch == null %>">
+
 				<%
 				List<LayoutSetBranch> layoutSetBranches = LayoutSetBranchLocalServiceUtil.getLayoutSetBranches(stagingGroup.getGroupId(), privateLayout);
 				%>
@@ -74,7 +75,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 		</aui:fieldset>
 
 		<aui:button-row>
-			<aui:button type="submit" value='<%= layoutSetBranch != null ? "update" : "add" %>' />
+			<aui:button type="submit" value='<%= (layoutSetBranch != null) ? "update" : "add" %>' />
 		</aui:button-row>
 	</aui:form>
 </div>

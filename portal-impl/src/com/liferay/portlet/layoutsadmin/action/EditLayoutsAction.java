@@ -340,14 +340,9 @@ public class EditLayoutsAction extends PortletAction {
 
 		long layoutRevisionId = ParamUtil.getLong(
 			actionRequest, "mergeLayoutRevisionId");
-
-		LayoutRevision layoutRevision =
-			LayoutRevisionLocalServiceUtil.getLayoutRevision(layoutRevisionId);
-
 		String name = ParamUtil.getString(
 			actionRequest, "name",
 			LayoutBranchConstants.MASTER_BRANCH_NAME);
-
 		String description = ParamUtil.getString(
 			actionRequest, "description",
 			LayoutBranchConstants.MASTER_BRANCH_DESCRIPTION);
@@ -356,7 +351,7 @@ public class EditLayoutsAction extends PortletAction {
 			actionRequest);
 
 		LayoutBranchLocalServiceUtil.addLayoutBranch(
-			name, description, false, layoutRevision, serviceContext);
+			layoutRevisionId, name, description, false, serviceContext);
 	}
 
 	protected void checkPermissions(PortletRequest portletRequest)
@@ -502,14 +497,14 @@ public class EditLayoutsAction extends PortletAction {
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		long layoutBranchId = ParamUtil.getLong(
-			actionRequest, "layoutBranchId");
-
 		long layoutSetBranchId = ParamUtil.getLong(
 			actionRequest, "layoutSetBranchId");
 
+		long layoutBranchId = ParamUtil.getLong(
+			actionRequest, "layoutBranchId");
+
 		LayoutRevisionServiceUtil.deleteLayoutRevisions(
-			layoutSetBranchId, themeDisplay.getPlid(), layoutBranchId);
+			layoutSetBranchId, layoutBranchId, themeDisplay.getPlid());
 	}
 
 	protected void deleteThemeSettings(

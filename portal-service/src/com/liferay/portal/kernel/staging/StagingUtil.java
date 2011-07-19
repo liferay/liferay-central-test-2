@@ -272,6 +272,23 @@ public class StagingUtil {
 		getStaging().schedulePublishToRemote(PortletRequest);
 	}
 
+	public static void setRecentLayoutBranchId(
+		HttpServletRequest request, long layoutSetBranchId, long plid,
+		long layoutBranchId)
+		throws SystemException {
+
+		getStaging().setRecentLayoutBranchId(
+			request, layoutSetBranchId, plid, layoutBranchId);
+	}
+
+	public static void setRecentLayoutBranchId(
+		User user, long layoutSetBranchId, long plid, long layoutBranchId)
+		throws SystemException {
+
+		getStaging().setRecentLayoutBranchId(
+			user, layoutSetBranchId, plid, layoutBranchId);
+	}
+
 	public static void setRecentLayoutRevisionId(
 			HttpServletRequest request, long layoutSetBranchId, long plid,
 			long layoutRevisionId)
@@ -300,23 +317,6 @@ public class StagingUtil {
 		throws SystemException {
 
 		getStaging().setRecentLayoutSetBranchId(user, layoutSetBranchId);
-	}
-
-	public static void setRecentLayoutBranchId(
-		HttpServletRequest request, long layoutSetBranchId, long plid,
-		long layoutBranchId)
-		throws SystemException {
-
-		getStaging().setRecentLayoutBranchId(
-			request, layoutSetBranchId, plid, layoutBranchId);
-	}
-
-	public static void setRecentLayoutBranchId(
-		User user, long layoutSetBranchId, long plid, long layoutBranchId)
-		throws SystemException {
-
-		getStaging().setRecentLayoutBranchId(
-			user, layoutSetBranchId, plid, layoutBranchId);
 	}
 
 	public static void unscheduleCopyFromLive(PortletRequest PortletRequest)

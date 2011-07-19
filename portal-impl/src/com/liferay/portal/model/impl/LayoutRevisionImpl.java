@@ -40,13 +40,6 @@ public class LayoutRevisionImpl extends LayoutRevisionBaseImpl {
 	public LayoutRevisionImpl() {
 	}
 
-	public LayoutBranch getLayoutBranch()
-		throws PortalException, SystemException {
-
-		return LayoutBranchLocalServiceUtil.getLayoutBranch(
-			getLayoutBranchId());
-	}
-
 	public List<LayoutRevision> getChildren() throws SystemException {
 		return LayoutRevisionLocalServiceUtil.getChildLayoutRevisions(
 			getLayoutSetBranchId(), getLayoutRevisionId(), getPlid());
@@ -88,6 +81,13 @@ public class LayoutRevisionImpl extends LayoutRevisionBaseImpl {
 		}
 
 		return htmlTitle;
+	}
+
+	public LayoutBranch getLayoutBranch()
+		throws PortalException, SystemException {
+
+		return LayoutBranchLocalServiceUtil.getLayoutBranch(
+			getLayoutBranchId());
 	}
 
 	public LayoutSet getLayoutSet() throws PortalException, SystemException {

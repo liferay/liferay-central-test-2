@@ -73,6 +73,7 @@ public class LayoutRevisionLocalServiceImpl
 		layoutRevision.setCreateDate(serviceContext.getCreateDate(now));
 		layoutRevision.setModifiedDate(serviceContext.getModifiedDate(now));
 		layoutRevision.setLayoutSetBranchId(layoutSetBranchId);
+		layoutRevision.setLayoutBranchId(layoutBranchId);
 		layoutRevision.setParentLayoutRevisionId(parentLayoutRevisionId);
 		layoutRevision.setHead(head);
 
@@ -83,7 +84,6 @@ public class LayoutRevisionLocalServiceImpl
 			layoutRevision.setMajor(true);
 		}
 
-		layoutRevision.setLayoutBranchId(layoutBranchId);
 		layoutRevision.setPlid(plid);
 		layoutRevision.setPrivateLayout(privateLayout);
 		layoutRevision.setName(name);
@@ -196,12 +196,12 @@ public class LayoutRevisionLocalServiceImpl
 	}
 
 	public void deleteLayoutRevisions(
-			long layoutSetBranchId, long plid, long layoutBranchId)
+			long layoutSetBranchId, long layoutBranchId, long plid)
 		throws PortalException, SystemException {
 
 		List<LayoutRevision> layoutRevisions =
-			layoutRevisionPersistence.findByL_P_L(
-				layoutSetBranchId, plid, layoutBranchId);
+			layoutRevisionPersistence.findByL_L_P(
+				layoutSetBranchId, layoutBranchId, plid);
 
 		for (LayoutRevision layoutRevision : layoutRevisions) {
 			layoutRevisionLocalService.deleteLayoutRevision(layoutRevision);
@@ -220,6 +220,32 @@ public class LayoutRevisionLocalServiceImpl
 		}
 	}
 
+	public List<LayoutRevision> getChildLayoutRevisions(
+			long layoutSetBranchId, long parentLayoutRevisionId, long plid)
+		throws SystemException {
+
+		return layoutRevisionPersistence.findByL_P_P(
+			layoutSetBranchId, parentLayoutRevisionId, plid);
+	}
+
+	public List<LayoutRevision> getChildLayoutRevisions(
+			long layoutSetBranchId, long parentLayoutRevision, long plid,
+			int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
+
+		return layoutRevisionPersistence.findByL_P_P(
+			layoutSetBranchId, parentLayoutRevision, plid, start, end,
+			orderByComparator);
+	}
+
+	public int getChildLayoutRevisionsCount(
+			long layoutSetBranchId, long parentLayoutRevision, long plid)
+		throws SystemException {
+
+		return layoutRevisionPersistence.countByL_P_P(
+			layoutSetBranchId, parentLayoutRevision, plid);
+	}
+
 	@Override
 	public LayoutRevision getLayoutRevision(long layoutRevisionId)
 		throws PortalException, SystemException {
@@ -236,12 +262,12 @@ public class LayoutRevisionLocalServiceImpl
 	}
 
 	public LayoutRevision getLayoutRevision(
-			long layoutSetBranchId, long plid, long layoutBranchId)
+			long layoutSetBranchId, long layoutBranchId, long plid)
 		throws PortalException, SystemException {
 
 		List<LayoutRevision> layoutRevisions =
-			layoutRevisionPersistence.findByL_P_L(
-				layoutSetBranchId, plid, layoutBranchId, 0, 1,
+			layoutRevisionPersistence.findByL_L_P(
+				layoutSetBranchId, layoutBranchId, plid, 0, 1,
 				new LayoutRevisionIdComparator(false));
 
 		if (!layoutRevisions.isEmpty()) {
@@ -286,48 +312,22 @@ public class LayoutRevisionLocalServiceImpl
 			layoutSetBranchId, plid, status);
 	}
 
-	public List<LayoutRevision> getChildLayoutRevisions(
-			long layoutSetBranchId, long parentLayoutRevisionId, long plid)
-		throws SystemException {
-
-		return layoutRevisionPersistence.findByL_P_P(
-			layoutSetBranchId, parentLayoutRevisionId, plid);
-	}
-
-	public List<LayoutRevision> getChildLayoutRevisions(
-			long layoutSetBranchId, long parentLayoutRevision, long plid,
-			int start, int end, OrderByComparator orderByComparator)
-		throws SystemException {
-
-		return layoutRevisionPersistence.findByL_P_P(
-			layoutSetBranchId, parentLayoutRevision, plid, start, end,
-			orderByComparator);
-	}
-
 	public List<LayoutRevision> getLayoutRevisions(
-			long layoutSetBranchId, long plid, long layoutBranchId,
+			long layoutSetBranchId, long layoutBranchId, long plid,
 			int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 
-		return layoutRevisionPersistence.findByL_P_L(
-			layoutSetBranchId, plid, layoutBranchId, start, end,
+		return layoutRevisionPersistence.findByL_L_P(
+			layoutSetBranchId, layoutBranchId, plid, start, end,
 			orderByComparator);
-	}
-
-	public int getChildLayoutRevisionsCount(
-			long layoutSetBranchId, long parentLayoutRevision, long plid)
-		throws SystemException {
-
-		return layoutRevisionPersistence.countByL_P_P(
-			layoutSetBranchId, parentLayoutRevision, plid);
 	}
 
 	public int getLayoutRevisionsCount(
-			long layoutSetBranchId, long plid, long layoutBranchId)
+			long layoutSetBranchId, long layoutBranchId, long plid)
 		throws SystemException {
 
-		return layoutRevisionPersistence.countByL_P_L(
-			layoutSetBranchId, plid, layoutBranchId);
+		return layoutRevisionPersistence.countByL_L_P(
+			layoutSetBranchId, layoutBranchId, plid);
 	}
 
 	public LayoutRevision updateLayoutRevision(

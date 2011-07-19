@@ -59,13 +59,15 @@ long layoutRevisionId = StagingUtil.getRecentLayoutRevisionId(request, layoutSet
 		>
 
 			<%
-			String layoutBranchNameName = layoutRevision.getLayoutBranch().getName();
+			LayoutBranch layoutBranch = layoutRevision.getLayoutBranch();
+
+			String layoutBranchName = layoutBranch.getName();
 
 			if (layoutRevision.isHead()) {
 				buffer.append("<strong>");
 			}
 
-			buffer.append(layoutBranchNameName);
+			buffer.append(layoutBranchName);
 
 			if (layoutRevision.isHead()) {
 				buffer.append(" (*)</strong>");

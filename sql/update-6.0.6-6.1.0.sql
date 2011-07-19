@@ -256,6 +256,19 @@ update Layout set modifiedDate = CURRENT_TIMESTAMP;
 
 COMMIT_TRANSACTION;
 
+create table LayoutBranch (
+	LayoutBranchId LONG not null primary key,
+	groupId LONG,
+	companyId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	layoutSetBranchId LONG,
+	plid LONG,
+	name VARCHAR(75) null,
+	description VARCHAR(75) null,
+	master BOOLEAN
+);
+
 create table LayoutRevision (
 	layoutRevisionId LONG not null primary key,
 	groupId LONG,

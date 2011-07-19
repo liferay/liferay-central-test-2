@@ -579,11 +579,9 @@ public class LayoutExporter {
 			layoutElement.addAttribute(
 				"layout-revision-id",
 				String.valueOf(layoutRevision.getLayoutRevisionId()));
-
 			layoutElement.addAttribute(
 				"layout-branch-id",
 				String.valueOf(layoutRevision.getLayoutBranchId()));
-
 			layoutElement.addAttribute(
 				"layout-branch-name",
 				String.valueOf(layoutRevision.getLayoutBranch().getName()));

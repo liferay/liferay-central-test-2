@@ -55,7 +55,7 @@ public class LayoutRevisionServiceImpl extends LayoutRevisionServiceBaseImpl {
 	}
 
 	public void deleteLayoutRevisions(
-			long layoutSetBranchId, long plid, long layoutBranchId)
+			long layoutSetBranchId, long layoutBranchId, long plid)
 		throws PortalException, SystemException {
 
 		LayoutSetBranch layoutSetBranch =
@@ -66,7 +66,7 @@ public class LayoutRevisionServiceImpl extends LayoutRevisionServiceBaseImpl {
 			ActionKeys.DELETE_LAYOUT_BRANCH);
 
 		layoutRevisionLocalService.deleteLayoutRevisions(
-			layoutSetBranchId, plid, layoutBranchId);
+			layoutSetBranchId, layoutBranchId, plid);
 	}
 
 }

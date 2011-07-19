@@ -32,9 +32,10 @@ List<LayoutRevision> rootLayoutRevisions = LayoutRevisionLocalServiceUtil.getChi
 
 			<%
 			for (LayoutRevision rootLayoutRevision : rootLayoutRevisions) {
+				LayoutBranch layoutBranch = rootLayoutRevision.getLayoutBranch();
 			%>
 
-				<aui:option label="<%= rootLayoutRevision.getLayoutBranch().getName() %>" selected="<%= recentLayoutRevision.getLayoutBranchId() == rootLayoutRevision.getLayoutBranchId() %>" value="<%= rootLayoutRevision.getLayoutRevisionId() %>" />
+				<aui:option label="<%= layoutBranch.getName() %>" selected="<%= recentLayoutRevision.getLayoutBranchId() == rootLayoutRevision.getLayoutBranchId() %>" value="<%= rootLayoutRevision.getLayoutRevisionId() %>" />
 
 			<%
 			}
@@ -52,7 +53,12 @@ List<LayoutRevision> rootLayoutRevisions = LayoutRevisionLocalServiceUtil.getChi
 
 			<div class="layout-variation-container <%= (recentLayoutRevision.getLayoutBranchId() == rootLayoutRevision.getLayoutBranchId()) ? StringPool.BLANK : "aui-helper-hidden" %>" id="<portlet:namespace/><%= rootLayoutRevision.getLayoutRevisionId() %>">
 				<c:if test="<%= rootLayoutRevisions.size() > 1 %>">
-					<h3 class="layout-variation-name"><%= rootLayoutRevision.getLayoutBranch().getName() %></h3>
+
+					<%
+					LayoutBranch layoutBranch = rootLayoutRevision.getLayoutBranch();
+					%>
+
+					<h3 class="layout-variation-name"><%= layoutBranch.getName() %></h3>
 				</c:if>
 
 				<liferay-ui:search-container>

@@ -25,25 +25,14 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.base.LayoutBranchLocalServiceBaseImpl;
 
 /**
- * The implementation of the layout branch local service.
- *
- * <p>
- * All custom service methods should be put in this class. Whenever methods are added, rerun ServiceBuilder to copy their definitions into the {@link com.liferay.portal.service.LayoutBranchLocalService} interface.
- *
- * <p>
- * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
- * </p>
- *
- * @author Brian Wing Shun Chan
- * @see com.liferay.portal.service.base.LayoutBranchLocalServiceBaseImpl
- * @see com.liferay.portal.service.LayoutBranchLocalServiceUtil
+ * @author Julio Camarero
  */
 public class LayoutBranchLocalServiceImpl
 	extends LayoutBranchLocalServiceBaseImpl {
 
 		public LayoutBranch addLayoutBranch(
-			long layoutSetBranchId, long plid, String name,
-			String description, boolean master, ServiceContext serviceContext)
+			long layoutSetBranchId, long plid, String name, String description,
+			boolean master, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		User user = userLocalService.getUserById(serviceContext.getUserId());
@@ -58,6 +47,7 @@ public class LayoutBranchLocalServiceImpl
 		layoutBranch.setGroupId(layoutSetBranch.getGroupId());
 		layoutBranch.setCompanyId(user.getCompanyId());
 		layoutBranch.setUserId(user.getUserId());
+		layoutBranch.setUserName(user.getFullName());
 		layoutBranch.setLayoutSetBranchId(layoutSetBranchId);
 		layoutBranch.setPlid(plid);
 		layoutBranch.setName(name);
@@ -70,30 +60,30 @@ public class LayoutBranchLocalServiceImpl
 	}
 
 	public LayoutBranch addLayoutBranch(
-			String name, String description, boolean master,
-			LayoutRevision layoutRevision, ServiceContext serviceContext)
+			long layoutRevisionId, String name, String description,
+			boolean master, ServiceContext serviceContext)
 		throws PortalException, SystemException {
+
+		LayoutRevision layoutRevision =
+			layoutRevisionPersistence.findByPrimaryKey(layoutRevisionId);
 
 		LayoutBranch layoutBranch = addLayoutBranch(
 			layoutRevision.getLayoutSetBranchId(), layoutRevision.getPlid(),
 			name, description, master, serviceContext);
 
-		if (layoutRevision != null) {
-			layoutRevisionService.addLayoutRevision(
-				layoutBranch.getUserId(), layoutRevision.getLayoutSetBranchId(),
-				layoutBranch.getLayoutBranchId(),
-				LayoutRevisionConstants.DEFAULT_PARENT_LAYOUT_REVISION_ID,
-				false, layoutRevision.getPlid(),
-				layoutRevision.isPrivateLayout(), layoutRevision.getName(),
-				layoutRevision.getTitle(), layoutRevision.getDescription(),
-				layoutRevision.getKeywords(), layoutRevision.getRobots(),
-				layoutRevision.getTypeSettings(), layoutRevision.getIconImage(),
-				layoutRevision.getIconImageId(), layoutRevision.getThemeId(),
-				layoutRevision.getColorSchemeId(),
-				layoutRevision.getWapThemeId(),
-				layoutRevision.getWapColorSchemeId(), layoutRevision.getCss(),
-				serviceContext);
-		}
+		layoutRevisionService.addLayoutRevision(
+			layoutBranch.getUserId(), layoutRevision.getLayoutSetBranchId(),
+			layoutBranch.getLayoutBranchId(),
+			LayoutRevisionConstants.DEFAULT_PARENT_LAYOUT_REVISION_ID, false,
+			layoutRevision.getPlid(), layoutRevision.isPrivateLayout(),
+			layoutRevision.getName(), layoutRevision.getTitle(),
+			layoutRevision.getDescription(), layoutRevision.getKeywords(),
+			layoutRevision.getRobots(), layoutRevision.getTypeSettings(),
+			layoutRevision.getIconImage(), layoutRevision.getIconImageId(),
+			layoutRevision.getThemeId(), layoutRevision.getColorSchemeId(),
+			layoutRevision.getWapThemeId(),
+			layoutRevision.getWapColorSchemeId(), layoutRevision.getCss(),
+			serviceContext);
 
 		return layoutBranch;
 	}
@@ -108,7 +98,8 @@ public class LayoutBranchLocalServiceImpl
 	public LayoutBranch getMasterLayoutBranch(long layoutSetBranchId, long plid)
 		throws PortalException, SystemException {
 
-		return layoutBranchFinder.findByMaster(layoutSetBranchId, plid);
+		return layoutBranchPersistence.findByL_P_M(
+			layoutSetBranchId, plid, true);
 	}
 
 }

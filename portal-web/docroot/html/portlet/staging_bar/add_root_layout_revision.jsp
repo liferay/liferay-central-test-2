@@ -37,6 +37,7 @@ long layoutRevisionId = ParamUtil.getLong(request, "layoutRevisionId");
 		</div>
 
 		<aui:input name="name" value="" />
+
 		<aui:input name="description" value="" />
 
 		<aui:button-row>

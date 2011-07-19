@@ -31,7 +31,6 @@ import com.liferay.portal.model.LayoutSetBranch;
 import com.liferay.portal.model.LayoutSetBranchConstants;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
-import com.liferay.portal.service.LayoutBranchLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.base.LayoutSetBranchLocalServiceBaseImpl;
 
@@ -94,7 +93,7 @@ public class LayoutSetBranchLocalServiceImpl
 
 			for (Layout layout : layouts) {
 				LayoutBranch layoutBranch =
-					LayoutBranchLocalServiceUtil.addLayoutBranch(
+					layoutBranchLocalService.addLayoutBranch(
 						layoutSetBranchId, layout.getPlid(),
 						LayoutBranchConstants.MASTER_BRANCH_NAME,
 						LayoutBranchConstants.MASTER_BRANCH_DESCRIPTION, true,
