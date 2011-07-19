@@ -1093,8 +1093,7 @@ release was successful.</echo>
 
 		<mkdir dir="${tstamp.value}" />
 
-		<echo file="${tstamp.value}/create-weblogic-domain.py">
-readTemplate('${wl.home}/common/templates/domains/wls.jar')
+		<echo file="${tstamp.value}/create-weblogic-domain.py">readTemplate('${wl.home}/common/templates/domains/wls.jar')
 
 set('Name', '${app.server.weblogic.instance.name}')
 
@@ -1109,8 +1108,7 @@ set('ListenPort', 8080)
 
 writeDomain('${app.server.weblogic.instance.dir}')
 
-closeTemplate()
-		</echo>
+closeTemplate()</echo>
 
 		<if>
 			<os family="windows" />
