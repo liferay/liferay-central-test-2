@@ -281,7 +281,7 @@ public interface ResourcePermissionLocalService
 	* resources of the type. Existing actions are retained.
 	*
 	* <p>
-	* This method should only used add default permissions to existing
+	* This method should only be used to add default permissions to existing
 	* resources en masse during upgrades or while verifying permissions. For
 	* example, this method could be used to grant site members individual scope
 	* permissions to view all blog posts.
