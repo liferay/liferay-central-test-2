@@ -85,17 +85,6 @@ public class AtomCollectionAdapterWrapper<E>
 	}
 
 	@Override
-	public Text getSummary(E entry, RequestContext request)
-		throws ResponseContextException {
-
-		Text summary = new Abdera().getFactory().newSummary();
-
-		summary.setValue(_atomCollectionAdapter.getEntrySummary(entry));
-
-		return summary;
-	}
-
-	@Override
 	public Object getContent(E entry, RequestContext requestContext) {
 		AtomEntryContent atomEntryContent =
 			_atomCollectionAdapter.getEntryContent(
@@ -175,6 +164,19 @@ public class AtomCollectionAdapterWrapper<E>
 			throw new ResponseContextException(
 				ae.getErrorCode(), ae.getCause());
 		}
+	}
+
+	@Override
+	public Text getSummary(E entry, RequestContext request) {
+		Abdera abdera = new Abdera();
+
+		Factory factory = abdera.getFactory();
+
+		Text summary = factory.newSummary();
+
+		summary.setValue(_atomCollectionAdapter.getEntrySummary(entry));
+
+		return summary;
 	}
 
 	@Override

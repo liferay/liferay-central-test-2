@@ -19,7 +19,6 @@ import com.liferay.portal.atom.AtomUtil;
 import com.liferay.portal.kernel.atom.AtomEntryContent;
 import com.liferay.portal.kernel.atom.AtomRequestContext;
 import com.liferay.portal.kernel.atom.BaseAtomCollectionAdapter;
-import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortletKeys;
@@ -55,9 +54,10 @@ public class DLFolderAtomCollectionAdapter
 		AtomEntryContent atomEntryContent = new AtomEntryContent(
 			AtomEntryContent.Type.XML);
 
-		String srcLink = AtomUtil.createCollectionLink(atomRequestContext,
-			DLFileEntryAtomCollectionAdapter._COLLECTION_NAME) +
-			"?folderId=" + dlFolder.getFolderId();
+		String srcLink = AtomUtil.createCollectionLink(
+			atomRequestContext,
+			DLFileEntryAtomCollectionAdapter._COLLECTION_NAME) + "?folderId=" +
+				dlFolder.getFolderId();
 
 		atomEntryContent.setSrcLink(srcLink);
 
@@ -112,12 +112,12 @@ public class DLFolderAtomCollectionAdapter
 
 		long groupId = 0;
 
-		long parentFolderId =
-			atomRequestContext.getLongParameter("parentFolderId");
+		long parentFolderId = atomRequestContext.getLongParameter(
+			"parentFolderId");
 
 		if (parentFolderId != 0) {
-			DLFolder dlParentFolder =
-				DLFolderServiceUtil.getFolder(parentFolderId);
+			DLFolder dlParentFolder = DLFolderServiceUtil.getFolder(
+				parentFolderId);
 
 			groupId = dlParentFolder.getGroupId();
 		}
@@ -125,15 +125,10 @@ public class DLFolderAtomCollectionAdapter
 			groupId = atomRequestContext.getLongParameter("groupId");
 		}
 
-		int max = atomRequestContext.getIntParameter(
-			"max", SearchContainer.DEFAULT_DELTA);
-
-		int page = atomRequestContext.getIntParameter("page");
-
-		int dlFoldersCount = DLFolderServiceUtil.getFoldersCount(
+		int count = DLFolderServiceUtil.getFoldersCount(
 			groupId, parentFolderId);
 
-		AtomPager atomPager = new AtomPager(page, dlFoldersCount, max);
+		AtomPager atomPager = new AtomPager(atomRequestContext, count);
 
 		AtomUtil.saveAtomPagerInRequest(atomRequestContext, atomPager);
 
@@ -151,12 +146,12 @@ public class DLFolderAtomCollectionAdapter
 		long groupId = 0;
 		long repositoryId = 0;
 
-		long parentFolderId =
-			atomRequestContext.getLongParameter("parentFolderId");
+		long parentFolderId = atomRequestContext.getLongParameter(
+			"parentFolderId");
 
 		if (parentFolderId != 0) {
-			DLFolder dlParentFolder =
-				DLFolderServiceUtil.getFolder(parentFolderId);
+			DLFolder dlParentFolder = DLFolderServiceUtil.getFolder(
+				parentFolderId);
 
 			groupId = dlParentFolder.getGroupId();
 			repositoryId = dlParentFolder.getRepositoryId();
@@ -183,8 +178,8 @@ public class DLFolderAtomCollectionAdapter
 
 		ServiceContext serviceContext = new ServiceContext();
 
-		DLFolderServiceUtil.updateFolder(dlFolder.getFolderId(), title, summary,
-			serviceContext);
+		DLFolderServiceUtil.updateFolder(
+			dlFolder.getFolderId(), title, summary, serviceContext);
 	}
 
 	private static final String _COLLECTION_NAME = "folders";

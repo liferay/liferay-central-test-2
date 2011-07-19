@@ -61,9 +61,9 @@ public interface AtomCollectionAdapter<E> {
 
 	public String getEntryId(E entry);
 
-	public String getEntryTitle(E entry);
-
 	public String getEntrySummary(E entry);
+
+	public String getEntryTitle(E entry);
 
 	public Date getEntryUpdated(E entry);
 

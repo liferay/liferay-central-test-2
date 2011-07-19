@@ -14,6 +14,7 @@
 
 package com.liferay.portal.atom;
 
+import com.liferay.portal.kernel.atom.AtomRequestContext;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 
 import org.apache.abdera.ext.history.FeedPagingHelper;
@@ -24,11 +25,19 @@ import org.apache.abdera.model.Feed;
  */
 public class AtomPager {
 
-	public AtomPager(int page, int totalElements) {
-		this(page, totalElements, SearchContainer.DEFAULT_DELTA);
+	public AtomPager(AtomRequestContext atomRequestContext, int totalElements) {
+		this(
+			atomRequestContext.getIntParameter("page"),
+			atomRequestContext.getIntParameter(
+				"max", SearchContainer.DEFAULT_DELTA),
+			totalElements);
 	}
 
-	public AtomPager(int page, int totalElements, int elementsPerPage) {
+	public AtomPager(int page, int totalElements) {
+		this(page, SearchContainer.DEFAULT_DELTA, totalElements);
+	}
+
+	public AtomPager(int page, int elementsPerPage, int totalElements) {
 		_firstPage = 1;
 
 		int lastPage = totalElements / elementsPerPage;

@@ -20,7 +20,6 @@ import com.liferay.portal.kernel.atom.AtomEntryContent;
 import com.liferay.portal.kernel.atom.AtomException;
 import com.liferay.portal.kernel.atom.AtomRequestContext;
 import com.liferay.portal.kernel.atom.BaseMediaAtomCollectionAdapter;
-import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.util.Base64;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.MimeTypesUtil;
@@ -157,15 +156,11 @@ public class DLFileEntryAtomCollectionAdapter
 			groupId = atomRequestContext.getLongParameter("groupId");
 		}
 
-		int max = atomRequestContext.getIntParameter(
-			"max", SearchContainer.DEFAULT_DELTA);
-
-		int page = atomRequestContext.getIntParameter("page");
-
-		int dlFileEntriesCount = DLFileEntryServiceUtil.getFileEntriesCount(
+		int count = DLFileEntryServiceUtil.getFileEntriesCount(
 			groupId, folderId);
 
-		AtomPager atomPager = new AtomPager(page, dlFileEntriesCount, max);
+		AtomPager atomPager = new AtomPager(
+			atomRequestContext, count);
 
 		AtomUtil.saveAtomPagerInRequest(atomRequestContext, atomPager);
 

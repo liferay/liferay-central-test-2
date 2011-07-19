@@ -125,10 +125,10 @@ public class BlogsEntryAtomCollectionAdapter
 					groupId, status, max);
 			}
 
-			int blogsEntriesCount = BlogsEntryServiceUtil.getGroupEntriesCount(
+			int count = BlogsEntryServiceUtil.getGroupEntriesCount(
 				groupId, status);
 
-			AtomPager atomPager = new AtomPager(page, blogsEntriesCount, max);
+			AtomPager atomPager = new AtomPager(page, max, count);
 
 			AtomUtil.saveAtomPagerInRequest(atomRequestContext, atomPager);
 
