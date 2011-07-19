@@ -103,6 +103,7 @@
 					}
 					else {
 						curGroup = manageableSites.get(0);
+						curLiveGroup = curGroup;
 
 						themeDisplay.setScopeGroupId(curGroup.getGroupId());
 					}
