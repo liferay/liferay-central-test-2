@@ -5043,11 +5043,12 @@ public class PortalImpl implements Portal {
 		Collection<Portlet> portlets = PortalUtil.getControlPanelPortlets(
 			companyId, PortletCategoryKeys.CONTENT);
 
-		List<Group> manageableSites = GroupServiceUtil.getManageableSites(
-			portlets, 1);
+		List<Group> groups = GroupServiceUtil.getManageableSites(portlets, 1);
 
-		if (!manageableSites.isEmpty()) {
-			doAsGroupId = manageableSites.get(0).getGroupId();
+		if (!groups.isEmpty()) {
+			Group group = groups.get(0);
+
+			doAsGroupId = group.getGroupId();
 		}
 		else {
 			Group guestGroup = GroupLocalServiceUtil.fetchGroup(
@@ -5057,6 +5058,7 @@ public class PortalImpl implements Portal {
 				doAsGroupId = guestGroup.getGroupId();
 			}
 		}
+
 		return doAsGroupId;
 	}
 

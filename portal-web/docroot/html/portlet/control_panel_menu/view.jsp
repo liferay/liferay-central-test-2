@@ -98,11 +98,12 @@
 				}
 
 				if (!manageableSites.isEmpty() && !manageableSites.contains(curLiveGroup)) {
-					if (_hasPermission(themeDisplay.getPermissionChecker(), curLiveGroup, categoryPortlets)) {
+					if (curLiveGroup.isSite() && PortletPermissionUtil.contains(permissionChecker, curLiveGroup.getGroupId(), 0, categoryPortlets, ActionKeys.ACCESS_IN_CONTROL_PANEL)) {
 						manageableSites.add(0, curLiveGroup);
 					}
 					else {
 						curGroup = manageableSites.get(0);
+
 						curLiveGroup = curGroup;
 
 						themeDisplay.setScopeGroupId(curGroup.getGroupId());
@@ -348,13 +349,3 @@
 		);
 	}
 </aui:script>
-
-<%!
-private boolean _hasPermission(PermissionChecker permissionChecker, Group group, Collection<Portlet> portlets) throws PortalException, SystemException{
-	if (!group.isSite() || !PortletPermissionUtil.contains(permissionChecker, group.getGroupId(), 0L, portlets, ActionKeys.ACCESS_IN_CONTROL_PANEL)) {
-		return false;
-	}
-
-	return true;
-}
-%>
