@@ -22,9 +22,6 @@ ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_
 MBCategory category = (MBCategory)row.getObject();
 
 Set<Long> categorySubscriptionClassPKs = (Set<Long>)row.getParameter("categorySubscriptionClassPKs");
-
-rssResourceURL.setParameter("p_l_id", String.valueOf(plid));
-rssResourceURL.setParameter("mbCategoryId", String.valueOf(category.getCategoryId()));
 %>
 
 <liferay-ui:icon-menu>
@@ -56,11 +53,17 @@ rssResourceURL.setParameter("mbCategoryId", String.valueOf(category.getCategoryI
 	</c:if>
 
 	<c:if test="<%= portletName.equals(PortletKeys.MESSAGE_BOARDS) %>">
+
+		<%
+		rssURL.setParameter("p_l_id", String.valueOf(plid));
+		rssURL.setParameter("mbCategoryId", String.valueOf(category.getCategoryId()));
+		%>
+
 		<liferay-ui:icon
 			image="rss"
 			method="get"
 			target="_blank"
-			url='<%= rssResourceURL.toString() %>'
+			url="<%= rssURL.toString() %>"
 		/>
 
 		<c:if test="<%= MBCategoryPermission.contains(permissionChecker, category, ActionKeys.SUBSCRIBE) %>">

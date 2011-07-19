@@ -31,9 +31,6 @@ if (portletName.equals(PortletKeys.MESSAGE_BOARDS)) {
 
 MBCategory category = message.getCategory();
 MBThread thread = message.getThread();
-
-rssResourceURL.setParameter("p_l_id", String.valueOf(plid));
-rssResourceURL.setParameter("threadId", String.valueOf(message.getThreadId()));
 %>
 
 <liferay-ui:icon-menu>
@@ -66,11 +63,17 @@ rssResourceURL.setParameter("threadId", String.valueOf(message.getThreadId()));
 
 	<c:if test="<%= portletName.equals(PortletKeys.MESSAGE_BOARDS) %>">
 		<c:if test="<%= MBMessagePermission.contains(permissionChecker, message, ActionKeys.VIEW) %>">
+
+			<%
+			rssURL.setParameter("p_l_id", String.valueOf(plid));
+			rssURL.setParameter("threadId", String.valueOf(message.getThreadId()));
+			%>
+
 			<liferay-ui:icon
 				image="rss"
 				method="get"
 				target="_blank"
-				url='<%= rssResourceURL.toString() %>'
+				url="<%= rssURL.toString() %>"
 			/>
 		</c:if>
 
