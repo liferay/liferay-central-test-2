@@ -40,6 +40,7 @@ import java.util.Map;
 
 /**
  * @author Bruno Farache
+ * @author Raymond Augé
  */
 public class LayoutsLocalPublisherMessageListener
 	extends BaseMessageStatusMessageListener {
@@ -123,7 +124,6 @@ public class LayoutsLocalPublisherMessageListener
 					attributes.put(param, values);
 				}
 			}
-
 		}
 
 		serviceContext.setAttributes(attributes);
