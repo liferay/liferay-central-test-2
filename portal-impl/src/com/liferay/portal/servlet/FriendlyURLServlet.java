@@ -79,6 +79,7 @@ public class FriendlyURLServlet extends HttpServlet {
 	public void service(
 			HttpServletRequest request, HttpServletResponse response)
 		throws IOException, ServletException {
+
 		// Do not set the entire full main path. See LEP-456.
 
 		//String mainPath = (String)ctx.getAttribute(WebKeys.MAIN_PATH);
@@ -145,7 +146,7 @@ public class FriendlyURLServlet extends HttpServlet {
 			Map<String, String[]> params)
 		throws Exception {
 
-		if (Validator.isNull(path) || !(path.charAt(0) == CharPool.SLASH)) {
+		if (Validator.isNull(path) || (path.charAt(0) != CharPool.SLASH)) {
 			return mainPath;
 		}
 
