@@ -410,16 +410,17 @@ public class ConfigurationImpl
 	}
 
 	protected String buildFilterCacheKey(
-		String key, Filter filter, boolean isArray) {
+		String key, Filter filter, boolean arrayValue) {
+
 		if (filter.getVariables() != null) {
 			return null;
 		}
 
 		String[] selectors = filter.getSelectors();
 
-		int length;
+		int length = 0;
 
-		if (isArray) {
+		if (arrayValue) {
 			length = selectors.length + 2;
 		}
 		else {
@@ -428,7 +429,7 @@ public class ConfigurationImpl
 
 		StringBundler sb = new StringBundler(length);
 
-		if (isArray) {
+		if (arrayValue) {
 			sb.append(_ARRAY_KEY_PREFIX);
 		}
 
@@ -446,6 +447,7 @@ public class ConfigurationImpl
 		Object value = _nullValue;
 
 		if ((array != null) && (array.length > 0)) {
+
 			// Commons Configuration parses an empty property into a String
 			// array with one String containing one space. It also leaves a
 			// trailing array member if you set a property in more than one
