@@ -77,8 +77,8 @@ public class SessionAuthToken implements AuthToken {
 
 		String tokenKey = WebKeys.AUTHENTICATION_TOKEN.concat(key);
 
-		String sessionAuthenticationToken =
-			(String)session.getAttribute(tokenKey);
+		String sessionAuthenticationToken = (String)session.getAttribute(
+			tokenKey);
 
 		if (Validator.isNull(sessionAuthenticationToken)) {
 			sessionAuthenticationToken = PwdGenerator.getPassword();
