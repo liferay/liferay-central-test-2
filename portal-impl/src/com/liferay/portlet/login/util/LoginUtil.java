@@ -411,13 +411,10 @@ public class LoginUtil {
 
 		CookieKeys.addCookie(request, response, companyIdCookie, secure);
 		CookieKeys.addCookie(request, response, idCookie, secure);
-
-		if (rememberMe) {
-			CookieKeys.addCookie(request, response, passwordCookie, secure);
-			CookieKeys.addCookie(request, response, rememberMeCookie, secure);
-			CookieKeys.addCookie(request, response, loginCookie, secure);
-			CookieKeys.addCookie(request, response, screenNameCookie, secure);
-		}
+		CookieKeys.addCookie(request, response, passwordCookie, secure);
+		CookieKeys.addCookie(request, response, rememberMeCookie, secure);
+		CookieKeys.addCookie(request, response, loginCookie, secure);
+		CookieKeys.addCookie(request, response, screenNameCookie, secure);
 	}
 
 	public static void sendPassword(ActionRequest actionRequest)
