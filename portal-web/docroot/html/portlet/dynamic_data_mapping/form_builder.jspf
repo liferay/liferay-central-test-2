@@ -34,6 +34,7 @@ String defaultLanguageId = LocalizationUtil.getDefaultLocale(script);
 		</span>
 
 		<select class="aui-helper-hidden lfr-translation-manager-default-locale" id="defaultLocale">
+
 			<%
 			Locale[] locales = LanguageUtil.getAvailableLocales();
 
@@ -45,6 +46,7 @@ String defaultLanguageId = LocalizationUtil.getDefaultLocale(script);
 			<%
 			}
 			%>
+
 		</select>
 
 		<a class="lfr-translation-manager-change-default-locale" href="javascript:;"><liferay-ui:message key="change" /></a>
@@ -81,6 +83,7 @@ String defaultLanguageId = LocalizationUtil.getDefaultLocale(script);
 				<label><liferay-ui:message key="available-translations" /></label>
 
 				<span class="lfr-translation-manager-available-translations-links">
+
 					<%
 					for (int i = 0; i < availableLocales.length; i++) {
 						if (defaultLanguageId.equals(availableLocales[i])) {
@@ -99,6 +102,7 @@ String defaultLanguageId = LocalizationUtil.getDefaultLocale(script);
 					<%
 					}
 					%>
+
 				</span>
 			</div>
 		</c:if>
@@ -166,16 +170,16 @@ String defaultLanguageId = LocalizationUtil.getDefaultLocale(script);
 </div>
 
 <%
-JSONArray availableLocalesArray = JSONFactoryUtil.createJSONArray();
+JSONArray availableLocalesJSONArray = JSONFactoryUtil.createJSONArray();
 
 for (int i = 0; i < availableLocales.length; i++) {
-	availableLocalesArray.put(availableLocales[i]);
+	availableLocalesJSONArray.put(availableLocales[i]);
 }
 
-JSONObject localesObject = JSONFactoryUtil.createJSONObject();
+JSONObject localesMapJSONObject = JSONFactoryUtil.createJSONObject();
 
 for (int i = 0; i < locales.length; i++) {
-	localesObject.put(LocaleUtil.toLanguageId(locales[i]), locales[i].getDisplayName(locale));
+	localesMapJSONObject.put(LocaleUtil.toLanguageId(locales[i]), locales[i].getDisplayName(locale));
 }
 %>
 
@@ -198,13 +202,13 @@ for (int i = 0; i < locales.length; i++) {
 
 			translationManager: {
 
-				<c:if test="<%= availableLocalesArray.length() > 0 %>">
-					availableLocales: <%= availableLocalesArray.toString() %>,
+				<c:if test="<%= availableLocalesJSONArray.length() > 0 %>">
+					availableLocales: <%= availableLocalesJSONArray.toString() %>,
 				</c:if>
 
 				boundingBox: '#<portlet:namespace />translationManager',
 				defaultLocale: '<%= defaultLanguageId %>',
-				localesMap: <%= localesObject.toString() %>,
+				localesMap: <%= localesMapJSONObject.toString() %>,
 				srcNode: '#<portlet:namespace />translationManager .lfr-translation-manager-content'
 			},
 

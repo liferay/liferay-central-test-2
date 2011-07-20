@@ -219,34 +219,39 @@ public class DDMXSDImpl implements DDMXSD {
 
 		for (Element dynamicElementElement : dynamicElementElements) {
 			JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
-			JSONObject localizationMap = JSONFactoryUtil.createJSONObject();
+			JSONObject localizationMapJSONObject =
+				JSONFactoryUtil.createJSONObject();
 
 			List<Element> metadataElements = dynamicElementElement.elements(
 				"meta-data");
 
 			for (Element metadataElement : metadataElements) {
-				JSONObject localeMap = JSONFactoryUtil.createJSONObject();
-
 				String locale = metadataElement.attributeValue("locale");
 
-				if (metadataElement != null) {
-					for (Element metadataEntry : metadataElement.elements()) {
-						String attributeName = metadataEntry.attributeValue(
-							"name");
-						String attributeValue = metadataEntry.getText();
+				JSONObject localeMap = JSONFactoryUtil.createJSONObject();
 
-						localeMap.put(attributeName, attributeValue);
+				localizationMapJSONObject.put(locale, localeMap);
 
-						if (defaultLocale.equals(locale)) {
-							jsonObject.put(attributeName, attributeValue);
-						}
-					}
+				if (metadataElement == null) {
+					continue;
 				}
 
-				localizationMap.put(locale, localeMap);
+				for (Element metadataEntryElement :
+						metadataElement.elements()) {
+
+					String attributeName = metadataEntryElement.attributeValue(
+						"name");
+					String attributeValue = metadataEntryElement.getText();
+
+					localeMap.put(attributeName, attributeValue);
+
+					if (defaultLocale.equals(locale)) {
+						jsonObject.put(attributeName, attributeValue);
+					}
+				}
 			}
 
-			jsonObject.put("localizationMap", localizationMap);
+			jsonObject.put("localizationMap", localizationMapJSONObject);
 
 			for (Attribute attribute : dynamicElementElement.attributes()) {
 				jsonObject.put(attribute.getName(), attribute.getValue());
@@ -285,13 +290,13 @@ public class DDMXSDImpl implements DDMXSD {
 		String[] availableLocales = LocalizationUtil.getAvailableLocales(
 			document.asXML());
 
-		String defaultLocale = LocalizationUtil.getDefaultLocale(
+		String defaultLanguageId = LocalizationUtil.getDefaultLocale(
 			document.asXML());
 
 		String languageId = LocaleUtil.toLanguageId(locale);
 
 		if (!ArrayUtil.contains(availableLocales, languageId)) {
-			languageId = defaultLocale;
+			languageId = defaultLanguageId;
 		}
 
 		Element metadataElement =
