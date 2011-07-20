@@ -76,7 +76,7 @@ public class SocialEquitySettingLocalServiceImpl
 			socialEquitySettingPersistence.findByG_C_A(
 				groupId, classNameId, actionId);
 
-		if (equityActionMapping == null && equitySettings.isEmpty()) {
+		if ((equityActionMapping == null) && equitySettings.isEmpty()) {
 			socialEquitySettings = Collections.emptyList();
 
 			_portalCache.put(key, socialEquitySettings);
@@ -86,6 +86,7 @@ public class SocialEquitySettingLocalServiceImpl
 
 		if (equityActionMapping == null) {
 			equityActionMapping = new SocialEquityActionMapping();
+
 			equityActionMapping.setActionId(actionId);
 		}
 
@@ -205,30 +206,44 @@ public class SocialEquitySettingLocalServiceImpl
 			groupId, className, equityActionMapping.getActionId());
 
 		if (equitySettings.isEmpty()) {
-			equitySettings.add(
-				new SocialEquitySettingImpl(
-					equityActionMapping.getActionId(),
-					SocialEquitySettingConstants.TYPE_INFORMATION));
+			SocialEquitySetting equitySetting = new SocialEquitySettingImpl();
 
-			equitySettings.add(
-				new SocialEquitySettingImpl(
-					equityActionMapping.getActionId(),
-					SocialEquitySettingConstants.TYPE_PARTICIPATION));
+			equitySetting.setActionId(equityActionMapping.getActionId());
+			equitySetting.setType(
+				SocialEquitySettingConstants.TYPE_INFORMATION);
+
+			equitySettings.add(equitySetting);
+
+			equitySetting = new SocialEquitySettingImpl();
+
+			equitySetting.setActionId(equityActionMapping.getActionId());
+			equitySetting.setType(
+				SocialEquitySettingConstants.TYPE_PARTICIPATION);
+
+			equitySettings.add(equitySetting);
 		}
 		else if (equitySettings.size() == 1) {
 			if (equitySettings.get(0).getType() ==
 					SocialEquitySettingConstants.TYPE_INFORMATION) {
 
-				equitySettings.add(
-					new SocialEquitySettingImpl(
-						equityActionMapping.getActionId(),
-						SocialEquitySettingConstants.TYPE_PARTICIPATION));
+				SocialEquitySetting equitySetting =
+					new SocialEquitySettingImpl();
+
+				equitySetting.setActionId(equityActionMapping.getActionId());
+				equitySetting.setType(
+					SocialEquitySettingConstants.TYPE_PARTICIPATION);
+
+				equitySettings.add(equitySetting);
 			}
 			else {
-				equitySettings.add(
-					new SocialEquitySettingImpl(
-						equityActionMapping.getActionId(),
-						SocialEquitySettingConstants.TYPE_INFORMATION));
+				SocialEquitySetting equitySetting =
+					new SocialEquitySettingImpl();
+
+				equitySetting.setActionId(equityActionMapping.getActionId());
+				equitySetting.setType(
+					SocialEquitySettingConstants.TYPE_INFORMATION);
+
+				equitySettings.add(equitySetting);
 			}
 		}
 
