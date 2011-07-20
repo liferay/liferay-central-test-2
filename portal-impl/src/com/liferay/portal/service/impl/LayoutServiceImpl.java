@@ -231,13 +231,15 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 				if (Validator.isNotNull(scopeType) &&
 					Validator.isNotNull(scopeLayoutUuid) &&
 					scopeLayoutUuid.equals(scopeGroupLayoutUuid)) {
-						return layout.getPlid();
+
+					return layout.getPlid();
 				}
 			}
 			else if (scopeGroup.isCompany()) {
 				if (Validator.isNotNull(scopeType) &&
 					scopeType.equals("company")) {
-	        		return layout.getPlid();
+
+					return layout.getPlid();
 				}
 			}
 			else {
