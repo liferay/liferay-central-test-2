@@ -50,8 +50,8 @@ public class IconHelpTag extends IconTag {
 		jspWriter.write("onFocus=\"Liferay.Portal.ToolTip.show(this);\"");
 		jspWriter.write("src=\"");
 		jspWriter.write(themeDisplay.getPathThemeImages());
-		jspWriter.write("/portlet/help.png\" tabIndex=\"0\" />");
-		jspWriter.write("<span class=\"aui-helper-hidden-accessible tooltip-text\">");
+		jspWriter.write("/portlet/help.png\" tabIndex=\"0\" /><span ");
+		jspWriter.write("class=\"aui-helper-hidden-accessible tooltip-text\">");
 		jspWriter.write(LanguageUtil.get(pageContext, getMessage()));
 		jspWriter.write("</span></span>");
 
