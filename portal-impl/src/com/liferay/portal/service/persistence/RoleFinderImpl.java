@@ -244,21 +244,8 @@ public class RoleFinderImpl
 			long companyId, String keywords, Integer[] types)
 		throws SystemException {
 
-		String[] names = null;
-		String[] descriptions = null;
-		boolean andOperator = false;
-
-		if (Validator.isNotNull(keywords)) {
-			names = CustomSQLUtil.keywords(keywords);
-			descriptions = CustomSQLUtil.keywords(keywords);
-		}
-		else {
-			andOperator = true;
-		}
-
-		return countByC_N_D_T(
-			companyId, names, descriptions, types,
-			new LinkedHashMap<String, Object>(), andOperator);
+		return countByKeywords(
+			companyId, keywords, types, new LinkedHashMap<String, Object>());
 	}
 
 	public int countByKeywords(
@@ -624,27 +611,15 @@ public class RoleFinderImpl
 			int end, OrderByComparator obc)
 		throws SystemException {
 
-		String[] names = null;
-		String[] descriptions = null;
-		boolean andOperator = false;
-
-		if (Validator.isNotNull(keywords)) {
-			names = CustomSQLUtil.keywords(keywords);
-			descriptions = CustomSQLUtil.keywords(keywords);
-		}
-		else {
-			andOperator = true;
-		}
-
-		return findByC_N_D_T(
-			companyId, names, descriptions, types,
-			new LinkedHashMap<String, Object>(), andOperator, start, end, obc);
+		return findByKeywords(
+			companyId, keywords, types, new LinkedHashMap<String, Object>(),
+			start, end, obc);
 	}
 
 	public List<Role> findByKeywords(
 			long companyId, String keywords, Integer[] types,
-			LinkedHashMap<String, Object> params, int start,
-			int end, OrderByComparator obc)
+			LinkedHashMap<String, Object> params, int start, int end,
+			OrderByComparator obc)
 		throws SystemException {
 
 		String[] names = null;
@@ -660,8 +635,8 @@ public class RoleFinderImpl
 		}
 
 		return findByC_N_D_T(
-			companyId, names, descriptions, types, params,
-			andOperator, start, end, obc);
+			companyId, names, descriptions, types, params, andOperator, start,
+			end, obc);
 	}
 
 	protected String getCountByR_U_SQL() {

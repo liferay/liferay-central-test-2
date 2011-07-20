@@ -69,7 +69,7 @@ else if (tabs2.equals("site-roles")) {
 		<%
 		RoleSearchTerms searchTerms = (RoleSearchTerms)searchContainer.getSearchTerms();
 
-		LinkedHashMap roleParams = new LinkedHashMap();
+		LinkedHashMap<String, Object> roleParams = new LinkedHashMap<String, Object>();
 
 		if (tabs3.equals("current")) {
 			roleParams.put("permissionsResourceId", new Long(resource.getResourceId()));
