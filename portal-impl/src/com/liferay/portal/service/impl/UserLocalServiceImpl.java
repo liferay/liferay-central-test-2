@@ -1662,8 +1662,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		// Social
 
 		socialActivityLocalService.deleteUserActivities(user.getUserId());
-		socialEquityLogLocalService.deactivateEquityLogs(user);
-		socialEquityUserLocalService.deleteSocialEquityUser(user);
+		socialEquityLogLocalService.deactivateUserEquityLogs(user.getUserId());
+		socialEquityUserLocalService.deleteSocialEquityUser(user.getUserId());
 		socialRequestLocalService.deleteReceiverUserRequests(user.getUserId());
 		socialRequestLocalService.deleteUserRequests(user.getUserId());
 
@@ -4290,19 +4290,19 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		User user = userPersistence.findByPrimaryKey(userId);
 
-		boolean wasActive = user.isActive();
+		boolean oldActive = user.isActive();
 
 		user.setStatus(status);
 
 		userPersistence.update(user, false);
 
+		if (!user.isActive() && oldActive) {
+			socialEquityUserLocalService.clearRanks(user.getUserId());
+		}
+
 		Indexer indexer = IndexerRegistryUtil.getIndexer(User.class);
 
 		indexer.reindex(user);
-
-		if (!user.isActive() && wasActive) {
-			socialEquityUserLocalService.clearRanks(user);
-		}
 
 		return user;
 	}

@@ -25,7 +25,6 @@ import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.User;
 import com.liferay.portal.util.PropsValues;
@@ -206,18 +205,6 @@ public class SocialEquityLogLocalServiceImpl
 		updateRanks();
 	}
 
-	public void deactivateEquityLogs(User user) throws SystemException {
-
-		List<SocialEquityLog> equityLogs =
-			socialEquityLogPersistence.findByUserId(user.getUserId());
-
-		for (SocialEquityLog equityLog : equityLogs) {
-			equityLog.setActive(false);
-
-			socialEquityLogPersistence.remove(equityLog);
-		}
-	}
-
 	public void deactivateEquityLogs(long assetEntryId) throws SystemException {
 		if (!PropsValues.SOCIAL_EQUITY_EQUITY_LOG_ENABLED) {
 			return;
@@ -337,6 +324,10 @@ public class SocialEquityLogLocalServiceImpl
 				assetEntry.getEntryId(), actionId, true, extraData);
 
 		deactivateEquityLogs(equityLogs);
+	}
+
+	public void deactivateUserEquityLogs(long userId) throws SystemException {
+		socialEquityLogPersistence.removeByUserId(userId);
 	}
 
 	@BufferedIncrement(incrementClass = SocialEquityIncrement.class)
@@ -829,30 +820,24 @@ public class SocialEquityLogLocalServiceImpl
 			long equityUserId = rs.getLong("equityUserId");
 			long groupId = rs.getLong("groupId");
 			double equityValue = rs.getDouble("equityValue");
-			int status = rs.getInt("status");
 
-			if (status != WorkflowConstants.STATUS_APPROVED) {
-				_updateRanksSetter.add(equityUserId, 0);
-			}
-			else {
-				if (groupId == _groupId) {
-					if (equityValue == _equityValue) {
-						_ties++;
-					}
-					else {
-						_equityValue = equityValue;
-						_rank = _rank + _ties + 1;
-						_ties = 0;
-					}
+			if (groupId == _groupId) {
+				if (equityValue == _equityValue) {
+					_ties++;
 				}
 				else {
-					_groupId = groupId;
-					_rank = 1;
+					_equityValue = equityValue;
+					_rank = _rank + _ties + 1;
 					_ties = 0;
 				}
-
-				_updateRanksSetter.add(equityUserId, _rank);
 			}
+			else {
+				_groupId = groupId;
+				_rank = 1;
+				_ties = 0;
+			}
+
+			_updateRanksSetter.add(equityUserId, _rank);
 		}
 
 		private double _equityValue;

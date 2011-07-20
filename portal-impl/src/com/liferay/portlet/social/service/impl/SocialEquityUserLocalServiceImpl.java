@@ -22,7 +22,6 @@ import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
-import com.liferay.portal.model.User;
 import com.liferay.portlet.social.model.SocialEquityUser;
 import com.liferay.portlet.social.model.SocialEquityValue;
 import com.liferay.portlet.social.service.base.SocialEquityUserLocalServiceBaseImpl;
@@ -35,9 +34,9 @@ import java.util.List;
 public class SocialEquityUserLocalServiceImpl
 	extends SocialEquityUserLocalServiceBaseImpl {
 
-	public void clearRanks(User user) throws SystemException {
+	public void clearRanks(long userId) throws SystemException {
 		List<SocialEquityUser> equityUsers =
-			socialEquityUserPersistence.findByUserId(user.getUserId());
+			socialEquityUserPersistence.findByUserId(userId);
 
 		for (SocialEquityUser equityUser : equityUsers) {
 			equityUser.setRank(0);
@@ -46,8 +45,8 @@ public class SocialEquityUserLocalServiceImpl
 		}
 	}
 
-	public void deleteSocialEquityUser(User user) throws SystemException {
-		socialEquityUserPersistence.removeByUserId(user.getUserId());
+	public void deleteSocialEquityUser(long userId) throws SystemException {
+		socialEquityUserPersistence.removeByUserId(userId);
 	}
 
 	public SocialEquityValue getContributionEquity(long userId)
