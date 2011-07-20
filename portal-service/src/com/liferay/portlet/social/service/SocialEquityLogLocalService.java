@@ -260,9 +260,6 @@ public interface SocialEquityLogLocalService extends PersistedModelLocalService 
 	public void checkEquityLogs()
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public void deactivateEquityLogs(com.liferay.portal.model.User user)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
 	public void deactivateEquityLogs(long assetEntryId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
@@ -293,6 +290,9 @@ public interface SocialEquityLogLocalService extends PersistedModelLocalService 
 		java.lang.String actionId, java.lang.String extraData)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
+
+	public void deactivateUserEquityLogs(long userId)
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void incrementSocialEquityAssetEntry_IQ(long assetEntryId,
 		com.liferay.portlet.social.model.SocialEquityIncrementPayload equityPayload)

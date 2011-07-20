@@ -231,10 +231,7 @@ public interface SocialEquityUserLocalService extends PersistedModelLocalService
 	*/
 	public void setBeanIdentifier(java.lang.String beanIdentifier);
 
-	public void clearRanks(com.liferay.portal.model.User user)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	public void deleteSocialEquityUser(com.liferay.portal.model.User user)
+	public void clearRanks(long userId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
