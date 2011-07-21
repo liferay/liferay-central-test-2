@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
 import com.liferay.portal.kernel.io.unsync.UnsyncStringWriter;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.UnsyncPrintWriterPool;
 
@@ -160,7 +161,9 @@ public class StringServletResponse extends HeaderCacheServletResponse {
 			writer.write(_string);
 		}
 		else if (_calledGetWriter) {
-			_unsyncStringWriter.getStringBundler().writeTo(writer);
+			StringBundler sb = _unsyncStringWriter.getStringBundler();
+
+			sb.writeTo(writer);
 		}
 		else {
 			writer.write(getString());
