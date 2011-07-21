@@ -18,8 +18,10 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.FileVersion;
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.security.auth.PrincipalThreadLocal;
 import com.liferay.portlet.documentlibrary.model.DLFileVersion;
-import com.liferay.portlet.documentlibrary.service.DLFileEntryServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 
 import java.io.InputStream;
@@ -62,9 +64,13 @@ public class LiferayFileVersion extends LiferayModel implements FileVersion {
 	public InputStream getContentStream(boolean incrementCounter)
 		throws PortalException, SystemException {
 
-		return DLFileEntryServiceUtil.getFileAsStream(
-			_dlFileVersion.getFileEntryId(), _dlFileVersion.getVersion(),
-			incrementCounter);
+		String name = PrincipalThreadLocal.getName();
+
+		long userId = GetterUtil.getLong(name);
+
+		return DLFileEntryLocalServiceUtil.getFileAsStream(
+			userId, _dlFileVersion.getFileEntryId(),
+			_dlFileVersion.getVersion(), incrementCounter);
 	}
 
 	public Date getCreateDate() {
