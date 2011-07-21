@@ -27,13 +27,18 @@ import javax.servlet.jsp.tagext.Tag;
 import org.apache.jasper.Constants;
 
 /**
+ * <p>
+ * See http://issues.liferay.com/browse/LPS-19130.
+ * </p>
+ *
  * @author Shuyang Zhou
  */
 public class TagHandlerPool extends org.apache.jasper.runtime.TagHandlerPool {
 
+	@SuppressWarnings("rawtypes")
 	@Override
 	public Tag get(Class tagClass) throws JspException {
-		Tag tag = _tagPool.poll();
+		Tag tag = _tags.poll();
 
 		if (tag == null) {
 			try {
@@ -49,9 +54,9 @@ public class TagHandlerPool extends org.apache.jasper.runtime.TagHandlerPool {
 
 	@Override
 	public void release() {
-		Tag tag;
+		Tag tag = null;
 
-		while ((tag = _tagPool.poll()) != null) {
+		while ((tag = _tags.poll()) != null) {
 			tag.release();
 		}
 	}
@@ -60,7 +65,8 @@ public class TagHandlerPool extends org.apache.jasper.runtime.TagHandlerPool {
 	public void reuse(Tag tag) {
 		if (_counter.get() < _maxSize) {
 			_counter.getAndIncrement();
-			_tagPool.offer(tag);
+
+			_tags.offer(tag);
 		}
 
 		tag.release();
@@ -74,6 +80,6 @@ public class TagHandlerPool extends org.apache.jasper.runtime.TagHandlerPool {
 
 	private AtomicInteger _counter = new AtomicInteger();
 	private int _maxSize;
-	private Queue<Tag> _tagPool = new ConcurrentLinkedQueue<Tag>();
+	private Queue<Tag> _tags = new ConcurrentLinkedQueue<Tag>();
 
 }
