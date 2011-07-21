@@ -47,8 +47,10 @@ import java.io.OutputStreamWriter;
 import java.io.RandomAccessFile;
 import java.io.Reader;
 import java.io.Writer;
+
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -57,6 +59,7 @@ import java.util.Properties;
 import org.apache.commons.io.FileUtils;
 import org.apache.tika.Tika;
 import org.apache.tools.ant.DirectoryScanner;
+
 import org.mozilla.intl.chardet.nsDetector;
 import org.mozilla.intl.chardet.nsPSMDetector;
 
