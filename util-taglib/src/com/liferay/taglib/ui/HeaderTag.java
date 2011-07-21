@@ -82,8 +82,8 @@ public class HeaderTag extends IncludeTag {
 		_escapeXml = escapeXml;
 	}
 
-	public void setShowBackURL(boolean backURL) {
-		_showBackURL = backURL;
+	public void setShowBackURL(boolean showBackURL) {
+		_showBackURL = showBackURL;
 	}
 
 	public void setTitle(String title) {
