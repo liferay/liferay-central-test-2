@@ -44,6 +44,7 @@ public class SQLServerLimitStringUtil {
 
 		if (orderByPos > 0) {
 			selectFromWhere = sql.substring(fromPos, orderByPos);
+
 			orderBy = sql.substring(orderByPos + 9, sql.length());
 		}
 		else {
@@ -85,8 +86,8 @@ public class SQLServerLimitStringUtil {
 	private static final String[] _splitOrderBy(
 		String selectFrom, String orderBy) {
 
-		StringBundler innerOrderBy = new StringBundler();
-		StringBundler outerOrderBy = new StringBundler();
+		StringBundler innerOrderBySB = new StringBundler();
+		StringBundler outerOrderBySB = new StringBundler();
 
 		String[] orderByColumns = StringUtil.split(orderBy, StringPool.COMMA);
 
@@ -121,42 +122,41 @@ public class SQLServerLimitStringUtil {
 			}
 
 			if (selectFrom.contains(orderByColumnName)) {
-				if (outerOrderBy.length() == 0) {
-					outerOrderBy.append(" order by ");
+				if (outerOrderBySB.length() == 0) {
+					outerOrderBySB.append(" order by ");
 				}
 				else {
-					outerOrderBy.append(StringPool.COMMA);
+					outerOrderBySB.append(StringPool.COMMA);
 				}
 
-				matcher = _QUALIFIED_COLUMN_PATTERN.matcher(orderByColumnName);
+				matcher = _qualifiedColumnPattern.matcher(orderByColumnName);
 
 				orderByColumnName = matcher.replaceAll("$1");
 
-				outerOrderBy.append(orderByColumnName);
-				outerOrderBy.append(StringPool.SPACE);
-				outerOrderBy.append(orderByType);
+				outerOrderBySB.append(orderByColumnName);
+				outerOrderBySB.append(StringPool.SPACE);
+				outerOrderBySB.append(orderByType);
 			}
 			else {
-				if (innerOrderBy.length() == 0) {
-					innerOrderBy.append(" order by ");
+				if (innerOrderBySB.length() == 0) {
+					innerOrderBySB.append(" order by ");
 				}
 				else {
-					innerOrderBy.append(StringPool.COMMA);
+					innerOrderBySB.append(StringPool.COMMA);
 				}
 
-				innerOrderBy.append(orderByColumnName);
-				innerOrderBy.append(StringPool.SPACE);
-				innerOrderBy.append(orderByType);
+				innerOrderBySB.append(orderByColumnName);
+				innerOrderBySB.append(StringPool.SPACE);
+				innerOrderBySB.append(orderByType);
 			}
 		}
 
-		if (outerOrderBy.length() == 0) {
-			outerOrderBy.append(" order by CURRENT_TIMESTAMP");
-
+		if (outerOrderBySB.length() == 0) {
+			outerOrderBySB.append(" order by CURRENT_TIMESTAMP");
 		}
 
 		return new String[] {
-			innerOrderBy.toString(), outerOrderBy.toString()
+			innerOrderBySB.toString(), outerOrderBySB.toString()
 		};
 	}
 
@@ -166,7 +166,7 @@ public class SQLServerLimitStringUtil {
 		String innerSelectFrom = selectFrom;
 
 		if (Validator.isNotNull(innerOrderBy)) {
-			Matcher matcher = _SELECT_PATTERN.matcher(innerSelectFrom);
+			Matcher matcher = _selectPattern.matcher(innerSelectFrom);
 
 			innerSelectFrom = matcher.replaceAll(
 				"select top ".concat(String.valueOf(limit)).concat(
@@ -179,15 +179,15 @@ public class SQLServerLimitStringUtil {
 			outerSelectFrom = outerSelectFrom.substring(1);
 		}
 
-		Matcher matcher = _COLUMN_ALIAS_PATTERN.matcher(outerSelectFrom);
+		Matcher matcher = _columnAliasPattern.matcher(outerSelectFrom);
 
 		outerSelectFrom = matcher.replaceAll("$1");
 
-		matcher = _DISTINCT_PATTERN.matcher(outerSelectFrom);
+		matcher = _distinctPattern.matcher(outerSelectFrom);
 
 		outerSelectFrom = matcher.replaceAll(StringPool.SPACE);
 
-		matcher = _QUALIFIED_COLUMN_PATTERN.matcher(outerSelectFrom);
+		matcher = _qualifiedColumnPattern.matcher(outerSelectFrom);
 
 		outerSelectFrom = matcher.replaceAll("$1");
 
@@ -196,16 +196,13 @@ public class SQLServerLimitStringUtil {
 		};
 	}
 
-	private static final Pattern _COLUMN_ALIAS_PATTERN = Pattern.compile(
+	private static final Pattern _columnAliasPattern = Pattern.compile(
 		"[\\w\\.]+ AS (\\w+)", Pattern.CASE_INSENSITIVE);
-
-	private static final Pattern _DISTINCT_PATTERN = Pattern.compile(
+	private static final Pattern _distinctPattern = Pattern.compile(
 		" DISTINCT ", Pattern.CASE_INSENSITIVE);
-
-	private static final Pattern _QUALIFIED_COLUMN_PATTERN = Pattern.compile(
+	private static final Pattern _qualifiedColumnPattern = Pattern.compile(
 		"\\w+\\.(\\w+)");
-
-	private static final Pattern _SELECT_PATTERN = Pattern.compile(
+	private static final Pattern _selectPattern = Pattern.compile(
 		"SELECT ", Pattern.CASE_INSENSITIVE);
 
 }
