@@ -41,11 +41,11 @@ if ((event.getRepeating()) && (recurrence != null)) {
 	}
 }
 
-request.setAttribute("view_event.jsp-event", event);
-
 AssetEntry layoutAssetEntry = AssetEntryLocalServiceUtil.getEntry(CalEvent.class.getName(), event.getEventId());
 
 request.setAttribute(WebKeys.LAYOUT_ASSET_ENTRY, layoutAssetEntry);
+
+request.setAttribute("view_event.jsp-event", event);
 %>
 
 <liferay-ui:header

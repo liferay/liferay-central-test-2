@@ -108,11 +108,11 @@ if (portletDisplay.isWebDAVEnabled()) {
 
 User userDisplay = UserLocalServiceUtil.getUserById(fileEntry.getUserId());
 
-request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
-
 AssetEntry layoutAssetEntry = AssetEntryLocalServiceUtil.getEntry(DLFileEntryConstants.getClassName(), assetClassPK);
 
 request.setAttribute(WebKeys.LAYOUT_ASSET_ENTRY, layoutAssetEntry);
+
+request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 %>
 
 <portlet:actionURL var="editFileEntry">

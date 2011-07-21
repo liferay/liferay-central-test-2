@@ -21,7 +21,6 @@ String randomNamespace = PortalUtil.generateRandomKey(request, "taglib_ui_input_
 
 String className = GetterUtil.getString((String)request.getAttribute("liferay-ui:input-asset-links:className"));
 long classPK = GetterUtil.getLong((String)request.getAttribute("liferay-ui:input-asset-links:classPK"));
-String assetLinkSearchContainerPrimaryKeys = ParamUtil.getString(request, "assetLinkSearchContainerPrimaryKeys");
 
 AssetEntry assetEntry = null;
 
@@ -30,6 +29,8 @@ List<AssetLink> assetLinks = new ArrayList<AssetLink>();
 if (classPK > 0) {
 	assetEntry = AssetEntryLocalServiceUtil.getEntry(className, classPK);
 }
+
+String assetLinkSearchContainerPrimaryKeys = ParamUtil.getString(request, "assetLinkSearchContainerPrimaryKeys");
 
 if (Validator.isNull(assetLinkSearchContainerPrimaryKeys) && SessionErrors.isEmpty(portletRequest)) {
 	if (assetEntry != null) {
@@ -44,7 +45,7 @@ else {
 
 		AssetEntry assetEntry2 = AssetEntryServiceUtil.getEntry(assetEntryId);
 
-		AssetLink assetLink = new AssetLinkImpl();
+		AssetLink assetLink = AssetLinkLocalServiceUtil.createAssetLink(0);
 
 		if (assetEntry != null) {
 			assetLink.setEntryId1(assetEntry.getEntryId());

@@ -144,12 +144,10 @@ if (showOnlyLayoutAssets) {
 }
 
 if (portletName.equals(PortletKeys.RELATED_ASSETS)) {
-	if (request.getAttribute(WebKeys.LAYOUT_ASSET_ENTRY) != null) {
-		AssetEntry mainAssetEntry = (AssetEntry)request.getAttribute(WebKeys.LAYOUT_ASSET_ENTRY);
+	AssetEntry layoutAssetEntry = (AssetEntry)request.getAttribute(WebKeys.LAYOUT_ASSET_ENTRY);
 
-		if (mainAssetEntry != null) {
-			assetEntryQuery.setLinkedAssetEntryId(mainAssetEntry.getEntryId());
-		}
+	if (layoutAssetEntry != null) {
+		assetEntryQuery.setLinkedAssetEntryId(layoutAssetEntry.getEntryId());
 	}
 }
 

@@ -21,7 +21,6 @@
 <%@ page import="com.liferay.portlet.asset.model.AssetLink" %>
 <%@ page import="com.liferay.portlet.asset.model.AssetRenderer" %>
 <%@ page import="com.liferay.portlet.asset.model.AssetRendererFactory" %>
-<%@ page import="com.liferay.portlet.asset.model.impl.AssetLinkImpl" %>
 <%@ page import="com.liferay.portlet.asset.service.AssetEntryLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.asset.service.AssetEntryServiceUtil" %>
 <%@ page import="com.liferay.portlet.asset.service.AssetLinkLocalServiceUtil" %>
