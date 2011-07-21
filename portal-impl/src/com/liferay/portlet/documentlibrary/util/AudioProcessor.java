@@ -124,8 +124,8 @@ public class AudioProcessor implements DLProcessor {
 				File tmpFile = _getAudioTmpFile(id, fileVersion.getExtension());
 
 				try {
-					InputStream inputStream =
-						fileVersion.getContentStream(false);
+					InputStream inputStream = fileVersion.getContentStream(
+						false);
 
 					FileUtil.write(tmpFile, inputStream);
 

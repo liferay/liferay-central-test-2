@@ -67,9 +67,7 @@ public class CMISFileVersion extends CMISModel implements FileVersion {
 		return _cmisRepository.getCompanyId();
 	}
 
-	public InputStream getContentStream(boolean count)
-		throws PortalException, SystemException {
-
+	public InputStream getContentStream(boolean incrementCounter) {
 		ContentStream contentStream = _document.getContentStream();
 
 		return contentStream.getStream();

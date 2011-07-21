@@ -31,7 +31,7 @@ public interface FileVersion extends RepositoryModel<FileVersion> {
 
 	public long getCompanyId();
 
-	public InputStream getContentStream(boolean count)
+	public InputStream getContentStream(boolean incrementCounter)
 		throws PortalException, SystemException;
 
 	public Date getCreateDate();

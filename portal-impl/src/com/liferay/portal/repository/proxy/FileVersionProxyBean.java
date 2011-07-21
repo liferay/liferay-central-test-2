@@ -52,10 +52,10 @@ public class FileVersionProxyBean
 		return _fileVersion.getCompanyId();
 	}
 
-	public InputStream getContentStream(boolean count)
+	public InputStream getContentStream(boolean incrementCounter)
 		throws PortalException, SystemException {
 
-		return _fileVersion.getContentStream(count);
+		return _fileVersion.getContentStream(incrementCounter);
 	}
 
 	public Date getCreateDate() {
