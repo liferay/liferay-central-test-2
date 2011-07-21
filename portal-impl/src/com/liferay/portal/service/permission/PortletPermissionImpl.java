@@ -236,76 +236,81 @@ public class PortletPermissionImpl implements PortletPermission {
 		String name = null;
 		String primKey = null;
 
-		if (layout != null) {
-			groupId = layout.getGroupId();
-			name = PortletConstants.getRootPortletId(portletId);
-			primKey = getPrimaryKey(layout.getPlid(), portletId);
+		if (layout == null) {
+			name = portletId;
+			primKey = portletId;
 
-			Boolean hasPermission = StagingPermissionUtil.hasPermission(
-				permissionChecker, groupId, name, groupId, name, actionId);
+			return permissionChecker.hasPermission(
+				groupId, name, primKey, actionId);
+		}
 
-			if (hasPermission != null) {
-				return hasPermission.booleanValue();
-			}
+		groupId = layout.getGroupId();
+		name = PortletConstants.getRootPortletId(portletId);
+		primKey = getPrimaryKey(layout.getPlid(), portletId);
 
-			if ((layout.isPrivateLayout() &&
-				 !PropsValues.LAYOUT_USER_PRIVATE_LAYOUTS_MODIFIABLE) ||
-				(layout.isPublicLayout() &&
-				 !PropsValues.LAYOUT_USER_PUBLIC_LAYOUTS_MODIFIABLE)) {
+		Boolean hasPermission = StagingPermissionUtil.hasPermission(
+			permissionChecker, groupId, name, groupId, name, actionId);
 
-				if (actionId.equals(ActionKeys.CONFIGURATION)) {
-					Group group = GroupLocalServiceUtil.getGroup(
-						layout.getGroupId());
+		if (hasPermission != null) {
+			return hasPermission.booleanValue();
+		}
 
-					if (group.isUser()) {
-						return false;
-					}
-				}
-			}
+		if ((layout.isPrivateLayout() &&
+			 !PropsValues.LAYOUT_USER_PRIVATE_LAYOUTS_MODIFIABLE) ||
+			(layout.isPublicLayout() &&
+			 !PropsValues.LAYOUT_USER_PUBLIC_LAYOUTS_MODIFIABLE)) {
 
-			if (actionId.equals(ActionKeys.VIEW)) {
+			if (actionId.equals(ActionKeys.CONFIGURATION)) {
 				Group group = GroupLocalServiceUtil.getGroup(
 					layout.getGroupId());
 
-				if (group.isControlPanel()) {
-					return true;
-				}
-			}
-
-			if (!strict) {
-				if (LayoutPermissionUtil.contains(
-						permissionChecker, groupId, layout.isPrivateLayout(),
-						layout.getLayoutId(), ActionKeys.UPDATE) &&
-					hasLayoutManagerPermission(portletId, actionId)) {
-
-					return true;
-				}
-
-				LayoutTypePortlet layoutTypePortlet =
-					(LayoutTypePortlet)layout.getLayoutType();
-
-				Portlet portlet = PortletLocalServiceUtil.getPortletById(
-					layout.getCompanyId(), portletId);
-
-				if (layoutTypePortlet.isCustomizedView() &&
-					layoutTypePortlet.isCustomizableByPortletId(portletId) &&
-					LayoutPermissionUtil.contains(
-						permissionChecker, layout, ActionKeys.CUSTOMIZE)) {
-
-					if (actionId.equals(ActionKeys.VIEW)) {
-						return true;
-					}
-					else if (actionId.equals(ActionKeys.CONFIGURATION) &&
-							 portlet.isPreferencesUniquePerLayout()) {
-
-						return true;
-					}
+				if (group.isUser()) {
+					return false;
 				}
 			}
 		}
-		else {
-			name = portletId;
-			primKey = portletId;
+
+		if (actionId.equals(ActionKeys.VIEW)) {
+			Group group = GroupLocalServiceUtil.getGroup(
+				layout.getGroupId());
+
+			if (group.isControlPanel()) {
+				return true;
+			}
+		}
+
+		if (strict) {
+			return permissionChecker.hasPermission(
+				groupId, name, primKey, actionId);
+		}
+
+		if (LayoutPermissionUtil.contains(
+				permissionChecker, groupId, layout.isPrivateLayout(),
+				layout.getLayoutId(), ActionKeys.UPDATE) &&
+			hasLayoutManagerPermission(portletId, actionId)) {
+
+			return true;
+		}
+
+		LayoutTypePortlet layoutTypePortlet =
+			(LayoutTypePortlet)layout.getLayoutType();
+
+		Portlet portlet = PortletLocalServiceUtil.getPortletById(
+			layout.getCompanyId(), portletId);
+
+		if (layoutTypePortlet.isCustomizedView() &&
+			layoutTypePortlet.isPortletCustomizable(portletId) &&
+			LayoutPermissionUtil.contains(
+				permissionChecker, layout, ActionKeys.CUSTOMIZE)) {
+
+			if (actionId.equals(ActionKeys.VIEW)) {
+				return true;
+			}
+			else if (actionId.equals(ActionKeys.CONFIGURATION) &&
+					 portlet.isPreferencesUniquePerLayout()) {
+
+				return true;
+			}
 		}
 
 		return permissionChecker.hasPermission(

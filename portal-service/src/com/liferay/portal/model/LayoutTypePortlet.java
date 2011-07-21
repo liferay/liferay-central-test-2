@@ -154,17 +154,17 @@ public interface LayoutTypePortlet extends LayoutType {
 
 	public boolean hasUpdatePermission();
 
-	public boolean isColumnDisabled(String columnId);
+	public boolean isColumnCustomizable(String columnId);
 
-	public boolean isDefaultUpdated();
+	public boolean isColumnDisabled(String columnId);
 
 	public boolean isCustomizable();
 
-	public boolean isCustomizable(String columnId);
-
-	public boolean isCustomizableByPortletId(String portletId);
-
 	public boolean isCustomizedView();
+
+	public boolean isDefaultUpdated();
+
+	public boolean isPortletCustomizable(String portletId);
 
 	public boolean isTemplateCustomizable(String columnId);
 
@@ -212,6 +212,8 @@ public interface LayoutTypePortlet extends LayoutType {
 
 	public void resetUserPreferences();
 
+	public void setCustomizedView(boolean customizedView);
+
 	public void setLayoutTemplateId(long userId, String newLayoutTemplateId);
 
 	public void setLayoutTemplateId(
@@ -232,8 +234,6 @@ public interface LayoutTypePortlet extends LayoutType {
 	public void setModePreview(String modePreview);
 
 	public void setModePrint(String modePrint);
-
-	public void setCustomizedView(boolean customizedView);
 
 	public void setPortalPreferences(PortalPreferences portalPreferences);
 
