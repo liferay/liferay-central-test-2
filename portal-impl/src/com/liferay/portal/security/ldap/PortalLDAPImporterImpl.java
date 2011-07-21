@@ -23,7 +23,6 @@ import com.liferay.portal.kernel.cache.SingleVMPoolUtil;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
@@ -701,15 +700,13 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 		}
 
 		if (userGroupId != null) {
-			long userId = user.getUserId();
-
 			if (_log.isDebugEnabled()) {
 				_log.debug(
-					"Adding " + userId + " to group " + userGroupId);
+					"Adding " + user.getUserId() + " to group " + userGroupId);
 			}
 
 			UserGroupLocalServiceUtil.addUserUserGroups(
-				userId, new long[] {userGroupId});
+				user.getUserId(), new long[] {userGroupId});
 		}
 	}
 
@@ -719,21 +716,20 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 			Properties groupMappings)
 		throws Exception {
 
-		long userId = user.getUserId();
-
 		if (!LDAPSettingsUtil.isExportEnabled(companyId) ||
 			!LDAPSettingsUtil.isExportGroupEnabled(companyId)) {
 
 			List<UserGroup> userGroups =
-				UserGroupLocalServiceUtil.getUserUserGroups(userId);
+				UserGroupLocalServiceUtil.getUserUserGroups(user.getUserId());
 
-			UserGroupLocalServiceUtil.clearUserUserGroups(userId);
+			UserGroupLocalServiceUtil.clearUserUserGroups(user.getUserId());
 
 			for (UserGroup userGroup : userGroups) {
 				if (!userGroup.isAddedByLDAPImport()) {
 
 					UserGroupLocalServiceUtil.addUserUserGroups(
-						userId, new long[] {userGroup.getUserGroupId()});
+						user.getUserId(),
+						new long[] {userGroup.getUserGroupId()});
 				}
 			}
 		}
