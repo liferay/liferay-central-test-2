@@ -131,10 +131,10 @@ public class MailMessageListener extends BaseMessageListener {
 				if (_log.isWarnEnabled()) {
 					StringBundler sb = new StringBundler(4);
 
-					sb.append("E-mail address ");
+					sb.append("Email address ");
 					sb.append(address);
-					sb.append(" contains line break characters, excluded ");
-					sb.append("from email.");
+					sb.append(" contains line break characters and will be ");
+					sb.append("excluded from the email");
 
 					_log.warn(sb.toString());
 				}
