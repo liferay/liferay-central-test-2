@@ -230,7 +230,12 @@ if (row == null && portletName.equals(PortletKeys.DOCUMENT_LIBRARY_DISPLAY)) {
 		</c:choose>
 
 		<c:if test="<%= portletDisplay.isWebDAVEnabled() && DLFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.VIEW) %>">
-			<liferay-ui:icon cssClass='<%= randomNamespace + "-webdav-action" %>' image="desktop" message="access-from-desktop" url="javascript:;" />
+			<liferay-ui:icon
+				cssClass='<%= randomNamespace + "-webdav-action" %>'
+				image="desktop"
+				message="access-from-desktop"
+				url="javascript:;"
+			/>
 		</c:if>
 
 		<c:if test="<%= portletName.equals(PortletKeys.DOCUMENT_LIBRARY_DISPLAY) %>">
