@@ -89,7 +89,7 @@ public class RESTProxyAction extends Action {
 			!ArrayUtil.contains(allowedDomains, domain)) {
 
 			if (_log.isDebugEnabled()) {
-				_log.debug("REST Proxy URL " + url + " is not allowed");
+				_log.debug("URL " + url + " is not allowed");
 			}
 
 			return false;
