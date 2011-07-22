@@ -14,20 +14,20 @@
 
 package com.liferay.portlet.documentlibrary.model;
 
-import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author Michael Young
  */
 public class DLSyncUpdate {
 
-	public DLSyncUpdate(Collection<DLSync> dlSyncs, Date lastAccessDate) {
+	public DLSyncUpdate(List<DLSync> dlSyncs, Date lastAccessDate) {
 		_dlSyncs = dlSyncs;
 		_lastAccessDate = lastAccessDate;
 	}
 
-	public Collection<DLSync> getDLSyncs() {
+	public List<DLSync> getDLSyncs() {
 		return _dlSyncs;
 	}
 
@@ -35,7 +35,7 @@ public class DLSyncUpdate {
 		return _lastAccessDate;
 	}
 
-	private Collection<DLSync> _dlSyncs;
+	private List<DLSync> _dlSyncs;
 	private Date _lastAccessDate = new Date();
 
 }
