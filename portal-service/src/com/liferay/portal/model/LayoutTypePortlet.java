@@ -190,7 +190,7 @@ public interface LayoutTypePortlet extends LayoutType {
 
 	public void removeModesPortletId(String portletId);
 
-	public void removeNestedColumns(String portletId);
+	public void removeNestedColumns(String portletNamespace);
 
 	public void removePortletId(long userId, String portletId);
 

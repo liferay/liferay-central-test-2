@@ -187,9 +187,11 @@ AUI().add(
 			closeNestedPortlets: function(portlet) {
 				var nestedPortlets = portlet.all('.portlet-boundary');
 
-				nestedPortlets.each(function(portlet) {
-				    Liferay.Portlet.close(portlet, true);
-				});
+				nestedPortlets.each(
+					function(portlet) {
+						Liferay.Portlet.close(portlet, true);
+					}
+				);
 			},
 
 			getActiveDropContainer: function() {
