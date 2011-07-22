@@ -179,7 +179,7 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 
 	public List<Group> getUserPlaces(String[] classNames, int max)
 		throws PortalException, SystemException {
-		
+
 		return getUserPlaces(getGuestOrUserId(), classNames, max);
 	}
 
@@ -254,7 +254,7 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 		}
 
 		PermissionChecker permissionChecker = getPermissionChecker();
-		
+
 		if (permissionChecker.getUserId() != userId) {
 			try {
 				permissionChecker = PermissionCheckerFactoryUtil.create(
@@ -264,7 +264,7 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 				throw new PrincipalException(e);
 			}
 		}
-		
+
 		if (PortalPermissionUtil.contains(
 				permissionChecker, ActionKeys.VIEW_CONTROL_PANEL)) {
 
