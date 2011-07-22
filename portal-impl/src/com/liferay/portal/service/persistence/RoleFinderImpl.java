@@ -47,14 +47,14 @@ import java.util.Map;
 public class RoleFinderImpl
 	extends BasePersistenceImpl<Role> implements RoleFinder {
 
-	public static String COUNT_BY_SITE =
-		RoleFinder.class.getName() + ".countBySite";
-
 	public static String COUNT_BY_ORGANIZATION =
 		RoleFinder.class.getName() + ".countByOrganization";
 
 	public static String COUNT_BY_ORGANIZATION_SITE =
 		RoleFinder.class.getName() + ".countByOrganizationSite";
+
+	public static String COUNT_BY_SITE =
+		RoleFinder.class.getName() + ".countBySite";
 
 	public static String COUNT_BY_USER =
 		RoleFinder.class.getName() + ".countByUser";
@@ -644,11 +644,11 @@ public class RoleFinderImpl
 			StringBundler sb = new StringBundler(13);
 
 			sb.append("(");
-			sb.append(CustomSQLUtil.get(COUNT_BY_SITE));
-			sb.append(") UNION (");
 			sb.append(CustomSQLUtil.get(COUNT_BY_ORGANIZATION));
 			sb.append(") UNION (");
 			sb.append(CustomSQLUtil.get(COUNT_BY_ORGANIZATION_SITE));
+			sb.append(") UNION (");
+			sb.append(CustomSQLUtil.get(COUNT_BY_SITE));
 			sb.append(") UNION (");
 			sb.append(CustomSQLUtil.get(COUNT_BY_USER));
 			sb.append(") UNION (");

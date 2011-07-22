@@ -110,12 +110,6 @@ else if (tabs2.equals("page-updated-email")) {
 						<liferay-ui:message key="the-company-name-associated-with-the-wiki" />
 					</dd>
 					<dt>
-						[$SITE_NAME$]
-					</dt>
-					<dd>
-						<liferay-ui:message key="the-site-name-associated-with-the-wiki" />
-					</dd>
-					<dt>
 						[$PAGE_USER_ADDRESS$]
 					</dt>
 					<dd>
@@ -132,6 +126,12 @@ else if (tabs2.equals("page-updated-email")) {
 					</dt>
 					<dd>
 						<%= PortalUtil.getPortletTitle(renderResponse) %>
+					</dd>
+					<dt>
+						[$SITE_NAME$]
+					</dt>
+					<dd>
+						<liferay-ui:message key="the-site-name-associated-with-the-wiki" />
 					</dd>
 				</dl>
 			</div>
@@ -182,12 +182,6 @@ else if (tabs2.equals("page-updated-email")) {
 					</dt>
 					<dd>
 						<liferay-ui:message key="the-company-name-associated-with-the-wiki" />
-					</dd>
-					<dt>
-						[$SITE_NAME$]
-					</dt>
-					<dd>
-						<liferay-ui:message key="the-site-name-associated-with-the-wiki" />
 					</dd>
 					<dt>
 						[$DIFFS_URL$]
@@ -278,6 +272,12 @@ else if (tabs2.equals("page-updated-email")) {
 					</dt>
 					<dd>
 						<%= PortalUtil.getPortletTitle(renderResponse) %>
+					</dd>
+					<dt>
+						[$SITE_NAME$]
+					</dt>
+					<dd>
+						<liferay-ui:message key="the-site-name-associated-with-the-wiki" />
 					</dd>
 					<dt>
 						[$TO_ADDRESS$]

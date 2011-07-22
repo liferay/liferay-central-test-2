@@ -195,7 +195,8 @@
 	</#if>
 
 	<#assign site_name = htmlUtil.escape(page_group.getDescriptiveName()) />
-	<#assign community_name =  site_name/>
+
+	<#assign community_name = site_name />
 
 	<#if page_group.getName() = "Guest">
 		<#assign css_class = css_class + " guest-site" />
@@ -223,18 +224,22 @@
 	${my_places_portlet_url.setParameter("privateLayout", "false")}
 
 	<#assign site_default_public_url = htmlUtil.escape(my_places_portlet_url.toString()) />
+
 	<#assign community_default_public_url = site_default_public_url />
 
 	${my_places_portlet_url.setParameter("privateLayout", "true")}
 
 	<#assign site_default_private_url = htmlUtil.escape(my_places_portlet_url.toString()) />
+
 	<#assign community_default_private_url = site_default_private_url />
 
 	<#assign site_default_url = community_default_public_url />
+
 	<#assign community_default_url = site_default_url />
 
 	<#if layout.isPrivateLayout()>
 		<#assign site_default_url = site_default_private_url />
+
 		<#assign community_default_url = site_default_url />
 	</#if>
 </#if>

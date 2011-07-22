@@ -270,11 +270,11 @@ public class PropsValues {
 
 	public static final int COMPANY_SECURITY_AUTO_LOGIN_MAX_AGE = GetterUtil.getInteger(PropsUtil.get(PropsKeys.COMPANY_SECURITY_AUTO_LOGIN_MAX_AGE), CookieKeys.MAX_AGE);
 
-	public static final boolean COMPANY_SECURITY_SITE_LOGO = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.COMPANY_SECURITY_SITE_LOGO));
-
 	public static final boolean COMPANY_SECURITY_SEND_PASSWORD = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.COMPANY_SECURITY_SEND_PASSWORD));
 
 	public static final boolean COMPANY_SECURITY_SEND_PASSWORD_RESET_LINK = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.COMPANY_SECURITY_SEND_PASSWORD_RESET_LINK));
+
+	public static final boolean COMPANY_SECURITY_SITE_LOGO = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.COMPANY_SECURITY_SITE_LOGO));
 
 	public static final boolean COMPANY_SECURITY_STRANGERS = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.COMPANY_SECURITY_STRANGERS));
 

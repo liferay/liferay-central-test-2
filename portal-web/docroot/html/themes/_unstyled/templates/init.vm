@@ -192,6 +192,7 @@
 	#set ($page_javascript = $typeSettingsProperties.getProperty("javascript"))
 
 	#set ($site_name = $htmlUtil.escape($page_group.getDescriptiveName()))
+
 	#set ($community_name = $site_name)
 
 	#if	($page_group.getName() == "Guest")
@@ -220,18 +221,22 @@
 	$my_places_portlet_url.setParameter("privateLayout", "false")
 
 	#set ($site_default_public_url = $htmlUtil.escape($my_places_portlet_url.toString()))
-	#set ($community_default_public_url = $site_default_public_url )
+
+	#set ($community_default_public_url = $site_default_public_url)
 
 	$my_places_portlet_url.setParameter("privateLayout", "true")
 
 	#set ($site_default_private_url = $htmlUtil.escape($my_places_portlet_url.toString()))
+
 	#set ($community_default_private_url = $site_default_private_url)
 
 	#set ($site_default_url = $site_default_public_url)
-	#set ($community_default_url = $site_default_url )
+
+	#set ($community_default_url = $site_default_url)
 
 	#if ($layout.isPrivateLayout())
 		#set ($site_default_url = $site_default_private_url)
+
 		#set ($community_default_url = $site_default_url)
 	#end
 #end

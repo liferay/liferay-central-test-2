@@ -30,6 +30,7 @@ List<Group> myPlaces = user.getMyPlaces(max);
 
 <c:if test="<%= !myPlaces.isEmpty() %>">
 	<ul class="taglib-my-places">
+
 		<%
 		PortletURL portletURL = new PortletURLImpl(request, PortletKeys.MY_PLACES, plid, PortletRequest.ACTION_PHASE);
 

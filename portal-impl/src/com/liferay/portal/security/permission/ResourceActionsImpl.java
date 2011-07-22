@@ -881,11 +881,10 @@ public class ResourceActionsImpl implements ResourceActions {
 			groupDefaultsElement = getPermissionsChildElement(
 				parentElement, "community-defaults");
 
-			if (_log.isWarnEnabled() && groupDefaultsElement != null) {
+			if (_log.isWarnEnabled() && (groupDefaultsElement != null)) {
 				_log.warn(
-					"The use of the element community-defaults is " +
-						"deprecated and will be deleted in future versions" +
-							". Use the site-defaults element instead.");
+					"The community-defaults element is deprecated. Use the " +
+						"site-defaults element instead.");
 			}
 		}
 
