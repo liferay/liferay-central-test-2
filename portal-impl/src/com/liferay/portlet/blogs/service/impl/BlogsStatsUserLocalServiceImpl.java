@@ -177,13 +177,8 @@ public class BlogsStatsUserLocalServiceImpl
 			groupId, userId, WorkflowConstants.STATUS_APPROVED);
 
 		if (entryCount == 0) {
-			int blogsStatsCount = blogsStatsUserPersistence.countByG_U(
-				groupId, userId);
+			blogsStatsUserPersistence.removeByG_U(groupId, userId);
 
-			if (blogsStatsCount > 0) {
-				blogsStatsUserPersistence.removeByG_U(groupId, userId);
-			}
-			
 			return;
 		}
 
@@ -192,8 +187,8 @@ public class BlogsStatsUserLocalServiceImpl
 		statsUser.setEntryCount(entryCount);
 
 		BlogsEntry blogsEntry = blogsEntryPersistence.findByG_U_S_First(
-				groupId, userId, WorkflowConstants.STATUS_APPROVED,
-				new EntryDisplayDateComparator());
+			groupId, userId, WorkflowConstants.STATUS_APPROVED,
+			new EntryDisplayDateComparator());
 
 		Date lastDisplayDate = blogsEntry.getDisplayDate();
 
