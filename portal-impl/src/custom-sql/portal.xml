@@ -17,8 +17,8 @@
 							OR [$OWNER_CHECK$]
 						)
 				)
-				AS RP ON
-					[$PRIM_KEYS$]
+			AS InlineSQLResourcePermission ON
+				[$PRIM_KEYS$]
 		]]>
 	</sql>
 	<sql id="com.liferay.portal.service.persistence.GroupFinder.countByGroupId">

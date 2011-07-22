@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.util.dao.orm.CustomSQLUtil;
 
@@ -219,11 +220,14 @@ public class InlineSQLHelperImpl implements InlineSQLHelper {
 			}
 		}
 
-		StringBundler primKeysSQL = new StringBundler();
+		StringBundler sb = new StringBundler();
 
-		primKeysSQL.append("(RP.scope = 4 AND RP.primKey = CAST_TEXT(");
-		primKeysSQL.append(classPKField);
-		primKeysSQL.append(") AND (");
+		sb.append("(InlineSQLResourcePermission.scope = ");
+		sb.append(ResourceConstants.SCOPE_INDIVIDUAL);
+		sb.append(" AND ");
+		sb.append("InlineSQLResourcePermission.primKey = CAST_TEXT(");
+		sb.append(classPKField);
+		sb.append(") AND (");
 
 		for (int j = 0; j < groupIds.length; j++) {
 			long groupId = groupIds[j];
@@ -232,10 +236,10 @@ public class InlineSQLHelperImpl implements InlineSQLHelper {
 					groupId, className, 0, ActionKeys.VIEW)) {
 
 				if (j > 0) {
-					primKeysSQL.append(" OR ");
+					sb.append(" OR ");
 				}
 
-				primKeysSQL.append("(");
+				sb.append("(");
 
 				long[] roleIds = getRoleIds(groupId);
 
@@ -245,25 +249,24 @@ public class InlineSQLHelperImpl implements InlineSQLHelper {
 
 				for (int i = 0; i < roleIds.length; i++) {
 					if (i > 0) {
-						primKeysSQL.append(" OR ");
+						sb.append(" OR ");
 					}
 
-					primKeysSQL.append("RP.roleId = ");
-					primKeysSQL.append(roleIds[i]);
+					sb.append("InlineSQLResourcePermission.roleId = ");
+					sb.append(roleIds[i]);
 				}
 
-				primKeysSQL.append(") AND ");
+				sb.append(") AND ");
 			}
 
-			primKeysSQL.append("(");
-			primKeysSQL.append(
-				classPKField.substring(0, classPKField.lastIndexOf('.')));
-			primKeysSQL.append(".groupId = ");
-			primKeysSQL.append(groupId);
-			primKeysSQL.append(")");
+			sb.append("(");
+			sb.append(classPKField.substring(0, classPKField.lastIndexOf('.')));
+			sb.append(".groupId = ");
+			sb.append(groupId);
+			sb.append(")");
 		}
 
-		primKeysSQL.append("))");
+		sb.append("))");
 
 		permissionJoin = StringUtil.replace(
 			permissionJoin,
@@ -277,7 +280,7 @@ public class InlineSQLHelperImpl implements InlineSQLHelper {
 				className,
 				String.valueOf(permissionChecker.getCompanyId()),
 				ownerSQL.toString(),
-				primKeysSQL.toString()
+				sb.toString()
 			});
 
 		int pos = sql.indexOf(_WHERE_CLAUSE);
