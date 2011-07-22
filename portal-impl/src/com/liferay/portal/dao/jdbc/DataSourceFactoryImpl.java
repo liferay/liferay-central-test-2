@@ -194,6 +194,12 @@ public class DataSourceFactoryImpl implements DataSourceFactory {
 				continue;
 			}
 
+			// Ignore Tomcat
+
+			if (isPropertyTomcat(key)) {
+				continue;
+			}
+
 			try {
 				BeanUtil.setProperty(comboPooledDataSource, key, value);
 			}
@@ -360,6 +366,20 @@ public class DataSourceFactoryImpl implements DataSourceFactory {
 			key.equalsIgnoreCase("connectionTransactionIsolation") ||
 			key.equalsIgnoreCase("idleTime") ||
 			key.equalsIgnoreCase("numberOfConnectionsToInitializeWith")) {
+
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	protected boolean isPropertyTomcat(String key) {
+		if (key.equalsIgnoreCase("fairQueue") ||
+			key.equalsIgnoreCase("jdbcInterceptors") ||
+			key.equalsIgnoreCase("jmxEnabled") ||
+			key.equalsIgnoreCase("timeBetweenEvictionRunsMillis") ||
+			key.equalsIgnoreCase("useEquals")) {
 
 			return true;
 		}
