@@ -134,6 +134,17 @@ public class PermissionCacheUtil {
 		return value;
 	}
 
+	private static ThreadLocal<LRUMap> _localCache;
+	private static boolean _localCacheAvailable;
+	private static PortalCache _permissionCheckerBagPortalCache =
+		MultiVMPoolUtil.getCache(
+			PERMISSION_CHECKER_BAG_CACHE_NAME,
+			PropsValues.PERMISSIONS_OBJECT_BLOCKING_CACHE);
+	private static PortalCache _permissionPortalCache =
+		MultiVMPoolUtil.getCache(
+			PERMISSION_CACHE_NAME,
+			PropsValues.PERMISSIONS_OBJECT_BLOCKING_CACHE);
+
 	private static class BagKey implements Serializable {
 
 		public BagKey(long userId, long groupId) {
@@ -142,8 +153,6 @@ public class PermissionCacheUtil {
 		}
 
 		public boolean equals(Object obj) {
-			// No need to test null or instanceof, since this is a private
-			// class, we can ensure to use it right.
 			BagKey bagKey = (BagKey)obj;
 
 			if ((bagKey._userId == _userId) && (bagKey._groupId == _groupId)) {
@@ -170,6 +179,7 @@ public class PermissionCacheUtil {
 		public PermissionKey(
 			long userId, boolean signedIn, boolean checkGuest, long groupId,
 			String name, String primKey, String actionId) {
+
 			_userId = userId;
 			_signedIn = signedIn;
 			_checkGuest = checkGuest;
@@ -180,8 +190,6 @@ public class PermissionCacheUtil {
 		}
 
 		public boolean equals(Object obj) {
-			// No need to test null or instanceof, since this is a private
-			// class, we can ensure to use it right.
 			PermissionKey permissionKey = (PermissionKey)obj;
 
 			if ((permissionKey._userId == _userId) &&
@@ -223,17 +231,6 @@ public class PermissionCacheUtil {
 		private final long _userId;
 
 	}
-
-	private static ThreadLocal<LRUMap> _localCache;
-	private static boolean _localCacheAvailable;
-	private static PortalCache _permissionCheckerBagPortalCache =
-		MultiVMPoolUtil.getCache(
-			PERMISSION_CHECKER_BAG_CACHE_NAME,
-			PropsValues.PERMISSIONS_OBJECT_BLOCKING_CACHE);
-	private static PortalCache _permissionPortalCache =
-		MultiVMPoolUtil.getCache(
-			PERMISSION_CACHE_NAME,
-			PropsValues.PERMISSIONS_OBJECT_BLOCKING_CACHE);
 
 	static {
 		if (PropsValues.PERMISSIONS_THREAD_LOCAL_CACHE_MAX_SIZE > 0) {

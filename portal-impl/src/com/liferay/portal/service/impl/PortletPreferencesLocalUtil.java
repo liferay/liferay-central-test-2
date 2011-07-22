@@ -60,6 +60,9 @@ public class PortletPreferencesLocalUtil {
 		return preferencesPool;
 	}
 
+	private static PortalCache _portalCache = MultiVMPoolUtil.getCache(
+		CACHE_NAME);
+
 	private static class PreferencesPoolKey implements Serializable {
 
 		public PreferencesPoolKey(long ownerId, int ownerType) {
@@ -68,13 +71,11 @@ public class PortletPreferencesLocalUtil {
 		}
 
 		public boolean equals(Object obj) {
-			// No need to test null or instanceof, since this is a private
-			// class, we can ensure to use it right.
-
 			PreferencesPoolKey preferencesPoolKey = (PreferencesPoolKey)obj;
 
 			if ((preferencesPoolKey._ownerId == _ownerId) &&
 				(preferencesPoolKey._ownerType == _ownerType)) {
+
 				return true;
 			}
 			else {
@@ -92,8 +93,5 @@ public class PortletPreferencesLocalUtil {
 		private final int _ownerType;
 
 	}
-
-	private static PortalCache _portalCache = MultiVMPoolUtil.getCache(
-		CACHE_NAME);
 
 }

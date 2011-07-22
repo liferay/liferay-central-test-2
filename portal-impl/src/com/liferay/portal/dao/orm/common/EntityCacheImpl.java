@@ -322,6 +322,14 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 		}
 	}
 
+	private static Log _log = LogFactoryUtil.getLog(EntityCacheImpl.class);
+
+	private static final String _GROUP_KEY_PREFIX = CACHE_NAME.concat(
+		StringPool.PERIOD);
+
+	private static ThreadLocal<LRUMap> _localCache;
+	private static boolean _localCacheAvailable;
+
 	private static class CacheKey implements Serializable {
 
 		public CacheKey(String shardName, Serializable primaryKey) {
@@ -330,13 +338,11 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 		}
 
 		public boolean equals(Object obj) {
-			// No need to test null or instanceof, since this is a private
-			// class, we can ensure to use it right. Both shardName and
-			// primaryKey are impossible to be null, so do equals call directly.
-
 			CacheKey cacheKey = (CacheKey)obj;
+
 			if (cacheKey._shardName.equals(_shardName) &&
 				cacheKey._primaryKey.equals(_primaryKey)) {
+
 				return true;
 			}
 			else {
@@ -359,22 +365,19 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 
 		public LocalCacheKey(
 			String shardName, String className, Serializable primaryKey) {
+
 			_shardName = shardName;
 			_className = className;
 			_primaryKey = primaryKey;
 		}
 
 		public boolean equals(Object obj) {
-			// No need to test null or instanceof, since this is a private
-			// class, we can ensure to use it right. All shardName, className
-			// and primaryKey are impossible to be null, so do equals call
-			// directly.
-
 			LocalCacheKey localCacheKey = (LocalCacheKey)obj;
 
 			if (localCacheKey._shardName.equals(_shardName) &&
 				localCacheKey._className.equals(_className) &&
 				localCacheKey._primaryKey.equals(_primaryKey)) {
+
 				return true;
 			}
 			else {
@@ -386,7 +389,6 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 			int hashCode = HashUtil.hash(0, _shardName);
 
 			hashCode = HashUtil.hash(hashCode, _className);
-
 			hashCode = HashUtil.hash(hashCode, _primaryKey);
 
 			return hashCode;
@@ -400,13 +402,9 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(EntityCacheImpl.class);
-
-	private static final String _GROUP_KEY_PREFIX = CACHE_NAME.concat(
-		StringPool.PERIOD);
-
-	private static ThreadLocal<LRUMap> _localCache;
-	private static boolean _localCacheAvailable;
+	private MultiVMPool _multiVMPool;
+	private ConcurrentMap<String, PortalCache> _portalCaches =
+		new ConcurrentHashMap<String, PortalCache>();
 
 	static {
 		if (PropsValues.VALUE_OBJECT_ENTITY_THREAD_LOCAL_CACHE_MAX_SIZE > 0) {
@@ -418,9 +416,5 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 			_localCacheAvailable = true;
 		}
 	}
-
-	private MultiVMPool _multiVMPool;
-	private ConcurrentMap<String, PortalCache> _portalCaches =
-		new ConcurrentHashMap<String, PortalCache>();
 
 }
