@@ -45,7 +45,7 @@ String[][] categorySections = {mainSections, identificationSections, miscellaneo
 
 <liferay-ui:header
 	backURL="<%= backURL %>"
-	localizeTitle="<%= (organization == null) ? true : false %>"
+	localizeTitle="<%= (organization == null) %>"
 	title='<%= (organization == null) ? "new-organization" : organization.getName() %>'
 />
 

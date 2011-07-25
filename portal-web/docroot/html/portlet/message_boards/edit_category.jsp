@@ -40,8 +40,8 @@ catch (NoSuchMailingListException nsmle) {
 
 <liferay-ui:header
 	backURL="<%= redirect %>"
-	localizeTitle="<%= (category != null) ? false : true %>"
-	title='<%= (category != null) ? category.getName() : "new-category" %>'
+	localizeTitle="<%= (category == null) %>"
+	title='<%= (category == null) ? "new-category" : category.getName() %>'
 />
 
 <portlet:actionURL var="editCategoryURL">

@@ -47,8 +47,8 @@ long folderId = BeanParamUtil.getLong(entry, request, "folderId");
 
 	<liferay-ui:header
 		backURL="<%= backURL %>"
-		localizeTitle="<%= (entry != null) ? false : true %>"
-		title='<%= (entry != null) ? entry.getName() : "new-bookmark" %>'
+		localizeTitle="<%= (entry == null) %>"
+		title='<%= (entry == null) ? "new-bookmark" : entry.getName() %>'
 	/>
 
 	<liferay-ui:error exception="<%= EntryURLException.class %>" message="please-enter-a-valid-url" />

@@ -31,8 +31,8 @@ long frameworkVersionId = BeanParamUtil.getLong(frameworkVersion, request, "fram
 
 <liferay-ui:header
 	backURL="<%= redirect %>"
-	localizeTitle="<%= (frameworkVersion != null) ? false : true %>"
-	title='<%= (frameworkVersion != null) ? frameworkVersion.getName() : "new-framework-version" %>'
+	localizeTitle="<%= (frameworkVersion == null) %>"
+	title='<%= (frameworkVersion == null) ? "new-framework-version" : frameworkVersion.getName() %>'
 />
 
 <liferay-ui:error exception="<%= FrameworkVersionNameException.class %>" message="please-enter-a-valid-name" />

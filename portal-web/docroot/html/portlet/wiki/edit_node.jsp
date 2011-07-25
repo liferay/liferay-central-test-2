@@ -35,8 +35,8 @@ long nodeId = BeanParamUtil.getLong(node, request, "nodeId");
 
 	<liferay-ui:header
 		backURL="<%= redirect %>"
-		localizeTitle="<%= (node != null) ? false : true %>"
-		title='<%= (node != null) ? node.getName() : "new-wiki-node" %>'
+		localizeTitle="<%= (node == null) %>"
+		title='<%= (node == null) ? "new-wiki-node" : node.getName() %>'
 	/>
 
 	<liferay-ui:error exception="<%= DuplicateNodeNameException.class %>" message="please-enter-a-unique-node-name" />

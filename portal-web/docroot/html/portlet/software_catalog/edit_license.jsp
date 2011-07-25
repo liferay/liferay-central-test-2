@@ -31,8 +31,8 @@ long licenseId = BeanParamUtil.getLong(license, request, "licenseId");
 
 <liferay-ui:header
 	backURL="<%= redirect %>"
-	localizeTitle="<%= (license != null) ? false : true %>"
-	title='<%= (license != null) ? license.getName() : "new-license" %>'
+	localizeTitle="<%= (license == null) %>"
+	title='<%= (license == null) ? "new-license" : license.getName() %>'
 />
 
 <liferay-ui:error exception="<%= LicenseNameException.class %>" message="please-enter-a-valid-name" />

@@ -111,8 +111,8 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 
 	<liferay-ui:header
 		backURL="<%= backURL %>"
-		localizeTitle="<%= (event != null) ? false : true %>"
-		title='<%= (event != null) ? event.getTitle() : "new-event" %>'
+		localizeTitle="<%= (event == null) %>"
+		title='<%= (event == null) ? "new-event" : event.getTitle() %>'
 	/>
 
 	<liferay-ui:error exception="<%= EventDurationException.class %>" message="please-enter-a-longer-duration" />

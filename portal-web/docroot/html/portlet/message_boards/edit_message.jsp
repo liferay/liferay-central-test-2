@@ -79,7 +79,7 @@ if (Validator.isNull(redirect)) {
 
 <liferay-ui:header
 	backURL="<%= redirect %>"
-	localizeTitle="<%= (message == null) ? true : false %>"
+	localizeTitle="<%= (message == null) %>"
 	title='<%= (message == null) ? "new-message" : message.getSubject() %>'
 />
 

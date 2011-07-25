@@ -36,7 +36,7 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 
 <liferay-ui:header
 	backURL="<%= backURL %>"
-	localizeTitle="<%= (entry == null) ? true : false %>"
+	localizeTitle="<%= (entry == null) %>"
 	title='<%= (entry == null) ? "new-blog-entry" : entry.getTitle() %>'
 />
 

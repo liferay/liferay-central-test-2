@@ -40,8 +40,8 @@ long folderId = ParamUtil.getLong(request, "folderId");
 
 	<liferay-ui:header
 		backURL="<%= redirect %>"
-		localizeTitle="<%= (repository != null) ? false : true %>"
-		title='<%= (repository != null) ? repository.getName() : "new-repository" %>'
+		localizeTitle="<%= (repository == null) %>"
+		title='<%= (repository == null) ? "new-repository" : repository.getName() %>'
 	/>
 
 	<liferay-ui:error exception="<%= DuplicateFolderNameException.class %>" message="please-enter-a-unique-repository-name" />
