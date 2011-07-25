@@ -124,77 +124,74 @@ public class DynamicCSSFilter extends BasePortalFilter {
 
 			return cacheDataFile;
 		}
-		else {
-			String content = null;
-			String dynamicContent = null;
 
-			String cssRealPath = (String)request.getAttribute(
-				WebKeys.CSS_REAL_PATH);
+		String dynamicContent = null;
 
-			try {
-				if (realPath.endsWith(_CSS_EXTENSION)) {
-					if (_log.isInfoEnabled()) {
-						_log.info("Parsing SASS on CSS " + file);
-					}
+		String content = null;
 
-					content = FileUtil.read(file);
+		String cssRealPath = (String)request.getAttribute(
+			WebKeys.CSS_REAL_PATH);
 
-					dynamicContent = DynamicCSSUtil.parseSass(
-						cssRealPath, content);
-
-					response.setContentType(ContentTypes.TEXT_CSS);
-
-					FileUtil.write(cacheContentTypeFile, ContentTypes.TEXT_CSS);
+		try {
+			if (realPath.endsWith(_CSS_EXTENSION)) {
+				if (_log.isInfoEnabled()) {
+					_log.info("Parsing SASS on CSS " + file);
 				}
-				else if (realPath.endsWith(_JSP_EXTENSION)) {
-					if (_log.isInfoEnabled()) {
-						_log.info("Parsing SASS on JSP " + file);
-					}
 
-					StringServletResponse stringResponse =
-						new StringServletResponse(response);
+				content = FileUtil.read(file);
 
-					processFilter(
-						DynamicCSSFilter.class, request, stringResponse,
-						filterChain);
+				dynamicContent = DynamicCSSUtil.parseSass(cssRealPath, content);
 
-					CacheResponseUtil.setHeaders(
-						response, stringResponse.getHeaders());
+				response.setContentType(ContentTypes.TEXT_CSS);
 
-					response.setContentType(stringResponse.getContentType());
-
-					content = stringResponse.getString();
-
-					dynamicContent = DynamicCSSUtil.parseSass(
-						cssRealPath, content);
-
-					FileUtil.write(
-						cacheContentTypeFile, stringResponse.getContentType());
-				}
-				else {
-					return null;
-				}
+				FileUtil.write(cacheContentTypeFile, ContentTypes.TEXT_CSS);
 			}
-			catch (Exception e) {
-				_log.error("Error on " + cssRealPath, e);
-
-				if (_log.isDebugEnabled()) {
-					_log.debug(content);
+			else if (realPath.endsWith(_JSP_EXTENSION)) {
+				if (_log.isInfoEnabled()) {
+					_log.info("Parsing SASS on JSP " + file);
 				}
 
-				response.setStatus(
-					HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-			}
+				StringServletResponse stringResponse =
+					new StringServletResponse(response);
 
-			if (dynamicContent != null) {
-				FileUtil.write(cacheDataFile, dynamicContent);
+				processFilter(
+					DynamicCSSFilter.class, request, stringResponse,
+					filterChain);
+
+				CacheResponseUtil.setHeaders(
+					response, stringResponse.getHeaders());
+
+				response.setContentType(stringResponse.getContentType());
+
+				content = stringResponse.getString();
+
+				dynamicContent = DynamicCSSUtil.parseSass(cssRealPath, content);
+
+				FileUtil.write(
+					cacheContentTypeFile, stringResponse.getContentType());
 			}
 			else {
-				dynamicContent = content;
+				return null;
+			}
+		}
+		catch (Exception e) {
+			_log.error("Unable to parse SASS on CSS " + cssRealPath, e);
+
+			if (_log.isDebugEnabled()) {
+				_log.debug(content);
 			}
 
-			return dynamicContent;
+			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 		}
+
+		if (dynamicContent != null) {
+			FileUtil.write(cacheDataFile, dynamicContent);
+		}
+		else {
+			dynamicContent = content;
+		}
+
+		return dynamicContent;
 	}
 
 	@Override

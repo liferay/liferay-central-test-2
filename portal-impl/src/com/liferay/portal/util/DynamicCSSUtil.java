@@ -61,7 +61,6 @@ public class DynamicCSSUtil {
 		Map<String, Object> inputObjects = new HashMap<String, Object>();
 
 		inputObjects.put("content", content);
-
 		inputObjects.put("cssRealPath", cssRealPath);
 
 		UnsyncByteArrayOutputStream unsyncByteArrayOutputStream =

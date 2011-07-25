@@ -199,26 +199,27 @@ public class ComboServlet extends HttpServlet {
 			else {
 				_fileContentBags.remove(fileContentKey, fileContentBag);
 			}
-		 }
+		}
 
 		if (file == null) {
 			fileContentBag = _EMPTY_FILE_CONTENT_BAG;
 		}
 		else {
-			String cssRealPath = file.getAbsolutePath();
-
 			String stringFileContent = FileUtil.read(file);
 
 			if (!StringUtil.endsWith(path, _CSS_MINIFIED_SUFFIX) &&
 				!StringUtil.endsWith(path, _JAVASCRIPT_MINIFIED_SUFFIX)) {
 
 				if (minifierType.equals("css")) {
+					String cssRealPath = file.getAbsolutePath();
+
 					try {
 						stringFileContent = DynamicCSSUtil.parseSass(
 							cssRealPath, stringFileContent);
 					}
 					catch (Exception e) {
-						_log.error("Error on " + cssRealPath, e);
+						_log.error(
+							"Unable to parse SASS on CSS " + cssRealPath, e);
 
 						if (_log.isDebugEnabled()) {
 							_log.debug(stringFileContent);

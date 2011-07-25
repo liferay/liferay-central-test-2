@@ -240,7 +240,7 @@ public class StripFilter extends BasePortalFilter {
 					content = DynamicCSSUtil.parseSass(key, content);
 				}
 				catch (ScriptingException se) {
-					_log.error("Error on " + key, se);
+					_log.error("Unable to parse SASS on CSS " + key, se);
 
 					if (_log.isDebugEnabled()) {
 						_log.debug(content);

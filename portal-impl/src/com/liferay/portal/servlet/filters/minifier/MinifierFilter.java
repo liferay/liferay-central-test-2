@@ -337,69 +337,66 @@ public class MinifierFilter extends BasePortalFilter {
 
 			return cacheDataFile;
 		}
-		else {
-			String minifiedContent = null;
 
-			if (realPath.endsWith(_CSS_EXTENSION)) {
-				if (_log.isInfoEnabled()) {
-					_log.info("Minifying CSS " + file);
-				}
+		String minifiedContent = null;
 
-				minifiedContent = minifyCss(request, response, file);
-
-				response.setContentType(ContentTypes.TEXT_CSS);
-
-				FileUtil.write(cacheContentTypeFile, ContentTypes.TEXT_CSS);
-			}
-			else if (realPath.endsWith(_JAVASCRIPT_EXTENSION)) {
-				if (_log.isInfoEnabled()) {
-					_log.info("Minifying JavaScript " + file);
-				}
-
-				minifiedContent = minifyJavaScript(file);
-
-				response.setContentType(ContentTypes.TEXT_JAVASCRIPT);
-
-				FileUtil.write(
-					cacheContentTypeFile, ContentTypes.TEXT_JAVASCRIPT);
-			}
-			else if (realPath.endsWith(_JSP_EXTENSION)) {
-				if (_log.isInfoEnabled()) {
-					_log.info("Minifying JSP " + file);
-				}
-
-				StringServletResponse stringResponse =
-					new StringServletResponse(response);
-
-				processFilter(
-					MinifierFilter.class, request, stringResponse, filterChain);
-
-				CacheResponseUtil.setHeaders(
-					response, stringResponse.getHeaders());
-
-				response.setContentType(stringResponse.getContentType());
-
-				minifiedContent = stringResponse.getString();
-
-				if (minifierType.equals("css")) {
-					minifiedContent = minifyCss(
-						request, response, realPath, minifiedContent);
-				}
-				else if (minifierType.equals("js")) {
-					minifiedContent = minifyJavaScript(minifiedContent);
-				}
-
-				FileUtil.write(
-					cacheContentTypeFile, stringResponse.getContentType());
-			}
-			else {
-				return null;
+		if (realPath.endsWith(_CSS_EXTENSION)) {
+			if (_log.isInfoEnabled()) {
+				_log.info("Minifying CSS " + file);
 			}
 
-			FileUtil.write(cacheDataFile, minifiedContent);
+			minifiedContent = minifyCss(request, response, file);
 
-			return minifiedContent;
+			response.setContentType(ContentTypes.TEXT_CSS);
+
+			FileUtil.write(cacheContentTypeFile, ContentTypes.TEXT_CSS);
 		}
+		else if (realPath.endsWith(_JAVASCRIPT_EXTENSION)) {
+			if (_log.isInfoEnabled()) {
+				_log.info("Minifying JavaScript " + file);
+			}
+
+			minifiedContent = minifyJavaScript(file);
+
+			response.setContentType(ContentTypes.TEXT_JAVASCRIPT);
+
+			FileUtil.write(cacheContentTypeFile, ContentTypes.TEXT_JAVASCRIPT);
+		}
+		else if (realPath.endsWith(_JSP_EXTENSION)) {
+			if (_log.isInfoEnabled()) {
+				_log.info("Minifying JSP " + file);
+			}
+
+			StringServletResponse stringResponse = new StringServletResponse(
+				response);
+
+			processFilter(
+				MinifierFilter.class, request, stringResponse, filterChain);
+
+			CacheResponseUtil.setHeaders(response, stringResponse.getHeaders());
+
+			response.setContentType(stringResponse.getContentType());
+
+			minifiedContent = stringResponse.getString();
+
+			if (minifierType.equals("css")) {
+				minifiedContent = minifyCss(
+					request, response, realPath, minifiedContent);
+			}
+			else if (minifierType.equals("js")) {
+				minifiedContent = minifyJavaScript(minifiedContent);
+			}
+
+			FileUtil.write(
+				cacheContentTypeFile, stringResponse.getContentType());
+		}
+		else {
+			return null;
+		}
+
+		FileUtil.write(cacheDataFile, minifiedContent);
+
+		return minifiedContent;
 	}
 
 	protected String minifyCss(
@@ -421,14 +418,13 @@ public class MinifierFilter extends BasePortalFilter {
 			content = DynamicCSSUtil.parseSass(cssRealPath, content);
 		}
 		catch (Exception e) {
-			_log.error("Error on " + cssRealPath, e);
+			_log.error("Unable to parse SASS on CSS " + cssRealPath, e);
 
 			if (_log.isDebugEnabled()) {
 				_log.debug(content);
 			}
 
-			response.setStatus(
-				HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 		}
 
 		String browserId = ParamUtil.getString(request, "browserId");
