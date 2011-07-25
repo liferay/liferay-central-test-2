@@ -28,21 +28,17 @@ public class CSVUtil {
 			return null;
 		}
 
-		if ((s.indexOf(StringPool.COMMA) < 0) &&
-			(s.indexOf(StringPool.QUOTE) < 0) &&
-			(s.indexOf(StringPool.NEW_LINE) < 0) &&
-			(s.indexOf(StringPool.RETURN) < 0)) {
+		if ((s.indexOf(CharPool.COMMA) < 0) &&
+			(s.indexOf(CharPool.QUOTE) < 0) &&
+			(s.indexOf(CharPool.NEW_LINE) < 0) &&
+			(s.indexOf(CharPool.RETURN) < 0)) {
+
 			return s;
 		}
 
-		StringBundler sb = new StringBundler(3);
+		s = StringUtil.replace(s, StringPool.QUOTE, StringPool.DOUBLE_QUOTE);
 
-		sb.append(StringPool.QUOTE);
-		sb.append(
-			StringUtil.replace(s, StringPool.QUOTE, StringPool.DOUBLE_QUOTE));
-		sb.append(StringPool.QUOTE);
-
-		return sb.toString();
+		return StringPool.QUOTE.concat(s.concat(StringPool.QUOTE));
 	}
 
 }
