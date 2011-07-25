@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.jsonwebservice.JSONWebServiceActionsManager;
 import com.liferay.portal.kernel.jsonwebservice.JSONWebServiceMode;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.util.PortalUtil;
@@ -89,7 +90,6 @@ public class JSONWebServiceConfigurator extends FindClass {
 
 			File portalImplJarFile = new File(
 				PortalUtil.getPortalLibDir(), "portal-impl.jar");
-
 			File portalServiceJarFile = new File(
 				PortalUtil.getGlobalLibDir(), "portal-service.jar");
 
@@ -98,7 +98,6 @@ public class JSONWebServiceConfigurator extends FindClass {
 
 				classPathFiles[0] = portalImplJarFile;
 				classPathFiles[1] = portalServiceJarFile;
-
 			}
 			else {
 				classPathFiles = ClassLoaderUtil.getDefaultClasspath(
@@ -150,8 +149,8 @@ public class JSONWebServiceConfigurator extends FindClass {
 	protected void onEntry(FindClass.EntryData entryData) throws Exception {
 		String className = entryData.getName();
 
-		if (className.endsWith("ServiceImpl")
-			|| className.endsWith("Service")) {
+		if (className.endsWith("Service") ||
+			className.endsWith("ServiceImpl")) {
 
 			if (_checkBytecodeSignature) {
 				InputStream inputStream = entryData.openInputStream();
@@ -168,29 +167,30 @@ public class JSONWebServiceConfigurator extends FindClass {
 	}
 
 	private boolean _hasAnnotatedServiceImpl(String className) {
-
-		int lastDotNdx = className.lastIndexOf('.');
-
 		StringBundler implClassName = new StringBundler(4);
 
-		implClassName.append(className.substring(0, lastDotNdx));
+		int pos = className.lastIndexOf(CharPool.PERIOD);
+
+		implClassName.append(className.substring(0, pos));
 		implClassName.append(".impl");
-		implClassName.append(className.substring(lastDotNdx));
+		implClassName.append(className.substring(pos));
 		implClassName.append("Impl");
 
-		Class implClass = null;
+		Class<?> implClass = null;
 
 		try {
 			implClass = _classLoader.loadClass(implClassName.toString());
 		}
-		catch (ClassNotFoundException e) {
+		catch (ClassNotFoundException cnfe) {
 			return false;
 		}
 
-		boolean hasClassLevelAnnotation =
-			implClass.getAnnotation(JSONWebService.class) != null;
-
-		return hasClassLevelAnnotation;
+		if (implClass.getAnnotation(JSONWebService.class) != null) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	private boolean _isJSONWebServiceClass(Class<?> clazz) {
@@ -239,7 +239,7 @@ public class JSONWebServiceConfigurator extends FindClass {
 		if (!_isJSONWebServiceClass(actionClass)) {
 			return;
 		}
-		
+
 		if (actionClass.isInterface() && _hasAnnotatedServiceImpl(className)) {
 			return;
 		}
