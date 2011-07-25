@@ -107,7 +107,6 @@ public class HeaderTag extends IncludeTag {
 	private boolean _escapeXml = true;
 	private boolean _localizeTitle = true;
 	private boolean _showBackURL = true;
-	private boolean _localizeTitle = true;
 	private String _title;
 
 }

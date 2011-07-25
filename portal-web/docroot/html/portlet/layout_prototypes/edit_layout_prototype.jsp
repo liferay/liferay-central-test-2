@@ -43,8 +43,8 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 
 <liferay-ui:header
 	backURL="<%= backURL %>"
-	localizeTitle="<%= (layoutPrototype.isNew()) ? true : false %>"
-	title='<%= (layoutPrototype.isNew()) ? "new-page-template" : layoutPrototype.getName(locale) %>'
+	localizeTitle="<%= layoutPrototype.isNew() %>"
+	title='<%= layoutPrototype.isNew() ? "new-page-template" : layoutPrototype.getName(locale) %>'
 />
 
 <aui:form method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveLayoutPrototype();" %>'>

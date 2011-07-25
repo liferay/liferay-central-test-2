@@ -46,9 +46,8 @@ String script = BeanParamUtil.getString(structure, request, "xsd");
 	<liferay-ui:error exception="<%= StructureXsdException.class %>" message="please-enter-a-valid-xsd" />
 
 	<%
-	String title = "new-structure";
-
 	boolean localizeTitle = true;
+	String title = "new-structure";
 
 	if (structure != null) {
 		localizeTitle = false;
