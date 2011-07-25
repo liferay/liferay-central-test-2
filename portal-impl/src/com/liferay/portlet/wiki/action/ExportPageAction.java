@@ -121,6 +121,7 @@ public class ExportPageAction extends PortletAction {
 				!host.startsWith(_LOCALHOST)) {
 
 				StringBundler sb = new StringBundler(3);
+
 				sb.append("Conversion using a remote OpenOffice instance is ");
 				sb.append("not fully supported. Please use a local instance ");
 				sb.append("to prevent any limitations and problems.");
