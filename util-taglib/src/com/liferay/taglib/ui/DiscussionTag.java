@@ -130,7 +130,7 @@ public class DiscussionTag extends IncludeTag {
 	private long _classPK;
 	private String _formAction;
 	private String _formName = "fm";
-	private boolean _hideControls = false;
+	private boolean _hideControls;
 	private String _permissionClassName;
 	private long _permissionClassPK;
 	private boolean _ratingsEnabled = true;
