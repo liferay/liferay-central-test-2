@@ -30,28 +30,7 @@ import javax.servlet.http.HttpServletRequest;
 public class CookieUtil {
 
 	public static String get(HttpServletRequest request, String name) {
-		Map<String, Cookie> cookieMap =
-			(Map<String, Cookie>)request.getAttribute(_COOKIE_MAP);
-
-		if (cookieMap == null) {
-			Cookie[] cookies = request.getCookies();
-
-			if (cookies == null) {
-				cookieMap = Collections.emptyMap();
-			}
-			else {
-				cookieMap = new HashMap<String, Cookie>(cookies.length * 4 / 3);
-
-				for (Cookie cookie : cookies) {
-					String cookieName =
-						GetterUtil.getString(cookie.getName()).toUpperCase();
-
-					cookieMap.put(cookieName, cookie);
-				}
-			}
-
-			request.setAttribute(_COOKIE_MAP, cookieMap);
-		}
+		Map<String, Cookie> cookieMap = _getCookieMap(request);
 
 		Cookie cookie = cookieMap.get(name.toUpperCase());
 
@@ -63,6 +42,38 @@ public class CookieUtil {
 		}
 	}
 
-	private static final String _COOKIE_MAP = "_COOKIE_MAP";
+	private static Map<String, Cookie> _getCookieMap(
+		HttpServletRequest request) {
+
+		Map<String, Cookie> cookieMap =
+			(Map<String, Cookie>)request.getAttribute(
+				CookieUtil.class.getName());
+
+		if (cookieMap != null) {
+			return cookieMap;
+		}
+
+		Cookie[] cookies = request.getCookies();
+
+		if (cookies == null) {
+			cookieMap = Collections.emptyMap();
+		}
+		else {
+			cookieMap = new HashMap<String, Cookie>(cookies.length * 4 / 3);
+
+			for (Cookie cookie : cookies) {
+				String cookieName = GetterUtil.getString(
+					cookie.getName());
+
+				cookieName = cookieName.toUpperCase();
+
+				cookieMap.put(cookieName, cookie);
+			}
+		}
+
+		request.setAttribute(CookieUtil.class.getName(), cookieMap);
+
+		return cookieMap;
+	}
 
 }
