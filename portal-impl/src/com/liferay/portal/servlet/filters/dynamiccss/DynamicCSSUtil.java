@@ -58,6 +58,10 @@ public class DynamicCSSUtil {
 	public static String parseSass(String cssRealPath, String content)
 		throws ScriptingException {
 
+		if (!DynamicCSSFilter.ENABLED) {
+			return content;
+		}
+
 		Map<String, Object> inputObjects = new HashMap<String, Object>();
 
 		inputObjects.put("content", content);

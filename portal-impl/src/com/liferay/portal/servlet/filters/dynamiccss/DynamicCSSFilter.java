@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.servlet.filters.BasePortalFilter;
+import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.SystemProperties;
 import com.liferay.util.servlet.ServletResponseUtil;
 import com.liferay.util.servlet.filters.CacheResponseUtil;
@@ -45,6 +46,9 @@ import javax.servlet.http.HttpServletResponse;
  * @author Raymond Augé
  */
 public class DynamicCSSFilter extends BasePortalFilter {
+
+	public static final boolean ENABLED = GetterUtil.getBoolean(
+		PropsUtil.get(DynamicCSSFilter.class.getName()));
 
 	@Override
 	public void init(FilterConfig filterConfig) {
