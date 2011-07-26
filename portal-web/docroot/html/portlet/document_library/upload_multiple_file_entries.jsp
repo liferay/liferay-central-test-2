@@ -50,14 +50,9 @@ long folderId = BeanParamUtil.getLong(fileEntry, request, "folderId");
 	</div>
 
 	<%
-	Date expirationDate = new Date(System.currentTimeMillis() + PropsValues.SESSION_TIMEOUT * 60 * 1000);
+	Date expirationDate = new Date(System.currentTimeMillis() + PropsValues.SESSION_TIMEOUT * Time.MINUTE);
 
-	ServiceContext serviceContext = new ServiceContext();
-
-	Ticket ticket = TicketLocalServiceUtil.addTicket(
-		user.getCompanyId(), User.class.getName(), user.getUserId(),
-		TicketConstants.TYPE_IMPERSONATE, null, expirationDate,
-		serviceContext);	
+	Ticket ticket = TicketLocalServiceUtil.addTicket(user.getCompanyId(), User.class.getName(), user.getUserId(), TicketConstants.TYPE_IMPERSONATE, null, expirationDate, new ServiceContext());
 	%>
 
 	<aui:script use="liferay-upload">

@@ -71,6 +71,7 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.QName;
@@ -3699,48 +3700,11 @@ public class PortalImpl implements Portal {
 			strutsAction.equals("/wiki_admin/edit_page_attachment") ||
 			actionName.equals("addFile")) {
 
-			String token = ParamUtil.getString(request, "ticket");
-			String doAsUserIdString = ParamUtil.getString(
-				request, "doAsUserId");
-
 			try {
-				Ticket ticket = TicketLocalServiceUtil.getTicket(token);
-
-				long doAsUserId = 0;
-
-				try {
-					Company company = getCompany(request);
-
-					if (Validator.isNotNull(doAsUserIdString)) {
-						doAsUserId = GetterUtil.getLong(
-							Encryptor.decrypt(
-								company.getKeyObj(), doAsUserIdString));
-					}
-				}
-				catch (Exception e) {
-				}
-
-				if (ticket.getClassName().equals(User.class.getName()) &&
-					ticket.getClassPK() == doAsUserId &&
-					ticket.getType() == TicketConstants.TYPE_IMPERSONATE) {
-
-					if (!ticket.isExpired()) {
-						alwaysAllowDoAsUser = true;
-
-						Date expirationDate = new Date(
-							System.currentTimeMillis() +
-							PropsValues.SESSION_TIMEOUT * 60 * 1000);
-
-						ticket.setExpirationDate(expirationDate);
-
-						TicketLocalServiceUtil.updateTicket(ticket, false);
-					}
-					else {
-						TicketLocalServiceUtil.deleteTicket(ticket);
-					}
-				}
+				alwaysAllowDoAsUser = isAlwaysAllowDoAsUser(request);
 			}
 			catch (Exception e) {
+				_log.error(e, e);
 			}
 		}
 
@@ -5190,6 +5154,59 @@ public class PortalImpl implements Portal {
 
 			return 0;
 		}
+	}
+
+	protected boolean isAlwaysAllowDoAsUser(HttpServletRequest request)
+		throws Exception {
+
+		String token = ParamUtil.getString(request, "ticket");
+
+		Ticket ticket = TicketLocalServiceUtil.getTicket(token);
+
+		String className = ticket.getClassName();
+
+		if (!className.equals(User.class.getName())) {
+			return false;
+		}
+
+		long doAsUserId = 0;
+
+		try {
+			Company company = getCompany(request);
+
+			String doAsUserIdString = ParamUtil.getString(
+				request, "doAsUserId");
+
+			if (Validator.isNotNull(doAsUserIdString)) {
+				doAsUserId = GetterUtil.getLong(
+					Encryptor.decrypt(company.getKeyObj(), doAsUserIdString));
+			}
+		}
+		catch (Exception e) {
+			return false;
+		}
+
+		if ((ticket.getClassPK() != doAsUserId) ||
+			(ticket.getType() != TicketConstants.TYPE_IMPERSONATE)) {
+
+			return false;
+		}
+
+		if (ticket.isExpired()) {
+			TicketLocalServiceUtil.deleteTicket(ticket);
+
+			return false;
+		}
+
+		Date expirationDate = new Date(
+			System.currentTimeMillis() +
+				PropsValues.SESSION_TIMEOUT * Time.MINUTE);
+
+		ticket.setExpirationDate(expirationDate);
+
+		TicketLocalServiceUtil.updateTicket(ticket, false);
+
+		return true;
 	}
 
 	protected void notifyPortalPortEventListeners(int portalPort) {
