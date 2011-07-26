@@ -72,10 +72,10 @@ public class PageIteratorTag extends IncludeTag {
 	}
 
 	public void setUrl(String url) {
-		String[] array = PortalUtil.stripURLAnchor(url, StringPool.POUND);
+		String[] urlArray = PortalUtil.stripURLAnchor(url, StringPool.POUND);
 
-		_url = array[0];
-		_urlAnchor = array[1];
+		_url = urlArray[0];
+		_urlAnchor = urlArray[1];
 
 		if (_url.indexOf(CharPool.QUESTION) == -1) {
 			_url += "?";

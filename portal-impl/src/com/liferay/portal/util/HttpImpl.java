@@ -178,11 +178,11 @@ public class HttpImpl implements Http {
 			return null;
 		}
 
-		String array[] = PortalUtil.stripURLAnchor(url, StringPool.POUND);
+		String[] urlArray = PortalUtil.stripURLAnchor(url, StringPool.POUND);
 
-		url = array[0];
+		url = urlArray[0];
 
-		String anchor = array[1];
+		String anchor = urlArray[1];
 
 		StringBundler sb = new StringBundler(7);
 
