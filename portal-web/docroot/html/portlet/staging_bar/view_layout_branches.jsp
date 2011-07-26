@@ -22,8 +22,6 @@ long layoutSetBranchId = ParamUtil.getLong(request, "layoutSetBranchId");
 List<LayoutRevision> layoutRevisions = LayoutRevisionLocalServiceUtil.getChildLayoutRevisions(layoutSetBranchId, LayoutRevisionConstants.DEFAULT_PARENT_LAYOUT_REVISION_ID, plid, QueryUtil.ALL_POS, QueryUtil.ALL_POS, new LayoutRevisionCreateDateComparator(true));
 
 long layoutRevisionId = StagingUtil.getRecentLayoutRevisionId(request, layoutSetBranchId, plid);
-
-LayoutBranch layoutBranch = null;
 %>
 
 <div class="portlet-msg-info">
@@ -61,14 +59,16 @@ LayoutBranch layoutBranch = null;
 			modelVar="layoutRevision"
 		>
 
+			<%
+			LayoutBranch layoutBranch = layoutRevision.getLayoutBranch();
+			%>
+
 			<liferay-ui:search-container-column-text
 				buffer="buffer"
 				name="name"
 			>
 
 				<%
-				layoutBranch = layoutRevision.getLayoutBranch();
-
 				String layoutBranchName = layoutBranch.getName();
 
 				if (layoutRevision.isHead()) {

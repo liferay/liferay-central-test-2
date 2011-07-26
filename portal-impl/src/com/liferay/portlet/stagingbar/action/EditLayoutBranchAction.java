@@ -14,33 +14,26 @@
 
 package com.liferay.portlet.stagingbar.action;
 
-import com.liferay.portal.LayoutSetBranchNameException;
 import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.model.LayoutBranchConstants;
-import com.liferay.portal.model.LayoutSetBranchConstants;
 import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.service.LayoutBranchLocalServiceUtil;
 import com.liferay.portal.service.LayoutBranchServiceUtil;
-import com.liferay.portal.service.LayoutRevisionServiceUtil;
-import com.liferay.portal.service.LayoutSetBranchServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
-import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.layoutsadmin.action.EditLayoutsAction;
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
+
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;
+import org.apache.struts.action.ActionMapping;
 
 /**
  * @author Brian Wing Shun Chan
@@ -75,7 +68,7 @@ public class EditLayoutBranchAction extends EditLayoutsAction {
 		}
 		catch (Exception e) {
 			if (e instanceof PrincipalException ||
-					 e instanceof SystemException) {
+				e instanceof SystemException) {
 
 				SessionErrors.add(actionRequest, e.getClass().getName());
 

@@ -22,10 +22,8 @@ import com.liferay.portal.model.LayoutRevision;
 import com.liferay.portal.model.LayoutRevisionConstants;
 import com.liferay.portal.model.LayoutSetBranch;
 import com.liferay.portal.model.User;
-import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.base.LayoutBranchLocalServiceBaseImpl;
-import com.liferay.portal.service.permission.LayoutBranchPermissionUtil;
 
 import java.util.List;
 
@@ -116,7 +114,7 @@ public class LayoutBranchLocalServiceImpl
 	public List<LayoutBranch> getLayoutBranches(
 			long layoutSetBranchId, long plid, int start, int end,
 			OrderByComparator orderByComparator)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return layoutBranchPersistence.findByL_P(
 			layoutSetBranchId, plid, start, end, orderByComparator);
