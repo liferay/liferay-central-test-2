@@ -3220,7 +3220,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		String verifyEmailAddressURL =
 			serviceContext.getPortalURL() + serviceContext.getPathMain() +
-				"/portal/verify_email_address?key=" + ticket.getKey();
+				"/portal/verify_email_address?ticketKey=" + ticket.getKey();
 
 		Layout layout = layoutLocalService.getLayout(serviceContext.getPlid());
 
@@ -4614,10 +4614,10 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		return user;
 	}
 
-	public void verifyEmailAddress(String key)
+	public void verifyEmailAddress(String ticketKey)
 		throws PortalException, SystemException {
 
-		Ticket ticket = ticketLocalService.getTicket(key);
+		Ticket ticket = ticketLocalService.getTicket(ticketKey);
 
 		if (ticket.isExpired() ||
 			(ticket.getType() != TicketConstants.TYPE_EMAIL_ADDRESS)) {
@@ -4965,7 +4965,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			passwordResetURL =
 				serviceContext.getPortalURL() + serviceContext.getPathMain() +
 					"/portal/update_password?p_l_id="+
-						serviceContext.getPlid() + "&ticket=" + ticket.getKey();
+						serviceContext.getPlid() +
+							"&ticketKey=" + ticket.getKey();
 		}
 		else {
 			if (!PwdEncryptor.PASSWORDS_ENCRYPTION_ALGORITHM.equals(

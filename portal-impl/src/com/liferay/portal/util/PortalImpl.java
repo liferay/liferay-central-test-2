@@ -5159,9 +5159,17 @@ public class PortalImpl implements Portal {
 	protected boolean isAlwaysAllowDoAsUser(HttpServletRequest request)
 		throws Exception {
 
-		String token = ParamUtil.getString(request, "ticket");
+		String ticketKey = ParamUtil.getString(request, "ticketKey");
 
-		Ticket ticket = TicketLocalServiceUtil.getTicket(token);
+		if (Validator.isNull(ticketKey)) {
+			return false;
+		}
+
+		Ticket ticket = TicketLocalServiceUtil.fetchTicket(ticketKey);
+
+		if (ticket == null) {
+			return false;
+		}
 
 		String className = ticket.getClassName();
 

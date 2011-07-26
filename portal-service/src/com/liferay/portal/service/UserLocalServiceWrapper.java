@@ -2726,10 +2726,10 @@ public class UserLocalServiceWrapper implements UserLocalService {
 			serviceContext);
 	}
 
-	public void verifyEmailAddress(java.lang.String key)
+	public void verifyEmailAddress(java.lang.String ticketKey)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		_userLocalService.verifyEmailAddress(key);
+		_userLocalService.verifyEmailAddress(ticketKey);
 	}
 
 	public UserLocalService getWrappedUserLocalService() {

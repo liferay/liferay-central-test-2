@@ -2760,10 +2760,10 @@ public class UserLocalServiceUtil {
 			roleIds, userGroupRoles, userGroupIds, serviceContext);
 	}
 
-	public static void verifyEmailAddress(java.lang.String key)
+	public static void verifyEmailAddress(java.lang.String ticketKey)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		getService().verifyEmailAddress(key);
+		getService().verifyEmailAddress(ticketKey);
 	}
 
 	public static UserLocalService getService() {
