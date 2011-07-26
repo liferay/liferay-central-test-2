@@ -71,7 +71,7 @@ public class JSONWebServiceActionParameters {
 	}
 
 	private void _addDefaultParameters() {
-		_parameters.put("serviceContext", Void.TYPE);	// lazy marker
+		_parameters.put("serviceContext", Void.TYPE);
 	}
 
 	private void _collectDefaultsFromRequestAttributes(

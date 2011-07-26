@@ -98,10 +98,8 @@ public class JSONWebServiceActionImpl implements JSONWebServiceAction {
 				Class<?> parameterType = parameterTypes[i];
 
 				if (value == Void.TYPE) {
-
 					parameterValue = _createDefaultParameterValue(
 						parameterName, parameterType);
-
 				}
 				else {
 					parameterValue = ReflectUtil.castType(value, parameterType);
