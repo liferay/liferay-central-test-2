@@ -432,7 +432,7 @@ public class CacheFilter extends BasePortalFilter {
 				byteBufferResponse.getHeader(HttpHeaders.CACHE_CONTROL));
 
 			if ((byteBufferResponse.getStatus() == HttpServletResponse.SC_OK) &&
-				!cacheControl.contains("no-cache") &&
+				!cacheControl.contains(HttpHeaders.PRAGMA_NO_CACHE_VALUE) &&
 				isCacheableRequest(request) &&
 				isCacheableResponse(byteBufferResponse)) {
 
