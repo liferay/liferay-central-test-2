@@ -117,7 +117,6 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		User user = userPersistence.findByPrimaryKey(userId);
 		WikiNode node = wikiNodePersistence.findByPrimaryKey(nodeId);
-
 		Date now = new Date();
 
 		long pageId = counterLocalService.increment();
