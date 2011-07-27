@@ -195,6 +195,7 @@ public class SQLTransformer {
 		else if (_vendorSQLServer || _vendorSybase) {
 			newSQL = _replaceMod(newSQL);
 		}
+
 		if (_log.isDebugEnabled()) {
 			_log.debug("Original SQL " + sql);
 			_log.debug("Modified SQL " + newSQL);
@@ -204,43 +205,47 @@ public class SQLTransformer {
 	}
 
 	private String _transformFromHqlToJpql(String sql) {
-		String newSQL = _SQL_CACHE.get(sql);
+		String newSQL = _transformedSqls.get(sql);
 
-		if (newSQL == null) {
-			newSQL = _transform(sql);
-
-			newSQL = _transformPositionalParams(newSQL);
-
-			newSQL = StringUtil.replace(
-				newSQL, _HQL_NOT_EQUALS, _JPQL_NOT_EQUALS);
-			newSQL = StringUtil.replace(
-				newSQL, _HQL_COMPOSITE_ID_MARKER, _JPQL_DOT_SEPARTOR);
-
-			_SQL_CACHE.put(sql, newSQL);
+		if (newSQL != null) {
+			return newSQL;
 		}
+
+		newSQL = _transform(sql);
+
+		newSQL = _transformPositionalParams(newSQL);
+
+		newSQL = StringUtil.replace(
+			newSQL, _HQL_NOT_EQUALS, _JPQL_NOT_EQUALS);
+		newSQL = StringUtil.replace(
+			newSQL, _HQL_COMPOSITE_ID_MARKER, _JPQL_DOT_SEPARTOR);
+
+		_transformedSqls.put(sql, newSQL);
 
 		return newSQL;
 	}
 
 	private String _transformFromJpqlToHql(String sql) {
-		String newSQL = _SQL_CACHE.get(sql);
+		String newSQL = _transformedSqls.get(sql);
 
-		if (newSQL == null) {
-			newSQL = _transform(sql);
-
-			Matcher matcher = _jpqlCountPattern.matcher(newSQL);
-
-			if (matcher.find()) {
-				String countExpression = matcher.group(1);
-				String entityAlias = matcher.group(3);
-
-				if (entityAlias.equals(countExpression)) {
-					newSQL = matcher.replaceFirst(_HQL_COUNT_SQL);
-				}
-			}
-
-			_SQL_CACHE.put(sql, newSQL);
+		if (newSQL != null) {
+			return newSQL;
 		}
+
+		newSQL = _transform(sql);
+
+		Matcher matcher = _jpqlCountPattern.matcher(newSQL);
+
+		if (matcher.find()) {
+			String countExpression = matcher.group(1);
+			String entityAlias = matcher.group(3);
+
+			if (entityAlias.equals(countExpression)) {
+				newSQL = matcher.replaceFirst(_HQL_COUNT_SQL);
+			}
+		}
+
+		_transformedSqls.put(sql, newSQL);
 
 		return newSQL;
 	}
@@ -283,9 +288,6 @@ public class SQLTransformer {
 
 	private static final String _LOWER_OPEN = "lower(";
 
-	private static final Map<String, String> _SQL_CACHE =
-		new ConcurrentHashMap<String, String>();
-
 	private static Log _log = LogFactoryUtil.getLog(SQLTransformer.class);
 
 	private static SQLTransformer _instance = new SQLTransformer();
@@ -300,6 +302,8 @@ public class SQLTransformer {
 		"MOD\\((.+?),(.+?)\\)", Pattern.CASE_INSENSITIVE);
 	private static Pattern _negativeComparisonPattern = Pattern.compile(
 		"(!=)?( -([0-9]+)?)", Pattern.CASE_INSENSITIVE);
+	private static Map<String, String> _transformedSqls =
+		new ConcurrentHashMap<String, String>();
 	private static Pattern _unionAllPattern = Pattern.compile(
 		"SELECT \\* FROM(.*)TEMP_TABLE(.*)", Pattern.CASE_INSENSITIVE);
 
