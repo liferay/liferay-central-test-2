@@ -128,9 +128,7 @@ public class JSONWebServiceActionParameters {
 			String value = null;
 
 			if (name.startsWith(StringPool.DASH)) {
-
 				name = name.substring(1);
-
 			}
 			else {
 				i++;
@@ -188,7 +186,6 @@ public class JSONWebServiceActionParameters {
 		public Object put(String key, Object value) {
 
 			if (key.startsWith(StringPool.DASH)) {
-
 				key = key.substring(1);
 
 				value = null;
@@ -196,6 +193,7 @@ public class JSONWebServiceActionParameters {
 
 			return super.put(key, value);
 		}
+
 	};
 
 }
