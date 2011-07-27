@@ -268,6 +268,7 @@ else if (dlFileEntryType != null) {
 			<aui:input name="description" />
 
 			<c:if test="<%= (folder != null) && (folder.getModel() instanceof DLFolder) %>">
+
 				<%
 				List<DLFileEntryType> dlFileEntryTypes = DLFileEntryTypeLocalServiceUtil.getFolderFileEntryTypes(scopeGroupId, folderId, true);
 				%>
