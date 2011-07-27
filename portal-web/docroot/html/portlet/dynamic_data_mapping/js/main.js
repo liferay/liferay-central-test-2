@@ -774,6 +774,6 @@ AUI().add(
 	},
 	'',
 	{
-		requires: ['aui-form-builder', 'aui-form-validator', 'liferay-translation-manager', 'aui-text']
+		requires: ['aui-form-builder', 'aui-form-validator', 'aui-text', 'liferay-translation-manager']
 	}
 );
