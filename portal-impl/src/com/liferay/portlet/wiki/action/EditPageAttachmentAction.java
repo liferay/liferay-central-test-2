@@ -14,41 +14,29 @@
 
 package com.liferay.portlet.wiki.action;
 
-import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
-import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.Constants;
-import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.KeyValuePair;
 import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.PropsKeys;
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.TempFileUtil;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.ActionConstants;
-import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.documentlibrary.DuplicateFileException;
-import com.liferay.portlet.documentlibrary.FileExtensionException;
-import com.liferay.portlet.documentlibrary.FileNameException;
-import com.liferay.portlet.documentlibrary.FileSizeException;
+import com.liferay.portlet.documentlibrary.action.EditFileEntryAction;
 import com.liferay.portlet.wiki.NoSuchNodeException;
 import com.liferay.portlet.wiki.NoSuchPageException;
 import com.liferay.portlet.wiki.service.WikiPageServiceUtil;
-import com.liferay.util.servlet.ServletResponseUtil;
 
 import java.io.File;
-import java.io.InputStream;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,9 +47,6 @@ import javax.portlet.PortletConfig;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -69,7 +54,7 @@ import org.apache.struts.action.ActionMapping;
 /**
  * @author Jorge Ferrer
  */
-public class EditPageAttachmentAction extends PortletAction {
+public class EditPageAttachmentAction extends EditFileEntryAction {
 
 	@Override
 	public void processAction(
@@ -84,7 +69,7 @@ public class EditPageAttachmentAction extends PortletAction {
 				addAttachment(actionRequest);
 			}
 			else if (cmd.equals(Constants.ADD_MULTIPLE)) {
-				addMultipleAttachments(actionRequest, actionResponse);
+				addMultipleFileEntries(actionRequest, actionResponse);
 			}
 			else if (cmd.equals(Constants.ADD_TEMP)) {
 				addTempAttachment(actionRequest);
@@ -199,8 +184,10 @@ public class EditPageAttachmentAction extends PortletAction {
 		WikiPageServiceUtil.addPageAttachments(nodeId, title, files);
 	}
 
-	protected void addMultipleAttachments(
-			ActionRequest actionRequest, ActionResponse actionResponse)
+	protected void addMultipleFileEntries(
+			ActionRequest actionRequest, ActionResponse actionResponse,
+			String selectedFileName, List<String> validFileNames,
+			List<KeyValuePair> invalidFileNameKVPs)
 		throws Exception {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
@@ -209,105 +196,37 @@ public class EditPageAttachmentAction extends PortletAction {
 		long nodeId = ParamUtil.getLong(actionRequest, "nodeId");
 		String title = ParamUtil.getString(actionRequest, "title");
 
-		String[] selectedFileNames = ParamUtil.getParameterValues(
-			actionRequest, "selectedFileName");
+		File file = null;
 
-		List<String> validUpdateFileEntries = new ArrayList<String>();
-		List<KeyValuePair> invalidUpdateFileEntries =
-			new ArrayList<KeyValuePair>();
+		try {
+			file = TempFileUtil.getTempFile(
+				themeDisplay.getUserId(), selectedFileName, _TEMP_FOLDER_NAME);
 
-		for (String selectedFileName : selectedFileNames) {
-			File file = TempFileUtil.getTempFile(
-				themeDisplay.getUserId(), selectedFileName, _TEMP_PATHNAME);
-
-			if (file != null) {
-				byte[] bytes = FileUtil.getBytes(file);
-
-				if ((bytes != null) && (bytes.length > 0)) {
-					try {
-						WikiPageServiceUtil.addPageAttachment(
-							nodeId, title, selectedFileName, bytes);
-
-						validUpdateFileEntries.add(selectedFileName);
-					}
-					catch (Exception e) {
-						String errorMessage = "an-unexpected-error-occurred-" +
-							"while-uploading-your-file";
-
-					if (e instanceof DuplicateFileException) {
-						errorMessage = LanguageUtil.get(
-							themeDisplay.getLocale(),
-							"the-folder-you-selected-already-has-an-entry-" +
-								"with-this-name.-please-select-a-different-" +
-								"folder");
-					}
-					else if (e instanceof FileExtensionException) {
-						errorMessage = LanguageUtil.format(
-							themeDisplay.getLocale(),
-							"please-enter-a-file-with-a-valid-extension-x",
-							StringUtil.merge(
-								PrefsPropsUtil.getStringArray(
-									PropsKeys.DL_FILE_EXTENSIONS,
-									StringPool.COMMA)));
-					}
-					else if (e instanceof FileNameException) {
-						errorMessage = LanguageUtil.get(
-							themeDisplay.getLocale(),
-							"please-enter-a-file-with-a-valid-file-name");
-					}
-					else if (e instanceof FileSizeException) {
-						long maxSizeMB = PrefsPropsUtil.getLong(
-							PropsKeys.DL_FILE_MAX_SIZE)	/ 1024 / 1024;
-
-						errorMessage = LanguageUtil.format(
-							themeDisplay.getLocale(),
-							"file-size-is-larger-than-x-megabytes",	maxSizeMB);
-					}
-
-					invalidUpdateFileEntries.add(new KeyValuePair(
-						selectedFileName, errorMessage));
-					}
-					finally {
-						FileUtil.delete(file);
-					}
-				}
+			if (file == null) {
+				return;
 			}
+
+			byte[] bytes = FileUtil.getBytes(file);
+
+			if ((bytes == null) || (bytes.length == 0)) {
+				return;
+			}
+
+			WikiPageServiceUtil.addPageAttachment(
+				nodeId, title, selectedFileName, bytes);
+
+			validFileNames.add(selectedFileName);
 		}
+		catch (Exception e) {
+			String errorMessage = getAddMultipleFileEntriesErrorMessage(
+				themeDisplay, e);
 
-		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
-
-		for (String validUpdateFileEntry : validUpdateFileEntries) {
-			JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
-
-			jsonObject.put("fileName", validUpdateFileEntry);
-			jsonObject.put("added", Boolean.TRUE);
-
-			jsonArray.put(jsonObject);
+			invalidFileNameKVPs.add(
+				new KeyValuePair(selectedFileName, errorMessage));
 		}
-
-		for (KeyValuePair invalidUpdateFileEntry : invalidUpdateFileEntries) {
-			String fileName = invalidUpdateFileEntry.getKey();
-			String errorMessage = invalidUpdateFileEntry.getValue();
-
-			JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
-
-			jsonObject.put("fileName", fileName);
-			jsonObject.put("added", Boolean.FALSE);
-			jsonObject.put("errorMessage", errorMessage);
-
-			jsonArray.put(jsonObject);
+		finally {
+			FileUtil.delete(file);
 		}
-
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			actionRequest);
-		HttpServletResponse response =
-			PortalUtil.getHttpServletResponse(actionResponse);
-		InputStream is = new UnsyncByteArrayInputStream(
-			jsonArray.toString().getBytes());
-		String contentType = ContentTypes.TEXT_JAVASCRIPT;
-
-		ServletResponseUtil.sendFile(
-			request, response, null, is, contentType);
 	}
 
 	protected void addTempAttachment(ActionRequest actionRequest)
@@ -317,12 +236,11 @@ public class EditPageAttachmentAction extends PortletAction {
 			actionRequest);
 
 		long nodeId = ParamUtil.getLong(uploadRequest, "nodeId");
-
 		File file = uploadRequest.getFile("file");
 		String sourceFileName = uploadRequest.getFileName("file");
 
 		WikiPageServiceUtil.addTempPageAttachment(
-			nodeId, sourceFileName, _TEMP_PATHNAME, file);
+			nodeId, sourceFileName, _TEMP_FOLDER_NAME, file);
 	}
 
 	protected void deleteAttachment(ActionRequest actionRequest)
@@ -349,7 +267,7 @@ public class EditPageAttachmentAction extends PortletAction {
 
 		try {
 			WikiPageServiceUtil.deleteTempPageAttachment(
-				nodeId, fileName, _TEMP_PATHNAME);
+				nodeId, fileName, _TEMP_FOLDER_NAME);
 
 			jsonObject.put("deleted", Boolean.TRUE);
 		}
@@ -362,18 +280,10 @@ public class EditPageAttachmentAction extends PortletAction {
 			jsonObject.put("errorMessage", errorMessage);
 		}
 
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			actionRequest);
-		HttpServletResponse response =
-			PortalUtil.getHttpServletResponse(actionResponse);
-		InputStream is = new UnsyncByteArrayInputStream(
-			jsonObject.toString().getBytes());
-		String contentType = ContentTypes.TEXT_JAVASCRIPT;
-
-		ServletResponseUtil.sendFile(
-			request, response, null, is, contentType);
+		writeJSON(actionRequest, actionResponse, jsonObject);
 	}
 
-	private static final String _TEMP_PATHNAME = "document_temp_upload";
+	private static final String _TEMP_FOLDER_NAME =
+		EditPageAttachmentAction.class.getName();
 
 }

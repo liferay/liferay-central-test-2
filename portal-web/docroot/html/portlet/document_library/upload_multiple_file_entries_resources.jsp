@@ -84,7 +84,6 @@ long assetClassPK = 0;
 
 			<div class="document-type-selector">
 				<liferay-ui:icon-menu align="left" direction="down" id="groupSelector" icon='<%= themeDisplay.getPathThemeImages() + "/common/copy.png" %>' message='<%= (fileEntryTypeId > 0) ? HtmlUtil.escape(fileEntryType.getName()) : "basic-document" %>'>
-
 					<liferay-portlet:resourceURL copyCurrentRenderParameters="<%= false %>" var="viewBasicFileEntryTypeURL">
 						<portlet:param name="struts_action" value="/document_library/edit_file_entry" />
 						<portlet:param name="repositoryId" value="<%= String.valueOf(repositoryId) %>" />

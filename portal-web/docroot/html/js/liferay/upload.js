@@ -100,7 +100,7 @@ AUI().add(
 			instance._invalidFileNameText = Liferay.Language.get('please-enter-a-file-with-a-valid-file-name');
 			instance._invalidFileSizeText = Liferay.Language.get('please-enter-a-file-with-a-valid-file-size');
 			instance._noFilesSelectedText = Liferay.Language.get('no-files-selected');
-			instance._pendingFileText = Liferay.Language.get('these-files-have-been-previously-uploaded-but-not-definitively-saved-please-save-or-delete-them-before-they-are-finally-removed');
+			instance._pendingFileText = Liferay.Language.get('these-files-have-been-previously-uploaded-but-not-actually-saved.-please-save-or-delete-them-before-they-are-removed');
 			instance._unexpectedDeleteErrorText = Liferay.Language.get('an-unexpected-error-occurred-while-deleting-the-file');
 			instance._unexpectedUploadErrorText = Liferay.Language.get('an-unexpected-error-occurred-while-uploading-your-file');
 			instance._uploadsCompleteText = Liferay.Language.get('all-files-ready-to-be-saved');

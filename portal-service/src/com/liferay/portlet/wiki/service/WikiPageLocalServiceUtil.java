@@ -405,9 +405,7 @@ public class WikiPageLocalServiceUtil {
 	}
 
 	public static void deleteTempPageAttachment(long userId,
-		java.lang.String fileName, java.lang.String tempFolderName)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		java.lang.String fileName, java.lang.String tempFolderName) {
 		getService().deleteTempPageAttachment(userId, fileName, tempFolderName);
 	}
 
@@ -622,9 +620,7 @@ public class WikiPageLocalServiceUtil {
 	}
 
 	public static java.lang.String[] getTempPageAttachmentNames(long userId,
-		java.lang.String tempFolderName)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		java.lang.String tempFolderName) {
 		return getService().getTempPageAttachmentNames(userId, tempFolderName);
 	}
 
