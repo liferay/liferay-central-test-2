@@ -245,6 +245,7 @@ public class PortletPermissionImpl implements PortletPermission {
 		}
 
 		Group group = layout.getGroup();
+
 		name = PortletConstants.getRootPortletId(portletId);
 		primKey = getPrimaryKey(layout.getPlid(), portletId);
 

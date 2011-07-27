@@ -57,13 +57,15 @@ public class LayoutSetPrototypeLocalServiceImpl
 		layoutSetPrototype.setDescription(description);
 		layoutSetPrototype.setActive(active);
 
-		UnicodeProperties typeSettings =
+		UnicodeProperties settingsProperties =
 			layoutSetPrototype.getSettingsProperties();
 
-		typeSettings.put(
+		settingsProperties.put(
 			"allowModifications", String.valueOf(allowModifications));
-		typeSettings.put(
+		settingsProperties.put(
 			"allowLayoutAdditions", String.valueOf(allowLayoutAddition));
+
+		layoutSetPrototype.setSettingsProperties(settingsProperties);
 
 		layoutSetPrototypePersistence.update(layoutSetPrototype, false);
 
@@ -90,7 +92,7 @@ public class LayoutSetPrototypeLocalServiceImpl
 		layoutLocalService.addLayout(
 			userId, group.getGroupId(), true,
 			LayoutConstants.DEFAULT_PARENT_LAYOUT_ID, "home", null, null,
-			LayoutConstants.TYPE_PORTLET, false, false, "/home",
+			LayoutConstants.TYPE_PORTLET, false, "/home", false,
 			serviceContext);
 
 		return layoutSetPrototype;
@@ -182,13 +184,15 @@ public class LayoutSetPrototypeLocalServiceImpl
 		layoutSetPrototype.setDescription(description);
 		layoutSetPrototype.setActive(active);
 
-		UnicodeProperties typeSettings =
+		UnicodeProperties settingsProperties =
 			layoutSetPrototype.getSettingsProperties();
 
-		typeSettings.put(
+		settingsProperties.put(
 			"allowModifications", String.valueOf(allowModifications));
-		typeSettings.put(
+		settingsProperties.put(
 			"allowLayoutAdditions", String.valueOf(allowLayoutAddition));
+
+		layoutSetPrototype.setSettingsProperties(settingsProperties);
 
 		layoutSetPrototypePersistence.update(layoutSetPrototype, false);
 

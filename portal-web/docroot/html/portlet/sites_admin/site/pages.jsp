@@ -23,9 +23,9 @@ LayoutSetPrototype layoutSetPrototype = (LayoutSetPrototype)request.getAttribute
 List<LayoutSetPrototype> layoutSetPrototypes = LayoutSetPrototypeServiceUtil.search(company.getCompanyId(), Boolean.TRUE, null);
 
 LayoutSet privateLayoutSet = null;
-LayoutSet publicLayoutSet = null;
-
 LayoutSetPrototype privateLayoutSetPrototype = null;
+
+LayoutSet publicLayoutSet = null;
 LayoutSetPrototype publicLayoutSetPrototype = null;
 
 if (group != null) {
@@ -33,10 +33,10 @@ if (group != null) {
 		try {
 			privateLayoutSet = LayoutSetLocalServiceUtil.getLayoutSet(group.getGroupId(), true);
 
-			String uuid = privateLayoutSet.getLayoutSetPrototypeUuid();
+			String layoutSetPrototypeUuid = privateLayoutSet.getLayoutSetPrototypeUuid();
 
-			if (uuid != null) {
-				privateLayoutSetPrototype = LayoutSetPrototypeLocalServiceUtil.getLayoutSetPrototypeByUuid(uuid);
+			if (Validator.isNotNull(layoutSetPrototypeUuid)) {
+				privateLayoutSetPrototype = LayoutSetPrototypeLocalServiceUtil.getLayoutSetPrototypeByUuid(layoutSetPrototypeUuid);
 			}
 		}
 		catch (Exception e) {
@@ -46,10 +46,10 @@ if (group != null) {
 		try {
 			publicLayoutSet = LayoutSetLocalServiceUtil.getLayoutSet(group.getGroupId(), false);
 
-			String uuid = publicLayoutSet.getLayoutSetPrototypeUuid();
+			String layoutSetPrototypeUuid = publicLayoutSet.getLayoutSetPrototypeUuid();
 
-			if (uuid != null) {
-				publicLayoutSetPrototype = LayoutSetPrototypeLocalServiceUtil.getLayoutSetPrototypeByUuid(uuid);
+			if (Validator.isNotNull(layoutSetPrototypeUuid)) {
+				publicLayoutSetPrototype = LayoutSetPrototypeLocalServiceUtil.getLayoutSetPrototypeByUuid(layoutSetPrototypeUuid);
 			}
 		}
 		catch (Exception e) {
@@ -86,7 +86,7 @@ if (group != null) {
 					</c:when>
 					<c:otherwise>
 						<c:if test="<%= (publicLayoutSetPrototype != null) %>">
-							<liferay-ui:message arguments="<%= new Object[] {publicLayoutSetPrototype.getName(locale)} %>" key="these-pages-are-linked-to-the-template-x" />
+							<liferay-ui:message arguments="<%= new Object[] {publicLayoutSetPrototype.getName(locale)} %>" key="these-pages-are-linked-to-template-x" />
 						</c:if>
 
 						<c:choose>
@@ -136,7 +136,7 @@ if (group != null) {
 					</c:when>
 					<c:otherwise>
 						<c:if test="<%= (privateLayoutSetPrototype != null) %>">
-							<liferay-ui:message arguments="<%= new Object[] {privateLayoutSetPrototype.getName(locale)} %>" key="these-pages-are-linked-to-the-template-x" />
+							<liferay-ui:message arguments="<%= new Object[] {privateLayoutSetPrototype.getName(locale)} %>" key="these-pages-are-linked-to-template-x" />
 						</c:if>
 
 						<c:choose>

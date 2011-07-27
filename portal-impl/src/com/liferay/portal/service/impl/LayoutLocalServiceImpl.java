@@ -107,7 +107,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			long parentLayoutId, Map<Locale, String> nameMap,
 			Map<Locale, String> titleMap, Map<Locale, String> descriptionMap,
 			Map<Locale, String> keywordsMap, Map<Locale, String> robotsMap,
-			String type, boolean hidden, boolean locked, String friendlyURL,
+			String type, boolean hidden, String friendlyURL, boolean locked,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
@@ -151,11 +151,12 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		layout.setPriority(priority);
 
 		if (locked) {
-			UnicodeProperties typeSettings = layout.getTypeSettingsProperties();
+			UnicodeProperties typeSettingsProperties =
+				layout.getTypeSettingsProperties();
 
-			typeSettings.put("locked", String.valueOf(locked));
+			typeSettingsProperties.put("locked", String.valueOf(locked));
 
-			layout.setTypeSettingsProperties(typeSettings);
+			layout.setTypeSettingsProperties(typeSettingsProperties);
 		}
 
 		if (type.equals(LayoutConstants.TYPE_PORTLET)) {
@@ -209,7 +210,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	public Layout addLayout(
 			long userId, long groupId, boolean privateLayout,
 			long parentLayoutId, String name, String title, String description,
-			String type, boolean hidden, boolean locked, String friendlyURL,
+			String type, boolean hidden, String friendlyURL, boolean locked,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
@@ -223,7 +224,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			userId, groupId, privateLayout, parentLayoutId, localeNamesMap,
 			new HashMap<Locale, String>(), new HashMap<Locale, String>(),
 			new HashMap<Locale, String>(), new HashMap<Locale, String>(),
-			type, hidden, locked, friendlyURL, serviceContext);
+			type, hidden, friendlyURL, locked, serviceContext);
 	}
 
 	public void deleteLayout(Layout layout, boolean updateLayoutSet)
@@ -843,8 +844,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			long parentLayoutId, Map<Locale, String> nameMap,
 			Map<Locale, String> titleMap, Map<Locale, String> descriptionMap,
 			Map<Locale, String> keywordsMap, Map<Locale, String> robotsMap,
-			String type, boolean hidden, boolean locked, String friendlyURL,
-			Boolean iconImage, byte[] iconBytes, ServiceContext serviceContext)
+			String type, boolean hidden, String friendlyURL, Boolean iconImage,
+			byte[] iconBytes, boolean locked, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Layout
@@ -883,12 +884,6 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		layout.setHidden(hidden);
 		layout.setFriendlyURL(friendlyURL);
 
-		UnicodeProperties typeSettings = layout.getTypeSettingsProperties();
-
-		typeSettings.put("locked", String.valueOf(locked));
-
-		layout.setTypeSettingsProperties(typeSettings);
-
 		if (iconImage != null) {
 			layout.setIconImage(iconImage.booleanValue());
 
@@ -902,6 +897,13 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 				}
 			}
 		}
+
+		UnicodeProperties typeSettingsProperties =
+			layout.getTypeSettingsProperties();
+
+		typeSettingsProperties.put("locked", String.valueOf(locked));
+
+		layout.setTypeSettingsProperties(typeSettingsProperties);
 
 		layoutPersistence.update(layout, false);
 

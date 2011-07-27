@@ -60,9 +60,8 @@ public class LayoutServiceHttp {
 		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
 		java.util.Map<java.util.Locale, java.lang.String> keywordsMap,
 		java.util.Map<java.util.Locale, java.lang.String> robotsMap,
-		java.lang.String type, boolean hidden, boolean locked,
-		java.lang.String friendlyURL,
-		com.liferay.portal.service.ServiceContext serviceContext)
+		java.lang.String type, boolean hidden, java.lang.String friendlyURL,
+		boolean locked, com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
@@ -72,7 +71,7 @@ public class LayoutServiceHttp {
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					privateLayout, parentLayoutId, localeNamesMap,
 					localeTitlesMap, descriptionMap, keywordsMap, robotsMap,
-					type, hidden, locked, friendlyURL, serviceContext);
+					type, hidden, friendlyURL, locked, serviceContext);
 
 			Object returnObj = null;
 
@@ -104,7 +103,7 @@ public class LayoutServiceHttp {
 		HttpPrincipal httpPrincipal, long groupId, boolean privateLayout,
 		long parentLayoutId, java.lang.String name, java.lang.String title,
 		java.lang.String description, java.lang.String type, boolean hidden,
-		boolean locked, java.lang.String friendlyURL,
+		java.lang.String friendlyURL, boolean locked,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -114,7 +113,7 @@ public class LayoutServiceHttp {
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					privateLayout, parentLayoutId, name, title, description,
-					type, hidden, locked, friendlyURL, serviceContext);
+					type, hidden, friendlyURL, locked, serviceContext);
 
 			Object returnObj = null;
 
@@ -885,9 +884,8 @@ public class LayoutServiceHttp {
 		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
 		java.util.Map<java.util.Locale, java.lang.String> keywordsMap,
 		java.util.Map<java.util.Locale, java.lang.String> robotsMap,
-		java.lang.String type, boolean hidden, boolean locked,
-		java.lang.String friendlyURL, java.lang.Boolean iconImage,
-		byte[] iconBytes,
+		java.lang.String type, boolean hidden, java.lang.String friendlyURL,
+		java.lang.Boolean iconImage, byte[] iconBytes, boolean locked,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -898,7 +896,7 @@ public class LayoutServiceHttp {
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					privateLayout, layoutId, parentLayoutId, localeNamesMap,
 					localeTitlesMap, descriptionMap, keywordsMap, robotsMap,
-					type, hidden, locked, friendlyURL, iconImage, iconBytes,
+					type, hidden, friendlyURL, iconImage, iconBytes, locked,
 					serviceContext);
 
 			Object returnObj = null;
@@ -1238,15 +1236,14 @@ public class LayoutServiceHttp {
 			long.class, boolean.class, long.class, java.util.Map.class,
 			java.util.Map.class, java.util.Map.class, java.util.Map.class,
 			java.util.Map.class, java.lang.String.class, boolean.class,
-			boolean.class, java.lang.String.class,
+			java.lang.String.class, boolean.class,
 			com.liferay.portal.service.ServiceContext.class
 		};
 	private static final Class<?>[] _addLayoutParameterTypes1 = new Class[] {
 			long.class, boolean.class, long.class, java.lang.String.class,
 			java.lang.String.class, java.lang.String.class,
-			java.lang.String.class, boolean.class, boolean.class,
-			java.lang.String.class,
-			com.liferay.portal.service.ServiceContext.class
+			java.lang.String.class, boolean.class, java.lang.String.class,
+			boolean.class, com.liferay.portal.service.ServiceContext.class
 		};
 	private static final Class<?>[] _deleteLayoutParameterTypes2 = new Class[] {
 			long.class
@@ -1328,8 +1325,8 @@ public class LayoutServiceHttp {
 			long.class, boolean.class, long.class, long.class,
 			java.util.Map.class, java.util.Map.class, java.util.Map.class,
 			java.util.Map.class, java.util.Map.class, java.lang.String.class,
-			boolean.class, boolean.class, java.lang.String.class,
-			java.lang.Boolean.class, byte[].class,
+			boolean.class, java.lang.String.class, java.lang.Boolean.class,
+			byte[].class, boolean.class,
 			com.liferay.portal.service.ServiceContext.class
 		};
 	private static final Class<?>[] _updateLayoutParameterTypes23 = new Class[] {

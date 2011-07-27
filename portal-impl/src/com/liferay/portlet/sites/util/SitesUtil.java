@@ -122,17 +122,17 @@ public class SitesUtil {
 			PortletDataHandlerKeys.DELETE_MISSING_LAYOUTS,
 			new String[] {Boolean.FALSE.toString()});
 
-		File f = LayoutLocalServiceUtil.exportLayoutsAsFile(
+		File file = LayoutLocalServiceUtil.exportLayoutsAsFile(
 			sourceLayout.getGroupId(), sourceLayout.isPrivateLayout(),
 			new long[] {sourceLayout.getLayoutId()}, parameterMap, null, null);
 
 		try {
 			LayoutServiceUtil.importLayouts(
 				targetLayout.getGroupId(), targetLayout.isPrivateLayout(),
-				parameterMap, f);
+				parameterMap, file);
 		}
 		finally {
-			f.delete();
+			file.delete();
 		}
 	}
 
@@ -237,6 +237,7 @@ public class SitesUtil {
 		}
 
 		LayoutSet layoutSet = layout.getLayoutSet();
+
 		Group layoutSetGroup = layoutSet.getGroup();
 
 		if (layoutSetGroup.isLayoutSetPrototype()) {
@@ -253,8 +254,9 @@ public class SitesUtil {
 					LayoutLocalServiceUtil.fetchLayoutByUuidAndGroupId(
 						layout.getUuid(), linkedLayoutSet.getGroupId());
 
-				if (linkedLayout != null && (isLayoutLocked(linkedLayout) ||
-						isLayoutToBeUpdatedFromTemplate(linkedLayout))) {
+				if ((linkedLayout != null) &&
+					(isLayoutLocked(linkedLayout) ||
+					 isLayoutToBeUpdatedFromTemplate(linkedLayout))) {
 
 					LayoutServiceUtil.deleteLayout(linkedLayout.getPlid());
 				}
@@ -369,7 +371,6 @@ public class SitesUtil {
 	}
 
 	public static boolean isLayoutLocked(Layout layout) {
-
 		try {
 			LayoutSet layoutSet = layout.getLayoutSet();
 
@@ -399,8 +400,7 @@ public class SitesUtil {
 			if (layout.isLayoutPrototypeLinkEnabled() ||
 				layoutSet.isLayoutSetPrototypeLinkEnabled()) {
 
-				String locked =
-					layoutTypePortlet.getTemplateProperty("locked");
+				String locked = layoutTypePortlet.getTemplateProperty("locked");
 
 				if (Validator.isNotNull(locked)) {
 					return GetterUtil.getBoolean(locked);
@@ -417,11 +417,11 @@ public class SitesUtil {
 	}
 
 	public static boolean isLayoutSetLocked(
-		Group group, boolean isPrivate) {
+		Group group, boolean privateLayout) {
 
 		try {
 			LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
-				group.getGroupId(), isPrivate);
+				group.getGroupId(), privateLayout);
 
 			return isLayoutSetLocked(layoutSet);
 		}
@@ -432,7 +432,6 @@ public class SitesUtil {
 	}
 
 	public static boolean isLayoutSetLocked(LayoutSet layoutSet) {
-
 		if (layoutSet.isLayoutSetPrototypeLinkEnabled()) {
 			try {
 				LayoutSetPrototype layoutSetPrototype =
@@ -444,7 +443,7 @@ public class SitesUtil {
 					layoutSetPrototype.getSettingsProperty(
 						"allowModifications");
 
-				if (allowModifications != null) {
+				if (Validator.isNotNull(allowModifications)) {
 					return !GetterUtil.getBoolean(allowModifications);
 				}
 			}
@@ -464,37 +463,37 @@ public class SitesUtil {
 
 		LayoutSet layoutSet = layout.getLayoutSet();
 
-		if (layoutSet.isLayoutSetPrototypeLinkEnabled()) {
+		if (!layoutSet.isLayoutSetPrototypeLinkEnabled()) {
+			return false;
+		}
 
-			Layout templateLayout = LayoutTypePortletImpl.getTemplateLayout(
-				layout);
+		Layout templateLayout = LayoutTypePortletImpl.getTemplateLayout(
+			layout);
 
-			Date layoutModifiedDate = layout.getModifiedDate();
+		Date layoutModifiedDate = layout.getModifiedDate();
 
-			if (layoutModifiedDate == null) {
-				layoutModifiedDate = new Date();
-			}
+		if (layoutModifiedDate == null) {
+			layoutModifiedDate = new Date();
+		}
 
-			Date lastCopyDate = null;
+		Date lastCopyDate = null;
 
-			String lastCopyDateString = layout.getTypeSettingsProperty(
-				"layoutSetPrototypeLastCopyDate");
+		String lastCopyDateString = layout.getTypeSettingsProperty(
+			"layoutSetPrototypeLastCopyDate");
 
-			if (lastCopyDateString != null) {
-				lastCopyDate = new Date(GetterUtil.getLong(lastCopyDateString));
-			}
+		if (Validator.isNotNull(lastCopyDateString)) {
+			lastCopyDate = new Date(GetterUtil.getLong(lastCopyDateString));
+		}
 
-			if (SitesUtil.isLayoutLocked(layout)) {
-				if (lastCopyDate == null || lastCopyDate.before(
-						templateLayout.getModifiedDate())) {
-
-					return true;
-				}
-			} else if (!layoutModifiedDate.after(
-				templateLayout.getModifiedDate())) {
+		if (isLayoutLocked(layout)) {
+			if ((lastCopyDate == null) ||
+				lastCopyDate.before(templateLayout.getModifiedDate())) {
 
 				return true;
 			}
+		}
+		else if (!layoutModifiedDate.after(templateLayout.getModifiedDate())) {
+			return true;
 		}
 
 		return false;

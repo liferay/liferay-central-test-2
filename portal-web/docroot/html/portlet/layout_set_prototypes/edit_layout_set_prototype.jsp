@@ -31,26 +31,13 @@ if (layoutSetPrototype == null) {
 
 long layoutSetPrototypeId = BeanParamUtil.getLong(layoutSetPrototype, request, "layoutSetPrototypeId");
 
+boolean allowModifications = GetterUtil.getBoolean(layoutSetPrototype.getSettingsProperty("allowModifications"), true);
+boolean allowLayoutAdditions = GetterUtil.getBoolean(layoutSetPrototype.getSettingsProperty("allowLayoutAdditions"), true);
+
 Locale defaultLocale = LocaleUtil.getDefault();
 String defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
 
 Locale[] locales = LanguageUtil.getAvailableLocales();
-
-boolean allowModifications = true;
-boolean allowLayoutAdditions = true;
-
-UnicodeProperties typeSettings = layoutSetPrototype.getSettingsProperties();
-
-String allowModificationsProperty = typeSettings.get("allowModifications");
-String allowLayoutAdditionsProperty = typeSettings.get("allowLayoutAdditions");
-
-if (allowModificationsProperty != null) {
-	allowModifications = Boolean.parseBoolean(allowModificationsProperty);
-}
-
-if (allowLayoutAdditionsProperty != null) {
-	allowLayoutAdditions = Boolean.parseBoolean(allowLayoutAdditionsProperty);
-}
 %>
 
 <liferay-util:include page="/html/portlet/layout_set_prototypes/toolbar.jsp">

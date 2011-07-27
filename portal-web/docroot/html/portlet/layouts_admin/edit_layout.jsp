@@ -63,9 +63,6 @@ if (!group.isUser() && selLayout.isTypePortlet()) {
 }
 
 String[][] categorySections = {mainSections};
-
-boolean locked = SitesUtil.isLayoutLocked(selLayout);
-
 %>
 
 <div class="lfr-header-row title">
@@ -141,7 +138,7 @@ String taglibOnSubmit = "event.preventDefault(); " + liferayPortletResponse.getN
 				/>
 
 				<c:choose>
-					<c:when test="<%= locked %>">
+					<c:when test="<%= SitesUtil.isLayoutLocked(selLayout) %>">
 						<div class="portlet-msg-alert">
 							<liferay-ui:message key="this-page-is-locked-by-the-template" />
 						</div>
@@ -231,7 +228,7 @@ String taglibOnSubmit = "event.preventDefault(); " + liferayPortletResponse.getN
 				categoryNames="<%= _CATEGORY_NAMES %>"
 				categorySections="<%= categorySections %>"
 				jspPath="/html/portlet/layouts_admin/layout/"
-				showButtons="<%= !locked %>"
+				showButtons="<%= !SitesUtil.isLayoutLocked(selLayout) %>"
 			/>
 		</c:otherwise>
 	</c:choose>

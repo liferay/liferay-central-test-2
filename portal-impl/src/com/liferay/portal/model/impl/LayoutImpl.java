@@ -391,9 +391,9 @@ public class LayoutImpl extends LayoutBaseImpl {
 	}
 
 	public String getTypeSettingsProperty(String key) {
-		UnicodeProperties settingsProperties = getTypeSettingsProperties();
+		UnicodeProperties typeSettingsProperties = getTypeSettingsProperties();
 
-		return settingsProperties.getProperty(key);
+		return typeSettingsProperties.getProperty(key);
 	}
 
 	public ColorScheme getWapColorScheme()

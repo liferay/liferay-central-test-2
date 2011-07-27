@@ -23,18 +23,22 @@ LayoutSet privateLayoutSet = LayoutSetLocalServiceUtil.getLayoutSet(group.getGro
 LayoutSet publicLayoutSet = LayoutSetLocalServiceUtil.getLayoutSet(group.getGroupId(), false);
 
 LayoutSetPrototype privateLayoutSetPrototype = null;
+
 boolean privateLayoutSetPrototypeInheritance = false;
 
 LayoutSetPrototype publicLayoutSetPrototype = null;
+
 boolean publicLayoutSetPrototypeInheritance = false;
 
 if (Validator.isNotNull(privateLayoutSet.getLayoutSetPrototypeUuid())) {
 	privateLayoutSetPrototype = LayoutSetPrototypeLocalServiceUtil.getLayoutSetPrototypeByUuid(privateLayoutSet.getLayoutSetPrototypeUuid());
+
 	privateLayoutSetPrototypeInheritance = privateLayoutSet.getLayoutSetPrototypeLinkEnabled();
 }
 
 if (Validator.isNotNull(publicLayoutSet.getLayoutSetPrototypeUuid())) {
 	publicLayoutSetPrototype = LayoutSetPrototypeLocalServiceUtil.getLayoutSetPrototypeByUuid(publicLayoutSet.getLayoutSetPrototypeUuid());
+
 	publicLayoutSetPrototypeInheritance = publicLayoutSet.getLayoutSetPrototypeLinkEnabled();
 }
 %>
@@ -44,34 +48,22 @@ if (Validator.isNotNull(publicLayoutSet.getLayoutSetPrototypeUuid())) {
 		<aui:fieldset label="public-site-template">
 			<c:choose>
 				<c:when test="<%= publicLayoutSetPrototypeInheritance %>">
+
 					<%
-					boolean active = false;
-					boolean allowModifications = true;
-					boolean allowLayoutAdditions = true;
-
-					UnicodeProperties settings = publicLayoutSetPrototype.getSettingsProperties();
-
-					if (Validator.isNotNull(settings.get("allowLayoutAdditions"))) {
-						allowLayoutAdditions = Boolean.valueOf(settings.get("allowLayoutAdditions"));
-					}
-
-					if (Validator.isNotNull(settings.get("allowModifications"))) {
-						allowModifications = Boolean.valueOf(settings.get("allowModifications"));
-					}
-
-					active = publicLayoutSetPrototype.isActive();
+					boolean allowModifications = GetterUtil.getBoolean(publicLayoutSetPrototype.getSettingsProperty("allowModifications"));
+					boolean allowLayoutAdditions = GetterUtil.getBoolean(publicLayoutSetPrototype.getSettingsProperty("allowLayoutAdditions"));
 					%>
 
-					<liferay-ui:message arguments="<%= new Object[] {publicLayoutSetPrototype.getName(locale)} %>" key="these-pages-are-linked-to-the-template-x" />
+					<liferay-ui:message arguments="<%= new Object[] {publicLayoutSetPrototype.getName(locale)} %>" key="these-pages-are-linked-to-template-x" />
 
 					<aui:field-wrapper label="site-template-settings">
-						<aui:input type="checkbox" name="active" value="<%= active %>" disabled="<%= true %>" />
-						<aui:input type="checkbox" disabled="<%= true %>" name="template-allows-modification" value="<%= allowModifications %>" />
-						<aui:input type="checkbox" disabled="<%= true %>" name="template-allows-page-addition" value="<%= allowLayoutAdditions %>" />
+						<aui:input disabled="<%= true %>" name="active" value="<%= publicLayoutSetPrototype.isActive() %>" type="checkbox" />
+						<aui:input disabled="<%= true %>" name="allow-modifications" type="checkbox" value="<%= allowModifications %>" />
+						<aui:input disabled="<%= true %>" name="allow-adding-pages" type="checkbox" value="<%= allowLayoutAdditions %>" />
 					</aui:field-wrapper>
 				</c:when>
 				<c:otherwise>
-					<liferay-ui:message arguments="<%= new Object[] {publicLayoutSetPrototype.getName(locale)} %>" key="this-site-is-cloned-from-template-x" />
+					<liferay-ui:message arguments="<%= new Object[] {publicLayoutSetPrototype.getName(locale)} %>" key="this-site-was-cloned-from-template-x" />
 				</c:otherwise>
 			</c:choose>
 		</aui:fieldset>
@@ -81,34 +73,22 @@ if (Validator.isNotNull(publicLayoutSet.getLayoutSetPrototypeUuid())) {
 		<aui:fieldset label="private-site-template">
 			<c:choose>
 				<c:when test="<%= privateLayoutSetPrototypeInheritance %>">
+
 					<%
-					boolean active = false;
-					boolean allowModifications = true;
-					boolean allowLayoutAdditions = true;
-
-					UnicodeProperties settings = privateLayoutSetPrototype.getSettingsProperties();
-
-					if (Validator.isNotNull(settings.get("allowLayoutAdditions"))) {
-						allowLayoutAdditions = Boolean.valueOf(settings.get("allowLayoutAdditions"));
-					}
-
-					if (Validator.isNotNull(settings.get("allowModifications"))) {
-						allowModifications = Boolean.valueOf(settings.get("allowModifications"));
-					}
-
-					active = privateLayoutSetPrototype.isActive();
+					boolean allowModifications = GetterUtil.getBoolean(privateLayoutSetPrototype.getSettingsProperty("allowModifications"));
+					boolean allowLayoutAdditions = GetterUtil.getBoolean(privateLayoutSetPrototype.getSettingsProperty("allowLayoutAdditions"));
 					%>
 
-					<liferay-ui:message arguments="<%= new Object[] {privateLayoutSetPrototype.getName(locale)} %>" key="these-pages-are-linked-to-the-template-x" />
+					<liferay-ui:message arguments="<%= new Object[] {privateLayoutSetPrototype.getName(locale)} %>" key="these-pages-are-linked-to-template-x" />
 
 					<aui:field-wrapper label="site-template-settings">
-						<aui:input type="checkbox" name="active" value="<%= active %>" disabled="<%= true %>" />
-						<aui:input type="checkbox" disabled="<%= true %>" name="template-allows-modification" value="<%= allowModifications %>" />
-						<aui:input type="checkbox" disabled="<%= true %>" name="template-allows-page-addition" value="<%= allowLayoutAdditions %>" />
+						<aui:input disabled="<%= true %>" name="active" type="checkbox" value="<%= privateLayoutSetPrototype.isActive() %>" />
+						<aui:input disabled="<%= true %>" name="template-allows-modification" type="checkbox" value="<%= allowModifications %>" />
+						<aui:input disabled="<%= true %>" name="template-allows-page-addition" type="checkbox" value="<%= allowLayoutAdditions %>" />
 					</aui:field-wrapper>
 				</c:when>
 				<c:otherwise>
-					<liferay-ui:message arguments="<%= new Object[] {privateLayoutSetPrototype.getName(locale)} %>" key="this-site-is-cloned-from-template-x" />
+					<liferay-ui:message arguments="<%= new Object[] {privateLayoutSetPrototype.getName(locale)} %>" key="this-site-was-cloned-from-template-x" />
 				</c:otherwise>
 			</c:choose>
 		</aui:fieldset>

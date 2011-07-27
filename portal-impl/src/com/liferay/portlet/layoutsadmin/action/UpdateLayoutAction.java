@@ -159,8 +159,8 @@ public class UpdateLayoutAction extends JSONAction {
 		String description = StringPool.BLANK;
 		String type = LayoutConstants.TYPE_PORTLET;
 		boolean hidden = false;
-		boolean locked = ParamUtil.getBoolean(request, "locked");
 		String friendlyURL = StringPool.BLANK;
+		boolean locked = ParamUtil.getBoolean(request, "locked");
 		long layoutPrototypeId = ParamUtil.getLong(
 			request, "layoutPrototypeId");
 
@@ -179,7 +179,7 @@ public class UpdateLayoutAction extends JSONAction {
 			layout = LayoutServiceUtil.addLayout(
 				groupId, privateLayout, parentLayoutId, name, title,
 				description, layoutPrototypeLayout.getType(),
-				false, locked, friendlyURL, serviceContext);
+				false, friendlyURL, locked, serviceContext);
 
 			LayoutServiceUtil.updateLayout(
 				layout.getGroupId(), layout.isPrivateLayout(),
@@ -193,7 +193,7 @@ public class UpdateLayoutAction extends JSONAction {
 		else {
 			layout = LayoutServiceUtil.addLayout(
 				groupId, privateLayout, parentLayoutId, name, title,
-				description, type, hidden, false, friendlyURL, serviceContext);
+				description, type, hidden, friendlyURL, false, serviceContext);
 
 			Group group = GroupLocalServiceUtil.getGroup(groupId);
 
@@ -202,27 +202,29 @@ public class UpdateLayoutAction extends JSONAction {
 					LayoutSetPrototypeLocalServiceUtil.getLayoutSetPrototype(
 						group.getClassPK());
 
-				List<LayoutSet> heirLayoutSets =
-					LayoutSetLocalServiceUtil.
-						getLayoutSetsByLayoutSetPrototypeUuid(
-							layoutSetPrototype.getUuid());
+				List<LayoutSet> layoutSets = LayoutSetLocalServiceUtil.
+					getLayoutSetsByLayoutSetPrototypeUuid(
+						layoutSetPrototype.getUuid());
 
 				serviceContext.setUuid(layout.getUuid());
 
-				for (LayoutSet layoutSet : heirLayoutSets) {
+				for (LayoutSet layoutSet : layoutSets) {
 					Layout addedLayout = LayoutServiceUtil.addLayout(
 						layoutSet.getGroupId(), layoutSet.isPrivateLayout(),
 						parentLayoutId, name, title, description, type, hidden,
-						locked, friendlyURL, serviceContext);
+						friendlyURL, locked, serviceContext);
 
 					addedLayout.setModifiedDate(layout.getModifiedDate());
 
-					UnicodeProperties typeSettings =
+					UnicodeProperties typeSettingsProperties =
 						addedLayout.getTypeSettingsProperties();
 
-					typeSettings.put(
+					typeSettingsProperties.put(
 						"layoutSetPrototypeLastCopyDate",
 						String.valueOf(layout.getModifiedDate().getTime()));
+
+					addedLayout.setTypeSettingsProperties(
+						typeSettingsProperties);
 
 					LayoutLocalServiceUtil.updateLayout(addedLayout);
 				}

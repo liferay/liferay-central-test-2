@@ -67,14 +67,13 @@ public class LayoutServiceSoap {
 	public static com.liferay.portal.model.LayoutSoap addLayout(long groupId,
 		boolean privateLayout, long parentLayoutId, java.lang.String name,
 		java.lang.String title, java.lang.String description,
-		java.lang.String type, boolean hidden, boolean locked,
-		java.lang.String friendlyURL,
-		com.liferay.portal.service.ServiceContext serviceContext)
+		java.lang.String type, boolean hidden, java.lang.String friendlyURL,
+		boolean locked, com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
 			com.liferay.portal.model.Layout returnValue = LayoutServiceUtil.addLayout(groupId,
 					privateLayout, parentLayoutId, name, title, description,
-					type, hidden, locked, friendlyURL, serviceContext);
+					type, hidden, friendlyURL, locked, serviceContext);
 
 			return com.liferay.portal.model.LayoutSoap.toSoapModel(returnValue);
 		}

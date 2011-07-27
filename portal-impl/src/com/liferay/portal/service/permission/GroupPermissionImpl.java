@@ -17,6 +17,7 @@ package com.liferay.portal.service.permission;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.LayoutSetPrototype;
@@ -84,7 +85,7 @@ public class GroupPermissionImpl implements GroupPermission {
 			}
 		}
 
-		if (ActionKeys.ADD_LAYOUT.equals(actionId)) {
+		if (actionId.equals(ActionKeys.ADD_LAYOUT)) {
 			LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
 				groupId, false);
 
@@ -98,7 +99,7 @@ public class GroupPermissionImpl implements GroupPermission {
 					layoutSetPrototype.getSettingsProperty(
 						"allowLayoutAdditions");
 
-				if (allowLayoutAdditions != null &&
+				if (Validator.isNotNull(allowLayoutAdditions) &&
 					!GetterUtil.getBoolean(allowLayoutAdditions)) {
 
 					return false;
@@ -109,14 +110,11 @@ public class GroupPermissionImpl implements GroupPermission {
 				groupId, Group.class.getName(), groupId,
 				ActionKeys.MANAGE_LAYOUTS);
 		}
-		else {
 
-			// Group id must be set so that users can modify their personal
-			// pages
+		// Group id must be set so that users can modify their personal pages
 
-			return permissionChecker.hasPermission(
-				groupId, Group.class.getName(), groupId, actionId);
-		}
+		return permissionChecker.hasPermission(
+			groupId, Group.class.getName(), groupId, actionId);
 	}
 
 }

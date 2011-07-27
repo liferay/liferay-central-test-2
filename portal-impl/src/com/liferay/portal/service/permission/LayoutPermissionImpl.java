@@ -91,7 +91,7 @@ public class LayoutPermissionImpl implements LayoutPermission {
 			Group group = layout.getGroup();
 
 			if (!group.isLayoutSetPrototype() &&
-				attemptToModifyLockedLayout(layout, actionId)) {
+				isAttemptToModifyLockedLayout(layout, actionId)) {
 
 				return false;
 			}
@@ -149,11 +149,10 @@ public class LayoutPermissionImpl implements LayoutPermission {
 		throws PortalException, SystemException {
 
 		if (layoutId == LayoutConstants.DEFAULT_PARENT_LAYOUT_ID) {
-
 			Layout layout = LayoutLocalServiceUtil.getLayout(
-					groupId, privateLayout, layoutId);
+				groupId, privateLayout, layoutId);
 
-			if (attemptToModifyLockedLayout(layout, actionId)) {
+			if (isAttemptToModifyLockedLayout(layout, actionId)) {
 				return false;
 			}
 
@@ -170,7 +169,7 @@ public class LayoutPermissionImpl implements LayoutPermission {
 			Layout layout = LayoutLocalServiceUtil.getLayout(
 				groupId, privateLayout, layoutId);
 
-			if (attemptToModifyLockedLayout(layout, actionId)) {
+			if (isAttemptToModifyLockedLayout(layout, actionId)) {
 				return false;
 			}
 
@@ -187,12 +186,12 @@ public class LayoutPermissionImpl implements LayoutPermission {
 		return contains(permissionChecker, layout, actionId);
 	}
 
-	protected boolean attemptToModifyLockedLayout(
+	protected boolean isAttemptToModifyLockedLayout(
 		Layout layout, String actionId) {
 
 		if (SitesUtil.isLayoutLocked(layout) &&
 			(ActionKeys.CUSTOMIZE.equals(actionId) ||
-				ActionKeys.UPDATE.equals(actionId))) {
+			 ActionKeys.UPDATE.equals(actionId))) {
 
 			return true;
 		}

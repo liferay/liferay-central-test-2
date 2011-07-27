@@ -753,9 +753,8 @@ public class LayoutImporter {
 			layoutElement.attributeValue("delete"));
 
 		if (deleteLayout) {
-			Layout layout =
-				LayoutLocalServiceUtil.fetchLayoutByUuidAndGroupId(
-					layoutUuid, groupId);
+			Layout layout = LayoutLocalServiceUtil.fetchLayoutByUuidAndGroupId(
+				layoutUuid, groupId);
 
 			if (layout != null) {
 				newLayoutsMap.put(oldLayoutId, layout);

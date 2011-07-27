@@ -57,8 +57,6 @@ if (!company.isSiteLogo()) {
 }
 
 String[][] categorySections = {mainSections};
-
-boolean locked = SitesUtil.isLayoutSetLocked(selLayoutSet);
 %>
 
 <div class="lfr-header-row">
@@ -126,7 +124,7 @@ boolean locked = SitesUtil.isLayoutSetLocked(selLayoutSet);
 	</div>
 </c:if>
 
-<c:if test="<%= !locked %>">
+<c:if test="<%= !SitesUtil.isLayoutSetLocked(selLayoutSet) %>">
 	<aui:script use="aui-dialog,aui-toolbar">
 		var popup;
 		var exportPopup;
@@ -310,7 +308,7 @@ boolean locked = SitesUtil.isLayoutSetLocked(selLayoutSet);
 		categoryNames="<%= _CATEGORY_NAMES %>"
 		categorySections="<%= categorySections %>"
 		jspPath="/html/portlet/layouts_admin/layout_set/"
-		showButtons="<%= !locked %>"
+		showButtons="<%= !SitesUtil.isLayoutSetLocked(selLayoutSet) %>"
 	/>
 </aui:form>
 

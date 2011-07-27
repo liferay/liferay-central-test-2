@@ -71,8 +71,8 @@ public class AddDefaultLayoutSetPrototypesAction extends SimpleAction {
 			group.getCreatorUserId(), group.getGroupId(),
 			layoutSet.isPrivateLayout(),
 			LayoutConstants.DEFAULT_PARENT_LAYOUT_ID, name, StringPool.BLANK,
-			StringPool.BLANK, LayoutConstants.TYPE_PORTLET, false, false,
-			friendlyURL, serviceContext);
+			StringPool.BLANK, LayoutConstants.TYPE_PORTLET, false, friendlyURL,
+			false, serviceContext);
 
 		LayoutTypePortlet layoutTypePortlet =
 			(LayoutTypePortlet)layout.getLayoutType();

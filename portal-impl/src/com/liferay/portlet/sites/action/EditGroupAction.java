@@ -350,7 +350,7 @@ public class EditGroupAction extends PortletAction {
 			int layoutSetVisibility = ParamUtil.getInteger(
 				actionRequest, "layoutSetVisibility");
 
-			if (layoutSetVisibility == _LAYOUTSET_VISIBILITY_PRIVATE) {
+			if (layoutSetVisibility == _LAYOUT_SET_VISIBILITY_PRIVATE) {
 				privateLayoutSetPrototypeId = layoutSetPrototypeId;
 			}
 			else {
@@ -371,6 +371,6 @@ public class EditGroupAction extends PortletAction {
 		StagingUtil.updateStaging(actionRequest, group);
 	}
 
-	private static final int _LAYOUTSET_VISIBILITY_PRIVATE = 1;
+	private static final int _LAYOUT_SET_VISIBILITY_PRIVATE = 1;
 
 }

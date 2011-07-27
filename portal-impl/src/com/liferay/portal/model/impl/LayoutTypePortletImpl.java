@@ -106,13 +106,11 @@ public class LayoutTypePortletImpl
 						layout.getLayoutPrototypeUuid());
 
 				group = layoutPrototype.getGroup();
-			} else {
-
+			}
+			else {
 				LayoutSet layoutSet = layout.getLayoutSet();
 
-				if (Validator.isNull(
-						layoutSet.getLayoutSetPrototypeUuid())) {
-
+				if (Validator.isNull(layoutSet.getLayoutSetPrototypeUuid())) {
 					return null;
 				}
 
@@ -619,7 +617,10 @@ public class LayoutTypePortletImpl
 			return StringPool.BLANK;
 		}
 
-		return _templateLayout.getTypeSettingsProperties().getProperty(key);
+		UnicodeProperties typeSettingsProperties =
+			_templateLayout.getTypeSettingsProperties();
+
+		return typeSettingsProperties.getProperty(key);
 	}
 
 	public boolean hasDefaultScopePortletId(long groupId, String portletId)

@@ -35,26 +35,24 @@ public class LayoutServiceWrapper implements LayoutService {
 		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
 		java.util.Map<java.util.Locale, java.lang.String> keywordsMap,
 		java.util.Map<java.util.Locale, java.lang.String> robotsMap,
-		java.lang.String type, boolean hidden, boolean locked,
-		java.lang.String friendlyURL,
-		com.liferay.portal.service.ServiceContext serviceContext)
+		java.lang.String type, boolean hidden, java.lang.String friendlyURL,
+		boolean locked, com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _layoutService.addLayout(groupId, privateLayout, parentLayoutId,
 			localeNamesMap, localeTitlesMap, descriptionMap, keywordsMap,
-			robotsMap, type, hidden, locked, friendlyURL, serviceContext);
+			robotsMap, type, hidden, friendlyURL, locked, serviceContext);
 	}
 
 	public com.liferay.portal.model.Layout addLayout(long groupId,
 		boolean privateLayout, long parentLayoutId, java.lang.String name,
 		java.lang.String title, java.lang.String description,
-		java.lang.String type, boolean hidden, boolean locked,
-		java.lang.String friendlyURL,
-		com.liferay.portal.service.ServiceContext serviceContext)
+		java.lang.String type, boolean hidden, java.lang.String friendlyURL,
+		boolean locked, com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _layoutService.addLayout(groupId, privateLayout, parentLayoutId,
-			name, title, description, type, hidden, locked, friendlyURL,
+			name, title, description, type, hidden, friendlyURL, locked,
 			serviceContext);
 	}
 
@@ -251,16 +249,15 @@ public class LayoutServiceWrapper implements LayoutService {
 		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
 		java.util.Map<java.util.Locale, java.lang.String> keywordsMap,
 		java.util.Map<java.util.Locale, java.lang.String> robotsMap,
-		java.lang.String type, boolean hidden, boolean locked,
-		java.lang.String friendlyURL, java.lang.Boolean iconImage,
-		byte[] iconBytes,
+		java.lang.String type, boolean hidden, java.lang.String friendlyURL,
+		java.lang.Boolean iconImage, byte[] iconBytes, boolean locked,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _layoutService.updateLayout(groupId, privateLayout, layoutId,
 			parentLayoutId, localeNamesMap, localeTitlesMap, descriptionMap,
-			keywordsMap, robotsMap, type, hidden, locked, friendlyURL,
-			iconImage, iconBytes, serviceContext);
+			keywordsMap, robotsMap, type, hidden, friendlyURL, iconImage,
+			iconBytes, locked, serviceContext);
 	}
 
 	public com.liferay.portal.model.Layout updateLayout(long groupId,

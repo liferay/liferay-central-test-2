@@ -21,19 +21,10 @@ Group group = (Group)request.getAttribute("edit_pages.jsp-group");
 boolean privateLayout = ((Boolean)request.getAttribute("edit_pages.jsp-privateLayout")).booleanValue();
 Layout selLayout = (Layout)request.getAttribute("edit_pages.jsp-selLayout");
 
+boolean locked = GetterUtil.getBoolean(selLayout.getTypeSettingsProperty("locked"));
+
 Locale defaultLocale = LocaleUtil.getDefault();
 String defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
-
-boolean locked;
-
-UnicodeProperties typeSettings = selLayout.getTypeSettingsProperties();
-
-try {
-	locked = Boolean.parseBoolean(typeSettings.get("locked"));
-}
-catch (Exception e) {
-	locked = false;
-}
 %>
 
 <liferay-ui:error-marker key="errorSection" value="details" />
