@@ -307,7 +307,7 @@ String editorContent = emailBody;
 
 				<aui:fieldset>
 					<aui:input name="preferences--enableSocialBookmarks--" type="checkbox" value="<%= enableSocialBookmarks %>" />
-					
+
 					<div class="social-boomarks-options" id="<portlet:namespace />socialBookmarksOptions">
 						<aui:select label="display-style" name="preferences--socialBookmarksDisplayStyle--">
 							<aui:option label="simple" selected='<%= socialBookmarksDisplayStyle.equals("simple") %>' />
@@ -388,7 +388,7 @@ String editorContent = emailBody;
 		},
 		['liferay-util-list-fields']
 	);
-	
+
 	Liferay.Util.toggleBoxes('<portlet:namespace />enableSocialBookmarksCheckbox','<portlet:namespace />socialBookmarksOptions');
 </aui:script>
 
