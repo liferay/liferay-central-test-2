@@ -429,30 +429,26 @@ public class GroupImpl extends GroupBaseImpl {
 				return true;
 			}
 
-			Portlet stagedPortlet = null;
-			String stagedPortletDataHandlerClass = null;
-			String stagedPortletId = null;
+			UnicodeProperties typeSettingsProperties =
+				getTypeSettingsProperties();
 
-			UnicodeProperties properties = getTypeSettingsProperties();
+			for (Map.Entry<String, String> entry :
+					typeSettingsProperties.entrySet()) {
 
-			for (Map.Entry<String, String> entry : properties.entrySet()) {
 				String key = entry.getKey();
 
 				if (!key.contains(StagingConstants.STAGED_PORTLET)) {
 					continue;
 				}
 
-				stagedPortletId = StringUtil.replace(
+				String stagedPortletId = StringUtil.replace(
 					key, StagingConstants.STAGED_PORTLET, StringPool.BLANK);
 
-				stagedPortlet = PortletLocalServiceUtil.getPortletById(
+				Portlet stagedPortlet = PortletLocalServiceUtil.getPortletById(
 					stagedPortletId);
 
-				stagedPortletDataHandlerClass =
-					stagedPortlet.getPortletDataHandlerClass();
-
 				if (portletDataHandlerClass.equals(
-						stagedPortletDataHandlerClass)) {
+						stagedPortlet.getPortletDataHandlerClass())) {
 
 					return GetterUtil.getBoolean(entry.getValue());
 				}
