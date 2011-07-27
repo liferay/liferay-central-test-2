@@ -101,8 +101,6 @@ public abstract class LiferayRepositoryBase extends LiferayBase {
 			DLFileEntry dlFileEntry, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		// Resources
-
 		if (serviceContext.getAddGroupPermissions() ||
 			serviceContext.getAddGuestPermissions()) {
 
@@ -115,8 +113,8 @@ public abstract class LiferayRepositoryBase extends LiferayBase {
 				dlFileEntry, serviceContext.getGroupPermissions(),
 				serviceContext.getGuestPermissions());
 		}
-
 	}
+
 	protected long getGroupId() {
 		return _groupId;
 	}
