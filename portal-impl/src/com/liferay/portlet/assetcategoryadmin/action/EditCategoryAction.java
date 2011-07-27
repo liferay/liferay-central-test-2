@@ -16,9 +16,7 @@ package com.liferay.portlet.assetcategoryadmin.action;
 
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
-import com.liferay.portal.kernel.servlet.ServletResponseUtil;
 import com.liferay.portal.kernel.util.Constants;
-import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.LocalizationUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -26,9 +24,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
-import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.struts.PortletAction;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.asset.model.AssetCategory;
 import com.liferay.portlet.asset.service.AssetCategoryServiceUtil;
 
@@ -36,8 +32,6 @@ import java.util.Locale;
 import java.util.Map;
 
 import javax.portlet.*;
-
-import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -71,14 +65,7 @@ public class EditCategoryAction extends PortletAction {
 			jsonObject.putException(e);
 		}
 
-		HttpServletResponse response = PortalUtil.getHttpServletResponse(
-			actionResponse);
-
-		response.setContentType(ContentTypes.TEXT_JAVASCRIPT);
-
-		ServletResponseUtil.write(response, jsonObject.toString());
-
-		setForward(actionRequest, ActionConstants.COMMON_NULL);
+		writeJSON(actionRequest, actionResponse, jsonObject);
 	}
 
 	@Override
