@@ -1610,15 +1610,19 @@ public class ServicePreAction extends Action {
 
 			Portlet groupPagesPortlet = PortletLocalServiceUtil.getPortletById(
 				PortletKeys.GROUP_PAGES);
-			Portlet siteMembershipsAdmin =
+
+			siteContentPortlets.remove(groupPagesPortlet);
+
+			Portlet siteMembershipsAdminPortlet =
 				PortletLocalServiceUtil.getPortletById(
 					PortletKeys.SITE_MEMBERSHIPS_ADMIN);
+
+			siteContentPortlets.remove(siteMembershipsAdminPortlet);
+
 			Portlet siteSettingsPortlet =
 				PortletLocalServiceUtil.getPortletById(
 					PortletKeys.SITE_SETTINGS);
 
-			siteContentPortlets.remove(groupPagesPortlet);
-			siteContentPortlets.remove(siteMembershipsAdmin);
 			siteContentPortlets.remove(siteSettingsPortlet);
 
 			showSiteContentIcon = PortletPermissionUtil.contains(
