@@ -290,7 +290,7 @@ public class DLStoreIndexer extends BaseIndexer {
 				try {
 					is.close();
 				}
-				catch (IOException e) {
+				catch (IOException ioe) {
 				}
 			}
 		}

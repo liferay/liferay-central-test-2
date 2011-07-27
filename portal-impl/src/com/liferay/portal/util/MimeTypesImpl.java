@@ -60,7 +60,7 @@ public class MimeTypesImpl implements MimeTypes {
 				try {
 					is.close();
 				}
-				catch (IOException e) {
+				catch (IOException ioe) {
 				}
 			}
 		}

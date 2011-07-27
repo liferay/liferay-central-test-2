@@ -99,7 +99,7 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 				try {
 					is.close();
 				}
-				catch (IOException e) {
+				catch (IOException ioe) {
 				}
 			}
 		}
@@ -573,7 +573,7 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 				try {
 					is.close();
 				}
-				catch (IOException e) {
+				catch (IOException ioe) {
 				}
 			}
 		}
