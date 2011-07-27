@@ -16,6 +16,7 @@ package com.liferay.portlet.assettagadmin.action;
 
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.servlet.ServletResponseUtil;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -29,7 +30,6 @@ import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.asset.model.AssetTag;
 import com.liferay.portlet.asset.service.AssetTagServiceUtil;
-import com.liferay.util.servlet.ServletResponseUtil;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
