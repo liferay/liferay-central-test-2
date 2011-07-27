@@ -178,8 +178,10 @@ public class DLStoreIndexer extends BaseIndexer {
 			long[] assetCategoryIds = fileModel.getAssetCategoryIds();
 
 			if (assetCategoryIds == null) {
-				assetCategoryIds = AssetCategoryLocalServiceUtil.getCategoryIds(
-					DLFileEntry.class.getName(), fileEntry.getFileEntryId());
+				assetCategoryIds =
+					AssetCategoryLocalServiceUtil.getCategoryIds(
+						DLFileEntry.class.getName(),
+					fileEntry.getFileEntryId());
 			}
 
 			document.addKeyword(Field.ASSET_CATEGORY_IDS, assetCategoryIds);
@@ -187,8 +189,10 @@ public class DLStoreIndexer extends BaseIndexer {
 			String[] assetCategoryNames = fileModel.getAssetCategoryNames();
 
 			if (assetCategoryNames == null) {
-				assetCategoryNames = AssetCategoryLocalServiceUtil.getCategoryNames(
-					DLFileEntry.class.getName(), fileEntry.getFileEntryId());
+				assetCategoryNames =
+					AssetCategoryLocalServiceUtil.getCategoryNames(
+						DLFileEntry.class.getName(),
+					fileEntry.getFileEntryId());
 			}
 
 			document.addKeyword(Field.ASSET_CATEGORY_NAMES, assetCategoryNames);
@@ -217,7 +221,8 @@ public class DLStoreIndexer extends BaseIndexer {
 			document.addText(Field.DESCRIPTION, fileEntry.getDescription());
 			document.addKeyword(
 				Field.ENTRY_CLASS_NAME, DLFileEntry.class.getName());
-			document.addKeyword(Field.ENTRY_CLASS_PK, fileEntry.getFileEntryId());
+			document.addKeyword(
+				Field.ENTRY_CLASS_PK, fileEntry.getFileEntryId());
 			document.addKeyword(Field.FOLDER_ID, folderId);
 			document.addKeyword(
 				Field.GROUP_ID, getParentGroupId(fileModel.getGroupId()));
@@ -262,13 +267,15 @@ public class DLStoreIndexer extends BaseIndexer {
 			document.addKeyword(Field.USER_NAME, userName, true);
 
 			document.addKeyword("extension", fileEntry.getExtension());
-			document.addKeyword("fileEntryTypeId", fileEntry.getFileEntryTypeId());
+			document.addKeyword(
+				"fileEntryTypeId", fileEntry.getFileEntryTypeId());
 			document.addKeyword("path", fileModel.getFileName());
 			document.addKeyword("repositoryId", fileModel.getRepositoryId());
 
-			ExpandoBridge expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(
-				fileModel.getCompanyId(), DLFileEntry.class.getName(),
-				fileVersion.getFileVersionId());
+			ExpandoBridge expandoBridge =
+				ExpandoBridgeFactoryUtil.getExpandoBridge(
+					fileModel.getCompanyId(), DLFileEntry.class.getName(),
+					fileVersion.getFileVersionId());
 
 			ExpandoBridgeIndexerUtil.addAttributes(document, expandoBridge);
 

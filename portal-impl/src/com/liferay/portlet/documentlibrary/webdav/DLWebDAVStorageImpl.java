@@ -670,9 +670,7 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 			FileUtil.write(file, request.getInputStream());
 
-			if (contentType.equals(
-					ContentTypes.APPLICATION_OCTET_STREAM)) {
-
+			if (contentType.equals(ContentTypes.APPLICATION_OCTET_STREAM)) {
 				contentType = MimeTypesUtil.getContentType(file);
 			}
 
@@ -699,8 +697,8 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			}
 			catch (NoSuchFileEntryException nsfee) {
 				DLAppServiceUtil.addFileEntry(
-					groupId, parentFolderId, contentType, title,
-					description, changeLog, file, serviceContext);
+					groupId, parentFolderId, contentType, title, description,
+					changeLog, file, serviceContext);
 			}
 
 			if (_log.isInfoEnabled()) {
