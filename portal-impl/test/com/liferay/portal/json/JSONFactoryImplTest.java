@@ -18,42 +18,42 @@ import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.util.BaseTestCase;
-public class JSONLooseSerializationTest extends BaseTestCase {
+
+/**
+ * @author Igor Spasic
+ */
+public class JSONFactoryImplTest extends BaseTestCase {
 
 	public void testAnnotations() {
-
 		FooBean fooBean = new FooBean();
 
-		String jsonString =
-			_removeQuotationMarks(JSONFactoryUtil.looseSerialize(fooBean));
+		String json = _removeQuotationMarks(
+			JSONFactoryUtil.looseSerialize(fooBean));
 
 		assertEquals(
 			"{class:com.liferay.portal.json.FooBean,name:bar,value:173}",
-			jsonString);
-
+			json);
 	}
 
 	public void testCollection() {
-
 		FooBean1 fooBean1 = new FooBean1();
 
-		String jsonString =
-			_removeQuotationMarks(JSONFactoryUtil.looseSerialize(fooBean1));
+		String json = _removeQuotationMarks(
+			JSONFactoryUtil.looseSerialize(fooBean1));
 
 		assertEquals(
-			"{class:com.liferay.portal.json.FooBean1," +
-				"collection:[element],value:173}",
-			jsonString);
+			"{class:com.liferay.portal.json.FooBean1,collection:[element]," +
+				"value:173}",
+			json);
 	}
 
 	public void testStrictMode() {
-
 		FooBean2 fooBean2 = new FooBean2();
 
-		String jsonString =
-			_removeQuotationMarks(JSONFactoryUtil.looseSerialize(fooBean2));
+		String json = _removeQuotationMarks(
+			JSONFactoryUtil.looseSerialize(fooBean2));
 
-		assertEquals("{value:173}", jsonString);
+		assertEquals("{value:173}", json);
 	}
 
 	private String _removeQuotationMarks(String string) {

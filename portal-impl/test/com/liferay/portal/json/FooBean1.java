@@ -17,10 +17,14 @@ package com.liferay.portal.json;
 import com.liferay.portal.kernel.json.JSON;
 
 import java.util.Collection;
+
+/**
+ * @author Igor Spasic
+ */
 public class FooBean1 extends FooBean {
 
 	@JSON
-	public Collection getCollection() {
+	public Collection<Object> getCollection() {
 		return super.getCollection();
 	}
 
