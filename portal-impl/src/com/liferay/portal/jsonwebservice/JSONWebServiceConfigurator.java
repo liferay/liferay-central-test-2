@@ -91,11 +91,10 @@ public class JSONWebServiceConfigurator extends FindClass {
 
 			classPathFiles[0] = classPathFile;
 
-			FindFile findFile =
-				new WildcardFindFile(libDir, "*-portlet-service.jar");
+			FindFile findFile = new WildcardFindFile(
+				libDir, "*-portlet-service.jar");
 
 			classPathFiles[1] = findFile.nextFile();
-
 		}
 		else {
 			Thread currentThread = Thread.currentThread();
