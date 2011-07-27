@@ -16,8 +16,6 @@ package com.liferay.portal.kernel.util;
 
 import com.liferay.portal.kernel.test.TestCase;
 
-import java.io.IOException;
-
 /**
  * @author Alexander Chow
  * @author Shuyang Zhou
@@ -141,7 +139,7 @@ public class StringUtilTest extends TestCase {
 		assertEquals(expected, actual);
 	}
 
-	public void testSplitLines() throws IOException {
+	public void testSplitLines() {
 		String singleLine = "abcdefg";
 
 		String[] lines = StringUtil.splitLines(singleLine);
@@ -189,7 +187,6 @@ public class StringUtilTest extends TestCase {
 		assertEquals("hijk", lines[2]);
 		assertEquals("", lines[3]);
 		assertEquals("lmn", lines[4]);
-
 	}
 
 	public void testStripChar() {

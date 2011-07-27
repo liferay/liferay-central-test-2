@@ -1128,6 +1128,7 @@ public class StringUtil {
 
 		if ((delimiter == CharPool.RETURN) ||
 			(delimiter == CharPool.NEW_LINE)) {
+
 			return splitLines(s);
 		}
 
@@ -1302,7 +1303,6 @@ public class StringUtil {
 
 	public static String[] splitLines(String s) {
 		if (Validator.isNull(s)) {
-
 			return _emptyStringArray;
 		}
 
