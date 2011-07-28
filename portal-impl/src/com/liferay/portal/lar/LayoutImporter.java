@@ -192,9 +192,6 @@ public class LayoutImporter {
 			stopWatch.start();
 		}
 
-		ServiceContext serviceContext =
-			ServiceContextThreadLocal.getServiceContext();
-
 		LayoutCache layoutCache = new LayoutCache();
 
 		LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
@@ -275,6 +272,9 @@ public class LayoutImporter {
 
 		String layoutSetPrototypeUuid = headerElement.attributeValue(
 			"layout-set-prototype-uuid");
+
+		ServiceContext serviceContext =
+			ServiceContextThreadLocal.getServiceContext();
 
 		if (Validator.isNotNull(layoutSetPrototypeUuid)) {
 			if (layoutSetPrototypeInherited) {

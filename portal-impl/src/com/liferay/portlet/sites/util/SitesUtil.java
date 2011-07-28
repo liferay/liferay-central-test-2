@@ -241,6 +241,9 @@ public class SitesUtil {
 
 		Group layoutSetGroup = layoutSet.getGroup();
 
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			request);
+
 		if (layoutSetGroup.isLayoutSetPrototype()) {
 			LayoutSetPrototype layoutSetPrototype =
 				LayoutSetPrototypeLocalServiceUtil.getLayoutSetPrototype(
@@ -259,16 +262,15 @@ public class SitesUtil {
 					(isLayoutLocked(linkedLayout) ||
 					 isLayoutToBeUpdatedFromTemplate(linkedLayout))) {
 
-					LayoutServiceUtil.deleteLayout(linkedLayout.getPlid());
+					LayoutServiceUtil.deleteLayout(
+						linkedLayout.getPlid(), serviceContext);
 				}
 			}
 		}
 
-		ServiceContext serviceContext = ServiceContextFactory.getInstance(
-			request);
-
 		LayoutServiceUtil.deleteLayout(
-			groupId, privateLayout, layoutId, serviceContext);	}
+			groupId, privateLayout, layoutId, serviceContext);
+	}
 
 	public static void deleteLayout(
 			RenderRequest renderRequest, RenderResponse renderResponse)

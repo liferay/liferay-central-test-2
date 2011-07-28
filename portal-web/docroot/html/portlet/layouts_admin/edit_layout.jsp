@@ -98,7 +98,7 @@ String[][] categorySections = {mainSections};
 
 	<c:choose>
 		<c:when test="<%= incomplete %>">
-			<liferay-ui:message arguments="<%= new Object[] {selLayout.getName(locale), layoutSetBranchName} %>" key="the-page-x-is-not-enabled-in-x-but-it-is-available-in-other-pages-variations" />
+			<liferay-ui:message arguments="<%= new Object[] {selLayout.getName(locale), layoutSetBranchName} %>" key="the-page-x-is-not-enabled-in-x,-but-is-available-in-other-pages-variations" />
 
 			<aui:input name="incompleteLayoutRevisionId" value="<%= layoutRevision.getLayoutRevisionId() %>" type="hidden" />
 

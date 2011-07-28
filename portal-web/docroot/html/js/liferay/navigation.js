@@ -15,7 +15,7 @@ AUI().add(
 		 * Required
 		 * hasPermission {boolean}: Whether the current user has permission to modify the navigation
 		 * layoutIds {array}: The displayable layout ids.
-		 * layoutSetBranchId {String}: The id of the layoutSetBranch (when branching is enabled).
+		 * layoutSetBranchId {String}: The id of the layout set branch (when branching is enabled).
 		 * navBlock {string|object}: A selector or DOM element of the navigation.
 		 */
 

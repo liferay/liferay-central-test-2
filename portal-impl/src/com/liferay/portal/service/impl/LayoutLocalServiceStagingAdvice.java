@@ -54,6 +54,24 @@ import org.aopalliance.intercept.MethodInvocation;
 public class LayoutLocalServiceStagingAdvice
 	extends LayoutLocalServiceImpl implements MethodInterceptor {
 
+	@Override
+	public void deleteLayout(
+			Layout layout, boolean updateLayoutSet,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		long layoutSetBranchId = ParamUtil.getLong(
+			serviceContext, "layoutSetBranchId");
+
+		if (layoutSetBranchId > 0) {
+			layoutRevisionLocalService.deleteLayoutRevisions(
+				layoutSetBranchId, layout.getPlid());
+		}
+		else {
+			super.deleteLayout(layout, updateLayoutSet, serviceContext);
+		}
+	}
+
 	public Object invoke(MethodInvocation methodInvocation) throws Throwable {
 		Method method = methodInvocation.getMethod();
 
@@ -71,7 +89,14 @@ public class LayoutLocalServiceStagingAdvice
 
 		Object returnValue = null;
 
-		if (methodName.equals("updateLayout") && (arguments.length == 16)) {
+		if (methodName.equals("deleteLayout") && (arguments.length == 3)) {
+			deleteLayout(
+				(Layout)arguments[0], (Boolean)arguments[1],
+				(ServiceContext)arguments[2]);
+		}
+		else if (methodName.equals("updateLayout") &&
+				 (arguments.length == 16)) {
+
 			returnValue = updateLayout(
 				(Long)arguments[0], (Boolean)arguments[1], (Long)arguments[2],
 				(Long)arguments[3], (Map<Locale, String>)arguments[4],
@@ -82,11 +107,6 @@ public class LayoutLocalServiceStagingAdvice
 				(Boolean)arguments[10], (String)arguments[11],
 				(Boolean)arguments[12], (byte[])arguments[13],
 				(Boolean)arguments[14], (ServiceContext)arguments[15]);
-		}
-		else if (methodName.equals("deleteLayout") && (arguments.length == 3)) {
-			deleteLayout(
-				(Layout) arguments[0], (Boolean) arguments[1],
-				(ServiceContext)arguments[2]);
 		}
 		else if (methodName.equals("getLayouts")) {
 			if (arguments.length == 6) {
@@ -112,24 +132,6 @@ public class LayoutLocalServiceStagingAdvice
 		returnValue = wrapReturnValue(returnValue, showIncomplete);
 
 		return returnValue;
-	}
-
-	@Override
-	public void deleteLayout(
-			Layout layout, boolean updateLayoutSet,
-			ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		long layoutSetBranchId = ParamUtil.getLong(
-			serviceContext, "layoutSetBranchId");
-
-		if (layoutSetBranchId > 0) {
-			layoutRevisionLocalService.deleteLayoutRevisions(
-				layoutSetBranchId, layout.getPlid());
-		}
-		else {
-			super.deleteLayout(layout, updateLayoutSet, serviceContext);
-		}
 	}
 
 	@Override

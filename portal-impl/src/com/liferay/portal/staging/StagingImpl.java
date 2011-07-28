@@ -18,6 +18,7 @@ import com.liferay.portal.LayoutSetBranchNameException;
 import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.NoSuchLayoutBranchException;
 import com.liferay.portal.NoSuchLayoutException;
+import com.liferay.portal.NoSuchLayoutRevisionException;
 import com.liferay.portal.RemoteExportException;
 import com.liferay.portal.RemoteOptionsException;
 import com.liferay.portal.kernel.cal.DayAndPosition;
@@ -1573,7 +1574,7 @@ public class StagingImpl implements Staging {
 
 				layoutBranchId = layoutBranch.getLayoutBranchId();
 			}
-			catch(NoSuchLayoutBranchException nlbe) {
+			catch (NoSuchLayoutBranchException nlbe) {
 			}
 		}
 
@@ -1587,7 +1588,7 @@ public class StagingImpl implements Staging {
 					layoutRevisionId = layoutRevision.getLayoutRevisionId();
 				}
 			}
-			catch (PortalException pe) {
+			catch (NoSuchLayoutRevisionException nslre) {
 			}
 		}
 
