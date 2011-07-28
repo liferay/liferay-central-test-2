@@ -358,13 +358,6 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 			}
 		}
 
-		Map<Long, Long> fileEntryIds =
-			(Map<Long, Long>)portletDataContext.getNewPrimaryKeysMap(
-				DLFileEntry.class);
-
-		fileEntryIds.put(
-			fileEntry.getFileEntryId(), importedFileEntry.getFileEntryId());
-
 		Map<String, String> fileEntryTitles =
 			(Map<String, String>)portletDataContext.getNewPrimaryKeysMap(
 				FileEntry.class.getName() + ".title");
@@ -698,7 +691,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		Map<Long, Long> fileEntryPKs =
 			(Map<Long, Long>)portletDataContext.getNewPrimaryKeysMap(
-				DLFileEntry.class);
+				FileEntry.class);
 
 		long fileEntryId = MapUtil.getLong(
 			fileEntryPKs, fileShortcut.getToFileEntryId(),
