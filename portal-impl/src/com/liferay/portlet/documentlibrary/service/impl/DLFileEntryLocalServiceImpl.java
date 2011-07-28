@@ -235,15 +235,11 @@ public class DLFileEntryLocalServiceImpl
 	public void cancelCheckOut(long userId, long fileEntryId)
 		throws PortalException, SystemException {
 
-		boolean hasLock = hasFileEntryLock(userId, fileEntryId);
-
-		boolean isCheckedOut = isFileEntryCheckedOut(fileEntryId);
-
-		if (!isCheckedOut) {
+		if (!isFileEntryCheckedOut(fileEntryId)) {
 			return;
 		}
 
-		if (!hasLock) {
+		if (!hasFileEntryLock(userId, fileEntryId)) {
 			lockFileEntry(userId, fileEntryId);
 		}
 
@@ -272,15 +268,11 @@ public class DLFileEntryLocalServiceImpl
 			String changeLog, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		boolean hasLock = hasFileEntryLock(userId, fileEntryId);
-
-		boolean isCheckedOut = isFileEntryCheckedOut(fileEntryId);
-
-		if (!isCheckedOut) {
+		if (!isFileEntryCheckedOut(fileEntryId)) {
 			return;
 		}
 
-		if (!hasLock) {
+		if (!hasFileEntryLock(userId, fileEntryId)) {
 			lockFileEntry(userId, fileEntryId);
 		}
 
@@ -504,9 +496,7 @@ public class DLFileEntryLocalServiceImpl
 	public void deleteFileEntry(long userId, long fileEntryId)
 		throws PortalException, SystemException {
 
-		boolean hasLock = hasFileEntryLock(userId, fileEntryId);
-
-		if (!hasLock) {
+		if (!hasFileEntryLock(userId, fileEntryId)) {
 			lockFileEntry(userId, fileEntryId);
 		}
 
@@ -718,9 +708,7 @@ public class DLFileEntryLocalServiceImpl
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		boolean hasLock = hasFileEntryLock(userId, fileEntryId);
-
-		if (!hasLock) {
+		if (!hasFileEntryLock(userId, fileEntryId)) {
 			lockFileEntry(userId, fileEntryId);
 		}
 
