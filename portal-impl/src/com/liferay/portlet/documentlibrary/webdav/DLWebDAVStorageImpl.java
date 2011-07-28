@@ -651,8 +651,6 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			String title = WebDAVUtil.getResourceName(pathArray);
 			String description = StringPool.BLANK;
 			String changeLog = StringPool.BLANK;
-			long contentLength = GetterUtil.getLong(
-				request.getHeader(HttpHeaders.CONTENT_LENGTH));
 
 			ServiceContext serviceContext = new ServiceContext();
 
