@@ -243,15 +243,6 @@ public class PortletPermissionUtil {
 			permissionChecker, portletId, actionId);
 	}
 
-	public static String firstContains(
-			PermissionChecker permissionChecker, long groupId, long plid,
-			Collection<Portlet> portlets, String actionId)
-		throws PortalException, SystemException {
-
-		return getPortletPermission().firstContains(
-			permissionChecker, groupId, plid, portlets, actionId);
-	}
-
 	public static PortletPermission getPortletPermission() {
 		return _portletPermission;
 	}

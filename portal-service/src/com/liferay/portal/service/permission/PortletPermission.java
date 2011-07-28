@@ -153,11 +153,6 @@ public interface PortletPermission {
 			String actionId)
 		throws PortalException, SystemException;
 
-	public String firstContains(
-			PermissionChecker permissionChecker, long groupId, long plid,
-			Collection<Portlet> portlets, String actionId)
-		throws PortalException, SystemException;
-
 	public String getPrimaryKey(long plid, String portletId);
 
 	public boolean hasLayoutManagerPermission(

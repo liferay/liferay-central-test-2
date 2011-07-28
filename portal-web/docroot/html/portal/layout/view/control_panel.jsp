@@ -21,10 +21,16 @@ String ppid = ParamUtil.getString(request, "p_p_id");
 
 String controlPanelCategory = themeDisplay.getControlPanelCategory();
 
-if (PortletCategoryKeys.CONTENT.equals(controlPanelCategory) && Validator.isNull(ppid)) {
-	List<Portlet> siteContentPortlets =	PortalUtil.getControlPanelPortlets(PortletCategoryKeys.CONTENT, themeDisplay);
+if (controlPanelCategory.equals(PortletCategoryKeys.CONTENT) && Validator.isNull(ppid)) {
+	List<Portlet> portlets = PortalUtil.getControlPanelPortlets(PortletCategoryKeys.CONTENT, themeDisplay);
 
-	ppid = PortletPermissionUtil.firstContains(themeDisplay.getPermissionChecker(), scopeGroupId, plid, siteContentPortlets, ActionKeys.VIEW);
+	for (Portlet portlet : portlets) {
+		if (PortletPermissionUtil.contains(permissionChecker, scopeGroupId, 0, portlet.getPortletId(), ActionKeys.ACCESS_IN_CONTROL_PANEL, true)) {
+			ppid = portlet.getPortletId();
+
+			break;
+		}
+	}
 }
 
 if (ppid.equals(PortletKeys.PORTLET_CONFIGURATION)) {

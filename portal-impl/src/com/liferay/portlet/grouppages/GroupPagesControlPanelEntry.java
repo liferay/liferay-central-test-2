@@ -36,7 +36,7 @@ public class GroupPagesControlPanelEntry extends BaseControlPanelEntry {
 
 		String controlPanelCategory = themeDisplay.getControlPanelCategory();
 
-		if (PortletCategoryKeys.CONTENT.equals(controlPanelCategory)) {
+		if (controlPanelCategory.equals(PortletCategoryKeys.CONTENT)) {
 			return false;
 		}
 
