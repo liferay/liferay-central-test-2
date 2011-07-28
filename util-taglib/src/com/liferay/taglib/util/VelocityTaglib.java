@@ -96,7 +96,9 @@ public class VelocityTaglib {
 	}
 
 	/**
-	 * @deprecated {@link #actionURL(String, String, Boolean, Boolean, Boolean, String, long, String, Boolean, Boolean, long, long, Boolean, String)}
+	 * @deprecated {@link #actionURL(String, String, Boolean, Boolean, Boolean,
+	 *             String, long, String, Boolean, Boolean, long, long, Boolean,
+	 *             String)}
 	 */
 	public void actionURL(
 			String windowState, String portletMode, Boolean secure,
@@ -435,12 +437,16 @@ public class VelocityTaglib {
 		MetaTagsTag.doTag(_servletContext, _request, _response);
 	}
 
-	@Deprecated
+	/**
+	 * @deprecated {@link #mySites}
+	 */
 	public void myPlaces() throws Exception {
 		mySites();
 	}
 
-	@Deprecated
+	/**
+	 * @deprecated {@link #mySites(int)}
+	 */
 	public void myPlaces(int max) throws Exception {
 		mySites(max);
 	}
@@ -490,7 +496,8 @@ public class VelocityTaglib {
 	}
 
 	/**
-	 * @deprecated {@link #renderURL(String, String, Boolean, Boolean, Boolean, long, String, Boolean, Boolean, long, long, Boolean, String)}
+	 * @deprecated {@link #renderURL(String, String, Boolean, Boolean, Boolean,
+	 *             long, String, Boolean, Boolean, long, long, Boolean, String)}
 	 */
 	public void renderURL(
 			String windowState, String portletMode, Boolean secure,

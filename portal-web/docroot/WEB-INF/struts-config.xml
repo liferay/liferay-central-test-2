@@ -1244,7 +1244,6 @@
 			<forward name="portlet.my_sites.view" path="portlet.my_sites.view" />
 		</action>
 
-
 		<!-- My Workflow Instances -->
 
 		<action path="/my_workflow_instances/edit_workflow_instance" type="com.liferay.portlet.workflowinstances.action.EditWorkflowInstanceAction">

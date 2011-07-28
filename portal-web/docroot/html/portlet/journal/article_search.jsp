@@ -54,7 +54,7 @@ ArticleDisplayTerms displayTerms = (ArticleDisplayTerms)searchContainer.getDispl
 		<c:if test="<%= !portletName.equals(PortletKeys.JOURNAL) || ((themeDisplay.getScopeGroupId() == themeDisplay.getCompanyGroupId()) && (Validator.isNotNull(displayTerms.getStructureId()) || Validator.isNotNull(displayTerms.getTemplateId()))) %>">
 
 			<%
-			List<Group> myPlaces = user.getMySites();
+			List<Group> mySites = user.getMySites();
 
 			List<Layout> scopeLayouts = new ArrayList<Layout>();
 
@@ -66,13 +66,13 @@ ArticleDisplayTerms displayTerms = (ArticleDisplayTerms)searchContainer.getDispl
 				<aui:option label="global" selected="<%= displayTerms.getGroupId() == themeDisplay.getCompanyGroupId() %>" value="<%= themeDisplay.getCompanyGroupId() %>" />
 
 				<%
-				for (Group myPlace : myPlaces) {
-					if (myPlace.hasStagingGroup() && !myPlace.isStagedRemotely() && myPlace.isStagedPortlet(PortletKeys.JOURNAL)) {
-						myPlace = myPlace.getStagingGroup();
+				for (Group mySite : mySites) {
+					if (mySite.hasStagingGroup() && !mySite.isStagedRemotely() && mySite.isStagedPortlet(PortletKeys.JOURNAL)) {
+						mySite = mySite.getStagingGroup();
 					}
 				%>
 
-					<aui:option label='<%= myPlace.isUser() ? "my-site" : HtmlUtil.escape(myPlace.getDescriptiveName()) %>' selected="<%= displayTerms.getGroupId() == myPlace.getGroupId() %>" value="<%= myPlace.getGroupId() %>" />
+					<aui:option label='<%= mySite.isUser() ? "my-site" : HtmlUtil.escape(mySite.getDescriptiveName()) %>' selected="<%= displayTerms.getGroupId() == mySite.getGroupId() %>" value="<%= mySite.getGroupId() %>" />
 
 				<%
 				}
