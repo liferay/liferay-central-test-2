@@ -56,32 +56,32 @@ public class UniqueList<E> extends ArrayList<E> {
 
 	@Override
 	public boolean addAll(Collection<? extends E> c) {
-		boolean changed = false;
+		boolean modified = false;
 
 		for (E e : c) {
 			if (!contains(e)) {
 				super.add(e);
-				
-				changed = true;
+
+				modified = true;
 			}
 		}
 
-		return changed;
+		return modified;
 	}
 
 	@Override
 	public boolean addAll(int index, Collection<? extends E> c) {
-		boolean changed = false;
-		
+		boolean modified = false;
+
 		for (E e : c) {
 			if (!contains(e)) {
 				super.add(index++, e);
-				
-				changed = true;
+
+				modified = true;
 			}
 		}
-		
-		return changed;
+
+		return modified;
 	}
 
 	@Override
