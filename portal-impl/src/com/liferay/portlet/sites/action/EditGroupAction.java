@@ -362,8 +362,8 @@ public class EditGroupAction extends PortletAction {
 			(privateLayoutSetPrototypeId > 0)) {
 
 			SitesUtil.applyLayoutSetPrototypes(
-				liveGroup, publicLayoutSetPrototypeId, privateLayoutSetPrototypeId,
-				serviceContext);
+				liveGroup, publicLayoutSetPrototypeId,
+				privateLayoutSetPrototypeId, serviceContext);
 		}
 
 		// Staging
