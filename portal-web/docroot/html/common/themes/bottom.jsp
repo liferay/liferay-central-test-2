@@ -18,17 +18,48 @@
 
 <%@ page import="com.liferay.taglib.aui.ScriptTag" %>
 
-<%-- Portlet CSS References --%>
-
 <%
 List<Portlet> portlets = (List<Portlet>)request.getAttribute(WebKeys.LAYOUT_PORTLETS);
 %>
+
+<%-- Portlet CSS References --%>
 
 <%@ include file="/html/common/themes/bottom_portlet_resources_css.jspf" %>
 
 <%-- Portlet JavaScript References --%>
 
 <%@ include file="/html/common/themes/bottom_portlet_resources_js.jspf" %>
+
+<%
+Set<String> runtimePortletIds = (Set<String>)request.getAttribute(WebKeys.RUNTIME_PORTLET_IDS);
+
+if ((runtimePortletIds != null) && !runtimePortletIds.isEmpty()) {
+	List<Portlet> runtimePortlets = new ArrayList<Portlet>();
+
+	for (String runtimePortletId : runtimePortletIds) {
+		Portlet runtimePortlet = PortletLocalServiceUtil.getPortletById(runtimePortletId);
+
+		if (runtimePortlet != null) {
+			runtimePortlets.add(runtimePortlet);
+		}
+	}
+
+	runtimePortlets = portlets;
+%>
+
+	<%-- Portlet CSS References --%>
+
+	<%@ include file="/html/common/themes/top_portlet_resources_css.jspf" %>
+	<%@ include file="/html/common/themes/bottom_portlet_resources_css.jspf" %>
+
+	<%-- Portlet JavaScript References --%>
+
+	<%@ include file="/html/common/themes/top_portlet_resources_js.jspf" %>
+	<%@ include file="/html/common/themes/bottom_portlet_resources_js.jspf" %>
+
+<%
+}
+%>
 
 <c:if test="<%= PropsValues.JAVASCRIPT_LOG_ENABLED %>">
 	<%@ include file="/html/common/themes/bottom_js_logging.jspf" %>
