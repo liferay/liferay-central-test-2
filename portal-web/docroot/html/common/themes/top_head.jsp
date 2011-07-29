@@ -60,7 +60,11 @@ if (layout != null) {
 		ppid = ParamUtil.getString(request, PortalUtil.getPortletNamespace(ppid) + "portletResource");
 
 		if (Validator.isNotNull(ppid)) {
-			portlets.add(PortletLocalServiceUtil.getPortletById(company.getCompanyId(), ppid));
+			Portlet portlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(), ppid);
+
+			if (portlet != null) {
+				portlets.add(portlet);
+			}
 		}
 	}
 	else if (layout.isTypePortlet()) {
@@ -70,7 +74,7 @@ if (layout != null) {
 			if (Validator.isNotNull(ppid)) {
 				Portlet portlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(), ppid);
 
-				if (!portlets.contains(portlet)) {
+				if ((portlet != null) && !portlets.contains(portlet)) {
 					portlets.add(portlet);
 				}
 			}
@@ -79,7 +83,11 @@ if (layout != null) {
 	else if ((layout.isTypeControlPanel() || layout.isTypePanel()) && Validator.isNotNull(ppid)) {
 		portlets = new ArrayList<Portlet>();
 
-		portlets.add(PortletLocalServiceUtil.getPortletById(company.getCompanyId(), ppid));
+		Portlet portlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(), ppid);
+
+		if (portlet != null) {
+			portlets.add(portlet);
+		}
 	}
 
 	request.setAttribute(WebKeys.LAYOUT_PORTLETS, portlets);
