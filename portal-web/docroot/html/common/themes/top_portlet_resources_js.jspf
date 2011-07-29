@@ -14,10 +14,16 @@
  */
 --%>
 
-<c:if test="<%= portlets != null %>">
+<c:if test="<%= (portlets != null) && !portlets.isEmpty() %>">
 
 	<%
-	Set<String> headerPortalJavaScriptSet = new LinkedHashSet<String>();
+	Set<String> portletResourceStaticURLs = (Set<String>)request.getAttribute(WebKeys.PORTLET_RESOURCE_STATIC_URLS);
+
+	if (portletResourceStaticURLs == null) {
+		portletResourceStaticURLs = new LinkedHashSet<String>();
+
+		request.setAttribute(WebKeys.PORTLET_RESOURCE_STATIC_URLS, portletResourceStaticURLs);
+	}
 
 	for (Portlet curPortlet : portlets) {
 		for (String headerPortalJavaScript : curPortlet.getHeaderPortalJavaScript()) {
@@ -27,8 +33,8 @@
 				headerPortalJavaScript = PortalUtil.getStaticResourceURL(request, PortalUtil.getPathContext() + headerPortalJavaScript, curRootPortlet.getTimestamp());
 			}
 
-			if (!headerPortalJavaScriptSet.contains(headerPortalJavaScript) && !themeDisplay.isIncludedJs(headerPortalJavaScript)) {
-				headerPortalJavaScriptSet.add(headerPortalJavaScript);
+			if (!portletResourceStaticURLs.contains(headerPortalJavaScript) && !themeDisplay.isIncludedJs(headerPortalJavaScript)) {
+				portletResourceStaticURLs.add(headerPortalJavaScript);
 	%>
 
 				<script src="<%= HtmlUtil.escape(headerPortalJavaScript) %>" type="text/javascript"></script>
@@ -38,8 +44,6 @@
 		}
 	}
 
-	Set<String> headerPortletJavaScriptSet = new LinkedHashSet<String>();
-
 	for (Portlet curPortlet : portlets) {
 		for (String headerPortletJavaScript : curPortlet.getHeaderPortletJavaScript()) {
 			if (!HttpUtil.hasProtocol(headerPortletJavaScript)) {
@@ -48,8 +52,8 @@
 				headerPortletJavaScript = PortalUtil.getStaticResourceURL(request, curPortlet.getStaticResourcePath() + headerPortletJavaScript, curRootPortlet.getTimestamp());
 			}
 
-			if (!headerPortletJavaScriptSet.contains(headerPortletJavaScript)) {
-				headerPortletJavaScriptSet.add(headerPortletJavaScript);
+			if (!portletResourceStaticURLs.contains(headerPortletJavaScript)) {
+				portletResourceStaticURLs.add(headerPortletJavaScript);
 	%>
 
 				<script src="<%= HtmlUtil.escape(headerPortletJavaScript) %>" type="text/javascript"></script>
