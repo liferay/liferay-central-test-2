@@ -92,16 +92,14 @@ public class GetLayoutsAction extends JSONAction {
 
 				LayoutBranch layoutBranch = layoutRevision.getLayoutBranch();
 
-				jsonObject.put("layoutSetBranchId", layoutSetBranchId);
-				jsonObject.put(
-					"layoutSetBranchName", layoutSetBranch.getName());
 				jsonObject.put(
 					"layoutBranchId", layoutBranch.getLayoutBranchId());
 				jsonObject.put("layoutBranchName", layoutBranch.getName());
 				jsonObject.put(
-					"layoutSetBranchName", layoutSetBranch.getName());
-				jsonObject.put(
 					"layoutRevisionId", layoutRevision.getLayoutRevisionId());
+				jsonObject.put("layoutSetBranchId", layoutSetBranchId);
+				jsonObject.put(
+					"layoutSetBranchName", layoutSetBranch.getName());
 			}
 
 			jsonArray.put(jsonObject);

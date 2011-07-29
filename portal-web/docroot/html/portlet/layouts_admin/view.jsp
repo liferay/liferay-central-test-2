@@ -82,19 +82,6 @@ if ((selLayout != null) && !group.isLayoutPrototype()) {
 
 	PortalUtil.addPortletBreadcrumbEntry(request, selLayout.getName(locale), redirectURL.toString());
 }
-
-long layoutSetBranchId = ParamUtil.getLong(request, "layoutSetBranchId");
-
-if (layoutSetBranchId <= 0) {
-	layoutSetBranchId = StagingUtil.getRecentLayoutSetBranchId(user);
-}
-
-LayoutSetBranch layoutSetBranch = null;
-
-if (layoutSetBranchId > 0) {
-	layoutSetBranch = LayoutSetBranchLocalServiceUtil.getLayoutSetBranch(layoutSetBranchId);
-
-}
 %>
 
 <aui:layout cssClass="manage-view">
@@ -102,7 +89,22 @@ if (layoutSetBranchId > 0) {
 		<aui:column columnWidth="25" cssClass="manage-sitemap">
 			<div class="lfr-header-row">
 				<div class="lfr-header-row-content">
-					<c:if test="<%= stagingGroup != null && layoutSetBranch != null %>">
+
+					<%
+					long layoutSetBranchId = ParamUtil.getLong(request, "layoutSetBranchId");
+
+					if (layoutSetBranchId <= 0) {
+						layoutSetBranchId = StagingUtil.getRecentLayoutSetBranchId(user);
+					}
+
+					LayoutSetBranch layoutSetBranch = null;
+
+					if (layoutSetBranchId > 0) {
+						layoutSetBranch = LayoutSetBranchLocalServiceUtil.getLayoutSetBranch(layoutSetBranchId);
+					}
+					%>
+
+					<c:if test="<%= (stagingGroup != null) && (layoutSetBranch != null) %>">
 
 						<%
 						List<LayoutSetBranch> layoutSetBranches = LayoutSetBranchLocalServiceUtil.getLayoutSetBranches(stagingGroup.getGroupId(), privateLayout);
@@ -127,7 +129,12 @@ if (layoutSetBranchId > 0) {
 											<portlet:param name="layoutSetBranchId" value="<%= String.valueOf(curLayoutSetBranch.getLayoutSetBranchId()) %>" />
 										</portlet:actionURL>
 
-										<liferay-ui:icon cssClass='<%= selected ? "disabled" : StringPool.BLANK %>' image='<%= selected ? "../arrows/01_right" : "copy"  %>' message="<%= curLayoutSetBranch.getName() %>" url="<%= selected ? null : layoutSetBranchURL %>" />
+										<liferay-ui:icon
+											cssClass='<%= selected ? "disabled" : StringPool.BLANK %>'
+											image='<%= selected ? "../arrows/01_right" : "copy"  %>'
+											message="<%= curLayoutSetBranch.getName() %>"
+											url="<%= selected ? null : layoutSetBranchURL %>"
+										/>
 
 									<%
 									}

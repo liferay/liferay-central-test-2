@@ -60,6 +60,19 @@ public class StagingTag extends IncludeTag {
 	}
 
 	@Override
+	protected void cleanUp() {
+		_cssClass = null;
+		_extended = true;
+		_groupId = 0 ;
+		_icon = "/dockbar/staging.png";
+		_layoutSetBranchId = 0;
+		_message = "staging";
+		_privateLayout = false;
+		_selPlid = 0;
+		_showManageBranches = false;
+	}
+
+	@Override
 	protected String getPage() {
 		return _PAGE;
 	}

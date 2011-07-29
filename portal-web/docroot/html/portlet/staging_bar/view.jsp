@@ -20,6 +20,7 @@
 LayoutRevision layoutRevision = null;
 
 LayoutSetBranch layoutSetBranch = null;
+
 LayoutBranch layoutBranch = null;
 
 if (layout != null) {
@@ -87,13 +88,13 @@ if (layout != null) {
 
 				<c:choose>
 					<c:when test="<%= !layoutSetBranches.isEmpty() %>">
-						<c:if test="<%= group.isStagingGroup() || layoutSetBranches.size() < MAX_INLINE_BRANCHES %>">
+						<c:if test="<%= group.isStagingGroup() || layoutSetBranches.size() < _MAX_INLINE_BRANCHES %>">
 
 							<%
 							for (int i = 0; i < layoutSetBranches.size(); i++) {
 								LayoutSetBranch curLayoutSetBranch = null;
 
-								if (layoutSetBranches.size() > MAX_INLINE_BRANCHES) {
+								if (layoutSetBranches.size() > _MAX_INLINE_BRANCHES) {
 									curLayoutSetBranch = layoutSetBranch;
 								}
 								else {
@@ -133,14 +134,14 @@ if (layout != null) {
 								</li>
 
 							<%
-								if (layoutSetBranches.size() > MAX_INLINE_BRANCHES) {
+								if (layoutSetBranches.size() > _MAX_INLINE_BRANCHES) {
 									break;
 								}
 							}
 							%>
 						</c:if>
 
-						<c:if test="<%= layoutSetBranches.size() > MAX_INLINE_BRANCHES %>">
+						<c:if test="<%= layoutSetBranches.size() > _MAX_INLINE_BRANCHES %>">
 							<li class="aui-state-default aui-tab go-to-layout-set-branches-tab">
 								<span class="aui-tab-content">
 									<span class="aui-tab-label">
@@ -161,7 +162,12 @@ if (layout != null) {
 													<portlet:param name="layoutSetBranchId" value="<%= String.valueOf(curLayoutSetBranch.getLayoutSetBranchId()) %>" />
 												</portlet:actionURL>
 
-												<liferay-ui:icon cssClass='<%= selected ? "disabled" : StringPool.BLANK %>' image='<%= selected ? "../arrows/01_right" : "copy"  %>' message="<%= curLayoutSetBranch.getName() %>" url="<%= selected ? null : layoutSetBranchURL %>" />
+												<liferay-ui:icon
+													cssClass='<%= selected ? "disabled" : StringPool.BLANK %>'
+													image='<%= selected ? "../arrows/01_right" : "copy"  %>'
+													message="<%= curLayoutSetBranch.getName() %>"
+													url="<%= selected ? null : layoutSetBranchURL %>"
+												/>
 
 											<%
 											}
@@ -313,13 +319,13 @@ if (layout != null) {
 											for (int i = 0; i < layoutRevisions.size(); i ++) {
 												LayoutBranch curLayoutBranch = null;
 
-												if (layoutRevisions.size() > MAX_INLINE_BRANCHES) {
+												if (layoutRevisions.size() > _MAX_INLINE_BRANCHES) {
 													curLayoutBranch = layoutBranch;
 												}
 												else {
-													LayoutRevision rootRevision = layoutRevisions.get(i);
+													LayoutRevision rootLayoutRevision = layoutRevisions.get(i);
 
-													curLayoutBranch = rootRevision.getLayoutBranch();
+													curLayoutBranch = rootLayoutRevision.getLayoutBranch();
 												}
 
 												boolean selected = (curLayoutBranch.getLayoutBranchId() == layoutRevision.getLayoutBranchId());
@@ -353,13 +359,13 @@ if (layout != null) {
 												</li>
 
 											<%
-												if (layoutRevisions.size() > MAX_INLINE_BRANCHES) {
+												if (layoutRevisions.size() > _MAX_INLINE_BRANCHES) {
 													break;
 												}
 											}
 											%>
 
-											<c:if test="<%= layoutRevisions.size() > MAX_INLINE_BRANCHES %>">
+											<c:if test="<%= layoutRevisions.size() > _MAX_INLINE_BRANCHES %>">
 												<li class="aui-state-default aui-tab go-to-layout-branches-tab">
 													<span class="aui-tab-content">
 														<span class="aui-tab-label">
@@ -367,22 +373,23 @@ if (layout != null) {
 
 																<%
 																for (int i = 0; i < layoutRevisions.size(); i ++) {
-																	LayoutRevision rootRevision = layoutRevisions.get(i);
-																	LayoutBranch curLayoutBranch = rootRevision.getLayoutBranch();
+																	LayoutRevision rootLayoutRevision = layoutRevisions.get(i);
 
-																	boolean selected = (rootRevision.getLayoutBranchId() == layoutRevision.getLayoutBranchId());
+																	LayoutBranch curLayoutBranch = rootLayoutRevision.getLayoutBranch();
+
+																	boolean selected = (rootLayoutRevision.getLayoutBranchId() == layoutRevision.getLayoutBranchId());
 																%>
 
-																	<portlet:actionURL var="rootRevisionURL">
+																	<portlet:actionURL var="rootLayoutRevisionURL">
 																		<portlet:param name="struts_action" value="/dockbar/edit_layouts" />
 																		<portlet:param name="<%= Constants.CMD %>" value="select_layout_branch" />
 																		<portlet:param name="redirect" value="<%= stagingFriendlyURL %>" />
-																		<portlet:param name="groupId" value="<%= String.valueOf(rootRevision.getGroupId()) %>" />
-																		<portlet:param name="layoutSetBranchId" value="<%= String.valueOf(rootRevision.getLayoutSetBranchId()) %>" />
-																		<portlet:param name="layoutBranchId" value="<%= String.valueOf(rootRevision.getLayoutBranchId()) %>" />
+																		<portlet:param name="groupId" value="<%= String.valueOf(rootLayoutRevision.getGroupId()) %>" />
+																		<portlet:param name="layoutSetBranchId" value="<%= String.valueOf(rootLayoutRevision.getLayoutSetBranchId()) %>" />
+																		<portlet:param name="layoutBranchId" value="<%= String.valueOf(rootLayoutRevision.getLayoutBranchId()) %>" />
 																	</portlet:actionURL>
 
-																	<liferay-ui:icon cssClass='<%= selected ? "disabled" : StringPool.BLANK %>' image='<%= selected ? "../arrows/01_right" : "copy"  %>' message="<%= curLayoutBranch.getName() %>" url="<%= selected ? null : rootRevisionURL %>" />
+																	<liferay-ui:icon cssClass='<%= selected ? "disabled" : StringPool.BLANK %>' image='<%= selected ? "../arrows/01_right" : "copy"  %>' message="<%= curLayoutBranch.getName() %>" url="<%= selected ? null : rootLayoutRevisionURL %>" />
 
 																<%
 																}
@@ -536,5 +543,5 @@ if (layout != null) {
 </c:if>
 
 <%!
-public static final int MAX_INLINE_BRANCHES = 8;
+private static final int _MAX_INLINE_BRANCHES = 8;
 %>
