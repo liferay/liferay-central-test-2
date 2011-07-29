@@ -274,14 +274,14 @@ the id-param value (stored in /sql/sequences.sql). This sequence is then
 accessed to generate a unique identifier whenever an insert occurs. This
 implementation is only supported by DB2, Oracle, PostgreSQL, and SAP DB.
 
+This accessor value specifies whether or not to generate an accessor for this
+column. This accessor will provide a fast and type-safe way to access column 
+value.
+
 The filter-primary value specifies the column to use as the primary key column
 when using filter finders. Only one column should ever have this value set to
 true. If no column has this set to true, then the default primary column be
 used.
-
-This accessor value specifies whether or not to generate an accessor for this
-column. This accessor will provide a fast and type-safe way to access column 
-value.
 
 The convert-null value specifies whether or not the column value is
 automatically converted to a non null value if it is null. This only applies if
