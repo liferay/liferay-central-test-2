@@ -19,8 +19,8 @@ import com.liferay.portal.atom.AtomUtil;
 import com.liferay.portal.kernel.atom.AtomEntryContent;
 import com.liferay.portal.kernel.atom.AtomRequestContext;
 import com.liferay.portal.kernel.atom.BaseAtomCollectionAdapter;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Address;
 import com.liferay.portal.model.User;
@@ -55,19 +55,20 @@ public class UserAtomCollectionAdapter
 	public AtomEntryContent getEntryContent(
 		User user, AtomRequestContext atomRequestContext) {
 
-		StringBuilder content = new StringBuilder();
+		StringBundler content = new StringBundler();
 
 		content.append(user.getScreenName());
 		content.append(StringPool.NEW_LINE);
-		content.append(user.getFullName());
-		content.append(StringPool.NEW_LINE);
 		content.append(user.getEmailAddress());
+		content.append(StringPool.NEW_LINE);
+		content.append(user.getFullName());
 		content.append(StringPool.NEW_LINE);
 		content.append(user.getJobTitle());
 		content.append(StringPool.NEW_LINE);
 
 		try {
 			List<Address> userAddresses = user.getAddresses();
+
 			for (Address address : userAddresses) {
 				content.append(address.getStreet1());
 				content.append(StringPool.NEW_LINE);
@@ -77,7 +78,7 @@ public class UserAtomCollectionAdapter
 				content.append(StringPool.NEW_LINE);
 			}
 		}
-		catch (SystemException e) {
+		catch (Exception e) {
 		}
 
 		return new AtomEntryContent(content.toString());
@@ -105,15 +106,6 @@ public class UserAtomCollectionAdapter
 	}
 
 	@Override
-	protected void doDeleteEntry(
-			String resourceName, AtomRequestContext atomRequestContext)
-		throws Exception {
-
-		throw new UnsupportedOperationException(
-			"Deleting users is not supported");
-	}
-
-	@Override
 	protected User doGetEntry(
 			String resourceName, AtomRequestContext atomRequestContext)
 		throws Exception {
@@ -130,38 +122,36 @@ public class UserAtomCollectionAdapter
 
 		long groupId = atomRequestContext.getLongParameter("groupId");
 
-		if (groupId != 0) {
+		if (groupId > 0) {
 			List<User> users = UserLocalServiceUtil.getGroupUsers(groupId);
+
+			return users;
+		}
+
+		long organizationId = atomRequestContext.getLongParameter(
+			"organizationId");
+
+		if (organizationId > 0) {
+			List<User> users = UserLocalServiceUtil.getOrganizationUsers(
+				organizationId);
 
 			return users;
 		}
 
 		long userGroupId = atomRequestContext.getLongParameter("userGroupId");
 
-		if (userGroupId != 0) {
-			List<User> users =
-				UserLocalServiceUtil.getUserGroupUsers(userGroupId);
-
-			return users;
-		}
-
-		long organizationId = atomRequestContext.
-			getLongParameter("organizationId");
-
-		if (organizationId != 0) {
-
-			List<User> users =
-				UserLocalServiceUtil.getOrganizationUsers(organizationId);
+		if (userGroupId > 0) {
+			List<User> users = UserLocalServiceUtil.getUserGroupUsers(
+				userGroupId);
 
 			return users;
 		}
 
 		long companyId = CompanyThreadLocal.getCompanyId();
 
-		if (companyId != 0) {
-
-			int usersCount =
-				UserLocalServiceUtil.getCompanyUsersCount(companyId);
+		if (companyId > 0) {
+			int usersCount = UserLocalServiceUtil.getCompanyUsersCount(
+				companyId);
 
 			AtomPager atomPager = new AtomPager(atomRequestContext, usersCount);
 
@@ -174,26 +164,6 @@ public class UserAtomCollectionAdapter
 		}
 
 		return Collections.emptyList();
-	}
-
-	@Override
-	protected User doPostEntry(
-			String title, String summary, String content, Date date,
-			AtomRequestContext atomRequestContext)
-		throws Exception {
-
-		throw new UnsupportedOperationException(
-			"Adding users is not supported");
-	}
-
-	@Override
-	protected void doPutEntry(
-			User user, String title, String summary, String content,
-			Date date, AtomRequestContext atomRequestContext)
-		throws Exception {
-
-		throw new UnsupportedOperationException(
-			"Updating users is not supported");
 	}
 
 	private static final String _COLLECTION_NAME = "users";
