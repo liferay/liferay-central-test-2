@@ -252,8 +252,8 @@ alter table Layout add keywords STRING null;
 alter table Layout add robots STRING null;
 alter table Layout add layoutPrototypeUuid VARCHAR(75) null;
 alter table Layout add layoutPrototypeLinkEnabled BOOLEAN null;
-alter table Layout drop column dlFolderId;
 alter table Layout drop column layoutPrototypeId;
+alter table Layout drop column dlFolderId;
 
 update Layout set createDate = CURRENT_TIMESTAMP;
 update Layout set modifiedDate = CURRENT_TIMESTAMP;
@@ -308,6 +308,7 @@ create table LayoutRevision (
 );
 
 drop index IX_5ABC2905 on LayoutSet;
+
 alter table LayoutSet add layoutSetPrototypeLinkEnabled BOOLEAN null;
 alter table LayoutSet add layoutSetPrototypeUuid VARCHAR(75) null;
 alter table LayoutSet drop column layoutSetPrototypeId;
