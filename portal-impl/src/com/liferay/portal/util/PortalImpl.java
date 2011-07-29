@@ -3636,30 +3636,31 @@ public class PortalImpl implements Portal {
 
 		User user = (User)request.getAttribute(WebKeys.USER);
 
-		if (user == null) {
-			long userId = getUserId(request);
+		if (user != null) {
+			return user;
+		}
 
-			if (userId <= 0) {
+		long userId = getUserId(request);
 
-				// Portlet WARs may have the correct remote user and not have
-				// the correct user id because the user id is saved in the
-				// session and may not be accessible by the portlet WAR's
-				// session. This behavior is inconsistent across different
-				// application servers.
+		if (userId <= 0) {
 
-				String remoteUser = request.getRemoteUser();
+			// Portlet WARs may have the correct remote user and not have the
+			// correct user id because the user id is saved in the session
+			// and may not be accessible by the portlet WAR's session. This
+			// behavior is inconsistent across different application servers.
 
-				if (remoteUser == null) {
-					return null;
-				}
+			String remoteUser = request.getRemoteUser();
 
-				userId = GetterUtil.getLong(remoteUser);
+			if (remoteUser == null) {
+				return null;
 			}
 
-			user = UserLocalServiceUtil.getUserById(userId);
-
-			request.setAttribute(WebKeys.USER, user);
+			userId = GetterUtil.getLong(remoteUser);
 		}
+
+		user = UserLocalServiceUtil.getUserById(userId);
+
+		request.setAttribute(WebKeys.USER, user);
 
 		return user;
 	}

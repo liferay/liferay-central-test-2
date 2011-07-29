@@ -52,7 +52,7 @@ public class LoginPostAction extends Action {
 			HttpSession session = request.getSession();
 
 			long companyId = PortalUtil.getCompanyId(request);
-			long userId = -1;
+			long userId = 0;
 
 			// Language
 
@@ -85,7 +85,7 @@ public class LoginPostAction extends Action {
 			if (PrefsPropsUtil.getBoolean(
 					companyId, PropsKeys.ADMIN_SYNC_DEFAULT_ASSOCIATIONS)) {
 
-				if (userId == -1) {
+				if (userId == 0) {
 					userId = PortalUtil.getUserId(request);
 				}
 
