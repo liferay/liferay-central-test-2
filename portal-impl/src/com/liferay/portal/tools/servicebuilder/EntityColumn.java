@@ -188,16 +188,6 @@ public class EntityColumn implements Cloneable {
 		return _type;
 	}
 
-	public String getTypeAutoBoxing() {
-		String type = _autoboxingMap.get(_type);
-
-		if (type == null) {
-			type = _type;
-		}
-
-		return type;
-	}
-
 	public String getUserUuidHumanName() {
 		return ServiceBuilder.toHumanName(getUserUuidName());
 	}
@@ -397,19 +387,6 @@ public class EntityColumn implements Cloneable {
 		}
 
 		return comparator;
-	}
-
-	private static final Map<String, String> _autoboxingMap =
-		new HashMap<String, String>();
-
-	static {
-		_autoboxingMap.put("boolean", "Boolean");
-		_autoboxingMap.put("byte", "Byte");
-		_autoboxingMap.put("char", "Char");
-		_autoboxingMap.put("double", "Double");
-		_autoboxingMap.put("int", "Integer");
-		_autoboxingMap.put("long", "Long");
-		_autoboxingMap.put("short", "Short");
 	}
 
 	private boolean _accessor;

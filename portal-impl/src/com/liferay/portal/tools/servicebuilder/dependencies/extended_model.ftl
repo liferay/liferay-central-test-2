@@ -80,9 +80,9 @@ public interface ${entity.name} extends
 
 	<#list entity.columnList as column>
 		<#if column.isAccessor()>
-			public static final Accessor<${entity.name}, ${column.typeAutoBoxing}> ${column.name?upper_case}_ACCESSOR =
-				new Accessor<${entity.name}, ${column.typeAutoBoxing}>() {
-					public ${column.typeAutoBoxing} get(${entity.name} ${entity.varName}) {
+			public static final Accessor<${entity.name}, ${serviceBuilder.getPrimitiveObj(column.type)}> ${column.name?upper_case}_ACCESSOR =
+				new Accessor<${entity.name}, ${serviceBuilder.getPrimitiveObj(column.type)}>() {
+					public ${serviceBuilder.getPrimitiveObj(column.type)} get(${entity.name} ${entity.varName}) {
 						return ${entity.varName}.get${column.methodName}();
 					}
 				};
