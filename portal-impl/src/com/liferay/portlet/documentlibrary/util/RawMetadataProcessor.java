@@ -92,9 +92,9 @@ public class RawMetadataProcessor implements DLProcessor {
 		}
 	}
 
-	private static RawMetadataProcessor _instance = new RawMetadataProcessor();
-
 	private static Log _log = LogFactoryUtil.getLog(
 		RawMetadataProcessor.class);
+
+	private static RawMetadataProcessor _instance = new RawMetadataProcessor();
 
 }
