@@ -379,10 +379,10 @@ public class PortletPreferencesLocalServiceImpl
 		}
 
 		public boolean equals(Object obj) {
-			PreferencesKey preferencesPoolKey = (PreferencesKey)obj;
+			PreferencesKey preferencesKey = (PreferencesKey)obj;
 
-			if ((preferencesPoolKey._plid == _plid) &&
-				(preferencesPoolKey._portletId.equals(_portletId))) {
+			if ((preferencesKey._plid == _plid) &&
+				(preferencesKey._portletId.equals(_portletId))) {
 
 				return true;
 			}
