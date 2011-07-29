@@ -168,9 +168,8 @@ public class DLAppServiceTest extends BaseServiceTestCase {
 		serviceContext.setAddGuestPermissions(true);
 
 		try {
-			byte[] bytes = null;
-
 			String name = "Bytes-null.txt";
+			byte[] bytes = null;
 
 			FileEntry fileEntry = DLAppServiceUtil.addFileEntry(
 				_groupId, folderId, name, ContentTypes.TEXT_PLAIN, name,
@@ -189,9 +188,8 @@ public class DLAppServiceTest extends BaseServiceTestCase {
 		}
 
 		try {
-			File file = null;
-
 			String name = "File-null.txt";
+			File file = null;
 
 			FileEntry fileEntry = DLAppServiceUtil.addFileEntry(
 				_groupId, folderId, name, ContentTypes.TEXT_PLAIN, name,
@@ -210,9 +208,8 @@ public class DLAppServiceTest extends BaseServiceTestCase {
 		}
 
 		try {
-			InputStream is = null;
-
 			String name = "IS-null.txt";
+			InputStream is = null;
 
 			FileEntry fileEntry = DLAppServiceUtil.addFileEntry(
 				_groupId, folderId, name, ContentTypes.TEXT_PLAIN, name,

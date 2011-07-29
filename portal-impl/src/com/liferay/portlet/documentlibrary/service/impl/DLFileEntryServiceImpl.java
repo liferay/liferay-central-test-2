@@ -135,11 +135,10 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 
 		DLFileEntry dlFileEntry = getFileEntry(fileEntryId);
 
+		String sourceFileName = "A." + dlFileEntry.getExtension();
 		InputStream inputStream = DLStoreUtil.getFileAsStream(
 			dlFileEntry.getCompanyId(), dlFileEntry.getFolderId(),
 			dlFileEntry.getName());
-
-		String sourceFileName = "A." + dlFileEntry.getExtension();
 
 		DLFileEntry newDlFileEntry = addFileEntry(
 			groupId, repositoryId, destFolderId, sourceFileName,
