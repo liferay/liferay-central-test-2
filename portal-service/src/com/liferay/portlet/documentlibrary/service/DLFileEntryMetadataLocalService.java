@@ -250,8 +250,7 @@ public interface DLFileEntryMetadataLocalService
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public long getFileEntryMetadataCount(long fileEntryId, long fileVersionId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void updateFileEntryMetadata(long companyId,
 		java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMStructure> ddmStructures,

@@ -272,8 +272,7 @@ public class DLFileEntryMetadataLocalServiceWrapper
 	}
 
 	public long getFileEntryMetadataCount(long fileEntryId, long fileVersionId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _dlFileEntryMetadataLocalService.getFileEntryMetadataCount(fileEntryId,
 			fileVersionId);
 	}

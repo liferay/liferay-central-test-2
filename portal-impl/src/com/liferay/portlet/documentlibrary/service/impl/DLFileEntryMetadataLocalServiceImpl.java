@@ -63,9 +63,8 @@ public class DLFileEntryMetadataLocalServiceImpl
 			ddmStructureId, fileVersionId);
 	}
 
-	public long getFileEntryMetadataCount(
-			long fileEntryId, long fileVersionId)
-		throws PortalException, SystemException {
+	public long getFileEntryMetadataCount(long fileEntryId, long fileVersionId)
+		throws SystemException {
 
 		return dlFileEntryMetadataPersistence.countByF_V(
 			fileEntryId, fileVersionId);
