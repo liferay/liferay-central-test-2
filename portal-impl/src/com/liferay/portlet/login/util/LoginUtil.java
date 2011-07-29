@@ -173,11 +173,9 @@ public class LoginUtil {
 		return userId;
 	}
 
-	public static String getURLCreateAccount(
+	public static String getCreateAccountHREF(
 		HttpServletRequest request, ThemeDisplay themeDisplay)
 			throws Exception {
-
-		String accountURL = StringPool.BLANK;
 
 		if (Validator.isNull(PropsValues.COMPANY_SECURITY_STRANGERS_URL)) {
 			PortletURL createAccountURL = new PortletURLImpl(
@@ -191,21 +189,20 @@ public class LoginUtil {
 			createAccountURL.setParameter(
 				"struts_action", "/login/create_account");
 
-			accountURL = createAccountURL.toString();
-		}
-		else {
-			try {
-				Layout layout = LayoutLocalServiceUtil.getFriendlyURLLayout(
-					themeDisplay.getScopeGroupId(), false,
-					PropsValues.COMPANY_SECURITY_STRANGERS_URL);
-
-				accountURL = PortalUtil.getLayoutURL(layout, themeDisplay);
-			}
-			catch (NoSuchLayoutException nsle) {
-			}
+			return createAccountURL.toString();
 		}
 
-	    return accountURL;
+		try {
+			Layout layout = LayoutLocalServiceUtil.getFriendlyURLLayout(
+				themeDisplay.getScopeGroupId(), false,
+				PropsValues.COMPANY_SECURITY_STRANGERS_URL);
+
+			return PortalUtil.getLayoutURL(layout, themeDisplay);
+		}
+		catch (NoSuchLayoutException nsle) {
+		}
+
+		return StringPool.BLANK;
 	}
 
 	public static String getEmailFromAddress(PortletPreferences preferences) {

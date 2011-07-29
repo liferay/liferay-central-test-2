@@ -266,7 +266,7 @@ public class OpenIdAction extends PortletAction {
 							"attributes to create an account");
 				}
 
-				String createAccountURL = LoginUtil.getURLCreateAccount(
+				String createAccountURL = LoginUtil.getCreateAccountHREF(
 					request, themeDisplay);
 
 				createAccountURL = HttpUtil.setParameter(
