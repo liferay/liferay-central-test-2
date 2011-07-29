@@ -18,111 +18,17 @@
 
 <%@ page import="com.liferay.taglib.aui.ScriptTag" %>
 
-<%-- Portal JavaScript --%>
-
 <%-- Portlet CSS References --%>
 
 <%
 List<Portlet> portlets = (List<Portlet>)request.getAttribute(WebKeys.LAYOUT_PORTLETS);
 %>
 
-<c:if test="<%= portlets != null %>">
-
-	<%
-	Set<String> footerPortalCssSet = new LinkedHashSet<String>();
-
-	for (Portlet portlet : portlets) {
-		for (String footerPortalCss : portlet.getFooterPortalCss()) {
-			if (!HttpUtil.hasProtocol(footerPortalCss)) {
-				Portlet rootPortlet = portlet.getRootPortlet();
-
-				footerPortalCss = PortalUtil.getStaticResourceURL(request, PortalUtil.getPathContext() + footerPortalCss, rootPortlet.getTimestamp());
-			}
-
-			if (!footerPortalCssSet.contains(footerPortalCss)) {
-				footerPortalCssSet.add(footerPortalCss);
-	%>
-
-				<link href="<%= HtmlUtil.escape(footerPortalCss) %>" rel="stylesheet" type="text/css" />
-
-	<%
-			}
-		}
-	}
-
-	Set<String> footerPortletCssSet = new LinkedHashSet<String>();
-
-	for (Portlet portlet : portlets) {
-		for (String footerPortletCss : portlet.getFooterPortletCss()) {
-			if (!HttpUtil.hasProtocol(footerPortletCss)) {
-				Portlet rootPortlet = portlet.getRootPortlet();
-
-				footerPortletCss = PortalUtil.getStaticResourceURL(request, portlet.getStaticResourcePath() + footerPortletCss, rootPortlet.getTimestamp());
-			}
-
-			if (!footerPortletCssSet.contains(footerPortletCss)) {
-				footerPortletCssSet.add(footerPortletCss);
-	%>
-
-				<link href="<%= HtmlUtil.escape(footerPortletCss) %>" rel="stylesheet" type="text/css" />
-
-	<%
-			}
-		}
-	}
-	%>
-
-</c:if>
+<%@ include file="/html/common/themes/bottom_portlet_resources_css.jspf" %>
 
 <%-- Portlet JavaScript References --%>
 
-<c:if test="<%= portlets != null %>">
-
-	<%
-	Set<String> footerPortalJavaScriptSet = new LinkedHashSet<String>();
-
-	for (Portlet portlet : portlets) {
-		for (String footerPortalJavaScript : portlet.getFooterPortalJavaScript()) {
-			if (!HttpUtil.hasProtocol(footerPortalJavaScript)) {
-				Portlet rootPortlet = portlet.getRootPortlet();
-
-				footerPortalJavaScript = PortalUtil.getStaticResourceURL(request, PortalUtil.getPathContext() + footerPortalJavaScript, rootPortlet.getTimestamp());
-			}
-
-			if (!footerPortalJavaScriptSet.contains(footerPortalJavaScript) && !themeDisplay.isIncludedJs(footerPortalJavaScript)) {
-				footerPortalJavaScriptSet.add(footerPortalJavaScript);
-	%>
-
-				<script src="<%= HtmlUtil.escape(footerPortalJavaScript) %>" type="text/javascript"></script>
-
-	<%
-			}
-		}
-	}
-
-	Set<String> footerPortletJavaScriptSet = new LinkedHashSet<String>();
-
-	for (Portlet portlet : portlets) {
-		for (String footerPortletJavaScript : portlet.getFooterPortletJavaScript()) {
-			if (!HttpUtil.hasProtocol(footerPortletJavaScript)) {
-				Portlet rootPortlet = portlet.getRootPortlet();
-
-				footerPortletJavaScript = PortalUtil.getStaticResourceURL(request, portlet.getStaticResourcePath() + footerPortletJavaScript, rootPortlet.getTimestamp());
-			}
-
-			if (!footerPortletJavaScriptSet.contains(footerPortletJavaScript)) {
-				footerPortletJavaScriptSet.add(footerPortletJavaScript);
-	%>
-
-				<script src="<%= HtmlUtil.escape(footerPortletJavaScript) %>" type="text/javascript"></script>
-
-	<%
-			}
-		}
-	}
-	%>
-
-</c:if>
+<%@ include file="/html/common/themes/bottom_portlet_resources_js.jspf" %>
 
 <c:if test="<%= PropsValues.JAVASCRIPT_LOG_ENABLED %>">
 	<%@ include file="/html/common/themes/bottom_js_logging.jspf" %>
