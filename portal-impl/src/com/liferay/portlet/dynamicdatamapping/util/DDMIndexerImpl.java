@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
+import com.liferay.portlet.dynamicdatamapping.storage.Field;
 import com.liferay.portlet.dynamicdatamapping.storage.Fields;
 
 import java.io.Serializable;
@@ -30,16 +31,13 @@ import java.util.Iterator;
  */
 public class DDMIndexerImpl implements DDMIndexer {
 
-	@Override
 	public void addAttributes(
 		Document document, DDMStructure ddmStructure, Fields fields) {
 
-		Iterator<com.liferay.portlet.dynamicdatamapping.storage.Field>
-			iterator = fields.iterator();
+		Iterator<Field> itr = fields.iterator();
 
-		while (iterator.hasNext()) {
-			com.liferay.portlet.dynamicdatamapping.storage.Field field =
-				iterator.next();
+		while (itr.hasNext()) {
+			Field field = itr.next();
 
 			String name = encodeName(
 				ddmStructure.getStructureId(), field.getName());
@@ -59,14 +57,13 @@ public class DDMIndexerImpl implements DDMIndexer {
 				document.addKeyword(name, (Integer)value);
 			}
 			else {
-				String stringValue = String.valueOf(value);
+				String valueString = String.valueOf(value);
 
-				document.addKeyword(name, stringValue);
+				document.addKeyword(name, valueString);
 			}
 		}
 	}
 
-	@Override
 	public String encodeName(long ddmStructureId, String fieldName) {
 		StringBundler sb = new StringBundler(5);
 

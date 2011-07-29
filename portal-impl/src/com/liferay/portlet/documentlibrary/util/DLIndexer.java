@@ -137,14 +137,6 @@ public class DLIndexer extends BaseIndexer {
 			BooleanQuery searchQuery, SearchContext searchContext)
 		throws Exception {
 
-		addSearchTerm(searchQuery, searchContext, Field.USER_NAME, true);
-
-		addSearchTerm(searchQuery, searchContext, "extension", true);
-		addSearchTerm(searchQuery, searchContext, "fileEntryTypeId", false);
-		addSearchTerm(searchQuery, searchContext, "path", true);
-
-		// File entry types
-
 		Set<DDMStructure> ddmStructuresSet = new TreeSet<DDMStructure>();
 
 		for (long groupId : searchContext.getGroupIds()) {
@@ -160,10 +152,14 @@ public class DLIndexer extends BaseIndexer {
 			addSearchDDMStruture(searchQuery, searchContext, ddmStructure);
 		}
 
+		addSearchTerm(searchQuery, searchContext, Field.USER_NAME, true);
+
+		addSearchTerm(searchQuery, searchContext, "extension", true);
+		addSearchTerm(searchQuery, searchContext, "fileEntryTypeId", false);
+		addSearchTerm(searchQuery, searchContext, "path", true);
+
 		LinkedHashMap<String, Object> params =
 			(LinkedHashMap<String, Object>)searchContext.getAttribute("params");
-
-		// Expando
 
 		if (params != null) {
 			String expandoAttributes = (String)params.get("expandoAttributes");
