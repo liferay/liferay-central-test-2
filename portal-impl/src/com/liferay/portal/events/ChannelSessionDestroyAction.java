@@ -45,22 +45,24 @@ public class ChannelSessionDestroyAction extends SessionAction {
 				}
 			}
 
- 			if ((user != null) && !user.isDefaultUser()) {
-				if (_log.isDebugEnabled()) {
-					_log.debug("Destroying channel " + user.getUserId());
-				}
+ 			if ((user == null) || user.isDefaultUser()) {
+				return;
+			}
 
-				try {
-					ChannelHubManagerUtil.destroyChannel(
-						user.getCompanyId(), user.getUserId());
-				}
-				catch (ChannelException ce) {
-					if (_log.isDebugEnabled()) {
-						_log.debug(
-							"User channel " + user.getUserId() +
-								" is already unregistered",
-							ce);
-					}
+			if (_log.isDebugEnabled()) {
+				_log.debug("Destroying channel " + user.getUserId());
+			}
+
+			try {
+				ChannelHubManagerUtil.destroyChannel(
+					user.getCompanyId(), user.getUserId());
+			}
+			catch (ChannelException ce) {
+				if (_log.isDebugEnabled()) {
+					_log.debug(
+						"User channel " + user.getUserId() +
+							" is already unregistered",
+						ce);
 				}
 			}
 		}
