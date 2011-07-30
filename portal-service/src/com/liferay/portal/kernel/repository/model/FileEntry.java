@@ -30,6 +30,16 @@ import java.util.List;
  */
 public interface FileEntry extends RepositoryModel<FileEntry> {
 
+	public static final Accessor<FileEntry, Long> FILE_ENTRY_ID_ACCESSOR =
+
+		new Accessor<FileEntry, Long>() {
+
+			public Long get(FileEntry fileEntry) {
+				return fileEntry.getFileEntryId();
+			}
+
+		};
+
 	public boolean containsPermission(
 			PermissionChecker permissionChecker, String actionId)
 		throws PortalException, SystemException;
@@ -139,12 +149,5 @@ public interface FileEntry extends RepositoryModel<FileEntry> {
 	public boolean isSupportsMetadata();
 
 	public boolean isSupportsSocial();
-
-	public static final Accessor<FileEntry, Long> FILEENTRYID_ACCESSOR =
-		new Accessor<FileEntry, Long>() {
-			public Long get(FileEntry fileEntry) {
-				return fileEntry.getFileEntryId();
-			}
-		};
 
 }

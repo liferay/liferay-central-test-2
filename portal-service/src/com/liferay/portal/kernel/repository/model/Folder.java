@@ -27,6 +27,16 @@ import java.util.List;
  */
 public interface Folder extends RepositoryModel<Folder> {
 
+	public static final Accessor<Folder, Long> FOLDER_ID_ACCESSOR =
+
+		new Accessor<Folder, Long>() {
+
+			public Long get(Folder folder) {
+				return folder.getFolderId();
+			}
+
+		};
+
 	public boolean containsPermission(
 			PermissionChecker permissionChecker, String actionId)
 		throws PortalException, SystemException;
@@ -83,12 +93,5 @@ public interface Folder extends RepositoryModel<Folder> {
 	public boolean isSupportsShortcuts();
 
 	public boolean isSupportsSocial();
-
-	public static final Accessor<Folder, Long> FOLDERID_ACCESSOR =
-		new Accessor<Folder, Long>() {
-			public Long get(Folder folder) {
-				return folder.getFolderId();
-			}
-		};
 
 }

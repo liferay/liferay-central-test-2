@@ -23,6 +23,16 @@ import java.io.Serializable;
  */
 public class License implements Serializable {
 
+	public static final Accessor<License, String> NAME_ACCESSOR =
+
+		new Accessor<License, String>() {
+
+			public String get(License license) {
+				return license.getName();
+			}
+
+		};
+
 	public String getName() {
 		return _name;
 	}
@@ -46,13 +56,6 @@ public class License implements Serializable {
 	public void setUrl(String url) {
 		_url = url;
 	}
-
-	public static final Accessor<License, String> NAME_ACCESSOR =
-		new Accessor<License, String>() {
-			public String get(License license) {
-				return license.getName();
-			}
-		};
 
 	private String _name;
 	private boolean _osiApproved;

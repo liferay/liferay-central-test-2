@@ -27,6 +27,28 @@ public interface ${entity.name} extends
 	 * Never modify this interface directly. Add methods to {@link ${packagePath}.model.impl.${entity.name}Impl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 
+	<#if entity.hasUuidAccessor()>
+		public static final Accessor<${entity.name}, String> UUID_ACCESSOR = new Accessor<${entity.name}, String>() {
+
+			public String get(${entity.name} ${entity.varName}) {
+				return ${entity.varName}.getUuid();
+			}
+
+		};
+	</#if>
+
+	<#list entity.columnList as column>
+		<#if column.isAccessor()>
+			public static final Accessor<${entity.name}, ${serviceBuilder.getPrimitiveObj(column.type)}> ${textFormatter.format(textFormatter.format(column.name, 7), 0)}_ACCESSOR = new Accessor<${entity.name}, ${serviceBuilder.getPrimitiveObj(column.type)}>() {
+
+				public ${serviceBuilder.getPrimitiveObj(column.type)} get(${entity.name} ${entity.varName}) {
+					return ${entity.varName}.get${column.methodName}();
+				}
+
+			};
+		</#if>
+	</#list>
+
 	<#list methods as method>
 		<#if !method.isConstructor() && !method.isStatic() && method.isPublic()>
 			${serviceBuilder.getJavadocComment(method)}
@@ -66,26 +88,6 @@ public interface ${entity.name} extends
 			</#list>
 
 			;
-		</#if>
-	</#list>
-
-	<#if entity.hasUuidAccessor()>
-		public static final Accessor<${entity.name}, String> UUID_ACCESSOR =
-				new Accessor<${entity.name}, String>() {
-					public String get(${entity.name} ${entity.varName}) {
-						return ${entity.varName}.getUuid();
-					}
-				};
-	</#if>
-
-	<#list entity.columnList as column>
-		<#if column.isAccessor()>
-			public static final Accessor<${entity.name}, ${serviceBuilder.getPrimitiveObj(column.type)}> ${column.name?upper_case}_ACCESSOR =
-				new Accessor<${entity.name}, ${serviceBuilder.getPrimitiveObj(column.type)}>() {
-					public ${serviceBuilder.getPrimitiveObj(column.type)} get(${entity.name} ${entity.varName}) {
-						return ${entity.varName}.get${column.methodName}();
-					}
-				};
 		</#if>
 	</#list>
 
