@@ -16,7 +16,7 @@ package com.liferay.taglib.core;
 
 import com.liferay.portal.kernel.servlet.taglib.TagSupport;
 
-import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.PageContext;
 
 /**
@@ -24,7 +24,8 @@ import javax.servlet.jsp.PageContext;
  */
 public abstract class ConditionalTagSupport extends TagSupport {
 
-	public int doStartTag() throws JspException {
+	@SuppressWarnings("unused")
+	public int doStartTag() throws JspTagException {
 		_result = condition();
 
 		if (_var != null) {
@@ -41,6 +42,7 @@ public abstract class ConditionalTagSupport extends TagSupport {
 
 	public void release() {
 		super.release();
+
 		_result = false;
 		_scope = PageContext.PAGE_SCOPE;
 		_var = null;
@@ -48,7 +50,11 @@ public abstract class ConditionalTagSupport extends TagSupport {
 
 	public void setScope(String scope) {
 		String scopeLowerCase = scope.toLowerCase();
-		if (scopeLowerCase.equals("page")) {
+
+		if (scopeLowerCase.equals("application")) {
+			_scope = PageContext.APPLICATION_SCOPE;
+		}
+		else if (scopeLowerCase.equals("page")) {
 			_scope = PageContext.PAGE_SCOPE;
 		}
 		else if (scopeLowerCase.equals("request")) {
@@ -56,9 +62,6 @@ public abstract class ConditionalTagSupport extends TagSupport {
 		}
 		else if (scopeLowerCase.equals("session")) {
 			_scope = PageContext.SESSION_SCOPE;
-		}
-		else if (scopeLowerCase.equals("application")) {
-			_scope = PageContext.APPLICATION_SCOPE;
 		}
 	}
 

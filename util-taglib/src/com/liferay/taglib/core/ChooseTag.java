@@ -27,18 +27,21 @@ public class ChooseTag extends TagSupport {
 
 	public int doStartTag() {
 		_ran = false;
+
 		return EVAL_BODY_INCLUDE;
 	}
 
 	public void markRan() {
 		if (_ran) {
-			throw new IllegalStateException("Other sub tag has already ran.");
+			throw new IllegalStateException("Another subtag has already run");
 		}
+
 		_ran = true;
 	}
 
 	public void release() {
 		super.release();
+
 		_ran = false;
 	}
 

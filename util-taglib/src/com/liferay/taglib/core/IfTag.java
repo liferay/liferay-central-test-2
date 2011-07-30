@@ -21,6 +21,7 @@ public class IfTag extends ConditionalTagSupport {
 
 	public void release() {
 		super.release();
+
 		_test = false;
 	}
 

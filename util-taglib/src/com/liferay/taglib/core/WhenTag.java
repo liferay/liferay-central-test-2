@@ -26,10 +26,11 @@ public class WhenTag extends ConditionalTagSupport {
 		Tag parentTag = getParent();
 
 		if (!(parentTag instanceof ChooseTag)) {
-			throw new JspTagException("WhenTag is not under ChooseTag.");
+			throw new JspTagException(
+				"The when tag must exist under a choose tag");
 		}
 
-		ChooseTag chooseTag = (ChooseTag) parentTag;
+		ChooseTag chooseTag = (ChooseTag)parentTag;
 
 		if (!chooseTag.canRun()) {
 			return SKIP_BODY;
@@ -37,6 +38,7 @@ public class WhenTag extends ConditionalTagSupport {
 
 		if (condition()) {
 			chooseTag.markRan();
+
 			return EVAL_BODY_INCLUDE;
 		}
 		else {
@@ -46,6 +48,7 @@ public class WhenTag extends ConditionalTagSupport {
 
 	public void release() {
 		super.release();
+
 		_test = false;
 	}
 
