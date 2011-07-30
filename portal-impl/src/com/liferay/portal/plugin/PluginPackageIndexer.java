@@ -130,8 +130,9 @@ public class PluginPackageIndexer extends BaseIndexer {
 		List<License> licenses = pluginPackage.getLicenses();
 
 		document.addKeyword(
-			"license", StringUtil.split(ListUtil.toString(
-				licenses, License.NAME_ACCESSOR)));
+			"license",
+			StringUtil.split(
+				ListUtil.toString(licenses, License.NAME_ACCESSOR)));
 
 		document.addText("longDescription", longDescription);
 		document.addKeyword("moduleId", pluginPackage.getModuleId());

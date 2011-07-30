@@ -2302,7 +2302,7 @@ public class JournalArticleLocalServiceImpl
 
 						long[] assetLinkEntryIds = StringUtil.split(
 							ListUtil.toString(
-								assetLinks, AssetLink.ENTRYID2_ACCESSOR), 0L);
+								assetLinks, AssetLink.ENTRY_ID2_ACCESSOR), 0L);
 
 						boolean visible = true;
 

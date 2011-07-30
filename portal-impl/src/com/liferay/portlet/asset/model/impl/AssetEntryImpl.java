@@ -44,7 +44,7 @@ public class AssetEntryImpl extends AssetEntryBaseImpl {
 	public long[] getCategoryIds() throws SystemException {
 		return StringUtil.split(
 			ListUtil.toString(
-				getCategories(), AssetCategory.CATEGORYID_ACCESSOR), 0L);
+				getCategories(), AssetCategory.CATEGORY_ID_ACCESSOR), 0L);
 	}
 
 	public double getSocialInformationEquity() {

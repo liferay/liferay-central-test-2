@@ -18,9 +18,6 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.TextFormatter;
 import com.liferay.portal.kernel.util.Validator;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * @author Brian Wing Shun Chan
  * @author Charles May

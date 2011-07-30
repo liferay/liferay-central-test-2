@@ -40,8 +40,8 @@ userGroupRoles.addAll(organizationRoles);
 	/>
 </liferay-util:buffer>
 
-<aui:input name="groupRolesRoleIds" type="hidden" value='<%= ListUtil.toString(userGroupRoles, UserGroupRole.ROLEID_ACCESSOR) %>' />
-<aui:input name="groupRolesGroupIds" type="hidden" value='<%= ListUtil.toString(userGroupRoles, UserGroupRole.GROUPID_ACCESSOR) %>' />
+<aui:input name="groupRolesRoleIds" type="hidden" value='<%= ListUtil.toString(userGroupRoles, UserGroupRole.ROLE_ID_ACCESSOR) %>' />
+<aui:input name="groupRolesGroupIds" type="hidden" value='<%= ListUtil.toString(userGroupRoles, UserGroupRole.GROUP_ID_ACCESSOR) %>' />
 
 <h3><liferay-ui:message key="regular-roles" /></h3>
 
@@ -291,8 +291,8 @@ userGroupRoles.addAll(organizationRoles);
 </c:choose>
 
 <aui:script>
-	var <portlet:namespace />groupRolesGroupIds = ['<%= ListUtil.toString(userGroupRoles, UserGroupRole.GROUPID_ACCESSOR, "', '") %>'];
-	var <portlet:namespace />groupRolesRoleIds = ['<%= ListUtil.toString(userGroupRoles, UserGroupRole.ROLEID_ACCESSOR, "', '") %>'];
+	var <portlet:namespace />groupRolesGroupIds = ['<%= ListUtil.toString(userGroupRoles, UserGroupRole.GROUP_ID_ACCESSOR, "', '") %>'];
+	var <portlet:namespace />groupRolesRoleIds = ['<%= ListUtil.toString(userGroupRoles, UserGroupRole.ROLE_ID_ACCESSOR, "', '") %>'];
 
 	function <portlet:namespace />deleteGroupRole(roleId, groupId) {
 		for (var i = 0; i < <portlet:namespace />groupRolesRoleIds.length; i++) {

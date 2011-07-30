@@ -1057,7 +1057,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			assetEntry.getEntryId(), AssetLinkConstants.TYPE_RELATED);
 
 		long[] assetLinkEntryIds = StringUtil.split(
-			ListUtil.toString(assetLinks, AssetLink.ENTRYID2_ACCESSOR), 0L);
+			ListUtil.toString(assetLinks, AssetLink.ENTRY_ID2_ACCESSOR), 0L);
 
 		serviceContext.setAssetLinkEntryIds(assetLinkEntryIds);
 
@@ -1363,7 +1363,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 					long[] assetLinkEntryIds = StringUtil.split(
 						ListUtil.toString(
-							assetLinks, AssetLink.ENTRYID2_ACCESSOR), 0L);
+							assetLinks, AssetLink.ENTRY_ID2_ACCESSOR), 0L);
 
 					AssetEntry assetEntry = assetEntryLocalService.updateEntry(
 						userId, page.getGroupId(), WikiPage.class.getName(),

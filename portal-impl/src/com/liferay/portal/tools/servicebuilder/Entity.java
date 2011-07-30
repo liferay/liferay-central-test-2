@@ -39,9 +39,11 @@ public class Entity {
 
 	public static final Accessor<Entity, String> NAME_ACCESSOR =
 		new Accessor<Entity, String>() {
+
 			public String get(Entity entity) {
 				return entity.getName();
 			}
+
 		};
 
 	public static EntityColumn getColumn(

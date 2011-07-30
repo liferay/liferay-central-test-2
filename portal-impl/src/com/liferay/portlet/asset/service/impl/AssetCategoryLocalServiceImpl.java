@@ -464,7 +464,7 @@ public class AssetCategoryLocalServiceImpl
 
 	protected long[] getCategoryIds(List<AssetCategory> categories) {
 		return StringUtil.split(
-			ListUtil.toString(categories, AssetCategory.CATEGORYID_ACCESSOR),
+			ListUtil.toString(categories, AssetCategory.CATEGORY_ID_ACCESSOR),
 			0L);
 	}
 
