@@ -21,8 +21,8 @@ import java.io.Serializable;
  */
 public class WorkflowTaskForm implements Serializable {
 
-	public WorkflowTaskForm(long workflowFormId, long formTemplateId) {
-		_workflowFormId = workflowFormId;
+	public WorkflowTaskForm(long workflowTaskFormId, long formTemplateId) {
+		_workflowTaskFormId = workflowTaskFormId;
 		_formTemplateId = formTemplateId;
 	}
 
@@ -30,11 +30,11 @@ public class WorkflowTaskForm implements Serializable {
 		return _formTemplateId;
 	}
 
-	public long getWorkflowFormId() {
-		return _workflowFormId;
+	public long getWorkflowTaskFormId() {
+		return _workflowTaskFormId;
 	}
 
 	private long _formTemplateId;
-	private long _workflowFormId;
+	private long _workflowTaskFormId;
 
 }
