@@ -31,6 +31,12 @@ public interface Permission extends PermissionModel, PersistedModel {
 	 *
 	 * Never modify this interface directly. Add methods to {@link com.liferay.portal.model.impl.PermissionImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
+	public static final Accessor<Permission, Long> PERMISSION_ID_ACCESSOR = new Accessor<Permission, Long>() {
+			public Long get(Permission permission) {
+				return permission.getPermissionId();
+			}
+		};
+
 	public java.lang.String getName();
 
 	public java.lang.String getPrimKey();
@@ -42,10 +48,4 @@ public interface Permission extends PermissionModel, PersistedModel {
 	public void setPrimKey(java.lang.String primKey);
 
 	public void setScope(int scope);
-
-	public static final Accessor<Permission, Long> PERMISSIONID_ACCESSOR = new Accessor<Permission, Long>() {
-			public Long get(Permission permission) {
-				return permission.getPermissionId();
-			}
-		};
 }
