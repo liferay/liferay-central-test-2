@@ -56,7 +56,7 @@
 	<xs:complexType name="form-complex-type">
 		<xs:sequence>
 			<xs:element name="description" type="xs:string" minOccurs="0" />
-			<xs:element name="form-template-id" type="xs:long" minOccurs="1" />
+			<xs:element name="form-template-id" type="xs:long" />
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="notification-complex-type">
