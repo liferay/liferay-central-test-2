@@ -31,6 +31,12 @@ public interface Organization extends OrganizationModel, PersistedModel {
 	 *
 	 * Never modify this interface directly. Add methods to {@link com.liferay.portal.model.impl.OrganizationImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
+	public static final Accessor<Organization, String> NAME_ACCESSOR = new Accessor<Organization, String>() {
+			public String get(Organization organization) {
+				return organization.getName();
+			}
+		};
+
 	public com.liferay.portal.model.Address getAddress();
 
 	public java.util.List<com.liferay.portal.model.Address> getAddresses()
@@ -86,10 +92,4 @@ public interface Organization extends OrganizationModel, PersistedModel {
 	public boolean isParentable();
 
 	public boolean isRoot();
-
-	public static final Accessor<Organization, String> NAME_ACCESSOR = new Accessor<Organization, String>() {
-			public String get(Organization organization) {
-				return organization.getName();
-			}
-		};
 }
