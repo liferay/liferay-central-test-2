@@ -31,6 +31,18 @@ public interface UserGroupRole extends UserGroupRoleModel, PersistedModel {
 	 *
 	 * Never modify this interface directly. Add methods to {@link com.liferay.portal.model.impl.UserGroupRoleImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
+	public static final Accessor<UserGroupRole, Long> GROUP_ID_ACCESSOR = new Accessor<UserGroupRole, Long>() {
+			public Long get(UserGroupRole userGroupRole) {
+				return userGroupRole.getGroupId();
+			}
+		};
+
+	public static final Accessor<UserGroupRole, Long> ROLE_ID_ACCESSOR = new Accessor<UserGroupRole, Long>() {
+			public Long get(UserGroupRole userGroupRole) {
+				return userGroupRole.getRoleId();
+			}
+		};
+
 	public com.liferay.portal.model.Group getGroup()
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
@@ -42,16 +54,4 @@ public interface UserGroupRole extends UserGroupRoleModel, PersistedModel {
 	public com.liferay.portal.model.User getUser()
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
-
-	public static final Accessor<UserGroupRole, Long> GROUPID_ACCESSOR = new Accessor<UserGroupRole, Long>() {
-			public Long get(UserGroupRole userGroupRole) {
-				return userGroupRole.getGroupId();
-			}
-		};
-
-	public static final Accessor<UserGroupRole, Long> ROLEID_ACCESSOR = new Accessor<UserGroupRole, Long>() {
-			public Long get(UserGroupRole userGroupRole) {
-				return userGroupRole.getRoleId();
-			}
-		};
 }

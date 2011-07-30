@@ -31,6 +31,11 @@ public interface Portlet extends PortletModel, PersistedModel {
 	 *
 	 * Never modify this interface directly. Add methods to {@link com.liferay.portal.model.impl.PortletImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
+	public static final Accessor<Portlet, String> PORTLET_ID_ACCESSOR = new Accessor<Portlet, String>() {
+			public String get(Portlet portlet) {
+				return portlet.getPortletId();
+			}
+		};
 
 	/**
 	* Returns the root portlet of this portlet instance.
@@ -2104,10 +2109,4 @@ public interface Portlet extends PortletModel, PersistedModel {
 	* @return <code>true</code> if the portlet is equal to the specified object
 	*/
 	public boolean equals(java.lang.Object obj);
-
-	public static final Accessor<Portlet, String> PORTLETID_ACCESSOR = new Accessor<Portlet, String>() {
-			public String get(Portlet portlet) {
-				return portlet.getPortletId();
-			}
-		};
 }

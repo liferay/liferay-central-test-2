@@ -31,6 +31,12 @@ public interface Layout extends LayoutModel, PersistedModel {
 	 *
 	 * Never modify this interface directly. Add methods to {@link com.liferay.portal.model.impl.LayoutImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
+	public static final Accessor<Layout, Long> LAYOUT_ID_ACCESSOR = new Accessor<Layout, Long>() {
+			public Long get(Layout layout) {
+				return layout.getLayoutId();
+			}
+		};
+
 	public java.util.List<com.liferay.portal.model.Layout> getAllChildren()
 		throws com.liferay.portal.kernel.exception.SystemException;
 
@@ -173,10 +179,4 @@ public interface Layout extends LayoutModel, PersistedModel {
 
 	public void setTypeSettingsProperties(
 		com.liferay.portal.kernel.util.UnicodeProperties typeSettingsProperties);
-
-	public static final Accessor<Layout, Long> LAYOUTID_ACCESSOR = new Accessor<Layout, Long>() {
-			public Long get(Layout layout) {
-				return layout.getLayoutId();
-			}
-		};
 }

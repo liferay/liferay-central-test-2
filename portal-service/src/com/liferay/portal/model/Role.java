@@ -31,6 +31,18 @@ public interface Role extends RoleModel, PersistedModel {
 	 *
 	 * Never modify this interface directly. Add methods to {@link com.liferay.portal.model.impl.RoleImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
+	public static final Accessor<Role, Long> ROLE_ID_ACCESSOR = new Accessor<Role, Long>() {
+			public Long get(Role role) {
+				return role.getRoleId();
+			}
+		};
+
+	public static final Accessor<Role, String> NAME_ACCESSOR = new Accessor<Role, String>() {
+			public String get(Role role) {
+				return role.getName();
+			}
+		};
+
 	public java.lang.String getDescriptiveName()
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
@@ -43,16 +55,4 @@ public interface Role extends RoleModel, PersistedModel {
 	public java.lang.String getTypeLabel();
 
 	public boolean isTeam();
-
-	public static final Accessor<Role, Long> ROLEID_ACCESSOR = new Accessor<Role, Long>() {
-			public Long get(Role role) {
-				return role.getRoleId();
-			}
-		};
-
-	public static final Accessor<Role, String> NAME_ACCESSOR = new Accessor<Role, String>() {
-			public String get(Role role) {
-				return role.getName();
-			}
-		};
 }
