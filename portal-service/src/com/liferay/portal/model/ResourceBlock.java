@@ -23,7 +23,7 @@ package com.liferay.portal.model;
  * @see com.liferay.portal.model.impl.ResourceBlockModelImpl
  * @generated
  */
-public interface ResourceBlock extends ResourceBlockModel, PersistedModel {
+public interface ResourceBlock extends ResourceBlockModel, PermissionedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *

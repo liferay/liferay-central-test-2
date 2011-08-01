@@ -16,7 +16,6 @@ package com.liferay.portlet.polls.model;
 
 import com.liferay.portal.kernel.bean.AutoEscape;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.model.AuditedModel;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.CacheModel;
 import com.liferay.portal.model.GroupedModel;
@@ -43,8 +42,8 @@ import java.util.Map;
  * @see com.liferay.portlet.polls.model.impl.PollsQuestionModelImpl
  * @generated
  */
-public interface PollsQuestionModel extends AuditedModel,
-	BaseModel<PollsQuestion>, GroupedModel {
+public interface PollsQuestionModel extends BaseModel<PollsQuestion>,
+	GroupedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *

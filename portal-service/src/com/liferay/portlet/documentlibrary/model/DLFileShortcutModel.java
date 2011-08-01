@@ -16,7 +16,6 @@ package com.liferay.portlet.documentlibrary.model;
 
 import com.liferay.portal.kernel.bean.AutoEscape;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.model.AuditedModel;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.CacheModel;
 import com.liferay.portal.model.GroupedModel;
@@ -42,8 +41,8 @@ import java.util.Date;
  * @see com.liferay.portlet.documentlibrary.model.impl.DLFileShortcutModelImpl
  * @generated
  */
-public interface DLFileShortcutModel extends AuditedModel,
-	BaseModel<DLFileShortcut>, GroupedModel, WorkflowedModel {
+public interface DLFileShortcutModel extends BaseModel<DLFileShortcut>,
+	GroupedModel, WorkflowedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *

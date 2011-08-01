@@ -36,7 +36,7 @@ import com.liferay.portal.kernel.transaction.Transactional;
 @Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
 	PortalException.class, SystemException.class})
 public interface ResourceBlockPermissionLocalService
-	extends PersistedModelLocalService {
+	extends PermissionedModelLocalService {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *

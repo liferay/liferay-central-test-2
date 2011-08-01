@@ -37,8 +37,8 @@ import java.util.Date;
  * @see com.liferay.portal.model.impl.LayoutSetBranchModelImpl
  * @generated
  */
-public interface LayoutSetBranchModel extends AuditedModel,
-	BaseModel<LayoutSetBranch>, GroupedModel {
+public interface LayoutSetBranchModel extends BaseModel<LayoutSetBranch>,
+	GroupedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *

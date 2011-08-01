@@ -16,7 +16,6 @@ package com.liferay.portlet.asset.model;
 
 import com.liferay.portal.kernel.bean.AutoEscape;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.model.AuditedModel;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.CacheModel;
 import com.liferay.portal.model.GroupedModel;
@@ -41,8 +40,7 @@ import java.util.Date;
  * @see com.liferay.portlet.asset.model.impl.AssetTagModelImpl
  * @generated
  */
-public interface AssetTagModel extends AuditedModel, BaseModel<AssetTag>,
-	GroupedModel {
+public interface AssetTagModel extends BaseModel<AssetTag>, GroupedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *

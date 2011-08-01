@@ -37,7 +37,7 @@ import java.util.Date;
  * @see com.liferay.portal.model.impl.WorkflowDefinitionLinkModelImpl
  * @generated
  */
-public interface WorkflowDefinitionLinkModel extends AttachedModel, AuditedModel,
+public interface WorkflowDefinitionLinkModel extends AttachedModel,
 	BaseModel<WorkflowDefinitionLink>, GroupedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:

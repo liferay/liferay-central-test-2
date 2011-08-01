@@ -16,7 +16,6 @@ package com.liferay.portlet.journal.model;
 
 import com.liferay.portal.kernel.bean.AutoEscape;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.model.AuditedModel;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.CacheModel;
 import com.liferay.portal.model.GroupedModel;
@@ -41,8 +40,8 @@ import java.util.Date;
  * @see com.liferay.portlet.journal.model.impl.JournalStructureModelImpl
  * @generated
  */
-public interface JournalStructureModel extends AuditedModel,
-	BaseModel<JournalStructure>, GroupedModel {
+public interface JournalStructureModel extends BaseModel<JournalStructure>,
+	GroupedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *

@@ -16,7 +16,6 @@ package com.liferay.portlet.bookmarks.model;
 
 import com.liferay.portal.kernel.bean.AutoEscape;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.model.AuditedModel;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.CacheModel;
 import com.liferay.portal.model.GroupedModel;
@@ -41,8 +40,8 @@ import java.util.Date;
  * @see com.liferay.portlet.bookmarks.model.impl.BookmarksEntryModelImpl
  * @generated
  */
-public interface BookmarksEntryModel extends AuditedModel,
-	BaseModel<BookmarksEntry>, GroupedModel {
+public interface BookmarksEntryModel extends BaseModel<BookmarksEntry>,
+	GroupedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *

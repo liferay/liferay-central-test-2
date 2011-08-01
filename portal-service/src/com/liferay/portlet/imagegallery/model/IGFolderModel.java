@@ -16,7 +16,6 @@ package com.liferay.portlet.imagegallery.model;
 
 import com.liferay.portal.kernel.bean.AutoEscape;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.model.AuditedModel;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.CacheModel;
 import com.liferay.portal.model.GroupedModel;
@@ -41,8 +40,7 @@ import java.util.Date;
  * @see com.liferay.portlet.imagegallery.model.impl.IGFolderModelImpl
  * @generated
  */
-public interface IGFolderModel extends AuditedModel, BaseModel<IGFolder>,
-	GroupedModel {
+public interface IGFolderModel extends BaseModel<IGFolder>, GroupedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
