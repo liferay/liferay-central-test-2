@@ -18,6 +18,7 @@ package com.liferay.portal.model.impl;
  * @author Connor McKay
  */
 public class ResourceTypePermissionImpl extends ResourceTypePermissionBaseImpl {
+
 	public boolean isCompanyScope() {
 		if (getGroupId() == 0) {
 			return true;

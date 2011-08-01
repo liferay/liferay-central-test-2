@@ -28,6 +28,7 @@ import java.util.Map;
  * @author Connor McKay
  */
 public class ResourceBlockIdsBag implements Serializable {
+
 	public void addResourceBlockId(long resourceBlockId, long actionIdsLong) {
 		actionIdsLong |= getActionIds(resourceBlockId);
 

@@ -17,10 +17,10 @@ public interface ${entity.name} extends
 	${entity.name}Model
 
 	<#if entity.hasLocalService() && entity.hasColumns()>
-		, PersistedModel
-
 		<#if entity.isPermissionedModel()>
-		, PermissionedModel
+			, PermissionedModel
+		<#else>
+			, PersistedModel
 		</#if>
 	</#if>
 

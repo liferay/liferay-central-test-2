@@ -54,8 +54,7 @@ public class ResourceActionRowChecker extends RowChecker {
 
 		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
 			if (ResourceBlockLocalServiceUtil.isSupported(resourceName)) {
-				return
-					ResourceTypePermissionLocalServiceUtil.
+				return ResourceTypePermissionLocalServiceUtil.
 					hasEitherScopePermission(
 						role.getCompanyId(), resourceName, role.getRoleId(),
 						actionId);

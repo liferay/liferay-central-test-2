@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.CharPool;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
@@ -139,18 +140,20 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 
 		ResourceBlockIdsBag resourceBlockIdsBag =
 			PermissionCacheUtil.getResourceBlockIdsBag(
-			companyId, groupId, defaultUserId, name, true);
+				companyId, groupId, defaultUserId, name, true);
 
 		if (resourceBlockIdsBag != null) {
 			return resourceBlockIdsBag;
 		}
 
 		try {
-			long[] roleIds = getGuestUserBag().getRoleIds();
+			PermissionCheckerBag bag = getGuestUserBag();
+
+			long[] roleIds = bag.getRoleIds();
 
 			resourceBlockIdsBag =
 				ResourceBlockLocalServiceUtil.getResourceBlockIdsBag(
-				getCompanyId(), groupId, name, roleIds);
+					getCompanyId(), groupId, name, roleIds);
 
 			PermissionCacheUtil.putResourceBlockIdsBag(
 				companyId, groupId, defaultUserId, name, true,
@@ -238,8 +241,8 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 
 		ResourceBlockIdsBag resourceBlockIdsBag =
 			PermissionCacheUtil.getResourceBlockIdsBag(
-			companyId, groupId, ResourceBlockConstants.OWNER_USER_ID, name,
-			true);
+				companyId, groupId, ResourceBlockConstants.OWNER_USER_ID, name,
+				true);
 
 		if (resourceBlockIdsBag != null) {
 			return resourceBlockIdsBag;
@@ -250,7 +253,7 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 
 			resourceBlockIdsBag =
 				ResourceBlockLocalServiceUtil.getResourceBlockIdsBag(
-				getCompanyId(), groupId, name, roleIds);
+					getCompanyId(), groupId, name, roleIds);
 
 			PermissionCacheUtil.putResourceBlockIdsBag(
 				companyId, groupId, ResourceBlockConstants.OWNER_USER_ID, name,
@@ -293,7 +296,7 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 
 		ResourceBlockIdsBag resourceBlockIdsBag =
 			PermissionCacheUtil.getResourceBlockIdsBag(
-			companyId, groupId, userId, name, checkGuest);
+				companyId, groupId, userId, name, checkGuest);
 
 		if (resourceBlockIdsBag != null) {
 			return resourceBlockIdsBag;
@@ -304,7 +307,7 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 
 			resourceBlockIdsBag =
 				ResourceBlockLocalServiceUtil.getResourceBlockIdsBag(
-				getCompanyId(), groupId, name, roleIds);
+					getCompanyId(), groupId, name, roleIds);
 
 			PermissionCacheUtil.putResourceBlockIdsBag(
 				companyId, groupId, userId, name, checkGuest,
@@ -481,45 +484,45 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 		try {
 			if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
 				if (ResourceBlockLocalServiceUtil.isSupported(name)) {
-					PermissionedModel model =
+					PermissionedModel permissionedModel =
 						ResourceBlockLocalServiceUtil.getPermissionedModel(
-						name, Long.valueOf(primKey));
+							name, GetterUtil.getLong(primKey));
 
 					long groupId = 0;
 
-					if (model instanceof GroupedModel) {
-						groupId = ((GroupedModel)model).getGroupId();
+					if (permissionedModel instanceof GroupedModel) {
+						GroupedModel groupedModel =
+							(GroupedModel)permissionedModel;
+
+						groupId = groupedModel.getGroupId();
 					}
 
 					ResourceBlockIdsBag resourceBlockIdsBag =
 						getOwnerResourceBlockIdsBag(companyId, groupId, name);
 
 					return ResourceBlockLocalServiceUtil.hasPermission(
-						name, model, actionId, resourceBlockIdsBag);
+						name, permissionedModel, actionId, resourceBlockIdsBag);
 				}
-				else {
-					return ResourcePermissionLocalServiceUtil.hasResourcePermission(
-						companyId, name, ResourceConstants.SCOPE_INDIVIDUAL,
-						primKey, getOwnerRoleId(), actionId);
-				}
-			}
-			else {
-				ResourceActionsUtil.checkAction(name, actionId);
 
-				Resource resource = ResourceLocalServiceUtil.getResource(
+				return ResourcePermissionLocalServiceUtil.hasResourcePermission(
 					companyId, name, ResourceConstants.SCOPE_INDIVIDUAL,
-					primKey);
+					primKey, getOwnerRoleId(), actionId);
+			}
 
-				List<Permission> permissions =
-					PermissionLocalServiceUtil.getRolePermissions(
-						getOwnerRoleId(), resource.getResourceId());
+			ResourceActionsUtil.checkAction(name, actionId);
 
-				int pos = Collections.binarySearch(
-					permissions, actionId, new PermissionActionIdComparator());
+			Resource resource = ResourceLocalServiceUtil.getResource(
+				companyId, name, ResourceConstants.SCOPE_INDIVIDUAL, primKey);
 
-				if (pos >= 0) {
-					return true;
-				}
+			List<Permission> permissions =
+				PermissionLocalServiceUtil.getRolePermissions(
+					getOwnerRoleId(), resource.getResourceId());
+
+			int pos = Collections.binarySearch(
+				permissions, actionId, new PermissionActionIdComparator());
+
+			if (pos >= 0) {
+				return true;
 			}
 		}
 		catch (Exception e) {
@@ -891,12 +894,12 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 					getGuestResourceBlockIdsBag(companyId, groupId, name);
 
 				return ResourceBlockLocalServiceUtil.hasPermission(
-					name, Long.valueOf(primKey), actionId, resourceBlockIdsBag);
+					name, GetterUtil.getLong(primKey), actionId,
+					resourceBlockIdsBag);
 			}
-			else {
-				return PermissionLocalServiceUtil.hasUserPermissions(
-					defaultUserId, groupId, resources, actionId, bag);
-			}
+
+			return PermissionLocalServiceUtil.hasUserPermissions(
+				defaultUserId, groupId, resources, actionId, bag);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -912,33 +915,31 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 			if (!signedIn) {
 				return hasGuestPermission(groupId, name, primKey, actionId);
 			}
-			else {
-				if ((PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) &&
-					ResourceBlockLocalServiceUtil.isSupported(name)) {
 
-					// It is not necessary to check guest permissions
-					// separately, as the user's resource block IDs bag will
-					// already have the guest permissions in it if checkGuest
-					// is true.
+			if ((PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) &&
+				ResourceBlockLocalServiceUtil.isSupported(name)) {
 
-					return hasUserPermission(
-						groupId, name, primKey, actionId, true);
-				}
+				// It is not necessary to check guest permissions separately,
+				// as the user's resource block IDs bag will already have the
+				// guest permissions in it if checkGuest is true.
 
-				boolean value = false;
-
-				if (checkGuest) {
-					value = hasGuestPermission(
-						groupId, name, primKey, actionId);
-				}
-
-				if (!value) {
-					value = hasUserPermission(
-						groupId, name, primKey, actionId, true);
-				}
-
-				return value;
+				return hasUserPermission(
+					groupId, name, primKey, actionId, true);
 			}
+
+			boolean value = false;
+
+			if (checkGuest) {
+				value = hasGuestPermission(
+					groupId, name, primKey, actionId);
+			}
+
+			if (!value) {
+				value = hasUserPermission(
+					groupId, name, primKey, actionId, true);
+			}
+
+			return value;
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -991,7 +992,8 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 				getResourceBlockIdsBag(companyId, groupId, getUserId(), name);
 
 			boolean value = ResourceBlockLocalServiceUtil.hasPermission(
-				name, Long.valueOf(primKey), actionId, resourceBlockIdsBag);
+				name, GetterUtil.getLong(primKey), actionId,
+				resourceBlockIdsBag);
 
 			logHasUserPermission(
 				groupId, name, primKey, actionId, stopWatch, 2);
@@ -1002,7 +1004,7 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 		List<Resource> resources = getResources(
 			companyId, groupId, name, primKey, actionId);
 
-		logHasUserPermission(groupId, name, primKey, actionId, stopWatch, 2);
+		logHasUserPermission(groupId, name, primKey, actionId, stopWatch, 3);
 
 		// Check if user has access to perform the action on the given
 		// resource scopes. The resources are scoped to check first for an
@@ -1014,7 +1016,7 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 		boolean value = PermissionLocalServiceUtil.hasUserPermissions(
 			user.getUserId(), groupId, resources, actionId, bag);
 
-		logHasUserPermission(groupId, name, primKey, actionId, stopWatch, 3);
+		logHasUserPermission(groupId, name, primKey, actionId, stopWatch, 4);
 
 		return value;
 	}

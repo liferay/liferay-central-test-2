@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.GroupConstants;
@@ -40,8 +41,7 @@ import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.ResourcePermissionsThreadLocal;
 import com.liferay.portal.util.comparator.ResourceComparator;
 
-import edu.emory.mathcs.backport.java.util.Arrays;
-
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
@@ -280,7 +280,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
 			if (resourceBlockLocalService.isSupported(name)) {
 				resourceBlockLocalService.releasePermissionedModelResourceBlock(
-					name, Long.valueOf(primKey));
+					name, GetterUtil.getLong(primKey));
 
 				return;
 			}
@@ -338,7 +338,6 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
-
 			return getResource_6(companyId, name, scope, primKey);
 		}
 		else {
@@ -357,9 +356,11 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 
 		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
 			if (resourceBlockLocalService.isSupported(name)) {
+
 				// Assuming that this method is used when the primary key of an
 				// existing record is changed, then nothing needs to happen
 				// here, as it should still have its resource block ID.
+
 			}
 			else {
 				updateResources_6(companyId, name, scope, primKey, newPrimKey);
@@ -501,7 +502,8 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 
 		resourceBlockLocalService.setIndividualScopePermissions(
 			resource.getCompanyId(), groupId, resource.getName(),
-			Long.valueOf(resource.getPrimKey()), role.getRoleId(), actionIds);
+			GetterUtil.getLong(resource.getPrimKey()), role.getRoleId(),
+			actionIds);
 	}
 
 	protected void addGuestPermissions(
@@ -582,7 +584,8 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 	}
 
 	protected void addGuestPermissions_6Blocks(
-			long companyId, long groupId, Resource resource, List<String> actionIds)
+			long companyId, long groupId, Resource resource,
+			List<String> actionIds)
 		throws PortalException, SystemException {
 
 		// Scope is assumed to always be individual
@@ -592,7 +595,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 
 		resourceBlockLocalService.setIndividualScopePermissions(
 			resource.getCompanyId(), groupId, resource.getName(),
-			Long.valueOf(resource.getPrimKey()), guestRole.getRoleId(),
+			GetterUtil.getLong(resource.getPrimKey()), guestRole.getRoleId(),
 			actionIds);
 	}
 
@@ -700,8 +703,8 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 		Role ownerRole = roleLocalService.getRole(
 			companyId, RoleConstants.OWNER);
 
-		List<String> ownerActionIds = ResourceActionsUtil.getModelResourceActions(
-			resource.getName());
+		List<String> ownerActionIds =
+			ResourceActionsUtil.getModelResourceActions(resource.getName());
 
 		ownerActionIds = ListUtil.copy(ownerActionIds);
 
@@ -737,21 +740,21 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 
 			resourceBlockLocalService.setIndividualScopePermissions(
 				resource.getCompanyId(), groupId, resource.getName(),
-				Long.valueOf(resource.getPrimKey()), ownerRole.getRoleId(),
-				ownerActionIds);
+				GetterUtil.getLong(resource.getPrimKey()),
+				ownerRole.getRoleId(), ownerActionIds);
 
 			if (groupId > 0) {
 				resourceBlockLocalService.setIndividualScopePermissions(
 					resource.getCompanyId(), groupId, resource.getName(),
-					Long.valueOf(resource.getPrimKey()),
+					GetterUtil.getLong(resource.getPrimKey()),
 					defaultGroupRole.getRoleId(),
 					Arrays.asList(groupPermissions));
 			}
 
 			resourceBlockLocalService.setIndividualScopePermissions(
 				resource.getCompanyId(), groupId, resource.getName(),
-				Long.valueOf(resource.getPrimKey()), guestRole.getRoleId(),
-				Arrays.asList(guestPermissions));
+				GetterUtil.getLong(resource.getPrimKey()),
+				guestRole.getRoleId(), Arrays.asList(guestPermissions));
 		}
 		else {
 			resourcePermissionLocalService.setOwnerResourcePermissions(
@@ -898,7 +901,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 
 			resourceBlockLocalService.setIndividualScopePermissions(
 				resource.getCompanyId(), groupId, resource.getName(),
-				Long.valueOf(resource.getPrimKey()), role.getRoleId(),
+				GetterUtil.getLong(resource.getPrimKey()), role.getRoleId(),
 				actionIds);
 		}
 		else {
@@ -907,7 +910,6 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 				resource.getScope(), resource.getPrimKey(), role.getRoleId(),
 				userId, actionIds.toArray(new String[actionIds.size()]));
 		}
-
 	}
 
 	protected void filterOwnerActions(String name, List<String> actionIds) {
@@ -1048,14 +1050,14 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 
 		resourceBlockLocalService.setIndividualScopePermissions(
 			companyId, groupId, resource.getName(),
-			Long.valueOf(resource.getPrimKey()), role.getRoleId(),
+			GetterUtil.getLong(resource.getPrimKey()), role.getRoleId(),
 			Arrays.asList(groupPermissions));
 
 		role = roleLocalService.getRole(companyId, RoleConstants.GUEST);
 
 		resourceBlockLocalService.setIndividualScopePermissions(
 			companyId, groupId, resource.getName(),
-			Long.valueOf(resource.getPrimKey()), role.getRoleId(),
+			GetterUtil.getLong(resource.getPrimKey()), role.getRoleId(),
 			Arrays.asList(guestPermissions));
 	}
 

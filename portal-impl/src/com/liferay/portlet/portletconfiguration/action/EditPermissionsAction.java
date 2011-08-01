@@ -16,6 +16,7 @@ package com.liferay.portlet.portletconfiguration.action;
 
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -157,8 +158,8 @@ public class EditPermissionsAction extends EditConfigurationAction {
 	protected String[] getActionIds(
 		ActionRequest actionRequest, long roleId, boolean includePreselected) {
 
-		List<String> actionIds =
-			getActionIdsList(actionRequest, roleId, includePreselected);
+		List<String> actionIds = getActionIdsList(
+			actionRequest, roleId, includePreselected);
 
 		return actionIds.toArray(new String[actionIds.size()]);
 	}
@@ -337,7 +338,7 @@ public class EditPermissionsAction extends EditConfigurationAction {
 
 				ResourceBlockServiceUtil.setIndividualScopePermissions(
 					themeDisplay.getCompanyId(), themeDisplay.getScopeGroupId(),
-					selResource, Long.valueOf(resourcePrimKey), roleId,
+					selResource, GetterUtil.getLong(resourcePrimKey), roleId,
 					actionIds);
 			}
 		}

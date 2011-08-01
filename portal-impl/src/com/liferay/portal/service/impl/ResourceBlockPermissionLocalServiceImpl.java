@@ -20,7 +20,6 @@ import com.liferay.portal.model.ResourceBlockPermission;
 import com.liferay.portal.model.ResourceBlockPermissionsContainer;
 import com.liferay.portal.model.ResourcePermission;
 import com.liferay.portal.service.base.ResourceBlockPermissionLocalServiceBaseImpl;
-import com.liferay.portal.service.persistence.ResourceBlockPermissionPK;
 
 import java.util.List;
 import java.util.Map;
@@ -44,17 +43,19 @@ public class ResourceBlockPermissionLocalServiceImpl
 		throws SystemException {
 
 		Map<Long, Long> permissions =
-				resourceBlockPermissionsContainer.getPermissions();
+			resourceBlockPermissionsContainer.getPermissions();
 
 		for (Map.Entry<Long, Long> permission : permissions.entrySet()) {
-			ResourceBlockPermissionPK pk =
-				new ResourceBlockPermissionPK(resourceBlockId,
-				permission.getKey());
+			long resourceBlockPermissionId = counterLocalService.increment();
 
 			ResourceBlockPermission resourceBlockPermission =
-				resourceBlockPermissionPersistence.create(pk);
+				resourceBlockPermissionPersistence.create(
+					resourceBlockPermissionId);
 
+			resourceBlockPermission.setResourceBlockId(resourceBlockId);
+			resourceBlockPermission.setRoleId(permission.getKey());
 			resourceBlockPermission.setActionIds(permission.getValue());
+
 			updateResourceBlockPermission(resourceBlockPermission);
 		}
 	}
@@ -67,19 +68,18 @@ public class ResourceBlockPermissionLocalServiceImpl
 	}
 
 	public ResourceBlockPermissionsContainer
-			getResourceBlockPermissionsContainer(
-			long resourceBlockId)
+			getResourceBlockPermissionsContainer(long resourceBlockId)
 		throws SystemException {
 
 		List<ResourceBlockPermission> resourceBlockPermissions =
 			resourceBlockPermissionPersistence.findByResourceBlockId(
-			resourceBlockId);
+				resourceBlockId);
 
 		ResourceBlockPermissionsContainer resourceBlockPermissionContainer =
 			new ResourceBlockPermissionsContainer();
 
 		for (ResourceBlockPermission resourceBlockPermission :
-			resourceBlockPermissions) {
+				resourceBlockPermissions) {
 
 			resourceBlockPermissionContainer.setPermissions(
 				resourceBlockPermission.getRoleId(),
@@ -91,15 +91,15 @@ public class ResourceBlockPermissionLocalServiceImpl
 
 	public ResourceBlockPermissionsContainer
 			getResourceBlockPermissionsContainer(
-			long companyId, long groupId, String name, long primKey)
+				long companyId, long groupId, String name, long primKey)
 		throws SystemException {
 
 		ResourceBlockPermissionsContainer resourceBlockPermissionContainer =
-				new ResourceBlockPermissionsContainer();
+			new ResourceBlockPermissionsContainer();
 
 		List<ResourcePermission> resourcePermissions =
 			resourcePermissionLocalService.getResourceResourcePermissions(
-			companyId, groupId, name, String.valueOf(primKey));
+				companyId, groupId, name, String.valueOf(primKey));
 
 		for (ResourcePermission resourcePermission : resourcePermissions) {
 			resourceBlockPermissionContainer.addPermission(
@@ -114,19 +114,22 @@ public class ResourceBlockPermissionLocalServiceImpl
 			long resourceBlockId, long roleId, long actionIdsLong, int operator)
 		throws SystemException {
 
-		ResourceBlockPermissionPK pk =
-			new ResourceBlockPermissionPK(resourceBlockId, roleId);
-
 		ResourceBlockPermission resourceBlockPermission =
-			resourceBlockPermissionPersistence.fetchByPrimaryKey(pk);
+			resourceBlockPermissionPersistence.fetchByR_R(
+				resourceBlockId, roleId);
 
 		if (resourceBlockPermission == null) {
 			if (actionIdsLong == 0) {
 				return;
 			}
 
-			resourceBlockPermission =
-				resourceBlockPermissionPersistence.create(pk);
+			long resourceBlockPermissionId = counterLocalService.increment();
+
+			resourceBlockPermission = resourceBlockPermissionPersistence.create(
+				resourceBlockPermissionId);
+
+			resourceBlockPermission.setResourceBlockId(resourceBlockId);
+			resourceBlockPermission.setRoleId(roleId);
 		}
 
 		if (operator == ResourceBlockConstants.OPERATOR_ADD) {
@@ -142,6 +145,7 @@ public class ResourceBlockPermissionLocalServiceImpl
 		}
 		else {
 			resourceBlockPermission.setActionIds(actionIdsLong);
+
 			updateResourceBlockPermission(resourceBlockPermission);
 		}
 	}

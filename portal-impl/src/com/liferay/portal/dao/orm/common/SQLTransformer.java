@@ -190,8 +190,8 @@ public class SQLTransformer {
 
 		String newSQL = sql;
 
-		newSQL = _replaceCastText(newSQL);
 		newSQL = _replaceBitwiseCheck(newSQL);
+		newSQL = _replaceCastText(newSQL);
 		newSQL = _replaceIntegerDivision(newSQL);
 
 		if (_vendorDerby) {

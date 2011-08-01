@@ -673,6 +673,7 @@ public class GroupFinderImpl
 		}
 		else if (key.equals("rolePermissions")) {
 			List<Object> values = (List<Object>)value;
+
 			String name = (String)values.get(0);
 
 			if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
@@ -761,6 +762,7 @@ public class GroupFinderImpl
 		}
 		else if (key.equals("rolePermissions")) {
 			List<Object> values = (List<Object>)value;
+
 			String name = (String)values.get(0);
 
 			if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {

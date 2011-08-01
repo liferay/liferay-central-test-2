@@ -127,17 +127,19 @@ public class PermissionCacheUtil {
 	public static PermissionCheckerBag putBag(
 		long userId, long groupId, PermissionCheckerBag bag) {
 
-		if (bag != null) {
-			Serializable key = new BagKey(userId, groupId);
-
-			if (_localCacheAvailable) {
-				Map<Serializable, Object> localCache = _localCache.get();
-
-				localCache.put(key, bag);
-			}
-
-			_permissionCheckerBagPortalCache.put(key, bag);
+		if (bag == null) {
+			return null;
 		}
+
+		Serializable key = new BagKey(userId, groupId);
+
+		if (_localCacheAvailable) {
+			Map<Serializable, Object> localCache = _localCache.get();
+
+			localCache.put(key, bag);
+		}
+
+		_permissionCheckerBagPortalCache.put(key, bag);
 
 		return bag;
 	}
@@ -146,18 +148,20 @@ public class PermissionCacheUtil {
 		long userId, boolean signedIn, boolean checkGuest, long groupId,
 		String name, String primKey, String actionId, Boolean value) {
 
-		if (value != null) {
-			Serializable key = new PermissionKey(
-				userId, signedIn, checkGuest, groupId, name, primKey, actionId);
-
-			if (_localCacheAvailable) {
-				Map<Serializable, Object> localCache = _localCache.get();
-
-				localCache.put(key, value);
-			}
-
-			_permissionPortalCache.put(key, value);
+		if (value == null) {
+			return null;
 		}
+
+		Serializable key = new PermissionKey(
+			userId, signedIn, checkGuest, groupId, name, primKey, actionId);
+
+		if (_localCacheAvailable) {
+			Map<Serializable, Object> localCache = _localCache.get();
+
+			localCache.put(key, value);
+		}
+
+		_permissionPortalCache.put(key, value);
 
 		return value;
 	}
@@ -166,18 +170,20 @@ public class PermissionCacheUtil {
 		long companyId, long groupId, long userId, String name,
 		boolean checkGuest,	ResourceBlockIdsBag resourceBlockIdsBag) {
 
-		if (resourceBlockIdsBag != null) {
-			Serializable key = new ResourceBlockIdsBagKey(
-				companyId, groupId, userId, name, checkGuest);
-
-			if (_localCacheAvailable) {
-				Map<Serializable, Object> localCache = _localCache.get();
-
-				localCache.put(key, resourceBlockIdsBag);
-			}
-
-			_resourceBlockIdsBagCache.put(key, resourceBlockIdsBag);
+		if (resourceBlockIdsBag == null) {
+			return null;
 		}
+
+		Serializable key = new ResourceBlockIdsBagKey(
+			companyId, groupId, userId, name, checkGuest);
+
+		if (_localCacheAvailable) {
+			Map<Serializable, Object> localCache = _localCache.get();
+
+			localCache.put(key, resourceBlockIdsBag);
+		}
+
+		_resourceBlockIdsBagCache.put(key, resourceBlockIdsBag);
 
 		return resourceBlockIdsBag;
 	}
@@ -287,7 +293,7 @@ public class PermissionCacheUtil {
 	private static class ResourceBlockIdsBagKey implements Serializable {
 
 		public ResourceBlockIdsBagKey(
-			long companyId, long userId, long groupId, String name,
+			long companyId, long groupId, long userId, String name,
 			boolean checkGuest) {
 
 			_companyId = companyId;
@@ -327,11 +333,11 @@ public class PermissionCacheUtil {
 
 		private static final long serialVersionUID = 1L;
 
+		private final boolean _checkGuest;
 		private final long _companyId;
 		private final long _groupId;
-		private final long _userId;
 		private final String _name;
-		private final boolean _checkGuest;
+		private final long _userId;
 
 	}
 

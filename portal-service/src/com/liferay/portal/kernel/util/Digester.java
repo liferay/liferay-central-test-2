@@ -31,35 +31,37 @@ public interface Digester {
 
 	public static final String SHA = "SHA";
 
-	public String digest(ByteBuffer buffer);
+	public static final String SHA_1 = "SHA-1";
 
-	public String digest(String algorithm, ByteBuffer buffer);
+	public String digest(ByteBuffer byteBuffer);
 
 	public String digest(String text);
 
+	public String digest(String algorithm, ByteBuffer byteBuffer);
+
 	public String digest(String algorithm, String... text);
 
-	public String digestBase64(ByteBuffer buffer);
-
-	public String digestBase64(String algorithm, ByteBuffer buffer);
+	public String digestBase64(ByteBuffer byteBuffer);
 
 	public String digestBase64(String text);
 
+	public String digestBase64(String algorithm, ByteBuffer byteBuffer);
+
 	public String digestBase64(String algorithm, String... text);
 
-	public String digestHex(ByteBuffer buffer);
-
-	public String digestHex(String algorithm, ByteBuffer buffer);
+	public String digestHex(ByteBuffer byteBuffer);
 
 	public String digestHex(String text);
 
+	public String digestHex(String algorithm, ByteBuffer byteBuffer);
+
 	public String digestHex(String algorithm, String... text);
 
-	public byte[] digestRaw(ByteBuffer buffer);
-
-	public byte[] digestRaw(String algorithm, ByteBuffer buffer);
+	public byte[] digestRaw(ByteBuffer byteBuffer);
 
 	public byte[] digestRaw(String text);
+
+	public byte[] digestRaw(String algorithm, ByteBuffer byteBuffer);
 
 	public byte[] digestRaw(String algorithm, String... text);
 

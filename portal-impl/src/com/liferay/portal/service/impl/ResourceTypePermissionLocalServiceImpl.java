@@ -21,7 +21,6 @@ import com.liferay.portal.model.ResourceBlockConstants;
 import com.liferay.portal.model.ResourceBlockPermissionsContainer;
 import com.liferay.portal.model.ResourceTypePermission;
 import com.liferay.portal.service.base.ResourceTypePermissionLocalServiceBaseImpl;
-import com.liferay.portal.service.persistence.ResourceTypePermissionPK;
 
 import java.util.List;
 
@@ -38,43 +37,6 @@ import java.util.List;
 public class ResourceTypePermissionLocalServiceImpl
 	extends ResourceTypePermissionLocalServiceBaseImpl {
 
-	public List<ResourceTypePermission> findByRoleId(long roleId)
-		throws SystemException {
-
-		return resourceTypePermissionPersistence.findByRoleId(roleId);
-	}
-
-	public List<ResourceTypePermission> findByGroupScope(
-			long companyId, String name, long roleId)
-		throws SystemException {
-
-		return resourceTypePermissionFinder.findByGroupScopeC_N_R(
-			companyId, name, roleId);
-	}
-
-	public ResourceBlockPermissionsContainer
-			getResourceBlockPermissionsContainer(
-			long companyId, long groupId, String name)
-		throws SystemException {
-
-		List<ResourceTypePermission> resourceTypePermissions =
-			resourceTypePermissionFinder.findByEitherScopeC_G_N(
-			companyId, groupId, name);
-
-		ResourceBlockPermissionsContainer resourceBlockPermissionContainer =
-			new ResourceBlockPermissionsContainer();
-
-		for (ResourceTypePermission resourceTypePermission :
-			resourceTypePermissions) {
-
-			resourceBlockPermissionContainer.setPermissions(
-				resourceTypePermission.getRoleId(),
-				resourceTypePermission.getActionIds());
-		}
-
-		return resourceBlockPermissionContainer;
-	}
-
 	public long getCompanyScopeActionIds(
 			long companyId, String name, long roleId)
 		throws SystemException {
@@ -86,11 +48,9 @@ public class ResourceTypePermissionLocalServiceImpl
 			long companyId, long groupId, String name, long roleId)
 		throws SystemException {
 
-		ResourceTypePermissionPK pk =
-			new ResourceTypePermissionPK(companyId, groupId, name, roleId);
-
 		ResourceTypePermission resourceTypePermission =
-			resourceTypePermissionPersistence.fetchByPrimaryKey(pk);
+			resourceTypePermissionPersistence.fetchByC_G_N_R(
+				companyId, groupId, name, roleId);
 
 		if (resourceTypePermission == null) {
 			return 0;
@@ -98,6 +58,51 @@ public class ResourceTypePermissionLocalServiceImpl
 		else {
 			return resourceTypePermission.getActionIds();
 		}
+	}
+
+	public List<ResourceTypePermission> getGroupScopeResourceTypePermissions(
+			long companyId, String name, long roleId)
+		throws SystemException {
+
+		return resourceTypePermissionFinder.findByGroupScopeC_N_R(
+			companyId, name, roleId);
+	}
+
+	public ResourceBlockPermissionsContainer
+			getResourceBlockPermissionsContainer(
+				long companyId, long groupId, String name)
+		throws SystemException {
+
+		List<ResourceTypePermission> resourceTypePermissions =
+			resourceTypePermissionFinder.findByEitherScopeC_G_N(
+				companyId, groupId, name);
+
+		ResourceBlockPermissionsContainer resourceBlockPermissionContainer =
+			new ResourceBlockPermissionsContainer();
+
+		for (ResourceTypePermission resourceTypePermission :
+				resourceTypePermissions) {
+
+			resourceBlockPermissionContainer.setPermissions(
+				resourceTypePermission.getRoleId(),
+				resourceTypePermission.getActionIds());
+		}
+
+		return resourceBlockPermissionContainer;
+	}
+
+	public List<ResourceTypePermission> getRoleResourceTypePermissions(
+			long roleId)
+		throws SystemException {
+
+		return resourceTypePermissionPersistence.findByRoleId(roleId);
+	}
+
+	public boolean hasCompanyScopePermission(
+			long companyId, String name, long roleId, String actionId)
+		throws PortalException, SystemException {
+
+		return hasGroupScopePermission(companyId, 0, name, roleId, actionId);
 	}
 
 	public boolean hasEitherScopePermission(
@@ -109,7 +114,7 @@ public class ResourceTypePermissionLocalServiceImpl
 
 		List<ResourceTypePermission> resourceTypePermissions =
 			resourceTypePermissionPersistence.findByC_N_R(
-			companyId, name, roleId);
+				companyId, name, roleId);
 
 		for (ResourceTypePermission resourceTypePermission :
 			resourceTypePermissions) {
@@ -125,13 +130,6 @@ public class ResourceTypePermissionLocalServiceImpl
 		return false;
 	}
 
-	public boolean hasCompanyScopePermission(
-			long companyId, String name, long roleId, String actionId)
-		throws PortalException, SystemException {
-
-		return hasGroupScopePermission(companyId, 0, name, roleId, actionId);
-	}
-
 	public boolean hasGroupScopePermission(
 			long companyId, long groupId, String name, long roleId,
 			String actionId)
@@ -140,11 +138,9 @@ public class ResourceTypePermissionLocalServiceImpl
 		ResourceAction resourceAction =
 			resourceActionLocalService.getResourceAction(name, actionId);
 
-		ResourceTypePermissionPK pk =
-			new ResourceTypePermissionPK(companyId, groupId, name, roleId);
-
 		ResourceTypePermission resourceTypePermission =
-			getResourceTypePermission(pk);
+			resourceTypePermissionPersistence.findByC_G_N_R(
+				companyId, groupId, name, roleId);
 
 		long actionIdsLong = resourceTypePermission.getActionIds();
 		long bitwiseValue = resourceAction.getBitwiseValue();
@@ -171,19 +167,25 @@ public class ResourceTypePermissionLocalServiceImpl
 			long actionIdsLong, long operator)
 		throws SystemException {
 
-		ResourceTypePermissionPK pk =
-			new ResourceTypePermissionPK(companyId, groupId, name, roleId);
-
 		ResourceTypePermission resourceTypePermission =
-			resourceTypePermissionPersistence.fetchByPrimaryKey(pk);
+			resourceTypePermissionPersistence.fetchByC_G_N_R(
+				companyId, groupId, name, roleId);
 
 		if (resourceTypePermission == null) {
 			if (actionIdsLong == 0) {
 				return;
 			}
 
+			long resourceTypePermissionId = counterLocalService.increment();
+
 			resourceTypePermission =
-				resourceTypePermissionPersistence.create(pk);
+				resourceTypePermissionPersistence.create(
+					resourceTypePermissionId);
+
+			resourceTypePermission.setCompanyId(companyId);
+			resourceTypePermission.setGroupId(groupId);
+			resourceTypePermission.setName(name);
+			resourceTypePermission.setRoleId(roleId);
 		}
 
 		if (operator == ResourceBlockConstants.OPERATOR_ADD) {
@@ -199,6 +201,7 @@ public class ResourceTypePermissionLocalServiceImpl
 		}
 		else {
 			resourceTypePermission.setActionIds(actionIdsLong);
+
 			updateResourceTypePermission(resourceTypePermission);
 		}
 	}

@@ -46,10 +46,12 @@ import com.liferay.portal.service.PersistedModelLocalService;
 @Transactional(isolation = Isolation.PORTAL, rollbackFor = {PortalException.class, SystemException.class})
 public interface ${entity.name}${sessionTypeName}Service
 	<#if (sessionTypeName == "Local") && entity.hasColumns()>
-		extends PersistedModelLocalService
+		extends
 
 		<#if entity.isPermissionedModel()>
-			, PermissionedModelLocalService
+			PermissionedModelLocalService
+		<#else>
+			PersistedModelLocalService
 		</#if>
 	</#if>
 

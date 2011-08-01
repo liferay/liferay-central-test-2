@@ -1009,10 +1009,16 @@
 				(ResourcePermission.companyID = ?) AND
 				(ResourcePermission.name = ?) AND
 				(
-					(ResourcePermission.primKey = ?) OR
-					(ResourcePermission.primKey = ?) OR
-					(ResourcePermission.scope = 1) OR
-					(ResourcePermission.scope = 3)
+					(
+						(ResourcePermission.primKey = ?) AND
+						(ResourcePermission.scope = [$RESOURCE_SCOPE_INDIVIDUAL$])
+					) OR
+					(
+						(ResourcePermission.primKey = ?) AND
+						(ResourcePermission.scope = [$RESOURCE_SCOPE_GROUP$])
+					) OR
+					(ResourcePermission.scope = [$RESOURCE_SCOPE_COMPANY$]) OR
+					(ResourcePermission.scope = [$RESOURCE_SCOPE_GROUP_TEMPLATE$])
 				)
 		]]>
 	</sql>

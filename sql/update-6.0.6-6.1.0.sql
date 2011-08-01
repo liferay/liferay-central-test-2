@@ -10,8 +10,8 @@ alter table BlogsEntry add smallImageId VARCHAR(75) null;
 alter table BlogsEntry add smallImageURL STRING null;
 
 alter table BookmarksEntry add userName VARCHAR(75) null;
+alter table BookmarksEntry add resourceBlockId LONG;
 alter table BookmarksEntry add description VARCHAR(75) null;
-alter table BookmarksEntry add resourceBlockId Long;
 
 COMMIT_TRANSACTION;
 
@@ -19,7 +19,7 @@ update BookmarksEntry set description = comments;
 alter table BookmarksEntry drop column comments;
 
 alter table BookmarksFolder add userName VARCHAR(75) null;
-alter table BookmarksFolder add resourceBlockId Long;
+alter table BookmarksFolder add resourceBlockId LONG;
 
 alter table CalEvent add location STRING null;
 

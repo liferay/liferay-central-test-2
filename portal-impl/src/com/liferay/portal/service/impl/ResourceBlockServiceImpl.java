@@ -25,6 +25,7 @@ import java.util.List;
  * @author Connor McKay
  */
 public class ResourceBlockServiceImpl extends ResourceBlockServiceBaseImpl {
+
 	public void addCompanyScopePermission(
 			long scopeGroupId, long companyId, String name, long roleId,
 			String actionId)

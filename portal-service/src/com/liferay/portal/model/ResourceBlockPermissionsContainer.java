@@ -24,24 +24,25 @@ import java.util.TreeMap;
  * @author Connor McKay
  */
 public class ResourceBlockPermissionsContainer {
+
 	public void addPermission(long roleId, long actionIdsLong) {
 		actionIdsLong |= getActionIds(roleId);
 
 		setPermissions(roleId, actionIdsLong);
 	}
 
-	public SortedMap<Long, Long> getPermissions() {
-		return _permissions;
-	}
-
 	public long getActionIds(long roleId) {
-		Long oldActionIdsLong = _permissions.get(roleId);
+		Long actionIdsLong = _permissions.get(roleId);
 
-		if (oldActionIdsLong == null) {
-			oldActionIdsLong = 0L;
+		if (actionIdsLong == null) {
+			actionIdsLong = 0L;
 		}
 
-		return oldActionIdsLong;
+		return actionIdsLong;
+	}
+
+	public SortedMap<Long, Long> getPermissions() {
+		return _permissions;
 	}
 
 	public void removePermission(long roleId, long actionIdsLong) {
@@ -53,10 +54,10 @@ public class ResourceBlockPermissionsContainer {
 	public void setPermissions(long roleId, long actionIdsLong) {
 		if (actionIdsLong == 0) {
 			_permissions.remove(roleId);
-			return;
 		}
-
-		_permissions.put(roleId, actionIdsLong);
+		else {
+			_permissions.put(roleId, actionIdsLong);
+		}
 	}
 
 	private SortedMap<Long, Long> _permissions = new TreeMap<Long, Long>();

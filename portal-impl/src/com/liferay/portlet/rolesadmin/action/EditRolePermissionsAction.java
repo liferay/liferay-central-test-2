@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.Constants;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -148,13 +149,13 @@ public class EditRolePermissionsAction extends PortletAction {
 			throw new RolePermissionsException(roleName);
 		}
 
-		else if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
+		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
 			if (ResourceBlockLocalServiceUtil.isSupported(name)) {
 				if (scope == ResourceConstants.SCOPE_GROUP) {
 					ResourceBlockServiceUtil.removeGroupScopePermission(
 						themeDisplay.getScopeGroupId(),
-						themeDisplay.getCompanyId(), Long.valueOf(primKey),
-						name, roleId, actionId);
+						themeDisplay.getCompanyId(),
+						GetterUtil.getLong(primKey), name, roleId, actionId);
 				}
 				else {
 					ResourceBlockServiceUtil.removeCompanyScopePermission(
@@ -304,7 +305,7 @@ public class EditRolePermissionsAction extends PortletAction {
 
 				for (String groupId : groupIds) {
 					ResourceBlockServiceUtil.addGroupScopePermission(
-						scopeGroupId, companyId, Long.valueOf(groupId),
+						scopeGroupId, companyId, GetterUtil.getLong(groupId),
 						selResource, roleId, actionId);
 				}
 			}
@@ -407,7 +408,9 @@ public class EditRolePermissionsAction extends PortletAction {
 				}
 
 				if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
-					if (ResourceBlockLocalServiceUtil.isSupported(selResource)) {
+					if (ResourceBlockLocalServiceUtil.isSupported(
+							selResource)) {
+
 						updateActions_6Blocks(
 							role, themeDisplay.getScopeGroupId(), selResource,
 							actionId, selected, scope, groupIds);

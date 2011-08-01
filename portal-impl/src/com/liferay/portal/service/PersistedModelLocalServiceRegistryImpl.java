@@ -48,7 +48,7 @@ public class PersistedModelLocalServiceRegistryImpl
 		}
 
 		if (persistedModelLocalService instanceof
-			PermissionedModelLocalService) {
+				PermissionedModelLocalService) {
 
 			return true;
 		}
