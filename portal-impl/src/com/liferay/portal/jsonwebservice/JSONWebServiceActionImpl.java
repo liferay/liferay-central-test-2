@@ -112,17 +112,17 @@ public class JSONWebServiceActionImpl implements JSONWebServiceAction {
 			}
 
 			if (parameterValue != null) {
-
 				List<KeyValue<String, Object>> innerParameters =
 					_jsonWebServiceActionParameters.getInnerParameters(
 						parameterName);
 
 				if (innerParameters != null) {
 					for (KeyValue<String, Object> innerParameter :
-						innerParameters) {
+							innerParameters) {
 
-						BeanUtil.setPropertySilent(parameterValue,
-							innerParameter.getKey(), innerParameter.getValue());
+						BeanUtil.setPropertySilent(
+							parameterValue, innerParameter.getKey(),
+							innerParameter.getValue());
 					}
 				}
 			}

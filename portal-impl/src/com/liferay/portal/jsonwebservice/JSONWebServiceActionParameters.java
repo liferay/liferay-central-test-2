@@ -189,9 +189,7 @@ public class JSONWebServiceActionParameters {
 
 	private Map<String, List<KeyValue<String, Object>>> _innerParameters =
 		new HashMap<String, List<KeyValue<String, Object>>>();
-
 	private JSONRPCRequest _jsonRpcRequest;
-
 	private Map<String, Object> _parameters = new HashMap<String, Object>() {
 
 		@Override
@@ -203,13 +201,12 @@ public class JSONWebServiceActionParameters {
 				value = null;
 			}
 
-			int dotIndex = key.indexOf('.');
+			int pos = key.indexOf(CharPool.PERIOD);
 
-			if (dotIndex != -1) {
+			if (pos != -1) {
+				String baseName = key.substring(0, pos);
 
-				String baseName = key.substring(0, dotIndex);
-
-				String innerName = key.substring(dotIndex + 1);
+				String innerName = key.substring(pos + 1);
 
 				List<KeyValue<String, Object>> values =
 					_innerParameters.get(baseName);
