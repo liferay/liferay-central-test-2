@@ -43,7 +43,7 @@ public interface ${entity.name}Model extends
 		AttachedModel,
 	</#if>
 
-	<#if entity.isAuditedModel()>
+	<#if entity.isAuditedModel() && !entity.isGroupedModel()>
 		AuditedModel,
 	</#if>
 
