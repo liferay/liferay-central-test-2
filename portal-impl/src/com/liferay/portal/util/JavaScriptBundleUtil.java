@@ -33,11 +33,11 @@ public class JavaScriptBundleUtil {
 		JavaScriptBundleUtil.class.getName();
 
 	public static void clearCache() {
-		_cache.removeAll();
+		_portalCache.removeAll();
 	}
 
 	public static String[] getFileNames(String bundleId) {
-		String[] fileNames = (String[])_cache.get(bundleId);
+		String[] fileNames = (String[])_portalCache.get(bundleId);
 
 		if (fileNames == null) {
 			List<String> fileNamesList = new ArrayList<String>();
@@ -56,7 +56,7 @@ public class JavaScriptBundleUtil {
 			fileNames = fileNamesList.toArray(
 				new String[fileNamesList.size()]);
 
-			_cache.put(bundleId, fileNames);
+			_portalCache.put(bundleId, fileNames);
 		}
 
 		return fileNames;
@@ -89,6 +89,7 @@ public class JavaScriptBundleUtil {
 		return dependencies;
 	}
 
-	private static PortalCache _cache = SingleVMPoolUtil.getCache(CACHE_NAME);
+	private static PortalCache _portalCache = SingleVMPoolUtil.getCache(
+		CACHE_NAME);
 
 }
