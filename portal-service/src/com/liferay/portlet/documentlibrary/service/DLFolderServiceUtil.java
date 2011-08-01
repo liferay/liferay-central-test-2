@@ -174,8 +174,7 @@ public class DLFolderServiceUtil {
 	}
 
 	public static boolean isFolderLocked(long folderId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().isFolderLocked(folderId);
 	}
 

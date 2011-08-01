@@ -271,9 +271,7 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 		return inheritable;
 	}
 
-	public boolean isFolderLocked(long folderId)
-		throws PortalException, SystemException {
-
+	public boolean isFolderLocked(long folderId) throws SystemException {
 		return lockLocalService.isLocked(DLFolder.class.getName(), folderId);
 	}
 

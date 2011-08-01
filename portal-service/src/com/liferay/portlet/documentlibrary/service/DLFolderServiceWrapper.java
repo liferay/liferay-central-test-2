@@ -159,8 +159,7 @@ public class DLFolderServiceWrapper implements DLFolderService {
 	}
 
 	public boolean isFolderLocked(long folderId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _dlFolderService.isFolderLocked(folderId);
 	}
 

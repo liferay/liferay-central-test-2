@@ -71,13 +71,13 @@ public class LockLocalServiceImpl extends LockLocalServiceBaseImpl {
 	}
 
 	public boolean hasLock(long userId, String className, long key)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return hasLock(userId, className, String.valueOf(key));
 	}
 
 	public boolean hasLock(long userId, String className, String key)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		Lock lock = fetchLock(className, key);
 
@@ -90,7 +90,7 @@ public class LockLocalServiceImpl extends LockLocalServiceBaseImpl {
 	}
 
 	public boolean isLocked(String className, long key)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return isLocked(className, String.valueOf(key));
 	}
@@ -293,6 +293,7 @@ public class LockLocalServiceImpl extends LockLocalServiceBaseImpl {
 
 	protected Lock fetchLock(String className, String key)
 		throws SystemException {
+
 		Lock lock = lockPersistence.fetchByC_K(className, key);
 
 		if (lock != null) {
