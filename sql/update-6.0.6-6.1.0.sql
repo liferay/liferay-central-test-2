@@ -273,6 +273,8 @@ create table LayoutBranch (
 	master BOOLEAN
 );
 
+alter table LayoutPrototype add uuid_ VARCHAR(75) null;
+
 create table LayoutRevision (
 	layoutRevisionId LONG not null primary key,
 	groupId LONG,
@@ -327,7 +329,6 @@ create table LayoutSetBranch (
 	master BOOLEAN
 );
 
-alter table LayoutPrototype add uuid_ VARCHAR(75) null;
 alter table LayoutSetPrototype add uuid_ VARCHAR(75) null;
 
 alter table MBCategory add displayStyle VARCHAR(75) null;
