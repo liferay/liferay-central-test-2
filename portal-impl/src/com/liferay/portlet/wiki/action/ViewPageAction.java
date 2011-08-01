@@ -50,6 +50,7 @@ public class ViewPageAction extends PortletAction {
 			return ViewNodeAction.viewNode(
 				mapping, renderRequest, "portlet.wiki.view_categorized_pages");
 		}
+
 		String tag = ParamUtil.getString(renderRequest, "tag");
 
 		if (Validator.isNotNull(tag)) {
