@@ -285,69 +285,65 @@ public class DLStoreImpl implements DLStore, IdentifiableBean {
 	}
 
 	public void updateFile(
-			long companyId, long repositoryId,
-			long newRepositoryId, String fileName)
+			long companyId, long repositoryId, long newRepositoryId,
+			String fileName)
 		throws PortalException, SystemException {
 
-		store.updateFile(
-			companyId, repositoryId, newRepositoryId,
-			fileName);
+		store.updateFile(companyId, repositoryId, newRepositoryId, fileName);
 	}
 
 	public void updateFile(
-			long companyId, long repositoryId,
-			String fileName, String newFileName)
+			long companyId, long repositoryId, String fileName,
+			String newFileName)
 		throws PortalException, SystemException {
 
-		store.updateFile(
-			companyId, repositoryId, fileName, newFileName);
+		store.updateFile(companyId, repositoryId, fileName, newFileName);
 	}
 
 	public void updateFile(
-			long companyId, long repositoryId,
-			String fileName, String fileExtension,
-			boolean validateFileExtension, String versionNumber,
-			String sourceFileName, ServiceContext serviceContext,
-			InputStream is)
+			long companyId, long repositoryId, String fileName,
+			String fileExtension, boolean validateFileExtension,
+			String versionNumber, String sourceFileName,
+			ServiceContext serviceContext, InputStream is)
 		throws PortalException, SystemException {
 
 		validate(
 			fileName, fileExtension, sourceFileName, validateFileExtension, is);
 
 		store.updateFile(
-			companyId, repositoryId, fileName,
-			versionNumber, sourceFileName, serviceContext, is);
+			companyId, repositoryId, fileName, versionNumber, sourceFileName,
+			serviceContext, is);
 	}
 
 	public void updateFile(
-			long companyId, long repositoryId,
-			String fileName, String versionNumber, String sourceFileName,
+			long companyId, long repositoryId, String fileName,
+			String versionNumber, String sourceFileName,
 			ServiceContext serviceContext, byte[] bytes)
 		throws PortalException, SystemException {
 
 		validate(fileName, true, bytes);
 
 		store.updateFile(
-			companyId, repositoryId, fileName,
-			versionNumber, sourceFileName, serviceContext, bytes);
+			companyId, repositoryId, fileName, versionNumber, sourceFileName,
+			serviceContext, bytes);
 	}
 
 	public void updateFile(
-			long companyId, long repositoryId,
-			String fileName, String versionNumber, String sourceFileName,
+			long companyId, long repositoryId, String fileName,
+			String versionNumber, String sourceFileName,
 			ServiceContext serviceContext, File file)
 		throws PortalException, SystemException {
 
 		validate(fileName, true, file);
 
 		store.updateFile(
-			companyId, repositoryId, fileName,
-			versionNumber, sourceFileName, serviceContext, file);
+			companyId, repositoryId, fileName, versionNumber, sourceFileName,
+			serviceContext, file);
 	}
 
 	public void updateFileVersion(
-			long companyId, long repositoryId,
-			String fileName, String fromVersionNumber, String toVersionNumber,
+			long companyId, long repositoryId, String fileName,
+			String fromVersionNumber, String toVersionNumber,
 			String sourceFileName, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
