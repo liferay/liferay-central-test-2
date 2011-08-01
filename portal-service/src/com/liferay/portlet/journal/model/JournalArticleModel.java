@@ -17,6 +17,7 @@ package com.liferay.portlet.journal.model;
 import com.liferay.portal.kernel.bean.AutoEscape;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.AttachedModel;
+import com.liferay.portal.model.AuditedModel;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.CacheModel;
 import com.liferay.portal.model.GroupedModel;
@@ -45,7 +46,7 @@ import java.util.Map;
  * @see com.liferay.portlet.journal.model.impl.JournalArticleModelImpl
  * @generated
  */
-public interface JournalArticleModel extends AttachedModel,
+public interface JournalArticleModel extends AttachedModel, AuditedModel,
 	BaseModel<JournalArticle>, GroupedModel, ResourcedModel, WorkflowedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:

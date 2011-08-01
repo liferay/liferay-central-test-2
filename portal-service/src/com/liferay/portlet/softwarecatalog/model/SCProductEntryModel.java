@@ -16,6 +16,7 @@ package com.liferay.portlet.softwarecatalog.model;
 
 import com.liferay.portal.kernel.bean.AutoEscape;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.model.AuditedModel;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.CacheModel;
 import com.liferay.portal.model.GroupedModel;
@@ -40,8 +41,8 @@ import java.util.Date;
  * @see com.liferay.portlet.softwarecatalog.model.impl.SCProductEntryModelImpl
  * @generated
  */
-public interface SCProductEntryModel extends BaseModel<SCProductEntry>,
-	GroupedModel {
+public interface SCProductEntryModel extends AuditedModel,
+	BaseModel<SCProductEntry>, GroupedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
