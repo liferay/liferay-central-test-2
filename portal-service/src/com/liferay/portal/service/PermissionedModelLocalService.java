@@ -17,5 +17,6 @@ package com.liferay.portal.service;
 /**
  * @author Connor McKay
  */
-public interface PermissionedModelLocalService extends PersistedModelLocalService {
+public interface PermissionedModelLocalService
+	extends PersistedModelLocalService {
 }

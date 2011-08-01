@@ -21,7 +21,10 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.CacheModel;
 import com.liferay.portal.model.ResourceTypePermission;
 import com.liferay.portal.model.ResourceTypePermissionModel;
-import com.liferay.portal.service.persistence.ResourceTypePermissionPK;
+import com.liferay.portal.service.ServiceContext;
+
+import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import java.io.Serializable;
 
@@ -51,13 +54,14 @@ public class ResourceTypePermissionModelImpl extends BaseModelImpl<ResourceTypeP
 	 */
 	public static final String TABLE_NAME = "ResourceTypePermission";
 	public static final Object[][] TABLE_COLUMNS = {
+			{ "resourceTypePermissionId", Types.BIGINT },
 			{ "companyId", Types.BIGINT },
 			{ "groupId", Types.BIGINT },
 			{ "name", Types.VARCHAR },
 			{ "roleId", Types.BIGINT },
 			{ "actionIds", Types.BIGINT }
 		};
-	public static final String TABLE_SQL_CREATE = "create table ResourceTypePermission (companyId LONG not null,groupId LONG not null,name VARCHAR(75) not null,roleId LONG not null,actionIds LONG,primary key (companyId, groupId, name, roleId))";
+	public static final String TABLE_SQL_CREATE = "create table ResourceTypePermission (resourceTypePermissionId LONG not null primary key,companyId LONG,groupId LONG,name VARCHAR(75) null,roleId LONG,actionIds LONG)";
 	public static final String TABLE_SQL_DROP = "drop table ResourceTypePermission";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -83,23 +87,28 @@ public class ResourceTypePermissionModelImpl extends BaseModelImpl<ResourceTypeP
 	public ResourceTypePermissionModelImpl() {
 	}
 
-	public ResourceTypePermissionPK getPrimaryKey() {
-		return new ResourceTypePermissionPK(_companyId, _groupId, _name, _roleId);
+	public long getPrimaryKey() {
+		return _resourceTypePermissionId;
 	}
 
-	public void setPrimaryKey(ResourceTypePermissionPK primaryKey) {
-		setCompanyId(primaryKey.companyId);
-		setGroupId(primaryKey.groupId);
-		setName(primaryKey.name);
-		setRoleId(primaryKey.roleId);
+	public void setPrimaryKey(long primaryKey) {
+		setResourceTypePermissionId(primaryKey);
 	}
 
 	public Serializable getPrimaryKeyObj() {
-		return new ResourceTypePermissionPK(_companyId, _groupId, _name, _roleId);
+		return new Long(_resourceTypePermissionId);
 	}
 
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
-		setPrimaryKey((ResourceTypePermissionPK)primaryKeyObj);
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
+	}
+
+	public long getResourceTypePermissionId() {
+		return _resourceTypePermissionId;
+	}
+
+	public void setResourceTypePermissionId(long resourceTypePermissionId) {
+		_resourceTypePermissionId = resourceTypePermissionId;
 	}
 
 	public long getCompanyId() {
@@ -107,7 +116,17 @@ public class ResourceTypePermissionModelImpl extends BaseModelImpl<ResourceTypeP
 	}
 
 	public void setCompanyId(long companyId) {
+		if (!_setOriginalCompanyId) {
+			_setOriginalCompanyId = true;
+
+			_originalCompanyId = _companyId;
+		}
+
 		_companyId = companyId;
+	}
+
+	public long getOriginalCompanyId() {
+		return _originalCompanyId;
 	}
 
 	public long getGroupId() {
@@ -115,7 +134,17 @@ public class ResourceTypePermissionModelImpl extends BaseModelImpl<ResourceTypeP
 	}
 
 	public void setGroupId(long groupId) {
+		if (!_setOriginalGroupId) {
+			_setOriginalGroupId = true;
+
+			_originalGroupId = _groupId;
+		}
+
 		_groupId = groupId;
+	}
+
+	public long getOriginalGroupId() {
+		return _originalGroupId;
 	}
 
 	public String getName() {
@@ -128,7 +157,15 @@ public class ResourceTypePermissionModelImpl extends BaseModelImpl<ResourceTypeP
 	}
 
 	public void setName(String name) {
+		if (_originalName == null) {
+			_originalName = _name;
+		}
+
 		_name = name;
+	}
+
+	public String getOriginalName() {
+		return GetterUtil.getString(_originalName);
 	}
 
 	public long getRoleId() {
@@ -136,7 +173,17 @@ public class ResourceTypePermissionModelImpl extends BaseModelImpl<ResourceTypeP
 	}
 
 	public void setRoleId(long roleId) {
+		if (!_setOriginalRoleId) {
+			_setOriginalRoleId = true;
+
+			_originalRoleId = _roleId;
+		}
+
 		_roleId = roleId;
+	}
+
+	public long getOriginalRoleId() {
+		return _originalRoleId;
 	}
 
 	public long getActionIds() {
@@ -164,9 +211,25 @@ public class ResourceTypePermissionModelImpl extends BaseModelImpl<ResourceTypeP
 	}
 
 	@Override
+	public ExpandoBridge getExpandoBridge() {
+		if (_expandoBridge == null) {
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
+					ResourceTypePermission.class.getName(), getPrimaryKey());
+		}
+
+		return _expandoBridge;
+	}
+
+	@Override
+	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
+		getExpandoBridge().setAttributes(serviceContext);
+	}
+
+	@Override
 	public Object clone() {
 		ResourceTypePermissionImpl resourceTypePermissionImpl = new ResourceTypePermissionImpl();
 
+		resourceTypePermissionImpl.setResourceTypePermissionId(getResourceTypePermissionId());
 		resourceTypePermissionImpl.setCompanyId(getCompanyId());
 		resourceTypePermissionImpl.setGroupId(getGroupId());
 		resourceTypePermissionImpl.setName(getName());
@@ -179,9 +242,17 @@ public class ResourceTypePermissionModelImpl extends BaseModelImpl<ResourceTypeP
 	}
 
 	public int compareTo(ResourceTypePermission resourceTypePermission) {
-		ResourceTypePermissionPK primaryKey = resourceTypePermission.getPrimaryKey();
+		long primaryKey = resourceTypePermission.getPrimaryKey();
 
-		return getPrimaryKey().compareTo(primaryKey);
+		if (getPrimaryKey() < primaryKey) {
+			return -1;
+		}
+		else if (getPrimaryKey() > primaryKey) {
+			return 1;
+		}
+		else {
+			return 0;
+		}
 	}
 
 	@Override
@@ -199,9 +270,9 @@ public class ResourceTypePermissionModelImpl extends BaseModelImpl<ResourceTypeP
 			return false;
 		}
 
-		ResourceTypePermissionPK primaryKey = resourceTypePermission.getPrimaryKey();
+		long primaryKey = resourceTypePermission.getPrimaryKey();
 
-		if (getPrimaryKey().equals(primaryKey)) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {
@@ -211,16 +282,33 @@ public class ResourceTypePermissionModelImpl extends BaseModelImpl<ResourceTypeP
 
 	@Override
 	public int hashCode() {
-		return getPrimaryKey().hashCode();
+		return (int)getPrimaryKey();
 	}
 
 	@Override
 	public void resetOriginalValues() {
+		ResourceTypePermissionModelImpl resourceTypePermissionModelImpl = this;
+
+		resourceTypePermissionModelImpl._originalCompanyId = resourceTypePermissionModelImpl._companyId;
+
+		resourceTypePermissionModelImpl._setOriginalCompanyId = false;
+
+		resourceTypePermissionModelImpl._originalGroupId = resourceTypePermissionModelImpl._groupId;
+
+		resourceTypePermissionModelImpl._setOriginalGroupId = false;
+
+		resourceTypePermissionModelImpl._originalName = resourceTypePermissionModelImpl._name;
+
+		resourceTypePermissionModelImpl._originalRoleId = resourceTypePermissionModelImpl._roleId;
+
+		resourceTypePermissionModelImpl._setOriginalRoleId = false;
 	}
 
 	@Override
 	public CacheModel<ResourceTypePermission> toCacheModel() {
 		ResourceTypePermissionCacheModel resourceTypePermissionCacheModel = new ResourceTypePermissionCacheModel();
+
+		resourceTypePermissionCacheModel.resourceTypePermissionId = getResourceTypePermissionId();
 
 		resourceTypePermissionCacheModel.companyId = getCompanyId();
 
@@ -243,9 +331,11 @@ public class ResourceTypePermissionModelImpl extends BaseModelImpl<ResourceTypeP
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(11);
+		StringBundler sb = new StringBundler(13);
 
-		sb.append("{companyId=");
+		sb.append("{resourceTypePermissionId=");
+		sb.append(getResourceTypePermissionId());
+		sb.append(", companyId=");
 		sb.append(getCompanyId());
 		sb.append(", groupId=");
 		sb.append(getGroupId());
@@ -261,12 +351,16 @@ public class ResourceTypePermissionModelImpl extends BaseModelImpl<ResourceTypeP
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(19);
+		StringBundler sb = new StringBundler(22);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portal.model.ResourceTypePermission");
 		sb.append("</model-name>");
 
+		sb.append(
+			"<column><column-name>resourceTypePermissionId</column-name><column-value><![CDATA[");
+		sb.append(getResourceTypePermissionId());
+		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>companyId</column-name><column-value><![CDATA[");
 		sb.append(getCompanyId());
@@ -297,10 +391,19 @@ public class ResourceTypePermissionModelImpl extends BaseModelImpl<ResourceTypeP
 	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
 			ResourceTypePermission.class
 		};
+	private long _resourceTypePermissionId;
 	private long _companyId;
+	private long _originalCompanyId;
+	private boolean _setOriginalCompanyId;
 	private long _groupId;
+	private long _originalGroupId;
+	private boolean _setOriginalGroupId;
 	private String _name;
+	private String _originalName;
 	private long _roleId;
+	private long _originalRoleId;
+	private boolean _setOriginalRoleId;
 	private long _actionIds;
+	private transient ExpandoBridge _expandoBridge;
 	private ResourceTypePermission _escapedModelProxy;
 }

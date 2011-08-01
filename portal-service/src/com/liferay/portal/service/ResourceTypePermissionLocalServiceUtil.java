@@ -54,27 +54,27 @@ public class ResourceTypePermissionLocalServiceUtil {
 	/**
 	* Creates a new resource type permission with the primary key. Does not add the resource type permission to the database.
 	*
-	* @param resourceTypePermissionPK the primary key for the new resource type permission
+	* @param resourceTypePermissionId the primary key for the new resource type permission
 	* @return the new resource type permission
 	*/
 	public static com.liferay.portal.model.ResourceTypePermission createResourceTypePermission(
-		com.liferay.portal.service.persistence.ResourceTypePermissionPK resourceTypePermissionPK) {
+		long resourceTypePermissionId) {
 		return getService()
-				   .createResourceTypePermission(resourceTypePermissionPK);
+				   .createResourceTypePermission(resourceTypePermissionId);
 	}
 
 	/**
 	* Deletes the resource type permission with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param resourceTypePermissionPK the primary key of the resource type permission
+	* @param resourceTypePermissionId the primary key of the resource type permission
 	* @throws PortalException if a resource type permission with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void deleteResourceTypePermission(
-		com.liferay.portal.service.persistence.ResourceTypePermissionPK resourceTypePermissionPK)
+		long resourceTypePermissionId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		getService().deleteResourceTypePermission(resourceTypePermissionPK);
+		getService().deleteResourceTypePermission(resourceTypePermissionId);
 	}
 
 	/**
@@ -163,16 +163,16 @@ public class ResourceTypePermissionLocalServiceUtil {
 	/**
 	* Returns the resource type permission with the primary key.
 	*
-	* @param resourceTypePermissionPK the primary key of the resource type permission
+	* @param resourceTypePermissionId the primary key of the resource type permission
 	* @return the resource type permission
 	* @throws PortalException if a resource type permission with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public static com.liferay.portal.model.ResourceTypePermission getResourceTypePermission(
-		com.liferay.portal.service.persistence.ResourceTypePermissionPK resourceTypePermissionPK)
+		long resourceTypePermissionId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getService().getResourceTypePermission(resourceTypePermissionPK);
+		return getService().getResourceTypePermission(resourceTypePermissionId);
 	}
 
 	public static com.liferay.portal.model.PersistedModel getPersistedModel(
@@ -258,25 +258,6 @@ public class ResourceTypePermissionLocalServiceUtil {
 		getService().setBeanIdentifier(beanIdentifier);
 	}
 
-	public static java.util.List<com.liferay.portal.model.ResourceTypePermission> findByRoleId(
-		long roleId) throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().findByRoleId(roleId);
-	}
-
-	public static java.util.List<com.liferay.portal.model.ResourceTypePermission> findByGroupScope(
-		long companyId, java.lang.String name, long roleId)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().findByGroupScope(companyId, name, roleId);
-	}
-
-	public static com.liferay.portal.model.ResourceBlockPermissionsContainer getResourceBlockPermissionsContainer(
-		long companyId, long groupId, java.lang.String name)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService()
-				   .getResourceBlockPermissionsContainer(companyId, groupId,
-			name);
-	}
-
 	public static long getCompanyScopeActionIds(long companyId,
 		java.lang.String name, long roleId)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -290,12 +271,24 @@ public class ResourceTypePermissionLocalServiceUtil {
 				   .getGroupScopeActionIds(companyId, groupId, name, roleId);
 	}
 
-	public static boolean hasEitherScopePermission(long companyId,
-		java.lang.String name, long roleId, java.lang.String actionId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+	public static java.util.List<com.liferay.portal.model.ResourceTypePermission> getGroupScopeResourceTypePermissions(
+		long companyId, java.lang.String name, long roleId)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .hasEitherScopePermission(companyId, name, roleId, actionId);
+				   .getGroupScopeResourceTypePermissions(companyId, name, roleId);
+	}
+
+	public static com.liferay.portal.model.ResourceBlockPermissionsContainer getResourceBlockPermissionsContainer(
+		long companyId, long groupId, java.lang.String name)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .getResourceBlockPermissionsContainer(companyId, groupId,
+			name);
+	}
+
+	public static java.util.List<com.liferay.portal.model.ResourceTypePermission> getRoleResourceTypePermissions(
+		long roleId) throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getRoleResourceTypePermissions(roleId);
 	}
 
 	public static boolean hasCompanyScopePermission(long companyId,
@@ -304,6 +297,14 @@ public class ResourceTypePermissionLocalServiceUtil {
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .hasCompanyScopePermission(companyId, name, roleId, actionId);
+	}
+
+	public static boolean hasEitherScopePermission(long companyId,
+		java.lang.String name, long roleId, java.lang.String actionId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .hasEitherScopePermission(companyId, name, roleId, actionId);
 	}
 
 	public static boolean hasGroupScopePermission(long companyId, long groupId,

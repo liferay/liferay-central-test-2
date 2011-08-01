@@ -46,26 +46,25 @@ public class ResourceTypePermissionLocalServiceWrapper
 	/**
 	* Creates a new resource type permission with the primary key. Does not add the resource type permission to the database.
 	*
-	* @param resourceTypePermissionPK the primary key for the new resource type permission
+	* @param resourceTypePermissionId the primary key for the new resource type permission
 	* @return the new resource type permission
 	*/
 	public com.liferay.portal.model.ResourceTypePermission createResourceTypePermission(
-		com.liferay.portal.service.persistence.ResourceTypePermissionPK resourceTypePermissionPK) {
-		return _resourceTypePermissionLocalService.createResourceTypePermission(resourceTypePermissionPK);
+		long resourceTypePermissionId) {
+		return _resourceTypePermissionLocalService.createResourceTypePermission(resourceTypePermissionId);
 	}
 
 	/**
 	* Deletes the resource type permission with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param resourceTypePermissionPK the primary key of the resource type permission
+	* @param resourceTypePermissionId the primary key of the resource type permission
 	* @throws PortalException if a resource type permission with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public void deleteResourceTypePermission(
-		com.liferay.portal.service.persistence.ResourceTypePermissionPK resourceTypePermissionPK)
+	public void deleteResourceTypePermission(long resourceTypePermissionId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		_resourceTypePermissionLocalService.deleteResourceTypePermission(resourceTypePermissionPK);
+		_resourceTypePermissionLocalService.deleteResourceTypePermission(resourceTypePermissionId);
 	}
 
 	/**
@@ -155,16 +154,16 @@ public class ResourceTypePermissionLocalServiceWrapper
 	/**
 	* Returns the resource type permission with the primary key.
 	*
-	* @param resourceTypePermissionPK the primary key of the resource type permission
+	* @param resourceTypePermissionId the primary key of the resource type permission
 	* @return the resource type permission
 	* @throws PortalException if a resource type permission with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public com.liferay.portal.model.ResourceTypePermission getResourceTypePermission(
-		com.liferay.portal.service.persistence.ResourceTypePermissionPK resourceTypePermissionPK)
+		long resourceTypePermissionId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _resourceTypePermissionLocalService.getResourceTypePermission(resourceTypePermissionPK);
+		return _resourceTypePermissionLocalService.getResourceTypePermission(resourceTypePermissionId);
 	}
 
 	public com.liferay.portal.model.PersistedModel getPersistedModel(
@@ -251,25 +250,6 @@ public class ResourceTypePermissionLocalServiceWrapper
 		_resourceTypePermissionLocalService.setBeanIdentifier(beanIdentifier);
 	}
 
-	public java.util.List<com.liferay.portal.model.ResourceTypePermission> findByRoleId(
-		long roleId) throws com.liferay.portal.kernel.exception.SystemException {
-		return _resourceTypePermissionLocalService.findByRoleId(roleId);
-	}
-
-	public java.util.List<com.liferay.portal.model.ResourceTypePermission> findByGroupScope(
-		long companyId, java.lang.String name, long roleId)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return _resourceTypePermissionLocalService.findByGroupScope(companyId,
-			name, roleId);
-	}
-
-	public com.liferay.portal.model.ResourceBlockPermissionsContainer getResourceBlockPermissionsContainer(
-		long companyId, long groupId, java.lang.String name)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return _resourceTypePermissionLocalService.getResourceBlockPermissionsContainer(companyId,
-			groupId, name);
-	}
-
 	public long getCompanyScopeActionIds(long companyId, java.lang.String name,
 		long roleId) throws com.liferay.portal.kernel.exception.SystemException {
 		return _resourceTypePermissionLocalService.getCompanyScopeActionIds(companyId,
@@ -283,12 +263,23 @@ public class ResourceTypePermissionLocalServiceWrapper
 			groupId, name, roleId);
 	}
 
-	public boolean hasEitherScopePermission(long companyId,
-		java.lang.String name, long roleId, java.lang.String actionId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _resourceTypePermissionLocalService.hasEitherScopePermission(companyId,
-			name, roleId, actionId);
+	public java.util.List<com.liferay.portal.model.ResourceTypePermission> getGroupScopeResourceTypePermissions(
+		long companyId, java.lang.String name, long roleId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _resourceTypePermissionLocalService.getGroupScopeResourceTypePermissions(companyId,
+			name, roleId);
+	}
+
+	public com.liferay.portal.model.ResourceBlockPermissionsContainer getResourceBlockPermissionsContainer(
+		long companyId, long groupId, java.lang.String name)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _resourceTypePermissionLocalService.getResourceBlockPermissionsContainer(companyId,
+			groupId, name);
+	}
+
+	public java.util.List<com.liferay.portal.model.ResourceTypePermission> getRoleResourceTypePermissions(
+		long roleId) throws com.liferay.portal.kernel.exception.SystemException {
+		return _resourceTypePermissionLocalService.getRoleResourceTypePermissions(roleId);
 	}
 
 	public boolean hasCompanyScopePermission(long companyId,
@@ -296,6 +287,14 @@ public class ResourceTypePermissionLocalServiceWrapper
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _resourceTypePermissionLocalService.hasCompanyScopePermission(companyId,
+			name, roleId, actionId);
+	}
+
+	public boolean hasEitherScopePermission(long companyId,
+		java.lang.String name, long roleId, java.lang.String actionId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _resourceTypePermissionLocalService.hasEitherScopePermission(companyId,
 			name, roleId, actionId);
 	}
 

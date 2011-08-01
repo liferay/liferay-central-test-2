@@ -4104,18 +4104,9 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 		return sql;
 	}
 
-	private static final String _FILTER_SQL_SELECT_BOOKMARKSENTRY_WHERE = "SELECT DISTINCT {bookmarksEntry.*} FROM BookmarksEntry bookmarksEntry WHERE ";
-	private static final String _FILTER_SQL_SELECT_BOOKMARKSENTRY_NO_INLINE_DISTINCT_WHERE_1 =
-		"SELECT {BookmarksEntry.*} FROM (SELECT DISTINCT bookmarksEntry.entryId FROM BookmarksEntry bookmarksEntry WHERE ";
-	private static final String _FILTER_SQL_SELECT_BOOKMARKSENTRY_NO_INLINE_DISTINCT_WHERE_2 =
-		") TEMP_TABLE INNER JOIN BookmarksEntry ON TEMP_TABLE.entryId = BookmarksEntry.entryId";
-	private static final String _FILTER_SQL_COUNT_BOOKMARKSENTRY_WHERE = "SELECT COUNT(DISTINCT bookmarksEntry.entryId) AS COUNT_VALUE FROM BookmarksEntry bookmarksEntry WHERE ";
-	private static final String _FILTER_ENTITY_ALIAS = "bookmarksEntry";
-	private static final String _FILTER_ENTITY_TABLE = "BookmarksEntry";
 	private static final String _FILTER_ENTITY_TABLE_FILTER_PK_COLUMN = "bookmarksEntry.entryId";
 	private static final String _FILTER_ENTITY_TABLE_FILTER_USERID_COLUMN = "bookmarksEntry.userId";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "bookmarksEntry.";
-	private static final String _ORDER_BY_ENTITY_TABLE = "BookmarksEntry.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No BookmarksEntry exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No BookmarksEntry exists with the key {";
 	private static final boolean _HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE = com.liferay.portal.util.PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE;

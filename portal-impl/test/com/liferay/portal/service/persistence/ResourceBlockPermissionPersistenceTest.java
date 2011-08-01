@@ -40,8 +40,7 @@ public class ResourceBlockPermissionPersistenceTest
 	}
 
 	public void testCreate() throws Exception {
-		ResourceBlockPermissionPK pk = new ResourceBlockPermissionPK(nextLong(),
-				nextLong());
+		long pk = nextLong();
 
 		ResourceBlockPermission resourceBlockPermission = _persistence.create(pk);
 
@@ -65,10 +64,13 @@ public class ResourceBlockPermissionPersistenceTest
 	}
 
 	public void testUpdateExisting() throws Exception {
-		ResourceBlockPermissionPK pk = new ResourceBlockPermissionPK(nextLong(),
-				nextLong());
+		long pk = nextLong();
 
 		ResourceBlockPermission newResourceBlockPermission = _persistence.create(pk);
+
+		newResourceBlockPermission.setResourceBlockId(nextLong());
+
+		newResourceBlockPermission.setRoleId(nextLong());
 
 		newResourceBlockPermission.setActionIds(nextLong());
 
@@ -76,6 +78,8 @@ public class ResourceBlockPermissionPersistenceTest
 
 		ResourceBlockPermission existingResourceBlockPermission = _persistence.findByPrimaryKey(newResourceBlockPermission.getPrimaryKey());
 
+		assertEquals(existingResourceBlockPermission.getResourceBlockPermissionId(),
+			newResourceBlockPermission.getResourceBlockPermissionId());
 		assertEquals(existingResourceBlockPermission.getResourceBlockId(),
 			newResourceBlockPermission.getResourceBlockId());
 		assertEquals(existingResourceBlockPermission.getRoleId(),
@@ -93,8 +97,7 @@ public class ResourceBlockPermissionPersistenceTest
 	}
 
 	public void testFindByPrimaryKeyMissing() throws Exception {
-		ResourceBlockPermissionPK pk = new ResourceBlockPermissionPK(nextLong(),
-				nextLong());
+		long pk = nextLong();
 
 		try {
 			_persistence.findByPrimaryKey(pk);
@@ -115,8 +118,7 @@ public class ResourceBlockPermissionPersistenceTest
 	}
 
 	public void testFetchByPrimaryKeyMissing() throws Exception {
-		ResourceBlockPermissionPK pk = new ResourceBlockPermissionPK(nextLong(),
-				nextLong());
+		long pk = nextLong();
 
 		ResourceBlockPermission missingResourceBlockPermission = _persistence.fetchByPrimaryKey(pk);
 
@@ -130,10 +132,9 @@ public class ResourceBlockPermissionPersistenceTest
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(ResourceBlockPermission.class,
 				ResourceBlockPermission.class.getClassLoader());
 
-		dynamicQuery.add(RestrictionsFactoryUtil.eq("id.resourceBlockId",
-				newResourceBlockPermission.getResourceBlockId()));
-		dynamicQuery.add(RestrictionsFactoryUtil.eq("id.roleId",
-				newResourceBlockPermission.getRoleId()));
+		dynamicQuery.add(RestrictionsFactoryUtil.eq(
+				"resourceBlockPermissionId",
+				newResourceBlockPermission.getResourceBlockPermissionId()));
 
 		List<ResourceBlockPermission> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
@@ -148,9 +149,8 @@ public class ResourceBlockPermissionPersistenceTest
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(ResourceBlockPermission.class,
 				ResourceBlockPermission.class.getClassLoader());
 
-		dynamicQuery.add(RestrictionsFactoryUtil.eq("id.resourceBlockId",
-				nextLong()));
-		dynamicQuery.add(RestrictionsFactoryUtil.eq("id.roleId", nextLong()));
+		dynamicQuery.add(RestrictionsFactoryUtil.eq(
+				"resourceBlockPermissionId", nextLong()));
 
 		List<ResourceBlockPermission> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
@@ -165,20 +165,22 @@ public class ResourceBlockPermissionPersistenceTest
 				ResourceBlockPermission.class.getClassLoader());
 
 		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
-				"id.resourceBlockId"));
+				"resourceBlockPermissionId"));
 
-		Object newResourceBlockId = newResourceBlockPermission.getResourceBlockId();
+		Object newResourceBlockPermissionId = newResourceBlockPermission.getResourceBlockPermissionId();
 
-		dynamicQuery.add(RestrictionsFactoryUtil.in("id.resourceBlockId",
-				new Object[] { newResourceBlockId }));
+		dynamicQuery.add(RestrictionsFactoryUtil.in(
+				"resourceBlockPermissionId",
+				new Object[] { newResourceBlockPermissionId }));
 
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
 		assertEquals(1, result.size());
 
-		Object existingResourceBlockId = result.get(0);
+		Object existingResourceBlockPermissionId = result.get(0);
 
-		assertEquals(existingResourceBlockId, newResourceBlockId);
+		assertEquals(existingResourceBlockPermissionId,
+			newResourceBlockPermissionId);
 	}
 
 	public void testDynamicQueryByProjectionMissing() throws Exception {
@@ -186,10 +188,10 @@ public class ResourceBlockPermissionPersistenceTest
 				ResourceBlockPermission.class.getClassLoader());
 
 		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
-				"id.resourceBlockId"));
+				"resourceBlockPermissionId"));
 
-		dynamicQuery.add(RestrictionsFactoryUtil.in("id.resourceBlockId",
-				new Object[] { nextLong() }));
+		dynamicQuery.add(RestrictionsFactoryUtil.in(
+				"resourceBlockPermissionId", new Object[] { nextLong() }));
 
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
@@ -216,10 +218,13 @@ public class ResourceBlockPermissionPersistenceTest
 
 	protected ResourceBlockPermission addResourceBlockPermission()
 		throws Exception {
-		ResourceBlockPermissionPK pk = new ResourceBlockPermissionPK(nextLong(),
-				nextLong());
+		long pk = nextLong();
 
 		ResourceBlockPermission resourceBlockPermission = _persistence.create(pk);
+
+		resourceBlockPermission.setResourceBlockId(nextLong());
+
+		resourceBlockPermission.setRoleId(nextLong());
 
 		resourceBlockPermission.setActionIds(nextLong());
 

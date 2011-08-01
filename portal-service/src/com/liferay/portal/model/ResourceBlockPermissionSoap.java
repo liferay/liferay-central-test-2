@@ -14,8 +14,6 @@
 
 package com.liferay.portal.model;
 
-import com.liferay.portal.service.persistence.ResourceBlockPermissionPK;
-
 import java.io.Serializable;
 
 import java.util.ArrayList;
@@ -32,6 +30,7 @@ public class ResourceBlockPermissionSoap implements Serializable {
 		ResourceBlockPermission model) {
 		ResourceBlockPermissionSoap soapModel = new ResourceBlockPermissionSoap();
 
+		soapModel.setResourceBlockPermissionId(model.getResourceBlockPermissionId());
 		soapModel.setResourceBlockId(model.getResourceBlockId());
 		soapModel.setRoleId(model.getRoleId());
 		soapModel.setActionIds(model.getActionIds());
@@ -82,13 +81,20 @@ public class ResourceBlockPermissionSoap implements Serializable {
 	public ResourceBlockPermissionSoap() {
 	}
 
-	public ResourceBlockPermissionPK getPrimaryKey() {
-		return new ResourceBlockPermissionPK(_resourceBlockId, _roleId);
+	public long getPrimaryKey() {
+		return _resourceBlockPermissionId;
 	}
 
-	public void setPrimaryKey(ResourceBlockPermissionPK pk) {
-		setResourceBlockId(pk.resourceBlockId);
-		setRoleId(pk.roleId);
+	public void setPrimaryKey(long pk) {
+		setResourceBlockPermissionId(pk);
+	}
+
+	public long getResourceBlockPermissionId() {
+		return _resourceBlockPermissionId;
+	}
+
+	public void setResourceBlockPermissionId(long resourceBlockPermissionId) {
+		_resourceBlockPermissionId = resourceBlockPermissionId;
 	}
 
 	public long getResourceBlockId() {
@@ -115,6 +121,7 @@ public class ResourceBlockPermissionSoap implements Serializable {
 		_actionIds = actionIds;
 	}
 
+	private long _resourceBlockPermissionId;
 	private long _resourceBlockId;
 	private long _roleId;
 	private long _actionIds;

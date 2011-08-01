@@ -54,27 +54,27 @@ public class ResourceBlockPermissionLocalServiceUtil {
 	/**
 	* Creates a new resource block permission with the primary key. Does not add the resource block permission to the database.
 	*
-	* @param resourceBlockPermissionPK the primary key for the new resource block permission
+	* @param resourceBlockPermissionId the primary key for the new resource block permission
 	* @return the new resource block permission
 	*/
 	public static com.liferay.portal.model.ResourceBlockPermission createResourceBlockPermission(
-		com.liferay.portal.service.persistence.ResourceBlockPermissionPK resourceBlockPermissionPK) {
+		long resourceBlockPermissionId) {
 		return getService()
-				   .createResourceBlockPermission(resourceBlockPermissionPK);
+				   .createResourceBlockPermission(resourceBlockPermissionId);
 	}
 
 	/**
 	* Deletes the resource block permission with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param resourceBlockPermissionPK the primary key of the resource block permission
+	* @param resourceBlockPermissionId the primary key of the resource block permission
 	* @throws PortalException if a resource block permission with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void deleteResourceBlockPermission(
-		com.liferay.portal.service.persistence.ResourceBlockPermissionPK resourceBlockPermissionPK)
+		long resourceBlockPermissionId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		getService().deleteResourceBlockPermission(resourceBlockPermissionPK);
+		getService().deleteResourceBlockPermission(resourceBlockPermissionId);
 	}
 
 	/**
@@ -163,16 +163,16 @@ public class ResourceBlockPermissionLocalServiceUtil {
 	/**
 	* Returns the resource block permission with the primary key.
 	*
-	* @param resourceBlockPermissionPK the primary key of the resource block permission
+	* @param resourceBlockPermissionId the primary key of the resource block permission
 	* @return the resource block permission
 	* @throws PortalException if a resource block permission with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public static com.liferay.portal.model.ResourceBlockPermission getResourceBlockPermission(
-		com.liferay.portal.service.persistence.ResourceBlockPermissionPK resourceBlockPermissionPK)
+		long resourceBlockPermissionId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getService().getResourceBlockPermission(resourceBlockPermissionPK);
+		return getService().getResourceBlockPermission(resourceBlockPermissionId);
 	}
 
 	public static com.liferay.portal.model.PersistedModel getPersistedModel(

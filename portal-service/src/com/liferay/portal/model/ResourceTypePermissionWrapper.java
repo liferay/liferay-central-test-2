@@ -42,7 +42,7 @@ public class ResourceTypePermissionWrapper implements ResourceTypePermission {
 	*
 	* @return the primary key of this resource type permission
 	*/
-	public com.liferay.portal.service.persistence.ResourceTypePermissionPK getPrimaryKey() {
+	public long getPrimaryKey() {
 		return _resourceTypePermission.getPrimaryKey();
 	}
 
@@ -51,9 +51,26 @@ public class ResourceTypePermissionWrapper implements ResourceTypePermission {
 	*
 	* @param primaryKey the primary key of this resource type permission
 	*/
-	public void setPrimaryKey(
-		com.liferay.portal.service.persistence.ResourceTypePermissionPK primaryKey) {
+	public void setPrimaryKey(long primaryKey) {
 		_resourceTypePermission.setPrimaryKey(primaryKey);
+	}
+
+	/**
+	* Returns the resource type permission ID of this resource type permission.
+	*
+	* @return the resource type permission ID of this resource type permission
+	*/
+	public long getResourceTypePermissionId() {
+		return _resourceTypePermission.getResourceTypePermissionId();
+	}
+
+	/**
+	* Sets the resource type permission ID of this resource type permission.
+	*
+	* @param resourceTypePermissionId the resource type permission ID of this resource type permission
+	*/
+	public void setResourceTypePermissionId(long resourceTypePermissionId) {
+		_resourceTypePermission.setResourceTypePermissionId(resourceTypePermissionId);
 	}
 
 	/**

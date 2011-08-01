@@ -14,8 +14,6 @@
 
 package com.liferay.portal.model;
 
-import com.liferay.portal.service.persistence.ResourceTypePermissionPK;
-
 import java.io.Serializable;
 
 import java.util.ArrayList;
@@ -32,6 +30,7 @@ public class ResourceTypePermissionSoap implements Serializable {
 		ResourceTypePermission model) {
 		ResourceTypePermissionSoap soapModel = new ResourceTypePermissionSoap();
 
+		soapModel.setResourceTypePermissionId(model.getResourceTypePermissionId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setGroupId(model.getGroupId());
 		soapModel.setName(model.getName());
@@ -84,15 +83,20 @@ public class ResourceTypePermissionSoap implements Serializable {
 	public ResourceTypePermissionSoap() {
 	}
 
-	public ResourceTypePermissionPK getPrimaryKey() {
-		return new ResourceTypePermissionPK(_companyId, _groupId, _name, _roleId);
+	public long getPrimaryKey() {
+		return _resourceTypePermissionId;
 	}
 
-	public void setPrimaryKey(ResourceTypePermissionPK pk) {
-		setCompanyId(pk.companyId);
-		setGroupId(pk.groupId);
-		setName(pk.name);
-		setRoleId(pk.roleId);
+	public void setPrimaryKey(long pk) {
+		setResourceTypePermissionId(pk);
+	}
+
+	public long getResourceTypePermissionId() {
+		return _resourceTypePermissionId;
+	}
+
+	public void setResourceTypePermissionId(long resourceTypePermissionId) {
+		_resourceTypePermissionId = resourceTypePermissionId;
 	}
 
 	public long getCompanyId() {
@@ -135,6 +139,7 @@ public class ResourceTypePermissionSoap implements Serializable {
 		_actionIds = actionIds;
 	}
 
+	private long _resourceTypePermissionId;
 	private long _companyId;
 	private long _groupId;
 	private String _name;

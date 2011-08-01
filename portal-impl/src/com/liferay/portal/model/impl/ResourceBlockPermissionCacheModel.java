@@ -28,9 +28,11 @@ import com.liferay.portal.model.ResourceBlockPermission;
 public class ResourceBlockPermissionCacheModel implements CacheModel<ResourceBlockPermission> {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(7);
+		StringBundler sb = new StringBundler(9);
 
-		sb.append("{resourceBlockId=");
+		sb.append("{resourceBlockPermissionId=");
+		sb.append(resourceBlockPermissionId);
+		sb.append(", resourceBlockId=");
 		sb.append(resourceBlockId);
 		sb.append(", roleId=");
 		sb.append(roleId);
@@ -44,6 +46,7 @@ public class ResourceBlockPermissionCacheModel implements CacheModel<ResourceBlo
 	public ResourceBlockPermission toEntityModel() {
 		ResourceBlockPermissionImpl resourceBlockPermissionImpl = new ResourceBlockPermissionImpl();
 
+		resourceBlockPermissionImpl.setResourceBlockPermissionId(resourceBlockPermissionId);
 		resourceBlockPermissionImpl.setResourceBlockId(resourceBlockId);
 		resourceBlockPermissionImpl.setRoleId(roleId);
 		resourceBlockPermissionImpl.setActionIds(actionIds);
@@ -53,6 +56,7 @@ public class ResourceBlockPermissionCacheModel implements CacheModel<ResourceBlo
 		return resourceBlockPermissionImpl;
 	}
 
+	public long resourceBlockPermissionId;
 	public long resourceBlockId;
 	public long roleId;
 	public long actionIds;

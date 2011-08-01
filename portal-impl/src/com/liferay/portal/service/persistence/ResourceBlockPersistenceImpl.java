@@ -70,6 +70,19 @@ public class ResourceBlockPersistenceImpl extends BasePersistenceImpl<ResourceBl
 	public static final String FINDER_CLASS_NAME_ENTITY = ResourceBlockImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
 		".List";
+	public static final FinderPath FINDER_PATH_FIND_BY_C_N = new FinderPath(ResourceBlockModelImpl.ENTITY_CACHE_ENABLED,
+			ResourceBlockModelImpl.FINDER_CACHE_ENABLED,
+			ResourceBlockImpl.class, FINDER_CLASS_NAME_LIST, "findByC_N",
+			new String[] {
+				Long.class.getName(), String.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_C_N = new FinderPath(ResourceBlockModelImpl.ENTITY_CACHE_ENABLED,
+			ResourceBlockModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST, "countByC_N",
+			new String[] { Long.class.getName(), String.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_BY_C_G_N = new FinderPath(ResourceBlockModelImpl.ENTITY_CACHE_ENABLED,
 			ResourceBlockModelImpl.FINDER_CACHE_ENABLED,
 			ResourceBlockImpl.class, FINDER_CLASS_NAME_LIST, "findByC_G_N",
@@ -102,19 +115,6 @@ public class ResourceBlockPersistenceImpl extends BasePersistenceImpl<ResourceBl
 				Long.class.getName(), Long.class.getName(),
 				String.class.getName(), String.class.getName()
 			});
-	public static final FinderPath FINDER_PATH_FIND_BY_C_N = new FinderPath(ResourceBlockModelImpl.ENTITY_CACHE_ENABLED,
-			ResourceBlockModelImpl.FINDER_CACHE_ENABLED,
-			ResourceBlockImpl.class, FINDER_CLASS_NAME_LIST, "findByC_N",
-			new String[] {
-				Long.class.getName(), String.class.getName(),
-				
-			"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			});
-	public static final FinderPath FINDER_PATH_COUNT_BY_C_N = new FinderPath(ResourceBlockModelImpl.ENTITY_CACHE_ENABLED,
-			ResourceBlockModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST, "countByC_N",
-			new String[] { Long.class.getName(), String.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(ResourceBlockModelImpl.ENTITY_CACHE_ENABLED,
 			ResourceBlockModelImpl.FINDER_CACHE_ENABLED,
 			ResourceBlockImpl.class, FINDER_CLASS_NAME_LIST, "findAll",
@@ -514,6 +514,384 @@ public class ResourceBlockPersistenceImpl extends BasePersistenceImpl<ResourceBl
 		}
 
 		return resourceBlock;
+	}
+
+	/**
+	 * Returns all the resource blocks where companyId = &#63; and name = &#63;.
+	 *
+	 * @param companyId the company ID
+	 * @param name the name
+	 * @return the matching resource blocks
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<ResourceBlock> findByC_N(long companyId, String name)
+		throws SystemException {
+		return findByC_N(companyId, name, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+			null);
+	}
+
+	/**
+	 * Returns a range of all the resource blocks where companyId = &#63; and name = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company ID
+	 * @param name the name
+	 * @param start the lower bound of the range of resource blocks
+	 * @param end the upper bound of the range of resource blocks (not inclusive)
+	 * @return the range of matching resource blocks
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<ResourceBlock> findByC_N(long companyId, String name,
+		int start, int end) throws SystemException {
+		return findByC_N(companyId, name, start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the resource blocks where companyId = &#63; and name = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company ID
+	 * @param name the name
+	 * @param start the lower bound of the range of resource blocks
+	 * @param end the upper bound of the range of resource blocks (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching resource blocks
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<ResourceBlock> findByC_N(long companyId, String name,
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
+		Object[] finderArgs = new Object[] {
+				companyId, name,
+				
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
+			};
+
+		List<ResourceBlock> list = (List<ResourceBlock>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_C_N,
+				finderArgs, this);
+
+		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(4 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(3);
+			}
+
+			query.append(_SQL_SELECT_RESOURCEBLOCK_WHERE);
+
+			query.append(_FINDER_COLUMN_C_N_COMPANYID_2);
+
+			if (name == null) {
+				query.append(_FINDER_COLUMN_C_N_NAME_1);
+			}
+			else {
+				if (name.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_C_N_NAME_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_C_N_NAME_2);
+				}
+			}
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(companyId);
+
+				if (name != null) {
+					qPos.add(name);
+				}
+
+				list = (List<ResourceBlock>)QueryUtil.list(q, getDialect(),
+						start, end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_C_N,
+						finderArgs);
+				}
+				else {
+					cacheResult(list);
+
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_C_N,
+						finderArgs, list);
+				}
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Returns the first resource block in the ordered set where companyId = &#63; and name = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company ID
+	 * @param name the name
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching resource block
+	 * @throws com.liferay.portal.NoSuchResourceBlockException if a matching resource block could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public ResourceBlock findByC_N_First(long companyId, String name,
+		OrderByComparator orderByComparator)
+		throws NoSuchResourceBlockException, SystemException {
+		List<ResourceBlock> list = findByC_N(companyId, name, 0, 1,
+				orderByComparator);
+
+		if (list.isEmpty()) {
+			StringBundler msg = new StringBundler(6);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("companyId=");
+			msg.append(companyId);
+
+			msg.append(", name=");
+			msg.append(name);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchResourceBlockException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	/**
+	 * Returns the last resource block in the ordered set where companyId = &#63; and name = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param companyId the company ID
+	 * @param name the name
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching resource block
+	 * @throws com.liferay.portal.NoSuchResourceBlockException if a matching resource block could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public ResourceBlock findByC_N_Last(long companyId, String name,
+		OrderByComparator orderByComparator)
+		throws NoSuchResourceBlockException, SystemException {
+		int count = countByC_N(companyId, name);
+
+		List<ResourceBlock> list = findByC_N(companyId, name, count - 1, count,
+				orderByComparator);
+
+		if (list.isEmpty()) {
+			StringBundler msg = new StringBundler(6);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("companyId=");
+			msg.append(companyId);
+
+			msg.append(", name=");
+			msg.append(name);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchResourceBlockException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	/**
+	 * Returns the resource blocks before and after the current resource block in the ordered set where companyId = &#63; and name = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param resourceBlockId the primary key of the current resource block
+	 * @param companyId the company ID
+	 * @param name the name
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next resource block
+	 * @throws com.liferay.portal.NoSuchResourceBlockException if a resource block with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public ResourceBlock[] findByC_N_PrevAndNext(long resourceBlockId,
+		long companyId, String name, OrderByComparator orderByComparator)
+		throws NoSuchResourceBlockException, SystemException {
+		ResourceBlock resourceBlock = findByPrimaryKey(resourceBlockId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			ResourceBlock[] array = new ResourceBlockImpl[3];
+
+			array[0] = getByC_N_PrevAndNext(session, resourceBlock, companyId,
+					name, orderByComparator, true);
+
+			array[1] = resourceBlock;
+
+			array[2] = getByC_N_PrevAndNext(session, resourceBlock, companyId,
+					name, orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected ResourceBlock getByC_N_PrevAndNext(Session session,
+		ResourceBlock resourceBlock, long companyId, String name,
+		OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_RESOURCEBLOCK_WHERE);
+
+		query.append(_FINDER_COLUMN_C_N_COMPANYID_2);
+
+		if (name == null) {
+			query.append(_FINDER_COLUMN_C_N_NAME_1);
+		}
+		else {
+			if (name.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_C_N_NAME_3);
+			}
+			else {
+				query.append(_FINDER_COLUMN_C_N_NAME_2);
+			}
+		}
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(companyId);
+
+		if (name != null) {
+			qPos.add(name);
+		}
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(resourceBlock);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<ResourceBlock> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
 	}
 
 	/**
@@ -1109,384 +1487,6 @@ public class ResourceBlockPersistenceImpl extends BasePersistenceImpl<ResourceBl
 	}
 
 	/**
-	 * Returns all the resource blocks where companyId = &#63; and name = &#63;.
-	 *
-	 * @param companyId the company ID
-	 * @param name the name
-	 * @return the matching resource blocks
-	 * @throws SystemException if a system exception occurred
-	 */
-	public List<ResourceBlock> findByC_N(long companyId, String name)
-		throws SystemException {
-		return findByC_N(companyId, name, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
-			null);
-	}
-
-	/**
-	 * Returns a range of all the resource blocks where companyId = &#63; and name = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	 * </p>
-	 *
-	 * @param companyId the company ID
-	 * @param name the name
-	 * @param start the lower bound of the range of resource blocks
-	 * @param end the upper bound of the range of resource blocks (not inclusive)
-	 * @return the range of matching resource blocks
-	 * @throws SystemException if a system exception occurred
-	 */
-	public List<ResourceBlock> findByC_N(long companyId, String name,
-		int start, int end) throws SystemException {
-		return findByC_N(companyId, name, start, end, null);
-	}
-
-	/**
-	 * Returns an ordered range of all the resource blocks where companyId = &#63; and name = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	 * </p>
-	 *
-	 * @param companyId the company ID
-	 * @param name the name
-	 * @param start the lower bound of the range of resource blocks
-	 * @param end the upper bound of the range of resource blocks (not inclusive)
-	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the ordered range of matching resource blocks
-	 * @throws SystemException if a system exception occurred
-	 */
-	public List<ResourceBlock> findByC_N(long companyId, String name,
-		int start, int end, OrderByComparator orderByComparator)
-		throws SystemException {
-		Object[] finderArgs = new Object[] {
-				companyId, name,
-				
-				String.valueOf(start), String.valueOf(end),
-				String.valueOf(orderByComparator)
-			};
-
-		List<ResourceBlock> list = (List<ResourceBlock>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_C_N,
-				finderArgs, this);
-
-		if (list == null) {
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(4 +
-						(orderByComparator.getOrderByFields().length * 3));
-			}
-			else {
-				query = new StringBundler(3);
-			}
-
-			query.append(_SQL_SELECT_RESOURCEBLOCK_WHERE);
-
-			query.append(_FINDER_COLUMN_C_N_COMPANYID_2);
-
-			if (name == null) {
-				query.append(_FINDER_COLUMN_C_N_NAME_1);
-			}
-			else {
-				if (name.equals(StringPool.BLANK)) {
-					query.append(_FINDER_COLUMN_C_N_NAME_3);
-				}
-				else {
-					query.append(_FINDER_COLUMN_C_N_NAME_2);
-				}
-			}
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
-					orderByComparator);
-			}
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(companyId);
-
-				if (name != null) {
-					qPos.add(name);
-				}
-
-				list = (List<ResourceBlock>)QueryUtil.list(q, getDialect(),
-						start, end);
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_C_N,
-						finderArgs);
-				}
-				else {
-					cacheResult(list);
-
-					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_C_N,
-						finderArgs, list);
-				}
-
-				closeSession(session);
-			}
-		}
-
-		return list;
-	}
-
-	/**
-	 * Returns the first resource block in the ordered set where companyId = &#63; and name = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	 * </p>
-	 *
-	 * @param companyId the company ID
-	 * @param name the name
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching resource block
-	 * @throws com.liferay.portal.NoSuchResourceBlockException if a matching resource block could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	public ResourceBlock findByC_N_First(long companyId, String name,
-		OrderByComparator orderByComparator)
-		throws NoSuchResourceBlockException, SystemException {
-		List<ResourceBlock> list = findByC_N(companyId, name, 0, 1,
-				orderByComparator);
-
-		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(6);
-
-			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-			msg.append("companyId=");
-			msg.append(companyId);
-
-			msg.append(", name=");
-			msg.append(name);
-
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-			throw new NoSuchResourceBlockException(msg.toString());
-		}
-		else {
-			return list.get(0);
-		}
-	}
-
-	/**
-	 * Returns the last resource block in the ordered set where companyId = &#63; and name = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	 * </p>
-	 *
-	 * @param companyId the company ID
-	 * @param name the name
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching resource block
-	 * @throws com.liferay.portal.NoSuchResourceBlockException if a matching resource block could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	public ResourceBlock findByC_N_Last(long companyId, String name,
-		OrderByComparator orderByComparator)
-		throws NoSuchResourceBlockException, SystemException {
-		int count = countByC_N(companyId, name);
-
-		List<ResourceBlock> list = findByC_N(companyId, name, count - 1, count,
-				orderByComparator);
-
-		if (list.isEmpty()) {
-			StringBundler msg = new StringBundler(6);
-
-			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-			msg.append("companyId=");
-			msg.append(companyId);
-
-			msg.append(", name=");
-			msg.append(name);
-
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-			throw new NoSuchResourceBlockException(msg.toString());
-		}
-		else {
-			return list.get(0);
-		}
-	}
-
-	/**
-	 * Returns the resource blocks before and after the current resource block in the ordered set where companyId = &#63; and name = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	 * </p>
-	 *
-	 * @param resourceBlockId the primary key of the current resource block
-	 * @param companyId the company ID
-	 * @param name the name
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the previous, current, and next resource block
-	 * @throws com.liferay.portal.NoSuchResourceBlockException if a resource block with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	public ResourceBlock[] findByC_N_PrevAndNext(long resourceBlockId,
-		long companyId, String name, OrderByComparator orderByComparator)
-		throws NoSuchResourceBlockException, SystemException {
-		ResourceBlock resourceBlock = findByPrimaryKey(resourceBlockId);
-
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			ResourceBlock[] array = new ResourceBlockImpl[3];
-
-			array[0] = getByC_N_PrevAndNext(session, resourceBlock, companyId,
-					name, orderByComparator, true);
-
-			array[1] = resourceBlock;
-
-			array[2] = getByC_N_PrevAndNext(session, resourceBlock, companyId,
-					name, orderByComparator, false);
-
-			return array;
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	protected ResourceBlock getByC_N_PrevAndNext(Session session,
-		ResourceBlock resourceBlock, long companyId, String name,
-		OrderByComparator orderByComparator, boolean previous) {
-		StringBundler query = null;
-
-		if (orderByComparator != null) {
-			query = new StringBundler(6 +
-					(orderByComparator.getOrderByFields().length * 6));
-		}
-		else {
-			query = new StringBundler(3);
-		}
-
-		query.append(_SQL_SELECT_RESOURCEBLOCK_WHERE);
-
-		query.append(_FINDER_COLUMN_C_N_COMPANYID_2);
-
-		if (name == null) {
-			query.append(_FINDER_COLUMN_C_N_NAME_1);
-		}
-		else {
-			if (name.equals(StringPool.BLANK)) {
-				query.append(_FINDER_COLUMN_C_N_NAME_3);
-			}
-			else {
-				query.append(_FINDER_COLUMN_C_N_NAME_2);
-			}
-		}
-
-		if (orderByComparator != null) {
-			String[] orderByFields = orderByComparator.getOrderByFields();
-
-			if (orderByFields.length > 0) {
-				query.append(WHERE_AND);
-			}
-
-			for (int i = 0; i < orderByFields.length; i++) {
-				query.append(_ORDER_BY_ENTITY_ALIAS);
-				query.append(orderByFields[i]);
-
-				if ((i + 1) < orderByFields.length) {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(WHERE_GREATER_THAN_HAS_NEXT);
-					}
-					else {
-						query.append(WHERE_LESSER_THAN_HAS_NEXT);
-					}
-				}
-				else {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(WHERE_GREATER_THAN);
-					}
-					else {
-						query.append(WHERE_LESSER_THAN);
-					}
-				}
-			}
-
-			query.append(ORDER_BY_CLAUSE);
-
-			for (int i = 0; i < orderByFields.length; i++) {
-				query.append(_ORDER_BY_ENTITY_ALIAS);
-				query.append(orderByFields[i]);
-
-				if ((i + 1) < orderByFields.length) {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(ORDER_BY_ASC_HAS_NEXT);
-					}
-					else {
-						query.append(ORDER_BY_DESC_HAS_NEXT);
-					}
-				}
-				else {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(ORDER_BY_ASC);
-					}
-					else {
-						query.append(ORDER_BY_DESC);
-					}
-				}
-			}
-		}
-
-		String sql = query.toString();
-
-		Query q = session.createQuery(sql);
-
-		q.setFirstResult(0);
-		q.setMaxResults(2);
-
-		QueryPos qPos = QueryPos.getInstance(q);
-
-		qPos.add(companyId);
-
-		if (name != null) {
-			qPos.add(name);
-		}
-
-		if (orderByComparator != null) {
-			Object[] values = orderByComparator.getOrderByValues(resourceBlock);
-
-			for (Object value : values) {
-				qPos.add(value);
-			}
-		}
-
-		List<ResourceBlock> list = q.list();
-
-		if (list.size() == 2) {
-			return list.get(1);
-		}
-		else {
-			return null;
-		}
-	}
-
-	/**
 	 * Returns all the resource blocks.
 	 *
 	 * @return the resource blocks
@@ -1596,6 +1596,20 @@ public class ResourceBlockPersistenceImpl extends BasePersistenceImpl<ResourceBl
 	}
 
 	/**
+	 * Removes all the resource blocks where companyId = &#63; and name = &#63; from the database.
+	 *
+	 * @param companyId the company ID
+	 * @param name the name
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void removeByC_N(long companyId, String name)
+		throws SystemException {
+		for (ResourceBlock resourceBlock : findByC_N(companyId, name)) {
+			resourceBlockPersistence.remove(resourceBlock);
+		}
+	}
+
+	/**
 	 * Removes all the resource blocks where companyId = &#63; and groupId = &#63; and name = &#63; from the database.
 	 *
 	 * @param companyId the company ID
@@ -1629,20 +1643,6 @@ public class ResourceBlockPersistenceImpl extends BasePersistenceImpl<ResourceBl
 	}
 
 	/**
-	 * Removes all the resource blocks where companyId = &#63; and name = &#63; from the database.
-	 *
-	 * @param companyId the company ID
-	 * @param name the name
-	 * @throws SystemException if a system exception occurred
-	 */
-	public void removeByC_N(long companyId, String name)
-		throws SystemException {
-		for (ResourceBlock resourceBlock : findByC_N(companyId, name)) {
-			resourceBlockPersistence.remove(resourceBlock);
-		}
-	}
-
-	/**
 	 * Removes all the resource blocks from the database.
 	 *
 	 * @throws SystemException if a system exception occurred
@@ -1651,6 +1651,77 @@ public class ResourceBlockPersistenceImpl extends BasePersistenceImpl<ResourceBl
 		for (ResourceBlock resourceBlock : findAll()) {
 			resourceBlockPersistence.remove(resourceBlock);
 		}
+	}
+
+	/**
+	 * Returns the number of resource blocks where companyId = &#63; and name = &#63;.
+	 *
+	 * @param companyId the company ID
+	 * @param name the name
+	 * @return the number of matching resource blocks
+	 * @throws SystemException if a system exception occurred
+	 */
+	public int countByC_N(long companyId, String name)
+		throws SystemException {
+		Object[] finderArgs = new Object[] { companyId, name };
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_N,
+				finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_COUNT_RESOURCEBLOCK_WHERE);
+
+			query.append(_FINDER_COLUMN_C_N_COMPANYID_2);
+
+			if (name == null) {
+				query.append(_FINDER_COLUMN_C_N_NAME_1);
+			}
+			else {
+				if (name.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_C_N_NAME_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_C_N_NAME_2);
+				}
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(companyId);
+
+				if (name != null) {
+					qPos.add(name);
+				}
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_C_N, finderArgs,
+					count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
 	}
 
 	/**
@@ -1816,77 +1887,6 @@ public class ResourceBlockPersistenceImpl extends BasePersistenceImpl<ResourceBl
 
 				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_C_G_N_P,
 					finderArgs, count);
-
-				closeSession(session);
-			}
-		}
-
-		return count.intValue();
-	}
-
-	/**
-	 * Returns the number of resource blocks where companyId = &#63; and name = &#63;.
-	 *
-	 * @param companyId the company ID
-	 * @param name the name
-	 * @return the number of matching resource blocks
-	 * @throws SystemException if a system exception occurred
-	 */
-	public int countByC_N(long companyId, String name)
-		throws SystemException {
-		Object[] finderArgs = new Object[] { companyId, name };
-
-		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_N,
-				finderArgs, this);
-
-		if (count == null) {
-			StringBundler query = new StringBundler(3);
-
-			query.append(_SQL_COUNT_RESOURCEBLOCK_WHERE);
-
-			query.append(_FINDER_COLUMN_C_N_COMPANYID_2);
-
-			if (name == null) {
-				query.append(_FINDER_COLUMN_C_N_NAME_1);
-			}
-			else {
-				if (name.equals(StringPool.BLANK)) {
-					query.append(_FINDER_COLUMN_C_N_NAME_3);
-				}
-				else {
-					query.append(_FINDER_COLUMN_C_N_NAME_2);
-				}
-			}
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(companyId);
-
-				if (name != null) {
-					qPos.add(name);
-				}
-
-				count = (Long)q.uniqueResult();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (count == null) {
-					count = Long.valueOf(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_C_N, finderArgs,
-					count);
 
 				closeSession(session);
 			}
@@ -2100,6 +2100,10 @@ public class ResourceBlockPersistenceImpl extends BasePersistenceImpl<ResourceBl
 	private static final String _SQL_SELECT_RESOURCEBLOCK_WHERE = "SELECT resourceBlock FROM ResourceBlock resourceBlock WHERE ";
 	private static final String _SQL_COUNT_RESOURCEBLOCK = "SELECT COUNT(resourceBlock) FROM ResourceBlock resourceBlock";
 	private static final String _SQL_COUNT_RESOURCEBLOCK_WHERE = "SELECT COUNT(resourceBlock) FROM ResourceBlock resourceBlock WHERE ";
+	private static final String _FINDER_COLUMN_C_N_COMPANYID_2 = "resourceBlock.companyId = ? AND ";
+	private static final String _FINDER_COLUMN_C_N_NAME_1 = "resourceBlock.name IS NULL";
+	private static final String _FINDER_COLUMN_C_N_NAME_2 = "resourceBlock.name = ?";
+	private static final String _FINDER_COLUMN_C_N_NAME_3 = "(resourceBlock.name IS NULL OR resourceBlock.name = ?)";
 	private static final String _FINDER_COLUMN_C_G_N_COMPANYID_2 = "resourceBlock.companyId = ? AND ";
 	private static final String _FINDER_COLUMN_C_G_N_GROUPID_2 = "resourceBlock.groupId = ? AND ";
 	private static final String _FINDER_COLUMN_C_G_N_NAME_1 = "resourceBlock.name IS NULL";
@@ -2113,10 +2117,6 @@ public class ResourceBlockPersistenceImpl extends BasePersistenceImpl<ResourceBl
 	private static final String _FINDER_COLUMN_C_G_N_P_PERMISSIONSHASH_1 = "resourceBlock.permissionsHash IS NULL";
 	private static final String _FINDER_COLUMN_C_G_N_P_PERMISSIONSHASH_2 = "resourceBlock.permissionsHash = ?";
 	private static final String _FINDER_COLUMN_C_G_N_P_PERMISSIONSHASH_3 = "(resourceBlock.permissionsHash IS NULL OR resourceBlock.permissionsHash = ?)";
-	private static final String _FINDER_COLUMN_C_N_COMPANYID_2 = "resourceBlock.companyId = ? AND ";
-	private static final String _FINDER_COLUMN_C_N_NAME_1 = "resourceBlock.name IS NULL";
-	private static final String _FINDER_COLUMN_C_N_NAME_2 = "resourceBlock.name = ?";
-	private static final String _FINDER_COLUMN_C_N_NAME_3 = "(resourceBlock.name IS NULL OR resourceBlock.name = ?)";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "resourceBlock.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No ResourceBlock exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No ResourceBlock exists with the key {";

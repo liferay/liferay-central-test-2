@@ -15,7 +15,6 @@
 package com.liferay.portlet.bookmarks.model;
 
 import com.liferay.portal.model.PermissionedModel;
-import com.liferay.portal.model.PersistedModel;
 
 /**
  * The extended model interface for the BookmarksFolder service. Represents a row in the &quot;BookmarksFolder&quot; database table, with each column mapped to a property of this class.
@@ -26,8 +25,7 @@ import com.liferay.portal.model.PersistedModel;
  * @see com.liferay.portlet.bookmarks.model.impl.BookmarksFolderModelImpl
  * @generated
  */
-public interface BookmarksFolder extends BookmarksFolderModel, PersistedModel,
-	PermissionedModel {
+public interface BookmarksFolder extends BookmarksFolderModel, PermissionedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *

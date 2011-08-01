@@ -24,7 +24,7 @@ package com.liferay.portal.model;
  * @generated
  */
 public interface ResourceBlockPermission extends ResourceBlockPermissionModel,
-	PersistedModel, PermissionedModel {
+	PersistedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *

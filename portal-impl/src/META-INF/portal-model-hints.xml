@@ -690,6 +690,7 @@
 		<field name="referenceCount" type="long" />
 	</model>
 	<model name="com.liferay.portal.model.ResourceBlockPermission">
+		<field name="resourceBlockPermissionId" type="long" />
 		<field name="resourceBlockId" type="long" />
 		<field name="roleId" type="long" />
 		<field name="actionIds" type="long" />
@@ -717,6 +718,7 @@
 		<field name="actionIds" type="long" />
 	</model>
 	<model name="com.liferay.portal.model.ResourceTypePermission">
+		<field name="resourceTypePermissionId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="groupId" type="long" />
 		<field name="name" type="String" />

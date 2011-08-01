@@ -20,7 +20,6 @@ import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
 import com.liferay.portal.service.PermissionedModelLocalService;
-import com.liferay.portal.service.PersistedModelLocalService;
 
 /**
  * The interface for the bookmarks entry local service.
@@ -37,8 +36,8 @@ import com.liferay.portal.service.PersistedModelLocalService;
  */
 @Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
 	PortalException.class, SystemException.class})
-public interface BookmarksEntryLocalService extends PersistedModelLocalService,
-	PermissionedModelLocalService {
+public interface BookmarksEntryLocalService
+	extends PermissionedModelLocalService {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *

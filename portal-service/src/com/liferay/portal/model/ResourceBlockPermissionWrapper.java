@@ -42,7 +42,7 @@ public class ResourceBlockPermissionWrapper implements ResourceBlockPermission {
 	*
 	* @return the primary key of this resource block permission
 	*/
-	public com.liferay.portal.service.persistence.ResourceBlockPermissionPK getPrimaryKey() {
+	public long getPrimaryKey() {
 		return _resourceBlockPermission.getPrimaryKey();
 	}
 
@@ -51,9 +51,26 @@ public class ResourceBlockPermissionWrapper implements ResourceBlockPermission {
 	*
 	* @param primaryKey the primary key of this resource block permission
 	*/
-	public void setPrimaryKey(
-		com.liferay.portal.service.persistence.ResourceBlockPermissionPK primaryKey) {
+	public void setPrimaryKey(long primaryKey) {
 		_resourceBlockPermission.setPrimaryKey(primaryKey);
+	}
+
+	/**
+	* Returns the resource block permission ID of this resource block permission.
+	*
+	* @return the resource block permission ID of this resource block permission
+	*/
+	public long getResourceBlockPermissionId() {
+		return _resourceBlockPermission.getResourceBlockPermissionId();
+	}
+
+	/**
+	* Sets the resource block permission ID of this resource block permission.
+	*
+	* @param resourceBlockPermissionId the resource block permission ID of this resource block permission
+	*/
+	public void setResourceBlockPermissionId(long resourceBlockPermissionId) {
+		_resourceBlockPermission.setResourceBlockPermissionId(resourceBlockPermissionId);
 	}
 
 	/**

@@ -184,7 +184,6 @@ import com.liferay.portal.service.persistence.RepositoryEntryPersistence;
 import com.liferay.portal.service.persistence.RepositoryPersistence;
 import com.liferay.portal.service.persistence.ResourceActionPersistence;
 import com.liferay.portal.service.persistence.ResourceBlockFinder;
-import com.liferay.portal.service.persistence.ResourceBlockPermissionPK;
 import com.liferay.portal.service.persistence.ResourceBlockPermissionPersistence;
 import com.liferay.portal.service.persistence.ResourceBlockPersistence;
 import com.liferay.portal.service.persistence.ResourceCodePersistence;
@@ -279,25 +278,24 @@ public abstract class ResourceBlockPermissionLocalServiceBaseImpl
 	/**
 	 * Creates a new resource block permission with the primary key. Does not add the resource block permission to the database.
 	 *
-	 * @param resourceBlockPermissionPK the primary key for the new resource block permission
+	 * @param resourceBlockPermissionId the primary key for the new resource block permission
 	 * @return the new resource block permission
 	 */
 	public ResourceBlockPermission createResourceBlockPermission(
-		ResourceBlockPermissionPK resourceBlockPermissionPK) {
-		return resourceBlockPermissionPersistence.create(resourceBlockPermissionPK);
+		long resourceBlockPermissionId) {
+		return resourceBlockPermissionPersistence.create(resourceBlockPermissionId);
 	}
 
 	/**
 	 * Deletes the resource block permission with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param resourceBlockPermissionPK the primary key of the resource block permission
+	 * @param resourceBlockPermissionId the primary key of the resource block permission
 	 * @throws PortalException if a resource block permission with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public void deleteResourceBlockPermission(
-		ResourceBlockPermissionPK resourceBlockPermissionPK)
+	public void deleteResourceBlockPermission(long resourceBlockPermissionId)
 		throws PortalException, SystemException {
-		ResourceBlockPermission resourceBlockPermission = resourceBlockPermissionPersistence.remove(resourceBlockPermissionPK);
+		ResourceBlockPermission resourceBlockPermission = resourceBlockPermissionPersistence.remove(resourceBlockPermissionId);
 
 		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
 
@@ -407,15 +405,14 @@ public abstract class ResourceBlockPermissionLocalServiceBaseImpl
 	/**
 	 * Returns the resource block permission with the primary key.
 	 *
-	 * @param resourceBlockPermissionPK the primary key of the resource block permission
+	 * @param resourceBlockPermissionId the primary key of the resource block permission
 	 * @return the resource block permission
 	 * @throws PortalException if a resource block permission with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public ResourceBlockPermission getResourceBlockPermission(
-		ResourceBlockPermissionPK resourceBlockPermissionPK)
-		throws PortalException, SystemException {
-		return resourceBlockPermissionPersistence.findByPrimaryKey(resourceBlockPermissionPK);
+		long resourceBlockPermissionId) throws PortalException, SystemException {
+		return resourceBlockPermissionPersistence.findByPrimaryKey(resourceBlockPermissionId);
 	}
 
 	public PersistedModel getPersistedModel(Serializable primaryKeyObj)

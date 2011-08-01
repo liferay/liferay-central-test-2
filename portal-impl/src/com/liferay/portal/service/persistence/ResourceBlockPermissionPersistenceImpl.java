@@ -177,15 +177,14 @@ public class ResourceBlockPermissionPersistenceImpl extends BasePersistenceImpl<
 	/**
 	 * Creates a new resource block permission with the primary key. Does not add the resource block permission to the database.
 	 *
-	 * @param resourceBlockPermissionPK the primary key for the new resource block permission
+	 * @param resourceBlockPermissionId the primary key for the new resource block permission
 	 * @return the new resource block permission
 	 */
-	public ResourceBlockPermission create(
-		ResourceBlockPermissionPK resourceBlockPermissionPK) {
+	public ResourceBlockPermission create(long resourceBlockPermissionId) {
 		ResourceBlockPermission resourceBlockPermission = new ResourceBlockPermissionImpl();
 
 		resourceBlockPermission.setNew(true);
-		resourceBlockPermission.setPrimaryKey(resourceBlockPermissionPK);
+		resourceBlockPermission.setPrimaryKey(resourceBlockPermissionId);
 
 		return resourceBlockPermission;
 	}
@@ -201,19 +200,18 @@ public class ResourceBlockPermissionPersistenceImpl extends BasePersistenceImpl<
 	@Override
 	public ResourceBlockPermission remove(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
-		return remove((ResourceBlockPermissionPK)primaryKey);
+		return remove(((Long)primaryKey).longValue());
 	}
 
 	/**
 	 * Removes the resource block permission with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param resourceBlockPermissionPK the primary key of the resource block permission
+	 * @param resourceBlockPermissionId the primary key of the resource block permission
 	 * @return the resource block permission that was removed
 	 * @throws com.liferay.portal.NoSuchResourceBlockPermissionException if a resource block permission with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public ResourceBlockPermission remove(
-		ResourceBlockPermissionPK resourceBlockPermissionPK)
+	public ResourceBlockPermission remove(long resourceBlockPermissionId)
 		throws NoSuchResourceBlockPermissionException, SystemException {
 		Session session = null;
 
@@ -221,16 +219,16 @@ public class ResourceBlockPermissionPersistenceImpl extends BasePersistenceImpl<
 			session = openSession();
 
 			ResourceBlockPermission resourceBlockPermission = (ResourceBlockPermission)session.get(ResourceBlockPermissionImpl.class,
-					resourceBlockPermissionPK);
+					Long.valueOf(resourceBlockPermissionId));
 
 			if (resourceBlockPermission == null) {
 				if (_log.isWarnEnabled()) {
 					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-						resourceBlockPermissionPK);
+						resourceBlockPermissionId);
 				}
 
 				throw new NoSuchResourceBlockPermissionException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-					resourceBlockPermissionPK);
+					resourceBlockPermissionId);
 			}
 
 			return resourceBlockPermissionPersistence.remove(resourceBlockPermission);
@@ -366,6 +364,7 @@ public class ResourceBlockPermissionPersistenceImpl extends BasePersistenceImpl<
 		resourceBlockPermissionImpl.setNew(resourceBlockPermission.isNew());
 		resourceBlockPermissionImpl.setPrimaryKey(resourceBlockPermission.getPrimaryKey());
 
+		resourceBlockPermissionImpl.setResourceBlockPermissionId(resourceBlockPermission.getResourceBlockPermissionId());
 		resourceBlockPermissionImpl.setResourceBlockId(resourceBlockPermission.getResourceBlockId());
 		resourceBlockPermissionImpl.setRoleId(resourceBlockPermission.getRoleId());
 		resourceBlockPermissionImpl.setActionIds(resourceBlockPermission.getActionIds());
@@ -384,30 +383,30 @@ public class ResourceBlockPermissionPersistenceImpl extends BasePersistenceImpl<
 	@Override
 	public ResourceBlockPermission findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchModelException, SystemException {
-		return findByPrimaryKey((ResourceBlockPermissionPK)primaryKey);
+		return findByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	/**
 	 * Returns the resource block permission with the primary key or throws a {@link com.liferay.portal.NoSuchResourceBlockPermissionException} if it could not be found.
 	 *
-	 * @param resourceBlockPermissionPK the primary key of the resource block permission
+	 * @param resourceBlockPermissionId the primary key of the resource block permission
 	 * @return the resource block permission
 	 * @throws com.liferay.portal.NoSuchResourceBlockPermissionException if a resource block permission with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public ResourceBlockPermission findByPrimaryKey(
-		ResourceBlockPermissionPK resourceBlockPermissionPK)
+		long resourceBlockPermissionId)
 		throws NoSuchResourceBlockPermissionException, SystemException {
-		ResourceBlockPermission resourceBlockPermission = fetchByPrimaryKey(resourceBlockPermissionPK);
+		ResourceBlockPermission resourceBlockPermission = fetchByPrimaryKey(resourceBlockPermissionId);
 
 		if (resourceBlockPermission == null) {
 			if (_log.isWarnEnabled()) {
 				_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-					resourceBlockPermissionPK);
+					resourceBlockPermissionId);
 			}
 
 			throw new NoSuchResourceBlockPermissionException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-				resourceBlockPermissionPK);
+				resourceBlockPermissionId);
 		}
 
 		return resourceBlockPermission;
@@ -423,21 +422,20 @@ public class ResourceBlockPermissionPersistenceImpl extends BasePersistenceImpl<
 	@Override
 	public ResourceBlockPermission fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
-		return fetchByPrimaryKey((ResourceBlockPermissionPK)primaryKey);
+		return fetchByPrimaryKey(((Long)primaryKey).longValue());
 	}
 
 	/**
 	 * Returns the resource block permission with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param resourceBlockPermissionPK the primary key of the resource block permission
+	 * @param resourceBlockPermissionId the primary key of the resource block permission
 	 * @return the resource block permission, or <code>null</code> if a resource block permission with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public ResourceBlockPermission fetchByPrimaryKey(
-		ResourceBlockPermissionPK resourceBlockPermissionPK)
-		throws SystemException {
+		long resourceBlockPermissionId) throws SystemException {
 		ResourceBlockPermission resourceBlockPermission = (ResourceBlockPermission)EntityCacheUtil.getResult(ResourceBlockPermissionModelImpl.ENTITY_CACHE_ENABLED,
-				ResourceBlockPermissionImpl.class, resourceBlockPermissionPK,
+				ResourceBlockPermissionImpl.class, resourceBlockPermissionId,
 				this);
 
 		if (resourceBlockPermission == _nullResourceBlockPermission) {
@@ -453,7 +451,7 @@ public class ResourceBlockPermissionPersistenceImpl extends BasePersistenceImpl<
 				session = openSession();
 
 				resourceBlockPermission = (ResourceBlockPermission)session.get(ResourceBlockPermissionImpl.class,
-						resourceBlockPermissionPK);
+						Long.valueOf(resourceBlockPermissionId));
 			}
 			catch (Exception e) {
 				hasException = true;
@@ -467,7 +465,7 @@ public class ResourceBlockPermissionPersistenceImpl extends BasePersistenceImpl<
 				else if (!hasException) {
 					EntityCacheUtil.putResult(ResourceBlockPermissionModelImpl.ENTITY_CACHE_ENABLED,
 						ResourceBlockPermissionImpl.class,
-						resourceBlockPermissionPK, _nullResourceBlockPermission);
+						resourceBlockPermissionId, _nullResourceBlockPermission);
 				}
 
 				closeSession(session);
@@ -674,7 +672,7 @@ public class ResourceBlockPermissionPersistenceImpl extends BasePersistenceImpl<
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param resourceBlockPermissionPK the primary key of the current resource block permission
+	 * @param resourceBlockPermissionId the primary key of the current resource block permission
 	 * @param resourceBlockId the resource block ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next resource block permission
@@ -682,10 +680,10 @@ public class ResourceBlockPermissionPersistenceImpl extends BasePersistenceImpl<
 	 * @throws SystemException if a system exception occurred
 	 */
 	public ResourceBlockPermission[] findByResourceBlockId_PrevAndNext(
-		ResourceBlockPermissionPK resourceBlockPermissionPK,
-		long resourceBlockId, OrderByComparator orderByComparator)
+		long resourceBlockPermissionId, long resourceBlockId,
+		OrderByComparator orderByComparator)
 		throws NoSuchResourceBlockPermissionException, SystemException {
-		ResourceBlockPermission resourceBlockPermission = findByPrimaryKey(resourceBlockPermissionPK);
+		ResourceBlockPermission resourceBlockPermission = findByPrimaryKey(resourceBlockPermissionId);
 
 		Session session = null;
 
@@ -1423,9 +1421,9 @@ public class ResourceBlockPermissionPersistenceImpl extends BasePersistenceImpl<
 	private static final String _SQL_COUNT_RESOURCEBLOCKPERMISSION = "SELECT COUNT(resourceBlockPermission) FROM ResourceBlockPermission resourceBlockPermission";
 	private static final String _SQL_COUNT_RESOURCEBLOCKPERMISSION_WHERE = "SELECT COUNT(resourceBlockPermission) FROM ResourceBlockPermission resourceBlockPermission WHERE ";
 	private static final String _FINDER_COLUMN_RESOURCEBLOCKID_RESOURCEBLOCKID_2 =
-		"resourceBlockPermission.id.resourceBlockId = ?";
-	private static final String _FINDER_COLUMN_R_R_RESOURCEBLOCKID_2 = "resourceBlockPermission.id.resourceBlockId = ? AND ";
-	private static final String _FINDER_COLUMN_R_R_ROLEID_2 = "resourceBlockPermission.id.roleId = ?";
+		"resourceBlockPermission.resourceBlockId = ?";
+	private static final String _FINDER_COLUMN_R_R_RESOURCEBLOCKID_2 = "resourceBlockPermission.resourceBlockId = ? AND ";
+	private static final String _FINDER_COLUMN_R_R_ROLEID_2 = "resourceBlockPermission.roleId = ?";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "resourceBlockPermission.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No ResourceBlockPermission exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No ResourceBlockPermission exists with the key {";

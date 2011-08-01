@@ -15,7 +15,6 @@
 package com.liferay.portal.model;
 
 import com.liferay.portal.service.ServiceContext;
-import com.liferay.portal.service.persistence.ResourceBlockPermissionPK;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
 
@@ -46,14 +45,28 @@ public interface ResourceBlockPermissionModel extends BaseModel<ResourceBlockPer
 	 *
 	 * @return the primary key of this resource block permission
 	 */
-	public ResourceBlockPermissionPK getPrimaryKey();
+	public long getPrimaryKey();
 
 	/**
 	 * Sets the primary key of this resource block permission.
 	 *
 	 * @param primaryKey the primary key of this resource block permission
 	 */
-	public void setPrimaryKey(ResourceBlockPermissionPK primaryKey);
+	public void setPrimaryKey(long primaryKey);
+
+	/**
+	 * Returns the resource block permission ID of this resource block permission.
+	 *
+	 * @return the resource block permission ID of this resource block permission
+	 */
+	public long getResourceBlockPermissionId();
+
+	/**
+	 * Sets the resource block permission ID of this resource block permission.
+	 *
+	 * @param resourceBlockPermissionId the resource block permission ID of this resource block permission
+	 */
+	public void setResourceBlockPermissionId(long resourceBlockPermissionId);
 
 	/**
 	 * Returns the resource block ID of this resource block permission.

@@ -36,7 +36,7 @@ import com.liferay.portal.kernel.transaction.Transactional;
 @Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
 	PortalException.class, SystemException.class})
 public interface ResourceBlockPermissionLocalService
-	extends PersistedModelLocalService, PermissionedModelLocalService {
+	extends PersistedModelLocalService {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -57,21 +57,20 @@ public interface ResourceBlockPermissionLocalService
 	/**
 	* Creates a new resource block permission with the primary key. Does not add the resource block permission to the database.
 	*
-	* @param resourceBlockPermissionPK the primary key for the new resource block permission
+	* @param resourceBlockPermissionId the primary key for the new resource block permission
 	* @return the new resource block permission
 	*/
 	public com.liferay.portal.model.ResourceBlockPermission createResourceBlockPermission(
-		com.liferay.portal.service.persistence.ResourceBlockPermissionPK resourceBlockPermissionPK);
+		long resourceBlockPermissionId);
 
 	/**
 	* Deletes the resource block permission with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param resourceBlockPermissionPK the primary key of the resource block permission
+	* @param resourceBlockPermissionId the primary key of the resource block permission
 	* @throws PortalException if a resource block permission with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public void deleteResourceBlockPermission(
-		com.liferay.portal.service.persistence.ResourceBlockPermissionPK resourceBlockPermissionPK)
+	public void deleteResourceBlockPermission(long resourceBlockPermissionId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -150,14 +149,14 @@ public interface ResourceBlockPermissionLocalService
 	/**
 	* Returns the resource block permission with the primary key.
 	*
-	* @param resourceBlockPermissionPK the primary key of the resource block permission
+	* @param resourceBlockPermissionId the primary key of the resource block permission
 	* @return the resource block permission
 	* @throws PortalException if a resource block permission with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.ResourceBlockPermission getResourceBlockPermission(
-		com.liferay.portal.service.persistence.ResourceBlockPermissionPK resourceBlockPermissionPK)
+		long resourceBlockPermissionId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
