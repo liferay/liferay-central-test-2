@@ -25,7 +25,6 @@ import com.liferay.portal.kernel.captcha.CaptchaUtil;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.User;
@@ -55,10 +54,6 @@ import org.apache.struts.action.ActionMapping;
  */
 public class ForgotPasswordAction extends PortletAction {
 
-	public static final String REMINDER_ATTEMPTS = "REMINDER_ATTEMPTS";
-
-	public static final String REMINDER_USER = "REMINDER_USER";
-
 	@Override
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
@@ -67,48 +62,10 @@ public class ForgotPasswordAction extends PortletAction {
 
 		try {
 			if (PropsValues.USERS_REMINDER_QUERIES_ENABLED) {
-				PortletSession portletSession =
-					actionRequest.getPortletSession();
-
-				int step = ParamUtil.getInteger(actionRequest, "step");
-
-				if (step == 1) {
-					_checkCaptcha(actionRequest);
-
-					portletSession.setAttribute(REMINDER_ATTEMPTS, 0);
-					portletSession.setAttribute(
-						REMINDER_USER, StringPool.BLANK);
-				}
-
-				User user = getUser(actionRequest);
-
-				portletSession.setAttribute(
-					REMINDER_USER, user.getEmailAddress());
-
-				actionRequest.setAttribute(
-					ForgotPasswordAction.class.getName(), user);
-
-				if (step == 2) {
-					Integer reminderAttempts =
-						(Integer)portletSession.getAttribute(REMINDER_ATTEMPTS);
-
-					if (reminderAttempts == null) {
-						reminderAttempts = 0;
-					}
-					else if (reminderAttempts > 2) {
-						_checkCaptcha(actionRequest);
-					}
-
-					reminderAttempts++;
-
-					portletSession.setAttribute(
-						REMINDER_ATTEMPTS, reminderAttempts);
-
-					sendPassword(actionRequest, actionResponse);
-				}
+				checkReminderQueries(actionRequest, actionResponse);
 			}
 			else {
-				_checkCaptcha(actionRequest);
+				checkCaptcha(actionRequest);
 
 				sendPassword(actionRequest, actionResponse);
 			}
@@ -143,21 +100,70 @@ public class ForgotPasswordAction extends PortletAction {
 		return mapping.findForward("portlet.login.forgot_password");
 	}
 
+	protected void checkCaptcha(ActionRequest actionRequest)
+		throws CaptchaException {
+
+		if (PropsValues.CAPTCHA_CHECK_PORTAL_SEND_PASSWORD) {
+			CaptchaUtil.check(actionRequest);
+		}
+	}
+
+	protected void checkReminderQueries(
+			ActionRequest actionRequest, ActionResponse actionResponse)
+		throws Exception {
+
+		PortletSession portletSession = actionRequest.getPortletSession();
+
+		int step = ParamUtil.getInteger(actionRequest, "step");
+
+		if (step == 1) {
+			checkCaptcha(actionRequest);
+
+			portletSession.removeAttribute(
+				WebKeys.FORGOT_PASSWORD_REMINDER_ATTEMPTS);
+			portletSession.removeAttribute(
+				WebKeys.FORGOT_PASSWORD_REMINDER_USER_EMAIL_ADDRESS);
+		}
+
+		User user = getUser(actionRequest);
+
+		portletSession.setAttribute(
+			WebKeys.FORGOT_PASSWORD_REMINDER_USER_EMAIL_ADDRESS,
+			user.getEmailAddress());
+
+		actionRequest.setAttribute(WebKeys.FORGOT_PASSWORD_REMINDER_USER, user);
+
+		if (step == 2) {
+			Integer reminderAttempts =
+				(Integer)portletSession.getAttribute(
+					WebKeys.FORGOT_PASSWORD_REMINDER_ATTEMPTS);
+
+			if (reminderAttempts == null) {
+				reminderAttempts = 0;
+			}
+			else if (reminderAttempts > 2) {
+				checkCaptcha(actionRequest);
+			}
+
+			reminderAttempts++;
+
+			portletSession.setAttribute(
+				WebKeys.FORGOT_PASSWORD_REMINDER_ATTEMPTS, reminderAttempts);
+
+			sendPassword(actionRequest, actionResponse);
+		}
+	}
+
 	protected User getUser(ActionRequest actionRequest)
 		throws Exception {
+
+		PortletSession portletSession = actionRequest.getPortletSession();
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		long userId = ParamUtil.getLong(actionRequest, "userId");
-		String screenName = ParamUtil.getString(actionRequest, "screenName");
-		String emailAddress = ParamUtil.getString(
-			actionRequest, "emailAddress");
-
-		PortletSession portletSession = actionRequest.getPortletSession();
-
 		String sessionEmailAddress = (String)portletSession.getAttribute(
-			REMINDER_USER);
+			WebKeys.FORGOT_PASSWORD_REMINDER_USER_EMAIL_ADDRESS);
 
 		User user = null;
 
@@ -167,6 +173,11 @@ public class ForgotPasswordAction extends PortletAction {
 
 			return user;
 		}
+
+		long userId = ParamUtil.getLong(actionRequest, "userId");
+		String screenName = ParamUtil.getString(actionRequest, "screenName");
+		String emailAddress = ParamUtil.getString(
+			actionRequest, "emailAddress");
 
 		if (Validator.isNotNull(emailAddress)) {
 			user = UserLocalServiceUtil.getUserByEmailAddress(
@@ -243,14 +254,6 @@ public class ForgotPasswordAction extends PortletAction {
 			subject, body);
 
 		sendRedirect(actionRequest, actionResponse);
-	}
-
-	private void _checkCaptcha(ActionRequest actionRequest)
-		throws CaptchaException {
-
-		if (PropsValues.CAPTCHA_CHECK_PORTAL_SEND_PASSWORD) {
-			CaptchaUtil.check(actionRequest);
-		}
 	}
 
 	private static final boolean _CHECK_METHOD_ON_PROCESS_ACTION = false;
