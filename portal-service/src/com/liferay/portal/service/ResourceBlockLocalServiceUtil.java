@@ -324,13 +324,6 @@ public class ResourceBlockLocalServiceUtil {
 			resourceBlockPermissionsContainer);
 	}
 
-	public static com.liferay.portal.model.ResourceBlock convertResourcePermissions(
-		long companyId, java.lang.String name, long primKey)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return getService().convertResourcePermissions(companyId, name, primKey);
-	}
-
 	public static long getActionId(java.lang.String name,
 		java.lang.String actionId)
 		throws com.liferay.portal.kernel.exception.PortalException {
@@ -614,6 +607,45 @@ public class ResourceBlockLocalServiceUtil {
 		getService()
 			.setIndividualScopePermissions(companyId, groupId, name, primKey,
 			roleId, actionIdsLong);
+	}
+
+	public static void updateCompanyScopePermissions(long companyId,
+		java.lang.String name, long roleId, long actionIdsLong, int operator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService()
+			.updateCompanyScopePermissions(companyId, name, roleId,
+			actionIdsLong, operator);
+	}
+
+	public static void updateGroupScopePermissions(long companyId,
+		long groupId, java.lang.String name, long roleId, long actionIdsLong,
+		int operator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService()
+			.updateGroupScopePermissions(companyId, groupId, name, roleId,
+			actionIdsLong, operator);
+	}
+
+	public static void updateIndividualScopePermissions(long companyId,
+		long groupId, java.lang.String name, long primKey, long roleId,
+		long actionIdsLong, int operator)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService()
+			.updateIndividualScopePermissions(companyId, groupId, name,
+			primKey, roleId, actionIdsLong, operator);
+	}
+
+	public static com.liferay.portal.model.ResourceBlock updateResourceBlockId(
+		long companyId, long groupId, java.lang.String name,
+		com.liferay.portal.model.PermissionedModel permissionedModel,
+		java.lang.String permissionsHash,
+		com.liferay.portal.model.ResourceBlockPermissionsContainer resourceBlockPermissionsContainer)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .updateResourceBlockId(companyId, groupId, name,
+			permissionedModel, permissionsHash,
+			resourceBlockPermissionsContainer);
 	}
 
 	public static void verifyResourceBlockId(long companyId,

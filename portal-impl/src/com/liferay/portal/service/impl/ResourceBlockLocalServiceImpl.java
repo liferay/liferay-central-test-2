@@ -144,48 +144,6 @@ public class ResourceBlockLocalServiceImpl
 		return resourceBlock;
 	}
 
-	public ResourceBlock convertResourcePermissions(
-			long companyId, String name, long primKey)
-		throws PortalException, SystemException {
-
-		PermissionedModel permissionedModel = getPermissionedModel(
-			name, primKey);
-
-		long groupId = 0;
-
-		if (permissionedModel instanceof GroupedModel) {
-			GroupedModel groupedModel = (GroupedModel)permissionedModel;
-
-			groupId = groupedModel.getGroupId();
-		}
-
-		ResourceBlock resourceBlock =
-			resourceBlockPersistence.fetchByPrimaryKey(
-				permissionedModel.getResourceBlockId());
-
-		ResourceBlockPermissionsContainer resourceBlockPermissionsContainer =
-			resourceBlockPermissionLocalService.
-				getResourceBlockPermissionsContainer(
-					companyId, groupId, name, primKey);
-
-		String permissionsHash = getPermissionsHash(
-			resourceBlockPermissionsContainer);
-
-		if (resourceBlock != null) {
-			if (permissionsHash.equals(resourceBlock.getPermissionsHash())) {
-				return resourceBlock;
-			}
-
-			releaseResourceBlock(resourceBlock);
-		}
-
-		resourceBlock = updateResourceBlockId(
-			companyId, groupId, name, permissionedModel, permissionsHash,
-			resourceBlockPermissionsContainer);
-
-		return resourceBlock;
-	}
-
 	@Override
 	public void deleteResourceBlock(long resourceBlockId)
 		throws PortalException, SystemException {
@@ -618,45 +576,7 @@ public class ResourceBlockLocalServiceImpl
 			ResourceBlockConstants.OPERATOR_SET);
 	}
 
-	public void verifyResourceBlockId(
-			long companyId, String name, long primKey)
-		throws PortalException, SystemException {
-
-		PermissionedModel permissionedModel = getPermissionedModel(
-			name, primKey);
-
-		ResourceBlock resourceBlock =
-				resourceBlockPersistence.fetchByPrimaryKey(
-			permissionedModel.getResourceBlockId());
-
-		if (resourceBlock == null) {
-			if (_log.isWarnEnabled()) {
-				_log.warn(
-					"Resource block " + permissionedModel.getResourceBlockId() +
-						" missing for " + name + "#" + primKey);
-			}
-
-			long groupId = 0;
-			long ownerId = 0;
-
-			if (permissionedModel instanceof GroupedModel) {
-				GroupedModel groupedModel = (GroupedModel)permissionedModel;
-
-				groupId = groupedModel.getGroupId();
-				ownerId = groupedModel.getUserId();
-			}
-			else if (permissionedModel instanceof AuditedModel) {
-				AuditedModel auditedModel = (AuditedModel)permissionedModel;
-
-				ownerId = auditedModel.getUserId();
-			}
-
-			resourceLocalService.addResources(
-				companyId, groupId, ownerId, name, primKey, false, true, true);
-		}
-	}
-
-	protected void updateCompanyScopePermissions(
+	public void updateCompanyScopePermissions(
 			long companyId, String name, long roleId,
 			long actionIdsLong, int operator)
 		throws SystemException {
@@ -673,7 +593,7 @@ public class ResourceBlockLocalServiceImpl
 		PermissionCacheUtil.clearCache();
 	}
 
-	protected void updateGroupScopePermissions(
+	public void updateGroupScopePermissions(
 			long companyId, long groupId, String name, long roleId,
 			long actionIdsLong, int operator)
 		throws SystemException {
@@ -690,7 +610,7 @@ public class ResourceBlockLocalServiceImpl
 		PermissionCacheUtil.clearCache();
 	}
 
-	protected void updateIndividualScopePermissions(
+	public void updateIndividualScopePermissions(
 			long companyId, long groupId, String name, long primKey,
 			long roleId, long actionIdsLong, int operator)
 		throws PortalException, SystemException {
@@ -748,6 +668,70 @@ public class ResourceBlockLocalServiceImpl
 		PermissionCacheUtil.clearCache();
 	}
 
+	public ResourceBlock updateResourceBlockId(
+			long companyId, long groupId, String name,
+			PermissionedModel permissionedModel, String permissionsHash,
+			ResourceBlockPermissionsContainer resourceBlockPermissionsContainer)
+		throws SystemException {
+
+		ResourceBlock resourceBlock = resourceBlockPersistence.fetchByC_G_N_P(
+			companyId, groupId, name, permissionsHash);
+
+		if (resourceBlock == null) {
+			resourceBlock = addResourceBlock(
+				companyId, groupId, name, permissionsHash,
+				resourceBlockPermissionsContainer);
+		}
+		else {
+			retainResourceBlock(resourceBlock);
+		}
+
+		permissionedModel.setResourceBlockId(
+			resourceBlock.getResourceBlockId());
+
+		permissionedModel.persist();
+
+		return resourceBlock;
+	}
+
+	public void verifyResourceBlockId(
+			long companyId, String name, long primKey)
+		throws PortalException, SystemException {
+
+		PermissionedModel permissionedModel = getPermissionedModel(
+			name, primKey);
+
+		ResourceBlock resourceBlock =
+				resourceBlockPersistence.fetchByPrimaryKey(
+			permissionedModel.getResourceBlockId());
+
+		if (resourceBlock == null) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(
+					"Resource block " + permissionedModel.getResourceBlockId() +
+						" missing for " + name + "#" + primKey);
+			}
+
+			long groupId = 0;
+			long ownerId = 0;
+
+			if (permissionedModel instanceof GroupedModel) {
+				GroupedModel groupedModel = (GroupedModel)permissionedModel;
+
+				groupId = groupedModel.getGroupId();
+				ownerId = groupedModel.getUserId();
+			}
+			else if (permissionedModel instanceof AuditedModel) {
+				AuditedModel auditedModel = (AuditedModel)permissionedModel;
+
+				ownerId = auditedModel.getUserId();
+			}
+
+			resourceLocalService.addResources(
+				companyId, groupId, ownerId, name, primKey, false, true, true);
+		}
+	}
+
 	protected void updatePermissions(
 			List<ResourceBlock> resourceBlocks, long roleId, long actionIdsLong,
 			int operator)
@@ -774,32 +758,6 @@ public class ResourceBlockLocalServiceImpl
 		resourceBlock.setPermissionsHash(permissionsHash);
 
 		updateResourceBlock(resourceBlock);
-	}
-
-	protected ResourceBlock updateResourceBlockId(
-			long companyId, long groupId, String name,
-			PermissionedModel permissionedModel, String permissionsHash,
-			ResourceBlockPermissionsContainer resourceBlockPermissionsContainer)
-		throws SystemException {
-
-		ResourceBlock resourceBlock = resourceBlockPersistence.fetchByC_G_N_P(
-			companyId, groupId, name, permissionsHash);
-
-		if (resourceBlock == null) {
-			resourceBlock = addResourceBlock(
-				companyId, groupId, name, permissionsHash,
-				resourceBlockPermissionsContainer);
-		}
-		else {
-			retainResourceBlock(resourceBlock);
-		}
-
-		permissionedModel.setResourceBlockId(
-			resourceBlock.getResourceBlockId());
-
-		permissionedModel.persist();
-
-		return resourceBlock;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(
