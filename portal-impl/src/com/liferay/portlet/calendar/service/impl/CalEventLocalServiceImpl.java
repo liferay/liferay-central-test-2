@@ -1120,9 +1120,10 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		serviceContext.setAddGuestPermissions(true);
 		serviceContext.setScopeGroupId(groupId);
 
-		// Merge Event
+		// Merge event
 
 		String uuid = null;
+
 		CalEvent existingEvent = null;
 
 		if (event.getUid() != null) {
@@ -1133,6 +1134,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 				// VEvent exported by Liferay portal
 
 				uuid = uid.getValue();
+
 				existingEvent = calEventPersistence.fetchByUUID_G(
 					uuid, groupId);
 			}
@@ -1142,6 +1144,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 				// VEvent exported by external application
 
 				uuid = PortalUUIDUtil.generate(uid.getValue().getBytes());
+
 				existingEvent = calEventPersistence.fetchByUUID_G(
 					uuid, groupId);
 			}
