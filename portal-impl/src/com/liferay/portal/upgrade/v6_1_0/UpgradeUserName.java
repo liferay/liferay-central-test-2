@@ -31,14 +31,16 @@ public class UpgradeUserName extends UpgradeProcess {
 
 	@Override
 	protected void doUpgrade() throws Exception {
-		updateTable("BookmarksEntry");
-		updateTable("BookmarksFolder");
-		updateTable("IGFolder");
-		updateTable("IGImage");
-		updateTable("PollsVote");
+		updateTable("BookmarksEntry", true);
+		updateTable("BookmarksFolder", true);
+		updateTable("IGFolder", true);
+		updateTable("IGImage", true);
+		updateTable("PollsVote", false);
 	}
 
-	protected void updateTable(String tableName) throws Exception {
+	protected void updateTable(String tableName, boolean setCompanyId)
+		throws Exception {
+
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -65,6 +67,7 @@ public class UpgradeUserName extends UpgradeProcess {
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
+				long companyId = rs.getLong("companyId");
 				long userId = rs.getLong("userId");
 				String firstName = rs.getString("firstName");
 				String middleName = rs.getString("middleName");
@@ -76,12 +79,12 @@ public class UpgradeUserName extends UpgradeProcess {
 				String fullName = fullNameGenerator.getFullName(
 					firstName, middleName, lastName);
 
-				sb = new StringBundler(6);
+				if (setCompanyId) {
+					sb = new StringBundler(8);
 
-				if (tableName.equals("PollsVote")) {
-					long companyId = rs.getLong("companyId");
-
-					sb.append("update PollsVote set companyId = ");
+					sb.append("update ");
+					sb.append(tableName);
+					sb.append(" set companyId = ");
 					sb.append(companyId);
 					sb.append(", userName = '");
 					sb.append(fullName);
@@ -89,6 +92,8 @@ public class UpgradeUserName extends UpgradeProcess {
 					sb.append(userId);
 				}
 				else {
+					sb = new StringBundler(6);
+
 					sb.append("update ");
 					sb.append(tableName);
 					sb.append(" set userName = '");
