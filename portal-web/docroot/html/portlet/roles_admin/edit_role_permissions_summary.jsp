@@ -75,7 +75,7 @@ if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
 		}
 	}
 
-	List<ResourceTypePermission> resourceTypePermissions = ResourceTypePermissionLocalServiceUtil.findByRoleId(role.getRoleId());
+	List<ResourceTypePermission> resourceTypePermissions = ResourceTypePermissionLocalServiceUtil.getRoleResourceTypePermissions(role.getRoleId());
 
 	for (ResourceTypePermission resourceTypePermission : resourceTypePermissions) {
 		List<String> actionIds = ResourceBlockLocalServiceUtil.getActionIds(resourceTypePermission.getName(), resourceTypePermission.getActionIds());
