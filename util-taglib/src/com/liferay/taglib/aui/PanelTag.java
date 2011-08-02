@@ -77,8 +77,6 @@ public class PanelTag extends BasePanelTag {
 			id = PwdGenerator.getPassword(PwdGenerator.KEY3, 4);
 		}
 
-		setId(id);
-
 		setNamespacedAttribute(request, "id", id);
 		setNamespacedAttribute(request, "toolTags", _toolTags);
 	}
