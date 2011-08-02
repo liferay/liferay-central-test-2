@@ -151,10 +151,10 @@ request.setAttribute("view.jsp-showIconLabel", true);
 				</div>
 			</c:if>
 
-			<c:if test='<%= enableSocialBookmarks && socialBookmarksDisplayPosition.equals("bottom")%>'>		
+			<c:if test='<%= enableSocialBookmarks && socialBookmarksDisplayPosition.equals("bottom") %>'>
 				<liferay-ui:social-bookmarks
 					displayStyle="<%= socialBookmarksDisplayStyle %>"
-					target="_blank"					
+					target="_blank"
 					title="<%= assetEntry.getTitle() %>"
 					url="<%= viewFullContentURL.toString() %>"
 				/>

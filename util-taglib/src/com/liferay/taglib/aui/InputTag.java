@@ -155,8 +155,9 @@ public class InputTag extends BaseInputTag {
 		String type = getType();
 
 		if (Validator.isNull(id)) {
-			if (!Validator.equals(type, "radio") &&
-				!Validator.equals(type, "assetTags")) {
+			if (!Validator.equals(type, "assetTags") &&
+				!Validator.equals(type, "radio")) {
+
 				id = name;
 			}
 			else {
