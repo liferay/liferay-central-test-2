@@ -206,14 +206,17 @@ public class GroupFinderImpl
 
 		if (doUnion) {
 			params2 = new LinkedHashMap<String, Object>(params1);
+
 			params2.remove("usersGroups");
 			params2.put("groupOrg", userId);
 
 			params3 = new LinkedHashMap<String, Object>(params1);
+
 			params3.remove("usersGroups");
 			params3.put("groupsOrgs", userId);
 
 			params4 = new LinkedHashMap<String, Object>(params1);
+
 			params4.remove("usersGroups");
 			params4.put("groupsUserGroups", userId);
 		}
@@ -460,8 +463,6 @@ public class GroupFinderImpl
 		String sql = null;
 
 		if (classNameIds == _getGroupOrganizationClassNameIds()) {
-			// Fixed class name ids, this is cachable
-
 			String sqlKey = _buildFindByC_C_N_DSQLKey(
 				params1, params2, params3, params4, obc, doUnion);
 
@@ -500,8 +501,6 @@ public class GroupFinderImpl
 				sb.append(")");
 			}
 
-			// We know for sure the sql here won't have an ORDER BY sub-clause,
-			// just don't borther checking for it, just append it.
 			if (obc != null) {
 				sb.append(" ORDER BY ");
 				sb.append(obc.toString());
@@ -661,24 +660,28 @@ public class GroupFinderImpl
 			String key = entry.getKey();
 			Object value = entry.getValue();
 
-			if (Validator.isNotNull(value)) {
-				if (key.equals("rolePermissions") &&
-					(PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6)) {
-
-					List<Object> values = (List<Object>)value;
-
-					String name = (String)values.get(0);
-
-					if (ResourceBlockLocalServiceUtil.isSupported(name)) {
-						key = "rolePermissions_6_block";
-					}
-					else {
-						key = "rolePermissions_6";
-					}
-				}
-
-				sb.append(_getJoinMap().get(key));
+			if (Validator.isNull(value)) {
+				continue;
 			}
+
+			if (key.equals("rolePermissions") &&
+				(PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6)) {
+
+				List<Object> values = (List<Object>)value;
+
+				String name = (String)values.get(0);
+
+				if (ResourceBlockLocalServiceUtil.isSupported(name)) {
+					key = "rolePermissions_6_block";
+				}
+				else {
+					key = "rolePermissions_6";
+				}
+			}
+
+			Map<String, String> joinMap = _getJoinMap();
+
+			sb.append(joinMap.get(key));
 		}
 
 		return sb.toString();
@@ -692,7 +695,6 @@ public class GroupFinderImpl
 		StringBundler sb = new StringBundler(params.size());
 
 		for (Map.Entry<String, Object> entry : params.entrySet()) {
-
 			String key = entry.getKey();
 
 			if (key.equals("types")) {
@@ -728,9 +730,10 @@ public class GroupFinderImpl
 					}
 				}
 
-				sb.append(_getWhereMap().get(key));
-			}
+				Map<String, String> whereMap = _getWhereMap();
 
+				sb.append(whereMap.get(key));
+			}
 		}
 
 		return sb.toString();
@@ -757,6 +760,7 @@ public class GroupFinderImpl
 
 		if (resultSQL == null) {
 			sql = StringUtil.replace(sql, "[$JOIN$]", getJoin(params));
+
 			resultSQL = StringUtil.replace(sql, "[$WHERE$]", getWhere(params));
 
 			_replaceJoinAndWhereSQLCache.put(cacheKey, resultSQL);
@@ -856,14 +860,15 @@ public class GroupFinderImpl
 		LinkedHashMap<String, Object> param1,
 		LinkedHashMap<String, Object> param2,
 		LinkedHashMap<String, Object> param3,
-		LinkedHashMap<String, Object> param4,
-		OrderByComparator obc, boolean doUnion) {
+		LinkedHashMap<String, Object> param4, OrderByComparator obc,
+		boolean doUnion) {
 
 		StringBundler sb = null;
 
 		if (doUnion) {
-			sb = new StringBundler(param1.size() +
-				param2.size() + param3.size() + param4.size() + 1);
+			sb = new StringBundler(
+				param1.size() + param2.size() + param3.size() + param4.size() +
+					1);
 
 			for (String key : param1.keySet()) {
 				sb.append(key);
@@ -933,80 +938,97 @@ public class GroupFinderImpl
 	}
 
 	private Map<String, String> _getJoinMap() {
-		if (_joinMap == null) {
-			Map<String, String> joinMap = new HashMap<String, String>();
-
-			joinMap.put("groupOrg",
-				_removeWhere(CustomSQLUtil.get(JOIN_BY_GROUP_ORG)));
-			joinMap.put("groupsOrgs",
-				_removeWhere(CustomSQLUtil.get(JOIN_BY_GROUPS_ORGS)));
-			joinMap.put("groupsRoles",
-				_removeWhere(CustomSQLUtil.get(JOIN_BY_GROUPS_ROLES)));
-			joinMap.put("groupsUserGroups",
-				_removeWhere(CustomSQLUtil.get(JOIN_BY_GROUPS_USER_GROUPS)));
-			joinMap.put("layoutSet",
-				_removeWhere(CustomSQLUtil.get(JOIN_BY_LAYOUT_SET)));
-			joinMap.put("pageCount",
-				_removeWhere(CustomSQLUtil.get(JOIN_BY_PAGE_COUNT)));
-			joinMap.put("rolePermissions",
-				_removeWhere(CustomSQLUtil.get(JOIN_BY_ROLE_PERMISSIONS)));
-			joinMap.put("rolePermissions_6",
-				_removeWhere(CustomSQLUtil.get(
-					JOIN_BY_ROLE_RESOURCE_PERMISSIONS)));
-			joinMap.put("rolePermissions_6_block",
-				_removeWhere(CustomSQLUtil.get(
-					JOIN_BY_ROLE_RESOURCE_TYPE_PERMISSIONS)));
-			joinMap.put("site", _removeWhere(CustomSQLUtil.get(JOIN_BY_SITE)));
-			joinMap.put("userGroupRole",
-				_removeWhere(CustomSQLUtil.get(JOIN_BY_USER_GROUP_ROLE)));
-			joinMap.put("usersGroups",
-				_removeWhere(CustomSQLUtil.get(JOIN_BY_USERS_GROUPS)));
-
-			_joinMap = joinMap;
+		if (_joinMap != null) {
+			return _joinMap;
 		}
+
+		Map<String, String> joinMap = new HashMap<String, String>();
+
+		joinMap.put(
+			"groupOrg", _removeWhere(CustomSQLUtil.get(JOIN_BY_GROUP_ORG)));
+		joinMap.put(
+			"groupsOrgs", _removeWhere(CustomSQLUtil.get(JOIN_BY_GROUPS_ORGS)));
+		joinMap.put(
+			"groupsRoles",
+			_removeWhere(CustomSQLUtil.get(JOIN_BY_GROUPS_ROLES)));
+		joinMap.put(
+			"groupsUserGroups",
+			_removeWhere(CustomSQLUtil.get(JOIN_BY_GROUPS_USER_GROUPS)));
+		joinMap.put(
+			"layoutSet", _removeWhere(CustomSQLUtil.get(JOIN_BY_LAYOUT_SET)));
+		joinMap.put(
+			"pageCount", _removeWhere(CustomSQLUtil.get(JOIN_BY_PAGE_COUNT)));
+		joinMap.put(
+			"rolePermissions",
+			_removeWhere(CustomSQLUtil.get(JOIN_BY_ROLE_PERMISSIONS)));
+		joinMap.put(
+			"rolePermissions_6",
+			_removeWhere(CustomSQLUtil.get(JOIN_BY_ROLE_RESOURCE_PERMISSIONS)));
+		joinMap.put(
+			"rolePermissions_6_block",
+			_removeWhere(
+				CustomSQLUtil.get(JOIN_BY_ROLE_RESOURCE_TYPE_PERMISSIONS)));
+		joinMap.put("site", _removeWhere(CustomSQLUtil.get(JOIN_BY_SITE)));
+		joinMap.put("userGroupRole",
+			_removeWhere(CustomSQLUtil.get(JOIN_BY_USER_GROUP_ROLE)));
+		joinMap.put("usersGroups",
+			_removeWhere(CustomSQLUtil.get(JOIN_BY_USERS_GROUPS)));
+
+		_joinMap = joinMap;
 
 		return _joinMap;
 	}
 
 	private Map<String, String> _getWhereMap() {
-		if (_whereMap == null) {
-			Map<String, String> whereMap = new HashMap<String, String>();
-
-			whereMap.put("active",
-				_getCondition(CustomSQLUtil.get(JOIN_BY_ACTIVE)));
-			whereMap.put("creatorUserId",
-				_getCondition(CustomSQLUtil.get(JOIN_BY_CREATOR_USER_ID)));
-			whereMap.put("groupOrg",
-				_getCondition(CustomSQLUtil.get(JOIN_BY_GROUP_ORG)));
-			whereMap.put("groupsOrgs",
-				_getCondition(CustomSQLUtil.get(JOIN_BY_GROUPS_ORGS)));
-			whereMap.put("groupsRoles",
-				_getCondition(CustomSQLUtil.get(JOIN_BY_GROUPS_ROLES)));
-			whereMap.put("groupsUserGroups",
-				_getCondition(CustomSQLUtil.get(JOIN_BY_GROUPS_USER_GROUPS)));
-			whereMap.put("layoutSet",
-				_getCondition(CustomSQLUtil.get(JOIN_BY_LAYOUT_SET)));
-			whereMap.put("pageCount",
-				_getCondition(CustomSQLUtil.get(JOIN_BY_PAGE_COUNT)));
-			whereMap.put("rolePermissions",
-				_getCondition(CustomSQLUtil.get(JOIN_BY_ROLE_PERMISSIONS)));
-			whereMap.put("rolePermissions_6",
-				_getCondition(CustomSQLUtil.get(
-					JOIN_BY_ROLE_RESOURCE_PERMISSIONS)));
-			whereMap.put("rolePermissions_6_block",
-				_getCondition(CustomSQLUtil.get(
-					JOIN_BY_ROLE_RESOURCE_TYPE_PERMISSIONS)));
-			whereMap.put("site",
-				_getCondition(CustomSQLUtil.get(JOIN_BY_SITE)));
-			whereMap.put("type",
-				_getCondition(CustomSQLUtil.get(JOIN_BY_TYPE)));
-			whereMap.put("userGroupRole",
-				_getCondition(CustomSQLUtil.get(JOIN_BY_USER_GROUP_ROLE)));
-			whereMap.put("usersGroups",
-				_getCondition(CustomSQLUtil.get(JOIN_BY_USERS_GROUPS)));
-
-			_whereMap = whereMap;
+		if (_whereMap != null) {
+			return _whereMap;
 		}
+
+		Map<String, String> whereMap = new HashMap<String, String>();
+
+		whereMap.put(
+			"active", _getCondition(CustomSQLUtil.get(JOIN_BY_ACTIVE)));
+		whereMap.put(
+			"creatorUserId",
+			_getCondition(CustomSQLUtil.get(JOIN_BY_CREATOR_USER_ID)));
+		whereMap.put(
+			"groupOrg", _getCondition(CustomSQLUtil.get(JOIN_BY_GROUP_ORG)));
+		whereMap.put(
+			"groupsOrgs",
+			_getCondition(CustomSQLUtil.get(JOIN_BY_GROUPS_ORGS)));
+		whereMap.put(
+			"groupsRoles",
+			_getCondition(CustomSQLUtil.get(JOIN_BY_GROUPS_ROLES)));
+		whereMap.put(
+			"groupsUserGroups",
+			_getCondition(CustomSQLUtil.get(JOIN_BY_GROUPS_USER_GROUPS)));
+		whereMap.put(
+			"layoutSet", _getCondition(CustomSQLUtil.get(JOIN_BY_LAYOUT_SET)));
+		whereMap.put(
+			"pageCount", _getCondition(CustomSQLUtil.get(JOIN_BY_PAGE_COUNT)));
+		whereMap.put(
+			"rolePermissions",
+			_getCondition(CustomSQLUtil.get(JOIN_BY_ROLE_PERMISSIONS)));
+		whereMap.put(
+			"rolePermissions_6",
+			_getCondition(
+				CustomSQLUtil.get(JOIN_BY_ROLE_RESOURCE_PERMISSIONS)));
+		whereMap.put(
+			"rolePermissions_6_block",
+			_getCondition(
+				CustomSQLUtil.get(JOIN_BY_ROLE_RESOURCE_TYPE_PERMISSIONS)));
+		whereMap.put(
+			"site", _getCondition(CustomSQLUtil.get(JOIN_BY_SITE)));
+		whereMap.put(
+			"type", _getCondition(CustomSQLUtil.get(JOIN_BY_TYPE)));
+		whereMap.put(
+			"userGroupRole",
+			_getCondition(CustomSQLUtil.get(JOIN_BY_USER_GROUP_ROLE)));
+		whereMap.put(
+			"usersGroups",
+			_getCondition(CustomSQLUtil.get(JOIN_BY_USERS_GROUPS)));
+
+		_whereMap = whereMap;
 
 		return _whereMap;
 	}
@@ -1017,8 +1039,8 @@ public class GroupFinderImpl
 		new ConcurrentHashMap<String, String>();
 	private volatile long[] _groupOrganizationClassNameIds;
 	private volatile Map<String, String> _joinMap;
-	private volatile Map<String, String> _whereMap;
 	private Map<String, String> _replaceJoinAndWhereSQLCache =
 		new ConcurrentHashMap<String, String>();
+	private volatile Map<String, String> _whereMap;
 
 }
