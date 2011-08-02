@@ -57,8 +57,8 @@ public class TagsCompilerPortlet extends LiferayPortlet {
 		String[] entries =
 			new String[entriesFromURLArray.length + entriesFromSession.size()];
 
-		System.arraycopy(entriesFromURLArray, 0, entries, 0,
-			entriesFromURLArray.length);
+		System.arraycopy(
+			entriesFromURLArray, 0, entries, 0, entriesFromURLArray.length);
 
 		int index = entriesFromURLArray.length;
 
