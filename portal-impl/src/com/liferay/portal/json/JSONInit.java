@@ -114,8 +114,7 @@ public class JSONInit {
 			new TransformerWrapper(new RepositoryModelJSONTransformer()));
 
 		transformersMap.put(
-			User.class,
-			new TransformerWrapper(new UserJSONTransformer()));
+			User.class, new TransformerWrapper(new UserJSONTransformer()));
 	}
 
 	private static boolean _initalized = false;
