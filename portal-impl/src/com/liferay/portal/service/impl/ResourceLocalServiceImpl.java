@@ -1164,16 +1164,14 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 		Role role = roleLocalService.getDefaultGroupRole(groupId);
 
 		resourceBlockLocalService.setIndividualScopePermissions(
-			companyId, groupId, resource.getName(),
-			permissionedModel, role.getRoleId(),
-			Arrays.asList(groupPermissions));
+			companyId, groupId, resource.getName(), permissionedModel,
+			role.getRoleId(), Arrays.asList(groupPermissions));
 
 		role = roleLocalService.getRole(companyId, RoleConstants.GUEST);
 
 		resourceBlockLocalService.setIndividualScopePermissions(
-			companyId, groupId, resource.getName(),
-			permissionedModel, role.getRoleId(),
-			Arrays.asList(guestPermissions));
+			companyId, groupId, resource.getName(), permissionedModel,
+			role.getRoleId(), Arrays.asList(guestPermissions));
 	}
 
 	protected void validate(String name, boolean portletActions)

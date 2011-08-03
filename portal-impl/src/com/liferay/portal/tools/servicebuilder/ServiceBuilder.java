@@ -4403,7 +4403,7 @@ public class ServiceBuilder {
 			String columnName = columnElement.attributeValue("name");
 
 			if (columnName.equals("resourceBlockId") &&
-					!ejbName.equals("ResourceBlock")) {
+				!ejbName.equals("ResourceBlock")) {
 
 				permissionedModel = true;
 			}

@@ -51,85 +51,35 @@ import java.util.List;
  */
 public class UpgradePermission extends UpgradeProcess {
 
-	@Override
-	protected void doUpgrade() throws Exception {
+	protected ResourceBlock convertResourcePermissions(
+			long companyId, String name, long primKey)
+		throws PortalException, SystemException {
 
-		// LPS-14202 and LPS-17841
+		PermissionedModel permissionedModel =
+			ResourceBlockLocalServiceUtil.getPermissionedModel(name, primKey);
 
-		RoleLocalServiceUtil.checkSystemRoles();
+		long groupId = 0;
 
-		updatePermissions("com.liferay.portlet.bookmarks", true, true);
-		updatePermissions("com.liferay.portlet.documentlibrary", false, true);
-		updatePermissions("com.liferay.portlet.imagegallery", true, true);
-		updatePermissions("com.liferay.portlet.messageboards", true, true);
-		updatePermissions("com.liferay.portlet.shopping", true, true);
+		if (permissionedModel instanceof GroupedModel) {
+			GroupedModel groupedModel = (GroupedModel)permissionedModel;
 
-		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
-			convertResourcePermissions(
-				BookmarksEntry.class.getName(), "BookmarksEntry", "entryId");
-			convertResourcePermissions(
-				BookmarksFolder.class.getName(), "BookmarksFolder", "folderId");
-		}
-	}
-
-	protected void updatePermissions(
-			String name, boolean community, boolean guest)
-		throws Exception {
-
-		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
-			updatePermissions_6(name, community, guest);
-		}
-		else {
-			updatePermissions_1to5(name, community, guest);
-		}
-	}
-
-	protected void updatePermissions_1to5(
-			String name, boolean community, boolean guest)
-		throws Exception {
-
-		if (community) {
-			PermissionLocalServiceUtil.setContainerResourcePermissions(
-				name, RoleConstants.ORGANIZATION_USER, ActionKeys.VIEW);
-			PermissionLocalServiceUtil.setContainerResourcePermissions(
-				name, RoleConstants.SITE_MEMBER, ActionKeys.VIEW);
+			groupId = groupedModel.getGroupId();
 		}
 
-		if (guest) {
-			PermissionLocalServiceUtil.setContainerResourcePermissions(
-				name, RoleConstants.GUEST, ActionKeys.VIEW);
-		}
+		ResourceBlockPermissionsContainer resourceBlockPermissionsContainer =
+			getResourceBlockPermissionsContainer(
+					companyId, groupId, name, primKey);
 
-		PermissionLocalServiceUtil.setContainerResourcePermissions(
-			name, RoleConstants.OWNER, ActionKeys.VIEW);
-	}
+		String permissionsHash =
+			ResourceBlockLocalServiceUtil.getPermissionsHash(
+				resourceBlockPermissionsContainer);
 
-	protected void updatePermissions_6(
-			String name, boolean community, boolean guest)
-		throws Exception {
+		ResourceBlock resourceBlock =
+			ResourceBlockLocalServiceUtil.updateResourceBlockId(
+				companyId, groupId, name, permissionedModel, permissionsHash,
+				resourceBlockPermissionsContainer);
 
-		List<String> modelActions =
-			ResourceActionsUtil.getModelResourceActions(name);
-
-		ResourceActionLocalServiceUtil.checkResourceActions(name, modelActions);
-
-		int scope = ResourceConstants.SCOPE_INDIVIDUAL;
-		long actionIdsLong = 1;
-
-		if (community) {
-			ResourcePermissionLocalServiceUtil.addResourcePermissions(
-				name, RoleConstants.ORGANIZATION_USER, scope, actionIdsLong);
-			ResourcePermissionLocalServiceUtil.addResourcePermissions(
-				name, RoleConstants.SITE_MEMBER, scope, actionIdsLong);
-		}
-
-		if (guest) {
-			ResourcePermissionLocalServiceUtil.addResourcePermissions(
-				name, RoleConstants.GUEST, scope, actionIdsLong);
-		}
-
-		ResourcePermissionLocalServiceUtil.addResourcePermissions(
-			name, RoleConstants.OWNER, scope, actionIdsLong);
+		return resourceBlock;
 	}
 
 	protected void convertResourcePermissions(
@@ -192,38 +142,28 @@ public class UpgradePermission extends UpgradeProcess {
 		}
 	}
 
-	public ResourceBlock convertResourcePermissions(
-		long companyId, String name, long primKey)
-	throws PortalException, SystemException {
+	@Override
+	protected void doUpgrade() throws Exception {
 
-		PermissionedModel permissionedModel =
-			ResourceBlockLocalServiceUtil.getPermissionedModel(name, primKey);
+		// LPS-14202 and LPS-17841
 
-		long groupId = 0;
+		RoleLocalServiceUtil.checkSystemRoles();
 
-		if (permissionedModel instanceof GroupedModel) {
-			GroupedModel groupedModel = (GroupedModel)permissionedModel;
+		updatePermissions("com.liferay.portlet.bookmarks", true, true);
+		updatePermissions("com.liferay.portlet.documentlibrary", false, true);
+		updatePermissions("com.liferay.portlet.imagegallery", true, true);
+		updatePermissions("com.liferay.portlet.messageboards", true, true);
+		updatePermissions("com.liferay.portlet.shopping", true, true);
 
-			groupId = groupedModel.getGroupId();
+		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
+			convertResourcePermissions(
+				BookmarksEntry.class.getName(), "BookmarksEntry", "entryId");
+			convertResourcePermissions(
+				BookmarksFolder.class.getName(), "BookmarksFolder", "folderId");
 		}
-
-		ResourceBlockPermissionsContainer resourceBlockPermissionsContainer =
-			getResourceBlockPermissionsContainer(
-					companyId, groupId, name, primKey);
-
-		String permissionsHash =
-			ResourceBlockLocalServiceUtil.getPermissionsHash(
-				resourceBlockPermissionsContainer);
-
-		ResourceBlock resourceBlock =
-			ResourceBlockLocalServiceUtil.updateResourceBlockId(
-				companyId, groupId, name, permissionedModel, permissionsHash,
-				resourceBlockPermissionsContainer);
-
-		return resourceBlock;
 	}
 
-	public ResourceBlockPermissionsContainer
+	protected ResourceBlockPermissionsContainer
 			getResourceBlockPermissionsContainer(
 				long companyId, long groupId, String name, long primKey)
 		throws SystemException {
@@ -242,6 +182,66 @@ public class UpgradePermission extends UpgradeProcess {
 		}
 
 		return resourceBlockPermissionContainer;
+	}
+
+	protected void updatePermissions(
+			String name, boolean community, boolean guest)
+		throws Exception {
+
+		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
+			updatePermissions_6(name, community, guest);
+		}
+		else {
+			updatePermissions_1to5(name, community, guest);
+		}
+	}
+
+	protected void updatePermissions_1to5(
+			String name, boolean community, boolean guest)
+		throws Exception {
+
+		if (community) {
+			PermissionLocalServiceUtil.setContainerResourcePermissions(
+				name, RoleConstants.ORGANIZATION_USER, ActionKeys.VIEW);
+			PermissionLocalServiceUtil.setContainerResourcePermissions(
+				name, RoleConstants.SITE_MEMBER, ActionKeys.VIEW);
+		}
+
+		if (guest) {
+			PermissionLocalServiceUtil.setContainerResourcePermissions(
+				name, RoleConstants.GUEST, ActionKeys.VIEW);
+		}
+
+		PermissionLocalServiceUtil.setContainerResourcePermissions(
+			name, RoleConstants.OWNER, ActionKeys.VIEW);
+	}
+
+	protected void updatePermissions_6(
+			String name, boolean community, boolean guest)
+		throws Exception {
+
+		List<String> modelActions =
+			ResourceActionsUtil.getModelResourceActions(name);
+
+		ResourceActionLocalServiceUtil.checkResourceActions(name, modelActions);
+
+		int scope = ResourceConstants.SCOPE_INDIVIDUAL;
+		long actionIdsLong = 1;
+
+		if (community) {
+			ResourcePermissionLocalServiceUtil.addResourcePermissions(
+				name, RoleConstants.ORGANIZATION_USER, scope, actionIdsLong);
+			ResourcePermissionLocalServiceUtil.addResourcePermissions(
+				name, RoleConstants.SITE_MEMBER, scope, actionIdsLong);
+		}
+
+		if (guest) {
+			ResourcePermissionLocalServiceUtil.addResourcePermissions(
+				name, RoleConstants.GUEST, scope, actionIdsLong);
+		}
+
+		ResourcePermissionLocalServiceUtil.addResourcePermissions(
+			name, RoleConstants.OWNER, scope, actionIdsLong);
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(UpgradePermission.class);
