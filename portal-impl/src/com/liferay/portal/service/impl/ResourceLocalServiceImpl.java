@@ -39,6 +39,7 @@ import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.security.permission.PermissionsListFilter;
 import com.liferay.portal.security.permission.PermissionsListFilterFactory;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.base.ResourceLocalServiceBaseImpl;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.ResourcePermissionsThreadLocal;
@@ -68,18 +69,31 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 	}
 
 	public void addModelResources(
-			AuditedModel auditedModel, String[] groupPermissions,
-			String[] guestPermissions)
+			AuditedModel auditedModel, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		ClassedModel classedModel = (ClassedModel)auditedModel;
 
-		addModelResources(
-			auditedModel.getCompanyId(), getGroupId(auditedModel),
-			auditedModel.getUserId(), classedModel.getModelClassName(),
-			String.valueOf(classedModel.getPrimaryKeyObj()),
-			groupPermissions, guestPermissions,
-			getPermissionedModel(auditedModel));
+		if (serviceContext.getAddGroupPermissions() ||
+			serviceContext.getAddGuestPermissions()) {
+
+			addResources(
+				auditedModel.getCompanyId(), getGroupId(auditedModel),
+				auditedModel.getUserId(), classedModel.getModelClassName(),
+				String.valueOf(classedModel.getPrimaryKeyObj()), false,
+				serviceContext.getAddGroupPermissions(),
+				serviceContext.getAddGuestPermissions(),
+				getPermissionedModel(auditedModel));
+		}
+		else {
+			addModelResources(
+				auditedModel.getCompanyId(), getGroupId(auditedModel),
+				auditedModel.getUserId(), classedModel.getModelClassName(),
+				String.valueOf(classedModel.getPrimaryKeyObj()),
+				serviceContext.getGroupPermissions(),
+				serviceContext.getGuestPermissions(),
+				getPermissionedModel(auditedModel));
+		}
 	}
 
 	public void addModelResources(
@@ -184,21 +198,6 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 		addResources(
 			companyId, groupId, userId, name, String.valueOf(primKey),
 			portletActions, addGroupPermissions, addGuestPermissions, null);
-	}
-
-	public void addResources(
-			AuditedModel auditedModel, boolean portletActions,
-			boolean addGroupPermissions, boolean addGuestPermissions)
-		throws PortalException, SystemException {
-
-		ClassedModel classedModel = (ClassedModel)auditedModel;
-
-		addResources(
-			auditedModel.getCompanyId(), getGroupId(auditedModel),
-			auditedModel.getUserId(), classedModel.getModelClassName(),
-			String.valueOf(classedModel.getPrimaryKeyObj()), portletActions,
-			addGroupPermissions, addGuestPermissions,
-			getPermissionedModel(auditedModel));
 	}
 
 	public void addResources(
