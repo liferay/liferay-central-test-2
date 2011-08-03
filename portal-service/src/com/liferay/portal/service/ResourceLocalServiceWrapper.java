@@ -253,11 +253,10 @@ public class ResourceLocalServiceWrapper implements ResourceLocalService {
 
 	public void addModelResources(
 		com.liferay.portal.model.AuditedModel auditedModel,
-		java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		_resourceLocalService.addModelResources(auditedModel, groupPermissions,
-			guestPermissions);
+		_resourceLocalService.addModelResources(auditedModel, serviceContext);
 	}
 
 	public void addModelResources(long companyId, long groupId, long userId,
@@ -290,16 +289,6 @@ public class ResourceLocalServiceWrapper implements ResourceLocalService {
 			com.liferay.portal.kernel.exception.SystemException {
 		_resourceLocalService.addResources(companyId, groupId, userId, name,
 			primKey, portletActions, addGroupPermissions, addGuestPermissions);
-	}
-
-	public void addResources(
-		com.liferay.portal.model.AuditedModel auditedModel,
-		boolean portletActions, boolean addGroupPermissions,
-		boolean addGuestPermissions)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		_resourceLocalService.addResources(auditedModel, portletActions,
-			addGroupPermissions, addGuestPermissions);
 	}
 
 	public void addResources(long companyId, long groupId, long userId,

@@ -234,7 +234,7 @@ public interface ResourceLocalService extends PersistedModelLocalService {
 
 	public void addModelResources(
 		com.liferay.portal.model.AuditedModel auditedModel,
-		java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -256,13 +256,6 @@ public interface ResourceLocalService extends PersistedModelLocalService {
 	public void addResources(long companyId, long groupId, long userId,
 		java.lang.String name, long primKey, boolean portletActions,
 		boolean addGroupPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	public void addResources(
-		com.liferay.portal.model.AuditedModel auditedModel,
-		boolean portletActions, boolean addGroupPermissions,
-		boolean addGuestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 

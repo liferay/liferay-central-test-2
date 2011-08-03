@@ -265,11 +265,10 @@ public class ResourceLocalServiceUtil {
 
 	public static void addModelResources(
 		com.liferay.portal.model.AuditedModel auditedModel,
-		java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		getService()
-			.addModelResources(auditedModel, groupPermissions, guestPermissions);
+		getService().addModelResources(auditedModel, serviceContext);
 	}
 
 	public static void addModelResources(long companyId, long groupId,
@@ -304,17 +303,6 @@ public class ResourceLocalServiceUtil {
 		getService()
 			.addResources(companyId, groupId, userId, name, primKey,
 			portletActions, addGroupPermissions, addGuestPermissions);
-	}
-
-	public static void addResources(
-		com.liferay.portal.model.AuditedModel auditedModel,
-		boolean portletActions, boolean addGroupPermissions,
-		boolean addGuestPermissions)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		getService()
-			.addResources(auditedModel, portletActions, addGroupPermissions,
-			addGuestPermissions);
 	}
 
 	public static void addResources(long companyId, long groupId, long userId,
