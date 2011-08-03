@@ -232,25 +232,15 @@ public interface ResourceLocalService extends PersistedModelLocalService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public void addModelResources(long companyId, long groupId, long userId,
-		java.lang.String name, long primKey,
-		java.lang.String[] groupPermissions,
-		java.lang.String[] guestPermissions,
-		com.liferay.portal.model.PermissionedModel permissionedModel)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	public void addModelResources(long companyId, long groupId, long userId,
-		java.lang.String name, java.lang.String primKey,
+	public void addModelResources(
+		com.liferay.portal.model.AuditedModel auditedModel,
 		java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public void addModelResources(long companyId, long groupId, long userId,
 		java.lang.String name, java.lang.String primKey,
-		java.lang.String[] groupPermissions,
-		java.lang.String[] guestPermissions,
-		com.liferay.portal.model.PermissionedModel permissionedModel)
+		java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -269,10 +259,10 @@ public interface ResourceLocalService extends PersistedModelLocalService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public void addResources(long companyId, long groupId, long userId,
-		java.lang.String name, long primKey, boolean portletActions,
-		boolean addGroupPermissions, boolean addGuestPermissions,
-		com.liferay.portal.model.PermissionedModel permissionedModel)
+	public void addResources(
+		com.liferay.portal.model.AuditedModel auditedModel,
+		boolean portletActions, boolean addGroupPermissions,
+		boolean addGuestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -283,33 +273,18 @@ public interface ResourceLocalService extends PersistedModelLocalService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public void addResources(long companyId, long groupId, long userId,
-		java.lang.String name, java.lang.String primKey,
-		boolean portletActions, boolean addGroupPermissions,
-		boolean addGuestPermissions,
-		com.liferay.portal.model.PermissionedModel permissionedModel)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
-
 	public void deleteResource(long companyId, java.lang.String name,
 		int scope, long primKey)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public void deleteResource(long companyId, java.lang.String name,
-		int scope, long primKey,
-		com.liferay.portal.model.PermissionedModel permissionedModel)
+	public void deleteResource(
+		com.liferay.portal.model.AuditedModel auditedModel, int scope)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public void deleteResource(long companyId, java.lang.String name,
 		int scope, java.lang.String primKey)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	public void deleteResource(long companyId, java.lang.String name,
-		int scope, java.lang.String primKey,
-		com.liferay.portal.model.PermissionedModel permissionedModel)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -341,25 +316,15 @@ public interface ResourceLocalService extends PersistedModelLocalService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public void updateResources(long companyId, long groupId,
-		java.lang.String name, long primKey,
-		java.lang.String[] groupPermissions,
-		java.lang.String[] guestPermissions,
-		com.liferay.portal.model.PermissionedModel permissionedModel)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	public void updateResources(long companyId, long groupId,
-		java.lang.String name, java.lang.String primKey,
+	public void updateResources(
+		com.liferay.portal.model.AuditedModel auditedModel,
 		java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public void updateResources(long companyId, long groupId,
 		java.lang.String name, java.lang.String primKey,
-		java.lang.String[] groupPermissions,
-		java.lang.String[] guestPermissions,
-		com.liferay.portal.model.PermissionedModel permissionedModel)
+		java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 }
