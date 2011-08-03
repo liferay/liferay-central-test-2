@@ -21,8 +21,11 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ListUtil;
+import com.liferay.portal.model.AuditedModel;
+import com.liferay.portal.model.ClassedModel;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.GroupConstants;
+import com.liferay.portal.model.GroupedModel;
 import com.liferay.portal.model.Permission;
 import com.liferay.portal.model.PermissionedModel;
 import com.liferay.portal.model.Resource;
@@ -65,14 +68,18 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 	}
 
 	public void addModelResources(
-			long companyId, long groupId, long userId, String name,
-			long primKey, String[] groupPermissions, String[] guestPermissions,
-			PermissionedModel permissionedModel)
+			AuditedModel auditedModel, String[] groupPermissions,
+			String[] guestPermissions)
 		throws PortalException, SystemException {
 
+		ClassedModel classedModel = (ClassedModel)auditedModel;
+
 		addModelResources(
-			companyId, groupId, userId, name, String.valueOf(primKey),
-			groupPermissions, guestPermissions, permissionedModel);
+			auditedModel.getCompanyId(), getGroupId(auditedModel),
+			auditedModel.getUserId(), classedModel.getModelClassName(),
+			String.valueOf(classedModel.getPrimaryKeyObj()),
+			groupPermissions, guestPermissions,
+			getPermissionedModel(auditedModel));
 	}
 
 	public void addModelResources(
@@ -86,7 +93,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 			guestPermissions, null);
 	}
 
-	public void addModelResources(
+	protected void addModelResources(
 			long companyId, long groupId, long userId, String name,
 			String primKey, String[] groupPermissions,
 			String[] guestPermissions, PermissionedModel permissionedModel)
@@ -180,16 +187,18 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 	}
 
 	public void addResources(
-			long companyId, long groupId, long userId, String name,
-			long primKey, boolean portletActions,
-			boolean addGroupPermissions, boolean addGuestPermissions,
-			PermissionedModel permissionedModel)
+			AuditedModel auditedModel, boolean portletActions,
+			boolean addGroupPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
+		ClassedModel classedModel = (ClassedModel)auditedModel;
+
 		addResources(
-			companyId, groupId, userId, name, String.valueOf(primKey),
-			portletActions, addGroupPermissions, addGuestPermissions,
-			permissionedModel);
+			auditedModel.getCompanyId(), getGroupId(auditedModel),
+			auditedModel.getUserId(), classedModel.getModelClassName(),
+			String.valueOf(classedModel.getPrimaryKeyObj()), portletActions,
+			addGroupPermissions, addGuestPermissions,
+			getPermissionedModel(auditedModel));
 	}
 
 	public void addResources(
@@ -203,7 +212,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 			addGroupPermissions, addGuestPermissions, null);
 	}
 
-	public void addResources(
+	protected void addResources(
 			long companyId, long groupId, long userId, String name,
 			String primKey, boolean portletActions,
 			boolean addGroupPermissions, boolean addGuestPermissions,
@@ -324,13 +333,15 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 		deleteResource(companyId, name, scope, String.valueOf(primKey), null);
 	}
 
-	public void deleteResource(
-			long companyId, String name, int scope, long primKey,
-			PermissionedModel permissionedModel)
+	public void deleteResource(AuditedModel auditedModel, int scope)
 		throws PortalException, SystemException {
 
+		ClassedModel classedModel = (ClassedModel)auditedModel;
+
 		deleteResource(
-			companyId, name, scope, String.valueOf(primKey), permissionedModel);
+			auditedModel.getCompanyId(), classedModel.getModelClassName(),
+			scope, String.valueOf(classedModel.getPrimaryKeyObj()),
+			getPermissionedModel(auditedModel));
 	}
 
 	public void deleteResource(
@@ -340,7 +351,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 		deleteResource(companyId, name, scope, primKey, null);
 	}
 
-	public void deleteResource(
+	protected void deleteResource(
 			long companyId, String name, int scope, String primKey,
 			PermissionedModel permissionedModel)
 		throws PortalException, SystemException{
@@ -349,7 +360,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 			if (resourceBlockLocalService.isSupported(name)) {
 				if (permissionedModel == null) {
 					throw new IllegalArgumentException(
-						"permissionedModel is null");
+						"Permissioned model is null");
 				}
 
 				resourceBlockLocalService.releasePermissionedModelResourceBlock(
@@ -456,14 +467,18 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 	}
 
 	public void updateResources(
-			long companyId, long groupId, String name, long primKey,
-			String[] groupPermissions, String[] guestPermissions,
-			PermissionedModel permissionedModel)
+			AuditedModel auditedModel, String[] groupPermissions,
+			String[] guestPermissions)
 		throws PortalException, SystemException {
 
+		ClassedModel classedModel = (ClassedModel)auditedModel;
+
 		updateResources(
-			companyId, groupId, name, String.valueOf(primKey), groupPermissions,
-			guestPermissions, permissionedModel);
+			auditedModel.getCompanyId(), getGroupId(auditedModel),
+			classedModel.getModelClassName(),
+			String.valueOf(classedModel.getPrimaryKeyObj()),
+			groupPermissions, guestPermissions,
+			getPermissionedModel(auditedModel));
 	}
 
 	public void updateResources(
@@ -476,7 +491,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 			guestPermissions, null);
 	}
 
-	public void updateResources(
+	protected void updateResources(
 			long companyId, long groupId, String name, String primKey,
 			String[] groupPermissions, String[] guestPermissions,
 			PermissionedModel permissionedModel)
@@ -595,7 +610,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		if (permissionedModel == null) {
-			throw new IllegalArgumentException("permissionedModel is null");
+			throw new IllegalArgumentException("Permissioned model is null");
 		}
 
 		// Scope is assumed to always be individual
@@ -691,7 +706,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		if (permissionedModel == null) {
-			throw new IllegalArgumentException("permissionedModel is null");
+			throw new IllegalArgumentException("Permissioned model is null");
 		}
 
 		// Scope is assumed to always be individual
@@ -843,7 +858,8 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 		if (resourceBlockLocalService.isSupported(resource.getName())) {
 
 			if (permissionedModel == null) {
-				throw new IllegalArgumentException("permissionedModel is null");
+				throw new IllegalArgumentException(
+					"Permissioned model is null");
 			}
 
 			// Scope is assumed to always be individual
@@ -1005,7 +1021,8 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 
 		if (resourceBlockLocalService.isSupported(resource.getName())) {
 			if (permissionedModel == null) {
-				throw new IllegalArgumentException("permissionedModel is null");
+				throw new IllegalArgumentException(
+					"Permissioned model is null");
 			}
 
 			// Scope is assumed to always be individual
@@ -1062,6 +1079,30 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 				itr.remove();
 			}
 		}
+	}
+
+	protected long getGroupId(AuditedModel auditedModel) {
+		long groupId = 0;
+
+		if (auditedModel instanceof GroupedModel) {
+			GroupedModel groupedModel = (GroupedModel)auditedModel;
+
+			groupId = groupedModel.getGroupId();
+		}
+
+		return groupId;
+	}
+
+	protected PermissionedModel getPermissionedModel(
+		AuditedModel auditedModel) {
+
+		PermissionedModel permissionedModel = null;
+
+		if (auditedModel instanceof PermissionedModel) {
+			permissionedModel = (PermissionedModel)auditedModel;
+		}
+
+		return permissionedModel;
 	}
 
 	protected Resource getResource_1to5(
@@ -1156,7 +1197,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		if (permissionedModel == null) {
-			throw new IllegalArgumentException("permissionedModel is null");
+			throw new IllegalArgumentException("Permissioned model is null");
 		}
 
 		// Scope is assumed to always be individual

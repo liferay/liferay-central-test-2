@@ -119,9 +119,7 @@ public class BookmarksEntryLocalServiceImpl
 		throws PortalException, SystemException {
 
 		resourceLocalService.addResources(
-			entry.getCompanyId(), entry.getGroupId(), entry.getUserId(),
-			BookmarksEntry.class.getName(), entry.getEntryId(), false,
-			addGroupPermissions, addGuestPermissions, entry);
+			entry, false, addGroupPermissions, addGuestPermissions);
 	}
 
 	public void addEntryResources(
@@ -130,9 +128,7 @@ public class BookmarksEntryLocalServiceImpl
 		throws PortalException, SystemException {
 
 		resourceLocalService.addModelResources(
-			entry.getCompanyId(), entry.getGroupId(), entry.getUserId(),
-			BookmarksEntry.class.getName(), entry.getEntryId(),
-			groupPermissions, guestPermissions, entry);
+			entry, groupPermissions, guestPermissions);
 	}
 
 	public void addEntryResources(
@@ -179,8 +175,7 @@ public class BookmarksEntryLocalServiceImpl
 		// Resources
 
 		resourceLocalService.deleteResource(
-			entry.getCompanyId(), BookmarksEntry.class.getName(),
-			ResourceConstants.SCOPE_INDIVIDUAL, entry.getEntryId(), entry);
+			entry, ResourceConstants.SCOPE_INDIVIDUAL);
 
 		// Asset
 
