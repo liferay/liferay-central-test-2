@@ -600,7 +600,7 @@ public class DLAppServiceUtil {
 	}
 
 	/**
-	* Retrieves the file entries with the file entry type in the folder.
+	* Returns the file entries with the file entry type in the folder.
 	*
 	* @param repositoryId the primary key of the file entry's repository
 	* @param folderId the primary key of the file entry's folder
