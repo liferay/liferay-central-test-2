@@ -56,18 +56,18 @@ import java.rmi.RemoteException;
  */
 public class DLAppServiceSoap {
 	/**
-	* Adds a file shortcut to an existing file entry. This method is only
+	* Adds a file shortcut to the existing file entry. This method is only
 	* supported by the Liferay repository.
 	*
 	* @param repositoryId the primary key of the repository
 	* @param folderId the primary key of the file shortcut's parent folder
-	* @param toFileEntryId the primary key of the file entry to point to
+	* @param toFileEntryId the primary key of the file shortcut's file entry
 	* @param serviceContext the file entry's service context. Can specify the
 	file entry's asset category IDs, asset tag names, and expando
 	bridge attributes.
 	* @return the file shortcut
-	* @throws PortalException if a parent folder or file entry could not be
-	found or if the file shortcut's information was invalid
+	* @throws PortalException if the parent folder or file entry could not be
+	found, or if the file shortcut's information was invalid
 	* @throws SystemException if a system exception occurred
 	*/
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcutSoap addFileShortcut(
@@ -89,21 +89,22 @@ public class DLAppServiceSoap {
 	}
 
 	/**
-	* Cancel the check out of a file entry. If a user has not checked out the
-	* specified file entry, invoking this method will result in no changes.
+	* Cancels the check out of the file entry. If a user has not checked out
+	* the specified file entry, invoking this method will result in no changes.
 	*
 	* <p>
 	* When a file entry is checked out, a PWC (private working copy) is created
 	* and the original file entry is locked. A client can make as many changes
 	* to the PWC as he desires without those changes being visible to other
 	* users. If the user is satisfied with the changes, he may elect to check
-	* in his changes, resulting in a new file version based on the PWC; the
-	* PWC will be removed and the file entry will be unlocked. If the user is
-	* not satisfied with the changes, he may elect to cancel his check out;
-	* this results in the deletion of the PWC and unlocking of the file entry.
+	* in his changes, resulting in a new file version based on the PWC; the PWC
+	* will be removed and the file entry will be unlocked. If the user is not
+	* satisfied with the changes, he may elect to cancel his check out; this
+	* results in the deletion of the PWC and unlocking of the file entry.
 	* </p>
 	*
-	* @param fileEntryId the file entry to cancel the checkout
+	* @param fileEntryId the primary key of the file entry to cancel the
+	checkout
 	* @throws PortalException if the file entry could not be found
 	* @throws SystemException if a system exception occurred
 	* @see #checkInFileEntry(long, boolean, String, ServiceContext)
@@ -122,21 +123,21 @@ public class DLAppServiceSoap {
 	}
 
 	/**
-	* Check in a file entry. If a user has not checked out the specified file
-	* entry, invoking this method will result in no changes.
+	* Checks in the file entry. If a user has not checked out the specified
+	* file entry, invoking this method will result in no changes.
 	*
 	* <p>
 	* When a file entry is checked out, a PWC (private working copy) is created
 	* and the original file entry is locked. A client can make as many changes
 	* to the PWC as he desires without those changes being visible to other
 	* users. If the user is satisfied with the changes, he may elect to check
-	* in his changes, resulting in a new file version based on the PWC; the
-	* PWC will be removed and the file entry will be unlocked. If the user is
-	* not satisfied with the changes, he may elect to cancel his check out;
-	* this results in the deletion of the PWC and unlocking of the file entry.
+	* in his changes, resulting in a new file version based on the PWC; the PWC
+	* will be removed and the file entry will be unlocked. If the user is not
+	* satisfied with the changes, he may elect to cancel his check out; this
+	* results in the deletion of the PWC and unlocking of the file entry.
 	* </p>
 	*
-	* @param fileEntryId the file entry to check in
+	* @param fileEntryId the primary key of the file entry to check in
 	* @param majorVersion whether the new file version is a major version
 	* @param changeLog the file's version change log
 	* @param serviceContext the file entry's service context
@@ -161,22 +162,22 @@ public class DLAppServiceSoap {
 	}
 
 	/**
-	* Check in a file entry. If a user has not checked out the specified file
-	* entry, invoking this method will result in no changes. This method is
-	* primarily used by WebDAV.
+	* Checks in the file entry using the lock's UUID. If a user has not checked
+	* out the specified file entry, invoking this method will result in no
+	* changes. This method is primarily used by WebDAV.
 	*
 	* <p>
 	* When a file entry is checked out, a PWC (private working copy) is created
 	* and the original file entry is locked. A client can make as many changes
 	* to the PWC as he desires without those changes being visible to other
 	* users. If the user is satisfied with the changes, he may elect to check
-	* in his changes, resulting in a new file version based on the PWC; the
-	* PWC will be removed and the file entry will be unlocked. If the user is
-	* not satisfied with the changes, he may elect to cancel his check out;
-	* this results in the deletion of the PWC and unlocking of the file entry.
+	* in his changes, resulting in a new file version based on the PWC; the PWC
+	* will be removed and the file entry will be unlocked. If the user is not
+	* satisfied with the changes, he may elect to cancel his check out; this
+	* results in the deletion of the PWC and unlocking of the file entry.
 	* </p>
 	*
-	* @param fileEntryId the file entry to check in
+	* @param fileEntryId the primary key of the file entry to check in
 	* @param lockUuid the lock's universally unique identifier
 	* @throws PortalException if the file entry could not be found
 	* @throws SystemException if a system exception occurred
@@ -203,10 +204,10 @@ public class DLAppServiceSoap {
 	* and the original file entry is locked. A client can make as many changes
 	* to the PWC as he desires without those changes being visible to other
 	* users. If the user is satisfied with the changes, he may elect to check
-	* in his changes, resulting in a new file version based on the PWC; the
-	* PWC will be removed and the file entry will be unlocked. If the user is
-	* not satisfied with the changes, he may elect to cancel his check out;
-	* this results in the deletion of the PWC and unlocking of the file entry.
+	* in his changes, resulting in a new file version based on the PWC; the PWC
+	* will be removed and the file entry will be unlocked. If the user is not
+	* satisfied with the changes, he may elect to cancel his check out; this
+	* results in the deletion of the PWC and unlocking of the file entry.
 	* </p>
 	*
 	* @param fileEntryId the file entry to check out
@@ -228,10 +229,10 @@ public class DLAppServiceSoap {
 	}
 
 	/**
-	* Deletes a file entry.
+	* Deletes the file entry with the primary key.
 	*
 	* @param fileEntryId the primary key of the file entry
-	* @throws PortalException if the file entry was not found
+	* @throws PortalException if the file entry could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void deleteFileEntry(long fileEntryId)
@@ -247,12 +248,12 @@ public class DLAppServiceSoap {
 	}
 
 	/**
-	* Deletes a file entry.
+	* Deletes the file entry with the title in the folder.
 	*
 	* @param repositoryId the primary key of the repository
-	* @param folderId the primary key of the parent folder
-	* @param title the title of the file entry
-	* @throws PortalException if the file entry was not found
+	* @param folderId the primary key of the file entry's parent folder
+	* @param title the file entry's title
+	* @throws PortalException if the file entry could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void deleteFileEntryByTitle(long repositoryId, long folderId,
@@ -269,11 +270,11 @@ public class DLAppServiceSoap {
 	}
 
 	/**
-	* Deletes a file shortcut. This method is only supported by the Liferay
-	* repository.
+	* Deletes the file shortcut with the primary key. This method is only
+	* supported by the Liferay repository.
 	*
 	* @param fileShortcutId the primary key of the file shortcut
-	* @throws PortalException if the file shortcut was not found
+	* @throws PortalException if the file shortcut could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void deleteFileShortcut(long fileShortcutId)
@@ -289,10 +290,11 @@ public class DLAppServiceSoap {
 	}
 
 	/**
-	* Deletes a folder and all of its subfolders and file entries.
+	* Deletes the folder with the primary key and all of its subfolders and
+	* file entries.
 	*
 	* @param folderId the primary key of the folder
-	* @throws PortalException if the folder was not found
+	* @throws PortalException if the folder could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void deleteFolder(long folderId) throws RemoteException {
@@ -307,12 +309,13 @@ public class DLAppServiceSoap {
 	}
 
 	/**
-	* Deletes a folder and all of its subfolders and file entries.
+	* Deletes the folder with the name in the parent folder and all of its
+	* subfolders and file entries.
 	*
 	* @param repositoryId the primary key of the repository
-	* @param parentFolderId the primary key of the parent folder
+	* @param parentFolderId the primary key of the folder's parent folder
 	* @param name the folder's name
-	* @throws PortalException if the folder was not found
+	* @throws PortalException if the folder could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void deleteFolder(long repositoryId, long parentFolderId,
@@ -328,14 +331,14 @@ public class DLAppServiceSoap {
 	}
 
 	/**
-	* Deletes a temporary file entry.
+	* Deletes the temporary file entry.
 	*
 	* @param groupId the primary key of the group
 	* @param folderId the primary key of the folder where the file entry was
 	eventually to reside
 	* @param fileName the file's original name
 	* @param tempFolderName the temporary folder's name
-	* @throws PortalException if the file name is invalid
+	* @throws PortalException if the file name was invalid
 	* @throws SystemException if a system exception occurred
 	* @see com.liferay.portal.kernel.util.TempFileUtil
 	*/
@@ -354,13 +357,13 @@ public class DLAppServiceSoap {
 	}
 
 	/**
-	* Retrieves a count of total file entries and shortcuts in a given folder.
+	* Returns the number of file entries and shortcuts in the folder.
 	*
 	* @param repositoryId the primary key of the repository
 	* @param folderId the primary key of the folder
 	* @param status the workflow status
-	* @return the count of total file entries and shortcuts
-	* @throws PortalException if the folder was not found
+	* @return the number of file entries and shortcuts in the folder
+	* @throws PortalException if the folder ould not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public static int getFileEntriesAndFileShortcutsCount(long repositoryId,
@@ -379,12 +382,12 @@ public class DLAppServiceSoap {
 	}
 
 	/**
-	* Retrieves a count of total file entries in a given folder.
+	* Returns the number of file entries in the folder.
 	*
-	* @param repositoryId the primary key of the repository
-	* @param folderId the primary key of the folder
-	* @return the count of total file entries
-	* @throws PortalException if the folder was not found
+	* @param repositoryId the primary key of the file entry's repository
+	* @param folderId the primary key of the file entry's folder
+	* @return the number of file entries in the folder
+	* @throws PortalException if the folder could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public static int getFileEntriesCount(long repositoryId, long folderId)
@@ -403,14 +406,14 @@ public class DLAppServiceSoap {
 	}
 
 	/**
-	* Retrieves a count of total file entries in a given folder of a given file
-	* entry type.
+	* Returns the number of file entries with the file entry type in the
+	* folder.
 	*
-	* @param repositoryId the primary key of the repository
-	* @param folderId the primary key of the folder
+	* @param repositoryId the primary key of the file entry's repository
+	* @param folderId the primary key of the file entry's folder
 	* @param fileEntryTypeId the primary key of the file entry type
-	* @return the count of total file entries
-	* @throws PortalException if the folder was not found
+	* @return the number of file entries with the file entry type in the folder
+	* @throws PortalException if the folder could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public static int getFileEntriesCount(long repositoryId, long folderId,
@@ -429,11 +432,11 @@ public class DLAppServiceSoap {
 	}
 
 	/**
-	* Retrieve a file shortcut. This method is only supported by the Liferay
-	* repository.
+	* Returns the file shortcut with the primary key. This method is only
+	* supported by the Liferay repository.
 	*
 	* @param fileShortcutId the primary key of the file shortcut
-	* @return the file shortcut
+	* @return the file shortcut with the primary key
 	* @throws PortalException if the file shortcut could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -453,17 +456,17 @@ public class DLAppServiceSoap {
 	}
 
 	/**
-	* Retrieves a count of total immediate subfolders, file entries, and
-	* file shortcuts in a given folder.
+	* Returns the number of immediate subfolders, file entries, and file
+	* shortcuts in the parent folder.
 	*
 	* @param repositoryId the primary key of the repository
 	* @param folderId the primary key of the parent folder
 	* @param status the workflow status
 	* @param includeMountFolders whether to include mount folders for
 	third-party repositories
-	* @return the count of immediate subfolders, file entries, and file
-	shortcuts
-	* @throws PortalException if the folder was not found
+	* @return the number of immediate subfolders, file entries, and file
+	shortcuts in the parent folder
+	* @throws PortalException if the folder could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public static int getFoldersAndFileEntriesAndFileShortcutsCount(
@@ -483,12 +486,12 @@ public class DLAppServiceSoap {
 	}
 
 	/**
-	* Retrieves a count of total immediate subfolders in a given folder.
+	* Returns the number of immediate subfolders of the parent folder.
 	*
-	* @param repositoryId the primary key of the repository
-	* @param parentFolderId the primary key of the parent folder
-	* @return the count of immediate subfolders
-	* @throws PortalException if the folder was not found
+	* @param repositoryId the primary key of the folder's repository
+	* @param parentFolderId the primary key of the folder's parent folder
+	* @return the number of immediate subfolders of the parent folder
+	* @throws PortalException if the parent folder could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public static int getFoldersCount(long repositoryId, long parentFolderId)
@@ -507,14 +510,15 @@ public class DLAppServiceSoap {
 	}
 
 	/**
-	* Retrieves a count of total immediate subfolders in a given folder.
+	* Returns the number of immediate subfolders of the parent folder,
+	* optionally including mount folders for third-party repositories.
 	*
-	* @param repositoryId the primary key of the repository
-	* @param parentFolderId the primary key of the parent folder
+	* @param repositoryId the primary key of the folder's repository
+	* @param parentFolderId the primary key of the folder's parent folder
 	* @param includeMountFolders whether to include mount folders for
 	third-party repositories
-	* @return the count of immediate subfolders
-	* @throws PortalException if the folder was not found
+	* @return the number of immediate subfolders of the parent folder
+	* @throws PortalException if the parent folder could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public static int getFoldersCount(long repositoryId, long parentFolderId,
@@ -533,14 +537,16 @@ public class DLAppServiceSoap {
 	}
 
 	/**
-	* Retrieves a count of total immediate subfolders and file entries across
-	* several folders.
+	* Returns the number of immediate subfolders and file entries across the
+	* folders.
 	*
 	* @param repositoryId the primary key of the repository
-	* @param folderIds a list of primary keys for parent folders to search
+	* @param folderIds the primary keys of folders from which to count
+	immediate subfolders and file entries
 	* @param status the workflow status
-	* @return the count of immediate subfolders and file entries
-	* @throws PortalException if the repository was not found
+	* @return the number of immediate subfolders and file entries across the
+	folders
+	* @throws PortalException if the repository could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public static int getFoldersFileEntriesCount(long repositoryId,
@@ -559,15 +565,15 @@ public class DLAppServiceSoap {
 	}
 
 	/**
-	* Retrieves a count of file entries in a group that are stored within the
-	* Liferay repository. This method is primarily used to search for recently
-	* modified file entries. It can be limited to the file entries modified by
-	* a given user.
+	* Returns the number of file entries in a group starting at the repository
+	* default parent folder that are stored within the Liferay repository. This
+	* method is primarily used to search for recently modified file entries. It
+	* can be limited to the file entries modified by a given user.
 	*
 	* @param groupId the primary key of the group
 	* @param userId the primary key of the user who created the file
 	(optionally <code>0</code>)
-	* @return the count of file entries in the group
+	* @return the number of matching file entries
 	* @throws PortalException if the group could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -587,17 +593,17 @@ public class DLAppServiceSoap {
 	}
 
 	/**
-	* Retrieves a count of file entries in a group that are stored within the
-	* Liferay repository. This method is primarily used to search for recently
-	* modified file entries. It can be limited to the file entries modified by
-	* a given user.
+	* Returns the number of file entries in a group starting at the root folder
+	* that are stored within the Liferay repository. This method is primarily
+	* used to search for recently modified file entries. It can be limited to
+	* the file entries modified by a given user.
 	*
 	* @param groupId the primary key of the group
 	* @param userId the primary key of the user who created the file
 	(optionally <code>0</code>)
 	* @param rootFolderId the primary key of the root folder to begin the
 	search
-	* @return the count of file entries in the group
+	* @return the number of matching file entries
 	* @throws PortalException if the group could not be found
 	* @throws SystemException if a system exception occurred
 	*/
@@ -617,12 +623,13 @@ public class DLAppServiceSoap {
 	}
 
 	/**
-	* Retrieve all descendant folders of the current folder.
+	* Returns all the descendant folders of the folder with the primary key.
 	*
 	* @param repositoryId the primary key of the repository
 	* @param folderId the primary key of the folder
-	* @return the list of primary keys for descendant folders
-	* @throws PortalException if the repository or parent folder was not found
+	* @return the descendant folders of the folder with the primary key
+	* @throws PortalException if the repository or parent folder could not be
+	found
 	* @throws SystemException if a system exception occurred
 	*/
 	public static java.lang.Long[] getSubfolderIds(long repositoryId,
@@ -641,14 +648,15 @@ public class DLAppServiceSoap {
 	}
 
 	/**
-	* Retrieve descendant folders of the current folder. The method can be
-	* limited to one level deep.
+	* Returns descendant folders of the folder with the primary key, optionally
+	* limiting to one level deep.
 	*
 	* @param repositoryId the primary key of the repository
 	* @param folderId the primary key of the folder
 	* @param recurse whether to recurse through each subfolder
-	* @return the list of primary keys for descendant folders
-	* @throws PortalException if the repository or parent folder was not found
+	* @return the descendant folders of the folder with the primary key
+	* @throws PortalException if the repository or parent folder could not be
+	found
 	* @throws SystemException if a system exception occurred
 	*/
 	public static java.lang.Long[] getSubfolderIds(long repositoryId,
@@ -667,14 +675,14 @@ public class DLAppServiceSoap {
 	}
 
 	/**
-	* Retrieve all temporary file entry names.
+	* Returns all the temporary file entry names.
 	*
 	* @param groupId the primary key of the group
 	* @param folderId the primary key of the folder where the file entry will
 	eventually reside
 	* @param tempFolderName the temporary folder's name
-	* @return all the file names
-	* @throws PortalException if the folder is invalid
+	* @return the temporary file entry names
+	* @throws PortalException if the folder was invalid
 	* @throws SystemException if a system exception occurred
 	* @see #addTempFileEntry(long, long, String, String, File)
 	* @see com.liferay.portal.kernel.util.TempFileUtil
@@ -696,8 +704,8 @@ public class DLAppServiceSoap {
 	}
 
 	/**
-	* Reverts a file entry to a previous version. A new version will be created
-	* based on the previous version and metadata.
+	* Reverts the file entry to a previous version. A new version will be
+	* created based on the previous version and metadata.
 	*
 	* @param fileEntryId the primary key of the file entry
 	* @param version the version to revert back to
@@ -721,12 +729,12 @@ public class DLAppServiceSoap {
 	}
 
 	/**
-	* Unlocks a folder. This method is primarily used by WebDAV.
+	* Unlocks the folder. This method is primarily used by WebDAV.
 	*
 	* @param repositoryId the primary key of the repository
 	* @param folderId the primary key of the folder
 	* @param lockUuid the lock's universally unique identifier
-	* @throws PortalException if the repository or folder was not found
+	* @throws PortalException if the repository or folder could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void unlockFolder(long repositoryId, long folderId,
@@ -742,13 +750,13 @@ public class DLAppServiceSoap {
 	}
 
 	/**
-	* Unlocks a folder. This method is primarily used by WebDAV.
+	* Unlocks the folder. This method is primarily used by WebDAV.
 	*
 	* @param repositoryId the primary key of the repository
 	* @param parentFolderId the primary key of the parent folder
 	* @param name the folder's name
 	* @param lockUuid the lock's universally unique identifier
-	* @throws PortalException if the repository or folder was not found
+	* @throws PortalException if the repository or folder could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void unlockFolder(long repositoryId, long parentFolderId,
@@ -766,15 +774,14 @@ public class DLAppServiceSoap {
 	}
 
 	/**
-	* Updates a file shortcut to an existing file entry. This method is only
+	* Updates a file shortcut to the existing file entry. This method is only
 	* supported by the Liferay repository.
 	*
-	* @param repositoryId the primary key of the repository
 	* @param fileShortcutId the primary key of the file shortcut
 	* @param folderId the primary key of the file shortcut's parent folder
-	* @param toFileEntryId the primary key of the file entry to point to
-	* @param serviceContext the file entry's service context. Can specify the
-	file entry's asset category IDs, asset tag names, and expando
+	* @param toFileEntryId the primary key of the file shortcut's file entry
+	* @param serviceContext the file shortcut's service context. Can specify
+	the file entry's asset category IDs, asset tag names, and expando
 	bridge attributes.
 	* @return the file shortcut
 	* @throws PortalException if the file shortcut, folder, or file entry could
@@ -800,14 +807,16 @@ public class DLAppServiceSoap {
 	}
 
 	/**
-	* Checks to see if a file is checked out. This method is primarily used by
-	* WebDAV.
+	* Returns <code>true</code> if the file entry is checked out. This method
+	* is primarily used by WebDAV.
 	*
 	* @param repositoryId the primary key for the repository
 	* @param fileEntryId the primary key for the file entry
 	* @param lockUuid the lock's universally unique identifier
-	* @return whether the file entry is checked out
-	* @throws PortalException if the file entry could not be found
+	* @return <code>true</code> if the file entry is checked out;
+	<code>false</code> otherwise
+	* @throws PortalException if the file entry could not be
+	found
 	* @throws SystemException if a system exception occurred
 	*/
 	public static boolean verifyFileEntryCheckOut(long repositoryId,
@@ -826,13 +835,14 @@ public class DLAppServiceSoap {
 	}
 
 	/**
-	* Checks to see if an inheritable lock exists. This method is primarily
-	* used by WebDAV.
+	* Returns <code>true</code> if the inheritable lock exists. This method is
+	* primarily used by WebDAV.
 	*
 	* @param repositoryId the primary key for the repository
 	* @param folderId the primary key for the folder
 	* @param lockUuid the lock's universally unique identifier
-	* @return whether the file entry is checked out
+	* @return <code>true</code> if the inheritable lock exists;
+	<code>false</code> otherwise
 	* @throws PortalException if the folder could not be found
 	* @throws SystemException if a system exception occurred
 	*/
