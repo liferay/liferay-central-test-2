@@ -242,6 +242,14 @@ public class ResourceLocalServiceWrapper implements ResourceLocalService {
 		_resourceLocalService.setBeanIdentifier(beanIdentifier);
 	}
 
+	public void addModelResources(
+		com.liferay.portal.model.AuditedModel auditedModel,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_resourceLocalService.addModelResources(auditedModel, serviceContext);
+	}
+
 	public void addModelResources(long companyId, long groupId, long userId,
 		java.lang.String name, long primKey,
 		java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
@@ -249,14 +257,6 @@ public class ResourceLocalServiceWrapper implements ResourceLocalService {
 			com.liferay.portal.kernel.exception.SystemException {
 		_resourceLocalService.addModelResources(companyId, groupId, userId,
 			name, primKey, groupPermissions, guestPermissions);
-	}
-
-	public void addModelResources(
-		com.liferay.portal.model.AuditedModel auditedModel,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		_resourceLocalService.addModelResources(auditedModel, serviceContext);
 	}
 
 	public void addModelResources(long companyId, long groupId, long userId,
@@ -272,14 +272,6 @@ public class ResourceLocalServiceWrapper implements ResourceLocalService {
 		java.lang.String name, int scope, java.lang.String primKey)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _resourceLocalService.addResource(companyId, name, scope, primKey);
-	}
-
-	public void addResources(long companyId, long groupId,
-		java.lang.String name, boolean portletActions)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		_resourceLocalService.addResources(companyId, groupId, name,
-			portletActions);
 	}
 
 	public void addResources(long companyId, long groupId, long userId,
@@ -301,11 +293,12 @@ public class ResourceLocalServiceWrapper implements ResourceLocalService {
 			primKey, portletActions, addGroupPermissions, addGuestPermissions);
 	}
 
-	public void deleteResource(long companyId, java.lang.String name,
-		int scope, long primKey)
+	public void addResources(long companyId, long groupId,
+		java.lang.String name, boolean portletActions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		_resourceLocalService.deleteResource(companyId, name, scope, primKey);
+		_resourceLocalService.addResources(companyId, groupId, name,
+			portletActions);
 	}
 
 	public void deleteResource(
@@ -313,6 +306,13 @@ public class ResourceLocalServiceWrapper implements ResourceLocalService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_resourceLocalService.deleteResource(auditedModel, scope);
+	}
+
+	public void deleteResource(long companyId, java.lang.String name,
+		int scope, long primKey)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_resourceLocalService.deleteResource(companyId, name, scope, primKey);
 	}
 
 	public void deleteResource(long companyId, java.lang.String name,
@@ -344,12 +344,13 @@ public class ResourceLocalServiceWrapper implements ResourceLocalService {
 		return _resourceLocalService.getResources();
 	}
 
-	public void updateResources(long companyId, java.lang.String name,
-		int scope, java.lang.String primKey, java.lang.String newPrimKey)
+	public void updateResources(
+		com.liferay.portal.model.AuditedModel auditedModel,
+		java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		_resourceLocalService.updateResources(companyId, name, scope, primKey,
-			newPrimKey);
+		_resourceLocalService.updateResources(auditedModel, groupPermissions,
+			guestPermissions);
 	}
 
 	public void updateResources(long companyId, long groupId,
@@ -361,15 +362,6 @@ public class ResourceLocalServiceWrapper implements ResourceLocalService {
 			primKey, groupPermissions, guestPermissions);
 	}
 
-	public void updateResources(
-		com.liferay.portal.model.AuditedModel auditedModel,
-		java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		_resourceLocalService.updateResources(auditedModel, groupPermissions,
-			guestPermissions);
-	}
-
 	public void updateResources(long companyId, long groupId,
 		java.lang.String name, java.lang.String primKey,
 		java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
@@ -377,6 +369,14 @@ public class ResourceLocalServiceWrapper implements ResourceLocalService {
 			com.liferay.portal.kernel.exception.SystemException {
 		_resourceLocalService.updateResources(companyId, groupId, name,
 			primKey, groupPermissions, guestPermissions);
+	}
+
+	public void updateResources(long companyId, java.lang.String name,
+		int scope, java.lang.String primKey, java.lang.String newPrimKey)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_resourceLocalService.updateResources(companyId, name, scope, primKey,
+			newPrimKey);
 	}
 
 	public ResourceLocalService getWrappedResourceLocalService() {

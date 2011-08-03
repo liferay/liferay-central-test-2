@@ -253,6 +253,14 @@ public class ResourceLocalServiceUtil {
 		getService().setBeanIdentifier(beanIdentifier);
 	}
 
+	public static void addModelResources(
+		com.liferay.portal.model.AuditedModel auditedModel,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().addModelResources(auditedModel, serviceContext);
+	}
+
 	public static void addModelResources(long companyId, long groupId,
 		long userId, java.lang.String name, long primKey,
 		java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
@@ -261,14 +269,6 @@ public class ResourceLocalServiceUtil {
 		getService()
 			.addModelResources(companyId, groupId, userId, name, primKey,
 			groupPermissions, guestPermissions);
-	}
-
-	public static void addModelResources(
-		com.liferay.portal.model.AuditedModel auditedModel,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		getService().addModelResources(auditedModel, serviceContext);
 	}
 
 	public static void addModelResources(long companyId, long groupId,
@@ -286,13 +286,6 @@ public class ResourceLocalServiceUtil {
 		java.lang.String primKey)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().addResource(companyId, name, scope, primKey);
-	}
-
-	public static void addResources(long companyId, long groupId,
-		java.lang.String name, boolean portletActions)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		getService().addResources(companyId, groupId, name, portletActions);
 	}
 
 	public static void addResources(long companyId, long groupId, long userId,
@@ -316,11 +309,11 @@ public class ResourceLocalServiceUtil {
 			portletActions, addGroupPermissions, addGuestPermissions);
 	}
 
-	public static void deleteResource(long companyId, java.lang.String name,
-		int scope, long primKey)
+	public static void addResources(long companyId, long groupId,
+		java.lang.String name, boolean portletActions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		getService().deleteResource(companyId, name, scope, primKey);
+		getService().addResources(companyId, groupId, name, portletActions);
 	}
 
 	public static void deleteResource(
@@ -328,6 +321,13 @@ public class ResourceLocalServiceUtil {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteResource(auditedModel, scope);
+	}
+
+	public static void deleteResource(long companyId, java.lang.String name,
+		int scope, long primKey)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().deleteResource(companyId, name, scope, primKey);
 	}
 
 	public static void deleteResource(long companyId, java.lang.String name,
@@ -360,11 +360,13 @@ public class ResourceLocalServiceUtil {
 		return getService().getResources();
 	}
 
-	public static void updateResources(long companyId, java.lang.String name,
-		int scope, java.lang.String primKey, java.lang.String newPrimKey)
+	public static void updateResources(
+		com.liferay.portal.model.AuditedModel auditedModel,
+		java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		getService().updateResources(companyId, name, scope, primKey, newPrimKey);
+		getService()
+			.updateResources(auditedModel, groupPermissions, guestPermissions);
 	}
 
 	public static void updateResources(long companyId, long groupId,
@@ -377,15 +379,6 @@ public class ResourceLocalServiceUtil {
 			groupPermissions, guestPermissions);
 	}
 
-	public static void updateResources(
-		com.liferay.portal.model.AuditedModel auditedModel,
-		java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		getService()
-			.updateResources(auditedModel, groupPermissions, guestPermissions);
-	}
-
 	public static void updateResources(long companyId, long groupId,
 		java.lang.String name, java.lang.String primKey,
 		java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
@@ -394,6 +387,13 @@ public class ResourceLocalServiceUtil {
 		getService()
 			.updateResources(companyId, groupId, name, primKey,
 			groupPermissions, guestPermissions);
+	}
+
+	public static void updateResources(long companyId, java.lang.String name,
+		int scope, java.lang.String primKey, java.lang.String newPrimKey)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().updateResources(companyId, name, scope, primKey, newPrimKey);
 	}
 
 	public static ResourceLocalService getService() {
