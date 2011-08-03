@@ -28,8 +28,7 @@ import java.util.Date;
 public class DLSyncLocalServiceImpl extends DLSyncLocalServiceBaseImpl {
 
 	public DLSync addSync(
-			long fileId, long companyId, long repositoryId,
-			String type)
+			long fileId, long companyId, long repositoryId, String type)
 		throws SystemException {
 
 		Date now = new Date();
