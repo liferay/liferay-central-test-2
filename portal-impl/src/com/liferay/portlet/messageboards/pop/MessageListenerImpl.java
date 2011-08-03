@@ -176,6 +176,8 @@ public class MessageListenerImpl implements MessageListener {
 
 			MBUtil.collectPartContent(message, collector);
 
+			files = collector.getFiles();
+
 			PermissionCheckerUtil.setThreadValues(user);
 
 			ServiceContext serviceContext = new ServiceContext();
@@ -186,8 +188,6 @@ public class MessageListenerImpl implements MessageListener {
 				PortalUtil.getLayoutFullURL(
 					groupId, PortletKeys.MESSAGE_BOARDS));
 			serviceContext.setScopeGroupId(groupId);
-
-			files = collector.getFiles();
 
 			if (parentMessage == null) {
 				MBMessageServiceUtil.addMessage(

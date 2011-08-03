@@ -434,9 +434,9 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 		List<ObjectValuePair<String, File>> ovps =
 			new ArrayList<ObjectValuePair<String, File>>();
 
-		if (!(message.isAttachments() &&
-			portletDataContext.getBooleanParameter(_NAMESPACE, "attachments")))
-		{
+		if (!message.isAttachments() &&
+			portletDataContext.getBooleanParameter(_NAMESPACE, "attachments")) {
+
 			return ovps;
 		}
 
@@ -464,7 +464,7 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 				ovps.add(new ObjectValuePair<String, File>(name, file));
 			}
 
-			if (ovps.size() <= 0) {
+			if (ovps.isEmpty()) {
 				_log.error(
 					"Could not find attachments for message " +
 						message.getMessageId());
@@ -748,8 +748,8 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		List<String> existingFiles = new ArrayList<String>();
 
-		List<ObjectValuePair<String, File>> files =
-			getAttachments(portletDataContext, messageElement, message);
+		List<ObjectValuePair<String, File>> files = getAttachments(
+			portletDataContext, messageElement, message);
 
 		try {
 			ServiceContext serviceContext =
