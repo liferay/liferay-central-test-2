@@ -312,7 +312,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		// Attachments
 
-		if (files.size() > 0) {
+		if (!files.isEmpty()) {
 			long companyId = message.getCompanyId();
 			long repositoryId = CompanyConstants.SYSTEM;
 			String dirName = message.getAttachmentsDir();
@@ -490,7 +490,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			deleteDiscussionSocialActivities(
 				BlogsEntry.class.getName(), messages);
 
-			if (messages.size() > 0) {
+			if (!messages.isEmpty()) {
 				MBMessage message = messages.get(0);
 
 				mbThreadLocalService.deleteThread(message.getThreadId());
@@ -638,7 +638,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 				// Message has children messages
 
-				if (childrenMessages.size() > 0) {
+				if (!childrenMessages.isEmpty()) {
 					Iterator<MBMessage> itr = childrenMessages.iterator();
 
 					while (itr.hasNext()) {
