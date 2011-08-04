@@ -75,7 +75,7 @@ assetBrowserURL.setParameter("groupId", scopeGroupId.toString());
 
 	<%
 	for (AssetRendererFactory assetRendererFactory : AssetRendererFactoryRegistryUtil.getAssetRendererFactories()) {
-		if (assetRendererFactory.isSelectable() && assetRendererFactory.isLinkable()) {
+		if (assetRendererFactory.isLinkable() && assetRendererFactory.isSelectable()) {
 			if (assetEntry != null) {
 				assetBrowserURL.setParameter("refererAssetEntryId", String.valueOf(assetEntry.getEntryId()));
 			}

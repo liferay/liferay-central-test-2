@@ -85,12 +85,14 @@ public class WikiPageAssetRendererFactory extends BaseAssetRendererFactory {
 
 	@Override
 	public boolean isLinkable() {
-		return true;
+		return _LINKABLE;
 	}
 
 	@Override
 	protected String getIconPath(ThemeDisplay themeDisplay) {
 		return themeDisplay.getPathThemeImages() + "/common/pages.png";
 	}
+
+	private static final boolean _LINKABLE = true;
 
 }
