@@ -1572,7 +1572,7 @@ public class StagingImpl implements Staging {
 			try {
 				LayoutBranchLocalServiceUtil.getLayoutBranch(layoutBranchId);
 			}
-			catch(NoSuchLayoutBranchException nlbe) {
+			catch (NoSuchLayoutBranchException nlbe) {
 				LayoutBranch layoutBranch =
 					LayoutBranchLocalServiceUtil.getMasterLayoutBranch(
 						layoutSetBranchId, plid);

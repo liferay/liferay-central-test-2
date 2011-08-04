@@ -198,7 +198,14 @@ else {
 					<portlet:param name="selPlid" value="<%= String.valueOf(selPlid) %>" />
 				</portlet:renderURL>
 
-				<liferay-ui:icon cssClass="manage-layout-set-branches" id="manageLayoutSetBranches" image="configuration" label="<%= true %>" message="manage-site-pages-variations" url="<%= layoutSetBranchesURL %>" />
+				<liferay-ui:icon
+					cssClass="manage-layout-set-branches"
+					id="manageLayoutSetBranches"
+					image="configuration"
+					label="<%= true %>"
+					message="manage-site-pages-variations"
+					url="<%= layoutSetBranchesURL %>"
+				/>
 
 				<aui:script use="aui-base">
 					var layoutSetBranchesLink = A.one('#<portlet:namespace />manageLayoutSetBranches');
