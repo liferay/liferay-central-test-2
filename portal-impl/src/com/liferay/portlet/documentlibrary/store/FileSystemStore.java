@@ -69,7 +69,7 @@ public class FileSystemStore extends BaseStore {
 
 		try {
 			File fileNameVersionFile = getFileNameVersionFile(
-				companyId, repositoryId, fileName, DEFAULT_VERSION);
+				companyId, repositoryId, fileName, VERSION_DEFAULT);
 
 			if (fileNameVersionFile.exists()) {
 				throw new DuplicateFileException(fileNameVersionFile.getPath());
@@ -374,12 +374,12 @@ public class FileSystemStore extends BaseStore {
 		File fileNameDir = getFileNameDir(companyId, repositoryId, fileName);
 
 		if (!fileNameDir.exists()) {
-			return DEFAULT_VERSION;
+			return VERSION_DEFAULT;
 		}
 
 		String[] versionNumbers = FileUtil.listFiles(fileNameDir);
 
-		String headVersionNumber = DEFAULT_VERSION;
+		String headVersionNumber = VERSION_DEFAULT;
 
 		for (String versionNumber : versionNumbers) {
 			if (DLUtil.compareVersions(versionNumber, headVersionNumber) > 0) {

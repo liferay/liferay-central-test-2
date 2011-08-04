@@ -1220,7 +1220,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		if ((Validator.isNumber(articleId)) ||
 			(JournalArticleUtil.fetchByG_A_V(
 				portletDataContext.getScopeGroupId(), articleId,
-					JournalArticleConstants.DEFAULT_VERSION) != null)) {
+					JournalArticleConstants.VERSION_DEFAULT) != null)) {
 
 			autoArticleId = true;
 		}

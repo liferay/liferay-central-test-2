@@ -347,7 +347,7 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 
 	public String getVersion() {
 		return GetterUtil.get(
-			_document.getVersionLabel(), DLFileEntryConstants.DEFAULT_VERSION);
+			_document.getVersionLabel(), DLFileEntryConstants.VERSION_DEFAULT);
 	}
 
 	public long getVersionUserId() {

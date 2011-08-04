@@ -74,7 +74,7 @@ public class S3Store extends BaseStore {
 		try {
 			S3Object s3Object = new S3Object(
 				_s3Bucket,
-				getKey(companyId, repositoryId, fileName, DEFAULT_VERSION));
+				getKey(companyId, repositoryId, fileName, VERSION_DEFAULT));
 
 			s3Object.setDataInputStream(is);
 

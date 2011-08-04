@@ -95,7 +95,7 @@ public class CMISStore extends BaseStore {
 		throws PortalException {
 
 		updateFile(
-			companyId, repositoryId, fileName, DEFAULT_VERSION, null, is);
+			companyId, repositoryId, fileName, VERSION_DEFAULT, null, is);
 	}
 
 	@Override
@@ -263,7 +263,7 @@ public class CMISStore extends BaseStore {
 
 		List<Folder> folders = getFolders(versioningFolder);
 
-		String headVersionNumber = DEFAULT_VERSION;
+		String headVersionNumber = VERSION_DEFAULT;
 
 		for (Folder folder : folders) {
 			String versionNumber = folder.getName();

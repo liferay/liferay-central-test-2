@@ -130,7 +130,7 @@ public class SafeFileNameStoreWrapper implements Store {
 		if (!safeFileName.equals(fileName) &&
 			_store.hasFile(
 				companyId, repositoryId, fileName,
-				DLFileEntryConstants.DEFAULT_VERSION)) {
+				DLFileEntryConstants.VERSION_DEFAULT)) {
 
 			_store.deleteFile(companyId, repositoryId, fileName);
 
@@ -166,7 +166,7 @@ public class SafeFileNameStoreWrapper implements Store {
 		if (!safeFileName.equals(fileName) &&
 			_store.hasFile(
 				companyId, repositoryId, fileName,
-				DLFileEntryConstants.DEFAULT_VERSION)) {
+				DLFileEntryConstants.VERSION_DEFAULT)) {
 
 			return _store.getFile(companyId, repositoryId, fileName);
 		}
@@ -201,7 +201,7 @@ public class SafeFileNameStoreWrapper implements Store {
 		if (!safeFileName.equals(fileName) &&
 			_store.hasFile(
 				companyId, repositoryId, fileName,
-				DLFileEntryConstants.DEFAULT_VERSION)) {
+				DLFileEntryConstants.VERSION_DEFAULT)) {
 
 			return _store.getFileAsStream(companyId, repositoryId, fileName);
 		}
@@ -277,7 +277,7 @@ public class SafeFileNameStoreWrapper implements Store {
 		if (!safeFileName.equals(fileName) &&
 			_store.hasFile(
 				companyId, repositoryId, fileName,
-				DLFileEntryConstants.DEFAULT_VERSION)) {
+				DLFileEntryConstants.VERSION_DEFAULT)) {
 
 			return _store.getFileSize(companyId, repositoryId, fileName);
 		}
@@ -330,7 +330,7 @@ public class SafeFileNameStoreWrapper implements Store {
 		if (!safeFileName.equals(fileName)) {
 			if (_store.hasFile(
 					companyId, repositoryId, fileName,
-					DLFileEntryConstants.DEFAULT_VERSION)) {
+					DLFileEntryConstants.VERSION_DEFAULT)) {
 
 				safeFileName = fileName;
 			}
@@ -414,7 +414,7 @@ public class SafeFileNameStoreWrapper implements Store {
 		if (!safeFileName.equals(fileName)) {
 			if (_store.hasFile(
 					companyId, repositoryId, fileName,
-					DLFileEntryConstants.DEFAULT_VERSION)) {
+					DLFileEntryConstants.VERSION_DEFAULT)) {
 
 				_store.updateFile(
 					companyId, repositoryId, fileName, safeFileName);

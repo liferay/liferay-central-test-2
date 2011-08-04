@@ -552,7 +552,7 @@ public class JournalArticleLocalServiceImpl
 		newArticle.setCreateDate(now);
 		newArticle.setModifiedDate(now);
 		newArticle.setArticleId(newArticleId);
-		newArticle.setVersion(JournalArticleConstants.DEFAULT_VERSION);
+		newArticle.setVersion(JournalArticleConstants.VERSION_DEFAULT);
 		newArticle.setTitle(oldArticle.getTitle());
 		newArticle.setDescription(oldArticle.getDescription());
 
@@ -2035,7 +2035,7 @@ public class JournalArticleLocalServiceImpl
 				article, serviceContext);
 		}
 		else if (article.getVersion() ==
-				 	JournalArticleConstants.DEFAULT_VERSION) {
+				 	JournalArticleConstants.VERSION_DEFAULT) {
 
 			// Indexer
 
@@ -2171,7 +2171,7 @@ public class JournalArticleLocalServiceImpl
 		boolean addDraftAssetEntry = false;
 
 		if (!article.isApproved() &&
-			(article.getVersion() != JournalArticleConstants.DEFAULT_VERSION)) {
+			(article.getVersion() != JournalArticleConstants.VERSION_DEFAULT)) {
 
 			int approvedArticlesCount =
 				journalArticlePersistence.countByG_A_ST(
@@ -2278,7 +2278,7 @@ public class JournalArticleLocalServiceImpl
 
 				if ((oldStatus != WorkflowConstants.STATUS_APPROVED) &&
 					(article.getVersion() !=
-						JournalArticleConstants.DEFAULT_VERSION)) {
+						JournalArticleConstants.VERSION_DEFAULT)) {
 
 					AssetEntry draftAssetEntry = null;
 
@@ -2754,7 +2754,7 @@ public class JournalArticleLocalServiceImpl
 				continue;
 			}
 
-			if ((version > JournalArticleConstants.DEFAULT_VERSION) &&
+			if ((version > JournalArticleConstants.VERSION_DEFAULT) &&
 				(incrementVersion)) {
 
 				Image oldImage = null;

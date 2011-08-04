@@ -25,7 +25,7 @@ import java.io.InputStream;
  */
 public interface Store {
 
-	public static final String DEFAULT_VERSION = "1.0";
+	public static final String VERSION_DEFAULT = "1.0";
 
 	public void addDirectory(long companyId, long repositoryId, String dirName)
 		throws PortalException, SystemException;

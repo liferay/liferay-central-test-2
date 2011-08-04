@@ -938,7 +938,7 @@ public class CMISRepository extends BaseCmisRepository {
 				String currentVersionLabel = currentVersion.getVersionLabel();
 
 				if (Validator.isNull(currentVersionLabel)) {
-					currentVersionLabel = DLFileEntryConstants.DEFAULT_VERSION;
+					currentVersionLabel = DLFileEntryConstants.VERSION_DEFAULT;
 				}
 
 				if (currentVersionLabel.equals(version)) {

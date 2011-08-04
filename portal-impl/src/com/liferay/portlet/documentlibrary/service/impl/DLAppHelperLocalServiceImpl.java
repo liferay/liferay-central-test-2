@@ -249,7 +249,7 @@ public class DLAppHelperLocalServiceImpl
 
 			if (latestFileVersionVersion.equals(fileEntry.getVersion())) {
 				if (!latestFileVersionVersion.equals(
-						DLFileEntryConstants.DEFAULT_VERSION)) {
+						DLFileEntryConstants.VERSION_DEFAULT)) {
 
 					AssetEntry draftAssetEntry = null;
 
@@ -303,7 +303,7 @@ public class DLAppHelperLocalServiceImpl
 			int activityType = DLActivityKeys.UPDATE_FILE_ENTRY;
 
 			if (latestFileVersionVersion.equals(
-					DLFileEntryConstants.DEFAULT_VERSION)) {
+					DLFileEntryConstants.VERSION_DEFAULT)) {
 
 				activityType = DLActivityKeys.ADD_FILE_ENTRY;
 			}

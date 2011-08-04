@@ -94,7 +94,7 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 			getPermissionChecker(), nodeId, ActionKeys.ADD_PAGE);
 
 		return wikiPageLocalService.addPage(
-			getUserId(), nodeId, title, WikiPageConstants.DEFAULT_VERSION,
+			getUserId(), nodeId, title, WikiPageConstants.VERSION_DEFAULT,
 			content, summary, minorEdit, format, true, parentTitle,
 			redirectTitle, serviceContext);
 	}

@@ -241,12 +241,12 @@ public class AdvancedFileSystemStore extends FileSystemStore {
 		File fileNameDir = getFileNameDir(companyId, repositoryId, fileName);
 
 		if (!fileNameDir.exists()) {
-			return DEFAULT_VERSION;
+			return VERSION_DEFAULT;
 		}
 
 		String[] versionNumbers = FileUtil.listFiles(fileNameDir);
 
-		String headVersionNumber = DEFAULT_VERSION;
+		String headVersionNumber = VERSION_DEFAULT;
 
 		for (int i = 0; i < versionNumbers.length; i++) {
 			String versionNumberFragment = versionNumbers[i];

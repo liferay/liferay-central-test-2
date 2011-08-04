@@ -214,7 +214,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			String summary, boolean minorEdit, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		double version = WikiPageConstants.DEFAULT_VERSION;
+		double version = WikiPageConstants.VERSION_DEFAULT;
 		String format = WikiPageConstants.DEFAULT_FORMAT;
 		boolean head = false;
 		String parentTitle = null;
@@ -976,7 +976,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 			// Support moving back to a previously moved title
 
-			if (((page.getVersion() == WikiPageConstants.DEFAULT_VERSION) &&
+			if (((page.getVersion() == WikiPageConstants.VERSION_DEFAULT) &&
 				 (page.getContent().length() < 200)) ||
 				!strict) {
 
@@ -1027,7 +1027,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		// Create stub page at the old location
 
-		double version = WikiPageConstants.DEFAULT_VERSION;
+		double version = WikiPageConstants.VERSION_DEFAULT;
 		String summary = WikiPageConstants.MOVED + " to " + title;
 		String format = page.getFormat();
 		boolean head = true;
@@ -1129,7 +1129,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		boolean addDraftAssetEntry = false;
 
 		if (!page.isApproved() &&
-			(page.getVersion() != WikiPageConstants.DEFAULT_VERSION)) {
+			(page.getVersion() != WikiPageConstants.VERSION_DEFAULT)) {
 
 			int approvedPagesCount = wikiPagePersistence.countByN_T_S(
 				page.getNodeId(), page.getTitle(),
@@ -1183,7 +1183,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		}
 		catch (NoSuchPageException nspe) {
 			return addPage(
-				userId, nodeId, title, WikiPageConstants.DEFAULT_VERSION,
+				userId, nodeId, title, WikiPageConstants.VERSION_DEFAULT,
 				content, summary, minorEdit, format, true, parentTitle,
 				redirectTitle, serviceContext);
 		}
@@ -1336,7 +1336,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			// Asset
 
 			if ((oldStatus != WorkflowConstants.STATUS_APPROVED) &&
-				(page.getVersion() != WikiPageConstants.DEFAULT_VERSION)) {
+				(page.getVersion() != WikiPageConstants.VERSION_DEFAULT)) {
 
 				try {
 					AssetEntry draftAssetEntry =

@@ -152,7 +152,7 @@ public class DLFileEntryLocalServiceImpl
 		dlFileEntry.setTitle(title);
 		dlFileEntry.setDescription(description);
 		dlFileEntry.setFileEntryTypeId(fileEntryTypeId);
-		dlFileEntry.setVersion(DLFileEntryConstants.DEFAULT_VERSION);
+		dlFileEntry.setVersion(DLFileEntryConstants.VERSION_DEFAULT);
 		dlFileEntry.setSize(size);
 		dlFileEntry.setReadCount(DLFileEntryConstants.DEFAULT_READ_COUNT);
 
@@ -163,7 +163,7 @@ public class DLFileEntryLocalServiceImpl
 		DLFileVersion dlFileVersion = addFileVersion(
 			user, dlFileEntry, serviceContext.getModifiedDate(now), extension,
 			mimeType, title, description, null, StringPool.BLANK,
-			fileEntryTypeId, fieldsMap, DLFileEntryConstants.DEFAULT_VERSION,
+			fileEntryTypeId, fieldsMap, DLFileEntryConstants.VERSION_DEFAULT,
 			size, WorkflowConstants.STATUS_DRAFT, serviceContext);
 
 		// Folder
@@ -834,7 +834,7 @@ public class DLFileEntryLocalServiceImpl
 		if ((dlFileVersion != null) && !dlFileVersion.isApproved()) {
 			String version = dlFileVersion.getVersion();
 
-			if (!version.equals(DLFileEntryConstants.DEFAULT_VERSION)) {
+			if (!version.equals(DLFileEntryConstants.VERSION_DEFAULT)) {
 				addDraftAssetEntry = true;
 			}
 		}
@@ -932,7 +932,7 @@ public class DLFileEntryLocalServiceImpl
 			// File entry
 
 			if (dlFileEntry.getVersion().equals(dlFileVersion.getVersion())) {
-				String newVersion = DLFileEntryConstants.DEFAULT_VERSION;
+				String newVersion = DLFileEntryConstants.VERSION_DEFAULT;
 
 				List<DLFileVersion> approvedFileVersions =
 					dlFileVersionPersistence.findByF_S(
@@ -951,7 +951,7 @@ public class DLFileEntryLocalServiceImpl
 			// Indexer
 
 			if (dlFileVersion.getVersion().equals(
-					DLFileEntryConstants.DEFAULT_VERSION)) {
+					DLFileEntryConstants.VERSION_DEFAULT)) {
 
 				Indexer indexer = IndexerRegistryUtil.getIndexer(
 					DLFileEntry.class);

@@ -154,7 +154,7 @@ public class JCRStore extends BaseStore {
 					versionManager.getVersionHistory(contentNode.getPath());
 
 				versionHistory.addVersionLabel(
-					version.getName(), DEFAULT_VERSION, false);
+					version.getName(), VERSION_DEFAULT, false);
 			}
 		}
 		catch (RepositoryException re) {
