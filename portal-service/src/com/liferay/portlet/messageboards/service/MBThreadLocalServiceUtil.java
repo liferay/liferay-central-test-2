@@ -396,7 +396,7 @@ public class MBThreadLocalServiceUtil {
 	}
 
 	/**
-	* @deprecated {@link #incrementViewCounter(long, long, int)}
+	* @deprecated {@link #incrementViewCounter(long, int)}
 	*/
 	public static com.liferay.portlet.messageboards.model.MBThread updateThread(
 		long threadId, int viewCount)

@@ -337,7 +337,7 @@ public interface MBThreadLocalService extends PersistedModelLocalService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* @deprecated {@link #incrementViewCounter(long, long, int)}
+	* @deprecated {@link #incrementViewCounter(long, int)}
 	*/
 	public com.liferay.portlet.messageboards.model.MBThread updateThread(
 		long threadId, int viewCount)
