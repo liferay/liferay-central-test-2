@@ -542,7 +542,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		// Thread
 
 		int count = mbMessagePersistence.countByT_S(
-			message.getThreadId(), WorkflowConstants.STATUS_APPROVED); 
+			message.getThreadId(), WorkflowConstants.STATUS_APPROVED);
 
 		// Message flags
 
@@ -556,7 +556,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			mbMessageFlagService.deleteAnswerFlag(message.getMessageId());
 		}
 
-		if ((count == 1) && 
+		if ((count == 1) &&
 			(message.getStatus() != WorkflowConstants.STATUS_DRAFT)) {
 
 			// Attachments
@@ -676,7 +676,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 			// Thread
 
-			if(message.getStatus() != WorkflowConstants.STATUS_DRAFT) { 
+			if (message.getStatus() != WorkflowConstants.STATUS_DRAFT) {
 				thread.setMessageCount(count - 1);
 			}
 
