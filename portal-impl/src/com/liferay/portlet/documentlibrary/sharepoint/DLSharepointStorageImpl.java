@@ -14,7 +14,6 @@
 
 package com.liferay.portlet.documentlibrary.sharepoint;
 
-import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
@@ -324,9 +323,6 @@ public class DLSharepointStorageImpl extends BaseSharepointStorageImpl {
 		String title = getResourceName(documentPath);
 		String description = StringPool.BLANK;
 		String changeLog = StringPool.BLANK;
-		InputStream is = new UnsyncByteArrayInputStream(
-			sharepointRequest.getBytes());
-		long contentLength = sharepointRequest.getBytes().length;
 
 		ServiceContext serviceContext = new ServiceContext();
 
