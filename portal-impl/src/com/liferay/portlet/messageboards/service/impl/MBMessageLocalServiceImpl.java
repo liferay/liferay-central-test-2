@@ -1621,30 +1621,32 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 					if (parentMessageId !=
 							MBMessageConstants.DEFAULT_PARENT_MESSAGE_ID) {
 
+						GroupedModel groupedModel = null;
 						int activityKey = 0;
-						GroupedModel model = null;
 
 						if (className.equals(BlogsEntry.class.getName())) {
+							groupedModel =
+								blogsEntryPersistence.findByPrimaryKey(classPK);
 							activityKey = BlogsActivityKeys.ADD_COMMENT;
-							model = blogsEntryPersistence.findByPrimaryKey(
-								classPK);
 						}
 						else if (className.equals(WikiPage.class.getName())) {
+							groupedModel = wikiPageLocalService.getPage(
+								classPK);
 							activityKey = WikiActivityKeys.ADD_COMMENT;
-							model = wikiPageLocalService.getPage(classPK);
 						}
 
-						if (model != null) {
-							JSONObject extraData =
+						if (groupedModel != null) {
+							JSONObject extraDataJSONObject =
 								JSONFactoryUtil.createJSONObject();
 
-							extraData.put("messageId", message.getMessageId());
+							extraDataJSONObject.put(
+								"messageId", message.getMessageId());
 
 							socialActivityLocalService.addActivity(
-								userId, model.getGroupId(),
+								userId, groupedModel.getGroupId(),
 								className, classPK,
-								activityKey, extraData.toString(),
-								model.getUserId());
+								activityKey, extraDataJSONObject.toString(),
+								groupedModel.getUserId());
 						}
 					}
 				}
@@ -1762,10 +1764,10 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				continue;
 			}
 
-			JSONObject extraData = JSONFactoryUtil.createJSONObject(
+			JSONObject extraDataJSONObject = JSONFactoryUtil.createJSONObject(
 				socialActivity.getExtraData());
 
-			long extraDataMessageId = extraData.getLong("messageId");
+			long extraDataMessageId = extraDataJSONObject.getLong("messageId");
 
 			if (messageIds.contains(extraDataMessageId)) {
 				socialActivityLocalService.deleteActivity(
