@@ -704,15 +704,17 @@ public class PortalImpl implements Portal {
 
 		String domain = HttpUtil.getDomain(url);
 
-		int index = -1;
+		int pos = -1;
 
-		if ((index = domain.indexOf(CharPool.COLON)) != -1) {
-			domain = domain.substring(0, index);
+		if ((pos = domain.indexOf(CharPool.COLON)) != -1) {
+			domain = domain.substring(0, pos);
 		}
 
 		try {
-			if (CompanyLocalServiceUtil.fetchCompanyByVirtualHost(domain)
-				!= null) {
+			Company company = CompanyLocalServiceUtil.fetchCompanyByVirtualHost(
+				domain);
+
+			if (company != null) {
 				return url;
 			}
 		}
@@ -720,7 +722,10 @@ public class PortalImpl implements Portal {
 		}
 
 		try {
-			if (LayoutSetLocalServiceUtil.fetchLayoutSet(domain) != null) {
+			LayoutSet layoutSet = LayoutSetLocalServiceUtil.fetchLayoutSet(
+				domain);
+
+			if (layoutSet != null) {
 				return url;
 			}
 		}
