@@ -49,12 +49,12 @@ public abstract class BaseRepositoryImpl implements BaseRepository {
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		long size = 0;
 		InputStream is = null;
+		long size = 0;
 
 		try {
-			size = file.length();
 			is = new FileInputStream(file);
+			size = file.length();
 
 			return addFileEntry(
 				folderId, sourceFileName, mimeType, title, description,
@@ -241,12 +241,12 @@ public abstract class BaseRepositoryImpl implements BaseRepository {
 			boolean majorVersion, File file, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		long size = 0;
 		InputStream is = null;
+		long size = 0;
 
 		try {
-			size = file.length();
 			is = new FileInputStream(file);
+			size = file.length();
 
 			return updateFileEntry(
 				fileEntryId, sourceFileName, mimeType, title, description,
@@ -263,7 +263,8 @@ public abstract class BaseRepositoryImpl implements BaseRepository {
 				catch (IOException ioe) {
 				}
 			}
-		}	}
+		}
+	}
 
 	protected CompanyLocalService companyLocalService;
 	protected CounterLocalService counterLocalService;
