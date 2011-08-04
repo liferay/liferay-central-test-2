@@ -1068,18 +1068,14 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			mbThreadLocalService.updateThread(
 				thread.getThreadId(), thread.getViewCount() + 1);
 
-			MBMessage rootMessage = mbMessagePersistence.fetchByPrimaryKey(
-				thread.getRootMessageId());
+			if (thread.getRootMessageUserId() != userId) {
+				MBMessage rootMessage = mbMessagePersistence.findByPrimaryKey(
+					thread.getRootMessageId());
 
-			if (rootMessage != null) {
-				// Social
-
-				if ((userId > 0) && (thread.getRootMessageUserId() != userId)) {
-					socialEquityLogLocalService.addEquityLogs(
-						userId, MBMessage.class.getName(),
-						rootMessage.getMessageId(), ActionKeys.VIEW,
-						StringPool.BLANK);
-				}
+				socialEquityLogLocalService.addEquityLogs(
+					userId, MBMessage.class.getName(),
+					rootMessage.getMessageId(), ActionKeys.VIEW,
+					StringPool.BLANK);
 			}
 		}
 
