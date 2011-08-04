@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portlet.words.util;
+package com.liferay.portal.words;
 
 import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
 import com.liferay.portal.kernel.log.Log;
@@ -21,7 +21,6 @@ import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.Randomizer;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnmodifiableList;
-import com.liferay.portlet.words.ScramblerException;
 import com.liferay.util.ContentUtil;
 import com.liferay.util.jazzy.BasicSpellCheckListener;
 import com.liferay.util.jazzy.InvalidWord;
@@ -33,7 +32,6 @@ import com.swabunga.spell.event.StringWordTokenizer;
 
 import java.io.IOException;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -64,20 +62,10 @@ public class WordsUtil {
 		return _instance._isDictionaryWord(word);
 	}
 
-	public static String[] scramble(String word) throws ScramblerException {
-		Scrambler scrambler = new Scrambler(word);
-
-		return scrambler.scramble();
-	}
-
-	public static String[] unscramble(String word) throws ScramblerException {
-		return _instance._unscramble(word);
-	}
-
 	private WordsUtil() {
 		_dictionaryList = ListUtil.fromArray(StringUtil.splitLines(
 			ContentUtil.get(
-				"com/liferay/portlet/words/dependencies/words.txt")));
+				"com/liferay/portal/words/dependencies/words.txt")));
 
 		_dictionaryList = new UnmodifiableList<String>(_dictionaryList);
 
@@ -88,7 +76,7 @@ public class WordsUtil {
 		_dictionarySet = Collections.unmodifiableSet(_dictionarySet);
 
 		try {
-			_spellDictionary = new SpellDictionaryHashMap();
+			_spellDictionaryHashMap = new SpellDictionaryHashMap();
 
 			String[] dics = new String[] {
 				"center.dic", "centre.dic", "color.dic", "colour.dic",
@@ -97,9 +85,9 @@ public class WordsUtil {
 			};
 
 			for (int i = 0; i < dics.length; i++) {
-				_spellDictionary.addDictionary(new UnsyncStringReader(
+				_spellDictionaryHashMap.addDictionary(new UnsyncStringReader(
 					ContentUtil.get(
-						"com/liferay/portlet/words/dependencies/" + dics[i])));
+						"com/liferay/portal/words/dependencies/" + dics[i])));
 			}
 		}
 		catch (IOException ioe) {
@@ -108,16 +96,17 @@ public class WordsUtil {
 	}
 
 	private List<InvalidWord> _checkSpelling(String text) {
-		SpellChecker checker = new SpellChecker(_spellDictionary);
+		SpellChecker spellChecker = new SpellChecker(_spellDictionaryHashMap);
 
-		BasicSpellCheckListener listener = new BasicSpellCheckListener(text);
+		BasicSpellCheckListener basicSpellCheckListener =
+			new BasicSpellCheckListener(text);
 
-		checker.addSpellCheckListener(listener);
+		spellChecker.addSpellCheckListener(basicSpellCheckListener);
 
-		checker.checkSpelling(
+		spellChecker.checkSpelling(
 			new StringWordTokenizer(new DefaultWordFinder(text)));
 
-		return listener.getInvalidWords();
+		return basicSpellCheckListener.getInvalidWords();
 	}
 
 	private List<String> _getDictionaryList() {
@@ -138,26 +127,12 @@ public class WordsUtil {
 		return _dictionarySet.contains(word);
 	}
 
-	private String[] _unscramble(String word) throws ScramblerException {
-		List<String> validWords = new ArrayList<String>();
-
-		String[] words = scramble(word);
-
-		for (int i = 0; i < words.length; i++) {
-			if (_dictionarySet.contains(words[i])) {
-				validWords.add(words[i]);
-			}
-		}
-
-		return validWords.toArray(new String[validWords.size()]);
-	}
-
 	private static Log _log = LogFactoryUtil.getLog(WordsUtil.class);
 
 	private static WordsUtil _instance = new WordsUtil();
 
 	private List<String> _dictionaryList;
 	private Set<String> _dictionarySet;
-	private SpellDictionaryHashMap _spellDictionary;
+	private SpellDictionaryHashMap _spellDictionaryHashMap;
 
 }

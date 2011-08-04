@@ -1636,14 +1636,6 @@
 		<put name="portlet_content" value="/portlet/wiki_display/view.jsp" />
 	</definition>
 
-	<!-- Words -->
-
-	<definition name="portlet.words" extends="portlet" />
-
-	<definition name="portlet.words.view" extends="portlet.words">
-		<put name="portlet_content" value="/portlet/words/view.jsp" />
-	</definition>
-
 	<!-- Workflow Definitions -->
 
 	<definition name="portlet.workflow_definitions" extends="portlet" />
