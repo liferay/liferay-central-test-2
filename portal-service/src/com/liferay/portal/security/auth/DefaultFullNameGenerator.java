@@ -32,7 +32,7 @@ public class DefaultFullNameGenerator implements FullNameGenerator {
 	public String getFullName(
 		String firstName, String middleName, String lastName) {
 
-		String fullName = createFullName(
+		String fullName = buildFullName(
 			firstName, middleName, lastName, false);
 
 		if (fullName.length() <= UserConstants.FULL_NAME_MAX_LENGTH) {
@@ -51,7 +51,7 @@ public class DefaultFullNameGenerator implements FullNameGenerator {
 			_log.info(sb.toString());
 		}
 
-		fullName = createFullName(firstName, middleName, lastName, true);
+		fullName = buildFullName(firstName, middleName, lastName, true);
 
 		if (fullName.length() <= UserConstants.FULL_NAME_MAX_LENGTH) {
 			return fullName;
@@ -94,7 +94,7 @@ public class DefaultFullNameGenerator implements FullNameGenerator {
 		return new String[] {firstName, middleName, lastName};
 	}
 
-	protected String createFullName(
+	protected String buildFullName(
 		String firstName, String middleName, String lastName,
 		boolean useInitials) {
 
