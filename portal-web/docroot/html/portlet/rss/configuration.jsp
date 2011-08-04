@@ -24,8 +24,6 @@ String redirect = ParamUtil.getString(request, "redirect");
 String typeSelection = ParamUtil.getString(request, "typeSelection");
 
 int assetOrder = ParamUtil.getInteger(request, "assetOrder", -1);
-
-String languageId = LanguageUtil.getLanguageId(request);
 %>
 
 <liferay-portlet:renderURL portletConfiguration="true" var="configurationURL" />
@@ -168,7 +166,7 @@ configurationRenderURL.setParameter("portletResource", portletResource);
 								JournalArticle headerArticle = JournalArticleLocalServiceUtil.getArticle(headerArticleGroupId, headerArticleId);
 								%>
 
-								<%= HtmlUtil.escape(headerArticle.getTitle(languageId, true)) %>
+								<%= HtmlUtil.escape(headerArticle.getTitle(locale)) %>
 							</c:if>
 
 							<aui:button name="selectButton" onClick='<%= renderResponse.getNamespace() + "selectionForHeader();" %>' value="select" />
@@ -183,7 +181,7 @@ configurationRenderURL.setParameter("portletResource", portletResource);
 								JournalArticle footerArticle = JournalArticleLocalServiceUtil.getArticle(footerArticleGroupId, footerArticleId);
 								%>
 
-								<%= HtmlUtil.escape(footerArticle.getTitle(languageId, true)) %>
+								<%= HtmlUtil.escape(footerArticle.getTitle(locale)) %>
 							</c:if>
 
 							<aui:button name="selectButton" onClick='<%= renderResponse.getNamespace() + "selectionForFooter();" %>' value="select" />
