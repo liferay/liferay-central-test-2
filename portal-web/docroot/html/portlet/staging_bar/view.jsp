@@ -181,7 +181,14 @@ if (layout != null) {
 
 						<li class="aui-state-default aui-tab last manage-layout-set-branches-tab">
 							<span class="aui-tab-content">
-								<liferay-ui:icon cssClass="aui-tab-label manage-layout-set-branches" id="manageLayoutSetBranches" image="configuration" label="<%= true %>" message='<%= layout.isPrivateLayout() ? "manage-private-pages-variations" : "manage-public-pages-variations" %>' url="<%= layoutSetBranchesURL %>" />
+								<liferay-ui:icon
+									cssClass="aui-tab-label manage-layout-set-branches"
+									id="manageLayoutSetBranches"
+									image="configuration"
+									label="<%= true %>"
+									message='<%= layout.isPrivateLayout() ? "manage-private-pages-variations" : "manage-public-pages-variations" %>'
+									url="<%= layoutSetBranchesURL %>"
+								/>
 							</span>
 						</li>
 
@@ -347,7 +354,12 @@ if (layout != null) {
 																	<portlet:param name="layoutBranchId" value="<%= String.valueOf(rootLayoutRevision.getLayoutBranchId()) %>" />
 																</portlet:actionURL>
 
-																<liferay-ui:icon cssClass='<%= selected ? "disabled" : StringPool.BLANK %>' image='<%= selected ? "../arrows/01_right" : "copy"  %>' message="<%= curLayoutBranch.getName() %>" url="<%= selected ? null : rootLayoutRevisionURL %>" />
+																<liferay-ui:icon
+																	cssClass='<%= selected ? "disabled" : StringPool.BLANK %>'
+																	image='<%= selected ? "../arrows/01_right" : "copy"  %>'
+																	message="<%= curLayoutBranch.getName() %>"
+																	url="<%= selected ? null : rootLayoutRevisionURL %>"
+																/>
 
 															<%
 															}
@@ -360,7 +372,14 @@ if (layout != null) {
 
 											<li class="aui-state-default aui-tab last manage-page-variations-tab">
 												<span class="aui-tab-content">
-													<liferay-ui:icon cssClass="aui-tab-label manage-layout-branches-tab" id="manageLayoutRevisions" image="configuration" label="<%= true %>" message="manage-page-variations" url="<%= layoutBranchesURL %>" />
+													<liferay-ui:icon
+														cssClass="aui-tab-label manage-layout-branches-tab"
+														id="manageLayoutRevisions"
+														image="configuration"
+														label="<%= true %>"
+														message="manage-page-variations"
+														url="<%= layoutBranchesURL %>"
+													/>
 												</span>
 											</li>
 										</ul>
@@ -381,7 +400,14 @@ if (layout != null) {
 										</div>
 
 										<c:if test="<%= layoutRevisions.size() <= 1 %>">
-											<liferay-ui:icon cssClass="manage-layout-branches-tab" id="manageLayoutRevisions" image="configuration" label="<%= true %>" message="manage-page-variations" url="<%= layoutBranchesURL %>" />
+											<liferay-ui:icon
+												cssClass="manage-layout-branches-tab"
+												id="manageLayoutRevisions"
+												image="configuration"
+												label="<%= true %>"
+												message="manage-page-variations"
+												url="<%= layoutBranchesURL %>"
+											/>
 										</c:if>
 									</div>
 								</div>
