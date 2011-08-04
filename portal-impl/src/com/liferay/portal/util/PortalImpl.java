@@ -84,6 +84,7 @@ import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutSet;
+import com.liferay.portal.model.LayoutType;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.LayoutTypePortletConstants;
 import com.liferay.portal.model.Organization;
@@ -1916,8 +1917,10 @@ public class PortalImpl implements Portal {
 		variables.put("liferay:mainPath", mainPath);
 		variables.put("liferay:plid", String.valueOf(layout.getPlid()));
 
+		LayoutType layoutType = layout.getLayoutType();
+
 		UnicodeProperties typeSettingsProperties =
-			layout.getLayoutType().getTypeSettingsProperties();
+			layoutType.getTypeSettingsProperties();
 
 		variables.putAll(typeSettingsProperties);
 
@@ -1969,11 +1972,13 @@ public class PortalImpl implements Portal {
 		String layoutActualURL = getLayoutActualURL(layout, mainPath);
 
 		if (Validator.isNotNull(queryString)) {
-			layoutActualURL = layoutActualURL + queryString;
+			layoutActualURL = layoutActualURL.concat(queryString);
 		}
 		else if (params.isEmpty()) {
+			LayoutType layoutType = layout.getLayoutType();
+
 			UnicodeProperties typeSettingsProperties =
-				layout.getLayoutType().getTypeSettingsProperties();
+				layoutType.getTypeSettingsProperties();
 
 			queryString = typeSettingsProperties.getProperty("query-string");
 
@@ -1981,7 +1986,8 @@ public class PortalImpl implements Portal {
 				layoutActualURL.contains(StringPool.QUESTION)) {
 
 				layoutActualURL =
-					layoutActualURL + StringPool.AMPERSAND + queryString;
+					layoutActualURL.concat(StringPool.AMPERSAND).concat(
+						queryString);
 			}
 		}
 
