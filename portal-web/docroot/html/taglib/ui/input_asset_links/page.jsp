@@ -76,12 +76,12 @@ assetBrowserURL.setParameter("groupId", scopeGroupId.toString());
 	<%
 	for (AssetRendererFactory assetRendererFactory : AssetRendererFactoryRegistryUtil.getAssetRendererFactories()) {
 		if (assetRendererFactory.isSelectable()) {
+			if (assetEntry != null) {
+				assetBrowserURL.setParameter("refererAssetEntryId", String.valueOf(assetEntry.getEntryId()));
+			}
+
 			assetBrowserURL.setParameter("typeSelection", assetRendererFactory.getClassName());
 			assetBrowserURL.setParameter("callback", randomNamespace + "addAssetLink");
-
-			if (assetEntry != null) {
-				assetBrowserURL.setParameter("refererEntryId", String.valueOf(assetEntry.getEntryId()));
-			}
 
 			String href = "javascript:" + randomNamespace + "openAssetBrowser('" + assetBrowserURL.toString() + "')";
 		%>
