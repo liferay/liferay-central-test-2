@@ -218,9 +218,9 @@ public class DDLRecordSetLocalServiceImpl
 	}
 
 	public List<DDLRecordSet> search(
-			long companyId, long groupId, String name,
-			String description, int scope, boolean andOperator, int start,
-			int end, OrderByComparator orderByComparator)
+			long companyId, long groupId, String name, String description,
+			int scope, boolean andOperator, int start, int end,
+			OrderByComparator orderByComparator)
 		throws SystemException {
 
 		return ddlRecordSetFinder.findByC_G_N_D_S(
@@ -246,8 +246,7 @@ public class DDLRecordSetLocalServiceImpl
 	}
 
 	public DDLRecordSet updateMinDisplayRows(
-			long recordSetId, int minDisplayRows,
-			ServiceContext serviceContext)
+			long recordSetId, int minDisplayRows, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		DDLRecordSet recordSet = ddlRecordSetPersistence.findByPrimaryKey(
