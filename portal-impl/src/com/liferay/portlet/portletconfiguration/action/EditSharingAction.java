@@ -135,8 +135,7 @@ public class EditSharingAction extends EditConfigurationAction {
 			actionRequest, "widgetShowAddAppLink");
 
 		preferences.setValue(
-			"lfrWidgetShowAddAppLink",
-			String.valueOf(widgetShowAddAppLink));
+			"lfrWidgetShowAddAppLink", String.valueOf(widgetShowAddAppLink));
 	}
 
 	protected void updateFacebook(
@@ -151,11 +150,10 @@ public class EditSharingAction extends EditConfigurationAction {
 			actionRequest, "facebookShowAddAppLink");
 
 		preferences.setValue("lfrFacebookApiKey", facebookAPIKey);
-		preferences.setValue(
-			"lfrFacebookCanvasPageUrl", facebookCanvasPageURL);
+		preferences.setValue("lfrFacebookCanvasPageUrl", facebookCanvasPageURL);
 		preferences.setValue(
 			"lfrFacebookShowAddAppLink",
-				String.valueOf(facebookShowAddAppLink));
+			String.valueOf(facebookShowAddAppLink));
 	}
 
 	protected void updateFriends(
@@ -178,8 +176,7 @@ public class EditSharingAction extends EditConfigurationAction {
 			actionRequest, "iGoogleShowAddAppLink");
 
 		preferences.setValue(
-			"lfrIgoogleShowAddAppLink",
-			String.valueOf(iGoogleShowAddAppLink));
+			"lfrIgoogleShowAddAppLink", String.valueOf(iGoogleShowAddAppLink));
 	}
 
 	protected void updateNetvibes(

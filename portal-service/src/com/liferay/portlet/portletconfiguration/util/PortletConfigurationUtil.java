@@ -36,8 +36,7 @@ public class PortletConfigurationUtil {
 
 		String customCSSClassName = StringPool.BLANK;
 
-		String css = portletSetup.getValue(
-			"portletSetupCss", StringPool.BLANK);
+		String css = portletSetup.getValue("portletSetupCss", StringPool.BLANK);
 
 		if (Validator.isNotNull(css)) {
 			JSONObject cssJSON = PortletSetupUtil.cssToJSON(portletSetup, css);
@@ -90,7 +89,7 @@ public class PortletConfigurationUtil {
 						"portletSetupTitle_" + defaultLanguageId,
 						portletTitle);
 					portletSetup.setValue(
-						"portletSetupUseCustomTitle", "true");
+						"portletSetupUseCustomTitle", Boolean.TRUE.toString());
 
 					portletSetup.store();
 				}

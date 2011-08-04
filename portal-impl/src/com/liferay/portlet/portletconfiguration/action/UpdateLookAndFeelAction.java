@@ -112,8 +112,7 @@ public class UpdateLookAndFeelAction extends JSONAction {
 			}
 
 			if (Validator.isNotNull(title)) {
-				portletSetup.setValue(
-					"portletSetupTitle_" + languageId, title);
+				portletSetup.setValue("portletSetupTitle_" + languageId, title);
 			}
 			else {
 				portletSetup.reset("portletSetupTitle_" + languageId);
@@ -127,7 +126,7 @@ public class UpdateLookAndFeelAction extends JSONAction {
 
 		if (Validator.isNotNull(linkToLayoutUuid)) {
 			portletSetup.setValue(
-				"portletSetupLinkToLayoutUuid",linkToLayoutUuid);
+				"portletSetupLinkToLayoutUuid", linkToLayoutUuid);
 		}
 		else {
 			portletSetup.reset("portletSetupLinkToLayoutUuid");
