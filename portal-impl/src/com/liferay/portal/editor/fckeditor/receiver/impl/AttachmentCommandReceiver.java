@@ -16,7 +16,6 @@ package com.liferay.portal.editor.fckeditor.receiver.impl;
 
 import com.liferay.portal.editor.fckeditor.command.CommandArgument;
 import com.liferay.portal.editor.fckeditor.exception.FCKException;
-import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -67,19 +66,13 @@ public class AttachmentCommandReceiver extends BaseCommandReceiver {
 
 			long nodeId = page.getNodeId();
 
-			List<ObjectValuePair<String, byte[]>> files =
-				new ArrayList<ObjectValuePair<String, byte[]>>();
+			List<ObjectValuePair<String, File>> files =
+				new ArrayList<ObjectValuePair<String, File>>();
 
-			if (file != null) {
-				byte[] bytes = FileUtil.getBytes(file);
+			ObjectValuePair<String, File> ovp =
+				new ObjectValuePair<String, File>(fileName, file);
 
-				if ((bytes != null) && (bytes.length > 0)) {
-					ObjectValuePair<String, byte[]> ovp =
-						new ObjectValuePair<String, byte[]>(fileName, bytes);
-
-					files.add(ovp);
-				}
-			}
+			files.add(ovp);
 
 			WikiPageServiceUtil.addPageAttachments(nodeId, title, files);
 		}
@@ -119,32 +112,36 @@ public class AttachmentCommandReceiver extends BaseCommandReceiver {
 
 		HttpServletRequest request = commandArgument.getHttpServletRequest();
 
-		long resourcePK = ParamUtil.getLong(request, "wikiPageResourcePrimKey");
+		long wikiPageResourcePrimKey = ParamUtil.getLong(
+			request, "wikiPageResourcePrimKey");
 
-		WikiPage page = WikiPageLocalServiceUtil.getPage(resourcePK);
+		WikiPage wikiPage = WikiPageLocalServiceUtil.getPage(
+			wikiPageResourcePrimKey);
 
 		long repositoryId = CompanyConstants.SYSTEM;
 
-		String dirName = page.getAttachmentsDir();
+		String dirName = wikiPage.getAttachmentsDir();
 
 		String[] fileNames = null;
 
 		try {
 			fileNames = DLStoreUtil.getFileNames(
-				page.getCompanyId(), repositoryId, dirName);
+				wikiPage.getCompanyId(), repositoryId, dirName);
 		}
 		catch (NoSuchDirectoryException nsde) {
 			DLStoreUtil.addDirectory(
-				page.getCompanyId(), repositoryId, dirName);
+				wikiPage.getCompanyId(), repositoryId, dirName);
+
 			fileNames = DLStoreUtil.getFileNames(
-				page.getCompanyId(), repositoryId, dirName);
+				wikiPage.getCompanyId(), repositoryId, dirName);
 		}
 
 		for (String fileName : fileNames) {
 			byte[] fileEntry = DLStoreUtil.getFile(
-				page.getCompanyId(), repositoryId, fileName);
+				wikiPage.getCompanyId(), repositoryId, fileName);
 
 			String[] parts = StringUtil.split(fileName, StringPool.SLASH);
+
 			fileName = parts[3];
 
 			Element fileElement = document.createElement("File");

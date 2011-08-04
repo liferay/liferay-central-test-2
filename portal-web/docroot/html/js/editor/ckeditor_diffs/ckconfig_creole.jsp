@@ -21,15 +21,14 @@
 String cssPath = ParamUtil.getString(request, "cssPath");
 String cssClasses = ParamUtil.getString(request, "cssClasses");
 String languageId = ParamUtil.getString(request, "languageId");
-String attachmentURLPrefix = ParamUtil.getString(request, "attachmentURLPrefix");
 long wikiPageResourcePrimKey = ParamUtil.getLong(request, "wikiPageResourcePrimKey");
+String attachmentURLPrefix = ParamUtil.getString(request, "attachmentURLPrefix");
 
 String linkButtonBar = "['Link', 'Unlink']";
 
 if (wikiPageResourcePrimKey > 0) {
 	linkButtonBar =  "['Link', 'Unlink', 'Image']";
 }
-
 %>
 
 CKEDITOR.config.height = 265;

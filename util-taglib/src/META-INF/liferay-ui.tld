@@ -1134,8 +1134,8 @@
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
-        <attribute>
-			<name>fileBrowseParams</name>
+		<attribute>
+			<name>fileBrowserParams</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>

@@ -528,7 +528,6 @@ if (currentFolderParam) {
 					</replacevalue>
 				</replace>
 
-
 				<replace file="docroot/html/js/editor/fckeditor/editor/filemanager/browser/liferay/browser.html">
 					<replacetoken><![CDATA[sUrl += '&CurrentFolder=' + encodeURIComponent( this.CurrentFolder ) ;]]></replacetoken>
 					<replacevalue><![CDATA[sUrl += '&CurrentFolder=' + encodeURIComponent( oConnector.CurrentFolder ) ;]]></replacevalue>
@@ -589,7 +588,7 @@ if (currentFolderParam) {
 				<replace file="docroot/html/js/editor/fckeditor/editor/filemanager/browser/liferay/frmresourcetype.html">
 					<replacetoken><![CDATA[var aTypes = []]></replacetoken>
 					<replacevalue><![CDATA[var customTypes = [
-	['Attachment','Attachment']
+	['Attachment', 'Attachment']
 ];
 
 var defaultTypes = []]>
@@ -608,8 +607,7 @@ var defaultTypes = []]>
 
 	var len = customTypes.length;
 
-	for ( i = 0; i < len; i++ )
-	{
+	for ( i = 0; i < len; i++ ) {
 		if ( customTypes[i][0] == oConnector.ResourceType )
 			AddSelectOption( oCombo, customTypes[i][1], customTypes[i][0] ) ;]]>
 					</replacevalue>

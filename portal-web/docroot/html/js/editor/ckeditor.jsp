@@ -38,10 +38,10 @@ if (!ckEditorConfigFileName.equals("ckconfig.jsp")) {
 }
 
 Map<String, String> configParamsMap = (Map<String, String>)request.getAttribute("liferay-ui:input-editor:configParams");
-Map<String, String> fileBrowseParamsMap = (Map<String, String>)request.getAttribute("liferay-ui:input-editor:fileBrowseParams");
+Map<String, String> fileBrowserParamsMap = (Map<String, String>)request.getAttribute("liferay-ui:input-editor:fileBrowserParams");
 
 String configParams = marshallParams(configParamsMap);
-String fileBrowseParams = marshallParams(fileBrowseParamsMap);
+String fileBrowserParams = marshallParams(fileBrowserParamsMap);
 
 String cssClass = GetterUtil.getString((String)request.getAttribute("liferay-ui:input-editor:cssClass"));
 String cssClasses = GetterUtil.getString((String)request.getAttribute("liferay-ui:input-editor:cssClasses"));
@@ -147,7 +147,7 @@ String toolbarSet = (String)request.getAttribute("liferay-ui:input-editor:toolba
 		}
 
 		<%
-		StringBundler sb = new StringBundler(10);
+		StringBundler sb = new StringBundler(9);
 
 		sb.append(mainPath);
 		sb.append("/portal/fckeditor?p_l_id=");
@@ -158,7 +158,6 @@ String toolbarSet = (String)request.getAttribute("liferay-ui:input-editor:toolba
 		sb.append(HttpUtil.encodeURL(doAsUserId));
 		sb.append("&doAsGroupId=");
 		sb.append(HttpUtil.encodeURL(String.valueOf(doAsGroupId)));
-		sb.append(fileBrowseParams);
 
 		String connectorURL = HttpUtil.encodeURL(sb.toString());
 		%>
@@ -167,7 +166,7 @@ String toolbarSet = (String)request.getAttribute("liferay-ui:input-editor:toolba
 			'<%= name %>',
 			{
 				customConfig: '<%= PortalUtil.getPathContext() %>/html/js/editor/ckeditor/<%= ckEditorConfigFileName %>?p_l_id=<%= plid %>&p_p_id=<%= HttpUtil.encodeURL(portletId) %>&p_main_path=<%= HttpUtil.encodeURL(mainPath) %>&doAsUserId=<%= HttpUtil.encodeURL(doAsUserId) %>&doAsGroupId=<%= HttpUtil.encodeURL(String.valueOf(doAsGroupId)) %>&cssPath=<%= HttpUtil.encodeURL(themeDisplay.getPathThemeCss()) %>&cssClasses=<%= HttpUtil.encodeURL(cssClasses) %>&imagesPath=<%= HttpUtil.encodeURL(themeDisplay.getPathThemeImages()) %>&languageId=<%= HttpUtil.encodeURL(LocaleUtil.toLanguageId(locale)) %><%= configParams %>',
-				filebrowserBrowseUrl: '<%= PortalUtil.getPathContext() %>/html/js/editor/ckeditor/editor/filemanager/browser/liferay/browser.html?Connector=<%= connectorURL %><%= fileBrowseParams %>',
+				filebrowserBrowseUrl: '<%= PortalUtil.getPathContext() %>/html/js/editor/ckeditor/editor/filemanager/browser/liferay/browser.html?Connector=<%= connectorURL %><%= fileBrowserParams %>',
 				filebrowserUploadUrl: null,
 				toolbar: '<%= TextFormatter.format(HtmlUtil.escape(toolbarSet), TextFormatter.M) %>'
 			}

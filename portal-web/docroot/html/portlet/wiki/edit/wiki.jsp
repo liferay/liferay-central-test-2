@@ -37,32 +37,31 @@ String content = BeanParamUtil.getString(wikiPage, request, "content");
 	<td class="lfr-top" width="70%">
 
 		<%
-		String attachmentURLPrefix = StringPool.BLANK;
-
 		long resourcePrimKey = 0;
 
-		if (wikiPage != null) {
-			attachmentURLPrefix = themeDisplay.getPortalURL() + themeDisplay.getPathMain() + "/wiki/get_page_attachment?p_l_id=" + themeDisplay.getPlid() + "&nodeId=" + wikiPage.getNodeId() + "&title=" + HttpUtil.encodeURL(wikiPage.getTitle()) + "&fileName=";
+		String attachmentURLPrefix = StringPool.BLANK;
 
+		if (wikiPage != null) {
 			resourcePrimKey = wikiPage.getResourcePrimKey();
+
+			attachmentURLPrefix = themeDisplay.getPortalURL() + themeDisplay.getPathMain() + "/wiki/get_page_attachment?p_l_id=" + themeDisplay.getPlid() + "&nodeId=" + wikiPage.getNodeId() + "&title=" + HttpUtil.encodeURL(wikiPage.getTitle()) + "&fileName=";
 		}
 
 		Map<String,String> configParams = new HashMap();
 
 		configParams.put("attachmentURLPrefix", attachmentURLPrefix);
-
 		configParams.put("wikiPageResourcePrimKey", String.valueOf(resourcePrimKey));
 
-		Map<String,String> fileBrowseParams = new HashMap();
+		Map<String,String> fileBrowserParams = new HashMap();
 
-		fileBrowseParams.put("wikiPageResourcePrimKey", String.valueOf(resourcePrimKey));
-		fileBrowseParams.put("Type", "Attachment");
+		fileBrowserParams.put("Type", "Attachment");
+		fileBrowserParams.put("wikiPageResourcePrimKey", String.valueOf(resourcePrimKey));
 		%>
 
 		<liferay-ui:input-editor
 			configParams="<%= configParams %>"
 			editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>"
-			fileBrowseParams="<%= fileBrowseParams %>"
+			fileBrowserParams="<%= fileBrowserParams %>"
 			toolbarSet="creole"
 			width="100%"
 		/>
