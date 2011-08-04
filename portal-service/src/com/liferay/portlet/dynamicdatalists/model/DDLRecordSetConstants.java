@@ -12,24 +12,17 @@
  * details.
  */
 
-package com.liferay.portlet.dynamicdatalists.util;
+package com.liferay.portlet.dynamicdatalists.model;
 
 /**
- * @author Marcellus Tavares
- * @author Eduardo Lundgren
+ * @author Brian Wing Shun Chan
  */
-public class DDLConstants {
+public class DDLRecordSetConstants {
 
-	public static final String RESERVED_DDM_STRUCTURE_ID =
-		"reserved_ddm_structure_id";
+	public static final int MIN_DISPLAY_ROWS_DEFAULT = 20;
 
-	public static final String RESERVED_RECORD_SET_DESCRIPTION =
-		"reserved_record_set_description";
+	public static final int SCOPE_ANY = -1;
 
-	public static final String RESERVED_RECORD_SET_ID =
-		"reserved_record_set_id";
-
-	public static final String RESERVED_RECORD_SET_NAME =
-		"reserved_record_set_name";
+	public static final int SCOPE_DYNAMIC_DATA_LISTS = 0;
 
 }

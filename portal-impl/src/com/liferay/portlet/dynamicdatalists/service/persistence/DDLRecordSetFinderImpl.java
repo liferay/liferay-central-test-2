@@ -26,8 +26,8 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portlet.dynamicdatalists.model.DDLRecordSet;
+import com.liferay.portlet.dynamicdatalists.model.DDLRecordSetConstants;
 import com.liferay.portlet.dynamicdatalists.model.impl.DDLRecordSetImpl;
-import com.liferay.portlet.dynamicdatalists.util.DDLConstants;
 import com.liferay.util.dao.orm.CustomSQLUtil;
 
 import java.util.Iterator;
@@ -144,7 +144,7 @@ public class DDLRecordSetFinderImpl extends BasePersistenceImpl<DDLRecordSet>
 				sql = StringUtil.replace(sql, "(groupId = ?) AND", "");
 			}
 
-			if (scope == DDLConstants.SCOPE_ANY) {
+			if (scope == DDLRecordSetConstants.SCOPE_ANY) {
 				sql = StringUtil.replace(sql, "(scope = ?) AND", "");
 			}
 
@@ -166,7 +166,7 @@ public class DDLRecordSetFinderImpl extends BasePersistenceImpl<DDLRecordSet>
 				qPos.add(groupId);
 			}
 
-			if (scope != DDLConstants.SCOPE_ANY) {
+			if (scope != DDLRecordSetConstants.SCOPE_ANY) {
 				qPos.add(scope);
 			}
 
@@ -213,7 +213,7 @@ public class DDLRecordSetFinderImpl extends BasePersistenceImpl<DDLRecordSet>
 				sql = StringUtil.replace(sql, "(groupId = ?) AND", "");
 			}
 
-			if (scope == DDLConstants.SCOPE_ANY) {
+			if (scope == DDLRecordSetConstants.SCOPE_ANY) {
 				sql = StringUtil.replace(sql, "(scope = ?) AND", "");
 			}
 
@@ -236,7 +236,7 @@ public class DDLRecordSetFinderImpl extends BasePersistenceImpl<DDLRecordSet>
 				qPos.add(groupId);
 			}
 
-			if (scope != DDLConstants.SCOPE_ANY) {
+			if (scope != DDLRecordSetConstants.SCOPE_ANY) {
 				qPos.add(scope);
 			}
 

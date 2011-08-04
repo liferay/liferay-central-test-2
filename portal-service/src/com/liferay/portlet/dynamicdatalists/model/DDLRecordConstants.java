@@ -21,6 +21,8 @@ public class DDLRecordConstants {
 
 	public static final String DEFAULT_VERSION = "1.0";
 
+	public static final int DISPLAY_INDEX_DEFAULT = 0;
+
 	public static String getClassName() {
 		return DDLRecord.class.getName();
 	}
