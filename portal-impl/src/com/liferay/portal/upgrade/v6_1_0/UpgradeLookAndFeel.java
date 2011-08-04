@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2011 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -15,17 +15,17 @@
 package com.liferay.portal.upgrade.v6_1_0;
 
 import com.liferay.portal.kernel.upgrade.BaseUpgradePortletPreferences;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 
-import javax.portlet.PortletPreferences;
 import java.util.Map;
 
+import javax.portlet.PortletPreferences;
+
 /**
- *
  * @author Eudaldo Alonso
  */
-public class UpgradePortletLookAndFeelPreferences
-	extends BaseUpgradePortletPreferences {
+public class UpgradeLookAndFeel extends BaseUpgradePortletPreferences {
 
 	@Override
 	protected String getUpdatePortletPreferencesWhereClause() {
@@ -46,8 +46,8 @@ public class UpgradePortletLookAndFeelPreferences
 
 		for (String oldName : preferencesMap.keySet()) {
 			if (oldName.startsWith("portlet-setup-title-")) {
-				String newName = oldName.replaceFirst(
-					"portlet-setup-title-", "portlet-setup-title_");
+				String newName = StringUtil.replaceFirst(
+					oldName, "portlet-setup-title-", "portlet-setup-title_");
 
 				String[] values = preferencesMap.get(oldName);
 
@@ -59,4 +59,5 @@ public class UpgradePortletLookAndFeelPreferences
 
 		return PortletPreferencesFactoryUtil.toXML(portletPreferences);
 	}
+
 }
