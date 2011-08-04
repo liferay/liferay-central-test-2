@@ -25,6 +25,12 @@ AssetEntry assetEntry = (AssetEntry)request.getAttribute("view.jsp-assetEntry");
 AssetRendererFactory assetRendererFactory = (AssetRendererFactory)request.getAttribute("view.jsp-assetRendererFactory");
 AssetRenderer assetRenderer = (AssetRenderer)request.getAttribute("view.jsp-assetRenderer");
 
+Group stageableGroup = themeDisplay.getScopeGroup();
+
+if (stageableGroup.isLayout()) {
+	stageableGroup = layout.getGroup();
+}
+
 String title = (String)request.getAttribute("view.jsp-title");
 
 if (Validator.isNull(title)) {
@@ -33,15 +39,13 @@ if (Validator.isNull(title)) {
 
 boolean show = ((Boolean)request.getAttribute("view.jsp-show")).booleanValue();
 
-request.setAttribute("view.jsp-showIconLabel", false);
+PortletURL editPortletURL = assetRenderer.getURLEdit(liferayPortletRequest, liferayPortletResponse);
 
 PortletURL viewFullContentURL = renderResponse.createRenderURL();
 
 viewFullContentURL.setParameter("struts_action", "/asset_publisher/view_content");
 viewFullContentURL.setParameter("assetEntryId", String.valueOf(assetEntry.getEntryId()));
 viewFullContentURL.setParameter("type", assetRendererFactory.getType());
-
-PortletURL editPortletURL = assetRenderer.getURLEdit(liferayPortletRequest, liferayPortletResponse);
 
 if (Validator.isNotNull(assetRenderer.getUrlTitle())) {
 	if (assetRenderer.getGroupId() != scopeGroupId) {
@@ -59,11 +63,7 @@ String viewURL = viewInContext ? assetRenderer.getURLViewInContext(liferayPortle
 
 viewURL = _checkViewURL(viewURL, currentURL, themeDisplay);
 
-Group stageableGroup = themeDisplay.getScopeGroup();
-
-if (themeDisplay.getScopeGroup().isLayout()) {
-	stageableGroup = layout.getGroup();
-}
+request.setAttribute("view.jsp-showIconLabel", false);
 %>
 
 <c:if test="<%= assetEntryIndex == 0 %>">
