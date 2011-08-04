@@ -281,7 +281,21 @@ public class SubscriptionSender implements Serializable {
 		this.replyToAddress = replyToAddress;
 	}
 
+	/**
+	 * @see {@link
+	 *      com.liferay.portal.kernel.search.BaseIndexer#getParentGroupId(long)}
+	 */
 	public void setScopeGroupId(long scopeGroupId) {
+		try {
+			Group group = GroupLocalServiceUtil.getGroup(scopeGroupId);
+
+			if (group.isLayout()) {
+				groupId = group.getParentGroupId();
+			}
+		}
+		catch (Exception e) {
+		}
+
 		this.scopeGroupId = scopeGroupId;
 	}
 
@@ -363,8 +377,8 @@ public class SubscriptionSender implements Serializable {
 		if (!GroupLocalServiceUtil.hasUserGroup(user.getUserId(), groupId) &&
 			!group.isCompany() &&
 			(LayoutServiceUtil.getDefaultPlid(
-				groupId, scopeGroupId, false, portletId)
-					== LayoutConstants.DEFAULT_PLID)) {
+				groupId, scopeGroupId, false, portletId) ==
+					LayoutConstants.DEFAULT_PLID)) {
 
 			if (_log.isInfoEnabled()) {
 				_log.info(
@@ -570,7 +584,6 @@ public class SubscriptionSender implements Serializable {
 	protected String fromAddress;
 	protected String fromName;
 	protected long groupId;
-	protected long scopeGroupId;
 	protected boolean htmlFormat;
 	protected String inReplyTo;
 	protected Map<Locale, String> localizedBodyMap;
@@ -578,6 +591,7 @@ public class SubscriptionSender implements Serializable {
 	protected String mailId;
 	protected String portletId;
 	protected String replyToAddress;
+	protected long scopeGroupId;
 	protected SMTPAccount smtpAccount;
 	protected String subject;
 	protected long userId;
