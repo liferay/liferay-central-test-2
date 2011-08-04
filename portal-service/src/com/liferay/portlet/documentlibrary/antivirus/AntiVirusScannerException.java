@@ -19,12 +19,22 @@ import com.liferay.portal.kernel.exception.PortalException;
 /**
  * @author Michael C. Han
  */
-public class AntiVirusScannerException extends PortalException {
-	public AntiVirusScannerException(String message) {
-		super(message);
+public class AntivirusScannerException extends PortalException {
+
+	public AntivirusScannerException() {
+		super();
 	}
 
-	public AntiVirusScannerException(String message, Throwable cause) {
-		super(message, cause);
+	public AntivirusScannerException(String msg) {
+		super(msg);
 	}
+
+	public AntivirusScannerException(String msg, Throwable cause) {
+		super(msg, cause);
+	}
+
+	public AntivirusScannerException(Throwable cause) {
+		super(cause);
+	}
+
 }

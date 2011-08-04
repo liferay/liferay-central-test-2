@@ -14,25 +14,18 @@
 
 package com.liferay.portlet.documentlibrary.antivirus;
 
-import com.liferay.portal.kernel.exception.SystemException;
-
-import java.io.File;
-import java.io.InputStream;
+import com.liferay.portal.kernel.util.InstancePool;
+import com.liferay.portal.util.PropsValues;
 
 /**
- * @author Michael C. Han
+ * @author Brian Wing Shun Chan
  */
-public interface AntivirusScanner {
+public class AntivirusScannerImpl extends AntivirusScannerWrapper {
 
-	public boolean isActive();
-
-	public void scan(byte[] bytes)
-		throws AntivirusScannerException, SystemException;
-
-	public void scan(File file)
-		throws AntivirusScannerException, SystemException;
-
-	public void scan(InputStream inputStream)
-		throws AntivirusScannerException, SystemException;
+	public AntivirusScannerImpl() {
+		super(
+			(AntivirusScanner)InstancePool.get(
+				PropsValues.DL_STORE_ANTIVIRUS_IMPL));
+	}
 
 }

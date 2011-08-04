@@ -15,24 +15,41 @@
 package com.liferay.portlet.documentlibrary.antivirus;
 
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.StreamUtil;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.InputStream;
 
 /**
  * @author Michael C. Han
  */
-public interface AntivirusScanner {
+public abstract class BaseInputStreamAntivirusScanner
+	implements AntivirusScanner {
 
-	public boolean isActive();
-
-	public void scan(byte[] bytes)
-		throws AntivirusScannerException, SystemException;
+	public boolean isActive() {
+		return _ACTIVE;
+	}
 
 	public void scan(File file)
-		throws AntivirusScannerException, SystemException;
+		throws AntivirusScannerException, SystemException {
 
-	public void scan(InputStream inputStream)
-		throws AntivirusScannerException, SystemException;
+		InputStream inputStream = null;
+
+		try {
+			inputStream = new FileInputStream(file);
+
+			scan(inputStream);
+		}
+		catch (FileNotFoundException fnfe) {
+			throw new SystemException("Unable to scan file", fnfe);
+		}
+		finally {
+			StreamUtil.cleanUp(inputStream);
+		}
+	}
+
+	private static boolean _ACTIVE = true;
 
 }

@@ -20,51 +20,47 @@ import java.io.File;
 import java.io.InputStream;
 
 /**
- * @author Michael C. Han
+ * @author Brian Wing Shun Chan
  */
-public class AntivirusScannerUtil {
+public class AntivirusScannerWrapper implements AntivirusScanner {
 
-	public static AntivirusScanner getAntivirusScanner() {
-		return _antivirusScanner;
+	public AntivirusScannerWrapper(AntivirusScanner antivirusScanner) {
+		_originalAntivirusScanner = antivirusScanner;
+		_antivirusScanner = antivirusScanner;
 	}
 
-	public static boolean isActive() {
-		if (_antivirusScanner == null) {
-			return false;
+	public boolean isActive() {
+		return _antivirusScanner.isActive();
+	}
+
+	public void scan(byte[] bytes)
+		throws AntivirusScannerException, SystemException {
+
+		_antivirusScanner.scan(bytes);
+	}
+
+	public void scan(File file)
+		throws AntivirusScannerException, SystemException {
+
+		_antivirusScanner.scan(file);
+	}
+
+	public void scan(InputStream inputStream)
+		throws AntivirusScannerException, SystemException {
+
+		_antivirusScanner.scan(inputStream);
+	}
+
+	public void setAntivirusScanner(AntivirusScanner antivirusScanner) {
+		if (antivirusScanner == null) {
+			_antivirusScanner = _originalAntivirusScanner;
 		}
 		else {
-			return _antivirusScanner.isActive();
+			_antivirusScanner = antivirusScanner;
 		}
 	}
 
-	public static void scan(byte[] bytes)
-		throws AntivirusScannerException, SystemException {
-
-		if (isActive()) {
-			_antivirusScanner.scan(bytes);
-		}
-	}
-
-	public static void scan(File file)
-		throws AntivirusScannerException, SystemException {
-
-		if (isActive()) {
-			_antivirusScanner.scan(file);
-		}
-	}
-
-	public static void scan(InputStream inputStream)
-		throws AntivirusScannerException, SystemException {
-
-		if (isActive()) {
-			_antivirusScanner.scan(inputStream);
-		}
-	}
-
-	public void setAntivirusScanner(AntivirusScanner antiVirusScanner) {
-		_antivirusScanner = antiVirusScanner;
-	}
-
-	private static AntivirusScanner _antivirusScanner;
+	private AntivirusScanner _originalAntivirusScanner;
+	private AntivirusScanner _antivirusScanner;
 
 }

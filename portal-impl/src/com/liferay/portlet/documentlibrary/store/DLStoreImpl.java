@@ -44,8 +44,7 @@ import com.liferay.portlet.documentlibrary.FileExtensionException;
 import com.liferay.portlet.documentlibrary.FileNameException;
 import com.liferay.portlet.documentlibrary.FileSizeException;
 import com.liferay.portlet.documentlibrary.SourceFileNameException;
-import com.liferay.portlet.documentlibrary.antivirus.AntiVirusScanner;
-import com.liferay.portlet.documentlibrary.antivirus.AntiVirusScannerUtil;
+import com.liferay.portlet.documentlibrary.antivirus.AntivirusScannerUtil;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.service.permission.DLFolderPermission;
@@ -77,7 +76,7 @@ public class DLStoreImpl implements DLStore, IdentifiableBean {
 
 		validate(fileName, validateFileExtension, is);
 
-		if (!AntiVirusScannerUtil.isActive()) {
+		if (!AntivirusScannerUtil.isActive()) {
 			store.addFile(companyId, repositoryId, fileName, is);
 		}
 		else {
@@ -87,7 +86,7 @@ public class DLStoreImpl implements DLStore, IdentifiableBean {
 				if (is.markSupported()) {
 					is.mark(is.available() + 1);
 
-					AntiVirusScannerUtil.scan(is);
+					AntivirusScannerUtil.scan(is);
 
 					is.reset();
 
@@ -98,13 +97,14 @@ public class DLStoreImpl implements DLStore, IdentifiableBean {
 
 					FileUtil.write(tempFile, is);
 
-					AntiVirusScannerUtil.scan(tempFile);
+					AntivirusScannerUtil.scan(tempFile);
 
 					store.addFile(companyId, repositoryId, fileName, tempFile);
 				}
 			}
-			catch (IOException e) {
-				throw new SystemException("Unable to process file: " + fileName, e);
+			catch (IOException ioe) {
+				throw new SystemException(
+					"Unable to scan file " + fileName, ioe);
 			}
 			finally {
 				if (tempFile != null) {
@@ -120,7 +120,7 @@ public class DLStoreImpl implements DLStore, IdentifiableBean {
 
 		validate(fileName, true, bytes);
 
-		AntiVirusScannerUtil.scan(bytes);
+		AntivirusScannerUtil.scan(bytes);
 
 		store.addFile(companyId, repositoryId, fileName, bytes);
 	}
@@ -131,7 +131,7 @@ public class DLStoreImpl implements DLStore, IdentifiableBean {
 
 		validate(fileName, true, file);
 
-		AntiVirusScannerUtil.scan(file);
+		AntivirusScannerUtil.scan(file);
 
 		store.addFile(companyId, repositoryId, fileName, file);
 	}
@@ -346,7 +346,7 @@ public class DLStoreImpl implements DLStore, IdentifiableBean {
 			fileName, fileExtension, sourceFileName,
 			validateFileExtension, is);
 
-		if (!AntiVirusScannerUtil.isActive()) {
+		if (!AntivirusScannerUtil.isActive()) {
 			store.updateFile(
 				companyId, repositoryId, fileName, versionNumber,
 				sourceFileName, is);
@@ -358,7 +358,7 @@ public class DLStoreImpl implements DLStore, IdentifiableBean {
 				if (is.markSupported()) {
 					is.mark(is.available() + 1);
 
-					AntiVirusScannerUtil.scan(is);
+					AntivirusScannerUtil.scan(is);
 
 					is.reset();
 
@@ -371,15 +371,16 @@ public class DLStoreImpl implements DLStore, IdentifiableBean {
 
 					FileUtil.write(tempFile, is);
 
-					AntiVirusScannerUtil.scan(tempFile);
+					AntivirusScannerUtil.scan(tempFile);
 
 					store.updateFile(
 						companyId, repositoryId, fileName, versionNumber,
 						sourceFileName, tempFile);
 				}
 			}
-			catch (IOException e) {
-				throw new SystemException("Unable to process file: " + fileName, e);
+			catch (IOException ioe) {
+				throw new SystemException(
+					"Unable to scan file " + fileName, ioe);
 			}
 			finally {
 				if (tempFile != null) {
@@ -396,7 +397,7 @@ public class DLStoreImpl implements DLStore, IdentifiableBean {
 
 		validate(fileName, true, bytes);
 
-		AntiVirusScannerUtil.scan(bytes);
+		AntivirusScannerUtil.scan(bytes);
 
 		store.updateFile(
 			companyId, repositoryId, fileName, versionNumber, sourceFileName,
@@ -410,7 +411,7 @@ public class DLStoreImpl implements DLStore, IdentifiableBean {
 
 		validate(fileName, true, file);
 
-		AntiVirusScannerUtil.scan(file);
+		AntivirusScannerUtil.scan(file);
 
 		store.updateFile(
 			companyId, repositoryId, fileName, versionNumber, sourceFileName,

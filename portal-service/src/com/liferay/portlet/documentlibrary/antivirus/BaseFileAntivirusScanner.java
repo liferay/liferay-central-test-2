@@ -24,11 +24,14 @@ import java.io.InputStream;
 /**
  * @author Michael C. Han
  */
-public abstract class AbstractFileBasedAntiVirusScanner
-	implements AntiVirusScanner {
+public abstract class BaseFileAntivirusScanner implements AntivirusScanner {
+
+	public boolean isActive() {
+		return _ACTIVE;
+	}
 
 	public void scan(byte[] bytes)
-		throws AntiVirusScannerException, SystemException {
+		throws AntivirusScannerException, SystemException {
 
 		File file = null;
 
@@ -39,8 +42,8 @@ public abstract class AbstractFileBasedAntiVirusScanner
 
 			scan(file);
 		}
-		catch (IOException ie) {
-			throw new SystemException("Unable to write temporary file", ie);
+		catch (IOException ioe) {
+			throw new SystemException("Unable to write temporary file", ioe);
 		}
 		finally {
 			if (file != null) {
@@ -50,7 +53,7 @@ public abstract class AbstractFileBasedAntiVirusScanner
 	}
 
 	public void scan(InputStream inputStream)
-		throws AntiVirusScannerException, SystemException {
+		throws AntivirusScannerException, SystemException {
 
 		File file = null;
 
@@ -61,8 +64,8 @@ public abstract class AbstractFileBasedAntiVirusScanner
 
 			scan(file);
 		}
-		catch (IOException ie) {
-			throw new SystemException("Unable to write temporary file", ie);
+		catch (IOException ioe) {
+			throw new SystemException("Unable to write temporary file", ioe);
 		}
 		finally {
 			if (file != null) {
@@ -71,5 +74,8 @@ public abstract class AbstractFileBasedAntiVirusScanner
 		}
 	}
 
+	private static boolean _ACTIVE = true;
+
 	private static final String _ANTIVIRUS_EXTENSION = "avs";
+
 }

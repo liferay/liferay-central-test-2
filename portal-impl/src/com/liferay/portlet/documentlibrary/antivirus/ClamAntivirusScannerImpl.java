@@ -24,11 +24,10 @@ import java.io.InputStream;
 /**
  * @author Michael C. Han
  */
-public class ClamScanAntiVirusScanner
-	extends AbstractFileBasedAntiVirusScanner {
+public class ClamAntivirusScannerImpl extends BaseFileAntivirusScanner {
 
 	public void scan(File file)
-		throws AntiVirusScannerException, SystemException {
+		throws AntivirusScannerException, SystemException {
 
 		Runtime runtime = Runtime.getRuntime();
 
@@ -51,18 +50,18 @@ public class ClamScanAntiVirusScanner
 			int exitValue = process.exitValue();
 
 			if (exitValue != 0) {
-				throw new SystemException(
-					"Unable to scan file due to inability to " +
-					"execute antivirus process");
+				throw new AntivirusScannerException(
+					"Unable to scan file due to inability to execute " +
+						"antivirus process");
 			}
 
 			if (scanResult.contains("FOUND")) {
-				throw new AntiVirusScannerException(
+				throw new AntivirusScannerException(
 					"Virus detected in " + filePath);
 			}
 		}
-		catch (IOException ie) {
-			throw new SystemException("Unable to scan file", ie);
+		catch (IOException ioe) {
+			throw new SystemException("Unable to scan file", ioe);
 		}
 		catch (InterruptedException ie) {
 			throw new SystemException("Unable to scan file", ie);

@@ -36,6 +36,7 @@ convert.processes
 default.landing.page.path
 dl.file.entry.drafts.enabled
 dl.file.entry.processors
+dl.store.antivirus.impl
 dl.store.impl
 dl.webdav.auto.unlock
 dl.webdav.save.to.single.version

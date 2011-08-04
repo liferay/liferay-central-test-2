@@ -14,35 +14,27 @@
 
 package com.liferay.portlet.documentlibrary.antivirus;
 
-import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.util.StreamUtil;
-
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.io.InputStream;
 
 /**
- * @author Michael C. Han
+ * @author Brian Wing Shun Chan
  */
-public abstract class AbstractStreamBasedAntiVirusScanner
-	implements AntiVirusScanner {
+public class DummyAntivirusScannerImpl implements AntivirusScanner {
 
-	public void scan(File file)
-		throws AntiVirusScannerException, SystemException {
-
-		FileInputStream fileInputStream = null;
-
-		try {
-			fileInputStream = new FileInputStream(file);
-
-			scan(fileInputStream);
-		}
-		catch (FileNotFoundException e) {
-			throw new SystemException("Unable to file file to scan", e);
-		}
-		finally {
-			StreamUtil.cleanUp(fileInputStream);
-		}
+	public boolean isActive() {
+		return _ACTIVE;
 	}
+
+	public void scan(byte[] bytes) {
+	}
+
+	public void scan(File file) {
+	}
+
+	public void scan(InputStream inputStream) {
+	}
+
+	private static boolean _ACTIVE = false;
 
 }
