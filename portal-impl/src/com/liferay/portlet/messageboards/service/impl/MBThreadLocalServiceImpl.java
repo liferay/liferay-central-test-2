@@ -604,7 +604,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 	}
 
 	/**
-	 * 	@deprecated {@link #incrementViewCounter(long, int)}
+	 * @deprecated {@link #incrementViewCounter(long, int)}
 	 */
 	public MBThread updateThread(long threadId, int viewCount)
 		throws PortalException, SystemException {
