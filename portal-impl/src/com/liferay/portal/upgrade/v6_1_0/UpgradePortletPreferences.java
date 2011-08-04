@@ -17,7 +17,6 @@ package com.liferay.portal.upgrade.v6_1_0;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.upgrade.CamelCaseUpgradePortletPreferences;
 import com.liferay.portal.kernel.util.StringBundler;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.PortletKeys;
 
 import java.sql.Connection;
@@ -119,6 +118,11 @@ public class UpgradePortletPreferences
 		return 0;
 	}
 
+	@Override
+	protected String[] getPortletIds() {
+		return _CAMEL_CASE_UPGRADE_PORTLET_IDS;
+	}
+
 	protected long getPortletPreferencesId(
 			long ownerId, int ownerType, long plid, String portletId)
 		throws Exception {
@@ -151,11 +155,6 @@ public class UpgradePortletPreferences
 		}
 
 		return 0;
-	}
-
-	@Override
-	protected String getUpdatePortletPreferencesWhereClause() {
-		return StringPool.BLANK;
 	}
 
 	protected void updatePortalPreferences() throws Exception {
