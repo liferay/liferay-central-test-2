@@ -98,17 +98,17 @@ public class DefaultFullNameGenerator implements FullNameGenerator {
 		String firstName, String middleName, String lastName,
 		boolean useInitials) {
 
-		StringBundler sb = new StringBundler();
+		StringBundler sb = new StringBundler(5);
 
 		if (useInitials) {
-			firstName = firstName.substring(0,1);
+			firstName = firstName.substring(0, 1);
 		}
 
 		sb.append(firstName);
 
 		if (Validator.isNotNull(middleName)) {
 			if (useInitials) {
-				middleName = middleName.substring(0,1);
+				middleName = middleName.substring(0, 1);
 			}
 
 			sb.append(StringPool.SPACE);
