@@ -14,9 +14,10 @@
 
 package com.liferay.portal.verify;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.Layout;
-import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.Permission;
 import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.ResourceCode;
@@ -61,6 +62,9 @@ public class VerifyPermission extends VerifyProcess {
 				}
 			}
 			catch (Exception e) {
+				if (_log.isDebugEnabled()) {
+					_log.debug(e, e);
+				}
 			}
 		}
 
@@ -96,11 +100,8 @@ public class VerifyPermission extends VerifyProcess {
 			PermissionLocalServiceUtil.getUserPermissions(defaultUserId);
 
 		for (Permission permission : permissions) {
-
-			long resourceId = permission.getResourceId();
-
 			Resource resource = ResourceLocalServiceUtil.getResource(
-				resourceId);
+				permission.getResourceId());
 
 			ResourceCode resourceCode =
 				ResourceCodeLocalServiceUtil.getResourceCode(
@@ -112,7 +113,7 @@ public class VerifyPermission extends VerifyProcess {
 				String[] actionIds = new String[] {permission.getActionId()};
 
 				PermissionLocalServiceUtil.unsetUserPermissions(
-					defaultUserId, actionIds, resourceId);
+					defaultUserId, actionIds, permission.getResourceId());
 			}
 		}
 	}
@@ -120,13 +121,11 @@ public class VerifyPermission extends VerifyProcess {
 	protected void deleteDefaultPrivateLayoutPermissions_5(long companyId)
 		throws Exception {
 
-		Role defaultUserRole = RoleLocalServiceUtil.getRole(
+		Role role = RoleLocalServiceUtil.getRole(
 			companyId, RoleConstants.GUEST);
 
-		long defaultRoleId = defaultUserRole.getRoleId();
-
 		List<Permission> permissions =
-			PermissionLocalServiceUtil.getRolePermissions(defaultRoleId);
+			PermissionLocalServiceUtil.getRolePermissions(role.getRoleId());
 
 		for (Permission permission : permissions) {
 			Resource resource = ResourceLocalServiceUtil.getResource(
@@ -140,7 +139,7 @@ public class VerifyPermission extends VerifyProcess {
 					resourceCode.getName(), resource.getPrimKey())) {
 
 				PermissionLocalServiceUtil.unsetRolePermission(
-					defaultRoleId, permission.getPermissionId());
+					role.getRoleId(), permission.getPermissionId());
 			}
 		}
 	}
@@ -148,12 +147,12 @@ public class VerifyPermission extends VerifyProcess {
 	protected void deleteDefaultPrivateLayoutPermissions_6(long companyId)
 		throws Exception {
 
-		Role defaultRole = RoleLocalServiceUtil.getRole(
+		Role role = RoleLocalServiceUtil.getRole(
 			companyId, RoleConstants.GUEST);
 
 		List<ResourcePermission> resourcePermissions =
 			ResourcePermissionLocalServiceUtil.getRoleResourcePermissions(
-				defaultRole.getRoleId());
+				role.getRoleId());
 
 		for (ResourcePermission resourcePermission : resourcePermissions) {
 			if (isPrivateLayout(
@@ -177,15 +176,13 @@ public class VerifyPermission extends VerifyProcess {
 
 		Layout layout = LayoutLocalServiceUtil.getLayout(plid);
 
-		if (layout.isPublicLayout()) {
-			return false;
-		}
-
-		if (layout.getType().equals(LayoutConstants.TYPE_CONTROL_PANEL)) {
+		if (layout.isPublicLayout() || layout.isTypeControlPanel()) {
 			return false;
 		}
 
 		return true;
 	}
+
+	private static Log _log = LogFactoryUtil.getLog(VerifyPermission.class);
 
 }
