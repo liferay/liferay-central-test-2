@@ -235,7 +235,7 @@ public class DLFileEntryImpl extends DLFileEntryBaseImpl {
 
 	public static String getNameWithExtension(String name, String type) {
 		if (Validator.isNotNull(type)) {
-			name += StringPool.PERIOD + type;
+			name = name.concat(StringPool.PERIOD).concat(type);
 		}
 
 		return name;

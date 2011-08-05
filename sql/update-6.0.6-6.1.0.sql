@@ -186,10 +186,6 @@ alter table DLFileEntry add custom2ImageId bigint;
 COMMIT_TRANSACTION;
 
 update DLFileEntry set repositoryId = groupId;
-update DLFileEntry set smallImageId = 0;
-update DLFileEntry set largeImageId = 0;
-update DLFileEntry set custom1ImageId = 0;
-update DLFileEntry set custom2ImageId = 0;
 
 drop index IX_CE705D48 on DLFileRank;
 drop index IX_40B56512 on DLFileRank;
@@ -219,10 +215,6 @@ alter table DLFileVersion add custom2ImageId bigint;
 COMMIT_TRANSACTION;
 
 update DLFileVersion set repositoryId = groupId;
-update DLFileVersion set smallImageId = 0;
-update DLFileVersion set largeImageId = 0;
-update DLFileVersion set custom1ImageId = 0;
-update DLFileVersion set custom2ImageId = 0;
 
 alter table DLFolder add repositoryId LONG;
 alter table DLFolder add mountPoint BOOLEAN;

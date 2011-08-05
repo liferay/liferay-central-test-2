@@ -173,7 +173,7 @@ public class DLAppHelperLocalServiceImpl
 			long userId, FileEntry fileEntry, FileVersion fileVersion,
 			long[] assetCategoryIds, String[] assetTagNames,
 			long[] assetLinkEntryIds, String mimeType,
-			boolean addDraftAssetEntry, boolean visible,int height, int width)
+			boolean addDraftAssetEntry, boolean visible, int height, int width)
 		throws PortalException, SystemException {
 
 		AssetEntry assetEntry = null;

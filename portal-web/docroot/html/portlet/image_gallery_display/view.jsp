@@ -83,13 +83,13 @@ request.setAttribute("view.jsp-defaultFolderId", String.valueOf(defaultFolderId)
 
 request.setAttribute("view.jsp-folderId", String.valueOf(folderId));
 
-request.setAttribute("view.jsp-portletURL", portletURL);
-
 request.setAttribute("view.jsp-repositoryId", String.valueOf(repositoryId));
 
 request.setAttribute("view.jsp-viewFolder", Boolean.TRUE.toString());
 
 request.setAttribute("view.jsp-useAssetEntryQuery", String.valueOf(useAssetEntryQuery));
+
+request.setAttribute("view.jsp-portletURL", portletURL);
 %>
 
 <liferay-util:include page="/html/portlet/document_library/top_links.jsp" />

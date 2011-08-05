@@ -69,8 +69,6 @@ if (permissionChecker.isCompanyAdmin() || permissionChecker.isGroupAdmin(scopeGr
 	status = WorkflowConstants.STATUS_ANY;
 }
 
-int imagesCount = DLAppServiceUtil.getFileEntriesAndFileShortcutsCount(repositoryId, folderId, status);
-
 String modelResource = null;
 String modelResourceDescription = null;
 String resourcePrimKey = null;
@@ -154,7 +152,10 @@ if (row == null && (portletName.equals(PortletKeys.DOCUMENT_LIBRARY_DISPLAY) || 
 						var="permissionsURL"
 					/>
 
-					<liferay-ui:icon image="permissions" url="<%= permissionsURL %>" />
+					<liferay-ui:icon
+						image="permissions"
+						url="<%= permissionsURL %>"
+					/>
 				</c:if>
 
 				<c:if test="<%= showActions && DLFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.DELETE) && !folder.isMountPoint() %>">
@@ -197,7 +198,11 @@ if (row == null && (portletName.equals(PortletKeys.DOCUMENT_LIBRARY_DISPLAY) || 
 						<portlet:param name="repositoryId" value="<%= String.valueOf(repositoryId) %>" />
 					</portlet:renderURL>
 
-					<liferay-ui:icon image="add_folder" message='<%= (folder != null) ? "add-subfolder" : "add-folder" %>' url="<%= addFolderURL %>" />
+					<liferay-ui:icon
+						image="add_folder"
+						message='<%= (folder != null) ? "add-subfolder" : "add-folder" %>'
+						url="<%= addFolderURL %>"
+					/>
 				</c:if>
 
 				<c:if test="<%= showActions && folder.isDefaultRepository() && DLFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.ADD_FOLDER) %>">
@@ -207,7 +212,11 @@ if (row == null && (portletName.equals(PortletKeys.DOCUMENT_LIBRARY_DISPLAY) || 
 						<portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" />
 					</portlet:renderURL>
 
-					<liferay-ui:icon image="add_drive" message="add-repository" url="<%= addRepositoryURL %>" />
+					<liferay-ui:icon
+						image="add_drive"
+						message="add-repository"
+						url="<%= addRepositoryURL %>"
+					/>
 				</c:if>
 			</c:when>
 			<c:otherwise>
@@ -220,7 +229,10 @@ if (row == null && (portletName.equals(PortletKeys.DOCUMENT_LIBRARY_DISPLAY) || 
 						var="permissionsURL"
 					/>
 
-					<liferay-ui:icon image="permissions" url="<%= permissionsURL %>" />
+					<liferay-ui:icon
+						image="permissions"
+						url="<%= permissionsURL %>"
+					/>
 				</c:if>
 
 				<c:if test="<%= showActions && DLFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.ADD_FOLDER) %>">
@@ -231,7 +243,11 @@ if (row == null && (portletName.equals(PortletKeys.DOCUMENT_LIBRARY_DISPLAY) || 
 						<portlet:param name="repositoryId" value="<%= String.valueOf(repositoryId) %>" />
 					</portlet:renderURL>
 
-					<liferay-ui:icon image="add_folder" message='<%= (folder != null) ? "add-subfolder" : "add-folder" %>' url="<%= addFolderURL %>" />
+					<liferay-ui:icon
+						image="add_folder"
+						message='<%= (folder != null) ? "add-subfolder" : "add-folder" %>'
+						url="<%= addFolderURL %>"
+					/>
 				</c:if>
 
 				<c:if test="<%= showActions && DLFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.ADD_FOLDER) %>">
@@ -241,7 +257,11 @@ if (row == null && (portletName.equals(PortletKeys.DOCUMENT_LIBRARY_DISPLAY) || 
 						<portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" />
 					</portlet:renderURL>
 
-					<liferay-ui:icon image="add_drive" message="add-repository" url="<%= addRepositoryURL %>" />
+					<liferay-ui:icon
+						image="add_drive"
+						message="add-repository"
+						url="<%= addRepositoryURL %>"
+					/>
 				</c:if>
 			</c:otherwise>
 		</c:choose>
@@ -275,7 +295,12 @@ if (row == null && (portletName.equals(PortletKeys.DOCUMENT_LIBRARY_DISPLAY) || 
 				String taglibEditURL = "javascript:Liferay.Util.openWindow({dialog: {width: 420}, id: '" + renderResponse.getNamespace() + "selectFileEntryType', title: '" + LanguageUtil.get(pageContext, "select-document-type") + "', uri:'" + editFileEntryURL.toString() + "'});";
 				%>
 
-				<liferay-ui:icon cssClass="aui-helper-hidden upload-multiple-documents" image="../document_library/add_multiple_documents" message="<%= message %>" url="<%= editFileEntryURL %>" />
+				<liferay-ui:icon
+					cssClass="aui-helper-hidden upload-multiple-documents"
+					image="../document_library/add_multiple_documents"
+					message="<%= message %>"
+					url="<%= editFileEntryURL %>"
+				/>
 			</c:if>
 
 			<%
@@ -301,10 +326,14 @@ if (row == null && (portletName.equals(PortletKeys.DOCUMENT_LIBRARY_DISPLAY) || 
 				String taglibEditURL = "javascript:Liferay.Util.openWindow({dialog: {width: 420}, id: '" + renderResponse.getNamespace() + "selectFileEntryType', title: '" + LanguageUtil.get(pageContext, "select-document-type") + "', uri:'" + editFileEntryURL.toString() + "'});";
 				%>
 
-				<liferay-ui:icon image="../document_library/add_document" message="<%= message %>" url="<%= fileEntryTypesCount > 0 ? taglibEditURL : editFileEntryURL %>" />
+				<liferay-ui:icon
+					image="../document_library/add_document"
+					message="<%= message %>"
+					url="<%= fileEntryTypesCount > 0 ? taglibEditURL : editFileEntryURL %>"
+				/>
 			</c:if>
 
-			<c:if test="<%= portletName.equals(PortletKeys.IMAGE_GALLERY_DISPLAY) && (imagesCount > 0) && DLFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.VIEW) %>">
+			<c:if test="<%= portletName.equals(PortletKeys.IMAGE_GALLERY_DISPLAY) && (DLAppServiceUtil.getFileEntriesAndFileShortcutsCount(repositoryId, folderId, status) > 0) && DLFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.VIEW) %>">
 				<liferay-ui:icon
 					cssClass='<%= randomNamespace + "-slide-show" %>'
 					image="../image_gallery_display/slide_show"
@@ -320,11 +349,20 @@ if (row == null && (portletName.equals(PortletKeys.DOCUMENT_LIBRARY_DISPLAY) || 
 					<portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" />
 				</portlet:renderURL>
 
-				<liferay-ui:icon image="add_instance" message="add-shortcut" url="<%= editFileShortcutURL %>" />
+				<liferay-ui:icon
+					image="add_instance"
+					message="add-shortcut"
+					url="<%= editFileShortcutURL %>"
+				/>
 			</c:if>
 
 			<c:if test="<%= portletDisplay.isWebDAVEnabled() && DLFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.VIEW) %>">
-				<liferay-ui:icon cssClass='<%= randomNamespace + "-webdav-action" %>' image="desktop" message="access-from-desktop" url="javascript:;" />
+				<liferay-ui:icon
+					cssClass='<%= randomNamespace + "-webdav-action" %>'
+					image="desktop"
+					message="access-from-desktop"
+					url="javascript:;"
+				/>
 			</c:if>
 		</c:if>
 	</liferay-ui:icon-menu>
@@ -414,6 +452,7 @@ if (row == null && (portletName.equals(PortletKeys.DOCUMENT_LIBRARY_DISPLAY) || 
 			'click',
 			function(event) {
 				var slideShowWindow = window.open('<%= viewSlideShowURL %>', 'slideShow', 'directories=no,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no');
+
 				slideShowWindow.focus();
 			}
 		);

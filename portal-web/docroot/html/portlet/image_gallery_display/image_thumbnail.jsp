@@ -17,9 +17,9 @@
 <%@ include file="/html/portlet/image_gallery_display/init.jsp" %>
 
 <%
-FileEntry fileEntry = null;
-
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
+
+FileEntry fileEntry = null;
 
 Object object = row.getObject();
 

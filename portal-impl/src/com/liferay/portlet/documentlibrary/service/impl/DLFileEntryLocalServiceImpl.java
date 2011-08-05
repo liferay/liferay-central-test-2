@@ -19,6 +19,7 @@ import com.liferay.portal.InvalidLockException;
 import com.liferay.portal.NoSuchLockException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.image.ImageBag;
 import com.liferay.portal.kernel.image.ImageProcessorUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -924,8 +925,9 @@ public class DLFileEntryLocalServiceImpl
 			String contentType = largeImage.getType();
 
 			if (bytes != null) {
-				renderedImage = ImageProcessorUtil.read(
-					bytes).getRenderedImage();
+				ImageBag imageBag = ImageProcessorUtil.read(bytes);
+
+				renderedImage = imageBag.getRenderedImage();
 
 				//validate(bytes);
 			}
@@ -1142,15 +1144,15 @@ public class DLFileEntryLocalServiceImpl
 		dlFileVersion.setFileEntryTypeId(fileEntryTypeId);
 		dlFileVersion.setVersion(version);
 		dlFileVersion.setSize(size);
+		dlFileVersion.setSmallImageId(dlFileEntry.getSmallImageId());
+		dlFileVersion.setLargeImageId(dlFileEntry.getLargeImageId());
+		dlFileVersion.setCustom1ImageId(dlFileEntry.getCustom1ImageId());
+		dlFileVersion.setCustom2ImageId(dlFileEntry.getCustom2ImageId());
 		dlFileVersion.setStatus(status);
 		dlFileVersion.setStatusByUserId(user.getUserId());
 		dlFileVersion.setStatusByUserName(user.getFullName());
 		dlFileVersion.setStatusDate(dlFileEntry.getModifiedDate());
 		dlFileVersion.setExpandoBridgeAttributes(serviceContext);
-		dlFileVersion.setSmallImageId(dlFileEntry.getSmallImageId());
-		dlFileVersion.setLargeImageId(dlFileEntry.getLargeImageId());
-		dlFileVersion.setCustom1ImageId(dlFileEntry.getCustom1ImageId());
-		dlFileVersion.setCustom2ImageId(dlFileEntry.getCustom2ImageId());
 
 		dlFileVersionPersistence.update(dlFileVersion, false);
 
@@ -1279,6 +1281,15 @@ public class DLFileEntryLocalServiceImpl
 		expandoValueLocalService.deleteValues(
 			DLFileEntry.class.getName(), dlFileEntry.getFileEntryId());
 
+		// Images
+
+		for (DLFileVersion dlFileVersion : dlFileVersions) {
+			imageLocalService.deleteImage(dlFileVersion.getSmallImageId());
+			imageLocalService.deleteImage(dlFileVersion.getLargeImageId());
+			imageLocalService.deleteImage(dlFileVersion.getCustom1ImageId());
+			imageLocalService.deleteImage(dlFileVersion.getCustom2ImageId());
+		}
+
 		// Lock
 
 		lockLocalService.unlock(
@@ -1288,15 +1299,6 @@ public class DLFileEntryLocalServiceImpl
 
 		dlAppHelperLocalService.deleteFileEntry(
 			new LiferayFileEntry(dlFileEntry));
-
-		// Images
-
-		for (DLFileVersion dlFileVersion : dlFileVersions) {
-			imageLocalService.deleteImage(dlFileVersion.getSmallImageId());
-			imageLocalService.deleteImage(dlFileVersion.getLargeImageId());
-			imageLocalService.deleteImage(dlFileVersion.getCustom1ImageId());
-			imageLocalService.deleteImage(dlFileVersion.getCustom2ImageId());
-		}
 
 		// File
 
@@ -1691,11 +1693,6 @@ public class DLFileEntryLocalServiceImpl
 		dlFileVersion.setFileEntryTypeId(fileEntryTypeId);
 		dlFileVersion.setVersion(version);
 		dlFileVersion.setSize(size);
-		dlFileVersion.setStatus(status);
-		dlFileVersion.setStatusByUserId(user.getUserId());
-		dlFileVersion.setStatusByUserName(user.getFullName());
-		dlFileVersion.setStatusDate(statusDate);
-		dlFileVersion.setExpandoBridgeAttributes(serviceContext);
 		dlFileVersion.setSmallImageId(counterLocalService.increment());
 		dlFileVersion.setLargeImageId(counterLocalService.increment());
 
@@ -1706,6 +1703,12 @@ public class DLFileEntryLocalServiceImpl
 		if (PropsValues.IG_IMAGE_CUSTOM_2_MAX_DIMENSION > 0) {
 			dlFileVersion.setCustom2ImageId(counterLocalService.increment());
 		}
+
+		dlFileVersion.setStatus(status);
+		dlFileVersion.setStatusByUserId(user.getUserId());
+		dlFileVersion.setStatusByUserName(user.getFullName());
+		dlFileVersion.setStatusDate(statusDate);
+		dlFileVersion.setExpandoBridgeAttributes(serviceContext);
 
 		dlFileVersionPersistence.update(dlFileVersion, false);
 

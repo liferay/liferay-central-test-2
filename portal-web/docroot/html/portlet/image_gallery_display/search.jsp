@@ -19,9 +19,9 @@
 <%
 String redirect = ParamUtil.getString(request, "redirect");
 
-long breadcrumbsFolderId = ParamUtil.getLong(request, "breadcrumbsFolderId");
-
 long repositoryId = ParamUtil.getLong(request, "repositoryId");
+
+long breadcrumbsFolderId = ParamUtil.getLong(request, "breadcrumbsFolderId");
 
 long searchFolderId = ParamUtil.getLong(request, "searchFolderId");
 long searchFolderIds = ParamUtil.getLong(request, "searchFolderIds");
@@ -108,7 +108,7 @@ boolean useAssetEntryQuery = false;
 			}
 			catch (Exception e) {
 				if (_log.isWarnEnabled()) {
-					_log.warn("Document Library search index is stale and contains document " + fileEntryId);
+					_log.warn("Document library search index is stale and contains document " + fileEntryId);
 				}
 			}
 		}

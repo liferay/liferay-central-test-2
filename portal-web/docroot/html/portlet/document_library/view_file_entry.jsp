@@ -106,8 +106,8 @@ if (portletDisplay.isWebDAVEnabled()) {
 	webDavUrl = themeDisplay.getPortalURL() + "/tunnel-web/secure/webdav" + group.getFriendlyURL() + "/document_library" + sb.toString();
 }
 
-Image largeImage = ImageLocalServiceUtil.getImage(fileEntry.getLargeImageId());
 Image smallImage = ImageLocalServiceUtil.getImage(fileEntry.getSmallImageId());
+Image largeImage = ImageLocalServiceUtil.getImage(fileEntry.getLargeImageId());
 
 boolean hasAudio = AudioProcessor.hasAudio(fileEntry, fileVersion.getVersion());
 boolean hasImages = ImageProcessor.hasImages(fileVersion);
@@ -206,13 +206,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 						<%
 						String thumbnailSrc = themeDisplay.getPathThemeImages() + "/file_system/large/" + DLUtil.getGenericName(extension) + ".png";
 
-						if (hasPDFImages) {
-							thumbnailSrc = themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + themeDisplay.getScopeGroupId() + StringPool.SLASH + fileEntry.getFolderId() + StringPool.SLASH + HttpUtil.encodeURL(title) + "?version=" + fileVersion.getVersion() + "&documentThumbnail=1";
-						}
-						else if (hasVideo){
-							thumbnailSrc = themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + themeDisplay.getScopeGroupId() + StringPool.SLASH + fileEntry.getFolderId() + StringPool.SLASH + HttpUtil.encodeURL(title) + "?version=" + fileVersion.getVersion() + "&videoThumbnail=1";
-						}
-						else if (hasImages) {
+						if (hasImages) {
 							long smallImageId = 0;
 
 							if (smallImage != null) {
@@ -220,6 +214,12 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 							}
 
 							thumbnailSrc = themeDisplay.getPathImage() + "/image_gallery?img_id=" + smallImageId +"&fileEntryId=" + fileEntry.getFileEntryId() + "&dlSmallImage=1&t=" + ImageServletTokenUtil.getToken(smallImageId);
+						}
+						else if (hasPDFImages) {
+							thumbnailSrc = themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + themeDisplay.getScopeGroupId() + StringPool.SLASH + fileEntry.getFolderId() + StringPool.SLASH + HttpUtil.encodeURL(title) + "?version=" + fileVersion.getVersion() + "&documentThumbnail=1";
+						}
+						else if (hasVideo){
+							thumbnailSrc = themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + themeDisplay.getScopeGroupId() + StringPool.SLASH + fileEntry.getFolderId() + StringPool.SLASH + HttpUtil.encodeURL(title) + "?version=" + fileVersion.getVersion() + "&videoThumbnail=1";
 						}
 						%>
 
@@ -283,7 +283,12 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 						boolean supportedAudio = AudioProcessor.isSupportedAudio(fileEntry, fileVersion.getVersion());
 						boolean supportedVideo = VideoProcessor.isSupportedVideo(fileEntry, fileVersion.getVersion());
 
-						if (supportedAudio) {
+						if (hasImages) {
+							previewFileURL = themeDisplay.getPathImage() + "/image_gallery?img_id=" + largeImage.getImageId() + "&t=" + ImageServletTokenUtil.getToken(largeImage.getImageId());
+
+							previewFileCount = 1;
+						}
+						else if (supportedAudio) {
 							if (hasAudio) {
 								previewFileCount = 1;
 							}
@@ -297,11 +302,6 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 
 							previewFileURL = themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + themeDisplay.getScopeGroupId() + StringPool.SLASH + fileEntry.getFolderId() + StringPool.SLASH + HttpUtil.encodeURL(title) + HtmlUtil.escapeURL("?version=") + fileVersion.getVersion() + HtmlUtil.escapeURL("&videoPreview=1");
 							videoThumbnailURL = themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + themeDisplay.getScopeGroupId() + StringPool.SLASH + fileEntry.getFolderId() + StringPool.SLASH + HttpUtil.encodeURL(title) + HtmlUtil.escapeURL("?version=") + fileVersion.getVersion() + HtmlUtil.escapeURL("&videoThumbnail=1");
-						}
-						else if (hasImages) {
-							previewFileURL = themeDisplay.getPathImage() + "/image_gallery?img_id=" + largeImage.getImageId() + "&t=" + ImageServletTokenUtil.getToken(largeImage.getImageId());
-
-							previewFileCount = 1;
 						}
 						else {
 							previewFileCount = PDFProcessor.getPreviewFileCount(fileEntry, fileVersion.getVersion());
@@ -355,6 +355,13 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 											).render();
 										</aui:script>
 									</c:when>
+									<c:when test="<%= hasImages %>">
+										<div class="lfr-preview-file lfr-preview-image" id="<portlet:namespace />previewFile">
+											<div class="lfr-preview-file-content lfr-preview-image-content" id="<portlet:namespace />previewFileContent">
+												<img src="<%= themeDisplay.getPathImage() %>/image_gallery?img_id=<%= largeImage.getImageId() %>&t=<%= ImageServletTokenUtil.getToken(largeImage.getImageId()) %>" style="max-height: 480px; max-width: 700px;" />
+											</div>
+										</div>
+									</c:when>
 									<c:when test="<%= supportedAudio || supportedVideo %>">
 										<div class="lfr-preview-file lfr-preview-video" id="<portlet:namespace />previewFile">
 											<div class="lfr-preview-file-content lfr-preview-video-content" id="<portlet:namespace />previewFileContent"></div>
@@ -386,13 +393,6 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 
 											so.write('<portlet:namespace />previewFileContent');
 										</aui:script>
-									</c:when>
-									<c:when test="<%= hasImages %>">
-										<div class="lfr-preview-file lfr-preview-image" id="<portlet:namespace />previewFile">
-											<div class="lfr-preview-file-content lfr-preview-image-content" id="<portlet:namespace />previewFileContent">
-												<img src="<%=themeDisplay.getPathImage() %>/image_gallery?img_id=<%= largeImage.getImageId() %>&t=<%= ImageServletTokenUtil.getToken(largeImage.getImageId()) %>" style="max-height: 480px; max-width: 700px;" />
-											</div>
-										</div>
 									</c:when>
 								</c:choose>
 							</c:otherwise>

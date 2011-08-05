@@ -22,7 +22,6 @@ Folder folder = (Folder)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FILE_ENTRY
 long folderId = BeanParamUtil.getLong(folder, request, "folderId", DLFolderConstants.DEFAULT_PARENT_FOLDER_ID);
 
 long repositoryId = BeanParamUtil.getLong(folder, request, "repositoryId", scopeGroupId);
-
 long groupId = ParamUtil.getLong(request, "groupId");
 
 int status = WorkflowConstants.STATUS_APPROVED;

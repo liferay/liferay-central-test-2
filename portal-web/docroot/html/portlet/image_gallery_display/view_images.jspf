@@ -49,7 +49,6 @@
 				<%
 				FileVersion fileVersion = fileEntry.getFileVersion();
 
-				Image largeImage = ImageLocalServiceUtil.getImage(fileVersion.getLargeImageId());
 				Image smallImage = ImageLocalServiceUtil.getImage(fileVersion.getSmallImageId());
 
 				long smallImageId = 0;
@@ -68,6 +67,8 @@
 				String href = StringPool.BLANK;
 				String src = StringPool.BLANK;
 				String style = StringPool.BLANK;
+
+				Image largeImage = ImageLocalServiceUtil.getImage(fileVersion.getLargeImageId());
 
 				if (largeImage != null) {
 					href = themeDisplay.getPathImage() + "/image_gallery?img_id=" + largeImage.getImageId() + "&t=" + ImageServletTokenUtil.getToken(largeImage.getImageId());

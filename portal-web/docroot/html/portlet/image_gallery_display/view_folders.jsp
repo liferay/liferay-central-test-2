@@ -30,7 +30,7 @@ if (folderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
 int status = WorkflowConstants.STATUS_APPROVED;
 
 if (permissionChecker.isCompanyAdmin() || permissionChecker.isGroupAdmin(scopeGroupId)) {
-status = WorkflowConstants.STATUS_ANY;
+	status = WorkflowConstants.STATUS_ANY;
 }
 
 PortletURL portletURL = (PortletURL)request.getAttribute("view.jsp-portletURL");

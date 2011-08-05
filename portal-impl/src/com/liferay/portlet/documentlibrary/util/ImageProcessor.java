@@ -16,6 +16,7 @@ package com.liferay.portlet.documentlibrary.util;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.image.ImageBag;
 import com.liferay.portal.kernel.image.ImageProcessorUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -51,8 +52,14 @@ public class ImageProcessor implements DLProcessor {
 	}
 
 	public static boolean hasImages(FileVersion fileVersion) {
-		return _hasImages(fileVersion.getLargeImageId()) &&
-			_hasImages(fileVersion.getSmallImageId());
+		if (_hasImages(fileVersion.getSmallImageId()) &&
+			_hasImages(fileVersion.getLargeImageId())) {
+
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	public static boolean hasLargeImage(FileVersion fileVersion) {
@@ -61,6 +68,23 @@ public class ImageProcessor implements DLProcessor {
 
 	public static boolean hasSmallImage(FileVersion fileVersion) {
 		return _hasImages(fileVersion.getSmallImageId());
+	}
+
+	private static boolean _hasImages(long imageId) {
+		boolean hasImages = false;
+
+		try {
+			Image image = ImageServiceUtil.getImage(imageId);
+
+			if (image != null) {
+				hasImages = true;
+			}
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+
+		return hasImages;
 	}
 
 	public void trigger(FileEntry fileEntry) {
@@ -87,8 +111,9 @@ public class ImageProcessor implements DLProcessor {
 
 			byte[] bytes = FileUtil.getBytes(inputStream);
 
-			RenderedImage renderedImage =
-				ImageProcessorUtil.read(bytes).getRenderedImage();
+			ImageBag imageBag = ImageProcessorUtil.read(bytes);
+
+			RenderedImage renderedImage = imageBag.getRenderedImage();
 
 			if (renderedImage != null) {
 				_saveImages(fileVersion.getLargeImageId(), renderedImage,
@@ -108,21 +133,14 @@ public class ImageProcessor implements DLProcessor {
 		}
 	}
 
-	private static boolean _hasImages(long imageId) {
-		boolean hasImages = false;
+	private void _queueGeneration(FileVersion fileVersion) {
+		if (!_fileEntries.contains(fileVersion.getFileEntryId())) {
+			_fileEntries.add(fileVersion.getFileVersionId());
 
-		try {
-			Image image = ImageServiceUtil.getImage(imageId);
-
-			if (image != null) {
-				hasImages = true;
-			}
+			MessageBusUtil.sendMessage(
+				DestinationNames.DOCUMENT_LIBRARY_IMAGE_PROCESSOR,
+				fileVersion);
 		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
-
-		return hasImages;
 	}
 
 	private void _saveImages(
@@ -173,20 +191,10 @@ public class ImageProcessor implements DLProcessor {
 			imageId, ImageProcessorUtil.getBytes(thumbnail, contentType));
 	}
 
-	private void _queueGeneration(FileVersion fileVersion) {
-		if (!_fileEntries.contains(fileVersion.getFileEntryId())) {
-			_fileEntries.add(fileVersion.getFileVersionId());
-
-			MessageBusUtil.sendMessage(
-				DestinationNames.DOCUMENT_LIBRARY_IMAGE_PROCESSOR,
-				fileVersion);
-		}
-	}
-
 	private static Log _log = LogFactoryUtil.getLog(PDFProcessor.class);
 
-	private static List<Long> _fileEntries = new Vector<Long>();
-
 	private static ImageProcessor _instance = new ImageProcessor();
+
+	private static List<Long> _fileEntries = new Vector<Long>();
 
 }

@@ -240,14 +240,14 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 			List<Long> folderIds, long groupId, long folderId)
 		throws SystemException {
 
-		List<DLFolder> folders = dlFolderPersistence.filterFindByG_P(
+		List<DLFolder> dlFolders = dlFolderPersistence.filterFindByG_P(
 			groupId, folderId);
 
-		for (DLFolder folder : folders) {
-			folderIds.add(folder.getFolderId());
+		for (DLFolder dlFolder : dlFolders) {
+			folderIds.add(dlFolder.getFolderId());
 
 			getSubfolderIds(
-				folderIds, folder.getGroupId(), folder.getFolderId());
+				folderIds, dlFolder.getGroupId(), dlFolder.getFolderId());
 		}
 	}
 

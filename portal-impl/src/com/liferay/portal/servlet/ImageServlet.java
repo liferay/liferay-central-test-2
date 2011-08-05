@@ -152,7 +152,7 @@ public class ImageServlet extends HttpServlet {
 		}
 	}
 
-	protected Image getImageThumbnail(Image image, long fileEntryId)
+	protected Image getImageThumbnail(Image image, long dlFileEntryId)
 		throws PortalException, SystemException {
 
 		if (image == null) {
@@ -166,7 +166,7 @@ public class ImageServlet extends HttpServlet {
 			(image.getWidth() > igThumbnailMaxDimension)) {
 
 			DLFileEntry dlFileEntry = DLFileEntryLocalServiceUtil.getFileEntry(
-				fileEntryId);
+				dlFileEntryId);
 
 			DLFileEntryLocalServiceUtil.updateSmallImage(
 				dlFileEntry.getSmallImageId(), dlFileEntry.getLargeImageId());
@@ -196,12 +196,13 @@ public class ImageServlet extends HttpServlet {
 				image = getUserPortraitImageResized(image, imageId);
 			}
 			else {
-				long fileEntryId = ParamUtil.getLong(request, "fileEntryId");
+				long dlFileEntryId = ParamUtil.getLong(
+					request, "dlFileEntryId");
 				boolean dlSmallImage = ParamUtil.getBoolean(
 					request, "dlSmallImage");
 
-				if ((fileEntryId > 0) && dlSmallImage) {
-					image = getImageThumbnail(image, fileEntryId);
+				if ((dlFileEntryId > 0) && dlSmallImage) {
+					image = getImageThumbnail(image, dlFileEntryId);
 				}
 			}
 		}
@@ -213,8 +214,7 @@ public class ImageServlet extends HttpServlet {
 				if (Validator.isNotNull(uuid) && (groupId > 0)) {
 					DLFileEntry dlFileEntry =
 						DLFileEntryLocalServiceUtil.
-							getFileEntryByUuidAndGroupId(
-								uuid, groupId);
+							getFileEntryByUuidAndGroupId(uuid, groupId);
 
 					image = ImageServiceUtil.getImage(
 						dlFileEntry.getLargeImageId());

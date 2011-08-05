@@ -142,14 +142,14 @@ public class DLFileEntryFinderImpl
 	public DLFileEntry findByAnyImageId(long imageId)
 		throws NoSuchFileEntryException, SystemException {
 
-		DLFileEntry image = fetchByAnyImageId(imageId);
+		DLFileEntry dlFileEntry = fetchByAnyImageId(imageId);
 
-		if (image == null) {
+		if (dlFileEntry == null) {
 			throw new NoSuchFileEntryException(
 				"No DLFileEntry exists with the imageId " + imageId);
 		}
 		else {
-			return image;
+			return dlFileEntry;
 		}
 	}
 
