@@ -171,8 +171,8 @@ public class URLCodec {
 				sb.append(rawURLString.substring(0, i));
 			}
 
-			// The cases are ordered by appearing frequency, don't sort it by
-			// alphabet.
+			// The cases are ordered by frequency and not alphabetically
+
 			switch (c) {
 				case CharPool.SLASH :
 					sb.append("%2F");
