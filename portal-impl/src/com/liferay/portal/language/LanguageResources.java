@@ -91,24 +91,29 @@ public class LanguageResources {
 	}
 
 	public static Locale getSuperLocale(Locale locale) {
-		if (locale.getVariant().length() > 0) {
+		String variant = locale.getVariant();
+
+		if (variant.length() > 0) {
 			return new Locale(locale.getLanguage(), locale.getCountry());
 		}
 
-		if (locale.getCountry().length() > 0) {
+		String country = locale.getCountry();
+
+		if (country.length() > 0) {
 			Locale priorityLocale = LanguageUtil.getLocale(
 				locale.getLanguage());
 
 			if ((priorityLocale != null) && (!locale.equals(priorityLocale))) {
 				return new Locale(
-					priorityLocale.getLanguage(),
-					priorityLocale.getCountry());
+					priorityLocale.getLanguage(), priorityLocale.getCountry());
 			}
 
 			return LocaleUtil.fromLanguageId(locale.getLanguage());
 		}
 
-		if (locale.getLanguage().length() > 0) {
+		String language = locale.getLanguage();
+
+		if (language.length() > 0) {
 			return _blankLocale;
 		}
 
