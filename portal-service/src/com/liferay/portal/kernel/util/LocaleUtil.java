@@ -126,8 +126,7 @@ public class LocaleUtil {
 				String languageCode = languageIdParts[0];
 				String countryCode = languageIdParts[1];
 
-				if ((Arrays.binarySearch(
-						_isoLanguages, languageCode) < 0) ||
+				if ((Arrays.binarySearch(_isoLanguages, languageCode) < 0) ||
 					(Arrays.binarySearch(_isoCountries, countryCode) < 0)) {
 
 					return _getDefault();
