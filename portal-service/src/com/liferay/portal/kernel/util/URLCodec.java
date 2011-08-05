@@ -67,8 +67,7 @@ public class URLCodec {
 			char c = encodedURLString.charAt(i);
 
 			switch (c) {
-				case CharPool.PERCENT :
-
+				case CharPool.PERCENT:
 					ByteBuffer byteBuffer = _getEncodedByteBuffer(
 						encodedURLString, i);
 
@@ -101,8 +100,8 @@ public class URLCodec {
 					i += byteBuffer.capacity() * 3 - 1;
 
 					break;
-				case CharPool.PLUS :
 
+				case CharPool.PLUS:
 					if (sb == null) {
 						sb = new StringBuilder(encodedURLString.length());
 
@@ -114,7 +113,8 @@ public class URLCodec {
 					sb.append(CharPool.SPACE);
 
 					break;
-				default :
+
+				default:
 					if (sb != null) {
 						sb.append(c);
 					}
@@ -175,27 +175,26 @@ public class URLCodec {
 			// alphabet.
 			switch (c) {
 				case CharPool.SLASH :
-
 					sb.append("%2F");
 
 					continue;
-				case CharPool.EQUAL :
 
+				case CharPool.EQUAL :
 					sb.append("%3D");
 
 					continue;
-				case CharPool.AMPERSAND :
 
+				case CharPool.AMPERSAND :
 					sb.append("%26");
 
 					continue;
-				case CharPool.PERCENT :
 
+				case CharPool.PERCENT :
 					sb.append("%25");
 
 					continue;
-				case CharPool.SPACE :
 
+				case CharPool.SPACE :
 					if (escapeSpaces) {
 						sb.append("%20");
 					}
@@ -204,13 +203,13 @@ public class URLCodec {
 					}
 
 					continue;
-				case CharPool.COLON :
 
+				case CharPool.COLON :
 					sb.append("%3A");
 
 					continue;
-				case CharPool.QUESTION :
 
+				case CharPool.QUESTION :
 					sb.append("%3F");
 
 					continue;
