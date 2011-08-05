@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portalweb.portlet.blogs.blogsentry.previewblogsentry;
+package com.liferay.portalweb.portlet.messageboards.message.previewmbthreadmessagedetails;
 
 import com.liferay.portalweb.portal.BaseTests;
 
@@ -22,15 +22,15 @@ import junit.framework.TestSuite;
 /**
  * @author Brian Wing Shun Chan
  */
-public class PreviewBlogsEntryTests extends BaseTests {
+public class PreviewMBThreadMessageDetailsTests extends BaseTests {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTestSuite(AddPageBlogsTest.class);
-		testSuite.addTestSuite(AddPortletBlogsTest.class);
-		testSuite.addTestSuite(PreviewBlogsEntryTest.class);
-		testSuite.addTestSuite(TearDownBlogsEntryTest.class);
+		testSuite.addTestSuite(AddPageMBTest.class);
+		testSuite.addTestSuite(AddPortletMBTest.class);
+		testSuite.addTestSuite(PreviewMBThreadMessageDetailsTest.class);
+		testSuite.addTestSuite(TearDownMBThreadMessageTest.class);
 		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;

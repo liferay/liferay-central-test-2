@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portalweb.portlet.blogs.blogsentry.previewblogsentry;
+package com.liferay.portalweb.portlet.messageboards.message.previewmbthreadmessagedetails;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
@@ -20,8 +20,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 /**
  * @author Brian Wing Shun Chan
  */
-public class PreviewBlogsEntryTest extends BaseTestCase {
-	public void testPreviewBlogsEntry() throws Exception {
+public class PreviewMBThreadMessageDetailsTest extends BaseTestCase {
+	public void testPreviewMBThreadMessageDetails() throws Exception {
 		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
@@ -30,7 +30,7 @@ public class PreviewBlogsEntryTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("link=Blogs Test Page")) {
+				if (selenium.isVisible("link=Message Boards Test Page")) {
 					break;
 				}
 			}
@@ -41,17 +41,18 @@ public class PreviewBlogsEntryTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("link=Blogs Test Page",
-			RuntimeVariables.replace("Blogs Test Page"));
+		selenium.clickAt("link=Message Boards Test Page",
+			RuntimeVariables.replace("Message Boards Test Page"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("//input[@value='Add Blog Entry']",
-			RuntimeVariables.replace("Add Blog Entry"));
+		selenium.clickAt("//input[@value='Post New Thread']",
+			RuntimeVariables.replace("Post New Thread"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.type("//input[@id='_33_title']",
-			RuntimeVariables.replace("Blogs Entry Title"));
+		selenium.type("//input[@id='_19_subject']",
+			RuntimeVariables.replace("MB Thread Message Subject"));
 		selenium.saveScreenShotAndSource();
+		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -60,7 +61,7 @@ public class PreviewBlogsEntryTest extends BaseTestCase {
 
 			try {
 				if (selenium.isVisible(
-							"//td[@id='cke_contents__33_editor']/iframe")) {
+							"//td[@id='cke_contents__19_editor']/iframe")) {
 					break;
 				}
 			}
@@ -71,16 +72,21 @@ public class PreviewBlogsEntryTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.selectFrame("//td[@id='cke_contents__33_editor']/iframe");
-		selenium.type("//body", RuntimeVariables.replace("Blogs Entry Content"));
+		selenium.selectFrame("//td[@id='cke_contents__19_editor']/iframe");
+		selenium.type("//body",
+			RuntimeVariables.replace("MB Thread Message Body"));
 		selenium.selectFrame("relative=top");
 		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//input[@value='Preview']",
 			RuntimeVariables.replace("Preview"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		assertEquals(RuntimeVariables.replace("Blogs Entry Content"),
-			selenium.getText("//div[@class='preview']"));
+		assertEquals(RuntimeVariables.replace("MB Thread Message Subject"),
+			selenium.getText("//h1[@class='header-title']/span"));
+		assertEquals(RuntimeVariables.replace("MB Thread Message Subject"),
+			selenium.getText("//div[@class='subject']/a/strong"));
+		assertEquals(RuntimeVariables.replace("MB Thread Message Body"),
+			selenium.getText("//div[@class='thread-body']"));
 		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
@@ -89,7 +95,7 @@ public class PreviewBlogsEntryTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("link=Blogs Test Page")) {
+				if (selenium.isVisible("link=Message Boards Test Page")) {
 					break;
 				}
 			}
@@ -100,11 +106,14 @@ public class PreviewBlogsEntryTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("link=Blogs Test Page",
-			RuntimeVariables.replace("Blogs Test Page"));
+		selenium.clickAt("link=Message Boards Test Page",
+			RuntimeVariables.replace("Message Boards Test Page"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		assertFalse(selenium.isTextPresent("Blogs Entry Title"));
-		assertFalse(selenium.isTextPresent("Blogs Entry Content"));
+		assertFalse(selenium.isTextPresent("MB Thread Message Subject"));
+		selenium.clickAt("link=My Posts", RuntimeVariables.replace("My Posts"));
+		selenium.waitForPageToLoad("30000");
+		selenium.saveScreenShotAndSource();
+		assertFalse(selenium.isTextPresent("MB Thread Message Subject"));
 	}
 }

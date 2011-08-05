@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portalweb.portlet.messageboards.message.previewmbthreadmessage;
+package com.liferay.portalweb.portlet.blogs.blogsentry.previewblogsentrydetails;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;

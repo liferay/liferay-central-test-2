@@ -37,7 +37,7 @@ import com.liferay.portalweb.portlet.messageboards.message.markasanswercategorym
 import com.liferay.portalweb.portlet.messageboards.message.movecategorymessagetocategory.MoveCategoryMessageToCategoryTests;
 import com.liferay.portalweb.portlet.messageboards.message.movecategorymessagetocategoryexplanation.MoveCategoryMessageToCategoryExplanationTests;
 import com.liferay.portalweb.portlet.messageboards.message.nextcategorymessage.NextCategoryMessageTests;
-import com.liferay.portalweb.portlet.messageboards.message.previewmbthreadmessage.PreviewMBThreadMessageTests;
+import com.liferay.portalweb.portlet.messageboards.message.previewmbthreadmessagedetails.PreviewMBThreadMessageDetailsTests;
 import com.liferay.portalweb.portlet.messageboards.message.previouscategorymessage.PreviousCategoryMessageTests;
 import com.liferay.portalweb.portlet.messageboards.message.ratecategorymessage.RateCategoryMessageTests;
 import com.liferay.portalweb.portlet.messageboards.message.searchcategorymessage.SearchCategoryMessageTests;
@@ -86,7 +86,7 @@ public class MessageTests extends BaseTests {
 		testSuite.addTest(
 			MoveCategoryMessageToCategoryExplanationTests.suite());
 		testSuite.addTest(NextCategoryMessageTests.suite());
-		testSuite.addTest(PreviewMBThreadMessageTests.suite());
+		testSuite.addTest(PreviewMBThreadMessageDetailsTests.suite());
 		testSuite.addTest(PreviousCategoryMessageTests.suite());
 		testSuite.addTest(RateCategoryMessageTests.suite());
 		testSuite.addTest(SearchCategoryMessageTests.suite());
