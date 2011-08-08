@@ -301,8 +301,8 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		String companyIdHexString = StringUtil.toHexString(companyId);
 
 		for (Group group : groupFinder.findBySystem(companyId)) {
-			_systemGroupsMap.put(companyIdHexString.concat(group.getName()),
-				group);
+			_systemGroupsMap.put(
+				companyIdHexString.concat(group.getName()), group);
 		}
 
 		long defaultUserId = userLocalService.getDefaultUserId(companyId);
