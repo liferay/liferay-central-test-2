@@ -162,7 +162,7 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		if (file == null || !file.exists() || file.length() == 0) {
+		if (file == null || !file.exists() || (file.length() == 0)) {
 			return addFileEntry(
 				userId, repositoryId, folderId, sourceFileName, mimeType, title,
 				description, changeLog, null, 0, serviceContext);
