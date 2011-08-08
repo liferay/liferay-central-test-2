@@ -115,9 +115,9 @@ public class ConvertImageGallery extends ConvertProcess {
 
 			_targetHook.updateImage(image, image.getType(), bytes);
 
-			if (_targetHook instanceof DatabaseHook) {
+			/*if (_targetHook instanceof DatabaseHook) {
 				ImageLocalServiceUtil.updateImage(image, false);
-			}
+			}*/
 		}
 		catch (Exception e) {
 			_log.error("Migration failed for " + image.getImageId(), e);
