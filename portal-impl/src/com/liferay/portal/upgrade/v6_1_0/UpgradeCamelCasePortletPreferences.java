@@ -20,54 +20,46 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import javax.portlet.PortletPreferences;
 
 /**
- *
  * @author Eudaldo Alonso
  */
-public class UpgradeCommonPortletPreferences
+public class UpgradeCamelCasePortletPreferences
 	extends BaseUpgradePortletPreferences {
 
-	protected void createCommonPreferencesMap() {
-		if (Validator.isNotNull(camelCasePreferencesNames)) {
-			return;
-		}
-
-		camelCasePreferencesNames = new HashMap<String, String>();
-
-		camelCasePreferencesNames.put("lfr-scope-type", "lfrScopeType");
-		camelCasePreferencesNames.put("lfr-scope-uuid", "lfrScopeUuid");
-		camelCasePreferencesNames.put("lfr-sharing", "lfrSharing");
-		camelCasePreferencesNames.put(
-			"lfr-facebook-api-key", "lfrFacebookApiKey");
-		camelCasePreferencesNames.put(
-			"lfr-facebook-canvas-page-url", "lfrFacebookCanvasPageUrl");
-		camelCasePreferencesNames.put(
-			"lfr-facebook-show-add-app-link", "lfrFacebookShowAddAppLink");
-		camelCasePreferencesNames.put(
-			"lfr-widget-show-add-app-link", "lfrWidgetShowAddAppLink");
-		camelCasePreferencesNames.put(
+	public UpgradeCamelCasePortletPreferences() {
+		_camelCasePreferenceNames.put(
 			"lfr-app-show-share-with-friends-link",
 			"lfrAppShowShareWithFriendsLink");
-		camelCasePreferencesNames.put(
+		_camelCasePreferenceNames.put(
+			"lfr-facebook-api-key", "lfrFacebookApiKey");
+		_camelCasePreferenceNames.put(
+			"lfr-facebook-canvas-page-url", "lfrFacebookCanvasPageUrl");
+		_camelCasePreferenceNames.put(
+			"lfr-facebook-show-add-app-link", "lfrFacebookShowAddAppLink");
+		_camelCasePreferenceNames.put(
 			"lfr-igoogle-show-add-app-link", "lfrIgoogleShowAddAppLink");
-		camelCasePreferencesNames.put(
+		_camelCasePreferenceNames.put(
 			"lfr-netvibes-show-add-app-link", "lfrNetvibesShowAddAppLink");
-		camelCasePreferencesNames.put(
-			"portlet-setup-use-custom-title", "portletSetupUseCustomTitle");
-		camelCasePreferencesNames.put(
-			"portlet-setup-show-borders", "portletSetupShowBorders");
-		camelCasePreferencesNames.put(
+		_camelCasePreferenceNames.put("lfr-scope-type", "lfrScopeType");
+		_camelCasePreferenceNames.put("lfr-scope-uuid", "lfrScopeUuid");
+		_camelCasePreferenceNames.put("lfr-sharing", "lfrSharing");
+		_camelCasePreferenceNames.put(
+			"lfr-wap-initial-window-state", "lfrWapInitialWindowState");
+		_camelCasePreferenceNames.put("lfr-wap-title", "lfrWapTitle");
+		_camelCasePreferenceNames.put(
+			"lfr-widget-show-add-app-link", "lfrWidgetShowAddAppLink");
+		_camelCasePreferenceNames.put("portlet-setup-css", "portletSetupCss");
+		_camelCasePreferenceNames.put(
 			"portlet-setup-link-to-layout-uuid",
 			"portletSetupLinkToLayoutUuid");
-		camelCasePreferencesNames.put("portlet-setup-css", "portletSetupCss");
-		camelCasePreferencesNames.put("lfr-wap-title", "lfrWapTitle");
-		camelCasePreferencesNames.put(
-			"lfr-wap-initial-window-state", "lfrWapInitialWindowState");
+		_camelCasePreferenceNames.put(
+			"portlet-setup-show-borders", "portletSetupShowBorders");
+		_camelCasePreferenceNames.put(
+			"portlet-setup-use-custom-title", "portletSetupUseCustomTitle");
 	}
 
 	@Override
@@ -87,10 +79,8 @@ public class UpgradeCommonPortletPreferences
 
 		Map<String, String[]> preferencesMap = portletPreferences.getMap();
 
-		createCommonPreferencesMap();
-
 		for (String oldName : preferencesMap.keySet()) {
-			String newName = camelCasePreferencesNames.get(oldName);
+			String newName = _camelCasePreferenceNames.get(oldName);
 
 			if (Validator.isNull(newName)) {
 				if (oldName.startsWith("portlet-setup-title-")) {
@@ -118,5 +108,6 @@ public class UpgradeCommonPortletPreferences
 		return PortletPreferencesFactoryUtil.toXML(portletPreferences);
 	}
 
-	private Map<String, String> camelCasePreferencesNames;
+	private Map<String, String> _camelCasePreferenceNames;
+
 }
