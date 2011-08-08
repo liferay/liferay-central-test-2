@@ -651,15 +651,15 @@ public class DLStoreImpl implements DLStore, IdentifiableBean {
 		validate(fileName, validateFileExtension);
 	}
 
-	private static final String[] _KEYWORDS_FIELDS = {
-		Field.ASSET_TAG_NAMES, Field.CONTENT, Field.PROPERTIES
-	};
-
 	@BeanReference(type = GroupLocalService.class)
 	protected GroupLocalService groupLocalService;
 
 	@BeanReference(type = Store.class)
 	protected Store store;
+
+	private static final String[] _KEYWORDS_FIELDS = {
+		Field.ASSET_TAG_NAMES, Field.CONTENT, Field.PROPERTIES
+	};
 
 	private String _beanIdentifier;
 

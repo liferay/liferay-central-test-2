@@ -160,7 +160,7 @@ public class FileSystemStore extends BaseStore {
 	public File getFile(
 			long companyId, long repositoryId, String fileName,
 			String versionLabel)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		if (Validator.isNull(versionLabel)) {
 			versionLabel = getHeadVersionLabel(

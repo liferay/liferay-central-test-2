@@ -122,6 +122,7 @@ public abstract class BaseStore implements Store {
 		return getFile(companyId, repositoryId, fileName, StringPool.BLANK);
 	}
 
+	@SuppressWarnings("unused")
 	public File getFile(
 			long companyId, long repositoryId, String fileName,
 			String versionLabel)
