@@ -317,8 +317,7 @@ public class DLAppHelperLocalServiceImpl
 				}
 				else if (event.equals(DLSyncConstants.EVENT_DELETE)) {
 					dlSyncLocalService.updateSync(
-						fileEntry.getFileEntryId(),
-						fileEntry.getFolderId(),
+						fileEntry.getFileEntryId(), fileEntry.getFolderId(),
 						DLSyncConstants.EVENT_DELETE);
 				}
 			}
