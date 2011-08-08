@@ -102,14 +102,6 @@ public class DLFileVersionPersistenceTest extends BasePersistenceTestCase {
 
 		newDLFileVersion.setSize(nextLong());
 
-		newDLFileVersion.setStatus(nextInt());
-
-		newDLFileVersion.setStatusByUserId(nextLong());
-
-		newDLFileVersion.setStatusByUserName(randomString());
-
-		newDLFileVersion.setStatusDate(nextDate());
-
 		newDLFileVersion.setSmallImageId(nextLong());
 
 		newDLFileVersion.setLargeImageId(nextLong());
@@ -117,6 +109,14 @@ public class DLFileVersionPersistenceTest extends BasePersistenceTestCase {
 		newDLFileVersion.setCustom1ImageId(nextLong());
 
 		newDLFileVersion.setCustom2ImageId(nextLong());
+
+		newDLFileVersion.setStatus(nextInt());
+
+		newDLFileVersion.setStatusByUserId(nextLong());
+
+		newDLFileVersion.setStatusByUserName(randomString());
+
+		newDLFileVersion.setStatusDate(nextDate());
 
 		_persistence.update(newDLFileVersion, false);
 
@@ -156,6 +156,14 @@ public class DLFileVersionPersistenceTest extends BasePersistenceTestCase {
 		assertEquals(existingDLFileVersion.getVersion(),
 			newDLFileVersion.getVersion());
 		assertEquals(existingDLFileVersion.getSize(), newDLFileVersion.getSize());
+		assertEquals(existingDLFileVersion.getSmallImageId(),
+			newDLFileVersion.getSmallImageId());
+		assertEquals(existingDLFileVersion.getLargeImageId(),
+			newDLFileVersion.getLargeImageId());
+		assertEquals(existingDLFileVersion.getCustom1ImageId(),
+			newDLFileVersion.getCustom1ImageId());
+		assertEquals(existingDLFileVersion.getCustom2ImageId(),
+			newDLFileVersion.getCustom2ImageId());
 		assertEquals(existingDLFileVersion.getStatus(),
 			newDLFileVersion.getStatus());
 		assertEquals(existingDLFileVersion.getStatusByUserId(),
@@ -165,14 +173,6 @@ public class DLFileVersionPersistenceTest extends BasePersistenceTestCase {
 		assertEquals(Time.getShortTimestamp(
 				existingDLFileVersion.getStatusDate()),
 			Time.getShortTimestamp(newDLFileVersion.getStatusDate()));
-		assertEquals(existingDLFileVersion.getSmallImageId(),
-			newDLFileVersion.getSmallImageId());
-		assertEquals(existingDLFileVersion.getLargeImageId(),
-			newDLFileVersion.getLargeImageId());
-		assertEquals(existingDLFileVersion.getCustom1ImageId(),
-			newDLFileVersion.getCustom1ImageId());
-		assertEquals(existingDLFileVersion.getCustom2ImageId(),
-			newDLFileVersion.getCustom2ImageId());
 	}
 
 	public void testFindByPrimaryKeyExisting() throws Exception {
@@ -335,14 +335,6 @@ public class DLFileVersionPersistenceTest extends BasePersistenceTestCase {
 
 		dlFileVersion.setSize(nextLong());
 
-		dlFileVersion.setStatus(nextInt());
-
-		dlFileVersion.setStatusByUserId(nextLong());
-
-		dlFileVersion.setStatusByUserName(randomString());
-
-		dlFileVersion.setStatusDate(nextDate());
-
 		dlFileVersion.setSmallImageId(nextLong());
 
 		dlFileVersion.setLargeImageId(nextLong());
@@ -350,6 +342,14 @@ public class DLFileVersionPersistenceTest extends BasePersistenceTestCase {
 		dlFileVersion.setCustom1ImageId(nextLong());
 
 		dlFileVersion.setCustom2ImageId(nextLong());
+
+		dlFileVersion.setStatus(nextInt());
+
+		dlFileVersion.setStatusByUserId(nextLong());
+
+		dlFileVersion.setStatusByUserName(randomString());
+
+		dlFileVersion.setStatusDate(nextDate());
 
 		_persistence.update(dlFileVersion, false);
 

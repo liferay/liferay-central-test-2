@@ -68,14 +68,6 @@ public class DLFileVersionCacheModel implements CacheModel<DLFileVersion> {
 		sb.append(version);
 		sb.append(", size=");
 		sb.append(size);
-		sb.append(", status=");
-		sb.append(status);
-		sb.append(", statusByUserId=");
-		sb.append(statusByUserId);
-		sb.append(", statusByUserName=");
-		sb.append(statusByUserName);
-		sb.append(", statusDate=");
-		sb.append(statusDate);
 		sb.append(", smallImageId=");
 		sb.append(smallImageId);
 		sb.append(", largeImageId=");
@@ -84,6 +76,14 @@ public class DLFileVersionCacheModel implements CacheModel<DLFileVersion> {
 		sb.append(custom1ImageId);
 		sb.append(", custom2ImageId=");
 		sb.append(custom2ImageId);
+		sb.append(", status=");
+		sb.append(status);
+		sb.append(", statusByUserId=");
+		sb.append(statusByUserId);
+		sb.append(", statusByUserName=");
+		sb.append(statusByUserName);
+		sb.append(", statusDate=");
+		sb.append(statusDate);
 		sb.append("}");
 
 		return sb.toString();
@@ -166,6 +166,10 @@ public class DLFileVersionCacheModel implements CacheModel<DLFileVersion> {
 		}
 
 		dlFileVersionImpl.setSize(size);
+		dlFileVersionImpl.setSmallImageId(smallImageId);
+		dlFileVersionImpl.setLargeImageId(largeImageId);
+		dlFileVersionImpl.setCustom1ImageId(custom1ImageId);
+		dlFileVersionImpl.setCustom2ImageId(custom2ImageId);
 		dlFileVersionImpl.setStatus(status);
 		dlFileVersionImpl.setStatusByUserId(statusByUserId);
 
@@ -182,11 +186,6 @@ public class DLFileVersionCacheModel implements CacheModel<DLFileVersion> {
 		else {
 			dlFileVersionImpl.setStatusDate(new Date(statusDate));
 		}
-
-		dlFileVersionImpl.setSmallImageId(smallImageId);
-		dlFileVersionImpl.setLargeImageId(largeImageId);
-		dlFileVersionImpl.setCustom1ImageId(custom1ImageId);
-		dlFileVersionImpl.setCustom2ImageId(custom2ImageId);
 
 		dlFileVersionImpl.resetOriginalValues();
 
@@ -210,12 +209,12 @@ public class DLFileVersionCacheModel implements CacheModel<DLFileVersion> {
 	public long fileEntryTypeId;
 	public String version;
 	public long size;
-	public int status;
-	public long statusByUserId;
-	public String statusByUserName;
-	public long statusDate;
 	public long smallImageId;
 	public long largeImageId;
 	public long custom1ImageId;
 	public long custom2ImageId;
+	public int status;
+	public long statusByUserId;
+	public String statusByUserName;
+	public long statusDate;
 }

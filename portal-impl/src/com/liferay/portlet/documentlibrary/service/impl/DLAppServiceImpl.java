@@ -2071,8 +2071,8 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 	 *         </li>
 	 *         <li>
 	 *         workflowDefinitionXYZ - the workflow definition name specified
-	 *         per file entry type. The parameter name must be the string 
-	 *         <code>workflowDefinition</code> appended by the 
+	 *         per file entry type. The parameter name must be the string
+	 *         <code>workflowDefinition</code> appended by the
 	 *         <code>fileEntryTypeId</code> (optionally <code>0</code>).
 	 *         </li>
 	 *         </ul>

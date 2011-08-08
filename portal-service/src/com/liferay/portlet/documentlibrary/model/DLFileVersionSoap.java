@@ -48,14 +48,14 @@ public class DLFileVersionSoap implements Serializable {
 		soapModel.setFileEntryTypeId(model.getFileEntryTypeId());
 		soapModel.setVersion(model.getVersion());
 		soapModel.setSize(model.getSize());
-		soapModel.setStatus(model.getStatus());
-		soapModel.setStatusByUserId(model.getStatusByUserId());
-		soapModel.setStatusByUserName(model.getStatusByUserName());
-		soapModel.setStatusDate(model.getStatusDate());
 		soapModel.setSmallImageId(model.getSmallImageId());
 		soapModel.setLargeImageId(model.getLargeImageId());
 		soapModel.setCustom1ImageId(model.getCustom1ImageId());
 		soapModel.setCustom2ImageId(model.getCustom2ImageId());
+		soapModel.setStatus(model.getStatus());
+		soapModel.setStatusByUserId(model.getStatusByUserId());
+		soapModel.setStatusByUserName(model.getStatusByUserName());
+		soapModel.setStatusDate(model.getStatusDate());
 
 		return soapModel;
 	}
@@ -244,38 +244,6 @@ public class DLFileVersionSoap implements Serializable {
 		_size = size;
 	}
 
-	public int getStatus() {
-		return _status;
-	}
-
-	public void setStatus(int status) {
-		_status = status;
-	}
-
-	public long getStatusByUserId() {
-		return _statusByUserId;
-	}
-
-	public void setStatusByUserId(long statusByUserId) {
-		_statusByUserId = statusByUserId;
-	}
-
-	public String getStatusByUserName() {
-		return _statusByUserName;
-	}
-
-	public void setStatusByUserName(String statusByUserName) {
-		_statusByUserName = statusByUserName;
-	}
-
-	public Date getStatusDate() {
-		return _statusDate;
-	}
-
-	public void setStatusDate(Date statusDate) {
-		_statusDate = statusDate;
-	}
-
 	public long getSmallImageId() {
 		return _smallImageId;
 	}
@@ -308,6 +276,38 @@ public class DLFileVersionSoap implements Serializable {
 		_custom2ImageId = custom2ImageId;
 	}
 
+	public int getStatus() {
+		return _status;
+	}
+
+	public void setStatus(int status) {
+		_status = status;
+	}
+
+	public long getStatusByUserId() {
+		return _statusByUserId;
+	}
+
+	public void setStatusByUserId(long statusByUserId) {
+		_statusByUserId = statusByUserId;
+	}
+
+	public String getStatusByUserName() {
+		return _statusByUserName;
+	}
+
+	public void setStatusByUserName(String statusByUserName) {
+		_statusByUserName = statusByUserName;
+	}
+
+	public Date getStatusDate() {
+		return _statusDate;
+	}
+
+	public void setStatusDate(Date statusDate) {
+		_statusDate = statusDate;
+	}
+
 	private long _fileVersionId;
 	private long _groupId;
 	private long _companyId;
@@ -325,12 +325,12 @@ public class DLFileVersionSoap implements Serializable {
 	private long _fileEntryTypeId;
 	private String _version;
 	private long _size;
-	private int _status;
-	private long _statusByUserId;
-	private String _statusByUserName;
-	private Date _statusDate;
 	private long _smallImageId;
 	private long _largeImageId;
 	private long _custom1ImageId;
 	private long _custom2ImageId;
+	private int _status;
+	private long _statusByUserId;
+	private String _statusByUserName;
+	private Date _statusDate;
 }

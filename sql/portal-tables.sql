@@ -625,14 +625,14 @@ create table DLFileVersion (
 	fileEntryTypeId LONG,
 	version VARCHAR(75) null,
 	size_ LONG,
-	status INTEGER,
-	statusByUserId LONG,
-	statusByUserName VARCHAR(75) null,
-	statusDate DATE null,
 	smallImageId LONG,
 	largeImageId LONG,
 	custom1ImageId LONG,
-	custom2ImageId LONG
+	custom2ImageId LONG,
+	status INTEGER,
+	statusByUserId LONG,
+	statusByUserName VARCHAR(75) null,
+	statusDate DATE null
 );
 
 create table DLFolder (

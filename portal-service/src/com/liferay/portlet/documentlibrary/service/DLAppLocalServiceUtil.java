@@ -71,7 +71,7 @@ public class DLAppLocalServiceUtil {
 	* @param serviceContext the file entry's service context. Can specify the
 	file entry's asset category IDs, asset tag names, and expando
 	bridge attributes. In a Liferay repository, it may include:
-
+	
 	<ul>
 	<li>
 	fileEntryTypeId - ID for a custom file entry type
@@ -115,7 +115,7 @@ public class DLAppLocalServiceUtil {
 	* @param serviceContext the file entry's service context. Can specify the
 	file entry's asset category IDs, asset tag names, and expando
 	bridge attributes. In a Liferay repository, it may include:
-
+	
 	<ul>
 	<li>
 	fileEntryTypeId - ID for a custom file entry type
@@ -161,7 +161,7 @@ public class DLAppLocalServiceUtil {
 	* @param serviceContext the file entry's service context. Can specify the
 	file entry's asset category IDs, asset tag names, and expando
 	bridge attributes. In a Liferay repository, it may include:
-
+	
 	<ul>
 	<li>
 	fileEntryTypeId - ID for a custom file entry type
@@ -643,7 +643,7 @@ public class DLAppLocalServiceUtil {
 	* @param parentFolderId the primary key of the folder's parent folder
 	* @param name the folder's name
 	* @return the folder with the name in the parent folder
-	* @throws PortalException if the folder could not be found TODO check
+	* @throws PortalException if the folder could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public static com.liferay.portal.kernel.repository.model.Folder getFolder(
@@ -1142,7 +1142,7 @@ public class DLAppLocalServiceUtil {
 	* @param serviceContext the file entry's service context. Can specify the
 	file entry's asset category IDs, asset tag names, and expando
 	bridge attributes. In a Liferay repository, it may include:
-
+	
 	<ul>
 	<li>
 	fileEntryTypeId - ID for a custom file entry type
@@ -1187,7 +1187,7 @@ public class DLAppLocalServiceUtil {
 	* @param serviceContext the file entry's service context. Can specify the
 	file entry's asset category IDs, asset tag names, and expando
 	bridge attributes. In a Liferay repository, it may include:
-
+	
 	<ul>
 	<li>
 	fileEntryTypeId - ID for a custom file entry type
@@ -1233,7 +1233,7 @@ public class DLAppLocalServiceUtil {
 	* @param serviceContext the file entry's service context. Can specify the
 	file entry's asset category IDs, asset tag names, and expando
 	bridge attributes. In a Liferay repository, it may include:
-
+	
 	<ul>
 	<li>
 	fileEntryTypeId - ID for a custom file entry type
@@ -1336,7 +1336,7 @@ public class DLAppLocalServiceUtil {
 	* @param description the folder's description
 	* @param serviceContext the folder's service context. In a Liferay
 	repository, it may include:
-
+	
 	<ul>
 	<li>
 	defaultFileEntryTypeId - the file entry type to default all
@@ -1354,6 +1354,12 @@ public class DLAppLocalServiceUtil {
 	<li>
 	overrideFileEntryTypes - boolean specifying whether to override
 	ancestral folder's restriction of file entry types allowed
+	</li>
+	<li>
+	workflowDefinitionXYZ - the workflow definition name specified
+	per file entry type. The parameter name must be the string
+	<code>workflowDefinition</code> appended by the
+	<code>fileEntryTypeId</code> (optionally <code>0</code>).
 	</li>
 	</ul>
 	* @return the folder

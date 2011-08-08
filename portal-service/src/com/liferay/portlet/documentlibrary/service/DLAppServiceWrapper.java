@@ -43,7 +43,7 @@ public class DLAppServiceWrapper implements DLAppService {
 	* @param serviceContext the file entry's service context. Can specify the
 	file entry's asset category IDs, asset tag names, and expando
 	bridge attributes. In a Liferay repository, it may include:
-
+	
 	<ul>
 	<li>
 	fileEntryTypeId - ID for a custom file entry type
@@ -85,7 +85,7 @@ public class DLAppServiceWrapper implements DLAppService {
 	* @param serviceContext the file entry's service context. Can specify the
 	file entry's asset category IDs, asset tag names, and expando
 	bridge attributes. In a Liferay repository, it may include:
-
+	
 	<ul>
 	<li>
 	fileEntryTypeId - ID for a custom file entry type
@@ -129,7 +129,7 @@ public class DLAppServiceWrapper implements DLAppService {
 	* @param serviceContext the file entry's service context. Can specify the
 	file entry's asset category IDs, asset tag names, and expando
 	bridge attributes. In a Liferay repository, it may include:
-
+	
 	<ul>
 	<li>
 	fileEntryTypeId - ID for a custom file entry type
@@ -1669,7 +1669,7 @@ public class DLAppServiceWrapper implements DLAppService {
 	* @param serviceContext the file entry's service context. Can specify the
 	file entry's asset category IDs, asset tag names, and expando
 	bridge attributes. In a Liferay repository, it may include:
-
+	
 	<ul>
 	<li>
 	fileEntryTypeId - ID for a custom file entry type
@@ -1711,7 +1711,7 @@ public class DLAppServiceWrapper implements DLAppService {
 	* @param serviceContext the file entry's service context. Can specify the
 	file entry's asset category IDs, asset tag names, and expando
 	bridge attributes. In a Liferay repository, it may include:
-
+	
 	<ul>
 	<li>
 	fileEntryTypeId - ID for a custom file entry type
@@ -1754,7 +1754,7 @@ public class DLAppServiceWrapper implements DLAppService {
 	* @param serviceContext the file entry's service context. Can specify the
 	file entry's asset category IDs, asset tag names, and expando
 	bridge attributes. In a Liferay repository, it may include:
-
+	
 	<ul>
 	<li>
 	fileEntryTypeId - ID for a custom file entry type
@@ -1813,7 +1813,7 @@ public class DLAppServiceWrapper implements DLAppService {
 	* @param description the folder's description
 	* @param serviceContext the folder's service context. In a Liferay
 	repository, it may include:
-
+	
 	<ul>
 	<li>
 	defaultFileEntryTypeId - the file entry type to default all
@@ -1827,6 +1827,12 @@ public class DLAppServiceWrapper implements DLAppService {
 	<li>
 	overrideFileEntryTypes - boolean specifying whether to override
 	ancestral folder's restriction of file entry types allowed
+	</li>
+	<li>
+	workflowDefinitionXYZ - the workflow definition name specified
+	per file entry type. The parameter name must be the string
+	<code>workflowDefinition</code> appended by the
+	<code>fileEntryTypeId</code> (optionally <code>0</code>).
 	</li>
 	</ul>
 	* @return the folder

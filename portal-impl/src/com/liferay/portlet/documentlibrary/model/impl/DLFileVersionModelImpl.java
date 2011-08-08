@@ -83,16 +83,16 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion>
 			{ "fileEntryTypeId", Types.BIGINT },
 			{ "version", Types.VARCHAR },
 			{ "size_", Types.BIGINT },
-			{ "status", Types.INTEGER },
-			{ "statusByUserId", Types.BIGINT },
-			{ "statusByUserName", Types.VARCHAR },
-			{ "statusDate", Types.TIMESTAMP },
 			{ "smallImageId", Types.BIGINT },
 			{ "largeImageId", Types.BIGINT },
 			{ "custom1ImageId", Types.BIGINT },
-			{ "custom2ImageId", Types.BIGINT }
+			{ "custom2ImageId", Types.BIGINT },
+			{ "status", Types.INTEGER },
+			{ "statusByUserId", Types.BIGINT },
+			{ "statusByUserName", Types.VARCHAR },
+			{ "statusDate", Types.TIMESTAMP }
 		};
-	public static final String TABLE_SQL_CREATE = "create table DLFileVersion (fileVersionId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,repositoryId LONG,fileEntryId LONG,extension VARCHAR(75) null,mimeType VARCHAR(75) null,title VARCHAR(255) null,description STRING null,changeLog VARCHAR(75) null,extraSettings TEXT null,fileEntryTypeId LONG,version VARCHAR(75) null,size_ LONG,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null,smallImageId LONG,largeImageId LONG,custom1ImageId LONG,custom2ImageId LONG)";
+	public static final String TABLE_SQL_CREATE = "create table DLFileVersion (fileVersionId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,repositoryId LONG,fileEntryId LONG,extension VARCHAR(75) null,mimeType VARCHAR(75) null,title VARCHAR(255) null,description STRING null,changeLog VARCHAR(75) null,extraSettings TEXT null,fileEntryTypeId LONG,version VARCHAR(75) null,size_ LONG,smallImageId LONG,largeImageId LONG,custom1ImageId LONG,custom2ImageId LONG,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table DLFileVersion";
 	public static final String ORDER_BY_JPQL = " ORDER BY dlFileVersion.fileEntryId DESC, dlFileVersion.createDate DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY DLFileVersion.fileEntryId DESC, DLFileVersion.createDate DESC";
@@ -132,14 +132,14 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion>
 		model.setFileEntryTypeId(soapModel.getFileEntryTypeId());
 		model.setVersion(soapModel.getVersion());
 		model.setSize(soapModel.getSize());
-		model.setStatus(soapModel.getStatus());
-		model.setStatusByUserId(soapModel.getStatusByUserId());
-		model.setStatusByUserName(soapModel.getStatusByUserName());
-		model.setStatusDate(soapModel.getStatusDate());
 		model.setSmallImageId(soapModel.getSmallImageId());
 		model.setLargeImageId(soapModel.getLargeImageId());
 		model.setCustom1ImageId(soapModel.getCustom1ImageId());
 		model.setCustom2ImageId(soapModel.getCustom2ImageId());
+		model.setStatus(soapModel.getStatus());
+		model.setStatusByUserId(soapModel.getStatusByUserId());
+		model.setStatusByUserName(soapModel.getStatusByUserName());
+		model.setStatusDate(soapModel.getStatusDate());
 
 		return model;
 	}
@@ -410,6 +410,42 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion>
 	}
 
 	@JSON
+	public long getSmallImageId() {
+		return _smallImageId;
+	}
+
+	public void setSmallImageId(long smallImageId) {
+		_smallImageId = smallImageId;
+	}
+
+	@JSON
+	public long getLargeImageId() {
+		return _largeImageId;
+	}
+
+	public void setLargeImageId(long largeImageId) {
+		_largeImageId = largeImageId;
+	}
+
+	@JSON
+	public long getCustom1ImageId() {
+		return _custom1ImageId;
+	}
+
+	public void setCustom1ImageId(long custom1ImageId) {
+		_custom1ImageId = custom1ImageId;
+	}
+
+	@JSON
+	public long getCustom2ImageId() {
+		return _custom2ImageId;
+	}
+
+	public void setCustom2ImageId(long custom2ImageId) {
+		_custom2ImageId = custom2ImageId;
+	}
+
+	@JSON
 	public int getStatus() {
 		return _status;
 	}
@@ -457,42 +493,6 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion>
 
 	public void setStatusDate(Date statusDate) {
 		_statusDate = statusDate;
-	}
-
-	@JSON
-	public long getSmallImageId() {
-		return _smallImageId;
-	}
-
-	public void setSmallImageId(long smallImageId) {
-		_smallImageId = smallImageId;
-	}
-
-	@JSON
-	public long getLargeImageId() {
-		return _largeImageId;
-	}
-
-	public void setLargeImageId(long largeImageId) {
-		_largeImageId = largeImageId;
-	}
-
-	@JSON
-	public long getCustom1ImageId() {
-		return _custom1ImageId;
-	}
-
-	public void setCustom1ImageId(long custom1ImageId) {
-		_custom1ImageId = custom1ImageId;
-	}
-
-	@JSON
-	public long getCustom2ImageId() {
-		return _custom2ImageId;
-	}
-
-	public void setCustom2ImageId(long custom2ImageId) {
-		_custom2ImageId = custom2ImageId;
 	}
 
 	/**
@@ -590,14 +590,14 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion>
 		dlFileVersionImpl.setFileEntryTypeId(getFileEntryTypeId());
 		dlFileVersionImpl.setVersion(getVersion());
 		dlFileVersionImpl.setSize(getSize());
-		dlFileVersionImpl.setStatus(getStatus());
-		dlFileVersionImpl.setStatusByUserId(getStatusByUserId());
-		dlFileVersionImpl.setStatusByUserName(getStatusByUserName());
-		dlFileVersionImpl.setStatusDate(getStatusDate());
 		dlFileVersionImpl.setSmallImageId(getSmallImageId());
 		dlFileVersionImpl.setLargeImageId(getLargeImageId());
 		dlFileVersionImpl.setCustom1ImageId(getCustom1ImageId());
 		dlFileVersionImpl.setCustom2ImageId(getCustom2ImageId());
+		dlFileVersionImpl.setStatus(getStatus());
+		dlFileVersionImpl.setStatusByUserId(getStatusByUserId());
+		dlFileVersionImpl.setStatusByUserName(getStatusByUserName());
+		dlFileVersionImpl.setStatusDate(getStatusDate());
 
 		dlFileVersionImpl.resetOriginalValues();
 
@@ -769,6 +769,14 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion>
 
 		dlFileVersionCacheModel.size = getSize();
 
+		dlFileVersionCacheModel.smallImageId = getSmallImageId();
+
+		dlFileVersionCacheModel.largeImageId = getLargeImageId();
+
+		dlFileVersionCacheModel.custom1ImageId = getCustom1ImageId();
+
+		dlFileVersionCacheModel.custom2ImageId = getCustom2ImageId();
+
 		dlFileVersionCacheModel.status = getStatus();
 
 		dlFileVersionCacheModel.statusByUserId = getStatusByUserId();
@@ -789,14 +797,6 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion>
 		else {
 			dlFileVersionCacheModel.statusDate = Long.MIN_VALUE;
 		}
-
-		dlFileVersionCacheModel.smallImageId = getSmallImageId();
-
-		dlFileVersionCacheModel.largeImageId = getLargeImageId();
-
-		dlFileVersionCacheModel.custom1ImageId = getCustom1ImageId();
-
-		dlFileVersionCacheModel.custom2ImageId = getCustom2ImageId();
 
 		return dlFileVersionCacheModel;
 	}
@@ -839,14 +839,6 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion>
 		sb.append(getVersion());
 		sb.append(", size=");
 		sb.append(getSize());
-		sb.append(", status=");
-		sb.append(getStatus());
-		sb.append(", statusByUserId=");
-		sb.append(getStatusByUserId());
-		sb.append(", statusByUserName=");
-		sb.append(getStatusByUserName());
-		sb.append(", statusDate=");
-		sb.append(getStatusDate());
 		sb.append(", smallImageId=");
 		sb.append(getSmallImageId());
 		sb.append(", largeImageId=");
@@ -855,6 +847,14 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion>
 		sb.append(getCustom1ImageId());
 		sb.append(", custom2ImageId=");
 		sb.append(getCustom2ImageId());
+		sb.append(", status=");
+		sb.append(getStatus());
+		sb.append(", statusByUserId=");
+		sb.append(getStatusByUserId());
+		sb.append(", statusByUserName=");
+		sb.append(getStatusByUserName());
+		sb.append(", statusDate=");
+		sb.append(getStatusDate());
 		sb.append("}");
 
 		return sb.toString();
@@ -936,22 +936,6 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion>
 		sb.append(getSize());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>status</column-name><column-value><![CDATA[");
-		sb.append(getStatus());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>statusByUserId</column-name><column-value><![CDATA[");
-		sb.append(getStatusByUserId());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>statusByUserName</column-name><column-value><![CDATA[");
-		sb.append(getStatusByUserName());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>statusDate</column-name><column-value><![CDATA[");
-		sb.append(getStatusDate());
-		sb.append("]]></column-value></column>");
-		sb.append(
 			"<column><column-name>smallImageId</column-name><column-value><![CDATA[");
 		sb.append(getSmallImageId());
 		sb.append("]]></column-value></column>");
@@ -966,6 +950,22 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion>
 		sb.append(
 			"<column><column-name>custom2ImageId</column-name><column-value><![CDATA[");
 		sb.append(getCustom2ImageId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>status</column-name><column-value><![CDATA[");
+		sb.append(getStatus());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>statusByUserId</column-name><column-value><![CDATA[");
+		sb.append(getStatusByUserId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>statusByUserName</column-name><column-value><![CDATA[");
+		sb.append(getStatusByUserName());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>statusDate</column-name><column-value><![CDATA[");
+		sb.append(getStatusDate());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
@@ -998,15 +998,15 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion>
 	private String _version;
 	private String _originalVersion;
 	private long _size;
+	private long _smallImageId;
+	private long _largeImageId;
+	private long _custom1ImageId;
+	private long _custom2ImageId;
 	private int _status;
 	private long _statusByUserId;
 	private String _statusByUserUuid;
 	private String _statusByUserName;
 	private Date _statusDate;
-	private long _smallImageId;
-	private long _largeImageId;
-	private long _custom1ImageId;
-	private long _custom2ImageId;
 	private transient ExpandoBridge _expandoBridge;
 	private DLFileVersion _escapedModelProxy;
 }
