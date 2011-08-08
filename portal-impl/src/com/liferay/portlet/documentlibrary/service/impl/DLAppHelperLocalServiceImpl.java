@@ -53,8 +53,6 @@ public class DLAppHelperLocalServiceImpl
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		// Message boards
-
 		if (PropsValues.DL_FILE_ENTRY_COMMENTS_ENABLED) {
 			mbMessageLocalService.addDiscussionMessage(
 				fileEntry.getUserId(), fileEntry.getUserName(),
@@ -89,7 +87,6 @@ public class DLAppHelperLocalServiceImpl
 		// Sync
 
 		if (!isStagingGroup(fileEntry.getGroupId())) {
-
 			dlSyncLocalService.updateSync(
 				fileEntry.getFileEntryId(), DLSyncConstants.EVENT_DELETE);
 		}
@@ -119,10 +116,8 @@ public class DLAppHelperLocalServiceImpl
 		throws PortalException, SystemException {
 
 		if (!isStagingGroup(folder.getGroupId())) {
-
 			dlSyncLocalService.updateSync(
 				folder.getFolderId(), DLSyncConstants.EVENT_DELETE);
-
 		}
 	}
 
@@ -227,6 +222,7 @@ public class DLAppHelperLocalServiceImpl
 		return assetEntry;
 	}
 
+	@SuppressWarnings("unused")
 	public void updateFileEntry(
 			FileEntry fileEntry, FileVersion fileVersion,
 			ServiceContext serviceContext)
@@ -304,22 +300,6 @@ public class DLAppHelperLocalServiceImpl
 					fileEntry.getFileEntryId(), true);
 			}
 
-			// Social
-
-			int activityType = DLActivityKeys.UPDATE_FILE_ENTRY;
-
-			if (latestFileVersionVersion.equals(
-					DLFileEntryConstants.VERSION_DEFAULT)) {
-
-				activityType = DLActivityKeys.ADD_FILE_ENTRY;
-			}
-
-			socialActivityLocalService.addUniqueActivity(
-				latestFileVersion.getStatusByUserId(),
-				fileEntry.getGroupId(), latestFileVersion.getCreateDate(),
-				DLFileEntryConstants.getClassName(), fileEntry.getFileEntryId(),
-				activityType, StringPool.BLANK, 0);
-
 			// Sync
 
 			if (!isStagingGroup(fileEntry.getGroupId())) {
@@ -336,6 +316,22 @@ public class DLAppHelperLocalServiceImpl
 						DLSyncConstants.EVENT_DELETE);
 				}
 			}
+
+			// Social
+
+			int activityType = DLActivityKeys.UPDATE_FILE_ENTRY;
+
+			if (latestFileVersionVersion.equals(
+					DLFileEntryConstants.VERSION_DEFAULT)) {
+
+				activityType = DLActivityKeys.ADD_FILE_ENTRY;
+			}
+
+			socialActivityLocalService.addUniqueActivity(
+				latestFileVersion.getStatusByUserId(),
+				fileEntry.getGroupId(), latestFileVersion.getCreateDate(),
+				DLFileEntryConstants.getClassName(), fileEntry.getFileEntryId(),
+				activityType, StringPool.BLANK, 0);
 		}
 		else {
 
