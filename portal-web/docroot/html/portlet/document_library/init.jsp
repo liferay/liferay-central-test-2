@@ -96,13 +96,11 @@ String portletResource = ParamUtil.getString(request, "portletResource");
 
 long rootFolderId = PrefsParamUtil.getLong(preferences, request, "rootFolderId", DLFolderConstants.DEFAULT_PARENT_FOLDER_ID);
 
-Folder rootFolder = null;
-
 String rootFolderName = StringPool.BLANK;
 
 if (rootFolderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
 	try {
-		rootFolder = DLAppLocalServiceUtil.getFolder(rootFolderId);
+		Folder rootFolder = DLAppLocalServiceUtil.getFolder(rootFolderId);
 
 		rootFolderName = rootFolder.getName();
 	}
