@@ -45,7 +45,6 @@ field.enable.com.liferay.portal.model.Contact.birthday
 field.enable.com.liferay.portal.model.Contact.male
 field.enable.com.liferay.portal.model.Organization.status
 hot.deploy.listeners
-image.hook.impl
 javascript.fast.load
 layout.static.portlets.all
 layout.template.cache.enabled

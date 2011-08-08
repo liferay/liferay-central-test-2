@@ -1256,10 +1256,6 @@ public class PortalUtil {
 		return getPortal().isGroupOwner(user, groupId);
 	}
 
-	public static boolean isImageGalleryUsingDLHook() {
-		return getPortal().isImageGalleryUsingDLHook();
-	}
-
 	public static boolean isLayoutDescendant(Layout layout, long layoutId)
 		throws PortalException, SystemException {
 

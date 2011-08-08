@@ -146,14 +146,8 @@
 	<#assign toggle_controls_url = "javascript:;" />
 </#if>
 
-<#if permissionChecker.isOmniadmin()>
-	<#if portalUtil.isUpdateAvailable()>
-		<#assign update_available_url = htmlUtil.escape(theme_display.getURLUpdateManager().toString()) />
-	</#if>
-
-	<#if !portalUtil.isImageGalleryUsingDLHook()>
-		<#assign upgrade_image_gallery_url = htmlUtil.escape(theme_display.getURLUpgradeImageGallery().toString()) />
-	</#if>
+<#if permissionChecker.isOmniadmin() && portalUtil.isUpdateAvailable()>
+	<#assign update_available_url = htmlUtil.escape(theme_display.getURLUpdateManager().toString()) />
 </#if>
 
 <#-- ---------- Page ---------- -->

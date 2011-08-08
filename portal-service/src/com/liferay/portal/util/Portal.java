@@ -937,8 +937,6 @@ public interface Portal {
 
 	public boolean isGroupOwner(User user, long groupId) throws Exception;
 
-	public boolean isImageGalleryUsingDLHook();
-
 	public boolean isLayoutDescendant(Layout layout, long layoutId)
 		throws PortalException, SystemException;
 

@@ -200,7 +200,6 @@ public class HookHotDeployListener
 		"field.enable.com.liferay.portal.model.Contact.male",
 		"field.enable.com.liferay.portal.model.Organization.status",
 		"hot.deploy.listeners",
-		"image.hook.impl",
 		"javascript.fast.load",
 		"layout.static.portlets.all",
 		"layout.template.cache.enabled",
@@ -409,10 +408,6 @@ public class HookHotDeployListener
 
 		if (portalProperties.containsKey(PropsKeys.DL_STORE_IMPL)) {
 			StoreFactory.setInstance(null);
-		}
-
-		if (portalProperties.containsKey(PropsKeys.IMAGE_HOOK_IMPL)) {
-			com.liferay.portal.image.HookFactory.setInstance(null);
 		}
 
 		if (portalProperties.containsKey(
@@ -1639,19 +1634,6 @@ public class HookHotDeployListener
 				portletClassLoader, Store.class, storeClassName);
 
 			StoreFactory.setInstance(store);
-		}
-
-		if (portalProperties.containsKey(PropsKeys.IMAGE_HOOK_IMPL)) {
-			String imageHookClassName = portalProperties.getProperty(
-				PropsKeys.IMAGE_HOOK_IMPL);
-
-			com.liferay.portal.kernel.image.Hook imageHook =
-				(com.liferay.portal.kernel.image.Hook)newInstance(
-					portletClassLoader,
-					com.liferay.portal.kernel.image.Hook.class,
-					imageHookClassName);
-
-			com.liferay.portal.image.HookFactory.setInstance(imageHook);
 		}
 
 		if (portalProperties.containsKey(
