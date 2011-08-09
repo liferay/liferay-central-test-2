@@ -63,12 +63,6 @@ if (!group.isUser() && selLayout.isTypePortlet()) {
 }
 
 String[][] categorySections = {mainSections};
-
-String friendlyURL = StringPool.BLANK;
-
-if (selLayout != null) {
-	friendlyURL = selLayout.getFriendlyURL();
-}
 %>
 
 <div class="lfr-header-row title">
@@ -89,10 +83,10 @@ if (selLayout != null) {
 	<aui:input name="groupId" type="hidden" value="<%= groupId %>" />
 	<aui:input name="liveGroupId" type="hidden" value="<%= liveGroupId %>" />
 	<aui:input name="stagingGroupId" type="hidden" value="<%= stagingGroupId %>" />
+	<aui:input name="selPlid" type="hidden" value="<%= selPlid %>" />
 	<aui:input name="privateLayout" type="hidden" value="<%= privateLayout %>" />
 	<aui:input name="layoutId" type="hidden" value="<%= layoutId %>" />
-	<aui:input name="friendlyURL" type="hidden" value="<%= friendlyURL %>" />
-	<aui:input name="selPlid" type="hidden" value="<%= selPlid %>" />
+	<aui:input name="friendlyURL" type="hidden" value="<%= (selLayout != null) ? selLayout.getFriendlyURL() : StringPool.BLANK %>" />
 	<aui:input name="<%= PortletDataHandlerKeys.SELECTED_LAYOUTS %>" type="hidden" />
 
 	<c:if test="<%= layoutRevision != null && !incomplete%>">
