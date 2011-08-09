@@ -54,9 +54,9 @@ String content = BeanParamUtil.getString(wikiPage, request, "content");
 
 		Map<String,String> fileBrowserParams = new HashMap();
 
+		fileBrowserParams.put("attachmentURLPrefix", attachmentURLPrefix);
 		fileBrowserParams.put("Type", "Attachment");
 		fileBrowserParams.put("wikiPageResourcePrimKey", String.valueOf(resourcePrimKey));
-		fileBrowserParams.put("attachmentURLPrefix", attachmentURLPrefix);
 		%>
 
 		<liferay-ui:input-editor
