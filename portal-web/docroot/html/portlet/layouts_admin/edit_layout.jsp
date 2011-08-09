@@ -43,7 +43,9 @@ String layoutSetBranchName = StringPool.BLANK;
 boolean incomplete = false;
 
 if (layoutRevision != null) {
-	long recentLayoutSetBranchId = StagingUtil.getRecentLayoutSetBranchId(user, selLayout.getLayoutSet().getLayoutSetId());
+	LayoutSet layoutSet = selLayout.getLayoutSet();
+
+	long recentLayoutSetBranchId = StagingUtil.getRecentLayoutSetBranchId(user, layoutSet.getLayoutSetId());
 
 	incomplete = StagingUtil.isIncomplete(selLayout, recentLayoutSetBranchId);
 
