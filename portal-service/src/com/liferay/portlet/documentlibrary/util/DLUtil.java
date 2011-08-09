@@ -118,15 +118,6 @@ public class DLUtil {
 			LiferayPortletResponse liferayPortletResponse)
 		throws Exception {
 
-		PortletPreferences preferences =
-			PortletPreferencesFactoryUtil.getPortletPreferences(
-				request, PortalUtil.getPortletId(request));
-
-		long defaultFolderId = GetterUtil.getLong(
-			preferences.getValue(
-				"rootFolderId",
-				String.valueOf(DLFolderConstants.DEFAULT_PARENT_FOLDER_ID)));
-
 		ThemeDisplay themeDisplay =	(ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
@@ -146,7 +137,7 @@ public class DLUtil {
 
 		Map<String, Object> data = new HashMap<String, Object>();
 
-		data.put("folder-id", defaultFolderId);
+		data.put("folder-id", _getDefaultFolderId(request));
 		data.put("refresh-folders", Boolean.TRUE.toString());
 
 		PortalUtil.addPortletBreadcrumbEntry(
@@ -161,14 +152,7 @@ public class DLUtil {
 			PortletURL portletURL)
 		throws Exception {
 
-		PortletPreferences preferences =
-			PortletPreferencesFactoryUtil.getPortletPreferences(
-				request, PortalUtil.getPortletId(request));
-
-		long defaultFolderId = GetterUtil.getLong(
-			preferences.getValue(
-				"rootFolderId",
-				String.valueOf(DLFolderConstants.DEFAULT_PARENT_FOLDER_ID)));
+		long defaultFolderId = _getDefaultFolderId(request);
 
 		List<Folder> ancestorFolders = Collections.emptyList();
 
@@ -231,15 +215,6 @@ public class DLUtil {
 			RenderResponse renderResponse)
 		throws Exception {
 
-		PortletPreferences preferences =
-			PortletPreferencesFactoryUtil.getPortletPreferences(
-				request, PortalUtil.getPortletId(request));
-
-		long defaultFolderId = GetterUtil.getLong(
-			preferences.getValue(
-				"rootFolderId",
-				String.valueOf(DLFolderConstants.DEFAULT_PARENT_FOLDER_ID)));
-
 		String strutsAction = ParamUtil.getString(
 			request, "struts_action");
 
@@ -262,7 +237,7 @@ public class DLUtil {
 
 			Map<String, Object> data = new HashMap<String, Object>();
 
-			data.put("folder-id", defaultFolderId);
+			data.put("folder-id", _getDefaultFolderId(request));
 			data.put("refresh-folders", Boolean.TRUE.toString());
 
 			PortalUtil.addPortletBreadcrumbEntry(
@@ -385,6 +360,23 @@ public class DLUtil {
 		return sb.toString();
 	}
 
+	private static long _getDefaultFolderId(HttpServletRequest request)
+		throws Exception {
+
+		PortletPreferences portletPreferences =
+			PortletPreferencesFactoryUtil.getPortletPreferences(
+				request, PortalUtil.getPortletId(request));
+
+		return GetterUtil.getLong(
+			portletPreferences.getValue(
+				"rootFolderId",
+				String.valueOf(DLFolderConstants.DEFAULT_PARENT_FOLDER_ID)));
+	}
+
+	private Set<String> _fileIcons = new HashSet<String>();
+
+	private Map<String, String> _genericNames = new HashMap<String, String>();
+
 	private DLUtil() {
 		String[] fileIcons = null;
 
@@ -455,8 +447,5 @@ public class DLUtil {
 	private static Log _log = LogFactoryUtil.getLog(DLUtil.class);
 
 	private static DLUtil _instance = new DLUtil();
-
-	private Set<String> _fileIcons = new HashSet<String>();
-	private Map<String, String> _genericNames = new HashMap<String, String>();
 
 }

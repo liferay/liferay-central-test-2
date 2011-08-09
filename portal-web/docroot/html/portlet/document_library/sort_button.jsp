@@ -17,10 +17,10 @@
 <%@ include file="/html/portlet/document_library/init.jsp" %>
 
 <%
+long folderId = GetterUtil.getLong((String)request.getAttribute("view.jsp-folderId"));
+
 String orderByCol = ParamUtil.getString(request, "orderByCol");
 String orderByType = ParamUtil.getString(request, "orderByType");
-
-long folderId = GetterUtil.getLong((String)request.getAttribute("view.jsp-folderId"));
 %>
 
 <liferay-ui:icon-menu align="left" direction="down" icon="" message="sort-by" showExpanded="<%= false %>" showWhenSingleIcon="<%= false %>">

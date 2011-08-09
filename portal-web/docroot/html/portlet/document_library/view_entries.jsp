@@ -333,8 +333,8 @@ for (int i = 0; i < results.size(); i++) {
 
 					data.put("folder", true);
 					data.put("folder-id", curFolder.getFolderId());
-					data.put("resource-url", viewEntriesURL);
 					data.put("refresh-folders", true);
+					data.put("resource-url", viewEntriesURL);
 
 					TextSearchEntry folderTitleSearchEntry = new TextSearchEntry();
 

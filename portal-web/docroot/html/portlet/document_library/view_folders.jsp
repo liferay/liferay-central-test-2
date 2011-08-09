@@ -21,8 +21,6 @@ Folder folder = (Folder)request.getAttribute("view.jsp-folder");
 
 long folderId = GetterUtil.getLong((String)request.getAttribute("view.jsp-folderId"));
 
-long fileEntryTypeId = ParamUtil.getLong(request, "fileEntryTypeId", -1);
-
 long repositoryId = GetterUtil.getLong((String)request.getAttribute("view.jsp-repositoryId"));
 
 long parentFolderId = DLFolderConstants.DEFAULT_PARENT_FOLDER_ID;
@@ -54,6 +52,8 @@ if (showSiblings) {
 else {
 	parentFolderId = folderId;
 }
+
+long fileEntryTypeId = ParamUtil.getLong(request, "fileEntryTypeId", -1);
 
 int entryStart = ParamUtil.getInteger(request, "entryStart");
 int entryEnd = ParamUtil.getInteger(request, "entryEnd", SearchContainer.DEFAULT_DELTA);
