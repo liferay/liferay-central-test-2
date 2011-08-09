@@ -747,9 +747,8 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 		if (parentPortletsPool == null) {
 
-			// The Upgrade scripts sometimes try to access portlet
-			// preferences before the portal's been initialized. Return an
-			// empty pool.
+			// The Upgrade scripts sometimes try to access portlet preferences
+			// before the portal's been initialized. Return an empty pool.
 
 			return portletsPool;
 		}
@@ -768,8 +767,8 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		for (Portlet portlet : portlets) {
 			Portlet portletModel = portletsPool.get(portlet.getPortletId());
 
-			// Portlet may be null if it exists in the database but its
-			// portlet WAR is not yet loaded
+			// Portlet may be null if it exists in the database but its portlet
+			// WAR is not yet loaded
 
 			if (portletModel != null) {
 				portletModel.setPluginPackage(portlet.getPluginPackage());
@@ -939,7 +938,6 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			(Map<String, Portlet>)_companyPortletsPool.get(key);
 
 		if (portletsPool == null) {
-			// Call aop proxy to load up portlets pool
 			portletsPool = portletLocalService.loadPortletsPool(companyId);
 
 			_companyPortletsPool.put(key, portletsPool);
