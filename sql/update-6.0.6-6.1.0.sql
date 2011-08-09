@@ -456,6 +456,8 @@ create table ResourceBlockPermission (
     actionIds LONG
 );
 
+alter table ResourcePermission add ownerId LONG;
+
 create table ResourceTypePermission (
     resourceTypePermissionId LONG not null primary key,
     companyId LONG,
@@ -464,8 +466,6 @@ create table ResourceTypePermission (
     roleId LONG,
     actionIds LONG
 );
-
-alter table ResourcePermission add ownerId LONG;
 
 alter table SocialEquityLog add extraData VARCHAR(255) null;
 
