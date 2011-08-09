@@ -331,10 +331,11 @@ public class PermissionImporter {
 
 			if (role == null) {
 				String description = roleElement.attributeValue("description");
-				int type = Integer.valueOf(roleElement.attributeValue("type"));
 
 				Map<Locale, String> descriptionMap =
 					LocalizationUtil.getLocalizationMap(description);
+
+				int type = Integer.valueOf(roleElement.attributeValue("type"));
 
 				role = RoleLocalServiceUtil.addRole(
 					userId, companyId, name, null, descriptionMap, type);
