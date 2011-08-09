@@ -2496,7 +2496,6 @@
 	</entity>
 	<exceptions>
 		<exception>AccountName</exception>
-		<exception>Adaptor</exception>
 		<exception>AddressCity</exception>
 		<exception>AddressStreet</exception>
 		<exception>AddressZip</exception>

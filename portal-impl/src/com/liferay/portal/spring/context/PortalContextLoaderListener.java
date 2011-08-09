@@ -129,15 +129,6 @@ public class PortalContextLoaderListener extends ContextLoaderListener {
 
 		PortalBeanLocatorUtil.setBeanLocator(beanLocator);
 
-		try {
-			AdaptorUtil.init(servletContext, applicationContext);
-
-			AdaptorUtil.start();
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
-
 		ClassLoader classLoader = portalClassLoader;
 
 		while (classLoader != null) {
@@ -150,6 +141,15 @@ public class PortalContextLoaderListener extends ContextLoaderListener {
 			applicationContext.getAutowireCapableBeanFactory();
 
 		clearFilteredPropertyDescriptorsCache(autowireCapableBeanFactory);
+
+		try {
+			AdaptorUtil.init(servletContext, applicationContext);
+
+			AdaptorUtil.start();
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
 	}
 
 	@Override
@@ -163,17 +163,17 @@ public class PortalContextLoaderListener extends ContextLoaderListener {
 			PortalContextLoaderLifecycleThreadLocal.setDestroying(false);
 		}
 
-		ThreadLocalCacheManager.destroy();
-
 		try {
-			ClearThreadLocalUtil.clearThreadLocal();
+			AdaptorUtil.stop();
 		}
 		catch (Exception e) {
 			_log.error(e, e);
 		}
 
+		ThreadLocalCacheManager.destroy();
+
 		try {
-			AdaptorUtil.stop();
+			ClearThreadLocalUtil.clearThreadLocal();
 		}
 		catch (Exception e) {
 			_log.error(e, e);

@@ -14,7 +14,6 @@
 
 package com.liferay.portal.kernel.adaptor;
 
-
 /**
  * @author Raymond Augé
  */

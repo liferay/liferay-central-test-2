@@ -14,10 +14,9 @@
 
 package com.liferay.portal.kernel.adaptor;
 
-import com.liferay.portal.AdaptorException;
+import com.liferay.portal.kernel.util.ServiceLoader;
 
-import java.util.Iterator;
-import java.util.ServiceLoader;
+import java.util.List;
 
 import javax.servlet.ServletContext;
 
@@ -26,14 +25,21 @@ import javax.servlet.ServletContext;
  */
 public class AdaptorUtil {
 
-	public static Adaptor getAdaptor() {
-		if (_adaptor == null) {
-			Iterator<AdaptorFactory> iterator = ServiceLoader.load(
-				AdaptorFactory.class).iterator();
+	public static Adaptor getAdaptor() throws AdaptorException {
+		if (_adaptor != null) {
+			return _adaptor;
+		}
 
-			if (iterator.hasNext()) {
-				_adaptor = iterator.next().newAdaptor();
+		try {
+			List<AdaptorFactory> services = ServiceLoader.load(
+				AdaptorFactory.class);
+
+			for (AdaptorFactory adaptorFactory : services) {
+				_adaptor = adaptorFactory.newAdaptor();
 			}
+		}
+		catch (Exception e) {
+			throw new AdaptorException(e);
 		}
 
 		return _adaptor;
@@ -43,19 +49,25 @@ public class AdaptorUtil {
 		throws AdaptorException {
 
 		if (hasAdaptor()) {
-			getAdaptor().init(servletContext, beanContext);
+			Adaptor adaptor = getAdaptor();
+
+			adaptor.init(servletContext, beanContext);
 		}
 	}
 
 	public static void start() throws AdaptorException {
 		if (hasAdaptor()) {
-			getAdaptor().start();
+			Adaptor adaptor = getAdaptor();
+
+			adaptor.start();
 		}
 	}
 
 	public static void stop() throws AdaptorException {
 		if (hasAdaptor()) {
-			getAdaptor().stop();
+			Adaptor adaptor = getAdaptor();
+
+			adaptor.stop();
 		}
 	}
 
@@ -63,8 +75,10 @@ public class AdaptorUtil {
 		_adaptor = adaptor;
 	}
 
-	protected static boolean hasAdaptor() {
-		if (getAdaptor() != null) {
+	protected static boolean hasAdaptor() throws AdaptorException {
+		Adaptor adaptor = getAdaptor();
+
+		if (adaptor != null) {
 			return true;
 		}
 

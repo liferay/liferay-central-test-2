@@ -12,12 +12,12 @@
  * details.
  */
 
-package com.liferay.portal;
+package com.liferay.portal.kernel.adaptor;
 
 import com.liferay.portal.kernel.exception.PortalException;
 
 /**
- * @author Brian Wing Shun Chan
+ * @author Raymond Augé
  */
 public class AdaptorException extends PortalException {
 

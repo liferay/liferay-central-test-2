@@ -14,10 +14,7 @@
 
 package com.liferay.portal.kernel.adaptor;
 
-import com.liferay.portal.AdaptorException;
-
 import javax.servlet.ServletContext;
-
 
 /**
  * @author Raymond Augé
