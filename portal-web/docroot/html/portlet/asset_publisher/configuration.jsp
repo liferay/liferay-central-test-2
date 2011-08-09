@@ -324,27 +324,6 @@ Group scopeGroup = themeDisplay.getScopeGroup();
 
 									row.addText(sb.toString(), rowURL);
 								}
-								else if (assetEntryClassName.equals(IGImage.class.getName())) {
-									IGImage image = IGImageLocalServiceUtil.getImage(assetEntry.getClassPK());
-
-									image = image.toEscapedModel();
-
-									StringBundler sb = new StringBundler(11);
-
-									sb.append("<img alt=\"");
-									sb.append(image.getName());
-									sb.append("\" src=\"");
-									sb.append(themeDisplay.getPathImage());
-									sb.append("/image_gallery?img_id=");
-									sb.append(image.getSmallImageId());
-									sb.append("&t=");
-									sb.append(ImageServletTokenUtil.getToken(image.getSmallImageId()));
-									sb.append("\" style=\"border-width: 1; \" title=\"");
-									sb.append(image.getDescription());
-									sb.append("\" />");
-
-									row.addText(sb.toString(), rowURL);
-								}
 								else {
 									row.addText(title, rowURL);
 								}
