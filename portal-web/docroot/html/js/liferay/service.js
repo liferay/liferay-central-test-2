@@ -590,6 +590,7 @@ Liferay.Service.registerClass(
 	Liferay.Service.Asset, "AssetVocabulary",
 	{
 		addVocabulary: true,
+		deleteVocabularies: true,
 		deleteVocabulary: true,
 		getCompanyVocabularies: true,
 		getGroupsVocabularies: true,
