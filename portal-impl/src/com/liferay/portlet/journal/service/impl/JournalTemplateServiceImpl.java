@@ -22,13 +22,10 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.journal.model.JournalTemplate;
 import com.liferay.portlet.journal.service.base.JournalTemplateServiceBaseImpl;
 import com.liferay.portlet.journal.service.permission.JournalPermission;
-import com.liferay.portlet.journal.service.permission.JournalStructurePermission;
 import com.liferay.portlet.journal.service.permission.JournalTemplatePermission;
 
 import java.io.File;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -36,22 +33,6 @@ import java.util.List;
  * @author Raymond Augé
  */
 public class JournalTemplateServiceImpl extends JournalTemplateServiceBaseImpl {
-
-	public JournalTemplate addTemplate(
-			long groupId, String templateId, boolean autoTemplateId,
-			String structureId, String name, String description, String xsl,
-			boolean formatXsl, String langType, boolean cacheable,
-			ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		JournalPermission.check(
-			getPermissionChecker(), groupId, ActionKeys.ADD_TEMPLATE);
-
-		return journalTemplateLocalService.addTemplate(
-			getUserId(), groupId, templateId, autoTemplateId, structureId, name,
-			description, xsl, formatXsl, langType, cacheable, false, null, null,
-			serviceContext);
-	}
 
 	public JournalTemplate addTemplate(
 			long groupId, String templateId, boolean autoTemplateId,
@@ -68,6 +49,22 @@ public class JournalTemplateServiceImpl extends JournalTemplateServiceBaseImpl {
 			getUserId(), groupId, templateId, autoTemplateId, structureId, name,
 			description, xsl, formatXsl, langType, cacheable, smallImage,
 			smallImageURL, smallFile, serviceContext);
+	}
+
+	public JournalTemplate addTemplate(
+			long groupId, String templateId, boolean autoTemplateId,
+			String structureId, String name, String description, String xsl,
+			boolean formatXsl, String langType, boolean cacheable,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		JournalPermission.check(
+			getPermissionChecker(), groupId, ActionKeys.ADD_TEMPLATE);
+
+		return journalTemplateLocalService.addTemplate(
+			getUserId(), groupId, templateId, autoTemplateId, structureId, name,
+			description, xsl, formatXsl, langType, cacheable, false, null, null,
+			serviceContext);
 	}
 
 	public JournalTemplate copyTemplate(
@@ -154,20 +151,6 @@ public class JournalTemplateServiceImpl extends JournalTemplateServiceBaseImpl {
 	public JournalTemplate updateTemplate(
 			long groupId, String templateId, String structureId, String name,
 			String description, String xsl, boolean formatXsl, String langType,
-			boolean cacheable, ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		JournalTemplatePermission.check(
-			getPermissionChecker(), groupId, templateId, ActionKeys.UPDATE);
-
-		return journalTemplateLocalService.updateTemplate(
-			groupId, templateId, structureId, name, description, xsl, formatXsl,
-			langType, cacheable, false, null, null, serviceContext);
-	}
-
-	public JournalTemplate updateTemplate(
-			long groupId, String templateId, String structureId, String name,
-			String description, String xsl, boolean formatXsl, String langType,
 			boolean cacheable, boolean smallImage, String smallImageURL,
 			File smallFile, ServiceContext serviceContext)
 		throws PortalException, SystemException {
@@ -179,6 +162,20 @@ public class JournalTemplateServiceImpl extends JournalTemplateServiceBaseImpl {
 			groupId, templateId, structureId, name, description, xsl, formatXsl,
 			langType, cacheable, smallImage, smallImageURL, smallFile,
 			serviceContext);
+	}
+
+	public JournalTemplate updateTemplate(
+			long groupId, String templateId, String structureId, String name,
+			String description, String xsl, boolean formatXsl, String langType,
+			boolean cacheable, ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		JournalTemplatePermission.check(
+			getPermissionChecker(), groupId, templateId, ActionKeys.UPDATE);
+
+		return journalTemplateLocalService.updateTemplate(
+			groupId, templateId, structureId, name, description, xsl, formatXsl,
+			langType, cacheable, false, null, null, serviceContext);
 	}
 
 }

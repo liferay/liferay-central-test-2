@@ -253,9 +253,11 @@ portletURL.setParameter("tabs1", tabs1);
 
 				row.addText(template.getTemplateId(), rowURL);
 
-				// Name, description, and image
+				// Name
 
 				row.addText(template.getName(), rowURL);
+
+				// Description and image
 
 				row.addJSP("/html/portlet/journal/template_description.jsp");
 

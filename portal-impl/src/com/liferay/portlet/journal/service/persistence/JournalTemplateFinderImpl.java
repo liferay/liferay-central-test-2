@@ -89,49 +89,6 @@ public class JournalTemplateFinderImpl
 			structureIdComparator, names, descriptions, andOperator, false);
 	}
 
-	public List<JournalTemplate> findByKeywords(
-			long companyId, long[] groupIds, String keywords,
-			String structureId, String structureIdComparator, int start,
-			int end, OrderByComparator obc)
-		throws SystemException {
-
-		String[] templateIds = null;
-		String[] names = null;
-		String[] descriptions = null;
-		boolean andOperator = false;
-
-		if (Validator.isNotNull(keywords)) {
-			templateIds = CustomSQLUtil.keywords(keywords, false);
-			names = CustomSQLUtil.keywords(keywords);
-			descriptions = CustomSQLUtil.keywords(keywords);
-		}
-		else {
-			andOperator = true;
-		}
-
-		return doFindByC_G_T_S_N_D(
-			companyId, groupIds, templateIds, structureId,
-			structureIdComparator, names, descriptions, andOperator, start, end,
-			obc, false);
-	}
-
-	public List<JournalTemplate> findByC_G_T_S_N_D(
-			long companyId, long[] groupIds, String templateId,
-			String structureId, String structureIdComparator, String name,
-			String description, boolean andOperator, int start, int end,
-			OrderByComparator obc)
-		throws SystemException {
-
-		String[] templateIds = CustomSQLUtil.keywords(templateId, false);
-		String[] names = CustomSQLUtil.keywords(name);
-		String[] descriptions = CustomSQLUtil.keywords(description);
-
-		return doFindByC_G_T_S_N_D(
-			companyId, groupIds, templateIds, structureId,
-			structureIdComparator, names, descriptions, andOperator, start, end,
-			obc, false);
-	}
-
 	public int filterCountByKeywords(
 			long companyId, long[] groupIds, String keywords,
 			String structureId, String structureIdComparator)
@@ -212,6 +169,49 @@ public class JournalTemplateFinderImpl
 			companyId, groupIds, templateIds, structureId,
 			structureIdComparator, names, descriptions, andOperator, start, end,
 			obc, true);
+	}
+
+	public List<JournalTemplate> findByKeywords(
+			long companyId, long[] groupIds, String keywords,
+			String structureId, String structureIdComparator, int start,
+			int end, OrderByComparator obc)
+		throws SystemException {
+
+		String[] templateIds = null;
+		String[] names = null;
+		String[] descriptions = null;
+		boolean andOperator = false;
+
+		if (Validator.isNotNull(keywords)) {
+			templateIds = CustomSQLUtil.keywords(keywords, false);
+			names = CustomSQLUtil.keywords(keywords);
+			descriptions = CustomSQLUtil.keywords(keywords);
+		}
+		else {
+			andOperator = true;
+		}
+
+		return doFindByC_G_T_S_N_D(
+			companyId, groupIds, templateIds, structureId,
+			structureIdComparator, names, descriptions, andOperator, start, end,
+			obc, false);
+	}
+
+	public List<JournalTemplate> findByC_G_T_S_N_D(
+			long companyId, long[] groupIds, String templateId,
+			String structureId, String structureIdComparator, String name,
+			String description, boolean andOperator, int start, int end,
+			OrderByComparator obc)
+		throws SystemException {
+
+		String[] templateIds = CustomSQLUtil.keywords(templateId, false);
+		String[] names = CustomSQLUtil.keywords(name);
+		String[] descriptions = CustomSQLUtil.keywords(description);
+
+		return doFindByC_G_T_S_N_D(
+			companyId, groupIds, templateIds, structureId,
+			structureIdComparator, names, descriptions, andOperator, start, end,
+			obc, false);
 	}
 
 	protected int doCountByC_G_T_S_N_D(
