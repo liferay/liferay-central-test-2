@@ -230,15 +230,6 @@ public class AssetVocabularyLocalServiceImpl
 	}
 
 	public List<AssetVocabulary> getGroupVocabularies(
-			long groupId, String name, int start, int end,
-			OrderByComparator obc)
-		throws PortalException, SystemException {
-
-		return assetVocabularyPersistence.findByGroupId(
-			groupId, start, end, obc);
-	}
-
-	public List<AssetVocabulary> getGroupVocabularies(
 			long groupId, boolean createDefaultVocabulary)
 		throws PortalException, SystemException {
 
@@ -272,6 +263,14 @@ public class AssetVocabularyLocalServiceImpl
 		vocabularies.add(vocabulary);
 
 		return vocabularies;
+	}
+
+	public List<AssetVocabulary> getGroupVocabularies(
+			long groupId, String name, int start, int end,
+			OrderByComparator obc)
+		throws PortalException, SystemException {
+
+		return assetVocabularyFinder.findByG_N(groupId, name, start, end, obc);
 	}
 
 	public AssetVocabulary getGroupVocabulary(long groupId, String name)
