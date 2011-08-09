@@ -78,7 +78,7 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 	 * been uploaded to the portal. If it is <code>null</code>, the <code>
 	 * sourceFileName</code> will be used.
 	 * </p>
-	 * 
+	 *
 	 * @param  userId the primary key of the file entry's creator/owner
 	 * @param  repositoryId the primary key of the file entry's repository
 	 * @param  folderId the primary key of the file entry's parent folder
@@ -202,7 +202,7 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 	/**
 	 * Adds a file entry and associated metadata based on an {@link InputStream}
 	 * object.
-	 * 
+	 *
 	 * <p>
 	 * This method takes two file names, the <code>sourceFileName</code> and the
 	 * <code>title</code>. The <code>sourceFileName</code> corresponds to the
@@ -320,8 +320,8 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 	 * @param  name the folder's name
 	 * @param  description the folder's description
 	 * @param  serviceContext the service context to be applied. In a Liferay
-	 *         repository, it may include mountPoint which is a boolean 
-	 *         specifying whether the folder is a facade for mounting a 
+	 *         repository, it may include mountPoint which is a boolean
+	 *         specifying whether the folder is a facade for mounting a
 	 *         third-party repository
 	 * @return the folder
 	 * @throws PortalException if the parent folder could not
@@ -1268,26 +1268,26 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 	/**
 	 * Updates a file entry and associated metadata based on a byte array
 	 * object. If the file data is <code>null</code>, then only the associated
-	 * metadata (i.e., <code>title</code>, <code>description</code>, and 
+	 * metadata (i.e., <code>title</code>, <code>description</code>, and
 	 * parameters in the <code>serviceContext</code>) will be updated.
-	 * 
+	 *
 	 * <p>
 	 * This method takes two file names, the <code>sourceFileName</code> and the
 	 * <code>title</code>. The <code>sourceFileName</code> corresponds to the
 	 * name of the actual file being uploaded. The <code>title</code>
 	 * corresponds to a name the client wishes to assign this file after it has
-	 * been uploaded to the portal. 
+	 * been uploaded to the portal.
 	 * </p>
 	 *
 	 * @param  userId the primary key of the user
 	 * @param  fileEntryId the primary key of the file entry
-	 * @param  sourceFileName the original file's name (optionally 
+	 * @param  sourceFileName the original file's name (optionally
 	 *         <code>null</code>)
 	 * @param  mimeType the file's MIME type (optionally <code>null</code>)
 	 * @param  title the new name to be assigned to the file (optionally <code>
 	 *         null</code>)
 	 * @param  description the file's new description
-	 * @param  changeLog the file's version change log (optionally 
+	 * @param  changeLog the file's version change log (optionally
 	 *         <code>null</code>)
 	 * @param  majorVersion whether the new file version is a major version
 	 * @param  bytes the file's data (optionally <code>null</code>)
@@ -1340,24 +1340,24 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 	 * object. If the file data is <code>null</code>, then only the associated
 	 * metadata (i.e., <code>title</code>, <code>description</code>, and
 	 * parameters in the <code>serviceContext</code>) will be updated.
-	 * 
+	 *
 	 * <p>
 	 * This method takes two file names, the <code>sourceFileName</code> and the
 	 * <code>title</code>. The <code>sourceFileName</code> corresponds to the
 	 * name of the actual file being uploaded. The <code>title</code>
 	 * corresponds to a name the client wishes to assign this file after it has
-	 * been uploaded to the portal. 
+	 * been uploaded to the portal.
 	 * </p>
 	 *
 	 * @param  userId the primary key of the user
 	 * @param  fileEntryId the primary key of the file entry
-	 * @param  sourceFileName the original file's name (optionally 
+	 * @param  sourceFileName the original file's name (optionally
 	 *         <code>null</code>)
 	 * @param  mimeType the file's MIME type (optionally <code>null</code>)
 	 * @param  title the new name to be assigned to the file (optionally <code>
 	 *         null</code>)
 	 * @param  description the file's new description
-	 * @param  changeLog the file's version change log (optionally 
+	 * @param  changeLog the file's version change log (optionally
 	 *         <code>null</code>)
 	 * @param  majorVersion whether the new file version is a major version
 	 * @param  file EntryId the primary key of the file entry
@@ -1405,27 +1405,27 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 
 	/**
 	 * Updates a file entry and associated metadata based on an {@link
-	 * InputStream} object. If the file data is <code>null</code>, then only the 
-	 * associated metadata (i.e., <code>title</code>, <code>description</code>, 
+	 * InputStream} object. If the file data is <code>null</code>, then only the
+	 * associated metadata (i.e., <code>title</code>, <code>description</code>,
 	 * and parameters in the <code>serviceContext</code>) will be updated.
-	 * 
+	 *
 	 * <p>
 	 * This method takes two file names, the <code>sourceFileName</code> and the
 	 * <code>title</code>. The <code>sourceFileName</code> corresponds to the
 	 * name of the actual file being uploaded. The <code>title</code>
 	 * corresponds to a name the client wishes to assign this file after it has
-	 * been uploaded to the portal. 
+	 * been uploaded to the portal.
 	 * </p>
 	 *
 	 * @param  userId the primary key of the user
 	 * @param  fileEntryId the primary key of the file entry
-	 * @param  sourceFileName the original file's name (optionally 
+	 * @param  sourceFileName the original file's name (optionally
 	 *         <code>null</code>)
 	 * @param  mimeType the file's MIME type (optionally <code>null</code>)
 	 * @param  title the new name to be assigned to the file (optionally <code>
 	 *         null</code>)
 	 * @param  description the file's new description
-	 * @param  changeLog the file's version change log (optionally 
+	 * @param  changeLog the file's version change log (optionally
 	 *         <code>null</code>)
 	 * @param  majorVersion whether the new file version is a major version
 	 * @param  is the file's data (optionally <code>null</code>)

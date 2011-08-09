@@ -32,7 +32,6 @@ import com.liferay.portal.model.LayoutSetBranch;
 import com.liferay.portal.model.LayoutSetBranchConstants;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
-import com.liferay.portal.service.LayoutSetLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.base.LayoutSetBranchLocalServiceBaseImpl;
 
@@ -232,7 +231,7 @@ public class LayoutSetBranchLocalServiceImpl
 		if (layoutSetBranchId <= 0) {
 			User user = userPersistence.findByPrimaryKey(userId);
 
-			LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
+			LayoutSet layoutSet = layoutSetLocalService.getLayoutSet(
 				groupId, privateLayout);
 
 			layoutSetBranchId = StagingUtil.getRecentLayoutSetBranchId(
