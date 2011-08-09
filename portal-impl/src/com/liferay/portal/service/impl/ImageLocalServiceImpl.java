@@ -312,7 +312,7 @@ public class ImageLocalServiceImpl extends ImageLocalServiceBaseImpl {
 		image.setWidth(width);
 		image.setSize(size);
 
-		Hook hook = new DLHook();
+		Hook hook = HookFactory.getInstance();
 
 		hook.updateImage(image, type, bytes);
 
