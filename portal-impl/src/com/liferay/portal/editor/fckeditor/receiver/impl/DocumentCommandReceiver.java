@@ -179,35 +179,36 @@ public class DocumentCommandReceiver extends BaseCommandReceiver {
 			boolean hasImages = ImageProcessor.hasImages(
 				fileEntry.getFileVersion());
 
-			StringBundler url = null;
+			StringBundler sb = null;
 
 			if (hasImages) {
-				url = new StringBundler(7);
+				sb = new StringBundler(7);
 
 				ThemeDisplay themeDisplay = commandArgument.getThemeDisplay();
 
+				sb.append(themeDisplay.getPathImage());
+				sb.append("/image_gallery?uuid=");
+				sb.append(fileEntry.getUuid());
+				sb.append("&groupId=");
+				sb.append(folder.getGroupId());
+				sb.append("&t=");
+
 				long largeImageId = fileEntry.getLargeImageId();
 
-				url.append(themeDisplay.getPathImage());
-				url.append("/image_gallery?uuid=");
-				url.append(fileEntry.getUuid());
-				url.append("&groupId=");
-				url.append(folder.getGroupId());
-				url.append("&t=");
-				url.append(ImageServletTokenUtil.getToken(largeImageId));
+				sb.append(ImageServletTokenUtil.getToken(largeImageId));
 			}
 			else {
-				url = new StringBundler(6);
+				sb = new StringBundler(6);
 
-				url.append("/documents/");
-				url.append(group.getGroupId());
-				url.append(StringPool.SLASH);
-				url.append(fileEntry.getFolderId());
-				url.append(StringPool.SLASH);
-				url.append(HttpUtil.encodeURL(fileEntry.getTitle()));
+				sb.append("/documents/");
+				sb.append(group.getGroupId());
+				sb.append(StringPool.SLASH);
+				sb.append(fileEntry.getFolderId());
+				sb.append(StringPool.SLASH);
+				sb.append(HttpUtil.encodeURL(fileEntry.getTitle()));
 			}
 
-			fileElement.setAttribute("url", url.toString());
+			fileElement.setAttribute("url", sb.toString());
 		}
 	}
 
