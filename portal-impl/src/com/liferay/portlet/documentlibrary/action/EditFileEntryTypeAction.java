@@ -113,15 +113,18 @@ public class EditFileEntryTypeAction extends PortletAction {
 				renderRequest.setAttribute(
 					WebKeys.DOCUMENT_LIBRARY_FILE_ENTRY_TYPE, fileEntryType);
 
-				String structureKey = "auto_" + fileEntryTypeId;
+				String ddmStructureKey = "auto_" + fileEntryTypeId;
 
-				List<DDMStructure> structures =
+				List<DDMStructure> ddmStructures =
 					fileEntryType.getDDMStructures();
 
-				for (DDMStructure structure : structures) {
-					if (structure.getStructureKey().equals(structureKey)) {
+				for (DDMStructure ddmStructure : ddmStructures) {
+					if (ddmStructureKey.equals(
+							ddmStructure.getStructureKey())) {
+
 						renderRequest.setAttribute(
-							WebKeys.DYNAMIC_DATA_MAPPING_STRUCTURE,	structure);
+							WebKeys.DYNAMIC_DATA_MAPPING_STRUCTURE,
+							ddmStructure);
 
 						break;
 					}
@@ -179,23 +182,21 @@ public class EditFileEntryTypeAction extends PortletAction {
 
 		String name = ParamUtil.getString(actionRequest, "name");
 		String description = ParamUtil.getString(actionRequest, "description");
-
 		long[] ddmStructureIds = getLongArray(
-			actionRequest, "structuresSearchContainerPrimaryKeys");
+			actionRequest, "ddmStructuresSearchContainerPrimaryKeys");
 
-		long structureId = ParamUtil.getLong(actionRequest, "structureId");
-
-		long classNameId = PortalUtil.getClassNameId(DLFileEntryMetadata.class);
+		long ddmStructureId = ParamUtil.getLong(
+			actionRequest, "ddmStructureId");
 
 		Map<Locale, String> nameMap = new HashMap<Locale, String>();
+
 		nameMap.put(themeDisplay.getLocale(), name);
 
 		Map<Locale, String> descriptionMap = new HashMap<Locale, String>();
+
 		descriptionMap.put(themeDisplay.getLocale(), description);
 
 		String xsd = ParamUtil.getString(actionRequest, "xsd");
-
-		String storageType = "xml";
 
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			DLFileEntryType.class.getName(), actionRequest);
@@ -209,16 +210,19 @@ public class EditFileEntryTypeAction extends PortletAction {
 					themeDisplay.getScopeGroupId(), name, description,
 					ddmStructureIds, serviceContext);
 
-			// Add structure
+			// Add dynamic data mapping structure
 
-			String structureKey = "auto_" + fileEntryType.getFileEntryTypeId();
+			String ddmStructureKey =
+				"auto_" + fileEntryType.getFileEntryTypeId();
 
-			DDMStructure structure = null;
+			DDMStructure ddmStructure = null;
 
 			try {
-				structure = DDMStructureServiceUtil.addStructure(
-					themeDisplay.getScopeGroupId(), classNameId, structureKey,
-					nameMap, descriptionMap, xsd, storageType, serviceContext);
+				ddmStructure = DDMStructureServiceUtil.addStructure(
+					themeDisplay.getScopeGroupId(),
+					PortalUtil.getClassNameId(DLFileEntryMetadata.class),
+					ddmStructureKey, nameMap, descriptionMap, xsd, "xml",
+					serviceContext);
 			}
 			catch (Exception e) {
 				if (!(e instanceof RequiredStructureException) &&
@@ -232,9 +236,9 @@ public class EditFileEntryTypeAction extends PortletAction {
 
 			// Update file entry type
 
-			if (structure != null) {
+			if (ddmStructure != null) {
 				ddmStructureIds = ArrayUtil.append(
-					ddmStructureIds, structure.getStructureId());
+					ddmStructureIds, ddmStructure.getStructureId());
 
 				DLFileEntryTypeServiceUtil.updateFileEntryType(
 					fileEntryType.getFileEntryTypeId(), name, description,
@@ -243,13 +247,14 @@ public class EditFileEntryTypeAction extends PortletAction {
 		}
 		else {
 
-			// Update structure
+			// Update dynamic data mapping structure
 
-			DDMStructure structure = null;
+			DDMStructure ddmStructure = null;
 
 			try {
-				structure = DDMStructureServiceUtil.updateStructure(
-					structureId, nameMap, descriptionMap, xsd, serviceContext);
+				ddmStructure = DDMStructureServiceUtil.updateStructure(
+					ddmStructureId, nameMap, descriptionMap, xsd,
+					serviceContext);
 			}
 			catch (Exception e) {
 				if (!(e instanceof RequiredStructureException) &&
@@ -261,9 +266,9 @@ public class EditFileEntryTypeAction extends PortletAction {
 				}
 			}
 
-			if (structure != null) {
+			if (ddmStructure != null) {
 				ddmStructureIds = ArrayUtil.append(
-					ddmStructureIds, structure.getStructureId());
+					ddmStructureIds, ddmStructure.getStructureId());
 			}
 
 			// Update file entry type
