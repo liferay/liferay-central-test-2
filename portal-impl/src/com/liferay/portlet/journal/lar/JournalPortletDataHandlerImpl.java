@@ -294,6 +294,23 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		return content;
 	}
 
+	public static String getArticlePath(
+			PortletDataContext portletDataContext, JournalArticle article)
+		throws Exception {
+
+		StringBundler sb = new StringBundler(8);
+
+		sb.append(portletDataContext.getPortletPath(PortletKeys.JOURNAL));
+		sb.append("/articles/");
+		sb.append(article.getArticleResourceUuid());
+		sb.append(StringPool.SLASH);
+		sb.append(article.getVersion());
+		sb.append(StringPool.SLASH);
+		sb.append("article.xml");
+
+		return sb.toString();
+	}
+
 	public static void importArticle(
 			PortletDataContext portletDataContext, Element articleElement)
 		throws Exception {
@@ -739,6 +756,141 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		}
 	}
 
+	public static void importFeed(
+			PortletDataContext portletDataContext, Element feedElement)
+		throws Exception {
+
+		String path = feedElement.attributeValue("path");
+
+		if (!portletDataContext.isPathNotProcessed(path)) {
+			return;
+		}
+
+		JournalFeed feed = (JournalFeed)portletDataContext.getZipEntryAsObject(
+			path);
+
+		long userId = portletDataContext.getUserId(feed.getUserUuid());
+
+		JournalCreationStrategy creationStrategy =
+			JournalCreationStrategyFactory.getInstance();
+
+		long authorId = creationStrategy.getAuthorUserId(
+			portletDataContext, feed);
+
+		if (authorId != JournalCreationStrategy.USE_DEFAULT_USER_ID_STRATEGY) {
+			userId = authorId;
+		}
+
+		Group group = GroupLocalServiceUtil.getGroup(
+			portletDataContext.getScopeGroupId());
+
+		String newGroupFriendlyURL = group.getFriendlyURL().substring(1);
+
+		String[] friendlyUrlParts = StringUtil.split(
+			feed.getTargetLayoutFriendlyUrl(), '/');
+
+		String oldGroupFriendlyURL = friendlyUrlParts[2];
+
+		if (oldGroupFriendlyURL.equals("@data_handler_group_friendly_url@")) {
+			feed.setTargetLayoutFriendlyUrl(
+				StringUtil.replace(
+					feed.getTargetLayoutFriendlyUrl(),
+					"@data_handler_group_friendly_url@",
+					newGroupFriendlyURL));
+		}
+
+		String feedId = feed.getFeedId();
+		boolean autoFeedId = false;
+
+		if ((Validator.isNumber(feedId)) ||
+			(JournalFeedUtil.fetchByG_F(
+				portletDataContext.getScopeGroupId(), feedId) != null)) {
+
+			autoFeedId = true;
+		}
+
+		Map<String, String> structureIds =
+			(Map<String, String>)portletDataContext.getNewPrimaryKeysMap(
+				JournalStructure.class + ".structureId");
+
+		String parentStructureId = MapUtil.getString(
+			structureIds, feed.getStructureId(), feed.getStructureId());
+
+		Map<String, String> templateIds =
+			(Map<String, String>)portletDataContext.getNewPrimaryKeysMap(
+				JournalTemplate.class + ".templateId");
+
+		String parentTemplateId = MapUtil.getString(
+			templateIds, feed.getTemplateId(), feed.getTemplateId());
+		String parentRenderTemplateId = MapUtil.getString(
+			templateIds, feed.getRendererTemplateId(),
+			feed.getRendererTemplateId());
+
+		boolean addGroupPermissions = creationStrategy.addGroupPermissions(
+			portletDataContext, feed);
+		boolean addGuestPermissions = creationStrategy.addGuestPermissions(
+			portletDataContext, feed);
+
+		ServiceContext serviceContext = portletDataContext.createServiceContext(
+			feedElement, feed, _NAMESPACE);
+
+		serviceContext.setAddGroupPermissions(addGroupPermissions);
+		serviceContext.setAddGuestPermissions(addGuestPermissions);
+
+		JournalFeed importedFeed = null;
+
+		if (portletDataContext.isDataStrategyMirror()) {
+			JournalFeed existingFeed = JournalFeedUtil.fetchByUUID_G(
+				feed.getUuid(), portletDataContext.getScopeGroupId());
+
+			if (existingFeed == null) {
+				serviceContext.setUuid(feed.getUuid());
+
+				importedFeed = JournalFeedLocalServiceUtil.addFeed(
+					userId, portletDataContext.getScopeGroupId(), feedId,
+					autoFeedId, feed.getName(), feed.getDescription(),
+					feed.getType(), parentStructureId, parentTemplateId,
+					parentRenderTemplateId, feed.getDelta(),
+					feed.getOrderByCol(), feed.getOrderByType(),
+					feed.getTargetLayoutFriendlyUrl(),
+					feed.getTargetPortletId(), feed.getContentField(),
+					feed.getFeedType(), feed.getFeedVersion(),
+					serviceContext);
+			}
+			else {
+				importedFeed = JournalFeedLocalServiceUtil.updateFeed(
+					existingFeed.getGroupId(), existingFeed.getFeedId(),
+					feed.getName(), feed.getDescription(), feed.getType(),
+					parentStructureId, parentTemplateId, parentRenderTemplateId,
+					feed.getDelta(), feed.getOrderByCol(),
+					feed.getOrderByType(), feed.getTargetLayoutFriendlyUrl(),
+					feed.getTargetPortletId(), feed.getContentField(),
+					feed.getFeedType(), feed.getFeedVersion(), serviceContext);
+			}
+		}
+		else {
+			importedFeed = JournalFeedLocalServiceUtil.addFeed(
+				userId, portletDataContext.getScopeGroupId(), feedId,
+				autoFeedId, feed.getName(), feed.getDescription(),
+				feed.getType(), parentStructureId, parentTemplateId,
+				parentRenderTemplateId, feed.getDelta(), feed.getOrderByCol(),
+				feed.getOrderByType(), feed.getTargetLayoutFriendlyUrl(),
+				feed.getTargetPortletId(), feed.getContentField(),
+				feed.getFeedType(), feed.getFeedVersion(), serviceContext);
+		}
+
+		portletDataContext.importClassedModel(feed, importedFeed, _NAMESPACE);
+
+		if (!feedId.equals(importedFeed.getFeedId())) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(
+					"A feed with the ID " + feedId + " already " +
+						"exists. The new generated ID is " +
+							importedFeed.getFeedId());
+			}
+		}
+	}
+
 	public static String importReferencedContent(
 			PortletDataContext portletDataContext, Element parentElement,
 			String content)
@@ -1104,49 +1256,6 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 							importedTemplate.getTemplateId());
 			}
 		}
-	}
-
-	public static String getArticlePath(
-			PortletDataContext portletDataContext, JournalArticle article)
-		throws Exception {
-
-		StringBundler sb = new StringBundler(8);
-
-		sb.append(portletDataContext.getPortletPath(PortletKeys.JOURNAL));
-		sb.append("/articles/");
-		sb.append(article.getArticleResourceUuid());
-		sb.append(StringPool.SLASH);
-		sb.append(article.getVersion());
-		sb.append(StringPool.SLASH);
-		sb.append("article.xml");
-
-		return sb.toString();
-	}
-
-	@Override
-	public PortletDataHandlerControl[] getExportControls() {
-		return new PortletDataHandlerControl[] {
-			_articles, _structuresTemplatesAndFeeds, _embeddedAssets, _images,
-			_categories, _comments, _ratings, _tags
-		};
-	}
-
-	@Override
-	public PortletDataHandlerControl[] getImportControls() {
-		return new PortletDataHandlerControl[] {
-			_articles, _structuresTemplatesAndFeeds, _images, _categories,
-			_comments, _ratings, _tags
-		};
-	}
-
-	@Override
-	public boolean isAlwaysExportable() {
-		return _ALWAYS_EXPORTABLE;
-	}
-
-	@Override
-	public boolean isPublishToLiveByDefault() {
-		return PropsValues.JOURNAL_PUBLISH_TO_LIVE_BY_DEFAULT;
 	}
 
 	protected static String exportDLFileEntries(
@@ -1801,141 +1910,6 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		return content;
 	}
 
-	protected static void importFeed(
-			PortletDataContext portletDataContext, Element feedElement)
-		throws Exception {
-
-		String path = feedElement.attributeValue("path");
-
-		if (!portletDataContext.isPathNotProcessed(path)) {
-			return;
-		}
-
-		JournalFeed feed = (JournalFeed)portletDataContext.getZipEntryAsObject(
-			path);
-
-		long userId = portletDataContext.getUserId(feed.getUserUuid());
-
-		JournalCreationStrategy creationStrategy =
-			JournalCreationStrategyFactory.getInstance();
-
-		long authorId = creationStrategy.getAuthorUserId(
-			portletDataContext, feed);
-
-		if (authorId != JournalCreationStrategy.USE_DEFAULT_USER_ID_STRATEGY) {
-			userId = authorId;
-		}
-
-		Group group = GroupLocalServiceUtil.getGroup(
-			portletDataContext.getScopeGroupId());
-
-		String newGroupFriendlyURL = group.getFriendlyURL().substring(1);
-
-		String[] friendlyUrlParts = StringUtil.split(
-			feed.getTargetLayoutFriendlyUrl(), '/');
-
-		String oldGroupFriendlyURL = friendlyUrlParts[2];
-
-		if (oldGroupFriendlyURL.equals("@data_handler_group_friendly_url@")) {
-			feed.setTargetLayoutFriendlyUrl(
-				StringUtil.replace(
-					feed.getTargetLayoutFriendlyUrl(),
-					"@data_handler_group_friendly_url@",
-					newGroupFriendlyURL));
-		}
-
-		String feedId = feed.getFeedId();
-		boolean autoFeedId = false;
-
-		if ((Validator.isNumber(feedId)) ||
-			(JournalFeedUtil.fetchByG_F(
-				portletDataContext.getScopeGroupId(), feedId) != null)) {
-
-			autoFeedId = true;
-		}
-
-		Map<String, String> structureIds =
-			(Map<String, String>)portletDataContext.getNewPrimaryKeysMap(
-				JournalStructure.class + ".structureId");
-
-		String parentStructureId = MapUtil.getString(
-			structureIds, feed.getStructureId(), feed.getStructureId());
-
-		Map<String, String> templateIds =
-			(Map<String, String>)portletDataContext.getNewPrimaryKeysMap(
-				JournalTemplate.class + ".templateId");
-
-		String parentTemplateId = MapUtil.getString(
-			templateIds, feed.getTemplateId(), feed.getTemplateId());
-		String parentRenderTemplateId = MapUtil.getString(
-			templateIds, feed.getRendererTemplateId(),
-			feed.getRendererTemplateId());
-
-		boolean addGroupPermissions = creationStrategy.addGroupPermissions(
-			portletDataContext, feed);
-		boolean addGuestPermissions = creationStrategy.addGuestPermissions(
-			portletDataContext, feed);
-
-		ServiceContext serviceContext = portletDataContext.createServiceContext(
-			feedElement, feed, _NAMESPACE);
-
-		serviceContext.setAddGroupPermissions(addGroupPermissions);
-		serviceContext.setAddGuestPermissions(addGuestPermissions);
-
-		JournalFeed importedFeed = null;
-
-		if (portletDataContext.isDataStrategyMirror()) {
-			JournalFeed existingFeed = JournalFeedUtil.fetchByUUID_G(
-				feed.getUuid(), portletDataContext.getScopeGroupId());
-
-			if (existingFeed == null) {
-				serviceContext.setUuid(feed.getUuid());
-
-				importedFeed = JournalFeedLocalServiceUtil.addFeed(
-					userId, portletDataContext.getScopeGroupId(), feedId,
-					autoFeedId, feed.getName(), feed.getDescription(),
-					feed.getType(), parentStructureId, parentTemplateId,
-					parentRenderTemplateId, feed.getDelta(),
-					feed.getOrderByCol(), feed.getOrderByType(),
-					feed.getTargetLayoutFriendlyUrl(),
-					feed.getTargetPortletId(), feed.getContentField(),
-					feed.getFeedType(), feed.getFeedVersion(),
-					serviceContext);
-			}
-			else {
-				importedFeed = JournalFeedLocalServiceUtil.updateFeed(
-					existingFeed.getGroupId(), existingFeed.getFeedId(),
-					feed.getName(), feed.getDescription(), feed.getType(),
-					parentStructureId, parentTemplateId, parentRenderTemplateId,
-					feed.getDelta(), feed.getOrderByCol(),
-					feed.getOrderByType(), feed.getTargetLayoutFriendlyUrl(),
-					feed.getTargetPortletId(), feed.getContentField(),
-					feed.getFeedType(), feed.getFeedVersion(), serviceContext);
-			}
-		}
-		else {
-			importedFeed = JournalFeedLocalServiceUtil.addFeed(
-				userId, portletDataContext.getScopeGroupId(), feedId,
-				autoFeedId, feed.getName(), feed.getDescription(),
-				feed.getType(), parentStructureId, parentTemplateId,
-				parentRenderTemplateId, feed.getDelta(), feed.getOrderByCol(),
-				feed.getOrderByType(), feed.getTargetLayoutFriendlyUrl(),
-				feed.getTargetPortletId(), feed.getContentField(),
-				feed.getFeedType(), feed.getFeedVersion(), serviceContext);
-		}
-
-		portletDataContext.importClassedModel(feed, importedFeed, _NAMESPACE);
-
-		if (!feedId.equals(importedFeed.getFeedId())) {
-			if (_log.isWarnEnabled()) {
-				_log.warn(
-					"A feed with the ID " + feedId + " already " +
-						"exists. The new generated ID is " +
-							importedFeed.getFeedId());
-			}
-		}
-	}
-
 	protected static String importLinksToLayout(
 			PortletDataContext portletDataContext, String content)
 		throws Exception {
@@ -2026,6 +2000,32 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 			ArrayUtil.toStringArray(newLinksToLayout.toArray()));
 
 		return content;
+	}
+
+	@Override
+	public PortletDataHandlerControl[] getExportControls() {
+		return new PortletDataHandlerControl[] {
+			_articles, _structuresTemplatesAndFeeds, _embeddedAssets, _images,
+			_categories, _comments, _ratings, _tags
+		};
+	}
+
+	@Override
+	public PortletDataHandlerControl[] getImportControls() {
+		return new PortletDataHandlerControl[] {
+			_articles, _structuresTemplatesAndFeeds, _images, _categories,
+			_comments, _ratings, _tags
+		};
+	}
+
+	@Override
+	public boolean isAlwaysExportable() {
+		return _ALWAYS_EXPORTABLE;
+	}
+
+	@Override
+	public boolean isPublishToLiveByDefault() {
+		return PropsValues.JOURNAL_PUBLISH_TO_LIVE_BY_DEFAULT;
 	}
 
 	@Override

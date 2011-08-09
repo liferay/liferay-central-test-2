@@ -732,7 +732,7 @@ public class LayoutImporter {
 		return assetVocabulary;
 	}
 
-	protected void importArticle(
+	protected void importJournalArticle(
 			PortletDataContext portletDataContext, Layout layout,
 			Element layoutElement)
 		throws Exception {
@@ -967,10 +967,15 @@ public class LayoutImporter {
 		importedLayout.setRobots(layout.getRobots());
 		importedLayout.setType(layout.getType());
 
-		if (layout.isTypePortlet() &&
-			Validator.isNotNull(layout.getTypeSettings()) &&
-			!portletsMergeMode.equals(
-				PortletDataHandlerKeys.PORTLETS_MERGE_MODE_REPLACE)) {
+		if (layout.isTypeArticle()) {
+			importJournalArticle(portletDataContext, layout, layoutElement);
+
+			importedLayout.setTypeSettings(layout.getTypeSettings());
+		}
+		else if (layout.isTypePortlet() &&
+				 Validator.isNotNull(layout.getTypeSettings()) &&
+				 !portletsMergeMode.equals(
+					 PortletDataHandlerKeys.PORTLETS_MERGE_MODE_REPLACE)) {
 
 			mergePortlets(
 				importedLayout, layout.getTypeSettings(), portletsMergeMode);
@@ -1021,11 +1026,6 @@ public class LayoutImporter {
 					}
 				}
 			}
-
-			importedLayout.setTypeSettings(layout.getTypeSettings());
-		}
-		else if (layout.isTypeArticle()) {
-			importArticle(portletDataContext, layout, layoutElement);
 
 			importedLayout.setTypeSettings(layout.getTypeSettings());
 		}
