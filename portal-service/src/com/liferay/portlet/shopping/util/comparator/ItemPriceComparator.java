@@ -22,7 +22,7 @@ import com.liferay.portlet.shopping.model.ShoppingItem;
  */
 public class ItemPriceComparator extends OrderByComparator {
 
-	public static String ORDER_BY_ASC = 
+	public static String ORDER_BY_ASC =
 		"ShoppingItem.categoryId ASC, ShoppingItem.price ASC, " +
 			"ShoppingItem.name ASC";
 

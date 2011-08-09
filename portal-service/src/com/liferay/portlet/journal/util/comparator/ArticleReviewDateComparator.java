@@ -23,10 +23,10 @@ import com.liferay.portlet.journal.model.JournalArticle;
  */
 public class ArticleReviewDateComparator extends OrderByComparator {
 
-	public static String ORDER_BY_ASC = 
+	public static String ORDER_BY_ASC =
 		"JournalArticle.reviewDate ASC, JournalArticle.version ASC";
 
-	public static String ORDER_BY_DESC = 
+	public static String ORDER_BY_DESC =
 		"JournalArticle.reviewDate DESC, JournalArticle.version DESC";
 
 	public static String[] ORDER_BY_FIELDS = {"reviewDate", "version"};
