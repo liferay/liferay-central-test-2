@@ -78,6 +78,7 @@ public class QueryImpl implements Query {
 
 	public List<?> list(boolean copy, boolean unmodifiable)
 		throws ORMException {
+
 		try {
 			List<?> list = _query.list();
 

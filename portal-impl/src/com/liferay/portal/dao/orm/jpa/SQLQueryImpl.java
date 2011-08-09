@@ -121,6 +121,7 @@ public class SQLQueryImpl extends QueryImpl implements SQLQuery {
 	@Override
 	public List<?> list(boolean copy, boolean unmodifiable)
 		throws ORMException {
+
 		try {
 			List<?> list = sessionImpl.list(
 				queryString, positionalParameterMap, namedParameterMap,

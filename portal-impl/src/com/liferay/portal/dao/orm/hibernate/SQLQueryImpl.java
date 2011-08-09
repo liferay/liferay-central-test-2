@@ -93,8 +93,9 @@ public class SQLQueryImpl implements SQLQuery {
 
 	public List<?> list(boolean copy, boolean unmodifiable)
 		throws ORMException {
+
 		try {
-			List list = _sqlQuery.list();
+			List<?> list = _sqlQuery.list();
 
 			if (unmodifiable) {
 				list = new UnmodifiableList<Object>(list);
@@ -282,7 +283,7 @@ public class SQLQueryImpl implements SQLQuery {
 
 		return this;
 	}
-
+	
 	public Query setTimestamp(String name, Timestamp value) {
 		if (!_strictName && (Arrays.binarySearch(_names, name) < 0)) {
 			return this;
@@ -292,7 +293,7 @@ public class SQLQueryImpl implements SQLQuery {
 
 		return this;
 	}
-
+	
 	public Object uniqueResult() throws ORMException {
 		try {
 			return _sqlQuery.uniqueResult();
