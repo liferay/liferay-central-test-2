@@ -17,9 +17,9 @@ package com.liferay.portal.upgrade.v6_1_0;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.upgrade.util.UpgradeTable;
 import com.liferay.portal.kernel.upgrade.util.UpgradeTableFactoryUtil;
-import com.liferay.portal.upgrade.v6_0_0.util.JournalTemplateTable;
 import com.liferay.portal.upgrade.v6_1_0.util.JournalArticleTable;
 import com.liferay.portal.upgrade.v6_1_0.util.JournalStructureTable;
+import com.liferay.portal.upgrade.v6_1_0.util.JournalTemplateTable;
 
 /**
  * @author Juan Fernández
@@ -44,9 +44,9 @@ public class UpgradeJournal extends UpgradeProcess {
 		}
 
 		try {
+			runSQL("alter_column_type JournalStructure name STRING null");
 			runSQL(
 				"alter_column_type JournalStructure description STRING null");
-			runSQL("alter_column_type JournalStructure name STRING null");
 		}
 		catch (Exception e) {
 			UpgradeTable upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
@@ -61,8 +61,8 @@ public class UpgradeJournal extends UpgradeProcess {
 		}
 
 		try {
-			runSQL("alter_column_type JournalTemplate description STRING null");
 			runSQL("alter_column_type JournalTemplate name STRING null");
+			runSQL("alter_column_type JournalTemplate description STRING null");
 		}
 		catch (Exception e) {
 			UpgradeTable upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(

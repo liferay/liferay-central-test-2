@@ -17,27 +17,28 @@ package com.liferay.portal.upgrade.v6_1_0.util;
 import java.sql.Types;
 
 /**
- * @author Juan Fernández
+ * @author	  Brian Wing Shun Chan
+ * @generated
  */
 public class JournalStructureTable {
 
 	public static final String TABLE_NAME = "JournalStructure";
 
 	public static final Object[][] TABLE_COLUMNS = {
-			{ "uuid_", Types.VARCHAR },
-			{ "id_", Types.BIGINT },
-			{ "groupId", Types.BIGINT },
-			{ "companyId", Types.BIGINT },
-			{ "userId", Types.BIGINT },
-			{ "userName", Types.VARCHAR },
-			{ "createDate", Types.TIMESTAMP },
-			{ "modifiedDate", Types.TIMESTAMP },
-			{ "structureId", Types.VARCHAR },
-			{ "parentStructureId", Types.VARCHAR },
-			{ "name", Types.VARCHAR },
-			{ "description", Types.VARCHAR },
-			{ "xsd", Types.CLOB }
-		};
+		{"uuid_", Types.VARCHAR},
+		{"id_", Types.BIGINT},
+		{"groupId", Types.BIGINT},
+		{"companyId", Types.BIGINT},
+		{"userId", Types.BIGINT},
+		{"userName", Types.VARCHAR},
+		{"createDate", Types.TIMESTAMP},
+		{"modifiedDate", Types.TIMESTAMP},
+		{"structureId", Types.VARCHAR},
+		{"parentStructureId", Types.VARCHAR},
+		{"name", Types.VARCHAR},
+		{"description", Types.VARCHAR},
+		{"xsd", Types.CLOB}
+	};
 
 	public static final String TABLE_SQL_CREATE = "create table JournalStructure (uuid_ VARCHAR(75) null,id_ LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,structureId VARCHAR(75) null,parentStructureId VARCHAR(75) null,name VARCHAR(75) null,description STRING null,xsd TEXT null)";
 
