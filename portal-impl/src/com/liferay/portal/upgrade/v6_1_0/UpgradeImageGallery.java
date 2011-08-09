@@ -218,7 +218,7 @@ public class UpgradeImageGallery extends UpgradeProcess {
 		updateIGFolderPermissions();
 		updateIGImagePermissions();
 
-		if (!DLHook.class.getName().equals(PropsValues.IMAGE_HOOK_IMPL)) {
+		if (!PropsValues.IMAGE_HOOK_IMPL.equals(DLHook.class.getName())) {
 			ConvertProcess convertProcess = new ConvertImageGallery();
 
 			String[] parameters = {DLHook.class.getName()};
