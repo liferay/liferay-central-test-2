@@ -82,9 +82,9 @@ public class UpgradeJournal extends UpgradeProcess {
 
 	protected void upgradeStructureXsd() throws Exception {
 		runSQL(
-			"update JournalStructure set xsd = " +
-			   	"replace(xsd, \"image_gallery\", \"document_library\") where " +
-				"xsd like \"%image_gallery%\"");
+			"update JournalStructure set xsd = replace(xsd, " +
+				"\"image_gallery\", \"document_library\") where xsd like " +
+					"\"%image_gallery%\"");
 	}
 
 }

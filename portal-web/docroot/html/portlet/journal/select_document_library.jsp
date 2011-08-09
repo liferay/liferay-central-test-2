@@ -139,7 +139,7 @@ if (folder != null) {
 		FileEntry fileEntry = (FileEntry)results.get(i);
 	%>
 
-	<%@ include file="/html/portlet/document_library/document_thumbnail.jspf" %>
+		<%@ include file="/html/portlet/document_library/document_thumbnail.jspf" %>
 
 	<%
 		ResultRow row = new ResultRow(fileEntry, fileEntry.getFileEntryId(), i);
