@@ -40,6 +40,8 @@ import com.liferay.portal.service.EmailAddressLocalService;
 import com.liferay.portal.service.EmailAddressService;
 import com.liferay.portal.service.GroupLocalService;
 import com.liferay.portal.service.GroupService;
+import com.liferay.portal.service.ImageLocalService;
+import com.liferay.portal.service.ImageService;
 import com.liferay.portal.service.LayoutBranchLocalService;
 import com.liferay.portal.service.LayoutBranchService;
 import com.liferay.portal.service.LayoutLocalService;
@@ -226,7 +228,6 @@ import com.liferay.portlet.calendar.service.persistence.CalEventFinder;
 import com.liferay.portlet.calendar.service.persistence.CalEventPersistence;
 import com.liferay.portlet.documentlibrary.service.DLAppLocalService;
 import com.liferay.portlet.documentlibrary.service.DLAppService;
-import com.liferay.portlet.imagegallery.service.persistence.IGFolderPersistence;
 import com.liferay.portlet.journal.service.JournalArticleLocalService;
 import com.liferay.portlet.journal.service.JournalArticleService;
 import com.liferay.portlet.journal.service.JournalStructureLocalService;
@@ -825,6 +826,42 @@ public abstract class GroupServiceBaseImpl extends PrincipalBean
 	 */
 	public void setGroupFinder(GroupFinder groupFinder) {
 		this.groupFinder = groupFinder;
+	}
+
+	/**
+	 * Returns the image local service.
+	 *
+	 * @return the image local service
+	 */
+	public ImageLocalService getImageLocalService() {
+		return imageLocalService;
+	}
+
+	/**
+	 * Sets the image local service.
+	 *
+	 * @param imageLocalService the image local service
+	 */
+	public void setImageLocalService(ImageLocalService imageLocalService) {
+		this.imageLocalService = imageLocalService;
+	}
+
+	/**
+	 * Returns the image remote service.
+	 *
+	 * @return the image remote service
+	 */
+	public ImageService getImageService() {
+		return imageService;
+	}
+
+	/**
+	 * Sets the image remote service.
+	 *
+	 * @param imageService the image remote service
+	 */
+	public void setImageService(ImageService imageService) {
+		this.imageService = imageService;
 	}
 
 	/**
@@ -4084,24 +4121,6 @@ public abstract class GroupServiceBaseImpl extends PrincipalBean
 	}
 
 	/**
-	 * Returns the i g folder persistence.
-	 *
-	 * @return the i g folder persistence
-	 */
-	public IGFolderPersistence getIGFolderPersistence() {
-		return igFolderPersistence;
-	}
-
-	/**
-	 * Sets the i g folder persistence.
-	 *
-	 * @param igFolderPersistence the i g folder persistence
-	 */
-	public void setIGFolderPersistence(IGFolderPersistence igFolderPersistence) {
-		this.igFolderPersistence = igFolderPersistence;
-	}
-
-	/**
 	 * Returns the journal article local service.
 	 *
 	 * @return the journal article local service
@@ -5076,6 +5095,10 @@ public abstract class GroupServiceBaseImpl extends PrincipalBean
 	protected GroupPersistence groupPersistence;
 	@BeanReference(type = GroupFinder.class)
 	protected GroupFinder groupFinder;
+	@BeanReference(type = ImageLocalService.class)
+	protected ImageLocalService imageLocalService;
+	@BeanReference(type = ImageService.class)
+	protected ImageService imageService;
 	@BeanReference(type = ImagePersistence.class)
 	protected ImagePersistence imagePersistence;
 	@BeanReference(type = LayoutLocalService.class)
@@ -5426,8 +5449,6 @@ public abstract class GroupServiceBaseImpl extends PrincipalBean
 	protected DLAppLocalService dlAppLocalService;
 	@BeanReference(type = DLAppService.class)
 	protected DLAppService dlAppService;
-	@BeanReference(type = IGFolderPersistence.class)
-	protected IGFolderPersistence igFolderPersistence;
 	@BeanReference(type = JournalArticleLocalService.class)
 	protected JournalArticleLocalService journalArticleLocalService;
 	@BeanReference(type = JournalArticleService.class)
