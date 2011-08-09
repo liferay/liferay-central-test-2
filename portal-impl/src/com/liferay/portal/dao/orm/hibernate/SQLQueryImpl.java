@@ -283,7 +283,7 @@ public class SQLQueryImpl implements SQLQuery {
 
 		return this;
 	}
-	
+
 	public Query setTimestamp(String name, Timestamp value) {
 		if (!_strictName && (Arrays.binarySearch(_names, name) < 0)) {
 			return this;
@@ -293,7 +293,7 @@ public class SQLQueryImpl implements SQLQuery {
 
 		return this;
 	}
-	
+
 	public Object uniqueResult() throws ORMException {
 		try {
 			return _sqlQuery.uniqueResult();
