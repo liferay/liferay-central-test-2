@@ -116,8 +116,8 @@ public class MBMessageFlagLocalServiceImpl
 			}
 		}
 		else if (!DateUtil.equals(
-				messageFlag.getModifiedDate(), thread.getLastPostDate(),
-				true)) {
+					messageFlag.getModifiedDate(), thread.getLastPostDate(),
+					true)) {
 
 			messageFlag.setModifiedDate(thread.getLastPostDate());
 
