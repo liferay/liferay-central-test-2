@@ -816,7 +816,7 @@ public class JournalArticleLocalServiceImpl
 		List<JournalArticle> articles = journalArticlePersistence.findByG_C_C(
 			groupId, classNameId, classPK);
 
-		if (articles.size() == 0) {
+		if (articles.isEmpty()) {
 			throw new NoSuchArticleException(
 				"No approved JournalArticle with the key {groupId=" + groupId +
 					", className=" + className + ", classPK=" + classPK + "}");
@@ -1282,7 +1282,7 @@ public class JournalArticleLocalServiceImpl
 		List<JournalArticle> articles = journalArticlePersistence.findByG_A_ST(
 			groupId, articleId, WorkflowConstants.STATUS_APPROVED);
 
-		if (articles.size() == 0) {
+		if (articles.isEmpty()) {
 			throw new NoSuchArticleException(
 				"No approved JournalArticle with the key {groupId=" + groupId +
 					", " + "articleId=" + articleId + "}");
@@ -1343,7 +1343,7 @@ public class JournalArticleLocalServiceImpl
 				resourcePrimKey, status, 0, 1, orderByComparator);
 		}
 
-		if (articles.size() == 0) {
+		if (articles.isEmpty()) {
 			throw new NoSuchArticleException(
 				"No JournalArticle with the key {resourcePrimKey=" +
 					resourcePrimKey + "}");
@@ -1376,7 +1376,7 @@ public class JournalArticleLocalServiceImpl
 				groupId, articleId, status, 0, 1, orderByComparator);
 		}
 
-		if (articles.size() == 0) {
+		if (articles.isEmpty()) {
 			throw new NoSuchArticleException(
 				"No JournalArticle with the key {groupId=" + groupId +
 					", articleId=" + articleId + ", status=" + status + "}");
@@ -1391,14 +1391,11 @@ public class JournalArticleLocalServiceImpl
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		List<JournalArticle> articles = null;
+		List<JournalArticle> articles = journalArticlePersistence.findByG_C_C(
+			groupId, classNameId, classPK, 0, 1,
+			new ArticleVersionComparator());
 
-		OrderByComparator orderByComparator = new ArticleVersionComparator();
-
-		articles = journalArticlePersistence.findByG_C_C(groupId, classNameId,
-			classPK, 0, 1, orderByComparator);
-
-		if (articles.size() == 0) {
+		if (articles.isEmpty()) {
 			throw new NoSuchArticleException(
 				"No JournalArticle with the key {groupId=" + groupId +
 					", className=" + className + ", classPK =" + classPK + "}");
@@ -1424,7 +1421,7 @@ public class JournalArticleLocalServiceImpl
 				groupId, urlTitle, status, 0, 1, orderByComparator);
 		}
 
-		if (articles.size() == 0) {
+		if (articles.isEmpty()) {
 			throw new NoSuchArticleException(
 				"No JournalArticle with the key {groupId=" + groupId +
 					", urlTitle=" + urlTitle + ", status=" + status + "}");
