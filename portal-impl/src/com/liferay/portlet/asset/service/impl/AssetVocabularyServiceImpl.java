@@ -114,7 +114,7 @@ public class AssetVocabularyServiceImpl
 
 	public List<AssetVocabulary> getGroupVocabularies(
 			long groupId, int start, int end, OrderByComparator obc)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return assetVocabularyPersistence.filterFindByGroupId(
 			groupId, start, end, obc);
@@ -158,8 +158,7 @@ public class AssetVocabularyServiceImpl
 		if (Validator.isNotNull(name)) {
 			name = (CustomSQLUtil.keywords(name))[0];
 
-			vocabularies =
-				getGroupVocabularies(groupId, name, start, end, obc);
+			vocabularies = getGroupVocabularies(groupId, name, start, end, obc);
 			total = getGroupVocabulariesCount(groupId, name);
 		}
 		else {

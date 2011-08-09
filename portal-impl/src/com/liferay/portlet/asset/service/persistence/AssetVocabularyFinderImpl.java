@@ -130,6 +130,7 @@ public class AssetVocabularyFinderImpl
 			session = openSession();
 
 			String sql = CustomSQLUtil.get(FIND_BY_G_N);
+
 			sql = CustomSQLUtil.replaceOrderBy(sql, obc);
 
 			if (inlineSQLHelper) {
