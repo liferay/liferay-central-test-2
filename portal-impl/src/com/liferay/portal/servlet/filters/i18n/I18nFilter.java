@@ -151,9 +151,9 @@ public class I18nFilter extends BasePortalFilter {
 			return null;
 		}
 
-		String i18nPath = StringPool.SLASH + i18nPathLanguageId;
+		String i18nPath = StringPool.SLASH.concat(i18nPathLanguageId);
 
-		if (requestURI.contains(i18nPath + '/')) {
+		if (requestURI.contains(i18nPath.concat(StringPool.SLASH))) {
 			return null;
 		}
 

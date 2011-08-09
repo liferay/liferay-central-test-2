@@ -39,12 +39,12 @@ public class LocaleUtil {
 		return _instance._getDefault();
 	}
 
-	public static Map<String, String> getISOLanguages(Locale locale) {
-		return _instance._getISOLanguages(locale);
-	}
-
 	public static LocaleUtil getInstance() {
 		return _instance;
+	}
+
+	public static Map<String, String> getISOLanguages(Locale locale) {
+		return _instance._getISOLanguages(locale);
 	}
 
 	public static void setDefault(
