@@ -27,6 +27,16 @@
 	</target>
 
 	<target name="compile">
+		<if>
+			<available file="$${javac.destdir}" />
+			<then>
+
+				<!-- Clean up stale dir -->
+
+				<delete dir="$${javac.destdir}" />
+			</then>
+		</if>
+
 		<mkdir dir="classes" />
 
 		<antcall target="compile-java">
