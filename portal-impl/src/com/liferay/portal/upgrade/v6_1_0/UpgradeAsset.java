@@ -46,15 +46,14 @@ public class UpgradeAsset extends UpgradeProcess {
 	}
 
 	protected void upgradeIGImageClassName() throws Exception {
+		long dlFileEntryClassNameId = PortalUtil.getClassNameId(
+			DLFileEntry.class.getName());
 		long igImageClassNameId = PortalUtil.getClassNameId(
 			"com.liferay.portlet.imagegallery.model.IGImage");
 
-		long dlFileEntryClassNameId = PortalUtil.getClassNameId(
-			DLFileEntry.class.getName());
-
 		runSQL(
 			"update AssetEntry set classNameId = " + igImageClassNameId +
-					" where classNameId = " + dlFileEntryClassNameId);
+				" where classNameId = " + dlFileEntryClassNameId);
 	}
 
 }
