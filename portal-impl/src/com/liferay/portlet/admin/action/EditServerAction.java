@@ -140,6 +140,9 @@ public class EditServerAction extends PortletAction {
 		else if (cmd.equals("cacheSingle")) {
 			cacheSingle();
 		}
+		else if (cmd.equals("cleanUpPermissions")) {
+			TidyPermissionsUtil.cleanUpAddToPagePermissions(actionRequest);
+		}
 		else if (cmd.startsWith("convertProcess.")) {
 			redirect = convertProcess(actionRequest, actionResponse, cmd);
 		}
@@ -154,9 +157,6 @@ public class EditServerAction extends PortletAction {
 		}
 		else if (cmd.equals("shutdown")) {
 			shutdown(actionRequest);
-		}
-		else if (cmd.equals("tidyPermissions")) {
-			TidyPermissionsUtil.tidyAddToPagePermissions(actionRequest);
 		}
 		else if (cmd.equals("threadDump")) {
 			threadDump();
