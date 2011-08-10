@@ -92,18 +92,13 @@ public class ResourcePermissionImpl extends ResourcePermissionBaseImpl {
 	}
 
 	public boolean hasActionId(String actionId) {
-		ResourceAction resourceAction = null;
-
-		try {
-			resourceAction = ResourceActionLocalServiceUtil.getResourceAction(
+		ResourceAction resourceAction =
+			ResourceActionLocalServiceUtil.fetchResourceAction(
 				getName(), actionId);
-		}
-		catch (Exception e) {
-		}
 
 		if (resourceAction != null) {
-			long bitwiseValue = resourceAction.getBitwiseValue();
 			long actionIds = getActionIds();
+			long bitwiseValue = resourceAction.getBitwiseValue();
 
 			if ((actionIds & bitwiseValue) == bitwiseValue) {
 				return true;
