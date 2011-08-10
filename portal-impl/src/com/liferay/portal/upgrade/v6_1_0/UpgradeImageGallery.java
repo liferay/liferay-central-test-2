@@ -228,118 +228,6 @@ public class UpgradeImageGallery extends UpgradeProcess {
 		migrateImageFiles();
 	}
 
-	protected void migrateImageFiles() throws Exception {
-		boolean migrateOnlyLargeImage = false;
-
-		if (PropsValues.IMAGE_HOOK_IMPL.equals(DLHook.class.getName())) {
-			migrateOnlyLargeImage = true;
-		}
-
-		Connection con = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-
-		try {
-			con = DataAccess.getConnection();
-
-			ps = con.prepareStatement("select imageId from Image");
-
-			rs = ps.executeQuery();
-
-			while (rs.next()) {
-				long imageId = rs.getLong("imageId");
-
-				migrateImage(imageId, migrateOnlyLargeImage);
-			}
-		}
-		finally {
-			DataAccess.cleanUp(con, ps, rs);
-		}
-	}
-
-	protected void migrateImage(long imageId, boolean migrateOnlyLargeImage)
-		throws Exception {
-
-		Connection con = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-
-		try {
-			con = DataAccess.getConnection();
-
-			ps = con.prepareStatement(
-				"select groupId, companyId, folderId, name from DLFileEntry " +
-					"where largeImageId = " + imageId);
-
-			rs = ps.executeQuery();
-
-			long companyId = 0;
-
-			long repositoryId = 0;
-
-			String name = null;
-
-			if (rs.next()) {
-				companyId = rs.getLong("companyId");
-
-				long groupId = rs.getLong("groupId");
-
-				long folderId = rs.getLong("folderId");
-
-				name = rs.getString("name");
-
-				repositoryId = DLFolderConstants.getDataRepositoryId(
-					groupId, folderId);
-
-				Image image = ImageLocalServiceUtil.getImage(imageId);
-
-				migrateFile(repositoryId, companyId, name, image);
-			}
-			else if (!migrateOnlyLargeImage) {
-				Image image = ImageLocalServiceUtil.getImage(imageId);
-
-				migrateFile(repositoryId, companyId, name, image);
-			}
-		}
-		finally {
-			DataAccess.cleanUp(con, ps, rs);
-		}
-	}
-
-	protected void migrateFile(
-			long repositoryId, long companyId, String name, Image image)
-		throws Exception {
-
-		try {
-			ClassLoader classLoader = PortalClassLoaderUtil.getClassLoader();
-
-			String sourceHookClassName = FileSystemHook.class.getName();
-
-			if (Validator.isNotNull(PropsValues.IMAGE_HOOK_IMPL)) {
-				sourceHookClassName = PropsValues.IMAGE_HOOK_IMPL;
-			}
-
-			Hook sourceHook = (Hook)classLoader.loadClass(
-				sourceHookClassName).newInstance();
-
-			InputStream is = sourceHook.getImageAsStream(image);
-
-			byte[] bytes = FileUtil.getBytes(is);
-
-			if (name == null) {
-				name = image.getImageId() + StringPool.PERIOD + image.getType();
-			}
-
-			if (DLStoreUtil.hasFile(companyId, repositoryId, name)) {
-				DLStoreUtil.deleteFile(companyId, repositoryId, name);
-			}
-
-			DLStoreUtil.addFile(companyId, repositoryId, name, true, bytes);
-		}
-		catch (Exception e) {
-		}
-	}
-
 	protected Object[] getImage(long imageId) throws Exception {
 		Object[] image = null;
 
@@ -367,6 +255,113 @@ public class UpgradeImageGallery extends UpgradeProcess {
 		}
 
 		return image;
+	}
+
+	protected void migrateFile(
+			long repositoryId, long companyId, String name, Image image)
+		throws Exception {
+
+		ClassLoader classLoader = PortalClassLoaderUtil.getClassLoader();
+
+		String sourceHookClassName = FileSystemHook.class.getName();
+
+		if (Validator.isNotNull(PropsValues.IMAGE_HOOK_IMPL)) {
+			sourceHookClassName = PropsValues.IMAGE_HOOK_IMPL;
+		}
+
+		Hook sourceHook = (Hook)classLoader.loadClass(
+			sourceHookClassName).newInstance();
+
+		InputStream is = sourceHook.getImageAsStream(image);
+
+		byte[] bytes = FileUtil.getBytes(is);
+
+		if (name == null) {
+			name = image.getImageId() + StringPool.PERIOD + image.getType();
+		}
+
+		if (DLStoreUtil.hasFile(companyId, repositoryId, name)) {
+			DLStoreUtil.deleteFile(companyId, repositoryId, name);
+		}
+
+		DLStoreUtil.addFile(companyId, repositoryId, name, true, bytes);
+	}
+
+	protected void migrateImage(long imageId, boolean migrateOnlyLargeImage)
+		throws Exception {
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = DataAccess.getConnection();
+
+			ps = con.prepareStatement(
+				"select groupId, companyId, folderId, name from DLFileEntry " +
+					"where largeImageId = " + imageId);
+
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
+				long companyId = rs.getLong("companyId");
+				long groupId = rs.getLong("groupId");
+				long folderId = rs.getLong("folderId");
+				String name = rs.getString("name");
+
+				long repositoryId = DLFolderConstants.getDataRepositoryId(
+					groupId, folderId);
+
+				Image image = ImageLocalServiceUtil.getImage(imageId);
+
+				try {
+					migrateFile(repositoryId, companyId, name, image);
+				}
+				catch (Exception e) {
+				}
+			}
+			else if (!migrateOnlyLargeImage) {
+				Image image = ImageLocalServiceUtil.getImage(imageId);
+
+				try {
+					migrateFile(0, 0, null, image);
+				}
+				catch (Exception e) {
+				}
+			}
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
+	}
+
+	protected void migrateImageFiles() throws Exception {
+		boolean migrateOnlyLargeImage = false;
+
+		if (PropsValues.IMAGE_HOOK_IMPL.equals(DLHook.class.getName())) {
+			migrateOnlyLargeImage = true;
+		}
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = DataAccess.getConnection();
+
+			ps = con.prepareStatement("select imageId from Image");
+
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				long imageId = rs.getLong("imageId");
+
+				migrateImage(imageId, migrateOnlyLargeImage);
+			}
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
 	}
 
 	protected void updateIGFolderEntries() throws Exception {

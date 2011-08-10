@@ -164,11 +164,6 @@ public class FreeMarkerVariablesImpl implements FreeMarkerVariables {
 
 		freeMarkerContext.put("httpUtil", HttpUtil.getHttp());
 
-		// Image servlet token
-
-		freeMarkerContext.put(
-			"imageToken", WebServerServletTokenUtil.getWebServerServletToken());
-
 		// Journal content util
 
 		freeMarkerContext.put(
@@ -268,12 +263,6 @@ public class FreeMarkerVariablesImpl implements FreeMarkerVariables {
 
 		freeMarkerContext.put("timeZoneUtil", TimeZoneUtil_IW.getInstance());
 
-		// Web Server servlet token
-
-		freeMarkerContext.put(
-			"webServerToken",
-			WebServerServletTokenUtil.getWebServerServletToken());
-
 		// Util locator
 
 		insertHelperUtility(
@@ -287,6 +276,12 @@ public class FreeMarkerVariablesImpl implements FreeMarkerVariables {
 		// Validator
 
 		freeMarkerContext.put("validator", Validator_IW.getInstance());
+
+		// Web server servlet token
+
+		freeMarkerContext.put(
+			"webServerToken",
+			WebServerServletTokenUtil.getWebServerServletToken());
 
 		// Permissions
 
@@ -315,6 +310,11 @@ public class FreeMarkerVariablesImpl implements FreeMarkerVariables {
 			UserGroupPermissionUtil.getUserGroupPermission());
 		freeMarkerContext.put(
 			"userPermission", UserPermissionUtil.getUserPermission());
+
+		// Deprecated
+
+		freeMarkerContext.put(
+			"imageToken", WebServerServletTokenUtil.getWebServerServletToken());
 	}
 
 	public void insertVariables(

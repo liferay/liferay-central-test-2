@@ -179,11 +179,6 @@ public class VelocityVariablesImpl implements VelocityVariables {
 
 		velocityContext.put("httpUtil", HttpUtil.getHttp());
 
-		// Image servlet token
-
-		velocityContext.put(
-			"imageToken", WebServerServletTokenUtil.getWebServerServletToken());
-
 		// Iterator tool
 
 		velocityContext.put("iteratorTool", new IteratorTool());
@@ -218,12 +213,6 @@ public class VelocityVariablesImpl implements VelocityVariables {
 		// Param util
 
 		velocityContext.put("paramUtil", ParamUtil_IW.getInstance());
-
-		// Web Server servlet token
-
-		velocityContext.put(
-			"webServerToken",
-			WebServerServletTokenUtil.getWebServerServletToken());
 
 		// Portal util
 
@@ -312,6 +301,12 @@ public class VelocityVariablesImpl implements VelocityVariables {
 
 		velocityContext.put("validator", Validator_IW.getInstance());
 
+		// Web server servlet token
+
+		velocityContext.put(
+			"webServerToken",
+			WebServerServletTokenUtil.getWebServerServletToken());
+
 		// Permissions
 
 		velocityContext.put(
@@ -345,6 +340,8 @@ public class VelocityVariablesImpl implements VelocityVariables {
 		velocityContext.put(
 			"dateFormats",
 			FastDateFormatFactoryUtil.getFastDateFormatFactory());
+		velocityContext.put(
+			"imageToken", WebServerServletTokenUtil.getWebServerServletToken());
 		velocityContext.put(
 			"locationPermission",
 			OrganizationPermissionUtil.getOrganizationPermission());

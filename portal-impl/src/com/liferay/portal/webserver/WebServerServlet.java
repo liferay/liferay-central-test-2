@@ -105,14 +105,6 @@ import javax.servlet.http.HttpSession;
  */
 public class WebServerServlet extends HttpServlet {
 
-	@Override
-	public void init(ServletConfig servletConfig) throws ServletException {
-		super.init(servletConfig);
-
-		_lastModified = GetterUtil.getBoolean(
-			servletConfig.getInitParameter("last_modified"), true);
-	}
-
 	/**
 	 * @see com.liferay.portal.servlet.filters.virtualhost.VirtualHostFilter
 	 */
@@ -165,6 +157,14 @@ public class WebServerServlet extends HttpServlet {
 		}
 
 		return true;
+	}
+
+	@Override
+	public void init(ServletConfig servletConfig) throws ServletException {
+		super.init(servletConfig);
+
+		_lastModified = GetterUtil.getBoolean(
+			servletConfig.getInitParameter("last_modified"), true);
 	}
 
 	@Override
@@ -295,31 +295,6 @@ public class WebServerServlet extends HttpServlet {
 		}
 	}
 
-	protected Image getImageThumbnail(Image image, long dlFileEntryId)
-		throws PortalException, SystemException {
-
-		if (image == null) {
-			return null;
-		}
-
-		long igThumbnailMaxDimension = PrefsPropsUtil.getLong(
-			PropsKeys.IG_IMAGE_THUMBNAIL_MAX_DIMENSION);
-
-		if ((image.getHeight() > igThumbnailMaxDimension) ||
-			(image.getWidth() > igThumbnailMaxDimension)) {
-
-			DLFileEntry dlFileEntry = DLFileEntryLocalServiceUtil.getFileEntry(
-				dlFileEntryId);
-
-			DLFileEntryLocalServiceUtil.updateSmallImage(
-				dlFileEntry.getSmallImageId(), dlFileEntry.getLargeImageId());
-
-			return ImageServiceUtil.getImage(image.getImageId());
-		}
-
-		return image;
-	}
-
 	protected Image getImage(HttpServletRequest request, boolean getDefault)
 		throws PortalException, SystemException {
 
@@ -424,6 +399,31 @@ public class WebServerServlet extends HttpServlet {
 		}
 
 		return imageId;
+	}
+
+	protected Image getImageThumbnail(Image image, long dlFileEntryId)
+		throws PortalException, SystemException {
+
+		if (image == null) {
+			return null;
+		}
+
+		long igThumbnailMaxDimension = PrefsPropsUtil.getLong(
+			PropsKeys.IG_IMAGE_THUMBNAIL_MAX_DIMENSION);
+
+		if ((image.getHeight() <= igThumbnailMaxDimension) &&
+			(image.getWidth() <= igThumbnailMaxDimension)) {
+
+			return image;
+		}
+
+		DLFileEntry dlFileEntry = DLFileEntryLocalServiceUtil.getFileEntry(
+			dlFileEntryId);
+
+		DLFileEntryLocalServiceUtil.updateSmallImage(
+			dlFileEntry.getSmallImageId(), dlFileEntry.getLargeImageId());
+
+		return ImageServiceUtil.getImage(image.getImageId());
 	}
 
 	@Override
@@ -789,36 +789,38 @@ public class WebServerServlet extends HttpServlet {
 	}
 
 	protected void writeImage(
-			Image image, HttpServletRequest request,
-			HttpServletResponse response)
-		throws PortalException, SystemException {
+		Image image, HttpServletRequest request, HttpServletResponse response) {
 
-		if (image != null) {
-			String contentType = null;
+		if (image == null) {
+			return;
+		}
 
-			if (!image.getType().equals(ImageConstants.TYPE_NOT_AVAILABLE)) {
-				contentType = MimeTypesUtil.getContentType(image.getType());
+		String contentType = null;
 
-				response.setContentType(contentType);
+		String type = image.getType();
+
+		if (!type.equals(ImageConstants.TYPE_NOT_AVAILABLE)) {
+			contentType = MimeTypesUtil.getContentType(type);
+
+			response.setContentType(contentType);
+		}
+
+		String fileName = ParamUtil.getString(request, "fileName");
+
+		try {
+			byte[] bytes = getImageBytes(request, image);
+
+			if (Validator.isNotNull(fileName)) {
+				ServletResponseUtil.sendFile(
+					request, response, fileName, bytes, contentType);
 			}
-
-			String fileName = ParamUtil.getString(request, "fileName");
-
-			try {
-				byte[] bytes = getImageBytes(request, image);
-
-				if (Validator.isNotNull(fileName)) {
-					ServletResponseUtil.sendFile(
-						request, response, fileName, bytes, contentType);
-				}
-				else {
-					ServletResponseUtil.write(response, bytes);
-				}
+			else {
+				ServletResponseUtil.write(response, bytes);
 			}
-			catch (Exception e) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(e, e);
-				}
+		}
+		catch (Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(e, e);
 			}
 		}
 	}

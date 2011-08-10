@@ -34,37 +34,37 @@ public class ImageImpl extends ImageBaseImpl {
 	}
 
 	public byte[] getTextObj() {
-		if (_textObj == null) {
-			long imageId = getImageId();
+		if (_textObj != null) {
+			return _textObj;
+		}
 
-			try {
-				DLFileEntry dlFileEntry =
-					DLFileEntryLocalServiceUtil.fetchFileEntryByAnyImageId(
-						imageId);
+		long imageId = getImageId();
 
-				InputStream is = null;
+		try {
+			DLFileEntry dlFileEntry =
+				DLFileEntryLocalServiceUtil.fetchFileEntryByAnyImageId(imageId);
 
-				if (dlFileEntry != null &&
-					dlFileEntry.getLargeImageId() == imageId) {
+			InputStream is = null;
 
-					is = DLStoreUtil.getFileAsStream(
-						dlFileEntry.getCompanyId(),
-						dlFileEntry.getDataRepositoryId(),
-						dlFileEntry.getName());
-				}
-				else {
-					is = DLStoreUtil.getFileAsStream(
-						_DEFAULT_COMPANY_ID, _DEFAULT_REPOSITORY_ID,
-						getFileName());
-				}
+			if ((dlFileEntry != null) &&
+				(dlFileEntry.getLargeImageId() == imageId)) {
 
-				byte[] bytes = FileUtil.getBytes(is);
-
-				_textObj = bytes;
+				is = DLStoreUtil.getFileAsStream(
+					dlFileEntry.getCompanyId(),
+					dlFileEntry.getDataRepositoryId(), dlFileEntry.getName());
 			}
-			catch (Exception e) {
-				_log.error("Error reading image " + imageId, e);
+			else {
+				is = DLStoreUtil.getFileAsStream(
+					_DEFAULT_COMPANY_ID, _DEFAULT_REPOSITORY_ID,
+					getFileName());
 			}
+
+			byte[] bytes = FileUtil.getBytes(is);
+
+			_textObj = bytes;
+		}
+		catch (Exception e) {
+			_log.error("Error reading image " + imageId, e);
 		}
 
 		return _textObj;

@@ -667,11 +667,11 @@
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>Web Server Servlet</servlet-name>
-		<url-pattern>/image/*</url-pattern>
+		<url-pattern>/documents/*</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>Web Server Servlet</servlet-name>
-		<url-pattern>/documents/*</url-pattern>
+		<url-pattern>/image/*</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>Widget Servlet</servlet-name>
