@@ -65,7 +65,7 @@ public class JSONFactoryImpl implements JSONFactory {
 		try {
 			org.json.JSONArray jsonArray = JSONML.toJSONArray(xml);
 
-			return JSONML.toJSONArray(xml).toString();
+			return jsonArray.toString();
 		}
 		catch (Exception e) {
 			_log.error(e, e);
