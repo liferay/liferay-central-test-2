@@ -4,6 +4,8 @@
 	<import file="../build-common-java.xml" />
 
 	<property name="jar.file" value="${ant.project.name}" />
+	<property name="manifest.bundle.name" value="Liferay Util Taglib" />
+	<property name="manifest.bundle.symbolic.name" value="com.liferay.util.taglib;singleton:=true" />
 
 	<target name="build-taglibs">
 		<java
@@ -37,19 +39,8 @@
 		</if>
 	</target>
 
-	<target name="jar" depends="compile">
-		<antcall target="manifest" />
-
-		<manifest file="classes/META-INF/MANIFEST.MF" mode="update">
-			<attribute name="Bundle-Name" value="Liferay Util Taglib" />
-			<attribute name="Bundle-SymbolicName" value="com.liferay.util.taglib;singleton:=true" />
-		</manifest>
-
-		<jar
-			basedir="classes"
-			jarfile="${jar.file}.jar"
-			manifest="classes/META-INF/MANIFEST.MF"
-		/>
+	<target name="jar">
+		<antcall target="build-common-java.jar" />
 
 		<copy file="${jar.file}.jar" todir="${portal-impl.classes.dir}/com/liferay/portal/deploy/dependencies" />
 

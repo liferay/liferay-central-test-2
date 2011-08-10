@@ -7,6 +7,8 @@
 
 	<property name="deploy.dir" value="${app.server.lib.portal.dir}" />
 	<property name="jar.file" value="${ant.project.name}" />
+	<property name="manifest.bundle.name" value="Liferay Portal Impl" />
+	<property name="manifest.bundle.symbolic.name" value="com.liferay.portal.impl;singleton:=true" />
 	<property name="service.file" value="service.xml" />
 
 	<target name="build-alloy-taglib">
@@ -1108,11 +1110,6 @@ public class Creole10Parser]]></replacevalue>
 			</not>
 			<then>
 				<antcall target="manifest" />
-
-				<manifest file="classes/META-INF/MANIFEST.MF" mode="update">
-					<attribute name="Bundle-Name" value="Liferay Portal Impl" />
-					<attribute name="Bundle-SymbolicName" value="com.liferay.portal.impl;singleton:=true" />
-				</manifest>
 
 				<jar
 					basedir="classes"

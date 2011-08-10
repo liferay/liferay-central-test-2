@@ -5,6 +5,8 @@
 
 	<property name="deploy.dir" value="${app.server.lib.global.dir}" />
 	<property name="jar.file" value="${ant.project.name}" />
+	<property name="manifest.bundle.name" value="Liferay Portal Service" />
+	<property name="manifest.bundle.symbolic.name" value="com.liferay.portal.service;singleton:=true" />
 
 	<target name="compile">
 		<mkdir dir="classes" />
@@ -27,21 +29,6 @@
 			includeAntRuntime="false"
 			nowarn="${javac.nowarn}"
 			srcdir="src"
-		/>
-	</target>
-
-	<target name="jar" depends="compile">
-		<antcall target="manifest" />
-
-		<manifest file="classes/META-INF/MANIFEST.MF" mode="update">
-			<attribute name="Bundle-Name" value="Liferay Portal Service" />
-			<attribute name="Bundle-SymbolicName" value="com.liferay.portal.service;singleton:=true" />
-		</manifest>
-
-		<jar
-			basedir="classes"
-			jarfile="${jar.file}.jar"
-			manifest="classes/META-INF/MANIFEST.MF"
 		/>
 	</target>
 </project>
