@@ -59,8 +59,8 @@ public class DDMTemplateServiceImpl extends DDMTemplateServiceBaseImpl {
 
 	public List<DDMTemplate> getTemplates(long structureId, String type) 
 		throws SystemException {
-		
-		return ddmTemplateLocalService.getTemplates(structureId, type);
+
+		return ddmTemplatePersistence.findByS_T(structureId, type);
 	}
 
 	public DDMTemplate updateTemplate(
