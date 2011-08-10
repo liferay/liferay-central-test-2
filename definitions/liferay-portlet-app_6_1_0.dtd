@@ -394,8 +394,8 @@ http://docs.liferay.com/portal/6.0/javadocs/portal-service/com/liferay/portlet/e
 
 <!--
 The permission-propagator value must be a class that implements
-com.liferay.portal.security.permission.PermissionPropagator and is called when
-permission related tasks are run.
+com.liferay.portal.security.permission.PermissionPropagator and is called to
+propagate permissions.
 -->
 <!ELEMENT permission-propagator (#PCDATA)>
 

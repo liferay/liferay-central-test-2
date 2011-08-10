@@ -19,15 +19,6 @@ package com.liferay.portal.security.permission;
  */
 public abstract class BasePermissionPropagator implements PermissionPropagator {
 
-	public void propagateRolePermissions() throws Exception {
-		try {
-			doPropagateRolePermissions();
-		}
-		catch (Exception e) {
-			throw new Exception(e);
-		}
-	}
-
-	protected abstract void doPropagateRolePermissions() throws Exception;
+	public abstract void propagateRolePermissions() throws Exception;
 
 }

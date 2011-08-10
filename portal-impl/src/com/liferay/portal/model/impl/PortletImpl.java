@@ -1266,14 +1266,30 @@ public class PortletImpl extends PortletBaseImpl {
 		return portletBag.getCustomAttributesDisplayInstances();
 	}
 
+	/**
+	 * Returns the name of the permission propagator class of the portlet.
+	 *
+	 * @return the name of the permission propagator class of the portlet
+	 */
 	public String getPermissionPropagatorClass() {
 		return _permissionPropagatorClass;
 	}
 
+	/**
+	 * Sets the name of the permission propagator class of the portlet.
+	 *
+	 * @param pollerProcessorClass the name of the permission propagator class
+	 *        of the portlet
+	 */
 	public void setPermissionPropagatorClass(String permissionPropagatorClass) {
 		_permissionPropagatorClass = permissionPropagatorClass;
 	}
 
+	/**
+	 * Returns the permission propagator instance of the portlet.
+	 *
+	 * @return the permission propagator instance of the portlet
+	 */
 	public PermissionPropagator getPermissionPropagatorInstance() {
 		if (Validator.isNull(getPermissionPropagatorClass())) {
 			return null;

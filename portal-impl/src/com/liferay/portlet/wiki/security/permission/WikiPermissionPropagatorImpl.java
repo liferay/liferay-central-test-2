@@ -22,8 +22,7 @@ import com.liferay.portal.security.permission.BasePermissionPropagator;
 public class WikiPermissionPropagatorImpl extends BasePermissionPropagator {
 
 	@Override
-	protected void doPropagateRolePermissions() throws Exception {
-		// LPS-19779, Angelo will write this method
+	public void propagateRolePermissions() throws Exception {
 	}
 
 }
