@@ -47,11 +47,6 @@ if ((selLayoutChildren != null) && !selLayoutChildren.isEmpty()) {
 if (!StringUtil.contains(tabs4Names, tabs4)) {
 	tabs4 = "new-page";
 }
-
-long layoutSetPrototypeId = PortalUtil.getClassNameId("com.liferay.portal.model.LayoutSetPrototype");
-long layoutPrototypeId = PortalUtil.getClassNameId("com.liferay.portal.model.LayoutPrototype");
-
-boolean prototype = (group.getClassNameId() == layoutSetPrototypeId) || (group.getClassNameId() == layoutPrototypeId);
 %>
 
 <liferay-ui:tabs
@@ -131,7 +126,7 @@ boolean prototype = (group.getClassNameId() == layoutSetPrototypeId) || (group.g
 
 					<%
 					for (int i = 0; i < PropsValues.LAYOUT_TYPES.length; i++) {
-						if (PropsValues.LAYOUT_TYPES[i].equals("article") && prototype) {
+						if (PropsValues.LAYOUT_TYPES[i].equals("article") && (group.isLayoutPrototype() || group.isLayoutSetPrototype())) {
 							continue;
 						}
 					%>

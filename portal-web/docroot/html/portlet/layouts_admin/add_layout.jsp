@@ -21,20 +21,14 @@ Group group = (Group)request.getAttribute("edit_pages.jsp-group");
 long groupId = ((Long)request.getAttribute("edit_pages.jsp-groupId")).longValue();
 long liveGroupId = ((Long)request.getAttribute("edit_pages.jsp-liveGroupId")).longValue();
 long stagingGroupId = ((Long)request.getAttribute("edit_pages.jsp-stagingGroupId")).longValue();
-
-Layout selLayout = (Layout)request.getAttribute("edit_pages.jsp-selLayout");
-boolean privateLayout = ((Boolean)request.getAttribute("edit_pages.jsp-privateLayout")).booleanValue();
 long selPlid = ((Long)request.getAttribute("edit_pages.jsp-selPlid")).longValue();
+boolean privateLayout = ((Boolean)request.getAttribute("edit_pages.jsp-privateLayout")).booleanValue();
 long layoutId = ((Long)request.getAttribute("edit_pages.jsp-layoutId")).longValue();
+Layout selLayout = (Layout)request.getAttribute("edit_pages.jsp-selLayout");
 
 PortletURL redirectURL = ((PortletURL)request.getAttribute("edit_pages.jsp-redirectURL"));
 
 List<LayoutPrototype> layoutPrototypes = LayoutPrototypeServiceUtil.search(company.getCompanyId(), Boolean.TRUE, null);
-
-long layoutSetPrototypeId = PortalUtil.getClassNameId("com.liferay.portal.model.LayoutSetPrototype");
-long layoutPrototypeId = PortalUtil.getClassNameId("com.liferay.portal.model.LayoutPrototype");
-
-boolean prototype = (group.getClassNameId() == layoutSetPrototypeId) || (group.getClassNameId() == layoutPrototypeId);
 %>
 
 <div class="aui-helper-hidden" id="<portlet:namespace />addLayout">
@@ -78,7 +72,7 @@ boolean prototype = (group.getClassNameId() == layoutSetPrototypeId) || (group.g
 
 					<%
 					for (int i = 0; i < PropsValues.LAYOUT_TYPES.length; i++) {
-						if (PropsValues.LAYOUT_TYPES[i].equals("article") && prototype) {
+						if (PropsValues.LAYOUT_TYPES[i].equals("article") && (group.isLayoutPrototype() || group.isLayoutSetPrototype())) {
 							continue;
 						}
 					%>
