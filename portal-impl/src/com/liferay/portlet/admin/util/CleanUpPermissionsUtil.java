@@ -36,7 +36,7 @@ import javax.portlet.ActionRequest;
 /**
  * @author Raymond Augé
  */
-public class TidyPermissionsUtil {
+public class CleanUpPermissionsUtil {
 
 	public static void cleanUpAddToPagePermissions(ActionRequest actionRequest)
 		throws Exception {
