@@ -161,11 +161,13 @@ public class EditEntryAction extends PortletAction {
 				jsonObject.put("updateRedirect", updateRedirect);
 
 				writeJSON(actionRequest, actionResponse, jsonObject);
+
+				return;
 			}
-			else if (cmd.equals(Constants.PREVIEW) ||
-					 ((entry != null) &&
-					  (workflowAction ==
-						  WorkflowConstants.ACTION_SAVE_DRAFT))) {
+
+			if (cmd.equals(Constants.PREVIEW) ||
+				((entry != null) &&
+				 (workflowAction == WorkflowConstants.ACTION_SAVE_DRAFT))) {
 
 				redirect = getSaveAndContinueRedirect(
 					portletConfig, actionRequest, entry, redirect);
@@ -280,8 +282,9 @@ public class EditEntryAction extends PortletAction {
 			WebKeys.THEME_DISPLAY);
 
 		String backURL = ParamUtil.getString(actionRequest, "backURL");
-		String content = ParamUtil.getString(actionRequest, "content");
+
 		String title = ParamUtil.getString(actionRequest, "title");
+		String content = ParamUtil.getString(actionRequest, "content");
 
 		boolean preview = ParamUtil.getBoolean(actionRequest, "preview");
 
@@ -307,13 +310,13 @@ public class EditEntryAction extends PortletAction {
 
 		if (entry != null) {
 			portletURL.setParameter(
-				"entryId", String.valueOf(entry.getEntryId()), false);
-			portletURL.setParameter(
 				"groupId", String.valueOf(entry.getGroupId()), false);
+			portletURL.setParameter(
+				"entryId", String.valueOf(entry.getEntryId()), false);
 		}
 		else {
-			portletURL.setParameter("content", content, false);
 			portletURL.setParameter("title", title, false);
+			portletURL.setParameter("content", content, false);
 		}
 
 		return portletURL.toString();

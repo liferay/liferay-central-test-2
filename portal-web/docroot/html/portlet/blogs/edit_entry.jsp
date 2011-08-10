@@ -419,7 +419,6 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 
 <aui:script use="aui-base">
 	var cancelButton = A.one('#<portlet:namespace />cancelButton');
-	var preview = document.<portlet:namespace />fm.<portlet:namespace />preview.value;
 
 	if (cancelButton) {
 		cancelButton.on(
@@ -432,7 +431,7 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 		);
 	}
 
-	<c:if test="<%= (entry == null) || (entry.getStatus() == WorkflowConstants.STATUS_DRAFT) || preview %>">
+	<c:if test="<%= (entry == null) || (entry.getStatus() == WorkflowConstants.STATUS_DRAFT) || document.<portlet:namespace />fm.<portlet:namespace />preview.value %>">
 		<portlet:namespace />saveDraftIntervalId = setInterval('<portlet:namespace />saveEntry(true, true)', 30000);
 		<portlet:namespace />oldTitle = document.<portlet:namespace />fm.<portlet:namespace />title.value;
 		<portlet:namespace />oldContent = <portlet:namespace />initEditor();

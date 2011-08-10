@@ -194,7 +194,7 @@ public class EditMessageAction extends PortletAction {
 		int workflowAction = ParamUtil.getInteger(
 			actionRequest, "workflowAction", WorkflowConstants.ACTION_PUBLISH);
 
-		if (((message == null) && (cmd.equals(Constants.PREVIEW))) ||
+		if (((message == null) && cmd.equals(Constants.PREVIEW)) ||
 			(workflowAction == WorkflowConstants.ACTION_SAVE_DRAFT)) {
 
 			return getSaveAndContinueRedirect(
@@ -221,9 +221,10 @@ public class EditMessageAction extends PortletAction {
 		ActionRequest actionRequest, ActionResponse actionResponse,
 		MBMessage message) {
 
-		String body = ParamUtil.getString(actionRequest, "body");
 		String redirect = ParamUtil.getString(actionRequest, "redirect");
+
 		String subject = ParamUtil.getString(actionRequest, "subject");
+		String body = ParamUtil.getString(actionRequest, "body");
 
 		boolean preview = ParamUtil.getBoolean(actionRequest, "preview");
 
