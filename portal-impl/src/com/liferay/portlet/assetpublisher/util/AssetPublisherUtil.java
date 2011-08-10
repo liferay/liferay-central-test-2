@@ -168,7 +168,7 @@ public class AssetPublisherUtil {
 		PrimitiveLongList allCategoryIdsList = new PrimitiveLongList(
 			allCategoryIds.length + customUserAttributeNames.length);
 
-		 allCategoryIdsList.addAll(allCategoryIds);
+		allCategoryIdsList.addAll(allCategoryIds);
 
 		for (String customUserAttributeName : customUserAttributeNames) {
 			ExpandoBridge userCustomAttributes = user.getExpandoBridge();
@@ -176,18 +176,19 @@ public class AssetPublisherUtil {
 			Serializable userCustomFieldValue =
 				userCustomAttributes.getAttribute(customUserAttributeName);
 
-			if (userCustomFieldValue != null) {
-				String userCustomFieldValueString =
-					userCustomFieldValue.toString();
+			if (userCustomFieldValue == null) {
+				continue;
+			}
 
-				List<AssetCategory> assetCategories =
-					AssetCategoryLocalServiceUtil.search(
-						companyGroup.getGroupId(), userCustomFieldValueString,
-						new String[0], QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+			String userCustomFieldValueString = userCustomFieldValue.toString();
 
-				for (AssetCategory assetCategory : assetCategories) {
-					 allCategoryIdsList.add(assetCategory.getCategoryId());
-				}
+			List<AssetCategory> assetCategories =
+				AssetCategoryLocalServiceUtil.search(
+					companyGroup.getGroupId(), userCustomFieldValueString,
+					new String[0], QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+
+			for (AssetCategory assetCategory : assetCategories) {
+				 allCategoryIdsList.add(assetCategory.getCategoryId());
 			}
 		}
 

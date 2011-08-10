@@ -90,8 +90,6 @@ long[] classNameIds = AssetPublisherUtil.getClassNameIds(preferences, availableC
 
 String customUserAttributes = GetterUtil.getString(preferences.getValue("customUserAttributes", StringPool.BLANK));
 
-String[] customUserAttributeNames = StringUtil.split(customUserAttributes);
-
 AssetEntryQuery assetEntryQuery = new AssetEntryQuery();
 
 String[] allAssetTagNames = new String[0];
@@ -106,7 +104,7 @@ if (selectionStyle.equals("dynamic")) {
 
 	allAssetTagNames = AssetPublisherUtil.getAssetTagNames(preferences, scopeGroupId);
 
-	AssetPublisherUtil.addUserAttributes(user, customUserAttributeNames, assetEntryQuery);
+	AssetPublisherUtil.addUserAttributes(user, StringUtil.split(customUserAttributes), assetEntryQuery);
 }
 
 long assetVocabularyId = GetterUtil.getLong(preferences.getValue("assetVocabularyId", StringPool.BLANK));
