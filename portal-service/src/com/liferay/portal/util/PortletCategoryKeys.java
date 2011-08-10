@@ -29,7 +29,8 @@ public class PortletCategoryKeys {
 
 	public static final String SERVER = "server";
 
-	public static final String[] ALL =
-		{MARKETPLACE, MY, CONTENT, PORTAL, SERVER};
+	public static final String[] ALL = {
+		MARKETPLACE, MY, CONTENT, PORTAL, SERVER
+	};
 
 }

@@ -557,7 +557,10 @@ public class PluginPackageUtil {
 	}
 
 	private boolean _isInstalled(String context) {
-		if (_installedPluginPackages.getPluginPackage(context) != null) {
+		PluginPackage pluginPackage = _installedPluginPackages.getPluginPackage(
+			context);
+
+		if (pluginPackage != null) {
 			return true;
 		}
 		else {

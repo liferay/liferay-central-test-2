@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.StreamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsValues;
@@ -51,15 +52,15 @@ public class LiferayPackageAutoDeployer implements AutoDeployer {
 			ZipFile zipFile = new ZipFile(
 				new File(baseDir + StringPool.SLASH + file));
 
-			Enumeration enu = zipFile.entries();
+			Enumeration<? extends ZipEntry> enu = zipFile.entries();
 
 			while (enu.hasMoreElements()) {
-				ZipEntry entry = (ZipEntry)enu.nextElement();
+				ZipEntry entry = enu.nextElement();
 
 				String fileName = entry.getName();
 
-				if (!fileName.endsWith(".war") && !fileName.endsWith(".zip") &&
-					!fileName.endsWith(".xml")) {
+				if (!fileName.endsWith(".war") && !fileName.endsWith(".xml") &&
+					!fileName.endsWith(".zip")) {
 
 					continue;
 				}
@@ -68,9 +69,17 @@ public class LiferayPackageAutoDeployer implements AutoDeployer {
 					_log.info("Extracting " + fileName + " from " + file);
 				}
 
-				InputStream is = zipFile.getInputStream(entry);
+				InputStream inputStream = null;
 
-				FileUtil.write(baseDir + StringPool.SLASH + fileName, is);
+				try {
+					inputStream = zipFile.getInputStream(entry);
+
+					FileUtil.write(
+						baseDir + StringPool.SLASH + fileName, inputStream);
+				}
+				finally {
+					StreamUtil.cleanUp(inputStream);
+				}
 			}
 		}
 		catch (Exception e) {

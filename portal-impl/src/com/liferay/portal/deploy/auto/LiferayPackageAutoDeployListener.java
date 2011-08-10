@@ -27,7 +27,7 @@ import java.io.File;
 public class LiferayPackageAutoDeployListener extends BaseAutoDeployListener {
 
 	public LiferayPackageAutoDeployListener() {
-		_deployer = new LiferayPackageAutoDeployer();
+		_autoDeployer = new LiferayPackageAutoDeployer();
 	}
 
 	public void deploy(File file) throws AutoDeployException {
@@ -40,11 +40,10 @@ public class LiferayPackageAutoDeployListener extends BaseAutoDeployListener {
 		}
 
 		if (_log.isInfoEnabled()) {
-			_log.info(
-				"Extracting Liferay package for " + file.getPath());
+			_log.info("Extracting Liferay package for " + file.getPath());
 		}
 
-		_deployer.autoDeploy(file.getName());
+		_autoDeployer.autoDeploy(file.getName());
 
 		if (_log.isInfoEnabled()) {
 			_log.info(
@@ -56,6 +55,6 @@ public class LiferayPackageAutoDeployListener extends BaseAutoDeployListener {
 	private static Log _log = LogFactoryUtil.getLog(
 		LiferayPackageAutoDeployListener.class);
 
-	private AutoDeployer _deployer;
+	private AutoDeployer _autoDeployer;
 
 }
