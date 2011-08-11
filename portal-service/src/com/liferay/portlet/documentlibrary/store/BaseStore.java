@@ -270,7 +270,6 @@ public abstract class BaseStore implements Store {
 	 * @throws UnsupportedOperationException if the method is unsupported by the
 	 *         storage implementation
 	 */
-	@SuppressWarnings("unused")
 	public File getFile(
 			long companyId, long repositoryId, String fileName,
 			String versionLabel)
