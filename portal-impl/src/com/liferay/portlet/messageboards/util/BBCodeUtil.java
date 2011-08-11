@@ -321,6 +321,7 @@ public class BBCodeUtil {
 			if (tag.hasParameter() &&
 				(tagParameterValue =
 					listStyles.get(tag.getParameter())) != null) {
+
 				sb.append(tagParameterValue);
 
 				for (int i = 0; i < items.length; i++) {
@@ -397,6 +398,7 @@ public class BBCodeUtil {
 				}
 
 				String fontSize = fontSizes.get(size);
+
 				if (fontSize != null) {
 					sb.append(fontSize);
 					sb.append(tag.getElement() + "</span>");
