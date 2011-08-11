@@ -258,8 +258,8 @@ public class CreateAccountAction extends PortletAction {
 		long[] organizationIds = null;
 		long[] roleIds = null;
 		long[] userGroupIds = null;
-		boolean sendEmail = true;
 		List<Address> addresses = new ArrayList<Address>();
+		boolean sendEmail = true;
 
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			User.class.getName(), actionRequest);
@@ -289,8 +289,8 @@ public class CreateAccountAction extends PortletAction {
 			autoScreenName, screenName, emailAddress, facebookId, openId,
 			themeDisplay.getLocale(), firstName, middleName, lastName, prefixId,
 			suffixId, male, birthdayMonth, birthdayDay, birthdayYear, jobTitle,
-			groupIds, organizationIds, roleIds, userGroupIds, sendEmail,
-			addresses, serviceContext);
+			groupIds, organizationIds, roleIds, userGroupIds, addresses,
+			sendEmail, serviceContext);
 
 		if (openIdPending) {
 			session.setAttribute(

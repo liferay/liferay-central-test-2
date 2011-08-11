@@ -463,8 +463,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 				autoScreenName, screenName, emailAddress, facebookId, openId,
 				locale, firstName, middleName, lastName, prefixId, suffixId,
 				male, birthdayMonth, birthdayDay, birthdayYear, jobTitle,
-				groupIds, organizationIds, roleIds, userGroupIds, sendEmail,
-				new ArrayList<Address>(), serviceContext);
+				groupIds, organizationIds, roleIds, userGroupIds,
+				new ArrayList<Address>(), sendEmail, serviceContext);
 		}
 		finally {
 			WorkflowThreadLocal.setEnabled(workflowEnabled);
@@ -532,9 +532,9 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	 * @param  organizationIds the primary keys of the user's organizations
 	 * @param  roleIds the primary keys of the roles this user possesses
 	 * @param  userGroupIds the primary keys of the user's user groups
+	 * @param  addresses the user's addresses
 	 * @param  sendEmail whether to send the user an email notification about
 	 *         their new account
-	 * @param  addresses the user's addresses
 	 * @param  serviceContext the user's service context (optionally
 	 *         <code>null</code>). Can specify the user's universally unique
 	 *         identifier (with the <code>uuid</code> attribute), asset category
@@ -551,8 +551,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			String lastName, int prefixId, int suffixId, boolean male,
 			int birthdayMonth, int birthdayDay, int birthdayYear,
 			String jobTitle, long[] groupIds, long[] organizationIds,
-			long[] roleIds, long[] userGroupIds, boolean sendEmail,
-			List<Address> addresses, ServiceContext serviceContext)
+			long[] roleIds, long[] userGroupIds, List<Address> addresses,
+			boolean sendEmail, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// User
