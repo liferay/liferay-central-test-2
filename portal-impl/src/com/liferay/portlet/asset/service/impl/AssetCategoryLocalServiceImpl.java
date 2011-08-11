@@ -211,22 +211,6 @@ public class AssetCategoryLocalServiceImpl
 		return assetCategoryPersistence.fetchByPrimaryKey(categoryId);
 	}
 
-	public String[] getCategoryNames() throws SystemException {
-		return getCategoryNames(getCategories());
-	}
-
-	public String[] getCategoryNames(long classNameId, long classPK)
-		throws SystemException {
-
-		return getCategoryNames(getCategories(classNameId, classPK));
-	}
-
-	public String[] getCategoryNames(String className, long classPK)
-		throws SystemException {
-
-		return getCategoryNames(getCategories(className, classPK));
-	}
-
 	public List<AssetCategory> getCategories() throws SystemException {
 		return assetCategoryPersistence.findAll();
 	}
@@ -256,6 +240,22 @@ public class AssetCategoryLocalServiceImpl
 		throws SystemException {
 
 		return getCategoryIds(getCategories(className, classPK));
+	}
+
+	public String[] getCategoryNames() throws SystemException {
+		return getCategoryNames(getCategories());
+	}
+
+	public String[] getCategoryNames(long classNameId, long classPK)
+		throws SystemException {
+
+		return getCategoryNames(getCategories(classNameId, classPK));
+	}
+
+	public String[] getCategoryNames(String className, long classPK)
+		throws SystemException {
+
+		return getCategoryNames(getCategories(className, classPK));
 	}
 
 	public List<AssetCategory> getChildCategories(long parentCategoryId)
