@@ -73,7 +73,7 @@ public class ThemeUtil {
 
 			portletId = portletDisplay.getId();
 		}
-		
+
 		return portletId;
 	}
 

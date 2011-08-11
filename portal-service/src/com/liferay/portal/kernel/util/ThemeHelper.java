@@ -121,15 +121,15 @@ public class ThemeHelper {
 		throws Exception {
 
 		Boolean exists = null;
-		
+
 		if (Validator.isNotNull(portletId)) {
 			exists = _resourceExists(servletContext, theme, portletId, path);
-			
+
 			if (!exists) {
 				exists = _resourceExists(servletContext, theme, null, path);
 			}
 		}
-		
+
 		if (exists == null) {
 			exists = _resourceExists(servletContext, theme, portletId, path);
 		}

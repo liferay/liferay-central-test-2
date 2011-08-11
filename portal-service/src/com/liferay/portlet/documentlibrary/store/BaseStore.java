@@ -20,7 +20,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portlet.documentlibrary.NoSuchFileException;
 
 import java.io.File;
@@ -31,7 +30,7 @@ import java.io.InputStream;
 
 /**
  * The abstract base class for all file store implementations. Most, if not all
- * implementations should extend this class. 
+ * implementations should extend this class.
  *
  * @author Brian Wing Shun Chan
  * @author Alexander Chow
@@ -42,7 +41,7 @@ public abstract class BaseStore implements Store {
 	 * Adds a directory.
 	 *
 	 * @param  companyId the primary key of the company
-	 * @param  repositoryId the primary key of the data repository (optionally 
+	 * @param  repositoryId the primary key of the data repository (optionally
 	 *         {@link CompanyConstants#SYSTEM})
 	 * @param  dirName the directory's name
 	 * @throws PortalException if the directory's information was invalid
@@ -56,7 +55,7 @@ public abstract class BaseStore implements Store {
 	 * Adds a file based on a byte array.
 	 *
 	 * @param  companyId the primary key of the company
-	 * @param  repositoryId the primary key of the data repository (optionally 
+	 * @param  repositoryId the primary key of the data repository (optionally
 	 *         {@link CompanyConstants#SYSTEM})
 	 * @param  fileName the file name
 	 * @param  bytes the files's data
@@ -86,7 +85,7 @@ public abstract class BaseStore implements Store {
 	 * Adds a file based on a {@link File} object.
 	 *
 	 * @param  companyId the primary key of the company
-	 * @param  repositoryId the primary key of the data repository (optionally 
+	 * @param  repositoryId the primary key of the data repository (optionally
 	 *         {@link CompanyConstants#SYSTEM})
 	 * @param  fileName the file name
 	 * @param  file the files's data
@@ -123,7 +122,7 @@ public abstract class BaseStore implements Store {
 	 * Adds a file based on an {@link InputStream} object.
 	 *
 	 * @param  companyId the primary key of the company
-	 * @param  repositoryId the primary key of the data repository (optionally 
+	 * @param  repositoryId the primary key of the data repository (optionally
 	 *         {@link CompanyConstants#SYSTEM})
 	 * @param  fileName the file name
 	 * @param  is the files's data
@@ -135,7 +134,7 @@ public abstract class BaseStore implements Store {
 		throws PortalException, SystemException;
 
 	/**
-	 * Ensures company's root directory exists. Only implemented by {@link 
+	 * Ensures company's root directory exists. Only implemented by {@link
 	 * JCRStore#checkRoot(long)}.
 	 *
 	 * @param  companyId the primary key of the company
@@ -152,7 +151,7 @@ public abstract class BaseStore implements Store {
 	 * </p>
 	 *
 	 * @param  companyId the primary key of the company
-	 * @param  repositoryId the primary key of the data repository (optionally 
+	 * @param  repositoryId the primary key of the data repository (optionally
 	 *         {@link CompanyConstants#SYSTEM})
 	 * @param  fileName the original's file name
 	 * @param  fromVersionLabel the original file's version label
@@ -175,7 +174,7 @@ public abstract class BaseStore implements Store {
 	 * Deletes a directory.
 	 *
 	 * @param  companyId the primary key of the company
-	 * @param  repositoryId the primary key of the data repository (optionally 
+	 * @param  repositoryId the primary key of the data repository (optionally
 	 *         {@link CompanyConstants#SYSTEM})
 	 * @param  dirName the directory's name
 	 * @throws PortalException if the directory's information was invalid
@@ -190,7 +189,7 @@ public abstract class BaseStore implements Store {
 	 * deleted.
 	 *
 	 * @param  companyId the primary key of the company
-	 * @param  repositoryId the primary key of the data repository (optionally 
+	 * @param  repositoryId the primary key of the data repository (optionally
 	 *         {@link CompanyConstants#SYSTEM})
 	 * @param  fileName the file's name
 	 * @throws PortalException if the file's information was invalid
@@ -204,7 +203,7 @@ public abstract class BaseStore implements Store {
 	 * Deletes a file at a particular version.
 	 *
 	 * @param  companyId the primary key of the company
-	 * @param  repositoryId the primary key of the data repository (optionally 
+	 * @param  repositoryId the primary key of the data repository (optionally
 	 *         {@link CompanyConstants#SYSTEM})
 	 * @param  fileName the file's name
 	 * @param  versionLabel the file's version label
@@ -218,17 +217,17 @@ public abstract class BaseStore implements Store {
 
 	/**
 	 * Returns the file as a {@link File} object.
-	 * 
+	 *
 	 * <p>
-	 * This method is useful when optimizing low-level file operations like 
-	 * copy. The client must not delete or change the returned {@link File} 
-	 * object in any way. This method is only supported in certain stores. If 
-	 * not supported, this method will throw an 
+	 * This method is useful when optimizing low-level file operations like
+	 * copy. The client must not delete or change the returned {@link File}
+	 * object in any way. This method is only supported in certain stores. If
+	 * not supported, this method will throw an
 	 * {@link UnsupportedOperationException}.
 	 * </p>
 	 *
 	 * @param  companyId the primary key of the company
-	 * @param  repositoryId the primary key of the data repository (optionally 
+	 * @param  repositoryId the primary key of the data repository (optionally
 	 *         {@link CompanyConstants#SYSTEM})
 	 * @param  fileName the file's name
 	 * @return Returns the {@link File} object with the file's name
@@ -245,22 +244,22 @@ public abstract class BaseStore implements Store {
 
 	/**
 	 * Returns the file as a {@link File} object.
-	 * 
+	 *
 	 * <p>
-	 * This method is useful when optimizing low-level file operations like 
-	 * copy. The client must not delete or change the returned {@link File} 
-	 * object in any way. This method is only supported in certain stores. If 
-	 * not supported, this method will throw an 
+	 * This method is useful when optimizing low-level file operations like
+	 * copy. The client must not delete or change the returned {@link File}
+	 * object in any way. This method is only supported in certain stores. If
+	 * not supported, this method will throw an
 	 * {@link UnsupportedOperationException}.
 	 * </p>
-	 * 
+	 *
 	 * <p>
 	 * This method should be overrided if a more optimized approach can be
 	 * used (e.g., {@link FileSystemStore#getFile(long, long, String, String)}).
 	 * </p>
 	 *
 	 * @param  companyId the primary key of the company
-	 * @param  repositoryId the primary key of the data repository (optionally 
+	 * @param  repositoryId the primary key of the data repository (optionally
 	 *         {@link CompanyConstants#SYSTEM})
 	 * @param  fileName the file's name
 	 * @param  versionLabel the file's version label
@@ -280,9 +279,9 @@ public abstract class BaseStore implements Store {
 
 	/**
 	 * Returns the file as a byte array.
-	 * 
+	 *
 	 * @param  companyId the primary key of the company
-	 * @param  repositoryId the primary key of the data repository (optionally 
+	 * @param  repositoryId the primary key of the data repository (optionally
 	 *         {@link CompanyConstants#SYSTEM})
 	 * @param  fileName the file's name
 	 * @return Returns the byte array with the file's name
@@ -309,9 +308,9 @@ public abstract class BaseStore implements Store {
 
 	/**
 	 * Returns the file as a byte array.
-	 * 
+	 *
 	 * @param  companyId the primary key of the company
-	 * @param  repositoryId the primary key of the data repository (optionally 
+	 * @param  repositoryId the primary key of the data repository (optionally
 	 *         {@link CompanyConstants#SYSTEM})
 	 * @param  fileName the file's name
 	 * @param  versionLabel the file's version label
@@ -341,9 +340,9 @@ public abstract class BaseStore implements Store {
 
 	/**
 	 * Returns the file as an {@link InputStream} object.
-	 * 
+	 *
 	 * @param  companyId the primary key of the company
-	 * @param  repositoryId the primary key of the data repository (optionally 
+	 * @param  repositoryId the primary key of the data repository (optionally
 	 *         {@link CompanyConstants#SYSTEM})
 	 * @param  fileName the file's name
 	 * @return Returns the {@link InputStream} object with the file's name
@@ -360,9 +359,9 @@ public abstract class BaseStore implements Store {
 
 	/**
 	 * Returns the file as an {@link InputStream} object.
-	 * 
+	 *
 	 * @param  companyId the primary key of the company
-	 * @param  repositoryId the primary key of the data repository (optionally 
+	 * @param  repositoryId the primary key of the data repository (optionally
 	 *         {@link CompanyConstants#SYSTEM})
 	 * @param  fileName the file's name
 	 * @param  versionLabel the file's version label
@@ -379,7 +378,7 @@ public abstract class BaseStore implements Store {
 	 * Returns all files of the directory.
 	 *
 	 * @param  companyId the primary key of the company
-	 * @param  repositoryId the primary key of the data repository (optionally 
+	 * @param  repositoryId the primary key of the data repository (optionally
 	 *         {@link CompanyConstants#SYSTEM})
 	 * @param  dirName the directory's name
 	 * @return Returns all files of the directory
@@ -394,7 +393,7 @@ public abstract class BaseStore implements Store {
 	 * Returns the size of the file.
 	 *
 	 * @param  companyId the primary key of the company
-	 * @param  repositoryId the primary key of the data repository (optionally 
+	 * @param  repositoryId the primary key of the data repository (optionally
 	 *         {@link CompanyConstants#SYSTEM})
 	 * @param  fileName the file's name
 	 * @return Returns the size of the file
@@ -409,10 +408,10 @@ public abstract class BaseStore implements Store {
 	 * Returns <code>true</code> if the file exists.
 	 *
 	 * @param  companyId the primary key of the company
-	 * @param  repositoryId the primary key of the data repository (optionally 
+	 * @param  repositoryId the primary key of the data repository (optionally
 	 *         {@link CompanyConstants#SYSTEM})
 	 * @param  fileName the file's name
-	 * @return <code>true</code> if the file exists; <code>false</code> 
+	 * @return <code>true</code> if the file exists; <code>false</code>
 	 *         otherwise
 	 * @throws PortalException if the file's information was invalid
 	 * @throws SystemException if a system exception occurred
@@ -427,11 +426,11 @@ public abstract class BaseStore implements Store {
 	 * Returns <code>true</code> if the file exists.
 	 *
 	 * @param  companyId the primary key of the company
-	 * @param  repositoryId the primary key of the data repository (optionally 
+	 * @param  repositoryId the primary key of the data repository (optionally
 	 *         {@link CompanyConstants#SYSTEM})
 	 * @param  fileName the file's name
 	 * @param  versionLabel the file's version label
-	 * @return <code>true</code> if the file exists; <code>false</code> 
+	 * @return <code>true</code> if the file exists; <code>false</code>
 	 *         otherwise
 	 * @throws PortalException if the file's information was invalid
 	 * @throws SystemException if a system exception occurred
@@ -442,7 +441,7 @@ public abstract class BaseStore implements Store {
 		throws PortalException, SystemException;
 
 	/**
-	 * Moves an existing directory. Only implemented by {@link 
+	 * Moves an existing directory. Only implemented by {@link
 	 * JCRStore#move(String, String)}.
 	 *
 	 * @param  srcDir the original directory's name
@@ -471,7 +470,7 @@ public abstract class BaseStore implements Store {
 	 * Updates a file based on a byte array.
 	 *
 	 * @param  companyId the primary key of the company
-	 * @param  repositoryId the primary key of the data repository (optionally 
+	 * @param  repositoryId the primary key of the data repository (optionally
 	 *         {@link CompanyConstants#SYSTEM})
 	 * @param  fileName the file name
 	 * @param  versionLabel the file's new version label
@@ -503,7 +502,7 @@ public abstract class BaseStore implements Store {
 	 * Updates a file based on a {@link File} object.
 	 *
 	 * @param  companyId the primary key of the company
-	 * @param  repositoryId the primary key of the data repository (optionally 
+	 * @param  repositoryId the primary key of the data repository (optionally
 	 *         {@link CompanyConstants#SYSTEM})
 	 * @param  fileName the file name
 	 * @param  versionLabel the file's new version label
@@ -542,7 +541,7 @@ public abstract class BaseStore implements Store {
 	 * Updates a file based on an {@link InputStream} object.
 	 *
 	 * @param  companyId the primary key of the company
-	 * @param  repositoryId the primary key of the data repository (optionally 
+	 * @param  repositoryId the primary key of the data repository (optionally
 	 *         {@link CompanyConstants#SYSTEM})
 	 * @param  fileName the file name
 	 * @param  versionLabel the file's new version label
@@ -556,12 +555,12 @@ public abstract class BaseStore implements Store {
 		throws PortalException, SystemException;
 
 	/**
-	 * Update's a file version label. Similar to {@link 
+	 * Update's a file version label. Similar to {@link
 	 * #copyFileVersion(long, long, String, String, String, String)} except that
 	 * the old file version is deleted.
 	 *
 	 * @param  companyId the primary key of the company
-	 * @param  repositoryId the primary key of the data repository (optionally 
+	 * @param  repositoryId the primary key of the data repository (optionally
 	 *         {@link CompanyConstants#SYSTEM})
 	 * @param  fileName the file's name
 	 * @param  fromVersionLabel the file's version label
