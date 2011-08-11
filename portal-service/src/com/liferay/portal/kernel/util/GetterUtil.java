@@ -232,10 +232,8 @@ public class GetterUtil {
 		try {
 			value = value.trim().toLowerCase();
 
-			if (value.equals(BOOLEANS[0]) ||
-				value.equals(BOOLEANS[1]) ||
-				value.equals(BOOLEANS[2]) ||
-				value.equals(BOOLEANS[3]) ||
+			if (value.equals(BOOLEANS[0]) || value.equals(BOOLEANS[1]) ||
+				value.equals(BOOLEANS[2]) || value.equals(BOOLEANS[3]) ||
 				value.equals(BOOLEANS[4])) {
 
 				return true;
