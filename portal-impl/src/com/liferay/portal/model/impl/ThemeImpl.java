@@ -105,7 +105,7 @@ public class ThemeImpl extends PluginBaseImpl implements Theme {
 		ThemeSetting themeSetting = new ThemeSettingImpl(
 			configurable, options, type, value);
 
-		_settings.put(key, themeSetting);
+		_themeSettingsMap.put(key, themeSetting);
 	}
 
 	public int compareTo(Theme theme) {
@@ -152,7 +152,9 @@ public class ThemeImpl extends PluginBaseImpl implements Theme {
 		Map<String, ThemeSetting> configurableSettings =
 			new HashMap<String, ThemeSetting>();
 
-		for (Map.Entry<String,ThemeSetting> entry : _settings.entrySet()) {
+		for (Map.Entry<String,ThemeSetting> entry :
+				_themeSettingsMap.entrySet()) {
+
 			ThemeSetting themeSetting = entry.getValue();
 
 			if (themeSetting.isConfigurable()) {
@@ -257,7 +259,7 @@ public class ThemeImpl extends PluginBaseImpl implements Theme {
 	public String getSetting(String key) {
 		String value = null;
 
-		ThemeSetting themeSetting = _settings.get(key);
+		ThemeSetting themeSetting = _themeSettingsMap.get(key);
 
 		if (themeSetting != null) {
 			value = themeSetting.getValue();
@@ -269,7 +271,7 @@ public class ThemeImpl extends PluginBaseImpl implements Theme {
 	public String[] getSettingOptions(String key) {
 		String[] options = null;
 
-		ThemeSetting themeSetting = _settings.get(key);
+		ThemeSetting themeSetting = _themeSettingsMap.get(key);
 
 		if (themeSetting != null) {
 			options = themeSetting.getOptions();
@@ -279,14 +281,14 @@ public class ThemeImpl extends PluginBaseImpl implements Theme {
 	}
 
 	public Map<String, ThemeSetting> getSettings() {
-		return _settings;
+		return _themeSettingsMap;
 	}
 
 	public Properties getSettingsProperties() {
 		Properties properties = new Properties();
 
-		for (String key : _settings.keySet()) {
-			ThemeSetting setting = _settings.get(key);
+		for (String key : _themeSettingsMap.keySet()) {
+			ThemeSetting setting = _themeSettingsMap.get(key);
 
 			if (setting != null) {
 				properties.setProperty(key, setting.getValue());
@@ -463,7 +465,7 @@ public class ThemeImpl extends PluginBaseImpl implements Theme {
 	}
 
 	public void setSetting(String key, String value) {
-		ThemeSetting themeSetting = _settings.get(key);
+		ThemeSetting themeSetting = _themeSettingsMap.get(key);
 
 		if (themeSetting != null) {
 			themeSetting.setValue(value);
@@ -617,7 +619,7 @@ public class ThemeImpl extends PluginBaseImpl implements Theme {
 		new ConcurrentHashMap<String,String>();
 	private String _rootPath = "/";
 	private String _servletContextName = StringPool.BLANK;
-	private Map<String, ThemeSetting> _settings =
+	private Map<String, ThemeSetting> _themeSettingsMap =
 		new HashMap<String, ThemeSetting>();
 	private Map<String, SpriteImage> _spriteImagesMap =
 		new HashMap<String, SpriteImage>();
