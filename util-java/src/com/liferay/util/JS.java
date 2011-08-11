@@ -35,22 +35,27 @@ public class JS {
 		}
 
 		StringBuilder sb = null;
+
 		int index = 0;
 
 		for (int i = 0; i < name.length(); i++) {
 			char c = name.charAt(i);
 
 			switch (c) {
-				case CharPool.SPACE :
-				case CharPool.DASH :
-				case CharPool.PERIOD :
+				case CharPool.SPACE:
+
+				case CharPool.DASH:
+
+				case CharPool.PERIOD:
 					if (sb == null) {
 						sb = new StringBuilder(name.length() - 1);
 
 						sb.append(name, index, i);
 					}
+
 					break;
-				default :
+
+				default:
 					if (sb != null) {
 						sb.append(c);
 					}
