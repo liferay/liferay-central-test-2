@@ -28,9 +28,7 @@ PortletURL portletURL = (PortletURL)request.getAttribute("liferay-ui:asset-categ
 
 List<AssetVocabulary> vocabularies = AssetVocabularyServiceUtil.getGroupsVocabularies(new long[] {themeDisplay.getParentGroupId(), themeDisplay.getCompanyGroupId()});
 List<AssetCategory> categories = AssetCategoryServiceUtil.getCategories(className, classPK);
-%>
 
-<%
 for (AssetVocabulary vocabulary : vocabularies) {
 	vocabulary = vocabulary.toEscapedModel();
 
@@ -53,7 +51,7 @@ for (AssetVocabulary vocabulary : vocabularies) {
 						portletURL.setParameter("categoryId", String.valueOf(category.getCategoryId()));
 					%>
 
-						<a class="asset-category" href="<%= portletURL.toString() %>"><%= _buildCategoryPath(category, themeDisplay.getLocale()) %></a>
+						<a class="asset-category" href="<%= portletURL.toString() %>"><%= _buildCategoryPath(category, themeDisplay) %></a>
 
 					<%
 					}
@@ -68,7 +66,7 @@ for (AssetVocabulary vocabulary : vocabularies) {
 					%>
 
 						<span class="asset-category">
-							<%= _buildCategoryPath(category, themeDisplay.getLocale()) %>
+							<%= _buildCategoryPath(category, themeDisplay) %>
 						</span>
 
 					<%
@@ -84,11 +82,11 @@ for (AssetVocabulary vocabulary : vocabularies) {
 %>
 
 <%!
-private String _buildCategoryPath(AssetCategory category, Locale locale) throws PortalException, SystemException {
+private String _buildCategoryPath(AssetCategory category, ThemeDisplay themeDisplay) throws PortalException, SystemException {
 	List<AssetCategory> ancestorCategories = category.getAncestors();
 
 	if (ancestorCategories.isEmpty()) {
-		return category.getTitle(locale);
+		return category.getTitle(themeDisplay.getLocale());
 	}
 
 	Collections.reverse(ancestorCategories);
@@ -98,11 +96,11 @@ private String _buildCategoryPath(AssetCategory category, Locale locale) throws 
 	for (AssetCategory ancestorCategory : ancestorCategories) {
 		ancestorCategory = ancestorCategory.toEscapedModel();
 
-		sb.append(ancestorCategory.getTitle(locale));
+		sb.append(ancestorCategory.getTitle(themeDisplay.getLocale()));
 		sb.append(" &raquo; ");
 	}
 
-	sb.append(category.getTitle(locale));
+	sb.append(category.getTitle(themeDisplay.getLocale()));
 
 	return sb.toString();
 }
