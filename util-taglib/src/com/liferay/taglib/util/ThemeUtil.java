@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.velocity.VelocityContext;
 import com.liferay.portal.kernel.velocity.VelocityEngineUtil;
 import com.liferay.portal.kernel.velocity.VelocityVariablesUtil;
 import com.liferay.portal.model.Theme;
+import com.liferay.portal.theme.PortletDisplay;
 import com.liferay.portal.theme.ThemeDisplay;
 
 import freemarker.ext.jsp.TaglibFactory;
@@ -60,6 +61,21 @@ import org.apache.struts.tiles.ComponentContext;
  * @author Shuyang Zhou
  */
 public class ThemeUtil {
+
+	public static String getPortletId(HttpServletRequest request) {
+		String portletId = null;
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		if (themeDisplay != null) {
+			PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
+
+			portletId = portletDisplay.getId();
+		}
+		
+		return portletId;
+	}
 
 	public static void include(
 			ServletContext servletContext, HttpServletRequest request,
@@ -104,20 +120,13 @@ public class ThemeUtil {
 			ServletContextPool.put(servletContextName, servletContext);
 		}
 
-		String portletId = null;
-
-		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
-		if (themeDisplay != null) {
-			portletId = themeDisplay.getPortletDisplay().getId();
-		}
+		String portletId = getPortletId(request);
 
 		String resourcePath = theme.getResourcePath(
 			servletContext, portletId, path);
 
-		if (!FreeMarkerEngineUtil.resourceExists(resourcePath) &&
-			Validator.isNotNull(portletId)) {
+		if (Validator.isNotNull(portletId) &&
+			!FreeMarkerEngineUtil.resourceExists(resourcePath)) {
 
 			resourcePath = theme.getResourcePath(servletContext, null, path);
 		}
@@ -273,20 +282,13 @@ public class ThemeUtil {
 			ServletContextPool.put(servletContextName, servletContext);
 		}
 
-		String portletId = null;
-
-		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
-		if (themeDisplay != null) {
-			portletId = themeDisplay.getPortletDisplay().getId();
-		}
+		String portletId = getPortletId(request);
 
 		String resourcePath = theme.getResourcePath(
 			servletContext, portletId, page);
 
-		if (!VelocityEngineUtil.resourceExists(resourcePath) &&
-			Validator.isNotNull(portletId)) {
+		if (Validator.isNotNull(portletId) &&
+			!VelocityEngineUtil.resourceExists(resourcePath)) {
 
 			resourcePath = theme.getResourcePath(servletContext, null, page);
 		}

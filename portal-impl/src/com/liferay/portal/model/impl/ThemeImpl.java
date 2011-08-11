@@ -221,23 +221,29 @@ public class ThemeImpl extends PluginBaseImpl implements Theme {
 	public String getResourcePath(
 		ServletContext servletContext, String portletId, String path) {
 
-		if (PropsValues.LAYOUT_TEMPLATE_CACHE_ENABLED) {
-			String key = encodeKey(portletId, path);
-
-			if (!_resourcePathCache.containsKey(key)) {
-
-				String resourcePath = ThemeHelper.getResourcePath(
-					servletContext, this, portletId, path);
-
-				_resourcePathCache.put(key, resourcePath);
-			}
-
-			return _resourcePathCache.get(key);
-		}
-		else {
+		if (!PropsValues.LAYOUT_TEMPLATE_CACHE_ENABLED) {
 			return ThemeHelper.getResourcePath(
 				servletContext, this, portletId, path);
 		}
+
+		String key = path;
+
+		if (Validator.isNotNull(portletId)) {
+			key = path.concat(StringPool.POUND).concat(portletId);
+		}
+
+		String resourcePath = _resourcePathsMap.get(key);
+
+		if (resourcePath != null) {
+			return resourcePath;
+		}
+
+		resourcePath = ThemeHelper.getResourcePath(
+			servletContext, this, portletId, path);
+
+		_resourcePathsMap.put(key, resourcePath);
+
+		return resourcePath;
 	}
 
 	public String getRootPath() {
@@ -396,23 +402,29 @@ public class ThemeImpl extends PluginBaseImpl implements Theme {
 			ServletContext servletContext, String portletId, String path)
 		throws Exception {
 
-		if (PropsValues.LAYOUT_TEMPLATE_CACHE_ENABLED) {
-			String key = encodeKey(portletId, path);
-
-			if (!_resourceExistsCache.containsKey(key)) {
-
-				boolean exists = ThemeHelper.resourceExists(
-					servletContext, this, portletId, path);
-
-				_resourceExistsCache.put(key, exists);
-			}
-
-			return _resourceExistsCache.get(key);
-		}
-		else {
+		if (!PropsValues.LAYOUT_TEMPLATE_CACHE_ENABLED) {
 			return ThemeHelper.resourceExists(
 				servletContext, this, portletId, path);
 		}
+
+		String key = path;
+
+		if (Validator.isNotNull(portletId)) {
+			key = path.concat(StringPool.POUND).concat(portletId);
+		}
+
+		Boolean resourceExists = _resourceExistsMap.containsKey(key);
+
+		if (resourceExists != null) {
+			return resourceExists;
+		}
+
+		resourceExists = ThemeHelper.resourceExists(
+			servletContext, this, portletId, path);
+
+		_resourceExistsMap.put(key, resourceExists);
+
+		return resourceExists;
 	}
 
 	public void setCssPath(String cssPath) {
@@ -518,14 +530,6 @@ public class ThemeImpl extends PluginBaseImpl implements Theme {
 		_wapTheme = wapTheme;
 	}
 
-	protected String encodeKey(String portletId, String path) {
-		if (Validator.isNull(portletId)) {
-			return path;
-		}
-
-		return path.concat(StringPool.POUND).concat(portletId);
-	}
-
 	protected boolean isAvailable(ThemeCompanyLimit limit, long id) {
 		boolean available = true;
 
@@ -607,9 +611,9 @@ public class ThemeImpl extends PluginBaseImpl implements Theme {
 	private String _javaScriptPath = "${root-path}/js";
 	private boolean _loadFromServletContext;
 	private String _name;
-	private Map<String,Boolean> _resourceExistsCache =
+	private Map<String, Boolean> _resourceExistsMap =
 		new ConcurrentHashMap<String,Boolean>();
-	private Map<String,String> _resourcePathCache =
+	private Map<String, String> _resourcePathsMap =
 		new ConcurrentHashMap<String,String>();
 	private String _rootPath = "/";
 	private String _servletContextName = StringPool.BLANK;

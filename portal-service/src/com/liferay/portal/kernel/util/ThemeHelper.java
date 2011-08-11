@@ -120,11 +120,18 @@ public class ThemeHelper {
 			String path)
 		throws Exception {
 
-		boolean exists = _resourceExists(
-			servletContext, theme, portletId, path);
-
-		if (!exists && Validator.isNotNull(portletId)) {
-			exists = _resourceExists(servletContext, theme, null, path);
+		Boolean exists = null;
+		
+		if (Validator.isNotNull(portletId)) {
+			exists = _resourceExists(servletContext, theme, portletId, path);
+			
+			if (!exists) {
+				exists = _resourceExists(servletContext, theme, null, path);
+			}
+		}
+		
+		if (exists == null) {
+			exists = _resourceExists(servletContext, theme, portletId, path);
 		}
 
 		return exists;

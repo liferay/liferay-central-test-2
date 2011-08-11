@@ -312,10 +312,9 @@ public class IncludeTag extends AttributesTagSupport {
 
 		HttpServletRequest request = getServletRequest();
 
-		request.setAttribute(WebKeys.SERVLET_PATH, page);
 		request.setAttribute(
-			WebKeys.SERVLET_CONTEXT_INCLUDE_FILTER_STRICT,
-			Boolean.valueOf(_strict));
+			WebKeys.SERVLET_CONTEXT_INCLUDE_FILTER_STRICT, _strict);
+		request.setAttribute(WebKeys.SERVLET_PATH, page);
 
 		HttpServletResponse response = new PipingServletResponse(
 			pageContext, isTrimNewLines());
@@ -400,14 +399,7 @@ public class IncludeTag extends AttributesTagSupport {
 
 		Theme theme = (Theme)request.getAttribute(WebKeys.THEME);
 
-		String portletId = null;
-
-		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
-		if (themeDisplay != null) {
-			portletId = themeDisplay.getPortletDisplay().getId();
-		}
+		String portletId = ThemeUtil.getPortletId(request);
 
 		boolean exists = theme.resourceExists(servletContext, portletId, page);
 
@@ -474,7 +466,7 @@ public class IncludeTag extends AttributesTagSupport {
 	private boolean _calledSetAttributes;
 	private String _page;
 	private String _portletId;
-	private boolean _strict = false;
+	private boolean _strict;
 	private TrackedServletRequest _trackedRequest;
 	private boolean _useCustomPage = true;
 
