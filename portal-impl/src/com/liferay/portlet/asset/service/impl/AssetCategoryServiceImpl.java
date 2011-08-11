@@ -62,15 +62,17 @@ public class AssetCategoryServiceImpl extends AssetCategoryServiceBaseImpl {
 		PermissionChecker permissionChecker = getPermissionChecker();
 
 		for (long categoryId : categoryIds) {
-			AssetCategory category =
-				assetCategoryLocalService.fetchCategory(categoryId);
+			AssetCategory category = assetCategoryPersistence.fetchByPrimaryKey(
+				categoryId);
 
-			if (category != null) {
-				AssetCategoryPermission.check(
-					permissionChecker, categoryId, ActionKeys.DELETE);
-
-				assetCategoryLocalService.deleteCategory(category);
+			if (category == null) {
+				continue;
 			}
+
+			AssetCategoryPermission.check(
+				permissionChecker, categoryId, ActionKeys.DELETE);
+
+			assetCategoryLocalService.deleteCategory(category);
 		}
 	}
 
