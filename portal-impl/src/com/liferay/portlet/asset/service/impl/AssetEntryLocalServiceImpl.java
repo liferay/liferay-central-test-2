@@ -786,9 +786,7 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 			String[] tagNames)
 		throws PortalException, SystemException {
 
-		boolean assetValidatorEnabled = AssetValidatorThreadLocal.isEnabled();
-
-		if (!assetValidatorEnabled) {
+		if (!AssetValidatorThreadLocal.isEnabled()) {
 			return;
 		}
 

@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2000-2011 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.util.AutoResetThreadLocal;
  * @author Michael C. Han
  */
 public class AssetValidatorThreadLocal {
+
 	public static boolean isEnabled() {
 		return _enabled.get().booleanValue();
 	}
