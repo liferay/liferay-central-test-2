@@ -702,7 +702,7 @@ public class SourceFormatter {
 			String content = _fileUtil.read(file);
 
 			if (_isGenerated(content)) {
-				return;
+				continue;
 			}
 
 			String className = file.getName();
