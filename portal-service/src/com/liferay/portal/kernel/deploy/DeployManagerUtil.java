@@ -43,8 +43,12 @@ public class DeployManagerUtil {
 		return _deployManager;
 	}
 
-	public static List<PluginPackage> getInstalledPlugins() {
-		return getDeployManager().getInstalledPlugins();
+	public static PluginPackage getInstalledPluginPackage(String context) {
+		return getDeployManager().getInstalledPluginPackage(context);
+	}
+
+	public static List<PluginPackage> getInstalledPluginPackages() {
+		return getDeployManager().getInstalledPluginPackages();
 	}
 
 	public static boolean isDeployed(String context) {

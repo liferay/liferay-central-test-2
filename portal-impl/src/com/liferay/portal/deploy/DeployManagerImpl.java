@@ -49,7 +49,11 @@ public class DeployManagerImpl implements DeployManager {
 		return DeployUtil.getAutoDeployDestDir();
 	}
 
-	public List<PluginPackage> getInstalledPlugins() {
+	public PluginPackage getInstalledPluginPackage(String context) {
+		return PluginPackageUtil.getInstalledPluginPackage(context);
+	}
+
+	public List<PluginPackage> getInstalledPluginPackages() {
 		return PluginPackageUtil.getInstalledPluginPackages();
 	}
 

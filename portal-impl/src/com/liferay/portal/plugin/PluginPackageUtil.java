@@ -111,6 +111,10 @@ public class PluginPackageUtil {
 		return _instance._getAvailableTags();
 	}
 
+	public static PluginPackage getInstalledPluginPackage(String context) {
+		return _instance._getInstalledPluginPackage(context);
+	}
+
 	public static List<PluginPackage> getInstalledPluginPackages() {
 		return _instance._getInstalledPluginPackages();
 	}
@@ -366,6 +370,10 @@ public class PluginPackageUtil {
 
 	private Collection<String> _getAvailableTags() {
 		return _availableTagsCache;
+	}
+
+	private PluginPackage _getInstalledPluginPackage(String context) {
+		return _installedPluginPackages.getPluginPackage(context);
 	}
 
 	private List<PluginPackage> _getInstalledPluginPackages() {
