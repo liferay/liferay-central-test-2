@@ -36,7 +36,6 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.kernel.workflow.WorkflowThreadLocal;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.DocumentException;
 import com.liferay.portal.kernel.xml.Element;
@@ -76,7 +75,6 @@ import com.liferay.portlet.asset.service.AssetLinkLocalServiceUtil;
 import com.liferay.portlet.asset.service.AssetVocabularyLocalServiceUtil;
 import com.liferay.portlet.asset.service.persistence.AssetCategoryUtil;
 import com.liferay.portlet.asset.service.persistence.AssetVocabularyUtil;
-import com.liferay.portlet.asset.util.AssetValidatorThreadLocal;
 import com.liferay.portlet.expando.NoSuchColumnException;
 import com.liferay.portlet.expando.NoSuchTableException;
 import com.liferay.portlet.expando.model.ExpandoColumn;
@@ -86,7 +84,6 @@ import com.liferay.portlet.expando.service.ExpandoTableLocalServiceUtil;
 import com.liferay.portlet.expando.util.ExpandoConverterUtil;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.ratings.model.RatingsEntry;
-import com.liferay.portlet.social.util.SocialActivityThreadLocal;
 
 import java.io.File;
 import java.io.Serializable;
@@ -771,10 +768,6 @@ public class PortletImporter {
 			portletDataElement.attributeValue("path"));
 
 		try {
-			AssetValidatorThreadLocal.setEnabled(false);
-			SocialActivityThreadLocal.setEnabled(false);
-			WorkflowThreadLocal.setEnabled(false);
-
 			portletPreferencesImpl =
 				(PortletPreferencesImpl)portletDataHandler.importData(
 					portletDataContext, portletId, portletPreferencesImpl,
@@ -782,11 +775,6 @@ public class PortletImporter {
 		}
 		catch (Exception e) {
 			throw e;
-		}
-		finally {
-			AssetValidatorThreadLocal.setEnabled(true);
-			SocialActivityThreadLocal.setEnabled(true);
-			WorkflowThreadLocal.setEnabled(true);
 		}
 
 		if (portletPreferencesImpl == null) {
