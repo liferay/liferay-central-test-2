@@ -76,7 +76,6 @@ public class SharedSessionServletRequest extends HttpServletRequestWrapper {
 	}
 
 	protected void checkPortalSession() {
-
 		try {
 			_portalSession.isNew();
 		}
