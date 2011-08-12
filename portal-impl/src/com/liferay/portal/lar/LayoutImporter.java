@@ -142,6 +142,57 @@ public class LayoutImporter {
 		}
 	}
 
+	protected String[] appendPortletIds(
+		String[] portletIds, String[] newPortletIds, String portletsMergeMode) {
+
+		for (String portletId : newPortletIds) {
+			if (ArrayUtil.contains(portletIds, portletId)) {
+				continue;
+			}
+
+			if (portletsMergeMode.equals(
+					PortletDataHandlerKeys.PORTLETS_MERGE_MODE_ADD_TO_BOTTOM)) {
+
+				portletIds = ArrayUtil.append(portletIds, portletId);
+			}
+			else {
+				portletIds = ArrayUtil.append(
+					new String[] {portletId}, portletIds);
+			}
+		}
+
+		return portletIds;
+	}
+
+	protected void deleteMissingLayouts(
+			long groupId, boolean privateLayout, Set<Long> newLayoutIds,
+			List<Layout> previousLayouts, ServiceContext serviceContext)
+		throws Exception {
+
+		// Layouts
+
+		if (_log.isDebugEnabled()) {
+			if (newLayoutIds.size() > 0) {
+				_log.debug("Delete missing layouts");
+			}
+		}
+
+		for (Layout layout : previousLayouts) {
+			if (!newLayoutIds.contains(layout.getLayoutId())) {
+				try {
+					LayoutLocalServiceUtil.deleteLayout(
+						layout, false, serviceContext);
+				}
+				catch (NoSuchLayoutException nsle) {
+				}
+			}
+		}
+
+		// Layout set
+
+		LayoutSetLocalServiceUtil.updatePageCount(groupId, privateLayout);
+	}
+
 	protected void doImportLayouts(
 			long userId, long groupId, boolean privateLayout,
 			Map<String, String[]> parameterMap, File file)
@@ -574,57 +625,6 @@ public class LayoutImporter {
 		}
 
 		zipReader.close();
-	}
-
-	protected String[] appendPortletIds(
-		String[] portletIds, String[] newPortletIds, String portletsMergeMode) {
-
-		for (String portletId : newPortletIds) {
-			if (ArrayUtil.contains(portletIds, portletId)) {
-				continue;
-			}
-
-			if (portletsMergeMode.equals(
-					PortletDataHandlerKeys.PORTLETS_MERGE_MODE_ADD_TO_BOTTOM)) {
-
-				portletIds = ArrayUtil.append(portletIds, portletId);
-			}
-			else {
-				portletIds = ArrayUtil.append(
-					new String[] {portletId}, portletIds);
-			}
-		}
-
-		return portletIds;
-	}
-
-	protected void deleteMissingLayouts(
-			long groupId, boolean privateLayout, Set<Long> newLayoutIds,
-			List<Layout> previousLayouts, ServiceContext serviceContext)
-		throws Exception {
-
-		// Layouts
-
-		if (_log.isDebugEnabled()) {
-			if (newLayoutIds.size() > 0) {
-				_log.debug("Delete missing layouts");
-			}
-		}
-
-		for (Layout layout : previousLayouts) {
-			if (!newLayoutIds.contains(layout.getLayoutId())) {
-				try {
-					LayoutLocalServiceUtil.deleteLayout(
-						layout, false, serviceContext);
-				}
-				catch (NoSuchLayoutException nsle) {
-				}
-			}
-		}
-
-		// Layout set
-
-		LayoutSetLocalServiceUtil.updatePageCount(groupId, privateLayout);
 	}
 
 	protected String getLayoutSetPrototype(
