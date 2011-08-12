@@ -117,7 +117,7 @@ public class GlobalStartupAction extends SimpleAction {
 		}
 
 		_hotDeployListeners = hotDeployListeners;
-		
+
 		return _hotDeployListeners;
 	}
 
