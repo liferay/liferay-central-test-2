@@ -14,7 +14,11 @@
 
 package com.liferay.portal.kernel.deploy;
 
+import com.liferay.portal.kernel.plugin.PluginPackage;
+
 import java.io.File;
+
+import java.util.List;
 
 /**
  * @author Jonathan Potter
@@ -28,6 +32,8 @@ public interface DeployManager {
 	public void deploy(File source, String context) throws Exception;
 
 	public String getDeployDir() throws Exception;
+
+	public List<PluginPackage> getInstalledPlugins();
 
 	public boolean isDeployed(String context);
 
