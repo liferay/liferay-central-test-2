@@ -235,7 +235,8 @@ public class BaseDeployer implements Deployer {
 			boolean overwrite)
 		throws Exception {
 
-		DeployUtil.copyDependencyXml(fileName, targetDir, filterMap, overwrite);
+		DeployUtil.copyDependencyXml(
+			fileName, targetDir, fileName, filterMap, overwrite);
 	}
 
 	public void copyJars(File srcFile, PluginPackage pluginPackage)
@@ -657,6 +658,10 @@ public class BaseDeployer implements Deployer {
 				deployWebXml.setLastModified(
 					System.currentTimeMillis() + (Time.SECOND * 6));
 			}
+		}
+
+		if (appServerType.equals(ServerDetector.JETTY_ID)) {
+			DeployUtil.redeployJetty(displayName);
 		}
 	}
 
