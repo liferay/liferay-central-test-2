@@ -887,7 +887,7 @@
 			</attribute>
 		</attributes>
 	</component>
-	<!--<component name="Tool">
+	<component name="Tool" parentClass="javax.servlet.jsp.tagext.TagSupport" writeJSP="false">
 		<attributes>
 			<attribute>
 				<name>handler</name>
