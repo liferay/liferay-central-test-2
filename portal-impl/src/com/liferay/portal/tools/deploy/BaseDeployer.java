@@ -121,8 +121,10 @@ public class BaseDeployer implements Deployer {
 
 		checkArguments();
 
+		String context = System.getProperty("deployer.context");
+
 		try {
-			deploy();
+			deploy(context);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -428,7 +430,7 @@ public class BaseDeployer implements Deployer {
 		copyDependencyXml("web.xml", srcFile + "/WEB-INF");
 	}
 
-	public void deploy() throws Exception {
+	public void deploy(String context) throws Exception {
 		try {
 			File baseDirFile = new File(baseDir);
 
@@ -465,7 +467,7 @@ public class BaseDeployer implements Deployer {
 				}
 
 				if (deploy) {
-					deployFile(srcFile);
+					deployFile(srcFile, context);
 				}
 			}
 		}
@@ -672,10 +674,6 @@ public class BaseDeployer implements Deployer {
 
 		deployDirectory(
 			srcFile, null, null, displayName, override, pluginPackage);
-	}
-
-	public void deployFile(File srcFile) throws Exception {
-		deployFile(srcFile, null);
 	}
 
 	public void deployFile(File srcFile, String specifiedContext)

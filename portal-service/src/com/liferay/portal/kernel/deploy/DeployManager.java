@@ -27,9 +27,9 @@ import java.util.List;
  */
 public interface DeployManager {
 
-	public void deploy(File source) throws Exception;
+	public void deploy(File file) throws Exception;
 
-	public void deploy(File source, String context) throws Exception;
+	public void deploy(File file, String context) throws Exception;
 
 	public String getDeployDir() throws Exception;
 
