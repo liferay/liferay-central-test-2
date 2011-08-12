@@ -134,13 +134,12 @@ public class UserServiceSoap {
 		java.lang.String lastName, int prefixId, int suffixId, boolean male,
 		int birthdayMonth, int birthdayDay, int birthdayYear,
 		java.lang.String jobTitle, long[] groupIds, long[] organizationIds,
-		long[] roleIds, long[] userGroupIds,
+		long[] roleIds, long[] userGroupIds, boolean sendEmail,
 		com.liferay.portal.model.AddressSoap[] addresses,
 		com.liferay.portal.model.EmailAddressSoap[] emailAddresses,
 		com.liferay.portal.model.PhoneSoap[] phones,
 		com.liferay.portal.model.WebsiteSoap[] websites,
 		com.liferay.portlet.announcements.model.AnnouncementsDeliverySoap[] announcementsDelivers,
-		boolean sendEmail,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
@@ -150,7 +149,7 @@ public class UserServiceSoap {
 					LocaleUtil.fromLanguageId(locale), firstName, middleName,
 					lastName, prefixId, suffixId, male, birthdayMonth,
 					birthdayDay, birthdayYear, jobTitle, groupIds,
-					organizationIds, roleIds, userGroupIds,
+					organizationIds, roleIds, userGroupIds, sendEmail,
 					com.liferay.portal.model.impl.AddressModelImpl.toModels(
 						addresses),
 					com.liferay.portal.model.impl.EmailAddressModelImpl.toModels(
@@ -160,7 +159,7 @@ public class UserServiceSoap {
 					com.liferay.portal.model.impl.WebsiteModelImpl.toModels(
 						websites),
 					com.liferay.portlet.announcements.model.impl.AnnouncementsDeliveryModelImpl.toModels(
-						announcementsDelivers), sendEmail, serviceContext);
+						announcementsDelivers), serviceContext);
 
 			return com.liferay.portal.model.UserSoap.toSoapModel(returnValue);
 		}
@@ -211,13 +210,12 @@ public class UserServiceSoap {
 		java.lang.String lastName, int prefixId, int suffixId, boolean male,
 		int birthdayMonth, int birthdayDay, int birthdayYear,
 		java.lang.String jobTitle, long[] groupIds, long[] organizationIds,
-		long[] roleIds, long[] userGroupIds,
+		long[] roleIds, long[] userGroupIds, boolean sendEmail,
 		com.liferay.portal.model.AddressSoap[] addresses,
 		com.liferay.portal.model.EmailAddressSoap[] emailAddresses,
 		com.liferay.portal.model.PhoneSoap[] phones,
 		com.liferay.portal.model.WebsiteSoap[] websites,
 		com.liferay.portlet.announcements.model.AnnouncementsDeliverySoap[] announcementsDelivers,
-		boolean sendEmail,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
@@ -227,7 +225,7 @@ public class UserServiceSoap {
 					LocaleUtil.fromLanguageId(locale), firstName, middleName,
 					lastName, prefixId, suffixId, male, birthdayMonth,
 					birthdayDay, birthdayYear, jobTitle, groupIds,
-					organizationIds, roleIds, userGroupIds,
+					organizationIds, roleIds, userGroupIds, sendEmail,
 					com.liferay.portal.model.impl.AddressModelImpl.toModels(
 						addresses),
 					com.liferay.portal.model.impl.EmailAddressModelImpl.toModels(
@@ -237,7 +235,7 @@ public class UserServiceSoap {
 					com.liferay.portal.model.impl.WebsiteModelImpl.toModels(
 						websites),
 					com.liferay.portlet.announcements.model.impl.AnnouncementsDeliveryModelImpl.toModels(
-						announcementsDelivers), sendEmail, serviceContext);
+						announcementsDelivers), serviceContext);
 
 			return com.liferay.portal.model.UserSoap.toSoapModel(returnValue);
 		}
@@ -257,8 +255,7 @@ public class UserServiceSoap {
 		java.lang.String lastName, int prefixId, int suffixId, boolean male,
 		int birthdayMonth, int birthdayDay, int birthdayYear,
 		java.lang.String jobTitle, long[] groupIds, long[] organizationIds,
-		long[] roleIds, long[] userGroupIds,
-		com.liferay.portal.model.AddressSoap[] addresses, boolean sendEmail,
+		long[] roleIds, long[] userGroupIds, boolean sendEmail,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
@@ -268,9 +265,8 @@ public class UserServiceSoap {
 					LocaleUtil.fromLanguageId(locale), firstName, middleName,
 					lastName, prefixId, suffixId, male, birthdayMonth,
 					birthdayDay, birthdayYear, jobTitle, groupIds,
-					organizationIds, roleIds, userGroupIds,
-					com.liferay.portal.model.impl.AddressModelImpl.toModels(
-						addresses), sendEmail, serviceContext);
+					organizationIds, roleIds, userGroupIds, sendEmail,
+					serviceContext);
 
 			return com.liferay.portal.model.UserSoap.toSoapModel(returnValue);
 		}

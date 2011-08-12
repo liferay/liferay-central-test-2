@@ -115,7 +115,11 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 
 		Organization organization = addOrganization(
 			parentOrganizationId, name, type, recursable, regionId, countryId,
-			statusId, comments, site, addresses, serviceContext);
+			statusId, comments, site, serviceContext);
+
+		UsersAdminUtil.updateAddresses(
+			Organization.class.getName(), organization.getOrganizationId(),
+			addresses);
 
 		UsersAdminUtil.updateEmailAddresses(
 			Organization.class.getName(), organization.getOrganizationId(),
@@ -155,7 +159,6 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 	 * @param  comments the comments about the organization
 	 * @param  site whether the organization is to be associated with a main
 	 *         site
-	 * @param  addresses the organization's addresses
 	 * @param  serviceContext the organization's service context (optionally
 	 *         <code>null</code>). Can specify the organization's asset category
 	 *         IDs, asset tag names, and expando bridge attributes.
@@ -168,8 +171,7 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 	public Organization addOrganization(
 			long parentOrganizationId, String name, String type,
 			boolean recursable, long regionId, long countryId, int statusId,
-			String comments, boolean site, List<Address> addresses,
-			ServiceContext serviceContext)
+			String comments, boolean site, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		if (!OrganizationPermissionUtil.contains(
@@ -185,7 +187,7 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 
 		return organizationLocalService.addOrganization(
 			getUserId(), parentOrganizationId, name, type, recursable, regionId,
-			countryId, statusId, comments, site, addresses, serviceContext);
+			countryId, statusId, comments, site, serviceContext);
 	}
 
 	/**
