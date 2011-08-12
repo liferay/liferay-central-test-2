@@ -21,6 +21,7 @@ import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.PortletIdException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.lar.ImportExportThreadLocal;
 import com.liferay.portal.kernel.lar.PortletDataContext;
 import com.liferay.portal.kernel.lar.PortletDataHandler;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
@@ -111,6 +112,22 @@ import org.apache.commons.lang.time.StopWatch;
 public class PortletImporter {
 
 	public void importPortletInfo(
+			long userId, long plid, long groupId, String portletId,
+			Map<String, String[]> parameterMap, File file)
+		throws Exception {
+
+		try {
+			ImportExportThreadLocal.setPortletImportInProcess(true);
+
+			doImportPortletInfo(
+				userId, plid, groupId, portletId, parameterMap, file);
+		}
+		finally {
+			ImportExportThreadLocal.setPortletImportInProcess(false);
+		}
+	}
+
+	protected void doImportPortletInfo(
 			long userId, long plid, long groupId, String portletId,
 			Map<String, String[]> parameterMap, File file)
 		throws Exception {
