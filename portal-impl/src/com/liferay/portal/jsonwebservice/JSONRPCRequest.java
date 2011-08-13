@@ -16,6 +16,8 @@ package com.liferay.portal.jsonwebservice;
 
 import com.liferay.portal.kernel.json.JSONDeserializer;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -23,30 +25,23 @@ import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.Validator;
 import jodd.servlet.ServletUtil;
 
 /**
  * @author Igor Spasic
  */
 public class JSONRPCRequest {
-	
+
 	public static JSONRPCRequest detectJSONRPCRequest(
 		HttpServletRequest request) {
 
 		try {
 			String requestBody = ServletUtil.readRequestBody(request);
 
-			if (Validator.isNull(requestBody)) {
-				return null;
-			}
+			if (Validator.isNull(requestBody) ||
+				!requestBody.startsWith(StringPool.OPEN_CURLY_BRACE) ||
+				!requestBody.endsWith(StringPool.CLOSE_CURLY_BRACE)) {
 
-			if (!requestBody.startsWith(StringPool.OPEN_CURLY_BRACE)) {
-				return null;
-			}
-
-			if (!requestBody.endsWith(StringPool.CLOSE_CURLY_BRACE)) {
 				return null;
 			}
 
@@ -60,12 +55,12 @@ public class JSONRPCRequest {
 				jsonDeserializer.deserialize(requestBody);
 
 			JSONRPCRequest jsonrpcRequest = new JSONRPCRequest();
-			
+
 			jsonrpcRequest._id = (Integer)requestBodyMap.get("id");
 			jsonrpcRequest._jsonrpc = (String)requestBodyMap.get("jsonrpc");
 			jsonrpcRequest._method = (String)requestBodyMap.get("method");
-			jsonrpcRequest._parameters =
-				(Map<String, ?>)requestBodyMap.get("params");
+			jsonrpcRequest._parameters = (Map<String, ?>)requestBodyMap.get(
+				"params");
 
 			if (Validator.isNull(jsonrpcRequest._method)) {
 				return null;
