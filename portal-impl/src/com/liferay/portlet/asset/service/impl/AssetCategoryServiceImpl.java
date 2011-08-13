@@ -122,7 +122,7 @@ public class AssetCategoryServiceImpl extends AssetCategoryServiceBaseImpl {
 	}
 
 	public JSONObject getJSONVocabularyCategories(
-			long groupId, long vocabularyId, String name, int start, int end,
+			long groupId, String name, long vocabularyId, int start, int end,
 			OrderByComparator obc)
 		throws PortalException, SystemException {
 
@@ -139,8 +139,8 @@ public class AssetCategoryServiceImpl extends AssetCategoryServiceBaseImpl {
 			name = (CustomSQLUtil.keywords(name))[0];
 
 			categories = getVocabularyCategories(
-				groupId, vocabularyId, name, start, end, obc);
-			total = getVocabularyCategoriesCount(groupId, vocabularyId, name);
+				groupId, name, vocabularyId, start, end, obc);
+			total = getVocabularyCategoriesCount(groupId, name, vocabularyId);
 		}
 		else {
 			categories = getVocabularyCategories(vocabularyId, start, end, obc);
@@ -169,15 +169,6 @@ public class AssetCategoryServiceImpl extends AssetCategoryServiceBaseImpl {
 	}
 
 	public List<AssetCategory> getVocabularyCategories(
-			long groupId, long vocabularyId, String name, int start, int end,
-			OrderByComparator obc)
-		throws PortalException, SystemException {
-
-		return assetCategoryFinder.filterFindByG_V_N(
-			groupId, vocabularyId, name, start, end, obc);
-	}
-
-	public List<AssetCategory> getVocabularyCategories(
 			long parentCategoryId, long vocabularyId, int start, int end,
 			OrderByComparator obc)
 		throws PortalException, SystemException {
@@ -187,18 +178,27 @@ public class AssetCategoryServiceImpl extends AssetCategoryServiceBaseImpl {
 				parentCategoryId, vocabularyId, start, end, obc));
 	}
 
-	public int getVocabularyCategoriesCount(long groupId,long vocabularyId)
+	public List<AssetCategory> getVocabularyCategories(
+			long groupId, String name, long vocabularyId, int start, int end,
+			OrderByComparator obc)
+		throws SystemException {
+
+		return assetCategoryFinder.filterFindByG_N_V(
+			groupId, name, vocabularyId, start, end, obc);
+	}
+
+	public int getVocabularyCategoriesCount(long groupId, long vocabularyId)
 		throws SystemException {
 
 		return assetCategoryPersistence.filterCountByG_V(groupId, vocabularyId);
 	}
 
 	public int getVocabularyCategoriesCount(
-			long groupId, long vocabularyId, String name)
+			long groupId, String name, long vocabularyId)
 		throws SystemException {
 
-		return assetCategoryFinder.filterCountByG_V_N(
-			groupId, vocabularyId, name);
+		return assetCategoryFinder.filterCountByG_N_V(
+			groupId, name, vocabularyId);
 	}
 
 	public List<AssetCategory> getVocabularyRootCategories(
