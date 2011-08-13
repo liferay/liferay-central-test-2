@@ -1461,16 +1461,6 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		return false;
 	}
 
-	protected void setRolePermissions(Group group, Role role, String name)
-		throws PortalException, SystemException {
-
-		List<String> actions = ResourceActionsUtil.getModelResourceActions(
-			name);
-
-		setRolePermissions(
-			group, role, name, actions.toArray(new String[actions.size()]));
-	}
-
 	protected void setCompanyPermissions(
 			Role role, String name, String[] actionIds)
 		throws PortalException, SystemException {
@@ -1494,6 +1484,16 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 				ResourceConstants.SCOPE_COMPANY,
 				String.valueOf(role.getCompanyId()), actionIds);
 		}
+	}
+
+	protected void setRolePermissions(Group group, Role role, String name)
+		throws PortalException, SystemException {
+
+		List<String> actions = ResourceActionsUtil.getModelResourceActions(
+			name);
+
+		setRolePermissions(
+			group, role, name, actions.toArray(new String[actions.size()]));
 	}
 
 	protected void setRolePermissions(
