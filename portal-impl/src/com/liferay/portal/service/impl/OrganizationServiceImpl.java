@@ -16,6 +16,8 @@ package com.liferay.portal.service.impl;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.model.Address;
 import com.liferay.portal.model.EmailAddress;
@@ -113,30 +115,49 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		Organization organization = addOrganization(
-			parentOrganizationId, name, type, recursable, regionId, countryId,
-			statusId, comments, site, serviceContext);
+		boolean indexingEnabled = serviceContext.isIndexingEnabled();
 
-		UsersAdminUtil.updateAddresses(
-			Organization.class.getName(), organization.getOrganizationId(),
-			addresses);
+		serviceContext.setIndexingEnabled(false);
 
-		UsersAdminUtil.updateEmailAddresses(
-			Organization.class.getName(), organization.getOrganizationId(),
-			emailAddresses);
+		try {
+			Organization organization = addOrganization(
+				parentOrganizationId, name, type, recursable, regionId,
+				countryId, statusId, comments, site, serviceContext);
 
-		UsersAdminUtil.updateOrgLabors(organization.getOrganizationId(),
-			orgLabors);
+			UsersAdminUtil.updateAddresses(
+				Organization.class.getName(), organization.getOrganizationId(),
+				addresses);
 
-		UsersAdminUtil.updatePhones(
-			Organization.class.getName(), organization.getOrganizationId(),
-			phones);
+			UsersAdminUtil.updateEmailAddresses(
+				Organization.class.getName(), organization.getOrganizationId(),
+				emailAddresses);
 
-		UsersAdminUtil.updateWebsites(
-			Organization.class.getName(), organization.getOrganizationId(),
-			websites);
+			UsersAdminUtil.updateOrgLabors(organization.getOrganizationId(),
+				orgLabors);
 
-		return organization;
+			UsersAdminUtil.updatePhones(
+				Organization.class.getName(), organization.getOrganizationId(),
+				phones);
+
+			UsersAdminUtil.updateWebsites(
+				Organization.class.getName(), organization.getOrganizationId(),
+				websites);
+
+			if (indexingEnabled) {
+				Indexer indexer = IndexerRegistryUtil.getIndexer(
+					Organization.class);
+
+				indexer.reindex(
+					new String[] {
+						String.valueOf(organization.getOrganizationId())
+					});
+			}
+
+			return organization;
+		}
+		finally {
+			serviceContext.setIndexingEnabled(indexingEnabled);
+		}
 	}
 
 	/**

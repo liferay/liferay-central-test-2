@@ -771,9 +771,11 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		// Indexer
 
-		Indexer indexer = IndexerRegistryUtil.getIndexer(User.class);
+		if (serviceContext.isIndexingEnabled()) {
+			Indexer indexer = IndexerRegistryUtil.getIndexer(User.class);
 
-		indexer.reindex(user);
+			indexer.reindex(user);
+		}
 
 		// Workflow
 
@@ -4609,9 +4611,11 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		// Indexer
 
-		Indexer indexer = IndexerRegistryUtil.getIndexer(User.class);
+		if (serviceContext.isIndexingEnabled()) {
+			Indexer indexer = IndexerRegistryUtil.getIndexer(User.class);
 
-		indexer.reindex(user);
+			indexer.reindex(user);
+		}
 
 		// Email address verification
 

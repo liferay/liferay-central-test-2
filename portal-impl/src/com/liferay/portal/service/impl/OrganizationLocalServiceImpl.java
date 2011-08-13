@@ -207,10 +207,13 @@ public class OrganizationLocalServiceImpl
 
 		// Indexer
 
-		Indexer indexer = IndexerRegistryUtil.getIndexer(Organization.class);
+		if (serviceContext.isIndexingEnabled()) {
+			Indexer indexer = IndexerRegistryUtil.getIndexer(
+				Organization.class);
 
-		indexer.reindex(
-			new String[] {String.valueOf(organization.getCompanyId())});
+			indexer.reindex(
+				new String[] {String.valueOf(organization.getCompanyId())});
+		}
 
 		return organization;
 	}

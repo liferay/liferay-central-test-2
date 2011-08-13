@@ -269,6 +269,10 @@ public class ServiceContext implements Cloneable, Serializable {
 		}
 	}
 
+	public boolean isIndexingEnabled() {
+		return _indexingEnabled;
+	}
+
 	public boolean isSignedIn() {
 		return _signedIn;
 	}
@@ -340,6 +344,10 @@ public class ServiceContext implements Cloneable, Serializable {
 		Map<String, Serializable> expandoBridgeAttributes) {
 
 		_expandoBridgeAttributes = expandoBridgeAttributes;
+	}
+
+	public void setIndexingEnabled(boolean indexingEnabled) {
+		_indexingEnabled = indexingEnabled;
 	}
 
 	public void setGroupPermissions(String[] groupPermissions) {
@@ -434,6 +442,7 @@ public class ServiceContext implements Cloneable, Serializable {
 	private String[] _groupPermissions;
 	private String[] _guestPermissions;
 	private Map<String, String> _headers;
+	private boolean _indexingEnabled = true;
 	private String _languageId;
 	private String _layoutFullURL;
 	private String _layoutURL;

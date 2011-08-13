@@ -20,6 +20,8 @@ import com.liferay.portal.UserEmailAddressException;
 import com.liferay.portal.UserScreenNameException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.kernel.workflow.WorkflowThreadLocal;
@@ -220,28 +222,45 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		User user = addUserWithWorkflow(
-			companyId, autoPassword, password1, password2, autoScreenName,
-			screenName, emailAddress, facebookId, openId, locale, firstName,
-			middleName, lastName, prefixId, suffixId, male, birthdayMonth,
-			birthdayDay, birthdayYear, jobTitle, groupIds, organizationIds,
-			roleIds, userGroupIds, sendEmail, serviceContext);
+		boolean indexingEnabled = serviceContext.isIndexingEnabled();
 
-		UsersAdminUtil.updateAddresses(
-			Contact.class.getName(), user.getContactId(), addresses);
+		serviceContext.setIndexingEnabled(false);
 
-		UsersAdminUtil.updateEmailAddresses(
-			Contact.class.getName(), user.getContactId(), emailAddresses);
+		try {
+			User user = addUserWithWorkflow(
+				companyId, autoPassword, password1, password2, autoScreenName,
+				screenName, emailAddress, facebookId, openId, locale, firstName,
+				middleName, lastName, prefixId, suffixId, male, birthdayMonth,
+				birthdayDay, birthdayYear, jobTitle, groupIds, organizationIds,
+				roleIds, userGroupIds, sendEmail, serviceContext);
 
-		UsersAdminUtil.updatePhones(
-			Contact.class.getName(), user.getContactId(), phones);
+			UsersAdminUtil.updateAddresses(
+				Contact.class.getName(), user.getContactId(), addresses);
 
-		UsersAdminUtil.updateWebsites(
-			Contact.class.getName(), user.getContactId(), websites);
+			UsersAdminUtil.updateEmailAddresses(
+				Contact.class.getName(), user.getContactId(), emailAddresses);
 
-		updateAnnouncementsDeliveries(user.getUserId(), announcementsDelivers);
+			UsersAdminUtil.updatePhones(
+				Contact.class.getName(), user.getContactId(), phones);
 
-		return user;
+			UsersAdminUtil.updateWebsites(
+				Contact.class.getName(), user.getContactId(), websites);
+
+			updateAnnouncementsDeliveries(
+				user.getUserId(), announcementsDelivers);
+
+			if (indexingEnabled) {
+				Indexer indexer = IndexerRegistryUtil.getIndexer(
+					User.class);
+
+				indexer.reindex(user);
+			}
+
+			return user;
+		}
+		finally {
+			serviceContext.setIndexingEnabled(indexingEnabled);
+		}
 	}
 
 	public User addUserWithWorkflow(
@@ -690,15 +709,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		User user = updateUser(
-			userId, oldPassword, newPassword1, newPassword2, passwordReset,
-			reminderQueryQuestion, reminderQueryAnswer, screenName,
-			emailAddress, facebookId, openId, languageId, timeZoneId, greeting,
-			comments, firstName, middleName, lastName, prefixId, suffixId, male,
-			birthdayMonth, birthdayDay, birthdayYear, smsSn, aimSn, facebookSn,
-			icqSn, jabberSn, msnSn, mySpaceSn, skypeSn, twitterSn, ymSn,
-			jobTitle, groupIds, organizationIds, roleIds,
-			userGroupRoles, userGroupIds, serviceContext);
+		User user = userPersistence.findByPrimaryKey(userId);
 
 		UsersAdminUtil.updateAddresses(
 			Contact.class.getName(), user.getContactId(), addresses);
@@ -713,6 +724,16 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			Contact.class.getName(), user.getContactId(), websites);
 
 		updateAnnouncementsDeliveries(user.getUserId(), announcementsDelivers);
+
+		user = updateUser(
+			userId, oldPassword, newPassword1, newPassword2, passwordReset,
+			reminderQueryQuestion, reminderQueryAnswer, screenName,
+			emailAddress, facebookId, openId, languageId, timeZoneId, greeting,
+			comments, firstName, middleName, lastName, prefixId, suffixId, male,
+			birthdayMonth, birthdayDay, birthdayYear, smsSn, aimSn, facebookSn,
+			icqSn, jabberSn, msnSn, mySpaceSn, skypeSn, twitterSn, ymSn,
+			jobTitle, groupIds, organizationIds, roleIds,
+			userGroupRoles, userGroupIds, serviceContext);
 
 		return user;
 	}
