@@ -50,11 +50,11 @@ public class AssetCategoryFinderImpl
 	public static String COUNT_BY_G_C_N =
 		AssetCategoryFinder.class.getName() + ".countByG_C_N";
 
+	public static String COUNT_BY_G_N_V =
+		AssetCategoryFinder.class.getName() + ".countByG_N_V";
+
 	public static String COUNT_BY_G_N_P =
 		AssetCategoryFinder.class.getName() + ".countByG_N_P";
-
-	public static String COUNT_BY_G_V_N =
-		AssetCategoryFinder.class.getName() + ".countByG_V_N";
 
 	public static String FIND_BY_ENTRY_ID =
 		AssetCategoryFinder.class.getName() + ".findByEntryId";
@@ -65,11 +65,11 @@ public class AssetCategoryFinderImpl
 	public static String FIND_BY_C_C =
 		AssetCategoryFinder.class.getName() + ".findByC_C";
 
+	public static String FIND_BY_G_N_V =
+		AssetCategoryFinder.class.getName() + ".findByG_N_V";
+
 	public static String FIND_BY_G_N_P =
 		AssetCategoryFinder.class.getName() + ".findByG_N_P";
-
-	public static String FIND_BY_G_V_N =
-		AssetCategoryFinder.class.getName() + ".findByG_V_N";
 
 	public int countByG_C_N(long groupId, long classNameId, String name)
 		throws SystemException {
@@ -110,6 +110,12 @@ public class AssetCategoryFinderImpl
 		finally {
 			closeSession(session);
 		}
+	}
+
+	public int countByG_N_V(long groupId, String name, long vocabularyId)
+		throws SystemException {
+
+		return doCountByG_N_V(groupId, name, vocabularyId, false);
 	}
 
 	public int countByG_N_P(
@@ -154,19 +160,19 @@ public class AssetCategoryFinderImpl
 		}
 	}
 
-	public int filterCountByG_V_N(long groupId, long vocabularyId, String name)
+	public int filterCountByG_N_V(long groupId, String name, long vocabularyId)
 		throws SystemException {
 
-		return doCountByG_V_N(groupId, vocabularyId, name, true);
+		return doCountByG_N_V(groupId, name, vocabularyId, true);
 	}
 
-	public List<AssetCategory> filterFindByG_V_N(
-			long groupId, long vocabularyId, String name, int start, int end,
+	public List<AssetCategory> filterFindByG_N_V(
+			long groupId, String name, long vocabularyId, int start, int end,
 			OrderByComparator obc)
 		throws SystemException {
 
-		return doFindByG_V_N(
-			groupId, vocabularyId, name, start, end, obc, true);
+		return doFindByG_N_V(
+			groupId, name, vocabularyId, start, end, obc, true);
 	}
 
 	public List<AssetCategory> findByEntryId(long entryId)
@@ -284,6 +290,15 @@ public class AssetCategoryFinderImpl
 		}
 	}
 
+	public List<AssetCategory> findByG_N_V(
+			long groupId, String name, long vocabularyId, int start, int end,
+			OrderByComparator obc)
+		throws SystemException {
+
+		return doFindByG_N_V(
+			groupId, name, vocabularyId, start, end, obc, false);
+	}
+
 	public List<AssetCategory> findByG_N_P(
 			long groupId, String name, String[] categoryProperties)
 		throws SystemException {
@@ -330,8 +345,8 @@ public class AssetCategoryFinderImpl
 		}
 	}
 
-	protected int doCountByG_V_N(
-			long groupId, long vocabularyId, String name,
+	protected int doCountByG_N_V(
+			long groupId, String name, long vocabularyId,
 			boolean inlineSQLHelper)
 		throws SystemException {
 
@@ -340,7 +355,7 @@ public class AssetCategoryFinderImpl
 		try {
 			session = openSession();
 
-			String sql = CustomSQLUtil.get(COUNT_BY_G_V_N);
+			String sql = CustomSQLUtil.get(COUNT_BY_G_N_V);
 
 			if (inlineSQLHelper) {
 				sql = InlineSQLHelperUtil.replacePermissionCheck(
@@ -355,9 +370,9 @@ public class AssetCategoryFinderImpl
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			qPos.add(groupId);
+			qPos.add(name);
+			qPos.add(name);
 			qPos.add(vocabularyId);
-			qPos.add(name);
-			qPos.add(name);
 
 			Iterator<Long> itr = q.list().iterator();
 
@@ -379,9 +394,9 @@ public class AssetCategoryFinderImpl
 		}
 	}
 
-	protected List<AssetCategory> doFindByG_V_N(
-		long groupId, long vocabularyId, String name, int start, int end,
-		OrderByComparator obc, boolean inlineSQLHelper)
+	protected List<AssetCategory> doFindByG_N_V(
+			long groupId, String name, long vocabularyId, int start, int end,
+			OrderByComparator obc, boolean inlineSQLHelper)
 		throws SystemException {
 
 		name = name.trim().toLowerCase();
@@ -391,7 +406,7 @@ public class AssetCategoryFinderImpl
 		try {
 			session = openSession();
 
-			String sql = CustomSQLUtil.get(FIND_BY_G_V_N);
+			String sql = CustomSQLUtil.get(FIND_BY_G_N_V);
 
 			sql = CustomSQLUtil.replaceOrderBy(sql, obc);
 
@@ -408,9 +423,9 @@ public class AssetCategoryFinderImpl
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			qPos.add(groupId);
+			qPos.add(name);
+			qPos.add(name);
 			qPos.add(vocabularyId);
-			qPos.add(name);
-			qPos.add(name);
 
 			return (List<AssetCategory>)QueryUtil.list(
 				q, getDialect(), start, end);
