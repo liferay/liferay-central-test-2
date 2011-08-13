@@ -911,7 +911,7 @@
 				<description></description>
 			</attribute>
 		</attributes>
-	</component>-->
+	</component>
 	<component name="Validator" className="ValidatorTagImpl" parentClass="com.liferay.portal.kernel.servlet.taglib.BaseBodyTagSupport" writeJSP="false">
 		<attributes>
 			<attribute>
