@@ -23,7 +23,6 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.security.permission.InlineSQLHelperUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
-import com.liferay.portlet.asset.NoSuchVocabularyException;
 import com.liferay.portlet.asset.model.AssetVocabulary;
 import com.liferay.portlet.asset.model.impl.AssetVocabularyImpl;
 import com.liferay.util.dao.orm.CustomSQLUtil;
@@ -57,14 +56,14 @@ public class AssetVocabularyFinderImpl
 
 	public List<AssetVocabulary> filterFindByG_N(long groupId, String name,
 			int start, int end, OrderByComparator obc)
-		throws NoSuchVocabularyException, SystemException {
+		throws SystemException {
 
 		return doFindByG_N(groupId, name, start, end, obc, true);
 	}
 
 	public List<AssetVocabulary> findByG_N(long groupId, String name, int start,
  			int end, OrderByComparator obc)
-		throws NoSuchVocabularyException, SystemException {
+		throws SystemException {
 
 		return doFindByG_N(groupId, name, start, end, obc, false);
 	}
