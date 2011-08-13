@@ -107,12 +107,13 @@ public class ValidatorTagImpl
 		if (name.equals("custom")) {
 			_custom = true;
 
-			setName(name.concat(StringPool.UNDERLINE).concat(
-				PwdGenerator.getPassword(PwdGenerator.KEY3, 4)));
+			setName(
+				name.concat(StringPool.UNDERLINE).concat(
+					PwdGenerator.getPassword(PwdGenerator.KEY3, 4)));
 		}
 	}
 
 	private String _body;
-	private boolean _custom = false;
+	private boolean _custom;
 
 }
