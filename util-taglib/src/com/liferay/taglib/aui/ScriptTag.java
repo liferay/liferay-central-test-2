@@ -98,6 +98,7 @@ public class ScriptTag extends BaseScriptTag {
 
 		try {
 			StringBundler bodyContentSB = getBodyContentAsStringBundler();
+
 			String use = getUse();
 
 			if (positionInline) {
