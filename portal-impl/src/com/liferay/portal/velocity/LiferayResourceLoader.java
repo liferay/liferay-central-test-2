@@ -32,18 +32,23 @@ import org.apache.velocity.runtime.resource.loader.ResourceLoader;
  */
 public class LiferayResourceLoader extends ResourceLoader {
 
-	public static void setListeners(String[] listeners) {
-		_listeners = new VelocityResourceListener[listeners.length];
+	public static void setVelocityResourceListeners(
+		String[] velocityResourceListeners) {
 
-		for (int i = 0; i < listeners.length; i++) {
+		_velocityResourceListeners = new VelocityResourceListener[
+			velocityResourceListeners.length];
+
+		for (int i = 0; i < velocityResourceListeners.length; i++) {
 			try {
-				_listeners[i] = (VelocityResourceListener)Class.forName(
-					listeners[i]).newInstance();
-			}
-			catch (Exception ex) {
-				_log.error(ex);
+				Class<?> clazz = Class.forName(velocityResourceListeners[i]);
 
-				_listeners[i] = null;
+				_velocityResourceListeners[i] = (VelocityResourceListener)
+					clazz.newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+
+				_velocityResourceListeners[i] = null;
 			}
 		}
 	}
@@ -123,19 +128,24 @@ public class LiferayResourceLoader extends ResourceLoader {
 
 		InputStream is = null;
 
-		for (int i = 0; (is == null) && (i < _listeners.length); i++) {
-			if (_listeners[i] != null) {
-				is = _listeners[i].getResourceStream(source);
+		for (int i = 0; (is == null) && (i < _velocityResourceListeners.length);
+				i++) {
+
+			VelocityResourceListener velocityResourceListener =
+				_velocityResourceListeners[i];
+
+			if (velocityResourceListener != null) {
+				is = velocityResourceListener.getResourceStream(source);
 			}
 		}
 
 		return is;
 	}
 
+	private static VelocityResourceListener[] _velocityResourceListeners =
+		new VelocityResourceListener[0];
+
 	private static Log _log = LogFactoryUtil.getLog(
 		LiferayResourceLoader.class);
-
-	private static VelocityResourceListener[] _listeners =
-		new VelocityResourceListener[0];
 
 }
