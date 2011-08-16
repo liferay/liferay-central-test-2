@@ -49,6 +49,7 @@ public class DeleteThreadAction extends PortletAction {
 		catch (Exception e) {
 			if (e instanceof LockedThreadException ||
 				e instanceof PrincipalException) {
+
 				SessionErrors.add(actionRequest, e.getClass().getName());
 
 				setForward(actionRequest, "portlet.message_boards.error");
