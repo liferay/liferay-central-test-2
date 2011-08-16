@@ -294,7 +294,7 @@ public interface Http {
 
 			if (_body != null) {
 				throw new IllegalArgumentException (
-					"Part file cannot be added because a body has already " +
+					"File part cannot be added because a body has already " +
 						"been set");
 			}
 
