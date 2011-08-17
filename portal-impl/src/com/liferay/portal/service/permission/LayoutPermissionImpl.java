@@ -91,9 +91,9 @@ public class LayoutPermissionImpl implements LayoutPermission {
 			User user = UserLocalServiceUtil.getUserById(
 				permissionChecker.getUserId());
 
-			return isViewableGroup(user, layout.getGroupId(),
-				layout.isPrivateLayout(), layout.getLayoutId(),
-				controlPanelCategory, permissionChecker);
+			return isViewableGroup(
+				user, layout.getGroupId(), layout.isPrivateLayout(),
+				layout.getLayoutId(), controlPanelCategory, permissionChecker);
 		}
 
 		if ((layout.isPrivateLayout() &&
@@ -169,6 +169,16 @@ public class LayoutPermissionImpl implements LayoutPermission {
 
 	public boolean contains(
 			PermissionChecker permissionChecker, long groupId,
+			boolean privateLayout, long layoutId, String actionId)
+		throws PortalException, SystemException {
+
+		return contains(
+			permissionChecker, groupId, privateLayout, layoutId, null,
+			actionId);
+	}
+
+	public boolean contains(
+			PermissionChecker permissionChecker, long groupId,
 			boolean privateLayout, long layoutId, String controlPanelCategory,
 			String actionId)
 		throws PortalException, SystemException {
@@ -201,16 +211,6 @@ public class LayoutPermissionImpl implements LayoutPermission {
 			return contains(
 				permissionChecker, layout, controlPanelCategory, actionId);
 		}
-	}
-
-	public boolean contains(
-			PermissionChecker permissionChecker, long groupId,
-			boolean privateLayout, long layoutId, String actionId)
-		throws PortalException, SystemException {
-
-		return contains(
-			permissionChecker, groupId, privateLayout, layoutId, null,
-			actionId);
 	}
 
 	public boolean contains(

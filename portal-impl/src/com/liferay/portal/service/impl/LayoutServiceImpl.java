@@ -196,6 +196,8 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 			return LayoutConstants.DEFAULT_PLID;
 		}
 
+		PermissionChecker permissionChecker = getPermissionChecker();
+
 		String scopeGroupLayoutUuid = null;
 
 		Group scopeGroup = groupLocalService.getGroup(scopeGroupId);
@@ -216,7 +218,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 
 		for (Layout layout : layouts) {
 			if (!LayoutPermissionUtil.contains(
-					getPermissionChecker(), layout, ActionKeys.VIEW)) {
+					permissionChecker, layout, ActionKeys.VIEW)) {
 
 				continue;
 			}
