@@ -42,30 +42,30 @@ public class QueryTermExtractor {
 
 		Set<Term> terms = new HashSet<Term>();
 
-		LinkedList<Query> queryStack = new LinkedList<Query>();
+		LinkedList<Query> queries = new LinkedList<Query>();
 
 		Query lastQuery = query;
 
 		while (lastQuery != null) {
-
 			if (lastQuery instanceof BooleanQuery) {
 				BooleanQuery booleanQuery = (BooleanQuery)lastQuery;
 
-				BooleanClause[] booleanQueryClauses = booleanQuery.getClauses();
-				for (BooleanClause booleanClause : booleanQueryClauses) {
+				BooleanClause[] booleanClauses = booleanQuery.getClauses();
+
+				for (BooleanClause booleanClause : booleanClauses) {
 					if (prohibited ||
 						(booleanClause.getOccur() !=
 							BooleanClause.Occur.MUST_NOT)) {
 
-						Query clauseQuery = booleanClause.getQuery();
+						Query booleanClauseQuery = booleanClause.getQuery();
 
-						if (clauseQuery != null) {
-							queryStack.addFirst(clauseQuery);
+						if (booleanClauseQuery != null) {
+							queries.addFirst(booleanClauseQuery);
 						}
 					}
 				}
 
-				lastQuery = queryStack.poll();
+				lastQuery = queries.poll();
 			}
 			else if (lastQuery instanceof FilteredQuery) {
 				FilteredQuery filteredQuery = (FilteredQuery)lastQuery;
@@ -73,23 +73,22 @@ public class QueryTermExtractor {
 				lastQuery = filteredQuery.getQuery();
 
 				if (lastQuery == null) {
-					lastQuery = queryStack.poll();
+					lastQuery = queries.poll();
 				}
 			}
 			else {
 				Class<? extends Query> queryClass = lastQuery.getClass();
 
-				if (!_queryClassBlackList.contains(queryClass)) {
+				if (!_queryClasses.contains(queryClass)) {
 					try {
 						lastQuery.extractTerms(terms);
 
 						for (Term term : terms) {
 							if ((fieldName == null) ||
-								term.field().equals(fieldName)) {
+								fieldName.equals(term.field())) {
 
-								WeightedTerm weightedTerm =
-									new WeightedTerm(
-										query.getBoost(), term.text());
+								WeightedTerm weightedTerm = new WeightedTerm(
+									query.getBoost(), term.text());
 
 								weightedTerms.add(weightedTerm);
 							}
@@ -98,22 +97,19 @@ public class QueryTermExtractor {
 						terms.clear();
 					}
 					catch (UnsupportedOperationException uoe) {
-						_queryClassBlackList.addIfAbsent(queryClass);
+						_queryClasses.addIfAbsent(queryClass);
 					}
 				}
 
-				lastQuery = queryStack.poll();
+				lastQuery = queries.poll();
 			}
 		}
 
 		return weightedTerms.toArray(new WeightedTerm[weightedTerms.size()]);
 	}
 
-	private static final WeightedTerm[] _emptyWeightedTermArray =
-		new WeightedTerm[0];
-
-	private static final CopyOnWriteArrayList<Class<? extends Query>>
-		_queryClassBlackList =
-			new CopyOnWriteArrayList<Class<? extends Query>>();
+	private static WeightedTerm[] _emptyWeightedTermArray = new WeightedTerm[0];
+	private static CopyOnWriteArrayList<Class<? extends Query>> _queryClasses =
+		new CopyOnWriteArrayList<Class<? extends Query>>();
 
 }
