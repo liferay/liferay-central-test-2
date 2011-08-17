@@ -50,6 +50,8 @@ boolean ratingsEnabled = GetterUtil.getBoolean((String)request.getAttribute("lif
 String redirect = (String)request.getAttribute("liferay-ui:discussion:redirect");
 long userId = GetterUtil.getLong((String)request.getAttribute("liferay-ui:discussion:userId"));
 
+String strutsAction = ParamUtil.getString(request, "struts_action");
+
 String threadView = PropsValues.DISCUSSION_THREAD_VIEW;
 
 MBMessageDisplay messageDisplay = MBMessageLocalServiceUtil.getDiscussionMessageDisplay(userId, scopeGroupId, className, classPK, WorkflowConstants.STATUS_ANY, threadView);
@@ -73,8 +75,6 @@ else {
 }
 
 Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZone);
-
-String strutsAction = ParamUtil.getString(request, "struts_action");
 %>
 
 <div class="aui-helper-hidden lfr-message-response" id="<portlet:namespace />discussion-status-messages"></div>
