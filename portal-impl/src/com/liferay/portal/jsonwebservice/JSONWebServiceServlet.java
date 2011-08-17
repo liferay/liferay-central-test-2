@@ -14,8 +14,6 @@
 
 package com.liferay.portal.jsonwebservice;
 
-import com.liferay.portal.kernel.jsonwebservice.JSONWebServiceActionMapping;
-import com.liferay.portal.kernel.jsonwebservice.JSONWebServiceActionsManagerUtil;
 import com.liferay.portal.kernel.servlet.PortletServlet;
 import com.liferay.portal.kernel.upload.UploadServletRequest;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -32,8 +30,6 @@ import com.liferay.portal.upload.UploadServletRequestImpl;
 import com.liferay.portal.util.PortalUtil;
 
 import java.io.IOException;
-
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -60,57 +56,34 @@ public class JSONWebServiceServlet extends JSONServlet {
 
 		String path = GetterUtil.getString(request.getPathInfo());
 
-		if (path.equals(StringPool.SLASH) || path.equals(StringPool.BLANK)) {
-
-			String uri = request.getRequestURI();
-
-			int secureIndex = uri.indexOf("/secure/");
-
-			if (secureIndex != -1) {
-
-				uri = uri.substring(0, secureIndex) + uri.substring(secureIndex + 7);
-
-				String query = request.getQueryString();
-
-				if (query != null) {
-					uri += StringPool.QUESTION + query;
-				}
-
-				response.sendRedirect(uri);
-
-				return;
-			}
-
-			List<JSONWebServiceActionMapping> mappings =
-				JSONWebServiceActionsManagerUtil.getMappings();
-
-			String action = request.getParameter("action");
-
-			RequestDispatcher requestDispatcher = null;
-
-			if (action == null) {
-				request.setAttribute("mappings", mappings);
-
-				requestDispatcher =
-					request.getRequestDispatcher("/doc/jsonws-toc.jsp");
-			}
-			else {
-				JSONWebServiceActionMapping jsonWebServiceActionMapping =
-					JSONWebServiceActionsManagerUtil.lookupMapping(action);
-
-				request.setAttribute("action", jsonWebServiceActionMapping);
-
-				requestDispatcher =
-					request.getRequestDispatcher("/doc/jsonws-entry.jsp");
-
-			}
-
-			requestDispatcher.forward(request, response);
+		if (!path.equals(StringPool.SLASH) && !path.equals(StringPool.BLANK)) {
+			super.service(request, response);
 
 			return;
 		}
 
-		super.service(request, response);
+		String uri = request.getRequestURI();
+
+		int pos = uri.indexOf("/secure/");
+
+		if (pos != -1) {
+			uri = uri.substring(0, pos) + uri.substring(pos + 7);
+
+			String queryString = request.getQueryString();
+
+			if (queryString != null) {
+				uri = uri.concat(StringPool.QUESTION).concat(queryString);
+			}
+
+			response.sendRedirect(uri);
+
+			return;
+		}
+
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher(
+			"/jsonws.jsp");
+
+		requestDispatcher.forward(request, response);
 	}
 
 	@Override

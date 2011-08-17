@@ -38,22 +38,9 @@ import javax.servlet.http.HttpServletRequest;
 public class JSONWebServiceActionsManagerImpl
 	implements JSONWebServiceActionsManager {
 
-	public List<JSONWebServiceActionMapping> getMappings() {
+	public JSONWebServiceAction getJSONWebServiceAction(
+		HttpServletRequest request) {
 
-		List<JSONWebServiceActionMapping> mappings =
-			new ArrayList<JSONWebServiceActionMapping>(
-				_jsonWebServiceActionConfigs.size());
-
-		for (JSONWebServiceActionConfig jsonWebServiceActionConfig :
-			_jsonWebServiceActionConfigs) {
-
-			mappings.add(jsonWebServiceActionConfig);
-		}
-
-		return mappings;
-	}
-
-	public JSONWebServiceAction lookup(HttpServletRequest request) {
 		String path = GetterUtil.getString(request.getPathInfo());
 
 		String method = GetterUtil.getString(request.getMethod());
@@ -108,15 +95,32 @@ public class JSONWebServiceActionsManagerImpl
 			jsonWebServiceActionConfig, jsonWebServiceActionParameters);
 	}
 
-	public JSONWebServiceActionMapping lookupMapping(String signature) {
-		for (JSONWebServiceActionConfig jsonWebServiceActionConfig
-			: _jsonWebServiceActionConfigs) {
+	public JSONWebServiceActionMapping getJSONWebServiceActionMapping(
+		String signature) {
 
-			if (jsonWebServiceActionConfig.getSignature().equals(signature)) {
+		for (JSONWebServiceActionConfig jsonWebServiceActionConfig :
+				_jsonWebServiceActionConfigs) {
+
+			if (signature.equals(jsonWebServiceActionConfig.getSignature())) {
 				return jsonWebServiceActionConfig;
 			}
 		}
+
 		return null;
+	}
+
+	public List<JSONWebServiceActionMapping> getJSONWebServiceActionMappings() {
+		List<JSONWebServiceActionMapping> jsonWebServiceActionMappings =
+			new ArrayList<JSONWebServiceActionMapping>(
+				_jsonWebServiceActionConfigs.size());
+
+		for (JSONWebServiceActionConfig jsonWebServiceActionConfig :
+				_jsonWebServiceActionConfigs) {
+
+			jsonWebServiceActionMappings.add(jsonWebServiceActionConfig);
+		}
+
+		return jsonWebServiceActionMappings;
 	}
 
 	public void registerJSONWebServiceAction(
