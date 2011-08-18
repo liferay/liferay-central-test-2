@@ -250,22 +250,21 @@ public class EditLayoutSetAction extends EditLayoutsAction {
 					String type = GetterUtil.getString(
 						themeSetting.getType(), "text");
 
-					String property = device + "ThemeSettingsProperties--" +
-						key + StringPool.DOUBLE_DASH;
+					String property =
+						device + "ThemeSettingsProperties--" + key +
+							StringPool.DOUBLE_DASH;
 
-					String defaultValue = themeSetting.getValue();
-					String newValue = ParamUtil.getString(
+					String value = ParamUtil.getString(
 						actionRequest, property);
 
 					if (type.equals("checkbox")) {
-						newValue = String.valueOf(
-							GetterUtil.getBoolean(newValue));
+						value = String.valueOf(GetterUtil.getBoolean(value));
 					}
 
-					if (!newValue.equals(defaultValue)) {
+					if (!value.equals(themeSetting.getValue())) {
 						typeSettingsProperties.setProperty(
 							ThemeSettingImpl.namespaceProperty(device, key),
-							newValue);
+							value);
 					}
 				}
 			}
