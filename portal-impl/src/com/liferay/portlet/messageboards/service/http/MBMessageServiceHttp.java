@@ -706,46 +706,13 @@ public class MBMessageServiceHttp {
 		}
 	}
 
-	public static void setAnswerFlag(HttpPrincipal httpPrincipal,
-		long messageId, boolean answer)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		try {
-			MethodKey methodKey = new MethodKey(MBMessageServiceUtil.class.getName(),
-					"setAnswerFlag", _setAnswerFlagParameterTypes17);
-
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					messageId, answer);
-
-			try {
-				TunnelUtil.invoke(httpPrincipal, methodHandler);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
-				}
-
-				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
-					throw (com.liferay.portal.kernel.exception.SystemException)e;
-				}
-
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
-			}
-		}
-		catch (com.liferay.portal.kernel.exception.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
 	public static void subscribeMessage(HttpPrincipal httpPrincipal,
 		long messageId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(MBMessageServiceUtil.class.getName(),
-					"subscribeMessage", _subscribeMessageParameterTypes18);
+					"subscribeMessage", _subscribeMessageParameterTypes17);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, messageId);
 
@@ -777,9 +744,42 @@ public class MBMessageServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(MBMessageServiceUtil.class.getName(),
-					"unsubscribeMessage", _unsubscribeMessageParameterTypes19);
+					"unsubscribeMessage", _unsubscribeMessageParameterTypes18);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, messageId);
+
+			try {
+				TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
+					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
+					throw (com.liferay.portal.kernel.exception.SystemException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static void updateAnswer(HttpPrincipal httpPrincipal,
+		long messageId, boolean answer, boolean cascade)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		try {
+			MethodKey methodKey = new MethodKey(MBMessageServiceUtil.class.getName(),
+					"updateAnswer", _updateAnswerParameterTypes19);
+
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					messageId, answer, cascade);
 
 			try {
 				TunnelUtil.invoke(httpPrincipal, methodHandler);
@@ -962,14 +962,14 @@ public class MBMessageServiceHttp {
 			double.class, java.lang.String.class, java.lang.String.class,
 			java.lang.String.class, com.liferay.portal.theme.ThemeDisplay.class
 		};
-	private static final Class<?>[] _setAnswerFlagParameterTypes17 = new Class[] {
-			long.class, boolean.class
-		};
-	private static final Class<?>[] _subscribeMessageParameterTypes18 = new Class[] {
+	private static final Class<?>[] _subscribeMessageParameterTypes17 = new Class[] {
 			long.class
 		};
-	private static final Class<?>[] _unsubscribeMessageParameterTypes19 = new Class[] {
+	private static final Class<?>[] _unsubscribeMessageParameterTypes18 = new Class[] {
 			long.class
+		};
+	private static final Class<?>[] _updateAnswerParameterTypes19 = new Class[] {
+			long.class, boolean.class, boolean.class
 		};
 	private static final Class<?>[] _updateDiscussionMessageParameterTypes20 = new Class[] {
 			java.lang.String.class, long.class, java.lang.String.class,

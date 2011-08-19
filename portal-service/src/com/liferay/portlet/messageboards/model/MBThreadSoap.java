@@ -42,11 +42,11 @@ public class MBThreadSoap implements Serializable {
 		soapModel.setLastPostByUserId(model.getLastPostByUserId());
 		soapModel.setLastPostDate(model.getLastPostDate());
 		soapModel.setPriority(model.getPriority());
+		soapModel.setQuestion(model.getQuestion());
 		soapModel.setStatus(model.getStatus());
 		soapModel.setStatusByUserId(model.getStatusByUserId());
 		soapModel.setStatusByUserName(model.getStatusByUserName());
 		soapModel.setStatusDate(model.getStatusDate());
-		soapModel.setQuestion(model.getQuestion());
 
 		return soapModel;
 	}
@@ -187,6 +187,18 @@ public class MBThreadSoap implements Serializable {
 		_priority = priority;
 	}
 
+	public boolean getQuestion() {
+		return _question;
+	}
+
+	public boolean isQuestion() {
+		return _question;
+	}
+
+	public void setQuestion(boolean question) {
+		_question = question;
+	}
+
 	public int getStatus() {
 		return _status;
 	}
@@ -219,18 +231,6 @@ public class MBThreadSoap implements Serializable {
 		_statusDate = statusDate;
 	}
 
-	public boolean getQuestion() {
-		return _question;
-	}
-
-	public boolean isQuestion() {
-		return _question;
-	}
-
-	public void setQuestion(boolean question) {
-		_question = question;
-	}
-
 	private long _threadId;
 	private long _groupId;
 	private long _companyId;
@@ -242,9 +242,9 @@ public class MBThreadSoap implements Serializable {
 	private long _lastPostByUserId;
 	private Date _lastPostDate;
 	private double _priority;
+	private boolean _question;
 	private int _status;
 	private long _statusByUserId;
 	private String _statusByUserName;
 	private Date _statusDate;
-	private boolean _question;
 }

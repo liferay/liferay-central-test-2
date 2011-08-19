@@ -345,13 +345,6 @@ public class MBMessageLocalServiceWrapper implements MBMessageLocalService {
 			guestPermissions);
 	}
 
-	public void deleteAnswerFlags(
-		com.liferay.portlet.messageboards.model.MBMessage message)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		_mbMessageLocalService.deleteAnswerFlags(message);
-	}
-
 	public void deleteDiscussionMessage(long messageId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -626,6 +619,12 @@ public class MBMessageLocalServiceWrapper implements MBMessageLocalService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_mbMessageLocalService.unsubscribeMessage(userId, messageId);
+	}
+
+	public void updateAnswer(long messageId, boolean answer, boolean cascade)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_mbMessageLocalService.updateAnswer(messageId, answer, cascade);
 	}
 
 	public void updateAsset(long userId,

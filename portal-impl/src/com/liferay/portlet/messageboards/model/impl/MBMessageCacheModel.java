@@ -76,6 +76,8 @@ public class MBMessageCacheModel implements CacheModel<MBMessage> {
 		sb.append(priority);
 		sb.append(", allowPingbacks=");
 		sb.append(allowPingbacks);
+		sb.append(", answer=");
+		sb.append(answer);
 		sb.append(", status=");
 		sb.append(status);
 		sb.append(", statusByUserId=");
@@ -84,8 +86,6 @@ public class MBMessageCacheModel implements CacheModel<MBMessage> {
 		sb.append(statusByUserName);
 		sb.append(", statusDate=");
 		sb.append(statusDate);
-		sb.append(", answer=");
-		sb.append(answer);
 		sb.append("}");
 
 		return sb.toString();
@@ -159,6 +159,7 @@ public class MBMessageCacheModel implements CacheModel<MBMessage> {
 		mbMessageImpl.setAnonymous(anonymous);
 		mbMessageImpl.setPriority(priority);
 		mbMessageImpl.setAllowPingbacks(allowPingbacks);
+		mbMessageImpl.setAnswer(answer);
 		mbMessageImpl.setStatus(status);
 		mbMessageImpl.setStatusByUserId(statusByUserId);
 
@@ -175,8 +176,6 @@ public class MBMessageCacheModel implements CacheModel<MBMessage> {
 		else {
 			mbMessageImpl.setStatusDate(new Date(statusDate));
 		}
-
-		mbMessageImpl.setAnswer(answer);
 
 		mbMessageImpl.resetOriginalValues();
 
@@ -204,9 +203,9 @@ public class MBMessageCacheModel implements CacheModel<MBMessage> {
 	public boolean anonymous;
 	public double priority;
 	public boolean allowPingbacks;
+	public boolean answer;
 	public int status;
 	public long statusByUserId;
 	public String statusByUserName;
 	public long statusDate;
-	public boolean answer;
 }

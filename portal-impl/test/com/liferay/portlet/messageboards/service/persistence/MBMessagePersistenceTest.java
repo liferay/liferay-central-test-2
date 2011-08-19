@@ -110,6 +110,8 @@ public class MBMessagePersistenceTest extends BasePersistenceTestCase {
 
 		newMBMessage.setAllowPingbacks(randomBoolean());
 
+		newMBMessage.setAnswer(randomBoolean());
+
 		newMBMessage.setStatus(nextInt());
 
 		newMBMessage.setStatusByUserId(nextLong());
@@ -117,8 +119,6 @@ public class MBMessagePersistenceTest extends BasePersistenceTestCase {
 		newMBMessage.setStatusByUserName(randomString());
 
 		newMBMessage.setStatusDate(nextDate());
-
-		newMBMessage.setAnswer(randomBoolean());
 
 		_persistence.update(newMBMessage, false);
 
@@ -156,6 +156,7 @@ public class MBMessagePersistenceTest extends BasePersistenceTestCase {
 		assertEquals(existingMBMessage.getPriority(), newMBMessage.getPriority());
 		assertEquals(existingMBMessage.getAllowPingbacks(),
 			newMBMessage.getAllowPingbacks());
+		assertEquals(existingMBMessage.getAnswer(), newMBMessage.getAnswer());
 		assertEquals(existingMBMessage.getStatus(), newMBMessage.getStatus());
 		assertEquals(existingMBMessage.getStatusByUserId(),
 			newMBMessage.getStatusByUserId());
@@ -163,7 +164,6 @@ public class MBMessagePersistenceTest extends BasePersistenceTestCase {
 			newMBMessage.getStatusByUserName());
 		assertEquals(Time.getShortTimestamp(existingMBMessage.getStatusDate()),
 			Time.getShortTimestamp(newMBMessage.getStatusDate()));
-		assertEquals(existingMBMessage.getAnswer(), newMBMessage.getAnswer());
 	}
 
 	public void testFindByPrimaryKeyExisting() throws Exception {
@@ -331,6 +331,8 @@ public class MBMessagePersistenceTest extends BasePersistenceTestCase {
 
 		mbMessage.setAllowPingbacks(randomBoolean());
 
+		mbMessage.setAnswer(randomBoolean());
+
 		mbMessage.setStatus(nextInt());
 
 		mbMessage.setStatusByUserId(nextLong());
@@ -338,8 +340,6 @@ public class MBMessagePersistenceTest extends BasePersistenceTestCase {
 		mbMessage.setStatusByUserName(randomString());
 
 		mbMessage.setStatusDate(nextDate());
-
-		mbMessage.setAnswer(randomBoolean());
 
 		_persistence.update(mbMessage, false);
 

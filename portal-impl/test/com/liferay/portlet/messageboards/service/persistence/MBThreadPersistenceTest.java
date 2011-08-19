@@ -89,6 +89,8 @@ public class MBThreadPersistenceTest extends BasePersistenceTestCase {
 
 		newMBThread.setPriority(nextDouble());
 
+		newMBThread.setQuestion(randomBoolean());
+
 		newMBThread.setStatus(nextInt());
 
 		newMBThread.setStatusByUserId(nextLong());
@@ -96,8 +98,6 @@ public class MBThreadPersistenceTest extends BasePersistenceTestCase {
 		newMBThread.setStatusByUserName(randomString());
 
 		newMBThread.setStatusDate(nextDate());
-
-		newMBThread.setQuestion(randomBoolean());
 
 		_persistence.update(newMBThread, false);
 
@@ -120,6 +120,7 @@ public class MBThreadPersistenceTest extends BasePersistenceTestCase {
 		assertEquals(Time.getShortTimestamp(existingMBThread.getLastPostDate()),
 			Time.getShortTimestamp(newMBThread.getLastPostDate()));
 		assertEquals(existingMBThread.getPriority(), newMBThread.getPriority());
+		assertEquals(existingMBThread.getQuestion(), newMBThread.getQuestion());
 		assertEquals(existingMBThread.getStatus(), newMBThread.getStatus());
 		assertEquals(existingMBThread.getStatusByUserId(),
 			newMBThread.getStatusByUserId());
@@ -127,7 +128,6 @@ public class MBThreadPersistenceTest extends BasePersistenceTestCase {
 			newMBThread.getStatusByUserName());
 		assertEquals(Time.getShortTimestamp(existingMBThread.getStatusDate()),
 			Time.getShortTimestamp(newMBThread.getStatusDate()));
-		assertEquals(existingMBThread.getQuestion(), newMBThread.getQuestion());
 	}
 
 	public void testFindByPrimaryKeyExisting() throws Exception {
@@ -273,6 +273,8 @@ public class MBThreadPersistenceTest extends BasePersistenceTestCase {
 
 		mbThread.setPriority(nextDouble());
 
+		mbThread.setQuestion(randomBoolean());
+
 		mbThread.setStatus(nextInt());
 
 		mbThread.setStatusByUserId(nextLong());
@@ -280,8 +282,6 @@ public class MBThreadPersistenceTest extends BasePersistenceTestCase {
 		mbThread.setStatusByUserName(randomString());
 
 		mbThread.setStatusDate(nextDate());
-
-		mbThread.setQuestion(randomBoolean());
 
 		_persistence.update(mbThread, false);
 

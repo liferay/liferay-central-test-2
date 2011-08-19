@@ -87,13 +87,13 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 			{ "anonymous", Types.BOOLEAN },
 			{ "priority", Types.DOUBLE },
 			{ "allowPingbacks", Types.BOOLEAN },
+			{ "answer", Types.BOOLEAN },
 			{ "status", Types.INTEGER },
 			{ "statusByUserId", Types.BIGINT },
 			{ "statusByUserName", Types.VARCHAR },
-			{ "statusDate", Types.TIMESTAMP },
-			{ "answer", Types.BOOLEAN }
+			{ "statusDate", Types.TIMESTAMP }
 		};
-	public static final String TABLE_SQL_CREATE = "create table MBMessage (uuid_ VARCHAR(75) null,messageId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,categoryId LONG,threadId LONG,rootMessageId LONG,parentMessageId LONG,subject VARCHAR(75) null,body TEXT null,format VARCHAR(75) null,attachments BOOLEAN,anonymous BOOLEAN,priority DOUBLE,allowPingbacks BOOLEAN,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null,answer BOOLEAN)";
+	public static final String TABLE_SQL_CREATE = "create table MBMessage (uuid_ VARCHAR(75) null,messageId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,categoryId LONG,threadId LONG,rootMessageId LONG,parentMessageId LONG,subject VARCHAR(75) null,body TEXT null,format VARCHAR(75) null,attachments BOOLEAN,anonymous BOOLEAN,priority DOUBLE,allowPingbacks BOOLEAN,answer BOOLEAN,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table MBMessage";
 	public static final String ORDER_BY_JPQL = " ORDER BY mbMessage.createDate ASC, mbMessage.messageId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY MBMessage.createDate ASC, MBMessage.messageId ASC";
@@ -137,11 +137,11 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 		model.setAnonymous(soapModel.getAnonymous());
 		model.setPriority(soapModel.getPriority());
 		model.setAllowPingbacks(soapModel.getAllowPingbacks());
+		model.setAnswer(soapModel.getAnswer());
 		model.setStatus(soapModel.getStatus());
 		model.setStatusByUserId(soapModel.getStatusByUserId());
 		model.setStatusByUserName(soapModel.getStatusByUserName());
 		model.setStatusDate(soapModel.getStatusDate());
-		model.setAnswer(soapModel.getAnswer());
 
 		return model;
 	}
@@ -453,6 +453,19 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 	}
 
 	@JSON
+	public boolean getAnswer() {
+		return _answer;
+	}
+
+	public boolean isAnswer() {
+		return _answer;
+	}
+
+	public void setAnswer(boolean answer) {
+		_answer = answer;
+	}
+
+	@JSON
 	public int getStatus() {
 		return _status;
 	}
@@ -500,19 +513,6 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 
 	public void setStatusDate(Date statusDate) {
 		_statusDate = statusDate;
-	}
-
-	@JSON
-	public boolean getAnswer() {
-		return _answer;
-	}
-
-	public boolean isAnswer() {
-		return _answer;
-	}
-
-	public void setAnswer(boolean answer) {
-		_answer = answer;
 	}
 
 	/**
@@ -614,11 +614,11 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 		mbMessageImpl.setAnonymous(getAnonymous());
 		mbMessageImpl.setPriority(getPriority());
 		mbMessageImpl.setAllowPingbacks(getAllowPingbacks());
+		mbMessageImpl.setAnswer(getAnswer());
 		mbMessageImpl.setStatus(getStatus());
 		mbMessageImpl.setStatusByUserId(getStatusByUserId());
 		mbMessageImpl.setStatusByUserName(getStatusByUserName());
 		mbMessageImpl.setStatusDate(getStatusDate());
-		mbMessageImpl.setAnswer(getAnswer());
 
 		mbMessageImpl.resetOriginalValues();
 
@@ -782,6 +782,8 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 
 		mbMessageCacheModel.allowPingbacks = getAllowPingbacks();
 
+		mbMessageCacheModel.answer = getAnswer();
+
 		mbMessageCacheModel.status = getStatus();
 
 		mbMessageCacheModel.statusByUserId = getStatusByUserId();
@@ -802,8 +804,6 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 		else {
 			mbMessageCacheModel.statusDate = Long.MIN_VALUE;
 		}
-
-		mbMessageCacheModel.answer = getAnswer();
 
 		return mbMessageCacheModel;
 	}
@@ -854,6 +854,8 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 		sb.append(getPriority());
 		sb.append(", allowPingbacks=");
 		sb.append(getAllowPingbacks());
+		sb.append(", answer=");
+		sb.append(getAnswer());
 		sb.append(", status=");
 		sb.append(getStatus());
 		sb.append(", statusByUserId=");
@@ -862,8 +864,6 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 		sb.append(getStatusByUserName());
 		sb.append(", statusDate=");
 		sb.append(getStatusDate());
-		sb.append(", answer=");
-		sb.append(getAnswer());
 		sb.append("}");
 
 		return sb.toString();
@@ -961,6 +961,10 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 		sb.append(getAllowPingbacks());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>answer</column-name><column-value><![CDATA[");
+		sb.append(getAnswer());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>status</column-name><column-value><![CDATA[");
 		sb.append(getStatus());
 		sb.append("]]></column-value></column>");
@@ -975,10 +979,6 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 		sb.append(
 			"<column><column-name>statusDate</column-name><column-value><![CDATA[");
 		sb.append(getStatusDate());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>answer</column-name><column-value><![CDATA[");
-		sb.append(getAnswer());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
@@ -1015,12 +1015,12 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 	private boolean _anonymous;
 	private double _priority;
 	private boolean _allowPingbacks;
+	private boolean _answer;
 	private int _status;
 	private long _statusByUserId;
 	private String _statusByUserUuid;
 	private String _statusByUserName;
 	private Date _statusDate;
-	private boolean _answer;
 	private transient ExpandoBridge _expandoBridge;
 	private MBMessage _escapedModelProxy;
 }

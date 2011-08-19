@@ -1905,11 +1905,11 @@
 		<field name="anonymous" type="boolean" />
 		<field name="priority" type="double" />
 		<field name="allowPingbacks" type="boolean" />
+		<field name="answer" type="boolean" />
 		<field name="status" type="int" />
 		<field name="statusByUserId" type="long" />
 		<field name="statusByUserName" type="String" />
 		<field name="statusDate" type="Date" />
-		<field name="answer" type="boolean" />
 	</model>
 	<model name="com.liferay.portlet.messageboards.model.MBMessageFlag">
 		<field name="messageFlagId" type="long" />
@@ -1938,11 +1938,11 @@
 		<field name="lastPostByUserId" type="long" />
 		<field name="lastPostDate" type="Date" />
 		<field name="priority" type="double" />
+		<field name="question" type="boolean" />
 		<field name="status" type="int" />
 		<field name="statusByUserId" type="long" />
 		<field name="statusByUserName" type="String" />
 		<field name="statusDate" type="Date" />
-		<field name="question" type="boolean" />
 	</model>
 	<model name="com.liferay.portlet.mobiledevicerules.model.MDRAction">
 		<field name="uuid" type="String" />

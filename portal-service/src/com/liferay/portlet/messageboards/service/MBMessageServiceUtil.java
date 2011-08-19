@@ -206,12 +206,6 @@ public class MBMessageServiceUtil {
 			displayStyle, feedURL, entryURL, themeDisplay);
 	}
 
-	public static void setAnswerFlag(long messageId, boolean answer)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		getService().setAnswerFlag(messageId, answer);
-	}
-
 	public static void subscribeMessage(long messageId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -222,6 +216,13 @@ public class MBMessageServiceUtil {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService().unsubscribeMessage(messageId);
+	}
+
+	public static void updateAnswer(long messageId, boolean answer,
+		boolean cascade)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().updateAnswer(messageId, answer, cascade);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage updateDiscussionMessage(

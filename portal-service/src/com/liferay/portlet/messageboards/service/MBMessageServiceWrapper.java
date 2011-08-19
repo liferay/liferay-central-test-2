@@ -188,12 +188,6 @@ public class MBMessageServiceWrapper implements MBMessageService {
 			type, version, displayStyle, feedURL, entryURL, themeDisplay);
 	}
 
-	public void setAnswerFlag(long messageId, boolean answer)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		_mbMessageService.setAnswerFlag(messageId, answer);
-	}
-
 	public void subscribeMessage(long messageId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -204,6 +198,12 @@ public class MBMessageServiceWrapper implements MBMessageService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_mbMessageService.unsubscribeMessage(messageId);
+	}
+
+	public void updateAnswer(long messageId, boolean answer, boolean cascade)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_mbMessageService.updateAnswer(messageId, answer, cascade);
 	}
 
 	public com.liferay.portlet.messageboards.model.MBMessage updateDiscussionMessage(

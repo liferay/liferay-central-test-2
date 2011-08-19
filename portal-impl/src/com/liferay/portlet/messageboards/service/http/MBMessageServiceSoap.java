@@ -251,18 +251,6 @@ public class MBMessageServiceSoap {
 		}
 	}
 
-	public static void setAnswerFlag(long messageId, boolean answer)
-		throws RemoteException {
-		try {
-			MBMessageServiceUtil.setAnswerFlag(messageId, answer);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
 	public static void subscribeMessage(long messageId)
 		throws RemoteException {
 		try {
@@ -279,6 +267,18 @@ public class MBMessageServiceSoap {
 		throws RemoteException {
 		try {
 			MBMessageServiceUtil.unsubscribeMessage(messageId);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void updateAnswer(long messageId, boolean answer,
+		boolean cascade) throws RemoteException {
+		try {
+			MBMessageServiceUtil.updateAnswer(messageId, answer, cascade);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

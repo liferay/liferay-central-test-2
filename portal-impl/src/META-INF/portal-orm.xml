@@ -2499,13 +2499,13 @@
 			<basic name="anonymous" />
 			<basic name="priority" />
 			<basic name="allowPingbacks" />
+			<basic name="answer" />
 			<basic name="status" />
 			<basic name="statusByUserId" />
 			<basic name="statusByUserName" />
 			<basic name="statusDate">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
-			<basic name="answer" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
 			<transient name="statusByUserUuid" />
@@ -2557,13 +2557,13 @@
 				<temporal>TIMESTAMP</temporal>
 			</basic>
 			<basic name="priority" />
+			<basic name="question" />
 			<basic name="status" />
 			<basic name="statusByUserId" />
 			<basic name="statusByUserName" />
 			<basic name="statusDate">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
-			<basic name="question" />
 			<transient name="lastPostByUserUuid" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />

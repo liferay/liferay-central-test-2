@@ -373,12 +373,6 @@ public class MBThreadLocalServiceUtil {
 		return getService().hasAnswerMessage(threadId);
 	}
 
-	public static boolean hasQuestionFlag(long threadId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return getService().hasQuestionFlag(threadId);
-	}
-
 	public static void incrementViewCounter(long threadId, int increment)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -392,18 +386,18 @@ public class MBThreadLocalServiceUtil {
 		return getService().moveThread(groupId, categoryId, threadId);
 	}
 
-	public static void setQuestionFlag(long threadId, boolean question)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		getService().setQuestionFlag(threadId, question);
-	}
-
 	public static com.liferay.portlet.messageboards.model.MBThread splitThread(
 		long messageId, java.lang.String subject,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService().splitThread(messageId, subject, serviceContext);
+	}
+
+	public static void updateQuestion(long threadId, boolean question)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().updateQuestion(threadId, question);
 	}
 
 	/**

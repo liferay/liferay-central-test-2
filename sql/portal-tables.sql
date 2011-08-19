@@ -1129,11 +1129,11 @@ create table MBMessage (
 	anonymous BOOLEAN,
 	priority DOUBLE,
 	allowPingbacks BOOLEAN,
+	answer BOOLEAN,
 	status INTEGER,
 	statusByUserId LONG,
 	statusByUserName VARCHAR(75) null,
-	statusDate DATE null,
-	answer BOOLEAN
+	statusDate DATE null
 );
 
 create table MBMessageFlag (
@@ -1165,11 +1165,11 @@ create table MBThread (
 	lastPostByUserId LONG,
 	lastPostDate DATE null,
 	priority DOUBLE,
+	question BOOLEAN,
 	status INTEGER,
 	statusByUserId LONG,
 	statusByUserName VARCHAR(75) null,
-	statusDate DATE null,
-	question BOOLEAN
+	statusDate DATE null
 );
 
 create table MDRAction (

@@ -56,6 +56,8 @@ public class MBThreadCacheModel implements CacheModel<MBThread> {
 		sb.append(lastPostDate);
 		sb.append(", priority=");
 		sb.append(priority);
+		sb.append(", question=");
+		sb.append(question);
 		sb.append(", status=");
 		sb.append(status);
 		sb.append(", statusByUserId=");
@@ -64,8 +66,6 @@ public class MBThreadCacheModel implements CacheModel<MBThread> {
 		sb.append(statusByUserName);
 		sb.append(", statusDate=");
 		sb.append(statusDate);
-		sb.append(", question=");
-		sb.append(question);
 		sb.append("}");
 
 		return sb.toString();
@@ -92,6 +92,7 @@ public class MBThreadCacheModel implements CacheModel<MBThread> {
 		}
 
 		mbThreadImpl.setPriority(priority);
+		mbThreadImpl.setQuestion(question);
 		mbThreadImpl.setStatus(status);
 		mbThreadImpl.setStatusByUserId(statusByUserId);
 
@@ -109,8 +110,6 @@ public class MBThreadCacheModel implements CacheModel<MBThread> {
 			mbThreadImpl.setStatusDate(new Date(statusDate));
 		}
 
-		mbThreadImpl.setQuestion(question);
-
 		mbThreadImpl.resetOriginalValues();
 
 		return mbThreadImpl;
@@ -127,9 +126,9 @@ public class MBThreadCacheModel implements CacheModel<MBThread> {
 	public long lastPostByUserId;
 	public long lastPostDate;
 	public double priority;
+	public boolean question;
 	public int status;
 	public long statusByUserId;
 	public String statusByUserName;
 	public long statusDate;
-	public boolean question;
 }
