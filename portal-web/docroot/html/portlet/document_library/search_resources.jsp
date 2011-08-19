@@ -222,6 +222,7 @@ int total = 0;
 
 							<%
 							resultRows = searchContainer.getResultRows();
+
 							ResultRow row = new ResultRow(fileEntry, fileEntry.getFileEntryId(), i);
 
 							// Position
