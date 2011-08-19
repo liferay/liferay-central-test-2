@@ -352,6 +352,7 @@ update MBCategory set displayStyle = 'default';
 alter table MBMailingList add allowAnonymous BOOLEAN;
 
 alter table MBMessage add format VARCHAR(75) null;
+alter table MBMessage add answer BOOLEAN;
 
 COMMIT_TRANSACTION;
 
@@ -359,6 +360,7 @@ update MBMessage set format = 'bbcode';
 
 alter table MBThread add companyId LONG;
 alter table MBThread add rootMessageUserId LONG;
+alter table MBThread add question BOOLEAN;
 
 create table MDRAction (
 	uuid_ VARCHAR(75) null,
