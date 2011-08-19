@@ -83,7 +83,7 @@ public class LayoutSetBranchLocalServiceImpl
 			LayoutSetBranch.class.getName(),
 			layoutSetBranch.getLayoutSetBranchId(), false, true, false);
 
-		// Revisions
+		// Layout revisions
 
 		if (layoutSetBranch.isMaster() ||
 			(copyLayoutSetBranchId == LayoutSetBranchConstants.ALL_BRANCHES)) {
@@ -167,12 +167,12 @@ public class LayoutSetBranchLocalServiceImpl
 			ResourceConstants.SCOPE_INDIVIDUAL,
 			layoutSetBranch.getLayoutSetBranchId());
 
-		// Branches
+		// Layout branches
 
 		layoutBranchLocalService.deleteLayoutSetBranchLayoutBranches(
 			layoutSetBranch.getLayoutSetBranchId());
 
-		// Revisions
+		// Layout revisions
 
 		layoutRevisionLocalService.deleteLayoutSetBranchLayoutRevisions(
 			layoutSetBranch.getLayoutSetBranchId());
