@@ -125,8 +125,6 @@ request.setAttribute("view_layout_branches.jsp-currenttLayoutBranchId", String.v
 	);
 
 	<c:if test='<%= themeDisplay.isStatePopUp() && SessionMessages.contains(renderRequest, portletName + ".doConfigure") %>'>
-		var stagingBarPortletBoundaryId = '#p_p_id_<%= PortletKeys.STAGING_BAR %>_';
-
 		var data = null;
 
 		<c:if test='<%= SessionMessages.contains(renderRequest, portletName + ".notAjaxable") %>'>
@@ -135,6 +133,6 @@ request.setAttribute("view_layout_branches.jsp-currenttLayoutBranchId", String.v
 			};
 		</c:if>
 
-		Liferay.Util.getOpener().Liferay.Portlet.refresh(stagingBarPortletBoundaryId, data);
+		Liferay.Util.getOpener().Liferay.Portlet.refresh('#p_p_id_<%= PortletKeys.STAGING_BAR %>_', data);
 	</c:if>
 </aui:script>
