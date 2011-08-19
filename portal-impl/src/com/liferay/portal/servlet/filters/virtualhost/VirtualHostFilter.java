@@ -169,12 +169,18 @@ public class VirtualHostFilter extends BasePortalFilter {
 
 		Set<String> languageIds = I18nServlet.getLanguageIds();
 
-		for (String languageId : languageIds) {
-			if (friendlyURL.startsWith(languageId)) {
-				int pos = friendlyURL.indexOf(CharPool.SLASH, 1);
+		String lowerCaseFriendlyURL = friendlyURL.toLowerCase();
 
-				if (((pos != -1) && (pos != languageId.length())) ||
-					((pos == -1) && !friendlyURL.equals(languageId))) {
+		for (String languageId : languageIds) {
+			String lowerCaseLanguageId = languageId.toLowerCase();
+
+			if (lowerCaseFriendlyURL.startsWith(lowerCaseLanguageId)) {
+				int pos = lowerCaseFriendlyURL.indexOf(CharPool.SLASH, 1);
+
+				friendlyURL = friendlyURL.replaceFirst(lowerCaseLanguageId, languageId);
+
+				if (((pos != -1) && (pos != lowerCaseLanguageId.length())) ||
+					((pos == -1) && !lowerCaseFriendlyURL.equals(lowerCaseLanguageId))) {
 
 					continue;
 				}
