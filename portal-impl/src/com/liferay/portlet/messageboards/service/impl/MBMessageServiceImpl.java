@@ -532,20 +532,6 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 			messages, themeDisplay);
 	}
 
-	public void setAnswerFlag(long messageId, boolean answer)
-		throws PortalException, SystemException {
-
-		MBMessage message= mbMessagePersistence.findByPrimaryKey(messageId);
-
-		if (message.isAnswer() == answer) {
-			return;
-		}
-
-		message.setAnswer(answer);
-
-		mbMessagePersistence.update(message, false);
-	}
-
 	public void subscribeMessage(long messageId)
 		throws PortalException, SystemException {
 
@@ -562,6 +548,12 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 			getPermissionChecker(), messageId, ActionKeys.SUBSCRIBE);
 
 		mbMessageLocalService.unsubscribeMessage(getUserId(), messageId);
+	}
+
+	public void updateAnswer(long messageId, boolean answer, boolean cascade)
+		throws PortalException, SystemException {
+
+		mbMessageLocalService.updateAnswer(messageId, answer, cascade);
 	}
 
 	public MBMessage updateDiscussionMessage(

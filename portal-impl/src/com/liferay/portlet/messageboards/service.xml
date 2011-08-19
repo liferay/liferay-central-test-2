@@ -203,11 +203,11 @@
 		<column name="anonymous" type="boolean" />
 		<column name="priority" type="double" />
 		<column name="allowPingbacks" type="boolean" />
+		<column name="answer" type="boolean" />
 		<column name="status" type="int" />
 		<column name="statusByUserId" type="long" />
 		<column name="statusByUserName" type="String" />
 		<column name="statusDate" type="Date" />
-		<column name="answer" type="boolean" />
 
 		<!-- Order -->
 
@@ -257,13 +257,13 @@
 			<finder-column name="classNameId" />
 			<finder-column name="classPK" />
 		</finder>
-		<finder name="T_A" return-type="Collection">
-			<finder-column name="threadId" />
-			<finder-column name="answer" />
-		</finder>
 		<finder name="T_P" return-type="Collection">
 			<finder-column name="threadId" />
 			<finder-column name="parentMessageId" />
+		</finder>
+		<finder name="T_A" return-type="Collection">
+			<finder-column name="threadId" />
+			<finder-column name="answer" />
 		</finder>
 		<finder name="T_S" return-type="Collection">
 			<finder-column name="threadId" />
@@ -448,11 +448,11 @@
 		<column name="lastPostByUserId" type="long" />
 		<column name="lastPostDate" type="Date" />
 		<column name="priority" type="double" />
+		<column name="question" type="boolean" />
 		<column name="status" type="int" />
 		<column name="statusByUserId" type="long" />
 		<column name="statusByUserName" type="String" />
 		<column name="statusDate" type="Date" />
-		<column name="question" type="boolean" />
 
 		<!-- Order -->
 

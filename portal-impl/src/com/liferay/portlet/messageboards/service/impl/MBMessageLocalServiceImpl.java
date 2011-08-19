@@ -464,25 +464,6 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			guestPermissions);
 	}
 
-	public void deleteAnswerFlags(MBMessage message)
-		throws PortalException, SystemException {
-
-		if (message.isAnswer()) {
-			message.setAnswer(false);
-
-			mbMessagePersistence.update(message, false);
-		}
-
-		long threadId = message.getThreadId();
-
-		List<MBMessage> childMessages = mbMessagePersistence.findByT_P(
-			threadId, message.getMessageId());
-
-		for (MBMessage childMessage : childMessages) {
-			deleteAnswerFlags(childMessage);
-		}
-	}
-
 	public void deleteDiscussionMessage(long messageId)
 		throws PortalException, SystemException {
 
@@ -1289,6 +1270,27 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		subscriptionLocalService.deleteSubscription(
 			userId, MBThread.class.getName(), message.getThreadId());
+	}
+
+	public void updateAnswer(long messageId, boolean answer, boolean cascade)
+		throws PortalException, SystemException {
+
+		MBMessage message = mbMessagePersistence.findByPrimaryKey(messageId);
+
+		if (message.isAnswer() != answer) {
+			message.setAnswer(answer);
+
+			mbMessagePersistence.update(message, false);
+		}
+
+		if (cascade) {
+			List<MBMessage> messages = mbMessagePersistence.findByT_P(
+				message.getThreadId(), message.getMessageId());
+
+			for (MBMessage curMessage : messages) {
+				updateAnswer(curMessage.getMessageId(), answer, cascade);
+			}
+		}
 	}
 
 	public void updateAsset(

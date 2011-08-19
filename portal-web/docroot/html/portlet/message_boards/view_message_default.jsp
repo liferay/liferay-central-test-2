@@ -106,10 +106,11 @@ MBThread thread = messageDisplay.getThread();
 		function(messageId) {
 			var A = AUI();
 
-			Liferay.Service.MB.MBMessage.setAnswerFlag(
+			Liferay.Service.MB.MBMessage.updateAnswer(
 				{
 					messageId: messageId,
-					answer: true
+					answer: true,
+					cascade: false
 				}
 			);
 
@@ -170,10 +171,11 @@ MBThread thread = messageDisplay.getThread();
 		function(messageId) {
 			var A = AUI();
 
-			Liferay.Service.MB.MBMessage.setAnswerFlag(
+			Liferay.Service.MB.MBMessage.updateAnswer(
 				{
 					messageId: messageId,
-					answer: false
+					answer: false,
+					cascade: false
 				}
 			);
 

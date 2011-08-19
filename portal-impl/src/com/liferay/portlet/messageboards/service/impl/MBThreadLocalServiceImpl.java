@@ -402,14 +402,6 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 		}
 	}
 
-	public boolean hasQuestionFlag(long threadId)
-		throws PortalException, SystemException {
-
-		MBThread thread = mbThreadPersistence.findByPrimaryKey(threadId);
-
-		return thread.isQuestion();
-	}
-
 	@BufferedIncrement(incrementClass = NumberIncrement.class)
 	public void incrementViewCounter(long threadId, int increment)
 		throws PortalException, SystemException {
@@ -490,27 +482,6 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 		return thread;
 	}
 
-	public void setQuestionFlag(long threadId, boolean question)
-		throws PortalException, SystemException {
-
-		MBThread thread = mbThreadPersistence.findByPrimaryKey(threadId);
-
-		if (thread.isQuestion() == question) {
-			return;
-		}
-
-		thread.setQuestion(question);
-
-		mbThreadPersistence.update(thread, false);
-
-		if (!question) {
-			MBMessage rootMessage = mbMessagePersistence.findByPrimaryKey(
-				thread.getRootMessageId());
-
-			mbMessageLocalService.deleteAnswerFlags(rootMessage);
-		}
-	}
-
 	public MBThread splitThread(
 			long messageId, String subject, ServiceContext serviceContext)
 		throws PortalException, SystemException {
@@ -529,7 +500,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 
 		// Message flags
 
-		mbMessageLocalService.deleteAnswerFlags(message);
+		mbMessageLocalService.updateAnswer(message.getMessageId(), false, true);
 
 		// Create new thread
 
@@ -623,6 +594,28 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 		}
 
 		return thread;
+	}
+
+	public void updateQuestion(long threadId, boolean question)
+		throws PortalException, SystemException {
+
+		MBThread thread = mbThreadPersistence.findByPrimaryKey(threadId);
+
+		if (thread.isQuestion() == question) {
+			return;
+		}
+
+		thread.setQuestion(question);
+
+		mbThreadPersistence.update(thread, false);
+
+		if (!question) {
+			MBMessage message = mbMessagePersistence.findByPrimaryKey(
+				thread.getRootMessageId());
+
+			mbMessageLocalService.updateAnswer(
+				message.getMessageId(), false, true);
+		}
 	}
 
 	/**

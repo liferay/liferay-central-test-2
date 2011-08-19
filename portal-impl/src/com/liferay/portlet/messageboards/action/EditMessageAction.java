@@ -372,7 +372,7 @@ public class EditMessageAction extends PortletAction {
 					anonymous, priority, allowPingbacks, serviceContext);
 
 				if (question) {
-					MBThreadLocalServiceUtil.setQuestionFlag(
+					MBThreadLocalServiceUtil.updateQuestion(
 						message.getThreadId(), true);
 				}
 			}
@@ -405,7 +405,7 @@ public class EditMessageAction extends PortletAction {
 				allowPingbacks, serviceContext);
 
 			if (message.isRoot()) {
-				MBThreadLocalServiceUtil.setQuestionFlag(
+				MBThreadLocalServiceUtil.updateQuestion(
 					message.getThreadId(), question);
 			}
 		}
