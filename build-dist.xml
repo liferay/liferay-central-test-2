@@ -378,9 +378,9 @@ app.server.glassfish.zip.url=http://download.java.net/glassfish/v3/release/${app
 		<delete file="app.server.${user.name}.properties" />
 
 		<antcall target="deploy-plugins">
-			<param name="deployer.dest.dir" value="${app.server.parent.dir}/tomcat-6.0.32/webapps" />
+			<param name="deployer.dest.dir" value="${app.server.parent.dir}/tomcat-6.0.33/webapps" />
 			<param name="deployer.app.server.type" value="tomcat" />
-			<param name="deployer.app.server.lib.portal.dir" value="${app.server.parent.dir}/tomcat-6.0.32/webapps/ROOT/WEB-INF/lib" />
+			<param name="deployer.app.server.lib.portal.dir" value="${app.server.parent.dir}/tomcat-6.0.33/webapps/ROOT/WEB-INF/lib" />
 		</antcall>
 	</target>
 
@@ -1052,11 +1052,11 @@ release was successful.</echo>
 			src="${app.server.parent.dir}/${app.server.tomcat.zip.name}"
 		>
 			<patternset
-				excludes="apache-tomcat-6.0.32/webapps/**"
+				excludes="apache-tomcat-6.0.33/webapps/**"
 			/>
 			<mapper
 				type="glob"
-				from="apache-tomcat-6.0.32/*"
+				from="apache-tomcat-6.0.33/*"
 				to="${app.server.tomcat.dir.name}/*"
 			/>
 		</unzip>
