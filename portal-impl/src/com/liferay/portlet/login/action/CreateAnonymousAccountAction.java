@@ -116,7 +116,7 @@ public class CreateAnonymousAccountAction extends PortletAction {
 		catch (Exception e) {
 			if (cmd.equals(Constants.UPDATE)) {
 				jsonObject.putException(e);
-	
+
 				writeJSON(actionRequest, actionResponse, jsonObject);
 			}
 			else if (e instanceof DuplicateUserEmailAddressException) {
