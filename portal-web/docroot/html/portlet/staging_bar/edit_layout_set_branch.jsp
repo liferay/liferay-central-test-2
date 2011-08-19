@@ -72,7 +72,7 @@ if (layoutSetBranchId > 0) {
 						</aui:select>
 					</c:when>
 					<c:otherwise>
-						
+
 						<%
 						LayoutSetBranch masterLayoutSetBranch = LayoutSetBranchLocalServiceUtil.getMasterLayoutSetBranch(stagingGroup.getGroupId(), privateLayout);
 						%>
