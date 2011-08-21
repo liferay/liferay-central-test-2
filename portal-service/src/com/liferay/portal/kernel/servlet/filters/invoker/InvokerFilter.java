@@ -195,11 +195,10 @@ public class InvokerFilter extends BasePortalLifecycle implements Filter {
 		return uri;
 	}
 
-	private static int _invokerFilterChainSize;
-
 	private Dispatcher _dispatcher;
 	private ConcurrentLRUCache<Integer, InvokerFilterChain> _filterChains;
 	private FilterConfig _filterConfig;
+	private int _invokerFilterChainSize;
 	private InvokerFilterHelper _invokerFilterHelper;
 
 }
