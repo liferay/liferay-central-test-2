@@ -20,33 +20,24 @@ import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.FileUtil;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropertiesParamUtil;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ColorScheme;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.LayoutSet;
-import com.liferay.portal.model.Theme;
-import com.liferay.portal.model.ThemeSetting;
-import com.liferay.portal.model.impl.ThemeSettingImpl;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.GroupServiceUtil;
 import com.liferay.portal.service.LayoutSetLocalServiceUtil;
 import com.liferay.portal.service.LayoutSetServiceUtil;
-import com.liferay.portal.service.ThemeLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.servlet.UploadException;
 
 import java.io.File;
-
-import java.util.Map;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -218,55 +209,9 @@ public class EditLayoutSetAction extends EditLayoutsAction {
 			boolean wapTheme = device.equals("wap");
 
 			if (Validator.isNotNull(themeId)) {
-				Theme theme = ThemeLocalServiceUtil.getTheme(
-					companyId, themeId, wapTheme);
-
-				if (!theme.hasColorSchemes()) {
-					colorSchemeId = StringPool.BLANK;
-				}
-
-				if (Validator.isNull(colorSchemeId)) {
-					ColorScheme colorScheme =
-						ThemeLocalServiceUtil.getColorScheme(
-							companyId, themeId, colorSchemeId, wapTheme);
-
-					colorSchemeId = colorScheme.getColorSchemeId();
-				}
-
-				deleteThemeSettings(typeSettingsProperties, device);
-
-				Map<String, ThemeSetting> configurableSettings =
-					theme.getConfigurableSettings();
-
-				if (configurableSettings.isEmpty() ||
-					!Validator.equals(themeId, oldThemeId)) {
-
-					continue;
-				}
-
-				for (String key : configurableSettings.keySet()) {
-					ThemeSetting themeSetting = configurableSettings.get(key);
-
-					String type = GetterUtil.getString(
-						themeSetting.getType(), "text");
-
-					String property =
-						device + "ThemeSettingsProperties--" + key +
-							StringPool.DOUBLE_DASH;
-
-					String value = ParamUtil.getString(
-						actionRequest, property);
-
-					if (type.equals("checkbox")) {
-						value = String.valueOf(GetterUtil.getBoolean(value));
-					}
-
-					if (!value.equals(themeSetting.getValue())) {
-						typeSettingsProperties.setProperty(
-							ThemeSettingImpl.namespaceProperty(device, key),
-							value);
-					}
-				}
+				colorSchemeId = getColorSchemeId(
+					actionRequest, companyId, typeSettingsProperties, device,
+					themeId, colorSchemeId, wapTheme);
 			}
 
 			long groupId = liveGroupId;
@@ -276,8 +221,7 @@ public class EditLayoutSetAction extends EditLayoutsAction {
 			}
 
 			LayoutSetServiceUtil.updateLookAndFeel(
-				groupId, privateLayout, themeId, colorSchemeId,
-				css, wapTheme);
+				groupId, privateLayout, themeId, colorSchemeId, css, wapTheme);
 		}
 	}
 
