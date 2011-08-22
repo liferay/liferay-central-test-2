@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.util.Validator;
  */
 public class FamilyNameFirstFullNameGenerator extends DefaultFullNameGenerator {
 
+	@Override
 	public String[] splitFullName(String fullName) {
 		String firstName = StringPool.BLANK;
 		String middleName = StringPool.BLANK;
@@ -59,6 +60,7 @@ public class FamilyNameFirstFullNameGenerator extends DefaultFullNameGenerator {
 		return new String[] {firstName, middleName, lastName};
 	}
 
+	@Override
 	protected String buildFullName(
 		String firstName, String middleName, String lastName,
 		boolean useInitials) {
