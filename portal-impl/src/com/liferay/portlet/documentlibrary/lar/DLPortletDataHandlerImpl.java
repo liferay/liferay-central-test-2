@@ -441,10 +441,12 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 		}
 
 		Element fileRankElement = fileRanksElement.addElement("file-rank");
+
 		FileEntry fileEntry = FileEntryUtil.fetchByPrimaryKey(
 			fileRank.getFileEntryId());
 
 		String fileEntryUuid = fileEntry.getUuid();
+
 		fileRankElement.addAttribute("file-entry-uuid", fileEntryUuid);
 
 		portletDataContext.addClassedModel(
@@ -475,6 +477,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 				fileShortcut.getToFileEntryId());
 
 			String fileEntryUuid = fileEntry.getUuid();
+
 			fileShortcutElement.addAttribute("file-entry-uuid", fileEntryUuid);
 
 			portletDataContext.addClassedModel(
@@ -730,8 +733,8 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 		if (fileEntry == null) {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
-					"Unable to retrieve file: " + fileEntryUuid +
-					" to import file rank.");
+					"Unable to fetch file entry {uuid=" + fileEntryUuid +
+						",groupId=" + groupId + "}");
 			}
 
 			return;
