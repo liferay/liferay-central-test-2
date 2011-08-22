@@ -57,16 +57,12 @@ public class ClusterRequestReceiver extends BaseReceiver {
 	}
 
 	public void initialize() {
-		String className = ClusterRequestReceiver.class.getName();
-
-		_parallelExecutorService =
-			PortalExecutorManagerUtil.getPortalExecutor(
-				className + "_parallel");
-
+		_parallelExecutorService = PortalExecutorManagerUtil.getPortalExecutor(
+			ClusterRequestReceiver.class.getName() + "_parallel");
 		_serialExecutorService = Executors.newSingleThreadExecutor(
 			new NamedThreadFactory(
-				className + "_serial", Thread.NORM_PRIORITY,
-				PortalClassLoaderUtil.getClassLoader()));
+				ClusterRequestReceiver.class.getName() + "_serial",
+				Thread.NORM_PRIORITY, PortalClassLoaderUtil.getClassLoader()));
 	}
 
 	@Override
@@ -98,8 +94,8 @@ public class ClusterRequestReceiver extends BaseReceiver {
 		if (obj instanceof ClusterRequest) {
 			ClusterRequest clusterRequest = (ClusterRequest)obj;
 
-			RequestTask requestTask = new RequestTask(clusterRequest,
-				sourceAddress, localAddress);
+			RequestTask requestTask = new RequestTask(
+				clusterRequest, sourceAddress, localAddress);
 
 			if (clusterRequest.isParallelized()) {
 				_parallelExecutorService.execute(requestTask);
@@ -111,8 +107,8 @@ public class ClusterRequestReceiver extends BaseReceiver {
 		else if (obj instanceof ClusterNodeResponse) {
 			ClusterNodeResponse clusterNodeResponse = (ClusterNodeResponse)obj;
 
-			processClusterResponse(clusterNodeResponse, sourceAddress,
-				localAddress);
+			processClusterResponse(
+				clusterNodeResponse, sourceAddress, localAddress);
 		}
 		else if (_log.isWarnEnabled()) {
 			_log.warn(
@@ -332,8 +328,8 @@ public class ClusterRequestReceiver extends BaseReceiver {
 		}
 
 		public void run() {
-			processClusterRequest(_clusterRequest, _sourceAddress,
-				_localAddress);
+			processClusterRequest(
+				_clusterRequest, _sourceAddress, _localAddress);
 		}
 
 		private ClusterRequest _clusterRequest;

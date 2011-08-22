@@ -209,7 +209,7 @@ public class ClusterRequest implements Serializable {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(15);
+		StringBundler sb = new StringBundler(17);
 
 		sb.append("{clusterMessageType=");
 		sb.append(_clusterMessageType);
