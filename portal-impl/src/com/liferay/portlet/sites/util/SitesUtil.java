@@ -493,8 +493,8 @@ public class SitesUtil {
 				return true;
 			}
 		}
-		else if (layoutModifiedDate == null ||
-				!layoutModifiedDate.after(templateLayout.getModifiedDate())) {
+		else if ((layoutModifiedDate == null) ||
+				 !layoutModifiedDate.after(templateLayout.getModifiedDate())) {
 
 			return true;
 		}
