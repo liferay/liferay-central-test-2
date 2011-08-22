@@ -246,47 +246,47 @@ public class MBThreadFlagLocalServiceWrapper implements MBThreadFlagLocalService
 		_mbThreadFlagLocalService.setBeanIdentifier(beanIdentifier);
 	}
 
-	public void addFlag(long userId,
+	public void addThreadFlag(long userId,
 		com.liferay.portlet.messageboards.model.MBThread thread)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		_mbThreadFlagLocalService.addFlag(userId, thread);
+		_mbThreadFlagLocalService.addThreadFlag(userId, thread);
 	}
 
-	public void deleteFlag(long threadFlagId)
+	public void deleteThreadFlag(long threadFlagId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		_mbThreadFlagLocalService.deleteFlag(threadFlagId);
+		_mbThreadFlagLocalService.deleteThreadFlag(threadFlagId);
 	}
 
-	public void deleteFlag(
+	public void deleteThreadFlag(
 		com.liferay.portlet.messageboards.model.MBThreadFlag threadFlag)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		_mbThreadFlagLocalService.deleteFlag(threadFlag);
+		_mbThreadFlagLocalService.deleteThreadFlag(threadFlag);
 	}
 
-	public void deleteFlagsByUserId(long userId)
+	public void deleteThreadFlagsByThreadId(long threadId)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		_mbThreadFlagLocalService.deleteFlagsByUserId(userId);
+		_mbThreadFlagLocalService.deleteThreadFlagsByThreadId(threadId);
 	}
 
-	public void deleteFlagsByThreadId(long threadId)
+	public void deleteThreadFlagsByUserId(long userId)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		_mbThreadFlagLocalService.deleteFlagsByThreadId(threadId);
+		_mbThreadFlagLocalService.deleteThreadFlagsByUserId(userId);
 	}
 
-	public com.liferay.portlet.messageboards.model.MBThreadFlag getFlag(
+	public com.liferay.portlet.messageboards.model.MBThreadFlag getThreadFlag(
 		long userId, com.liferay.portlet.messageboards.model.MBThread thread)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _mbThreadFlagLocalService.getFlag(userId, thread);
+		return _mbThreadFlagLocalService.getThreadFlag(userId, thread);
 	}
 
-	public boolean hasFlag(long userId,
+	public boolean hasThreadFlag(long userId,
 		com.liferay.portlet.messageboards.model.MBThread thread)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _mbThreadFlagLocalService.hasFlag(userId, thread);
+		return _mbThreadFlagLocalService.hasThreadFlag(userId, thread);
 	}
 
 	public MBThreadFlagLocalService getWrappedMBThreadFlagLocalService() {

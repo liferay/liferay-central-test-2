@@ -240,8 +240,8 @@ public class PersistenceTestSuite extends TestSuite {
 		testSuite.addTestSuite(MBMailingListPersistenceTest.class);
 		testSuite.addTestSuite(MBMessagePersistenceTest.class);
 		testSuite.addTestSuite(MBStatsUserPersistenceTest.class);
-		testSuite.addTestSuite(MBThreadPersistenceTest.class);
 		testSuite.addTestSuite(MBThreadFlagPersistenceTest.class);
+		testSuite.addTestSuite(MBThreadPersistenceTest.class);
 
 		testSuite.addTestSuite(MDRActionPersistenceTest.class);
 		testSuite.addTestSuite(MDRRuleGroupPersistenceTest.class);

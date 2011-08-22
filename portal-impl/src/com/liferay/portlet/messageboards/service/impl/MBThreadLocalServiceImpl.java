@@ -89,7 +89,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 		catch (NoSuchDirectoryException nsde) {
 		}
 
-		// Flag
+		// Thread flags
 
 		mbThreadFlagPersistence.removeByThreadId(thread.getThreadId());
 

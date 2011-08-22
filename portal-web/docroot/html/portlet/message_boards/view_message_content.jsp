@@ -28,9 +28,9 @@ MBThread thread = messageDisplay.getThread();
 MBThread previousThread = messageDisplay.getPreviousThread();
 MBThread nextThread = messageDisplay.getNextThread();
 
-MBThreadFlag threadFlag = MBThreadFlagLocalServiceUtil.getFlag(themeDisplay.getUserId(), thread);
-
 String threadView = messageDisplay.getThreadView();
+
+MBThreadFlag threadFlag = MBThreadFlagLocalServiceUtil.getThreadFlag(themeDisplay.getUserId(), thread);
 %>
 
 <portlet:renderURL var="backURL">

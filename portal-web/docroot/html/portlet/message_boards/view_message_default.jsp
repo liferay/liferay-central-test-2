@@ -205,7 +205,7 @@ MBThread thread = messageDisplay.getThread();
 </aui:script>
 
 <%
-MBThreadFlagLocalServiceUtil.addFlag(themeDisplay.getUserId(), thread);
+MBThreadFlagLocalServiceUtil.addThreadFlag(themeDisplay.getUserId(), thread);
 
 message = messageDisplay.getMessage();
 

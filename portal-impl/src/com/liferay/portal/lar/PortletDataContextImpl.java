@@ -1403,10 +1403,10 @@ public class PortletDataContextImpl implements PortletDataContext {
 		_xStream.alias("JournalStructure", JournalStructureImpl.class);
 		_xStream.alias("JournalTemplate", JournalTemplateImpl.class);
 		_xStream.alias("Lock", LockImpl.class);
+		_xStream.alias("MBBan", MBBanImpl.class);
 		_xStream.alias("MBCategory", MBCategoryImpl.class);
 		_xStream.alias("MBMessage", MBMessageImpl.class);
 		_xStream.alias("MBThreadFlag", MBThreadFlagImpl.class);
-		_xStream.alias("MBBan", MBBanImpl.class);
 		_xStream.alias("PollsQuestion", PollsQuestionImpl.class);
 		_xStream.alias("PollsChoice", PollsChoiceImpl.class);
 		_xStream.alias("PollsVote", PollsVoteImpl.class);

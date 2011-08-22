@@ -28,10 +28,12 @@ MBThreadFlag threadFlag = (MBThreadFlag)request.getAttribute(WebKeys.MESSAGE_BOA
 boolean lastNode = ((Boolean)request.getAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_LAST_NODE)).booleanValue();
 int depth = ((Integer)request.getAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_DEPTH)).intValue();
 
-long lastReadTime = 0;
+long threadFlagModifiedTime = 0;
 
 if (threadFlag != null) {
-	lastReadTime = threadFlag.getModifiedDate().getTime();
+	Date threadFlagModifiedDate = threadFlag.getModifiedDate();
+
+	threadFlagModifiedTime = threadFlagModifiedDate.getTime();
 }
 
 String className = "portlet-section-alternate results-row alt";
@@ -71,28 +73,32 @@ if (treeWalker.isOdd()) {
 			rowHREF = messageURL + rowHREF;
 		}
 
-		boolean readFlag = true;
+		boolean readThread = true;
 
-		if (themeDisplay.isSignedIn() && (lastReadTime < message.getModifiedDate().getTime())) {
-			readFlag = false;
+		if (themeDisplay.isSignedIn()) {
+			Date messageModifiedDate = message.getModifiedDate();
+
+			if (threadFlagModifiedTime < messageModifiedDate.getTime()) {
+				readThread = false;
+			}
 		}
 		%>
 
 		<a href="<%= rowHREF %>">
-			<c:if test="<%= !readFlag %>">
+			<c:if test="<%= !readThread %>">
 				<strong>
 			</c:if>
 
 			<%= HtmlUtil.escape(message.getSubject()) %>
 
-			<c:if test="<%= !readFlag %>">
+			<c:if test="<%= !readThread %>">
 				</strong>
 			</c:if>
 		</a>
 	</td>
 	<td style="white-space: nowrap;">
 		<a href="<%= rowHREF %>">
-			<c:if test="<%= !readFlag %>">
+			<c:if test="<%= !readThread %>">
 				<strong>
 			</c:if>
 
@@ -105,7 +111,7 @@ if (treeWalker.isOdd()) {
 				</c:otherwise>
 			</c:choose>
 
-			<c:if test="<%= !readFlag %>">
+			<c:if test="<%= !readThread %>">
 				</strong>
 			</c:if>
 		</a>

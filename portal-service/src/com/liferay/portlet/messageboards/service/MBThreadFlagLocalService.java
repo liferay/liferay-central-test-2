@@ -231,33 +231,33 @@ public interface MBThreadFlagLocalService extends PersistedModelLocalService {
 	*/
 	public void setBeanIdentifier(java.lang.String beanIdentifier);
 
-	public void addFlag(long userId,
+	public void addThreadFlag(long userId,
 		com.liferay.portlet.messageboards.model.MBThread thread)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public void deleteFlag(long threadFlagId)
+	public void deleteThreadFlag(long threadFlagId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public void deleteFlag(
+	public void deleteThreadFlag(
 		com.liferay.portlet.messageboards.model.MBThreadFlag threadFlag)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public void deleteFlagsByUserId(long userId)
+	public void deleteThreadFlagsByThreadId(long threadId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public void deleteFlagsByThreadId(long threadId)
+	public void deleteThreadFlagsByUserId(long userId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public com.liferay.portlet.messageboards.model.MBThreadFlag getFlag(
+	public com.liferay.portlet.messageboards.model.MBThreadFlag getThreadFlag(
 		long userId, com.liferay.portlet.messageboards.model.MBThread thread)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public boolean hasFlag(long userId,
+	public boolean hasThreadFlag(long userId,
 		com.liferay.portlet.messageboards.model.MBThread thread)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;

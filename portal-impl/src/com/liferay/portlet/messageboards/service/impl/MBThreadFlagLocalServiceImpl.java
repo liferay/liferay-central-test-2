@@ -31,7 +31,7 @@ import com.liferay.portlet.messageboards.service.base.MBThreadFlagLocalServiceBa
 public class MBThreadFlagLocalServiceImpl
 	extends MBThreadFlagLocalServiceBaseImpl {
 
-	public void addFlag(long userId, MBThread thread)
+	public void addThreadFlag(long userId, MBThread thread)
 		throws PortalException, SystemException {
 
 		User user = userPersistence.findByPrimaryKey(userId);
@@ -46,9 +46,9 @@ public class MBThreadFlagLocalServiceImpl
 			userId, threadId);
 
 		if (threadFlag == null) {
-			long messageFlagId = counterLocalService.increment();
+			long threadFlagId = counterLocalService.increment();
 
-			threadFlag = mbThreadFlagPersistence.create(messageFlagId);
+			threadFlag = mbThreadFlagPersistence.create(threadFlagId);
 
 			threadFlag.setUserId(userId);
 			threadFlag.setModifiedDate(thread.getLastPostDate());
@@ -60,8 +60,8 @@ public class MBThreadFlagLocalServiceImpl
 			catch (SystemException se) {
 				if (_log.isWarnEnabled()) {
 					_log.warn(
-						"Add failed, fetch {userId=" + userId +
-							", threadId=" + threadId + "}");
+						"Add failed, fetch {userId=" + userId + ", threadId=" +
+							threadId + "}");
 				}
 
 				threadFlag = mbThreadFlagPersistence.fetchByU_T(
@@ -82,28 +82,32 @@ public class MBThreadFlagLocalServiceImpl
 		}
 	}
 
-	public void deleteFlag(long threadFlagId)
+	public void deleteThreadFlag(long threadFlagId)
 		throws PortalException,	SystemException {
 
-		MBThreadFlag messageFlag =
-			mbThreadFlagPersistence.findByPrimaryKey(threadFlagId);
+		MBThreadFlag threadFlag = mbThreadFlagPersistence.findByPrimaryKey(
+			threadFlagId);
 
-		deleteFlag(messageFlag);
+		deleteThreadFlag(threadFlag);
 	}
 
-	public void deleteFlag(MBThreadFlag threadFlag) throws SystemException {
+	public void deleteThreadFlag(MBThreadFlag threadFlag)
+		throws SystemException {
+
 		mbThreadFlagPersistence.remove(threadFlag);
 	}
 
-	public void deleteFlagsByUserId(long userId) throws SystemException {
-		mbThreadFlagPersistence.removeByUserId(userId);
-	}
+	public void deleteThreadFlagsByThreadId(long threadId)
+		throws SystemException {
 
-	public void deleteFlagsByThreadId(long threadId) throws SystemException {
 		mbThreadFlagPersistence.removeByThreadId(threadId);
 	}
 
-	public MBThreadFlag getFlag(long userId, MBThread thread)
+	public void deleteThreadFlagsByUserId(long userId) throws SystemException {
+		mbThreadFlagPersistence.removeByUserId(userId);
+	}
+
+	public MBThreadFlag getThreadFlag(long userId, MBThread thread)
 		throws PortalException, SystemException {
 
 		User user = userPersistence.findByPrimaryKey(userId);
@@ -116,7 +120,7 @@ public class MBThreadFlagLocalServiceImpl
 			userId, thread.getThreadId());
 	}
 
-	public boolean hasFlag(long userId, MBThread thread)
+	public boolean hasThreadFlag(long userId, MBThread thread)
 		throws PortalException, SystemException {
 
 		User user = userPersistence.findByPrimaryKey(userId);
