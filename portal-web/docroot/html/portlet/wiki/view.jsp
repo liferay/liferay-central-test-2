@@ -60,19 +60,15 @@ PortletURL viewParentPageURL = null;
 if (Validator.isNotNull(parentTitle)) {
 	viewParentPageURL = PortletURLUtil.clone(viewPageURL, renderResponse);
 
-	viewParentPageURL.setParameter("title", HttpUtil.encodeURL(parentTitle));
+	viewParentPageURL.setParameter("title", parentTitle);
 
 	parentTitle = StringUtil.shorten(parentTitle, 20);
 }
 
-PortletURL redirectURL = PortletURLUtil.clone(viewPageURL, renderResponse);
-
-redirectURL.setParameter("title", HttpUtil.encodeURL(title));
-
 PortletURL addPageURL = renderResponse.createRenderURL();
 
 addPageURL.setParameter("struts_action", "/wiki/edit_page");
-addPageURL.setParameter("redirect", redirectURL.toString());
+addPageURL.setParameter("redirect", currentURL);
 addPageURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
 addPageURL.setParameter("title", StringPool.BLANK);
 addPageURL.setParameter("editTitle", "1");
@@ -84,7 +80,7 @@ if (wikiPage != null) {
 PortletURL editPageURL = renderResponse.createRenderURL();
 
 editPageURL.setParameter("struts_action", "/wiki/edit_page");
-editPageURL.setParameter("redirect", redirectURL.toString());
+editPageURL.setParameter("redirect", currentURL);
 editPageURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
 editPageURL.setParameter("title", title);
 
@@ -92,7 +88,6 @@ PortletURL printPageURL = PortletURLUtil.clone(viewPageURL, renderResponse);
 
 printPageURL.setWindowState(LiferayWindowState.POP_UP);
 
-printPageURL.setParameter("title", HttpUtil.encodeURL(title));
 printPageURL.setParameter("viewMode", Constants.PRINT);
 
 PortletURL categorizedPagesURL = renderResponse.createRenderURL();
@@ -170,7 +165,7 @@ if (wikiPage != null) {
 		PortletURL viewPageDetailsURL = PortletURLUtil.clone(viewPageURL, renderResponse);
 
 		viewPageDetailsURL.setParameter("struts_action", "/wiki/view_page_details");
-		viewPageDetailsURL.setParameter("redirect", redirectURL.toString());
+		viewPageDetailsURL.setParameter("redirect", currentURL);
 		%>
 
 		<liferay-ui:icon
@@ -256,7 +251,7 @@ if (wikiPage != null) {
 				for (int i = 0; i < childPages.size(); i++) {
 					WikiPage curPage = (WikiPage)childPages.get(i);
 
-					curPageURL.setParameter("title", HttpUtil.encodeURL(curPage.getTitle()));
+					curPageURL.setParameter("title", curPage.getTitle());
 				%>
 
 					<c:if test="<%= Validator.isNull(curPage.getRedirectTitle()) %>">
@@ -340,7 +335,7 @@ if (wikiPage != null) {
 					formAction="<%= discussionURL %>"
 					formName="fm2"
 					ratingsEnabled="<%= enableCommentRatings %>"
-					redirect="<%= redirectURL.toString() %>"
+					redirect="<%= currentURL %>"
 					subject="<%= wikiPage.getTitle() %>"
 					userId="<%= wikiPage.getUserId() %>"
 				/>
@@ -389,12 +384,12 @@ if ((wikiPage != null) && !wikiPage.getTitle().equals(WikiPageConstants.FRONT_PA
 	List<WikiPage> parentPages = wikiPage.getParentPages();
 
 	for (WikiPage curParentPage : parentPages) {
-		viewPageURL.setParameter("title", HttpUtil.encodeURL(curParentPage.getTitle()));
+		viewPageURL.setParameter("title", curParentPage.getTitle());
 
 		PortalUtil.addPortletBreadcrumbEntry(request, curParentPage.getTitle(), viewPageURL.toString());
 	}
 
-	viewPageURL.setParameter("title", HttpUtil.encodeURL(wikiPage.getTitle()));
+	viewPageURL.setParameter("title", wikiPage.getTitle());
 
 	PortalUtil.addPortletBreadcrumbEntry(request, wikiPage.getTitle(), viewPageURL.toString());
 }
