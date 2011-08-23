@@ -39,6 +39,7 @@ import com.liferay.portal.theme.ThemeDisplay;
 import freemarker.ext.jsp.TaglibFactory;
 import freemarker.ext.servlet.HttpRequestHashModel;
 import freemarker.ext.servlet.ServletContextHashModel;
+
 import freemarker.template.ObjectWrapper;
 
 import java.io.Writer;
@@ -126,20 +127,19 @@ public class ThemeUtil {
 			servletContext, portletId, path);
 
 		if (Validator.isNotNull(portletId) &&
-			!FreeMarkerEngineUtil.resourceExists(resourcePath) &&
-			portletId.contains(PortletConstants.INSTANCE_SEPARATOR)) {
-
-			String rootPortletId = PortletConstants.getRootPortletId(
-				portletId);
-
-			resourcePath = theme.getResourcePath(
-				servletContext, rootPortletId, path);
-		}
-
-		if (Validator.isNotNull(portletId) &&
 			!FreeMarkerEngineUtil.resourceExists(resourcePath)) {
 
-			resourcePath = theme.getResourcePath(servletContext, null, path);
+			if (portletId.contains(PortletConstants.INSTANCE_SEPARATOR)) {
+				String rootPortletId = PortletConstants.getRootPortletId(
+					portletId);
+
+				resourcePath = theme.getResourcePath(
+					servletContext, rootPortletId, path);
+			}
+			else {
+				resourcePath = theme.getResourcePath(
+					servletContext, null, path);
+			}
 		}
 
 		if (!FreeMarkerEngineUtil.resourceExists(resourcePath)) {
