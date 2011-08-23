@@ -4107,7 +4107,7 @@ public class PortalImpl implements Portal {
 			String requestPortletAuthenticationToken = ParamUtil.getString(
 				request, "p_p_auth");
 
-			if (requestPortletAuthenticationToken.equals(StringPool.BLANK)) {
+			if (Validator.isNull(requestPortletAuthenticationToken)) {
 				HttpServletRequest originalRequest = getOriginalServletRequest(
 					request);
 
