@@ -550,9 +550,11 @@ AUI().add(
 							time /= 1000;
 
 							BUFFER_TIME[0] = instance._formatNumber(time / 3600);
+
 							time %= 3600;
 
 							BUFFER_TIME[1] = instance._formatNumber(time / 60);
+
 							time %= 60;
 
 							BUFFER_TIME[2] = instance._formatNumber(time);
