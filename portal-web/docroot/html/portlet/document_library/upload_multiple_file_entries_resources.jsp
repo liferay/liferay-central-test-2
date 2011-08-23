@@ -91,7 +91,14 @@ long assetClassPK = 0;
 						<portlet:param name="fileEntryTypeId" value="0" />
 					</liferay-portlet:resourceURL>
 
-					<liferay-ui:icon id='<%= "fileEntryType_0" %>' cssClass="upload-multiple-document-types" image="copy" message="basic-document" method="get" url="<%= viewBasicFileEntryTypeURL %>" />
+					<liferay-ui:icon
+						cssClass="upload-multiple-document-types"
+						id='<%= "fileEntryType_0" %>'
+						image="copy"
+						message="basic-document"
+						method="get"
+						url="<%= viewBasicFileEntryTypeURL %>"
+					/>
 
 					<%
 					for (DLFileEntryType curFileEntryType : fileEntryTypes) {
@@ -104,7 +111,14 @@ long assetClassPK = 0;
 							<portlet:param name="fileEntryTypeId" value="<%= String.valueOf(curFileEntryType.getFileEntryTypeId()) %>" />
 						</liferay-portlet:resourceURL>
 
-						<liferay-ui:icon id='<%= "fileEntryType_" + String.valueOf(curFileEntryType.getFileEntryTypeId()) %>' cssClass="upload-multiple-document-types" image="copy" message="<%= curFileEntryType.getName() %>" method="get" url="<%= viewFileEntryTypeURL %>" />
+						<liferay-ui:icon
+							cssClass="upload-multiple-document-types"
+							id='<%= "fileEntryType_" + String.valueOf(curFileEntryType.getFileEntryTypeId()) %>'
+							image="copy"
+							message="<%= curFileEntryType.getName() %>"
+							method="get"
+							url="<%= viewFileEntryTypeURL %>"
+						/>
 
 					<%
 					}
