@@ -39,6 +39,7 @@ import com.liferay.portal.theme.ThemeDisplay;
 import freemarker.ext.jsp.TaglibFactory;
 import freemarker.ext.servlet.HttpRequestHashModel;
 import freemarker.ext.servlet.ServletContextHashModel;
+
 import freemarker.template.ObjectWrapper;
 
 import java.io.Writer;
