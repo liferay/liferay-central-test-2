@@ -239,10 +239,10 @@ the HTML input.
 
 Set the value attribute to specify the default value.
 
-Include a CDATA section containing javascript to alter the behaviour of the
-field, to bind advanced controls such as a colour picker or to perform
-validation. In order to identify the field from javascript there a token
-[@NAMESPACE@] which is used in conjunction with the key of the setting.
+Include a CDATA section containing JavaScript to alter the behavior of the
+field, to bind advanced controls such as a color picker, or to perform
+validation. Use the token [@NAMESPACE@] in conjunction with the key of the
+setting in order to identify the field from JavaScript.
 
 For example, you can access the html field of the setting with:
 AUI().one('#[@NAMESPACE@]hello')
