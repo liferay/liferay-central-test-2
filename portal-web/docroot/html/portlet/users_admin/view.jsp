@@ -17,10 +17,10 @@
 <%@ include file="/html/portlet/users_admin/init.jsp" %>
 
 <%
-String usersListView = ParamUtil.get(request, "usersListView", UserConstants.LIST_VIEW_TREE);
-
 String viewUsersRedirect = ParamUtil.getString(request, "viewUsersRedirect");
 String backURL = ParamUtil.getString(request, "backURL", viewUsersRedirect);
+
+String usersListView = ParamUtil.get(request, "usersListView", UserConstants.LIST_VIEW_TREE);
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
