@@ -30,17 +30,15 @@ import java.util.List;
 
 /**
  * @author Brian Wing Shun Chan
+ * @author Zsolt Berentey
  */
 public class VerifyMessageBoards extends VerifyProcess {
 
 	@Override
 	protected void doVerify() throws Exception {
 		verifyStatisticsForCategories();
-
 		verifyStatisticsForThreads();
-
 		verifyAssetsForMessages();
-
 		verifyAssetsForThreads();
 	}
 
@@ -81,17 +79,14 @@ public class VerifyMessageBoards extends VerifyProcess {
 				"Processing " + threads.size() + " threads with no asset");
 		}
 
-		long[] categoryIds = new long[0];
-		String[] tagNames = new String[0];
-
 		for (MBThread thread : threads) {
 			try {
 				AssetEntryLocalServiceUtil.updateEntry(
 					thread.getRootMessageUserId(), thread.getGroupId(),
 					MBThread.class.getName(), thread.getThreadId(), null,
-					categoryIds, tagNames, false, null, null, null, null, null,
-					String.valueOf(thread.getRootMessageId()), null, null, null,
-					null, 0, 0, null, false);
+					new long[0], new String[0], false, null, null, null, null,
+					null, String.valueOf(thread.getRootMessageId()), null, null,
+					null, null, 0, 0, null, false);
 			}
 			catch (Exception e) {
 				if (_log.isWarnEnabled()) {

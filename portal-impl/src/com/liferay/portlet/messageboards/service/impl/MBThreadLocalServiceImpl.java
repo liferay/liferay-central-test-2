@@ -60,6 +60,8 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 	public MBThread addThread(long categoryId, MBMessage message)
 		throws PortalException, SystemException {
 
+		// Thread
+
 		long threadId = counterLocalService.increment();
 
 		MBThread thread = mbThreadPersistence.create(threadId);
@@ -69,11 +71,6 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 		thread.setCategoryId(categoryId);
 		thread.setRootMessageId(message.getMessageId());
 		thread.setRootMessageUserId(message.getUserId());
-		thread.setStatus(message.getStatus());
-		thread.setStatusByUserId(message.getStatusByUserId());
-		thread.setStatusByUserName(message.getStatusByUserName());
-		thread.setStatusDate(message.getStatusDate());
-
 		thread.setMessageCount(thread.getMessageCount() + 1);
 
 		if (message.isAnonymous()) {
@@ -89,7 +86,14 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 			thread.setPriority(message.getPriority());
 		}
 
+		thread.setStatus(message.getStatus());
+		thread.setStatusByUserId(message.getStatusByUserId());
+		thread.setStatusByUserName(message.getStatusByUserName());
+		thread.setStatusDate(message.getStatusDate());
+
 		mbThreadPersistence.update(thread, false);
+
+		// Asset
 
 		assetEntryLocalService.updateEntry(
 			message.getUserId(), message.getGroupId(), MBThread.class.getName(),

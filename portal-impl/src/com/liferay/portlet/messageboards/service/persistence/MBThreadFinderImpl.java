@@ -47,14 +47,14 @@ public class MBThreadFinderImpl
 	public static String COUNT_BY_S_G_U_C_S =
 		MBThreadFinder.class.getName() + ".countByS_G_U_C_S";
 
+	public static String FIND_BY_NO_ASSETS =
+		MBThreadFinder.class.getName() + ".findByNoAssets";
+
 	public static String FIND_BY_G_C =
 		MBThreadFinder.class.getName() + ".findByG_C";
 
 	public static String FIND_BY_S_G_U_C_S =
 		MBThreadFinder.class.getName() + ".findByS_G_U_C_S";
-
-	public static String FIND_BY_NO_ASSETS =
-		MBThreadFinder.class.getName() + ".findByNoAssets";
 
 	public int countByG_C_S(long groupId, long categoryId, int status)
 		throws SystemException {
@@ -183,13 +183,6 @@ public class MBThreadFinderImpl
 			groupId, userId, categoryIds, status, start, end, true);
 	}
 
-	public List<MBThread> findByG_C_S(
-			long groupId, long categoryId, int status, int start, int end)
-		throws SystemException {
-
-		return doFindByG_C_S(groupId, categoryId, status, start, end, false);
-	}
-
 	public List<MBThread> findByNoAssets() throws SystemException {
 		Session session = null;
 
@@ -210,6 +203,13 @@ public class MBThreadFinderImpl
 		finally {
 			closeSession(session);
 		}
+	}
+
+	public List<MBThread> findByG_C_S(
+			long groupId, long categoryId, int status, int start, int end)
+		throws SystemException {
+
+		return doFindByG_C_S(groupId, categoryId, status, start, end, false);
 	}
 
 	public List<MBThread> findByS_G_U_C_S(

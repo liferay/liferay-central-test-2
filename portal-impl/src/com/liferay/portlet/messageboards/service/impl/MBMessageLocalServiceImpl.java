@@ -239,15 +239,16 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		message.setUserName(userName);
 		message.setCreateDate(serviceContext.getCreateDate(now));
 		message.setModifiedDate(serviceContext.getModifiedDate(now));
+
+		if (priority != MBThreadConstants.PRIORITY_NOT_GIVEN) {
+			message.setPriority(priority);
+		}
+
 		message.setAllowPingbacks(allowPingbacks);
 		message.setStatus(WorkflowConstants.STATUS_DRAFT);
 		message.setStatusByUserId(user.getUserId());
 		message.setStatusByUserName(userName);
 		message.setStatusDate(serviceContext.getModifiedDate(now));
-
-		if (priority != MBThreadConstants.PRIORITY_NOT_GIVEN) {
-			message.setPriority(priority);
-		}
 
 		// Thread
 
@@ -304,6 +305,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			message.setClassPK(classPK);
 		}
 
+		mbMessagePersistence.update(message, false);
+
 		// Attachments
 
 		if (!files.isEmpty()) {
@@ -340,10 +343,6 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				}
 			}
 		}
-
-		// Commit
-
-		mbMessagePersistence.update(message, false);
 
 		// Resources
 
