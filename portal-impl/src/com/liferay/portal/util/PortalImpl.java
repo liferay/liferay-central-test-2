@@ -4087,44 +4087,45 @@ public class PortalImpl implements Portal {
 			}
 		}
 
-		if (portlet.isAddDefaultResource()) {
-			if (!PropsValues.PORTLET_ADD_DEFAULT_RESOURCE_CHECK_ENABLED) {
+		if (!portlet.isAddDefaultResource()) {
+			return false;
+		}
+
+		if (!PropsValues.PORTLET_ADD_DEFAULT_RESOURCE_CHECK_ENABLED) {
+			return true;
+		}
+
+		if (_portletAddDefaultResourceCheckWhitelist.contains(portletId)) {
+			return true;
+		}
+
+		String strutsAction = ParamUtil.getString(request, "struts_action");
+
+		if (_portletAddDefaultResourceCheckWhitelistActions.contains(
+				strutsAction)) {
+
+			return true;
+		}
+
+		String requestPortletAuthenticationToken = ParamUtil.getString(
+			request, "p_p_auth");
+
+		if (Validator.isNull(requestPortletAuthenticationToken)) {
+			HttpServletRequest originalRequest = getOriginalServletRequest(
+				request);
+
+			requestPortletAuthenticationToken = ParamUtil.getString(
+				originalRequest, "p_p_auth");
+		}
+
+		if (Validator.isNotNull(requestPortletAuthenticationToken)) {
+			String actualPortletAuthenticationToken = AuthTokenUtil.getToken(
+				request, layout.getPlid(), portletId);
+
+			if (requestPortletAuthenticationToken.equals(
+					actualPortletAuthenticationToken)) {
+
 				return true;
-			}
-
-			if (_portletAddDefaultResourceCheckWhitelist.contains(portletId)) {
-				return true;
-			}
-
-			String strutsAction = ParamUtil.getString(request, "struts_action");
-
-			if (_portletAddDefaultResourceCheckWhitelistActions.contains(
-					strutsAction)) {
-
-				return true;
-			}
-
-			String requestPortletAuthenticationToken = ParamUtil.getString(
-				request, "p_p_auth");
-
-			if (Validator.isNull(requestPortletAuthenticationToken)) {
-				HttpServletRequest originalRequest = getOriginalServletRequest(
-					request);
-
-				requestPortletAuthenticationToken = ParamUtil.getString(
-					originalRequest, "p_p_auth");
-			}
-
-			if (Validator.isNotNull(requestPortletAuthenticationToken)) {
-				String actualPortletAuthenticationToken =
-					AuthTokenUtil.getToken(
-						request, layout.getPlid(), portletId);
-
-				if (requestPortletAuthenticationToken.equals(
-						actualPortletAuthenticationToken)) {
-
-					return true;
-				}
 			}
 		}
 
