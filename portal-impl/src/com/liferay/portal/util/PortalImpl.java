@@ -991,7 +991,7 @@ public class PortalImpl implements Portal {
 		pos = layoutFriendlyURL.indexOf(groupFriendlyURL);
 
 		if (pos != -1) {
-			host = PortalUtil.getPortalURL(request);
+			host = getPortalURL(request);
 		}
 
 		if (layout.isFirstParent() && Validator.isNull(url)) {
@@ -1232,7 +1232,7 @@ public class PortalImpl implements Portal {
 		sb.append(
 			getPortalURL(
 				company.getVirtualHostname(), getPortalPort(false), false));
-		sb.append(PortalUtil.getPathFriendlyURLPrivateGroup());
+		sb.append(getPathFriendlyURLPrivateGroup());
 		sb.append(GroupConstants.CONTROL_PANEL_FRIENDLY_URL);
 		sb.append(PropsValues.CONTROL_PANEL_LAYOUT_FRIENDLY_URL);
 
@@ -1542,7 +1542,7 @@ public class PortalImpl implements Portal {
 		else if (type == ExpandoColumnConstants.BOOLEAN_ARRAY) {
 		}
 		else if (type == ExpandoColumnConstants.DATE) {
-			User user = PortalUtil.getUser(portletRequest);
+			User user = getUser(portletRequest);
 
 			int valueDateMonth = ParamUtil.getInteger(
 				portletRequest, name + "Month");
@@ -1561,7 +1561,7 @@ public class PortalImpl implements Portal {
 				valueDateHour += 12;
 			}
 
-			value = PortalUtil.getDate(
+			value = getDate(
 				valueDateMonth, valueDateDay, valueDateYear, valueDateHour,
 				valueDateMinute, user.getTimeZone(), new ValueDataException());
 		}
@@ -2146,7 +2146,7 @@ public class PortalImpl implements Portal {
 		throws PortalException, SystemException {
 
 		String layoutURL = getLayoutURL(layout, themeDisplay, doAsUser);
-		String portalURL = getPortalURL(themeDisplay, layout);
+		String portalURL = getPortalURL(layout, themeDisplay);
 
 		if (StringUtil.startsWith(layoutURL, portalURL)) {
 			return layoutURL;
@@ -2207,14 +2207,14 @@ public class PortalImpl implements Portal {
 
 		if (layout.isPrivateLayout()) {
 			if (group.isUser()) {
-				sb.append(PortalUtil.getPathFriendlyURLPrivateUser());
+				sb.append(getPathFriendlyURLPrivateUser());
 			}
 			else {
-				sb.append(PortalUtil.getPathFriendlyURLPrivateGroup());
+				sb.append(getPathFriendlyURLPrivateGroup());
 			}
 		}
 		else {
-			sb.append(PortalUtil.getPathFriendlyURLPublic());
+			sb.append(getPathFriendlyURLPublic());
 		}
 
 		sb.append(group.getFriendlyURL());
@@ -2797,13 +2797,7 @@ public class PortalImpl implements Portal {
 		return sb.toString();
 	}
 
-	public String getPortalURL(ThemeDisplay themeDisplay)
-		throws PortalException, SystemException {
-
-		return getPortalURL(themeDisplay, null);
-	}
-
-	public String getPortalURL(ThemeDisplay themeDisplay, Layout layout)
+	public String getPortalURL(Layout layout, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
 		String serverName = themeDisplay.getServerName();
@@ -2812,16 +2806,24 @@ public class PortalImpl implements Portal {
 			layout = themeDisplay.getLayout();
 		}
 
-		LayoutSet layoutSet = layout.getLayoutSet();
+		if (layout != null) {
+			LayoutSet layoutSet = layout.getLayoutSet();
 
-		String virtualHostname = layoutSet.getVirtualHostname();
+			String virtualHostname = layoutSet.getVirtualHostname();
 
-		if (Validator.isNotNull(virtualHostname)) {
-			serverName = virtualHostname;
+			if (Validator.isNotNull(virtualHostname)) {
+				serverName = virtualHostname;
+			}
 		}
 
-		return getPortalURL(serverName, themeDisplay.getServerPort(),
-			themeDisplay.isSecure());
+		return getPortalURL(
+			serverName, themeDisplay.getServerPort(), themeDisplay.isSecure());
+	}
+
+	public String getPortalURL(ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
+
+		return getPortalURL(null, themeDisplay);
 	}
 
 	public String getPortalWebDir() {
@@ -3648,8 +3650,7 @@ public class PortalImpl implements Portal {
 
 		return new UploadPortletRequestImpl(
 			uploadServletRequest,
-			PortalUtil.getPortletNamespace(
-				portletRequestImpl.getPortletName()));
+			getPortletNamespace(portletRequestImpl.getPortletName()));
 	}
 
 	public Date getUptime() {
@@ -4615,7 +4616,7 @@ public class PortalImpl implements Portal {
 		sb.append("&exception=");
 		sb.append(e.getClass().getName());
 		sb.append("&previousURL=");
-		sb.append(HttpUtil.encodeURL(PortalUtil.getCurrentURL(actionRequest)));
+		sb.append(HttpUtil.encodeURL(getCurrentURL(actionRequest)));
 
 		actionResponse.sendRedirect(sb.toString());
 	}
@@ -5115,7 +5116,7 @@ public class PortalImpl implements Portal {
 
 		long doAsGroupId = 0;
 
-		Collection<Portlet> portlets = PortalUtil.getControlPanelPortlets(
+		Collection<Portlet> portlets = getControlPanelPortlets(
 			companyId, PortletCategoryKeys.CONTENT);
 
 		List<Group> groups = GroupServiceUtil.getManageableSites(portlets, 1);
@@ -5475,18 +5476,18 @@ public class PortalImpl implements Portal {
 		DB db = DBFactoryUtil.getDB();
 
 		Object[] customSqlValues = new Object[] {
-			PortalUtil.getClassNameId(Group.class),
-			PortalUtil.getClassNameId(Layout.class),
-			PortalUtil.getClassNameId(Organization.class),
-			PortalUtil.getClassNameId(Role.class),
-			PortalUtil.getClassNameId(User.class),
-			PortalUtil.getClassNameId(UserGroup.class),
-			PortalUtil.getClassNameId(BlogsEntry.class),
-			PortalUtil.getClassNameId(BookmarksEntry.class),
-			PortalUtil.getClassNameId(CalEvent.class),
-			PortalUtil.getClassNameId(DLFileEntry.class),
-			PortalUtil.getClassNameId(MBMessage.class),
-			PortalUtil.getClassNameId(WikiPage.class),
+			getClassNameId(Group.class),
+			getClassNameId(Layout.class),
+			getClassNameId(Organization.class),
+			getClassNameId(Role.class),
+			getClassNameId(User.class),
+			getClassNameId(UserGroup.class),
+			getClassNameId(BlogsEntry.class),
+			getClassNameId(BookmarksEntry.class),
+			getClassNameId(CalEvent.class),
+			getClassNameId(DLFileEntry.class),
+			getClassNameId(MBMessage.class),
+			getClassNameId(WikiPage.class),
 			ResourceConstants.SCOPE_COMPANY,
 			ResourceConstants.SCOPE_GROUP,
 			ResourceConstants.SCOPE_GROUP_TEMPLATE,
