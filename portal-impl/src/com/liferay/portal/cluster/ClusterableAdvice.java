@@ -36,6 +36,7 @@ import org.aopalliance.intercept.MethodInvocation;
 public class ClusterableAdvice
 	extends AnnotationChainableMethodAdvice<Clusterable> {
 
+	@Override
 	public void afterPropertiesSet() {
 		if (PropsValues.CLUSTER_LINK_ENABLED) {
 			super.afterPropertiesSet();

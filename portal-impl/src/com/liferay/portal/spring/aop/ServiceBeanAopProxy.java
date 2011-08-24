@@ -68,27 +68,27 @@ public class ServiceBeanAopProxy implements AopProxy, InvocationHandler {
 			return;
 		}
 
-		ArrayList<MethodInterceptor> copyMethodInterceptors =
+		ArrayList<MethodInterceptor> methodInterceptors =
 			new ArrayList<MethodInterceptor>(
 				methodInterceptorsBag._mergedMethodInterceptors);
 
-		copyMethodInterceptors.remove(methodInterceptor);
+		methodInterceptors.remove(methodInterceptor);
 
 		MethodInterceptorsBag newMethodInterceptorsBag = null;
 
-		if (copyMethodInterceptors.equals(
-			methodInterceptorsBag._classLevelMethodInterceptors)) {
+		if (methodInterceptors.equals(
+				methodInterceptorsBag._classLevelMethodInterceptors)) {
 
 			newMethodInterceptorsBag = new MethodInterceptorsBag(
 				methodInterceptorsBag._classLevelMethodInterceptors,
 				methodInterceptorsBag._classLevelMethodInterceptors);
 		}
 		else {
-			copyMethodInterceptors.trimToSize();
+			methodInterceptors.trimToSize();
 
 			newMethodInterceptorsBag = new MethodInterceptorsBag(
 				methodInterceptorsBag._classLevelMethodInterceptors,
-				copyMethodInterceptors);
+				methodInterceptors);
 		}
 
 		_methodInterceptorBags.put(
@@ -108,7 +108,6 @@ public class ServiceBeanAopProxy implements AopProxy, InvocationHandler {
 			new ArrayList<MethodInterceptor>();
 
 		while (true) {
-			// Stop tracing, this is the end
 			if (!(methodInterceptor instanceof ChainableMethodAdvice)) {
 				classLevelMethodInterceptors.add(methodInterceptor);
 				fullMethodInterceptors.add(methodInterceptor);
@@ -119,26 +118,23 @@ public class ServiceBeanAopProxy implements AopProxy, InvocationHandler {
 			ChainableMethodAdvice chainableMethodAdvice =
 				(ChainableMethodAdvice)methodInterceptor;
 
-			// Check AnnotationChainableMethodAdvice's interested type
 			if (methodInterceptor instanceof AnnotationChainableMethodAdvice) {
-				AnnotationChainableMethodAdvice annotationChainableMethodAdvice
-					= (AnnotationChainableMethodAdvice)methodInterceptor;
+				AnnotationChainableMethodAdvice<?>
+					annotationChainableMethodAdvice =
+						(AnnotationChainableMethodAdvice<?>)methodInterceptor;
 
-				Class<? extends Annotation> annotationType =
-					annotationChainableMethodAdvice.getAnnotationType();
+				Class<? extends Annotation> annotationClass =
+					annotationChainableMethodAdvice.getAnnotationClass();
 
-				Target target = annotationType.getAnnotation(Target.class);
+				Target target = annotationClass.getAnnotation(Target.class);
 
 				if (target == null) {
-					// Wildcard target
 					classLevelMethodInterceptors.add(methodInterceptor);
 				}
 				else {
-					// Check ElementType.TYPE
 					for (ElementType elementType : target.value()) {
 						if (elementType == ElementType.TYPE) {
-							classLevelMethodInterceptors.add(
-								methodInterceptor);
+							classLevelMethodInterceptors.add(methodInterceptor);
 
 							break;
 						}
@@ -159,7 +155,7 @@ public class ServiceBeanAopProxy implements AopProxy, InvocationHandler {
 		_classLevelMethodInterceptors = classLevelMethodInterceptors;
 		_fullMethodInterceptors = fullMethodInterceptors;
 
-		AnnotationChainableMethodAdvice.registerAnnotationType(Skip.class);
+		AnnotationChainableMethodAdvice.registerAnnotationClass(Skip.class);
 	}
 
 	public Object getProxy() {
@@ -235,8 +231,8 @@ public class ServiceBeanAopProxy implements AopProxy, InvocationHandler {
 			new ArrayList<MethodInterceptor>(_fullMethodInterceptors);
 
 		if (!list.isEmpty()) {
-			for (Object obj : list) {
-				methodInterceptors.add((MethodInterceptor)obj);
+			for (Object object : list) {
+				methodInterceptors.add((MethodInterceptor)object);
 			}
 		}
 
@@ -274,7 +270,6 @@ public class ServiceBeanAopProxy implements AopProxy, InvocationHandler {
 
 	private AdvisedSupport _advisedSupport;
 	private AdvisorChainFactory _advisorChainFactory;
-	// These finals are critical for thread-safty, please keep them.
 	private final List<MethodInterceptor> _classLevelMethodInterceptors;
 	private final List<MethodInterceptor> _fullMethodInterceptors;
 

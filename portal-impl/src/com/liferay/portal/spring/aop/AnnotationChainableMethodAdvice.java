@@ -33,31 +33,31 @@ import org.aopalliance.intercept.MethodInvocation;
 public abstract class AnnotationChainableMethodAdvice<T extends Annotation>
 	extends ChainableMethodAdvice {
 
-	public static void registerAnnotationType(
-		Class<? extends Annotation> annotationType) {
+	public static void registerAnnotationClass(
+		Class<? extends Annotation> annotationClass) {
 
-		_annotationAdviceMap.put(annotationType, null);
+		_annotationChainableMethodAdvices.put(annotationClass, null);
 	}
 
 	public AnnotationChainableMethodAdvice() {
 		_nullAnnotation = getNullAnnotation();
 
-		_annotationType = _nullAnnotation.annotationType();
+		_annotationClass = _nullAnnotation.annotationType();
 	}
 
 	public void afterPropertiesSet() {
-		_annotationAdviceMap.put(_annotationType, this);
+		_annotationChainableMethodAdvices.put(_annotationClass, this);
 	}
 
-	public Class<? extends Annotation> getAnnotationType() {
-		return _annotationType;
+	public Class<? extends Annotation> getAnnotationClass() {
+		return _annotationClass;
 	}
 
 	public abstract T getNullAnnotation();
 
 	protected T findAnnotation(MethodInvocation methodInvocation) {
 		Annotation annotation = ServiceMethodAnnotationCache.get(
-			methodInvocation, _annotationType, _nullAnnotation);
+			methodInvocation, _annotationClass, _nullAnnotation);
 
 		if (annotation != null) {
 			return (T)annotation;
@@ -89,47 +89,52 @@ public abstract class AnnotationChainableMethodAdvice<T extends Annotation>
 		}
 
 		if ((annotations != null) && (annotations.length > 0)) {
-			List<Annotation> filteredAnnotations = new ArrayList<Annotation>(
-							annotations.length);
+			List<Annotation> annotationsList = new ArrayList<Annotation>(
+				annotations.length);
 
 			for (Annotation curAnnotation : annotations) {
-				if (_annotationAdviceMap.containsKey(
+				if (_annotationChainableMethodAdvices.containsKey(
 						curAnnotation.annotationType())) {
 
-					filteredAnnotations.add(curAnnotation);
+					annotationsList.add(curAnnotation);
 				}
 			}
 
-			annotations = filteredAnnotations.toArray(
-				new Annotation[filteredAnnotations.size()]);
+			annotations = annotationsList.toArray(
+				new Annotation[annotationsList.size()]);
 		}
 
 		ServiceMethodAnnotationCache.put(methodInvocation, annotations);
 
-		Set<Class<? extends Annotation>> annotationTypes =
+		Set<Class<? extends Annotation>> annotationClasses =
 			new HashSet<Class<? extends Annotation>>();
 
 		annotation = _nullAnnotation;
 
 		for (Annotation curAnnotation : annotations) {
-			Class<? extends Annotation> annotationType =
+			Class<? extends Annotation> annotationClass =
 				curAnnotation.annotationType();
 
-			if (annotationType == _annotationType) {
+			if (annotationClass == _annotationClass) {
 				annotation = curAnnotation;
 			}
 
-			annotationTypes.add(annotationType);
+			annotationClasses.add(annotationClass);
 		}
 
 		for (Map.Entry<Class<? extends Annotation>,
-			AnnotationChainableMethodAdvice<?>> entry :
-				_annotationAdviceMap.entrySet()) {
+				AnnotationChainableMethodAdvice<?>> entry :
+					_annotationChainableMethodAdvices.entrySet()) {
 
-			if ((!annotationTypes.contains(entry.getKey())) &&
-				(entry.getValue() != null)) {
+			Class<? extends Annotation> annotationClass = entry.getKey();
+			AnnotationChainableMethodAdvice<?> annotationChainableMethodAdvice =
+				entry.getValue();
+
+			if ((!annotationClasses.contains(annotationClass)) &&
+				(annotationChainableMethodAdvice != null)) {
+
 				ServiceBeanAopProxy.removeMethodInterceptor(
-					methodInvocation, entry.getValue());
+					methodInvocation, annotationChainableMethodAdvice);
 			}
 		}
 
@@ -137,12 +142,11 @@ public abstract class AnnotationChainableMethodAdvice<T extends Annotation>
 	}
 
 	private static Map<Class<? extends Annotation>,
-		AnnotationChainableMethodAdvice<?>>
-			_annotationAdviceMap =
-				new HashMap<Class<? extends Annotation>,
-					AnnotationChainableMethodAdvice<?>>();
+		AnnotationChainableMethodAdvice<?>> _annotationChainableMethodAdvices =
+			new HashMap<Class<? extends Annotation>,
+				AnnotationChainableMethodAdvice<?>>();
 
-	private Class<? extends Annotation> _annotationType;
+	private Class<? extends Annotation> _annotationClass;
 	private T _nullAnnotation;
 
 }

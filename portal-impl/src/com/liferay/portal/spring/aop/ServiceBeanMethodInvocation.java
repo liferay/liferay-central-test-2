@@ -102,7 +102,6 @@ public class ServiceBeanMethodInvocation
 
 	public Object proceed() throws Throwable {
 		if (_index < _methodInterceptors.size()) {
-
 			MethodInterceptor methodInterceptor = _methodInterceptors.get(
 				_index++);
 
