@@ -834,10 +834,12 @@ release was successful.</echo>
 			 dest="${app.server.parent.dir}"
 			 src="${app.server.parent.dir}/${app.server.glassfish.zip.name}"
 		>
-			<patternset includes="${app.server.glassfish.zip.glob}/**" />
+			<patternset
+				includes="glassfish3/glassfish/**"
+			/>
 			<mapper
 				type="glob"
-				from="${app.server.glassfish.zip.glob}/*"
+				from="glassfish3/glassfish/*"
 				to="${app.server.glassfish.dir}/*"
 			/>
 		</unzip>
