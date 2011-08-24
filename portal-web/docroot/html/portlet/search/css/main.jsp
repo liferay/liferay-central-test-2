@@ -113,7 +113,7 @@
 					margin: 0;
 				}
 
-				&.search-asset_tags .lfr-panel-content ul {
+				&.search-asset-tags .lfr-panel-content ul {
 					padding: 0;
 				}
 

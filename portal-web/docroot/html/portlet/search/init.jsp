@@ -16,7 +16,6 @@
 
 <%@ include file="/html/portlet/init.jsp" %>
 
-<%@ page import="com.liferay.portal.kernel.dao.orm.QueryUtil" %>
 <%@ page import="com.liferay.portal.kernel.repository.model.FileEntry" %>
 <%@ page import="com.liferay.portal.kernel.search.Document" %>
 <%@ page import="com.liferay.portal.kernel.search.FacetedSearcher" %>
@@ -25,8 +24,8 @@
 <%@ page import="com.liferay.portal.kernel.search.IndexerRegistryUtil" %>
 <%@ page import="com.liferay.portal.kernel.search.OpenSearch" %>
 <%@ page import="com.liferay.portal.kernel.search.OpenSearchUtil" %>
-<%@ page import="com.liferay.portal.kernel.search.SearchContextFactory" %>
 <%@ page import="com.liferay.portal.kernel.search.SearchContext" %>
+<%@ page import="com.liferay.portal.kernel.search.SearchContextFactory" %>
 <%@ page import="com.liferay.portal.kernel.search.Summary" %>
 <%@ page import="com.liferay.portal.kernel.search.facet.AssetEntriesFacet" %>
 <%@ page import="com.liferay.portal.kernel.search.facet.Facet" %>
@@ -37,11 +36,11 @@
 <%@ page import="com.liferay.portal.kernel.search.facet.config.FacetConfigurationUtil" %>
 <%@ page import="com.liferay.portal.kernel.search.facet.util.FacetFactoryUtil" %>
 <%@ page import="com.liferay.portal.kernel.search.facet.util.RangeParserUtil" %>
+<%@ page import="com.liferay.portal.kernel.util.DateFormatFactoryUtil" %>
 <%@ page import="com.liferay.portal.kernel.xml.Element" %>
 <%@ page import="com.liferay.portal.kernel.xml.SAXReaderUtil" %>
 <%@ page import="com.liferay.portal.security.permission.comparator.ModelResourceComparator" %>
 <%@ page import="com.liferay.portal.service.PortletLocalServiceUtil" %>
-<%@ page import="com.liferay.portal.util.PortletKeys" %>
 <%@ page import="com.liferay.portlet.asset.AssetRendererFactoryRegistryUtil" %>
 <%@ page import="com.liferay.portlet.asset.NoSuchCategoryException" %>
 <%@ page import="com.liferay.portlet.asset.model.AssetCategory" %>
@@ -70,13 +69,20 @@ if (Validator.isNotNull(portletResource)) {
 	portletPreferences = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
 }
 
-boolean dlLinkToViewURL = false;
-boolean includeSystemPortlets = false;
+boolean displayAssetTypeFacet = GetterUtil.getBoolean(portletPreferences.getValue("displayAssetTypeFacet", null), true);
+boolean displayAssetTagsFacet = GetterUtil.getBoolean(portletPreferences.getValue("displayAssetTagsFacet", null), true);
+boolean displayAssetCategoriesFacet = GetterUtil.getBoolean(portletPreferences.getValue("displayAssetCategoriesFacet", null), true);
+boolean displayModifiedRangeFacet = GetterUtil.getBoolean(portletPreferences.getValue("displayModifiedRangeFacet", null), true);
 
-boolean displayAssetTypeFacet = GetterUtil.getBoolean(portletPreferences.getValue("displayAssetTypeFacet", String.valueOf(true)));
-boolean displayAssetTagsFacet = GetterUtil.getBoolean(portletPreferences.getValue("displayAssetTagsFacet", String.valueOf(true)));
-boolean displayAssetCategoriesFacet = GetterUtil.getBoolean(portletPreferences.getValue("displayAssetCategoriesFacet", String.valueOf(true)));
-boolean displayModifiedRangeFacet = GetterUtil.getBoolean(portletPreferences.getValue("displayModifiedRangeFacet", String.valueOf(true)));
+boolean displayResultsInDocumentForm = GetterUtil.getBoolean(portletPreferences.getValue("displayResultsInDocumentForm", null));
+
+if (!permissionChecker.isCompanyAdmin()) {
+	displayResultsInDocumentForm = false;
+}
+
+boolean viewInContext = GetterUtil.getBoolean(portletPreferences.getValue("viewInContext", null), true);
+boolean displayMainQuery = GetterUtil.getBoolean(portletPreferences.getValue("displayMainQuery", null));
+boolean displayOpenSearchResults = GetterUtil.getBoolean(portletPreferences.getValue("displayOpenSearchResults", null), true);
 
 String searchConfiguration = portletPreferences.getValue("searchConfiguration", StringPool.BLANK);
 
@@ -86,16 +92,19 @@ if (Validator.isNull(searchConfiguration)) {
 	sb.append("{facets: [");
 
 	if (displayAssetTypeFacet) {
-		sb.append("{className: 'com.liferay.portal.kernel.search.facet.AssetEntriesFacet', data: {frequencyThreshold: 1, values: ['com.liferay.portlet.bookmarks.model.BookmarksEntry','com.liferay.portlet.blogs.model.BlogsEntry','com.liferay.portlet.calendar.model.CalEvent','com.liferay.portlet.documentlibrary.model.DLFileEntry','com.liferay.portlet.journal.model.JournalArticle','com.liferay.portlet.messageboards.model.MBMessage','com.liferay.portlet.wiki.model.WikiPage','com.liferay.portal.model.User']}, displayStyle: 'asset_entries', fieldName: 'entryClassName', label: 'asset-type', order: 'OrderHitsDesc', static: false, weight: 1.5},");
+		sb.append("{className: 'com.liferay.portal.kernel.search.facet.AssetEntriesFacet', data: {frequencyThreshold: 1, values: ['com.liferay.portlet.bookmarks.model.BookmarksEntry','com.liferay.portlet.blogs.model.BlogsEntry','com.liferay.portlet.calendar.model.CalEvent','com.liferay.portlet.documentlibrary.model.DLFileEntry','com.liferay.portlet.journal.model.JournalArticle','com.liferay.portlet.messageboards.model.MBMessage','com.liferay.portlet.wiki.model.WikiPage','com.liferay.portal.model.User']}, displayStyle: 'asset-entries', fieldName: 'entryClassName', label: 'asset-type', order: 'OrderHitsDesc', static: false, weight: 1.5},");
 	}
+
 	if (displayAssetTagsFacet) {
-		sb.append("{className: 'com.liferay.portal.kernel.search.facet.MultiValueFacet', data: {displayStyle: 'list', frequencyThreshold: 1, maxTerms: 10, showAssetCount: true}, displayStyle: 'asset_tags', fieldName: 'assetTagNames', label: 'tag', order: 'OrderHitsDesc', static: false, weight: 1.4},");
+		sb.append("{className: 'com.liferay.portal.kernel.search.facet.MultiValueFacet', data: {displayStyle: 'list', frequencyThreshold: 1, maxTerms: 10, showAssetCount: true}, displayStyle: 'asset-tags', fieldName: 'assetTagNames', label: 'tag', order: 'OrderHitsDesc', static: false, weight: 1.4},");
 	}
+
 	if (displayAssetCategoriesFacet) {
-		sb.append("{className: 'com.liferay.portal.kernel.search.facet.MultiValueFacet', data: {displayStyle: 'list', frequencyThreshold: 1, maxTerms: 10, showAssetCount: true}, displayStyle: 'asset_tags', fieldName: 'assetCategoryNames', label: 'category', order: 'OrderHitsDesc', static: false, weight: 1.3},");
+		sb.append("{className: 'com.liferay.portal.kernel.search.facet.MultiValueFacet', data: {displayStyle: 'list', frequencyThreshold: 1, maxTerms: 10, showAssetCount: true}, displayStyle: 'asset-tags', fieldName: 'assetCategoryNames', label: 'category', order: 'OrderHitsDesc', static: false, weight: 1.3},");
 	}
+
 	if (displayModifiedRangeFacet) {
-		sb.append("{className: 'com.liferay.portal.kernel.search.facet.RangeFacet',data: {frequencyThreshold: 1, ranges: [{label:'modified', range:'[19700101000000 TO *]'}]}, displayStyle: 'modified', fieldName: 'modified', label: 'modified', order: 'OrderHitsDesc', static: false, weight: 1.1}");
+		sb.append("{className: 'com.liferay.portal.kernel.search.facet.RangeFacet', data: {frequencyThreshold: 1, ranges: [{label:'modified', range:'[19700101000000 TO *]'}]}, displayStyle: 'modified', fieldName: 'modified', label: 'modified', order: 'OrderHitsDesc', static: false, weight: 1.1}");
 	}
 
 	sb.append("]}");
@@ -103,33 +112,26 @@ if (Validator.isNull(searchConfiguration)) {
 	searchConfiguration = sb.toString();
 }
 
-boolean displayResultsInDocumentForm = GetterUtil.getBoolean(portletPreferences.getValue("displayResultsInDocumentForm", String.valueOf(false)));
-
-if (!permissionChecker.isCompanyAdmin()) {
-	displayResultsInDocumentForm = false;
-}
-
-boolean viewInContext = GetterUtil.getBoolean(portletPreferences.getValue("viewInContext", String.valueOf(true)));
-boolean displayMainQuery = GetterUtil.getBoolean(portletPreferences.getValue("displayMainQuery", String.valueOf(false)));
-boolean displayOpenSearchResults = GetterUtil.getBoolean(portletPreferences.getValue("displayOpenSearchResults", String.valueOf(true)));
+boolean dlLinkToViewURL = false;
+boolean includeSystemPortlets = false;
 %>
 
 <%@ include file="/html/portlet/search/init-ext.jsp" %>
 
 <%!
-private String _buildCategoryPath(AssetCategory assetCategory, Locale locale) throws PortalException, SystemException {
-	List<AssetCategory> ancestorCategories = assetCategory.getAncestors();
+private String _buildAssetCategoryPath(AssetCategory assetCategory, Locale locale) throws Exception {
+	List<AssetCategory> assetCategories = assetCategory.getAncestors();
 
-	if (ancestorCategories.isEmpty()) {
+	if (assetCategories.isEmpty()) {
 		return assetCategory.getName();
 	}
 
-	Collections.reverse(ancestorCategories);
+	Collections.reverse(assetCategories);
 
-	StringBundler sb = new StringBundler(ancestorCategories.size() * 2 + 1);
+	StringBundler sb = new StringBundler(assetCategories.size() * 2 + 1);
 
-	for (AssetCategory ancestorCategory : ancestorCategories) {
-		sb.append(ancestorCategory.getTitle(locale));
+	for (AssetCategory curAssetCategory : assetCategories) {
+		sb.append(curAssetCategory.getTitle(locale));
 		sb.append(" &raquo; ");
 	}
 
@@ -146,24 +148,25 @@ private String _checkViewURL(ThemeDisplay themeDisplay, String viewURL, String c
 	return viewURL;
 }
 
-private PortletURL _getURL(HttpServletRequest request, ThemeDisplay themeDisplay, String portletId, Document result) throws Exception {
-	long resultGroupId = GetterUtil.getLong(result.get(Field.GROUP_ID));
+private PortletURL _getViewFullContentURL(HttpServletRequest request, ThemeDisplay themeDisplay, String portletId, Document document) throws Exception {
+	long groupId = GetterUtil.getLong(document.get(Field.GROUP_ID));
 
-	if (resultGroupId == 0) {
-		resultGroupId = themeDisplay.getLayout().getGroupId();
+	if (groupId == 0) {
+		Layout layout = themeDisplay.getLayout();
+
+		groupId = layout.getGroupId();
 	}
 
-	long resultScopeGroupId = GetterUtil.getLong(
-		result.get(Field.SCOPE_GROUP_ID));
+	long scopeGroupId = GetterUtil.getLong(document.get(Field.SCOPE_GROUP_ID));
 
-	if (resultScopeGroupId == 0) {
-		resultScopeGroupId = themeDisplay.getScopeGroupId();
+	if (scopeGroupId == 0) {
+		scopeGroupId = themeDisplay.getScopeGroupId();
 	}
 
-	long plid = LayoutServiceUtil.getDefaultPlid(resultGroupId, resultScopeGroupId, false, portletId);
+	long plid = LayoutServiceUtil.getDefaultPlid(groupId, scopeGroupId, false, portletId);
 
 	if (plid == 0) {
-		plid = LayoutServiceUtil.getDefaultPlid(resultGroupId, resultScopeGroupId, true, portletId);
+		plid = LayoutServiceUtil.getDefaultPlid(groupId, scopeGroupId, true, portletId);
 	}
 
 	if (plid == 0) {

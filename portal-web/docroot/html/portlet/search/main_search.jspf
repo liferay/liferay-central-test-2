@@ -43,20 +43,15 @@ for (FacetConfiguration facetConfiguration : facetConfigurations) {
 	searchContext.addFacet(facet);
 }
 
-Hits hits = FacetedSearcher.getInstance().search(searchContext);
+Indexer indexer = FacetedSearcher.getInstance();
 
-queryTerms = hits.getQueryTerms();
+Hits hits = indexer.search(searchContext);
 
-request.setAttribute("view.jsp-portletURL", portletURL);
-request.setAttribute("view.jsp-queryTerms", queryTerms);
+String[] queryTerms = hits.getQueryTerms();
+
+request.setAttribute("search.jsp-queryTerms", queryTerms);
 
 boolean showMenu = displayAssetTypeFacet || displayAssetTagsFacet || displayAssetCategoriesFacet || displayModifiedRangeFacet;
-
-String displayResultsPath = "/html/portlet/search/main_search_result_form.jsp";
-
-if (displayResultsInDocumentForm) {
-	displayResultsPath = "/html/portlet/search/main_search_document_form.jsp";
-}
 %>
 
 <aui:layout cssClass='<%= "search-layout" + (showMenu ? " menu-column" : StringPool.BLANK) %>'>
@@ -75,7 +70,7 @@ if (displayResultsInDocumentForm) {
 
 				FacetConfiguration facetConfiguration = facet.getFacetConfiguration();
 
-				request.setAttribute("view.jsp-facet", facet);
+				request.setAttribute("search.jsp-facet", facet);
 			%>
 
 				<liferay-util:include page='<%= "/html/portlet/search/facets/" + facetConfiguration.getDisplayStyle() + ".jsp" %>' />
@@ -104,31 +99,27 @@ if (displayResultsInDocumentForm) {
 					keyProperty="uID"
 					stringKey="<%= true %>"
 				>
-
-					<liferay-ui:search-container-column-jsp path="<%= displayResultsPath %>" />
-
+					<liferay-ui:search-container-column-jsp path='<%= displayResultsInDocumentForm ? "/html/portlet/search/main_search_document_form.jsp" : "/html/portlet/search/main_search_result_form.jsp" %>' />
 				</liferay-ui:search-container-row>
 
 				<liferay-ui:search-iterator type="more" />
 
-				<c:if test="<%= (hits != null) %>">
-					<em class="taglib-page-iterator">
-						<span class="search-results">Completed in <%= hits.getSearchTime() %> seconds.</span>
-					</em>
+				<em class="taglib-page-iterator">
+					<span class="search-results"><liferay-ui:message arguments="<%= hits.getSearchTime() %>" key="completed-in-x-seconds" /></span>
+				</em>
 
-					<c:if test="<%= displayMainQuery && (hits.getQuery() != null) %>">
-						<table class="full-query">
-							<tr>
-								<td valign="top">
-									<div class="container">
-										<code>
-											<%= HtmlUtil.escape(hits.getQuery().toString()) %>
-										</code>
-									</div>
-								</td>
-							</tr>
-						</table>
-					</c:if>
+				<c:if test="<%= displayMainQuery && (hits.getQuery() != null) %>">
+					<table class="full-query">
+						<tr>
+							<td valign="top">
+								<div class="container">
+									<code>
+										<%= HtmlUtil.escape(hits.getQuery().toString()) %>
+									</code>
+								</div>
+							</td>
+						</tr>
+					</table>
 				</c:if>
 			</liferay-ui:search-container>
 		</c:if>

@@ -123,6 +123,7 @@
 <%@ page import="com.liferay.portal.kernel.util.ResourceBundleUtil" %>
 <%@ page import="com.liferay.portal.kernel.util.ServerDetector" %>
 <%@ page import="com.liferay.portal.kernel.util.SetUtil" %>
+<%@ page import="com.liferay.portal.kernel.util.SortedArrayList" %>
 <%@ page import="com.liferay.portal.kernel.util.StringBundler" %>
 <%@ page import="com.liferay.portal.kernel.util.StringComparator" %>
 <%@ page import="com.liferay.portal.kernel.util.StringPool" %>

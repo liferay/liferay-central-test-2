@@ -21,12 +21,13 @@ ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_
 
 Document document = (Document)row.getObject();
 
-PortletURL portletURL = (PortletURL)request.getAttribute("view.jsp-portletURL");
-String[] queryTerms = (String[])request.getAttribute("view.jsp-queryTerms");
-
 String entryClassName = document.get(Field.ENTRY_CLASS_NAME);
 
 AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(entryClassName);
+
+String[] queryTerms = (String[])request.getAttribute("search.jsp-queryTerms");
+
+PortletURL portletURL = (PortletURL)request.getAttribute("search.jsp-portletURL");
 %>
 
 <span class="asset-entry">
@@ -57,30 +58,28 @@ AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.get
 	</span>
 
 	<%
-	String[] tags = document.getValues(Field.ASSET_TAG_NAMES);
+	String[] assetTagNames = document.getValues(Field.ASSET_TAG_NAMES);
 	%>
 
-	<c:if test="<%= Validator.isNotNull(tags[0]) %>">
+	<c:if test="<%= Validator.isNotNull(assetTagNames[0]) %>">
 		<div class="asset-entry-tags">
 
 			<%
-			for (int k = 0; k < tags.length; k++) {
-				String tag = tags[k];
-
-				String newKeywords = tag.trim();
+			for (int i = 0; i < assetTagNames.length; i++) {
+				String assetTagName = assetTagNames[i].trim();
 
 				PortletURL tagURL = PortletURLUtil.clone(portletURL, renderResponse);
 
-				tagURL.setParameter(Field.ASSET_TAG_NAMES, newKeywords);
+				tagURL.setParameter(Field.ASSET_TAG_NAMES, assetTagName);
 			%>
 
-				<c:if test="<%= k == 0 %>">
+				<c:if test="<%= i == 0 %>">
 					<div class="taglib-asset-tags-summary">
 				</c:if>
 
-				<a class="tag" href="<%= tagURL.toString() %>"><%= tag %></a>
+				<a class="tag" href="<%= tagURL.toString() %>"><%= assetTagName %></a>
 
-				<c:if test="<%= (k + 1) == tags.length %>">
+				<c:if test="<%= (i + 1) == assetTagNames.length %>">
 					</div>
 				</c:if>
 
@@ -92,21 +91,20 @@ AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.get
 	</c:if>
 
 	<%
-	String[] categoryIds = document.getValues(Field.ASSET_CATEGORY_IDS);
+	String[] assetCategoryIds = document.getValues(Field.ASSET_CATEGORY_IDS);
 	%>
 
-	<c:if test="<%= Validator.isNotNull(categoryIds[0]) %>">
+	<c:if test="<%= Validator.isNotNull(assetCategoryIds[0]) %>">
 		<div class="asset-entry-categories">
 
 			<%
-			for (int k = 0; k < categoryIds.length; k++) {
-
-				String categoryId = categoryIds[k];
+			for (int i = 0; i < assetCategoryIds.length; i++) {
+				long assetCategoryId = GetterUtil.getLong(assetCategoryIds[i]);
 
 				AssetCategory assetCategory = null;
 
 				try {
-					assetCategory = AssetCategoryLocalServiceUtil.getCategory(GetterUtil.getLong(categoryId));
+					assetCategory = AssetCategoryLocalServiceUtil.getCategory(assetCategoryId);
 				}
 				catch (NoSuchCategoryException nsce) {
 				}
@@ -122,7 +120,7 @@ AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.get
 				categoryURL.setParameter(Field.ASSET_CATEGORY_NAMES, assetCategory.getName());
 			%>
 
-				<c:if test="<%= k == 0 %>">
+				<c:if test="<%= i == 0 %>">
 					<div class="taglib-asset-categories-summary">
 						<span class="asset-vocabulary">
 							<%= HtmlUtil.escape(assetVocabulary.getTitle(locale)) %>:
@@ -130,10 +128,10 @@ AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.get
 				</c:if>
 
 				<a class="asset-category" href="<%= categoryURL.toString() %>">
-					<%= _buildCategoryPath(assetCategory, locale) %>
+					<%= _buildAssetCategoryPath(assetCategory, locale) %>
 				</a>
 
-				<c:if test="<%= (k + 1) == categoryIds.length %>">
+				<c:if test="<%= (i + 1) == assetCategoryIds.length %>">
 					</div>
 				</c:if>
 
@@ -147,30 +145,40 @@ AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.get
 	<table class="lfr-table asset-entry-fields aui-helper-hidden">
 		<thead>
 			<tr>
-				<th class="key"><liferay-ui:message key="key" /></th>
-				<th class="value"><liferay-ui:message key="value" /></th>
+				<th class="key">
+					<liferay-ui:message key="key" />
+				</th>
+				<th class="value">
+					<liferay-ui:message key="value" />
+				</th>
 			</tr>
 		</thead>
-
 		<tbody>
 
 			<%
-			List<Map.Entry<String,Field>> fields = new LinkedList(document.getFields().entrySet());
+			List<Map.Entry<String, Field>> fields = new LinkedList(document.getFields().entrySet());
 
-			Collections.sort(fields, new Comparator<Map.Entry<String,Field>>() {
-				public int compare(Map.Entry<String,Field> o1, Map.Entry<String,Field> o2) {
-					return o1.getKey().compareTo(o2.getKey());
+			Collections.sort(
+				fields,
+				new Comparator<Map.Entry<String, Field>>() {
+
+					public int compare(Map.Entry<String, Field> entry1, Map.Entry<String, Field> entry2) {
+						return entry1.getKey().compareTo(entry2.getKey());
+					}
+
 				}
-			});
+			);
 
-			for (Map.Entry<String,Field> entry : fields) {
+			for (Map.Entry<String, Field> entry : fields) {
 				Field field = entry.getValue();
 
-				if (field.getName().equals(Field.UID)) {
+				String fieldName = field.getName();
+
+				if (fieldName.equals(Field.UID)) {
 					continue;
 				}
 
-				boolean isArray = field.getValues().length > 1;
+				String[] values = field.getValues();
 			%>
 
 				<tr>
@@ -180,20 +188,15 @@ AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.get
 						<br />
 
 						<em>
-							<liferay-ui:message key="array" /> = <%= isArray %>,
-							<liferay-ui:message key="boost" /> = <%= field.getBoost() %>, <br />
-							<liferay-ui:message key="numeric" /> = <%= field.isNumeric() %>,
-							<liferay-ui:message key="tokenized" /> = <%= field.isTokenized() %>
+							<liferay-ui:message key="array" /> = <%= values.length > 1 %>, <liferay-ui:message key="boost" /> = <%= field.getBoost() %>,<br />
+
+							<liferay-ui:message key="numeric" /> = <%= field.isNumeric() %>, <liferay-ui:message key="tokenized" /> = <%= field.isTokenized() %>
 						</em>
 					</td>
 					<td class="value" valign="top">
 						<div class="container">
 							<code>
-								<%
-								String[] values = field.getValues();
-								%>
-
-								<c:if test="<%= isArray %>">[</c:if><%for (int i = 0; i < values.length; i++) {%><c:if test="<%= i > 0 %>">, </c:if><c:if test="<%= !field.isNumeric() %>">"</c:if><%= HtmlUtil.escape(values[i]) %><c:if test="<%= !field.isNumeric() %>">"</c:if><%}%><c:if test="<%= isArray %>">]</c:if>
+								<c:if test="<%= values.length > 1 %>">[</c:if><%for (int i = 0; i < values.length; i++) {%><c:if test="<%= i > 0 %>">, </c:if><c:if test="<%= !field.isNumeric() %>">"</c:if><%= HtmlUtil.escape(values[i]) %><c:if test="<%= !field.isNumeric() %>">"</c:if><%}%><c:if test="<%= values.length > 1 %>">]</c:if>
 							</code>
 						</div>
 					</td>

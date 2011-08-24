@@ -19,6 +19,12 @@
 </aui:button-row>
 
 <%
+LinkedHashMap groupParams = new LinkedHashMap();
+
+groupParams.put("active", Boolean.FALSE);
+
+int inactiveGroupsCount = GroupLocalServiceUtil.searchCount(themeDisplay.getCompanyId(), null, null, groupParams);
+
 List<Portlet> portlets = PortletLocalServiceUtil.getPortlets(company.getCompanyId(), includeSystemPortlets, false);
 
 portlets = ListUtil.sort(portlets, new PortletTitleComparator(application, locale));
@@ -59,9 +65,10 @@ if (Validator.isNotNull(primarySearch)) {
 	for (int i = 0; i < portlets.size(); i++) {
 		Portlet portlet = (Portlet)portlets.get(i);
 
-		if (portlet.getOpenSearchClass().equals(primarySearch)) {
+		if (primarySearch.equals(portlet.getOpenSearchClass())) {
 			if (i != 0) {
 				portlets.remove(i);
+
 				portlets.add(0, portlet);
 			}
 
@@ -119,25 +126,25 @@ for (int i = 0; i < portlets.size(); i++) {
 
 		xml = XMLFormatter.stripInvalidChars(xml);
 
-		com.liferay.portal.kernel.xml.Document doc = SAXReaderUtil.read(xml);
+		com.liferay.portal.kernel.xml.Document document = SAXReaderUtil.read(xml);
 
-		Element root = doc.getRootElement();
+		Element rootElement = document.getRootElement();
 
-		//portletTitle = root.elementText("title");
+		//portletTitle = rootElement.elementText("title");
 
-		queryTerms = StringUtil.split(root.elementText("queryTerms"), StringPool.COMMA_AND_SPACE);
+		queryTerms = StringUtil.split(rootElement.elementText("queryTerms"), StringPool.COMMA_AND_SPACE);
 
-		List<Element> entries = root.elements("entry");
+		List<Element> entries = rootElement.elements("entry");
 
-		int total = GetterUtil.getInteger(root.elementText(OpenSearchUtil.getQName("totalResults", OpenSearchUtil.OS_NAMESPACE)));
+		int total = GetterUtil.getInteger(rootElement.elementText(OpenSearchUtil.getQName("totalResults", OpenSearchUtil.OS_NAMESPACE)));
 
 		resultRows = openSearchSearchContainer.getResultRows();
 
 		for (int j = 0; j < entries.size(); j++) {
 			try {
-				Element el = entries.get(j);
+				Element element = entries.get(j);
 
-				ResultRow row = new ResultRow(doc, String.valueOf(j), j);
+				ResultRow row = new ResultRow(document, String.valueOf(j), j);
 
 				// Position
 
@@ -145,14 +152,14 @@ for (int i = 0; i < portlets.size(); i++) {
 
 				// Summary
 
-				String entryClassName = el.elementText("entryClassName");
-				String entryTitle = el.elementText("title");
-				String entryHref = el.element("link").attributeValue("href");
-				String summary = el.elementText("summary");
+				String entryClassName = element.elementText("entryClassName");
+				String entryTitle = element.elementText("title");
+				String entryHref = element.element("link").attributeValue("href");
+				String summary = element.elementText("summary");
 
 				// Group id
 
-				long entryScopeGroupId = GetterUtil.getLong(el.elementText(OpenSearchUtil.getQName("scopeGroupId", OpenSearchUtil.LIFERAY_NAMESPACE)));
+				long entryScopeGroupId = GetterUtil.getLong(element.elementText(OpenSearchUtil.getQName("scopeGroupId", OpenSearchUtil.LIFERAY_NAMESPACE)));
 
 				if (Validator.isNotNull(entryScopeGroupId) && (inactiveGroupsCount > 0)) {
 					Group entryGroup = GroupServiceUtil.getGroup(entryScopeGroupId);
@@ -211,7 +218,7 @@ for (int i = 0; i < portlets.size(); i++) {
 
 				// Tags
 
-				String tagsString = el.elementText("tags");
+				String tagsString = element.elementText("tags");
 
 				tagsString = tagsString.replaceAll("[\\[\\]]","");
 
@@ -258,13 +265,13 @@ for (int i = 0; i < portlets.size(); i++) {
 
 				// Ratings
 
-				//String ratings = el.elementText("ratings");
+				//String ratings = element.elementText("ratings");
 
 				//row.addText(ratings);
 
 				// Score
 
-				//String score = el.elementText(OpenSearchUtil.getQName("score", OpenSearchUtil.RELEVANCE_NAMESPACE));
+				//String score = element.elementText(OpenSearchUtil.getQName("score", OpenSearchUtil.RELEVANCE_NAMESPACE));
 
 				//row.addText(score);
 

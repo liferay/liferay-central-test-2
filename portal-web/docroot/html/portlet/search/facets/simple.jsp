@@ -14,22 +14,8 @@
  */
 --%>
 
-<%@ include file="/html/portlet/search/init.jsp" %>
+<%@ include file="/html/portlet/search/facets/init.jsp" %>
 
-<%
-String randomNamespace = PortalUtil.generateRandomKey(request, "portlet_search_facets_simple") + StringPool.UNDERLINE;
-
-Facet facet = (Facet)request.getAttribute("view.jsp-facet");
-
-FacetConfiguration facetConfiguration = facet.getFacetConfiguration();
-
-String panelLabel = facetConfiguration.getLabel();
-String facetDisplayStyle = facetConfiguration.getDisplayStyle();
-String cssClass = "search-facet search-".concat(facetDisplayStyle);
-
-String fieldParam = ParamUtil.getString(request, facet.getFieldName());
-%>
-
-<div class="<%= cssClass %>" id='<%= randomNamespace + "facet" %>'>
+<div class="<%= cssClass %>" id="<%= randomNamespace %>facet">
 	<aui:input name="<%= facet.getFieldName() %>" label="" type="text" value="<%= fieldParam %>" />
 </div>

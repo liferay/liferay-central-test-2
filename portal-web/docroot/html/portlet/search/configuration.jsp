@@ -16,12 +16,12 @@
 
 <%@ include file="/html/portlet/search/init.jsp" %>
 
-<liferay-portlet:actionURL portletConfiguration="true" var="configurationURL" />
-<liferay-portlet:renderURL portletConfiguration="true" varImpl="portletURL" />
+<liferay-portlet:actionURL portletConfiguration="true" var="configurationActionURL" />
+<liferay-portlet:renderURL portletConfiguration="true" var="configurationRenderURL" />
 
-<aui:form action="<%= configurationURL %>" method="post" name="fm">
+<aui:form action="<%= configurationActionURL %>" method="post" name="fm">
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
-	<aui:input name="redirect" type="hidden" value='<%= portletURL.toString() %>' />
+	<aui:input name="redirect" type="hidden" value="<%= configurationRenderURL %>" />
 
 	<aui:fieldset>
 		<aui:input name="preferences--displayAssetTypeFacet--" type="checkbox" value="<%= displayAssetTypeFacet %>" />
@@ -32,7 +32,7 @@
 
 		<aui:input name="preferences--displayModifiedRangeFacet--" type="checkbox" value="<%= displayModifiedRangeFacet %>" />
 
-		<c:if test="<%= permissionChecker.isCompanyAdmin() %>"
+		<c:if test="<%= permissionChecker.isCompanyAdmin() %>">
 			<aui:input helpMessage="display-results-in-document-form-help" name="preferences--displayResultsInDocumentForm--" type="checkbox" value="<%= displayResultsInDocumentForm %>" />
 		</c:if>
 

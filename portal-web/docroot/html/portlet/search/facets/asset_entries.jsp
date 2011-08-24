@@ -14,23 +14,9 @@
  */
 --%>
 
-<%@ include file="/html/portlet/search/init.jsp" %>
+<%@ include file="/html/portlet/search/facets/init.jsp" %>
 
 <%
-String randomNamespace = PortalUtil.generateRandomKey(request, "portlet_search_facets_asset_entries") + StringPool.UNDERLINE;
-
-Facet facet = (Facet)request.getAttribute("view.jsp-facet");
-
-FacetConfiguration facetConfiguration = facet.getFacetConfiguration();
-
-String panelLabel = facetConfiguration.getLabel();
-String facetDisplayStyle = facetConfiguration.getDisplayStyle();
-String cssClass = "search-facet search-".concat(facetDisplayStyle);
-
-String fieldParam = ParamUtil.getString(request, facet.getFieldName());
-
-JSONObject dataJSONObject = facetConfiguration.getData();
-
 int frequencyThreshold = dataJSONObject.getInt("frequencyThreshold");
 
 String[] values = new String[0];
@@ -44,153 +30,109 @@ if (dataJSONObject.has("values")) {
 		values[i] = valuesJSONArray.getString(i);
 	}
 }
-
-FacetCollector facetCollector = facet.getFacetCollector();
-
-List<TermCollector> termCollectors = facetCollector.getTermCollectors();
 %>
 
-<div class="<%= cssClass %>" id='<%= randomNamespace + "facet" %>'>
+<div class="<%= cssClass %>" id="<%= randomNamespace %>facet">
 	<aui:input name="<%= facet.getFieldName() %>" type="hidden" value="<%= fieldParam %>" />
 
-	<%
-	String assetEntriesNavigation = _buildAssetEntriesNavigation(renderRequest, themeDisplay, fieldParam, frequencyThreshold, values, facetCollector, termCollectors);
+	<aui:field-wrapper cssClass="asset-entries" label="" name="<%= fieldParam %>">
+		<ul class="asset-type">
+			<li class="facet-value default <%= Validator.isNull(fieldParam) ? "current-term" : StringPool.BLANK %>">">
+				<a href="#" data-value=""><img alt="" src="<%= themeDisplay.getPathThemeImages() %>/common/search.png" /><liferay-ui:message key="everything" /></a>
+			</li>
 
-	if (Validator.isNotNull(assetEntriesNavigation)) {
-	%>
+			<%
+			List<String> assetTypes = new SortedArrayList<String>(new ModelResourceComparator(locale));
 
-		<aui:field-wrapper cssClass="asset_entries" label="" name="<%= fieldParam %>">
-			<%= assetEntriesNavigation %>
-		</aui:field-wrapper>
+			for (String className : values) {
+				if (assetTypes.contains(className)) {
+					continue;
+				}
 
-	<%
-	}
-	%>
+				if (!ArrayUtil.contains(values, className)) {
+					continue;
+				}
 
-	<aui:script position="inline" use="aui-base">
-		var container = A.one('.portlet-search .menu .search-asset_entries .asset_entries');
+				assetTypes.add(className);
+			}
 
-		if (container) {
-			container.delegate(
-				'click',
-				function(event) {
-					var term = event.currentTarget;
+			for (String assetType : assetTypes) {
+				TermCollector termCollector = facetCollector.getTermCollector(assetType);
 
-					var wasSelfSelected = false;
+				int frequency = 0;
 
-					var field = document.<portlet:namespace />fm['<portlet:namespace /><%= facet.getFieldName() %>'];
+				if (termCollector != null) {
+					frequency = termCollector.getFrequency();
+				}
 
-					var currentTerms = A.all('.portlet-search .menu .search-asset_entries .asset_entries .facet-value.current-term a');
+				if (frequencyThreshold > frequency) {
+					continue;
+				}
 
-					if (currentTerms) {
-						currentTerms.each(
-							function(item, index, collection) {
-								item.ancestor('.facet-value').removeClass('current-term');
+				AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(assetType);
+			%>
 
-								if (item == term) {
-									wasSelfSelected = true;
-								}
+				<li class="facet-value" <%= fieldParam.equals(termCollector.getTerm()) ? "current-term" : StringPool.BLANK %>">
+					<a href="#" data-value="<%= HtmlUtil.escapeAttribute(assetType) %>"><c:if test="<%= assetRendererFactory != null %>"><img alt="" src="<%= assetRendererFactory.getIconPath(renderRequest) %>" /></c:if><%= ResourceActionsUtil.getModelResource(locale, assetType) %></a> <span class="frequency">(<%= frequency %>)</span>
+				</li>
+
+			<%
+			}
+			%>
+
+		</ul>
+	</aui:field-wrapper>
+</div>
+
+<aui:script position="inline" use="aui-base">
+	var container = A.one('.portlet-search .menu .search-asset-entries .asset-entries');
+
+	if (container) {
+		container.delegate(
+			'click',
+			function(event) {
+				var term = event.currentTarget;
+
+				var wasSelfSelected = false;
+
+				var field = document.<portlet:namespace />fm['<portlet:namespace /><%= facet.getFieldName() %>'];
+
+				var currentTerms = A.all('.portlet-search .menu .search-asset-entries .asset-entries .facet-value.current-term a');
+
+				if (currentTerms) {
+					currentTerms.each(
+						function(item, index, collection) {
+							item.ancestor('.facet-value').removeClass('current-term');
+
+							if (item == term) {
+								wasSelfSelected = true;
 							}
-						);
+						}
+					);
 
-						field.value = '';
-					}
+					field.value = '';
+				}
 
-					if (!wasSelfSelected) {
-						term.ancestor('.facet-value').addClass('current-term');
+				if (!wasSelfSelected) {
+					term.ancestor('.facet-value').addClass('current-term');
 
-						field.value = term.attr('data-value');
-					}
-
-					submitForm(document.<portlet:namespace />fm);
-				},
-				'.facet-value a'
-			);
-		}
-
-		Liferay.provide(
-			window,
-			'<portlet:namespace /><%= facet.getFieldName() %>clearFacet',
-			function() {
-				document.<portlet:namespace />fm['<portlet:namespace /><%= facet.getFieldName() %>'].value = '';
+					field.value = term.attr('data-value');
+				}
 
 				submitForm(document.<portlet:namespace />fm);
 			},
-			['aui-base']
+			'.facet-value a'
 		);
-	</aui:script>
-	</div>
-
-<%!
-private String _buildAssetEntriesNavigation(RenderRequest renderRequest, ThemeDisplay themeDisplay, String selectedTerm, long frequencyThreshold, String[] values, FacetCollector facetCollector, List<TermCollector> termCollectors) throws Exception {
-	List<String> assetTypes = new ArrayList<String>();
-
-	for (String className : values) {
-		if (!assetTypes.contains(className)) {
-			if (ArrayUtil.contains(values, className)) {
-				assetTypes.add(className);
-			}
-		}
 	}
 
-	assetTypes = ListUtil.sort(assetTypes, new ModelResourceComparator(themeDisplay.getLocale()));
+	Liferay.provide(
+		window,
+		'<portlet:namespace /><%= facet.getFieldName() %>clearFacet',
+		function() {
+			document.<portlet:namespace />fm['<portlet:namespace /><%= facet.getFieldName() %>'].value = '';
 
-	StringBundler sb = new StringBundler();
-
-	sb.append("<ul class=\"asset-type\">");
-	sb.append("<li class=\"facet-value default");
-
-	if (Validator.isNull(selectedTerm)) {
-		sb.append(" current-term");
-	}
-
-	sb.append("\"><a href=\"#\" data-value=\"\"><img alt=\"\" src=\"");
-	sb.append(themeDisplay.getPathThemeImages());
-	sb.append("/common/search.png\" /> ");
-	sb.append(LanguageUtil.get(themeDisplay.getLocale(), "everything"));
-	sb.append("</a></li>");
-
-	for (int i = 0; i < assetTypes.size(); i++) {
-		String assetType = assetTypes.get(i);
-
-		TermCollector termCollector = facetCollector.getTermCollector(assetType);
-
-		int frequency = 0;
-
-		if (termCollector != null) {
-			frequency = termCollector.getFrequency();
-		}
-
-		if (frequency < frequencyThreshold) {
-			continue;
-		}
-
-		sb.append("<li class=\"facet-value");
-
-		if (assetType.equals(selectedTerm)) {
-			sb.append(" current-term");
-		}
-
-		sb.append("\"><a href=\"#\" data-value=\"");
-		sb.append(HtmlUtil.escapeAttribute(assetType));
-		sb.append("\">");
-
-		AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(assetType);
-
-		if (assetRendererFactory != null) {
-			sb.append("<img alt=\"\" src=\"");
-			sb.append(assetRendererFactory.getIconPath(renderRequest));
-			sb.append("\" /> ");
-		}
-
-		sb.append(ResourceActionsUtil.getModelResource(themeDisplay.getLocale(), assetType));
-		sb.append("</a> <span class=\"frequency\">(");
-		sb.append(frequency);
-		sb.append(")</span></li>");
-	}
-
-	sb.append("</ul>");
-
-	return sb.toString();
-}
-%>
+			submitForm(document.<portlet:namespace />fm);
+		},
+		['aui-base']
+	);
+</aui:script>

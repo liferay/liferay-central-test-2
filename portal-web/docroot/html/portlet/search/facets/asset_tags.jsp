@@ -14,206 +14,136 @@
  */
 --%>
 
-<%@ include file="/html/portlet/search/init.jsp" %>
+<%@ include file="/html/portlet/search/facets/init.jsp" %>
 
 <%
-String randomNamespace = PortalUtil.generateRandomKey(request, "portlet_search_facets_asset_tags") + StringPool.UNDERLINE;
-
-Facet facet = (Facet)request.getAttribute("view.jsp-facet");
-
-FacetConfiguration facetConfiguration = facet.getFacetConfiguration();
-
-String panelLabel = facetConfiguration.getLabel();
-String facetDisplayStyle = facetConfiguration.getDisplayStyle();
-String cssClass = "search-facet search-".concat(facetDisplayStyle);
-
-String fieldParam = ParamUtil.getString(request, facet.getFieldName());
-
-JSONObject dataJSONObject = facetConfiguration.getData();
+if (termCollectors.isEmpty()) {
+	return;
+}
 
 String displayStyle = dataJSONObject.getString("displayStyle", "cloud");
 int frequencyThreshold = dataJSONObject.getInt("frequencyThreshold");
 int maxTerms = dataJSONObject.getInt("maxTerms", 10);
 boolean showAssetCount = dataJSONObject.getBoolean("showAssetCount", true);
-
-FacetCollector facetCollector = facet.getFacetCollector();
-
-List<TermCollector> termCollectors = facetCollector.getTermCollectors();
 %>
 
-<c:if test="<%= !termCollectors.isEmpty() %>">
-	<div class="<%= cssClass %>" id='<%= randomNamespace + "facet" %>'>
-		<aui:input name="<%= facet.getFieldName() %>" type="hidden" value="<%= fieldParam %>" />
+<div class="<%= cssClass %>" id="<%= randomNamespace %>facet">
+	<aui:input name="<%= facet.getFieldName() %>" type="hidden" value="<%= fieldParam %>" />
 
-		<%
-		String tagsNavigation = _buildTagsNavigation(themeDisplay, fieldParam, panelLabel, displayStyle, frequencyThreshold, maxTerms, showAssetCount, facetCollector, termCollectors);
+	<aui:field-wrapper cssClass='<%= randomNamespace + "asset-tags asset-tags" %>' label="" name="assetTags">
+		<ul class="<%= (showAssetCount && displayStyle.equals("cloud")) ? "tag-cloud" : "tag-list" %>">
+			<li class="facet-value default <%= Validator.isNull(fieldParam) ? "current-term" : StringPool.BLANK %>">">
+				<a href="#" data-value=""><img alt="" src="<%= themeDisplay.getPathThemeImages() %>/common/<%= facetConfiguration.getLabel() %>.png" /><liferay-ui:message key="any" /> <liferay-ui:message key="<%= facetConfiguration.getLabel() %>" /></a>
+			</li>
 
-		if (Validator.isNotNull(tagsNavigation)) {
-		%>
+			<%
+			int maxCount = 1;
+			int minCount = 1;
 
-			<aui:field-wrapper cssClass='<%= randomNamespace + "asset_tags asset_tags" %>' label="" name="assetTags">
-				<%= tagsNavigation %>
-			</aui:field-wrapper>
+			if (showAssetCount && displayStyle.equals("cloud")) {
+				for (int i = 0; i < termCollectors.size(); i++) {
+					if (i >= maxTerms) {
+						break;
+					}
 
-		<%
-		}
-		%>
+					TermCollector termCollector = termCollectors.get(i);
 
-		<aui:script position="inline" use="aui-base">
-			var container = A.one('.portlet-search .menu .search-asset_tags .<%= randomNamespace %>asset_tags');
+					int frequency = termCollector.getFrequency();
 
-			if (container) {
-				container.delegate(
-					'click',
-					function(event) {
-						var term = event.currentTarget;
+					if (frequencyThreshold > frequency) {
+						continue;
+					}
 
-						var wasSelfSelected = false;
+					maxCount = Math.max(maxCount, frequency);
+					minCount = Math.min(minCount, frequency);
+				}
+			}
 
-						var field = document.<portlet:namespace />fm['<portlet:namespace /><%= facet.getFieldName() %>'];
+			double multiplier = 1;
 
-						var currentTerms = A.all('.portlet-search .menu .search-asset_tags .<%= randomNamespace %>asset_tags .facet-value.current-term a');
+			if (maxCount != minCount) {
+				multiplier = (double)5 / (maxCount - minCount);
+			}
 
-						if (currentTerms) {
-							currentTerms.each(
-								function(item, index, collection) {
-									item.ancestor('.facet-value').removeClass('current-term');
+			for (int i = 0; i < termCollectors.size(); i++) {
+				if (i >= maxTerms) {
+					break;
+				}
 
-									if (item == term) {
-										wasSelfSelected = true;
-									}
-								}
-							);
+				TermCollector termCollector = termCollectors.get(i);
 
-							field.value = '';
+				int popularity = (int)(1 + ((maxCount - (maxCount - (termCollector.getFrequency() - minCount))) * multiplier));
+
+				if (frequencyThreshold > termCollector.getFrequency()) {
+					continue;
+				}
+			%>
+
+				<li class="facet-value tag-popularity-"<%= popularity %> <%= fieldParam.equals(termCollector.getTerm()) ? "current-term" : StringPool.BLANK %>">
+					<a href="#" data-value="<%= termCollector.getTerm() %>"><%= termCollector.getTerm() %></a>
+
+					<c:if test="<%= showAssetCount %>">
+						<span class="frequency">(<%= termCollector.getFrequency() %>)</span>
+					</c:if>
+				</li>
+
+			<%
+			}
+			%>
+
+		</ul>
+	</aui:field-wrapper>
+</div>
+
+<aui:script position="inline" use="aui-base">
+	var container = A.one('.portlet-search .menu .search-asset-tags .<%= randomNamespace %>asset-tags');
+
+	if (container) {
+		container.delegate(
+			'click',
+			function(event) {
+				var term = event.currentTarget;
+
+				var wasSelfSelected = false;
+
+				var field = document.<portlet:namespace />fm['<portlet:namespace /><%= facet.getFieldName() %>'];
+
+				var currentTerms = A.all('.portlet-search .menu .search-asset-tags .<%= randomNamespace %>asset-tags .facet-value.current-term a');
+
+				if (currentTerms) {
+					currentTerms.each(
+						function(item, index, collection) {
+							item.ancestor('.facet-value').removeClass('current-term');
+
+							if (item == term) {
+								wasSelfSelected = true;
+							}
 						}
+					);
 
-						if (!wasSelfSelected) {
-							term.ancestor('.facet-value').addClass('current-term');
+					field.value = '';
+				}
 
-							field.value = term.attr('data-value');
-						}
+				if (!wasSelfSelected) {
+					term.ancestor('.facet-value').addClass('current-term');
 
-						submitForm(document.<portlet:namespace />fm);
-					},
-					'.facet-value a'
-				);
-			}
+					field.value = term.attr('data-value');
+				}
 
-			Liferay.provide(
-				window,
-				'<portlet:namespace /><%= facet.getFieldName() %>clearFacet',
-				function() {
-					document.<portlet:namespace />fm['<portlet:namespace /><%= facet.getFieldName() %>'].value = '';
-
-					submitForm(document.<portlet:namespace />fm);
-				},
-				['aui-base']
-			);
-		</aui:script>
-	</div>
-</c:if>
-
-<%!
-private String _buildTagsNavigation(ThemeDisplay themeDisplay, String selectedTerm, String panelLabel, String displayStyle, int frequencyThreshold, int maxTerms, boolean showAssetCount, FacetCollector facetCollector, List<TermCollector> termCollectors) throws Exception {
-	StringBundler sb = new StringBundler();
-
-	sb.append("<ul class=\"");
-
-	if (showAssetCount && displayStyle.equals("cloud")) {
-		sb.append("tag-cloud");
-	}
-	else {
-		sb.append("tag-list");
+				submitForm(document.<portlet:namespace />fm);
+			},
+			'.facet-value a'
+		);
 	}
 
-	sb.append("\">");
+	Liferay.provide(
+		window,
+		'<portlet:namespace /><%= facet.getFieldName() %>clearFacet',
+		function() {
+			document.<portlet:namespace />fm['<portlet:namespace /><%= facet.getFieldName() %>'].value = '';
 
-	sb.append("<li class=\"facet-value default");
-
-	if (Validator.isNull(selectedTerm)) {
-		sb.append(" current-term");
-	}
-
-	sb.append("\"><a href=\"#\" data-value=\"\"><img alt=\"\" src=\"");
-	sb.append(themeDisplay.getPathThemeImages());
-	sb.append("/common/");
-	sb.append(panelLabel);
-	sb.append(".png\" /> ");
-	sb.append(LanguageUtil.get(themeDisplay.getLocale(), "any"));
-	sb.append(" ");
-	sb.append(LanguageUtil.get(themeDisplay.getLocale(), panelLabel));
-	sb.append("</a></li>");
-
-	int maxCount = 1;
-	int minCount = 1;
-
-	if (showAssetCount && displayStyle.equals("cloud")) {
-		for (int i = 0; i < termCollectors.size(); i++) {
-			if (i >= maxTerms) {
-				break;
-			}
-
-			TermCollector termCollector = termCollectors.get(i);
-
-			int count = termCollector.getFrequency();
-
-			if (frequencyThreshold > count) {
-				continue;
-			}
-
-			maxCount = Math.max(maxCount, count);
-			minCount = Math.min(minCount, count);
-		}
-	}
-
-	double multiplier = 1;
-
-	if (maxCount != minCount) {
-		multiplier = (double)5 / (maxCount - minCount);
-	}
-
-	for (int i = 0; i < termCollectors.size(); i++) {
-		if (i >= maxTerms) {
-			break;
-		}
-
-		TermCollector termCollector = termCollectors.get(i);
-
-		String term = termCollector.getTerm();
-
-		int frequency = termCollector.getFrequency();
-
-		int popularity = (int)(1 + ((maxCount - (maxCount - (frequency - minCount))) * multiplier));
-
-		if (frequencyThreshold > frequency) {
-			continue;
-		}
-
-		sb.append("<li class=\"facet-value tag-popularity-");
-		sb.append(popularity);
-
-		if (term.equals(selectedTerm)) {
-			sb.append(" current-term");
-		}
-
-		sb.append("\"><a href=\"#\" data-value=\"");
-		sb.append(term);
-		sb.append("\">");
-		sb.append(term);
-		sb.append("</a>");
-
-		if (showAssetCount) {
-			sb.append(" <span class=\"frequency\">(");
-			sb.append(frequency);
-			sb.append(")</span>");
-		}
-
-		sb.append("</li>");
-	}
-
-	sb.append("</ul>");
-
-	return sb.toString();
-}
-%>
+			submitForm(document.<portlet:namespace />fm);
+		},
+		['aui-base']
+	);
+</aui:script>

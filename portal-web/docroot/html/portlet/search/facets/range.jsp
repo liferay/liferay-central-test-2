@@ -14,157 +14,109 @@
  */
 --%>
 
-<%@ include file="/html/portlet/search/init.jsp" %>
+<%@ include file="/html/portlet/search/facets/init.jsp" %>
 
 <%
-String randomNamespace = PortalUtil.generateRandomKey(request, "portlet_search_facets_range") + StringPool.UNDERLINE;
-
-Facet facet = (Facet)request.getAttribute("view.jsp-facet");
-
-FacetConfiguration facetConfiguration = facet.getFacetConfiguration();
-
-String panelLabel = facetConfiguration.getLabel();
-String facetDisplayStyle = facetConfiguration.getDisplayStyle();
-String cssClass = "search-facet search-".concat(facetDisplayStyle);
-
-String fieldParam = ParamUtil.getString(request, facet.getFieldName());
-
-JSONObject dataJSONObject = facetConfiguration.getData();
+if (termCollectors.isEmpty()) {
+	return;
+}
 
 int frequencyThreshold = dataJSONObject.getInt("frequencyThreshold");
 JSONArray rangesJSONArray = dataJSONObject.getJSONArray("ranges");
-
-FacetCollector facetCollector = facet.getFacetCollector();
-
-List<TermCollector> termCollectors = facetCollector.getTermCollectors();
 %>
 
-<c:if test="<%= !termCollectors.isEmpty() %>">
-	<div class="<%= cssClass %>" id='<%= randomNamespace + "facet" %>'>
-		<aui:input name="<%= facet.getFieldName() %>" type="hidden" value="<%= fieldParam %>" />
+<div class="<%= cssClass %>" id="<%= randomNamespace %>facet">
+	<aui:input name="<%= facet.getFieldName() %>" type="hidden" value="<%= fieldParam %>" />
 
-		<%
-		String rangeNavigation = _buildRangeNavigation(themeDisplay, fieldParam, frequencyThreshold, rangesJSONArray, facetCollector, termCollectors);
+	<aui:field-wrapper cssClass='<%= randomNamespace + "range range" %>' label="" name="<%= facet.getFieldName() %>">
+		<ul class="range">
+			<li class="facet-value default <%= Validator.isNull(fieldParam) ? "current-term" : StringPool.BLANK %>">
+				<a href="#" data-value=""><liferay-ui:message key="any-range" /></a>
+			</li>
 
-		if (Validator.isNotNull(rangeNavigation)) {
-		%>
+			<%
+			for (int i = 0; i < rangesJSONArray.length(); i++) {
+				JSONObject rangeJSONObject = rangesJSONArray.getJSONObject(i);
 
-			<aui:field-wrapper cssClass='<%= randomNamespace + "range range" %>' label="" name="<%= facet.getFieldName() %>">
-				<%= rangeNavigation %>
-			</aui:field-wrapper>
+				String label = rangeJSONObject.getString("label");
+				String range = rangeJSONObject.getString("range");
 
-		<%
-		}
-		%>
+				TermCollector termCollector = facetCollector.getTermCollector(range);
 
-		<liferay-ui:message key="<%= panelLabel %>" />: <aui:a href='<%= "javascript:" + renderResponse.getNamespace() + facet.getFieldName() + "clearFacet();" %>'><liferay-ui:message key="clear" /></aui:a>
+				int frequency = 0;
 
-		<aui:script position="inline" use="aui-base">
-			var container = A.one('.portlet-search .menu .search-range .<%= randomNamespace %>range');
+				if (termCollector != null) {
+					frequency = termCollector.getFrequency();
+				}
 
-			if (container) {
-				container.delegate(
-					'click',
-					function(event) {
-						var term = event.currentTarget;
+				if (frequencyThreshold > frequency) {
+					continue;
+				}
+			%>
 
-						var wasSelfSelected = false;
+				<li class="facet-value" <%= fieldParam.equals(range) ? "current-term" : StringPool.BLANK %>">
+					<a href="#" data-value="<%= HtmlUtil.escapeAttribute(range) %>"><liferay-ui:message key="<%= label %>" /></a> <span class="frequency">(<%= frequency %>)</span>
+				</li>
 
-						var field = document.<portlet:namespace />fm['<portlet:namespace /><%= facet.getFieldName() %>'];
-
-						var currentTerms = A.all('.portlet-search .menu .search-range .<%= randomNamespace %>range .facet-value.current-term a');
-
-						if (currentTerms) {
-							currentTerms.each(
-								function(item, index, collection) {
-									item.ancestor('.facet-value').removeClass('current-term');
-
-									if (item == term) {
-										wasSelfSelected = true;
-									}
-								}
-							);
-
-							field.value = '';
-						}
-
-						if (!wasSelfSelected) {
-							term.ancestor('.facet-value').addClass('current-term');
-
-							field.value = term.attr('data-value');
-						}
-
-						submitForm(document.<portlet:namespace />fm);
-					},
-					'.facet-value a'
-				);
+			<%
 			}
+			%>
 
-			Liferay.provide(
-				window,
-				'<portlet:namespace /><%= facet.getFieldName() %>clearFacet',
-				function() {
-					document.<portlet:namespace />fm['<portlet:namespace /><%= facet.getFieldName() %>'].value = '';
+		</ul>
+	</aui:field-wrapper>
 
-					submitForm(document.<portlet:namespace />fm);
-				},
-				['aui-base']
-			);
-		</aui:script>
-	</div>
-</c:if>
+	<liferay-ui:message key="<%= facetConfiguration.getLabel() %>" />: <aui:a href='<%= "javascript:" + renderResponse.getNamespace() + facet.getFieldName() + "clearFacet();" %>'><liferay-ui:message key="clear" /></aui:a>
+</div>
 
-<%!
-private String _buildRangeNavigation(ThemeDisplay themeDisplay, String selectedTerm, long frequencyThreshold, JSONArray rangesJSONArray, FacetCollector facetCollector, List<TermCollector> termCollectors) throws Exception {
-	StringBundler sb = new StringBundler();
+<aui:script position="inline" use="aui-base">
+	var container = A.one('.portlet-search .menu .search-range .<%= randomNamespace %>range');
 
-	sb.append("<ul class=\"range\">");
+	if (container) {
+		container.delegate(
+			'click',
+			function(event) {
+				var term = event.currentTarget;
 
-	sb.append("<li class=\"facet-value default");
+				var wasSelfSelected = false;
 
-	if (Validator.isNull(selectedTerm)) {
-		sb.append(" current-term");
+				var field = document.<portlet:namespace />fm['<portlet:namespace /><%= facet.getFieldName() %>'];
+
+				var currentTerms = A.all('.portlet-search .menu .search-range .<%= randomNamespace %>range .facet-value.current-term a');
+
+				if (currentTerms) {
+					currentTerms.each(
+						function(item, index, collection) {
+							item.ancestor('.facet-value').removeClass('current-term');
+
+							if (item == term) {
+								wasSelfSelected = true;
+							}
+						}
+					);
+
+					field.value = '';
+				}
+
+				if (!wasSelfSelected) {
+					term.ancestor('.facet-value').addClass('current-term');
+
+					field.value = term.attr('data-value');
+				}
+
+				submitForm(document.<portlet:namespace />fm);
+			},
+			'.facet-value a'
+		);
 	}
 
-	sb.append("\"><a href=\"#\" data-value=\"\">");
-	sb.append(LanguageUtil.get(themeDisplay.getLocale(), "any-range"));
-	sb.append("</a></li>");
+	Liferay.provide(
+		window,
+		'<portlet:namespace /><%= facet.getFieldName() %>clearFacet',
+		function() {
+			document.<portlet:namespace />fm['<portlet:namespace /><%= facet.getFieldName() %>'].value = '';
 
-	for (int i = 0; i < rangesJSONArray.length(); i++) {
-		JSONObject rangeJSONObject = rangesJSONArray.getJSONObject(i);
-
-		String label = rangeJSONObject.getString("label");
-		String range = rangeJSONObject.getString("range");
-
-		TermCollector termCollector = facetCollector.getTermCollector(range);
-
-		int frequency = 0;
-
-		if (termCollector != null) {
-			frequency = termCollector.getFrequency();
-		}
-
-		if (frequency < frequencyThreshold) {
-			continue;
-		}
-
-		sb.append("<li class=\"facet-value");
-
-		if (range.equals(selectedTerm)) {
-			sb.append(" current-term");
-		}
-
-		sb.append("\"><a href=\"#\" data-value=\"");
-		sb.append(HtmlUtil.escapeAttribute(range));
-		sb.append("\">");
-		sb.append(LanguageUtil.get(themeDisplay.getLocale(), label));
-		sb.append("</a> <span class=\"frequency\">(");
-		sb.append(frequency);
-		sb.append(")</span></li>");
-	}
-
-	sb.append("</ul>");
-
-	return sb.toString();
-}
-%>
+			submitForm(document.<portlet:namespace />fm);
+		},
+		['aui-base']
+	);
+</aui:script>

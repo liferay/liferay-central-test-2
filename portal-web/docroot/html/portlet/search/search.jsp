@@ -34,21 +34,15 @@ String keywords = ParamUtil.getString(request, "keywords");
 
 String format = ParamUtil.getString(request, "format");
 
+List<String> portletTitles = new ArrayList<String>();
+
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("struts_action", "/search/search");
 portletURL.setParameter("keywords", keywords);
 portletURL.setParameter("format", format);
 
-List<String> portletTitles = new ArrayList<String>();
-
-LinkedHashMap groupParams = new LinkedHashMap();
-
-groupParams.put("active", Boolean.FALSE);
-
-String[] queryTerms = new String[0];
-
-int inactiveGroupsCount = GroupLocalServiceUtil.searchCount(themeDisplay.getCompanyId(), null, null, groupParams);
+request.setAttribute("search.jsp-portletURL", portletURL);
 %>
 
 <liferay-portlet:renderURL varImpl="searchURL">
@@ -79,7 +73,7 @@ int inactiveGroupsCount = GroupLocalServiceUtil.searchCount(themeDisplay.getComp
 	<%@ include file="/html/portlet/search/main_search.jspf" %>
 
 	<c:if test="<%= displayOpenSearchResults %>">
-		<liferay-ui:panel collapsible="<%= true %>" cssClass="open-search-panel" extended="<%= true %>" id='open-search-panel' persistState="<%= true %>" title='<%= LanguageUtil.get(pageContext, "open-search") %>'>
+		<liferay-ui:panel collapsible="<%= true %>" cssClass="open-search-panel" extended="<%= true %>" id="searchOpenSearchPanelContainer" persistState="<%= true %>" title="open-search">
 			<%@ include file="/html/portlet/search/open_search.jspf" %>
 		</liferay-ui:panel>
 	</c:if>
