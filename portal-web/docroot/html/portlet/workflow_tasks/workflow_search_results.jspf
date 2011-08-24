@@ -19,10 +19,6 @@ WorkflowTaskSearchTerms searchTerms = (WorkflowTaskSearchTerms)searchContainer.g
 
 boolean allTasks = false;
 
-List<WorkflowTask> resultsTasks = null;
-
-int totalTasks = 0;
-
 List<String> assetTypesList = new ArrayList<String>();
 
 List<WorkflowHandler> workflowHandlers = WorkflowHandlerRegistryUtil.getWorkflowHandlers();
@@ -36,6 +32,9 @@ for (WorkflowHandler workflowHandler : workflowHandlers) {
 }
 
 String[] assetTypes = assetTypesList.toArray(new String[assetTypesList.size()]);
+
+List<WorkflowTask> resultsTasks = null;
+int totalTasks = 0;
 
 if (portletName.equals(PortletKeys.WORKFLOW_TASKS)) {
 	searchContainer.setEmptyResultsMessage("there-are-no-tasks");

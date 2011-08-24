@@ -16,7 +16,6 @@ package com.liferay.portal.workflow;
 
 import com.liferay.portal.kernel.messaging.proxy.BaseProxyBean;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.workflow.WorkflowException;
 import com.liferay.portal.kernel.workflow.WorkflowTask;
 import com.liferay.portal.kernel.workflow.WorkflowTaskManager;
 
@@ -158,19 +157,18 @@ public class WorkflowTaskManagerProxyBean
 	}
 
 	public List<WorkflowTask> search(
-			long companyId, long userId, String keywords, String[] assetTypes,
-			Boolean completed, Boolean searchByUserRoles, int start, int end,
-			OrderByComparator orderByComparator)
-		throws WorkflowException {
+		long companyId, long userId, String taskName, String assetType,
+		Long[] assetPrimaryKey, Date dueDateGT, Date dueDateLT,
+		Boolean completed, Boolean searchByUserRoles, boolean andOperator,
+		int start, int end, OrderByComparator orderByComparator) {
 
 		throw new UnsupportedOperationException();
 	}
 
 	public List<WorkflowTask> search(
-		long companyId, long userId, String taskName, String assetType,
-		Long[] assetPrimaryKey, Date dueDateGT, Date dueDateLT,
-		Boolean completed, Boolean searchByUserRoles, boolean andOperator,
-		int start, int end, OrderByComparator orderByComparator) {
+		long companyId, long userId, String keywords, String[] assetTypes,
+		Boolean completed, Boolean searchByUserRoles, int start, int end,
+		OrderByComparator orderByComparator) {
 
 		throw new UnsupportedOperationException();
 	}
@@ -183,17 +181,16 @@ public class WorkflowTaskManagerProxyBean
 	}
 
 	public int searchCount(
-			long companyId, long userId, String keywords, String[] assetTypes,
-			Boolean completed, Boolean searchByUserRoles)
-		throws WorkflowException {
+		long companyId, long userId, String taskName, String assetType,
+		Long[] assetPrimaryKey, Date dueDateGT, Date dueDateLT,
+		Boolean completed, Boolean searchByUserRoles, boolean andOperator) {
 
 		throw new UnsupportedOperationException();
 	}
 
 	public int searchCount(
-		long companyId, long userId, String taskName, String assetType,
-		Long[] assetPrimaryKey, Date dueDateGT, Date dueDateLT,
-		Boolean completed, Boolean searchByUserRoles, boolean andOperator) {
+		long companyId, long userId, String keywords, String[] assetTypes,
+		Boolean completed, Boolean searchByUserRoles) {
 
 		throw new UnsupportedOperationException();
 	}
