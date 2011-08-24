@@ -56,13 +56,13 @@ public class GlobalShutdownAction extends SimpleAction {
 
 		AutoDeployUtil.unregisterDir(AutoDeployDir.DEFAULT_NAME);
 
-		// Sandbox deploy
-
-		SandboxDeployUtil.unregisterDir(SandboxDeployDir.DEFAULT_NAME);
-
 		// Hot deploy
 
 		HotDeployUtil.unregisterListeners();
+
+		// Sandbox deploy
+
+		SandboxDeployUtil.unregisterDir(SandboxDeployDir.DEFAULT_NAME);
 
 		// Instant messenger AIM
 
