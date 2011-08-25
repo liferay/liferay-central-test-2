@@ -12,12 +12,12 @@
  * details.
  */
 
-package com.liferay.portal.util;
+package com.liferay.portlet.layoutsadmin.util;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.sitemap.Sitemap;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
@@ -31,6 +31,7 @@ import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalArticleConstants;
 import com.liferay.portlet.journal.service.JournalArticleServiceUtil;
@@ -43,25 +44,6 @@ import java.util.List;
  */
 public class SitemapImpl implements Sitemap {
 
-	public String getSitemap(
-			long groupId, boolean privateLayout, ThemeDisplay themeDisplay)
-		throws PortalException, SystemException {
-
-		Document doc = SAXReaderUtil.createDocument();
-
-		doc.setXMLEncoding(StringPool.UTF8);
-
-		Element root = doc.addElement(
-			"urlset", "http://www.google.com/schemas/sitemap/0.84");
-
-		List<Layout> layouts = LayoutLocalServiceUtil.getLayouts(
-			groupId, privateLayout, LayoutConstants.DEFAULT_PARENT_LAYOUT_ID);
-
-		_visitLayouts(root, layouts, themeDisplay);
-
-		return doc.asXML();
-	}
-
 	public String encodeXML(String input) {
 		return StringUtil.replace(
 			input,
@@ -69,50 +51,26 @@ public class SitemapImpl implements Sitemap {
 			new String[] {"&amp;", "&lt;", "&gt;", "&apos;", "&quot;"});
 	}
 
-	private void _visitLayouts(
-			Element element, List<Layout> layouts, ThemeDisplay themeDisplay)
+	public String getSitemap(
+			long groupId, boolean privateLayout, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
-		for (Layout layout : layouts) {
-			UnicodeProperties typeSettingsProperties =
-				layout.getTypeSettingsProperties();
+		Document document = SAXReaderUtil.createDocument();
 
-			if (PortalUtil.isLayoutSitemapable(layout) && !layout.isHidden() &&
-				GetterUtil.getBoolean(
-					typeSettingsProperties.getProperty("sitemap-include"),
-					true)) {
+		document.setXMLEncoding(StringPool.UTF8);
 
-				Element url = element.addElement("url");
+		Element rootElement = document.addElement(
+			"urlset", "http://www.google.com/schemas/sitemap/0.84");
 
-				String layoutFullURL = PortalUtil.getLayoutFullURL(
-					layout, themeDisplay);
+		List<Layout> layouts = LayoutLocalServiceUtil.getLayouts(
+			groupId, privateLayout, LayoutConstants.DEFAULT_PARENT_LAYOUT_ID);
 
-				url.addElement("loc").addText(encodeXML(layoutFullURL));
+		visitLayouts(rootElement, layouts, themeDisplay);
 
-				String changefreq = typeSettingsProperties.getProperty(
-					"sitemap-changefreq");
-
-				if (Validator.isNotNull(changefreq)) {
-					url.addElement("changefreq").addText(changefreq);
-				}
-
-				String priority = typeSettingsProperties.getProperty(
-					"sitemap-priority");
-
-				if (Validator.isNotNull(priority)) {
-					url.addElement("priority").addText(priority);
-				}
-
-				_visitArticles(element, layout, themeDisplay);
-
-				List<Layout> children = layout.getChildren();
-
-				_visitLayouts(element, children, themeDisplay);
-			}
-		}
+		return document.asXML();
 	}
 
-	private void _visitArticles(
+	protected void visitArticles(
 			Element element, Layout layout, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
@@ -135,22 +93,86 @@ public class SitemapImpl implements Sitemap {
 				continue;
 			}
 
-			String portalURL = PortalUtil.getPortalURL(
-				layout, themeDisplay);
+			String portalURL = PortalUtil.getPortalURL(layout, themeDisplay);
 
 			String groupFriendlyURL = PortalUtil.getGroupFriendlyURL(
 				GroupLocalServiceUtil.getGroup(journalArticle.getGroupId()),
 				false, themeDisplay);
 
-			String articleURL = portalURL.concat(groupFriendlyURL).concat(
-				JournalArticleConstants.CANONICAL_URL_SEPARATOR).concat(
-					journalArticle.getUrlTitle());
+			StringBundler sb = new StringBundler(4);
 
-			Element url = element.addElement("url");
+			sb.append(portalURL);
+			sb.append(groupFriendlyURL);
+			sb.append(JournalArticleConstants.CANONICAL_URL_SEPARATOR);
+			sb.append(journalArticle.getUrlTitle());
 
-			url.addElement("loc").addText(encodeXML(articleURL));
+			String articleURL = sb.toString();
+
+			Element urlElement = element.addElement("url");
+
+			Element locElement = urlElement.addElement("loc");
+
+			locElement.addText(encodeXML(articleURL));
 
 			processedArticleIds.add(journalArticle.getArticleId());
+		}
+	}
+
+	protected void visitLayout(
+			Element element, Layout layout, ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
+
+		UnicodeProperties typeSettingsProperties =
+			layout.getTypeSettingsProperties();
+
+		if (layout.isHidden() || !PortalUtil.isLayoutSitemapable(layout) ||
+			!GetterUtil.getBoolean(
+				typeSettingsProperties.getProperty("sitemap-include"),
+				true)) {
+
+			return;
+		}
+
+		Element urlElement = element.addElement("url");
+
+		String layoutFullURL = PortalUtil.getLayoutFullURL(
+			layout, themeDisplay);
+
+		Element locElement = urlElement.addElement("loc");
+
+		locElement.addText(encodeXML(layoutFullURL));
+
+		String changefreq = typeSettingsProperties.getProperty(
+			"sitemap-changefreq");
+
+		if (Validator.isNotNull(changefreq)) {
+			Element changefreqElement = urlElement.addElement("changefreq");
+
+			changefreqElement.addText(changefreq);
+		}
+
+		String priority = typeSettingsProperties.getProperty(
+			"sitemap-priority");
+
+		if (Validator.isNotNull(priority)) {
+			Element priorityElement = urlElement.addElement("priority");
+
+			priorityElement.addText(priority);
+		}
+
+		visitArticles(element, layout, themeDisplay);
+
+		List<Layout> children = layout.getChildren();
+
+		visitLayouts(element, children, themeDisplay);
+	}
+
+	protected void visitLayouts(
+			Element element, List<Layout> layouts, ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
+
+		for (Layout layout : layouts) {
+			visitLayout(element, layout,  themeDisplay);
 		}
 	}
 

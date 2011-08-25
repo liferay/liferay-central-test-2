@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.kernel.sitemap;
+package com.liferay.portlet.layoutsadmin.util;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -23,6 +23,10 @@ import com.liferay.portal.theme.ThemeDisplay;
  */
 public class SitemapUtil {
 
+	public static String encodeXML(String input) {
+		return getSitemap().encodeXML(input);
+	}
+
 	public static Sitemap getSitemap() {
 		return _sitemap;
 	}
@@ -32,10 +36,6 @@ public class SitemapUtil {
 		throws PortalException, SystemException {
 
 		return getSitemap().getSitemap(groupId, privateLayout, themeDisplay);
-	}
-
-	public static String encodeXML(String input) {
-		return getSitemap().encodeXML(input);
 	}
 
 	public void setSitemap(Sitemap sitemap) {

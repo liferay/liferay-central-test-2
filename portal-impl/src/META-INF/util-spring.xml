@@ -221,11 +221,6 @@
 			<bean class="com.liferay.portal.servlet.filters.compoundsessionid.CompoundSessionIdSplitterImpl" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.kernel.sitemap.SitemapUtil" class="com.liferay.portal.kernel.sitemap.SitemapUtil">
-		<property name="sitemap">
-			<bean class="com.liferay.portal.util.SitemapImpl" />
-		</property>
-	</bean>
 	<bean id="com.liferay.portal.kernel.staging.LayoutStagingUtil" class="com.liferay.portal.kernel.staging.LayoutStagingUtil">
 		<property name="layoutStaging">
 			<bean class="com.liferay.portal.staging.LayoutStagingImpl" />
@@ -605,6 +600,11 @@
 	<bean id="com.liferay.portlet.layoutconfiguration.util.RuntimePortlet" class="com.liferay.portlet.layoutconfiguration.util.RuntimePortletImpl" />
 	<bean id="com.liferay.portlet.layoutconfiguration.util.RuntimePortletUtil" class="com.liferay.portlet.layoutconfiguration.util.RuntimePortletUtil">
 		<property name="runtimePortlet" ref="com.liferay.portlet.layoutconfiguration.util.RuntimePortlet" />
+	</bean>
+	<bean id="com.liferay.portlet.layoutsadmin.util.SitemapUtil" class="com.liferay.portlet.layoutsadmin.util.SitemapUtil">
+		<property name="sitemap">
+			<bean class="com.liferay.portlet.layoutsadmin.util.SitemapImpl" />
+		</property>
 	</bean>
 	<bean id="com.liferay.portlet.passwordpoliciesadmin.util.PasswordPoliciesAdmin" class="com.liferay.portlet.passwordpoliciesadmin.util.PasswordPoliciesAdminImpl" />
 	<bean id="com.liferay.portlet.passwordpoliciesadmin.util.PasswordPoliciesAdminUtil" class="com.liferay.portlet.passwordpoliciesadmin.util.PasswordPoliciesAdminUtil">

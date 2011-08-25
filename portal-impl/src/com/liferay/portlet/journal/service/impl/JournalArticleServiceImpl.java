@@ -250,7 +250,7 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 
 	public List<JournalArticle> getArticlesByLayoutUuid(
 			long groupId, String layoutUuid)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return journalArticlePersistence.filterFindByG_L(groupId, layoutUuid);
 	}
