@@ -148,7 +148,7 @@ if (layout != null) {
 
 	<c:if test="<%= themeDisplay.isSignedIn() %>">
 		<c:choose>
-			<c:when test="<%= (layout != null) && layout.getGroup().isControlPanel() %>">
+			<c:when test="<%= (group != null) && group.isControlPanel() %>">
 				Liferay._editControlsState = 'visible';
 			</c:when>
 			<c:otherwise>
