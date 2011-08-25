@@ -189,8 +189,7 @@ public class JournalArticleServiceWrapper implements JournalArticleService {
 
 	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> getArticlesByLayoutUuid(
 		long groupId, java.lang.String layoutUuid)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _journalArticleService.getArticlesByLayoutUuid(groupId,
 			layoutUuid);
 	}
