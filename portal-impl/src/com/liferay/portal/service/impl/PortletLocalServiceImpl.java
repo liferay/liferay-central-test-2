@@ -585,9 +585,10 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 		// Clear pools every time initEAR is called. See LEP-5452.
 
+		portletLocalService.clearCompanyPortletsPool();
+
 		_portletAppsPool.clear();
 		_portletsPool.clear();
-		portletLocalService.clearCompanyPortletsPool();
 		_portletIdsByStrutsPath.clear();
 		_friendlyURLMapperPortlets.clear();
 
@@ -941,8 +942,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 	private Map<String, Portlet> _getPortletsPool(long companyId)
 		throws SystemException {
 
-		Map<String, Portlet> portletsPool =
-			(Map<String, Portlet>)_companyPortletsPool.get(companyId);
+		Map<String, Portlet> portletsPool = _companyPortletsPool.get(companyId);
 
 		if (portletsPool == null) {
 			portletsPool = portletLocalService.loadPortletsPool(companyId);
