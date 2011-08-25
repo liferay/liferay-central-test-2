@@ -229,12 +229,14 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 
 			CMISRepository cmisRepository = getCmisRepository();
 
-			String pwcId = _document.getVersionSeriesCheckedOutId();
+			String versionSeriesCheckedOutId =
+				_document.getVersionSeriesCheckedOutId();
 
-			if (Validator.isNotNull(pwcId)) {
+			if (Validator.isNotNull(versionSeriesCheckedOutId)) {
 				Session session = cmisRepository.getSession();
 
-				latestDocumentVersion = (Document)session.getObject(pwcId);
+				latestDocumentVersion = (Document)session.getObject(
+					versionSeriesCheckedOutId);
 
 				latestDocumentVersion.refresh();
 			}

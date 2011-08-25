@@ -201,10 +201,12 @@ public class CMISRepository extends BaseCmisRepository {
 
 			document.refresh();
 
-			String pwcId = document.getVersionSeriesCheckedOutId();
+			String versionSeriesCheckedOutId =
+				document.getVersionSeriesCheckedOutId();
 
-			if (Validator.isNotNull(pwcId)) {
-				document = (Document)session.getObject(pwcId);
+			if (Validator.isNotNull(versionSeriesCheckedOutId)) {
+				document = (Document)session.getObject(
+					versionSeriesCheckedOutId);
 
 				document.cancelCheckOut();
 
@@ -231,10 +233,12 @@ public class CMISRepository extends BaseCmisRepository {
 
 			document.refresh();
 
-			String pwcId = document.getVersionSeriesCheckedOutId();
+			String versionSeriesCheckedOutId =
+				document.getVersionSeriesCheckedOutId();
 
-			if (Validator.isNotNull(pwcId)) {
-				document = (Document)session.getObject(pwcId);
+			if (Validator.isNotNull(versionSeriesCheckedOutId)) {
+				document = (Document)session.getObject(
+					versionSeriesCheckedOutId);
 
 				document.checkIn(major, null, null, changeLog);
 
@@ -1103,10 +1107,12 @@ public class CMISRepository extends BaseCmisRepository {
 
 			document = (Document)session.getObject(versionSeriesId);
 
-			String pwcId = document.getVersionSeriesCheckedOutId();
+			String versionSeriesCheckedOutId =
+				document.getVersionSeriesCheckedOutId();
 
-			if (Validator.isNotNull(pwcId)) {
-				document = (Document)session.getObject(pwcId);
+			if (Validator.isNotNull(versionSeriesCheckedOutId)) {
+				document = (Document)session.getObject(
+					versionSeriesCheckedOutId);
 
 				document.refresh();
 			}
