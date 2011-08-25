@@ -47,12 +47,11 @@ public class SearchUserTest extends BaseTestCase {
 
 				selenium.saveScreenShotAndSource();
 				selenium.clickAt("link=Directory Test Page",
-					RuntimeVariables.replace(""));
+					RuntimeVariables.replace("Directory Test Page"));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
-				selenium.clickAt("link=Users", RuntimeVariables.replace(""));
-				selenium.waitForPageToLoad("30000");
-				selenium.saveScreenShotAndSource();
+				assertEquals(RuntimeVariables.replace("Users"),
+					selenium.getText("//li[1]/span/span"));
 
 				boolean basicVisible = selenium.isVisible("link=\u00ab Basic");
 
@@ -63,25 +62,31 @@ public class SearchUserTest extends BaseTestCase {
 				}
 
 				selenium.clickAt("link=\u00ab Basic",
-					RuntimeVariables.replace(""));
+					RuntimeVariables.replace("\u00ab Basic"));
 
 			case 2:
-				selenium.type("_11_keywords",
-					RuntimeVariables.replace("TestFirst"));
+				selenium.type("//input[@name='_11_keywords']",
+					RuntimeVariables.replace("userfn"));
 				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//input[@value='Search']",
-					RuntimeVariables.replace(""));
+					RuntimeVariables.replace("Search"));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
-				assertTrue(selenium.isElementPresent("link=TestFirst1"));
-				selenium.type("_11_keywords",
-					RuntimeVariables.replace("TestFirstA"));
+				selenium.type("//input[@name='_11_keywords']",
+					RuntimeVariables.replace(""));
+				selenium.saveScreenShotAndSource();
+				assertTrue(selenium.isElementPresent("link=userfn"));
+				selenium.type("//input[@name='_11_keywords']",
+					RuntimeVariables.replace("userfn1"));
 				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//input[@value='Search']",
-					RuntimeVariables.replace(""));
+					RuntimeVariables.replace("Search"));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
-				assertFalse(selenium.isTextPresent("TestFirst1"));
+				selenium.type("//input[@name='_11_keywords']",
+					RuntimeVariables.replace(""));
+				selenium.saveScreenShotAndSource();
+				assertFalse(selenium.isTextPresent("userfn"));
 
 			case 100:
 				label = -1;
