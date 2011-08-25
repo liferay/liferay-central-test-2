@@ -266,8 +266,8 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 	}
 
 	function <portlet:namespace />manageAttachments() {
+		document.<portlet:namespace />fm.encoding = "multipart/form-data";
 		document.<portlet:namespace />fm.<portlet:namespace />attachments.value = "true";
-		document.<portlet:namespace />fm.encoding="multipart/form-data";
 	}
 
 	function <portlet:namespace />previewEntry() {
