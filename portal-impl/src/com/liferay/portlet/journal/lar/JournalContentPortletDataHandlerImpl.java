@@ -248,8 +248,8 @@ public class JournalContentPortletDataHandlerImpl
 				layout.getLayoutId(), portletId, articleId, true);
 		}
 		else {
-			portletPreferences.setValue("article-id", StringPool.BLANK);
 			portletPreferences.setValue("group-id", StringPool.BLANK);
+			portletPreferences.setValue("article-id", StringPool.BLANK);
 		}
 
 		String templateId = portletPreferences.getValue("templateId", null);
