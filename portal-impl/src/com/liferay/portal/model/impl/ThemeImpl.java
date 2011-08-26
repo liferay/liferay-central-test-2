@@ -167,22 +167,20 @@ public class ThemeImpl extends PluginBaseImpl implements Theme {
 	}
 
 	public String getContextPath() {
-		if (isWARFile()) {
-			String servletContextName = getServletContextName();
-
-			if (servletContextName != null &&
-				ServletContextPool.containsKey(servletContextName)) {
-
-				ServletContext servletContext =
-					ServletContextPool.get(servletContextName);
-
-				return servletContext.getContextPath();
-			}
-			return StringPool.SLASH.concat(servletContextName);
-		}
-		else {
+		if (!isWARFile()) {
 			return PortalUtil.getPathContext();
 		}
+
+		String servletContextName = getServletContextName();
+
+		if (ServletContextPool.containsKey(servletContextName)) {
+			ServletContext servletContext = ServletContextPool.get(
+				servletContextName);
+
+			return servletContext.getContextPath();
+		}
+
+		return StringPool.SLASH.concat(servletContextName);
 	}
 
 	public String getCssPath() {
@@ -324,12 +322,11 @@ public class ThemeImpl extends PluginBaseImpl implements Theme {
 
 		String contextPath = getContextPath();
 
-		if (isWARFile()) {
-			return proxyPath.concat(contextPath);
-		}
-		else {
+		if (!isWARFile()) {
 			return contextPath;
 		}
+
+		return proxyPath.concat(contextPath);
 	}
 
 	public String getTemplateExtension() {

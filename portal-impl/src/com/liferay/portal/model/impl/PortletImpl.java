@@ -3000,22 +3000,20 @@ public class PortletImpl extends PortletBaseImpl {
 	 * @return the servlet context path of the portlet
 	 */
 	public String getContextPath() {
-		if (_portletApp.isWARFile()) {
-			String servletContextName = _portletApp.getServletContextName();
-
-			if (servletContextName != null
-				&& ServletContextPool.containsKey(servletContextName)) {
-
-				ServletContext servletContext =
-					ServletContextPool.get(servletContextName);
-
-				return servletContext.getContextPath();
-			}
-			return StringPool.SLASH.concat(servletContextName);
-		}
-		else {
+		if (!_portletApp.isWARFile()) {
 			return PortalUtil.getPathContext();
 		}
+
+		String servletContextName = _portletApp.getServletContextName();
+
+		if (ServletContextPool.containsKey(servletContextName)) {
+			ServletContext servletContext = ServletContextPool.get(
+				servletContextName);
+
+			return servletContext.getContextPath();
+		}
+
+		return StringPool.SLASH.concat(servletContextName);
 	}
 
 	/**
@@ -3034,12 +3032,11 @@ public class PortletImpl extends PortletBaseImpl {
 
 		String contextPath = getContextPath();
 
-		if (_portletApp.isWARFile()) {
-			return proxyPath.concat(contextPath);
-		}
-		else {
+		if (!_portletApp.isWARFile()) {
 			return contextPath;
 		}
+
+		return proxyPath.concat(contextPath);
 	}
 
 	/**
