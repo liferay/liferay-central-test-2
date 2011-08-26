@@ -113,8 +113,8 @@ public class MediaWikiEngine implements WikiEngine {
 	}
 
 	protected ParserInput getParserInput(long nodeId, String topicName) {
-		ParserInput parserInput =
-			new ParserInput("Special:Node:" + nodeId, topicName);
+		ParserInput parserInput = new ParserInput(
+			"Special:Node:" + nodeId, topicName);
 
 		// Dummy values
 
