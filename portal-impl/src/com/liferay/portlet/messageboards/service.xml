@@ -372,11 +372,15 @@
 			<finder-column name="groupId" />
 			<finder-column name="userId" />
 		</finder>
-		<finder name="G_NotM_NotU" return-type="Collection">
+		<finder name="G_NotU_NotM" return-type="Collection">
 			<finder-column name="groupId" />
-			<finder-column name="messageCount" comparator="!=" />
 			<finder-column name="userId" comparator="!=" />
+			<finder-column name="messageCount" comparator="!=" />
 		</finder>
+
+		<!-- References -->
+
+		<reference package-path="com.liferay.portal" entity="Group" />
 	</entity>
 	<entity name="MBThread" human-name="message boards thread" local-service="true" remote-service="true">
 
