@@ -23,7 +23,7 @@ import java.util.List;
 public class WorkflowHandlerUtil {
 
 	public static String[] getSearchableAssetTypes() {
-		List<String> assetTypesList = new ArrayList<String>();
+		List<String> assetTypes = new ArrayList<String>();
 
 		List<WorkflowHandler> workflowHandlers =
 			WorkflowHandlerRegistryUtil.getWorkflowHandlers();
@@ -33,14 +33,10 @@ public class WorkflowHandlerUtil {
 				continue;
 			}
 
-			assetTypesList.add(workflowHandler.getClassName());
+			assetTypes.add(workflowHandler.getClassName());
 		}
 
-		String[] assetTypes = new String[assetTypesList.size()];
-
-		assetTypesList.toArray(assetTypes);
-
-		return assetTypes;
+		return assetTypes.toArray(new String[assetTypes.size()]);
 	}
 
 }

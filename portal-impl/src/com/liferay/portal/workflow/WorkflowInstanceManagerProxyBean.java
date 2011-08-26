@@ -56,7 +56,7 @@ public class WorkflowInstanceManagerProxyBean
 	}
 
 	public int getWorkflowInstanceCount(
-		long companyId, Long userId, String assetClassNames[],
+		long companyId, Long userId, String[] assetClassNames,
 		Boolean completed) {
 
 		throw new UnsupportedOperationException();
