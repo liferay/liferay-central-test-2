@@ -46,7 +46,7 @@ AUI().add(
 						},
 						value: ''
 					},
-                    curEntryIds: {
+					curEntryIds: {
 						setter: function(value) {
 							var instance = this;
 
