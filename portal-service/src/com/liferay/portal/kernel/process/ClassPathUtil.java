@@ -82,7 +82,9 @@ public class ClassPathUtil {
 		String path = URLCodec.decodeURL(url.getPath());
 
 		if (ServerDetector.isWebLogic()) {
-			if (url.getProtocol().equals("zip")) {
+			String protocol = url.getProtocol();
+
+			if (protocol.equals("zip")) {
 				path = "file:".concat(path);
 			}
 		}
