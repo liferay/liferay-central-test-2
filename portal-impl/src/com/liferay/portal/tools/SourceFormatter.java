@@ -120,10 +120,7 @@ public class SourceFormatter {
 			String content, String packageDir, String className)
 		throws IOException {
 
-		Pattern pattern = Pattern.compile(
-			"(^[ \t]*import\\s+.*;\n+)+", Pattern.MULTILINE);
-
-		Matcher matcher = pattern.matcher(content);
+		Matcher matcher = _javaImportPattern.matcher(content);
 
 		if (!matcher.find()) {
 			return content;
@@ -142,7 +139,7 @@ public class SourceFormatter {
 		String line = null;
 
 		while ((line = unsyncBufferedReader.readLine()) != null) {
-			if (line.indexOf("import ") != -1) {
+			if (line.contains("import ")) {
 				int importX = line.indexOf(" ");
 				int importY = line.lastIndexOf(".");
 
@@ -216,7 +213,7 @@ public class SourceFormatter {
 
 			String includeFileName = content.substring(x + 1, y);
 
-			Matcher matcher = _includeFilePattern.matcher(includeFileName);
+			Matcher matcher = _jspIncludeFilePattern.matcher(includeFileName);
 
 			if (!matcher.find()) {
 				throw new RuntimeException(
@@ -352,25 +349,25 @@ public class SourceFormatter {
 
 			String inlineStringVulnerability1 = "'<%= " + jspVariable + " %>";
 
-			if (jspContent.indexOf(inlineStringVulnerability1) != -1) {
+			if (jspContent.contains(inlineStringVulnerability1)) {
 				xssVulnerable = true;
 			}
 
 			String inlineStringVulnerability2 = "(\"<%= " + jspVariable + " %>";
 
-			if (jspContent.indexOf(inlineStringVulnerability2) != -1) {
+			if (jspContent.contains(inlineStringVulnerability2)) {
 				xssVulnerable = true;
 			}
 
 			String inlineStringVulnerability3 = " \"<%= " + jspVariable + " %>";
 
-			if (jspContent.indexOf(inlineStringVulnerability3) != -1) {
+			if (jspContent.contains(inlineStringVulnerability3)) {
 				xssVulnerable = true;
 			}
 
 			String documentIdVulnerability = ".<%= " + jspVariable + " %>";
 
-			if (jspContent.indexOf(documentIdVulnerability) != -1) {
+			if (jspContent.contains(documentIdVulnerability)) {
 				xssVulnerable = true;
 			}
 
@@ -544,7 +541,7 @@ public class SourceFormatter {
 
 			String content = _fileUtil.read(file);
 
-			if (content.indexOf("<!-- SourceFormatter.Ignore -->") != -1) {
+			if (content.contains("<!-- SourceFormatter.Ignore -->")) {
 				continue;
 			}
 
@@ -685,9 +682,8 @@ public class SourceFormatter {
 	private static String _formatImports(String imports, int classStartPos)
 		throws IOException {
 
-		if ((imports.indexOf("/*") != -1) ||
-			(imports.indexOf("*/") != -1) ||
-			(imports.indexOf("//") != -1)) {
+		if (imports.contains("/*") || imports.contains("*/") ||
+			imports.contains("//")) {
 
 			return imports + "\n";
 		}
@@ -700,8 +696,7 @@ public class SourceFormatter {
 		String line = null;
 
 		while ((line = unsyncBufferedReader.readLine()) != null) {
-			if (((line.indexOf("import=") != -1) ||
-				 (line.indexOf("import ") != -1)) &&
+			if ((line.contains("import=") || line.contains("import ")) &&
 				!importsList.contains(line)) {
 
 				importsList.add(line);
@@ -790,14 +785,14 @@ public class SourceFormatter {
 				packagePath, File.separator, StringPool.PERIOD);
 
 			if (packagePath.endsWith(".model")) {
-				if (content.indexOf("extends " + className + "Model") != -1) {
+				if (content.contains("extends " + className + "Model")) {
 					continue;
 				}
 			}
 
 			String newContent = _formatJavaContent(fileName, content);
 
-			if (newContent.indexOf("$\n */") != -1) {
+			if (newContent.contains("$\n */")) {
 				_sourceFormatterHelper.printError(fileName, "*: " + fileName);
 
 				newContent = StringUtil.replace(
@@ -812,11 +807,11 @@ public class SourceFormatter {
 					fileName, "old (c): " + fileName);
 			}
 
-			if (newContent.indexOf(copyright) == -1) {
+			if (!newContent.contains(copyright)) {
 				_sourceFormatterHelper.printError(fileName, "(c): " + fileName);
 			}
 
-			if (newContent.indexOf(className + ".java.html") != -1) {
+			if (newContent.contains(className + ".java.html")) {
 				_sourceFormatterHelper.printError(
 					fileName, "Java2HTML: " + fileName);
 			}
@@ -851,56 +846,22 @@ public class SourceFormatter {
 
 			newContent = stripJavaImports(newContent, packagePath, className);
 
-			if (newContent.indexOf(";\n/**") != -1) {
-				newContent = StringUtil.replace(
-					newContent,
-					";\n/**",
-					";\n\n/**");
-			}
+			newContent = StringUtil.replace(newContent, ";\n/**", ";\n\n/**");
 
-			if (newContent.indexOf("\t/*\n\t *") != -1) {
-				newContent = StringUtil.replace(
-					newContent,
-					"\t/*\n\t *",
-					"\t/**\n\t *");
-			}
+			newContent = StringUtil.replace(
+				newContent, "\t/*\n\t *", "\t/**\n\t *");
 
-			if (newContent.indexOf("if(") != -1) {
-				newContent = StringUtil.replace(
-					newContent,
-					"if(",
-					"if (");
-			}
+			newContent = StringUtil.replace(newContent, "if(", "if (");
 
-			if (newContent.indexOf("for(") != -1) {
-				newContent = StringUtil.replace(
-					newContent,
-					"for(",
-					"for (");
-			}
+			newContent = StringUtil.replace(newContent, "for(", "for (");
 
-			if (newContent.indexOf("while(") != -1) {
-				newContent = StringUtil.replace(
-					newContent,
-					"while(",
-					"while (");
-			}
+			newContent = StringUtil.replace(newContent, "while(", "while (");
 
-			if (newContent.indexOf("){\n") != -1) {
-				newContent = StringUtil.replace(
-					newContent,
-					"){\n",
-					") {\n");
-			}
+			newContent = StringUtil.replace(newContent, "){\n", ") {\n");
 
-			if (newContent.indexOf("\n\n\n") != -1) {
-				newContent = StringUtil.replace(
-					newContent,
-					"\n\n\n",
-					"\n\n");
-			}
+			newContent = StringUtil.replace(newContent, "\n\n\n", "\n\n");
 
-			if (newContent.indexOf("*/\npackage ") != -1) {
+			if (newContent.contains("*/\npackage ")) {
 				_sourceFormatterHelper.printError(
 					fileName, "package: " + fileName);
 			}
@@ -912,7 +873,7 @@ public class SourceFormatter {
 			}
 
 			if (portalJavaFiles && className.endsWith("ServiceImpl") &&
-				(newContent.indexOf("ServiceUtil.") != -1)) {
+				newContent.contains("ServiceUtil.")) {
 
 				_sourceFormatterHelper.printError(
 					fileName, "ServiceUtil: " + fileName);
@@ -1140,7 +1101,7 @@ public class SourceFormatter {
 						fileName, "old (c): " + fileName);
 				}
 
-				if (newContent.indexOf(copyright) == -1) {
+				if (!newContent.contains(copyright)) {
 					_sourceFormatterHelper.printError(
 						fileName, "(c): " + fileName);
 				}
@@ -1151,31 +1112,23 @@ public class SourceFormatter {
 				}
 			}
 
-			if (newContent.indexOf("alert('<%= LanguageUtil.") != -1) {
-				newContent = StringUtil.replace(
-					newContent, "alert('<%= LanguageUtil.",
-					"alert('<%= UnicodeLanguageUtil.");
-			}
+			newContent = StringUtil.replace(
+				newContent, "alert('<%= LanguageUtil.",
+				"alert('<%= UnicodeLanguageUtil.");
 
-			if (newContent.indexOf("alert(\"<%= LanguageUtil.") != -1) {
-				newContent = StringUtil.replace(
-					newContent, "alert(\"<%= LanguageUtil.",
-					"alert(\"<%= UnicodeLanguageUtil.");
-			}
+			newContent = StringUtil.replace(
+				newContent, "alert(\"<%= LanguageUtil.",
+				"alert(\"<%= UnicodeLanguageUtil.");
 
-			if (newContent.indexOf("confirm('<%= LanguageUtil.") != -1) {
-				newContent = StringUtil.replace(
-					newContent, "confirm('<%= LanguageUtil.",
-					"confirm('<%= UnicodeLanguageUtil.");
-			}
+			newContent = StringUtil.replace(
+				newContent, "confirm('<%= LanguageUtil.",
+				"confirm('<%= UnicodeLanguageUtil.");
 
-			if (newContent.indexOf("confirm(\"<%= LanguageUtil.") != -1) {
-				newContent = StringUtil.replace(
-					newContent, "confirm(\"<%= LanguageUtil.",
-					"confirm(\"<%= UnicodeLanguageUtil.");
-			}
+			newContent = StringUtil.replace(
+				newContent, "confirm(\"<%= LanguageUtil.",
+				"confirm(\"<%= UnicodeLanguageUtil.");
 
-			if (newContent.indexOf("    ") != -1) {
+			if (newContent.contains("    ")) {
 				if (!fileName.endsWith("template.vm")) {
 					_sourceFormatterHelper.printError(
 						fileName, "tab: " + fileName);
@@ -1230,7 +1183,7 @@ public class SourceFormatter {
 				if (y != -1) {
 					String includeFileName = line.substring(x + 1, y);
 
-					Matcher matcher = _includeFilePattern.matcher(
+					Matcher matcher = _jspIncludeFilePattern.matcher(
 						includeFileName);
 
 					if (!matcher.find()) {
@@ -1320,7 +1273,7 @@ public class SourceFormatter {
 						}
 					}
 
-					if (result.indexOf(quoteFix) == -1) {
+					if (!result.contains(quoteFix)) {
 						StringBundler sb = new StringBundler(5);
 
 						sb.append(content.substring(0, x));
@@ -1476,7 +1429,8 @@ public class SourceFormatter {
 	}
 
 	private static List<String> _getJSPUnusedImportClassNames(
-		String fileName, String imports) throws IOException {
+			String fileName, String imports)
+		throws IOException {
 
 		List<String> importClassNames = new ArrayList<String>();
 
@@ -1486,7 +1440,7 @@ public class SourceFormatter {
 		String line = null;
 
 		while ((line = unsyncBufferedReader.readLine()) != null) {
-			if (line.indexOf("import=") != -1) {
+			if (line.contains("import=")) {
 				int x = line.indexOf(StringPool.QUOTE);
 				int y = line.indexOf(StringPool.QUOTE, x + 1);
 
@@ -1787,7 +1741,8 @@ public class SourceFormatter {
 	}
 
 	private static String _stripJSPImports(String fileName, String content)
-			throws IOException {
+		throws IOException {
+
 		fileName = fileName.replace(
 			CharPool.BACK_SLASH, CharPool.FORWARD_SLASH);
 
@@ -1798,10 +1753,7 @@ public class SourceFormatter {
 			return content;
 		}
 
-		Pattern pattern = Pattern.compile(
-			"(<.*page.import=\".*>\n*)+", Pattern.MULTILINE);
-
-		Matcher matcher = pattern.matcher(content);
+		Matcher matcher = _jspImportPattern.matcher(content);
 
 		if (!matcher.find()) {
 			return content;
@@ -1837,7 +1789,7 @@ public class SourceFormatter {
 
 		content =
 			content.substring(0, matcher.start()) + imports + "\n" +
-			afterImports;
+				afterImports;
 
 		return content;
 	}
@@ -1851,10 +1803,14 @@ public class SourceFormatter {
 	private static String[] _excludes;
 	private static Properties _exclusionsProperties;
 	private static FileImpl _fileUtil = FileImpl.getInstance();
-	private static Pattern _includeFilePattern = Pattern.compile(
-		"/.*[.]jsp[f]?");
+	private static Pattern _javaImportPattern = Pattern.compile(
+		"(^[ \t]*import\\s+.*;\n+)+", Pattern.MULTILINE);
 	private static Map<String, String> _jspContents =
 		new HashMap<String, String>();
+	private static Pattern _jspImportPattern = Pattern.compile(
+		"(<.*page.import=\".*>\n*)+", Pattern.MULTILINE);
+	private static Pattern _jspIncludeFilePattern = Pattern.compile(
+		"/.*[.]jsp[f]?");
 	private static SAXReaderImpl _saxReaderUtil = SAXReaderImpl.getInstance();
 	private static SourceFormatterHelper _sourceFormatterHelper;
 	private static Pattern _xssPattern = Pattern.compile(
