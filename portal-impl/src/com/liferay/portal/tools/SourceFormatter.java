@@ -826,40 +826,41 @@ public class SourceFormatter {
 					fileName, "UTF-8: " + fileName);
 			}
 
-			if (newContent.contains("com.liferay.portal.PortalException")) {
-				newContent = StringUtil.replace(
-					newContent, "com.liferay.portal.PortalException",
-					"com.liferay.portal.kernel.exception.PortalException");
-			}
-
-			if (newContent.contains("com.liferay.portal.SystemException")) {
-				newContent = StringUtil.replace(
-					newContent, "com.liferay.portal.SystemException",
-					"com.liferay.portal.kernel.exception.SystemException");
-			}
-
-			if (newContent.contains("com.liferay.util.LocalizationUtil")) {
-				newContent = StringUtil.replace(
-					newContent, "com.liferay.util.LocalizationUtil",
-					"com.liferay.portal.kernel.util.LocalizationUtil");
-			}
+			newContent = StringUtil.replace(
+				newContent,
+				new String[] {
+					"com.liferay.portal.PortalException",
+					"com.liferay.portal.SystemException",
+					"com.liferay.util.LocalizationUtil"
+				},
+				new String[] {
+					"com.liferay.portal.kernel.exception.PortalException",
+					"com.liferay.portal.kernel.exception.SystemException",
+					"com.liferay.portal.kernel.util.LocalizationUtil"
+				});
 
 			newContent = stripJavaImports(newContent, packagePath, className);
 
-			newContent = StringUtil.replace(newContent, ";\n/**", ";\n\n/**");
-
 			newContent = StringUtil.replace(
-				newContent, "\t/*\n\t *", "\t/**\n\t *");
-
-			newContent = StringUtil.replace(newContent, "if(", "if (");
-
-			newContent = StringUtil.replace(newContent, "for(", "for (");
-
-			newContent = StringUtil.replace(newContent, "while(", "while (");
-
-			newContent = StringUtil.replace(newContent, "){\n", ") {\n");
-
-			newContent = StringUtil.replace(newContent, "\n\n\n", "\n\n");
+				newContent,
+				new String[] {
+					";\n/**",
+					"\t/*\n\t *",
+					"if(",
+					"for(",
+					"while(",
+					"){\n",
+					"\n\n\n"
+				},
+				new String[] {
+					";\n\n/**",
+					"\t/**\n\t *",
+					"if (",
+					"for (",
+					"while (",
+					") {\n",
+					"\n\n"
+				});
 
 			if (newContent.contains("*/\npackage ")) {
 				_sourceFormatterHelper.printError(
@@ -1113,20 +1114,19 @@ public class SourceFormatter {
 			}
 
 			newContent = StringUtil.replace(
-				newContent, "alert('<%= LanguageUtil.",
-				"alert('<%= UnicodeLanguageUtil.");
-
-			newContent = StringUtil.replace(
-				newContent, "alert(\"<%= LanguageUtil.",
-				"alert(\"<%= UnicodeLanguageUtil.");
-
-			newContent = StringUtil.replace(
-				newContent, "confirm('<%= LanguageUtil.",
-				"confirm('<%= UnicodeLanguageUtil.");
-
-			newContent = StringUtil.replace(
-				newContent, "confirm(\"<%= LanguageUtil.",
-				"confirm(\"<%= UnicodeLanguageUtil.");
+				newContent,
+				new String[] {
+					"alert('<%= LanguageUtil.",
+					"alert(\"<%= LanguageUtil.",
+					"confirm('<%= LanguageUtil.",
+					"confirm(\"<%= LanguageUtil."
+				},
+				new String[] {
+					"alert('<%= UnicodeLanguageUtil.",
+					"alert(\"<%= UnicodeLanguageUtil.",
+					"confirm('<%= UnicodeLanguageUtil.",
+					"confirm(\"<%= UnicodeLanguageUtil."
+				});
 
 			if (newContent.contains("    ")) {
 				if (!fileName.endsWith("template.vm")) {
