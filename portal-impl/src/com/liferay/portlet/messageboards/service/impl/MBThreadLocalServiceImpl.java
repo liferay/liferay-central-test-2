@@ -92,9 +92,9 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 
 		mbThreadPersistence.update(thread, false);
 
-		if (categoryId >= 0) {
-			// Asset
+		// Asset
 
+		if (categoryId >= 0) {
 			assetEntryLocalService.updateEntry(
 				message.getUserId(), message.getGroupId(),
 				MBThread.class.getName(), thread.getThreadId(), null,
