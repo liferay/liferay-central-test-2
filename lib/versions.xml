@@ -1660,7 +1660,7 @@
 		<file-name>portal/fontbox.jar</file-name>
 		<version>1.6.0</version>
 		<project-name>PDFBox</project-name>
-		<project-url>http://pdfbox.apache.org/</project-url>
+		<project-url>http://pdfbox.apache.org</project-url>
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
@@ -2042,7 +2042,7 @@
 		<file-name>portal/jempbox.jar</file-name>
 		<version>1.6.0</version>
 		<project-name>PDFBox</project-name>
-		<project-url>http://pdfbox.apache.org/</project-url>
+		<project-url>http://pdfbox.apache.org</project-url>
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
@@ -2507,7 +2507,7 @@
 		<file-name>portal/pdfbox.jar</file-name>
 		<version>1.6.0</version>
 		<project-name>PDFBox</project-name>
-		<project-url>http://pdfbox.apache.org/</project-url>
+		<project-url>http://pdfbox.apache.org</project-url>
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
