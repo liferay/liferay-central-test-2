@@ -197,8 +197,7 @@ public class SourceFormatter {
 	}
 
 	private static void _addJSPIncludeFileNames(
-			String fileName, Set<String> includeFileNames)
-		throws SourceFormatException {
+		String fileName, Set<String> includeFileNames) {
 
 		String content = _jspContents.get(fileName);
 
@@ -230,7 +229,8 @@ public class SourceFormatter {
 			Matcher matcher = _includeFilePattern.matcher(includeFileName);
 
 			if (!matcher.find()) {
-				throw new SourceFormatException();
+				throw new RuntimeException(
+					"Invalid include " + includeFileName);
 			}
 
 			includeFileName = "portal-web/docroot" + includeFileName;
@@ -1098,7 +1098,7 @@ public class SourceFormatter {
 			_jspContents.put(fileName, content);
 		}
 
-		boolean invalidSourceFormat = false;
+		boolean stripJSPImports = true;
 
 		for (String fileName : fileNames) {
 			File file = new File(basedir + fileName);
@@ -1118,11 +1118,12 @@ public class SourceFormatter {
 					"javascript:"
 				});
 
-			if (!invalidSourceFormat) {
+			if (stripJSPImports) {
 				try {
 					newContent = _stripJSPImports(fileName, newContent);
-				} catch (SourceFormatException sfe) {
-					invalidSourceFormat = true;
+				}
+				catch (RuntimeException re) {
+					stripJSPImports = false;
 				}
 			}
 
@@ -1242,8 +1243,7 @@ public class SourceFormatter {
 					if (!matcher.find()) {
 						_sourceFormatterHelper.printError(
 							fileName,
-							"include file without '/' " + fileName + " " +
-								lineCount);
+							"include: " + fileName + " " + lineCount);
 					}
 				}
 			}
@@ -1483,7 +1483,7 @@ public class SourceFormatter {
 	}
 
 	private static List<String> _getJSPUnusedImportClassNames(
-		String fileName, String content) throws SourceFormatException {
+		String fileName, String content) {
 
 		if (Validator.isNull(content) ||
 			fileName.endsWith("html/common/init.jsp") ||
@@ -1712,9 +1712,8 @@ public class SourceFormatter {
 	}
 
 	private static boolean _isJSPImportRequired(
-			String fileName, String className,
-			Set<String> includeFileNames, Set<String> checkedFileNames)
-		throws SourceFormatException {
+		String fileName, String className, Set<String> includeFileNames,
+		Set<String> checkedFileNames) {
 
 		if (checkedFileNames.contains(fileName)) {
 			return false;
@@ -1811,9 +1810,7 @@ public class SourceFormatter {
 		return newLine;
 	}
 
-	private static String _stripJSPImports(String fileName, String content)
-		throws SourceFormatException {
-
+	private static String _stripJSPImports(String fileName, String content) {
 		fileName = fileName.replace(
 			CharPool.BACK_SLASH, CharPool.FORWARD_SLASH);
 
