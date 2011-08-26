@@ -23,6 +23,7 @@ import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.FileVersion;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.SystemProperties;
@@ -39,9 +40,9 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.InputStream;
 
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 import java.util.Vector;
 
 /**
@@ -389,8 +390,8 @@ public class VideoProcessor implements DLProcessor {
 
 	private static VideoProcessor _instance = new VideoProcessor();
 
-	private static List<String> _videoMimeTypes =
-		Arrays.asList(PropsValues.DL_FILE_ENTRY_PREVIEW_VIDEO_MIME_TYPES);
+	private static Set<String> _videoMimeTypes = SetUtil.fromArray(
+		PropsValues.DL_FILE_ENTRY_PREVIEW_VIDEO_MIME_TYPES);
 
 	private List<Long> _fileEntries = new Vector<Long>();
 

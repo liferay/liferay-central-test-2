@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.FileVersion;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.service.ImageLocalServiceUtil;
 import com.liferay.portal.service.ImageServiceUtil;
@@ -39,8 +40,8 @@ import java.awt.image.RenderedImage;
 import java.io.IOException;
 import java.io.InputStream;
 
-import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.Vector;
 
 /**
@@ -71,6 +72,21 @@ public class ImageProcessor implements DLProcessor {
 		return _hasImages(fileVersion.getSmallImageId());
 	}
 
+	public void trigger(FileEntry fileEntry) {
+		try {
+			FileVersion fileVersion = fileEntry.getLatestFileVersion();
+
+			trigger(fileVersion);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+	}
+
+	public void trigger(FileVersion fileVersion) {
+		_instance._queueGeneration(fileVersion);
+	}
+
 	private static boolean _hasImages(long imageId) {
 		boolean hasImages = false;
 
@@ -86,21 +102,6 @@ public class ImageProcessor implements DLProcessor {
 		}
 
 		return hasImages;
-	}
-
-	public void trigger(FileEntry fileEntry) {
-		try {
-			FileVersion fileVersion = fileEntry.getLatestFileVersion();
-
-			trigger(fileVersion);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
-	}
-
-	public void trigger(FileVersion fileVersion) {
-		_instance._queueGeneration(fileVersion);
 	}
 
 	private void _generateImages(FileVersion fileVersion) {
@@ -205,8 +206,8 @@ public class ImageProcessor implements DLProcessor {
 
 	private static ImageProcessor _instance = new ImageProcessor();
 
-	private static List<String> _imageMimeTypes =
-		Arrays.asList(PropsValues.IG_IMAGE_THUMBNAIL_MIME_TYPES);
+	private static Set<String> _imageMimeTypes = SetUtil.fromArray(
+		PropsValues.IG_IMAGE_THUMBNAIL_MIME_TYPES);
 
 	private static List<Long> _fileEntries = new Vector<Long>();
 

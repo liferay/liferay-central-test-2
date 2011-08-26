@@ -23,6 +23,7 @@ import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.FileVersion;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.SystemProperties;
@@ -38,8 +39,8 @@ import com.xuggle.xuggler.ICodec;
 import java.io.File;
 import java.io.InputStream;
 
-import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.Vector;
 
 /**
@@ -273,8 +274,8 @@ public class AudioProcessor implements DLProcessor {
 
 	private static AudioProcessor _instance = new AudioProcessor();
 
-	private static List<String> _audioMimeTypes =
-		Arrays.asList(PropsValues.DL_FILE_ENTRY_PREVIEW_AUDIO_MIME_TYPES);
+	private static Set<String> _audioMimeTypes = SetUtil.fromArray(
+		PropsValues.DL_FILE_ENTRY_PREVIEW_AUDIO_MIME_TYPES);
 
 	private List<Long> _fileEntries = new Vector<Long>();
 
