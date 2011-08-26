@@ -238,7 +238,7 @@ public class CMISRepository extends BaseCmisRepository {
 				document.getVersionSeriesCheckedOutId();
 
 			if (Validator.isNotNull(versionSeriesCheckedOutId)) {
-				if (!isMinorVersionsSupported()) {
+				if (!isSupportsMinorVersions()) {
 					major = true;
 				}
 
@@ -842,8 +842,12 @@ public class CMISRepository extends BaseCmisRepository {
 		return _cmisRepositoryHandler.isDocumentRetrievableByVersionSeriesId();
 	}
 
+	public boolean isRefreshBeforePermissionCheck() {
+		return _cmisRepositoryHandler.isRefreshBeforePermissionCheck();
+	}
+
 	@Override
-	public boolean isMinorVersionsSupported()
+	public boolean isSupportsMinorVersions()
 		throws PortalException, SystemException {
 
 		try {
@@ -853,7 +857,7 @@ public class CMISRepository extends BaseCmisRepository {
 
 			String productName = repositoryInfo.getProductName();
 
-			return _cmisRepositoryHandler.isMinorVersionsSupported(productName);
+			return _cmisRepositoryHandler.isSupportsMinorVersions(productName);
 		}
 		catch (PortalException pe) {
 			throw pe;
@@ -866,10 +870,6 @@ public class CMISRepository extends BaseCmisRepository {
 
 			throw new RepositoryException(e);
 		}
-	}
-
-	public boolean isRefreshBeforePermissionCheck() {
-		return _cmisRepositoryHandler.isRefreshBeforePermissionCheck();
 	}
 
 	public Lock lockFolder(long folderId) {
@@ -1180,7 +1180,7 @@ public class CMISRepository extends BaseCmisRepository {
 			checkUpdatable(allowableActionsSet, properties, contentStream);
 
 			if (checkOutDocumentObjectId != null) {
-				if (!isMinorVersionsSupported()) {
+				if (!isSupportsMinorVersions()) {
 					majorVersion = true;
 				}
 

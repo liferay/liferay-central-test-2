@@ -324,7 +324,11 @@ public abstract class CMISRepositoryHandler extends BaseRepositoryImpl {
 		return true;
 	}
 
-	public boolean isMinorVersionsSupported(String productName)
+	public boolean isRefreshBeforePermissionCheck() {
+		return false;
+	}
+
+	public boolean isSupportsMinorVersions(String productName)
 		throws PortalException, SystemException {
 
 		// LPS-20509
@@ -337,10 +341,6 @@ public abstract class CMISRepositoryHandler extends BaseRepositoryImpl {
 		else {
 			return true;
 		}
-	}
-
-	public boolean isRefreshBeforePermissionCheck() {
-		return false;
 	}
 
 	public Lock lockFolder(long folderId)
