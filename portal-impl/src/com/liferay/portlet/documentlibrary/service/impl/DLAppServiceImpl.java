@@ -1641,6 +1641,15 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 		return repository.getMountFolders(parentFolderId, start, end, obc);
 	}
 
+	public void getSubfolderIds(
+			long repositoryId, List<Long> folderIds, long folderId)
+		throws PortalException, SystemException {
+
+		Repository repository = getRepository(repositoryId);
+
+		repository.getSubfolderIds(folderIds, folderId);
+	}
+
 	/**
 	 * Returns all the descendant folders of the folder with the primary key.
 	 *
@@ -1676,15 +1685,6 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 		Repository repository = getRepository(repositoryId);
 
 		return repository.getSubfolderIds(folderId, recurse);
-	}
-
-	public void getSubfolderIds(
-			long repositoryId, List<Long> folderIds, long folderId)
-		throws PortalException, SystemException {
-
-		Repository repository = getRepository(repositoryId);
-
-		repository.getSubfolderIds(folderIds, folderId);
 	}
 
 	/**
@@ -2113,7 +2113,7 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 			boolean majorVersion, File file, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		if (file == null || !file.exists() || (file.length() == 0)) {
+		if ((file == null) || !file.exists() || (file.length() == 0)) {
 			return updateFileEntryAndCheckIn(
 				fileEntryId, sourceFileName, mimeType, title, description,
 				changeLog, majorVersion, null, 0, serviceContext);

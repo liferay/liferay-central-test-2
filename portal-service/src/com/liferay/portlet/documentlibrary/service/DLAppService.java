@@ -69,7 +69,7 @@ public interface DLAppService {
 	* @param serviceContext the service context to be applied. Can specify the
 	file entry's asset category IDs, asset tag names, and expando
 	bridge attributes. In a Liferay repository, it may include:
-
+	
 	<ul>
 	<li>
 	fileEntryTypeId - ID for a custom file entry type
@@ -117,7 +117,7 @@ public interface DLAppService {
 	* @param serviceContext the service context to be applied. Can specify the
 	file entry's asset category IDs, asset tag names, and expando
 	bridge attributes. In a Liferay repository, it may include:
-
+	
 	<ul>
 	<li>
 	fileEntryTypeId - ID for a custom file entry type
@@ -167,7 +167,7 @@ public interface DLAppService {
 	* @param serviceContext the service context to be applied. Can specify the
 	file entry's asset category IDs, asset tag names, and expando
 	bridge attributes. In a Liferay repository, it may include:
-
+	
 	<ul>
 	<li>
 	fileEntryTypeId - ID for a custom file entry type
@@ -1361,6 +1361,12 @@ public interface DLAppService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public void getSubfolderIds(long repositoryId,
+		java.util.List<java.lang.Long> folderIds, long folderId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
 	/**
 	* Returns all the descendant folders of the folder with the primary key.
 	*
@@ -1392,12 +1398,6 @@ public interface DLAppService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<java.lang.Long> getSubfolderIds(long repositoryId,
 		long folderId, boolean recurse)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public void getSubfolderIds(long repositoryId,
-		java.util.List<java.lang.Long> folderIds, long folderId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -1600,7 +1600,7 @@ public interface DLAppService {
 	* @param serviceContext the service context to be applied. Can specify the
 	file entry's asset category IDs, asset tag names, and expando
 	bridge attributes. In a Liferay repository, it may include:
-
+	
 	<ul>
 	<li>
 	fileEntryTypeId - ID for a custom file entry type
@@ -1651,7 +1651,7 @@ public interface DLAppService {
 	* @param serviceContext the service context to be applied. Can specify the
 	file entry's asset category IDs, asset tag names, and expando
 	bridge attributes. In a Liferay repository, it may include:
-
+	
 	<ul>
 	<li>
 	fileEntryTypeId - ID for a custom file entry type
@@ -1703,7 +1703,7 @@ public interface DLAppService {
 	* @param serviceContext the service context to be applied. Can specify the
 	file entry's asset category IDs, asset tag names, and expando
 	bridge attributes. In a Liferay repository, it may include:
-
+	
 	<ul>
 	<li>
 	fileEntryTypeId - ID for a custom file entry type
@@ -1773,7 +1773,7 @@ public interface DLAppService {
 	* @param description the folder's new description
 	* @param serviceContext the service context to be applied. In a Liferay
 	repository, it may include:
-
+	
 	<ul>
 	<li>
 	defaultFileEntryTypeId - the file entry type to default all
