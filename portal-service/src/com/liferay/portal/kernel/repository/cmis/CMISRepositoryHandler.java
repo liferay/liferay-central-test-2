@@ -328,8 +328,7 @@ public abstract class CMISRepositoryHandler extends BaseRepositoryImpl {
 		return false;
 	}
 
-	public boolean isSupportsMinorVersions(String productName)
-		throws PortalException, SystemException {
+	public boolean isSupportsMinorVersions(String productName) {
 
 		// LPS-20509
 
