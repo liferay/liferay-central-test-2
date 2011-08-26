@@ -36,7 +36,7 @@ public class DLProcessorRegistryImpl implements DLProcessorRegistry {
 			return;
 		}
 
-		if (fileEntry == null || fileEntry.getSize() == 0) {
+		if ((fileEntry == null) || (fileEntry.getSize() == 0)) {
 			return;
 		}
 
