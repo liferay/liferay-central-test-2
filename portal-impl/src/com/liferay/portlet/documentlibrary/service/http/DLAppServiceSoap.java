@@ -622,6 +622,19 @@ public class DLAppServiceSoap {
 		}
 	}
 
+	public static void getSubfolderIds(long repositoryId, Long[] folderIds,
+		long folderId) throws RemoteException {
+		try {
+			DLAppServiceUtil.getSubfolderIds(repositoryId,
+				ListUtil.toList(folderIds), folderId);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	/**
 	* Returns all the descendant folders of the folder with the primary key.
 	*
@@ -666,19 +679,6 @@ public class DLAppServiceSoap {
 					folderId, recurse);
 
 			return returnValue.toArray(new java.lang.Long[returnValue.size()]);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static void getSubfolderIds(long repositoryId, Long[] folderIds,
-		long folderId) throws RemoteException {
-		try {
-			DLAppServiceUtil.getSubfolderIds(repositoryId,
-				ListUtil.toList(folderIds), folderId);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
