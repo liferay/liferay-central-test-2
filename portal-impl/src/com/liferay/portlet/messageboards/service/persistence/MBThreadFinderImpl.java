@@ -74,12 +74,6 @@ public class MBThreadFinderImpl
 	public static String FIND_BY_S_G_U_C_S =
 		MBThreadFinder.class.getName() + ".findByS_G_U_C_S";
 
-	public int countByG_C_S(long groupId, long categoryId, int status)
-		throws SystemException {
-
-		return doCountByG_C_S(groupId, categoryId, status, false);
-	}
-
 	public int countByG_U_S(long groupId, long userId, int status)
 		throws SystemException {
 
@@ -128,6 +122,12 @@ public class MBThreadFinderImpl
 		}
 	}
 
+	public int countByG_C_S(long groupId, long categoryId, int status)
+		throws SystemException {
+
+		return doCountByG_C_S(groupId, categoryId, status, false);
+	}
+
 	public int countByG_U_A_S(
 			long groupId, long userId, boolean anonymous, int status)
 		throws SystemException {
@@ -137,7 +137,7 @@ public class MBThreadFinderImpl
 		try {
 			session = openSession();
 
-			String sql = CustomSQLUtil.get(FIND_BY_G_U_A_S);
+			String sql = CustomSQLUtil.get(COUNT_BY_G_U_A_S);
 
 			if (status != WorkflowConstants.STATUS_ANY) {
 				sql = CustomSQLUtil.appendCriteria(
@@ -327,13 +327,6 @@ public class MBThreadFinderImpl
 		}
 	}
 
-	public List<MBThread> findByG_C_S(
-			long groupId, long categoryId, int status, int start, int end)
-		throws SystemException {
-
-		return doFindByG_C_S(groupId, categoryId, status, start, end, false);
-	}
-
 	public List<MBThread> findByG_U_S(
 			long groupId, long userId, int status, int start, int end)
 		throws SystemException {
@@ -371,6 +364,13 @@ public class MBThreadFinderImpl
 		finally {
 			closeSession(session);
 		}
+	}
+
+	public List<MBThread> findByG_C_S(
+			long groupId, long categoryId, int status, int start, int end)
+		throws SystemException {
+
+		return doFindByG_C_S(groupId, categoryId, status, start, end, false);
 	}
 
 	public List<MBThread> findByG_U_A_S(
@@ -414,15 +414,6 @@ public class MBThreadFinderImpl
 		}
 	}
 
-	public List<MBThread> findByS_G_U_C_S(
-			long groupId, long userId, long[] categoryIds, int status,
-			int start, int end)
-		throws SystemException {
-
-		return doFindByS_G_U_C_S(
-			groupId, userId, categoryIds, status, start, end, false);
-	}
-
 	public List<MBThread> findByS_G_U_S(
 		long groupId, long userId, int status, int start, int end)
 		throws SystemException {
@@ -461,6 +452,15 @@ public class MBThreadFinderImpl
 		finally {
 			closeSession(session);
 		}
+	}
+
+	public List<MBThread> findByS_G_U_C_S(
+			long groupId, long userId, long[] categoryIds, int status,
+			int start, int end)
+		throws SystemException {
+
+		return doFindByS_G_U_C_S(
+			groupId, userId, categoryIds, status, start, end, false);
 	}
 
 	protected int doCountByG_C_S(

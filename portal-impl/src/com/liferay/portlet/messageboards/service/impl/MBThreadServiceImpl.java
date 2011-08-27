@@ -69,8 +69,9 @@ public class MBThreadServiceImpl extends MBThreadServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
-			return doGetGroupThreads(groupId, userId, status, subscribed,
-				includeAnonymous, start, end);
+			return doGetGroupThreads(
+				groupId, userId, status, subscribed, includeAnonymous, start,
+				end);
 		}
 
 		long[] categoryIds = mbCategoryService.getCategoryIds(
@@ -158,8 +159,8 @@ public class MBThreadServiceImpl extends MBThreadServiceBaseImpl {
 		throws SystemException {
 
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
-			return doGetGroupThreadsCount(groupId, userId, status, subscribed,
-				includeAnonymous);
+			return doGetGroupThreadsCount(
+				groupId, userId, status, subscribed, includeAnonymous);
 		}
 
 		long[] categoryIds = mbCategoryService.getCategoryIds(
@@ -284,28 +285,28 @@ public class MBThreadServiceImpl extends MBThreadServiceBaseImpl {
 	protected List<MBThread> doGetGroupThreads(
 			long groupId, long userId, int status, boolean subscribed,
 			boolean includeAnonymous, int start, int end)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		if (userId <= 0) {
 			if (status == WorkflowConstants.STATUS_ANY) {
 				return mbThreadPersistence.findByGroupId(groupId, start, end);
 			}
 			else {
-				return mbThreadPersistence.findByG_S(groupId, status, start,
-					end);
+				return mbThreadPersistence.findByG_S(
+					groupId, status, start, end);
 			}
 		}
 		else if (subscribed) {
-			return mbThreadFinder.findByS_G_U_S(groupId, userId, status, start,
-				end);
+			return mbThreadFinder.findByS_G_U_S(
+				groupId, userId, status, start, end);
 		}
 		else if (includeAnonymous) {
-			return mbThreadFinder.findByG_U_S(groupId, userId, status, start,
-				end);
+			return mbThreadFinder.findByG_U_S(
+				groupId, userId, status, start, end);
 		}
 		else {
-			return mbThreadFinder.findByG_U_A_S(groupId, userId, false, status,
-				start, end);
+			return mbThreadFinder.findByG_U_A_S(
+				groupId, userId, false, status, start, end);
 		}
 	}
 
@@ -329,8 +330,8 @@ public class MBThreadServiceImpl extends MBThreadServiceBaseImpl {
 			return mbThreadFinder.countByG_U_S(groupId, userId, status);
 		}
 		else {
-			return mbThreadFinder.countByG_U_A_S(groupId, userId, false,
-				status);
+			return mbThreadFinder.countByG_U_A_S(
+				groupId, userId, false, status);
 		}
 	}
 
