@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.io.unsync.UnsyncBufferedReader;
 import com.liferay.portal.kernel.io.unsync.UnsyncBufferedWriter;
 import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
 import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -33,7 +34,9 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 
+import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 import java.util.TreeSet;
@@ -49,22 +52,37 @@ public class LangBuilder {
 		" (Automatic Translation)";
 
 	public static void main(String[] args) {
+		Map<String, String> arguments = ArgumentsUtil.parseArguments(args);
+
 		System.setProperty("line.separator", StringPool.NEW_LINE);
 
 		InitUtil.initWithSpring();
 
-		if (args.length == 2) {
-			new LangBuilder(args[0], args[1]);
-		}
-		else {
-			throw new IllegalArgumentException();
-		}
+		String langDir = arguments.get("lang.dir");
+		String langFile = arguments.get("lang.file");
+		boolean langPlugin = GetterUtil.getBoolean(
+			arguments.get("lang.plugin"));
+
+		new LangBuilder(langDir, langFile, langPlugin);
 	}
 
-	public LangBuilder(String langDir, String langFile) {
+	public LangBuilder(String langDir, String langFile, boolean langPlugin) {
 		try {
 			_langDir = langDir;
 			_langFile = langFile;
+
+			if (langPlugin) {
+				_portalLanguageProperties = new Properties();
+
+				Class<?> clazz = getClass();
+
+				ClassLoader classLoader = clazz.getClassLoader();
+
+				InputStream is = classLoader.getResourceAsStream(
+					"content/Language.properties");
+
+				_portalLanguageProperties.load(is);
+			}
 
 			File renameKeysFile = new File(_langDir + "/rename.properties");
 
@@ -321,6 +339,15 @@ public class LangBuilder {
 				String key = line.substring(0, pos);
 				String value = line.substring(pos + 1, line.length());
 
+				if (_portalLanguageProperties != null) {
+					String portalValue = String.valueOf(
+						_portalLanguageProperties.get(key));
+
+					if (value.equals(portalValue)) {
+						System.out.println("Duplicate key " + key);
+					}
+				}
+
 				messages.add(key + "=" + value);
 			}
 			else {
@@ -442,6 +469,7 @@ public class LangBuilder {
 
 	private String _langDir;
 	private String _langFile;
+	private Properties _portalLanguageProperties;
 	private Properties _renameKeys;
 
 }
