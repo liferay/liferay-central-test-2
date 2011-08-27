@@ -1469,9 +1469,9 @@ public interface PropsKeys {
 
 	public static final String PERMISSIONS_CHECKER = "permissions.checker";
 
-	public static final String PERMISSIONS_CUSTOM_ATTRIBUTE_CHECK_ON_READ_ENABLED = "permissions.custom.attribute.check.on.read.enabled";
+	public static final String PERMISSIONS_CUSTOM_ATTRIBUTE_READ_CHECK_BY_DEFAULT = "permissions.custom.attribute.read.check.by.default";
 
-	public static final String PERMISSIONS_CUSTOM_ATTRIBUTE_CHECK_ON_WRITE_ENABLED = "permissions.custom.attribute.check.on.write.enabled";
+	public static final String PERMISSIONS_CUSTOM_ATTRIBUTE_WRITE_CHECK_BY_DEFAULT = "permissions.custom.attribute.write.check.by.default";
 
 	public static final String PERMISSIONS_INLINE_SQL_CHECK_ENABLED = "permissions.inline.sql.check.enabled";
 

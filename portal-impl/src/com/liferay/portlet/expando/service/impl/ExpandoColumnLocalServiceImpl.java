@@ -109,16 +109,14 @@ public class ExpandoColumnLocalServiceImpl
 	}
 
 	public void deleteColumn(long tableId, String name)
-		throws PortalException, SystemException {
+		throws SystemException {
 
-		List<ExpandoColumn> columns =
-			expandoColumnPersistence.findByT_N(tableId, name);
+		List<ExpandoColumn> columns = expandoColumnPersistence.findByT_N(
+			tableId, name);
 
-		if (columns.isEmpty()) {
-			return;
+		if (!columns.isEmpty()) {
+			deleteColumn(columns.get(0));
 		}
-
-		deleteColumn(columns.get(0));
 	}
 
 	public void deleteColumn(
@@ -175,27 +173,27 @@ public class ExpandoColumnLocalServiceImpl
 			return null;
 		}
 
-		List<ExpandoColumn> columns =
-			expandoColumnPersistence.findByT_N(table.getTableId(), name);
+		List<ExpandoColumn> columns = expandoColumnPersistence.findByT_N(
+			table.getTableId(), name);
 
-		if (columns.isEmpty()) {
-			return null;
+		if (!columns.isEmpty()) {
+			return columns.get(0);
 		}
 
-		return columns.get(0);
+		return null;
 	}
 
 	public ExpandoColumn getColumn(long tableId, String name)
 		throws SystemException {
 
-		List<ExpandoColumn> columns =
-			expandoColumnPersistence.findByT_N(tableId, name);
+		List<ExpandoColumn> columns = expandoColumnPersistence.findByT_N(
+			tableId, name);
 
-		if (columns.isEmpty()) {
-			return null;
+		if (!columns.isEmpty()) {
+			return columns.get(0);
 		}
 
-		return columns.get(0);
+		return null;
 	}
 
 	public ExpandoColumn getColumn(
@@ -214,11 +212,11 @@ public class ExpandoColumnLocalServiceImpl
 	}
 
 	public List<ExpandoColumn> getColumns(
-			long tableId, Collection<String> columnNames)
+			long tableId, Collection<String> names)
 		throws SystemException {
 
 		return expandoColumnPersistence.findByT_N(
-			tableId, columnNames.toArray(new String[columnNames.size()]));
+			tableId, names.toArray(new String[names.size()]));
 	}
 
 	public List<ExpandoColumn> getColumns(
@@ -233,6 +231,22 @@ public class ExpandoColumnLocalServiceImpl
 		}
 
 		return expandoColumnPersistence.findByTableId(table.getTableId());
+	}
+
+	public List<ExpandoColumn> getColumns(
+			long companyId, long classNameId, String tableName,
+			Collection<String> names)
+		throws SystemException {
+
+		ExpandoTable table = expandoTablePersistence.fetchByC_C_N(
+			companyId, classNameId, tableName);
+
+		if (table == null) {
+			return Collections.emptyList();
+		}
+
+		return expandoColumnPersistence.findByT_N(
+			table.getTableId(), names.toArray(new String[names.size()]));
 	}
 
 	public List<ExpandoColumn> getColumns(
@@ -252,23 +266,6 @@ public class ExpandoColumnLocalServiceImpl
 		long classNameId = PortalUtil.getClassNameId(className);
 
 		return getColumns(companyId, classNameId, tableName, columnNames);
-	}
-
-	public List<ExpandoColumn> getColumns(
-			long companyId, long classNameId, String tableName,
-			Collection<String> columnNames)
-		throws SystemException {
-
-		ExpandoTable table = expandoTablePersistence.fetchByC_C_N(
-			companyId, classNameId, tableName);
-
-		if (table == null) {
-			return Collections.emptyList();
-		}
-
-		return expandoColumnPersistence.findByT_N(
-			table.getTableId(),
-			columnNames.toArray(new String[columnNames.size()]));
 	}
 
 	public int getColumnsCount(long tableId) throws SystemException {
@@ -412,8 +409,8 @@ public class ExpandoColumnLocalServiceImpl
 			throw new ColumnNameException();
 		}
 
-		List<ExpandoColumn> columns =
-			expandoColumnPersistence.findByT_N(tableId, name);
+		List<ExpandoColumn> columns = expandoColumnPersistence.findByT_N(
+			tableId, name);
 
 		if (!columns.isEmpty()) {
 			ExpandoColumn column = columns.get(0);
@@ -422,7 +419,6 @@ public class ExpandoColumnLocalServiceImpl
 				throw new DuplicateColumnNameException();
 			}
 		}
-
 
 		if ((type != ExpandoColumnConstants.BOOLEAN) &&
 			(type != ExpandoColumnConstants.BOOLEAN_ARRAY) &&

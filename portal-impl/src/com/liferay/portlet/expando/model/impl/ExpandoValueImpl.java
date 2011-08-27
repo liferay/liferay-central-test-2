@@ -48,19 +48,9 @@ public class ExpandoValueImpl extends ExpandoValueBaseImpl {
 		return GetterUtil.getBooleanValues(StringUtil.split(getData()));
 	}
 
-	/**
-	 * Obtain the ExpandoColumn associated with this value.  If the
-	 * column was set manually by a caller via {@link #setColumn(ExpandoColumn)}
-	 * then return that column.  Otherwise, return the column identified by the
-	 * columnId attribute.
-	 *
-	 * @return the ExpandoColumn associated with this value.
-	 * @throws PortalException if a no ExpandoColumn could be found
-	 * @throws SystemException if a system exception occurred
-	 */
 	public ExpandoColumn getColumn() throws PortalException, SystemException {
-		if (_expandoColumn != null) {
-			return _expandoColumn;
+		if (_column != null) {
+			return _column;
 		}
 
 		long columnId = getColumnId();
@@ -187,8 +177,10 @@ public class ExpandoValueImpl extends ExpandoValueBaseImpl {
 		setData(StringUtil.merge(data));
 	}
 
-	public void setColumn(ExpandoColumn expandoColumn) {
-		_expandoColumn = expandoColumn;
+	public void setColumn(ExpandoColumn column) {
+		_column = column;
+
+		setColumnId(_column.getColumnId());
 	}
 
 	public void setDate(Date data) throws PortalException, SystemException {
@@ -319,6 +311,6 @@ public class ExpandoValueImpl extends ExpandoValueBaseImpl {
 
 	private static String _EXPANDO_COMMA = "[$LIFERAY_EXPANDO_COMMA]";
 
-	private transient ExpandoColumn _expandoColumn;
+	private transient ExpandoColumn _column;
 
 }

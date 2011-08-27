@@ -68,13 +68,15 @@ public class ExpandoValueServiceImpl extends ExpandoValueServiceBaseImpl {
 
 	public void addValues(
 			long companyId, String className, String tableName,
-			long classPK, Map<String, Serializable> attributes)
+			long classPK, Map<String, Serializable> attributeValues)
 		throws PortalException, SystemException {
 
-		for (Map.Entry<String, Serializable> entry : attributes.entrySet()) {
+		for (Map.Entry<String, Serializable> entry :
+				attributeValues.entrySet()) {
+
 			addValue(
-				companyId, className, tableName, entry.getKey(),
-				classPK, entry.getValue());
+				companyId, className, tableName, entry.getKey(), classPK,
+				entry.getValue());
 		}
 	}
 

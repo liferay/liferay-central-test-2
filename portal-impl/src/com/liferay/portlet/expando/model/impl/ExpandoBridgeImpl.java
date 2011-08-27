@@ -71,7 +71,7 @@ public class ExpandoBridgeImpl implements ExpandoBridge {
 	public void addAttribute(String name) throws PortalException {
 		addAttribute(
 			name, ExpandoColumnConstants.STRING, null,
-			PropsValues.PERMISSIONS_CUSTOM_ATTRIBUTE_CHECK_ON_WRITE_ENABLED);
+			PropsValues.PERMISSIONS_CUSTOM_ATTRIBUTE_WRITE_CHECK_BY_DEFAULT);
 	}
 
 	public void addAttribute(String name, boolean secure)
@@ -83,7 +83,7 @@ public class ExpandoBridgeImpl implements ExpandoBridge {
 	public void addAttribute(String name, int type) throws PortalException {
 		addAttribute(
 			name, type, null,
-			PropsValues.PERMISSIONS_CUSTOM_ATTRIBUTE_CHECK_ON_WRITE_ENABLED);
+			PropsValues.PERMISSIONS_CUSTOM_ATTRIBUTE_WRITE_CHECK_BY_DEFAULT);
 	}
 
 	public void addAttribute(String name, int type, boolean secure)
@@ -98,7 +98,7 @@ public class ExpandoBridgeImpl implements ExpandoBridge {
 
 		addAttribute(
 			name, type, defaultValue,
-			PropsValues.PERMISSIONS_CUSTOM_ATTRIBUTE_CHECK_ON_WRITE_ENABLED);
+			PropsValues.PERMISSIONS_CUSTOM_ATTRIBUTE_WRITE_CHECK_BY_DEFAULT);
 	}
 
 	public void addAttribute(
@@ -136,8 +136,7 @@ public class ExpandoBridgeImpl implements ExpandoBridge {
 	public Serializable getAttribute(String name) {
 		return getAttribute(
 			name,
-			PropsValues.PERMISSIONS_CUSTOM_ATTRIBUTE_CHECK_ON_READ_ENABLED);
-
+			PropsValues.PERMISSIONS_CUSTOM_ATTRIBUTE_READ_CHECK_BY_DEFAULT);
 	}
 
 	public Serializable getAttribute(String name, boolean secure) {
@@ -220,7 +219,7 @@ public class ExpandoBridgeImpl implements ExpandoBridge {
 
 	public Map<String, Serializable> getAttributes() {
 		return getAttributes(
-			PropsValues.PERMISSIONS_CUSTOM_ATTRIBUTE_CHECK_ON_READ_ENABLED);
+			PropsValues.PERMISSIONS_CUSTOM_ATTRIBUTE_READ_CHECK_BY_DEFAULT);
 	}
 
 	public Map<String, Serializable> getAttributes(boolean secure) {
@@ -250,8 +249,7 @@ public class ExpandoBridgeImpl implements ExpandoBridge {
 	public Map<String, Serializable> getAttributes(Collection<String> names) {
 		return getAttributes(
 			names,
-			PropsValues.PERMISSIONS_CUSTOM_ATTRIBUTE_CHECK_ON_READ_ENABLED);
-
+			PropsValues.PERMISSIONS_CUSTOM_ATTRIBUTE_READ_CHECK_BY_DEFAULT);
 	}
 
 	public Map<String, Serializable> getAttributes(
@@ -354,12 +352,13 @@ public class ExpandoBridgeImpl implements ExpandoBridge {
 	public void setAttribute(String name, Serializable value) {
 		setAttribute(
 			name, value,
-			PropsValues.PERMISSIONS_CUSTOM_ATTRIBUTE_CHECK_ON_WRITE_ENABLED);
+			PropsValues.PERMISSIONS_CUSTOM_ATTRIBUTE_WRITE_CHECK_BY_DEFAULT);
 	}
 
 	public void setAttribute(String name, Serializable value, boolean secure) {
 		if (_classPK <= 0) {
-			throw new UnsupportedOperationException("No classPK specified");
+			throw new UnsupportedOperationException(
+				"Class primary key is less than 0");
 		}
 
 		try {
@@ -401,7 +400,7 @@ public class ExpandoBridgeImpl implements ExpandoBridge {
 
 		setAttributeProperties(
 			name, properties,
-			PropsValues.PERMISSIONS_CUSTOM_ATTRIBUTE_CHECK_ON_WRITE_ENABLED);
+			PropsValues.PERMISSIONS_CUSTOM_ATTRIBUTE_WRITE_CHECK_BY_DEFAULT);
 	}
 
 	public void setAttributeProperties(
@@ -429,14 +428,15 @@ public class ExpandoBridgeImpl implements ExpandoBridge {
 	public void setAttributes(Map<String, Serializable> attributes) {
 		setAttributes(
 			attributes,
-			PropsValues.PERMISSIONS_CUSTOM_ATTRIBUTE_CHECK_ON_WRITE_ENABLED);
+			PropsValues.PERMISSIONS_CUSTOM_ATTRIBUTE_WRITE_CHECK_BY_DEFAULT);
 	}
 
 	public void setAttributes(
 		Map<String, Serializable> attributes, boolean secure) {
 
 		if (_classPK <= 0) {
-			throw new UnsupportedOperationException("No classPK specified");
+			throw new UnsupportedOperationException(
+				"Class primary key is less than 0");
 		}
 
 		if ((attributes == null) || attributes.isEmpty()) {
@@ -465,7 +465,7 @@ public class ExpandoBridgeImpl implements ExpandoBridge {
 	public void setAttributes(ServiceContext serviceContext) {
 		setAttributes(
 			serviceContext,
-			PropsValues.PERMISSIONS_CUSTOM_ATTRIBUTE_CHECK_ON_WRITE_ENABLED);
+			PropsValues.PERMISSIONS_CUSTOM_ATTRIBUTE_WRITE_CHECK_BY_DEFAULT);
 	}
 
 	public void setAttributes(ServiceContext serviceContext, boolean secure) {

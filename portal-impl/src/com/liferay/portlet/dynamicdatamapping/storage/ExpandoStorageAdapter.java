@@ -230,15 +230,16 @@ public class ExpandoStorageAdapter extends BaseStorageAdapter {
 		throws PortalException, SystemException {
 
 		for (String name : fields.getNames()) {
-				ExpandoColumn expandoColumn =
-					ExpandoColumnLocalServiceUtil.getColumn(
-						expandoTable.getTableId(), name);
+			ExpandoColumn expandoColumn =
+				ExpandoColumnLocalServiceUtil.getColumn(
+					expandoTable.getTableId(), name);
 
-				if (expandoColumn == null) {
-					ExpandoColumnLocalServiceUtil.addColumn(
-						expandoTable.getTableId(), name,
-						ExpandoColumnConstants.STRING);
-				}
+			if (expandoColumn != null) {
+				continue;
+			}
+
+			ExpandoColumnLocalServiceUtil.addColumn(
+				expandoTable.getTableId(), name, ExpandoColumnConstants.STRING);
 		}
 	}
 
