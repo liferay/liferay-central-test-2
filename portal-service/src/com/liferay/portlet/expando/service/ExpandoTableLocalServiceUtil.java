@@ -339,12 +339,6 @@ public class ExpandoTableLocalServiceUtil {
 		getService().deleteTables(companyId, className);
 	}
 
-	public static com.liferay.portlet.expando.model.ExpandoTable fetchTable(
-		long companyId, long classNameId, java.lang.String name)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().fetchTable(companyId, classNameId, name);
-	}
-
 	public static com.liferay.portlet.expando.model.ExpandoTable fetchDefaultTable(
 		long companyId, long classNameId)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -353,9 +347,14 @@ public class ExpandoTableLocalServiceUtil {
 
 	public static com.liferay.portlet.expando.model.ExpandoTable fetchDefaultTable(
 		long companyId, java.lang.String className)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().fetchDefaultTable(companyId, className);
+	}
+
+	public static com.liferay.portlet.expando.model.ExpandoTable fetchTable(
+		long companyId, long classNameId, java.lang.String name)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().fetchTable(companyId, classNameId, name);
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoTable getDefaultTable(

@@ -48,11 +48,11 @@ public class ExpandoValueServiceWrapper implements ExpandoValueService {
 
 	public void addValues(long companyId, java.lang.String className,
 		java.lang.String tableName, long classPK,
-		java.util.Map<java.lang.String, java.io.Serializable> attributes)
+		java.util.Map<java.lang.String, java.io.Serializable> attributeValues)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_expandoValueService.addValues(companyId, className, tableName,
-			classPK, attributes);
+			classPK, attributeValues);
 	}
 
 	public java.io.Serializable getData(long companyId,

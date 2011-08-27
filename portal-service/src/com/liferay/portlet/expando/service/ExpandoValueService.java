@@ -57,7 +57,7 @@ public interface ExpandoValueService {
 
 	public void addValues(long companyId, java.lang.String className,
 		java.lang.String tableName, long classPK,
-		java.util.Map<java.lang.String, java.io.Serializable> attributes)
+		java.util.Map<java.lang.String, java.io.Serializable> attributeValues)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 

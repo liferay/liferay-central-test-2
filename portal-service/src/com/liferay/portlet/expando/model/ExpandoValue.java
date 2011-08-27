@@ -39,16 +39,6 @@ public interface ExpandoValue extends ExpandoValueModel, PersistedModel {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	/**
-	* Obtain the ExpandoColumn associated with this value.  If the
-	* column was set manually by a caller via {@link #setColumn(ExpandoColumn)}
-	* then return that column.  Otherwise, return the column identified by the
-	* columnId attribute.
-	*
-	* @return the ExpandoColumn associated with this value.
-	* @throws PortalException if a no ExpandoColumn could be found
-	* @throws SystemException if a system exception occurred
-	*/
 	public com.liferay.portlet.expando.model.ExpandoColumn getColumn()
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
@@ -118,7 +108,7 @@ public interface ExpandoValue extends ExpandoValueModel, PersistedModel {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public void setColumn(
-		com.liferay.portlet.expando.model.ExpandoColumn expandoColumn);
+		com.liferay.portlet.expando.model.ExpandoColumn column);
 
 	public void setDate(java.util.Date data)
 		throws com.liferay.portal.kernel.exception.PortalException,

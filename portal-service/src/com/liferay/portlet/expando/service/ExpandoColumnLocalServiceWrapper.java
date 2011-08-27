@@ -285,8 +285,7 @@ public class ExpandoColumnLocalServiceWrapper
 	}
 
 	public void deleteColumn(long tableId, java.lang.String name)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		_expandoColumnLocalService.deleteColumn(tableId, name);
 	}
 
@@ -354,9 +353,9 @@ public class ExpandoColumnLocalServiceWrapper
 	}
 
 	public java.util.List<com.liferay.portlet.expando.model.ExpandoColumn> getColumns(
-		long tableId, java.util.Collection<java.lang.String> columnNames)
+		long tableId, java.util.Collection<java.lang.String> names)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return _expandoColumnLocalService.getColumns(tableId, columnNames);
+		return _expandoColumnLocalService.getColumns(tableId, names);
 	}
 
 	public java.util.List<com.liferay.portlet.expando.model.ExpandoColumn> getColumns(
@@ -364,6 +363,14 @@ public class ExpandoColumnLocalServiceWrapper
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _expandoColumnLocalService.getColumns(companyId, classNameId,
 			tableName);
+	}
+
+	public java.util.List<com.liferay.portlet.expando.model.ExpandoColumn> getColumns(
+		long companyId, long classNameId, java.lang.String tableName,
+		java.util.Collection<java.lang.String> names)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _expandoColumnLocalService.getColumns(companyId, classNameId,
+			tableName, names);
 	}
 
 	public java.util.List<com.liferay.portlet.expando.model.ExpandoColumn> getColumns(
@@ -378,14 +385,6 @@ public class ExpandoColumnLocalServiceWrapper
 		java.util.Collection<java.lang.String> columnNames)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _expandoColumnLocalService.getColumns(companyId, className,
-			tableName, columnNames);
-	}
-
-	public java.util.List<com.liferay.portlet.expando.model.ExpandoColumn> getColumns(
-		long companyId, long classNameId, java.lang.String tableName,
-		java.util.Collection<java.lang.String> columnNames)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return _expandoColumnLocalService.getColumns(companyId, classNameId,
 			tableName, columnNames);
 	}
 

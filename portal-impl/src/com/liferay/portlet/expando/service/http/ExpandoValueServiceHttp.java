@@ -134,7 +134,7 @@ public class ExpandoValueServiceHttp {
 
 	public static void addValues(HttpPrincipal httpPrincipal, long companyId,
 		java.lang.String className, java.lang.String tableName, long classPK,
-		java.util.Map<java.lang.String, java.io.Serializable> attributes)
+		java.util.Map<java.lang.String, java.io.Serializable> attributeValues)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
@@ -142,7 +142,7 @@ public class ExpandoValueServiceHttp {
 					"addValues", _addValuesParameterTypes2);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
-					companyId, className, tableName, classPK, attributes);
+					companyId, className, tableName, classPK, attributeValues);
 
 			try {
 				TunnelUtil.invoke(httpPrincipal, methodHandler);

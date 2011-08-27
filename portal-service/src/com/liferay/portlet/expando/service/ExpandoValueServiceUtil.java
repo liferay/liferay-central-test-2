@@ -59,11 +59,11 @@ public class ExpandoValueServiceUtil {
 
 	public static void addValues(long companyId, java.lang.String className,
 		java.lang.String tableName, long classPK,
-		java.util.Map<java.lang.String, java.io.Serializable> attributes)
+		java.util.Map<java.lang.String, java.io.Serializable> attributeValues)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService()
-			.addValues(companyId, className, tableName, classPK, attributes);
+			.addValues(companyId, className, tableName, classPK, attributeValues);
 	}
 
 	public static java.io.Serializable getData(long companyId,
