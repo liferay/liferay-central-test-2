@@ -508,7 +508,7 @@
 		maxElementsInMemory="10000"
 		name="com.liferay.portal.servlet.filters.cache.CacheUtil"
 		overflowToDisk="false"
-		timeToLiveSeconds="600"
+		timeToIdleSeconds="600"
 	>
 		<cacheEventListenerFactory
 			class="com.liferay.portal.cache.ehcache.LiferayCacheEventListenerFactory"
@@ -564,7 +564,7 @@
 		maxElementsInMemory="10000"
 		name="com.liferay.portlet.journalcontent.util.JournalContent"
 		overflowToDisk="false"
-		timeToLiveSeconds="600"
+		timeToIdleSeconds="600"
 	>
 		<cacheEventListenerFactory
 			class="com.liferay.portal.cache.ehcache.LiferayCacheEventListenerFactory"
