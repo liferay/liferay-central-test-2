@@ -384,7 +384,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 
 			for (ExpandoColumn expandoColumn : expandoColumns) {
 				addPermissions(
-				ExpandoColumn.class, expandoColumn.getColumnId());
+					ExpandoColumn.class, expandoColumn.getColumnId());
 			}
 
 			_expandoColumnsMap.put(className, expandoColumns);
