@@ -20,7 +20,6 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.ReflectionUtil;
-import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.StringPool;
 
 import java.io.File;
@@ -137,9 +136,11 @@ public class DirectServletRegistry {
 
 			Collection<String> dependants = null;
 
-			if (ServerDetector.getJasperVersion().compareTo("7.0") >= 0) {
-				Map<String, ?> dependantsMap =
-					(Map<String, ?>)method.invoke(servlet);
+			String jasperVersion = JasperVersionDetector.getJasperVersion();
+
+			if (jasperVersion.contains("7.0")) {
+				Map<String, ?> dependantsMap = (Map<String, ?>)method.invoke(
+					servlet);
 
 				if (dependantsMap != null) {
 					dependants = dependantsMap.keySet();
