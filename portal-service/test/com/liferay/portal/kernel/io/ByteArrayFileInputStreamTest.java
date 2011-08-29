@@ -25,276 +25,322 @@ import java.io.IOException;
  */
 public class ByteArrayFileInputStreamTest extends TestCase {
 
-	public void setUp() throws IOException {
-		_testDir = new File("test-dir");
+	@Override
+	public void setUp() throws Exception {
+		_testDir = new File("ByteArrayFileInputStreamTest.testDir");
+
 		_testDir.mkdir();
 
-		_testFile = new File("test-file");
+		_testFile = new File("ByteArrayFileInputStreamTest.testFile");
 
-		FileOutputStream fos = new FileOutputStream(_testFile);
+		FileOutputStream fileOutputStream = new FileOutputStream(_testFile);
 
 		for (int i = 0; i < 1024; i++) {
-			fos.write(i);
+			fileOutputStream.write(i);
 		}
 
-		fos.close();
+		fileOutputStream.close();
 	}
 
-	public void tearDown() {
+	@Override
+	public void tearDown() throws Exception {
 		_testDir.delete();
 		_testFile.delete();
 	}
 
-	public void testConstructor() {
-		// File is a dir
-		try {
-			new ByteArrayFileInputStream(_testDir, 1024);
-			fail();
-		}
-		catch (IllegalArgumentException iae) {
-		}
-
-		// File does not exist
-		try {
-			new ByteArrayFileInputStream(new File("No Such File"), 1024);
-			fail();
-		}
-		catch (IllegalArgumentException iae) {
-		}
-
-		// Constructor 1
-		ByteArrayFileInputStream bafi = new ByteArrayFileInputStream(_testFile,
-			512);
-
-		assertEquals(_testFile, bafi.file);
-		assertEquals(1024, bafi.fileSize);
-		assertEquals(512, bafi.threshold);
-		assertFalse(bafi.deleteOnClose);
-
-		// Constructor 2, deleteOnClose = false
-		bafi = new ByteArrayFileInputStream(_testFile, 512, false);
-
-		assertEquals(_testFile, bafi.file);
-		assertEquals(1024, bafi.fileSize);
-		assertEquals(512, bafi.threshold);
-		assertFalse(bafi.deleteOnClose);
-
-		// Constructor 2, deleteOnClose = true
-		bafi = new ByteArrayFileInputStream(_testFile, 512, true);
-
-		assertEquals(_testFile, bafi.file);
-		assertEquals(1024, bafi.fileSize);
-		assertEquals(512, bafi.threshold);
-		assertTrue(bafi.deleteOnClose);
-	}
-
 	public void testaAailable() throws IOException {
-		// Un-initialized
-		ByteArrayFileInputStream bafi = new ByteArrayFileInputStream(_testFile,
-			512);
 
-		assertEquals(0, bafi.available());
+		// Uninitialized
+
+		ByteArrayFileInputStream byteArrayFileInputStream =
+			new ByteArrayFileInputStream(_testFile, 512);
+
+		assertEquals(0, byteArrayFileInputStream.available());
 
 		// byte[]
-		bafi = new ByteArrayFileInputStream(_testFile, 2048);
-		bafi.read();
 
-		assertNotNull(bafi.data);
-		assertNull(bafi.fileInputStream);
-		assertEquals(1, bafi.index);
-		assertEquals(1023, bafi.available());
+		byteArrayFileInputStream = new ByteArrayFileInputStream(
+			_testFile, 2048);
 
-		bafi.close();
+		byteArrayFileInputStream.read();
 
-		// FileInputStream
-		bafi = new ByteArrayFileInputStream(_testFile, 512);
-		bafi.read();
+		assertNotNull(byteArrayFileInputStream.data);
+		assertNull(byteArrayFileInputStream.fileInputStream);
+		assertEquals(1, byteArrayFileInputStream.index);
+		assertEquals(1023, byteArrayFileInputStream.available());
 
-		assertNull(bafi.data);
-		assertNotNull(bafi.fileInputStream);
-		assertEquals(0, bafi.index);
-		assertEquals(bafi.fileInputStream.available(), bafi.available());
-		bafi.close();
-	}
-
-	public void testClose() throws IOException {
-		// deleteOnClose = false
-		ByteArrayFileInputStream bafi = new ByteArrayFileInputStream(_testFile,
-			512);
-		bafi.read();
-
-		bafi.close();
-		assertNull(bafi.data);
-		assertNull(bafi.file);
-		assertNull(bafi.fileInputStream);
-		assertTrue(_testFile.exists());
-
-		// deleteOnClose = true
-		bafi = new ByteArrayFileInputStream(_testFile, 512, true);
-
-		bafi.close();
-		assertNull(bafi.data);
-		assertNull(bafi.file);
-		assertNull(bafi.fileInputStream);
-		assertFalse(_testFile.exists());
-
-	}
-
-	public void testMark() throws IOException {
-		// byte[]
-		ByteArrayFileInputStream bafi = new ByteArrayFileInputStream(_testFile,
-			2048);
-		assertTrue(bafi.markSupported());
-
-		for (int i = 0; i < 512; i++) {
-			assertEquals(i & 0xff, bafi.read());
-		}
-
-		bafi.mark(0);
-
-		for (int i = 512; i < 1024; i++) {
-			assertEquals(i & 0xff, bafi.read());
-		}
-
-		assertEquals(-1, bafi.read());
-
-		// In memory reset to index 512
-		bafi.reset();
-
-		for (int i = 512; i < 1024; i++) {
-			assertEquals(i & 0xff, bafi.read());
-		}
-
-		bafi.close();
+		byteArrayFileInputStream.close();
 
 		// FileInputStream
-		bafi = new ByteArrayFileInputStream(_testFile, 512);
 
-		assertFalse(bafi.markSupported());
+		byteArrayFileInputStream = new ByteArrayFileInputStream(
+			_testFile, 512);
 
-		for (int i = 0; i < 1024; i++) {
-			assertEquals(i & 0xff, bafi.read());
-		}
+		byteArrayFileInputStream.read();
 
-		assertEquals(-1, bafi.read());
+		assertNull(byteArrayFileInputStream.data);
+		assertNotNull(byteArrayFileInputStream.fileInputStream);
+		assertEquals(0, byteArrayFileInputStream.index);
+		assertEquals(
+			byteArrayFileInputStream.fileInputStream.available(),
+			byteArrayFileInputStream.available());
 
-		// FileInputStream reset to index 0
-		bafi.reset();
-
-		for (int i = 0; i < 1024; i++) {
-			assertEquals(i & 0xff, bafi.read());
-		}
-
-		bafi.close();
+		byteArrayFileInputStream.close();
 	}
 
 	public void testBlockRead() throws IOException {
+
 		// byte[]
-		ByteArrayFileInputStream bafi = new ByteArrayFileInputStream(_testFile,
-			2048);
+
+		ByteArrayFileInputStream byteArrayFileInputStream =
+			new ByteArrayFileInputStream(_testFile,2048);
 
 		byte[] buffer = new byte[17];
 
 		int index = 0;
 		int length = 0;
 
-		while ((length = bafi.read(buffer)) != -1) {
+		while ((length = byteArrayFileInputStream.read(buffer)) != -1) {
 			for (int i = 0; i < length; i++) {
 				assertEquals(index++ & 0xff, buffer[i] & 0xff);
 			}
 		}
 
-		bafi.close();
+		byteArrayFileInputStream.close();
 
-		bafi = new ByteArrayFileInputStream(_testFile, 2048);
+		byteArrayFileInputStream = new ByteArrayFileInputStream(
+			_testFile, 2048);
 
-		// Zero length
-		assertEquals(0, bafi.read(null, -1, 0));
+		// 0 length
+
+		assertEquals(0, byteArrayFileInputStream.read(null, -1, 0));
 
 		buffer = new byte[48];
 
 		index = 0;
 		length = 0;
 
-		while ((length = bafi.read(buffer, 16, 16)) != -1) {
+		while ((length = byteArrayFileInputStream.read(buffer, 16, 16)) != -1) {
 			for (int i = 0; i < length; i++) {
 				assertEquals(index++ & 0xff, buffer[i + 16] & 0xff);
 			}
 		}
 
-		bafi.close();
+		byteArrayFileInputStream.close();
 
 		// FileInputStream
-		bafi = new ByteArrayFileInputStream(_testFile, 512);
+
+		byteArrayFileInputStream = new ByteArrayFileInputStream(_testFile, 512);
 
 		buffer = new byte[17];
 
 		index = 0;
 		length = 0;
 
-		while ((length = bafi.read(buffer)) != -1) {
+		while ((length = byteArrayFileInputStream.read(buffer)) != -1) {
 			for (int i = 0; i < length; i++) {
 				assertEquals(index++ & 0xff, buffer[i] & 0xff);
 			}
 		}
 
-		bafi.close();
+		byteArrayFileInputStream.close();
 
-		bafi = new ByteArrayFileInputStream(_testFile, 512);
+		byteArrayFileInputStream = new ByteArrayFileInputStream(_testFile, 512);
 
-		// Zero length
-		assertEquals(0, bafi.read(null, -1, 0));
+		// 0 length
+
+		assertEquals(0, byteArrayFileInputStream.read(null, -1, 0));
 
 		buffer = new byte[48];
 
 		index = 0;
 		length = 0;
 
-		while ((length = bafi.read(buffer, 16, 16)) != -1) {
+		while ((length = byteArrayFileInputStream.read(buffer, 16, 16)) != -1) {
 			for (int i = 0; i < length; i++) {
 				assertEquals(index++ & 0xff, buffer[i + 16] & 0xff);
 			}
 		}
 
-		bafi.close();
+		byteArrayFileInputStream.close();
 	}
 
-	public void testSkip() throws IOException {
+	public void testClose() throws IOException {
+
+		// Do not delete on close
+
+		ByteArrayFileInputStream byteArrayFileInputStream =
+			new ByteArrayFileInputStream(_testFile, 512);
+
+		byteArrayFileInputStream.read();
+
+		byteArrayFileInputStream.close();
+		assertNull(byteArrayFileInputStream.data);
+		assertNull(byteArrayFileInputStream.file);
+		assertNull(byteArrayFileInputStream.fileInputStream);
+		assertTrue(_testFile.exists());
+
+		// Delete on close
+
+		byteArrayFileInputStream = new ByteArrayFileInputStream(
+			_testFile, 512, true);
+
+		byteArrayFileInputStream.close();
+
+		assertNull(byteArrayFileInputStream.data);
+		assertNull(byteArrayFileInputStream.file);
+		assertNull(byteArrayFileInputStream.fileInputStream);
+		assertFalse(_testFile.exists());
+	}
+
+	public void testConstructor() {
+
+		// File is a dir
+
+		try {
+			new ByteArrayFileInputStream(_testDir, 1024);
+
+			fail();
+		}
+		catch (IllegalArgumentException iae) {
+		}
+
+		// File does not exist
+
+		try {
+			new ByteArrayFileInputStream(new File("No Such File"), 1024);
+
+			fail();
+		}
+		catch (IllegalArgumentException iae) {
+		}
+
+		// Constructor 1
+
+		ByteArrayFileInputStream byteArrayFileInputStream =
+			new ByteArrayFileInputStream(_testFile, 512);
+
+		assertEquals(_testFile, byteArrayFileInputStream.file);
+		assertEquals(1024, byteArrayFileInputStream.fileSize);
+		assertEquals(512, byteArrayFileInputStream.threshold);
+		assertFalse(byteArrayFileInputStream.deleteOnClose);
+
+		// Constructor 2, do not delete on close
+
+		byteArrayFileInputStream = new ByteArrayFileInputStream(
+			_testFile, 512, false);
+
+		assertEquals(_testFile, byteArrayFileInputStream.file);
+		assertEquals(1024, byteArrayFileInputStream.fileSize);
+		assertEquals(512, byteArrayFileInputStream.threshold);
+		assertFalse(byteArrayFileInputStream.deleteOnClose);
+
+		// Constructor 2, delete on close
+
+		byteArrayFileInputStream = new ByteArrayFileInputStream(
+			_testFile, 512, true);
+
+		assertEquals(_testFile, byteArrayFileInputStream.file);
+		assertEquals(1024, byteArrayFileInputStream.fileSize);
+		assertEquals(512, byteArrayFileInputStream.threshold);
+		assertTrue(byteArrayFileInputStream.deleteOnClose);
+	}
+
+	public void testMark() throws IOException {
+
 		// byte[]
-		ByteArrayFileInputStream bafi = new ByteArrayFileInputStream(_testFile,
-			2048);
+
+		ByteArrayFileInputStream byteArrayFileInputStream =
+			new ByteArrayFileInputStream(_testFile, 2048);
+
+		assertTrue(byteArrayFileInputStream.markSupported());
+
+		for (int i = 0; i < 512; i++) {
+			assertEquals(i & 0xff, byteArrayFileInputStream.read());
+		}
+
+		byteArrayFileInputStream.mark(0);
+
+		for (int i = 512; i < 1024; i++) {
+			assertEquals(i & 0xff, byteArrayFileInputStream.read());
+		}
+
+		assertEquals(-1, byteArrayFileInputStream.read());
+
+		// In memory reset to index 512
+
+		byteArrayFileInputStream.reset();
+
+		for (int i = 512; i < 1024; i++) {
+			assertEquals(i & 0xff, byteArrayFileInputStream.read());
+		}
+
+		byteArrayFileInputStream.close();
+
+		// FileInputStream
+
+		byteArrayFileInputStream = new ByteArrayFileInputStream(_testFile, 512);
+
+		assertFalse(byteArrayFileInputStream.markSupported());
+
+		for (int i = 0; i < 1024; i++) {
+			assertEquals(i & 0xff, byteArrayFileInputStream.read());
+		}
+
+		assertEquals(-1, byteArrayFileInputStream.read());
+
+		// FileInputStream reset to index 0
+
+		byteArrayFileInputStream.reset();
+
+		for (int i = 0; i < 1024; i++) {
+			assertEquals(i & 0xff, byteArrayFileInputStream.read());
+		}
+
+		byteArrayFileInputStream.close();
+	}
+	public void testSkip() throws IOException {
+
+		// byte[]
+
+		ByteArrayFileInputStream byteArrayFileInputStream =
+			new ByteArrayFileInputStream(_testFile, 2048);
 
 		// Negative length
-		assertEquals(0, bafi.skip(-1));
+
+		assertEquals(0, byteArrayFileInputStream.skip(-1));
 
 		int count = 1024 / 17;
 
 		for (int i = 0; i < count; i++) {
-			assertEquals(17, bafi.skip(17));
+			assertEquals(17, byteArrayFileInputStream.skip(17));
 		}
 
-		assertEquals(1024 % 17, bafi.skip(17));
+		assertEquals(1024 % 17, byteArrayFileInputStream.skip(17));
 
-		assertEquals(0, bafi.skip(17));
+		assertEquals(0, byteArrayFileInputStream.skip(17));
 
-		bafi.close();
+		byteArrayFileInputStream.close();
 
 		// FileInputStream
-		bafi = new ByteArrayFileInputStream(_testFile, 512);
 
-		// Zero length
-		assertEquals(0, bafi.skip(0));
+		byteArrayFileInputStream = new ByteArrayFileInputStream(_testFile, 512);
+
+		// 0 length
+
+		assertEquals(0, byteArrayFileInputStream.skip(0));
 
 		for (int i = 0; i < 1024; i++) {
-			assertEquals(17, bafi.skip(17));
+			assertEquals(17, byteArrayFileInputStream.skip(17));
 		}
 
 		// Skip EOF
-		bafi.skip(17);
 
-		assertEquals(-1, bafi.read());
+		byteArrayFileInputStream.skip(17);
 
-		bafi.close();
+		assertEquals(-1, byteArrayFileInputStream.read());
+
+		byteArrayFileInputStream.close();
 	}
 
 	private File _testDir;

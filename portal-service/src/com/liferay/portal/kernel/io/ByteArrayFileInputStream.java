@@ -32,8 +32,8 @@ public class ByteArrayFileInputStream extends InputStream {
 		File file, int threshold, boolean deleteOnClose) {
 
 		if (!file.exists() || !file.isFile()) {
-			throw new IllegalArgumentException("File " +
-				file.getAbsolutePath() + " does not exist");
+			throw new IllegalArgumentException(
+				"File " + file.getAbsolutePath() + " does not exist");
 		}
 
 		this.file = file;
@@ -75,7 +75,7 @@ public class ByteArrayFileInputStream extends InputStream {
 	}
 
 	@Override
-	public void mark(int readlimit) {
+	public void mark(int readLimit) {
 		markIndex = index;
 	}
 
@@ -84,6 +84,7 @@ public class ByteArrayFileInputStream extends InputStream {
 		return fileSize < threshold;
 	}
 
+	@Override
 	public int read() throws IOException {
 		if (fileSize < threshold) {
 			initData();
@@ -184,19 +185,20 @@ public class ByteArrayFileInputStream extends InputStream {
 
 		data = new byte[arraySize];
 
-		FileInputStream fis = new FileInputStream(file);
+		FileInputStream fileInputStream = new FileInputStream(file);
 
 		int offset = 0;
 		int length = 0;
+
 		try {
 			while (offset < arraySize) {
-				length = fis.read(data, offset, arraySize - offset);
+				length = fileInputStream.read(data, offset, arraySize - offset);
 
 				offset += length;
 			}
 		}
 		finally {
-			fis.close();
+			fileInputStream.close();
 		}
 	}
 
