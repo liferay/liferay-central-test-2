@@ -84,7 +84,7 @@ String content = BeanParamUtil.getString(entry, request, "content");
 		<aui:input name="url" />
 
 		<aui:field-wrapper label="content">
-			<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>"/>
+			<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" />
 
 			<aui:input name="content" type="hidden" />
 		</aui:field-wrapper>
