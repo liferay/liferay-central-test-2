@@ -163,7 +163,7 @@ if (workflowEnabled) {
 						<div class='<%= folderDLFileEntryTypes.isEmpty() ? StringPool.BLANK : "aui-helper-hidden" %>' id="<portlet:namespace />defaultWorkflow">
 							<aui:select label="default-workflow-for-all-document-types" name="workflowDefinition0">
 
-								<aui:option label='<%= LanguageUtil.get(pageContext, "no-workflow") %>' value="" />
+								<aui:option label="no-workflow" value="" />
 
 								<%
 								WorkflowDefinitionLink workflowDefinitionLink = null;
@@ -220,7 +220,7 @@ if (workflowEnabled) {
 								<liferay-ui:search-container-column-text name="workflow">
 									<aui:select label="" name='<%= "workflowDefinition" + dlFileEntryType.getFileEntryTypeId() %>'>
 
-										<aui:option label='<%= LanguageUtil.get(pageContext, "no-workflow") %>' value="" />
+										<aui:option label="no-workflow" value="" />
 
 										<%
 										WorkflowDefinitionLink workflowDefinitionLink = null;
@@ -333,17 +333,17 @@ if (workflowEnabled) {
 					var defaultWorkflow = A.one('#<portlet:namespace />defaultWorkflow');
 
 					<liferay-util:buffer var="workflowDefinitionsBuffer">
-						<aui:select label="" name="LIFERAY_WORKFLOW_DEFINITION_FILE_ENTRY_TYPE" ><aui:option label='<%= LanguageUtil.get(pageContext, "no-workflow") %>' value="" />
+						<aui:select label="" name="LIFERAY_WORKFLOW_DEFINITION_FILE_ENTRY_TYPE"><aui:option label="no-workflow" value="" />
 
-					<%
-					for (WorkflowDefinition workflowDefinition : workflowDefinitions) {
-					%>
+						<%
+						for (WorkflowDefinition workflowDefinition : workflowDefinitions) {
+						%>
 
 							<aui:option label='<%= workflowDefinition.getName() + " (" + LanguageUtil.format(locale, "version-x", workflowDefinition.getVersion()) + ")" %>' selected='<% selected %>' value="<%= workflowDefinition.getName() + StringPool.AT + workflowDefinition.getVersion() %>" />
 
-					<%
-					}
-					%>
+						<%
+						}
+						%>
 
 						</aui:select>
 					</liferay-util:buffer>
