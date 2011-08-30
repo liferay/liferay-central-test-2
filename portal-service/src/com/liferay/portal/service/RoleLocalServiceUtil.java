@@ -438,17 +438,17 @@ public class RoleLocalServiceUtil {
 		return getService().hasUserRoles(userId, companyId, names, inherited);
 	}
 
-	public static com.liferay.portal.model.Role loadRoleFetch(long companyId,
+	public static com.liferay.portal.model.Role loadFetchRole(long companyId,
 		java.lang.String name)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().loadRoleFetch(companyId, name);
+		return getService().loadFetchRole(companyId, name);
 	}
 
-	public static com.liferay.portal.model.Role loadRoleFind(long companyId,
+	public static com.liferay.portal.model.Role loadGetRole(long companyId,
 		java.lang.String name)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getService().loadRoleFind(companyId, name);
+		return getService().loadGetRole(companyId, name);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Role> search(

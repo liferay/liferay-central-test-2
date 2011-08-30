@@ -493,6 +493,19 @@ public class GroupLocalServiceWrapper implements GroupLocalService {
 		return _groupLocalService.hasUserGroup(userId, groupId, inherit);
 	}
 
+	public com.liferay.portal.model.Group loadFetchGroup(long companyId,
+		java.lang.String name)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _groupLocalService.loadFetchGroup(companyId, name);
+	}
+
+	public com.liferay.portal.model.Group loadGetGroup(long companyId,
+		java.lang.String name)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _groupLocalService.loadGetGroup(companyId, name);
+	}
+
 	public java.util.List<com.liferay.portal.model.Group> search(
 		long companyId, long[] classNameIds, java.lang.String name,
 		java.lang.String description,
@@ -598,19 +611,6 @@ public class GroupLocalServiceWrapper implements GroupLocalService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _groupLocalService.updateSite(groupId, site);
-	}
-
-	public com.liferay.portal.model.Group loadGroupFetch(long companyId,
-		java.lang.String name)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return _groupLocalService.loadGroupFetch(companyId, name);
-	}
-
-	public com.liferay.portal.model.Group loadGroupFind(long companyId,
-		java.lang.String name)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _groupLocalService.loadGroupFind(companyId, name);
 	}
 
 	public GroupLocalService getWrappedGroupLocalService() {

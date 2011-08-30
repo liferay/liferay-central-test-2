@@ -263,15 +263,15 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 
 	@Skip
 	public Role fetchRole(long companyId, String name) throws SystemException {
+		String companyIdHexString = StringUtil.toHexString(companyId);
 
-		Role role = _systemRolesMap.get(
-			StringUtil.toHexString(companyId).concat(name));
+		Role role = _systemRolesMap.get(companyIdHexString.concat(name));
 
 		if (role != null) {
 			return role;
 		}
 
-		return roleLocalService.loadRoleFetch(companyId, name);
+		return roleLocalService.loadFetchRole(companyId, name);
 	}
 
 	public Role getDefaultGroupRole(long groupId)
@@ -342,14 +342,15 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 	public Role getRole(long companyId, String name)
 		throws PortalException, SystemException {
 
-		Role role = _systemRolesMap.get(
-			StringUtil.toHexString(companyId).concat(name));
+		String companyIdHexString = StringUtil.toHexString(companyId);
+
+		Role role = _systemRolesMap.get(companyIdHexString.concat(name));
 
 		if (role != null) {
 			return role;
 		}
 
-		return roleLocalService.loadRoleFind(companyId, name);
+		return roleLocalService.loadGetRole(companyId, name);
 	}
 
 	public List<Role> getRoles(int type, String subtype)
@@ -514,13 +515,15 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		return false;
 	}
 
-	public Role loadRoleFetch(long companyId, String name)
+	public Role loadFetchRole(long companyId, String name)
 		throws SystemException {
+
 		return rolePersistence.fetchByC_N(companyId, name);
 	}
 
-	public Role loadRoleFind(long companyId, String name)
+	public Role loadGetRole(long companyId, String name)
 		throws PortalException, SystemException {
+
 		return rolePersistence.findByC_N(companyId, name);
 	}
 
@@ -657,9 +660,9 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 
 		String companyIdHexString = StringUtil.toHexString(companyId);
 
-		String roleCacheKey = companyIdHexString.concat(name);
+		String key = companyIdHexString.concat(name);
 
-		Role role = _systemRolesMap.get(roleCacheKey);
+		Role role = _systemRolesMap.get(key);
 
 		try {
 			if (role == null) {
@@ -681,7 +684,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 			}
 		}
 
-		_systemRolesMap.put(roleCacheKey, role);
+		_systemRolesMap.put(key, role);
 	}
 
 	protected String[] getDefaultControlPanelPortlets() {

@@ -1816,10 +1816,10 @@ public class UserLocalServiceWrapper implements UserLocalService {
 		return _userLocalService.isPasswordExpiringSoon(user);
 	}
 
-	public com.liferay.portal.model.User loadDefaultUser(long companyId)
+	public com.liferay.portal.model.User loadGetDefaultUser(long companyId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _userLocalService.loadDefaultUser(companyId);
+		return _userLocalService.loadGetDefaultUser(companyId);
 	}
 
 	/**

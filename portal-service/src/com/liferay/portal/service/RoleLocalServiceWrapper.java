@@ -425,17 +425,17 @@ public class RoleLocalServiceWrapper implements RoleLocalService {
 			inherited);
 	}
 
-	public com.liferay.portal.model.Role loadRoleFetch(long companyId,
+	public com.liferay.portal.model.Role loadFetchRole(long companyId,
 		java.lang.String name)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return _roleLocalService.loadRoleFetch(companyId, name);
+		return _roleLocalService.loadFetchRole(companyId, name);
 	}
 
-	public com.liferay.portal.model.Role loadRoleFind(long companyId,
+	public com.liferay.portal.model.Role loadGetRole(long companyId,
 		java.lang.String name)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _roleLocalService.loadRoleFind(companyId, name);
+		return _roleLocalService.loadGetRole(companyId, name);
 	}
 
 	public java.util.List<com.liferay.portal.model.Role> search(

@@ -585,7 +585,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			return group;
 		}
 
-		return groupLocalService.loadGroupFetch(companyId, name);
+		return groupLocalService.loadFetchGroup(companyId, name);
 	}
 
 	public Group getCompanyGroup(long companyId)
@@ -637,7 +637,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			return group;
 		}
 
-		return groupLocalService.loadGroupFind(companyId, name);
+		return groupLocalService.loadGetGroup(companyId, name);
 	}
 
 	public List<Group> getGroups(long[] groupIds)
@@ -896,6 +896,18 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		else {
 			return false;
 		}
+	}
+
+	public Group loadFetchGroup(long companyId, String name)
+		throws SystemException {
+
+		return groupPersistence.fetchByC_N(companyId, name);
+	}
+
+	public Group loadGetGroup(long companyId, String name)
+		throws PortalException, SystemException {
+
+		return groupPersistence.findByC_N(companyId, name);
 	}
 
 	public List<Group> search(
@@ -1469,18 +1481,6 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		}
 
 		return false;
-	}
-
-	public Group loadGroupFetch(long companyId, String name)
-		throws SystemException {
-
-		return groupPersistence.fetchByC_N(companyId, name);
-	}
-
-	public Group loadGroupFind(long companyId, String name)
-		throws PortalException, SystemException {
-
-		return groupPersistence.findByC_N(companyId, name);
 	}
 
 	protected void setCompanyPermissions(

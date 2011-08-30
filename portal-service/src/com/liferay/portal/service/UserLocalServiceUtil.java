@@ -1839,10 +1839,11 @@ public class UserLocalServiceUtil {
 		return getService().isPasswordExpiringSoon(user);
 	}
 
-	public static com.liferay.portal.model.User loadDefaultUser(long companyId)
+	public static com.liferay.portal.model.User loadGetDefaultUser(
+		long companyId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getService().loadDefaultUser(companyId);
+		return getService().loadGetDefaultUser(companyId);
 	}
 
 	/**
