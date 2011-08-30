@@ -199,7 +199,7 @@ public class CMISQueryBuilder {
 					cmisJunction = anyCMISConjunction;
 				}
 				else if (booleanClauseOccur.equals(
-						BooleanClauseOccur.MUST_NOT)) {
+							BooleanClauseOccur.MUST_NOT)) {
 
 					cmisJunction = notCMISConjunction;
 				}
