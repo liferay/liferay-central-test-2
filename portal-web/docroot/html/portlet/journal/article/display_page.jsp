@@ -24,7 +24,6 @@ String defaultLanguageId = (String)request.getAttribute("edit_article.jsp-defaul
 String layoutUuid = BeanParamUtil.getString(article, request, "layoutUuid");
 
 Layout refererLayout = null;
-boolean selected = false;
 
 if ((article == null) || article.isNew()) {
 	long refererPlid = ParamUtil.getLong(request, "refererPlid", LayoutConstants.DEFAULT_PLID);
@@ -63,16 +62,15 @@ else {
 
 		<optgroup label="<liferay-ui:message key="public-pages" />">
 
-	<%
+		<%
 		for (Layout groupLayout : publicGroupLayouts) {
-			selected = layoutUuid.equals(groupLayout.getUuid()) || ((refererLayout != null) && groupLayout.equals(refererLayout));
-	%>
+		%>
 
-			<aui:option label="<%= groupLayout.getName(defaultLanguageId) %>" selected="<%= selected %>" value="<%= groupLayout.getUuid() %>" />
+			<aui:option label="<%= groupLayout.getName(defaultLanguageId) %>" selected="<%= layoutUuid.equals(groupLayout.getUuid()) || groupLayout.equals(refererLayout) %>" value="<%= groupLayout.getUuid() %>" />
 
-	<%
+		<%
 		}
-	%>
+		%>
 
 		</optgroup>
 
@@ -84,16 +82,15 @@ else {
 
 		<optgroup label="<liferay-ui:message key="private-pages" />">
 
-	<%
+		<%
 		for (Layout groupLayout : privateGroupLayouts) {
-			selected = layoutUuid.equals(groupLayout.getUuid()) || ((refererLayout != null) && groupLayout.equals(refererLayout));
-	%>
+		%>
 
-			<aui:option label="<%= groupLayout.getName(defaultLanguageId) %>" selected="<%= selected %>" value="<%= groupLayout.getUuid() %>" />
+			<aui:option label="<%= groupLayout.getName(defaultLanguageId) %>" selected="<%= layoutUuid.equals(groupLayout.getUuid()) || groupLayout.equals(refererLayout) %>" value="<%= groupLayout.getUuid() %>" />
 
-	<%
+		<%
 		}
-	%>
+		%>
 
 		</optgroup>
 	<%
