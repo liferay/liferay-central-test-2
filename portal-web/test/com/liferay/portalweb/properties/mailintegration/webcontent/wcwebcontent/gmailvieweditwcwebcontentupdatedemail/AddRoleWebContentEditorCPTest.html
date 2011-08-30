@@ -29,9 +29,34 @@
 	<td>Roles</td>
 </tr>
 <tr>
-	<td>clickAtAndWait</td>
+	<td>clickAt</td>
 	<td>link=Add</td>
 	<td>Add</td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a</td>
+	<td>Regular Role</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a</td>
+	<td>Regular Role</td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a</td>
+	<td>Regular Role</td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>//input[@id='_128_name']</td>
+	<td>Web Content Editor</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -40,7 +65,7 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>//textarea[@id='_128_description']</td>
+	<td>//textarea[@id='_128_description_en_US']</td>
 	<td>Web Content Editors are users who have full permissions and usage over all available Web Content</td>
 </tr>
 <tr>
@@ -56,7 +81,7 @@
 <tr>
 	<td>assertElementPresent</td>
 	<td>link=Web Content Editor</td>
-	<td></td>
+	<td>Web Content Editor</td>
 </tr>
 
 </tbody></table>
