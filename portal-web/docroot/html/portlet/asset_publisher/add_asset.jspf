@@ -32,7 +32,7 @@ Map<String, PortletURL> addPortletURLs = getAddPortletURLs(liferayPortletRequest
 
 			String message = StringPool.BLANK;
 
-			if (JournalArticle.class.getName().equals(className)) {
+			if (className.equals(JournalArticle.class.getName())) {
 				message = "basic-web-content";
 			}
 			else {
