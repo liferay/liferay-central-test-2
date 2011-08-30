@@ -56,8 +56,10 @@ public class SearchUserGroupTest extends BaseTestCase {
 			RuntimeVariables.replace("Search"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		assertTrue(selenium.isTextPresent("User Group Name"));
-		assertTrue(selenium.isTextPresent("User Group Description"));
+		assertEquals(RuntimeVariables.replace("User Group Name"),
+			selenium.getText("//tr[3]/td[1]"));
+		assertEquals(RuntimeVariables.replace("User Group Description"),
+			selenium.getText("//tr[3]/td[2]"));
 		selenium.type("//input[@id='_11_name']",
 			RuntimeVariables.replace("User1 Group1 Name1"));
 		selenium.saveScreenShotAndSource();
@@ -66,5 +68,6 @@ public class SearchUserGroupTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertFalse(selenium.isTextPresent("User Group Name"));
+		assertFalse(selenium.isTextPresent("User Group Description"));
 	}
 }

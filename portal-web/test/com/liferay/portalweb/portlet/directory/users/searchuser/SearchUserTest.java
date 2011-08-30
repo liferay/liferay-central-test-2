@@ -50,8 +50,9 @@ public class SearchUserTest extends BaseTestCase {
 					RuntimeVariables.replace("Directory Test Page"));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
-				assertEquals(RuntimeVariables.replace("Users"),
-					selenium.getText("//li[1]/span/span"));
+				selenium.clickAt("link=Users", RuntimeVariables.replace("Users"));
+				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 
 				boolean basicVisible = selenium.isVisible("link=\u00ab Basic");
 

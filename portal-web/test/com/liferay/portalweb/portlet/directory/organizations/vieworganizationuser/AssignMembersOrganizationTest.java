@@ -116,7 +116,9 @@ public class AssignMembersOrganizationTest extends BaseTestCase {
 					RuntimeVariables.replace("Search"));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
-				selenium.clickAt("//td[4]/span/ul/li/strong/a",
+				assertEquals(RuntimeVariables.replace("Actions"),
+					selenium.getText("//td[8]/span/ul/li/strong/a/span"));
+				selenium.clickAt("//td[8]/span/ul/li/strong/a/span",
 					RuntimeVariables.replace("Actions"));
 
 				for (int second = 0;; second++) {
@@ -177,6 +179,12 @@ public class AssignMembersOrganizationTest extends BaseTestCase {
 				assertEquals(RuntimeVariables.replace(
 						"Your request completed successfully."),
 					selenium.getText("//div[@class='portlet-msg-success']"));
+				selenium.clickAt("link=Current",
+					RuntimeVariables.replace("Current"));
+				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
+				assertEquals(RuntimeVariables.replace("userfn usermn userln"),
+					selenium.getText("//tr[3]/td[2]"));
 
 			case 100:
 				label = -1;

@@ -35,8 +35,7 @@ public class AdvancedSearchUserFirstNameTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent(
-									"link=Directory Test Page")) {
+						if (selenium.isVisible("link=Directory Test Page")) {
 							break;
 						}
 					}
@@ -51,8 +50,9 @@ public class AdvancedSearchUserFirstNameTest extends BaseTestCase {
 					RuntimeVariables.replace("Directory Test Page"));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
-				assertEquals(RuntimeVariables.replace("Users"),
-					selenium.getText("//li[1]/span/span"));
+				selenium.clickAt("link=Users", RuntimeVariables.replace("Users"));
+				selenium.waitForPageToLoad("30000");
+				selenium.saveScreenShotAndSource();
 
 				boolean advancedVisible = selenium.isVisible(
 						"link=Advanced \u00bb");
