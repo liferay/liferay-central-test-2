@@ -55,7 +55,9 @@ public class VideoProcessor extends DLPreviewableProcessor {
 
 	public static final String THUMBNAIL_TYPE = "jpg";
 
-	public static void generateVideo(FileVersion fileVersion) {
+	public static void generateVideo(FileVersion fileVersion)
+		throws Exception {
+
 		_instance._generateVideo(fileVersion);
 	}
 
@@ -128,33 +130,40 @@ public class VideoProcessor extends DLPreviewableProcessor {
 		}
 	}
 
+	@Override
 	protected String getPreviewType() {
 		return PREVIEW_TYPE;
 	}
 
+	@Override
 	protected String getThumbnailType() {
 		return THUMBNAIL_TYPE;
 	}
 
+	private VideoProcessor() {
+		FileUtil.mkdirs(PREVIEW_TMP_PATH);
+		FileUtil.mkdirs(THUMBNAIL_TMP_PATH);
+	}
+
 	private void _generateThumbnailXuggler(
-			FileVersion fileVersion, File srcFile, int height, int width)
+			FileVersion fileVersion, File file, int height, int width)
 		throws Exception {
 
-		String id = DLUtil.getTempFileId(
+		String tempFileId = DLUtil.getTempFileId(
 			fileVersion.getFileEntryId(), fileVersion.getVersion());
 
-		File destFile = getThumbnailTempFile(id);
+		File thumbnailTempFile = getThumbnailTempFile(tempFileId);
 
 		try {
 			IMediaReader iMediaReader = ToolFactory.makeReader(
-				srcFile.getCanonicalPath());
+				file.getCanonicalPath());
 
 			iMediaReader.setBufferedImageTypeToGenerate(
 				BufferedImage.TYPE_3BYTE_BGR);
 
 			CaptureFrameListener captureFrameListener =
 				new CaptureFrameListener(
-					destFile, THUMBNAIL_TYPE, height, width);
+					thumbnailTempFile, THUMBNAIL_TYPE, height, width);
 
 			iMediaReader.addListener(captureFrameListener);
 
@@ -163,22 +172,23 @@ public class VideoProcessor extends DLPreviewableProcessor {
 
 			addFileToStore(
 				fileVersion.getCompanyId(), THUMBNAIL_PATH,
-				getThumbnailFilePath(fileVersion), destFile);
+				getThumbnailFilePath(fileVersion), thumbnailTempFile);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
 		}
 		finally {
-			FileUtil.delete(destFile);
+			FileUtil.delete(thumbnailTempFile);
 		}
 	}
 
-	private void _generateVideo(FileVersion fileVersion) {
-		String id = DLUtil.getTempFileId(
+	private void _generateVideo(FileVersion fileVersion) throws Exception {
+		String tempFileId = DLUtil.getTempFileId(
 			fileVersion.getFileEntryId(), fileVersion.getVersion());
 
-		File file = _getVideoTempFile(id, fileVersion.getExtension());
-		File previewTempFile = getPreviewTempFile(id);
+		File videoTempFile = _getVideoTempFile(
+			tempFileId, fileVersion.getExtension());
+		File previewTempFile = getPreviewTempFile(tempFileId);
 
 		try {
 			if (!PrefsPropsUtil.getBoolean(
@@ -191,11 +201,11 @@ public class VideoProcessor extends DLPreviewableProcessor {
 			if (_isGeneratePreview(fileVersion)) {
 				InputStream inputStream = fileVersion.getContentStream(false);
 
-				FileUtil.write(file, inputStream);
+				FileUtil.write(videoTempFile, inputStream);
 
 				try {
 					_generateVideoXuggler(
-						fileVersion, file, previewTempFile,
+						fileVersion, videoTempFile, previewTempFile,
 						PropsValues.DL_FILE_ENTRY_PREVIEW_VIDEO_HEIGHT,
 						PropsValues.DL_FILE_ENTRY_PREVIEW_VIDEO_WIDTH);
 				}
@@ -205,7 +215,7 @@ public class VideoProcessor extends DLPreviewableProcessor {
 
 				if (_log.isInfoEnabled()) {
 					_log.info(
-						"Xuggler generated a preview video for " + id);
+						"Xuggler generated a preview video for " + tempFileId);
 				}
 			}
 
@@ -221,20 +231,18 @@ public class VideoProcessor extends DLPreviewableProcessor {
 				}
 
 				if (_log.isInfoEnabled()) {
-					_log.info("Xuggler generated a thumbnail for " + id);
+					_log.info(
+						"Xuggler generated a thumbnail for " + tempFileId);
 				}
 			}
 		}
 		catch (NoSuchFileEntryException nsfee) {
 		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
 		finally {
-			_fileEntries.remove(fileVersion.getFileVersionId());
+			_fileVersionIds.remove(fileVersion.getFileVersionId());
 
 			FileUtil.delete(previewTempFile);
-			FileUtil.delete(file);
+			FileUtil.delete(videoTempFile);
 		}
 	}
 
@@ -243,32 +251,27 @@ public class VideoProcessor extends DLPreviewableProcessor {
 			int width)
 		throws Exception {
 
-		try {
-			IMediaReader iMediaReader = ToolFactory.makeReader(
-				srcFile.getCanonicalPath());
+		IMediaReader iMediaReader = ToolFactory.makeReader(
+			srcFile.getCanonicalPath());
 
-			VideoResizer videoResizer = new VideoResizer(height, width);
+		VideoResizer videoResizer = new VideoResizer(height, width);
 
-			iMediaReader.addListener(videoResizer);
+		iMediaReader.addListener(videoResizer);
 
-			AudioListener audioListener = new AudioListener();
+		AudioListener audioListener = new AudioListener();
 
-			videoResizer.addListener(audioListener);
+		videoResizer.addListener(audioListener);
 
-			IMediaWriter iMediaWriter = ToolFactory.makeWriter(
-				destFile.getCanonicalPath(), iMediaReader);
+		IMediaWriter iMediaWriter = ToolFactory.makeWriter(
+			destFile.getCanonicalPath(), iMediaReader);
 
-			audioListener.addListener(iMediaWriter);
+		audioListener.addListener(iMediaWriter);
 
-			VideoListener videoListener = new VideoListener(height, width);
+		VideoListener videoListener = new VideoListener(height, width);
 
-			iMediaWriter.addListener(videoListener);
+		iMediaWriter.addListener(videoListener);
 
-			while (iMediaReader.readPacket() == null) {
-			}
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
+		while (iMediaReader.readPacket() == null) {
 		}
 
 		addFileToStore(
@@ -276,17 +279,20 @@ public class VideoProcessor extends DLPreviewableProcessor {
 			getPreviewFilePath(fileVersion), destFile);
 	}
 
-	private File _getVideoTempFile(String id, String targetExtension) {
-		String filePath = _getVideoTempFilePath(id, targetExtension);
+	private File _getVideoTempFile(String tempFileId, String targetExtension) {
+		String videoTempFilePath = _getVideoTempFilePath(
+			tempFileId, targetExtension);
 
-		return new File(filePath);
+		return new File(videoTempFilePath);
 	}
 
-	private String _getVideoTempFilePath(String id, String targetExtension) {
-		StringBundler sb = new StringBundler(4);
+	private String _getVideoTempFilePath(
+		String tempFileId, String targetExtension) {
+
+		StringBundler sb = new StringBundler(5);
 
 		sb.append(PREVIEW_TMP_PATH);
-		sb.append(id);
+		sb.append(tempFileId);
 
 		if (PREVIEW_TYPE.equals(targetExtension)) {
 			sb.append("_tmp");
@@ -299,12 +305,12 @@ public class VideoProcessor extends DLPreviewableProcessor {
 	}
 
 	private boolean _hasVideo(FileVersion fileVersion) throws Exception {
-		long companyId = fileVersion.getCompanyId();
-
 		boolean previewExists = DLStoreUtil.hasFile(
-			companyId, REPOSITORY_ID, getPreviewFilePath(fileVersion));
+			fileVersion.getCompanyId(), REPOSITORY_ID,
+			getPreviewFilePath(fileVersion));
 		boolean thumbnailExists = DLStoreUtil.hasFile(
-			companyId, REPOSITORY_ID, getThumbnailFilePath(fileVersion));
+			fileVersion.getCompanyId(), REPOSITORY_ID,
+			getThumbnailFilePath(fileVersion));
 
 		if (PropsValues.DL_FILE_ENTRY_PREVIEW_ENABLED &&
 			PropsValues.DL_FILE_ENTRY_THUMBNAIL_ENABLED) {
@@ -328,12 +334,11 @@ public class VideoProcessor extends DLPreviewableProcessor {
 	private boolean _isGeneratePreview(FileVersion fileVersion)
 		throws Exception {
 
-		long companyId = fileVersion.getCompanyId();
-
 		String previewFilePath = getPreviewFilePath(fileVersion);
 
 		if (PropsValues.DL_FILE_ENTRY_PREVIEW_ENABLED &&
-			!DLStoreUtil.hasFile(companyId, REPOSITORY_ID, previewFilePath)) {
+			!DLStoreUtil.hasFile(
+				fileVersion.getCompanyId(), REPOSITORY_ID, previewFilePath)) {
 
 			return true;
 		}
@@ -345,12 +350,11 @@ public class VideoProcessor extends DLPreviewableProcessor {
 	private boolean _isGenerateThumbnail(FileVersion fileVersion)
 		throws Exception {
 
-		long companyId = fileVersion.getCompanyId();
-
-		String fileName = getThumbnailFilePath(fileVersion);
+		String thumbnailFilePath = getThumbnailFilePath(fileVersion);
 
 		if (PropsValues.DL_FILE_ENTRY_THUMBNAIL_ENABLED &&
-			!DLStoreUtil.hasFile(companyId, REPOSITORY_ID, fileName)) {
+			!DLStoreUtil.hasFile(
+				fileVersion.getCompanyId(), REPOSITORY_ID, thumbnailFilePath)) {
 
 			return true;
 		}
@@ -368,15 +372,16 @@ public class VideoProcessor extends DLPreviewableProcessor {
 	}
 
 	private void _queueGeneration(FileVersion fileVersion) {
-		if (!_fileEntries.contains(fileVersion.getFileVersionId()) &&
-			_isSupportedVideo(fileVersion)) {
+		if (_fileVersionIds.contains(fileVersion.getFileVersionId()) ||
+			!_isSupportedVideo(fileVersion)) {
 
-			_fileEntries.add(fileVersion.getFileVersionId());
-
-			MessageBusUtil.sendMessage(
-				DestinationNames.DOCUMENT_LIBRARY_VIDEO_PROCESSOR,
-				fileVersion);
+			return;
 		}
+
+		_fileVersionIds.add(fileVersion.getFileVersionId());
+
+		MessageBusUtil.sendMessage(
+			DestinationNames.DOCUMENT_LIBRARY_VIDEO_PROCESSOR, fileVersion);
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(VideoProcessor.class);
@@ -386,11 +391,6 @@ public class VideoProcessor extends DLPreviewableProcessor {
 	private static Set<String> _videoMimeTypes = SetUtil.fromArray(
 		PropsValues.DL_FILE_ENTRY_PREVIEW_VIDEO_MIME_TYPES);
 
-	private List<Long> _fileEntries = new Vector<Long>();
-
-	static {
-		FileUtil.mkdirs(PREVIEW_TMP_PATH);
-		FileUtil.mkdirs(THUMBNAIL_TMP_PATH);
-	}
+	private List<Long> _fileVersionIds = new Vector<Long>();
 
 }

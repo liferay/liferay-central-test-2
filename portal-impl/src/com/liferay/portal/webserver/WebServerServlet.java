@@ -673,21 +673,17 @@ public class WebServerServlet extends HttpServlet {
 		else if (documentThumbnail) {
 			fileName = FileUtil.stripExtension(fileName).concat(
 				StringPool.PERIOD).concat(PDFProcessor.THUMBNAIL_TYPE);
-
-			contentLength = PDFProcessor.getThumbnailFileSize(fileVersion);
-
 			inputStream = PDFProcessor.getThumbnailAsStream(fileVersion);
+			contentLength = PDFProcessor.getThumbnailFileSize(fileVersion);
 
 			converted = true;
 		}
 		else if (previewFileIndex > 0) {
 			fileName = FileUtil.stripExtension(fileName).concat(
 				StringPool.PERIOD).concat(PDFProcessor.PREVIEW_TYPE);
-
-			contentLength = PDFProcessor.getPreviewFileSize(
-				fileVersion, previewFileIndex);
-
 			inputStream = PDFProcessor.getPreviewAsStream(
+				fileVersion, previewFileIndex);
+			contentLength = PDFProcessor.getPreviewFileSize(
 				fileVersion, previewFileIndex);
 
 			converted = true;
@@ -695,30 +691,24 @@ public class WebServerServlet extends HttpServlet {
 		else if (audioPreview) {
 			fileName = FileUtil.stripExtension(fileName).concat(
 				StringPool.PERIOD).concat(AudioProcessor.PREVIEW_TYPE);
-
-			contentLength = AudioProcessor.getPreviewFileSize(fileVersion);
-
 			inputStream = AudioProcessor.getPreviewAsStream(fileVersion);
+			contentLength = AudioProcessor.getPreviewFileSize(fileVersion);
 
 			converted = true;
 		}
 		else if (videoPreview) {
 			fileName = FileUtil.stripExtension(fileName).concat(
 				StringPool.PERIOD).concat(VideoProcessor.PREVIEW_TYPE);
-
-			contentLength = VideoProcessor.getPreviewFileSize(fileVersion);
-
 			inputStream = VideoProcessor.getPreviewAsStream(fileVersion);
+			contentLength = VideoProcessor.getPreviewFileSize(fileVersion);
 
 			converted = true;
 		}
 		else if (videoThumbnail) {
 			fileName = FileUtil.stripExtension(fileName).concat(
 				StringPool.PERIOD).concat(VideoProcessor.THUMBNAIL_TYPE);
-
-			contentLength = VideoProcessor.getThumbnailFileSize(fileVersion);
-
 			inputStream = VideoProcessor.getThumbnailAsStream(fileVersion);
+			contentLength = VideoProcessor.getThumbnailFileSize(fileVersion);
 
 			converted = true;
 		}
