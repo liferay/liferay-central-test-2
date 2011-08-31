@@ -2639,13 +2639,13 @@ public class PortalImpl implements Portal {
 
 		String key = sb.toString();
 
-		Long plidObj = _plidToPortletIdCache.get(key);
+		Long plidObj = _plidToPortletIdMap.get(key);
 
 		if (plidObj == null) {
 			plid = _getPlidFromPortletId(groupId, privateLayout, portletId);
 
 			if (plid != LayoutConstants.DEFAULT_PLID) {
-				_plidToPortletIdCache.put(key, plid);
+				_plidToPortletIdMap.put(key, plid);
 			}
 		}
 		else {
@@ -2669,12 +2669,12 @@ public class PortalImpl implements Portal {
 			}
 
 			if (!validPlid) {
-				_plidToPortletIdCache.remove(key);
+				_plidToPortletIdMap.remove(key);
 
 				plid = _getPlidFromPortletId(groupId, privateLayout, portletId);
 
 				if (plid != LayoutConstants.DEFAULT_PLID) {
-					_plidToPortletIdCache.put(key, plid);
+					_plidToPortletIdMap.put(key, plid);
 				}
 			}
 		}
@@ -4605,8 +4605,8 @@ public class PortalImpl implements Portal {
 	}
 
 	public void resetCDNHosts() {
-		_cdnHostHttpCache.clear();
-		_cdnHostHttpsCache.clear();
+		_cdnHostHttpMap.clear();
+		_cdnHostHttpsMap.clear();
 
 		if (!ClusterInvokeThreadLocal.isEnabled()) {
 			return;
@@ -5621,7 +5621,7 @@ public class PortalImpl implements Portal {
 	private String _pathImage;
 	private String _pathMain;
 	private String _pathProxy;
-	private Map<String, Long> _plidToPortletIdCache =
+	private Map<String, Long> _plidToPortletIdMap =
 		new ConcurrentHashMap<String, Long>();
 	private String _portalLibDir;
 	private final AtomicInteger _portalPort = new AtomicInteger(-1);
