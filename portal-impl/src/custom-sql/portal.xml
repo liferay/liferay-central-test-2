@@ -472,6 +472,19 @@
 				)
 		]]>
 	</sql>
+	<sql id="com.liferay.portal.service.persistence.OrganizationFinder.findByCompanyId">
+		<![CDATA[
+			SELECT
+				DISTINCT Organization_.organizationId AS orgId, Organization_.name AS orgName
+			FROM
+				Organization_
+			[$JOIN$]
+			WHERE
+				[$WHERE$]
+				(Organization_.companyId = ?) AND
+				(Organization_.parentOrganizationId != -1)
+		]]>
+	</sql>
 	<sql id="com.liferay.portal.service.persistence.OrganizationFinder.findByC_PO_N_L_S_C_Z_R_C">
 		<![CDATA[
 			SELECT
@@ -501,19 +514,6 @@
 					(lower(Address.city) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
 					(lower(Address.zip) LIKE ? [$AND_OR_NULL_CHECK$])
 				)
-		]]>
-	</sql>
-	<sql id="com.liferay.portal.service.persistence.OrganizationFinder.findByCompany">
-		<![CDATA[
-			SELECT
-				DISTINCT Organization_.organizationId AS orgId, Organization_.name AS orgName
-			FROM
-				Organization_
-			[$JOIN$]
-			WHERE
-				[$WHERE$]
-				(Organization_.companyId = ?) AND
-				(Organization_.parentOrganizationId != -1)
 		]]>
 	</sql>
 	<sql id="com.liferay.portal.service.persistence.OrganizationFinder.findByC_PO_N_S_C_Z_R_C">

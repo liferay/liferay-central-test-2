@@ -70,12 +70,12 @@ public class OrganizationFinderUtil {
 			regionId, countryId, params, andOperator);
 	}
 
-	public static java.util.List<com.liferay.portal.model.Organization> findByCompany(
+	public static java.util.List<com.liferay.portal.model.Organization> findByCompanyId(
 		long companyId,
 		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params,
 		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getFinder().findByCompany(companyId, params, start, end, obc);
+		return getFinder().findByCompanyId(companyId, params, start, end, obc);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Organization> findByKeywords(
