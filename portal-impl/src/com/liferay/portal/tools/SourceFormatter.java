@@ -250,9 +250,8 @@ public class SourceFormatter {
 	}
 
 	private static void _addJSPUnusedImports(
-			String fileName, List<String> importLines,
-			List<String> unneededImports)
-		throws IOException {
+		String fileName, List<String> importLines,
+		List<String> unneededImports) {
 
 		for (String importLine : importLines) {
 			Set<String> includeFileNames = new HashSet<String>();
@@ -270,8 +269,8 @@ public class SourceFormatter {
 
 			String className = importLine.substring(x + 1, y);
 
-			className = className.substring(className.lastIndexOf(
-				StringPool.PERIOD) + 1);
+			className = className.substring(
+				className.lastIndexOf(StringPool.PERIOD) + 1);
 
 			if (!_isJSPImportRequired(
 					fileName, className, includeFileNames, checkedFileNames)) {
@@ -1461,8 +1460,7 @@ public class SourceFormatter {
 	}
 
 	private static List<String> _getJSPDuplicateImports(
-			String fileName, String content, List<String> importLines)
-		throws IOException {
+		String fileName, String content, List<String> importLines) {
 
 		List<String> duplicateImports = new ArrayList<String>();
 
