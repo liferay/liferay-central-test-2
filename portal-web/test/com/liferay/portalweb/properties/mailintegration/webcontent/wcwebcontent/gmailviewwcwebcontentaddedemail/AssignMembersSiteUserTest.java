@@ -50,8 +50,7 @@ public class AssignMembersSiteUserTest extends BaseTestCase {
 					RuntimeVariables.replace("Control Panel"));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
-				selenium.clickAt("link=Sites",
-					RuntimeVariables.replace("Site Memberships"));
+				selenium.clickAt("link=Sites", RuntimeVariables.replace("Sites"));
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace("Actions"),
