@@ -635,25 +635,6 @@ public class PortalImpl implements Portal {
 			themeDisplay, themeDisplay.getLayout(), url, true);
 	}
 
-	public void clearCDNHostCaches() {
-		_cdnHostHttpCache.clear();
-		_cdnHostHttpsCache.clear();
-
-		if (!ClusterInvokeThreadLocal.isEnabled()) {
-			return;
-		}
-
-		ClusterRequest clusterRequest = ClusterRequest.createMulticastRequest(
-			_clearCDNHostCachesMethodHandler, true);
-
-		try {
-			ClusterExecutorUtil.execute(clusterRequest);
-		}
-		catch (SystemException se) {
-			_log.error("Failed to clear cluster wide cdn host cache : " + se);
-		}
-	}
-
 	public void clearRequestParameters(RenderRequest renderRequest) {
 		RenderRequestImpl renderRequestImpl = (RenderRequestImpl)renderRequest;
 
@@ -1053,13 +1034,13 @@ public class PortalImpl implements Portal {
 	 * @deprecated {@link #getCDNHost(boolean)}
 	 */
 	public String getCDNHost() {
-		Long companyId = CompanyThreadLocal.getCompanyId();
+		long companyId = CompanyThreadLocal.getCompanyId();
 
 		return getCDNHostHttp(companyId);
 	}
 
 	public String getCDNHost(boolean secure) {
-		Long companyId = CompanyThreadLocal.getCompanyId();
+		long companyId = CompanyThreadLocal.getCompanyId();
 
 		if (secure) {
 			return getCDNHostHttps(companyId);
@@ -1070,7 +1051,7 @@ public class PortalImpl implements Portal {
 	}
 
 	public String getCDNHostHttp(long companyId) {
-		String cdnHostHttp = _cdnHostHttpCache.get(companyId);
+		String cdnHostHttp = _cdnHostHttpMap.get(companyId);
 
 		if (cdnHostHttp != null) {
 			return cdnHostHttp;
@@ -1087,13 +1068,13 @@ public class PortalImpl implements Portal {
 			cdnHostHttp = StringPool.BLANK;
 		}
 
-		_cdnHostHttpCache.put(companyId, cdnHostHttp);
+		_cdnHostHttpMap.put(companyId, cdnHostHttp);
 
 		return cdnHostHttp;
 	}
 
 	public String getCDNHostHttps(long companyId) {
-		String cdnHostHttps = _cdnHostHttpsCache.get(companyId);
+		String cdnHostHttps = _cdnHostHttpsMap.get(companyId);
 
 		if (cdnHostHttps != null) {
 			return cdnHostHttps;
@@ -1111,7 +1092,7 @@ public class PortalImpl implements Portal {
 			cdnHostHttps = StringPool.BLANK;
 		}
 
-		_cdnHostHttpsCache.put(companyId, cdnHostHttps);
+		_cdnHostHttpsMap.put(companyId, cdnHostHttps);
 
 		return cdnHostHttps;
 	}
@@ -4623,6 +4604,25 @@ public class PortalImpl implements Portal {
 		}
 	}
 
+	public void resetCDNHosts() {
+		_cdnHostHttpCache.clear();
+		_cdnHostHttpsCache.clear();
+
+		if (!ClusterInvokeThreadLocal.isEnabled()) {
+			return;
+		}
+
+		ClusterRequest clusterRequest = ClusterRequest.createMulticastRequest(
+			_resetCDNHostsMethodHandler, true);
+
+		try {
+			ClusterExecutorUtil.execute(clusterRequest);
+		}
+		catch (Exception e) {
+			_log.error("Unable to clear cluster wide CDN hosts", e);
+		}
+	}
+
 	public Set<String> resetPortletAddDefaultResourceCheckWhitelist() {
 		_portletAddDefaultResourceCheckWhitelist = SetUtil.fromArray(
 			PropsValues.PORTLET_ADD_DEFAULT_RESOURCE_CHECK_WHITELIST);
@@ -5592,9 +5592,9 @@ public class PortalImpl implements Portal {
 	private static Log _logWebServerServlet = LogFactoryUtil.getLog(
 		WebServerServlet.class);
 
-	private static MethodHandler _clearCDNHostCachesMethodHandler =
-		new MethodHandler(new MethodKey(PortalUtil.class.getName(),
-			"clearCDNHostCaches"));
+	private static MethodHandler _resetCDNHostsMethodHandler =
+		new MethodHandler(
+			new MethodKey(PortalUtil.class.getName(), "resetCDNHosts"));
 
 	private String[] _allSystemGroups;
 	private String[] _allSystemOrganizationRoles;
@@ -5605,9 +5605,9 @@ public class PortalImpl implements Portal {
 	private Pattern _bannedResourceIdPattern = Pattern.compile(
 		PropsValues.PORTLET_RESOURCE_ID_BANNED_PATHS_REGEXP,
 		Pattern.CASE_INSENSITIVE);
-	private static Map<Long, String> _cdnHostHttpCache =
+	private static Map<Long, String> _cdnHostHttpMap =
 		new ConcurrentHashMap<Long, String>();
-	private static Map<Long, String> _cdnHostHttpsCache =
+	private static Map<Long, String> _cdnHostHttpsMap =
 		new ConcurrentHashMap<Long, String>();
 	private String _computerAddress;
 	private String _computerName;

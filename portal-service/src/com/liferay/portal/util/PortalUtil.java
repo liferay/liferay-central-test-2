@@ -163,10 +163,6 @@ public class PortalUtil {
 		return getPortal().addPreservedParameters(themeDisplay, url);
 	}
 
-	public static void clearCDNHostCaches() {
-		getPortal().clearCDNHostCaches();
-	}
-
 	public static void clearRequestParameters(RenderRequest renderRequest) {
 		getPortal().clearRequestParameters(renderRequest);
 	}
@@ -1406,6 +1402,10 @@ public class PortalUtil {
 		return getPortal().renderPortlet(
 			servletContext, request, response, portlet, queryString, columnId,
 			columnPos, columnCount, path, writeOutput);
+	}
+
+	public static void resetCDNHosts() {
+		getPortal().resetCDNHosts();
 	}
 
 	public static Set<String> resetPortletAddDefaultResourceCheckWhitelist() {

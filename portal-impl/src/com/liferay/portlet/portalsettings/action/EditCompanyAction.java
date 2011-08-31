@@ -170,7 +170,7 @@ public class EditCompanyAction extends PortletAction {
 			timeZoneId, addresses, emailAddresses, phones, websites,
 			properties);
 
-		PortalUtil.clearCDNHostCaches();
+		PortalUtil.resetCDNHosts();
 	}
 
 	protected void updateDisplay(ActionRequest actionRequest) throws Exception {

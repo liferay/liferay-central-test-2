@@ -205,8 +205,6 @@ public interface Portal {
 	 */
 	public void clearRequestParameters(RenderRequest renderRequest);
 
-	public void clearCDNHostCaches();
-
 	/**
 	 * Copies the request parameters to the render parameters, unless a
 	 * parameter with that name already exists in the render parameters.
@@ -1042,6 +1040,8 @@ public interface Portal {
 			String columnId, Integer columnPos, Integer columnCount,
 			String path, boolean writeOutput)
 		throws IOException, ServletException;
+
+	public void resetCDNHosts();
 
 	public Set<String> resetPortletAddDefaultResourceCheckWhitelist();
 
