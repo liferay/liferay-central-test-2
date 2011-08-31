@@ -28,4 +28,5 @@ public class CMISNotExpression implements CMISCriterion {
 	}
 
 	private CMISCriterion _cmisCriterion;
+
 }
