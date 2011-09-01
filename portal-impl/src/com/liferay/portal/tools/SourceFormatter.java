@@ -839,10 +839,10 @@ public class SourceFormatter {
 			}
 
 			if (!newContent.contains(copyright)) {
-				String customizedCopyright = _getCustomizedCopyright(file);
+				String customCopyright = _getCustomCopyright(file);
 
-				if (Validator.isNull(customizedCopyright) ||
-					!newContent.contains(customizedCopyright)) {
+				if (Validator.isNull(customCopyright) ||
+					!newContent.contains(customCopyright)) {
 
 					_sourceFormatterHelper.printError(
 						fileName, "(c): " + fileName);
@@ -1141,18 +1141,18 @@ public class SourceFormatter {
 				}
 
 				if (!newContent.contains(copyright)) {
-					String customizedCopyright = _getCustomizedCopyright(file);
+					String customCopyright = _getCustomCopyright(file);
 
-					if (Validator.isNull(customizedCopyright) ||
-						!newContent.contains(customizedCopyright)) {
+					if (Validator.isNull(customCopyright) ||
+						!newContent.contains(customCopyright)) {
 
 						_sourceFormatterHelper.printError(
 							fileName, "(c): " + fileName);
 					}
 					else {
 						newContent = StringUtil.replace(
-							newContent, "<%\n" + customizedCopyright + "\n%>",
-							"<%--\n" + customizedCopyright + "\n--%>");
+							newContent, "<%\n" + customCopyright + "\n%>",
+							"<%--\n" + customCopyright + "\n--%>");
 					}
 				}
 				else {
@@ -1477,11 +1477,10 @@ public class SourceFormatter {
 		return copyright;
 	}
 
-	private static String _getCustomizedCopyright(File file)
+	private static String _getCustomCopyright(File file)
 		throws IOException {
 
 		String absolutePath = _fileUtil.getAbsolutePath(file);
-		String copyright = null;
 
 		for (int x = absolutePath.length();;) {
 			x = absolutePath.lastIndexOf(StringPool.SLASH, x);
@@ -1490,7 +1489,7 @@ public class SourceFormatter {
 				break;
 			}
 
-			copyright = _fileUtil.read(
+			String copyright = _fileUtil.read(
 				absolutePath.substring(0, x + 1) + "copyright.txt");
 
 			if (Validator.isNotNull(copyright)) {
@@ -1500,7 +1499,7 @@ public class SourceFormatter {
 			x = x - 1;
 		}
 
-		return copyright;
+		return null;
 	}
 
 	private static List<String> _getJSPDuplicateImports(
