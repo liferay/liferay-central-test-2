@@ -71,6 +71,10 @@ public class OrganizationPermissionImpl implements OrganizationPermission {
 			String actionId)
 		throws PortalException, SystemException {
 
+		if ((organizationIds == null) || (organizationIds.length == 0)) {
+			return true;
+		}
+
 		for (long organizationId : organizationIds) {
 			check(permissionChecker, organizationId, actionId);
 		}
