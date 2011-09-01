@@ -73,8 +73,8 @@ public class GroupFinderImpl
 	public static String FIND_BY_SYSTEM =
 		GroupFinder.class.getName() + ".findBySystem";
 
-	public static String FIND_BY_COMPANYID =
-		GroupFinder.class.getName() + ".findByCompanyId";
+	public static String FIND_BY_C_C =
+		GroupFinder.class.getName() + ".findByC_C";
 
 	public static String FIND_BY_C_N =
 		GroupFinder.class.getName() + ".findByC_N";
@@ -363,51 +363,6 @@ public class GroupFinderImpl
 		}
 	}
 
-	public Group findByC_N(long companyId, String name)
-		throws NoSuchGroupException, SystemException {
-
-		name = StringUtil.lowerCase(name);
-
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			String sql = CustomSQLUtil.get(FIND_BY_C_N);
-
-			SQLQuery q = session.createSQLQuery(sql);
-
-			q.addEntity("Group_", GroupImpl.class);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(companyId);
-			qPos.add(name);
-
-			List<Group> list = q.list();
-
-			if (!list.isEmpty()) {
-				return list.get(0);
-			}
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-
-		StringBundler sb = new StringBundler(5);
-
-		sb.append("No Group exists with the key {companyId=");
-		sb.append(companyId);
-		sb.append(", name=");
-		sb.append(name);
-		sb.append("}");
-
-		throw new NoSuchGroupException(sb.toString());
-	}
-
 	public List<Group> findByCompanyId(
 			long companyId, LinkedHashMap<String, Object> params, int start,
 			int end, OrderByComparator obc)
@@ -456,15 +411,16 @@ public class GroupFinderImpl
 		sql = _findByCompanyIdSQLCache.get(sqlKey);
 
 		if (sql == null) {
-			String findByCompanyId_SQL = CustomSQLUtil.get(FIND_BY_COMPANYID);
+			String findByC_C_SQL = CustomSQLUtil.get(FIND_BY_C_C);
 
 			if (params.get("active") == Boolean.TRUE) {
-				findByCompanyId_SQL = StringUtil.replace(findByCompanyId_SQL,
-					"(Group_.liveGroupId = 0) AND", StringPool.BLANK);
+				findByC_C_SQL = StringUtil.replace(
+					findByC_C_SQL, "(Group_.liveGroupId = 0) AND",
+					StringPool.BLANK);
 			}
 
-			findByCompanyId_SQL = StringUtil.replace(
-				findByCompanyId_SQL, "Group_.classNameId = ?",
+			findByC_C_SQL = StringUtil.replace(
+				findByC_C_SQL, "Group_.classNameId = ?",
 				"Group_.classNameId = ".concat(
 					StringUtil.merge(
 						_getGroupOrganizationClassNameIds(),
@@ -473,16 +429,16 @@ public class GroupFinderImpl
 			StringBundler sb = new StringBundler();
 
 			sb.append("(");
-			sb.append(replaceJoinAndWhere(findByCompanyId_SQL, params1));
+			sb.append(replaceJoinAndWhere(findByC_C_SQL, params1));
 			sb.append(")");
 
 			if (doUnion) {
 				sb.append(" UNION (");
-				sb.append(replaceJoinAndWhere(findByCompanyId_SQL, params2));
+				sb.append(replaceJoinAndWhere(findByC_C_SQL, params2));
 				sb.append(") UNION (");
-				sb.append(replaceJoinAndWhere(findByCompanyId_SQL, params3));
+				sb.append(replaceJoinAndWhere(findByC_C_SQL, params3));
 				sb.append(") UNION (");
-				sb.append(replaceJoinAndWhere(findByCompanyId_SQL, params4));
+				sb.append(replaceJoinAndWhere(findByC_C_SQL, params4));
 				sb.append(")");
 			}
 
@@ -508,16 +464,20 @@ public class GroupFinderImpl
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			setJoin(qPos, params1);
+
 			qPos.add(companyId);
 
 			if (doUnion) {
 				setJoin(qPos, params2);
+
 				qPos.add(companyId);
 
 				setJoin(qPos, params3);
+
 				qPos.add(companyId);
 
 				setJoin(qPos, params4);
+
 				qPos.add(companyId);
 			}
 
@@ -540,6 +500,51 @@ public class GroupFinderImpl
 		finally {
 			closeSession(session);
 		}
+	}
+
+	public Group findByC_N(long companyId, String name)
+		throws NoSuchGroupException, SystemException {
+
+		name = StringUtil.lowerCase(name);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			String sql = CustomSQLUtil.get(FIND_BY_C_N);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity("Group_", GroupImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(companyId);
+			qPos.add(name);
+
+			List<Group> list = q.list();
+
+			if (!list.isEmpty()) {
+				return list.get(0);
+			}
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+
+		StringBundler sb = new StringBundler(5);
+
+		sb.append("No Group exists with the key {companyId=");
+		sb.append(companyId);
+		sb.append(", name=");
+		sb.append(name);
+		sb.append("}");
+
+		throw new NoSuchGroupException(sb.toString());
 	}
 
 	public List<Group> findByC_N_D(
@@ -607,16 +612,16 @@ public class GroupFinderImpl
 		}
 
 		if (sql == null) {
-			String findByCND_SQL = CustomSQLUtil.get(FIND_BY_C_N_D);
+			String findByC_N_D_SQL = CustomSQLUtil.get(FIND_BY_C_N_D);
 
 			if (classNameIds == null) {
-				findByCND_SQL = StringUtil.replace(
-					findByCND_SQL, "AND (Group_.classNameId = ?)",
+				findByC_N_D_SQL = StringUtil.replace(
+					findByC_N_D_SQL, "AND (Group_.classNameId = ?)",
 					StringPool.BLANK);
 			}
 			else {
-				findByCND_SQL = StringUtil.replace(
-					findByCND_SQL, "Group_.classNameId = ?",
+				findByC_N_D_SQL = StringUtil.replace(
+					findByC_N_D_SQL, "Group_.classNameId = ?",
 					"Group_.classNameId = ".concat(
 						StringUtil.merge(
 							classNameIds, " OR Group_.classNameId = ")));
@@ -625,16 +630,16 @@ public class GroupFinderImpl
 			StringBundler sb = new StringBundler();
 
 			sb.append("(");
-			sb.append(replaceJoinAndWhere(findByCND_SQL, params1));
+			sb.append(replaceJoinAndWhere(findByC_N_D_SQL, params1));
 			sb.append(")");
 
 			if (doUnion) {
 				sb.append(" UNION (");
-				sb.append(replaceJoinAndWhere(findByCND_SQL, params2));
+				sb.append(replaceJoinAndWhere(findByC_N_D_SQL, params2));
 				sb.append(") UNION (");
-				sb.append(replaceJoinAndWhere(findByCND_SQL, params3));
+				sb.append(replaceJoinAndWhere(findByC_N_D_SQL, params3));
 				sb.append(") UNION (");
-				sb.append(replaceJoinAndWhere(findByCND_SQL, params4));
+				sb.append(replaceJoinAndWhere(findByC_N_D_SQL, params4));
 				sb.append(")");
 			}
 
@@ -665,6 +670,7 @@ public class GroupFinderImpl
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			setJoin(qPos, params1);
+
 			qPos.add(companyId);
 			qPos.add(name);
 			qPos.add(realName);
@@ -674,6 +680,7 @@ public class GroupFinderImpl
 
 			if (doUnion) {
 				setJoin(qPos, params2);
+
 				qPos.add(companyId);
 				qPos.add(name);
 				qPos.add(realName);
@@ -682,6 +689,7 @@ public class GroupFinderImpl
 				qPos.add(description);
 
 				setJoin(qPos, params3);
+
 				qPos.add(companyId);
 				qPos.add(name);
 				qPos.add(realName);
@@ -690,6 +698,7 @@ public class GroupFinderImpl
 				qPos.add(description);
 
 				setJoin(qPos, params4);
+
 				qPos.add(companyId);
 				qPos.add(name);
 				qPos.add(realName);
@@ -733,6 +742,7 @@ public class GroupFinderImpl
 		QueryPos qPos = QueryPos.getInstance(q);
 
 		setJoin(qPos, params);
+
 		qPos.add(groupId);
 
 		Iterator<Long> itr = q.list().iterator();
@@ -776,6 +786,7 @@ public class GroupFinderImpl
 		QueryPos qPos = QueryPos.getInstance(q);
 
 		setJoin(qPos, params);
+
 		qPos.add(companyId);
 		qPos.add(name);
 		qPos.add(realName);
