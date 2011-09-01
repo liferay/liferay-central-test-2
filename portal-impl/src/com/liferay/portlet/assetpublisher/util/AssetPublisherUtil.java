@@ -46,7 +46,6 @@ import com.liferay.portlet.asset.service.AssetEntryLocalServiceUtil;
 import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
 import com.liferay.portlet.asset.service.persistence.AssetEntryQuery;
 import com.liferay.portlet.expando.model.ExpandoBridge;
-import org.apache.ecs.vxml.Else;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -333,11 +332,11 @@ public class AssetPublisherUtil {
 			portletPreferences.getValue("anyAssetType", null));
 
 		if (defaultClassNameId > 0) {
-			return  new long[] {defaultClassNameId};
+			return new long[] {defaultClassNameId};
 		}
 
 		long[] classNameIds = GetterUtil.getLongValues(
-				portletPreferences.getValues("classNameIds", null));
+			portletPreferences.getValues("classNameIds", null));
 
 		if (classNameIds != null) {
 			return classNameIds;
@@ -355,7 +354,7 @@ public class AssetPublisherUtil {
 			portletPreferences.getValue("defaultScope", null), true);
 
 		if (defaultScope) {
-			return  new long[] {scopeGroupId};
+			return new long[] {scopeGroupId};
 		}
 
 		long defaultScopeId = GetterUtil.getLong(
@@ -380,19 +379,16 @@ public class AssetPublisherUtil {
 					long scopeIdLayoutId = GetterUtil.getLong(
 						scopeIdFragments[1]);
 
-					Layout scopeIdLayout =
-						LayoutLocalServiceUtil.getLayout(
-							scopeGroupId, layout.isPrivateLayout(),
-							scopeIdLayoutId);
+					Layout scopeIdLayout = LayoutLocalServiceUtil.getLayout(
+						scopeGroupId, layout.isPrivateLayout(),
+						scopeIdLayoutId);
 
 					Group scopeIdGroup = scopeIdLayout.getScopeGroup();
 
 					groupIds[i] = scopeIdGroup.getGroupId();
 				}
 				else {
-					if (scopeIdFragments[1].equals(
-							GroupConstants.DEFAULT)) {
-
+					if (scopeIdFragments[1].equals(GroupConstants.DEFAULT)) {
 						groupIds[i] = scopeGroupId;
 					}
 					else {
