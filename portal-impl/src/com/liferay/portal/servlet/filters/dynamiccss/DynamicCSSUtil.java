@@ -35,12 +35,10 @@ import java.util.Map;
 public class DynamicCSSUtil {
 
 	public static void init() {
-		String scriptPath =
-			"com/liferay/portal/servlet/filters/dynamiccss/main.rb";
-
 		try {
 			_rubyScript = ContentUtil.get(
-				PortalClassLoaderUtil.getClassLoader(), scriptPath);
+				PortalClassLoaderUtil.getClassLoader(),
+				"com/liferay/portal/servlet/filters/dynamiccss/main.rb");
 
 			// Ruby executor needs to warm up when requiring Sass. Always breaks
 			// the first time without this block.
@@ -49,8 +47,8 @@ public class DynamicCSSUtil {
 				null, new HashMap<String, Object>(), null,
 				"require 'rubygems'\nrequire 'sass'");
 		}
-		catch (Exception se) {
-			_log.error(se, se);
+		catch (Exception e) {
+			_log.error(e, e);
 		}
 	}
 
