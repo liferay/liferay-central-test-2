@@ -125,7 +125,7 @@ public class LiferayStrutsRequestImpl extends HttpServletRequestWrapper {
 		}
 	}
 
-	private Map<String, Object> _strutsAttributes;
 	private byte[] _bytes;
+	private Map<String, Object> _strutsAttributes;
 
 }
