@@ -141,11 +141,11 @@ public class DLUtil {
 		data.put("folder-id", _getDefaultFolderId(request));
 		data.put("refresh-folders", Boolean.TRUE.toString());
 
-        if(folder != null) {
-            PortalUtil.addPortletBreadcrumbEntry(
+		if (folder != null) {
+			PortalUtil.addPortletBreadcrumbEntry(
 				request, themeDisplay.translate("documents-home"),
 				portletURL.toString(), data);
-        }
+		}
 
 		addPortletBreadcrumbEntries(folder, request, portletURL);
 	}
@@ -243,11 +243,11 @@ public class DLUtil {
 			data.put("folder-id", _getDefaultFolderId(request));
 			data.put("refresh-folders", Boolean.TRUE.toString());
 
-            if(folder != null){
-                PortalUtil.addPortletBreadcrumbEntry(
-                    request, themeDisplay.translate("documents-home"),
-                    portletURL.toString(), data);
-            }
+			if (folder != null) {
+				PortalUtil.addPortletBreadcrumbEntry(
+					request, themeDisplay.translate("documents-home"),
+					portletURL.toString(), data);
+			}
 		}
 		else {
 			portletURL.setParameter("struts_action", "/document_library/view");
