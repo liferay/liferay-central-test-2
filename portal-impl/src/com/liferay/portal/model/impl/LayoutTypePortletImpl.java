@@ -1361,13 +1361,15 @@ public class LayoutTypePortletImpl
 
 		if (hasTemplate() && (customizable = isCustomizable()) &&
 			(columnDisabled = isColumnDisabled(columnId))) {
+
 			return getTemplateProperty(columnId);
 		}
 
 		if (hasUserPreferences() &&
-			(customizable == null ? isCustomizable() : customizable) &&
-			(columnDisabled == null ? !isColumnDisabled(columnId) :
-				columnDisabled)) {
+			((customizable == null) ? isCustomizable() : customizable) &&
+			((columnDisabled == null) ?
+				!isColumnDisabled(columnId) : columnDisabled)) {
+
 			return getUserPreference(columnId);
 		}
 
