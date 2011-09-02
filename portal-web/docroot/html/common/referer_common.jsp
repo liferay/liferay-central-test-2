@@ -14,7 +14,7 @@
  */
 --%>
 
-<%@ page session="false"%>
+<%@ page session="false" %>
 
 <%@ include file="/html/common/init.jsp" %>
 
@@ -23,6 +23,7 @@ String referer = null;
 
 String refererParam = PortalUtil.escapeRedirect(request.getParameter(WebKeys.REFERER));
 String refererRequest = (String)request.getAttribute(WebKeys.REFERER);
+
 String refererSession = null;
 
 HttpSession session = request.getSession(false);
