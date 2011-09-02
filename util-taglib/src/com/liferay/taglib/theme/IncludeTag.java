@@ -30,12 +30,12 @@ public class IncludeTag extends com.liferay.taglib.util.IncludeTag {
 
 	@Override
 	public int doEndTag() throws JspException {
-		ServletContext servletContext = getServletContext();
-		HttpServletRequest request = getServletRequest();
-
-		Theme theme = (Theme)request.getAttribute(WebKeys.THEME);
-
 		try {
+			ServletContext servletContext = getServletContext();
+			HttpServletRequest request = getServletRequest();
+
+			Theme theme = (Theme)request.getAttribute(WebKeys.THEME);
+
 			ThemeUtil.include(
 				servletContext, request, new PipingServletResponse(pageContext),
 				pageContext, getPage(), theme);
