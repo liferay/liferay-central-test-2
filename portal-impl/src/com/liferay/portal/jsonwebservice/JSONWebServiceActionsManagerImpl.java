@@ -125,39 +125,39 @@ public class JSONWebServiceActionsManagerImpl
 	}
 
 	public void registerJSONWebServiceAction(
-		Class<?> actionClass, Method actionMethod, String path, String method,
-		String portletServletContextName) {
+		String servletContextName, Class<?> actionClass, Method actionMethod,
+		String path, String method) {
 
 		JSONWebServiceActionConfig jsonWebServiceActionConfig =
 			new JSONWebServiceActionConfig(
-				actionClass, actionMethod, path, method,
-				portletServletContextName);
+				servletContextName, actionClass, actionMethod, path, method);
 
 		_jsonWebServiceActionConfigs.add(jsonWebServiceActionConfig);
 	}
 
-	public int unregisterJSONWebServiceActions(
-		String portletServletContextName) {
+	public int unregisterJSONWebServiceActions(String servletContextName) {
+		if (servletContextName == null) {
+			return 0;
+		}
 
-		int removedCount = 0;
+		int count = 0;
 
-		Iterator<JSONWebServiceActionConfig> iterator =
+		Iterator<JSONWebServiceActionConfig> itr =
 			_jsonWebServiceActionConfigs.iterator();
 
-		while (iterator.hasNext()) {
-			JSONWebServiceActionConfig jsonWebServiceActionConfig =
-				iterator.next();
+		while (itr.hasNext()) {
+			JSONWebServiceActionConfig jsonWebServiceActionConfig = itr.next();
 
-			if ((portletServletContextName != null) &&
-				portletServletContextName.equals(
-					jsonWebServiceActionConfig.getPortletServletContextName()))
-			{
-				iterator.remove();
-				removedCount++;
+			if (servletContextName.equals(
+					jsonWebServiceActionConfig.getServletContextName())) {
+
+				itr.remove();
+
+				count++;
 			}
 		}
 
-		return removedCount;
+		return count;
 	}
 
 	private int _countMatchedElements(

@@ -16,8 +16,7 @@ package com.liferay.portal.jsonwebservice;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.jsonwebservice.JSONWebService;
-import
-	com.liferay.portal.kernel.jsonwebservice.JSONWebServiceActionsManagerUtil;
+import com.liferay.portal.kernel.jsonwebservice.JSONWebServiceActionsManagerUtil;
 import com.liferay.portal.kernel.jsonwebservice.JSONWebServiceMode;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -53,24 +52,26 @@ import org.objectweb.asm.ClassReader;
  */
 public class JSONWebServiceConfigurator extends ClassFinder {
 
-	public JSONWebServiceConfigurator(String portletServletContextName) {
+	public JSONWebServiceConfigurator(String servletContextName) {
 		setIncludedJars(
 			"*portal-impl.jar", "*portal-service.jar", "*_wl_cls_gen.jar",
 			"*-portlet-service.jar");
 
-		_portletServletContextName = portletServletContextName;
+		_servletContextName = servletContextName;
 	}
 
 	public void clean() {
-		int removedCount = JSONWebServiceActionsManagerUtil.
-			unregisterJSONWebServiceActions(_portletServletContextName);
+		int count =
+			JSONWebServiceActionsManagerUtil.unregisterJSONWebServiceActions(
+				_servletContextName);
 
-		_registeredActionsCount -= removedCount;
+		_registeredActionsCount -= count;
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Removed " + removedCount +
-				" existing JSON Web Service actions for " +
-				_portletServletContextName);
+			_log.debug(
+				"Removed " + count +
+					" existing JSON Web Service actions that belonged to " +
+						_servletContextName);
 		}
 	}
 
@@ -210,8 +211,8 @@ public class JSONWebServiceConfigurator extends ClassFinder {
 
 		if (_log.isDebugEnabled()) {
 			_log.debug(
-				"Configuring " + _registeredActionsCount +
-					" actions in " + stopWatch.getTime() + " ms");
+				"Configured " + _registeredActionsCount + " actions in " +
+					stopWatch.getTime() + " ms");
 		}
 	}
 
@@ -370,8 +371,8 @@ public class JSONWebServiceConfigurator extends ClassFinder {
 		}
 
 		JSONWebServiceActionsManagerUtil.registerJSONWebServiceAction(
-			method.getDeclaringClass(), method, path, httpMethod,
-			_portletServletContextName);
+			_servletContextName, method.getDeclaringClass(), method, path,
+			httpMethod);
 
 		_registeredActionsCount++;
 	}
@@ -384,8 +385,8 @@ public class JSONWebServiceConfigurator extends ClassFinder {
 		getTypeSignatureBytes(JSONWebService.class);
 	private JSONWebServiceMappingResolver _jsonWebServiceMappingResolver =
 		new JSONWebServiceMappingResolver();
-	private String _portletServletContextName;
 	private int _registeredActionsCount;
+	private String _servletContextName;
 	private Map<Class<?>, Class<?>> _utilClasses =
 		new HashMap<Class<?>, Class<?>>();
 

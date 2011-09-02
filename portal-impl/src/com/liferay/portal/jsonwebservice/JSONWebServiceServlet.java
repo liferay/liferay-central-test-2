@@ -18,7 +18,6 @@ import com.liferay.portal.kernel.servlet.PortletServlet;
 import com.liferay.portal.kernel.upload.UploadServletRequest;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.model.PortletApp;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.CompanyThreadLocal;
 import com.liferay.portal.security.permission.PermissionChecker;
@@ -45,7 +44,8 @@ public class JSONWebServiceServlet extends JSONServlet {
 
 	@Override
 	public void destroy() {
-		_jsonAction.destroy();
+		_jsonWebServiceServiceAction.destroy();
+
 		super.destroy();
 	}
 
@@ -99,21 +99,12 @@ public class JSONWebServiceServlet extends JSONServlet {
 			(ClassLoader)servletContext.getAttribute(
 				PortletServlet.PORTLET_CLASS_LOADER);
 
-		String portletServletContextName = null;
+		_jsonWebServiceServiceAction = new JSONWebServiceServiceAction(
+			servletContext.getServletContextName(), portletClassLoader);
 
-		PortletApp portletApp = (PortletApp)servletContext.getAttribute(
-			PortletServlet.PORTLET_APP);
+		_jsonWebServiceServiceAction.setServletContext(servletContext);
 
-		if (portletApp != null) {
-			portletServletContextName = portletApp.getServletContextName();
-		}
-
-		_jsonAction = new JSONWebServiceServiceAction(
-			portletClassLoader, portletServletContextName);
-
-		_jsonAction.setServletContext(servletContext);
-
-		return _jsonAction;
+		return _jsonWebServiceServiceAction;
 	}
 
 	@Override
@@ -139,6 +130,6 @@ public class JSONWebServiceServlet extends JSONServlet {
 		}
 	}
 
-	private JSONWebServiceServiceAction _jsonAction;
+	private JSONWebServiceServiceAction _jsonWebServiceServiceAction;
 
 }
