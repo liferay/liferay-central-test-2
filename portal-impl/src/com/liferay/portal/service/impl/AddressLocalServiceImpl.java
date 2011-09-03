@@ -23,10 +23,10 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Account;
 import com.liferay.portal.model.Address;
 import com.liferay.portal.model.Contact;
+import com.liferay.portal.model.Country;
 import com.liferay.portal.model.ListTypeConstants;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.User;
-import com.liferay.portal.service.CountryServiceUtil;
 import com.liferay.portal.service.base.AddressLocalServiceBaseImpl;
 import com.liferay.portal.util.PortalUtil;
 
@@ -216,10 +216,12 @@ public class AddressLocalServiceImpl extends AddressLocalServiceBaseImpl {
 		else if (Validator.isNull(city)) {
 			throw new AddressCityException();
 		}
-		else if (Validator.isNull(zip) &&
-				 CountryServiceUtil.getCountry(countryId).isZipRequired()) {
+		else if (Validator.isNull(zip)) {
+			Country country = countryService.fetchCountry(countryId);
 
-			throw new AddressZipException();
+			if ((country == null) || country.isZipRequired()) {
+				throw new AddressZipException();
+			}
 		}
 
 		if (addressId > 0) {

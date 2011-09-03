@@ -14,12 +14,7 @@
 
 package com.liferay.portal.upgrade.v6_1_0;
 
-import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
-import com.liferay.portal.kernel.util.StringBundler;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 
 /**
  * @author Kenneth Chang
@@ -28,44 +23,15 @@ public class UpgradeCountry extends UpgradeProcess {
 
 	@Override
 	protected void doUpgrade() throws Exception {
-		updateZipRequired();
-	}
-
-	protected void updateZipRequired() throws Exception {
-		Connection con = null;
-		PreparedStatement ps = null;
-
-		try {
-			con = DataAccess.getConnection();
-
-			StringBundler sb = new StringBundler();
-
-			sb.append("update Country set zipRequired = false where name = '");
-
-			for (int i = 0; i < _COUNTRIES_NO_ZIP_REQUIRED.length; i++) {
-				sb.append(_COUNTRIES_NO_ZIP_REQUIRED[i]);
-
-				if ((i + 1) <  _COUNTRIES_NO_ZIP_REQUIRED.length) {
-					sb.append("' or name = '");
-				}
-				else {
-					sb.append("'");
-				}
-			}
-
-			String sql = sb.toString();
-
-			ps = con.prepareStatement(sql);
-
-			ps.executeUpdate();
-		}
-		finally {
-			DataAccess.cleanUp(con, ps);
+		for (String name : _NAMES) {
+			runSQL(
+				"update Country set zipRequired = FALSE where name = '" + name +
+					"'");
 		}
 	}
 
-	private static final String[] _COUNTRIES_NO_ZIP_REQUIRED =
-		{"Angola", "Antigua", "Aruba", "Bahamas", "Belize", "Benin", "Botswana",
+	private static final String[] _NAMES = {
+		"Angola", "Antigua", "Aruba", "Bahamas", "Belize", "Benin", "Botswana",
 		"Burkina Faso", "Burundi", "Central African Republic", "Comoros",
 		"Republic of Congo", "Democratic Republic of Congo", "Cook Islands",
 		"Djibouti", "Dominica", "Equatorial Guinea", "Eritrea", "Fiji Islands",
@@ -75,6 +41,7 @@ public class UpgradeCountry extends UpgradeProcess {
 		"St. Lucia", "Sao Tome & Principe", "Seychelles", "Sierra Leone",
 		"Solomon Islands", "Somalia", "Suriname", "Syria", "Tanzania", "Tonga",
 		"Trinidad & Tobago", "Tuvalu", "Uganda", "United Arab Emirates",
-		"Vanuatu", "Yemen", "Zimbabwe"};
+		"Vanuatu", "Yemen", "Zimbabwe"
+	};
 
 }
