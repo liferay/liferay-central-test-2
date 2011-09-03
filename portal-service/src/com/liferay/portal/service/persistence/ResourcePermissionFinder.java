@@ -22,7 +22,7 @@ public interface ResourcePermissionFinder {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int countByC_N_S_P_R_A(long companyId, java.lang.String name,
-		int scope, java.lang.String primKey, long[] roleIds, long actionIdMask)
+		int scope, java.lang.String primKey, long[] roleIds, long actionId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portal.model.ResourcePermission> findByResource(

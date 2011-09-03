@@ -27,11 +27,11 @@ public class ResourcePermissionFinderUtil {
 	}
 
 	public static int countByC_N_S_P_R_A(long companyId, java.lang.String name,
-		int scope, java.lang.String primKey, long[] roleIds, long actionIdMask)
+		int scope, java.lang.String primKey, long[] roleIds, long actionId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder()
 				   .countByC_N_S_P_R_A(companyId, name, scope, primKey,
-			roleIds, actionIdMask);
+			roleIds, actionId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.ResourcePermission> findByResource(

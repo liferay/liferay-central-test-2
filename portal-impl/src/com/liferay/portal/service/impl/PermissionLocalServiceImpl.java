@@ -457,7 +457,6 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 		//	permissionCheckerBag.getUserUserGroupGroups();
 		List<Group> groups = permissionCheckerBag.getGroups();
 		List<Role> roles = permissionCheckerBag.getRoles();
-		long[] roleIds = permissionCheckerBag.getRoleIds();
 
 		logHasUserPermissions(userId, resourceId, actionId, stopWatch, block++);
 
@@ -498,8 +497,8 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 		}
 		else if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
 			return hasUserPermissions_6(
-				userId, resourceId, resources, actionId, roleIds, stopWatch,
-				block);
+				userId, resourceId, resources, actionId,
+				permissionCheckerBag.getRoleIds(), stopWatch, block);
 		}
 
 		return false;
@@ -1043,19 +1042,13 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 			int block)
 		throws PortalException, SystemException {
 
-		// Iterate the list of resources in reverse order to test permissions
-		// from company scope to individual scope because it is more likely that
-		// a permission is assigned at a higher scope. Optimizing this method
-		// to one SQL call may actually slow things down since most of the calls
-		// will pull from the cache after the first request.
-
-		boolean hasUserPermission =
+		boolean hasUserPermissions =
 			resourcePermissionLocalService.hasResourcePermission(
 				resources, roleIds, actionId);
 
 		logHasUserPermissions(userId, resourceId, actionId, stopWatch, block++);
 
-		return hasUserPermission;
+		return hasUserPermissions;
 	}
 
 	protected void logHasUserPermissions(

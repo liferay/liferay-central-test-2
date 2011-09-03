@@ -1020,7 +1020,7 @@
 				[$SCOPE$]
 		]]>
 	</sql>
-<sql id="com.liferay.portal.service.persistence.ResourcePermissionFinder.countByC_N_S_P_R_A">
+	<sql id="com.liferay.portal.service.persistence.ResourcePermissionFinder.countByC_N_S_P_R_A">
 		<![CDATA[
 			SELECT
 				COUNT(*) AS COUNT_VALUE
@@ -1034,7 +1034,8 @@
 				(ResourcePermission.roleId = ?) AND
 				((ResourcePermission.actionIds & ?) = ?)
 		]]>
-	</sql>	<sql id="com.liferay.portal.service.persistence.ResourcePermissionFinder.findByResource">
+	</sql>
+	<sql id="com.liferay.portal.service.persistence.ResourcePermissionFinder.findByResource">
 		<![CDATA[
 			SELECT
 				{ResourcePermission.*}

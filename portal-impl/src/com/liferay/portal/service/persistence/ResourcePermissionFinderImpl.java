@@ -41,11 +41,11 @@ public class ResourcePermissionFinderImpl
 	public static String COUNT_BY_R_S =
 		ResourcePermissionFinder.class.getName() + ".countByR_S";
 
-	public static String FIND_BY_RESOURCE =
-		ResourcePermissionFinder.class.getName() + ".findByResource";
-
 	public static String COUNT_BY_C_N_S_P_R_A =
 		ResourcePermissionFinder.class.getName() + ".countByC_N_S_P_R_A";
+
+	public static String FIND_BY_RESOURCE =
+		ResourcePermissionFinder.class.getName() + ".findByResource";
 
 	public static String FIND_BY_R_S =
 		ResourcePermissionFinder.class.getName() + ".findByR_S";
@@ -94,73 +94,73 @@ public class ResourcePermissionFinderImpl
 
 	public int countByC_N_S_P_R_A(
 			long companyId, String name, int scope, String primKey,
-			long[] roleIds, long actionIdMask)
+			long[] roleIds, long actionId)
 		throws SystemException {
 
 		Object[] finderArgs = new Object[] {
-			companyId, name, scope, primKey, roleIds, actionIdMask
+			companyId, name, scope, primKey, roleIds, actionId
 		};
 
 		Long count = (Long)FinderCacheUtil.getResult(
 			ResourcePermissionPersistenceImpl.FINDER_PATH_COUNT_BY_C_N_S_P_R_A,
 			finderArgs, this);
 
-		if (count == null) {
+		if (count != null) {
+			return count.intValue();
+		}
+
+		Session session = null;
+
+		try {
+			session = openSession();
 
 			String sql = CustomSQLUtil.get(COUNT_BY_C_N_S_P_R_A);
 
 			if (roleIds.length > 1) {
-				StringBundler roleIdsOR = new StringBundler(
-					(roleIds.length * 2) -1);
+				StringBundler sb = new StringBundler(roleIds.length * 2 - 1);
 
 				for (int i = 0; i < roleIds.length; i++) {
 					if (i > 0) {
-						roleIdsOR.append(" OR ");
+						sb.append(" OR ");
 					}
 
-					roleIdsOR.append("ResourcePermission.roleId = ?");
+					sb.append("ResourcePermission.roleId = ?");
 				}
 
 				sql = StringUtil.replace(
-					sql, "ResourcePermission.roleId = ?", roleIdsOR.toString());
+					sql, "ResourcePermission.roleId = ?", sb.toString());
 			}
 
-			Session session = null;
+			SQLQuery q = session.createSQLQuery(sql);
 
-			try {
-				session = openSession();
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
 
-				SQLQuery q = session.createSQLQuery(sql);
+			QueryPos qPos = QueryPos.getInstance(q);
 
-				q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
+			qPos.add(companyId);
+			qPos.add(name);
+			qPos.add(scope);
+			qPos.add(primKey);
+			qPos.add(roleIds);
+			qPos.add(actionId);
+			qPos.add(actionId);
 
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(companyId);
-				qPos.add(name);
-				qPos.add(scope);
-				qPos.add(primKey);
-				qPos.add(roleIds);
-				qPos.add(actionIdMask);
-				qPos.add(actionIdMask);
-
-				count = (Long)q.uniqueResult();
+			count = (Long)q.uniqueResult();
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			if (count == null) {
+				count = Long.valueOf(0);
 			}
-			catch (Exception e) {
-				throw new SystemException(e);
-			}
-			finally {
-				if (count == null) {
-					count = Long.valueOf(0);
-				}
 
-				FinderCacheUtil.putResult(
-					ResourcePermissionPersistenceImpl.
-						FINDER_PATH_COUNT_BY_C_N_S_P_R_A,
-					finderArgs, count);
+			FinderCacheUtil.putResult(
+				ResourcePermissionPersistenceImpl.
+					FINDER_PATH_COUNT_BY_C_N_S_P_R_A,
+				finderArgs, count);
 
-				closeSession(session);
-			}
+			closeSession(session);
 		}
 
 		return count.intValue();
