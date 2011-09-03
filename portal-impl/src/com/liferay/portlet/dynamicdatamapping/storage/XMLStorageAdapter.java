@@ -293,38 +293,39 @@ public class XMLStorageAdapter extends BaseStorageAdapter {
 
 			Document document = SAXReaderUtil.read(ddmContent.getXml());
 
-			if ((conditionXPath == null) ||
-				((conditionXPath != null) &&
-				  conditionXPath.booleanValueOf(document))) {
+			if ((conditionXPath != null) &&
+				!conditionXPath.booleanValueOf(document)) {
 
-				Fields fields = new Fields();
+				continue;
+			}
 
-				Element rootElement = document.getRootElement();
+			Fields fields = new Fields();
 
-				List<Element> dynamicElementElements = rootElement.elements(
-					"dynamic-element");
+			Element rootElement = document.getRootElement();
 
-				for (Element dynamicElementElement : dynamicElementElements) {
-					String fieldName = dynamicElementElement.attributeValue(
-						"name");
-					String fieldDataType = ddmStructure.getFieldDataType(
-						fieldName);
-					String fieldValue = dynamicElementElement.elementText(
-						"dynamic-content");
+			List<Element> dynamicElementElements = rootElement.elements(
+				"dynamic-element");
 
-					if ((fieldNames == null) ||
-						((fieldNames != null) &&
-						 fieldNames.contains(fieldName))) {
+			for (Element dynamicElementElement : dynamicElementElements) {
+				String fieldName = dynamicElementElement.attributeValue("name");
+				String fieldValue = dynamicElementElement.elementText(
+					"dynamic-content");
 
-						Serializable value = FieldConstants.getSerializable(
-							fieldDataType, fieldValue);
-
-						fields.put(new Field(fieldName, value));
-					}
+				if ((fieldNames != null) && !fieldNames.contains(fieldName)) {
+					continue;
 				}
 
-				fieldsList.add(fields);
+				String fieldDataType = ddmStructure.getFieldDataType(fieldName);
+
+				Serializable fieldValueSerializable =
+					FieldConstants.getSerializable(fieldDataType, fieldValue);
+
+				Field field = new Field(fieldName, fieldValueSerializable);
+
+				fields.put(field);
 			}
+
+			fieldsList.add(fields);
 		}
 
 		if (orderByComparator != null) {

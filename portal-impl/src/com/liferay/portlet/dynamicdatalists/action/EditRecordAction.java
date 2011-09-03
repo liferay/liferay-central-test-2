@@ -177,12 +177,12 @@ public class EditRecordAction extends PortletAction {
 
 			String fieldDataType = ddmStructure.getFieldDataType(fieldName);
 
-			String value = ParamUtil.getString(actionRequest, fieldName);
+			String fieldValue = ParamUtil.getString(actionRequest, fieldName);
 
-			Serializable fieldValue = FieldConstants.getSerializable(
-				fieldDataType, value);
+			Serializable fieldValueSerializable =
+				FieldConstants.getSerializable(fieldDataType, fieldValue);
 
-			field.setValue(fieldValue);
+			field.setValue(fieldValueSerializable);
 
 			fields.put(field);
 		}
