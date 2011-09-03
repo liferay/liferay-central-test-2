@@ -36,6 +36,7 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.ResourcePermissionsThreadLocal;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -266,7 +267,7 @@ public class ResourcePermissionLocalServiceImpl
 
 	public List<String> getAvailableResourcePermissionActionIds(
 			long companyId, String name, int scope, String primKey, long roleId,
-			List<String> actionIds)
+			Collection<String> actionIds)
 		throws PortalException, SystemException {
 
 		ResourcePermission resourcePermission =
