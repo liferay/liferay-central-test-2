@@ -10,6 +10,6 @@ ${sampleSQLBuilder.insertSecurity("com.liferay.portlet.documentlibrary.model.DLF
 
 		${sampleSQLBuilder.insertDLFileEntry(dlFileEntry, ddmStructure)}
 
-		${dlCsvWriter.write(dlFolder.folderId + "," + dlFileEntry.name + "," + dlFileEntry.fileEntryId + "\n")}
+		${writerDocumentLibraryCSV.write(dlFolder.folderId + "," + dlFileEntry.name + "," + dlFileEntry.fileEntryId + "\n")}
 	</#list>
 </#if>

@@ -273,28 +273,24 @@ public class SampleSQLBuilder {
 		processTemplate(_tplDLFileEntry, context);
 	}
 
-	public void insertDLFolder(
-			Writer dlCsvWriter, DLFolder dlFolder, DDMStructure ddmStructure)
+	public void insertDLFolder(DLFolder dlFolder, DDMStructure ddmStructure)
 		throws Exception {
 
 		Map<String, Object> context = getContext();
 
 		put(context, "ddmStructure", ddmStructure);
-		put(context, "dlCsvWriter", dlCsvWriter);
 		put(context, "dlFolder", dlFolder);
 
 		processTemplate(_tplDLFolder, context);
 	}
 
 	public void insertDLFolders(
-			Writer dlCsvWriter, long parentDLFolderId, int dlFolderDepth,
-			DDMStructure ddmStructure)
+			long parentDLFolderId, int dlFolderDepth, DDMStructure ddmStructure)
 		throws Exception {
 
 		Map<String, Object> context = getContext();
 
 		put(context, "ddmStructure", ddmStructure);
-		put(context, "dlCsvWriter", dlCsvWriter);
 		put(context, "dlFolderDepth", dlFolderDepth);
 		put(context, "parentDLFolderId", parentDLFolderId);
 
@@ -485,12 +481,12 @@ public class SampleSQLBuilder {
 			@Override
 			public void run() {
 				try {
-					_writer = new UnsyncTeeWriter(
+					_writerSampleSQL = new UnsyncTeeWriter(
 						writer, new FileWriter(_outputDir +  "/sample.sql"));
 
 					createSample();
 
-					_writer.close();
+					_writerSampleSQL.close();
 
 					charPipe.close();
 				}
@@ -500,27 +496,21 @@ public class SampleSQLBuilder {
 			}
 
 			protected void createSample() throws Exception {
+				_writerBlogsCSV = getWriter("blogs.csv");
+				_writerDocumentLibraryCSV = getWriter("document_library.csv");
+				_writerMessageBoardsCSV = getWriter("message_boards.csv");
+				_writerUsersCSV = getWriter("users.csv");
+				_writerWikiCSV = getWriter("wiki.csv");
+
 				Map<String, Object> context = getContext();
-
-				Writer blogsEntriesCsvWriter = getWriter("blogs_entries.csv");
-				Writer dlCsvWriter = getWriter("dl.csv");
-				Writer mbMessagesCsvWriter = getWriter("mb_messages.csv");
-				Writer usersCsvWriter = getWriter("users.csv");
-				Writer wikiPagesCsvWriter = getWriter("wiki_pages.csv");
-
-				put(context, "blogsEntriesCsvWriter", blogsEntriesCsvWriter);
-				put(context, "dlCsvWriter", dlCsvWriter);
-				put(context, "mbMessagesCsvWriter", mbMessagesCsvWriter);
-				put(context, "usersCsvWriter", usersCsvWriter);
-				put(context, "wikiPagesCsvWriter", wikiPagesCsvWriter);
 
 				processTemplate(_tplSample, context);
 
-				blogsEntriesCsvWriter.flush();
-				dlCsvWriter.flush();
-				mbMessagesCsvWriter.flush();
-				usersCsvWriter.flush();
-				wikiPagesCsvWriter.flush();
+				_writerBlogsCSV.flush();
+				_writerDocumentLibraryCSV.flush();
+				_writerMessageBoardsCSV.flush();
+				_writerUsersCSV.flush();
+				_writerWikiCSV.flush();
 			}
 
 			protected Writer getWriter(String fileName) throws Exception {
@@ -562,6 +552,11 @@ public class SampleSQLBuilder {
 		put(context, "sampleSQLBuilder", this);
 		put(context, "stringUtil", StringUtil_IW.getInstance());
 		put(context, "userScreenNameIncrementer", _userScreenNameIncrementer);
+		put(context, "writerBlogsCSV", _writerBlogsCSV);
+		put(context, "writerDocumentLibraryCSV", _writerDocumentLibraryCSV);
+		put(context, "writerMessageBoardsCSV", _writerMessageBoardsCSV);
+		put(context, "writerUsersCSV", _writerUsersCSV);
+		put(context, "writerWikiCSV", _writerWikiCSV);
 
 		return context;
 	}
@@ -621,7 +616,7 @@ public class SampleSQLBuilder {
 	protected void processTemplate(String name, Map<String, Object> context)
 		throws Exception {
 
-		FreeMarkerUtil.process(name, context, _writer);
+		FreeMarkerUtil.process(name, context, _writerSampleSQL);
 	}
 
 	protected void put(Map<String, Object> context, String key, Object value) {
@@ -699,6 +694,11 @@ public class SampleSQLBuilder {
 	private String _tplWikiNode = _TPL_ROOT + "wiki_node.ftl";
 	private String _tplWikiPage = _TPL_ROOT + "wiki_page.ftl";
 	private SimpleCounter _userScreenNameIncrementer;
-	private Writer _writer;
+	private Writer _writerBlogsCSV;
+	private Writer _writerDocumentLibraryCSV;
+	private Writer _writerMessageBoardsCSV;
+	private Writer _writerSampleSQL;
+	private Writer _writerUsersCSV;
+	private Writer _writerWikiCSV;
 
 }
