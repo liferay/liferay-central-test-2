@@ -679,7 +679,7 @@ public class DataFactory {
 		return _counters;
 	}
 
-	public ClassName getDdmContentClassName() {
+	public ClassName getDDMContentClassName() {
 		return _ddmContentClassName;
 	}
 
@@ -687,7 +687,7 @@ public class DataFactory {
 		return _defaultUser;
 	}
 
-	public ClassName getDlFileEntryClassName() {
+	public ClassName getDLFileEntryClassName() {
 		return _dlFileEntryClassName;
 	}
 
