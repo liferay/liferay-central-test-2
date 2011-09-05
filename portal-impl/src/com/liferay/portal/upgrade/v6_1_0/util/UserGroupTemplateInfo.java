@@ -15,7 +15,6 @@
 package com.liferay.portal.upgrade.v6_1_0.util;
 
 /**
- *
  * @author Miguel Pastor
  */
 public class UserGroupTemplateInfo {
@@ -60,20 +59,24 @@ public class UserGroupTemplateInfo {
 		return _settings;
 	}
 
+	public String getThemeId() {
+		return _themeId;
+	}
+
 	public long getUserGroupId() {
 		return _userGroupId;
 	}
 
-	public String getThemeId() {
-		return _themeId;
+	public String getWapColorSchemeId() {
+		return _wapColorSchemeId;
 	}
 
 	public String getWapThemeId() {
 		return _wapThemeId;
 	}
 
-	public String getWapColorSchemeId() {
-		return _wapColorSchemeId;
+	public boolean isPrivateLayout() {
+		return _privateLayout;
 	}
 
 	public void setColorSchemeId(String colorSchemeId) {
@@ -92,6 +95,10 @@ public class UserGroupTemplateInfo {
 		_groupId = groupId;
 	}
 
+	public void setLayoutSetId(long layoutSetId) {
+		_layoutSetId = layoutSetId;
+	}
+
 	public void setLayoutSetPrototypeId(long layoutSetPrototypeId) {
 		_layoutSetPrototypeId = layoutSetPrototypeId;
 	}
@@ -108,10 +115,6 @@ public class UserGroupTemplateInfo {
 		_pageCount = pageCount;
 	}
 
-	public boolean isPrivateLayout() {
-		return _privateLayout;
-	}
-
 	public void setPrivateLayout(boolean privateLayout) {
 		_privateLayout = privateLayout;
 	}
@@ -120,24 +123,20 @@ public class UserGroupTemplateInfo {
 		_settings = settings;
 	}
 
-	public void setUserGroupId(long userGroupId) {
-		_userGroupId = userGroupId;
-	}
-
-	public void setLayoutSetId(long layoutSetId) {
-		_layoutSetId = layoutSetId;
-	}
-
 	public void setThemeId(String themeId) {
 		_themeId = themeId;
 	}
 
-	public void setWapThemeId(String wapThemeId) {
-		_wapThemeId = wapThemeId;
+	public void setUserGroupId(long userGroupId) {
+		_userGroupId = userGroupId;
 	}
 
 	public void setWapColorSchemeId(String wapColorSchemeId) {
 		_wapColorSchemeId = wapColorSchemeId;
+	}
+
+	public void setWapThemeId(String wapThemeId) {
+		_wapThemeId = wapThemeId;
 	}
 
 	private String _colorSchemeId;
@@ -151,9 +150,9 @@ public class UserGroupTemplateInfo {
 	private long _pageCount;
 	private boolean _privateLayout;
 	private String _settings;
-	private long _userGroupId;
 	private String _themeId;
-	private String _wapThemeId;
+	private long _userGroupId;
 	private String _wapColorSchemeId;
+	private String _wapThemeId;
 
 }

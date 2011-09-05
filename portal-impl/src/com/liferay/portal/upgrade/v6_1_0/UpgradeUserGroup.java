@@ -15,7 +15,6 @@
 package com.liferay.portal.upgrade.v6_1_0;
 
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -30,17 +29,26 @@ import com.liferay.portal.util.PropsValues;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 
 /**
  * @author Miguel Pastor
  */
 public class UpgradeUserGroup extends UpgradeProcess {
 
-	protected long addLayoutSet(
-			long companyId, long groupId, long layoutSetPrototypeId,
-			UserGroupTemplateInfo userGroupTemplateInfo)
-		throws SQLException, SystemException {
+	protected long addGroup(
+			long companyId, long creatorUserId, String groupName,
+			long layoutSetPrototypeId)
+		throws Exception {
+
+		long layoutSetPrototypeClassNameId = getClassNameId(
+			LayoutSetPrototype.class.getName());
+
+		long groupId = getGroupId(
+			companyId, layoutSetPrototypeClassNameId, layoutSetPrototypeId);
+
+		if (groupId > 0) {
+			return groupId;
+		}
 
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -51,18 +59,63 @@ public class UpgradeUserGroup extends UpgradeProcess {
 
 			StringBundler sb = new StringBundler(5);
 
-			sb.append(
-				"insert into LayoutSet (layoutSetId,groupId,companyId,");
-			sb.append("privateLayout,logo,logoId,themeId,colorSchemeId,");
-			sb.append("wapThemeId,wapColorSchemeId,css,pageCount,");
-			sb.append("settings_,layoutSetPrototypeId) values ");
-			sb.append("(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+			sb.append("insert into Group_ (groupId, companyId, ");
+			sb.append("creatorUserId, classNameId, classPK, parentGroupId, ");
+			sb.append("liveGroupId, name, description, type_, typeSettings, ");
+			sb.append("friendlyURL, site, active_) values (?, ?, ?, ?, ?, 0, ");
+			sb.append("0, ?, ?, 0, ?, ?, ?, ?)");
 
 			String sql = sb.toString();
 
 			ps = con.prepareStatement(sql);
 
-			long layoutSetId = increment();
+			groupId = increment();
+
+			ps.setLong(1, groupId);
+			ps.setLong(2, companyId);
+			ps.setLong(3, creatorUserId);
+			ps.setLong(4, layoutSetPrototypeClassNameId);
+			ps.setLong(5, layoutSetPrototypeId);
+			ps.setString(6, groupId + StringPool.MINUS + groupName);
+			ps.setString(7, "/template-" + layoutSetPrototypeId);
+			ps.setString(8, StringPool.BLANK);
+			ps.setString(9, StringPool.BLANK);
+			ps.setBoolean(10, false);
+			ps.setBoolean(11, true);
+
+			ps.execute();
+
+			return groupId;
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
+	}
+
+	protected long addLayoutSet(
+			long layoutSetId, long companyId, long groupId,
+			long layoutSetPrototypeId,
+			UserGroupTemplateInfo userGroupTemplateInfo)
+		throws Exception {
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = DataAccess.getConnection();
+
+			StringBundler sb = new StringBundler(5);
+
+			sb.append("insert into LayoutSet (layoutSetId, groupId, ");
+			sb.append("companyId, privateLayout, logo, logoId, themeId, ");
+			sb.append("colorSchemeId, wapThemeId, wapColorSchemeId, css, ");
+			sb.append("pageCount, settings_, layoutSetPrototypeId) values ");
+			sb.append("(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+
+			String sql = sb.toString();
+
+			ps = con.prepareStatement(sql);
 
 			ps.setLong(1, layoutSetId);
 			ps.setLong(2, groupId);
@@ -87,105 +140,40 @@ public class UpgradeUserGroup extends UpgradeProcess {
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
 		}
-
 	}
 
-	protected long addLayoutSetPrototype(
-		long companyId, String name) throws Exception {
-
-		Connection con = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-
-		try {
-			con = DataAccess.getConnection();
-
-			StringBundler sb = new StringBundler(3);
-
-			sb.append("insert into LayoutSetPrototype (layoutSetPrototypeId,");
-			sb.append("companyId,name, description, settings_,active_)");
-			sb.append(" values (?,?,?,?,NULL,1)");
-
-			String sql = sb.toString();
-
-			ps = con.prepareStatement(sql);
-
-			long layoutSetPrototypeId = increment();
-			ps.setLong(1, layoutSetPrototypeId);
-			ps.setLong(2, companyId);
-			ps.setString(3, composeI18N(name));
-			ps.setString(4, name);
-
-			ps.execute();
-
-			return layoutSetPrototypeId;
-		}
-		finally {
-			DataAccess.cleanUp(con, ps, rs);
-		}
-	}
-
-	protected long addLayoutSetPrototypeGroup(
-			long companyId, long layoutSetPrototypeId, long creatorUserId,
-			String groupName)
+	protected void addLayoutSetPrototype(
+			long layoutSetPrototypeId, long companyId, String name)
 		throws Exception {
 
-		long groupId = findGroupByC_C_C(
-			companyId, layoutSetPrototypeClassNameId,
-			layoutSetPrototypeId);
-
-		if (groupId > 0) {
-			return groupId;
-		}
-
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 
 		try {
-
 			con = DataAccess.getConnection();
 
-			StringBundler sb = new StringBundler(5);
+			ps = con.prepareStatement(
+				"insert into LayoutSetPrototype (layoutSetPrototypeId, " +
+					"companyId, name, description, active_) values (?, ?, ?, " +
+						"?, ?)");
 
-			sb.append("insert into Group_ (companyId, creatorUserId, ");
-			sb.append("classNameId, classPK, parentGroupId, liveGroupId, ");
-			sb.append("name, description, type_, typeSettings, friendlyURL, ");
-			sb.append("site, active_,groupId) values (?, ?, ?, ?, 0, 0, ?, ");
-			sb.append("NULL, 0, NULL, ?, 0, 1, ?)");
-
-			String sql = sb.toString();
-
-			ps = con.prepareStatement(sql);
-
-			ps.setLong(1, companyId);
-			ps.setLong(2, creatorUserId);
-			ps.setLong(3, layoutSetPrototypeClassNameId);
-			ps.setLong(4, layoutSetPrototypeId);
-
-			long layoutSetPrototypeGroupId = increment();
-
-			String autoGroupName =
-				layoutSetPrototypeGroupId + StringPool.MINUS + groupName;
-
-			ps.setString(5, autoGroupName);
-			ps.setString(6, String.valueOf(
-				StringPool.SLASH + "template-"+layoutSetPrototypeId));
-			ps.setLong(7, layoutSetPrototypeGroupId);
+			ps.setLong(1, layoutSetPrototypeId);
+			ps.setLong(2, companyId);
+			ps.setString(3, getNameXML(name));
+			ps.setString(4, name);
+			ps.setBoolean(5, true);
 
 			ps.execute();
-
-			return layoutSetPrototypeGroupId;
 		}
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
 		}
-
 	}
 
 	protected void addPermission(
-			long companyId, String actionId, long resourceId)
-		throws SQLException, SystemException {
+			long permissionId, long companyId, String actionId, long resourceId)
+		throws Exception {
 
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -193,51 +181,65 @@ public class UpgradeUserGroup extends UpgradeProcess {
 		try {
 			con = DataAccess.getConnection();
 
-			StringBundler sb = new StringBundler(2);
+			ps = con.prepareStatement(
+				"insert into Permission_ (permissionId, companyId, actionId, " +
+					"resourceId) values (?, ?, ?, ?)");
 
-			sb.append("insert into Permission_ (companyId, actionId, ");
-			sb.append("resourceId, permissionId) values (?, ?, ?, ?)");
-
-			String sql = sb.toString();
-
-			ps = con.prepareStatement(sql);
-
-			ps.setLong(1, companyId);
-			ps.setString(2, actionId);
-			ps.setLong(3, resourceId);
-			ps.setLong(4, increment());
+			ps.setLong(1, permissionId);
+			ps.setLong(2, companyId);
+			ps.setString(3, actionId);
+			ps.setLong(4, resourceId);
 
 			ps.executeUpdate();
-
 		}
 		finally {
 			DataAccess.cleanUp(con, ps);
 		}
 	}
 
-	protected long addResource(long primKey)
-		throws SQLException, SystemException {
+	protected void addPermissions(
+			long companyId, long userId, long layoutSetPrototypeId)
+		throws Exception {
+
+		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
+			addResourcePermission(
+				increment(), companyId, LayoutSetPrototype.class.getName(),
+				layoutSetPrototypeId, userId);
+		}
+		else if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 5) {
+			addResource(increment(), increment(), companyId);
+
+			long resourceId = increment();
+
+			addResource(resourceId, increment(), layoutSetPrototypeId);
+
+			String[] actionIds = {
+				ActionKeys.DELETE, ActionKeys.PERMISSIONS, ActionKeys.UPDATE,
+				ActionKeys.VIEW
+			};
+
+			for (String actionId : actionIds) {
+				addPermission(increment(), companyId, actionId, resourceId);
+			}
+		}
+	}
+
+	protected long addResource(long resourceId, long codeId, long primKey)
+		throws Exception {
 
 		Connection con = null;
 		PreparedStatement ps = null;
 
-		long resourceId = increment();
-
 		try {
 			con = DataAccess.getConnection();
 
-			StringBundler sb = new StringBundler(2);
+			ps = con.prepareStatement(
+				"insert into Resource_ (resourceId, codeId, primKey) values " +
+					"(?, ?, ?)");
 
-			sb.append("insert into Resource_ (codeId, primKey, resourceId)");
-			sb.append(" values (?, ?, ?)");
-
-			String sql = sb.toString();
-
-			ps = con.prepareStatement(sql);
-
-			ps.setLong(1, increment());
-			ps.setString(2, String.valueOf(primKey));
-			ps.setLong(3, resourceId);
+			ps.setLong(1, resourceId);
+			ps.setLong(2, codeId);
+			ps.setString(3, String.valueOf(primKey));
 
 			ps.executeUpdate();
 		}
@@ -249,8 +251,9 @@ public class UpgradeUserGroup extends UpgradeProcess {
 	}
 
 	protected void addResourcePermission(
-			long companyId, long userId, long layoutSetPrototypeId)
-		throws SQLException, SystemException {
+			long resourcePermissionId, long companyId, String name,
+			long primKey, long ownerId)
+		throws Exception {
 
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -259,25 +262,19 @@ public class UpgradeUserGroup extends UpgradeProcess {
 		try {
 			con = DataAccess.getConnection();
 
-			StringBundler sb = new StringBundler(3);
+			ps = con.prepareStatement(
+				"insert into ResourcePermission (resourcePermissionId, " +
+					"companyId, name, scope, primKey, roleId, ownerId, " +
+						"actionIds) values (?, ?, ?, ?, ?, ?, ?, ?)");
 
-			sb.append("insert into ResourcePermission (companyId, name,");
-			sb.append("scope, primKey, roleId, ownerId, actionIds, ");
-			sb.append("resourcePermissionId) values (?,?,?,?,?,?,?,?)");
-
-			String sql = sb.toString();
-
-			ps = con.prepareStatement(sql);
-
-			ps.setLong(1, companyId);
-			ps.setString(2, LAYOUTSETPROTOTYPE_CLASSNAME);
-			ps.setLong(3, ResourceConstants.SCOPE_INDIVIDUAL);
-			ps.setString(4, String.valueOf(layoutSetPrototypeId));
-			ps.setLong(5, getOwnerRole(companyId, RoleConstants.OWNER));
-			ps.setLong(6, userId);
-			ps.setLong(
-				7, getResourceActionIds(LAYOUTSETPROTOTYPE_CLASSNAME));
-			ps.setLong(8, increment());
+			ps.setLong(1, resourcePermissionId);
+			ps.setLong(2, companyId);
+			ps.setString(3, name);
+			ps.setLong(4, ResourceConstants.SCOPE_INDIVIDUAL);
+			ps.setString(5, String.valueOf(primKey));
+			ps.setLong(6, getRoleId(companyId, RoleConstants.OWNER));
+			ps.setLong(7, ownerId);
+			ps.setLong(8, getActionIds(name));
 
 			ps.executeUpdate();
 
@@ -287,122 +284,148 @@ public class UpgradeUserGroup extends UpgradeProcess {
 		}
 	}
 
-	protected void addPermissionsForLayoutSetPrototype(
-			long companyId, long userId, long layoutSetPrototypeId)
-		throws SQLException, SystemException {
-
-		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
-			addResourcePermission(companyId, userId, layoutSetPrototypeId);
-
-		}
-		else if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 5) {
-			addResource(companyId);
-
-			long layoutSetPrototypeResourceId =
-				addResource(layoutSetPrototypeId);
-
-			addPermission(
-				companyId, ActionKeys.DELETE, layoutSetPrototypeResourceId);
-			addPermission(
-				companyId, ActionKeys.PERMISSIONS,
-				layoutSetPrototypeResourceId);
-			addPermission(
-				companyId, ActionKeys.UPDATE, layoutSetPrototypeResourceId);
-			addPermission(
-				companyId, ActionKeys.VIEW, layoutSetPrototypeResourceId);
-		}
-
-	}
-
-	protected String composeI18N(String str) {
-		StringBundler sb = new StringBundler(8);
-
-		sb.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-		sb.append("<root default-locale=\"");
-		sb.append(LocaleUtil.getDefault());
-		sb.append("\"><Name language-id=\"");
-		sb.append(LocaleUtil.getDefault());
-		sb.append("\">");
-		sb.append(str);
-		sb.append("</Name></root>");
-
-		return sb.toString();
-	}
-
-	protected UserGroupTemplateInfo createUserGroupsTemplatesInfo(ResultSet rs)
-		throws SQLException {
+	protected UserGroupTemplateInfo buildUserGroupsTemplatesInfo(ResultSet rs)
+		throws Exception {
 
 		UserGroupTemplateInfo userGroupTemplateInfo =
 			new UserGroupTemplateInfo();
 
+		userGroupTemplateInfo.setColorSchemeId(rs.getString("colorSchemeId"));
 		userGroupTemplateInfo.setCompanyId(rs.getLong("companyId"));
-		userGroupTemplateInfo.setUserGroupId(rs.getLong("userGroupId"));
+		userGroupTemplateInfo.setCss(rs.getString("css"));
 		userGroupTemplateInfo.setGroupId(rs.getLong("groupId"));
 		userGroupTemplateInfo.setLayoutSetId(rs.getLong("layoutSetId"));
-		userGroupTemplateInfo.setPrivateLayout(rs.getBoolean("privateLayout"));
-		userGroupTemplateInfo.setLogo(rs.getShort("logo"));
-		userGroupTemplateInfo.setLogoId(rs.getLong("logoId"));
-		userGroupTemplateInfo.setThemeId(rs.getString("themeId"));
-		userGroupTemplateInfo.setColorSchemeId(rs.getString("colorSchemeId"));
-		userGroupTemplateInfo.setWapThemeId(rs.getString("wapThemeId"));
-		userGroupTemplateInfo.setWapColorSchemeId(
-			rs.getString("wapColorSchemeId"));
-		userGroupTemplateInfo.setCss(rs.getString("css"));
-		userGroupTemplateInfo.setPageCount(rs.getLong("pageCount"));
-		userGroupTemplateInfo.setSettings(rs.getString("settings"));
 		userGroupTemplateInfo.setLayoutSetPrototypeId(
 			rs.getLong("layoutSetPrototypeId"));
+		userGroupTemplateInfo.setLogo(rs.getShort("logo"));
+		userGroupTemplateInfo.setLogoId(rs.getLong("logoId"));
+		userGroupTemplateInfo.setPageCount(rs.getLong("pageCount"));
+		userGroupTemplateInfo.setPrivateLayout(rs.getBoolean("privateLayout"));
+		userGroupTemplateInfo.setSettings(rs.getString("settings"));
+		userGroupTemplateInfo.setThemeId(rs.getString("themeId"));
+		userGroupTemplateInfo.setUserGroupId(rs.getLong("userGroupId"));
+		userGroupTemplateInfo.setWapColorSchemeId(
+			rs.getString("wapColorSchemeId"));
+		userGroupTemplateInfo.setWapThemeId(rs.getString("wapThemeId"));
 
 		return userGroupTemplateInfo;
 	}
 
 	@Override
 	protected void doUpgrade() throws Exception {
-		updateUserGroupTemplates();
-
-	}
-
-	protected long findGroupByC_C_C(
-			long companyId, long classNameId, long classPK)
-		throws SQLException {
-
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 
-		long groupId = 0;
-
 		try {
 			con = DataAccess.getConnection();
 
-			StringBundler sb = new StringBundler(2);
+			StringBundler sb = new StringBundler(17);
 
-			sb.append("select groupId as groupId from Group_ where ");
-			sb.append("companyId = ? AND classNameId = ?  AND classPK = ?");
+			sb.append("select UserGroup.userGroupId as userGroupId, ");
+			sb.append("UserGroup.companyId as companyId, UserGroup.name as ");
+			sb.append("userGroupName, Group_.groupId as groupId, ");
+			sb.append("Group_.creatorUserId as creatorUserId, ");
+			sb.append("LayoutSet.layoutSetId as layoutSetId, ");
+			sb.append("LayoutSet.privateLayout as privateLayout, ");
+			sb.append("LayoutSet.logo as logo, LayoutSet.logoId as logoId, ");
+			sb.append("LayoutSet.themeId as themeId, LayoutSet.colorSchemeId ");
+			sb.append("as colorSchemeId, LayoutSet.wapThemeId as wapThemeId, ");
+			sb.append("LayoutSet.wapColorSchemeId as wapColorSchemeId, ");
+			sb.append("LayoutSet.css as css, LayoutSet.pageCount as ");
+			sb.append("pageCount, LayoutSet.settings_ as settings, ");
+			sb.append("LayoutSet.layoutSetPrototypeId as ");
+			sb.append("layoutSetPrototypeId from UserGroup inner join ");
+			sb.append("Group_ on Group_.classPK = UserGroup.userGroupId ");
+			sb.append("inner join LayoutSet on (LayoutSet.groupId = ");
+			sb.append("Group_.groupId) and (LayoutSet.pageCount > 0)");
 
 			String sql = sb.toString();
 
 			ps = con.prepareStatement(sql);
 
-			ps.setLong(1, companyId);
-			ps.setLong(2, classNameId);
-			ps.setLong(3, classPK);
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				long userGroupId = rs.getLong("userGroupId");
+				long companyId = rs.getLong("companyId");
+				String userGroupName = rs.getString("userGroupName");
+				long groupId = rs.getLong("groupId");
+				long creatorUserId = rs.getLong("creatorUserId");
+				boolean privateLayout = rs.getBoolean("privateLayout");
+
+				long layoutSetPrototypeId = increment();
+
+				addLayoutSetPrototype(
+					layoutSetPrototypeId, companyId, userGroupName);
+
+				long layoutSetPrototypeGroupId = addGroup(
+					companyId, creatorUserId, userGroupName,
+					layoutSetPrototypeId);
+
+				addPermissions(companyId, creatorUserId, layoutSetPrototypeId);
+
+				UserGroupTemplateInfo privateUserGroupTemplateInfo =
+					buildUserGroupsTemplatesInfo(rs);
+
+				boolean oldPrivateLayout =
+					privateUserGroupTemplateInfo.isPrivateLayout();
+
+				privateUserGroupTemplateInfo.setPrivateLayout(true);
+
+				addLayoutSet(
+					increment(), companyId, layoutSetPrototypeGroupId,
+					layoutSetPrototypeId, privateUserGroupTemplateInfo);
+
+				updateLayout(
+					groupId, layoutSetPrototypeGroupId, oldPrivateLayout);
+
+				UserGroupTemplateInfo publicUserGroupTemplateInfo =
+					new UserGroupTemplateInfo();
+
+				publicUserGroupTemplateInfo.setPrivateLayout(false);
+
+				addLayoutSet(
+					increment(), companyId, layoutSetPrototypeGroupId,
+					layoutSetPrototypeId, publicUserGroupTemplateInfo);
+
+				updateUserGroup(
+					userGroupId, privateLayout, layoutSetPrototypeId);
+			}
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
+	}
+
+	protected long getActionIds(String name) throws Exception {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = DataAccess.getConnection();
+
+			ps = con.prepareStatement(
+				"select sum(bitwiseValue) as actionIds from ResourceAction " +
+					"where name = ?");
+
+			ps.setString(1, name);
 
 			rs = ps.executeQuery();
 
 			if (rs.next()) {
-				groupId = rs.getLong("groupId");
+				return rs.getLong("actionIds");
 			}
 		}
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
 		}
 
-		return groupId;
+		return 0;
 	}
 
-	protected long getClassNameId(String className) {
-
+	protected long getClassNameId(String className) throws Exception {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -421,8 +444,6 @@ public class UpgradeUserGroup extends UpgradeProcess {
 				return rs.getLong("classNameId");
 			}
 		}
-		catch (SQLException e) {
-		}
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
 		}
@@ -430,8 +451,56 @@ public class UpgradeUserGroup extends UpgradeProcess {
 		return 0;
 	}
 
-	protected long getOwnerRole(long companyId, String roleName)
-		throws SQLException, SystemException {
+	protected long getGroupId(long companyId, long classNameId, long classPK)
+		throws Exception {
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		long groupId = 0;
+
+		try {
+			con = DataAccess.getConnection();
+
+			ps = con.prepareStatement(
+				"select groupId from Group_ where (companyId = ?) and " +
+					"(classNameId = ?) and (classPK = ?)");
+
+			ps.setLong(1, companyId);
+			ps.setLong(2, classNameId);
+			ps.setLong(3, classPK);
+
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
+				groupId = rs.getLong("groupId");
+			}
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
+
+		return groupId;
+	}
+
+	protected String getNameXML(String name) {
+		StringBundler sb = new StringBundler(8);
+
+		sb.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+		sb.append("<root default-locale=\"");
+		sb.append(LocaleUtil.getDefault());
+		sb.append("\"><Name language-id=\"");
+		sb.append(LocaleUtil.getDefault());
+		sb.append("\">");
+		sb.append(name);
+		sb.append("</Name></root>");
+
+		return sb.toString();
+	}
+
+	protected long getRoleId(long companyId, String name)
+		throws Exception {
 
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -440,17 +509,12 @@ public class UpgradeUserGroup extends UpgradeProcess {
 		try {
 			con = DataAccess.getConnection();
 
-			StringBundler sb = new StringBundler(2);
-
-			sb.append("select roleId from Role_ where companyId = ? AND ");
-			sb.append("name = ?");
-
-			String sql = sb.toString();
-
-			ps = con.prepareStatement(sql);
+			ps = con.prepareStatement(
+				"select roleId from Role_ where (companyId = ?) and (name = " +
+					"?)");
 
 			ps.setLong(1, companyId);
-			ps.setString(2, roleName);
+			ps.setString(2, name);
 
 			rs = ps.executeQuery();
 
@@ -465,43 +529,9 @@ public class UpgradeUserGroup extends UpgradeProcess {
 		return 0;
 	}
 
-	protected long getResourceActionIds(String name)
-		throws SQLException, SystemException {
-
-		Connection con = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-
-		try {
-			con = DataAccess.getConnection();
-
-			StringBundler sb = new StringBundler(2);
-
-			sb.append("select sum(bitwiseValue) as actionIds from ");
-			sb.append("ResourceAction where name = ?");
-
-			String sql = sb.toString();
-
-			ps = con.prepareStatement(sql);
-
-			ps.setString(1, name);
-
-			rs = ps.executeQuery();
-
-			if (rs.next()) {
-				return rs.getLong("actionIds");
-			}
-		}
-		finally {
-			DataAccess.cleanUp(con, ps, rs);
-		}
-
-		return 0;
-	}
-
-	protected void updateLayouts(
+	protected void updateLayout(
 			long oldGroupId, long newGroupId, boolean privateLayout)
-		throws SQLException {
+		throws Exception {
 
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -510,31 +540,25 @@ public class UpgradeUserGroup extends UpgradeProcess {
 		try {
 			con = DataAccess.getConnection();
 
-			StringBundler sb = new StringBundler(2);
-
-			sb.append("update Layout set groupId = ? , privateLayout = TRUE");
-			sb.append(" where groupId = ? AND privateLayout = ?");
-
-			String sql = sb.toString();
-
-			ps = con.prepareStatement(sql);
+			ps = con.prepareStatement(
+				"update Layout set groupId = ?, privateLayout = ? where " +
+					"(groupId = ?) and (privateLayout = ?)");
 
 			ps.setLong(1, newGroupId);
-			ps.setLong(2, oldGroupId);
-			ps.setBoolean(3, privateLayout);
+			ps.setBoolean(2, true);
+			ps.setLong(3, oldGroupId);
+			ps.setBoolean(4, privateLayout);
 
 			ps.executeUpdate();
-
 		}
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
 		}
 	}
 
-	protected void updateLayoutSetPrototypeId(
-			long companyId, long userGroupId, long layoutSetPrototypeId,
-			String layoutSetPrototypeIdColumnName)
-		throws SQLException {
+	protected void updateUserGroup(
+			long userGroupId, boolean privateLayout, long layoutSetPrototypeId)
+		throws Exception {
 
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -543,126 +567,27 @@ public class UpgradeUserGroup extends UpgradeProcess {
 		try {
 			con = DataAccess.getConnection();
 
-			StringBundler sb = new StringBundler(3);
+			String layoutSetPrototypeIdColumnName = null;
 
-			sb.append("update UserGroup set ");
-			sb.append(layoutSetPrototypeIdColumnName);
-			sb.append("= ? where companyId = ? AND userGroupId = ?");
+			if (privateLayout) {
+				layoutSetPrototypeIdColumnName = "privateLayoutSetPrototypeId";
+			}
+			else {
+				layoutSetPrototypeIdColumnName = "publicLayoutSetPrototypeId";
+			}
 
-			String sql = sb.toString();
-
-			ps = con.prepareStatement(sql);
+			ps = con.prepareStatement(
+				"update UserGroup set " + layoutSetPrototypeIdColumnName +
+					" = ? where userGroupId = ?");
 
 			ps.setLong(1, layoutSetPrototypeId);
-			ps.setLong(2, companyId);
-			ps.setLong(3, userGroupId);
+			ps.setLong(2, userGroupId);
 
 			ps.executeUpdate();
-
 		}
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
 		}
 	}
-
-	protected void updateUserGroupTemplates() throws Exception {
-		Connection con = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-
-		try {
-			con = DataAccess.getConnection();
-
-			StringBundler sb = new StringBundler(14);
-
-			sb.append("select ug.companyId as companyId,ug.userGroupId ");
-			sb.append("as userGroupId,ug.name as userGroupName,");
-			sb.append("g.groupId as groupId,g.creatorUserId as creatorUserId,");
-			sb.append("ls.layoutSetId as layoutSetId,");
-			sb.append("ls.privateLayout as privateLayout, ls.logo as logo,");
-			sb.append("ls.logoId as logoId,ls.themeId as themeId,");
-			sb.append("ls.colorSchemeId as colorSchemeId,");
-			sb.append("ls.wapThemeId as wapThemeId,ls.wapColorSchemeId ");
-			sb.append("as wapColorSchemeId ,ls.css as css,");
-			sb.append("ls.pageCount as pageCount,ls.settings_ as settings,");
-			sb.append("ls.layoutSetPrototypeId as layoutSetPrototypeId ");
-			sb.append("from UserGroup ug  inner join Group_ g on ");
-			sb.append("ug.userGroupId=g.classPK inner join LayoutSet ls on ");
-			sb.append("(g.groupId=ls.groupId AND ls.pageCount > 0)");
-
-			ps = con.prepareStatement(sb.toString());
-
-			rs = ps.executeQuery();
-
-			while (rs.next()) {
-				long companyId = rs.getLong("companyId");
-				String userGroupName = rs.getString("userGroupName");
-				long groupId = rs.getLong("groupId");
-				long creatorUserId = rs.getLong("creatorUserId");
-				long userGroupId = rs.getLong("userGroupId");
-				boolean privateLayout = rs.getBoolean("privateLayout");
-
-				// Add a new LayoutSetPrototype and Group for each user group
-
-				long layoutSetPrototypeId = addLayoutSetPrototype(
-					companyId, userGroupName);
-
-				long layoutSetPrototypeGroupId = addLayoutSetPrototypeGroup(
-					companyId, layoutSetPrototypeId, creatorUserId,
-					userGroupName);
-
-				addPermissionsForLayoutSetPrototype(
-					companyId, creatorUserId, layoutSetPrototypeId);
-
-				// Create private LayoutSet and move the pages to it
-
-				UserGroupTemplateInfo userGroupTemplateInfo =
-					createUserGroupsTemplatesInfo(rs);
-
-				boolean originalPrivateLayout =
-					userGroupTemplateInfo.isPrivateLayout();
-
-				userGroupTemplateInfo.setPrivateLayout(true);
-
-				addLayoutSet(
-					companyId, layoutSetPrototypeGroupId, layoutSetPrototypeId,
-					userGroupTemplateInfo);
-
-				updateLayouts(
-					groupId, layoutSetPrototypeGroupId, originalPrivateLayout);
-
-				// Create public LayoutSet
-
-				UserGroupTemplateInfo publicLayoutSet =
-					new UserGroupTemplateInfo();
-
-				publicLayoutSet.setPrivateLayout(false);
-
-				addLayoutSet(
-					companyId, layoutSetPrototypeGroupId, layoutSetPrototypeId,
-					publicLayoutSet);
-
-				// Store the layoutSetPrototype id in the UserGroup
-
-				String layoutSetPrototypeIdColumnName =
-					privateLayout ? "privateLayoutSetPrototypeId" :
-						"publicLayoutSetPrototypeId";
-
-				updateLayoutSetPrototypeId(
-					companyId, userGroupId, layoutSetPrototypeId,
-					layoutSetPrototypeIdColumnName);
-
-			}
-		}
-		finally {
-			DataAccess.cleanUp(con, ps, rs);
-		}
-	}
-
-	protected static final String LAYOUTSETPROTOTYPE_CLASSNAME =
-		LayoutSetPrototype.class.getName();
-
-	protected final long layoutSetPrototypeClassNameId =
-		getClassNameId(LAYOUTSETPROTOTYPE_CLASSNAME);
 
 }
