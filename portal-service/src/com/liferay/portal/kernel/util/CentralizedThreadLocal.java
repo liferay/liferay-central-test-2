@@ -47,35 +47,21 @@ public class CentralizedThreadLocal<T> extends ThreadLocal<T> {
 		Map<CentralizedThreadLocal<?>, Object> longLivedThreadLocals,
 		Map<CentralizedThreadLocal<?>, Object> shortLivedThreadLocals) {
 
-		ThreadLocalMap threadLocals = _longLivedThreadLocals.get();
+		ThreadLocalMap threadLocalMap = _longLivedThreadLocals.get();
 
 		for (Map.Entry<CentralizedThreadLocal<?>, Object> entry :
-			longLivedThreadLocals.entrySet()) {
+				longLivedThreadLocals.entrySet()) {
 
-			threadLocals.putEntry(entry.getKey(), entry.getValue());
+			threadLocalMap.putEntry(entry.getKey(), entry.getValue());
 		}
 
-		threadLocals = _shortLivedThreadLocals.get();
+		threadLocalMap = _shortLivedThreadLocals.get();
 
 		for (Map.Entry<CentralizedThreadLocal<?>, Object> entry :
-			shortLivedThreadLocals.entrySet()) {
+				shortLivedThreadLocals.entrySet()) {
 
-			threadLocals.putEntry(entry.getKey(), entry.getValue());
+			threadLocalMap.putEntry(entry.getKey(), entry.getValue());
 		}
-	}
-
-	private static Map<CentralizedThreadLocal<?>, Object> _toMap(
-		ThreadLocalMap threadLocals) {
-
-		Map<CentralizedThreadLocal<?>, Object> map =
-			new HashMap<CentralizedThreadLocal<?>, Object>(
-				threadLocals._table.length);
-
-		for (Entry entry : threadLocals._table) {
-			map.put(entry._key, entry._value);
-		}
-
-		return map;
 	}
 
 	public CentralizedThreadLocal(boolean shortLived) {
@@ -91,14 +77,14 @@ public class CentralizedThreadLocal<T> extends ThreadLocal<T> {
 
 	@Override
 	public T get() {
-		ThreadLocalMap threadLocals = _getThreadLocals();
+		ThreadLocalMap threadLocalMap = _getThreadLocalMap();
 
-		Entry entry = threadLocals.getEntry(this);
+		Entry entry = threadLocalMap.getEntry(this);
 
 		if (entry == null) {
 			T value = initialValue();
 
-			threadLocals.putEntry(this, value);
+			threadLocalMap.putEntry(this, value);
 
 			return value;
 		}
@@ -114,19 +100,33 @@ public class CentralizedThreadLocal<T> extends ThreadLocal<T> {
 
 	@Override
 	public void remove() {
-		ThreadLocalMap threadLocals = _getThreadLocals();
+		ThreadLocalMap threadLocalMap = _getThreadLocalMap();
 
-		threadLocals.removeEntry(this);
+		threadLocalMap.removeEntry(this);
 	}
 
 	@Override
 	public void set(T value) {
-		ThreadLocalMap threadLocals = _getThreadLocals();
+		ThreadLocalMap threadLocalMap = _getThreadLocalMap();
 
-		threadLocals.putEntry(this, value);
+		threadLocalMap.putEntry(this, value);
 	}
 
-	private ThreadLocalMap _getThreadLocals() {
+	private static Map<CentralizedThreadLocal<?>, Object> _toMap(
+		ThreadLocalMap threadLocalMap) {
+
+		Map<CentralizedThreadLocal<?>, Object> map =
+			new HashMap<CentralizedThreadLocal<?>, Object>(
+				threadLocalMap._table.length);
+
+		for (Entry entry : threadLocalMap._table) {
+			map.put(entry._key, entry._value);
+		}
+
+		return map;
+	}
+
+	private ThreadLocalMap _getThreadLocalMap() {
 		if (_shortLived) {
 			return _shortLivedThreadLocals.get();
 		}
@@ -139,31 +139,25 @@ public class CentralizedThreadLocal<T> extends ThreadLocal<T> {
 
 	private static final AtomicInteger _longLivedNextHasCode =
 		new AtomicInteger();
-	private static final ThreadLocal<ThreadLocalMap>
-		_longLivedThreadLocals = new MapThreadLocal();
+	private static final ThreadLocal<ThreadLocalMap> _longLivedThreadLocals =
+		new ThreadLocalMapThreadLocal();
 	private static final AtomicInteger _shortLivedNextHasCode =
 		new AtomicInteger();
-	private static final ThreadLocal<ThreadLocalMap>
-		_shortLivedThreadLocals = new MapThreadLocal();
+	private static final ThreadLocal<ThreadLocalMap> _shortLivedThreadLocals =
+		new ThreadLocalMapThreadLocal();
 
-	private static class MapThreadLocal extends ThreadLocal<ThreadLocalMap> {
-
-		@Override
-		protected ThreadLocalMap initialValue() {
-			return new ThreadLocalMap();
-		}
-
-	}
+	private final int _hashCode;
+	private final boolean _shortLived;
 
 	private static class Entry {
 
-		public Entry(CentralizedThreadLocal key, Object value, Entry next) {
+		public Entry(CentralizedThreadLocal<?> key, Object value, Entry next) {
 			_key = key;
 			_value = value;
 			_next = next;
 		}
 
-		private CentralizedThreadLocal _key;
+		private CentralizedThreadLocal<?> _key;
 		private Entry _next;
 		private Object _value;
 
@@ -171,9 +165,8 @@ public class CentralizedThreadLocal<T> extends ThreadLocal<T> {
 
 	private static class ThreadLocalMap {
 
-		private void expand(int newCapacity) {
-			if (_table.length == MAXIMUM_CAPACITY) {
-				// Reach max capacity, stop further expanding
+		public void expand(int newCapacity) {
+			if (_table.length == _MAXIMUM_CAPACITY) {
 				_threshold = Integer.MAX_VALUE;
 
 				return;
@@ -181,28 +174,27 @@ public class CentralizedThreadLocal<T> extends ThreadLocal<T> {
 
 			Entry[] newTable = new Entry[newCapacity];
 
-			// Move entries to new table
 			for (int i = 0; i < _table.length; i++) {
 				Entry entry = _table[i];
 
-				if (entry != null) {
-					// Null out old reference to help GC
-					_table[i] = null;
-
-					do {
-						Entry nextEntry = entry._next;
-
-						// Reindex
-						int index = entry._key._hashCode & (newCapacity - 1);
-
-						// Linked in new table
-						entry._next = newTable[index];
-						newTable[index] = entry;
-
-						entry = nextEntry;
-					}
-					while (entry != null);
+				if (entry == null) {
+					continue;
 				}
+
+				_table[i] = null;
+
+				do {
+					Entry nextEntry = entry._next;
+
+					int index = entry._key._hashCode & (newCapacity - 1);
+
+					entry._next = newTable[index];
+
+					newTable[index] = entry;
+
+					entry = nextEntry;
+				}
+				while (entry != null);
 			}
 
 			_table = newTable;
@@ -210,59 +202,53 @@ public class CentralizedThreadLocal<T> extends ThreadLocal<T> {
 			_threshold = newCapacity * 2 / 3;
 		}
 
-		private Entry getEntry(CentralizedThreadLocal key) {
+		public Entry getEntry(CentralizedThreadLocal<?> key) {
 			int index = key._hashCode & (_table.length - 1);
 
 			Entry entry = _table[index];
 
 			if (entry == null) {
-				// No such entry
 				return null;
 			}
 			else if (entry._key == key) {
-				// Direct hit
 				return entry;
 			}
 			else {
-				// Open list search
 				while ((entry = entry._next) != null) {
 					if (entry._key == key) {
 						return entry;
 					}
 				}
 
-				// No such entry
 				return null;
 			}
 		}
 
-		private void putEntry(CentralizedThreadLocal key, Object value) {
+		public void putEntry(CentralizedThreadLocal<?> key, Object value) {
 			int index = key._hashCode & (_table.length - 1);
 
 			for (Entry entry = _table[index]; entry != null;
 				entry = entry._next) {
 
 				if (entry._key == key) {
-					// Update exist value
 					entry._value = value;
 
 					return;
 				}
 			}
 
-			// Insert new Entry
 			_table[index] = new Entry(key, value, _table[index]);
 
-			// Expand table
 			if (_size++ >= _threshold) {
 				expand(2 * _table.length);
 			}
 		}
 
-		private void removeEntry(CentralizedThreadLocal key) {
+		public void removeEntry(CentralizedThreadLocal<?> key) {
 			int index = key._hashCode & (_table.length - 1);
 
 			Entry previousEntry = null;
+
 			Entry entry = _table[index];
 
 			while (entry != null) {
@@ -272,11 +258,9 @@ public class CentralizedThreadLocal<T> extends ThreadLocal<T> {
 					_size--;
 
 					if (previousEntry == null) {
-						// First entry
 						_table[index] = nextEntry;
 					}
 					else {
-						// Relink
 						previousEntry._next = nextEntry;
 					}
 
@@ -286,20 +270,26 @@ public class CentralizedThreadLocal<T> extends ThreadLocal<T> {
 				previousEntry = entry;
 				entry = nextEntry;
 			}
-		}
+		};
 
-		private static final int INITIAL_CAPACITY = 16;
+		private static final int _INITIAL_CAPACITY = 16;
 
-		private static final int MAXIMUM_CAPACITY = 1 << 30;
-
-		private Entry[] _table = new Entry[INITIAL_CAPACITY];
+		private static final int _MAXIMUM_CAPACITY = 1 << 30;
 
 		private int _size;
+		private Entry[] _table = new Entry[_INITIAL_CAPACITY];
+		private int _threshold = _INITIAL_CAPACITY * 2 / 3;
 
-		private int _threshold = INITIAL_CAPACITY * 2 / 3;;
 	}
 
-	private final int _hashCode;
-	private final boolean _shortLived;
+	private static class ThreadLocalMapThreadLocal
+		extends ThreadLocal<ThreadLocalMap> {
+
+		@Override
+		protected ThreadLocalMap initialValue() {
+			return new ThreadLocalMap();
+		}
+
+	}
 
 }
