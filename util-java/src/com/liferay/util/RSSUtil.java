@@ -32,30 +32,30 @@ import org.jdom.IllegalDataException;
  */
 public class RSSUtil {
 
-	public static final String RSS = "rss";
-
-	public static final double[] RSS_VERSIONS = new double[] {
-		0.9, 0.91, 0.93, 0.94, 1.0, 2.0
-	};
-
 	public static final String ATOM = "atom";
 
 	public static final double[] ATOM_VERSIONS = new double[] {0.3, 1.0};
-
-	public static final String DEFAULT_TYPE = ATOM;
-
-	public static final double VERSION_DEFAULT = 1.0;
-
-	public static final String DEFAULT_ENTRY_TYPE = "html";
-
-	public static final String DEFAULT_FEED_TYPE = getFeedType(
-		DEFAULT_TYPE, VERSION_DEFAULT);
 
 	public static final String DISPLAY_STYLE_ABSTRACT = "abstract";
 
 	public static final String DISPLAY_STYLE_FULL_CONTENT = "full-content";
 
 	public static final String DISPLAY_STYLE_TITLE = "title";
+
+	public static final String ENTRY_TYPE_DEFAULT = "html";
+
+	public static final String FEED_TYPE_DEFAULT = getFeedType(
+		RSSUtil.TYPE_DEFAULT, RSSUtil.VERSION_DEFAULT);
+
+	public static final String RSS = "rss";
+
+	public static final double[] RSS_VERSIONS = new double[] {
+		0.9, 0.91, 0.93, 0.94, 1.0, 2.0
+	};
+
+	public static final String TYPE_DEFAULT = ATOM;
+
+	public static final double VERSION_DEFAULT = 1.0;
 
 	public static String export(SyndFeed feed) throws FeedException {
 		RSSThreadLocal.setExportRSS(true);
@@ -83,7 +83,7 @@ public class RSSUtil {
 
 	public static String getFormatType(String format) {
 		if (format == null) {
-			return DEFAULT_TYPE;
+			return TYPE_DEFAULT;
 		}
 
 		int x = format.indexOf(ATOM);
@@ -98,7 +98,7 @@ public class RSSUtil {
 			return RSS;
 		}
 
-		return DEFAULT_TYPE;
+		return TYPE_DEFAULT;
 	}
 
 	public static double getFormatVersion(String format) {
@@ -121,21 +121,6 @@ public class RSSUtil {
 		return VERSION_DEFAULT;
 	}
 
-	private static void _regexpStrip(SyndFeed syndFeed) {
-		syndFeed.setTitle(_regexpStrip(syndFeed.getTitle()));
-		syndFeed.setDescription(_regexpStrip(syndFeed.getDescription()));
-
-		List<SyndEntry> syndEntries = syndFeed.getEntries();
-
-		for (SyndEntry syndEntry : syndEntries) {
-			syndEntry.setTitle(_regexpStrip(syndEntry.getTitle()));
-
-			SyndContent syndContent = syndEntry.getDescription();
-
-			syndContent.setValue(_regexpStrip(syndContent.getValue()));
-		}
-	}
-
 	private static String _regexpStrip(String text) {
 		text = Normalizer.normalizeToAscii(text);
 
@@ -150,6 +135,21 @@ public class RSSUtil {
 		}
 
 		return new String(array);
+	}
+
+	private static void _regexpStrip(SyndFeed syndFeed) {
+		syndFeed.setTitle(_regexpStrip(syndFeed.getTitle()));
+		syndFeed.setDescription(_regexpStrip(syndFeed.getDescription()));
+
+		List<SyndEntry> syndEntries = syndFeed.getEntries();
+
+		for (SyndEntry syndEntry : syndEntries) {
+			syndEntry.setTitle(_regexpStrip(syndEntry.getTitle()));
+
+			SyndContent syndContent = syndEntry.getDescription();
+
+			syndContent.setValue(_regexpStrip(syndContent.getValue()));
+		}
 	}
 
 	private static final String _REGEXP_STRIP = "[\\d\\w]";
