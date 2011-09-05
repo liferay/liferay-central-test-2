@@ -162,8 +162,7 @@ public class AudioProcessor extends DLPreviewableProcessor {
 				}
 
 				try {
-					_generateAudioXuggler(
-						fileVersion, file, previewTempFile);
+					_generateAudioXuggler(fileVersion, file, previewTempFile);
 				}
 				catch (Exception e) {
 					_log.error(e, e);
@@ -200,7 +199,7 @@ public class AudioProcessor extends DLPreviewableProcessor {
 			}
 		}
 		catch (Exception e) {
-			_log.error(e);
+			_log.error(e, e);
 		}
 
 		addFileToStore(

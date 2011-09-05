@@ -43,6 +43,10 @@ public class CaptureFrameListener extends MediaListenerAdapter {
 		_width = width;
 	}
 
+	public boolean isWritten() {
+		return _written;
+	}
+
 	@Override
 	public void onVideoPicture(IVideoPictureEvent iVideoPictureEvent) {
 		try {
@@ -72,10 +76,6 @@ public class CaptureFrameListener extends MediaListenerAdapter {
 		catch (Exception e) {
 			_log.error(e, e);
 		}
-	}
-
-	public boolean isWritten() {
-		return _written;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(CaptureFrameListener.class);

@@ -173,7 +173,7 @@ public class VideoProcessor extends DLPreviewableProcessor {
 				}
 			}
 			catch (Exception e) {
-				_log.error(e);
+				_log.error(e, e);
 			}
 
 			addFileToStore(
@@ -244,7 +244,7 @@ public class VideoProcessor extends DLPreviewableProcessor {
 						PropsValues.DL_FILE_ENTRY_PREVIEW_VIDEO_WIDTH);
 				}
 				catch (Exception e) {
-					_log.error(e);
+					_log.error(e, e);
 				}
 			}
 
@@ -256,7 +256,7 @@ public class VideoProcessor extends DLPreviewableProcessor {
 						PropsValues.DL_FILE_ENTRY_THUMBNAIL_WIDTH);
 				}
 				catch (Exception e) {
-					_log.error(e);
+					_log.error(e, e);
 				}
 			}
 		}
@@ -300,7 +300,7 @@ public class VideoProcessor extends DLPreviewableProcessor {
 			}
 		}
 		catch (Exception e) {
-			_log.error(e);
+			_log.error(e, e);
 		}
 
 		addFileToStore(
