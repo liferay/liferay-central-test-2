@@ -890,10 +890,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 		catch (PrincipalException pe) {
 		}
 
-		long[] organizationIds = null;
-
-		checkAddUserPermission(
-			creatorUserId, companyId, emailAddress, organizationIds);
+		checkAddUserPermission(creatorUserId, companyId, emailAddress, null);
 
 		return userLocalService.updateIncompleteUser(
 			creatorUserId, companyId, autoPassword, password1, password2,
