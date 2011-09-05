@@ -34,42 +34,50 @@ import java.io.InputStream;
  */
 public abstract class DLPreviewableProcessor implements DLProcessor {
 
-	public static void deleteFiles(
-		long companyId, long groupId, long fileEntryId, long fileVersionId) {
-		
-		try {
-			DLStoreUtil.deleteDirectory(
-				companyId, REPOSITORY_ID,
-				getPathSegment(groupId, fileEntryId, fileVersionId, true));
-		}
-		catch (Exception e) {
-		}
-	
-		try {
-			DLStoreUtil.deleteDirectory(
-				companyId, REPOSITORY_ID,
-				getPathSegment(groupId, fileEntryId, fileVersionId, false));
-		}
-		catch (Exception e) {
-		}
-	}
+	public static final String PREVIEW_PATH = "document_preview/";
+
+	public static final String PREVIEW_TMP_PATH =
+		SystemProperties.get(SystemProperties.TMP_DIR) +
+			"/liferay/" + PREVIEW_PATH;
+
+	public static final long REPOSITORY_ID = CompanyConstants.SYSTEM;
+
+	public static final String THUMBNAIL_PATH = "document_thumbnail/";
+
+	public static final String THUMBNAIL_TMP_PATH =
+		SystemProperties.get(SystemProperties.TMP_DIR) +
+			"/liferay/" + THUMBNAIL_PATH;
 
 	public static void deleteFiles(FileEntry fileEntry) {
-		long companyId = fileEntry.getCompanyId();
-		long groupId = fileEntry.getGroupId();
-		long fileEntryId = fileEntry.getFileEntryId();
-		long fileVersionId = -1;
-		
-		deleteFiles(companyId, groupId, fileEntryId, fileVersionId);
+		deleteFiles(
+			fileEntry.getCompanyId(), fileEntry.getGroupId(),
+			fileEntry.getFileEntryId(), -1);
 	}
 
 	public static void deleteFiles(FileVersion fileVersion) {
-		long companyId = fileVersion.getCompanyId();
-		long groupId = fileVersion.getGroupId();
-		long fileEntryId = fileVersion.getFileEntryId();
-		long fileVersionId = fileVersion.getFileVersionId();
-		
-		deleteFiles(companyId, groupId, fileEntryId, fileVersionId);
+		deleteFiles(
+			fileVersion.getCompanyId(), fileVersion.getGroupId(),
+			fileVersion.getFileEntryId(), fileVersion.getFileVersionId());
+	}
+
+	public static void deleteFiles(
+		long companyId, long groupId, long fileEntryId, long fileVersionId) {
+
+		try {
+			DLStoreUtil.deleteDirectory(
+				companyId, REPOSITORY_ID,
+				_getPathSegment(groupId, fileEntryId, fileVersionId, true));
+		}
+		catch (Exception e) {
+		}
+
+		try {
+			DLStoreUtil.deleteDirectory(
+				companyId, REPOSITORY_ID,
+				_getPathSegment(groupId, fileEntryId, fileVersionId, false));
+		}
+		catch (Exception e) {
+		}
 	}
 
 	protected void addFileToStore(
@@ -142,47 +150,6 @@ public abstract class DLPreviewableProcessor implements DLProcessor {
 			fileVersion.getCompanyId(), CompanyConstants.SYSTEM,
 			getThumbnailFilePath(fileVersion));
 	}
-	
-	protected static String getPathSegment(
-		FileVersion fileVersion, boolean preview) {
-		
-		long groupId = fileVersion.getGroupId();
-		long fileEntryId = fileVersion.getFileEntryId();
-		long fileVersionId = fileVersion.getFileVersionId();
-		
-		return getPathSegment(groupId, fileEntryId, fileVersionId, preview);
-	}
-
-	protected static String getPathSegment(
-		long groupId, long fileEntryId, long fileVersionId, boolean preview) {
-		
-		StringBundler sb = null;
-
-		if (fileVersionId > 0) {
-			sb = new StringBundler(6);
-		}
-		else {
-			sb = new StringBundler(4);
-		}
-		
-		if (preview) {
-			sb.append(PREVIEW_PATH);
-		}
-		else {
-			sb.append(THUMBNAIL_PATH);
-		}
-		
-		sb.append(groupId);
-		sb.append(StringPool.SLASH);
-		sb.append(fileEntryId);
-		
-		if (fileVersionId > 0) {
-			sb.append(StringPool.SLASH);
-			sb.append(fileVersionId);
-		}
-
-		return sb.toString();
-	}
 
 	protected int getPreviewFileCount(FileVersion fileVersion)
 		throws Exception {
@@ -190,7 +157,7 @@ public abstract class DLPreviewableProcessor implements DLProcessor {
 		try {
 			String[] fileNames = DLStoreUtil.getFileNames(
 				fileVersion.getCompanyId(), REPOSITORY_ID,
-				getPathSegment(fileVersion, true));
+				_getPathSegment(fileVersion, true));
 
 			return fileNames.length;
 		}
@@ -214,7 +181,7 @@ public abstract class DLPreviewableProcessor implements DLProcessor {
 			sb = new StringBundler(3);
 		}
 
-		sb.append(getPathSegment(fileVersion, true));
+		sb.append(_getPathSegment(fileVersion, true));
 
 		if (index > 0) {
 			sb.append(StringPool.SLASH);
@@ -293,13 +260,8 @@ public abstract class DLPreviewableProcessor implements DLProcessor {
 	protected abstract String getPreviewType();
 
 	protected String getThumbnailFilePath(FileVersion fileVersion) {
-		StringBundler sb = new StringBundler(3);
-
-		sb.append(getPathSegment(fileVersion, false));
-		sb.append(StringPool.PERIOD);
-		sb.append(getThumbnailType());
-
-		return sb.toString();
+		return _getPathSegment(fileVersion, false).concat(
+			StringPool.PERIOD).concat(getThumbnailType());
 	}
 
 	protected File getThumbnailTempFile(String id) {
@@ -323,21 +285,44 @@ public abstract class DLPreviewableProcessor implements DLProcessor {
 		return null;
 	}
 
-	protected static final String PREVIEW_PATH =
-		"document_preview/";
+	private static String _getPathSegment(
+		FileVersion fileVersion, boolean preview) {
 
-	protected static final String PREVIEW_TMP_PATH =
-		SystemProperties.get(SystemProperties.TMP_DIR) +
-			"/liferay/" + PREVIEW_PATH;
+		return _getPathSegment(
+			fileVersion.getGroupId(), fileVersion.getFileEntryId(),
+			fileVersion.getFileVersionId(), preview);
+	}
 
-	protected static final long REPOSITORY_ID = CompanyConstants.SYSTEM;
+	private static String _getPathSegment(
+		long groupId, long fileEntryId, long fileVersionId, boolean preview) {
 
-	protected static final String THUMBNAIL_PATH =
-		"document_thumbnail/";
+		StringBundler sb = null;
 
-	protected static final String THUMBNAIL_TMP_PATH =
-		SystemProperties.get(SystemProperties.TMP_DIR) +
-			"/liferay/" + THUMBNAIL_PATH;
+		if (fileVersionId > 0) {
+			sb = new StringBundler(6);
+		}
+		else {
+			sb = new StringBundler(4);
+		}
+
+		if (preview) {
+			sb.append(PREVIEW_PATH);
+		}
+		else {
+			sb.append(THUMBNAIL_PATH);
+		}
+
+		sb.append(groupId);
+		sb.append(StringPool.SLASH);
+		sb.append(fileEntryId);
+
+		if (fileVersionId > 0) {
+			sb.append(StringPool.SLASH);
+			sb.append(fileVersionId);
+		}
+
+		return sb.toString();
+	}
 
 	private static Log _log = LogFactoryUtil.getLog(
 		DLPreviewableProcessor.class);

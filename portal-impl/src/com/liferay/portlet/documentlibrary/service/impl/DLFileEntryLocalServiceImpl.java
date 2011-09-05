@@ -291,7 +291,7 @@ public class DLFileEntryLocalServiceImpl
 		}
 		catch (NoSuchFileException nsfe) {
 		}
-		
+
 		DLPreviewableProcessor.deleteFiles(
 			new LiferayFileVersion(dlFileVersion));
 

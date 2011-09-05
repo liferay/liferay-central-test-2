@@ -77,7 +77,7 @@ public class DLAppHelperLocalServiceImpl
 		throws PortalException, SystemException {
 
 		// File previews
-		
+
 		DLPreviewableProcessor.deleteFiles(fileEntry);
 
 		// File ranks
