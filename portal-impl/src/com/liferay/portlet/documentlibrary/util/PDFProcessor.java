@@ -132,23 +132,21 @@ public class PDFProcessor extends DLPreviewableProcessor {
 		if (PropsValues.IMAGEMAGICK_ENABLED) {
 			return true;
 		}
-		else {
-			if (!_warned) {
-				StringBundler sb = new StringBundler(5);
 
-				sb.append("Liferay is not configured to use ImageMagick for ");
-				sb.append("generating Document Library previews and will ");
-				sb.append("default to PDFBox. For better quality previews, ");
-				sb.append("install ImageMagick and enable it in ");
-				sb.append("portal-ext.properties");
+		if (!_warned) {
+			StringBundler sb = new StringBundler(5);
 
-				_log.warn(sb.toString());
+			sb.append("Liferay is not configured to use ImageMagick for ");
+			sb.append("generating Document Library previews and will default ");
+			sb.append("to PDFBox. For better quality previews, install ");
+			sb.append("ImageMagick and enable it in portal-ext.properties.");
 
-				_warned = true;
-			}
+			_log.warn(sb.toString());
 
-			return false;
+			_warned = true;
 		}
+
+		return false;
 	}
 
 	public PDFProcessor() {
@@ -628,6 +626,6 @@ public class PDFProcessor extends DLPreviewableProcessor {
 
 	private static ConvertCmd _convertCmd;
 	private static List<Long> _fileVersionIds = new Vector<Long>();
-	private static boolean _warned = false;
+	private static boolean _warned;
 
 }
