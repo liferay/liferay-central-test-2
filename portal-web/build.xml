@@ -1072,14 +1072,14 @@ Please set the property "jdk.6.home" in build.properties.
 				<if>
 					<equals arg1="${app.server.type}" arg2="jboss" />
 					<then>
-						<antcall target="compile-jboss" />
+						<!--<antcall target="compile-jboss" />
 
 						<copy todir="${app.server.instance.dir}/work/jboss.web/localhost/_">
 							<fileset dir="classes/${app.server.type}">
 								<exclude name="**/*.jspc_error" />
 								<exclude name="**/*.java" />
 							</fileset>
-						</copy>
+						</copy>-->
 					</then>
 					<elseif>
 						<equals arg1="${app.server.type}" arg2="jonas" />

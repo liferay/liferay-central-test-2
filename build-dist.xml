@@ -846,7 +846,7 @@ release was successful.</echo>
 	</target>
 
 	<target name="unzip-jboss">
-		<delete dir="${app.server.parent.dir}/jboss-${app.server.jboss.version}" />
+		<delete dir="${app.server.jboss.dir}" />
 
 		<if>
 			<not>
@@ -865,34 +865,28 @@ release was successful.</echo>
 			dest="${app.server.parent.dir}"
 			src="${app.server.parent.dir}/${app.server.jboss.zip.name}"
 		>
-			<patternset
-				excludes="jboss-${app.server.jboss.version}.GA/server/all/**,jboss-${app.server.jboss.version}.GA/server/default/**,jboss-${app.server.jboss.version}.GA/server/minimal/**,jboss-${app.server.jboss.version}.GA/server/standard/**"
-			/>
 			<mapper
 				type="glob"
-				from="jboss-${app.server.jboss.version}.GA/*"
+				from="jboss-as-${app.server.jboss.version}.Final/*"
 				to="jboss-${app.server.jboss.version}/*"
 			/>
 		</unzip>
 
-		<replace file="${app.server.parent.dir}/jboss-${app.server.jboss.version}/server/web/conf/jboss-service.xml">
-			<replacetoken><![CDATA[<attribute name="Port">-1</attribute>]]></replacetoken>
-			<replacevalue><![CDATA[<attribute name="Port"><value-factory bean="ServiceBindingManager" method="getIntBinding"><parameter>jboss:service=Naming</parameter><parameter>Port</parameter></value-factory></attribute>]]></replacevalue>
+		<replace file="${app.server.jboss.dir}/standalone/configuration/standalone.xml">
+			<replacetoken><![CDATA[enable-welcome-root="true"]]></replacetoken>
+			<replacevalue><![CDATA[enable-welcome-root="false"]]></replacevalue>
 		</replace>
 
-		<replace file="${app.server.parent.dir}/jboss-${app.server.jboss.version}/server/web/conf/login-config.xml">
-			<replacetoken><![CDATA[</policy>]]></replacetoken>
-			<replacevalue><![CDATA[
-					<application-policy name="PortalRealm">
-						<authentication>
-							<login-module code="com.liferay.portal.security.jaas.PortalLoginModule" flag="required" />
-						</authentication>
-					</application-policy>
-				</policy>]]>
+		<replace file="${app.server.jboss.dir}/standalone/configuration/standalone.xml">
+			<replacetoken><![CDATA[<security-domains>]]></replacetoken>
+			<replacevalue><![CDATA[<security-domains>
+				<security-domain name="PortalRealm">
+					<authentication>
+						<login-module code="com.liferay.portal.security.jaas.PortalLoginModule" flag="required"/>
+					</authentication>
+				</security-domain>]]>
 			</replacevalue>
 		</replace>
-
-		<move file="${app.server.parent.dir}/jboss-${app.server.jboss.version}/server/web" tofile="${app.server.parent.dir}/jboss-${app.server.jboss.version}/server/default" />
 	</target>
 
 	<target name="unzip-jetty">
