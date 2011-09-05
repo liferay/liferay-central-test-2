@@ -171,18 +171,18 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		// Resources
 
+		boolean addGroupPermissions = true;
+
+		Group group = groupLocalService.getGroup(groupId);
+
+		if (privateLayout && group.isUser()) {
+			addGroupPermissions = false;
+		}
+
 		boolean addGuestPermissions = false;
 
 		if (!privateLayout || type.equals(LayoutConstants.TYPE_CONTROL_PANEL)) {
 			addGuestPermissions = true;
-		}
-
-		Group group = groupLocalService.getGroup(groupId);
-
-		boolean addGroupPermissions = true;
-
-		if (privateLayout && group.isUser()) {
-			addGroupPermissions = false;
 		}
 
 		resourceLocalService.addResources(
