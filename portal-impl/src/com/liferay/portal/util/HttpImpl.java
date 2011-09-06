@@ -925,9 +925,7 @@ public class HttpImpl implements Http {
 			List<Part> partsList = new ArrayList<Part>();
 
 			if (parts != null) {
-				for (Map.Entry<String, String> entry :
-						parts.entrySet()) {
-
+				for (Map.Entry<String, String> entry : parts.entrySet()) {
 					String value = entry.getValue();
 
 					if (Validator.isNotNull(value)) {
