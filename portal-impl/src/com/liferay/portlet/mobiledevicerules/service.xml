@@ -2,13 +2,13 @@
 <!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 6.1.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_6_1_0.dtd">
 
 <service-builder package-path="com.liferay.portlet.mobiledevicerules">
-    <author>Edward C. Han</author>
+	<author>Edward C. Han</author>
 	<namespace>MDR</namespace>
 	<entity name="MDRAction" local-service="true" remote-service="true" uuid="true">
 
-        <!-- PK fields -->
+		<!-- PK fields -->
 
-        <column name="actionId" type="long" primary="true" />
+		<column name="actionId" type="long" primary="true" />
 
 		<!-- Group instance -->
 
@@ -26,27 +26,27 @@
 
 		<column name="classNameId" type="long" />
 		<column name="classPK" type="long" />
+		<column name="ruleGroupId" type="long" />
 		<column name="name" type="String"  localized="true" />
 		<column name="description" type="String" localized="true"/>
-        <column name="ruleGroupId" type="long" />
-        <column name="type" type="String" />
-        <column name="typeSettings" type="String" />
+		<column name="type" type="String" />
+		<column name="typeSettings" type="String" />
 
 		<!-- Finder methods -->
 
-        <finder name="RuleGroupId" return-type="Collection">
-            <finder-column name="ruleGroupId" />
-        </finder>
+		<finder name="RuleGroupId" return-type="Collection">
+			<finder-column name="ruleGroupId" />
+		</finder>
 		<finder name="C_C" return-type="Collection">
 			<finder-column name="classNameId" />
 			<finder-column name="classPK" />
 		</finder>
-    </entity>
+	</entity>
 	<entity name="MDRRule" local-service="true" remote-service="true" uuid="true">
 
-        <!-- PK fields -->
+		<!-- PK fields -->
 
-        <column name="ruleId" type="long" primary="true" />
+		<column name="ruleId" type="long" primary="true" />
 
 		<!-- Group instance -->
 
@@ -60,25 +60,25 @@
 		<column name="createDate" type="Date" />
 		<column name="modifiedDate" type="Date" />
 
-        <!-- Other fields -->
+		<!-- Other fields -->
 
-        <column name="ruleGroupId" type="long" />
-        <column name="name" type="String" localized="true" />
-        <column name="description" type="String" localized="true" />
-        <column name="type" type="String" />
-        <column name="typeSettings" type="String" />
+		<column name="ruleGroupId" type="long" />
+		<column name="name" type="String" localized="true" />
+		<column name="description" type="String" localized="true" />
+		<column name="type" type="String" />
+		<column name="typeSettings" type="String" />
 
 		<!-- Finder methods -->
 
-        <finder name="RuleGroupId" return-type="Collection">
-            <finder-column name="ruleGroupId" />
-        </finder>
-    </entity>
-    <entity name="MDRRuleGroup" local-service="true" remote-service="true" uuid="true">
+		<finder name="RuleGroupId" return-type="Collection">
+			<finder-column name="ruleGroupId" />
+		</finder>
+	</entity>
+	<entity name="MDRRuleGroup" local-service="true" remote-service="true" uuid="true">
 
-        <!-- PK fields -->
+		<!-- PK fields -->
 
-        <column name="ruleGroupId" type="long" primary="true" />
+		<column name="ruleGroupId" type="long" primary="true" />
 
 		<!-- Group instance -->
 
@@ -92,19 +92,19 @@
 		<column name="createDate" type="Date" />
 		<column name="modifiedDate" type="Date" />
 
-        <!-- Other fields -->
+		<!-- Other fields -->
 
-        <column name="name" type="String" localized="true" />
-        <column name="description" type="String" localized="true" />
+		<column name="name" type="String" localized="true" />
+		<column name="description" type="String" localized="true" />
 
-        <!-- Finder methods -->
+		<!-- Finder methods -->
 
-        <finder name="GroupId" return-type="Collection">
-            <finder-column name="groupId" />
-        </finder>
+		<finder name="GroupId" return-type="Collection">
+			<finder-column name="groupId" />
+		</finder>
 
-        <!-- References -->
+		<!-- References -->
 
-        <reference package-path="com.liferay.portal" entity="Group" />
+		<reference package-path="com.liferay.portal" entity="Group" />
 	</entity>
 </service-builder>

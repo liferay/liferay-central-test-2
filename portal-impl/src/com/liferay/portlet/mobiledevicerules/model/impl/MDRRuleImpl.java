@@ -14,13 +14,7 @@
 
 package com.liferay.portlet.mobiledevicerules.model.impl;
 
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.UnicodeProperties;
-import com.liferay.portlet.mobiledevicerules.model.MDRAction;
-import com.liferay.portlet.mobiledevicerules.service.MDRActionLocalServiceUtil;
-
-import java.util.Collections;
-import java.util.List;
 
 /**
  * @author Edward C. Han

@@ -40,9 +40,9 @@ public class MDRActionLocalServiceImpl extends MDRActionLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		User user = userLocalService.getUser(serviceContext.getUserId());
+		long classNameId = PortalUtil.getClassNameId(className);
 		Date now = new Date();
 
-		long classNameId = PortalUtil.getClassNameId(className);
 		long actionId = counterLocalService.increment();
 
 		MDRAction action = mdrActionLocalService.createMDRAction(actionId);
@@ -81,8 +81,12 @@ public class MDRActionLocalServiceImpl extends MDRActionLocalServiceBaseImpl {
 		MDRAction action = mdrActionPersistence.fetchByPrimaryKey(actionId);
 
 		if (action != null) {
-			deleteMDRAction(action);
+			deleteAction(action);
 		}
+	}
+
+	public void deleteAction(MDRAction action) throws SystemException {
+		mdrActionPersistence.remove(action);
 	}
 
 	public void deleteActions(String className, long classPK)
@@ -120,7 +124,9 @@ public class MDRActionLocalServiceImpl extends MDRActionLocalServiceBaseImpl {
 			classNameId, classPK, start, end);
 	}
 
-	public int getActionsCount(String className, long classPK) throws SystemException {
+	public int getActionsCount(String className, long classPK)
+		throws SystemException {
+
 		long classNameId = PortalUtil.getClassNameId(className);
 
 		return mdrActionPersistence.countByC_C(classNameId, classPK);
