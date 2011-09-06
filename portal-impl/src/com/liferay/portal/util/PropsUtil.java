@@ -89,6 +89,9 @@ public class PropsUtil {
 
 	private PropsUtil() {
 		try {
+
+			// Default liferay home directory
+
 			SystemProperties.set(
 				PropsKeys.DEFAULT_LIFERAY_HOME, _getDefaultLiferayHome());
 
@@ -139,6 +142,8 @@ public class PropsUtil {
 			SystemProperties.set(
 				PropsKeys.LIFERAY_LIB_PORTAL_DIR, portalLibDir);
 
+			// Portal web directory
+
 			String portalWebDir = WebDirDetector.getRootDir(portalLibDir);
 
 			if (_log.isDebugEnabled()) {
@@ -147,6 +152,8 @@ public class PropsUtil {
 
 			SystemProperties.set(
 				PropsKeys.LIFERAY_WEB_PORTAL_DIR, portalWebDir);
+
+			// Liferay home directory
 
 			_configuration = new ConfigurationImpl(
 				PropsUtil.class.getClassLoader(), PropsFiles.PORTAL);
@@ -158,6 +165,8 @@ public class PropsUtil {
 			}
 
 			SystemProperties.set(PropsKeys.LIFERAY_HOME, liferayHome);
+
+			// Ehcache disk directory
 
 			SystemProperties.set(
 				"ehcache.disk.store.dir", liferayHome + "/data/ehcache");
