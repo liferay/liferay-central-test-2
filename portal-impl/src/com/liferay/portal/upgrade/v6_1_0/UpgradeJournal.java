@@ -77,10 +77,10 @@ public class UpgradeJournal extends UpgradeProcess {
 			upgradeTable.updateTable();
 		}
 
-		upgradeStructureXsd();
+		updateStructureXsd();
 	}
 
-	protected void upgradeStructureXsd() throws Exception {
+	protected void updateStructureXsd() throws Exception {
 		runSQL(
 			"update JournalStructure set xsd = replace(xsd, " +
 				"'image_gallery', 'document_library') where xsd like " +
