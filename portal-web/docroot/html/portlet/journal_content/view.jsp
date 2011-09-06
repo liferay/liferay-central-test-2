@@ -22,9 +22,7 @@ JournalArticleDisplay articleDisplay = (JournalArticleDisplay)request.getAttribu
 boolean print = ParamUtil.getString(request, "viewMode").equals(Constants.PRINT);
 
 boolean hasViewPermission = true;
-%>
 
-<%
 String title = StringPool.BLANK;
 boolean approved = false;
 boolean expired = true;
