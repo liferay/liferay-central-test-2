@@ -24,10 +24,8 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ClassName;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutTypePortletConstants;
-import com.liferay.portal.service.ClassNameServiceUtil;
 import com.liferay.portal.service.LayoutServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
@@ -126,66 +124,65 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 	protected String[] getClassTypeIds(
 		ActionRequest actionRequest, String[] classNameIds) throws Exception {
 
-		String[] classTypeIds = null;
-
-		String anyAssetTypeParam = getParameter(
+		String anyAssetTypeString = getParameter(
 			actionRequest, "anyAssetType");
 
-		boolean anyAssetType = GetterUtil.getBoolean(anyAssetTypeParam);
+		boolean anyAssetType = GetterUtil.getBoolean(anyAssetTypeString);
 
-		if (!anyAssetType) {
-			long defaultAssetTypeId = GetterUtil.getLong(anyAssetTypeParam);
-
-			if (defaultAssetTypeId == 0 && classNameIds.length == 1) {
-				defaultAssetTypeId = GetterUtil.getLong(classNameIds[0]);
-			}
-
-			if (defaultAssetTypeId > 0 ) {
-				ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.
-				getAttribute(WebKeys.THEME_DISPLAY);
-
-				long[] groupdIds = new long[]{
-					themeDisplay.getCompanyGroupId(),
-					themeDisplay.getScopeGroupId()};
-
-				ClassName className = ClassNameServiceUtil.getClassName(
-					defaultAssetTypeId);
-
-				 AssetRendererFactory assetRendererFactory =
-					AssetRendererFactoryRegistryUtil.
-						getAssetRendererFactoryByClassName(
-							className.getClassName());
-
-				if (assetRendererFactory.getClassTypes(groupdIds) != null) {
-					String assetClassName = AssetPublisherUtil.getClassName(
-						assetRendererFactory);
-
-					String anyAssetClassTypeParam = getParameter(
-							actionRequest, "anyClassType" + assetClassName);
-
-					boolean anyAssetClassType = GetterUtil.getBoolean(
-						anyAssetClassTypeParam);
-
-					if (!anyAssetClassType) {
-						long defaultAssetClassTypeId = GetterUtil.getLong(
-							anyAssetClassTypeParam);
-
-						if (defaultAssetClassTypeId > 0) {
-							classTypeIds = new String[] {
-								String.valueOf(defaultAssetClassTypeId)};
-						}
-						else {
-							classTypeIds = StringUtil.split(
-								getParameter(
-									actionRequest,
-									"classTypeIds" + assetClassName));
-						}
-					}
-				}
-			}
+		if (anyAssetType) {
+			return null;
 		}
 
-		return classTypeIds;
+		long defaultAssetTypeId = GetterUtil.getLong(anyAssetTypeString);
+
+		if ((defaultAssetTypeId == 0) && (classNameIds.length == 1)) {
+			defaultAssetTypeId = GetterUtil.getLong(classNameIds[0]);
+		}
+
+		if (defaultAssetTypeId <= 0 ) {
+			return null;
+		}
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		String className = PortalUtil.getClassName(defaultAssetTypeId);
+
+		AssetRendererFactory assetRendererFactory =
+			AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(
+				className);
+
+		long[] groupdIds = {
+			themeDisplay.getCompanyGroupId(), themeDisplay.getScopeGroupId()
+		};
+
+		if (assetRendererFactory.getClassTypes(groupdIds) == null) {
+			return null;
+		}
+
+		String assetClassName = AssetPublisherUtil.getClassName(
+			assetRendererFactory);
+
+		String anyAssetClassTypeString = getParameter(
+			actionRequest, "anyClassType" + assetClassName);
+
+		boolean anyAssetClassType = GetterUtil.getBoolean(
+			anyAssetClassTypeString);
+
+		if (anyAssetClassType) {
+			return null;
+		}
+
+		long defaultAssetClassTypeId = GetterUtil.getLong(
+			anyAssetClassTypeString);
+
+		if (defaultAssetClassTypeId > 0) {
+			return new String[] {String.valueOf(defaultAssetClassTypeId)};
+		}
+		else {
+			return StringUtil.split(
+				getParameter(actionRequest, "classTypeIds" + assetClassName));
+		}
 	}
 
 	protected void moveSelectionDown(
@@ -331,18 +328,15 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 
 		String[] classNameIds = StringUtil.split(
 			getParameter(actionRequest, "classNameIds"));
-
+		String[] classTypeIds = getClassTypeIds(actionRequest, classNameIds);
 		String[] extensions = actionRequest.getParameterValues("extensions");
-
 		String[] scopeIds = StringUtil.split(
 			getParameter(actionRequest, "scopeIds"));
 
-		String[] classTypeIds = getClassTypeIds(actionRequest, classNameIds);
-
 		setPreference(actionRequest, "classNameIds", classNameIds);
+		setPreference(actionRequest, "classTypeIds", classTypeIds);
 		setPreference(actionRequest, "extensions", extensions);
 		setPreference(actionRequest, "scopeIds", scopeIds);
-		setPreference(actionRequest, "classTypeIds", classTypeIds);
 	}
 
 	protected void updateQueryLogic(

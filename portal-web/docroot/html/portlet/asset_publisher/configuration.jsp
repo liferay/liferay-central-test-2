@@ -24,6 +24,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 String typeSelection = ParamUtil.getString(request, "typeSelection", StringPool.BLANK);
 
 AssetRendererFactory rendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(typeSelection);
+
 List<AssetRendererFactory> classTypesAssetRendererFactories = new ArrayList<AssetRendererFactory>();
 
 Group scopeGroup = themeDisplay.getScopeGroup();
@@ -127,13 +128,13 @@ Group scopeGroup = themeDisplay.getScopeGroup();
 
 			<%
 			for (AssetRendererFactory assetRendererFactory : AssetRendererFactoryRegistryUtil.getAssetRendererFactories()) {
-				if (assetRendererFactory.getClassTypes(new long[]{themeDisplay.getCompanyGroupId(), scopeGroupId}) == null) {
+				if (assetRendererFactory.getClassTypes(new long[] {themeDisplay.getCompanyGroupId(), scopeGroupId}) == null) {
 					continue;
 				}
 
 				classTypesAssetRendererFactories.add(assetRendererFactory);
 
-				Map<Long, String> assetAvailableClassTypes = assetRendererFactory.getClassTypes(new long[]{themeDisplay.getCompanyGroupId(), scopeGroupId});
+				Map<Long, String> assetAvailableClassTypes = assetRendererFactory.getClassTypes(new long[] {themeDisplay.getCompanyGroupId(), scopeGroupId});
 
 				String className = AssetPublisherUtil.getClassName(assetRendererFactory);
 
@@ -795,7 +796,7 @@ Group scopeGroup = themeDisplay.getScopeGroup();
 
 		Liferay.Util.toggleSelectBox('<portlet:namespace />anyClassType<%= className %>','false','<portlet:namespace /><%= className %>Boxes');
 
-	    var <portlet:namespace /><%= className %>Options = A.one('#<portlet:namespace /><%= className %>Options');
+		var <portlet:namespace /><%= className %>Options = A.one('#<portlet:namespace /><%= className %>Options');
 
 		function <portlet:namespace />toggle<%= className %>() {
 			var assetOptions = assetMulitpleSelector.all('option');
@@ -814,7 +815,7 @@ Group scopeGroup = themeDisplay.getScopeGroup();
 	}
 	%>
 
-	function <portlet:namespace />toggleSubClasses() {
+	function <portlet:namespace />toggleSubclasses() {
 
 		<%
 		for (AssetRendererFactory curRendererFactory : classTypesAssetRendererFactories) {
@@ -829,20 +830,20 @@ Group scopeGroup = themeDisplay.getScopeGroup();
 
 	}
 
-	<portlet:namespace />toggleSubClasses();
+	<portlet:namespace />toggleSubclasses();
 
 	assetSelector.on(
 		'change',
 		function(event){
-			<portlet:namespace />toggleSubClasses();
+			<portlet:namespace />toggleSubclasses();
 		}
 	);
 
 	Liferay.after(
 		'inputmoveboxes:moveItem',
 		function(event){
-	    	if ((event.fromBox.get('id') == '<portlet:namespace />currentClassNameIds') || ( event.toBox.get('id') == '<portlet:namespace />currentClassNameIds')) {
-				<portlet:namespace />toggleSubClasses();
+			if ((event.fromBox.get('id') == '<portlet:namespace />currentClassNameIds') || ( event.toBox.get('id') == '<portlet:namespace />currentClassNameIds')) {
+				<portlet:namespace />toggleSubclasses();
 			}
 		}
 	);
