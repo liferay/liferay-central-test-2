@@ -906,6 +906,51 @@ public class HttpImpl implements Http {
 		}
 	}
 
+	protected void processPostMethod(
+		PostMethod postMethod, List<Http.FilePart> fileParts,
+		Map<String, String> parts) {
+
+		if ((fileParts == null) || fileParts.isEmpty()) {
+			if (parts != null) {
+				for (Map.Entry<String, String> entry : parts.entrySet()) {
+					String value = entry.getValue();
+
+					if (Validator.isNotNull(value)) {
+						postMethod.addParameter(entry.getKey(), value);
+					}
+				}
+			}
+		}
+		else {
+			List<Part> partsList = new ArrayList<Part>();
+
+			if (parts != null) {
+				for (Map.Entry<String, String> entry :
+						parts.entrySet()) {
+
+					String value = entry.getValue();
+
+					if (Validator.isNotNull(value)) {
+						StringPart stringPart = new StringPart(
+							entry.getKey(), value);
+
+						partsList.add(stringPart);
+					}
+				}
+			}
+
+			for (Http.FilePart filePart : fileParts) {
+				partsList.add(toCommonsFilePart(filePart));
+			}
+
+			MultipartRequestEntity multipartRequestEntity =
+				new MultipartRequestEntity(
+					partsList.toArray(new Part[0]), postMethod.getParams());
+
+			postMethod.setRequestEntity(multipartRequestEntity);
+		}
+	}
+
 	protected org.apache.commons.httpclient.Cookie toCommonsCookie(
 		Cookie cookie) {
 
@@ -1051,49 +1096,7 @@ public class HttpImpl implements Http {
 				else if (method.equals(Http.Method.POST)) {
 					PostMethod postMethod = (PostMethod)httpMethod;
 
-					if ((fileParts == null) || fileParts.isEmpty()) {
-						if (parts != null) {
-							for (Map.Entry<String, String> entry :
-									parts.entrySet()) {
-
-								String value = entry.getValue();
-
-								if (Validator.isNotNull(value)) {
-									postMethod.addParameter(
-										entry.getKey(), value);
-								}
-							}
-						}
-					}
-					else {
-						List<Part> partsList = new ArrayList<Part>();
-
-						if (parts != null) {
-							for (Map.Entry<String, String> entry :
-									parts.entrySet()) {
-
-								String value = entry.getValue();
-
-								if (Validator.isNotNull(value)) {
-									StringPart stringPart = new StringPart(
-										entry.getKey(), value);
-
-									partsList.add(stringPart);
-								}
-							}
-						}
-
-						for (Http.FilePart filePart : fileParts) {
-							partsList.add(toCommonsFilePart(filePart));
-						}
-
-						MultipartRequestEntity multipartRequestEntity =
-							new MultipartRequestEntity(
-								partsList.toArray(new Part[0]),
-								postMethod.getParams());
-
-						postMethod.setRequestEntity(multipartRequestEntity);
-					}
+					processPostMethod(postMethod, fileParts, parts);
 				}
 			}
 			else if (method.equals(Http.Method.DELETE)) {
