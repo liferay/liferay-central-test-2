@@ -3061,11 +3061,11 @@ public class PortletImpl extends PortletBaseImpl {
 	 * @return a cloned instance of the portlet
 	 */
 	public Portlet getClonedInstance(String portletId) {
-		Portlet	clonedInstance = (Portlet)clone();
+		Portlet	portlet = (Portlet)clone();
 
-		clonedInstance.setPortletId(portletId);
+		portlet.setPortletId(portletId);
 
-		return clonedInstance;
+		return portlet;
 	}
 
 	/**
