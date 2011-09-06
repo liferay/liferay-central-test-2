@@ -102,15 +102,19 @@ public class MDRRuleLocalServiceImpl extends MDRRuleLocalServiceBaseImpl {
 		MDRRule rule = mdrRulePersistence.fetchByPrimaryKey(ruleId);
 
 		if (rule != null) {
-			deleteMDRRule(rule);
+			deleteRule(rule);
 		}
+	}
+
+	public void deleteRule(MDRRule rule) throws SystemException {
+		mdrRulePersistence.remove(rule);
 	}
 
 	public void deleteRules(long ruleGroupId) throws SystemException {
 		List<MDRRule> rules = mdrRulePersistence.findByRuleGroupId(ruleGroupId);
 
 		for (MDRRule rule : rules) {
-			deleteMDRRule(rule);
+			deleteRule(rule);
 		}
 	}
 

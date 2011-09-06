@@ -2588,9 +2588,9 @@
 			</basic>
 			<basic name="classNameId" />
 			<basic name="classPK" />
+			<basic name="ruleGroupId" />
 			<basic name="name" />
 			<basic name="description" />
-			<basic name="ruleGroupId" />
 			<basic name="type">
 				<column name="TYPE_" />
 			</basic>

@@ -320,6 +320,12 @@ public class MDRRuleLocalServiceUtil {
 		getService().deleteRule(ruleId);
 	}
 
+	public static void deleteRule(
+		com.liferay.portlet.mobiledevicerules.model.MDRRule rule)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().deleteRule(rule);
+	}
+
 	public static void deleteRules(long ruleGroupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteRules(ruleGroupId);

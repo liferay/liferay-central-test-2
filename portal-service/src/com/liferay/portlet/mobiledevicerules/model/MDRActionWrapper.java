@@ -264,6 +264,24 @@ public class MDRActionWrapper implements MDRAction {
 	}
 
 	/**
+	* Returns the rule group ID of this m d r action.
+	*
+	* @return the rule group ID of this m d r action
+	*/
+	public long getRuleGroupId() {
+		return _mdrAction.getRuleGroupId();
+	}
+
+	/**
+	* Sets the rule group ID of this m d r action.
+	*
+	* @param ruleGroupId the rule group ID of this m d r action
+	*/
+	public void setRuleGroupId(long ruleGroupId) {
+		_mdrAction.setRuleGroupId(ruleGroupId);
+	}
+
+	/**
 	* Returns the name of this m d r action.
 	*
 	* @return the name of this m d r action
@@ -491,24 +509,6 @@ public class MDRActionWrapper implements MDRAction {
 		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
 		java.util.Locale defaultLocale) {
 		_mdrAction.setDescriptionMap(descriptionMap, defaultLocale);
-	}
-
-	/**
-	* Returns the rule group ID of this m d r action.
-	*
-	* @return the rule group ID of this m d r action
-	*/
-	public long getRuleGroupId() {
-		return _mdrAction.getRuleGroupId();
-	}
-
-	/**
-	* Sets the rule group ID of this m d r action.
-	*
-	* @param ruleGroupId the rule group ID of this m d r action
-	*/
-	public void setRuleGroupId(long ruleGroupId) {
-		_mdrAction.setRuleGroupId(ruleGroupId);
 	}
 
 	/**

@@ -230,6 +230,20 @@ public interface MDRActionModel extends AttachedModel, BaseModel<MDRAction>,
 	public void setClassPK(long classPK);
 
 	/**
+	 * Returns the rule group ID of this m d r action.
+	 *
+	 * @return the rule group ID of this m d r action
+	 */
+	public long getRuleGroupId();
+
+	/**
+	 * Sets the rule group ID of this m d r action.
+	 *
+	 * @param ruleGroupId the rule group ID of this m d r action
+	 */
+	public void setRuleGroupId(long ruleGroupId);
+
+	/**
 	 * Returns the name of this m d r action.
 	 *
 	 * @return the name of this m d r action
@@ -404,20 +418,6 @@ public interface MDRActionModel extends AttachedModel, BaseModel<MDRAction>,
 	 */
 	public void setDescriptionMap(Map<Locale, String> descriptionMap,
 		Locale defaultLocale);
-
-	/**
-	 * Returns the rule group ID of this m d r action.
-	 *
-	 * @return the rule group ID of this m d r action
-	 */
-	public long getRuleGroupId();
-
-	/**
-	 * Sets the rule group ID of this m d r action.
-	 *
-	 * @param ruleGroupId the rule group ID of this m d r action
-	 */
-	public void setRuleGroupId(long ruleGroupId);
 
 	/**
 	 * Returns the type of this m d r action.

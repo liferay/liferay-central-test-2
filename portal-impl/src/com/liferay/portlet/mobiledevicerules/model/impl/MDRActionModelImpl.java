@@ -81,13 +81,13 @@ public class MDRActionModelImpl extends BaseModelImpl<MDRAction>
 			{ "modifiedDate", Types.TIMESTAMP },
 			{ "classNameId", Types.BIGINT },
 			{ "classPK", Types.BIGINT },
+			{ "ruleGroupId", Types.BIGINT },
 			{ "name", Types.VARCHAR },
 			{ "description", Types.VARCHAR },
-			{ "ruleGroupId", Types.BIGINT },
 			{ "type_", Types.VARCHAR },
 			{ "typeSettings", Types.CLOB }
 		};
-	public static final String TABLE_SQL_CREATE = "create table MDRAction (uuid_ VARCHAR(75) null,actionId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,name STRING null,description STRING null,ruleGroupId LONG,type_ VARCHAR(255) null,typeSettings TEXT null)";
+	public static final String TABLE_SQL_CREATE = "create table MDRAction (uuid_ VARCHAR(75) null,actionId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,ruleGroupId LONG,name STRING null,description STRING null,type_ VARCHAR(255) null,typeSettings TEXT null)";
 	public static final String TABLE_SQL_DROP = "drop table MDRAction";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -118,9 +118,9 @@ public class MDRActionModelImpl extends BaseModelImpl<MDRAction>
 		model.setModifiedDate(soapModel.getModifiedDate());
 		model.setClassNameId(soapModel.getClassNameId());
 		model.setClassPK(soapModel.getClassPK());
+		model.setRuleGroupId(soapModel.getRuleGroupId());
 		model.setName(soapModel.getName());
 		model.setDescription(soapModel.getDescription());
-		model.setRuleGroupId(soapModel.getRuleGroupId());
 		model.setType(soapModel.getType());
 		model.setTypeSettings(soapModel.getTypeSettings());
 
@@ -308,6 +308,15 @@ public class MDRActionModelImpl extends BaseModelImpl<MDRAction>
 	}
 
 	@JSON
+	public long getRuleGroupId() {
+		return _ruleGroupId;
+	}
+
+	public void setRuleGroupId(long ruleGroupId) {
+		_ruleGroupId = ruleGroupId;
+	}
+
+	@JSON
 	public String getName() {
 		if (_name == null) {
 			return StringPool.BLANK;
@@ -490,15 +499,6 @@ public class MDRActionModelImpl extends BaseModelImpl<MDRAction>
 	}
 
 	@JSON
-	public long getRuleGroupId() {
-		return _ruleGroupId;
-	}
-
-	public void setRuleGroupId(long ruleGroupId) {
-		_ruleGroupId = ruleGroupId;
-	}
-
-	@JSON
 	public String getType() {
 		if (_type == null) {
 			return StringPool.BLANK;
@@ -571,9 +571,9 @@ public class MDRActionModelImpl extends BaseModelImpl<MDRAction>
 		mdrActionImpl.setModifiedDate(getModifiedDate());
 		mdrActionImpl.setClassNameId(getClassNameId());
 		mdrActionImpl.setClassPK(getClassPK());
+		mdrActionImpl.setRuleGroupId(getRuleGroupId());
 		mdrActionImpl.setName(getName());
 		mdrActionImpl.setDescription(getDescription());
-		mdrActionImpl.setRuleGroupId(getRuleGroupId());
 		mdrActionImpl.setType(getType());
 		mdrActionImpl.setTypeSettings(getTypeSettings());
 
@@ -687,6 +687,8 @@ public class MDRActionModelImpl extends BaseModelImpl<MDRAction>
 
 		mdrActionCacheModel.classPK = getClassPK();
 
+		mdrActionCacheModel.ruleGroupId = getRuleGroupId();
+
 		mdrActionCacheModel.name = getName();
 
 		String name = mdrActionCacheModel.name;
@@ -702,8 +704,6 @@ public class MDRActionModelImpl extends BaseModelImpl<MDRAction>
 		if ((description != null) && (description.length() == 0)) {
 			mdrActionCacheModel.description = null;
 		}
-
-		mdrActionCacheModel.ruleGroupId = getRuleGroupId();
 
 		mdrActionCacheModel.type = getType();
 
@@ -748,12 +748,12 @@ public class MDRActionModelImpl extends BaseModelImpl<MDRAction>
 		sb.append(getClassNameId());
 		sb.append(", classPK=");
 		sb.append(getClassPK());
+		sb.append(", ruleGroupId=");
+		sb.append(getRuleGroupId());
 		sb.append(", name=");
 		sb.append(getName());
 		sb.append(", description=");
 		sb.append(getDescription());
-		sb.append(", ruleGroupId=");
-		sb.append(getRuleGroupId());
 		sb.append(", type=");
 		sb.append(getType());
 		sb.append(", typeSettings=");
@@ -811,16 +811,16 @@ public class MDRActionModelImpl extends BaseModelImpl<MDRAction>
 		sb.append(getClassPK());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>ruleGroupId</column-name><column-value><![CDATA[");
+		sb.append(getRuleGroupId());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>name</column-name><column-value><![CDATA[");
 		sb.append(getName());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>description</column-name><column-value><![CDATA[");
 		sb.append(getDescription());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>ruleGroupId</column-name><column-value><![CDATA[");
-		sb.append(getRuleGroupId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>type</column-name><column-value><![CDATA[");
@@ -854,9 +854,9 @@ public class MDRActionModelImpl extends BaseModelImpl<MDRAction>
 	private Date _modifiedDate;
 	private long _classNameId;
 	private long _classPK;
+	private long _ruleGroupId;
 	private String _name;
 	private String _description;
-	private long _ruleGroupId;
 	private String _type;
 	private String _typeSettings;
 	private transient ExpandoBridge _expandoBridge;

@@ -296,6 +296,12 @@ public class MDRActionLocalServiceWrapper implements MDRActionLocalService {
 		_mdrActionLocalService.deleteAction(actionId);
 	}
 
+	public void deleteAction(
+		com.liferay.portlet.mobiledevicerules.model.MDRAction action)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		_mdrActionLocalService.deleteAction(action);
+	}
+
 	public void deleteActions(java.lang.String className, long classPK)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_mdrActionLocalService.deleteActions(className, classPK);

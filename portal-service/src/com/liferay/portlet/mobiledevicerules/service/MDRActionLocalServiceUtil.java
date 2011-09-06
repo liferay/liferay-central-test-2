@@ -306,6 +306,12 @@ public class MDRActionLocalServiceUtil {
 		getService().deleteAction(actionId);
 	}
 
+	public static void deleteAction(
+		com.liferay.portlet.mobiledevicerules.model.MDRAction action)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().deleteAction(action);
+	}
+
 	public static void deleteActions(java.lang.String className, long classPK)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteActions(className, classPK);

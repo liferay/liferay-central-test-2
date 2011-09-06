@@ -398,9 +398,9 @@ public class MDRActionPersistenceImpl extends BasePersistenceImpl<MDRAction>
 		mdrActionImpl.setModifiedDate(mdrAction.getModifiedDate());
 		mdrActionImpl.setClassNameId(mdrAction.getClassNameId());
 		mdrActionImpl.setClassPK(mdrAction.getClassPK());
+		mdrActionImpl.setRuleGroupId(mdrAction.getRuleGroupId());
 		mdrActionImpl.setName(mdrAction.getName());
 		mdrActionImpl.setDescription(mdrAction.getDescription());
-		mdrActionImpl.setRuleGroupId(mdrAction.getRuleGroupId());
 		mdrActionImpl.setType(mdrAction.getType());
 		mdrActionImpl.setTypeSettings(mdrAction.getTypeSettings());
 
@@ -550,12 +550,7 @@ public class MDRActionPersistenceImpl extends BasePersistenceImpl<MDRAction>
 	 */
 	public List<MDRAction> findByUuid(String uuid, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
-		Object[] finderArgs = new Object[] {
-				uuid,
-				
-				String.valueOf(start), String.valueOf(end),
-				String.valueOf(orderByComparator)
-			};
+		Object[] finderArgs = new Object[] { uuid, start, end, orderByComparator };
 
 		List<MDRAction> list = (List<MDRAction>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_UUID,
 				finderArgs, this);
@@ -1061,8 +1056,7 @@ public class MDRActionPersistenceImpl extends BasePersistenceImpl<MDRAction>
 		Object[] finderArgs = new Object[] {
 				ruleGroupId,
 				
-				String.valueOf(start), String.valueOf(end),
-				String.valueOf(orderByComparator)
+				start, end, orderByComparator
 			};
 
 		List<MDRAction> list = (List<MDRAction>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_RULEGROUPID,
@@ -1397,8 +1391,7 @@ public class MDRActionPersistenceImpl extends BasePersistenceImpl<MDRAction>
 		Object[] finderArgs = new Object[] {
 				classNameId, classPK,
 				
-				String.valueOf(start), String.valueOf(end),
-				String.valueOf(orderByComparator)
+				start, end, orderByComparator
 			};
 
 		List<MDRAction> list = (List<MDRAction>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_C_C,
@@ -1739,10 +1732,7 @@ public class MDRActionPersistenceImpl extends BasePersistenceImpl<MDRAction>
 	 */
 	public List<MDRAction> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
-		Object[] finderArgs = new Object[] {
-				String.valueOf(start), String.valueOf(end),
-				String.valueOf(orderByComparator)
-			};
+		Object[] finderArgs = new Object[] { start, end, orderByComparator };
 
 		List<MDRAction> list = (List<MDRAction>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
 				finderArgs, this);

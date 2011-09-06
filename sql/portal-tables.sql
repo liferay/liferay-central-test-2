@@ -1182,9 +1182,9 @@ create table MDRAction (
 	modifiedDate DATE null,
 	classNameId LONG,
 	classPK LONG,
+	ruleGroupId LONG,
 	name STRING null,
 	description STRING null,
-	ruleGroupId LONG,
 	type_ VARCHAR(255) null,
 	typeSettings TEXT null
 );

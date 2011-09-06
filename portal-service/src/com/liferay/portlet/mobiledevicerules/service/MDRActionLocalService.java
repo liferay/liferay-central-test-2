@@ -270,6 +270,10 @@ public interface MDRActionLocalService extends PersistedModelLocalService {
 	public void deleteAction(long actionId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	public void deleteAction(
+		com.liferay.portlet.mobiledevicerules.model.MDRAction action)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public void deleteActions(java.lang.String className, long classPK)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
