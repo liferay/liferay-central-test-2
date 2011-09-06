@@ -56,12 +56,11 @@ public interface AssetRendererFactory {
 
 	public long getClassNameId();
 
+	public Map<Long, String> getClassTypes(long[] groupIds) throws Exception;
+
 	public String getIconPath(PortletRequest portletRequest);
 
 	public String getPortletId();
-
-	public Map<Long, String> getClassTypes(long[] groupIds)
-		throws SystemException;
 
 	public String getType();
 

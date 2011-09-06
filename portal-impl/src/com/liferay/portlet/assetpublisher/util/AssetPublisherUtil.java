@@ -321,7 +321,9 @@ public class AssetPublisherUtil {
 	public static String getClassName(
 		AssetRendererFactory assetRendererFactory) {
 
-		String className = assetRendererFactory.getClass().getName();
+		Class<?> clazz = assetRendererFactory.getClass();
+
+		String className = clazz.getName();
 
 		int pos = className.lastIndexOf(StringPool.PERIOD);
 

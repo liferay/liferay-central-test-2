@@ -535,7 +535,7 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 			return updateEntry(
 				userId, groupId, className, classPK, entry.getClassUuid(),
 				entry.getClassTypeId(), categoryIds, tagNames,
-				entry.getVisible(), entry.getStartDate(), entry.getEndDate(),
+				entry.isVisible(), entry.getStartDate(), entry.getEndDate(),
 				entry.getPublishDate(), entry.getExpirationDate(),
 				entry.getMimeType(), entry.getTitle(), entry.getDescription(),
 				entry.getSummary(), entry.getUrl(), entry.getLayoutUuid(),

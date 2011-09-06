@@ -420,6 +420,22 @@ public class AssetEntryFinderImpl
 		return q;
 	}
 
+	protected void buildClassTypeIdsSQL(long[] classTypeIds, StringBundler sb) {
+		sb.append(" AND (");
+
+		for (int i = 0; i < classTypeIds.length; i++) {
+			sb.append(" AssetEntry.classTypeId = ");
+			sb.append(classTypeIds[i]);
+
+			if ((i + 1) < classTypeIds.length) {
+				sb.append(" OR ");
+			}
+			else {
+				sb.append(StringPool.CLOSE_PARENTHESIS);
+			}
+		}
+	}
+
 	protected void buildNotAnyCategoriesSQL(
 		String sqlId, long[] categoryIds, StringBundler sb) {
 
@@ -452,23 +468,6 @@ public class AssetEntryFinderImpl
 		}
 
 		sb.append(StringPool.CLOSE_PARENTHESIS);
-	}
-
-	protected void buildClassTypeIdsSQL(long[] subtypeIds, StringBundler sb) {
-		sb.append(" AND (");
-
-		for (int i = 0; i < subtypeIds.length; i++) {
-
-			sb.append(" AssetEntry.classTypeId = ");
-			sb.append(subtypeIds[i]);
-
-			if ((i + 1) < subtypeIds.length) {
-				sb.append(" OR ");
-			}
-			else {
-				sb.append(StringPool.CLOSE_PARENTHESIS);
-			}
-		}
 	}
 
 	protected String getCategoryIds(String sqlId, long[] categoryIds) {

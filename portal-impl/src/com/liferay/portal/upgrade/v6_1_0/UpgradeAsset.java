@@ -47,8 +47,8 @@ public class UpgradeAsset extends UpgradeProcess {
 			upgradeTable.updateTable();
 		}
 
-		upgradeAssetClassTypeId();
-		upgradeIGImageClassName();
+		updateAssetClassTypeId();
+		updateIGImageClassName();
 	}
 
 	protected long getJournalStructureId(String structureId) throws Exception {
@@ -62,13 +62,13 @@ public class UpgradeAsset extends UpgradeProcess {
 			con = DataAccess.getConnection();
 
 			ps = con.prepareStatement(
-				"select * from JournalStructure where structureId = ?");
+				"select id_ from JournalStructure where structureId = ?");
 
 			ps.setString(1, structureId);
 
 			rs = ps.executeQuery();
 
-			while (rs.next()) {
+			if (rs.next()) {
 				journalStructureId = rs.getLong("id_");
 			}
 		}
@@ -79,7 +79,7 @@ public class UpgradeAsset extends UpgradeProcess {
 		return journalStructureId;
 	}
 
-	protected void upgradeAssetClassTypeId() throws Exception {
+	protected void updateAssetClassTypeId() throws Exception {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -88,7 +88,8 @@ public class UpgradeAsset extends UpgradeProcess {
 			con = DataAccess.getConnection();
 
 			ps = con.prepareStatement(
-				"select * from JournalArticle where structureId > 0");
+				"select resourcePrimKey, structureId from JournalArticle " +
+					"where structureId > 0");
 
 			rs = ps.executeQuery();
 
@@ -102,7 +103,7 @@ public class UpgradeAsset extends UpgradeProcess {
 				runSQL(
 					"update AssetEntry set classTypeId = " +
 						journalStructureId + " where classPK = " +
-						resourcePrimKey);
+							resourcePrimKey);
 			}
 		}
 		finally {
@@ -110,7 +111,7 @@ public class UpgradeAsset extends UpgradeProcess {
 		}
 	}
 
-	protected void upgradeIGImageClassName() throws Exception {
+	protected void updateIGImageClassName() throws Exception {
 		long dlFileEntryClassNameId = PortalUtil.getClassNameId(
 			DLFileEntry.class.getName());
 		long igImageClassNameId = PortalUtil.getClassNameId(

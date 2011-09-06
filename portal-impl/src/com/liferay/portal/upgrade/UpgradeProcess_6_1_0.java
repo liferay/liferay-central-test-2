@@ -67,7 +67,6 @@ public class UpgradeProcess_6_1_0 extends UpgradeProcess {
 		upgrade(UpgradeGroup.class);
 		upgrade(UpgradeImageGallery.class);
 		upgrade(UpgradeJournal.class);
-		upgrade(UpgradeAsset.class);
 		upgrade(UpgradeLayout.class);
 		upgrade(UpgradeLock.class);
 		upgrade(UpgradeMessageBoards.class);
@@ -81,6 +80,7 @@ public class UpgradeProcess_6_1_0 extends UpgradeProcess {
 		upgrade(UpgradeUserGroup.class);
 		upgrade(UpgradeVirtualHost.class);
 		upgrade(UpgradeWorkflow.class);
+		upgrade(UpgradeAsset.class);
 	}
 
 }

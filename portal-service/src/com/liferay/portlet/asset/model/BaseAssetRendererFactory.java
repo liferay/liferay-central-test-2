@@ -69,6 +69,10 @@ public abstract class BaseAssetRendererFactory implements AssetRendererFactory {
 		return _classNameId;
 	}
 
+	public Map<Long, String> getClassTypes(long[] groupId) throws Exception {
+		return  null;
+	}
+
 	public String getIconPath(PortletRequest portletRequest) {
 		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
@@ -78,12 +82,6 @@ public abstract class BaseAssetRendererFactory implements AssetRendererFactory {
 
 	public String getPortletId() {
 		return _portletId;
-	}
-
-	public Map<Long, String> getClassTypes(long[] groupId)
-		throws SystemException {
-
-		return  null;
 	}
 
 	@SuppressWarnings("unused")

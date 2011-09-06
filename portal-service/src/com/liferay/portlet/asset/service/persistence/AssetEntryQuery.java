@@ -47,6 +47,7 @@ public class AssetEntryQuery {
 		setAnyCategoryIds(assetEntryQuery.getAnyCategoryIds());
 		setAnyTagIds(assetEntryQuery.getAnyTagIds());
 		setClassNameIds(assetEntryQuery.getClassNameIds());
+		setClassTypeIds(assetEntryQuery.getClassTypeIds());
 		setEnd(assetEntryQuery.getEnd());
 		setExcludeZeroViewCount(assetEntryQuery.isExcludeZeroViewCount());
 		setExpirationDate(assetEntryQuery.getExpirationDate());
@@ -62,7 +63,6 @@ public class AssetEntryQuery {
 		setOrderByType2(assetEntryQuery.getOrderByType2());
 		setPublishDate(assetEntryQuery.getPublishDate());
 		setStart(assetEntryQuery.getStart());
-		setClassTypeIds(assetEntryQuery.getClassTypeIds());
 		setVisible(assetEntryQuery.isVisible());
 	}
 
@@ -274,12 +274,12 @@ public class AssetEntryQuery {
 		_classNameIds = new long[] {classNameId};
 	}
 
-	public void setClassTypeIds(long[] classTypeIds) {
-		_classTypeIds = classTypeIds;
-	}
-
 	public void setClassNameIds(long[] classNameIds) {
 		_classNameIds = classNameIds;
+	}
+
+	public void setClassTypeIds(long[] classTypeIds) {
+		_classTypeIds = classTypeIds;
 	}
 
 	public void setLayout(Layout layout) {

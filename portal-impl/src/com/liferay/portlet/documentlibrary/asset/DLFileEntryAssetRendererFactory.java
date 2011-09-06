@@ -82,9 +82,8 @@ public class DLFileEntryAssetRendererFactory extends BaseAssetRendererFactory {
 		return CLASS_NAME;
 	}
 
-	public Map<Long, String> getClassTypes(long[] groupIds)
-		throws SystemException {
-
+	@Override
+	public Map<Long, String> getClassTypes(long[] groupIds) throws Exception {
 		Map<Long, String> classTypes = new HashMap<Long, String>();
 
 		for (long groupId : groupIds) {

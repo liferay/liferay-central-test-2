@@ -2182,6 +2182,25 @@ public class JournalArticleLocalServiceImpl
 		// Get the earliest display date and latest expiration date among
 		// all article versions
 
+		long classTypeId = 0;
+
+		JournalStructure structure =
+			journalStructurePersistence.fetchByG_S(
+				article.getGroupId(), article.getStructureId());
+
+		if (structure == null) {
+			Group companyGroup =
+				groupLocalService.getCompanyGroup(article.getCompanyId());
+
+			structure =
+				journalStructurePersistence.fetchByG_S(
+					companyGroup.getGroupId(), article.getStructureId());
+		}
+
+		if (structure != null) {
+			classTypeId = structure.getId();
+		}
+
 		Date[] dateInterval = getDateInterval(
 			article.getGroupId(), article.getArticleId(),
 			article.getDisplayDate(), article.getExpirationDate());
@@ -2210,36 +2229,17 @@ public class JournalArticleLocalServiceImpl
 			}
 		}
 
-		long classTypeId = 0;
-
-		JournalStructure structure =
-			journalStructurePersistence.fetchByG_S(
-				article.getGroupId(), article.getStructureId());
-
-		if (structure == null) {
-			Group companyGroup =
-				groupLocalService.getCompanyGroup(article.getCompanyId());
-
-			structure =
-				journalStructurePersistence.fetchByG_S(
-					companyGroup.getGroupId(), article.getStructureId());
-		}
-
-		if (structure != null) {
-			classTypeId = structure.getId();
-		}
-
 		AssetEntry assetEntry = null;
 
 		if (addDraftAssetEntry) {
 			assetEntry = assetEntryLocalService.updateEntry(
 				userId, article.getGroupId(), JournalArticle.class.getName(),
-				article.getPrimaryKey(), article.getUuid(),
-				classTypeId, assetCategoryIds,
-				assetTagNames, false, null, null, displayDate, expirationDate,
-				ContentTypes.TEXT_HTML, article.getTitle(),
-				article.getDescription(), article.getDescription(), null,
-				article.getLayoutUuid(), 0, 0, null, false);
+				article.getPrimaryKey(), article.getUuid(), classTypeId,
+				assetCategoryIds, assetTagNames, false, null, null,
+				displayDate, expirationDate, ContentTypes.TEXT_HTML,
+				article.getTitle(), article.getDescription(),
+				article.getDescription(), null, article.getLayoutUuid(), 0, 0,
+				null, false);
 		}
 		else {
 			JournalArticleResource journalArticleResource =
@@ -2366,7 +2366,7 @@ public class JournalArticleLocalServiceImpl
 								userId, article.getGroupId(),
 								JournalArticle.class.getName(),
 								article.getResourcePrimKey(), article.getUuid(),
-								Long.parseLong(article.getStructureId()),
+								GetterUtil.getLong(article.getStructureId()),
 								assetCategoryIds, assetTagNames, visible, null,
 								null, displayDate, expirationDate,
 								ContentTypes.TEXT_HTML, article.getTitle(),

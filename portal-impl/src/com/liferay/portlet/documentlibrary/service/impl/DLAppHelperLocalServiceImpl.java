@@ -181,6 +181,23 @@ public class DLAppHelperLocalServiceImpl
 		return null;
 	}
 
+	protected long getFileEntryTypeId(FileEntry fileEntry)
+		throws PortalException, SystemException {
+
+		FileVersion latestFileVersion = fileEntry.getLatestFileVersion();
+
+		LiferayFileEntry liferayFileEntry =
+			(LiferayFileEntry)latestFileVersion.getFileEntry();
+
+		if (liferayFileEntry == null) {
+			return 0;
+		}
+
+		DLFileEntry dlFileEntry = liferayFileEntry.getDLFileEntry();
+
+		return dlFileEntry.getFileEntryTypeId();
+	}
+
 	public AssetEntry updateAsset(
 			long userId, FileEntry fileEntry, FileVersion fileVersion,
 			long[] assetCategoryIds, String[] assetTagNames,
@@ -190,15 +207,7 @@ public class DLAppHelperLocalServiceImpl
 
 		AssetEntry assetEntry = null;
 
-		long fileEntryTypeId = 0;
-
-		LiferayFileEntry liferayFileEntry =
-			(LiferayFileEntry)fileEntry.getLatestFileVersion().getFileEntry();
-
-		if (liferayFileEntry != null) {
-			DLFileEntry dlFileEntry = liferayFileEntry.getDLFileEntry();
-			fileEntryTypeId = dlFileEntry.getFileEntryTypeId();
-		}
+		long fileEntryTypeId = getFileEntryTypeId(fileEntry);
 
 		if (addDraftAssetEntry) {
 			assetEntry = assetEntryLocalService.updateEntry(
@@ -215,21 +224,22 @@ public class DLAppHelperLocalServiceImpl
 				userId, fileEntry.getGroupId(),
 				DLFileEntryConstants.getClassName(),
 				fileEntry.getFileEntryId(), fileEntry.getUuid(),
-				fileEntryTypeId, assetCategoryIds, assetTagNames, visible, null,
-				null, null, null, mimeType, fileEntry.getTitle(),
+				fileEntryTypeId, assetCategoryIds, assetTagNames, visible,
+				null, null, null, null, mimeType, fileEntry.getTitle(),
 				fileEntry.getDescription(), null, null, null, height, width,
 				null, false);
 
-			List<DLFileShortcut> fileShortcuts =
+			List<DLFileShortcut> dlFileShortcuts =
 				dlFileShortcutPersistence.findByToFileEntryId(
 					fileEntry.getFileEntryId());
 
-			for (DLFileShortcut fileShortcut : fileShortcuts) {
+			for (DLFileShortcut dlFileShortcut : dlFileShortcuts) {
 				assetEntryLocalService.updateEntry(
-					userId, fileShortcut.getGroupId(),
+					userId, dlFileShortcut.getGroupId(),
 					DLFileShortcut.class.getName(),
-					fileShortcut.getFileShortcutId(), fileShortcut.getUuid(),
-					fileEntryTypeId, assetCategoryIds, assetTagNames, true,
+					dlFileShortcut.getFileShortcutId(),
+					dlFileShortcut.getUuid(), fileEntryTypeId,
+					assetCategoryIds, assetTagNames, true,
 					null, null, null, null, mimeType, fileEntry.getTitle(),
 					fileEntry.getDescription(), null, null, null, height, width,
 					null, false);
@@ -278,6 +288,8 @@ public class DLAppHelperLocalServiceImpl
 					AssetEntry draftAssetEntry = null;
 
 					try {
+						long fileEntryTypeId = getFileEntryTypeId(fileEntry);
+
 						draftAssetEntry = assetEntryLocalService.getEntry(
 							DLFileEntryConstants.getClassName(),
 							latestFileVersion.getPrimaryKey());
@@ -294,17 +306,6 @@ public class DLAppHelperLocalServiceImpl
 						long[] assetLinkEntryIds = StringUtil.split(
 							ListUtil.toString(
 								assetLinks, AssetLink.ENTRY_ID2_ACCESSOR), 0L);
-
-						long fileEntryTypeId = 0;
-
-						LiferayFileEntry liferayFileEntry = (LiferayFileEntry)
-							fileEntry.getLatestFileVersion().getFileEntry();
-
-						if (liferayFileEntry != null) {
-							DLFileEntry dlFileEntry =
-								liferayFileEntry.getDLFileEntry();
-							fileEntryTypeId = dlFileEntry.getFileEntryTypeId();
-						}
 
 						AssetEntry assetEntry =
 							assetEntryLocalService.updateEntry(
