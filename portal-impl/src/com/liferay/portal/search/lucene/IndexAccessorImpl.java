@@ -221,6 +221,22 @@ public class IndexAccessorImpl implements IndexAccessor {
 		}
 	}
 
+	private void _cleanUpJdbcDirectories() {
+		for (String tableName : _jdbcDirectories.keySet()) {
+			JdbcDirectory jdbcDirectory = (JdbcDirectory)_jdbcDirectories.get(
+				tableName);
+
+			try {
+				jdbcDirectory.deleteMarkDeleted(60000);
+			}
+			catch (IOException e) {
+				if (_log.isWarnEnabled()) {
+					_log.warn("Could not clean up JDBC directory " + tableName);
+				}
+			}
+		}
+	}
+
 	private void _commit() throws IOException {
 		if ((PropsValues.LUCENE_COMMIT_BATCH_SIZE == 0) ||
 			(PropsValues.LUCENE_COMMIT_BATCH_SIZE <= _batchCount)) {
@@ -305,22 +321,6 @@ public class IndexAccessorImpl implements IndexAccessor {
 	}
 
 	private void _deleteRam() {
-	}
-
-	private void _doCleanUpJdbc() {
-		for (String tableName : _jdbcDirectories.keySet()) {
-			JdbcDirectory jdbcDirectory = (JdbcDirectory)_jdbcDirectories.get(
-				tableName);
-
-			try {
-				jdbcDirectory.deleteMarkDeleted(60000);
-			}
-			catch (IOException e) {
-				if (_log.isWarnEnabled()) {
-					_log.warn("Could not clean up JDBC directory " + tableName);
-				}
-			}
-		}
 	}
 
 	private void _doCommit() throws IOException {
@@ -483,7 +483,7 @@ public class IndexAccessorImpl implements IndexAccessor {
 		Runnable runnable = new Runnable() {
 
 			public void run() {
-				_doCleanUpJdbc();
+				_cleanUpJdbcDirectories();
 			}
 
 		};
