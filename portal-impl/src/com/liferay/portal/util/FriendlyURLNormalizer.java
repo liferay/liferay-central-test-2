@@ -17,6 +17,7 @@ package com.liferay.portal.util;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -43,33 +44,34 @@ public class FriendlyURLNormalizer {
 		friendlyURL = friendlyURL.toLowerCase();
 		friendlyURL = Normalizer.normalizeToAscii(friendlyURL);
 
-		StringBuilder sb = null;
-		int lastReplacementIndex = 0;
+		StringBundler sb = null;
+
+		int index = 0;
 
 		for (int i = 0; i < friendlyURL.length(); i++) {
-			char oldChar = friendlyURL.charAt(i);
+			char c = friendlyURL.charAt(i);
 
-			if ((Arrays.binarySearch(_REPLACE_CHARS, oldChar) >= 0) ||
+			if ((Arrays.binarySearch(_REPLACE_CHARS, c) >= 0) ||
 				((replaceChars != null) &&
-				 ArrayUtil.contains(replaceChars, oldChar))) {
+				 ArrayUtil.contains(replaceChars, c))) {
 
 				if (sb == null) {
-					sb = new StringBuilder();
+					sb = new StringBundler();
 				}
 
-				if (i > lastReplacementIndex) {
-					sb.append(friendlyURL.substring(lastReplacementIndex, i));
+				if (i > index) {
+					sb.append(friendlyURL.substring(index, i));
 				}
 
 				sb.append(CharPool.DASH);
 
-				lastReplacementIndex = i + 1;
+				index = i + 1;
 			}
 		}
 
 		if (sb != null) {
-			if (lastReplacementIndex < friendlyURL.length()) {
-				sb.append(friendlyURL.substring(lastReplacementIndex));
+			if (index < friendlyURL.length()) {
+				sb.append(friendlyURL.substring(index));
 			}
 
 			friendlyURL = sb.toString();

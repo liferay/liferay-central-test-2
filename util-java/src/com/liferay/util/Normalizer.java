@@ -24,7 +24,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 public class Normalizer {
 
 	public static String normalizeToAscii(String s) {
-		if (!hasNonASCIICode(s)) {
+		if (!_hasNonASCIICode(s)) {
 			return s;
 		}
 
@@ -34,7 +34,7 @@ public class Normalizer {
 			normalizedText, _UNICODE_TEXT, _NORMALIZED_TEXT);
 	}
 
-	private static boolean hasNonASCIICode(String s) {
+	private static boolean _hasNonASCIICode(String s) {
 		for (int i = 0; i < s.length(); i++) {
 			if (s.charAt(i) > 127) {
 				return true;
@@ -48,7 +48,7 @@ public class Normalizer {
 
 	private static final String _UNICODE_TEXT = "\u0142";
 
-	private static Transliterator _transliterator =
-		Transliterator.getInstance("NFD; [:Nonspacing Mark:] Remove; NFC");
+	private static Transliterator _transliterator = Transliterator.getInstance(
+		"NFD; [:Nonspacing Mark:] Remove; NFC");
 
 }
