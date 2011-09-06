@@ -285,7 +285,7 @@
 	.permission-group {
 		margin: 10px 0 0 10px;
 	}
-	
+
 	.view-all-link {
 		color: #666;
 		font-weight: normal;

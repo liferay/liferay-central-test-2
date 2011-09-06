@@ -46,18 +46,18 @@
 
 	int organizationUserCount = UserLocalServiceUtil.searchCount(company.getCompanyId(), null, 0, userParams);
 
-	if (suborganizationsCount > 0 || organizationUserCount > 0) {
+	if ((suborganizationsCount > 0) || (organizationUserCount > 0)) {
 		buffer.append("<br /><em>");
 
-		if (suborganizationsCount > 0){
+		if (suborganizationsCount > 0) {
 			buffer.append((suborganizationsCount == 1) ? LanguageUtil.format(pageContext, "x-suborganization", String.valueOf(suborganizationsCount)) : LanguageUtil.format(pageContext, "x-suborganizations", String.valueOf(suborganizationsCount)));
 		}
 
-		if (suborganizationsCount > 0 && organizationUserCount > 0) {
+		if ((suborganizationsCount > 0) && (organizationUserCount > 0)) {
 			buffer.append(StringPool.SPACE + LanguageUtil.get(pageContext, "and").toLowerCase() + StringPool.SPACE);
 		}
 
-		if (organizationUserCount > 0){
+		if (organizationUserCount > 0) {
 			buffer.append((organizationUserCount == 1) ? LanguageUtil.format(pageContext, "x-user", String.valueOf(organizationUserCount)) : LanguageUtil.format(pageContext, "x-users", String.valueOf(organizationUserCount)));
 		}
 
