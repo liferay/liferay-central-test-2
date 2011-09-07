@@ -144,7 +144,7 @@ public Map<String, PortletURL> getAddPortletURLs(LiferayPortletRequest liferayPo
 
 		Map<Long, String> classTypes = assetRendererFactory.getClassTypes(new long[] {themeDisplay.getCompanyGroupId(), themeDisplay.getScopeGroupId()});
 
-		if (classTypeIds.length == 0 || classTypes == null) {
+		if ((classTypeIds.length == 0) || (classTypes == null)) {
 			PortletURL addPortletURL = getAddPortletURL(liferayPortletRequest, liferayPortletResponse, className, allAssetCategoryIds, allAssetTagNames, -1, StringPool.BLANK);
 
 			if (addPortletURL != null) {
@@ -153,12 +153,13 @@ public Map<String, PortletURL> getAddPortletURLs(LiferayPortletRequest liferayPo
 		}
 
 		if (classTypes != null) {
-			for(Long classTypeId : classTypes.keySet()) {
+			for (long classTypeId : classTypes.keySet()) {
 				if (ArrayUtil.contains(classTypeIds, classTypeId) || (classTypeIds.length == 0)) {
 					PortletURL addPortletURL = getAddPortletURL(liferayPortletRequest, liferayPortletResponse, className, allAssetCategoryIds, allAssetTagNames, classTypeId, StringPool.BLANK);
 
 					if (addPortletURL != null) {
 						String mesage = className + _CLASSNAME_SEPARATOR + classTypes.get(classTypeId);
+
 						addPortletURLs.put(mesage, addPortletURL);
 					}
 				}
