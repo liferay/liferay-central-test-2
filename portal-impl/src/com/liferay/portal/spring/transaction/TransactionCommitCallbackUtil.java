@@ -27,46 +27,47 @@ import java.util.concurrent.Callable;
 public class TransactionCommitCallbackUtil {
 
 	public static void registerCallback(Callable<?> callable) {
-		List<List<Callable<?>>> callbackListStack =
-			_transactionCommitCallbackThreadLocal.get();
+		List<List<Callable<?>>> callbackListList =
+			_callbackListListThreadLocal.get();
 
-		int lastIndex = callbackListStack.size() - 1;
+		int index = callbackListList.size() - 1;
 
-		List<Callable<?>> callbackList = callbackListStack.get(lastIndex);
+		List<Callable<?>> callableList = callbackListList.get(index);
 
-		if (callbackList == Collections.EMPTY_LIST) {
-			callbackList = new ArrayList<Callable<?>>();
-			callbackListStack.set(lastIndex, callbackList);
+		if (callableList == Collections.EMPTY_LIST) {
+			callableList = new ArrayList<Callable<?>>();
+
+			callbackListList.set(index, callableList);
 		}
 
-		callbackList.add(callable);
-	}
-
-	protected static void pushCallbackList() {
-		List<List<Callable<?>>> callbackListStack =
-			_transactionCommitCallbackThreadLocal.get();
-
-		callbackListStack.add(Collections.EMPTY_LIST);
+		callableList.add(callable);
 	}
 
 	protected static List<Callable<?>> popCallbackList() {
-		List<List<Callable<?>>> callbackListStack =
-			_transactionCommitCallbackThreadLocal.get();
+		List<List<Callable<?>>> callbackListList =
+			_callbackListListThreadLocal.get();
 
-		return callbackListStack.remove(callbackListStack.size() - 1);
+		return callbackListList.remove(callbackListList.size() - 1);
+	}
+
+	protected static void pushCallbackList() {
+		List<List<Callable<?>>> callbackListList =
+			_callbackListListThreadLocal.get();
+
+		callbackListList.add(Collections.EMPTY_LIST);
 	}
 
 	private static ThreadLocal<List<List<Callable<?>>>>
-		_transactionCommitCallbackThreadLocal =
-		new AutoResetThreadLocal<List<List<Callable<?>>>>(
-			TransactionCommitCallbackUtil.class +
-				"._transactionCommitCallbackThreadLocal") {
+		_callbackListListThreadLocal =
+			new AutoResetThreadLocal<List<List<Callable<?>>>>(
+				TransactionCommitCallbackUtil.class +
+					"._callbackListListThreadLocal") {
 
-					@Override
-					protected List<List<Callable<?>>> initialValue() {
-						return new ArrayList<List<Callable<?>>>();
-					}
+				@Override
+				protected List<List<Callable<?>>> initialValue() {
+					return new ArrayList<List<Callable<?>>>();
+				}
 
-				};
+			};
 
 }

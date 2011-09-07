@@ -196,15 +196,16 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 			userId, folderId, sourceFileName, mimeType, title, description,
 			changeLog, file, serviceContext);
 
-		TransactionCommitCallbackUtil.registerCallback(new Callable<Void>() {
+		TransactionCommitCallbackUtil.registerCallback(
+			new Callable<Void>() {
 
-			public Void call() throws Exception {
-				DLProcessorRegistryUtil.trigger(fileEntry);
+				public Void call() throws Exception {
+					DLProcessorRegistryUtil.trigger(fileEntry);
 
-				return null;
-			}
+					return null;
+				}
 
-		});
+			});
 
 		return fileEntry;
 	}
@@ -270,15 +271,16 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 			userId, folderId, sourceFileName, mimeType, title, description,
 			changeLog, is, size, serviceContext);
 
-		TransactionCommitCallbackUtil.registerCallback(new Callable<Void>() {
+		TransactionCommitCallbackUtil.registerCallback(
+			new Callable<Void>() {
 
-			public Void call() throws Exception {
-				DLProcessorRegistryUtil.trigger(fileEntry);
+				public Void call() throws Exception {
+					DLProcessorRegistryUtil.trigger(fileEntry);
 
-				return null;
-			}
+					return null;
+				}
 
-		});
+			});
 
 		return fileEntry;
 	}
@@ -1416,15 +1418,16 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 			userId, fileEntryId, sourceFileName, mimeType, title, description,
 			changeLog, majorVersion, file, serviceContext);
 
-		TransactionCommitCallbackUtil.registerCallback(new Callable<Void>() {
+		TransactionCommitCallbackUtil.registerCallback(
+			new Callable<Void>() {
 
-			public Void call() throws Exception {
-				DLProcessorRegistryUtil.trigger(fileEntry);
+				public Void call() throws Exception {
+					DLProcessorRegistryUtil.trigger(fileEntry);
 
-				return null;
-			}
+					return null;
+				}
 
-		});
+			});
 
 		return fileEntry;
 	}
@@ -1488,15 +1491,16 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 			userId, fileEntryId, sourceFileName, mimeType, title, description,
 			changeLog, majorVersion, is, size, serviceContext);
 
-		TransactionCommitCallbackUtil.registerCallback(new Callable<Void>() {
+		TransactionCommitCallbackUtil.registerCallback(
+			new Callable<Void>() {
 
-			public Void call() throws Exception {
-				DLProcessorRegistryUtil.trigger(fileEntry);
+				public Void call() throws Exception {
+					DLProcessorRegistryUtil.trigger(fileEntry);
 
-				return null;
-			}
+					return null;
+				}
 
-		});
+			});
 
 		return fileEntry;
 	}

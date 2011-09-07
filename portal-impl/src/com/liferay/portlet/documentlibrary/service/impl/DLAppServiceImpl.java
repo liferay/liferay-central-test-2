@@ -207,15 +207,16 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 			folderId, sourceFileName, mimeType, title, description,
 			changeLog, file, serviceContext);
 
-		TransactionCommitCallbackUtil.registerCallback(new Callable<Void>() {
+		TransactionCommitCallbackUtil.registerCallback(
+			new Callable<Void>() {
 
-			public Void call() throws Exception {
-				DLProcessorRegistryUtil.trigger(fileEntry);
+				public Void call() throws Exception {
+					DLProcessorRegistryUtil.trigger(fileEntry);
 
-				return null;
-			}
+					return null;
+				}
 
-		});
+			});
 
 		return fileEntry;
 	}
@@ -279,15 +280,16 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 			folderId, sourceFileName, mimeType, title, description, changeLog,
 			is, size, serviceContext);
 
-		TransactionCommitCallbackUtil.registerCallback(new Callable<Void>() {
+		TransactionCommitCallbackUtil.registerCallback(
+			new Callable<Void>() {
 
-			public Void call() throws Exception {
-				DLProcessorRegistryUtil.trigger(fileEntry);
+				public Void call() throws Exception {
+					DLProcessorRegistryUtil.trigger(fileEntry);
 
-				return null;
-			}
+					return null;
+				}
 
-		});
+			});
 
 		return fileEntry;
 	}
@@ -2062,15 +2064,16 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 			fileEntryId, sourceFileName, mimeType, title, description,
 			changeLog, majorVersion, file, serviceContext);
 
-		TransactionCommitCallbackUtil.registerCallback(new Callable<Void>() {
+		TransactionCommitCallbackUtil.registerCallback(
+			new Callable<Void>() {
 
-			public Void call() throws Exception {
-				DLProcessorRegistryUtil.trigger(fileEntry);
+				public Void call() throws Exception {
+					DLProcessorRegistryUtil.trigger(fileEntry);
 
-				return null;
-			}
+					return null;
+				}
 
-		});
+			});
 
 		return fileEntry;
 	}
@@ -2132,15 +2135,16 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 			fileEntryId, sourceFileName, mimeType, title, description,
 			changeLog, majorVersion, is, size, serviceContext);
 
-		TransactionCommitCallbackUtil.registerCallback(new Callable<Void>() {
+		TransactionCommitCallbackUtil.registerCallback(
+			new Callable<Void>() {
 
-			public Void call() throws Exception {
-				DLProcessorRegistryUtil.trigger(fileEntry);
+				public Void call() throws Exception {
+					DLProcessorRegistryUtil.trigger(fileEntry);
 
-				return null;
-			}
+					return null;
+				}
 
-		});
+			});
 
 		return fileEntry;
 	}
@@ -2166,15 +2170,16 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 		repository.checkInFileEntry(
 			fileEntryId, majorVersion, changeLog, serviceContext);
 
-		TransactionCommitCallbackUtil.registerCallback(new Callable<Void>() {
+		TransactionCommitCallbackUtil.registerCallback(
+			new Callable<Void>() {
 
-			public Void call() throws Exception {
-				DLProcessorRegistryUtil.trigger(fileEntry);
+				public Void call() throws Exception {
+					DLProcessorRegistryUtil.trigger(fileEntry);
 
-				return null;
-			}
+					return null;
+				}
 
-		});
+			});
 
 		return fileEntry;
 	}
@@ -2195,15 +2200,16 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 		repository.checkInFileEntry(
 			fileEntryId, majorVersion, changeLog, serviceContext);
 
-		TransactionCommitCallbackUtil.registerCallback(new Callable<Void>() {
+		TransactionCommitCallbackUtil.registerCallback(
+			new Callable<Void>() {
 
-			public Void call() throws Exception {
-				DLProcessorRegistryUtil.trigger(fileEntry);
+				public Void call() throws Exception {
+					DLProcessorRegistryUtil.trigger(fileEntry);
 
-				return null;
-			}
+					return null;
+				}
 
-		});
+			});
 
 		return fileEntry;
 	}
@@ -2327,25 +2333,25 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		Queue<Folder[]> folderQueue = new LinkedList<Folder[]>();
-		final List<FileEntry> fileEntryList = new ArrayList<FileEntry>();
+		Queue<Folder[]> folders = new LinkedList<Folder[]>();
+		final List<FileEntry> fileEntries = new ArrayList<FileEntry>();
 
-		Folder currentSrcFolder = srcFolder;
-		Folder currentDestFolder = destFolder;
+		Folder curSrcFolder = srcFolder;
+		Folder curDestFolder = destFolder;
 
 		while (true) {
 			List<FileEntry> srcFileEntries = repository.getFileEntries(
-				currentSrcFolder.getFolderId(), QueryUtil.ALL_POS,
+				curSrcFolder.getFolderId(), QueryUtil.ALL_POS,
 				QueryUtil.ALL_POS, null);
 
 			for (FileEntry srcFileEntry : srcFileEntries) {
 				try {
 					FileEntry fileEntry = repository.copyFileEntry(
-						currentDestFolder.getGroupId(),
+						curDestFolder.getGroupId(),
 						srcFileEntry.getFileEntryId(),
-						currentDestFolder.getFolderId(), serviceContext);
+						curDestFolder.getFolderId(), serviceContext);
 
-					fileEntryList.add(fileEntry);
+					fileEntries.add(fileEntry);
 				}
 				catch (Exception e) {
 					_log.error(e, e);
@@ -2355,39 +2361,40 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 			}
 
 			List<Folder> srcSubfolders = repository.getFolders(
-				currentSrcFolder.getFolderId(), false, QueryUtil.ALL_POS,
+				curSrcFolder.getFolderId(), false, QueryUtil.ALL_POS,
 				QueryUtil.ALL_POS, null);
 
 			for (Folder srcSubfolder : srcSubfolders) {
 				Folder destSubfolder = repository.addFolder(
-					currentDestFolder.getFolderId(), srcSubfolder.getName(),
+					curDestFolder.getFolderId(), srcSubfolder.getName(),
 					srcSubfolder.getDescription(), serviceContext);
 
-				folderQueue.offer(new Folder[]{srcSubfolder, destSubfolder});
+				folders.offer(new Folder[] {srcSubfolder, destSubfolder});
 			}
 
-			Folder[] next = folderQueue.poll();
+			Folder[] next = folders.poll();
 
 			if (next == null) {
 				break;
 			}
 			else {
-				currentSrcFolder = next[0];
-				currentDestFolder = next[1];
+				curSrcFolder = next[0];
+				curDestFolder = next[1];
 			}
 		}
 
-		TransactionCommitCallbackUtil.registerCallback(new Callable<Void>() {
+		TransactionCommitCallbackUtil.registerCallback(
+			new Callable<Void>() {
 
-			public Void call() throws Exception {
-				for (FileEntry fileEntry : fileEntryList) {
-					DLProcessorRegistryUtil.trigger(fileEntry);
+				public Void call() throws Exception {
+					for (FileEntry fileEntry : fileEntries) {
+						DLProcessorRegistryUtil.trigger(fileEntry);
+					}
+
+					return null;
 				}
 
-				return null;
-			}
-
-		});
+			});
 	}
 
 	protected Repository getRepository(long repositoryId)

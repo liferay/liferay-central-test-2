@@ -59,10 +59,9 @@ public class TransactionInterceptor implements MethodInterceptor {
 		TransactionStatus transactionStatus =
 			_platformTransactionManager.getTransaction(transactionAttribute);
 
-		boolean newTransaction = transactionStatus.isNewTransaction();
-
-		if (newTransaction) {
+		if (transactionStatus.isNewTransaction()) {
 			TransactionalPortalCacheHelper.begin();
+
 			TransactionCommitCallbackUtil.pushCallbackList();
 		}
 
@@ -72,104 +71,125 @@ public class TransactionInterceptor implements MethodInterceptor {
 			returnValue = methodInvocation.proceed();
 		}
 		catch (Throwable throwable) {
-			if (transactionAttribute.rollbackOn(throwable)) {
-				try {
-					_platformTransactionManager.rollback(transactionStatus);
-				}
-				catch (TransactionSystemException tse) {
-					_log.error("Application exception overridden by rollback "
-						+ "exception", tse);
-					throw tse;
-				}
-				catch (RuntimeException re) {
-					_log.error("Application exception overridden by rollback "
-						+ "exception", re);
-					throw re;
-				}
-				catch (Error e) {
-					_log.error("Application exception overridden by rollback "
-						+ "error", e);
-					throw e;
-				}
-				finally {
-					if (newTransaction) {
-						TransactionalPortalCacheHelper.rollback();
-						TransactionCommitCallbackUtil.popCallbackList();
-					}
-				}
-			}
-			else {
-				boolean hasError = false;
-
-				try {
-					_platformTransactionManager.commit(transactionStatus);
-				}
-				catch (TransactionSystemException tse) {
-					_log.error("Application exception overridden by commit "
-						+ "exception", tse);
-
-					hasError = true;
-
-					throw tse;
-				}
-				catch (RuntimeException re) {
-					_log.error("Application exception overridden by commit "
-						+ "exception", re);
-
-					hasError = true;
-
-					throw re;
-				}
-				catch (Error e) {
-					_log.error("Application exception overridden by commit "
-						+ "error", e);
-
-					hasError = true;
-
-					throw e;
-				}
-				finally {
-					if (newTransaction) {
-						if (hasError) {
-							TransactionalPortalCacheHelper.rollback();
-							TransactionCommitCallbackUtil.popCallbackList();
-						}
-						else {
-							TransactionalPortalCacheHelper.commit();
-							invokeCallbacks();
-						}
-					}
-				}
-			}
-
-			throw throwable;
+			processThrowable(
+				throwable, transactionAttribute, transactionStatus);
 		}
 
 		_platformTransactionManager.commit(transactionStatus);
 
-		if (newTransaction) {
+		if (transactionStatus.isNewTransaction()) {
 			TransactionalPortalCacheHelper.commit();
+
 			invokeCallbacks();
 		}
 
 		return returnValue;
 	}
 
-	public void setTransactionManager(
+	public void setPlatformTransactionManager(
 		PlatformTransactionManager platformTransactionManager) {
+
 		_platformTransactionManager = platformTransactionManager;
 	}
 
 	public void setTransactionAttributeSource(
 		TransactionAttributeSource transactionAttributeSource) {
+
 		this.transactionAttributeSource = transactionAttributeSource;
 	}
 
+	protected void processThrowable(
+			Throwable throwable, TransactionAttribute transactionAttribute,
+			TransactionStatus transactionStatus)
+		throws Throwable {
+
+		if (transactionAttribute.rollbackOn(throwable)) {
+			try {
+				_platformTransactionManager.rollback(transactionStatus);
+			}
+			catch (TransactionSystemException tse) {
+				_log.error(
+					"Application exception overridden by rollback exception",
+					tse);
+
+				throw tse;
+			}
+			catch (RuntimeException re) {
+				_log.error(
+					"Application exception overridden by rollback exception",
+					re);
+
+				throw re;
+			}
+			catch (Error e) {
+				_log.error(
+					"Application exception overridden by rollback error", e);
+
+				throw e;
+			}
+			finally {
+				if (transactionStatus.isNewTransaction()) {
+					TransactionalPortalCacheHelper.rollback();
+
+					TransactionCommitCallbackUtil.popCallbackList();
+				}
+			}
+		}
+		else {
+			boolean hasError = false;
+
+			try {
+				_platformTransactionManager.commit(transactionStatus);
+			}
+			catch (TransactionSystemException tse) {
+				_log.error(
+					"Application exception overridden by commit exception",
+					tse);
+
+				hasError = true;
+
+				throw tse;
+			}
+			catch (RuntimeException re) {
+				_log.error(
+					"Application exception overridden by commit exception", re);
+
+				hasError = true;
+
+				throw re;
+			}
+			catch (Error e) {
+				_log.error(
+					"Application exception overridden by commit error", e);
+
+				hasError = true;
+
+				throw e;
+			}
+			finally {
+				if (transactionStatus.isNewTransaction()) {
+					if (hasError) {
+						TransactionalPortalCacheHelper.rollback();
+
+						TransactionCommitCallbackUtil.popCallbackList();
+					}
+					else {
+						TransactionalPortalCacheHelper.commit();
+
+						invokeCallbacks();
+					}
+				}
+			}
+		}
+
+		throw throwable;
+	}
+
 	private void invokeCallbacks() {
-		List<Callable<?>> callbackList =
+		List<Callable<?>> callables =
 			TransactionCommitCallbackUtil.popCallbackList();
 
-		for (Callable<?> callable : callbackList) {
+		for (Callable<?> callable : callables) {
 			try {
 				callable.call();
 			}
@@ -179,10 +199,10 @@ public class TransactionInterceptor implements MethodInterceptor {
 		}
 	}
 
+	protected TransactionAttributeSource transactionAttributeSource;
+
 	private static Log _log = LogFactoryUtil.getLog(
 		TransactionInterceptor.class);
-
-	protected TransactionAttributeSource transactionAttributeSource;
 
 	private PlatformTransactionManager _platformTransactionManager;
 
