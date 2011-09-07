@@ -380,7 +380,8 @@ public class BaseDeployer implements Deployer {
 					"/WEB-INF/classes/portlet.properties");
 
 			if (!portletPropertiesFile.exists()) {
-				FileUtil.write(portletPropertiesFile,
+				FileUtil.write(
+					portletPropertiesFile,
 					"plugin.package.name=" + pluginPackage.getName());
 			}
 		}
@@ -436,15 +437,15 @@ public class BaseDeployer implements Deployer {
 		if (appServerType.equals(ServerDetector.GERONIMO_ID)) {
 			copyDependencyXml("geronimo-web.xml", srcFile + "/WEB-INF");
 		}
+		else if (appServerType.equals(ServerDetector.JBOSS_ID)) {
+			copyDependencyXml(
+				"jboss-deployment-structure.xml", srcFile + "/WEB-INF");
+		}
 		else if (appServerType.equals(ServerDetector.WEBLOGIC_ID)) {
 			copyDependencyXml("weblogic.xml", srcFile + "/WEB-INF");
 		}
 		else if (appServerType.equals(ServerDetector.WEBSPHERE_ID)) {
 			copyDependencyXml("ibm-web-ext.xmi", srcFile + "/WEB-INF");
-		}
-		else if (appServerType.equals(ServerDetector.JBOSS_ID)) {
-			copyDependencyXml("jboss-deployment-structure.xml",
-				srcFile + "/WEB-INF");
 		}
 
 		copyDependencyXml("web.xml", srcFile + "/WEB-INF");
@@ -821,9 +822,9 @@ public class BaseDeployer implements Deployer {
 				}
 				else {
 					if (appServerType.equals(ServerDetector.JBOSS_ID)) {
-						File dodeployFile = new File(deployDir + ".dodeploy");
+						File doDeployFile = new File(deployDir + ".dodeploy");
 
-						FileUtil.write(dodeployFile, StringPool.BLANK);
+						FileUtil.write(doDeployFile, StringPool.BLANK);
 					}
 				}
 			}
