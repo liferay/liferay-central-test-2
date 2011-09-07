@@ -17,7 +17,9 @@
 <%@ include file="/html/portlet/document_library/init.jsp" %>
 
 <%
-String redirect = ParamUtil.getString(request, "redirect");
+SearchContainer searchContainer = (SearchContainer)request.getAttribute("liferay-ui:search:searchContainer");
+
+String redirect = searchContainer.getIteratorURL().toString();
 
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
