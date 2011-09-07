@@ -71,9 +71,25 @@ public class AddNewBlogsEntryAPActionsTest extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace("Blogs Entry"),
 			selenium.getText(
 				"//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a"));
-		selenium.click(RuntimeVariables.replace(
-				"//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a"));
-		selenium.waitForPageToLoad("30000");
+		selenium.clickAt("//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a",
+			RuntimeVariables.replace("Blogs Entry"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("//input[@id='_33_title']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.saveScreenShotAndSource();
 		selenium.type("//input[@id='_33_title']",
 			RuntimeVariables.replace("Blogs Entry Title"));
