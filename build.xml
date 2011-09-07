@@ -412,9 +412,10 @@ JAVA_OPTS="$JAVA_OPTS -Dfile.encoding=UTF-8 -Djava.net.preferIPv4Stack=true -Dus
 							file="tools/servers/jetty/bin/start.ini"
 							tofile="${app.server.bin.dir}/start.ini"
 						/>
+
 						<replace file="${app.server.jetty.bin.dir}/start.ini">
 							<replacetoken>JETTY_EXTRA_CLASSPATH</replacetoken>
-							<replacevalue expandProperties="true">../lib/jetty-server-${app.server.jetty.version}.v${app.server.jetty.release.date}.jar,../lib/jetty-util.${app.server.jetty.version}-v${app.server.jetty.release.date}.jar,../lib/jetty-webapp-${app.server.jetty.version}.v${app.server.jetty.release.date}.jar</replacevalue>
+							<replacevalue expandProperties="true">../lib/jetty-server-${app.server.jetty.version}.v${app.server.jetty.version.date}.jar,../lib/jetty-util.${app.server.jetty.version}-v${app.server.jetty.version.date}.jar,../lib/jetty-webapp-${app.server.jetty.version}.v${app.server.jetty.version.date}.jar</replacevalue>
 						</replace>
 					</then>
 				</if>
@@ -457,7 +458,7 @@ $(jetty.home)/lib/liferay/*</echo>
 				<copy todir="${app.server.lib.global.dir}">
 					<fileset
 						dir="lib/development"
-						includes="activation.jar,mail.jar,jta.jar,persistence.jar"
+						includes="activation.jar,jta.jar,mail.jar,persistence.jar"
 					/>
 				</copy>
 			</then>
