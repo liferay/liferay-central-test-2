@@ -41,8 +41,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * @author Brian Wing Shun Chan
  */
-public class CustomAttributesAvailableTag
-	extends TagSupport {
+public class CustomAttributesAvailableTag extends TagSupport {
 
 	@Override
 	public int doStartTag() {
