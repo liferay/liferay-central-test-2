@@ -227,43 +227,6 @@ public class UpgradeImageGallery extends UpgradeProcess {
 		}
 	}
 
-	protected boolean dlFolderExist(
-		long groupId, String name, long parentFolderId, long folderId,
-		Map<Long, Long> folderIds)
-		throws Exception {
-
-		Connection con = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-
-		try {
-			con = DataAccess.getConnection();
-
-			ps = con.prepareStatement(
-				"select folderId from DLFolder" +
-				" where parentFolderId = " + parentFolderId +
-				" and groupId = " + groupId +
-				" and name = '" + name + "'");
-
-			rs = ps.executeQuery();
-
-			if (rs.next()) {
-				long newFolderId = rs.getLong("folderId");
-
-				updateIGFolderId(newFolderId, folderId);
-
-				folderIds.put(folderId, newFolderId);
-
-				return true;
-			}
-		}
-		finally {
-			DataAccess.cleanUp(con, ps, rs);
-		}
-
-		return false;
-	}
-
 	@Override
 	protected void doUpgrade() throws Exception {
 		updateIGFolderEntries();
@@ -442,10 +405,10 @@ public class UpgradeImageGallery extends UpgradeProcess {
 					parentFolderId = folderIds.get(parentFolderId);
 				}
 
-				boolean dlFolderExist = dlFolderExist(
+				boolean update = updateIGImageFolderId(
 					groupId, name, parentFolderId, folderId, folderIds);
 
-				if (!dlFolderExist) {
+				if (!update) {
 					addDLFolderEntry(
 						uuid, folderId, groupId, companyId, userId, userName,
 						createDate, modifiedDate, groupId, parentFolderId, name,
@@ -454,32 +417,6 @@ public class UpgradeImageGallery extends UpgradeProcess {
 			}
 
 			runSQL("drop table IGFolder");
-		}
-		finally {
-			DataAccess.cleanUp(con, ps, rs);
-		}
-	}
-
-	protected void updateIGFolderId(long newFolderId, long oldFolderId)
-		throws Exception {
-
-		Connection con = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-
-		try {
-			con = DataAccess.getConnection();
-
-			StringBundler sb = new StringBundler(4);
-
-			sb.append("update IGImage set folderId = ");
-			sb.append(newFolderId);
-			sb.append(" where folderId = ");
-			sb.append(oldFolderId);
-
-			ps = con.prepareStatement(sb.toString());
-
-			ps.executeUpdate();
 		}
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
@@ -579,6 +516,44 @@ public class UpgradeImageGallery extends UpgradeProcess {
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
 		}
+	}
+
+	protected boolean updateIGImageFolderId(
+			long groupId, String name, long parentFolderId, long folderId,
+			Map<Long, Long> folderIds)
+		throws Exception {
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = DataAccess.getConnection();
+
+			ps = con.prepareStatement(
+				"select folderId from DLFolder where groupId = " + groupId +
+					" and parentFolderId = " + parentFolderId +
+						" and name = '" + name + "'");
+
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
+				long newFolderId = rs.getLong("folderId");
+
+				runSQL(
+					"update IGImage set folderId = " + newFolderId +
+						" where folderId = " + folderId);
+
+				folderIds.put(folderId, newFolderId);
+
+				return true;
+			}
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
+
+		return false;
 	}
 
 	protected void updateIGImagePermissions() throws Exception {
