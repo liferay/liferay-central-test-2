@@ -81,12 +81,6 @@ AUI().add(
 						instance._displayStyle = namespace + 'displayStyle';
 						instance._folderId = namespace + 'folderId';
 
-						var page = 0;
-
-						if (config.entriesTotal > 0) {
-							page = config.entryEnd / (config.entryEnd - config.entryStart);
-						}
-
 						var entryPaginator = new A.Paginator(
 							{
 								circular: false,
@@ -94,7 +88,7 @@ AUI().add(
 								firstPageLinkLabel: '<<',
 								lastPageLinkLabel: '>>',
 								nextPageLinkLabel: '>',
-								page: page,
+								page: config.entryEnd / config.entryRowsPerPage,
 								prevPageLinkLabel: '<',
 								rowsPerPage: config.entryRowsPerPage,
 								rowsPerPageOptions: config.entryRowsPerPageOptions,
@@ -112,6 +106,7 @@ AUI().add(
 								firstPageLinkLabel: '<<',
 								lastPageLinkLabel: '>>',
 								nextPageLinkLabel: '>',
+								page: config.folderEnd / config.folderRowsPerPage,
 								prevPageLinkLabel: '<',
 								rowsPerPage: config.folderRowsPerPage,
 								rowsPerPageOptions: config.folderRowsPerPageOptions,
