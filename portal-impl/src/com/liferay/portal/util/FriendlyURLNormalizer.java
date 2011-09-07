@@ -17,7 +17,6 @@ package com.liferay.portal.util;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -44,7 +43,7 @@ public class FriendlyURLNormalizer {
 		friendlyURL = friendlyURL.toLowerCase();
 		friendlyURL = Normalizer.normalizeToAscii(friendlyURL);
 
-		StringBundler sb = null;
+		StringBuilder sb = null;
 
 		int index = 0;
 
@@ -56,7 +55,7 @@ public class FriendlyURLNormalizer {
 				 ArrayUtil.contains(replaceChars, c))) {
 
 				if (sb == null) {
-					sb = new StringBundler();
+					sb = new StringBuilder();
 				}
 
 				if (i > index) {
