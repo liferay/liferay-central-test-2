@@ -83,7 +83,7 @@ AUI().add(
 
 						var page = 0;
 
-						if(config.entriesTotal > 0){
+						if (config.entriesTotal > 0) {
 							page = config.entryEnd / (config.entryEnd - config.entryStart);
 						}
 
