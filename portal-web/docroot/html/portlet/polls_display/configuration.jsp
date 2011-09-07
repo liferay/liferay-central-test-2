@@ -1,4 +1,3 @@
-<%@ page import="com.liferay.portal.security.auth.CompanyThreadLocal" %>
 <%--
 /**
  * Copyright (c) 2000-2011 Liferay, Inc. All rights reserved.
@@ -22,11 +21,11 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 questionId = ParamUtil.getLong(request, "questionId", questionId);
 
-List<PollsQuestion> questions = new ArrayList<PollsQuestion>();
-
-questions.addAll(PollsQuestionLocalServiceUtil.getQuestions(scopeGroupId));
+List<PollsQuestion> questions = PollsQuestionLocalServiceUtil.getQuestions(scopeGroupId);
 
 if (scopeGroupId != themeDisplay.getCompanyGroupId()) {
+	questions = ListUtil.copy(questions);
+
 	questions.addAll(PollsQuestionLocalServiceUtil.getQuestions(themeDisplay.getCompanyGroupId()));
 }
 %>
