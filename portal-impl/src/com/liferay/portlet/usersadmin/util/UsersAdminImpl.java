@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Tuple;
 import com.liferay.portal.kernel.util.Validator;
@@ -599,11 +600,15 @@ public class UsersAdminImpl implements UsersAdmin {
 			catch (NoSuchOrganizationException nsoe) {
 				corruptIndex = true;
 
-				_log.error(
-					"Organization " + organizationId + " exists in the " +
-						"search index but not in the database. The search " +
-							"index is corrupt. Re-indexing of organizations " +
-								"may be required.");
+				StringBundler sb = new StringBundler();
+
+				sb.append("Organization ");
+				sb.append(organizationId);
+				sb.append(" exists in the search index but not in the ");
+				sb.append("database. The search index is corrupt. Reindexing ");
+				sb.append("of organizations may be required.");
+
+				_log.error(sb.toString());
 			}
 		}
 
