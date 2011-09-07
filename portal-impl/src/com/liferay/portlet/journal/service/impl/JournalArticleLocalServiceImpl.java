@@ -2182,8 +2182,6 @@ public class JournalArticleLocalServiceImpl
 		// Get the earliest display date and latest expiration date among
 		// all article versions
 
-		long classTypeId = getClassTypeId(article);
-
 		Date[] dateInterval = getDateInterval(
 			article.getGroupId(), article.getArticleId(),
 			article.getDisplayDate(), article.getExpirationDate());
@@ -2217,9 +2215,9 @@ public class JournalArticleLocalServiceImpl
 		if (addDraftAssetEntry) {
 			assetEntry = assetEntryLocalService.updateEntry(
 				userId, article.getGroupId(), JournalArticle.class.getName(),
-				article.getPrimaryKey(), article.getUuid(), classTypeId,
-				assetCategoryIds, assetTagNames, false, null, null,
-				displayDate, expirationDate, ContentTypes.TEXT_HTML,
+				article.getPrimaryKey(), article.getUuid(),
+				getClassTypeId(article), assetCategoryIds, assetTagNames, false,
+				null, null, displayDate, expirationDate, ContentTypes.TEXT_HTML,
 				article.getTitle(), article.getDescription(),
 				article.getDescription(), null, article.getLayoutUuid(), 0, 0,
 				null, false);
@@ -2232,11 +2230,12 @@ public class JournalArticleLocalServiceImpl
 			assetEntry = assetEntryLocalService.updateEntry(
 				userId, article.getGroupId(), JournalArticle.class.getName(),
 				journalArticleResource.getResourcePrimKey(),
-				journalArticleResource.getUuid(), classTypeId, assetCategoryIds,
-				assetTagNames, visible, null, null, displayDate, expirationDate,
-				ContentTypes.TEXT_HTML, article.getTitle(),
-				article.getDescription(), article.getDescription(), null,
-				article.getLayoutUuid(), 0, 0, null, false);
+				journalArticleResource.getUuid(), getClassTypeId(article),
+				assetCategoryIds, assetTagNames, visible, null, null,
+				displayDate, expirationDate, ContentTypes.TEXT_HTML,
+				article.getTitle(), article.getDescription(),
+				article.getDescription(), null, article.getLayoutUuid(), 0, 0,
+				null, false);
 		}
 
 		assetLinkLocalService.updateLinks(
@@ -2344,15 +2343,13 @@ public class JournalArticleLocalServiceImpl
 							visible = false;
 						}
 
-						long classTypeId = getClassTypeId(article);
-
 						AssetEntry assetEntry =
 							assetEntryLocalService.updateEntry(
 								userId, article.getGroupId(),
 								JournalArticle.class.getName(),
 								article.getResourcePrimKey(), article.getUuid(),
-								classTypeId, assetCategoryIds, assetTagNames,
-								visible, null, null, displayDate,
+								getClassTypeId(article), assetCategoryIds,
+								assetTagNames, visible, null, null, displayDate,
 								expirationDate, ContentTypes.TEXT_HTML,
 								article.getTitle(), article.getDescription(),
 								article.getDescription(), null,
@@ -2873,21 +2870,19 @@ public class JournalArticleLocalServiceImpl
 				article.getGroupId(), article.getStructureId());
 
 			if (structure == null) {
-				Group companyGroup =
-					groupLocalService.getCompanyGroup(
-						article.getCompanyId());
+				Group companyGroup = groupLocalService.getCompanyGroup(
+					article.getCompanyId());
 
-				structure =
-					journalStructurePersistence.fetchByG_S(
-						companyGroup.getGroupId(),
-							article.getStructureId());
+				structure = journalStructurePersistence.fetchByG_S(
+					companyGroup.getGroupId(), article.getStructureId());
 			}
 
 			if (structure != null) {
 				classTypeId = structure.getId();
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
+		}
+		catch (Exception e) {
+			_log.error(e, e);
 		}
 
 		return classTypeId;
