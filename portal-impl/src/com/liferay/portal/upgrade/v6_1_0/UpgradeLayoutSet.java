@@ -24,10 +24,11 @@ public class UpgradeLayoutSet extends UpgradeProcess {
 	@Override
 	protected void doUpgrade() throws Exception {
 		runSQL(
-			"alter table LayoutSet add layoutSetPrototypeLinkEnabled " +
-				"BOOLEAN null");
-		runSQL("alter table LayoutSet add layoutSetPrototypeUuid " +
-					"VARCHAR(75) null");
+			"alter table LayoutSet add layoutSetPrototypeLinkEnabled BOOLEAN " +
+				"null");
+		runSQL(
+			"alter table LayoutSet add layoutSetPrototypeUuid VARCHAR(75) " +
+				"null");
 		runSQL("alter table LayoutSet drop column layoutSetPrototypeId");
 	}
 

@@ -313,6 +313,11 @@ public class UpgradeUserGroup extends UpgradeProcess {
 
 	@Override
 	protected void doUpgrade() throws Exception {
+		updateUserGroup();
+		upgrade(UpgradeLayoutSet.class);
+	}
+
+	protected void updateUserGroup() throws Exception {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
