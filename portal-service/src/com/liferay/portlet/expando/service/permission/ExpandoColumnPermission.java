@@ -23,6 +23,7 @@ import com.liferay.portlet.expando.model.ExpandoColumn;
  * @author Michael C. Han
  */
 public interface ExpandoColumnPermission {
+
 	public void check(
 			PermissionChecker permissionChecker, ExpandoColumn column,
 			String actionId)
@@ -51,4 +52,5 @@ public interface ExpandoColumnPermission {
 			String className, String tableName, String columnName,
 			String actionId)
 		throws SystemException;
+
 }

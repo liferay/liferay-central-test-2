@@ -23,6 +23,7 @@ import com.liferay.portlet.expando.model.ExpandoColumn;
  * @author Michael C. Han
  */
 public class ExpandoColumnPermissionUtil {
+
 	public static void check(
 			PermissionChecker permissionChecker, ExpandoColumn column,
 			String actionId)
@@ -83,10 +84,10 @@ public class ExpandoColumnPermissionUtil {
 
 	public void setExpandoColumnPermission(
 		ExpandoColumnPermission expandoColumnPermission) {
+
 		_expandoColumnPermission = expandoColumnPermission;
 	}
 
 	private static ExpandoColumnPermission _expandoColumnPermission;
-
 
 }

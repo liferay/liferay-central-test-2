@@ -89,7 +89,7 @@ public class ExpandoValueServiceImpl extends ExpandoValueServiceBaseImpl {
 			companyId, className, tableName, columnName);
 
 		if (ExpandoColumnPermissionUtil.contains(
-			getPermissionChecker(), column, ActionKeys.VIEW)) {
+				getPermissionChecker(), column, ActionKeys.VIEW)) {
 
 			return expandoValueLocalService.getData(
 				companyId, className, tableName, columnName, classPK);
@@ -113,7 +113,7 @@ public class ExpandoValueServiceImpl extends ExpandoValueServiceBaseImpl {
 				companyId, className, tableName, columnName);
 
 			if (!ExpandoColumnPermissionUtil.contains(
-				getPermissionChecker(), column, ActionKeys.VIEW)) {
+					getPermissionChecker(), column, ActionKeys.VIEW)) {
 
 				attributeValues.remove(columnName);
 			}
@@ -131,7 +131,7 @@ public class ExpandoValueServiceImpl extends ExpandoValueServiceBaseImpl {
 			companyId, className, tableName, columnName);
 
 		if (ExpandoColumnPermissionUtil.contains(
-			getPermissionChecker(), column, ActionKeys.VIEW)) {
+				getPermissionChecker(), column, ActionKeys.VIEW)) {
 
 			String data = expandoValueLocalService.getData(
 				companyId, className, tableName, columnName, classPK,
