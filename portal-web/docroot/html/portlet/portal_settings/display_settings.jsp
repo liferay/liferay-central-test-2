@@ -34,13 +34,13 @@ String defaultWapThemeId = PrefsPropsUtil.getString(company.getCompanyId(), Prop
 String defaultControlPanelThemeId = PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.CONTROL_PANEL_LAYOUT_REGULAR_THEME_ID, PropsValues.CONTROL_PANEL_LAYOUT_REGULAR_THEME_ID);
 %>
 
-<h3><liferay-ui:message key="language-and-time-zone" /></h3>
-
 <liferay-ui:error-marker key="errorSection" value="displaySettings" />
 
-<h3><liferay-ui:error exception="<%= InvalidLocaleException.class %>" message="please-enter-a-valid-locale" /></h3>
+<h3><liferay-ui:message key="language-and-time-zone" /></h3>
 
 <aui:fieldset>
+	<h3><liferay-ui:error exception="<%= LocaleException.class %>" message="please-enter-a-valid-locale" /></h3>
+
 	<aui:select label="default-language" name="languageId">
 
 		<%

@@ -18,7 +18,7 @@ import com.liferay.portal.AccountNameException;
 import com.liferay.portal.CompanyMxException;
 import com.liferay.portal.CompanyVirtualHostException;
 import com.liferay.portal.CompanyWebIdException;
-import com.liferay.portal.InvalidLocaleException;
+import com.liferay.portal.LocaleException;
 import com.liferay.portal.NoSuchShardException;
 import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.NoSuchVirtualHostException;
@@ -763,7 +763,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 			preferences.store();
 		}
-		catch (InvalidLocaleException e) {
+		catch (LocaleException e) {
 			throw e;
 		}
 		catch (Exception e) {
@@ -905,11 +905,11 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 	}
 
 	protected void validateLocales(String locales) throws PortalException {
-		String[] newLocales = StringUtil.split(locales, StringPool.COMMA);
+		String[] localesArray = StringUtil.split(locales, StringPool.COMMA);
 
-		for (String locale : newLocales) {
+		for (String locale : localesArray) {
 			if (!ArrayUtil.contains(PropsValues.LOCALES, locale)) {
-				throw new InvalidLocaleException();
+				throw new LocaleException();
 			}
 		}
 	}

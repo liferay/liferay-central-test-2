@@ -19,21 +19,21 @@ import com.liferay.portal.kernel.exception.PortalException;
 /**
  * @author Brian Wing Shun Chan
  */
-public class InvalidLocaleException extends PortalException {
+public class LocaleException extends PortalException {
 
-	public InvalidLocaleException() {
+	public LocaleException() {
 		super();
 	}
 
-	public InvalidLocaleException(String msg) {
+	public LocaleException(String msg) {
 		super(msg);
 	}
 
-	public InvalidLocaleException(String msg, Throwable cause) {
+	public LocaleException(String msg, Throwable cause) {
 		super(msg, cause);
 	}
 
-	public InvalidLocaleException(Throwable cause) {
+	public LocaleException(Throwable cause) {
 		super(cause);
 	}
 

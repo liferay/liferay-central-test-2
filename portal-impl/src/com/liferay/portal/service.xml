@@ -2537,7 +2537,6 @@
 		<exception>EmailAddress</exception>
 		<exception>ExpiredLock</exception>
 		<exception>ImageType</exception>
-		<exception>InvalidLocale</exception>
 		<exception>InvalidLock</exception>
 		<exception>InvalidRepository</exception>
 		<exception>LARFile</exception>
