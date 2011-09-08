@@ -34,17 +34,16 @@ public class BlogsEntryServiceWrapper implements BlogsEntryService {
 		int displayDateYear, int displayDateHour, int displayDateMinute,
 		boolean allowPingbacks, boolean allowTrackbacks,
 		java.lang.String[] trackbacks, boolean smallImage,
-		java.lang.String smallImageURL,
-		java.io.InputStream smallFileInputStream,
-		java.lang.String smallFileName,
+		java.lang.String smallImageURL, java.lang.String smallImageFileName,
+		java.io.InputStream smallImageInputStream,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _blogsEntryService.addEntry(title, description, content,
 			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
 			displayDateMinute, allowPingbacks, allowTrackbacks, trackbacks,
-			smallImage, smallImageURL, smallFileInputStream, smallFileName,
-			serviceContext);
+			smallImage, smallImageURL, smallImageFileName,
+			smallImageInputStream, serviceContext);
 	}
 
 	public void deleteEntry(long entryId)
@@ -158,9 +157,8 @@ public class BlogsEntryServiceWrapper implements BlogsEntryService {
 		int displayDateYear, int displayDateHour, int displayDateMinute,
 		boolean allowPingbacks, boolean allowTrackbacks,
 		java.lang.String[] trackbacks, boolean smallImage,
-		java.lang.String smallImageURL,
-		java.io.InputStream smallFileInputStream,
-		java.lang.String smallFileName,
+		java.lang.String smallImageURL, java.lang.String smallImageFileName,
+		java.io.InputStream smallImageInputStream,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -168,7 +166,7 @@ public class BlogsEntryServiceWrapper implements BlogsEntryService {
 			content, displayDateMonth, displayDateDay, displayDateYear,
 			displayDateHour, displayDateMinute, allowPingbacks,
 			allowTrackbacks, trackbacks, smallImage, smallImageURL,
-			smallFileInputStream, smallFileName, serviceContext);
+			smallImageFileName, smallImageInputStream, serviceContext);
 	}
 
 	public BlogsEntryService getWrappedBlogsEntryService() {

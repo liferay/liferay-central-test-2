@@ -268,9 +268,8 @@ public class BlogsEntryLocalServiceWrapper implements BlogsEntryLocalService {
 		int displayDateYear, int displayDateHour, int displayDateMinute,
 		boolean allowPingbacks, boolean allowTrackbacks,
 		java.lang.String[] trackbacks, boolean smallImage,
-		java.lang.String smallImageURL,
-		java.io.InputStream smallFileInputStream,
-		java.lang.String smallFileName,
+		java.lang.String smallImageURL, java.lang.String smallImageFileName,
+		java.io.InputStream smallImageInputStream,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -278,7 +277,7 @@ public class BlogsEntryLocalServiceWrapper implements BlogsEntryLocalService {
 			content, displayDateMonth, displayDateDay, displayDateYear,
 			displayDateHour, displayDateMinute, allowPingbacks,
 			allowTrackbacks, trackbacks, smallImage, smallImageURL,
-			smallFileInputStream, smallFileName, serviceContext);
+			smallImageFileName, smallImageInputStream, serviceContext);
 	}
 
 	public void addEntryResources(
@@ -467,9 +466,8 @@ public class BlogsEntryLocalServiceWrapper implements BlogsEntryLocalService {
 		int displayDateYear, int displayDateHour, int displayDateMinute,
 		boolean allowPingbacks, boolean allowTrackbacks,
 		java.lang.String[] trackbacks, boolean smallImage,
-		java.lang.String smallImageURL,
-		java.io.InputStream smallFileInputStream,
-		java.lang.String smallFileName,
+		java.lang.String smallImageURL, java.lang.String smallImageFileName,
+		java.io.InputStream smallImageInputStream,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -477,7 +475,8 @@ public class BlogsEntryLocalServiceWrapper implements BlogsEntryLocalService {
 			description, content, displayDateMonth, displayDateDay,
 			displayDateYear, displayDateHour, displayDateMinute,
 			allowPingbacks, allowTrackbacks, trackbacks, smallImage,
-			smallImageURL, smallFileInputStream, smallFileName, serviceContext);
+			smallImageURL, smallImageFileName, smallImageInputStream,
+			serviceContext);
 	}
 
 	public void updateEntryResources(

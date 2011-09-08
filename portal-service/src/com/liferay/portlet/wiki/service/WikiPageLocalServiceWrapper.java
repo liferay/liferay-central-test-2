@@ -281,15 +281,6 @@ public class WikiPageLocalServiceWrapper implements WikiPageLocalService {
 			summary, minorEdit, serviceContext);
 	}
 
-	public void addPageAttachment(long companyId, java.lang.String dirName,
-		java.util.Date modifiedDate, java.lang.String fileName,
-		java.io.InputStream inputStream)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		_wikiPageLocalService.addPageAttachment(companyId, dirName,
-			modifiedDate, fileName, inputStream);
-	}
-
 	public void addPageAttachment(long userId, long nodeId,
 		java.lang.String title, java.lang.String fileName, java.io.File file)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -305,6 +296,15 @@ public class WikiPageLocalServiceWrapper implements WikiPageLocalService {
 			com.liferay.portal.kernel.exception.SystemException {
 		_wikiPageLocalService.addPageAttachment(userId, nodeId, title,
 			fileName, inputStream);
+	}
+
+	public void addPageAttachment(long companyId, java.lang.String dirName,
+		java.util.Date modifiedDate, java.lang.String fileName,
+		java.io.InputStream inputStream)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_wikiPageLocalService.addPageAttachment(companyId, dirName,
+			modifiedDate, fileName, inputStream);
 	}
 
 	public void addPageAttachments(long userId, long nodeId,
