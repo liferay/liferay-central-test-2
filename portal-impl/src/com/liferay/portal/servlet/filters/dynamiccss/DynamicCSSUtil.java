@@ -25,6 +25,7 @@ import com.liferay.portal.kernel.util.SystemProperties;
 import com.liferay.portal.kernel.util.UnsyncPrintWriterPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.portal.model.PortletConstants;
 import com.liferay.portal.model.Theme;
 import com.liferay.portal.scripting.ruby.RubyExecutor;
 import com.liferay.portal.service.ThemeLocalServiceUtil;
@@ -34,6 +35,8 @@ import com.liferay.util.ContentUtil;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -58,7 +61,7 @@ public class DynamicCSSUtil {
 			HttpServletRequest request, String cssRealPath, String content)
 		throws ScriptingException {
 
-		String cssThemePath = getCssThemePath(request);
+		String cssThemePath = getCssThemePath(request, cssRealPath);
 
 		if (!DynamicCSSFilter.ENABLED || (cssThemePath == null)) {
 			return content;
@@ -92,7 +95,9 @@ public class DynamicCSSUtil {
 		return content;
 	}
 
-	protected static String getCssThemePath(HttpServletRequest request) {
+	protected static String getCssThemePath(
+		HttpServletRequest request, String cssRealPath) {
+
 		if (request == null) {
 			return null;
 		}
@@ -107,6 +112,26 @@ public class DynamicCSSUtil {
 		long companyId = PortalUtil.getCompanyId(request);
 
 		String themeId = ParamUtil.getString(request, "themeId");
+
+		Matcher portalThemeResourceMatcher = _portalThemeResourcePath.matcher(
+			cssRealPath);
+		Matcher pluginThemeResourceMatcher = _pluginThemeResourcePath.matcher(
+			cssRealPath);
+
+		if (portalThemeResourceMatcher.find()) {
+			String themePathId = portalThemeResourceMatcher.group(1);
+
+			themeId = PortalUtil.getJsSafePortletId(themePathId);
+		}
+		else if (pluginThemeResourceMatcher.find()) {
+			String themePathId = pluginThemeResourceMatcher.group(1);
+
+			themePathId = themePathId.concat(
+				PortletConstants.WAR_SEPARATOR).concat(
+					themePathId).concat("theme");
+
+			themeId = PortalUtil.getJsSafePortletId(themePathId);
+		}
 
 		if (Validator.isNull(themeId)) {
 			return null;
@@ -131,6 +156,12 @@ public class DynamicCSSUtil {
 		SystemProperties.get(SystemProperties.TMP_DIR) + "/liferay/sassCache";
 
 	private static Log _log = LogFactoryUtil.getLog(DynamicCSSUtil.class);
+
+	private static final Pattern _portalThemeResourcePath =
+		Pattern.compile("themes\\/([^\\/]+)\\/css", Pattern.CASE_INSENSITIVE);
+
+	private static final Pattern _pluginThemeResourcePath =
+		Pattern.compile("\\/([^\\/]+)-theme\\/", Pattern.CASE_INSENSITIVE);
 
 	private static RubyExecutor _rubyExecutor = new RubyExecutor();
 	private static String _rubyScript;
