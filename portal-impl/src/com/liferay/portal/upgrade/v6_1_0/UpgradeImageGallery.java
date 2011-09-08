@@ -567,33 +567,16 @@ public class UpgradeImageGallery extends UpgradeProcess {
 		}
 
 		runSQL(
-			"delete from ResourcePermission where " +
-				"name = 'com.liferay.portlet.imagegallery.model.IGImage' and " +
-					"primKey = 0");
+			"delete from ResourcePermission where name = '" +
+				_IG_IMAGE_CLASS_NAME + "' and primKey = 0");
 
-		Connection con = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-
-		try {
-			con = DataAccess.getConnection();
-
-			StringBundler sb = new StringBundler(4);
-
-			sb.append("update ResourcePermission set name = '");
-			sb.append(DLFileEntry.class.getName());
-			sb.append("' where name = 'com.liferay.portlet.imagegallery.");
-			sb.append("model.IGImage'");
-
-			String sql = sb.toString();
-
-			ps = con.prepareStatement(sql);
-
-			ps.executeUpdate();
-		}
-		finally {
-			DataAccess.cleanUp(con, ps, rs);
-		}
+		runSQL(
+			"update ResourcePermission set name = '" +
+				DLFileEntry.class.getName() + "' where name = '" +
+					_IG_IMAGE_CLASS_NAME + "'");
 	}
+
+	private static final String _IG_IMAGE_CLASS_NAME =
+		"com.liferay.portlet.imagegallery.model.IGImage";
 
 }
