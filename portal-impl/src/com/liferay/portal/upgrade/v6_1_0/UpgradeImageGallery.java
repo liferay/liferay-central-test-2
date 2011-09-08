@@ -237,7 +237,10 @@ public class UpgradeImageGallery extends UpgradeProcess {
 
 		migrateImageFiles();
 
-		upgrade(UpgradeDLSync.class);
+		UpgradeDocumentLibrary upgradeDocumentLibrary =
+			new UpgradeDocumentLibrary();
+
+		upgradeDocumentLibrary.updateSyncs();
 	}
 
 	protected Object[] getImage(long imageId) throws Exception {
