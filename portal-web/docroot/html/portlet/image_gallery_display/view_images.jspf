@@ -169,6 +169,7 @@
 						);
 					}
 				}
+
 				<c:if test="<%= showActions %>">
 					, request: function(event) {
 						var instance = this;
