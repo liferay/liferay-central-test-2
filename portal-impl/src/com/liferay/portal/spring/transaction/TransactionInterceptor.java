@@ -98,6 +98,15 @@ public class TransactionInterceptor implements MethodInterceptor {
 		this.transactionAttributeSource = transactionAttributeSource;
 	}
 
+	/**
+	 * @deprecated {@link #setPlatformTransactionManager(boolean)}
+	 */
+	public void setTransactionManager(
+		PlatformTransactionManager platformTransactionManager) {
+
+		_platformTransactionManager = platformTransactionManager;
+	}
+
 	protected void processThrowable(
 			Throwable throwable, TransactionAttribute transactionAttribute,
 			TransactionStatus transactionStatus)
