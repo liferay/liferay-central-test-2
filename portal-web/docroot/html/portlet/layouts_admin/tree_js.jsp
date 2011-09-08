@@ -19,14 +19,13 @@
 <%@ include file="/html/portlet/layouts_admin/init_attributes.jspf" %>
 
 <%
-String treeLoadingId = PortalUtil.generateRandomKey(request, "treeLoading");
+String treeLoading = PortalUtil.generateRandomKey(request, "treeLoading");
 
+String treeId = ParamUtil.getString(request, "treeId");
 boolean checkContentDisplayPage = ParamUtil.getBoolean(request, "checkContentDisplayPage", false);
 boolean expandFirstNode = ParamUtil.getBoolean(request, "expandFirstNode", true);
 boolean saveState = ParamUtil.getBoolean(request, "saveState", true);
-
 boolean selectableTree = ParamUtil.getBoolean(request, "selectableTree");
-String treeId = ParamUtil.getString(request, "treeId");
 
 String modules = "aui-io-request,aui-tree-view,dataschema-xml,datatype-xml";
 
@@ -52,7 +51,7 @@ if (!selectableTree) {
 
 			var rootNode = treeInstance.item(0);
 
-			var loadingEl = A.one('#<portlet:namespace />treeLoading<%= treeLoadingId %>');
+			var loadingEl = A.one('#<portlet:namespace />treeLoading<%= treeLoading %>');
 
 			loadingEl.hide();
 
@@ -426,7 +425,7 @@ if (!selectableTree) {
 	</c:if>
 </aui:script>
 
-<div class="lfr-tree-loading" id="<portlet:namespace />treeLoading<%= treeLoadingId %>">
+<div class="lfr-tree-loading" id="<portlet:namespace />treeLoading<%= treeLoading %>">
 	<span class="aui-icon aui-icon-loading lfr-tree-loading-icon"></span>
 </div>
 

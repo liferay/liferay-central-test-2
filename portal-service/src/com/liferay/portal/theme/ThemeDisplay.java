@@ -181,12 +181,12 @@ public class ThemeDisplay implements Serializable {
 		return _locale;
 	}
 
-	public long getParentGroupId() {
-		return _parentGroupId;
-	}
-
 	public Group getParentGroup() {
 		return _parentGroup;
+	}
+
+	public long getParentGroupId() {
+		return _parentGroupId;
 	}
 
 	public String getParentGroupName() throws PortalException, SystemException {

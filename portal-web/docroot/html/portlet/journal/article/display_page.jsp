@@ -24,30 +24,17 @@ String toLanguageId = (String)request.getAttribute("edit_article.jsp-toLanguageI
 
 String layoutUuid = BeanParamUtil.getString(article, request, "layoutUuid");
 
-String layoutBreadcrumb = StringPool.BLANK;
-
 Layout selLayout = null;
+
+String layoutBreadcrumb = StringPool.BLANK;
 
 if (Validator.isNotNull(layoutUuid)) {
 	selLayout = LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(layoutUuid, themeDisplay.getParentGroupId());
 
 	layoutBreadcrumb = _getLayoutBreadcrumb(selLayout, locale);
 }
-	
-Layout refererLayout = null;
-
-if ((article == null) || article.isNew()) {
-	long refererPlid = ParamUtil.getLong(request, "refererPlid", LayoutConstants.DEFAULT_PLID);
-
-	if (refererPlid > 0) {
-		refererLayout = LayoutLocalServiceUtil.getLayout(refererPlid);
-	}
-}
 
 Group parentGroup = themeDisplay.getParentGroup();
-
-int privateLayoutsCount = parentGroup.getPrivateLayoutsPageCount();
-int publicLayoutsCount = parentGroup.getPublicLayoutsPageCount();
 %>
 
 <liferay-ui:error-marker key="errorSection" value="display-page" />
@@ -55,14 +42,14 @@ int publicLayoutsCount = parentGroup.getPublicLayoutsPageCount();
 <h3><liferay-ui:message key="display-page" /><liferay-ui:icon-help message="default-display-page-help" /></h3>
 
 <div id="<portlet:namespace />pagesContainer">
-	<aui:input id="pagesContainerInput" name="layoutUuid" type="hidden" value="<%= layoutUuid %>"/>
+	<aui:input id="pagesContainerInput" name="layoutUuid" type="hidden" value="<%= layoutUuid %>" />
 
 	<div id="<portlet:namespace />displayPageItemContainer" class="display-page-item-container aui-helper-hidden">
 		<span class="display-page-item">
 			<span>
 				<span id="<portlet:namespace />displayPageNameInput"><%= layoutBreadcrumb %></span>
-				<span class="display-page-item-remove aui-icon aui-icon-close" id="<portlet:namespace />displayPageItemRemove" tabindex="0">
-				</span>
+
+				<span class="display-page-item-remove aui-icon aui-icon-close" id="<portlet:namespace />displayPageItemRemove" tabindex="0"></span>
 			</span>
 		</span>
 	</div>
@@ -115,29 +102,31 @@ int publicLayoutsCount = parentGroup.getPublicLayoutsPageCount();
 				<portlet:param name="struts_action" value="/journal/select_display_page" />
 				<portlet:param name="cmd" value="<%= ActionKeys.VIEW_TREE %>" />
 				<portlet:param name="groupId" value="<%= String.valueOf(themeDisplay.getParentGroupId()) %>" />
+
+				<c:if test="<%= selLayout != null && !selLayout.isPrivateLayout() %>">
+					<portlet:param name="selPlid" value="<%= String.valueOf(selLayout.getPlid()) %>" />
+				</c:if>
+
+				<portlet:param name="treeId" value="treeContainerPublicPages" />
 				<portlet:param name="checkContentDisplayPage" value="<%= Boolean.TRUE.toString() %>" />
 				<portlet:param name="expandFirstNode" value="<%= Boolean.TRUE.toString() %>" />
 				<portlet:param name="saveState" value="<%= Boolean.FALSE.toString() %>" />
-				<portlet:param name="treeId" value="treeContainerPublicPages" />
-
-				<c:if test="<%= selLayout != null && !selLayout.isPrivateLayout() %>" >
-					<portlet:param name="selPlid" value="<%= String.valueOf(selLayout.getPlid()) %>" />
-				</c:if>
 			</liferay-portlet:resourceURL>
 
 			<liferay-portlet:resourceURL copyCurrentRenderParameters="<%= false %>" var="treeUrlPrivatePages">
 				<portlet:param name="struts_action" value="/journal/select_display_page" />
-				<portlet:param name="cmd" value="<%= ActionKeys.VIEW_TREE %>" />
+				<portlet:param name="<%= Constants.CMD %>" value="<%= ActionKeys.VIEW_TREE %>" />
+				<portlet:param name="tabs1" value="private-pages" />
 				<portlet:param name="groupId" value="<%= String.valueOf(themeDisplay.getParentGroupId()) %>" />
+
+				<c:if test="<%= selLayout != null && selLayout.isPrivateLayout() %>">
+					<portlet:param name="selPlid" value="<%= String.valueOf(selLayout.getPlid()) %>" />
+				</c:if>
+
+				<portlet:param name="treeId" value="treeContainerPrivatePages" />
 				<portlet:param name="checkContentDisplayPage" value="<%= Boolean.TRUE.toString() %>" />
 				<portlet:param name="expandFirstNode" value="<%= Boolean.TRUE.toString() %>" />
 				<portlet:param name="saveState" value="<%= Boolean.FALSE.toString() %>" />
-				<portlet:param name="tabs1" value="private-pages" />
-				<portlet:param name="treeId" value="treeContainerPrivatePages" />
-
-				<c:if test="<%= selLayout != null && selLayout.isPrivateLayout() %>" >
-					<portlet:param name="selPlid" value="<%= String.valueOf(selLayout.getPlid()) %>" />
-				</c:if>
 			</liferay-portlet:resourceURL>
 
 			var bindTreeUI = function(treeInstance) {
@@ -227,7 +216,7 @@ int publicLayoutsCount = parentGroup.getPublicLayoutsPageCount();
 
 					var tabs = [];
 
-					<c:if test="<%= publicLayoutsCount > 0 %>">
+					<c:if test="<%= parentGroup.getPublicLayoutsPageCount() > 0 %>">
 						tabs.push(
 							{
 								label: '<liferay-ui:message key="public-pages" />',
@@ -242,7 +231,7 @@ int publicLayoutsCount = parentGroup.getPublicLayoutsPageCount();
 						);
 					</c:if>
 
-					<c:if test="<%= privateLayoutsCount > 0 %>">
+					<c:if test="<%= parentGroup.getPrivateLayoutsPageCount() > 0 %>">
 						tabs.push(
 							{
 								label: '<liferay-ui:message key="private-pages" />',
@@ -275,13 +264,13 @@ int publicLayoutsCount = parentGroup.getPublicLayoutsPageCount();
 						}
 					);
 
-					<c:if test="<%= publicLayoutsCount > 0 %>">
+					<c:if test="<%= parentGroup.getPublicLayoutsPageCount() > 0 %>">
 						publicPagesTabNode = A.one('#<portlet:namespace />' + publicPagesTabContentId);
 
 						publicPagesTabNode.plug(A.Plugin.ParseContent);
 					</c:if>
 
-					<c:if test="<%= privateLayoutsCount > 0 %>">
+					<c:if test="<%= parentGroup.getPrivateLayoutsPageCount() > 0 %>">
 						privatePagesTabNode = A.one('#<portlet:namespace />' + privatePagesTabContentId);
 
 						privatePagesTabNode.plug(A.Plugin.ParseContent);
@@ -294,7 +283,7 @@ int publicLayoutsCount = parentGroup.getPublicLayoutsPageCount();
 			};
 
 			var isPublicPagesTabSelected = function() {
-				var result = <%= publicLayoutsCount > 0 %>;
+				var result = <%= parentGroup.getPublicLayoutsPageCount() > 0 %>;
 
 				if (tabView.get('items').length >= 2) {
 					var index = tabView.getTabIndex(tabView.get('activeTab'));
@@ -417,7 +406,7 @@ int publicLayoutsCount = parentGroup.getPublicLayoutsPageCount();
 			};
 
 			var onSelectDisplayPage = function(event) {
-				<c:if test="<%= privateLayoutsCount > 0 || publicLayoutsCount > 0 %>">
+				<c:if test="<%= (parentGroup.getPrivateLayoutsPageCount() > 0) || (parentGroup.getPublicLayoutsPageCount() > 0) %>">
 					getDialog().show();
 				</c:if>
 			};
@@ -500,7 +489,7 @@ int publicLayoutsCount = parentGroup.getPublicLayoutsPageCount();
 				{
 					children: [
 						{
-							<c:if test="<%= privateLayoutsCount <= 0 && publicLayoutsCount <= 0 %>">
+							<c:if test="<%= (parentGroup.getPrivateLayoutsPageCount() <= 0) && (parentGroup.getPublicLayoutsPageCount() <= 0) %>">
 								disabled: true,
 							</c:if>
 
@@ -541,8 +530,25 @@ int publicLayoutsCount = parentGroup.getPublicLayoutsPageCount();
 	</c:choose>
 </aui:script>
 
+<c:if test="<%= Validator.isNotNull(layoutUuid) %>">
+
+	<%
+	Layout defaultDisplayLayout = LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(layoutUuid, scopeGroupId);
+
+	AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(JournalArticle.class.getName());
+
+	AssetRenderer assetRenderer = assetRendererFactory.getAssetRenderer(article.getResourcePrimKey());
+
+	String urlViewInContext = assetRenderer.getURLViewInContext(liferayPortletRequest, liferayPortletResponse, currentURL);
+	%>
+
+	<c:if test="<%= Validator.isNotNull(urlViewInContext) %>">
+		<a href="<%= urlViewInContext %>" target="blank"><%= LanguageUtil.format(pageContext, "view-content-in-x", defaultDisplayLayout.getName(locale)) %></a>
+	</c:if>
+</c:if>
+
 <%!
-private String _getLayoutBreadcrumb(Layout layout, Locale locale) throws PortalException, SystemException {
+private String _getLayoutBreadcrumb(Layout layout, Locale locale) throws Exception {
 	StringBundler sb = new StringBundler();
 
 	if (layout.isPrivateLayout()) {
@@ -562,7 +568,6 @@ private String _getLayoutBreadcrumb(Layout layout, Locale locale) throws PortalE
 
 	for (Layout ancestor : ancestors) {
 		sb.append(ancestor.getName(locale));
-
 		sb.append(StringPool.SPACE);
 		sb.append(StringPool.GREATER_THAN);
 		sb.append(StringPool.SPACE);
@@ -573,20 +578,3 @@ private String _getLayoutBreadcrumb(Layout layout, Locale locale) throws PortalE
 	return sb.toString();
 }
 %>
-
-<c:if test="<%= Validator.isNotNull(layoutUuid) %>">
-
-	<%
-	Layout defaultDisplayLayout = LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(layoutUuid, scopeGroupId);
-
-	AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(JournalArticle.class.getName());
-
-	AssetRenderer assetRenderer = assetRendererFactory.getAssetRenderer(article.getResourcePrimKey());
-
-	String urlViewInContext = assetRenderer.getURLViewInContext(liferayPortletRequest, liferayPortletResponse, currentURL);
-	%>
-
-	<c:if test="<%= Validator.isNotNull(urlViewInContext) %>">
-		<a href="<%= urlViewInContext %>" target="blank"><%= LanguageUtil.format(pageContext, "view-content-in-x", defaultDisplayLayout.getName(locale)) %></a>
-	</c:if>
-</c:if>
