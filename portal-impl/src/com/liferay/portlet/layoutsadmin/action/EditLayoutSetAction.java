@@ -182,10 +182,12 @@ public class EditLayoutSetAction extends EditLayoutsAction {
 		}
 
 		inputStream.mark(0);
+
 		LayoutSetServiceUtil.updateLogo(
 			liveGroupId, privateLayout, useLogo, inputStream);
 
 		inputStream.reset();
+
 		if (stagingGroupId > 0) {
 			LayoutSetServiceUtil.updateLogo(
 				stagingGroupId, privateLayout, useLogo, inputStream);

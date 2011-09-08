@@ -165,11 +165,12 @@ public class UploadServletRequestImpl
 				try {
 					FileUtil.write(file, liferayFileItem.getInputStream());
 				}
-				catch (IOException ie) {
+				catch (IOException ioe) {
 					if (_log.isWarnEnabled()) {
 						_log.warn(
 							"Unable to write temporary file " +
-							file.getAbsolutePath(), ie);
+								file.getAbsolutePath(),
+							ioe);
 					}
 				}
 			}

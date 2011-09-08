@@ -106,11 +106,11 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			displayDateMinute, user.getTimeZone(),
 			new EntryDisplayDateException());
 
-		byte[] smallBytes = null;
+		byte[] smallImageBytes = null;
 
 		try {
 			if ((smallImageInputStream != null) && smallImage) {
-				smallBytes = FileUtil.getBytes(smallImageInputStream);
+				smallImageBytes = FileUtil.getBytes(smallImageInputStream);
 			}
 		}
 		catch (IOException ioe) {
@@ -120,7 +120,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		validate(
 			title, content, smallImage, smallImageURL, smallImageFileName,
-			smallBytes);
+			smallImageBytes);
 
 		long entryId = counterLocalService.increment();
 
@@ -167,7 +167,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		// Small image
 
 		saveImages(
-			smallImage, entry.getSmallImageId(), smallBytes);
+			smallImage, entry.getSmallImageId(), smallImageBytes);
 
 		// Asset
 
@@ -1033,12 +1033,12 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 	}
 
 	protected void saveImages(
-			boolean smallImage, long smallImageId, byte[] smallBytes)
+			boolean smallImage, long smallImageId, byte[] smallImageBytes)
 		throws PortalException, SystemException {
 
 		if (smallImage) {
-			if (smallBytes != null) {
-				imageLocalService.updateImage(smallImageId, smallBytes);
+			if (smallImageBytes != null) {
+				imageLocalService.updateImage(smallImageId, smallImageBytes);
 			}
 		}
 		else {
@@ -1048,7 +1048,8 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 	protected void validate(
 			String title, String content, boolean smallImage,
-			String smallImageURL, String smallImageFileName, byte[] smallBytes)
+			String smallImageURL, String smallImageFileName,
+			byte[] smallImageBytes)
 		throws PortalException, SystemException {
 
 		if (Validator.isNull(title)) {
@@ -1062,7 +1063,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			PropsKeys.BLOGS_IMAGE_EXTENSIONS, StringPool.COMMA);
 
 		if (smallImage && Validator.isNull(smallImageURL) &&
-			(smallBytes != null)) {
+			(smallImageBytes != null)) {
 
 			if (smallImageFileName != null) {
 				boolean validSmallImageExtension = false;
@@ -1087,8 +1088,8 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 				PropsKeys.BLOGS_IMAGE_SMALL_MAX_SIZE);
 
 			if ((smallImageMaxSize > 0) &&
-				((smallBytes == null) ||
-					(smallBytes.length > smallImageMaxSize))) {
+				((smallImageBytes == null) ||
+				 (smallImageBytes.length > smallImageMaxSize))) {
 
 				throw new EntrySmallImageSizeException();
 			}

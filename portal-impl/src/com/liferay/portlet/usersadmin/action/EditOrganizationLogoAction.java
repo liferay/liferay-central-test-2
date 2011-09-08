@@ -100,9 +100,11 @@ public class EditOrganizationLogoAction extends PortletAction {
 			}
 
 			inputStream.mark(0);
+
 			LayoutSetServiceUtil.updateLogo(groupId, true, true, inputStream);
 
 			inputStream.reset();
+
 			LayoutSetServiceUtil.updateLogo(groupId, false, true, inputStream);
 		}
 		finally {
