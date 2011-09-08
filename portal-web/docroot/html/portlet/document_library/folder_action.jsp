@@ -69,6 +69,8 @@ if (permissionChecker.isCompanyAdmin() || permissionChecker.isGroupAdmin(scopeGr
 	status = WorkflowConstants.STATUS_ANY;
 }
 
+boolean folderSelected = GetterUtil.getBoolean((String)request.getAttribute("view_entries.jsp-folderSelected"));
+
 String modelResource = null;
 String modelResourceDescription = null;
 String resourcePrimKey = null;
@@ -95,8 +97,6 @@ boolean view = false;
 if (row == null && (portletName.equals(PortletKeys.DOCUMENT_LIBRARY_DISPLAY) || portletName.equals(PortletKeys.IMAGE_GALLERY_DISPLAY))) {
 	view = true;
 }
-
-boolean selected = GetterUtil.getBoolean((String)request.getAttribute("view_entries.jsp-selected"));
 %>
 
 <liferay-util:buffer var="iconMenu">
@@ -169,7 +169,7 @@ boolean selected = GetterUtil.getBoolean((String)request.getAttribute("view_entr
 					<portlet:actionURL var="deleteURL">
 						<portlet:param name="struts_action" value="/document_library/edit_folder" />
 						<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
-						<portlet:param name="redirect" value="<%= (view || selected) ? redirectURL : redirect %>" />
+						<portlet:param name="redirect" value="<%= (view || folderSelected) ? redirectURL : redirect %>" />
 						<portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" />
 					</portlet:actionURL>
 
@@ -185,7 +185,7 @@ boolean selected = GetterUtil.getBoolean((String)request.getAttribute("view_entr
 					<portlet:actionURL var="deleteURL">
 						<portlet:param name="struts_action" value="/document_library/edit_repository" />
 						<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
-						<portlet:param name="redirect" value="<%= (view || selected) ? redirectURL : redirect %>" />
+						<portlet:param name="redirect" value="<%= (view || folderSelected) ? redirectURL : redirect %>" />
 						<portlet:param name="repositoryId" value="<%= String.valueOf(repositoryId) %>" />
 					</portlet:actionURL>
 
