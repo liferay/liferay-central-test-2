@@ -167,14 +167,6 @@
 		<finder name="CompanyId" return-type="Collection">
 			<finder-column name="companyId" />
 		</finder>
-		<finder name="G_CU" return-type="AssetEntry">
-			<finder-column name="groupId" />
-			<finder-column name="classUuid" />
-		</finder>
-		<finder name="C_C" return-type="AssetEntry" unique="true">
-			<finder-column name="classNameId" />
-			<finder-column name="classPK" />
-		</finder>
 		<finder name="Visible" return-type="Collection">
 			<finder-column name="visible" />
 		</finder>
@@ -183,6 +175,14 @@
 		</finder>
 		<finder name="ExpirationDate" return-type="Collection">
 			<finder-column name="expirationDate" />
+		</finder>
+		<finder name="G_CU" return-type="AssetEntry">
+			<finder-column name="groupId" />
+			<finder-column name="classUuid" />
+		</finder>
+		<finder name="C_C" return-type="AssetEntry" unique="true">
+			<finder-column name="classNameId" />
+			<finder-column name="classPK" />
 		</finder>
 
 		<!-- References -->
