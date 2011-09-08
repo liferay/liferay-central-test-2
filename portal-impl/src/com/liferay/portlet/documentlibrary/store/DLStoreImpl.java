@@ -100,7 +100,10 @@ public class DLStoreImpl implements DLStore, IdentifiableBean {
 		throws PortalException, SystemException {
 
 		if (is instanceof ByteArrayFileInputStream) {
-			File file = ((ByteArrayFileInputStream) is).getFile();
+			ByteArrayFileInputStream byteArrayFileInputStream =
+				(ByteArrayFileInputStream)is;
+
+			File file = byteArrayFileInputStream.getFile();
 
 			addFile(
 				companyId, repositoryId, fileName, validateFileExtension, file);
@@ -109,7 +112,6 @@ public class DLStoreImpl implements DLStore, IdentifiableBean {
 		}
 
 		validate(fileName, validateFileExtension, is);
-
 
 		if (!AntivirusScannerUtil.isActive()) {
 			store.addFile(companyId, repositoryId, fileName, is);
@@ -413,7 +415,10 @@ public class DLStoreImpl implements DLStore, IdentifiableBean {
 		throws PortalException, SystemException {
 
 		if (is instanceof ByteArrayFileInputStream) {
-			File file = ((ByteArrayFileInputStream) is).getFile();
+			ByteArrayFileInputStream byteArrayFileInputStream =
+				(ByteArrayFileInputStream)is;
+
+			File file = byteArrayFileInputStream.getFile();
 
 			updateFile(
 				companyId, repositoryId, fileName, fileExtension,

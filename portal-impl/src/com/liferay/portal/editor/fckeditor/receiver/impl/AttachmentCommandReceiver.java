@@ -68,15 +68,16 @@ public class AttachmentCommandReceiver extends BaseCommandReceiver {
 
 			long nodeId = page.getNodeId();
 
-			List<ObjectValuePair<String, InputStream>> inputStreams =
+			List<ObjectValuePair<String, InputStream>> inputStreamOVPs =
 				new ArrayList<ObjectValuePair<String, InputStream>>(1);
 
-			ObjectValuePair<String, InputStream> ovp =
+			ObjectValuePair<String, InputStream> inputStreamOVP =
 				new ObjectValuePair<String, InputStream>(fileName, inputStream);
 
-			inputStreams.add(ovp);
+			inputStreamOVPs.add(inputStreamOVP);
 
-			WikiPageServiceUtil.addPageAttachments(nodeId, title, inputStreams);
+			WikiPageServiceUtil.addPageAttachments(
+				nodeId, title, inputStreamOVPs);
 		}
 		catch (Exception e) {
 			throw new FCKException(e);

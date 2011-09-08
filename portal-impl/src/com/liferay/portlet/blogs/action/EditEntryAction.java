@@ -372,8 +372,8 @@ public class EditEntryAction extends PortletAction {
 
 		boolean	smallImage = false;
 		String smallImageURL = null;
-		InputStream smallFileInputStream = null;
-		String smallFileName = null;
+		String smallImageFileName = null;
+		InputStream smallImageInputStream = null;
 
 		BlogsEntry entry = null;
 		String oldUrlTitle = null;
@@ -393,10 +393,10 @@ public class EditEntryAction extends PortletAction {
 						uploadPortletRequest, "smallImage");
 					smallImageURL = ParamUtil.getString(
 						uploadPortletRequest, "smallImageURL");
-					smallFileInputStream = uploadPortletRequest.getFileAsStream(
+					smallImageFileName = uploadPortletRequest.getFileName(
 						"smallFile");
-					smallFileName = uploadPortletRequest.getFileName(
-						"smallFile");
+					smallImageInputStream =
+						uploadPortletRequest.getFileAsStream("smallFile");
 				}
 			}
 
@@ -414,12 +414,12 @@ public class EditEntryAction extends PortletAction {
 					title, description, content, displayDateMonth,
 					displayDateDay, displayDateYear, displayDateHour,
 					displayDateMinute, allowPingbacks, allowTrackbacks,
-					trackbacks, smallImage, smallImageURL, smallFileInputStream,
-					smallFileName, serviceContext);
+					trackbacks, smallImage, smallImageURL, smallImageFileName,
+					smallImageInputStream, serviceContext);
 
 				AssetPublisherUtil.addAndStoreSelection(
-					actionRequest, BlogsEntry.class.getName(), entry.getEntryId(),
-					-1);
+					actionRequest, BlogsEntry.class.getName(),
+					entry.getEntryId(), -1);
 			}
 			else {
 
@@ -433,20 +433,20 @@ public class EditEntryAction extends PortletAction {
 					entryId, title, description, content, displayDateMonth,
 					displayDateDay, displayDateYear, displayDateHour,
 					displayDateMinute, allowPingbacks, allowTrackbacks,
-					trackbacks, smallImage, smallImageURL, smallFileInputStream,
-					smallFileName, serviceContext);
+					trackbacks, smallImage, smallImageURL, smallImageFileName,
+					smallImageInputStream, serviceContext);
 
 				if (!tempOldUrlTitle.equals(entry.getUrlTitle())) {
 					oldUrlTitle = tempOldUrlTitle;
 				}
 
 				AssetPublisherUtil.addAndStoreSelection(
-					actionRequest, BlogsEntry.class.getName(), entry.getEntryId(),
-					-1);
+					actionRequest, BlogsEntry.class.getName(),
+					entry.getEntryId(), -1);
 			}
 		}
 		finally {
-			StreamUtil.cleanUp(smallFileInputStream);
+			StreamUtil.cleanUp(smallImageInputStream);
 		}
 
 		return new Object[] {entry, oldUrlTitle};

@@ -140,9 +140,8 @@ public class ImportPagesAction extends PortletAction {
 				actionRequest.getParameterMap());
 		}
 		finally {
-			for (int i = 0; i < inputStreams.length; i++) {
-				if (inputStreams[i] != null)
-				StreamUtil.cleanUp(inputStreams[i]);
+			for (InputStream inputStream : inputStreams) {
+				StreamUtil.cleanUp(inputStream);
 			}
 		}
 

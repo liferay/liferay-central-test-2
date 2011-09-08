@@ -158,7 +158,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			subject = body.substring(0, Math.min(body.length(), 50)) + "...";
 		}
 
-		List<ObjectValuePair<String, InputStream>> inputStreamEntries =
+		List<ObjectValuePair<String, InputStream>> inputStreamOVPs =
 			Collections.emptyList();
 		boolean anonymous = false;
 		double priority = 0.0;
@@ -172,7 +172,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		MBMessage message = addMessage(
 			userId, userName, groupId, categoryId, threadId, parentMessageId,
 			subject, body, MBMessageConstants.DEFAULT_FORMAT,
-			inputStreamEntries, anonymous, priority, allowPingbacks,
+			inputStreamOVPs, anonymous, priority, allowPingbacks,
 			serviceContext);
 
 		// Discussion
@@ -196,7 +196,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			long userId, String userName, long groupId, long categoryId,
 			long threadId, long parentMessageId, String subject, String body,
 			String format,
-			List<ObjectValuePair<String, InputStream>> inputStreamEntries,
+			List<ObjectValuePair<String, InputStream>> inputStreamOVPs,
 			boolean anonymous, double priority, boolean allowPingbacks,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
@@ -299,7 +299,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		message.setSubject(subject);
 		message.setBody(body);
 		message.setFormat(format);
-		message.setAttachments(!inputStreamEntries.isEmpty());
+		message.setAttachments(!inputStreamOVPs.isEmpty());
 		message.setAnonymous(anonymous);
 
 		if (message.isDiscussion()) {
@@ -316,7 +316,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		// Attachments
 
-		if (!inputStreamEntries.isEmpty()) {
+		if (!inputStreamOVPs.isEmpty()) {
 			long companyId = message.getCompanyId();
 			long repositoryId = CompanyConstants.SYSTEM;
 			String dirName = message.getAttachmentsDir();
@@ -332,12 +332,12 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 			DLStoreUtil.addDirectory(companyId, repositoryId, dirName);
 
-			for (int i = 0; i < inputStreamEntries.size(); i++) {
-				ObjectValuePair<String, InputStream> inputStreamEntry =
-					inputStreamEntries.get(i);
+			for (int i = 0; i < inputStreamOVPs.size(); i++) {
+				ObjectValuePair<String, InputStream> inputStreamOVP =
+					inputStreamOVPs.get(i);
 
-				String fileName = inputStreamEntry.getKey();
-				InputStream inputStream = inputStreamEntry.getValue();
+				String fileName = inputStreamOVP.getKey();
+				InputStream inputStream = inputStreamOVP.getValue();
 
 				try {
 					DLStoreUtil.addFile(
@@ -404,7 +404,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 	public MBMessage addMessage(
 			long userId, String userName, long groupId, long categoryId,
 			String subject, String body, String format,
-			List<ObjectValuePair<String, InputStream>> inputStreamEntries,
+			List<ObjectValuePair<String, InputStream>> inputStreamOVPs,
 			boolean anonymous, double priority, boolean allowPingbacks,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
@@ -414,7 +414,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		return addMessage(
 			userId, userName, groupId, categoryId, threadId, parentMessageId,
-			subject, body, format, inputStreamEntries, anonymous, priority,
+			subject, body, format, inputStreamOVPs, anonymous, priority,
 			allowPingbacks, serviceContext);
 	}
 
@@ -1330,7 +1330,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			subject = body.substring(0, Math.min(body.length(), 50)) + "...";
 		}
 
-		List<ObjectValuePair<String, InputStream>> inputStreamEntries =
+		List<ObjectValuePair<String, InputStream>> inputStreamOVPs =
 			Collections.emptyList();
 		List<String> existingFiles = new ArrayList<String>();
 		double priority = 0.0;
@@ -1340,13 +1340,13 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		serviceContext.setAttribute("classPK", String.valueOf(classPK));
 
 		return updateMessage(
-			userId, messageId, subject, body, inputStreamEntries, existingFiles,
+			userId, messageId, subject, body, inputStreamOVPs, existingFiles,
 			priority, allowPingbacks, serviceContext);
 	}
 
 	public MBMessage updateMessage(
 			long userId, long messageId, String subject, String body,
-			List<ObjectValuePair<String, InputStream>> inputStreamEntries,
+			List<ObjectValuePair<String, InputStream>> inputStreamOVPs,
 			List<String> existingFiles, double priority, boolean allowPingbacks,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
@@ -1369,7 +1369,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		message.setSubject(subject);
 		message.setBody(body);
 		message.setAttachments(
-			!inputStreamEntries.isEmpty() || !existingFiles.isEmpty());
+			!inputStreamOVPs.isEmpty() || !existingFiles.isEmpty());
 		message.setAllowPingbacks(allowPingbacks);
 
 		if (priority != MBThreadConstants.PRIORITY_NOT_GIVEN) {
@@ -1389,7 +1389,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		long repositoryId = CompanyConstants.SYSTEM;
 		String dirName = message.getAttachmentsDir();
 
-		if (!inputStreamEntries.isEmpty() || !existingFiles.isEmpty()) {
+		if (!inputStreamOVPs.isEmpty() || !existingFiles.isEmpty()) {
 			try {
 				DLStoreUtil.addDirectory(companyId, repositoryId, dirName);
 			}
@@ -1405,12 +1405,12 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				}
 			}
 
-			for (int i = 0; i < inputStreamEntries.size(); i++) {
-				ObjectValuePair<String, InputStream> inputStreamEntry =
-					inputStreamEntries.get(i);
+			for (int i = 0; i < inputStreamOVPs.size(); i++) {
+				ObjectValuePair<String, InputStream> inputStreamOVP =
+					inputStreamOVPs.get(i);
 
-				String fileName = inputStreamEntry.getKey();
-				InputStream inputStream = inputStreamEntry.getValue();
+				String fileName = inputStreamOVP.getKey();
+				InputStream inputStream = inputStreamOVP.getValue();
 
 				try {
 					DLStoreUtil.addFile(

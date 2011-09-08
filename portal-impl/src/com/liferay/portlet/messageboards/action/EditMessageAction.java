@@ -324,8 +324,8 @@ public class EditMessageAction extends PortletAction {
 		boolean attachments = ParamUtil.getBoolean(
 			actionRequest, "attachments");
 
-		List<ObjectValuePair<String, InputStream>> inputStreamEntries =
-				new ArrayList<ObjectValuePair<String, InputStream>>(5);
+		List<ObjectValuePair<String, InputStream>> inputStreamOVPs =
+			new ArrayList<ObjectValuePair<String, InputStream>>(5);
 
 		try {
 			if (attachments) {
@@ -339,13 +339,15 @@ public class EditMessageAction extends PortletAction {
 					String fileName = uploadPortletRequest.getFileName(
 						"msgFile" + i);
 
-					if (inputStream != null) {
-						ObjectValuePair<String, InputStream> ovp =
-								new ObjectValuePair<String, InputStream>(
-									fileName, inputStream);
-
-						inputStreamEntries.add(ovp);
+					if (inputStream == null) {
+						continue;
 					}
+
+					ObjectValuePair<String, InputStream> inputStreamOVP =
+						new ObjectValuePair<String, InputStream>(
+							fileName, inputStream);
+
+					inputStreamOVPs.add(inputStreamOVP);
 				}
 			}
 
@@ -368,6 +370,7 @@ public class EditMessageAction extends PortletAction {
 			if (messageId <= 0) {
 				if (PropsValues.
 						CAPTCHA_CHECK_PORTLET_MESSAGE_BOARDS_EDIT_MESSAGE) {
+
 					CaptchaUtil.check(actionRequest);
 				}
 
@@ -377,7 +380,7 @@ public class EditMessageAction extends PortletAction {
 
 					message = MBMessageServiceUtil.addMessage(
 						groupId, categoryId, subject, body, format,
-						inputStreamEntries, anonymous, priority, allowPingbacks,
+						inputStreamOVPs, anonymous, priority, allowPingbacks,
 						serviceContext);
 
 					if (question) {
@@ -391,7 +394,7 @@ public class EditMessageAction extends PortletAction {
 
 					message = MBMessageServiceUtil.addMessage(
 						groupId, categoryId, threadId, parentMessageId, subject,
-						body, format, inputStreamEntries, anonymous, priority,
+						body, format, inputStreamOVPs, anonymous, priority,
 						allowPingbacks, serviceContext);
 				}
 			}
@@ -410,7 +413,7 @@ public class EditMessageAction extends PortletAction {
 				// Update message
 
 				message = MBMessageServiceUtil.updateMessage(
-					messageId, subject, body, inputStreamEntries, existingFiles,
+					messageId, subject, body, inputStreamOVPs, existingFiles,
 					priority, allowPingbacks, serviceContext);
 
 				if (message.isRoot()) {
@@ -436,10 +439,10 @@ public class EditMessageAction extends PortletAction {
 		}
 		finally {
 			if (attachments) {
-				for (ObjectValuePair<String, InputStream> inputStreamEntry :
-						inputStreamEntries) {
+				for (ObjectValuePair<String, InputStream> inputStreamOVP :
+						inputStreamOVPs) {
 
-					InputStream inputStream = inputStreamEntry.getValue();
+					InputStream inputStream = inputStreamOVP.getValue();
 
 					StreamUtil.cleanUp(inputStream);
 				}

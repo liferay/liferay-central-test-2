@@ -59,13 +59,11 @@ public class ImportEventsAction extends PortletAction {
 			ServiceContext serviceContext = ServiceContextFactory.getInstance(
 				CalEvent.class.getName(), actionRequest);
 
-			inputStream = uploadPortletRequest.getFileAsStream(
-				"file");
-
-			String fileName = uploadPortletRequest.getFileName(
-				"file");
+			String fileName = uploadPortletRequest.getFileName("file");
 
 			validate(fileName);
+
+			inputStream = uploadPortletRequest.getFileAsStream("file");
 
 			CalEventServiceUtil.importICal4j(
 				serviceContext.getScopeGroupId(), inputStream);

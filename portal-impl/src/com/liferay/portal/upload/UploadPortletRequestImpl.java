@@ -21,9 +21,9 @@ import com.liferay.portal.kernel.util.MimeTypesUtil;
 import com.liferay.portal.kernel.util.Validator;
 
 import java.io.File;
-
 import java.io.IOException;
 import java.io.InputStream;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Enumeration;
@@ -219,10 +219,8 @@ public class UploadPortletRequestImpl
 		return parameterValues;
 	}
 
-
 	public long getSize(String name) {
-		Long size = _uploadServletRequest.getSize(
-			_namespace.concat(name));
+		Long size = _uploadServletRequest.getSize(_namespace.concat(name));
 
 		if (size == null) {
 			size = _uploadServletRequest.getSize(name);

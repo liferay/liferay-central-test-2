@@ -63,8 +63,8 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 			int displayDateMonth, int displayDateDay, int displayDateYear,
 			int displayDateHour, int displayDateMinute, boolean allowPingbacks,
 			boolean allowTrackbacks, String[] trackbacks, boolean smallImage,
-			String smallImageURL, InputStream smallFileInputStream,
-			String smallFileName, ServiceContext serviceContext)
+			String smallImageURL, String smallImageFileName,
+			InputStream smallImageInputStream, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		BlogsPermission.check(
@@ -75,7 +75,8 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 			getUserId(), title, description, content, displayDateMonth,
 			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
 			allowPingbacks, allowTrackbacks, trackbacks, smallImage,
-			smallImageURL, smallFileInputStream, smallFileName, serviceContext);
+			smallImageURL, smallImageFileName, smallImageInputStream,
+			serviceContext);
 	}
 
 	public void deleteEntry(long entryId)
@@ -323,8 +324,8 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 			int displayDateMonth, int displayDateDay, int displayDateYear,
 			int displayDateHour, int displayDateMinute, boolean allowPingbacks,
 			boolean allowTrackbacks, String[] trackbacks, boolean smallImage,
-			String smallImageURL, InputStream smallFileInputStream,
-			String smallFileName, ServiceContext serviceContext)
+			String smallImageURL, String smallImageFileName,
+			InputStream smallImageInputStream, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		BlogsEntryPermission.check(
@@ -334,7 +335,8 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 			getUserId(), entryId, title, description, content, displayDateMonth,
 			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
 			allowPingbacks, allowTrackbacks, trackbacks, smallImage,
-			smallImageURL, smallFileInputStream, smallFileName, serviceContext);
+			smallImageURL, smallImageFileName, smallImageInputStream,
+			serviceContext);
 	}
 
 	protected String exportToRSS(

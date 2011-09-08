@@ -92,7 +92,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 	public MBMessage addMessage(
 			long groupId, long categoryId, long threadId, long parentMessageId,
 			String subject, String body, String format,
-			List<ObjectValuePair<String, InputStream>> inputStreamEntries,
+			List<ObjectValuePair<String, InputStream>> inputStreamOVPs,
 			boolean anonymous, double priority, boolean allowPingbacks,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
@@ -109,7 +109,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 				getPermissionChecker(), groupId, categoryId,
 				ActionKeys.ADD_FILE)) {
 
-			inputStreamEntries = Collections.emptyList();
+			inputStreamOVPs = Collections.emptyList();
 		}
 
 		boolean preview = GetterUtil.getBoolean(
@@ -131,14 +131,14 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 
 		return mbMessageLocalService.addMessage(
 			getGuestOrUserId(), null, groupId, categoryId, threadId,
-			parentMessageId, subject, body, format, inputStreamEntries,
+			parentMessageId, subject, body, format, inputStreamOVPs,
 			anonymous, priority, allowPingbacks, serviceContext);
 	}
 
 	public MBMessage addMessage(
 			long groupId, long categoryId, String subject, String body,
 			String format,
-			List<ObjectValuePair<String, InputStream>> inputStreamEntries,
+			List<ObjectValuePair<String, InputStream>> inputStreamOVPs,
 			boolean anonymous, double priority, boolean allowPingbacks,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
@@ -151,7 +151,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 				getPermissionChecker(), groupId, categoryId,
 				ActionKeys.ADD_FILE)) {
 
-			inputStreamEntries = Collections.emptyList();
+			inputStreamOVPs = Collections.emptyList();
 		}
 
 		if (!MBCategoryPermission.contains(
@@ -163,7 +163,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 
 		return mbMessageLocalService.addMessage(
 			getGuestOrUserId(), null, groupId, categoryId, subject, body,
-			format, inputStreamEntries, anonymous, priority, allowPingbacks,
+			format, inputStreamOVPs, anonymous, priority, allowPingbacks,
 			serviceContext);
 	}
 
@@ -580,7 +580,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 
 	public MBMessage updateMessage(
 			long messageId, String subject, String body,
-			List<ObjectValuePair<String, InputStream>> inputStreamEntries,
+			List<ObjectValuePair<String, InputStream>> inputStreamOVPs,
 			List<String> existingFiles, double priority, boolean allowPingbacks,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
@@ -610,7 +610,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 				getPermissionChecker(), message.getGroupId(),
 				message.getCategoryId(), ActionKeys.ADD_FILE)) {
 
-			inputStreamEntries = Collections.emptyList();
+			inputStreamOVPs = Collections.emptyList();
 		}
 
 		if (!MBCategoryPermission.contains(
@@ -624,7 +624,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 		}
 
 		return mbMessageLocalService.updateMessage(
-			getGuestOrUserId(), messageId, subject, body, inputStreamEntries,
+			getGuestOrUserId(), messageId, subject, body, inputStreamOVPs,
 			existingFiles, priority, allowPingbacks, serviceContext);
 	}
 

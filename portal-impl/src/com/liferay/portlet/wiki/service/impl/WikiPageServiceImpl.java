@@ -100,6 +100,17 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 			redirectTitle, serviceContext);
 	}
 
+	public void addPageAttachment(
+			long nodeId, String title, String fileName,	File file)
+		throws PortalException, SystemException {
+
+		WikiNodePermission.check(
+			getPermissionChecker(), nodeId, ActionKeys.ADD_ATTACHMENT);
+
+		wikiPageLocalService.addPageAttachment(
+			getUserId(), nodeId, title, fileName, file);
+	}
+
 	public void addPageAttachments(
 			long nodeId, String title,
 			List<ObjectValuePair<String, InputStream>> inputStream)
@@ -110,17 +121,6 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 
 		wikiPageLocalService.addPageAttachments(
 			getUserId(), nodeId, title, inputStream);
-	}
-
-	public void addPageAttachment(
-			long nodeId, String title, String fileName,	File file)
-		throws PortalException, SystemException {
-
-		WikiNodePermission.check(
-			getPermissionChecker(), nodeId, ActionKeys.ADD_ATTACHMENT);
-
-		wikiPageLocalService.addPageAttachment(
-			getUserId(), nodeId, title, fileName, file);
 	}
 
 	public String addTempPageAttachment(

@@ -20,7 +20,6 @@ import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.Validator;
 
 import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import java.io.InputStream;
 
 import java.util.ArrayList;
@@ -31,44 +30,8 @@ import java.util.List;
  */
 public class MBMailMessage {
 
-	public void addFile(String fileName, byte[] bytes) {
-		_files.add(new ObjectValuePair<String, byte[]>(fileName, bytes));
-	}
-
-	public List<ObjectValuePair<String, InputStream>> getFiles()
-		throws IOException {
-
-		List<ObjectValuePair<String, InputStream>> inputStreams =
-			new ArrayList<ObjectValuePair<String, InputStream>>(
-				_files.size());
-
-		for (ObjectValuePair<String, byte[]> ovp : _files) {
-			String key = ovp.getKey();
-			byte[] bytes = ovp.getValue();
-
-			ByteArrayInputStream bais = new ByteArrayInputStream(bytes);
-
-			inputStreams.add(
-				new ObjectValuePair<String, InputStream>(key, bais));
-		}
-
-		return inputStreams;
-	}
-
-	public String getHtmlBody() {
-		return _htmlBody;
-	}
-
-	public void setHtmlBody(String htmlBody) {
-		_htmlBody = htmlBody;
-	}
-
-	public String getPlainBody() {
-		return _plainBody;
-	}
-
-	public void setPlainBody(String plainBody) {
-		_plainBody = plainBody;
+	public void addBytes(String fileName, byte[] bytes) {
+		_bytesOVPs.add(new ObjectValuePair<String, byte[]>(fileName, bytes));
 	}
 
 	public String getBody() {
@@ -83,9 +46,47 @@ public class MBMailMessage {
 		}
 	}
 
+	public String getHtmlBody() {
+		return _htmlBody;
+	}
+
+	public List<ObjectValuePair<String, InputStream>> getInputStreamOVPs() {
+		List<ObjectValuePair<String, InputStream>> inputStreamOVPs =
+			new ArrayList<ObjectValuePair<String, InputStream>>(
+				_bytesOVPs.size());
+
+		for (ObjectValuePair<String, byte[]> bytesOVP : _bytesOVPs) {
+			String key = bytesOVP.getKey();
+			byte[] bytes = bytesOVP.getValue();
+
+			ByteArrayInputStream byteArrayInputStream =
+							new ByteArrayInputStream(bytes);
+
+			ObjectValuePair<String, InputStream> inputStreamOVP =
+				new ObjectValuePair<String, InputStream>(
+					key, byteArrayInputStream);
+
+			inputStreamOVPs.add(inputStreamOVP);
+		}
+
+		return inputStreamOVPs;
+	}
+
+	public String getPlainBody() {
+		return _plainBody;
+	}
+
+	public void setHtmlBody(String htmlBody) {
+		_htmlBody = htmlBody;
+	}
+
+	public void setPlainBody(String plainBody) {
+		_plainBody = plainBody;
+	}
+
+	private List<ObjectValuePair<String, byte[]>> _bytesOVPs =
+		new ArrayList<ObjectValuePair<String, byte[]>>();
 	private String _htmlBody;
 	private String _plainBody;
-	private List<ObjectValuePair<String, byte[]>> _files =
-		new ArrayList<ObjectValuePair<String, byte[]>>();
 
 }

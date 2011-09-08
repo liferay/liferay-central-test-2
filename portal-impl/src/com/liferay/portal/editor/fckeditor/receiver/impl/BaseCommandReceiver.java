@@ -161,6 +161,7 @@ public abstract class BaseCommandReceiver implements CommandReceiver {
 		HttpServletResponse response) {
 
 		InputStream inputStream = null;
+
 		String returnValue = null;
 
 		try {

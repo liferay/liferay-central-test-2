@@ -187,7 +187,8 @@ public class MBUtil {
 		}
 	}
 
-	public static void collectPartContent(Part part, MBMailMessage collector)
+	public static void collectPartContent(
+			Part part, MBMailMessage mbMailMessage)
 		throws Exception {
 
 		Object partContent = part.getContent();
@@ -210,18 +211,20 @@ public class MBUtil {
 				bytes = JavaMailUtil.getBytes(part);
 			}
 
-			collector.addFile(part.getFileName(), bytes);
+			mbMailMessage.addBytes(part.getFileName(), bytes);
 		}
 		else {
 			if (partContent instanceof MimeMultipart) {
-				collectMultipartContent((MimeMultipart)partContent, collector);
+				MimeMultipart mimeMultipart = (MimeMultipart)partContent;
+
+				collectMultipartContent(mimeMultipart, mbMailMessage);
 			}
 			else if (partContent instanceof String) {
 				if (contentType.startsWith("text/html")) {
-					collector.setHtmlBody((String)partContent);
+					mbMailMessage.setHtmlBody((String)partContent);
 				}
 				else {
-					collector.setPlainBody((String)partContent);
+					mbMailMessage.setPlainBody((String)partContent);
 				}
 			}
 		}

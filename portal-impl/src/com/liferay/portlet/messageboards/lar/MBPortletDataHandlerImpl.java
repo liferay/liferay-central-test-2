@@ -55,7 +55,6 @@ import com.liferay.portlet.messageboards.service.persistence.MBMessageUtil;
 import com.liferay.portlet.messageboards.service.persistence.MBThreadFlagUtil;
 import com.liferay.portlet.messageboards.service.persistence.MBThreadUtil;
 
-import java.io.IOException;
 import java.io.InputStream;
 
 import java.util.ArrayList;
@@ -429,9 +428,8 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 	}
 
 	protected List<ObjectValuePair<String, InputStream>> getAttachments(
-			PortletDataContext portletDataContext, Element messageElement,
-			MBMessage message)
-		throws IOException {
+		PortletDataContext portletDataContext, Element messageElement,
+		MBMessage message) {
 
 		if (!message.isAttachments() &&
 			portletDataContext.getBooleanParameter(_NAMESPACE, "attachments")) {
@@ -439,7 +437,7 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 			return Collections.emptyList();
 		}
 
-		List<ObjectValuePair<String, InputStream>> ovps =
+		List<ObjectValuePair<String, InputStream>> inputStreamOVPs =
 			new ArrayList<ObjectValuePair<String, InputStream>>();
 
 		List<Element> attachmentElements = messageElement.elements(
@@ -450,19 +448,22 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 			String binPath = attachmentElement.attributeValue(
 				"bin-path");
 
-			InputStream is = portletDataContext.getZipEntryAsInputStream(
-				binPath);
+			InputStream inputStream =
+				portletDataContext.getZipEntryAsInputStream(binPath);
 
-			ovps.add(new ObjectValuePair<String, InputStream>(name, is));
+			ObjectValuePair<String, InputStream> inputStreamOVP =
+				new ObjectValuePair<String, InputStream>(name, inputStream);
+
+			inputStreamOVPs.add(inputStreamOVP);
 		}
 
-		if (ovps.isEmpty()) {
+		if (inputStreamOVPs.isEmpty()) {
 			_log.error(
 				"Could not find attachments for message " +
 					message.getMessageId());
 		}
 
-		return ovps;
+		return inputStreamOVPs;
 	}
 
 	protected long getCategoryId(
@@ -732,8 +733,8 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		List<String> existingFiles = new ArrayList<String>();
 
-		List<ObjectValuePair<String, InputStream>> files = getAttachments(
-			portletDataContext, messageElement, message);
+		List<ObjectValuePair<String, InputStream>> inputStreamOVPs =
+			getAttachments(portletDataContext, messageElement, message);
 
 		try {
 			ServiceContext serviceContext =
@@ -761,15 +762,15 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 						userId, userName, portletDataContext.getScopeGroupId(),
 						categoryId, threadId, parentMessageId,
 						message.getSubject(), message.getBody(),
-						message.getFormat(), files, message.getAnonymous(),
-						message.getPriority(), message.getAllowPingbacks(),
-						serviceContext);
+						message.getFormat(), inputStreamOVPs,
+						message.getAnonymous(), message.getPriority(),
+						message.getAllowPingbacks(), serviceContext);
 				}
 				else {
 					importedMessage = MBMessageLocalServiceUtil.updateMessage(
 						userId, existingMessage.getMessageId(),
-						message.getSubject(), message.getBody(), files,
-						existingFiles, message.getPriority(),
+						message.getSubject(), message.getBody(),
+						inputStreamOVPs, existingFiles, message.getPriority(),
 						message.getAllowPingbacks(), serviceContext);
 				}
 			}
@@ -777,7 +778,7 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 				importedMessage = MBMessageLocalServiceUtil.addMessage(
 					userId, userName, portletDataContext.getScopeGroupId(),
 					categoryId, threadId, parentMessageId, message.getSubject(),
-					message.getBody(), message.getFormat(), files,
+					message.getBody(), message.getFormat(), inputStreamOVPs,
 					message.getAnonymous(), message.getPriority(),
 					message.getAllowPingbacks(), serviceContext);
 			}
@@ -788,8 +789,10 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 				message, importedMessage, _NAMESPACE);
 		}
 		finally {
-			for (ObjectValuePair<String, InputStream> ovp : files) {
-				InputStream inputStream = ovp.getValue();
+			for (ObjectValuePair<String, InputStream> inputStreamOVP :
+					inputStreamOVPs) {
+
+				InputStream inputStream = inputStreamOVP.getValue();
 
 				StreamUtil.cleanUp(inputStream);
 			}

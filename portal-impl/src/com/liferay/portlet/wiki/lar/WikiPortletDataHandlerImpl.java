@@ -235,8 +235,8 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 				InputStream inputStream = null;
 
 				try {
-					inputStream =
-						portletDataContext.getZipEntryAsInputStream(binPath);
+					inputStream = portletDataContext.getZipEntryAsInputStream(
+						binPath);
 
 					WikiPageLocalServiceUtil.addPageAttachment(
 						importedPage.getCompanyId(),

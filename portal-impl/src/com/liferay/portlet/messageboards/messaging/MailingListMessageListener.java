@@ -218,9 +218,9 @@ public class MailingListMessageListener extends BaseMessageListener {
 			_log.debug("Parent message " + parentMessage);
 		}
 
-		MBMailMessage collector = new MBMailMessage();
+		MBMailMessage mbMailMessage = new MBMailMessage();
 
-		MBUtil.collectPartContent(mailMessage, collector);
+		MBUtil.collectPartContent(mailMessage, mbMailMessage);
 
 		PermissionCheckerUtil.setThreadValues(user);
 
@@ -236,27 +236,29 @@ public class MailingListMessageListener extends BaseMessageListener {
 			PortalUtil.getLayoutFullURL(groupId, PortletKeys.MESSAGE_BOARDS));
 		serviceContext.setScopeGroupId(groupId);
 
-		List<ObjectValuePair<String, InputStream>> inputStreams =
-			collector.getFiles();
+		List<ObjectValuePair<String, InputStream>> inputStreamOVPs =
+			mbMailMessage.getInputStreamOVPs();
 
 		try {
 			if (parentMessage == null) {
 				MBMessageServiceUtil.addMessage(
-					groupId, categoryId, subject, collector.getBody(),
-					MBMessageConstants.DEFAULT_FORMAT, inputStreams, anonymous,
-					0.0, true, serviceContext);
+					groupId, categoryId, subject, mbMailMessage.getBody(),
+					MBMessageConstants.DEFAULT_FORMAT, inputStreamOVPs,
+					anonymous, 0.0, true, serviceContext);
 			}
 			else {
 				MBMessageServiceUtil.addMessage(
 					groupId, categoryId, parentMessage.getThreadId(),
-					parentMessage.getMessageId(), subject, collector.getBody(),
-					MBMessageConstants.DEFAULT_FORMAT, inputStreams, anonymous,
-					0.0, true, serviceContext);
+					parentMessage.getMessageId(), subject,
+					mbMailMessage.getBody(), MBMessageConstants.DEFAULT_FORMAT,
+					inputStreamOVPs, anonymous, 0.0, true, serviceContext);
 			}
 		}
 		finally {
-			for (ObjectValuePair<String, InputStream> ovp : inputStreams) {
-				InputStream inputStream = ovp.getValue();
+			for (ObjectValuePair<String, InputStream> inputStreamOVP :
+					inputStreamOVPs) {
+
+				InputStream inputStream = inputStreamOVP.getValue();
 
 				StreamUtil.cleanUp(inputStream);
 			}

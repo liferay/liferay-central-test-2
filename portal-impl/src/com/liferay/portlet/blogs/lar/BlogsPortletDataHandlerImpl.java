@@ -39,6 +39,7 @@ import com.liferay.portlet.blogs.service.persistence.BlogsEntryUtil;
 import com.liferay.portlet.journal.lar.JournalPortletDataHandlerImpl;
 
 import java.io.InputStream;
+
 import java.util.Calendar;
 import java.util.List;
 
@@ -317,20 +318,19 @@ public class BlogsPortletDataHandlerImpl extends BasePortletDataHandler {
 				WorkflowConstants.ACTION_SAVE_DRAFT);
 		}
 
-		String smallImagePath = entryElement.attributeValue("small-image-path");
-
-		InputStream smallImageFileInputStream = null;
-
 		String smallImageFileName = null;
+		InputStream smallImageInputStream = null;
 
 		try {
-			if (entry.isSmallImage() && Validator.isNotNull(smallImagePath)) {
-				smallImageFileInputStream =
-					portletDataContext.getZipEntryAsInputStream(smallImagePath);
+			String smallImagePath = entryElement.attributeValue(
+				"small-image-path");
 
+			if (entry.isSmallImage() && Validator.isNotNull(smallImagePath)) {
 				smallImageFileName =
 					String.valueOf(entry.getSmallImageId()).concat(
 						StringPool.PERIOD).concat(entry.getSmallImageType());
+				smallImageInputStream =
+					portletDataContext.getZipEntryAsInputStream(smallImagePath);
 			}
 
 			BlogsEntry importedEntry = null;
@@ -348,7 +348,7 @@ public class BlogsPortletDataHandlerImpl extends BasePortletDataHandler {
 						displayDateYear, displayDateHour, displayDateMinute,
 						allowPingbacks, allowTrackbacks, trackbacks,
 						entry.isSmallImage(), entry.getSmallImageURL(),
-						smallImageFileInputStream, smallImageFileName,
+						smallImageFileName, smallImageInputStream,
 						serviceContext);
 				}
 				else {
@@ -358,8 +358,8 @@ public class BlogsPortletDataHandlerImpl extends BasePortletDataHandler {
 						displayDateMonth, displayDateDay, displayDateYear,
 						displayDateHour, displayDateMinute, allowPingbacks,
 						allowTrackbacks, trackbacks, entry.getSmallImage(),
-						entry.getSmallImageURL(), smallImageFileInputStream,
-						smallImageFileName, serviceContext);
+						entry.getSmallImageURL(), smallImageFileName,
+						smallImageInputStream, serviceContext);
 				}
 			}
 			else {
@@ -369,7 +369,7 @@ public class BlogsPortletDataHandlerImpl extends BasePortletDataHandler {
 					displayDateYear, displayDateHour, displayDateMinute,
 					allowPingbacks, allowTrackbacks, trackbacks,
 					entry.getSmallImage(), entry.getSmallImageURL(),
-					smallImageFileInputStream, smallImageFileName,
+					smallImageFileName, smallImageInputStream,
 					serviceContext);
 			}
 
@@ -377,7 +377,7 @@ public class BlogsPortletDataHandlerImpl extends BasePortletDataHandler {
 				entry, importedEntry, _NAMESPACE);
 		}
 		finally {
-			StreamUtil.cleanUp(smallImageFileInputStream);
+			StreamUtil.cleanUp(smallImageInputStream);
 		}
 
 	}

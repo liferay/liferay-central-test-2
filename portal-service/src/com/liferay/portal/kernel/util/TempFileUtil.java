@@ -62,12 +62,15 @@ public class TempFileUtil {
 			InputStream inputStream)
 		throws IOException, PortalException, SystemException {
 
-		File uploadedFile = null;
-		if (inputStream instanceof ByteArrayFileInputStream) {
-			uploadedFile =
-				((ByteArrayFileInputStream) inputStream).getFile();
+		File file = null;
 
-			DLStoreUtil.validate(fileName, true, uploadedFile);
+		if (inputStream instanceof ByteArrayFileInputStream) {
+			ByteArrayFileInputStream byteArrayFileInputStream =
+				(ByteArrayFileInputStream)inputStream;
+
+			file = byteArrayFileInputStream.getFile();
+
+			DLStoreUtil.validate(fileName, true, file);
 		}
 		else {
 			DLStoreUtil.validate(fileName, true, inputStream);
@@ -75,8 +78,8 @@ public class TempFileUtil {
 
 		File tempFile = getTempFile(userId, fileName, tempPathName);
 
-		if (uploadedFile != null) {
-			FileUtil.copyFile(uploadedFile, tempFile);
+		if (file != null) {
+			FileUtil.copyFile(file, tempFile);
 		}
 		else {
 			FileUtil.write(tempFile, inputStream);

@@ -226,28 +226,6 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 	}
 
 	public void addPageAttachment(
-			long companyId, String dirName, Date modifiedDate, String fileName,
-			InputStream inputStream)
-		throws PortalException, SystemException {
-
-		if (inputStream == null) {
-			return;
-		}
-
-		long repositoryId = CompanyConstants.SYSTEM;
-
-		try {
-			DLStoreUtil.addDirectory(companyId, repositoryId, dirName);
-		}
-		catch (DuplicateDirectoryException dde) {
-		}
-
-		DLStoreUtil.addFile(
-			companyId, repositoryId, dirName + "/" + fileName, false,
-			inputStream);
-	}
-
-	public void addPageAttachment(
 			long userId, long nodeId, String title, String fileName,
 			File file)
 		throws PortalException, SystemException {
@@ -311,6 +289,28 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		DLStoreUtil.addFile(
 			companyId, repositoryId, dirName + "/" + fileName, inputStream);
+	}
+
+	public void addPageAttachment(
+			long companyId, String dirName, Date modifiedDate, String fileName,
+			InputStream inputStream)
+		throws PortalException, SystemException {
+
+		if (inputStream == null) {
+			return;
+		}
+
+		long repositoryId = CompanyConstants.SYSTEM;
+
+		try {
+			DLStoreUtil.addDirectory(companyId, repositoryId, dirName);
+		}
+		catch (DuplicateDirectoryException dde) {
+		}
+
+		DLStoreUtil.addFile(
+			companyId, repositoryId, dirName + "/" + fileName, false,
+			inputStream);
 	}
 
 	public void addPageAttachments(

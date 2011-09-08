@@ -145,7 +145,7 @@ public class EditPageAttachmentAction extends EditFileEntryAction {
 
 		int numOfFiles = ParamUtil.getInteger(actionRequest, "numOfFiles");
 
-		List<ObjectValuePair<String, InputStream>> inputStreamEntries =
+		List<ObjectValuePair<String, InputStream>> inputStreamOVPs =
 			new ArrayList<ObjectValuePair<String, InputStream>>();
 
 		try {
@@ -155,37 +155,40 @@ public class EditPageAttachmentAction extends EditFileEntryAction {
 				String fileName = uploadPortletRequest.getFileName("file");
 
 				if (inputStream != null) {
-					ObjectValuePair<String, InputStream> ovp =
+					ObjectValuePair<String, InputStream> inputStreamOVP =
 						new ObjectValuePair<String, InputStream>(
 							fileName, inputStream);
 
-					inputStreamEntries.add(ovp);
+					inputStreamOVPs.add(inputStreamOVP);
 				}
 			}
 			else {
 				for (int i = 1; i <= numOfFiles; i++) {
-					InputStream inputStream = uploadPortletRequest.getFileAsStream(
+					InputStream inputStream =
+						uploadPortletRequest.getFileAsStream("file" + i);
+					String fileName = uploadPortletRequest.getFileName(
 						"file" + i);
-					String fileName = uploadPortletRequest.getFileName("file" + i);
 
-					if (inputStream != null) {
-						ObjectValuePair<String, InputStream> ovp =
-							new ObjectValuePair<String, InputStream>(
-								fileName, inputStream);
-
-						inputStreamEntries.add(ovp);
+					if (inputStream == null) {
+						continue;
 					}
+
+					ObjectValuePair<String, InputStream> inputStreamOVP =
+						new ObjectValuePair<String, InputStream>(
+							fileName, inputStream);
+
+					inputStreamOVPs.add(inputStreamOVP);
 				}
 			}
 
 			WikiPageServiceUtil.addPageAttachments(
-				nodeId, title, inputStreamEntries);
+				nodeId, title, inputStreamOVPs);
 		}
 		finally {
-			for (ObjectValuePair<String, InputStream> inputStreamEntry :
-					inputStreamEntries) {
+			for (ObjectValuePair<String, InputStream> inputStreamOVP :
+					inputStreamOVPs) {
 
-				InputStream inputStream = inputStreamEntry.getValue();
+				InputStream inputStream = inputStreamOVP.getValue();
 
 				StreamUtil.cleanUp(inputStream);
 			}
@@ -222,8 +225,10 @@ public class EditPageAttachmentAction extends EditFileEntryAction {
 			String errorMessage = getAddMultipleFileEntriesErrorMessage(
 				themeDisplay, e);
 
-			invalidFileNameKVPs.add(
-				new KeyValuePair(selectedFileName, errorMessage));
+			KeyValuePair invalidFileNameKVP = new KeyValuePair(
+				selectedFileName, errorMessage);
+
+			invalidFileNameKVPs.add(invalidFileNameKVP);
 		}
 		finally {
 			FileUtil.delete(file);
@@ -248,9 +253,7 @@ public class EditPageAttachmentAction extends EditFileEntryAction {
 				nodeId, sourceFileName, _TEMP_FOLDER_NAME, inputStream);
 		}
 		finally {
-			if (inputStream != null) {
-				StreamUtil.cleanUp(inputStream);
-			}
+			StreamUtil.cleanUp(inputStream);
 		}
 	}
 

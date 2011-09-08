@@ -76,7 +76,6 @@ public class EditWorkflowDefinitionAction extends PortletAction {
 		}
 		catch (Exception e) {
 			if (e instanceof WorkflowDefinitionFileException) {
-
 				SessionErrors.add(actionRequest, e.getClass().getName());
 			}
 			else if (e instanceof WorkflowException) {
@@ -188,9 +187,7 @@ public class EditWorkflowDefinitionAction extends PortletAction {
 				WebKeys.WORKFLOW_DEFINITION, workflowDefinition);
 		}
 		finally {
-			if (inputStream != null) {
-				StreamUtil.cleanUp(inputStream);
-			}
+			StreamUtil.cleanUp(inputStream);
 		}
 
 	}
