@@ -93,8 +93,8 @@ public class UpgradeSubscription extends UpgradeProcess {
 
 			StringBundler sb = new StringBundler(5);
 
-			sb.append("select userId, MIN(userName) as userName, classNameId,");
-			sb.append(" classPK, MIN(createDate) as createDate, ");
+			sb.append("select userId, MIN(userName) as userName, ");
+			sb.append("classNameId, classPK, MIN(createDate) as createDate, ");
 			sb.append("MIN(modifiedDate) as modifiedDate from MBMessage ");
 			sb.append("where (companyId = " + companyId + ") and ");
 			sb.append("(classNameId != 0) and (parentMessageId != 0) ");
