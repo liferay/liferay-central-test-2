@@ -231,7 +231,7 @@ public class JournalContentImpl implements JournalContent {
 
 		StringBundler sb = new StringBundler();
 
-		sb.append(_CACHE_NAME);
+		sb.append(CACHE_NAME);
 		sb.append(StringPool.POUND);
 		sb.append(StringUtil.toHexString(groupId));
 		sb.append(ARTICLE_SEPARATOR);
@@ -308,12 +308,12 @@ public class JournalContentImpl implements JournalContent {
 		}
 	}
 
+	protected static final String CACHE_NAME = JournalContent.class.getName();
+
 	protected static Pattern lifecycleRenderPhasePatern = Pattern.compile(
 		"<lifecycle>\\s*RENDER_PHASE\\s*</lifecycle>");
 	protected static PortalCache portalCache = MultiVMPoolUtil.getCache(
-		JournalContentImpl._CACHE_NAME);
-
-	private static final String _CACHE_NAME = JournalContent.class.getName();
+		CACHE_NAME);
 
 	private static Log _log = LogFactoryUtil.getLog(JournalContentImpl.class);
 
