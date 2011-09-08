@@ -109,22 +109,6 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 			AssetEntryModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST, "countByCompanyId",
 			new String[] { Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FETCH_BY_G_CU = new FinderPath(AssetEntryModelImpl.ENTITY_CACHE_ENABLED,
-			AssetEntryModelImpl.FINDER_CACHE_ENABLED, AssetEntryImpl.class,
-			FINDER_CLASS_NAME_ENTITY, "fetchByG_CU",
-			new String[] { Long.class.getName(), String.class.getName() });
-	public static final FinderPath FINDER_PATH_COUNT_BY_G_CU = new FinderPath(AssetEntryModelImpl.ENTITY_CACHE_ENABLED,
-			AssetEntryModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST, "countByG_CU",
-			new String[] { Long.class.getName(), String.class.getName() });
-	public static final FinderPath FINDER_PATH_FETCH_BY_C_C = new FinderPath(AssetEntryModelImpl.ENTITY_CACHE_ENABLED,
-			AssetEntryModelImpl.FINDER_CACHE_ENABLED, AssetEntryImpl.class,
-			FINDER_CLASS_NAME_ENTITY, "fetchByC_C",
-			new String[] { Long.class.getName(), Long.class.getName() });
-	public static final FinderPath FINDER_PATH_COUNT_BY_C_C = new FinderPath(AssetEntryModelImpl.ENTITY_CACHE_ENABLED,
-			AssetEntryModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST, "countByC_C",
-			new String[] { Long.class.getName(), Long.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_BY_VISIBLE = new FinderPath(AssetEntryModelImpl.ENTITY_CACHE_ENABLED,
 			AssetEntryModelImpl.FINDER_CACHE_ENABLED, AssetEntryImpl.class,
 			FINDER_CLASS_NAME_LIST, "findByVisible",
@@ -164,6 +148,22 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 			AssetEntryModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST, "countByExpirationDate",
 			new String[] { Date.class.getName() });
+	public static final FinderPath FINDER_PATH_FETCH_BY_G_CU = new FinderPath(AssetEntryModelImpl.ENTITY_CACHE_ENABLED,
+			AssetEntryModelImpl.FINDER_CACHE_ENABLED, AssetEntryImpl.class,
+			FINDER_CLASS_NAME_ENTITY, "fetchByG_CU",
+			new String[] { Long.class.getName(), String.class.getName() });
+	public static final FinderPath FINDER_PATH_COUNT_BY_G_CU = new FinderPath(AssetEntryModelImpl.ENTITY_CACHE_ENABLED,
+			AssetEntryModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST, "countByG_CU",
+			new String[] { Long.class.getName(), String.class.getName() });
+	public static final FinderPath FINDER_PATH_FETCH_BY_C_C = new FinderPath(AssetEntryModelImpl.ENTITY_CACHE_ENABLED,
+			AssetEntryModelImpl.FINDER_CACHE_ENABLED, AssetEntryImpl.class,
+			FINDER_CLASS_NAME_ENTITY, "fetchByC_C",
+			new String[] { Long.class.getName(), Long.class.getName() });
+	public static final FinderPath FINDER_PATH_COUNT_BY_C_C = new FinderPath(AssetEntryModelImpl.ENTITY_CACHE_ENABLED,
+			AssetEntryModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST, "countByC_C",
+			new String[] { Long.class.getName(), Long.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(AssetEntryModelImpl.ENTITY_CACHE_ENABLED,
 			AssetEntryModelImpl.FINDER_CACHE_ENABLED, AssetEntryImpl.class,
 			FINDER_CLASS_NAME_LIST, "findAll", new String[0]);
@@ -943,297 +943,6 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 		}
 		else {
 			return null;
-		}
-	}
-
-	/**
-	 * Returns the asset entry where groupId = &#63; and classUuid = &#63; or throws a {@link com.liferay.portlet.asset.NoSuchEntryException} if it could not be found.
-	 *
-	 * @param groupId the group ID
-	 * @param classUuid the class uuid
-	 * @return the matching asset entry
-	 * @throws com.liferay.portlet.asset.NoSuchEntryException if a matching asset entry could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	public AssetEntry findByG_CU(long groupId, String classUuid)
-		throws NoSuchEntryException, SystemException {
-		AssetEntry assetEntry = fetchByG_CU(groupId, classUuid);
-
-		if (assetEntry == null) {
-			StringBundler msg = new StringBundler(6);
-
-			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-			msg.append("groupId=");
-			msg.append(groupId);
-
-			msg.append(", classUuid=");
-			msg.append(classUuid);
-
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-			if (_log.isWarnEnabled()) {
-				_log.warn(msg.toString());
-			}
-
-			throw new NoSuchEntryException(msg.toString());
-		}
-
-		return assetEntry;
-	}
-
-	/**
-	 * Returns the asset entry where groupId = &#63; and classUuid = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
-	 *
-	 * @param groupId the group ID
-	 * @param classUuid the class uuid
-	 * @return the matching asset entry, or <code>null</code> if a matching asset entry could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	public AssetEntry fetchByG_CU(long groupId, String classUuid)
-		throws SystemException {
-		return fetchByG_CU(groupId, classUuid, true);
-	}
-
-	/**
-	 * Returns the asset entry where groupId = &#63; and classUuid = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
-	 *
-	 * @param groupId the group ID
-	 * @param classUuid the class uuid
-	 * @param retrieveFromCache whether to use the finder cache
-	 * @return the matching asset entry, or <code>null</code> if a matching asset entry could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	public AssetEntry fetchByG_CU(long groupId, String classUuid,
-		boolean retrieveFromCache) throws SystemException {
-		Object[] finderArgs = new Object[] { groupId, classUuid };
-
-		Object result = null;
-
-		if (retrieveFromCache) {
-			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_G_CU,
-					finderArgs, this);
-		}
-
-		if (result == null) {
-			StringBundler query = new StringBundler(3);
-
-			query.append(_SQL_SELECT_ASSETENTRY_WHERE);
-
-			query.append(_FINDER_COLUMN_G_CU_GROUPID_2);
-
-			if (classUuid == null) {
-				query.append(_FINDER_COLUMN_G_CU_CLASSUUID_1);
-			}
-			else {
-				if (classUuid.equals(StringPool.BLANK)) {
-					query.append(_FINDER_COLUMN_G_CU_CLASSUUID_3);
-				}
-				else {
-					query.append(_FINDER_COLUMN_G_CU_CLASSUUID_2);
-				}
-			}
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(groupId);
-
-				if (classUuid != null) {
-					qPos.add(classUuid);
-				}
-
-				List<AssetEntry> list = q.list();
-
-				result = list;
-
-				AssetEntry assetEntry = null;
-
-				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_CU,
-						finderArgs, list);
-				}
-				else {
-					assetEntry = list.get(0);
-
-					cacheResult(assetEntry);
-
-					if ((assetEntry.getGroupId() != groupId) ||
-							(assetEntry.getClassUuid() == null) ||
-							!assetEntry.getClassUuid().equals(classUuid)) {
-						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_CU,
-							finderArgs, assetEntry);
-					}
-				}
-
-				return assetEntry;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (result == null) {
-					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_CU,
-						finderArgs);
-				}
-
-				closeSession(session);
-			}
-		}
-		else {
-			if (result instanceof List<?>) {
-				return null;
-			}
-			else {
-				return (AssetEntry)result;
-			}
-		}
-	}
-
-	/**
-	 * Returns the asset entry where classNameId = &#63; and classPK = &#63; or throws a {@link com.liferay.portlet.asset.NoSuchEntryException} if it could not be found.
-	 *
-	 * @param classNameId the class name ID
-	 * @param classPK the class p k
-	 * @return the matching asset entry
-	 * @throws com.liferay.portlet.asset.NoSuchEntryException if a matching asset entry could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	public AssetEntry findByC_C(long classNameId, long classPK)
-		throws NoSuchEntryException, SystemException {
-		AssetEntry assetEntry = fetchByC_C(classNameId, classPK);
-
-		if (assetEntry == null) {
-			StringBundler msg = new StringBundler(6);
-
-			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-			msg.append("classNameId=");
-			msg.append(classNameId);
-
-			msg.append(", classPK=");
-			msg.append(classPK);
-
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-			if (_log.isWarnEnabled()) {
-				_log.warn(msg.toString());
-			}
-
-			throw new NoSuchEntryException(msg.toString());
-		}
-
-		return assetEntry;
-	}
-
-	/**
-	 * Returns the asset entry where classNameId = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
-	 *
-	 * @param classNameId the class name ID
-	 * @param classPK the class p k
-	 * @return the matching asset entry, or <code>null</code> if a matching asset entry could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	public AssetEntry fetchByC_C(long classNameId, long classPK)
-		throws SystemException {
-		return fetchByC_C(classNameId, classPK, true);
-	}
-
-	/**
-	 * Returns the asset entry where classNameId = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
-	 *
-	 * @param classNameId the class name ID
-	 * @param classPK the class p k
-	 * @param retrieveFromCache whether to use the finder cache
-	 * @return the matching asset entry, or <code>null</code> if a matching asset entry could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	public AssetEntry fetchByC_C(long classNameId, long classPK,
-		boolean retrieveFromCache) throws SystemException {
-		Object[] finderArgs = new Object[] { classNameId, classPK };
-
-		Object result = null;
-
-		if (retrieveFromCache) {
-			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_C_C,
-					finderArgs, this);
-		}
-
-		if (result == null) {
-			StringBundler query = new StringBundler(3);
-
-			query.append(_SQL_SELECT_ASSETENTRY_WHERE);
-
-			query.append(_FINDER_COLUMN_C_C_CLASSNAMEID_2);
-
-			query.append(_FINDER_COLUMN_C_C_CLASSPK_2);
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(classNameId);
-
-				qPos.add(classPK);
-
-				List<AssetEntry> list = q.list();
-
-				result = list;
-
-				AssetEntry assetEntry = null;
-
-				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_C,
-						finderArgs, list);
-				}
-				else {
-					assetEntry = list.get(0);
-
-					cacheResult(assetEntry);
-
-					if ((assetEntry.getClassNameId() != classNameId) ||
-							(assetEntry.getClassPK() != classPK)) {
-						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_C,
-							finderArgs, assetEntry);
-					}
-				}
-
-				return assetEntry;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (result == null) {
-					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_C,
-						finderArgs);
-				}
-
-				closeSession(session);
-			}
-		}
-		else {
-			if (result instanceof List<?>) {
-				return null;
-			}
-			else {
-				return (AssetEntry)result;
-			}
 		}
 	}
 
@@ -2261,6 +1970,297 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 	}
 
 	/**
+	 * Returns the asset entry where groupId = &#63; and classUuid = &#63; or throws a {@link com.liferay.portlet.asset.NoSuchEntryException} if it could not be found.
+	 *
+	 * @param groupId the group ID
+	 * @param classUuid the class uuid
+	 * @return the matching asset entry
+	 * @throws com.liferay.portlet.asset.NoSuchEntryException if a matching asset entry could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public AssetEntry findByG_CU(long groupId, String classUuid)
+		throws NoSuchEntryException, SystemException {
+		AssetEntry assetEntry = fetchByG_CU(groupId, classUuid);
+
+		if (assetEntry == null) {
+			StringBundler msg = new StringBundler(6);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("groupId=");
+			msg.append(groupId);
+
+			msg.append(", classUuid=");
+			msg.append(classUuid);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchEntryException(msg.toString());
+		}
+
+		return assetEntry;
+	}
+
+	/**
+	 * Returns the asset entry where groupId = &#63; and classUuid = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param groupId the group ID
+	 * @param classUuid the class uuid
+	 * @return the matching asset entry, or <code>null</code> if a matching asset entry could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public AssetEntry fetchByG_CU(long groupId, String classUuid)
+		throws SystemException {
+		return fetchByG_CU(groupId, classUuid, true);
+	}
+
+	/**
+	 * Returns the asset entry where groupId = &#63; and classUuid = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param groupId the group ID
+	 * @param classUuid the class uuid
+	 * @param retrieveFromCache whether to use the finder cache
+	 * @return the matching asset entry, or <code>null</code> if a matching asset entry could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public AssetEntry fetchByG_CU(long groupId, String classUuid,
+		boolean retrieveFromCache) throws SystemException {
+		Object[] finderArgs = new Object[] { groupId, classUuid };
+
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_G_CU,
+					finderArgs, this);
+		}
+
+		if (result == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_SELECT_ASSETENTRY_WHERE);
+
+			query.append(_FINDER_COLUMN_G_CU_GROUPID_2);
+
+			if (classUuid == null) {
+				query.append(_FINDER_COLUMN_G_CU_CLASSUUID_1);
+			}
+			else {
+				if (classUuid.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_G_CU_CLASSUUID_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_G_CU_CLASSUUID_2);
+				}
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				if (classUuid != null) {
+					qPos.add(classUuid);
+				}
+
+				List<AssetEntry> list = q.list();
+
+				result = list;
+
+				AssetEntry assetEntry = null;
+
+				if (list.isEmpty()) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_CU,
+						finderArgs, list);
+				}
+				else {
+					assetEntry = list.get(0);
+
+					cacheResult(assetEntry);
+
+					if ((assetEntry.getGroupId() != groupId) ||
+							(assetEntry.getClassUuid() == null) ||
+							!assetEntry.getClassUuid().equals(classUuid)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_CU,
+							finderArgs, assetEntry);
+					}
+				}
+
+				return assetEntry;
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (result == null) {
+					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_CU,
+						finderArgs);
+				}
+
+				closeSession(session);
+			}
+		}
+		else {
+			if (result instanceof List<?>) {
+				return null;
+			}
+			else {
+				return (AssetEntry)result;
+			}
+		}
+	}
+
+	/**
+	 * Returns the asset entry where classNameId = &#63; and classPK = &#63; or throws a {@link com.liferay.portlet.asset.NoSuchEntryException} if it could not be found.
+	 *
+	 * @param classNameId the class name ID
+	 * @param classPK the class p k
+	 * @return the matching asset entry
+	 * @throws com.liferay.portlet.asset.NoSuchEntryException if a matching asset entry could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public AssetEntry findByC_C(long classNameId, long classPK)
+		throws NoSuchEntryException, SystemException {
+		AssetEntry assetEntry = fetchByC_C(classNameId, classPK);
+
+		if (assetEntry == null) {
+			StringBundler msg = new StringBundler(6);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("classNameId=");
+			msg.append(classNameId);
+
+			msg.append(", classPK=");
+			msg.append(classPK);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchEntryException(msg.toString());
+		}
+
+		return assetEntry;
+	}
+
+	/**
+	 * Returns the asset entry where classNameId = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param classNameId the class name ID
+	 * @param classPK the class p k
+	 * @return the matching asset entry, or <code>null</code> if a matching asset entry could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public AssetEntry fetchByC_C(long classNameId, long classPK)
+		throws SystemException {
+		return fetchByC_C(classNameId, classPK, true);
+	}
+
+	/**
+	 * Returns the asset entry where classNameId = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param classNameId the class name ID
+	 * @param classPK the class p k
+	 * @param retrieveFromCache whether to use the finder cache
+	 * @return the matching asset entry, or <code>null</code> if a matching asset entry could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public AssetEntry fetchByC_C(long classNameId, long classPK,
+		boolean retrieveFromCache) throws SystemException {
+		Object[] finderArgs = new Object[] { classNameId, classPK };
+
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_C_C,
+					finderArgs, this);
+		}
+
+		if (result == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_SELECT_ASSETENTRY_WHERE);
+
+			query.append(_FINDER_COLUMN_C_C_CLASSNAMEID_2);
+
+			query.append(_FINDER_COLUMN_C_C_CLASSPK_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(classNameId);
+
+				qPos.add(classPK);
+
+				List<AssetEntry> list = q.list();
+
+				result = list;
+
+				AssetEntry assetEntry = null;
+
+				if (list.isEmpty()) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_C,
+						finderArgs, list);
+				}
+				else {
+					assetEntry = list.get(0);
+
+					cacheResult(assetEntry);
+
+					if ((assetEntry.getClassNameId() != classNameId) ||
+							(assetEntry.getClassPK() != classPK)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_C,
+							finderArgs, assetEntry);
+					}
+				}
+
+				return assetEntry;
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (result == null) {
+					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_C,
+						finderArgs);
+				}
+
+				closeSession(session);
+			}
+		}
+		else {
+			if (result instanceof List<?>) {
+				return null;
+			}
+			else {
+				return (AssetEntry)result;
+			}
+		}
+	}
+
+	/**
 	 * Returns all the asset entries.
 	 *
 	 * @return the asset entries
@@ -2379,34 +2379,6 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 	}
 
 	/**
-	 * Removes the asset entry where groupId = &#63; and classUuid = &#63; from the database.
-	 *
-	 * @param groupId the group ID
-	 * @param classUuid the class uuid
-	 * @throws SystemException if a system exception occurred
-	 */
-	public void removeByG_CU(long groupId, String classUuid)
-		throws NoSuchEntryException, SystemException {
-		AssetEntry assetEntry = findByG_CU(groupId, classUuid);
-
-		assetEntryPersistence.remove(assetEntry);
-	}
-
-	/**
-	 * Removes the asset entry where classNameId = &#63; and classPK = &#63; from the database.
-	 *
-	 * @param classNameId the class name ID
-	 * @param classPK the class p k
-	 * @throws SystemException if a system exception occurred
-	 */
-	public void removeByC_C(long classNameId, long classPK)
-		throws NoSuchEntryException, SystemException {
-		AssetEntry assetEntry = findByC_C(classNameId, classPK);
-
-		assetEntryPersistence.remove(assetEntry);
-	}
-
-	/**
 	 * Removes all the asset entries where visible = &#63; from the database.
 	 *
 	 * @param visible the visible
@@ -2441,6 +2413,34 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 		for (AssetEntry assetEntry : findByExpirationDate(expirationDate)) {
 			assetEntryPersistence.remove(assetEntry);
 		}
+	}
+
+	/**
+	 * Removes the asset entry where groupId = &#63; and classUuid = &#63; from the database.
+	 *
+	 * @param groupId the group ID
+	 * @param classUuid the class uuid
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void removeByG_CU(long groupId, String classUuid)
+		throws NoSuchEntryException, SystemException {
+		AssetEntry assetEntry = findByG_CU(groupId, classUuid);
+
+		assetEntryPersistence.remove(assetEntry);
+	}
+
+	/**
+	 * Removes the asset entry where classNameId = &#63; and classPK = &#63; from the database.
+	 *
+	 * @param classNameId the class name ID
+	 * @param classPK the class p k
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void removeByC_C(long classNameId, long classPK)
+		throws NoSuchEntryException, SystemException {
+		AssetEntry assetEntry = findByC_C(classNameId, classPK);
+
+		assetEntryPersistence.remove(assetEntry);
 	}
 
 	/**
@@ -2499,136 +2499,6 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 
 				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_COMPANYID,
 					finderArgs, count);
-
-				closeSession(session);
-			}
-		}
-
-		return count.intValue();
-	}
-
-	/**
-	 * Returns the number of asset entries where groupId = &#63; and classUuid = &#63;.
-	 *
-	 * @param groupId the group ID
-	 * @param classUuid the class uuid
-	 * @return the number of matching asset entries
-	 * @throws SystemException if a system exception occurred
-	 */
-	public int countByG_CU(long groupId, String classUuid)
-		throws SystemException {
-		Object[] finderArgs = new Object[] { groupId, classUuid };
-
-		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_CU,
-				finderArgs, this);
-
-		if (count == null) {
-			StringBundler query = new StringBundler(3);
-
-			query.append(_SQL_COUNT_ASSETENTRY_WHERE);
-
-			query.append(_FINDER_COLUMN_G_CU_GROUPID_2);
-
-			if (classUuid == null) {
-				query.append(_FINDER_COLUMN_G_CU_CLASSUUID_1);
-			}
-			else {
-				if (classUuid.equals(StringPool.BLANK)) {
-					query.append(_FINDER_COLUMN_G_CU_CLASSUUID_3);
-				}
-				else {
-					query.append(_FINDER_COLUMN_G_CU_CLASSUUID_2);
-				}
-			}
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(groupId);
-
-				if (classUuid != null) {
-					qPos.add(classUuid);
-				}
-
-				count = (Long)q.uniqueResult();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (count == null) {
-					count = Long.valueOf(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_CU,
-					finderArgs, count);
-
-				closeSession(session);
-			}
-		}
-
-		return count.intValue();
-	}
-
-	/**
-	 * Returns the number of asset entries where classNameId = &#63; and classPK = &#63;.
-	 *
-	 * @param classNameId the class name ID
-	 * @param classPK the class p k
-	 * @return the number of matching asset entries
-	 * @throws SystemException if a system exception occurred
-	 */
-	public int countByC_C(long classNameId, long classPK)
-		throws SystemException {
-		Object[] finderArgs = new Object[] { classNameId, classPK };
-
-		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_C,
-				finderArgs, this);
-
-		if (count == null) {
-			StringBundler query = new StringBundler(3);
-
-			query.append(_SQL_COUNT_ASSETENTRY_WHERE);
-
-			query.append(_FINDER_COLUMN_C_C_CLASSNAMEID_2);
-
-			query.append(_FINDER_COLUMN_C_C_CLASSPK_2);
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(classNameId);
-
-				qPos.add(classPK);
-
-				count = (Long)q.uniqueResult();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (count == null) {
-					count = Long.valueOf(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_C_C, finderArgs,
-					count);
 
 				closeSession(session);
 			}
@@ -2803,6 +2673,136 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 
 				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_EXPIRATIONDATE,
 					finderArgs, count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	/**
+	 * Returns the number of asset entries where groupId = &#63; and classUuid = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param classUuid the class uuid
+	 * @return the number of matching asset entries
+	 * @throws SystemException if a system exception occurred
+	 */
+	public int countByG_CU(long groupId, String classUuid)
+		throws SystemException {
+		Object[] finderArgs = new Object[] { groupId, classUuid };
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_CU,
+				finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_COUNT_ASSETENTRY_WHERE);
+
+			query.append(_FINDER_COLUMN_G_CU_GROUPID_2);
+
+			if (classUuid == null) {
+				query.append(_FINDER_COLUMN_G_CU_CLASSUUID_1);
+			}
+			else {
+				if (classUuid.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_G_CU_CLASSUUID_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_G_CU_CLASSUUID_2);
+				}
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				if (classUuid != null) {
+					qPos.add(classUuid);
+				}
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_CU,
+					finderArgs, count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	/**
+	 * Returns the number of asset entries where classNameId = &#63; and classPK = &#63;.
+	 *
+	 * @param classNameId the class name ID
+	 * @param classPK the class p k
+	 * @return the number of matching asset entries
+	 * @throws SystemException if a system exception occurred
+	 */
+	public int countByC_C(long classNameId, long classPK)
+		throws SystemException {
+		Object[] finderArgs = new Object[] { classNameId, classPK };
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_C,
+				finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_COUNT_ASSETENTRY_WHERE);
+
+			query.append(_FINDER_COLUMN_C_C_CLASSNAMEID_2);
+
+			query.append(_FINDER_COLUMN_C_C_CLASSPK_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(classNameId);
+
+				qPos.add(classPK);
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_C_C, finderArgs,
+					count);
 
 				closeSession(session);
 			}
@@ -4255,17 +4255,17 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 	private static final String _SQL_GETASSETTAGSSIZE = "SELECT COUNT(*) AS COUNT_VALUE FROM AssetEntries_AssetTags WHERE entryId = ?";
 	private static final String _SQL_CONTAINSASSETTAG = "SELECT COUNT(*) AS COUNT_VALUE FROM AssetEntries_AssetTags WHERE entryId = ? AND tagId = ?";
 	private static final String _FINDER_COLUMN_COMPANYID_COMPANYID_2 = "assetEntry.companyId = ?";
+	private static final String _FINDER_COLUMN_VISIBLE_VISIBLE_2 = "assetEntry.visible = ?";
+	private static final String _FINDER_COLUMN_PUBLISHDATE_PUBLISHDATE_1 = "assetEntry.publishDate IS NULL";
+	private static final String _FINDER_COLUMN_PUBLISHDATE_PUBLISHDATE_2 = "assetEntry.publishDate = ?";
+	private static final String _FINDER_COLUMN_EXPIRATIONDATE_EXPIRATIONDATE_1 = "assetEntry.expirationDate IS NULL";
+	private static final String _FINDER_COLUMN_EXPIRATIONDATE_EXPIRATIONDATE_2 = "assetEntry.expirationDate = ?";
 	private static final String _FINDER_COLUMN_G_CU_GROUPID_2 = "assetEntry.groupId = ? AND ";
 	private static final String _FINDER_COLUMN_G_CU_CLASSUUID_1 = "assetEntry.classUuid IS NULL";
 	private static final String _FINDER_COLUMN_G_CU_CLASSUUID_2 = "assetEntry.classUuid = ?";
 	private static final String _FINDER_COLUMN_G_CU_CLASSUUID_3 = "(assetEntry.classUuid IS NULL OR assetEntry.classUuid = ?)";
 	private static final String _FINDER_COLUMN_C_C_CLASSNAMEID_2 = "assetEntry.classNameId = ? AND ";
 	private static final String _FINDER_COLUMN_C_C_CLASSPK_2 = "assetEntry.classPK = ?";
-	private static final String _FINDER_COLUMN_VISIBLE_VISIBLE_2 = "assetEntry.visible = ?";
-	private static final String _FINDER_COLUMN_PUBLISHDATE_PUBLISHDATE_1 = "assetEntry.publishDate IS NULL";
-	private static final String _FINDER_COLUMN_PUBLISHDATE_PUBLISHDATE_2 = "assetEntry.publishDate = ?";
-	private static final String _FINDER_COLUMN_EXPIRATIONDATE_EXPIRATIONDATE_1 = "assetEntry.expirationDate IS NULL";
-	private static final String _FINDER_COLUMN_EXPIRATIONDATE_EXPIRATIONDATE_2 = "assetEntry.expirationDate = ?";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "assetEntry.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No AssetEntry exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No AssetEntry exists with the key {";

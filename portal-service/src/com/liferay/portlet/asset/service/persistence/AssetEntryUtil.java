@@ -321,98 +321,6 @@ public class AssetEntryUtil {
 	}
 
 	/**
-	* Returns the asset entry where groupId = &#63; and classUuid = &#63; or throws a {@link com.liferay.portlet.asset.NoSuchEntryException} if it could not be found.
-	*
-	* @param groupId the group ID
-	* @param classUuid the class uuid
-	* @return the matching asset entry
-	* @throws com.liferay.portlet.asset.NoSuchEntryException if a matching asset entry could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public static com.liferay.portlet.asset.model.AssetEntry findByG_CU(
-		long groupId, java.lang.String classUuid)
-		throws com.liferay.portal.kernel.exception.SystemException,
-			com.liferay.portlet.asset.NoSuchEntryException {
-		return getPersistence().findByG_CU(groupId, classUuid);
-	}
-
-	/**
-	* Returns the asset entry where groupId = &#63; and classUuid = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
-	*
-	* @param groupId the group ID
-	* @param classUuid the class uuid
-	* @return the matching asset entry, or <code>null</code> if a matching asset entry could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public static com.liferay.portlet.asset.model.AssetEntry fetchByG_CU(
-		long groupId, java.lang.String classUuid)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().fetchByG_CU(groupId, classUuid);
-	}
-
-	/**
-	* Returns the asset entry where groupId = &#63; and classUuid = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
-	*
-	* @param groupId the group ID
-	* @param classUuid the class uuid
-	* @param retrieveFromCache whether to use the finder cache
-	* @return the matching asset entry, or <code>null</code> if a matching asset entry could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public static com.liferay.portlet.asset.model.AssetEntry fetchByG_CU(
-		long groupId, java.lang.String classUuid, boolean retrieveFromCache)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence()
-				   .fetchByG_CU(groupId, classUuid, retrieveFromCache);
-	}
-
-	/**
-	* Returns the asset entry where classNameId = &#63; and classPK = &#63; or throws a {@link com.liferay.portlet.asset.NoSuchEntryException} if it could not be found.
-	*
-	* @param classNameId the class name ID
-	* @param classPK the class p k
-	* @return the matching asset entry
-	* @throws com.liferay.portlet.asset.NoSuchEntryException if a matching asset entry could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public static com.liferay.portlet.asset.model.AssetEntry findByC_C(
-		long classNameId, long classPK)
-		throws com.liferay.portal.kernel.exception.SystemException,
-			com.liferay.portlet.asset.NoSuchEntryException {
-		return getPersistence().findByC_C(classNameId, classPK);
-	}
-
-	/**
-	* Returns the asset entry where classNameId = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
-	*
-	* @param classNameId the class name ID
-	* @param classPK the class p k
-	* @return the matching asset entry, or <code>null</code> if a matching asset entry could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public static com.liferay.portlet.asset.model.AssetEntry fetchByC_C(
-		long classNameId, long classPK)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().fetchByC_C(classNameId, classPK);
-	}
-
-	/**
-	* Returns the asset entry where classNameId = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
-	*
-	* @param classNameId the class name ID
-	* @param classPK the class p k
-	* @param retrieveFromCache whether to use the finder cache
-	* @return the matching asset entry, or <code>null</code> if a matching asset entry could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public static com.liferay.portlet.asset.model.AssetEntry fetchByC_C(
-		long classNameId, long classPK, boolean retrieveFromCache)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence()
-				   .fetchByC_C(classNameId, classPK, retrieveFromCache);
-	}
-
-	/**
 	* Returns all the asset entries where visible = &#63;.
 	*
 	* @param visible the visible
@@ -778,6 +686,98 @@ public class AssetEntryUtil {
 	}
 
 	/**
+	* Returns the asset entry where groupId = &#63; and classUuid = &#63; or throws a {@link com.liferay.portlet.asset.NoSuchEntryException} if it could not be found.
+	*
+	* @param groupId the group ID
+	* @param classUuid the class uuid
+	* @return the matching asset entry
+	* @throws com.liferay.portlet.asset.NoSuchEntryException if a matching asset entry could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.asset.model.AssetEntry findByG_CU(
+		long groupId, java.lang.String classUuid)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.asset.NoSuchEntryException {
+		return getPersistence().findByG_CU(groupId, classUuid);
+	}
+
+	/**
+	* Returns the asset entry where groupId = &#63; and classUuid = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param groupId the group ID
+	* @param classUuid the class uuid
+	* @return the matching asset entry, or <code>null</code> if a matching asset entry could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.asset.model.AssetEntry fetchByG_CU(
+		long groupId, java.lang.String classUuid)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().fetchByG_CU(groupId, classUuid);
+	}
+
+	/**
+	* Returns the asset entry where groupId = &#63; and classUuid = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param groupId the group ID
+	* @param classUuid the class uuid
+	* @param retrieveFromCache whether to use the finder cache
+	* @return the matching asset entry, or <code>null</code> if a matching asset entry could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.asset.model.AssetEntry fetchByG_CU(
+		long groupId, java.lang.String classUuid, boolean retrieveFromCache)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .fetchByG_CU(groupId, classUuid, retrieveFromCache);
+	}
+
+	/**
+	* Returns the asset entry where classNameId = &#63; and classPK = &#63; or throws a {@link com.liferay.portlet.asset.NoSuchEntryException} if it could not be found.
+	*
+	* @param classNameId the class name ID
+	* @param classPK the class p k
+	* @return the matching asset entry
+	* @throws com.liferay.portlet.asset.NoSuchEntryException if a matching asset entry could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.asset.model.AssetEntry findByC_C(
+		long classNameId, long classPK)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.asset.NoSuchEntryException {
+		return getPersistence().findByC_C(classNameId, classPK);
+	}
+
+	/**
+	* Returns the asset entry where classNameId = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param classNameId the class name ID
+	* @param classPK the class p k
+	* @return the matching asset entry, or <code>null</code> if a matching asset entry could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.asset.model.AssetEntry fetchByC_C(
+		long classNameId, long classPK)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().fetchByC_C(classNameId, classPK);
+	}
+
+	/**
+	* Returns the asset entry where classNameId = &#63; and classPK = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param classNameId the class name ID
+	* @param classPK the class p k
+	* @param retrieveFromCache whether to use the finder cache
+	* @return the matching asset entry, or <code>null</code> if a matching asset entry could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.asset.model.AssetEntry fetchByC_C(
+		long classNameId, long classPK, boolean retrieveFromCache)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .fetchByC_C(classNameId, classPK, retrieveFromCache);
+	}
+
+	/**
 	* Returns all the asset entries.
 	*
 	* @return the asset entries
@@ -838,32 +838,6 @@ public class AssetEntryUtil {
 	}
 
 	/**
-	* Removes the asset entry where groupId = &#63; and classUuid = &#63; from the database.
-	*
-	* @param groupId the group ID
-	* @param classUuid the class uuid
-	* @throws SystemException if a system exception occurred
-	*/
-	public static void removeByG_CU(long groupId, java.lang.String classUuid)
-		throws com.liferay.portal.kernel.exception.SystemException,
-			com.liferay.portlet.asset.NoSuchEntryException {
-		getPersistence().removeByG_CU(groupId, classUuid);
-	}
-
-	/**
-	* Removes the asset entry where classNameId = &#63; and classPK = &#63; from the database.
-	*
-	* @param classNameId the class name ID
-	* @param classPK the class p k
-	* @throws SystemException if a system exception occurred
-	*/
-	public static void removeByC_C(long classNameId, long classPK)
-		throws com.liferay.portal.kernel.exception.SystemException,
-			com.liferay.portlet.asset.NoSuchEntryException {
-		getPersistence().removeByC_C(classNameId, classPK);
-	}
-
-	/**
 	* Removes all the asset entries where visible = &#63; from the database.
 	*
 	* @param visible the visible
@@ -897,6 +871,32 @@ public class AssetEntryUtil {
 	}
 
 	/**
+	* Removes the asset entry where groupId = &#63; and classUuid = &#63; from the database.
+	*
+	* @param groupId the group ID
+	* @param classUuid the class uuid
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void removeByG_CU(long groupId, java.lang.String classUuid)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.asset.NoSuchEntryException {
+		getPersistence().removeByG_CU(groupId, classUuid);
+	}
+
+	/**
+	* Removes the asset entry where classNameId = &#63; and classPK = &#63; from the database.
+	*
+	* @param classNameId the class name ID
+	* @param classPK the class p k
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void removeByC_C(long classNameId, long classPK)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.asset.NoSuchEntryException {
+		getPersistence().removeByC_C(classNameId, classPK);
+	}
+
+	/**
 	* Removes all the asset entries from the database.
 	*
 	* @throws SystemException if a system exception occurred
@@ -916,32 +916,6 @@ public class AssetEntryUtil {
 	public static int countByCompanyId(long companyId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByCompanyId(companyId);
-	}
-
-	/**
-	* Returns the number of asset entries where groupId = &#63; and classUuid = &#63;.
-	*
-	* @param groupId the group ID
-	* @param classUuid the class uuid
-	* @return the number of matching asset entries
-	* @throws SystemException if a system exception occurred
-	*/
-	public static int countByG_CU(long groupId, java.lang.String classUuid)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().countByG_CU(groupId, classUuid);
-	}
-
-	/**
-	* Returns the number of asset entries where classNameId = &#63; and classPK = &#63;.
-	*
-	* @param classNameId the class name ID
-	* @param classPK the class p k
-	* @return the number of matching asset entries
-	* @throws SystemException if a system exception occurred
-	*/
-	public static int countByC_C(long classNameId, long classPK)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().countByC_C(classNameId, classPK);
 	}
 
 	/**
@@ -978,6 +952,32 @@ public class AssetEntryUtil {
 	public static int countByExpirationDate(java.util.Date expirationDate)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByExpirationDate(expirationDate);
+	}
+
+	/**
+	* Returns the number of asset entries where groupId = &#63; and classUuid = &#63;.
+	*
+	* @param groupId the group ID
+	* @param classUuid the class uuid
+	* @return the number of matching asset entries
+	* @throws SystemException if a system exception occurred
+	*/
+	public static int countByG_CU(long groupId, java.lang.String classUuid)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().countByG_CU(groupId, classUuid);
+	}
+
+	/**
+	* Returns the number of asset entries where classNameId = &#63; and classPK = &#63;.
+	*
+	* @param classNameId the class name ID
+	* @param classPK the class p k
+	* @return the number of matching asset entries
+	* @throws SystemException if a system exception occurred
+	*/
+	public static int countByC_C(long classNameId, long classPK)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().countByC_C(classNameId, classPK);
 	}
 
 	/**
