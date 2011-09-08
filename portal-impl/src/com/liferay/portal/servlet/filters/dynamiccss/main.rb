@@ -18,6 +18,7 @@ load_paths += Compass.configuration.sass_load_paths
 engine = Sass::Engine.new(
 	$content,
 	{
+		:cache_location => $sassCachePath,
 		:debug_info => log.isDebugEnabled,
 		:filename => $cssRealPath,
 		:full_exception => log.isDebugEnabled,

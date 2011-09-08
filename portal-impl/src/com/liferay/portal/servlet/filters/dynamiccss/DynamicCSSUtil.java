@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.scripting.ScriptingException;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
+import com.liferay.portal.kernel.util.SystemProperties;
 import com.liferay.portal.kernel.util.UnsyncPrintWriterPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -68,6 +69,7 @@ public class DynamicCSSUtil {
 		inputObjects.put("content", content);
 		inputObjects.put("cssRealPath", cssRealPath);
 		inputObjects.put("cssThemePath", cssThemePath);
+		inputObjects.put("sassCachePath", _SASS_CACHE_DIR);
 
 		UnsyncByteArrayOutputStream unsyncByteArrayOutputStream =
 			new UnsyncByteArrayOutputStream();
@@ -124,6 +126,9 @@ public class DynamicCSSUtil {
 
 		return null;
 	}
+
+	private static final String _SASS_CACHE_DIR =
+		SystemProperties.get(SystemProperties.TMP_DIR) + "/liferay/sassCache";
 
 	private static Log _log = LogFactoryUtil.getLog(DynamicCSSUtil.class);
 
