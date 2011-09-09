@@ -19,5 +19,6 @@ import com.liferay.portlet.mobiledevicerules.service.base.MDRRuleGroupInstanceSe
 /**
  * @author Edward C. Han
  */
-public class MDRRuleGroupInstanceServiceImpl extends MDRRuleGroupInstanceServiceBaseImpl {
+public class MDRRuleGroupInstanceServiceImpl
+	extends MDRRuleGroupInstanceServiceBaseImpl {
 }

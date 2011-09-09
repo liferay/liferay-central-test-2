@@ -22,7 +22,6 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.mobiledevicerules.model.MDRRuleGroupInstance;
 import com.liferay.portlet.mobiledevicerules.service.base.MDRRuleGroupInstanceLocalServiceBaseImpl;
-import com.liferay.portlet.mobiledevicerules.util.RuleGroupInstancePriorityComparator;
 
 import java.util.Date;
 import java.util.List;
@@ -76,10 +75,14 @@ public class MDRRuleGroupInstanceLocalServiceImpl
 	public void deleteRuleGroupInstance(MDRRuleGroupInstance ruleGroupInstance)
 		throws SystemException {
 
-		mdrActionLocalService.deleteActions(
-			ruleGroupInstance.getRuleGroupInstanceId());
+		// Rule group instance
 
 		mdrRuleGroupInstancePersistence.remove(ruleGroupInstance);
+
+		// Rule actions
+
+		mdrActionLocalService.deleteActions(
+			ruleGroupInstance.getRuleGroupInstanceId());
 	}
 
 	public void deleteRuleGroupInstances(long ruleGroupId)
@@ -91,38 +94,6 @@ public class MDRRuleGroupInstanceLocalServiceImpl
 		for (MDRRuleGroupInstance ruleGroupInstance : ruleGroupInstances) {
 			deleteRuleGroupInstance(ruleGroupInstance);
 		}
-	}
-
-	public List<MDRRuleGroupInstance> getRuleGroupInstances(
-			String className, long classPK)
-		throws SystemException {
-
-		long classNameId = PortalUtil.getClassNameId(className);
-
-		return mdrRuleGroupInstancePersistence.findByC_C(classNameId, classPK);
-	}
-
-	public List<MDRRuleGroupInstance> getSortedRuleGroupInstances(
-			String className, long classPK)
-		throws SystemException {
-
-		long classNameId = PortalUtil.getClassNameId(className);
-
-		OrderByComparator orderByComparator =
-			new RuleGroupInstancePriorityComparator();
-
-		return mdrRuleGroupInstancePersistence.findByC_C(
-			classNameId, classPK, 0, Integer.MAX_VALUE, orderByComparator);
-	}
-
-	public List<MDRRuleGroupInstance> getRuleGroupInstances(
-			String className, long classPK, int start, int end)
-		throws SystemException {
-
-		long classNameId = PortalUtil.getClassNameId(className);
-
-		return mdrRuleGroupInstancePersistence.findByC_C(
-			classNameId, classPK, start, end);
 	}
 
 	public List<MDRRuleGroupInstance> getRuleGroupInstances(long ruleGroupId)
@@ -139,18 +110,38 @@ public class MDRRuleGroupInstanceLocalServiceImpl
 			ruleGroupId, start, end);
 	}
 
-	public int getRuleGroupInstancesCount(String className, long classPK)
+	public List<MDRRuleGroupInstance> getRuleGroupInstances(
+			String className, long classPK)
 		throws SystemException {
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		return mdrRuleGroupInstancePersistence.countByC_C(classNameId, classPK);
+		return mdrRuleGroupInstancePersistence.findByC_C(classNameId, classPK);
+	}
+
+	public List<MDRRuleGroupInstance> getRuleGroupInstances(
+			String className, long classPK, int start, int end,
+			OrderByComparator orderByComparator)
+		throws SystemException {
+
+		long classNameId = PortalUtil.getClassNameId(className);
+
+		return mdrRuleGroupInstancePersistence.findByC_C(
+			classNameId, classPK, start, end, orderByComparator);
 	}
 
 	public int getRuleGroupInstancesCount(long ruleGroupId)
 		throws SystemException {
 
 		return mdrRuleGroupInstancePersistence.countByRuleGroupId(ruleGroupId);
+	}
+
+	public int getRuleGroupInstancesCount(String className, long classPK)
+		throws SystemException {
+
+		long classNameId = PortalUtil.getClassNameId(className);
+
+		return mdrRuleGroupInstancePersistence.countByC_C(classNameId, classPK);
 	}
 
 	public MDRRuleGroupInstance updateRuleGroupInstance(

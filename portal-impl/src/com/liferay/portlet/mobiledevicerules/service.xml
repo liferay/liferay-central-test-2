@@ -137,7 +137,7 @@
 			<finder-column name="classNameId" />
 			<finder-column name="classPK" />
 		</finder>
-		<finder name="C_C_R" return-type="MDRRuleGroupInstance">
+		<finder name="C_C_R" return-type="MDRRuleGroupInstance" unique="true">
 			<finder-column name="classNameId" />
 			<finder-column name="classPK" />
 			<finder-column name="ruleGroupId" />

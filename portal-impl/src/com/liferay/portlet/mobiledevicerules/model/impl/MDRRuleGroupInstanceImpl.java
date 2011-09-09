@@ -15,20 +15,11 @@
 package com.liferay.portlet.mobiledevicerules.model.impl;
 
 /**
- * The extended model implementation for the MDRRuleGroupInstance service. Represents a row in the &quot;MDRRuleGroupInstance&quot; database table, with each column mapped to a property of this class.
- *
- * <p>
- * Helper methods and all application logic should be put in this class. Whenever methods are added, rerun ServiceBuilder to copy their definitions into the {@link com.liferay.portlet.mobiledevicerules.model.MDRRuleGroupInstance} interface.
- * </p>
- *
  * @author Edward C. Han
  */
 public class MDRRuleGroupInstanceImpl extends MDRRuleGroupInstanceBaseImpl {
-	/*
-	 * NOTE FOR DEVELOPERS:
-	 *
-	 * Never reference this class directly. All methods that expect a m d r rule group instance model instance should use the {@link com.liferay.portlet.mobiledevicerules.model.MDRRuleGroupInstance} interface instead.
-	 */
+
 	public MDRRuleGroupInstanceImpl() {
 	}
+
 }
