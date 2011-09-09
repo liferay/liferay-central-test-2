@@ -372,7 +372,9 @@ public class FileSystemStore extends BaseStore {
 	}
 
 	protected void deleteEmptyAncestors(File file) {
-		if (file.list().length == 0) {
+		String[] fileNames = file.list();
+
+		if (fileNames.length == 0) {
 			File parentFile = file.getParentFile();
 
 			file.delete();
