@@ -128,11 +128,11 @@ public class EditFolderAction extends PortletAction {
 			long[] folderIds = StringUtil.split(
 				ParamUtil.getString(actionRequest, "folderIds"), 0L);
 
-			for (int i = 0; i < folderIds.length; i++) {
-				DLAppServiceUtil.deleteFolder(folderIds[i]);
+			for (long curFolderId : folderIds) {
+				DLAppServiceUtil.deleteFolder(curFolderId);
 
 				AssetPublisherUtil.removeRecentFolderId(
-					actionRequest, DLFileEntry.class.getName(), folderIds[i]);
+					actionRequest, DLFileEntry.class.getName(), curFolderId);
 			}
 		}
 	}
@@ -154,9 +154,9 @@ public class EditFolderAction extends PortletAction {
 			long[] folderIds = StringUtil.split(
 				ParamUtil.getString(actionRequest, "folderIds"), 0L);
 
-			for (int i = 0; i < folderIds.length; i++) {
+			for (long curFolderId : folderIds) {
 				DLAppServiceUtil.moveFolder(
-					folderIds[i], parentFolderId, serviceContext);
+					curFolderId, parentFolderId, serviceContext);
 			}
 		}
 	}
