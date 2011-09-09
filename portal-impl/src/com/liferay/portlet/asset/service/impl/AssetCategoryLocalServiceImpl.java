@@ -529,9 +529,7 @@ public class AssetCategoryLocalServiceImpl
 		AssetCategory category = assetCategoryPersistence.fetchByP_N_V(
 			parentCategoryId, name, vocabularyId);
 
-		if ((category != null) &&
-			(category.getCategoryId() != categoryId)) {
-
+		if ((category != null) && (category.getCategoryId() != categoryId)) {
 			StringBundler sb = new StringBundler(4);
 
 			sb.append("There is another category named ");
