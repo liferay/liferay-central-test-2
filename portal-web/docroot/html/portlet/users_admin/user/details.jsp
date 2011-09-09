@@ -87,21 +87,19 @@ boolean deletePortrait = ParamUtil.getBoolean(request, "deletePortrait");
 				<aui:input name="emailAddress" type="hidden" value="<%= selUser.getEmailAddress() %>" />
 			</aui:field-wrapper>
 		</c:when>
-		<c:when test="<%= (selUser != null) %>">
-			<%
-				User selUserDisplayEmailAddress = (User)selUser.clone();
+		<c:otherwise>
 
-				selUserDisplayEmailAddress.setEmailAddress(selUserDisplayEmailAddress.getDisplayEmailAddress());
+			<%
+			User displayEmailAddressUser = null;
+			
+			if (selUser != null) {
+				displayEmailAddressUser = (User)selUser.clone();
+
+				displayEmailAddressUser.setEmailAddress(displayEmailAddressUser.getDisplayEmailAddress());
+			}
 			%>
 
-			<aui:input bean="<%= selUserDisplayEmailAddress %>" model="<%= User.class %>" name="emailAddress">
-				<c:if test="<%= PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.USERS_EMAIL_ADDRESS_REQUIRED) %>">
-					<aui:validator name="required" />
-				</c:if>
-			</aui:input>
-		</c:when>
-		<c:otherwise>
-			<aui:input name="emailAddress">
+			<aui:input bean="<%= displayEmailAddressUser %>" model="<%= User.class %>" name="emailAddress">
 				<c:if test="<%= PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.USERS_EMAIL_ADDRESS_REQUIRED) %>">
 					<aui:validator name="required" />
 				</c:if>
