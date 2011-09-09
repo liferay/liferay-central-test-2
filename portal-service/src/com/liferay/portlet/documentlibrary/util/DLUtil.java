@@ -302,6 +302,24 @@ public class DLUtil {
 		return 0;
 	}
 
+	public static String getDividedPath(long id) {
+		StringBundler sb = new StringBundler(16);
+
+		long dividend = id;
+
+		while ((dividend / _DIVISOR) != 0) {
+			sb.append(StringPool.SLASH);
+			sb.append(dividend % _DIVISOR);
+
+			dividend = dividend / _DIVISOR;
+		}
+
+		sb.append(StringPool.SLASH);
+		sb.append(id);
+
+		return sb.toString();
+	}
+
 	public static String getFileIcon(String extension) {
 		return _instance._getFileIcon(extension);
 	}
@@ -341,24 +359,6 @@ public class DLUtil {
 		}
 
 		return orderByComparator;
-	}
-
-	public static String getScalablePath(long id) {
-		StringBundler sb = new StringBundler(16);
-
-		long dividend = id;
-
-		while ((dividend / _DIVISOR) != 0) {
-			sb.append(StringPool.SLASH);
-			sb.append(dividend % _DIVISOR);
-
-			dividend = dividend / _DIVISOR;
-		}
-
-		sb.append(StringPool.SLASH);
-		sb.append(id);
-
-		return sb.toString();
 	}
 
 	public static String getTempFileId(long id, String version) {

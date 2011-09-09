@@ -334,7 +334,7 @@ public abstract class DLPreviewableProcessor implements DLProcessor {
 		}
 
 		sb.append(groupId);
-		sb.append(DLUtil.getScalablePath(fileEntryId));
+		sb.append(DLUtil.getDividedPath(fileEntryId));
 
 		if (fileVersionId > 0) {
 			sb.append(StringPool.SLASH);
