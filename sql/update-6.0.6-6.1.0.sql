@@ -528,6 +528,8 @@ create table UserNotificationEvent (
 	archived BOOLEAN
 );
 
+alter table UserNotificationEvent add archived BOOLEAN;
+
 create table VirtualHost (
 	virtualHostId LONG not null primary key,
 	companyId LONG,
