@@ -787,7 +787,8 @@ public class LayoutImporter {
 		if (layoutsImportMode.equals(
 				PortletDataHandlerKeys.LAYOUTS_IMPORT_MODE_ADD_AS_NEW) ||
 			layoutsImportMode.equals(
-				PortletDataHandlerKeys.LAYOUTS_IMPORT_MODE_CREATED_FROM_PROTOTYPE)) {
+				PortletDataHandlerKeys.
+					LAYOUTS_IMPORT_MODE_CREATED_FROM_PROTOTYPE)) {
 
 			layoutId = LayoutLocalServiceUtil.getNextLayoutId(
 				groupId, privateLayout);
@@ -856,7 +857,8 @@ public class LayoutImporter {
 			importedLayout = LayoutUtil.create(plid);
 
 			if (layoutsImportMode.equals(
-					PortletDataHandlerKeys.LAYOUTS_IMPORT_MODE_CREATED_FROM_PROTOTYPE)) {
+					PortletDataHandlerKeys.
+						LAYOUTS_IMPORT_MODE_CREATED_FROM_PROTOTYPE)) {
 
 				importedLayout.setTemplateLayoutUuid(layout.getUuid());
 			}

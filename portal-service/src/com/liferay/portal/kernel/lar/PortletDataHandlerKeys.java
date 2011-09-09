@@ -39,9 +39,6 @@ public class PortletDataHandlerKeys {
 	public static final String IGNORE_LAST_PUBLISH_DATE =
 		"IGNORE_LAST_PUBLISH_DATE";
 
-	public static final String PUBLIC_LAYOUT_PERMISSIONS =
-		"PUBLIC_LAYOUT_PERMISSIONS";
-
 	public static final String LAYOUT_SET_PROTOTYPE_INHERITED =
 		"LAYOUT_SET_PROTOTYPE_INHERITED";
 
@@ -49,14 +46,14 @@ public class PortletDataHandlerKeys {
 
 	public static final String LAYOUTS_IMPORT_MODE_ADD_AS_NEW = "ADD_AS_NEW";
 
+	public static final String LAYOUTS_IMPORT_MODE_CREATED_FROM_PROTOTYPE =
+		"CREATED_FROM_PROTOTYPE";
+
 	public static final String LAYOUTS_IMPORT_MODE_MERGE_BY_LAYOUT_ID =
 		"MERGE_BY_LAYOUT_ID";
 
 	public static final String LAYOUTS_IMPORT_MODE_MERGE_BY_LAYOUT_NAME =
 		"MERGE_BY_LAYOUT_NAME";
-
-	public static final String LAYOUTS_IMPORT_MODE_CREATED_FROM_PROTOTYPE =
-		"CREATED_FROM_PROTOTYPE";
 
 	public static final String PERFORM_DIRECT_BINARY_IMPORT =
 		"PERFORM_DIRECT_BINARY_IMPORT";
@@ -86,6 +83,9 @@ public class PortletDataHandlerKeys {
 	public static final String PORTLETS_MERGE_MODE_ADD_TO_TOP = "ADD_TO_TOP";
 
 	public static final String PORTLETS_MERGE_MODE_REPLACE = "REPLACE";
+
+	public static final String PUBLIC_LAYOUT_PERMISSIONS =
+		"PUBLIC_LAYOUT_PERMISSIONS";
 
 	public static final String PUBLISH_TO_REMOTE = "PUBLISH_TO_REMOTE";
 
