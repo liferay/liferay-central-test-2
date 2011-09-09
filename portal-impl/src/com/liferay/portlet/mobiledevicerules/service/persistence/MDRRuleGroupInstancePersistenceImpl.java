@@ -183,7 +183,7 @@ public class MDRRuleGroupInstancePersistenceImpl extends BasePersistenceImpl<MDR
 			if (EntityCacheUtil.getResult(
 						MDRRuleGroupInstanceModelImpl.ENTITY_CACHE_ENABLED,
 						MDRRuleGroupInstanceImpl.class,
-						mdrRuleGroupInstance.getPrimaryKey(), this) == null) {
+						mdrRuleGroupInstance.getPrimaryKey()) == null) {
 				cacheResult(mdrRuleGroupInstance);
 			}
 		}
@@ -542,7 +542,7 @@ public class MDRRuleGroupInstancePersistenceImpl extends BasePersistenceImpl<MDR
 	public MDRRuleGroupInstance fetchByPrimaryKey(long ruleGroupInstanceId)
 		throws SystemException {
 		MDRRuleGroupInstance mdrRuleGroupInstance = (MDRRuleGroupInstance)EntityCacheUtil.getResult(MDRRuleGroupInstanceModelImpl.ENTITY_CACHE_ENABLED,
-				MDRRuleGroupInstanceImpl.class, ruleGroupInstanceId, this);
+				MDRRuleGroupInstanceImpl.class, ruleGroupInstanceId);
 
 		if (mdrRuleGroupInstance == _nullMDRRuleGroupInstance) {
 			return null;
