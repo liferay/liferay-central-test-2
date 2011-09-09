@@ -16,9 +16,9 @@ package com.liferay.portlet.documentlibrary.action;
 
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
+import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.SortedArrayList;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.security.auth.PrincipalException;
@@ -175,19 +175,14 @@ public class EditFolderAction extends PortletAction {
 	protected void setRootWorkflowDefinitionLink(ActionRequest actionRequest)
 		throws Exception {
 
-		String value = ParamUtil.getString(
-			actionRequest, "fileEntryTypeSearchContainerPrimaryKeys");
-
-		SortedArrayList<Long> fileEntryTypeIds = new SortedArrayList<Long>();
-
-		long[] longArray = StringUtil.split(value, 0L);
-
-		for (long longValue : longArray) {
-			fileEntryTypeIds.add(longValue);
-		}
-
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			DLFileEntry.class.getName(), actionRequest);
+
+		List<Long> fileEntryTypeIds = ListUtil.toList(
+			StringUtil.split(
+				ParamUtil.getString(
+					actionRequest, "fileEntryTypeSearchContainerPrimaryKeys"),
+					0L));
 
 		List<ObjectValuePair<Long, String>> workflowDefinitions =
 			new ArrayList<ObjectValuePair<Long, String>>();

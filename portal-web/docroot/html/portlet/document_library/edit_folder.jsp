@@ -38,15 +38,6 @@ List<WorkflowDefinition> workflowDefinitions = null;
 if (workflowEnabled) {
 	workflowDefinitions = WorkflowDefinitionManagerUtil.search(company.getCompanyId(), null, true, WorkflowConstants.SCOPE_DEFAULT, 0, 100, null);
 }
-
-String cmd = Constants.UPDATE;
-
-if (rootFolder) {
-	cmd = "set-root-workflow-definition-link";
-}
-else if (folder == null) {
-	cmd = Constants.ADD;
-}
 %>
 
 <liferay-util:include page="/html/portlet/document_library/top_links.jsp" />
@@ -64,7 +55,7 @@ else if (folder == null) {
 </liferay-util:buffer>
 
 <aui:form action="<%= editFolderURL %>" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "savePage();" %>'>
-	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= cmd %>" />
+	<aui:input name="<%= Constants.CMD %>" type="hidden" value='<%= rootFolder ? "set-root-workflow-definition-link" : ((folder == null) ? Constants.ADD : Constants.UPDATE) %>' />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 	<aui:input name="folderId" type="hidden" value="<%= folderId %>" />
 	<aui:input name="repositoryId" type="hidden" value="<%= repositoryId %>" />
@@ -279,7 +270,7 @@ else if (folder == null) {
 			</aui:field-wrapper>
 		</c:if>
 
-		<c:if test="<%= (!rootFolder) && (folder == null) %>">
+		<c:if test="<%= !rootFolder && (folder == null) %>">
 			<aui:field-wrapper label="permissions">
 				<liferay-ui:input-permissions
 					modelName="<%= DLFolderConstants.getClassName() %>"
