@@ -104,8 +104,8 @@ public class NotificationEvent implements Serializable {
 
 		if ((deliverBy < 0) && _deliveryRequired) {
 			throw new IllegalArgumentException(
-				"Deliver by must be greater than or equal to 0 " +
-				"if delivery is required");
+				"Deliver by must be greater than or equal to 0 if delivery " +
+					"is required");
 		}
 
 		_deliverBy = deliverBy;
@@ -116,8 +116,8 @@ public class NotificationEvent implements Serializable {
 
 		if (deliverBy < 0) {
 			throw new IllegalArgumentException(
-				"Deliver by must be greater than or equal to 0 " +
-				"if delivery is required");
+				"Deliver by must be greater than or equal to 0 if delivery " +
+					"is required");
 		}
 
 		_deliverBy = deliverBy;
@@ -154,7 +154,7 @@ public class NotificationEvent implements Serializable {
 
 	private static final String _KEY_UUID = "uuid";
 
-	private boolean _archived = false;
+	private boolean _archived;
 	private long _deliverBy;
 	private boolean _deliveryRequired;
 	private JSONObject _payloadJSONObject;

@@ -73,14 +73,6 @@ public class ChannelHubManagerImpl implements ChannelHubManager {
 		return channelHub;
 	}
 
-	public void destroyChannel(long companyId, long userId)
-		throws ChannelException {
-
-		ChannelHub channelHub = getChannelHub(companyId);
-
-		channelHub.destroyChannel(userId);
-	}
-
 	public void deleteUserNotificiationEvent(
 			long companyId, long userId, String notificationEventUuid)
 		throws ChannelException {
@@ -99,6 +91,14 @@ public class ChannelHubManagerImpl implements ChannelHubManager {
 
 		channelHub.deleteUserNotificiationEvents(
 			userId, notificationEventUuids);
+	}
+
+	public void destroyChannel(long companyId, long userId)
+		throws ChannelException {
+
+		ChannelHub channelHub = getChannelHub(companyId);
+
+		channelHub.destroyChannel(userId);
 	}
 
 	public void destroyChannelHub(long companyId) throws ChannelException {
@@ -275,7 +275,7 @@ public class ChannelHubManagerImpl implements ChannelHubManager {
 	}
 
 	private ChannelHub _channelHub;
-	private final ConcurrentMap<Long, ChannelHub> _channelHubs =
+	private ConcurrentMap<Long, ChannelHub> _channelHubs =
 		new ConcurrentHashMap<Long, ChannelHub>();
 
 }

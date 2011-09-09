@@ -136,16 +136,16 @@ public class UserNotificationEventLocalServiceImpl
 		List<UserNotificationEvent> userNotificationEvents =
 			userNotificationEventPersistence.findByUuid(uuid);
 
-		UserNotificationEvent userNotificationEvent = null;
-
-		if (!userNotificationEvents.isEmpty()) {
-			userNotificationEvent = userNotificationEvents.get(0);
-
-			userNotificationEvent.setArchived(archive);
-
-			userNotificationEventPersistence.update(
-				userNotificationEvent, false);
+		if (userNotificationEvents.isEmpty()) {
+			return null;
 		}
+
+		UserNotificationEvent userNotificationEvent =
+			userNotificationEvents.get(0);
+
+		userNotificationEvent.setArchived(archive);
+
+		userNotificationEventPersistence.update(userNotificationEvent, false);
 
 		return userNotificationEvent;
 	}

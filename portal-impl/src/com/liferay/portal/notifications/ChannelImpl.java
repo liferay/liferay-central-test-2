@@ -68,13 +68,6 @@ public class ChannelImpl extends BaseChannelImpl {
 		confirmDelivery(notificationEventUuids, false);
 	}
 
-
-	public void confirmDelivery(String notificationEventUuid)
-		throws ChannelException {
-
-		confirmDelivery(notificationEventUuid, false);
-	}
-
 	public void confirmDelivery(
 			Collection<String> notificationEventUuids, boolean archive)
 		throws ChannelException {
@@ -108,6 +101,12 @@ public class ChannelImpl extends BaseChannelImpl {
 		finally {
 			_reentrantLock.unlock();
 		}
+	}
+
+	public void confirmDelivery(String notificationEventUuid)
+		throws ChannelException {
+
+		confirmDelivery(notificationEventUuid, false);
 	}
 
 	public void confirmDelivery(String notificationEventUuid, boolean archive)
@@ -151,7 +150,7 @@ public class ChannelImpl extends BaseChannelImpl {
 		}
 		catch (Exception e) {
 			throw new ChannelException(
-				"Uanble to delete Notification for " + notificationEventUuid ,
+				"Uanble to delete event " + notificationEventUuid ,
 				e);
 		}
 	}
@@ -166,8 +165,7 @@ public class ChannelImpl extends BaseChannelImpl {
 		}
 		catch (Exception e) {
 			throw new ChannelException(
-				"Uanble to delete Notifications for user " + getUserId() ,
-				e);
+				"Uanble to delete events for user " + getUserId() , e);
 		}
 	}
 
@@ -232,9 +230,9 @@ public class ChannelImpl extends BaseChannelImpl {
 		try {
 			doInit();
 		}
-		catch (SystemException e) {
+		catch (SystemException se) {
 			throw new ChannelException(
-				"Unable to init channel " + getUserId(), e);
+				"Unable to init channel " + getUserId(), se);
 		}
 		finally {
 			_reentrantLock.unlock();
@@ -463,8 +461,8 @@ public class ChannelImpl extends BaseChannelImpl {
 
 			NotificationEvent notificationEvent = entry.getValue();
 
-			if ((isRemoveNotificationEvent(notificationEvent, currentTime)) &&
-				!(notificationEvent.isArchived())) {
+			if (isRemoveNotificationEvent(notificationEvent, currentTime) &&
+				!notificationEvent.isArchived()) {
 
 				invalidNotificationEventUuids.add(notificationEvent.getUuid());
 
@@ -521,7 +519,6 @@ public class ChannelImpl extends BaseChannelImpl {
 				notificationEvent.setUuid(persistedNotificationEvent.getUuid());
 
 				if (isRemoveNotificationEvent(notificationEvent, currentTime)) {
-
 					invalidNotificationEventUuids.add(
 						notificationEvent.getUuid());
 				}
@@ -610,7 +607,7 @@ public class ChannelImpl extends BaseChannelImpl {
 	private static Log _log = LogFactoryUtil.getLog(ChannelImpl.class);
 
 	private static Comparator<NotificationEvent> _comparator =
-		new NotificationEventComparator();
+					new NotificationEventComparator();
 
 	private TreeSet<NotificationEvent> _notificationEvents;
 	private ReentrantLock _reentrantLock = new ReentrantLock();
