@@ -818,7 +818,7 @@ public class LayoutImporter {
 					PortletDataHandlerKeys.
 						LAYOUTS_IMPORT_MODE_CREATED_FROM_PROTOTYPE)) {
 
-			existingLayout = LayoutUtil.fetchByG_P_TU(
+			existingLayout = LayoutUtil.fetchByG_P_TLU(
 				groupId, privateLayout, layout.getUuid());
 		}
 		else {
