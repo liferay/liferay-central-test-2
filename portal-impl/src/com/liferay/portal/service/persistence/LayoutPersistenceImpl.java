@@ -209,16 +209,16 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 				Long.class.getName(), Boolean.class.getName(),
 				String.class.getName()
 			});
-	public static final FinderPath FINDER_PATH_FETCH_BY_G_P_TU = new FinderPath(LayoutModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_FETCH_BY_G_P_TLU = new FinderPath(LayoutModelImpl.ENTITY_CACHE_ENABLED,
 			LayoutModelImpl.FINDER_CACHE_ENABLED, LayoutImpl.class,
-			FINDER_CLASS_NAME_ENTITY, "fetchByG_P_TU",
+			FINDER_CLASS_NAME_ENTITY, "fetchByG_P_TLU",
 			new String[] {
 				Long.class.getName(), Boolean.class.getName(),
 				String.class.getName()
 			});
-	public static final FinderPath FINDER_PATH_COUNT_BY_G_P_TU = new FinderPath(LayoutModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_COUNT_BY_G_P_TLU = new FinderPath(LayoutModelImpl.ENTITY_CACHE_ENABLED,
 			LayoutModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST, "countByG_P_TU",
+			FINDER_CLASS_NAME_LIST, "countByG_P_TLU",
 			new String[] {
 				Long.class.getName(), Boolean.class.getName(),
 				String.class.getName()
@@ -261,7 +261,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 			layout.getFriendlyURL()
 			}, layout);
 
-		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_P_TU,
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_P_TLU,
 			new Object[] {
 				Long.valueOf(layout.getGroupId()),
 				Boolean.valueOf(layout.getPrivateLayout()),
@@ -338,7 +338,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 			layout.getFriendlyURL()
 			});
 
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_P_TU,
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_P_TLU,
 			new Object[] {
 				Long.valueOf(layout.getGroupId()),
 				Boolean.valueOf(layout.getPrivateLayout()),
@@ -478,7 +478,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 			layoutModelImpl.getFriendlyURL()
 			});
 
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_P_TU,
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_P_TLU,
 			new Object[] {
 				Long.valueOf(layoutModelImpl.getGroupId()),
 				Boolean.valueOf(layoutModelImpl.getPrivateLayout()),
@@ -619,7 +619,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 				(layout.getPrivateLayout() != layoutModelImpl.getOriginalPrivateLayout()) ||
 				!Validator.equals(layout.getTemplateLayoutUuid(),
 					layoutModelImpl.getOriginalTemplateLayoutUuid()))) {
-			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_P_TU,
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_P_TLU,
 				new Object[] {
 					Long.valueOf(layoutModelImpl.getOriginalGroupId()),
 					Boolean.valueOf(layoutModelImpl.getOriginalPrivateLayout()),
@@ -633,7 +633,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 				(layout.getPrivateLayout() != layoutModelImpl.getOriginalPrivateLayout()) ||
 				!Validator.equals(layout.getTemplateLayoutUuid(),
 					layoutModelImpl.getOriginalTemplateLayoutUuid()))) {
-			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_P_TU,
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_P_TLU,
 				new Object[] {
 					Long.valueOf(layout.getGroupId()),
 					Boolean.valueOf(layout.getPrivateLayout()),
@@ -4902,10 +4902,11 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 	 * @throws com.liferay.portal.NoSuchLayoutException if a matching layout could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public Layout findByG_P_TU(long groupId, boolean privateLayout,
+	public Layout findByG_P_TLU(long groupId, boolean privateLayout,
 		String templateLayoutUuid)
 		throws NoSuchLayoutException, SystemException {
-		Layout layout = fetchByG_P_TU(groupId, privateLayout, templateLayoutUuid);
+		Layout layout = fetchByG_P_TLU(groupId, privateLayout,
+				templateLayoutUuid);
 
 		if (layout == null) {
 			StringBundler msg = new StringBundler(8);
@@ -4942,9 +4943,9 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 	 * @return the matching layout, or <code>null</code> if a matching layout could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public Layout fetchByG_P_TU(long groupId, boolean privateLayout,
+	public Layout fetchByG_P_TLU(long groupId, boolean privateLayout,
 		String templateLayoutUuid) throws SystemException {
-		return fetchByG_P_TU(groupId, privateLayout, templateLayoutUuid, true);
+		return fetchByG_P_TLU(groupId, privateLayout, templateLayoutUuid, true);
 	}
 
 	/**
@@ -4957,7 +4958,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 	 * @return the matching layout, or <code>null</code> if a matching layout could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public Layout fetchByG_P_TU(long groupId, boolean privateLayout,
+	public Layout fetchByG_P_TLU(long groupId, boolean privateLayout,
 		String templateLayoutUuid, boolean retrieveFromCache)
 		throws SystemException {
 		Object[] finderArgs = new Object[] {
@@ -4967,7 +4968,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		Object result = null;
 
 		if (retrieveFromCache) {
-			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_G_P_TU,
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_G_P_TLU,
 					finderArgs, this);
 		}
 
@@ -4976,19 +4977,19 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 
 			query.append(_SQL_SELECT_LAYOUT_WHERE);
 
-			query.append(_FINDER_COLUMN_G_P_TU_GROUPID_2);
+			query.append(_FINDER_COLUMN_G_P_TLU_GROUPID_2);
 
-			query.append(_FINDER_COLUMN_G_P_TU_PRIVATELAYOUT_2);
+			query.append(_FINDER_COLUMN_G_P_TLU_PRIVATELAYOUT_2);
 
 			if (templateLayoutUuid == null) {
-				query.append(_FINDER_COLUMN_G_P_TU_TEMPLATELAYOUTUUID_1);
+				query.append(_FINDER_COLUMN_G_P_TLU_TEMPLATELAYOUTUUID_1);
 			}
 			else {
 				if (templateLayoutUuid.equals(StringPool.BLANK)) {
-					query.append(_FINDER_COLUMN_G_P_TU_TEMPLATELAYOUTUUID_3);
+					query.append(_FINDER_COLUMN_G_P_TLU_TEMPLATELAYOUTUUID_3);
 				}
 				else {
-					query.append(_FINDER_COLUMN_G_P_TU_TEMPLATELAYOUTUUID_2);
+					query.append(_FINDER_COLUMN_G_P_TLU_TEMPLATELAYOUTUUID_2);
 				}
 			}
 
@@ -5020,7 +5021,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 				Layout layout = null;
 
 				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_P_TU,
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_P_TLU,
 						finderArgs, list);
 				}
 				else {
@@ -5033,7 +5034,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 							(layout.getTemplateLayoutUuid() == null) ||
 							!layout.getTemplateLayoutUuid()
 									   .equals(templateLayoutUuid)) {
-						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_P_TU,
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_P_TLU,
 							finderArgs, layout);
 					}
 				}
@@ -5045,7 +5046,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 			}
 			finally {
 				if (result == null) {
-					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_P_TU,
+					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_P_TLU,
 						finderArgs);
 				}
 
@@ -5312,10 +5313,10 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 	 * @param templateLayoutUuid the template layout uuid
 	 * @throws SystemException if a system exception occurred
 	 */
-	public void removeByG_P_TU(long groupId, boolean privateLayout,
+	public void removeByG_P_TLU(long groupId, boolean privateLayout,
 		String templateLayoutUuid)
 		throws NoSuchLayoutException, SystemException {
-		Layout layout = findByG_P_TU(groupId, privateLayout, templateLayoutUuid);
+		Layout layout = findByG_P_TLU(groupId, privateLayout, templateLayoutUuid);
 
 		layoutPersistence.remove(layout);
 	}
@@ -6208,13 +6209,13 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 	 * @return the number of matching layouts
 	 * @throws SystemException if a system exception occurred
 	 */
-	public int countByG_P_TU(long groupId, boolean privateLayout,
+	public int countByG_P_TLU(long groupId, boolean privateLayout,
 		String templateLayoutUuid) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				groupId, privateLayout, templateLayoutUuid
 			};
 
-		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_P_TU,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_P_TLU,
 				finderArgs, this);
 
 		if (count == null) {
@@ -6222,19 +6223,19 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 
 			query.append(_SQL_COUNT_LAYOUT_WHERE);
 
-			query.append(_FINDER_COLUMN_G_P_TU_GROUPID_2);
+			query.append(_FINDER_COLUMN_G_P_TLU_GROUPID_2);
 
-			query.append(_FINDER_COLUMN_G_P_TU_PRIVATELAYOUT_2);
+			query.append(_FINDER_COLUMN_G_P_TLU_PRIVATELAYOUT_2);
 
 			if (templateLayoutUuid == null) {
-				query.append(_FINDER_COLUMN_G_P_TU_TEMPLATELAYOUTUUID_1);
+				query.append(_FINDER_COLUMN_G_P_TLU_TEMPLATELAYOUTUUID_1);
 			}
 			else {
 				if (templateLayoutUuid.equals(StringPool.BLANK)) {
-					query.append(_FINDER_COLUMN_G_P_TU_TEMPLATELAYOUTUUID_3);
+					query.append(_FINDER_COLUMN_G_P_TLU_TEMPLATELAYOUTUUID_3);
 				}
 				else {
-					query.append(_FINDER_COLUMN_G_P_TU_TEMPLATELAYOUTUUID_2);
+					query.append(_FINDER_COLUMN_G_P_TLU_TEMPLATELAYOUTUUID_2);
 				}
 			}
 
@@ -6267,7 +6268,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 					count = Long.valueOf(0);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_P_TU,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_P_TLU,
 					finderArgs, count);
 
 				closeSession(session);
@@ -6520,11 +6521,11 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 	private static final String _FINDER_COLUMN_G_P_T_TYPE_1 = "layout.type IS NULL";
 	private static final String _FINDER_COLUMN_G_P_T_TYPE_2 = "layout.type = ?";
 	private static final String _FINDER_COLUMN_G_P_T_TYPE_3 = "(layout.type IS NULL OR layout.type = ?)";
-	private static final String _FINDER_COLUMN_G_P_TU_GROUPID_2 = "layout.groupId = ? AND ";
-	private static final String _FINDER_COLUMN_G_P_TU_PRIVATELAYOUT_2 = "layout.privateLayout = ? AND ";
-	private static final String _FINDER_COLUMN_G_P_TU_TEMPLATELAYOUTUUID_1 = "layout.templateLayoutUuid IS NULL";
-	private static final String _FINDER_COLUMN_G_P_TU_TEMPLATELAYOUTUUID_2 = "layout.templateLayoutUuid = ?";
-	private static final String _FINDER_COLUMN_G_P_TU_TEMPLATELAYOUTUUID_3 = "(layout.templateLayoutUuid IS NULL OR layout.templateLayoutUuid = ?)";
+	private static final String _FINDER_COLUMN_G_P_TLU_GROUPID_2 = "layout.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_G_P_TLU_PRIVATELAYOUT_2 = "layout.privateLayout = ? AND ";
+	private static final String _FINDER_COLUMN_G_P_TLU_TEMPLATELAYOUTUUID_1 = "layout.templateLayoutUuid IS NULL";
+	private static final String _FINDER_COLUMN_G_P_TLU_TEMPLATELAYOUTUUID_2 = "layout.templateLayoutUuid = ?";
+	private static final String _FINDER_COLUMN_G_P_TLU_TEMPLATELAYOUTUUID_3 = "(layout.templateLayoutUuid IS NULL OR layout.templateLayoutUuid = ?)";
 	private static final String _FILTER_ENTITY_TABLE_FILTER_PK_COLUMN = "layout.plid";
 	private static final String _FILTER_SQL_SELECT_LAYOUT_WHERE = "SELECT DISTINCT {layout.*} FROM Layout layout WHERE ";
 	private static final String _FILTER_SQL_SELECT_LAYOUT_NO_INLINE_DISTINCT_WHERE_1 =

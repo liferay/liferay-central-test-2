@@ -1483,12 +1483,12 @@ public class LayoutUtil {
 	* @throws com.liferay.portal.NoSuchLayoutException if a matching layout could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.liferay.portal.model.Layout findByG_P_TU(long groupId,
+	public static com.liferay.portal.model.Layout findByG_P_TLU(long groupId,
 		boolean privateLayout, java.lang.String templateLayoutUuid)
 		throws com.liferay.portal.NoSuchLayoutException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .findByG_P_TU(groupId, privateLayout, templateLayoutUuid);
+				   .findByG_P_TLU(groupId, privateLayout, templateLayoutUuid);
 	}
 
 	/**
@@ -1500,11 +1500,11 @@ public class LayoutUtil {
 	* @return the matching layout, or <code>null</code> if a matching layout could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.liferay.portal.model.Layout fetchByG_P_TU(long groupId,
+	public static com.liferay.portal.model.Layout fetchByG_P_TLU(long groupId,
 		boolean privateLayout, java.lang.String templateLayoutUuid)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .fetchByG_P_TU(groupId, privateLayout, templateLayoutUuid);
+				   .fetchByG_P_TLU(groupId, privateLayout, templateLayoutUuid);
 	}
 
 	/**
@@ -1517,12 +1517,12 @@ public class LayoutUtil {
 	* @return the matching layout, or <code>null</code> if a matching layout could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.liferay.portal.model.Layout fetchByG_P_TU(long groupId,
+	public static com.liferay.portal.model.Layout fetchByG_P_TLU(long groupId,
 		boolean privateLayout, java.lang.String templateLayoutUuid,
 		boolean retrieveFromCache)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .fetchByG_P_TU(groupId, privateLayout, templateLayoutUuid,
+				   .fetchByG_P_TLU(groupId, privateLayout, templateLayoutUuid,
 			retrieveFromCache);
 	}
 
@@ -1711,12 +1711,12 @@ public class LayoutUtil {
 	* @param templateLayoutUuid the template layout uuid
 	* @throws SystemException if a system exception occurred
 	*/
-	public static void removeByG_P_TU(long groupId, boolean privateLayout,
+	public static void removeByG_P_TLU(long groupId, boolean privateLayout,
 		java.lang.String templateLayoutUuid)
 		throws com.liferay.portal.NoSuchLayoutException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getPersistence()
-			.removeByG_P_TU(groupId, privateLayout, templateLayoutUuid);
+			.removeByG_P_TLU(groupId, privateLayout, templateLayoutUuid);
 	}
 
 	/**
@@ -1929,11 +1929,11 @@ public class LayoutUtil {
 	* @return the number of matching layouts
 	* @throws SystemException if a system exception occurred
 	*/
-	public static int countByG_P_TU(long groupId, boolean privateLayout,
+	public static int countByG_P_TLU(long groupId, boolean privateLayout,
 		java.lang.String templateLayoutUuid)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .countByG_P_TU(groupId, privateLayout, templateLayoutUuid);
+				   .countByG_P_TLU(groupId, privateLayout, templateLayoutUuid);
 	}
 
 	/**

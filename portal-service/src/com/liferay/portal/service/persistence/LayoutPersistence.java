@@ -1199,7 +1199,7 @@ public interface LayoutPersistence extends BasePersistence<Layout> {
 	* @throws com.liferay.portal.NoSuchLayoutException if a matching layout could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public com.liferay.portal.model.Layout findByG_P_TU(long groupId,
+	public com.liferay.portal.model.Layout findByG_P_TLU(long groupId,
 		boolean privateLayout, java.lang.String templateLayoutUuid)
 		throws com.liferay.portal.NoSuchLayoutException,
 			com.liferay.portal.kernel.exception.SystemException;
@@ -1213,7 +1213,7 @@ public interface LayoutPersistence extends BasePersistence<Layout> {
 	* @return the matching layout, or <code>null</code> if a matching layout could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public com.liferay.portal.model.Layout fetchByG_P_TU(long groupId,
+	public com.liferay.portal.model.Layout fetchByG_P_TLU(long groupId,
 		boolean privateLayout, java.lang.String templateLayoutUuid)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
@@ -1227,7 +1227,7 @@ public interface LayoutPersistence extends BasePersistence<Layout> {
 	* @return the matching layout, or <code>null</code> if a matching layout could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public com.liferay.portal.model.Layout fetchByG_P_TU(long groupId,
+	public com.liferay.portal.model.Layout fetchByG_P_TLU(long groupId,
 		boolean privateLayout, java.lang.String templateLayoutUuid,
 		boolean retrieveFromCache)
 		throws com.liferay.portal.kernel.exception.SystemException;
@@ -1389,7 +1389,7 @@ public interface LayoutPersistence extends BasePersistence<Layout> {
 	* @param templateLayoutUuid the template layout uuid
 	* @throws SystemException if a system exception occurred
 	*/
-	public void removeByG_P_TU(long groupId, boolean privateLayout,
+	public void removeByG_P_TLU(long groupId, boolean privateLayout,
 		java.lang.String templateLayoutUuid)
 		throws com.liferay.portal.NoSuchLayoutException,
 			com.liferay.portal.kernel.exception.SystemException;
@@ -1571,7 +1571,7 @@ public interface LayoutPersistence extends BasePersistence<Layout> {
 	* @return the number of matching layouts
 	* @throws SystemException if a system exception occurred
 	*/
-	public int countByG_P_TU(long groupId, boolean privateLayout,
+	public int countByG_P_TLU(long groupId, boolean privateLayout,
 		java.lang.String templateLayoutUuid)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
