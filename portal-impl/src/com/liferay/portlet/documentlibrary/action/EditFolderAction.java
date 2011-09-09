@@ -74,8 +74,8 @@ public class EditFolderAction extends PortletAction {
 			else if (cmd.equals(Constants.MOVE)) {
 				moveFolders(actionRequest);
 			}
-			else if (cmd.equals("set-root-workflow-definition-link")) {
-				setRootWorkflowDefinitionLink(actionRequest);
+			else if (cmd.equals("updateWorkflowDefinitions")) {
+				updateWorkflowDefinitions(actionRequest);
 			}
 
 			sendRedirect(actionRequest, actionResponse);
@@ -172,7 +172,36 @@ public class EditFolderAction extends PortletAction {
 		}
 	}
 
-	protected void setRootWorkflowDefinitionLink(ActionRequest actionRequest)
+	protected void updateFolder(ActionRequest actionRequest) throws Exception {
+		long folderId = ParamUtil.getLong(actionRequest, "folderId");
+
+		long repositoryId = ParamUtil.getLong(actionRequest, "repositoryId");
+		long parentFolderId = ParamUtil.getLong(
+			actionRequest, "parentFolderId");
+		String name = ParamUtil.getString(actionRequest, "name");
+		String description = ParamUtil.getString(actionRequest, "description");
+
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			DLFolder.class.getName(), actionRequest);
+
+		if (folderId <= 0) {
+
+			// Add folder
+
+			DLAppServiceUtil.addFolder(
+				repositoryId, parentFolderId, name, description,
+				serviceContext);
+		}
+		else {
+
+			// Update folder
+
+			DLAppServiceUtil.updateFolder(
+				folderId, name, description, serviceContext);
+		}
+	}
+
+	protected void updateWorkflowDefinitions(ActionRequest actionRequest)
 		throws Exception {
 
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
@@ -210,35 +239,6 @@ public class EditFolderAction extends PortletAction {
 			serviceContext.getScopeGroupId(), DLFolder.class.getName(),
 			DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
 			workflowDefinitions);
-	}
-
-	protected void updateFolder(ActionRequest actionRequest) throws Exception {
-		long folderId = ParamUtil.getLong(actionRequest, "folderId");
-
-		long repositoryId = ParamUtil.getLong(actionRequest, "repositoryId");
-		long parentFolderId = ParamUtil.getLong(
-			actionRequest, "parentFolderId");
-		String name = ParamUtil.getString(actionRequest, "name");
-		String description = ParamUtil.getString(actionRequest, "description");
-
-		ServiceContext serviceContext = ServiceContextFactory.getInstance(
-			DLFolder.class.getName(), actionRequest);
-
-		if (folderId <= 0) {
-
-			// Add folder
-
-			DLAppServiceUtil.addFolder(
-				repositoryId, parentFolderId, name, description,
-				serviceContext);
-		}
-		else {
-
-			// Update folder
-
-			DLAppServiceUtil.updateFolder(
-				folderId, name, description, serviceContext);
-		}
 	}
 
 }
