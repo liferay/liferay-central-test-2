@@ -91,7 +91,7 @@ boolean deletePortrait = ParamUtil.getBoolean(request, "deletePortrait");
 
 			<%
 			User displayEmailAddressUser = null;
-			
+
 			if (selUser != null) {
 				displayEmailAddressUser = (User)selUser.clone();
 
