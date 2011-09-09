@@ -1848,10 +1848,10 @@ public class SourceFormatter {
 		fileName = fileName.replace(
 			CharPool.BACK_SLASH, CharPool.FORWARD_SLASH);
 
-		if (fileName.endsWith("html/common/init.jsp") ||
-			fileName.endsWith("html/portal/init.jsp") ||
+		if (!fileName.contains("docroot") ||
 			fileName.endsWith("init-ext.jsp") ||
-			!fileName.contains("docroot")) {
+			fileName.endsWith("html/common/init.jsp") ||
+			fileName.endsWith("html/portal/init.jsp")) {
 
 			return content;
 		}
