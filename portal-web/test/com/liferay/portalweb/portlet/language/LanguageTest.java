@@ -47,7 +47,7 @@ public class LanguageTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		selenium.clickAt("//img[@alt='\u0627\u0644\u0639\u0631\u0628\u064a\u0629 (\u0627\u0644\u0633\u0639\u0648\u062f\u064a\u0629) - Beta']",
 			RuntimeVariables.replace(
-				"\u0628\u064a\u0629 (\u0627\u0644\u0633\u0639\u0648\u062f\u064a\u0629 (\u0627\u0644\u0633\u0639\u0648\u062f\u064a\u0629) - Beta'"));
+				"\u0628\u064a\u0629 (\u0627\u0644\u0633\u0639\u0648\u062f\u064a\u0629 (\u0627\u0644\u0633\u0639\u0648\u062f\u064a\u0629) - Beta"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertTrue(selenium.isTextPresent("\u0623\u0636\u0641"));
