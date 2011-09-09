@@ -66,12 +66,6 @@ public class ChannelHubImpl implements ChannelHub {
 		confirmDelivery(userId, notificationEventUuids, false);
 	}
 
-	public void confirmDelivery(long userId, String notificationEventUuid)
-		throws ChannelException {
-
-		confirmDelivery(userId, notificationEventUuid, false);
-	}
-
 	public void confirmDelivery(
 			long userId, Collection<String> notificationEventUuids,
 			boolean archive)
@@ -80,6 +74,12 @@ public class ChannelHubImpl implements ChannelHub {
 		Channel channel = getChannel(userId);
 
 		channel.confirmDelivery(notificationEventUuids, archive);
+	}
+
+	public void confirmDelivery(long userId, String notificationEventUuid)
+		throws ChannelException {
+
+		confirmDelivery(userId, notificationEventUuid, false);
 	}
 
 	public void confirmDelivery(
@@ -98,10 +98,10 @@ public class ChannelHubImpl implements ChannelHub {
 
 		Channel channel = _channel.clone(_companyId, userId);
 
-		Channel storedChannel = _channels.putIfAbsent(userId, channel);
-		if (storedChannel != null) {
-			channel.sendNotificationEvents(
-				storedChannel.getNotificationEvents());
+		Channel oldChannel = _channels.putIfAbsent(userId, channel);
+
+		if (oldChannel != null) {
+			channel.sendNotificationEvents(oldChannel.getNotificationEvents());
 		}
 
 		channel.init();
@@ -152,7 +152,6 @@ public class ChannelHubImpl implements ChannelHub {
 	}
 
 	public Channel fetchChannel(long userId) throws ChannelException {
-
 		return fetchChannel(userId, false);
 	}
 
@@ -185,7 +184,7 @@ public class ChannelHubImpl implements ChannelHub {
 	public void flush(long userId) throws ChannelException {
 		Channel channel = fetchChannel(userId);
 
-		if (channel == null) {
+		if (channel != null) {
 			channel.flush();
 		}
 	}
@@ -193,7 +192,7 @@ public class ChannelHubImpl implements ChannelHub {
 	public void flush(long userId, long timestamp) throws ChannelException {
 		Channel channel = fetchChannel(userId);
 
-		if (channel == null) {
+		if (channel != null) {
 			channel.flush(timestamp);
 		}
 	}
@@ -306,7 +305,7 @@ public class ChannelHubImpl implements ChannelHub {
 	}
 
 	private Channel _channel;
-	private final ConcurrentMap<Long, Channel> _channels =
+	private ConcurrentMap<Long, Channel> _channels =
 		new ConcurrentHashMap<Long, Channel>();
 	private long _companyId = CompanyConstants.SYSTEM;
 
