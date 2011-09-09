@@ -63,11 +63,14 @@ public class ChannelHubManagerUtil {
 		getChannelHubManager().destroyChannelHub(companyId);
 	}
 
-	public ChannelHub fetchChannelHub(long companyId) throws ChannelException {
+	public static ChannelHub fetchChannelHub(long companyId)
+		throws ChannelException {
+
 		return getChannelHubManager().fetchChannelHub(companyId);
 	}
 
-	public ChannelHub fetchChannelHub(long companyId, boolean createIfAbsent)
+	public static ChannelHub fetchChannelHub(
+			long companyId, boolean createIfAbsent)
 		throws ChannelException {
 
 		return getChannelHubManager().fetchChannelHub(
