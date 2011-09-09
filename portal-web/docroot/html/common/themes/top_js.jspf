@@ -97,9 +97,9 @@
 				notices: [
 					null
 
-					<c:if test= "<%= themeDisplay.getPermissionChecker().isOmniadmin() && PortalUtil.isUpdateAvailable() %>">
+					<c:if test= "<%= permissionChecker.isOmniadmin() && PortalUtil.isUpdateAvailable() %>">
 						,{
-							content: '<a class="update-available" href="<%= themeDisplay.getURLUpdateManager().toString() %>"><%= LanguageUtil.format(pageContext, "updates-are-available-for-liferay", false) %></a>',
+							content: '<a class="update-available" href="<%= themeDisplay.getURLUpdateManager() %>"><liferay-ui:message key="updates-are-available-for-liferay" /></a>',
 							toggleText: false
 						}
 					</c:if>
