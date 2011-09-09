@@ -280,18 +280,22 @@ public class ChannelHubImpl implements ChannelHub {
 
 		if (channel != null) {
 			channel.sendNotificationEvent(notificationEvent);
+
+			return;
 		}
-		else {
-			if (PropsValues.USER_NOTIFICATION_EVENT_CONFIRMATION_ENABLED &&
-				notificationEvent.isDeliveryRequired()) {
-				try {
-					UserNotificationEventLocalServiceUtil.
-						addUserNotificationEvent(userId, notificationEvent);
-				}
-				catch (Exception e) {
-					throw new ChannelException("Unable to send event", e);
-				}
-			}
+
+		if (!PropsValues.USER_NOTIFICATION_EVENT_CONFIRMATION_ENABLED ||
+			!notificationEvent.isDeliveryRequired()) {
+
+			return;
+		}
+
+		try {
+			UserNotificationEventLocalServiceUtil.addUserNotificationEvent(
+				userId, notificationEvent);
+		}
+		catch (Exception e) {
+			throw new ChannelException("Unable to send event", e);
 		}
 	}
 
@@ -303,27 +307,29 @@ public class ChannelHubImpl implements ChannelHub {
 
 		if (channel != null) {
 			channel.sendNotificationEvents(notificationEvents);
+
+			return;
 		}
-		else {
-			if (PropsValues.USER_NOTIFICATION_EVENT_CONFIRMATION_ENABLED) {
-				List<NotificationEvent> persistedNotificationEvents =
-					new ArrayList<NotificationEvent>(notificationEvents.size());
 
-				for (NotificationEvent notificationEvent : notificationEvents) {
-					if (notificationEvent.isDeliveryRequired()) {
-						persistedNotificationEvents.add(notificationEvent);
-					}
-				}
+		if (!PropsValues.USER_NOTIFICATION_EVENT_CONFIRMATION_ENABLED) {
+			return;
+		}
 
-				try {
-					UserNotificationEventLocalServiceUtil.
-						addUserNotificationEvents(
-							userId, persistedNotificationEvents);
-				}
-				catch (Exception e) {
-					throw new ChannelException("Unable to send events", e);
-				}
+		List<NotificationEvent> persistedNotificationEvents =
+				new ArrayList<NotificationEvent>(notificationEvents.size());
+
+		for (NotificationEvent notificationEvent : notificationEvents) {
+			if (notificationEvent.isDeliveryRequired()) {
+				persistedNotificationEvents.add(notificationEvent);
 			}
+		}
+
+		try {
+			UserNotificationEventLocalServiceUtil.addUserNotificationEvents(
+				userId, persistedNotificationEvents);
+		}
+		catch (Exception e) {
+			throw new ChannelException("Unable to send events", e);
 		}
 	}
 
