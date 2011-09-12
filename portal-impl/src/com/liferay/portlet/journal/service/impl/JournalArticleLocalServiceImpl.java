@@ -3156,8 +3156,8 @@ public class JournalArticleLocalServiceImpl
 			"[$ARTICLE_URL$]", articleURL,
 			"[$ARTICLE_USER_NAME$]", article.getUserName(),
 			"[$ARTICLE_VERSION$]", String.valueOf(article.getVersion()));
-		subscriptionSender.setFrom(fromAddress, fromName);
 		subscriptionSender.setContextUserPrefix("ARTICLE");
+		subscriptionSender.setFrom(fromAddress, fromName);
 		subscriptionSender.setHtmlFormat(true);
 		subscriptionSender.setMailId("journal_article", article.getId());
 		subscriptionSender.setPortletId(PortletKeys.JOURNAL);
