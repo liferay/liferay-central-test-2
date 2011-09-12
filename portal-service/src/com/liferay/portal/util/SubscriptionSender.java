@@ -213,7 +213,8 @@ public class SubscriptionSender implements Serializable {
 				HtmlUtil.escape(PortalUtil.getUserEmailAddress(userId)));
 			setContextAttribute(
 				"[$" + _contextUserPrefix + "_USER_NAME$]",
-				HtmlUtil.escape(PortalUtil.getUserName(userId, StringPool.BLANK)));
+				HtmlUtil.escape(PortalUtil.getUserName(userId,
+					StringPool.BLANK)));
 		}
 
 		mailId = PortalUtil.getMailId(
@@ -464,7 +465,8 @@ public class SubscriptionSender implements Serializable {
 				from.getAddress(),
 				GetterUtil.getString(from.getPersonal(), from.getAddress()),
 				HtmlUtil.escape(to.getAddress()),
-				HtmlUtil.escape(GetterUtil.getString(to.getPersonal(), to.getAddress()))
+				HtmlUtil.escape(GetterUtil.getString(to.getPersonal(),
+					to.getAddress()))
 			});
 
 		processedSubject = replaceContent(processedSubject, locale);
@@ -483,7 +485,8 @@ public class SubscriptionSender implements Serializable {
 				from.getAddress(),
 				GetterUtil.getString(from.getPersonal(), from.getAddress()),
 				HtmlUtil.escape(to.getAddress()),
-				HtmlUtil.escape(GetterUtil.getString(to.getPersonal(), to.getAddress()))
+				HtmlUtil.escape(GetterUtil.getString(to.getPersonal(),
+					to.getAddress()))
 			});
 
 		processedBody = replaceContent(processedBody, locale);
