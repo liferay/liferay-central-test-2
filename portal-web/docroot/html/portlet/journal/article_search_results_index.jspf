@@ -26,12 +26,11 @@ journalParams.put("expandoAttributes", searchTerms.getKeywords());
 
 Sort sort = SortFactoryUtil.getSort(JournalArticle.class, searchContainer.getOrderByCol(), searchContainer.getOrderByType());
 
-Hits hits = null;
-Tuple tuple = null;
+int total = 0;
 
-boolean corruptIndex = true;
+while (true) {
+	Hits hits = null;
 
-while (corruptIndex) {
 	if (searchTerms.isAdvancedSearch()) {
 		hits = JournalArticleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getGroupId(), 0, searchTerms.getArticleId(), searchTerms.getTitle(), searchTerms.getDescription(), searchTerms.getContent(), searchTerms.getType(), StringUtil.valueOf(searchTerms.getStatusCode()), searchTerms.getStructureId(), searchTerms.getTemplateId(), journalParams, searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd(), sort);
 	}
@@ -39,12 +38,17 @@ while (corruptIndex) {
 		hits = JournalArticleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getGroupId(), 0, searchTerms.getStructureId(), searchTerms.getTemplateId(), searchTerms.getKeywords(), journalParams, searchContainer.getStart(), searchContainer.getEnd(), sort);
 	}
 
-	tuple = JournalUtil.getArticles(hits);
+	Tuple tuple = JournalUtil.getArticles(hits);
 
-	corruptIndex = (Boolean)tuple.getObject(1);
+	boolean corruptIndex = (Boolean)tuple.getObject(1);
+
+	if (!corruptIndex) {
+		results = (List<JournalArticle>)tuple.getObject(0);
+		total = hits.getLength();
+
+		break;
+	}
 }
-results = (List<JournalArticle>)tuple.getObject(0);
-int total = hits.getLength();
 
 searchContainer.setResults(results);
 searchContainer.setTotal(total);

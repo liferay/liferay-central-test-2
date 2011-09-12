@@ -72,9 +72,8 @@ public class SCIndexer extends BaseIndexer {
 	protected void doDelete(Object obj) throws Exception {
 		SCProductEntry productEntry = (SCProductEntry)obj;
 
-		doDelete(
-			productEntry.getCompanyId(),
-			String.valueOf(productEntry.getProductEntryId()));
+		deleteDocument(
+			productEntry.getCompanyId(), productEntry.getProductEntryId());
 	}
 
 	@Override

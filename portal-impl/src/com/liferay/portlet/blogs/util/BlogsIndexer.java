@@ -94,7 +94,7 @@ public class BlogsIndexer extends BaseIndexer {
 	protected void doDelete(Object obj) throws Exception {
 		BlogsEntry entry = (BlogsEntry)obj;
 
-		doDelete(entry.getCompanyId(), String.valueOf(entry.getEntryId()));
+		deleteDocument(entry.getCompanyId(), entry.getEntryId());
 	}
 
 	@Override

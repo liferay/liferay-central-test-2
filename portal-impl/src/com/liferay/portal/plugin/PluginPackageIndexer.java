@@ -71,7 +71,7 @@ public class PluginPackageIndexer extends BaseIndexer {
 	protected void doDelete(Object obj) throws Exception {
 		PluginPackage pluginPackage = (PluginPackage)obj;
 
-		doDelete(CompanyConstants.SYSTEM, pluginPackage.getModuleId());
+		deleteDocument(CompanyConstants.SYSTEM, pluginPackage.getModuleId());
 	}
 
 	@Override

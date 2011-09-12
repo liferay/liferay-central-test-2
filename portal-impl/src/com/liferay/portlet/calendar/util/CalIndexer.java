@@ -57,7 +57,7 @@ public class CalIndexer extends BaseIndexer {
 	protected void doDelete(Object obj) throws Exception {
 		CalEvent event = (CalEvent)obj;
 
-		doDelete(event.getCompanyId(), String.valueOf(event.getEventId()));
+		deleteDocument(event.getCompanyId(), event.getEventId());
 	}
 
 	@Override

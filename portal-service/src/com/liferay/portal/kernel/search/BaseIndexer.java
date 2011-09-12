@@ -600,10 +600,34 @@ public abstract class BaseIndexer implements Indexer {
 		return fullQuery;
 	}
 
-	protected void doDelete(long companyId, String field1) throws Exception {
+	protected void deleteDocument(long companyId, long field1)
+		throws Exception {
+
+		deleteDocument(companyId, String.valueOf(field1));
+	}
+
+	protected void deleteDocument(long companyId, long field1, String field2)
+		throws Exception {
+
+		deleteDocument(companyId, String.valueOf(field1), field2);
+	}
+
+	protected void deleteDocument(long companyId, String field1)
+		throws Exception {
+
 		Document document = new DocumentImpl();
 
 		document.addUID(getPortletId(), field1);
+
+		SearchEngineUtil.deleteDocument(companyId, document.get(Field.UID));
+	}
+
+	protected void deleteDocument(long companyId, String field1, String field2)
+		throws Exception {
+
+		Document document = new DocumentImpl();
+
+		document.addUID(getPortletId(), field1, field2);
 
 		SearchEngineUtil.deleteDocument(companyId, document.get(Field.UID));
 	}

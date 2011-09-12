@@ -355,14 +355,13 @@ public class JournalUtil {
 			catch (NoSuchArticleException nsae) {
 				corruptIndex = true;
 
-				long companyId = GetterUtil.getLong(
-					document.get(Field.COMPANY_ID));
-				String uid = document.getUID();
-
 				Indexer indexer = IndexerRegistryUtil.getIndexer(
 					JournalArticle.class);
 
-				indexer.delete(companyId, uid);
+				long companyId = GetterUtil.getLong(
+					document.get(Field.COMPANY_ID));
+
+				indexer.delete(companyId, document.getUID());
 			}
 		}
 

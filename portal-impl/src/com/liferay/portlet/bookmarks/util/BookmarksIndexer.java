@@ -97,7 +97,7 @@ public class BookmarksIndexer extends BaseIndexer {
 	protected void doDelete(Object obj) throws Exception {
 		BookmarksEntry entry = (BookmarksEntry)obj;
 
-		doDelete(entry.getCompanyId(), String.valueOf(entry.getEntryId()));
+		deleteDocument(entry.getCompanyId(), entry.getEntryId());
 	}
 
 	@Override

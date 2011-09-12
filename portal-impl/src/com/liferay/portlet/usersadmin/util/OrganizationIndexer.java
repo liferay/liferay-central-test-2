@@ -129,9 +129,8 @@ public class OrganizationIndexer extends BaseIndexer {
 	protected void doDelete(Object obj) throws Exception {
 		Organization organization = (Organization)obj;
 
-		doDelete(
-			organization.getCompanyId(),
-			String.valueOf(organization.getOrganizationId()));
+		deleteDocument(
+			organization.getCompanyId(), organization.getOrganizationId());
 	}
 
 	@Override

@@ -169,7 +169,7 @@ public class UserIndexer extends BaseIndexer {
 	protected void doDelete(Object obj) throws Exception {
 		User user = (User)obj;
 
-		doDelete(user.getCompanyId(), String.valueOf(user.getUserId()));
+		deleteDocument(user.getCompanyId(), user.getUserId());
 	}
 
 	@Override
