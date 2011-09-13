@@ -3343,13 +3343,12 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			"[$EMAIL_VERIFICATION_CODE$]", ticket.getKey(),
 			"[$EMAIL_VERIFICATION_URL$]", verifyEmailAddressURL,
 			"[$REMOTE_ADDRESS$]", serviceContext.getRemoteAddr(),
-			"[$REMOTE_HOST$]", serviceContext.getRemoteHost(),
-			"[$USER_AGENT$]", serviceContext.getUserAgent(),
-			"[$USER_ID$]", String.valueOf(user.getUserId()),
+			"[$REMOTE_HOST$]", serviceContext.getRemoteHost(), "[$USER_AGENT$]",
+			serviceContext.getUserAgent(), "[$USER_ID$]", user.getUserId(),
 			"[$USER_SCREENNAME$]", user.getScreenName());
 		subscriptionSender.setFrom(fromAddress, fromName);
 		subscriptionSender.setHtmlFormat(true);
-		subscriptionSender.setMailId("email_verification", user.getUserId());
+		subscriptionSender.setMailId("user", user.getUserId());
 		subscriptionSender.setPortletId(PortletKeys.PORTAL);
 		subscriptionSender.setScopeGroupId(serviceContext.getScopeGroupId());
 		subscriptionSender.setSubject(subject);
@@ -5114,16 +5113,15 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		subscriptionSender.setBody(body);
 		subscriptionSender.setCompanyId(companyId);
 		subscriptionSender.setContextAttributes(
-			"[$PASSWORD_RESET_URL$]", passwordResetURL,
-			"[$REMOTE_ADDRESS$]", serviceContext.getRemoteAddr(),
-			"[$REMOTE_HOST$]", serviceContext.getRemoteHost(),
-			"[$USER_AGENT$]", serviceContext.getUserAgent(),
-			"[$USER_ID$]", String.valueOf(user.getUserId()),
-			"[$USER_PASSWORD$]", newPassword,
-			"[$USER_SCREENNAME$]", user.getScreenName());
+			"[$PASSWORD_RESET_URL$]", passwordResetURL, "[$REMOTE_ADDRESS$]",
+			serviceContext.getRemoteAddr(), "[$REMOTE_HOST$]",
+			serviceContext.getRemoteHost(), "[$USER_AGENT$]",
+			serviceContext.getUserAgent(), "[$USER_ID$]", user.getUserId(),
+			"[$USER_PASSWORD$]", newPassword, "[$USER_SCREENNAME$]",
+			user.getScreenName());
 		subscriptionSender.setFrom(fromAddress, fromName);
 		subscriptionSender.setHtmlFormat(true);
-		subscriptionSender.setMailId("send_pwd", user.getUserId());
+		subscriptionSender.setMailId("user", user.getUserId());
 		subscriptionSender.setScopeGroupId(serviceContext.getScopeGroupId());
 		subscriptionSender.setSubject(subject);
 		subscriptionSender.setUserId(user.getUserId());
@@ -5149,8 +5147,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		return userIds;
 	}
 
-	protected void sendEmail(User user,
-			String password, ServiceContext serviceContext)
+	protected void sendEmail(
+			User user, String password, ServiceContext serviceContext)
 		throws IOException, PortalException, SystemException {
 
 		if (!PrefsPropsUtil.getBoolean(
@@ -5188,12 +5186,11 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		subscriptionSender.setBody(body);
 		subscriptionSender.setCompanyId(user.getCompanyId());
 		subscriptionSender.setContextAttributes(
-				"[$USER_ID$]", String.valueOf(user.getUserId()),
-				"[$USER_PASSWORD$]", password,
-				"[$USER_SCREENNAME$]", user.getScreenName());
+			"[$USER_ID$]", user.getUserId(), "[$USER_PASSWORD$]", password,
+			"[$USER_SCREENNAME$]", user.getScreenName());
 		subscriptionSender.setFrom(fromAddress, fromName);
 		subscriptionSender.setHtmlFormat(true);
-		subscriptionSender.setMailId("user_registration", user.getUserId());
+		subscriptionSender.setMailId("user", user.getUserId());
 		subscriptionSender.setScopeGroupId(serviceContext.getScopeGroupId());
 		subscriptionSender.setSubject(subject);
 		subscriptionSender.setUserId(user.getUserId());

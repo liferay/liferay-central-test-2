@@ -238,12 +238,7 @@ public class SubscriptionSender implements Serializable {
 	}
 
 	public void setContextAttribute(String key, Object value) {
-		try {
-			_context.put(key, HtmlUtil.escape((String)value));
-		}
-		catch (ClassCastException ex) {
-			_context.put(key, value);
-		}
+		_context.put(key, HtmlUtil.escape(String.valueOf(value)));
 	}
 
 	public void setContextAttributes(Object... values) {

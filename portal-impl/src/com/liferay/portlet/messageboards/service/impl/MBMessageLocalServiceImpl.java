@@ -1824,9 +1824,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		subscriptionSender.setCompanyId(message.getCompanyId());
 		subscriptionSender.setContextAttributes(
 			"[$COMMENTS_BODY$]", message.getBody(true),
-			"[$COMMENTS_USER_ADDRESS$]", userAddress,
-			"[$COMMENTS_USER_NAME$]", userName,
-			"[$CONTENT_URL$]", contentURL);
+			"[$COMMENTS_USER_ADDRESS$]", userAddress, "[$COMMENTS_USER_NAME$]",
+			userName, "[$CONTENT_URL$]", contentURL);
 		subscriptionSender.setFrom(fromAddress, fromName);
 		subscriptionSender.setHtmlFormat(true);
 		subscriptionSender.setMailId(
@@ -1992,13 +1991,11 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		subscriptionSenderPrototype.setBulk(true);
 		subscriptionSenderPrototype.setCompanyId(message.getCompanyId());
 		subscriptionSenderPrototype.setContextAttributes(
-			"[$CATEGORY_NAME$]", categoryName,
-			"[$MESSAGE_BODY$]", message.getBody(),
-			"[$MESSAGE_ID$]", message.getMessageId(),
+			"[$CATEGORY_NAME$]", categoryName, "[$MESSAGE_BODY$]",
+			message.getBody(), "[$MESSAGE_ID$]", message.getMessageId(),
 			"[$MAILING_LIST_ADDRESS$]", mailingListAddress,
-			"[$MESSAGE_SUBJECT$]", message.getSubject(),
-			"[$MESSAGE_URL$]", messageURL,
-			"[$MESSAGE_USER_ADDRESS$]", emailAddress,
+			"[$MESSAGE_SUBJECT$]", message.getSubject(), "[$MESSAGE_URL$]",
+			messageURL, "[$MESSAGE_USER_ADDRESS$]", emailAddress,
 			"[$MESSAGE_USER_NAME$]", fullName);
 		subscriptionSenderPrototype.setFrom(fromAddress, fromName);
 		subscriptionSenderPrototype.setHtmlFormat(
