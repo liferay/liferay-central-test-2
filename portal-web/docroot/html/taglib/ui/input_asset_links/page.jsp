@@ -27,11 +27,7 @@ AssetEntry assetEntry = null;
 List<AssetLink> assetLinks = new ArrayList<AssetLink>();
 
 if (classPK > 0) {
-	try {
-		assetEntry = AssetEntryLocalServiceUtil.getEntry(className, classPK);
-	}
-	catch (NoSuchEntryException nsee) {
-	}
+	assetEntry = AssetEntryLocalServiceUtil.fetchEntry(className, classPK);
 }
 
 String assetLinkSearchContainerPrimaryKeys = ParamUtil.getString(request, "assetLinkSearchContainerPrimaryKeys");
