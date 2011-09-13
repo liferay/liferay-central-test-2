@@ -225,21 +225,18 @@ public class FlagsRequestMessageListener extends BaseMessageListener {
 		subscriptionSender.setBody(body);
 		subscriptionSender.setCompanyId(company.getCompanyId());
 		subscriptionSender.setContextAttributes(
-			"[$CONTENT_ID$]", String.valueOf(contentId), "[$CONTENT_TITLE$]",
-			contentTitle, "[$CONTENT_TYPE$]", contentType, "[$CONTENT_URL$]",
-			contentURL, "[$DATE$]", now.toString(), "[$REASON$]", reason,
+			"[$CONTENT_ID$]", contentId, "[$CONTENT_TITLE$]", contentTitle,
+			"[$CONTENT_TYPE$]", contentType, "[$CONTENT_URL$]", contentURL,
+			"[$DATE$]", now.toString(), "[$REASON$]", reason,
 			"[$REPORTED_USER_ADDRESS$]", reportedEmailAddress,
 			"[$REPORTED_USER_NAME$]", reportedUserName, "[$REPORTED_USER_URL$]",
 			reportedUserURL, "[$REPORTER_USER_ADDRESS$]", reporterEmailAddress,
 			"[$REPORTER_USER_NAME$]", reporterUserName);
-		subscriptionSender.setContextUserPrefix("FLAG");
 		subscriptionSender.setFrom(fromAddress, fromName);
 		subscriptionSender.setHtmlFormat(true);
 		subscriptionSender.setMailId("flags_request", contentId);
 		subscriptionSender.setPortletId(PortletKeys.FLAGS);
-		subscriptionSender.setScopeGroupId(serviceContext.getScopeGroupId());
 		subscriptionSender.setSubject(subject);
-		subscriptionSender.setUserId(serviceContext.getUserId());
 
 		subscriptionSender.addRuntimeSubscribers(toAddress, toName);
 

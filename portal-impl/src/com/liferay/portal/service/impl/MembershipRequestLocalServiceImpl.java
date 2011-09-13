@@ -20,7 +20,6 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.MembershipRequest;
 import com.liferay.portal.model.MembershipRequestConstants;
@@ -29,7 +28,6 @@ import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroupRole;
 import com.liferay.portal.service.base.MembershipRequestLocalServiceBaseImpl;
-import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.SubscriptionSender;
 import com.liferay.util.UniqueList;
@@ -274,12 +272,6 @@ public class MembershipRequestLocalServiceImpl
 			String subjectProperty, String bodyProperty)
 		throws PortalException, SystemException {
 
-		Company company = companyPersistence.findByPrimaryKey(
-			membershipRequest.getCompanyId());
-
-		Group group = groupPersistence.findByPrimaryKey(
-			membershipRequest.getGroupId());
-
 		User user = userPersistence.findByPrimaryKey(userId);
 		User requestUser = userPersistence.findByPrimaryKey(
 			membershipRequest.getUserId());
@@ -320,7 +312,7 @@ public class MembershipRequestLocalServiceImpl
 		SubscriptionSender subscriptionSender = new SubscriptionSender();
 
 		subscriptionSender.setBody(body);
-		subscriptionSender.setCompanyId(company.getLogoId());
+		subscriptionSender.setCompanyId(membershipRequest.getCompanyId());
 		subscriptionSender.setContextAttributes(
 			"[$COMMENTS$]", membershipRequest.getComments(),
 			"[$REPLY_COMMENTS$]", membershipRequest.getReplyComments(),
@@ -332,8 +324,6 @@ public class MembershipRequestLocalServiceImpl
 		subscriptionSender.setHtmlFormat(true);
 		subscriptionSender.setMailId(
 			"membership_request", membershipRequest.getMembershipRequestId());
-		subscriptionSender.setPortletId(PortletKeys.PORTAL);
-		subscriptionSender.setScopeGroupId(group.getGroupId());
 		subscriptionSender.setSubject(subject);
 		subscriptionSender.setUserId(userId);
 

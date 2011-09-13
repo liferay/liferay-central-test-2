@@ -19,7 +19,6 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
-import com.liferay.portal.model.Company;
 import com.liferay.portal.model.User;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
@@ -436,9 +435,6 @@ public class ShoppingOrderLocalServiceImpl
 			return;
 		}
 
-		Company company = companyPersistence.findByPrimaryKey(
-			order.getCompanyId());
-
 		User user = userPersistence.findByPrimaryKey(order.getUserId());
 
 		Currency currency = Currency.getInstance(shoppingPrefs.getCurrencyId());
@@ -488,16 +484,15 @@ public class ShoppingOrderLocalServiceImpl
 		SubscriptionSender subscriptionSender = new SubscriptionSender();
 
 		subscriptionSender.setBody(body);
-		subscriptionSender.setCompanyId(company.getCompanyId());
+		subscriptionSender.setCompanyId(order.getCompanyId());
 		subscriptionSender.setContextAttributes(
 			"[$ORDER_BILLING_ADDRESS$]", billingAddress, "[$ORDER_CURRENCY$]",
 			currency.getSymbol(), "[$ORDER_NUMBER$]", order.getNumber(),
 			"[$ORDER_SHIPPING_ADDRESS$]", shippingAddress, "[$ORDER_TOTAL$]",
-			String.valueOf(total));
-		subscriptionSender.setContextUserPrefix("ORDER");
+			total);
 		subscriptionSender.setFrom(fromAddress, fromName);
 		subscriptionSender.setHtmlFormat(true);
-		subscriptionSender.setMailId("order",order.getOrderId());
+		subscriptionSender.setMailId("shopping_order", order.getOrderId());
 		subscriptionSender.setPortletId(PortletKeys.SHOPPING);
 		subscriptionSender.setScopeGroupId(order.getGroupId());
 		subscriptionSender.setSubject(subject);

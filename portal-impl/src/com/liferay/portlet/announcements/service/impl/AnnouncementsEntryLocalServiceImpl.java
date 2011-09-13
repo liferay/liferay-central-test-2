@@ -412,7 +412,7 @@ public class AnnouncementsEntryLocalServiceImpl
 			_log.debug("Notifying " + users.size() + " users");
 		}
 
-		boolean sendAnnouncements = false;
+		boolean notifyUsers = false;
 
 		SubscriptionSender subscriptionSender = new SubscriptionSender();
 
@@ -425,7 +425,7 @@ public class AnnouncementsEntryLocalServiceImpl
 				subscriptionSender.addRuntimeSubscribers(
 					user.getEmailAddress(), user.getFullName());
 
-				sendAnnouncements = true;
+				notifyUsers = true;
 			}
 
 			if (announcementsDelivery.isSms()) {
@@ -434,11 +434,11 @@ public class AnnouncementsEntryLocalServiceImpl
 				subscriptionSender.addRuntimeSubscribers(
 					smsSn, user.getFullName());
 
-				sendAnnouncements = true;
+				notifyUsers = true;
 			}
 		}
 
-		if (!sendAnnouncements) {
+		if (!notifyUsers) {
 			return;
 		}
 
@@ -447,17 +447,16 @@ public class AnnouncementsEntryLocalServiceImpl
 		String body = ContentUtil.get(PropsValues.ANNOUNCEMENTS_EMAIL_BODY);
 
 		subscriptionSender.setBody(body);
-		subscriptionSender.setCompanyId(company.getCompanyId());
+		subscriptionSender.setCompanyId(entry.getCompanyId());
 		subscriptionSender.setContextAttributes(
 			"[$ENTRY_CONTENT$]", entry.getContent(), "[$ENTRY_ID$]",
-			String.valueOf(entry.getEntryId()), "[$ENTRY_TITLE$]",
-			entry.getTitle(), "[$ENTRY_TYPE$]",
+			entry.getEntryId(), "[$ENTRY_TITLE$]", entry.getTitle(),
+			"[$ENTRY_TYPE$]",
 			LanguageUtil.get(company.getLocale(), entry.getType()),
 			"[$ENTRY_URL$]", entry.getUrl(), "[$PORTLET_NAME$]",
 			LanguageUtil.get(
 				company.getLocale(),
 				(entry.isAlert() ? "alert" : "announcement")));
-		subscriptionSender.setContextUserPrefix("ANNOUNCEMENT");
 		subscriptionSender.setFrom(fromAddress, fromName);
 		subscriptionSender.setHtmlFormat(true);
 		subscriptionSender.setMailId("announcements_entry", entry.getEntryId());

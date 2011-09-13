@@ -385,23 +385,26 @@ public class SubscriptionSender implements Serializable {
 			return;
 		}
 
-		Group group = GroupLocalServiceUtil.getGroup(groupId);
+		if (groupId > 0) {
+			Group group = GroupLocalServiceUtil.getGroup(groupId);
 
-		if (!GroupLocalServiceUtil.hasUserGroup(user.getUserId(), groupId) &&
-			!group.isCompany() &&
-			(LayoutServiceUtil.getDefaultPlid(
-				groupId, scopeGroupId, false, portletId) ==
-					LayoutConstants.DEFAULT_PLID)) {
+			if (!GroupLocalServiceUtil.hasUserGroup(
+					user.getUserId(), groupId) &&
+				!group.isCompany() &&
+				(LayoutServiceUtil.getDefaultPlid(
+					groupId, scopeGroupId, false, portletId) ==
+						LayoutConstants.DEFAULT_PLID)) {
 
-			if (_log.isInfoEnabled()) {
-				_log.info(
-					"Subscription " + subscription.getSubscriptionId() +
-						" is stale and will be deleted");
+				if (_log.isInfoEnabled()) {
+					_log.info(
+						"Subscription " + subscription.getSubscriptionId() +
+							" is stale and will be deleted");
+				}
+
+				deleteSubscription(subscription);
+
+				return;
 			}
-
-			deleteSubscription(subscription);
-
-			return;
 		}
 
 		try {
