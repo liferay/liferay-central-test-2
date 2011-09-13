@@ -221,14 +221,10 @@ public class AddDefaultDocumentLibraryStructuresAction
 
 		serviceContext.setUserId(defaultUserId);
 
-		String fileName =
-			"com/liferay/portal/events/dependencies/" +
-			"document-library-structures.xml";
-
 		addDDMStructures(
 			defaultUserId, group.getGroupId(),
 			PortalUtil.getClassNameId(DLFileEntryMetadata.class),
-			serviceContext, fileName);
+			"document-library-structures.xml", serviceContext);
 		addDLFileEntryTypes(defaultUserId, group.getGroupId(), serviceContext);
 		addDLRawMetadataStructures(
 			defaultUserId, group.getGroupId(), serviceContext);

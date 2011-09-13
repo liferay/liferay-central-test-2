@@ -52,14 +52,10 @@ public class AddDefaultDDMStructuresAction
 
 		serviceContext.setUserId(defaultUserId);
 
-		String fileName =
-			"com/liferay/portal/events/dependencies/" +
-			"dynamic-data-list-structures.xml";
-
 		addDDMStructures(
 			defaultUserId, group.getGroupId(),
 			PortalUtil.getClassNameId(DDLRecordSet.class),
-			serviceContext, fileName);
+			"dynamic-data-list-structures.xml", serviceContext);
 	}
 
 }

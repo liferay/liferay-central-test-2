@@ -39,10 +39,11 @@ public abstract class BaseDefaultDDMStructureAction extends SimpleAction {
 
 	protected void addDDMStructures(
 			long userId, long groupId, long classNameId,
-			ServiceContext serviceContext, String fileName)
+			String fileName, ServiceContext serviceContext)
 		throws DocumentException, PortalException, SystemException {
 
-		String xml = ContentUtil.get(fileName);
+		String xml = ContentUtil.get(
+			"com/liferay/portal/events/dependencies/" + fileName);
 
 		Document document = SAXReaderUtil.read(xml);
 
@@ -79,9 +80,9 @@ public abstract class BaseDefaultDDMStructureAction extends SimpleAction {
 			descriptionMap.put(LocaleUtil.getDefault(), description);
 
 			DDMStructureLocalServiceUtil.addStructure(
-				userId, groupId, classNameId,
-				ddmStructureKey, nameMap, descriptionMap, xsd, "xml",
-				serviceContext);
+				userId, groupId, classNameId, ddmStructureKey, nameMap,
+				descriptionMap, xsd, "xml", serviceContext);
 		}
 	}
+
 }
