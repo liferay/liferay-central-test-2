@@ -34,8 +34,6 @@ import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.SubscriptionSender;
 import com.liferay.util.UniqueList;
 
-import java.io.IOException;
-
 import java.util.Date;
 import java.util.List;
 
@@ -69,12 +67,7 @@ public class MembershipRequestLocalServiceImpl
 
 		membershipRequestPersistence.update(membershipRequest, false);
 
-		try {
-			notifyGroupAdministrators(membershipRequest);
-		}
-		catch (IOException ioe) {
-			throw new SystemException(ioe);
-		}
+		notifyGroupAdministrators(membershipRequest);
 
 		return membershipRequest;
 	}
@@ -206,16 +199,11 @@ public class MembershipRequestLocalServiceImpl
 				membershipRequest.getGroupId(), addUserIds);
 		}
 
-		try {
-			if (replierUserId != 0) {
-				notify(
-					membershipRequest.getUserId(), membershipRequest,
-					PropsKeys.SITES_EMAIL_MEMBERSHIP_REPLY_SUBJECT,
-					PropsKeys.SITES_EMAIL_MEMBERSHIP_REPLY_BODY);
-			}
-		}
-		catch (IOException ioe) {
-			throw new SystemException(ioe);
+		if (replierUserId != 0) {
+			notify(
+				membershipRequest.getUserId(), membershipRequest,
+				PropsKeys.SITES_EMAIL_MEMBERSHIP_REPLY_SUBJECT,
+				PropsKeys.SITES_EMAIL_MEMBERSHIP_REPLY_BODY);
 		}
 	}
 
@@ -284,7 +272,7 @@ public class MembershipRequestLocalServiceImpl
 	protected void notify(
 			long userId, MembershipRequest membershipRequest,
 			String subjectProperty, String bodyProperty)
-		throws IOException, PortalException, SystemException {
+		throws PortalException, SystemException {
 
 		Company company = companyPersistence.findByPrimaryKey(
 			membershipRequest.getCompanyId());
@@ -356,7 +344,7 @@ public class MembershipRequestLocalServiceImpl
 
 	protected void notifyGroupAdministrators(
 			MembershipRequest membershipRequest)
-		throws IOException, PortalException, SystemException {
+		throws PortalException, SystemException {
 
 		List<Long> userIds = getGroupAdministratorUserIds(
 			membershipRequest.getGroupId());

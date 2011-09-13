@@ -299,12 +299,7 @@ public class JournalArticleLocalServiceImpl
 		PortletPreferences preferences =
 			ServiceContextUtil.getPortletPreferences(serviceContext);
 
-		try {
-			sendEmail(article, articleURL, preferences, "requested");
-		}
-		catch (IOException ioe) {
-			throw new SystemException(ioe);
-		}
+		sendEmail(article, articleURL, preferences, "requested");
 
 		// Workflow
 
@@ -458,12 +453,7 @@ public class JournalArticleLocalServiceImpl
 					article.getCompanyId(), ownerId, ownerType, plid,
 					portletId);
 
-			try {
-				sendEmail(article, articleURL, preferences, "review");
-			}
-			catch (IOException ioe) {
-				throw new SystemException(ioe);
-			}
+			sendEmail(article, articleURL, preferences, "review");
 		}
 	}
 
@@ -625,12 +615,7 @@ public class JournalArticleLocalServiceImpl
 				article.getGroupId(), article.getArticleId(),
 				article.getVersion())) {
 
-			try {
-				sendEmail(article, articleURL, preferences, "denied");
-			}
-			catch (IOException ioe) {
-				throw new SystemException(ioe);
-			}
+			sendEmail(article, articleURL, preferences, "denied");
 		}
 
 		// Images
@@ -2048,12 +2033,7 @@ public class JournalArticleLocalServiceImpl
 		if (serviceContext.getWorkflowAction() ==
 				WorkflowConstants.ACTION_PUBLISH) {
 
-			try {
-				sendEmail(article, articleURL, preferences, "requested");
-			}
-			catch (IOException ioe) {
-				throw new SystemException(ioe);
-			}
+			sendEmail(article, articleURL, preferences, "requested");
 
 			WorkflowHandlerRegistryUtil.startWorkflowInstance(
 				user.getCompanyId(), groupId, userId,
@@ -3067,7 +3047,7 @@ public class JournalArticleLocalServiceImpl
 	protected void sendEmail(
 			JournalArticle article, String articleURL,
 			PortletPreferences preferences, String emailType)
-		throws IOException, PortalException, SystemException {
+		throws PortalException, SystemException {
 
 		if (preferences == null) {
 			return;
@@ -3098,9 +3078,6 @@ public class JournalArticleLocalServiceImpl
 		articleURL +=
 			"&groupId=" + article.getGroupId() + "&articleId=" +
 				article.getArticleId() + "&version=" + article.getVersion();
-
-		String portletName = PortalUtil.getPortletTitle(
-			PortletKeys.JOURNAL, user);
 
 		String fromName = JournalUtil.getEmailFromName(preferences);
 		String fromAddress = JournalUtil.getEmailFromAddress(preferences);

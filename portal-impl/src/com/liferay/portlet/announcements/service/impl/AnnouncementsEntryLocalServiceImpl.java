@@ -45,8 +45,6 @@ import com.liferay.portlet.announcements.model.AnnouncementsEntry;
 import com.liferay.portlet.announcements.service.base.AnnouncementsEntryLocalServiceBaseImpl;
 import com.liferay.util.ContentUtil;
 
-import java.io.IOException;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedHashMap;
@@ -133,12 +131,7 @@ public class AnnouncementsEntryLocalServiceImpl
 		}
 
 		for (AnnouncementsEntry entry : entries) {
-			try {
-				notifyUsers(entry);
-			}
-			catch (IOException ioe) {
-				throw new SystemException(ioe);
-			}
+			notifyUsers(entry);
 		}
 	}
 
@@ -342,7 +335,7 @@ public class AnnouncementsEntryLocalServiceImpl
 	}
 
 	protected void notifyUsers(AnnouncementsEntry entry)
-		throws IOException, PortalException, SystemException {
+		throws PortalException, SystemException {
 
 		Company company = companyPersistence.findByPrimaryKey(
 			entry.getCompanyId());

@@ -1450,12 +1450,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			serviceContext.getAttribute("sendEmail"));
 
 		if (sendEmail) {
-			try {
-				sendEmail(user, password, serviceContext);
-			}
-			catch (IOException ioe) {
-				throw new SystemException(ioe);
-			}
+			sendEmail(user, password, serviceContext);
 		}
 
 		Company company = companyPersistence.findByPrimaryKey(
@@ -3301,9 +3296,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			User user, String emailAddress, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		Company company = companyLocalService.getCompanyById(
-			user.getCompanyId());
-
 		Ticket ticket = ticketLocalService.addTicket(
 			user.getCompanyId(), User.class.getName(), user.getUserId(),
 			TicketConstants.TYPE_EMAIL_ADDRESS, emailAddress, null,
@@ -3385,14 +3377,9 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		try {
-			doSendPassword(
-				companyId, emailAddress, fromName, fromAddress, subject, body,
-				serviceContext);
-		}
-		catch (IOException ioe) {
-			throw new SystemException(ioe);
-		}
+		doSendPassword(
+			companyId, emailAddress, fromName, fromAddress, subject, body,
+			serviceContext);
 	}
 
 	/**
@@ -5006,7 +4993,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			long companyId, String emailAddress, String fromName,
 			String fromAddress, String subject, String body,
 			ServiceContext serviceContext)
-		throws IOException, PortalException, SystemException {
+		throws PortalException, SystemException {
 
 		Company company = companyPersistence.findByPrimaryKey(companyId);
 
@@ -5149,7 +5136,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 	protected void sendEmail(
 			User user, String password, ServiceContext serviceContext)
-		throws IOException, PortalException, SystemException {
+		throws SystemException {
 
 		if (!PrefsPropsUtil.getBoolean(
 				user.getCompanyId(),

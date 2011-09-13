@@ -63,8 +63,6 @@ import com.liferay.portlet.shopping.util.comparator.OrderDateComparator;
 import com.liferay.util.CreditCard;
 import com.liferay.util.PwdGenerator;
 
-import java.io.IOException;
-
 import java.util.Currency;
 import java.util.Date;
 import java.util.Iterator;
@@ -224,12 +222,7 @@ public class ShoppingOrderLocalServiceImpl
 
 		// Email
 
-		try {
-			doSendEmail(order, "confirmation");
-		}
-		catch (IOException ioe) {
-			throw new SystemException(ioe);
-		}
+		sendEmail(order, "confirmation");
 	}
 
 	public void deleteOrder(long orderId)
@@ -424,23 +417,13 @@ public class ShoppingOrderLocalServiceImpl
 		ShoppingOrder order = shoppingOrderPersistence.findByPrimaryKey(
 			orderId);
 
-		try {
-			doSendEmail(order, emailType);
-		}
-		catch (IOException ioe) {
-			throw new SystemException(ioe);
-		}
+		sendEmail(order, emailType);
 	}
 
 	public void sendEmail(ShoppingOrder order, String emailType)
 		throws PortalException, SystemException {
 
-		try {
-			doSendEmail(order, emailType);
-		}
-		catch (IOException ioe) {
-			throw new SystemException(ioe);
-		}
+		doSendEmail(order, emailType);
 	}
 
 	public ShoppingOrder updateLatestOrder(
@@ -570,7 +553,7 @@ public class ShoppingOrderLocalServiceImpl
 	}
 
 	protected void doSendEmail(ShoppingOrder order, String emailType)
-		throws IOException, PortalException, SystemException {
+		throws PortalException, SystemException {
 
 		ShoppingPreferences shoppingPrefs = ShoppingPreferences.getInstance(
 			order.getCompanyId(), order.getGroupId());
