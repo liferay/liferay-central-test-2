@@ -3377,9 +3377,127 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		doSendPassword(
-			companyId, emailAddress, fromName, fromAddress, subject, body,
-			serviceContext);
+		Company company = companyPersistence.findByPrimaryKey(companyId);
+
+		if (!company.isSendPassword() && !company.isSendPasswordResetLink()) {
+			return;
+		}
+
+		emailAddress = emailAddress.trim().toLowerCase();
+
+		if (Validator.isNull(emailAddress)) {
+			throw new UserEmailAddressException();
+		}
+
+		User user = userPersistence.findByC_EA(companyId, emailAddress);
+
+		PasswordPolicy passwordPolicy = user.getPasswordPolicy();
+
+		String newPassword = StringPool.BLANK;
+		String passwordResetURL = StringPool.BLANK;
+
+		if (company.isSendPasswordResetLink()) {
+			Date expirationDate = new Date(
+				System.currentTimeMillis() +
+					(passwordPolicy.getResetTicketMaxAge() * 1000));
+
+			Ticket ticket = ticketLocalService.addTicket(
+				companyId, User.class.getName(), user.getUserId(),
+				TicketConstants.TYPE_PASSWORD, null, expirationDate,
+				serviceContext);
+
+			passwordResetURL =
+				serviceContext.getPortalURL() + serviceContext.getPathMain() +
+					"/portal/update_password?p_l_id="+
+						serviceContext.getPlid() +
+							"&ticketKey=" + ticket.getKey();
+		}
+		else {
+			if (!PwdEncryptor.PASSWORDS_ENCRYPTION_ALGORITHM.equals(
+					PwdEncryptor.TYPE_NONE)) {
+
+				newPassword = PwdToolkitUtil.generate(passwordPolicy);
+
+				boolean passwordReset = false;
+
+				if (passwordPolicy.getChangeable() &&
+					passwordPolicy.getChangeRequired()) {
+
+					passwordReset = true;
+				}
+
+				user.setPassword(PwdEncryptor.encrypt(newPassword));
+				user.setPasswordUnencrypted(newPassword);
+				user.setPasswordEncrypted(true);
+				user.setPasswordReset(passwordReset);
+				user.setPasswordModified(true);
+				user.setPasswordModifiedDate(new Date());
+
+				userPersistence.update(user, false);
+
+				user.setPasswordModified(false);
+			}
+			else {
+				newPassword = user.getPassword();
+			}
+		}
+
+		if (Validator.isNull(fromName)) {
+			fromName = PrefsPropsUtil.getString(
+				companyId, PropsKeys.ADMIN_EMAIL_FROM_NAME);
+		}
+
+		if (Validator.isNull(fromAddress)) {
+			fromAddress = PrefsPropsUtil.getString(
+				companyId, PropsKeys.ADMIN_EMAIL_FROM_ADDRESS);
+		}
+
+		String toName = user.getFullName();
+		String toAddress = user.getEmailAddress();
+
+		if (Validator.isNull(subject)) {
+			if (company.isSendPasswordResetLink()) {
+				subject = PrefsPropsUtil.getContent(
+					companyId, PropsKeys.ADMIN_EMAIL_PASSWORD_RESET_SUBJECT);
+			}
+			else {
+				subject = PrefsPropsUtil.getContent(
+					companyId, PropsKeys.ADMIN_EMAIL_PASSWORD_SENT_SUBJECT);
+			}
+		}
+
+		if (Validator.isNull(body)) {
+			if (company.isSendPasswordResetLink()) {
+				body = PrefsPropsUtil.getContent(
+					companyId, PropsKeys.ADMIN_EMAIL_PASSWORD_RESET_BODY);
+			}
+			else {
+				body = PrefsPropsUtil.getContent(
+					companyId, PropsKeys.ADMIN_EMAIL_PASSWORD_SENT_BODY);
+			}
+		}
+
+		SubscriptionSender subscriptionSender = new SubscriptionSender();
+
+		subscriptionSender.setBody(body);
+		subscriptionSender.setCompanyId(companyId);
+		subscriptionSender.setContextAttributes(
+			"[$PASSWORD_RESET_URL$]", passwordResetURL, "[$REMOTE_ADDRESS$]",
+			serviceContext.getRemoteAddr(), "[$REMOTE_HOST$]",
+			serviceContext.getRemoteHost(), "[$USER_AGENT$]",
+			serviceContext.getUserAgent(), "[$USER_ID$]", user.getUserId(),
+			"[$USER_PASSWORD$]", newPassword, "[$USER_SCREENNAME$]",
+			user.getScreenName());
+		subscriptionSender.setFrom(fromAddress, fromName);
+		subscriptionSender.setHtmlFormat(true);
+		subscriptionSender.setMailId("user", user.getUserId());
+		subscriptionSender.setScopeGroupId(serviceContext.getScopeGroupId());
+		subscriptionSender.setSubject(subject);
+		subscriptionSender.setUserId(user.getUserId());
+
+		subscriptionSender.addRuntimeSubscribers(toAddress, toName);
+
+		subscriptionSender.flushNotificationsAsync();
 	}
 
 	/**
@@ -4987,135 +5105,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		}
 
 		return authResult;
-	}
-
-	protected void doSendPassword(
-			long companyId, String emailAddress, String fromName,
-			String fromAddress, String subject, String body,
-			ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		Company company = companyPersistence.findByPrimaryKey(companyId);
-
-		if (!company.isSendPassword() && !company.isSendPasswordResetLink()) {
-			return;
-		}
-
-		emailAddress = emailAddress.trim().toLowerCase();
-
-		if (Validator.isNull(emailAddress)) {
-			throw new UserEmailAddressException();
-		}
-
-		User user = userPersistence.findByC_EA(companyId, emailAddress);
-
-		PasswordPolicy passwordPolicy = user.getPasswordPolicy();
-
-		String newPassword = StringPool.BLANK;
-		String passwordResetURL = StringPool.BLANK;
-
-		if (company.isSendPasswordResetLink()) {
-			Date expirationDate = new Date(
-				System.currentTimeMillis() +
-					(passwordPolicy.getResetTicketMaxAge() * 1000));
-
-			Ticket ticket = ticketLocalService.addTicket(
-				companyId, User.class.getName(), user.getUserId(),
-				TicketConstants.TYPE_PASSWORD, null, expirationDate,
-				serviceContext);
-
-			passwordResetURL =
-				serviceContext.getPortalURL() + serviceContext.getPathMain() +
-					"/portal/update_password?p_l_id="+
-						serviceContext.getPlid() +
-							"&ticketKey=" + ticket.getKey();
-		}
-		else {
-			if (!PwdEncryptor.PASSWORDS_ENCRYPTION_ALGORITHM.equals(
-					PwdEncryptor.TYPE_NONE)) {
-
-				newPassword = PwdToolkitUtil.generate(passwordPolicy);
-
-				boolean passwordReset = false;
-
-				if (passwordPolicy.getChangeable() &&
-					passwordPolicy.getChangeRequired()) {
-
-					passwordReset = true;
-				}
-
-				user.setPassword(PwdEncryptor.encrypt(newPassword));
-				user.setPasswordUnencrypted(newPassword);
-				user.setPasswordEncrypted(true);
-				user.setPasswordReset(passwordReset);
-				user.setPasswordModified(true);
-				user.setPasswordModifiedDate(new Date());
-
-				userPersistence.update(user, false);
-
-				user.setPasswordModified(false);
-			}
-			else {
-				newPassword = user.getPassword();
-			}
-		}
-
-		if (Validator.isNull(fromName)) {
-			fromName = PrefsPropsUtil.getString(
-				companyId, PropsKeys.ADMIN_EMAIL_FROM_NAME);
-		}
-
-		if (Validator.isNull(fromAddress)) {
-			fromAddress = PrefsPropsUtil.getString(
-				companyId, PropsKeys.ADMIN_EMAIL_FROM_ADDRESS);
-		}
-
-		String toName = user.getFullName();
-		String toAddress = user.getEmailAddress();
-
-		if (Validator.isNull(subject)) {
-			if (company.isSendPasswordResetLink()) {
-				subject = PrefsPropsUtil.getContent(
-					companyId, PropsKeys.ADMIN_EMAIL_PASSWORD_RESET_SUBJECT);
-			}
-			else {
-				subject = PrefsPropsUtil.getContent(
-					companyId, PropsKeys.ADMIN_EMAIL_PASSWORD_SENT_SUBJECT);
-			}
-		}
-
-		if (Validator.isNull(body)) {
-			if (company.isSendPasswordResetLink()) {
-				body = PrefsPropsUtil.getContent(
-					companyId, PropsKeys.ADMIN_EMAIL_PASSWORD_RESET_BODY);
-			}
-			else {
-				body = PrefsPropsUtil.getContent(
-					companyId, PropsKeys.ADMIN_EMAIL_PASSWORD_SENT_BODY);
-			}
-		}
-
-		SubscriptionSender subscriptionSender = new SubscriptionSender();
-
-		subscriptionSender.setBody(body);
-		subscriptionSender.setCompanyId(companyId);
-		subscriptionSender.setContextAttributes(
-			"[$PASSWORD_RESET_URL$]", passwordResetURL, "[$REMOTE_ADDRESS$]",
-			serviceContext.getRemoteAddr(), "[$REMOTE_HOST$]",
-			serviceContext.getRemoteHost(), "[$USER_AGENT$]",
-			serviceContext.getUserAgent(), "[$USER_ID$]", user.getUserId(),
-			"[$USER_PASSWORD$]", newPassword, "[$USER_SCREENNAME$]",
-			user.getScreenName());
-		subscriptionSender.setFrom(fromAddress, fromName);
-		subscriptionSender.setHtmlFormat(true);
-		subscriptionSender.setMailId("user", user.getUserId());
-		subscriptionSender.setScopeGroupId(serviceContext.getScopeGroupId());
-		subscriptionSender.setSubject(subject);
-		subscriptionSender.setUserId(user.getUserId());
-
-		subscriptionSender.addRuntimeSubscribers(toAddress, toName);
-
-		subscriptionSender.flushNotificationsAsync();
 	}
 
 	protected String getScreenName(String screenName) {

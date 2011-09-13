@@ -423,7 +423,102 @@ public class ShoppingOrderLocalServiceImpl
 	public void sendEmail(ShoppingOrder order, String emailType)
 		throws PortalException, SystemException {
 
-		doSendEmail(order, emailType);
+		ShoppingPreferences shoppingPrefs = ShoppingPreferences.getInstance(
+			order.getCompanyId(), order.getGroupId());
+
+		if (emailType.equals("confirmation") &&
+			shoppingPrefs.getEmailOrderConfirmationEnabled()) {
+		}
+		else if (emailType.equals("shipping") &&
+				 shoppingPrefs.getEmailOrderShippingEnabled()) {
+		}
+		else {
+			return;
+		}
+
+		Company company = companyPersistence.findByPrimaryKey(
+			order.getCompanyId());
+
+		User user = userPersistence.findByPrimaryKey(order.getUserId());
+
+		Currency currency = Currency.getInstance(shoppingPrefs.getCurrencyId());
+
+		String billingAddress =
+			order.getBillingFirstName() + " " + order.getBillingLastName() +
+				"<br>" +
+			order.getBillingEmailAddress() + "<br>" +
+			order.getBillingStreet() + "<br>" +
+			order.getBillingCity() + "<br>" +
+			order.getBillingState() + "<br>" +
+			order.getBillingZip() + "<br>" +
+			order.getBillingCountry() + "<br>" +
+			order.getBillingPhone() + "<br>";
+
+		String shippingAddress =
+			order.getShippingFirstName() + " " + order.getShippingLastName() +
+				"<br>" +
+			order.getShippingEmailAddress() + "<br>" +
+			order.getShippingStreet() + "<br>" +
+			order.getShippingCity() + "<br>" +
+			order.getShippingState() + "<br>" +
+			order.getShippingZip() + "<br>" +
+			order.getShippingCountry() + "<br>" +
+			order.getShippingPhone() + "<br>";
+
+		double total = ShoppingUtil.calculateTotal(order);
+
+		String fromName = shoppingPrefs.getEmailFromName();
+		String fromAddress = shoppingPrefs.getEmailFromAddress();
+
+		String toName = user.getFullName();
+		String toAddress = user.getEmailAddress();
+
+		String subject = null;
+		String body = null;
+
+		if (emailType.equals("confirmation")) {
+			subject = shoppingPrefs.getEmailOrderConfirmationSubject();
+			body = shoppingPrefs.getEmailOrderConfirmationBody();
+		}
+		else if (emailType.equals("shipping")) {
+			subject = shoppingPrefs.getEmailOrderShippingSubject();
+			body = shoppingPrefs.getEmailOrderShippingBody();
+		}
+
+		SubscriptionSender subscriptionSender = new SubscriptionSender();
+
+		subscriptionSender.setBody(body);
+		subscriptionSender.setCompanyId(company.getCompanyId());
+		subscriptionSender.setContextAttributes(
+			"[$ORDER_BILLING_ADDRESS$]", billingAddress, "[$ORDER_CURRENCY$]",
+			currency.getSymbol(), "[$ORDER_NUMBER$]", order.getNumber(),
+			"[$ORDER_SHIPPING_ADDRESS$]", shippingAddress, "[$ORDER_TOTAL$]",
+			String.valueOf(total));
+		subscriptionSender.setContextUserPrefix("ORDER");
+		subscriptionSender.setFrom(fromAddress, fromName);
+		subscriptionSender.setHtmlFormat(true);
+		subscriptionSender.setMailId("order",order.getOrderId());
+		subscriptionSender.setPortletId(PortletKeys.SHOPPING);
+		subscriptionSender.setScopeGroupId(order.getGroupId());
+		subscriptionSender.setSubject(subject);
+		subscriptionSender.setUserId(order.getUserId());
+
+		subscriptionSender.addRuntimeSubscribers(toAddress, toName);
+
+		subscriptionSender.flushNotificationsAsync();
+
+		if (emailType.equals("confirmation") && order.isSendOrderEmail()) {
+			order.setSendOrderEmail(false);
+
+			shoppingOrderPersistence.update(order, false);
+		}
+		else if (emailType.equals("shipping") &&
+				 order.isSendShippingEmail()) {
+
+			order.setSendShippingEmail(false);
+
+			shoppingOrderPersistence.update(order, false);
+		}
 	}
 
 	public ShoppingOrder updateLatestOrder(
@@ -550,107 +645,6 @@ public class ShoppingOrderLocalServiceImpl
 		shoppingOrderPersistence.update(order, false);
 
 		return order;
-	}
-
-	protected void doSendEmail(ShoppingOrder order, String emailType)
-		throws PortalException, SystemException {
-
-		ShoppingPreferences shoppingPrefs = ShoppingPreferences.getInstance(
-			order.getCompanyId(), order.getGroupId());
-
-		if (emailType.equals("confirmation") &&
-			shoppingPrefs.getEmailOrderConfirmationEnabled()) {
-		}
-		else if (emailType.equals("shipping") &&
-				 shoppingPrefs.getEmailOrderShippingEnabled()) {
-		}
-		else {
-			return;
-		}
-
-		Company company = companyPersistence.findByPrimaryKey(
-			order.getCompanyId());
-
-		User user = userPersistence.findByPrimaryKey(order.getUserId());
-
-		Currency currency = Currency.getInstance(shoppingPrefs.getCurrencyId());
-
-		String billingAddress =
-			order.getBillingFirstName() + " " + order.getBillingLastName() +
-				"<br>" +
-			order.getBillingEmailAddress() + "<br>" +
-			order.getBillingStreet() + "<br>" +
-			order.getBillingCity() + "<br>" +
-			order.getBillingState() + "<br>" +
-			order.getBillingZip() + "<br>" +
-			order.getBillingCountry() + "<br>" +
-			order.getBillingPhone() + "<br>";
-
-		String shippingAddress =
-			order.getShippingFirstName() + " " + order.getShippingLastName() +
-				"<br>" +
-			order.getShippingEmailAddress() + "<br>" +
-			order.getShippingStreet() + "<br>" +
-			order.getShippingCity() + "<br>" +
-			order.getShippingState() + "<br>" +
-			order.getShippingZip() + "<br>" +
-			order.getShippingCountry() + "<br>" +
-			order.getShippingPhone() + "<br>";
-
-		double total = ShoppingUtil.calculateTotal(order);
-
-		String fromName = shoppingPrefs.getEmailFromName();
-		String fromAddress = shoppingPrefs.getEmailFromAddress();
-
-		String toName = user.getFullName();
-		String toAddress = user.getEmailAddress();
-
-		String subject = null;
-		String body = null;
-
-		if (emailType.equals("confirmation")) {
-			subject = shoppingPrefs.getEmailOrderConfirmationSubject();
-			body = shoppingPrefs.getEmailOrderConfirmationBody();
-		}
-		else if (emailType.equals("shipping")) {
-			subject = shoppingPrefs.getEmailOrderShippingSubject();
-			body = shoppingPrefs.getEmailOrderShippingBody();
-		}
-
-		SubscriptionSender subscriptionSender = new SubscriptionSender();
-
-		subscriptionSender.setBody(body);
-		subscriptionSender.setCompanyId(company.getCompanyId());
-		subscriptionSender.setContextAttributes(
-			"[$ORDER_BILLING_ADDRESS$]", billingAddress, "[$ORDER_CURRENCY$]",
-			currency.getSymbol(), "[$ORDER_NUMBER$]", order.getNumber(),
-			"[$ORDER_SHIPPING_ADDRESS$]", shippingAddress, "[$ORDER_TOTAL$]",
-			String.valueOf(total));
-		subscriptionSender.setContextUserPrefix("ORDER");
-		subscriptionSender.setFrom(fromAddress, fromName);
-		subscriptionSender.setHtmlFormat(true);
-		subscriptionSender.setMailId("order",order.getOrderId());
-		subscriptionSender.setPortletId(PortletKeys.SHOPPING);
-		subscriptionSender.setScopeGroupId(order.getGroupId());
-		subscriptionSender.setSubject(subject);
-		subscriptionSender.setUserId(order.getUserId());
-
-		subscriptionSender.addRuntimeSubscribers(toAddress, toName);
-
-		subscriptionSender.flushNotificationsAsync();
-
-		if (emailType.equals("confirmation") && order.isSendOrderEmail()) {
-			order.setSendOrderEmail(false);
-
-			shoppingOrderPersistence.update(order, false);
-		}
-		else if (emailType.equals("shipping") &&
-				 order.isSendShippingEmail()) {
-
-			order.setSendShippingEmail(false);
-
-			shoppingOrderPersistence.update(order, false);
-		}
 	}
 
 	protected String getNumber() throws SystemException {
