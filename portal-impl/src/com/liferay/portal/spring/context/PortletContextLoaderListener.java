@@ -84,12 +84,10 @@ public class PortletContextLoaderListener extends ContextLoaderListener {
 	public void contextInitialized(ServletContextEvent servletContextEvent) {
 		MethodCache.reset();
 
-		ServletContext servletContext =
-			servletContextEvent.getServletContext();
+		ServletContext servletContext = servletContextEvent.getServletContext();
 
-		Object previousApplicationContext =
-			servletContext.getAttribute(
-				WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE);
+		Object previousApplicationContext = servletContext.getAttribute(
+			WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE);
 
 		servletContext.removeAttribute(
 			WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE);
