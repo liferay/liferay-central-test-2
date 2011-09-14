@@ -65,7 +65,7 @@ public class DLUtil {
 
 	public static void addPortletBreadcrumbEntries(
 			DLFileShortcut dlFileShortcut, HttpServletRequest request,
-			RenderResponse renderResponse)
+			RenderResponse renderResponse, boolean showGlobally)
 		throws Exception {
 
 		Folder folder = dlFileShortcut.getFolder();
@@ -73,7 +73,8 @@ public class DLUtil {
 		if (folder.getFolderId() !=
 				DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
 
-			addPortletBreadcrumbEntries(folder, request, renderResponse);
+			addPortletBreadcrumbEntries(
+				folder, request, renderResponse, showGlobally);
 		}
 
 		PortletURL portletURL = renderResponse.createRenderURL();
@@ -90,7 +91,7 @@ public class DLUtil {
 
 	public static void addPortletBreadcrumbEntries(
 			FileEntry fileEntry, HttpServletRequest request,
-			RenderResponse renderResponse)
+			RenderResponse renderResponse, boolean showGlobally)
 		throws Exception {
 
 		Folder folder = fileEntry.getFolder();
@@ -98,7 +99,8 @@ public class DLUtil {
 		if (folder.getFolderId() !=
 				DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
 
-			addPortletBreadcrumbEntries(folder, request, renderResponse);
+			addPortletBreadcrumbEntries(
+				folder, request, renderResponse, showGlobally);
 		}
 
 		PortletURL portletURL = renderResponse.createRenderURL();
@@ -111,15 +113,6 @@ public class DLUtil {
 
 		PortalUtil.addPortletBreadcrumbEntry(
 			request, fileEntry.getTitle(), portletURL.toString());
-	}
-
-	public static void addPortletBreadcrumbEntries(
-			Folder folder, HttpServletRequest request,
-			LiferayPortletResponse liferayPortletResponse)
-		throws Exception {
-
-		addPortletBreadcrumbEntries(
-			folder, request, liferayPortletResponse, true);
 	}
 
 	public static void addPortletBreadcrumbEntries(
@@ -157,13 +150,6 @@ public class DLUtil {
 		}
 
 		addPortletBreadcrumbEntries(folder, request, portletURL, showGlobally);
-	}
-
-	public static void addPortletBreadcrumbEntries(
-			Folder folder, HttpServletRequest request, PortletURL portletURL)
-		throws Exception {
-
-		addPortletBreadcrumbEntries(folder, request, portletURL, true);
 	}
 
 	public static void addPortletBreadcrumbEntries(
@@ -233,7 +219,7 @@ public class DLUtil {
 
 	public static void addPortletBreadcrumbEntries(
 			Folder folder, HttpServletRequest request,
-			RenderResponse renderResponse)
+			RenderResponse renderResponse, boolean showGlobally)
 		throws Exception {
 
 		String strutsAction = ParamUtil.getString(
@@ -271,12 +257,12 @@ public class DLUtil {
 			portletURL.setParameter("struts_action", "/document_library/view");
 		}
 
-		addPortletBreadcrumbEntries(folder, request, portletURL);
+		addPortletBreadcrumbEntries(folder, request, portletURL, showGlobally);
 	}
 
 	public static void addPortletBreadcrumbEntries(
 			long folderId, HttpServletRequest request,
-			RenderResponse renderResponse)
+			RenderResponse renderResponse, boolean showGlobally)
 		throws Exception {
 
 		if (folderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
@@ -285,7 +271,8 @@ public class DLUtil {
 			if (folder.getFolderId() !=
 					DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
 
-				addPortletBreadcrumbEntries(folder, request, renderResponse);
+				addPortletBreadcrumbEntries(
+					folder, request, renderResponse, showGlobally);
 			}
 		}
 	}
