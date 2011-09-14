@@ -120,7 +120,7 @@ public class DLUtil {
 
 		addPortletBreadcrumbEntries(
 			folder, request, liferayPortletResponse, true);
-    }
+	}
 
 	public static void addPortletBreadcrumbEntries(
 			Folder folder, HttpServletRequest request,
@@ -160,12 +160,11 @@ public class DLUtil {
 	}
 
 	public static void addPortletBreadcrumbEntries(
-			Folder folder, HttpServletRequest request,
-			PortletURL portletURL)
+			Folder folder, HttpServletRequest request, PortletURL portletURL)
 		throws Exception {
 
-            addPortletBreadcrumbEntries(folder, request, portletURL, true);
-        }
+		addPortletBreadcrumbEntries(folder, request, portletURL, true);
+	}
 
 	public static void addPortletBreadcrumbEntries(
 			Folder folder, HttpServletRequest request,
@@ -204,7 +203,7 @@ public class DLUtil {
 
 			data.put("folder-id", ancestorFolder.getFolderId());
 			data.put("refresh-folders", Boolean.TRUE.toString());
-            data.put("show-globally", Boolean.valueOf(showGlobally).toString());
+			data.put("show-globally", String.valueOf(showGlobally));
 
 			PortalUtil.addPortletBreadcrumbEntry(
 				request, ancestorFolder.getName(), portletURL.toString(), data);
@@ -225,7 +224,7 @@ public class DLUtil {
 
 			data.put("folder-id", folderId);
 			data.put("refresh-folders", Boolean.TRUE.toString());
-            data.put("show-globally", Boolean.valueOf(showGlobally).toString());
+			data.put("show-globally", String.valueOf(showGlobally));
 
 			PortalUtil.addPortletBreadcrumbEntry(
 				request, folder.getName(), portletURL.toString(), data);
@@ -415,10 +414,6 @@ public class DLUtil {
 				String.valueOf(DLFolderConstants.DEFAULT_PARENT_FOLDER_ID)));
 	}
 
-	private Set<String> _fileIcons = new HashSet<String>();
-
-	private Map<String, String> _genericNames = new HashMap<String, String>();
-
 	private DLUtil() {
 		String[] fileIcons = null;
 
@@ -491,5 +486,8 @@ public class DLUtil {
 	private static Log _log = LogFactoryUtil.getLog(DLUtil.class);
 
 	private static DLUtil _instance = new DLUtil();
+
+	private Set<String> _fileIcons = new HashSet<String>();
+	private Map<String, String> _genericNames = new HashMap<String, String>();
 
 }
