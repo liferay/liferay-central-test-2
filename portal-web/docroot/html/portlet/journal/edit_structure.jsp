@@ -233,9 +233,9 @@ int tabIndex = 1;
 
 		<aui:button onClick='<%= renderResponse.getNamespace() + "saveAndContinueStructure();" %>' value="save-and-continue" />
 
-        <c:if test="<%= structure != null %>">
-		    <aui:button onClick='<%= renderResponse.getNamespace() + "saveAndEditDefaultValues();" %>' value="save-and-edit-default-values" />
-        </c:if>
+		<c:if test="<%= structure != null %>">
+			<aui:button onClick='<%= renderResponse.getNamespace() + "saveAndEditDefaultValues();" %>' value="save-and-edit-default-values" />
+		</c:if>
 
 		<aui:button href="<%= redirect %>" type="cancel" />
 	</aui:button-row>
