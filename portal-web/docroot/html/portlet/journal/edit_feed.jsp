@@ -484,6 +484,7 @@ if (feed != null) {
 
 	var changeFeedItemContent = function() {
 		var selectedFeedItemOption = feedItemContentSelector.one(':selected');
+
 		var data = selectedFeedItemOption.attr('data-contentField');
 		var value = selectedFeedItemOption.attr('value');
 
