@@ -17,7 +17,6 @@ package com.liferay.portal.model.impl;
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.CacheModel;
@@ -31,6 +30,8 @@ import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import java.io.Serializable;
+
+import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
@@ -182,7 +183,7 @@ public class ClassNameModelImpl extends BaseModelImpl<ClassName>
 		}
 		else {
 			if (_escapedModelProxy == null) {
-				_escapedModelProxy = (ClassName)ProxyUtil.newProxyInstance(_classLoader,
+				_escapedModelProxy = (ClassName)Proxy.newProxyInstance(_classLoader,
 						_escapedModelProxyInterfaces,
 						new AutoEscapeBeanHandler(this));
 			}

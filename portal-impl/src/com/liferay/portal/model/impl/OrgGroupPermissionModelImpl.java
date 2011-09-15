@@ -16,7 +16,6 @@ package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.model.CacheModel;
 import com.liferay.portal.model.OrgGroupPermission;
@@ -24,6 +23,8 @@ import com.liferay.portal.model.OrgGroupPermissionModel;
 import com.liferay.portal.service.persistence.OrgGroupPermissionPK;
 
 import java.io.Serializable;
+
+import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
@@ -128,7 +129,7 @@ public class OrgGroupPermissionModelImpl extends BaseModelImpl<OrgGroupPermissio
 		}
 		else {
 			if (_escapedModelProxy == null) {
-				_escapedModelProxy = (OrgGroupPermission)ProxyUtil.newProxyInstance(_classLoader,
+				_escapedModelProxy = (OrgGroupPermission)Proxy.newProxyInstance(_classLoader,
 						_escapedModelProxyInterfaces,
 						new AutoEscapeBeanHandler(this));
 			}
