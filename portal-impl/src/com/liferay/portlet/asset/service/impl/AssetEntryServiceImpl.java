@@ -67,37 +67,19 @@ public class AssetEntryServiceImpl extends AssetEntryServiceBaseImpl {
 	public List<AssetEntry> getEntries(AssetEntryQuery entryQuery)
 		throws PortalException, SystemException {
 
-		ThreadLocalCache<Object[]> threadLocalCache =
-			ThreadLocalCacheManager.getThreadLocalCache(
-				Lifecycle.REQUEST, _GET_ENTRIES);
-
-		// See LPS-21198
-
-		Object[] results = threadLocalCache.get(_ENTRIES);
-
-		if (results != null) {
-			threadLocalCache.remove(_ENTRIES);
-
-			return (List<AssetEntry>)results[0];
-		}
-
 		AssetEntryQuery filteredEntryQuery = setupQuery(entryQuery);
 
 		if (isRemovedFilters(entryQuery, filteredEntryQuery)) {
 			return new ArrayList<AssetEntry>();
 		}
 
-		results = filterQuery(entryQuery);
+		Object[] results = filterQuery(entryQuery);
 
 		return (List<AssetEntry>)results[0];
 	}
 
 	public int getEntriesCount(AssetEntryQuery entryQuery)
 		throws PortalException, SystemException {
-
-		ThreadLocalCache<Object[]> threadLocalCache =
-			ThreadLocalCacheManager.getThreadLocalCache(
-				Lifecycle.REQUEST, _GET_ENTRIES);
 
 		AssetEntryQuery filteredEntryQuery = setupQuery(entryQuery);
 
@@ -106,10 +88,6 @@ public class AssetEntryServiceImpl extends AssetEntryServiceBaseImpl {
 		}
 
 		Object[] results = filterQuery(entryQuery);
-
-		// See LPS-21198
-
-		threadLocalCache.put(_ENTRIES, results);
 
 		return (Integer)results[1];
 	}
@@ -198,6 +176,18 @@ public class AssetEntryServiceImpl extends AssetEntryServiceBaseImpl {
 	protected Object[] filterQuery(AssetEntryQuery entryQuery)
 		throws PortalException, SystemException {
 
+		ThreadLocalCache<Object[]> threadLocalCache =
+			ThreadLocalCacheManager.getThreadLocalCache(
+				Lifecycle.REQUEST, AssetEntryServiceImpl.class.getName());
+
+		String key = entryQuery.toString();
+
+		Object[] results = threadLocalCache.get(key);
+
+		if (results != null) {
+			return results;
+		}
+
 		int end = entryQuery.getEnd();
 		int start = entryQuery.getStart();
 
@@ -247,7 +237,11 @@ public class AssetEntryServiceImpl extends AssetEntryServiceBaseImpl {
 		entryQuery.setEnd(end);
 		entryQuery.setStart(start);
 
-		return new Object[] {filteredEntries, length};
+		results = new Object[] {filteredEntries, length};
+
+		threadLocalCache.put(key, results);
+
+		return results;
 	}
 
 	protected boolean isRemovedFilters (
@@ -285,8 +279,5 @@ public class AssetEntryServiceImpl extends AssetEntryServiceBaseImpl {
 
 		return filteredEntryQuery;
 	}
-
-	private static final String _ENTRIES = "entries";
-	private static final String _GET_ENTRIES = "GET_ENTRIES";
 
 }
