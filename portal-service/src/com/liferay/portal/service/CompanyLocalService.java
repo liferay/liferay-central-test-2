@@ -299,7 +299,7 @@ public interface CompanyLocalService extends PersistedModelLocalService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public long getCompanyId(long userId) throws java.lang.Exception;
+	public long getCompanyIdByUserId(long userId) throws java.lang.Exception;
 
 	public void removePreferences(long companyId, java.lang.String[] keys)
 		throws com.liferay.portal.kernel.exception.SystemException;

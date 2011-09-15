@@ -80,16 +80,18 @@ public class PortalSessionDestroyer extends BasePortalLifecycle {
 			// Live users
 
 			if (PropsValues.LIVE_USERS_ENABLED) {
-				long userId = userIdObj.longValue();
-				long companyId = CompanyLocalServiceUtil.getCompanyId(userId);
-				String sessionId = session.getId();
-
 				JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
 				jsonObject.put("command", "signOut");
+
+				long userId = userIdObj.longValue();
+
+				long companyId = CompanyLocalServiceUtil.getCompanyIdByUserId(
+					userId);
+
 				jsonObject.put("companyId", companyId);
 				jsonObject.put("userId", userId);
-				jsonObject.put("sessionId", sessionId);
+				jsonObject.put("sessionId", session.getId());
 
 				MessageBusUtil.sendMessage(
 					DestinationNames.LIVE_USERS, jsonObject.toString());

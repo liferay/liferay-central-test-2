@@ -282,15 +282,17 @@ public class LoginUtil {
 					continue;
 				}
 
-				long companyId = CompanyLocalServiceUtil.getCompanyId(userId);
-				String sessionId = userTracker.getSessionId();
-
 				JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
 				jsonObject.put("command", "signOut");
+
+				long companyId = CompanyLocalServiceUtil.getCompanyIdByUserId(
+					userId);
+
 				jsonObject.put("companyId", companyId);
+
 				jsonObject.put("userId", userId);
-				jsonObject.put("sessionId", sessionId);
+				jsonObject.put("sessionId", userTracker.getSessionId());
 
 				MessageBusUtil.sendMessage(
 					DestinationNames.LIVE_USERS, jsonObject.toString());

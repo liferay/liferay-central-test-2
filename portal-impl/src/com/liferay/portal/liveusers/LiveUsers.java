@@ -330,11 +330,10 @@ public class LiveUsers {
 		}
 
 		try {
-			HttpSession userTrackerSession = PortalSessionContext.get(
-				sessionId);
+			HttpSession session = PortalSessionContext.get(sessionId);
 
-			if (userTrackerSession != null) {
-				userTrackerSession.invalidate();
+			if (session != null) {
+				session.invalidate();
 			}
 		}
 		catch (Exception e) {

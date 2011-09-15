@@ -504,7 +504,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 		return companyPersistence.findByWebId(webId);
 	}
 
-	public long getCompanyId(long userId) throws Exception {
+	public long getCompanyIdByUserId(long userId) throws Exception {
 		long[] companyIds = PortalInstances.getCompanyIds();
 
 		long companyId = 0;
@@ -521,7 +521,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			catch (Exception e) {
 				if (_log.isWarnEnabled()) {
 					_log.warn(
-						"Unable to set the company id for user " + userId, e);
+						"Unable to get the company id for user " + userId, e);
 				}
 			}
 		}
