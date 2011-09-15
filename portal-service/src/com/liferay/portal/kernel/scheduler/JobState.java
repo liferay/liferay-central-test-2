@@ -30,6 +30,8 @@ import java.util.Queue;
  */
 public class JobState implements Cloneable, Serializable {
 
+	public static final int VERSION = 1;
+
 	public JobState(TriggerState triggerState) {
 		this(triggerState, _EXCEPTIONS_MAX_SIZE);
 	}
@@ -43,17 +45,13 @@ public class JobState implements Cloneable, Serializable {
 		_exceptionsMaxSize = exceptionsMaxSize;
 	}
 
-	JobState(TriggerState triggerState, int exceptionsMaxSize,
-		Map<String, Date> triggerTimeInfomation) {
+	public JobState(
+		TriggerState triggerState, int exceptionsMaxSize,
+		Map<String, Date> triggerDates) {
 
-		if (exceptionsMaxSize <= 0) {
-			exceptionsMaxSize = _EXCEPTIONS_MAX_SIZE;
-		}
+		this(triggerState, exceptionsMaxSize);
 
-		_triggerState = triggerState;
-		_exceptionsMaxSize = exceptionsMaxSize;
-		_triggerTimeInfomation = new HashMap<String, Date>(
-			triggerTimeInfomation);
+		_triggerDates = new HashMap<String, Date>(triggerDates);
 	}
 
 	public void addException(Exception exception, Date date) {
@@ -88,13 +86,13 @@ public class JobState implements Cloneable, Serializable {
 			jobState._exceptions = exceptions;
 		}
 
-		if (_triggerTimeInfomation != null) {
+		if (_triggerDates != null) {
 			Map<String, Date> triggerTimeInfomation =
 				new HashMap<String, Date>();
 
-			triggerTimeInfomation.putAll(_triggerTimeInfomation);
+			triggerTimeInfomation.putAll(_triggerDates);
 
-			jobState._triggerTimeInfomation = triggerTimeInfomation;
+			jobState._triggerDates = triggerTimeInfomation;
 		}
 
 		return jobState;
@@ -112,46 +110,45 @@ public class JobState implements Cloneable, Serializable {
 		return _exceptionsMaxSize;
 	}
 
+	public Date getTriggerDate(String key) {
+		if (_triggerDates == null) {
+			return null;
+		}
+
+		return _triggerDates.get(key);
+	}
+
+	public Map<String, Date> getTriggerDates() {
+		if (_triggerDates == null) {
+			return Collections.EMPTY_MAP;
+		}
+
+		return _triggerDates;
+	}
+
 	public TriggerState getTriggerState() {
 		return _triggerState;
 	}
 
-	public Date getTriggerTimeInfomation(String key) {
-		if (_triggerTimeInfomation == null) {
-			return null;
+	public void setTriggerDate(String key, Date date) {
+		if (_triggerDates == null) {
+			_triggerDates = new HashMap<String, Date>();
 		}
 
-		return _triggerTimeInfomation.get(key);
-	}
-
-	public Map<String, Date> getTriggerTimeInfomations() {
-		if (_triggerTimeInfomation == null) {
-			return Collections.EMPTY_MAP;
-		}
-
-		return _triggerTimeInfomation;
+		_triggerDates.put(key, date);
 	}
 
 	public void setTriggerState(TriggerState triggerState) {
 		_triggerState = triggerState;
 	}
 
-	public void setTriggerTimeInfomation(String key, Date date) {
-		if (_triggerTimeInfomation == null) {
-			_triggerTimeInfomation = new HashMap<String, Date>();
-		}
-
-		_triggerTimeInfomation.put(key, date);
-	}
-
-	public static final int VERSION = 1;
-
 	private static final int _EXCEPTIONS_MAX_SIZE = 10;
+
 	private static final long serialVersionUID = 5747422831990881126L;
 
 	private Queue<ObjectValuePair<Exception, Date>> _exceptions;
 	private int _exceptionsMaxSize;
+	private Map<String, Date> _triggerDates;
 	private TriggerState _triggerState;
-	private Map<String, Date> _triggerTimeInfomation;
 
 }

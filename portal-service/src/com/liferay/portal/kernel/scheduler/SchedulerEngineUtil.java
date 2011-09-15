@@ -364,7 +364,7 @@ public class SchedulerEngineUtil {
 			return (Date)message.get(SchedulerEngine.END_TIME);
 		}
 		else {
-			return jobState.getTriggerTimeInfomation(SchedulerEngine.END_TIME);
+			return jobState.getTriggerDate(SchedulerEngine.END_TIME);
 		}
 	}
 
@@ -395,8 +395,7 @@ public class SchedulerEngineUtil {
 			return (Date)message.get(SchedulerEngine.FINAL_FIRE_TIME);
 		}
 		else {
-			return jobState.getTriggerTimeInfomation(
-				SchedulerEngine.FINAL_FIRE_TIME);
+			return jobState.getTriggerDate(SchedulerEngine.FINAL_FIRE_TIME);
 		}
 	}
 
@@ -473,8 +472,7 @@ public class SchedulerEngineUtil {
 			return (Date)message.get(SchedulerEngine.NEXT_FIRE_TIME);
 		}
 		else {
-			return jobState.getTriggerTimeInfomation(
-				SchedulerEngine.NEXT_FIRE_TIME);
+			return jobState.getTriggerDate(SchedulerEngine.NEXT_FIRE_TIME);
 		}
 	}
 
@@ -505,8 +503,7 @@ public class SchedulerEngineUtil {
 			return (Date)message.get(SchedulerEngine.PREVIOUS_FIRE_TIME);
 		}
 		else {
-			return jobState.getTriggerTimeInfomation(
-				SchedulerEngine.PREVIOUS_FIRE_TIME);
+			return jobState.getTriggerDate(SchedulerEngine.PREVIOUS_FIRE_TIME);
 		}
 	}
 
@@ -595,8 +592,7 @@ public class SchedulerEngineUtil {
 			return (Date)message.get(SchedulerEngine.START_TIME);
 		}
 		else {
-			return jobState.getTriggerTimeInfomation(
-				SchedulerEngine.START_TIME);
+			return jobState.getTriggerDate(SchedulerEngine.START_TIME);
 		}
 	}
 

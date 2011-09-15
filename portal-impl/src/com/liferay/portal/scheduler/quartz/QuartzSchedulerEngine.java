@@ -479,6 +479,13 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 		return groupName.concat(StringPool.PERIOD).concat(jobName);
 	}
 
+	protected JobState getJobState(JobDataMap jobDataMap) {
+		Map<String, Object> jobStateMap = (Map<String, Object>)jobDataMap.get(
+			JOB_STATE);
+
+		return JobStateSerializeUtil.deserialize(jobStateMap);
+	}
+
 	protected Message getMessage(JobDataMap jobDataMap) {
 		String messageJSON = (String)jobDataMap.get(MESSAGE);
 
@@ -903,16 +910,12 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 
 		Trigger trigger = scheduler.getTrigger(jobName, groupName);
 
-		Date previousFireTime = trigger.getPreviousFireTime();
-
-		jobState.setTriggerTimeInfomation(END_TIME, new Date());
-		jobState.setTriggerTimeInfomation(
-			FINAL_FIRE_TIME, previousFireTime);
-		jobState.setTriggerTimeInfomation(NEXT_FIRE_TIME, null);
-		jobState.setTriggerTimeInfomation(
-			PREVIOUS_FIRE_TIME, previousFireTime);
-		jobState.setTriggerTimeInfomation(
-			START_TIME, trigger.getStartTime());
+		jobState.setTriggerDate(END_TIME, new Date());
+		jobState.setTriggerDate(FINAL_FIRE_TIME, trigger.getPreviousFireTime());
+		jobState.setTriggerDate(NEXT_FIRE_TIME, null);
+		jobState.setTriggerDate(
+			PREVIOUS_FIRE_TIME, trigger.getPreviousFireTime());
+		jobState.setTriggerDate(START_TIME, trigger.getStartTime());
 
 		jobState.setTriggerState(TriggerState.UNSCHEDULED);
 
@@ -981,13 +984,6 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 		jobDataMap.put(JOB_STATE, JobStateSerializeUtil.serialize(jobState));
 
 		scheduler.addJob(jobDetail, true);
-	}
-
-	private JobState getJobState(JobDataMap jobDataMap) {
-		Map<String, Object> jobStateMap = (Map<String, Object>)jobDataMap.get(
-			JOB_STATE);
-
-		return JobStateSerializeUtil.deserialize(jobStateMap);
 	}
 
 	@BeanReference(name = "com.liferay.portal.service.QuartzLocalService")

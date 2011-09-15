@@ -36,62 +36,64 @@ public class JobStateSerializeUtil {
 
 		int version = (Integer)object;
 
-		switch (version) {
-			case 1:
-				return _doDeserialize1(jobStateMap);
-			default:
-				throw new IllegalStateException(
-					"Unable to find deserialize method for JobState with " +
-						"version " + version);
+		if (version == 1) {
+			return _deserialize_1(jobStateMap);
+		}
+		else {
+			throw new IllegalStateException(
+				"Unable to deserialize field for job state with version " +
+					version);
 		}
 	}
 
 	public static Map<String, Object> serialize(JobState jobState) {
 		switch (JobState.VERSION) {
 			case 1:
-				return _doSerialize1(jobState);
+				return _serialize_1(jobState);
+
 			default:
 				throw new IllegalStateException(
-					"Unable to find serialize method for JobState with " +
-						"current version " + JobState.VERSION);
+					"Unable to serialize field for job state with version " +
+						JobState.VERSION);
 		}
 	}
 
-	private static JobState _doDeserialize1(Map<String, Object> jobStateMap) {
-		ArrayList<Object[]> exceptionsList =
-			(ArrayList<Object[]>)jobStateMap.get(_EXCEPTIONS_FIELD);
-		int exceptionsMaxSize = (Integer)jobStateMap.get(
-			_EXCEPTIONS_MAX_SIZE_FIELD);
-		String triggerStateString =
-			(String)jobStateMap.get(_TRIGGER_STATE_FIELD);
-		Map<String, Date> triggerTimeInfomation =
-			(Map<String, Date>)jobStateMap.get(_TRIGGER_TIME_INFOMATION_FIELD);
-
+	private static JobState _deserialize_1(Map<String, Object> jobStateMap) {
 		TriggerState triggerState = null;
+
+		String triggerStateString = (String)jobStateMap.get(
+			_TRIGGER_STATE_FIELD);
 
 		try {
 			triggerState = TriggerState.valueOf(triggerStateString);
 		}
 		catch (IllegalArgumentException iae) {
 			throw new IllegalStateException(
-				"Unable to cast string " + triggerStateString +
-					" to TriggerState enum type", iae);
+				"Invalid value " + triggerStateString, iae);
 		}
 
-		JobState jobState = new JobState(triggerState, exceptionsMaxSize,
-			triggerTimeInfomation);
+		int exceptionsMaxSize = (Integer)jobStateMap.get(
+			_EXCEPTIONS_MAX_SIZE_FIELD);
+		Map<String, Date> triggerDates = (Map<String, Date>)jobStateMap.get(
+			_TRIGGER_DATES_FIELD);
+
+		JobState jobState = new JobState(
+			triggerState, exceptionsMaxSize, triggerDates);
+
+		ArrayList<Object[]> exceptionsList =
+			(ArrayList<Object[]>)jobStateMap.get(_EXCEPTIONS_FIELD);
 
 		if (exceptionsList != null) {
 			for (Object[] exceptions : exceptionsList) {
-				jobState.addException((Exception)exceptions[0],
-					(Date)exceptions[1]);
+				jobState.addException(
+					(Exception)exceptions[0], (Date)exceptions[1]);
 			}
 		}
 
 		return jobState;
 	}
 
-	private static Map<String, Object> _doSerialize1(JobState jobState) {
+	private static Map<String, Object> _serialize_1(JobState jobState) {
 		Map<String, Object> jobStateMap = new HashMap<String, Object>();
 
 		ArrayList<Object[]> exceptionsList = new ArrayList<Object[]>();
@@ -101,30 +103,33 @@ public class JobStateSerializeUtil {
 
 		for (ObjectValuePair<Exception, Date> exception : exceptions) {
 			exceptionsList.add(
-				new Object[]{exception.getKey(), exception.getValue()});
+				new Object[] {exception.getKey(), exception.getValue()});
 		}
 
 		exceptionsList.trimToSize();
 
 		jobStateMap.put(_EXCEPTIONS_FIELD, exceptionsList);
+
 		jobStateMap.put(
 			_EXCEPTIONS_MAX_SIZE_FIELD, jobState.getExceptionsMaxSize());
 		jobStateMap.put(
-			_TRIGGER_STATE_FIELD, jobState.getTriggerState().toString());
+			_TRIGGER_DATES_FIELD, jobState.getTriggerDates());
 		jobStateMap.put(
-			_TRIGGER_TIME_INFOMATION_FIELD,
-			jobState.getTriggerTimeInfomations());
+			_TRIGGER_STATE_FIELD, jobState.getTriggerState().toString());
 		jobStateMap.put(_VERSION_FIELD, JobState.VERSION);
 
 		return jobStateMap;
 	}
 
 	private static final String _EXCEPTIONS_FIELD = "exceptions";
+
 	private static final String _EXCEPTIONS_MAX_SIZE_FIELD =
 		"exceptionsMaxSize";
+
+	private static final String _TRIGGER_DATES_FIELD = "triggerDates";
+
 	private static final String _TRIGGER_STATE_FIELD = "triggerState";
-	private static final String _TRIGGER_TIME_INFOMATION_FIELD =
-		"triggerTimeInfomation";
+
 	private static final String _VERSION_FIELD = "version";
 
 }

@@ -164,16 +164,16 @@ public class MessageSenderJob implements Job {
 	protected JobState updatePersistedJobState(
 		JobState jobState, Trigger trigger) {
 
-		jobState.setTriggerState(TriggerState.COMPLETE);
-		jobState.setTriggerTimeInfomation(
+		jobState.setTriggerDate(
 			SchedulerEngine.END_TIME, trigger.getEndTime());
-		jobState.setTriggerTimeInfomation(
+		jobState.setTriggerDate(
 			SchedulerEngine.FINAL_FIRE_TIME, trigger.getFinalFireTime());
-		jobState.setTriggerTimeInfomation(SchedulerEngine.NEXT_FIRE_TIME, null);
-		jobState.setTriggerTimeInfomation(
+		jobState.setTriggerDate(SchedulerEngine.NEXT_FIRE_TIME, null);
+		jobState.setTriggerDate(
 			SchedulerEngine.PREVIOUS_FIRE_TIME, trigger.getPreviousFireTime());
-		jobState.setTriggerTimeInfomation(
+		jobState.setTriggerDate(
 			SchedulerEngine.START_TIME, trigger.getStartTime());
+		jobState.setTriggerState(TriggerState.COMPLETE);
 
 		JobState jobStateClone = (JobState)jobState.clone();
 
