@@ -159,7 +159,7 @@ public class AddNewDLFolderDocumentAPActionsTest extends BaseTestCase {
 					}
 
 					try {
-						if (RuntimeVariables.replace("DML Folder Name")
+						if (RuntimeVariables.replace("DM Folder Name")
 												.equals(selenium.getText(
 										"//a[@id='_20_folderName']"))) {
 							break;
@@ -172,14 +172,14 @@ public class AddNewDLFolderDocumentAPActionsTest extends BaseTestCase {
 				}
 
 				selenium.saveScreenShotAndSource();
-				assertEquals(RuntimeVariables.replace("DML Folder Name"),
+				assertEquals(RuntimeVariables.replace("DM Folder Name"),
 					selenium.getText("//a[@id='_20_folderName']"));
 				selenium.type("//input[@id='_20_file']",
 					RuntimeVariables.replace(
 						"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\assetpublisher\\dependencies\\DLDocument.txt"));
 				selenium.saveScreenShotAndSource();
 				selenium.type("//input[@id='_20_title']",
-					RuntimeVariables.replace("DML Folder Document Title"));
+					RuntimeVariables.replace("DM Folder Document Title"));
 				selenium.saveScreenShotAndSource();
 				selenium.clickAt("//input[@value='Publish']",
 					RuntimeVariables.replace("Publish"));
@@ -192,8 +192,7 @@ public class AddNewDLFolderDocumentAPActionsTest extends BaseTestCase {
 					}
 
 					try {
-						if (RuntimeVariables.replace(
-									"DML Folder Document Title")
+						if (RuntimeVariables.replace("DM Folder Document Title")
 												.equals(selenium.getText(
 										"//h3[@class='asset-title']/a"))) {
 							break;
@@ -207,10 +206,10 @@ public class AddNewDLFolderDocumentAPActionsTest extends BaseTestCase {
 
 				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
-						"DML Folder Document Title"),
+						"DM Folder Document Title"),
 					selenium.getText("//h3[@class='asset-title']/a"));
 				assertEquals(RuntimeVariables.replace(
-						"DML Folder Document Title"),
+						"DM Folder Document Title"),
 					selenium.getText(
 						"//div[@class='asset-resource-info']/span/a/span"));
 
