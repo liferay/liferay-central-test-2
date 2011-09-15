@@ -102,8 +102,8 @@ if (Validator.isNull(redirect)) {
 		message.setModifiedDate(temp.getModifiedDate());
 		message.setThreadId(temp.getThreadId());
 		message.setSubject(subject);
-		message.setFormat(MBMessageConstants.DEFAULT_FORMAT);
 		message.setBody(body);
+		message.setFormat(MBMessageConstants.DEFAULT_FORMAT);
 		message.setAttachments(temp.isAttachments());
 		message.setAnonymous(temp.isAnonymous());
 	}
@@ -118,8 +118,8 @@ if (Validator.isNull(redirect)) {
 		message.setModifiedDate(new Date());
 		message.setThreadId(threadId);
 		message.setSubject(subject);
-		message.setFormat(MBMessageConstants.DEFAULT_FORMAT);
 		message.setBody(body);
+		message.setFormat(MBMessageConstants.DEFAULT_FORMAT);
 		message.setAttachments(attachments);
 		message.setAnonymous(BeanParamUtil.getBoolean(message, request, "anonymous"));
 	}
