@@ -120,7 +120,7 @@ public class DLFileEntryImpl extends DLFileEntryBaseImpl {
 		return _extraSettingsProperties;
 	}
 
-	public Map<String, Fields> getFileEntryMetadataFields(long fileVersionId)
+	public Map<String, Fields> getFieldsMap(long fileVersionId)
 		throws PortalException, SystemException {
 
 		Map<String, Fields> fieldsMap = new HashMap<String, Fields>();
