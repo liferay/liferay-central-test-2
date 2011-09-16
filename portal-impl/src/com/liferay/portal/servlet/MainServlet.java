@@ -186,11 +186,11 @@ public class MainServlet extends ActionServlet {
 
 	@Override
 	public void init() throws ServletException {
-		ServletContext servletContext = getServletContext();
-
 		if (_log.isDebugEnabled()) {
 			_log.debug("Initialize");
 		}
+
+		ServletContext servletContext = getServletContext();
 
 		callParentInit();
 
@@ -731,10 +731,10 @@ public class MainServlet extends ActionServlet {
 
 		String key = Globals.REQUEST_PROCESSOR_KEY + moduleConfig.getPrefix();
 
-		RequestProcessor processor =
+		RequestProcessor requestProcessor =
 			(RequestProcessor)servletContext.getAttribute(key);
 
-		if (processor == null) {
+		if (requestProcessor == null) {
 			ControllerConfig controllerConfig =
 				moduleConfig.getControllerConfig();
 
@@ -743,19 +743,19 @@ public class MainServlet extends ActionServlet {
 			ClassLoader classLoader = PortalClassLoaderUtil.getClassLoader();
 
 			try {
-				processor = (RequestProcessor)classLoader.loadClass(
+				requestProcessor = (RequestProcessor)classLoader.loadClass(
 					processorClass).newInstance();
 			}
 			catch (Exception e) {
 				throw new ServletException(e);
 			}
 
-			processor.init(this, moduleConfig);
+			requestProcessor.init(this, moduleConfig);
 
-			servletContext.setAttribute(key, processor);
+			servletContext.setAttribute(key, requestProcessor);
 		}
 
-		return processor;
+		return requestProcessor;
 	}
 
 	protected long getUserId(HttpServletRequest request) {
@@ -1261,30 +1261,30 @@ public class MainServlet extends ActionServlet {
 	}
 
 	protected boolean processSetupWizardRequest(
-		HttpServletRequest request, HttpServletResponse response)
-		throws IOException, ServletException  {
+			HttpServletRequest request, HttpServletResponse response)
+		throws IOException, ServletException {
 
 		ServletContext servletContext = getServletContext();
 
-		boolean startupFinished = (Boolean)servletContext.getAttribute(
+		Boolean startupFinished = (Boolean)servletContext.getAttribute(
 			WebKeys.STARTUP_FINISHED);
 
-		boolean setupWizardEnabled = PropsValues.SETUP_WIZARD_ENABLED;
+		if (!PropsValues.SETUP_WIZARD_ENABLED || (startupFinished == null) ||
+			!startupFinished.booleanValue()) {
 
-		if (!startupFinished || !setupWizardEnabled) {
 			return false;
 		}
 
 		String cmd = ParamUtil.getString(request, Constants.CMD);
 
-		if (cmd.equals(Constants.EDIT)) {
+		if (cmd.equals(Constants.UPDATE)) {
 			SetupWizardUtil.processProperties(request);
 
 			servletContext.setAttribute(WebKeys.SETUP_WIZARD_FINISHED, true);
 		}
 
 		RequestDispatcher requestDispatcher = request.getRequestDispatcher(
-			"/html/portal/setup_wizard/view.jsp");
+			"/html/portal/setup_wizard.jsp");
 
 		requestDispatcher.include(request, response);
 

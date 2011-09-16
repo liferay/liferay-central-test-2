@@ -332,8 +332,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			String emailAddress = null;
 
 			if (companyPersistence.countAll() == 1) {
-				emailAddress = PropsUtil.get(
-					PropsKeys.DEFAULT_ADMIN_EMAIL_ADDRESS);
+				emailAddress = PropsValues.DEFAULT_ADMIN_EMAIL_ADDRESS;
 			}
 
 			if (Validator.isNull(emailAddress)) {

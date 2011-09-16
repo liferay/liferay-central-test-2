@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropertiesParamUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.security.auth.FullNameGenerator;
@@ -27,77 +28,92 @@ import com.liferay.portal.security.auth.FullNameGeneratorFactory;
 import com.liferay.portal.security.auth.ScreenNameGenerator;
 import com.liferay.portal.security.auth.ScreenNameGeneratorFactory;
 import com.liferay.portal.util.PropsValues;
+import com.liferay.portal.util.WebKeys;
 
 import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
+
+/**
+ * @author Julio Camarero
+ * @author Brian Wing Shun Chan
+ */
 public class SetupWizardUtil {
 
-	public static final String LIFERAY_SETUP_PROPERTIES_FILE =
-		"portal-wizard.properties";
+	private static Log _log = LogFactoryUtil.getLog(SetupWizardUtil.class);
 
-	public final static String PROPERTIES_PREFIX = "properties--";
+	private static final String _PROPERTIES_FILE_NAME =
+		"portal-setup-wizard.properties";
 
-	public static void processProperties (HttpServletRequest request) {
-		UnicodeProperties properties = PropertiesParamUtil.getProperties(
-			request, "properties--");
+	private final static String _PROPERTIES_PREFIX = "properties--";
 
-		processAdminProperties(request, properties);
-		processDatabaseProperties(request, properties);
+	public static void processProperties(HttpServletRequest request) {
+		UnicodeProperties unicodeProperties =
+			PropertiesParamUtil.getProperties(request, _PROPERTIES_PREFIX);
 
-		properties.put(PropsKeys.SETUP_WIZARD_ENABLED, String.valueOf(false));
+		_processAdminProperties(request, unicodeProperties);
+		_processDatabaseProperties(request, unicodeProperties);
 
-		boolean propertiesFileCreated =
-			SetupWizardUtil.writePropertiesFile(properties);
+		unicodeProperties.put(
+			PropsKeys.SETUP_WIZARD_ENABLED, String.valueOf(false));
+
+		boolean updatedPropertiesFile = _writePropertiesFile(unicodeProperties);
 
 		request.setAttribute(
-			"setup_wizard_propertiesFileCreated",
-			String.valueOf(propertiesFileCreated));
-		request.setAttribute("setup_wizard_properties", properties);
+			WebKeys.SETUP_WIZARD_PROPERTIES_UPDATED,
+			String.valueOf(updatedPropertiesFile));
+
+		request.setAttribute(
+			WebKeys.SETUP_WIZARD_PROPERTIES, unicodeProperties);
 	}
 
-	protected static String getParameter(
+	private static String _getParameter(
 		HttpServletRequest request, String name, String defaultValue) {
 
-		name = PROPERTIES_PREFIX.concat(name).concat(StringPool.DOUBLE_DASH);
+		name = _PROPERTIES_PREFIX.concat(name).concat(StringPool.DOUBLE_DASH);
 
 		return ParamUtil.getString(request, name);
 	}
 
-	protected static void processAdminProperties(
+	private static void _processAdminProperties(
 		HttpServletRequest request, UnicodeProperties properties) {
-
-		String firstName = getParameter(
-			request, PropsKeys.DEFAULT_ADMIN_FIRST_NAME, "Test");
-		String lastName = getParameter(
-			request, PropsKeys.DEFAULT_ADMIN_LAST_NAME, "Test");
 
 		FullNameGenerator fullNameGenerator =
 			FullNameGeneratorFactory.getInstance();
 
-		String fullName = fullNameGenerator.getFullName(
+		String firstName = _getParameter(
+			request, PropsKeys.DEFAULT_ADMIN_FIRST_NAME, "Test");
+		String lastName = _getParameter(
+			request, PropsKeys.DEFAULT_ADMIN_LAST_NAME, "Test");
+
+		String adminEmailFromName = fullNameGenerator.getFullName(
 			firstName, null, lastName);
 
-		String adminEmail = getParameter(
+		properties.put(PropsKeys.ADMIN_EMAIL_FROM_NAME, adminEmailFromName);
+
+		String defaultAdminEmailAddress = _getParameter(
 			request, PropsKeys.ADMIN_EMAIL_FROM_ADDRESS, "test@liferay.com");
+
+		properties.put(
+			PropsKeys.DEFAULT_ADMIN_EMAIL_ADDRESS, defaultAdminEmailAddress);
 
 		ScreenNameGenerator screenNameGenerator =
 			ScreenNameGeneratorFactory.getInstance();
 
-		String screenName = "test";
+		String defaultAdminScreenName = "test";
 
 		try {
-			screenName = screenNameGenerator.generate(0, 0, adminEmail);
+			defaultAdminScreenName = screenNameGenerator.generate(
+				0, 0, defaultAdminEmailAddress);
 		}
-		catch(Exception e) {
+		catch (Exception e) {
 		}
 
-		properties.put(PropsKeys.DEFAULT_ADMIN_SCREEN_NAME, screenName);
-		properties.put(PropsKeys.ADMIN_EMAIL_FROM_NAME, fullName);
-		properties.put(PropsKeys.DEFAULT_ADMIN_EMAIL_ADDRESS, adminEmail);
+		properties.put(
+			PropsKeys.DEFAULT_ADMIN_SCREEN_NAME, defaultAdminScreenName);
 	}
 
-	protected static void processDatabaseProperties(
+	private static void _processDatabaseProperties(
 		HttpServletRequest request, UnicodeProperties properties) {
 
 		boolean defaultDatabase = ParamUtil.getBoolean(
@@ -107,89 +123,89 @@ public class SetupWizardUtil {
 			return;
 		}
 
-		String databaseModel = ParamUtil.getString(
+		String jdbcDefaultDriverClassName = null;
+		String jdbcDefaultURL = null;
+
+		String databaseType = ParamUtil.getString(
 			request, "databaseType", "hsql");
 		String databaseName = ParamUtil.getString(
 			request, "databaseName", "lportal");
 
-		String driverClassName = null;
-		String url = null;
+		if (databaseType.equals("db2")) {
+			jdbcDefaultDriverClassName = "com.ibm.db2.jcc.DB2Driver";
 
-		if ("db2".equals(databaseModel)) {
-			driverClassName = "com.ibm.db2.jcc.DB2Driver";
+			StringBundler sb = new StringBundler(5);
 
-			url = "jdbc:db2://localhost:50000/" + databaseName +
-				":deferPrepares=false;fullyMaterializeInputStreams=true;" +
-				"fullyMaterializeLobData=true;progresssiveLocators=2;" +
-				"progressiveStreaming=2;";
+			sb.append("jdbc:db2://localhost:50000/");
+			sb.append(databaseName);
+			sb.append(":deferPrepares=false;fullyMaterializeInputStreams=");
+			sb.append("true;fullyMaterializeLobData=true;");
+			sb.append("progresssiveLocators=2;progressiveStreaming=2;");
+
+			jdbcDefaultURL = sb.toString();
 		}
-		else if ("derby".equals(databaseModel)) {
-			driverClassName = "org.apache.derby.jdbc.EmbeddedDriver";
-
-			url = "jdbc:derby:" + databaseName;
+		else if (databaseType.equals("derby")) {
+			jdbcDefaultDriverClassName = "org.apache.derby.jdbc.EmbeddedDriver";
+			jdbcDefaultURL = "jdbc:derby:" + databaseName;
 		}
-		else if ("ingres".equals(databaseModel)) {
-			driverClassName = "com.ingres.jdbc.IngresDriver";
-
-			url = "jdbc:ingres://localhost:II7/" + databaseName;
+		else if (databaseType.equals("ingres")) {
+			jdbcDefaultDriverClassName = "com.ingres.jdbc.IngresDriver";
+			jdbcDefaultURL = "jdbc:ingres://localhost:II7/" + databaseName;
 		}
-		else if ("mysql".equals(databaseModel)) {
-			driverClassName = "com.mysql.jdbc.Driver";
-
-			url = "jdbc:mysql://localhost/" + databaseName +
-				"?useUnicode=true&characterEncoding=UTF-8" +
-				"&useFastDateParsing=false";
+		else if (databaseType.equals("mysql")) {
+			jdbcDefaultDriverClassName = "com.mysql.jdbc.Driver";
+			jdbcDefaultURL =
+				"jdbc:mysql://localhost/" + databaseName +
+					"?useUnicode=true&characterEncoding=UTF-8&" +
+						"useFastDateParsing=false";
 		}
-		else if ("oracle".equals(databaseModel)) {
-			driverClassName = "oracle.jdbc.this.get_driver().OracleDriver";
-
-			url = "jdbc:oracle:thin:@localhost:1521:xe";
+		else if (databaseType.equals("oracle")) {
+			jdbcDefaultDriverClassName =
+				"oracle.jdbc.this.get_driver().OracleDriver";
+			jdbcDefaultURL = "jdbc:oracle:thin:@localhost:1521:xe";
 		}
-		else if ("p6spy".equals(databaseModel)) {
-			driverClassName = "com.p6spy.engine.spy.P6SpyDriver";
-
-			url = "jdbc:mysql://localhost/" + databaseName +
-				"?useUnicode=true&characterEncoding=UTF-8" +
-				"&useFastDateParsing=false";
+		else if (databaseType.equals("p6spy")) {
+			jdbcDefaultDriverClassName = "com.p6spy.engine.spy.P6SpyDriver";
+			jdbcDefaultURL =
+				"jdbc:mysql://localhost/" + databaseName +
+					"?useUnicode=true&characterEncoding=UTF-8" +
+						"&useFastDateParsing=false";
 		}
-		else if ("postgresql".equals(databaseModel)) {
-			driverClassName = "org.postgresql.Driver";
-
-			url = "jdbc:postgresql://localhost:5432/" + databaseName;
+		else if (databaseType.equals("postgresql")) {
+			jdbcDefaultDriverClassName = "org.postgresql.Driver";
+			jdbcDefaultURL = "jdbc:postgresql://localhost:5432/" + databaseName;
 		}
-		else if ("sqlserver".equals(databaseModel)) {
-			driverClassName = "net.sourceforge.jtds.jdbc.Driver";
-
-			url = "jdbc:jtds:sqlserver://localhost/" + databaseName;
+		else if (databaseType.equals("sqlserver")) {
+			jdbcDefaultDriverClassName = "net.sourceforge.jtds.jdbc.Driver";
+			jdbcDefaultURL = "jdbc:jtds:sqlserver://localhost/" + databaseName;
 		}
-		else if ("sybase".equals(databaseModel)) {
-			driverClassName = "net.sourceforge.jtds.jdbc.Driver";
-
-			url = "jdbc:jtds:sybase://localhost:5000/" + databaseName;
+		else if (databaseType.equals("sybase")) {
+			jdbcDefaultDriverClassName = "net.sourceforge.jtds.jdbc.Driver";
+			jdbcDefaultURL =
+				"jdbc:jtds:sybase://localhost:5000/" + databaseName;
 		}
 
 		properties.put(
-			PropsKeys.JDBC_DEFAULT_DRIVER_CLASS_NAME, driverClassName);
-		properties.put(PropsKeys.JDBC_DEFAULT_URL, url);
+			PropsKeys.JDBC_DEFAULT_DRIVER_CLASS_NAME,
+			jdbcDefaultDriverClassName);
+		properties.put(PropsKeys.JDBC_DEFAULT_URL, jdbcDefaultURL);
 	}
 
-	protected static boolean writePropertiesFile(UnicodeProperties properties) {
-		boolean succesful = true;
+	private static boolean _writePropertiesFile(
+		UnicodeProperties unicodeProperties) {
 
 		try {
 			FileUtil.write(
-				PropsValues.LIFERAY_HOME, LIFERAY_SETUP_PROPERTIES_FILE,
-				properties.toString());
-		}
-		catch (IOException e) {
-			succesful = false;
+				PropsValues.LIFERAY_HOME, _PROPERTIES_FILE_NAME,
+				unicodeProperties.toString());
 
-			_log.error(e, e);
+			return true;
 		}
+		catch (IOException ioe) {
+			_log.error(ioe, ioe);
 
-		return succesful;
+			return false;
+		}
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(SetupWizardUtil.class);
 
 }

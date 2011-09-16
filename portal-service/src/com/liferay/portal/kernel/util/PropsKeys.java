@@ -407,9 +407,9 @@ public interface PropsKeys {
 
 	public static final String DATABASE_MYSQL_ENGINE = "database.mysql.engine";
 
-	public static final String DEFAULT_ADMIN_EMAIL_ADDRESS_PREFIX = "default.admin.email.address.prefix";
-
 	public static final String DEFAULT_ADMIN_EMAIL_ADDRESS = "default.admin.email.address";
+
+	public static final String DEFAULT_ADMIN_EMAIL_ADDRESS_PREFIX = "default.admin.email.address.prefix";
 
 	public static final String DEFAULT_ADMIN_FIRST_NAME = "default.admin.first.name";
 
@@ -837,11 +837,11 @@ public interface PropsKeys {
 
 	public static final String JDBC_DEFAULT_LIFERAY_POOL_PROVIDER = "jdbc.default.liferay.pool.provider";
 
-	public static final String JDBC_DEFAULT_USERNAME = "jdbc.default.username";
-
 	public static final String JDBC_DEFAULT_PASSWORD = "jdbc.default.password";
 
 	public static final String JDBC_DEFAULT_URL = "jdbc.default.url";
+
+	public static final String JDBC_DEFAULT_USERNAME = "jdbc.default.username";
 
 	public static final String JOURNAL_ARTICLE_CHECK_INTERVAL = "journal.article.check.interval";
 
@@ -1716,7 +1716,7 @@ public interface PropsKeys {
 	public static final String SETUP_DATABASE_DRIVERS_LIST = "setup.database.drivers.list";
 
 	public static final String SETUP_WIZARD_ENABLED = "setup.wizard.enabled";
-	
+
 	public static final String SHARD_DEFAULT_NAME = "shard.default.name";
 
 	public static final String SHARD_SELECTOR = "shard.selector";
