@@ -64,14 +64,13 @@ public class ByteArrayFileInputStream extends InputStream {
 		}
 		finally {
 			data = null;
+			fileInputStream = null;
 
-			if (deleteOnClose && (file != null)) {
+			if (deleteOnClose) {
 				file.delete();
 			}
 
 			file = null;
-
-			fileInputStream = null;
 		}
 	}
 
