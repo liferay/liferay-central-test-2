@@ -17,8 +17,6 @@ package com.liferay.portlet.documentlibrary.util;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.metadata.RawMetadataProcessorUtil;
@@ -126,9 +124,6 @@ public class RawMetadataProcessor implements DLProcessor {
 			DestinationNames.DOCUMENT_LIBRARY_RAW_METADATA_PROCESSOR,
 			fileVersion);
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(
-		RawMetadataProcessor.class);
 
 	private static RawMetadataProcessor _instance = new RawMetadataProcessor();
 
