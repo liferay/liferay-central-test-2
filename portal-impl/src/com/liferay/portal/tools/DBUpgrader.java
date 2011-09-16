@@ -23,6 +23,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ReleaseInfo;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.model.Release;
 import com.liferay.portal.model.ReleaseConstants;
@@ -80,19 +81,21 @@ public class DBUpgrader {
 			_log.debug("Run upgrade process");
 		}
 
-		int currentBuildNumber =
-			ReleaseLocalServiceUtil.getBuildNumberOrCreate();
+		int buildNumber = ReleaseLocalServiceUtil.getBuildNumberOrCreate();
 
-		int newBuildNumber = ReleaseInfo.getBuildNumber();
+		if (buildNumber > ReleaseInfo.getBuildNumber()) {
+			StringBundler sb = new StringBundler(6);
 
-		if (newBuildNumber < currentBuildNumber ) {
-			throw new IllegalStateException(
-				"Attempting to deploy an older Liferay Portal version.  " +
-				"Current build version (" + currentBuildNumber +
-				") and attempting to deploy version (" + newBuildNumber + ")");
+			sb.append("Attempting to deploy an older Liferay Portal version. ");
+			sb.append("Current build version is ");
+			sb.append(buildNumber);
+			sb.append(" and attempting to deploy version ");
+			sb.append(ReleaseInfo.getBuildNumber());
+			sb.append(".");
+
+			throw new IllegalStateException(sb.toString());
 		}
-
-		if (currentBuildNumber < ReleaseInfo.RELEASE_5_0_0_BUILD_NUMBER) {
+		else if (buildNumber < ReleaseInfo.RELEASE_5_0_0_BUILD_NUMBER) {
 			String msg = "You must first upgrade to Liferay Portal 5.0.0";
 
 			System.out.println(msg);
@@ -103,10 +106,10 @@ public class DBUpgrader {
 		// Upgrade build
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Update build " + currentBuildNumber);
+			_log.debug("Update build " + buildNumber);
 		}
 
-		StartupHelperUtil.upgradeProcess(currentBuildNumber);
+		StartupHelperUtil.upgradeProcess(buildNumber);
 
 		// Update company key
 
