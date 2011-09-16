@@ -101,8 +101,8 @@ public class EditUserPortraitAction extends PortletAction {
 
 		User user = PortalUtil.getSelectedUser(uploadPortletRequest);
 
-		InputStream inputStream =
-			uploadPortletRequest.getFileAsStream("fileName");
+		InputStream inputStream = uploadPortletRequest.getFileAsStream(
+			"fileName");
 
 		if (inputStream == null) {
 			throw new UploadException();
