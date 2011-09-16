@@ -19,7 +19,7 @@
 <%
 String emailAddress = ParamUtil.getString(request, "emailAddress");
 
-boolean anonymousAccount = ParamUtil.getBoolean(request, "anonymousAccount");
+boolean anonymousAccount = ParamUtil.getBoolean(request, "anonymousUser");
 %>
 
 <c:if test="<%= anonymousAccount && company.isStrangers() %>">

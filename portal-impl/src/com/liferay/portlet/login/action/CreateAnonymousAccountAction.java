@@ -95,7 +95,7 @@ public class CreateAnonymousAccountAction extends PortletAction {
 
 		portletURL.setParameter("struts_action", "/login/login_redirect");
 		portletURL.setParameter("emailAddress", emailAddress);
-		portletURL.setParameter("anonymousAccount", Boolean.TRUE.toString());
+		portletURL.setParameter("anonymousUser", Boolean.TRUE.toString());
 
 		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
@@ -201,7 +201,7 @@ public class CreateAnonymousAccountAction extends PortletAction {
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			User.class.getName(), actionRequest);
 
-		serviceContext.setAttribute("anonymousAccount", true);
+		serviceContext.setAttribute("anonymousUser", true);
 
 		if (PropsValues.CAPTCHA_CHECK_PORTAL_CREATE_ACCOUNT) {
 			CaptchaUtil.check(actionRequest);

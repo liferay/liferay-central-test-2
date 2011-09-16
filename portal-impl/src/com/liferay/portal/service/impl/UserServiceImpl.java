@@ -1549,11 +1549,11 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 
 		Company company = companyPersistence.findByPrimaryKey(companyId);
 
-		boolean anonymousAccount = GetterUtil.getBoolean(
-			serviceContext.getAttribute("anonymousAccount"));
+		boolean anonymousUser = GetterUtil.getBoolean(
+			serviceContext.getAttribute("anonymousUser"));
 
 		if ((creatorUserId != 0) ||
-			(!company.isStrangers() && !anonymousAccount)) {
+			(!company.isStrangers() && !anonymousUser)) {
 
 			if (!PortalPermissionUtil.contains(
 					getPermissionChecker(), ActionKeys.ADD_USER) ||
