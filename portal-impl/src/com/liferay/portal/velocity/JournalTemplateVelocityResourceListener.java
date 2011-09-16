@@ -14,8 +14,6 @@
 
 package com.liferay.portal.velocity;
 
-import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -40,40 +38,40 @@ public class JournalTemplateVelocityResourceListener
 		throws ResourceNotFoundException {
 
 		try {
-			int pos = source.indexOf(_SOURCE_PREFIX);
-
-			if (pos == -1) {
-				return null;
-			}
-
-			int x = source.indexOf(CharPool.SLASH, pos);
-			int y = source.indexOf(CharPool.SLASH, x + 1);
-			int z = source.indexOf(CharPool.SLASH, y + 1);
-
-			long companyId = GetterUtil.getLong(source.substring(x + 1, y));
-			long groupId = GetterUtil.getLong(source.substring(y + 1, z));
-			String templateId = source.substring(z + 1);
-
-			if (_log.isDebugEnabled()) {
-				_log.debug(
-					"Loading {companyId=" + companyId + ",groupId=" + groupId +
-						",templateId=" + templateId + "}");
-			}
-
-			JournalTemplate journalTemplate =
-				JournalTemplateLocalServiceUtil.getTemplate(
-					groupId, templateId);
-
-			String xsl = journalTemplate.getXsl();
-
-			return new UnsyncByteArrayInputStream(xsl.getBytes());
+			return doGetResourceStream(source);
 		}
-		catch (PortalException pe) {
+		catch (Exception e) {
 			throw new ResourceNotFoundException(source);
 		}
-		catch (SystemException se) {
-			throw new ResourceNotFoundException(source);
+	}
+
+	protected InputStream doGetResourceStream(String source) throws Exception {
+		int pos = source.indexOf(_SOURCE_PREFIX);
+
+		if (pos == -1) {
+			return null;
 		}
+
+		int x = source.indexOf(CharPool.SLASH, pos);
+		int y = source.indexOf(CharPool.SLASH, x + 1);
+		int z = source.indexOf(CharPool.SLASH, y + 1);
+
+		long companyId = GetterUtil.getLong(source.substring(x + 1, y));
+		long groupId = GetterUtil.getLong(source.substring(y + 1, z));
+		String templateId = source.substring(z + 1);
+
+		if (_log.isDebugEnabled()) {
+			_log.debug(
+				"Loading {companyId=" + companyId + ",groupId=" + groupId +
+					",templateId=" + templateId + "}");
+		}
+
+		JournalTemplate journalTemplate =
+			JournalTemplateLocalServiceUtil.getTemplate(groupId, templateId);
+
+		String xsl = journalTemplate.getXsl();
+
+		return new UnsyncByteArrayInputStream(xsl.getBytes());
 	}
 
 	private static final String _SOURCE_PREFIX = JOURNAL_SEPARATOR.concat(

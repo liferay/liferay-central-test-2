@@ -31,6 +31,15 @@ public class ClassLoaderVelocityResourceListener
 	public InputStream getResourceStream(String source)
 		throws ResourceNotFoundException {
 
+		try {
+			return doGetResourceStream(source);
+		}
+		catch (Exception e) {
+			throw new ResourceNotFoundException(source);
+		}
+	}
+
+	protected InputStream doGetResourceStream(String source) throws Exception {
 		if (source.contains(JOURNAL_SEPARATOR) ||
 			source.contains(SERVLET_SEPARATOR) ||
 			source.contains(THEME_LOADER_SEPARATOR)) {

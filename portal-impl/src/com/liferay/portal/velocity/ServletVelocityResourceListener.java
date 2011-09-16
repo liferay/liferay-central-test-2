@@ -39,6 +39,15 @@ public class ServletVelocityResourceListener extends VelocityResourceListener {
 	public InputStream getResourceStream(String source)
 		throws ResourceNotFoundException {
 
+		try {
+			return doGetResourceStream(source);
+		}
+		catch (Exception e) {
+			throw new ResourceNotFoundException(source);
+		}
+	}
+
+	protected InputStream doGetResourceStream(String source) throws Exception {
 		int pos = source.indexOf(SERVLET_SEPARATOR);
 
 		if (pos == -1) {
@@ -70,25 +79,20 @@ public class ServletVelocityResourceListener extends VelocityResourceListener {
 					servletContextName + " " + servletContext);
 		}
 
-		try {
-			URL url = servletContext.getResource(name);
+		URL url = servletContext.getResource(name);
 
-			if (url != null) {
-				return url.openStream();
-			}
-
-			if (name.endsWith("/init_custom.vm")) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(
-						"The template " + name +
-							" should be created");
-				}
-
-				return new UnsyncByteArrayInputStream(new byte[0]);
-			}
+		if (url != null) {
+			return url.openStream();
 		}
-		catch (Exception e) {
-			_log.error(e, e);
+
+		if (name.endsWith("/init_custom.vm")) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(
+					"The template " + name +
+						" should be created");
+			}
+
+			return new UnsyncByteArrayInputStream(new byte[0]);
 		}
 
 		return null;
