@@ -103,7 +103,7 @@ pageContext.setAttribute("portletURL", portletURL);
 	headerNames.add("name");
 	headerNames.add("members");
 
-	if (tabs1.equals("my-sites") && PropsValues.LIVE_USERS_ENABLED) {
+	if (PropsValues.LIVE_USERS_ENABLED && tabs1.equals("my-sites")) {
 		headerNames.add("online-now");
 	}
 
