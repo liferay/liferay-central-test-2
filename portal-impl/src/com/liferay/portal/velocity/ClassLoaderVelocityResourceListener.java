@@ -31,29 +31,20 @@ public class ClassLoaderVelocityResourceListener
 	public InputStream getResourceStream(String source)
 		throws ResourceNotFoundException {
 
-		InputStream is = null;
+		if (source.contains(JOURNAL_SEPARATOR) ||
+			source.contains(SERVLET_SEPARATOR) ||
+			source.contains(THEME_LOADER_SEPARATOR)) {
 
-		int pos = source.indexOf(JOURNAL_SEPARATOR);
-
-		if (pos == -1) {
-			pos = source.indexOf(SERVLET_SEPARATOR);
+			return null;
 		}
 
-		if (pos == -1) {
-			pos = source.indexOf(THEME_LOADER_SEPARATOR);
+		ClassLoader classLoader = getClass().getClassLoader();
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Loading " + source);
 		}
 
-		if (pos == -1) {
-			ClassLoader classLoader = getClass().getClassLoader();
-
-			if (_log.isDebugEnabled()) {
-				_log.debug("Loading " + source);
-			}
-
-			is = classLoader.getResourceAsStream(source);
-		}
-
-		return is;
+		return classLoader.getResourceAsStream(source);
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(
