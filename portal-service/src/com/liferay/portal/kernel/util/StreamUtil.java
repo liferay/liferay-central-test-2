@@ -145,17 +145,19 @@ public class StreamUtil {
 
 				FileInputStream fileInputStream = (FileInputStream)inputStream;
 
-				FileChannel sourceChannel = fileInputStream.getChannel();
+				FileChannel sourceFileChannel = fileInputStream.getChannel();
 
-				FileOutputStream fileOutputStream = (FileOutputStream)outputStream;
+				FileOutputStream fileOutputStream =
+					(FileOutputStream)outputStream;
 
-				FileChannel targetChannel = fileOutputStream.getChannel();
+				FileChannel targetFileChannel = fileOutputStream.getChannel();
 
 				long position = 0;
 
-				while (position < sourceChannel.size()) {
-					position += sourceChannel.transferTo(
-						position, sourceChannel.size() - position, targetChannel);
+				while (position < sourceFileChannel.size()) {
+					position += sourceFileChannel.transferTo(
+						position, sourceFileChannel.size() - position,
+						targetFileChannel);
 				}
 			}
 			else {
