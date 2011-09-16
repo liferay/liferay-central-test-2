@@ -343,6 +343,7 @@ public class LanguageImpl implements Language {
 		while ((value == null) || value.equals(defaultValue)) {
 			if ((key.length() > 0) &&
 				(key.charAt(key.length() - 1) == CharPool.CLOSE_BRACKET)) {
+
 				int pos = key.lastIndexOf(CharPool.OPEN_BRACKET);
 
 				if (pos != -1) {
@@ -654,6 +655,7 @@ public class LanguageImpl implements Language {
 		if ((value == null) || value.equals(defaultValue)) {
 			if ((key.length() > 0) &&
 				(key.charAt(key.length() - 1) == CharPool.CLOSE_BRACKET)) {
+
 				int pos = key.lastIndexOf(CharPool.OPEN_BRACKET);
 
 				if (pos != -1) {
