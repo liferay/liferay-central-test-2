@@ -628,7 +628,6 @@ public class WebServerServlet extends HttpServlet {
 		String tempFileId = DLUtil.getTempFileId(
 			fileEntry.getFileEntryId(), version);
 
-
 		FileVersion fileVersion = fileEntry.getFileVersion(version);
 
 		String fileName = fileVersion.getTitle();
