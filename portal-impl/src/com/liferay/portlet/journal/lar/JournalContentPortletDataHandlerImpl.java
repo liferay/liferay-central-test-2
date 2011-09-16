@@ -135,7 +135,7 @@ public class JournalContentPortletDataHandlerImpl
 			return StringPool.BLANK;
 		}
 
-		long originalScopeGroupId = portletDataContext.getScopeGroupId();
+		long previousScopeGroupId = portletDataContext.getScopeGroupId();
 
 		if (articleGroupId != portletDataContext.getScopeGroupId()) {
 			portletDataContext.setScopeGroupId(articleGroupId);
@@ -160,7 +160,7 @@ public class JournalContentPortletDataHandlerImpl
 		Element rootElement = document.addElement("journal-content-data");
 
 		if (article == null) {
-			portletDataContext.setScopeGroupId(originalScopeGroupId);
+			portletDataContext.setScopeGroupId(previousScopeGroupId);
 
 			return document.formattedString();
 		}
@@ -183,7 +183,7 @@ public class JournalContentPortletDataHandlerImpl
 			dlFoldersElement, dlFilesElement, dlFileRanksElement,
 			igFoldersElement, igImagesElement, article, false);
 
-		portletDataContext.setScopeGroupId(originalScopeGroupId);
+		portletDataContext.setScopeGroupId(previousScopeGroupId);
 
 		return document.formattedString();
 	}
@@ -203,13 +203,12 @@ public class JournalContentPortletDataHandlerImpl
 			return null;
 		}
 
-		long originalScopeGroupId = portletDataContext.getScopeGroupId();
+		long previousScopeGroupId = portletDataContext.getScopeGroupId();
 
-		String importGroupId = portletPreferences.getValue("groupId", null);
+		long importGroupId = GetterUtil.getLong(
+			portletPreferences.getValue("groupId", null));
 
-		if (GetterUtil.getLong(importGroupId) ==
-				portletDataContext.getSourceGroupId()) {
-
+		if (importGroupId == portletDataContext.getSourceGroupId()) {
 			portletDataContext.setScopeGroupId(portletDataContext.getGroupId());
 		}
 
@@ -289,7 +288,7 @@ public class JournalContentPortletDataHandlerImpl
 			portletPreferences.setValue("templateId", StringPool.BLANK);
 		}
 
-		portletDataContext.setScopeGroupId(originalScopeGroupId);
+		portletDataContext.setScopeGroupId(previousScopeGroupId);
 
 		return portletPreferences;
 	}

@@ -389,8 +389,7 @@ public class LayoutExporter {
 						new Object[] {
 							portletId, firstLayout.getPlid(), groupId,
 							StringPool.BLANK, StringPool.BLANK
-						}
-					);
+						});
 				}
 			}
 		}
@@ -747,8 +746,7 @@ public class LayoutExporter {
 							portlet.getPortletId(), layout.getPlid(),
 							layout.getScopeGroup().getGroupId(),
 							StringPool.BLANK, layout.getUuid()
-						}
-					);
+						});
 				}
 			}
 
