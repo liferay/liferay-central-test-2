@@ -358,11 +358,11 @@ public class JSONWebServiceActionParameters {
 				return value;
 			}
 
-			if (key.equals("serviceContext") && (value != Void.TYPE) &&
-				(_serviceContext != null)) {
+			if ((_serviceContext != null) && key.equals("serviceContext") &&
+				((value == null) || !value.equals(Void.TYPE))) {
 
-				if ((value != null) && ServiceContext.class.isAssignableFrom(
-						value.getClass())) {
+				if ((value != null) &&
+					ServiceContext.class.isAssignableFrom(value.getClass())) {
 
 					value = _mergeServiceContext((ServiceContext)value);
 				}
