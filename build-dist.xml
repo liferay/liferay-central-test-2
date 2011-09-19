@@ -211,6 +211,8 @@
 				<available file="${app.server.parent.dir}/${tcat.zip.name}" />
 			</not>
 			<then>
+				<mkdir dir="${app.server.parent.dir}" />
+
 				<get
 					dest="${app.server.parent.dir}/${tcat.zip.name}"
 					src="${tcat.zip.url}"
@@ -794,6 +796,8 @@ release was successful.</echo>
 				<available file="${app.server.parent.dir}/${app.server.geronimo.zip.name}" />
 			</not>
 			<then>
+				<mkdir dir="${app.server.parent.dir}" />
+
 				<get
 					dest="${app.server.parent.dir}/${app.server.geronimo.zip.name}"
 					src="${app.server.geronimo.zip.url}"
@@ -822,6 +826,8 @@ release was successful.</echo>
 				<available file="${app.server.parent.dir}/${app.server.glassfish.zip.name}" />
 			</not>
 			<then>
+				<mkdir dir="${app.server.parent.dir}" />
+
 				<get
 					dest="${app.server.parent.dir}/${app.server.glassfish.zip.name}"
 					src="${app.server.glassfish.zip.url}"
@@ -853,6 +859,8 @@ release was successful.</echo>
 				<available file="${app.server.parent.dir}/${app.server.jboss.zip.name}" />
 			</not>
 			<then>
+				<mkdir dir="${app.server.parent.dir}" />
+
 				<get
 					dest="${app.server.parent.dir}/${app.server.jboss.zip.name}"
 					src="${app.server.jboss.zip.url}"
@@ -902,6 +910,8 @@ release was successful.</echo>
 				<available file="${app.server.parent.dir}/${app.server.jetty.zip.name}" />
 			</not>
 			<then>
+				<mkdir dir="${app.server.parent.dir}" />
+
 				<get
 					dest="${app.server.parent.dir}/${app.server.jetty.zip.name}"
 					src="${app.server.jetty.zip.url}"
@@ -938,6 +948,8 @@ release was successful.</echo>
 				<available file="${app.server.parent.dir}/${app.server.jonas.zip.name}" />
 			</not>
 			<then>
+				<mkdir dir="${app.server.parent.dir}" />
+
 				<get
 					dest="${app.server.parent.dir}/${app.server.jonas.zip.name}"
 					src="${app.server.jonas.zip.url}"
@@ -1000,6 +1012,8 @@ release was successful.</echo>
 				<available file="${app.server.parent.dir}/${app.server.resin.zip.name}" />
 			</not>
 			<then>
+				<mkdir dir="${app.server.parent.dir}" />
+
 				<get
 					dest="${app.server.parent.dir}/${app.server.resin.zip.name}"
 					src="${app.server.resin.zip.url}"
@@ -1029,6 +1043,7 @@ release was successful.</echo>
 			</not>
 			<then>
 				<mkdir dir="${app.server.parent.dir}" />
+
 				<get
 					dest="${app.server.parent.dir}/${app.server.tomcat.zip.name}"
 					src="${app.server.tomcat.zip.url}"
@@ -1081,6 +1096,8 @@ release was successful.</echo>
 				<available file="${app.server.parent.dir}/${app.server.weblogic.zip.name}" />
 			</not>
 			<then>
+				<mkdir dir="${app.server.parent.dir}" />
+
 				<get
 					dest="${app.server.parent.dir}/${app.server.weblogic.zip.name}"
 					src="${app.server.weblogic.zip.url}"
