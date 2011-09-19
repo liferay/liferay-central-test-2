@@ -359,7 +359,7 @@ public class JSONWebServiceActionParameters {
 			}
 
 			if ((_serviceContext != null) && key.equals("serviceContext")) {
-				if ((value != null) && 
+				if ((value != null) &&
 					ServiceContext.class.isAssignableFrom(value.getClass())) {
 
 					value = _mergeServiceContext((ServiceContext)value);
