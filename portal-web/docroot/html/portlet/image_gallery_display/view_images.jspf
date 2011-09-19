@@ -44,6 +44,9 @@
 						<%
 						FileVersion fileVersion = fileEntry.getFileVersion();
 
+						boolean supportedAudio = AudioProcessor.isSupportedAudio(fileEntry, fileVersion.getVersion());
+						boolean supportedVideo = VideoProcessor.isSupportedVideo(fileEntry, fileVersion.getVersion());
+
 						Image smallImage = ImageLocalServiceUtil.getImage(fileVersion.getSmallImageId());
 
 						long smallImageId = 0;
@@ -58,9 +61,6 @@
 
 						int topMargin = PrefsPropsUtil.getInteger(PropsKeys.IG_IMAGE_THUMBNAIL_MAX_DIMENSION) - smallImageHeight;
 						int sideMargin = (PrefsPropsUtil.getInteger(PropsKeys.IG_IMAGE_THUMBNAIL_MAX_DIMENSION) - smallImageWidth) / 2;
-
-						boolean supportedAudio = AudioProcessor.isSupportedAudio(fileEntry, fileVersion.getVersion());
-						boolean supportedVideo = VideoProcessor.isSupportedVideo(fileEntry, fileVersion.getVersion());
 
 						String href = StringPool.BLANK;
 						String src = StringPool.BLANK;
@@ -178,6 +178,7 @@
 PortletURL embeddedPlayerURL = renderResponse.createRenderURL();
 
 embeddedPlayerURL.setWindowState(LiferayWindowState.POP_UP);
+
 embeddedPlayerURL.setParameter("struts_action", "/image_gallery_display/embedded_player");
 %>
 

@@ -282,12 +282,12 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 					<div>
 
 						<%
+						boolean supportedAudio = AudioProcessor.isSupportedAudio(fileEntry, fileVersion.getVersion());
+						boolean supportedVideo = VideoProcessor.isSupportedVideo(fileEntry, fileVersion.getVersion());
+
 						int previewFileCount = 0;
 						String previewFileURL = null;
 						String videoThumbnailURL = null;
-
-						boolean supportedAudio = AudioProcessor.isSupportedAudio(fileEntry, fileVersion.getVersion());
-						boolean supportedVideo = VideoProcessor.isSupportedVideo(fileEntry, fileVersion.getVersion());
 
 						if (hasImages) {
 							previewFileURL = themeDisplay.getPathImage() + "/image_gallery?img_id=" + largeImage.getImageId() + "&t=" + WebServerServletTokenUtil.getToken(largeImage.getImageId());
