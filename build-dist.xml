@@ -816,6 +816,12 @@ release was successful.</echo>
 				to="geronimo-${app.server.geronimo.version}/*"
 			/>
 		</unzip>
+
+		<chmod perm="a+x">
+			<fileset dir="${app.server.geronimo.bin.dir}">
+				<include name="*.sh"/>
+			</fileset>
+		</chmod>
 	</target>
 
 	<target name="unzip-glassfish">
@@ -849,6 +855,12 @@ release was successful.</echo>
 				to="${app.server.glassfish.dir}/*"
 			/>
 		</unzip>
+
+		<chmod perm="a+x">
+			<fileset dir="${app.server.glassfish.bin.dir}">
+				<exclude name="*.bat"/>
+			</fileset>
+		</chmod>
 	</target>
 
 	<target name="unzip-jboss">
@@ -879,6 +891,12 @@ release was successful.</echo>
 				to="jboss-${app.server.jboss.version}/*"
 			/>
 		</unzip>
+
+		<chmod perm="a+x">
+			<fileset dir="${app.server.jboss.bin.dir}">
+				<include name="*.sh"/>
+			</fileset>
+		</chmod>
 
 		<replace file="${app.server.jboss.dir}/standalone/configuration/standalone.xml">
 			<replacetoken><![CDATA[enable-welcome-root="true"]]></replacetoken>
@@ -971,6 +989,12 @@ release was successful.</echo>
 				to="jonas-${app.server.jonas.version}/*"
 			/>
 		</unzip>
+
+		<chmod perm="a+x">
+			<fileset dir="${app.server.jonas.bin.dir}">
+				<exclude name="*.bat"/>
+			</fileset>
+		</chmod>
 
 		<delete includeemptydirs="true" failonerror="false">
 			<fileset
@@ -1083,13 +1107,13 @@ release was successful.</echo>
 			/>
 		</unzip>
 
-		<mkdir dir="${app.server.tomcat.dir}/webapps" />
-
 		<chmod perm="a+x">
-			<fileset dir="${app.server.tomcat.dir}/bin">
+			<fileset dir="${app.server.tomcat.bin.dir}">
 				<include name="*.sh"/>
 			</fileset>
 		</chmod>
+
+		<mkdir dir="${app.server.tomcat.dir}/webapps" />
 	</target>
 
 	<target name="unzip-weblogic">
