@@ -892,25 +892,26 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 			if (!feedId.equals(importedFeed.getFeedId())) {
 				if (_log.isWarnEnabled()) {
-					StringBundler sb = new StringBundler(4);
+					StringBundler sb = new StringBundler(5);
 
 					sb.append("A feed with the ID ");
 					sb.append(feedId);
 					sb.append(" already exists. The new generated ID is ");
 					sb.append(importedFeed.getFeedId());
+					sb.append(".");
 
 					_log.warn(sb.toString());
 				}
 			}
 		}
-		catch (FeedTargetLayoutFriendlyUrlException ftlfue) {
+		catch (FeedTargetLayoutFriendlyUrlException ftlfurle) {
 			if (_log.isWarnEnabled()) {
 				StringBundler sb = new StringBundler(6);
 
 				sb.append("A feed with the ID ");
 				sb.append(feedId);
-				sb.append(" cannot be imported because layout with ");
-				sb.append("friendlyURL ");
+				sb.append(" cannot be imported because layout with friendly ");
+				sb.append("URL ");
 				sb.append(feed.getTargetLayoutFriendlyUrl());
 				sb.append(" does not exist");
 
