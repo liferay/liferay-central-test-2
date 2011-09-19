@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.servlet.ServletResponseConstants;
 import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.upload.UploadException;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.FileUtil;
@@ -42,8 +43,6 @@ import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.upload.LiferayFileUploadException;
-import com.liferay.portal.upload.LiferayFileUploadUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.WebKeys;
@@ -101,15 +100,16 @@ public class EditFileEntryAction extends PortletAction {
 
 		try {
 			if (Validator.isNull(cmd)) {
-				LiferayFileUploadException fileUploadException =
-					LiferayFileUploadUtil.getFileUploadException(actionRequest);
+				UploadException uploadException =
+					(UploadException)actionRequest.getAttribute(
+						WebKeys.UPLOAD_EXCEPTION);
 
-				if (fileUploadException != null) {
-					if (fileUploadException.isSizeLimitException()) {
-						throw new FileSizeException(
-							fileUploadException.getCause());
+				if (uploadException != null) {
+					if (uploadException.isExceededSizeLimit()) {
+						throw new FileSizeException(uploadException.getCause());
 					}
-					throw new PortalException(fileUploadException.getCause());
+
+					throw new PortalException(uploadException.getCause());
 				}
 			}
 			else if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)

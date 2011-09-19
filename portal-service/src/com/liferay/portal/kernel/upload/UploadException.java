@@ -12,34 +12,39 @@
  * details.
  */
 
-package com.liferay.portal.upload;
+package com.liferay.portal.kernel.upload;
 
 import com.liferay.portal.kernel.exception.PortalException;
-
-import org.apache.commons.fileupload.FileUploadBase;
 
 /**
  * @author Igor Spasic
  */
-public class LiferayFileUploadException extends PortalException {
+public class UploadException extends PortalException {
 
-	public LiferayFileUploadException(String msg, Throwable cause) {
+	public UploadException() {
+		super();
+	}
+
+	public UploadException(String msg) {
+		super(msg);
+	}
+
+	public UploadException(String msg, Throwable cause) {
 		super(msg, cause);
 	}
 
-	public LiferayFileUploadException(Throwable cause) {
+	public UploadException(Throwable cause) {
 		super(cause);
 	}
 
-	public boolean isSizeLimitException() {
-		Throwable cause = getCause();
-		if (cause instanceof FileUploadBase.SizeLimitExceededException ||
-			cause instanceof
-				FileUploadBase.FileSizeLimitExceededException) {
-
-			return true;
-		} else {
-			return false;
-		}
+	public boolean isExceededSizeLimit() {
+		return _exceededSizeLimit;
 	}
+
+	public void setExceededSizeLimit(boolean exceededSizeLimit) {
+		_exceededSizeLimit = exceededSizeLimit;
+	}
+
+	private boolean _exceededSizeLimit;
+
 }
