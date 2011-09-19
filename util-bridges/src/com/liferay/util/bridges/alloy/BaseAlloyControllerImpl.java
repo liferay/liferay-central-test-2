@@ -21,6 +21,8 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.LiferayPortletConfig;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.portlet.PortletResponseUtil;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.servlet.ServletResponseUtil;
 import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.ContentTypes;
@@ -36,6 +38,7 @@ import com.liferay.portal.model.AuditedModel;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.GroupedModel;
+import com.liferay.portal.model.PersistedModel;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.User;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -80,6 +83,7 @@ public abstract class BaseAlloyControllerImpl implements AlloyController {
 		initThemeDisplayVariables();
 		initMethods();
 		initPaths();
+		initIndexer();
 	}
 
 	public void execute() throws Exception {
@@ -126,6 +130,10 @@ public abstract class BaseAlloyControllerImpl implements AlloyController {
 		sb.append(".jsp");
 
 		return sb.toString();
+	}
+
+	protected Indexer buildIndexer() {
+		return null;
 	}
 
 	protected void executeAction(Method method) throws Exception {
@@ -205,6 +213,14 @@ public abstract class BaseAlloyControllerImpl implements AlloyController {
 	protected void initClass() {
 		clazz = getClass();
 		classLoader = clazz.getClassLoader();
+	}
+
+	protected void initIndexer() {
+		indexer = buildIndexer();
+
+		if (indexer != null) {
+			IndexerRegistryUtil.register(indexer);
+		}
 	}
 
 	protected void initMethods() {
@@ -409,6 +425,16 @@ public abstract class BaseAlloyControllerImpl implements AlloyController {
 		updateAuditedModel(baseModel);
 		updateGroupedModel(baseModel);
 		updateAttachedModel(baseModel);
+
+		if (baseModel instanceof PersistedModel) {
+			PersistedModel persistedModel = (PersistedModel)baseModel;
+
+			persistedModel.persist();
+		}
+
+		if (indexer != null) {
+			indexer.reindex(baseModel);
+		}
 	}
 
 	protected void writeJSON(Object json) throws Exception {
@@ -445,6 +471,7 @@ public abstract class BaseAlloyControllerImpl implements AlloyController {
 	protected String controllerPath;
 	protected EventRequest eventRequest;
 	protected EventResponse eventResponse;
+	protected Indexer indexer;
 	protected String lifecycle;
 	protected LiferayPortletConfig liferayPortletConfig;
 	protected LiferayPortletResponse liferayPortletResponse;
