@@ -41,8 +41,8 @@ public class RepositoryFactoryUtil {
 			return baseRepository;
 		}
 
-		throw new RepositoryException("Repository with class name " +
-			className + " is unavailable");
+		throw new RepositoryException(
+			"Repository with class name " + className + " is unavailable");
 	}
 
 	public static String[] getRepositoryClassNames() {
