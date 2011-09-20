@@ -330,8 +330,8 @@ public class WebServerServlet extends HttpServlet {
 			boolean igSmallImage = ParamUtil.getBoolean(
 				request, "igSmallImage");
 
-			try {
-				if (Validator.isNotNull(uuid) && (groupId > 0)) {
+			if (Validator.isNotNull(uuid) && (groupId > 0)) {
+				try {
 					FileEntry fileEntry =
 						DLAppServiceUtil.getFileEntryByUuidAndGroupId(
 							uuid, groupId);
@@ -345,8 +345,8 @@ public class WebServerServlet extends HttpServlet {
 							fileEntry.getLargeImageId());
 					}
 				}
-			}
-			catch (Exception e) {
+				catch (Exception e) {
+				}
 			}
 		}
 
