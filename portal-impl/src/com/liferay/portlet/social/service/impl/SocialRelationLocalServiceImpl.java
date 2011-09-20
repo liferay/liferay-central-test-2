@@ -26,25 +26,25 @@ import java.util.List;
 
 /**
  * The social relation local service. This service provides methods to handle
- * uni- or bidirectional relations between users.
+ * unidirectional or bidirectional relations between users.
  *
  * <p>
- * Relations between users can be uni- or bidirectional. The type of relation
- * is identified by an integer constant. Possible relations are <i>co-worker,
- * friend, romantic partner, sibling, spouse, child, enemy, follower, parent,
- * subordinate, supervisor</i>.
+ * Relations between users can be unidirectional or bidirectional. The type of
+ * relation is determined by an integer constant. Some example relations are
+ * <i>co-worker, friend, romantic partner, sibling, spouse, child, enemy,
+ * follower, parent, subordinate, supervisor</i>.
  * </p>
  *
  * <p>
- * The two users participating in the relation are designated as user1 and
- * user2. In case of unidirectional relations User1 should always be the
+ * The two users participating in the relation are designated as User1 and
+ * User2. In case of unidirectional relations User1 should always be the
  * subject of the relation. You can use the following English sentence to find
- * out which user to use as user1 and user2:
+ * out which user to use as User1 and which to use as User2:
  * </p>
  *
  * <p>
- * User1 is <i>&lt;relation&gt;</i> of user2 (e.g. User1 is parent of user2;
- * User1 is supervisor of user2)
+ * User1 is <i>&lt;relation&gt;</i> of User2 (e.g. User1 is parent of User2;
+ * User1 is supervisor of User2)
  * </p>
  *
  * <p>
@@ -58,13 +58,15 @@ public class SocialRelationLocalServiceImpl
 	extends SocialRelationLocalServiceBaseImpl {
 
 	/**
-	 * Adds a new social relation between two users to the database.
+	 * Adds a social relation between the two users to the database.
 	 *
 	 * @param  userId1 the user that is the subject of the relation
 	 * @param  userId2 the user at the other end of the relation
 	 * @param  type the type of the relation
 	 * @return the social relation
-	 * @throws PortalException if the users could not be found
+	 * @throws PortalException if the users could not be found, if the users
+	 *         were not from the same company, or if either of the users was
+	 *         the default user
 	 * @throws SystemException if a system exception occurred
 	 */
 	public SocialRelation addRelation(long userId1, long userId2, int type)
@@ -122,7 +124,7 @@ public class SocialRelationLocalServiceImpl
 	}
 
 	/**
-	 * Remove the relation (and its inverse in case of a bidirectional
+	 * Removes the relation (and its inverse in case of a bidirectional
 	 * relation) from the database.
 	 *
 	 * @param  relationId the primary key of the relation
@@ -139,13 +141,14 @@ public class SocialRelationLocalServiceImpl
 	}
 
 	/**
-	 * Remove the relation (and its inverse in case of a bidirectional
-	 * relation) from the database.
+	 * Removes the matching relation (and its inverse in case of a
+	 * bidirectional relation) from the database.
 	 *
 	 * @param  userId1 the user that is the subject of the relation
 	 * @param  userId2 the user at the other end of the relation
-	 * @param  type the type of the relation
-	 * @throws PortalException if the relation could not be found
+	 * @param  type the relation's type
+	 * @throws PortalException if the relation or its inverse relation (if
+	 *         applicable) could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void deleteRelation(long userId1, long userId2, int type)
@@ -158,11 +161,12 @@ public class SocialRelationLocalServiceImpl
 	}
 
 	/**
-	 * Remove the relation (and its inverse in case of a bidirectional
+	 * Removes the relation (and its inverse in case of a bidirectional
 	 * relation) from the database.
 	 *
 	 * @param  relation the relation to be removed
-	 * @throws PortalException if the inverse relation could not be found
+	 * @throws PortalException if the relation is bidirectional and its inverse
+	 *         relation could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void deleteRelation(SocialRelation relation)
@@ -180,7 +184,7 @@ public class SocialRelationLocalServiceImpl
 	}
 
 	/**
-	 * Removes all relations from the database the user is part of.
+	 * Removes all relations involving the user from the database.
 	 *
 	 * @param  userId the primary key of the user
 	 * @throws SystemException if a system exception occurred
@@ -191,7 +195,7 @@ public class SocialRelationLocalServiceImpl
 	}
 
 	/**
-	 * Removes all relations between user1 and user2.
+	 * Removes all relations between User1 and User2.
 	 *
 	 * @param  userId1 the user that is the subject of the relation
 	 * @param  userId2 the user at the other end of the relation
@@ -210,8 +214,8 @@ public class SocialRelationLocalServiceImpl
 	}
 
 	/**
-	 * Returns a range of all the inverse relations of the given type for the
-	 * user.
+	 * Returns a range of all the inverse relations of the given type for which
+	 * the user is User2 of the relation.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end -
@@ -224,10 +228,10 @@ public class SocialRelationLocalServiceImpl
 	 * </p>
 	 *
 	 * @param  userId the primary key of the user
-	 * @param  type the type of the relation
+	 * @param  type the relation's type
 	 * @param  start the lower bound of the range of results
 	 * @param  end the upper bound of the range of results (not inclusive)
-	 * @return the range of relations
+	 * @return the range of matching relations
 	 * @throws SystemException if a system exception occurred
 	 */
 	public List<SocialRelation> getInverseRelations(
@@ -238,11 +242,12 @@ public class SocialRelationLocalServiceImpl
 	}
 
 	/**
-	 * Returns the number of inverse relations of the given type for the user.
+	 * Returns the number of inverse relations of the given type for which the
+	 * user is User2 of the relation.
 	 *
 	 * @param  userId the primary key of the user
-	 * @param  type the type of the relation
-	 * @return the number of relations
+	 * @param  type the relation's type
+	 * @return the number of matching relations
 	 * @throws SystemException if a system exception occurred
 	 */
 	public int getInverseRelationsCount(long userId, int type)
@@ -266,11 +271,11 @@ public class SocialRelationLocalServiceImpl
 	}
 
 	/**
-	 * Returns the relation with the given type between user1 and user2.
+	 * Returns the relation of the given type between User1 and User2.
 	 *
 	 * @param  userId1 the user that is the subject of the relation
 	 * @param  userId2 the user at the other end of the relation
-	 * @param  type the type of the relation
+	 * @param  type the relation's type
 	 * @return Returns the relation
 	 * @throws PortalException if the relation could not be found
 	 * @throws SystemException if a system exception occurred
@@ -283,8 +288,8 @@ public class SocialRelationLocalServiceImpl
 	}
 
 	/**
-	 * Returns a range of all the relations with the given type where the user
-	 * is the subject of the relation.
+	 * Returns a range of all the relations of the given type where the user is
+	 * the subject of the relation.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end -
@@ -297,7 +302,7 @@ public class SocialRelationLocalServiceImpl
 	 * </p>
 	 *
 	 * @param  userId the primary key of the user
-	 * @param  type the type of the relation
+	 * @param  type the relation's type
 	 * @param  start the lower bound of the range of results
 	 * @param  end the upper bound of the range of results (not inclusive)
 	 * @return the range of relations
@@ -311,7 +316,7 @@ public class SocialRelationLocalServiceImpl
 	}
 
 	/**
-	 * Returns a range of all the relations between user1 and user2.
+	 * Returns a range of all the relations between User1 and User2.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end -
@@ -339,11 +344,11 @@ public class SocialRelationLocalServiceImpl
 	}
 
 	/**
-	 * Returns the number of relations with the given type where the user is
-	 * the subject of the relation.
+	 * Returns the number of relations of the given type where the user is the
+	 * subject of the relation.
 	 *
 	 * @param  userId the primary key of the user
-	 * @param  type the type of the relation
+	 * @param  type the relation's type
 	 * @return the number of relations
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -352,7 +357,7 @@ public class SocialRelationLocalServiceImpl
 	}
 
 	/**
-	 * Returns the number of relations between user1 and user2.
+	 * Returns the number of relations between User1 and User2.
 	 *
 	 * @param  userId1 the user that is the subject of the relation
 	 * @param  userId2 the user at the other end of the relation
@@ -366,12 +371,14 @@ public class SocialRelationLocalServiceImpl
 	}
 
 	/**
-	 * Returns <code>true</code> if a relation with the given type exists
-	 * between user1 and user2.
+	 * Returns <code>true</code> if a relation of the given type exists where
+	 * the user with primary key <code>userId1</code> is User1 of the relation
+	 * and the user with the primary key <code>userId2</code> is User2 of the
+	 * relation.
 	 *
 	 * @param  userId1 the user that is the subject of the relation
 	 * @param  userId2 the user at the other end of the relation
-	 * @param  type the type of the relation
+	 * @param  type the relation's type
 	 * @return <code>true</code> if the relation exists; <code>false</code>
 	 *         otherwise
 	 * @throws SystemException if a system exception occurred
@@ -391,21 +398,22 @@ public class SocialRelationLocalServiceImpl
 	}
 
 	/**
-	 * Returns <code>true</code> if user1 and user2 can be in a relation with
-	 * the given type.
+	 * Returns <code>true</code> if the users can be in a relation of the given
+	 * type where the user with primary key <code>userId1</code> is User1 of
+	 * the relation and the user with the primary key <code>userId2</code> is
+	 * User2 of the relation.
 	 *
 	 * <p>
-	 * This method returns <code>false</code> when user1 and user2 are the
-	 * same, or when any of the users is the default user. It also returns
-	 * <code>false</code> if a relation with the given type already exists
-	 * between the two users.
+	 * This method returns <code>false</code> if User1 and User2 are the same,
+	 * if either user is the default user, or if a matching relation already
+	 * exists.
 	 * </p>
 	 *
 	 * @param  userId1 the user that is the subject of the relation
 	 * @param  userId2 the user at the other end of the relation
-	 * @param  type the type of the relation
-	 * @return <code>true</code> if the two users can be in the given relation;
-	 *         <code>false</code> otherwise
+	 * @param  type the relation's type
+	 * @return <code>true</code> if the two users can be in a new relation of
+	 *         the given type; <code>false</code> otherwise
 	 * @throws SystemException if a system exception occurred
 	 */
 	public boolean isRelatable(long userId1, long userId2, int type)
