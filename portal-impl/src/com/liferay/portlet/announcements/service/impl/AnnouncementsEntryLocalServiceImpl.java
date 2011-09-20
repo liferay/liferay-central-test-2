@@ -348,7 +348,6 @@ public class AnnouncementsEntryLocalServiceImpl
 		String fromName = PrefsPropsUtil.getStringFromNames(
 			entry.getCompanyId(), PropsValues.ANNOUNCEMENTS_EMAIL_FROM_NAME,
 			PropsKeys.ADMIN_EMAIL_FROM_NAME);
-
 		String fromAddress = PrefsPropsUtil.getStringFromNames(
 			entry.getCompanyId(), PropsValues.ANNOUNCEMENTS_EMAIL_FROM_ADDRESS,
 			PropsKeys.ADMIN_EMAIL_FROM_ADDRESS);
