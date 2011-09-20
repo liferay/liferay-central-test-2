@@ -1274,7 +1274,6 @@ public class MainServlet extends ActionServlet {
 			WebKeys.STARTUP_FINISHED);
 
 		if ((startupFinished == null) || !startupFinished.booleanValue()) {
-
 			return false;
 		}
 
