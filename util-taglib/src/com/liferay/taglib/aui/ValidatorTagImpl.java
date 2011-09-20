@@ -35,13 +35,13 @@ public class ValidatorTagImpl
 	}
 
 	public ValidatorTagImpl(
-		String name, String errorMessage, String body, boolean isCustom) {
+		String name, String errorMessage, String body, boolean custom) {
 
 		setName(name);
 		setErrorMessage(errorMessage);
 
 		_body = body;
-		_custom = isCustom;
+		_custom = custom;
 	}
 
 	@Override
@@ -73,7 +73,7 @@ public class ValidatorTagImpl
 		_custom = ModelHintsUtil.isCustomValidator(name);
 
 		if (_custom) {
-			name = ModelHintsUtil.processCustomValidatorName(name);
+			name = ModelHintsUtil.buildCustomValidatorName(name);
 		}
 
 		ValidatorTag validatorTag = new ValidatorTagImpl(

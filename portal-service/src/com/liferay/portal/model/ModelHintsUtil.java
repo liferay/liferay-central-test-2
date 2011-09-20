@@ -25,6 +25,10 @@ import java.util.Map;
  */
 public class ModelHintsUtil {
 
+	public static String buildCustomValidatorName(String validatorName) {
+		return getModelHints().buildCustomValidatorName(validatorName);
+	}
+
 	public static Map<String, String> getDefaultHints(String model) {
 		return getModelHints().getDefaultHints(model);
 	}
@@ -67,10 +71,6 @@ public class ModelHintsUtil {
 
 	public static boolean isLocalized(String model, String field) {
 		return getModelHints().isLocalized(model, field);
-	}
-
-	public static String processCustomValidatorName(String validatorName) {
-		return getModelHints().processCustomValidatorName(validatorName);
 	}
 
 	public static void read(ClassLoader classLoader, String source)

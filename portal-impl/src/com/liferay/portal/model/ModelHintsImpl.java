@@ -69,6 +69,11 @@ public class ModelHintsImpl implements ModelHints {
 		}
 	}
 
+	public String buildCustomValidatorName(String validatorName) {
+		return validatorName.concat(StringPool.UNDERLINE).concat(
+			PwdGenerator.getPassword(PwdGenerator.KEY3, 4));
+	}
+
 	public Map<String, String> getDefaultHints(String model) {
 		return _defaultHints.get(model);
 	}
@@ -198,12 +203,6 @@ public class ModelHintsImpl implements ModelHints {
 				return false;
 			}
 		}
-	}
-
-	public String processCustomValidatorName(String validatorName) {
-		return validatorName.concat(
-			StringPool.UNDERLINE).concat(
-				PwdGenerator.getPassword(PwdGenerator.KEY3, 4));
 	}
 
 	public void read(ClassLoader classLoader, String source) throws Exception {
@@ -361,17 +360,15 @@ public class ModelHintsImpl implements ModelHints {
 						validator.attributeValue("error-message"));
 					String validatorValue = GetterUtil.getString(
 						validator.getText());
-					boolean isCustomValidator = isCustomValidator(
-						validatorName);
+					boolean customValidator = isCustomValidator(validatorName);
 
-					if (isCustomValidator) {
-						validatorName = processCustomValidatorName(
-							validatorName);
+					if (customValidator) {
+						validatorName = buildCustomValidatorName(validatorName);
 					}
 
 					Tuple fieldValidator = new Tuple(
 						fieldName, validatorName, validatorErrorMessage,
-						validatorValue, isCustomValidator);
+						validatorValue, customValidator);
 
 					fieldValidators.put(validatorName, fieldValidator);
 				}
