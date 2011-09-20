@@ -31,6 +31,7 @@ import com.xuggle.xuggler.IContainer;
 
 import java.io.File;
 import java.io.InputStream;
+
 import java.text.DecimalFormat;
 
 import org.apache.tika.metadata.Metadata;
@@ -95,15 +96,17 @@ public class XugglerRawMetadataProcessor extends BaseRawMetadataProcessor {
 	protected String convertTime(long microseconds) {
 		long milliseconds = microseconds / 1000L;
 
-		StringBundler sb = new StringBundler(5);
+		StringBundler sb = new StringBundler(7);
 
-		sb.append(_formatter.format(milliseconds / Time.HOUR));
+		sb.append(_decimalFormatter.format(milliseconds / Time.HOUR));
 		sb.append(StringPool.COLON);
-		sb.append(_formatter.format(milliseconds % Time.HOUR / Time.MINUTE));
+		sb.append(
+			_decimalFormatter.format(milliseconds % Time.HOUR / Time.MINUTE));
 		sb.append(StringPool.COLON);
-		sb.append(_formatter.format(milliseconds % Time.MINUTE / Time.SECOND));
+		sb.append(
+			_decimalFormatter.format(milliseconds % Time.MINUTE / Time.SECOND));
 		sb.append(StringPool.PERIOD);
-		sb.append(_formatter.format(milliseconds % Time.SECOND / 10));
+		sb.append(_decimalFormatter.format(milliseconds % Time.SECOND / 10));
 
 		return sb.toString();
 	}
@@ -151,9 +154,9 @@ public class XugglerRawMetadataProcessor extends BaseRawMetadataProcessor {
 		}
 	}
 
-	private static final DecimalFormat _formatter = new DecimalFormat("00");
-
 	private static Log _log = LogFactoryUtil.getLog(
 		XugglerRawMetadataProcessor.class);
+
+	private static DecimalFormat _decimalFormatter = new DecimalFormat("00");
 
 }

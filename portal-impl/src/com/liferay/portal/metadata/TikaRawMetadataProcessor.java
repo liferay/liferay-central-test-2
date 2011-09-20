@@ -82,7 +82,7 @@ public class TikaRawMetadataProcessor extends XugglerRawMetadataProcessor {
 
 		metadata.remove(XMPDM.ABS_PEAK_AUDIO_FILE_PATH.getName());
 		metadata.remove(XMPDM.RELATIVE_PEAK_AUDIO_FILE_PATH.getName());
-		
+
 		return metadata;
 	}
 
