@@ -108,7 +108,7 @@ public class DDLUtil {
 
 				if (ddmStructure.getFieldDisplayChildLabelAsValue(fieldName)) {
 					Map<String, String> childFields = ddmStructure.getFields(
-							fieldName, FieldConstants.VALUE, (String)fieldValue);
+						fieldName, FieldConstants.VALUE, (String)fieldValue);
 
 					if (childFields != null) {
 						fieldValue = childFields.get(FieldConstants.LABEL);
