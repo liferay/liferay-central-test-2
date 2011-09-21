@@ -314,7 +314,7 @@ if (row == null && (portletName.equals(PortletKeys.DOCUMENT_LIBRARY_DISPLAY) || 
 				<liferay-ui:icon
 					cssClass="aui-helper-hidden upload-multiple-documents"
 					image="../document_library/add_multiple_documents"
-					message="<%= portletName.equals(PortletKeys.IMAGE_GALLERY_DISPLAY) ? "multiple-media" : "multiple-documents" %>"
+					message='<%= portletName.equals(PortletKeys.IMAGE_GALLERY_DISPLAY) ? "multiple-media" : "multiple-documents" %>'
 					url="<%= editFileEntryURL %>"
 				/>
 			</c:if>
@@ -338,7 +338,7 @@ if (row == null && (portletName.equals(PortletKeys.DOCUMENT_LIBRARY_DISPLAY) || 
 
 				<liferay-ui:icon
 					image="../document_library/add_document"
-					message="<%= portletName.equals(PortletKeys.IMAGE_GALLERY_DISPLAY) ? "add-media" : "add-document" %>"
+					message='<%= portletName.equals(PortletKeys.IMAGE_GALLERY_DISPLAY) ? "add-media" : "add-document" %>'
 					url="<%= fileEntryTypesCount > 0 ? taglibEditURL : editFileEntryURL %>"
 				/>
 			</c:if>
