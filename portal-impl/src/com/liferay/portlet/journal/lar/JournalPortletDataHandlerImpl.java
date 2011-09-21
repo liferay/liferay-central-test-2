@@ -1494,12 +1494,12 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		String oldGroupFriendlyURL = friendlyUrlParts[2];
 
 		if (newGroupFriendlyURL.equals(oldGroupFriendlyURL)) {
-			feed.setTargetLayoutFriendlyUrl(
-				StringUtil.replaceFirst(
-					feed.getTargetLayoutFriendlyUrl(),
-					StringPool.SLASH + newGroupFriendlyURL + StringPool.SLASH,
-					StringPool.SLASH + "@data_handler_group_friendly_url@" +
-						StringPool.SLASH));
+			String targetLayoutFriendlyUrl = StringUtil.replaceFirst(
+				feed.getTargetLayoutFriendlyUrl(),
+				StringPool.SLASH + newGroupFriendlyURL + StringPool.SLASH,
+				"/@data_handler_group_friendly_url@/");
+
+			feed.setTargetLayoutFriendlyUrl(targetLayoutFriendlyUrl);
 		}
 
 		portletDataContext.addClassedModel(feedElement, path, feed, _NAMESPACE);
