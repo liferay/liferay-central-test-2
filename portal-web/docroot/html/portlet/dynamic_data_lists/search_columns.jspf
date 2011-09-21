@@ -24,7 +24,6 @@
 <liferay-ui:search-container-column-text
 	href="<%= rowURL %>"
 	name="name"
-	property="name"
 	orderable="<%= false %>"
 />
 
