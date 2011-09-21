@@ -104,11 +104,11 @@ public class JSONWebServiceActionImpl implements JSONWebServiceAction {
 			if (value != null) {
 				Class<?> parameterType = parameterTypes[i];
 
-				if (value == Void.TYPE) {
+				if (value.equals(Void.TYPE)) {
 					parameterValue = _createDefaultParameterValue(
 						parameterName, parameterType);
 				}
-				else if (parameterType == Locale.class) {
+				else if (parameterType.equals(Locale.class)) {
 					parameterValue = LocaleUtil.fromLanguageId(
 						value.toString());
 				}
