@@ -33,13 +33,20 @@ public abstract class OrderByComparator implements Comparator, Serializable {
 		return null;
 	}
 
-	/**
-	 * Subset of {@link #getOrderByFields()} that should appears in conditional
-	 * part of the SQL query. There are cases when only few of order-by-fields
-	 * have to be used as condition.By default returns all order-by-fields.
-	 */
 	public String[] getOrderByConditionFields() {
 		return getOrderByFields();
+	}
+
+	public Object[] getOrderByConditionValues(Object obj) {
+		String[] fields = getOrderByConditionFields();
+
+		Object[] values = new Object[fields.length];
+
+		for (int i = 0; i < fields.length; i++) {
+			values[i] = BeanPropertiesUtil.getObject(obj, fields[i]);
+		}
+
+		return values;
 	}
 
 	public String[] getOrderByFields() {
@@ -67,18 +74,6 @@ public abstract class OrderByComparator implements Comparator, Serializable {
 		}
 
 		return fields;
-	}
-
-	public Object[] getOrderByConditionValues(Object obj) {
-		String[] fields = getOrderByConditionFields();
-
-		Object[] values = new Object[fields.length];
-
-		for (int i = 0; i < fields.length; i++) {
-			values[i] = BeanPropertiesUtil.getObject(obj, fields[i]);
-		}
-
-		return values;
 	}
 
 	public boolean isAscending() {
