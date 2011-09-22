@@ -12,17 +12,21 @@
  * details.
  */
 
-package com.liferay.portal.kernel.adaptor;
+package com.liferay.portal.adaptor.osgi;
 
 /**
  * @author Raymond Augé
  */
-public interface Adaptor {
+public class BaseListener {
 
-	public void init(Object applicationContext) throws AdaptorException;
+	protected String getLogMessage(String state, Object object) {
+		return getLogMessage(state, String.valueOf(object));
+	}
 
-	public void start() throws AdaptorException;
+	protected String getLogMessage(String state, String message) {
+		return String.format(_LOG_MESSAGE_FORMAT, state, message);
+	}
 
-	public void stop() throws AdaptorException;
+	private static final String _LOG_MESSAGE_FORMAT = "%1$18s %2$s";
 
 }
