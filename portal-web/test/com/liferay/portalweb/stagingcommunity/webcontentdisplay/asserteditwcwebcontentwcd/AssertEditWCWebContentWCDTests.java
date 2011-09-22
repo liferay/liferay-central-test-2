@@ -32,7 +32,6 @@ public class AssertEditWCWebContentWCDTests extends BaseTests {
 		testSuite.addTestSuite(AddPageWCDTest.class);
 		testSuite.addTestSuite(AddPortletWCDTest.class);
 		testSuite.addTestSuite(AddWCWebContentWCDTest.class);
-		testSuite.addTestSuite(SelectWCWebContentWCDTest.class);
 		testSuite.addTestSuite(ActivateStagingTest.class);
 		testSuite.addTestSuite(AssertCannotEditWCWebContentWCDTest.class);
 		testSuite.addTestSuite(DeactivateStagingTest.class);

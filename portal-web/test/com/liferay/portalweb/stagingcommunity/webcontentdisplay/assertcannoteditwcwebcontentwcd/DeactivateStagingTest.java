@@ -30,7 +30,7 @@ public class DeactivateStagingTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Control Panel")) {
+				if (selenium.isVisible("link=Control Panel")) {
 					break;
 				}
 			}
@@ -56,8 +56,8 @@ public class DeactivateStagingTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("Actions"),
-			selenium.getText("//td[7]/span/ul/li/strong/a/span"));
-		selenium.click("//td[7]/span/ul/li/strong/a/span");
+			selenium.getText("//td[6]/span/ul/li/strong/a/span"));
+		selenium.click("//td[6]/span/ul/li/strong/a/span");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

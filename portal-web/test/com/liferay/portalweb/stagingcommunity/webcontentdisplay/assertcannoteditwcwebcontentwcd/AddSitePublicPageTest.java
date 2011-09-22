@@ -35,7 +35,7 @@ public class AddSitePublicPageTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent("link=Control Panel")) {
+						if (selenium.isVisible("link=Control Panel")) {
 							break;
 						}
 					}
@@ -63,8 +63,8 @@ public class AddSitePublicPageTest extends BaseTestCase {
 				assertEquals(RuntimeVariables.replace("Site Name"),
 					selenium.getText("//tr[3]/td[1]"));
 				assertEquals(RuntimeVariables.replace("Actions"),
-					selenium.getText("//td[7]/span/ul/li/strong"));
-				selenium.clickAt("//td[7]/span/ul/li/strong",
+					selenium.getText("//td[6]/span/ul/li/strong"));
+				selenium.clickAt("//td[6]/span/ul/li/strong",
 					RuntimeVariables.replace("Actions"));
 
 				for (int second = 0;; second++) {
