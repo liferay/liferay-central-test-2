@@ -61,8 +61,8 @@ public class TearDownSiteTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
 
-				boolean site1Present = selenium.isPartialText("//tr[3]/td[1]",
-						"Site Name");
+				boolean site1Present = selenium.isElementPresent(
+						"//td[6]/span/ul/li/strong/a/span");
 
 				if (!site1Present) {
 					label = 2;
@@ -71,8 +71,8 @@ public class TearDownSiteTest extends BaseTestCase {
 				}
 
 				assertEquals(RuntimeVariables.replace("Actions"),
-					selenium.getText("//td[7]/span/ul/li/strong/a"));
-				selenium.clickAt("//td[7]/span/ul/li/strong/a",
+					selenium.getText("//td[6]/span/ul/li/strong/a/span"));
+				selenium.clickAt("//td[6]/span/ul/li/strong/a/span",
 					RuntimeVariables.replace("Actions"));
 
 				for (int second = 0;; second++) {
@@ -82,7 +82,7 @@ public class TearDownSiteTest extends BaseTestCase {
 
 					try {
 						if (selenium.isVisible(
-									"//div[@class='lfr-component lfr-menu-list']/ul/li[7]/a")) {
+									"//div[@class='lfr-component lfr-menu-list']/ul/li[@class='last']/a")) {
 							break;
 						}
 					}
@@ -95,9 +95,9 @@ public class TearDownSiteTest extends BaseTestCase {
 				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace("Delete"),
 					selenium.getText(
-						"//div[@class='lfr-component lfr-menu-list']/ul/li[7]/a"));
+						"//div[@class='lfr-component lfr-menu-list']/ul/li[@class='last']/a"));
 				selenium.click(RuntimeVariables.replace(
-						"//div[@class='lfr-component lfr-menu-list']/ul/li[7]/a"));
+						"//div[@class='lfr-component lfr-menu-list']/ul/li[@class='last']/a"));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
@@ -108,8 +108,8 @@ public class TearDownSiteTest extends BaseTestCase {
 
 			case 2:
 
-				boolean site2Present = selenium.isPartialText("//tr[3]/td[1]",
-						"Site Name");
+				boolean site2Present = selenium.isElementPresent(
+						"//td[6]/span/ul/li/strong/a/span");
 
 				if (!site2Present) {
 					label = 3;
@@ -118,8 +118,8 @@ public class TearDownSiteTest extends BaseTestCase {
 				}
 
 				assertEquals(RuntimeVariables.replace("Actions"),
-					selenium.getText("//td[7]/span/ul/li/strong/a"));
-				selenium.clickAt("//td[7]/span/ul/li/strong/a",
+					selenium.getText("//td[6]/span/ul/li/strong/a/span"));
+				selenium.clickAt("//td[6]/span/ul/li/strong/a/span",
 					RuntimeVariables.replace("Actions"));
 
 				for (int second = 0;; second++) {
@@ -129,7 +129,7 @@ public class TearDownSiteTest extends BaseTestCase {
 
 					try {
 						if (selenium.isVisible(
-									"//div[@class='lfr-component lfr-menu-list']/ul/li[7]/a")) {
+									"//div[@class='lfr-component lfr-menu-list']/ul/li[@class='last']/a")) {
 							break;
 						}
 					}
@@ -142,9 +142,9 @@ public class TearDownSiteTest extends BaseTestCase {
 				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace("Delete"),
 					selenium.getText(
-						"//div[@class='lfr-component lfr-menu-list']/ul/li[7]/a"));
+						"//div[@class='lfr-component lfr-menu-list']/ul/li[@class='last']/a"));
 				selenium.click(RuntimeVariables.replace(
-						"//div[@class='lfr-component lfr-menu-list']/ul/li[7]/a"));
+						"//div[@class='lfr-component lfr-menu-list']/ul/li[@class='last']/a"));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
@@ -155,8 +155,8 @@ public class TearDownSiteTest extends BaseTestCase {
 
 			case 3:
 
-				boolean site3Present = selenium.isPartialText("//tr[3]/td[1]",
-						"Site Name");
+				boolean site3Present = selenium.isElementPresent(
+						"//td[6]/span/ul/li/strong/a/span");
 
 				if (!site3Present) {
 					label = 4;
@@ -165,8 +165,8 @@ public class TearDownSiteTest extends BaseTestCase {
 				}
 
 				assertEquals(RuntimeVariables.replace("Actions"),
-					selenium.getText("//td[7]/span/ul/li/strong/a"));
-				selenium.clickAt("//td[7]/span/ul/li/strong/a",
+					selenium.getText("//td[6]/span/ul/li/strong/a/span"));
+				selenium.clickAt("//td[6]/span/ul/li/strong/a/span",
 					RuntimeVariables.replace("Actions"));
 
 				for (int second = 0;; second++) {
@@ -176,7 +176,7 @@ public class TearDownSiteTest extends BaseTestCase {
 
 					try {
 						if (selenium.isVisible(
-									"//div[@class='lfr-component lfr-menu-list']/ul/li[7]/a")) {
+									"//div[@class='lfr-component lfr-menu-list']/ul/li[@class='last']/a")) {
 							break;
 						}
 					}
@@ -189,9 +189,9 @@ public class TearDownSiteTest extends BaseTestCase {
 				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace("Delete"),
 					selenium.getText(
-						"//div[@class='lfr-component lfr-menu-list']/ul/li[7]/a"));
+						"//div[@class='lfr-component lfr-menu-list']/ul/li[@class='last']/a"));
 				selenium.click(RuntimeVariables.replace(
-						"//div[@class='lfr-component lfr-menu-list']/ul/li[7]/a"));
+						"//div[@class='lfr-component lfr-menu-list']/ul/li[@class='last']/a"));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
@@ -202,8 +202,8 @@ public class TearDownSiteTest extends BaseTestCase {
 
 			case 4:
 
-				boolean site4Present = selenium.isPartialText("//tr[3]/td[1]",
-						"Site Name");
+				boolean site4Present = selenium.isElementPresent(
+						"//td[6]/span/ul/li/strong/a/span");
 
 				if (!site4Present) {
 					label = 5;
@@ -212,8 +212,8 @@ public class TearDownSiteTest extends BaseTestCase {
 				}
 
 				assertEquals(RuntimeVariables.replace("Actions"),
-					selenium.getText("//td[7]/span/ul/li/strong/a"));
-				selenium.clickAt("//td[7]/span/ul/li/strong/a",
+					selenium.getText("//td[6]/span/ul/li/strong/a/span"));
+				selenium.clickAt("//td[6]/span/ul/li/strong/a/span",
 					RuntimeVariables.replace("Actions"));
 
 				for (int second = 0;; second++) {
@@ -223,7 +223,7 @@ public class TearDownSiteTest extends BaseTestCase {
 
 					try {
 						if (selenium.isVisible(
-									"//div[@class='lfr-component lfr-menu-list']/ul/li[7]/a")) {
+									"//div[@class='lfr-component lfr-menu-list']/ul/li[@class='last']/a")) {
 							break;
 						}
 					}
@@ -236,9 +236,9 @@ public class TearDownSiteTest extends BaseTestCase {
 				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace("Delete"),
 					selenium.getText(
-						"//div[@class='lfr-component lfr-menu-list']/ul/li[7]/a"));
+						"//div[@class='lfr-component lfr-menu-list']/ul/li[@class='last']/a"));
 				selenium.click(RuntimeVariables.replace(
-						"//div[@class='lfr-component lfr-menu-list']/ul/li[7]/a"));
+						"//div[@class='lfr-component lfr-menu-list']/ul/li[@class='last']/a"));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
@@ -249,8 +249,8 @@ public class TearDownSiteTest extends BaseTestCase {
 
 			case 5:
 
-				boolean site5Present = selenium.isPartialText("//tr[3]/td[1]",
-						"Site Name");
+				boolean site5Present = selenium.isElementPresent(
+						"//td[6]/span/ul/li/strong/a/span");
 
 				if (!site5Present) {
 					label = 6;
@@ -259,8 +259,8 @@ public class TearDownSiteTest extends BaseTestCase {
 				}
 
 				assertEquals(RuntimeVariables.replace("Actions"),
-					selenium.getText("//td[7]/span/ul/li/strong/a"));
-				selenium.clickAt("//td[7]/span/ul/li/strong/a",
+					selenium.getText("//td[6]/span/ul/li/strong/a/span"));
+				selenium.clickAt("//td[6]/span/ul/li/strong/a/span",
 					RuntimeVariables.replace("Actions"));
 
 				for (int second = 0;; second++) {
@@ -270,7 +270,7 @@ public class TearDownSiteTest extends BaseTestCase {
 
 					try {
 						if (selenium.isVisible(
-									"//div[@class='lfr-component lfr-menu-list']/ul/li[7]/a")) {
+									"//div[@class='lfr-component lfr-menu-list']/ul/li[@class='last']/a")) {
 							break;
 						}
 					}
@@ -283,9 +283,9 @@ public class TearDownSiteTest extends BaseTestCase {
 				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace("Delete"),
 					selenium.getText(
-						"//div[@class='lfr-component lfr-menu-list']/ul/li[7]/a"));
+						"//div[@class='lfr-component lfr-menu-list']/ul/li[@class='last']/a"));
 				selenium.click(RuntimeVariables.replace(
-						"//div[@class='lfr-component lfr-menu-list']/ul/li[7]/a"));
+						"//div[@class='lfr-component lfr-menu-list']/ul/li[@class='last']/a"));
 				selenium.waitForPageToLoad("30000");
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));

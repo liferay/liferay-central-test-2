@@ -40,12 +40,12 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//td[7]/span/ul/li/strong/a/span</td>
+	<td>//td[6]/span/ul/li/strong/a/span</td>
 	<td>Actions</td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//td[7]/span/ul/li/strong/a/span</td>
+	<td>//td[6]/span/ul/li/strong/a/span</td>
 	<td>Actions</td>
 </tr>
 <tr>
@@ -165,6 +165,26 @@
 </tr>
 <tr>
 	<td>store</td>
+	<td>eval(selenium.isChecked('_165_staged-portlet_166Checkbox'))</td>
+	<td>dynamicDataMappingChecked</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>${dynamicDataMappingChecked}</td>
+	<td>DynamicDataMappingChecked</td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>//input[@id='_165_staged-portlet_166Checkbox']</td>
+	<td>Dynamic Data Mapping</td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>DynamicDataMappingChecked</td>
+	<td></td>
+</tr>
+<tr>
+	<td>store</td>
 	<td>eval(selenium.isChecked('_165_staged-portlet_162Checkbox'))</td>
 	<td>messageBoardsChecked</td>
 </tr>
@@ -221,6 +241,26 @@
 <tr>
 	<td>label</td>
 	<td>PageRatingsChecked</td>
+	<td></td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>eval(selenium.isChecked('_165_staged-portlet_25Checkbox'))</td>
+	<td>pollsChecked</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>${pollsChecked}</td>
+	<td>PollsChecked</td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>//input[@id='_165_staged-portlet_25Checkbox']</td>
+	<td>Polls</td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>PollsChecked</td>
 	<td></td>
 </tr>
 <tr>
@@ -328,7 +368,6 @@
 	<td>//h1[@class='header-title']/span</td>
 	<td>Site Name (Staging)</td>
 </tr>
-
 </tbody></table>
 </body>
 </html>

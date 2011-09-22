@@ -61,8 +61,8 @@ public class ActivateStagingTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace("Actions"),
-					selenium.getText("//td[7]/span/ul/li/strong/a/span"));
-				selenium.click("//td[7]/span/ul/li/strong/a/span");
+					selenium.getText("//td[6]/span/ul/li/strong/a/span"));
+				selenium.click("//td[6]/span/ul/li/strong/a/span");
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -171,11 +171,25 @@ public class ActivateStagingTest extends BaseTestCase {
 
 			case 5:
 
+				boolean dynamicDataMappingChecked = selenium.isChecked(
+						"_165_staged-portlet_166Checkbox");
+
+				if (dynamicDataMappingChecked) {
+					label = 6;
+
+					continue;
+				}
+
+				selenium.clickAt("//input[@id='_165_staged-portlet_166Checkbox']",
+					RuntimeVariables.replace("Dynamic Data Mapping"));
+
+			case 6:
+
 				boolean messageBoardsChecked = selenium.isChecked(
 						"_165_staged-portlet_162Checkbox");
 
 				if (messageBoardsChecked) {
-					label = 6;
+					label = 7;
 
 					continue;
 				}
@@ -183,13 +197,13 @@ public class ActivateStagingTest extends BaseTestCase {
 				selenium.clickAt("//input[@id='_165_staged-portlet_162Checkbox']",
 					RuntimeVariables.replace("Message Boards"));
 
-			case 6:
+			case 7:
 
 				boolean pageCommentsChecked = selenium.isChecked(
 						"_165_staged-portlet_107Checkbox");
 
 				if (pageCommentsChecked) {
-					label = 7;
+					label = 8;
 
 					continue;
 				}
@@ -197,13 +211,13 @@ public class ActivateStagingTest extends BaseTestCase {
 				selenium.clickAt("//input[@id='_165_staged-portlet_107Checkbox']",
 					RuntimeVariables.replace("Page Comments"));
 
-			case 7:
+			case 8:
 
 				boolean pageRatingsChecked = selenium.isChecked(
 						"_165_staged-portlet_108Checkbox");
 
 				if (pageRatingsChecked) {
-					label = 8;
+					label = 9;
 
 					continue;
 				}
@@ -211,13 +225,27 @@ public class ActivateStagingTest extends BaseTestCase {
 				selenium.clickAt("//input[@id='_165_staged-portlet_108Checkbox']",
 					RuntimeVariables.replace("Page Ratings"));
 
-			case 8:
+			case 9:
+
+				boolean pollsChecked = selenium.isChecked(
+						"_165_staged-portlet_25Checkbox");
+
+				if (pollsChecked) {
+					label = 10;
+
+					continue;
+				}
+
+				selenium.clickAt("//input[@id='_165_staged-portlet_25Checkbox']",
+					RuntimeVariables.replace("Polls"));
+
+			case 10:
 
 				boolean pollsDisplayChecked = selenium.isChecked(
 						"_165_staged-portlet_59Checkbox");
 
 				if (pollsDisplayChecked) {
-					label = 9;
+					label = 11;
 
 					continue;
 				}
@@ -225,13 +253,13 @@ public class ActivateStagingTest extends BaseTestCase {
 				selenium.clickAt("//input[@id='_165_staged-portlet_59Checkbox']",
 					RuntimeVariables.replace("Polls Display"));
 
-			case 9:
+			case 11:
 
 				boolean webContentDisplayChecked = selenium.isChecked(
 						"_165_staged-portlet_56Checkbox");
 
 				if (webContentDisplayChecked) {
-					label = 10;
+					label = 12;
 
 					continue;
 				}
@@ -239,13 +267,13 @@ public class ActivateStagingTest extends BaseTestCase {
 				selenium.clickAt("//input[@id='_165_staged-portlet_56Checkbox']",
 					RuntimeVariables.replace("Web Content Display"));
 
-			case 10:
+			case 12:
 
 				boolean wikiChecked = selenium.isChecked(
 						"_165_staged-portlet_36Checkbox");
 
 				if (wikiChecked) {
-					label = 11;
+					label = 13;
 
 					continue;
 				}
@@ -253,13 +281,13 @@ public class ActivateStagingTest extends BaseTestCase {
 				selenium.clickAt("//input[@id='_165_staged-portlet_36Checkbox']",
 					RuntimeVariables.replace("Wiki"));
 
-			case 11:
+			case 13:
 
 				boolean wikiDisplayChecked = selenium.isChecked(
 						"_165_staged-portlet_54Checkbox");
 
 				if (wikiDisplayChecked) {
-					label = 12;
+					label = 14;
 
 					continue;
 				}
@@ -267,7 +295,7 @@ public class ActivateStagingTest extends BaseTestCase {
 				selenium.clickAt("//input[@id='_165_staged-portlet_54Checkbox']",
 					RuntimeVariables.replace("Wiki Display Checked"));
 
-			case 12:
+			case 14:
 				selenium.clickAt("//input[@value='Save']",
 					RuntimeVariables.replace("Save"));
 				selenium.waitForPageToLoad("30000");
