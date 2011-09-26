@@ -152,13 +152,7 @@
 			var triggerTop = cached.get('currentNode').getY();
 
 			if (triggerTop - tooltipHeight < 0) {
-				cached.align(
-					trigger,
-					[
-						'tl',
-						'tr'
-					]
-				);
+				cached.align(trigger, ['tl', 'bl']);
 			}
 			else {
 				cached.refreshAlign();
