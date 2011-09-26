@@ -171,7 +171,17 @@ public class AssetTagPropertyModelImpl extends BaseModelImpl<AssetTagProperty>
 	}
 
 	public void setCompanyId(long companyId) {
+		if (!_setOriginalCompanyId) {
+			_setOriginalCompanyId = true;
+
+			_originalCompanyId = _companyId;
+		}
+
 		_companyId = companyId;
+	}
+
+	public long getOriginalCompanyId() {
+		return _originalCompanyId;
 	}
 
 	@JSON
@@ -374,6 +384,10 @@ public class AssetTagPropertyModelImpl extends BaseModelImpl<AssetTagProperty>
 	public void resetOriginalValues() {
 		AssetTagPropertyModelImpl assetTagPropertyModelImpl = this;
 
+		assetTagPropertyModelImpl._originalCompanyId = assetTagPropertyModelImpl._companyId;
+
+		assetTagPropertyModelImpl._setOriginalCompanyId = false;
+
 		assetTagPropertyModelImpl._originalTagId = assetTagPropertyModelImpl._tagId;
 
 		assetTagPropertyModelImpl._setOriginalTagId = false;
@@ -520,6 +534,8 @@ public class AssetTagPropertyModelImpl extends BaseModelImpl<AssetTagProperty>
 		};
 	private long _tagPropertyId;
 	private long _companyId;
+	private long _originalCompanyId;
+	private boolean _setOriginalCompanyId;
 	private long _userId;
 	private String _userUuid;
 	private String _userName;

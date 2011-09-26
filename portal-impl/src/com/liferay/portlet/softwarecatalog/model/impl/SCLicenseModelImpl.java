@@ -218,7 +218,17 @@ public class SCLicenseModelImpl extends BaseModelImpl<SCLicense>
 	}
 
 	public void setActive(boolean active) {
+		if (!_setOriginalActive) {
+			_setOriginalActive = true;
+
+			_originalActive = _active;
+		}
+
 		_active = active;
+	}
+
+	public boolean getOriginalActive() {
+		return _originalActive;
 	}
 
 	@JSON
@@ -231,7 +241,17 @@ public class SCLicenseModelImpl extends BaseModelImpl<SCLicense>
 	}
 
 	public void setRecommended(boolean recommended) {
+		if (!_setOriginalRecommended) {
+			_setOriginalRecommended = true;
+
+			_originalRecommended = _recommended;
+		}
+
 		_recommended = recommended;
+	}
+
+	public boolean getOriginalRecommended() {
+		return _originalRecommended;
 	}
 
 	@Override
@@ -325,6 +345,15 @@ public class SCLicenseModelImpl extends BaseModelImpl<SCLicense>
 
 	@Override
 	public void resetOriginalValues() {
+		SCLicenseModelImpl scLicenseModelImpl = this;
+
+		scLicenseModelImpl._originalActive = scLicenseModelImpl._active;
+
+		scLicenseModelImpl._setOriginalActive = false;
+
+		scLicenseModelImpl._originalRecommended = scLicenseModelImpl._recommended;
+
+		scLicenseModelImpl._setOriginalRecommended = false;
 	}
 
 	@Override
@@ -425,7 +454,11 @@ public class SCLicenseModelImpl extends BaseModelImpl<SCLicense>
 	private String _url;
 	private boolean _openSource;
 	private boolean _active;
+	private boolean _originalActive;
+	private boolean _setOriginalActive;
 	private boolean _recommended;
+	private boolean _originalRecommended;
+	private boolean _setOriginalRecommended;
 	private transient ExpandoBridge _expandoBridge;
 	private SCLicense _escapedModelProxy;
 }

@@ -169,7 +169,17 @@ public class ExpandoColumnModelImpl extends BaseModelImpl<ExpandoColumn>
 	}
 
 	public void setTableId(long tableId) {
+		if (!_setOriginalTableId) {
+			_setOriginalTableId = true;
+
+			_originalTableId = _tableId;
+		}
+
 		_tableId = tableId;
+	}
+
+	public long getOriginalTableId() {
+		return _originalTableId;
 	}
 
 	@JSON
@@ -183,7 +193,15 @@ public class ExpandoColumnModelImpl extends BaseModelImpl<ExpandoColumn>
 	}
 
 	public void setName(String name) {
+		if (_originalName == null) {
+			_originalName = _name;
+		}
+
 		_name = name;
+	}
+
+	public String getOriginalName() {
+		return GetterUtil.getString(_originalName);
 	}
 
 	@JSON
@@ -300,6 +318,13 @@ public class ExpandoColumnModelImpl extends BaseModelImpl<ExpandoColumn>
 
 	@Override
 	public void resetOriginalValues() {
+		ExpandoColumnModelImpl expandoColumnModelImpl = this;
+
+		expandoColumnModelImpl._originalTableId = expandoColumnModelImpl._tableId;
+
+		expandoColumnModelImpl._setOriginalTableId = false;
+
+		expandoColumnModelImpl._originalName = expandoColumnModelImpl._name;
 	}
 
 	@Override
@@ -412,7 +437,10 @@ public class ExpandoColumnModelImpl extends BaseModelImpl<ExpandoColumn>
 	private long _columnId;
 	private long _companyId;
 	private long _tableId;
+	private long _originalTableId;
+	private boolean _setOriginalTableId;
 	private String _name;
+	private String _originalName;
 	private int _type;
 	private String _defaultData;
 	private String _typeSettings;

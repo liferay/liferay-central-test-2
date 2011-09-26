@@ -110,7 +110,17 @@ public class OrgGroupRoleModelImpl extends BaseModelImpl<OrgGroupRole>
 	}
 
 	public void setGroupId(long groupId) {
+		if (!_setOriginalGroupId) {
+			_setOriginalGroupId = true;
+
+			_originalGroupId = _groupId;
+		}
+
 		_groupId = groupId;
+	}
+
+	public long getOriginalGroupId() {
+		return _originalGroupId;
 	}
 
 	public long getRoleId() {
@@ -118,7 +128,17 @@ public class OrgGroupRoleModelImpl extends BaseModelImpl<OrgGroupRole>
 	}
 
 	public void setRoleId(long roleId) {
+		if (!_setOriginalRoleId) {
+			_setOriginalRoleId = true;
+
+			_originalRoleId = _roleId;
+		}
+
 		_roleId = roleId;
+	}
+
+	public long getOriginalRoleId() {
+		return _originalRoleId;
 	}
 
 	@Override
@@ -188,6 +208,15 @@ public class OrgGroupRoleModelImpl extends BaseModelImpl<OrgGroupRole>
 
 	@Override
 	public void resetOriginalValues() {
+		OrgGroupRoleModelImpl orgGroupRoleModelImpl = this;
+
+		orgGroupRoleModelImpl._originalGroupId = orgGroupRoleModelImpl._groupId;
+
+		orgGroupRoleModelImpl._setOriginalGroupId = false;
+
+		orgGroupRoleModelImpl._originalRoleId = orgGroupRoleModelImpl._roleId;
+
+		orgGroupRoleModelImpl._setOriginalRoleId = false;
 	}
 
 	@Override
@@ -249,6 +278,10 @@ public class OrgGroupRoleModelImpl extends BaseModelImpl<OrgGroupRole>
 		};
 	private long _organizationId;
 	private long _groupId;
+	private long _originalGroupId;
+	private boolean _setOriginalGroupId;
 	private long _roleId;
+	private long _originalRoleId;
+	private boolean _setOriginalRoleId;
 	private OrgGroupRole _escapedModelProxy;
 }

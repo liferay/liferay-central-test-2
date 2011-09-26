@@ -164,7 +164,15 @@ public class LayoutPrototypeModelImpl extends BaseModelImpl<LayoutPrototype>
 	}
 
 	public void setUuid(String uuid) {
+		if (_originalUuid == null) {
+			_originalUuid = _uuid;
+		}
+
 		_uuid = uuid;
+	}
+
+	public String getOriginalUuid() {
+		return GetterUtil.getString(_originalUuid);
 	}
 
 	@JSON
@@ -182,7 +190,17 @@ public class LayoutPrototypeModelImpl extends BaseModelImpl<LayoutPrototype>
 	}
 
 	public void setCompanyId(long companyId) {
+		if (!_setOriginalCompanyId) {
+			_setOriginalCompanyId = true;
+
+			_originalCompanyId = _companyId;
+		}
+
 		_companyId = companyId;
+	}
+
+	public long getOriginalCompanyId() {
+		return _originalCompanyId;
 	}
 
 	@JSON
@@ -312,7 +330,17 @@ public class LayoutPrototypeModelImpl extends BaseModelImpl<LayoutPrototype>
 	}
 
 	public void setActive(boolean active) {
+		if (!_setOriginalActive) {
+			_setOriginalActive = true;
+
+			_originalActive = _active;
+		}
+
 		_active = active;
+	}
+
+	public boolean getOriginalActive() {
+		return _originalActive;
 	}
 
 	@Override
@@ -409,6 +437,17 @@ public class LayoutPrototypeModelImpl extends BaseModelImpl<LayoutPrototype>
 
 	@Override
 	public void resetOriginalValues() {
+		LayoutPrototypeModelImpl layoutPrototypeModelImpl = this;
+
+		layoutPrototypeModelImpl._originalUuid = layoutPrototypeModelImpl._uuid;
+
+		layoutPrototypeModelImpl._originalCompanyId = layoutPrototypeModelImpl._companyId;
+
+		layoutPrototypeModelImpl._setOriginalCompanyId = false;
+
+		layoutPrototypeModelImpl._originalActive = layoutPrototypeModelImpl._active;
+
+		layoutPrototypeModelImpl._setOriginalActive = false;
 	}
 
 	@Override
@@ -525,12 +564,17 @@ public class LayoutPrototypeModelImpl extends BaseModelImpl<LayoutPrototype>
 			LayoutPrototype.class
 		};
 	private String _uuid;
+	private String _originalUuid;
 	private long _layoutPrototypeId;
 	private long _companyId;
+	private long _originalCompanyId;
+	private boolean _setOriginalCompanyId;
 	private String _name;
 	private String _description;
 	private String _settings;
 	private boolean _active;
+	private boolean _originalActive;
+	private boolean _setOriginalActive;
 	private transient ExpandoBridge _expandoBridge;
 	private LayoutPrototype _escapedModelProxy;
 }

@@ -218,7 +218,17 @@ public class BookmarksFolderModelImpl extends BaseModelImpl<BookmarksFolder>
 	}
 
 	public void setCompanyId(long companyId) {
+		if (!_setOriginalCompanyId) {
+			_setOriginalCompanyId = true;
+
+			_originalCompanyId = _companyId;
+		}
+
 		_companyId = companyId;
+	}
+
+	public long getOriginalCompanyId() {
+		return _originalCompanyId;
 	}
 
 	@JSON
@@ -276,7 +286,17 @@ public class BookmarksFolderModelImpl extends BaseModelImpl<BookmarksFolder>
 	}
 
 	public void setResourceBlockId(long resourceBlockId) {
+		if (!_setOriginalResourceBlockId) {
+			_setOriginalResourceBlockId = true;
+
+			_originalResourceBlockId = _resourceBlockId;
+		}
+
 		_resourceBlockId = resourceBlockId;
+	}
+
+	public long getOriginalResourceBlockId() {
+		return _originalResourceBlockId;
 	}
 
 	@JSON
@@ -285,7 +305,17 @@ public class BookmarksFolderModelImpl extends BaseModelImpl<BookmarksFolder>
 	}
 
 	public void setParentFolderId(long parentFolderId) {
+		if (!_setOriginalParentFolderId) {
+			_setOriginalParentFolderId = true;
+
+			_originalParentFolderId = _parentFolderId;
+		}
+
 		_parentFolderId = parentFolderId;
+	}
+
+	public long getOriginalParentFolderId() {
+		return _originalParentFolderId;
 	}
 
 	@JSON
@@ -435,6 +465,18 @@ public class BookmarksFolderModelImpl extends BaseModelImpl<BookmarksFolder>
 		bookmarksFolderModelImpl._originalGroupId = bookmarksFolderModelImpl._groupId;
 
 		bookmarksFolderModelImpl._setOriginalGroupId = false;
+
+		bookmarksFolderModelImpl._originalCompanyId = bookmarksFolderModelImpl._companyId;
+
+		bookmarksFolderModelImpl._setOriginalCompanyId = false;
+
+		bookmarksFolderModelImpl._originalResourceBlockId = bookmarksFolderModelImpl._resourceBlockId;
+
+		bookmarksFolderModelImpl._setOriginalResourceBlockId = false;
+
+		bookmarksFolderModelImpl._originalParentFolderId = bookmarksFolderModelImpl._parentFolderId;
+
+		bookmarksFolderModelImpl._setOriginalParentFolderId = false;
 	}
 
 	@Override
@@ -611,13 +653,19 @@ public class BookmarksFolderModelImpl extends BaseModelImpl<BookmarksFolder>
 	private long _originalGroupId;
 	private boolean _setOriginalGroupId;
 	private long _companyId;
+	private long _originalCompanyId;
+	private boolean _setOriginalCompanyId;
 	private long _userId;
 	private String _userUuid;
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
 	private long _resourceBlockId;
+	private long _originalResourceBlockId;
+	private boolean _setOriginalResourceBlockId;
 	private long _parentFolderId;
+	private long _originalParentFolderId;
+	private boolean _setOriginalParentFolderId;
 	private String _name;
 	private String _description;
 	private transient ExpandoBridge _expandoBridge;

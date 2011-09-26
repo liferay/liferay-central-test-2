@@ -207,7 +207,17 @@ public class UserGroupModelImpl extends BaseModelImpl<UserGroup>
 	}
 
 	public void setParentUserGroupId(long parentUserGroupId) {
+		if (!_setOriginalParentUserGroupId) {
+			_setOriginalParentUserGroupId = true;
+
+			_originalParentUserGroupId = _parentUserGroupId;
+		}
+
 		_parentUserGroupId = parentUserGroupId;
+	}
+
+	public long getOriginalParentUserGroupId() {
+		return _originalParentUserGroupId;
 	}
 
 	@JSON
@@ -376,6 +386,10 @@ public class UserGroupModelImpl extends BaseModelImpl<UserGroup>
 
 		userGroupModelImpl._setOriginalCompanyId = false;
 
+		userGroupModelImpl._originalParentUserGroupId = userGroupModelImpl._parentUserGroupId;
+
+		userGroupModelImpl._setOriginalParentUserGroupId = false;
+
 		userGroupModelImpl._originalName = userGroupModelImpl._name;
 	}
 
@@ -493,6 +507,8 @@ public class UserGroupModelImpl extends BaseModelImpl<UserGroup>
 	private long _originalCompanyId;
 	private boolean _setOriginalCompanyId;
 	private long _parentUserGroupId;
+	private long _originalParentUserGroupId;
+	private boolean _setOriginalParentUserGroupId;
 	private String _name;
 	private String _originalName;
 	private String _description;

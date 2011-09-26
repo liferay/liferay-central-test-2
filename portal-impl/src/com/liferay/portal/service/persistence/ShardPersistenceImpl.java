@@ -68,15 +68,17 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 	 * Never modify or reference this class directly. Always use {@link ShardUtil} to access the shard persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
 	 */
 	public static final String FINDER_CLASS_NAME_ENTITY = ShardImpl.class.getName();
-	public static final String FINDER_CLASS_NAME_LIST = FINDER_CLASS_NAME_ENTITY +
-		".List";
+	public static final String FINDER_CLASS_NAME_LIST_WITH_PAGINATION = FINDER_CLASS_NAME_ENTITY +
+		".List1";
+	public static final String FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION = FINDER_CLASS_NAME_ENTITY +
+		".List2";
 	public static final FinderPath FINDER_PATH_FETCH_BY_NAME = new FinderPath(ShardModelImpl.ENTITY_CACHE_ENABLED,
 			ShardModelImpl.FINDER_CACHE_ENABLED, ShardImpl.class,
 			FINDER_CLASS_NAME_ENTITY, "fetchByName",
 			new String[] { String.class.getName() });
 	public static final FinderPath FINDER_PATH_COUNT_BY_NAME = new FinderPath(ShardModelImpl.ENTITY_CACHE_ENABLED,
 			ShardModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST, "countByName",
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByName",
 			new String[] { String.class.getName() });
 	public static final FinderPath FINDER_PATH_FETCH_BY_C_C = new FinderPath(ShardModelImpl.ENTITY_CACHE_ENABLED,
 			ShardModelImpl.FINDER_CACHE_ENABLED, ShardImpl.class,
@@ -84,14 +86,17 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 			new String[] { Long.class.getName(), Long.class.getName() });
 	public static final FinderPath FINDER_PATH_COUNT_BY_C_C = new FinderPath(ShardModelImpl.ENTITY_CACHE_ENABLED,
 			ShardModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST, "countByC_C",
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByC_C",
 			new String[] { Long.class.getName(), Long.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(ShardModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_ALL = new FinderPath(ShardModelImpl.ENTITY_CACHE_ENABLED,
 			ShardModelImpl.FINDER_CACHE_ENABLED, ShardImpl.class,
-			FINDER_CLASS_NAME_LIST, "findAll", new String[0]);
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findAll", new String[0]);
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_ALL = new FinderPath(ShardModelImpl.ENTITY_CACHE_ENABLED,
+			ShardModelImpl.FINDER_CACHE_ENABLED, ShardImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findAll", new String[0]);
 	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(ShardModelImpl.ENTITY_CACHE_ENABLED,
 			ShardModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST, "countAll", new String[0]);
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll", new String[0]);
 
 	/**
 	 * Caches the shard in the entity cache if it is enabled.
@@ -142,8 +147,10 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 		}
 
 		EntityCacheUtil.clearCache(ShardImpl.class.getName());
+
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 	}
 
 	/**
@@ -158,7 +165,8 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 		EntityCacheUtil.removeResult(ShardModelImpl.ENTITY_CACHE_ENABLED,
 			ShardImpl.class, shard.getPrimaryKey());
 
-		FinderCacheUtil.removeResult(FINDER_PATH_FIND_ALL, FINDER_ARGS_EMPTY);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_NAME,
 			new Object[] { shard.getName() });
@@ -269,7 +277,8 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 			closeSession(session);
 		}
 
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 
 		ShardModelImpl shardModelImpl = (ShardModelImpl)shard;
 
@@ -313,43 +322,45 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 			closeSession(session);
 		}
 
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 
 		EntityCacheUtil.putResult(ShardModelImpl.ENTITY_CACHE_ENABLED,
 			ShardImpl.class, shard.getPrimaryKey(), shard);
 
-		if (!isNew &&
-				(!Validator.equals(shard.getName(),
-					shardModelImpl.getOriginalName()))) {
-			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_NAME,
-				new Object[] { shardModelImpl.getOriginalName() });
-		}
-
-		if (isNew ||
-				(!Validator.equals(shard.getName(),
-					shardModelImpl.getOriginalName()))) {
+		if (isNew) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_NAME,
 				new Object[] { shard.getName() }, shard);
-		}
 
-		if (!isNew &&
-				((shard.getClassNameId() != shardModelImpl.getOriginalClassNameId()) ||
-				(shard.getClassPK() != shardModelImpl.getOriginalClassPK()))) {
-			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_C,
-				new Object[] {
-					Long.valueOf(shardModelImpl.getOriginalClassNameId()),
-					Long.valueOf(shardModelImpl.getOriginalClassPK())
-				});
-		}
-
-		if (isNew ||
-				((shard.getClassNameId() != shardModelImpl.getOriginalClassNameId()) ||
-				(shard.getClassPK() != shardModelImpl.getOriginalClassPK()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_C,
 				new Object[] {
 					Long.valueOf(shard.getClassNameId()),
 					Long.valueOf(shard.getClassPK())
 				}, shard);
+		}
+		else {
+			if (!Validator.equals(shard.getName(),
+						shardModelImpl.getOriginalName())) {
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_NAME,
+					new Object[] { shardModelImpl.getOriginalName() });
+
+				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_NAME,
+					new Object[] { shard.getName() }, shard);
+			}
+
+			if ((shard.getClassNameId() != shardModelImpl.getOriginalClassNameId()) ||
+					(shard.getClassPK() != shardModelImpl.getOriginalClassPK())) {
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_C,
+					new Object[] {
+						Long.valueOf(shardModelImpl.getOriginalClassNameId()),
+						Long.valueOf(shardModelImpl.getOriginalClassPK())
+					});
+
+				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_C,
+					new Object[] {
+						Long.valueOf(shard.getClassNameId()),
+						Long.valueOf(shard.getClassPK())
+					}, shard);
+			}
 		}
 
 		return shard;
@@ -791,9 +802,20 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 	 */
 	public List<Shard> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
+		FinderPath finderPath = null;
 		Object[] finderArgs = new Object[] { start, end, orderByComparator };
 
-		List<Shard> list = (List<Shard>)FinderCacheUtil.getResult(FINDER_PATH_FIND_ALL,
+		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
+				(orderByComparator == null)) {
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_ALL;
+			finderArgs = FINDER_ARGS_EMPTY;
+		}
+		else {
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_ALL;
+			finderArgs = new Object[] { start, end, orderByComparator };
+		}
+
+		List<Shard> list = (List<Shard>)FinderCacheUtil.getResult(finderPath,
 				finderArgs, this);
 
 		if (list == null) {
@@ -838,14 +860,12 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 			}
 			finally {
 				if (list == null) {
-					FinderCacheUtil.removeResult(FINDER_PATH_FIND_ALL,
-						finderArgs);
+					FinderCacheUtil.removeResult(finderPath, finderArgs);
 				}
 				else {
 					cacheResult(list);
 
-					FinderCacheUtil.putResult(FINDER_PATH_FIND_ALL, finderArgs,
-						list);
+					FinderCacheUtil.putResult(finderPath, finderArgs, list);
 				}
 
 				closeSession(session);
@@ -1083,7 +1103,7 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 	public void destroy() {
 		EntityCacheUtil.removeCache(ShardImpl.class.getName());
 		FinderCacheUtil.removeCache(FINDER_CLASS_NAME_ENTITY);
-		FinderCacheUtil.removeCache(FINDER_CLASS_NAME_LIST);
+		FinderCacheUtil.removeCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 	}
 
 	@BeanReference(type = AccountPersistence.class)

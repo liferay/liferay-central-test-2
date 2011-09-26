@@ -292,7 +292,17 @@ public class DDMStructureModelImpl extends BaseModelImpl<DDMStructure>
 	}
 
 	public void setClassNameId(long classNameId) {
+		if (!_setOriginalClassNameId) {
+			_setOriginalClassNameId = true;
+
+			_originalClassNameId = _classNameId;
+		}
+
 		_classNameId = classNameId;
+	}
+
+	public long getOriginalClassNameId() {
+		return _originalClassNameId;
 	}
 
 	@JSON
@@ -367,6 +377,10 @@ public class DDMStructureModelImpl extends BaseModelImpl<DDMStructure>
 	}
 
 	public void setName(String name) {
+		if (_originalName == null) {
+			_originalName = _name;
+		}
+
 		_name = name;
 	}
 
@@ -404,6 +418,10 @@ public class DDMStructureModelImpl extends BaseModelImpl<DDMStructure>
 
 			setName(name, locale, defaultLocale);
 		}
+	}
+
+	public String getOriginalName() {
+		return GetterUtil.getString(_originalName);
 	}
 
 	@JSON
@@ -457,6 +475,10 @@ public class DDMStructureModelImpl extends BaseModelImpl<DDMStructure>
 	}
 
 	public void setDescription(String description) {
+		if (_originalDescription == null) {
+			_originalDescription = _description;
+		}
+
 		_description = description;
 	}
 
@@ -497,6 +519,10 @@ public class DDMStructureModelImpl extends BaseModelImpl<DDMStructure>
 
 			setDescription(description, locale, defaultLocale);
 		}
+	}
+
+	public String getOriginalDescription() {
+		return GetterUtil.getString(_originalDescription);
 	}
 
 	@JSON
@@ -636,7 +662,15 @@ public class DDMStructureModelImpl extends BaseModelImpl<DDMStructure>
 
 		ddmStructureModelImpl._setOriginalGroupId = false;
 
+		ddmStructureModelImpl._originalClassNameId = ddmStructureModelImpl._classNameId;
+
+		ddmStructureModelImpl._setOriginalClassNameId = false;
+
 		ddmStructureModelImpl._originalStructureKey = ddmStructureModelImpl._structureKey;
+
+		ddmStructureModelImpl._originalName = ddmStructureModelImpl._name;
+
+		ddmStructureModelImpl._originalDescription = ddmStructureModelImpl._description;
 	}
 
 	@Override
@@ -853,10 +887,14 @@ public class DDMStructureModelImpl extends BaseModelImpl<DDMStructure>
 	private Date _createDate;
 	private Date _modifiedDate;
 	private long _classNameId;
+	private long _originalClassNameId;
+	private boolean _setOriginalClassNameId;
 	private String _structureKey;
 	private String _originalStructureKey;
 	private String _name;
+	private String _originalName;
 	private String _description;
+	private String _originalDescription;
 	private String _xsd;
 	private String _storageType;
 	private transient ExpandoBridge _expandoBridge;

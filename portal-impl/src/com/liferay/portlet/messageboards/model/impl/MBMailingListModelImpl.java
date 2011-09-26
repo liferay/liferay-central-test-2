@@ -443,7 +443,17 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList>
 	}
 
 	public void setActive(boolean active) {
+		if (!_setOriginalActive) {
+			_setOriginalActive = true;
+
+			_originalActive = _active;
+		}
+
 		_active = active;
+	}
+
+	public boolean getOriginalActive() {
+		return _originalActive;
 	}
 
 	@Override
@@ -570,6 +580,10 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList>
 		mbMailingListModelImpl._originalCategoryId = mbMailingListModelImpl._categoryId;
 
 		mbMailingListModelImpl._setOriginalCategoryId = false;
+
+		mbMailingListModelImpl._originalActive = mbMailingListModelImpl._active;
+
+		mbMailingListModelImpl._setOriginalActive = false;
 	}
 
 	@Override
@@ -925,6 +939,8 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList>
 	private String _outPassword;
 	private boolean _allowAnonymous;
 	private boolean _active;
+	private boolean _originalActive;
+	private boolean _setOriginalActive;
 	private transient ExpandoBridge _expandoBridge;
 	private MBMailingList _escapedModelProxy;
 }

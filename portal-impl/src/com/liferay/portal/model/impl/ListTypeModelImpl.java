@@ -169,7 +169,15 @@ public class ListTypeModelImpl extends BaseModelImpl<ListType>
 	}
 
 	public void setType(String type) {
+		if (_originalType == null) {
+			_originalType = _type;
+		}
+
 		_type = type;
+	}
+
+	public String getOriginalType() {
+		return GetterUtil.getString(_originalType);
 	}
 
 	@Override
@@ -246,6 +254,9 @@ public class ListTypeModelImpl extends BaseModelImpl<ListType>
 
 	@Override
 	public void resetOriginalValues() {
+		ListTypeModelImpl listTypeModelImpl = this;
+
+		listTypeModelImpl._originalType = listTypeModelImpl._type;
 	}
 
 	@Override
@@ -320,5 +331,6 @@ public class ListTypeModelImpl extends BaseModelImpl<ListType>
 	private int _listTypeId;
 	private String _name;
 	private String _type;
+	private String _originalType;
 	private ListType _escapedModelProxy;
 }

@@ -181,7 +181,17 @@ public class OrgLaborModelImpl extends BaseModelImpl<OrgLabor>
 	}
 
 	public void setOrganizationId(long organizationId) {
+		if (!_setOriginalOrganizationId) {
+			_setOriginalOrganizationId = true;
+
+			_originalOrganizationId = _organizationId;
+		}
+
 		_organizationId = organizationId;
+	}
+
+	public long getOriginalOrganizationId() {
+		return _originalOrganizationId;
 	}
 
 	@JSON
@@ -443,6 +453,11 @@ public class OrgLaborModelImpl extends BaseModelImpl<OrgLabor>
 
 	@Override
 	public void resetOriginalValues() {
+		OrgLaborModelImpl orgLaborModelImpl = this;
+
+		orgLaborModelImpl._originalOrganizationId = orgLaborModelImpl._organizationId;
+
+		orgLaborModelImpl._setOriginalOrganizationId = false;
 	}
 
 	@Override
@@ -616,6 +631,8 @@ public class OrgLaborModelImpl extends BaseModelImpl<OrgLabor>
 		};
 	private long _orgLaborId;
 	private long _organizationId;
+	private long _originalOrganizationId;
+	private boolean _setOriginalOrganizationId;
 	private int _typeId;
 	private int _sunOpen;
 	private int _sunClose;

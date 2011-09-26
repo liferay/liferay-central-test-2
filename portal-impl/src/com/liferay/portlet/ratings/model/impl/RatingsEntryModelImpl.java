@@ -282,7 +282,17 @@ public class RatingsEntryModelImpl extends BaseModelImpl<RatingsEntry>
 	}
 
 	public void setScore(double score) {
+		if (!_setOriginalScore) {
+			_setOriginalScore = true;
+
+			_originalScore = _score;
+		}
+
 		_score = score;
+	}
+
+	public double getOriginalScore() {
+		return _originalScore;
 	}
 
 	@Override
@@ -394,6 +404,10 @@ public class RatingsEntryModelImpl extends BaseModelImpl<RatingsEntry>
 		ratingsEntryModelImpl._originalClassPK = ratingsEntryModelImpl._classPK;
 
 		ratingsEntryModelImpl._setOriginalClassPK = false;
+
+		ratingsEntryModelImpl._originalScore = ratingsEntryModelImpl._score;
+
+		ratingsEntryModelImpl._setOriginalScore = false;
 	}
 
 	@Override
@@ -537,6 +551,8 @@ public class RatingsEntryModelImpl extends BaseModelImpl<RatingsEntry>
 	private long _originalClassPK;
 	private boolean _setOriginalClassPK;
 	private double _score;
+	private double _originalScore;
+	private boolean _setOriginalScore;
 	private transient ExpandoBridge _expandoBridge;
 	private RatingsEntry _escapedModelProxy;
 }

@@ -307,7 +307,17 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 	}
 
 	public void setLayoutBranchId(long layoutBranchId) {
+		if (!_setOriginalLayoutBranchId) {
+			_setOriginalLayoutBranchId = true;
+
+			_originalLayoutBranchId = _layoutBranchId;
+		}
+
 		_layoutBranchId = layoutBranchId;
+	}
+
+	public long getOriginalLayoutBranchId() {
+		return _originalLayoutBranchId;
 	}
 
 	@JSON
@@ -316,7 +326,17 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 	}
 
 	public void setParentLayoutRevisionId(long parentLayoutRevisionId) {
+		if (!_setOriginalParentLayoutRevisionId) {
+			_setOriginalParentLayoutRevisionId = true;
+
+			_originalParentLayoutRevisionId = _parentLayoutRevisionId;
+		}
+
 		_parentLayoutRevisionId = parentLayoutRevisionId;
+	}
+
+	public long getOriginalParentLayoutRevisionId() {
+		return _originalParentLayoutRevisionId;
 	}
 
 	@JSON
@@ -950,7 +970,17 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 	}
 
 	public void setStatus(int status) {
+		if (!_setOriginalStatus) {
+			_setOriginalStatus = true;
+
+			_originalStatus = _status;
+		}
+
 		_status = status;
+	}
+
+	public int getOriginalStatus() {
+		return _originalStatus;
 	}
 
 	@JSON
@@ -1169,6 +1199,14 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 
 		layoutRevisionModelImpl._setOriginalLayoutSetBranchId = false;
 
+		layoutRevisionModelImpl._originalLayoutBranchId = layoutRevisionModelImpl._layoutBranchId;
+
+		layoutRevisionModelImpl._setOriginalLayoutBranchId = false;
+
+		layoutRevisionModelImpl._originalParentLayoutRevisionId = layoutRevisionModelImpl._parentLayoutRevisionId;
+
+		layoutRevisionModelImpl._setOriginalParentLayoutRevisionId = false;
+
 		layoutRevisionModelImpl._originalHead = layoutRevisionModelImpl._head;
 
 		layoutRevisionModelImpl._setOriginalHead = false;
@@ -1176,6 +1214,10 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 		layoutRevisionModelImpl._originalPlid = layoutRevisionModelImpl._plid;
 
 		layoutRevisionModelImpl._setOriginalPlid = false;
+
+		layoutRevisionModelImpl._originalStatus = layoutRevisionModelImpl._status;
+
+		layoutRevisionModelImpl._setOriginalStatus = false;
 	}
 
 	@Override
@@ -1570,7 +1612,11 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 	private long _originalLayoutSetBranchId;
 	private boolean _setOriginalLayoutSetBranchId;
 	private long _layoutBranchId;
+	private long _originalLayoutBranchId;
+	private boolean _setOriginalLayoutBranchId;
 	private long _parentLayoutRevisionId;
+	private long _originalParentLayoutRevisionId;
+	private boolean _setOriginalParentLayoutRevisionId;
 	private boolean _head;
 	private boolean _originalHead;
 	private boolean _setOriginalHead;
@@ -1593,6 +1639,8 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 	private String _wapColorSchemeId;
 	private String _css;
 	private int _status;
+	private int _originalStatus;
+	private boolean _setOriginalStatus;
 	private long _statusByUserId;
 	private String _statusByUserUuid;
 	private String _statusByUserName;

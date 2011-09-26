@@ -150,7 +150,17 @@ public class BlogsStatsUserModelImpl extends BaseModelImpl<BlogsStatsUser>
 	}
 
 	public void setCompanyId(long companyId) {
+		if (!_setOriginalCompanyId) {
+			_setOriginalCompanyId = true;
+
+			_originalCompanyId = _companyId;
+		}
+
 		_companyId = companyId;
+	}
+
+	public long getOriginalCompanyId() {
+		return _originalCompanyId;
 	}
 
 	public long getUserId() {
@@ -184,7 +194,17 @@ public class BlogsStatsUserModelImpl extends BaseModelImpl<BlogsStatsUser>
 	}
 
 	public void setEntryCount(int entryCount) {
+		if (!_setOriginalEntryCount) {
+			_setOriginalEntryCount = true;
+
+			_originalEntryCount = _entryCount;
+		}
+
 		_entryCount = entryCount;
+	}
+
+	public int getOriginalEntryCount() {
+		return _originalEntryCount;
 	}
 
 	public Date getLastPostDate() {
@@ -192,7 +212,15 @@ public class BlogsStatsUserModelImpl extends BaseModelImpl<BlogsStatsUser>
 	}
 
 	public void setLastPostDate(Date lastPostDate) {
+		if (_originalLastPostDate == null) {
+			_originalLastPostDate = _lastPostDate;
+		}
+
 		_lastPostDate = lastPostDate;
+	}
+
+	public Date getOriginalLastPostDate() {
+		return _originalLastPostDate;
 	}
 
 	public int getRatingsTotalEntries() {
@@ -329,9 +357,19 @@ public class BlogsStatsUserModelImpl extends BaseModelImpl<BlogsStatsUser>
 
 		blogsStatsUserModelImpl._setOriginalGroupId = false;
 
+		blogsStatsUserModelImpl._originalCompanyId = blogsStatsUserModelImpl._companyId;
+
+		blogsStatsUserModelImpl._setOriginalCompanyId = false;
+
 		blogsStatsUserModelImpl._originalUserId = blogsStatsUserModelImpl._userId;
 
 		blogsStatsUserModelImpl._setOriginalUserId = false;
+
+		blogsStatsUserModelImpl._originalEntryCount = blogsStatsUserModelImpl._entryCount;
+
+		blogsStatsUserModelImpl._setOriginalEntryCount = false;
+
+		blogsStatsUserModelImpl._originalLastPostDate = blogsStatsUserModelImpl._lastPostDate;
 	}
 
 	@Override
@@ -452,12 +490,17 @@ public class BlogsStatsUserModelImpl extends BaseModelImpl<BlogsStatsUser>
 	private long _originalGroupId;
 	private boolean _setOriginalGroupId;
 	private long _companyId;
+	private long _originalCompanyId;
+	private boolean _setOriginalCompanyId;
 	private long _userId;
 	private String _userUuid;
 	private long _originalUserId;
 	private boolean _setOriginalUserId;
 	private int _entryCount;
+	private int _originalEntryCount;
+	private boolean _setOriginalEntryCount;
 	private Date _lastPostDate;
+	private Date _originalLastPostDate;
 	private int _ratingsTotalEntries;
 	private double _ratingsTotalScore;
 	private double _ratingsAverageScore;

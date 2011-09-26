@@ -124,7 +124,17 @@ public class ShoppingOrderItemModelImpl extends BaseModelImpl<ShoppingOrderItem>
 	}
 
 	public void setOrderId(long orderId) {
+		if (!_setOriginalOrderId) {
+			_setOriginalOrderId = true;
+
+			_originalOrderId = _orderId;
+		}
+
 		_orderId = orderId;
+	}
+
+	public long getOriginalOrderId() {
+		return _originalOrderId;
 	}
 
 	public String getItemId() {
@@ -317,6 +327,11 @@ public class ShoppingOrderItemModelImpl extends BaseModelImpl<ShoppingOrderItem>
 
 	@Override
 	public void resetOriginalValues() {
+		ShoppingOrderItemModelImpl shoppingOrderItemModelImpl = this;
+
+		shoppingOrderItemModelImpl._originalOrderId = shoppingOrderItemModelImpl._orderId;
+
+		shoppingOrderItemModelImpl._setOriginalOrderId = false;
 	}
 
 	@Override
@@ -471,6 +486,8 @@ public class ShoppingOrderItemModelImpl extends BaseModelImpl<ShoppingOrderItem>
 		};
 	private long _orderItemId;
 	private long _orderId;
+	private long _originalOrderId;
+	private boolean _setOriginalOrderId;
 	private String _itemId;
 	private String _sku;
 	private String _name;

@@ -3097,7 +3097,7 @@ executable ZIP file.
 		<antcall target="prepare-mysql" />
 
 		<antcall target="rebuild-database" inheritAll="false">
-			<property name="test.database.minimal" value="true" />
+			<param name="test.database.minimal" value="true" />
 		</antcall>
 
 		<antcall target="revert-test-properties" />

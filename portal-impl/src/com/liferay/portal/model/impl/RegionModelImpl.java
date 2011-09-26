@@ -158,7 +158,17 @@ public class RegionModelImpl extends BaseModelImpl<Region>
 	}
 
 	public void setCountryId(long countryId) {
+		if (!_setOriginalCountryId) {
+			_setOriginalCountryId = true;
+
+			_originalCountryId = _countryId;
+		}
+
 		_countryId = countryId;
+	}
+
+	public long getOriginalCountryId() {
+		return _originalCountryId;
 	}
 
 	@JSON
@@ -199,7 +209,17 @@ public class RegionModelImpl extends BaseModelImpl<Region>
 	}
 
 	public void setActive(boolean active) {
+		if (!_setOriginalActive) {
+			_setOriginalActive = true;
+
+			_originalActive = _active;
+		}
+
 		_active = active;
+	}
+
+	public boolean getOriginalActive() {
+		return _originalActive;
 	}
 
 	@Override
@@ -292,6 +312,15 @@ public class RegionModelImpl extends BaseModelImpl<Region>
 
 	@Override
 	public void resetOriginalValues() {
+		RegionModelImpl regionModelImpl = this;
+
+		regionModelImpl._originalCountryId = regionModelImpl._countryId;
+
+		regionModelImpl._setOriginalCountryId = false;
+
+		regionModelImpl._originalActive = regionModelImpl._active;
+
+		regionModelImpl._setOriginalActive = false;
 	}
 
 	@Override
@@ -381,9 +410,13 @@ public class RegionModelImpl extends BaseModelImpl<Region>
 		};
 	private long _regionId;
 	private long _countryId;
+	private long _originalCountryId;
+	private boolean _setOriginalCountryId;
 	private String _regionCode;
 	private String _name;
 	private boolean _active;
+	private boolean _originalActive;
+	private boolean _setOriginalActive;
 	private transient ExpandoBridge _expandoBridge;
 	private Region _escapedModelProxy;
 }

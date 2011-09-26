@@ -120,7 +120,15 @@ public class LockModelImpl extends BaseModelImpl<Lock> implements LockModel {
 	}
 
 	public void setUuid(String uuid) {
+		if (_originalUuid == null) {
+			_originalUuid = _uuid;
+		}
+
 		_uuid = uuid;
+	}
+
+	public String getOriginalUuid() {
+		return GetterUtil.getString(_originalUuid);
 	}
 
 	public long getLockId() {
@@ -248,7 +256,15 @@ public class LockModelImpl extends BaseModelImpl<Lock> implements LockModel {
 	}
 
 	public void setExpirationDate(Date expirationDate) {
+		if (_originalExpirationDate == null) {
+			_originalExpirationDate = _expirationDate;
+		}
+
 		_expirationDate = expirationDate;
+	}
+
+	public Date getOriginalExpirationDate() {
+		return _originalExpirationDate;
 	}
 
 	@Override
@@ -351,9 +367,13 @@ public class LockModelImpl extends BaseModelImpl<Lock> implements LockModel {
 	public void resetOriginalValues() {
 		LockModelImpl lockModelImpl = this;
 
+		lockModelImpl._originalUuid = lockModelImpl._uuid;
+
 		lockModelImpl._originalClassName = lockModelImpl._className;
 
 		lockModelImpl._originalKey = lockModelImpl._key;
+
+		lockModelImpl._originalExpirationDate = lockModelImpl._expirationDate;
 	}
 
 	@Override
@@ -522,6 +542,7 @@ public class LockModelImpl extends BaseModelImpl<Lock> implements LockModel {
 			Lock.class
 		};
 	private String _uuid;
+	private String _originalUuid;
 	private long _lockId;
 	private long _companyId;
 	private long _userId;
@@ -535,6 +556,7 @@ public class LockModelImpl extends BaseModelImpl<Lock> implements LockModel {
 	private String _owner;
 	private boolean _inheritable;
 	private Date _expirationDate;
+	private Date _originalExpirationDate;
 	private transient ExpandoBridge _expandoBridge;
 	private Lock _escapedModelProxy;
 }

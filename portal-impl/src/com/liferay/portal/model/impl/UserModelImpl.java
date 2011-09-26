@@ -270,7 +270,15 @@ public class UserModelImpl extends BaseModelImpl<User> implements UserModel {
 	}
 
 	public void setUuid(String uuid) {
+		if (_originalUuid == null) {
+			_originalUuid = _uuid;
+		}
+
 		_uuid = uuid;
+	}
+
+	public String getOriginalUuid() {
+		return GetterUtil.getString(_originalUuid);
 	}
 
 	@JSON
@@ -813,7 +821,17 @@ public class UserModelImpl extends BaseModelImpl<User> implements UserModel {
 	}
 
 	public void setStatus(int status) {
+		if (!_setOriginalStatus) {
+			_setOriginalStatus = true;
+
+			_originalStatus = _status;
+		}
+
 		_status = status;
+	}
+
+	public int getOriginalStatus() {
+		return _originalStatus;
 	}
 
 	@Override
@@ -944,6 +962,8 @@ public class UserModelImpl extends BaseModelImpl<User> implements UserModel {
 	public void resetOriginalValues() {
 		UserModelImpl userModelImpl = this;
 
+		userModelImpl._originalUuid = userModelImpl._uuid;
+
 		userModelImpl._originalUserId = userModelImpl._userId;
 
 		userModelImpl._setOriginalUserId = false;
@@ -973,6 +993,10 @@ public class UserModelImpl extends BaseModelImpl<User> implements UserModel {
 		userModelImpl._originalPortraitId = userModelImpl._portraitId;
 
 		userModelImpl._setOriginalPortraitId = false;
+
+		userModelImpl._originalStatus = userModelImpl._status;
+
+		userModelImpl._setOriginalStatus = false;
 	}
 
 	@Override
@@ -1480,6 +1504,7 @@ public class UserModelImpl extends BaseModelImpl<User> implements UserModel {
 			User.class
 		};
 	private String _uuid;
+	private String _originalUuid;
 	private long _userId;
 	private String _userUuid;
 	private long _originalUserId;
@@ -1534,6 +1559,8 @@ public class UserModelImpl extends BaseModelImpl<User> implements UserModel {
 	private boolean _agreedToTermsOfUse;
 	private boolean _emailAddressVerified;
 	private int _status;
+	private int _originalStatus;
+	private boolean _setOriginalStatus;
 	private transient ExpandoBridge _expandoBridge;
 	private User _escapedModelProxy;
 }

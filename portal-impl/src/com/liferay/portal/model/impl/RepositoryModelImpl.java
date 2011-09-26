@@ -170,7 +170,17 @@ public class RepositoryModelImpl extends BaseModelImpl<Repository>
 	}
 
 	public void setGroupId(long groupId) {
+		if (!_setOriginalGroupId) {
+			_setOriginalGroupId = true;
+
+			_originalGroupId = _groupId;
+		}
+
 		_groupId = groupId;
+	}
+
+	public long getOriginalGroupId() {
+		return _originalGroupId;
 	}
 
 	@JSON
@@ -380,6 +390,11 @@ public class RepositoryModelImpl extends BaseModelImpl<Repository>
 
 	@Override
 	public void resetOriginalValues() {
+		RepositoryModelImpl repositoryModelImpl = this;
+
+		repositoryModelImpl._originalGroupId = repositoryModelImpl._groupId;
+
+		repositoryModelImpl._setOriginalGroupId = false;
 	}
 
 	@Override
@@ -543,6 +558,8 @@ public class RepositoryModelImpl extends BaseModelImpl<Repository>
 		};
 	private long _repositoryId;
 	private long _groupId;
+	private long _originalGroupId;
+	private boolean _setOriginalGroupId;
 	private long _companyId;
 	private Date _createDate;
 	private Date _modifiedDate;

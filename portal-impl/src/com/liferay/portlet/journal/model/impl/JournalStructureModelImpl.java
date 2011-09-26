@@ -312,7 +312,15 @@ public class JournalStructureModelImpl extends BaseModelImpl<JournalStructure>
 	}
 
 	public void setParentStructureId(String parentStructureId) {
+		if (_originalParentStructureId == null) {
+			_originalParentStructureId = _parentStructureId;
+		}
+
 		_parentStructureId = parentStructureId;
+	}
+
+	public String getOriginalParentStructureId() {
+		return GetterUtil.getString(_originalParentStructureId);
 	}
 
 	@JSON
@@ -618,6 +626,8 @@ public class JournalStructureModelImpl extends BaseModelImpl<JournalStructure>
 		journalStructureModelImpl._setOriginalGroupId = false;
 
 		journalStructureModelImpl._originalStructureId = journalStructureModelImpl._structureId;
+
+		journalStructureModelImpl._originalParentStructureId = journalStructureModelImpl._parentStructureId;
 	}
 
 	@Override
@@ -828,6 +838,7 @@ public class JournalStructureModelImpl extends BaseModelImpl<JournalStructure>
 	private String _structureId;
 	private String _originalStructureId;
 	private String _parentStructureId;
+	private String _originalParentStructureId;
 	private String _name;
 	private String _description;
 	private String _xsd;

@@ -255,7 +255,17 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 	}
 
 	public void setCompanyId(long companyId) {
+		if (!_setOriginalCompanyId) {
+			_setOriginalCompanyId = true;
+
+			_originalCompanyId = _companyId;
+		}
+
 		_companyId = companyId;
+	}
+
+	public long getOriginalCompanyId() {
+		return _originalCompanyId;
 	}
 
 	@JSON
@@ -324,7 +334,17 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 	}
 
 	public void setParentLayoutId(long parentLayoutId) {
+		if (!_setOriginalParentLayoutId) {
+			_setOriginalParentLayoutId = true;
+
+			_originalParentLayoutId = _parentLayoutId;
+		}
+
 		_parentLayoutId = parentLayoutId;
+	}
+
+	public long getOriginalParentLayoutId() {
+		return _originalParentLayoutId;
 	}
 
 	@JSON
@@ -789,7 +809,15 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 	}
 
 	public void setType(String type) {
+		if (_originalType == null) {
+			_originalType = _type;
+		}
+
 		_type = type;
+	}
+
+	public String getOriginalType() {
+		return GetterUtil.getString(_originalType);
 	}
 
 	@JSON
@@ -1146,6 +1174,10 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 
 		layoutModelImpl._setOriginalGroupId = false;
 
+		layoutModelImpl._originalCompanyId = layoutModelImpl._companyId;
+
+		layoutModelImpl._setOriginalCompanyId = false;
+
 		layoutModelImpl._originalPrivateLayout = layoutModelImpl._privateLayout;
 
 		layoutModelImpl._setOriginalPrivateLayout = false;
@@ -1153,6 +1185,12 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 		layoutModelImpl._originalLayoutId = layoutModelImpl._layoutId;
 
 		layoutModelImpl._setOriginalLayoutId = false;
+
+		layoutModelImpl._originalParentLayoutId = layoutModelImpl._parentLayoutId;
+
+		layoutModelImpl._setOriginalParentLayoutId = false;
+
+		layoutModelImpl._originalType = layoutModelImpl._type;
 
 		layoutModelImpl._originalFriendlyURL = layoutModelImpl._friendlyURL;
 
@@ -1546,6 +1584,8 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 	private long _originalGroupId;
 	private boolean _setOriginalGroupId;
 	private long _companyId;
+	private long _originalCompanyId;
+	private boolean _setOriginalCompanyId;
 	private Date _createDate;
 	private Date _modifiedDate;
 	private boolean _privateLayout;
@@ -1555,12 +1595,15 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 	private long _originalLayoutId;
 	private boolean _setOriginalLayoutId;
 	private long _parentLayoutId;
+	private long _originalParentLayoutId;
+	private boolean _setOriginalParentLayoutId;
 	private String _name;
 	private String _title;
 	private String _description;
 	private String _keywords;
 	private String _robots;
 	private String _type;
+	private String _originalType;
 	private String _typeSettings;
 	private boolean _hidden;
 	private String _friendlyURL;

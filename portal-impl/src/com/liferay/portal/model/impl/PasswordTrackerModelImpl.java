@@ -120,6 +120,12 @@ public class PasswordTrackerModelImpl extends BaseModelImpl<PasswordTracker>
 	}
 
 	public void setUserId(long userId) {
+		if (!_setOriginalUserId) {
+			_setOriginalUserId = true;
+
+			_originalUserId = _userId;
+		}
+
 		_userId = userId;
 	}
 
@@ -129,6 +135,10 @@ public class PasswordTrackerModelImpl extends BaseModelImpl<PasswordTracker>
 
 	public void setUserUuid(String userUuid) {
 		_userUuid = userUuid;
+	}
+
+	public long getOriginalUserId() {
+		return _originalUserId;
 	}
 
 	public Date getCreateDate() {
@@ -260,6 +270,11 @@ public class PasswordTrackerModelImpl extends BaseModelImpl<PasswordTracker>
 
 	@Override
 	public void resetOriginalValues() {
+		PasswordTrackerModelImpl passwordTrackerModelImpl = this;
+
+		passwordTrackerModelImpl._originalUserId = passwordTrackerModelImpl._userId;
+
+		passwordTrackerModelImpl._setOriginalUserId = false;
 	}
 
 	@Override
@@ -343,6 +358,8 @@ public class PasswordTrackerModelImpl extends BaseModelImpl<PasswordTracker>
 	private long _passwordTrackerId;
 	private long _userId;
 	private String _userUuid;
+	private long _originalUserId;
+	private boolean _setOriginalUserId;
 	private Date _createDate;
 	private String _password;
 	private transient ExpandoBridge _expandoBridge;

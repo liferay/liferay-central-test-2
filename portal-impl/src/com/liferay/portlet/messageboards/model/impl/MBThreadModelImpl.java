@@ -186,7 +186,17 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread>
 	}
 
 	public void setGroupId(long groupId) {
+		if (!_setOriginalGroupId) {
+			_setOriginalGroupId = true;
+
+			_originalGroupId = _groupId;
+		}
+
 		_groupId = groupId;
+	}
+
+	public long getOriginalGroupId() {
+		return _originalGroupId;
 	}
 
 	@JSON
@@ -204,7 +214,17 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread>
 	}
 
 	public void setCategoryId(long categoryId) {
+		if (!_setOriginalCategoryId) {
+			_setOriginalCategoryId = true;
+
+			_originalCategoryId = _categoryId;
+		}
+
 		_categoryId = categoryId;
+	}
+
+	public long getOriginalCategoryId() {
+		return _originalCategoryId;
 	}
 
 	@JSON
@@ -286,7 +306,15 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread>
 	}
 
 	public void setLastPostDate(Date lastPostDate) {
+		if (_originalLastPostDate == null) {
+			_originalLastPostDate = _lastPostDate;
+		}
+
 		_lastPostDate = lastPostDate;
+	}
+
+	public Date getOriginalLastPostDate() {
+		return _originalLastPostDate;
 	}
 
 	@JSON
@@ -295,7 +323,17 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread>
 	}
 
 	public void setPriority(double priority) {
+		if (!_setOriginalPriority) {
+			_setOriginalPriority = true;
+
+			_originalPriority = _priority;
+		}
+
 		_priority = priority;
+	}
+
+	public double getOriginalPriority() {
+		return _originalPriority;
 	}
 
 	@JSON
@@ -317,7 +355,17 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread>
 	}
 
 	public void setStatus(int status) {
+		if (!_setOriginalStatus) {
+			_setOriginalStatus = true;
+
+			_originalStatus = _status;
+		}
+
 		_status = status;
+	}
+
+	public int getOriginalStatus() {
+		return _originalStatus;
 	}
 
 	@JSON
@@ -525,9 +573,27 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread>
 	public void resetOriginalValues() {
 		MBThreadModelImpl mbThreadModelImpl = this;
 
+		mbThreadModelImpl._originalGroupId = mbThreadModelImpl._groupId;
+
+		mbThreadModelImpl._setOriginalGroupId = false;
+
+		mbThreadModelImpl._originalCategoryId = mbThreadModelImpl._categoryId;
+
+		mbThreadModelImpl._setOriginalCategoryId = false;
+
 		mbThreadModelImpl._originalRootMessageId = mbThreadModelImpl._rootMessageId;
 
 		mbThreadModelImpl._setOriginalRootMessageId = false;
+
+		mbThreadModelImpl._originalLastPostDate = mbThreadModelImpl._lastPostDate;
+
+		mbThreadModelImpl._originalPriority = mbThreadModelImpl._priority;
+
+		mbThreadModelImpl._setOriginalPriority = false;
+
+		mbThreadModelImpl._originalStatus = mbThreadModelImpl._status;
+
+		mbThreadModelImpl._setOriginalStatus = false;
 	}
 
 	@Override
@@ -713,8 +779,12 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread>
 		};
 	private long _threadId;
 	private long _groupId;
+	private long _originalGroupId;
+	private boolean _setOriginalGroupId;
 	private long _companyId;
 	private long _categoryId;
+	private long _originalCategoryId;
+	private boolean _setOriginalCategoryId;
 	private long _rootMessageId;
 	private long _originalRootMessageId;
 	private boolean _setOriginalRootMessageId;
@@ -725,9 +795,14 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread>
 	private long _lastPostByUserId;
 	private String _lastPostByUserUuid;
 	private Date _lastPostDate;
+	private Date _originalLastPostDate;
 	private double _priority;
+	private double _originalPriority;
+	private boolean _setOriginalPriority;
 	private boolean _question;
 	private int _status;
+	private int _originalStatus;
+	private boolean _setOriginalStatus;
 	private long _statusByUserId;
 	private String _statusByUserUuid;
 	private String _statusByUserName;

@@ -173,7 +173,17 @@ public class ShoppingCategoryModelImpl extends BaseModelImpl<ShoppingCategory>
 	}
 
 	public void setGroupId(long groupId) {
+		if (!_setOriginalGroupId) {
+			_setOriginalGroupId = true;
+
+			_originalGroupId = _groupId;
+		}
+
 		_groupId = groupId;
+	}
+
+	public long getOriginalGroupId() {
+		return _originalGroupId;
 	}
 
 	@JSON
@@ -240,7 +250,17 @@ public class ShoppingCategoryModelImpl extends BaseModelImpl<ShoppingCategory>
 	}
 
 	public void setParentCategoryId(long parentCategoryId) {
+		if (!_setOriginalParentCategoryId) {
+			_setOriginalParentCategoryId = true;
+
+			_originalParentCategoryId = _parentCategoryId;
+		}
+
 		_parentCategoryId = parentCategoryId;
+	}
+
+	public long getOriginalParentCategoryId() {
+		return _originalParentCategoryId;
 	}
 
 	@JSON
@@ -381,6 +401,15 @@ public class ShoppingCategoryModelImpl extends BaseModelImpl<ShoppingCategory>
 
 	@Override
 	public void resetOriginalValues() {
+		ShoppingCategoryModelImpl shoppingCategoryModelImpl = this;
+
+		shoppingCategoryModelImpl._originalGroupId = shoppingCategoryModelImpl._groupId;
+
+		shoppingCategoryModelImpl._setOriginalGroupId = false;
+
+		shoppingCategoryModelImpl._originalParentCategoryId = shoppingCategoryModelImpl._parentCategoryId;
+
+		shoppingCategoryModelImpl._setOriginalParentCategoryId = false;
 	}
 
 	@Override
@@ -530,6 +559,8 @@ public class ShoppingCategoryModelImpl extends BaseModelImpl<ShoppingCategory>
 		};
 	private long _categoryId;
 	private long _groupId;
+	private long _originalGroupId;
+	private boolean _setOriginalGroupId;
 	private long _companyId;
 	private long _userId;
 	private String _userUuid;
@@ -537,6 +568,8 @@ public class ShoppingCategoryModelImpl extends BaseModelImpl<ShoppingCategory>
 	private Date _createDate;
 	private Date _modifiedDate;
 	private long _parentCategoryId;
+	private long _originalParentCategoryId;
+	private boolean _setOriginalParentCategoryId;
 	private String _name;
 	private String _description;
 	private transient ExpandoBridge _expandoBridge;

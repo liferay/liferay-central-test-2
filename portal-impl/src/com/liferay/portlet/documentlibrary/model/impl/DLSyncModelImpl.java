@@ -169,7 +169,17 @@ public class DLSyncModelImpl extends BaseModelImpl<DLSync>
 	}
 
 	public void setCompanyId(long companyId) {
+		if (!_setOriginalCompanyId) {
+			_setOriginalCompanyId = true;
+
+			_originalCompanyId = _companyId;
+		}
+
 		_companyId = companyId;
+	}
+
+	public long getOriginalCompanyId() {
+		return _originalCompanyId;
 	}
 
 	@JSON
@@ -187,7 +197,15 @@ public class DLSyncModelImpl extends BaseModelImpl<DLSync>
 	}
 
 	public void setModifiedDate(Date modifiedDate) {
+		if (_originalModifiedDate == null) {
+			_originalModifiedDate = _modifiedDate;
+		}
+
 		_modifiedDate = modifiedDate;
+	}
+
+	public Date getOriginalModifiedDate() {
+		return _originalModifiedDate;
 	}
 
 	@JSON
@@ -215,7 +233,17 @@ public class DLSyncModelImpl extends BaseModelImpl<DLSync>
 	}
 
 	public void setRepositoryId(long repositoryId) {
+		if (!_setOriginalRepositoryId) {
+			_setOriginalRepositoryId = true;
+
+			_originalRepositoryId = _repositoryId;
+		}
+
 		_repositoryId = repositoryId;
+	}
+
+	public long getOriginalRepositoryId() {
+		return _originalRepositoryId;
 	}
 
 	@JSON
@@ -379,9 +407,19 @@ public class DLSyncModelImpl extends BaseModelImpl<DLSync>
 	public void resetOriginalValues() {
 		DLSyncModelImpl dlSyncModelImpl = this;
 
+		dlSyncModelImpl._originalCompanyId = dlSyncModelImpl._companyId;
+
+		dlSyncModelImpl._setOriginalCompanyId = false;
+
+		dlSyncModelImpl._originalModifiedDate = dlSyncModelImpl._modifiedDate;
+
 		dlSyncModelImpl._originalFileId = dlSyncModelImpl._fileId;
 
 		dlSyncModelImpl._setOriginalFileId = false;
+
+		dlSyncModelImpl._originalRepositoryId = dlSyncModelImpl._repositoryId;
+
+		dlSyncModelImpl._setOriginalRepositoryId = false;
 	}
 
 	@Override
@@ -517,12 +555,17 @@ public class DLSyncModelImpl extends BaseModelImpl<DLSync>
 		};
 	private long _syncId;
 	private long _companyId;
+	private long _originalCompanyId;
+	private boolean _setOriginalCompanyId;
 	private Date _createDate;
 	private Date _modifiedDate;
+	private Date _originalModifiedDate;
 	private long _fileId;
 	private long _originalFileId;
 	private boolean _setOriginalFileId;
 	private long _repositoryId;
+	private long _originalRepositoryId;
+	private boolean _setOriginalRepositoryId;
 	private long _parentFolderId;
 	private String _event;
 	private String _type;

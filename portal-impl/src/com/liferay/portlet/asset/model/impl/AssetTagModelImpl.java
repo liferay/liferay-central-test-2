@@ -179,7 +179,17 @@ public class AssetTagModelImpl extends BaseModelImpl<AssetTag>
 	}
 
 	public void setGroupId(long groupId) {
+		if (!_setOriginalGroupId) {
+			_setOriginalGroupId = true;
+
+			_originalGroupId = _groupId;
+		}
+
 		_groupId = groupId;
+	}
+
+	public long getOriginalGroupId() {
+		return _originalGroupId;
 	}
 
 	@JSON
@@ -357,6 +367,11 @@ public class AssetTagModelImpl extends BaseModelImpl<AssetTag>
 
 	@Override
 	public void resetOriginalValues() {
+		AssetTagModelImpl assetTagModelImpl = this;
+
+		assetTagModelImpl._originalGroupId = assetTagModelImpl._groupId;
+
+		assetTagModelImpl._setOriginalGroupId = false;
 	}
 
 	@Override
@@ -492,6 +507,8 @@ public class AssetTagModelImpl extends BaseModelImpl<AssetTag>
 		};
 	private long _tagId;
 	private long _groupId;
+	private long _originalGroupId;
+	private boolean _setOriginalGroupId;
 	private long _companyId;
 	private long _userId;
 	private String _userUuid;

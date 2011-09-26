@@ -255,7 +255,17 @@ public class PollsVoteModelImpl extends BaseModelImpl<PollsVote>
 	}
 
 	public void setChoiceId(long choiceId) {
+		if (!_setOriginalChoiceId) {
+			_setOriginalChoiceId = true;
+
+			_originalChoiceId = _choiceId;
+		}
+
 		_choiceId = choiceId;
+	}
+
+	public long getOriginalChoiceId() {
+		return _originalChoiceId;
 	}
 
 	@JSON
@@ -372,6 +382,10 @@ public class PollsVoteModelImpl extends BaseModelImpl<PollsVote>
 		pollsVoteModelImpl._originalQuestionId = pollsVoteModelImpl._questionId;
 
 		pollsVoteModelImpl._setOriginalQuestionId = false;
+
+		pollsVoteModelImpl._originalChoiceId = pollsVoteModelImpl._choiceId;
+
+		pollsVoteModelImpl._setOriginalChoiceId = false;
 	}
 
 	@Override
@@ -519,6 +533,8 @@ public class PollsVoteModelImpl extends BaseModelImpl<PollsVote>
 	private long _originalQuestionId;
 	private boolean _setOriginalQuestionId;
 	private long _choiceId;
+	private long _originalChoiceId;
+	private boolean _setOriginalChoiceId;
 	private Date _voteDate;
 	private transient ExpandoBridge _expandoBridge;
 	private PollsVote _escapedModelProxy;

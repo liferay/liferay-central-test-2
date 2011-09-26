@@ -173,7 +173,17 @@ public class MembershipRequestModelImpl extends BaseModelImpl<MembershipRequest>
 	}
 
 	public void setGroupId(long groupId) {
+		if (!_setOriginalGroupId) {
+			_setOriginalGroupId = true;
+
+			_originalGroupId = _groupId;
+		}
+
 		_groupId = groupId;
+	}
+
+	public long getOriginalGroupId() {
+		return _originalGroupId;
 	}
 
 	@JSON
@@ -191,6 +201,12 @@ public class MembershipRequestModelImpl extends BaseModelImpl<MembershipRequest>
 	}
 
 	public void setUserId(long userId) {
+		if (!_setOriginalUserId) {
+			_setOriginalUserId = true;
+
+			_originalUserId = _userId;
+		}
+
 		_userId = userId;
 	}
 
@@ -200,6 +216,10 @@ public class MembershipRequestModelImpl extends BaseModelImpl<MembershipRequest>
 
 	public void setUserUuid(String userUuid) {
 		_userUuid = userUuid;
+	}
+
+	public long getOriginalUserId() {
+		return _originalUserId;
 	}
 
 	@JSON
@@ -272,7 +292,17 @@ public class MembershipRequestModelImpl extends BaseModelImpl<MembershipRequest>
 	}
 
 	public void setStatusId(int statusId) {
+		if (!_setOriginalStatusId) {
+			_setOriginalStatusId = true;
+
+			_originalStatusId = _statusId;
+		}
+
 		_statusId = statusId;
+	}
+
+	public int getOriginalStatusId() {
+		return _originalStatusId;
 	}
 
 	@Override
@@ -373,6 +403,19 @@ public class MembershipRequestModelImpl extends BaseModelImpl<MembershipRequest>
 
 	@Override
 	public void resetOriginalValues() {
+		MembershipRequestModelImpl membershipRequestModelImpl = this;
+
+		membershipRequestModelImpl._originalGroupId = membershipRequestModelImpl._groupId;
+
+		membershipRequestModelImpl._setOriginalGroupId = false;
+
+		membershipRequestModelImpl._originalUserId = membershipRequestModelImpl._userId;
+
+		membershipRequestModelImpl._setOriginalUserId = false;
+
+		membershipRequestModelImpl._originalStatusId = membershipRequestModelImpl._statusId;
+
+		membershipRequestModelImpl._setOriginalStatusId = false;
 	}
 
 	@Override
@@ -516,9 +559,13 @@ public class MembershipRequestModelImpl extends BaseModelImpl<MembershipRequest>
 		};
 	private long _membershipRequestId;
 	private long _groupId;
+	private long _originalGroupId;
+	private boolean _setOriginalGroupId;
 	private long _companyId;
 	private long _userId;
 	private String _userUuid;
+	private long _originalUserId;
+	private boolean _setOriginalUserId;
 	private Date _createDate;
 	private String _comments;
 	private String _replyComments;
@@ -526,6 +573,8 @@ public class MembershipRequestModelImpl extends BaseModelImpl<MembershipRequest>
 	private long _replierUserId;
 	private String _replierUserUuid;
 	private int _statusId;
+	private int _originalStatusId;
+	private boolean _setOriginalStatusId;
 	private transient ExpandoBridge _expandoBridge;
 	private MembershipRequest _escapedModelProxy;
 }

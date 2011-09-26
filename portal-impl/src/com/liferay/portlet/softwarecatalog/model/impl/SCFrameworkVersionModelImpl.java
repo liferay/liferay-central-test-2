@@ -188,7 +188,17 @@ public class SCFrameworkVersionModelImpl extends BaseModelImpl<SCFrameworkVersio
 	}
 
 	public void setGroupId(long groupId) {
+		if (!_setOriginalGroupId) {
+			_setOriginalGroupId = true;
+
+			_originalGroupId = _groupId;
+		}
+
 		_groupId = groupId;
+	}
+
+	public long getOriginalGroupId() {
+		return _originalGroupId;
 	}
 
 	@JSON
@@ -197,7 +207,17 @@ public class SCFrameworkVersionModelImpl extends BaseModelImpl<SCFrameworkVersio
 	}
 
 	public void setCompanyId(long companyId) {
+		if (!_setOriginalCompanyId) {
+			_setOriginalCompanyId = true;
+
+			_originalCompanyId = _companyId;
+		}
+
 		_companyId = companyId;
+	}
+
+	public long getOriginalCompanyId() {
+		return _originalCompanyId;
 	}
 
 	@JSON
@@ -287,7 +307,17 @@ public class SCFrameworkVersionModelImpl extends BaseModelImpl<SCFrameworkVersio
 	}
 
 	public void setActive(boolean active) {
+		if (!_setOriginalActive) {
+			_setOriginalActive = true;
+
+			_originalActive = _active;
+		}
+
 		_active = active;
+	}
+
+	public boolean getOriginalActive() {
+		return _originalActive;
 	}
 
 	@JSON
@@ -397,6 +427,19 @@ public class SCFrameworkVersionModelImpl extends BaseModelImpl<SCFrameworkVersio
 
 	@Override
 	public void resetOriginalValues() {
+		SCFrameworkVersionModelImpl scFrameworkVersionModelImpl = this;
+
+		scFrameworkVersionModelImpl._originalGroupId = scFrameworkVersionModelImpl._groupId;
+
+		scFrameworkVersionModelImpl._setOriginalGroupId = false;
+
+		scFrameworkVersionModelImpl._originalCompanyId = scFrameworkVersionModelImpl._companyId;
+
+		scFrameworkVersionModelImpl._setOriginalCompanyId = false;
+
+		scFrameworkVersionModelImpl._originalActive = scFrameworkVersionModelImpl._active;
+
+		scFrameworkVersionModelImpl._setOriginalActive = false;
 	}
 
 	@Override
@@ -555,7 +598,11 @@ public class SCFrameworkVersionModelImpl extends BaseModelImpl<SCFrameworkVersio
 		};
 	private long _frameworkVersionId;
 	private long _groupId;
+	private long _originalGroupId;
+	private boolean _setOriginalGroupId;
 	private long _companyId;
+	private long _originalCompanyId;
+	private boolean _setOriginalCompanyId;
 	private long _userId;
 	private String _userUuid;
 	private String _userName;
@@ -564,6 +611,8 @@ public class SCFrameworkVersionModelImpl extends BaseModelImpl<SCFrameworkVersio
 	private String _name;
 	private String _url;
 	private boolean _active;
+	private boolean _originalActive;
+	private boolean _setOriginalActive;
 	private int _priority;
 	private transient ExpandoBridge _expandoBridge;
 	private SCFrameworkVersion _escapedModelProxy;

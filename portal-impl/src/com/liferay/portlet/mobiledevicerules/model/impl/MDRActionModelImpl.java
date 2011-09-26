@@ -312,7 +312,17 @@ public class MDRActionModelImpl extends BaseModelImpl<MDRAction>
 	}
 
 	public void setRuleGroupInstanceId(long ruleGroupInstanceId) {
+		if (!_setOriginalRuleGroupInstanceId) {
+			_setOriginalRuleGroupInstanceId = true;
+
+			_originalRuleGroupInstanceId = _ruleGroupInstanceId;
+		}
+
 		_ruleGroupInstanceId = ruleGroupInstanceId;
+	}
+
+	public long getOriginalRuleGroupInstanceId() {
+		return _originalRuleGroupInstanceId;
 	}
 
 	@JSON
@@ -634,6 +644,10 @@ public class MDRActionModelImpl extends BaseModelImpl<MDRAction>
 		mdrActionModelImpl._originalGroupId = mdrActionModelImpl._groupId;
 
 		mdrActionModelImpl._setOriginalGroupId = false;
+
+		mdrActionModelImpl._originalRuleGroupInstanceId = mdrActionModelImpl._ruleGroupInstanceId;
+
+		mdrActionModelImpl._setOriginalRuleGroupInstanceId = false;
 	}
 
 	@Override
@@ -854,6 +868,8 @@ public class MDRActionModelImpl extends BaseModelImpl<MDRAction>
 	private long _classNameId;
 	private long _classPK;
 	private long _ruleGroupInstanceId;
+	private long _originalRuleGroupInstanceId;
+	private boolean _setOriginalRuleGroupInstanceId;
 	private String _name;
 	private String _description;
 	private String _type;

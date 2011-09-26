@@ -114,7 +114,15 @@ public class DLFileEntryMetadataModelImpl extends BaseModelImpl<DLFileEntryMetad
 	}
 
 	public void setUuid(String uuid) {
+		if (_originalUuid == null) {
+			_originalUuid = _uuid;
+		}
+
 		_uuid = uuid;
+	}
+
+	public String getOriginalUuid() {
+		return GetterUtil.getString(_originalUuid);
 	}
 
 	public long getFileEntryMetadataId() {
@@ -156,7 +164,17 @@ public class DLFileEntryMetadataModelImpl extends BaseModelImpl<DLFileEntryMetad
 	}
 
 	public void setFileEntryTypeId(long fileEntryTypeId) {
+		if (!_setOriginalFileEntryTypeId) {
+			_setOriginalFileEntryTypeId = true;
+
+			_originalFileEntryTypeId = _fileEntryTypeId;
+		}
+
 		_fileEntryTypeId = fileEntryTypeId;
+	}
+
+	public long getOriginalFileEntryTypeId() {
+		return _originalFileEntryTypeId;
 	}
 
 	public long getFileEntryId() {
@@ -291,9 +309,15 @@ public class DLFileEntryMetadataModelImpl extends BaseModelImpl<DLFileEntryMetad
 	public void resetOriginalValues() {
 		DLFileEntryMetadataModelImpl dlFileEntryMetadataModelImpl = this;
 
+		dlFileEntryMetadataModelImpl._originalUuid = dlFileEntryMetadataModelImpl._uuid;
+
 		dlFileEntryMetadataModelImpl._originalDDMStructureId = dlFileEntryMetadataModelImpl._DDMStructureId;
 
 		dlFileEntryMetadataModelImpl._setOriginalDDMStructureId = false;
+
+		dlFileEntryMetadataModelImpl._originalFileEntryTypeId = dlFileEntryMetadataModelImpl._fileEntryTypeId;
+
+		dlFileEntryMetadataModelImpl._setOriginalFileEntryTypeId = false;
 
 		dlFileEntryMetadataModelImpl._originalFileEntryId = dlFileEntryMetadataModelImpl._fileEntryId;
 
@@ -401,12 +425,15 @@ public class DLFileEntryMetadataModelImpl extends BaseModelImpl<DLFileEntryMetad
 			DLFileEntryMetadata.class
 		};
 	private String _uuid;
+	private String _originalUuid;
 	private long _fileEntryMetadataId;
 	private long _DDMStorageId;
 	private long _DDMStructureId;
 	private long _originalDDMStructureId;
 	private boolean _setOriginalDDMStructureId;
 	private long _fileEntryTypeId;
+	private long _originalFileEntryTypeId;
+	private boolean _setOriginalFileEntryTypeId;
 	private long _fileEntryId;
 	private long _originalFileEntryId;
 	private boolean _setOriginalFileEntryId;

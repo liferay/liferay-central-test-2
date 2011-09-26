@@ -175,7 +175,17 @@ public class PhoneModelImpl extends BaseModelImpl<Phone> implements PhoneModel {
 	}
 
 	public void setCompanyId(long companyId) {
+		if (!_setOriginalCompanyId) {
+			_setOriginalCompanyId = true;
+
+			_originalCompanyId = _companyId;
+		}
+
 		_companyId = companyId;
+	}
+
+	public long getOriginalCompanyId() {
+		return _originalCompanyId;
 	}
 
 	@JSON
@@ -184,6 +194,12 @@ public class PhoneModelImpl extends BaseModelImpl<Phone> implements PhoneModel {
 	}
 
 	public void setUserId(long userId) {
+		if (!_setOriginalUserId) {
+			_setOriginalUserId = true;
+
+			_originalUserId = _userId;
+		}
+
 		_userId = userId;
 	}
 
@@ -193,6 +209,10 @@ public class PhoneModelImpl extends BaseModelImpl<Phone> implements PhoneModel {
 
 	public void setUserUuid(String userUuid) {
 		_userUuid = userUuid;
+	}
+
+	public long getOriginalUserId() {
+		return _originalUserId;
 	}
 
 	@JSON
@@ -241,7 +261,17 @@ public class PhoneModelImpl extends BaseModelImpl<Phone> implements PhoneModel {
 	}
 
 	public void setClassNameId(long classNameId) {
+		if (!_setOriginalClassNameId) {
+			_setOriginalClassNameId = true;
+
+			_originalClassNameId = _classNameId;
+		}
+
 		_classNameId = classNameId;
+	}
+
+	public long getOriginalClassNameId() {
+		return _originalClassNameId;
 	}
 
 	@JSON
@@ -250,7 +280,17 @@ public class PhoneModelImpl extends BaseModelImpl<Phone> implements PhoneModel {
 	}
 
 	public void setClassPK(long classPK) {
+		if (!_setOriginalClassPK) {
+			_setOriginalClassPK = true;
+
+			_originalClassPK = _classPK;
+		}
+
 		_classPK = classPK;
+	}
+
+	public long getOriginalClassPK() {
+		return _originalClassPK;
 	}
 
 	@JSON
@@ -300,7 +340,17 @@ public class PhoneModelImpl extends BaseModelImpl<Phone> implements PhoneModel {
 	}
 
 	public void setPrimary(boolean primary) {
+		if (!_setOriginalPrimary) {
+			_setOriginalPrimary = true;
+
+			_originalPrimary = _primary;
+		}
+
 		_primary = primary;
+	}
+
+	public boolean getOriginalPrimary() {
+		return _originalPrimary;
 	}
 
 	@Override
@@ -400,6 +450,27 @@ public class PhoneModelImpl extends BaseModelImpl<Phone> implements PhoneModel {
 
 	@Override
 	public void resetOriginalValues() {
+		PhoneModelImpl phoneModelImpl = this;
+
+		phoneModelImpl._originalCompanyId = phoneModelImpl._companyId;
+
+		phoneModelImpl._setOriginalCompanyId = false;
+
+		phoneModelImpl._originalUserId = phoneModelImpl._userId;
+
+		phoneModelImpl._setOriginalUserId = false;
+
+		phoneModelImpl._originalClassNameId = phoneModelImpl._classNameId;
+
+		phoneModelImpl._setOriginalClassNameId = false;
+
+		phoneModelImpl._originalClassPK = phoneModelImpl._classPK;
+
+		phoneModelImpl._setOriginalClassPK = false;
+
+		phoneModelImpl._originalPrimary = phoneModelImpl._primary;
+
+		phoneModelImpl._setOriginalPrimary = false;
 	}
 
 	@Override
@@ -565,17 +636,27 @@ public class PhoneModelImpl extends BaseModelImpl<Phone> implements PhoneModel {
 		};
 	private long _phoneId;
 	private long _companyId;
+	private long _originalCompanyId;
+	private boolean _setOriginalCompanyId;
 	private long _userId;
 	private String _userUuid;
+	private long _originalUserId;
+	private boolean _setOriginalUserId;
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
 	private long _classNameId;
+	private long _originalClassNameId;
+	private boolean _setOriginalClassNameId;
 	private long _classPK;
+	private long _originalClassPK;
+	private boolean _setOriginalClassPK;
 	private String _number;
 	private String _extension;
 	private int _typeId;
 	private boolean _primary;
+	private boolean _originalPrimary;
+	private boolean _setOriginalPrimary;
 	private transient ExpandoBridge _expandoBridge;
 	private Phone _escapedModelProxy;
 }

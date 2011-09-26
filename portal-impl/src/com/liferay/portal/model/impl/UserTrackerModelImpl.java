@@ -121,7 +121,17 @@ public class UserTrackerModelImpl extends BaseModelImpl<UserTracker>
 	}
 
 	public void setCompanyId(long companyId) {
+		if (!_setOriginalCompanyId) {
+			_setOriginalCompanyId = true;
+
+			_originalCompanyId = _companyId;
+		}
+
 		_companyId = companyId;
+	}
+
+	public long getOriginalCompanyId() {
+		return _originalCompanyId;
 	}
 
 	public long getUserId() {
@@ -129,6 +139,12 @@ public class UserTrackerModelImpl extends BaseModelImpl<UserTracker>
 	}
 
 	public void setUserId(long userId) {
+		if (!_setOriginalUserId) {
+			_setOriginalUserId = true;
+
+			_originalUserId = _userId;
+		}
+
 		_userId = userId;
 	}
 
@@ -138,6 +154,10 @@ public class UserTrackerModelImpl extends BaseModelImpl<UserTracker>
 
 	public void setUserUuid(String userUuid) {
 		_userUuid = userUuid;
+	}
+
+	public long getOriginalUserId() {
+		return _originalUserId;
 	}
 
 	public Date getModifiedDate() {
@@ -158,7 +178,15 @@ public class UserTrackerModelImpl extends BaseModelImpl<UserTracker>
 	}
 
 	public void setSessionId(String sessionId) {
+		if (_originalSessionId == null) {
+			_originalSessionId = _sessionId;
+		}
+
 		_sessionId = sessionId;
+	}
+
+	public String getOriginalSessionId() {
+		return GetterUtil.getString(_originalSessionId);
 	}
 
 	public String getRemoteAddr() {
@@ -295,6 +323,17 @@ public class UserTrackerModelImpl extends BaseModelImpl<UserTracker>
 
 	@Override
 	public void resetOriginalValues() {
+		UserTrackerModelImpl userTrackerModelImpl = this;
+
+		userTrackerModelImpl._originalCompanyId = userTrackerModelImpl._companyId;
+
+		userTrackerModelImpl._setOriginalCompanyId = false;
+
+		userTrackerModelImpl._originalUserId = userTrackerModelImpl._userId;
+
+		userTrackerModelImpl._setOriginalUserId = false;
+
+		userTrackerModelImpl._originalSessionId = userTrackerModelImpl._sessionId;
 	}
 
 	@Override
@@ -427,10 +466,15 @@ public class UserTrackerModelImpl extends BaseModelImpl<UserTracker>
 		};
 	private long _userTrackerId;
 	private long _companyId;
+	private long _originalCompanyId;
+	private boolean _setOriginalCompanyId;
 	private long _userId;
 	private String _userUuid;
+	private long _originalUserId;
+	private boolean _setOriginalUserId;
 	private Date _modifiedDate;
 	private String _sessionId;
+	private String _originalSessionId;
 	private String _remoteAddr;
 	private String _remoteHost;
 	private String _userAgent;

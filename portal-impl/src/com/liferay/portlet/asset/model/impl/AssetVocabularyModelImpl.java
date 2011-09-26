@@ -225,7 +225,17 @@ public class AssetVocabularyModelImpl extends BaseModelImpl<AssetVocabulary>
 	}
 
 	public void setCompanyId(long companyId) {
+		if (!_setOriginalCompanyId) {
+			_setOriginalCompanyId = true;
+
+			_originalCompanyId = _companyId;
+		}
+
 		_companyId = companyId;
+	}
+
+	public long getOriginalCompanyId() {
+		return _originalCompanyId;
 	}
 
 	@JSON
@@ -600,6 +610,10 @@ public class AssetVocabularyModelImpl extends BaseModelImpl<AssetVocabulary>
 
 		assetVocabularyModelImpl._setOriginalGroupId = false;
 
+		assetVocabularyModelImpl._originalCompanyId = assetVocabularyModelImpl._companyId;
+
+		assetVocabularyModelImpl._setOriginalCompanyId = false;
+
 		assetVocabularyModelImpl._originalName = assetVocabularyModelImpl._name;
 	}
 
@@ -789,6 +803,8 @@ public class AssetVocabularyModelImpl extends BaseModelImpl<AssetVocabulary>
 	private long _originalGroupId;
 	private boolean _setOriginalGroupId;
 	private long _companyId;
+	private long _originalCompanyId;
+	private boolean _setOriginalCompanyId;
 	private long _userId;
 	private String _userUuid;
 	private String _userName;

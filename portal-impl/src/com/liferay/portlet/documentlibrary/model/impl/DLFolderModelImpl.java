@@ -236,7 +236,17 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 	}
 
 	public void setCompanyId(long companyId) {
+		if (!_setOriginalCompanyId) {
+			_setOriginalCompanyId = true;
+
+			_originalCompanyId = _companyId;
+		}
+
 		_companyId = companyId;
+	}
+
+	public long getOriginalCompanyId() {
+		return _originalCompanyId;
 	}
 
 	@JSON
@@ -317,7 +327,17 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 	}
 
 	public void setMountPoint(boolean mountPoint) {
+		if (!_setOriginalMountPoint) {
+			_setOriginalMountPoint = true;
+
+			_originalMountPoint = _mountPoint;
+		}
+
 		_mountPoint = mountPoint;
+	}
+
+	public boolean getOriginalMountPoint() {
+		return _originalMountPoint;
 	}
 
 	@JSON
@@ -530,9 +550,17 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 
 		dlFolderModelImpl._setOriginalGroupId = false;
 
+		dlFolderModelImpl._originalCompanyId = dlFolderModelImpl._companyId;
+
+		dlFolderModelImpl._setOriginalCompanyId = false;
+
 		dlFolderModelImpl._originalRepositoryId = dlFolderModelImpl._repositoryId;
 
 		dlFolderModelImpl._setOriginalRepositoryId = false;
+
+		dlFolderModelImpl._originalMountPoint = dlFolderModelImpl._mountPoint;
+
+		dlFolderModelImpl._setOriginalMountPoint = false;
 
 		dlFolderModelImpl._originalParentFolderId = dlFolderModelImpl._parentFolderId;
 
@@ -754,6 +782,8 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 	private long _originalGroupId;
 	private boolean _setOriginalGroupId;
 	private long _companyId;
+	private long _originalCompanyId;
+	private boolean _setOriginalCompanyId;
 	private long _userId;
 	private String _userUuid;
 	private String _userName;
@@ -763,6 +793,8 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 	private long _originalRepositoryId;
 	private boolean _setOriginalRepositoryId;
 	private boolean _mountPoint;
+	private boolean _originalMountPoint;
+	private boolean _setOriginalMountPoint;
 	private long _parentFolderId;
 	private long _originalParentFolderId;
 	private boolean _setOriginalParentFolderId;

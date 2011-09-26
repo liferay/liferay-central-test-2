@@ -237,7 +237,17 @@ public class ExpandoValueModelImpl extends BaseModelImpl<ExpandoValue>
 	}
 
 	public void setClassNameId(long classNameId) {
+		if (!_setOriginalClassNameId) {
+			_setOriginalClassNameId = true;
+
+			_originalClassNameId = _classNameId;
+		}
+
 		_classNameId = classNameId;
+	}
+
+	public long getOriginalClassNameId() {
+		return _originalClassNameId;
 	}
 
 	@JSON
@@ -270,7 +280,15 @@ public class ExpandoValueModelImpl extends BaseModelImpl<ExpandoValue>
 	}
 
 	public void setData(String data) {
+		if (_originalData == null) {
+			_originalData = _data;
+		}
+
 		_data = data;
+	}
+
+	public String getOriginalData() {
+		return GetterUtil.getString(_originalData);
 	}
 
 	@Override
@@ -401,9 +419,15 @@ public class ExpandoValueModelImpl extends BaseModelImpl<ExpandoValue>
 
 		expandoValueModelImpl._setOriginalRowId = false;
 
+		expandoValueModelImpl._originalClassNameId = expandoValueModelImpl._classNameId;
+
+		expandoValueModelImpl._setOriginalClassNameId = false;
+
 		expandoValueModelImpl._originalClassPK = expandoValueModelImpl._classPK;
 
 		expandoValueModelImpl._setOriginalClassPK = false;
+
+		expandoValueModelImpl._originalData = expandoValueModelImpl._data;
 	}
 
 	@Override
@@ -521,9 +545,12 @@ public class ExpandoValueModelImpl extends BaseModelImpl<ExpandoValue>
 	private long _originalRowId;
 	private boolean _setOriginalRowId;
 	private long _classNameId;
+	private long _originalClassNameId;
+	private boolean _setOriginalClassNameId;
 	private long _classPK;
 	private long _originalClassPK;
 	private boolean _setOriginalClassPK;
 	private String _data;
+	private String _originalData;
 	private ExpandoValue _escapedModelProxy;
 }

@@ -142,7 +142,17 @@ public class UserGroupGroupRoleModelImpl extends BaseModelImpl<UserGroupGroupRol
 	}
 
 	public void setUserGroupId(long userGroupId) {
+		if (!_setOriginalUserGroupId) {
+			_setOriginalUserGroupId = true;
+
+			_originalUserGroupId = _userGroupId;
+		}
+
 		_userGroupId = userGroupId;
+	}
+
+	public long getOriginalUserGroupId() {
+		return _originalUserGroupId;
 	}
 
 	@JSON
@@ -151,7 +161,17 @@ public class UserGroupGroupRoleModelImpl extends BaseModelImpl<UserGroupGroupRol
 	}
 
 	public void setGroupId(long groupId) {
+		if (!_setOriginalGroupId) {
+			_setOriginalGroupId = true;
+
+			_originalGroupId = _groupId;
+		}
+
 		_groupId = groupId;
+	}
+
+	public long getOriginalGroupId() {
+		return _originalGroupId;
 	}
 
 	@JSON
@@ -160,7 +180,17 @@ public class UserGroupGroupRoleModelImpl extends BaseModelImpl<UserGroupGroupRol
 	}
 
 	public void setRoleId(long roleId) {
+		if (!_setOriginalRoleId) {
+			_setOriginalRoleId = true;
+
+			_originalRoleId = _roleId;
+		}
+
 		_roleId = roleId;
+	}
+
+	public long getOriginalRoleId() {
+		return _originalRoleId;
 	}
 
 	@Override
@@ -230,6 +260,19 @@ public class UserGroupGroupRoleModelImpl extends BaseModelImpl<UserGroupGroupRol
 
 	@Override
 	public void resetOriginalValues() {
+		UserGroupGroupRoleModelImpl userGroupGroupRoleModelImpl = this;
+
+		userGroupGroupRoleModelImpl._originalUserGroupId = userGroupGroupRoleModelImpl._userGroupId;
+
+		userGroupGroupRoleModelImpl._setOriginalUserGroupId = false;
+
+		userGroupGroupRoleModelImpl._originalGroupId = userGroupGroupRoleModelImpl._groupId;
+
+		userGroupGroupRoleModelImpl._setOriginalGroupId = false;
+
+		userGroupGroupRoleModelImpl._originalRoleId = userGroupGroupRoleModelImpl._roleId;
+
+		userGroupGroupRoleModelImpl._setOriginalRoleId = false;
 	}
 
 	@Override
@@ -290,7 +333,13 @@ public class UserGroupGroupRoleModelImpl extends BaseModelImpl<UserGroupGroupRol
 			UserGroupGroupRole.class
 		};
 	private long _userGroupId;
+	private long _originalUserGroupId;
+	private boolean _setOriginalUserGroupId;
 	private long _groupId;
+	private long _originalGroupId;
+	private boolean _setOriginalGroupId;
 	private long _roleId;
+	private long _originalRoleId;
+	private boolean _setOriginalRoleId;
 	private UserGroupGroupRole _escapedModelProxy;
 }

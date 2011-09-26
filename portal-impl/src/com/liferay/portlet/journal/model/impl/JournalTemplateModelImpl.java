@@ -322,7 +322,15 @@ public class JournalTemplateModelImpl extends BaseModelImpl<JournalTemplate>
 	}
 
 	public void setStructureId(String structureId) {
+		if (_originalStructureId == null) {
+			_originalStructureId = _structureId;
+		}
+
 		_structureId = structureId;
+	}
+
+	public String getOriginalStructureId() {
+		return GetterUtil.getString(_originalStructureId);
 	}
 
 	@JSON
@@ -707,6 +715,8 @@ public class JournalTemplateModelImpl extends BaseModelImpl<JournalTemplate>
 
 		journalTemplateModelImpl._originalTemplateId = journalTemplateModelImpl._templateId;
 
+		journalTemplateModelImpl._originalStructureId = journalTemplateModelImpl._structureId;
+
 		journalTemplateModelImpl._originalSmallImageId = journalTemplateModelImpl._smallImageId;
 
 		journalTemplateModelImpl._setOriginalSmallImageId = false;
@@ -972,6 +982,7 @@ public class JournalTemplateModelImpl extends BaseModelImpl<JournalTemplate>
 	private String _templateId;
 	private String _originalTemplateId;
 	private String _structureId;
+	private String _originalStructureId;
 	private String _name;
 	private String _description;
 	private String _xsl;

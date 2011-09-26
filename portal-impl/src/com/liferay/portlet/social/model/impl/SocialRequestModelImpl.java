@@ -166,7 +166,17 @@ public class SocialRequestModelImpl extends BaseModelImpl<SocialRequest>
 	}
 
 	public void setCompanyId(long companyId) {
+		if (!_setOriginalCompanyId) {
+			_setOriginalCompanyId = true;
+
+			_originalCompanyId = _companyId;
+		}
+
 		_companyId = companyId;
+	}
+
+	public long getOriginalCompanyId() {
+		return _originalCompanyId;
 	}
 
 	public long getUserId() {
@@ -318,7 +328,17 @@ public class SocialRequestModelImpl extends BaseModelImpl<SocialRequest>
 	}
 
 	public void setStatus(int status) {
+		if (!_setOriginalStatus) {
+			_setOriginalStatus = true;
+
+			_originalStatus = _status;
+		}
+
 		_status = status;
+	}
+
+	public int getOriginalStatus() {
+		return _originalStatus;
 	}
 
 	@Override
@@ -437,6 +457,10 @@ public class SocialRequestModelImpl extends BaseModelImpl<SocialRequest>
 
 		socialRequestModelImpl._setOriginalGroupId = false;
 
+		socialRequestModelImpl._originalCompanyId = socialRequestModelImpl._companyId;
+
+		socialRequestModelImpl._setOriginalCompanyId = false;
+
 		socialRequestModelImpl._originalUserId = socialRequestModelImpl._userId;
 
 		socialRequestModelImpl._setOriginalUserId = false;
@@ -456,6 +480,10 @@ public class SocialRequestModelImpl extends BaseModelImpl<SocialRequest>
 		socialRequestModelImpl._originalReceiverUserId = socialRequestModelImpl._receiverUserId;
 
 		socialRequestModelImpl._setOriginalReceiverUserId = false;
+
+		socialRequestModelImpl._originalStatus = socialRequestModelImpl._status;
+
+		socialRequestModelImpl._setOriginalStatus = false;
 	}
 
 	@Override
@@ -614,6 +642,8 @@ public class SocialRequestModelImpl extends BaseModelImpl<SocialRequest>
 	private long _originalGroupId;
 	private boolean _setOriginalGroupId;
 	private long _companyId;
+	private long _originalCompanyId;
+	private boolean _setOriginalCompanyId;
 	private long _userId;
 	private String _userUuid;
 	private long _originalUserId;
@@ -635,6 +665,8 @@ public class SocialRequestModelImpl extends BaseModelImpl<SocialRequest>
 	private long _originalReceiverUserId;
 	private boolean _setOriginalReceiverUserId;
 	private int _status;
+	private int _originalStatus;
+	private boolean _setOriginalStatus;
 	private transient ExpandoBridge _expandoBridge;
 	private SocialRequest _escapedModelProxy;
 }

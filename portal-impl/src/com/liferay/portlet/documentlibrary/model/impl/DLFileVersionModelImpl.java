@@ -450,7 +450,17 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion>
 	}
 
 	public void setStatus(int status) {
+		if (!_setOriginalStatus) {
+			_setOriginalStatus = true;
+
+			_originalStatus = _status;
+		}
+
 		_status = status;
+	}
+
+	public int getOriginalStatus() {
+		return _originalStatus;
 	}
 
 	@JSON
@@ -673,6 +683,10 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion>
 		dlFileVersionModelImpl._setOriginalFileEntryId = false;
 
 		dlFileVersionModelImpl._originalVersion = dlFileVersionModelImpl._version;
+
+		dlFileVersionModelImpl._originalStatus = dlFileVersionModelImpl._status;
+
+		dlFileVersionModelImpl._setOriginalStatus = false;
 	}
 
 	@Override
@@ -1002,6 +1016,8 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion>
 	private long _custom1ImageId;
 	private long _custom2ImageId;
 	private int _status;
+	private int _originalStatus;
+	private boolean _setOriginalStatus;
 	private long _statusByUserId;
 	private String _statusByUserUuid;
 	private String _statusByUserName;

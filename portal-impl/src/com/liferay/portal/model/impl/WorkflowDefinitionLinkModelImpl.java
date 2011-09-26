@@ -275,7 +275,15 @@ public class WorkflowDefinitionLinkModelImpl extends BaseModelImpl<WorkflowDefin
 	}
 
 	public void setWorkflowDefinitionName(String workflowDefinitionName) {
+		if (_originalWorkflowDefinitionName == null) {
+			_originalWorkflowDefinitionName = _workflowDefinitionName;
+		}
+
 		_workflowDefinitionName = workflowDefinitionName;
+	}
+
+	public String getOriginalWorkflowDefinitionName() {
+		return GetterUtil.getString(_originalWorkflowDefinitionName);
 	}
 
 	public int getWorkflowDefinitionVersion() {
@@ -283,7 +291,17 @@ public class WorkflowDefinitionLinkModelImpl extends BaseModelImpl<WorkflowDefin
 	}
 
 	public void setWorkflowDefinitionVersion(int workflowDefinitionVersion) {
+		if (!_setOriginalWorkflowDefinitionVersion) {
+			_setOriginalWorkflowDefinitionVersion = true;
+
+			_originalWorkflowDefinitionVersion = _workflowDefinitionVersion;
+		}
+
 		_workflowDefinitionVersion = workflowDefinitionVersion;
+	}
+
+	public int getOriginalWorkflowDefinitionVersion() {
+		return _originalWorkflowDefinitionVersion;
 	}
 
 	@Override
@@ -405,6 +423,12 @@ public class WorkflowDefinitionLinkModelImpl extends BaseModelImpl<WorkflowDefin
 		workflowDefinitionLinkModelImpl._originalTypePK = workflowDefinitionLinkModelImpl._typePK;
 
 		workflowDefinitionLinkModelImpl._setOriginalTypePK = false;
+
+		workflowDefinitionLinkModelImpl._originalWorkflowDefinitionName = workflowDefinitionLinkModelImpl._workflowDefinitionName;
+
+		workflowDefinitionLinkModelImpl._originalWorkflowDefinitionVersion = workflowDefinitionLinkModelImpl._workflowDefinitionVersion;
+
+		workflowDefinitionLinkModelImpl._setOriginalWorkflowDefinitionVersion = false;
 	}
 
 	@Override
@@ -585,7 +609,10 @@ public class WorkflowDefinitionLinkModelImpl extends BaseModelImpl<WorkflowDefin
 	private long _originalTypePK;
 	private boolean _setOriginalTypePK;
 	private String _workflowDefinitionName;
+	private String _originalWorkflowDefinitionName;
 	private int _workflowDefinitionVersion;
+	private int _originalWorkflowDefinitionVersion;
+	private boolean _setOriginalWorkflowDefinitionVersion;
 	private transient ExpandoBridge _expandoBridge;
 	private WorkflowDefinitionLink _escapedModelProxy;
 }

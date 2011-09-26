@@ -241,7 +241,17 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry>
 	}
 
 	public void setCompanyId(long companyId) {
+		if (!_setOriginalCompanyId) {
+			_setOriginalCompanyId = true;
+
+			_originalCompanyId = _companyId;
+		}
+
 		_companyId = companyId;
+	}
+
+	public long getOriginalCompanyId() {
+		return _originalCompanyId;
 	}
 
 	@JSON
@@ -250,6 +260,12 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry>
 	}
 
 	public void setUserId(long userId) {
+		if (!_setOriginalUserId) {
+			_setOriginalUserId = true;
+
+			_originalUserId = _userId;
+		}
+
 		_userId = userId;
 	}
 
@@ -259,6 +275,10 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry>
 
 	public void setUserUuid(String userUuid) {
 		_userUuid = userUuid;
+	}
+
+	public long getOriginalUserId() {
+		return _originalUserId;
 	}
 
 	@JSON
@@ -363,7 +383,15 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry>
 	}
 
 	public void setDisplayDate(Date displayDate) {
+		if (_originalDisplayDate == null) {
+			_originalDisplayDate = _displayDate;
+		}
+
 		_displayDate = displayDate;
+	}
+
+	public Date getOriginalDisplayDate() {
+		return _originalDisplayDate;
 	}
 
 	@JSON
@@ -448,7 +476,17 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry>
 	}
 
 	public void setStatus(int status) {
+		if (!_setOriginalStatus) {
+			_setOriginalStatus = true;
+
+			_originalStatus = _status;
+		}
+
 		_status = status;
+	}
+
+	public int getOriginalStatus() {
+		return _originalStatus;
 	}
 
 	@JSON
@@ -653,7 +691,21 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry>
 
 		blogsEntryModelImpl._setOriginalGroupId = false;
 
+		blogsEntryModelImpl._originalCompanyId = blogsEntryModelImpl._companyId;
+
+		blogsEntryModelImpl._setOriginalCompanyId = false;
+
+		blogsEntryModelImpl._originalUserId = blogsEntryModelImpl._userId;
+
+		blogsEntryModelImpl._setOriginalUserId = false;
+
 		blogsEntryModelImpl._originalUrlTitle = blogsEntryModelImpl._urlTitle;
+
+		blogsEntryModelImpl._originalDisplayDate = blogsEntryModelImpl._displayDate;
+
+		blogsEntryModelImpl._originalStatus = blogsEntryModelImpl._status;
+
+		blogsEntryModelImpl._setOriginalStatus = false;
 	}
 
 	@Override
@@ -962,8 +1014,12 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry>
 	private long _originalGroupId;
 	private boolean _setOriginalGroupId;
 	private long _companyId;
+	private long _originalCompanyId;
+	private boolean _setOriginalCompanyId;
 	private long _userId;
 	private String _userUuid;
+	private long _originalUserId;
+	private boolean _setOriginalUserId;
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
@@ -973,6 +1029,7 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry>
 	private String _description;
 	private String _content;
 	private Date _displayDate;
+	private Date _originalDisplayDate;
 	private boolean _allowPingbacks;
 	private boolean _allowTrackbacks;
 	private String _trackbacks;
@@ -980,6 +1037,8 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry>
 	private long _smallImageId;
 	private String _smallImageURL;
 	private int _status;
+	private int _originalStatus;
+	private boolean _setOriginalStatus;
 	private long _statusByUserId;
 	private String _statusByUserUuid;
 	private String _statusByUserName;

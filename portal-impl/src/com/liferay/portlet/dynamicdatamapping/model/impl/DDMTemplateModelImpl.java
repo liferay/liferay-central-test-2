@@ -284,7 +284,17 @@ public class DDMTemplateModelImpl extends BaseModelImpl<DDMTemplate>
 	}
 
 	public void setStructureId(long structureId) {
+		if (!_setOriginalStructureId) {
+			_setOriginalStructureId = true;
+
+			_originalStructureId = _structureId;
+		}
+
 		_structureId = structureId;
+	}
+
+	public long getOriginalStructureId() {
+		return _originalStructureId;
 	}
 
 	@JSON
@@ -480,7 +490,15 @@ public class DDMTemplateModelImpl extends BaseModelImpl<DDMTemplate>
 	}
 
 	public void setType(String type) {
+		if (_originalType == null) {
+			_originalType = _type;
+		}
+
 		_type = type;
+	}
+
+	public String getOriginalType() {
+		return GetterUtil.getString(_originalType);
 	}
 
 	@JSON
@@ -494,7 +512,15 @@ public class DDMTemplateModelImpl extends BaseModelImpl<DDMTemplate>
 	}
 
 	public void setLanguage(String language) {
+		if (_originalLanguage == null) {
+			_originalLanguage = _language;
+		}
+
 		_language = language;
+	}
+
+	public String getOriginalLanguage() {
+		return GetterUtil.getString(_originalLanguage);
 	}
 
 	@JSON
@@ -619,6 +645,14 @@ public class DDMTemplateModelImpl extends BaseModelImpl<DDMTemplate>
 		ddmTemplateModelImpl._originalGroupId = ddmTemplateModelImpl._groupId;
 
 		ddmTemplateModelImpl._setOriginalGroupId = false;
+
+		ddmTemplateModelImpl._originalStructureId = ddmTemplateModelImpl._structureId;
+
+		ddmTemplateModelImpl._setOriginalStructureId = false;
+
+		ddmTemplateModelImpl._originalType = ddmTemplateModelImpl._type;
+
+		ddmTemplateModelImpl._originalLanguage = ddmTemplateModelImpl._language;
 	}
 
 	@Override
@@ -835,10 +869,14 @@ public class DDMTemplateModelImpl extends BaseModelImpl<DDMTemplate>
 	private Date _createDate;
 	private Date _modifiedDate;
 	private long _structureId;
+	private long _originalStructureId;
+	private boolean _setOriginalStructureId;
 	private String _name;
 	private String _description;
 	private String _type;
+	private String _originalType;
 	private String _language;
+	private String _originalLanguage;
 	private String _script;
 	private transient ExpandoBridge _expandoBridge;
 	private DDMTemplate _escapedModelProxy;

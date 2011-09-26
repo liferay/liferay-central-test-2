@@ -115,7 +115,17 @@ public class UserTrackerPathModelImpl extends BaseModelImpl<UserTrackerPath>
 	}
 
 	public void setUserTrackerId(long userTrackerId) {
+		if (!_setOriginalUserTrackerId) {
+			_setOriginalUserTrackerId = true;
+
+			_originalUserTrackerId = _userTrackerId;
+		}
+
 		_userTrackerId = userTrackerId;
+	}
+
+	public long getOriginalUserTrackerId() {
+		return _originalUserTrackerId;
 	}
 
 	public String getPath() {
@@ -230,6 +240,11 @@ public class UserTrackerPathModelImpl extends BaseModelImpl<UserTrackerPath>
 
 	@Override
 	public void resetOriginalValues() {
+		UserTrackerPathModelImpl userTrackerPathModelImpl = this;
+
+		userTrackerPathModelImpl._originalUserTrackerId = userTrackerPathModelImpl._userTrackerId;
+
+		userTrackerPathModelImpl._setOriginalUserTrackerId = false;
 	}
 
 	@Override
@@ -312,6 +327,8 @@ public class UserTrackerPathModelImpl extends BaseModelImpl<UserTrackerPath>
 		};
 	private long _userTrackerPathId;
 	private long _userTrackerId;
+	private long _originalUserTrackerId;
+	private boolean _setOriginalUserTrackerId;
 	private String _path;
 	private Date _pathDate;
 	private transient ExpandoBridge _expandoBridge;

@@ -213,7 +213,17 @@ public class SocialEquityUserModelImpl extends BaseModelImpl<SocialEquityUser>
 	}
 
 	public void setRank(int rank) {
+		if (!_setOriginalRank) {
+			_setOriginalRank = true;
+
+			_originalRank = _rank;
+		}
+
 		_rank = rank;
+	}
+
+	public int getOriginalRank() {
+		return _originalRank;
 	}
 
 	@Override
@@ -321,6 +331,10 @@ public class SocialEquityUserModelImpl extends BaseModelImpl<SocialEquityUser>
 		socialEquityUserModelImpl._originalUserId = socialEquityUserModelImpl._userId;
 
 		socialEquityUserModelImpl._setOriginalUserId = false;
+
+		socialEquityUserModelImpl._originalRank = socialEquityUserModelImpl._rank;
+
+		socialEquityUserModelImpl._setOriginalRank = false;
 	}
 
 	@Override
@@ -443,6 +457,8 @@ public class SocialEquityUserModelImpl extends BaseModelImpl<SocialEquityUser>
 	private double _participationK;
 	private double _participationB;
 	private int _rank;
+	private int _originalRank;
+	private boolean _setOriginalRank;
 	private transient ExpandoBridge _expandoBridge;
 	private SocialEquityUser _escapedModelProxy;
 }

@@ -197,7 +197,17 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry>
 	}
 
 	public void setGroupId(long groupId) {
+		if (!_setOriginalGroupId) {
+			_setOriginalGroupId = true;
+
+			_originalGroupId = _groupId;
+		}
+
 		_groupId = groupId;
+	}
+
+	public long getOriginalGroupId() {
+		return _originalGroupId;
 	}
 
 	@JSON
@@ -206,7 +216,17 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry>
 	}
 
 	public void setCompanyId(long companyId) {
+		if (!_setOriginalCompanyId) {
+			_setOriginalCompanyId = true;
+
+			_originalCompanyId = _companyId;
+		}
+
 		_companyId = companyId;
+	}
+
+	public long getOriginalCompanyId() {
+		return _originalCompanyId;
 	}
 
 	@JSON
@@ -215,6 +235,12 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry>
 	}
 
 	public void setUserId(long userId) {
+		if (!_setOriginalUserId) {
+			_setOriginalUserId = true;
+
+			_originalUserId = _userId;
+		}
+
 		_userId = userId;
 	}
 
@@ -224,6 +250,10 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry>
 
 	public void setUserUuid(String userUuid) {
 		_userUuid = userUuid;
+	}
+
+	public long getOriginalUserId() {
+		return _originalUserId;
 	}
 
 	@JSON
@@ -514,6 +544,18 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry>
 	public void resetOriginalValues() {
 		SCProductEntryModelImpl scProductEntryModelImpl = this;
 
+		scProductEntryModelImpl._originalGroupId = scProductEntryModelImpl._groupId;
+
+		scProductEntryModelImpl._setOriginalGroupId = false;
+
+		scProductEntryModelImpl._originalCompanyId = scProductEntryModelImpl._companyId;
+
+		scProductEntryModelImpl._setOriginalCompanyId = false;
+
+		scProductEntryModelImpl._originalUserId = scProductEntryModelImpl._userId;
+
+		scProductEntryModelImpl._setOriginalUserId = false;
+
 		scProductEntryModelImpl._originalRepoGroupId = scProductEntryModelImpl._repoGroupId;
 
 		scProductEntryModelImpl._originalRepoArtifactId = scProductEntryModelImpl._repoArtifactId;
@@ -756,9 +798,15 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry>
 		};
 	private long _productEntryId;
 	private long _groupId;
+	private long _originalGroupId;
+	private boolean _setOriginalGroupId;
 	private long _companyId;
+	private long _originalCompanyId;
+	private boolean _setOriginalCompanyId;
 	private long _userId;
 	private String _userUuid;
+	private long _originalUserId;
+	private boolean _setOriginalUserId;
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;

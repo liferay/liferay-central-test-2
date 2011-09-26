@@ -223,7 +223,17 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory>
 	}
 
 	public void setCompanyId(long companyId) {
+		if (!_setOriginalCompanyId) {
+			_setOriginalCompanyId = true;
+
+			_originalCompanyId = _companyId;
+		}
+
 		_companyId = companyId;
+	}
+
+	public long getOriginalCompanyId() {
+		return _originalCompanyId;
 	}
 
 	@JSON
@@ -281,7 +291,17 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory>
 	}
 
 	public void setParentCategoryId(long parentCategoryId) {
+		if (!_setOriginalParentCategoryId) {
+			_setOriginalParentCategoryId = true;
+
+			_originalParentCategoryId = _parentCategoryId;
+		}
+
 		_parentCategoryId = parentCategoryId;
+	}
+
+	public long getOriginalParentCategoryId() {
+		return _originalParentCategoryId;
 	}
 
 	@JSON
@@ -475,6 +495,14 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory>
 		mbCategoryModelImpl._originalGroupId = mbCategoryModelImpl._groupId;
 
 		mbCategoryModelImpl._setOriginalGroupId = false;
+
+		mbCategoryModelImpl._originalCompanyId = mbCategoryModelImpl._companyId;
+
+		mbCategoryModelImpl._setOriginalCompanyId = false;
+
+		mbCategoryModelImpl._originalParentCategoryId = mbCategoryModelImpl._parentCategoryId;
+
+		mbCategoryModelImpl._setOriginalParentCategoryId = false;
 	}
 
 	@Override
@@ -688,12 +716,16 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory>
 	private long _originalGroupId;
 	private boolean _setOriginalGroupId;
 	private long _companyId;
+	private long _originalCompanyId;
+	private boolean _setOriginalCompanyId;
 	private long _userId;
 	private String _userUuid;
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
 	private long _parentCategoryId;
+	private long _originalParentCategoryId;
+	private boolean _setOriginalParentCategoryId;
 	private String _name;
 	private String _description;
 	private String _displayStyle;

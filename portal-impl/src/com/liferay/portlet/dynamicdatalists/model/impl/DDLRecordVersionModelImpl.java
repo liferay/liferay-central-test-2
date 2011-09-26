@@ -246,7 +246,17 @@ public class DDLRecordVersionModelImpl extends BaseModelImpl<DDLRecordVersion>
 	}
 
 	public void setStatus(int status) {
+		if (!_setOriginalStatus) {
+			_setOriginalStatus = true;
+
+			_originalStatus = _status;
+		}
+
 		_status = status;
+	}
+
+	public int getOriginalStatus() {
+		return _originalStatus;
 	}
 
 	public long getStatusByUserId() {
@@ -439,6 +449,10 @@ public class DDLRecordVersionModelImpl extends BaseModelImpl<DDLRecordVersion>
 		ddlRecordVersionModelImpl._setOriginalRecordId = false;
 
 		ddlRecordVersionModelImpl._originalVersion = ddlRecordVersionModelImpl._version;
+
+		ddlRecordVersionModelImpl._originalStatus = ddlRecordVersionModelImpl._status;
+
+		ddlRecordVersionModelImpl._setOriginalStatus = false;
 	}
 
 	@Override
@@ -642,6 +656,8 @@ public class DDLRecordVersionModelImpl extends BaseModelImpl<DDLRecordVersion>
 	private String _originalVersion;
 	private int _displayIndex;
 	private int _status;
+	private int _originalStatus;
+	private boolean _setOriginalStatus;
 	private long _statusByUserId;
 	private String _statusByUserUuid;
 	private String _statusByUserName;

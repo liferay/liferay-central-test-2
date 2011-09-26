@@ -193,7 +193,17 @@ public class DLFileEntryTypeModelImpl extends BaseModelImpl<DLFileEntryType>
 	}
 
 	public void setGroupId(long groupId) {
+		if (!_setOriginalGroupId) {
+			_setOriginalGroupId = true;
+
+			_originalGroupId = _groupId;
+		}
+
 		_groupId = groupId;
+	}
+
+	public long getOriginalGroupId() {
+		return _originalGroupId;
 	}
 
 	@JSON
@@ -265,7 +275,15 @@ public class DLFileEntryTypeModelImpl extends BaseModelImpl<DLFileEntryType>
 	}
 
 	public void setName(String name) {
+		if (_originalName == null) {
+			_originalName = _name;
+		}
+
 		_name = name;
+	}
+
+	public String getOriginalName() {
+		return GetterUtil.getString(_originalName);
 	}
 
 	@JSON
@@ -279,7 +297,15 @@ public class DLFileEntryTypeModelImpl extends BaseModelImpl<DLFileEntryType>
 	}
 
 	public void setDescription(String description) {
+		if (_originalDescription == null) {
+			_originalDescription = _description;
+		}
+
 		_description = description;
+	}
+
+	public String getOriginalDescription() {
+		return GetterUtil.getString(_originalDescription);
 	}
 
 	@Override
@@ -378,6 +404,15 @@ public class DLFileEntryTypeModelImpl extends BaseModelImpl<DLFileEntryType>
 
 	@Override
 	public void resetOriginalValues() {
+		DLFileEntryTypeModelImpl dlFileEntryTypeModelImpl = this;
+
+		dlFileEntryTypeModelImpl._originalGroupId = dlFileEntryTypeModelImpl._groupId;
+
+		dlFileEntryTypeModelImpl._setOriginalGroupId = false;
+
+		dlFileEntryTypeModelImpl._originalName = dlFileEntryTypeModelImpl._name;
+
+		dlFileEntryTypeModelImpl._originalDescription = dlFileEntryTypeModelImpl._description;
 	}
 
 	@Override
@@ -519,6 +554,8 @@ public class DLFileEntryTypeModelImpl extends BaseModelImpl<DLFileEntryType>
 		};
 	private long _fileEntryTypeId;
 	private long _groupId;
+	private long _originalGroupId;
+	private boolean _setOriginalGroupId;
 	private long _companyId;
 	private long _userId;
 	private String _userUuid;
@@ -526,7 +563,9 @@ public class DLFileEntryTypeModelImpl extends BaseModelImpl<DLFileEntryType>
 	private Date _createDate;
 	private Date _modifiedDate;
 	private String _name;
+	private String _originalName;
 	private String _description;
+	private String _originalDescription;
 	private transient ExpandoBridge _expandoBridge;
 	private DLFileEntryType _escapedModelProxy;
 }

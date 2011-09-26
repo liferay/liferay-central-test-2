@@ -114,7 +114,15 @@ public class SocialRelationModelImpl extends BaseModelImpl<SocialRelation>
 	}
 
 	public void setUuid(String uuid) {
+		if (_originalUuid == null) {
+			_originalUuid = _uuid;
+		}
+
 		_uuid = uuid;
+	}
+
+	public String getOriginalUuid() {
+		return GetterUtil.getString(_originalUuid);
 	}
 
 	public long getRelationId() {
@@ -130,7 +138,17 @@ public class SocialRelationModelImpl extends BaseModelImpl<SocialRelation>
 	}
 
 	public void setCompanyId(long companyId) {
+		if (!_setOriginalCompanyId) {
+			_setOriginalCompanyId = true;
+
+			_originalCompanyId = _companyId;
+		}
+
 		_companyId = companyId;
+	}
+
+	public long getOriginalCompanyId() {
+		return _originalCompanyId;
 	}
 
 	public long getCreateDate() {
@@ -291,6 +309,12 @@ public class SocialRelationModelImpl extends BaseModelImpl<SocialRelation>
 	public void resetOriginalValues() {
 		SocialRelationModelImpl socialRelationModelImpl = this;
 
+		socialRelationModelImpl._originalUuid = socialRelationModelImpl._uuid;
+
+		socialRelationModelImpl._originalCompanyId = socialRelationModelImpl._companyId;
+
+		socialRelationModelImpl._setOriginalCompanyId = false;
+
 		socialRelationModelImpl._originalUserId1 = socialRelationModelImpl._userId1;
 
 		socialRelationModelImpl._setOriginalUserId1 = false;
@@ -400,8 +424,11 @@ public class SocialRelationModelImpl extends BaseModelImpl<SocialRelation>
 			SocialRelation.class
 		};
 	private String _uuid;
+	private String _originalUuid;
 	private long _relationId;
 	private long _companyId;
+	private long _originalCompanyId;
+	private boolean _setOriginalCompanyId;
 	private long _createDate;
 	private long _userId1;
 	private long _originalUserId1;

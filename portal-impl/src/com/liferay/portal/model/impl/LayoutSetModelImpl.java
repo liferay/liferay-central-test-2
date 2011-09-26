@@ -347,7 +347,15 @@ public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet>
 	}
 
 	public void setLayoutSetPrototypeUuid(String layoutSetPrototypeUuid) {
+		if (_originalLayoutSetPrototypeUuid == null) {
+			_originalLayoutSetPrototypeUuid = _layoutSetPrototypeUuid;
+		}
+
 		_layoutSetPrototypeUuid = layoutSetPrototypeUuid;
+	}
+
+	public String getOriginalLayoutSetPrototypeUuid() {
+		return GetterUtil.getString(_originalLayoutSetPrototypeUuid);
 	}
 
 	@JSON
@@ -475,6 +483,8 @@ public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet>
 		layoutSetModelImpl._originalPrivateLayout = layoutSetModelImpl._privateLayout;
 
 		layoutSetModelImpl._setOriginalPrivateLayout = false;
+
+		layoutSetModelImpl._originalLayoutSetPrototypeUuid = layoutSetModelImpl._layoutSetPrototypeUuid;
 	}
 
 	@Override
@@ -691,6 +701,7 @@ public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet>
 	private int _pageCount;
 	private String _settings;
 	private String _layoutSetPrototypeUuid;
+	private String _originalLayoutSetPrototypeUuid;
 	private boolean _layoutSetPrototypeLinkEnabled;
 	private transient ExpandoBridge _expandoBridge;
 	private LayoutSet _escapedModelProxy;

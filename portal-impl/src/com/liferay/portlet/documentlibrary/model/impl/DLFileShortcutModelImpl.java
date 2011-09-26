@@ -289,7 +289,17 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut>
 	}
 
 	public void setFolderId(long folderId) {
+		if (!_setOriginalFolderId) {
+			_setOriginalFolderId = true;
+
+			_originalFolderId = _folderId;
+		}
+
 		_folderId = folderId;
+	}
+
+	public long getOriginalFolderId() {
+		return _originalFolderId;
 	}
 
 	@JSON
@@ -298,7 +308,17 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut>
 	}
 
 	public void setToFileEntryId(long toFileEntryId) {
+		if (!_setOriginalToFileEntryId) {
+			_setOriginalToFileEntryId = true;
+
+			_originalToFileEntryId = _toFileEntryId;
+		}
+
 		_toFileEntryId = toFileEntryId;
+	}
+
+	public long getOriginalToFileEntryId() {
+		return _originalToFileEntryId;
 	}
 
 	@JSON
@@ -307,7 +327,17 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut>
 	}
 
 	public void setStatus(int status) {
+		if (!_setOriginalStatus) {
+			_setOriginalStatus = true;
+
+			_originalStatus = _status;
+		}
+
 		_status = status;
+	}
+
+	public int getOriginalStatus() {
+		return _originalStatus;
 	}
 
 	@JSON
@@ -503,6 +533,18 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut>
 		dlFileShortcutModelImpl._originalGroupId = dlFileShortcutModelImpl._groupId;
 
 		dlFileShortcutModelImpl._setOriginalGroupId = false;
+
+		dlFileShortcutModelImpl._originalFolderId = dlFileShortcutModelImpl._folderId;
+
+		dlFileShortcutModelImpl._setOriginalFolderId = false;
+
+		dlFileShortcutModelImpl._originalToFileEntryId = dlFileShortcutModelImpl._toFileEntryId;
+
+		dlFileShortcutModelImpl._setOriginalToFileEntryId = false;
+
+		dlFileShortcutModelImpl._originalStatus = dlFileShortcutModelImpl._status;
+
+		dlFileShortcutModelImpl._setOriginalStatus = false;
 	}
 
 	@Override
@@ -711,8 +753,14 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut>
 	private Date _modifiedDate;
 	private long _repositoryId;
 	private long _folderId;
+	private long _originalFolderId;
+	private boolean _setOriginalFolderId;
 	private long _toFileEntryId;
+	private long _originalToFileEntryId;
+	private boolean _setOriginalToFileEntryId;
 	private int _status;
+	private int _originalStatus;
+	private boolean _setOriginalStatus;
 	private long _statusByUserId;
 	private String _statusByUserUuid;
 	private String _statusByUserName;

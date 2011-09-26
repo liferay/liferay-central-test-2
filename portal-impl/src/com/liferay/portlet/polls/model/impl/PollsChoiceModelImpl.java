@@ -122,7 +122,15 @@ public class PollsChoiceModelImpl extends BaseModelImpl<PollsChoice>
 	}
 
 	public void setUuid(String uuid) {
+		if (_originalUuid == null) {
+			_originalUuid = _uuid;
+		}
+
 		_uuid = uuid;
+	}
+
+	public String getOriginalUuid() {
+		return GetterUtil.getString(_originalUuid);
 	}
 
 	public long getChoiceId() {
@@ -370,6 +378,8 @@ public class PollsChoiceModelImpl extends BaseModelImpl<PollsChoice>
 	public void resetOriginalValues() {
 		PollsChoiceModelImpl pollsChoiceModelImpl = this;
 
+		pollsChoiceModelImpl._originalUuid = pollsChoiceModelImpl._uuid;
+
 		pollsChoiceModelImpl._originalQuestionId = pollsChoiceModelImpl._questionId;
 
 		pollsChoiceModelImpl._setOriginalQuestionId = false;
@@ -469,6 +479,7 @@ public class PollsChoiceModelImpl extends BaseModelImpl<PollsChoice>
 			PollsChoice.class
 		};
 	private String _uuid;
+	private String _originalUuid;
 	private long _choiceId;
 	private long _questionId;
 	private long _originalQuestionId;

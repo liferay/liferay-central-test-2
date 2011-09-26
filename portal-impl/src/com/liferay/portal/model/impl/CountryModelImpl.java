@@ -275,7 +275,17 @@ public class CountryModelImpl extends BaseModelImpl<Country>
 	}
 
 	public void setActive(boolean active) {
+		if (!_setOriginalActive) {
+			_setOriginalActive = true;
+
+			_originalActive = _active;
+		}
+
 		_active = active;
+	}
+
+	public boolean getOriginalActive() {
+		return _originalActive;
 	}
 
 	@Override
@@ -378,6 +388,10 @@ public class CountryModelImpl extends BaseModelImpl<Country>
 		countryModelImpl._originalA2 = countryModelImpl._a2;
 
 		countryModelImpl._originalA3 = countryModelImpl._a3;
+
+		countryModelImpl._originalActive = countryModelImpl._active;
+
+		countryModelImpl._setOriginalActive = false;
 	}
 
 	@Override
@@ -518,6 +532,8 @@ public class CountryModelImpl extends BaseModelImpl<Country>
 	private String _idd;
 	private boolean _zipRequired;
 	private boolean _active;
+	private boolean _originalActive;
+	private boolean _setOriginalActive;
 	private transient ExpandoBridge _expandoBridge;
 	private Country _escapedModelProxy;
 }

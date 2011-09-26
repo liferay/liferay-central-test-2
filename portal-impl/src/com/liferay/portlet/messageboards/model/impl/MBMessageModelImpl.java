@@ -247,7 +247,17 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 	}
 
 	public void setCompanyId(long companyId) {
+		if (!_setOriginalCompanyId) {
+			_setOriginalCompanyId = true;
+
+			_originalCompanyId = _companyId;
+		}
+
 		_companyId = companyId;
+	}
+
+	public long getOriginalCompanyId() {
+		return _originalCompanyId;
 	}
 
 	@JSON
@@ -256,6 +266,12 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 	}
 
 	public void setUserId(long userId) {
+		if (!_setOriginalUserId) {
+			_setOriginalUserId = true;
+
+			_originalUserId = _userId;
+		}
+
 		_userId = userId;
 	}
 
@@ -265,6 +281,10 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 
 	public void setUserUuid(String userUuid) {
 		_userUuid = userUuid;
+	}
+
+	public long getOriginalUserId() {
+		return _originalUserId;
 	}
 
 	@JSON
@@ -313,7 +333,17 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 	}
 
 	public void setClassNameId(long classNameId) {
+		if (!_setOriginalClassNameId) {
+			_setOriginalClassNameId = true;
+
+			_originalClassNameId = _classNameId;
+		}
+
 		_classNameId = classNameId;
+	}
+
+	public long getOriginalClassNameId() {
+		return _originalClassNameId;
 	}
 
 	@JSON
@@ -322,7 +352,17 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 	}
 
 	public void setClassPK(long classPK) {
+		if (!_setOriginalClassPK) {
+			_setOriginalClassPK = true;
+
+			_originalClassPK = _classPK;
+		}
+
 		_classPK = classPK;
+	}
+
+	public long getOriginalClassPK() {
+		return _originalClassPK;
 	}
 
 	@JSON
@@ -331,7 +371,17 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 	}
 
 	public void setCategoryId(long categoryId) {
+		if (!_setOriginalCategoryId) {
+			_setOriginalCategoryId = true;
+
+			_originalCategoryId = _categoryId;
+		}
+
 		_categoryId = categoryId;
+	}
+
+	public long getOriginalCategoryId() {
+		return _originalCategoryId;
 	}
 
 	@JSON
@@ -340,7 +390,17 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 	}
 
 	public void setThreadId(long threadId) {
+		if (!_setOriginalThreadId) {
+			_setOriginalThreadId = true;
+
+			_originalThreadId = _threadId;
+		}
+
 		_threadId = threadId;
+	}
+
+	public long getOriginalThreadId() {
+		return _originalThreadId;
 	}
 
 	@JSON
@@ -358,7 +418,17 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 	}
 
 	public void setParentMessageId(long parentMessageId) {
+		if (!_setOriginalParentMessageId) {
+			_setOriginalParentMessageId = true;
+
+			_originalParentMessageId = _parentMessageId;
+		}
+
 		_parentMessageId = parentMessageId;
+	}
+
+	public long getOriginalParentMessageId() {
+		return _originalParentMessageId;
 	}
 
 	@JSON
@@ -461,7 +531,17 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 	}
 
 	public void setAnswer(boolean answer) {
+		if (!_setOriginalAnswer) {
+			_setOriginalAnswer = true;
+
+			_originalAnswer = _answer;
+		}
+
 		_answer = answer;
+	}
+
+	public boolean getOriginalAnswer() {
+		return _originalAnswer;
 	}
 
 	@JSON
@@ -470,7 +550,17 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 	}
 
 	public void setStatus(int status) {
+		if (!_setOriginalStatus) {
+			_setOriginalStatus = true;
+
+			_originalStatus = _status;
+		}
+
 		_status = status;
+	}
+
+	public int getOriginalStatus() {
+		return _originalStatus;
 	}
 
 	@JSON
@@ -689,6 +779,42 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 		mbMessageModelImpl._originalGroupId = mbMessageModelImpl._groupId;
 
 		mbMessageModelImpl._setOriginalGroupId = false;
+
+		mbMessageModelImpl._originalCompanyId = mbMessageModelImpl._companyId;
+
+		mbMessageModelImpl._setOriginalCompanyId = false;
+
+		mbMessageModelImpl._originalUserId = mbMessageModelImpl._userId;
+
+		mbMessageModelImpl._setOriginalUserId = false;
+
+		mbMessageModelImpl._originalClassNameId = mbMessageModelImpl._classNameId;
+
+		mbMessageModelImpl._setOriginalClassNameId = false;
+
+		mbMessageModelImpl._originalClassPK = mbMessageModelImpl._classPK;
+
+		mbMessageModelImpl._setOriginalClassPK = false;
+
+		mbMessageModelImpl._originalCategoryId = mbMessageModelImpl._categoryId;
+
+		mbMessageModelImpl._setOriginalCategoryId = false;
+
+		mbMessageModelImpl._originalThreadId = mbMessageModelImpl._threadId;
+
+		mbMessageModelImpl._setOriginalThreadId = false;
+
+		mbMessageModelImpl._originalParentMessageId = mbMessageModelImpl._parentMessageId;
+
+		mbMessageModelImpl._setOriginalParentMessageId = false;
+
+		mbMessageModelImpl._originalAnswer = mbMessageModelImpl._answer;
+
+		mbMessageModelImpl._setOriginalAnswer = false;
+
+		mbMessageModelImpl._originalStatus = mbMessageModelImpl._status;
+
+		mbMessageModelImpl._setOriginalStatus = false;
 	}
 
 	@Override
@@ -996,17 +1122,31 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 	private long _originalGroupId;
 	private boolean _setOriginalGroupId;
 	private long _companyId;
+	private long _originalCompanyId;
+	private boolean _setOriginalCompanyId;
 	private long _userId;
 	private String _userUuid;
+	private long _originalUserId;
+	private boolean _setOriginalUserId;
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
 	private long _classNameId;
+	private long _originalClassNameId;
+	private boolean _setOriginalClassNameId;
 	private long _classPK;
+	private long _originalClassPK;
+	private boolean _setOriginalClassPK;
 	private long _categoryId;
+	private long _originalCategoryId;
+	private boolean _setOriginalCategoryId;
 	private long _threadId;
+	private long _originalThreadId;
+	private boolean _setOriginalThreadId;
 	private long _rootMessageId;
 	private long _parentMessageId;
+	private long _originalParentMessageId;
+	private boolean _setOriginalParentMessageId;
 	private String _subject;
 	private String _body;
 	private String _format;
@@ -1015,7 +1155,11 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 	private double _priority;
 	private boolean _allowPingbacks;
 	private boolean _answer;
+	private boolean _originalAnswer;
+	private boolean _setOriginalAnswer;
 	private int _status;
+	private int _originalStatus;
+	private boolean _setOriginalStatus;
 	private long _statusByUserId;
 	private String _statusByUserUuid;
 	private String _statusByUserName;

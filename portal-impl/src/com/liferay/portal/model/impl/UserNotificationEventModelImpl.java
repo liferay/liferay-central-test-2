@@ -119,7 +119,15 @@ public class UserNotificationEventModelImpl extends BaseModelImpl<UserNotificati
 	}
 
 	public void setUuid(String uuid) {
+		if (_originalUuid == null) {
+			_originalUuid = _uuid;
+		}
+
 		_uuid = uuid;
+	}
+
+	public String getOriginalUuid() {
+		return GetterUtil.getString(_originalUuid);
 	}
 
 	public long getUserNotificationEventId() {
@@ -143,6 +151,12 @@ public class UserNotificationEventModelImpl extends BaseModelImpl<UserNotificati
 	}
 
 	public void setUserId(long userId) {
+		if (!_setOriginalUserId) {
+			_setOriginalUserId = true;
+
+			_originalUserId = _userId;
+		}
+
 		_userId = userId;
 	}
 
@@ -152,6 +166,10 @@ public class UserNotificationEventModelImpl extends BaseModelImpl<UserNotificati
 
 	public void setUserUuid(String userUuid) {
 		_userUuid = userUuid;
+	}
+
+	public long getOriginalUserId() {
+		return _originalUserId;
 	}
 
 	public String getType() {
@@ -205,7 +223,17 @@ public class UserNotificationEventModelImpl extends BaseModelImpl<UserNotificati
 	}
 
 	public void setArchived(boolean archived) {
+		if (!_setOriginalArchived) {
+			_setOriginalArchived = true;
+
+			_originalArchived = _archived;
+		}
+
 		_archived = archived;
+	}
+
+	public boolean getOriginalArchived() {
+		return _originalArchived;
 	}
 
 	@Override
@@ -312,6 +340,17 @@ public class UserNotificationEventModelImpl extends BaseModelImpl<UserNotificati
 
 	@Override
 	public void resetOriginalValues() {
+		UserNotificationEventModelImpl userNotificationEventModelImpl = this;
+
+		userNotificationEventModelImpl._originalUuid = userNotificationEventModelImpl._uuid;
+
+		userNotificationEventModelImpl._originalUserId = userNotificationEventModelImpl._userId;
+
+		userNotificationEventModelImpl._setOriginalUserId = false;
+
+		userNotificationEventModelImpl._originalArchived = userNotificationEventModelImpl._archived;
+
+		userNotificationEventModelImpl._setOriginalArchived = false;
 	}
 
 	@Override
@@ -438,15 +477,20 @@ public class UserNotificationEventModelImpl extends BaseModelImpl<UserNotificati
 			UserNotificationEvent.class
 		};
 	private String _uuid;
+	private String _originalUuid;
 	private long _userNotificationEventId;
 	private long _companyId;
 	private long _userId;
 	private String _userUuid;
+	private long _originalUserId;
+	private boolean _setOriginalUserId;
 	private String _type;
 	private long _timestamp;
 	private long _deliverBy;
 	private String _payload;
 	private boolean _archived;
+	private boolean _originalArchived;
+	private boolean _setOriginalArchived;
 	private transient ExpandoBridge _expandoBridge;
 	private UserNotificationEvent _escapedModelProxy;
 }

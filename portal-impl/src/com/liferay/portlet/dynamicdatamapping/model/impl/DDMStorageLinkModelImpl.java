@@ -113,7 +113,15 @@ public class DDMStorageLinkModelImpl extends BaseModelImpl<DDMStorageLink>
 	}
 
 	public void setUuid(String uuid) {
+		if (_originalUuid == null) {
+			_originalUuid = _uuid;
+		}
+
 		_uuid = uuid;
+	}
+
+	public String getOriginalUuid() {
+		return GetterUtil.getString(_originalUuid);
 	}
 
 	public long getStorageLinkId() {
@@ -163,7 +171,17 @@ public class DDMStorageLinkModelImpl extends BaseModelImpl<DDMStorageLink>
 	}
 
 	public void setStructureId(long structureId) {
+		if (!_setOriginalStructureId) {
+			_setOriginalStructureId = true;
+
+			_originalStructureId = _structureId;
+		}
+
 		_structureId = structureId;
+	}
+
+	public long getOriginalStructureId() {
+		return _originalStructureId;
 	}
 
 	@Override
@@ -260,9 +278,15 @@ public class DDMStorageLinkModelImpl extends BaseModelImpl<DDMStorageLink>
 	public void resetOriginalValues() {
 		DDMStorageLinkModelImpl ddmStorageLinkModelImpl = this;
 
+		ddmStorageLinkModelImpl._originalUuid = ddmStorageLinkModelImpl._uuid;
+
 		ddmStorageLinkModelImpl._originalClassPK = ddmStorageLinkModelImpl._classPK;
 
 		ddmStorageLinkModelImpl._setOriginalClassPK = false;
+
+		ddmStorageLinkModelImpl._originalStructureId = ddmStorageLinkModelImpl._structureId;
+
+		ddmStorageLinkModelImpl._setOriginalStructureId = false;
 	}
 
 	@Override
@@ -345,12 +369,15 @@ public class DDMStorageLinkModelImpl extends BaseModelImpl<DDMStorageLink>
 			DDMStorageLink.class
 		};
 	private String _uuid;
+	private String _originalUuid;
 	private long _storageLinkId;
 	private long _classNameId;
 	private long _classPK;
 	private long _originalClassPK;
 	private boolean _setOriginalClassPK;
 	private long _structureId;
+	private long _originalStructureId;
+	private boolean _setOriginalStructureId;
 	private transient ExpandoBridge _expandoBridge;
 	private DDMStorageLink _escapedModelProxy;
 }

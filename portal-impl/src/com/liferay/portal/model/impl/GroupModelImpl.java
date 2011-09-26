@@ -364,7 +364,17 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 	}
 
 	public void setType(int type) {
+		if (!_setOriginalType) {
+			_setOriginalType = true;
+
+			_originalType = _type;
+		}
+
 		_type = type;
+	}
+
+	public int getOriginalType() {
+		return _originalType;
 	}
 
 	@JSON
@@ -426,7 +436,17 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 	}
 
 	public void setActive(boolean active) {
+		if (!_setOriginalActive) {
+			_setOriginalActive = true;
+
+			_originalActive = _active;
+		}
+
 		_active = active;
+	}
+
+	public boolean getOriginalActive() {
+		return _originalActive;
 	}
 
 	@Override
@@ -548,7 +568,15 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 
 		groupModelImpl._originalName = groupModelImpl._name;
 
+		groupModelImpl._originalType = groupModelImpl._type;
+
+		groupModelImpl._setOriginalType = false;
+
 		groupModelImpl._originalFriendlyURL = groupModelImpl._friendlyURL;
+
+		groupModelImpl._originalActive = groupModelImpl._active;
+
+		groupModelImpl._setOriginalActive = false;
 	}
 
 	@Override
@@ -740,11 +768,15 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 	private String _originalName;
 	private String _description;
 	private int _type;
+	private int _originalType;
+	private boolean _setOriginalType;
 	private String _typeSettings;
 	private String _friendlyURL;
 	private String _originalFriendlyURL;
 	private boolean _site;
 	private boolean _active;
+	private boolean _originalActive;
+	private boolean _setOriginalActive;
 	private transient ExpandoBridge _expandoBridge;
 	private Group _escapedModelProxy;
 }

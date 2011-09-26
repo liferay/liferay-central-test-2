@@ -110,7 +110,17 @@ public class OrgGroupPermissionModelImpl extends BaseModelImpl<OrgGroupPermissio
 	}
 
 	public void setGroupId(long groupId) {
+		if (!_setOriginalGroupId) {
+			_setOriginalGroupId = true;
+
+			_originalGroupId = _groupId;
+		}
+
 		_groupId = groupId;
+	}
+
+	public long getOriginalGroupId() {
+		return _originalGroupId;
 	}
 
 	public long getPermissionId() {
@@ -118,7 +128,17 @@ public class OrgGroupPermissionModelImpl extends BaseModelImpl<OrgGroupPermissio
 	}
 
 	public void setPermissionId(long permissionId) {
+		if (!_setOriginalPermissionId) {
+			_setOriginalPermissionId = true;
+
+			_originalPermissionId = _permissionId;
+		}
+
 		_permissionId = permissionId;
+	}
+
+	public long getOriginalPermissionId() {
+		return _originalPermissionId;
 	}
 
 	@Override
@@ -188,6 +208,15 @@ public class OrgGroupPermissionModelImpl extends BaseModelImpl<OrgGroupPermissio
 
 	@Override
 	public void resetOriginalValues() {
+		OrgGroupPermissionModelImpl orgGroupPermissionModelImpl = this;
+
+		orgGroupPermissionModelImpl._originalGroupId = orgGroupPermissionModelImpl._groupId;
+
+		orgGroupPermissionModelImpl._setOriginalGroupId = false;
+
+		orgGroupPermissionModelImpl._originalPermissionId = orgGroupPermissionModelImpl._permissionId;
+
+		orgGroupPermissionModelImpl._setOriginalPermissionId = false;
 	}
 
 	@Override
@@ -249,6 +278,10 @@ public class OrgGroupPermissionModelImpl extends BaseModelImpl<OrgGroupPermissio
 		};
 	private long _organizationId;
 	private long _groupId;
+	private long _originalGroupId;
+	private boolean _setOriginalGroupId;
 	private long _permissionId;
+	private long _originalPermissionId;
+	private boolean _setOriginalPermissionId;
 	private OrgGroupPermission _escapedModelProxy;
 }

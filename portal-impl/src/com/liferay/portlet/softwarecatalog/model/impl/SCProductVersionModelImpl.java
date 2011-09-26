@@ -249,7 +249,17 @@ public class SCProductVersionModelImpl extends BaseModelImpl<SCProductVersion>
 	}
 
 	public void setProductEntryId(long productEntryId) {
+		if (!_setOriginalProductEntryId) {
+			_setOriginalProductEntryId = true;
+
+			_originalProductEntryId = _productEntryId;
+		}
+
 		_productEntryId = productEntryId;
+	}
+
+	public long getOriginalProductEntryId() {
+		return _originalProductEntryId;
 	}
 
 	@JSON
@@ -430,6 +440,10 @@ public class SCProductVersionModelImpl extends BaseModelImpl<SCProductVersion>
 	@Override
 	public void resetOriginalValues() {
 		SCProductVersionModelImpl scProductVersionModelImpl = this;
+
+		scProductVersionModelImpl._originalProductEntryId = scProductVersionModelImpl._productEntryId;
+
+		scProductVersionModelImpl._setOriginalProductEntryId = false;
 
 		scProductVersionModelImpl._originalDirectDownloadURL = scProductVersionModelImpl._directDownloadURL;
 	}
@@ -615,6 +629,8 @@ public class SCProductVersionModelImpl extends BaseModelImpl<SCProductVersion>
 	private Date _createDate;
 	private Date _modifiedDate;
 	private long _productEntryId;
+	private long _originalProductEntryId;
+	private boolean _setOriginalProductEntryId;
 	private String _version;
 	private String _changeLog;
 	private String _downloadPageURL;

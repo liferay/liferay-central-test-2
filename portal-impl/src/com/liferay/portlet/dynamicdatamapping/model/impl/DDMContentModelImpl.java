@@ -171,7 +171,17 @@ public class DDMContentModelImpl extends BaseModelImpl<DDMContent>
 	}
 
 	public void setCompanyId(long companyId) {
+		if (!_setOriginalCompanyId) {
+			_setOriginalCompanyId = true;
+
+			_originalCompanyId = _companyId;
+		}
+
 		_companyId = companyId;
+	}
+
+	public long getOriginalCompanyId() {
+		return _originalCompanyId;
 	}
 
 	public long getUserId() {
@@ -438,6 +448,10 @@ public class DDMContentModelImpl extends BaseModelImpl<DDMContent>
 		ddmContentModelImpl._originalGroupId = ddmContentModelImpl._groupId;
 
 		ddmContentModelImpl._setOriginalGroupId = false;
+
+		ddmContentModelImpl._originalCompanyId = ddmContentModelImpl._companyId;
+
+		ddmContentModelImpl._setOriginalCompanyId = false;
 	}
 
 	@Override
@@ -612,6 +626,8 @@ public class DDMContentModelImpl extends BaseModelImpl<DDMContent>
 	private long _originalGroupId;
 	private boolean _setOriginalGroupId;
 	private long _companyId;
+	private long _originalCompanyId;
+	private boolean _setOriginalCompanyId;
 	private long _userId;
 	private String _userUuid;
 	private String _userName;

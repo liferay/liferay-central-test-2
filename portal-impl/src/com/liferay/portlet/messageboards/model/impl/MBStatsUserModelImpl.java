@@ -172,7 +172,17 @@ public class MBStatsUserModelImpl extends BaseModelImpl<MBStatsUser>
 	}
 
 	public void setMessageCount(int messageCount) {
+		if (!_setOriginalMessageCount) {
+			_setOriginalMessageCount = true;
+
+			_originalMessageCount = _messageCount;
+		}
+
 		_messageCount = messageCount;
+	}
+
+	public int getOriginalMessageCount() {
+		return _originalMessageCount;
 	}
 
 	public Date getLastPostDate() {
@@ -292,6 +302,10 @@ public class MBStatsUserModelImpl extends BaseModelImpl<MBStatsUser>
 		mbStatsUserModelImpl._originalUserId = mbStatsUserModelImpl._userId;
 
 		mbStatsUserModelImpl._setOriginalUserId = false;
+
+		mbStatsUserModelImpl._originalMessageCount = mbStatsUserModelImpl._messageCount;
+
+		mbStatsUserModelImpl._setOriginalMessageCount = false;
 	}
 
 	@Override
@@ -384,6 +398,8 @@ public class MBStatsUserModelImpl extends BaseModelImpl<MBStatsUser>
 	private long _originalUserId;
 	private boolean _setOriginalUserId;
 	private int _messageCount;
+	private int _originalMessageCount;
+	private boolean _setOriginalMessageCount;
 	private Date _lastPostDate;
 	private transient ExpandoBridge _expandoBridge;
 	private MBStatsUser _escapedModelProxy;

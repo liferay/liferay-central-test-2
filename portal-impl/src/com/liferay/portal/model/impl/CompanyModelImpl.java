@@ -270,7 +270,17 @@ public class CompanyModelImpl extends BaseModelImpl<Company>
 	}
 
 	public void setSystem(boolean system) {
+		if (!_setOriginalSystem) {
+			_setOriginalSystem = true;
+
+			_originalSystem = _system;
+		}
+
 		_system = system;
+	}
+
+	public boolean getOriginalSystem() {
+		return _originalSystem;
 	}
 
 	@JSON
@@ -401,6 +411,10 @@ public class CompanyModelImpl extends BaseModelImpl<Company>
 		companyModelImpl._originalLogoId = companyModelImpl._logoId;
 
 		companyModelImpl._setOriginalLogoId = false;
+
+		companyModelImpl._originalSystem = companyModelImpl._system;
+
+		companyModelImpl._setOriginalSystem = false;
 	}
 
 	@Override
@@ -552,6 +566,8 @@ public class CompanyModelImpl extends BaseModelImpl<Company>
 	private long _originalLogoId;
 	private boolean _setOriginalLogoId;
 	private boolean _system;
+	private boolean _originalSystem;
+	private boolean _setOriginalSystem;
 	private int _maxUsers;
 	private boolean _active;
 	private transient ExpandoBridge _expandoBridge;

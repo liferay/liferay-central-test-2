@@ -217,7 +217,17 @@ public class ImageModelImpl extends BaseModelImpl<Image> implements ImageModel {
 	}
 
 	public void setSize(int size) {
+		if (!_setOriginalSize) {
+			_setOriginalSize = true;
+
+			_originalSize = _size;
+		}
+
 		_size = size;
+	}
+
+	public int getOriginalSize() {
+		return _originalSize;
 	}
 
 	@Override
@@ -320,6 +330,11 @@ public class ImageModelImpl extends BaseModelImpl<Image> implements ImageModel {
 
 	@Override
 	public void resetOriginalValues() {
+		ImageModelImpl imageModelImpl = this;
+
+		imageModelImpl._originalSize = imageModelImpl._size;
+
+		imageModelImpl._setOriginalSize = false;
 	}
 
 	@Override
@@ -437,6 +452,8 @@ public class ImageModelImpl extends BaseModelImpl<Image> implements ImageModel {
 	private int _height;
 	private int _width;
 	private int _size;
+	private int _originalSize;
+	private boolean _setOriginalSize;
 	private transient ExpandoBridge _expandoBridge;
 	private Image _escapedModelProxy;
 }

@@ -121,7 +121,17 @@ public class ShoppingItemPriceModelImpl extends BaseModelImpl<ShoppingItemPrice>
 	}
 
 	public void setItemId(long itemId) {
+		if (!_setOriginalItemId) {
+			_setOriginalItemId = true;
+
+			_originalItemId = _itemId;
+		}
+
 		_itemId = itemId;
+	}
+
+	public long getOriginalItemId() {
+		return _originalItemId;
 	}
 
 	public int getMinQuantity() {
@@ -313,6 +323,11 @@ public class ShoppingItemPriceModelImpl extends BaseModelImpl<ShoppingItemPrice>
 
 	@Override
 	public void resetOriginalValues() {
+		ShoppingItemPriceModelImpl shoppingItemPriceModelImpl = this;
+
+		shoppingItemPriceModelImpl._originalItemId = shoppingItemPriceModelImpl._itemId;
+
+		shoppingItemPriceModelImpl._setOriginalItemId = false;
 	}
 
 	@Override
@@ -430,6 +445,8 @@ public class ShoppingItemPriceModelImpl extends BaseModelImpl<ShoppingItemPrice>
 		};
 	private long _itemPriceId;
 	private long _itemId;
+	private long _originalItemId;
+	private boolean _setOriginalItemId;
 	private int _minQuantity;
 	private int _maxQuantity;
 	private double _price;

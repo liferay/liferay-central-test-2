@@ -209,7 +209,17 @@ public class ContactModelImpl extends BaseModelImpl<Contact>
 	}
 
 	public void setCompanyId(long companyId) {
+		if (!_setOriginalCompanyId) {
+			_setOriginalCompanyId = true;
+
+			_originalCompanyId = _companyId;
+		}
+
 		_companyId = companyId;
+	}
+
+	public long getOriginalCompanyId() {
+		return _originalCompanyId;
 	}
 
 	@JSON
@@ -688,6 +698,11 @@ public class ContactModelImpl extends BaseModelImpl<Contact>
 
 	@Override
 	public void resetOriginalValues() {
+		ContactModelImpl contactModelImpl = this;
+
+		contactModelImpl._originalCompanyId = contactModelImpl._companyId;
+
+		contactModelImpl._setOriginalCompanyId = false;
 	}
 
 	@Override
@@ -1100,6 +1115,8 @@ public class ContactModelImpl extends BaseModelImpl<Contact>
 		};
 	private long _contactId;
 	private long _companyId;
+	private long _originalCompanyId;
+	private boolean _setOriginalCompanyId;
 	private long _userId;
 	private String _userUuid;
 	private String _userName;

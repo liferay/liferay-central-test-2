@@ -220,7 +220,17 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem>
 	}
 
 	public void setGroupId(long groupId) {
+		if (!_setOriginalGroupId) {
+			_setOriginalGroupId = true;
+
+			_originalGroupId = _groupId;
+		}
+
 		_groupId = groupId;
+	}
+
+	public long getOriginalGroupId() {
+		return _originalGroupId;
 	}
 
 	@JSON
@@ -297,7 +307,17 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem>
 	}
 
 	public void setCategoryId(long categoryId) {
+		if (!_setOriginalCategoryId) {
+			_setOriginalCategoryId = true;
+
+			_originalCategoryId = _categoryId;
+		}
+
 		_categoryId = categoryId;
+	}
+
+	public long getOriginalCategoryId() {
+		return _originalCategoryId;
 	}
 
 	@JSON
@@ -777,9 +797,17 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem>
 	public void resetOriginalValues() {
 		ShoppingItemModelImpl shoppingItemModelImpl = this;
 
+		shoppingItemModelImpl._originalGroupId = shoppingItemModelImpl._groupId;
+
+		shoppingItemModelImpl._setOriginalGroupId = false;
+
 		shoppingItemModelImpl._originalCompanyId = shoppingItemModelImpl._companyId;
 
 		shoppingItemModelImpl._setOriginalCompanyId = false;
+
+		shoppingItemModelImpl._originalCategoryId = shoppingItemModelImpl._categoryId;
+
+		shoppingItemModelImpl._setOriginalCategoryId = false;
 
 		shoppingItemModelImpl._originalSku = shoppingItemModelImpl._sku;
 
@@ -1171,6 +1199,8 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem>
 		};
 	private long _itemId;
 	private long _groupId;
+	private long _originalGroupId;
+	private boolean _setOriginalGroupId;
 	private long _companyId;
 	private long _originalCompanyId;
 	private boolean _setOriginalCompanyId;
@@ -1180,6 +1210,8 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem>
 	private Date _createDate;
 	private Date _modifiedDate;
 	private long _categoryId;
+	private long _originalCategoryId;
+	private boolean _setOriginalCategoryId;
 	private String _sku;
 	private String _originalSku;
 	private String _name;

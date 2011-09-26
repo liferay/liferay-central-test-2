@@ -215,7 +215,17 @@ public class WikiNodeModelImpl extends BaseModelImpl<WikiNode>
 	}
 
 	public void setCompanyId(long companyId) {
+		if (!_setOriginalCompanyId) {
+			_setOriginalCompanyId = true;
+
+			_originalCompanyId = _companyId;
+		}
+
 		_companyId = companyId;
+	}
+
+	public long getOriginalCompanyId() {
+		return _originalCompanyId;
 	}
 
 	@JSON
@@ -417,6 +427,10 @@ public class WikiNodeModelImpl extends BaseModelImpl<WikiNode>
 
 		wikiNodeModelImpl._setOriginalGroupId = false;
 
+		wikiNodeModelImpl._originalCompanyId = wikiNodeModelImpl._companyId;
+
+		wikiNodeModelImpl._setOriginalCompanyId = false;
+
 		wikiNodeModelImpl._originalName = wikiNodeModelImpl._name;
 	}
 
@@ -593,6 +607,8 @@ public class WikiNodeModelImpl extends BaseModelImpl<WikiNode>
 	private long _originalGroupId;
 	private boolean _setOriginalGroupId;
 	private long _companyId;
+	private long _originalCompanyId;
+	private boolean _setOriginalCompanyId;
 	private long _userId;
 	private String _userUuid;
 	private String _userName;

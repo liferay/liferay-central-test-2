@@ -228,6 +228,12 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 	}
 
 	public void setUserId(long userId) {
+		if (!_setOriginalUserId) {
+			_setOriginalUserId = true;
+
+			_originalUserId = _userId;
+		}
+
 		_userId = userId;
 	}
 
@@ -237,6 +243,10 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 
 	public void setUserUuid(String userUuid) {
 		_userUuid = userUuid;
+	}
+
+	public long getOriginalUserId() {
+		return _originalUserId;
 	}
 
 	@JSON
@@ -318,7 +328,17 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 	}
 
 	public void setRecordSetId(long recordSetId) {
+		if (!_setOriginalRecordSetId) {
+			_setOriginalRecordSetId = true;
+
+			_originalRecordSetId = _recordSetId;
+		}
+
 		_recordSetId = recordSetId;
+	}
+
+	public long getOriginalRecordSetId() {
+		return _originalRecordSetId;
 	}
 
 	@JSON
@@ -452,6 +472,14 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 		ddlRecordModelImpl._originalGroupId = ddlRecordModelImpl._groupId;
 
 		ddlRecordModelImpl._setOriginalGroupId = false;
+
+		ddlRecordModelImpl._originalUserId = ddlRecordModelImpl._userId;
+
+		ddlRecordModelImpl._setOriginalUserId = false;
+
+		ddlRecordModelImpl._originalRecordSetId = ddlRecordModelImpl._recordSetId;
+
+		ddlRecordModelImpl._setOriginalRecordSetId = false;
 	}
 
 	@Override
@@ -646,6 +674,8 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 	private long _companyId;
 	private long _userId;
 	private String _userUuid;
+	private long _originalUserId;
+	private boolean _setOriginalUserId;
 	private String _userName;
 	private long _versionUserId;
 	private String _versionUserUuid;
@@ -654,6 +684,8 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 	private Date _modifiedDate;
 	private long _DDMStorageId;
 	private long _recordSetId;
+	private long _originalRecordSetId;
+	private boolean _setOriginalRecordSetId;
 	private String _version;
 	private int _displayIndex;
 	private transient ExpandoBridge _expandoBridge;

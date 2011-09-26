@@ -242,7 +242,17 @@ public class JournalArticleImageModelImpl extends BaseModelImpl<JournalArticleIm
 	}
 
 	public void setTempImage(boolean tempImage) {
+		if (!_setOriginalTempImage) {
+			_setOriginalTempImage = true;
+
+			_originalTempImage = _tempImage;
+		}
+
 		_tempImage = tempImage;
+	}
+
+	public boolean getOriginalTempImage() {
+		return _originalTempImage;
 	}
 
 	@Override
@@ -357,6 +367,10 @@ public class JournalArticleImageModelImpl extends BaseModelImpl<JournalArticleIm
 		journalArticleImageModelImpl._originalElName = journalArticleImageModelImpl._elName;
 
 		journalArticleImageModelImpl._originalLanguageId = journalArticleImageModelImpl._languageId;
+
+		journalArticleImageModelImpl._originalTempImage = journalArticleImageModelImpl._tempImage;
+
+		journalArticleImageModelImpl._setOriginalTempImage = false;
 	}
 
 	@Override
@@ -496,6 +510,8 @@ public class JournalArticleImageModelImpl extends BaseModelImpl<JournalArticleIm
 	private String _languageId;
 	private String _originalLanguageId;
 	private boolean _tempImage;
+	private boolean _originalTempImage;
+	private boolean _setOriginalTempImage;
 	private transient ExpandoBridge _expandoBridge;
 	private JournalArticleImage _escapedModelProxy;
 }

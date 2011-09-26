@@ -117,7 +117,17 @@ public class ShoppingItemFieldModelImpl extends BaseModelImpl<ShoppingItemField>
 	}
 
 	public void setItemId(long itemId) {
+		if (!_setOriginalItemId) {
+			_setOriginalItemId = true;
+
+			_originalItemId = _itemId;
+		}
+
 		_itemId = itemId;
+	}
+
+	public long getOriginalItemId() {
+		return _originalItemId;
 	}
 
 	public String getName() {
@@ -264,6 +274,11 @@ public class ShoppingItemFieldModelImpl extends BaseModelImpl<ShoppingItemField>
 
 	@Override
 	public void resetOriginalValues() {
+		ShoppingItemFieldModelImpl shoppingItemFieldModelImpl = this;
+
+		shoppingItemFieldModelImpl._originalItemId = shoppingItemFieldModelImpl._itemId;
+
+		shoppingItemFieldModelImpl._setOriginalItemId = false;
 	}
 
 	@Override
@@ -359,6 +374,8 @@ public class ShoppingItemFieldModelImpl extends BaseModelImpl<ShoppingItemField>
 		};
 	private long _itemFieldId;
 	private long _itemId;
+	private long _originalItemId;
+	private boolean _setOriginalItemId;
 	private String _name;
 	private String _values;
 	private String _description;

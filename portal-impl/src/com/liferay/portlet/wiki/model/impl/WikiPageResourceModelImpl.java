@@ -111,7 +111,15 @@ public class WikiPageResourceModelImpl extends BaseModelImpl<WikiPageResource>
 	}
 
 	public void setUuid(String uuid) {
+		if (_originalUuid == null) {
+			_originalUuid = _uuid;
+		}
+
 		_uuid = uuid;
+	}
+
+	public String getOriginalUuid() {
+		return GetterUtil.getString(_originalUuid);
 	}
 
 	public long getResourcePrimKey() {
@@ -254,6 +262,8 @@ public class WikiPageResourceModelImpl extends BaseModelImpl<WikiPageResource>
 	public void resetOriginalValues() {
 		WikiPageResourceModelImpl wikiPageResourceModelImpl = this;
 
+		wikiPageResourceModelImpl._originalUuid = wikiPageResourceModelImpl._uuid;
+
 		wikiPageResourceModelImpl._originalNodeId = wikiPageResourceModelImpl._nodeId;
 
 		wikiPageResourceModelImpl._setOriginalNodeId = false;
@@ -339,6 +349,7 @@ public class WikiPageResourceModelImpl extends BaseModelImpl<WikiPageResource>
 			WikiPageResource.class
 		};
 	private String _uuid;
+	private String _originalUuid;
 	private long _resourcePrimKey;
 	private long _nodeId;
 	private long _originalNodeId;

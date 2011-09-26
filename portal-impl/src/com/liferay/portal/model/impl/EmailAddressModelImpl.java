@@ -174,7 +174,17 @@ public class EmailAddressModelImpl extends BaseModelImpl<EmailAddress>
 	}
 
 	public void setCompanyId(long companyId) {
+		if (!_setOriginalCompanyId) {
+			_setOriginalCompanyId = true;
+
+			_originalCompanyId = _companyId;
+		}
+
 		_companyId = companyId;
+	}
+
+	public long getOriginalCompanyId() {
+		return _originalCompanyId;
 	}
 
 	@JSON
@@ -183,6 +193,12 @@ public class EmailAddressModelImpl extends BaseModelImpl<EmailAddress>
 	}
 
 	public void setUserId(long userId) {
+		if (!_setOriginalUserId) {
+			_setOriginalUserId = true;
+
+			_originalUserId = _userId;
+		}
+
 		_userId = userId;
 	}
 
@@ -192,6 +208,10 @@ public class EmailAddressModelImpl extends BaseModelImpl<EmailAddress>
 
 	public void setUserUuid(String userUuid) {
 		_userUuid = userUuid;
+	}
+
+	public long getOriginalUserId() {
+		return _originalUserId;
 	}
 
 	@JSON
@@ -240,7 +260,17 @@ public class EmailAddressModelImpl extends BaseModelImpl<EmailAddress>
 	}
 
 	public void setClassNameId(long classNameId) {
+		if (!_setOriginalClassNameId) {
+			_setOriginalClassNameId = true;
+
+			_originalClassNameId = _classNameId;
+		}
+
 		_classNameId = classNameId;
+	}
+
+	public long getOriginalClassNameId() {
+		return _originalClassNameId;
 	}
 
 	@JSON
@@ -249,7 +279,17 @@ public class EmailAddressModelImpl extends BaseModelImpl<EmailAddress>
 	}
 
 	public void setClassPK(long classPK) {
+		if (!_setOriginalClassPK) {
+			_setOriginalClassPK = true;
+
+			_originalClassPK = _classPK;
+		}
+
 		_classPK = classPK;
+	}
+
+	public long getOriginalClassPK() {
+		return _originalClassPK;
 	}
 
 	@JSON
@@ -285,7 +325,17 @@ public class EmailAddressModelImpl extends BaseModelImpl<EmailAddress>
 	}
 
 	public void setPrimary(boolean primary) {
+		if (!_setOriginalPrimary) {
+			_setOriginalPrimary = true;
+
+			_originalPrimary = _primary;
+		}
+
 		_primary = primary;
+	}
+
+	public boolean getOriginalPrimary() {
+		return _originalPrimary;
 	}
 
 	@Override
@@ -384,6 +434,27 @@ public class EmailAddressModelImpl extends BaseModelImpl<EmailAddress>
 
 	@Override
 	public void resetOriginalValues() {
+		EmailAddressModelImpl emailAddressModelImpl = this;
+
+		emailAddressModelImpl._originalCompanyId = emailAddressModelImpl._companyId;
+
+		emailAddressModelImpl._setOriginalCompanyId = false;
+
+		emailAddressModelImpl._originalUserId = emailAddressModelImpl._userId;
+
+		emailAddressModelImpl._setOriginalUserId = false;
+
+		emailAddressModelImpl._originalClassNameId = emailAddressModelImpl._classNameId;
+
+		emailAddressModelImpl._setOriginalClassNameId = false;
+
+		emailAddressModelImpl._originalClassPK = emailAddressModelImpl._classPK;
+
+		emailAddressModelImpl._setOriginalClassPK = false;
+
+		emailAddressModelImpl._originalPrimary = emailAddressModelImpl._primary;
+
+		emailAddressModelImpl._setOriginalPrimary = false;
 	}
 
 	@Override
@@ -535,16 +606,26 @@ public class EmailAddressModelImpl extends BaseModelImpl<EmailAddress>
 		};
 	private long _emailAddressId;
 	private long _companyId;
+	private long _originalCompanyId;
+	private boolean _setOriginalCompanyId;
 	private long _userId;
 	private String _userUuid;
+	private long _originalUserId;
+	private boolean _setOriginalUserId;
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
 	private long _classNameId;
+	private long _originalClassNameId;
+	private boolean _setOriginalClassNameId;
 	private long _classPK;
+	private long _originalClassPK;
+	private boolean _setOriginalClassPK;
 	private String _address;
 	private int _typeId;
 	private boolean _primary;
+	private boolean _originalPrimary;
+	private boolean _setOriginalPrimary;
 	private transient ExpandoBridge _expandoBridge;
 	private EmailAddress _escapedModelProxy;
 }

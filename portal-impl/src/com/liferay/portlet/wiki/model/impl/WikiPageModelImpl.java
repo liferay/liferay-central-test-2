@@ -272,6 +272,12 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage>
 	}
 
 	public void setUserId(long userId) {
+		if (!_setOriginalUserId) {
+			_setOriginalUserId = true;
+
+			_originalUserId = _userId;
+		}
+
 		_userId = userId;
 	}
 
@@ -281,6 +287,10 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage>
 
 	public void setUserUuid(String userUuid) {
 		_userUuid = userUuid;
+	}
+
+	public long getOriginalUserId() {
+		return _originalUserId;
 	}
 
 	@JSON
@@ -427,7 +437,15 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage>
 	}
 
 	public void setFormat(String format) {
+		if (_originalFormat == null) {
+			_originalFormat = _format;
+		}
+
 		_format = format;
+	}
+
+	public String getOriginalFormat() {
+		return GetterUtil.getString(_originalFormat);
 	}
 
 	@JSON
@@ -440,7 +458,17 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage>
 	}
 
 	public void setHead(boolean head) {
+		if (!_setOriginalHead) {
+			_setOriginalHead = true;
+
+			_originalHead = _head;
+		}
+
 		_head = head;
+	}
+
+	public boolean getOriginalHead() {
+		return _originalHead;
 	}
 
 	@JSON
@@ -454,7 +482,15 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage>
 	}
 
 	public void setParentTitle(String parentTitle) {
+		if (_originalParentTitle == null) {
+			_originalParentTitle = _parentTitle;
+		}
+
 		_parentTitle = parentTitle;
+	}
+
+	public String getOriginalParentTitle() {
+		return GetterUtil.getString(_originalParentTitle);
 	}
 
 	@JSON
@@ -468,7 +504,15 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage>
 	}
 
 	public void setRedirectTitle(String redirectTitle) {
+		if (_originalRedirectTitle == null) {
+			_originalRedirectTitle = _redirectTitle;
+		}
+
 		_redirectTitle = redirectTitle;
+	}
+
+	public String getOriginalRedirectTitle() {
+		return GetterUtil.getString(_originalRedirectTitle);
 	}
 
 	@JSON
@@ -477,7 +521,17 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage>
 	}
 
 	public void setStatus(int status) {
+		if (!_setOriginalStatus) {
+			_setOriginalStatus = true;
+
+			_originalStatus = _status;
+		}
+
 		_status = status;
+	}
+
+	public int getOriginalStatus() {
+		return _originalStatus;
 	}
 
 	@JSON
@@ -715,6 +769,10 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage>
 
 		wikiPageModelImpl._setOriginalGroupId = false;
 
+		wikiPageModelImpl._originalUserId = wikiPageModelImpl._userId;
+
+		wikiPageModelImpl._setOriginalUserId = false;
+
 		wikiPageModelImpl._originalNodeId = wikiPageModelImpl._nodeId;
 
 		wikiPageModelImpl._setOriginalNodeId = false;
@@ -724,6 +782,20 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage>
 		wikiPageModelImpl._originalVersion = wikiPageModelImpl._version;
 
 		wikiPageModelImpl._setOriginalVersion = false;
+
+		wikiPageModelImpl._originalFormat = wikiPageModelImpl._format;
+
+		wikiPageModelImpl._originalHead = wikiPageModelImpl._head;
+
+		wikiPageModelImpl._setOriginalHead = false;
+
+		wikiPageModelImpl._originalParentTitle = wikiPageModelImpl._parentTitle;
+
+		wikiPageModelImpl._originalRedirectTitle = wikiPageModelImpl._redirectTitle;
+
+		wikiPageModelImpl._originalStatus = wikiPageModelImpl._status;
+
+		wikiPageModelImpl._setOriginalStatus = false;
 	}
 
 	@Override
@@ -1030,6 +1102,8 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage>
 	private long _companyId;
 	private long _userId;
 	private String _userUuid;
+	private long _originalUserId;
+	private boolean _setOriginalUserId;
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
@@ -1045,10 +1119,17 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage>
 	private String _content;
 	private String _summary;
 	private String _format;
+	private String _originalFormat;
 	private boolean _head;
+	private boolean _originalHead;
+	private boolean _setOriginalHead;
 	private String _parentTitle;
+	private String _originalParentTitle;
 	private String _redirectTitle;
+	private String _originalRedirectTitle;
 	private int _status;
+	private int _originalStatus;
+	private boolean _setOriginalStatus;
 	private long _statusByUserId;
 	private String _statusByUserUuid;
 	private String _statusByUserName;

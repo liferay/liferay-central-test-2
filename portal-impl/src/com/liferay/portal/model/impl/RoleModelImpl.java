@@ -466,7 +466,17 @@ public class RoleModelImpl extends BaseModelImpl<Role> implements RoleModel {
 	}
 
 	public void setType(int type) {
+		if (!_setOriginalType) {
+			_setOriginalType = true;
+
+			_originalType = _type;
+		}
+
 		_type = type;
+	}
+
+	public int getOriginalType() {
+		return _originalType;
 	}
 
 	@JSON
@@ -480,7 +490,15 @@ public class RoleModelImpl extends BaseModelImpl<Role> implements RoleModel {
 	}
 
 	public void setSubtype(String subtype) {
+		if (_originalSubtype == null) {
+			_originalSubtype = _subtype;
+		}
+
 		_subtype = subtype;
+	}
+
+	public String getOriginalSubtype() {
+		return GetterUtil.getString(_originalSubtype);
 	}
 
 	@Override
@@ -592,6 +610,12 @@ public class RoleModelImpl extends BaseModelImpl<Role> implements RoleModel {
 		roleModelImpl._setOriginalClassPK = false;
 
 		roleModelImpl._originalName = roleModelImpl._name;
+
+		roleModelImpl._originalType = roleModelImpl._type;
+
+		roleModelImpl._setOriginalType = false;
+
+		roleModelImpl._originalSubtype = roleModelImpl._subtype;
 	}
 
 	@Override
@@ -738,7 +762,10 @@ public class RoleModelImpl extends BaseModelImpl<Role> implements RoleModel {
 	private String _title;
 	private String _description;
 	private int _type;
+	private int _originalType;
+	private boolean _setOriginalType;
 	private String _subtype;
+	private String _originalSubtype;
 	private transient ExpandoBridge _expandoBridge;
 	private Role _escapedModelProxy;
 }

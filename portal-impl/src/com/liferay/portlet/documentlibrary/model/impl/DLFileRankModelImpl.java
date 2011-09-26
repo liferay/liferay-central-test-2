@@ -122,7 +122,17 @@ public class DLFileRankModelImpl extends BaseModelImpl<DLFileRank>
 	}
 
 	public void setGroupId(long groupId) {
+		if (!_setOriginalGroupId) {
+			_setOriginalGroupId = true;
+
+			_originalGroupId = _groupId;
+		}
+
 		_groupId = groupId;
+	}
+
+	public long getOriginalGroupId() {
+		return _originalGroupId;
 	}
 
 	public long getCompanyId() {
@@ -290,6 +300,10 @@ public class DLFileRankModelImpl extends BaseModelImpl<DLFileRank>
 	public void resetOriginalValues() {
 		DLFileRankModelImpl dlFileRankModelImpl = this;
 
+		dlFileRankModelImpl._originalGroupId = dlFileRankModelImpl._groupId;
+
+		dlFileRankModelImpl._setOriginalGroupId = false;
+
 		dlFileRankModelImpl._originalCompanyId = dlFileRankModelImpl._companyId;
 
 		dlFileRankModelImpl._setOriginalCompanyId = false;
@@ -393,6 +407,8 @@ public class DLFileRankModelImpl extends BaseModelImpl<DLFileRank>
 		};
 	private long _fileRankId;
 	private long _groupId;
+	private long _originalGroupId;
+	private boolean _setOriginalGroupId;
 	private long _companyId;
 	private long _originalCompanyId;
 	private boolean _setOriginalCompanyId;
