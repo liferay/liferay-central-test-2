@@ -423,7 +423,7 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> imple
 
 		public void set${column.methodName}(${column.type} ${column.name}) {
 			<#if column.name == "uuid">
-				<#if column.isFetchFinderPath()>
+				<#if column.isFinderPath()>
 					if (_originalUuid == null) {
 						_originalUuid = _uuid;
 					}
@@ -431,7 +431,7 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> imple
 
 				_uuid = uuid;
 			<#else>
-				<#if column.isFetchFinderPath() || ((parentPKColumn != "") && (parentPKColumn.name == column.name))>
+				<#if column.isFinderPath() || ((parentPKColumn != "") && (parentPKColumn.name == column.name))>
 					<#if column.isPrimitiveType()>
 						if (!_setOriginal${column.methodName}) {
 							_setOriginal${column.methodName} = true;
@@ -508,7 +508,7 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> imple
 			}
 		</#if>
 
-		<#if column.isFetchFinderPath() || ((parentPKColumn != "") && (parentPKColumn.name == column.name))>
+		<#if column.isFinderPath() || ((parentPKColumn != "") && (parentPKColumn.name == column.name))>
 			public ${column.type} getOriginal${column.methodName}() {
 				<#if column.type == "String" && column.isConvertNull()>
 					return GetterUtil.getString(_original${column.methodName});
@@ -735,7 +735,7 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> imple
 	@Override
 	public void resetOriginalValues() {
 		<#list entity.regularColList as column>
-			<#if column.isFetchFinderPath() || ((parentPKColumn != "") && (parentPKColumn.name == column.name))>
+			<#if column.isFinderPath() || ((parentPKColumn != "") && (parentPKColumn.name == column.name))>
 				<#if !cloneCastModelImpl??>
 					<#assign cloneCastModelImpl = true>
 
@@ -840,7 +840,7 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> imple
 				private String _${column.userUuidName};
 			</#if>
 
-			<#if column.isFetchFinderPath() || ((parentPKColumn != "") && (parentPKColumn.name == column.name))>
+			<#if column.isFinderPath() || ((parentPKColumn != "") && (parentPKColumn.name == column.name))>
 				private ${column.type} _original${column.methodName};
 
 				<#if column.isPrimitiveType()>
