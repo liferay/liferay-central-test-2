@@ -422,10 +422,10 @@ AUI().add(
 								container: instance._documentLibraryContainer,
 								nodes: CSS_DOCUMENT_DISPLAY_STYLE_SELECTABLE,
 								on: {
-									'drag:start': A.bind(instance._onDragStart, instance),
+									'drag:drophit': A.bind(instance._onDragDropHit, instance),
 									'drag:enter': A.bind(instance._onDragEnter, instance),
 									'drag:exit': A.bind(instance._onDragExit, instance),
-									'drag:drophit': A.bind(instance._onDragDropHit, instance)
+									'drag:start': A.bind(instance._onDragStart, instance)
 								}
 							}
 						);
@@ -457,13 +457,13 @@ AUI().add(
 					_initHover: function() {
 						var instance = this;
 
-						var _entriesContainer = instance._entriesContainer;
+						var entriesContainer = instance._entriesContainer;
 
 						var boundToggleHovered = A.bind(instance._toggleHovered, instance);
 
-						_entriesContainer.delegate(STR_FOCUS, boundToggleHovered, '*');
+						entriesContainer.on(STR_FOCUS, boundToggleHovered);
 
-						_entriesContainer.delegate('blur', boundToggleHovered, '*');
+						entriesContainer.on('blur', boundToggleHovered);
 					},
 
 					_initSelectAllCheckbox: function() {
@@ -596,7 +596,7 @@ AUI().add(
 
 							var moveText = Liferay.Language.get('x-items-ready-to-be-moved-to-x');
 
-							var itemTitle = Lang.trim(dropTarget.one('.entry-title').html());
+							var itemTitle = Lang.trim(dropTarget.one('.entry-title').text());
 
 							proxyNode.html(Lang.sub(moveText, [dd.get(STR_DATA).items, itemTitle]));
 						}
@@ -962,7 +962,7 @@ AUI().add(
 						var displayStyle = History.get(instance._displayStyle) || STR_ICON;
 
 						if (displayStyle != DISPLAY_STYLE_LIST) {
-							var documentDisplayStyle = event.currentTarget.ancestor(CSS_DOCUMENT_DISPLAY_STYLE);
+							var documentDisplayStyle = event.target.ancestor(CSS_DOCUMENT_DISPLAY_STYLE);
 
 							if (documentDisplayStyle) {
 								documentDisplayStyle.toggleClass('hover', (event.type == STR_FOCUS));
