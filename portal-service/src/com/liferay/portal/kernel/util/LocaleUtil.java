@@ -123,7 +123,7 @@ public class LocaleUtil {
 				_locales.put(languageId, locale);
 			}
 			else {
-				if (_log.isWarnEnabled()){
+				if (_log.isWarnEnabled()) {
 					_log.warn("There are too many entries in the locales map");
 				}
 			}
