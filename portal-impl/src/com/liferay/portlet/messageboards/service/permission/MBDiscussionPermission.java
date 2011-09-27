@@ -68,10 +68,11 @@ public class MBDiscussionPermission {
 		MBMessage message = MBMessageLocalServiceUtil.getMessage(
 			messageId);
 
-        if (PropsValues.DISCUSSION_ALLOW_OWNERS_EDIT &&
-            permissionChecker.getUserId() == message.getUserId()) {
-            return true;
-        }
+		if (PropsValues.DISCUSSION_COMMENTS_ALWAYS_EDITABLE_BY_OWNER &&
+			(permissionChecker.getUserId() == message.getUserId())) {
+
+			return true;
+		}
 
 		if (message.isPending()) {
 			Boolean hasPermission = WorkflowPermissionUtil.hasPermission(
