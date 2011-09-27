@@ -768,7 +768,7 @@ public class ServicePreAction extends Action {
 		}
 	}
 
-	protected void servicePre(
+	public ThemeDisplay initThemeDisplay(
 			HttpServletRequest request, HttpServletResponse response)
 		throws Exception {
 
@@ -878,7 +878,7 @@ public class ServicePreAction extends Action {
 				session.invalidate();
 			}
 
-			return;
+			return null;
 		}
 
 		boolean signedIn = false;
@@ -1805,6 +1805,19 @@ public class ServicePreAction extends Action {
 		updateManagerURL.setParameter("struts_action", "/update_manager/view");
 
 		themeDisplay.setURLUpdateManager(updateManagerURL);
+		
+		return themeDisplay;
+	}
+
+	protected void servicePre(
+			HttpServletRequest request, HttpServletResponse response)
+		throws Exception {
+
+		ThemeDisplay themeDisplay = initThemeDisplay(request, response);
+		
+		if (themeDisplay == null) {
+			return;
+		}
 
 		request.setAttribute(WebKeys.THEME_DISPLAY, themeDisplay);
 
@@ -1819,7 +1832,12 @@ public class ServicePreAction extends Action {
 
 		boolean parallelRenderEnable = true;
 
+		Layout layout = themeDisplay.getLayout();
+
 		if (layout != null) {
+			LayoutTypePortlet layoutTypePortlet =
+				themeDisplay.getLayoutTypePortlet();
+
 			List<String> portletIds = layoutTypePortlet.getPortletIds();
 
 			if (portletIds.size() == 1) {
