@@ -43,6 +43,10 @@ request.setAttribute("view_layout_branches.jsp-currenttLayoutBranchId", String.v
 <liferay-ui:success key="pageVariationDeleted" message="page-variation-was-deleted" />
 <liferay-ui:success key="pageVariationUpdated" message="page-variation-was-updated" />
 
+<liferay-ui:error key="<%= LayoutBranchNameException.class.getName() + LayoutBranchNameException.DUPLICATE %>" message="a-page-variation-with-that-name-already-exists" />
+<liferay-ui:error key="<%= LayoutBranchNameException.class.getName() + LayoutBranchNameException.TOO_LONG %>" message='<%= LanguageUtil.format(pageContext, "please-enter-a-value-between-x-and-x-characters-long", new Object[] {4, 100}) %>' />
+<liferay-ui:error key="<%= LayoutBranchNameException.class.getName() + LayoutBranchNameException.TOO_SHORT %>" message='<%= LanguageUtil.format(pageContext, "please-enter-a-value-between-x-and-x-characters-long", new Object[] {4, 100}) %>' />
+
 <div class="portlet-msg-info">
 	<liferay-ui:message key="page-variations-help" />
 </div>
