@@ -37,21 +37,21 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 			ActionResponse actionResponse)
 		throws Exception {
 
-		validateDisplayStyleView(actionRequest);
+		validateDisplayStyleViews(actionRequest);
 
 		validateRootFolder(actionRequest);
 
 		super.processAction(portletConfig, actionRequest, actionResponse);
 	}
 
-	protected void validateDisplayStyleView(ActionRequest actionRequest)
+	protected void validateDisplayStyleViews(ActionRequest actionRequest)
 		throws Exception{
 
 		String displayViews = GetterUtil.getString(
 			getParameter(actionRequest, "displayViews"));
 
 		if (Validator.isNull(displayViews)) {
-			SessionErrors.add(actionRequest, "displayStyleViewsCannotBeEmpty");
+			SessionErrors.add(actionRequest, "displayViewsInvalid");
 		}
 	}
 

@@ -35,13 +35,12 @@ String redirect = ParamUtil.getString(request, "redirect");
 	<aui:input name="preferences--displayViews--" type="hidden" />
 	<aui:input name="preferences--entryColumns--" type="hidden" />
 
-	<liferay-ui:error key="displayStyleViewsCannotBeEmpty" message="display-style-views-cannot-be-empty" />
-	<liferay-ui:error key="rootFolderId" message="please-enter-a-valid-root-folder" />
+	<liferay-ui:error key="displayViewsInvalid" message="display-style-views-cannot-be-empty" />
+	<liferay-ui:error key="rootFolderIdInvalid" message="please-enter-a-valid-root-folder" />
 
 	<liferay-ui:panel-container extended="<%= true %>" id="documentLibrarySettingsPanelContainer" persistState="<%= true %>">
 		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="documentLibraryItemsListingPanel" persistState="<%= true %>" title="display-settings">
 			<aui:fieldset>
-
 				<aui:field-wrapper label="root-folder">
 					<portlet:renderURL var="viewFolderURL">
 						<portlet:param name="struts_action" value='<%= strutsAction + "/view" %>' />
@@ -115,7 +114,6 @@ String redirect = ParamUtil.getString(request, "redirect");
 						rightList="<%= rightList %>"
 					/>
 				</aui:field-wrapper>
-
 			</aui:fieldset>
 		</liferay-ui:panel>
 

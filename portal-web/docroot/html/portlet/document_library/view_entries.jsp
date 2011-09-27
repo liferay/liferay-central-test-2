@@ -72,6 +72,7 @@ for (String headerName : entryColumns) {
 	else if (headerName.equals("name")) {
 		headerName = "title";
 	}
+
 	headerNames.add(headerName);
 }
 

@@ -111,6 +111,7 @@ int total = 0;
 				else if (headerName.equals("name")) {
 					headerName = "title";
 				}
+
 				headerNames.add(headerName);
 			}
 
