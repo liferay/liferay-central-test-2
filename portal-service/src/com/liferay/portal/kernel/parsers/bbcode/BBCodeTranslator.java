@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portlet.messageboards.util;
+package com.liferay.portal.kernel.parsers.bbcode;
 
 /**
  * @author Iliyan Peychev
@@ -20,11 +20,11 @@ package com.liferay.portlet.messageboards.util;
  */
 public interface BBCodeTranslator {
 
-	public String[][] getEmoticons();
-
 	public String[] getEmoticonDescriptions();
 
 	public String[] getEmoticonFiles();
+
+	public String[][] getEmoticons();
 
 	public String[] getEmoticonSymbols();
 

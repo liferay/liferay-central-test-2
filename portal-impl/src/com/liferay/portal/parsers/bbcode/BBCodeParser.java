@@ -14,194 +14,187 @@
 
 package com.liferay.portal.parsers.bbcode;
 
+import com.liferay.portal.kernel.util.IntegerWrapper;
+import com.liferay.portal.kernel.util.SetUtil;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.Stack;
 
 /**
  * @author Iliyan Peychev
  */
 public class BBCodeParser {
-	public static final int TOKEN_DATA = 0x04;
-	public static final int TOKEN_TAG_END = 0x02;
-	public static final int TOKEN_TAG_START = 0x01;
+
+	public static final int TYPE_DATA = 0x04;
+
+	public static final int TYPE_TAG_END = 0x02;
+
+	public static final int TYPE_TAG_START = 0x01;
+
+	public static final int TYPE_TAG_START_END = TYPE_TAG_START | TYPE_TAG_END;
 
 	public BBCodeParser() {
-		_dataPointer = 0;
+		_blockElements = SetUtil.fromArray(
+			new String[] {
+				"*", "center", "code", "justify", "left", "li", "list", "q",
+				"quote", "right", "table", "td", "th", "tr"
+			});
 
-		_elementsBlock = new ArrayList(14);
+		_inlineElements = SetUtil.fromArray(
+			new String[] {
+				"b", "color", "font", "i", "img", "s", "size", "u", "url"
+			});
 
-		_elementsBlock.add("*");
-		_elementsBlock.add("center");
-		_elementsBlock.add("code");
-		_elementsBlock.add("justify");
-		_elementsBlock.add("left");
-		_elementsBlock.add("li");
-		_elementsBlock.add("list");
-		_elementsBlock.add("q");
-		_elementsBlock.add("quote");
-		_elementsBlock.add("right");
-		_elementsBlock.add("table");
-		_elementsBlock.add("td");
-		_elementsBlock.add("th");
-		_elementsBlock.add("tr");
-
-		_elementsCloseSelf = new ArrayList(1);
-
-		_elementsCloseSelf.add("*");
-
-		_elementsInline = new ArrayList(9);
-
-		_elementsInline.add("b");
-		_elementsInline.add("color");
-		_elementsInline.add("font");
-		_elementsInline.add("i");
-		_elementsInline.add("img");
-		_elementsInline.add("s");
-		_elementsInline.add("size");
-		_elementsInline.add("u");
-		_elementsInline.add("url");
+		_selfCloseElements = SetUtil.fromArray(new String[] {"*"});
 	}
 
 	public List<BBCodeItem> parse(String text) {
-		_lexer = new BBCodeLexer(text);
+		List<BBCodeItem> bbCodeItems = new ArrayList<BBCodeItem>();
 
-		_tagsStack = new Stack();
+		BBCodeLexer bbCodeLexer = new BBCodeLexer(text);
+		Stack<String> tags = new Stack<String>();
+		IntegerWrapper marker = new IntegerWrapper();
 
-		_itemsList = new ArrayList();
+		BBCodeToken bbCodeToken = null;
 
-		BBCodeToken token = null;
+		while ((bbCodeToken = bbCodeLexer.getNextBBCodeToken()) != null) {
+			handleData(bbCodeItems, bbCodeLexer, marker, bbCodeToken, text);
 
-		while ((token = _lexer.getNextToken()) != null) {
-			_handleData(token, text);
+			if (bbCodeToken.getStartTag() == null) {
+				handleTagEnd(bbCodeItems, tags, bbCodeToken);
 
-			if (token.getStartTag() != null) {
-				_handleTagStart(token);
+				continue;
+			}
 
-				if (token.getStartTag().equals(STR_TAG_CODE)) {
+			handleTagStart(bbCodeItems, tags, bbCodeToken);
 
-					while ( (token = _lexer.getNextToken()) != null &&
-							!(STR_TAG_CODE.equals(token.getEndTag())));
+			String startTag = bbCodeToken.getStartTag();
 
-					_handleData(token, text);
+			if (!startTag.equals("code")) {
+				continue;
+			}
 
-					if (token != null) {
-						_handleTagEnd(token);
-					}
-					else {
-						break;
-					}
+			while (true) {
+				bbCodeToken = bbCodeLexer.getNextBBCodeToken();
+
+				if (bbCodeToken == null) {
+					break;
+				}
+
+				String endTag = bbCodeToken.getEndTag();
+
+				if (!endTag.equals("code")) {
+					break;
 				}
 			}
+
+			handleData(bbCodeItems, bbCodeLexer, marker, bbCodeToken, text);
+
+			if (bbCodeToken != null) {
+				handleTagEnd(bbCodeItems, tags, bbCodeToken);
+			}
 			else {
-				_handleTagEnd(token);
+				break;
 			}
 		}
 
-		_handleData(null, text);
+		handleData(bbCodeItems, bbCodeLexer, marker, null, text);
+		handleTagEnd(bbCodeItems, tags, null);
 
-		_handleTagEnd(null);
-
-		List<BBCodeItem> result = new ArrayList(_itemsList);
-
-		_reset();
-
-		return result;
+		return bbCodeItems;
 	}
 
-	private void _handleData(BBCodeToken token, String data) {
+	protected void handleData(
+		List<BBCodeItem> bbCodeItems, BBCodeLexer bbCodeLexer,
+		IntegerWrapper marker, BBCodeToken bbCodeToken, String data) {
+
 		int length = data.length();
 
 		int lastIndex = length;
 
-		if (token != null) {
-			length = token.getStart();
+		if (bbCodeToken != null) {
+			length = bbCodeToken.getStart();
 
-			lastIndex = _lexer.getLastIndex();
+			lastIndex = bbCodeLexer.getLastIndex();
 		}
 
-		if (length > _dataPointer) {
-			BBCodeItem bbCodeItem =
-					new BBCodeItem(
-							TOKEN_DATA, null,
-							data.substring(_dataPointer, length));
+		if (length > marker.getValue()) {
+			BBCodeItem bbCodeItem = new BBCodeItem(
+				TYPE_DATA, null, data.substring(marker.getValue(), length));
 
-			_itemsList.add(bbCodeItem);
+			bbCodeItems.add(bbCodeItem);
 		}
 
-		_dataPointer = lastIndex;
+		marker.setValue(lastIndex);
 	}
 
-	private void _handleTagEnd(BBCodeToken token) {
-		int position = 0;
+	protected void handleTagEnd(
+		List<BBCodeItem> bbCodeItems, Stack<String> tags,
+		BBCodeToken bbCodeToken) {
 
-		if (token != null) {
-			String tagName = token.getEndTag();
+		int size = 0;
 
-			for (position = _tagsStack.size() - 1; position >= 0; position--) {
+		if (bbCodeToken != null) {
+			String endTag = bbCodeToken.getEndTag();
 
-				if (_tagsStack.elementAt(position).equals(tagName)) {
+			for (size = tags.size() - 1; size >= 0; size--) {
+				if (endTag.equals(tags.elementAt(size))) {
 					break;
 				}
 			}
 		}
 
-		if (position >= 0) {
+		if (size >= 0) {
+			for (int i = tags.size() - 1; i >= size; i--) {
+				BBCodeItem bbCodeItem = new BBCodeItem(
+					TYPE_TAG_END, null, tags.elementAt(i));
 
-			for (int i = _tagsStack.size() - 1; i >= position; i--) {
-				_itemsList.add(
-					new BBCodeItem(
-						TOKEN_TAG_END, null, _tagsStack.elementAt(i)));
+				bbCodeItems.add(bbCodeItem);
 			}
 
-			_tagsStack.setSize(position);
+			tags.setSize(size);
 		}
 	}
 
-	private void _handleTagStart(BBCodeToken token) {
-		String tagName = token.getStartTag();
+	protected void handleTagStart(
+		List<BBCodeItem> bbCodeItems, Stack<String> tags,
+		BBCodeToken bbCodeToken) {
 
-		if (_elementsBlock.contains(tagName)) {
-			String lastTag = null;
+		String startTag = bbCodeToken.getStartTag();
 
-			while (_tagsStack.size() > 0 &&
-					(lastTag = _tagsStack.lastElement()) != null &&
-						_elementsInline.contains(lastTag)) {
+		if (_blockElements.contains(startTag)) {
+			String currentTag = null;
 
-				_handleTagEnd(new BBCodeToken(lastTag));
+			while (!tags.isEmpty() &&
+				   ((currentTag = tags.lastElement()) != null) &&
+				   _inlineElements.contains(currentTag)) {
+
+				BBCodeToken currentTagBBCodeToken = new BBCodeToken(currentTag);
+
+				handleTagEnd(bbCodeItems, tags, currentTagBBCodeToken);
 			}
 		}
 
-		if (_elementsCloseSelf.contains(tagName) &&
-				_tagsStack.lastElement().equals(tagName)) {
+		if (_selfCloseElements.contains(startTag) &&
+			startTag.equals(tags.lastElement())) {
 
-			_handleTagEnd(new BBCodeToken(tagName));
+			BBCodeToken tagBBCodeToken = new BBCodeToken(startTag);
+
+			handleTagEnd(bbCodeItems, tags, tagBBCodeToken);
 		}
 
-		_tagsStack.push(tagName);
+		tags.push(startTag);
 
-		BBCodeItem item =
-				new BBCodeItem(
-						TOKEN_TAG_START, token.getAttribute(), tagName);
+		BBCodeItem bbCodeItem = new BBCodeItem(
+			TYPE_TAG_START, bbCodeToken.getAttribute(), startTag);
 
-		_itemsList.add(item);
+		bbCodeItems.add(bbCodeItem);
 	}
 
-	private void _reset() {
-		_tagsStack.empty();
-		_itemsList.clear();
-
-		_dataPointer = 0;
-	}
-
-	private final String STR_TAG_CODE = "code";
-
-	private int _dataPointer;
-	private List<String> _elementsBlock = null;
-	private List<String> _elementsCloseSelf = null;
-	private List<String> _elementsInline = null;
-	private List<BBCodeItem> _itemsList = null;
-	private BBCodeLexer _lexer = null;
-	private Stack<String> _tagsStack = null;
+	private Set<String> _blockElements;
+	private Set<String> _inlineElements;
+	private Set<String> _selfCloseElements;
 
 }

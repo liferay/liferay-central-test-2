@@ -22,30 +22,28 @@ import java.util.regex.Pattern;
 public class BBCodeLexer {
 
 	public BBCodeLexer(String data) {
-		_matcherBBCode = regexBBCode.matcher(data);
+		_matcher = _pattern.matcher(data);
 	}
 
 	public int getLastIndex() {
-		return _matcherBBCode.end();
+		return _matcher.end();
 	}
 
-	public BBCodeToken getNextToken() {
-		boolean tokenFound = _matcherBBCode.find();
-
-		BBCodeToken token = null;
-
-		if (tokenFound) {
-			token = new BBCodeToken(
-				_matcherBBCode.group(1), _matcherBBCode.group(2),
-				_matcherBBCode.group(3), _matcherBBCode.start(),
-				_matcherBBCode.end());
+	public BBCodeToken getNextBBCodeToken() {
+		if (!_matcher.find()) {
+			return null;
 		}
 
-		return token;
+		return new BBCodeToken(
+			_matcher.group(1), _matcher.group(2), _matcher.group(3),
+			_matcher.start(), _matcher.end());
 	}
 
-	private static Pattern regexBBCode = Pattern.compile("(?:\\[((?:[a-z]|\\*){1,16})(?:=([^\\x00-\\x1F\"'()<>\\[\\]]{1,256}))?\\])|(?:\\[/([a-z]{1,16})\\])", Pattern.CASE_INSENSITIVE);
+	private static Pattern _pattern = Pattern.compile(
+		"(?:\\[((?:[a-z]|\\*){1,16})(?:=([^\\x00-\\x1F\"'()<>\\[\\]]{1,256}))" +
+			"?\\])|(?:\\[/([a-z]{1,16})\\])",
+		Pattern.CASE_INSENSITIVE);
 
-	private Matcher _matcherBBCode = null;
+	private Matcher _matcher;
 
 }

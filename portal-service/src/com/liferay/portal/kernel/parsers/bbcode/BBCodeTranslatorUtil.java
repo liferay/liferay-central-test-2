@@ -14,8 +14,6 @@
 
 package com.liferay.portal.kernel.parsers.bbcode;
 
-import com.liferay.portlet.messageboards.util.BBCodeTranslator;
-
 /**
  * @author Iliyan Peychev
  * @author Miguel Pastor
@@ -28,16 +26,16 @@ public class BBCodeTranslatorUtil {
 		return _BBCodeTranslator;
 	}
 
-	public static String[][] getEmoticons() {
-		return getBBCodeTranslator().getEmoticons();
-	}
-
 	public static String[] getEmoticonDescriptions() {
 		return getBBCodeTranslator().getEmoticonDescriptions();
 	}
 
 	public static String[] getEmoticonFiles() {
 		return getBBCodeTranslator().getEmoticonFiles();
+	}
+
+	public static String[][] getEmoticons() {
+		return getBBCodeTranslator().getEmoticons();
 	}
 
 	public static String[] getEmoticonSymbols() {

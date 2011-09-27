@@ -14,24 +14,25 @@
 
 package com.liferay.portal.parsers.bbcode;
 
+import com.liferay.portal.kernel.util.StringUtil;
+
 /**
  * @author Iliyan Peychev
  */
 public class BBCodeToken {
 
-	public BBCodeToken(
-			String startTag, String attribute, String endTag, int start,
-			int end) {
-
-		_attribute = attribute;
-		_end = end;
-		_endTag = endTag != null ? endTag.toLowerCase() : null;
-		_start = start;
-		_startTag = startTag != null ? startTag.toLowerCase() : null;
-	}
-
 	public BBCodeToken(String endTag) {
 		_endTag = endTag;
+	}
+
+	public BBCodeToken(
+		String startTag, String attribute, String endTag, int start, int end) {
+
+		_startTag = StringUtil.lowerCase(startTag);
+		_attribute = attribute;
+		_endTag = StringUtil.lowerCase(endTag);
+		_start = start;
+		_end = end;
 	}
 
 	public String getAttribute() {
@@ -55,7 +56,7 @@ public class BBCodeToken {
 	}
 
 	public void setAttribute(String attribute) {
-		this._attribute = attribute;
+		_attribute = attribute;
 	}
 
 	private String _attribute;
