@@ -91,15 +91,16 @@ Format dateFormatDate = FastDateFormatFactoryUtil.getDate(locale, timeZone);
 %>
 
 <%!
+private static Set<String> _allMimeTypes;
 private static String _defaultMimeTypes;
 
 static {
-	List<String> allMimeTypes = new ArrayList<String>();
+	_allMimeTypes = new LinkedHashSet<String>();
 
-	allMimeTypes.addAll(VideoProcessor.getVideoMimeTypes());
-	allMimeTypes.addAll(ImageProcessor.getImageMimeTypes());
-	allMimeTypes.addAll(AudioProcessor.getAudioMimeTypes());
+	_allMimeTypes.addAll(VideoProcessor.getVideoMimeTypes());
+	_allMimeTypes.addAll(ImageProcessor.getImageMimeTypes());
+	_allMimeTypes.addAll(AudioProcessor.getAudioMimeTypes());
 
-	_defaultMimeTypes = StringUtil.merge(allMimeTypes.toArray(new String[allMimeTypes.size()]));
+	_defaultMimeTypes = StringUtil.merge(_allMimeTypes.toArray(new String[_allMimeTypes.size()]));
 }
 %>

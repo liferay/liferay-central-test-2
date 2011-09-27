@@ -44,7 +44,6 @@ String redirect = ParamUtil.getString(request, "redirect");
 				<aui:field-wrapper label="show-media-type">
 
 					<%
-					Set availableMimeTypes = SetUtil.fromList(allMimeTypes);
 
 					// Left list
 
@@ -62,7 +61,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 					Arrays.sort(mimeTypes);
 
-					Iterator itr = availableMimeTypes.iterator();
+					Iterator itr = _allMimeTypes.iterator();
 
 					while (itr.hasNext()) {
 						String mimeType = (String)itr.next();
