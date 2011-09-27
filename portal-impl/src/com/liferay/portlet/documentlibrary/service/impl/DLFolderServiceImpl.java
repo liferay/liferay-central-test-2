@@ -176,7 +176,17 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 		throws SystemException {
 
 		return dlFolderFinder.filterFindF_FE_FS_ByG_F_S(
-			groupId, folderId, status, includeMountFolders, start, end, obc);
+			groupId, folderId, status, null, includeMountFolders, start, end,
+			obc);
+	}
+
+	public int getFoldersAndFileEntriesAndFileShortcuts(
+			long groupId, long folderId, int status, String[] mimeTypes,
+			boolean includeMountFolders)
+		throws SystemException {
+
+		return dlFolderFinder.filterCountF_FE_FS_ByG_F_S(
+			groupId, folderId, status, mimeTypes, includeMountFolders);
 	}
 
 	public List<Object> getFoldersAndFileEntriesAndFileShortcuts(
@@ -196,19 +206,10 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 		throws SystemException {
 
 		return dlFolderFinder.filterCountF_FE_FS_ByG_F_S(
-			groupId, folderId, status, includeMountFolders);
+			groupId, folderId, status, null, includeMountFolders);
 	}
 
 	public int getFoldersAndFileEntriesAndFileShortcutsCount(
-			long groupId, long folderId, int status, String[] mimeTypes,
-			boolean includeMountFolders)
-		throws SystemException {
-
-		return dlFolderFinder.filterCountF_FE_FS_ByG_F_S(
-			groupId, folderId, status, mimeTypes, includeMountFolders);
-	}
-
-	public int getFoldersAndFileEntriesAndFileShortcuts(
 			long groupId, long folderId, int status, String[] mimeTypes,
 			boolean includeMountFolders)
 		throws SystemException {
@@ -254,17 +255,6 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 			groupId, parentFolderId, true);
 	}
 
-	public List<Long> getSubfolderIds(
-			long groupId, long folderId, boolean recurse)
-		throws SystemException {
-
-		List<Long> folderIds = new ArrayList<Long>();
-
-		getSubfolderIds(folderIds, groupId, folderId);
-
-		return folderIds;
-	}
-
 	public void getSubfolderIds(
 			List<Long> folderIds, long groupId, long folderId)
 		throws SystemException {
@@ -278,6 +268,17 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 			getSubfolderIds(
 				folderIds, dlFolder.getGroupId(), dlFolder.getFolderId());
 		}
+	}
+
+	public List<Long> getSubfolderIds(
+			long groupId, long folderId, boolean recurse)
+		throws SystemException {
+
+		List<Long> folderIds = new ArrayList<Long>();
+
+		getSubfolderIds(folderIds, groupId, folderId);
+
+		return folderIds;
 	}
 
 	public boolean hasFolderLock(long folderId)

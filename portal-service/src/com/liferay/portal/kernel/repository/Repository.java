@@ -176,10 +176,10 @@ public interface Repository {
 
 	public long getRepositoryId();
 
-	public List<Long> getSubfolderIds(long folderId, boolean recurse)
+	public void getSubfolderIds(List<Long> folderIds, long folderId)
 		throws SystemException;
 
-	public void getSubfolderIds(List<Long> folderIds, long folderId)
+	public List<Long> getSubfolderIds(long folderId, boolean recurse)
 		throws SystemException;
 
 	public Lock lockFolder(long folderId)
@@ -209,14 +209,14 @@ public interface Repository {
 			long fileEntryId, String version, ServiceContext serviceContext)
 		throws PortalException, SystemException;
 
+	public Hits search(SearchContext searchContext, Query query)
+		throws SearchException;
+
 	public void unlockFolder(long folderId, String lockUuid)
 		throws PortalException, SystemException;
 
 	public void unlockFolder(long parentFolderId, String title, String lockUuid)
 		throws PortalException, SystemException;
-
-	public Hits search(SearchContext searchContext, Query query)
-		throws SearchException;
 
 	public FileEntry updateFileEntry(
 			long fileEntryId, String sourceFileName, String mimeType,

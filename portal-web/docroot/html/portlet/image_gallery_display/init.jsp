@@ -85,15 +85,21 @@ boolean showAddFolderButton = false;
 boolean showFolderMenu = PrefsParamUtil.getBoolean(preferences, request, "showFolderMenu");
 boolean showTabs = PrefsParamUtil.getBoolean(preferences, request, "showTabs");
 
-List<String> allMimeTypes = new ArrayList<String>();
-
-allMimeTypes.addAll(VideoProcessor.getVideoMimeTypes());
-allMimeTypes.addAll(ImageProcessor.getImageMimeTypes());
-allMimeTypes.addAll(AudioProcessor.getAudioMimeTypes());
-
-String defaultMimeTypes = StringUtil.merge(ArrayUtil.toStringArray(allMimeTypes.toArray()));
-
-String[] mimeTypes = StringUtil.split(PrefsParamUtil.getString(preferences, request, "mimeTypes", defaultMimeTypes));
+String[] mimeTypes = StringUtil.split(PrefsParamUtil.getString(preferences, request, "mimeTypes", _defaultMimeTypes));
 
 Format dateFormatDate = FastDateFormatFactoryUtil.getDate(locale, timeZone);
+%>
+
+<%!
+private static String _defaultMimeTypes;
+
+static {
+	List<String> allMimeTypes = new ArrayList<String>();
+
+	allMimeTypes.addAll(VideoProcessor.getVideoMimeTypes());
+	allMimeTypes.addAll(ImageProcessor.getImageMimeTypes());
+	allMimeTypes.addAll(AudioProcessor.getAudioMimeTypes());
+
+	_defaultMimeTypes = StringUtil.merge(allMimeTypes.toArray(new String[allMimeTypes.size()]));
+}
 %>

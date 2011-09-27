@@ -449,18 +449,18 @@ public class LiferayRepository
 			getGroupId(), userId, toFolderId(rootFolderId));
 	}
 
-	public List<Long> getSubfolderIds(long folderId, boolean recurse)
-		throws SystemException {
-
-		return dlFolderService.getSubfolderIds(
-			getGroupId(), toFolderId(folderId), recurse);
-	}
-
 	public void getSubfolderIds(List<Long> folderIds, long folderId)
 		throws SystemException {
 
 		dlFolderService.getSubfolderIds(
 			folderIds, getGroupId(), toFolderId(folderId));
+	}
+
+	public List<Long> getSubfolderIds(long folderId, boolean recurse)
+		throws SystemException {
+
+		return dlFolderService.getSubfolderIds(
+			getGroupId(), toFolderId(folderId), recurse);
 	}
 
 	public Lock lockFolder(long folderId)

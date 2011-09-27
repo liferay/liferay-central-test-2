@@ -213,19 +213,16 @@ public abstract class BaseRepositoryImpl implements BaseRepository {
 
 		this.companyLocalService = companyLocalService;
 	}
-
 	public void setCounterLocalService(
 		CounterLocalService counterLocalService) {
 
 		this.counterLocalService = counterLocalService;
 	}
-
 	public void setDLAppHelperLocalService(
 		DLAppHelperLocalService dlAppHelperLocalService) {
 
 		this.dlAppHelperLocalService = dlAppHelperLocalService;
 	}
-
 	public void setGroupId(long groupId) {
 		_groupId = groupId;
 	}

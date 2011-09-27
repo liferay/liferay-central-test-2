@@ -168,6 +168,15 @@ public class DefaultLocalRepositoryImpl implements LocalRepository {
 	}
 
 	public List<Object> getFoldersAndFileEntriesAndFileShortcuts(
+			long folderId, int status, int start, int end,
+			OrderByComparator obc)
+		throws SystemException {
+
+		return getFoldersAndFileEntriesAndFileShortcuts(
+			folderId, status, true, start, end, obc);
+	}
+
+	public List<Object> getFoldersAndFileEntriesAndFileShortcuts(
 			long folderId, int status, String[] mimeTypes,
 			boolean includeMountFolders, int start,	int end,
 			OrderByComparator obc)
@@ -175,15 +184,6 @@ public class DefaultLocalRepositoryImpl implements LocalRepository {
 
 		return _repository.getFoldersAndFileEntriesAndFileShortcuts(
 			folderId, status, mimeTypes, includeMountFolders, start, end, obc);
-	}
-
-	public List<Object> getFoldersAndFileEntriesAndFileShortcuts(
-			long folderId, int status, int start, int end,
-			OrderByComparator obc)
-		throws SystemException {
-
-		return getFoldersAndFileEntriesAndFileShortcuts(
-			folderId, status, true, start, end, obc);
 	}
 
 	public int getFoldersAndFileEntriesAndFileShortcutsCount(

@@ -375,16 +375,16 @@ public class BaseRepositoryProxyBean
 		return _baseRepository.getRepositoryId();
 	}
 
-	public List<Long> getSubfolderIds(long folderId, boolean recurse)
-		throws SystemException {
-
-		return _baseRepository.getSubfolderIds(folderId, recurse);
-	}
-
 	public void getSubfolderIds(List<Long> folderIds, long folderId)
 		throws SystemException {
 
 		_baseRepository.getSubfolderIds(folderIds, folderId);
+	}
+
+	public List<Long> getSubfolderIds(long folderId, boolean recurse)
+		throws SystemException {
+
+		return _baseRepository.getSubfolderIds(folderId, recurse);
 	}
 
 	public String[] getSupportedConfigurations() {

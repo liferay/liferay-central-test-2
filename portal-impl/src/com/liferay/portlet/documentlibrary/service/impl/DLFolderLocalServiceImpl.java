@@ -254,7 +254,8 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 		throws SystemException {
 
 		return dlFolderFinder.findF_FE_FS_ByG_F_S(
-			groupId, folderId, status, includeMountFolders, start, end, obc);
+			groupId, folderId, status, null, includeMountFolders, start, end,
+			obc);
 	}
 
 	public List<Object> getFoldersAndFileEntriesAndFileShortcuts(
@@ -274,7 +275,7 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 		throws SystemException {
 
 		return dlFolderFinder.countF_FE_FS_ByG_F_S(
-			groupId, folderId, status, includeMountFolders);
+			groupId, folderId, status, null, includeMountFolders);
 	}
 
 	public int getFoldersAndFileEntriesAndFileShortcutsCount(
