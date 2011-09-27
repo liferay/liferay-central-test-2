@@ -14,34 +14,24 @@
  */
 --%>
 
-<%@ include file="/html/portlet/layouts_admin/init.jsp" %>
+<%@ include file="/html/portlet/mobile_device_rules/action/init.jsp" %>
 
 <%
-Layout selLayout = (Layout)request.getAttribute("edit_pages.jsp-selLayout");
-
-LayoutTypePortlet selLayoutTypePortlet = null;
-
-Theme selTheme = null;
-
-if (selLayout != null) {
-	selLayoutTypePortlet = (LayoutTypePortlet)selLayout.getLayoutType();
-
-	selTheme = selLayout.getTheme();
-}
-
 String layoutTemplateId = StringPool.BLANK;
 
-if (selLayoutTypePortlet != null) {
-	layoutTemplateId = selLayoutTypePortlet.getLayoutTemplateId();
+if (!isAdd) {
+	layoutTemplateId = actionTypeSettings.getProperty("layoutTemplateId");
+
+	if (Validator.isNull(layoutTemplateId)) {
+		layoutTemplateId = StringPool.BLANK;
+	}
 }
 
-List layoutTemplates = LayoutTemplateLocalServiceUtil.getLayoutTemplates(selTheme.getThemeId());
+List layoutTemplates = LayoutTemplateLocalServiceUtil.getLayoutTemplates();
 %>
 
 <liferay-ui:error-marker key="errorSection" value="layout" />
 
-<aui:model-context bean="<%= selLayout %>" model="<%= Layout.class %>" />
-
-<h3><liferay-ui:message key="layout" /></h3>
+<h5><%= LanguageUtil.get(pageContext, "layout-template") %></h5>
 
 <%@ include file="/html/portlet/layouts_admin/layout_field.jspf" %>
