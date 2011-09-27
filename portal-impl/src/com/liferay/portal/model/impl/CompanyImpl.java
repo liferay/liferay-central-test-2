@@ -104,6 +104,7 @@ public class CompanyImpl extends CompanyBaseImpl {
 		return new GroupImpl();
 	}
 
+	@Override
 	public Key getKeyObj() {
 		if (_keyObj == null) {
 			String key = getKey();
@@ -235,6 +236,7 @@ public class CompanyImpl extends CompanyBaseImpl {
 		super.setKey(key);
 	}
 
+	@Override
 	public void setKeyObj(Key keyObj) {
 		_keyObj = keyObj;
 	}

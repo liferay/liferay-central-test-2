@@ -3724,32 +3724,25 @@ public class ServiceBuilder {
 	}
 
 	private JavaField[] _getCacheFields(JavaClass javaClass) {
-		JavaField[] fields = javaClass.getFields();
+		List<JavaField> javaFields = new ArrayList<JavaField>();
 
-		if (fields.length == 0) {
-			return fields;
-		}
-
-		String annotationClassName = CacheField.class.getName();
-
-		List<JavaField> fieldList = new ArrayList<JavaField>();
-
-		for (JavaField field : fields) {
-			Annotation[] annotations = field.getAnnotations();
+		for (JavaField javaField : javaClass.getFields()) {
+			Annotation[] annotations = javaField.getAnnotations();
 
 			for (Annotation annotation : annotations) {
-				String annotationTypeFQN =
-					annotation.getType().getFullyQualifiedName();
+				Type type = annotation.getType();
 
-				if (annotationTypeFQN.equals(annotationClassName)) {
-						fieldList.add(field);
+				String className = type.getFullyQualifiedName();
+
+				if (className.equals(CacheField.class.getName())) {
+					javaFields.add(javaField);
 
 					break;
 				}
 			}
 		}
 
-		return fieldList.toArray(new JavaField[fieldList.size()]);
+		return javaFields.toArray(new JavaField[javaFields.size()]);
 	}
 
 	private String _getContent(String fileName) throws Exception {
