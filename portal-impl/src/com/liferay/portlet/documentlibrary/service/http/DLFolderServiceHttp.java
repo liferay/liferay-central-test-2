@@ -434,6 +434,40 @@ public class DLFolderServiceHttp {
 		}
 	}
 
+	public static int getFoldersAndFileEntriesAndFileShortcuts(
+		HttpPrincipal httpPrincipal, long groupId, long folderId, int status,
+		java.lang.String[] mimeTypes, boolean includeMountFolders)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		try {
+			MethodKey methodKey = new MethodKey(DLFolderServiceUtil.class.getName(),
+					"getFoldersAndFileEntriesAndFileShortcuts",
+					_getFoldersAndFileEntriesAndFileShortcutsParameterTypes11);
+
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					folderId, status, mimeTypes, includeMountFolders);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
+					throw (com.liferay.portal.kernel.exception.SystemException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+
+			return ((Integer)returnObj).intValue();
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
 	public static java.util.List<java.lang.Object> getFoldersAndFileEntriesAndFileShortcuts(
 		HttpPrincipal httpPrincipal, long groupId, long folderId, int status,
 		java.lang.String[] mimeTypes, boolean includeMountFolders, int start,
@@ -442,7 +476,7 @@ public class DLFolderServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(DLFolderServiceUtil.class.getName(),
 					"getFoldersAndFileEntriesAndFileShortcuts",
-					_getFoldersAndFileEntriesAndFileShortcutsParameterTypes11);
+					_getFoldersAndFileEntriesAndFileShortcutsParameterTypes12);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					folderId, status, mimeTypes, includeMountFolders, start,
@@ -477,7 +511,7 @@ public class DLFolderServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(DLFolderServiceUtil.class.getName(),
 					"getFoldersAndFileEntriesAndFileShortcutsCount",
-					_getFoldersAndFileEntriesAndFileShortcutsCountParameterTypes12);
+					_getFoldersAndFileEntriesAndFileShortcutsCountParameterTypes13);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					folderId, status, includeMountFolders);
@@ -511,41 +545,7 @@ public class DLFolderServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(DLFolderServiceUtil.class.getName(),
 					"getFoldersAndFileEntriesAndFileShortcutsCount",
-					_getFoldersAndFileEntriesAndFileShortcutsCountParameterTypes13);
-
-			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					folderId, status, mimeTypes, includeMountFolders);
-
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
-					throw (com.liferay.portal.kernel.exception.SystemException)e;
-				}
-
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
-			}
-
-			return ((Integer)returnObj).intValue();
-		}
-		catch (com.liferay.portal.kernel.exception.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
-	public static int getFoldersAndFileEntriesAndFileShortcuts(
-		HttpPrincipal httpPrincipal, long groupId, long folderId, int status,
-		java.lang.String[] mimeTypes, boolean includeMountFolders)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		try {
-			MethodKey methodKey = new MethodKey(DLFolderServiceUtil.class.getName(),
-					"getFoldersAndFileEntriesAndFileShortcuts",
-					_getFoldersAndFileEntriesAndFileShortcutsParameterTypes14);
+					_getFoldersAndFileEntriesAndFileShortcutsCountParameterTypes14);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					folderId, status, mimeTypes, includeMountFolders);
@@ -702,13 +702,41 @@ public class DLFolderServiceHttp {
 		}
 	}
 
+	public static void getSubfolderIds(HttpPrincipal httpPrincipal,
+		java.util.List<java.lang.Long> folderIds, long groupId, long folderId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		try {
+			MethodKey methodKey = new MethodKey(DLFolderServiceUtil.class.getName(),
+					"getSubfolderIds", _getSubfolderIdsParameterTypes19);
+
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					folderIds, groupId, folderId);
+
+			try {
+				TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
+					throw (com.liferay.portal.kernel.exception.SystemException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
 	public static java.util.List<java.lang.Long> getSubfolderIds(
 		HttpPrincipal httpPrincipal, long groupId, long folderId,
 		boolean recurse)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(DLFolderServiceUtil.class.getName(),
-					"getSubfolderIds", _getSubfolderIdsParameterTypes19);
+					"getSubfolderIds", _getSubfolderIdsParameterTypes20);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					folderId, recurse);
@@ -727,34 +755,6 @@ public class DLFolderServiceHttp {
 			}
 
 			return (java.util.List<java.lang.Long>)returnObj;
-		}
-		catch (com.liferay.portal.kernel.exception.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
-	public static void getSubfolderIds(HttpPrincipal httpPrincipal,
-		java.util.List<java.lang.Long> folderIds, long groupId, long folderId)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		try {
-			MethodKey methodKey = new MethodKey(DLFolderServiceUtil.class.getName(),
-					"getSubfolderIds", _getSubfolderIdsParameterTypes20);
-
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					folderIds, groupId, folderId);
-
-			try {
-				TunnelUtil.invoke(httpPrincipal, methodHandler);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
-					throw (com.liferay.portal.kernel.exception.SystemException)e;
-				}
-
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
-			}
 		}
 		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);
@@ -1203,17 +1203,17 @@ public class DLFolderServiceHttp {
 	private static final Class<?>[] _getFoldersAndFileEntriesAndFileShortcutsParameterTypes11 =
 		new Class[] {
 			long.class, long.class, int.class, java.lang.String[].class,
+			boolean.class
+		};
+	private static final Class<?>[] _getFoldersAndFileEntriesAndFileShortcutsParameterTypes12 =
+		new Class[] {
+			long.class, long.class, int.class, java.lang.String[].class,
 			boolean.class, int.class, int.class,
 			com.liferay.portal.kernel.util.OrderByComparator.class
 		};
-	private static final Class<?>[] _getFoldersAndFileEntriesAndFileShortcutsCountParameterTypes12 =
-		new Class[] { long.class, long.class, int.class, boolean.class };
 	private static final Class<?>[] _getFoldersAndFileEntriesAndFileShortcutsCountParameterTypes13 =
-		new Class[] {
-			long.class, long.class, int.class, java.lang.String[].class,
-			boolean.class
-		};
-	private static final Class<?>[] _getFoldersAndFileEntriesAndFileShortcutsParameterTypes14 =
+		new Class[] { long.class, long.class, int.class, boolean.class };
+	private static final Class<?>[] _getFoldersAndFileEntriesAndFileShortcutsCountParameterTypes14 =
 		new Class[] {
 			long.class, long.class, int.class, java.lang.String[].class,
 			boolean.class
@@ -1232,10 +1232,10 @@ public class DLFolderServiceHttp {
 			long.class, long.class
 		};
 	private static final Class<?>[] _getSubfolderIdsParameterTypes19 = new Class[] {
-			long.class, long.class, boolean.class
+			java.util.List.class, long.class, long.class
 		};
 	private static final Class<?>[] _getSubfolderIdsParameterTypes20 = new Class[] {
-			java.util.List.class, long.class, long.class
+			long.class, long.class, boolean.class
 		};
 	private static final Class<?>[] _hasFolderLockParameterTypes21 = new Class[] {
 			long.class
