@@ -586,7 +586,6 @@ public class JournalArticleLocalServiceImpl
 
 		long[] assetCategoryIds = assetCategoryLocalService.getCategoryIds(
 			JournalArticle.class.getName(), oldArticle.getResourcePrimKey());
-
 		String[] assetTagNames = assetTagLocalService.getTagNames(
 			JournalArticle.class.getName(), oldArticle.getResourcePrimKey());
 
