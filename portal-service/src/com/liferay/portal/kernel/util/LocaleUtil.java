@@ -278,11 +278,11 @@ public class LocaleUtil {
 		return w3cLanguageIds;
 	}
 
+	private static final int _MAX_LOCALES = 1000;
+
 	private static LocaleUtil _instance = new LocaleUtil();
 
 	private static Log _log = LogFactoryUtil.getLog(LocaleUtil.class);
-
-	private static int _MAX_LOCALES = 1000;
 
 	private Locale _locale;
 	private Map<String, Locale> _locales = new HashMap<String, Locale>();
