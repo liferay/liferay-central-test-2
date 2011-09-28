@@ -88,14 +88,16 @@ public class SpriteProcessorImpl implements SpriteProcessor {
 
 		Collections.sort(images);
 
-		String dir = PropsValues.SPRITE_PROPERTIES_ROOT_PATH;
+		String spriteRootDirName = PropsValues.SPRITE_ROOT_DIR;
 
-		if (Validator.isNull(dir)) {
-			dir = images.get(0).getParentFile().toString();
+		if (Validator.isNull(spriteRootDirName)) {
+			File image = images.get(0);
+
+			spriteRootDirName = String.valueOf(image.getParentFile());
 		}
 
 		File spritePropertiesFile = new File(
-			dir + StringPool.SLASH + spritePropertiesFileName);
+			spriteRootDirName + StringPool.SLASH + spritePropertiesFileName);
 
 		boolean build = false;
 
@@ -193,7 +195,8 @@ public class SpriteProcessorImpl implements SpriteProcessor {
 				MosaicDescriptor.MOSAIC_TYPE_OVERLAY, null, null, null, null,
 				null);
 
-			File spriteFile = new File(dir + StringPool.SLASH + spriteFileName);
+			File spriteFile = new File(
+				spriteRootDirName + StringPool.SLASH + spriteFileName);
 
 			ImageIO.write(renderedImage, "png", spriteFile);
 
@@ -210,7 +213,7 @@ public class SpriteProcessorImpl implements SpriteProcessor {
 			renderedImage = imageWorker.getPlanarImage();
 
 			spriteFile = new File(
-				dir + StringPool.SLASH +
+				spriteRootDirName + StringPool.SLASH +
 					StringUtil.replace(spriteFileName, ".png", ".gif"));
 
 			FileOutputStream fos = new FileOutputStream(spriteFile);

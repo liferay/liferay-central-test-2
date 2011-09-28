@@ -1825,7 +1825,7 @@ public interface PropsKeys {
 
 	public static final String SPRITE_PROPERTIES_FILE_NAME = "sprite.properties.file.name";
 
-	public static final String SPRITE_PROPERTIES_ROOT_PATH = "sprite.properties.root.path";
+	public static final String SPRITE_ROOT_DIR = "sprite.root.dir";
 
 	public static final String SQL_DATA_COM_LIFERAY_PORTAL_MODEL_COUNTRY_COUNTRY_ID = "sql.data.com.liferay.portal.model.Country.country.id";
 
