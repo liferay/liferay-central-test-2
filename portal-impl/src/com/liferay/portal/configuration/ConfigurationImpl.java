@@ -106,6 +106,11 @@ public class ConfigurationImpl
 
 						writer.close();
 					}
+					else {
+						if (_log.isWarnEnabled()) {
+							_log.warn("Unable to write " + file);
+						}
+					}
 				}
 			}
 		}
