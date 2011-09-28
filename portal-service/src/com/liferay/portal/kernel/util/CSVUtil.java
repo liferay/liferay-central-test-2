@@ -20,14 +20,16 @@ package com.liferay.portal.kernel.util;
 public class CSVUtil {
 
 	public static String encode(Object obj) {
-		if (!obj.getClass().isArray()) {
+		Class<?> clazz = obj.getClass();
+
+		if (!clazz.isArray()) {
 			return encode(String.valueOf(obj));
 		}
 
-		Object[] objArray = (Object[])obj;
+		Object[] array = (Object[])obj;
 
-		if (objArray.length > 0) {
-			return encode(String.valueOf(objArray[0]));
+		if (array.length > 0) {
+			return encode(String.valueOf(array[0]));
 		}
 
 		return null;
