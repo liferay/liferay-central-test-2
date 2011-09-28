@@ -77,8 +77,8 @@ public class ResourceModelImpl extends BaseModelImpl<Resource>
 	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.column.bitmask.enabled.com.liferay.portal.model.Resource"),
 			true);
-	public static long PRIMKEY_COLUMN_BITMASK = 1L;
-	public static long CODEID_COLUMN_BITMASK = 2L;
+	public static long CODEID_COLUMN_BITMASK = 1L;
+	public static long PRIMKEY_COLUMN_BITMASK = 2L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.

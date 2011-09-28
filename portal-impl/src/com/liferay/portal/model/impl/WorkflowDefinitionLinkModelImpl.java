@@ -86,13 +86,13 @@ public class WorkflowDefinitionLinkModelImpl extends BaseModelImpl<WorkflowDefin
 	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.column.bitmask.enabled.com.liferay.portal.model.WorkflowDefinitionLink"),
 			true);
-	public static long TYPEPK_COLUMN_BITMASK = 1L;
-	public static long GROUPID_COLUMN_BITMASK = 2L;
+	public static long CLASSNAMEID_COLUMN_BITMASK = 1L;
+	public static long CLASSPK_COLUMN_BITMASK = 2L;
 	public static long COMPANYID_COLUMN_BITMASK = 4L;
-	public static long CLASSNAMEID_COLUMN_BITMASK = 8L;
-	public static long WORKFLOWDEFINITIONVERSION_COLUMN_BITMASK = 16L;
-	public static long CLASSPK_COLUMN_BITMASK = 32L;
-	public static long WORKFLOWDEFINITIONNAME_COLUMN_BITMASK = 64L;
+	public static long GROUPID_COLUMN_BITMASK = 8L;
+	public static long TYPEPK_COLUMN_BITMASK = 16L;
+	public static long WORKFLOWDEFINITIONNAME_COLUMN_BITMASK = 32L;
+	public static long WORKFLOWDEFINITIONVERSION_COLUMN_BITMASK = 64L;
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.WorkflowDefinitionLink"));
 

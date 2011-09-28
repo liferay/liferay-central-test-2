@@ -89,8 +89,8 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization>
 				"value.object.column.bitmask.enabled.com.liferay.portal.model.Organization"),
 			true);
 	public static long COMPANYID_COLUMN_BITMASK = 1L;
-	public static long PARENTORGANIZATIONID_COLUMN_BITMASK = 2L;
-	public static long NAME_COLUMN_BITMASK = 4L;
+	public static long NAME_COLUMN_BITMASK = 2L;
+	public static long PARENTORGANIZATIONID_COLUMN_BITMASK = 4L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.

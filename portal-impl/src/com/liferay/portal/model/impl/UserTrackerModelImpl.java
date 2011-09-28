@@ -81,8 +81,8 @@ public class UserTrackerModelImpl extends BaseModelImpl<UserTracker>
 				"value.object.column.bitmask.enabled.com.liferay.portal.model.UserTracker"),
 			true);
 	public static long COMPANYID_COLUMN_BITMASK = 1L;
-	public static long USERID_COLUMN_BITMASK = 2L;
-	public static long SESSIONID_COLUMN_BITMASK = 4L;
+	public static long SESSIONID_COLUMN_BITMASK = 2L;
+	public static long USERID_COLUMN_BITMASK = 4L;
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.UserTracker"));
 

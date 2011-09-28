@@ -468,8 +468,8 @@ create index IX_7F26B2A6 on MDRRuleGroup (uuid_);
 create unique index IX_46665CC4 on MDRRuleGroup (uuid_, groupId);
 
 create index IX_C95A08D8 on MDRRuleGroupInstance (classNameId, classPK);
-create index IX_27EBDED2 on MDRRuleGroupInstance (classNameId, classPK, groupId);
 create unique index IX_808A0036 on MDRRuleGroupInstance (classNameId, classPK, ruleGroupId);
+create index IX_22DAB85C on MDRRuleGroupInstance (groupId, classNameId, classPK);
 create index IX_BF3E642B on MDRRuleGroupInstance (ruleGroupId);
 create index IX_B6A6BD91 on MDRRuleGroupInstance (uuid_);
 create unique index IX_9CBC6A39 on MDRRuleGroupInstance (uuid_, groupId);

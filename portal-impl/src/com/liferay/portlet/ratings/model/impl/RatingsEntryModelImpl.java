@@ -88,9 +88,9 @@ public class RatingsEntryModelImpl extends BaseModelImpl<RatingsEntry>
 				"value.object.column.bitmask.enabled.com.liferay.portlet.ratings.model.RatingsEntry"),
 			true);
 	public static long CLASSNAMEID_COLUMN_BITMASK = 1L;
-	public static long USERID_COLUMN_BITMASK = 2L;
+	public static long CLASSPK_COLUMN_BITMASK = 2L;
 	public static long SCORE_COLUMN_BITMASK = 4L;
-	public static long CLASSPK_COLUMN_BITMASK = 8L;
+	public static long USERID_COLUMN_BITMASK = 8L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.

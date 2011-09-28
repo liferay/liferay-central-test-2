@@ -118,11 +118,11 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.column.bitmask.enabled.com.liferay.portal.model.LayoutRevision"),
 			true);
-	public static long PARENTLAYOUTREVISIONID_COLUMN_BITMASK = 1L;
-	public static long PLID_COLUMN_BITMASK = 2L;
+	public static long HEAD_COLUMN_BITMASK = 1L;
+	public static long LAYOUTBRANCHID_COLUMN_BITMASK = 2L;
 	public static long LAYOUTSETBRANCHID_COLUMN_BITMASK = 4L;
-	public static long HEAD_COLUMN_BITMASK = 8L;
-	public static long LAYOUTBRANCHID_COLUMN_BITMASK = 16L;
+	public static long PARENTLAYOUTREVISIONID_COLUMN_BITMASK = 8L;
+	public static long PLID_COLUMN_BITMASK = 16L;
 	public static long STATUS_COLUMN_BITMASK = 32L;
 
 	/**

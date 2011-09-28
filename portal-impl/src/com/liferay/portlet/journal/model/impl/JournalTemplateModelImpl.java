@@ -106,10 +106,10 @@ public class JournalTemplateModelImpl extends BaseModelImpl<JournalTemplate>
 				"value.object.column.bitmask.enabled.com.liferay.portlet.journal.model.JournalTemplate"),
 			true);
 	public static long GROUPID_COLUMN_BITMASK = 1L;
-	public static long UUID_COLUMN_BITMASK = 2L;
-	public static long SMALLIMAGEID_COLUMN_BITMASK = 4L;
-	public static long STRUCTUREID_COLUMN_BITMASK = 8L;
-	public static long TEMPLATEID_COLUMN_BITMASK = 16L;
+	public static long SMALLIMAGEID_COLUMN_BITMASK = 2L;
+	public static long STRUCTUREID_COLUMN_BITMASK = 4L;
+	public static long TEMPLATEID_COLUMN_BITMASK = 8L;
+	public static long UUID_COLUMN_BITMASK = 16L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.

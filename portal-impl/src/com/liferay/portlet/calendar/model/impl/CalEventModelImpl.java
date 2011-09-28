@@ -106,10 +106,10 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent>
 			true);
 	public static long COMPANYID_COLUMN_BITMASK = 1L;
 	public static long GROUPID_COLUMN_BITMASK = 2L;
-	public static long TYPE_COLUMN_BITMASK = 4L;
-	public static long REMINDBY_COLUMN_BITMASK = 8L;
-	public static long UUID_COLUMN_BITMASK = 16L;
-	public static long REPEATING_COLUMN_BITMASK = 32L;
+	public static long REMINDBY_COLUMN_BITMASK = 4L;
+	public static long REPEATING_COLUMN_BITMASK = 8L;
+	public static long TYPE_COLUMN_BITMASK = 16L;
+	public static long UUID_COLUMN_BITMASK = 32L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.

@@ -77,9 +77,9 @@ public class SCProductScreenshotModelImpl extends BaseModelImpl<SCProductScreens
 	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.column.bitmask.enabled.com.liferay.portlet.softwarecatalog.model.SCProductScreenshot"),
 			true);
-	public static long PRODUCTENTRYID_COLUMN_BITMASK = 1L;
-	public static long FULLIMAGEID_COLUMN_BITMASK = 2L;
-	public static long PRIORITY_COLUMN_BITMASK = 4L;
+	public static long FULLIMAGEID_COLUMN_BITMASK = 1L;
+	public static long PRIORITY_COLUMN_BITMASK = 2L;
+	public static long PRODUCTENTRYID_COLUMN_BITMASK = 4L;
 	public static long THUMBNAILID_COLUMN_BITMASK = 8L;
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.softwarecatalog.model.SCProductScreenshot"));

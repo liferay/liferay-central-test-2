@@ -85,8 +85,8 @@ public class MBBanModelImpl extends BaseModelImpl<MBBan> implements MBBanModel {
 	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.column.bitmask.enabled.com.liferay.portlet.messageboards.model.MBBan"),
 			true);
-	public static long GROUPID_COLUMN_BITMASK = 1L;
-	public static long BANUSERID_COLUMN_BITMASK = 2L;
+	public static long BANUSERID_COLUMN_BITMASK = 1L;
+	public static long GROUPID_COLUMN_BITMASK = 2L;
 	public static long USERID_COLUMN_BITMASK = 4L;
 
 	/**

@@ -89,9 +89,9 @@ public class DLSyncModelImpl extends BaseModelImpl<DLSync>
 				"value.object.column.bitmask.enabled.com.liferay.portlet.documentlibrary.model.DLSync"),
 			true);
 	public static long COMPANYID_COLUMN_BITMASK = 1L;
-	public static long MODIFIEDDATE_COLUMN_BITMASK = 2L;
-	public static long REPOSITORYID_COLUMN_BITMASK = 4L;
-	public static long FILEID_COLUMN_BITMASK = 8L;
+	public static long FILEID_COLUMN_BITMASK = 2L;
+	public static long MODIFIEDDATE_COLUMN_BITMASK = 4L;
+	public static long REPOSITORYID_COLUMN_BITMASK = 8L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.

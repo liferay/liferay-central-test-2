@@ -104,18 +104,18 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage>
 	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.column.bitmask.enabled.com.liferay.portlet.wiki.model.WikiPage"),
 			true);
-	public static long PARENTTITLE_COLUMN_BITMASK = 1L;
+	public static long FORMAT_COLUMN_BITMASK = 1L;
 	public static long GROUPID_COLUMN_BITMASK = 2L;
-	public static long REDIRECTTITLE_COLUMN_BITMASK = 4L;
-	public static long RESOURCEPRIMKEY_COLUMN_BITMASK = 8L;
-	public static long NODEID_COLUMN_BITMASK = 16L;
-	public static long USERID_COLUMN_BITMASK = 32L;
-	public static long TITLE_COLUMN_BITMASK = 64L;
-	public static long UUID_COLUMN_BITMASK = 128L;
-	public static long HEAD_COLUMN_BITMASK = 256L;
-	public static long STATUS_COLUMN_BITMASK = 512L;
-	public static long VERSION_COLUMN_BITMASK = 1024L;
-	public static long FORMAT_COLUMN_BITMASK = 2048L;
+	public static long HEAD_COLUMN_BITMASK = 4L;
+	public static long NODEID_COLUMN_BITMASK = 8L;
+	public static long PARENTTITLE_COLUMN_BITMASK = 16L;
+	public static long REDIRECTTITLE_COLUMN_BITMASK = 32L;
+	public static long RESOURCEPRIMKEY_COLUMN_BITMASK = 64L;
+	public static long STATUS_COLUMN_BITMASK = 128L;
+	public static long TITLE_COLUMN_BITMASK = 256L;
+	public static long USERID_COLUMN_BITMASK = 512L;
+	public static long UUID_COLUMN_BITMASK = 1024L;
+	public static long VERSION_COLUMN_BITMASK = 2048L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.

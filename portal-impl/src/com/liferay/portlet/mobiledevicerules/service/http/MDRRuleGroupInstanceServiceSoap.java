@@ -84,6 +84,18 @@ public class MDRRuleGroupInstanceServiceSoap {
 		}
 	}
 
+	public static void deleteRuleGroupInstance(long ruleGroupInstanceId)
+		throws RemoteException {
+		try {
+			MDRRuleGroupInstanceServiceUtil.deleteRuleGroupInstance(ruleGroupInstanceId);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static void deleteRuleGroupInstance(
 		com.liferay.portlet.mobiledevicerules.model.MDRRuleGroupInstanceSoap ruleGroupInstance)
 		throws RemoteException {

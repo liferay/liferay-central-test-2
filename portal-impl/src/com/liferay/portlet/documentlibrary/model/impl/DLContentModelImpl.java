@@ -84,9 +84,9 @@ public class DLContentModelImpl extends BaseModelImpl<DLContent>
 				"value.object.column.bitmask.enabled.com.liferay.portlet.documentlibrary.model.DLContent"),
 			true);
 	public static long COMPANYID_COLUMN_BITMASK = 1L;
-	public static long REPOSITORYID_COLUMN_BITMASK = 2L;
-	public static long PATH_COLUMN_BITMASK = 4L;
-	public static long PORTLETID_COLUMN_BITMASK = 8L;
+	public static long PATH_COLUMN_BITMASK = 2L;
+	public static long PORTLETID_COLUMN_BITMASK = 4L;
+	public static long REPOSITORYID_COLUMN_BITMASK = 8L;
 	public static long VERSION_COLUMN_BITMASK = 16L;
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.documentlibrary.model.DLContent"));

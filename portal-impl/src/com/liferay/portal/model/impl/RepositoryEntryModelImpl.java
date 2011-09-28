@@ -73,8 +73,8 @@ public class RepositoryEntryModelImpl extends BaseModelImpl<RepositoryEntry>
 	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.column.bitmask.enabled.com.liferay.portal.model.RepositoryEntry"),
 			true);
-	public static long MAPPEDID_COLUMN_BITMASK = 1L;
-	public static long GROUPID_COLUMN_BITMASK = 2L;
+	public static long GROUPID_COLUMN_BITMASK = 1L;
+	public static long MAPPEDID_COLUMN_BITMASK = 2L;
 	public static long REPOSITORYID_COLUMN_BITMASK = 4L;
 	public static long UUID_COLUMN_BITMASK = 8L;
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(

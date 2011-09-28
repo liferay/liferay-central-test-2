@@ -80,9 +80,9 @@ public class PluginSettingModelImpl extends BaseModelImpl<PluginSetting>
 	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.column.bitmask.enabled.com.liferay.portal.model.PluginSetting"),
 			true);
-	public static long PLUGINTYPE_COLUMN_BITMASK = 1L;
-	public static long COMPANYID_COLUMN_BITMASK = 2L;
-	public static long PLUGINID_COLUMN_BITMASK = 4L;
+	public static long COMPANYID_COLUMN_BITMASK = 1L;
+	public static long PLUGINID_COLUMN_BITMASK = 2L;
+	public static long PLUGINTYPE_COLUMN_BITMASK = 4L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.

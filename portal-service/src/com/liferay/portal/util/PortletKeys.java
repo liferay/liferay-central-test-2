@@ -108,15 +108,15 @@ public class PortletKeys {
 
 	public static final String MAIL = "1_WAR_mailportlet";
 
-	public static final String MESSAGE_BOARDS_ADMIN = "162";
-
 	public static final String MESSAGE_BOARDS = "19";
+
+	public static final String MESSAGE_BOARDS_ADMIN = "162";
 
 	public static final String METADATA_SET_ADMIN = "171";
 
-	public static final String MOBILE_DEVICE_ADMIN_GLOBAL = "176";
+	public static final String MOBILE_DEVICE_GLOBAL_ADMIN = "176";
 
-	public static final String MOBILE_DEVICE_ADMIN_SITE = "177";
+	public static final String MOBILE_DEVICE_SITE_ADMIN = "177";
 
 	public static final String MONITORING = "131";
 
@@ -192,9 +192,9 @@ public class PortletKeys {
 
 	public static final String SITE_MEMBERSHIPS_ADMIN = "174";
 
-	public static final String SITES_ADMIN = "134";
-
 	public static final String SITE_SETTINGS = "165";
+
+	public static final String SITES_ADMIN = "134";
 
 	public static final String SOFTWARE_CATALOG = "98";
 

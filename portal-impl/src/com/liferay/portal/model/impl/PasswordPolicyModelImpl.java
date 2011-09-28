@@ -110,8 +110,8 @@ public class PasswordPolicyModelImpl extends BaseModelImpl<PasswordPolicy>
 				"value.object.column.bitmask.enabled.com.liferay.portal.model.PasswordPolicy"),
 			true);
 	public static long COMPANYID_COLUMN_BITMASK = 1L;
-	public static long NAME_COLUMN_BITMASK = 2L;
-	public static long DEFAULTPOLICY_COLUMN_BITMASK = 4L;
+	public static long DEFAULTPOLICY_COLUMN_BITMASK = 2L;
+	public static long NAME_COLUMN_BITMASK = 4L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.

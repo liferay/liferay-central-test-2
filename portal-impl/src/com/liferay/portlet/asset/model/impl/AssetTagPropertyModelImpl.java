@@ -89,8 +89,8 @@ public class AssetTagPropertyModelImpl extends BaseModelImpl<AssetTagProperty>
 	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.column.bitmask.enabled.com.liferay.portlet.asset.model.AssetTagProperty"),
 			true);
-	public static long KEY_COLUMN_BITMASK = 1L;
-	public static long COMPANYID_COLUMN_BITMASK = 2L;
+	public static long COMPANYID_COLUMN_BITMASK = 1L;
+	public static long KEY_COLUMN_BITMASK = 2L;
 	public static long TAGID_COLUMN_BITMASK = 4L;
 
 	/**

@@ -99,12 +99,12 @@ public class DDMStructureModelImpl extends BaseModelImpl<DDMStructure>
 	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.column.bitmask.enabled.com.liferay.portlet.dynamicdatamapping.model.DDMStructure"),
 			true);
-	public static long GROUPID_COLUMN_BITMASK = 1L;
-	public static long CLASSNAMEID_COLUMN_BITMASK = 2L;
-	public static long STRUCTUREKEY_COLUMN_BITMASK = 4L;
-	public static long UUID_COLUMN_BITMASK = 8L;
-	public static long DESCRIPTION_COLUMN_BITMASK = 16L;
-	public static long NAME_COLUMN_BITMASK = 32L;
+	public static long CLASSNAMEID_COLUMN_BITMASK = 1L;
+	public static long DESCRIPTION_COLUMN_BITMASK = 2L;
+	public static long GROUPID_COLUMN_BITMASK = 4L;
+	public static long NAME_COLUMN_BITMASK = 8L;
+	public static long STRUCTUREKEY_COLUMN_BITMASK = 16L;
+	public static long UUID_COLUMN_BITMASK = 32L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.

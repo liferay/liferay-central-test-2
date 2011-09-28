@@ -90,8 +90,8 @@ public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet>
 				"value.object.column.bitmask.enabled.com.liferay.portal.model.LayoutSet"),
 			true);
 	public static long GROUPID_COLUMN_BITMASK = 1L;
-	public static long PRIVATELAYOUT_COLUMN_BITMASK = 2L;
-	public static long LAYOUTSETPROTOTYPEUUID_COLUMN_BITMASK = 4L;
+	public static long LAYOUTSETPROTOTYPEUUID_COLUMN_BITMASK = 2L;
+	public static long PRIVATELAYOUT_COLUMN_BITMASK = 4L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.

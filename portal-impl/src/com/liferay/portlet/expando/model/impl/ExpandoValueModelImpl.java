@@ -84,11 +84,11 @@ public class ExpandoValueModelImpl extends BaseModelImpl<ExpandoValue>
 				"value.object.column.bitmask.enabled.com.liferay.portlet.expando.model.ExpandoValue"),
 			true);
 	public static long CLASSNAMEID_COLUMN_BITMASK = 1L;
-	public static long COLUMNID_COLUMN_BITMASK = 2L;
-	public static long ROWID_COLUMN_BITMASK = 4L;
+	public static long CLASSPK_COLUMN_BITMASK = 2L;
+	public static long COLUMNID_COLUMN_BITMASK = 4L;
 	public static long DATA_COLUMN_BITMASK = 8L;
-	public static long TABLEID_COLUMN_BITMASK = 16L;
-	public static long CLASSPK_COLUMN_BITMASK = 32L;
+	public static long ROWID_COLUMN_BITMASK = 16L;
+	public static long TABLEID_COLUMN_BITMASK = 32L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.

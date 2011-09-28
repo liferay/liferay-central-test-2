@@ -103,10 +103,10 @@ public class AssetCategoryModelImpl extends BaseModelImpl<AssetCategory>
 				"value.object.column.bitmask.enabled.com.liferay.portlet.asset.model.AssetCategory"),
 			true);
 	public static long GROUPID_COLUMN_BITMASK = 1L;
-	public static long VOCABULARYID_COLUMN_BITMASK = 2L;
+	public static long NAME_COLUMN_BITMASK = 2L;
 	public static long PARENTCATEGORYID_COLUMN_BITMASK = 4L;
 	public static long UUID_COLUMN_BITMASK = 8L;
-	public static long NAME_COLUMN_BITMASK = 16L;
+	public static long VOCABULARYID_COLUMN_BITMASK = 16L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.

@@ -82,10 +82,10 @@ public class LockModelImpl extends BaseModelImpl<Lock> implements LockModel {
 	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.column.bitmask.enabled.com.liferay.portal.model.Lock"),
 			true);
-	public static long KEY_COLUMN_BITMASK = 1L;
-	public static long UUID_COLUMN_BITMASK = 2L;
-	public static long CLASSNAME_COLUMN_BITMASK = 4L;
-	public static long EXPIRATIONDATE_COLUMN_BITMASK = 8L;
+	public static long CLASSNAME_COLUMN_BITMASK = 1L;
+	public static long EXPIRATIONDATE_COLUMN_BITMASK = 2L;
+	public static long KEY_COLUMN_BITMASK = 4L;
+	public static long UUID_COLUMN_BITMASK = 8L;
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.Lock"));
 

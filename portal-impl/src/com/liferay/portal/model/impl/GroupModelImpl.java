@@ -92,13 +92,13 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 				"value.object.column.bitmask.enabled.com.liferay.portal.model.Group"),
 			true);
 	public static long ACTIVE_COLUMN_BITMASK = 1L;
-	public static long FRIENDLYURL_COLUMN_BITMASK = 2L;
-	public static long COMPANYID_COLUMN_BITMASK = 4L;
-	public static long CLASSNAMEID_COLUMN_BITMASK = 8L;
-	public static long TYPE_COLUMN_BITMASK = 16L;
-	public static long CLASSPK_COLUMN_BITMASK = 32L;
-	public static long LIVEGROUPID_COLUMN_BITMASK = 64L;
-	public static long NAME_COLUMN_BITMASK = 128L;
+	public static long CLASSNAMEID_COLUMN_BITMASK = 2L;
+	public static long CLASSPK_COLUMN_BITMASK = 4L;
+	public static long COMPANYID_COLUMN_BITMASK = 8L;
+	public static long FRIENDLYURL_COLUMN_BITMASK = 16L;
+	public static long LIVEGROUPID_COLUMN_BITMASK = 32L;
+	public static long NAME_COLUMN_BITMASK = 64L;
+	public static long TYPE_COLUMN_BITMASK = 128L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.

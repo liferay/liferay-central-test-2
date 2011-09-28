@@ -113,16 +113,16 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.column.bitmask.enabled.com.liferay.portal.model.Layout"),
 			true);
-	public static long FRIENDLYURL_COLUMN_BITMASK = 1L;
-	public static long COMPANYID_COLUMN_BITMASK = 2L;
+	public static long COMPANYID_COLUMN_BITMASK = 1L;
+	public static long FRIENDLYURL_COLUMN_BITMASK = 2L;
 	public static long GROUPID_COLUMN_BITMASK = 4L;
-	public static long PRIVATELAYOUT_COLUMN_BITMASK = 8L;
-	public static long TYPE_COLUMN_BITMASK = 16L;
+	public static long ICONIMAGEID_COLUMN_BITMASK = 8L;
+	public static long LAYOUTID_COLUMN_BITMASK = 16L;
 	public static long PARENTLAYOUTID_COLUMN_BITMASK = 32L;
-	public static long UUID_COLUMN_BITMASK = 64L;
+	public static long PRIVATELAYOUT_COLUMN_BITMASK = 64L;
 	public static long TEMPLATELAYOUTUUID_COLUMN_BITMASK = 128L;
-	public static long ICONIMAGEID_COLUMN_BITMASK = 256L;
-	public static long LAYOUTID_COLUMN_BITMASK = 512L;
+	public static long TYPE_COLUMN_BITMASK = 256L;
+	public static long UUID_COLUMN_BITMASK = 512L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.

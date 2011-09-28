@@ -100,10 +100,10 @@ public class DDMTemplateModelImpl extends BaseModelImpl<DDMTemplate>
 				"value.object.column.bitmask.enabled.com.liferay.portlet.dynamicdatamapping.model.DDMTemplate"),
 			true);
 	public static long GROUPID_COLUMN_BITMASK = 1L;
-	public static long TYPE_COLUMN_BITMASK = 2L;
-	public static long UUID_COLUMN_BITMASK = 4L;
-	public static long LANGUAGE_COLUMN_BITMASK = 8L;
-	public static long STRUCTUREID_COLUMN_BITMASK = 16L;
+	public static long LANGUAGE_COLUMN_BITMASK = 2L;
+	public static long STRUCTUREID_COLUMN_BITMASK = 4L;
+	public static long TYPE_COLUMN_BITMASK = 8L;
+	public static long UUID_COLUMN_BITMASK = 16L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.

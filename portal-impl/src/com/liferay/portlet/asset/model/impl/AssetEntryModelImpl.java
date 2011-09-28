@@ -111,14 +111,14 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.column.bitmask.enabled.com.liferay.portlet.asset.model.AssetEntry"),
 			true);
-	public static long GROUPID_COLUMN_BITMASK = 1L;
-	public static long COMPANYID_COLUMN_BITMASK = 2L;
-	public static long CLASSNAMEID_COLUMN_BITMASK = 4L;
-	public static long PUBLISHDATE_COLUMN_BITMASK = 8L;
-	public static long VISIBLE_COLUMN_BITMASK = 16L;
-	public static long CLASSPK_COLUMN_BITMASK = 32L;
-	public static long CLASSUUID_COLUMN_BITMASK = 64L;
-	public static long EXPIRATIONDATE_COLUMN_BITMASK = 128L;
+	public static long CLASSNAMEID_COLUMN_BITMASK = 1L;
+	public static long CLASSPK_COLUMN_BITMASK = 2L;
+	public static long CLASSUUID_COLUMN_BITMASK = 4L;
+	public static long COMPANYID_COLUMN_BITMASK = 8L;
+	public static long EXPIRATIONDATE_COLUMN_BITMASK = 16L;
+	public static long GROUPID_COLUMN_BITMASK = 32L;
+	public static long PUBLISHDATE_COLUMN_BITMASK = 64L;
+	public static long VISIBLE_COLUMN_BITMASK = 128L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.

@@ -87,9 +87,9 @@ public class PollsVoteModelImpl extends BaseModelImpl<PollsVote>
 	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.column.bitmask.enabled.com.liferay.portlet.polls.model.PollsVote"),
 			true);
-	public static long USERID_COLUMN_BITMASK = 1L;
+	public static long CHOICEID_COLUMN_BITMASK = 1L;
 	public static long QUESTIONID_COLUMN_BITMASK = 2L;
-	public static long CHOICEID_COLUMN_BITMASK = 4L;
+	public static long USERID_COLUMN_BITMASK = 4L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.

@@ -120,20 +120,20 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.column.bitmask.enabled.com.liferay.portlet.journal.model.JournalArticle"),
 			true);
-	public static long COMPANYID_COLUMN_BITMASK = 1L;
-	public static long RESOURCEPRIMKEY_COLUMN_BITMASK = 2L;
-	public static long ARTICLEID_COLUMN_BITMASK = 4L;
-	public static long STATUS_COLUMN_BITMASK = 8L;
-	public static long TEMPLATEID_COLUMN_BITMASK = 16L;
+	public static long ARTICLEID_COLUMN_BITMASK = 1L;
+	public static long CLASSNAMEID_COLUMN_BITMASK = 2L;
+	public static long CLASSPK_COLUMN_BITMASK = 4L;
+	public static long COMPANYID_COLUMN_BITMASK = 8L;
+	public static long GROUPID_COLUMN_BITMASK = 16L;
 	public static long LAYOUTUUID_COLUMN_BITMASK = 32L;
-	public static long VERSION_COLUMN_BITMASK = 64L;
-	public static long GROUPID_COLUMN_BITMASK = 128L;
-	public static long CLASSNAMEID_COLUMN_BITMASK = 256L;
-	public static long UUID_COLUMN_BITMASK = 512L;
-	public static long URLTITLE_COLUMN_BITMASK = 1024L;
-	public static long CLASSPK_COLUMN_BITMASK = 2048L;
-	public static long SMALLIMAGEID_COLUMN_BITMASK = 4096L;
-	public static long STRUCTUREID_COLUMN_BITMASK = 8192L;
+	public static long RESOURCEPRIMKEY_COLUMN_BITMASK = 64L;
+	public static long SMALLIMAGEID_COLUMN_BITMASK = 128L;
+	public static long STATUS_COLUMN_BITMASK = 256L;
+	public static long STRUCTUREID_COLUMN_BITMASK = 512L;
+	public static long TEMPLATEID_COLUMN_BITMASK = 1024L;
+	public static long URLTITLE_COLUMN_BITMASK = 2048L;
+	public static long UUID_COLUMN_BITMASK = 4096L;
+	public static long VERSION_COLUMN_BITMASK = 8192L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.

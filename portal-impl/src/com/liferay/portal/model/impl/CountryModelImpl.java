@@ -84,9 +84,9 @@ public class CountryModelImpl extends BaseModelImpl<Country>
 	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.column.bitmask.enabled.com.liferay.portal.model.Country"),
 			true);
-	public static long ACTIVE_COLUMN_BITMASK = 1L;
-	public static long A2_COLUMN_BITMASK = 2L;
-	public static long A3_COLUMN_BITMASK = 4L;
+	public static long A2_COLUMN_BITMASK = 1L;
+	public static long A3_COLUMN_BITMASK = 2L;
+	public static long ACTIVE_COLUMN_BITMASK = 4L;
 	public static long NAME_COLUMN_BITMASK = 8L;
 
 	/**

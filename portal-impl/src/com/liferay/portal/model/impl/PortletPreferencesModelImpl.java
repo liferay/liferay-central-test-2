@@ -80,9 +80,9 @@ public class PortletPreferencesModelImpl extends BaseModelImpl<PortletPreference
 	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.column.bitmask.enabled.com.liferay.portal.model.PortletPreferences"),
 			true);
-	public static long OWNERTYPE_COLUMN_BITMASK = 1L;
-	public static long PLID_COLUMN_BITMASK = 2L;
-	public static long OWNERID_COLUMN_BITMASK = 4L;
+	public static long OWNERID_COLUMN_BITMASK = 1L;
+	public static long OWNERTYPE_COLUMN_BITMASK = 2L;
+	public static long PLID_COLUMN_BITMASK = 4L;
 	public static long PORTLETID_COLUMN_BITMASK = 8L;
 
 	/**

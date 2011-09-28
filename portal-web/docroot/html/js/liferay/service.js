@@ -1025,7 +1025,7 @@ Liferay.Service.register("Liferay.Service.MDR", "com.liferay.portlet.mobiledevic
 Liferay.Service.registerClass(
 	Liferay.Service.MDR, "MDRAction",
 	{
-		addMDRAction: true,
+		addAction: true,
 		deleteAction: true,
 		fetchAction: true,
 		getAction: true,

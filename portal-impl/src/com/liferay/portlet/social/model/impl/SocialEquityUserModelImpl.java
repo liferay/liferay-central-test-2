@@ -80,8 +80,8 @@ public class SocialEquityUserModelImpl extends BaseModelImpl<SocialEquityUser>
 				"value.object.column.bitmask.enabled.com.liferay.portlet.social.model.SocialEquityUser"),
 			true);
 	public static long GROUPID_COLUMN_BITMASK = 1L;
-	public static long USERID_COLUMN_BITMASK = 2L;
-	public static long RANK_COLUMN_BITMASK = 4L;
+	public static long RANK_COLUMN_BITMASK = 2L;
+	public static long USERID_COLUMN_BITMASK = 4L;
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.social.model.SocialEquityUser"));
 

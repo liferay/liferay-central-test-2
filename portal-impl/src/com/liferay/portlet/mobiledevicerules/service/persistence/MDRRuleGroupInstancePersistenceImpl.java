@@ -95,7 +95,8 @@ public class MDRRuleGroupInstancePersistenceImpl extends BasePersistenceImpl<MDR
 			MDRRuleGroupInstanceModelImpl.FINDER_CACHE_ENABLED,
 			MDRRuleGroupInstanceImpl.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByUuid",
-			new String[] { String.class.getName() });
+			new String[] { String.class.getName() },
+			MDRRuleGroupInstanceModelImpl.UUID_COLUMN_BITMASK);
 	public static final FinderPath FINDER_PATH_COUNT_BY_UUID = new FinderPath(MDRRuleGroupInstanceModelImpl.ENTITY_CACHE_ENABLED,
 			MDRRuleGroupInstanceModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByUuid",
@@ -104,7 +105,9 @@ public class MDRRuleGroupInstancePersistenceImpl extends BasePersistenceImpl<MDR
 			MDRRuleGroupInstanceModelImpl.FINDER_CACHE_ENABLED,
 			MDRRuleGroupInstanceImpl.class, FINDER_CLASS_NAME_ENTITY,
 			"fetchByUUID_G",
-			new String[] { String.class.getName(), Long.class.getName() });
+			new String[] { String.class.getName(), Long.class.getName() },
+			MDRRuleGroupInstanceModelImpl.UUID_COLUMN_BITMASK |
+			MDRRuleGroupInstanceModelImpl.GROUPID_COLUMN_BITMASK);
 	public static final FinderPath FINDER_PATH_COUNT_BY_UUID_G = new FinderPath(MDRRuleGroupInstanceModelImpl.ENTITY_CACHE_ENABLED,
 			MDRRuleGroupInstanceModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByUUID_G",
@@ -125,7 +128,8 @@ public class MDRRuleGroupInstancePersistenceImpl extends BasePersistenceImpl<MDR
 			MDRRuleGroupInstanceModelImpl.FINDER_CACHE_ENABLED,
 			MDRRuleGroupInstanceImpl.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByRuleGroupId",
-			new String[] { Long.class.getName() });
+			new String[] { Long.class.getName() },
+			MDRRuleGroupInstanceModelImpl.RULEGROUPID_COLUMN_BITMASK);
 	public static final FinderPath FINDER_PATH_COUNT_BY_RULEGROUPID = new FinderPath(MDRRuleGroupInstanceModelImpl.ENTITY_CACHE_ENABLED,
 			MDRRuleGroupInstanceModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByRuleGroupId",
@@ -144,31 +148,36 @@ public class MDRRuleGroupInstancePersistenceImpl extends BasePersistenceImpl<MDR
 			MDRRuleGroupInstanceModelImpl.FINDER_CACHE_ENABLED,
 			MDRRuleGroupInstanceImpl.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByC_C",
-			new String[] { Long.class.getName(), Long.class.getName() });
+			new String[] { Long.class.getName(), Long.class.getName() },
+			MDRRuleGroupInstanceModelImpl.CLASSNAMEID_COLUMN_BITMASK |
+			MDRRuleGroupInstanceModelImpl.CLASSPK_COLUMN_BITMASK);
 	public static final FinderPath FINDER_PATH_COUNT_BY_C_C = new FinderPath(MDRRuleGroupInstanceModelImpl.ENTITY_CACHE_ENABLED,
 			MDRRuleGroupInstanceModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByC_C",
 			new String[] { Long.class.getName(), Long.class.getName() });
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_C_C_G = new FinderPath(MDRRuleGroupInstanceModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_G_C_C = new FinderPath(MDRRuleGroupInstanceModelImpl.ENTITY_CACHE_ENABLED,
 			MDRRuleGroupInstanceModelImpl.FINDER_CACHE_ENABLED,
 			MDRRuleGroupInstanceImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByC_C_G",
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByG_C_C",
 			new String[] {
 				Long.class.getName(), Long.class.getName(), Long.class.getName(),
 				
 			"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_C_G = new FinderPath(MDRRuleGroupInstanceModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_C_C = new FinderPath(MDRRuleGroupInstanceModelImpl.ENTITY_CACHE_ENABLED,
 			MDRRuleGroupInstanceModelImpl.FINDER_CACHE_ENABLED,
 			MDRRuleGroupInstanceImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByC_C_G",
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByG_C_C",
 			new String[] {
 				Long.class.getName(), Long.class.getName(), Long.class.getName()
-			});
-	public static final FinderPath FINDER_PATH_COUNT_BY_C_C_G = new FinderPath(MDRRuleGroupInstanceModelImpl.ENTITY_CACHE_ENABLED,
+			},
+			MDRRuleGroupInstanceModelImpl.GROUPID_COLUMN_BITMASK |
+			MDRRuleGroupInstanceModelImpl.CLASSNAMEID_COLUMN_BITMASK |
+			MDRRuleGroupInstanceModelImpl.CLASSPK_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_G_C_C = new FinderPath(MDRRuleGroupInstanceModelImpl.ENTITY_CACHE_ENABLED,
 			MDRRuleGroupInstanceModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByC_C_G",
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByG_C_C",
 			new String[] {
 				Long.class.getName(), Long.class.getName(), Long.class.getName()
 			});
@@ -178,7 +187,10 @@ public class MDRRuleGroupInstancePersistenceImpl extends BasePersistenceImpl<MDR
 			"fetchByC_C_R",
 			new String[] {
 				Long.class.getName(), Long.class.getName(), Long.class.getName()
-			});
+			},
+			MDRRuleGroupInstanceModelImpl.CLASSNAMEID_COLUMN_BITMASK |
+			MDRRuleGroupInstanceModelImpl.CLASSPK_COLUMN_BITMASK |
+			MDRRuleGroupInstanceModelImpl.RULEGROUPID_COLUMN_BITMASK);
 	public static final FinderPath FINDER_PATH_COUNT_BY_C_C_R = new FinderPath(MDRRuleGroupInstanceModelImpl.ENTITY_CACHE_ENABLED,
 			MDRRuleGroupInstanceModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByC_C_R",
@@ -452,47 +464,57 @@ public class MDRRuleGroupInstancePersistenceImpl extends BasePersistenceImpl<MDR
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 
-		if (isNew) {
+		if (isNew || !MDRRuleGroupInstanceModelImpl.COLUMN_BITMASK_ENABLED) {
 			FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 		}
+
 		else {
-			if (!Validator.equals(mdrRuleGroupInstance.getUuid(),
-						mdrRuleGroupInstanceModelImpl.getOriginalUuid())) {
+			if ((mdrRuleGroupInstanceModelImpl.getColumnBitmask() &
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_UUID.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						mdrRuleGroupInstanceModelImpl.getOriginalUuid()
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_UUID, args);
 				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_UUID,
-					new Object[] { mdrRuleGroupInstanceModelImpl.getOriginalUuid() });
+					args);
 			}
 
-			if (mdrRuleGroupInstance.getRuleGroupId() != mdrRuleGroupInstanceModelImpl.getOriginalRuleGroupId()) {
+			if ((mdrRuleGroupInstanceModelImpl.getColumnBitmask() &
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_RULEGROUPID.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						Long.valueOf(mdrRuleGroupInstanceModelImpl.getOriginalRuleGroupId())
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_RULEGROUPID,
+					args);
 				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_RULEGROUPID,
-					new Object[] {
-						Long.valueOf(
-							mdrRuleGroupInstanceModelImpl.getOriginalRuleGroupId())
-					});
+					args);
 			}
 
-			if ((mdrRuleGroupInstance.getClassNameId() != mdrRuleGroupInstanceModelImpl.getOriginalClassNameId()) ||
-					(mdrRuleGroupInstance.getClassPK() != mdrRuleGroupInstanceModelImpl.getOriginalClassPK())) {
+			if ((mdrRuleGroupInstanceModelImpl.getColumnBitmask() &
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_C.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						Long.valueOf(mdrRuleGroupInstanceModelImpl.getOriginalClassNameId()),
+						Long.valueOf(mdrRuleGroupInstanceModelImpl.getOriginalClassPK())
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_C_C, args);
 				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_C,
-					new Object[] {
-						Long.valueOf(
-							mdrRuleGroupInstanceModelImpl.getOriginalClassNameId()),
-						Long.valueOf(
-							mdrRuleGroupInstanceModelImpl.getOriginalClassPK())
-					});
+					args);
 			}
 
-			if ((mdrRuleGroupInstance.getClassNameId() != mdrRuleGroupInstanceModelImpl.getOriginalClassNameId()) ||
-					(mdrRuleGroupInstance.getClassPK() != mdrRuleGroupInstanceModelImpl.getOriginalClassPK()) ||
-					(mdrRuleGroupInstance.getGroupId() != mdrRuleGroupInstanceModelImpl.getOriginalGroupId())) {
-				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_C_G,
-					new Object[] {
-						Long.valueOf(
-							mdrRuleGroupInstanceModelImpl.getOriginalClassNameId()),
-						Long.valueOf(
-							mdrRuleGroupInstanceModelImpl.getOriginalClassPK()),
-						Long.valueOf(
-							mdrRuleGroupInstanceModelImpl.getOriginalGroupId())
-					});
+			if ((mdrRuleGroupInstanceModelImpl.getColumnBitmask() &
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_C_C.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						Long.valueOf(mdrRuleGroupInstanceModelImpl.getOriginalGroupId()),
+						Long.valueOf(mdrRuleGroupInstanceModelImpl.getOriginalClassNameId()),
+						Long.valueOf(mdrRuleGroupInstanceModelImpl.getOriginalClassPK())
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_C_C, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_C_C,
+					args);
 			}
 		}
 
@@ -515,9 +537,8 @@ public class MDRRuleGroupInstancePersistenceImpl extends BasePersistenceImpl<MDR
 				}, mdrRuleGroupInstance);
 		}
 		else {
-			if (!Validator.equals(mdrRuleGroupInstance.getUuid(),
-						mdrRuleGroupInstanceModelImpl.getOriginalUuid()) ||
-					(mdrRuleGroupInstance.getGroupId() != mdrRuleGroupInstanceModelImpl.getOriginalGroupId())) {
+			if ((mdrRuleGroupInstanceModelImpl.getColumnBitmask() &
+					FINDER_PATH_FETCH_BY_UUID_G.getColumnBitmask()) != 0) {
 				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 					new Object[] {
 						mdrRuleGroupInstanceModelImpl.getOriginalUuid(),
@@ -532,9 +553,8 @@ public class MDRRuleGroupInstancePersistenceImpl extends BasePersistenceImpl<MDR
 					}, mdrRuleGroupInstance);
 			}
 
-			if ((mdrRuleGroupInstance.getClassNameId() != mdrRuleGroupInstanceModelImpl.getOriginalClassNameId()) ||
-					(mdrRuleGroupInstance.getClassPK() != mdrRuleGroupInstanceModelImpl.getOriginalClassPK()) ||
-					(mdrRuleGroupInstance.getRuleGroupId() != mdrRuleGroupInstanceModelImpl.getOriginalRuleGroupId())) {
+			if ((mdrRuleGroupInstanceModelImpl.getColumnBitmask() &
+					FINDER_PATH_FETCH_BY_C_C_R.getColumnBitmask()) != 0) {
 				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_C_R,
 					new Object[] {
 						Long.valueOf(
@@ -1907,72 +1927,72 @@ public class MDRRuleGroupInstancePersistenceImpl extends BasePersistenceImpl<MDR
 	}
 
 	/**
-	 * Returns all the m d r rule group instances where classNameId = &#63; and classPK = &#63; and groupId = &#63;.
+	 * Returns all the m d r rule group instances where groupId = &#63; and classNameId = &#63; and classPK = &#63;.
 	 *
+	 * @param groupId the group ID
 	 * @param classNameId the class name ID
 	 * @param classPK the class p k
-	 * @param groupId the group ID
 	 * @return the matching m d r rule group instances
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<MDRRuleGroupInstance> findByC_C_G(long classNameId,
-		long classPK, long groupId) throws SystemException {
-		return findByC_C_G(classNameId, classPK, groupId, QueryUtil.ALL_POS,
+	public List<MDRRuleGroupInstance> findByG_C_C(long groupId,
+		long classNameId, long classPK) throws SystemException {
+		return findByG_C_C(groupId, classNameId, classPK, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Returns a range of all the m d r rule group instances where classNameId = &#63; and classPK = &#63; and groupId = &#63;.
+	 * Returns a range of all the m d r rule group instances where groupId = &#63; and classNameId = &#63; and classPK = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
+	 * @param groupId the group ID
 	 * @param classNameId the class name ID
 	 * @param classPK the class p k
-	 * @param groupId the group ID
 	 * @param start the lower bound of the range of m d r rule group instances
 	 * @param end the upper bound of the range of m d r rule group instances (not inclusive)
 	 * @return the range of matching m d r rule group instances
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<MDRRuleGroupInstance> findByC_C_G(long classNameId,
-		long classPK, long groupId, int start, int end)
+	public List<MDRRuleGroupInstance> findByG_C_C(long groupId,
+		long classNameId, long classPK, int start, int end)
 		throws SystemException {
-		return findByC_C_G(classNameId, classPK, groupId, start, end, null);
+		return findByG_C_C(groupId, classNameId, classPK, start, end, null);
 	}
 
 	/**
-	 * Returns an ordered range of all the m d r rule group instances where classNameId = &#63; and classPK = &#63; and groupId = &#63;.
+	 * Returns an ordered range of all the m d r rule group instances where groupId = &#63; and classNameId = &#63; and classPK = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
+	 * @param groupId the group ID
 	 * @param classNameId the class name ID
 	 * @param classPK the class p k
-	 * @param groupId the group ID
 	 * @param start the lower bound of the range of m d r rule group instances
 	 * @param end the upper bound of the range of m d r rule group instances (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching m d r rule group instances
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<MDRRuleGroupInstance> findByC_C_G(long classNameId,
-		long classPK, long groupId, int start, int end,
+	public List<MDRRuleGroupInstance> findByG_C_C(long groupId,
+		long classNameId, long classPK, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 				(orderByComparator == null)) {
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_C_G;
-			finderArgs = new Object[] { classNameId, classPK, groupId };
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_C_C;
+			finderArgs = new Object[] { groupId, classNameId, classPK };
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_C_C_G;
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_G_C_C;
 			finderArgs = new Object[] {
-					classNameId, classPK, groupId,
+					groupId, classNameId, classPK,
 					
 					start, end, orderByComparator
 				};
@@ -1994,11 +2014,11 @@ public class MDRRuleGroupInstancePersistenceImpl extends BasePersistenceImpl<MDR
 
 			query.append(_SQL_SELECT_MDRRULEGROUPINSTANCE_WHERE);
 
-			query.append(_FINDER_COLUMN_C_C_G_CLASSNAMEID_2);
+			query.append(_FINDER_COLUMN_G_C_C_GROUPID_2);
 
-			query.append(_FINDER_COLUMN_C_C_G_CLASSPK_2);
+			query.append(_FINDER_COLUMN_G_C_C_CLASSNAMEID_2);
 
-			query.append(_FINDER_COLUMN_C_C_G_GROUPID_2);
+			query.append(_FINDER_COLUMN_G_C_C_CLASSPK_2);
 
 			if (orderByComparator != null) {
 				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
@@ -2016,11 +2036,11 @@ public class MDRRuleGroupInstancePersistenceImpl extends BasePersistenceImpl<MDR
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
+				qPos.add(groupId);
+
 				qPos.add(classNameId);
 
 				qPos.add(classPK);
-
-				qPos.add(groupId);
 
 				list = (List<MDRRuleGroupInstance>)QueryUtil.list(q,
 						getDialect(), start, end);
@@ -2046,39 +2066,39 @@ public class MDRRuleGroupInstancePersistenceImpl extends BasePersistenceImpl<MDR
 	}
 
 	/**
-	 * Returns the first m d r rule group instance in the ordered set where classNameId = &#63; and classPK = &#63; and groupId = &#63;.
+	 * Returns the first m d r rule group instance in the ordered set where groupId = &#63; and classNameId = &#63; and classPK = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
+	 * @param groupId the group ID
 	 * @param classNameId the class name ID
 	 * @param classPK the class p k
-	 * @param groupId the group ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching m d r rule group instance
 	 * @throws com.liferay.portlet.mobiledevicerules.NoSuchRuleGroupInstanceException if a matching m d r rule group instance could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public MDRRuleGroupInstance findByC_C_G_First(long classNameId,
-		long classPK, long groupId, OrderByComparator orderByComparator)
+	public MDRRuleGroupInstance findByG_C_C_First(long groupId,
+		long classNameId, long classPK, OrderByComparator orderByComparator)
 		throws NoSuchRuleGroupInstanceException, SystemException {
-		List<MDRRuleGroupInstance> list = findByC_C_G(classNameId, classPK,
-				groupId, 0, 1, orderByComparator);
+		List<MDRRuleGroupInstance> list = findByG_C_C(groupId, classNameId,
+				classPK, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(8);
 
 			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("classNameId=");
+			msg.append("groupId=");
+			msg.append(groupId);
+
+			msg.append(", classNameId=");
 			msg.append(classNameId);
 
 			msg.append(", classPK=");
 			msg.append(classPK);
-
-			msg.append(", groupId=");
-			msg.append(groupId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -2090,41 +2110,41 @@ public class MDRRuleGroupInstancePersistenceImpl extends BasePersistenceImpl<MDR
 	}
 
 	/**
-	 * Returns the last m d r rule group instance in the ordered set where classNameId = &#63; and classPK = &#63; and groupId = &#63;.
+	 * Returns the last m d r rule group instance in the ordered set where groupId = &#63; and classNameId = &#63; and classPK = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
+	 * @param groupId the group ID
 	 * @param classNameId the class name ID
 	 * @param classPK the class p k
-	 * @param groupId the group ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching m d r rule group instance
 	 * @throws com.liferay.portlet.mobiledevicerules.NoSuchRuleGroupInstanceException if a matching m d r rule group instance could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public MDRRuleGroupInstance findByC_C_G_Last(long classNameId,
-		long classPK, long groupId, OrderByComparator orderByComparator)
+	public MDRRuleGroupInstance findByG_C_C_Last(long groupId,
+		long classNameId, long classPK, OrderByComparator orderByComparator)
 		throws NoSuchRuleGroupInstanceException, SystemException {
-		int count = countByC_C_G(classNameId, classPK, groupId);
+		int count = countByG_C_C(groupId, classNameId, classPK);
 
-		List<MDRRuleGroupInstance> list = findByC_C_G(classNameId, classPK,
-				groupId, count - 1, count, orderByComparator);
+		List<MDRRuleGroupInstance> list = findByG_C_C(groupId, classNameId,
+				classPK, count - 1, count, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(8);
 
 			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("classNameId=");
+			msg.append("groupId=");
+			msg.append(groupId);
+
+			msg.append(", classNameId=");
 			msg.append(classNameId);
 
 			msg.append(", classPK=");
 			msg.append(classPK);
-
-			msg.append(", groupId=");
-			msg.append(groupId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -2136,23 +2156,23 @@ public class MDRRuleGroupInstancePersistenceImpl extends BasePersistenceImpl<MDR
 	}
 
 	/**
-	 * Returns the m d r rule group instances before and after the current m d r rule group instance in the ordered set where classNameId = &#63; and classPK = &#63; and groupId = &#63;.
+	 * Returns the m d r rule group instances before and after the current m d r rule group instance in the ordered set where groupId = &#63; and classNameId = &#63; and classPK = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
 	 * @param ruleGroupInstanceId the primary key of the current m d r rule group instance
+	 * @param groupId the group ID
 	 * @param classNameId the class name ID
 	 * @param classPK the class p k
-	 * @param groupId the group ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next m d r rule group instance
 	 * @throws com.liferay.portlet.mobiledevicerules.NoSuchRuleGroupInstanceException if a m d r rule group instance with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public MDRRuleGroupInstance[] findByC_C_G_PrevAndNext(
-		long ruleGroupInstanceId, long classNameId, long classPK, long groupId,
+	public MDRRuleGroupInstance[] findByG_C_C_PrevAndNext(
+		long ruleGroupInstanceId, long groupId, long classNameId, long classPK,
 		OrderByComparator orderByComparator)
 		throws NoSuchRuleGroupInstanceException, SystemException {
 		MDRRuleGroupInstance mdrRuleGroupInstance = findByPrimaryKey(ruleGroupInstanceId);
@@ -2164,13 +2184,13 @@ public class MDRRuleGroupInstancePersistenceImpl extends BasePersistenceImpl<MDR
 
 			MDRRuleGroupInstance[] array = new MDRRuleGroupInstanceImpl[3];
 
-			array[0] = getByC_C_G_PrevAndNext(session, mdrRuleGroupInstance,
-					classNameId, classPK, groupId, orderByComparator, true);
+			array[0] = getByG_C_C_PrevAndNext(session, mdrRuleGroupInstance,
+					groupId, classNameId, classPK, orderByComparator, true);
 
 			array[1] = mdrRuleGroupInstance;
 
-			array[2] = getByC_C_G_PrevAndNext(session, mdrRuleGroupInstance,
-					classNameId, classPK, groupId, orderByComparator, false);
+			array[2] = getByG_C_C_PrevAndNext(session, mdrRuleGroupInstance,
+					groupId, classNameId, classPK, orderByComparator, false);
 
 			return array;
 		}
@@ -2182,9 +2202,9 @@ public class MDRRuleGroupInstancePersistenceImpl extends BasePersistenceImpl<MDR
 		}
 	}
 
-	protected MDRRuleGroupInstance getByC_C_G_PrevAndNext(Session session,
-		MDRRuleGroupInstance mdrRuleGroupInstance, long classNameId,
-		long classPK, long groupId, OrderByComparator orderByComparator,
+	protected MDRRuleGroupInstance getByG_C_C_PrevAndNext(Session session,
+		MDRRuleGroupInstance mdrRuleGroupInstance, long groupId,
+		long classNameId, long classPK, OrderByComparator orderByComparator,
 		boolean previous) {
 		StringBundler query = null;
 
@@ -2198,11 +2218,11 @@ public class MDRRuleGroupInstancePersistenceImpl extends BasePersistenceImpl<MDR
 
 		query.append(_SQL_SELECT_MDRRULEGROUPINSTANCE_WHERE);
 
-		query.append(_FINDER_COLUMN_C_C_G_CLASSNAMEID_2);
+		query.append(_FINDER_COLUMN_G_C_C_GROUPID_2);
 
-		query.append(_FINDER_COLUMN_C_C_G_CLASSPK_2);
+		query.append(_FINDER_COLUMN_G_C_C_CLASSNAMEID_2);
 
-		query.append(_FINDER_COLUMN_C_C_G_GROUPID_2);
+		query.append(_FINDER_COLUMN_G_C_C_CLASSPK_2);
 
 		if (orderByComparator != null) {
 			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
@@ -2269,11 +2289,11 @@ public class MDRRuleGroupInstancePersistenceImpl extends BasePersistenceImpl<MDR
 
 		QueryPos qPos = QueryPos.getInstance(q);
 
+		qPos.add(groupId);
+
 		qPos.add(classNameId);
 
 		qPos.add(classPK);
-
-		qPos.add(groupId);
 
 		if (orderByComparator != null) {
 			Object[] values = orderByComparator.getOrderByConditionValues(mdrRuleGroupInstance);
@@ -2294,62 +2314,62 @@ public class MDRRuleGroupInstancePersistenceImpl extends BasePersistenceImpl<MDR
 	}
 
 	/**
-	 * Returns all the m d r rule group instances that the user has permission to view where classNameId = &#63; and classPK = &#63; and groupId = &#63;.
+	 * Returns all the m d r rule group instances that the user has permission to view where groupId = &#63; and classNameId = &#63; and classPK = &#63;.
 	 *
+	 * @param groupId the group ID
 	 * @param classNameId the class name ID
 	 * @param classPK the class p k
-	 * @param groupId the group ID
 	 * @return the matching m d r rule group instances that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<MDRRuleGroupInstance> filterFindByC_C_G(long classNameId,
-		long classPK, long groupId) throws SystemException {
-		return filterFindByC_C_G(classNameId, classPK, groupId,
+	public List<MDRRuleGroupInstance> filterFindByG_C_C(long groupId,
+		long classNameId, long classPK) throws SystemException {
+		return filterFindByG_C_C(groupId, classNameId, classPK,
 			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Returns a range of all the m d r rule group instances that the user has permission to view where classNameId = &#63; and classPK = &#63; and groupId = &#63;.
+	 * Returns a range of all the m d r rule group instances that the user has permission to view where groupId = &#63; and classNameId = &#63; and classPK = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
+	 * @param groupId the group ID
 	 * @param classNameId the class name ID
 	 * @param classPK the class p k
-	 * @param groupId the group ID
 	 * @param start the lower bound of the range of m d r rule group instances
 	 * @param end the upper bound of the range of m d r rule group instances (not inclusive)
 	 * @return the range of matching m d r rule group instances that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<MDRRuleGroupInstance> filterFindByC_C_G(long classNameId,
-		long classPK, long groupId, int start, int end)
+	public List<MDRRuleGroupInstance> filterFindByG_C_C(long groupId,
+		long classNameId, long classPK, int start, int end)
 		throws SystemException {
-		return filterFindByC_C_G(classNameId, classPK, groupId, start, end, null);
+		return filterFindByG_C_C(groupId, classNameId, classPK, start, end, null);
 	}
 
 	/**
-	 * Returns an ordered range of all the m d r rule group instances that the user has permissions to view where classNameId = &#63; and classPK = &#63; and groupId = &#63;.
+	 * Returns an ordered range of all the m d r rule group instances that the user has permissions to view where groupId = &#63; and classNameId = &#63; and classPK = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
+	 * @param groupId the group ID
 	 * @param classNameId the class name ID
 	 * @param classPK the class p k
-	 * @param groupId the group ID
 	 * @param start the lower bound of the range of m d r rule group instances
 	 * @param end the upper bound of the range of m d r rule group instances (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching m d r rule group instances that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<MDRRuleGroupInstance> filterFindByC_C_G(long classNameId,
-		long classPK, long groupId, int start, int end,
+	public List<MDRRuleGroupInstance> filterFindByG_C_C(long groupId,
+		long classNameId, long classPK, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
-			return findByC_C_G(classNameId, classPK, groupId, start, end,
+			return findByG_C_C(groupId, classNameId, classPK, start, end,
 				orderByComparator);
 		}
 
@@ -2370,11 +2390,11 @@ public class MDRRuleGroupInstancePersistenceImpl extends BasePersistenceImpl<MDR
 			query.append(_FILTER_SQL_SELECT_MDRRULEGROUPINSTANCE_NO_INLINE_DISTINCT_WHERE_1);
 		}
 
-		query.append(_FINDER_COLUMN_C_C_G_CLASSNAMEID_2);
+		query.append(_FINDER_COLUMN_G_C_C_GROUPID_2);
 
-		query.append(_FINDER_COLUMN_C_C_G_CLASSPK_2);
+		query.append(_FINDER_COLUMN_G_C_C_CLASSNAMEID_2);
 
-		query.append(_FINDER_COLUMN_C_C_G_GROUPID_2);
+		query.append(_FINDER_COLUMN_G_C_C_CLASSPK_2);
 
 		if (!getDB().isSupportsInlineDistinct()) {
 			query.append(_FILTER_SQL_SELECT_MDRRULEGROUPINSTANCE_NO_INLINE_DISTINCT_WHERE_2);
@@ -2411,11 +2431,11 @@ public class MDRRuleGroupInstancePersistenceImpl extends BasePersistenceImpl<MDR
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
+			qPos.add(groupId);
+
 			qPos.add(classNameId);
 
 			qPos.add(classPK);
-
-			qPos.add(groupId);
 
 			return (List<MDRRuleGroupInstance>)QueryUtil.list(q, getDialect(),
 				start, end);
@@ -2429,24 +2449,24 @@ public class MDRRuleGroupInstancePersistenceImpl extends BasePersistenceImpl<MDR
 	}
 
 	/**
-	 * Returns the m d r rule group instances before and after the current m d r rule group instance in the ordered set of m d r rule group instances that the user has permission to view where classNameId = &#63; and classPK = &#63; and groupId = &#63;.
+	 * Returns the m d r rule group instances before and after the current m d r rule group instance in the ordered set of m d r rule group instances that the user has permission to view where groupId = &#63; and classNameId = &#63; and classPK = &#63;.
 	 *
 	 * @param ruleGroupInstanceId the primary key of the current m d r rule group instance
+	 * @param groupId the group ID
 	 * @param classNameId the class name ID
 	 * @param classPK the class p k
-	 * @param groupId the group ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next m d r rule group instance
 	 * @throws com.liferay.portlet.mobiledevicerules.NoSuchRuleGroupInstanceException if a m d r rule group instance with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public MDRRuleGroupInstance[] filterFindByC_C_G_PrevAndNext(
-		long ruleGroupInstanceId, long classNameId, long classPK, long groupId,
+	public MDRRuleGroupInstance[] filterFindByG_C_C_PrevAndNext(
+		long ruleGroupInstanceId, long groupId, long classNameId, long classPK,
 		OrderByComparator orderByComparator)
 		throws NoSuchRuleGroupInstanceException, SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
-			return findByC_C_G_PrevAndNext(ruleGroupInstanceId, classNameId,
-				classPK, groupId, orderByComparator);
+			return findByG_C_C_PrevAndNext(ruleGroupInstanceId, groupId,
+				classNameId, classPK, orderByComparator);
 		}
 
 		MDRRuleGroupInstance mdrRuleGroupInstance = findByPrimaryKey(ruleGroupInstanceId);
@@ -2458,14 +2478,14 @@ public class MDRRuleGroupInstancePersistenceImpl extends BasePersistenceImpl<MDR
 
 			MDRRuleGroupInstance[] array = new MDRRuleGroupInstanceImpl[3];
 
-			array[0] = filterGetByC_C_G_PrevAndNext(session,
-					mdrRuleGroupInstance, classNameId, classPK, groupId,
+			array[0] = filterGetByG_C_C_PrevAndNext(session,
+					mdrRuleGroupInstance, groupId, classNameId, classPK,
 					orderByComparator, true);
 
 			array[1] = mdrRuleGroupInstance;
 
-			array[2] = filterGetByC_C_G_PrevAndNext(session,
-					mdrRuleGroupInstance, classNameId, classPK, groupId,
+			array[2] = filterGetByG_C_C_PrevAndNext(session,
+					mdrRuleGroupInstance, groupId, classNameId, classPK,
 					orderByComparator, false);
 
 			return array;
@@ -2478,9 +2498,9 @@ public class MDRRuleGroupInstancePersistenceImpl extends BasePersistenceImpl<MDR
 		}
 	}
 
-	protected MDRRuleGroupInstance filterGetByC_C_G_PrevAndNext(
+	protected MDRRuleGroupInstance filterGetByG_C_C_PrevAndNext(
 		Session session, MDRRuleGroupInstance mdrRuleGroupInstance,
-		long classNameId, long classPK, long groupId,
+		long groupId, long classNameId, long classPK,
 		OrderByComparator orderByComparator, boolean previous) {
 		StringBundler query = null;
 
@@ -2499,11 +2519,11 @@ public class MDRRuleGroupInstancePersistenceImpl extends BasePersistenceImpl<MDR
 			query.append(_FILTER_SQL_SELECT_MDRRULEGROUPINSTANCE_NO_INLINE_DISTINCT_WHERE_1);
 		}
 
-		query.append(_FINDER_COLUMN_C_C_G_CLASSNAMEID_2);
+		query.append(_FINDER_COLUMN_G_C_C_GROUPID_2);
 
-		query.append(_FINDER_COLUMN_C_C_G_CLASSPK_2);
+		query.append(_FINDER_COLUMN_G_C_C_CLASSNAMEID_2);
 
-		query.append(_FINDER_COLUMN_C_C_G_GROUPID_2);
+		query.append(_FINDER_COLUMN_G_C_C_CLASSPK_2);
 
 		if (!getDB().isSupportsInlineDistinct()) {
 			query.append(_FILTER_SQL_SELECT_MDRRULEGROUPINSTANCE_NO_INLINE_DISTINCT_WHERE_2);
@@ -2595,11 +2615,11 @@ public class MDRRuleGroupInstancePersistenceImpl extends BasePersistenceImpl<MDR
 
 		QueryPos qPos = QueryPos.getInstance(q);
 
+		qPos.add(groupId);
+
 		qPos.add(classNameId);
 
 		qPos.add(classPK);
-
-		qPos.add(groupId);
 
 		if (orderByComparator != null) {
 			Object[] values = orderByComparator.getOrderByConditionValues(mdrRuleGroupInstance);
@@ -2941,17 +2961,17 @@ public class MDRRuleGroupInstancePersistenceImpl extends BasePersistenceImpl<MDR
 	}
 
 	/**
-	 * Removes all the m d r rule group instances where classNameId = &#63; and classPK = &#63; and groupId = &#63; from the database.
+	 * Removes all the m d r rule group instances where groupId = &#63; and classNameId = &#63; and classPK = &#63; from the database.
 	 *
+	 * @param groupId the group ID
 	 * @param classNameId the class name ID
 	 * @param classPK the class p k
-	 * @param groupId the group ID
 	 * @throws SystemException if a system exception occurred
 	 */
-	public void removeByC_C_G(long classNameId, long classPK, long groupId)
+	public void removeByG_C_C(long groupId, long classNameId, long classPK)
 		throws SystemException {
-		for (MDRRuleGroupInstance mdrRuleGroupInstance : findByC_C_G(
-				classNameId, classPK, groupId)) {
+		for (MDRRuleGroupInstance mdrRuleGroupInstance : findByG_C_C(groupId,
+				classNameId, classPK)) {
 			mdrRuleGroupInstancePersistence.remove(mdrRuleGroupInstance);
 		}
 	}
@@ -3232,19 +3252,19 @@ public class MDRRuleGroupInstancePersistenceImpl extends BasePersistenceImpl<MDR
 	}
 
 	/**
-	 * Returns the number of m d r rule group instances where classNameId = &#63; and classPK = &#63; and groupId = &#63;.
+	 * Returns the number of m d r rule group instances where groupId = &#63; and classNameId = &#63; and classPK = &#63;.
 	 *
+	 * @param groupId the group ID
 	 * @param classNameId the class name ID
 	 * @param classPK the class p k
-	 * @param groupId the group ID
 	 * @return the number of matching m d r rule group instances
 	 * @throws SystemException if a system exception occurred
 	 */
-	public int countByC_C_G(long classNameId, long classPK, long groupId)
+	public int countByG_C_C(long groupId, long classNameId, long classPK)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { classNameId, classPK, groupId };
+		Object[] finderArgs = new Object[] { groupId, classNameId, classPK };
 
-		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_C_G,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_C_C,
 				finderArgs, this);
 
 		if (count == null) {
@@ -3252,11 +3272,11 @@ public class MDRRuleGroupInstancePersistenceImpl extends BasePersistenceImpl<MDR
 
 			query.append(_SQL_COUNT_MDRRULEGROUPINSTANCE_WHERE);
 
-			query.append(_FINDER_COLUMN_C_C_G_CLASSNAMEID_2);
+			query.append(_FINDER_COLUMN_G_C_C_GROUPID_2);
 
-			query.append(_FINDER_COLUMN_C_C_G_CLASSPK_2);
+			query.append(_FINDER_COLUMN_G_C_C_CLASSNAMEID_2);
 
-			query.append(_FINDER_COLUMN_C_C_G_GROUPID_2);
+			query.append(_FINDER_COLUMN_G_C_C_CLASSPK_2);
 
 			String sql = query.toString();
 
@@ -3269,11 +3289,11 @@ public class MDRRuleGroupInstancePersistenceImpl extends BasePersistenceImpl<MDR
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
+				qPos.add(groupId);
+
 				qPos.add(classNameId);
 
 				qPos.add(classPK);
-
-				qPos.add(groupId);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -3285,7 +3305,7 @@ public class MDRRuleGroupInstancePersistenceImpl extends BasePersistenceImpl<MDR
 					count = Long.valueOf(0);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_C_C_G,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_C_C,
 					finderArgs, count);
 
 				closeSession(session);
@@ -3296,29 +3316,29 @@ public class MDRRuleGroupInstancePersistenceImpl extends BasePersistenceImpl<MDR
 	}
 
 	/**
-	 * Returns the number of m d r rule group instances that the user has permission to view where classNameId = &#63; and classPK = &#63; and groupId = &#63;.
+	 * Returns the number of m d r rule group instances that the user has permission to view where groupId = &#63; and classNameId = &#63; and classPK = &#63;.
 	 *
+	 * @param groupId the group ID
 	 * @param classNameId the class name ID
 	 * @param classPK the class p k
-	 * @param groupId the group ID
 	 * @return the number of matching m d r rule group instances that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
-	public int filterCountByC_C_G(long classNameId, long classPK, long groupId)
+	public int filterCountByG_C_C(long groupId, long classNameId, long classPK)
 		throws SystemException {
 		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
-			return countByC_C_G(classNameId, classPK, groupId);
+			return countByG_C_C(groupId, classNameId, classPK);
 		}
 
 		StringBundler query = new StringBundler(4);
 
 		query.append(_FILTER_SQL_COUNT_MDRRULEGROUPINSTANCE_WHERE);
 
-		query.append(_FINDER_COLUMN_C_C_G_CLASSNAMEID_2);
+		query.append(_FINDER_COLUMN_G_C_C_GROUPID_2);
 
-		query.append(_FINDER_COLUMN_C_C_G_CLASSPK_2);
+		query.append(_FINDER_COLUMN_G_C_C_CLASSNAMEID_2);
 
-		query.append(_FINDER_COLUMN_C_C_G_GROUPID_2);
+		query.append(_FINDER_COLUMN_G_C_C_CLASSPK_2);
 
 		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
 				MDRRuleGroupInstance.class.getName(),
@@ -3336,11 +3356,11 @@ public class MDRRuleGroupInstancePersistenceImpl extends BasePersistenceImpl<MDR
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
+			qPos.add(groupId);
+
 			qPos.add(classNameId);
 
 			qPos.add(classPK);
-
-			qPos.add(groupId);
 
 			Long count = (Long)q.uniqueResult();
 
@@ -3517,9 +3537,9 @@ public class MDRRuleGroupInstancePersistenceImpl extends BasePersistenceImpl<MDR
 	private static final String _FINDER_COLUMN_RULEGROUPID_RULEGROUPID_2 = "mdrRuleGroupInstance.ruleGroupId = ?";
 	private static final String _FINDER_COLUMN_C_C_CLASSNAMEID_2 = "mdrRuleGroupInstance.classNameId = ? AND ";
 	private static final String _FINDER_COLUMN_C_C_CLASSPK_2 = "mdrRuleGroupInstance.classPK = ?";
-	private static final String _FINDER_COLUMN_C_C_G_CLASSNAMEID_2 = "mdrRuleGroupInstance.classNameId = ? AND ";
-	private static final String _FINDER_COLUMN_C_C_G_CLASSPK_2 = "mdrRuleGroupInstance.classPK = ? AND ";
-	private static final String _FINDER_COLUMN_C_C_G_GROUPID_2 = "mdrRuleGroupInstance.groupId = ?";
+	private static final String _FINDER_COLUMN_G_C_C_GROUPID_2 = "mdrRuleGroupInstance.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_G_C_C_CLASSNAMEID_2 = "mdrRuleGroupInstance.classNameId = ? AND ";
+	private static final String _FINDER_COLUMN_G_C_C_CLASSPK_2 = "mdrRuleGroupInstance.classPK = ?";
 	private static final String _FINDER_COLUMN_C_C_R_CLASSNAMEID_2 = "mdrRuleGroupInstance.classNameId = ? AND ";
 	private static final String _FINDER_COLUMN_C_C_R_CLASSPK_2 = "mdrRuleGroupInstance.classPK = ? AND ";
 	private static final String _FINDER_COLUMN_C_C_R_RULEGROUPID_2 = "mdrRuleGroupInstance.ruleGroupId = ?";

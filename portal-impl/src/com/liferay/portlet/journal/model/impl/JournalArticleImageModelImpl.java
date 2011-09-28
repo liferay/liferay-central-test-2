@@ -77,10 +77,10 @@ public class JournalArticleImageModelImpl extends BaseModelImpl<JournalArticleIm
 	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.column.bitmask.enabled.com.liferay.portlet.journal.model.JournalArticleImage"),
 			true);
-	public static long ELINSTANCEID_COLUMN_BITMASK = 1L;
-	public static long ELNAME_COLUMN_BITMASK = 2L;
-	public static long GROUPID_COLUMN_BITMASK = 4L;
-	public static long ARTICLEID_COLUMN_BITMASK = 8L;
+	public static long ARTICLEID_COLUMN_BITMASK = 1L;
+	public static long ELINSTANCEID_COLUMN_BITMASK = 2L;
+	public static long ELNAME_COLUMN_BITMASK = 4L;
+	public static long GROUPID_COLUMN_BITMASK = 8L;
 	public static long LANGUAGEID_COLUMN_BITMASK = 16L;
 	public static long TEMPIMAGE_COLUMN_BITMASK = 32L;
 	public static long VERSION_COLUMN_BITMASK = 64L;

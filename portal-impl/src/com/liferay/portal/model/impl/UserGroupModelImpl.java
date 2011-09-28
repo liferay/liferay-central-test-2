@@ -85,8 +85,8 @@ public class UserGroupModelImpl extends BaseModelImpl<UserGroup>
 				"value.object.column.bitmask.enabled.com.liferay.portal.model.UserGroup"),
 			true);
 	public static long COMPANYID_COLUMN_BITMASK = 1L;
-	public static long PARENTUSERGROUPID_COLUMN_BITMASK = 2L;
-	public static long NAME_COLUMN_BITMASK = 4L;
+	public static long NAME_COLUMN_BITMASK = 2L;
+	public static long PARENTUSERGROUPID_COLUMN_BITMASK = 4L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
