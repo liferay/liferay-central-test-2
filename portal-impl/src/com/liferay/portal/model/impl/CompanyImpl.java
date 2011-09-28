@@ -110,7 +110,7 @@ public class CompanyImpl extends CompanyBaseImpl {
 			String key = getKey();
 
 			if (Validator.isNotNull(key)) {
-				_keyObj = (Key)Base64.stringToObject(key);
+				_keyObj = (Key)Base64.stringToObjectSilent(key);
 			}
 		}
 
