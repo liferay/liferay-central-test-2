@@ -205,13 +205,9 @@ for (int i = 0; i < results.size(); i++) {
 							tempRowURL.setParameter("fileEntryId", String.valueOf(fileEntry.getFileEntryId()));
 
 							request.setAttribute("view_entries.jsp-fileEntry", fileEntry);
+							request.setAttribute("view_entries.jsp-fileShortcut", fileShortcut);
 
 							request.setAttribute("view_entries.jsp-tempRowURL", tempRowURL);
-
-							if (fileShortcut != null) {
-								request.setAttribute("view_entries.jsp-fileShortcut", fileShortcut);
-							}
-
 							%>
 
 							<c:choose>
