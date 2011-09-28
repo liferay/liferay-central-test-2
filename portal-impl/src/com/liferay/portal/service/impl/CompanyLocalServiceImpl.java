@@ -679,7 +679,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 		}
 		else if (companyIds.length > 1) {
 			try {
-				User user = userLocalService.getUserById(userId);
+				User user = userPersistence.findByPrimaryKey(userId);
 
 				companyId = user.getCompanyId();
 			}
