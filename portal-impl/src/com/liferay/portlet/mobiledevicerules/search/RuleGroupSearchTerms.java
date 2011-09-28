@@ -29,4 +29,5 @@ public class RuleGroupSearchTerms extends RuleGroupDisplayTerms {
 		setGroupId(DAOParamUtil.getLong(portletRequest, GROUP_ID));
 		setName(DAOParamUtil.getString(portletRequest, NAME));
 	}
+
 }

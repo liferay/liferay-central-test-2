@@ -48,6 +48,16 @@ public class MDRRuleGroupInstanceServiceImpl
 			groupId, className, classPK, ruleGroupId, priority, serviceContext);
 	}
 
+	public void deleteRuleGroupInstance(long ruleGroupInstanceId)
+		throws PortalException, SystemException {
+
+		MDRRuleGroupInstance ruleGroupInstance =
+			mdrRuleGroupInstancePersistence.findByPrimaryKey(
+				ruleGroupInstanceId);
+
+		deleteRuleGroupInstance(ruleGroupInstance);
+	}
+
 	public void deleteRuleGroupInstance(MDRRuleGroupInstance ruleGroupInstance)
 		throws PortalException, SystemException {
 
@@ -61,56 +71,23 @@ public class MDRRuleGroupInstanceServiceImpl
 	public List<MDRRuleGroupInstance> getRuleGroupInstances(
 			String className, long classPK, int start, int end,
 			OrderByComparator orderByComparator)
-		throws PortalException, SystemException {
+		throws SystemException {
 
+		long groupId = getGroupId(className, classPK);
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		long groupId = 0;
-
-		if (Layout.class.getName().equals(className)) {
-			Layout layout = layoutLocalService.getLayout(classPK);
-
-			if (layout != null) {
-				groupId = layout.getGroupId();
-			}
-		}
-		else if (LayoutSet.class.getName().equals(className)) {
-			LayoutSet layoutSet = layoutSetLocalService.getLayoutSet(classPK);
-
-			if (layoutSet != null) {
-				groupId = layoutSet.getGroupId();
-			}
-		}
-
-		return mdrRuleGroupInstancePersistence.filterFindByC_C_G(
-			classNameId, classPK, groupId, start, end, orderByComparator);
+		return mdrRuleGroupInstancePersistence.filterFindByG_C_C(
+			groupId, classNameId, classPK, start, end, orderByComparator);
 	}
 
-
 	public int getRuleGroupInstancesCount(String className, long classPK)
-		throws PortalException, SystemException {
+		throws SystemException {
 
+		long groupId = getGroupId(className, classPK);
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		long groupId = 0;
-
-		if (Layout.class.getName().equals(className)) {
-			Layout layout = layoutLocalService.getLayout(classPK);
-
-			if (layout != null) {
-				groupId = layout.getGroupId();
-			}
-		}
-		else if (LayoutSet.class.getName().equals(className)) {
-			LayoutSet layoutSet = layoutSetLocalService.getLayoutSet(classPK);
-
-			if (layoutSet != null) {
-				groupId = layoutSet.getGroupId();
-			}
-		}
-
-		return mdrRuleGroupInstancePersistence.filterCountByC_C_G(
-			classNameId, classPK, groupId);
+		return mdrRuleGroupInstancePersistence.filterCountByG_C_C(
+			groupId, classNameId, classPK);
 	}
 
 	public MDRRuleGroupInstance updateRuleGroupInstance(
@@ -127,6 +104,30 @@ public class MDRRuleGroupInstanceServiceImpl
 
 		return mdrRuleGroupInstanceLocalService.updateRuleGroupInstance(
 			ruleGroupInstanceId, priority);
+	}
+
+	protected long getGroupId(String className, long classPK)
+		throws SystemException {
+
+		long groupId = 0;
+
+		if (className.equals(Layout.class.getName())) {
+			Layout layout = layoutPersistence.fetchByPrimaryKey(classPK);
+
+			if (layout != null) {
+				groupId = layout.getGroupId();
+			}
+		}
+		else if (className.equals(LayoutSet.class.getName())) {
+			LayoutSet layoutSet = layoutSetPersistence.fetchByPrimaryKey(
+				classPK);
+
+			if (layoutSet != null) {
+				groupId = layoutSet.getGroupId();
+			}
+		}
+
+		return groupId;
 	}
 
 }

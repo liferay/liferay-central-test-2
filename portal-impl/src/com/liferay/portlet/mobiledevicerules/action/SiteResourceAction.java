@@ -14,17 +14,16 @@
 
 package com.liferay.portlet.mobiledevicerules.action;
 
-import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.struts.PortletAction;
-
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionMapping;
 
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletContext;
 import javax.portlet.PortletRequestDispatcher;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
+
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionMapping;
 
 /**
  * @author Edward Han
@@ -39,21 +38,14 @@ public class SiteResourceAction extends PortletAction {
 
 		PortletContext portletContext = portletConfig.getPortletContext();
 
-		long actionGroupId = ParamUtil.getLong(
-			resourceRequest, "actionGroupId");
-		long actionLayoutId = ParamUtil.getLong(
-			resourceRequest, "actionLayoutId");
-
-		resourceRequest.setAttribute("actionGroupId", actionGroupId);
-		resourceRequest.setAttribute("actionLayoutId", actionLayoutId);
-
 		PortletRequestDispatcher portletRequestDispatcher =
-			portletContext.getRequestDispatcher(GROUP_LAYOUTS_DISPLAY);
+			portletContext.getRequestDispatcher(_SITE_URL_ACTION_LAYOUTS_JSP);
 
 		portletRequestDispatcher.include(resourceRequest, resourceResponse);
 	}
 
-	private static final String GROUP_LAYOUTS_DISPLAY =
+	private static final String _SITE_URL_ACTION_LAYOUTS_JSP =
 		"/html/portlet/mobile_device_rules_admin/action/" +
 			"site_url_action_layouts.jsp";
+
 }

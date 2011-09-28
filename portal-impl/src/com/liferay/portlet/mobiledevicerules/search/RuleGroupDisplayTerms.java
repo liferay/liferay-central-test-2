@@ -53,4 +53,5 @@ public class RuleGroupDisplayTerms extends DisplayTerms {
 
 	private long _groupId;
 	private String _name;
+
 }

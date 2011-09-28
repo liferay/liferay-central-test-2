@@ -44,7 +44,8 @@ public class MDRRuleGroupLocalServiceImpl
 			Map<Locale, String> descriptionMap, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		User user = userLocalService.getUser(serviceContext.getUserId());
+		User user = userPersistence.findByPrimaryKey(
+			serviceContext.getUserId());
 		Date now = new Date();
 
 		long ruleGroupId = counterLocalService.increment();
@@ -125,18 +126,18 @@ public class MDRRuleGroupLocalServiceImpl
 
 	public void deleteRuleGroup(MDRRuleGroup ruleGroup) throws SystemException {
 
+		// Rule group
+
+		mdrRuleGroupPersistence.remove(ruleGroup);
+
 		// Rules
 
 		mdrRuleLocalService.deleteRules(ruleGroup.getRuleGroupId());
 
-		//	Rule Group Instances
+		//	Rule group instances
 
 		mdrRuleGroupInstanceLocalService.deleteRuleGroupInstances(
 			ruleGroup.getRuleGroupId());
-
-		// Rule group
-
-		deleteMDRRuleGroup(ruleGroup);
 	}
 
 	public void deleteRuleGroups(long groupId) throws SystemException {

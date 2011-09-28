@@ -21,7 +21,6 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.mobiledevicerules.NoSuchRuleGroupInstanceException;
-import com.liferay.portlet.mobiledevicerules.model.MDRRuleGroup;
 import com.liferay.portlet.mobiledevicerules.model.MDRRuleGroupInstance;
 import com.liferay.portlet.mobiledevicerules.service.base.MDRRuleGroupInstanceLocalServiceBaseImpl;
 
@@ -39,12 +38,12 @@ public class MDRRuleGroupInstanceLocalServiceImpl
 			int priority, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		MDRRuleGroup ruleGroup = mdrRuleGroupLocalService.getMDRRuleGroup(
-			ruleGroupId);
-
-		User user = userLocalService.getUser(serviceContext.getUserId());
+		User user = userPersistence.findByPrimaryKey(
+			serviceContext.getUserId());
 		long classNameId = PortalUtil.getClassNameId(className);
 		Date now = new Date();
+
+		validate(ruleGroupId);
 
 		long ruleGroupInstanceId = counterLocalService.increment();
 
@@ -112,12 +111,10 @@ public class MDRRuleGroupInstanceLocalServiceImpl
 			String className, long classPK, long ruleGroupId)
 		throws SystemException {
 
-		try {
-			return getRuleGroupInstance(className, classPK, ruleGroupId);
-		}
-		catch (NoSuchRuleGroupInstanceException e) {
-			return null;
-		}
+		long classNameId = PortalUtil.getClassNameId(className);
+
+		return mdrRuleGroupInstancePersistence.fetchByC_C_R(
+			classNameId, classPK, ruleGroupId);
 	}
 
 	public MDRRuleGroupInstance getRuleGroupInstance(
@@ -191,6 +188,12 @@ public class MDRRuleGroupInstanceLocalServiceImpl
 		mdrRuleGroupInstancePersistence.update(ruleGroupInstance, false);
 
 		return ruleGroupInstance;
+	}
+
+	protected void validate(long ruleGroupId)
+		throws PortalException, SystemException {
+
+		mdrRuleGroupLocalService.getMDRRuleGroup(ruleGroupId);
 	}
 
 }

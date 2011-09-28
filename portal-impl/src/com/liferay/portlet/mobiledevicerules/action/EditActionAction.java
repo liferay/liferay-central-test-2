@@ -14,8 +14,8 @@
 
 package com.liferay.portlet.mobiledevicerules.action;
 
-import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.bean.BeanParamUtil;
+import com.liferay.portal.kernel.bean.BeanPropertiesUtil;
 import com.liferay.portal.kernel.mobile.device.rulegroup.ActionHandlerManagerUtil;
 import com.liferay.portal.kernel.mobile.device.rulegroup.action.ActionHandler;
 import com.liferay.portal.kernel.servlet.SessionErrors;
@@ -24,24 +24,21 @@ import com.liferay.portal.kernel.util.LocalizationUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.UnicodeProperties;
-import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.mobile.device.rulegroup.action.impl.LayoutTemplateModificationActionHandler;
 import com.liferay.portal.mobile.device.rulegroup.action.impl.SimpleRedirectActionHandler;
 import com.liferay.portal.mobile.device.rulegroup.action.impl.SiteRedirectActionHandler;
-import com.liferay.portal.mobile.device.rulegroup.action.impl.LayoutTemplateModificationActionHandler;
 import com.liferay.portal.mobile.device.rulegroup.action.impl.ThemeModificationActionHandler;
+import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
-import com.liferay.portal.struts.PortletAction;
-import com.liferay.portlet.mobiledevicerules.MDRPortletConstants;
+import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.mobiledevicerules.NoSuchActionException;
 import com.liferay.portlet.mobiledevicerules.NoSuchRuleGroupException;
 import com.liferay.portlet.mobiledevicerules.model.MDRAction;
 import com.liferay.portlet.mobiledevicerules.model.MDRRuleGroupInstance;
-import com.liferay.portlet.mobiledevicerules.service.MDRActionLocalServiceUtil;
 import com.liferay.portlet.mobiledevicerules.service.MDRActionServiceUtil;
 import com.liferay.portlet.mobiledevicerules.service.MDRRuleGroupInstanceLocalServiceUtil;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -49,8 +46,6 @@ import java.util.Map;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
-import javax.portlet.PortletContext;
-import javax.portlet.PortletRequestDispatcher;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 import javax.portlet.ResourceRequest;
@@ -63,7 +58,15 @@ import org.apache.struts.action.ActionMapping;
 /**
  * @author Edward Han
  */
-public class EditActionAction extends PortletAction {
+public class EditActionAction extends EditRuleAction {
+
+	public EditActionAction() {
+		registerEditorJSP(
+			LayoutTemplateModificationActionHandler.class, "layout_tpl");
+		registerEditorJSP(SimpleRedirectActionHandler.class, "simple_url");
+		registerEditorJSP(SiteRedirectActionHandler.class, "site_url");
+		registerEditorJSP(ThemeModificationActionHandler.class, "theme");
+	}
 
 	@Override
 	public void processAction(
@@ -74,8 +77,8 @@ public class EditActionAction extends PortletAction {
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		try {
-			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.EDIT)) {
-				editAction(actionRequest, cmd.equals(Constants.ADD));
+			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
+				updateAction(actionRequest);
 			}
 			else if (cmd.equals(Constants.DELETE)) {
 				deleteAction(actionRequest);
@@ -83,11 +86,21 @@ public class EditActionAction extends PortletAction {
 
 			sendRedirect(actionRequest, actionResponse);
 		}
-		catch (NoSuchActionException nsae) {
-			SessionErrors.add(actionRequest, nsae.getClass().getName());
-		}
-		catch (NoSuchRuleGroupException nsrge) {
-			SessionErrors.add(actionRequest, nsrge.getClass().getName());
+		catch (Exception e) {
+			if (e instanceof PrincipalException) {
+				SessionErrors.add(actionRequest, e.getClass().getName());
+
+				setForward(
+					actionRequest, "portlet.mobile_device_rules_admin.error");
+			}
+			else if (e instanceof NoSuchActionException ||
+					 e instanceof NoSuchRuleGroupException) {
+
+				SessionErrors.add(actionRequest, e.getClass().getName());
+			}
+			else {
+				throw e;
+			}
 		}
 	}
 
@@ -97,34 +110,33 @@ public class EditActionAction extends PortletAction {
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
-		long ruleGroupInstanceId = ParamUtil.getLong(
-			renderRequest, MDRPortletConstants.MDR_RULE_GROUP_INSTANCE_ID);
-		long actionId = ParamUtil.getLong(
-			renderRequest, MDRPortletConstants.MDR_ACTION_ID);
+		long actionId = ParamUtil.getLong(renderRequest, "actionId");
 
-		MDRAction mdrAction = MDRActionServiceUtil.fetchAction(actionId);
+		MDRAction action = MDRActionServiceUtil.fetchAction(actionId);
 
-		boolean isAddAction = Validator.isNull(mdrAction);
+		renderRequest.setAttribute(
+			WebKeys.MOBILE_DEVICE_RULES_RULE_GROUP_ACTION, action);
 
-		String type = StringPool.BLANK;
+		String type = BeanPropertiesUtil.getString(action, "type");
 
-		if (!isAddAction) {
-			ruleGroupInstanceId = mdrAction.getRuleGroupInstanceId();
+		renderRequest.setAttribute(
+			WebKeys.MOBILE_DEVICE_RULES_RULE_GROUP_ACTION_TYPE, type);
 
-			type = mdrAction.getType();
-		}
+		String editorJSP = getEditorJSP(type);
+
+		renderRequest.setAttribute(
+			WebKeys.MOBILE_DEVICE_RULES_RULE_GROUP_ACTION_EDITOR_JSP,
+			editorJSP);
+
+		long ruleGroupInstanceId = BeanParamUtil.getLong(
+			action, renderRequest, "ruleGroupInstanceId");
 
 		MDRRuleGroupInstance ruleGroupInstance =
 			MDRRuleGroupInstanceLocalServiceUtil.getMDRRuleGroupInstance(
 				ruleGroupInstanceId);
 
-		String editorJSP = getEditorJSP(type);
-
 		renderRequest.setAttribute(
-			MDRPortletConstants.MDR_RULE_GROUP_INSTANCE, ruleGroupInstance);
-		renderRequest.setAttribute(MDRPortletConstants.MDR_ACTION, mdrAction);
-		renderRequest.setAttribute(MDRPortletConstants.TYPE, type);
-		renderRequest.setAttribute(MDRPortletConstants.EDITOR_JSP, editorJSP);
+			WebKeys.MOBILE_DEVICE_RULES_RULE_GROUP_INSTANCE, ruleGroupInstance);
 
 		return mapping.findForward(
 			"portlet.mobile_device_rules_admin.edit_action");
@@ -136,154 +148,89 @@ public class EditActionAction extends PortletAction {
 			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
 		throws Exception {
 
-		PortletContext portletContext = portletConfig.getPortletContext();
+		long actionId = ParamUtil.getLong(resourceRequest, "actionId");
 
-		String type = ParamUtil.get(
-			resourceRequest, MDRPortletConstants.TYPE,
-			StringPool.BLANK);
+		MDRAction action = MDRActionServiceUtil.fetchAction(actionId);
 
-		long actionId = ParamUtil.getLong(
-			resourceRequest, MDRPortletConstants.MDR_ACTION_ID);
+		resourceRequest.setAttribute(
+			WebKeys.MOBILE_DEVICE_RULES_RULE_GROUP_ACTION, action);
 
-		if (actionId != 0) {
-			MDRAction action = MDRActionServiceUtil.fetchAction(
-				actionId);
+		String type = ParamUtil.getString(resourceRequest, "type");
 
-			resourceRequest.setAttribute(
-				MDRPortletConstants.MDR_ACTION, action);
-		}
-
-		PortletRequestDispatcher portletRequestDispatcher = null;
-
-		String editorJSP = getEditorJSP(type);
-
-		if (Validator.isNotNull(editorJSP)) {
-			portletRequestDispatcher = portletContext.getRequestDispatcher(
-				editorJSP);
-		}
-
-		if (Validator.isNotNull(portletRequestDispatcher)) {
-			portletRequestDispatcher.include(resourceRequest, resourceResponse);
-		}
+		includeEditorJSP(
+			portletConfig, resourceRequest, resourceResponse, type);
 	}
 
 	protected void deleteAction(ActionRequest actionRequest) throws Exception {
-		long actionId = ParamUtil.getLong(
-			actionRequest, MDRPortletConstants.MDR_ACTION_ID);
+		long actionId = ParamUtil.getLong(actionRequest, "actionId");
 
-		MDRAction action = MDRActionLocalServiceUtil.getMDRAction(actionId);
-
-		MDRActionServiceUtil.deleteAction(action);
+		MDRActionServiceUtil.deleteAction(actionId);
 	}
 
-	protected void editAction(ActionRequest actionRequest, boolean add)
-		throws PortalException, SystemException {
-
-		String type = ParamUtil.getString(
-			actionRequest, MDRPortletConstants.TYPE);
-
+	@Override
+	protected String getEditorJSP(String type) {
 		ActionHandler actionHandler = ActionHandlerManagerUtil.getActionHandler(
 			type);
 
-		if (actionHandler == null) {
-			SessionErrors.add(
-				actionRequest, MDRPortletConstants.ERROR_INVALID_TYPE);
-
-			return;
-		}
-
-		UnicodeProperties typeSettingsProperties = getTypeSettingsProperties(
-			actionRequest, actionHandler);
-
-		if (typeSettingsProperties != null) {
-			long ruleGroupInstanceId = ParamUtil.getLong(
-				actionRequest, MDRPortletConstants.MDR_RULE_GROUP_INSTANCE_ID);
-
-			Map<Locale, String> nameMap = LocalizationUtil.getLocalizationMap(
-				actionRequest, MDRPortletConstants.NAME);
-			Map<Locale, String> descriptionMap =
-				LocalizationUtil.getLocalizationMap(
-					actionRequest, MDRPortletConstants.DESCRIPTION);
-
-			MDRRuleGroupInstance ruleGroupInstance =
-				MDRRuleGroupInstanceLocalServiceUtil.getMDRRuleGroupInstance(
-					ruleGroupInstanceId);
-
-			ServiceContext serviceContext = ServiceContextFactory.getInstance(
-				actionRequest);
-
-			if (add) {
-				MDRActionServiceUtil.addMDRAction(
-					ruleGroupInstance.getRuleGroupInstanceId(), nameMap,
-					descriptionMap, type, typeSettingsProperties,
-					serviceContext);
-			}
-			else {
-				long actionId = ParamUtil.getLong(
-					actionRequest, MDRPortletConstants.MDR_ACTION_ID);
-
-				MDRActionServiceUtil.updateAction(
-					actionId, nameMap, descriptionMap, type,
-					typeSettingsProperties, serviceContext);
-			}
-		}
-	}
-
-	protected String getEditorJSP(String type) {
-		ActionHandler handler = ActionHandlerManagerUtil.getActionHandler(type);
-
 		String editorJSP = null;
 
-		if (handler != null) {
-			editorJSP = _handlerRegistry.get(handler.getClass());
+		if (actionHandler != null) {
+			editorJSP = _editorJSPs.get(actionHandler.getClass());
 		}
 
-		if (Validator.isNull(editorJSP)) {
+		if (editorJSP == null) {
 			editorJSP = StringPool.BLANK;
 		}
 
 		return editorJSP;
 	}
 
-	protected UnicodeProperties getTypeSettingsProperties(
-			ActionRequest actionRequest, ActionHandler actionHandler) {
+	protected void registerEditorJSP(Class<?> clazz, String jspPrefix) {
+		_editorJSPs.put(
+			clazz,
+			"/html/portlet/mobile_device_rules_admin/action/" + jspPrefix +
+				"_action.jsp");
+	}
 
-		Collection<String> propertyNames = actionHandler.getPropertyNames();
+	protected void updateAction(ActionRequest actionRequest) throws Exception {
+		long actionId = ParamUtil.getLong(actionRequest, "actionId");
 
-		UnicodeProperties properties = new UnicodeProperties();
+		long ruleGroupInstanceId = ParamUtil.getLong(
+			actionRequest, "ruleGroupInstanceId");
+		Map<Locale, String> nameMap = LocalizationUtil.getLocalizationMap(
+			actionRequest, "name");
+		Map<Locale, String> descriptionMap =
+			LocalizationUtil.getLocalizationMap(
+				actionRequest, "description");
+		String type = ParamUtil.getString(actionRequest, "type");
 
-		for (String propertyName : propertyNames) {
-			String value = ParamUtil.get(
-				actionRequest, propertyName, StringPool.BLANK);
+		ActionHandler actionHandler = ActionHandlerManagerUtil.getActionHandler(
+			type);
 
-			properties.setProperty(propertyName, value);
+		if (actionHandler == null) {
+			SessionErrors.add(actionRequest, "typeInvalid");
+
+			return;
 		}
 
-		return properties;
+		UnicodeProperties typeSettingsProperties = getTypeSettingsProperties(
+			actionRequest, actionHandler.getPropertyNames());
+
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			actionRequest);
+
+		if (actionId <= 0) {
+			MDRActionServiceUtil.addAction(
+				ruleGroupInstanceId, nameMap, descriptionMap, type,
+				typeSettingsProperties, serviceContext);
+		}
+		else {
+			MDRActionServiceUtil.updateAction(
+				actionId, nameMap, descriptionMap, type, typeSettingsProperties,
+				serviceContext);
+		}
 	}
 
-	private static final Map<Class, String> _handlerRegistry;
+	private Map<Class<?>, String> _editorJSPs = new HashMap<Class<?>, String>();
 
-	private static final String PATH =
-		"/html/portlet/mobile_device_rules_admin/action";
-
-	static {
-		_handlerRegistry = new HashMap<Class, String>(4);
-
-		_handlerRegistry.put(
-			SiteRedirectActionHandler.class,
-			PATH + "/site_url_action.jsp");
-
-		_handlerRegistry.put(
-			LayoutTemplateModificationActionHandler.class,
-			PATH + "/layout_tpl_action.jsp");
-
-		_handlerRegistry.put(
-			SimpleRedirectActionHandler.class,
-			PATH + "/simple_url_action.jsp");
-
-		_handlerRegistry.put(
-			ThemeModificationActionHandler.class,
-			PATH + "/theme_action.jsp");
-	}
 }

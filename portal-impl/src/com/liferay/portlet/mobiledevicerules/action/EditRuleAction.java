@@ -14,8 +14,8 @@
 
 package com.liferay.portlet.mobiledevicerules.action;
 
-import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.bean.BeanParamUtil;
+import com.liferay.portal.kernel.bean.BeanPropertiesUtil;
 import com.liferay.portal.kernel.mobile.device.rulegroup.RuleGroupProcessorUtil;
 import com.liferay.portal.kernel.mobile.device.rulegroup.rule.RuleHandler;
 import com.liferay.portal.kernel.mobile.device.rulegroup.rule.UnknownRuleHandlerException;
@@ -28,10 +28,11 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.mobile.device.rulegroup.rule.impl.SimpleRuleHandler;
+import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.struts.PortletAction;
-import com.liferay.portlet.mobiledevicerules.MDRPortletConstants;
+import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.mobiledevicerules.NoSuchActionException;
 import com.liferay.portlet.mobiledevicerules.NoSuchRuleGroupException;
 import com.liferay.portlet.mobiledevicerules.model.MDRRule;
@@ -71,8 +72,8 @@ public class EditRuleAction extends PortletAction {
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		try {
-			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.EDIT)) {
-				editRule(actionRequest, cmd.equals(Constants.ADD));
+			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
+				updateRule(actionRequest);
 			}
 			else if (cmd.equals(Constants.DELETE)) {
 				deleteRule(actionRequest);
@@ -80,14 +81,22 @@ public class EditRuleAction extends PortletAction {
 
 			sendRedirect(actionRequest, actionResponse);
 		}
-		catch (NoSuchActionException nsae) {
-			SessionErrors.add(actionRequest, nsae.getClass().getName());
-		}
-		catch (NoSuchRuleGroupException nsrge) {
-			SessionErrors.add(actionRequest, nsrge.getClass().getName());
-		}
-		catch (UnknownRuleHandlerException urhe) {
-			SessionErrors.add(actionRequest, urhe.getClass().getName());
+		catch (Exception e) {
+			if (e instanceof PrincipalException) {
+				SessionErrors.add(actionRequest, e.getClass().getName());
+
+				setForward(
+					actionRequest, "portlet.mobile_device_rules_admin.error");
+			}
+			else if (e instanceof NoSuchActionException ||
+					 e instanceof NoSuchRuleGroupException ||
+					 e instanceof UnknownRuleHandlerException) {
+
+				SessionErrors.add(actionRequest, e.getClass().getName());
+			}
+			else {
+				throw e;
+			}
 		}
 	}
 
@@ -97,36 +106,29 @@ public class EditRuleAction extends PortletAction {
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
-		long ruleGroupId = ParamUtil.get(
-			renderRequest, MDRPortletConstants.MDR_RULE_GROUP_ID, 0L);
-
-		long ruleId = ParamUtil.get(
-			renderRequest, MDRPortletConstants.MDR_RULE_ID, 0L);
+		long ruleId = ParamUtil.getLong(renderRequest, "ruleId");
 
 		MDRRule rule = MDRRuleServiceUtil.fetchRule(ruleId);
 
-		boolean isAddAction = Validator.isNull(rule);
+		renderRequest.setAttribute(WebKeys.MOBILE_DEVICE_RULES_RULE, rule);
 
-		if (!isAddAction) {
-			ruleGroupId = rule.getRuleGroupId();
-		}
+		String type = BeanPropertiesUtil.getString(rule, "type");
 
-		MDRRuleGroup ruleGroup = MDRRuleGroupServiceUtil.getRuleGroup(
-			ruleGroupId);
-
-		String type = StringPool.BLANK;
-
-		if (!isAddAction) {
-			type = rule.getType();
-		}
+		renderRequest.setAttribute(WebKeys.MOBILE_DEVICE_RULES_RULE_TYPE, type);
 
 		String editorJSP = getEditorJSP(type);
 
 		renderRequest.setAttribute(
-			MDRPortletConstants.MDR_RULE_GROUP, ruleGroup);
-		renderRequest.setAttribute(MDRPortletConstants.MDR_RULE, rule);
-		renderRequest.setAttribute(MDRPortletConstants.TYPE, type);
-		renderRequest.setAttribute(MDRPortletConstants.EDITOR_JSP, editorJSP);
+			WebKeys.MOBILE_DEVICE_RULES_RULE_EDITOR_JSP, editorJSP);
+
+		long ruleGroupId = BeanParamUtil.getLong(
+			rule, renderRequest, "ruleGroupId");
+
+		MDRRuleGroup ruleGroup = MDRRuleGroupServiceUtil.getRuleGroup(
+			ruleGroupId);
+
+		renderRequest.setAttribute(
+			WebKeys.MOBILE_DEVICE_RULES_RULE_GROUP, ruleGroup);
 
 		return mapping.findForward(
 			"portlet.mobile_device_rules_admin.edit_rule");
@@ -138,103 +140,39 @@ public class EditRuleAction extends PortletAction {
 			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
 		throws Exception {
 
-		PortletContext portletContext = portletConfig.getPortletContext();
+		long ruleId = ParamUtil.getLong(resourceRequest, "ruleId");
 
-		String type = ParamUtil.getString(
-			resourceRequest, MDRPortletConstants.TYPE);
-
-		long ruleId = ParamUtil.getLong(
-			resourceRequest, MDRPortletConstants.MDR_RULE_ID);
-
-		if (ruleId != 0) {
+		if (ruleId > 0) {
 			MDRRule rule = MDRRuleServiceUtil.fetchRule(ruleId);
 
-			resourceRequest.setAttribute(MDRPortletConstants.MDR_RULE, rule);
+			resourceRequest.setAttribute(
+				WebKeys.MOBILE_DEVICE_RULES_RULE, rule);
 		}
 
-		PortletRequestDispatcher portletRequestDispatcher = null;
+		String type = ParamUtil.getString(resourceRequest, "type");
 
-		String jsp = getEditorJSP(type);
-
-		if (Validator.isNotNull(jsp)) {
-			portletRequestDispatcher = portletContext.getRequestDispatcher(jsp);
-		}
-
-		if (Validator.isNotNull(portletRequestDispatcher)) {
-			portletRequestDispatcher.include(resourceRequest, resourceResponse);
-		}
+		includeEditorJSP(
+			portletConfig, resourceRequest, resourceResponse, type);
 	}
 
-	protected void deleteRule(ActionRequest request)
-		throws PortalException, SystemException {
+	protected void deleteRule(ActionRequest request) throws Exception {
+		long ruleId = ParamUtil.getLong(request, "ruleId");
 
-		long ruleId = ParamUtil.get(
-			request, MDRPortletConstants.MDR_RULE_ID, 0L);
-
-		MDRRule rule = MDRRuleServiceUtil.fetchRule(ruleId);
-
-		if (rule != null) {
-			MDRRuleServiceUtil.deleteRule(rule);
-		}
-	}
-
-	protected void editRule(ActionRequest actionRequest, boolean add)
-		throws PortalException, SystemException {
-
-		long ruleGroupId = ParamUtil.getLong(
-			actionRequest, MDRPortletConstants.MDR_RULE_GROUP_ID);
-
-		Map<Locale, String> nameMap = LocalizationUtil.getLocalizationMap(
-			actionRequest, MDRPortletConstants.NAME);
-
-		Map<Locale, String> descriptionMap =
-			LocalizationUtil.getLocalizationMap(
-				actionRequest, MDRPortletConstants.DESCRIPTION);
-
-		String type = ParamUtil.getString(
-			actionRequest, MDRPortletConstants.TYPE);
-
-		RuleHandler ruleHandler = RuleGroupProcessorUtil.getRuleHandler(type);
-
-		if (ruleHandler == null) {
-			throw new UnknownRuleHandlerException(type);
-		}
-
-		UnicodeProperties typeSettings = getTypeSettings(
-			actionRequest, ruleHandler);
-
-		ServiceContext serviceContext = ServiceContextFactory.getInstance(
-			actionRequest);
-
-		if (add) {
-			MDRRuleServiceUtil.addRule(
-				ruleGroupId, nameMap, descriptionMap, type, typeSettings,
-				serviceContext);
-		}
-		else {
-			long ruleId = ParamUtil.getLong(
-				actionRequest, MDRPortletConstants.MDR_RULE_ID);
-
-			MDRRuleServiceUtil.updateRule(
-				ruleId, nameMap, descriptionMap, type, typeSettings,
-				serviceContext);
-		}
+		MDRRuleServiceUtil.deleteRule(ruleId);
 	}
 
 	protected String getEditorJSP(String ruleType) {
-		if (SimpleRuleHandler.getHandlerType().equals(ruleType)) {
-			return EDITOR_JSP_SIMPLE;
+		if (ruleType.equals(SimpleRuleHandler.getHandlerType())) {
+			return _SIMPLE_RULE_EDIT_RJSP;
 		}
 
 		return StringPool.BLANK;
 	}
 
-	protected UnicodeProperties getTypeSettings(
-		ActionRequest actionRequest, RuleHandler ruleHandler) {
+	protected UnicodeProperties getTypeSettingsProperties(
+		ActionRequest actionRequest, Collection<String> propertyNames) {
 
-		UnicodeProperties properties = new UnicodeProperties();
-
-		Collection<String> propertyNames = ruleHandler.getPropertyNames();
+		UnicodeProperties typeSettingsProperties = new UnicodeProperties();
 
 		for (String propertyName : propertyNames) {
 			String[] values = ParamUtil.getParameterValues(
@@ -242,12 +180,66 @@ public class EditRuleAction extends PortletAction {
 
 			String merged = StringUtil.merge(values);
 
-			properties.setProperty(propertyName, merged);
+			typeSettingsProperties.setProperty(propertyName, merged);
 		}
 
-		return properties;
+		return typeSettingsProperties;
 	}
 
-	private static final String EDITOR_JSP_SIMPLE =
+	protected void includeEditorJSP(
+			PortletConfig portletConfig, ResourceRequest resourceRequest,
+			ResourceResponse resourceResponse, String type)
+		throws Exception {
+
+		String editorJSP = getEditorJSP(type);
+
+		if (Validator.isNull(editorJSP)) {
+			return;
+		}
+
+		PortletContext portletContext = portletConfig.getPortletContext();
+
+		PortletRequestDispatcher portletRequestDispatcher =
+			portletContext.getRequestDispatcher(editorJSP);
+
+		portletRequestDispatcher.include(resourceRequest, resourceResponse);
+	}
+
+	protected void updateRule(ActionRequest actionRequest) throws Exception {
+		long ruleId = ParamUtil.getLong(actionRequest, "ruleId");
+
+		long ruleGroupId = ParamUtil.getLong(actionRequest, "ruleGroupId");
+		Map<Locale, String> nameMap = LocalizationUtil.getLocalizationMap(
+			actionRequest, "name");
+		Map<Locale, String> descriptionMap =
+			LocalizationUtil.getLocalizationMap(actionRequest, "description");
+		String type = ParamUtil.getString(actionRequest, "type");
+
+		RuleHandler ruleHandler = RuleGroupProcessorUtil.getRuleHandler(type);
+
+		if (ruleHandler == null) {
+			throw new UnknownRuleHandlerException(type);
+		}
+
+		UnicodeProperties typeSettingsProperties = getTypeSettingsProperties(
+			actionRequest, ruleHandler.getPropertyNames());
+
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			actionRequest);
+
+		if (ruleId <= 0) {
+			MDRRuleServiceUtil.addRule(
+				ruleGroupId, nameMap, descriptionMap, type,
+				typeSettingsProperties, serviceContext);
+		}
+		else {
+			MDRRuleServiceUtil.updateRule(
+				ruleId, nameMap, descriptionMap, type, typeSettingsProperties,
+				serviceContext);
+		}
+	}
+
+	private static final String _SIMPLE_RULE_EDIT_RJSP =
 		"/html/portlet/mobile_device_rules_admin/rule/simple_rule.jsp";
+
 }
