@@ -423,11 +423,13 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl<MBBan>
 		else {
 			if ((mbBanModelImpl.getColumnBitmask() &
 					FINDER_PATH_FETCH_BY_G_B.getColumnBitmask()) != 0) {
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_B,
-					new Object[] {
+				Object[] args = new Object[] {
 						Long.valueOf(mbBanModelImpl.getOriginalGroupId()),
 						Long.valueOf(mbBanModelImpl.getOriginalBanUserId())
-					});
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_B, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_B, args);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_B,
 					new Object[] {

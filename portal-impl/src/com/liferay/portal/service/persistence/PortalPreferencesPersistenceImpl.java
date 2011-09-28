@@ -336,13 +336,13 @@ public class PortalPreferencesPersistenceImpl extends BasePersistenceImpl<Portal
 		else {
 			if ((portalPreferencesModelImpl.getColumnBitmask() &
 					FINDER_PATH_FETCH_BY_O_O.getColumnBitmask()) != 0) {
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_O_O,
-					new Object[] {
-						Long.valueOf(
-							portalPreferencesModelImpl.getOriginalOwnerId()),
-						Integer.valueOf(
-							portalPreferencesModelImpl.getOriginalOwnerType())
-					});
+				Object[] args = new Object[] {
+						Long.valueOf(portalPreferencesModelImpl.getOriginalOwnerId()),
+						Integer.valueOf(portalPreferencesModelImpl.getOriginalOwnerType())
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_O_O, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_O_O, args);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_O_O,
 					new Object[] {

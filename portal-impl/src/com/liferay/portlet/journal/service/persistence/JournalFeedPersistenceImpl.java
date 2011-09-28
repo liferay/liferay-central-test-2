@@ -445,11 +445,13 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl<JournalFeed>
 		else {
 			if ((journalFeedModelImpl.getColumnBitmask() &
 					FINDER_PATH_FETCH_BY_UUID_G.getColumnBitmask()) != 0) {
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
-					new Object[] {
+				Object[] args = new Object[] {
 						journalFeedModelImpl.getOriginalUuid(),
 						Long.valueOf(journalFeedModelImpl.getOriginalGroupId())
-					});
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_UUID_G, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G, args);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
 					new Object[] {
@@ -460,12 +462,14 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl<JournalFeed>
 
 			if ((journalFeedModelImpl.getColumnBitmask() &
 					FINDER_PATH_FETCH_BY_G_F.getColumnBitmask()) != 0) {
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_F,
-					new Object[] {
+				Object[] args = new Object[] {
 						Long.valueOf(journalFeedModelImpl.getOriginalGroupId()),
 						
-					journalFeedModelImpl.getOriginalFeedId()
-					});
+						journalFeedModelImpl.getOriginalFeedId()
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_F, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_F, args);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_F,
 					new Object[] {

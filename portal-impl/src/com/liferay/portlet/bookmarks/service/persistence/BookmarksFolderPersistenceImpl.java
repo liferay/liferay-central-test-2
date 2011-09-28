@@ -520,12 +520,13 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 		else {
 			if ((bookmarksFolderModelImpl.getColumnBitmask() &
 					FINDER_PATH_FETCH_BY_UUID_G.getColumnBitmask()) != 0) {
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
-					new Object[] {
+				Object[] args = new Object[] {
 						bookmarksFolderModelImpl.getOriginalUuid(),
-						Long.valueOf(
-							bookmarksFolderModelImpl.getOriginalGroupId())
-					});
+						Long.valueOf(bookmarksFolderModelImpl.getOriginalGroupId())
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_UUID_G, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G, args);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
 					new Object[] {

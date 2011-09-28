@@ -357,15 +357,14 @@ public class SocialEquityGroupSettingPersistenceImpl extends BasePersistenceImpl
 		else {
 			if ((socialEquityGroupSettingModelImpl.getColumnBitmask() &
 					FINDER_PATH_FETCH_BY_G_C_T.getColumnBitmask()) != 0) {
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_C_T,
-					new Object[] {
-						Long.valueOf(
-							socialEquityGroupSettingModelImpl.getOriginalGroupId()),
-						Long.valueOf(
-							socialEquityGroupSettingModelImpl.getOriginalClassNameId()),
-						Integer.valueOf(
-							socialEquityGroupSettingModelImpl.getOriginalType())
-					});
+				Object[] args = new Object[] {
+						Long.valueOf(socialEquityGroupSettingModelImpl.getOriginalGroupId()),
+						Long.valueOf(socialEquityGroupSettingModelImpl.getOriginalClassNameId()),
+						Integer.valueOf(socialEquityGroupSettingModelImpl.getOriginalType())
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_C_T, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_C_T, args);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_C_T,
 					new Object[] {

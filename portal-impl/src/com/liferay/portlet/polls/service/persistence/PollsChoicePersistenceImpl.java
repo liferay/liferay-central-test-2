@@ -412,13 +412,14 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl<PollsChoice>
 		else {
 			if ((pollsChoiceModelImpl.getColumnBitmask() &
 					FINDER_PATH_FETCH_BY_Q_N.getColumnBitmask()) != 0) {
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_Q_N,
-					new Object[] {
-						Long.valueOf(
-							pollsChoiceModelImpl.getOriginalQuestionId()),
+				Object[] args = new Object[] {
+						Long.valueOf(pollsChoiceModelImpl.getOriginalQuestionId()),
 						
-					pollsChoiceModelImpl.getOriginalName()
-					});
+						pollsChoiceModelImpl.getOriginalName()
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_Q_N, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_Q_N, args);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_Q_N,
 					new Object[] {

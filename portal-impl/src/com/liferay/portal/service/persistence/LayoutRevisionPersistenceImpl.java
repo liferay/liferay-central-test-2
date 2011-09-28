@@ -631,14 +631,14 @@ public class LayoutRevisionPersistenceImpl extends BasePersistenceImpl<LayoutRev
 		else {
 			if ((layoutRevisionModelImpl.getColumnBitmask() &
 					FINDER_PATH_FETCH_BY_L_H_P.getColumnBitmask()) != 0) {
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_L_H_P,
-					new Object[] {
-						Long.valueOf(
-							layoutRevisionModelImpl.getOriginalLayoutSetBranchId()),
-						Boolean.valueOf(
-							layoutRevisionModelImpl.getOriginalHead()),
+				Object[] args = new Object[] {
+						Long.valueOf(layoutRevisionModelImpl.getOriginalLayoutSetBranchId()),
+						Boolean.valueOf(layoutRevisionModelImpl.getOriginalHead()),
 						Long.valueOf(layoutRevisionModelImpl.getOriginalPlid())
-					});
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_L_H_P, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_L_H_P, args);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_L_H_P,
 					new Object[] {

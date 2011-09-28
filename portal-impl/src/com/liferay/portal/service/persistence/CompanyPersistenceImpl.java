@@ -387,8 +387,10 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 		else {
 			if ((companyModelImpl.getColumnBitmask() &
 					FINDER_PATH_FETCH_BY_WEBID.getColumnBitmask()) != 0) {
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_WEBID,
-					new Object[] { companyModelImpl.getOriginalWebId() });
+				Object[] args = new Object[] { companyModelImpl.getOriginalWebId() };
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_WEBID, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_WEBID, args);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_WEBID,
 					new Object[] { company.getWebId() }, company);
@@ -396,8 +398,10 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 
 			if ((companyModelImpl.getColumnBitmask() &
 					FINDER_PATH_FETCH_BY_MX.getColumnBitmask()) != 0) {
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_MX,
-					new Object[] { companyModelImpl.getOriginalMx() });
+				Object[] args = new Object[] { companyModelImpl.getOriginalMx() };
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_MX, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_MX, args);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_MX,
 					new Object[] { company.getMx() }, company);
@@ -405,10 +409,12 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 
 			if ((companyModelImpl.getColumnBitmask() &
 					FINDER_PATH_FETCH_BY_LOGOID.getColumnBitmask()) != 0) {
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_LOGOID,
-					new Object[] {
+				Object[] args = new Object[] {
 						Long.valueOf(companyModelImpl.getOriginalLogoId())
-					});
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_LOGOID, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_LOGOID, args);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_LOGOID,
 					new Object[] { Long.valueOf(company.getLogoId()) }, company);

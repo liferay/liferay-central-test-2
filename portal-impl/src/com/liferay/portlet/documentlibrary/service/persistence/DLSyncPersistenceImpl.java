@@ -360,10 +360,12 @@ public class DLSyncPersistenceImpl extends BasePersistenceImpl<DLSync>
 		else {
 			if ((dlSyncModelImpl.getColumnBitmask() &
 					FINDER_PATH_FETCH_BY_FILEID.getColumnBitmask()) != 0) {
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_FILEID,
-					new Object[] {
+				Object[] args = new Object[] {
 						Long.valueOf(dlSyncModelImpl.getOriginalFileId())
-					});
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_FILEID, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_FILEID, args);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_FILEID,
 					new Object[] { Long.valueOf(dlSync.getFileId()) }, dlSync);

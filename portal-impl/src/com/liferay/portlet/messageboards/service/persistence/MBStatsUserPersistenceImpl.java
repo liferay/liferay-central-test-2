@@ -439,11 +439,13 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl<MBStatsUser>
 		else {
 			if ((mbStatsUserModelImpl.getColumnBitmask() &
 					FINDER_PATH_FETCH_BY_G_U.getColumnBitmask()) != 0) {
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_U,
-					new Object[] {
+				Object[] args = new Object[] {
 						Long.valueOf(mbStatsUserModelImpl.getOriginalGroupId()),
 						Long.valueOf(mbStatsUserModelImpl.getOriginalUserId())
-					});
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_U, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_U, args);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_U,
 					new Object[] {

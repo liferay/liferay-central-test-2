@@ -388,15 +388,16 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl<PluginSett
 		else {
 			if ((pluginSettingModelImpl.getColumnBitmask() &
 					FINDER_PATH_FETCH_BY_C_I_T.getColumnBitmask()) != 0) {
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_I_T,
-					new Object[] {
-						Long.valueOf(
-							pluginSettingModelImpl.getOriginalCompanyId()),
+				Object[] args = new Object[] {
+						Long.valueOf(pluginSettingModelImpl.getOriginalCompanyId()),
 						
-					pluginSettingModelImpl.getOriginalPluginId(),
+						pluginSettingModelImpl.getOriginalPluginId(),
 						
-					pluginSettingModelImpl.getOriginalPluginType()
-					});
+						pluginSettingModelImpl.getOriginalPluginType()
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_C_I_T, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_I_T, args);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_I_T,
 					new Object[] {

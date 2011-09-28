@@ -313,10 +313,14 @@ public class ReleasePersistenceImpl extends BasePersistenceImpl<Release>
 		else {
 			if ((releaseModelImpl.getColumnBitmask() &
 					FINDER_PATH_FETCH_BY_SERVLETCONTEXTNAME.getColumnBitmask()) != 0) {
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_SERVLETCONTEXTNAME,
-					new Object[] {
+				Object[] args = new Object[] {
 						releaseModelImpl.getOriginalServletContextName()
-					});
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_SERVLETCONTEXTNAME,
+					args);
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_SERVLETCONTEXTNAME,
+					args);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_SERVLETCONTEXTNAME,
 					new Object[] { release.getServletContextName() }, release);

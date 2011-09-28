@@ -362,12 +362,14 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 		else {
 			if ((resourceModelImpl.getColumnBitmask() &
 					FINDER_PATH_FETCH_BY_C_P.getColumnBitmask()) != 0) {
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_P,
-					new Object[] {
+				Object[] args = new Object[] {
 						Long.valueOf(resourceModelImpl.getOriginalCodeId()),
 						
-					resourceModelImpl.getOriginalPrimKey()
-					});
+						resourceModelImpl.getOriginalPrimKey()
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_C_P, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_P, args);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_P,
 					new Object[] {

@@ -437,13 +437,14 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 		else {
 			if ((dlFileRankModelImpl.getColumnBitmask() &
 					FINDER_PATH_FETCH_BY_C_U_F.getColumnBitmask()) != 0) {
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_U_F,
-					new Object[] {
+				Object[] args = new Object[] {
 						Long.valueOf(dlFileRankModelImpl.getOriginalCompanyId()),
 						Long.valueOf(dlFileRankModelImpl.getOriginalUserId()),
-						Long.valueOf(
-							dlFileRankModelImpl.getOriginalFileEntryId())
-					});
+						Long.valueOf(dlFileRankModelImpl.getOriginalFileEntryId())
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_C_U_F, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_U_F, args);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_U_F,
 					new Object[] {

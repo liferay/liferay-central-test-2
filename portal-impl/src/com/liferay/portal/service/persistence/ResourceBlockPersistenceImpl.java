@@ -438,17 +438,17 @@ public class ResourceBlockPersistenceImpl extends BasePersistenceImpl<ResourceBl
 		else {
 			if ((resourceBlockModelImpl.getColumnBitmask() &
 					FINDER_PATH_FETCH_BY_C_G_N_P.getColumnBitmask()) != 0) {
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_G_N_P,
-					new Object[] {
-						Long.valueOf(
-							resourceBlockModelImpl.getOriginalCompanyId()),
-						Long.valueOf(
-							resourceBlockModelImpl.getOriginalGroupId()),
+				Object[] args = new Object[] {
+						Long.valueOf(resourceBlockModelImpl.getOriginalCompanyId()),
+						Long.valueOf(resourceBlockModelImpl.getOriginalGroupId()),
 						
-					resourceBlockModelImpl.getOriginalName(),
+						resourceBlockModelImpl.getOriginalName(),
 						
-					resourceBlockModelImpl.getOriginalPermissionsHash()
-					});
+						resourceBlockModelImpl.getOriginalPermissionsHash()
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_C_G_N_P, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_G_N_P, args);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_G_N_P,
 					new Object[] {

@@ -426,8 +426,12 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 		else {
 			if ((shoppingOrderModelImpl.getColumnBitmask() &
 					FINDER_PATH_FETCH_BY_NUMBER.getColumnBitmask()) != 0) {
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_NUMBER,
-					new Object[] { shoppingOrderModelImpl.getOriginalNumber() });
+				Object[] args = new Object[] {
+						shoppingOrderModelImpl.getOriginalNumber()
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_NUMBER, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_NUMBER, args);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_NUMBER,
 					new Object[] { shoppingOrder.getNumber() }, shoppingOrder);
@@ -435,8 +439,12 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 
 			if ((shoppingOrderModelImpl.getColumnBitmask() &
 					FINDER_PATH_FETCH_BY_PPTXNID.getColumnBitmask()) != 0) {
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_PPTXNID,
-					new Object[] { shoppingOrderModelImpl.getOriginalPpTxnId() });
+				Object[] args = new Object[] {
+						shoppingOrderModelImpl.getOriginalPpTxnId()
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_PPTXNID, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_PPTXNID, args);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_PPTXNID,
 					new Object[] { shoppingOrder.getPpTxnId() }, shoppingOrder);

@@ -429,11 +429,14 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 		else {
 			if ((scProductScreenshotModelImpl.getColumnBitmask() &
 					FINDER_PATH_FETCH_BY_THUMBNAILID.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						Long.valueOf(scProductScreenshotModelImpl.getOriginalThumbnailId())
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_THUMBNAILID,
+					args);
 				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_THUMBNAILID,
-					new Object[] {
-						Long.valueOf(
-							scProductScreenshotModelImpl.getOriginalThumbnailId())
-					});
+					args);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_THUMBNAILID,
 					new Object[] {
@@ -443,11 +446,14 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 
 			if ((scProductScreenshotModelImpl.getColumnBitmask() &
 					FINDER_PATH_FETCH_BY_FULLIMAGEID.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						Long.valueOf(scProductScreenshotModelImpl.getOriginalFullImageId())
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_FULLIMAGEID,
+					args);
 				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_FULLIMAGEID,
-					new Object[] {
-						Long.valueOf(
-							scProductScreenshotModelImpl.getOriginalFullImageId())
-					});
+					args);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_FULLIMAGEID,
 					new Object[] {
@@ -457,13 +463,13 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 
 			if ((scProductScreenshotModelImpl.getColumnBitmask() &
 					FINDER_PATH_FETCH_BY_P_P.getColumnBitmask()) != 0) {
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_P_P,
-					new Object[] {
-						Long.valueOf(
-							scProductScreenshotModelImpl.getOriginalProductEntryId()),
-						Integer.valueOf(
-							scProductScreenshotModelImpl.getOriginalPriority())
-					});
+				Object[] args = new Object[] {
+						Long.valueOf(scProductScreenshotModelImpl.getOriginalProductEntryId()),
+						Integer.valueOf(scProductScreenshotModelImpl.getOriginalPriority())
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_P_P, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_P_P, args);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_P_P,
 					new Object[] {

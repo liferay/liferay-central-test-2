@@ -338,11 +338,14 @@ public class SocialEquityAssetEntryPersistenceImpl extends BasePersistenceImpl<S
 		else {
 			if ((socialEquityAssetEntryModelImpl.getColumnBitmask() &
 					FINDER_PATH_FETCH_BY_ASSETENTRYID.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						Long.valueOf(socialEquityAssetEntryModelImpl.getOriginalAssetEntryId())
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_ASSETENTRYID,
+					args);
 				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_ASSETENTRYID,
-					new Object[] {
-						Long.valueOf(
-							socialEquityAssetEntryModelImpl.getOriginalAssetEntryId())
-					});
+					args);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_ASSETENTRYID,
 					new Object[] {

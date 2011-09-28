@@ -394,12 +394,13 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl<LayoutSet>
 		else {
 			if ((layoutSetModelImpl.getColumnBitmask() &
 					FINDER_PATH_FETCH_BY_G_P.getColumnBitmask()) != 0) {
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_P,
-					new Object[] {
+				Object[] args = new Object[] {
 						Long.valueOf(layoutSetModelImpl.getOriginalGroupId()),
-						Boolean.valueOf(
-							layoutSetModelImpl.getOriginalPrivateLayout())
-					});
+						Boolean.valueOf(layoutSetModelImpl.getOriginalPrivateLayout())
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_P, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_P, args);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_P,
 					new Object[] {

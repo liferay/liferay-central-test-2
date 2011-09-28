@@ -405,11 +405,12 @@ public class DDMStorageLinkPersistenceImpl extends BasePersistenceImpl<DDMStorag
 		else {
 			if ((ddmStorageLinkModelImpl.getColumnBitmask() &
 					FINDER_PATH_FETCH_BY_CLASSPK.getColumnBitmask()) != 0) {
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_CLASSPK,
-					new Object[] {
-						Long.valueOf(
-							ddmStorageLinkModelImpl.getOriginalClassPK())
-					});
+				Object[] args = new Object[] {
+						Long.valueOf(ddmStorageLinkModelImpl.getOriginalClassPK())
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_CLASSPK, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_CLASSPK, args);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_CLASSPK,
 					new Object[] { Long.valueOf(ddmStorageLink.getClassPK()) },

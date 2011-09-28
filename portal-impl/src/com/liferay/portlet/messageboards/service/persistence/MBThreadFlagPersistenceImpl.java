@@ -395,12 +395,13 @@ public class MBThreadFlagPersistenceImpl extends BasePersistenceImpl<MBThreadFla
 		else {
 			if ((mbThreadFlagModelImpl.getColumnBitmask() &
 					FINDER_PATH_FETCH_BY_U_T.getColumnBitmask()) != 0) {
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_U_T,
-					new Object[] {
+				Object[] args = new Object[] {
 						Long.valueOf(mbThreadFlagModelImpl.getOriginalUserId()),
-						Long.valueOf(
-							mbThreadFlagModelImpl.getOriginalThreadId())
-					});
+						Long.valueOf(mbThreadFlagModelImpl.getOriginalThreadId())
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_U_T, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_U_T, args);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_T,
 					new Object[] {

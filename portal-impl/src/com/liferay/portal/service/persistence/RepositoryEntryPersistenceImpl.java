@@ -453,12 +453,13 @@ public class RepositoryEntryPersistenceImpl extends BasePersistenceImpl<Reposito
 		else {
 			if ((repositoryEntryModelImpl.getColumnBitmask() &
 					FINDER_PATH_FETCH_BY_UUID_G.getColumnBitmask()) != 0) {
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
-					new Object[] {
+				Object[] args = new Object[] {
 						repositoryEntryModelImpl.getOriginalUuid(),
-						Long.valueOf(
-							repositoryEntryModelImpl.getOriginalGroupId())
-					});
+						Long.valueOf(repositoryEntryModelImpl.getOriginalGroupId())
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_UUID_G, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G, args);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
 					new Object[] {
@@ -469,13 +470,14 @@ public class RepositoryEntryPersistenceImpl extends BasePersistenceImpl<Reposito
 
 			if ((repositoryEntryModelImpl.getColumnBitmask() &
 					FINDER_PATH_FETCH_BY_R_M.getColumnBitmask()) != 0) {
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_R_M,
-					new Object[] {
-						Long.valueOf(
-							repositoryEntryModelImpl.getOriginalRepositoryId()),
+				Object[] args = new Object[] {
+						Long.valueOf(repositoryEntryModelImpl.getOriginalRepositoryId()),
 						
-					repositoryEntryModelImpl.getOriginalMappedId()
-					});
+						repositoryEntryModelImpl.getOriginalMappedId()
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_R_M, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_R_M, args);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_R_M,
 					new Object[] {

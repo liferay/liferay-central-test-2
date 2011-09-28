@@ -743,23 +743,22 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 		else {
 			if ((resourcePermissionModelImpl.getColumnBitmask() &
 					FINDER_PATH_FETCH_BY_C_N_S_P_R_O_A.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						Long.valueOf(resourcePermissionModelImpl.getOriginalCompanyId()),
+						
+						resourcePermissionModelImpl.getOriginalName(),
+						Integer.valueOf(resourcePermissionModelImpl.getOriginalScope()),
+						
+						resourcePermissionModelImpl.getOriginalPrimKey(),
+						Long.valueOf(resourcePermissionModelImpl.getOriginalRoleId()),
+						Long.valueOf(resourcePermissionModelImpl.getOriginalOwnerId()),
+						Long.valueOf(resourcePermissionModelImpl.getOriginalActionIds())
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_C_N_S_P_R_O_A,
+					args);
 				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_N_S_P_R_O_A,
-					new Object[] {
-						Long.valueOf(
-							resourcePermissionModelImpl.getOriginalCompanyId()),
-						
-					resourcePermissionModelImpl.getOriginalName(),
-						Integer.valueOf(
-							resourcePermissionModelImpl.getOriginalScope()),
-						
-					resourcePermissionModelImpl.getOriginalPrimKey(),
-						Long.valueOf(
-							resourcePermissionModelImpl.getOriginalRoleId()),
-						Long.valueOf(
-							resourcePermissionModelImpl.getOriginalOwnerId()),
-						Long.valueOf(
-							resourcePermissionModelImpl.getOriginalActionIds())
-					});
+					args);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_N_S_P_R_O_A,
 					new Object[] {

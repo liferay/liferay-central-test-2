@@ -372,13 +372,13 @@ public class PasswordPolicyPersistenceImpl extends BasePersistenceImpl<PasswordP
 		else {
 			if ((passwordPolicyModelImpl.getColumnBitmask() &
 					FINDER_PATH_FETCH_BY_C_DP.getColumnBitmask()) != 0) {
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_DP,
-					new Object[] {
-						Long.valueOf(
-							passwordPolicyModelImpl.getOriginalCompanyId()),
-						Boolean.valueOf(
-							passwordPolicyModelImpl.getOriginalDefaultPolicy())
-					});
+				Object[] args = new Object[] {
+						Long.valueOf(passwordPolicyModelImpl.getOriginalCompanyId()),
+						Boolean.valueOf(passwordPolicyModelImpl.getOriginalDefaultPolicy())
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_C_DP, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_DP, args);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_DP,
 					new Object[] {
@@ -389,13 +389,14 @@ public class PasswordPolicyPersistenceImpl extends BasePersistenceImpl<PasswordP
 
 			if ((passwordPolicyModelImpl.getColumnBitmask() &
 					FINDER_PATH_FETCH_BY_C_N.getColumnBitmask()) != 0) {
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_N,
-					new Object[] {
-						Long.valueOf(
-							passwordPolicyModelImpl.getOriginalCompanyId()),
+				Object[] args = new Object[] {
+						Long.valueOf(passwordPolicyModelImpl.getOriginalCompanyId()),
 						
-					passwordPolicyModelImpl.getOriginalName()
-					});
+						passwordPolicyModelImpl.getOriginalName()
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_C_N, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_N, args);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_N,
 					new Object[] {

@@ -449,15 +449,15 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 		else {
 			if ((subscriptionModelImpl.getColumnBitmask() &
 					FINDER_PATH_FETCH_BY_C_U_C_C.getColumnBitmask()) != 0) {
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_U_C_C,
-					new Object[] {
-						Long.valueOf(
-							subscriptionModelImpl.getOriginalCompanyId()),
+				Object[] args = new Object[] {
+						Long.valueOf(subscriptionModelImpl.getOriginalCompanyId()),
 						Long.valueOf(subscriptionModelImpl.getOriginalUserId()),
-						Long.valueOf(
-							subscriptionModelImpl.getOriginalClassNameId()),
+						Long.valueOf(subscriptionModelImpl.getOriginalClassNameId()),
 						Long.valueOf(subscriptionModelImpl.getOriginalClassPK())
-					});
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_C_U_C_C, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_U_C_C, args);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_U_C_C,
 					new Object[] {

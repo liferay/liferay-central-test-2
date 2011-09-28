@@ -540,12 +540,14 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 		else {
 			if ((assetEntryModelImpl.getColumnBitmask() &
 					FINDER_PATH_FETCH_BY_G_CU.getColumnBitmask()) != 0) {
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_CU,
-					new Object[] {
+				Object[] args = new Object[] {
 						Long.valueOf(assetEntryModelImpl.getOriginalGroupId()),
 						
-					assetEntryModelImpl.getOriginalClassUuid()
-					});
+						assetEntryModelImpl.getOriginalClassUuid()
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_CU, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_CU, args);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_CU,
 					new Object[] {
@@ -557,12 +559,13 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 
 			if ((assetEntryModelImpl.getColumnBitmask() &
 					FINDER_PATH_FETCH_BY_C_C.getColumnBitmask()) != 0) {
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_C,
-					new Object[] {
-						Long.valueOf(
-							assetEntryModelImpl.getOriginalClassNameId()),
+				Object[] args = new Object[] {
+						Long.valueOf(assetEntryModelImpl.getOriginalClassNameId()),
 						Long.valueOf(assetEntryModelImpl.getOriginalClassPK())
-					});
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_C_C, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_C, args);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_C,
 					new Object[] {

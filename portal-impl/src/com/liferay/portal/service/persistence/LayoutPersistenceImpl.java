@@ -706,11 +706,13 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		else {
 			if ((layoutModelImpl.getColumnBitmask() &
 					FINDER_PATH_FETCH_BY_UUID_G.getColumnBitmask()) != 0) {
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
-					new Object[] {
+				Object[] args = new Object[] {
 						layoutModelImpl.getOriginalUuid(),
 						Long.valueOf(layoutModelImpl.getOriginalGroupId())
-					});
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_UUID_G, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G, args);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
 					new Object[] {
@@ -720,10 +722,14 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 
 			if ((layoutModelImpl.getColumnBitmask() &
 					FINDER_PATH_FETCH_BY_ICONIMAGEID.getColumnBitmask()) != 0) {
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_ICONIMAGEID,
-					new Object[] {
+				Object[] args = new Object[] {
 						Long.valueOf(layoutModelImpl.getOriginalIconImageId())
-					});
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_ICONIMAGEID,
+					args);
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_ICONIMAGEID,
+					args);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_ICONIMAGEID,
 					new Object[] { Long.valueOf(layout.getIconImageId()) },
@@ -732,13 +738,14 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 
 			if ((layoutModelImpl.getColumnBitmask() &
 					FINDER_PATH_FETCH_BY_G_P_L.getColumnBitmask()) != 0) {
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_P_L,
-					new Object[] {
+				Object[] args = new Object[] {
 						Long.valueOf(layoutModelImpl.getOriginalGroupId()),
-						Boolean.valueOf(
-							layoutModelImpl.getOriginalPrivateLayout()),
+						Boolean.valueOf(layoutModelImpl.getOriginalPrivateLayout()),
 						Long.valueOf(layoutModelImpl.getOriginalLayoutId())
-					});
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_P_L, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_P_L, args);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_P_L,
 					new Object[] {
@@ -750,14 +757,15 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 
 			if ((layoutModelImpl.getColumnBitmask() &
 					FINDER_PATH_FETCH_BY_G_P_F.getColumnBitmask()) != 0) {
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_P_F,
-					new Object[] {
+				Object[] args = new Object[] {
 						Long.valueOf(layoutModelImpl.getOriginalGroupId()),
-						Boolean.valueOf(
-							layoutModelImpl.getOriginalPrivateLayout()),
+						Boolean.valueOf(layoutModelImpl.getOriginalPrivateLayout()),
 						
-					layoutModelImpl.getOriginalFriendlyURL()
-					});
+						layoutModelImpl.getOriginalFriendlyURL()
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_P_F, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_P_F, args);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_P_F,
 					new Object[] {
@@ -770,14 +778,15 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 
 			if ((layoutModelImpl.getColumnBitmask() &
 					FINDER_PATH_FETCH_BY_G_P_TLU.getColumnBitmask()) != 0) {
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_P_TLU,
-					new Object[] {
+				Object[] args = new Object[] {
 						Long.valueOf(layoutModelImpl.getOriginalGroupId()),
-						Boolean.valueOf(
-							layoutModelImpl.getOriginalPrivateLayout()),
+						Boolean.valueOf(layoutModelImpl.getOriginalPrivateLayout()),
 						
-					layoutModelImpl.getOriginalTemplateLayoutUuid()
-					});
+						layoutModelImpl.getOriginalTemplateLayoutUuid()
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_P_TLU, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_P_TLU, args);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_P_TLU,
 					new Object[] {

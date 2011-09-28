@@ -496,21 +496,23 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 		else {
 			if ((journalArticleImageModelImpl.getColumnBitmask() &
 					FINDER_PATH_FETCH_BY_G_A_V_E_E_L.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						Long.valueOf(journalArticleImageModelImpl.getOriginalGroupId()),
+						
+						journalArticleImageModelImpl.getOriginalArticleId(),
+						Double.valueOf(journalArticleImageModelImpl.getOriginalVersion()),
+						
+						journalArticleImageModelImpl.getOriginalElInstanceId(),
+						
+						journalArticleImageModelImpl.getOriginalElName(),
+						
+						journalArticleImageModelImpl.getOriginalLanguageId()
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_A_V_E_E_L,
+					args);
 				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_A_V_E_E_L,
-					new Object[] {
-						Long.valueOf(
-							journalArticleImageModelImpl.getOriginalGroupId()),
-						
-					journalArticleImageModelImpl.getOriginalArticleId(),
-						Double.valueOf(
-							journalArticleImageModelImpl.getOriginalVersion()),
-						
-					journalArticleImageModelImpl.getOriginalElInstanceId(),
-						
-					journalArticleImageModelImpl.getOriginalElName(),
-						
-					journalArticleImageModelImpl.getOriginalLanguageId()
-					});
+					args);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_A_V_E_E_L,
 					new Object[] {

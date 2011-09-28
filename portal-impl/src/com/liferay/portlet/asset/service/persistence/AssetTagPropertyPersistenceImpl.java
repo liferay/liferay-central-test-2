@@ -443,13 +443,14 @@ public class AssetTagPropertyPersistenceImpl extends BasePersistenceImpl<AssetTa
 		else {
 			if ((assetTagPropertyModelImpl.getColumnBitmask() &
 					FINDER_PATH_FETCH_BY_T_K.getColumnBitmask()) != 0) {
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_T_K,
-					new Object[] {
-						Long.valueOf(
-							assetTagPropertyModelImpl.getOriginalTagId()),
+				Object[] args = new Object[] {
+						Long.valueOf(assetTagPropertyModelImpl.getOriginalTagId()),
 						
-					assetTagPropertyModelImpl.getOriginalKey()
-					});
+						assetTagPropertyModelImpl.getOriginalKey()
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_T_K, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_T_K, args);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_T_K,
 					new Object[] {

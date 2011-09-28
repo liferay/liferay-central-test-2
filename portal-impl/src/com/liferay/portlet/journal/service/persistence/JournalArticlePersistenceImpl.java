@@ -1189,12 +1189,13 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		else {
 			if ((journalArticleModelImpl.getColumnBitmask() &
 					FINDER_PATH_FETCH_BY_UUID_G.getColumnBitmask()) != 0) {
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
-					new Object[] {
+				Object[] args = new Object[] {
 						journalArticleModelImpl.getOriginalUuid(),
-						Long.valueOf(
-							journalArticleModelImpl.getOriginalGroupId())
-					});
+						Long.valueOf(journalArticleModelImpl.getOriginalGroupId())
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_UUID_G, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G, args);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
 					new Object[] {
@@ -1205,15 +1206,15 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 
 			if ((journalArticleModelImpl.getColumnBitmask() &
 					FINDER_PATH_FETCH_BY_G_C_S.getColumnBitmask()) != 0) {
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_C_S,
-					new Object[] {
-						Long.valueOf(
-							journalArticleModelImpl.getOriginalGroupId()),
-						Long.valueOf(
-							journalArticleModelImpl.getOriginalClassNameId()),
+				Object[] args = new Object[] {
+						Long.valueOf(journalArticleModelImpl.getOriginalGroupId()),
+						Long.valueOf(journalArticleModelImpl.getOriginalClassNameId()),
 						
-					journalArticleModelImpl.getOriginalStructureId()
-					});
+						journalArticleModelImpl.getOriginalStructureId()
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_C_S, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_C_S, args);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_C_S,
 					new Object[] {
@@ -1226,15 +1227,15 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 
 			if ((journalArticleModelImpl.getColumnBitmask() &
 					FINDER_PATH_FETCH_BY_G_A_V.getColumnBitmask()) != 0) {
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_A_V,
-					new Object[] {
-						Long.valueOf(
-							journalArticleModelImpl.getOriginalGroupId()),
+				Object[] args = new Object[] {
+						Long.valueOf(journalArticleModelImpl.getOriginalGroupId()),
 						
-					journalArticleModelImpl.getOriginalArticleId(),
-						Double.valueOf(
-							journalArticleModelImpl.getOriginalVersion())
-					});
+						journalArticleModelImpl.getOriginalArticleId(),
+						Double.valueOf(journalArticleModelImpl.getOriginalVersion())
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_A_V, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_A_V, args);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_A_V,
 					new Object[] {

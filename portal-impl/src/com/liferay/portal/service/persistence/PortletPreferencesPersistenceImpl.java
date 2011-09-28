@@ -465,17 +465,16 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 		else {
 			if ((portletPreferencesModelImpl.getColumnBitmask() &
 					FINDER_PATH_FETCH_BY_O_O_P_P.getColumnBitmask()) != 0) {
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_O_O_P_P,
-					new Object[] {
-						Long.valueOf(
-							portletPreferencesModelImpl.getOriginalOwnerId()),
-						Integer.valueOf(
-							portletPreferencesModelImpl.getOriginalOwnerType()),
-						Long.valueOf(
-							portletPreferencesModelImpl.getOriginalPlid()),
+				Object[] args = new Object[] {
+						Long.valueOf(portletPreferencesModelImpl.getOriginalOwnerId()),
+						Integer.valueOf(portletPreferencesModelImpl.getOriginalOwnerType()),
+						Long.valueOf(portletPreferencesModelImpl.getOriginalPlid()),
 						
-					portletPreferencesModelImpl.getOriginalPortletId()
-					});
+						portletPreferencesModelImpl.getOriginalPortletId()
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_O_O_P_P, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_O_O_P_P, args);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_O_O_P_P,
 					new Object[] {

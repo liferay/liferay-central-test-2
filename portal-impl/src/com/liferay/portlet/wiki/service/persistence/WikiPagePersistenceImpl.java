@@ -1037,11 +1037,13 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		else {
 			if ((wikiPageModelImpl.getColumnBitmask() &
 					FINDER_PATH_FETCH_BY_UUID_G.getColumnBitmask()) != 0) {
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
-					new Object[] {
+				Object[] args = new Object[] {
 						wikiPageModelImpl.getOriginalUuid(),
 						Long.valueOf(wikiPageModelImpl.getOriginalGroupId())
-					});
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_UUID_G, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G, args);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
 					new Object[] {
@@ -1051,13 +1053,14 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 
 			if ((wikiPageModelImpl.getColumnBitmask() &
 					FINDER_PATH_FETCH_BY_R_N_V.getColumnBitmask()) != 0) {
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_R_N_V,
-					new Object[] {
-						Long.valueOf(
-							wikiPageModelImpl.getOriginalResourcePrimKey()),
+				Object[] args = new Object[] {
+						Long.valueOf(wikiPageModelImpl.getOriginalResourcePrimKey()),
 						Long.valueOf(wikiPageModelImpl.getOriginalNodeId()),
 						Double.valueOf(wikiPageModelImpl.getOriginalVersion())
-					});
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_R_N_V, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_R_N_V, args);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_R_N_V,
 					new Object[] {
@@ -1069,13 +1072,15 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 
 			if ((wikiPageModelImpl.getColumnBitmask() &
 					FINDER_PATH_FETCH_BY_N_T_V.getColumnBitmask()) != 0) {
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_N_T_V,
-					new Object[] {
+				Object[] args = new Object[] {
 						Long.valueOf(wikiPageModelImpl.getOriginalNodeId()),
 						
-					wikiPageModelImpl.getOriginalTitle(),
+						wikiPageModelImpl.getOriginalTitle(),
 						Double.valueOf(wikiPageModelImpl.getOriginalVersion())
-					});
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_N_T_V, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_N_T_V, args);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_N_T_V,
 					new Object[] {

@@ -611,8 +611,6 @@ public class DLContentPersistenceImpl extends BasePersistenceImpl<DLContent>
 		EntityCacheUtil.putResult(DLContentModelImpl.ENTITY_CACHE_ENABLED,
 			DLContentImpl.class, dlContent.getPrimaryKey(), dlContent);
 
-		dlContent.resetOriginalValues();
-
 		if (isNew) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_R_P_V,
 				new Object[] {
@@ -639,16 +637,17 @@ public class DLContentPersistenceImpl extends BasePersistenceImpl<DLContent>
 		else {
 			if ((dlContentModelImpl.getColumnBitmask() &
 					FINDER_PATH_FETCH_BY_C_R_P_V.getColumnBitmask()) != 0) {
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_R_P_V,
-					new Object[] {
+				Object[] args = new Object[] {
 						Long.valueOf(dlContentModelImpl.getOriginalCompanyId()),
-						Long.valueOf(
-							dlContentModelImpl.getOriginalRepositoryId()),
+						Long.valueOf(dlContentModelImpl.getOriginalRepositoryId()),
 						
-					dlContentModelImpl.getOriginalPath(),
+						dlContentModelImpl.getOriginalPath(),
 						
-					dlContentModelImpl.getOriginalVersion()
-					});
+						dlContentModelImpl.getOriginalVersion()
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_C_R_P_V, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_R_P_V, args);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_R_P_V,
 					new Object[] {
@@ -663,18 +662,21 @@ public class DLContentPersistenceImpl extends BasePersistenceImpl<DLContent>
 
 			if ((dlContentModelImpl.getColumnBitmask() &
 					FINDER_PATH_FETCH_BY_C_P_R_P_V.getColumnBitmask()) != 0) {
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_P_R_P_V,
-					new Object[] {
+				Object[] args = new Object[] {
 						Long.valueOf(dlContentModelImpl.getOriginalCompanyId()),
 						
-					dlContentModelImpl.getOriginalPortletId(),
-						Long.valueOf(
-							dlContentModelImpl.getOriginalRepositoryId()),
+						dlContentModelImpl.getOriginalPortletId(),
+						Long.valueOf(dlContentModelImpl.getOriginalRepositoryId()),
 						
-					dlContentModelImpl.getOriginalPath(),
+						dlContentModelImpl.getOriginalPath(),
 						
-					dlContentModelImpl.getOriginalVersion()
-					});
+						dlContentModelImpl.getOriginalVersion()
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_C_P_R_P_V,
+					args);
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_P_R_P_V,
+					args);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_P_R_P_V,
 					new Object[] {
@@ -689,6 +691,8 @@ public class DLContentPersistenceImpl extends BasePersistenceImpl<DLContent>
 					}, dlContent);
 			}
 		}
+
+		dlContent.resetOriginalValues();
 
 		return dlContent;
 	}

@@ -520,12 +520,14 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		else {
 			if ((roleModelImpl.getColumnBitmask() &
 					FINDER_PATH_FETCH_BY_C_N.getColumnBitmask()) != 0) {
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_N,
-					new Object[] {
+				Object[] args = new Object[] {
 						Long.valueOf(roleModelImpl.getOriginalCompanyId()),
 						
-					roleModelImpl.getOriginalName()
-					});
+						roleModelImpl.getOriginalName()
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_C_N, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_N, args);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_N,
 					new Object[] {
@@ -537,12 +539,14 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 
 			if ((roleModelImpl.getColumnBitmask() &
 					FINDER_PATH_FETCH_BY_C_C_C.getColumnBitmask()) != 0) {
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_C_C,
-					new Object[] {
+				Object[] args = new Object[] {
 						Long.valueOf(roleModelImpl.getOriginalCompanyId()),
 						Long.valueOf(roleModelImpl.getOriginalClassNameId()),
 						Long.valueOf(roleModelImpl.getOriginalClassPK())
-					});
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_C_C_C, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_C_C, args);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_C_C,
 					new Object[] {

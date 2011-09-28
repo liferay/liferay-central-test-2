@@ -390,11 +390,12 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 		else {
 			if ((mbDiscussionModelImpl.getColumnBitmask() &
 					FINDER_PATH_FETCH_BY_THREADID.getColumnBitmask()) != 0) {
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_THREADID,
-					new Object[] {
-						Long.valueOf(
-							mbDiscussionModelImpl.getOriginalThreadId())
-					});
+				Object[] args = new Object[] {
+						Long.valueOf(mbDiscussionModelImpl.getOriginalThreadId())
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_THREADID, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_THREADID, args);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_THREADID,
 					new Object[] { Long.valueOf(mbDiscussion.getThreadId()) },
@@ -403,12 +404,13 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 
 			if ((mbDiscussionModelImpl.getColumnBitmask() &
 					FINDER_PATH_FETCH_BY_C_C.getColumnBitmask()) != 0) {
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_C,
-					new Object[] {
-						Long.valueOf(
-							mbDiscussionModelImpl.getOriginalClassNameId()),
+				Object[] args = new Object[] {
+						Long.valueOf(mbDiscussionModelImpl.getOriginalClassNameId()),
 						Long.valueOf(mbDiscussionModelImpl.getOriginalClassPK())
-					});
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_C_C, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_C, args);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_C,
 					new Object[] {

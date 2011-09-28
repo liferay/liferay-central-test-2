@@ -420,15 +420,15 @@ public class LayoutSetBranchPersistenceImpl extends BasePersistenceImpl<LayoutSe
 		else {
 			if ((layoutSetBranchModelImpl.getColumnBitmask() &
 					FINDER_PATH_FETCH_BY_G_P_N.getColumnBitmask()) != 0) {
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_P_N,
-					new Object[] {
-						Long.valueOf(
-							layoutSetBranchModelImpl.getOriginalGroupId()),
-						Boolean.valueOf(
-							layoutSetBranchModelImpl.getOriginalPrivateLayout()),
+				Object[] args = new Object[] {
+						Long.valueOf(layoutSetBranchModelImpl.getOriginalGroupId()),
+						Boolean.valueOf(layoutSetBranchModelImpl.getOriginalPrivateLayout()),
 						
-					layoutSetBranchModelImpl.getOriginalName()
-					});
+						layoutSetBranchModelImpl.getOriginalName()
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_P_N, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_P_N, args);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_P_N,
 					new Object[] {

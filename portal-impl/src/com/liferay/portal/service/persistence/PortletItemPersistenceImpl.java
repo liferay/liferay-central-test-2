@@ -427,16 +427,17 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 		else {
 			if ((portletItemModelImpl.getColumnBitmask() &
 					FINDER_PATH_FETCH_BY_G_N_P_C.getColumnBitmask()) != 0) {
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_N_P_C,
-					new Object[] {
+				Object[] args = new Object[] {
 						Long.valueOf(portletItemModelImpl.getOriginalGroupId()),
 						
-					portletItemModelImpl.getOriginalName(),
+						portletItemModelImpl.getOriginalName(),
 						
-					portletItemModelImpl.getOriginalPortletId(),
-						Long.valueOf(
-							portletItemModelImpl.getOriginalClassNameId())
-					});
+						portletItemModelImpl.getOriginalPortletId(),
+						Long.valueOf(portletItemModelImpl.getOriginalClassNameId())
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_N_P_C, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_N_P_C, args);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_N_P_C,
 					new Object[] {

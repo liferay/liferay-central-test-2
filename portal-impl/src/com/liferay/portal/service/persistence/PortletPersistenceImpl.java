@@ -364,12 +364,14 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 		else {
 			if ((portletModelImpl.getColumnBitmask() &
 					FINDER_PATH_FETCH_BY_C_P.getColumnBitmask()) != 0) {
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_P,
-					new Object[] {
+				Object[] args = new Object[] {
 						Long.valueOf(portletModelImpl.getOriginalCompanyId()),
 						
-					portletModelImpl.getOriginalPortletId()
-					});
+						portletModelImpl.getOriginalPortletId()
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_C_P, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_P, args);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_P,
 					new Object[] {

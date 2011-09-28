@@ -378,12 +378,14 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 		else {
 			if ((teamModelImpl.getColumnBitmask() &
 					FINDER_PATH_FETCH_BY_G_N.getColumnBitmask()) != 0) {
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_N,
-					new Object[] {
+				Object[] args = new Object[] {
 						Long.valueOf(teamModelImpl.getOriginalGroupId()),
 						
-					teamModelImpl.getOriginalName()
-					});
+						teamModelImpl.getOriginalName()
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_N, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_N, args);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_N,
 					new Object[] { Long.valueOf(team.getGroupId()), team.getName() },

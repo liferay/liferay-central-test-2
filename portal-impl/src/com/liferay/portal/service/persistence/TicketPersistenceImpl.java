@@ -313,8 +313,10 @@ public class TicketPersistenceImpl extends BasePersistenceImpl<Ticket>
 		else {
 			if ((ticketModelImpl.getColumnBitmask() &
 					FINDER_PATH_FETCH_BY_KEY.getColumnBitmask()) != 0) {
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_KEY,
-					new Object[] { ticketModelImpl.getOriginalKey() });
+				Object[] args = new Object[] { ticketModelImpl.getOriginalKey() };
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_KEY, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_KEY, args);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_KEY,
 					new Object[] { ticket.getKey() }, ticket);

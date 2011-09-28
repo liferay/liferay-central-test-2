@@ -386,12 +386,14 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 		else {
 			if ((lockModelImpl.getColumnBitmask() &
 					FINDER_PATH_FETCH_BY_C_K.getColumnBitmask()) != 0) {
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_K,
-					new Object[] {
+				Object[] args = new Object[] {
 						lockModelImpl.getOriginalClassName(),
 						
-					lockModelImpl.getOriginalKey()
-					});
+						lockModelImpl.getOriginalKey()
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_C_K, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_K, args);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_K,
 					new Object[] { lock.getClassName(), lock.getKey() }, lock);

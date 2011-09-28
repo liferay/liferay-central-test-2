@@ -441,19 +441,18 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 		else {
 			if ((workflowDefinitionLinkModelImpl.getColumnBitmask() &
 					FINDER_PATH_FETCH_BY_G_C_C_C_T.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						Long.valueOf(workflowDefinitionLinkModelImpl.getOriginalGroupId()),
+						Long.valueOf(workflowDefinitionLinkModelImpl.getOriginalCompanyId()),
+						Long.valueOf(workflowDefinitionLinkModelImpl.getOriginalClassNameId()),
+						Long.valueOf(workflowDefinitionLinkModelImpl.getOriginalClassPK()),
+						Long.valueOf(workflowDefinitionLinkModelImpl.getOriginalTypePK())
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_C_C_C_T,
+					args);
 				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_C_C_C_T,
-					new Object[] {
-						Long.valueOf(
-							workflowDefinitionLinkModelImpl.getOriginalGroupId()),
-						Long.valueOf(
-							workflowDefinitionLinkModelImpl.getOriginalCompanyId()),
-						Long.valueOf(
-							workflowDefinitionLinkModelImpl.getOriginalClassNameId()),
-						Long.valueOf(
-							workflowDefinitionLinkModelImpl.getOriginalClassPK()),
-						Long.valueOf(
-							workflowDefinitionLinkModelImpl.getOriginalTypePK())
-					});
+					args);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_C_C_C_T,
 					new Object[] {

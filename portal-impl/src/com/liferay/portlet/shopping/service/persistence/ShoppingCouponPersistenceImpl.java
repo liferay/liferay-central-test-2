@@ -358,8 +358,12 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
 		else {
 			if ((shoppingCouponModelImpl.getColumnBitmask() &
 					FINDER_PATH_FETCH_BY_CODE.getColumnBitmask()) != 0) {
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_CODE,
-					new Object[] { shoppingCouponModelImpl.getOriginalCode() });
+				Object[] args = new Object[] {
+						shoppingCouponModelImpl.getOriginalCode()
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_CODE, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_CODE, args);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_CODE,
 					new Object[] { shoppingCoupon.getCode() }, shoppingCoupon);

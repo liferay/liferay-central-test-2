@@ -388,13 +388,14 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl<WikiPag
 		else {
 			if ((wikiPageResourceModelImpl.getColumnBitmask() &
 					FINDER_PATH_FETCH_BY_N_T.getColumnBitmask()) != 0) {
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_N_T,
-					new Object[] {
-						Long.valueOf(
-							wikiPageResourceModelImpl.getOriginalNodeId()),
+				Object[] args = new Object[] {
+						Long.valueOf(wikiPageResourceModelImpl.getOriginalNodeId()),
 						
-					wikiPageResourceModelImpl.getOriginalTitle()
-					});
+						wikiPageResourceModelImpl.getOriginalTitle()
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_N_T, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_N_T, args);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_N_T,
 					new Object[] {

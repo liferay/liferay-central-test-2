@@ -418,13 +418,14 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl<RatingsEntr
 		else {
 			if ((ratingsEntryModelImpl.getColumnBitmask() &
 					FINDER_PATH_FETCH_BY_U_C_C.getColumnBitmask()) != 0) {
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_U_C_C,
-					new Object[] {
+				Object[] args = new Object[] {
 						Long.valueOf(ratingsEntryModelImpl.getOriginalUserId()),
-						Long.valueOf(
-							ratingsEntryModelImpl.getOriginalClassNameId()),
+						Long.valueOf(ratingsEntryModelImpl.getOriginalClassNameId()),
 						Long.valueOf(ratingsEntryModelImpl.getOriginalClassPK())
-					});
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_U_C_C, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_U_C_C, args);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_C_C,
 					new Object[] {

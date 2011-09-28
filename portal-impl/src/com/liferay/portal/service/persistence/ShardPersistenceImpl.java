@@ -346,8 +346,10 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 		else {
 			if ((shardModelImpl.getColumnBitmask() &
 					FINDER_PATH_FETCH_BY_NAME.getColumnBitmask()) != 0) {
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_NAME,
-					new Object[] { shardModelImpl.getOriginalName() });
+				Object[] args = new Object[] { shardModelImpl.getOriginalName() };
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_NAME, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_NAME, args);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_NAME,
 					new Object[] { shard.getName() }, shard);
@@ -355,11 +357,13 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 
 			if ((shardModelImpl.getColumnBitmask() &
 					FINDER_PATH_FETCH_BY_C_C.getColumnBitmask()) != 0) {
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_C,
-					new Object[] {
+				Object[] args = new Object[] {
 						Long.valueOf(shardModelImpl.getOriginalClassNameId()),
 						Long.valueOf(shardModelImpl.getOriginalClassPK())
-					});
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_C_C, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_C, args);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_C,
 					new Object[] {

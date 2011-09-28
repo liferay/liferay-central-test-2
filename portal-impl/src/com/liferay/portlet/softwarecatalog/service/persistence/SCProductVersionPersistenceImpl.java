@@ -383,10 +383,14 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl<SCProdu
 		else {
 			if ((scProductVersionModelImpl.getColumnBitmask() &
 					FINDER_PATH_FETCH_BY_DIRECTDOWNLOADURL.getColumnBitmask()) != 0) {
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_DIRECTDOWNLOADURL,
-					new Object[] {
+				Object[] args = new Object[] {
 						scProductVersionModelImpl.getOriginalDirectDownloadURL()
-					});
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_DIRECTDOWNLOADURL,
+					args);
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_DIRECTDOWNLOADURL,
+					args);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_DIRECTDOWNLOADURL,
 					new Object[] { scProductVersion.getDirectDownloadURL() },

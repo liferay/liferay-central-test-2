@@ -409,13 +409,14 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 		else {
 			if ((dlFileVersionModelImpl.getColumnBitmask() &
 					FINDER_PATH_FETCH_BY_F_V.getColumnBitmask()) != 0) {
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_F_V,
-					new Object[] {
-						Long.valueOf(
-							dlFileVersionModelImpl.getOriginalFileEntryId()),
+				Object[] args = new Object[] {
+						Long.valueOf(dlFileVersionModelImpl.getOriginalFileEntryId()),
 						
-					dlFileVersionModelImpl.getOriginalVersion()
-					});
+						dlFileVersionModelImpl.getOriginalVersion()
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_F_V, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_F_V, args);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_F_V,
 					new Object[] {

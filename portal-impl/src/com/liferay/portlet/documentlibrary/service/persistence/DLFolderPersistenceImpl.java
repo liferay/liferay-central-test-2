@@ -628,11 +628,13 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 		else {
 			if ((dlFolderModelImpl.getColumnBitmask() &
 					FINDER_PATH_FETCH_BY_UUID_G.getColumnBitmask()) != 0) {
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
-					new Object[] {
+				Object[] args = new Object[] {
 						dlFolderModelImpl.getOriginalUuid(),
 						Long.valueOf(dlFolderModelImpl.getOriginalGroupId())
-					});
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_UUID_G, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G, args);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
 					new Object[] {
@@ -642,11 +644,14 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 
 			if ((dlFolderModelImpl.getColumnBitmask() &
 					FINDER_PATH_FETCH_BY_REPOSITORYID.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						Long.valueOf(dlFolderModelImpl.getOriginalRepositoryId())
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_REPOSITORYID,
+					args);
 				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_REPOSITORYID,
-					new Object[] {
-						Long.valueOf(
-							dlFolderModelImpl.getOriginalRepositoryId())
-					});
+					args);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_REPOSITORYID,
 					new Object[] { Long.valueOf(dlFolder.getRepositoryId()) },
@@ -655,14 +660,15 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 
 			if ((dlFolderModelImpl.getColumnBitmask() &
 					FINDER_PATH_FETCH_BY_G_P_N.getColumnBitmask()) != 0) {
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_P_N,
-					new Object[] {
+				Object[] args = new Object[] {
 						Long.valueOf(dlFolderModelImpl.getOriginalGroupId()),
-						Long.valueOf(
-							dlFolderModelImpl.getOriginalParentFolderId()),
+						Long.valueOf(dlFolderModelImpl.getOriginalParentFolderId()),
 						
-					dlFolderModelImpl.getOriginalName()
-					});
+						dlFolderModelImpl.getOriginalName()
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_P_N, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_P_N, args);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_P_N,
 					new Object[] {

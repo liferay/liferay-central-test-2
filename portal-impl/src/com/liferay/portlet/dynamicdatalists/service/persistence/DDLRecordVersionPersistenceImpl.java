@@ -410,13 +410,14 @@ public class DDLRecordVersionPersistenceImpl extends BasePersistenceImpl<DDLReco
 		else {
 			if ((ddlRecordVersionModelImpl.getColumnBitmask() &
 					FINDER_PATH_FETCH_BY_R_V.getColumnBitmask()) != 0) {
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_R_V,
-					new Object[] {
-						Long.valueOf(
-							ddlRecordVersionModelImpl.getOriginalRecordId()),
+				Object[] args = new Object[] {
+						Long.valueOf(ddlRecordVersionModelImpl.getOriginalRecordId()),
 						
-					ddlRecordVersionModelImpl.getOriginalVersion()
-					});
+						ddlRecordVersionModelImpl.getOriginalVersion()
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_R_V, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_R_V, args);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_R_V,
 					new Object[] {

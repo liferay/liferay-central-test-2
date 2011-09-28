@@ -502,13 +502,13 @@ public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialE
 		else {
 			if ((socialEquityUserModelImpl.getColumnBitmask() &
 					FINDER_PATH_FETCH_BY_G_U.getColumnBitmask()) != 0) {
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_U,
-					new Object[] {
-						Long.valueOf(
-							socialEquityUserModelImpl.getOriginalGroupId()),
-						Long.valueOf(
-							socialEquityUserModelImpl.getOriginalUserId())
-					});
+				Object[] args = new Object[] {
+						Long.valueOf(socialEquityUserModelImpl.getOriginalGroupId()),
+						Long.valueOf(socialEquityUserModelImpl.getOriginalUserId())
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_U, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_U, args);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_U,
 					new Object[] {

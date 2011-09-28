@@ -450,13 +450,14 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 		else {
 			if ((assetCategoryPropertyModelImpl.getColumnBitmask() &
 					FINDER_PATH_FETCH_BY_CA_K.getColumnBitmask()) != 0) {
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_CA_K,
-					new Object[] {
-						Long.valueOf(
-							assetCategoryPropertyModelImpl.getOriginalCategoryId()),
+				Object[] args = new Object[] {
+						Long.valueOf(assetCategoryPropertyModelImpl.getOriginalCategoryId()),
 						
-					assetCategoryPropertyModelImpl.getOriginalKey()
-					});
+						assetCategoryPropertyModelImpl.getOriginalKey()
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_CA_K, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_CA_K, args);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_CA_K,
 					new Object[] {

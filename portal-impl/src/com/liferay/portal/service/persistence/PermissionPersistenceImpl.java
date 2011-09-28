@@ -400,12 +400,13 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 		else {
 			if ((permissionModelImpl.getColumnBitmask() &
 					FINDER_PATH_FETCH_BY_A_R.getColumnBitmask()) != 0) {
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_A_R,
-					new Object[] {
+				Object[] args = new Object[] {
 						permissionModelImpl.getOriginalActionId(),
-						Long.valueOf(
-							permissionModelImpl.getOriginalResourceId())
-					});
+						Long.valueOf(permissionModelImpl.getOriginalResourceId())
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_A_R, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_A_R, args);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_A_R,
 					new Object[] {

@@ -638,11 +638,14 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		else {
 			if ((socialActivityModelImpl.getColumnBitmask() &
 					FINDER_PATH_FETCH_BY_MIRRORACTIVITYID.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						Long.valueOf(socialActivityModelImpl.getOriginalMirrorActivityId())
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_MIRRORACTIVITYID,
+					args);
 				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_MIRRORACTIVITYID,
-					new Object[] {
-						Long.valueOf(
-							socialActivityModelImpl.getOriginalMirrorActivityId())
-					});
+					args);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_MIRRORACTIVITYID,
 					new Object[] {
@@ -652,23 +655,20 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 
 			if ((socialActivityModelImpl.getColumnBitmask() &
 					FINDER_PATH_FETCH_BY_G_U_CD_C_C_T_R.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						Long.valueOf(socialActivityModelImpl.getOriginalGroupId()),
+						Long.valueOf(socialActivityModelImpl.getOriginalUserId()),
+						Long.valueOf(socialActivityModelImpl.getOriginalCreateDate()),
+						Long.valueOf(socialActivityModelImpl.getOriginalClassNameId()),
+						Long.valueOf(socialActivityModelImpl.getOriginalClassPK()),
+						Integer.valueOf(socialActivityModelImpl.getOriginalType()),
+						Long.valueOf(socialActivityModelImpl.getOriginalReceiverUserId())
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_U_CD_C_C_T_R,
+					args);
 				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_U_CD_C_C_T_R,
-					new Object[] {
-						Long.valueOf(
-							socialActivityModelImpl.getOriginalGroupId()),
-						Long.valueOf(
-							socialActivityModelImpl.getOriginalUserId()),
-						Long.valueOf(
-							socialActivityModelImpl.getOriginalCreateDate()),
-						Long.valueOf(
-							socialActivityModelImpl.getOriginalClassNameId()),
-						Long.valueOf(
-							socialActivityModelImpl.getOriginalClassPK()),
-						Integer.valueOf(
-							socialActivityModelImpl.getOriginalType()),
-						Long.valueOf(
-							socialActivityModelImpl.getOriginalReceiverUserId())
-					});
+					args);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_U_CD_C_C_T_R,
 					new Object[] {

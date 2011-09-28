@@ -466,12 +466,14 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 		else {
 			if ((scProductEntryModelImpl.getColumnBitmask() &
 					FINDER_PATH_FETCH_BY_RG_RA.getColumnBitmask()) != 0) {
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_RG_RA,
-					new Object[] {
+				Object[] args = new Object[] {
 						scProductEntryModelImpl.getOriginalRepoGroupId(),
 						
-					scProductEntryModelImpl.getOriginalRepoArtifactId()
-					});
+						scProductEntryModelImpl.getOriginalRepoArtifactId()
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_RG_RA, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_RG_RA, args);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_RG_RA,
 					new Object[] {

@@ -404,15 +404,15 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 		else {
 			if ((resourceCodeModelImpl.getColumnBitmask() &
 					FINDER_PATH_FETCH_BY_C_N_S.getColumnBitmask()) != 0) {
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_N_S,
-					new Object[] {
-						Long.valueOf(
-							resourceCodeModelImpl.getOriginalCompanyId()),
+				Object[] args = new Object[] {
+						Long.valueOf(resourceCodeModelImpl.getOriginalCompanyId()),
 						
-					resourceCodeModelImpl.getOriginalName(),
-						Integer.valueOf(
-							resourceCodeModelImpl.getOriginalScope())
-					});
+						resourceCodeModelImpl.getOriginalName(),
+						Integer.valueOf(resourceCodeModelImpl.getOriginalScope())
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_C_N_S, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_N_S, args);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_N_S,
 					new Object[] {

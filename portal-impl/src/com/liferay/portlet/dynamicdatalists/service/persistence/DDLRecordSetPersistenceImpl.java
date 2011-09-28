@@ -446,11 +446,13 @@ public class DDLRecordSetPersistenceImpl extends BasePersistenceImpl<DDLRecordSe
 		else {
 			if ((ddlRecordSetModelImpl.getColumnBitmask() &
 					FINDER_PATH_FETCH_BY_UUID_G.getColumnBitmask()) != 0) {
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
-					new Object[] {
+				Object[] args = new Object[] {
 						ddlRecordSetModelImpl.getOriginalUuid(),
 						Long.valueOf(ddlRecordSetModelImpl.getOriginalGroupId())
-					});
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_UUID_G, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G, args);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
 					new Object[] {
@@ -461,12 +463,14 @@ public class DDLRecordSetPersistenceImpl extends BasePersistenceImpl<DDLRecordSe
 
 			if ((ddlRecordSetModelImpl.getColumnBitmask() &
 					FINDER_PATH_FETCH_BY_G_R.getColumnBitmask()) != 0) {
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_R,
-					new Object[] {
+				Object[] args = new Object[] {
 						Long.valueOf(ddlRecordSetModelImpl.getOriginalGroupId()),
 						
-					ddlRecordSetModelImpl.getOriginalRecordSetKey()
-					});
+						ddlRecordSetModelImpl.getOriginalRecordSetKey()
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_R, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_R, args);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_R,
 					new Object[] {

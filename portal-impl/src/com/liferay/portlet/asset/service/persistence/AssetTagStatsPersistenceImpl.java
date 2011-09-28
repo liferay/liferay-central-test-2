@@ -402,12 +402,13 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 		else {
 			if ((assetTagStatsModelImpl.getColumnBitmask() &
 					FINDER_PATH_FETCH_BY_T_C.getColumnBitmask()) != 0) {
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_T_C,
-					new Object[] {
+				Object[] args = new Object[] {
 						Long.valueOf(assetTagStatsModelImpl.getOriginalTagId()),
-						Long.valueOf(
-							assetTagStatsModelImpl.getOriginalClassNameId())
-					});
+						Long.valueOf(assetTagStatsModelImpl.getOriginalClassNameId())
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_T_C, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_T_C, args);
 
 				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_T_C,
 					new Object[] {
