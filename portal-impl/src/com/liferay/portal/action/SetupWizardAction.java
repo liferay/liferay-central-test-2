@@ -25,9 +25,6 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 
-import java.io.IOException;
-
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -37,7 +34,6 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 /**
- *
  * @author Manuel de la Peña
  * @author Brian Wing Shun Chan
  */
@@ -63,16 +59,17 @@ public class SetupWizardAction extends Action {
 		}
 
 		try {
-			processSetupWizardRequest(request);
+			if (cmd.equals(Constants.UPDATE)) {
+				SetupWizardUtil.processSetup(request);
+			}
 
 			response.sendRedirect(
-				themeDisplay.getPathMain() +  "/portal/setup_wizard");
+				themeDisplay.getPathMain() + "/portal/setup_wizard");
 
 			return null;
 		}
 		catch (Exception e) {
 			if (e instanceof PrincipalException) {
-
 				SessionErrors.add(request, e.getClass().getName());
 
 				return mapping.findForward("portal.setup_wizard");
@@ -83,23 +80,6 @@ public class SetupWizardAction extends Action {
 				return null;
 			}
 		}
-	}
-
-	protected boolean processSetupWizardRequest(HttpServletRequest request)
-		throws IOException, ServletException {
-
-		String cmd = ParamUtil.getString(request, Constants.CMD);
-
-		if (cmd.equals(Constants.UPDATE)) {
-			try {
-				SetupWizardUtil.processSetup(request);
-			}
-			catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-
-		return true;
 	}
 
 }

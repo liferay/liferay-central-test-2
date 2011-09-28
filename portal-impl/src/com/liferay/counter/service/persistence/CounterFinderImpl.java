@@ -88,7 +88,7 @@ public class CounterFinderImpl
 	}
 
 	public String getRegistryName() {
-		return CACHE_NAME;
+		return CounterFinderImpl.class.getName();
 	}
 
 	public long increment() throws SystemException {
@@ -406,9 +406,6 @@ public class CounterFinderImpl
 			closeSession(session);
 		}
 	}
-
-	public static final String CACHE_NAME =
-		"Counter Finder CounterRegister Cache";
 
 	private static final int _DEFAULT_CURRENT_ID = 0;
 

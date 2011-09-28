@@ -113,13 +113,7 @@ public class PortalInstances {
 	}
 
 	public static void reload(ServletContext servletContext) {
-		_instance._companyIds = new long[0];
-
-		String[] webIds = getWebIds();
-
-		for (int i = 0; i < webIds.length; i++) {
-			PortalInstances.initCompany(servletContext, webIds[i]);
-		}
+		_instance._reload(servletContext);
 	}
 
 	private PortalInstances() {
@@ -516,6 +510,16 @@ public class PortalInstances {
 
 	private boolean _isVirtualHostsIgnorePath(String path) {
 		return _virtualHostsIgnorePaths.contains(path);
+	}
+
+	private void _reload(ServletContext servletContext) {
+		_companyIds = new long[0];
+
+		String[] webIds = _getWebIds();
+
+		for (String webId : webIds) {
+			PortalInstances.initCompany(servletContext, webId);
+		}
 	}
 
 	private static final String _GET_COMPANY_IDS =

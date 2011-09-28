@@ -37,6 +37,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class ClassNameLocalServiceImpl
 	extends ClassNameLocalServiceBaseImpl implements CacheRegistryItem {
 
+	@Override
 	public void afterPropertiesSet() {
 		super.afterPropertiesSet();
 
@@ -120,14 +121,12 @@ public class ClassNameLocalServiceImpl
 	}
 
 	public String getRegistryName() {
-		return CACHE_NAME;
+		return ClassNameLocalServiceImpl.class.getName();
 	}
 
 	public void invalidate() {
 		_classNames.clear();
 	}
-
-	public static final String CACHE_NAME = "ClassName Cache";
 
 	private static ClassName _nullClassName = new ClassNameImpl();
 	private static Map<String, ClassName> _classNames =

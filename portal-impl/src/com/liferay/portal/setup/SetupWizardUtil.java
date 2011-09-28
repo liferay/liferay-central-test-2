@@ -14,7 +14,7 @@
 
 package com.liferay.portal.setup;
 
-import com.liferay.portal.dao.jdbc.util.DataSourceSwapUtil;
+import com.liferay.portal.dao.jdbc.util.DataSourceSwapper;
 import com.liferay.portal.events.StartupAction;
 import com.liferay.portal.kernel.cache.CacheRegistryUtil;
 import com.liferay.portal.kernel.cache.MultiVMPoolUtil;
@@ -48,6 +48,7 @@ import java.util.Properties;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 /**
  * @author Manuel de la Peña
@@ -56,22 +57,23 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class SetupWizardUtil {
 
-	private static Log _log = LogFactoryUtil.getLog(SetupWizardUtil.class);
-
-	public static final String _PROPERTIES_FILE_NAME =
-		"portal-setup-wizard.properties";
-
-	private final static String _PROPERTIES_PREFIX = "properties--";
-
 	public static boolean isSetupFinished(HttpServletRequest request) {
-		ServletContext servletContext =
-			request.getSession().getServletContext();
+		if (!PropsValues.SETUP_WIZARD_ENABLED) {
+			return true;
+		}
+
+		HttpSession session = request.getSession();
+
+		ServletContext servletContext = session.getServletContext();
 
 		Boolean setupWizardFinished = (Boolean)servletContext.getAttribute(
 			WebKeys.SETUP_WIZARD_FINISHED);
 
-		return setupWizardFinished == null ||
-			setupWizardFinished.booleanValue();
+		if (setupWizardFinished != null) {
+			return setupWizardFinished;
+		}
+
+		return true;
 	}
 
 	public static void processSetup(HttpServletRequest request)
@@ -86,17 +88,18 @@ public class SetupWizardUtil {
 		unicodeProperties.put(
 			PropsKeys.SETUP_WIZARD_ENABLED, String.valueOf(false));
 
+		HttpSession session = request.getSession();
+
+		session.setAttribute(
+			WebKeys.SETUP_WIZARD_PROPERTIES, unicodeProperties);
+
 		boolean updatedPropertiesFile = _writePropertiesFile(unicodeProperties);
 
-		_processContextReload(request, unicodeProperties);
+		session.setAttribute(
+			WebKeys.SETUP_WIZARD_PROPERTIES_UPDATED, updatedPropertiesFile);
+
+		_reloadServletContext(request, unicodeProperties);
 		_resetAdminPassword(request);
-
-		request.getSession().setAttribute(
-			WebKeys.SETUP_WIZARD_PROPERTIES_UPDATED,
-			String.valueOf(updatedPropertiesFile));
-
-		request.getSession().setAttribute(
-			WebKeys.SETUP_WIZARD_PROPERTIES, unicodeProperties);
 	}
 
 	private static String _getParameter(
@@ -107,27 +110,9 @@ public class SetupWizardUtil {
 		return ParamUtil.getString(request, name);
 	}
 
-	private static void _resetAdminPassword(HttpServletRequest request) {
-		String defaultAdminEmailAddress = _getParameter(
-			request, PropsKeys.ADMIN_EMAIL_FROM_ADDRESS, "test@liferay.com");
-
-		try {
-			User adminUser = UserLocalServiceUtil.getUserByEmailAddress(
-				PortalUtil.getDefaultCompanyId(), defaultAdminEmailAddress);
-
-			UserLocalServiceUtil.updatePasswordReset(
-				adminUser.getUserId(), true);
-
-			request.getSession().setAttribute(
-				WebKeys.SETUP_WIZARD_PASSWORD_UPDATED,
-				String.valueOf(true));
-		}
-		catch (Exception e) {
-		}
-	}
-
 	private static void _processAdminProperties(
-		HttpServletRequest request, UnicodeProperties properties) {
+			HttpServletRequest request, UnicodeProperties unicodeProperties)
+		throws Exception {
 
 		String webId = _getParameter(
 			request, PropsKeys.COMPANY_DEFAULT_WEB_ID, "liferay.com");
@@ -138,22 +123,26 @@ public class SetupWizardUtil {
 
 		String firstName = _getParameter(
 			request, PropsKeys.DEFAULT_ADMIN_FIRST_NAME, "Test");
+
+		PropsValues.DEFAULT_ADMIN_FIRST_NAME = firstName;
+
 		String lastName = _getParameter(
 			request, PropsKeys.DEFAULT_ADMIN_LAST_NAME, "Test");
+
+		PropsValues.DEFAULT_ADMIN_LAST_NAME = lastName;
 
 		String adminEmailFromName = fullNameGenerator.getFullName(
 			firstName, null, lastName);
 
-		properties.put(PropsKeys.ADMIN_EMAIL_FROM_NAME, adminEmailFromName);
-
-		PropsValues.DEFAULT_ADMIN_FIRST_NAME = firstName;
-		PropsValues.DEFAULT_ADMIN_LAST_NAME = lastName;
 		PropsValues.ADMIN_EMAIL_FROM_NAME = adminEmailFromName;
+
+		unicodeProperties.put(
+			PropsKeys.ADMIN_EMAIL_FROM_NAME, adminEmailFromName);
 
 		String defaultAdminEmailAddress = _getParameter(
 			request, PropsKeys.ADMIN_EMAIL_FROM_ADDRESS, "test@liferay.com");
 
-		properties.put(
+		unicodeProperties.put(
 			PropsKeys.DEFAULT_ADMIN_EMAIL_ADDRESS, defaultAdminEmailAddress);
 
 		PropsValues.DEFAULT_ADMIN_EMAIL_ADDRESS = defaultAdminEmailAddress;
@@ -161,54 +150,17 @@ public class SetupWizardUtil {
 		ScreenNameGenerator screenNameGenerator =
 			ScreenNameGeneratorFactory.getInstance();
 
-		String defaultAdminScreenName = "test";
-
-		try {
-			defaultAdminScreenName = screenNameGenerator.generate(
-				0, 0, defaultAdminEmailAddress);
-		}
-		catch (Exception e) {
-		}
-
-		properties.put(
-			PropsKeys.DEFAULT_ADMIN_SCREEN_NAME, defaultAdminScreenName);
+		String defaultAdminScreenName = screenNameGenerator.generate(
+			0, 0, "test");
 
 		PropsValues.DEFAULT_ADMIN_SCREEN_NAME = defaultAdminScreenName;
-	}
 
-	private static void _processContextReload(
-			HttpServletRequest request, UnicodeProperties unicodeProperties)
-		throws Exception {
-
-		// Swap datasource
-
-		Properties jdbcProperties = new Properties();
-
-		jdbcProperties.putAll(unicodeProperties);
-		jdbcProperties = PropertiesUtil.getProperties(
-			jdbcProperties,"jdbc.default.",true);
-
-		DataSourceSwapUtil.swapCounterDataSource(jdbcProperties);
-		DataSourceSwapUtil.swapPortalDataSource(jdbcProperties);
-
-		// Clear caches
-
-		CacheRegistryUtil.clear();
-		MultiVMPoolUtil.clear();
-		WebCachePoolUtil.clear();
-		CentralizedThreadLocal.clearShortLivedThreadLocals();
-
-		// Rebuild database and loading data
-
-		QuartzLocalServiceUtil.checkQuartzTables();
-
-		new StartupAction().run(null);
-
-		PortalInstances.reload(request.getSession().getServletContext());
+		unicodeProperties.put(
+			PropsKeys.DEFAULT_ADMIN_SCREEN_NAME, defaultAdminScreenName);
 	}
 
 	private static void _processDatabaseProperties(
-			HttpServletRequest request, UnicodeProperties properties)
+			HttpServletRequest request, UnicodeProperties unicodeProperties)
 		throws Exception {
 
 		boolean defaultDatabase = ParamUtil.getBoolean(
@@ -280,10 +232,62 @@ public class SetupWizardUtil {
 				"jdbc:jtds:sybase://localhost:5000/" + databaseName;
 		}
 
-		properties.put(
+		unicodeProperties.put(
 			PropsKeys.JDBC_DEFAULT_DRIVER_CLASS_NAME,
 			jdbcDefaultDriverClassName);
-		properties.put(PropsKeys.JDBC_DEFAULT_URL, jdbcDefaultURL);
+		unicodeProperties.put(PropsKeys.JDBC_DEFAULT_URL, jdbcDefaultURL);
+	}
+
+	private static void _reloadServletContext(
+			HttpServletRequest request, UnicodeProperties unicodeProperties)
+		throws Exception {
+
+		// Data sources
+
+		Properties jdbcProperties = new Properties();
+
+		jdbcProperties.putAll(unicodeProperties);
+
+		jdbcProperties = PropertiesUtil.getProperties(
+			jdbcProperties,"jdbc.default.",true);
+
+		DataSourceSwapper.swapCounterDataSource(jdbcProperties);
+		DataSourceSwapper.swapLiferayDataSource(jdbcProperties);
+
+		// Caches
+
+		CacheRegistryUtil.clear();
+		MultiVMPoolUtil.clear();
+		WebCachePoolUtil.clear();
+		CentralizedThreadLocal.clearShortLivedThreadLocals();
+
+		// Startup
+
+		QuartzLocalServiceUtil.checkQuartzTables();
+
+		StartupAction startupAction = new StartupAction();
+
+		startupAction.run(null);
+
+		HttpSession session = request.getSession();
+
+		PortalInstances.reload(session.getServletContext());
+	}
+
+	private static void _resetAdminPassword(HttpServletRequest request)
+		throws Exception {
+
+		String defaultAdminEmailAddress = _getParameter(
+			request, PropsKeys.ADMIN_EMAIL_FROM_ADDRESS, "test@liferay.com");
+
+		User user = UserLocalServiceUtil.getUserByEmailAddress(
+			PortalUtil.getDefaultCompanyId(), defaultAdminEmailAddress);
+
+		UserLocalServiceUtil.updatePasswordReset(user.getUserId(), true);
+
+		HttpSession session = request.getSession();
+
+		session.setAttribute(WebKeys.SETUP_WIZARD_PASSWORD_UPDATED, true);
 	}
 
 	private static boolean _writePropertiesFile(
@@ -302,5 +306,12 @@ public class SetupWizardUtil {
 			return false;
 		}
 	}
+
+	private static final String _PROPERTIES_FILE_NAME =
+		"portal-setup-wizard.properties";
+
+	private final static String _PROPERTIES_PREFIX = "properties--";
+
+	private static Log _log = LogFactoryUtil.getLog(SetupWizardUtil.class);
 
 }

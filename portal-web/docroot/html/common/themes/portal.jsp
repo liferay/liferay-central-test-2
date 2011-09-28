@@ -20,8 +20,6 @@
 
 <%
 StringBundler sb = (StringBundler)request.getAttribute(WebKeys.LAYOUT_CONTENT);
-
-boolean isSetupWizard = PropsValues.SETUP_WIZARD_ENABLED && !SetupWizardUtil.isSetupFinished(request);
 %>
 
 <c:choose>
@@ -32,7 +30,7 @@ boolean isSetupWizard = PropsValues.SETUP_WIZARD_ENABLED && !SetupWizardUtil.isS
 		%>
 
 	</c:when>
-	<c:when test="<%= themeDisplay.isStatePopUp() || themeDisplay.isWidget() || isSetupWizard %>">
+	<c:when test="<%= themeDisplay.isStatePopUp() || themeDisplay.isWidget() || !SetupWizardUtil.isSetupFinished(request) %>">
 		<liferay-theme:include page="portal_pop_up.jsp" />
 	</c:when>
 	<c:otherwise>

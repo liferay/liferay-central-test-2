@@ -28,26 +28,26 @@ import javax.sql.DataSource;
  */
 public class DataSourceWrapper implements DataSource {
 
-	public DataSourceWrapper(DataSource wrappedDataSource) {
-		_wrappedDataSource = wrappedDataSource;
+	public DataSourceWrapper(DataSource dataSource) {
+		_dataSource = dataSource;
 	}
 
 	public Connection getConnection() throws SQLException {
-		return _wrappedDataSource.getConnection();
+		return _dataSource.getConnection();
 	}
 
 	public Connection getConnection(String username, String password)
 		throws SQLException {
 
-		return _wrappedDataSource.getConnection(username, password);
-	}
-
-	public PrintWriter getLogWriter() throws SQLException {
-		return _wrappedDataSource.getLogWriter();
+		return _dataSource.getConnection(username, password);
 	}
 
 	public int getLoginTimeout() throws SQLException {
-		return _wrappedDataSource.getLoginTimeout();
+		return _dataSource.getLoginTimeout();
+	}
+
+	public PrintWriter getLogWriter() throws SQLException {
+		return _dataSource.getLogWriter();
 	}
 
 	public Logger getParentLogger() {
@@ -58,7 +58,7 @@ public class DataSourceWrapper implements DataSource {
 	}
 
 	public DataSource getWrappedDataSource() {
-		return _wrappedDataSource;
+		return _dataSource;
 	}
 
 	public boolean isWrapperFor(Class<?> clazz) {
@@ -68,16 +68,16 @@ public class DataSourceWrapper implements DataSource {
 		return DataSource.class.equals(clazz);
 	}
 
-	public void setLogWriter(PrintWriter out) throws SQLException {
-		_wrappedDataSource.setLogWriter(out);
+	public void setLoginTimeout(int seconds) throws SQLException {
+		_dataSource.setLoginTimeout(seconds);
 	}
 
-	public void setLoginTimeout(int seconds) throws SQLException {
-		_wrappedDataSource.setLoginTimeout(seconds);
+	public void setLogWriter(PrintWriter out) throws SQLException {
+		_dataSource.setLogWriter(out);
 	}
 
 	public void setWrappedDataSource(DataSource wrappedDataSource) {
-		_wrappedDataSource = wrappedDataSource;
+		_dataSource = wrappedDataSource;
 	}
 
 	public <T> T unwrap(Class<T> clazz) throws SQLException {
@@ -91,6 +91,6 @@ public class DataSourceWrapper implements DataSource {
 		return (T)this;
 	}
 
-	private volatile DataSource _wrappedDataSource;
+	private volatile DataSource _dataSource;
 
 }
