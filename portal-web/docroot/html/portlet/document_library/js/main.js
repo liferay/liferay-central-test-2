@@ -585,7 +585,7 @@ AUI().add(
 
 							var dd = instance._ddHandler.dd;
 
-							var moveText = Liferay.Language.get('x-items-ready-to-be-moved-to-x');
+							var moveText = Liferay.Language.get('x-items-are-ready-to-be-moved-to-x');
 
 							var itemTitle = Lang.trim(dropTarget.one('.entry-title').text());
 
@@ -604,7 +604,7 @@ AUI().add(
 
 						var proxyNode = event.target.get(STR_DRAG_NODE);
 
-						var moveText = Liferay.Language.get('x-items-ready-to-be-moved');
+						var moveText = Liferay.Language.get('x-items-are-ready-to-be-moved');
 
 						var selectedItemsCount = instance._ddHandler.dd.get(STR_DATA).selectedItemsCount;
 
@@ -637,7 +637,7 @@ AUI().add(
 
 						var selectedItemsCount = selectedItems.size();
 
-						var moveText = Liferay.Language.get('x-items-ready-to-be-moved');
+						var moveText = Liferay.Language.get('x-items-are-ready-to-be-moved');
 
 						proxyNode.html(Lang.sub(moveText, [selectedItemsCount]));
 
