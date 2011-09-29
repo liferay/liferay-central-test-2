@@ -620,7 +620,7 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread>
 
 		mbThreadModelImpl._setOriginalStatus = false;
 
-		_columnBitmask = 0;
+		mbThreadModelImpl._columnBitmask = 0;
 	}
 
 	@Override

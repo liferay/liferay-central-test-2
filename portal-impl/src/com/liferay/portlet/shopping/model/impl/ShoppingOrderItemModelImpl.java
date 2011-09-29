@@ -342,7 +342,7 @@ public class ShoppingOrderItemModelImpl extends BaseModelImpl<ShoppingOrderItem>
 
 		shoppingOrderItemModelImpl._setOriginalOrderId = false;
 
-		_columnBitmask = 0;
+		shoppingOrderItemModelImpl._columnBitmask = 0;
 	}
 
 	@Override

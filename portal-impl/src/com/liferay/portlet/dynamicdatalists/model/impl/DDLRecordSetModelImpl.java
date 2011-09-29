@@ -634,7 +634,7 @@ public class DDLRecordSetModelImpl extends BaseModelImpl<DDLRecordSet>
 
 		ddlRecordSetModelImpl._originalRecordSetKey = ddlRecordSetModelImpl._recordSetKey;
 
-		_columnBitmask = 0;
+		ddlRecordSetModelImpl._columnBitmask = 0;
 	}
 
 	@Override

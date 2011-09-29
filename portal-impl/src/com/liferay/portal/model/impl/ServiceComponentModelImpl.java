@@ -300,7 +300,7 @@ public class ServiceComponentModelImpl extends BaseModelImpl<ServiceComponent>
 
 		serviceComponentModelImpl._setOriginalBuildNumber = false;
 
-		_columnBitmask = 0;
+		serviceComponentModelImpl._columnBitmask = 0;
 	}
 
 	@Override

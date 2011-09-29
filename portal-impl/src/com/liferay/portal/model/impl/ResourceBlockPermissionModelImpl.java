@@ -264,7 +264,7 @@ public class ResourceBlockPermissionModelImpl extends BaseModelImpl<ResourceBloc
 
 		resourceBlockPermissionModelImpl._setOriginalRoleId = false;
 
-		_columnBitmask = 0;
+		resourceBlockPermissionModelImpl._columnBitmask = 0;
 	}
 
 	@Override

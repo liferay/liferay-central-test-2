@@ -335,7 +335,7 @@ public class RegionModelImpl extends BaseModelImpl<Region>
 
 		regionModelImpl._setOriginalActive = false;
 
-		_columnBitmask = 0;
+		regionModelImpl._columnBitmask = 0;
 	}
 
 	@Override

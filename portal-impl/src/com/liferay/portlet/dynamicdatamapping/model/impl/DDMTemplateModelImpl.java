@@ -674,7 +674,7 @@ public class DDMTemplateModelImpl extends BaseModelImpl<DDMTemplate>
 
 		ddmTemplateModelImpl._originalLanguage = ddmTemplateModelImpl._language;
 
-		_columnBitmask = 0;
+		ddmTemplateModelImpl._columnBitmask = 0;
 	}
 
 	@Override

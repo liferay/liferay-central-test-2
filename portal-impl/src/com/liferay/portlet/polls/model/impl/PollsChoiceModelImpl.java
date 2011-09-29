@@ -399,7 +399,7 @@ public class PollsChoiceModelImpl extends BaseModelImpl<PollsChoice>
 
 		pollsChoiceModelImpl._originalName = pollsChoiceModelImpl._name;
 
-		_columnBitmask = 0;
+		pollsChoiceModelImpl._columnBitmask = 0;
 	}
 
 	@Override

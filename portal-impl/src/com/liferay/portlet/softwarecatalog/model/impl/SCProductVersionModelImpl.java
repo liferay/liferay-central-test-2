@@ -460,7 +460,7 @@ public class SCProductVersionModelImpl extends BaseModelImpl<SCProductVersion>
 
 		scProductVersionModelImpl._originalDirectDownloadURL = scProductVersionModelImpl._directDownloadURL;
 
-		_columnBitmask = 0;
+		scProductVersionModelImpl._columnBitmask = 0;
 	}
 
 	@Override

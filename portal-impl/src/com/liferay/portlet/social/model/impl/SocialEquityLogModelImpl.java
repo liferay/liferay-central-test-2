@@ -447,7 +447,7 @@ public class SocialEquityLogModelImpl extends BaseModelImpl<SocialEquityLog>
 
 		socialEquityLogModelImpl._originalExtraData = socialEquityLogModelImpl._extraData;
 
-		_columnBitmask = 0;
+		socialEquityLogModelImpl._columnBitmask = 0;
 	}
 
 	@Override

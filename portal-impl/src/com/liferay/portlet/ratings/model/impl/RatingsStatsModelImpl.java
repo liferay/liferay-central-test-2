@@ -295,7 +295,7 @@ public class RatingsStatsModelImpl extends BaseModelImpl<RatingsStats>
 
 		ratingsStatsModelImpl._setOriginalClassPK = false;
 
-		_columnBitmask = 0;
+		ratingsStatsModelImpl._columnBitmask = 0;
 	}
 
 	@Override

@@ -283,7 +283,7 @@ public class WikiPageResourceModelImpl extends BaseModelImpl<WikiPageResource>
 
 		wikiPageResourceModelImpl._originalTitle = wikiPageResourceModelImpl._title;
 
-		_columnBitmask = 0;
+		wikiPageResourceModelImpl._columnBitmask = 0;
 	}
 
 	@Override

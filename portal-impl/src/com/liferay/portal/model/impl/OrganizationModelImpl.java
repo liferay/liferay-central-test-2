@@ -453,7 +453,7 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization>
 
 		organizationModelImpl._originalName = organizationModelImpl._name;
 
-		_columnBitmask = 0;
+		organizationModelImpl._columnBitmask = 0;
 	}
 
 	@Override

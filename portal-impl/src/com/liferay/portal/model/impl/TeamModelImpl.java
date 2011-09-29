@@ -406,7 +406,7 @@ public class TeamModelImpl extends BaseModelImpl<Team> implements TeamModel {
 
 		teamModelImpl._originalName = teamModelImpl._name;
 
-		_columnBitmask = 0;
+		teamModelImpl._columnBitmask = 0;
 	}
 
 	@Override

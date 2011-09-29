@@ -275,7 +275,7 @@ public class ExpandoTableModelImpl extends BaseModelImpl<ExpandoTable>
 
 		expandoTableModelImpl._originalName = expandoTableModelImpl._name;
 
-		_columnBitmask = 0;
+		expandoTableModelImpl._columnBitmask = 0;
 	}
 
 	@Override

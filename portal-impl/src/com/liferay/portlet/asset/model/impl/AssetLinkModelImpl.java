@@ -358,7 +358,7 @@ public class AssetLinkModelImpl extends BaseModelImpl<AssetLink>
 
 		assetLinkModelImpl._setOriginalType = false;
 
-		_columnBitmask = 0;
+		assetLinkModelImpl._columnBitmask = 0;
 	}
 
 	@Override

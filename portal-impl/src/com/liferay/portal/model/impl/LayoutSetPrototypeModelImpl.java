@@ -463,7 +463,7 @@ public class LayoutSetPrototypeModelImpl extends BaseModelImpl<LayoutSetPrototyp
 
 		layoutSetPrototypeModelImpl._setOriginalActive = false;
 
-		_columnBitmask = 0;
+		layoutSetPrototypeModelImpl._columnBitmask = 0;
 	}
 
 	@Override

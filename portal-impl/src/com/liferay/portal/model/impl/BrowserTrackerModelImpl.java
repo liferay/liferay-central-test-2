@@ -247,7 +247,7 @@ public class BrowserTrackerModelImpl extends BaseModelImpl<BrowserTracker>
 
 		browserTrackerModelImpl._setOriginalUserId = false;
 
-		_columnBitmask = 0;
+		browserTrackerModelImpl._columnBitmask = 0;
 	}
 
 	@Override

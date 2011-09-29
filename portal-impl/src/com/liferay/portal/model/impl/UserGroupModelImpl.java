@@ -408,7 +408,7 @@ public class UserGroupModelImpl extends BaseModelImpl<UserGroup>
 
 		userGroupModelImpl._originalName = userGroupModelImpl._name;
 
-		_columnBitmask = 0;
+		userGroupModelImpl._columnBitmask = 0;
 	}
 
 	@Override

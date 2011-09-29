@@ -1150,7 +1150,7 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 
 		journalArticleModelImpl._setOriginalStatus = false;
 
-		_columnBitmask = 0;
+		journalArticleModelImpl._columnBitmask = 0;
 	}
 
 	@Override

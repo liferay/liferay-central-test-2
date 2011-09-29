@@ -285,7 +285,7 @@ public class AssetTagStatsModelImpl extends BaseModelImpl<AssetTagStats>
 
 		assetTagStatsModelImpl._setOriginalClassNameId = false;
 
-		_columnBitmask = 0;
+		assetTagStatsModelImpl._columnBitmask = 0;
 	}
 
 	@Override

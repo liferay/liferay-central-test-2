@@ -695,7 +695,7 @@ public class DDMStructureModelImpl extends BaseModelImpl<DDMStructure>
 
 		ddmStructureModelImpl._originalDescription = ddmStructureModelImpl._description;
 
-		_columnBitmask = 0;
+		ddmStructureModelImpl._columnBitmask = 0;
 	}
 
 	@Override

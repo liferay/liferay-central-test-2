@@ -292,7 +292,7 @@ public class MBDiscussionModelImpl extends BaseModelImpl<MBDiscussion>
 
 		mbDiscussionModelImpl._setOriginalThreadId = false;
 
-		_columnBitmask = 0;
+		mbDiscussionModelImpl._columnBitmask = 0;
 	}
 
 	@Override

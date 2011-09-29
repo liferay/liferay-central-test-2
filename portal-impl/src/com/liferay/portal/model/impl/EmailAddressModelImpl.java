@@ -478,7 +478,7 @@ public class EmailAddressModelImpl extends BaseModelImpl<EmailAddress>
 
 		emailAddressModelImpl._setOriginalPrimary = false;
 
-		_columnBitmask = 0;
+		emailAddressModelImpl._columnBitmask = 0;
 	}
 
 	@Override

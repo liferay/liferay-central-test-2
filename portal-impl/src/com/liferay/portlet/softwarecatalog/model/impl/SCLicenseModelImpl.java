@@ -368,7 +368,7 @@ public class SCLicenseModelImpl extends BaseModelImpl<SCLicense>
 
 		scLicenseModelImpl._setOriginalRecommended = false;
 
-		_columnBitmask = 0;
+		scLicenseModelImpl._columnBitmask = 0;
 	}
 
 	@Override

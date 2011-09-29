@@ -277,7 +277,7 @@ public class MBThreadFlagModelImpl extends BaseModelImpl<MBThreadFlag>
 
 		mbThreadFlagModelImpl._setOriginalThreadId = false;
 
-		_columnBitmask = 0;
+		mbThreadFlagModelImpl._columnBitmask = 0;
 	}
 
 	@Override

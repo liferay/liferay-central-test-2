@@ -289,7 +289,7 @@ public class ShoppingItemFieldModelImpl extends BaseModelImpl<ShoppingItemField>
 
 		shoppingItemFieldModelImpl._setOriginalItemId = false;
 
-		_columnBitmask = 0;
+		shoppingItemFieldModelImpl._columnBitmask = 0;
 	}
 
 	@Override

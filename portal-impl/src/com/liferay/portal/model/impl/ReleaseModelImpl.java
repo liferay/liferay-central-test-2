@@ -300,7 +300,7 @@ public class ReleaseModelImpl extends BaseModelImpl<Release>
 
 		releaseModelImpl._originalServletContextName = releaseModelImpl._servletContextName;
 
-		_columnBitmask = 0;
+		releaseModelImpl._columnBitmask = 0;
 	}
 
 	@Override

@@ -369,7 +369,7 @@ public class ResourceBlockModelImpl extends BaseModelImpl<ResourceBlock>
 
 		resourceBlockModelImpl._originalPermissionsHash = resourceBlockModelImpl._permissionsHash;
 
-		_columnBitmask = 0;
+		resourceBlockModelImpl._columnBitmask = 0;
 	}
 
 	@Override

@@ -646,7 +646,7 @@ public class JournalStructureModelImpl extends BaseModelImpl<JournalStructure>
 
 		journalStructureModelImpl._originalParentStructureId = journalStructureModelImpl._parentStructureId;
 
-		_columnBitmask = 0;
+		journalStructureModelImpl._columnBitmask = 0;
 	}
 
 	@Override

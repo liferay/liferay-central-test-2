@@ -457,7 +457,7 @@ public class SCFrameworkVersionModelImpl extends BaseModelImpl<SCFrameworkVersio
 
 		scFrameworkVersionModelImpl._setOriginalActive = false;
 
-		_columnBitmask = 0;
+		scFrameworkVersionModelImpl._columnBitmask = 0;
 	}
 
 	@Override

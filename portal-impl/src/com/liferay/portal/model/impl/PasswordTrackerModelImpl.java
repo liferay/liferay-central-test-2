@@ -285,7 +285,7 @@ public class PasswordTrackerModelImpl extends BaseModelImpl<PasswordTracker>
 
 		passwordTrackerModelImpl._setOriginalUserId = false;
 
-		_columnBitmask = 0;
+		passwordTrackerModelImpl._columnBitmask = 0;
 	}
 
 	@Override

@@ -247,7 +247,7 @@ public class ExpandoRowModelImpl extends BaseModelImpl<ExpandoRow>
 
 		expandoRowModelImpl._setOriginalClassPK = false;
 
-		_columnBitmask = 0;
+		expandoRowModelImpl._columnBitmask = 0;
 	}
 
 	@Override

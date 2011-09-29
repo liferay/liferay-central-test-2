@@ -1244,7 +1244,7 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 
 		layoutRevisionModelImpl._setOriginalStatus = false;
 
-		_columnBitmask = 0;
+		layoutRevisionModelImpl._columnBitmask = 0;
 	}
 
 	@Override

@@ -603,7 +603,7 @@ public class AddressModelImpl extends BaseModelImpl<Address>
 
 		addressModelImpl._setOriginalPrimary = false;
 
-		_columnBitmask = 0;
+		addressModelImpl._columnBitmask = 0;
 	}
 
 	@Override

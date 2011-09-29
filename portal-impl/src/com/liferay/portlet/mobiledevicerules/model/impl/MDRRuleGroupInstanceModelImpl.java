@@ -482,7 +482,7 @@ public class MDRRuleGroupInstanceModelImpl extends BaseModelImpl<MDRRuleGroupIns
 
 		mdrRuleGroupInstanceModelImpl._setOriginalRuleGroupId = false;
 
-		_columnBitmask = 0;
+		mdrRuleGroupInstanceModelImpl._columnBitmask = 0;
 	}
 
 	@Override

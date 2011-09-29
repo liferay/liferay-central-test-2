@@ -374,7 +374,7 @@ public class SocialEquitySettingModelImpl extends BaseModelImpl<SocialEquitySett
 
 		socialEquitySettingModelImpl._setOriginalType = false;
 
-		_columnBitmask = 0;
+		socialEquitySettingModelImpl._columnBitmask = 0;
 	}
 
 	@Override

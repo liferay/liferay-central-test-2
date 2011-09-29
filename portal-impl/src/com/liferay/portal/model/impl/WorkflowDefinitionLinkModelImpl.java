@@ -457,7 +457,7 @@ public class WorkflowDefinitionLinkModelImpl extends BaseModelImpl<WorkflowDefin
 
 		workflowDefinitionLinkModelImpl._setOriginalWorkflowDefinitionVersion = false;
 
-		_columnBitmask = 0;
+		workflowDefinitionLinkModelImpl._columnBitmask = 0;
 	}
 
 	@Override

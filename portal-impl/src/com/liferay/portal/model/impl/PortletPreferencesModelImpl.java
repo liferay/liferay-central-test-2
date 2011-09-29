@@ -374,7 +374,7 @@ public class PortletPreferencesModelImpl extends BaseModelImpl<PortletPreference
 
 		portletPreferencesModelImpl._originalPortletId = portletPreferencesModelImpl._portletId;
 
-		_columnBitmask = 0;
+		portletPreferencesModelImpl._columnBitmask = 0;
 	}
 
 	@Override

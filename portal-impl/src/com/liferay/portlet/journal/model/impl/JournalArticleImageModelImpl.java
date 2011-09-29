@@ -399,7 +399,7 @@ public class JournalArticleImageModelImpl extends BaseModelImpl<JournalArticleIm
 
 		journalArticleImageModelImpl._setOriginalTempImage = false;
 
-		_columnBitmask = 0;
+		journalArticleImageModelImpl._columnBitmask = 0;
 	}
 
 	@Override

@@ -339,7 +339,7 @@ public class ExpandoColumnModelImpl extends BaseModelImpl<ExpandoColumn>
 
 		expandoColumnModelImpl._originalName = expandoColumnModelImpl._name;
 
-		_columnBitmask = 0;
+		expandoColumnModelImpl._columnBitmask = 0;
 	}
 
 	@Override

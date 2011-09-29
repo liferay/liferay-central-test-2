@@ -741,7 +741,7 @@ public class JournalTemplateModelImpl extends BaseModelImpl<JournalTemplate>
 
 		journalTemplateModelImpl._setOriginalSmallImageId = false;
 
-		_columnBitmask = 0;
+		journalTemplateModelImpl._columnBitmask = 0;
 	}
 
 	@Override

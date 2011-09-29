@@ -403,7 +403,7 @@ public class PollsVoteModelImpl extends BaseModelImpl<PollsVote>
 
 		pollsVoteModelImpl._setOriginalChoiceId = false;
 
-		_columnBitmask = 0;
+		pollsVoteModelImpl._columnBitmask = 0;
 	}
 
 	@Override

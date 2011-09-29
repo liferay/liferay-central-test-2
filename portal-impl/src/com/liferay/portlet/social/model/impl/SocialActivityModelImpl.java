@@ -497,7 +497,7 @@ public class SocialActivityModelImpl extends BaseModelImpl<SocialActivity>
 
 		socialActivityModelImpl._setOriginalReceiverUserId = false;
 
-		_columnBitmask = 0;
+		socialActivityModelImpl._columnBitmask = 0;
 	}
 
 	@Override

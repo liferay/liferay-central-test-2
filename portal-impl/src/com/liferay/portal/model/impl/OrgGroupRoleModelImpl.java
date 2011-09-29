@@ -230,7 +230,7 @@ public class OrgGroupRoleModelImpl extends BaseModelImpl<OrgGroupRole>
 
 		orgGroupRoleModelImpl._setOriginalRoleId = false;
 
-		_columnBitmask = 0;
+		orgGroupRoleModelImpl._columnBitmask = 0;
 	}
 
 	@Override

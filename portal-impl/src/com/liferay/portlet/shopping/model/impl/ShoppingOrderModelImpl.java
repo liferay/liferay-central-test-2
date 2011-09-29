@@ -1113,7 +1113,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 
 		shoppingOrderModelImpl._originalPpPaymentStatus = shoppingOrderModelImpl._ppPaymentStatus;
 
-		_columnBitmask = 0;
+		shoppingOrderModelImpl._columnBitmask = 0;
 	}
 
 	@Override

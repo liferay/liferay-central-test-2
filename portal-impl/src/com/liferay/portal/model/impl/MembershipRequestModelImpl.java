@@ -433,7 +433,7 @@ public class MembershipRequestModelImpl extends BaseModelImpl<MembershipRequest>
 
 		membershipRequestModelImpl._setOriginalStatusId = false;
 
-		_columnBitmask = 0;
+		membershipRequestModelImpl._columnBitmask = 0;
 	}
 
 	@Override

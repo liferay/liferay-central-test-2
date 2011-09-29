@@ -642,7 +642,7 @@ public class RoleModelImpl extends BaseModelImpl<Role> implements RoleModel {
 
 		roleModelImpl._originalSubtype = roleModelImpl._subtype;
 
-		_columnBitmask = 0;
+		roleModelImpl._columnBitmask = 0;
 	}
 
 	@Override

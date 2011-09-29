@@ -268,7 +268,7 @@ public class ListTypeModelImpl extends BaseModelImpl<ListType>
 
 		listTypeModelImpl._originalType = listTypeModelImpl._type;
 
-		_columnBitmask = 0;
+		listTypeModelImpl._columnBitmask = 0;
 	}
 
 	@Override

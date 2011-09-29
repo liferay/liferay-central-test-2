@@ -582,7 +582,7 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry>
 
 		scProductEntryModelImpl._originalRepoArtifactId = scProductEntryModelImpl._repoArtifactId;
 
-		_columnBitmask = 0;
+		scProductEntryModelImpl._columnBitmask = 0;
 	}
 
 	@Override

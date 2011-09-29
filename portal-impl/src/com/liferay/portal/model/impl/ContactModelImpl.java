@@ -714,7 +714,7 @@ public class ContactModelImpl extends BaseModelImpl<Contact>
 
 		contactModelImpl._setOriginalCompanyId = false;
 
-		_columnBitmask = 0;
+		contactModelImpl._columnBitmask = 0;
 	}
 
 	@Override

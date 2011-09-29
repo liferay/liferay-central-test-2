@@ -346,7 +346,7 @@ public class ImageModelImpl extends BaseModelImpl<Image> implements ImageModel {
 
 		imageModelImpl._setOriginalSize = false;
 
-		_columnBitmask = 0;
+		imageModelImpl._columnBitmask = 0;
 	}
 
 	@Override

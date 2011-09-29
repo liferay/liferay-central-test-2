@@ -410,7 +410,7 @@ public class AssetTagPropertyModelImpl extends BaseModelImpl<AssetTagProperty>
 
 		assetTagPropertyModelImpl._originalKey = assetTagPropertyModelImpl._key;
 
-		_columnBitmask = 0;
+		assetTagPropertyModelImpl._columnBitmask = 0;
 	}
 
 	@Override

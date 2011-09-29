@@ -288,7 +288,7 @@ public class SocialEquityAssetEntryModelImpl extends BaseModelImpl<SocialEquityA
 
 		socialEquityAssetEntryModelImpl._setOriginalAssetEntryId = false;
 
-		_columnBitmask = 0;
+		socialEquityAssetEntryModelImpl._columnBitmask = 0;
 	}
 
 	@Override

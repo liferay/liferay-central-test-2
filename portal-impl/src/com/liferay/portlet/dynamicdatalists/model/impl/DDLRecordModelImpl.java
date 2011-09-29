@@ -498,7 +498,7 @@ public class DDLRecordModelImpl extends BaseModelImpl<DDLRecord>
 
 		ddlRecordModelImpl._setOriginalRecordSetId = false;
 
-		_columnBitmask = 0;
+		ddlRecordModelImpl._columnBitmask = 0;
 	}
 
 	@Override

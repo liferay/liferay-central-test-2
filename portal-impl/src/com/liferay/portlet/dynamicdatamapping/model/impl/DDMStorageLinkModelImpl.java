@@ -301,7 +301,7 @@ public class DDMStorageLinkModelImpl extends BaseModelImpl<DDMStorageLink>
 
 		ddmStorageLinkModelImpl._setOriginalStructureId = false;
 
-		_columnBitmask = 0;
+		ddmStorageLinkModelImpl._columnBitmask = 0;
 	}
 
 	@Override

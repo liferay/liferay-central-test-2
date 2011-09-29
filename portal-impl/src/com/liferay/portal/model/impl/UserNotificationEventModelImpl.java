@@ -365,7 +365,7 @@ public class UserNotificationEventModelImpl extends BaseModelImpl<UserNotificati
 
 		userNotificationEventModelImpl._setOriginalArchived = false;
 
-		_columnBitmask = 0;
+		userNotificationEventModelImpl._columnBitmask = 0;
 	}
 
 	@Override

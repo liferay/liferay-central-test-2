@@ -469,7 +469,7 @@ public class DDLRecordVersionModelImpl extends BaseModelImpl<DDLRecordVersion>
 
 		ddlRecordVersionModelImpl._setOriginalStatus = false;
 
-		_columnBitmask = 0;
+		ddlRecordVersionModelImpl._columnBitmask = 0;
 	}
 
 	@Override

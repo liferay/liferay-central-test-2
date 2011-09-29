@@ -371,7 +371,7 @@ public class AnnouncementsDeliveryModelImpl extends BaseModelImpl<AnnouncementsD
 
 		announcementsDeliveryModelImpl._originalType = announcementsDeliveryModelImpl._type;
 
-		_columnBitmask = 0;
+		announcementsDeliveryModelImpl._columnBitmask = 0;
 	}
 
 	@Override

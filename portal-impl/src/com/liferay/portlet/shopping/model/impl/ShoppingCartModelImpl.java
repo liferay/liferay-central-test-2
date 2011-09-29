@@ -367,7 +367,7 @@ public class ShoppingCartModelImpl extends BaseModelImpl<ShoppingCart>
 
 		shoppingCartModelImpl._setOriginalUserId = false;
 
-		_columnBitmask = 0;
+		shoppingCartModelImpl._columnBitmask = 0;
 	}
 
 	@Override

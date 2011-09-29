@@ -469,7 +469,7 @@ public class OrgLaborModelImpl extends BaseModelImpl<OrgLabor>
 
 		orgLaborModelImpl._setOriginalOrganizationId = false;
 
-		_columnBitmask = 0;
+		orgLaborModelImpl._columnBitmask = 0;
 	}
 
 	@Override

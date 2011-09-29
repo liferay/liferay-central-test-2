@@ -442,7 +442,7 @@ public class CompanyModelImpl extends BaseModelImpl<Company>
 
 		companyModelImpl._setOriginalSystem = false;
 
-		_columnBitmask = 0;
+		companyModelImpl._columnBitmask = 0;
 	}
 
 	@Override

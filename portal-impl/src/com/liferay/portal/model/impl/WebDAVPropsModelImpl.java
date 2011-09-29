@@ -311,7 +311,7 @@ public class WebDAVPropsModelImpl extends BaseModelImpl<WebDAVProps>
 
 		webDAVPropsModelImpl._setOriginalClassPK = false;
 
-		_columnBitmask = 0;
+		webDAVPropsModelImpl._columnBitmask = 0;
 	}
 
 	@Override

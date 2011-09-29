@@ -230,7 +230,7 @@ public class OrgGroupPermissionModelImpl extends BaseModelImpl<OrgGroupPermissio
 
 		orgGroupPermissionModelImpl._setOriginalPermissionId = false;
 
-		_columnBitmask = 0;
+		orgGroupPermissionModelImpl._columnBitmask = 0;
 	}
 
 	@Override

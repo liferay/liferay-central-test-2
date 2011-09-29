@@ -720,7 +720,7 @@ public class PasswordPolicyModelImpl extends BaseModelImpl<PasswordPolicy>
 
 		passwordPolicyModelImpl._originalName = passwordPolicyModelImpl._name;
 
-		_columnBitmask = 0;
+		passwordPolicyModelImpl._columnBitmask = 0;
 	}
 
 	@Override

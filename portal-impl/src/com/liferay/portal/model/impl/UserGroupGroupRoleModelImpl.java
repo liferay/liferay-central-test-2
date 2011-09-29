@@ -290,7 +290,7 @@ public class UserGroupGroupRoleModelImpl extends BaseModelImpl<UserGroupGroupRol
 
 		userGroupGroupRoleModelImpl._setOriginalRoleId = false;
 
-		_columnBitmask = 0;
+		userGroupGroupRoleModelImpl._columnBitmask = 0;
 	}
 
 	@Override

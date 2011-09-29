@@ -854,7 +854,7 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 
 		mbMessageModelImpl._setOriginalStatus = false;
 
-		_columnBitmask = 0;
+		mbMessageModelImpl._columnBitmask = 0;
 	}
 
 	@Override

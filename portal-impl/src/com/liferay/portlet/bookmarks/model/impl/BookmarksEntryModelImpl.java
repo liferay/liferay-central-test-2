@@ -538,7 +538,7 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry>
 
 		bookmarksEntryModelImpl._setOriginalFolderId = false;
 
-		_columnBitmask = 0;
+		bookmarksEntryModelImpl._columnBitmask = 0;
 	}
 
 	@Override

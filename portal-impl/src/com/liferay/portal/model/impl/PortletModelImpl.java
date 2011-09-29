@@ -331,7 +331,7 @@ public class PortletModelImpl extends BaseModelImpl<Portlet>
 
 		portletModelImpl._originalPortletId = portletModelImpl._portletId;
 
-		_columnBitmask = 0;
+		portletModelImpl._columnBitmask = 0;
 	}
 
 	@Override

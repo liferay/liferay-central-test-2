@@ -391,7 +391,7 @@ public class LockModelImpl extends BaseModelImpl<Lock> implements LockModel {
 
 		lockModelImpl._originalExpirationDate = lockModelImpl._expirationDate;
 
-		_columnBitmask = 0;
+		lockModelImpl._columnBitmask = 0;
 	}
 
 	@Override

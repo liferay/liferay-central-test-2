@@ -386,7 +386,7 @@ public class PortletItemModelImpl extends BaseModelImpl<PortletItem>
 
 		portletItemModelImpl._setOriginalClassNameId = false;
 
-		_columnBitmask = 0;
+		portletItemModelImpl._columnBitmask = 0;
 	}
 
 	@Override

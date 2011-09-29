@@ -366,7 +366,7 @@ public class AnnouncementsFlagModelImpl extends BaseModelImpl<AnnouncementsFlag>
 
 		announcementsFlagModelImpl._setOriginalValue = false;
 
-		_columnBitmask = 0;
+		announcementsFlagModelImpl._columnBitmask = 0;
 	}
 
 	@Override

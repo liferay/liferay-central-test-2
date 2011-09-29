@@ -851,7 +851,7 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem>
 
 		shoppingItemModelImpl._setOriginalLargeImageId = false;
 
-		_columnBitmask = 0;
+		shoppingItemModelImpl._columnBitmask = 0;
 	}
 
 	@Override

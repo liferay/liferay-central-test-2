@@ -346,7 +346,7 @@ public class SocialRelationModelImpl extends BaseModelImpl<SocialRelation>
 
 		socialRelationModelImpl._setOriginalType = false;
 
-		_columnBitmask = 0;
+		socialRelationModelImpl._columnBitmask = 0;
 	}
 
 	@Override

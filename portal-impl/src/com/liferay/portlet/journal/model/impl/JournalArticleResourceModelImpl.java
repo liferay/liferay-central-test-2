@@ -283,7 +283,7 @@ public class JournalArticleResourceModelImpl extends BaseModelImpl<JournalArticl
 
 		journalArticleResourceModelImpl._originalArticleId = journalArticleResourceModelImpl._articleId;
 
-		_columnBitmask = 0;
+		journalArticleResourceModelImpl._columnBitmask = 0;
 	}
 
 	@Override

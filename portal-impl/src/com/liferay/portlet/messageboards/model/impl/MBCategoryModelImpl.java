@@ -521,7 +521,7 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory>
 
 		mbCategoryModelImpl._setOriginalParentCategoryId = false;
 
-		_columnBitmask = 0;
+		mbCategoryModelImpl._columnBitmask = 0;
 	}
 
 	@Override

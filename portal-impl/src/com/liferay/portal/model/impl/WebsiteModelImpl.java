@@ -478,7 +478,7 @@ public class WebsiteModelImpl extends BaseModelImpl<Website>
 
 		websiteModelImpl._setOriginalPrimary = false;
 
-		_columnBitmask = 0;
+		websiteModelImpl._columnBitmask = 0;
 	}
 
 	@Override

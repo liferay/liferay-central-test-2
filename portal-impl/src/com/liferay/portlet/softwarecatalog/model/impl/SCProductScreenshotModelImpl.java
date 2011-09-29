@@ -351,7 +351,7 @@ public class SCProductScreenshotModelImpl extends BaseModelImpl<SCProductScreens
 
 		scProductScreenshotModelImpl._setOriginalPriority = false;
 
-		_columnBitmask = 0;
+		scProductScreenshotModelImpl._columnBitmask = 0;
 	}
 
 	@Override

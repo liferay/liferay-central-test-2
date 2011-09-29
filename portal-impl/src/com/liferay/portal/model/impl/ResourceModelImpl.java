@@ -298,7 +298,7 @@ public class ResourceModelImpl extends BaseModelImpl<Resource>
 
 		resourceModelImpl._originalPrimKey = resourceModelImpl._primKey;
 
-		_columnBitmask = 0;
+		resourceModelImpl._columnBitmask = 0;
 	}
 
 	@Override

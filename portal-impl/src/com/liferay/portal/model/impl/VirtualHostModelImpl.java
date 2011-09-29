@@ -283,7 +283,7 @@ public class VirtualHostModelImpl extends BaseModelImpl<VirtualHost>
 
 		virtualHostModelImpl._originalHostname = virtualHostModelImpl._hostname;
 
-		_columnBitmask = 0;
+		virtualHostModelImpl._columnBitmask = 0;
 	}
 
 	@Override

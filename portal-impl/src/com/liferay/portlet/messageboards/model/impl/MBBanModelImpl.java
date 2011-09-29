@@ -398,7 +398,7 @@ public class MBBanModelImpl extends BaseModelImpl<MBBan> implements MBBanModel {
 
 		mbBanModelImpl._setOriginalBanUserId = false;
 
-		_columnBitmask = 0;
+		mbBanModelImpl._columnBitmask = 0;
 	}
 
 	@Override

@@ -353,7 +353,7 @@ public class JournalContentSearchModelImpl extends BaseModelImpl<JournalContentS
 
 		journalContentSearchModelImpl._originalArticleId = journalContentSearchModelImpl._articleId;
 
-		_columnBitmask = 0;
+		journalContentSearchModelImpl._columnBitmask = 0;
 	}
 
 	@Override

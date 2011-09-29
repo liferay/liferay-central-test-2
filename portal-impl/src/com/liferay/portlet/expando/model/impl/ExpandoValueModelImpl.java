@@ -454,7 +454,7 @@ public class ExpandoValueModelImpl extends BaseModelImpl<ExpandoValue>
 
 		expandoValueModelImpl._originalData = expandoValueModelImpl._data;
 
-		_columnBitmask = 0;
+		expandoValueModelImpl._columnBitmask = 0;
 	}
 
 	@Override

@@ -334,7 +334,7 @@ public class PermissionModelImpl extends BaseModelImpl<Permission>
 
 		permissionModelImpl._setOriginalResourceId = false;
 
-		_columnBitmask = 0;
+		permissionModelImpl._columnBitmask = 0;
 	}
 
 	@Override

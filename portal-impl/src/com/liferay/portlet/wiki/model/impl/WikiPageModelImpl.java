@@ -838,7 +838,7 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage>
 
 		wikiPageModelImpl._setOriginalStatus = false;
 
-		_columnBitmask = 0;
+		wikiPageModelImpl._columnBitmask = 0;
 	}
 
 	@Override

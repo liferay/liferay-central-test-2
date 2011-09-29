@@ -1036,7 +1036,7 @@ public class UserModelImpl extends BaseModelImpl<User> implements UserModel {
 
 		userModelImpl._setOriginalStatus = false;
 
-		_columnBitmask = 0;
+		userModelImpl._columnBitmask = 0;
 	}
 
 	@Override

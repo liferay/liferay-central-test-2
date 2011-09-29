@@ -270,7 +270,7 @@ public class PortalPreferencesModelImpl extends BaseModelImpl<PortalPreferences>
 
 		portalPreferencesModelImpl._setOriginalOwnerType = false;
 
-		_columnBitmask = 0;
+		portalPreferencesModelImpl._columnBitmask = 0;
 	}
 
 	@Override

@@ -412,7 +412,7 @@ public class CountryModelImpl extends BaseModelImpl<Country>
 
 		countryModelImpl._setOriginalActive = false;
 
-		_columnBitmask = 0;
+		countryModelImpl._columnBitmask = 0;
 	}
 
 	@Override

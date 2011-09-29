@@ -291,7 +291,7 @@ public class PasswordPolicyRelModelImpl extends BaseModelImpl<PasswordPolicyRel>
 
 		passwordPolicyRelModelImpl._setOriginalClassPK = false;
 
-		_columnBitmask = 0;
+		passwordPolicyRelModelImpl._columnBitmask = 0;
 	}
 
 	@Override

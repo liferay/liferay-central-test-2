@@ -1235,7 +1235,7 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 
 		layoutModelImpl._originalTemplateLayoutUuid = layoutModelImpl._templateLayoutUuid;
 
-		_columnBitmask = 0;
+		layoutModelImpl._columnBitmask = 0;
 	}
 
 	@Override

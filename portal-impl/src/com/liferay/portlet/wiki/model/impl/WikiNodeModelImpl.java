@@ -450,7 +450,7 @@ public class WikiNodeModelImpl extends BaseModelImpl<WikiNode>
 
 		wikiNodeModelImpl._originalName = wikiNodeModelImpl._name;
 
-		_columnBitmask = 0;
+		wikiNodeModelImpl._columnBitmask = 0;
 	}
 
 	@Override

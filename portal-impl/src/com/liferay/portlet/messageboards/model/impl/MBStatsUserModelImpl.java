@@ -322,7 +322,7 @@ public class MBStatsUserModelImpl extends BaseModelImpl<MBStatsUser>
 
 		mbStatsUserModelImpl._setOriginalMessageCount = false;
 
-		_columnBitmask = 0;
+		mbStatsUserModelImpl._columnBitmask = 0;
 	}
 
 	@Override

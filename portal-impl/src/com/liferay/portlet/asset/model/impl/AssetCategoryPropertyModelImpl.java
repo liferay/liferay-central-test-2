@@ -411,7 +411,7 @@ public class AssetCategoryPropertyModelImpl extends BaseModelImpl<AssetCategoryP
 
 		assetCategoryPropertyModelImpl._originalKey = assetCategoryPropertyModelImpl._key;
 
-		_columnBitmask = 0;
+		assetCategoryPropertyModelImpl._columnBitmask = 0;
 	}
 
 	@Override

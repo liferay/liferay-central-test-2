@@ -388,7 +388,7 @@ public class WorkflowInstanceLinkModelImpl extends BaseModelImpl<WorkflowInstanc
 
 		workflowInstanceLinkModelImpl._setOriginalClassPK = false;
 
-		_columnBitmask = 0;
+		workflowInstanceLinkModelImpl._columnBitmask = 0;
 	}
 
 	@Override

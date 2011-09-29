@@ -633,7 +633,7 @@ public class AssetVocabularyModelImpl extends BaseModelImpl<AssetVocabulary>
 
 		assetVocabularyModelImpl._originalName = assetVocabularyModelImpl._name;
 
-		_columnBitmask = 0;
+		assetVocabularyModelImpl._columnBitmask = 0;
 	}
 
 	@Override

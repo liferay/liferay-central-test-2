@@ -526,7 +526,7 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon>
 
 		shoppingCouponModelImpl._originalCode = shoppingCouponModelImpl._code;
 
-		_columnBitmask = 0;
+		shoppingCouponModelImpl._columnBitmask = 0;
 	}
 
 	@Override

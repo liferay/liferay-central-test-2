@@ -309,7 +309,7 @@ public class UserIdMapperModelImpl extends BaseModelImpl<UserIdMapper>
 
 		userIdMapperModelImpl._originalExternalUserId = userIdMapperModelImpl._externalUserId;
 
-		_columnBitmask = 0;
+		userIdMapperModelImpl._columnBitmask = 0;
 	}
 
 	@Override

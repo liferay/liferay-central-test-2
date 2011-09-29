@@ -733,7 +733,7 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry>
 
 		blogsEntryModelImpl._setOriginalStatus = false;
 
-		_columnBitmask = 0;
+		blogsEntryModelImpl._columnBitmask = 0;
 	}
 
 	@Override

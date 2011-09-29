@@ -427,7 +427,7 @@ public class LayoutBranchModelImpl extends BaseModelImpl<LayoutBranch>
 
 		layoutBranchModelImpl._setOriginalMaster = false;
 
-		_columnBitmask = 0;
+		layoutBranchModelImpl._columnBitmask = 0;
 	}
 
 	@Override

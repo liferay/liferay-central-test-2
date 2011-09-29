@@ -351,7 +351,7 @@ public class SocialEquityUserModelImpl extends BaseModelImpl<SocialEquityUser>
 
 		socialEquityUserModelImpl._setOriginalRank = false;
 
-		_columnBitmask = 0;
+		socialEquityUserModelImpl._columnBitmask = 0;
 	}
 
 	@Override

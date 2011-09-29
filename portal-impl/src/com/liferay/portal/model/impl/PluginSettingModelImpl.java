@@ -361,7 +361,7 @@ public class PluginSettingModelImpl extends BaseModelImpl<PluginSetting>
 
 		pluginSettingModelImpl._originalPluginType = pluginSettingModelImpl._pluginType;
 
-		_columnBitmask = 0;
+		pluginSettingModelImpl._columnBitmask = 0;
 	}
 
 	@Override

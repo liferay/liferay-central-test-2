@@ -406,7 +406,7 @@ public class RepositoryModelImpl extends BaseModelImpl<Repository>
 
 		repositoryModelImpl._setOriginalGroupId = false;
 
-		_columnBitmask = 0;
+		repositoryModelImpl._columnBitmask = 0;
 	}
 
 	@Override

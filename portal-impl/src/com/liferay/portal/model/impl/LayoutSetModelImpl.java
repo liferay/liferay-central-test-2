@@ -502,7 +502,7 @@ public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet>
 
 		layoutSetModelImpl._originalLayoutSetPrototypeUuid = layoutSetModelImpl._layoutSetPrototypeUuid;
 
-		_columnBitmask = 0;
+		layoutSetModelImpl._columnBitmask = 0;
 	}
 
 	@Override

@@ -291,7 +291,7 @@ public class ShardModelImpl extends BaseModelImpl<Shard> implements ShardModel {
 
 		shardModelImpl._originalName = shardModelImpl._name;
 
-		_columnBitmask = 0;
+		shardModelImpl._columnBitmask = 0;
 	}
 
 	@Override

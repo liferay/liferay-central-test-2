@@ -662,7 +662,7 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent>
 
 		calEventModelImpl._setOriginalRemindBy = false;
 
-		_columnBitmask = 0;
+		calEventModelImpl._columnBitmask = 0;
 	}
 
 	@Override

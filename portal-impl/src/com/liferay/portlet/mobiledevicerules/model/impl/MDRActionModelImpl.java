@@ -663,7 +663,7 @@ public class MDRActionModelImpl extends BaseModelImpl<MDRAction>
 
 		mdrActionModelImpl._setOriginalRuleGroupInstanceId = false;
 
-		_columnBitmask = 0;
+		mdrActionModelImpl._columnBitmask = 0;
 	}
 
 	@Override

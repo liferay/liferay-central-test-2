@@ -323,7 +323,7 @@ public class TicketModelImpl extends BaseModelImpl<Ticket>
 
 		ticketModelImpl._originalKey = ticketModelImpl._key;
 
-		_columnBitmask = 0;
+		ticketModelImpl._columnBitmask = 0;
 	}
 
 	@Override

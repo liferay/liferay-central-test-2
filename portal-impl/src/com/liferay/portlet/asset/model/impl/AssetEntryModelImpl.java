@@ -830,7 +830,7 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 
 		assetEntryModelImpl._originalExpirationDate = assetEntryModelImpl._expirationDate;
 
-		_columnBitmask = 0;
+		assetEntryModelImpl._columnBitmask = 0;
 	}
 
 	@Override

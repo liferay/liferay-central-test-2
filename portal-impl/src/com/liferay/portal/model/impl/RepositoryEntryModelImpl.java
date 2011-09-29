@@ -309,7 +309,7 @@ public class RepositoryEntryModelImpl extends BaseModelImpl<RepositoryEntry>
 
 		repositoryEntryModelImpl._originalMappedId = repositoryEntryModelImpl._mappedId;
 
-		_columnBitmask = 0;
+		repositoryEntryModelImpl._columnBitmask = 0;
 	}
 
 	@Override

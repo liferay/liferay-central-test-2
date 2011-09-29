@@ -441,7 +441,7 @@ public class LayoutSetBranchModelImpl extends BaseModelImpl<LayoutSetBranch>
 
 		layoutSetBranchModelImpl._originalName = layoutSetBranchModelImpl._name;
 
-		_columnBitmask = 0;
+		layoutSetBranchModelImpl._columnBitmask = 0;
 	}
 
 	@Override

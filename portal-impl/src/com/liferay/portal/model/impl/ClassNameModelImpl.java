@@ -278,7 +278,7 @@ public class ClassNameModelImpl extends BaseModelImpl<ClassName>
 
 		classNameModelImpl._originalValue = classNameModelImpl._value;
 
-		_columnBitmask = 0;
+		classNameModelImpl._columnBitmask = 0;
 	}
 
 	@Override

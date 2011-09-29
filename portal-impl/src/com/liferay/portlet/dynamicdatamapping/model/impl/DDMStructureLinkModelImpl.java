@@ -337,7 +337,7 @@ public class DDMStructureLinkModelImpl extends BaseModelImpl<DDMStructureLink>
 
 		ddmStructureLinkModelImpl._setOriginalStructureId = false;
 
-		_columnBitmask = 0;
+		ddmStructureLinkModelImpl._columnBitmask = 0;
 	}
 
 	@Override

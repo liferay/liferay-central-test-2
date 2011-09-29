@@ -692,7 +692,7 @@ public class AssetCategoryModelImpl extends BaseModelImpl<AssetCategory>
 
 		assetCategoryModelImpl._setOriginalVocabularyId = false;
 
-		_columnBitmask = 0;
+		assetCategoryModelImpl._columnBitmask = 0;
 	}
 
 	@Override

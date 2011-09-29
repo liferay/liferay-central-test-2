@@ -392,7 +392,7 @@ public class BlogsStatsUserModelImpl extends BaseModelImpl<BlogsStatsUser>
 
 		blogsStatsUserModelImpl._originalLastPostDate = blogsStatsUserModelImpl._lastPostDate;
 
-		_columnBitmask = 0;
+		blogsStatsUserModelImpl._columnBitmask = 0;
 	}
 
 	@Override

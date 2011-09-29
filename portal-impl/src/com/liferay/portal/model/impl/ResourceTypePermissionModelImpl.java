@@ -320,7 +320,7 @@ public class ResourceTypePermissionModelImpl extends BaseModelImpl<ResourceTypeP
 
 		resourceTypePermissionModelImpl._setOriginalRoleId = false;
 
-		_columnBitmask = 0;
+		resourceTypePermissionModelImpl._columnBitmask = 0;
 	}
 
 	@Override

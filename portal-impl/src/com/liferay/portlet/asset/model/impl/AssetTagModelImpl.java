@@ -383,7 +383,7 @@ public class AssetTagModelImpl extends BaseModelImpl<AssetTag>
 
 		assetTagModelImpl._setOriginalGroupId = false;
 
-		_columnBitmask = 0;
+		assetTagModelImpl._columnBitmask = 0;
 	}
 
 	@Override

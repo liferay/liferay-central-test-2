@@ -581,7 +581,7 @@ public class AnnouncementsEntryModelImpl extends BaseModelImpl<AnnouncementsEntr
 
 		announcementsEntryModelImpl._setOriginalAlert = false;
 
-		_columnBitmask = 0;
+		announcementsEntryModelImpl._columnBitmask = 0;
 	}
 
 	@Override

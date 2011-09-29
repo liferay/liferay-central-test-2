@@ -424,7 +424,7 @@ public class ShoppingCategoryModelImpl extends BaseModelImpl<ShoppingCategory>
 
 		shoppingCategoryModelImpl._setOriginalParentCategoryId = false;
 
-		_columnBitmask = 0;
+		shoppingCategoryModelImpl._columnBitmask = 0;
 	}
 
 	@Override

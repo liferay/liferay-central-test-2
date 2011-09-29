@@ -498,7 +498,7 @@ public class BookmarksFolderModelImpl extends BaseModelImpl<BookmarksFolder>
 
 		bookmarksFolderModelImpl._setOriginalParentFolderId = false;
 
-		_columnBitmask = 0;
+		bookmarksFolderModelImpl._columnBitmask = 0;
 	}
 
 	@Override

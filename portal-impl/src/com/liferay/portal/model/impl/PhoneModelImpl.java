@@ -494,7 +494,7 @@ public class PhoneModelImpl extends BaseModelImpl<Phone> implements PhoneModel {
 
 		phoneModelImpl._setOriginalPrimary = false;
 
-		_columnBitmask = 0;
+		phoneModelImpl._columnBitmask = 0;
 	}
 
 	@Override

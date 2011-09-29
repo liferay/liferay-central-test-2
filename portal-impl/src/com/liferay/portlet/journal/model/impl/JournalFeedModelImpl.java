@@ -631,7 +631,7 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed>
 
 		journalFeedModelImpl._originalFeedId = journalFeedModelImpl._feedId;
 
-		_columnBitmask = 0;
+		journalFeedModelImpl._columnBitmask = 0;
 	}
 
 	@Override

@@ -609,7 +609,7 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 
 		groupModelImpl._setOriginalActive = false;
 
-		_columnBitmask = 0;
+		groupModelImpl._columnBitmask = 0;
 	}
 
 	@Override

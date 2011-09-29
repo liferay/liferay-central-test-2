@@ -596,7 +596,7 @@ public class PollsQuestionModelImpl extends BaseModelImpl<PollsQuestion>
 
 		pollsQuestionModelImpl._setOriginalGroupId = false;
 
-		_columnBitmask = 0;
+		pollsQuestionModelImpl._columnBitmask = 0;
 	}
 
 	@Override

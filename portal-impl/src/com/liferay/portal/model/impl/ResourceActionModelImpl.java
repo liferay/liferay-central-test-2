@@ -281,7 +281,7 @@ public class ResourceActionModelImpl extends BaseModelImpl<ResourceAction>
 
 		resourceActionModelImpl._originalActionId = resourceActionModelImpl._actionId;
 
-		_columnBitmask = 0;
+		resourceActionModelImpl._columnBitmask = 0;
 	}
 
 	@Override

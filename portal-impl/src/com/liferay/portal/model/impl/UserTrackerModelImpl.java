@@ -350,7 +350,7 @@ public class UserTrackerModelImpl extends BaseModelImpl<UserTracker>
 
 		userTrackerModelImpl._originalSessionId = userTrackerModelImpl._sessionId;
 
-		_columnBitmask = 0;
+		userTrackerModelImpl._columnBitmask = 0;
 	}
 
 	@Override

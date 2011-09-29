@@ -338,7 +338,7 @@ public class ShoppingItemPriceModelImpl extends BaseModelImpl<ShoppingItemPrice>
 
 		shoppingItemPriceModelImpl._setOriginalItemId = false;
 
-		_columnBitmask = 0;
+		shoppingItemPriceModelImpl._columnBitmask = 0;
 	}
 
 	@Override

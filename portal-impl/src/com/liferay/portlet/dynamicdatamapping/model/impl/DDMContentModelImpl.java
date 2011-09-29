@@ -466,7 +466,7 @@ public class DDMContentModelImpl extends BaseModelImpl<DDMContent>
 
 		ddmContentModelImpl._setOriginalCompanyId = false;
 
-		_columnBitmask = 0;
+		ddmContentModelImpl._columnBitmask = 0;
 	}
 
 	@Override

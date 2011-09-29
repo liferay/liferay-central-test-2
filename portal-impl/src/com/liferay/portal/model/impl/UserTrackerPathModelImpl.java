@@ -255,7 +255,7 @@ public class UserTrackerPathModelImpl extends BaseModelImpl<UserTrackerPath>
 
 		userTrackerPathModelImpl._setOriginalUserTrackerId = false;
 
-		_columnBitmask = 0;
+		userTrackerPathModelImpl._columnBitmask = 0;
 	}
 
 	@Override

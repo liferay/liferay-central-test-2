@@ -601,7 +601,7 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList>
 
 		mbMailingListModelImpl._setOriginalActive = false;
 
-		_columnBitmask = 0;
+		mbMailingListModelImpl._columnBitmask = 0;
 	}
 
 	@Override

@@ -283,7 +283,7 @@ public class ResourceCodeModelImpl extends BaseModelImpl<ResourceCode>
 
 		resourceCodeModelImpl._setOriginalScope = false;
 
-		_columnBitmask = 0;
+		resourceCodeModelImpl._columnBitmask = 0;
 	}
 
 	@Override

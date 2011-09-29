@@ -428,7 +428,7 @@ public class RatingsEntryModelImpl extends BaseModelImpl<RatingsEntry>
 
 		ratingsEntryModelImpl._setOriginalScore = false;
 
-		_columnBitmask = 0;
+		ratingsEntryModelImpl._columnBitmask = 0;
 	}
 
 	@Override

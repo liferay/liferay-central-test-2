@@ -379,7 +379,7 @@ public class SubscriptionModelImpl extends BaseModelImpl<Subscription>
 
 		subscriptionModelImpl._setOriginalClassPK = false;
 
-		_columnBitmask = 0;
+		subscriptionModelImpl._columnBitmask = 0;
 	}
 
 	@Override

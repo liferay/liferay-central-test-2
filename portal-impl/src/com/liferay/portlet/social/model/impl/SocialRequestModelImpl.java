@@ -516,7 +516,7 @@ public class SocialRequestModelImpl extends BaseModelImpl<SocialRequest>
 
 		socialRequestModelImpl._setOriginalStatus = false;
 
-		_columnBitmask = 0;
+		socialRequestModelImpl._columnBitmask = 0;
 	}
 
 	@Override
