@@ -81,7 +81,7 @@ public class UpdatePasswordAction extends Action {
 				try {
 					UserLocalServiceUtil.checkLockout(user);
 				}
-				catch (UserLockoutException e) {
+				catch (UserLockoutException ule) {
 					SessionErrors.add(request, e.getClass().getName());
 				}
 			}
