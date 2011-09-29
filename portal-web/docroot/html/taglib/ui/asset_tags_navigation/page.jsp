@@ -83,13 +83,14 @@ private String _buildTagsNavigation(long groupId, String selectedTagName, Portle
 
 	sb.append("\">");
 
-	int count = 0;
 	int maxCount = 1;
 	int minCount = 1;
 
 	if (showAssetCount && displayStyle.equals("cloud")) {
 		for (AssetTag tag : tags) {
 			String tagName = tag.getName();
+
+			int count = 0;
 
 			if (classNameId > 0) {
 				count = AssetTagServiceUtil.getTagsCount(groupId, classNameId, tagName);
@@ -115,6 +116,8 @@ private String _buildTagsNavigation(long groupId, String selectedTagName, Portle
 
 	for (AssetTag tag : tags) {
 		String tagName = tag.getName();
+
+		int count = 0;
 
 		if (classNameId > 0) {
 			count = AssetTagServiceUtil.getTagsCount(groupId, classNameId, tagName);
