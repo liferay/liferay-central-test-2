@@ -694,6 +694,9 @@ public class DLContentPersistenceImpl extends BasePersistenceImpl<DLContent>
 
 		dlContent.resetOriginalValues();
 
+		session.flush();
+		session.clear();
+
 		return dlContent;
 	}
 
