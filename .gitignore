@@ -1,9 +1,10 @@
 *~
+*.ant-*
 *.bak
 *.iml
 *.swp
-*.ant-*
 
+/*.ant-*
 /*.ipr
 /*.iws
 /*.patch
@@ -13,7 +14,6 @@
 /.xmlcatalog
 /ActiveMQ
 /ant.install.log
-/*.ant-*
 /api
 /app.server.*.properties
 /bin
