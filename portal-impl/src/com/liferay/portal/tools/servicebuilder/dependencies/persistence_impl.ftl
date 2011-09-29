@@ -788,6 +788,9 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 		<#if entity.hasLazyBlobColumn()>
 			${entity.varName}.resetOriginalValues();
+
+			session.flush();
+			session.clear();
 		</#if>
 
 		return ${entity.varName};
