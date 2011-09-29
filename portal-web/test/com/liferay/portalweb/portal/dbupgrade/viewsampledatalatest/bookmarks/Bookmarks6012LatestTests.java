@@ -24,7 +24,7 @@ import junit.framework.TestSuite;
 /**
  * @author Brian Wing Shun Chan
  */
-public class Bookmarks6011LatestTests extends BaseTests {
+public class Bookmarks6012LatestTests extends BaseTests {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
