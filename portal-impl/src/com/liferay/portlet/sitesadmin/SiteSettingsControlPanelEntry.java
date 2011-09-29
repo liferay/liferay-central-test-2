@@ -40,11 +40,11 @@ public class SiteSettingsControlPanelEntry extends BaseControlPanelEntry {
 		}
 
 		Group scopeGroup = themeDisplay.getScopeGroup();
-		
-		if (scopeGroup.isUser() || scopeGroup.isCompany() ||
-			!(GroupPermissionUtil.contains(
+
+		if (scopeGroup.isCompany() || scopeGroup.isUser() ||
+			!GroupPermissionUtil.contains(
 				themeDisplay.getPermissionChecker(),
-				scopeGroup.getGroupId(), ActionKeys.UPDATE))) {
+				scopeGroup.getGroupId(), ActionKeys.UPDATE)) {
 
 			return false;
 		}
