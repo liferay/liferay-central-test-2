@@ -153,26 +153,26 @@ public class PortletAction extends Action {
 
 		String resourceId = resourceRequest.getResourceID();
 
-		if (Validator.isNotNull(resourceId)) {
-			PortletContext portletContext = portletConfig.getPortletContext();
-
-			PortletRequestDispatcher portletRequestDispatcher =
-				portletContext.getRequestDispatcher(resourceId);
-
-			if (portletRequestDispatcher != null) {
-				portletRequestDispatcher.forward(
-					resourceRequest, resourceResponse);
-			}
+		if (Validator.isNull(resourceId)) {
+			return;
 		}
+
+		PortletContext portletContext = portletConfig.getPortletContext();
+
+		PortletRequestDispatcher portletRequestDispatcher =
+			portletContext.getRequestDispatcher(resourceId);
+
+		if (portletRequestDispatcher == null) {
+			return;
+		}
+
+		portletRequestDispatcher.forward(resourceRequest, resourceResponse);
 	}
 
 	protected void addSuccessMessage(
 		ActionRequest actionRequest, ActionResponse actionResponse) {
 
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			actionRequest);
-
-		PortletConfig portletConfig = (PortletConfig)request.getAttribute(
+		PortletConfig portletConfig = (PortletConfig)actionRequest.getAttribute(
 			JavaConstants.JAVAX_PORTLET_CONFIG);
 
 		boolean addProcessActionSuccessMessage = GetterUtil.getBoolean(
