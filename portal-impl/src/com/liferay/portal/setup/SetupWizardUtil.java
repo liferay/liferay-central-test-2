@@ -57,6 +57,9 @@ import javax.servlet.http.HttpSession;
  */
 public class SetupWizardUtil {
 
+	public static final String PROPERTIES_FILE_NAME =
+		"portal-setup-wizard.properties";
+
 	public static boolean isSetupFinished(HttpServletRequest request) {
 		if (!PropsValues.SETUP_WIZARD_ENABLED) {
 			return true;
@@ -93,10 +96,10 @@ public class SetupWizardUtil {
 		session.setAttribute(
 			WebKeys.SETUP_WIZARD_PROPERTIES, unicodeProperties);
 
-		boolean updatedPropertiesFile = _writePropertiesFile(unicodeProperties);
+		boolean propertiesFileUpdated = _writePropertiesFile(unicodeProperties);
 
 		session.setAttribute(
-			WebKeys.SETUP_WIZARD_PROPERTIES_UPDATED, updatedPropertiesFile);
+			WebKeys.SETUP_WIZARD_PROPERTIES_UPDATED, propertiesFileUpdated);
 
 		_reloadServletContext(request, unicodeProperties);
 		_resetAdminPassword(request);
@@ -181,7 +184,7 @@ public class SetupWizardUtil {
 		String jdbcDefaultURL = null;
 
 		String databaseType = ParamUtil.getString(
-			request, "databaseType", "hsql");
+			request, "databaseType", "hypersonic");
 		String databaseName = ParamUtil.getString(
 			request, "databaseName", "lportal");
 
@@ -217,13 +220,6 @@ public class SetupWizardUtil {
 			jdbcDefaultDriverClassName =
 				"oracle.jdbc.this.get_driver().OracleDriver";
 			jdbcDefaultURL = "jdbc:oracle:thin:@localhost:1521:xe";
-		}
-		else if (databaseType.equals("p6spy")) {
-			jdbcDefaultDriverClassName = "com.p6spy.engine.spy.P6SpyDriver";
-			jdbcDefaultURL =
-				"jdbc:mysql://localhost/" + databaseName +
-					"?useUnicode=true&characterEncoding=UTF-8" +
-						"&useFastDateParsing=false";
 		}
 		else if (databaseType.equals("postgresql")) {
 			jdbcDefaultDriverClassName = "org.postgresql.Driver";
@@ -313,9 +309,6 @@ public class SetupWizardUtil {
 			return false;
 		}
 	}
-
-	public static final String PROPERTIES_FILE_NAME =
-		"portal-setup-wizard.properties";
 
 	private final static String _PROPERTIES_PREFIX = "properties--";
 

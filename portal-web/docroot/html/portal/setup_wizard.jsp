@@ -19,21 +19,15 @@
 <%@ page import="com.liferay.portal.setup.SetupWizardUtil" %>
 
 <%
-UnicodeProperties properties = (UnicodeProperties)request.getSession().getAttribute(WebKeys.SETUP_WIZARD_PROPERTIES);
+UnicodeProperties unicodeProperties = (UnicodeProperties)session.getAttribute(WebKeys.SETUP_WIZARD_PROPERTIES);
 
-boolean propertiesFileCreated = GetterUtil.getBoolean((Boolean)request.getSession().getAttribute(WebKeys.SETUP_WIZARD_PROPERTIES_UPDATED));
+boolean propertiesFileUpdated = GetterUtil.getBoolean((Boolean)session.getAttribute(WebKeys.SETUP_WIZARD_PROPERTIES_UPDATED));
 
-boolean passwordUpdated = GetterUtil.getBoolean((Boolean)request.getSession().getAttribute(WebKeys.SETUP_WIZARD_PASSWORD_UPDATED));
-
-String themeStaticResourcePath = theme.getStaticResourcePath();
-
-String cdnHost = PortalUtil.getCDNHost(request.isSecure());
-
-String themeImagesPath = cdnHost + themeStaticResourcePath + theme.getImagesPath();
+boolean passwordUpdated = GetterUtil.getBoolean((Boolean)session.getAttribute(WebKeys.SETUP_WIZARD_PASSWORD_UPDATED));
 %>
 
 <style>
-	<%@include file="/html/portal/css/portal/setup_wizard.jspf" %>
+	<%@ include file="/html/portal/setup_wizard_css.jspf" %>
 </style>
 
 <div id="wrapper">
@@ -54,7 +48,7 @@ String themeImagesPath = cdnHost + themeStaticResourcePath + theme.getImagesPath
 	<div id="content">
 		<div id="main-content">
 			<c:choose>
-				<c:when test="<%= !propertiesFileCreated && !SetupWizardUtil.isSetupFinished(request) %>">
+				<c:when test="<%= !propertiesFileUpdated && !SetupWizardUtil.isSetupFinished(request) %>">
 					<aui:form action='<%= themeDisplay.getPathMain() + "/portal/setup_wizard" %>' method="post" name="fm">
 						<aui:input type="hidden" name="<%= Constants.CMD %>" value="<%= Constants.UPDATE %>" />
 
@@ -71,18 +65,11 @@ String themeImagesPath = cdnHost + themeStaticResourcePath + theme.getImagesPath
 
 							<aui:input label="last-name" name='<%= "properties--" + PropsKeys.DEFAULT_ADMIN_LAST_NAME + "--" %>' value="<%= PropsValues.DEFAULT_ADMIN_LAST_NAME %>" />
 
-							<aui:input label="email" name='<%= "properties--" + PropsKeys.ADMIN_EMAIL_FROM_ADDRESS + "--" %>' value="<%= PropsUtil.get(PropsKeys.ADMIN_EMAIL_FROM_ADDRESS) %>" />
+							<aui:input label="email" name='<%= "properties--" + PropsKeys.ADMIN_EMAIL_FROM_ADDRESS + "--" %>' value="<%= PropsValues.ADMIN_EMAIL_FROM_ADDRESS %>" />
 						</aui:fieldset>
 
 						<aui:fieldset column="<%= true %>" cssClass="aui-w100" label="database">
-
-							<%
-							String[] drivers = PropsUtil.getArray(PropsKeys.SETUP_DATABASE_DRIVERS_LIST);
-
-							String jdbcDefaultUrl = PropsUtil.get(PropsKeys.JDBC_DEFAULT_URL);
-							%>
-
-							<aui:input name="defaultDatabase" type="hidden" value='<%= jdbcDefaultUrl.indexOf("hsqldb") != -1 %>' />
+							<aui:input name="defaultDatabase" type="hidden" value='<%= PropsValues.JDBC_DEFAULT_URL.contains("hypersonic") %>' />
 
 							<div id="defaultDatabaseOptions">
 								<strong><liferay-ui:message key="default-database-hypersonic" /></strong>. <liferay-ui:message key="this-database-is-useful-for-development" />
@@ -100,9 +87,11 @@ String themeImagesPath = cdnHost + themeStaticResourcePath + theme.getImagesPath
 								<aui:select name="databaseType">
 
 									<%
-									for (String driver : drivers) {
+									for (String databaseType : PropsValues.SETUP_DATABASE_TYPES) {
 									%>
-										<aui:option selected="<%= jdbcDefaultUrl.indexOf(driver) != -1 %>" label="<%= driver %>" />
+
+										<aui:option label='<%= "database." + databaseType %>' selected="<%= PropsValues.JDBC_DEFAULT_URL.contains(databaseType) %>" value="<%= databaseType %>" />
+
 									<%
 									}
 									%>
@@ -115,9 +104,9 @@ String themeImagesPath = cdnHost + themeStaticResourcePath + theme.getImagesPath
 
 								<aui:input name="databaseName" value="lportal" />
 
-								<aui:input label="user-name" name='<%= "properties--" + PropsKeys.JDBC_DEFAULT_USERNAME + "--" %>' value="<%= PropsUtil.get(PropsKeys.JDBC_DEFAULT_USERNAME) %>" />
+								<aui:input label="user-name" name='<%= "properties--" + PropsKeys.JDBC_DEFAULT_USERNAME + "--" %>' value="<%= PropsValues.JDBC_DEFAULT_USERNAME %>" />
 
-								<aui:input label="password" name='<%= "properties--" + PropsKeys.JDBC_DEFAULT_PASSWORD + "--" %>' type="password" value="<%= PropsUtil.get(PropsKeys.JDBC_DEFAULT_PASSWORD) %>" />
+								<aui:input label="password" name='<%= "properties--" + PropsKeys.JDBC_DEFAULT_PASSWORD + "--" %>' type="password" value="<%= PropsValues.JDBC_DEFAULT_PASSWORD %>" />
 							</div>
 						</aui:fieldset>
 
@@ -135,7 +124,7 @@ String themeImagesPath = cdnHost + themeStaticResourcePath + theme.getImagesPath
 						var defaultDatabaseOptions = A.one('#defaultDatabaseOptions');
 						var defaultDatabaseOptionsLink = A.one('#defaultDatabaseOptionsLink');
 
-						if (databaseSelector.val() != 'hsqldb') {
+						if (databaseSelector.val() != 'hypersonic') {
 							defaultDatabaseOptions.hide();
 
 							customDatabaseOptions.show();
@@ -160,7 +149,7 @@ String themeImagesPath = cdnHost + themeStaticResourcePath + theme.getImagesPath
 						var onChangeDatabaseSelector = function() {
 							var value = databaseSelector.val();
 
-							var displayMessage = !(/^hsqldb|mysql|postgresql$/.test(value));
+							var displayMessage = !(/^hypersonic|mysql|postgresql$/.test(value));
 
 							databaseMessage.toggle(displayMessage);
 						}
@@ -190,7 +179,8 @@ String themeImagesPath = cdnHost + themeStaticResourcePath + theme.getImagesPath
 					%>
 
 					<c:choose>
-						<c:when test="<%= propertiesFileCreated %>">
+						<c:when test="<%= propertiesFileUpdated %>">
+
 							<%
 							PortletURL loginURL = new PortletURLImpl(request, PortletKeys.LOGIN, plid, PortletRequest.ACTION_PHASE);
 
@@ -203,7 +193,6 @@ String themeImagesPath = cdnHost + themeStaticResourcePath + theme.getImagesPath
 
 							<aui:form action="<%= loginURL %>" method="post" name="fm">
 								<aui:input name="login" type="hidden" value="<%= PropsValues.DEFAULT_ADMIN_EMAIL_ADDRESS %>" />
-
 								<aui:input name="password" type="hidden" value='<%= PropsValues.DEFAULT_ADMIN_PASSWORD %>' />
 
 								<aui:fieldset label="congratulations">
@@ -237,7 +226,7 @@ String themeImagesPath = cdnHost + themeStaticResourcePath + theme.getImagesPath
 							</aui:fieldset>
 
 							<aui:fieldset label="your-portal-ext-properties">
-								<aui:input inputCssClass="properties-text" name="portal-ext" label="" type="textarea" value="<%= properties.toString() %>" wrap="soft" />
+								<aui:input inputCssClass="properties-text" name="portal-ext" label="" type="textarea" value="<%= unicodeProperties.toString() %>" wrap="soft" />
 							</aui:fieldset>
 						</c:otherwise>
 					</c:choose>
