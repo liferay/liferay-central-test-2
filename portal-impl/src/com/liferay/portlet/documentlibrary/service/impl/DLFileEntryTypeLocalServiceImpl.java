@@ -58,7 +58,6 @@ public class DLFileEntryTypeLocalServiceImpl
 		throws PortalException, SystemException {
 
 		User user = userPersistence.findByPrimaryKey(userId);
-		Date now = new Date();
 
 		long fileEntryTypeId = counterLocalService.increment();
 
@@ -70,7 +69,9 @@ public class DLFileEntryTypeLocalServiceImpl
 				ddmStructureIds, dynamicStructureId);
 		}
 
-		verify(ddmStructureIds);
+		Date now = new Date();
+
+		validate(ddmStructureIds);
 
 		DLFileEntryType dlFileEntryType = dlFileEntryTypePersistence.create(
 			fileEntryTypeId);
@@ -255,7 +256,7 @@ public class DLFileEntryTypeLocalServiceImpl
 				ddmStructureIds, dynamicStructureId);
 		}
 
-		verify(ddmStructureIds);
+		validate(ddmStructureIds);
 
 		dlFileEntryType.setModifiedDate(serviceContext.getModifiedDate(null));
 		dlFileEntryType.setName(name);
@@ -399,12 +400,16 @@ public class DLFileEntryTypeLocalServiceImpl
 			ServiceContext serviceContext)
 		throws SystemException, PortalException {
 
-		Locale locale = ServiceContextUtil.getLocale(serviceContext);
-		Locale defaultLocale = LocaleUtil.getDefault();
+		String ddmStructureKey = "auto_" + fileEntryTypeId;
 
 		Map<Locale, String> nameMap = new HashMap<Locale, String>();
 
+		Locale locale = ServiceContextUtil.getLocale(serviceContext);
+
 		nameMap.put(locale, name);
+
+		Locale defaultLocale = LocaleUtil.getDefault();
+
 		nameMap.put(defaultLocale, name);
 
 		Map<Locale, String> descriptionMap = new HashMap<Locale, String>();
@@ -413,8 +418,6 @@ public class DLFileEntryTypeLocalServiceImpl
 		descriptionMap.put(defaultLocale, description);
 
 		String xsd = ParamUtil.getString(serviceContext, "xsd");
-
-		String ddmStructureKey = "auto_" + fileEntryTypeId;
 
 		DDMStructure ddmStructure = ddmStructureService.fetchStructure(
 			groupId, ddmStructureKey);
@@ -445,7 +448,7 @@ public class DLFileEntryTypeLocalServiceImpl
 		return 0;
 	}
 
-	protected void verify(long[] ddmStructureIds)
+	protected void validate(long[] ddmStructureIds)
 		throws PortalException, SystemException {
 
 		if (ddmStructureIds.length == 0) {
