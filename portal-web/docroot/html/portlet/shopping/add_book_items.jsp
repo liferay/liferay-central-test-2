@@ -22,8 +22,6 @@ String redirect = ParamUtil.getString(request, "redirect");
 long categoryId = ParamUtil.getLong(request, "categoryId", ShoppingCategoryConstants.DEFAULT_PARENT_CATEGORY_ID);
 %>
 
-<liferay-ui:error exception="<%= PortalException.class %>" />
-
 <portlet:actionURL var="addBookItemsURL">
 	<portlet:param name="struts_action" value="/shopping/add_book_items" />
 </portlet:actionURL>
@@ -35,6 +33,8 @@ long categoryId = ParamUtil.getLong(request, "categoryId", ShoppingCategoryConst
 	<liferay-util:include page="/html/portlet/shopping/tabs1.jsp">
 		<liferay-util:param name="tabs1" value="categories" />
 	</liferay-util:include>
+
+	<liferay-ui:error exception="<%= AmazonException.class %>" />
 
 	<div class="breadcrumbs">
 		<%= ShoppingUtil.getBreadcrumbs(categoryId, pageContext, renderRequest, renderResponse) %>

@@ -14,7 +14,6 @@
 
 package com.liferay.portlet.shopping.action;
 
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -23,6 +22,7 @@ import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.shopping.AmazonException;
 import com.liferay.portlet.shopping.service.ShoppingItemServiceUtil;
 
 import javax.portlet.ActionRequest;
@@ -86,8 +86,8 @@ public class AddBookItemsAction extends PortletAction {
 		try {
 			ShoppingItemServiceUtil.addBookItems(groupId, categoryId, isbns);
 		}
-		catch(PortalException pe) {
-			 SessionErrors.add(actionRequest, pe.getClass().getName());
+		catch (AmazonException ae) {
+			 SessionErrors.add(actionRequest, ae.getClass().getName());
 		}
 	}
 

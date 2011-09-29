@@ -30,6 +30,7 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portlet.amazonrankings.model.AmazonRankings;
 import com.liferay.portlet.amazonrankings.util.AmazonRankingsUtil;
+import com.liferay.portlet.shopping.AmazonException;
 import com.liferay.portlet.shopping.DuplicateItemSKUException;
 import com.liferay.portlet.shopping.ItemLargeImageNameException;
 import com.liferay.portlet.shopping.ItemLargeImageSizeException;
@@ -46,7 +47,6 @@ import com.liferay.portlet.shopping.model.ShoppingItemField;
 import com.liferay.portlet.shopping.model.ShoppingItemPrice;
 import com.liferay.portlet.shopping.model.ShoppingItemPriceConstants;
 import com.liferay.portlet.shopping.service.base.ShoppingItemLocalServiceBaseImpl;
-import com.liferay.portlet.shopping.util.ShoppingUtil;
 import com.liferay.util.PwdGenerator;
 
 import java.io.File;
@@ -69,12 +69,7 @@ public class ShoppingItemLocalServiceImpl
 		throws PortalException, SystemException {
 
 		try {
-			if (ShoppingUtil.isAmazonConfigured()) {
-				doAddBookItems(userId, groupId, categoryId, isbns);
-			}
-			else {
-				throw new PortalException("Amazon is not configured");
-			}
+			doAddBookItems(userId, groupId, categoryId, isbns);
 		}
 		catch (IOException ioe) {
 			throw new SystemException(ioe);
@@ -600,6 +595,10 @@ public class ShoppingItemLocalServiceImpl
 	protected void doAddBookItems(
 			long userId, long groupId, long categoryId, String[] isbns)
 		throws IOException, PortalException, SystemException {
+
+		if (!AmazonRankingsUtil.isEnabled()) {
+			throw new AmazonException("Amazon integration is not enabled");
+		}
 
 		String tmpDir = SystemProperties.get(SystemProperties.TMP_DIR);
 
