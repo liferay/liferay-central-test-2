@@ -299,7 +299,7 @@ public class DLAppHelperLocalServiceImpl
 				userId, fileEntry.getGroupId(),
 				DLFileEntryConstants.getClassName(),
 				fileEntry.getFileEntryId(), fileEntry.getUuid(),
-				fileEntryTypeId, assetCategoryIds, assetTagNames, visible, null, 
+				fileEntryTypeId, assetCategoryIds, assetTagNames, visible, null,
 				null, null, null, fileEntry.getMimeType(), fileEntry.getTitle(),
 				fileEntry.getDescription(), null, null, null, height, width,
 				null, false);
