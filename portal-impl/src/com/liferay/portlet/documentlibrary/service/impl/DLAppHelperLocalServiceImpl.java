@@ -244,11 +244,11 @@ public class DLAppHelperLocalServiceImpl
 
 		AssetEntry assetEntry = null;
 
+		boolean visible = false;
 		int height = 0;
 		int width = 0;
 
 		boolean addDraftAssetEntry = false;
-		boolean visible = false;
 
 		if (fileEntry instanceof LiferayFileEntry) {
 			DLFileEntry dlFileEntry = (DLFileEntry)fileEntry.getModel();
