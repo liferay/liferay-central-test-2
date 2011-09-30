@@ -151,25 +151,11 @@ public class ${entity.name}Clp extends BaseModelImpl<${entity.name}> implements 
 			}
 
 			public String get${column.methodName}(String languageId) {
-				String value = LocalizationUtil.getLocalization(get${column.methodName}(), languageId);
-
-				if (isEscapedModel()) {
-					return HtmlUtil.escape(value);
-				}
-				else {
-					return value;
-				}
+				return LocalizationUtil.getLocalization(get${column.methodName}(), languageId);
 			}
 
 			public String get${column.methodName}(String languageId, boolean useDefault) {
-				String value = LocalizationUtil.getLocalization(get${column.methodName}(), languageId, useDefault);
-
-				if (isEscapedModel()) {
-					return HtmlUtil.escape(value);
-				}
-				else {
-					return value;
-				}
+				return LocalizationUtil.getLocalization(get${column.methodName}(), languageId, useDefault);
 			}
 
 			public Map<Locale, String> get${column.methodName}Map() {
@@ -348,12 +334,7 @@ public class ${entity.name}Clp extends BaseModelImpl<${entity.name}> implements 
 
 	@Override
 	public ${entity.name} toEscapedModel() {
-		if (isEscapedModel()) {
-			return this;
-		}
-		else {
-			return (${entity.name})Proxy.newProxyInstance(${entity.name}.class.getClassLoader(), new Class[] {${entity.name}.class}, new AutoEscapeBeanHandler(this));
-		}
+		return (${entity.name})Proxy.newProxyInstance(${entity.name}.class.getClassLoader(), new Class[] {${entity.name}.class}, new AutoEscapeBeanHandler(this));
 	}
 
 	@Override

@@ -47,7 +47,7 @@ public abstract class BaseModelImpl<T> implements BaseModel<T> {
 	}
 
 	public boolean isEscapedModel() {
-		return false;
+		return _ESCAPED_MODEL;
 	}
 
 	public ExpandoBridge getExpandoBridge() {
@@ -71,6 +71,8 @@ public abstract class BaseModelImpl<T> implements BaseModel<T> {
 	public T toEscapedModel() {
 		throw new UnsupportedOperationException();
 	}
+
+	private static final boolean _ESCAPED_MODEL = false;
 
 	private boolean _new;
 	private boolean _cachedModel;
