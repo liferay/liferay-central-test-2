@@ -62,10 +62,9 @@ Format dateFormatDate = FastDateFormatFactoryUtil.getDate(locale, timeZone);
 %>
 
 <%!
-private static Set<String> _allMimeTypes;
-private static String _defaultMimeTypes;
+public void jspInit() {
+	super.jspInit();
 
-static {
 	_allMimeTypes = new LinkedHashSet<String>();
 
 	_allMimeTypes.addAll(VideoProcessor.getVideoMimeTypes());
@@ -74,4 +73,7 @@ static {
 
 	_defaultMimeTypes = StringUtil.merge(_allMimeTypes.toArray(new String[_allMimeTypes.size()]));
 }
+
+private Set<String> _allMimeTypes;
+private String _defaultMimeTypes;
 %>
