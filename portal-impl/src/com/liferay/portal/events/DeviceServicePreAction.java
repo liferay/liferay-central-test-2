@@ -102,8 +102,6 @@ public class DeviceServicePreAction extends Action {
 			if (_log.isWarnEnabled()) {
 				_log.warn("Unable to apply device profile", e);
 			}
-
-			return;
 		}
 	}
 
