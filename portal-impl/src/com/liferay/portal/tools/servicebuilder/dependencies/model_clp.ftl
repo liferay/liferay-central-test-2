@@ -158,6 +158,16 @@ public class ${entity.name}Clp extends BaseModelImpl<${entity.name}> implements 
 				return LocalizationUtil.getLocalization(get${column.methodName}(), languageId, useDefault);
 			}
 
+			public String get${column.methodName}CurrentLanguageId() {
+				return _${column.name}CurrentLanguageId;
+			}
+
+			public String get${column.methodName}CurrentValue() {
+				Locale locale = getLocale(_${column.name}CurrentLanguageId);
+
+				return get${column.methodName}(locale);
+			}
+
 			public Map<Locale, String> get${column.methodName}Map() {
 				return LocalizationUtil.getLocalizationMap(get${column.methodName}());
 			}
@@ -188,6 +198,10 @@ public class ${entity.name}Clp extends BaseModelImpl<${entity.name}> implements 
 				else {
 					set${column.methodName}(LocalizationUtil.removeLocalization(get${column.methodName}(), "${column.methodName}", languageId));
 				}
+			}
+
+			public void set${column.methodName}CurrentLanguageId(String languageId) {
+				_${column.name}CurrentLanguageId = languageId;
 			}
 
 			public void set${column.methodName}Map(Map<Locale, String> ${column.name}Map) {
@@ -504,6 +518,10 @@ public class ${entity.name}Clp extends BaseModelImpl<${entity.name}> implements 
 
 	<#list entity.regularColList as column>
 		private ${column.type} _${column.name};
+
+		<#if column.localized>
+			private String _${column.name}CurrentLanguageId;
+		</#if>
 
 		<#if (column.name == "resourcePrimKey") && entity.isResourcedModel()>
 			private boolean _resourceMain;

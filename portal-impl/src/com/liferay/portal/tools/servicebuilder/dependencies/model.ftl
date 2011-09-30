@@ -158,6 +158,12 @@ public interface ${entity.name}Model extends
 			@AutoEscape
 			public String get${column.methodName}(String languageId, boolean useDefault);
 
+			@AutoEscape
+			public String get${column.methodName}CurrentLanguageId();
+
+			@AutoEscape
+			public String get${column.methodName}CurrentValue();
+
 			/**
 			 * Returns a map of the locales and localized ${column.humanNames} of this ${entity.humanName}.
 			 *
@@ -203,6 +209,8 @@ public interface ${entity.name}Model extends
 			 * @param defaultLocale the default locale
 			 */
 			public void set${column.methodName}(String ${column.name}, Locale locale, Locale defaultLocale);
+
+			public void set${column.methodName}CurrentLanguageId(String languageId);
 
 			/**
 			 * Sets the localized ${column.humanNames} of this ${entity.humanName} from the map of locales and localized ${column.humanNames}.

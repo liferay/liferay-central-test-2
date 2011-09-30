@@ -423,6 +423,16 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> imple
 				return LocalizationUtil.getLocalization(get${column.methodName}(), languageId, useDefault);
 			}
 
+			public String get${column.methodName}CurrentLanguageId() {
+				return _${column.name}CurrentLanguageId;
+			}
+
+			public String get${column.methodName}CurrentValue() {
+				Locale locale = getLocale(_${column.name}CurrentLanguageId);
+
+				return get${column.methodName}(locale);
+			}
+
 			public Map<Locale, String> get${column.methodName}Map() {
 				return LocalizationUtil.getLocalizationMap(get${column.methodName}());
 			}
@@ -488,6 +498,10 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> imple
 				else {
 					set${column.methodName}(LocalizationUtil.removeLocalization(get${column.methodName}(), "${column.methodName}", languageId));
 				}
+			}
+
+			public void set${column.methodName}CurrentLanguageId(String languageId) {
+				_${column.name}CurrentLanguageId = languageId;
 			}
 
 			public void set${column.methodName}Map(Map<Locale, String> ${column.name}Map) {
@@ -888,6 +902,10 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> imple
 			private ${entity.name}${column.methodName}BlobModel _${column.name}BlobModel;
 		<#else>
 			private ${column.type} _${column.name};
+
+			<#if column.localized>
+				private String _${column.name}CurrentLanguageId;
+			</#if>
 
 			<#if column.userUuid>
 				private String _${column.userUuidName};
