@@ -80,11 +80,7 @@ public class EditLayoutSetBranchAction extends EditLayoutsAction {
 		}
 		catch (Exception e) {
 			if (e instanceof LayoutSetBranchNameException) {
-				LayoutSetBranchNameException lsbne =
-					(LayoutSetBranchNameException)e;
-
-				SessionErrors.add(
-					actionRequest, e.getClass().getName() + lsbne.getType());
+				SessionErrors.add(actionRequest, e.getClass().getName(), e);
 
 				sendRedirect(actionRequest, actionResponse);
 			}

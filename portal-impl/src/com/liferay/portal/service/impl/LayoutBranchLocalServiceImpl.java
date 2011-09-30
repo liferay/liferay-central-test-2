@@ -195,7 +195,6 @@ public class LayoutBranchLocalServiceImpl
 		}
 		catch (NoSuchLayoutBranchException nsbe) {
 		}
-
 	}
 
 }

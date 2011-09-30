@@ -76,10 +76,7 @@ public class EditLayoutBranchAction extends EditLayoutsAction {
 		}
 		catch (Exception e) {
 			if (e instanceof LayoutBranchNameException) {
-				LayoutBranchNameException lbne = (LayoutBranchNameException)e;
-
-				SessionErrors.add(
-					actionRequest, e.getClass().getName() + lbne.getType());
+				SessionErrors.add(actionRequest, e.getClass().getName(), e);
 
 				sendRedirect(actionRequest, actionResponse);
 			}

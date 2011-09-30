@@ -302,7 +302,7 @@ public class LayoutSetBranchLocalServiceImpl
 
 		validate(
 			layoutSetBranch.getGroupId(), layoutSetBranch.getPrivateLayout(),
-			name, layoutSetBranch.getMaster());
+			name, layoutSetBranch.isMaster());
 
 		layoutSetBranch.setName(name);
 		layoutSetBranch.setDescription(description);

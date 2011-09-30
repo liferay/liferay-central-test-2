@@ -29,9 +29,24 @@ request.setAttribute("view_layout_set_branches.jsp-currentLayoutSetBranchId", St
 <liferay-ui:success key="sitePageVariationMerged" message="site-page-variation-was-merged" />
 <liferay-ui:success key="sitePageVariationUpdated" message="site-page-variation-was-updated" />
 
-<liferay-ui:error key="<%= LayoutSetBranchNameException.class.getName() + LayoutSetBranchNameException.DUPLICATE %>" message="a-site-pages-variation-with-that-name-already-exists" />
-<liferay-ui:error key="<%= LayoutSetBranchNameException.class.getName() + LayoutSetBranchNameException.TOO_LONG %>" message='<%= LanguageUtil.format(pageContext, "please-enter-a-value-between-x-and-x-characters-long", new Object[] {4, 100}) %>' />
-<liferay-ui:error key="<%= LayoutSetBranchNameException.class.getName() + LayoutSetBranchNameException.TOO_SHORT %>" message='<%= LanguageUtil.format(pageContext, "please-enter-a-value-between-x-and-x-characters-long", new Object[] {4, 100}) %>' />
+<liferay-ui:error exception="<%= LayoutSetBranchNameException.class %>">
+
+	<%
+	LayoutSetBranchNameException lsbne = (LayoutSetBranchNameException)errorException;
+	%>
+
+	<c:if test="<%= lsbne.getType() == LayoutSetBranchNameException.DUPLICATE %>">
+		<liferay-ui:message key="a-site-pages-variation-with-that-name-already-exists" />
+	</c:if>
+
+	<c:if test="<%= lsbne.getType() == LayoutSetBranchNameException.TOO_LONG %>">
+		<liferay-ui:message arguments="<%= new Object[] {4, 100} %>" key="please-enter-a-value-between-x-and-x-characters-long" />
+	</c:if>
+
+	<c:if test="<%= lsbne.getType() == LayoutSetBranchNameException.TOO_SHORT %>">
+		<liferay-ui:message arguments="<%= new Object[] {4, 100} %>" key="please-enter-a-value-between-x-and-x-characters-long" />
+	</c:if>
+</liferay-ui:error>
 
 <div class="portlet-msg-info">
 	<liferay-ui:message key="pages-variations-help" />

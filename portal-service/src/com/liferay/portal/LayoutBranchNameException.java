@@ -27,8 +27,6 @@ public class LayoutBranchNameException extends PortalException {
 
 	public static final int TOO_SHORT = 3;
 
-	private int _type;
-
 	public LayoutBranchNameException(int type) {
 		_type = type;
 	}
@@ -36,5 +34,7 @@ public class LayoutBranchNameException extends PortalException {
 	public int getType() {
 		return _type;
 	}
+
+	private int _type;
 
 }

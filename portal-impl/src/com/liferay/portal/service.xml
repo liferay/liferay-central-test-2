@@ -577,15 +577,15 @@
 			<finder-column name="layoutSetBranchId" />
 			<finder-column name="plid" />
 		</finder>
-		<finder name="L_P_M" return-type="LayoutBranch">
-			<finder-column name="layoutSetBranchId" />
-			<finder-column name="plid" />
-			<finder-column name="master" />
-		</finder>
         <finder name="L_P_N" return-type="LayoutBranch" unique="true">
 			<finder-column name="layoutSetBranchId" />
             <finder-column name="plid" />
 			<finder-column name="name" />
+		</finder>
+		<finder name="L_P_M" return-type="LayoutBranch">
+			<finder-column name="layoutSetBranchId" />
+			<finder-column name="plid" />
+			<finder-column name="master" />
 		</finder>
 	</entity>
 	<entity name="LayoutPrototype" uuid="true" local-service="true" remote-service="true">
