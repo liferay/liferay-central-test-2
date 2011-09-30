@@ -183,8 +183,7 @@ public class SetupWizardUtil {
 		String jdbcDefaultDriverClassName = null;
 		String jdbcDefaultURL = null;
 
-		String databaseType = ParamUtil.getString(
-			request, "databaseType", "hypersonic");
+		String databaseType = ParamUtil.getString(request, "databaseType");
 		String databaseName = ParamUtil.getString(
 			request, "databaseName", "lportal");
 

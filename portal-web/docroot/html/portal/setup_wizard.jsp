@@ -56,7 +56,7 @@ boolean passwordUpdated = GetterUtil.getBoolean((Boolean)session.getAttribute(We
 							<aui:input label="portal-name" name='<%= "properties--" + PropsKeys.COMPANY_DEFAULT_WEB_ID + "--" %>' value="<%= PropsValues.COMPANY_DEFAULT_WEB_ID %>" />
 
 							<span class="aui-field-hint">
-								<liferay-ui:message key="for-example-x" arguments='<%= "liferay.com" %>' />
+								<liferay-ui:message arguments='<%= "liferay.com" %>' key="for-example-x" />
 							</span>
 						</aui:fieldset>
 
@@ -72,7 +72,7 @@ boolean passwordUpdated = GetterUtil.getBoolean((Boolean)session.getAttribute(We
 							<aui:input name="defaultDatabase" type="hidden" value='<%= PropsValues.JDBC_DEFAULT_URL.contains("hypersonic") %>' />
 
 							<div id="defaultDatabaseOptions">
-								<strong><liferay-ui:message key="default-database-hypersonic" /></strong>. <liferay-ui:message key="this-database-is-useful-for-development" />
+								<liferay-ui:message key="hypersonic-is-an-embedded-database-useful-for-development-and-demo'ing-purposes" />
 
 								<a href="javascript;" id="customDatabaseOptionsLink">
 									(<liferay-ui:message key="change" />)
@@ -116,8 +116,8 @@ boolean passwordUpdated = GetterUtil.getBoolean((Boolean)session.getAttribute(We
 					</aui:form>
 
 					<aui:script use="aui-base,aui-loading-mask">
-						var customDatabaseOptionsLink = A.one('#customDatabaseOptionsLink');
 						var customDatabaseOptions = A.one('#customDatabaseOptions');
+						var customDatabaseOptionsLink = A.one('#customDatabaseOptionsLink');
 						var databaseMessage = A.one('#databaseMessage');
 						var databaseSelector = A.one('#databaseType');
 						var defaultDatabase = A.one('#defaultDatabase');
@@ -195,39 +195,45 @@ boolean passwordUpdated = GetterUtil.getBoolean((Boolean)session.getAttribute(We
 								<aui:input name="login" type="hidden" value="<%= PropsValues.DEFAULT_ADMIN_EMAIL_ADDRESS %>" />
 								<aui:input name="password" type="hidden" value='<%= PropsValues.DEFAULT_ADMIN_PASSWORD %>' />
 
-								<aui:fieldset label="congratulations">
-									<p>
-										<span class="portlet-msg-success">
-											<liferay-ui:message key="your-configuration-has-finished-sucessfully" />
-										</span>
+								<p>
+									<span class="portlet-msg-success">
+										<liferay-ui:message key="your-configuration-was-saved-sucessfully" />
+									</span>
 
+									<span class="aui-field-hint">
+
+										<%
+										String taglibArguments = "<span class=\"lfr-inline-code\">" + PropsValues.LIFERAY_HOME + StringPool.SLASH + SetupWizardUtil.PROPERTIES_FILE_NAME + "</span>";
+										%>
+
+										<liferay-ui:message arguments="<%= taglibArguments %>" key="the-configuration-was-saved-in" />
+									</span>
+								</p>
+
+								<c:if test="<%= passwordUpdated %>">
+									<p>
 										<span class="aui-field-hint">
-											<liferay-ui:message key="this-configuration-has-been-saved-in" arguments='<%= "<span class=\\"lfr-inline-code\\">" + PropsValues.LIFERAY_HOME + StringPool.SLASH + SetupWizardUtil.PROPERTIES_FILE_NAME + "</span>" %>'/>
+											<liferay-ui:message arguments="<%= PropsValues.DEFAULT_ADMIN_PASSWORD %>" key="your-password-is-x.-don't-forget-to-change-it-in-my-account" />
 										</span>
 									</p>
-								</aui:fieldset>
+								</c:if>
 
 							   <aui:button type="submit" value="go-to-my-portal" />
-
-								<c:if test="<%= !passwordUpdated %>">
-									<span class="aui-field-hint">
-										<liferay-ui:message key="your-password-is-x" arguments="<%= PropsValues.DEFAULT_ADMIN_PASSWORD %>" />
-									</span>
-								</c:if>
 							</aui:form>
 						</c:when>
 						<c:otherwise>
-							<aui:fieldset label="create-a-configuration-file">
-								<p>
-									<span class="portlet-msg-alert">
-										<liferay-ui:message key="sorry-we-were-not-able-to-write-configuration-file" arguments='<%= "<span class=\\"lfr-inline-code\\">" + PropsValues.LIFERAY_HOME + "</span>" %>'/>
-									</span>
-								</p>
-							</aui:fieldset>
+							<p>
+								<span class="portlet-msg-alert">
 
-							<aui:fieldset label="your-portal-ext-properties">
-								<aui:input inputCssClass="properties-text" name="portal-ext" label="" type="textarea" value="<%= unicodeProperties.toString() %>" wrap="soft" />
-							</aui:fieldset>
+									<%
+									String taglibArguments = "<span class=\"lfr-inline-code\">" + PropsValues.LIFERAY_HOME + "</span>";
+									%>
+
+									<liferay-ui:message arguments="<%= taglibArguments %>" key="sorry,-we-were-not-able-to-save-the-configuration-file-in-x" />
+								</span>
+							</p>
+
+							<aui:input inputCssClass="properties-text" name="portal-ext" label="" type="textarea" value="<%= unicodeProperties.toSortedString() %>" wrap="soft" />
 						</c:otherwise>
 					</c:choose>
 				</c:otherwise>
