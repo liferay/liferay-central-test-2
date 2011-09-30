@@ -212,7 +212,7 @@ public class CopyPageChildPageTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isVisible("//div/span/button[4]")) {
+						if (selenium.isVisible("//button[5]")) {
 							break;
 						}
 					}
@@ -223,7 +223,9 @@ public class CopyPageChildPageTest extends BaseTestCase {
 				}
 
 				selenium.saveScreenShotAndSource();
-				selenium.clickAt("//div/span/button[4]",
+				assertEquals(RuntimeVariables.replace("Copy Portlets from Page"),
+					selenium.getText("//button[5]"));
+				selenium.clickAt("//button[5]",
 					RuntimeVariables.replace("Copy Portlets from Page"));
 
 				for (int second = 0;; second++) {
