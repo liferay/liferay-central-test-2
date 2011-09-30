@@ -366,8 +366,8 @@ public class LiferayLocalRepository
 		throws PortalException, SystemException {
 
 		dlAppHelperLocalService.updateAsset(
-			userId, fileEntry, fileVersion, assetCategoryIds,
-			assetTagNames, assetLinkEntryIds);
+			userId, fileEntry, fileVersion, assetCategoryIds, assetTagNames,
+			assetLinkEntryIds);
 	}
 
 	public FileEntry updateFileEntry(

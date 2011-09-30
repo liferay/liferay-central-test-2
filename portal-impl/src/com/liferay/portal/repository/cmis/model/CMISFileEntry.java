@@ -91,15 +91,11 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 		ContentStream contentStream = _document.getContentStream();
 
 		try {
-			String name = PrincipalThreadLocal.getName();
-
-			long userId = GetterUtil.getLong(name);
-
 			DLAppHelperLocalServiceUtil.getFileAsStream(
-				userId, this, true);
+				PrincipalThreadLocal.getUserId(), this, true);
 		}
 		catch (Exception e) {
-			_log.error(e);
+			_log.error(e, e);
 		}
 
 		return contentStream.getStream();
@@ -113,15 +109,11 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 				ContentStream contentStream = document.getContentStream();
 
 				try {
-					String name = PrincipalThreadLocal.getName();
-
-					long userId = GetterUtil.getLong(name);
-
 					DLAppHelperLocalServiceUtil.getFileAsStream(
-						userId, this, true);
+						PrincipalThreadLocal.getUserId(), this, true);
 				}
 				catch (Exception e) {
-					_log.error(e);
+					_log.error(e, e);
 				}
 
 				return contentStream.getStream();

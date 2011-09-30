@@ -210,8 +210,8 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 		Repository repository = getRepository(repositoryId);
 
 		FileEntry fileEntry = repository.addFileEntry(
-			folderId, sourceFileName, mimeType, title, description,
-			changeLog, file, serviceContext);
+			folderId, sourceFileName, mimeType, title, description, changeLog,
+			file, serviceContext);
 
 		dlAppHelperLocalService.addFileEntry(
 			getUserId(), fileEntry, fileEntry.getFileVersion(), serviceContext);

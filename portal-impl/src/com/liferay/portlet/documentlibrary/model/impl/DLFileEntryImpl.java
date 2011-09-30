@@ -335,8 +335,8 @@ public class DLFileEntryImpl extends DLFileEntryBaseImpl {
 
 	private static Log _log = LogFactoryUtil.getLog(DLFileEntryImpl.class);
 
-	private UnicodeProperties _extraSettingsProperties = null;
-	private DLFileVersion _dlFileVersion = null;
+	private UnicodeProperties _extraSettingsProperties;
+	private DLFileVersion _dlFileVersion;
 	private String _imageType;
 
 }

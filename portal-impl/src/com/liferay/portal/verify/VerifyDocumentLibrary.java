@@ -85,15 +85,15 @@ public class VerifyDocumentLibrary extends VerifyProcess {
 
 			try {
 				DLAppHelperLocalServiceUtil.updateAsset(
-					dlFileEntry.getUserId(), fileEntry, fileVersion, null,
-					null, null);
+					dlFileEntry.getUserId(), fileEntry, fileVersion, null, null,
+					null);
 			}
 			catch (Exception e) {
 				if (_log.isWarnEnabled()) {
 					_log.warn(
 						"Unable to update asset for file entry " +
 							dlFileEntry.getFileEntryId() + ": " +
-							e.getMessage());
+								e.getMessage());
 				}
 			}
 		}

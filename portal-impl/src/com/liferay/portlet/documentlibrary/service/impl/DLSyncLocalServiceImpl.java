@@ -61,7 +61,7 @@ public class DLSyncLocalServiceImpl extends DLSyncLocalServiceBaseImpl {
 			dlSync = dlSyncPersistence.fetchByFileId(fileId);
 
 			if (dlSync == null) {
-				return dlSync;
+				return null;
 			}
 		}
 		else {

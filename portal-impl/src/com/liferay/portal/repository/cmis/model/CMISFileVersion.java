@@ -21,7 +21,6 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.FileVersion;
 import com.liferay.portal.kernel.util.FileUtil;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.User;
 import com.liferay.portal.repository.cmis.CMISRepository;
@@ -74,12 +73,9 @@ public class CMISFileVersion extends CMISModel implements FileVersion {
 		ContentStream contentStream = _document.getContentStream();
 
 		try {
-			String name = PrincipalThreadLocal.getName();
-
-			long userId = GetterUtil.getLong(name);
-
 			DLAppHelperLocalServiceUtil.getFileAsStream(
-				userId, getFileEntry(), incrementCounter);
+				PrincipalThreadLocal.getUserId(), getFileEntry(),
+				incrementCounter);
 		}
 		catch (Exception e) {
 			_log.error(e);

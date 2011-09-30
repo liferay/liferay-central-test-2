@@ -78,8 +78,7 @@ public class DLAppHelperLocalServiceImpl
 		}
 
 		if (fileVersion instanceof LiferayFileVersion) {
-			final DLFileVersion dlFileVersion =
-				(DLFileVersion)fileVersion.getModel();
+			DLFileVersion dlFileVersion = (DLFileVersion)fileVersion.getModel();
 
 			startWorkflowInstance(userId, dlFileVersion, serviceContext);
 		}
@@ -204,18 +203,6 @@ public class DLAppHelperLocalServiceImpl
 		return null;
 	}
 
-	protected long getFileEntryTypeId(FileEntry fileEntry)
-		throws PortalException, SystemException {
-
-		if (fileEntry instanceof LiferayFileEntry) {
-			DLFileEntry dlFileEntry = (DLFileEntry)fileEntry.getModel();
-
-			return dlFileEntry.getLatestFileVersion(true).getFileEntryTypeId();
-		}
-
-		return 0;
-	}
-
 	public AssetEntry updateAsset(
 			long userId, FileEntry fileEntry, FileVersion fileVersion,
 			long assetClassPk)
@@ -248,17 +235,10 @@ public class DLAppHelperLocalServiceImpl
 
 		AssetEntry assetEntry = null;
 
-		boolean visible = true;
-
-		boolean addDraftAssetEntry = false;
-
 		int height = 0;
-
 		int width = 0;
 
-		if (!fileVersion.isApproved()) {
-			visible = false;
-		}
+		boolean addDraftAssetEntry = false;
 
 		if (fileEntry instanceof LiferayFileEntry) {
 			DLFileEntry dlFileEntry = (DLFileEntry)fileEntry.getModel();
@@ -303,10 +283,11 @@ public class DLAppHelperLocalServiceImpl
 				userId, fileEntry.getGroupId(),
 				DLFileEntryConstants.getClassName(),
 				fileEntry.getFileEntryId(), fileEntry.getUuid(),
-				fileEntryTypeId, assetCategoryIds, assetTagNames, visible,
-				null, null, null, null, fileEntry.getMimeType(),
-				fileEntry.getTitle(), fileEntry.getDescription(), null, null,
-				null, height, width, null, false);
+				fileEntryTypeId, assetCategoryIds, assetTagNames,
+				fileVersion.isApproved(), null, null, null, null,
+				fileEntry.getMimeType(), fileEntry.getTitle(),
+				fileEntry.getDescription(), null, null, null, height, width,
+				null, false);
 
 			List<DLFileShortcut> dlFileShortcuts =
 				dlFileShortcutPersistence.findByToFileEntryId(
@@ -334,14 +315,6 @@ public class DLAppHelperLocalServiceImpl
 
 	public void updateFileEntry(
 			long userId, FileEntry fileEntry, FileVersion fileVersion,
-			ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		updateFileEntry(userId, fileEntry, fileVersion, false, serviceContext);
-	}
-
-	public void updateFileEntry(
-			long userId, FileEntry fileEntry, FileVersion fileVersion,
 			boolean checkIn, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
@@ -355,13 +328,20 @@ public class DLAppHelperLocalServiceImpl
 		 	(serviceContext.getWorkflowAction() ==
 		 		WorkflowConstants.ACTION_PUBLISH)) {
 
-			final DLFileVersion dlFileVersion =
-				(DLFileVersion)fileVersion.getModel();
+			DLFileVersion dlFileVersion = (DLFileVersion)fileVersion.getModel();
 
 			startWorkflowInstance(userId, dlFileVersion, serviceContext);
 		}
 
 		registerDLProcessorCallback(fileEntry);
+	}
+
+	public void updateFileEntry(
+			long userId, FileEntry fileEntry, FileVersion fileVersion,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		updateFileEntry(userId, fileEntry, fileVersion, false, serviceContext);
 	}
 
 	public void updateFolder(Folder folder, ServiceContext serviceContext)
@@ -487,6 +467,18 @@ public class DLAppHelperLocalServiceImpl
 		}
 	}
 
+	protected long getFileEntryTypeId(FileEntry fileEntry)
+		throws PortalException, SystemException {
+
+		if (fileEntry instanceof LiferayFileEntry) {
+			DLFileEntry dlFileEntry = (DLFileEntry)fileEntry.getModel();
+
+			return dlFileEntry.getLatestFileVersion(true).getFileEntryTypeId();
+		}
+
+		return 0;
+	}
+
 	protected boolean isStagingGroup(long groupId) {
 		try {
 			Group group = groupLocalService.getGroup(groupId);
@@ -522,11 +514,9 @@ public class DLAppHelperLocalServiceImpl
 		workflowContext.put("event", DLSyncConstants.EVENT_ADD);
 
 		WorkflowHandlerRegistryUtil.startWorkflowInstance(
-			dlFileVersion.getCompanyId(),
-			dlFileVersion.getGroupId(), userId,
-			DLFileEntry.class.getName(),
-			dlFileVersion.getFileVersionId(), dlFileVersion,
-			serviceContext, workflowContext);
+			dlFileVersion.getCompanyId(), dlFileVersion.getGroupId(), userId,
+			DLFileEntry.class.getName(), dlFileVersion.getFileVersionId(),
+			dlFileVersion, serviceContext, workflowContext);
 	}
 
 }

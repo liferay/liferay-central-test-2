@@ -36,7 +36,6 @@ import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.servlet.PortalSessionThreadLocal;
 import com.liferay.portal.kernel.util.AutoResetThreadLocal;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -1083,16 +1082,13 @@ public class CMISRepository extends BaseCmisRepository {
 			if (assetEntry == null) {
 				FileVersion fileVersion = fileEntry.getFileVersion();
 
-				String name = PrincipalThreadLocal.getName();
-
-				long userId = GetterUtil.getLong(name);
-
 				dlAppHelperLocalService.addFileEntry(
-					userId, fileEntry, fileVersion, new ServiceContext());
+					PrincipalThreadLocal.getUserId(), fileEntry, fileVersion,
+					new ServiceContext());
 			}
 		}
 		catch (Exception e) {
-			_log.error("Error attempting to update asset info", e);
+			_log.error("Unable to update asset", e);
 		}
 
 		return fileEntry;
