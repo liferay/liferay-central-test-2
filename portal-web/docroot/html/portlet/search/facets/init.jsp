@@ -32,7 +32,6 @@ FacetCollector facetCollector = facet.getFacetCollector();
 List<TermCollector> termCollectors = facetCollector.getTermCollectors();
 
 String cssClass = "search-facet search-".concat(facetConfiguration.getDisplayStyle());
-String cssClassSelector = ".search-facet.search-".concat(facetConfiguration.getDisplayStyle());
 %>
 
 <%!
