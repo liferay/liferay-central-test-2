@@ -32,11 +32,11 @@ Map<String, PortletURL> addPortletURLs = getAddPortletURLs(liferayPortletRequest
 
 			String message = StringPool.BLANK;
 
-			if (className.equals(JournalArticle.class.getName())) {
-				message = "basic-web-content";
-			}
-			else if (className.equals(DLFileEntry.class.getName())) {
+			if (className.equals(DLFileEntry.class.getName())) {
 				message = "document";
+			}
+			else if (className.equals(JournalArticle.class.getName())) {
+				message = "basic-web-content";
 			}
 			else {
 				message = ResourceActionsUtil.getModelResourceNamePrefix() + className;
@@ -84,7 +84,7 @@ Map<String, PortletURL> addPortletURLs = getAddPortletURLs(liferayPortletRequest
 </c:if>
 
 <%!
-public PortletURL getAddPortletURL(LiferayPortletRequest liferayPortletRequest, LiferayPortletResponse liferayPortletResponse, String className, long[] allAssetCategoryIds, String[] allAssetTagNames, long classTypeId) throws Exception {
+public PortletURL getAddPortletURL(LiferayPortletRequest liferayPortletRequest, LiferayPortletResponse liferayPortletResponse, String className, long classTypeId, long[] allAssetCategoryIds, String[] allAssetTagNames) throws Exception {
 	ThemeDisplay themeDisplay = (ThemeDisplay)liferayPortletRequest.getAttribute(WebKeys.THEME_DISPLAY);
 
 	AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(className);
@@ -157,7 +157,7 @@ public Map<String, PortletURL> getAddPortletURLs(LiferayPortletRequest liferayPo
 		Map<Long, String> classTypes = assetRendererFactory.getClassTypes(new long[] {themeDisplay.getCompanyGroupId(), themeDisplay.getScopeGroupId()});
 
 		if ((classTypeIds.length == 0) || (classTypes == null)) {
-			PortletURL addPortletURL = getAddPortletURL(liferayPortletRequest, liferayPortletResponse, className, allAssetCategoryIds, allAssetTagNames, 0);
+			PortletURL addPortletURL = getAddPortletURL(liferayPortletRequest, liferayPortletResponse, className, 0, allAssetCategoryIds, allAssetTagNames);
 
 			if (addPortletURL != null) {
 				addPortletURLs.put(className, addPortletURL);
@@ -167,7 +167,7 @@ public Map<String, PortletURL> getAddPortletURLs(LiferayPortletRequest liferayPo
 		if (classTypes != null) {
 			for (long classTypeId : classTypes.keySet()) {
 				if (ArrayUtil.contains(classTypeIds, classTypeId) || (classTypeIds.length == 0)) {
-					PortletURL addPortletURL = getAddPortletURL(liferayPortletRequest, liferayPortletResponse, className, allAssetCategoryIds, allAssetTagNames, classTypeId);
+					PortletURL addPortletURL = getAddPortletURL(liferayPortletRequest, liferayPortletResponse, className, classTypeId, allAssetCategoryIds, allAssetTagNames);
 
 					if (addPortletURL != null) {
 						String mesage = className + _CLASSNAME_SEPARATOR + classTypes.get(classTypeId);
