@@ -84,18 +84,18 @@ public class TikaRawMetadataProcessor extends XugglerRawMetadataProcessor {
 			metadata = new Metadata();
 		}
 
-		ParseContext context = new ParseContext();
+		ParseContext parserContext = new ParseContext();
 
-		context.set(Parser.class, _parser);
+		parserContext.set(Parser.class, _parser);
 
 		ContentHandler contentHandler = new WriteOutContentHandler(
 			new DummyWriter());
 
 		try {
-			_parser.parse(inputStream, contentHandler, metadata, context);
+			_parser.parse(inputStream, contentHandler, metadata, parserContext);
 		}
 		catch (Exception e) {
-			_log.error("Failed parsing", e);
+			_log.error("Unable to parse", e);
 
 			throw new IOException(e.getMessage());
 		}
