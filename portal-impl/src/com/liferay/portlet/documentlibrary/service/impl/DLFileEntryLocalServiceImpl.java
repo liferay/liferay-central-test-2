@@ -292,7 +292,7 @@ public class DLFileEntryLocalServiceImpl
 
 		dlFileVersionPersistence.update(dlFileVersion, false);
 
-		// Asset
+		// App helper
 
 		dlAppHelperLocalService.updateAsset(
 			userId, new LiferayFileEntry(dlFileEntry),
@@ -1033,7 +1033,7 @@ public class DLFileEntryLocalServiceImpl
 			}
 		}
 
-		// DLApp
+		// App helper
 
 		dlAppHelperLocalService.updateStatus(
 			userId, new LiferayFileEntry(dlFileEntry),
@@ -1570,7 +1570,7 @@ public class DLFileEntryLocalServiceImpl
 				fieldsMap, version, size, dlFileVersion.getStatus(),
 				serviceContext.getModifiedDate(now), serviceContext);
 
-			// DLApp
+			// App helper
 
 			dlAppHelperLocalService.updateAsset(
 				userId, new LiferayFileEntry(dlFileEntry),
