@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.search.SearchContext;
+import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.UnicodeProperties;
@@ -216,7 +217,7 @@ public abstract class BaseRepositoryImpl implements BaseRepository {
 		Indexer indexer = IndexerRegistryUtil.getIndexer(
 			DLFileEntryConstants.getClassName());
 
-		searchContext.setSearchEngineId("GENERIC_ENGINE");
+		searchContext.setSearchEngineId(SearchEngineUtil.GENERIC_ENGINE_ID);
 
 		BooleanQuery fullQuery = indexer.getFullQuery(searchContext);
 

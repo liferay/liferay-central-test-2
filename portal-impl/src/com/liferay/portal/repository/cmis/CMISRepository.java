@@ -1570,8 +1570,9 @@ public class CMISRepository extends BaseCmisRepository {
 					"HITS");
 
 				if (scoreObj instanceof BigDecimal) {
-					BigDecimal bigDecimalScore = (BigDecimal)scoreObj;
-					scores[index] = bigDecimalScore.floatValue();
+					BigDecimal scoreBigDecimal = (BigDecimal)scoreObj;
+
+					scores[index] = scoreBigDecimal.floatValue();
 				}
 				else {
 					scores[index] = (Float)scoreObj;
