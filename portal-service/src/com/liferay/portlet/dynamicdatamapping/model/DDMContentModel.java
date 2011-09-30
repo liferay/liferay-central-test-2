@@ -237,6 +237,12 @@ public interface DDMContentModel extends BaseModel<DDMContent>, GroupedModel {
 	@AutoEscape
 	public String getName(String languageId, boolean useDefault);
 
+	@AutoEscape
+	public String getNameCurrentLanguageId();
+
+	@AutoEscape
+	public String getNameCurrentValue();
+
 	/**
 	 * Returns a map of the locales and localized names of this d d m content.
 	 *
@@ -267,6 +273,8 @@ public interface DDMContentModel extends BaseModel<DDMContent>, GroupedModel {
 	 * @param defaultLocale the default locale
 	 */
 	public void setName(String name, Locale locale, Locale defaultLocale);
+
+	public void setNameCurrentLanguageId(String languageId);
 
 	/**
 	 * Sets the localized names of this d d m content from the map of locales and localized names.

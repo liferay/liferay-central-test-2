@@ -163,6 +163,12 @@ public interface PollsChoiceModel extends BaseModel<PollsChoice> {
 	@AutoEscape
 	public String getDescription(String languageId, boolean useDefault);
 
+	@AutoEscape
+	public String getDescriptionCurrentLanguageId();
+
+	@AutoEscape
+	public String getDescriptionCurrentValue();
+
 	/**
 	 * Returns a map of the locales and localized descriptions of this polls choice.
 	 *
@@ -194,6 +200,8 @@ public interface PollsChoiceModel extends BaseModel<PollsChoice> {
 	 */
 	public void setDescription(String description, Locale locale,
 		Locale defaultLocale);
+
+	public void setDescriptionCurrentLanguageId(String languageId);
 
 	/**
 	 * Sets the localized descriptions of this polls choice from the map of locales and localized descriptions.

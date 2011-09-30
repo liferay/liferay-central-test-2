@@ -238,6 +238,12 @@ public interface LayoutModel extends BaseModel<Layout> {
 	@AutoEscape
 	public String getName(String languageId, boolean useDefault);
 
+	@AutoEscape
+	public String getNameCurrentLanguageId();
+
+	@AutoEscape
+	public String getNameCurrentValue();
+
 	/**
 	 * Returns a map of the locales and localized names of this layout.
 	 *
@@ -268,6 +274,8 @@ public interface LayoutModel extends BaseModel<Layout> {
 	 * @param defaultLocale the default locale
 	 */
 	public void setName(String name, Locale locale, Locale defaultLocale);
+
+	public void setNameCurrentLanguageId(String languageId);
 
 	/**
 	 * Sets the localized names of this layout from the map of locales and localized names.
@@ -329,6 +337,12 @@ public interface LayoutModel extends BaseModel<Layout> {
 	@AutoEscape
 	public String getTitle(String languageId, boolean useDefault);
 
+	@AutoEscape
+	public String getTitleCurrentLanguageId();
+
+	@AutoEscape
+	public String getTitleCurrentValue();
+
 	/**
 	 * Returns a map of the locales and localized titles of this layout.
 	 *
@@ -359,6 +373,8 @@ public interface LayoutModel extends BaseModel<Layout> {
 	 * @param defaultLocale the default locale
 	 */
 	public void setTitle(String title, Locale locale, Locale defaultLocale);
+
+	public void setTitleCurrentLanguageId(String languageId);
 
 	/**
 	 * Sets the localized titles of this layout from the map of locales and localized titles.
@@ -420,6 +436,12 @@ public interface LayoutModel extends BaseModel<Layout> {
 	@AutoEscape
 	public String getDescription(String languageId, boolean useDefault);
 
+	@AutoEscape
+	public String getDescriptionCurrentLanguageId();
+
+	@AutoEscape
+	public String getDescriptionCurrentValue();
+
 	/**
 	 * Returns a map of the locales and localized descriptions of this layout.
 	 *
@@ -451,6 +473,8 @@ public interface LayoutModel extends BaseModel<Layout> {
 	 */
 	public void setDescription(String description, Locale locale,
 		Locale defaultLocale);
+
+	public void setDescriptionCurrentLanguageId(String languageId);
 
 	/**
 	 * Sets the localized descriptions of this layout from the map of locales and localized descriptions.
@@ -513,6 +537,12 @@ public interface LayoutModel extends BaseModel<Layout> {
 	@AutoEscape
 	public String getKeywords(String languageId, boolean useDefault);
 
+	@AutoEscape
+	public String getKeywordsCurrentLanguageId();
+
+	@AutoEscape
+	public String getKeywordsCurrentValue();
+
 	/**
 	 * Returns a map of the locales and localized keywordses of this layout.
 	 *
@@ -543,6 +573,8 @@ public interface LayoutModel extends BaseModel<Layout> {
 	 * @param defaultLocale the default locale
 	 */
 	public void setKeywords(String keywords, Locale locale, Locale defaultLocale);
+
+	public void setKeywordsCurrentLanguageId(String languageId);
 
 	/**
 	 * Sets the localized keywordses of this layout from the map of locales and localized keywordses.
@@ -605,6 +637,12 @@ public interface LayoutModel extends BaseModel<Layout> {
 	@AutoEscape
 	public String getRobots(String languageId, boolean useDefault);
 
+	@AutoEscape
+	public String getRobotsCurrentLanguageId();
+
+	@AutoEscape
+	public String getRobotsCurrentValue();
+
 	/**
 	 * Returns a map of the locales and localized robotses of this layout.
 	 *
@@ -635,6 +673,8 @@ public interface LayoutModel extends BaseModel<Layout> {
 	 * @param defaultLocale the default locale
 	 */
 	public void setRobots(String robots, Locale locale, Locale defaultLocale);
+
+	public void setRobotsCurrentLanguageId(String languageId);
 
 	/**
 	 * Sets the localized robotses of this layout from the map of locales and localized robotses.

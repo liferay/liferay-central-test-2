@@ -267,6 +267,12 @@ public interface JournalStructureModel extends BaseModel<JournalStructure>,
 	@AutoEscape
 	public String getName(String languageId, boolean useDefault);
 
+	@AutoEscape
+	public String getNameCurrentLanguageId();
+
+	@AutoEscape
+	public String getNameCurrentValue();
+
 	/**
 	 * Returns a map of the locales and localized names of this journal structure.
 	 *
@@ -297,6 +303,8 @@ public interface JournalStructureModel extends BaseModel<JournalStructure>,
 	 * @param defaultLocale the default locale
 	 */
 	public void setName(String name, Locale locale, Locale defaultLocale);
+
+	public void setNameCurrentLanguageId(String languageId);
 
 	/**
 	 * Sets the localized names of this journal structure from the map of locales and localized names.
@@ -358,6 +366,12 @@ public interface JournalStructureModel extends BaseModel<JournalStructure>,
 	@AutoEscape
 	public String getDescription(String languageId, boolean useDefault);
 
+	@AutoEscape
+	public String getDescriptionCurrentLanguageId();
+
+	@AutoEscape
+	public String getDescriptionCurrentValue();
+
 	/**
 	 * Returns a map of the locales and localized descriptions of this journal structure.
 	 *
@@ -389,6 +403,8 @@ public interface JournalStructureModel extends BaseModel<JournalStructure>,
 	 */
 	public void setDescription(String description, Locale locale,
 		Locale defaultLocale);
+
+	public void setDescriptionCurrentLanguageId(String languageId);
 
 	/**
 	 * Sets the localized descriptions of this journal structure from the map of locales and localized descriptions.

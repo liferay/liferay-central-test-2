@@ -400,6 +400,16 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 			useDefault);
 	}
 
+	public String getNameCurrentLanguageId() {
+		return _nameCurrentLanguageId;
+	}
+
+	public String getNameCurrentValue() {
+		Locale locale = getLocale(_nameCurrentLanguageId);
+
+		return getName(locale);
+	}
+
 	public Map<Locale, String> getNameMap() {
 		return LocalizationUtil.getLocalizationMap(getName());
 	}
@@ -424,6 +434,10 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 			setName(LocalizationUtil.removeLocalization(getName(), "Name",
 					languageId));
 		}
+	}
+
+	public void setNameCurrentLanguageId(String languageId) {
+		_nameCurrentLanguageId = languageId;
 	}
 
 	public void setNameMap(Map<Locale, String> nameMap) {
@@ -475,6 +489,16 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 			useDefault);
 	}
 
+	public String getTitleCurrentLanguageId() {
+		return _titleCurrentLanguageId;
+	}
+
+	public String getTitleCurrentValue() {
+		Locale locale = getLocale(_titleCurrentLanguageId);
+
+		return getTitle(locale);
+	}
+
 	public Map<Locale, String> getTitleMap() {
 		return LocalizationUtil.getLocalizationMap(getTitle());
 	}
@@ -499,6 +523,10 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 			setTitle(LocalizationUtil.removeLocalization(getTitle(), "Title",
 					languageId));
 		}
+	}
+
+	public void setTitleCurrentLanguageId(String languageId) {
+		_titleCurrentLanguageId = languageId;
 	}
 
 	public void setTitleMap(Map<Locale, String> titleMap) {
@@ -550,6 +578,16 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 			useDefault);
 	}
 
+	public String getDescriptionCurrentLanguageId() {
+		return _descriptionCurrentLanguageId;
+	}
+
+	public String getDescriptionCurrentValue() {
+		Locale locale = getLocale(_descriptionCurrentLanguageId);
+
+		return getDescription(locale);
+	}
+
 	public Map<Locale, String> getDescriptionMap() {
 		return LocalizationUtil.getLocalizationMap(getDescription());
 	}
@@ -576,6 +614,10 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 			setDescription(LocalizationUtil.removeLocalization(
 					getDescription(), "Description", languageId));
 		}
+	}
+
+	public void setDescriptionCurrentLanguageId(String languageId) {
+		_descriptionCurrentLanguageId = languageId;
 	}
 
 	public void setDescriptionMap(Map<Locale, String> descriptionMap) {
@@ -628,6 +670,16 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 			useDefault);
 	}
 
+	public String getKeywordsCurrentLanguageId() {
+		return _keywordsCurrentLanguageId;
+	}
+
+	public String getKeywordsCurrentValue() {
+		Locale locale = getLocale(_keywordsCurrentLanguageId);
+
+		return getKeywords(locale);
+	}
+
 	public Map<Locale, String> getKeywordsMap() {
 		return LocalizationUtil.getLocalizationMap(getKeywords());
 	}
@@ -652,6 +704,10 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 			setKeywords(LocalizationUtil.removeLocalization(getKeywords(),
 					"Keywords", languageId));
 		}
+	}
+
+	public void setKeywordsCurrentLanguageId(String languageId) {
+		_keywordsCurrentLanguageId = languageId;
 	}
 
 	public void setKeywordsMap(Map<Locale, String> keywordsMap) {
@@ -704,6 +760,16 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 			useDefault);
 	}
 
+	public String getRobotsCurrentLanguageId() {
+		return _robotsCurrentLanguageId;
+	}
+
+	public String getRobotsCurrentValue() {
+		Locale locale = getLocale(_robotsCurrentLanguageId);
+
+		return getRobots(locale);
+	}
+
 	public Map<Locale, String> getRobotsMap() {
 		return LocalizationUtil.getLocalizationMap(getRobots());
 	}
@@ -728,6 +794,10 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 			setRobots(LocalizationUtil.removeLocalization(getRobots(),
 					"Robots", languageId));
 		}
+	}
+
+	public void setRobotsCurrentLanguageId(String languageId) {
+		_robotsCurrentLanguageId = languageId;
 	}
 
 	public void setRobotsMap(Map<Locale, String> robotsMap) {
@@ -1557,10 +1627,15 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 	private long _originalParentLayoutId;
 	private boolean _setOriginalParentLayoutId;
 	private String _name;
+	private String _nameCurrentLanguageId;
 	private String _title;
+	private String _titleCurrentLanguageId;
 	private String _description;
+	private String _descriptionCurrentLanguageId;
 	private String _keywords;
+	private String _keywordsCurrentLanguageId;
 	private String _robots;
+	private String _robotsCurrentLanguageId;
 	private String _type;
 	private String _originalType;
 	private String _typeSettings;

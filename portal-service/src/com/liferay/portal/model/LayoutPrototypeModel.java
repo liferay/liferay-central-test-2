@@ -146,6 +146,12 @@ public interface LayoutPrototypeModel extends BaseModel<LayoutPrototype> {
 	@AutoEscape
 	public String getName(String languageId, boolean useDefault);
 
+	@AutoEscape
+	public String getNameCurrentLanguageId();
+
+	@AutoEscape
+	public String getNameCurrentValue();
+
 	/**
 	 * Returns a map of the locales and localized names of this layout prototype.
 	 *
@@ -176,6 +182,8 @@ public interface LayoutPrototypeModel extends BaseModel<LayoutPrototype> {
 	 * @param defaultLocale the default locale
 	 */
 	public void setName(String name, Locale locale, Locale defaultLocale);
+
+	public void setNameCurrentLanguageId(String languageId);
 
 	/**
 	 * Sets the localized names of this layout prototype from the map of locales and localized names.

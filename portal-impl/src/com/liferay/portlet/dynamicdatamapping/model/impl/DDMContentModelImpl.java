@@ -267,6 +267,16 @@ public class DDMContentModelImpl extends BaseModelImpl<DDMContent>
 			useDefault);
 	}
 
+	public String getNameCurrentLanguageId() {
+		return _nameCurrentLanguageId;
+	}
+
+	public String getNameCurrentValue() {
+		Locale locale = getLocale(_nameCurrentLanguageId);
+
+		return getName(locale);
+	}
+
 	public Map<Locale, String> getNameMap() {
 		return LocalizationUtil.getLocalizationMap(getName());
 	}
@@ -291,6 +301,10 @@ public class DDMContentModelImpl extends BaseModelImpl<DDMContent>
 			setName(LocalizationUtil.removeLocalization(getName(), "Name",
 					languageId));
 		}
+	}
+
+	public void setNameCurrentLanguageId(String languageId) {
+		_nameCurrentLanguageId = languageId;
 	}
 
 	public void setNameMap(Map<Locale, String> nameMap) {
@@ -629,6 +643,7 @@ public class DDMContentModelImpl extends BaseModelImpl<DDMContent>
 	private Date _createDate;
 	private Date _modifiedDate;
 	private String _name;
+	private String _nameCurrentLanguageId;
 	private String _description;
 	private String _xml;
 	private transient ExpandoBridge _expandoBridge;

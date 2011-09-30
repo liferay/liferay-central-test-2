@@ -380,6 +380,12 @@ public interface AssetEntryModel extends AttachedModel, BaseModel<AssetEntry>,
 	@AutoEscape
 	public String getTitle(String languageId, boolean useDefault);
 
+	@AutoEscape
+	public String getTitleCurrentLanguageId();
+
+	@AutoEscape
+	public String getTitleCurrentValue();
+
 	/**
 	 * Returns a map of the locales and localized titles of this asset entry.
 	 *
@@ -410,6 +416,8 @@ public interface AssetEntryModel extends AttachedModel, BaseModel<AssetEntry>,
 	 * @param defaultLocale the default locale
 	 */
 	public void setTitle(String title, Locale locale, Locale defaultLocale);
+
+	public void setTitleCurrentLanguageId(String languageId);
 
 	/**
 	 * Sets the localized titles of this asset entry from the map of locales and localized titles.

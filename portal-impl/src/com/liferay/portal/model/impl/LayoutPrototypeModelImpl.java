@@ -241,6 +241,16 @@ public class LayoutPrototypeModelImpl extends BaseModelImpl<LayoutPrototype>
 			useDefault);
 	}
 
+	public String getNameCurrentLanguageId() {
+		return _nameCurrentLanguageId;
+	}
+
+	public String getNameCurrentValue() {
+		Locale locale = getLocale(_nameCurrentLanguageId);
+
+		return getName(locale);
+	}
+
 	public Map<Locale, String> getNameMap() {
 		return LocalizationUtil.getLocalizationMap(getName());
 	}
@@ -265,6 +275,10 @@ public class LayoutPrototypeModelImpl extends BaseModelImpl<LayoutPrototype>
 			setName(LocalizationUtil.removeLocalization(getName(), "Name",
 					languageId));
 		}
+	}
+
+	public void setNameCurrentLanguageId(String languageId) {
+		_nameCurrentLanguageId = languageId;
 	}
 
 	public void setNameMap(Map<Locale, String> nameMap) {
@@ -566,6 +580,7 @@ public class LayoutPrototypeModelImpl extends BaseModelImpl<LayoutPrototype>
 	private long _originalCompanyId;
 	private boolean _setOriginalCompanyId;
 	private String _name;
+	private String _nameCurrentLanguageId;
 	private String _description;
 	private String _settings;
 	private boolean _active;

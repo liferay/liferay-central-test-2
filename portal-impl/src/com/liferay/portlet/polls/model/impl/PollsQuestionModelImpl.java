@@ -314,6 +314,16 @@ public class PollsQuestionModelImpl extends BaseModelImpl<PollsQuestion>
 			useDefault);
 	}
 
+	public String getTitleCurrentLanguageId() {
+		return _titleCurrentLanguageId;
+	}
+
+	public String getTitleCurrentValue() {
+		Locale locale = getLocale(_titleCurrentLanguageId);
+
+		return getTitle(locale);
+	}
+
 	public Map<Locale, String> getTitleMap() {
 		return LocalizationUtil.getLocalizationMap(getTitle());
 	}
@@ -338,6 +348,10 @@ public class PollsQuestionModelImpl extends BaseModelImpl<PollsQuestion>
 			setTitle(LocalizationUtil.removeLocalization(getTitle(), "Title",
 					languageId));
 		}
+	}
+
+	public void setTitleCurrentLanguageId(String languageId) {
+		_titleCurrentLanguageId = languageId;
 	}
 
 	public void setTitleMap(Map<Locale, String> titleMap) {
@@ -389,6 +403,16 @@ public class PollsQuestionModelImpl extends BaseModelImpl<PollsQuestion>
 			useDefault);
 	}
 
+	public String getDescriptionCurrentLanguageId() {
+		return _descriptionCurrentLanguageId;
+	}
+
+	public String getDescriptionCurrentValue() {
+		Locale locale = getLocale(_descriptionCurrentLanguageId);
+
+		return getDescription(locale);
+	}
+
 	public Map<Locale, String> getDescriptionMap() {
 		return LocalizationUtil.getLocalizationMap(getDescription());
 	}
@@ -415,6 +439,10 @@ public class PollsQuestionModelImpl extends BaseModelImpl<PollsQuestion>
 			setDescription(LocalizationUtil.removeLocalization(
 					getDescription(), "Description", languageId));
 		}
+	}
+
+	public void setDescriptionCurrentLanguageId(String languageId) {
+		_descriptionCurrentLanguageId = languageId;
 	}
 
 	public void setDescriptionMap(Map<Locale, String> descriptionMap) {
@@ -758,7 +786,9 @@ public class PollsQuestionModelImpl extends BaseModelImpl<PollsQuestion>
 	private Date _createDate;
 	private Date _modifiedDate;
 	private String _title;
+	private String _titleCurrentLanguageId;
 	private String _description;
+	private String _descriptionCurrentLanguageId;
 	private Date _expirationDate;
 	private Date _lastVoteDate;
 	private transient ExpandoBridge _expandoBridge;

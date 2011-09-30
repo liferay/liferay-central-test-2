@@ -352,6 +352,16 @@ public class AssetVocabularyModelImpl extends BaseModelImpl<AssetVocabulary>
 			useDefault);
 	}
 
+	public String getTitleCurrentLanguageId() {
+		return _titleCurrentLanguageId;
+	}
+
+	public String getTitleCurrentValue() {
+		Locale locale = getLocale(_titleCurrentLanguageId);
+
+		return getTitle(locale);
+	}
+
 	public Map<Locale, String> getTitleMap() {
 		return LocalizationUtil.getLocalizationMap(getTitle());
 	}
@@ -376,6 +386,10 @@ public class AssetVocabularyModelImpl extends BaseModelImpl<AssetVocabulary>
 			setTitle(LocalizationUtil.removeLocalization(getTitle(), "Title",
 					languageId));
 		}
+	}
+
+	public void setTitleCurrentLanguageId(String languageId) {
+		_titleCurrentLanguageId = languageId;
 	}
 
 	public void setTitleMap(Map<Locale, String> titleMap) {
@@ -427,6 +441,16 @@ public class AssetVocabularyModelImpl extends BaseModelImpl<AssetVocabulary>
 			useDefault);
 	}
 
+	public String getDescriptionCurrentLanguageId() {
+		return _descriptionCurrentLanguageId;
+	}
+
+	public String getDescriptionCurrentValue() {
+		Locale locale = getLocale(_descriptionCurrentLanguageId);
+
+		return getDescription(locale);
+	}
+
 	public Map<Locale, String> getDescriptionMap() {
 		return LocalizationUtil.getLocalizationMap(getDescription());
 	}
@@ -453,6 +477,10 @@ public class AssetVocabularyModelImpl extends BaseModelImpl<AssetVocabulary>
 			setDescription(LocalizationUtil.removeLocalization(
 					getDescription(), "Description", languageId));
 		}
+	}
+
+	public void setDescriptionCurrentLanguageId(String languageId) {
+		_descriptionCurrentLanguageId = languageId;
 	}
 
 	public void setDescriptionMap(Map<Locale, String> descriptionMap) {
@@ -797,7 +825,9 @@ public class AssetVocabularyModelImpl extends BaseModelImpl<AssetVocabulary>
 	private String _name;
 	private String _originalName;
 	private String _title;
+	private String _titleCurrentLanguageId;
 	private String _description;
+	private String _descriptionCurrentLanguageId;
 	private String _settings;
 	private transient ExpandoBridge _expandoBridge;
 	private long _columnBitmask;

@@ -179,6 +179,14 @@ public class PollsChoiceWrapper implements PollsChoice {
 		return _pollsChoice.getDescription(languageId, useDefault);
 	}
 
+	public java.lang.String getDescriptionCurrentLanguageId() {
+		return _pollsChoice.getDescriptionCurrentLanguageId();
+	}
+
+	public java.lang.String getDescriptionCurrentValue() {
+		return _pollsChoice.getDescriptionCurrentValue();
+	}
+
 	/**
 	* Returns a map of the locales and localized descriptions of this polls choice.
 	*
@@ -218,6 +226,10 @@ public class PollsChoiceWrapper implements PollsChoice {
 	public void setDescription(java.lang.String description,
 		java.util.Locale locale, java.util.Locale defaultLocale) {
 		_pollsChoice.setDescription(description, locale, defaultLocale);
+	}
+
+	public void setDescriptionCurrentLanguageId(java.lang.String languageId) {
+		_pollsChoice.setDescriptionCurrentLanguageId(languageId);
 	}
 
 	/**

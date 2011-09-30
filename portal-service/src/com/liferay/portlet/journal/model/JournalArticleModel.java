@@ -320,6 +320,12 @@ public interface JournalArticleModel extends AttachedModel,
 	@AutoEscape
 	public String getTitle(String languageId, boolean useDefault);
 
+	@AutoEscape
+	public String getTitleCurrentLanguageId();
+
+	@AutoEscape
+	public String getTitleCurrentValue();
+
 	/**
 	 * Returns a map of the locales and localized titles of this journal article.
 	 *
@@ -350,6 +356,8 @@ public interface JournalArticleModel extends AttachedModel,
 	 * @param defaultLocale the default locale
 	 */
 	public void setTitle(String title, Locale locale, Locale defaultLocale);
+
+	public void setTitleCurrentLanguageId(String languageId);
 
 	/**
 	 * Sets the localized titles of this journal article from the map of locales and localized titles.
@@ -426,6 +434,12 @@ public interface JournalArticleModel extends AttachedModel,
 	@AutoEscape
 	public String getDescription(String languageId, boolean useDefault);
 
+	@AutoEscape
+	public String getDescriptionCurrentLanguageId();
+
+	@AutoEscape
+	public String getDescriptionCurrentValue();
+
 	/**
 	 * Returns a map of the locales and localized descriptions of this journal article.
 	 *
@@ -457,6 +471,8 @@ public interface JournalArticleModel extends AttachedModel,
 	 */
 	public void setDescription(String description, Locale locale,
 		Locale defaultLocale);
+
+	public void setDescriptionCurrentLanguageId(String languageId);
 
 	/**
 	 * Sets the localized descriptions of this journal article from the map of locales and localized descriptions.

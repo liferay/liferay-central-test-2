@@ -372,6 +372,16 @@ public class DDMStructureModelImpl extends BaseModelImpl<DDMStructure>
 			useDefault);
 	}
 
+	public String getNameCurrentLanguageId() {
+		return _nameCurrentLanguageId;
+	}
+
+	public String getNameCurrentValue() {
+		Locale locale = getLocale(_nameCurrentLanguageId);
+
+		return getName(locale);
+	}
+
 	public Map<Locale, String> getNameMap() {
 		return LocalizationUtil.getLocalizationMap(getName());
 	}
@@ -402,6 +412,10 @@ public class DDMStructureModelImpl extends BaseModelImpl<DDMStructure>
 			setName(LocalizationUtil.removeLocalization(getName(), "Name",
 					languageId));
 		}
+	}
+
+	public void setNameCurrentLanguageId(String languageId) {
+		_nameCurrentLanguageId = languageId;
 	}
 
 	public void setNameMap(Map<Locale, String> nameMap) {
@@ -457,6 +471,16 @@ public class DDMStructureModelImpl extends BaseModelImpl<DDMStructure>
 			useDefault);
 	}
 
+	public String getDescriptionCurrentLanguageId() {
+		return _descriptionCurrentLanguageId;
+	}
+
+	public String getDescriptionCurrentValue() {
+		Locale locale = getLocale(_descriptionCurrentLanguageId);
+
+		return getDescription(locale);
+	}
+
 	public Map<Locale, String> getDescriptionMap() {
 		return LocalizationUtil.getLocalizationMap(getDescription());
 	}
@@ -489,6 +513,10 @@ public class DDMStructureModelImpl extends BaseModelImpl<DDMStructure>
 			setDescription(LocalizationUtil.removeLocalization(
 					getDescription(), "Description", languageId));
 		}
+	}
+
+	public void setDescriptionCurrentLanguageId(String languageId) {
+		_descriptionCurrentLanguageId = languageId;
 	}
 
 	public void setDescriptionMap(Map<Locale, String> descriptionMap) {
@@ -882,8 +910,10 @@ public class DDMStructureModelImpl extends BaseModelImpl<DDMStructure>
 	private String _structureKey;
 	private String _originalStructureKey;
 	private String _name;
+	private String _nameCurrentLanguageId;
 	private String _originalName;
 	private String _description;
+	private String _descriptionCurrentLanguageId;
 	private String _originalDescription;
 	private String _xsd;
 	private String _storageType;

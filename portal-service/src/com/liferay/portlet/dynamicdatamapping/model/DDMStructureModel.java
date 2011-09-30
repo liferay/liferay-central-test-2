@@ -272,6 +272,12 @@ public interface DDMStructureModel extends BaseModel<DDMStructure>, GroupedModel
 	@AutoEscape
 	public String getName(String languageId, boolean useDefault);
 
+	@AutoEscape
+	public String getNameCurrentLanguageId();
+
+	@AutoEscape
+	public String getNameCurrentValue();
+
 	/**
 	 * Returns a map of the locales and localized names of this d d m structure.
 	 *
@@ -302,6 +308,8 @@ public interface DDMStructureModel extends BaseModel<DDMStructure>, GroupedModel
 	 * @param defaultLocale the default locale
 	 */
 	public void setName(String name, Locale locale, Locale defaultLocale);
+
+	public void setNameCurrentLanguageId(String languageId);
 
 	/**
 	 * Sets the localized names of this d d m structure from the map of locales and localized names.
@@ -363,6 +371,12 @@ public interface DDMStructureModel extends BaseModel<DDMStructure>, GroupedModel
 	@AutoEscape
 	public String getDescription(String languageId, boolean useDefault);
 
+	@AutoEscape
+	public String getDescriptionCurrentLanguageId();
+
+	@AutoEscape
+	public String getDescriptionCurrentValue();
+
 	/**
 	 * Returns a map of the locales and localized descriptions of this d d m structure.
 	 *
@@ -394,6 +408,8 @@ public interface DDMStructureModel extends BaseModel<DDMStructure>, GroupedModel
 	 */
 	public void setDescription(String description, Locale locale,
 		Locale defaultLocale);
+
+	public void setDescriptionCurrentLanguageId(String languageId);
 
 	/**
 	 * Sets the localized descriptions of this d d m structure from the map of locales and localized descriptions.

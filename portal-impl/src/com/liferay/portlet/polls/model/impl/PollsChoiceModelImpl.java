@@ -218,6 +218,16 @@ public class PollsChoiceModelImpl extends BaseModelImpl<PollsChoice>
 			useDefault);
 	}
 
+	public String getDescriptionCurrentLanguageId() {
+		return _descriptionCurrentLanguageId;
+	}
+
+	public String getDescriptionCurrentValue() {
+		Locale locale = getLocale(_descriptionCurrentLanguageId);
+
+		return getDescription(locale);
+	}
+
 	public Map<Locale, String> getDescriptionMap() {
 		return LocalizationUtil.getLocalizationMap(getDescription());
 	}
@@ -244,6 +254,10 @@ public class PollsChoiceModelImpl extends BaseModelImpl<PollsChoice>
 			setDescription(LocalizationUtil.removeLocalization(
 					getDescription(), "Description", languageId));
 		}
+	}
+
+	public void setDescriptionCurrentLanguageId(String languageId) {
+		_descriptionCurrentLanguageId = languageId;
 	}
 
 	public void setDescriptionMap(Map<Locale, String> descriptionMap) {
@@ -481,6 +495,7 @@ public class PollsChoiceModelImpl extends BaseModelImpl<PollsChoice>
 	private String _name;
 	private String _originalName;
 	private String _description;
+	private String _descriptionCurrentLanguageId;
 	private transient ExpandoBridge _expandoBridge;
 	private long _columnBitmask;
 	private PollsChoice _escapedModelProxy;

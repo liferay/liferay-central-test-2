@@ -498,6 +498,16 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 			useDefault);
 	}
 
+	public String getTitleCurrentLanguageId() {
+		return _titleCurrentLanguageId;
+	}
+
+	public String getTitleCurrentValue() {
+		Locale locale = getLocale(_titleCurrentLanguageId);
+
+		return getTitle(locale);
+	}
+
 	public Map<Locale, String> getTitleMap() {
 		return LocalizationUtil.getLocalizationMap(getTitle());
 	}
@@ -522,6 +532,10 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 			setTitle(LocalizationUtil.removeLocalization(getTitle(), "Title",
 					languageId));
 		}
+	}
+
+	public void setTitleCurrentLanguageId(String languageId) {
+		_titleCurrentLanguageId = languageId;
 	}
 
 	public void setTitleMap(Map<Locale, String> titleMap) {
@@ -597,6 +611,16 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 			useDefault);
 	}
 
+	public String getDescriptionCurrentLanguageId() {
+		return _descriptionCurrentLanguageId;
+	}
+
+	public String getDescriptionCurrentValue() {
+		Locale locale = getLocale(_descriptionCurrentLanguageId);
+
+		return getDescription(locale);
+	}
+
 	public Map<Locale, String> getDescriptionMap() {
 		return LocalizationUtil.getLocalizationMap(getDescription());
 	}
@@ -623,6 +647,10 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 			setDescription(LocalizationUtil.removeLocalization(
 					getDescription(), "Description", languageId));
 		}
+	}
+
+	public void setDescriptionCurrentLanguageId(String languageId) {
+		_descriptionCurrentLanguageId = languageId;
 	}
 
 	public void setDescriptionMap(Map<Locale, String> descriptionMap) {
@@ -1556,9 +1584,11 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 	private double _originalVersion;
 	private boolean _setOriginalVersion;
 	private String _title;
+	private String _titleCurrentLanguageId;
 	private String _urlTitle;
 	private String _originalUrlTitle;
 	private String _description;
+	private String _descriptionCurrentLanguageId;
 	private String _content;
 	private String _type;
 	private String _structureId;

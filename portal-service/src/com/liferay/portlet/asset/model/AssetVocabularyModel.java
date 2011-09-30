@@ -253,6 +253,12 @@ public interface AssetVocabularyModel extends BaseModel<AssetVocabulary>,
 	@AutoEscape
 	public String getTitle(String languageId, boolean useDefault);
 
+	@AutoEscape
+	public String getTitleCurrentLanguageId();
+
+	@AutoEscape
+	public String getTitleCurrentValue();
+
 	/**
 	 * Returns a map of the locales and localized titles of this asset vocabulary.
 	 *
@@ -283,6 +289,8 @@ public interface AssetVocabularyModel extends BaseModel<AssetVocabulary>,
 	 * @param defaultLocale the default locale
 	 */
 	public void setTitle(String title, Locale locale, Locale defaultLocale);
+
+	public void setTitleCurrentLanguageId(String languageId);
 
 	/**
 	 * Sets the localized titles of this asset vocabulary from the map of locales and localized titles.
@@ -344,6 +352,12 @@ public interface AssetVocabularyModel extends BaseModel<AssetVocabulary>,
 	@AutoEscape
 	public String getDescription(String languageId, boolean useDefault);
 
+	@AutoEscape
+	public String getDescriptionCurrentLanguageId();
+
+	@AutoEscape
+	public String getDescriptionCurrentValue();
+
 	/**
 	 * Returns a map of the locales and localized descriptions of this asset vocabulary.
 	 *
@@ -375,6 +389,8 @@ public interface AssetVocabularyModel extends BaseModel<AssetVocabulary>,
 	 */
 	public void setDescription(String description, Locale locale,
 		Locale defaultLocale);
+
+	public void setDescriptionCurrentLanguageId(String languageId);
 
 	/**
 	 * Sets the localized descriptions of this asset vocabulary from the map of locales and localized descriptions.
