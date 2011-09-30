@@ -211,7 +211,7 @@ boolean passwordUpdated = GetterUtil.getBoolean((Boolean)session.getAttribute(We
 
 								<c:if test="<%= !passwordUpdated %>">
 									<span class="aui-field-hint">
-										<liferay-ui:message key="your-passwrod-is-x" arguments="<%= PropsValues.DEFAULT_ADMIN_PASSWORD %>" />
+										<liferay-ui:message key="your-password-is-x" arguments="<%= PropsValues.DEFAULT_ADMIN_PASSWORD %>" />
 									</span>
 								</c:if>
 							</aui:form>
