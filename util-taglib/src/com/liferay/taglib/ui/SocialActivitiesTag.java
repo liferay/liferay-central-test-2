@@ -64,7 +64,7 @@ public class SocialActivitiesTag extends IncludeTag {
 		_activities = null;
 		_className = StringPool.BLANK;
 		_classPK = 0;
-		_displayRSSFeed = true;
+		_displayRSSFeed = false;
 		_feedEnabled = false;
 		_feedLink = StringPool.BLANK;
 		_feedLinkMessage = StringPool.BLANK;
