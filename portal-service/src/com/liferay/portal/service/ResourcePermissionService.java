@@ -48,9 +48,14 @@ public interface ResourcePermissionService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public void setIndividualResourcePermissions(long groupId, long companyId,
-		java.lang.String name, java.lang.String primKey,
-		java.util.Map<java.lang.Long, java.lang.String[]> roleIdsToActionIds)
+	public void removeResourcePermission(long groupId, long companyId,
+		java.lang.String name, int scope, java.lang.String primKey,
+		long roleId, java.lang.String actionId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	public void removeResourcePermissions(long groupId, long companyId,
+		java.lang.String name, int scope, long roleId, java.lang.String actionId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -60,14 +65,9 @@ public interface ResourcePermissionService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public void removeResourcePermission(long groupId, long companyId,
-		java.lang.String name, int scope, java.lang.String primKey,
-		long roleId, java.lang.String actionId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	public void removeResourcePermissions(long groupId, long companyId,
-		java.lang.String name, int scope, long roleId, java.lang.String actionId)
+	public void setIndividualResourcePermissions(long groupId, long companyId,
+		java.lang.String name, java.lang.String primKey,
+		java.util.Map<java.lang.Long, java.lang.String[]> roleIdsToActionIds)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 }

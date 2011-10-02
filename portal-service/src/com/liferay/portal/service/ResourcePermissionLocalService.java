@@ -612,14 +612,15 @@ public interface ResourcePermissionLocalService
 	portlet ID
 	* @param scope the scope
 	* @param primKey the primary key
-	* @param roleIdsToActionIds a map of role IDs to action IDs of the actions
+	* @param roleId the primary key of the role
+	* @param actionIds the action IDs of the actions
 	* @throws PortalException if a role with the primary key or a resource
 	action with the name and action ID could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public void setResourcePermissions(long companyId, java.lang.String name,
-		int scope, java.lang.String primKey,
-		java.util.Map<java.lang.Long, java.lang.String[]> roleIdsToActionIds)
+		int scope, java.lang.String primKey, long roleId,
+		java.lang.String[] actionIds)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -644,15 +645,14 @@ public interface ResourcePermissionLocalService
 	portlet ID
 	* @param scope the scope
 	* @param primKey the primary key
-	* @param roleId the primary key of the role
-	* @param actionIds the action IDs of the actions
+	* @param roleIdsToActionIds a map of role IDs to action IDs of the actions
 	* @throws PortalException if a role with the primary key or a resource
 	action with the name and action ID could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public void setResourcePermissions(long companyId, java.lang.String name,
-		int scope, java.lang.String primKey, long roleId,
-		java.lang.String[] actionIds)
+		int scope, java.lang.String primKey,
+		java.util.Map<java.lang.Long, java.lang.String[]> roleIdsToActionIds)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 }
