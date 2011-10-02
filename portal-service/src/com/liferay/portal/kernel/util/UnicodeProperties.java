@@ -183,7 +183,7 @@ public class UnicodeProperties extends HashMap<String, String> {
 	public String toSortedString() {
 		StringBuilder sb = new StringBuilder(_length);
 
-		Set<String> keys = new TreeSet(keySet());
+		Set<String> keys = new TreeSet<String>(keySet());
 
 		for (String key : keys) {
 			String value = get(key);
