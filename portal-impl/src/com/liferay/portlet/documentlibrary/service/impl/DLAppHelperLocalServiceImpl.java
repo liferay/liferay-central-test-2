@@ -465,9 +465,7 @@ public class DLAppHelperLocalServiceImpl
 		}
 	}
 
-	protected long getFileEntryTypeId(FileEntry fileEntry)
-		throws PortalException, SystemException {
-
+	protected long getFileEntryTypeId(FileEntry fileEntry) {
 		if (fileEntry instanceof LiferayFileEntry) {
 			DLFileEntry dlFileEntry = (DLFileEntry)fileEntry.getModel();
 
