@@ -118,7 +118,7 @@ boolean urlIsNotNull = Validator.isNotNull(url);
 %>
 
 <liferay-util:buffer var="linkContent">
-	<c:if test="<%= src != null %>">
+	<c:if test="<%= Validator.isNotNull(src) %>">
 		<c:choose>
 			<c:when test="<%= urlIsNotNull %>">
 				<img class="<%= imgClass %>" src="<%= src %>" <%= details %> />
