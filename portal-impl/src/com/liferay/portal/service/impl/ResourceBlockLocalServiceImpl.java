@@ -41,7 +41,6 @@ import com.liferay.portal.service.base.ResourceBlockLocalServiceBaseImpl;
 import java.nio.ByteBuffer;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.SortedMap;
@@ -54,6 +53,9 @@ import java.util.SortedMap;
  */
 public class ResourceBlockLocalServiceImpl
 	extends ResourceBlockLocalServiceBaseImpl {
+
+	private static Log _log = LogFactoryUtil.getLog(
+		ResourceBlockLocalServiceImpl.class);
 
 	public void addCompanyScopePermission(
 			long companyId, String name, long roleId, String actionId)
@@ -660,11 +662,9 @@ public class ResourceBlockLocalServiceImpl
 		PermissionedModel permissionedModel = getPermissionedModel(
 			name, primKey);
 
-		Iterator<Long> itr = roleIdsToActionIds.keySet().iterator();
-
-		while (itr.hasNext()) {
-			Long roleId = itr.next();
-			String[] actionIds = roleIdsToActionIds.get(roleId);
+		for (Map.Entry<Long, String[]> entry : roleIdsToActionIds.entrySet()) {
+			long roleId = entry.getKey();
+			String[] actionIds = entry.getValue();
 
 			updateIndividualScopePermissions(
 				companyId, groupId, name, permissionedModel, roleId,
@@ -891,8 +891,5 @@ public class ResourceBlockLocalServiceImpl
 
 		updateResourceBlock(resourceBlock);
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(
-		ResourceBlockLocalServiceImpl.class);
 
 }

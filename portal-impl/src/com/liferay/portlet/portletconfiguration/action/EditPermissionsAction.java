@@ -300,11 +300,11 @@ public class EditPermissionsAction extends EditConfigurationAction {
 
 		long resourceId = ParamUtil.getLong(actionRequest, "resourceId");
 
+		Map<Long, String[]> roleIdsToActionIds = new HashMap<Long, String[]>();
+
 		long[] roleIds = StringUtil.split(
 			ParamUtil.getString(
 				actionRequest, "rolesSearchContainerPrimaryKeys"), 0L);
-
-		Map<Long, String[]> roleIdsToActionIds = new HashMap<Long, String[]>();
 
 		for (long roleId : roleIds) {
 			String[] actionIds = getActionIds(actionRequest, roleId, false);

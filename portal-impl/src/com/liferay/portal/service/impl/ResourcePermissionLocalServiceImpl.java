@@ -41,7 +41,6 @@ import com.liferay.portal.util.ResourcePermissionsThreadLocal;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.locks.Lock;
@@ -755,18 +754,19 @@ public class ResourcePermissionLocalServiceImpl
 	 *         portlet ID
 	 * @param  scope the scope
 	 * @param  primKey the primary key
-	 * @param  roleIdsToActionIds a map of role IDs to action IDs of the actions
+	 * @param  roleId the primary key of the role
+	 * @param  actionIds the action IDs of the actions
 	 * @throws PortalException if a role with the primary key or a resource
 	 *         action with the name and action ID could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void setResourcePermissions(
-			long companyId, String name, int scope, String primKey,
-			Map<Long, String[]> roleIdsToActionIds)
+			long companyId, String name, int scope, String primKey, long roleId,
+			String[] actionIds)
 		throws PortalException, SystemException {
 
 		updateResourcePermission(
-			companyId, name, scope, primKey, 0, roleIdsToActionIds,
+			companyId, name, scope, primKey, roleId, 0, actionIds,
 			ResourcePermissionConstants.OPERATOR_SET);
 	}
 
@@ -791,41 +791,19 @@ public class ResourcePermissionLocalServiceImpl
 	 *         portlet ID
 	 * @param  scope the scope
 	 * @param  primKey the primary key
-	 * @param  roleId the primary key of the role
-	 * @param  actionIds the action IDs of the actions
+	 * @param  roleIdsToActionIds a map of role IDs to action IDs of the actions
 	 * @throws PortalException if a role with the primary key or a resource
 	 *         action with the name and action ID could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void setResourcePermissions(
-			long companyId, String name, int scope, String primKey, long roleId,
-			String[] actionIds)
+			long companyId, String name, int scope, String primKey,
+			Map<Long, String[]> roleIdsToActionIds)
 		throws PortalException, SystemException {
 
 		updateResourcePermission(
-			companyId, name, scope, primKey, roleId, 0, actionIds,
+			companyId, name, scope, primKey, 0, roleIdsToActionIds,
 			ResourcePermissionConstants.OPERATOR_SET);
-	}
-
-	protected void doUpdateResourcePermission(
-			long companyId, String name, int scope, String primKey,
-			long ownerId, Map<Long, String[]> roleIdsToActionIds, int operator)
-		throws PortalException, SystemException {
-
-		Iterator<Long> itr = roleIdsToActionIds.keySet().iterator();
-
-		while (itr.hasNext()) {
-			Long roleId = itr.next();
-			String[] actionIds = roleIdsToActionIds.get(roleId);
-
-			doUpdateResourcePermission(
-				companyId, name, scope, primKey, ownerId, roleId, actionIds,
-				operator, false);
-		}
-
-		PermissionCacheUtil.clearCache();
-
-		SearchEngineUtil.updatePermissionFields(name, primKey);
 	}
 
 	protected void doUpdateResourcePermission(
@@ -903,6 +881,25 @@ public class ResourcePermissionLocalServiceImpl
 		}
 	}
 
+	protected void doUpdateResourcePermission(
+			long companyId, String name, int scope, String primKey,
+			long ownerId, Map<Long, String[]> roleIdsToActionIds, int operator)
+		throws PortalException, SystemException {
+
+		for (Map.Entry<Long, String[]> entry : roleIdsToActionIds.entrySet()) {
+			long roleId = entry.getKey();
+			String[] actionIds = entry.getValue();
+
+			doUpdateResourcePermission(
+				companyId, name, scope, primKey, ownerId, roleId, actionIds,
+				operator, false);
+		}
+
+		PermissionCacheUtil.clearCache();
+
+		SearchEngineUtil.updatePermissionFields(name, primKey);
+	}
+
 	/**
 	 * Updates the role's permissions at the scope, either adding to, removing
 	 * from, or setting the actions that can be performed on resources of the
@@ -932,8 +929,8 @@ public class ResourcePermissionLocalServiceImpl
 	 * @throws SystemException if a system exception occurred
 	 */
 	protected void updateResourcePermission(
-			long companyId, String name, int scope, String primKey,
-			long roleId, long ownerId, String[] actionIds, int operator)
+			long companyId, String name, int scope, String primKey, long roleId,
+			long ownerId, String[] actionIds, int operator)
 		throws PortalException, SystemException {
 
 		DB db = DBFactoryUtil.getDB();
@@ -960,7 +957,10 @@ public class ResourcePermissionLocalServiceImpl
 		sb.append(StringPool.POUND);
 		sb.append(roleId);
 
-		String groupName = getClass().getName();
+		Class<?> clazz = getClass();
+
+		String groupName = clazz.getName();
+
 		String key = sb.toString();
 
 		Lock lock = LockRegistry.allocateLock(groupName, key);
@@ -1036,7 +1036,10 @@ public class ResourcePermissionLocalServiceImpl
 		sb.append(StringPool.POUND);
 		sb.append(StringUtil.merge(roleIdsToActionIds.keySet()));
 
-		String groupName = getClass().getName();
+		Class<?> clazz = getClass();
+
+		String groupName = clazz.getName();
+
 		String key = sb.toString();
 
 		Lock lock = LockRegistry.allocateLock(groupName, key);

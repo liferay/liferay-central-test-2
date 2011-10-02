@@ -692,13 +692,11 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	public void setRolesPermissions(
 			long companyId, Map<Long, String[]> roleIdsToActionIds,
 			long resourceId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
-		Iterator<Long> itr = roleIdsToActionIds.keySet().iterator();
-
-		while (itr.hasNext()) {
-			Long roleId = itr.next();
-			String[] actionIds = roleIdsToActionIds.get(roleId);
+		for (Map.Entry<Long, String[]> entry : roleIdsToActionIds.entrySet()) {
+			long roleId = entry.getKey();
+			String[] actionIds = entry.getValue();
 
 			List<Permission> permissions = permissionFinder.findByR_R(
 				roleId, resourceId);
@@ -718,7 +716,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	public void setRolesPermissions(
 			long companyId, Map<Long, String[]> roleIdsToActionIds, String name,
 			int scope, String primKey)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		Resource resource = resourceLocalService.fetchResource(
 			companyId, name, scope, String.valueOf(primKey));
@@ -732,9 +730,8 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 			return;
 		}
 
-		long resourceId = resource.getResourceId();
-
-		setRolesPermissions(companyId, roleIdsToActionIds, resourceId);
+		setRolesPermissions(
+			companyId, roleIdsToActionIds, resource.getResourceId());
 	}
 
 	public void setUserPermissions(

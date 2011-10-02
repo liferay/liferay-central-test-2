@@ -213,6 +213,14 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 		resourcePersistence.remove(resource);
 	}
 
+	public void deleteResources(String name) throws SystemException {
+		List<Resource> resources = resourceFinder.findByName(name);
+
+		for (Resource resource : resources) {
+			deleteResource(resource);
+		}
+	}
+
 	public Resource fetchResource(
 			long companyId, String name, int scope, String primKey)
 		throws SystemException {
@@ -222,14 +230,6 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 		}
 		else {
 			return fetchResource_1to5(companyId, name, scope, primKey);
-		}
-	}
-
-	public void deleteResources(String name) throws SystemException {
-		List<Resource> resources = resourceFinder.findByName(name);
-
-		for (Resource resource : resources) {
-			deleteResource(resource);
 		}
 	}
 
@@ -1020,7 +1020,8 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 		ResourceCode resourceCode = resourceCodeLocalService.getResourceCode(
 			companyId, name, scope);
 
-		return resourcePersistence.fetchByC_P(resourceCode.getCodeId(), primKey);
+		return resourcePersistence.fetchByC_P(
+			resourceCode.getCodeId(), primKey);
 	}
 
 	protected void filterOwnerActions(String name, List<String> actionIds) {
