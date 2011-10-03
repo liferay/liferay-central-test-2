@@ -160,7 +160,7 @@ public class EditEntryAction extends PortletAction {
 			}
 
 			if ((entry != null) &&
-				 (workflowAction == WorkflowConstants.ACTION_SAVE_DRAFT)) {
+				(workflowAction == WorkflowConstants.ACTION_SAVE_DRAFT)) {
 
 				redirect = getSaveAndContinueRedirect(
 					portletConfig, actionRequest, entry, redirect);

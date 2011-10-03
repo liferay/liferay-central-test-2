@@ -193,7 +193,6 @@ public class EditMessageAction extends PortletAction {
 			actionRequest, "workflowAction", WorkflowConstants.ACTION_PUBLISH);
 
 		if (workflowAction == WorkflowConstants.ACTION_SAVE_DRAFT) {
-
 			return getSaveAndContinueRedirect(
 				actionRequest, actionResponse, message);
 		}
