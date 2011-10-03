@@ -1200,13 +1200,15 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 	 *         the user
 	 * @throws SystemException if a system exception occurred
 	 */
-	public void updateOrganizations(long userId, long[] organizationIds)
+	public void updateOrganizations(
+			long userId, long[] organizationIds, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		UserPermissionUtil.check(
 			getPermissionChecker(), userId, ActionKeys.UPDATE);
 
-		userLocalService.updateOrganizations(userId, organizationIds);
+		userLocalService.updateOrganizations(
+			userId, organizationIds, serviceContext);
 	}
 
 	/**
