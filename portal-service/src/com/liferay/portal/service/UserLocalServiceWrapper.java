@@ -2419,10 +2419,11 @@ public class UserLocalServiceWrapper implements UserLocalService {
 	* @throws PortalException if a portal exception occurred
 	* @throws SystemException if a system exception occurred
 	*/
-	public void updateGroups(long userId, long[] newGroupIds)
+	public void updateGroups(long userId, long[] newGroupIds,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		_userLocalService.updateGroups(userId, newGroupIds);
+		_userLocalService.updateGroups(userId, newGroupIds, serviceContext);
 	}
 
 	/**
@@ -2575,10 +2576,12 @@ public class UserLocalServiceWrapper implements UserLocalService {
 	found
 	* @throws SystemException if a system exception occurred
 	*/
-	public void updateOrganizations(long userId, long[] newOrganizationIds)
+	public void updateOrganizations(long userId, long[] newOrganizationIds,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		_userLocalService.updateOrganizations(userId, newOrganizationIds);
+		_userLocalService.updateOrganizations(userId, newOrganizationIds,
+			serviceContext);
 	}
 
 	/**
