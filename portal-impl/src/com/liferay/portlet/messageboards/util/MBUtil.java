@@ -24,7 +24,6 @@ import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.LocalizationUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -266,7 +265,7 @@ public class MBUtil {
 
 		return PortalUtil.getEmailFromAddress(
 			preferences, companyId,
-			PropsKeys.MESSAGE_BOARDS_EMAIL_FROM_ADDRESS, null);
+			PropsValues.MESSAGE_BOARDS_EMAIL_FROM_ADDRESS);
 	}
 
 	public static String getEmailFromName(
@@ -274,8 +273,7 @@ public class MBUtil {
 		throws SystemException {
 
 		return PortalUtil.getEmailFromName(
-			preferences, companyId, PropsKeys.MESSAGE_BOARDS_EMAIL_FROM_NAME,
-			null);
+			preferences, companyId, PropsValues.MESSAGE_BOARDS_EMAIL_FROM_NAME);
 	}
 
 	public static boolean getEmailHtmlFormat(PortletPreferences preferences) {

@@ -27,7 +27,6 @@ import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.liveusers.LiveUsers;
@@ -215,7 +214,7 @@ public class LoginUtil {
 		throws SystemException {
 
 		return PortalUtil.getEmailFromAddress(
-			preferences, companyId, PropsKeys.LOGIN_EMAIL_FROM_ADDRESS, null);
+			preferences, companyId, PropsValues.LOGIN_EMAIL_FROM_ADDRESS);
 	}
 
 	public static String getEmailFromName(
@@ -223,7 +222,7 @@ public class LoginUtil {
 		throws SystemException {
 
 		return PortalUtil.getEmailFromName(
-			preferences, companyId, PropsValues.LOGIN_EMAIL_FROM_NAME, null);
+			preferences, companyId, PropsValues.LOGIN_EMAIL_FROM_NAME);
 	}
 
 	public static String getLogin(

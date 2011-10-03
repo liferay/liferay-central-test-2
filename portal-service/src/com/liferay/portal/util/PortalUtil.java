@@ -414,21 +414,19 @@ public class PortalUtil {
 	}
 
 	public static String getEmailFromAddress(
-			PortletPreferences preferences, long companyId, String key,
-			String defaultValue)
+			PortletPreferences preferences, long companyId, String defaultValue)
 		throws SystemException {
 
 		return getPortal().getEmailFromAddress(
-			preferences, companyId, key, defaultValue);
+			preferences, companyId, defaultValue);
 	}
 
 	public static String getEmailFromName(
-			PortletPreferences preferences, long companyId, String key,
-			String defaultValue)
+			PortletPreferences preferences, long companyId, String defaultValue)
 		throws SystemException {
 
 		return getPortal().getEmailFromName(
-			preferences, companyId, key, defaultValue);
+			preferences, companyId, defaultValue);
 	}
 
 	public static Map<String, Serializable> getExpandoBridgeAttributes(

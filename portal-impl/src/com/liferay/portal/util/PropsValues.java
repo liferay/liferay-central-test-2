@@ -155,6 +155,10 @@ public class PropsValues {
 
 	public static final boolean BASIC_AUTH_PASSWORD_REQUIRED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.BASIC_AUTH_PASSWORD_REQUIRED));
 
+	public static final String BLOGS_EMAIL_FROM_ADDRESS = PropsUtil.get(PropsKeys.BLOGS_EMAIL_FROM_ADDRESS);
+
+	public static final String BLOGS_EMAIL_FROM_NAME = PropsUtil.get(PropsKeys.BLOGS_EMAIL_FROM_NAME);
+
 	public static final boolean BLOGS_ENTRY_COMMENTS_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.BLOGS_ENTRY_COMMENTS_ENABLED));
 
 	public static final boolean BLOGS_ENTRY_PREVIOUS_AND_NEXT_NAVIGATION_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.BLOGS_ENTRY_PREVIOUS_AND_NEXT_NAVIGATION_ENABLED));
@@ -186,6 +190,10 @@ public class PropsValues {
 	public static final int BUFFERED_INCREMENT_SERIAL_QUEUE_SIZE = GetterUtil.getInteger(PropsUtil.get(PropsKeys.BUFFERED_INCREMENT_SERIAL_QUEUE_SIZE));
 
 	public static final int CACHE_CONTENT_THRESHOLD_SIZE = GetterUtil.getInteger(PropsUtil.get(PropsKeys.CACHE_CONTENT_THRESHOLD_SIZE));
+
+	public static final String CALENDAR_EMAIL_FROM_ADDRESS = PropsUtil.get(PropsKeys.CALENDAR_EMAIL_FROM_ADDRESS);
+
+	public static final String CALENDAR_EMAIL_FROM_NAME = PropsUtil.get(PropsKeys.CALENDAR_EMAIL_FROM_NAME);
 
 	public static final int CALENDAR_EVENT_CHECK_INTERVAL = GetterUtil.getInteger(PropsUtil.get(PropsKeys.CALENDAR_EVENT_CHECK_INTERVAL));
 
@@ -656,6 +664,10 @@ public class PropsValues {
 	public static final boolean JOURNAL_ARTICLES_SEARCH_WITH_INDEX = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.JOURNAL_ARTICLES_SEARCH_WITH_INDEX));
 
 	public static final boolean JOURNAL_CONTENT_SEARCH_SHOW_LISTED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.JOURNAL_CONTENT_SEARCH_SHOW_LISTED));
+
+	public static final String JOURNAL_EMAIL_FROM_ADDRESS = PropsUtil.get(PropsKeys.JOURNAL_EMAIL_FROM_ADDRESS);
+
+	public static final String JOURNAL_EMAIL_FROM_NAME = PropsUtil.get(PropsKeys.JOURNAL_EMAIL_FROM_NAME);
 
 	public static final String JOURNAL_ERROR_TEMPLATE_FREEMARKER = PropsUtil.get(PropsKeys.JOURNAL_ERROR_TEMPLATE_FREEMARKER);
 
@@ -1257,6 +1269,10 @@ public class PropsValues {
 
 	public static final String SHARD_SELECTOR = PropsUtil.get(PropsKeys.SHARD_SELECTOR);
 
+	public static final String SHOPPING_EMAIL_FROM_ADDRESS = PropsUtil.get(PropsKeys.SHOPPING_EMAIL_FROM_ADDRESS);
+
+	public static final String SHOPPING_EMAIL_FROM_NAME = PropsUtil.get(PropsKeys.SHOPPING_EMAIL_FROM_NAME);
+
 	public static final boolean SHOPPING_ORDER_COMMENTS_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.SHOPPING_ORDER_COMMENTS_ENABLED));
 
 	public static final boolean SITEMINDER_AUTH_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.SITEMINDER_AUTH_ENABLED));
@@ -1444,6 +1460,10 @@ public class PropsValues {
 	public static final String[] WEBDAV_IGNORE = PropsUtil.getArray(PropsKeys.WEBDAV_IGNORE);
 
 	public static final String WIDGET_SERVLET_MAPPING = PropsUtil.get(PropsKeys.WIDGET_SERVLET_MAPPING);
+
+	public static final String WIKI_EMAIL_FROM_ADDRESS = PropsUtil.get(PropsKeys.WIKI_EMAIL_FROM_ADDRESS);
+
+	public static final String WIKI_EMAIL_FROM_NAME = PropsUtil.get(PropsKeys.WIKI_EMAIL_FROM_NAME);
 
 	public static final String[] WIKI_IMPORTERS = PropsUtil.getArray(PropsKeys.WIKI_IMPORTERS);
 
