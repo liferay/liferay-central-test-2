@@ -70,7 +70,7 @@ if (Validator.isNotNull(onChangeMethod)) {
 	window['<%= name %>'].initEditor();
 </aui:script>
 
-<div id="<%= name %>_container" class="<%= cssClass %>">
+<div class="<%= cssClass %>" id="<%= name %>_container">
 	<table bgcolor="#FFFFFF" cellpadding="0" cellspacing="0" height="100%" width="100%">
 	<tr>
 		<td bgcolor="#FFFFFF" height="100%">
