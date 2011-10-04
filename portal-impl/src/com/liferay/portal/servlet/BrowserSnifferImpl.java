@@ -216,7 +216,8 @@ public class BrowserSnifferImpl implements BrowserSniffer {
 		String userAgent = getUserAgent(request);
 
 		if (userAgent.contains("mozilla") &&
-			!(userAgent.contains("compatible") || userAgent.contains("webkit"))) {
+			!(userAgent.contains("compatible") ||
+			  userAgent.contains("webkit"))) {
 
 			return true;
 		}
