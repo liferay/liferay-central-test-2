@@ -15,6 +15,7 @@
 package com.liferay.portlet.documentlibrary.store;
 
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
+import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.util.BaseTestCase;
 
 import java.io.BufferedInputStream;
@@ -24,9 +25,10 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 
 import java.util.Arrays;
-import java.util.List;
+import java.util.Set;
 
 /**
  * @author Shuyang Zhou
@@ -39,336 +41,337 @@ public class DBStoreTest extends BaseTestCase {
 		long repositoryId = nextLong();
 		String fileName = randomString();
 
-		_STORE.addFile(companyId, repositoryId, fileName, _DATA_VERSION_1);
+		_store.addFile(companyId, repositoryId, fileName, _DATA_VERSION_1);
 
-		boolean exist = _STORE.hasFile(
-			companyId, repositoryId, fileName, Store.VERSION_DEFAULT);
-
-		assertTrue(exist);
+		assertTrue(
+			_store.hasFile(
+				companyId, repositoryId, fileName, Store.VERSION_DEFAULT));
 	}
 
 	public void testAddFileWithFile() throws Exception {
 		long companyId = nextLong();
 		long repositoryId = nextLong();
 		String fileName = randomString();
+		File file = createFile(_DATA_VERSION_1);
 
-		File testFile = createTempFile(_DATA_VERSION_1);
+		_store.addFile(companyId, repositoryId, fileName, file);
 
-		_STORE.addFile(companyId, repositoryId, fileName, testFile);
-
-		boolean exist = _STORE.hasFile(
-			companyId, repositoryId, fileName, Store.VERSION_DEFAULT);
-
-		assertTrue(exist);
+		assertTrue(
+			_store.hasFile(
+				companyId, repositoryId, fileName, Store.VERSION_DEFAULT));
 	}
 
 	public void testAddFileWithInputStream() throws Exception {
+
 		// FileInputStream
+
 		long companyId = nextLong();
 		long repositoryId = nextLong();
 		String fileName = randomString();
+		File file = createFile(_DATA_VERSION_1);
 
-		File testFile = createTempFile(_DATA_VERSION_1);
+		_store.addFile(
+			companyId, repositoryId, fileName, new FileInputStream(file));
 
-		_STORE.addFile(
-			companyId, repositoryId, fileName, new FileInputStream(testFile));
-
-		boolean exist = _STORE.hasFile(
-			companyId, repositoryId, fileName, Store.VERSION_DEFAULT);
-
-		assertTrue(exist);
+		assertTrue(
+			_store.hasFile(
+				companyId, repositoryId, fileName, Store.VERSION_DEFAULT));
 
 		// UnsyncByteArrayInputStream
+
 		companyId = nextLong();
 		repositoryId = nextLong();
 		fileName = randomString();
 
-		_STORE.addFile(
+		_store.addFile(
 			companyId, repositoryId, fileName,
 			new UnsyncByteArrayInputStream(_DATA_VERSION_1));
 
-		exist = _STORE.hasFile(
-			companyId, repositoryId, fileName, Store.VERSION_DEFAULT);
-
-		assertTrue(exist);
+		assertTrue(
+			_store.hasFile(
+				companyId, repositoryId, fileName, Store.VERSION_DEFAULT));
 
 		// ByteArrayInputStream
+
 		companyId = nextLong();
 		repositoryId = nextLong();
 		fileName = randomString();
 
-		_STORE.addFile(
+		_store.addFile(
 			companyId, repositoryId, fileName,
 			new ByteArrayInputStream(_DATA_VERSION_1));
 
-		exist = _STORE.hasFile(
-			companyId, repositoryId, fileName, Store.VERSION_DEFAULT);
-
-		assertTrue(exist);
+		assertTrue(
+			_store.hasFile(
+				companyId, repositoryId, fileName, Store.VERSION_DEFAULT));
 
 		// BufferedInputStream
+
 		companyId = nextLong();
 		repositoryId = nextLong();
 		fileName = randomString();
 
-		_STORE.addFile(
+		_store.addFile(
 			companyId, repositoryId, fileName,
 			new BufferedInputStream(
 				new ByteArrayInputStream(_DATA_VERSION_1)));
 
-		exist = _STORE.hasFile(
-			companyId, repositoryId, fileName, Store.VERSION_DEFAULT);
-
-		assertTrue(exist);
+		assertTrue(
+			_store.hasFile(
+				companyId, repositoryId, fileName, Store.VERSION_DEFAULT));
 	}
 
 	public void testDeleteDirectory() throws Exception {
+
+		// One level deep
+
 		long companyId = nextLong();
 		long repositoryId = nextLong();
 
-		// One level directory
 		String directory = randomString();
+
 		String fileName1 = directory + "/" + randomString();
 		String fileName2 = directory + "/" + randomString();
 
-		_STORE.addFile(companyId, repositoryId, fileName1, _DATA_VERSION_1);
-		_STORE.addFile(companyId, repositoryId, fileName2, _DATA_VERSION_1);
+		_store.addFile(companyId, repositoryId, fileName1, _DATA_VERSION_1);
+		_store.addFile(companyId, repositoryId, fileName2, _DATA_VERSION_1);
 
-		boolean fileExist1 = _STORE.hasFile(
-			companyId, repositoryId, fileName1, Store.VERSION_DEFAULT);
-		boolean fileExist2 = _STORE.hasFile(
-			companyId, repositoryId, fileName2, Store.VERSION_DEFAULT);
+		assertTrue(
+			_store.hasFile(
+				companyId, repositoryId, fileName1, Store.VERSION_DEFAULT));
+		assertTrue(
+			_store.hasFile(
+				companyId, repositoryId, fileName2, Store.VERSION_DEFAULT));
 
-		assertTrue(fileExist1);
-		assertTrue(fileExist2);
+		_store.deleteDirectory(companyId, repositoryId, directory);
 
-		_STORE.deleteDirectory(companyId, repositoryId, directory);
+		assertFalse(
+			_store.hasFile(
+				companyId, repositoryId, fileName1, Store.VERSION_DEFAULT));
+		assertFalse(
+			_store.hasFile(
+				companyId, repositoryId, fileName2, Store.VERSION_DEFAULT));
 
-		fileExist1 = _STORE.hasFile(
-			companyId, repositoryId, fileName1, Store.VERSION_DEFAULT);
-		fileExist2 = _STORE.hasFile(
-			companyId, repositoryId, fileName2, Store.VERSION_DEFAULT);
+		// Two levels deep
 
-		assertFalse(fileExist1);
-		assertFalse(fileExist2);
-
-		// Two levels directories
 		directory = randomString();
-		String subDirectory = directory + "/" + randomString();
 		fileName1 = directory + "/" + randomString();
-		fileName2 = subDirectory + "/" + randomString();
+		fileName2 = directory + "/" + randomString() + "/" + randomString();
 
-		_STORE.addFile(companyId, repositoryId, fileName1, _DATA_VERSION_1);
-		_STORE.addFile(companyId, repositoryId, fileName2, _DATA_VERSION_1);
+		_store.addFile(companyId, repositoryId, fileName1, _DATA_VERSION_1);
+		_store.addFile(companyId, repositoryId, fileName2, _DATA_VERSION_1);
 
-		fileExist1 = _STORE.hasFile(
-			companyId, repositoryId, fileName1, Store.VERSION_DEFAULT);
-		fileExist2 = _STORE.hasFile(
-			companyId, repositoryId, fileName2, Store.VERSION_DEFAULT);
+		assertTrue(
+			_store.hasFile(
+				companyId, repositoryId, fileName1, Store.VERSION_DEFAULT));
+		assertTrue(
+			_store.hasFile(
+				companyId, repositoryId, fileName2, Store.VERSION_DEFAULT));
 
-		assertTrue(fileExist1);
-		assertTrue(fileExist2);
+		_store.deleteDirectory(companyId, repositoryId, directory);
 
-		_STORE.deleteDirectory(companyId, repositoryId, directory);
-
-		fileExist1 = _STORE.hasFile(
-			companyId, repositoryId, fileName1, Store.VERSION_DEFAULT);
-		fileExist2 = _STORE.hasFile(
-			companyId, repositoryId, fileName2, Store.VERSION_DEFAULT);
-
-		assertFalse(fileExist1);
-		assertFalse(fileExist2);
+		assertFalse(
+			_store.hasFile(
+				companyId, repositoryId, fileName1, Store.VERSION_DEFAULT));
+		assertFalse(
+			_store.hasFile(
+				companyId, repositoryId, fileName2, Store.VERSION_DEFAULT));
 	}
 
 	public void testDeleteFile() throws Exception {
-		Object[] data = createFile(1);
+		Object[] data = addFile(1);
 
-		Long companyId =  (Long)data[0];
-		Long repositoryId =  (Long)data[1];
+		long companyId = (Long)data[0];
+		long repositoryId = (Long)data[1];
 		String fileName = (String)data[2];
 
-		boolean exist = _STORE.hasFile(
-			companyId, repositoryId, fileName, Store.VERSION_DEFAULT);
-		assertTrue(exist);
+		assertTrue(
+			_store.hasFile(
+				companyId, repositoryId, fileName, Store.VERSION_DEFAULT));
+		assertTrue(_store.hasFile(companyId, repositoryId, fileName, "1.1"));
 
-		exist = _STORE.hasFile(companyId, repositoryId, fileName, "1.1");
-		assertTrue(exist);
+		_store.deleteFile(companyId, repositoryId, fileName);
 
-		_STORE.deleteFile(companyId, repositoryId, fileName);
-
-		exist = _STORE.hasFile(
-			companyId, repositoryId, fileName, Store.VERSION_DEFAULT);
-		assertFalse(exist);
-
-		exist = _STORE.hasFile(companyId, repositoryId, fileName, "1.1");
-
-		assertFalse(exist);
+		assertFalse(
+			_store.hasFile(
+				companyId, repositoryId, fileName, Store.VERSION_DEFAULT));
+		assertFalse(_store.hasFile(companyId, repositoryId, fileName, "1.1"));
 	}
 
 	public void testDeleteFileWithVersion() throws Exception {
-		Object[] data = createFile(1);
-
-		Long companyId =  (Long)data[0];
-		Long repositoryId =  (Long)data[1];
-		String fileName = (String)data[2];
 
 		// 1.0
-		boolean exist = _STORE.hasFile(
-			companyId, repositoryId, fileName, Store.VERSION_DEFAULT);
-		assertTrue(exist);
 
-		_STORE.deleteFile(
+		Object[] data = addFile(1);
+
+		long companyId = (Long)data[0];
+		long repositoryId = (Long)data[1];
+		String fileName = (String)data[2];
+
+		assertTrue(
+			_store.hasFile(
+				companyId, repositoryId, fileName, Store.VERSION_DEFAULT));
+
+		_store.deleteFile(
 			companyId, repositoryId, fileName, Store.VERSION_DEFAULT);
 
-		exist = _STORE.hasFile(
-			companyId, repositoryId, fileName, Store.VERSION_DEFAULT);
-		assertFalse(exist);
+		assertFalse(
+			_store.hasFile(
+				companyId, repositoryId, fileName, Store.VERSION_DEFAULT));
 
 		// 1.1
-		exist = _STORE.hasFile(companyId, repositoryId, fileName, "1.1");
-		assertTrue(exist);
 
-		_STORE.deleteFile(companyId, repositoryId, fileName, "1.1");
+		assertTrue(_store.hasFile(companyId, repositoryId, fileName, "1.1"));
 
-		exist = _STORE.hasFile(companyId, repositoryId, fileName, "1.1");
-		assertFalse(exist);
+		_store.deleteFile(companyId, repositoryId, fileName, "1.1");
+
+		assertFalse(_store.hasFile(companyId, repositoryId, fileName, "1.1"));
 	}
 
 	public void testGetFileAsStream() throws Exception {
-		Object[] data = createFile(1);
+		Object[] data = addFile(1);
 
-		Long companyId =  (Long)data[0];
-		Long repositoryId =  (Long)data[1];
+		long companyId = (Long)data[0];
+		long repositoryId = (Long)data[1];
 		String fileName = (String)data[2];
 
-		InputStream is = _STORE.getFileAsStream(
+		InputStream inputStream = _store.getFileAsStream(
 			companyId, repositoryId, fileName);
 
 		for (int i = 0; i < _DATA_SIZE; i++) {
-			assertEquals(_DATA_VERSION_1[i], (byte)is.read());
+			assertEquals(_DATA_VERSION_1[i], (byte)inputStream.read());
 		}
 
-		assertEquals(-1, is.read());
+		assertEquals(-1, inputStream.read());
 
-		is.close();
+		inputStream.close();
 	}
 
 	public void testGetFileAsStreamWithVersion() throws Exception {
-		Object[] data = createFile(5);
+		Object[] data = addFile(5);
 
-		Long companyId =  (Long)data[0];
-		Long repositoryId =  (Long)data[1];
+		long companyId = (Long)data[0];
+		long repositoryId = (Long)data[1];
 		String fileName = (String)data[2];
 
-		InputStream is = _STORE.getFileAsStream(
+		InputStream inputStream = _store.getFileAsStream(
 			companyId, repositoryId, fileName, "1.5");
 
 		for (int i = 0; i < _DATA_SIZE; i++) {
-			assertEquals(_DATA_VERSION_1[i], (byte)is.read());
+			assertEquals(_DATA_VERSION_1[i], (byte)inputStream.read());
 		}
 
-		assertEquals(-1, is.read());
+		assertEquals(-1, inputStream.read());
 
-		is.close();
+		inputStream.close();
 	}
 
 	public void testGetFileNames() throws Exception {
 		long companyId = nextLong();
 		long repositoryId = nextLong();
 
-		// One level directory
+		// One level deep
+
 		String directory = randomString();
+
 		String fileName1 = directory + "/" + randomString();
 		String fileName2 = directory + "/" + randomString();
 
-		_STORE.addFile(companyId, repositoryId, fileName1, _DATA_VERSION_1);
-		_STORE.addFile(companyId, repositoryId, fileName2, _DATA_VERSION_1);
+		_store.addFile(companyId, repositoryId, fileName1, _DATA_VERSION_1);
+		_store.addFile(companyId, repositoryId, fileName2, _DATA_VERSION_1);
 
-		String[] fileNames = _STORE.getFileNames(companyId, repositoryId);
+		String[] fileNames = _store.getFileNames(companyId, repositoryId);
 
 		assertEquals(2, fileNames.length);
 
-		List<String> fileNameList = Arrays.asList(fileNames);
+		Set<String> fileNamesSet = SetUtil.fromArray(fileNames);
 
-		assertTrue(fileNameList.contains(fileName1));
-		assertTrue(fileNameList.contains(fileName2));
+		assertTrue(fileNamesSet.contains(fileName1));
+		assertTrue(fileNamesSet.contains(fileName2));
 
-		// Two levels directories
+		// Two levels deep
+
 		directory = randomString();
-		String subDirectory = directory + "/" + randomString();
+
 		String fileName3 = directory + "/" + randomString();
-		String fileName4 = subDirectory + "/" + randomString();
+		String fileName4 =
+			directory + "/" + randomString() + "/" + randomString();
 
-		_STORE.addFile(companyId, repositoryId, fileName3, _DATA_VERSION_1);
-		_STORE.addFile(companyId, repositoryId, fileName4, _DATA_VERSION_1);
+		_store.addFile(companyId, repositoryId, fileName3, _DATA_VERSION_1);
+		_store.addFile(companyId, repositoryId, fileName4, _DATA_VERSION_1);
 
-		fileNames = _STORE.getFileNames(companyId, repositoryId);
+		fileNames = _store.getFileNames(companyId, repositoryId);
 
 		assertEquals(4, fileNames.length);
 
-		fileNameList = Arrays.asList(fileNames);
+		fileNamesSet = SetUtil.fromArray(fileNames);
 
-		assertTrue(fileNameList.contains(fileName1));
-		assertTrue(fileNameList.contains(fileName2));
-		assertTrue(fileNameList.contains(fileName3));
-		assertTrue(fileNameList.contains(fileName4));
+		assertTrue(fileNamesSet.contains(fileName1));
+		assertTrue(fileNamesSet.contains(fileName2));
+		assertTrue(fileNamesSet.contains(fileName3));
+		assertTrue(fileNamesSet.contains(fileName4));
 	}
 
 	public void testGetFileNamesWithDirectory() throws Exception {
+
+		// One level deep
+
 		long companyId = nextLong();
 		long repositoryId = nextLong();
 
-		// One level directory
 		String directory = randomString();
+
 		String fileName1 = directory + "/" + randomString();
 		String fileName2 = directory + "/" + randomString();
 
-		_STORE.addFile(companyId, repositoryId, fileName1, _DATA_VERSION_1);
-		_STORE.addFile(companyId, repositoryId, fileName2, _DATA_VERSION_1);
+		_store.addFile(companyId, repositoryId, fileName1, _DATA_VERSION_1);
+		_store.addFile(companyId, repositoryId, fileName2, _DATA_VERSION_1);
 
-		String[] fileNames = _STORE.getFileNames(
+		String[] fileNames = _store.getFileNames(
 			companyId, repositoryId, directory);
 
 		assertEquals(2, fileNames.length);
 
-		List<String> fileNameList = Arrays.asList(fileNames);
+		Set<String> fileNamesSet = SetUtil.fromArray(fileNames);
 
-		assertTrue(fileNameList.contains(fileName1));
-		assertTrue(fileNameList.contains(fileName2));
+		assertTrue(fileNamesSet.contains(fileName1));
+		assertTrue(fileNamesSet.contains(fileName2));
 
-		// Two levels directories
+		// Two levels deep
+
 		directory = randomString();
-		String subDirectory = directory + "/" + randomString();
+
+		String subdirectory = directory + "/" + randomString();
+
 		String fileName3 = directory + "/" + randomString();
-		String fileName4 = subDirectory + "/" + randomString();
+		String fileName4 = subdirectory + "/" + randomString();
 
-		_STORE.addFile(companyId, repositoryId, fileName3, _DATA_VERSION_1);
-		_STORE.addFile(companyId, repositoryId, fileName4, _DATA_VERSION_1);
+		_store.addFile(companyId, repositoryId, fileName3, _DATA_VERSION_1);
+		_store.addFile(companyId, repositoryId, fileName4, _DATA_VERSION_1);
 
-		fileNames = _STORE.getFileNames(companyId, repositoryId, directory);
+		fileNames = _store.getFileNames(companyId, repositoryId, directory);
 
 		assertEquals(2, fileNames.length);
 
-		fileNameList = Arrays.asList(fileNames);
+		fileNamesSet = SetUtil.fromArray(fileNames);
 
-		assertTrue(fileNameList.contains(fileName3));
-		assertTrue(fileNameList.contains(fileName4));
+		assertTrue(fileNamesSet.contains(fileName3));
+		assertTrue(fileNamesSet.contains(fileName4));
 
-		fileNames = _STORE.getFileNames(companyId, repositoryId, subDirectory);
+		fileNames = _store.getFileNames(companyId, repositoryId, subdirectory);
 
 		assertEquals(1, fileNames.length);
-
 		assertEquals(fileName4, fileNames[0]);
 	}
 
 	public void testGetFileSize() throws Exception {
-		Object[] data = createFile(0);
+		Object[] data = addFile(0);
 
-		Long companyId =  (Long)data[0];
-		Long repositoryId =  (Long)data[1];
+		long companyId = (Long)data[0];
+		long repositoryId = (Long)data[1];
 		String fileName = (String)data[2];
 
-		long size = _STORE.getFileSize(companyId, repositoryId, fileName);
+		long size = _store.getFileSize(companyId, repositoryId, fileName);
 
 		assertEquals(_DATA_SIZE, size);
 	}
@@ -378,193 +381,184 @@ public class DBStoreTest extends BaseTestCase {
 		long repositoryId = nextLong();
 		String fileName = randomString();
 
-		_STORE.addFile(companyId, repositoryId, fileName, _DATA_VERSION_1);
+		_store.addFile(companyId, repositoryId, fileName, _DATA_VERSION_1);
 
-		boolean exist = _STORE.hasFile(companyId, repositoryId, fileName);
-
-		assertTrue(exist);
+		assertTrue(_store.hasFile(companyId, repositoryId, fileName));
 	}
 
 	public void testHasFileWithVersion() throws Exception {
-		Object[] data = createFile(5);
+		Object[] data = addFile(5);
 
-		Long companyId =  (Long)data[0];
-		Long repositoryId =  (Long)data[1];
+		long companyId = (Long)data[0];
+		long repositoryId = (Long)data[1];
 		String fileName = (String)data[2];
 
 		String versionLabel = "1.";
 
 		for (int i = 0; i < 5; i++) {
-
-			boolean exist = _STORE.hasFile(
-				companyId, repositoryId, fileName, versionLabel + i);
-
-			assertTrue(exist);
+			assertTrue(
+				_store.hasFile(
+					companyId, repositoryId, fileName, versionLabel + i));
 		}
 	}
 
 	public void testUpdateFileWithByteArray() throws Exception {
-		Object[] data = createFile(0);
+		Object[] data = addFile(0);
 
-		Long companyId =  (Long)data[0];
-		Long repositoryId =  (Long)data[1];
+		long companyId = (Long)data[0];
+		long repositoryId = (Long)data[1];
 		String fileName = (String)data[2];
 
-		_STORE.updateFile(
+		_store.updateFile(
 			companyId, repositoryId, fileName, "1.1", _DATA_VERSION_2);
 
-		byte[] result1 = _STORE.getFileAsBytes(
+		byte[] bytes1 = _store.getFileAsBytes(
 			companyId, repositoryId, fileName, "1.0");
 
-		assertTrue(Arrays.equals(_DATA_VERSION_1, result1));
+		assertTrue(Arrays.equals(_DATA_VERSION_1, bytes1));
 
-		byte[] result2 = _STORE.getFileAsBytes(
+		byte[] bytes2 = _store.getFileAsBytes(
 			companyId, repositoryId, fileName, "1.1");
 
-		assertTrue(Arrays.equals(_DATA_VERSION_2, result2));
+		assertTrue(Arrays.equals(_DATA_VERSION_2, bytes2));
 
-		byte[] result3 = _STORE.getFileAsBytes(
+		byte[] bytes3 = _store.getFileAsBytes(
 			companyId, repositoryId, fileName);
 
-		assertTrue(Arrays.equals(_DATA_VERSION_2, result3));
+		assertTrue(Arrays.equals(_DATA_VERSION_2, bytes3));
 	}
 
 	public void testUpdateFileWithFile() throws Exception {
-		Object[] data = createFile(0);
+		Object[] data = addFile(0);
 
-		Long companyId =  (Long)data[0];
-		Long repositoryId =  (Long)data[1];
+		long companyId = (Long)data[0];
+		long repositoryId = (Long)data[1];
 		String fileName = (String)data[2];
 
-		File testFile = createTempFile(_DATA_VERSION_2);
+		File file = createFile(_DATA_VERSION_2);
 
-		_STORE.updateFile(companyId, repositoryId, fileName, "1.1", testFile);
+		_store.updateFile(companyId, repositoryId, fileName, "1.1", file);
 
-		byte[] result1 = _STORE.getFileAsBytes(
+		byte[] bytes1 = _store.getFileAsBytes(
 			companyId, repositoryId, fileName, "1.0");
 
-		assertTrue(Arrays.equals(_DATA_VERSION_1, result1));
+		assertTrue(Arrays.equals(_DATA_VERSION_1, bytes1));
 
-		byte[] result2 = _STORE.getFileAsBytes(
+		byte[] bytes2 = _store.getFileAsBytes(
 			companyId, repositoryId, fileName, "1.1");
 
-		assertTrue(Arrays.equals(_DATA_VERSION_2, result2));
+		assertTrue(Arrays.equals(_DATA_VERSION_2, bytes2));
 
-		byte[] result3 = _STORE.getFileAsBytes(
+		byte[] bytes3 = _store.getFileAsBytes(
 			companyId, repositoryId, fileName);
 
-		assertTrue(Arrays.equals(_DATA_VERSION_2, result3));
+		assertTrue(Arrays.equals(_DATA_VERSION_2, bytes3));
 	}
 
 	public void testUpdateFileWithInputStream() throws Exception {
-		Object[] data = createFile(0);
+		Object[] data = addFile(0);
 
-		Long companyId =  (Long)data[0];
-		Long repositoryId =  (Long)data[1];
+		long companyId = (Long)data[0];
+		long repositoryId = (Long)data[1];
 		String fileName = (String)data[2];
 
-		_STORE.updateFile(
+		_store.updateFile(
 			companyId, repositoryId, fileName, "1.1",
 			new ByteArrayInputStream(_DATA_VERSION_2));
 
-		byte[] result1 = _STORE.getFileAsBytes(
+		byte[] bytes1 = _store.getFileAsBytes(
 			companyId, repositoryId, fileName, "1.0");
 
-		assertTrue(Arrays.equals(_DATA_VERSION_1, result1));
+		assertTrue(Arrays.equals(_DATA_VERSION_1, bytes1));
 
-		byte[] result2 = _STORE.getFileAsBytes(
+		byte[] bytes2 = _store.getFileAsBytes(
 			companyId, repositoryId, fileName, "1.1");
 
-		assertTrue(Arrays.equals(_DATA_VERSION_2, result2));
+		assertTrue(Arrays.equals(_DATA_VERSION_2, bytes2));
 
-		byte[] result3 = _STORE.getFileAsBytes(
+		byte[] bytes3 = _store.getFileAsBytes(
 			companyId, repositoryId, fileName);
 
-		assertTrue(Arrays.equals(_DATA_VERSION_2, result3));
+		assertTrue(Arrays.equals(_DATA_VERSION_2, bytes3));
 	}
 
 	public void testUpdateFileWithNewFileName() throws Exception {
-		Object[] data = createFile(0);
+		Object[] data = addFile(0);
 
-		Long companyId =  (Long)data[0];
-		Long repositoryId =  (Long)data[1];
+		long companyId = (Long)data[0];
+		long repositoryId = (Long)data[1];
 		String fileName = (String)data[2];
 
 		String newFileName = randomString();
 
-		_STORE.updateFile(companyId, repositoryId, fileName, newFileName);
+		_store.updateFile(companyId, repositoryId, fileName, newFileName);
 
-		boolean exist1 = _STORE.hasFile(companyId, repositoryId, fileName);
-		boolean exist2 = _STORE.hasFile(companyId, repositoryId, newFileName);
-
-		assertFalse(exist1);
-		assertTrue(exist2);
+		assertFalse(_store.hasFile(companyId, repositoryId, fileName));
+		assertTrue(_store.hasFile(companyId, repositoryId, newFileName));
 	}
 
 	public void testUpdateFileWithNewRepositoryId() throws Exception {
-		Object[] data = createFile(0);
+		Object[] data = addFile(0);
 
-		Long companyId =  (Long)data[0];
-		Long repositoryId =  (Long)data[1];
+		long companyId = (Long)data[0];
+		long repositoryId = (Long)data[1];
 		String fileName = (String)data[2];
 
 		long newRepositoryId = nextLong();
 
-		_STORE.updateFile(companyId, repositoryId, newRepositoryId, fileName);
+		_store.updateFile(companyId, repositoryId, newRepositoryId, fileName);
 
-		boolean exist1 = _STORE.hasFile(companyId, repositoryId, fileName);
-		boolean exist2 = _STORE.hasFile(companyId, newRepositoryId, fileName);
-
-		assertFalse(exist1);
-		assertTrue(exist2);
+		assertFalse(_store.hasFile(companyId, repositoryId, fileName));
+		assertTrue(_store.hasFile(companyId, newRepositoryId, fileName));
 	}
 
-	private Object[] createFile(int newVersionCount) throws Exception {
+	protected Object[] addFile(int newVersionCount) throws Exception {
 		long companyId = nextLong();
 		long repositoryId = nextLong();
 		String fileName = randomString();
 
-		_STORE.addFile(companyId, repositoryId, fileName, _DATA_VERSION_1);
+		_store.addFile(companyId, repositoryId, fileName, _DATA_VERSION_1);
 
 		String versionLabel = "1.";
 
 		for (int i = 1; i <= newVersionCount; i++) {
-			_STORE.updateFile(
+			_store.updateFile(
 				companyId, repositoryId, fileName, versionLabel + i,
 				_DATA_VERSION_1);
 		}
 
-		boolean exist = _STORE.hasFile(
-			companyId, repositoryId, fileName, Store.VERSION_DEFAULT);
-
-		assertTrue(exist);
+		assertTrue(
+			_store.hasFile(
+				companyId, repositoryId, fileName, Store.VERSION_DEFAULT));
 
 		for (int i = 1; i <= newVersionCount; i++) {
-			exist = _STORE.hasFile(
-				companyId, repositoryId, fileName, versionLabel + i);
-
-			assertTrue(exist);
+			assertTrue(
+				_store.hasFile(
+					companyId, repositoryId, fileName, versionLabel + i));
 		}
 
 		return new Object[] {companyId, repositoryId, fileName};
 	}
 
-	private File createTempFile(byte[] fileData) throws IOException {
-		File tempFile = File.createTempFile("DBStoreTest-testFile", null);
+	protected File createFile(byte[] fileData) throws IOException {
+		File file = File.createTempFile("DBStoreTest-testFile", null);
 
-		FileOutputStream fileOutputStream = new FileOutputStream(tempFile);
-		fileOutputStream.write(fileData);
-		fileOutputStream.close();
+		OutputStream outputStream = new FileOutputStream(file);
 
-		return tempFile;
+		outputStream.write(fileData);
+
+		outputStream.close();
+
+		return file;
 	}
-
-	private static final Store _STORE = new DBStore();
 
 	private static final int _DATA_SIZE = 1024 * 65;
 
 	private static final byte[] _DATA_VERSION_1 = new byte[_DATA_SIZE];
+
 	private static final byte[] _DATA_VERSION_2 = new byte[_DATA_SIZE];
+
+	private static Store _store = new DBStore();
 
 	static {
 		for (int i = 0; i < _DATA_SIZE; i++) {

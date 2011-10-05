@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portlet.documentlibrary.DuplicateFileException;
 import com.liferay.portlet.documentlibrary.model.DLContent;
 import com.liferay.portlet.documentlibrary.service.DLContentLocalServiceUtil;
@@ -45,8 +46,8 @@ import java.util.List;
 public class DBStore extends BaseStore {
 
 	@Override
-	public void addDirectory(long companyId, long repositoryId, String dirName)
-		throws PortalException, SystemException {
+	public void addDirectory(
+		long companyId, long repositoryId, String dirName) {
 	}
 
 	@Override
@@ -54,8 +55,8 @@ public class DBStore extends BaseStore {
 			long companyId, long repositoryId, String fileName, byte[] bytes)
 		throws PortalException, SystemException {
 
-		updateFile(companyId, repositoryId, fileName, Store.VERSION_DEFAULT,
-			bytes);
+		updateFile(
+			companyId, repositoryId, fileName, Store.VERSION_DEFAULT, bytes);
 	}
 
 	@Override
@@ -63,38 +64,40 @@ public class DBStore extends BaseStore {
 			long companyId, long repositoryId, String fileName, File file)
 		throws PortalException, SystemException {
 
-		updateFile(companyId, repositoryId, fileName, Store.VERSION_DEFAULT,
-			file);
+		updateFile(
+			companyId, repositoryId, fileName, Store.VERSION_DEFAULT, file);
 	}
 
 	@Override
 	public void addFile(
-			long companyId, long repositoryId, String fileName, InputStream is)
+			long companyId, long repositoryId, String fileName,
+			InputStream inputStream)
 		throws PortalException, SystemException {
 
-		updateFile(companyId, repositoryId, fileName, Store.VERSION_DEFAULT,
-			is);
+		updateFile(
+			companyId, repositoryId, fileName, Store.VERSION_DEFAULT,
+			inputStream);
 	}
 
 	@Override
-	public void checkRoot(long companyId) throws SystemException {
+	public void checkRoot(long companyId) {
 	}
 
 	@Override
 	public void deleteDirectory(
 			long companyId, long repositoryId, String dirName)
-		throws PortalException, SystemException {
+		throws SystemException {
 
-		DLContentLocalServiceUtil.deleteContentsByDirectory(companyId,
-			repositoryId, dirName);
+		DLContentLocalServiceUtil.deleteContentsByDirectory(
+			companyId, repositoryId, dirName);
 	}
 
 	@Override
 	public void deleteFile(long companyId, long repositoryId, String fileName)
-		throws PortalException, SystemException {
+		throws SystemException {
 
-		DLContentLocalServiceUtil.deleteContents(companyId, repositoryId,
-			fileName);
+		DLContentLocalServiceUtil.deleteContents(
+			companyId, repositoryId, fileName);
 	}
 
 	@Override
@@ -112,19 +115,26 @@ public class DBStore extends BaseStore {
 			long companyId, long repositoryId, String fileName)
 		throws PortalException, SystemException {
 
-		DLContent dlcontent = DLContentLocalServiceUtil.getContent(
+		DLContent dlContent = DLContentLocalServiceUtil.getContent(
 			companyId, repositoryId, fileName);
 
-		dlcontent.resetOriginalValues();
+		dlContent.resetOriginalValues();
 
-		Blob blobData = dlcontent.getData();
+		Blob blobData = dlContent.getData();
 
 		if (blobData == null) {
 			if (_log.isWarnEnabled()) {
-				_log.warn(
-					"Unable to find data for file with companyId=" +
-					companyId + ", repositoryId=" + repositoryId +
-					", fileName=" + fileName);
+				StringBundler sb = new StringBundler(9);
+
+				sb.append("No blob data found for file {companyId=");
+				sb.append(companyId);
+				sb.append(", repositoryId=");
+				sb.append(repositoryId);
+				sb.append(", fileName=");
+				sb.append(fileName);
+				sb.append("}");
+
+				_log.warn(sb.toString());
 			}
 
 			return null;
@@ -134,10 +144,17 @@ public class DBStore extends BaseStore {
 			return blobData.getBinaryStream();
 		}
 		catch (SQLException sqle) {
-			throw new SystemException(
-				"Unable to find data for file with companyId=" +  companyId +
-					", repositoryId=" + repositoryId + ", fileName=" + fileName,
-				sqle);
+			StringBundler sb = new StringBundler(7);
+
+			sb.append("Unable to load data binary stream for file {companyId=");
+			sb.append(companyId);
+			sb.append(", repositoryId=");
+			sb.append(repositoryId);
+			sb.append(", fileName=");
+			sb.append(fileName);
+			sb.append("}");
+
+			throw new SystemException(sb.toString(), sqle);
 		}
 	}
 
@@ -147,18 +164,26 @@ public class DBStore extends BaseStore {
 			String versionLabel)
 		throws PortalException, SystemException {
 
-		DLContent dlcontent = DLContentLocalServiceUtil.getContent(
+		DLContent dlContent = DLContentLocalServiceUtil.getContent(
 			companyId, repositoryId, fileName, versionLabel);
 
-		Blob blobData = dlcontent.getData();
+		Blob blobData = dlContent.getData();
 
 		if (blobData == null) {
 			if (_log.isWarnEnabled()) {
-				_log.warn(
-					"Unable to find data for file with companyId=" +
-					companyId + ", repositoryId=" + repositoryId +
-					", fileName=" + fileName + ", versionLabel=" +
-					versionLabel);
+				StringBundler sb = new StringBundler(9);
+
+				sb.append("No blob data found for file {companyId=");
+				sb.append(companyId);
+				sb.append(", repositoryId=");
+				sb.append(repositoryId);
+				sb.append(", fileName=");
+				sb.append(fileName);
+				sb.append(", versionLabel=");
+				sb.append(versionLabel);
+				sb.append("}");
+
+				_log.warn(sb.toString());
 			}
 
 			return null;
@@ -168,15 +193,25 @@ public class DBStore extends BaseStore {
 			return blobData.getBinaryStream();
 		}
 		catch (SQLException sqle) {
-			throw new SystemException(
-				"Unable to find data for file with companyId=" + companyId +
-				", repositoryId=" + repositoryId + ", fileName=" + fileName +
-				", versionLabel=" + versionLabel, sqle);
+			StringBundler sb = new StringBundler(9);
+
+			sb.append("Unable to load data binary stream for file {companyId=");
+			sb.append(companyId);
+			sb.append(", repositoryId=");
+			sb.append(repositoryId);
+			sb.append(", fileName=");
+			sb.append(fileName);
+			sb.append(", versionLabel=");
+			sb.append(versionLabel);
+			sb.append("}");
+
+			throw new SystemException(sb.toString(), sqle);
 		}
 	}
 
 	public String[] getFileNames(long companyId, long repositoryId)
 		throws SystemException {
+
 		List<DLContent> dlContents = DLContentLocalServiceUtil.getContents(
 			companyId, repositoryId);
 
@@ -191,9 +226,10 @@ public class DBStore extends BaseStore {
 		return fileNames;
 	}
 
+	@Override
 	public String[] getFileNames(
 			long companyId, long repositoryId, String dirName)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		List<DLContent> dlContents =
 			DLContentLocalServiceUtil.getContentsByDirectory(
@@ -224,24 +260,33 @@ public class DBStore extends BaseStore {
 	public boolean hasFile(
 			long companyId, long repositoryId, String fileName,
 			String versionLabel)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return DLContentLocalServiceUtil.hasContent(
 			companyId, repositoryId, fileName, versionLabel);
 	}
 
 	@Override
-	public void move(String srcDir, String destDir) throws SystemException {
+	public void move(String srcDir, String destDir) {
 	}
 
 	@Override
 	public void updateFile(
 			long companyId, long repositoryId, long newRepositoryId,
 			String fileName)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		DLContentLocalServiceUtil.updateDLContent(
 			companyId, repositoryId, newRepositoryId, fileName, fileName);
+	}
+
+	public void updateFile(
+			long companyId, long repositoryId, String fileName,
+			String newFileName)
+		throws SystemException {
+
+		DLContentLocalServiceUtil.updateDLContent(
+			companyId, repositoryId, repositoryId, fileName, newFileName);
 	}
 
 	@Override
@@ -251,13 +296,13 @@ public class DBStore extends BaseStore {
 		throws PortalException, SystemException {
 
 		if (DLContentLocalServiceUtil.hasContent(
-			companyId, repositoryId, fileName, versionLabel)) {
+				companyId, repositoryId, fileName, versionLabel)) {
 
 			throw new DuplicateFileException(fileName);
 		}
 
-		DLContentLocalServiceUtil.addContent(companyId, repositoryId, fileName,
-			versionLabel, bytes);
+		DLContentLocalServiceUtil.addContent(
+			companyId, repositoryId, fileName, versionLabel, bytes);
 	}
 
 	@Override
@@ -267,7 +312,7 @@ public class DBStore extends BaseStore {
 		throws PortalException, SystemException {
 
 		if (DLContentLocalServiceUtil.hasContent(
-			companyId, repositoryId, fileName, versionLabel)) {
+				companyId, repositoryId, fileName, versionLabel)) {
 
 			throw new DuplicateFileException(fileName);
 		}
@@ -289,19 +334,26 @@ public class DBStore extends BaseStore {
 	@Override
 	public void updateFile(
 			long companyId, long repositoryId, String fileName,
-			String versionLabel, InputStream is)
+			String versionLabel, InputStream inputStream)
 		throws PortalException, SystemException {
 
 		if (DLContentLocalServiceUtil.hasContent(
-			companyId, repositoryId, fileName, versionLabel)) {
+				companyId, repositoryId, fileName, versionLabel)) {
 
 			throw new DuplicateFileException(fileName);
 		}
 
 		long length = -1;
 
-		if (is instanceof FileInputStream) {
-			FileInputStream fileInputStream = (FileInputStream)is;
+		if (inputStream instanceof ByteArrayInputStream) {
+			ByteArrayInputStream byteArrayInputStream =
+				(ByteArrayInputStream)inputStream;
+
+			length = byteArrayInputStream.available();
+		}
+		else if (inputStream instanceof FileInputStream) {
+			FileInputStream fileInputStream = (FileInputStream)inputStream;
+
 			FileChannel fileChannel = fileInputStream.getChannel();
 
 			try {
@@ -310,38 +362,33 @@ public class DBStore extends BaseStore {
 			catch (IOException ioe) {
 				if (_log.isWarnEnabled()) {
 					_log.warn(
-						"Failed to detect file size from FileChannel," +
-							"fallback to memory buffer adding.", ioe);
+						"Unable to detect file size from file channel", ioe);
 				}
 			}
 		}
-		else if (is instanceof UnsyncByteArrayInputStream) {
+		else if (inputStream instanceof UnsyncByteArrayInputStream) {
 			UnsyncByteArrayInputStream unsyncByteArrayInputStream =
-				(UnsyncByteArrayInputStream)is;
+				(UnsyncByteArrayInputStream)inputStream;
 
 			length = unsyncByteArrayInputStream.available();
-		}
-		else if (is instanceof ByteArrayInputStream) {
-			ByteArrayInputStream byteArrayInputStream =(ByteArrayInputStream)is;
-			length = byteArrayInputStream.available();
 		}
 
 		if (length >= 0) {
 			DLContentLocalServiceUtil.addContent(
-				companyId, repositoryId, fileName, versionLabel, is, length);
+				companyId, repositoryId, fileName, versionLabel, inputStream,
+				length);
 		}
 		else {
 			if (_log.isWarnEnabled()) {
-				_log.warn("Unable to detect given InputStream's data length :" +
-						is + ", have to buffer the whole data into " +
-							"memory before flush to database, this could be " +
-								"a memory hog when the inputing file is large");
+				_log.warn(
+					"Unable to detect length from input stream. Reading " +
+						"entire input stream into memory as a last resort.");
 			}
 
 			byte[] bytes = null;
 
 			try {
-				bytes = FileUtil.getBytes(is);
+				bytes = FileUtil.getBytes(inputStream);
 			}
 			catch (IOException ioe) {
 				throw new SystemException(ioe);
@@ -350,15 +397,6 @@ public class DBStore extends BaseStore {
 			DLContentLocalServiceUtil.addContent(
 				companyId, repositoryId, fileName, versionLabel, bytes);
 		}
-	}
-
-	public void updateFile(
-			long companyId, long repositoryId, String fileName,
-			String newFileName)
-		throws PortalException, SystemException {
-
-		DLContentLocalServiceUtil.updateDLContent(
-			companyId, repositoryId, repositoryId, fileName, newFileName);
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(DBStore.class);

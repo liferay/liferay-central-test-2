@@ -49,7 +49,6 @@ public class DLContentLocalServiceImpl extends DLContentLocalServiceBaseImpl {
 		dlContent.setRepositoryId(repositoryId);
 		dlContent.setPath(path);
 		dlContent.setVersion(version);
-		dlContent.setSize(bytes.length);
 
 		UnsyncByteArrayInputStream unsyncByteArrayInputStream =
 			new UnsyncByteArrayInputStream(bytes);
@@ -59,13 +58,15 @@ public class DLContentLocalServiceImpl extends DLContentLocalServiceBaseImpl {
 
 		dlContent.setData(dataOutputBlob);
 
+		dlContent.setSize(bytes.length);
+
 		dlContentPersistence.update(dlContent, false);
 
 		return dlContent;
 	}
 
 	public DLContent addContent(
-			long companyId,  long repositoryId, String path, String version,
+			long companyId, long repositoryId, String path, String version,
 			InputStream inputStream, long size)
 		throws SystemException {
 
@@ -98,8 +99,8 @@ public class DLContentLocalServiceImpl extends DLContentLocalServiceBaseImpl {
 			long companyId, long repositoryId, String path, String version)
 		throws PortalException, SystemException {
 
-		dlContentPersistence.removeByC_R_P_V(companyId, repositoryId, path,
-			version);
+		dlContentPersistence.removeByC_R_P_V(
+			companyId, repositoryId, path, version);
 	}
 
 	public void deleteContents(long companyId,  long repositoryId, String path)
@@ -118,8 +119,8 @@ public class DLContentLocalServiceImpl extends DLContentLocalServiceBaseImpl {
 
 		dirName = dirName.concat(StringPool.PERCENT);
 
-		dlContentPersistence.removeByC_R_LikeP(companyId, repositoryId,
-			dirName);
+		dlContentPersistence.removeByC_R_LikeP(
+			companyId, repositoryId, dirName);
 	}
 
 	public DLContent getContent(long companyId, long repositoryId, String path)
@@ -141,8 +142,8 @@ public class DLContentLocalServiceImpl extends DLContentLocalServiceBaseImpl {
 			long companyId, long repositoryId, String path, String version)
 		throws NoSuchContentException, SystemException {
 
-		return dlContentPersistence.findByC_R_P_V(companyId, repositoryId, path,
-			version);
+		return dlContentPersistence.findByC_R_P_V(
+			companyId, repositoryId, path, version);
 	}
 
 	public List<DLContent> getContents(long companyId, long repositoryId)

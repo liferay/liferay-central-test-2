@@ -43,14 +43,14 @@ public class DLContentLocalServiceTest extends BaseServiceTestCase {
 		long repositoryId = nextLong();
 		String path = randomString();
 
-		DLContent dlContent = _dlContentLocalService.addContent(
+		DLContent addDLContent = _dlContentLocalService.addContent(
 			companyId, repositoryId, path, Store.VERSION_DEFAULT,
 			_DATA_VERSION_1);
 
-		DLContent newDLContent = _dlContentLocalService.getContent(
+		DLContent getDLContent = _dlContentLocalService.getContent(
 			companyId, repositoryId, path);
 
-		assertEquals(dlContent, newDLContent);
+		assertEquals(addDLContent, getDLContent);
 	}
 
 	public void testAddContentByInputStream() throws Exception {
@@ -58,14 +58,14 @@ public class DLContentLocalServiceTest extends BaseServiceTestCase {
 		long repositoryId = nextLong();
 		String path = randomString();
 
-		DLContent dlContent = _dlContentLocalService.addContent(
+		DLContent addDLContent = _dlContentLocalService.addContent(
 			companyId, repositoryId, path, Store.VERSION_DEFAULT,
 			new ByteArrayInputStream(_DATA_VERSION_1), 1024);
 
-		DLContent newDLContent = _dlContentLocalService.getContent(
+		DLContent getDLContent = _dlContentLocalService.getContent(
 			companyId, repositoryId, path);
 
-		assertEquals(dlContent, newDLContent);
+		assertEquals(addDLContent, getDLContent);
 	}
 
 	public void testDeleteContent() throws Exception {
@@ -77,18 +77,16 @@ public class DLContentLocalServiceTest extends BaseServiceTestCase {
 			companyId, repositoryId, path, Store.VERSION_DEFAULT,
 			_DATA_VERSION_1);
 
-		boolean exist = _dlContentLocalService.hasContent(
-			companyId, repositoryId, path, Store.VERSION_DEFAULT);
-
-		assertTrue(exist);
+		assertTrue(
+			_dlContentLocalService.hasContent(
+				companyId, repositoryId, path, Store.VERSION_DEFAULT));
 
 		_dlContentLocalService.deleteContent(
 			companyId, repositoryId, path, Store.VERSION_DEFAULT);
 
-		exist = _dlContentLocalService.hasContent(
-			companyId, repositoryId, path, Store.VERSION_DEFAULT);
-
-		assertFalse(exist);
+		assertFalse(
+			_dlContentLocalService.hasContent(
+				companyId, repositoryId, path, Store.VERSION_DEFAULT));
 	}
 
 	public void testDeleteContents() throws Exception {
@@ -102,37 +100,31 @@ public class DLContentLocalServiceTest extends BaseServiceTestCase {
 		_dlContentLocalService.addContent(
 			companyId, repositoryId, path, "1.1", _DATA_VERSION_2);
 
-		boolean exist = _dlContentLocalService.hasContent(
-			companyId, repositoryId, path, Store.VERSION_DEFAULT);
-
-		assertTrue(exist);
-
-		exist = _dlContentLocalService.hasContent(
-			companyId, repositoryId, path, "1.1");
-
-		assertTrue(exist);
+		assertTrue(
+			_dlContentLocalService.hasContent(
+				companyId, repositoryId, path, Store.VERSION_DEFAULT));
+		assertTrue(
+			_dlContentLocalService.hasContent(
+				companyId, repositoryId, path, "1.1"));
 
 		_dlContentLocalService.deleteContents(companyId, repositoryId, path);
 
-		exist = _dlContentLocalService.hasContent(
-			companyId, repositoryId, path, Store.VERSION_DEFAULT);
-
-		assertFalse(exist);
-
-		exist = _dlContentLocalService.hasContent(
-			companyId, repositoryId, path, "1.1");
-
-		assertFalse(exist);
+		assertFalse(
+			_dlContentLocalService.hasContent(
+				companyId, repositoryId, path, Store.VERSION_DEFAULT));
+		assertFalse(
+			_dlContentLocalService.hasContent(
+				companyId, repositoryId, path, "1.1"));
 	}
 
 	public void testDeleteContentsByDirectory() throws Exception {
 		long companyId = nextLong();
 		long repositoryId = nextLong();
+
 		String directory = randomString();
-		String subDirectory = directory + "/" + randomString();
 
 		String path1 = directory + "/" + randomString();
-		String path2 = subDirectory + "/" + randomString();
+		String path2 = directory + "/" + randomString() + "/" + randomString();
 
 		_dlContentLocalService.addContent(
 			companyId, repositoryId, path1, Store.VERSION_DEFAULT,
@@ -142,28 +134,22 @@ public class DLContentLocalServiceTest extends BaseServiceTestCase {
 			companyId, repositoryId, path2, Store.VERSION_DEFAULT,
 			_DATA_VERSION_1);
 
-		boolean exist = _dlContentLocalService.hasContent(
-			companyId, repositoryId, path1, Store.VERSION_DEFAULT);
-
-		assertTrue(exist);
-
-		exist = _dlContentLocalService.hasContent(
-			companyId, repositoryId, path2, Store.VERSION_DEFAULT);
-
-		assertTrue(exist);
+		assertTrue(
+			_dlContentLocalService.hasContent(
+				companyId, repositoryId, path1, Store.VERSION_DEFAULT));
+		assertTrue(
+			_dlContentLocalService.hasContent(
+				companyId, repositoryId, path2, Store.VERSION_DEFAULT));
 
 		_dlContentLocalService.deleteContentsByDirectory(
 			companyId, repositoryId, directory);
 
-		exist = _dlContentLocalService.hasContent(
-			companyId, repositoryId, path1, Store.VERSION_DEFAULT);
-
-		assertFalse(exist);
-
-		exist = _dlContentLocalService.hasContent(
-			companyId, repositoryId, path2, Store.VERSION_DEFAULT);
-
-		assertFalse(exist);
+		assertFalse(
+			_dlContentLocalService.hasContent(
+				companyId, repositoryId, path1, Store.VERSION_DEFAULT));
+		assertFalse(
+			_dlContentLocalService.hasContent(
+				companyId, repositoryId, path2, Store.VERSION_DEFAULT));
 	}
 
 	public void testGetContentLatest() throws Exception {
@@ -171,72 +157,72 @@ public class DLContentLocalServiceTest extends BaseServiceTestCase {
 		long repositoryId = nextLong();
 		String path = randomString();
 
-		DLContent dlContent1 = _dlContentLocalService.addContent(
+		DLContent addDLContent1 = _dlContentLocalService.addContent(
 			companyId, repositoryId, path, Store.VERSION_DEFAULT,
 			_DATA_VERSION_1);
 
-		DLContent dlContent1Read = _dlContentLocalService.getContent(
+		DLContent getDLContent1 = _dlContentLocalService.getContent(
 			companyId, repositoryId, path);
 
-		assertEquals(dlContent1, dlContent1Read);
+		assertEquals(addDLContent1, getDLContent1);
 
-		DLContent dlContent2 = _dlContentLocalService.addContent(
+		DLContent addDLContent2 = _dlContentLocalService.addContent(
 			companyId, repositoryId, path, "1.1", _DATA_VERSION_2);
 
-		DLContent dlContent2Read = _dlContentLocalService.getContent(
+		DLContent getDLContent2 = _dlContentLocalService.getContent(
 			companyId, repositoryId, path);
 
-		assertEquals(dlContent2, dlContent2Read);
-	}
-
-	public void testGetContentVersion() throws Exception {
-		long companyId = nextLong();
-		long repositoryId = nextLong();
-		String path = randomString();
-
-		DLContent dlContent1 = _dlContentLocalService.addContent(
-			companyId, repositoryId, path, Store.VERSION_DEFAULT,
-			_DATA_VERSION_1);
-
-		DLContent dlContent1Read = _dlContentLocalService.getContent(
-			companyId, repositoryId, path, Store.VERSION_DEFAULT);
-
-		assertEquals(dlContent1, dlContent1Read);
-
-		DLContent dlContent2 = _dlContentLocalService.addContent(
-			companyId, repositoryId, path, "1.1", _DATA_VERSION_2);
-
-		DLContent dlContent2Read = _dlContentLocalService.getContent(
-			companyId, repositoryId, path, "1.1");
-
-		assertEquals(dlContent2, dlContent2Read);
+		assertEquals(addDLContent2, getDLContent2);
 	}
 
 	public void testGetContentsAll() throws Exception {
 		long companyId = nextLong();
 		long repositoryId = nextLong();
-		String path1 = randomString();
-		String path2 = randomString();
-		String path3 = randomString();
 
 		DLContent dlContent1 = _dlContentLocalService.addContent(
-			companyId, repositoryId, path1, Store.VERSION_DEFAULT,
+			companyId, repositoryId, randomString(), Store.VERSION_DEFAULT,
 			_DATA_VERSION_1);
 		DLContent dlContent2 = _dlContentLocalService.addContent(
-			companyId, repositoryId, path2, Store.VERSION_DEFAULT,
+			companyId, repositoryId, randomString(), Store.VERSION_DEFAULT,
 			_DATA_VERSION_1);
 		DLContent dlContent3 = _dlContentLocalService.addContent(
-			companyId, repositoryId, path3, Store.VERSION_DEFAULT,
+			companyId, repositoryId, randomString(), Store.VERSION_DEFAULT,
 			_DATA_VERSION_1);
 
-		List<DLContent> dlContents =
-			_dlContentLocalService.getContents(companyId, repositoryId);
+		List<DLContent> dlContents = _dlContentLocalService.getContents(
+			companyId, repositoryId);
 
 		assertEquals(3, dlContents.size());
-
 		assertTrue(dlContents.contains(dlContent1));
 		assertTrue(dlContents.contains(dlContent2));
 		assertTrue(dlContents.contains(dlContent3));
+	}
+
+	public void testGetContentsByDirectory() throws Exception {
+		long companyId = nextLong();
+		long repositoryId = nextLong();
+		String path1 = randomString();
+		String path2 = randomString();
+
+		DLContent dlContent1 = _dlContentLocalService.addContent(
+			companyId, repositoryId, path1 + "/" + randomString(),
+			Store.VERSION_DEFAULT, _DATA_VERSION_1);
+		DLContent dlContent2 = _dlContentLocalService.addContent(
+			companyId, repositoryId, path2 + "/" + randomString(),
+			Store.VERSION_DEFAULT, _DATA_VERSION_1);
+
+		List<DLContent> dlContents =
+			_dlContentLocalService.getContentsByDirectory(
+				companyId, repositoryId, path1);
+
+		assertEquals(1, dlContents.size());
+		assertTrue(dlContents.contains(dlContent1));
+
+		dlContents = _dlContentLocalService.getContentsByDirectory(
+			companyId, repositoryId, path2);
+
+		assertEquals(1, dlContents.size());
+		assertEquals(dlContent2, dlContents.get(0));
 	}
 
 	public void testGetContentsVersions() throws Exception {
@@ -250,7 +236,6 @@ public class DLContentLocalServiceTest extends BaseServiceTestCase {
 			_DATA_VERSION_1);
 		DLContent dlContent2 = _dlContentLocalService.addContent(
 			companyId, repositoryId, path1, "1.1", _DATA_VERSION_2);
-
 		DLContent dlContent3 = _dlContentLocalService.addContent(
 			companyId, repositoryId, path2, Store.VERSION_DEFAULT,
 			_DATA_VERSION_1);
@@ -261,7 +246,6 @@ public class DLContentLocalServiceTest extends BaseServiceTestCase {
 			_dlContentLocalService.getContents(companyId, repositoryId, path1);
 
 		assertEquals(2, dlContents1.size());
-
 		assertTrue(dlContents1.contains(dlContent1));
 		assertTrue(dlContents1.contains(dlContent2));
 
@@ -269,41 +253,31 @@ public class DLContentLocalServiceTest extends BaseServiceTestCase {
 			_dlContentLocalService.getContents(companyId, repositoryId, path2);
 
 		assertEquals(2, dlContents2.size());
-
 		assertTrue(dlContents2.contains(dlContent3));
 		assertTrue(dlContents2.contains(dlContent4));
 	}
 
-	public void testGetContentsByDirectory() throws Exception {
+	public void testGetContentVersion() throws Exception {
 		long companyId = nextLong();
 		long repositoryId = nextLong();
-		String directory = randomString();
-		String subDirectory = randomString();
+		String path = randomString();
 
-		String path1 = directory + "/" + randomString();
-		String path2 = subDirectory + "/" + randomString();
-
-		DLContent dlContent1 = _dlContentLocalService.addContent(
-			companyId, repositoryId, path1, Store.VERSION_DEFAULT,
-			_DATA_VERSION_1);
-		DLContent dlContent2 = _dlContentLocalService.addContent(
-			companyId, repositoryId, path2, Store.VERSION_DEFAULT,
+		DLContent addDLContent1 = _dlContentLocalService.addContent(
+			companyId, repositoryId, path, Store.VERSION_DEFAULT,
 			_DATA_VERSION_1);
 
-		List<DLContent> dlContents =
-			_dlContentLocalService.getContentsByDirectory(
-				companyId, repositoryId, directory);
+		DLContent getDLContent1 = _dlContentLocalService.getContent(
+			companyId, repositoryId, path, Store.VERSION_DEFAULT);
 
-		assertEquals(1, dlContents.size());
+		assertEquals(addDLContent1, getDLContent1);
 
-		assertTrue(dlContents.contains(dlContent1));
+		DLContent addDLContent2 = _dlContentLocalService.addContent(
+			companyId, repositoryId, path, "1.1", _DATA_VERSION_2);
 
-		dlContents = _dlContentLocalService.getContentsByDirectory(
-			companyId, repositoryId, subDirectory);
+		DLContent getDLContent2 = _dlContentLocalService.getContent(
+			companyId, repositoryId, path, "1.1");
 
-		assertEquals(1, dlContents.size());
-
-		assertEquals(dlContent2, dlContents.get(0));
+		assertEquals(addDLContent2, getDLContent2);
 	}
 
 	public void testHasContent() throws Exception {
@@ -312,33 +286,31 @@ public class DLContentLocalServiceTest extends BaseServiceTestCase {
 		String path = randomString();
 
 		// 1.0
-		boolean exist = _dlContentLocalService.hasContent(
-			companyId, repositoryId, path, Store.VERSION_DEFAULT);
 
-		assertFalse(exist);
+		assertFalse(
+			_dlContentLocalService.hasContent(
+				companyId, repositoryId, path, Store.VERSION_DEFAULT));
 
 		_dlContentLocalService.addContent(
 			companyId, repositoryId, path, Store.VERSION_DEFAULT,
 			_DATA_VERSION_1);
 
-		exist = _dlContentLocalService.hasContent(
-			companyId, repositoryId, path, Store.VERSION_DEFAULT);
-
-		assertTrue(exist);
+		assertTrue(
+			_dlContentLocalService.hasContent(
+				companyId, repositoryId, path, Store.VERSION_DEFAULT));
 
 		// 1.1
-		exist = _dlContentLocalService.hasContent(
-			companyId, repositoryId, path, "1.1");
 
-		assertFalse(exist);
+		assertFalse(
+			_dlContentLocalService.hasContent(
+				companyId, repositoryId, path, "1.1"));
 
 		_dlContentLocalService.addContent(
 			companyId, repositoryId, path, "1.1", _DATA_VERSION_1);
 
-		exist = _dlContentLocalService.hasContent(
-			companyId, repositoryId, path, "1.1");
-
-		assertTrue(exist);
+		assertTrue(
+			_dlContentLocalService.hasContent(
+				companyId, repositoryId, path, "1.1"));
 	}
 
 	public void testUpdateContent() throws Exception {
@@ -348,22 +320,22 @@ public class DLContentLocalServiceTest extends BaseServiceTestCase {
 		String oldPath = randomString();
 		String newPath = randomString();
 
-		DLContent dlContent = _dlContentLocalService.addContent(
+		DLContent addDLContent = _dlContentLocalService.addContent(
 			companyId, oldRepositoryId, oldPath, Store.VERSION_DEFAULT,
 			_DATA_VERSION_1);
 
 		_dlContentLocalService.updateDLContent(
 			companyId, oldRepositoryId, newRepositoryId, oldPath, newPath);
 
-		DLContent newDLContent = _dlContentLocalService.getContent(
+		DLContent getDLContent = _dlContentLocalService.getContent(
 			companyId, newRepositoryId, newPath);
 
-		dlContent.setRepositoryId(newRepositoryId);
-		dlContent.setPath(newPath);
+		addDLContent.setRepositoryId(newRepositoryId);
+		addDLContent.setPath(newPath);
 
-		assertEquals(dlContent, newDLContent);
+		assertEquals(addDLContent, getDLContent);
 
-		_dlContentLocalService.deleteDLContent(newDLContent);
+		_dlContentLocalService.deleteDLContent(getDLContent);
 	}
 
 	protected void assertEquals(
@@ -389,7 +361,10 @@ public class DLContentLocalServiceTest extends BaseServiceTestCase {
 	private static final int _DATA_SIZE = 1024;
 
 	private static final byte[] _DATA_VERSION_1 = new byte[_DATA_SIZE];
+
 	private static final byte[] _DATA_VERSION_2 = new byte[_DATA_SIZE];
+
+	private DLContentLocalService _dlContentLocalService;
 
 	static {
 		for (int i = 0; i < _DATA_SIZE; i++) {
@@ -397,7 +372,5 @@ public class DLContentLocalServiceTest extends BaseServiceTestCase {
 			_DATA_VERSION_2[i] = (byte)(i + 1);
 		}
 	}
-
-	private DLContentLocalService _dlContentLocalService;
 
 }
