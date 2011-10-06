@@ -36,7 +36,6 @@ import com.liferay.portal.service.CMISRepositoryLocalServiceUtil;
 import com.liferay.portal.service.persistence.LockUtil;
 import com.liferay.portlet.documentlibrary.NoSuchFileVersionException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
-import com.liferay.portlet.documentlibrary.model.DLFileEntryConstants;
 import com.liferay.portlet.documentlibrary.service.DLAppHelperLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.util.DLUtil;
 
@@ -107,7 +106,7 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 		if (Validator.isNull(version)) {
 			return getContentStream();
 		}
-		
+
 		for (Document document : _document.getAllVersions()) {
 			if (version.equals(document.getVersionLabel())) {
 				ContentStream contentStream = document.getContentStream();
@@ -158,7 +157,7 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 
 	public FileVersion getFileVersion(String version)
 		throws PortalException, SystemException {
-		
+
 		if (Validator.isNull(version)) {
 			return getFileVersion();
 		}
@@ -307,7 +306,7 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 		if (Validator.isNull(version)) {
 			return getMimeType();
 		}
-		
+
 		for (Document document : _document.getAllVersions()) {
 			if (version.equals(document.getVersionLabel())) {
 				return document.getContentStreamMimeType();
@@ -406,8 +405,7 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 	}
 
 	public String getVersion() {
-		return GetterUtil.get(
-			_document.getVersionLabel(), (String) null);
+		return GetterUtil.getString(_document.getVersionLabel(), null);
 	}
 
 	public long getVersionUserId() {

@@ -113,16 +113,17 @@ public class CMISFileVersion extends CMISModel implements FileVersion {
 	}
 
 	public FileEntry getFileEntry() throws PortalException, SystemException {
-		Document document;
+		Document document = null;
 
 		List<Document> allVersions = _document.getAllVersions();
 
 		if (allVersions.isEmpty()) {
 			document = _document;
-		} else {
+		}
+		else {
 			document = allVersions.get(0);
 		}
-		
+
 		return CMISRepositoryLocalServiceUtil.toFileEntry(
 			getRepositoryId(), document);
 	}
