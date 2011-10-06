@@ -217,6 +217,7 @@ public class ThemeUtil {
 		}
 		else {
 			genericServlet = new GenericServlet() {
+
 				@Override
 				public void service(
 						ServletRequest servletRequest,
@@ -225,6 +226,7 @@ public class ThemeUtil {
 
 					servlet.service(servletRequest, servletResponse);
 				}
+
 			};
 
 			genericServlet.init(pageContext.getServletConfig());

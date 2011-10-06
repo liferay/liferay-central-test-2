@@ -394,10 +394,11 @@ public class DDMXSDImpl implements DDMXSD {
 		GenericServlet genericServlet = null;
 
 		if (servlet instanceof GenericServlet) {
-			genericServlet = (GenericServlet) servlet;
+			genericServlet = (GenericServlet)servlet;
 		}
 		else {
 			genericServlet = new GenericServlet() {
+
 				@Override
 				public void service(
 						ServletRequest servletRequest,
@@ -406,6 +407,7 @@ public class DDMXSDImpl implements DDMXSD {
 
 					servlet.service(servletRequest, servletResponse);
 				}
+
 			};
 
 			genericServlet.init(pageContext.getServletConfig());
