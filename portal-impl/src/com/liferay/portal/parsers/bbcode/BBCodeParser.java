@@ -85,7 +85,7 @@ public class BBCodeParser {
 
 				String endTag = bbCodeToken.getEndTag();
 
-				if ("code".equals(endTag)) {
+				if (endTag.equals("code")) {
 					break;
 				}
 			}
