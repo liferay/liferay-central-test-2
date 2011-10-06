@@ -117,6 +117,8 @@ public class AssertImportLARTest extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace(
 				"DML Folder1 Subfolder Document Description Edit"),
 			selenium.getText("//span[@class='document-description']"));
+		assertEquals(RuntimeVariables.replace("Download (0.5k)"),
+			selenium.getText("//span[@class='download-document']/span/a/span"));
 		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
