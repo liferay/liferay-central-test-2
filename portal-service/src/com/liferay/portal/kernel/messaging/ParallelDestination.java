@@ -78,7 +78,8 @@ public class ParallelDestination extends BaseAsyncDestination {
 				public void run() {
 					long companyId = CompanyThreadLocal.getCompanyId();
 					String principalName = PrincipalThreadLocal.getName();
-					String principalPassword = PrincipalThreadLocal.getPassword();
+					String principalPassword =
+						PrincipalThreadLocal.getPassword();
 
 					try {
 						long messageCompanyId = message.getLong("companyId");
