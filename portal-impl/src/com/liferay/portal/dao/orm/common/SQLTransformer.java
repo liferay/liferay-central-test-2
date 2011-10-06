@@ -195,7 +195,7 @@ public class SQLTransformer {
 		return matcher.replaceAll("$1 ($2)");
 	}
 
-	private String _replaceTextReplacementFunction(String newSQL) {
+	private String _replaceReplace(String newSQL) {
 		return StringUtil.replace(newSQL, "replace(", "str_replace(");
 	}
 
@@ -234,10 +234,7 @@ public class SQLTransformer {
 		}
 		else if (_vendorSybase) {
 			newSQL = _replaceMod(newSQL);
-
-			// replace function is not available in Sybase ASE
-
-			newSQL = _replaceTextReplacementFunction(newSQL);
+			newSQL = _replaceReplace(newSQL);
 		}
 
 		if (_log.isDebugEnabled()) {
