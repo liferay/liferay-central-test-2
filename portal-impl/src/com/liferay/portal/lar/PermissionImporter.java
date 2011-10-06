@@ -295,14 +295,9 @@ public class PermissionImporter {
 			Element permissionsElement, boolean portletActions)
 		throws Exception {
 
-		Resource resource = layoutCache.getResource(
-			companyId, groupId, resourceName,
-			ResourceConstants.SCOPE_INDIVIDUAL, resourcePrimKey,
-			portletActions);
+		Map<Long, String[]> roleIdsToActionIds = new HashMap<Long, String[]>();
 
 		List<Element> roleElements = permissionsElement.elements("role");
-
-		Map<Long, String[]> roleIdsToActionIds = new HashMap<Long, String[]>();
 
 		for (Element roleElement : roleElements) {
 			String name = roleElement.attributeValue("name");
@@ -365,9 +360,9 @@ public class PermissionImporter {
 			Element permissionsElement, boolean portletActions)
 		throws Exception {
 
-		List<Element> roleElements = permissionsElement.elements("role");
-
 		Map<Long, String[]> roleIdsToActionIds = new HashMap<Long, String[]>();
+
+		List<Element> roleElements = permissionsElement.elements("role");
 
 		for (Element roleElement : roleElements) {
 			String name = roleElement.attributeValue("name");
