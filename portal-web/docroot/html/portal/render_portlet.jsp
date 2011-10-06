@@ -1015,10 +1015,10 @@ else {
 <c:if test='<%= themeDisplay.isStatePopUp() && SessionMessages.contains(renderRequestImpl, portletConfig.getPortletName() + ".doRefresh") %>'>
 
 	<%
-	String p_p_id = (String)SessionMessages.get(renderRequestImpl, portletConfig.getPortletName() + ".doRefresh");
+	String doRefreshPortletId = (String)SessionMessages.get(renderRequestImpl, portletConfig.getPortletName() + ".doRefresh");
 
-	if (Validator.isNull(p_p_id) && portletResourcePortlet != null) {
-		p_p_id = portletResourcePortlet.getPortletId();
+	if (Validator.isNull(doRefreshPortletId) && (portletResourcePortlet != null)) {
+		doRefreshPortletId = portletResourcePortlet.getPortletId();
 	}
 	%>
 
@@ -1026,7 +1026,7 @@ else {
 		if (window.parent) {
 			var data = null;
 
-			var curPortletBoundaryId = '#p_p_id_<%= p_p_id %>_';
+			var curPortletBoundaryId = '#doRefreshPortletId_<%= doRefreshPortletId %>_';
 
 			<c:if test='<%= (portletResourcePortlet != null && !portletResourcePortlet.isAjaxable()) || SessionMessages.contains(renderRequestImpl, portletConfig.getPortletName() + ".notAjaxable") %>'>
 				data = {
