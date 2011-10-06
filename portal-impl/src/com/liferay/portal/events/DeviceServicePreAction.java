@@ -78,6 +78,7 @@ public class DeviceServicePreAction extends Action {
 				else {
 					logMessage += "null";
 				}
+
 				_log.debug(logMessage);
 			}
 		}
