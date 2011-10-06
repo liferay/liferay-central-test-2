@@ -67,7 +67,7 @@ request.setAttribute("edit_site_assignments.jsp-portletURL", portletURL);
 			title='<%= group.getDescriptiveName() %>'
 		/>
 
-		<liferay-util:include page="/html/portlet/sites_admin/edit_site_assignments_toolbar.jsp" >
+		<liferay-util:include page="/html/portlet/sites_admin/edit_site_assignments_toolbar.jsp">
 			<liferay-util:param name="toolbarItem" value='<%= tabs2.equals("available") ? "add-role" : null %>' />
 		</liferay-util:include>
 
@@ -78,7 +78,6 @@ request.setAttribute("edit_site_assignments.jsp-portletURL", portletURL);
 				url="<%= tabsURL.toString() %>"
 			/>
 		</c:if>
-
 	</c:when>
 	<c:otherwise>
 		<liferay-ui:header
@@ -172,7 +171,7 @@ request.setAttribute("edit_site_assignments.jsp-portletURL", portletURL);
 		window,
 		'<portlet:namespace />submit',
 		function() {
-		    var organizationKeywords = document.<portlet:namespace />fm.<portlet:namespace /><%= DisplayTerms.KEYWORDS %>_organizations;
+			var organizationKeywords = document.<portlet:namespace />fm.<portlet:namespace /><%= DisplayTerms.KEYWORDS %>_organizations;
 
 			if (organizationKeywords && organizationKeywords.value) {
 				document.<portlet:namespace />fm.<portlet:namespace /><%= DisplayTerms.KEYWORDS %>.value = organizationKeywords.value;
