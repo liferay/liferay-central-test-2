@@ -73,9 +73,7 @@ String[] advancedSections = PropsValues.SITES_FORM_ADD_ADVANCED;
 
 if (group != null) {
 	mainSections = PropsValues.SITES_FORM_UPDATE_MAIN;
-
 	seoSections = PropsValues.SITES_FORM_UPDATE_SEO;
-
 	advancedSections = PropsValues.SITES_FORM_UPDATE_ADVANCED;
 }
 
