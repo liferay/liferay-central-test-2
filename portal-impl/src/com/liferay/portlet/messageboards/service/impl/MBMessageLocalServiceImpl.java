@@ -232,8 +232,9 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			messageId, "text/" + format, body);
 
 		validate(subject, body);
-		subject = _fixEmptySubject(subject, body);
-		body = _fixEmptyBody(subject, body);
+
+		subject = getSubject(subject, body);
+		body = getBody(subject, body);
 
 		MBMessage message = mbMessagePersistence.create(messageId);
 
@@ -1366,8 +1367,9 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		Date now = new Date();
 
 		validate(subject, body);
-		subject = _fixEmptySubject(subject, body);
-		body = _fixEmptyBody(subject, body);
+
+		subject = getSubject(subject, body);
+		body = getBody(subject, body);
 
 		message.setModifiedDate(serviceContext.getModifiedDate(now));
 		message.setSubject(subject);
@@ -1789,6 +1791,22 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		}
 	}
 
+	protected String getBody(String subject, String body) {
+		if (Validator.isNull(body)) {
+			return subject;
+		}
+
+		return body;
+	}
+
+	protected String getSubject(String subject, String body) {
+		if (Validator.isNull(subject)) {
+			return StringUtil.shorten(body);
+		}
+
+		return subject;
+	}
+
 	protected void notifyDiscussionSubscribers(
 			MBMessage message, ServiceContext serviceContext)
 		throws SystemException {
@@ -2110,20 +2128,6 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		if (Validator.isNull(subject) && Validator.isNull(body)) {
 			throw new MessageSubjectException();
 		}
-	}
-
-	private String _fixEmptyBody(String subject, String body) {
-		if (Validator.isNull(body)) {
-			return subject;
-		}
-		return body;
-	}
-
-	private String _fixEmptySubject(String subject, String body) {
-		if (Validator.isNull(subject)) {
-			return StringUtil.shorten(body);
-		}
-		return subject;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(
