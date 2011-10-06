@@ -32,6 +32,9 @@ public class ConfigurePortletFoldersPerPage5Tests extends BaseTests {
 		testSuite.addTestSuite(AddFolder1Test.class);
 		testSuite.addTestSuite(AddFolder2Test.class);
 		testSuite.addTestSuite(AddFolder3Test.class);
+		testSuite.addTestSuite(AddFolder4Test.class);
+		testSuite.addTestSuite(AddFolder5Test.class);
+		testSuite.addTestSuite(AddFolder6Test.class);
 		testSuite.addTestSuite(ConfigurePortletFoldersPerPage20Test.class);
 		testSuite.addTestSuite(ConfigurePortletFoldersPerPage5Test.class);
 		testSuite.addTestSuite(TearDownDLConfigurationTest.class);

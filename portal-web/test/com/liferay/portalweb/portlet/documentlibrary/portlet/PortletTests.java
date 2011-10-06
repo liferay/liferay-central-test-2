@@ -23,7 +23,6 @@ import com.liferay.portalweb.portlet.documentlibrary.portlet.configureportletfol
 import com.liferay.portalweb.portlet.documentlibrary.portlet.configureportletrootfolderselectfolder.ConfigurePortletRootFolderSelectFolderTests;
 import com.liferay.portalweb.portlet.documentlibrary.portlet.configureportletrootfolderselectsubfolder.ConfigurePortletRootFolderSelectSubfolderTests;
 import com.liferay.portalweb.portlet.documentlibrary.portlet.configureportletshowdocumentcolumns.ConfigurePortletShowDocumentColumnsTests;
-import com.liferay.portalweb.portlet.documentlibrary.portlet.configureportletshowfoldercolumns.ConfigurePortletShowFolderColumnsTests;
 import com.liferay.portalweb.portlet.documentlibrary.portlet.configureportletshowfoldersearch.ConfigurePortletShowFolderSearchTests;
 import com.liferay.portalweb.portlet.documentlibrary.portlet.removeportlet.RemovePortletTests;
 
@@ -47,7 +46,6 @@ public class PortletTests extends BaseTests {
 		testSuite.addTest(
 			ConfigurePortletRootFolderSelectSubfolderTests.suite());
 		testSuite.addTest(ConfigurePortletShowDocumentColumnsTests.suite());
-		testSuite.addTest(ConfigurePortletShowFolderColumnsTests.suite());
 		testSuite.addTest(ConfigurePortletShowFolderSearchTests.suite());
 		testSuite.addTest(RemovePortletTests.suite());
 
