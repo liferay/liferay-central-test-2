@@ -105,10 +105,10 @@ public class ServiceBeanAopProxy implements AopProxy, InvocationHandler {
 		_advisedSupport = advisedSupport;
 		_advisorChainFactory = _advisedSupport.getAdvisorChainFactory();
 
-		Class[] proxyInterfaces = _advisedSupport.getProxiedInterfaces();
+		Class<?>[] proxyInterfaces = _advisedSupport.getProxiedInterfaces();
 
-		_needMergeSpringMethodInterceptors =
-			!ArrayUtil.contains(proxyInterfaces, SpringProxy.class);
+		_mergeSpringMethodInterceptors = !ArrayUtil.contains(
+			proxyInterfaces, SpringProxy.class);
 
 		ArrayList<MethodInterceptor> classLevelMethodInterceptors =
 			new ArrayList<MethodInterceptor>();
@@ -223,35 +223,38 @@ public class ServiceBeanAopProxy implements AopProxy, InvocationHandler {
 		List<MethodInterceptor> methodInterceptors =
 			new ArrayList<MethodInterceptor>(_fullMethodInterceptors);
 
-		if (_needMergeSpringMethodInterceptors) {
-			List<Object> list =
-				_advisorChainFactory.
-					getInterceptorsAndDynamicInterceptionAdvice(
-						_advisedSupport,
-						serviceBeanMethodInvocation.getMethod(),
-						serviceBeanMethodInvocation.getTargetClass());
+		if (!_mergeSpringMethodInterceptors) {
+			return methodInterceptors;
+		}
 
-			Iterator<Object> itr = list.iterator();
+		List<Object> list =
+			_advisorChainFactory.getInterceptorsAndDynamicInterceptionAdvice(
+				_advisedSupport, serviceBeanMethodInvocation.getMethod(),
+				serviceBeanMethodInvocation.getTargetClass());
 
-			while (itr.hasNext()) {
-				Object obj = itr.next();
+		Iterator<Object> itr = list.iterator();
 
-				if (!(obj instanceof MethodInterceptor)) {
-					if (_log.isWarnEnabled()) {
-						_log.warn(
-							"Skipping unsupported interceptor type " +
-								obj.getClass());
-					}
+		while (itr.hasNext()) {
+			Object obj = itr.next();
 
-					itr.remove();
-				}
+			if (obj instanceof MethodInterceptor) {
+				continue;
 			}
 
-			if (!list.isEmpty()) {
-				for (Object object : list) {
-					methodInterceptors.add((MethodInterceptor)object);
-				}
+			if (_log.isWarnEnabled()) {
+				_log.warn(
+					"Skipping unsupported interceptor type " + obj.getClass());
 			}
+
+			itr.remove();
+		}
+
+		if (list.isEmpty()) {
+			return methodInterceptors;
+		}
+
+		for (Object object : list) {
+			methodInterceptors.add((MethodInterceptor)object);
 		}
 
 		return methodInterceptors;
@@ -290,7 +293,7 @@ public class ServiceBeanAopProxy implements AopProxy, InvocationHandler {
 	private AdvisorChainFactory _advisorChainFactory;
 	private final List<MethodInterceptor> _classLevelMethodInterceptors;
 	private final List<MethodInterceptor> _fullMethodInterceptors;
-	private boolean _needMergeSpringMethodInterceptors;
+	private boolean _mergeSpringMethodInterceptors;
 
 	private static class MethodInterceptorsBag {
 
