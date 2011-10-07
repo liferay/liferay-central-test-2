@@ -266,14 +266,16 @@ for (int i = 0; i < results.size(); i++) {
 						}
 
 						if (columnName.equals("name")) {
+							TextSearchEntry folderTitleSearchEntry = new TextSearchEntry();
+
+							folderTitleSearchEntry.setCssClass("document-display-style selectable");
+
 							Map<String,Object> data = new HashMap<String,Object>();
 
 							data.put("file-entry-id", fileEntry.getFileEntryId());
 
-							TextSearchEntry folderTitleSearchEntry = new TextSearchEntry();
-
 							folderTitleSearchEntry.setData(data);
-							folderTitleSearchEntry.setCssClass("document-display-style selectable");
+
 							folderTitleSearchEntry.setHref(rowURL.toString());
 							folderTitleSearchEntry.setName(fileEntryTitle);
 
