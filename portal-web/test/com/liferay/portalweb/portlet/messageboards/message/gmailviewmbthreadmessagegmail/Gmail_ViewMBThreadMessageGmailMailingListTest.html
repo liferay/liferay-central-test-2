@@ -1,12 +1,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>GmailServer_TearDownMailingListMessageTest</title>
+<title>Gmail_ViewMBThreadMessageGmailMailingListTest</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">GmailServer_TearDownMailingListMessageTest</td></tr>
+<tr><td rowspan="1" colspan="3">Gmail_ViewMBThreadMessageGmailMailingListTest</td></tr>
 </thead><tbody>
 <tr>
 	<td>selectWindow</td>
@@ -35,18 +35,18 @@
 </tr>
 <tr>
 	<td>pause</td>
-	<td>10000</td>
+	<td>80000</td>
 	<td></td>
 </tr>
 <tr>
 	<td>store</td>
 	<td>eval(selenium.isElementPresent('link=Sign out'))</td>
-	<td>SignedIn1</td>
+	<td>signedIn1</td>
 </tr>
 <tr>
 	<td>gotoIf</td>
-	<td>!${SignedIn1}</td>
-	<td>SignedOut1</td>
+	<td>!${signedIn1}</td>
+	<td>signedOut1</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -65,7 +65,7 @@
 </tr>
 <tr>
 	<td>label</td>
-	<td>SignedOut1</td>
+	<td>signedOut1</td>
 	<td></td>
 </tr>
 <tr>
@@ -189,14 +189,9 @@
 	<td>liferay-mailinglist</td>
 </tr>
 <tr>
-	<td>storeElementPresent</td>
+	<td>assertElementPresent</td>
 	<td>//span[1]/a</td>
-	<td>MLMessage1Present</td>
-</tr>
-<tr>
-	<td>gotoIf</td>
-	<td>!${MLMessage1Present}</td>
-	<td>MLMessage1NotPresent</td>
+	<td>[MB Category Name] MB Message Subject</td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
@@ -204,168 +199,28 @@
 	<td>[MB Category Name] MB Message Subject</td>
 </tr>
 <tr>
-	<td>clickAtAndWait</td>
-	<td>link=Remove</td>
-	<td>Remove</td>
+	<td>assertPartialText</td>
+	<td>//table[@id='top']/tbody/tr[2]/td[1]/span/span/i</td>
+	<td>liferay.qa.server</td>
 </tr>
 <tr>
-	<td>check</td>
-	<td>//input[@id='really_delete.yes']</td>
-	<td>Yes, remove it now</td>
+	<td>assertText</td>
+	<td>//div[1]/table/tbody/tr/td[2]/div[1]/div[2]/div</td>
+	<td>MB Message Body<br />--<br />Liferay Message Boards<br />http://localhost:8080/web/site-name/message-boards-test-page/-/message_boards/view_message/10508<br /><br />http://localhost</td>
 </tr>
 <tr>
-	<td>clickAtAndWait</td>
-	<td>//input[@name='Action.Confirm']</td>
-	<td>Confirm</td>
+	<td>assertText</td>
+	<td>//div[2]/table/tbody/tr/td[2]/div[1]/div[1]/table/tbody/tr[2]/td[1]/span/span</td>
+	<td>Trunk Liferay QA</td>
 </tr>
 <tr>
-	<td>storeElementPresent</td>
-	<td>//span[1]/a</td>
-	<td>MLMessage2Present</td>
-</tr>
-<tr>
-	<td>gotoIf</td>
-	<td>!${MLMessage2Present}</td>
-	<td>MLMessage2NotPresent</td>
-</tr>
-<tr>
-	<td>clickAtAndWait</td>
-	<td>//span[1]/a</td>
-	<td>[MB Category Name] MB Message Subject</td>
-</tr>
-<tr>
-	<td>clickAtAndWait</td>
-	<td>link=Remove</td>
-	<td>Remove</td>
-</tr>
-<tr>
-	<td>check</td>
-	<td>//input[@id='really_delete.yes']</td>
-	<td>Yes, remove it now</td>
-</tr>
-<tr>
-	<td>clickAtAndWait</td>
-	<td>//input[@name='Action.Confirm']</td>
-	<td>Confirm</td>
-</tr>
-<tr>
-	<td>storeElementPresent</td>
-	<td>//span[1]/a</td>
-	<td>MLMessage3Present</td>
-</tr>
-<tr>
-	<td>gotoIf</td>
-	<td>!${MLMessage3Present}</td>
-	<td>MLMessage3NotPresent</td>
-</tr>
-<tr>
-	<td>clickAtAndWait</td>
-	<td>//span[1]/a</td>
-	<td>[MB Category Name] MB Message Subject</td>
-</tr>
-<tr>
-	<td>clickAtAndWait</td>
-	<td>link=Remove</td>
-	<td>Remove</td>
-</tr>
-<tr>
-	<td>check</td>
-	<td>//input[@id='really_delete.yes']</td>
-	<td>Yes, remove it now</td>
-</tr>
-<tr>
-	<td>clickAtAndWait</td>
-	<td>//input[@name='Action.Confirm']</td>
-	<td>Confirm</td>
-</tr>
-<tr>
-	<td>storeElementPresent</td>
-	<td>//span[1]/a</td>
-	<td>MLMessage4Present</td>
-</tr>
-<tr>
-	<td>gotoIf</td>
-	<td>!${MLMessage4Present}</td>
-	<td>MLMessage4NotPresent</td>
-</tr>
-<tr>
-	<td>clickAtAndWait</td>
-	<td>//span[1]/a</td>
-	<td>[MB Category Name] MB Message Subject</td>
-</tr>
-<tr>
-	<td>clickAtAndWait</td>
-	<td>link=Remove</td>
-	<td>Remove</td>
-</tr>
-<tr>
-	<td>check</td>
-	<td>//input[@id='really_delete.yes']</td>
-	<td>Yes, remove it now</td>
-</tr>
-<tr>
-	<td>clickAtAndWait</td>
-	<td>//input[@name='Action.Confirm']</td>
-	<td>Confirm</td>
-</tr>
-<tr>
-	<td>storeElementPresent</td>
-	<td>//span[1]/a</td>
-	<td>MLMessage5Present</td>
-</tr>
-<tr>
-	<td>gotoIf</td>
-	<td>!${MLMessage5Present}</td>
-	<td>MLMessage5NotPresent</td>
-</tr>
-<tr>
-	<td>clickAtAndWait</td>
-	<td>//span[1]/a</td>
-	<td>[MB Category Name] MB Message Subject</td>
-</tr>
-<tr>
-	<td>clickAtAndWait</td>
-	<td>link=Remove</td>
-	<td>Remove</td>
-</tr>
-<tr>
-	<td>check</td>
-	<td>//input[@id='really_delete.yes']</td>
-	<td>Yes, remove it now</td>
-</tr>
-<tr>
-	<td>clickAtAndWait</td>
-	<td>//input[@name='Action.Confirm']</td>
-	<td>Confirm</td>
-</tr>
-<tr>
-	<td>label</td>
-	<td>MLMessage1NotPresent</td>
-	<td></td>
-</tr>
-<tr>
-	<td>label</td>
-	<td>MLMessage2NotPresent</td>
-	<td></td>
-</tr>
-<tr>
-	<td>label</td>
-	<td>MLMessage3NotPresent</td>
-	<td></td>
-</tr>
-<tr>
-	<td>label</td>
-	<td>MLMessage4NotPresent</td>
-	<td></td>
-</tr>
-<tr>
-	<td>label</td>
-	<td>MLMessage5NotPresent</td>
-	<td></td>
+	<td>assertText</td>
+	<td>//p</td>
+	<td>MB Message Email Reply</td>
 </tr>
 <tr>
 	<td>store</td>
-	<td>eval(selenium.isPartialText('//td/a','Sign out'))</td>
+	<td>eval(selenium.isElementPresent('link=Sign out'))</td>
 	<td>SignedIn2</td>
 </tr>
 <tr>
