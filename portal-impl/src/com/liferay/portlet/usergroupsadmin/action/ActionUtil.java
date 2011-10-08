@@ -52,4 +52,5 @@ public class ActionUtil {
 
 		getUserGroup(request);
 	}
+
 }

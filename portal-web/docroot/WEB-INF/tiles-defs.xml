@@ -1494,10 +1494,6 @@
 		<put name="portlet_content" value="/portlet/users_admin/error.jsp" />
 	</definition>
 
-    <definition name="portlet.user_groups_admin.view" extends="portlet.user_groups_admin">
-		<put name="portlet_content" value="/portlet/user_groups_admin/view.jsp" />
-	</definition>
-
 	<definition name="portlet.user_groups_admin.edit_user_group" extends="portlet.user_groups_admin">
 		<put name="portlet_content" value="/portlet/user_groups_admin/edit_user_group.jsp" />
 	</definition>
@@ -1508,6 +1504,10 @@
 
 	<definition name="portlet.user_groups_admin.select_user_group" extends="portlet.user_groups_admin">
 		<put name="portlet_content" value="/portlet/user_groups_admin/select_user_group.jsp" />
+	</definition>
+
+    <definition name="portlet.user_groups_admin.view" extends="portlet.user_groups_admin">
+		<put name="portlet_content" value="/portlet/user_groups_admin/view.jsp" />
 	</definition>
 
 	<!-- Users Admin -->
