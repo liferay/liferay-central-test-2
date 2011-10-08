@@ -210,7 +210,7 @@
 		.document-thumbnail {
 			img {
 				background: #EAEAEA;
-			    border: 1px solid #CCC;
+				border: 1px solid #CCC;
 				margin: 0;
 				padding: 5px;
 			}
