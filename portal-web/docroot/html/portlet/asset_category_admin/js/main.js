@@ -2287,6 +2287,17 @@ AUI().add(
 						);
 					},
 
+					_onDropHit: function(event) {
+						var instance = this;
+
+						if (instance._findCategoryByName(event)) {
+							event.halt();
+						}
+						else {
+							CategoriesTree.superclass._onDropHit.apply(instance, arguments);
+						}
+					},
+
 					_updateNodeState: function(event) {
 						var instance = this;
 
@@ -2302,17 +2313,6 @@ AUI().add(
 							else {
 								CategoriesTree.superclass._updateNodeState.apply(instance, arguments);
 							}
-						}
-					},
-
-					_onDropHit: function(event) {
-						var instance = this;
-
-						if (instance._findCategoryByName(event)) {
-							event.halt();
-						}
-						else {
-							CategoriesTree.superclass._onDropHit.apply(instance, arguments);
 						}
 					}
 				}
