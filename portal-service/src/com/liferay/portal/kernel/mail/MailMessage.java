@@ -14,6 +14,8 @@
 
 package com.liferay.portal.kernel.mail;
 
+import com.liferay.mail.model.Attachment;
+
 import java.io.File;
 import java.io.Serializable;
 
@@ -21,8 +23,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.mail.internet.InternetAddress;
-
-import com.liferay.mail.model.LiferayAttachment;
 
 /**
  * @author Brian Wing Shun Chan
@@ -60,17 +60,19 @@ public class MailMessage implements Serializable {
 		_htmlFormat = htmlFormat;
 	}
 
-	public void addAttachment(File attachment) {
-		addAttachment(attachment, null);
+	public void addAttachment(File file) {
+		addAttachment(file, null);
 	}
 
-	public void addAttachment(File attachment, String attachmentFileName) {
-		if (attachment != null) {
-			_attachments.add(new LiferayAttachment(attachment, attachmentFileName));
+	public void addAttachment(File file, String fileName) {
+		if (file != null) {
+			Attachment attachment = new Attachment(file, fileName);
+
+			_attachments.add(attachment);
 		}
 	}
 
-	public List<LiferayAttachment> getAttachments() {
+	public List<Attachment> getAttachments() {
 		return _attachments;
 	}
 
@@ -197,7 +199,7 @@ public class MailMessage implements Serializable {
 	private InternetAddress[] _replyTo;
 	private String _messageId;
 	private String _inReplyTo;
-	private List<LiferayAttachment> _attachments = new ArrayList<LiferayAttachment>();
+	private List<Attachment> _attachments = new ArrayList<Attachment>();
 	private SMTPAccount _smtpAccount;
 
 }

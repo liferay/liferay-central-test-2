@@ -14,7 +14,7 @@
 
 package com.liferay.portal.util;
 
-import com.liferay.mail.model.LiferayAttachment;
+import com.liferay.mail.model.Attachment;
 import com.liferay.mail.service.MailServiceUtil;
 import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -61,20 +61,22 @@ import javax.mail.internet.InternetAddress;
  */
 public class SubscriptionSender implements Serializable {
 
-	public void addAttachment(File attachment) {
-		addAttachment(attachment, null);
+	public void addAttachment(File file) {
+		addAttachment(file, null);
 	}
 
-	public void addAttachment(File attachment, String attachmentFileName) {
-		if (attachment == null) {
+	public void addAttachment(File file, String fileName) {
+		if (file == null) {
 			return;
 		}
 
 		if (attachments == null) {
-			attachments = new ArrayList<LiferayAttachment>();
+			attachments = new ArrayList<Attachment>();
 		}
 
-		attachments.add(new LiferayAttachment(attachment, attachmentFileName));
+		Attachment attachment = new Attachment(file, fileName);
+
+		attachments.add(attachment);
 	}
 
 	public void addPersistedSubscribers(String className, long classPK) {
@@ -564,9 +566,9 @@ public class SubscriptionSender implements Serializable {
 			from, to, processedSubject, processedBody, htmlFormat);
 
 		if (attachments != null) {
-			for (LiferayAttachment liferayAttachment : attachments) {
+			for (Attachment attachment : attachments) {
 				mailMessage.addAttachment(
-						liferayAttachment.getAttachment(), liferayAttachment.getAttachmentFileName());
+					attachment.getFile(), attachment.getFileName());
 			}
 		}
 
@@ -601,7 +603,7 @@ public class SubscriptionSender implements Serializable {
 		MailServiceUtil.sendEmail(mailMessage);
 	}
 
-	protected List<LiferayAttachment> attachments = new ArrayList<LiferayAttachment>();
+	protected List<Attachment> attachments = new ArrayList<Attachment>();
 	protected String body;
 	protected boolean bulk;
 	protected long companyId;
