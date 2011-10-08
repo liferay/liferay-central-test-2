@@ -258,8 +258,7 @@ public class DBStore extends BaseStore {
 
 	@Override
 	public boolean hasDirectory(
-			long companyId, long repositoryId, String dirName)
-		throws PortalException, SystemException {
+		long companyId, long repositoryId, String dirName) {
 
 		return true;
 	}
