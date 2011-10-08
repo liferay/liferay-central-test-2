@@ -25,6 +25,8 @@ long repositoryId = GetterUtil.getLong((String)request.getAttribute("view.jsp-re
 
 long fileEntryTypeId = ParamUtil.getLong(request, "fileEntryTypeId");
 
+String dlFileEntryTypeName = null;
+
 int status = WorkflowConstants.STATUS_APPROVED;
 
 if (permissionChecker.isCompanyAdmin() || permissionChecker.isGroupAdmin(scopeGroupId)) {
@@ -104,7 +106,6 @@ int entryEnd = ParamUtil.getInteger(request, "entryEnd", searchContainer.getEnd(
 int folderStart = ParamUtil.getInteger(request, "folderStart");
 int folderEnd = ParamUtil.getInteger(request, "folderEnd", SearchContainer.DEFAULT_DELTA);
 
-String dlFileEntryTypeName = null;
 List results = null;
 int total = 0;
 
