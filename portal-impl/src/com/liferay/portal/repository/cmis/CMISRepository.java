@@ -1528,14 +1528,14 @@ public class CMISRepository extends BaseCmisRepository {
 			start = 0;
 		}
 
+		int total = 0;
+
 		List<com.liferay.portal.kernel.search.Document> documents =
 			new ArrayList<com.liferay.portal.kernel.search.Document>();
 		List<String> snippets = new ArrayList<String>();
 		List<Float> scores = new ArrayList<Float>();
-	
-		QueryConfig queryConfig = query.getQueryConfig();
 
-		int total = 0;
+		QueryConfig queryConfig = query.getQueryConfig();
 
 		Iterator<QueryResult> itr = queryResults.iterator();
 
@@ -1544,7 +1544,7 @@ public class CMISRepository extends BaseCmisRepository {
 
 			total++;
 
-			if (total > end && end != QueryUtil.ALL_POS) {
+			if ((total > end) && (end != QueryUtil.ALL_POS)) {
 				continue;
 			}
 
@@ -1592,7 +1592,7 @@ public class CMISRepository extends BaseCmisRepository {
 		hits.setDocs(
 			documents.toArray(
 				new com.liferay.portal.kernel.search.Document[0]));
-		hits.setLength((int)total);
+		hits.setLength(total);
 		hits.setQuery(query);
 		hits.setQueryTerms(new String[0]);
 		hits.setScores(scores.toArray(new Float[0]));
