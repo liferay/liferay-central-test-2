@@ -25,8 +25,6 @@ long repositoryId = GetterUtil.getLong((String)request.getAttribute("view.jsp-re
 
 String orderByCol = ParamUtil.getString(request, "orderByCol");
 String orderByType = ParamUtil.getString(request, "orderByType");
-
-Group scopeGroup = themeDisplay.getScopeGroup();
 %>
 
 <aui:input cssClass="select-documents aui-state-default" inline="<%= true %>" label="" name='<%= RowChecker.ALL_ROW_IDS %>' type="checkbox" />
@@ -34,13 +32,13 @@ Group scopeGroup = themeDisplay.getScopeGroup();
 <liferay-ui:icon-menu align="left" cssClass="actions-button" direction="down" disabled="<%= true %>" icon="" id="actionsButtonContainer" message="actions" showExpanded="<%= false %>" showWhenSingleIcon="<%= actionsAlowed ? false : true %>">
 
 	<%
-	String taglibUrl = null;
+	Group scopeGroup = themeDisplay.getScopeGroup();
 	%>
 
 	<c:if test="<%= scopeGroup.isStaged() && (scopeGroup.isStagingGroup() || !scopeGroup.isStagedPortlet(PortletKeys.DOCUMENT_LIBRARY)) %>">
 
 		<%
-		taglibUrl = "javascript:" + renderResponse.getNamespace() + "editFileEntry('" + Constants.CANCEL_CHECKOUT + "')";
+		String taglibUrl = "javascript:" + renderResponse.getNamespace() + "editFileEntry('" + Constants.CANCEL_CHECKOUT + "')";
 		%>
 
 		<liferay-ui:icon
@@ -81,7 +79,7 @@ Group scopeGroup = themeDisplay.getScopeGroup();
 	</c:if>
 
 	<%
-	taglibUrl = "javascript:" + renderResponse.getNamespace() + "editFileEntry('" + Constants.DELETE + "')";
+	String taglibUrl = "javascript:" + renderResponse.getNamespace() + "editFileEntry('" + Constants.DELETE + "')";
 	%>
 
 	<liferay-ui:icon-delete
