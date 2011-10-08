@@ -68,7 +68,6 @@
 	<taskdef classpathref="lib.classpath" resource="axis-tasks.properties" />
 	<taskdef classpathref="lib.classpath" resource="ise/antelope/tasks/antlib.xml" uri="antlib:ise.antelope.tasks" />
 	<taskdef classpathref="lib.classpath" resource="com/orangevolt/tools/ant/taskdefs.properties" />
-	<!--cobertura ant tasks-->
 	<taskdef classpathref="lib.classpath" resource="tasks.properties" />
 
 	<property name="doc.dir" value="${project.dir}/api" />
@@ -330,6 +329,9 @@ Please set the environment variable ANT_OPTS to the recommended value of
 			<equals arg1="${junit.code.coverage}" arg2="true" />
 			<then>
 				<cobertura-instrument datafile="test-coverage/cobertura.ser" todir="test-coverage">
+					<fileset dir="${project.dir}/portal-impl/classes">
+						<include name="**/*.class" />
+					</fileset>
 					<fileset dir="${project.dir}/portal-service/classes">
 						<include name="**/*.class" />
 					</fileset>
@@ -337,9 +339,6 @@ Please set the environment variable ANT_OPTS to the recommended value of
 						<include name="**/*.class" />
 					</fileset>
 					<fileset dir="${project.dir}/util-taglib/classes">
-						<include name="**/*.class" />
-					</fileset>
-					<fileset dir="${project.dir}/portal-impl/classes">
 						<include name="**/*.class" />
 					</fileset>
 				</cobertura-instrument>
@@ -419,6 +418,9 @@ Please set the environment variable ANT_OPTS to the recommended value of
 			<equals arg1="${junit.code.coverage}" arg2="true" />
 			<then>
 				<cobertura-report format="html" datafile="test-coverage/cobertura.ser" destdir="test-coverage" >
+					<fileset dir="${project.dir}/portal-impl/src">
+						<include name="**/*.java" />
+					</fileset>
 					<fileset dir="${project.dir}/portal-service/src">
 						<include name="**/*.java" />
 					</fileset>
@@ -426,9 +428,6 @@ Please set the environment variable ANT_OPTS to the recommended value of
 						<include name="**/*.java" />
 					</fileset>
 					<fileset dir="${project.dir}/util-taglib/src">
-						<include name="**/*.java" />
-					</fileset>
-					<fileset dir="${project.dir}/portal-impl/src">
 						<include name="**/*.java" />
 					</fileset>
 				</cobertura-report>
@@ -457,6 +456,9 @@ Please set the environment variable ANT_OPTS to the recommended value of
 			<equals arg1="${junit.code.coverage}" arg2="true" />
 			<then>
 				<cobertura-report format="html" datafile="test-coverage/cobertura.ser" destdir="test-coverage" >
+					<fileset dir="${project.dir}/portal-impl/src">
+						<include name="**/*.java" />
+					</fileset>
 					<fileset dir="${project.dir}/portal-service/src">
 						<include name="**/*.java" />
 					</fileset>
@@ -464,9 +466,6 @@ Please set the environment variable ANT_OPTS to the recommended value of
 						<include name="**/*.java" />
 					</fileset>
 					<fileset dir="${project.dir}/util-taglib/src">
-						<include name="**/*.java" />
-					</fileset>
-					<fileset dir="${project.dir}/portal-impl/src">
 						<include name="**/*.java" />
 					</fileset>
 				</cobertura-report>

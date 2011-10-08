@@ -101,9 +101,6 @@
 			<license>
 				<license-name>Apache License 1.1</license-name>
 			</license>
-			<license>
-				<license-name>GPL 2.0</license-name>
-			</license>
 		</licenses>
 	</library>
 	<library>
