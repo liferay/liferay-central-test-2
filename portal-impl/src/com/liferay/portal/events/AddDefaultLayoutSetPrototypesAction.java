@@ -223,10 +223,10 @@ public class AddDefaultLayoutSetPrototypesAction extends SimpleAction {
 
 		preferences = new HashMap<String, String>();
 
+		preferences.put("expandedEntriesPerFeed", "3");
 		preferences.put(
 			"portletSetupTitle_" + LocaleUtil.getDefault(), "Technology news");
 		preferences.put("portletSetupUseCustomTitle", Boolean.TRUE.toString());
-		preferences.put("expandedEntriesPerFeed", "3");
 		preferences.put(
 			"urls", "http://partners.userland.com/nytRss/technology.xml");
 
@@ -236,10 +236,10 @@ public class AddDefaultLayoutSetPrototypesAction extends SimpleAction {
 
 		preferences = new HashMap<String, String>();
 
+		preferences.put("expandedEntriesPerFeed", "0");
 		preferences.put(
 			"portletSetupTitle_" + LocaleUtil.getDefault(), "Liferay news");
 		preferences.put("portletSetupUseCustomTitle", Boolean.TRUE.toString());
-		preferences.put("expandedEntriesPerFeed", "0");
 		preferences.put(
 			"urls", "http://www.liferay.com/en/about-us/news/-/blogs/rss");
 		preferences.put("titles", "Liferay Press Releases");
@@ -254,8 +254,7 @@ public class AddDefaultLayoutSetPrototypesAction extends SimpleAction {
 
 		LayoutSet layoutSet = addLayoutSetPrototype(
 			companyId, defaultUserId, "Community Site",
-			"Site with Forums, Calendar and Wiki",
-			layoutSetPrototypes);
+			"Site with Forums, Calendar and Wiki", layoutSetPrototypes);
 
 		if (layoutSet == null) {
 			return;
@@ -263,8 +262,7 @@ public class AddDefaultLayoutSetPrototypesAction extends SimpleAction {
 
 		// Home layout
 
-		Layout layout = addLayout(
-			layoutSet, "Home", "/home", "2_columns_iii");
+		Layout layout = addLayout(layoutSet, "Home", "/home", "2_columns_iii");
 
 		addPortletId(layout, PortletKeys.MESSAGE_BOARDS, "column-1");
 
@@ -275,7 +273,6 @@ public class AddDefaultLayoutSetPrototypesAction extends SimpleAction {
 		preferences.put("portletSetupShowBorders", Boolean.FALSE.toString());
 
 		updatePortletSetup(layout, portletId, preferences);
-
 
 		addPortletId(layout, PortletKeys.POLLS_DISPLAY, "column-2");
 		addPortletId(layout, PortletKeys.TOP_USERS, "column-2");
