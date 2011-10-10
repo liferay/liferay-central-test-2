@@ -331,15 +331,16 @@ for (int i = 0; i < results.size(); i++) {
 			int foldersCount = DLAppServiceUtil.getFoldersCount(curFolder.getRepositoryId(), curFolder.getFolderId());
 			int fileEntriesCount = DLAppServiceUtil.getFileEntriesAndFileShortcutsCount(curFolder.getRepositoryId(), curFolder.getFolderId(), status);
 
-			String imageFolderSrc = "folder_empty";
+			String folderImage = "folder_empty";
 
 			if ((foldersCount + fileEntriesCount) > 0) {
-				imageFolderSrc = "folder_full_document";
+				folderImage = "folder_full_document";
 			}
 			%>
 
 			<c:choose>
 				<c:when test='<%= !displayStyle.equals("list") %>'>
+
 					<%
 					PortletURL tempRowURL = liferayPortletResponse.createRenderURL();
 
@@ -351,10 +352,10 @@ for (int i = 0; i < results.size(); i++) {
 					request.setAttribute("view_entries.jsp-folderId", String.valueOf(curFolder.getFolderId()));
 					request.setAttribute("view_entries.jsp-repositoryId", String.valueOf(curFolder.getRepositoryId()));
 
+					request.setAttribute("view_entries.jsp-folderImage", folderImage);
+
 					request.setAttribute("view_entries.jsp-tempRowURL", tempRowURL);
 					request.setAttribute("view_entries.jsp-viewEntriesURL", viewEntriesURL);
-
-					request.setAttribute("view_entries.jsp-imageFolderSrc", imageFolderSrc);
 					%>
 
 					<c:choose>
@@ -370,7 +371,7 @@ for (int i = 0; i < results.size(); i++) {
 				<c:otherwise>
 					<liferay-util:buffer var="folderTitle">
 						<liferay-ui:icon
-							image="<%= imageFolderSrc %>"
+							image="<%= folderImage %>"
 							label="<%= true %>"
 							message="<%= curFolder.getName() %>"
 						/>
