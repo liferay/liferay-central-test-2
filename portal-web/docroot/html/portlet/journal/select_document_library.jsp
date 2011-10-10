@@ -143,6 +143,8 @@ if (folder != null) {
 
 	for (int i = 0; i < results.size(); i++) {
 		FileEntry fileEntry = (FileEntry)results.get(i);
+
+		DLFileShortcut fileShortcut = null;
 	%>
 
 		<%@ include file="/html/portlet/document_library/document_thumbnail.jspf" %>
