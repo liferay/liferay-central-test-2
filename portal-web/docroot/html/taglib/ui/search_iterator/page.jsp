@@ -62,14 +62,6 @@ if (iteratorURL != null) {
 List<String> primaryKeys = new ArrayList<String>();
 
 int sortColumnIndex = -1;
-
-String classNameHover = "hover";
-
-String rowClassNameAlternate = "portlet-section-alternate";
-String rowClassNameAlternateHover = "portlet-section-alternate-hover";
-
-String rowClassNameBody = "portlet-section-body";
-String rowClassNameBodyHover = "portlet-section-body-hover";
 %>
 
 <c:if test="<%= resultRows.isEmpty() && (emptyResultsMessage != null) %>">
@@ -211,14 +203,14 @@ String rowClassNameBodyHover = "portlet-section-body-hover";
 		for (int i = 0; i < resultRows.size(); i++) {
 			ResultRow row = (ResultRow)resultRows.get(i);
 
-			String rowClassName = rowClassNameAlternate + " results-row alt";
-			String rowClassHoverName = rowClassNameAlternateHover + " results-row alt " + classNameHover;
+			String rowClassName = _ROW_CLASS_NAME_ALTERNATE + " results-row alt";
+			String rowClassHoverName = _ROW_CLASS_NAME_ALTERNATE_HOVER + " results-row alt " + _CLASS_NAME_HOVER;
 
 			primaryKeys.add(row.getPrimaryKey());
 
 			if (MathUtil.isEven(i)) {
-				rowClassName = rowClassNameBody + " results-row";
-				rowClassHoverName = rowClassNameBodyHover + " results-row " + classNameHover;
+				rowClassName = _ROW_CLASS_NAME_BODY + " results-row";
+				rowClassHoverName = _ROW_CLASS_NAME_BODY_HOVER + " results-row " + _CLASS_NAME_HOVER;
 			}
 
 			if (Validator.isNotNull(row.getClassName())) {
@@ -336,14 +328,26 @@ String rowClassNameBodyHover = "portlet-section-body-hover";
 	<aui:script use="liferay-search-container">
 		new Liferay.SearchContainer(
 			{
-				classNameHover: '<%= classNameHover %>',
+				classNameHover: '<%= _CLASS_NAME_HOVER %>',
 				hover: <%= searchContainer.isHover() %>,
 				id: '<%= id %>',
-				rowClassNameAlternate: '<%= rowClassNameAlternate %>',
-				rowClassNameAlternateHover: '<%= rowClassNameAlternateHover %>',
-				rowClassNameBody: '<%= rowClassNameBody %>',
-				rowClassNameBodyHover: '<%= rowClassNameBody %>'
+				rowClassNameAlternate: '<%= _ROW_CLASS_NAME_ALTERNATE %>',
+				rowClassNameAlternateHover: '<%= _ROW_CLASS_NAME_ALTERNATE_HOVER %>',
+				rowClassNameBody: '<%= _ROW_CLASS_NAME_BODY %>',
+				rowClassNameBodyHover: '<%= _ROW_CLASS_NAME_BODY %>'
 			}
 		).render();
 	</aui:script>
 </c:if>
+
+<%!
+private static final String _CLASS_NAME_HOVER = "hover";
+
+private static final String _ROW_CLASS_NAME_ALTERNATE = "portlet-section-alternate";
+
+private static final String _ROW_CLASS_NAME_ALTERNATE_HOVER = "portlet-section-alternate-hover";
+
+private static final String _ROW_CLASS_NAME_BODY = "portlet-section-body";
+
+private static final String _ROW_CLASS_NAME_BODY_HOVER = "portlet-section-body-hover";
+%>
