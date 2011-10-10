@@ -65,6 +65,7 @@ public class JSONWebServiceActionParameters {
 		if (_innerParameters == null) {
 			return null;
 		}
+
 		return _innerParameters.get(baseName);
 	}
 
@@ -94,6 +95,7 @@ public class JSONWebServiceActionParameters {
 		if (_parameterTypes == null) {
 			return null;
 		}
+
 		return _parameterTypes.get(name);
 	}
 
@@ -156,7 +158,8 @@ public class JSONWebServiceActionParameters {
 
 			if (name.startsWith(StringPool.DASH)) {
 				name = name.substring(1);
-			} else if (!name.startsWith(StringPool.PLUS)) {
+			}
+			else if (!name.startsWith(StringPool.PLUS)) {
 				i++;
 
 				value = pathParametersParts[i];
@@ -344,15 +347,16 @@ public class JSONWebServiceActionParameters {
 				key = key.substring(1);
 
 				value = null;
-			} else  if (key.startsWith(StringPool.PLUS)) {
+			}
+			else  if (key.startsWith(StringPool.PLUS)) {
 				key = key.substring(1);
 
-				int colonIndex = key.indexOf(CharPool.COLON);
+				int pos = key.indexOf(CharPool.COLON);
 
-				if (colonIndex != -1) {
-					value = key.substring(colonIndex + 1);
+				if (pos != -1) {
+					value = key.substring(pos + 1);
 
-					key = key.substring(0, colonIndex);
+					key = key.substring(0, pos);
 				}
 
 				if (Validator.isNotNull(value)) {

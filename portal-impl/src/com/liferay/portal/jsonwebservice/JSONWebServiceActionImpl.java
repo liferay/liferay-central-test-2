@@ -59,6 +59,7 @@ public class JSONWebServiceActionImpl implements JSONWebServiceAction {
 		}
 		catch (Exception e) {
 			exception = e;
+
 			_log.error(e, e);
 		}
 
@@ -66,7 +67,7 @@ public class JSONWebServiceActionImpl implements JSONWebServiceAction {
 	}
 
 	private Object _createDefaultParameterValue(
-		String parameterName, Class<?> parameterType)
+			String parameterName, Class<?> parameterType)
 		throws Exception {
 
 		if (parameterName.equals("serviceContext") &&
@@ -116,8 +117,8 @@ public class JSONWebServiceActionImpl implements JSONWebServiceAction {
 					if (parameterTypeName != null) {
 						ClassLoader classLoader = actionClass.getClassLoader();
 
-						parameterType =
-							classLoader.loadClass(parameterTypeName);
+						parameterType = classLoader.loadClass(
+							parameterTypeName);
 					}
 
 					parameterValue = _createDefaultParameterValue(

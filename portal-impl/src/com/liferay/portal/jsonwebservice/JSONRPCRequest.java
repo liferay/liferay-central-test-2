@@ -72,9 +72,9 @@ public class JSONRPCRequest {
 		}
 		catch (Exception e) {
 			if (_log.isDebugEnabled()) {
-				_log.debug(
-					"JSON RPC not recognized because of parsing exception.", e);
+				_log.debug("Unable to parse JSON RPC request", e);
 			}
+
 			return null;
 		}
 	}
