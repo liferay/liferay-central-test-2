@@ -84,7 +84,7 @@ String toolbarItem = ParamUtil.getString(request, "toolbarItem", "view-all");
 							image="configuration"
 							message="manage-site-template"
 							method="get"
-							url='<%= manageSiteTemplateURL.toString() %>'
+							url="<%= manageSiteTemplateURL.toString() %>"
 						/>
 					</c:if>
 				</liferay-ui:icon-menu>
