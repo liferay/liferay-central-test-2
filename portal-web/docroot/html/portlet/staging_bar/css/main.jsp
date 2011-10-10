@@ -266,7 +266,7 @@
 				}
 			}
 
-    		.last-publication-user {
+			.last-publication-user {
 				background: url(<%= themeImagesPath %>/common/time.png) no-repeat 0 50%;
 				padding-left: 20px;
 			}
