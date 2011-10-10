@@ -77,7 +77,7 @@ public class DoubleClickFilter extends BasePortalFilter {
 				ok = true;
 			}
 			finally {
-				if (_log.isDebugEnabled()) {
+				if (stopWatch != null) {
 					String completeURL = HttpUtil.getCompleteURL(request);
 
 					if (ok) {
