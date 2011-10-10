@@ -82,7 +82,7 @@ public class DoubleClickFilter extends BasePortalFilter {
 
 					if (ok) {
 						_log.debug(
-							"Double click prevention succeded in " +
+							"Double click prevention succeeded in " +
 								stopWatch.getTime() + " ms for " + completeURL);
 					}
 					else {
