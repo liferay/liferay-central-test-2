@@ -151,7 +151,7 @@ public class PermissionServiceImpl extends PermissionServiceBaseImpl {
 		return permissionLocalService.hasGroupPermission(
 			groupId, actionId, resourceId);
 	}
-	
+
 	/**
 	 * Returns <code>true</code> if the user has permission to perform the
 	 * action on the resource.
