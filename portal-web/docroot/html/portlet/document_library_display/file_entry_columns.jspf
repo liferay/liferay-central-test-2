@@ -68,7 +68,7 @@ for (int j = 0; j < fileEntryColumns.length; j++) {
 				<%
 				String thumbnailSrc = themeDisplay.getPathThemeImages() + "/file_system/large/" + DLUtil.getGenericName(fileEntry.getExtension()) + ".png";
 
-				if (fileShortcut == null) {					
+				if (fileShortcut == null) {
 					if (ImageProcessor.hasLargeImage(fileEntry.getFileVersion())) {
 						thumbnailSrc = themeDisplay.getPathImage() + "/image_gallery?img_id=" + fileEntry.getLargeImageId() +"&fileEntryId=" + fileEntry.getFileEntryId() + "&t=" + WebServerServletTokenUtil.getToken(fileEntry.getLargeImageId());
 					}
