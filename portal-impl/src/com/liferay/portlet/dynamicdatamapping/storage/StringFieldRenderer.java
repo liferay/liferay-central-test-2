@@ -23,6 +23,7 @@ import java.io.Serializable;
  */
 public class StringFieldRenderer extends BaseFieldRenderer {
 
+	@Override
 	protected String doRender(
 		ThemeDisplay themeDisplay, Serializable fieldValue) {
 

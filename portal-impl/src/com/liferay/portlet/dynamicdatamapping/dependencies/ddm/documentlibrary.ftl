@@ -1,9 +1,11 @@
 <#include "../init.ftl">
 
 <#assign groupLocalService = serviceLocator.findService("com.liferay.portal.service.GroupLocalService")>
-<#assign layoutLocalService = serviceLocator.findService("com.liferay.portal.service.LayoutLocalService")>
 
 <#assign controlPanelGroup = groupLocalService.getGroup(themeDisplay.getCompanyId(), "Control Panel")>
+
+<#assign layoutLocalService = serviceLocator.findService("com.liferay.portal.service.LayoutLocalService")>
+
 <#assign controlPanelPlid = layoutLocalService.getDefaultPlid(controlPanelGroup.getGroupId(), true)>
 
 <@aui["field-wrapper"] label=label>
@@ -19,7 +21,9 @@
 
 		<#if (fields??) && (fieldValue != "")>
 			<#assign fileJSONObject = getFileJSONObject(fieldRawValue)>
+
 			<#assign fileEntry = getFileEntry(fileJSONObject)>
+
 			<#assign fileEntryTitle = fileEntry.getTitle()>
 			<#assign fileEntryURL = getFileEntryURL(fileEntry)>
 		</#if>
@@ -31,60 +35,60 @@
 </@>
 
 <@aui.script>
-Liferay.provide(
-	window,
-	'${portalUtil.getPortletNamespace("15")}selectDocumentLibrary',
-	function(url, uuid, version, title) {
-		var A = AUI();
+	Liferay.provide(
+		window,
+		'${portalUtil.getPortletNamespace("15")}selectDocumentLibrary',
+		function(url, uuid, title, version) {
+			var A = AUI();
 
-		var inputNode = A.one('#${portletNamespace}${namespacedFieldName}');
+			var inputNode = A.one('#${portletNamespace}${namespacedFieldName}');
 
-		if (inputNode) {
-			inputNode.val(
-				A.JSON.stringify(
-					{
-						groupId: ${scopeGroupId?c},
-						uuid: uuid,
-						version: version
-					}
-				)
-			);
-		}
+			if (inputNode) {
+				inputNode.val(
+					A.JSON.stringify(
+						{
+							groupId: ${scopeGroupId?c},
+							uuid: uuid,
+							version: version
+						}
+					)
+				);
+			}
 
-		var labelNode = A.one('#${namespacedFieldName}Label');
+			var labelNode = A.one('#${namespacedFieldName}Label');
 
-		if (labelNode) {
-			labelNode.setContent('<a href="' + url + '">' + title + '</a>');
-		}
-	},
-	['json']
-);
+			if (labelNode) {
+				labelNode.setContent('<a href="' + url + '">' + title + '</a>');
+			}
+		},
+		['json']
+	);
 </@>
 
 <@aui.script use="liferay-portlet-url">
-var namespacedField = A.one('#${namespacedFieldName}');
+	var namespacedField = A.one('#${namespacedFieldName}');
 
-if (namespacedField) {
-	namespacedField.on(
-		'click',
-		function(event) {
-			var portletURL = Liferay.PortletURL.createRenderURL();
+	if (namespacedField) {
+		namespacedField.on(
+			'click',
+			function(event) {
+				var portletURL = Liferay.PortletURL.createRenderURL();
 
-			portletURL.setParameter('groupId', ${scopeGroupId?c});
-			portletURL.setParameter('struts_action', '/journal/select_document_library');
+				portletURL.setParameter('groupId', ${scopeGroupId?c});
+				portletURL.setParameter('struts_action', '/journal/select_document_library');
 
-			portletURL.setPlid(${controlPanelPlid?c});
+				portletURL.setPlid(${controlPanelPlid?c});
 
-			portletURL.setPortletId('15');
+				portletURL.setPortletId('15');
 
-			portletURL.setWindowState('pop_up');
+				portletURL.setWindowState('pop_up');
 
-			Liferay.Util.openWindow(
-				{
-					uri: portletURL.toString()
-				}
-			);
-		}
-	);
-}
+				Liferay.Util.openWindow(
+					{
+						uri: portletURL.toString()
+					}
+				);
+			}
+		);
+	}
 </@>

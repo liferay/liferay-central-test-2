@@ -15,7 +15,6 @@
 package com.liferay.portlet.dynamicdatamapping.storage;
 
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.language.LanguageUtil;
@@ -35,42 +34,42 @@ import java.io.Serializable;
  */
 public class DocumentLibraryFieldRenderer extends BaseFieldRenderer {
 
+	@Override
 	protected String doRender(
 			ThemeDisplay themeDisplay, Serializable fieldValue)
-		throws PortalException, SystemException {
+		throws PortalException {
 
-		String output = StringPool.BLANK;
+		if (Validator.isNull(fieldValue) ||
+			fieldValue.equals(JSONFactoryUtil.getNullJSON())) {
 
-		if (Validator.isNotNull(fieldValue) &&
-			!fieldValue.equals(JSONFactoryUtil.getNullJSON())) {
+			return StringPool.BLANK;
+		}
 
-			String fieldValueJSON = GetterUtil.getString(fieldValue);
+		String fieldValueJSON = GetterUtil.getString(fieldValue);
 
-			JSONObject fieldValueJSONObject = JSONFactoryUtil.createJSONObject(
-				fieldValueJSON);
+		JSONObject fieldValueJSONObject = JSONFactoryUtil.createJSONObject(
+			fieldValueJSON);
 
-			long fileEntryGroupId = fieldValueJSONObject.getLong("groupId");
-			String fileEntryUUID = fieldValueJSONObject.getString("uuid");
+		long fileEntryGroupId = fieldValueJSONObject.getLong("groupId");
+		String fileEntryUUID = fieldValueJSONObject.getString("uuid");
 
-			try {
-				FileEntry fileEntry =
-					DLAppServiceUtil.getFileEntryByUuidAndGroupId(
-						fileEntryUUID, fileEntryGroupId);
+		try {
+			FileEntry fileEntry = DLAppServiceUtil.getFileEntryByUuidAndGroupId(
+				fileEntryUUID, fileEntryGroupId);
 
-				output = fileEntry.getTitle();
-			}
-			catch (Exception e) {
-				if (e instanceof NoSuchFileEntryException ||
-					e instanceof PrincipalException) {
+			return fileEntry.getTitle();
+		}
+		catch (Exception e) {
+			if (e instanceof NoSuchFileEntryException ||
+				e instanceof PrincipalException) {
 
-					output = LanguageUtil.format(
-						themeDisplay.getLocale(),
-						"is-temporarily-unavailable", "content");
-				}
+				return LanguageUtil.format(
+					themeDisplay.getLocale(), "is-temporarily-unavailable",
+					"content");
 			}
 		}
 
-		return output;
+		return StringPool.BLANK;
 	}
 
 }

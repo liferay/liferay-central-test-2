@@ -26,13 +26,14 @@ import java.text.Format;
  */
 public class DateFieldRenderer extends BaseFieldRenderer {
 
+	@Override
 	protected String doRender(
 		ThemeDisplay themeDisplay, Serializable fieldValue) {
 
-		Format dateFormat = FastDateFormatFactoryUtil.getDate(
+		Format format = FastDateFormatFactoryUtil.getDate(
 			themeDisplay.getLocale());
 
-		return dateFormat.format(fieldValue);
+		return format.format(fieldValue);
 	}
 
 }

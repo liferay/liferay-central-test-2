@@ -85,15 +85,15 @@ public class DDLUtil {
 	}
 
 	public static JSONObject getRecordFileJSONObject(FileEntry fileEntry) {
-		JSONObject fileJSONObject = JSONFactoryUtil.createJSONObject();
+		JSONObject recordFileJSONObject = JSONFactoryUtil.createJSONObject();
 
 		if (fileEntry != null) {
-			fileJSONObject.put("groupId", fileEntry.getGroupId());
-			fileJSONObject.put("uuid", fileEntry.getUuid());
-			fileJSONObject.put("version", fileEntry.getVersion());
+			recordFileJSONObject.put("groupId", fileEntry.getGroupId());
+			recordFileJSONObject.put("uuid", fileEntry.getUuid());
+			recordFileJSONObject.put("version", fileEntry.getVersion());
 		}
 
-		return fileJSONObject;
+		return recordFileJSONObject;
 	}
 
 	public static JSONObject getRecordJSONObject(DDLRecord record)

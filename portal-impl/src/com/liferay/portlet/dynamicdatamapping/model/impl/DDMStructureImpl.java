@@ -75,9 +75,9 @@ public class DDMStructureImpl extends DDMStructureBaseImpl {
 		return getFieldLabel(fieldName, locale.getLanguage());
 	}
 
-	public String getFieldLabel(String fieldName, String localeLanguageId) {
+	public String getFieldLabel(String fieldName, String locale) {
 		return GetterUtil.getString(
-			getFieldProperty(fieldName, "label", localeLanguageId), fieldName);
+			getFieldProperty(fieldName, "label", locale), fieldName);
 	}
 
 	public Set<String> getFieldNames() {

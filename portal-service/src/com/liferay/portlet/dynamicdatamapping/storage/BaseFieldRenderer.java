@@ -26,7 +26,6 @@ import java.io.Serializable;
 public abstract class BaseFieldRenderer implements FieldRenderer {
 
 	public String render(ThemeDisplay themeDisplay, Serializable fieldValue) {
-
 		try {
 			return doRender(themeDisplay, fieldValue);
 		}

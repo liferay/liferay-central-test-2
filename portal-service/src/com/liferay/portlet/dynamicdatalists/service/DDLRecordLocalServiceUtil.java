@@ -312,10 +312,10 @@ public class DDLRecordLocalServiceUtil {
 		getService().deleteRecords(recordSetId);
 	}
 
-	public static com.liferay.portlet.dynamicdatalists.model.DDLRecord fetchByPrimaryKey(
+	public static com.liferay.portlet.dynamicdatalists.model.DDLRecord fetchRecord(
 		long recordId)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().fetchByPrimaryKey(recordId);
+		return getService().fetchRecord(recordId);
 	}
 
 	public static com.liferay.portlet.dynamicdatalists.model.DDLRecordVersion getLatestRecordVersion(

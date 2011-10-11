@@ -48,8 +48,6 @@ import com.liferay.portlet.dynamicdatamapping.storage.Fields;
 import java.io.File;
 import java.io.Serializable;
 
-import java.util.Set;
-
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
@@ -167,23 +165,21 @@ public class EditRecordAction extends PortletAction {
 			WebKeys.THEME_DISPLAY);
 
 		long recordId = ParamUtil.getLong(actionRequest, "recordId");
+
 		long recordSetId = ParamUtil.getLong(actionRequest, "recordSetId");
 		boolean majorVersion = ParamUtil.getBoolean(
 			actionRequest, "majorVersion");
+
+		DDLRecord record = DDLRecordLocalServiceUtil.fetchRecord(recordId);
 
 		DDLRecordSet recordSet = DDLRecordSetLocalServiceUtil.getRecordSet(
 			recordSetId);
 
 		DDMStructure ddmStructure = recordSet.getDDMStructure();
 
-		Set<String> fieldNames = ddmStructure.getFieldNames();
-
-		DDLRecord record =
-			DDLRecordLocalServiceUtil.fetchByPrimaryKey(recordId);
-
 		Fields fields = new Fields();
 
-		for (String fieldName : fieldNames) {
+		for (String fieldName : ddmStructure.getFieldNames()) {
 			String fieldDataType = ddmStructure.getFieldDataType(fieldName);
 			String fieldValue = ParamUtil.getString(actionRequest, fieldName);
 

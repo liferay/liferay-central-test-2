@@ -72,23 +72,22 @@ public class EditRecordFileAction extends PortletAction {
 		throws Exception {
 
 		long recordId = ParamUtil.getLong(resourceRequest, "recordId");
-		long structureId = ParamUtil.getLong(resourceRequest, "ddmStructureId");
+
+		long ddmStructureId = ParamUtil.getLong(
+			resourceRequest, "ddmStructureId");
 		String fieldName = ParamUtil.getString(resourceRequest, "fieldName");
 
-		DDMStructure ddmStructure =
-			DDMStructureLocalServiceUtil.getDDMStructure(structureId);
+		DDLRecord record = DDLRecordLocalServiceUtil.fetchRecord(recordId);
 
-		DDLRecord record =
-			DDLRecordLocalServiceUtil.fetchByPrimaryKey(recordId);
+		DDMStructure ddmStructure =
+			DDMStructureLocalServiceUtil.getDDMStructure(ddmStructureId);
 
 		JSONObject fileJSONObject = null;
 
 		if (record != null) {
-			String oldFieldValue = String.valueOf(
-				record.getFieldValue(fieldName));
+			String fieldValue = String.valueOf(record.getFieldValue(fieldName));
 
-			fileJSONObject = JSONFactoryUtil.createJSONObject(
-				oldFieldValue);
+			fileJSONObject = JSONFactoryUtil.createJSONObject(fieldValue);
 		}
 
 		UploadPortletRequest uploadPortletRequest =

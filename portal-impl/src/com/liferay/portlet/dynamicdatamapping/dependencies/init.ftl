@@ -32,12 +32,14 @@
 
 <#-- Field value -->
 
-<#assign fieldRawValue = "">
 <#assign fieldValue = predefinedValue>
+<#assign fieldRawValue = "">
 
 <#if fields?? && fields.get(fieldName)??>
-	<#assign fieldRawValue = fields.get(fieldName).getValue()>
-	<#assign fieldValue = fields.get(fieldName).getRenderedValue(themeDisplay)>
+	<#assign field = fields.get(fieldName)>
+
+	<#assign fieldValue = field.getRenderedValue(themeDisplay)>
+	<#assign fieldRawValue = field.getValue()>
 </#if>
 
 <#-- Label -->
@@ -56,7 +58,7 @@
 	<#assign required = true>
 </#if>
 
-<!-- Util Functions -->
+<#-- Util -->
 
 <#assign jsonFactoryUtil = utilLocator.findUtil("com.liferay.portal.kernel.json.JSONFactory")>
 

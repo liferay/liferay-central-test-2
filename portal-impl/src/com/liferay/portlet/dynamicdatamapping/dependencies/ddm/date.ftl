@@ -35,7 +35,7 @@
 			timestamp = date.getTime()
 		}
 		catch (e) {
-		};
+		}
 
 		fieldValueInput.val(timestamp);
 	};
@@ -69,9 +69,11 @@
 			},
 			calendar: {
 				dateFormat: '%m/%d/%Y',
+
 				<#if (fieldValue != "")>
 					dates: ['${fieldValue}'],
 				</#if>
+
 				selectMultipleDates: false
 			},
 			setValue: false,

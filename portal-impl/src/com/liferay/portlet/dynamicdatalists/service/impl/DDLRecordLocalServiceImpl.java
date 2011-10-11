@@ -182,7 +182,7 @@ public class DDLRecordLocalServiceImpl
 		}
 	}
 
-	public DDLRecord fetchByPrimaryKey(long recordId) throws SystemException {
+	public DDLRecord fetchRecord(long recordId) throws SystemException {
 		return ddlRecordPersistence.fetchByPrimaryKey(recordId);
 	}
 
@@ -534,8 +534,7 @@ public class DDLRecordLocalServiceImpl
 	}
 
 	protected Fields toFields(
-			long ddmStructureId, Map<String, Serializable> fieldsMap)
-		throws PortalException, SystemException {
+		long ddmStructureId, Map<String, Serializable> fieldsMap) {
 
 		Fields fields = new Fields();
 

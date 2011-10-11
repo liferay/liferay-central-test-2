@@ -43,7 +43,7 @@ public interface DDMStructure extends DDMStructureModel, PersistedModel {
 		java.util.Locale locale);
 
 	public java.lang.String getFieldLabel(java.lang.String fieldName,
-		java.lang.String localeLanguageId);
+		java.lang.String locale);
 
 	public java.util.Set<java.lang.String> getFieldNames();
 
