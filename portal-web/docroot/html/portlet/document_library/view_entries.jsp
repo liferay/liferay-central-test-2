@@ -27,7 +27,7 @@ long repositoryId = GetterUtil.getLong((String)request.getAttribute("view.jsp-re
 
 long fileEntryTypeId = ParamUtil.getLong(request, "fileEntryTypeId");
 
-String dlFileEntryTypeName = null;
+String dlFileEntryTypeName = StringPool.BLANK;
 
 int status = WorkflowConstants.STATUS_APPROVED;
 
@@ -185,19 +185,15 @@ request.setAttribute("view_entries.jsp-total", String.valueOf(total));
 
 <c:if test="<%= results.isEmpty() %>">
 	<c:choose>
-		<c:when test="<%= Validator.isNotNull(dlFileEntryTypeName) && ((dlFileEntryTypeName.equals(DLFileEntryConstants.TYPE_IMAGE) || dlFileEntryTypeName.equals(DLFileEntryConstants.TYPE_VIDEO))) %>">
-			<c:choose>
-				<c:when test="<%= dlFileEntryTypeName.equals(DLFileEntryConstants.TYPE_IMAGE) %>">
-					<div class="portlet-msg-info">
-						<%= LanguageUtil.get(pageContext, "there-are-no-images-in-this-folder") %>
-					</div>
-				</c:when>
-				<c:otherwise>
-					<div class="portlet-msg-info">
-						<%= LanguageUtil.get(pageContext, "there-are-no-videos-in-this-folder") %>
-					</div>
-				</c:otherwise>
-			</c:choose>
+		<c:when test="<%= dlFileEntryTypeName.equals(DLFileEntryTypeConstants.NAME_IMAGE) %>">
+			<div class="portlet-msg-info">
+				<liferay-ui:message key="there-are-no-images-in-this-folder" />
+			</div>
+		</c:when>
+		<c:when test="<%= dlFileEntryTypeName.equals(DLFileEntryTypeConstants.NAME_VIDEO) %>">
+			<div class="portlet-msg-info">
+				<liferay-ui:message key="there-are-no-videos-in-this-folder" />
+			</div>
 		</c:when>
 		<c:otherwise>
 			<div class="portlet-msg-info">

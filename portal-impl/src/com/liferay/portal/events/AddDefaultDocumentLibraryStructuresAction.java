@@ -30,8 +30,8 @@ import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryTypeException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
-import com.liferay.portlet.documentlibrary.model.DLFileEntryConstants;
 import com.liferay.portlet.documentlibrary.model.DLFileEntryMetadata;
+import com.liferay.portlet.documentlibrary.model.DLFileEntryTypeConstants;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryTypeLocalServiceUtil;
 import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
 import com.liferay.portlet.dynamicdatamapping.service.DDMStructureLocalServiceUtil;
@@ -95,12 +95,12 @@ public class AddDefaultDocumentLibraryStructuresAction
 		throws Exception {
 
 		addDLFileEntryType(
-			userId, groupId, DLFileEntryConstants.TYPE_IMAGE,
+			userId, groupId, DLFileEntryTypeConstants.NAME_IMAGE,
 			"Image Document Type", "Default Image's Metadata Set",
 			serviceContext);
 
 		addDLFileEntryType(
-			userId, groupId, DLFileEntryConstants.TYPE_VIDEO,
+			userId, groupId, DLFileEntryTypeConstants.NAME_VIDEO,
 			"Video Document Type", "Default Videos's Metadata Set",
 			serviceContext);
 	}
