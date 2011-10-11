@@ -17,7 +17,7 @@
 <%@ include file="/html/portlet/document_library_display/init.jsp" %>
 
 <c:choose>
-	<c:when test="<%= portletName.equals(PortletKeys.DOCUMENT_LIBRARY_DISPLAY) || portletName.equals(PortletKeys.IMAGE_GALLERY_DISPLAY) %>">
+	<c:when test="<%= portletName.equals(PortletKeys.DOCUMENT_LIBRARY_DISPLAY) || portletName.equals(PortletKeys.MEDIA_GALLERY_DISPLAY) %>">
 
 		<%
 		String topLink = ParamUtil.getString(request, "topLink", "documents-home");
@@ -43,7 +43,7 @@
 						String recentDocumentsMessage = "recent-documents";
 						String myDocumentsMessage = "my-documents";
 
-						if (portletName.equals(PortletKeys.IMAGE_GALLERY_DISPLAY)) {
+						if (portletName.equals(PortletKeys.MEDIA_GALLERY_DISPLAY)) {
 							documentsHomeMessage = "images-home";
 							recentDocumentsMessage = "recent-images";
 							myDocumentsMessage = "my-images";

@@ -49,7 +49,7 @@ public class FindFolderAction extends FindAction {
 	protected String[] initPortletIds() {
 		return new String[] {
 			PortletKeys.DOCUMENT_LIBRARY, PortletKeys.DOCUMENT_LIBRARY_DISPLAY,
-			PortletKeys.IMAGE_GALLERY_DISPLAY};
+			PortletKeys.MEDIA_GALLERY_DISPLAY};
 	}
 
 }
