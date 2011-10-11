@@ -327,12 +327,12 @@ public class ThemeUtil {
 		String resourcePath = theme.getResourcePath(
 			servletContext, portletId, page);
 
-		boolean needCheck = true;
+		boolean checkResourceExists = true;
 
 		if (Validator.isNotNull(portletId)) {
 			if (portletId.contains(PortletConstants.INSTANCE_SEPARATOR) &&
-				(needCheck =
-					!VelocityEngineUtil.resourceExists(resourcePath))) {
+				(checkResourceExists = !VelocityEngineUtil.resourceExists(
+					resourcePath))) {
 
 				String rootPortletId = PortletConstants.getRootPortletId(
 					portletId);
@@ -341,16 +341,18 @@ public class ThemeUtil {
 					servletContext, rootPortletId, page);
 			}
 
-			if (needCheck &&
-				(needCheck =
-					!VelocityEngineUtil.resourceExists(resourcePath))) {
+			if (checkResourceExists &&
+				(checkResourceExists = !VelocityEngineUtil.resourceExists(
+					resourcePath))) {
 
-				resourcePath = theme.getResourcePath(servletContext, null,
-					page);
+				resourcePath = theme.getResourcePath(
+					servletContext, null, page);
 			}
 		}
 
-		if (needCheck && !VelocityEngineUtil.resourceExists(resourcePath)) {
+		if (checkResourceExists &&
+			!VelocityEngineUtil.resourceExists(resourcePath)) {
+
 			_log.error(resourcePath + " does not exist");
 
 			return null;
