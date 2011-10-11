@@ -28,16 +28,16 @@ import javax.servlet.ServletContext;
 public class SpriteProcessorUtil {
 
 	public static Properties generate(
-			List<File> images, String spriteFileName,
-			String spritePropertiesFileName, String spritePropertiesRootPath,
-			ServletContext servletContext, int maxHeight, int maxWidth,
+			ServletContext servletContext, List<File> imageFiles,
+			String spriteFileName, String spritePropertiesFileName,
+			String spritePropertiesRootPath, int maxHeight, int maxWidth,
 			int maxSize)
 		throws IOException {
 
 		return getSpriteProcessor().generate(
-			images, spriteFileName, spritePropertiesFileName,
-			spritePropertiesRootPath, servletContext, maxHeight, maxWidth,
-			maxSize);
+			servletContext, imageFiles, spriteFileName,
+			spritePropertiesFileName, spritePropertiesRootPath, maxHeight,
+			maxWidth, maxSize);
 	}
 
 	public static SpriteProcessor getSpriteProcessor() {

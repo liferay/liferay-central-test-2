@@ -28,9 +28,9 @@ import javax.servlet.ServletContext;
 public interface SpriteProcessor {
 
 	public Properties generate(
-			List<File> images, String spriteFileName,
-			String spritePropertiesFileName, String spritePropertiesRootPath,
-			ServletContext servletContext, int maxHeight, int maxWidth,
+			ServletContext servletContext, List<File> imageFiles,
+			String spriteFileName, String spritePropertiesFileName,
+			String spritePropertiesRootPath, int maxHeight, int maxWidth,
 			int maxSize)
 		throws IOException;
 

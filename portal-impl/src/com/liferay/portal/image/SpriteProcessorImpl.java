@@ -70,18 +70,14 @@ import org.geotools.image.ImageWorker;
  */
 public class SpriteProcessorImpl implements SpriteProcessor {
 
-	static {
-		System.setProperty("com.sun.media.jai.disableMediaLib", "true");
-	}
-
 	public Properties generate(
-			List<File> images, String spriteFileName,
-			String spritePropertiesFileName, String spritePropertiesRootPath,
-			ServletContext servletContext, int maxHeight, int maxWidth,
+			ServletContext servletContext, List<File> imageFiles,
+			String spriteFileName, String spritePropertiesFileName,
+			String spritePropertiesRootPath, int maxHeight, int maxWidth,
 			int maxSize)
 		throws IOException {
 
-		if (images.size() < 1) {
+		if (imageFiles.size() < 1) {
 			return null;
 		}
 
@@ -92,57 +88,10 @@ public class SpriteProcessorImpl implements SpriteProcessor {
 				0, spritePropertiesRootPath.length() - 1);
 		}
 
-		Collections.sort(images);
+		Collections.sort(imageFiles);
 
-		String imagesDirName = images.get(0).getParentFile().toString();
-		String spriteRootDirName = PropsValues.SPRITE_ROOT_DIR;
-
-		if (Validator.isNotNull(spriteRootDirName)) {
-			if (!spriteRootDirName.endsWith(StringPool.BACK_SLASH) &&
-				!spriteRootDirName.endsWith(StringPool.SLASH)) {
-
-				spriteRootDirName += StringPool.SLASH;
-			}
-
-			String portalProxyPath = PropsUtil.get(PropsKeys.PORTAL_PROXY_PATH);
-
-			if (Validator.isNotNull(portalProxyPath)) {
-				spriteRootDirName += portalProxyPath + StringPool.SLASH;
-			}
-
-			String portalContext = PropsUtil.get(PropsKeys.PORTAL_CTX);
-
-			if (Validator.isNotNull(portalContext) &&
-				!portalContext.equals(StringPool.SLASH)) {
-
-				spriteRootDirName += portalContext + StringPool.SLASH;
-			}
-
-			String portletContext = servletContext.getContextPath();
-
-			if (Validator.isNotNull(portletContext)) {
-				spriteRootDirName +=
-					servletContext.getContextPath() + StringPool.SLASH;
-			}
-
-			String contextRoot = ServletContextUtil.getRealPath(
-				servletContext, StringPool.SLASH);
-
-			spriteRootDirName = StringUtil.replace(
-				spriteRootDirName +
-					imagesDirName.substring(contextRoot.length()),
-				CharPool.BACK_SLASH, CharPool.SLASH);
-
-			if (spriteRootDirName.endsWith(StringPool.BACK_SLASH) ||
-				spriteRootDirName.endsWith(StringPool.SLASH)) {
-
-				spriteRootDirName = spriteRootDirName.substring(
-					0, spriteRootDirName.length() - 1);
-			}
-		}
-		else {
-			spriteRootDirName = imagesDirName;
-		}
+		String spriteRootDirName = getSpriteRootDirName(
+			servletContext, imageFiles);
 
 		File spritePropertiesFile = new File(
 			spriteRootDirName + StringPool.SLASH + spritePropertiesFileName);
@@ -154,8 +103,8 @@ public class SpriteProcessorImpl implements SpriteProcessor {
 		if (spritePropertiesFile.exists()) {
 			lastModified = spritePropertiesFile.lastModified();
 
-			for (File image : images) {
-				if (image.lastModified() > lastModified) {
+			for (File imageFile : imageFiles) {
+				if (imageFile.lastModified() > lastModified) {
 					build = true;
 
 					break;
@@ -184,13 +133,13 @@ public class SpriteProcessorImpl implements SpriteProcessor {
 		float x = 0;
 		float y = 0;
 
-		for (File file : images) {
-			if (file.length() > maxSize) {
+		for (File imageFile : imageFiles) {
+			if (imageFile.length() > maxSize) {
 				continue;
 			}
 
 			try {
-				ImageBag imageBag = ImageProcessorUtil.read(file);
+				ImageBag imageBag = ImageProcessorUtil.read(imageFile);
 
 				RenderedImage renderedImage = imageBag.getRenderedImage();
 
@@ -206,7 +155,8 @@ public class SpriteProcessorImpl implements SpriteProcessor {
 					renderedImages.add(renderedImage);
 
 					String key = StringUtil.replace(
-						file.toString(), CharPool.BACK_SLASH, CharPool.SLASH);
+						imageFile.toString(), CharPool.BACK_SLASH,
+						CharPool.SLASH);
 
 					key = key.substring(
 						spritePropertiesRootPath.toString().length());
@@ -220,7 +170,7 @@ public class SpriteProcessorImpl implements SpriteProcessor {
 			}
 			catch (Exception e) {
 				if (_log.isWarnEnabled()) {
-					_log.warn("Unable to process " + file);
+					_log.warn("Unable to process " + imageFile);
 				}
 
 				if (_log.isDebugEnabled()) {
@@ -417,6 +367,65 @@ public class SpriteProcessorImpl implements SpriteProcessor {
 		return tiledImage;
 	}
 
+	protected String getSpriteRootDirName(
+		ServletContext servletContext, List<File> imageFiles) {
+
+		String spriteRootDirName = PropsValues.SPRITE_ROOT_DIR;
+
+		File imageFile = imageFiles.get(0);
+
+		File imageDir = imageFile.getParentFile();
+
+		String imageDirName = imageDir.toString();
+
+		if (Validator.isNull(spriteRootDirName)) {
+			return imageDirName;
+		}
+
+		if (!spriteRootDirName.endsWith(StringPool.BACK_SLASH) &&
+			!spriteRootDirName.endsWith(StringPool.SLASH)) {
+
+			spriteRootDirName += StringPool.SLASH;
+		}
+
+		String portalProxyPath = PropsUtil.get(PropsKeys.PORTAL_PROXY_PATH);
+
+		if (Validator.isNotNull(portalProxyPath)) {
+			spriteRootDirName += portalProxyPath + StringPool.SLASH;
+		}
+
+		String portalContextPath = PropsUtil.get(PropsKeys.PORTAL_CTX);
+
+		if (Validator.isNotNull(portalContextPath) &&
+			!portalContextPath.equals(StringPool.SLASH)) {
+
+			spriteRootDirName += portalContextPath + StringPool.SLASH;
+		}
+
+		String portletContextPath = servletContext.getContextPath();
+
+		if (Validator.isNotNull(portletContextPath)) {
+			spriteRootDirName +=
+				servletContext.getContextPath() + StringPool.SLASH;
+		}
+
+		String rootRealPath = ServletContextUtil.getRealPath(
+			servletContext, StringPool.SLASH);
+
+		spriteRootDirName = StringUtil.replace(
+			spriteRootDirName + imageDirName.substring(rootRealPath.length()),
+			CharPool.BACK_SLASH, CharPool.SLASH);
+
+		if (spriteRootDirName.endsWith(StringPool.BACK_SLASH) ||
+			spriteRootDirName.endsWith(StringPool.SLASH)) {
+
+			spriteRootDirName = spriteRootDirName.substring(
+				0, spriteRootDirName.length() - 1);
+		}
+
+		return spriteRootDirName;
+	}
+
 	protected void printImage(RenderedImage renderedImage) {
 		SampleModel sampleModel = renderedImage.getSampleModel();
 
@@ -450,5 +459,9 @@ public class SpriteProcessorImpl implements SpriteProcessor {
 	private static final int _NUM_OF_BANDS = 4;
 
 	private static Log _log = LogFactoryUtil.getLog(SpriteProcessorImpl.class);
+
+	static {
+		System.setProperty("com.sun.media.jai.disableMediaLib", "true");
+	}
 
 }
