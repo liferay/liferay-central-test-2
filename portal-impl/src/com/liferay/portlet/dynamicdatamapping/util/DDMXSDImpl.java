@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.CharPool;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.LocalizationUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -74,8 +75,7 @@ public class DDMXSDImpl implements DDMXSD {
 			Locale locale)
 		throws Exception {
 
-		String script = ddmTemplate.getScript();
-		Document document = SAXReaderUtil.read(script);
+		Document document = SAXReaderUtil.read(ddmTemplate.getScript());
 
 		return getHTML(
 			pageContext, document.getRootElement(), fields, StringPool.BLANK,
@@ -167,7 +167,7 @@ public class DDMXSDImpl implements DDMXSD {
 			String fieldNamespace = dynamicElementElement.attributeValue(
 				"fieldNamespace", _DEFAULT_NAMESPACE);
 
-			boolean required = Boolean.valueOf(
+			boolean required = GetterUtil.getBoolean(
 				String.valueOf(field.get("required")));
 
 			if (readOnly) {
@@ -469,18 +469,18 @@ public class DDMXSDImpl implements DDMXSD {
 		return writer.toString();
 	}
 
-	private static final String _DEFAULT_NAMESPACE = "alloy";
-
 	private static final String _DEFAULT_MODE_EDIT_NAMESPACE = "modeedit";
 
-	private static final String _DEFAULT_READ_ONLY_NAMESPACE = "readonly";
+	private static final String _DEFAULT_NAMESPACE = "alloy";
 
-	private static final String _TPL_DEFAULT_PATH =
-		"com/liferay/portlet/dynamicdatamapping/dependencies/alloy/text.ftl";
+	private static final String _DEFAULT_READ_ONLY_NAMESPACE = "readonly";
 
 	private static final String _TPL_DEFAULT_MODE_EDIT_PATH =
 		"com/liferay/portlet/dynamicdatamapping/dependencies/modeedit/" +
 			"default.ftl";
+
+	private static final String _TPL_DEFAULT_PATH =
+		"com/liferay/portlet/dynamicdatamapping/dependencies/alloy/text.ftl";
 
 	private static final String _TPL_DEFAULT_READ_ONLY_PATH =
 		"com/liferay/portlet/dynamicdatamapping/dependencies/readonly/" +
