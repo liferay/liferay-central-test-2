@@ -73,6 +73,24 @@ create table DDLRecordSet (
 	scope INTEGER
 );
 
+create table DDLRecordVersion (
+	recordVersionId LONG not null primary key,
+	groupId LONG,
+	companyId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null,
+	DDMStorageId LONG,
+	recordSetId LONG,
+	recordId LONG,
+	version VARCHAR(75) null,
+	displayIndex INTEGER,
+	status INTEGER,
+	statusByUserId LONG,
+	statusByUserName VARCHAR(75) null,
+	statusDate DATE null
+);
+
 create table DDMContent (
 	uuid_ VARCHAR(75) null,
 	contentId LONG not null primary key,
@@ -418,6 +436,21 @@ create table MDRRuleGroup (
 	modifiedDate DATE null,
 	name STRING null,
 	description STRING null
+);
+
+create table MDRRuleGroupInstance (
+	uuid_ VARCHAR(75) null,
+	ruleGroupInstanceId LONG not null primary key,
+	groupId LONG,
+	companyId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null,
+	modifiedDate DATE null,
+	classNameId LONG,
+	classPK LONG,
+	ruleGroupId LONG,
+	priority INTEGER
 );
 
 alter table PollsVote add companyId LONG;
