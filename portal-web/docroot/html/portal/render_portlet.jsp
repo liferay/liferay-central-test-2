@@ -1016,7 +1016,6 @@ else {
 String doRefreshPortletId = null;
 
 if (themeDisplay.isStatePopUp() && ((doRefreshPortletId = (String)SessionMessages.get(renderRequestImpl, portletConfig.getPortletName() + ".doRefresh")) != null)) {
-
 	if (Validator.isNull(doRefreshPortletId) && (portletResourcePortlet != null)) {
 		doRefreshPortletId = portletResourcePortlet.getPortletId();
 	}
@@ -1037,11 +1036,10 @@ if (themeDisplay.isStatePopUp() && ((doRefreshPortletId = (String)SessionMessage
 			Liferay.Util.getOpener().Liferay.Portlet.refresh(curPortletBoundaryId, data);
 		}
 	</aui:script>
-<%
-}
-%>
 
 <%
+}
+
 themeDisplay.setScopeGroupId(previousScopeGroupId);
 themeDisplay.setParentGroupId(previousParentGroupId);
 
