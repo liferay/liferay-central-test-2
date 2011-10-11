@@ -17,24 +17,8 @@ package com.liferay.portlet.social.service.impl;
 import com.liferay.portlet.social.service.base.SocialActivityAchievementLocalServiceBaseImpl;
 
 /**
- * The implementation of the social activity achievement local service.
- *
- * <p>
- * All custom service methods should be put in this class. Whenever methods are added, rerun ServiceBuilder to copy their definitions into the {@link com.liferay.portlet.social.service.SocialActivityAchievementLocalService} interface.
- *
- * <p>
- * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
- * </p>
- *
  * @author Brian Wing Shun Chan
- * @see com.liferay.portlet.social.service.base.SocialActivityAchievementLocalServiceBaseImpl
- * @see com.liferay.portlet.social.service.SocialActivityAchievementLocalServiceUtil
  */
 public class SocialActivityAchievementLocalServiceImpl
 	extends SocialActivityAchievementLocalServiceBaseImpl {
-	/*
-	 * NOTE FOR DEVELOPERS:
-	 *
-	 * Never reference this interface directly. Always use {@link com.liferay.portlet.social.service.SocialActivityAchievementLocalServiceUtil} to access the social activity achievement local service.
-	 */
 }
