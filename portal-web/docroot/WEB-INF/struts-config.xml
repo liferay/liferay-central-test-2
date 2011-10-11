@@ -1815,12 +1815,12 @@
 
 		<!-- Users Admin -->
 
-		<action path="/users_admin/edit_layouts" type="com.liferay.portlet.layoutsadmin.action.EditLayoutsAction">
+		<action path="/users_admin/edit_layout_set" type="com.liferay.portlet.layoutsadmin.action.EditLayoutSetAction">
 			<forward name="portlet.layouts_admin.edit_layouts" path="portlet.layouts_admin.edit_layouts" />
 			<forward name="portlet.layouts_admin.error" path="portlet.layouts_admin.error" />
 		</action>
 
-		<action path="/users_admin/edit_layout_set" type="com.liferay.portlet.layoutsadmin.action.EditLayoutSetAction">
+		<action path="/users_admin/edit_layouts" type="com.liferay.portlet.layoutsadmin.action.EditLayoutsAction">
 			<forward name="portlet.layouts_admin.edit_layouts" path="portlet.layouts_admin.edit_layouts" />
 			<forward name="portlet.layouts_admin.error" path="portlet.layouts_admin.error" />
 		</action>
