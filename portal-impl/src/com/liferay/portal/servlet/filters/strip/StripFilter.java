@@ -390,7 +390,7 @@ public class StripFilter extends BasePortalFilter {
 		}
 
 		if (KMPSearch.search(
-				charBuffer, 0, endPos, 
+				charBuffer, 0, endPos,
 				_MARKER_TYPE_JAVASCRIPT, _MARKER_TYPE_JAVASCRIPT_NEXTS) == -1) {
 
 			return;
@@ -633,7 +633,7 @@ public class StripFilter extends BasePortalFilter {
 	private static final String _MARKER_TYPE_JAVASCRIPT =
 		"type=\"text/javascript\"";
 
-	private static final int[] _MARKER_TYPE_JAVASCRIPT_NEXTS = 
+	private static final int[] _MARKER_TYPE_JAVASCRIPT_NEXTS =
 		KMPSearch.generateNexts(_MARKER_TYPE_JAVASCRIPT);
 
 	private static final String _STRIP = "strip";
