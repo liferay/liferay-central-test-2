@@ -391,26 +391,12 @@ public class SocialActivityLocalServiceWrapper
 	* Removes stored activities for the asset identified by the class name ID
 	* and class primary key.
 	*
-	* @param classNameId the target asset's class ID
-	* @param classPK the primary key of the target asset
 	* @throws SystemException if a system exception occurred
 	*/
-	public void deleteActivities(long classNameId, long classPK)
+	public void deleteActivities(
+		com.liferay.portlet.asset.model.AssetEntry assetEntry)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		_socialActivityLocalService.deleteActivities(classNameId, classPK);
-	}
-
-	/**
-	* Removes stored activities for the asset identified by the class name and
-	* class primary key.
-	*
-	* @param className the target asset's class name
-	* @param classPK the primary key of the target asset
-	* @throws SystemException if a system exception occurred
-	*/
-	public void deleteActivities(java.lang.String className, long classPK)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		_socialActivityLocalService.deleteActivities(className, classPK);
+		_socialActivityLocalService.deleteActivities(assetEntry);
 	}
 
 	/**
