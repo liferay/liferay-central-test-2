@@ -381,38 +381,49 @@ public class StripFilter extends BasePortalFilter {
 				c = charBuffer.charAt(i);
 
 				if (c == CharPool.GREATER_THAN) {
-					// script openTag complete
+
+					// Open script tag complete
+
 					endPos = i + 1;
 
 					int length = i - startPos;
 
 					if ((length < _MARKER_TYPE_JAVASCRIPT.length()) ||
 						(KMPSearch.search(
-								charBuffer, startPos, length,
-								_MARKER_TYPE_JAVASCRIPT,
-								_MARKER_TYPE_JAVASCRIPT_NEXTS) == -1)) {
-						// script openTag with attribute, but not
-						// type="text/javascript". Skip Minifier.
+							charBuffer, startPos, length,
+							_MARKER_TYPE_JAVASCRIPT,
+							_MARKER_TYPE_JAVASCRIPT_NEXTS) == -1)) {
+
+						// Open script tag has attribute other than
+						// type="text/javascript". Skip stripping.
+
 						return;
 					}
 
-					// Legal script openTag, without attribute or explicitly
-					// with type="text/javascript", start stripping.
+					// Open script tag has no attribute or has attribute
+					// type="text/javascript". Start stripping.
+
 					break;
 				}
 				else if (c == CharPool.LESS_THAN) {
-					// Illegal openTag, found '<' before seeing a '>'.
+
+					// Illegal open script tag. Found a '<' before seeing a '>'.
+
 					return;
 				}
 			}
 
 			if (endPos == charBuffer.length()) {
-				// Illegal openTag, can not find '>'.
+
+				// Illegal open script tag. Unable to find a '>'.
+
 				return;
 			}
 		}
 		else if (c != CharPool.GREATER_THAN) {
-			// Illegal openTag, not followed by '>' or ' '.
+
+			// Illegal open script tag. Not followed by a '>' or a ' '.
+
 			return;
 		}
 
