@@ -22,6 +22,7 @@ import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.User;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.asset.model.AssetEntry;
 import com.liferay.portlet.social.NoSuchActivityException;
 import com.liferay.portlet.social.model.SocialActivity;
 import com.liferay.portlet.social.service.base.SocialActivityLocalServiceBaseImpl;
@@ -280,30 +281,11 @@ public class SocialActivityLocalServiceImpl
 	 * Removes stored activities for the asset identified by the class name ID
 	 * and class primary key.
 	 *
-	 * @param  classNameId the target asset's class ID
-	 * @param  classPK the primary key of the target asset
 	 * @throws SystemException if a system exception occurred
 	 */
-	public void deleteActivities(long classNameId, long classPK)
-		throws SystemException {
-
-		socialActivityPersistence.removeByC_C(classNameId, classPK);
-	}
-
-	/**
-	 * Removes stored activities for the asset identified by the class name and
-	 * class primary key.
-	 *
-	 * @param  className the target asset's class name
-	 * @param  classPK the primary key of the target asset
-	 * @throws SystemException if a system exception occurred
-	 */
-	public void deleteActivities(String className, long classPK)
-		throws SystemException {
-
-		long classNameId = PortalUtil.getClassNameId(className);
-
-		deleteActivities(classNameId, classPK);
+	public void deleteActivities(AssetEntry assetEntry) throws SystemException {
+		socialActivityPersistence.removeByC_C(
+			assetEntry.getClassNameId(), assetEntry.getClassPK());
 	}
 
 	/**

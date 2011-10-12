@@ -145,7 +145,6 @@ public class DLAppHelperLocalServiceImpl
 
 		ratingsStatsLocalService.deleteStats(
 			DLFileEntryConstants.getClassName(), fileEntry.getFileEntryId());
-
 	}
 
 	public void deleteFolder(Folder folder)
