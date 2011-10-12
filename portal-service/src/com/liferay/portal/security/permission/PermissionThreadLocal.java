@@ -27,11 +27,11 @@ public class PermissionThreadLocal {
 	}
 
 	public static boolean isAddResource() {
-		return _addResource.get().booleanValue();
+		return _addResource.get();
 	}
 
 	public static boolean isFlushEnabled() {
-		return _flushEnabled.get().booleanValue();
+		return _flushEnabled.get();
 	}
 
 	public static void setAddResource(boolean addResource) {

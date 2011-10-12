@@ -38,7 +38,6 @@ public class SearchEngineUtil {
 	 * @deprecated Use {@link
 	 *             com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}.
 	 */
-	@Deprecated
 	public static final int ALL_POS = -1;
 
 	public static final String GENERIC_ENGINE_ID = "GENERIC_ENGINE";
