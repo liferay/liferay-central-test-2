@@ -48,9 +48,8 @@ public class Member_AddCommentTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("Add Comment"),
 			selenium.getText(
-				"//fieldset[@class='aui-fieldset add-comment ']/div/span/a"));
-		selenium.click(
-			"//fieldset[@class='aui-fieldset add-comment ']/div/span/a");
+				"//fieldset[contains(@class,'add-comment')]/div/span/a"));
+		selenium.click("//fieldset[contains(@class,'add-comment')]/div/span/a");
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
