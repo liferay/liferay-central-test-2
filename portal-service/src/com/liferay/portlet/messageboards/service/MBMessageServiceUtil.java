@@ -179,18 +179,18 @@ public class MBMessageServiceUtil {
 			includePrevAndNext);
 	}
 
+	public static int getThreadAnswersCount(long groupId, long categoryId,
+		long threadId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getThreadAnswersCount(groupId, categoryId, threadId);
+	}
+
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> getThreadMessages(
 		long groupId, long categoryId, long threadId, int status, int start,
 		int end) throws com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .getThreadMessages(groupId, categoryId, threadId, status,
 			start, end);
-	}
-
-	public static int getThreadAnswersCount(long groupId, long categoryId,
-		long threadId)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getThreadAnswersCount(groupId, categoryId, threadId);
 	}
 
 	public static int getThreadMessagesCount(long groupId, long categoryId,
