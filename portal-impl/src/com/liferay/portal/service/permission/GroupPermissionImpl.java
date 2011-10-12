@@ -62,7 +62,7 @@ public class GroupPermissionImpl implements GroupPermission {
 
 			// An individual user would never reach this block because he would
 			// be an administrator of his own layouts. However, a user who
-			// manages a set of organisations may be modifying pages of a user
+			// manages a set of organizations may be modifying pages of a user
 			// he manages.
 
 			long userId = group.getClassPK();

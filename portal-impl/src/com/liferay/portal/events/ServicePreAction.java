@@ -422,7 +422,6 @@ public class ServicePreAction extends Action {
 				boolean isViewableGroup = LayoutPermissionUtil.contains(
 					permissionChecker, layout, controlPanelCategory,
 					ActionKeys.VIEW);
-
 				boolean isViewableStaging = GroupPermissionUtil.contains(
 					permissionChecker, group.getGroupId(),
 					ActionKeys.VIEW_STAGING);
@@ -523,7 +522,6 @@ public class ServicePreAction extends Action {
 		if (layout != null) {
 			hasCustomizeLayoutPermission = LayoutPermissionUtil.contains(
 				permissionChecker, layout, ActionKeys.CUSTOMIZE);
-
 			hasUpdateLayoutPermission = LayoutPermissionUtil.contains(
 				permissionChecker, layout, ActionKeys.UPDATE);
 
@@ -1007,12 +1005,12 @@ public class ServicePreAction extends Action {
 				}
 			}
 
-			boolean hasAddLayoutLayoutPermission =
-				LayoutPermissionUtil.contains(
-					permissionChecker, layout, ActionKeys.ADD_LAYOUT);
 			boolean hasAddLayoutGroupPermission =
 				GroupPermissionUtil.contains(
 					permissionChecker, scopeGroupId, ActionKeys.ADD_LAYOUT);
+			boolean hasAddLayoutLayoutPermission =
+				LayoutPermissionUtil.contains(
+					permissionChecker, layout, ActionKeys.ADD_LAYOUT);
 			boolean hasManageLayoutsGroupPermission =
 				GroupPermissionUtil.contains(
 					permissionChecker, scopeGroupId, ActionKeys.MANAGE_LAYOUTS);

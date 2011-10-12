@@ -364,23 +364,14 @@ public class EditLayoutsAction extends PortletAction {
 		String cmd = ParamUtil.getString(portletRequest, Constants.CMD);
 
 		long selPlid = ParamUtil.getLong(portletRequest, "selPlid");
-		long parentPlid = ParamUtil.getLong(portletRequest, "parentPlid");
 
 		if (selPlid > 0) {
 			layout = LayoutLocalServiceUtil.getLayout(selPlid);
 		}
 
-		if (cmd.equals("reset_customized_view")) {
-			if (!LayoutPermissionUtil.contains(
-					permissionChecker, layout, ActionKeys.CUSTOMIZE)) {
+		if (cmd.equals(Constants.ADD)) {
+			long parentPlid = ParamUtil.getLong(portletRequest, "parentPlid");
 
-				throw new PrincipalException();
-			}
-			else {
-				return;
-			}
-		}
-		else if (cmd.equals(Constants.ADD)) {
 			if ((parentPlid == LayoutConstants.DEFAULT_PARENT_LAYOUT_ID)) {
 				if (!GroupPermissionUtil.contains(
 						permissionChecker, group.getGroupId(),
@@ -415,6 +406,16 @@ public class EditLayoutsAction extends PortletAction {
 				return;
 			}
 		}
+		else if (cmd.equals("reset_customized_view")) {
+			if (!LayoutPermissionUtil.contains(
+					permissionChecker, layout, ActionKeys.CUSTOMIZE)) {
+
+				throw new PrincipalException();
+			}
+			else {
+				return;
+			}
+		}
 
 		boolean hasUpdateLayoutPermission = false;
 
@@ -436,10 +437,8 @@ public class EditLayoutsAction extends PortletAction {
 				}
 			}
 			else if (group.isOrganization()) {
-				long organizationId = group.getOrganizationId();
-
 				boolean publishToLive = OrganizationPermissionUtil.contains(
-					permissionChecker, organizationId,
+					permissionChecker, group.getOrganizationId(),
 					ActionKeys.PUBLISH_STAGING);
 
 				if (!hasUpdateLayoutPermission && !publishToLive) {

@@ -4031,8 +4031,7 @@ public class PortalImpl implements Portal {
 				long organizationId = group.getOrganizationId();
 
 				if (OrganizationPermissionUtil.contains(
-						permissionChecker, organizationId,
-						ActionKeys.UPDATE)) {
+						permissionChecker, organizationId, ActionKeys.UPDATE)) {
 
 					return true;
 				}
