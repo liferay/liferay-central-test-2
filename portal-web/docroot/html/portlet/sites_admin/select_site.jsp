@@ -25,8 +25,8 @@ PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("struts_action", "/sites_admin/select_site");
 portletURL.setParameter("target", target);
-portletURL.setParameter("includeCompany", StringUtil.valueOf(includeCompany));
-portletURL.setParameter("includeUserPersonalSite", StringUtil.valueOf(includeUserPersonalSite));
+portletURL.setParameter("includeCompany", String.valueOf(includeCompany));
+portletURL.setParameter("includeUserPersonalSite", String.valueOf(includeUserPersonalSite));
 %>
 
 <aui:form action="<%= portletURL.toString() %>" method="post" name="fm">
