@@ -460,6 +460,14 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 			includePrevAndNext);
 	}
 
+	public int getThreadAnswersCount(
+			long groupId, long categoryId, long threadId)
+		throws SystemException {
+
+		return mbMessagePersistence.filterCountByG_C_T_A(
+			groupId, categoryId, threadId, true);
+	}
+
 	public List<MBMessage> getThreadMessages(
 			long groupId, long categoryId, long threadId, int status, int start,
 			int end)
@@ -473,14 +481,6 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 			return mbMessagePersistence.filterFindByG_C_T_S(
 				groupId, categoryId, threadId, status, start, end);
 		}
-	}
-
-	public int getThreadAnswersCount(
-			long groupId, long categoryId, long threadId)
-		throws SystemException {
-
-		return mbMessagePersistence.filterCountByG_C_T_A(
-			groupId, categoryId, threadId, true);
 	}
 
 	public int getThreadMessagesCount(
