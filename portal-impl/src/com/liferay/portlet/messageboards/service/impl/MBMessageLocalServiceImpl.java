@@ -1605,13 +1605,15 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 							MBActivityKeys.ADD_MESSAGE, StringPool.BLANK,
 							receiverUserId);
 
-						if (parentMessage != null && receiverUserId != userId) {
+						if ((parentMessage != null) &&
+							(receiverUserId != userId)) {
+
 							socialActivityLocalService.addActivity(
 								userId, parentMessage.getGroupId(),
 								MBMessage.class.getName(),
 								parentMessage.getMessageId(),
-								MBActivityKeys.REPLY_MESSAGE,
-								StringPool.BLANK, 0);
+								MBActivityKeys.REPLY_MESSAGE, StringPool.BLANK,
+								0);
 						}
 
 						socialEquityLogLocalService.addEquityLogs(

@@ -99,21 +99,24 @@ public class SubscriptionLocalServiceImpl
 			// Social
 
 			if (className.equals(MBThread.class.getName())) {
-				MBThread thread = mbThreadLocalService.getMBThread(classPK);
+				MBThread mbThread = mbThreadLocalService.getMBThread(classPK);
 
-				JSONObject extraData = JSONFactoryUtil.createJSONObject();
+				JSONObject extraDataJSONObject =
+					JSONFactoryUtil.createJSONObject();
 
-				extraData.put("threadId", classPK);
+				extraDataJSONObject.put("threadId", classPK);
 
 				socialActivityLocalService.addActivity(
 					userId, groupId, MBMessage.class.getName(),
-					thread.getRootMessageId(),
-					SocialActivityConstants.TYPE_SUBSCRIBE, extraData.toString(), 0);
+					mbThread.getRootMessageId(),
+					SocialActivityConstants.TYPE_SUBSCRIBE,
+					extraDataJSONObject.toString(), 0);
 			}
 			else {
 				socialActivityLocalService.addActivity(
 					userId, groupId, className, classPK,
-					SocialActivityConstants.TYPE_SUBSCRIBE, StringPool.BLANK, 0);
+					SocialActivityConstants.TYPE_SUBSCRIBE, StringPool.BLANK,
+					0);
 			}
 
 			socialEquityLogLocalService.addEquityLogs(
@@ -161,7 +164,6 @@ public class SubscriptionLocalServiceImpl
 			subscription.getClassNameId(), subscription.getClassPK());
 
 		if (assetEntry != null) {
-
 			String className = PortalUtil.getClassName(
 				subscription.getClassNameId());
 

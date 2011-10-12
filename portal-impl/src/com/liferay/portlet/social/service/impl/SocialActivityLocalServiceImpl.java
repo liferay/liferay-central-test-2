@@ -102,10 +102,10 @@ public class SocialActivityLocalServiceImpl
 			return null;
 		}
 
-		if ((type == SocialActivityConstants.TYPE_VIEW) ||
+		if ((type == SocialActivityConstants.TYPE_ADD_VOTE) ||
 			(type == SocialActivityConstants.TYPE_SUBSCRIBE) ||
 			(type == SocialActivityConstants.TYPE_UNSUBSCRIBE) ||
-			(type == SocialActivityConstants.TYPE_ADD_VOTE)) {
+			(type == SocialActivityConstants.TYPE_VIEW)) {
 
 			return null;
 		}

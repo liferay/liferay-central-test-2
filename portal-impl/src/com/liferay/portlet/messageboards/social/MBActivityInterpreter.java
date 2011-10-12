@@ -83,19 +83,19 @@ public class MBActivityInterpreter extends BaseSocialActivityInterpreter {
 
 		String titlePattern = null;
 
-        if (activityType == MBActivityKeys.ADD_MESSAGE) {
-        	if (activity.getReceiverUserId() == 0) {
-		    	titlePattern = "activity-message-boards-add-message";
-		    }
-		    else {
-		    	titlePattern = "activity-message-boards-reply-message";
-		    }
+		if (activityType == MBActivityKeys.ADD_MESSAGE) {
+			if (activity.getReceiverUserId() == 0) {
+				titlePattern = "activity-message-boards-add-message";
+			}
+			else {
+				titlePattern = "activity-message-boards-reply-message";
+			}
 		}
-        else if (activityType == MBActivityKeys.REPLY_MESSAGE &&
-        	activity.getReceiverUserId() > 0) {
+		else if ((activityType == MBActivityKeys.REPLY_MESSAGE) &&
+				 (activity.getReceiverUserId() > 0)) {
 
-        	titlePattern = "activity-message-boards-reply-message";
-        }
+			titlePattern = "activity-message-boards-reply-message";
+		}
 
 		if (Validator.isNotNull(groupName)) {
 			titlePattern += "-in";

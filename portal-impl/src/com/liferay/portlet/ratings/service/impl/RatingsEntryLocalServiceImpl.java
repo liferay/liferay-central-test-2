@@ -237,15 +237,14 @@ public class RatingsEntryLocalServiceImpl
 		}
 
 		// Social
-		try {
-			AssetEntry assetEntry = assetEntryLocalService.getEntry(
-				className, classPK);
 
+		AssetEntry assetEntry = assetEntryLocalService.fetchEntry(
+			className, classPK);
+
+		if (assetEntry != null) {
 			socialActivityLocalService.addActivity(
 				userId, assetEntry.getGroupId(), className, classPK,
 				SocialActivityConstants.TYPE_ADD_VOTE, StringPool.BLANK, 0);
-		}
-		catch (Exception e) {
 		}
 
 		socialEquityLogLocalService.addEquityLogs(
