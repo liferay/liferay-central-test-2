@@ -48,6 +48,14 @@
 		</delete>
 
 		<if>
+			<equals arg1="${app.server.type}" arg2="glassfish" />
+			<then>
+				<delete dir="${app.server.instance.dir}/applications/liferay-portal" />
+				<delete dir="${app.server.instance.dir}/applications/tunnel-web" />
+			</then>
+		</if>
+
+		<if>
 			<equals arg1="${app.server.type}" arg2="tomcat" />
 			<then>
 				<delete failonerror="false">
@@ -58,14 +66,6 @@
 				</delete>
 
 				<ant dir="support-tomcat" target="clean" inheritAll="false" />
-			</then>
-		</if>
-
-		<if>
-			<equals arg1="${app.server.type}" arg2="glassfish" />
-			<then>
-				<delete dir="${app.server.glassfish.instance.dir}/applications/liferay-portal" failonerror="false"/>
-				<delete dir="${app.server.glassfish.instance.dir}/applications/tunnel-web" failonerror="false"/>
 			</then>
 		</if>
 
