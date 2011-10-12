@@ -101,22 +101,21 @@ public class AssetEntryServiceImpl extends AssetEntryServiceBaseImpl {
 		return assetEntryLocalService.getEntry(entryId);
 	}
 
-	public void incrementViewCounter(String className, long classPK)
+	public AssetEntry incrementViewCounter(String className, long classPK)
 		throws PortalException, SystemException {
 
 		User user = getGuestOrUser();
 
-		assetEntryLocalService.incrementViewCounter(
+		AssetEntry assetEntry = assetEntryLocalService.incrementViewCounter(
 			user.getUserId(), className, classPK, 1);
 
 		if (!user.isDefaultUser()) {
-			AssetEntry assetEntry = assetEntryLocalService.getEntry(
-				className, classPK);
-
 			socialActivityLocalService.addActivity(
 				user.getUserId(), assetEntry.getGroupId(), className, classPK,
 				SocialActivityConstants.TYPE_VIEW, StringPool.BLANK, 0);
 		}
+
+		return assetEntry;
 	}
 
 	public AssetEntryDisplay[] searchEntryDisplays(
