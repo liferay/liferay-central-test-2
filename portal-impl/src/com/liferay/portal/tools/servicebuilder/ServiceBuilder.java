@@ -1463,12 +1463,16 @@ public class ServiceBuilder {
 	}
 
 	public boolean isSoapMethod(JavaMethod method) {
-		String returnTypeGenericsName = getTypeGenericsName(
-			method.getReturns());
-		String returnValueName = method.getReturns().getValue();
+		Type returnType = method.getReturns();
+
+		String returnTypeGenericsName = getTypeGenericsName(returnType);
+		String returnValueName = returnType.getValue();
 
 		if (returnTypeGenericsName.contains(
 				"com.liferay.portal.kernel.repository.") ||
+			returnTypeGenericsName.contains(
+				"com.liferay.portal.kernel.search.") ||
+			returnTypeGenericsName.contains("com.liferay.portal.model.Theme") ||
 			returnTypeGenericsName.equals("java.util.List<java.lang.Object>") ||
 			returnValueName.equals("com.liferay.portal.model.Lock") ||
 			returnValueName.equals(
