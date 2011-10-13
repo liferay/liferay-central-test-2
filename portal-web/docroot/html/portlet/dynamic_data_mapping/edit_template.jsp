@@ -127,7 +127,7 @@ if (Validator.isNotNull(structureAvailableFields)) {
 </aui:form>
 
 <c:if test='<%= type.equals("detail") %>'>
-	<div class="portlet-msg-info <%=  ((template != null) && template.getMode().equals(DDMTemplateConstants.TEMPLATE_MODE_EDIT)) ? StringPool.BLANK : "aui-helper-hidden" %> " id="<portlet:namespace />modeEditMessage"><liferay-ui:message key="the-required-fields-will-not-be-displayed-when-the-form-is-rendered" /></div>
+	<div class="portlet-msg-info <%= ((template != null) && DDMTemplateConstants.TEMPLATE_MODE_EDIT.equals(template.getMode())) ? StringPool.BLANK : "aui-helper-hidden" %> " id="<portlet:namespace />modeEditMessage"><liferay-ui:message key="the-required-fields-will-not-be-displayed-when-the-form-is-rendered" /></div>
 
 	<%@ include file="/html/portlet/dynamic_data_mapping/form_builder.jspf" %>
 </c:if>
