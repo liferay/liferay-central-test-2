@@ -123,12 +123,15 @@ double version = ParamUtil.getDouble(request, "version");
 
 				if (pageUrl.equals("viewInContext")) {
 					AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(JournalArticle.class.getName());
+
 					AssetRenderer assetRenderer = assetRendererFactory.getAssetRenderer(article.getId());
 
 					String viewFullContentURLString = articleURL.toString();
+
 					viewFullContentURLString = HttpUtil.setParameter(viewFullContentURLString, "redirect", currentURL);
 
 					rowHREF = assetRenderer.getURLViewInContext(liferayPortletRequest, liferayPortletResponse, viewFullContentURLString);
+
 					rowHREF = HttpUtil.setParameter(rowHREF, "redirect", currentURL);
 
 					if (Validator.isNull(rowHREF)) {
