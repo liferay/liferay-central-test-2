@@ -17,10 +17,9 @@ package com.liferay.portlet.documentlibrary.store;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.FileUtil;
-import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.documentlibrary.DuplicateDirectoryException;
 import com.liferay.portlet.documentlibrary.DuplicateFileException;
 import com.liferay.portlet.documentlibrary.NoSuchDirectoryException;
@@ -45,9 +44,6 @@ import java.util.concurrent.ConcurrentHashMap;
 public class FileSystemStore extends BaseStore {
 
 	public FileSystemStore() {
-		_repositoryDirCache = new ConcurrentHashMap<RepositoryDirKey, File>();
-		_rootDir = new File(_ROOT_DIR);
-
 		if (!_rootDir.exists()) {
 			_rootDir.mkdirs();
 		}
@@ -460,7 +456,7 @@ public class FileSystemStore extends BaseStore {
 		RepositoryDirKey repositoryDirKey =
 			new RepositoryDirKey(companyId, repositoryId);
 
-		File repositoryDir = _repositoryDirCache.get(repositoryDirKey);
+		File repositoryDir = _repositoryDirs.get(repositoryDirKey);
 
 		if (repositoryDir == null) {
 			File companyDir = getCompanyDir(companyId);
@@ -472,17 +468,15 @@ public class FileSystemStore extends BaseStore {
 				repositoryDir.mkdirs();
 			}
 
-			_repositoryDirCache.put(repositoryDirKey, repositoryDir);
+			_repositoryDirs.put(repositoryDirKey, repositoryDir);
 		}
 
 		return repositoryDir;
 	}
 
-	private static final String _ROOT_DIR = PropsUtil.get(
-		PropsKeys.DL_STORE_FILE_SYSTEM_ROOT_DIR);
-
-	private Map<RepositoryDirKey, File> _repositoryDirCache;
-	private File _rootDir;
+	private Map<RepositoryDirKey, File> _repositoryDirs =
+		new ConcurrentHashMap<RepositoryDirKey, File>();
+	private File _rootDir = new File(PropsValues.DL_STORE_FILE_SYSTEM_ROOT_DIR);
 
 	private class RepositoryDirKey {
 
@@ -497,6 +491,7 @@ public class FileSystemStore extends BaseStore {
 
 			if ((_companyId == repositoryDirKey._companyId) &&
 				(_repositoryId == repositoryDirKey._repositoryId)) {
+
 				return true;
 			}
 			else {
