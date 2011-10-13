@@ -1,57 +1,56 @@
 <!--
-This is the DTD for defining social achievements and counters on models for Liferay Portal.
-
 <!DOCTYPE social PUBLIC
 	"-//Liferay//DTD Social 6.1.0//EN"
 	"http://www.liferay.com/dtd/liferay-social_6_1_0.dtd">
 -->
 
-<!ELEMENT social (activity*) >
+<!ELEMENT social (activity*)>
 
-<!ELEMENT activity (model-ref, activity-key, language-key?, log-activity?,
-handler-class?, contribution-value?, contribution-limit?,
+<!ELEMENT activity (model-name, activity-key, language-key?, log-activity?,
+processor-class?, contribution-value?, contribution-limit?,
 contribution-limit-period?, participation-value?, participation-limit?,
-particiaption-limit-period?, counter*, achievement*) >
+particiaption-limit-period?, counter*, achievement*)>
 
-<!--
-The model-ref element is the name of the model.
--->
-<!ELEMENT model-ref (#PCDATA) >
+<!ELEMENT model-name (#PCDATA)>
 
-<!ELEMENT activity-key (#PCDATA) >
+<!ELEMENT activity-type (#PCDATA)>
 
-<!ELEMENT language-key (#PCDATA) >
+<!ELEMENT language-key (#PCDATA)>
 
-<!ELEMENT log-activity (#PCDATA) >
+<!ELEMENT log-activity (#PCDATA)>
 
-<!ELEMENT handler-class (#PCDATA) >
+<!ELEMENT processor-class (#PCDATA)>
 
-<!ELEMENT contribution-value (#PCDATA) >
+<!ELEMENT contribution-value (#PCDATA)>
 
-<!ELEMENT contribution-limit (#PCDATA) >
+<!ELEMENT contribution-limit (#PCDATA)>
 
-<!ATTLIST contribution-limit period (day|lifetime|period) #REQUIRED >
+<!ATTLIST contribution-limit
+	period (day|lifetime|period) #REQUIRED
+>
 
-<!ELEMENT participation-value (#PCDATA) >
+<!ELEMENT participation-value (#PCDATA)>
 
-<!ELEMENT participation-limit (#PCDATA) >
+<!ELEMENT participation-limit (#PCDATA)>
 
-<!ATTLIST participation-limit period (day|lifetime|period) #REQUIRED >
+<!ATTLIST participation-limit
+	period (day|lifetime|period) #REQUIRED
+>
 
-<!ELEMENT counter (name, owner, increment?) >
+<!ELEMENT counter (name, owner-type, increment?)>
 
-<!ELEMENT name (#PCDATA) >
+<!ELEMENT name (#PCDATA)>
 
-<!ELEMENT owner (#PCDATA) >
+<!ELEMENT owner (#PCDATA)>
 
-<!ELEMENT increment (#PCDATA) >
+<!ELEMENT increment (#PCDATA)>
 
-<!ELEMENT achievement (name, achievement-class, icon, property*) >
+<!ELEMENT achievement (name, achievement-class, icon, property*)>
 
-<!ELEMENT achievement-class (#PCDATA) >
+<!ELEMENT achievement-class (#PCDATA)>
 
-<!ELEMENT icon (#PCDATA) >
+<!ELEMENT icon (#PCDATA)>
 
-<!ELEMENT property (name, value) >
+<!ELEMENT property (name, value)>
 
-<!ELEMENT value (#PCDATA) >
+<!ELEMENT value (#PCDATA)>

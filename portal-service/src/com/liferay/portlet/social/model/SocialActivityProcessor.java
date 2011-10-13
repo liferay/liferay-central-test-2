@@ -17,7 +17,7 @@ package com.liferay.portlet.social.model;
 /**
  * @author Zsolt Berentey
  */
-public interface SocialActivityHandler {
+public interface SocialActivityProcessor {
 
 	public void processActivity(SocialActivity activity);
 

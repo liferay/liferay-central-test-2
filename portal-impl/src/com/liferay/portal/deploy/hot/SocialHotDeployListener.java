@@ -19,20 +19,16 @@ import com.liferay.portal.kernel.deploy.hot.HotDeployEvent;
 import com.liferay.portal.kernel.deploy.hot.HotDeployException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
-import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.xml.Document;
-import com.liferay.portal.kernel.xml.SAXReaderUtil;
+import com.liferay.portal.kernel.util.Tuple;
 import com.liferay.portlet.social.model.SocialAchievement;
 import com.liferay.portlet.social.model.SocialActivityCounterDefinition;
 import com.liferay.portlet.social.model.SocialActivityDefinition;
-import com.liferay.portlet.social.util.SocialActivitiesUtil;
+import com.liferay.portlet.social.util.SocialConfigurationUtil;
 
-import java.io.InputStream;
-
+import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
@@ -42,28 +38,40 @@ import javax.servlet.ServletContext;
  */
 public class SocialHotDeployListener extends BaseHotDeployListener {
 
-	public void invokeDeploy(HotDeployEvent event) throws HotDeployException {
+	public void invokeDeploy(HotDeployEvent hotDeployEvent)
+		throws HotDeployException {
+
 		try {
-			doInvokeDeploy(event);
+			doInvokeDeploy(hotDeployEvent);
 		}
 		catch (Throwable t) {
 			throwHotDeployException(
-				event, "Error registering social plugin for ", t);
+				hotDeployEvent, "Error registering social for ", t);
 		}
 	}
 
-	public void invokeUndeploy(HotDeployEvent event) throws HotDeployException {
+	public void invokeUndeploy(HotDeployEvent hotDeployEvent)
+		throws HotDeployException {
+
 		try {
-			doInvokeUndeploy(event);
+			doInvokeUndeploy(hotDeployEvent);
 		}
 		catch (Throwable t) {
 			throwHotDeployException(
-				event, "Error unregistering social plugin for ", t);
+				hotDeployEvent, "Error unregistering social for ", t);
 		}
 	}
 
-	protected void doInvokeDeploy(HotDeployEvent event) throws Exception {
-		ServletContext servletContext = event.getServletContext();
+	protected void logRegistration(String servletContextName) {
+		if (_log.isInfoEnabled()) {
+			_log.info("Registering social for " + servletContextName);
+		}
+	}
+
+	protected void doInvokeDeploy(HotDeployEvent hotDeployEvent)
+		throws Exception {
+
+		ServletContext servletContext = hotDeployEvent.getServletContext();
 
 		String servletContextName = servletContext.getServletContextName();
 
@@ -71,45 +79,30 @@ public class SocialHotDeployListener extends BaseHotDeployListener {
 			_log.debug("Invoking deploy for " + servletContextName);
 		}
 
-		String xml = HttpUtil.URLtoString(servletContext.getResource(
-			_LIFERAY_SOCIAL_XML));
+		String[] xmls = new String[] {
+			HttpUtil.URLtoString(
+				servletContext.getResource("/WEB-INF/liferay-social.xml"))
+		};
 
-		if (xml == null) {
+		if (xmls[0] == null) {
 			return;
 		}
 
-		if (_log.isInfoEnabled()) {
-			_log.info("Registering social plugins for " + servletContextName);
-		}
+		logRegistration(servletContextName);
 
-		InputStream inputStream = servletContext.getResourceAsStream(
-			_LIFERAY_SOCIAL_XML);
+		List<Object> objects = SocialConfigurationUtil.read(
+			hotDeployEvent.getContextClassLoader(), xmls);
 
-		if (inputStream == null) {
-			if (_log.isWarnEnabled()) {
-				_log.warn("Cannot load " + _LIFERAY_SOCIAL_XML);
-			}
-
-			return;
-		}
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Loading " + _LIFERAY_SOCIAL_XML);
-		}
-
-		Document document = SAXReaderUtil.read(inputStream, true);
-
-		SocialActivitiesUtil.readXml(document, event, _vars);
+		_vars.put(servletContextName, objects);
 
 		if (_log.isInfoEnabled()) {
 			_log.info(
-				"Social plugins for " + servletContextName +
-					" are available for use");
+				"Social for " + servletContextName + " is available for use");
 		}
 	}
 
-	protected void doInvokeUndeploy(HotDeployEvent event) throws Exception {
-		ServletContext servletContext = event.getServletContext();
+	protected void doInvokeUndeploy(HotDeployEvent hotDeployEvent) throws Exception {
+		ServletContext servletContext = hotDeployEvent.getServletContext();
 
 		String servletContextName = servletContext.getServletContextName();
 
@@ -117,49 +110,54 @@ public class SocialHotDeployListener extends BaseHotDeployListener {
 			_log.debug("Invoking undeploy for " + servletContextName);
 		}
 
-		for (Iterator<String> it = _vars.keySet().iterator(); it.hasNext(); ) {
-			String path = it.next();
+		List<Object> objects = (List<Object>)_vars.get(servletContextName);
 
-			if (path.startsWith(servletContextName)) {
-				String[] pathElements = StringUtil.split(path, "/");
+		if (objects == null) {
+			return;
+		}
 
+		for (Object object : objects) {
+			if (object instanceof SocialActivityDefinition) {
 				SocialActivityDefinition activityDefinition =
-					SocialActivitiesUtil.getSocialActivityDefinition(
-						pathElements[1],
-						GetterUtil.getInteger(pathElements[2]));
+					(SocialActivityDefinition)object;
 
-				if (activityDefinition != null) {
-					Object obj = _vars.get(path);
+				SocialConfigurationUtil.removeActivityDefinition(
+					activityDefinition);
 
-					if (obj instanceof SocialActivityCounterDefinition) {
-						activityDefinition.getCounters().remove(
-							(SocialActivityCounterDefinition)obj);
-					} else if (obj instanceof SocialAchievement) {
-						activityDefinition.getAchievements().remove(
-							(SocialAchievement)obj);
-					} else if (obj instanceof SocialActivityDefinition) {
-						SocialActivitiesUtil.removeSocialActivityDefinition(
-							activityDefinition);
-					}
-				}
+				continue;
+			}
 
-				it.remove();
+			Tuple tuple = (Tuple)object;
+
+			SocialActivityDefinition activityDefinition =
+				(SocialActivityDefinition)tuple.getObject(0);
+
+			Object tupleObject1 = tuple.getObject(1);
+
+			if (tupleObject1 instanceof SocialAchievement) {
+				List<SocialAchievement> achievements =
+					activityDefinition.getAchievements();
+
+				achievements.remove(tupleObject1);
+			}
+			else if (tupleObject1 instanceof SocialActivityCounterDefinition) {
+				Collection<SocialActivityCounterDefinition>
+					activityCounterDefinitions =
+						activityDefinition.getActivityCounterDefinitions();
+
+				activityCounterDefinitions.remove(tupleObject1);
 			}
 		}
 
 		if (_log.isInfoEnabled()) {
 			_log.info(
-				"Social plugins for " + servletContextName +
-					" was unregistered");
+				"Social for " + servletContextName + " was unregistered");
 		}
 	}
 
-	private static String _LIFERAY_SOCIAL_XML = "/WEB-INF/liferay-social.xml";
-
 	private static Log _log = LogFactoryUtil.getLog(
-			SocialHotDeployListener.class);
+		SocialHotDeployListener.class);
 
-	private static Map<String, Object> _vars =
-		new HashMap<String, Object>();
+	private static Map<String, Object> _vars = new HashMap<String, Object>();
 
 }

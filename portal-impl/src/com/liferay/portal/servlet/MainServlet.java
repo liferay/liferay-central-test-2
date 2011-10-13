@@ -94,7 +94,7 @@ import com.liferay.portlet.PortletFilterFactory;
 import com.liferay.portlet.PortletInstanceFactoryUtil;
 import com.liferay.portlet.PortletURLListenerFactory;
 import com.liferay.portlet.social.messaging.CheckEquityLogMessageListener;
-import com.liferay.portlet.social.util.SocialActivitiesUtil;
+import com.liferay.portlet.social.util.SocialConfigurationUtil;
 import com.liferay.util.ContentUtil;
 import com.liferay.util.servlet.DynamicServletRequest;
 import com.liferay.util.servlet.EncryptedServletRequest;
@@ -258,6 +258,17 @@ public class MainServlet extends ActionServlet {
 		}
 
 		if (_log.isDebugEnabled()) {
+			_log.debug("Initialize social");
+		}
+
+		try {
+			initSocial(pluginPackage);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+
+		if (_log.isDebugEnabled()) {
 			_log.debug("Initialize themes");
 		}
 
@@ -345,25 +356,6 @@ public class MainServlet extends ActionServlet {
 		}
 		catch (Exception e) {
 			_log.error(e, e);
-		}
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Initialize message resources");
-		}
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Initialize social activities");
-		}
-
-		try {
-			initSocialActivities(pluginPackage);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Initialize layout templates");
 		}
 
 		if (_log.isDebugEnabled()) {
@@ -991,8 +983,8 @@ public class MainServlet extends ActionServlet {
 		ServletContextPool.put(contextPath, servletContext);
 	}
 
-	protected void initSocialActivities(PluginPackage pluginPackage)
-		throws Exception {
+	protected void initSocial(PluginPackage pluginPackage) throws Exception {
+		ClassLoader classLoader = PortalClassLoaderUtil.getClassLoader();
 
 		ServletContext servletContext = getServletContext();
 
@@ -1003,7 +995,7 @@ public class MainServlet extends ActionServlet {
 				servletContext.getResource("/WEB-INF/liferay-social-ext.xml"))
 		};
 
-		SocialActivitiesUtil.readXmls(xmls);
+		SocialConfigurationUtil.read(classLoader, xmls);
 	}
 
 	protected void initSocialEquityLogScheduler() throws Exception {

@@ -173,21 +173,21 @@ public class SocialActivityCounterWrapper implements SocialActivityCounter {
 	}
 
 	/**
-	* Returns the type of this social activity counter.
+	* Returns the owner type of this social activity counter.
 	*
-	* @return the type of this social activity counter
+	* @return the owner type of this social activity counter
 	*/
-	public int getType() {
-		return _socialActivityCounter.getType();
+	public int getOwnerType() {
+		return _socialActivityCounter.getOwnerType();
 	}
 
 	/**
-	* Sets the type of this social activity counter.
+	* Sets the owner type of this social activity counter.
 	*
-	* @param type the type of this social activity counter
+	* @param ownerType the owner type of this social activity counter
 	*/
-	public void setType(int type) {
-		_socialActivityCounter.setType(type);
+	public void setOwnerType(int ownerType) {
+		_socialActivityCounter.setOwnerType(ownerType);
 	}
 
 	/**

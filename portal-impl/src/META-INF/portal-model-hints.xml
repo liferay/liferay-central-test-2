@@ -2344,7 +2344,7 @@
 		<field name="classNameId" type="long" />
 		<field name="classPK" type="long" />
 		<field name="name" type="String" />
-		<field name="type" type="int" />
+		<field name="ownerType" type="int" />
 		<field name="currentValue" type="int" />
 		<field name="totalValue" type="int" />
 		<field name="graceValue" type="int" />

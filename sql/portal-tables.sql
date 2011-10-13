@@ -1883,7 +1883,7 @@ create table SocialActivityCounter (
 	classNameId LONG,
 	classPK LONG,
 	name VARCHAR(75) null,
-	type_ INTEGER,
+	ownerType INTEGER,
 	currentValue INTEGER,
 	totalValue INTEGER,
 	graceValue INTEGER,

@@ -3113,9 +3113,7 @@
 			<basic name="classNameId" />
 			<basic name="classPK" />
 			<basic name="name" />
-			<basic name="type">
-				<column name="TYPE_" />
-			</basic>
+			<basic name="ownerType" />
 			<basic name="currentValue" />
 			<basic name="totalValue" />
 			<basic name="graceValue" />

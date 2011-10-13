@@ -15,6 +15,7 @@
 package com.liferay.portlet.social.model;
 
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
@@ -23,39 +24,35 @@ import java.io.Serializable;
  */
 public class SocialActivityCounterDefinition implements Serializable {
 
-	public SocialActivityCounterDefinition() {
-	}
-
-	public SocialActivityCounterDefinition(String name, int ownerType) {
-		_name = name;
-		_ownerType = ownerType;
-	}
-
+	@Override
 	public SocialActivityCounterDefinition clone() {
-		SocialActivityCounterDefinition counter =
+		SocialActivityCounterDefinition activityCounterDefinition =
 			new SocialActivityCounterDefinition();
 
-		counter.setName(_name);
-		counter.setOwnerType(_ownerType);
-		counter.setIncrement(_increment);
-		counter.setLimit(_limit);
-		counter.setLimitType(_limitType);
+		activityCounterDefinition.setIncrement(_increment);
+		activityCounterDefinition.setLimitValue(_limitValue);
+		activityCounterDefinition.setLimitPeriod(_limitType);
+		activityCounterDefinition.setName(_name);
+		activityCounterDefinition.setOwnerType(_ownerType);
 
-		return counter;
+		return activityCounterDefinition;
 	}
 
-	public boolean equals(SocialActivityCounterDefinition counter) {
-		if (_name.equals(counter.getName())) {
-			if (_ownerType == counter.getOwnerType()) {
-				if (_increment == counter.getIncrement()) {
-					if (_limit == counter.getLimit()) {
-						if (_limitType == counter.getLimitType()) {
-							return true;
-						}
-					}
-				}
-			}
- 		}
+	public boolean equals(
+		SocialActivityCounterDefinition activityCounterDefinition) {
+
+		if (Validator.equals(
+				_increment, activityCounterDefinition._increment) &&
+			Validator.equals(
+				_limitValue, activityCounterDefinition._limitValue) &&
+			Validator.equals(
+				_limitType, activityCounterDefinition._limitType) &&
+			Validator.equals(_name, activityCounterDefinition._name) &&
+			Validator.equals(
+				_ownerType, activityCounterDefinition._ownerType)) {
+
+			return true;
+		}
 
 		return false;
 	}
@@ -65,15 +62,16 @@ public class SocialActivityCounterDefinition implements Serializable {
 	}
 
 	public String getKey() {
-		return _name + StringPool.SLASH + _ownerType;
+		return _name.concat(StringPool.SLASH).concat(
+			String.valueOf(_ownerType));
 	}
 
-	public int getLimit() {
-		return _limit;
-	}
-
-	public int getLimitType() {
+	public int getLimitPeriod() {
 		return _limitType;
+	}
+
+	public int getLimitValue() {
+		return _limitValue;
 	}
 
 	public String getName() {
@@ -88,16 +86,24 @@ public class SocialActivityCounterDefinition implements Serializable {
 		_increment = increment;
 	}
 
-	public void setLimit(int limit) {
-		_limit = limit;
+	public void setLimitPeriod(int limitPeriod) {
+		_limitType = limitPeriod;
 	}
 
-	public void setLimitType(int limitType) {
-		if (limitType < 1 || limitType > 3) {
-			limitType = SocialActivityConstants.LIMIT_PER_PERIOD;
+	public void setLimitPeriod(String limitPeriod) {
+		if (limitPeriod.equalsIgnoreCase("day")) {
+			setLimitPeriod(_LIMIT_PERIOD_DAY);
 		}
+		else if (limitPeriod.equalsIgnoreCase("lifetime")) {
+			setLimitPeriod(_LIMIT_PERIOD_LIFETIME);
+		}
+		else {
+			setLimitPeriod(_LIMIT_PERIOD_PERIOD);
+		}
+	}
 
-		_limitType = limitType;
+	public void setLimitValue(int limitValue) {
+		_limitValue = limitValue;
 	}
 
 	public void setName(String name) {
@@ -109,19 +115,27 @@ public class SocialActivityCounterDefinition implements Serializable {
 	}
 
 	public void setOwnerType(String ownerType) {
-		if ("actor".equals(ownerType)) {
+		if (ownerType.equalsIgnoreCase("actor")) {
 			setOwnerType(SocialActivityCounterConstants.TYPE_ACTOR);
-		} else if ("asset".equals(ownerType)) {
+		}
+		else if (ownerType.equalsIgnoreCase("asset")) {
 			setOwnerType(SocialActivityCounterConstants.TYPE_ASSET);
-		} else if ("creator".equals(ownerType)) {
+		}
+		else if (ownerType.equalsIgnoreCase("creator")) {
 			setOwnerType(SocialActivityCounterConstants.TYPE_CREATOR);
 		}
 	}
 
-	private int _limit;
+	private static final int _LIMIT_PERIOD_DAY = 1;
+
+	private static final int _LIMIT_PERIOD_LIFETIME = 2;
+
+	private static final int _LIMIT_PERIOD_PERIOD = 3;
+
+	private int _increment;
 	private int _limitType;
+	private int _limitValue;
 	private String _name;
 	private int _ownerType;
-	private int _increment;
 
 }

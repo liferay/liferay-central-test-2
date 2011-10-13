@@ -27,31 +27,35 @@ import java.util.Map;
  */
 public class SocialActivityDefinition implements Serializable {
 
-	public void addCounter(SocialActivityCounterDefinition counter) {
-		_counters.put(counter.getName(), counter);
+	public void addCounter(
+		SocialActivityCounterDefinition activityCounterDefinition) {
+
+		_activityCounterDefinitions.put(
+			activityCounterDefinition.getName(), activityCounterDefinition);
 	}
 
+	@Override
 	public SocialActivityDefinition clone() {
-
 		SocialActivityDefinition activityDefinition =
 			new SocialActivityDefinition();
 
-		activityDefinition.setActivityHandler(_activityHandler);
-		activityDefinition.setActivityKey(_activityKey);
+		for (SocialActivityCounterDefinition activityCounterDefinition :
+				_activityCounterDefinitions.values()) {
+
+			activityDefinition.addCounter(activityCounterDefinition.clone());
+		}
+
+		List<SocialAchievement> achievements =
+			activityDefinition.getAchievements();
+
+		achievements.addAll(_achievements);
+
+		activityDefinition.setActivityProcessor(_activityProcessor);
+		activityDefinition.setActivityType(_activityType);
+		activityDefinition.setCounterEnabled(_counterEnabled);
 		activityDefinition.setLanguageKey(_languageKey);
 		activityDefinition.setLogActivity(_logActivity);
 		activityDefinition.setModelName(_modelName);
-		activityDefinition.setStatsEnabled(_statsEnabled);
-
-		// Counters
-
-		for (SocialActivityCounterDefinition counter : _counters.values()) {
-			activityDefinition.addCounter(counter.clone());
-		}
-
-		// Achievements
-
-		activityDefinition.getAchievements().addAll(_achievements);
 
 		return activityDefinition;
 	}
@@ -60,20 +64,24 @@ public class SocialActivityDefinition implements Serializable {
 		return _achievements;
 	}
 
-	public SocialActivityHandler getActivityHandler() {
-		return _activityHandler;
+	public SocialActivityCounterDefinition getActivityCounterDefinition(
+		String name) {
+
+		return _activityCounterDefinitions.get(name);
 	}
 
-	public int getActivityKey() {
-		return _activityKey;
+	public Collection<SocialActivityCounterDefinition>
+		getActivityCounterDefinitions() {
+
+		return _activityCounterDefinitions.values();
 	}
 
-	public SocialActivityCounterDefinition getCounter(String name) {
-		return _counters.get(name);
+	public SocialActivityProcessor getActivityProcessor() {
+		return _activityProcessor;
 	}
 
-	public Collection<SocialActivityCounterDefinition> getCounters() {
-		return _counters.values();
+	public int getActivityType() {
+		return _activityType;
 	}
 
 	public String getLanguageKey() {
@@ -84,27 +92,38 @@ public class SocialActivityDefinition implements Serializable {
 		return _modelName;
 	}
 
+	public boolean isCounterEnabled() {
+		return _counterEnabled;
+	}
+
 	public boolean isLogActivity() {
 		return _logActivity;
 	}
 
-	public boolean isStatsEnabled() {
-		return _statsEnabled;
+	public void setActivityProcessor(
+		SocialActivityProcessor activityProcessor) {
+
+		_activityProcessor = activityProcessor;
 	}
 
-	public void setActivityHandler(SocialActivityHandler activityHandler) {
-		_activityHandler = activityHandler;
+	public void setActivityType(int activityKey) {
+		_activityType = activityKey;
 	}
 
-	public void setActivityKey(int activityKey) {
-		_activityKey = activityKey;
+	public void setCounterEnabled(boolean counterEnabled) {
+		_counterEnabled = counterEnabled;
 	}
 
-	public void setCounters(List<SocialActivityCounterDefinition> counters) {
-		_counters.clear();
+	public void setCounters(
+		List<SocialActivityCounterDefinition> activityCounterDefinitions) {
 
-		for (SocialActivityCounterDefinition counter: counters) {
-			_counters.put(counter.getName(), counter);
+		_activityCounterDefinitions.clear();
+
+		for (SocialActivityCounterDefinition activityCounterDefinition :
+				activityCounterDefinitions) {
+
+			_activityCounterDefinitions.put(
+				activityCounterDefinition.getName(), activityCounterDefinition);
 		}
 	}
 
@@ -120,19 +139,16 @@ public class SocialActivityDefinition implements Serializable {
 		_modelName = modelName;
 	}
 
-	public void setStatsEnabled(boolean statsEnabled) {
-		_statsEnabled = statsEnabled;
-	}
-
 	private List<SocialAchievement> _achievements =
 		new ArrayList<SocialAchievement>();
-	private SocialActivityHandler _activityHandler;
-	private int _activityKey;
-	private Map<String, SocialActivityCounterDefinition> _counters =
-		new HashMap<String, SocialActivityCounterDefinition>();
+	private Map<String, SocialActivityCounterDefinition>
+		_activityCounterDefinitions =
+			new HashMap<String, SocialActivityCounterDefinition>();
+	private SocialActivityProcessor _activityProcessor;
+	private int _activityType;
+	private boolean _counterEnabled = true;
 	private String _languageKey;
 	private boolean _logActivity;
 	private String _modelName;
-	private boolean _statsEnabled = true;
 
 }

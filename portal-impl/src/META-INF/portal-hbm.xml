@@ -2392,7 +2392,7 @@
 		<property name="classNameId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="classPK" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="type" type="com.liferay.portal.dao.orm.hibernate.IntegerType" column="type_" />
+		<property name="ownerType" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property name="currentValue" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property name="totalValue" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property name="graceValue" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
