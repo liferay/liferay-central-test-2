@@ -76,6 +76,13 @@ if (folder != null) {
 		rowURL.setParameter("struts_action", "/document_library/select_folder");
 		rowURL.setParameter("folderId", String.valueOf(curFolder.getFolderId()));
 
+		// Name
+
+		StringBundler sb = new StringBundler(7);
+
+		sb.append("<img align=\"left\" border=\"0\" src=\"");
+		sb.append(themeDisplay.getPathThemeImages());
+
 		List<Long> subfolderIds = DLAppServiceUtil.getSubfolderIds(repositoryId, curFolder.getFolderId(), false);
 
 		int foldersCount = subfolderIds.size();
@@ -84,13 +91,6 @@ if (folder != null) {
 		subfolderIds.add(curFolder.getFolderId());
 
 		int fileEntriesCount = DLAppServiceUtil.getFoldersFileEntriesCount(repositoryId, subfolderIds, WorkflowConstants.STATUS_APPROVED);
-
-		// Name
-
-		StringBundler sb = new StringBundler(7);
-
-		sb.append("<img align=\"left\" border=\"0\" src=\"");
-		sb.append(themeDisplay.getPathThemeImages());
 
 		if ((foldersCount + fileEntriesCount) > 0) {
 			sb.append("/common/folder_full_document.png\">");
