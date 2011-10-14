@@ -234,7 +234,7 @@ public interface SocialActivityLimitLocalService
 
 	public com.liferay.portlet.social.model.SocialActivityLimit addActivityLimit(
 		long userId, long groupId, long classNameId, long classPK,
-		int activityType, java.lang.String counterName, int limitPeriod)
+		int activityType, java.lang.String activityCounterName, int limitPeriod)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 }
