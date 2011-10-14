@@ -62,55 +62,22 @@ public class SetupWizardAction extends Action {
 
 		String cmd = ParamUtil.getString(request, Constants.CMD);
 
-		if (Validator.isNull(cmd)) {
-			return mapping.findForward("portal.setup_wizard");
-		}
-
 		try {
-			if (cmd.equals(Constants.TRANSLATE)) {
-				SetupWizardUtil.processPortalLanguage(request, response);
+			if (Validator.isNull(cmd)) {
+				return mapping.findForward("portal.setup_wizard");
+			}
+			else if (cmd.equals(Constants.TRANSLATE)) {
+				SetupWizardUtil.updateLanguage(request, response);
 
 				return mapping.findForward("portal.setup_wizard");
 			}
 			else if (cmd.equals(Constants.TEST)) {
-				JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
-
-				try {
-					SetupWizardUtil.testDatabase(request) ;
-
-					jsonObject.put("success", Boolean.TRUE);
-					jsonObject.put(
-						"message",
-						LanguageUtil.get(
-							themeDisplay.getLocale(),
-							"database-connection-has-been-established-" +
-								"sucessfully"));
-				}
-				catch(ClassNotFoundException cnfe) {
-					jsonObject.put(
-						"message", LanguageUtil.format(
-							themeDisplay.getLocale(),
-							"database-driver-x-is-not-present",
-							cnfe.getLocalizedMessage()));
-				}
-				catch(SQLException sqle) {
-					jsonObject.put(
-						"message", LanguageUtil.get(
-							themeDisplay.getLocale(),
-							"database-connection-has-not-been-established"));
-				}
-
-				response.setContentType(ContentTypes.TEXT_JAVASCRIPT);
-				response.setHeader(
-					HttpHeaders.CACHE_CONTROL,
-					HttpHeaders.CACHE_CONTROL_NO_CACHE_VALUE);
-
-				ServletResponseUtil.write(response, jsonObject.toString());
+				testDatabase(request, response);
 
 				return null;
 			}
 			else if (cmd.equals(Constants.UPDATE)) {
-				SetupWizardUtil.processSetup(request, response);
+				SetupWizardUtil.updateSetup(request, response);
 			}
 
 			response.sendRedirect(
@@ -130,6 +97,53 @@ public class SetupWizardAction extends Action {
 				return null;
 			}
 		}
+	}
+
+	protected void putMessage(
+		HttpServletRequest request, JSONObject jsonObject, String key,
+		Object... arguments) {
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		String message = LanguageUtil.format(
+			themeDisplay.getLocale(), key, arguments);
+
+		jsonObject.put("message", message);
+	}
+
+	protected void testDatabase(
+			HttpServletRequest request, HttpServletResponse response)
+		throws Exception {
+
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
+
+		try {
+			SetupWizardUtil.testDatabase(request);
+
+			jsonObject.put("success", true);
+
+			putMessage(
+				request, jsonObject,
+				"database-connection-was-established-sucessfully");
+		}
+		catch (ClassNotFoundException cnfe) {
+			putMessage(
+				request, jsonObject, "database-driver-x-is-not-present",
+				cnfe.getLocalizedMessage());
+		}
+		catch (SQLException sqle) {
+			putMessage(
+				request, jsonObject,
+				"database-connection-could-not-be-established");
+		}
+
+		response.setContentType(ContentTypes.TEXT_JAVASCRIPT);
+		response.setHeader(
+			HttpHeaders.CACHE_CONTROL,
+			HttpHeaders.CACHE_CONTROL_NO_CACHE_VALUE);
+
+		ServletResponseUtil.write(response, jsonObject.toString());
 	}
 
 }

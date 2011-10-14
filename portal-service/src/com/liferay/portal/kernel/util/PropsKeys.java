@@ -347,6 +347,10 @@ public interface PropsKeys {
 
 	public static final String COMPANY_DEFAULT_HOME_URL = "company.default.home.url";
 
+	public static final String COMPANY_DEFAULT_LOCALE = "company.default.locale";
+
+	public static final String COMPANY_DEFAULT_TIME_ZONE = "company.default.time.zone";
+
 	public static final String COMPANY_DEFAULT_WEB_ID = "company.default.web.id";
 
 	public static final String COMPANY_ENCRYPTION_ALGORITHM = "company.encryption.algorithm";
@@ -442,8 +446,6 @@ public interface PropsKeys {
 	public static final String DEFAULT_LANDING_PAGE_PATH = "default.landing.page.path";
 
 	public static final String DEFAULT_LAYOUT_TEMPLATE_ID = "default.layout.template.id";
-
-	public static final String DEFAULT_LOCALE = "default.locale";
 
 	public static final String DEFAULT_LIFERAY_HOME = "default.liferay.home";
 

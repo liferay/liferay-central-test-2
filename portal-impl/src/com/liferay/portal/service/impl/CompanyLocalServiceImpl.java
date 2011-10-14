@@ -75,6 +75,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.TimeZone;
 
 import javax.portlet.PortletException;
 import javax.portlet.PortletPreferences;
@@ -307,14 +308,25 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			defaultUser.setScreenName(String.valueOf(defaultUser.getUserId()));
 			defaultUser.setEmailAddress("default@" + company.getMx());
 
-			if (Validator.isNotNull(PropsValues.DEFAULT_LOCALE)) {
-				defaultUser.setLanguageId(PropsValues.DEFAULT_LOCALE);
+			if (Validator.isNotNull(PropsValues.COMPANY_DEFAULT_LOCALE)) {
+				defaultUser.setLanguageId(PropsValues.COMPANY_DEFAULT_LOCALE);
 			}
 			else {
-				defaultUser.setLanguageId(LocaleUtil.getDefault().toString());
+				Locale locale = LocaleUtil.getDefault();
+
+				defaultUser.setLanguageId(locale.toString());
 			}
 
-			defaultUser.setTimeZoneId(TimeZoneUtil.getDefault().getID());
+			if (Validator.isNotNull(PropsValues.COMPANY_DEFAULT_TIME_ZONE)) {
+				defaultUser.setTimeZoneId(
+					PropsValues.COMPANY_DEFAULT_TIME_ZONE);
+			}
+			else {
+				TimeZone timeZone = TimeZoneUtil.getDefault();
+
+				defaultUser.setTimeZoneId(timeZone.getID());
+			}
+
 			defaultUser.setGreeting(
 				LanguageUtil.format(
 					defaultUser.getLocale(), "welcome-x", StringPool.BLANK,

@@ -277,6 +277,10 @@ public class PropsValues {
 
 	public static final String COMPANY_DEFAULT_HOME_URL = PropsUtil.get(PropsKeys.COMPANY_DEFAULT_HOME_URL);
 
+	public static String COMPANY_DEFAULT_LOCALE = PropsUtil.get(PropsKeys.COMPANY_DEFAULT_LOCALE);
+
+	public static String COMPANY_DEFAULT_TIME_ZONE = PropsUtil.get(PropsKeys.COMPANY_DEFAULT_TIME_ZONE);
+
 	public static String COMPANY_DEFAULT_WEB_ID = PropsUtil.get(PropsKeys.COMPANY_DEFAULT_WEB_ID);
 
 	public static final boolean COMPANY_LOGIN_PREPOPULATE_DOMAIN = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.COMPANY_LOGIN_PREPOPULATE_DOMAIN));
@@ -364,8 +368,6 @@ public class PropsValues {
 	public static String DEFAULT_LANDING_PAGE_PATH = PropsUtil.get(PropsKeys.DEFAULT_LANDING_PAGE_PATH);
 
 	public static final String DEFAULT_LAYOUT_TEMPLATE_ID = PropsUtil.get(PropsKeys.DEFAULT_LAYOUT_TEMPLATE_ID);
-
-	public static String DEFAULT_LOCALE = PropsUtil.get(PropsKeys.DEFAULT_LOCALE);
 
 	public static final String DEFAULT_LOGOUT_PAGE_PATH = PropsUtil.get(PropsKeys.DEFAULT_LOGOUT_PAGE_PATH);
 

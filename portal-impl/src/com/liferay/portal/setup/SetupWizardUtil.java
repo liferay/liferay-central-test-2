@@ -52,7 +52,6 @@ import com.liferay.portal.util.WebKeys;
 import java.io.IOException;
 
 import java.sql.Connection;
-import java.sql.SQLException;
 
 import java.util.List;
 import java.util.Locale;
@@ -96,37 +95,55 @@ public class SetupWizardUtil {
 		return true;
 	}
 
-	public static void processPortalLanguage(
+	public static void testDatabase(HttpServletRequest request)
+		throws Exception {
+
+		String driverClassName = _getParameter(
+			request, PropsKeys.JDBC_DEFAULT_DRIVER_CLASS_NAME,
+			PropsValues.JDBC_DEFAULT_DRIVER_CLASS_NAME);
+		String url = _getParameter(
+			request, PropsKeys.JDBC_DEFAULT_URL, null);
+		String userName = _getParameter(
+			request, PropsKeys.JDBC_DEFAULT_USERNAME, null);
+		String password = _getParameter(
+			request, PropsKeys.JDBC_DEFAULT_PASSWORD, null);
+
+		_testConnection(driverClassName, url, userName, password);
+	}
+
+	public static void updateLanguage(
 		HttpServletRequest request, HttpServletResponse response) {
 
 		String languageId = _getParameter(
-			request, PropsKeys.DEFAULT_LOCALE, PropsValues.DEFAULT_LOCALE);
+			request, PropsKeys.COMPANY_DEFAULT_LOCALE,
+			PropsValues.COMPANY_DEFAULT_LOCALE);
 
 		Locale locale = LocaleUtil.fromLanguageId(languageId);
 
 		List<Locale> availableLocales = ListUtil.fromArray(
 			LanguageUtil.getAvailableLocales());
 
-		if (availableLocales.contains(locale)) {
-			PropsValues.DEFAULT_LOCALE = languageId;
-
-			HttpSession session = request.getSession();
-
-			session.setAttribute(Globals.LOCALE_KEY, locale);
-			session.setAttribute(
-				PropsKeys.DEFAULT_LOCALE, LocaleUtil.toLanguageId(locale));
-
-			LanguageUtil.updateCookie(request, response, locale);
-
-			ThemeDisplay themeDisplay =
-				(ThemeDisplay)request.getAttribute(WebKeys.THEME_DISPLAY);
-
-			themeDisplay.setLanguageId(languageId);
-			themeDisplay.setLocale(locale);
+		if (!availableLocales.contains(locale)) {
+			return;
 		}
+
+		PropsValues.COMPANY_DEFAULT_LOCALE = languageId;
+
+		HttpSession session = request.getSession();
+
+		session.setAttribute(Globals.LOCALE_KEY, locale);
+		session.setAttribute(WebKeys.SETUP_WIZARD_DEFAULT_LOCALE, languageId);
+
+		LanguageUtil.updateCookie(request, response, locale);
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		themeDisplay.setLanguageId(languageId);
+		themeDisplay.setLocale(locale);
 	}
 
-	public static void processSetup(
+	public static void updateSetup(
 			HttpServletRequest request, HttpServletResponse response)
 		throws Exception {
 
@@ -134,8 +151,9 @@ public class SetupWizardUtil {
 			PropertiesParamUtil.getProperties(request, _PROPERTIES_PREFIX);
 
 		_processAdminProperties(request, unicodeProperties);
-		_processDBProperties(request, unicodeProperties);
-		processPortalLanguage(request, response);
+		_processDatabaseProperties(request, unicodeProperties);
+
+		updateLanguage(request, response);
 
 		unicodeProperties.put(
 			PropsKeys.SETUP_WIZARD_ENABLED, String.valueOf(false));
@@ -218,7 +236,7 @@ public class SetupWizardUtil {
 			PropsKeys.DEFAULT_ADMIN_SCREEN_NAME, defaultAdminScreenName);
 	}
 
-	private static void _processDBProperties(
+	private static void _processDatabaseProperties(
 			HttpServletRequest request, UnicodeProperties unicodeProperties)
 		throws Exception {
 
@@ -230,47 +248,6 @@ public class SetupWizardUtil {
 			unicodeProperties.remove(PropsKeys.JDBC_DEFAULT_DRIVER_CLASS_NAME);
 			unicodeProperties.remove(PropsKeys.JDBC_DEFAULT_USERNAME);
 			unicodeProperties.remove(PropsKeys.JDBC_DEFAULT_PASSWORD);
-		}
-	}
-
-	public static void testDatabase(HttpServletRequest request)
-		throws ClassNotFoundException, SQLException {
-
-		String driverClassName = _getParameter(
-			request, PropsKeys.JDBC_DEFAULT_DRIVER_CLASS_NAME,
-			PropsValues.JDBC_DEFAULT_DRIVER_CLASS_NAME);
-		String url = _getParameter(
-			request, PropsKeys.JDBC_DEFAULT_URL, null);
-		String userName = _getParameter(
-			request, PropsKeys.JDBC_DEFAULT_USERNAME, null);
-		String password = _getParameter(
-			request, PropsKeys.JDBC_DEFAULT_PASSWORD, null);
-
-		_checkConnection(driverClassName, url, userName, password);
-	}
-
-	private static void _checkConnection(
-			String driverClassName, String url, String userName,
-			String password)
-		throws ClassNotFoundException, SQLException {
-
-		Class.forName(driverClassName);
-
-		Connection connection = null;
-
-		try {
-			DataSource dataSource = DataSourceFactoryUtil.initDataSource(
-				driverClassName, url, userName, password);
-
-			connection = dataSource.getConnection();
-		}
-		catch(Exception e) {
-			if ( e instanceof SQLException) {
-				throw (SQLException)e;
-			}
-		}
-		finally {
-			DataAccess.cleanUp(connection);
 		}
 	}
 
@@ -316,27 +293,46 @@ public class SetupWizardUtil {
 		String defaultAdminEmailAddress = _getParameter(
 			request, PropsKeys.ADMIN_EMAIL_FROM_ADDRESS, "test@liferay.com");
 
-		User adminUser = null;
+		User user = null;
 
 		try {
-			adminUser = UserLocalServiceUtil.getUserByEmailAddress(
+			user = UserLocalServiceUtil.getUserByEmailAddress(
 				PortalUtil.getDefaultCompanyId(), defaultAdminEmailAddress);
 		}
 		catch (NoSuchUserException nsue) {
-			adminUser = UserLocalServiceUtil.getUserByEmailAddress(
+			user = UserLocalServiceUtil.getUserByEmailAddress(
 				PortalUtil.getDefaultCompanyId(), "test@liferay.com");
 
 			UserLocalServiceUtil.updateEmailAddress(
-				adminUser.getUserId(), StringPool.BLANK,
+				user.getUserId(), StringPool.BLANK,
 				defaultAdminEmailAddress, defaultAdminEmailAddress);
 		}
 
-		UserLocalServiceUtil.updatePasswordReset(adminUser.getUserId(), true);
-
+		UserLocalServiceUtil.updatePasswordReset(user.getUserId(), true);
 
 		HttpSession session = request.getSession();
 
 		session.setAttribute(WebKeys.SETUP_WIZARD_PASSWORD_UPDATED, true);
+	}
+
+	private static void _testConnection(
+			String driverClassName, String url, String userName,
+			String password)
+		throws Exception {
+
+		Class.forName(driverClassName);
+
+		Connection connection = null;
+
+		try {
+			DataSource dataSource = DataSourceFactoryUtil.initDataSource(
+				driverClassName, url, userName, password);
+
+			connection = dataSource.getConnection();
+		}
+		finally {
+			DataAccess.cleanUp(connection);
+		}
 	}
 
 	private static boolean _writePropertiesFile(
