@@ -178,8 +178,8 @@ boolean refreshFolders = ParamUtil.getBoolean(request, "refreshFolders");
 						<c:if test="<%= rootFolderId == DLFolderConstants.DEFAULT_PARENT_FOLDER_ID %>">
 							<liferay-portlet:renderURL varImpl="viewRecentDocumentsURL">
 								<portlet:param name="struts_action" value="/document_library/view" />
-								<portlet:param name="folderId" value="<%= String.valueOf(parentFolderId) %>" />
 								<portlet:param name="navigation" value="recent-documents" />
+								<portlet:param name="folderId" value="<%= String.valueOf(parentFolderId) %>" />
 								<portlet:param name="entryStart" value="0" />
 								<portlet:param name="entryEnd" value="<%= String.valueOf(entryEnd - entryStart) %>" />
 								<portlet:param name="folderStart" value="0" />
@@ -213,8 +213,8 @@ boolean refreshFolders = ParamUtil.getBoolean(request, "refreshFolders");
 
 							<liferay-portlet:renderURL varImpl="viewMyDocumentsURL">
 								<portlet:param name="struts_action" value="/document_library/view" />
-								<portlet:param name="folderId" value="<%= String.valueOf(parentFolderId) %>" />
 								<portlet:param name="navigation" value="my-documents" />
+								<portlet:param name="folderId" value="<%= String.valueOf(parentFolderId) %>" />
 								<portlet:param name="entryStart" value="0" />
 								<portlet:param name="entryEnd" value="<%= String.valueOf(entryEnd - entryStart) %>" />
 								<portlet:param name="folderStart" value="0" />
