@@ -56,8 +56,9 @@ public class FolderAtomCollectionAdapter
 
 		String srcLink = AtomUtil.createCollectionLink(
 			atomRequestContext,
-			FileEntryAtomCollectionAdapter._COLLECTION_NAME) + "?folderId=" +
-				folder.getFolderId();
+			FileEntryAtomCollectionAdapter.COLLECTION_NAME);
+
+		srcLink += "?folderId=" + folder.getFolderId();
 
 		atomEntryContent.setSrcLink(srcLink);
 
@@ -116,8 +117,7 @@ public class FolderAtomCollectionAdapter
 			"parentFolderId");
 
 		if (parentFolderId != 0) {
-			Folder parentFolder = DLAppServiceUtil.getFolder(
-				parentFolderId);
+			Folder parentFolder = DLAppServiceUtil.getFolder(parentFolderId);
 
 			repositoryId = parentFolder.getRepositoryId();
 		}

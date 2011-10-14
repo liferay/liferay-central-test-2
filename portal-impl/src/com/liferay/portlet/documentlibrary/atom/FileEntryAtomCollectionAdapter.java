@@ -46,7 +46,7 @@ public class FileEntryAtomCollectionAdapter
 	extends BaseMediaAtomCollectionAdapter<FileEntry> {
 
 	public String getCollectionName() {
-		return _COLLECTION_NAME;
+		return COLLECTION_NAME;
 	}
 
 	public List<String> getEntryAuthors(FileEntry fileEntry) {
@@ -66,7 +66,7 @@ public class FileEntryAtomCollectionAdapter
 		atomEntryContent.setMimeType(fileEntry.getMimeType());
 
 		String srcLink = AtomUtil.createEntryLink(
-			atomRequestContext, _COLLECTION_NAME,
+			atomRequestContext, COLLECTION_NAME,
 			fileEntry.getFileEntryId() + ":media");
 
 		atomEntryContent.setSrcLink(srcLink);
@@ -158,14 +158,13 @@ public class FileEntryAtomCollectionAdapter
 		int count = DLAppServiceUtil.getFileEntriesCount(
 			repositoryId, folderId);
 
-		AtomPager atomPager = new AtomPager(
-			atomRequestContext, count);
+		AtomPager atomPager = new AtomPager(atomRequestContext, count);
 
 		AtomUtil.saveAtomPagerInRequest(atomRequestContext, atomPager);
 
-		return DLAppServiceUtil.getFileEntries(repositoryId, folderId,
-			atomPager.getStart(), atomPager.getEnd() + 1,
-			new EntryNameComparator());
+		return DLAppServiceUtil.getFileEntries(
+			repositoryId, folderId, atomPager.getStart(),
+			atomPager.getEnd() + 1, new EntryNameComparator());
 	}
 
 	@Override
@@ -201,9 +200,8 @@ public class FileEntryAtomCollectionAdapter
 		ServiceContext serviceContext = new ServiceContext();
 
 		FileEntry fileEntry = DLAppServiceUtil.addFileEntry(
-			repositoryId, folderId, title, mimeType, title, summary,
-			null, contentInputStream, contentDecoded.length,
-			serviceContext);
+			repositoryId, folderId, title, mimeType, title, summary, null,
+			contentInputStream, contentDecoded.length, serviceContext);
 
 		return fileEntry;
 	}
@@ -243,9 +241,8 @@ public class FileEntryAtomCollectionAdapter
 		ServiceContext serviceContext = new ServiceContext();
 
 		FileEntry fileEntry = DLAppServiceUtil.addFileEntry(
-			repositoryId, folderId, title, mimeType, title,
-			description, null, contentInputStream, content.length,
-			serviceContext);
+			repositoryId, folderId, title, mimeType, title, description, null,
+			contentInputStream, content.length, serviceContext);
 
 		return fileEntry;
 	}
@@ -270,8 +267,8 @@ public class FileEntryAtomCollectionAdapter
 		ServiceContext serviceContext = new ServiceContext();
 
 		DLAppServiceUtil.updateFileEntry(fileEntry.getFileEntryId(),
-			title, mimeType, title, summary, null, true,
-			contentInputStream, contentDecoded.length, serviceContext);
+			title, mimeType, title, summary, null, true, contentInputStream,
+			contentDecoded.length, serviceContext);
 	}
 
 	@Override
@@ -296,10 +293,10 @@ public class FileEntryAtomCollectionAdapter
 		ServiceContext serviceContext = new ServiceContext();
 
 		DLAppServiceUtil.updateFileEntry(fileEntry.getFileEntryId(),
-			slug, mimeType, title, description, null, true,
-			contentInputStream, content.length, serviceContext);
+			slug, mimeType, title, description, null, true, contentInputStream,
+			content.length, serviceContext);
 	}
 
-	static final String _COLLECTION_NAME = "files";
+	protected static final String COLLECTION_NAME = "files";
 
 }
