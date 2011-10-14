@@ -4198,7 +4198,9 @@
 	</entity>
 	<entity class="com.liferay.portlet.social.model.impl.SocialActivityLimitImpl" name="SocialActivityLimit">
 		<table name="SocialActivityLimit" />
-		<attributes />
+		<attributes>
+			<transient name="count" />
+		</attributes>
 	</entity>
 	<entity class="com.liferay.portlet.social.model.impl.SocialActivitySettingImpl" name="SocialActivitySetting">
 		<table name="SocialActivitySetting" />
