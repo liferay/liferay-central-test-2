@@ -479,6 +479,10 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 
 		// File entry types
 
+		if (!overrideFileEntryTypes) {
+			fileEntryTypeIds = new ArrayList<Long>();
+		}
+
 		if (fileEntryTypeIds != null) {
 			dlFileEntryTypeLocalService.updateFolderFileEntryTypes(
 				dlFolder, fileEntryTypeIds, defaultFileEntryTypeId,
