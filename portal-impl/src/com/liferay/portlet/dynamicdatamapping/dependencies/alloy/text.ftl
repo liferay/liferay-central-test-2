@@ -1,6 +1,7 @@
 <#include "../init.ftl">
 
 <#assign width = field.width!25>
+
 <#assign cssClass = cssClass +  " aui-w" + width>
 
 <div class="aui-field-wrapper-content lfr-forms-field-wrapper">
