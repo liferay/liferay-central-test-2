@@ -188,7 +188,7 @@ pageContext.setAttribute("portletURL", portletURL);
 		}
     %>
 
-		<liferay-util:buffer var="groupTags">
+		<liferay-util:buffer var="assetTagsSummary">
 			<liferay-ui:asset-tags-summary
 				className="<%= Group.class.getName() %>"
 				classPK="<%= group.getGroupId() %>"
@@ -196,9 +196,10 @@ pageContext.setAttribute("portletURL", portletURL);
 		</liferay-util:buffer>
 
 	<%
+
 		// Tags
 
-		row.addText(groupTags);
+		row.addText(assetTagsSummary);
 
 		// Action
 
