@@ -300,10 +300,10 @@ public class DLFileEntryTypeLocalServiceUtil {
 		getService().deleteFileEntryTypes(folderId);
 	}
 
-	public static long getDefaultFileEntryType(long folderId)
+	public static long getDefaultFileEntryTypeId(long folderId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getService().getDefaultFileEntryType(folderId);
+		return getService().getDefaultFileEntryTypeId(folderId);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntryType getFileEntryType(

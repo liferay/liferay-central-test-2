@@ -266,7 +266,7 @@ public interface DLFileEntryTypeLocalService extends PersistedModelLocalService 
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public long getDefaultFileEntryType(long folderId)
+	public long getDefaultFileEntryTypeId(long folderId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 

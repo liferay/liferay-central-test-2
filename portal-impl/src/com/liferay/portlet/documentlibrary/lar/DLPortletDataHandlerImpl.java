@@ -224,9 +224,9 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 		ServiceContext serviceContext = portletDataContext.createServiceContext(
 			fileEntryElement, fileEntry, _NAMESPACE);
 
-		serviceContext.setUserId(userId);
 		serviceContext.setAttribute(
 			"sourceFileName", "A." + fileEntry.getExtension());
+		serviceContext.setUserId(userId);
 
 		String binPath = fileEntryElement.attributeValue("bin-path");
 
@@ -252,8 +252,9 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 			Folder folder = (Folder)portletDataContext.getZipEntryAsObject(
 				folderPath);
 
-			Element rootElement =
-				fileEntryElement.getDocument().getRootElement();
+			Document document = fileEntryElement.getDocument();
+
+			Element rootElement = document.getRootElement();
 
 			Element folderElement = (Element)rootElement.selectSingleNode(
 				"//folder[@path='".concat(folderPath).concat("']"));
@@ -618,35 +619,38 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 			Element fileEntryTypesElement, Element folderElement)
 		throws Exception {
 
-		long defaultFileEntryType =
-			DLFileEntryTypeLocalServiceUtil.getDefaultFileEntryType(
-				folder.getFolderId());
-
-		List<DLFileEntryType> fileEntryTypes =
+		List<DLFileEntryType> dlFileEntryTypes =
 			DLFileEntryTypeLocalServiceUtil.getFolderFileEntryTypes(
 				new long[] {portletDataContext.getScopeGroupId()},
 				folder.getFolderId(), false);
 
-		String[] fileEntryTypeUuids = new String[fileEntryTypes.size()];
+		String[] fileEntryTypeUuids = new String[dlFileEntryTypes.size()];
+
+		long defaultFileEntryTypeId =
+			DLFileEntryTypeLocalServiceUtil.getDefaultFileEntryTypeId(
+				folder.getFolderId());
+
 		String deaultFileEntryTypeUuid = StringPool.BLANK;
 
-		for (int i = 0; i < fileEntryTypes.size(); i++) {
-			DLFileEntryType fileEntryType = fileEntryTypes.get(i);
+		for (int i = 0; i < dlFileEntryTypes.size(); i++) {
+			DLFileEntryType dlFileEntryType = dlFileEntryTypes.get(i);
 
-			fileEntryTypeUuids[i] = fileEntryType.getUuid();
+			fileEntryTypeUuids[i] = dlFileEntryType.getUuid();
 
-			if (fileEntryType.getFileEntryTypeId() == defaultFileEntryType) {
-				deaultFileEntryTypeUuid = fileEntryType.getUuid();
+			if (defaultFileEntryTypeId ==
+					dlFileEntryType.getFileEntryTypeId()) {
+
+				deaultFileEntryTypeUuid = dlFileEntryType.getUuid();
 			}
 
 			exportFileEntryType(
-				portletDataContext, fileEntryTypesElement, fileEntryType);
+				portletDataContext, fileEntryTypesElement, dlFileEntryType);
 		}
 
 		folderElement.addAttribute(
 			"fileEntryTypeUuids", StringUtil.merge(fileEntryTypeUuids));
 		folderElement.addAttribute(
-			"deaultFileEntryTypeUuid", deaultFileEntryTypeUuid);
+			"defaultFileEntryTypeUuid", deaultFileEntryTypeUuid);
 	}
 
 	protected static void exportMetaData(
@@ -661,43 +665,46 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		LiferayFileEntry liferayFileEntry = (LiferayFileEntry)fileEntry;
 
-		long fileEntryTypeId =
-			liferayFileEntry.getDLFileEntry().getFileEntryTypeId();
+		DLFileEntry dlFileEntry = liferayFileEntry.getDLFileEntry();
 
-		DLFileEntryType fileEntryType =
+		long fileEntryTypeId = dlFileEntry.getFileEntryTypeId();
+
+		DLFileEntryType dlFileEntryType =
 			DLFileEntryTypeLocalServiceUtil.getDLFileEntryType(
 				fileEntryTypeId);
 
 		exportFileEntryType(
-			portletDataContext, fileEntryTypesElement, fileEntryType);
+			portletDataContext, fileEntryTypesElement, dlFileEntryType);
 
 		fileEntryElement.addAttribute(
-			"fileEntryTypeUuid", fileEntryType.getUuid());
+			"fileEntryTypeUuid", dlFileEntryType.getUuid());
 
-		List<DDMStructure> ddmStructures = fileEntryType.getDDMStructures();
+		List<DDMStructure> ddmStructures = dlFileEntryType.getDDMStructures();
 
 		for (DDMStructure ddmStructure : ddmStructures) {
-			String structureFieldsPath =
-				getFileEntryFileEntryTypeStructureFieldsPath(
-					portletDataContext, fileEntry, fileEntryType.getUuid(),
-					ddmStructure.getStructureId());
-
-			DLFileEntryMetadata fileEntryMetadata =
-				DLFileEntryMetadataLocalServiceUtil.getFileEntryMetadata(
-					ddmStructure.getStructureId(),
-					fileEntry.getFileVersion().getFileVersionId());
-
-			Fields fields = StorageEngineUtil.getFields(
-				fileEntryMetadata.getDDMStorageId());
-
 			Element structureFields = fileEntryElement.addElement(
 				"structure-fields");
 
-			structureFields.addAttribute("path", structureFieldsPath);
+			String path = getFileEntryFileEntryTypeStructureFieldsPath(
+				portletDataContext, fileEntry, dlFileEntryType.getUuid(),
+				ddmStructure.getStructureId());
+
+			structureFields.addAttribute("path", path);
+
 			structureFields.addAttribute(
 				"structureUuid", ddmStructure.getUuid());
 
-			portletDataContext.addZipEntry(structureFieldsPath, fields);
+			FileVersion fileVersion = fileEntry.getFileVersion();
+
+			DLFileEntryMetadata dlFileEntryMetadata =
+				DLFileEntryMetadataLocalServiceUtil.getFileEntryMetadata(
+					ddmStructure.getStructureId(),
+					fileVersion.getFileVersionId());
+
+			Fields fields = StorageEngineUtil.getFields(
+				dlFileEntryMetadata.getDDMStorageId());
+
+			portletDataContext.addZipEntry(path, fields);
 		}
 	}
 
@@ -746,8 +753,63 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 		return sb.toString();
 	}
 
+	protected static String getFileEntryFileEntryTypeStructureFieldsPath(
+		PortletDataContext portletDataContext, FileEntry fileEntry,
+		String fileEntryTypeUuid, long structureId) {
+
+		StringBundler sb = new StringBundler(4);
+
+		String fileEntryPath = getFileEntryPath(portletDataContext, fileEntry);
+
+		sb.append(StringUtil.replace(fileEntryPath, ".xml", StringPool.BLANK));
+		sb.append("/file-entry-type/");
+		sb.append(fileEntryTypeUuid);
+		sb.append("/structure-fields/");
+		sb.append(structureId);
+		sb.append(".xml");
+
+		return sb.toString();
+	}
+
+	protected static String getFileEntryTypeName(
+			String uuid, long companyId, long groupId, String name, int count)
+		throws Exception {
+
+		DLFileEntryType dlFileEntryType = DLFileEntryTypeUtil.fetchByG_N(
+			groupId, name);
+
+		if (dlFileEntryType == null) {
+			return name;
+		}
+
+		if (Validator.isNotNull(uuid) &&
+			uuid.equals(dlFileEntryType.getUuid())) {
+
+			return name;
+		}
+
+		if (Pattern.matches(".* \\(\\d+\\)", name)) {
+			int pos = name.lastIndexOf(" (");
+
+			name = name.substring(0, pos);
+		}
+
+		StringBundler sb = new StringBundler(5);
+
+		sb.append(name);
+		sb.append(StringPool.SPACE);
+		sb.append(StringPool.OPEN_PARENTHESIS);
+		sb.append(count);
+		sb.append(StringPool.CLOSE_PARENTHESIS);
+
+		name = sb.toString();
+
+		return getFileEntryTypeName(uuid, companyId, groupId, name, ++count);
+	}
+
 	protected static String getFileEntryTypePath(
-		PortletDataContext portletDataContext, DLFileEntryType dlFileEntryType) {
+		PortletDataContext portletDataContext,
+		DLFileEntryType dlFileEntryType) {
 
 		StringBundler sb = new StringBundler(4);
 
@@ -772,40 +834,6 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 		sb.append(".xml");
 
 		return sb.toString();
-	}
-
-	protected static String getFileEntryTypeName(
-			String uuid, long companyId, long groupId, String name, int count)
-		throws Exception {
-
-		DLFileEntryType fileEntryType = DLFileEntryTypeUtil.fetchByG_N(
-			groupId, name);
-
-		if (fileEntryType == null) {
-			return name;
-		}
-
-		if (Validator.isNotNull(uuid) && uuid.equals(fileEntryType.getUuid())) {
-			return name;
-		}
-
-		if (Pattern.matches(".* \\(\\d+\\)", name)) {
-			int pos = name.lastIndexOf(" (");
-
-			name = name.substring(0, pos);
-		}
-
-		StringBundler sb = new StringBundler(5);
-
-		sb.append(name);
-		sb.append(StringPool.SPACE);
-		sb.append(StringPool.OPEN_PARENTHESIS);
-		sb.append(count);
-		sb.append(StringPool.CLOSE_PARENTHESIS);
-
-		name = sb.toString();
-
-		return getFileEntryTypeName(uuid, companyId, groupId, name, ++count);
 	}
 
 	protected static String getFileShortcutPath(
@@ -886,24 +914,6 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 		return sb.toString();
 	}
 
-	protected static String getFileEntryFileEntryTypeStructureFieldsPath(
-		PortletDataContext portletDataContext, FileEntry fileEntry,
-		String fileEntryTypeUuid, long structureId) {
-
-		StringBundler sb = new StringBundler(4);
-
-		String fileEntryPath = getFileEntryPath(portletDataContext, fileEntry);
-
-		sb.append(StringUtil.replace(fileEntryPath, ".xml", StringPool.BLANK));
-		sb.append("/file-entry-type/");
-		sb.append(fileEntryTypeUuid);
-		sb.append("/structure-fields/");
-		sb.append(structureId);
-		sb.append(".xml");
-
-		return sb.toString();
-	}
-
 	protected static void importFileEntryType(
 			PortletDataContext portletDataContext, Element fileEntryTypeElement)
 		throws Exception {
@@ -914,8 +924,15 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 			return;
 		}
 
-		DLFileEntryType fileEntryType =
+		DLFileEntryType dlFileEntryType =
 			(DLFileEntryType)portletDataContext.getZipEntryAsObject(path);
+
+		long userId = portletDataContext.getUserId(
+			dlFileEntryType.getUserUuid());
+
+		String name = getFileEntryTypeName(
+			dlFileEntryType.getUuid(), portletDataContext.getCompanyId(),
+			portletDataContext.getScopeGroupId(), dlFileEntryType.getName(), 2);
 
 		List<Element> structureElements = fileEntryTypeElement.elements(
 			"structure");
@@ -937,51 +954,45 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 			ddmStrutureIds[i] = existingStructure.getStructureId();
 		}
 
-		long userId = portletDataContext.getUserId(
-			fileEntryType.getUserUuid());
-
-		long groupId = portletDataContext.getScopeGroupId();
-
 		ServiceContext serviceContext = portletDataContext.createServiceContext(
-			path, fileEntryType, _NAMESPACE);
+			path, dlFileEntryType, _NAMESPACE);
 
-		String name = getFileEntryTypeName(
-			fileEntryType.getUuid(), portletDataContext.getCompanyId(),
-			portletDataContext.getScopeGroupId(), fileEntryType.getName(), 2);
-
-		DLFileEntryType importedFileEntryType = null;
+		DLFileEntryType importedDLFileEntryType = null;
 
 		if (portletDataContext.isDataStrategyMirror()) {
-			DLFileEntryType existingFileEntryType =
+			DLFileEntryType existingDLFileEntryType =
 				DLFileEntryTypeUtil.fetchByUUID_G(
-					fileEntryType.getUuid(), groupId);
+					dlFileEntryType.getUuid(),
+					portletDataContext.getScopeGroupId());
 
-			if (existingFileEntryType == null) {
-				serviceContext.setUuid(fileEntryType.getUuid());
+			if (existingDLFileEntryType == null) {
+				serviceContext.setUuid(dlFileEntryType.getUuid());
 
-				importedFileEntryType =
+				importedDLFileEntryType =
 					DLFileEntryTypeLocalServiceUtil.addFileEntryType(
-						userId, groupId, name, fileEntryType.getDescription(),
-						ddmStrutureIds, serviceContext);
+						userId, portletDataContext.getScopeGroupId(), name,
+						dlFileEntryType.getDescription(), ddmStrutureIds,
+						serviceContext);
 			}
 			else {
 				DLFileEntryTypeLocalServiceUtil.updateFileEntryType(
-					userId, existingFileEntryType.getFileEntryTypeId(),
-					name, fileEntryType.getDescription(), ddmStrutureIds,
+					userId, existingDLFileEntryType.getFileEntryTypeId(),
+					name, dlFileEntryType.getDescription(), ddmStrutureIds,
 					serviceContext);
 
-				importedFileEntryType = existingFileEntryType;
+				importedDLFileEntryType = existingDLFileEntryType;
 			}
 		}
 		else {
-			importedFileEntryType =
+			importedDLFileEntryType =
 				DLFileEntryTypeLocalServiceUtil.addFileEntryType(
-					userId, groupId, name, fileEntryType.getDescription(),
-					ddmStrutureIds, serviceContext);
+					userId, portletDataContext.getScopeGroupId(), name,
+					dlFileEntryType.getDescription(), ddmStrutureIds,
+					serviceContext);
 		}
 
 		portletDataContext.importClassedModel(
-			fileEntryType, importedFileEntryType, _NAMESPACE);
+			dlFileEntryType, importedDLFileEntryType, _NAMESPACE);
 	}
 
 	protected static void importFileRank(
@@ -1016,6 +1027,23 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 			portletDataContext.getScopeGroupId(),
 			portletDataContext.getCompanyId(), userId, fileEntryId,
 			serviceContext);
+	}
+
+	protected static void importFileShortcut(
+			PortletDataContext portletDataContext, Element fileShortcutElement)
+		throws Exception {
+
+		String path = fileShortcutElement.attributeValue("path");
+
+		if (!portletDataContext.isPathNotProcessed(path)) {
+			return;
+		}
+
+		DLFileShortcut fileShortcut =
+			(DLFileShortcut)portletDataContext.getZipEntryAsObject(path);
+
+		importFileShortcut(
+			portletDataContext, fileShortcutElement, fileShortcut);
 	}
 
 	protected static void importFileShortcut(
@@ -1088,23 +1116,6 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		portletDataContext.importClassedModel(
 			fileShortcut, importedFileShortcut, _NAMESPACE);
-	}
-
-	protected static void importFileShortcut(
-			PortletDataContext portletDataContext, Element fileShortcutElement)
-		throws Exception {
-
-		String path = fileShortcutElement.attributeValue("path");
-
-		if (!portletDataContext.isPathNotProcessed(path)) {
-			return;
-		}
-
-		DLFileShortcut fileShortcut =
-			(DLFileShortcut)portletDataContext.getZipEntryAsObject(path);
-
-		importFileShortcut(
-			portletDataContext, fileShortcutElement, fileShortcut);
 	}
 
 	protected static void importFolder(
@@ -1195,23 +1206,26 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		String[] fileEntryTypeUuids = StringUtil.split(
 			folderElement.attributeValue("fileEntryTypeUuids"));
-		String defaultFileEntryTypeUuid = folderElement.attributeValue(
-			"defaultFileEntryTypeUuid");
 
 		List<Long> fileEntryTypeIds = new ArrayList<Long>();
+
+		String defaultFileEntryTypeUuid = GetterUtil.getString(
+			folderElement.attributeValue("defaultFileEntryTypeUuid"));
 
 		long defaultFileEntryTypeId = 0;
 
 		for (String fileEntryTypeUuid : fileEntryTypeUuids) {
-			DLFileEntryType fileEntryType = DLFileEntryTypeUtil.fetchByUUID_G(
+			DLFileEntryType dlFileEntryType = DLFileEntryTypeUtil.fetchByUUID_G(
 				fileEntryTypeUuid, portletDataContext.getScopeGroupId());
 
-			if (fileEntryType != null) {
-				fileEntryTypeIds.add(fileEntryType.getFileEntryTypeId());
+			if (dlFileEntryType == null) {
+				continue;
+			}
 
-				if (fileEntryType.getUuid().equals(defaultFileEntryTypeUuid)) {
-					defaultFileEntryTypeId = fileEntryType.getFileEntryTypeId();
-				}
+			fileEntryTypeIds.add(dlFileEntryType.getFileEntryTypeId());
+
+			if (defaultFileEntryTypeUuid.equals(dlFileEntryType.getUuid())) {
+				defaultFileEntryTypeId = dlFileEntryType.getFileEntryTypeId();
 			}
 		}
 
@@ -1232,19 +1246,19 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 			return;
 		}
 
-		DLFileEntryType fileEntryType = DLFileEntryTypeUtil.fetchByUUID_G(
+		DLFileEntryType dlFileEntryType = DLFileEntryTypeUtil.fetchByUUID_G(
 			fileEntryTypeUuid, portletDataContext.getScopeGroupId());
 
-		if (fileEntryType == null) {
+		if (dlFileEntryType == null) {
 			serviceContext.setAttribute("fileEntryTypeId", -1);
 
 			return;
 		}
 
 		serviceContext.setAttribute(
-			"fileEntryTypeId", fileEntryType.getFileEntryTypeId());
+			"fileEntryTypeId", dlFileEntryType.getFileEntryTypeId());
 
-		List<DDMStructure> ddmStructures = fileEntryType.getDDMStructures();
+		List<DDMStructure> ddmStructures = dlFileEntryType.getDDMStructures();
 
 		for (DDMStructure ddmStructure : ddmStructures) {
 			Element structureFieldsElement =
@@ -1256,12 +1270,10 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 				continue;
 			}
 
-			String structureFieldsPath =
-				structureFieldsElement.attributeValue("path");
+			String path = structureFieldsElement.attributeValue("path");
 
-			Fields fields =
-				(Fields)portletDataContext.getZipEntryAsObject(
-					structureFieldsPath);
+			Fields fields = (Fields)portletDataContext.getZipEntryAsObject(
+				path);
 
 			serviceContext.setAttribute(
 				Fields.class.getName() + ddmStructure.getStructureId(), fields);

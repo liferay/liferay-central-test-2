@@ -294,10 +294,10 @@ public class DLFileEntryTypeLocalServiceWrapper
 		_dlFileEntryTypeLocalService.deleteFileEntryTypes(folderId);
 	}
 
-	public long getDefaultFileEntryType(long folderId)
+	public long getDefaultFileEntryTypeId(long folderId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _dlFileEntryTypeLocalService.getDefaultFileEntryType(folderId);
+		return _dlFileEntryTypeLocalService.getDefaultFileEntryTypeId(folderId);
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntryType getFileEntryType(
