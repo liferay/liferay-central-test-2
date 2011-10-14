@@ -24,9 +24,9 @@ public interface PropsKeys {
 	public static final String ADMIN_DEFAULT_ROLE_NAMES = "admin.default.role.names";
 
 	public static final String ADMIN_DEFAULT_USER_GROUP_NAMES = "admin.default.user.group.names";
-
+	
 	public static final String ADMIN_EMAIL_FROM_ADDRESS = "admin.email.from.address";
-
+	
 	public static final String ADMIN_EMAIL_FROM_NAME = "admin.email.from.name";
 
 	public static final String ADMIN_EMAIL_PASSWORD_RESET_BODY = "admin.email.password.reset.body";
@@ -1810,6 +1810,8 @@ public interface PropsKeys {
 	public static final String SITES_FORM_UPDATE_MAIN = "sites.form.update.main";
 
 	public static final String SITES_FORM_UPDATE_SEO = "sites.form.update.seo";
+
+	public static final String SOCIAL_ACTIVITY_COUNTER_PERIOD_LENGTH = "social.activity.counter.period.length";
 
 	public static final String SOCIAL_BOOKMARK_JSP = "social.bookmark.jsp";
 
