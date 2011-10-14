@@ -40,6 +40,7 @@ import com.liferay.portlet.documentlibrary.service.base.DLFolderLocalServiceBase
 import com.liferay.portlet.documentlibrary.store.DLStoreUtil;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -461,6 +462,10 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 
 		// Folder
 
+		if (!overrideFileEntryTypes) {
+			fileEntryTypeIds = Collections.emptyList();
+		}
+
 		DLFolder dlFolder = dlFolderPersistence.findByPrimaryKey(folderId);
 
 		parentFolderId = getParentFolderId(dlFolder, parentFolderId);
@@ -478,10 +483,6 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 		dlFolderPersistence.update(dlFolder, false);
 
 		// File entry types
-
-		if (!overrideFileEntryTypes) {
-			fileEntryTypeIds = new ArrayList<Long>();
-		}
 
 		if (fileEntryTypeIds != null) {
 			dlFileEntryTypeLocalService.updateFolderFileEntryTypes(
