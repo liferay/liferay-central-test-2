@@ -62,6 +62,9 @@ public class SocialActivityAchievementLocalServiceImpl
 		activityAchievement.setName(achievement.getName());
 
 		socialActivityAchievementPersistence.update(activityAchievement, false);
+
+		// TODO
+
 	}
 
 }

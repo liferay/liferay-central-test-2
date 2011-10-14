@@ -12,24 +12,18 @@
  * details.
  */
 
-package com.liferay.portlet.social.model.impl;
-
-import com.liferay.portlet.social.util.SocialCounterPeriodUtil;
+package com.liferay.portlet.social.model;
 
 /**
  * @author Zsolt Berentey
+ * @author Brian Wing Shun Chan
  */
-public class SocialActivityCounterImpl extends SocialActivityCounterBaseImpl {
+public class SocialActivitySettingConstants {
 
-	public boolean isActivePeriod() {
-		if ((getStartPeriod() == SocialCounterPeriodUtil.getStartPeriod()) &&
-			((getEndPeriod() == -1) ||
-			 (getEndPeriod() == SocialCounterPeriodUtil.getEndPeriod()))) {
+	public static final String NAME_COUNTER_ENABLED = "counterEnabled";
 
-			return true;
-		}
+	public static final String NAME_ENABLED = "enabled";
 
-		return false;
-	}
+	public static final String NAME_LOG_ENABLED = "logEnabled";
 
 }
