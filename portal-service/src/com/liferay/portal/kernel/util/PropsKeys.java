@@ -2035,6 +2035,8 @@ public interface PropsKeys {
 
 	public static final String WEBDAV_IGNORE = "webdav.ignore";
 
+	public static final String WEBDAV_NONCE_EXPIRATION = "webdav.nonce.expiration";
+
 	public static final String WIDGET_SERVLET_MAPPING = "widget.servlet.mapping";
 
 	public static final String WIKI_EMAIL_FROM_ADDRESS = "wiki.email.from.address";
