@@ -186,7 +186,7 @@ pageContext.setAttribute("portletURL", portletURL);
 
 			row.addText(String.valueOf(onlineCount));
 		}
-    %>
+	%>
 
 		<liferay-util:buffer var="assetTagsSummary">
 			<liferay-ui:asset-tags-summary
