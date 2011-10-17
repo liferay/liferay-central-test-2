@@ -1020,7 +1020,7 @@ else {
 if (themeDisplay.isStatePopUp()) {
 	String doRefreshPortletId = null;
 
-	if((doRefreshPortletId = (String)SessionMessages.get(renderRequestImpl, portletConfig.getPortletName() + ".doRefresh")) != null) {
+	if ((doRefreshPortletId = (String)SessionMessages.get(renderRequestImpl, portletConfig.getPortletName() + ".doRefresh")) != null) {
 		if (Validator.isNull(doRefreshPortletId) && (portletResourcePortlet != null)) {
 			doRefreshPortletId = portletResourcePortlet.getPortletId();
 		}
@@ -1047,7 +1047,7 @@ if (themeDisplay.isStatePopUp()) {
 
 	String doCloseRedirect = null;
 
-	if((doCloseRedirect = (String)SessionMessages.get(renderRequestImpl, portletConfig.getPortletName() + ".doCloseRedirect")) != null) {
+	if ((doCloseRedirect = (String)SessionMessages.get(renderRequestImpl, portletConfig.getPortletName() + ".doCloseRedirect")) != null) {
 %>
 
 		<aui:script use="aui-base,aui-loading-mask">

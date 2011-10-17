@@ -1114,6 +1114,9 @@ public interface Portal {
 		String portletId, User user, Layout layout, PortletMode portletMode,
 		HttpServletRequest request);
 
+	public String updateRedirect(
+		String redirect, String oldPath, String newPath);
+
 	public WindowState updateWindowState(
 		String portletId, User user, Layout layout, WindowState windowState,
 		HttpServletRequest request);

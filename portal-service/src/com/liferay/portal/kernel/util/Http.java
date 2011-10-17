@@ -148,9 +148,6 @@ public interface Http {
 
 	public String setParameter(String url, String name, String value);
 
-	public String updateRedirect(
-		String redirect, String oldPath, String newPath);
-
 	public byte[] URLtoByteArray(Http.Options options) throws IOException;
 
 	public byte[] URLtoByteArray(String location) throws IOException;

@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.staging.StagingUtil;
 import com.liferay.portal.kernel.util.Constants;
-import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
@@ -84,10 +83,10 @@ public class EditGroupAction extends PortletAction {
 
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
-		String closeRedirect = ParamUtil.getString(
-			actionRequest, "closeRedirect");
-
 		try {
+			String closeRedirect = ParamUtil.getString(
+				actionRequest, "closeRedirect");
+
 			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
 				Object[] returnValue = updateGroup(actionRequest);
 
@@ -262,7 +261,7 @@ public class EditGroupAction extends PortletAction {
 			newPath = group.getFriendlyURL();
 
 			if (closeRedirect.indexOf(oldPath) != -1) {
-				closeRedirect = HttpUtil.updateRedirect(
+				closeRedirect = PortalUtil.updateRedirect(
 					closeRedirect, oldPath, newPath);
 			}
 			else {
@@ -285,8 +284,8 @@ public class EditGroupAction extends PortletAction {
 				newPath = stagingGroup.getFriendlyURL();
 			}
 
-			if (closeRedirect.indexOf(oldPath) != -1) {
-				closeRedirect = HttpUtil.updateRedirect(
+			if (closeRedirect.contains(oldPath)) {
+				closeRedirect = PortalUtil.updateRedirect(
 					closeRedirect, oldPath, newPath);
 			}
 			else {
@@ -298,7 +297,9 @@ public class EditGroupAction extends PortletAction {
 		return closeRedirect;
 	}
 
-	protected Object[] updateGroup(ActionRequest actionRequest) throws Exception {
+	protected Object[] updateGroup(ActionRequest actionRequest)
+		throws Exception {
+
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 

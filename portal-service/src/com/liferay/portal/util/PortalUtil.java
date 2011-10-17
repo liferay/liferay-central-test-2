@@ -1541,6 +1541,12 @@ public class PortalUtil {
 			portletId, user, layout, portletMode, request);
 	}
 
+	public static String updateRedirect(
+		String redirect, String oldPath, String newPath) {
+
+		return getPortal().updateRedirect(redirect, oldPath, newPath);
+	}
+
 	public static WindowState updateWindowState(
 		String portletId, User user, Layout layout, WindowState windowState,
 		HttpServletRequest request) {

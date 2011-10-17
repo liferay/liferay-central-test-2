@@ -215,6 +215,7 @@ public class SitesUtil {
 		}
 
 		Group group = layout.getGroup();
+		String oldFriendlyURL = layout.getFriendlyURL();
 
 		if (group.isStagingGroup() &&
 			!GroupPermissionUtil.contains(
@@ -239,8 +240,6 @@ public class SitesUtil {
 		LayoutSet layoutSet = layout.getLayoutSet();
 
 		Group layoutSetGroup = layoutSet.getGroup();
-
-		String oldFriendlyURL = layout.getFriendlyURL();
 
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			request);

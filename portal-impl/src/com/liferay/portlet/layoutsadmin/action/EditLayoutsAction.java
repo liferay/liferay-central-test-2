@@ -38,7 +38,6 @@ import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.LocalizationUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropertiesParamUtil;
@@ -140,10 +139,10 @@ public class EditLayoutsAction extends PortletAction {
 
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
-		String closeRedirect = ParamUtil.getString(
-			actionRequest, "closeRedirect");
-
 		try {
+			String closeRedirect = ParamUtil.getString(
+				actionRequest, "closeRedirect");
+
 			Layout layout = null;
 			String oldFriendlyURL = StringPool.BLANK;
 
@@ -627,9 +626,51 @@ public class EditLayoutsAction extends PortletAction {
 		return ActionUtil.getGroup(portletRequest);
 	}
 
+	protected byte[] getIconBytes(
+		UploadPortletRequest uploadPortletRequest, String iconFileName) {
+
+		InputStream inputStream = null;
+
+		try {
+			inputStream = uploadPortletRequest.getFileAsStream(
+				iconFileName);
+
+			if (inputStream != null) {
+				return FileUtil.getBytes(inputStream);
+			}
+		}
+		catch (IOException e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("Unable to retrieve icon", e);
+			}
+		}
+
+		return new byte[0];
+	}
+
 	@Override
 	protected boolean isCheckMethodOnProcessAction() {
 		return _CHECK_METHOD_ON_PROCESS_ACTION;
+	}
+
+	protected void selectLayoutBranch(ActionRequest actionRequest)
+		throws Exception {
+
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			actionRequest);
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		long layoutSetBranchId = ParamUtil.getLong(
+			actionRequest, "layoutSetBranchId");
+
+		long layoutBranchId = ParamUtil.getLong(
+			actionRequest, "layoutBranchId");
+
+		StagingUtil.setRecentLayoutBranchId(
+			request, layoutSetBranchId, themeDisplay.getPlid(),
+			layoutBranchId);
 	}
 
 	protected void selectLayoutSetBranch(ActionRequest actionRequest)
@@ -659,24 +700,30 @@ public class EditLayoutsAction extends PortletAction {
 			layoutSetBranch.getLayoutSetBranchId());
 	}
 
-	protected void selectLayoutBranch(ActionRequest actionRequest)
-		throws Exception {
+	protected String updateCloseRedirect(
+		String closeRedirect, Group group, Layout layout,
+		String oldLayoutFriendlyURL) {
 
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			actionRequest);
+		if (Validator.isNull(oldLayoutFriendlyURL)) {
+			return closeRedirect;
+		}
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
+		if (layout != null) {
+			String oldPath = oldLayoutFriendlyURL;
+			String newPath = layout.getFriendlyURL();
 
-		long layoutSetBranchId = ParamUtil.getLong(
-			actionRequest, "layoutSetBranchId");
+			return PortalUtil.updateRedirect(
+				closeRedirect, oldPath, newPath);
+		}
+		else if (group != null) {
+			String oldPath = group.getFriendlyURL() + oldLayoutFriendlyURL;
+			String newPath =  group.getFriendlyURL();
 
-		long layoutBranchId = ParamUtil.getLong(
-			actionRequest, "layoutBranchId");
+			return PortalUtil.updateRedirect(
+				closeRedirect, oldPath, newPath);
+		}
 
-		StagingUtil.setRecentLayoutBranchId(
-			request, layoutSetBranchId, themeDisplay.getPlid(),
-			layoutBranchId);
+		return closeRedirect;
 	}
 
 	protected void updateDisplayOrder(ActionRequest actionRequest)
@@ -908,28 +955,6 @@ public class EditLayoutsAction extends PortletAction {
 		return new Object[] {layout, oldFriendlyURL};
 	}
 
-	private byte[] getIconBytes(
-		UploadPortletRequest uploadPortletRequest, String iconFileName) {
-
-		InputStream inputStream = null;
-
-		try {
-			inputStream = uploadPortletRequest.getFileAsStream(
-				iconFileName);
-
-			if (inputStream != null) {
-				return FileUtil.getBytes(inputStream);
-			}
-		}
-		catch (IOException e) {
-			if (_log.isWarnEnabled()) {
-				_log.warn("Unable to retrieve icon", e);
-			}
-		}
-
-		return new byte[0];
-	}
-
 	protected void updateLayoutRevision(ActionRequest actionRequest)
 		throws Exception {
 
@@ -1000,32 +1025,6 @@ public class EditLayoutsAction extends PortletAction {
 				groupId, privateLayout, layoutId, themeId, colorSchemeId, css,
 				wapTheme);
 		}
-	}
-
-	protected String updateCloseRedirect(
-		String closeRedirect, Group group, Layout layout,
-		String oldLayoutFriendlyURL) {
-
-		if (Validator.isNull(oldLayoutFriendlyURL)) {
-			return closeRedirect;
-		}
-
-		if (layout != null) {
-			String oldPath = oldLayoutFriendlyURL;
-			String newPath = layout.getFriendlyURL();
-
-			return HttpUtil.updateRedirect(
-				closeRedirect, oldPath, newPath);
-		}
-		else if (group != null) {
-			String oldPath = group.getFriendlyURL() + oldLayoutFriendlyURL;
-			String newPath =  group.getFriendlyURL();
-
-			return HttpUtil.updateRedirect(
-				closeRedirect, oldPath, newPath);
-		}
-
-		return closeRedirect;
 	}
 
 	private static final boolean _CHECK_METHOD_ON_PROCESS_ACTION = false;

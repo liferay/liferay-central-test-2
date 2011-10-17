@@ -4932,6 +4932,21 @@ public class PortalImpl implements Portal {
 		}
 	}
 
+	public String updateRedirect(
+		String redirect, String oldPath, String newPath) {
+
+		if (Validator.isNotNull(redirect) && (oldPath != null) &&
+			!oldPath.equals(newPath)) {
+
+			redirect = StringUtil.replace(redirect, oldPath, newPath);
+			redirect = StringUtil.replace(
+				redirect, HttpUtil.encodeURL(oldPath),
+				HttpUtil.encodeURL(newPath));
+		}
+
+		return redirect;
+	}
+
 	public WindowState updateWindowState(
 		String portletId, User user, Layout layout, WindowState windowState,
 		HttpServletRequest request) {
