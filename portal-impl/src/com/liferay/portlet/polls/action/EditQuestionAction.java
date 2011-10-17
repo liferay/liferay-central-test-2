@@ -87,8 +87,12 @@ public class EditQuestionAction extends PortletAction {
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		try {
-			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.ADD_VOTE) ||
-				cmd.equals(Constants.UPDATE)) {
+			if (Validator.isNull(cmd)) {
+				return;
+			}
+			else if (cmd.equals(Constants.ADD) ||
+					 cmd.equals(Constants.UPDATE) ||
+					 cmd.equals(Constants.VOTE)) {
 
 				updateQuestion(portletConfig, actionRequest);
 			}
@@ -97,10 +101,6 @@ public class EditQuestionAction extends PortletAction {
 			}
 
 			WindowState windowState = actionRequest.getWindowState();
-
-			if (Validator.isNull(cmd)) {
-				return;
-			}
 
 			if (windowState.equals(LiferayWindowState.POP_UP)) {
 				String redirect = PortalUtil.escapeRedirect(
@@ -196,7 +196,6 @@ public class EditQuestionAction extends PortletAction {
 		SessionMessages.add(
 			portletRequest, portletConfig.getPortletName() + ".doRefresh",
 			referringPortletResource);
-
 	}
 
 	protected void deleteQuestion(ActionRequest actionRequest)
@@ -205,7 +204,6 @@ public class EditQuestionAction extends PortletAction {
 		long questionId = ParamUtil.getLong(actionRequest, "questionId");
 
 		PollsQuestionServiceUtil.deleteQuestion(questionId);
-
 	}
 
 	protected void updateQuestion(
@@ -282,13 +280,11 @@ public class EditQuestionAction extends PortletAction {
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			BookmarksEntry.class.getName(), actionRequest);
 
-		PollsQuestion question = null;
-
 		if (questionId <= 0) {
 
 			// Add question
 
-			question = PollsQuestionServiceUtil.addQuestion(
+			PollsQuestion question = PollsQuestionServiceUtil.addQuestion(
 				titleMap, descriptionMap, expirationDateMonth,
 				expirationDateDay, expirationDateYear, expirationDateHour,
 				expirationDateMinute, neverExpire, choices, serviceContext);

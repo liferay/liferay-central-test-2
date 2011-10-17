@@ -17,7 +17,7 @@
 <%@ include file="/html/portlet/polls_display/init.jsp" %>
 
 <%
-Portlet selPortlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(), portletDisplay.getId());
+Portlet portlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(), portletDisplay.getId());
 %>
 
 <aui:script use="aui-base">
@@ -25,7 +25,7 @@ Portlet selPortlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId
 		'closeWindow',
 		{
 			id: '<%= renderResponse.getNamespace() %>',
-			portletAjaxable: <%= selPortlet.isAjaxable() %>,
+			portletAjaxable: <%= portlet.isAjaxable() %>,
 			refresh: '<%= portletDisplay.getId() %>'
 		}
 	);

@@ -58,18 +58,17 @@ if (choiceName > 0) {
 }
 %>
 
-<portlet:actionURL var="editQuestionURL">
+<liferay-portlet:actionURL refererPlid="<%= themeDisplay.getRefererPlid() %>" var="editQuestionURL">
 	<portlet:param name="struts_action" value="/polls/edit_question" />
-</portlet:actionURL>
+</liferay-portlet:actionURL>
 
 <aui:form action="<%= editQuestionURL %>" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveQuestion();" %>'>
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
+	<aui:input name="referringPortletResource" type="hidden" value="<%= referringPortletResource %>" />
 	<aui:input name="questionId" type="hidden" value="<%= questionId %>" />
 	<aui:input name="choicesCount" type="hidden" value="<%= choicesCount %>" />
 	<aui:input name="choiceName" type="hidden" value="" />
-	<aui:input name="referringPortletResource" type="hidden" value="<%= referringPortletResource %>" />
-	<aui:input name="refererPlid" type="hidden" useNamespace="<%= false %>" value="<%= themeDisplay.getRefererPlid() %>" />
 
 	<liferay-ui:header
 		backURL="<%= redirect %>"

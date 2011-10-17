@@ -101,8 +101,8 @@ public class VelocityTaglib {
 
 	/**
 	 * @deprecated {@link #actionURL(String, String, Boolean, Boolean, Boolean,
-	 *             String, long, String, Boolean, Boolean, long, long, Boolean,
-	 *             String)}
+	 *             String, long, long, String, Boolean, Boolean, long, long,
+	 *             Boolean, String)}
 	 */
 	public void actionURL(
 			String windowState, String portletMode, Boolean secure,
