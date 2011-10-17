@@ -480,7 +480,6 @@ public class DLFolderFinderImpl
 			sql = StringUtil.replace(
 				sql, "[$FILE_SHORTCUT_FOLDER_ID$]",
 				getFolderId(folderId, "DLFileShortcut"));
-
 			sql = CustomSQLUtil.replaceOrderBy(sql, obc);
 
 			SQLQuery q = session.createSQLQuery(sql);
