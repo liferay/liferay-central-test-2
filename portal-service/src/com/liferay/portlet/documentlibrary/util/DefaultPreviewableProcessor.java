@@ -22,11 +22,10 @@ import java.io.InputStream;
 /**
  * @author Alexander Chow
  */
-public abstract class DefaultPreviewableProcessor extends
-	DLPreviewableProcessor {
+public abstract class DefaultPreviewableProcessor
+	extends DLPreviewableProcessor {
 
-	protected InputStream doGetPreviewAsStream(
-			FileVersion fileVersion)
+	protected InputStream doGetPreviewAsStream(FileVersion fileVersion)
 		throws Exception {
 
 		return doGetPreviewAsStream(fileVersion, 0);
@@ -67,18 +66,16 @@ public abstract class DefaultPreviewableProcessor extends
 		return getPreviewFilePath(fileVersion, 0);
 	}
 
-	protected String getPreviewFilePath(
-		FileVersion fileVersion, int index) {
-
+	protected String getPreviewFilePath(FileVersion fileVersion, int index) {
 		return getPreviewFilePath(fileVersion, index, getPreviewType());
 	}
 
-	protected File getPreviewTempFile(String tempFileId) {
-		return getPreviewTempFile(tempFileId, 0);
+	protected File getPreviewTempFile(String id) {
+		return getPreviewTempFile(id, 0);
 	}
 
-	protected File getPreviewTempFile(String tempFileId, int index) {
-		return getPreviewTempFile(tempFileId, index, getPreviewType());
+	protected File getPreviewTempFile(String id, int index) {
+		return getPreviewTempFile(id, index, getPreviewType());
 	}
 
 	protected int getPreviewTempFileCount(FileVersion fileVersion) {
@@ -93,6 +90,8 @@ public abstract class DefaultPreviewableProcessor extends
 		return getPreviewTempFilePath(id, index, getPreviewType());
 	}
 
+	protected abstract String getPreviewType();
+
 	protected String getThumbnailFilePath(FileVersion fileVersion) {
 		return getThumbnailFilePath(fileVersion, getThumbnailType());
 	}
@@ -104,8 +103,6 @@ public abstract class DefaultPreviewableProcessor extends
 	protected String getThumbnailTempFilePath(String id) {
 		return getThumbnailTempFilePath(id, getThumbnailType());
 	}
-
-	protected abstract String getPreviewType();
 
 	protected String getThumbnailType() {
 		return null;

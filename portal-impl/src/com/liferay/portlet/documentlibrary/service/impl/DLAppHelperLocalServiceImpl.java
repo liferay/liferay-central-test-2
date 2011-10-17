@@ -243,7 +243,6 @@ public class DLAppHelperLocalServiceImpl
 		boolean addDraftAssetEntry = false;
 
 		if (fileEntry instanceof LiferayFileEntry) {
-			DLFileEntry dlFileEntry = (DLFileEntry)fileEntry.getModel();
 			DLFileVersion dlFileVersion = (DLFileVersion)fileVersion.getModel();
 
 			if (dlFileVersion.isApproved()) {

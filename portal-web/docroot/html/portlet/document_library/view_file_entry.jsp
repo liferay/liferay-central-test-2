@@ -206,21 +206,20 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 						<%
 						String thumbnailSrc = themeDisplay.getPathThemeImages() + "/file_system/large/" + DLUtil.getGenericName(extension) + ".png";
 
-
-						String thumbnailParam = null;
+						String thumbnailQueryString = null;
 
 						if (hasImages) {
-							thumbnailParam = "&imageThumbnail=1";
+							thumbnailQueryString = "&imageThumbnail=1";
 						}
 						else if (hasPDFImages) {
-							thumbnailParam = "&documentThumbnail=1";
+							thumbnailQueryString = "&documentThumbnail=1";
 						}
 						else if (hasVideo) {
-							thumbnailParam = "&videoThumbnail=1";
+							thumbnailQueryString = "&videoThumbnail=1";
 						}
 
-						if (Validator.isNotNull(thumbnailParam)) {
-							thumbnailSrc = themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + themeDisplay.getScopeGroupId() + StringPool.SLASH + fileEntry.getFolderId() + StringPool.SLASH + HttpUtil.encodeURL(title) + "?version=" + fileEntry.getVersion() + thumbnailParam;
+						if (Validator.isNotNull(thumbnailQueryString)) {
+							thumbnailSrc = themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + themeDisplay.getScopeGroupId() + StringPool.SLASH + fileEntry.getFolderId() + StringPool.SLASH + HttpUtil.encodeURL(title) + "?version=" + fileEntry.getVersion() + thumbnailQueryString;
 						}
 
 						if (layoutAssetEntry != null) {

@@ -110,6 +110,5 @@ public class DLFileVersionImpl extends DLFileVersionBaseImpl {
 
 	private ExpandoBridge _expandoBridge;
 	private UnicodeProperties _extraSettingsProperties;
-	private String _imageType;
 
 }

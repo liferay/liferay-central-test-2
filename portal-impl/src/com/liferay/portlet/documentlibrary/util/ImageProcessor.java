@@ -162,31 +162,33 @@ public class ImageProcessor extends DLPreviewableProcessor {
 
 			RenderedImage renderedImage = imageBag.getRenderedImage();
 
-			if (renderedImage != null) {
-				String imageType = imageBag.getType();
+			if (renderedImage == null) {
+				return;
+			}
+
+			String imageType = imageBag.getType();
+
+			_saveThumbnailImage(
+				fileVersion, renderedImage,
+				PropsKeys.IG_IMAGE_THUMBNAIL_MAX_DIMENSION,
+				getThumbnailFilePath(fileVersion, imageType));
+
+			if (PrefsPropsUtil.getInteger(
+					PropsKeys.IG_IMAGE_CUSTOM_1_MAX_DIMENSION) > 0) {
 
 				_saveThumbnailImage(
 					fileVersion, renderedImage,
-					PropsKeys.IG_IMAGE_THUMBNAIL_MAX_DIMENSION,
-					getThumbnailFilePath(fileVersion, imageType));
+					PropsKeys.IG_IMAGE_CUSTOM_1_MAX_DIMENSION,
+					_getCustom1FilePath(fileVersion, imageType));
+			}
 
-				if (PrefsPropsUtil.getInteger(
-						PropsKeys.IG_IMAGE_CUSTOM_1_MAX_DIMENSION) > 0) {
+			if (PrefsPropsUtil.getInteger(
+					PropsKeys.IG_IMAGE_CUSTOM_2_MAX_DIMENSION) > 0) {
 
-					_saveThumbnailImage(
-						fileVersion, renderedImage,
-						PropsKeys.IG_IMAGE_CUSTOM_1_MAX_DIMENSION,
-						_getCustom1FilePath(fileVersion, imageType));
-				}
-
-				if (PrefsPropsUtil.getInteger(
-						PropsKeys.IG_IMAGE_CUSTOM_2_MAX_DIMENSION) > 0) {
-
-					_saveThumbnailImage(
-						fileVersion, renderedImage,
-						PropsKeys.IG_IMAGE_CUSTOM_2_MAX_DIMENSION,
-						_getCustom2FilePath(fileVersion, imageType));
-				}
+				_saveThumbnailImage(
+					fileVersion, renderedImage,
+					PropsKeys.IG_IMAGE_CUSTOM_2_MAX_DIMENSION,
+					_getCustom2FilePath(fileVersion, imageType));
 			}
 		}
 		catch (NoSuchFileEntryException nsfee) {
@@ -195,7 +197,7 @@ public class ImageProcessor extends DLPreviewableProcessor {
 			_log.error(e, e);
 		}
 		finally {
-			_fileEntries.remove(fileVersion.getFileVersionId());
+			_fileVersionIds.remove(fileVersion.getFileVersionId());
 		}
 	}
 
@@ -309,9 +311,9 @@ public class ImageProcessor extends DLPreviewableProcessor {
 	}
 
 	private void _queueGeneration(FileVersion fileVersion) {
-		if (!_fileEntries.contains(fileVersion.getFileVersionId()) &&
+		if (!_fileVersionIds.contains(fileVersion.getFileVersionId()) &&
 			_isSupportedImage(fileVersion) && !_hasImages(fileVersion)) {
-			_fileEntries.add(fileVersion.getFileVersionId());
+			_fileVersionIds.add(fileVersion.getFileVersionId());
 
 			MessageBusUtil.sendMessage(
 				DestinationNames.DOCUMENT_LIBRARY_IMAGE_PROCESSOR,
@@ -389,9 +391,8 @@ public class ImageProcessor extends DLPreviewableProcessor {
 
 	private static ImageProcessor _instance = new ImageProcessor();
 
+	private static List<Long> _fileVersionIds = new Vector<Long>();
 	private static Set<String> _imageMimeTypes = SetUtil.fromArray(
 		PropsValues.IG_IMAGE_THUMBNAIL_MIME_TYPES);
-
-	private static List<Long> _fileEntries = new Vector<Long>();
 
 }

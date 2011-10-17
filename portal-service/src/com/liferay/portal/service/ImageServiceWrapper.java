@@ -34,13 +34,6 @@ public class ImageServiceWrapper implements ImageService {
 		return _imageService.getImage(imageId);
 	}
 
-	public com.liferay.portlet.documentlibrary.model.DLFileEntry getDLFileEntry(
-		long imageId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _imageService.getDLFileEntry(imageId);
-	}
-
 	public ImageService getWrappedImageService() {
 		return _imageService;
 	}

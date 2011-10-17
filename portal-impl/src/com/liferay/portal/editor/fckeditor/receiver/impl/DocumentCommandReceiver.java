@@ -40,6 +40,7 @@ import com.liferay.portlet.documentlibrary.util.ImageProcessor;
 import java.io.InputStream;
 
 import java.util.List;
+import java.util.Set;
 import java.util.StringTokenizer;
 
 import org.w3c.dom.Document;
@@ -170,8 +171,6 @@ public class DocumentCommandReceiver extends BaseCommandReceiver {
 			folder.getRepositoryId(), folder.getFolderId());
 
 		for (FileEntry fileEntry : fileEntries) {
-			FileVersion fileVersion = fileEntry.getFileVersion();
-
 			Element fileElement = document.createElement("File");
 
 			filesElement.appendChild(fileElement);
@@ -189,12 +188,16 @@ public class DocumentCommandReceiver extends BaseCommandReceiver {
 			sb.append(StringPool.SLASH);
 			sb.append(HttpUtil.encodeURL(fileEntry.getTitle()));
 
-			if (ImageProcessor.getImageMimeTypes().contains(
-					fileEntry.getMimeType())) {
+			Set<String> imageMimeTypes = ImageProcessor.getImageMimeTypes();
 
+			if (imageMimeTypes.contains(fileEntry.getMimeType())) {
 				sb.append("&t=");
-				sb.append(WebServerServletTokenUtil.getToken(
-					fileVersion.getFileVersionId()));
+
+				FileVersion fileVersion = fileEntry.getFileVersion();
+
+				sb.append(
+					WebServerServletTokenUtil.getToken(
+						fileVersion.getFileVersionId()));
 			}
 
 			fileElement.setAttribute("url", sb.toString());

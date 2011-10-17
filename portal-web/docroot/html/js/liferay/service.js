@@ -88,8 +88,7 @@ Liferay.Service.registerClass(
 Liferay.Service.registerClass(
 	Liferay.Service.Portal, "Image",
 	{
-		getImage: true,
-		getDLFileEntry: true
+		getImage: true
 	}
 );
 
@@ -727,6 +726,7 @@ Liferay.Service.registerClass(
 		checkOutFileEntry: true,
 		copyFileEntry: true,
 		deleteFileEntry: true,
+		fetchFileEntryByImageId: true,
 		getFileEntries: true,
 		getFileEntriesCount: true,
 		getFileEntry: true,

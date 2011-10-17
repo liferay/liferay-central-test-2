@@ -196,12 +196,11 @@ if (folder != null) {
 		sb.append(StringPool.SLASH);
 		sb.append(HttpUtil.encodeURL(HtmlUtil.unescape(fileEntry.getTitle())));
 
-		if (ImageProcessor.getImageMimeTypes().contains(
-				fileEntry.getMimeType())) {
+		Set<String> imageMimeTypes = ImageProcessor.getImageMimeTypes();
 
+		if (imageMimeTypes.contains(fileEntry.getMimeType())) {
 			sb.append("&t=");
-			sb.append(WebServerServletTokenUtil.getToken(
-				fileEntry.getFileEntryId()));
+			sb.append(WebServerServletTokenUtil.getToken(fileEntry.getFileEntryId()));
 		}
 
 		sb.append("', '");

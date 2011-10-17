@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.image.Hook;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.portal.kernel.util.InstanceFactory;
 import com.liferay.portal.kernel.util.MimeTypesUtil;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -121,8 +122,7 @@ public class UpgradeImageGallery extends UpgradeProcess {
 			long fileEntryId, String extension, String mimeType, String title,
 			String description, String changeLog, String extraSettings,
 			long fileEntryTypeId, String version, long size, int status,
-			long statusByUserId, String statusByUserName,
-			Date statusDate)
+			long statusByUserId, String statusByUserName, Date statusDate)
 		throws Exception {
 
 		Connection con = null;
@@ -334,7 +334,6 @@ public class UpgradeImageGallery extends UpgradeProcess {
 				long folderId = rs.getLong("folderId");
 				String name = rs.getString("name");
 				long largeImageId = rs.getLong("largeImageId");
-				long smallImageId = rs.getLong("smallImageId");
 				long custom1ImageId = rs.getLong("custom1ImageId");
 				long custom2ImageId = rs.getLong("custom2ImageId");
 
@@ -360,8 +359,8 @@ public class UpgradeImageGallery extends UpgradeProcess {
 						sourceHookClassName = PropsValues.IMAGE_HOOK_IMPL;
 					}
 
-					Hook sourceHook = (Hook)classLoader.loadClass(
-						sourceHookClassName).newInstance();
+					Hook sourceHook = (Hook)InstanceFactory.newInstance(
+						classLoader, sourceHookClassName);
 
 					InputStream is = sourceHook.getImageAsStream(image);
 

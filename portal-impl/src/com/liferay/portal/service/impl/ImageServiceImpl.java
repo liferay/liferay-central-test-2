@@ -17,10 +17,7 @@ package com.liferay.portal.service.impl;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.Image;
-import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.base.ImageServiceBaseImpl;
-import com.liferay.portlet.documentlibrary.model.DLFileEntry;
-import com.liferay.portlet.documentlibrary.service.permission.DLFileEntryPermission;
 
 /**
  * @author Brian Wing Shun Chan
@@ -28,19 +25,6 @@ import com.liferay.portlet.documentlibrary.service.permission.DLFileEntryPermiss
  * @author Sergio González
  */
 public class ImageServiceImpl extends ImageServiceBaseImpl {
-
-	public DLFileEntry getDLFileEntry(long imageId)
-		throws PortalException, SystemException {
-
-		DLFileEntry fileEntry = dlFileEntryFinder.fetchByAnyImageId(imageId);
-
-		if (fileEntry != null) {
-			DLFileEntryPermission.check(
-				getPermissionChecker(), fileEntry, ActionKeys.VIEW);
-		}
-
-		return fileEntry;
-	}
 
 	public Image getImage(long imageId)
 		throws PortalException, SystemException {

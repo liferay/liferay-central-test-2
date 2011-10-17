@@ -101,67 +101,6 @@ public abstract class DLPreviewableProcessor implements DLProcessor {
 		}
 	}
 
-	protected void addFileToStore(
-			long companyId, String dirName, String filePath, File srcFile)
-		throws Exception {
-
-		try {
-			DLStoreUtil.addDirectory(companyId, REPOSITORY_ID, dirName);
-		}
-		catch (DuplicateDirectoryException dde) {
-		}
-
-		DLStoreUtil.addFile(companyId, REPOSITORY_ID, filePath, srcFile);
-	}
-
-	protected InputStream doGetPreviewAsStream(
-			FileVersion fileVersion, String type)
-		throws Exception {
-
-		return doGetPreviewAsStream(fileVersion, 0, type);
-	}
-
-	protected InputStream doGetPreviewAsStream(
-			FileVersion fileVersion, int index, String type)
-		throws Exception {
-
-		return DLStoreUtil.getFileAsStream(
-			fileVersion.getCompanyId(), CompanyConstants.SYSTEM,
-			getPreviewFilePath(fileVersion, index, type));
-	}
-
-	protected long doGetPreviewFileSize(FileVersion fileVersion, String type)
-		throws Exception {
-
-		return doGetPreviewFileSize(fileVersion, 0, type);
-	}
-
-	protected long doGetPreviewFileSize(
-			FileVersion fileVersion, int index, String type)
-		throws Exception {
-
-		return DLStoreUtil.getFileSize(
-			fileVersion.getCompanyId(), CompanyConstants.SYSTEM,
-			getPreviewFilePath(fileVersion, index, type));
-	}
-
-	protected InputStream doGetThumbnailAsStream(
-			FileVersion fileVersion, String type)
-		throws Exception {
-
-		return DLStoreUtil.getFileAsStream(
-			fileVersion.getCompanyId(), CompanyConstants.SYSTEM,
-			getThumbnailFilePath(fileVersion, type));
-	}
-
-	protected long doGetThumbnailFileSize(FileVersion fileVersion, String type)
-		throws Exception {
-
-		return DLStoreUtil.getFileSize(
-			fileVersion.getCompanyId(), CompanyConstants.SYSTEM,
-			getThumbnailFilePath(fileVersion, type));
-	}
-
 	protected static String getPathSegment(
 		FileVersion fileVersion, boolean preview) {
 
@@ -200,6 +139,67 @@ public abstract class DLPreviewableProcessor implements DLProcessor {
 		return sb.toString();
 	}
 
+	protected void addFileToStore(
+			long companyId, String dirName, String filePath, File srcFile)
+		throws Exception {
+
+		try {
+			DLStoreUtil.addDirectory(companyId, REPOSITORY_ID, dirName);
+		}
+		catch (DuplicateDirectoryException dde) {
+		}
+
+		DLStoreUtil.addFile(companyId, REPOSITORY_ID, filePath, srcFile);
+	}
+
+	protected InputStream doGetPreviewAsStream(
+			FileVersion fileVersion, int index, String type)
+		throws Exception {
+
+		return DLStoreUtil.getFileAsStream(
+			fileVersion.getCompanyId(), CompanyConstants.SYSTEM,
+			getPreviewFilePath(fileVersion, index, type));
+	}
+
+	protected InputStream doGetPreviewAsStream(
+			FileVersion fileVersion, String type)
+		throws Exception {
+
+		return doGetPreviewAsStream(fileVersion, 0, type);
+	}
+
+	protected long doGetPreviewFileSize(
+			FileVersion fileVersion, int index, String type)
+		throws Exception {
+
+		return DLStoreUtil.getFileSize(
+			fileVersion.getCompanyId(), CompanyConstants.SYSTEM,
+			getPreviewFilePath(fileVersion, index, type));
+	}
+
+	protected long doGetPreviewFileSize(FileVersion fileVersion, String type)
+		throws Exception {
+
+		return doGetPreviewFileSize(fileVersion, 0, type);
+	}
+
+	protected InputStream doGetThumbnailAsStream(
+			FileVersion fileVersion, String type)
+		throws Exception {
+
+		return DLStoreUtil.getFileAsStream(
+			fileVersion.getCompanyId(), CompanyConstants.SYSTEM,
+			getThumbnailFilePath(fileVersion, type));
+	}
+
+	protected long doGetThumbnailFileSize(FileVersion fileVersion, String type)
+		throws Exception {
+
+		return DLStoreUtil.getFileSize(
+			fileVersion.getCompanyId(), CompanyConstants.SYSTEM,
+			getThumbnailFilePath(fileVersion, type));
+	}
+
 	protected int getPreviewFileCount(FileVersion fileVersion)
 		throws Exception {
 
@@ -214,10 +214,6 @@ public abstract class DLPreviewableProcessor implements DLProcessor {
 		}
 
 		return 0;
-	}
-
-	protected String getPreviewFilePath(FileVersion fileVersion, String type) {
-		return getPreviewFilePath(fileVersion, 0, type);
 	}
 
 	protected String getPreviewFilePath(
@@ -245,17 +241,18 @@ public abstract class DLPreviewableProcessor implements DLProcessor {
 		return sb.toString();
 	}
 
-	protected File getPreviewTempFile(String tempFileId, String type) {
-		return getPreviewTempFile(tempFileId, 0, type);
+	protected String getPreviewFilePath(FileVersion fileVersion, String type) {
+		return getPreviewFilePath(fileVersion, 0, type);
 	}
 
-	protected File getPreviewTempFile(
-		String tempFileId, int index, String type) {
-
-		String previewTempFilePath = getPreviewTempFilePath(
-			tempFileId, index, type);
+	protected File getPreviewTempFile(String id, int index, String type) {
+		String previewTempFilePath = getPreviewTempFilePath(id, index, type);
 
 		return new File(previewTempFilePath);
+	}
+
+	protected File getPreviewTempFile(String id, String type) {
+		return getPreviewTempFile(id, 0, type);
 	}
 
 	protected int getPreviewTempFileCount(
@@ -285,10 +282,6 @@ public abstract class DLPreviewableProcessor implements DLProcessor {
 		return files.length;
 	}
 
-	protected String getPreviewTempFilePath(String id, String type) {
-		return getPreviewTempFilePath(id, 0, type);
-	}
-
 	protected String getPreviewTempFilePath(String id, int index, String type) {
 		StringBundler sb = null;
 
@@ -311,6 +304,10 @@ public abstract class DLPreviewableProcessor implements DLProcessor {
 		sb.append(type);
 
 		return sb.toString();
+	}
+
+	protected String getPreviewTempFilePath(String id, String type) {
+		return getPreviewTempFilePath(id, 0, type);
 	}
 
 	protected String getThumbnailFilePath(

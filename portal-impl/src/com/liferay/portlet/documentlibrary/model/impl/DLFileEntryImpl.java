@@ -291,6 +291,5 @@ public class DLFileEntryImpl extends DLFileEntryBaseImpl {
 
 	private UnicodeProperties _extraSettingsProperties;
 	private DLFileVersion _dlFileVersion;
-	private String _imageType;
 
 }

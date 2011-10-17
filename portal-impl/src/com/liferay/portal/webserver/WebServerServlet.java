@@ -73,6 +73,7 @@ import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLAppServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLFileEntryServiceUtil;
 import com.liferay.portlet.documentlibrary.util.AudioProcessor;
 import com.liferay.portlet.documentlibrary.util.DLUtil;
 import com.liferay.portlet.documentlibrary.util.DocumentConversionUtil;
@@ -222,9 +223,7 @@ public class WebServerServlet extends HttpServlet {
 					sendFile(request, response, user, pathArray);
 				}
 				else {
-					boolean redirected = checkImageId(request, response);
-
-					if (redirected) {
+					if (isLegacyImageGalleryImageId(request, response)) {
 						return;
 					}
 
@@ -254,56 +253,54 @@ public class WebServerServlet extends HttpServlet {
 		}
 	}
 
-	protected boolean checkImageId(
+	protected boolean isLegacyImageGalleryImageId(
 		HttpServletRequest request, HttpServletResponse response) {
 
-		boolean redirected = false;
-
-		long imageId = getImageId(request);
-
-		if (imageId == 0) {
-			return redirected;
-		}
-
 		try {
+			long imageId = getImageId(request);
 
-			// Permamently redirect legacy Image Gallery URLs
-
-			DLFileEntry dlFileEntry = ImageServiceUtil.getDLFileEntry(imageId);
-
-			if (dlFileEntry != null) {
-				StringBundler sb = new StringBundler(9);
-
-				sb.append("/documents/");
-				sb.append(dlFileEntry.getGroupId());
-				sb.append(StringPool.SLASH);
-				sb.append(dlFileEntry.getFolderId());
-				sb.append(StringPool.SLASH);
-				sb.append(HttpUtil.encodeURL(HtmlUtil.unescape(
-					dlFileEntry.getTitle())));
-				sb.append("?version=");
-				sb.append(dlFileEntry.getVersion());
-
-				if (imageId == dlFileEntry.getSmallImageId()) {
-					sb.append("&imageThumbnail=1");
-				}
-				else if (imageId == dlFileEntry.getSmallImageId()) {
-					sb.append("&imageThumbnail=2");
-				}
-				else if (imageId == dlFileEntry.getSmallImageId()) {
-					sb.append("&imageThumbnail=3");
-				}
-
-				response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
-				response.setHeader(HttpHeaders.LOCATION, sb.toString());
-
-				redirected = true;
+			if (imageId == 0) {
+				return false;
 			}
+
+			DLFileEntry dlFileEntry =
+				DLFileEntryServiceUtil.fetchFileEntryByImageId(imageId);
+
+			if (dlFileEntry == null) {
+				return false;
+			}
+
+			StringBundler sb = new StringBundler(9);
+
+			sb.append("/documents/");
+			sb.append(dlFileEntry.getGroupId());
+			sb.append(StringPool.SLASH);
+			sb.append(dlFileEntry.getFolderId());
+			sb.append(StringPool.SLASH);
+			sb.append(
+				HttpUtil.encodeURL(HtmlUtil.unescape(dlFileEntry.getTitle())));
+			sb.append("?version=");
+			sb.append(dlFileEntry.getVersion());
+
+			if (imageId == dlFileEntry.getSmallImageId()) {
+				sb.append("&imageThumbnail=1");
+			}
+			else if (imageId == dlFileEntry.getSmallImageId()) {
+				sb.append("&imageThumbnail=2");
+			}
+			else if (imageId == dlFileEntry.getSmallImageId()) {
+				sb.append("&imageThumbnail=3");
+			}
+
+			response.setHeader(HttpHeaders.LOCATION, sb.toString());
+			response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
+
+			return true;
 		}
 		catch (Exception e) {
 		}
 
-		return redirected;
+		return false;
 	}
 
 	protected Image getDefaultImage(HttpServletRequest request, long imageId) {
@@ -348,6 +345,7 @@ public class WebServerServlet extends HttpServlet {
 		else {
 			long groupId = GetterUtil.getLong(pathArray[0]);
 			long folderId = GetterUtil.getLong(pathArray[1]);
+
 			String fileName = HttpUtil.decodeURL(pathArray[2], true);
 
 			if (fileName.contains(StringPool.QUESTION)) {
@@ -382,7 +380,7 @@ public class WebServerServlet extends HttpServlet {
 		else {
 			String uuid = ParamUtil.getString(request, "uuid");
 			long groupId = ParamUtil.getLong(request, "groupId");
-			boolean smallImage = ParamUtil.getBoolean(
+			boolean igSmallImage = ParamUtil.getBoolean(
 				request, "igSmallImage");
 
 			if (Validator.isNotNull(uuid) && (groupId > 0)) {
@@ -391,7 +389,7 @@ public class WebServerServlet extends HttpServlet {
 						DLAppServiceUtil.getFileEntryByUuidAndGroupId(
 							uuid, groupId);
 
-					image = convertFileEntry(smallImage, fileEntry);
+					image = convertFileEntry(igSmallImage, fileEntry);
 				}
 				catch (Exception e) {
 				}
@@ -417,6 +415,8 @@ public class WebServerServlet extends HttpServlet {
 		try {
 			Image image = new ImageImpl();
 
+			image.setModifiedDate(fileEntry.getModifiedDate());
+
 			InputStream is = null;
 
 			if (smallImage) {
@@ -430,7 +430,6 @@ public class WebServerServlet extends HttpServlet {
 			byte[] bytes = FileUtil.getBytes(is);
 
 			image.setTextObj(bytes);
-			image.setModifiedDate(fileEntry.getModifiedDate());
 
 			return image;
 		}
@@ -446,11 +445,11 @@ public class WebServerServlet extends HttpServlet {
 	}
 
 	protected byte[] getImageBytes(HttpServletRequest request, Image image) {
-		if (!PropsValues.IMAGE_AUTO_SCALE) {
-			return image.getTextObj();
-		}
-
 		try {
+			if (!PropsValues.IMAGE_AUTO_SCALE) {
+				return image.getTextObj();
+			}
+
 			ImageBag imageBag = null;
 
 			if (image.getImageId() == 0) {
