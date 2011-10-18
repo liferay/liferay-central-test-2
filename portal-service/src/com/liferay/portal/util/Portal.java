@@ -458,6 +458,10 @@ public interface Portal {
 			String category, ThemeDisplay themeDisplay)
 		throws SystemException;
 
+	public String getCreateAccountURL(
+			HttpServletRequest request, ThemeDisplay themeDisplay)
+		throws Exception;
+
 	public String getCurrentCompleteURL(HttpServletRequest request);
 
 	public String getCurrentURL(HttpServletRequest request);
