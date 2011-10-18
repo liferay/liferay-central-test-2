@@ -174,6 +174,7 @@ create table DLFileEntryMetadata (
 );
 
 create table DLFileEntryType (
+	uuid_ VARCHAR(75) null,
 	fileEntryTypeId LONG not null primary key,
 	groupId LONG,
 	companyId LONG,
@@ -215,6 +216,7 @@ COMMIT_TRANSACTION;
 update DLFileShortcut set repositoryId = groupId;
 
 alter table DLFileVersion add repositoryId LONG;
+alter table DLFileVersion add folderId LONG;
 alter table DLFileVersion add fileEntryTypeId LONG;
 
 COMMIT_TRANSACTION;
