@@ -214,8 +214,8 @@ public class JournalArticleLocalServiceImpl
 		String title = titleMap.get(locale);
 
 		content = format(
-			user.getCompanyId(), userId, groupId, articleId, version, false,
-			content, structureId, images);
+			user, groupId, articleId, version, false, content, structureId,
+			images);
 
 		article.setResourcePrimKey(resourcePrimKey);
 		article.setGroupId(groupId);
@@ -1971,9 +1971,8 @@ public class JournalArticleLocalServiceImpl
 		String title = titleMap.get(locale);
 
 		content = format(
-			user.getCompanyId(), user.getUserId(), groupId, articleId,
-			article.getVersion(), incrementVersion, content, structureId,
-			images);
+			user, groupId, articleId, article.getVersion(), incrementVersion,
+			content, structureId, images);
 
 		article.setModifiedDate(serviceContext.getModifiedDate(now));
 		article.setTitleMap(titleMap, locale);
@@ -2625,74 +2624,76 @@ public class JournalArticleLocalServiceImpl
 	}
 
 	protected void format(
-			long companyId, long userId, long groupId, String articleId,
-			double version, boolean incrementVersion, Element root, Map<String,
-			byte[]> images)
+			User user, long groupId, String articleId, double version,
+			boolean incrementVersion, Element root, Map<String, byte[]> images)
 		throws PortalException, SystemException {
 
-		for (Element el : root.elements()) {
-			String elInstanceId = el.attributeValue(
+		for (Element element : root.elements()) {
+			String elInstanceId = element.attributeValue(
 				"instance-id", StringPool.BLANK);
-			String elName = el.attributeValue("name", StringPool.BLANK);
-			String elType = el.attributeValue("type", StringPool.BLANK);
+			String elName = element.attributeValue("name", StringPool.BLANK);
+			String elType = element.attributeValue("type", StringPool.BLANK);
 
 			if (elType.equals("image")) {
 				formatImage(
-					groupId, articleId, version, incrementVersion, el,
+					groupId, articleId, version, incrementVersion, element,
 					elInstanceId, elName, images);
 			}
 			else if (elType.equals("text_area") || elType.equals("text") ||
 					 elType.equals("text_box")) {
 
-				Element dynamicContent = el.element("dynamic-content");
+				Element dynamicContentElement = element.element(
+					"dynamic-content");
 
-				String text = dynamicContent.getText();
+				String dynamicContent = dynamicContentElement.getText();
 
-				if (Validator.isNotNull(text)) {
-					text = SanitizerUtil.sanitize(
-						companyId, groupId, userId,
+				if (Validator.isNotNull(dynamicContent)) {
+					dynamicContent = SanitizerUtil.sanitize(
+						user.getCompanyId(), groupId, user.getUserId(),
 						JournalArticle.class.getName(), 0,
-						ContentTypes.TEXT_HTML, text);
+						ContentTypes.TEXT_HTML, dynamicContent);
 
-					dynamicContent.setText(text);
+					dynamicContentElement.setText(dynamicContent);
 				}
 			}
 
 			format(
-				companyId, userId, groupId, articleId, version,
-				incrementVersion, el, images);
+				user, groupId, articleId, version, incrementVersion, element,
+				images);
 		}
 	}
 
 	protected String format(
-			long companyId, long userId, long groupId, String articleId,
-			double version, boolean incrementVersion, String content,
-			String structureId, Map<String, byte[]> images)
+			User user, long groupId, String articleId, double version,
+			boolean incrementVersion, String content, String structureId,
+			Map<String, byte[]> images)
 		throws PortalException, SystemException {
 
-		Document doc = null;
+		Document document = null;
 
 		try {
-			doc = SAXReaderUtil.read(content);
+			document = SAXReaderUtil.read(content);
 
-			Element root = doc.getRootElement();
+			Element rootElement = document.getRootElement();
 
 			if (Validator.isNotNull(structureId)) {
 				format(
-					companyId, userId, groupId, articleId, version,
-					incrementVersion, root, images);
+					user, groupId, articleId, version, incrementVersion,
+					rootElement, images);
 			}
 			else {
-				Element staticContent = root.element("static-content");
+				Element staticContentElement = rootElement.element(
+					"static-content");
 
-				String sanitizedContent = SanitizerUtil.sanitize(
-					companyId, groupId, userId, JournalArticle.class.getName(),
-					0, ContentTypes.TEXT_HTML, staticContent.getText());
+				String staticContent = SanitizerUtil.sanitize(
+					user.getCompanyId(), groupId, user.getUserId(),
+					JournalArticle.class.getName(), 0, ContentTypes.TEXT_HTML,
+					staticContentElement.getText());
 
-				staticContent.setText(sanitizedContent);
+				staticContentElement.setText(staticContent);
 			}
 
-			content = DDMXMLUtil.formatXML(doc);
+			content = DDMXMLUtil.formatXML(document);
 		}
 		catch (DocumentException de) {
 			_log.error(de);
