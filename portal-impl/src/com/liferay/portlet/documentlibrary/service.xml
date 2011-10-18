@@ -385,8 +385,8 @@
 		<!-- Other fields -->
 
 		<column name="repositoryId" type="long" />
-		<column name="fileEntryId" type="long" />
 		<column name="folderId" type="long" />
+		<column name="fileEntryId" type="long" />
 		<column name="extension" type="String" />
 		<column name="mimeType" type="String" />
 		<column name="title" type="String" />
