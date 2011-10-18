@@ -204,24 +204,6 @@ public class DLFileVersionWrapper implements DLFileVersion,
 	}
 
 	/**
-	* Returns the file entry ID of this document library file version.
-	*
-	* @return the file entry ID of this document library file version
-	*/
-	public long getFileEntryId() {
-		return _dlFileVersion.getFileEntryId();
-	}
-
-	/**
-	* Sets the file entry ID of this document library file version.
-	*
-	* @param fileEntryId the file entry ID of this document library file version
-	*/
-	public void setFileEntryId(long fileEntryId) {
-		_dlFileVersion.setFileEntryId(fileEntryId);
-	}
-
-	/**
 	* Returns the folder ID of this document library file version.
 	*
 	* @return the folder ID of this document library file version
@@ -237,6 +219,24 @@ public class DLFileVersionWrapper implements DLFileVersion,
 	*/
 	public void setFolderId(long folderId) {
 		_dlFileVersion.setFolderId(folderId);
+	}
+
+	/**
+	* Returns the file entry ID of this document library file version.
+	*
+	* @return the file entry ID of this document library file version
+	*/
+	public long getFileEntryId() {
+		return _dlFileVersion.getFileEntryId();
+	}
+
+	/**
+	* Sets the file entry ID of this document library file version.
+	*
+	* @param fileEntryId the file entry ID of this document library file version
+	*/
+	public void setFileEntryId(long fileEntryId) {
+		_dlFileVersion.setFileEntryId(fileEntryId);
 	}
 
 	/**

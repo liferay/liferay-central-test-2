@@ -48,10 +48,10 @@ public class DLFileVersionCacheModel implements CacheModel<DLFileVersion> {
 		sb.append(createDate);
 		sb.append(", repositoryId=");
 		sb.append(repositoryId);
-		sb.append(", fileEntryId=");
-		sb.append(fileEntryId);
 		sb.append(", folderId=");
 		sb.append(folderId);
+		sb.append(", fileEntryId=");
+		sb.append(fileEntryId);
 		sb.append(", extension=");
 		sb.append(extension);
 		sb.append(", mimeType=");
@@ -106,8 +106,8 @@ public class DLFileVersionCacheModel implements CacheModel<DLFileVersion> {
 		}
 
 		dlFileVersionImpl.setRepositoryId(repositoryId);
-		dlFileVersionImpl.setFileEntryId(fileEntryId);
 		dlFileVersionImpl.setFolderId(folderId);
+		dlFileVersionImpl.setFileEntryId(fileEntryId);
 
 		if (extension == null) {
 			dlFileVersionImpl.setExtension(StringPool.BLANK);
@@ -190,8 +190,8 @@ public class DLFileVersionCacheModel implements CacheModel<DLFileVersion> {
 	public String userName;
 	public long createDate;
 	public long repositoryId;
-	public long fileEntryId;
 	public long folderId;
+	public long fileEntryId;
 	public String extension;
 	public String mimeType;
 	public String title;

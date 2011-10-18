@@ -1864,8 +1864,8 @@
 				<temporal>TIMESTAMP</temporal>
 			</basic>
 			<basic name="repositoryId" />
-			<basic name="fileEntryId" />
 			<basic name="folderId" />
+			<basic name="fileEntryId" />
 			<basic name="extension" />
 			<basic name="mimeType" />
 			<basic name="title" />

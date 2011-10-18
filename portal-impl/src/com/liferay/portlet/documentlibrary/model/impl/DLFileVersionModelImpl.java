@@ -72,8 +72,8 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion>
 			{ "userName", Types.VARCHAR },
 			{ "createDate", Types.TIMESTAMP },
 			{ "repositoryId", Types.BIGINT },
-			{ "fileEntryId", Types.BIGINT },
 			{ "folderId", Types.BIGINT },
+			{ "fileEntryId", Types.BIGINT },
 			{ "extension", Types.VARCHAR },
 			{ "mimeType", Types.VARCHAR },
 			{ "title", Types.VARCHAR },
@@ -88,7 +88,7 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion>
 			{ "statusByUserName", Types.VARCHAR },
 			{ "statusDate", Types.TIMESTAMP }
 		};
-	public static final String TABLE_SQL_CREATE = "create table DLFileVersion (fileVersionId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,repositoryId LONG,fileEntryId LONG,folderId LONG,extension VARCHAR(75) null,mimeType VARCHAR(75) null,title VARCHAR(255) null,description STRING null,changeLog VARCHAR(75) null,extraSettings TEXT null,fileEntryTypeId LONG,version VARCHAR(75) null,size_ LONG,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table DLFileVersion (fileVersionId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,repositoryId LONG,folderId LONG,fileEntryId LONG,extension VARCHAR(75) null,mimeType VARCHAR(75) null,title VARCHAR(255) null,description STRING null,changeLog VARCHAR(75) null,extraSettings TEXT null,fileEntryTypeId LONG,version VARCHAR(75) null,size_ LONG,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table DLFileVersion";
 	public static final String ORDER_BY_JPQL = " ORDER BY dlFileVersion.fileEntryId DESC, dlFileVersion.createDate DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY DLFileVersion.fileEntryId DESC, DLFileVersion.createDate DESC";
@@ -126,8 +126,8 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion>
 		model.setUserName(soapModel.getUserName());
 		model.setCreateDate(soapModel.getCreateDate());
 		model.setRepositoryId(soapModel.getRepositoryId());
-		model.setFileEntryId(soapModel.getFileEntryId());
 		model.setFolderId(soapModel.getFolderId());
+		model.setFileEntryId(soapModel.getFileEntryId());
 		model.setExtension(soapModel.getExtension());
 		model.setMimeType(soapModel.getMimeType());
 		model.setTitle(soapModel.getTitle());
@@ -280,27 +280,6 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion>
 	}
 
 	@JSON
-	public long getFileEntryId() {
-		return _fileEntryId;
-	}
-
-	public void setFileEntryId(long fileEntryId) {
-		_columnBitmask |= FILEENTRYID_COLUMN_BITMASK;
-
-		if (!_setOriginalFileEntryId) {
-			_setOriginalFileEntryId = true;
-
-			_originalFileEntryId = _fileEntryId;
-		}
-
-		_fileEntryId = fileEntryId;
-	}
-
-	public long getOriginalFileEntryId() {
-		return _originalFileEntryId;
-	}
-
-	@JSON
 	public long getFolderId() {
 		return _folderId;
 	}
@@ -319,6 +298,27 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion>
 
 	public long getOriginalFolderId() {
 		return _originalFolderId;
+	}
+
+	@JSON
+	public long getFileEntryId() {
+		return _fileEntryId;
+	}
+
+	public void setFileEntryId(long fileEntryId) {
+		_columnBitmask |= FILEENTRYID_COLUMN_BITMASK;
+
+		if (!_setOriginalFileEntryId) {
+			_setOriginalFileEntryId = true;
+
+			_originalFileEntryId = _fileEntryId;
+		}
+
+		_fileEntryId = fileEntryId;
+	}
+
+	public long getOriginalFileEntryId() {
+		return _originalFileEntryId;
 	}
 
 	@JSON
@@ -593,8 +593,8 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion>
 		dlFileVersionImpl.setUserName(getUserName());
 		dlFileVersionImpl.setCreateDate(getCreateDate());
 		dlFileVersionImpl.setRepositoryId(getRepositoryId());
-		dlFileVersionImpl.setFileEntryId(getFileEntryId());
 		dlFileVersionImpl.setFolderId(getFolderId());
+		dlFileVersionImpl.setFileEntryId(getFileEntryId());
 		dlFileVersionImpl.setExtension(getExtension());
 		dlFileVersionImpl.setMimeType(getMimeType());
 		dlFileVersionImpl.setTitle(getTitle());
@@ -683,13 +683,13 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion>
 
 		dlFileVersionModelImpl._setOriginalGroupId = false;
 
-		dlFileVersionModelImpl._originalFileEntryId = dlFileVersionModelImpl._fileEntryId;
-
-		dlFileVersionModelImpl._setOriginalFileEntryId = false;
-
 		dlFileVersionModelImpl._originalFolderId = dlFileVersionModelImpl._folderId;
 
 		dlFileVersionModelImpl._setOriginalFolderId = false;
+
+		dlFileVersionModelImpl._originalFileEntryId = dlFileVersionModelImpl._fileEntryId;
+
+		dlFileVersionModelImpl._setOriginalFileEntryId = false;
 
 		dlFileVersionModelImpl._originalVersion = dlFileVersionModelImpl._version;
 
@@ -731,9 +731,9 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion>
 
 		dlFileVersionCacheModel.repositoryId = getRepositoryId();
 
-		dlFileVersionCacheModel.fileEntryId = getFileEntryId();
-
 		dlFileVersionCacheModel.folderId = getFolderId();
+
+		dlFileVersionCacheModel.fileEntryId = getFileEntryId();
 
 		dlFileVersionCacheModel.extension = getExtension();
 
@@ -837,10 +837,10 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion>
 		sb.append(getCreateDate());
 		sb.append(", repositoryId=");
 		sb.append(getRepositoryId());
-		sb.append(", fileEntryId=");
-		sb.append(getFileEntryId());
 		sb.append(", folderId=");
 		sb.append(getFolderId());
+		sb.append(", fileEntryId=");
+		sb.append(getFileEntryId());
 		sb.append(", extension=");
 		sb.append(getExtension());
 		sb.append(", mimeType=");
@@ -908,12 +908,12 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion>
 		sb.append(getRepositoryId());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>fileEntryId</column-name><column-value><![CDATA[");
-		sb.append(getFileEntryId());
-		sb.append("]]></column-value></column>");
-		sb.append(
 			"<column><column-name>folderId</column-name><column-value><![CDATA[");
 		sb.append(getFolderId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>fileEntryId</column-name><column-value><![CDATA[");
+		sb.append(getFileEntryId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>extension</column-name><column-value><![CDATA[");
@@ -987,12 +987,12 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion>
 	private String _userName;
 	private Date _createDate;
 	private long _repositoryId;
-	private long _fileEntryId;
-	private long _originalFileEntryId;
-	private boolean _setOriginalFileEntryId;
 	private long _folderId;
 	private long _originalFolderId;
 	private boolean _setOriginalFolderId;
+	private long _fileEntryId;
+	private long _originalFileEntryId;
+	private boolean _setOriginalFileEntryId;
 	private String _extension;
 	private String _mimeType;
 	private String _title;
