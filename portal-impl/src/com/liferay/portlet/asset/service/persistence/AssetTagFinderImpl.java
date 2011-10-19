@@ -223,8 +223,6 @@ public class AssetTagFinderImpl
 			long groupId, String name, int startPeriod, int endPeriod)
 		throws SystemException {
 
-		List<AssetTag> list = new ArrayList<AssetTag>();
-
 		Session session = null;
 
 		try {
@@ -240,6 +238,8 @@ public class AssetTagFinderImpl
 			qPos.add(startPeriod);
 			qPos.add(endPeriod);
 
+			List<AssetTag> assetTags = new ArrayList<AssetTag>();
+
 			Iterator<Object[]> itr = q.iterate();
 
 			while (itr.hasNext()) {
@@ -253,8 +253,10 @@ public class AssetTagFinderImpl
 				assetTag.setAssetCount(
 					GetterUtil.getInteger((Serializable)array[2]));
 
-				list.add(assetTag);
+				assetTags.add(assetTag);
 			}
+
+			return assetTags;
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -262,8 +264,6 @@ public class AssetTagFinderImpl
 		finally {
 			closeSession(session);
 		}
-
-		return list;
 	}
 
 	protected String getJoin(String[] tagProperties) {
