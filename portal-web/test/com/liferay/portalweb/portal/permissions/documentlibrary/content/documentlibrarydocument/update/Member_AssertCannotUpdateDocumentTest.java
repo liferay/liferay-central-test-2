@@ -56,6 +56,6 @@ public class Member_AssertCannotUpdateDocumentTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isElementPresent(
 				"//div[@id='_20_fileEntryToolbar']/span/button"));
-		assertFalse(selenium.isElementPresent("link=Edit"));
+		assertFalse(selenium.isTextPresent("Edit"));
 	}
 }

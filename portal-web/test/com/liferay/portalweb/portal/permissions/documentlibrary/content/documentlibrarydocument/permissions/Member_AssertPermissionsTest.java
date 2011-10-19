@@ -72,7 +72,7 @@ public class Member_AssertPermissionsTest extends BaseTestCase {
 		selenium.clickAt("//a[contains(@class,'document-link')]/span[@class='entry-title']",
 			RuntimeVariables.replace("TestDocument.txt"));
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("link=Permissions"));
+		assertTrue(selenium.isTextPresent("Permissions"));
 		assertEquals(RuntimeVariables.replace("Permissions"),
 			selenium.getText("//div[@id='_20_fileEntryToolbar']/span/button"));
 		selenium.clickAt("//div[@id='_20_fileEntryToolbar']/span/button",
