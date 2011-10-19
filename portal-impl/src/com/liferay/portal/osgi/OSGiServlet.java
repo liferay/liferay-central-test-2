@@ -151,12 +151,14 @@ public class OSGiServlet extends HttpServlet {
 	}
 
 	protected BundleContext getBundleContext() {
-		if (_bundleContext == null) {
-			Framework framework = OSGiServiceUtil.getFramework();
+		if (_bundleContext != null) {
+			return _bundleContext;
+		}
 
-			if (framework != null) {
-				_bundleContext = framework.getBundleContext();
-			}
+		Framework framework = OSGiServiceUtil.getFramework();
+
+		if (framework != null) {
+			_bundleContext = framework.getBundleContext();
 		}
 
 		return _bundleContext;

@@ -44,9 +44,11 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.jar.Attributes;
 import java.util.jar.Manifest;
 
@@ -67,9 +69,6 @@ import org.springframework.context.ApplicationContext;
  * @author Raymond Augé
  */
 public class OSGiServiceUtil {
-
-	private OSGiServiceUtil() {
-	}
 
 	public static Object addBundle(String location) throws PortalException {
 		return addBundle(location, null);
@@ -145,7 +144,31 @@ public class OSGiServiceUtil {
 		_instance._updateBundle(bundleId, inputStream);
 	}
 
-	protected Map<String, String> buildProperties() {
+	private OSGiServiceUtil() {
+	}
+
+	private Object _addBundle(String location, InputStream inputStream)
+		throws PortalException {
+
+		_checkPermission();
+
+		if (_framework == null) {
+			return null;
+		}
+
+		BundleContext bundleContext = _framework.getBundleContext();
+
+		try {
+			return bundleContext.installBundle(location, inputStream);
+		}
+		catch (BundleException be) {
+			_log.error(be, be);
+
+			throw new OSGiException(be);
+		}
+	}
+
+	private Map<String, String> _buildProperties() {
 		Map<String, String> properties = new HashMap<String, String>();
 
 		properties.put(
@@ -165,7 +188,7 @@ public class OSGiServiceUtil {
 		UniqueList<String> packages = new UniqueList<String>();
 
 		try {
-			getBundleExportPackages(
+			_getBundleExportPackages(
 				PropsValues.OSGI_SYSTEM_BUNDLE_EXPORT_PACKAGES, packages);
 		}
 		catch (Exception e) {
@@ -183,7 +206,7 @@ public class OSGiServiceUtil {
 		return properties;
 	}
 
-	protected void checkPermission() throws PrincipalException {
+	private void _checkPermission() throws PrincipalException {
 		PermissionChecker permissionChecker =
 			PermissionThreadLocal.getPermissionChecker();
 
@@ -192,7 +215,7 @@ public class OSGiServiceUtil {
 		}
 	}
 
-	protected Bundle getBundle(long bundleId) {
+	private Bundle _getBundle(long bundleId) {
 		if (_framework == null) {
 			return null;
 		}
@@ -202,7 +225,7 @@ public class OSGiServiceUtil {
 		return bundleContext.getBundle(bundleId);
 	}
 
-	protected void getBundleExportPackages(
+	private void _getBundleExportPackages(
 			String[] bundleSymbolicNames, List<String> packages)
 		throws Exception {
 
@@ -256,17 +279,23 @@ public class OSGiServiceUtil {
 		}
 	}
 
-	protected List<Class<?>> getInterfaces(Object bean) {
-		List<Class<?>> interfaces = new ArrayList<Class<?>>();
+	private Framework _getFramework() {
+		return _framework;
+	}
+
+	private Set<Class<?>> _getInterfaces(Object bean) {
+		Set<Class<?>> interfaces = new HashSet<Class<?>>();
 
 		Class<?> beanClass = bean.getClass();
 
-		interfaces.addAll(Arrays.asList(beanClass.getInterfaces()));
+		for (Class<?> interfaceClass : beanClass.getInterfaces()) {
+			interfaces.add(interfaceClass);
+		}
 
-		while((beanClass = beanClass.getSuperclass()) != null) {
-			for (Class<?> classInterface : beanClass.getInterfaces()) {
-				if (!interfaces.contains(classInterface)) {
-					interfaces.add(classInterface);
+		while ((beanClass = beanClass.getSuperclass()) != null) {
+			for (Class<?> interfaceClass : beanClass.getInterfaces()) {
+				if (!interfaces.contains(interfaceClass)) {
+					interfaces.add(interfaceClass);
 				}
 			}
 		}
@@ -274,61 +303,10 @@ public class OSGiServiceUtil {
 		return interfaces;
 	}
 
-	protected ServiceReference registerService(
-		BundleContext bundleContext, String beanName, Object bean) {
+	private String _getState(long bundleId) throws PortalException {
+		_checkPermission();
 
-		List<Class<?>> interfaces = getInterfaces(bean);
-
-		List<String> names = new ArrayList<String>();
-
-		for (Class<?> interfaceClass : interfaces) {
-			names.add(interfaceClass.getName());
-		}
-
-		if (names.isEmpty()) {
-			return null;
-		}
-
-		Hashtable<String,Object> properties = new Hashtable<String, Object>();
-
-		properties.put("bean.name", beanName);
-		properties.put("original.bean", Boolean.TRUE);
-
-		ServiceRegistration<?> registerService = bundleContext.registerService(
-			names.toArray(new String[names.size()]), bean, properties);
-
-		return registerService.getReference();
-	}
-
-	protected Object _addBundle(String location, InputStream inputStream)
-		throws PortalException {
-
-		checkPermission();
-
-		if (_framework == null) {
-			return null;
-		}
-
-		BundleContext bundleContext = _framework.getBundleContext();
-
-		try {
-			return bundleContext.installBundle(location, inputStream);
-		}
-		catch (BundleException be) {
-			_log.error(be, be);
-
-			throw new OSGiException(be);
-		}
-	}
-
-	protected Framework _getFramework() {
-		return _framework;
-	}
-
-	protected String _getState(long bundleId) throws PortalException {
-		checkPermission();
-
-		Bundle bundle = getBundle(bundleId);
+		Bundle bundle = _getBundle(bundleId);
 
 		if (bundle == null) {
 			throw new OSGiException("No bundle with ID " + bundleId);
@@ -359,7 +337,7 @@ public class OSGiServiceUtil {
 		}
 	}
 
-	protected void _init() throws Exception {
+	private void _init() throws Exception {
 		List<FrameworkFactory> frameworkFactories = ServiceLoader.load(
 			FrameworkFactory.class);
 
@@ -369,7 +347,7 @@ public class OSGiServiceUtil {
 
 		FrameworkFactory frameworkFactory = frameworkFactories.get(0);
 
-		Map<String, String> properties = buildProperties();
+		Map<String, String> properties = _buildProperties();
 
 		_framework = frameworkFactory.newFramework(properties);
 
@@ -391,7 +369,7 @@ public class OSGiServiceUtil {
 			serviceListener, _PORTAL_SERVICE_FILTER);
 	}
 
-	protected void _registerContext(Object context) {
+	private void _registerContext(Object context) {
 		if ((context == null) || !(context instanceof ApplicationContext) ||
 			!PropsValues.OSGI_REGISTER_LIFERAY_SERVICES) {
 
@@ -415,17 +393,43 @@ public class OSGiServiceUtil {
 			}
 
 			if (bean != null) {
-				registerService(bundleContext, beanName, bean);
+				_registerService(bundleContext, beanName, bean);
 			}
 		}
 	}
 
-	protected void _setBundleStartLevel(long bundleId, int startLevel)
+	private ServiceReference<?> _registerService(
+		BundleContext bundleContext, String beanName, Object bean) {
+
+		Set<Class<?>> interfaces = _getInterfaces(bean);
+
+		List<String> names = new ArrayList<String>();
+
+		for (Class<?> interfaceClass : interfaces) {
+			names.add(interfaceClass.getName());
+		}
+
+		if (names.isEmpty()) {
+			return null;
+		}
+
+		Hashtable<String,Object> properties = new Hashtable<String, Object>();
+
+		properties.put("bean.name", beanName);
+		properties.put("original.bean", Boolean.TRUE);
+
+		ServiceRegistration<?> registerService = bundleContext.registerService(
+			names.toArray(new String[names.size()]), bean, properties);
+
+		return registerService.getReference();
+	}
+
+	private void _setBundleStartLevel(long bundleId, int startLevel)
 		throws PortalException {
 
-		checkPermission();
+		_checkPermission();
 
-		Bundle bundle = getBundle(bundleId);
+		Bundle bundle = _getBundle(bundleId);
 
 		if (bundle == null) {
 			throw new OSGiException("No bundle with ID " + bundleId);
@@ -436,16 +440,16 @@ public class OSGiServiceUtil {
 		bundleStartLevel.setStartLevel(startLevel);
 	}
 
-	protected void _start() throws Exception {
+	private void _start() throws Exception {
 		if (_framework != null) {
 			_framework.start();
 		}
 	}
 
-	protected void _startBundle(long bundleId) throws PortalException {
-		checkPermission();
+	private void _startBundle(long bundleId) throws PortalException {
+		_checkPermission();
 
-		Bundle bundle = getBundle(bundleId);
+		Bundle bundle = _getBundle(bundleId);
 
 		if (bundle == null) {
 			throw new OSGiException("No bundle with ID " + bundleId);
@@ -461,12 +465,12 @@ public class OSGiServiceUtil {
 		}
 	}
 
-	protected void _startBundle(long bundleId, int options)
+	private void _startBundle(long bundleId, int options)
 		throws PortalException {
 
-		checkPermission();
+		_checkPermission();
 
-		Bundle bundle = getBundle(bundleId);
+		Bundle bundle = _getBundle(bundleId);
 
 		if (bundle == null) {
 			throw new OSGiException("No bundle with ID " + bundleId);
@@ -482,16 +486,16 @@ public class OSGiServiceUtil {
 		}
 	}
 
-	protected void _stop() throws Exception {
+	private void _stop() throws Exception {
 		if (_framework != null) {
 			_framework.stop();
 		}
 	}
 
-	protected void _stopBundle(long bundleId) throws PortalException {
-		checkPermission();
+	private void _stopBundle(long bundleId) throws PortalException {
+		_checkPermission();
 
-		Bundle bundle = getBundle(bundleId);
+		Bundle bundle = _getBundle(bundleId);
 
 		if (bundle == null) {
 			throw new OSGiException("No bundle with ID " + bundleId);
@@ -507,12 +511,12 @@ public class OSGiServiceUtil {
 		}
 	}
 
-	protected void _stopBundle(long bundleId, int options)
+	private void _stopBundle(long bundleId, int options)
 		throws PortalException {
 
-		checkPermission();
+		_checkPermission();
 
-		Bundle bundle = getBundle(bundleId);
+		Bundle bundle = _getBundle(bundleId);
 
 		if (bundle == null) {
 			throw new OSGiException("No bundle with ID " + bundleId);
@@ -528,10 +532,10 @@ public class OSGiServiceUtil {
 		}
 	}
 
-	protected void _uninstallBundle(long bundleId) throws PortalException {
-		checkPermission();
+	private void _uninstallBundle(long bundleId) throws PortalException {
+		_checkPermission();
 
-		Bundle bundle = getBundle(bundleId);
+		Bundle bundle = _getBundle(bundleId);
 
 		if (bundle == null) {
 			throw new OSGiException("No bundle with ID " + bundleId);
@@ -547,10 +551,10 @@ public class OSGiServiceUtil {
 		}
 	}
 
-	protected void _updateBundle(long bundleId) throws PortalException {
-		checkPermission();
+	private void _updateBundle(long bundleId) throws PortalException {
+		_checkPermission();
 
-		Bundle bundle = getBundle(bundleId);
+		Bundle bundle = _getBundle(bundleId);
 
 		if (bundle == null) {
 			throw new OSGiException("No bundle with ID " + bundleId);
@@ -566,12 +570,12 @@ public class OSGiServiceUtil {
 		}
 	}
 
-	protected void _updateBundle(long bundleId, InputStream inputStream)
+	private void _updateBundle(long bundleId, InputStream inputStream)
 		throws PortalException {
 
-		checkPermission();
+		_checkPermission();
 
-		Bundle bundle = getBundle(bundleId);
+		Bundle bundle = _getBundle(bundleId);
 
 		if (bundle == null) {
 			throw new OSGiException("No bundle with ID " + bundleId);
@@ -591,9 +595,10 @@ public class OSGiServiceUtil {
 		"(&(portal.service=*)(!(portal.service.core=*))" +
 			"(!(portal.service.previous=*)))";
 
-	private static OSGiServiceUtil _instance = new OSGiServiceUtil();
+	private static final Log _log = LogFactoryUtil.getLog(
+		OSGiServiceUtil.class);
 
-	private static final Log _log = LogFactoryUtil.getLog(OSGiServiceUtil.class);
+	private static OSGiServiceUtil _instance = new OSGiServiceUtil();
 
 	private Framework _framework;
 
