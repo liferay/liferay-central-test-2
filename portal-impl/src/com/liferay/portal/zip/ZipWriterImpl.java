@@ -18,7 +18,7 @@ import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.memory.DeleteFileAction;
+import com.liferay.portal.kernel.memory.DeleteFileFinalizeAction;
 import com.liferay.portal.kernel.memory.FinalizeManager;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -57,8 +57,8 @@ public class ZipWriterImpl implements ZipWriter {
 
 		_file.mkdir();
 
-		FinalizeManager.register(_file,
-			new DeleteFileAction(_file.getAbsolutePath()));
+		FinalizeManager.register(
+			_file, new DeleteFileFinalizeAction(_file.getAbsolutePath()));
 	}
 
 	public ZipWriterImpl(java.io.File file) {

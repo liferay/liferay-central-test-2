@@ -19,14 +19,16 @@ import java.io.File;
 /**
  * @author Shuyang Zhou
  */
-public class DeleteFileAction implements FinalizeAction {
+public class DeleteFileFinalizeAction implements FinalizeAction {
 
-	public DeleteFileAction(String fileName) {
+	public DeleteFileFinalizeAction(String fileName) {
 		_fileName = fileName;
 	}
 
 	public void doFinalize() {
-		new File(_fileName).delete();
+		File file = new File(_fileName);
+
+		file.delete();
 	}
 
 	private final String _fileName;
