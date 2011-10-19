@@ -76,7 +76,7 @@ public class DLFileVersionImpl extends DLFileVersionBaseImpl {
 		return DLFileEntryLocalServiceUtil.getFileEntry(getFileEntryId());
 	}
 
-	public DLFolder getFolder() throws PortalException, SystemException {
+	public DLFolder getFolder() {
 		DLFolder dlFolder = null;
 
 		if (getFolderId() > 0) {
