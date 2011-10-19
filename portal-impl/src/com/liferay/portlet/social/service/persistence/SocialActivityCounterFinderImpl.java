@@ -16,8 +16,6 @@ package com.liferay.portlet.social.service.persistence;
 
 import com.liferay.portal.kernel.cache.MultiVMPoolUtil;
 import com.liferay.portal.kernel.cache.PortalCache;
-import com.liferay.portal.kernel.cache.key.CacheKeyGenerator;
-import com.liferay.portal.kernel.cache.key.CacheKeyGeneratorUtil;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.SQLQuery;
@@ -52,19 +50,19 @@ public class SocialActivityCounterFinderImpl
 	public static String COUNT_U_BY_G_C_N_S_E =
 		SocialActivityCounterFinder.class.getName() + ".countU_ByG_C_N_S_E";
 
-	public static String FIND_AC_BY_G_C_C_N_S_E =
-	SocialActivityCounterFinder.class.getName() + ".findAC_By_G_C_C_N_S_E";
-
 	public static String FIND_AC_BY_G_N_S_E_1 =
-	SocialActivityCounterFinder.class.getName() + ".findAC_ByG_N_S_E_1";
+		SocialActivityCounterFinder.class.getName() + ".findAC_ByG_N_S_E_1";
 
 	public static String FIND_AC_BY_G_N_S_E_2 =
-	SocialActivityCounterFinder.class.getName() + ".findAC_ByG_N_S_E_2";
+		SocialActivityCounterFinder.class.getName() + ".findAC_ByG_N_S_E_2";
+
+	public static String FIND_AC_BY_G_C_C_N_S_E =
+		SocialActivityCounterFinder.class.getName() + ".findAC_By_G_C_C_N_S_E";
 
 	public static String FIND_U_BY_G_C_N_S_E =
 		SocialActivityCounterFinder.class.getName() + ".findU_ByG_C_N_S_E";
 
-	public int countU_ByG_N(long groupId, String[] orderBy)
+	public int countU_ByG_N(long groupId, String[] names)
 		throws SystemException {
 
 		Session session = null;
@@ -74,18 +72,7 @@ public class SocialActivityCounterFinderImpl
 
 			String sql = CustomSQLUtil.get(COUNT_U_BY_G_C_N_S_E);
 
-			StringBuilder orderByList =
-				new StringBuilder(StringUtil.quote(orderBy[0], "'"));
-
-			for (int i = 1; i < orderBy.length; i++) {
-				orderByList.append(StringPool.COMMA);
-
-				orderByList.append(
-					StringUtil.quote(orderBy[i], "'"));
-			}
-
-			sql = StringUtil.replace(
-				sql, "[$RANKING_COUNTER_NAMES$]", orderByList.toString());
+			sql = StringUtil.replace(sql, "[$NAME$]", getNames(names));
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -98,7 +85,7 @@ public class SocialActivityCounterFinderImpl
 			qPos.add(SocialCounterPeriodUtil.getPeriodLength());
 			qPos.add(SocialCounterPeriodUtil.getActivityDay());
 
-			Iterator<Long> itr = q.list().iterator();
+			Iterator<Long> itr = q.iterate();
 
 			if (itr.hasNext()) {
 				Long count = itr.next();
@@ -118,12 +105,148 @@ public class SocialActivityCounterFinderImpl
 		}
 	}
 
-	public List<SocialActivityCounter> findAC_By_G_C_C_N_S_E(
-			long groupId, List<Long> userIds, String[] selectedCounters,
-			int start, int end)
+	public List<SocialActivityCounter> findAC_ByG_N_S_E_1(
+			long groupId, String name, int startPeriod, int endPeriod)
 		throws SystemException {
 
-		if (selectedCounters.length == 0) {
+		StringBundler sb = new StringBundler(8);
+
+		sb.append(groupId);
+		sb.append(StringPool.POUND);
+		sb.append(name);
+		sb.append(StringPool.POUND);
+		sb.append(startPeriod);
+		sb.append(StringPool.POUND);
+		sb.append(endPeriod);
+		sb.append(StringPool.POUND);
+
+		String key = sb.toString();
+
+		List<SocialActivityCounter> activityCounters = null;
+
+		if (startPeriod != SocialCounterPeriodUtil.getStartPeriod()) {
+			activityCounters =
+				(List<SocialActivityCounter>)_activityCounters.get(key);
+		}
+
+		if (activityCounters != null) {
+			return activityCounters;
+		}
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			String sql = CustomSQLUtil.get(FIND_AC_BY_G_N_S_E_1);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+			qPos.add(name);
+			qPos.add(startPeriod);
+			qPos.add(endPeriod);
+
+			activityCounters = new ArrayList<SocialActivityCounter>();
+
+			Iterator<Object[]> itr = q.iterate();
+
+			while (itr.hasNext()) {
+				Object[] array = itr.next();
+
+				SocialActivityCounter activityCounter =
+					new SocialActivityCounterImpl();
+
+				activityCounter.setName(
+					GetterUtil.getString((Serializable)array[0]));
+				activityCounter.setCurrentValue(
+					GetterUtil.getInteger((Serializable)array[1]));
+				activityCounter.setStartPeriod(
+					GetterUtil.getInteger((Serializable)array[2]));
+				activityCounter.setEndPeriod(
+					GetterUtil.getInteger((Serializable)array[3]));
+
+				activityCounters.add(activityCounter);
+			}
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			if (activityCounters == null) {
+				_activityCounters.remove(key);
+			}
+			else {
+				if (startPeriod != SocialCounterPeriodUtil.getStartPeriod()) {
+					_activityCounters.put(key, activityCounters);
+				}
+			}
+
+			closeSession(session);
+		}
+
+		return activityCounters;
+	}
+
+	public List<SocialActivityCounter> findAC_ByG_N_S_E_2(
+			long groupId, String counterName, int startPeriod, int endPeriod)
+		throws SystemException {
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			String sql = CustomSQLUtil.get(FIND_AC_BY_G_N_S_E_2);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+			qPos.add(counterName);
+			qPos.add(startPeriod);
+			qPos.add(endPeriod);
+
+			List<SocialActivityCounter> activityCounters =
+				new ArrayList<SocialActivityCounter>();
+
+			Iterator<Object[]> itr = q.iterate();
+
+			while (itr.hasNext()) {
+				Object[] array = itr.next();
+
+				SocialActivityCounter activityCounter =
+					new SocialActivityCounterImpl();
+
+				activityCounter.setClassNameId(
+					GetterUtil.getLong((Serializable)array[0]));
+				activityCounter.setName(
+					GetterUtil.getString((Serializable)array[1]));
+				activityCounter.setCurrentValue(
+					GetterUtil.getInteger((Serializable)array[2]));
+
+				activityCounters.add(activityCounter);
+			}
+
+			return activityCounters;
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public List<SocialActivityCounter> findAC_By_G_C_C_N_S_E(
+			long groupId, List<Long> userIds, String[] names, int start,
+			int end)
+		throws SystemException {
+
+		if (names.length == 0) {
 			return null;
 		}
 
@@ -134,26 +257,9 @@ public class SocialActivityCounterFinderImpl
 
 			String sql = CustomSQLUtil.get(FIND_AC_BY_G_C_C_N_S_E);
 
-			StringBuilder selectedCounterList =
-				new StringBuilder(StringUtil.quote(selectedCounters[0], "'"));
-
-			for (int i = 1; i < selectedCounters.length; i++) {
-				selectedCounterList.append(StringPool.COMMA);
-
-				selectedCounterList.append(
-					StringUtil.quote(selectedCounters[i], "'"));
-			}
-
 			sql = StringUtil.replace(
-				sql,
-				new String[] {
-					"[$SELECTED_COUNTER_NAMES$]",
-					"[$USER_IDS$]"
-				},
-				new String[] {
-					selectedCounterList.toString(),
-					StringUtil.merge(userIds)
-				});
+				sql, new String[] {"[$CLASS_PK$]", "[$NAME$]"},
+				new String[] {StringUtil.merge(userIds), getNames(names)});
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -164,8 +270,8 @@ public class SocialActivityCounterFinderImpl
 			qPos.add(SocialCounterPeriodUtil.getPeriodLength());
 			qPos.add(SocialCounterPeriodUtil.getActivityDay());
 
-			q.addEntity("SocialActivityCounter",
-				SocialActivityCounterImpl.class);
+			q.addEntity(
+				"SocialActivityCounter", SocialActivityCounterImpl.class);
 
 			return (List<SocialActivityCounter>)QueryUtil.list(
 				q, getDialect(), start, end);
@@ -178,136 +284,11 @@ public class SocialActivityCounterFinderImpl
 		}
 	}
 
-	public List<SocialActivityCounter> findAC_ByG_N_S_E_1(
-			long groupId, String counterName, int startPeriod, int endPeriod)
-		throws SystemException {
-
-		Serializable cacheKey = encodeCacheKey(
-			"findAC_ByG_N_S_E",
-			new Object[] {
-				groupId, counterName, startPeriod, endPeriod
-			});
-
-		List<SocialActivityCounter> list = null;
-
-		if (startPeriod != SocialCounterPeriodUtil.getStartPeriod()) {
-			list = (List<SocialActivityCounter>)_portalCache.get(cacheKey);
-		}
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				String sql = CustomSQLUtil.get(FIND_AC_BY_G_N_S_E_1);
-				SQLQuery q = session.createSQLQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(groupId);
-				qPos.add(counterName);
-				qPos.add(startPeriod);
-				qPos.add(endPeriod);
-
-				List<Object[]> results = (List<Object[]>)QueryUtil.list(
-					q, getDialect(), -1, -1);
-
-				list = new ArrayList<SocialActivityCounter>();
-
-				for (Object[] result : results) {
-					SocialActivityCounter activityCounter =
-						new SocialActivityCounterImpl();
-
-					activityCounter.setName(
-						GetterUtil.getString((Serializable)result[0]));
-					activityCounter.setCurrentValue(
-						GetterUtil.getInteger((Serializable)result[1]));
-					activityCounter.setStartPeriod(
-						GetterUtil.getInteger((Serializable)result[2]));
-					activityCounter.setEndPeriod(
-						GetterUtil.getInteger((Serializable)result[3]));
-
-					list.add(activityCounter);
-				}
-			}
-			catch (Exception e) {
-				throw new SystemException(e);
-			}
-			finally {
-				if (list == null) {
-					_portalCache.remove(cacheKey);
-				}
-				else {
-					if (startPeriod !=
-							SocialCounterPeriodUtil.getStartPeriod()) {
-
-						_portalCache.put(cacheKey, list);
-					}
-				}
-
-				closeSession(session);
-			}
-		}
-
-		return list;
-	}
-
-	public List<SocialActivityCounter> findAC_ByG_N_S_E_2(
-			long groupId, String counterName, int startPeriod, int endPeriod)
-		throws SystemException {
-
-		List<SocialActivityCounter> list = null;
-
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			String sql = CustomSQLUtil.get(FIND_AC_BY_G_N_S_E_2);
-			SQLQuery q = session.createSQLQuery(sql);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(groupId);
-			qPos.add(counterName);
-			qPos.add(startPeriod);
-			qPos.add(endPeriod);
-
-			List<Object[]> results = (List<Object[]>)QueryUtil.list(
-				q, getDialect(), -1, -1);
-
-			list = new ArrayList<SocialActivityCounter>();
-
-			for (Object[] result : results) {
-				SocialActivityCounter activityCounter =
-					new SocialActivityCounterImpl();
-
-				activityCounter.setClassNameId(
-					GetterUtil.getLong((Serializable)result[0]));
-				activityCounter.setName(
-					GetterUtil.getString((Serializable)result[1]));
-				activityCounter.setCurrentValue(
-					GetterUtil.getInteger((Serializable)result[2]));
-
-				list.add(activityCounter);
-			}
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-
-		return list;
-	}
-
 	public List<Long> findU_ByG_N(
-			long groupId, String[] orderBy, int start, int end)
+			long groupId, String[] names, int start, int end)
 		throws SystemException {
 
-		if (orderBy.length == 0) {
+		if (names.length == 0) {
 			return null;
 		}
 
@@ -318,18 +299,7 @@ public class SocialActivityCounterFinderImpl
 
 			String sql = CustomSQLUtil.get(FIND_U_BY_G_C_N_S_E);
 
-			StringBuilder orderByList =
-				new StringBuilder(StringUtil.quote(orderBy[0], "'"));
-
-			for (int i = 1; i < orderBy.length; i++) {
-				orderByList.append(StringPool.COMMA);
-
-				orderByList.append(
-					StringUtil.quote(orderBy[i], "'"));
-			}
-
-			sql = StringUtil.replace(
-				sql, "[$RANKING_COUNTER_NAMES$]", orderByList.toString());
+			sql = StringUtil.replace(sql, "[$NAME$]", getNames(names));
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -351,24 +321,25 @@ public class SocialActivityCounterFinderImpl
 		}
 	}
 
-	protected Serializable encodeCacheKey(String methodName, Object[] args) {
-		StringBundler sb = new StringBundler(args.length * 2 + 1);
-
-		sb.append(methodName);
-
-		for (Object arg : args) {
-			sb.append(StringPool.PERIOD);
-			sb.append(StringUtil.toHexString(arg));
+	protected String getNames(String[] names) {
+		if (names.length == 0) {
+			return StringPool.BLANK;
 		}
 
-		CacheKeyGenerator cacheKeyGenerator =
-			CacheKeyGeneratorUtil.getCacheKeyGenerator(
-				SocialActivityCounterFinder.class.getName());
+		StringBundler sb = new StringBundler(names.length * 2 - 1);
 
-		return cacheKeyGenerator.getCacheKey(sb);
+		for (int i = 0; i < names.length; i++) {
+			sb.append(StringUtil.quote(names[i], StringPool.APOSTROPHE));
+
+			if ((i + 1) < names.length) {
+				sb.append(StringPool.COMMA);
+			}
+		}
+
+		return sb.toString();
 	}
 
-	private static PortalCache _portalCache = MultiVMPoolUtil.getCache(
+	private static PortalCache _activityCounters = MultiVMPoolUtil.getCache(
 		SocialActivityCounterFinder.class.getName());
 
 }

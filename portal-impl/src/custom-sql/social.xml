@@ -266,7 +266,7 @@
 			WHERE
 				(groupId = ?) AND
 				(classNameId = ?) AND
-				(name IN ([$RANKING_COUNTER_NAMES$])) AND
+				(name IN ([$NAME$])) AND
 				(startPeriod + ? >= ?) AND
 				(endPeriod = -1)
 		]]>
@@ -311,24 +311,6 @@
 				currentValue DESC
 		]]>
 	</sql>
-	<sql id="com.liferay.portlet.social.service.persistence.SocialActivityCounterFinder.findU_ByG_C_N_S_E">
-		<![CDATA[
-			SELECT
-				classPK
-			FROM
-				SocialActivityCounter
-			WHERE
-				(groupId = ?) AND
-				(classNameId = ?) AND
-				(name IN ([$RANKING_COUNTER_NAMES$])) AND
-				(startPeriod + ? >= ?) AND
-				(endPeriod = -1)
-			GROUP BY
-				classPK
-			ORDER BY
-				SUM(currentValue)
-		]]>
-	</sql>
 	<sql id="com.liferay.portlet.social.service.persistence.SocialActivityCounterFinder.findAC_By_G_C_C_N_S_E">
 		<![CDATA[
 			SELECT
@@ -338,12 +320,30 @@
 			WHERE
 				(groupId = ?) AND
 				(classNameId = ?) AND
-				(classPK IN ([$USER_IDS$])) AND
-				(name IN ([$SELECTED_COUNTER_NAMES$])) AND
+				(classPK IN ([$CLASS_PK$])) AND
+				(name IN ([$NAME$])) AND
 				(startPeriod + ? >= ?) AND
 				(endPeriod = -1)
 			ORDER BY
 				classPK
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.social.service.persistence.SocialActivityCounterFinder.findU_ByG_C_N_S_E">
+		<![CDATA[
+			SELECT
+				classPK
+			FROM
+				SocialActivityCounter
+			WHERE
+				(groupId = ?) AND
+				(classNameId = ?) AND
+				(name IN ([$NAME$])) AND
+				(startPeriod + ? >= ?) AND
+				(endPeriod = -1)
+			GROUP BY
+				classPK
+			ORDER BY
+				SUM(currentValue)
 		]]>
 	</sql>
 	<sql id="com.liferay.portlet.social.service.persistence.SocialActivityFinder.countByGroupId">
