@@ -7,6 +7,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.CacheModel;
 
 import java.io.Serializable;
+
 import java.util.Date;
 
 /**
