@@ -19,7 +19,11 @@
 <%
 SearchContainer searchContainer = (SearchContainer)request.getAttribute("liferay-ui:search:searchContainer");
 
-String redirect = searchContainer.getIteratorURL().getParameterMap().get("redirect").toString();
+PortletURL iteratorURL = searchContainer.getIteratorURL();
+
+Map<String, String[]> parameterMap = iteratorURL.getParameterMap();
+
+String redirect = parameterMap.get("redirect")[0];
 
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
