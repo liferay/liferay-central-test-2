@@ -231,12 +231,16 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 	public FileVersion getLatestFileVersion()
 		throws PortalException, SystemException {
 
-		if (_latestFileVersion == null) {
-			Document latestDocumentVersion = getAllVersions().get(0);
-
-			_latestFileVersion = CMISRepositoryLocalServiceUtil.toFileVersion(
-				getRepositoryId(), latestDocumentVersion);
+		if (_latestFileVersion != null) {
+			return _latestFileVersion;
 		}
+
+		List<Document> documents = getAllVersions();
+
+		Document latestDocumentVersion = documents.get(0);
+
+		_latestFileVersion = CMISRepositoryLocalServiceUtil.toFileVersion(
+			getRepositoryId(), latestDocumentVersion);
 
 		return _latestFileVersion;
 	}

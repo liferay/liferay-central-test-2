@@ -171,4 +171,4 @@ boolean enableCommentRatings = GetterUtil.getBoolean(preferences.getValue("enabl
 Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZone);
 %>
 
-<%@ include file="/html/portlet/document_library/util.jsp" %>
+<%@ include file="/html/portlet/document_library/util.jspf" %>

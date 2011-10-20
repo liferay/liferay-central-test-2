@@ -14,14 +14,6 @@
  */
 --%>
 
-<%@ page import="com.liferay.portal.kernel.repository.model.FileEntry" %>
-<%@ page import="com.liferay.portal.kernel.util.HtmlUtil" %>
-<%@ page import="com.liferay.portal.kernel.util.HttpUtil" %>
-<%@ page import="com.liferay.portal.kernel.util.StringBundler" %>
-<%@ page import="com.liferay.portal.kernel.util.StringPool" %>
-<%@ page import="com.liferay.portal.theme.ThemeDisplay" %>
-<%@ page import="com.liferay.portal.webserver.WebServerServletTokenUtil" %>
-
 <%!
 private static final String _getFileEntryImage(FileEntry fileEntry, ThemeDisplay themeDisplay) {
 	StringBundler sb = new StringBundler(5);
