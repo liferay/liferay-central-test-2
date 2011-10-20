@@ -27,7 +27,8 @@ public class AddDataDefinitionFieldNullTests extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTestSuite(AssertCannotAddDataDefinitionFieldNullTest.class);
+		testSuite.addTestSuite(
+			AssertCannotAddDataDefinitionFieldNullTest.class);
 		testSuite.addTestSuite(TearDownDataDefinitionTest.class);
 
 		return testSuite;
