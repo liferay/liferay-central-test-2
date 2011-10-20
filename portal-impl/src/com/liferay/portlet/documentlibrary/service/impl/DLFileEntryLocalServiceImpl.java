@@ -1655,11 +1655,12 @@ public class DLFileEntryLocalServiceImpl
 			throw new DuplicateFolderNameException(title);
 		}
 
-		DLFileEntry dlFileEntry =
-			dlFileEntryPersistence.fetchByG_F_T(groupId, folderId, title);
+		DLFileEntry dlFileEntry = dlFileEntryPersistence.fetchByG_F_T(
+			groupId, folderId, title);
 
 		if ((dlFileEntry != null) &&
 			(dlFileEntry.getFileEntryId() != fileEntryId)) {
+
 			throw new DuplicateFileException(title);
 		}
 	}
