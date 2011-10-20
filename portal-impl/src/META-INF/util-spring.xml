@@ -469,6 +469,10 @@
 			<bean class="com.liferay.portal.service.permission.RolePermissionImpl" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.permission.SubscriptionPermission" class="com.liferay.portal.service.permission.SubscriptionPermissionImpl" />
+	<bean id="com.liferay.portal.service.permission.SubscriptionPermissionUtil" class="com.liferay.portal.service.permission.SubscriptionPermissionUtil">
+		<property name="subscriptionPermission" ref="com.liferay.portal.service.permission.SubscriptionPermission" />
+	</bean>
 	<bean id="com.liferay.portal.service.permission.TeamPermissionUtil" class="com.liferay.portal.service.permission.TeamPermissionUtil">
 		<property name="teamPermission">
 			<bean class="com.liferay.portal.service.permission.TeamPermissionImpl" />
@@ -660,9 +664,5 @@
 	<bean id="com.liferay.portlet.usersadmin.util.UsersAdmin" class="com.liferay.portlet.usersadmin.util.UsersAdminImpl" />
 	<bean id="com.liferay.portlet.usersadmin.util.UsersAdminUtil" class="com.liferay.portlet.usersadmin.util.UsersAdminUtil">
 		<property name="usersAdmin" ref="com.liferay.portlet.usersadmin.util.UsersAdmin" />
-	</bean>
-	<bean id="com.liferay.portal.security.permission.SubscriptionPermission" class="com.liferay.portal.security.permission.SubscriptionPermissionImpl" />
-	<bean id="com.liferay.portal.security.permission.SubscriptionPermissionUtil" class="com.liferay.portal.security.permission.SubscriptionPermissionUtil">
-		<property name="subscriptionPermission" ref="com.liferay.portal.security.permission.SubscriptionPermission" />
 	</bean>
 </beans>

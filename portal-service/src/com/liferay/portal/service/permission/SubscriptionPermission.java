@@ -12,21 +12,23 @@
  * details.
  */
 
-package com.liferay.portal.security.permission;
+package com.liferay.portal.service.permission;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.model.User;
+import com.liferay.portal.security.permission.PermissionChecker;
 
 /**
  * @author Mate Thurzo
  */
 public interface SubscriptionPermission {
 
-	public void check(User user, String className, long classPK)
+	public void check(
+			PermissionChecker permissionChecker, String className, long classPK)
 		throws PortalException, SystemException;
 
-	public boolean contains(User user, String className, long classPK)
+	public boolean contains(
+			PermissionChecker permissionChecker, String className, long classPK)
 		throws PortalException, SystemException;
 
 }

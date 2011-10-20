@@ -36,11 +36,13 @@ import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Subscription;
 import com.liferay.portal.model.User;
-import com.liferay.portal.security.permission.SubscriptionPermissionUtil;
+import com.liferay.portal.security.permission.PermissionChecker;
+import com.liferay.portal.security.permission.PermissionCheckerFactoryUtil;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.SubscriptionLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portal.service.permission.SubscriptionPermissionUtil;
 
 import java.io.File;
 import java.io.Serializable;
@@ -341,16 +343,12 @@ public class SubscriptionSender implements Serializable {
 	protected boolean hasPermission(Subscription subscription, User user)
 		throws Exception {
 
-		String className = subscription.getClassName();
-		long classPK = subscription.getClassPK();
+		PermissionChecker permissionChecker =
+			PermissionCheckerFactoryUtil.create(user, true);
 
-		try {
-			return SubscriptionPermissionUtil.contains(
-				user, className, classPK);
-		}
-		catch (Exception e) {
-			return false;
-		}
+		return SubscriptionPermissionUtil.contains(
+			permissionChecker, subscription.getClassName(),
+			subscription.getClassPK());
 	}
 
 	protected void notifySubscriber(Subscription subscription)

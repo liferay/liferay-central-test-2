@@ -20,7 +20,6 @@ import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.util.PropsValues;
-import com.liferay.portlet.messageboards.NoSuchCategoryException;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBCategoryConstants;
 import com.liferay.portlet.messageboards.service.MBBanLocalServiceUtil;
@@ -85,15 +84,10 @@ public class MBCategoryPermission {
 			String actionId)
 		throws PortalException, SystemException {
 
-		try {
-			MBCategory category = MBCategoryLocalServiceUtil.getCategory(
-				categoryId);
+		MBCategory category = MBCategoryLocalServiceUtil.getCategory(
+			categoryId);
 
-			return contains(permissionChecker, category, actionId);
-		}
-		catch (NoSuchCategoryException nsce) {
-			return false;
-		}
+		return contains(permissionChecker, category, actionId);
 	}
 
 	public static boolean contains(

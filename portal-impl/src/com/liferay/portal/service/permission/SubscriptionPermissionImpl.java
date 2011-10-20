@@ -12,14 +12,13 @@
  * details.
  */
 
-package com.liferay.portal.security.permission;
+package com.liferay.portal.service.permission;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.service.permission.BlogsPermission;
 import com.liferay.portlet.journal.model.JournalArticle;
@@ -38,41 +37,24 @@ import com.liferay.portlet.wiki.service.permission.WikiPagePermission;
  */
 public class SubscriptionPermissionImpl implements SubscriptionPermission {
 
-	public void check(User user, String className, long classPK)
+	public void check(
+			PermissionChecker permissionChecker, String className, long classPK)
 		throws PortalException, SystemException {
 
-		if (!contains(user, className, classPK)) {
+		if (!contains(permissionChecker, className, classPK)) {
 			throw new PrincipalException();
 		}
 	}
 
-	public boolean contains(User user, String className, long classPK)
+	public boolean contains(
+			PermissionChecker permissionChecker, String className, long classPK)
 		throws PortalException, SystemException {
-
-		PermissionChecker permissionChecker =
-			PermissionThreadLocal.getPermissionChecker();
-
-		if (permissionChecker == null) {
-			try {
-				permissionChecker = PermissionCheckerFactoryUtil.create(
-					user, true);
-
-				PermissionThreadLocal.setPermissionChecker(permissionChecker);
-			}
-			catch (Exception e) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(
-						"Subscription permission checking failed for user: " +
-							user.getUserId());
-				}
-				return false;
-			}
-		}
 
 		if (className == null) {
 			return false;
 		}
-		else if (className.equals(BlogsEntry.class.getName())) {
+
+		if (className.equals(BlogsEntry.class.getName())) {
 			return BlogsPermission.contains(
 				permissionChecker, classPK, ActionKeys.SUBSCRIBE);
 		}
@@ -99,8 +81,5 @@ public class SubscriptionPermissionImpl implements SubscriptionPermission {
 
 		return true;
 	}
-
-	private static final Log _log =
-		LogFactoryUtil.getLog(SubscriptionPermissionImpl.class);
 
 }

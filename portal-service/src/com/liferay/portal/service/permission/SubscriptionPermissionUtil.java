@@ -12,27 +12,31 @@
  * details.
  */
 
-package com.liferay.portal.security.permission;
+package com.liferay.portal.service.permission;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.model.User;
+import com.liferay.portal.security.permission.PermissionChecker;
 
 /**
  * @author Mate Thurzo
  */
 public class SubscriptionPermissionUtil {
 
-	public static void check(User user, String className, long classPK)
+	public static void check(
+			PermissionChecker permissionChecker, String className, long classPK)
 		throws PortalException, SystemException {
 
-		getSubscriptionPermission().check(user, className, classPK);
+		getSubscriptionPermission().check(
+			permissionChecker, className, classPK);
 	}
 
-	public static boolean contains(User user, String className, long classPK)
+	public static boolean contains(
+			PermissionChecker permissionChecker, String className, long classPK)
 		throws PortalException, SystemException {
 
-		return getSubscriptionPermission().contains(user, className, classPK);
+		return getSubscriptionPermission().contains(
+			permissionChecker, className, classPK);
 	}
 
 	public static SubscriptionPermission getSubscriptionPermission() {
@@ -40,7 +44,7 @@ public class SubscriptionPermissionUtil {
 	}
 
 	public void setSubscriptionPermission(
-			SubscriptionPermission subscriptionPermission) {
+		SubscriptionPermission subscriptionPermission) {
 
 		_subscriptionPermission = subscriptionPermission;
 	}
