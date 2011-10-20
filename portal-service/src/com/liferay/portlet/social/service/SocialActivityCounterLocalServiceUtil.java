@@ -257,12 +257,13 @@ public class SocialActivityCounterLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.social.model.SocialActivityCounter addActivityCounter(
-		long companyId, long groupId, long classNameId, long classPK,
-		java.lang.String name, int ownerType, int currentValue, int totalValue)
-		throws com.liferay.portal.kernel.exception.SystemException {
+		long groupId, long classNameId, long classPK, java.lang.String name,
+		int ownerType, int currentValue, int totalValue)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .addActivityCounter(companyId, groupId, classNameId,
-			classPK, name, ownerType, currentValue, totalValue);
+				   .addActivityCounter(groupId, classNameId, classPK, name,
+			ownerType, currentValue, totalValue);
 	}
 
 	public static void addActivityCounters(
@@ -274,7 +275,8 @@ public class SocialActivityCounterLocalServiceUtil {
 
 	public static void deleteActivityCounters(
 		com.liferay.portlet.asset.model.AssetEntry assetEntry)
-		throws com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteActivityCounters(assetEntry);
 	}
 
@@ -283,75 +285,77 @@ public class SocialActivityCounterLocalServiceUtil {
 		getService().deleteActivityCounters(classNameId, classPK);
 	}
 
-	public static com.liferay.portlet.social.model.SocialActivityCounter fetchLastCounter(
+	public static com.liferay.portlet.social.model.SocialActivityCounter fetchLatestActivityCounter(
 		long groupId, long classNameId, long classPK, java.lang.String name,
 		int ownerType)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .fetchLastCounter(groupId, classNameId, classPK, name,
-			ownerType);
+				   .fetchLatestActivityCounter(groupId, classNameId, classPK,
+			name, ownerType);
 	}
 
-	public static com.liferay.portlet.social.model.SocialActivityCounter findLastCounter(
+	public static java.util.List<com.liferay.portlet.social.model.SocialActivityCounter> getActivityCounterDistribution(
+		long groupId, java.lang.String name, int offset,
+		boolean includeCurrentPeriod)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .getActivityCounterDistribution(groupId, name, offset,
+			includeCurrentPeriod);
+	}
+
+	public static java.util.List<com.liferay.portlet.social.model.SocialActivityCounter> getActivityCounterDistribution(
+		long groupId, java.lang.String name, int startPeriod, int endPeriod)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .getActivityCounterDistribution(groupId, name, startPeriod,
+			endPeriod);
+	}
+
+	public static java.util.List<com.liferay.portlet.social.model.SocialActivityCounter> getActivityCounters(
+		long groupId, java.lang.String name, int offset,
+		boolean includeCurrentPeriod)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .getActivityCounters(groupId, name, offset,
+			includeCurrentPeriod);
+	}
+
+	public static java.util.List<com.liferay.portlet.social.model.SocialActivityCounter> getActivityCounters(
+		long groupId, java.lang.String name, int startPeriod, int endPeriod)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .getActivityCounters(groupId, name, startPeriod, endPeriod);
+	}
+
+	public static com.liferay.portlet.social.model.SocialActivityCounter getLatestActivityCounter(
 		long groupId, long classNameId, long classPK, java.lang.String name,
 		int ownerType)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.social.NoSuchActivityCounterException {
 		return getService()
-				   .findLastCounter(groupId, classNameId, classPK, name,
-			ownerType);
+				   .getLatestActivityCounter(groupId, classNameId, classPK,
+			name, ownerType);
 	}
 
-	public static java.util.List<com.liferay.portlet.social.model.SocialActivityCounter> getCounterDistribution(
-		long groupId, java.lang.String name, int offset,
-		boolean includeCurrentPeriod)
+	public static int getUserActivityCounters(long groupId,
+		java.lang.String[] rankingNames)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getUserActivityCounters(groupId, rankingNames);
+	}
+
+	public static java.util.List<com.liferay.portal.kernel.util.Tuple> getUserActivityCounters(
+		long groupId, java.lang.String[] rankingNames,
+		java.lang.String[] selectedNames, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .getCounterDistribution(groupId, name, offset,
-			includeCurrentPeriod);
+				   .getUserActivityCounters(groupId, rankingNames,
+			selectedNames, start, end);
 	}
 
-	public static java.util.List<com.liferay.portlet.social.model.SocialActivityCounter> getCounterDistribution(
-		long groupId, java.lang.String name, int startPeriod, int endPeriod)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService()
-				   .getCounterDistribution(groupId, name, startPeriod, endPeriod);
-	}
-
-	public static java.util.List<com.liferay.portlet.social.model.SocialActivityCounter> getCounters(
-		long groupId, java.lang.String name, int offset,
-		boolean includeCurrentPeriod)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService()
-				   .getCounters(groupId, name, offset, includeCurrentPeriod);
-	}
-
-	public static java.util.List<com.liferay.portlet.social.model.SocialActivityCounter> getCounters(
-		long groupId, java.lang.String name, int startPeriod, int endPeriod)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getCounters(groupId, name, startPeriod, endPeriod);
-	}
-
-	public static java.util.List<com.liferay.portal.kernel.util.Tuple> getTopUsers(
-		long groupId, java.lang.String[] rankingCounterNames,
-		java.lang.String[] selectedCounterNames, int start, int end)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService()
-				   .getTopUsers(groupId, rankingCounterNames,
-			selectedCounterNames, start, end);
-	}
-
-	public static int getTopUsersCount(long groupId,
-		java.lang.String[] rankingCounterNames)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getTopUsersCount(groupId, rankingCounterNames);
-	}
-
-	public static void incrementUserAchievementsCounter(long groupId,
-		long userId)
+	public static void incrementUserAchievementCounter(long userId, long groupId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		getService().incrementUserAchievementsCounter(groupId, userId);
+		getService().incrementUserAchievementCounter(userId, groupId);
 	}
 
 	public static SocialActivityCounterLocalService getService() {

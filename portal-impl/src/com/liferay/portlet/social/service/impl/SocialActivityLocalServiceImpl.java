@@ -331,7 +331,9 @@ public class SocialActivityLocalServiceImpl
 	 *
 	 * @throws SystemException if a system exception occurred
 	 */
-	public void deleteActivities(AssetEntry assetEntry) throws SystemException {
+	public void deleteActivities(AssetEntry assetEntry)
+		throws PortalException, SystemException {
+
 		socialActivityPersistence.removeByC_C(
 			assetEntry.getClassNameId(), assetEntry.getClassPK());
 

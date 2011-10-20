@@ -63,8 +63,8 @@ public class SocialActivityAchievementLocalServiceImpl
 
 		socialActivityAchievementPersistence.update(activityAchievement, false);
 
-		socialActivityCounterLocalService.incrementUserAchievementsCounter(
-			groupId, userId);
+		socialActivityCounterLocalService.incrementUserAchievementCounter(
+			userId, groupId);
 	}
 
 }

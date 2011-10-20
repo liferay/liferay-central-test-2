@@ -32,9 +32,12 @@ import com.liferay.portlet.social.model.SocialActivityCounterConstants;
 import com.liferay.portlet.social.model.SocialActivityCounterDefinition;
 import com.liferay.portlet.social.model.SocialActivityDefinition;
 import com.liferay.portlet.social.model.SocialActivityLimit;
+import com.liferay.portlet.social.model.SocialActivityProcessor;
 import com.liferay.portlet.social.service.base.SocialActivityCounterLocalServiceBaseImpl;
 import com.liferay.portlet.social.service.persistence.SocialActivityCounterFinderUtil;
 import com.liferay.portlet.social.util.SocialCounterPeriodUtil;
+
+import edu.emory.mathcs.backport.java.util.Collections;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -51,9 +54,11 @@ public class SocialActivityCounterLocalServiceImpl
 		rollbackFor = SystemException.class,
 		propagation = Propagation.REQUIRES_NEW)
 	public SocialActivityCounter addActivityCounter(
-			long companyId, long groupId, long classNameId, long classPK,
-			String name, int ownerType, int currentValue, int totalValue)
-		throws SystemException {
+			long groupId, long classNameId, long classPK, String name,
+			int ownerType, int currentValue, int totalValue)
+		throws PortalException, SystemException {
+
+		Group group = groupPersistence.findByPrimaryKey(groupId);
 
 		long activityCounterId = counterLocalService.increment();
 
@@ -61,7 +66,7 @@ public class SocialActivityCounterLocalServiceImpl
 			socialActivityCounterPersistence.create(activityCounterId);
 
 		activityCounter.setGroupId(groupId);
-		activityCounter.setCompanyId(companyId);
+		activityCounter.setCompanyId(group.getCompanyId());
 		activityCounter.setClassNameId(classNameId);
 		activityCounter.setClassPK(classPK);
 		activityCounter.setName(name);
@@ -70,7 +75,8 @@ public class SocialActivityCounterLocalServiceImpl
 		activityCounter.setTotalValue(totalValue);
 		activityCounter.setStartPeriod(
 			SocialCounterPeriodUtil.getStartPeriod());
-		activityCounter.setEndPeriod(-1);
+		activityCounter.setEndPeriod(
+			SocialActivityCounterConstants.END_PERIOD_UNDEFINED);
 
 		socialActivityCounterPersistence.update(
 			activityCounter, false);
@@ -95,32 +101,30 @@ public class SocialActivityCounterLocalServiceImpl
 				activity.getType());
 
 		if ((activityDefinition == null) ||
-			(!activityDefinition.isCounterEnabled())) {
+			!activityDefinition.isCounterEnabled()) {
 
 			return;
 		}
 
-		// Activity Handler
+		SocialActivityProcessor activityProcessor =
+			activityDefinition.getActivityProcessor();
 
-		if (activityDefinition.getActivityProcessor() != null) {
-			activityDefinition.getActivityProcessor().processActivity(activity);
+		if (activityProcessor != null) {
+			activityProcessor.processActivity(activity);
 		}
-
-		// Counters
 
 		for (SocialActivityCounterDefinition activityCounterDefinition :
 				activityDefinition.getActivityCounterDefinitions()) {
 
 			if ((activityCounterDefinition.getIncrement() != 0) &&
-				(checkLimit(user, activity, activityCounterDefinition))) {
+				checkActivityLimit(
+					user, activity, activityCounterDefinition)) {
 
-				incrementCounter(
+				incrementActivityCounter(
 					activity.getGroupId(), user, activity.getAssetEntry(),
 					activityCounterDefinition);
 			}
 		}
-
-		// Achievements
 
 		for (SocialAchievement achievement :
 				activityDefinition.getAchievements()) {
@@ -128,72 +132,72 @@ public class SocialActivityCounterLocalServiceImpl
 			achievement.processActivity(activity);
 		}
 
-		// Activity counter
-
-		incrementCounter(
-			activity.getGroupId(), activity.getClassNameId(),
-			activity.getClassPK(),
-			SocialActivityCounterConstants.NAME_ASSET_ACTIVITY,
-			SocialActivityCounterConstants.TYPE_ASSET, 1);
-
-		incrementCounter(
+		incrementActivityCounter(
 			activity.getGroupId(),
 			PortalUtil.getClassNameId(User.class.getName()),
 			activity.getUserId(),
 			SocialActivityCounterConstants.NAME_USER_ACTIVITY,
 			SocialActivityCounterConstants.TYPE_ACTOR, 1);
+
+		incrementActivityCounter(
+			activity.getGroupId(), activity.getClassNameId(),
+			activity.getClassPK(),
+			SocialActivityCounterConstants.NAME_ASSET_ACTIVITY,
+			SocialActivityCounterConstants.TYPE_ASSET, 1);
 	}
 
 	public void deleteActivityCounters(AssetEntry assetEntry)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		if (assetEntry == null) {
 			return;
 		}
 
-		// Counters
+		SocialActivityCounter latestContributionActivityCounter =
+			fetchLatestActivityCounter(
+				assetEntry.getGroupId(),
+				PortalUtil.getClassNameId(User.class.getName()),
+				assetEntry.getUserId(),
+				SocialActivityCounterConstants.NAME_CONTRIBUTION,
+				SocialActivityCounterConstants.TYPE_CREATOR);
 
-		SocialActivityCounter lastPopularityCounter = fetchLastCounter(
-			assetEntry.getGroupId(), assetEntry.getClassNameId(),
-			assetEntry.getClassPK(),
-			SocialActivityCounterConstants.NAME_POPULARITY,
-			SocialActivityCounterConstants.TYPE_ASSET);
+		SocialActivityCounter latestPopularityActivityCounter =
+			fetchLatestActivityCounter(
+				assetEntry.getGroupId(), assetEntry.getClassNameId(),
+				assetEntry.getClassPK(),
+				SocialActivityCounterConstants.NAME_POPULARITY,
+				SocialActivityCounterConstants.TYPE_ASSET);
 
-		SocialActivityCounter lastContributionCounter = fetchLastCounter(
-			assetEntry.getGroupId(),
-			PortalUtil.getClassNameId(User.class.getName()),
-			assetEntry.getUserId(),
-			SocialActivityCounterConstants.NAME_CONTRIBUTION,
-			SocialActivityCounterConstants.TYPE_CREATOR);
-
-		if ((lastContributionCounter != null) &&
-			(lastPopularityCounter != null)) {
+		if ((latestContributionActivityCounter != null) &&
+			(latestPopularityActivityCounter != null)) {
 
 			int startPeriod = SocialCounterPeriodUtil.getStartPeriod();
 
-			if (lastContributionCounter.getStartPeriod() != startPeriod) {
-				lastContributionCounter = createNewCounterPeriod(
-					lastContributionCounter);
+			if (latestContributionActivityCounter.getStartPeriod() !=
+					startPeriod) {
+
+				latestContributionActivityCounter = addNewPeriod(
+					latestContributionActivityCounter);
 			}
 
-			lastContributionCounter.setTotalValue(
-				lastContributionCounter.getTotalValue() -
-					lastPopularityCounter.getTotalValue());
+			if (latestPopularityActivityCounter.getStartPeriod() ==
+					startPeriod) {
 
-			if (lastPopularityCounter.getStartPeriod() == startPeriod) {
-				lastContributionCounter.setCurrentValue(
-					lastContributionCounter.getCurrentValue() -
-						lastPopularityCounter.getCurrentValue());
+				latestContributionActivityCounter.setCurrentValue(
+					latestContributionActivityCounter.getCurrentValue() -
+						latestPopularityActivityCounter.getCurrentValue());
 			}
+
+			latestContributionActivityCounter.setTotalValue(
+				latestContributionActivityCounter.getTotalValue() -
+					latestPopularityActivityCounter.getTotalValue());
 
 			socialActivityCounterPersistence.update(
-				lastContributionCounter, false);
+				latestContributionActivityCounter, false);
 		}
 
 		deleteActivityCounters(
 			assetEntry.getClassNameId(), assetEntry.getClassPK());
-
-		// Limits
 
 		socialActivityLimitPersistence.removeByC_C(
 			assetEntry.getClassNameId(), assetEntry.getClassPK());
@@ -205,7 +209,7 @@ public class SocialActivityCounterLocalServiceImpl
 		socialActivityCounterPersistence.removeByC_C(classNameId, classPK);
 	}
 
-	public SocialActivityCounter fetchLastCounter(
+	public SocialActivityCounter fetchLatestActivityCounter(
 			long groupId, long classNameId, long classPK, String name,
 			int ownerType)
 		throws SystemException {
@@ -215,7 +219,64 @@ public class SocialActivityCounterLocalServiceImpl
 			SocialActivityCounterConstants.END_PERIOD_UNDEFINED);
 	}
 
-	public SocialActivityCounter findLastCounter(
+	public List<SocialActivityCounter> getActivityCounterDistribution(
+			long groupId, String name, int offset,
+			boolean includeCurrentPeriod)
+		throws SystemException {
+
+		if (includeCurrentPeriod) {
+			offset = offset - 1;
+		}
+
+		int startPeriod = SocialCounterPeriodUtil.getStartPeriod(-offset);
+
+		int endPeriod = SocialActivityCounterConstants.END_PERIOD_UNDEFINED;
+
+		if (!includeCurrentPeriod) {
+			endPeriod = SocialCounterPeriodUtil.getStartPeriod() - 1;
+		}
+
+		return getActivityCounterDistribution(
+			groupId, name, startPeriod, endPeriod);
+	}
+
+	public List<SocialActivityCounter> getActivityCounterDistribution(
+			long groupId, String name, int startPeriod, int endPeriod)
+		throws SystemException {
+
+		return socialActivityCounterFinder.findAC_ByG_N_S_E_2(
+			groupId, name, startPeriod, endPeriod);
+	}
+
+	public List<SocialActivityCounter> getActivityCounters(
+			long groupId, String name, int offset,
+			boolean includeCurrentPeriod)
+		throws SystemException {
+
+		if (includeCurrentPeriod) {
+			offset = offset - 1;
+		}
+
+		int startPeriod = SocialCounterPeriodUtil.getStartPeriod(-offset);
+
+		int endPeriod = -1;
+
+		if (!includeCurrentPeriod) {
+			endPeriod = SocialCounterPeriodUtil.getStartPeriod() - 1;
+		}
+
+		return getActivityCounters(groupId, name, startPeriod, endPeriod);
+	}
+
+	public List<SocialActivityCounter> getActivityCounters(
+			long groupId, String name, int startPeriod, int endPeriod)
+		throws SystemException {
+
+		return socialActivityCounterFinder.findAC_ByG_N_S_E_1(
+			groupId, name, startPeriod, endPeriod);
+	}
+
+	public SocialActivityCounter getLatestActivityCounter(
 			long groupId, long classNameId, long classPK, String name,
 			int ownerType)
 		throws NoSuchActivityCounterException, SystemException {
@@ -225,114 +286,102 @@ public class SocialActivityCounterLocalServiceImpl
 			SocialActivityCounterConstants.END_PERIOD_UNDEFINED);
 	}
 
-	public List<SocialActivityCounter> getCounterDistribution(
-			long groupId, String name, int offset,
-			boolean includeCurrentPeriod)
+	public int getUserActivityCounters(long groupId, String[] rankingNames)
 		throws SystemException {
 
-		if (includeCurrentPeriod) {
-			offset = offset - 1;
-		}
-
-		int startPeriod = SocialCounterPeriodUtil.getStartPeriod(-offset);
-		int endPeriod = SocialActivityCounterConstants.END_PERIOD_UNDEFINED;
-
-		if (!includeCurrentPeriod) {
-			endPeriod = SocialCounterPeriodUtil.getStartPeriod() - 1;
-		}
-
-		return getCounterDistribution(groupId, name, startPeriod, endPeriod);
+		return SocialActivityCounterFinderUtil.countU_ByG_N(
+			groupId, rankingNames);
 	}
 
-	public List<SocialActivityCounter> getCounterDistribution(
-			long groupId, String name, int startPeriod, int endPeriod)
+	public List<Tuple> getUserActivityCounters(
+			long groupId, String[] rankingNames, String[] selectedNames,
+			int start, int end)
 		throws SystemException {
 
-		return socialActivityCounterFinder.findAC_ByG_N_S_E_2(
-			groupId, name, startPeriod, endPeriod);
-	}
-
-	public List<SocialActivityCounter> getCounters(
-			long groupId, String name, int offset,
-			boolean includeCurrentPeriod)
-		throws SystemException {
-
-		if (includeCurrentPeriod) {
-			offset = offset - 1;
-		}
-
-		int startPeriod = SocialCounterPeriodUtil.getStartPeriod(-offset);
-		int endPeriod = -1;
-
-		if (!includeCurrentPeriod) {
-			endPeriod = SocialCounterPeriodUtil.getStartPeriod() - 1;
-		}
-
-		return getCounters(groupId, name, startPeriod, endPeriod);
-	}
-
-	public List<SocialActivityCounter> getCounters(
-			long groupId, String name, int startPeriod, int endPeriod)
-		throws SystemException {
-
-		return socialActivityCounterFinder.findAC_ByG_N_S_E_1(
-			groupId, name, startPeriod, endPeriod);
-	}
-
-	public List<Tuple> getTopUsers(
-			long groupId, String[] rankingCounterNames,
-			String[] selectedCounterNames, int start, int end)
-		throws SystemException {
-
-		List<Tuple> topUsers = new ArrayList<Tuple>();
-
-		List<Long> userIds =
-			SocialActivityCounterFinderUtil.findU_ByG_N(
-				groupId, rankingCounterNames, start, end);
+		List<Long> userIds = socialActivityCounterFinder.findU_ByG_N(
+			groupId, rankingNames, start, end);
 
 		if (userIds.isEmpty()) {
-			return topUsers;
+			return Collections.emptyList();
 		}
+
+		List<Tuple> userActivityCounters = new ArrayList<Tuple>();
 
 		List<SocialActivityCounter> activityCounters =
 			SocialActivityCounterFinderUtil.findAC_By_G_C_C_N_S_E(
-				groupId, userIds, selectedCounterNames, QueryUtil.ALL_POS,
+				groupId, userIds, selectedNames, QueryUtil.ALL_POS,
 				QueryUtil.ALL_POS);
 
 		long userId = 0;
-		Map<String, SocialActivityCounter> counters = null;
+		Map<String, SocialActivityCounter> activityCountersMap = null;
 
 		for (SocialActivityCounter activityCounter : activityCounters) {
 			if (userId != activityCounter.getClassPK()) {
 				userId = activityCounter.getClassPK();
-				counters = new HashMap<String, SocialActivityCounter>();
+				activityCountersMap =
+					new HashMap<String, SocialActivityCounter>();
 
-				topUsers.add(new Tuple(userId, counters));
+				Tuple userActivityCounter = new Tuple(
+					userId, activityCountersMap);
+
+				userActivityCounters.add(userActivityCounter);
 			}
 
-			counters.put(activityCounter.getName(), activityCounter);
+			activityCountersMap.put(activityCounter.getName(), activityCounter);
 		}
 
-		return topUsers;
+		return userActivityCounters;
 	}
 
-	public int getTopUsersCount(long groupId, String[] rankingCounterNames)
-		throws SystemException {
-
-		return SocialActivityCounterFinderUtil.countU_ByG_N(
-			groupId, rankingCounterNames);
-	}
-
-	public void incrementUserAchievementsCounter(long groupId, long userId)
+	public void incrementUserAchievementCounter(long userId, long groupId)
 		throws PortalException, SystemException {
 
-		incrementCounter(
+		incrementActivityCounter(
 			groupId, PortalUtil.getClassNameId(User.class.getName()), userId,
 			SocialActivityCounterConstants.NAME_USER_ACHIEVEMENT,
 			SocialActivityCounterConstants.TYPE_ACTOR, 1);
 	}
 
-	protected boolean checkLimit(
+	protected SocialActivityCounter addActivityCounter(
+			long groupId, long classNameId, long classPK, String name,
+			int ownerType, int overallValue)
+		throws PortalException, SystemException {
+
+		SocialActivityCounter activityCounter = null;
+
+		try {
+			activityCounter = addActivityCounter(
+				groupId, classNameId, classPK, name, ownerType, 0,
+				overallValue);
+		}
+		catch (SystemException se) {
+			activityCounter = fetchLatestActivityCounter(
+				groupId, classNameId, classPK, name, ownerType);
+		}
+
+		return activityCounter;
+	}
+
+	protected SocialActivityCounter addNewPeriod(
+			SocialActivityCounter activityCounter)
+		throws PortalException, SystemException {
+
+		if (activityCounter == null) {
+			return null;
+		}
+
+		activityCounter.setEndPeriod(
+			SocialCounterPeriodUtil.getStartPeriod() - 1);
+
+		socialActivityCounterPersistence.update(activityCounter, false);
+
+		return addActivityCounter(
+			activityCounter.getGroupId(), activityCounter.getClassNameId(),
+			activityCounter.getClassPK(), activityCounter.getName(),
+			activityCounter.getOwnerType(), activityCounter.getTotalValue());
+	}
+
+	protected boolean checkActivityLimit(
 			User user, SocialActivity activity,
 			SocialActivityCounterDefinition activityCounterDefinition)
 		throws PortalException, SystemException {
@@ -385,64 +434,21 @@ public class SocialActivityCounterLocalServiceImpl
 		return false;
 	}
 
-	protected SocialActivityCounter createActivityCounter(
-			long companyId, long groupId, long classNameId,	long classPK,
-			String name, int ownerType, int overallValue)
-		throws SystemException {
-
-		SocialActivityCounter activityCounter = null;
-
-		try {
-			activityCounter =
-				getSocialActivityCounterLocalService().addActivityCounter(
-					companyId, groupId, classNameId, classPK, name,
-					ownerType, 0, overallValue);
-		}
-		catch (SystemException se) {
-			activityCounter = fetchLastCounter(
-				groupId, classNameId, classPK, name, ownerType);
-		}
-
-		return activityCounter;
-	}
-
-	protected SocialActivityCounter createNewCounterPeriod(
-			SocialActivityCounter oldCounter)
-		throws SystemException {
-
-		if (oldCounter == null) {
-			return null;
-		}
-
-		oldCounter.setEndPeriod(SocialCounterPeriodUtil.getStartPeriod() - 1);
-
-		socialActivityCounterPersistence.update(oldCounter, false);
-
-		return createActivityCounter(
-			oldCounter.getCompanyId(), oldCounter.getGroupId(),
-			oldCounter.getClassNameId(), oldCounter.getClassPK(),
-			oldCounter.getName(), oldCounter.getOwnerType(),
-			oldCounter.getTotalValue());
-	}
-
-	protected void incrementCounter(
+	protected void incrementActivityCounter(
 			long groupId, long classNameId, long classPK, String name,
 			int ownerType, int increment)
 		throws PortalException, SystemException {
 
-		SocialActivityCounter activityCounter = fetchLastCounter(
+		SocialActivityCounter activityCounter = fetchLatestActivityCounter(
 			groupId, classNameId, classPK, name, ownerType);
 
 		if (activityCounter == null) {
-			Group group = groupPersistence.findByPrimaryKey(groupId);
-
-			activityCounter = createActivityCounter(
-				group.getCompanyId(), groupId, classNameId, classPK, name,
-				ownerType, 0);
+			activityCounter = addActivityCounter(
+				groupId, classNameId, classPK, name, ownerType, 0);
 		}
 
 		if (!activityCounter.isActivePeriod()) {
-			activityCounter = createNewCounterPeriod(activityCounter);
+			activityCounter = addNewPeriod(activityCounter);
 		}
 
 		activityCounter.setCurrentValue(
@@ -453,7 +459,7 @@ public class SocialActivityCounterLocalServiceImpl
 		socialActivityCounterPersistence.update(activityCounter, false);
 	}
 
-	protected void incrementCounter(
+	protected void incrementActivityCounter(
 			long groupId, User user, AssetEntry assetEntry,
 			SocialActivityCounterDefinition activityCounterDefinition)
 		throws PortalException, SystemException {
@@ -462,19 +468,19 @@ public class SocialActivityCounterLocalServiceImpl
 		long userClassNameId = PortalUtil.getClassNameId(User.class.getName());
 
 		if (ownerType == SocialActivityCounterConstants.TYPE_ACTOR) {
-			incrementCounter(
+			incrementActivityCounter(
 				groupId, userClassNameId, user.getUserId(),
 				activityCounterDefinition.getName(), ownerType,
 				activityCounterDefinition.getIncrement());
 		}
 		else if (ownerType == SocialActivityCounterConstants.TYPE_ASSET) {
-			incrementCounter(
+			incrementActivityCounter(
 				groupId, assetEntry.getClassNameId(), assetEntry.getClassPK(),
 				activityCounterDefinition.getName(), ownerType,
 				activityCounterDefinition.getIncrement());
 		}
 		else {
-			incrementCounter(
+			incrementActivityCounter(
 				groupId, userClassNameId, assetEntry.getUserId(),
 				activityCounterDefinition.getName(), ownerType,
 				activityCounterDefinition.getIncrement());
