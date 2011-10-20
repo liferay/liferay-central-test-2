@@ -1038,7 +1038,6 @@ public class ServicePreAction extends Action {
 
 				siteSettingsURL.setParameter(
 					"struts_action", "/sites_admin/edit_site");
-
 				siteSettingsURL.setParameter("closeRedirect", currentURL);
 				siteSettingsURL.setParameter(
 					"groupId", String.valueOf(scopeGroupId));
@@ -1062,8 +1061,6 @@ public class ServicePreAction extends Action {
 				siteMapSettingsURL.setParameter(
 					"struts_action", "/layouts_admin/edit_layouts");
 
-				siteMapSettingsURL.setParameter("closeRedirect", currentURL);
-
 				if (layout.isPrivateLayout()) {
 					siteMapSettingsURL.setParameter("tabs1", "private-pages");
 				}
@@ -1071,6 +1068,7 @@ public class ServicePreAction extends Action {
 					siteMapSettingsURL.setParameter("tabs1", "public-pages");
 				}
 
+				siteMapSettingsURL.setParameter("closeRedirect", currentURL);
 				siteMapSettingsURL.setParameter(
 					"groupId", String.valueOf(scopeGroupId));
 
