@@ -230,7 +230,6 @@ else if (dlFileEntryType != null) {
 		else {
 			folderName = LanguageUtil.get(pageContext, "documents-home");
 		}
-
 		%>
 
 		<portlet:renderURL var="viewFolderURL">
