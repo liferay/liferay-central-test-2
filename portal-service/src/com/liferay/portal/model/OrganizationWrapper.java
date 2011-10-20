@@ -381,6 +381,10 @@ public class OrganizationWrapper implements Organization,
 		return _organization.getGroup();
 	}
 
+	public long getGroupId() {
+		return _organization.getGroupId();
+	}
+
 	public long getLogoId() {
 		return _organization.getLogoId();
 	}
