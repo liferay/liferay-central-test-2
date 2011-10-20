@@ -307,8 +307,7 @@ public class WebServerServlet extends HttpServlet {
 		String path = GetterUtil.getString(request.getPathInfo());
 
 		if (path.startsWith("/company_logo") ||
-			path.startsWith("/layout_set_logo") ||
-			path.startsWith("/logo")) {
+			path.startsWith("/layout_set_logo") || path.startsWith("/logo")) {
 
 			return ImageLocalServiceUtil.getDefaultCompanyLogo();
 		}
