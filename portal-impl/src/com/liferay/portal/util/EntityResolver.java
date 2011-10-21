@@ -567,7 +567,7 @@ public class EntityResolver implements org.xml.sax.EntityResolver {
 		),
 
 		new KeyValuePair(
-			"http://java.sun.com/xml/ns/j2ee/jsp_2_1.xsd",
+			"http://java.sun.com/xml/ns/javaee/jsp_2_1.xsd",
 			"jsp_2_1.xsd"
 		),
 
