@@ -172,7 +172,6 @@ portletURL.setParameter("tabs1", "default-configuration");
 			className="com.liferay.portal.kernel.workflow.WorkflowHandler"
 			modelVar="workflowHandler"
 		>
-
 			<liferay-ui:search-container-row-parameter
 				name="workflowHandler"
 				value="<%= workflowHandler %>"
