@@ -19,10 +19,6 @@
 <%
 SearchContainer searchContainer = (SearchContainer)request.getAttribute("liferay-ui:search:searchContainer");
 
-PortletURL iteratorURL = searchContainer.getIteratorURL();
-
-Map<String, String[]> parameterMap = iteratorURL.getParameterMap();
-
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
 Object[] objArray = (Object[])row.getObject();
