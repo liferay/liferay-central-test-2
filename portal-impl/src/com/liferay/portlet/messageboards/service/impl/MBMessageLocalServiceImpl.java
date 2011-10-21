@@ -1639,7 +1639,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 							MBMessageConstants.DEFAULT_PARENT_MESSAGE_ID) {
 
 						AssetEntry assetEntry =
-							assetEntryLocalService.getEntry(className, classPK);
+							assetEntryLocalService.fetchEntry(
+								className, classPK);
 
 						if (assetEntry != null) {
 							JSONObject extraDataJSONObject =
