@@ -252,11 +252,12 @@ public class DLFileEntryFinderImpl
 
 					sql = StringUtil.replace(sql, "[$JOIN$]",
 						CustomSQLUtil.get(
-							DLFolderFinderImpl.JOIN_FV_BY_DLFILEENTRY));
+							DLFolderFinderImpl.JOIN_FV_BY_DL_FILE_ENTRY));
 				}
 				else {
-					sql = StringUtil.replace(sql, "[$JOIN$]", "");
 					table = "DLFileVersion";
+
+					sql = StringUtil.replace(sql, "[$JOIN$]", "");
 				}
 			}
 
