@@ -57,7 +57,6 @@ import com.liferay.portal.util.SubscriptionSender;
 import com.liferay.portlet.asset.model.AssetEntry;
 import com.liferay.portlet.asset.model.AssetLinkConstants;
 import com.liferay.portlet.blogs.model.BlogsEntry;
-import com.liferay.portlet.blogs.social.BlogsActivityKeys;
 import com.liferay.portlet.blogs.util.LinkbackProducerUtil;
 import com.liferay.portlet.documentlibrary.DuplicateDirectoryException;
 import com.liferay.portlet.documentlibrary.DuplicateFileException;
@@ -86,8 +85,8 @@ import com.liferay.portlet.messageboards.util.comparator.MessageCreateDateCompar
 import com.liferay.portlet.messageboards.util.comparator.MessageThreadComparator;
 import com.liferay.portlet.messageboards.util.comparator.ThreadLastPostDateComparator;
 import com.liferay.portlet.social.model.SocialActivity;
+import com.liferay.portlet.social.model.SocialActivityConstants;
 import com.liferay.portlet.wiki.model.WikiPage;
-import com.liferay.portlet.wiki.social.WikiActivityKeys;
 import com.liferay.util.SerializableUtil;
 
 import java.io.InputStream;
@@ -1647,12 +1646,14 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 						if (className.equals(BlogsEntry.class.getName())) {
 							groupedModel =
 								blogsEntryPersistence.findByPrimaryKey(classPK);
-							activityKey = BlogsActivityKeys.ADD_COMMENT;
+							activityKey =
+								SocialActivityConstants.TYPE_ADD_COMMENT;
 						}
 						else if (className.equals(WikiPage.class.getName())) {
 							groupedModel = wikiPageLocalService.getPage(
 								classPK);
-							activityKey = WikiActivityKeys.ADD_COMMENT;
+							activityKey =
+								SocialActivityConstants.TYPE_ADD_COMMENT;
 						}
 
 						if (groupedModel != null) {

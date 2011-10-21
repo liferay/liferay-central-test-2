@@ -4,7 +4,7 @@
 <liferay-social>
 	<activity>
 		<model-name>com.liferay.portlet.blogs.model.BlogsEntry</model-name>
-		<activity-type>10005</activity-type>
+		<activity-type>${com.liferay.portlet.social.model.SocialActivityConstants.TYPE_ADD_COMMENT}</activity-type>
 		<language-key>ADD_COMMENT</language-key>
 		<log-activity>true</log-activity>
 		<contribution-value>2</contribution-value>
@@ -25,7 +25,7 @@
 	</activity>
 	<activity>
 		<model-name>com.liferay.portlet.blogs.model.BlogsEntry</model-name>
-		<activity-type>2</activity-type>
+		<activity-type>${com.liferay.portlet.blogs.social.BlogsActivityKeys.ADD_ENTRY}</activity-type>
 		<language-key>ADD_ENTRY</language-key>
 		<log-activity>true</log-activity>
 		<participation-value>5</participation-value>
@@ -37,7 +37,7 @@
 	</activity>
 	<activity>
 		<model-name>com.liferay.portlet.blogs.model.BlogsEntry</model-name>
-		<activity-type>10004</activity-type>
+		<activity-type>${com.liferay.portlet.social.model.SocialActivityConstants.TYPE_ADD_VOTE}</activity-type>
 		<language-key>ADD_VOTE</language-key>
 		<log-activity>false</log-activity>
 		<contribution-value>5</contribution-value>
@@ -53,7 +53,7 @@
 	</activity>
 	<activity>
 		<model-name>com.liferay.portlet.blogs.model.BlogsEntry</model-name>
-		<activity-type>10002</activity-type>
+		<activity-type>${com.liferay.portlet.social.model.SocialActivityConstants.TYPE_SUBSCRIBE}</activity-type>
 		<language-key>SUBSCRIBE</language-key>
 		<log-activity>false</log-activity>
 		<contribution-value>2</contribution-value>
@@ -75,7 +75,7 @@
 	</activity>
 	<activity>
 		<model-name>com.liferay.portlet.blogs.model.BlogsEntry</model-name>
-		<activity-type>10003</activity-type>
+		<activity-type>${com.liferay.portlet.social.model.SocialActivityConstants.TYPE_UNSUBSCRIBE}</activity-type>
 		<language-key>UNSUBSCRIBE</language-key>
 		<log-activity>false</log-activity>
 		<counter>
@@ -105,14 +105,14 @@
 	</activity>
 	<activity>
 		<model-name>com.liferay.portlet.blogs.model.BlogsEntry</model-name>
-		<activity-type>10001</activity-type>
+		<activity-type>${com.liferay.portlet.social.model.SocialActivityConstants.TYPE_VIEW}</activity-type>
 		<language-key>VIEW</language-key>
 		<log-activity>false</log-activity>
 		<participation-value>1</participation-value>
 	</activity>
 	<activity>
 		<model-name>com.liferay.portlet.messageboards.model.MBMessage</model-name>
-		<activity-type>1</activity-type>
+		<activity-type>${com.liferay.portlet.messageboards.social.MBActivityKeys.ADD_MESSAGE}</activity-type>
 		<language-key>ADD_MESSAGE</language-key>
 		<log-activity>true</log-activity>
 		<participation-value>5</participation-value>
@@ -123,7 +123,7 @@
 	</activity>
 	<activity>
 		<model-name>com.liferay.portlet.messageboards.model.MBMessage</model-name>
-		<activity-type>2</activity-type>
+		<activity-type>${com.liferay.portlet.messageboards.social.MBActivityKeys.REPLY_MESSAGE}</activity-type>
 		<language-key>REPLY_MESSAGE</language-key>
 		<log-activity>false</log-activity>
 		<contribution-value>2</contribution-value>
@@ -134,7 +134,7 @@
 	</activity>
 	<activity>
 		<model-name>com.liferay.portlet.messageboards.model.MBMessage</model-name>
-		<activity-type>10004</activity-type>
+		<activity-type>${com.liferay.portlet.social.model.SocialActivityConstants.TYPE_ADD_VOTE}</activity-type>
 		<language-key>ADD_VOTE</language-key>
 		<log-activity>false</log-activity>
 		<contribution-value>5</contribution-value>
@@ -150,14 +150,14 @@
 	</activity>
 	<activity>
 		<model-name>com.liferay.portlet.messageboards.model.MBMessage</model-name>
-		<activity-type>10001</activity-type>
+		<activity-type>${com.liferay.portlet.social.model.SocialActivityConstants.TYPE_VIEW}</activity-type>
 		<language-key>VIEW</language-key>
 		<log-activity>false</log-activity>
 		<participation-value>1</participation-value>
 	</activity>
 	<activity>
 		<model-name>com.liferay.portlet.messageboards.model.MBMessage</model-name>
-		<activity-type>10002</activity-type>
+		<activity-type>${com.liferay.portlet.social.model.SocialActivityConstants.TYPE_SUBSCRIBE}</activity-type>
 		<language-key>SUBSCRIBE</language-key>
 		<log-activity>false</log-activity>
 		<contribution-value>2</contribution-value>
@@ -179,7 +179,7 @@
 	</activity>
 	<activity>
 		<model-name>com.liferay.portlet.messageboards.model.MBMessage</model-name>
-		<activity-type>10003</activity-type>
+		<activity-type>${com.liferay.portlet.social.model.SocialActivityConstants.TYPE_UNSUBSCRIBE}</activity-type>
 		<language-key>UNSUBSCRIBE</language-key>
 		<log-activity>false</log-activity>
 		<counter>
@@ -197,7 +197,7 @@
 	</activity>
 	<activity>
 		<model-name>com.liferay.portlet.wiki.model.WikiPage</model-name>
-		<activity-type>10006</activity-type>
+		<activity-type>${com.liferay.portlet.social.model.SocialActivityConstants.ADD_ATTACHMENT}</activity-type>
 		<language-key>ADD_ATTACHMENT</language-key>
 		<log-activity>false</log-activity>
 		<contribution-value>2</contribution-value>
@@ -213,7 +213,7 @@
 	</activity>
 	<activity>
 		<model-name>com.liferay.portlet.wiki.model.WikiPage</model-name>
-		<activity-type>10005</activity-type>
+		<activity-type>${com.liferay.portlet.social.model.SocialActivityConstants.TYPE_ADD_COMMENT}</activity-type>
 		<language-key>ADD_COMMENT</language-key>
 		<log-activity>true</log-activity>
 		<contribution-value>2</contribution-value>
@@ -234,7 +234,7 @@
 	</activity>
 	<activity>
 		<model-name>com.liferay.portlet.wiki.model.WikiPage</model-name>
-		<activity-type>1</activity-type>
+		<activity-type>${com.liferay.portlet.wiki.social.WikiActivityKeys.ADD_PAGE}</activity-type>
 		<language-key>ADD_PAGE</language-key>
 		<log-activity>true</log-activity>
 		<participation-value>5</participation-value>
@@ -246,7 +246,7 @@
 	</activity>
 	<activity>
 		<model-name>com.liferay.portlet.wiki.model.WikiPage</model-name>
-		<activity-type>10002</activity-type>
+		<activity-type>${com.liferay.portlet.social.model.SocialActivityConstants.TYPE_SUBSCRIBE}</activity-type>
 		<language-key>SUBSCRIBE</language-key>
 		<log-activity>false</log-activity>
 		<contribution-value>2</contribution-value>
@@ -268,7 +268,7 @@
 	</activity>
 	<activity>
 		<model-name>com.liferay.portlet.wiki.model.WikiPage</model-name>
-		<activity-type>10003</activity-type>
+		<activity-type>${com.liferay.portlet.social.model.SocialActivityConstants.TYPE_UNSUBSCRIBE}</activity-type>
 		<language-key>UNSUBSCRIBE</language-key>
 		<log-activity>false</log-activity>
 		<counter>
@@ -286,7 +286,7 @@
 	</activity>
 	<activity>
 		<model-name>com.liferay.portlet.wiki.model.WikiPage</model-name>
-		<activity-type>2</activity-type>
+		<activity-type>${com.liferay.portlet.wiki.social.WikiActivityKeys.UPDATE_PAGE}</activity-type>
 		<language-key>UPDATE_PAGE</language-key>
 		<log-activity>true</log-activity>
 		<participation-value>1</participation-value>
@@ -298,7 +298,7 @@
 	</activity>
 	<activity>
 		<model-name>com.liferay.portlet.wiki.model.WikiPage</model-name>
-		<activity-type>10001</activity-type>
+		<activity-type>${com.liferay.portlet.social.model.SocialActivityConstants.TYPE_VIEW}</activity-type>
 		<language-key>VIEW</language-key>
 		<log-activity>false</log-activity>
 		<participation-value>1</participation-value>
