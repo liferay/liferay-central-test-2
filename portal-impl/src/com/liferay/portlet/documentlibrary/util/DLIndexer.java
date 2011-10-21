@@ -315,6 +315,7 @@ public class DLIndexer extends BaseIndexer {
 				DLFileEntry.class.getName(), fileEntryId);
 
 			document.addKeyword(Field.ASSET_TAG_NAMES, assetTagNames);
+
 			document.addKeyword(Field.COMPANY_ID, dlFileEntry.getCompanyId());
 
 			if (indexContent) {
@@ -353,12 +354,13 @@ public class DLIndexer extends BaseIndexer {
 				Field.USER_NAME, PortalUtil.getUserName(
 					userId, dlFileEntry.getUserName()),
 				true);
+
+			document.addKeyword(
+				"dataRepositoryId", dlFileEntry.getDataRepositoryId());
 			document.addKeyword("extension", dlFileEntry.getExtension());
 			document.addKeyword(
 				"fileEntryTypeId", dlFileEntry.getFileEntryTypeId());
 			document.addKeyword("path", dlFileEntry.getTitle());
-			document.addKeyword(
-				"repositoryId", dlFileEntry.getDataRepositoryId());
 
 			ExpandoBridge expandoBridge =
 				ExpandoBridgeFactoryUtil.getExpandoBridge(
@@ -572,8 +574,8 @@ public class DLIndexer extends BaseIndexer {
 		}
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(DLIndexer.class);
-
 	private static final boolean _FILTER_SEARCH = true;
+
+	private static Log _log = LogFactoryUtil.getLog(DLIndexer.class);
 
 }

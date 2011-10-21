@@ -40,7 +40,6 @@ public class DLFileVersionImpl extends DLFileVersionBaseImpl {
 	public DLFileVersionImpl() {
 	}
 
-	@Override
 	public InputStream getContentStream(boolean incrementCounter)
 		throws PortalException, SystemException {
 

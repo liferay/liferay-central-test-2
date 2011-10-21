@@ -157,7 +157,7 @@ int total = 0;
 				List resultRows = searchContainer.getResultRows();
 
 				Document[] docs = hits.getDocs();
-				
+
 				if (docs != null) {
 					for (Document doc : docs) {
 
@@ -287,7 +287,7 @@ int total = 0;
 			<%
 			}
 			catch (Exception e) {
-				_log.error(e);
+				_log.error(e, e);
 			}
 			%>
 
