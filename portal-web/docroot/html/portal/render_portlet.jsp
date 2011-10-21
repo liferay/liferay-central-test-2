@@ -739,7 +739,6 @@ if (portletDecorateObj != null) {
 if ((invokerPortlet != null) && (invokerPortlet.isStrutsPortlet() || invokerPortlet.isStrutsBridgePortlet())) {
 	request.removeAttribute(ComponentConstants.COMPONENT_CONTEXT);
 }
-
 %>
 
 <%@ include file="/html/portal/render_portlet-ext.jsp" %>
