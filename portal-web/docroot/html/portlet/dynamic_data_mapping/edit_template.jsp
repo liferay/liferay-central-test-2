@@ -103,7 +103,7 @@ if (Validator.isNotNull(structureAvailableFields)) {
 				<aui:input name="description" />
 
 				<c:if test='<%= type.equals("detail") %>'>
-					<aui:select helpMessage="only-allows-deleting-required-fields-in-edit-mode" label="mode" name="mode">
+					<aui:select helpMessage="only-allow-deleting-required-fields-in-edit-mode" label="mode" name="mode">
 						<aui:option label="create" />
 						<aui:option label="edit" />
 					</aui:select>

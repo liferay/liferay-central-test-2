@@ -464,6 +464,7 @@ AUI().add(
 
 					_setAvailableFields: function(val) {
 						var instance = this;
+
 						var fields = [];
 
 						AArray.each(
