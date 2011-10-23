@@ -34,6 +34,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -53,8 +54,9 @@ public class DeployUtil {
 		File targetFile = new File(targetDir, targetFileName);
 
 		if (!targetFile.exists()) {
-			CopyTask.copyFile(file, new File(targetDir), targetFileName,
-				filterMap, overwrite, true);
+			CopyTask.copyFile(
+				file, new File(targetDir), targetFileName, filterMap, overwrite,
+				true);
 		}
 	}
 
@@ -137,10 +139,9 @@ public class DeployUtil {
 			return;
 		}
 
-		// App servers supported for undeploy
 		if (!appServerType.equals(ServerDetector.JBOSS_ID) &&
-			!appServerType.equals(ServerDetector.TOMCAT_ID) &&
-			!appServerType.equals(ServerDetector.JETTY_ID)) {
+			!appServerType.equals(ServerDetector.JETTY_ID) &&
+			!appServerType.equals(ServerDetector.TOMCAT_ID)) {
 
 			return;
 		}
