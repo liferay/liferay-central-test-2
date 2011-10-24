@@ -301,19 +301,20 @@ public class DLIndexer extends BaseIndexer {
 
 			document.addUID(PORTLET_ID, fileEntryId);
 
-			List<AssetCategory> categories =
+			List<AssetCategory> assetCategories =
 				AssetCategoryLocalServiceUtil.getCategories(
 					DLFileEntry.class.getName(), fileEntryId);
 
 			long[] assetCategoryIds = StringUtil.split(
-				ListUtil.toString(categories,
-					AssetCategory.CATEGORY_ID_ACCESSOR),
+				ListUtil.toString(
+					assetCategories, AssetCategory.CATEGORY_ID_ACCESSOR),
 				0L);
 
 			document.addKeyword(Field.ASSET_CATEGORY_IDS, assetCategoryIds);
 
 			String[] assetCategoryNames = StringUtil.split(
-				ListUtil.toString(categories, AssetCategory.NAME_ACCESSOR));
+				ListUtil.toString(
+					assetCategories, AssetCategory.NAME_ACCESSOR));
 
 			document.addKeyword(Field.ASSET_CATEGORY_NAMES, assetCategoryNames);
 

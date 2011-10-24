@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.SetUtil;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
@@ -51,6 +52,7 @@ import com.liferay.portal.service.CountryServiceUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.RegionServiceUtil;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.asset.model.AssetCategory;
 import com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil;
 import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
 import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
@@ -747,14 +749,18 @@ public abstract class BaseIndexer implements Indexer {
 
 		document.addUID(portletId, classPK);
 
-		long[] assetCategoryIds = AssetCategoryLocalServiceUtil.getCategoryIds(
-			className, classPK);
+		List<AssetCategory> assetCategories =
+			AssetCategoryLocalServiceUtil.getCategories(className, classPK);
+
+		long[] assetCategoryIds = StringUtil.split(
+			ListUtil.toString(
+				assetCategories, AssetCategory.CATEGORY_ID_ACCESSOR),
+			0L);
 
 		document.addKeyword(Field.ASSET_CATEGORY_IDS, assetCategoryIds);
 
-		String[] assetCategoryNames =
-			AssetCategoryLocalServiceUtil.getCategoryNames(
-				className, classPK);
+		String[] assetCategoryNames = StringUtil.split(
+			ListUtil.toString(assetCategories, AssetCategory.NAME_ACCESSOR));
 
 		document.addText(Field.ASSET_CATEGORY_NAMES, assetCategoryNames);
 
