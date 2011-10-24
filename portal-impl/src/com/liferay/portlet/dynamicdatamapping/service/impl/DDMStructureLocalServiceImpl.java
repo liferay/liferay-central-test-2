@@ -145,7 +145,7 @@ public class DDMStructureLocalServiceImpl
 
 		DDMStructure structure = getStructure(structureId);
 
-		 return addStructure(
+		return addStructure(
 			 userId, structure.getGroupId(), structure.getClassNameId(), null,
 			 structure.getNameMap(), structure.getDescriptionMap(),
 			 structure.getXsd(), structure.getStorageType(), serviceContext);
