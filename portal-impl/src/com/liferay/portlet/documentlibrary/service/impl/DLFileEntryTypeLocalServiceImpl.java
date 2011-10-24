@@ -158,6 +158,12 @@ public class DLFileEntryTypeLocalServiceImpl
 		}
 	}
 
+	public DLFileEntryType fetchFileEntryType(long fileEntryTypeId)
+		throws SystemException {
+
+		return dlFileEntryTypePersistence.fetchByPrimaryKey(fileEntryTypeId);
+	}
+
 	public long getDefaultFileEntryTypeId(long folderId)
 		throws PortalException, SystemException {
 

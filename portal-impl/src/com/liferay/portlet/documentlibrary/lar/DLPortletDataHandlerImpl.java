@@ -41,7 +41,6 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.documentlibrary.DuplicateFileException;
-import com.liferay.portlet.documentlibrary.NoSuchFileEntryTypeException;
 import com.liferay.portlet.documentlibrary.NoSuchFileException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileEntryMetadata;
@@ -670,14 +669,11 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		long fileEntryTypeId = dlFileEntry.getFileEntryTypeId();
 
-		DLFileEntryType dlFileEntryType = null;
-
-		try {
-			dlFileEntryType =
-				DLFileEntryTypeLocalServiceUtil.getDLFileEntryType(
+		DLFileEntryType dlFileEntryType =
+			DLFileEntryTypeLocalServiceUtil.fetchFileEntryType(
 					fileEntryTypeId);
-		}
-		catch (NoSuchFileEntryTypeException nsfete) {
+
+		if (dlFileEntryType == null) {
 			return;
 		}
 
