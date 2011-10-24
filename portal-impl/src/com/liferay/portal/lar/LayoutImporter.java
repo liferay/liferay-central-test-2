@@ -53,6 +53,7 @@ import com.liferay.portal.kernel.xml.Node;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.kernel.zip.ZipReader;
 import com.liferay.portal.kernel.zip.ZipReaderFactoryUtil;
+import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutSet;
@@ -683,10 +684,11 @@ public class LayoutImporter {
 			return;
 		}
 
+		Group group = layout.getGroup();
+
 		typeSettings.setProperty(
 			"url",
-			url.substring(0, x) + layout.getGroup().getFriendlyURL() +
-				url.substring(y));
+			url.substring(0, x) + group.getFriendlyURL() + url.substring(y));
 	}
 
 	protected void importJournalArticle(
@@ -892,7 +894,9 @@ public class LayoutImporter {
 
 			boolean addGroupPermissions = true;
 
-			if (privateLayout && layout.getGroup().isUser()) {
+			Group group = layout.getGroup();
+
+			if (privateLayout && group.isUser()) {
 				addGroupPermissions = false;
 			}
 
