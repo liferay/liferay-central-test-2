@@ -1,5 +1,3 @@
-<%@ page import="com.liferay.portlet.documentlibrary.util.DLUtil" %>
-
 <%--
 /**
  * Copyright (c) 2000-2011 Liferay, Inc. All rights reserved.
