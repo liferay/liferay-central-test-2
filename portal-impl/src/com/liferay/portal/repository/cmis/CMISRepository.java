@@ -732,7 +732,7 @@ public class CMISRepository extends BaseCmisRepository {
 			"CMIS object is unfileable for id " + objectId);
 	}
 
-	public Session getSession() throws PortalException, RepositoryException {
+	public Session getSession() throws PortalException, SystemException {
 		Session session = getCachedSession();
 
 		if (session != null) {

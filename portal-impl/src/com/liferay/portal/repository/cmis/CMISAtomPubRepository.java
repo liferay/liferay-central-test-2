@@ -16,7 +16,7 @@ package com.liferay.portal.repository.cmis;
 
 import com.liferay.portal.InvalidRepositoryException;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.repository.RepositoryException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.repository.cmis.CMISRepositoryHandler;
 import com.liferay.portal.kernel.repository.cmis.Session;
 import com.liferay.portal.kernel.util.LocaleUtil;
@@ -36,7 +36,7 @@ import org.apache.chemistry.opencmis.commons.enums.BindingType;
 public class CMISAtomPubRepository extends CMISRepositoryHandler {
 
 	@Override
-	public Session getSession() throws PortalException, RepositoryException {
+	public Session getSession() throws PortalException, SystemException {
 		Map<String, String> parameters = new HashMap<String, String>();
 
 		parameters.put(

@@ -230,7 +230,7 @@ public abstract class CMISRepositoryHandler extends BaseRepositoryImpl {
 		return _baseCmisRepository.getLatestVersionId(objectId);
 	}
 
-	public String getLogin() throws RepositoryException {
+	public String getLogin() throws SystemException {
 		String login = PrincipalThreadLocal.getName();
 
 		try {
@@ -283,7 +283,7 @@ public abstract class CMISRepositoryHandler extends BaseRepositoryImpl {
 	}
 
 	public abstract Session getSession()
-		throws PortalException, RepositoryException;
+		throws PortalException, SystemException;
 
 	public List<Long> getSubfolderIds(long folderId, boolean recurse)
 		throws SystemException {
