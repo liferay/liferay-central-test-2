@@ -295,7 +295,8 @@ public class IconMenuTag extends BaseBodyTagSupport implements BodyTag {
 
 					ScriptTag.doTag(
 						null, "liferay-menu",
-						"Liferay.Menu.register('#" + _id + "');", pageContext);
+						"Liferay.Menu.register('#" + _id + "');", bodyContent,
+						pageContext);
 				}
 
 				jspWriter.write("<ul>");
@@ -321,7 +322,7 @@ public class IconMenuTag extends BaseBodyTagSupport implements BodyTag {
 					ScriptTag.doTag(
 						null, "liferay-menu",
 						"Liferay.Menu.handleFocus('#" + _id + "menu');",
-						pageContext);
+						bodyContent, pageContext);
 				}
 				else {
 					jspWriter.write("</li></ul></span>");
