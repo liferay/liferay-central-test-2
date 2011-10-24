@@ -253,15 +253,15 @@ for (int i = 0; i < results.size(); i++) {
 				<c:otherwise>
 
 					<%
+					Map<String, Object> data = new HashMap<String, Object>();
+
+					data.put("file-entry-id", fileEntry.getFileEntryId());
+
 					PortletURL rowURL = liferayPortletResponse.createRenderURL();
 
 					rowURL.setParameter("struts_action", "/document_library/view_file_entry");
 					rowURL.setParameter("redirect", HttpUtil.addParameter(currentURL, liferayPortletResponse.getNamespace() + "showSiblings", true));
 					rowURL.setParameter("fileEntryId", String.valueOf(fileEntry.getFileEntryId()));
-
-					Map<String,Object> data = new HashMap<String,Object>();
-
-					data.put("file-entry-id", fileEntry.getFileEntryId());
 					%>
 
 					<liferay-util:buffer var="fileEntryTitle">
@@ -377,8 +377,9 @@ for (int i = 0; i < results.size(); i++) {
 					</c:choose>
 				</c:when>
 				<c:otherwise>
+
 					<%
-					Map<String,Object> data = new HashMap<String,Object>();
+					Map<String, Object> data = new HashMap<String, Object>();
 
 					data.put("folder", true);
 					data.put("folder-id", curFolder.getFolderId());
@@ -395,10 +396,10 @@ for (int i = 0; i < results.size(); i++) {
 					<liferay-util:buffer var="folderTitle">
 						<liferay-ui:icon
 							data="<%= data %>"
-							url="<%= rowURL.toString() %>"
 							image="<%= folderImage %>"
 							label="<%= true %>"
 							message="<%= curFolder.getName() %>"
+							url="<%= rowURL.toString() %>"
 						/>
 					</liferay-util:buffer>
 
