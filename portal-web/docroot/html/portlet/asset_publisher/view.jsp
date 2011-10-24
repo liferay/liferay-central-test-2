@@ -110,7 +110,7 @@ if (!paginationType.equals("none")) {
 }
 %>
 
-<c:if test='<%= showMetadataDescriptions  %>'>
+<c:if test="<%= showMetadataDescriptions %>">
 	<c:if test='<%= (assetCategoryId > 0) && selectionStyle.equals("dynamic") %>'>
 		<h1 class="asset-categorization-title">
 			<%= LanguageUtil.format(pageContext, "content-with-x-x", new String[] {assetVocabularyTitle, assetCategoryTitle}) %>
@@ -135,7 +135,12 @@ if (!paginationType.equals("none")) {
 
 	<c:if test='<%= portletName.equals(PortletKeys.RELATED_ASSETS) && (assetEntryQuery.getLinkedAssetEntryId() > 0) %>'>
 		<h1 class="related-assets-title">
-			<%= LanguageUtil.format(pageContext, "content-related-to-x", AssetEntryServiceUtil.getEntry(assetEntryQuery.getLinkedAssetEntryId()).getTitle(locale)) %>
+
+			<%
+			AssetEntry assetEntry = AssetEntryServiceUtil.getEntry(assetEntryQuery.getLinkedAssetEntryId());
+			%>
+
+			<%= LanguageUtil.format(pageContext, "content-related-to-x", assetEntry.getTitle(locale)) %>
 		</h1>
 	</c:if>
 </c:if>
