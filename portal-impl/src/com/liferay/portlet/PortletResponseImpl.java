@@ -292,7 +292,7 @@ public abstract class PortletResponseImpl implements LiferayPortletResponse {
 
 			try {
 				Constructor<? extends PortletURLImpl> constructor =
-					_constructorMap.get(portletURLClass);
+					_constructors.get(portletURLClass);
 
 				if (constructor == null) {
 					Class<?> portletURLClassObj = Class.forName(
@@ -305,10 +305,10 @@ public abstract class PortletResponseImpl implements LiferayPortletResponse {
 								long.class, String.class
 							});
 
-					_constructorMap.put(portletURLClass, constructor);
+					_constructors.put(portletURLClass, constructor);
 				}
 
-				portletURLImpl = (PortletURLImpl)constructor.newInstance(
+				portletURLImpl = constructor.newInstance(
 					new Object[] {this, plid, lifecycle});
 			}
 			catch (Exception e) {
@@ -669,7 +669,7 @@ public abstract class PortletResponseImpl implements LiferayPortletResponse {
 	private static Log _log = LogFactoryUtil.getLog(PortletResponseImpl.class);
 
 	private long _companyId;
-	private Map<String, Constructor<? extends PortletURLImpl>> _constructorMap =
+	private Map<String, Constructor<? extends PortletURLImpl>> _constructors =
 		new ConcurrentHashMap<String, Constructor<? extends PortletURLImpl>>();
 	private Document _document;
 	private Map<String, Object> _headers = new LinkedHashMap<String, Object>();
