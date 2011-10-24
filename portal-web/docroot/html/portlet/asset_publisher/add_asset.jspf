@@ -93,12 +93,7 @@ public PortletURL getAddPortletURL(LiferayPortletRequest liferayPortletRequest, 
 		return null;
 	}
 
-	if (classTypeId > 0) {
-		liferayPortletRequest.setAttribute("classTypeId", String.valueOf(classTypeId));
-	}
-	else {
-		liferayPortletRequest.setAttribute("classTypeId", "0");
-	}
+	liferayPortletRequest.setAttribute(WebKeys.ASSET_RENDERER_FACTORY_CLASS_TYPE_ID, classTypeId);
 
 	PortletURL addPortletURL = assetRendererFactory.getURLAdd(liferayPortletRequest, liferayPortletResponse);
 

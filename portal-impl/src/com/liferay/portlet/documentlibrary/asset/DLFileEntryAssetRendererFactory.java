@@ -39,6 +39,8 @@ import com.liferay.portlet.documentlibrary.service.permission.DLFileEntryPermiss
 import com.liferay.portlet.documentlibrary.service.permission.DLFileEntryTypePermission;
 import com.liferay.portlet.documentlibrary.service.permission.DLPermission;
 
+import java.io.Serializable;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -125,12 +127,13 @@ public class DLFileEntryAssetRendererFactory extends BaseAssetRendererFactory {
 		}
 
 		long classTypeId = GetterUtil.getLong(
-			(String) liferayPortletRequest.getAttribute("classTypeId"));
+			(Serializable)liferayPortletRequest.getAttribute(
+				WebKeys.ASSET_RENDERER_FACTORY_CLASS_TYPE_ID));
 
 		if ((classTypeId > 0) &&
-			(!DLFileEntryTypePermission.contains(
+			!DLFileEntryTypePermission.contains(
 				themeDisplay.getPermissionChecker(), classTypeId,
-				ActionKeys.VIEW))) {
+				ActionKeys.VIEW)) {
 
 			return null;
 		}
