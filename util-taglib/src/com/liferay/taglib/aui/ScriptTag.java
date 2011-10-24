@@ -49,6 +49,8 @@ public class ScriptTag extends BaseScriptTag {
 		if ((previousBodyContent != null) &&
 			!(previousBodyContent instanceof BodyContentWrapper)) {
 
+			// LPS-22413
+
 			previousBodyContentString = previousBodyContent.getString();
 		}
 
@@ -71,6 +73,9 @@ public class ScriptTag extends BaseScriptTag {
 		scriptTag.release();
 
 		if (previousBodyContentString != null) {
+
+			// LPS-22413
+
 			previousBodyContent.clear();
 
 			previousBodyContent.append(previousBodyContentString);
