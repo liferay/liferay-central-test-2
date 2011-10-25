@@ -474,7 +474,7 @@ int tabIndex = 1;
 			id: '<portlet:namespace />xsdContentIFrame',
 			textarea: '<portlet:namespace />xsdContent',
 			title: '<liferay-ui:message key="editor" />',
-			uri: '<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/journal/edit_template_xsl" /><portlet:param name="langType" value="xsd" /><portlet:param name="editorContentInputElement" value="<%= \"#\" + renderResponse.getNamespace() + \"xsd\" %>" /><portlet:param name="editorContentOutputElement" value="<%= \"#\" + renderResponse.getNamespace() + \"xsd\" %>" /></portlet:renderURL>'
+			uri: '<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/journal/edit_template_xsl" /><portlet:param name="langType" value="xsd" /><portlet:param name="editorContentInputElement" value='<%= "#" + renderResponse.getNamespace() + "xsd" %>' /><portlet:param name="editorContentOutputElement" value='<%= "#" + renderResponse.getNamespace() + "xsd" %>' /></portlet:renderURL>'
 		}
 	);
 

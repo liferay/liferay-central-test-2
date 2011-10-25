@@ -66,7 +66,7 @@ String langType = BeanParamUtil.getString(template, request, "langType", Journal
 
 String editorContent = xsl;
 
-if (editorContent.isEmpty()) {
+if (Validator.isNull(editorContent)) {
 	editorContent = ContentUtil.get(PropsUtil.get(PropsKeys.JOURNAL_TEMPLATE_LANGUAGE_CONTENT, new Filter(langType)));
 }
 
@@ -319,7 +319,7 @@ if (template == null) {
 			id: '<portlet:namespace />xslContentIFrame',
 			textarea: '<portlet:namespace />xslContent',
 			title: '<liferay-ui:message key="editor" />',
-			uri: '<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/journal/edit_template_xsl" /><portlet:param name="langType" value="<%= langType %>" /><portlet:param name="editorContentInputElement" value="<%= \"#\" + renderResponse.getNamespace() + \"editorContentInput\" %>" /><portlet:param name="editorContentOutputElement" value="<%= \"#\" + renderResponse.getNamespace() + \"xslContent\" %>" /></portlet:renderURL>'
+			uri: '<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/journal/edit_template_xsl" /><portlet:param name="langType" value="<%= langType %>" /><portlet:param name="editorContentInputElement" value='<%= \"#\" + renderResponse.getNamespace() + \"editorContentInput\" %>' /><portlet:param name="editorContentOutputElement" value='<%= \"#\" + renderResponse.getNamespace() + \"xslContent\" %>' /></portlet:renderURL>'
 		}
 	);
 
