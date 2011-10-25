@@ -310,10 +310,10 @@ public class LayoutSetLocalServiceUtil {
 	}
 
 	public static void updateLogo(long groupId, boolean privateLayout,
-		boolean logo, java.io.InputStream is, boolean closeStream)
+		boolean logo, java.io.InputStream is, boolean cleanUpStream)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		getService().updateLogo(groupId, privateLayout, logo, is, closeStream);
+		getService().updateLogo(groupId, privateLayout, logo, is, cleanUpStream);
 	}
 
 	public static void updateLookAndFeel(long groupId,

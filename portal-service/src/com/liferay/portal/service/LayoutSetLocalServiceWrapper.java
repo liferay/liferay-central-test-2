@@ -299,11 +299,11 @@ public class LayoutSetLocalServiceWrapper implements LayoutSetLocalService,
 	}
 
 	public void updateLogo(long groupId, boolean privateLayout, boolean logo,
-		java.io.InputStream is, boolean closeStream)
+		java.io.InputStream is, boolean cleanUpStream)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_layoutSetLocalService.updateLogo(groupId, privateLayout, logo, is,
-			closeStream);
+			cleanUpStream);
 	}
 
 	public void updateLookAndFeel(long groupId, java.lang.String themeId,

@@ -161,10 +161,10 @@ public class FileUtil {
 	}
 
 	public static byte[] getBytes(
-			InputStream is, int bufferSize, boolean closeStream)
+			InputStream is, int bufferSize, boolean cleanUpStream)
 		throws IOException {
 
-		return getFile().getBytes(is, bufferSize, closeStream);
+		return getFile().getBytes(is, bufferSize, cleanUpStream);
 	}
 
 	public static String getExtension(String fileName) {

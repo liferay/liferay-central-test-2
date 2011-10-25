@@ -84,7 +84,7 @@ public interface File {
 	public byte[] getBytes(InputStream is, int bufferSize) throws IOException;
 
 	public byte[] getBytes(
-			InputStream inputStream, int bufferSize, boolean closeStream)
+			InputStream inputStream, int bufferSize, boolean cleanUpStream)
 		throws IOException;
 
 	public byte[] getBytes(java.io.File file) throws IOException;

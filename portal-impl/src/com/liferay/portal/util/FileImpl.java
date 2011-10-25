@@ -373,7 +373,7 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 	}
 
 	public byte[] getBytes(
-			InputStream inputStream, int bufferSize, boolean closeStream)
+			InputStream inputStream, int bufferSize, boolean cleanUpStream)
 		throws IOException {
 
 		if (inputStream == null) {
@@ -384,7 +384,7 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 			new UnsyncByteArrayOutputStream();
 
 		StreamUtil.transfer(
-			inputStream, unsyncByteArrayOutputStream, bufferSize, closeStream);
+			inputStream, unsyncByteArrayOutputStream, bufferSize, cleanUpStream);
 
 		return unsyncByteArrayOutputStream.toByteArray();
 	}

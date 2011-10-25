@@ -87,7 +87,7 @@ public class LayoutSetServiceHttp {
 
 	public static void updateLogo(HttpPrincipal httpPrincipal, long groupId,
 		boolean privateLayout, boolean logo, java.io.InputStream inputStream,
-		boolean closeStream)
+		boolean cleanUpStream)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
@@ -95,7 +95,7 @@ public class LayoutSetServiceHttp {
 					"updateLogo", _updateLogoParameterTypes1);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					privateLayout, logo, inputStream, closeStream);
+					privateLayout, logo, inputStream, cleanUpStream);
 
 			try {
 				TunnelUtil.invoke(httpPrincipal, methodHandler);

@@ -226,7 +226,7 @@ public class LayoutSetLocalServiceImpl extends LayoutSetLocalServiceBaseImpl {
 
 	public void updateLogo(
 			long groupId, boolean privateLayout, boolean logo, InputStream is,
-			boolean closeStream)
+			boolean cleanUpStream)
 		throws PortalException, SystemException {
 
 		LayoutSet layoutSet = layoutSetPersistence.findByG_P(
@@ -248,7 +248,7 @@ public class LayoutSetLocalServiceImpl extends LayoutSetLocalServiceBaseImpl {
 
 		if (logo) {
 			imageLocalService.updateImage(
-				layoutSet.getLogoId(), is, closeStream);
+				layoutSet.getLogoId(), is, cleanUpStream);
 		}
 		else {
 			imageLocalService.deleteImage(layoutSet.getLogoId());

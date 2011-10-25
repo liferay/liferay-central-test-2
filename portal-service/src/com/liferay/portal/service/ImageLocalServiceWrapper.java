@@ -284,10 +284,10 @@ public class ImageLocalServiceWrapper implements ImageLocalService,
 	}
 
 	public com.liferay.portal.model.Image getImage(java.io.InputStream is,
-		boolean closeStream)
+		boolean cleanUpStream)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _imageLocalService.getImage(is, closeStream);
+		return _imageLocalService.getImage(is, cleanUpStream);
 	}
 
 	public com.liferay.portal.model.Image getImageOrDefault(long imageId) {
@@ -329,10 +329,10 @@ public class ImageLocalServiceWrapper implements ImageLocalService,
 	}
 
 	public com.liferay.portal.model.Image updateImage(long imageId,
-		java.io.InputStream is, boolean closeStream)
+		java.io.InputStream is, boolean cleanUpStream)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _imageLocalService.updateImage(imageId, is, closeStream);
+		return _imageLocalService.updateImage(imageId, is, cleanUpStream);
 	}
 
 	public com.liferay.portal.model.Image updateImage(long imageId,

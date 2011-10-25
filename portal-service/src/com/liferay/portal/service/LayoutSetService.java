@@ -48,7 +48,7 @@ public interface LayoutSetService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public void updateLogo(long groupId, boolean privateLayout, boolean logo,
-		java.io.InputStream inputStream, boolean closeStream)
+		java.io.InputStream inputStream, boolean cleanUpStream)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
