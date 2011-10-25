@@ -37,6 +37,10 @@ public interface Organization extends OrganizationModel, PersistedModel {
 			}
 		};
 
+	public java.lang.String buildTreePath()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
 	public com.liferay.portal.model.Address getAddress();
 
 	public java.util.List<com.liferay.portal.model.Address> getAddresses()

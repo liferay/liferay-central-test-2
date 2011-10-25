@@ -335,6 +335,12 @@ public class OrganizationWrapper implements Organization,
 		_organization.persist();
 	}
 
+	public java.lang.String buildTreePath()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _organization.buildTreePath();
+	}
+
 	public com.liferay.portal.model.Address getAddress() {
 		return _organization.getAddress();
 	}

@@ -363,6 +363,12 @@ public class OrganizationLocalServiceUtil {
 		getService().deleteLogo(organizationId);
 	}
 
+	public static com.liferay.portal.model.Organization fetchOrganization(
+		long organizationId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().fetchOrganization(organizationId);
+	}
+
 	/**
 	* Returns all the organizations belonging to the group.
 	*
@@ -772,8 +778,6 @@ public class OrganizationLocalServiceUtil {
 	* </p>
 	*
 	* @param companyId the primary key of the organization's company
-	* @throws PortalException if an organization referenced while building the
-	treePath could not be found
 	* @throws SystemException if a system exception occurred
 	* @see com.liferay.portal.service.persistence.OrganizationPersistence#rebuildTree(
 	long, boolean)
