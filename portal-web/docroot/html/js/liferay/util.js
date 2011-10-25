@@ -1633,11 +1633,7 @@
 		Util,
 		'_openWindowProvider',
 		function(config) {
-			var dialog = Util._openWindow(config);
-
-			if (config.callback) {
-				config.callback(dialog);
-			}
+			Util._openWindow(config);
 		},
 		['liferay-util-window']
 	);
