@@ -21,7 +21,6 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.Document;
@@ -350,45 +349,43 @@ public class DDMStructureLocalServiceImpl
 	}
 
 	protected void appendNewStructureRequiredFields(
-		DDMStructure structure, Document templateDoc) {
+		DDMStructure structure, Document templateDocument) {
+
+		String xsd = structure.getXsd();
+
+		Document structureDocument = null;
 
 		try {
-			String xsd = structure.getXsd();
-
-			Document structureDoc = SAXReaderUtil.read(xsd);
-
-			Element templateElement = templateDoc.getRootElement();
-
-			XPath structureXPathSelector = SAXReaderUtil.createXPath(
-				"//dynamic-element" +
-				"[.//meta-data/entry[@name=\"required\"]=\"true\"]");
-
-			List<Node> nodes = structureXPathSelector.selectNodes(structureDoc);
-
-			Iterator<Node> itr = nodes.iterator();
-
-			while (itr.hasNext()) {
-				Element element = (Element)itr.next();
-
-				String name = element.attributeValue("name");
-
-				StringBundler sb = new StringBundler(3);
-
-				sb.append("//dynamic-element[@name=\"");
-				sb.append(name);
-				sb.append("\"]");
-
-				XPath templateXPathSelector =
-					SAXReaderUtil.createXPath(sb.toString());
-
-				if (!templateXPathSelector.booleanValueOf(templateDoc)) {
-					templateElement.add(element.createCopy());
-				}
-			}
+			structureDocument = SAXReaderUtil.read(xsd);
 		}
-		catch (DocumentException e) {
+		catch (DocumentException de) {
 			if (_log.isWarnEnabled()) {
-				_log.warn(e, e);
+				_log.warn(de, de);
+			}
+
+			return;
+		}
+
+		Element templateElement = templateDocument.getRootElement();
+
+		XPath structureXPath = SAXReaderUtil.createXPath(
+			"//dynamic-element[.//meta-data/entry[@name=\"required\"]=" +
+				"\"true\"]");
+
+		List<Node> nodes = structureXPath.selectNodes(structureDocument);
+
+		Iterator<Node> itr = nodes.iterator();
+
+		while (itr.hasNext()) {
+			Element element = (Element)itr.next();
+
+			String name = element.attributeValue("name");
+
+			XPath templateXPath = SAXReaderUtil.createXPath(
+				"//dynamic-element[@name=\"" + name + "\"]");
+
+			if (!templateXPath.booleanValueOf(templateDocument)) {
+				templateElement.add(element.createCopy());
 			}
 		}
 	}
@@ -426,34 +423,38 @@ public class DDMStructureLocalServiceImpl
 			structure.getStructureId(),
 			DDMTemplateConstants.TEMPLATE_TYPE_DETAIL);
 
-		try {
-			for (DDMTemplate template : templates) {
-				String script = template.getScript();
+		for (DDMTemplate template : templates) {
+			String script = template.getScript();
 
-				Document templateDoc = SAXReaderUtil.read(script);
+			Document templateDocument = null;
 
-				Element templateRootElement = templateDoc.getRootElement();
-
-				syncStructureTemplatesFields(template, templateRootElement);
-
-				appendNewStructureRequiredFields(structure, templateDoc);
-
-				try {
-					script = DDMXMLUtil.formatXML(templateDoc.asXML());
-				}
-				catch (Exception e) {
-					throw new StructureXsdException();
+			try {
+				templateDocument = SAXReaderUtil.read(script);
+			}
+			catch (DocumentException de) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(de, de);
 				}
 
-				template.setScript(script);
+				continue;
+			}
 
-				ddmTemplatePersistence.update(template, false);
+			Element templateRootElement = templateDocument.getRootElement();
+
+			syncStructureTemplatesFields(template, templateRootElement);
+
+			appendNewStructureRequiredFields(structure, templateDocument);
+
+			try {
+				script = DDMXMLUtil.formatXML(templateDocument.asXML());
 			}
-		}
-		catch (DocumentException e) {
-			if (_log.isWarnEnabled()) {
-				_log.warn(e, e);
+			catch (Exception e) {
+				throw new StructureXsdException();
 			}
+
+			template.setScript(script);
+
+			ddmTemplatePersistence.update(template, false);
 		}
 	}
 
@@ -476,35 +477,35 @@ public class DDMStructureLocalServiceImpl
 
 			if (!structure.hasField(fieldName)) {
 				templateElement.remove(dynamicElementElement);
+
+				continue;
 			}
-			else {
-				String mode = template.getMode();
 
-				if (mode.equals(DDMTemplateConstants.TEMPLATE_MODE_CREATE)) {
-					boolean requiredAtStructure = structure.getFieldRequired(
-						fieldName);
+			String mode = template.getMode();
 
-					List<Element> metadataElements =
-						dynamicElementElement.elements("meta-data");
+			if (mode.equals(DDMTemplateConstants.TEMPLATE_MODE_CREATE)) {
+				boolean fieldRequired = structure.getFieldRequired(fieldName);
 
-					for (Element metadataElement : metadataElements) {
-						for (Element metadataEntryElement :
-								metadataElement.elements()) {
+				List<Element> metadataElements = dynamicElementElement.elements(
+					"meta-data");
 
-							String attributeName =
-								metadataEntryElement.attributeValue("name");
+				for (Element metadataElement : metadataElements) {
+					for (Element metadataEntryElement :
+							metadataElement.elements()) {
 
-							if (requiredAtStructure &&
-								attributeName.equals("required")) {
+						String attributeName =
+							metadataEntryElement.attributeValue("name");
 
-								metadataEntryElement.setText("true");
-							}
+						if (fieldRequired &&
+							attributeName.equals("required")) {
+
+							metadataEntryElement.setText("true");
 						}
 					}
 				}
-
-				syncStructureTemplatesFields(template, dynamicElementElement);
 			}
+
+			syncStructureTemplatesFields(template, dynamicElementElement);
 		}
 	}
 
