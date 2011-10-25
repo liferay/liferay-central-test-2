@@ -25,6 +25,8 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocalizationUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.SetUtil;
+import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.Address;
 import com.liferay.portal.model.Group;
@@ -91,6 +93,14 @@ public class OrganizationImpl extends OrganizationBaseImpl {
 	}
 
 	public OrganizationImpl() {
+	}
+
+	public String buildTreePath() throws PortalException, SystemException {
+		StringBundler sb = new StringBundler();
+
+		buildTreePath(sb, this);
+
+		return sb.toString();
 	}
 
 	public Address getAddress() {
@@ -342,6 +352,20 @@ public class OrganizationImpl extends OrganizationBaseImpl {
 		}
 		else {
 			return false;
+		}
+	}
+
+	protected void buildTreePath(StringBundler sb, Organization organization)
+		throws PortalException, SystemException {
+
+		if (organization == null) {
+			sb.append(StringPool.SLASH);
+		}
+		else {
+			buildTreePath(sb, organization.getParentOrganization());
+
+			sb.append(organization.getOrganizationId());
+			sb.append(StringPool.SLASH);
 		}
 	}
 

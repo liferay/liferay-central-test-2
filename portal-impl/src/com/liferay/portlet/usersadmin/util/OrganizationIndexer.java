@@ -24,12 +24,9 @@ import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.Summary;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Organization;
-import com.liferay.portal.model.OrganizationConstants;
 import com.liferay.portal.service.OrganizationLocalServiceUtil;
-import com.liferay.portal.service.persistence.OrganizationUtil;
 import com.liferay.portal.util.PortletKeys;
 
 import java.util.ArrayList;
@@ -77,18 +74,17 @@ public class OrganizationIndexer extends BaseIndexer {
 			return;
 		}
 
-		List<Organization> organizationsTree =
-			(List<Organization>)params.get("organizationsTree");
+		List<Organization> organizationsTree = (List<Organization>)params.get(
+			"organizationsTree");
 
 		if ((organizationsTree != null) && !organizationsTree.isEmpty()) {
 			BooleanQuery booleanQuery = BooleanQueryFactoryUtil.create(
 				searchContext);
 
 			for (Organization organization : organizationsTree) {
-				StringBundler treePath = OrganizationConstants.buildTreePath(
-					organization);
+				String treePath = organization.buildTreePath();
 
-				booleanQuery.addTerm("treePath", treePath.toString(), true);
+				booleanQuery.addTerm("treePath", treePath, true);
 			}
 
 			contextQuery.add(booleanQuery, BooleanClauseOccur.MUST);
@@ -145,10 +141,9 @@ public class OrganizationIndexer extends BaseIndexer {
 		document.addKeyword(
 			"parentOrganizationId", organization.getParentOrganizationId());
 
-		StringBundler treePath = OrganizationConstants.buildTreePath(
-			organization);
+		String treePath = organization.buildTreePath();
 
-		document.addKeyword("treePath", treePath.toString());
+		document.addKeyword("treePath", treePath);
 
 		populateAddresses(
 			document, organization.getAddresses(), organization.getRegionId(),
@@ -212,8 +207,9 @@ public class OrganizationIndexer extends BaseIndexer {
 				new HashMap<Long, Collection<Document>>();
 
 			for (long organizationId : organizationIds) {
-				Organization organization = OrganizationUtil.fetchByPrimaryKey(
-					organizationId);
+				Organization organization =
+					OrganizationLocalServiceUtil.fetchOrganization(
+						organizationId);
 
 				if (organization == null) {
 					continue;

@@ -285,7 +285,6 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 	 * @throws     SystemException if a system exception occurred
 	 * @deprecated Replaced by {@link #getOrganizations(long, long, int, int)}
 	 */
-	@Deprecated
 	public List<Organization> getManageableOrganizations(
 			String actionId, int max)
 		throws PortalException, SystemException {

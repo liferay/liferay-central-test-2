@@ -1225,15 +1225,15 @@ public class OrganizationFinderImpl
 
 				if (!organizationsTree.isEmpty()) {
 					for (Organization organization : organizationsTree) {
-						StringBundler treePath = new StringBundler(5);
+						StringBundler sb = new StringBundler(5);
 
-						treePath.append(StringPool.PERCENT);
-						treePath.append(StringPool.SLASH);
-						treePath.append(organization.getOrganizationId());
-						treePath.append(StringPool.SLASH);
-						treePath.append(StringPool.PERCENT);
+						sb.append(StringPool.PERCENT);
+						sb.append(StringPool.SLASH);
+						sb.append(organization.getOrganizationId());
+						sb.append(StringPool.SLASH);
+						sb.append(StringPool.PERCENT);
 
-						qPos.add(treePath.toString());
+						qPos.add(sb.toString());
 					}
 				}
 			}
