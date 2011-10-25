@@ -28,9 +28,6 @@ String videoThumbnailURL = HtmlUtil.escapeURL((String)request.getAttribute("view
 	new A.SWF(
 		{
 			boundingBox: '#<portlet:namespace />previewFileContent',
-			url: '<%= themeDisplay.getPathJavaScript() %>/misc/video_player/mpw_player.swf',
-			version: 9,
-			useExpressInstall: true,
 			fixedAttributes: {
 				allowFullScreen: true,
 				bgColor: '#000000'
@@ -45,7 +42,10 @@ String videoThumbnailURL = HtmlUtil.escapeURL((String)request.getAttribute("view
 						'<%= VideoProcessor.THUMBNAIL_TYPE %>': '<%= videoThumbnailURL %>'
 					</c:when>
 				</c:choose>
-			}
+			},
+			url: '<%= themeDisplay.getPathJavaScript() %>/misc/video_player/mpw_player.swf',
+			useExpressInstall: true,
+			version: 9
 		}
 	);
 </aui:script>
