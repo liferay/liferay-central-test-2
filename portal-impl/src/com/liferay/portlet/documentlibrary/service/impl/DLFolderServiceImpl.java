@@ -114,6 +114,7 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 
 		if ((status == WorkflowConstants.STATUS_ANY) &&
 			!InlineSQLHelperUtil.isEnabled(groupId)) {
+
 			fileEntriesCount = dlFileEntryPersistence.countByG_F(
 				groupId, folderId);
 		}
