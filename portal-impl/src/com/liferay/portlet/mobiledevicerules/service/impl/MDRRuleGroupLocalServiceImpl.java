@@ -155,6 +155,12 @@ public class MDRRuleGroupLocalServiceImpl
 		return mdrRuleGroupPersistence.fetchByPrimaryKey(ruleGroupId);
 	}
 
+	public MDRRuleGroup getRuleGroup(long ruleGroupId)
+		throws PortalException, SystemException {
+
+		return mdrRuleGroupPersistence.findByPrimaryKey(ruleGroupId);
+	}
+
 	public List<MDRRuleGroup> getRuleGroups(long groupId)
 		throws SystemException {
 

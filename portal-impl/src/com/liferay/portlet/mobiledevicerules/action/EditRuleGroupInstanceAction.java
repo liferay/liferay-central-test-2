@@ -17,13 +17,13 @@ package com.liferay.portlet.mobiledevicerules.action;
 import com.liferay.portal.kernel.bean.BeanParamUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
+import com.liferay.portal.kernel.json.JSONArray;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.service.ServiceContext;
-import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.mobiledevicerules.NoSuchRuleGroupException;
@@ -36,13 +36,8 @@ import com.liferay.portlet.mobiledevicerules.service.MDRRuleGroupLocalServiceUti
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
-import javax.portlet.PortletContext;
-import javax.portlet.PortletRequestDispatcher;
-import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
-import javax.portlet.ResourceRequest;
-import javax.portlet.ResourceResponse;
 
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -62,24 +57,14 @@ public class EditRuleGroupInstanceAction extends PortletAction {
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		try {
-			MDRRuleGroupInstance ruleGroupInstance = null;
-
-			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
-				ruleGroupInstance = updateRuleGroupInstance(actionRequest);
-			}
-			else if (cmd.equals(Constants.DELETE)) {
+			if (cmd.equals(Constants.DELETE)) {
 				deleteRuleGroupInstance(actionRequest);
 			}
-
-			if (cmd.equals(Constants.ADD)) {
-				String redirect = getRedirect(
-					actionRequest, actionResponse, ruleGroupInstance);
-
-				sendRedirect(actionRequest, actionResponse, redirect);
+			else if (cmd.equals(Constants.UPDATE)) {
+				updateRuleGroupInstancesPriorities(actionRequest);
 			}
-			else {
-				sendRedirect(actionRequest, actionResponse);
-			}
+
+			sendRedirect(actionRequest, actionResponse);
 		}
 		catch (Exception e) {
 			if (e instanceof PrincipalException) {
@@ -123,40 +108,8 @@ public class EditRuleGroupInstanceAction extends PortletAction {
 			WebKeys.MOBILE_DEVICE_RULES_RULE_GROUP, ruleGroup);
 
 		return mapping.findForward(
-			"portlet.mobile_device_rules_admin.edit_rule_group_instance");
-	}
-
-	@Override
-	public void serveResource(
-			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
-		throws Exception {
-
-		long ruleGroupId = ParamUtil.getLong(resourceRequest, "ruleGroupId");
-
-		MDRRuleGroup ruleGroup = MDRRuleGroupLocalServiceUtil.fetchRuleGroup(
-			ruleGroupId);
-
-		resourceRequest.setAttribute(
-			WebKeys.MOBILE_DEVICE_RULES_RULE_GROUP, ruleGroup);
-
-		String className = ParamUtil.getString(resourceRequest, "className");
-		long classPK = ParamUtil.getLong(resourceRequest, "classPK");
-
-		MDRRuleGroupInstance ruleGroupInstance =
-			MDRRuleGroupInstanceLocalServiceUtil.fetchRuleGroupInstance(
-				className, classPK, ruleGroupId);
-
-		resourceRequest.setAttribute(
-			WebKeys.MOBILE_DEVICE_RULES_RULE_GROUP_INSTANCE,
-			ruleGroupInstance);
-
-		PortletContext portletContext = portletConfig.getPortletContext();
-
-		PortletRequestDispatcher portletRequestDispatcher =
-			portletContext.getRequestDispatcher(_EDITOR_JSP);
-
-		portletRequestDispatcher.include(resourceRequest, resourceResponse);
+			"portlet.mobile_device_rules_admin." +
+				"edit_rule_group_instance_priorities");
 	}
 
 	protected void deleteRuleGroupInstance(ActionRequest actionRequest)
@@ -169,60 +122,28 @@ public class EditRuleGroupInstanceAction extends PortletAction {
 			ruleGroupInstanceId);
 	}
 
-	protected String getRedirect(
-		ActionRequest actionRequest, ActionResponse actionResponse,
-		MDRRuleGroupInstance ruleGroupInstance) {
-
-		LiferayPortletResponse liferayPortletResponse =
-			(LiferayPortletResponse)actionResponse;
-
-		PortletURL portletURL = liferayPortletResponse.createRenderURL();
-
-		portletURL.setParameter(
-			"struts_action",
-			"/mobile_device_rules_admin/edit_rule_group_instance");
-
-		String redirect = ParamUtil.getString(actionRequest, "redirect");
-
-		portletURL.setParameter("redirect", redirect);
-
-		portletURL.setParameter(
-			"ruleGroupInstanceId",
-			String.valueOf(ruleGroupInstance.getRuleGroupInstanceId()));
-
-		return portletURL.toString();
-	}
-
-	protected MDRRuleGroupInstance updateRuleGroupInstance(
+	protected void updateRuleGroupInstancesPriorities(
 			ActionRequest actionRequest)
 		throws PortalException, SystemException {
 
-		long groupId = ParamUtil.getLong(actionRequest, "groupId");
-		String className = ParamUtil.getString(actionRequest, "className");
-		long classPK = ParamUtil.getLong(actionRequest, "classPK");
-		long ruleGroupId = ParamUtil.getLong(actionRequest, "ruleGroupId");
-		int priority = ParamUtil.getInteger(actionRequest, "priority");
+		String ruleGroupsInstancesJSON = ParamUtil.getString(
+			actionRequest, "ruleGroupsInstancesJSON");
 
-		ServiceContext serviceContext = ServiceContextFactory.getInstance(
-			actionRequest);
+		JSONArray ruleGroupsInstancesJSONArray =
+			JSONFactoryUtil.createJSONArray(ruleGroupsInstancesJSON);
 
-		MDRRuleGroupInstance ruleGroupInstance =
-			MDRRuleGroupInstanceLocalServiceUtil.fetchRuleGroupInstance(
-				className, classPK, ruleGroupId);
+		for (int i = 0; i < ruleGroupsInstancesJSONArray.length(); i++) {
+			JSONObject ruleGroupInstanceJSONObject =
+				ruleGroupsInstancesJSONArray.getJSONObject(i);
 
-		if (ruleGroupInstance == null) {
-			return MDRRuleGroupInstanceServiceUtil.addRuleGroupInstance(
-				groupId, className, classPK, ruleGroupId, priority,
-				serviceContext);
-		}
-		else {
-			return MDRRuleGroupInstanceServiceUtil.updateRuleGroupInstance(
-				ruleGroupInstance.getRuleGroupInstanceId(), priority);
+			long ruleGroupInstanceId = ruleGroupInstanceJSONObject.getLong(
+				"ruleGroupInstanceId");
+
+			int priority = ruleGroupInstanceJSONObject.getInt("priority");
+
+			MDRRuleGroupInstanceServiceUtil.updateRuleGroupInstance(
+				ruleGroupInstanceId, priority);
 		}
 	}
-
-	private static final String _EDITOR_JSP =
-		"/html/portlet/mobile_device_rules_admin/" +
-			"device_rule_group_instance_editor.jsp";
 
 }
