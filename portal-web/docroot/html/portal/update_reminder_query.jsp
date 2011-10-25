@@ -17,7 +17,9 @@
 <%@ include file="/html/portal/init.jsp" %>
 
 <%
-String referer = ParamUtil.get(request, WebKeys.REFERER, PortalUtil.getCurrentURL(request));
+String currentURL = PortalUtil.getCurrentURL(request);
+
+String referer = ParamUtil.getString(request, WebKeys.REFERER, currentURL);
 
 if (referer.equals(themeDisplay.getPathMain() + "/portal/update_reminder_query")) {
 	referer = themeDisplay.getPathMain() + "?doAsUserId=" + themeDisplay.getDoAsUserId();
@@ -28,7 +30,7 @@ if (referer.equals(themeDisplay.getPathMain() + "/portal/update_reminder_query")
 	<aui:input name="p_auth" type="hidden" value="<%= AuthTokenUtil.getToken(request) %>" />
 	<aui:input name="doAsUserId" type="hidden" value="<%= themeDisplay.getDoAsUserId() %>" />
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
-	<aui:input name="<%= WebKeys.REFERER %>" type="hidden" value='<%= referer %>' />
+	<aui:input name="<%= WebKeys.REFERER %>" type="hidden" value="<%= referer %>" />
 
 	<div class="portlet-msg-info">
 		<liferay-ui:message key="please-choose-a-reminder-query" />
