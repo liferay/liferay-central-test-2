@@ -541,9 +541,9 @@ public class AssetTagLocalServiceImpl extends AssetTagLocalServiceBaseImpl {
 	protected void validate(String name) throws PortalException {
 		if (!AssetUtil.isValidWord(name)) {
 			throw new AssetTagException(
-					AssetTagException.INVALID_CHARACTER,
-					StringUtil.merge(AssetUtil.INVALID_CHARACTERS,
-							StringPool.SPACE));
+				StringUtil.merge(
+					AssetUtil.INVALID_CHARACTERS, StringPool.SPACE),
+				AssetTagException.INVALID_CHARACTER);
 		}
 	}
 

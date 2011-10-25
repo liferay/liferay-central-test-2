@@ -25,7 +25,7 @@ public class AssetTagException extends PortalException {
 
 	public static final int INVALID_CHARACTER = 2;
 
-	public AssetTagException(int type, String message) {
+	public AssetTagException(String message, int type) {
 		super(message);
 
 		_type = type;
