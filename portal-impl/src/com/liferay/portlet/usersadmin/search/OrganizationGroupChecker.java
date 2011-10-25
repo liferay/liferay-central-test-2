@@ -41,15 +41,19 @@ public class OrganizationGroupChecker extends RowChecker {
 		Organization organization = (Organization)obj;
 
 		try {
-			return (OrganizationLocalServiceUtil.hasGroupOrganization(
-				_group.getGroupId(), organization.getOrganizationId()) ||
-				_group.getOrganizationId() == organization.getOrganizationId());
+			if (OrganizationLocalServiceUtil.hasGroupOrganization(
+					_group.getGroupId(), organization.getOrganizationId()) ||
+				(_group.getOrganizationId() ==
+					organization.getOrganizationId())) {
+
+				return true;
+			}
 		}
 		catch (Exception e) {
 			_log.error(e, e);
-
-			return false;
 		}
+
+		return false;
 	}
 
 	@Override
