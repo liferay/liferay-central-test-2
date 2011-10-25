@@ -321,6 +321,13 @@ public class MDRRuleGroupLocalServiceUtil {
 		return getService().fetchRuleGroup(ruleGroupId);
 	}
 
+	public static com.liferay.portlet.mobiledevicerules.model.MDRRuleGroup getRuleGroup(
+		long ruleGroupId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().getRuleGroup(ruleGroupId);
+	}
+
 	public static java.util.List<com.liferay.portlet.mobiledevicerules.model.MDRRuleGroup> getRuleGroups(
 		long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
