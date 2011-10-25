@@ -384,7 +384,8 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 			new UnsyncByteArrayOutputStream();
 
 		StreamUtil.transfer(
-			inputStream, unsyncByteArrayOutputStream, bufferSize, cleanUpStream);
+			inputStream, unsyncByteArrayOutputStream, bufferSize,
+			cleanUpStream);
 
 		return unsyncByteArrayOutputStream.toByteArray();
 	}

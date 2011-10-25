@@ -302,7 +302,8 @@ public class ImageLocalServiceImpl extends ImageLocalServiceBaseImpl {
 			image.getWidth(), image.getSize());
 	}
 
-	public Image updateImage(long imageId, InputStream is, boolean cleanUpStream)
+	public Image updateImage(
+			long imageId, InputStream is, boolean cleanUpStream)
 		throws PortalException, SystemException {
 
 		Image image = getImage(is, cleanUpStream);
@@ -346,7 +347,8 @@ public class ImageLocalServiceImpl extends ImageLocalServiceBaseImpl {
 		return getImage(is, bytes, true);
 	}
 
-	protected Image getImage(InputStream is, byte[] bytes, boolean cleanUpStream)
+	protected Image getImage(
+			InputStream is, byte[] bytes, boolean cleanUpStream)
 		throws PortalException, SystemException {
 
 		try {
