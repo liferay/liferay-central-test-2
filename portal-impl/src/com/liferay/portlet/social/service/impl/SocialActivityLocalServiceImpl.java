@@ -312,11 +312,10 @@ public class SocialActivityLocalServiceImpl
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		List<SocialActivity> socialActivities =
-			socialActivityPersistence.findByG_U_C_C_T_R(
-				groupId, userId, classNameId, classPK, type, receiverUserId);
+		int count = socialActivityPersistence.countByG_U_C_C_T_R(
+			groupId, userId, classNameId, classPK, type, receiverUserId);
 
-		if (!socialActivities.isEmpty()) {
+		if (count > 0) {
 			return;
 		}
 
