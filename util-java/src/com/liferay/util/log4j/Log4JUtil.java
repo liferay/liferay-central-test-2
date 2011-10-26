@@ -14,7 +14,7 @@
 
 package com.liferay.util.log4j;
 
-import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.ServerDetector;
@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.util.StreamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.Reader;
 import java.io.StringReader;
@@ -118,6 +119,18 @@ public class Log4JUtil {
 		jdkLogger.setLevel(_getJdkLevel(priority));
 	}
 
+	/**
+	 * @see {@link com.liferay.portal.util.FileImpl#getBytes(InputStream, int, boolean)}
+	 */
+	private static byte[] _getBytes(InputStream inputStream) throws IOException {
+		UnsyncByteArrayOutputStream unsyncByteArrayOutputStream =
+			new UnsyncByteArrayOutputStream();
+
+		StreamUtil.transfer(inputStream, unsyncByteArrayOutputStream, -1, true);
+
+		return unsyncByteArrayOutputStream.toByteArray();
+	}
+
 	private static java.util.logging.Level _getJdkLevel(String priority) {
 		if (priority.equalsIgnoreCase(Level.DEBUG.toString())) {
 			return java.util.logging.Level.FINE;
@@ -145,7 +158,7 @@ public class Log4JUtil {
 		try {
 			inputStream = url.openStream();
 
-			byte[] bytes = FileUtil.getBytes(inputStream);
+			byte[] bytes = _getBytes(inputStream);
 
 			urlContent = new String(bytes, StringPool.UTF8);
 		}
