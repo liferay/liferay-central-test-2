@@ -14,6 +14,7 @@
 
 package com.liferay.util.log4j;
 
+import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.ServerDetector;
@@ -38,8 +39,6 @@ import org.apache.log4j.Level;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.apache.log4j.xml.DOMConfigurator;
-
-import org.aspectj.util.FileUtil;
 
 import org.dom4j.Document;
 import org.dom4j.Element;
@@ -146,7 +145,7 @@ public class Log4JUtil {
 		try {
 			inputStream = url.openStream();
 
-			byte[] bytes = FileUtil.readAsByteArray(inputStream);
+			byte[] bytes = FileUtil.getBytes(inputStream);
 
 			urlContent = new String(bytes, StringPool.UTF8);
 		}
