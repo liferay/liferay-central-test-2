@@ -341,17 +341,12 @@ boolean showIconsActions = themeDisplay.isSignedIn() && (showEditArticleIcon || 
 			</c:if>
 
 			<c:if test="<%= showSelectArticleIcon %>">
-
-				<%
-				String taglibOnClick = "Liferay.Portlet.openConfiguration(\'#p_p_id_" + portletDisplay.getId() + "_\', \'" + portletDisplay.getId() + "\', \'" + portletDisplay.getURLConfiguration() + " \', \'" + portletDisplay.getNamespace() + "\'); return false;";
-				%>
-
 				<liferay-ui:icon
 					cssClass="portlet-configuration"
 					image="configuration"
 					message="select-web-content"
 					method="get"
-					onClick="<%= taglibOnClick %>"
+					onClick="<%= portletDisplay.getURLConfigurationJS() %>"
 					url="<%= portletDisplay.getURLConfiguration() %>"
 				/>
 			</c:if>

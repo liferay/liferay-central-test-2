@@ -233,6 +233,22 @@ public class PortletDisplay implements Serializable {
 		return _urlConfiguration;
 	}
 
+	public String getURLConfigurationJS() {
+		StringBundler sb = new StringBundler(9);
+
+		sb.append("Liferay.Portlet.openConfiguration(\'#p_p_id_");
+		sb.append(_id);
+		sb.append("_\', \'");
+		sb.append(_id);
+		sb.append("\', \'");
+		sb.append(_urlConfiguration);
+		sb.append(" \', \'");
+		sb.append(_namespace);
+		sb.append("\'); return false;");
+
+		return sb.toString();
+	}
+
 	public String getURLEdit() {
 		return _urlEdit;
 	}
