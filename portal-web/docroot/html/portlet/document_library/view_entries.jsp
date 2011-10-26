@@ -251,26 +251,20 @@ for (int i = 0; i < results.size(); i++) {
 				</c:when>
 
 				<c:otherwise>
-
-					<%
-					Map<String, Object> data = new HashMap<String, Object>();
-
-					data.put("file-entry-id", fileEntry.getFileEntryId());
-
-					PortletURL rowURL = liferayPortletResponse.createRenderURL();
-
-					rowURL.setParameter("struts_action", "/document_library/view_file_entry");
-					rowURL.setParameter("redirect", HttpUtil.addParameter(currentURL, liferayPortletResponse.getNamespace() + "showSiblings", true));
-					rowURL.setParameter("fileEntryId", String.valueOf(fileEntry.getFileEntryId()));
-
-					FileVersion latestFileVersion = fileEntry.getFileVersion();
-
-					if ((user.getUserId() == fileEntry.getUserId()) || permissionChecker.isCompanyAdmin() || permissionChecker.isGroupAdmin(scopeGroupId) || DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.UPDATE)) {
-						latestFileVersion = fileEntry.getLatestFileVersion();
-					}
-					%>
-
 					<liferay-util:buffer var="fileEntryTitle">
+
+						<%
+						Map<String, Object> data = new HashMap<String, Object>();
+
+						data.put("file-entry-id", fileEntry.getFileEntryId());
+
+						PortletURL rowURL = liferayPortletResponse.createRenderURL();
+
+						rowURL.setParameter("struts_action", "/document_library/view_file_entry");
+						rowURL.setParameter("redirect", HttpUtil.addParameter(currentURL, liferayPortletResponse.getNamespace() + "showSiblings", true));
+						rowURL.setParameter("fileEntryId", String.valueOf(fileEntry.getFileEntryId()));
+						%>
+
 						<liferay-ui:icon
 							cssClass="document-display-style selectable"
 							data="<%= data %>"
@@ -279,6 +273,14 @@ for (int i = 0; i < results.size(); i++) {
 							message="<%= fileEntry.getTitle() %>"
 							url="<%= rowURL.toString() %>"
 						/>
+
+						<%
+						FileVersion latestFileVersion = fileEntry.getFileVersion();
+
+						if ((user.getUserId() == fileEntry.getUserId()) || permissionChecker.isCompanyAdmin() || permissionChecker.isGroupAdmin(scopeGroupId) || DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.UPDATE)) {
+							latestFileVersion = fileEntry.getLatestFileVersion();
+						}
+						%>
 
 						<c:if test="<%= latestFileVersion.isPending() %>">
 							<span class="workflow-status-pending">
@@ -389,23 +391,23 @@ for (int i = 0; i < results.size(); i++) {
 					</c:choose>
 				</c:when>
 				<c:otherwise>
-
-					<%
-					Map<String, Object> data = new HashMap<String, Object>();
-
-					data.put("folder", true);
-					data.put("folder-id", curFolder.getFolderId());
-					data.put("refresh-folders", true);
-					data.put("resource-url", viewEntriesURL);
-
-					PortletURL rowURL = liferayPortletResponse.createRenderURL();
-
-					rowURL.setParameter("struts_action", "/document_library/view");
-					rowURL.setParameter("redirect", currentURL);
-					rowURL.setParameter("folderId", String.valueOf(curFolder.getFolderId()));
-					%>
-
 					<liferay-util:buffer var="folderTitle">
+
+						<%
+						Map<String, Object> data = new HashMap<String, Object>();
+
+						data.put("folder", true);
+						data.put("folder-id", curFolder.getFolderId());
+						data.put("refresh-folders", true);
+						data.put("resource-url", viewEntriesURL);
+
+						PortletURL rowURL = liferayPortletResponse.createRenderURL();
+
+						rowURL.setParameter("struts_action", "/document_library/view");
+						rowURL.setParameter("redirect", currentURL);
+						rowURL.setParameter("folderId", String.valueOf(curFolder.getFolderId()));
+						%>
+
 						<liferay-ui:icon
 							data="<%= data %>"
 							image="<%= folderImage %>"

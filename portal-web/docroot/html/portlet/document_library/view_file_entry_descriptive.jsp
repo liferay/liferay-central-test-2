@@ -21,13 +21,13 @@ FileEntry fileEntry = (FileEntry)request.getAttribute("view_entries.jsp-fileEntr
 
 FileVersion fileVersion = fileEntry.getFileVersion();
 
-DLFileShortcut fileShortcut = (DLFileShortcut)request.getAttribute("view_entries.jsp-fileShortcut");
-
 FileVersion latestFileVersion = fileVersion;
 
 if ((user.getUserId() == fileEntry.getUserId()) || permissionChecker.isCompanyAdmin() || permissionChecker.isGroupAdmin(scopeGroupId) || DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.UPDATE)) {
 	latestFileVersion = fileEntry.getLatestFileVersion();
 }
+
+DLFileShortcut fileShortcut = (DLFileShortcut)request.getAttribute("view_entries.jsp-fileShortcut");
 
 PortletURL tempRowURL = (PortletURL)request.getAttribute("view_entries.jsp-tempRowURL");
 
