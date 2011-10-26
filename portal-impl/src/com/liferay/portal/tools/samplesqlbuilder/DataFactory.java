@@ -517,7 +517,7 @@ public class DataFactory {
 	}
 
 	public List<ResourcePermission> addResourcePermission(
-			String name, long companyId, String primKey)
+			long companyId, String name, String primKey)
 		throws Exception {
 
 		List<ResourcePermission> resourcePermissions =
@@ -529,11 +529,11 @@ public class DataFactory {
 			_resourcePermissionCounter.get());
 		resourcePermission.setCompanyId(companyId);
 		resourcePermission.setName(name);
+		resourcePermission.setScope(ResourceConstants.SCOPE_INDIVIDUAL);
 		resourcePermission.setPrimKey(primKey);
 		resourcePermission.setRoleId(_ownerRole.getRoleId());
-		resourcePermission.setActionIds(1);
-		resourcePermission.setScope(ResourceConstants.SCOPE_INDIVIDUAL);
 		resourcePermission.setOwnerId(_defaultUser.getUserId());
+		resourcePermission.setActionIds(1);
 
 		resourcePermissions.add(resourcePermission);
 
@@ -543,11 +543,11 @@ public class DataFactory {
 			_resourcePermissionCounter.get());
 		resourcePermission.setCompanyId(companyId);
 		resourcePermission.setName(name);
+		resourcePermission.setScope(ResourceConstants.SCOPE_INDIVIDUAL);
 		resourcePermission.setPrimKey(primKey);
 		resourcePermission.setRoleId(_guestRole.getRoleId());
-		resourcePermission.setActionIds(1);
-		resourcePermission.setScope(ResourceConstants.SCOPE_INDIVIDUAL);
 		resourcePermission.setOwnerId(0);
+		resourcePermission.setActionIds(1);
 
 		resourcePermissions.add(resourcePermission);
 
