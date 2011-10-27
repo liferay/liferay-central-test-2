@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.events.SimpleAction;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.notifications.ChannelHubManagerUtil;
+import com.liferay.portal.kernel.notifications.DuplicateChannelHubException;
 import com.liferay.portal.kernel.util.GetterUtil;
 
 /**
@@ -37,6 +38,11 @@ public class ChannelHubAppStartupAction extends SimpleAction {
 			}
 
 			ChannelHubManagerUtil.createChannelHub(companyId);
+		}
+		catch (DuplicateChannelHubException dche) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(dche.getMessage());
+			}
 		}
 		catch (Exception e) {
 			throw new ActionException(e);
