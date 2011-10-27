@@ -18,11 +18,11 @@ import com.liferay.portal.kernel.lar.PortletDataContext;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.KeyValuePair;
 import com.liferay.portal.kernel.util.MapUtil;
-import com.liferay.portal.kernel.util.PrimitiveLongList;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
@@ -322,29 +322,34 @@ public class PermissionExporter {
 			return;
 		}
 
-		PrimitiveLongList roleIds = new PrimitiveLongList(roles.size());
-		Map<Long, Role> roleIdToRole = new HashMap<Long, Role>();
+		Map<Long, Role> roleIdsToRoles = new HashMap<Long, Role>();
 
 		for (Role role : roles) {
-			if (role.getName().equals(RoleConstants.ADMINISTRATOR)) {
+			String name = role.getName();
+
+			if (name.equals(RoleConstants.ADMINISTRATOR)) {
 				continue;
 			}
 
-			roleIds.add(role.getRoleId());
-			roleIdToRole.put(role.getRoleId(), role);
+			roleIdsToRoles.put(role.getRoleId(), role);
 		}
 
-		Map<Long, Set<String>> roleIdsToAction =
+		Set<Long> roleIdsSet = roleIdsToRoles.keySet();
+
+		long[] roleIds = ArrayUtil.toArray(
+			roleIdsSet.toArray(new Long[roleIdsSet.size()]));
+
+		Map<Long, Set<String>> roleIdsToActionIds =
 			ResourcePermissionLocalServiceUtil.
 				getAvailableResourcePermissionActionIds(
-					companyId, resourceName,
-					ResourceConstants.SCOPE_INDIVIDUAL, resourcePrimKey,
-					roleIds.getArray(), actionIds);
+					companyId, resourceName, ResourceConstants.SCOPE_INDIVIDUAL,
+					resourcePrimKey, roleIds, actionIds);
 
-		for (Role role : roleIdToRole.values()) {
-			Set<String> actions = roleIdsToAction.get(role.getRoleId());
+		for (Role role : roleIdsToRoles.values()) {
+			Set<String> availableActionIds = roleIdsToActionIds.get(
+				role.getRoleId());
 
-			if ((actions == null) || actions.isEmpty()) {
+			if ((availableActionIds == null) || availableActionIds.isEmpty()) {
 				continue;
 			}
 
@@ -354,7 +359,7 @@ public class PermissionExporter {
 			roleElement.addAttribute("description", role.getDescription());
 			roleElement.addAttribute("type", String.valueOf(role.getType()));
 
-			for (String action : actions) {
+			for (String action : availableActionIds) {
 				Element actionKeyElement = roleElement.addElement("action-key");
 
 				actionKeyElement.addText(action);

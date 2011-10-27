@@ -349,21 +349,21 @@ public class ResourcePermissionLocalServiceImpl
 			return Collections.emptyMap();
 		}
 
-		Map<Long, Set<String>> roleIdsToActions =
+		Map<Long, Set<String>> roleIdsToActionIds =
 			new HashMap<Long, Set<String>>();
 
 		for (ResourcePermission resourcePermission : resourcePermissions) {
 			long roleId = resourcePermission.getRoleId();
-			Set<String> availableActionIds = roleIdsToActions.get(roleId);
+
+			Set<String> availableActionIds = roleIdsToActionIds.get(roleId);
 
 			if (availableActionIds != null) {
 				continue;
 			}
-			else {
-				availableActionIds = new HashSet<String>();
 
-				roleIdsToActions.put(roleId, availableActionIds);
-			}
+			availableActionIds = new HashSet<String>();
+
+			roleIdsToActionIds.put(roleId, availableActionIds);
 
 			for (String actionId : actionIds) {
 				ResourceAction resourceAction =
@@ -376,7 +376,7 @@ public class ResourcePermissionLocalServiceImpl
 			}
 		}
 
-		return roleIdsToActions;
+		return roleIdsToActionIds;
 	}
 
 	/**
