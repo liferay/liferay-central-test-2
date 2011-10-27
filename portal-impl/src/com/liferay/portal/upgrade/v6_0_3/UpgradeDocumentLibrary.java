@@ -43,8 +43,6 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 
-		List<Long> fileVersionIds = new ArrayList<Long>();
-
 		try {
 			con = DataAccess.getConnection();
 
@@ -57,8 +55,12 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 
 			rs = ps.executeQuery();
 
+			List<Long> fileVersionIds = new ArrayList<Long>();
+
 			while (rs.next()) {
-				fileVersionIds.add(rs.getLong("fileVersionId"));
+				long fileVersionId = rs.getLong("fileVersionId");
+
+				fileVersionIds.add(fileVersionId);
 			}
 
 			return fileVersionIds;
@@ -97,9 +99,9 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 						"' where uuid_ = '" + uuid_ + "' and groupId = " +
 							groupId);
 
-				List<Long> fileVersionIds = getFileVersionIds(folderId, name);
-
 				long latestFileVersionId = 0;
+
+				List<Long> fileVersionIds = getFileVersionIds(folderId, name);
 
 				if (!fileVersionIds.isEmpty()) {
 					latestFileVersionId = fileVersionIds.get(0);
