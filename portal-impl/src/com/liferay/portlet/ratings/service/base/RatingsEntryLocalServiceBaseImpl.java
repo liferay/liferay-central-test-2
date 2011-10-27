@@ -245,6 +245,11 @@ public abstract class RatingsEntryLocalServiceBaseImpl
 		return ratingsEntryPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public RatingsEntry fetchRatingsEntry(long entryId)
+		throws SystemException {
+		return ratingsEntryPersistence.fetchByPrimaryKey(entryId);
+	}
+
 	/**
 	 * Returns the ratings entry with the primary key.
 	 *

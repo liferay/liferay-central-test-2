@@ -399,6 +399,11 @@ public abstract class UserIdMapperLocalServiceBaseImpl
 		return userIdMapperPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public UserIdMapper fetchUserIdMapper(long userIdMapperId)
+		throws SystemException {
+		return userIdMapperPersistence.fetchByPrimaryKey(userIdMapperId);
+	}
+
 	/**
 	 * Returns the user ID mapper with the primary key.
 	 *

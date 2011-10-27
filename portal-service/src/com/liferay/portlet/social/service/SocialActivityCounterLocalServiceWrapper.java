@@ -154,6 +154,12 @@ public class SocialActivityCounterLocalServiceWrapper
 		return _socialActivityCounterLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	public com.liferay.portlet.social.model.SocialActivityCounter fetchSocialActivityCounter(
+		long activityCounterId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _socialActivityCounterLocalService.fetchSocialActivityCounter(activityCounterId);
+	}
+
 	/**
 	* Returns the social activity counter with the primary key.
 	*

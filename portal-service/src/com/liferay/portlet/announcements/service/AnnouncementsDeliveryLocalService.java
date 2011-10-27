@@ -147,6 +147,11 @@ public interface AnnouncementsDeliveryLocalService
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portlet.announcements.model.AnnouncementsDelivery fetchAnnouncementsDelivery(
+		long deliveryId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	/**
 	* Returns the announcements delivery with the primary key.
 	*

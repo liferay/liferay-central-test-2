@@ -250,6 +250,11 @@ public abstract class JournalStructureLocalServiceBaseImpl
 		return journalStructurePersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public JournalStructure fetchJournalStructure(long id)
+		throws SystemException {
+		return journalStructurePersistence.fetchByPrimaryKey(id);
+	}
+
 	/**
 	 * Returns the journal structure with the primary key.
 	 *

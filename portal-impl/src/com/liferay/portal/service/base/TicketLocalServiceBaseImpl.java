@@ -396,6 +396,10 @@ public abstract class TicketLocalServiceBaseImpl implements TicketLocalService,
 		return ticketPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public Ticket fetchTicket(long ticketId) throws SystemException {
+		return ticketPersistence.fetchByPrimaryKey(ticketId);
+	}
+
 	/**
 	 * Returns the ticket with the primary key.
 	 *

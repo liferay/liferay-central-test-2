@@ -401,6 +401,11 @@ public abstract class PortletPreferencesLocalServiceBaseImpl
 		return portletPreferencesPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public PortletPreferences fetchPortletPreferences(long portletPreferencesId)
+		throws SystemException {
+		return portletPreferencesPersistence.fetchByPrimaryKey(portletPreferencesId);
+	}
+
 	/**
 	 * Returns the portlet preferences with the primary key.
 	 *

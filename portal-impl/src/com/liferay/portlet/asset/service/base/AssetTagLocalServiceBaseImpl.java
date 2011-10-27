@@ -248,6 +248,10 @@ public abstract class AssetTagLocalServiceBaseImpl
 		return assetTagPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public AssetTag fetchAssetTag(long tagId) throws SystemException {
+		return assetTagPersistence.fetchByPrimaryKey(tagId);
+	}
+
 	/**
 	 * Returns the asset tag with the primary key.
 	 *

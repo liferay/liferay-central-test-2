@@ -258,6 +258,11 @@ public abstract class DLFileEntryMetadataLocalServiceBaseImpl
 		return dlFileEntryMetadataPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public DLFileEntryMetadata fetchDLFileEntryMetadata(
+		long fileEntryMetadataId) throws SystemException {
+		return dlFileEntryMetadataPersistence.fetchByPrimaryKey(fileEntryMetadataId);
+	}
+
 	/**
 	 * Returns the document library file entry metadata with the primary key.
 	 *

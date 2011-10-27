@@ -147,6 +147,11 @@ public interface SCProductScreenshotLocalService
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portlet.softwarecatalog.model.SCProductScreenshot fetchSCProductScreenshot(
+		long productScreenshotId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	/**
 	* Returns the s c product screenshot with the primary key.
 	*

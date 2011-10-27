@@ -238,6 +238,11 @@ public abstract class DDMStructureLinkLocalServiceBaseImpl
 		return ddmStructureLinkPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public DDMStructureLink fetchDDMStructureLink(long structureLinkId)
+		throws SystemException {
+		return ddmStructureLinkPersistence.fetchByPrimaryKey(structureLinkId);
+	}
+
 	/**
 	 * Returns the d d m structure link with the primary key.
 	 *

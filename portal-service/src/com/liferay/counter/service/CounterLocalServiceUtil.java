@@ -157,6 +157,12 @@ public class CounterLocalServiceUtil {
 		return getService().dynamicQueryCount(dynamicQuery);
 	}
 
+	public static com.liferay.counter.model.Counter fetchCounter(
+		java.lang.String name)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().fetchCounter(name);
+	}
+
 	/**
 	* Returns the counter with the primary key.
 	*

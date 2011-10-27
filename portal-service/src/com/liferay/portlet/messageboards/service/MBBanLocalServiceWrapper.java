@@ -149,6 +149,11 @@ public class MBBanLocalServiceWrapper implements MBBanLocalService,
 		return _mbBanLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	public com.liferay.portlet.messageboards.model.MBBan fetchMBBan(long banId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _mbBanLocalService.fetchMBBan(banId);
+	}
+
 	/**
 	* Returns the message boards ban with the primary key.
 	*

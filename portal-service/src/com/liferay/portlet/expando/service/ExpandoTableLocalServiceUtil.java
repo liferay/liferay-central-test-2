@@ -158,6 +158,12 @@ public class ExpandoTableLocalServiceUtil {
 		return getService().dynamicQueryCount(dynamicQuery);
 	}
 
+	public static com.liferay.portlet.expando.model.ExpandoTable fetchExpandoTable(
+		long tableId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().fetchExpandoTable(tableId);
+	}
+
 	/**
 	* Returns the expando table with the primary key.
 	*

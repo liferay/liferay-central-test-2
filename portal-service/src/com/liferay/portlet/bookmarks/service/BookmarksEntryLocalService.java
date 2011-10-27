@@ -147,6 +147,11 @@ public interface BookmarksEntryLocalService
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portlet.bookmarks.model.BookmarksEntry fetchBookmarksEntry(
+		long entryId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	/**
 	* Returns the bookmarks entry with the primary key.
 	*

@@ -229,6 +229,11 @@ public abstract class RatingsStatsLocalServiceBaseImpl
 		return ratingsStatsPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public RatingsStats fetchRatingsStats(long statsId)
+		throws SystemException {
+		return ratingsStatsPersistence.fetchByPrimaryKey(statsId);
+	}
+
 	/**
 	 * Returns the ratings stats with the primary key.
 	 *

@@ -154,6 +154,12 @@ public class SocialEquityHistoryLocalServiceWrapper
 		return _socialEquityHistoryLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	public com.liferay.portlet.social.model.SocialEquityHistory fetchSocialEquityHistory(
+		long equityHistoryId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _socialEquityHistoryLocalService.fetchSocialEquityHistory(equityHistoryId);
+	}
+
 	/**
 	* Returns the social equity history with the primary key.
 	*

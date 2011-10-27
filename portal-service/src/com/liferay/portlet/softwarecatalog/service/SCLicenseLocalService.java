@@ -146,6 +146,11 @@ public interface SCLicenseLocalService extends PersistedModelLocalService {
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portlet.softwarecatalog.model.SCLicense fetchSCLicense(
+		long licenseId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	/**
 	* Returns the s c license with the primary key.
 	*

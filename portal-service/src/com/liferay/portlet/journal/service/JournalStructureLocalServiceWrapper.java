@@ -154,6 +154,11 @@ public class JournalStructureLocalServiceWrapper
 		return _journalStructureLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	public com.liferay.portlet.journal.model.JournalStructure fetchJournalStructure(
+		long id) throws com.liferay.portal.kernel.exception.SystemException {
+		return _journalStructureLocalService.fetchJournalStructure(id);
+	}
+
 	/**
 	* Returns the journal structure with the primary key.
 	*

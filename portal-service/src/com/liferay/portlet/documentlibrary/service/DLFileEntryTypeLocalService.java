@@ -146,6 +146,11 @@ public interface DLFileEntryTypeLocalService extends PersistedModelLocalService 
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portlet.documentlibrary.model.DLFileEntryType fetchDLFileEntryType(
+		long fileEntryTypeId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	/**
 	* Returns the document library file entry type with the primary key.
 	*

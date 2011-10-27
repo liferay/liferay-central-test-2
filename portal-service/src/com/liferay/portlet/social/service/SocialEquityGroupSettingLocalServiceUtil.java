@@ -158,6 +158,12 @@ public class SocialEquityGroupSettingLocalServiceUtil {
 		return getService().dynamicQueryCount(dynamicQuery);
 	}
 
+	public static com.liferay.portlet.social.model.SocialEquityGroupSetting fetchSocialEquityGroupSetting(
+		long equityGroupSettingId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().fetchSocialEquityGroupSetting(equityGroupSettingId);
+	}
+
 	/**
 	* Returns the social equity group setting with the primary key.
 	*

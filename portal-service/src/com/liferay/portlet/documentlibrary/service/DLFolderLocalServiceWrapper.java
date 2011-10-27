@@ -152,6 +152,12 @@ public class DLFolderLocalServiceWrapper implements DLFolderLocalService,
 		return _dlFolderLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	public com.liferay.portlet.documentlibrary.model.DLFolder fetchDLFolder(
+		long folderId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _dlFolderLocalService.fetchDLFolder(folderId);
+	}
+
 	/**
 	* Returns the document library folder with the primary key.
 	*

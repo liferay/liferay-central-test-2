@@ -292,6 +292,10 @@ public abstract class MBMessageLocalServiceBaseImpl
 		return mbMessagePersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public MBMessage fetchMBMessage(long messageId) throws SystemException {
+		return mbMessagePersistence.fetchByPrimaryKey(messageId);
+	}
+
 	/**
 	 * Returns the message-boards message with the primary key.
 	 *

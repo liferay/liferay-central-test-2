@@ -146,6 +146,11 @@ public interface DLFileRankLocalService extends PersistedModelLocalService {
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portlet.documentlibrary.model.DLFileRank fetchDLFileRank(
+		long fileRankId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	/**
 	* Returns the document library file rank with the primary key.
 	*

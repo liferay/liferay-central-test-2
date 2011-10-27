@@ -154,6 +154,12 @@ public class ShoppingCategoryLocalServiceWrapper
 		return _shoppingCategoryLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	public com.liferay.portlet.shopping.model.ShoppingCategory fetchShoppingCategory(
+		long categoryId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _shoppingCategoryLocalService.fetchShoppingCategory(categoryId);
+	}
+
 	/**
 	* Returns the shopping category with the primary key.
 	*

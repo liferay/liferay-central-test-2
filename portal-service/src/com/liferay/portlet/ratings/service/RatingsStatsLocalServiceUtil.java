@@ -158,6 +158,12 @@ public class RatingsStatsLocalServiceUtil {
 		return getService().dynamicQueryCount(dynamicQuery);
 	}
 
+	public static com.liferay.portlet.ratings.model.RatingsStats fetchRatingsStats(
+		long statsId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().fetchRatingsStats(statsId);
+	}
+
 	/**
 	* Returns the ratings stats with the primary key.
 	*

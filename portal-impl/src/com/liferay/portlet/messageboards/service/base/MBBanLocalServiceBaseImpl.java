@@ -241,6 +241,10 @@ public abstract class MBBanLocalServiceBaseImpl implements MBBanLocalService,
 		return mbBanPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public MBBan fetchMBBan(long banId) throws SystemException {
+		return mbBanPersistence.fetchByPrimaryKey(banId);
+	}
+
 	/**
 	 * Returns the message boards ban with the primary key.
 	 *

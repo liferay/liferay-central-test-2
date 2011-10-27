@@ -146,6 +146,11 @@ public interface MBMessageLocalService extends PersistedModelLocalService {
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portlet.messageboards.model.MBMessage fetchMBMessage(
+		long messageId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	/**
 	* Returns the message-boards message with the primary key.
 	*

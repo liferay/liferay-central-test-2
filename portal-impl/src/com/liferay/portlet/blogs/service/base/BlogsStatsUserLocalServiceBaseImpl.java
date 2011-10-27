@@ -233,6 +233,11 @@ public abstract class BlogsStatsUserLocalServiceBaseImpl
 		return blogsStatsUserPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public BlogsStatsUser fetchBlogsStatsUser(long statsUserId)
+		throws SystemException {
+		return blogsStatsUserPersistence.fetchByPrimaryKey(statsUserId);
+	}
+
 	/**
 	 * Returns the blogs stats user with the primary key.
 	 *

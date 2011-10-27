@@ -158,6 +158,11 @@ public class JournalTemplateLocalServiceUtil {
 		return getService().dynamicQueryCount(dynamicQuery);
 	}
 
+	public static com.liferay.portlet.journal.model.JournalTemplate fetchJournalTemplate(
+		long id) throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().fetchJournalTemplate(id);
+	}
+
 	/**
 	* Returns the journal template with the primary key.
 	*

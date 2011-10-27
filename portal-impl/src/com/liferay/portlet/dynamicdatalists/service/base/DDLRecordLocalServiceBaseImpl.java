@@ -240,6 +240,10 @@ public abstract class DDLRecordLocalServiceBaseImpl
 		return ddlRecordPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public DDLRecord fetchDDLRecord(long recordId) throws SystemException {
+		return ddlRecordPersistence.fetchByPrimaryKey(recordId);
+	}
+
 	/**
 	 * Returns the d d l record with the primary key.
 	 *

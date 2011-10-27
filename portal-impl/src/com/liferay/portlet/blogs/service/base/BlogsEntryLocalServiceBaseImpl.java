@@ -276,6 +276,10 @@ public abstract class BlogsEntryLocalServiceBaseImpl
 		return blogsEntryPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public BlogsEntry fetchBlogsEntry(long entryId) throws SystemException {
+		return blogsEntryPersistence.fetchByPrimaryKey(entryId);
+	}
+
 	/**
 	 * Returns the blogs entry with the primary key.
 	 *

@@ -238,6 +238,11 @@ public abstract class DDLRecordSetLocalServiceBaseImpl
 		return ddlRecordSetPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public DDLRecordSet fetchDDLRecordSet(long recordSetId)
+		throws SystemException {
+		return ddlRecordSetPersistence.fetchByPrimaryKey(recordSetId);
+	}
+
 	/**
 	 * Returns the d d l record set with the primary key.
 	 *

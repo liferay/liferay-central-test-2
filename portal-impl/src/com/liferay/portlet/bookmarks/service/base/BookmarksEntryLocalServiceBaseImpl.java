@@ -242,6 +242,11 @@ public abstract class BookmarksEntryLocalServiceBaseImpl
 		return bookmarksEntryPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public BookmarksEntry fetchBookmarksEntry(long entryId)
+		throws SystemException {
+		return bookmarksEntryPersistence.fetchByPrimaryKey(entryId);
+	}
+
 	/**
 	 * Returns the bookmarks entry with the primary key.
 	 *

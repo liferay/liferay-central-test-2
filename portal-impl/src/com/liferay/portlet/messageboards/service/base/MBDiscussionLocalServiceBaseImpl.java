@@ -245,6 +245,11 @@ public abstract class MBDiscussionLocalServiceBaseImpl
 		return mbDiscussionPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public MBDiscussion fetchMBDiscussion(long discussionId)
+		throws SystemException {
+		return mbDiscussionPersistence.fetchByPrimaryKey(discussionId);
+	}
+
 	/**
 	 * Returns the message boards discussion with the primary key.
 	 *

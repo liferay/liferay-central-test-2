@@ -154,6 +154,12 @@ public class AnnouncementsEntryLocalServiceWrapper
 		return _announcementsEntryLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	public com.liferay.portlet.announcements.model.AnnouncementsEntry fetchAnnouncementsEntry(
+		long entryId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _announcementsEntryLocalService.fetchAnnouncementsEntry(entryId);
+	}
+
 	/**
 	* Returns the announcements entry with the primary key.
 	*

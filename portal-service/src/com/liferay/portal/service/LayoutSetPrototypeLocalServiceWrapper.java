@@ -154,6 +154,12 @@ public class LayoutSetPrototypeLocalServiceWrapper
 		return _layoutSetPrototypeLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	public com.liferay.portal.model.LayoutSetPrototype fetchLayoutSetPrototype(
+		long layoutSetPrototypeId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _layoutSetPrototypeLocalService.fetchLayoutSetPrototype(layoutSetPrototypeId);
+	}
+
 	/**
 	* Returns the layout set prototype with the primary key.
 	*

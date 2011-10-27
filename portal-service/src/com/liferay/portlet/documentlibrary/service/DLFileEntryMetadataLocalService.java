@@ -147,6 +147,11 @@ public interface DLFileEntryMetadataLocalService
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portlet.documentlibrary.model.DLFileEntryMetadata fetchDLFileEntryMetadata(
+		long fileEntryMetadataId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	/**
 	* Returns the document library file entry metadata with the primary key.
 	*

@@ -154,6 +154,12 @@ public class AnnouncementsDeliveryLocalServiceWrapper
 		return _announcementsDeliveryLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	public com.liferay.portlet.announcements.model.AnnouncementsDelivery fetchAnnouncementsDelivery(
+		long deliveryId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _announcementsDeliveryLocalService.fetchAnnouncementsDelivery(deliveryId);
+	}
+
 	/**
 	* Returns the announcements delivery with the primary key.
 	*

@@ -257,6 +257,11 @@ public abstract class SocialEquitySettingLocalServiceBaseImpl
 		return socialEquitySettingPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public SocialEquitySetting fetchSocialEquitySetting(long equitySettingId)
+		throws SystemException {
+		return socialEquitySettingPersistence.fetchByPrimaryKey(equitySettingId);
+	}
+
 	/**
 	 * Returns the social equity setting with the primary key.
 	 *

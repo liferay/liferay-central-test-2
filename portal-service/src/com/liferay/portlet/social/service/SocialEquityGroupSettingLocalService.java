@@ -147,6 +147,11 @@ public interface SocialEquityGroupSettingLocalService
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portlet.social.model.SocialEquityGroupSetting fetchSocialEquityGroupSetting(
+		long equityGroupSettingId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	/**
 	* Returns the social equity group setting with the primary key.
 	*

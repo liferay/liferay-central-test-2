@@ -158,6 +158,12 @@ public class JournalArticleImageLocalServiceUtil {
 		return getService().dynamicQueryCount(dynamicQuery);
 	}
 
+	public static com.liferay.portlet.journal.model.JournalArticleImage fetchJournalArticleImage(
+		long articleImageId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().fetchJournalArticleImage(articleImageId);
+	}
+
 	/**
 	* Returns the journal article image with the primary key.
 	*

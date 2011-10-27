@@ -158,6 +158,12 @@ public class JournalArticleResourceLocalServiceUtil {
 		return getService().dynamicQueryCount(dynamicQuery);
 	}
 
+	public static com.liferay.portlet.journal.model.JournalArticleResource fetchJournalArticleResource(
+		long resourcePrimKey)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().fetchJournalArticleResource(resourcePrimKey);
+	}
+
 	/**
 	* Returns the journal article resource with the primary key.
 	*

@@ -257,6 +257,11 @@ public abstract class DLFileRankLocalServiceBaseImpl
 		return dlFileRankPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public DLFileRank fetchDLFileRank(long fileRankId)
+		throws SystemException {
+		return dlFileRankPersistence.fetchByPrimaryKey(fileRankId);
+	}
+
 	/**
 	 * Returns the document library file rank with the primary key.
 	 *

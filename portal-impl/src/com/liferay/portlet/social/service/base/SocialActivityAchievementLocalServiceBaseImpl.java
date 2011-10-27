@@ -260,6 +260,11 @@ public abstract class SocialActivityAchievementLocalServiceBaseImpl
 		return socialActivityAchievementPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public SocialActivityAchievement fetchSocialActivityAchievement(
+		long activityAchievementId) throws SystemException {
+		return socialActivityAchievementPersistence.fetchByPrimaryKey(activityAchievementId);
+	}
+
 	/**
 	 * Returns the social activity achievement with the primary key.
 	 *

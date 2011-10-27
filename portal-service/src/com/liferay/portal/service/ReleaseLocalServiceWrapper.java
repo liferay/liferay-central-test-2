@@ -147,6 +147,11 @@ public class ReleaseLocalServiceWrapper implements ReleaseLocalService,
 		return _releaseLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	public com.liferay.portal.model.Release fetchRelease(long releaseId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _releaseLocalService.fetchRelease(releaseId);
+	}
+
 	/**
 	* Returns the release with the primary key.
 	*

@@ -252,6 +252,10 @@ public abstract class CalEventLocalServiceBaseImpl
 		return calEventPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public CalEvent fetchCalEvent(long eventId) throws SystemException {
+		return calEventPersistence.fetchByPrimaryKey(eventId);
+	}
+
 	/**
 	 * Returns the cal event with the primary key.
 	 *

@@ -158,6 +158,12 @@ public class DDLRecordLocalServiceUtil {
 		return getService().dynamicQueryCount(dynamicQuery);
 	}
 
+	public static com.liferay.portlet.dynamicdatalists.model.DDLRecord fetchDDLRecord(
+		long recordId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().fetchDDLRecord(recordId);
+	}
+
 	/**
 	* Returns the d d l record with the primary key.
 	*

@@ -146,6 +146,11 @@ public interface AssetEntryLocalService extends PersistedModelLocalService {
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portlet.asset.model.AssetEntry fetchAssetEntry(
+		long entryId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	/**
 	* Returns the asset entry with the primary key.
 	*

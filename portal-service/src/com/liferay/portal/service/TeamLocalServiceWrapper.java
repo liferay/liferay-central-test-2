@@ -149,6 +149,11 @@ public class TeamLocalServiceWrapper implements TeamLocalService,
 		return _teamLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	public com.liferay.portal.model.Team fetchTeam(long teamId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _teamLocalService.fetchTeam(teamId);
+	}
+
 	/**
 	* Returns the team with the primary key.
 	*

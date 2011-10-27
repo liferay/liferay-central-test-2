@@ -245,6 +245,11 @@ public abstract class ShoppingCouponLocalServiceBaseImpl
 		return shoppingCouponPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public ShoppingCoupon fetchShoppingCoupon(long couponId)
+		throws SystemException {
+		return shoppingCouponPersistence.fetchByPrimaryKey(couponId);
+	}
+
 	/**
 	 * Returns the shopping coupon with the primary key.
 	 *

@@ -237,6 +237,11 @@ public abstract class SCProductVersionLocalServiceBaseImpl
 		return scProductVersionPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public SCProductVersion fetchSCProductVersion(long productVersionId)
+		throws SystemException {
+		return scProductVersionPersistence.fetchByPrimaryKey(productVersionId);
+	}
+
 	/**
 	 * Returns the s c product version with the primary key.
 	 *

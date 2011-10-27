@@ -156,6 +156,11 @@ public class LockLocalServiceUtil {
 		return getService().dynamicQueryCount(dynamicQuery);
 	}
 
+	public static com.liferay.portal.model.Lock fetchLock(long lockId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().fetchLock(lockId);
+	}
+
 	/**
 	* Returns the lock with the primary key.
 	*

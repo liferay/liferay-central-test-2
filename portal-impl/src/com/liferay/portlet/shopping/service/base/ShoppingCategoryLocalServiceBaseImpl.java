@@ -246,6 +246,11 @@ public abstract class ShoppingCategoryLocalServiceBaseImpl
 		return shoppingCategoryPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public ShoppingCategory fetchShoppingCategory(long categoryId)
+		throws SystemException {
+		return shoppingCategoryPersistence.fetchByPrimaryKey(categoryId);
+	}
+
 	/**
 	 * Returns the shopping category with the primary key.
 	 *

@@ -232,6 +232,11 @@ public abstract class WikiPageResourceLocalServiceBaseImpl
 		return wikiPageResourcePersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public WikiPageResource fetchWikiPageResource(long resourcePrimKey)
+		throws SystemException {
+		return wikiPageResourcePersistence.fetchByPrimaryKey(resourcePrimKey);
+	}
+
 	/**
 	 * Returns the wiki page resource with the primary key.
 	 *

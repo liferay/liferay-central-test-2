@@ -396,6 +396,10 @@ public abstract class OrgLaborLocalServiceBaseImpl
 		return orgLaborPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public OrgLabor fetchOrgLabor(long orgLaborId) throws SystemException {
+		return orgLaborPersistence.fetchByPrimaryKey(orgLaborId);
+	}
+
 	/**
 	 * Returns the org labor with the primary key.
 	 *

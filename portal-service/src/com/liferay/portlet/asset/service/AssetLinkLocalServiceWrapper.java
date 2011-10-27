@@ -152,6 +152,11 @@ public class AssetLinkLocalServiceWrapper implements AssetLinkLocalService,
 		return _assetLinkLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	public com.liferay.portlet.asset.model.AssetLink fetchAssetLink(long linkId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _assetLinkLocalService.fetchAssetLink(linkId);
+	}
+
 	/**
 	* Returns the asset link with the primary key.
 	*

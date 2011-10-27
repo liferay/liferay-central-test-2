@@ -150,6 +150,12 @@ public class ClusterGroupLocalServiceWrapper implements ClusterGroupLocalService
 		return _clusterGroupLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	public com.liferay.portal.model.ClusterGroup fetchClusterGroup(
+		long clusterGroupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _clusterGroupLocalService.fetchClusterGroup(clusterGroupId);
+	}
+
 	/**
 	* Returns the cluster group with the primary key.
 	*

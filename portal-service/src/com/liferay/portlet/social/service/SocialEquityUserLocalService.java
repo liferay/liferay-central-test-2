@@ -146,6 +146,11 @@ public interface SocialEquityUserLocalService extends PersistedModelLocalService
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portlet.social.model.SocialEquityUser fetchSocialEquityUser(
+		long equityUserId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	/**
 	* Returns the social equity user with the primary key.
 	*

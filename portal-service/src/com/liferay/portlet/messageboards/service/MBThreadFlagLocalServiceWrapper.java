@@ -152,6 +152,12 @@ public class MBThreadFlagLocalServiceWrapper implements MBThreadFlagLocalService
 		return _mbThreadFlagLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	public com.liferay.portlet.messageboards.model.MBThreadFlag fetchMBThreadFlag(
+		long threadFlagId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _mbThreadFlagLocalService.fetchMBThreadFlag(threadFlagId);
+	}
+
 	/**
 	* Returns the message boards thread flag with the primary key.
 	*

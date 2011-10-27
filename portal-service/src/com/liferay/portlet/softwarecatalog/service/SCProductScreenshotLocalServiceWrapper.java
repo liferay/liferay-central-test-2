@@ -154,6 +154,12 @@ public class SCProductScreenshotLocalServiceWrapper
 		return _scProductScreenshotLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	public com.liferay.portlet.softwarecatalog.model.SCProductScreenshot fetchSCProductScreenshot(
+		long productScreenshotId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _scProductScreenshotLocalService.fetchSCProductScreenshot(productScreenshotId);
+	}
+
 	/**
 	* Returns the s c product screenshot with the primary key.
 	*

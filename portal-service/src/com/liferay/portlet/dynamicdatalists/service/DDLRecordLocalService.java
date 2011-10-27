@@ -146,6 +146,11 @@ public interface DDLRecordLocalService extends PersistedModelLocalService {
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portlet.dynamicdatalists.model.DDLRecord fetchDDLRecord(
+		long recordId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	/**
 	* Returns the d d l record with the primary key.
 	*

@@ -153,6 +153,11 @@ public class JournalArticleLocalServiceWrapper
 		return _journalArticleLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	public com.liferay.portlet.journal.model.JournalArticle fetchJournalArticle(
+		long id) throws com.liferay.portal.kernel.exception.SystemException {
+		return _journalArticleLocalService.fetchJournalArticle(id);
+	}
+
 	/**
 	* Returns the journal article with the primary key.
 	*

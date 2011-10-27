@@ -158,6 +158,12 @@ public class PollsChoiceLocalServiceUtil {
 		return getService().dynamicQueryCount(dynamicQuery);
 	}
 
+	public static com.liferay.portlet.polls.model.PollsChoice fetchPollsChoice(
+		long choiceId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().fetchPollsChoice(choiceId);
+	}
+
 	/**
 	* Returns the polls choice with the primary key.
 	*

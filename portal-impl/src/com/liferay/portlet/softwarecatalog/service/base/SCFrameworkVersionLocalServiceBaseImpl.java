@@ -237,6 +237,11 @@ public abstract class SCFrameworkVersionLocalServiceBaseImpl
 		return scFrameworkVersionPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public SCFrameworkVersion fetchSCFrameworkVersion(long frameworkVersionId)
+		throws SystemException {
+		return scFrameworkVersionPersistence.fetchByPrimaryKey(frameworkVersionId);
+	}
+
 	/**
 	 * Returns the s c framework version with the primary key.
 	 *

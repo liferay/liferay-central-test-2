@@ -252,6 +252,11 @@ public abstract class SocialRequestLocalServiceBaseImpl
 		return socialRequestPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public SocialRequest fetchSocialRequest(long requestId)
+		throws SystemException {
+		return socialRequestPersistence.fetchByPrimaryKey(requestId);
+	}
+
 	/**
 	 * Returns the social request with the primary key.
 	 *

@@ -151,6 +151,11 @@ public class MDRRuleLocalServiceWrapper implements MDRRuleLocalService,
 		return _mdrRuleLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	public com.liferay.portlet.mobiledevicerules.model.MDRRule fetchMDRRule(
+		long ruleId) throws com.liferay.portal.kernel.exception.SystemException {
+		return _mdrRuleLocalService.fetchMDRRule(ruleId);
+	}
+
 	/**
 	* Returns the m d r rule with the primary key.
 	*

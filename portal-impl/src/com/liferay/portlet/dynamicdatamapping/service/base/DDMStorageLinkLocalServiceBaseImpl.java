@@ -237,6 +237,11 @@ public abstract class DDMStorageLinkLocalServiceBaseImpl
 		return ddmStorageLinkPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public DDMStorageLink fetchDDMStorageLink(long storageLinkId)
+		throws SystemException {
+		return ddmStorageLinkPersistence.fetchByPrimaryKey(storageLinkId);
+	}
+
 	/**
 	 * Returns the d d m storage link with the primary key.
 	 *

@@ -253,6 +253,11 @@ public abstract class SocialEquityUserLocalServiceBaseImpl
 		return socialEquityUserPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public SocialEquityUser fetchSocialEquityUser(long equityUserId)
+		throws SystemException {
+		return socialEquityUserPersistence.fetchByPrimaryKey(equityUserId);
+	}
+
 	/**
 	 * Returns the social equity user with the primary key.
 	 *

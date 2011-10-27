@@ -158,6 +158,11 @@ public class AssetTagLocalServiceUtil {
 		return getService().dynamicQueryCount(dynamicQuery);
 	}
 
+	public static com.liferay.portlet.asset.model.AssetTag fetchAssetTag(
+		long tagId) throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().fetchAssetTag(tagId);
+	}
+
 	/**
 	* Returns the asset tag with the primary key.
 	*

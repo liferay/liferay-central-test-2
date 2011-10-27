@@ -241,6 +241,11 @@ public abstract class DDMStructureLocalServiceBaseImpl
 		return ddmStructurePersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public DDMStructure fetchDDMStructure(long structureId)
+		throws SystemException {
+		return ddmStructurePersistence.fetchByPrimaryKey(structureId);
+	}
+
 	/**
 	 * Returns the d d m structure with the primary key.
 	 *

@@ -253,6 +253,11 @@ public abstract class SocialEquityHistoryLocalServiceBaseImpl
 		return socialEquityHistoryPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public SocialEquityHistory fetchSocialEquityHistory(long equityHistoryId)
+		throws SystemException {
+		return socialEquityHistoryPersistence.fetchByPrimaryKey(equityHistoryId);
+	}
+
 	/**
 	 * Returns the social equity history with the primary key.
 	 *

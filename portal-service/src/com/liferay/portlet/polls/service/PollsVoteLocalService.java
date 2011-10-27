@@ -146,6 +146,10 @@ public interface PollsVoteLocalService extends PersistedModelLocalService {
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portlet.polls.model.PollsVote fetchPollsVote(long voteId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	/**
 	* Returns the polls vote with the primary key.
 	*

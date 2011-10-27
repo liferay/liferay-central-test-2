@@ -158,6 +158,12 @@ public class SCLicenseLocalServiceUtil {
 		return getService().dynamicQueryCount(dynamicQuery);
 	}
 
+	public static com.liferay.portlet.softwarecatalog.model.SCLicense fetchSCLicense(
+		long licenseId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().fetchSCLicense(licenseId);
+	}
+
 	/**
 	* Returns the s c license with the primary key.
 	*

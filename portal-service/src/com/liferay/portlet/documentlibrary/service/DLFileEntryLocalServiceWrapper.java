@@ -152,6 +152,12 @@ public class DLFileEntryLocalServiceWrapper implements DLFileEntryLocalService,
 		return _dlFileEntryLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	public com.liferay.portlet.documentlibrary.model.DLFileEntry fetchDLFileEntry(
+		long fileEntryId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _dlFileEntryLocalService.fetchDLFileEntry(fileEntryId);
+	}
+
 	/**
 	* Returns the document library file entry with the primary key.
 	*

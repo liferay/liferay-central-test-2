@@ -158,6 +158,12 @@ public class DDMStructureLocalServiceUtil {
 		return getService().dynamicQueryCount(dynamicQuery);
 	}
 
+	public static com.liferay.portlet.dynamicdatamapping.model.DDMStructure fetchDDMStructure(
+		long structureId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().fetchDDMStructure(structureId);
+	}
+
 	/**
 	* Returns the d d m structure with the primary key.
 	*

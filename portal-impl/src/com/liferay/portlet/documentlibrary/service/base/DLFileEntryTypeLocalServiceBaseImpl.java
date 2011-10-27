@@ -262,6 +262,11 @@ public abstract class DLFileEntryTypeLocalServiceBaseImpl
 		return dlFileEntryTypePersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public DLFileEntryType fetchDLFileEntryType(long fileEntryTypeId)
+		throws SystemException {
+		return dlFileEntryTypePersistence.fetchByPrimaryKey(fileEntryTypeId);
+	}
+
 	/**
 	 * Returns the document library file entry type with the primary key.
 	 *

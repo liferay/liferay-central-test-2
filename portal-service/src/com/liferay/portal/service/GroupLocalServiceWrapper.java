@@ -149,6 +149,11 @@ public class GroupLocalServiceWrapper implements GroupLocalService,
 		return _groupLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	public com.liferay.portal.model.Group fetchGroup(long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _groupLocalService.fetchGroup(groupId);
+	}
+
 	/**
 	* Returns the group with the primary key.
 	*
@@ -383,19 +388,6 @@ public class GroupLocalServiceWrapper implements GroupLocalService,
 		long companyId, java.lang.String friendlyURL)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _groupLocalService.fetchFriendlyURLGroup(companyId, friendlyURL);
-	}
-
-	/**
-	* Returns the group with the matching primary key.
-	*
-	* @param groupId the primary key of the group
-	* @return the group with the primary key, or <code>null</code> if a group
-	with the primary key could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public com.liferay.portal.model.Group fetchGroup(long groupId)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return _groupLocalService.fetchGroup(groupId);
 	}
 
 	/**

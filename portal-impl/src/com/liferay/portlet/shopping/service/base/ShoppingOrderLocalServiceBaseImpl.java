@@ -254,6 +254,11 @@ public abstract class ShoppingOrderLocalServiceBaseImpl
 		return shoppingOrderPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public ShoppingOrder fetchShoppingOrder(long orderId)
+		throws SystemException {
+		return shoppingOrderPersistence.fetchByPrimaryKey(orderId);
+	}
+
 	/**
 	 * Returns the shopping order with the primary key.
 	 *

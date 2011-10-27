@@ -153,6 +153,12 @@ public class SocialRelationLocalServiceWrapper
 		return _socialRelationLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	public com.liferay.portlet.social.model.SocialRelation fetchSocialRelation(
+		long relationId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _socialRelationLocalService.fetchSocialRelation(relationId);
+	}
+
 	/**
 	* Returns the social relation with the primary key.
 	*

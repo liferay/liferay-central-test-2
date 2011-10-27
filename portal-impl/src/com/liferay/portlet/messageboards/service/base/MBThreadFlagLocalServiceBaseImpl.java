@@ -245,6 +245,11 @@ public abstract class MBThreadFlagLocalServiceBaseImpl
 		return mbThreadFlagPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public MBThreadFlag fetchMBThreadFlag(long threadFlagId)
+		throws SystemException {
+		return mbThreadFlagPersistence.fetchByPrimaryKey(threadFlagId);
+	}
+
 	/**
 	 * Returns the message boards thread flag with the primary key.
 	 *

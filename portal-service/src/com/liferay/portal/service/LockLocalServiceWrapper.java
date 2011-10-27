@@ -147,6 +147,11 @@ public class LockLocalServiceWrapper implements LockLocalService,
 		return _lockLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	public com.liferay.portal.model.Lock fetchLock(long lockId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _lockLocalService.fetchLock(lockId);
+	}
+
 	/**
 	* Returns the lock with the primary key.
 	*

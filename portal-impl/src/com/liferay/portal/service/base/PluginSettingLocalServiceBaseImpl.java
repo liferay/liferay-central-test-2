@@ -399,6 +399,11 @@ public abstract class PluginSettingLocalServiceBaseImpl
 		return pluginSettingPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public PluginSetting fetchPluginSetting(long pluginSettingId)
+		throws SystemException {
+		return pluginSettingPersistence.fetchByPrimaryKey(pluginSettingId);
+	}
+
 	/**
 	 * Returns the plugin setting with the primary key.
 	 *

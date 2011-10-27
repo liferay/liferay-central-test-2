@@ -237,6 +237,11 @@ public abstract class BookmarksFolderLocalServiceBaseImpl
 		return bookmarksFolderPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public BookmarksFolder fetchBookmarksFolder(long folderId)
+		throws SystemException {
+		return bookmarksFolderPersistence.fetchByPrimaryKey(folderId);
+	}
+
 	/**
 	 * Returns the bookmarks folder with the primary key.
 	 *

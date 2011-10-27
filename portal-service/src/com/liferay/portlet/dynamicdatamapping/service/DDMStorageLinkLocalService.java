@@ -146,6 +146,11 @@ public interface DDMStorageLinkLocalService extends PersistedModelLocalService {
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portlet.dynamicdatamapping.model.DDMStorageLink fetchDDMStorageLink(
+		long storageLinkId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	/**
 	* Returns the d d m storage link with the primary key.
 	*

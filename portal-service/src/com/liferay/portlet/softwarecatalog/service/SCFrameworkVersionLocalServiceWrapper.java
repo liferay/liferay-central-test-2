@@ -154,6 +154,12 @@ public class SCFrameworkVersionLocalServiceWrapper
 		return _scFrameworkVersionLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	public com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion fetchSCFrameworkVersion(
+		long frameworkVersionId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _scFrameworkVersionLocalService.fetchSCFrameworkVersion(frameworkVersionId);
+	}
+
 	/**
 	* Returns the s c framework version with the primary key.
 	*

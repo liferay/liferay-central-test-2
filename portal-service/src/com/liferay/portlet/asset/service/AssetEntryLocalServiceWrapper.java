@@ -152,6 +152,12 @@ public class AssetEntryLocalServiceWrapper implements AssetEntryLocalService,
 		return _assetEntryLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	public com.liferay.portlet.asset.model.AssetEntry fetchAssetEntry(
+		long entryId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _assetEntryLocalService.fetchAssetEntry(entryId);
+	}
+
 	/**
 	* Returns the asset entry with the primary key.
 	*

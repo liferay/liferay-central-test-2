@@ -158,6 +158,11 @@ public class JournalFeedLocalServiceUtil {
 		return getService().dynamicQueryCount(dynamicQuery);
 	}
 
+	public static com.liferay.portlet.journal.model.JournalFeed fetchJournalFeed(
+		long id) throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().fetchJournalFeed(id);
+	}
+
 	/**
 	* Returns the journal feed with the primary key.
 	*

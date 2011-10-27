@@ -156,6 +156,11 @@ public class WebsiteLocalServiceUtil {
 		return getService().dynamicQueryCount(dynamicQuery);
 	}
 
+	public static com.liferay.portal.model.Website fetchWebsite(long websiteId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().fetchWebsite(websiteId);
+	}
+
 	/**
 	* Returns the website with the primary key.
 	*

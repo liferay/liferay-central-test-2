@@ -158,6 +158,11 @@ public class MBBanLocalServiceUtil {
 		return getService().dynamicQueryCount(dynamicQuery);
 	}
 
+	public static com.liferay.portlet.messageboards.model.MBBan fetchMBBan(
+		long banId) throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().fetchMBBan(banId);
+	}
+
 	/**
 	* Returns the message boards ban with the primary key.
 	*

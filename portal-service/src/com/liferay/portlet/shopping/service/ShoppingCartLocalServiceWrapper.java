@@ -152,6 +152,11 @@ public class ShoppingCartLocalServiceWrapper implements ShoppingCartLocalService
 		return _shoppingCartLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	public com.liferay.portlet.shopping.model.ShoppingCart fetchShoppingCart(
+		long cartId) throws com.liferay.portal.kernel.exception.SystemException {
+		return _shoppingCartLocalService.fetchShoppingCart(cartId);
+	}
+
 	/**
 	* Returns the shopping cart with the primary key.
 	*

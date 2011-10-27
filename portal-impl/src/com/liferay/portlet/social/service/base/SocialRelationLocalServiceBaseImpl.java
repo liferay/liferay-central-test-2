@@ -252,6 +252,11 @@ public abstract class SocialRelationLocalServiceBaseImpl
 		return socialRelationPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public SocialRelation fetchSocialRelation(long relationId)
+		throws SystemException {
+		return socialRelationPersistence.fetchByPrimaryKey(relationId);
+	}
+
 	/**
 	 * Returns the social relation with the primary key.
 	 *

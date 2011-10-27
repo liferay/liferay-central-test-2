@@ -152,6 +152,12 @@ public class MBMessageLocalServiceWrapper implements MBMessageLocalService,
 		return _mbMessageLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	public com.liferay.portlet.messageboards.model.MBMessage fetchMBMessage(
+		long messageId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _mbMessageLocalService.fetchMBMessage(messageId);
+	}
+
 	/**
 	* Returns the message-boards message with the primary key.
 	*

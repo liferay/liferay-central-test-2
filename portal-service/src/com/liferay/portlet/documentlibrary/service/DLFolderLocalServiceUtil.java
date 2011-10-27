@@ -158,6 +158,12 @@ public class DLFolderLocalServiceUtil {
 		return getService().dynamicQueryCount(dynamicQuery);
 	}
 
+	public static com.liferay.portlet.documentlibrary.model.DLFolder fetchDLFolder(
+		long folderId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().fetchDLFolder(folderId);
+	}
+
 	/**
 	* Returns the document library folder with the primary key.
 	*

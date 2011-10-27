@@ -158,6 +158,12 @@ public class DLContentLocalServiceUtil {
 		return getService().dynamicQueryCount(dynamicQuery);
 	}
 
+	public static com.liferay.portlet.documentlibrary.model.DLContent fetchDLContent(
+		long contentId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().fetchDLContent(contentId);
+	}
+
 	/**
 	* Returns the document library content with the primary key.
 	*

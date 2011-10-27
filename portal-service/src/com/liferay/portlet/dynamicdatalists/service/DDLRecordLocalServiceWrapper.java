@@ -152,6 +152,12 @@ public class DDLRecordLocalServiceWrapper implements DDLRecordLocalService,
 		return _ddlRecordLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	public com.liferay.portlet.dynamicdatalists.model.DDLRecord fetchDDLRecord(
+		long recordId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _ddlRecordLocalService.fetchDDLRecord(recordId);
+	}
+
 	/**
 	* Returns the d d l record with the primary key.
 	*

@@ -150,6 +150,11 @@ public class WikiPageLocalServiceWrapper implements WikiPageLocalService,
 		return _wikiPageLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	public com.liferay.portlet.wiki.model.WikiPage fetchWikiPage(long pageId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _wikiPageLocalService.fetchWikiPage(pageId);
+	}
+
 	/**
 	* Returns the wiki page with the primary key.
 	*

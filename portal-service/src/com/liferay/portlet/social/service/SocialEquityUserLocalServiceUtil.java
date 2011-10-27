@@ -158,6 +158,12 @@ public class SocialEquityUserLocalServiceUtil {
 		return getService().dynamicQueryCount(dynamicQuery);
 	}
 
+	public static com.liferay.portlet.social.model.SocialEquityUser fetchSocialEquityUser(
+		long equityUserId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().fetchSocialEquityUser(equityUserId);
+	}
+
 	/**
 	* Returns the social equity user with the primary key.
 	*

@@ -158,6 +158,11 @@ public class ShoppingItemLocalServiceUtil {
 		return getService().dynamicQueryCount(dynamicQuery);
 	}
 
+	public static com.liferay.portlet.shopping.model.ShoppingItem fetchShoppingItem(
+		long itemId) throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().fetchShoppingItem(itemId);
+	}
+
 	/**
 	* Returns the shopping item with the primary key.
 	*

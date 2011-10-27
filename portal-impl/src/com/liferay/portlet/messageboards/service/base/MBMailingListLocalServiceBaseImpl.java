@@ -245,6 +245,11 @@ public abstract class MBMailingListLocalServiceBaseImpl
 		return mbMailingListPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public MBMailingList fetchMBMailingList(long mailingListId)
+		throws SystemException {
+		return mbMailingListPersistence.fetchByPrimaryKey(mailingListId);
+	}
+
 	/**
 	 * Returns the message boards mailing list with the primary key.
 	 *

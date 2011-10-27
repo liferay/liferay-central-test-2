@@ -153,6 +153,12 @@ public class AssetCategoryLocalServiceWrapper
 		return _assetCategoryLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	public com.liferay.portlet.asset.model.AssetCategory fetchAssetCategory(
+		long categoryId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _assetCategoryLocalService.fetchAssetCategory(categoryId);
+	}
+
 	/**
 	* Returns the asset category with the primary key.
 	*

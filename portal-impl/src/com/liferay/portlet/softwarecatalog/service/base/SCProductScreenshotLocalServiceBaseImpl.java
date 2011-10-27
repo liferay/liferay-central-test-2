@@ -241,6 +241,11 @@ public abstract class SCProductScreenshotLocalServiceBaseImpl
 		return scProductScreenshotPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public SCProductScreenshot fetchSCProductScreenshot(
+		long productScreenshotId) throws SystemException {
+		return scProductScreenshotPersistence.fetchByPrimaryKey(productScreenshotId);
+	}
+
 	/**
 	 * Returns the s c product screenshot with the primary key.
 	 *

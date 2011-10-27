@@ -158,6 +158,12 @@ public class SocialActivityLocalServiceUtil {
 		return getService().dynamicQueryCount(dynamicQuery);
 	}
 
+	public static com.liferay.portlet.social.model.SocialActivity fetchSocialActivity(
+		long activityId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().fetchSocialActivity(activityId);
+	}
+
 	/**
 	* Returns the social activity with the primary key.
 	*

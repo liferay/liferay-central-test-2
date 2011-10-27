@@ -232,6 +232,11 @@ public abstract class ExpandoValueLocalServiceBaseImpl
 		return expandoValuePersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public ExpandoValue fetchExpandoValue(long valueId)
+		throws SystemException {
+		return expandoValuePersistence.fetchByPrimaryKey(valueId);
+	}
+
 	/**
 	 * Returns the expando value with the primary key.
 	 *

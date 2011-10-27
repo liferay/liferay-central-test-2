@@ -160,6 +160,12 @@ public class LayoutPrototypeLocalServiceUtil {
 		return getService().dynamicQueryCount(dynamicQuery);
 	}
 
+	public static com.liferay.portal.model.LayoutPrototype fetchLayoutPrototype(
+		long layoutPrototypeId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().fetchLayoutPrototype(layoutPrototypeId);
+	}
+
 	/**
 	* Returns the layout prototype with the primary key.
 	*

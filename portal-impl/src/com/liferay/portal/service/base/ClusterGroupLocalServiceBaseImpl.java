@@ -399,6 +399,11 @@ public abstract class ClusterGroupLocalServiceBaseImpl
 		return clusterGroupPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public ClusterGroup fetchClusterGroup(long clusterGroupId)
+		throws SystemException {
+		return clusterGroupPersistence.fetchByPrimaryKey(clusterGroupId);
+	}
+
 	/**
 	 * Returns the cluster group with the primary key.
 	 *

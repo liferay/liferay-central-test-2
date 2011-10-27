@@ -158,6 +158,12 @@ public class ClassNameLocalServiceUtil {
 		return getService().dynamicQueryCount(dynamicQuery);
 	}
 
+	public static com.liferay.portal.model.ClassName fetchClassName(
+		long classNameId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().fetchClassName(classNameId);
+	}
+
 	/**
 	* Returns the class name with the primary key.
 	*

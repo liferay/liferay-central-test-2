@@ -152,6 +152,12 @@ public class MBCategoryLocalServiceWrapper implements MBCategoryLocalService,
 		return _mbCategoryLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	public com.liferay.portlet.messageboards.model.MBCategory fetchMBCategory(
+		long categoryId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _mbCategoryLocalService.fetchMBCategory(categoryId);
+	}
+
 	/**
 	* Returns the message boards category with the primary key.
 	*

@@ -152,6 +152,12 @@ public class DLFileRankLocalServiceWrapper implements DLFileRankLocalService,
 		return _dlFileRankLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	public com.liferay.portlet.documentlibrary.model.DLFileRank fetchDLFileRank(
+		long fileRankId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _dlFileRankLocalService.fetchDLFileRank(fileRankId);
+	}
+
 	/**
 	* Returns the document library file rank with the primary key.
 	*

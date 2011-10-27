@@ -395,6 +395,10 @@ public abstract class LockLocalServiceBaseImpl implements LockLocalService,
 		return lockPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public Lock fetchLock(long lockId) throws SystemException {
+		return lockPersistence.fetchByPrimaryKey(lockId);
+	}
+
 	/**
 	 * Returns the lock with the primary key.
 	 *

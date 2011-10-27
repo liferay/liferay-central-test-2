@@ -158,6 +158,12 @@ public class AssetCategoryPropertyLocalServiceUtil {
 		return getService().dynamicQueryCount(dynamicQuery);
 	}
 
+	public static com.liferay.portlet.asset.model.AssetCategoryProperty fetchAssetCategoryProperty(
+		long categoryPropertyId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().fetchAssetCategoryProperty(categoryPropertyId);
+	}
+
 	/**
 	* Returns the asset category property with the primary key.
 	*

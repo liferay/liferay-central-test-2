@@ -158,6 +158,12 @@ public class SocialActivityCounterLocalServiceUtil {
 		return getService().dynamicQueryCount(dynamicQuery);
 	}
 
+	public static com.liferay.portlet.social.model.SocialActivityCounter fetchSocialActivityCounter(
+		long activityCounterId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().fetchSocialActivityCounter(activityCounterId);
+	}
+
 	/**
 	* Returns the social activity counter with the primary key.
 	*

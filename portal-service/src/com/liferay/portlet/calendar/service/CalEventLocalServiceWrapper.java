@@ -152,6 +152,12 @@ public class CalEventLocalServiceWrapper implements CalEventLocalService,
 		return _calEventLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	public com.liferay.portlet.calendar.model.CalEvent fetchCalEvent(
+		long eventId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _calEventLocalService.fetchCalEvent(eventId);
+	}
+
 	/**
 	* Returns the cal event with the primary key.
 	*

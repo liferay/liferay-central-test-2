@@ -153,6 +153,12 @@ public class DLFileVersionLocalServiceWrapper
 		return _dlFileVersionLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	public com.liferay.portlet.documentlibrary.model.DLFileVersion fetchDLFileVersion(
+		long fileVersionId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _dlFileVersionLocalService.fetchDLFileVersion(fileVersionId);
+	}
+
 	/**
 	* Returns the document library file version with the primary key.
 	*

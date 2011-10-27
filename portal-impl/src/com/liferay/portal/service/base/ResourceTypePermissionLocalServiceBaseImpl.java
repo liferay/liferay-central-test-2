@@ -403,6 +403,11 @@ public abstract class ResourceTypePermissionLocalServiceBaseImpl
 		return resourceTypePermissionPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public ResourceTypePermission fetchResourceTypePermission(
+		long resourceTypePermissionId) throws SystemException {
+		return resourceTypePermissionPersistence.fetchByPrimaryKey(resourceTypePermissionId);
+	}
+
 	/**
 	 * Returns the resource type permission with the primary key.
 	 *

@@ -158,6 +158,12 @@ public class MDRRuleGroupLocalServiceUtil {
 		return getService().dynamicQueryCount(dynamicQuery);
 	}
 
+	public static com.liferay.portlet.mobiledevicerules.model.MDRRuleGroup fetchMDRRuleGroup(
+		long ruleGroupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().fetchMDRRuleGroup(ruleGroupId);
+	}
+
 	/**
 	* Returns the m d r rule group with the primary key.
 	*

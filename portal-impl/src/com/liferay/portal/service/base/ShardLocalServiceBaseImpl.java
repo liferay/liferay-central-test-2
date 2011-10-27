@@ -396,6 +396,10 @@ public abstract class ShardLocalServiceBaseImpl implements ShardLocalService,
 		return shardPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public Shard fetchShard(long shardId) throws SystemException {
+		return shardPersistence.fetchByPrimaryKey(shardId);
+	}
+
 	/**
 	 * Returns the shard with the primary key.
 	 *

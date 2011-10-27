@@ -253,6 +253,11 @@ public abstract class DLFileVersionLocalServiceBaseImpl
 		return dlFileVersionPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public DLFileVersion fetchDLFileVersion(long fileVersionId)
+		throws SystemException {
+		return dlFileVersionPersistence.fetchByPrimaryKey(fileVersionId);
+	}
+
 	/**
 	 * Returns the document library file version with the primary key.
 	 *

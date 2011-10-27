@@ -146,6 +146,11 @@ public interface BlogsStatsUserLocalService extends PersistedModelLocalService {
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portlet.blogs.model.BlogsStatsUser fetchBlogsStatsUser(
+		long statsUserId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	/**
 	* Returns the blogs stats user with the primary key.
 	*

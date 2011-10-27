@@ -232,6 +232,10 @@ public abstract class MDRRuleLocalServiceBaseImpl implements MDRRuleLocalService
 		return mdrRulePersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public MDRRule fetchMDRRule(long ruleId) throws SystemException {
+		return mdrRulePersistence.fetchByPrimaryKey(ruleId);
+	}
+
 	/**
 	 * Returns the m d r rule with the primary key.
 	 *

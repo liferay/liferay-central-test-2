@@ -152,6 +152,12 @@ public class RatingsEntryLocalServiceWrapper implements RatingsEntryLocalService
 		return _ratingsEntryLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	public com.liferay.portlet.ratings.model.RatingsEntry fetchRatingsEntry(
+		long entryId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _ratingsEntryLocalService.fetchRatingsEntry(entryId);
+	}
+
 	/**
 	* Returns the ratings entry with the primary key.
 	*

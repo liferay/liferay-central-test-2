@@ -158,6 +158,11 @@ public class ExpandoRowLocalServiceUtil {
 		return getService().dynamicQueryCount(dynamicQuery);
 	}
 
+	public static com.liferay.portlet.expando.model.ExpandoRow fetchExpandoRow(
+		long rowId) throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().fetchExpandoRow(rowId);
+	}
+
 	/**
 	* Returns the expando row with the primary key.
 	*

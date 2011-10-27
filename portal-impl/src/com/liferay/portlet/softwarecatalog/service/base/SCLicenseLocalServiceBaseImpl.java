@@ -235,6 +235,10 @@ public abstract class SCLicenseLocalServiceBaseImpl
 		return scLicensePersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public SCLicense fetchSCLicense(long licenseId) throws SystemException {
+		return scLicensePersistence.fetchByPrimaryKey(licenseId);
+	}
+
 	/**
 	 * Returns the s c license with the primary key.
 	 *

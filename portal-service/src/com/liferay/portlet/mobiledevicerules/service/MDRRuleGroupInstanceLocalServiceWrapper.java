@@ -154,6 +154,12 @@ public class MDRRuleGroupInstanceLocalServiceWrapper
 		return _mdrRuleGroupInstanceLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	public com.liferay.portlet.mobiledevicerules.model.MDRRuleGroupInstance fetchMDRRuleGroupInstance(
+		long ruleGroupInstanceId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _mdrRuleGroupInstanceLocalService.fetchMDRRuleGroupInstance(ruleGroupInstanceId);
+	}
+
 	/**
 	* Returns the m d r rule group instance with the primary key.
 	*

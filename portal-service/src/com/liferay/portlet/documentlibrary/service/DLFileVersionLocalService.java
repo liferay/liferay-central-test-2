@@ -146,6 +146,11 @@ public interface DLFileVersionLocalService extends PersistedModelLocalService {
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portlet.documentlibrary.model.DLFileVersion fetchDLFileVersion(
+		long fileVersionId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	/**
 	* Returns the document library file version with the primary key.
 	*

@@ -257,6 +257,11 @@ public abstract class SocialEquityLogLocalServiceBaseImpl
 		return socialEquityLogPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public SocialEquityLog fetchSocialEquityLog(long equityLogId)
+		throws SystemException {
+		return socialEquityLogPersistence.fetchByPrimaryKey(equityLogId);
+	}
+
 	/**
 	 * Returns the social equity log with the primary key.
 	 *

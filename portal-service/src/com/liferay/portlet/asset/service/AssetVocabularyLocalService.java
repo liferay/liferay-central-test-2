@@ -146,6 +146,11 @@ public interface AssetVocabularyLocalService extends PersistedModelLocalService 
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portlet.asset.model.AssetVocabulary fetchAssetVocabulary(
+		long vocabularyId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	/**
 	* Returns the asset vocabulary with the primary key.
 	*

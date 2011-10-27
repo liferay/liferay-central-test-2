@@ -399,6 +399,11 @@ public abstract class PortletItemLocalServiceBaseImpl
 		return portletItemPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public PortletItem fetchPortletItem(long portletItemId)
+		throws SystemException {
+		return portletItemPersistence.fetchByPrimaryKey(portletItemId);
+	}
+
 	/**
 	 * Returns the portlet item with the primary key.
 	 *

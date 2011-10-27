@@ -158,6 +158,12 @@ public class MBMessageLocalServiceUtil {
 		return getService().dynamicQueryCount(dynamicQuery);
 	}
 
+	public static com.liferay.portlet.messageboards.model.MBMessage fetchMBMessage(
+		long messageId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().fetchMBMessage(messageId);
+	}
+
 	/**
 	* Returns the message-boards message with the primary key.
 	*

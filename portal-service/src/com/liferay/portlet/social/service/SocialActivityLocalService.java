@@ -146,6 +146,11 @@ public interface SocialActivityLocalService extends PersistedModelLocalService {
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portlet.social.model.SocialActivity fetchSocialActivity(
+		long activityId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	/**
 	* Returns the social activity with the primary key.
 	*

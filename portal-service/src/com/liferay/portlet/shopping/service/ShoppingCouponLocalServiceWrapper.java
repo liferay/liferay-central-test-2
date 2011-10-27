@@ -153,6 +153,12 @@ public class ShoppingCouponLocalServiceWrapper
 		return _shoppingCouponLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	public com.liferay.portlet.shopping.model.ShoppingCoupon fetchShoppingCoupon(
+		long couponId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _shoppingCouponLocalService.fetchShoppingCoupon(couponId);
+	}
+
 	/**
 	* Returns the shopping coupon with the primary key.
 	*

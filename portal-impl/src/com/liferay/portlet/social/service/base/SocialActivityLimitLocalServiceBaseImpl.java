@@ -257,6 +257,11 @@ public abstract class SocialActivityLimitLocalServiceBaseImpl
 		return socialActivityLimitPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public SocialActivityLimit fetchSocialActivityLimit(long activityLimitId)
+		throws SystemException {
+		return socialActivityLimitPersistence.fetchByPrimaryKey(activityLimitId);
+	}
+
 	/**
 	 * Returns the social activity limit with the primary key.
 	 *

@@ -396,6 +396,10 @@ public abstract class PhoneLocalServiceBaseImpl implements PhoneLocalService,
 		return phonePersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public Phone fetchPhone(long phoneId) throws SystemException {
+		return phonePersistence.fetchByPrimaryKey(phoneId);
+	}
+
 	/**
 	 * Returns the phone with the primary key.
 	 *

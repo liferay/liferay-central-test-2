@@ -264,6 +264,11 @@ public abstract class SocialActivityLocalServiceBaseImpl
 		return socialActivityPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public SocialActivity fetchSocialActivity(long activityId)
+		throws SystemException {
+		return socialActivityPersistence.fetchByPrimaryKey(activityId);
+	}
+
 	/**
 	 * Returns the social activity with the primary key.
 	 *

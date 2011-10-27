@@ -153,6 +153,12 @@ public class ShoppingOrderLocalServiceWrapper
 		return _shoppingOrderLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	public com.liferay.portlet.shopping.model.ShoppingOrder fetchShoppingOrder(
+		long orderId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _shoppingOrderLocalService.fetchShoppingOrder(orderId);
+	}
+
 	/**
 	* Returns the shopping order with the primary key.
 	*

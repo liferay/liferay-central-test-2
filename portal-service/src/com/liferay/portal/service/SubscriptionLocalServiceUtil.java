@@ -160,6 +160,12 @@ public class SubscriptionLocalServiceUtil {
 		return getService().dynamicQueryCount(dynamicQuery);
 	}
 
+	public static com.liferay.portal.model.Subscription fetchSubscription(
+		long subscriptionId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().fetchSubscription(subscriptionId);
+	}
+
 	/**
 	* Returns the subscription with the primary key.
 	*

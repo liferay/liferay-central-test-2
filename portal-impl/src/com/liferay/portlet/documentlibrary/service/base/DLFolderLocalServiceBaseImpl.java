@@ -265,6 +265,10 @@ public abstract class DLFolderLocalServiceBaseImpl
 		return dlFolderPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public DLFolder fetchDLFolder(long folderId) throws SystemException {
+		return dlFolderPersistence.fetchByPrimaryKey(folderId);
+	}
+
 	/**
 	 * Returns the document library folder with the primary key.
 	 *

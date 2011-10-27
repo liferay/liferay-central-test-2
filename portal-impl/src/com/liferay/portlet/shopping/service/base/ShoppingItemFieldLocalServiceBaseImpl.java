@@ -246,6 +246,11 @@ public abstract class ShoppingItemFieldLocalServiceBaseImpl
 		return shoppingItemFieldPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public ShoppingItemField fetchShoppingItemField(long itemFieldId)
+		throws SystemException {
+		return shoppingItemFieldPersistence.fetchByPrimaryKey(itemFieldId);
+	}
+
 	/**
 	 * Returns the shopping item field with the primary key.
 	 *

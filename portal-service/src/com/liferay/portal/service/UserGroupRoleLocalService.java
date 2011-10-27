@@ -146,6 +146,11 @@ public interface UserGroupRoleLocalService extends PersistedModelLocalService {
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portal.model.UserGroupRole fetchUserGroupRole(
+		com.liferay.portal.service.persistence.UserGroupRolePK userGroupRolePK)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	/**
 	* Returns the user group role with the primary key.
 	*

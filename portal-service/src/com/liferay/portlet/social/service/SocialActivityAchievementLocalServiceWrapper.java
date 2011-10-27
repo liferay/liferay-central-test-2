@@ -154,6 +154,12 @@ public class SocialActivityAchievementLocalServiceWrapper
 		return _socialActivityAchievementLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	public com.liferay.portlet.social.model.SocialActivityAchievement fetchSocialActivityAchievement(
+		long activityAchievementId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _socialActivityAchievementLocalService.fetchSocialActivityAchievement(activityAchievementId);
+	}
+
 	/**
 	* Returns the social activity achievement with the primary key.
 	*

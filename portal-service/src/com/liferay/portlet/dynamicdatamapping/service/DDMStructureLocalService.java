@@ -146,6 +146,11 @@ public interface DDMStructureLocalService extends PersistedModelLocalService {
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portlet.dynamicdatamapping.model.DDMStructure fetchDDMStructure(
+		long structureId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	/**
 	* Returns the d d m structure with the primary key.
 	*

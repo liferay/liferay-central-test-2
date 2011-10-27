@@ -146,6 +146,11 @@ public interface AssetCategoryLocalService extends PersistedModelLocalService {
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portlet.asset.model.AssetCategory fetchAssetCategory(
+		long categoryId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	/**
 	* Returns the asset category with the primary key.
 	*

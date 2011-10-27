@@ -220,6 +220,10 @@ public abstract class CounterLocalServiceBaseImpl implements CounterLocalService
 		return counterPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public Counter fetchCounter(String name) throws SystemException {
+		return counterPersistence.fetchByPrimaryKey(name);
+	}
+
 	/**
 	 * Returns the counter with the primary key.
 	 *

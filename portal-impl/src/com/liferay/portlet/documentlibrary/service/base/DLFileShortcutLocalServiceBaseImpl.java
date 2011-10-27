@@ -261,6 +261,11 @@ public abstract class DLFileShortcutLocalServiceBaseImpl
 		return dlFileShortcutPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public DLFileShortcut fetchDLFileShortcut(long fileShortcutId)
+		throws SystemException {
+		return dlFileShortcutPersistence.fetchByPrimaryKey(fileShortcutId);
+	}
+
 	/**
 	 * Returns the document library file shortcut with the primary key.
 	 *

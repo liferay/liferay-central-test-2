@@ -158,6 +158,11 @@ public class PollsVoteLocalServiceUtil {
 		return getService().dynamicQueryCount(dynamicQuery);
 	}
 
+	public static com.liferay.portlet.polls.model.PollsVote fetchPollsVote(
+		long voteId) throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().fetchPollsVote(voteId);
+	}
+
 	/**
 	* Returns the polls vote with the primary key.
 	*

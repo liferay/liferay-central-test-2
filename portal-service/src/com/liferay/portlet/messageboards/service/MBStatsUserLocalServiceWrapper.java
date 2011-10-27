@@ -152,6 +152,12 @@ public class MBStatsUserLocalServiceWrapper implements MBStatsUserLocalService,
 		return _mbStatsUserLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	public com.liferay.portlet.messageboards.model.MBStatsUser fetchMBStatsUser(
+		long statsUserId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _mbStatsUserLocalService.fetchMBStatsUser(statsUserId);
+	}
+
 	/**
 	* Returns the message boards stats user with the primary key.
 	*

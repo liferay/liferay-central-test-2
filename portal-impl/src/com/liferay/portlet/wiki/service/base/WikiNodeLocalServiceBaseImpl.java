@@ -234,6 +234,10 @@ public abstract class WikiNodeLocalServiceBaseImpl
 		return wikiNodePersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public WikiNode fetchWikiNode(long nodeId) throws SystemException {
+		return wikiNodePersistence.fetchByPrimaryKey(nodeId);
+	}
+
 	/**
 	 * Returns the wiki node with the primary key.
 	 *

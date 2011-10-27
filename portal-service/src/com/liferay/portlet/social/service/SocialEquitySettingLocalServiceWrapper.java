@@ -154,6 +154,12 @@ public class SocialEquitySettingLocalServiceWrapper
 		return _socialEquitySettingLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	public com.liferay.portlet.social.model.SocialEquitySetting fetchSocialEquitySetting(
+		long equitySettingId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _socialEquitySettingLocalService.fetchSocialEquitySetting(equitySettingId);
+	}
+
 	/**
 	* Returns the social equity setting with the primary key.
 	*

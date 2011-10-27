@@ -231,6 +231,11 @@ public abstract class PollsQuestionLocalServiceBaseImpl
 		return pollsQuestionPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public PollsQuestion fetchPollsQuestion(long questionId)
+		throws SystemException {
+		return pollsQuestionPersistence.fetchByPrimaryKey(questionId);
+	}
+
 	/**
 	 * Returns the polls question with the primary key.
 	 *

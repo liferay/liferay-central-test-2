@@ -158,6 +158,12 @@ public class SCProductEntryLocalServiceUtil {
 		return getService().dynamicQueryCount(dynamicQuery);
 	}
 
+	public static com.liferay.portlet.softwarecatalog.model.SCProductEntry fetchSCProductEntry(
+		long productEntryId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().fetchSCProductEntry(productEntryId);
+	}
+
 	/**
 	* Returns the s c product entry with the primary key.
 	*

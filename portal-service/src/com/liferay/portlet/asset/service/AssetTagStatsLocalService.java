@@ -146,6 +146,11 @@ public interface AssetTagStatsLocalService extends PersistedModelLocalService {
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portlet.asset.model.AssetTagStats fetchAssetTagStats(
+		long tagStatsId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	/**
 	* Returns the asset tag stats with the primary key.
 	*

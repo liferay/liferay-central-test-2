@@ -154,6 +154,12 @@ public class DLFileEntryMetadataLocalServiceWrapper
 		return _dlFileEntryMetadataLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	public com.liferay.portlet.documentlibrary.model.DLFileEntryMetadata fetchDLFileEntryMetadata(
+		long fileEntryMetadataId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _dlFileEntryMetadataLocalService.fetchDLFileEntryMetadata(fileEntryMetadataId);
+	}
+
 	/**
 	* Returns the document library file entry metadata with the primary key.
 	*

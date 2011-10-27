@@ -152,6 +152,12 @@ public class BlogsEntryLocalServiceWrapper implements BlogsEntryLocalService,
 		return _blogsEntryLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	public com.liferay.portlet.blogs.model.BlogsEntry fetchBlogsEntry(
+		long entryId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _blogsEntryLocalService.fetchBlogsEntry(entryId);
+	}
+
 	/**
 	* Returns the blogs entry with the primary key.
 	*

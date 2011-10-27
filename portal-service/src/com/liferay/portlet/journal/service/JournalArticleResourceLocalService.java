@@ -147,6 +147,11 @@ public interface JournalArticleResourceLocalService
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portlet.journal.model.JournalArticleResource fetchJournalArticleResource(
+		long resourcePrimKey)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	/**
 	* Returns the journal article resource with the primary key.
 	*

@@ -154,6 +154,12 @@ public class AssetTagPropertyLocalServiceWrapper
 		return _assetTagPropertyLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	public com.liferay.portlet.asset.model.AssetTagProperty fetchAssetTagProperty(
+		long tagPropertyId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _assetTagPropertyLocalService.fetchAssetTagProperty(tagPropertyId);
+	}
+
 	/**
 	* Returns the asset tag property with the primary key.
 	*

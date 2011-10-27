@@ -158,6 +158,12 @@ public class AnnouncementsEntryLocalServiceUtil {
 		return getService().dynamicQueryCount(dynamicQuery);
 	}
 
+	public static com.liferay.portlet.announcements.model.AnnouncementsEntry fetchAnnouncementsEntry(
+		long entryId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().fetchAnnouncementsEntry(entryId);
+	}
+
 	/**
 	* Returns the announcements entry with the primary key.
 	*

@@ -152,6 +152,12 @@ public class ExpandoTableLocalServiceWrapper implements ExpandoTableLocalService
 		return _expandoTableLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	public com.liferay.portlet.expando.model.ExpandoTable fetchExpandoTable(
+		long tableId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _expandoTableLocalService.fetchExpandoTable(tableId);
+	}
+
 	/**
 	* Returns the expando table with the primary key.
 	*

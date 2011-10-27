@@ -147,6 +147,11 @@ public interface SocialActivityLimitLocalService
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portlet.social.model.SocialActivityLimit fetchSocialActivityLimit(
+		long activityLimitId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	/**
 	* Returns the social activity limit with the primary key.
 	*

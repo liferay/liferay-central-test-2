@@ -158,6 +158,12 @@ public class SocialActivityLimitLocalServiceUtil {
 		return getService().dynamicQueryCount(dynamicQuery);
 	}
 
+	public static com.liferay.portlet.social.model.SocialActivityLimit fetchSocialActivityLimit(
+		long activityLimitId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().fetchSocialActivityLimit(activityLimitId);
+	}
+
 	/**
 	* Returns the social activity limit with the primary key.
 	*

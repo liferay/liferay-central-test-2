@@ -146,6 +146,10 @@ public interface ShoppingItemLocalService extends PersistedModelLocalService {
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portlet.shopping.model.ShoppingItem fetchShoppingItem(
+		long itemId) throws com.liferay.portal.kernel.exception.SystemException;
+
 	/**
 	* Returns the shopping item with the primary key.
 	*

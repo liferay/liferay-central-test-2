@@ -233,6 +233,11 @@ public abstract class AnnouncementsDeliveryLocalServiceBaseImpl
 		return announcementsDeliveryPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public AnnouncementsDelivery fetchAnnouncementsDelivery(long deliveryId)
+		throws SystemException {
+		return announcementsDeliveryPersistence.fetchByPrimaryKey(deliveryId);
+	}
+
 	/**
 	 * Returns the announcements delivery with the primary key.
 	 *

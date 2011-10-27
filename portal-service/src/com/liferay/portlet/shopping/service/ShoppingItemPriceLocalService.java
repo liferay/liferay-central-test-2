@@ -147,6 +147,11 @@ public interface ShoppingItemPriceLocalService
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portlet.shopping.model.ShoppingItemPrice fetchShoppingItemPrice(
+		long itemPriceId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	/**
 	* Returns the shopping item price with the primary key.
 	*

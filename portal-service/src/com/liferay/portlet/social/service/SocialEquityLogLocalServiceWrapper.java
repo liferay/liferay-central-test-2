@@ -154,6 +154,12 @@ public class SocialEquityLogLocalServiceWrapper
 		return _socialEquityLogLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	public com.liferay.portlet.social.model.SocialEquityLog fetchSocialEquityLog(
+		long equityLogId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _socialEquityLogLocalService.fetchSocialEquityLog(equityLogId);
+	}
+
 	/**
 	* Returns the social equity log with the primary key.
 	*

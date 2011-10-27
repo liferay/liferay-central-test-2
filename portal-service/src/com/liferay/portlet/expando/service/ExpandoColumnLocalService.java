@@ -146,6 +146,11 @@ public interface ExpandoColumnLocalService extends PersistedModelLocalService {
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portlet.expando.model.ExpandoColumn fetchExpandoColumn(
+		long columnId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	/**
 	* Returns the expando column with the primary key.
 	*

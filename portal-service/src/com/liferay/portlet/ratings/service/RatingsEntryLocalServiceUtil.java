@@ -158,6 +158,12 @@ public class RatingsEntryLocalServiceUtil {
 		return getService().dynamicQueryCount(dynamicQuery);
 	}
 
+	public static com.liferay.portlet.ratings.model.RatingsEntry fetchRatingsEntry(
+		long entryId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().fetchRatingsEntry(entryId);
+	}
+
 	/**
 	* Returns the ratings entry with the primary key.
 	*

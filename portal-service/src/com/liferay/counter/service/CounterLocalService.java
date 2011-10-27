@@ -145,6 +145,10 @@ public interface CounterLocalService extends PersistedModelLocalService {
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.counter.model.Counter fetchCounter(java.lang.String name)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	/**
 	* Returns the counter with the primary key.
 	*

@@ -245,6 +245,11 @@ public abstract class ShoppingCartLocalServiceBaseImpl
 		return shoppingCartPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public ShoppingCart fetchShoppingCart(long cartId)
+		throws SystemException {
+		return shoppingCartPersistence.fetchByPrimaryKey(cartId);
+	}
+
 	/**
 	 * Returns the shopping cart with the primary key.
 	 *

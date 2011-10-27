@@ -146,6 +146,11 @@ public interface MDRRuleGroupLocalService extends PersistedModelLocalService {
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portlet.mobiledevicerules.model.MDRRuleGroup fetchMDRRuleGroup(
+		long ruleGroupId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	/**
 	* Returns the m d r rule group with the primary key.
 	*

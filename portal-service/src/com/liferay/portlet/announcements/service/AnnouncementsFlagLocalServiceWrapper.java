@@ -154,6 +154,11 @@ public class AnnouncementsFlagLocalServiceWrapper
 		return _announcementsFlagLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	public com.liferay.portlet.announcements.model.AnnouncementsFlag fetchAnnouncementsFlag(
+		long flagId) throws com.liferay.portal.kernel.exception.SystemException {
+		return _announcementsFlagLocalService.fetchAnnouncementsFlag(flagId);
+	}
+
 	/**
 	* Returns the announcements flag with the primary key.
 	*

@@ -154,6 +154,12 @@ public class SocialActivitySettingLocalServiceWrapper
 		return _socialActivitySettingLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	public com.liferay.portlet.social.model.SocialActivitySetting fetchSocialActivitySetting(
+		long activitySettingId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _socialActivitySettingLocalService.fetchSocialActivitySetting(activitySettingId);
+	}
+
 	/**
 	* Returns the social activity setting with the primary key.
 	*

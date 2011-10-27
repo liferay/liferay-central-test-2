@@ -154,6 +154,12 @@ public class ShoppingItemPriceLocalServiceWrapper
 		return _shoppingItemPriceLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	public com.liferay.portlet.shopping.model.ShoppingItemPrice fetchShoppingItemPrice(
+		long itemPriceId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _shoppingItemPriceLocalService.fetchShoppingItemPrice(itemPriceId);
+	}
+
 	/**
 	* Returns the shopping item price with the primary key.
 	*

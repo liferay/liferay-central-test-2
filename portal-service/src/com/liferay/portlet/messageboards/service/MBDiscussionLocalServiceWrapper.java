@@ -152,6 +152,12 @@ public class MBDiscussionLocalServiceWrapper implements MBDiscussionLocalService
 		return _mbDiscussionLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	public com.liferay.portlet.messageboards.model.MBDiscussion fetchMBDiscussion(
+		long discussionId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _mbDiscussionLocalService.fetchMBDiscussion(discussionId);
+	}
+
 	/**
 	* Returns the message boards discussion with the primary key.
 	*

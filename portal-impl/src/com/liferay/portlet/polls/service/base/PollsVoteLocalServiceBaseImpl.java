@@ -230,6 +230,10 @@ public abstract class PollsVoteLocalServiceBaseImpl
 		return pollsVotePersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public PollsVote fetchPollsVote(long voteId) throws SystemException {
+		return pollsVotePersistence.fetchByPrimaryKey(voteId);
+	}
+
 	/**
 	 * Returns the polls vote with the primary key.
 	 *

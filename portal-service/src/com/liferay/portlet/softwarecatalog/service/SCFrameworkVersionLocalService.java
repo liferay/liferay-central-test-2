@@ -147,6 +147,11 @@ public interface SCFrameworkVersionLocalService
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion fetchSCFrameworkVersion(
+		long frameworkVersionId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	/**
 	* Returns the s c framework version with the primary key.
 	*

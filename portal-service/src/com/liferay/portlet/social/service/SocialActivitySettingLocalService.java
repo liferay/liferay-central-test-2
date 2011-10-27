@@ -147,6 +147,11 @@ public interface SocialActivitySettingLocalService
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portlet.social.model.SocialActivitySetting fetchSocialActivitySetting(
+		long activitySettingId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	/**
 	* Returns the social activity setting with the primary key.
 	*

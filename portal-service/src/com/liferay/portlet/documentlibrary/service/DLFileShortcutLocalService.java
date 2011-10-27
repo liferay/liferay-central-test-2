@@ -146,6 +146,11 @@ public interface DLFileShortcutLocalService extends PersistedModelLocalService {
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portlet.documentlibrary.model.DLFileShortcut fetchDLFileShortcut(
+		long fileShortcutId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	/**
 	* Returns the document library file shortcut with the primary key.
 	*

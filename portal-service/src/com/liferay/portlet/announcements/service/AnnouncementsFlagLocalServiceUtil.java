@@ -158,6 +158,11 @@ public class AnnouncementsFlagLocalServiceUtil {
 		return getService().dynamicQueryCount(dynamicQuery);
 	}
 
+	public static com.liferay.portlet.announcements.model.AnnouncementsFlag fetchAnnouncementsFlag(
+		long flagId) throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().fetchAnnouncementsFlag(flagId);
+	}
+
 	/**
 	* Returns the announcements flag with the primary key.
 	*

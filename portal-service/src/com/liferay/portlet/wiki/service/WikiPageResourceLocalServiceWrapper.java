@@ -154,6 +154,12 @@ public class WikiPageResourceLocalServiceWrapper
 		return _wikiPageResourceLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	public com.liferay.portlet.wiki.model.WikiPageResource fetchWikiPageResource(
+		long resourcePrimKey)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _wikiPageResourceLocalService.fetchWikiPageResource(resourcePrimKey);
+	}
+
 	/**
 	* Returns the wiki page resource with the primary key.
 	*

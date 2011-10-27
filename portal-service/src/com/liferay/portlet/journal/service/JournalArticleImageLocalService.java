@@ -147,6 +147,11 @@ public interface JournalArticleImageLocalService
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portlet.journal.model.JournalArticleImage fetchJournalArticleImage(
+		long articleImageId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	/**
 	* Returns the journal article image with the primary key.
 	*

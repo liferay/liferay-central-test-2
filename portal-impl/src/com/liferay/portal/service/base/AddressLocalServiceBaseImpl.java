@@ -396,6 +396,10 @@ public abstract class AddressLocalServiceBaseImpl implements AddressLocalService
 		return addressPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public Address fetchAddress(long addressId) throws SystemException {
+		return addressPersistence.fetchByPrimaryKey(addressId);
+	}
+
 	/**
 	 * Returns the address with the primary key.
 	 *

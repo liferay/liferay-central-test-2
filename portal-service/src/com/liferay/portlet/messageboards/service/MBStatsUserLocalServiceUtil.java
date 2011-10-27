@@ -158,6 +158,12 @@ public class MBStatsUserLocalServiceUtil {
 		return getService().dynamicQueryCount(dynamicQuery);
 	}
 
+	public static com.liferay.portlet.messageboards.model.MBStatsUser fetchMBStatsUser(
+		long statsUserId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().fetchMBStatsUser(statsUserId);
+	}
+
 	/**
 	* Returns the message boards stats user with the primary key.
 	*

@@ -254,6 +254,11 @@ public abstract class AnnouncementsEntryLocalServiceBaseImpl
 		return announcementsEntryPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public AnnouncementsEntry fetchAnnouncementsEntry(long entryId)
+		throws SystemException {
+		return announcementsEntryPersistence.fetchByPrimaryKey(entryId);
+	}
+
 	/**
 	 * Returns the announcements entry with the primary key.
 	 *

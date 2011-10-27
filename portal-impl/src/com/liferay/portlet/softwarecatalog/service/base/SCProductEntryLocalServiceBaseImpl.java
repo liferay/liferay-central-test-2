@@ -250,6 +250,11 @@ public abstract class SCProductEntryLocalServiceBaseImpl
 		return scProductEntryPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public SCProductEntry fetchSCProductEntry(long productEntryId)
+		throws SystemException {
+		return scProductEntryPersistence.fetchByPrimaryKey(productEntryId);
+	}
+
 	/**
 	 * Returns the s c product entry with the primary key.
 	 *

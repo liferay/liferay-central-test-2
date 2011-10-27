@@ -152,6 +152,12 @@ public class DDMContentLocalServiceWrapper implements DDMContentLocalService,
 		return _ddmContentLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	public com.liferay.portlet.dynamicdatamapping.model.DDMContent fetchDDMContent(
+		long contentId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _ddmContentLocalService.fetchDDMContent(contentId);
+	}
+
 	/**
 	* Returns the d d m content with the primary key.
 	*

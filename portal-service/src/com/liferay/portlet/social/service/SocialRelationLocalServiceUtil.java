@@ -158,6 +158,12 @@ public class SocialRelationLocalServiceUtil {
 		return getService().dynamicQueryCount(dynamicQuery);
 	}
 
+	public static com.liferay.portlet.social.model.SocialRelation fetchSocialRelation(
+		long relationId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().fetchSocialRelation(relationId);
+	}
+
 	/**
 	* Returns the social relation with the primary key.
 	*

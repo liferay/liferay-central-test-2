@@ -260,6 +260,11 @@ public abstract class SocialEquityGroupSettingLocalServiceBaseImpl
 		return socialEquityGroupSettingPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public SocialEquityGroupSetting fetchSocialEquityGroupSetting(
+		long equityGroupSettingId) throws SystemException {
+		return socialEquityGroupSettingPersistence.fetchByPrimaryKey(equityGroupSettingId);
+	}
+
 	/**
 	 * Returns the social equity group setting with the primary key.
 	 *

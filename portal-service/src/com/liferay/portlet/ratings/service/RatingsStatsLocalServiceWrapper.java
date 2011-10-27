@@ -152,6 +152,12 @@ public class RatingsStatsLocalServiceWrapper implements RatingsStatsLocalService
 		return _ratingsStatsLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	public com.liferay.portlet.ratings.model.RatingsStats fetchRatingsStats(
+		long statsId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _ratingsStatsLocalService.fetchRatingsStats(statsId);
+	}
+
 	/**
 	* Returns the ratings stats with the primary key.
 	*

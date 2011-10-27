@@ -399,6 +399,11 @@ public abstract class ResourceCodeLocalServiceBaseImpl
 		return resourceCodePersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public ResourceCode fetchResourceCode(long codeId)
+		throws SystemException {
+		return resourceCodePersistence.fetchByPrimaryKey(codeId);
+	}
+
 	/**
 	 * Returns the resource code with the primary key.
 	 *

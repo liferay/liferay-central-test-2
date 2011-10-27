@@ -154,6 +154,12 @@ public class JournalArticleImageLocalServiceWrapper
 		return _journalArticleImageLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	public com.liferay.portlet.journal.model.JournalArticleImage fetchJournalArticleImage(
+		long articleImageId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _journalArticleImageLocalService.fetchJournalArticleImage(articleImageId);
+	}
+
 	/**
 	* Returns the journal article image with the primary key.
 	*

@@ -403,6 +403,11 @@ public abstract class ResourceBlockPermissionLocalServiceBaseImpl
 		return resourceBlockPermissionPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public ResourceBlockPermission fetchResourceBlockPermission(
+		long resourceBlockPermissionId) throws SystemException {
+		return resourceBlockPermissionPersistence.fetchByPrimaryKey(resourceBlockPermissionId);
+	}
+
 	/**
 	 * Returns the resource block permission with the primary key.
 	 *

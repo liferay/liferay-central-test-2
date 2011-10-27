@@ -147,6 +147,11 @@ public class ContactLocalServiceWrapper implements ContactLocalService,
 		return _contactLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	public com.liferay.portal.model.Contact fetchContact(long contactId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _contactLocalService.fetchContact(contactId);
+	}
+
 	/**
 	* Returns the contact with the primary key.
 	*

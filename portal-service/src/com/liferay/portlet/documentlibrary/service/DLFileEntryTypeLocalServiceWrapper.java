@@ -154,6 +154,12 @@ public class DLFileEntryTypeLocalServiceWrapper
 		return _dlFileEntryTypeLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	public com.liferay.portlet.documentlibrary.model.DLFileEntryType fetchDLFileEntryType(
+		long fileEntryTypeId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _dlFileEntryTypeLocalService.fetchDLFileEntryType(fileEntryTypeId);
+	}
+
 	/**
 	* Returns the document library file entry type with the primary key.
 	*

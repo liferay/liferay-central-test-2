@@ -158,6 +158,12 @@ public class DLFileRankLocalServiceUtil {
 		return getService().dynamicQueryCount(dynamicQuery);
 	}
 
+	public static com.liferay.portlet.documentlibrary.model.DLFileRank fetchDLFileRank(
+		long fileRankId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().fetchDLFileRank(fileRankId);
+	}
+
 	/**
 	* Returns the document library file rank with the primary key.
 	*

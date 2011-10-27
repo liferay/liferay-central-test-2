@@ -153,6 +153,12 @@ public class PasswordPolicyLocalServiceWrapper
 		return _passwordPolicyLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	public com.liferay.portal.model.PasswordPolicy fetchPasswordPolicy(
+		long passwordPolicyId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _passwordPolicyLocalService.fetchPasswordPolicy(passwordPolicyId);
+	}
+
 	/**
 	* Returns the password policy with the primary key.
 	*

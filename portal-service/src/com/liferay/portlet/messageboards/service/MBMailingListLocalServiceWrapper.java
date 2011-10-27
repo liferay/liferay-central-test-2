@@ -153,6 +153,12 @@ public class MBMailingListLocalServiceWrapper
 		return _mbMailingListLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	public com.liferay.portlet.messageboards.model.MBMailingList fetchMBMailingList(
+		long mailingListId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _mbMailingListLocalService.fetchMBMailingList(mailingListId);
+	}
+
 	/**
 	* Returns the message boards mailing list with the primary key.
 	*

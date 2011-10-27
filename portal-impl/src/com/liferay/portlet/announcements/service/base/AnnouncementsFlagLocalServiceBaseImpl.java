@@ -233,6 +233,11 @@ public abstract class AnnouncementsFlagLocalServiceBaseImpl
 		return announcementsFlagPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public AnnouncementsFlag fetchAnnouncementsFlag(long flagId)
+		throws SystemException {
+		return announcementsFlagPersistence.fetchByPrimaryKey(flagId);
+	}
+
 	/**
 	 * Returns the announcements flag with the primary key.
 	 *

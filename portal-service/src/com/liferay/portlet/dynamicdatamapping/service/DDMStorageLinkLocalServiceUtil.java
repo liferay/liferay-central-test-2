@@ -158,6 +158,12 @@ public class DDMStorageLinkLocalServiceUtil {
 		return getService().dynamicQueryCount(dynamicQuery);
 	}
 
+	public static com.liferay.portlet.dynamicdatamapping.model.DDMStorageLink fetchDDMStorageLink(
+		long storageLinkId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().fetchDDMStorageLink(storageLinkId);
+	}
+
 	/**
 	* Returns the d d m storage link with the primary key.
 	*

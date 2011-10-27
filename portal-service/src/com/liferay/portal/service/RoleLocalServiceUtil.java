@@ -158,6 +158,11 @@ public class RoleLocalServiceUtil {
 		return getService().dynamicQueryCount(dynamicQuery);
 	}
 
+	public static com.liferay.portal.model.Role fetchRole(long roleId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().fetchRole(roleId);
+	}
+
 	/**
 	* Returns the role with the primary key.
 	*

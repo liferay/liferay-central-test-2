@@ -396,6 +396,10 @@ public abstract class AccountLocalServiceBaseImpl implements AccountLocalService
 		return accountPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public Account fetchAccount(long accountId) throws SystemException {
+		return accountPersistence.fetchByPrimaryKey(accountId);
+	}
+
 	/**
 	 * Returns the account with the primary key.
 	 *

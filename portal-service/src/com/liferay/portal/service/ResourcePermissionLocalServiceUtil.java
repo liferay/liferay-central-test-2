@@ -158,6 +158,12 @@ public class ResourcePermissionLocalServiceUtil {
 		return getService().dynamicQueryCount(dynamicQuery);
 	}
 
+	public static com.liferay.portal.model.ResourcePermission fetchResourcePermission(
+		long resourcePermissionId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().fetchResourcePermission(resourcePermissionId);
+	}
+
 	/**
 	* Returns the resource permission with the primary key.
 	*

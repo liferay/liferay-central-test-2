@@ -158,6 +158,12 @@ public class SCFrameworkVersionLocalServiceUtil {
 		return getService().dynamicQueryCount(dynamicQuery);
 	}
 
+	public static com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion fetchSCFrameworkVersion(
+		long frameworkVersionId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().fetchSCFrameworkVersion(frameworkVersionId);
+	}
+
 	/**
 	* Returns the s c framework version with the primary key.
 	*

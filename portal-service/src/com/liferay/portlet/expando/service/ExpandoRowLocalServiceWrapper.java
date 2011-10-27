@@ -152,6 +152,11 @@ public class ExpandoRowLocalServiceWrapper implements ExpandoRowLocalService,
 		return _expandoRowLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	public com.liferay.portlet.expando.model.ExpandoRow fetchExpandoRow(
+		long rowId) throws com.liferay.portal.kernel.exception.SystemException {
+		return _expandoRowLocalService.fetchExpandoRow(rowId);
+	}
+
 	/**
 	* Returns the expando row with the primary key.
 	*

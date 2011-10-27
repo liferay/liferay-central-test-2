@@ -146,6 +146,11 @@ public interface RatingsStatsLocalService extends PersistedModelLocalService {
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portlet.ratings.model.RatingsStats fetchRatingsStats(
+		long statsId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	/**
 	* Returns the ratings stats with the primary key.
 	*

@@ -253,6 +253,11 @@ public abstract class JournalTemplateLocalServiceBaseImpl
 		return journalTemplatePersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public JournalTemplate fetchJournalTemplate(long id)
+		throws SystemException {
+		return journalTemplatePersistence.fetchByPrimaryKey(id);
+	}
+
 	/**
 	 * Returns the journal template with the primary key.
 	 *

@@ -158,6 +158,12 @@ public class VirtualHostLocalServiceUtil {
 		return getService().dynamicQueryCount(dynamicQuery);
 	}
 
+	public static com.liferay.portal.model.VirtualHost fetchVirtualHost(
+		long virtualHostId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().fetchVirtualHost(virtualHostId);
+	}
+
 	/**
 	* Returns the virtual host with the primary key.
 	*

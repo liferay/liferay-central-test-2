@@ -232,6 +232,11 @@ public abstract class ExpandoTableLocalServiceBaseImpl
 		return expandoTablePersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public ExpandoTable fetchExpandoTable(long tableId)
+		throws SystemException {
+		return expandoTablePersistence.fetchByPrimaryKey(tableId);
+	}
+
 	/**
 	 * Returns the expando table with the primary key.
 	 *

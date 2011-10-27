@@ -152,6 +152,12 @@ public class MDRActionLocalServiceWrapper implements MDRActionLocalService,
 		return _mdrActionLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	public com.liferay.portlet.mobiledevicerules.model.MDRAction fetchMDRAction(
+		long actionId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _mdrActionLocalService.fetchMDRAction(actionId);
+	}
+
 	/**
 	* Returns the m d r action with the primary key.
 	*

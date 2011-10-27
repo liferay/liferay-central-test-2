@@ -147,6 +147,11 @@ public interface ShoppingItemFieldLocalService
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portlet.shopping.model.ShoppingItemField fetchShoppingItemField(
+		long itemFieldId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	/**
 	* Returns the shopping item field with the primary key.
 	*

@@ -256,6 +256,10 @@ public abstract class MBThreadLocalServiceBaseImpl
 		return mbThreadPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public MBThread fetchMBThread(long threadId) throws SystemException {
+		return mbThreadPersistence.fetchByPrimaryKey(threadId);
+	}
+
 	/**
 	 * Returns the message boards thread with the primary key.
 	 *

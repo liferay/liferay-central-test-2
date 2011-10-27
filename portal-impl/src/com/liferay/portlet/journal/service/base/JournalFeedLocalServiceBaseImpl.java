@@ -247,6 +247,10 @@ public abstract class JournalFeedLocalServiceBaseImpl
 		return journalFeedPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public JournalFeed fetchJournalFeed(long id) throws SystemException {
+		return journalFeedPersistence.fetchByPrimaryKey(id);
+	}
+
 	/**
 	 * Returns the journal feed with the primary key.
 	 *

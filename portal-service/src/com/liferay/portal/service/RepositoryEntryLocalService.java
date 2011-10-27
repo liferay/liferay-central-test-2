@@ -145,6 +145,11 @@ public interface RepositoryEntryLocalService extends PersistedModelLocalService 
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portal.model.RepositoryEntry fetchRepositoryEntry(
+		long repositoryEntryId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	/**
 	* Returns the repository entry with the primary key.
 	*
@@ -243,9 +248,4 @@ public interface RepositoryEntryLocalService extends PersistedModelLocalService 
 	* @param beanIdentifier the Spring bean ID for this bean
 	*/
 	public void setBeanIdentifier(java.lang.String beanIdentifier);
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public com.liferay.portal.model.RepositoryEntry fetchRepositoryEntry(
-		long repositoryEntryId)
-		throws com.liferay.portal.kernel.exception.SystemException;
 }

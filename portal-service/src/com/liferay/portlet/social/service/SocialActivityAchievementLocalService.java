@@ -147,6 +147,11 @@ public interface SocialActivityAchievementLocalService
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portlet.social.model.SocialActivityAchievement fetchSocialActivityAchievement(
+		long activityAchievementId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	/**
 	* Returns the social activity achievement with the primary key.
 	*

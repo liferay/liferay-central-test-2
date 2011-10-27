@@ -158,6 +158,11 @@ public class ShoppingCartLocalServiceUtil {
 		return getService().dynamicQueryCount(dynamicQuery);
 	}
 
+	public static com.liferay.portlet.shopping.model.ShoppingCart fetchShoppingCart(
+		long cartId) throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().fetchShoppingCart(cartId);
+	}
+
 	/**
 	* Returns the shopping cart with the primary key.
 	*

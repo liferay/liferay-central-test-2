@@ -251,6 +251,11 @@ public abstract class AssetCategoryLocalServiceBaseImpl
 		return assetCategoryPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public AssetCategory fetchAssetCategory(long categoryId)
+		throws SystemException {
+		return assetCategoryPersistence.fetchByPrimaryKey(categoryId);
+	}
+
 	/**
 	 * Returns the asset category with the primary key.
 	 *

@@ -158,6 +158,12 @@ public class MBCategoryLocalServiceUtil {
 		return getService().dynamicQueryCount(dynamicQuery);
 	}
 
+	public static com.liferay.portlet.messageboards.model.MBCategory fetchMBCategory(
+		long categoryId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().fetchMBCategory(categoryId);
+	}
+
 	/**
 	* Returns the message boards category with the primary key.
 	*

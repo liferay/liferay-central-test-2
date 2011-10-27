@@ -154,6 +154,12 @@ public class BookmarksFolderLocalServiceWrapper
 		return _bookmarksFolderLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	public com.liferay.portlet.bookmarks.model.BookmarksFolder fetchBookmarksFolder(
+		long folderId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _bookmarksFolderLocalService.fetchBookmarksFolder(folderId);
+	}
+
 	/**
 	* Returns the bookmarks folder with the primary key.
 	*

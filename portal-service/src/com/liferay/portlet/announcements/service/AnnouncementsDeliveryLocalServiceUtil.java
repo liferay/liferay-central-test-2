@@ -158,6 +158,12 @@ public class AnnouncementsDeliveryLocalServiceUtil {
 		return getService().dynamicQueryCount(dynamicQuery);
 	}
 
+	public static com.liferay.portlet.announcements.model.AnnouncementsDelivery fetchAnnouncementsDelivery(
+		long deliveryId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().fetchAnnouncementsDelivery(deliveryId);
+	}
+
 	/**
 	* Returns the announcements delivery with the primary key.
 	*

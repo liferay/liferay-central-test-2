@@ -158,6 +158,12 @@ public class ShoppingOrderItemLocalServiceUtil {
 		return getService().dynamicQueryCount(dynamicQuery);
 	}
 
+	public static com.liferay.portlet.shopping.model.ShoppingOrderItem fetchShoppingOrderItem(
+		long orderItemId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().fetchShoppingOrderItem(orderItemId);
+	}
+
 	/**
 	* Returns the shopping order item with the primary key.
 	*

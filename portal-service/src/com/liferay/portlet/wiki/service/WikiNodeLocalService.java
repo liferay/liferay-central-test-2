@@ -144,6 +144,10 @@ public interface WikiNodeLocalService extends PersistedModelLocalService {
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portlet.wiki.model.WikiNode fetchWikiNode(long nodeId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	/**
 	* Returns the wiki node with the primary key.
 	*

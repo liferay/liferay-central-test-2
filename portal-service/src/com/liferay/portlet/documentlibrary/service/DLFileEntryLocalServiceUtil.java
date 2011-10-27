@@ -158,6 +158,12 @@ public class DLFileEntryLocalServiceUtil {
 		return getService().dynamicQueryCount(dynamicQuery);
 	}
 
+	public static com.liferay.portlet.documentlibrary.model.DLFileEntry fetchDLFileEntry(
+		long fileEntryId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().fetchDLFileEntry(fileEntryId);
+	}
+
 	/**
 	* Returns the document library file entry with the primary key.
 	*

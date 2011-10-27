@@ -152,6 +152,12 @@ public class MBThreadLocalServiceWrapper implements MBThreadLocalService,
 		return _mbThreadLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	public com.liferay.portlet.messageboards.model.MBThread fetchMBThread(
+		long threadId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _mbThreadLocalService.fetchMBThread(threadId);
+	}
+
 	/**
 	* Returns the message boards thread with the primary key.
 	*

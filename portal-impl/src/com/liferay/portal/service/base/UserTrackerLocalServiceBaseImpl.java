@@ -399,6 +399,11 @@ public abstract class UserTrackerLocalServiceBaseImpl
 		return userTrackerPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public UserTracker fetchUserTracker(long userTrackerId)
+		throws SystemException {
+		return userTrackerPersistence.fetchByPrimaryKey(userTrackerId);
+	}
+
 	/**
 	 * Returns the user tracker with the primary key.
 	 *

@@ -156,6 +156,11 @@ public class ShardLocalServiceUtil {
 		return getService().dynamicQueryCount(dynamicQuery);
 	}
 
+	public static com.liferay.portal.model.Shard fetchShard(long shardId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().fetchShard(shardId);
+	}
+
 	/**
 	* Returns the shard with the primary key.
 	*

@@ -152,6 +152,12 @@ public class ResourcePermissionLocalServiceWrapper
 		return _resourcePermissionLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	public com.liferay.portal.model.ResourcePermission fetchResourcePermission(
+		long resourcePermissionId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _resourcePermissionLocalService.fetchResourcePermission(resourcePermissionId);
+	}
+
 	/**
 	* Returns the resource permission with the primary key.
 	*

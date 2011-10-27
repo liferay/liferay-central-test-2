@@ -154,6 +154,12 @@ public class SocialActivityLimitLocalServiceWrapper
 		return _socialActivityLimitLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	public com.liferay.portlet.social.model.SocialActivityLimit fetchSocialActivityLimit(
+		long activityLimitId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _socialActivityLimitLocalService.fetchSocialActivityLimit(activityLimitId);
+	}
+
 	/**
 	* Returns the social activity limit with the primary key.
 	*

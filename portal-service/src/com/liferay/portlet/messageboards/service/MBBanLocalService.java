@@ -144,6 +144,10 @@ public interface MBBanLocalService extends PersistedModelLocalService {
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portlet.messageboards.model.MBBan fetchMBBan(long banId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	/**
 	* Returns the message boards ban with the primary key.
 	*

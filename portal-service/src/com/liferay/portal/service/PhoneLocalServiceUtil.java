@@ -156,6 +156,11 @@ public class PhoneLocalServiceUtil {
 		return getService().dynamicQueryCount(dynamicQuery);
 	}
 
+	public static com.liferay.portal.model.Phone fetchPhone(long phoneId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().fetchPhone(phoneId);
+	}
+
 	/**
 	* Returns the phone with the primary key.
 	*

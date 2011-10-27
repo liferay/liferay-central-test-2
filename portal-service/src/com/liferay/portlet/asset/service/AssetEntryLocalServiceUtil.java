@@ -158,6 +158,12 @@ public class AssetEntryLocalServiceUtil {
 		return getService().dynamicQueryCount(dynamicQuery);
 	}
 
+	public static com.liferay.portlet.asset.model.AssetEntry fetchAssetEntry(
+		long entryId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().fetchAssetEntry(entryId);
+	}
+
 	/**
 	* Returns the asset entry with the primary key.
 	*

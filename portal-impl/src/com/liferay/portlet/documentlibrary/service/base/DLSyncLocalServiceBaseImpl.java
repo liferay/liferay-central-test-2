@@ -250,6 +250,10 @@ public abstract class DLSyncLocalServiceBaseImpl implements DLSyncLocalService,
 		return dlSyncPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public DLSync fetchDLSync(long syncId) throws SystemException {
+		return dlSyncPersistence.fetchByPrimaryKey(syncId);
+	}
+
 	/**
 	 * Returns the d l sync with the primary key.
 	 *

@@ -158,6 +158,11 @@ public class TeamLocalServiceUtil {
 		return getService().dynamicQueryCount(dynamicQuery);
 	}
 
+	public static com.liferay.portal.model.Team fetchTeam(long teamId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().fetchTeam(teamId);
+	}
+
 	/**
 	* Returns the team with the primary key.
 	*

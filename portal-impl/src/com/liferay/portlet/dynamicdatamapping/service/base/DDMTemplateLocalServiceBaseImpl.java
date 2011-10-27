@@ -237,6 +237,11 @@ public abstract class DDMTemplateLocalServiceBaseImpl
 		return ddmTemplatePersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public DDMTemplate fetchDDMTemplate(long templateId)
+		throws SystemException {
+		return ddmTemplatePersistence.fetchByPrimaryKey(templateId);
+	}
+
 	/**
 	 * Returns the d d m template with the primary key.
 	 *

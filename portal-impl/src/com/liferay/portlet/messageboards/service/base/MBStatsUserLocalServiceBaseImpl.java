@@ -249,6 +249,11 @@ public abstract class MBStatsUserLocalServiceBaseImpl
 		return mbStatsUserPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public MBStatsUser fetchMBStatsUser(long statsUserId)
+		throws SystemException {
+		return mbStatsUserPersistence.fetchByPrimaryKey(statsUserId);
+	}
+
 	/**
 	 * Returns the message boards stats user with the primary key.
 	 *

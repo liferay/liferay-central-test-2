@@ -158,6 +158,12 @@ public class JournalContentSearchLocalServiceUtil {
 		return getService().dynamicQueryCount(dynamicQuery);
 	}
 
+	public static com.liferay.portlet.journal.model.JournalContentSearch fetchJournalContentSearch(
+		long contentSearchId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().fetchJournalContentSearch(contentSearchId);
+	}
+
 	/**
 	* Returns the journal content search with the primary key.
 	*

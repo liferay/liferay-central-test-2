@@ -152,6 +152,12 @@ public class PollsChoiceLocalServiceWrapper implements PollsChoiceLocalService,
 		return _pollsChoiceLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	public com.liferay.portlet.polls.model.PollsChoice fetchPollsChoice(
+		long choiceId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _pollsChoiceLocalService.fetchPollsChoice(choiceId);
+	}
+
 	/**
 	* Returns the polls choice with the primary key.
 	*

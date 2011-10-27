@@ -150,6 +150,11 @@ public class WikiNodeLocalServiceWrapper implements WikiNodeLocalService,
 		return _wikiNodeLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	public com.liferay.portlet.wiki.model.WikiNode fetchWikiNode(long nodeId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _wikiNodeLocalService.fetchWikiNode(nodeId);
+	}
+
 	/**
 	* Returns the wiki node with the primary key.
 	*

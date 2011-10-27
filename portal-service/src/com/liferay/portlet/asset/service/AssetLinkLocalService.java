@@ -146,6 +146,10 @@ public interface AssetLinkLocalService extends PersistedModelLocalService {
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portlet.asset.model.AssetLink fetchAssetLink(long linkId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	/**
 	* Returns the asset link with the primary key.
 	*

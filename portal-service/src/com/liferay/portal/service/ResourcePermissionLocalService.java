@@ -146,6 +146,11 @@ public interface ResourcePermissionLocalService
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portal.model.ResourcePermission fetchResourcePermission(
+		long resourcePermissionId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	/**
 	* Returns the resource permission with the primary key.
 	*

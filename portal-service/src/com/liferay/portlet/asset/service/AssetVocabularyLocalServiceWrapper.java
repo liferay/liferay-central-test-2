@@ -154,6 +154,12 @@ public class AssetVocabularyLocalServiceWrapper
 		return _assetVocabularyLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	public com.liferay.portlet.asset.model.AssetVocabulary fetchAssetVocabulary(
+		long vocabularyId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _assetVocabularyLocalService.fetchAssetVocabulary(vocabularyId);
+	}
+
 	/**
 	* Returns the asset vocabulary with the primary key.
 	*

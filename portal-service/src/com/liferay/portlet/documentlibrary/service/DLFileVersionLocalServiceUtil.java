@@ -158,6 +158,12 @@ public class DLFileVersionLocalServiceUtil {
 		return getService().dynamicQueryCount(dynamicQuery);
 	}
 
+	public static com.liferay.portlet.documentlibrary.model.DLFileVersion fetchDLFileVersion(
+		long fileVersionId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().fetchDLFileVersion(fileVersionId);
+	}
+
 	/**
 	* Returns the document library file version with the primary key.
 	*

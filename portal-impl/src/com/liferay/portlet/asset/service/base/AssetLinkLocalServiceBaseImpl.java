@@ -250,6 +250,10 @@ public abstract class AssetLinkLocalServiceBaseImpl
 		return assetLinkPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public AssetLink fetchAssetLink(long linkId) throws SystemException {
+		return assetLinkPersistence.fetchByPrimaryKey(linkId);
+	}
+
 	/**
 	 * Returns the asset link with the primary key.
 	 *

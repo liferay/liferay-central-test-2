@@ -232,6 +232,10 @@ public abstract class ExpandoRowLocalServiceBaseImpl
 		return expandoRowPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public ExpandoRow fetchExpandoRow(long rowId) throws SystemException {
+		return expandoRowPersistence.fetchByPrimaryKey(rowId);
+	}
+
 	/**
 	 * Returns the expando row with the primary key.
 	 *

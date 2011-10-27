@@ -158,6 +158,12 @@ public class MBDiscussionLocalServiceUtil {
 		return getService().dynamicQueryCount(dynamicQuery);
 	}
 
+	public static com.liferay.portlet.messageboards.model.MBDiscussion fetchMBDiscussion(
+		long discussionId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().fetchMBDiscussion(discussionId);
+	}
+
 	/**
 	* Returns the message boards discussion with the primary key.
 	*

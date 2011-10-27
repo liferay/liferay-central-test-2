@@ -145,6 +145,11 @@ public interface EmailAddressLocalService extends PersistedModelLocalService {
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portal.model.EmailAddress fetchEmailAddress(
+		long emailAddressId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	/**
 	* Returns the email address with the primary key.
 	*

@@ -158,6 +158,11 @@ public class DLSyncLocalServiceUtil {
 		return getService().dynamicQueryCount(dynamicQuery);
 	}
 
+	public static com.liferay.portlet.documentlibrary.model.DLSync fetchDLSync(
+		long syncId) throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().fetchDLSync(syncId);
+	}
+
 	/**
 	* Returns the d l sync with the primary key.
 	*

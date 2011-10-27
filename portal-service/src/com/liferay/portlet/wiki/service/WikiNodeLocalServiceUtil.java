@@ -158,6 +158,11 @@ public class WikiNodeLocalServiceUtil {
 		return getService().dynamicQueryCount(dynamicQuery);
 	}
 
+	public static com.liferay.portlet.wiki.model.WikiNode fetchWikiNode(
+		long nodeId) throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().fetchWikiNode(nodeId);
+	}
+
 	/**
 	* Returns the wiki node with the primary key.
 	*

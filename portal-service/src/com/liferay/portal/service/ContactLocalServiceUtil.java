@@ -156,6 +156,11 @@ public class ContactLocalServiceUtil {
 		return getService().dynamicQueryCount(dynamicQuery);
 	}
 
+	public static com.liferay.portal.model.Contact fetchContact(long contactId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().fetchContact(contactId);
+	}
+
 	/**
 	* Returns the contact with the primary key.
 	*

@@ -146,6 +146,11 @@ public interface WikiPageResourceLocalService extends PersistedModelLocalService
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portlet.wiki.model.WikiPageResource fetchWikiPageResource(
+		long resourcePrimKey)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	/**
 	* Returns the wiki page resource with the primary key.
 	*

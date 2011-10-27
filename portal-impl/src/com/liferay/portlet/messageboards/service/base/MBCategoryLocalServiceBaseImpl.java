@@ -258,6 +258,11 @@ public abstract class MBCategoryLocalServiceBaseImpl
 		return mbCategoryPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public MBCategory fetchMBCategory(long categoryId)
+		throws SystemException {
+		return mbCategoryPersistence.fetchByPrimaryKey(categoryId);
+	}
+
 	/**
 	 * Returns the message boards category with the primary key.
 	 *

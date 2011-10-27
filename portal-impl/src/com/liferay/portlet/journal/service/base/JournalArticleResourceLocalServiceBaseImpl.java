@@ -248,6 +248,11 @@ public abstract class JournalArticleResourceLocalServiceBaseImpl
 		return journalArticleResourcePersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public JournalArticleResource fetchJournalArticleResource(
+		long resourcePrimKey) throws SystemException {
+		return journalArticleResourcePersistence.fetchByPrimaryKey(resourcePrimKey);
+	}
+
 	/**
 	 * Returns the journal article resource with the primary key.
 	 *

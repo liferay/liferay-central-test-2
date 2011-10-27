@@ -239,6 +239,11 @@ public abstract class MDRRuleGroupLocalServiceBaseImpl
 		return mdrRuleGroupPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public MDRRuleGroup fetchMDRRuleGroup(long ruleGroupId)
+		throws SystemException {
+		return mdrRuleGroupPersistence.fetchByPrimaryKey(ruleGroupId);
+	}
+
 	/**
 	 * Returns the m d r rule group with the primary key.
 	 *

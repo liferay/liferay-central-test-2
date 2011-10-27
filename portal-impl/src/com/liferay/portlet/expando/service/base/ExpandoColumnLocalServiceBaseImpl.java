@@ -232,6 +232,11 @@ public abstract class ExpandoColumnLocalServiceBaseImpl
 		return expandoColumnPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public ExpandoColumn fetchExpandoColumn(long columnId)
+		throws SystemException {
+		return expandoColumnPersistence.fetchByPrimaryKey(columnId);
+	}
+
 	/**
 	 * Returns the expando column with the primary key.
 	 *

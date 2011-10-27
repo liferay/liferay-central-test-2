@@ -158,6 +158,12 @@ public class BlogsStatsUserLocalServiceUtil {
 		return getService().dynamicQueryCount(dynamicQuery);
 	}
 
+	public static com.liferay.portlet.blogs.model.BlogsStatsUser fetchBlogsStatsUser(
+		long statsUserId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().fetchBlogsStatsUser(statsUserId);
+	}
+
 	/**
 	* Returns the blogs stats user with the primary key.
 	*

@@ -153,6 +153,12 @@ public class BlogsStatsUserLocalServiceWrapper
 		return _blogsStatsUserLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	public com.liferay.portlet.blogs.model.BlogsStatsUser fetchBlogsStatsUser(
+		long statsUserId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _blogsStatsUserLocalService.fetchBlogsStatsUser(statsUserId);
+	}
+
 	/**
 	* Returns the blogs stats user with the primary key.
 	*

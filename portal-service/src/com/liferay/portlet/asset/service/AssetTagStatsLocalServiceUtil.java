@@ -158,6 +158,12 @@ public class AssetTagStatsLocalServiceUtil {
 		return getService().dynamicQueryCount(dynamicQuery);
 	}
 
+	public static com.liferay.portlet.asset.model.AssetTagStats fetchAssetTagStats(
+		long tagStatsId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().fetchAssetTagStats(tagStatsId);
+	}
+
 	/**
 	* Returns the asset tag stats with the primary key.
 	*

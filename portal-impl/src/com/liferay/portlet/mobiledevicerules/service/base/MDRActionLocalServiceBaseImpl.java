@@ -234,6 +234,10 @@ public abstract class MDRActionLocalServiceBaseImpl
 		return mdrActionPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public MDRAction fetchMDRAction(long actionId) throws SystemException {
+		return mdrActionPersistence.fetchByPrimaryKey(actionId);
+	}
+
 	/**
 	 * Returns the m d r action with the primary key.
 	 *

@@ -145,6 +145,11 @@ public interface PortletItemLocalService extends PersistedModelLocalService {
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portal.model.PortletItem fetchPortletItem(
+		long portletItemId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	/**
 	* Returns the portlet item with the primary key.
 	*

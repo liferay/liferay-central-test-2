@@ -146,6 +146,11 @@ public interface MBThreadLocalService extends PersistedModelLocalService {
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portlet.messageboards.model.MBThread fetchMBThread(
+		long threadId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	/**
 	* Returns the message boards thread with the primary key.
 	*

@@ -158,6 +158,12 @@ public class SocialEquityLogLocalServiceUtil {
 		return getService().dynamicQueryCount(dynamicQuery);
 	}
 
+	public static com.liferay.portlet.social.model.SocialEquityLog fetchSocialEquityLog(
+		long equityLogId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().fetchSocialEquityLog(equityLogId);
+	}
+
 	/**
 	* Returns the social equity log with the primary key.
 	*

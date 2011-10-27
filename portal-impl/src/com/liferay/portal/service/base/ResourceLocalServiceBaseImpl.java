@@ -396,6 +396,10 @@ public abstract class ResourceLocalServiceBaseImpl
 		return resourcePersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public Resource fetchResource(long resourceId) throws SystemException {
+		return resourcePersistence.fetchByPrimaryKey(resourceId);
+	}
+
 	/**
 	 * Returns the resource with the primary key.
 	 *

@@ -152,6 +152,12 @@ public class DLContentLocalServiceWrapper implements DLContentLocalService,
 		return _dlContentLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	public com.liferay.portlet.documentlibrary.model.DLContent fetchDLContent(
+		long contentId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _dlContentLocalService.fetchDLContent(contentId);
+	}
+
 	/**
 	* Returns the document library content with the primary key.
 	*

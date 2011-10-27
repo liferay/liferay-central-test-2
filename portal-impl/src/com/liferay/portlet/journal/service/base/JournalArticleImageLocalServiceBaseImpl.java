@@ -248,6 +248,11 @@ public abstract class JournalArticleImageLocalServiceBaseImpl
 		return journalArticleImagePersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public JournalArticleImage fetchJournalArticleImage(long articleImageId)
+		throws SystemException {
+		return journalArticleImagePersistence.fetchByPrimaryKey(articleImageId);
+	}
+
 	/**
 	 * Returns the journal article image with the primary key.
 	 *

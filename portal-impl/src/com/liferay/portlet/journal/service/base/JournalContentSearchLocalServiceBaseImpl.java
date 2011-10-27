@@ -257,6 +257,11 @@ public abstract class JournalContentSearchLocalServiceBaseImpl
 		return journalContentSearchPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public JournalContentSearch fetchJournalContentSearch(long contentSearchId)
+		throws SystemException {
+		return journalContentSearchPersistence.fetchByPrimaryKey(contentSearchId);
+	}
+
 	/**
 	 * Returns the journal content search with the primary key.
 	 *

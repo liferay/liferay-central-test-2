@@ -158,6 +158,11 @@ public class AssetLinkLocalServiceUtil {
 		return getService().dynamicQueryCount(dynamicQuery);
 	}
 
+	public static com.liferay.portlet.asset.model.AssetLink fetchAssetLink(
+		long linkId) throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().fetchAssetLink(linkId);
+	}
+
 	/**
 	* Returns the asset link with the primary key.
 	*

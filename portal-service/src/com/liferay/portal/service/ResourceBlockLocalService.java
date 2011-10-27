@@ -145,6 +145,11 @@ public interface ResourceBlockLocalService extends PermissionedModelLocalService
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portal.model.ResourceBlock fetchResourceBlock(
+		long resourceBlockId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	/**
 	* Returns the resource block with the primary key.
 	*

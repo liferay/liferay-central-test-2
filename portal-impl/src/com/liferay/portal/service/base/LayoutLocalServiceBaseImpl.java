@@ -412,6 +412,10 @@ public abstract class LayoutLocalServiceBaseImpl implements LayoutLocalService,
 		return layoutPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public Layout fetchLayout(long plid) throws SystemException {
+		return layoutPersistence.fetchByPrimaryKey(plid);
+	}
+
 	/**
 	 * Returns the layout with the primary key.
 	 *

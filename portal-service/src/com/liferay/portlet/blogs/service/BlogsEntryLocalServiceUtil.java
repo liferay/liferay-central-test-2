@@ -158,6 +158,12 @@ public class BlogsEntryLocalServiceUtil {
 		return getService().dynamicQueryCount(dynamicQuery);
 	}
 
+	public static com.liferay.portlet.blogs.model.BlogsEntry fetchBlogsEntry(
+		long entryId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().fetchBlogsEntry(entryId);
+	}
+
 	/**
 	* Returns the blogs entry with the primary key.
 	*

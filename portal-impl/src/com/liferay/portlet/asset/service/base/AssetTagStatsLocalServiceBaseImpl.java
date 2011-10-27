@@ -251,6 +251,11 @@ public abstract class AssetTagStatsLocalServiceBaseImpl
 		return assetTagStatsPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public AssetTagStats fetchAssetTagStats(long tagStatsId)
+		throws SystemException {
+		return assetTagStatsPersistence.fetchByPrimaryKey(tagStatsId);
+	}
+
 	/**
 	 * Returns the asset tag stats with the primary key.
 	 *

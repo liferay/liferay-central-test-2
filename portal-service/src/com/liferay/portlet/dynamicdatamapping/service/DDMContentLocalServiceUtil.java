@@ -158,6 +158,12 @@ public class DDMContentLocalServiceUtil {
 		return getService().dynamicQueryCount(dynamicQuery);
 	}
 
+	public static com.liferay.portlet.dynamicdatamapping.model.DDMContent fetchDDMContent(
+		long contentId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().fetchDDMContent(contentId);
+	}
+
 	/**
 	* Returns the d d m content with the primary key.
 	*

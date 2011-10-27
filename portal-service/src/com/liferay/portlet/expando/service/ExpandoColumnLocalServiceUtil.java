@@ -158,6 +158,12 @@ public class ExpandoColumnLocalServiceUtil {
 		return getService().dynamicQueryCount(dynamicQuery);
 	}
 
+	public static com.liferay.portlet.expando.model.ExpandoColumn fetchExpandoColumn(
+		long columnId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().fetchExpandoColumn(columnId);
+	}
+
 	/**
 	* Returns the expando column with the primary key.
 	*

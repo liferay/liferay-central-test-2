@@ -297,6 +297,10 @@ public abstract class AssetEntryLocalServiceBaseImpl
 		return assetEntryPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public AssetEntry fetchAssetEntry(long entryId) throws SystemException {
+		return assetEntryPersistence.fetchByPrimaryKey(entryId);
+	}
+
 	/**
 	 * Returns the asset entry with the primary key.
 	 *

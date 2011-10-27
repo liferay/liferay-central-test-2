@@ -254,6 +254,10 @@ public abstract class DLContentLocalServiceBaseImpl
 		return dlContentPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public DLContent fetchDLContent(long contentId) throws SystemException {
+		return dlContentPersistence.fetchByPrimaryKey(contentId);
+	}
+
 	/**
 	 * Returns the document library content with the primary key.
 	 *

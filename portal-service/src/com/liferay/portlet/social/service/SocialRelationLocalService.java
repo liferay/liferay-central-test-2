@@ -146,6 +146,11 @@ public interface SocialRelationLocalService extends PersistedModelLocalService {
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portlet.social.model.SocialRelation fetchSocialRelation(
+		long relationId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	/**
 	* Returns the social relation with the primary key.
 	*

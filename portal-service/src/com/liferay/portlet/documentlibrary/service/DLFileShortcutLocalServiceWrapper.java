@@ -153,6 +153,12 @@ public class DLFileShortcutLocalServiceWrapper
 		return _dlFileShortcutLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	public com.liferay.portlet.documentlibrary.model.DLFileShortcut fetchDLFileShortcut(
+		long fileShortcutId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _dlFileShortcutLocalService.fetchDLFileShortcut(fileShortcutId);
+	}
+
 	/**
 	* Returns the document library file shortcut with the primary key.
 	*

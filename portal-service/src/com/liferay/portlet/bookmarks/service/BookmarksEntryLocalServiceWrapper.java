@@ -153,6 +153,12 @@ public class BookmarksEntryLocalServiceWrapper
 		return _bookmarksEntryLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	public com.liferay.portlet.bookmarks.model.BookmarksEntry fetchBookmarksEntry(
+		long entryId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _bookmarksEntryLocalService.fetchBookmarksEntry(entryId);
+	}
+
 	/**
 	* Returns the bookmarks entry with the primary key.
 	*

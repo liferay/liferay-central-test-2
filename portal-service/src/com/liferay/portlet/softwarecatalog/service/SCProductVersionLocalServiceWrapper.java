@@ -154,6 +154,12 @@ public class SCProductVersionLocalServiceWrapper
 		return _scProductVersionLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	public com.liferay.portlet.softwarecatalog.model.SCProductVersion fetchSCProductVersion(
+		long productVersionId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _scProductVersionLocalService.fetchSCProductVersion(productVersionId);
+	}
+
 	/**
 	* Returns the s c product version with the primary key.
 	*

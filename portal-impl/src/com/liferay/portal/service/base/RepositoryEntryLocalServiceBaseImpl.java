@@ -400,6 +400,11 @@ public abstract class RepositoryEntryLocalServiceBaseImpl
 		return repositoryEntryPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public RepositoryEntry fetchRepositoryEntry(long repositoryEntryId)
+		throws SystemException {
+		return repositoryEntryPersistence.fetchByPrimaryKey(repositoryEntryId);
+	}
+
 	/**
 	 * Returns the repository entry with the primary key.
 	 *

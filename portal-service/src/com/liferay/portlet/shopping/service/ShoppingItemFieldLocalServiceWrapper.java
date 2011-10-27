@@ -154,6 +154,12 @@ public class ShoppingItemFieldLocalServiceWrapper
 		return _shoppingItemFieldLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	public com.liferay.portlet.shopping.model.ShoppingItemField fetchShoppingItemField(
+		long itemFieldId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _shoppingItemFieldLocalService.fetchShoppingItemField(itemFieldId);
+	}
+
 	/**
 	* Returns the shopping item field with the primary key.
 	*

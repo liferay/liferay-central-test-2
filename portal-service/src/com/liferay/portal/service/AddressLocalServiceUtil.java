@@ -156,6 +156,11 @@ public class AddressLocalServiceUtil {
 		return getService().dynamicQueryCount(dynamicQuery);
 	}
 
+	public static com.liferay.portal.model.Address fetchAddress(long addressId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().fetchAddress(addressId);
+	}
+
 	/**
 	* Returns the address with the primary key.
 	*

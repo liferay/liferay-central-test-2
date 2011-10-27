@@ -152,6 +152,12 @@ public class SCLicenseLocalServiceWrapper implements SCLicenseLocalService,
 		return _scLicenseLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	public com.liferay.portlet.softwarecatalog.model.SCLicense fetchSCLicense(
+		long licenseId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _scLicenseLocalService.fetchSCLicense(licenseId);
+	}
+
 	/**
 	* Returns the s c license with the primary key.
 	*

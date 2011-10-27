@@ -401,6 +401,11 @@ public abstract class UserNotificationEventLocalServiceBaseImpl
 		return userNotificationEventPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public UserNotificationEvent fetchUserNotificationEvent(
+		long userNotificationEventId) throws SystemException {
+		return userNotificationEventPersistence.fetchByPrimaryKey(userNotificationEventId);
+	}
+
 	/**
 	 * Returns the user notification event with the primary key.
 	 *

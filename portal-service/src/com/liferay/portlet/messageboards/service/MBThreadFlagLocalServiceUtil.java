@@ -158,6 +158,12 @@ public class MBThreadFlagLocalServiceUtil {
 		return getService().dynamicQueryCount(dynamicQuery);
 	}
 
+	public static com.liferay.portlet.messageboards.model.MBThreadFlag fetchMBThreadFlag(
+		long threadFlagId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().fetchMBThreadFlag(threadFlagId);
+	}
+
 	/**
 	* Returns the message boards thread flag with the primary key.
 	*

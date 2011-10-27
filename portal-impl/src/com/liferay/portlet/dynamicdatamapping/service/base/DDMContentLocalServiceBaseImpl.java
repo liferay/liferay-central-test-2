@@ -237,6 +237,10 @@ public abstract class DDMContentLocalServiceBaseImpl
 		return ddmContentPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public DDMContent fetchDDMContent(long contentId) throws SystemException {
+		return ddmContentPersistence.fetchByPrimaryKey(contentId);
+	}
+
 	/**
 	 * Returns the d d m content with the primary key.
 	 *

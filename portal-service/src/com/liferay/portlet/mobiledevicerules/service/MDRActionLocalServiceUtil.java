@@ -158,6 +158,12 @@ public class MDRActionLocalServiceUtil {
 		return getService().dynamicQueryCount(dynamicQuery);
 	}
 
+	public static com.liferay.portlet.mobiledevicerules.model.MDRAction fetchMDRAction(
+		long actionId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().fetchMDRAction(actionId);
+	}
+
 	/**
 	* Returns the m d r action with the primary key.
 	*

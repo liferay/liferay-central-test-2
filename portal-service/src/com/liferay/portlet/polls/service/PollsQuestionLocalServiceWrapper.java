@@ -153,6 +153,12 @@ public class PollsQuestionLocalServiceWrapper
 		return _pollsQuestionLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	public com.liferay.portlet.polls.model.PollsQuestion fetchPollsQuestion(
+		long questionId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _pollsQuestionLocalService.fetchPollsQuestion(questionId);
+	}
+
 	/**
 	* Returns the polls question with the primary key.
 	*

@@ -256,6 +256,11 @@ public abstract class AssetVocabularyLocalServiceBaseImpl
 		return assetVocabularyPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public AssetVocabulary fetchAssetVocabulary(long vocabularyId)
+		throws SystemException {
+		return assetVocabularyPersistence.fetchByPrimaryKey(vocabularyId);
+	}
+
 	/**
 	 * Returns the asset vocabulary with the primary key.
 	 *

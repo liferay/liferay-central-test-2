@@ -153,6 +153,12 @@ public class LayoutRevisionLocalServiceWrapper
 		return _layoutRevisionLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	public com.liferay.portal.model.LayoutRevision fetchLayoutRevision(
+		long layoutRevisionId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _layoutRevisionLocalService.fetchLayoutRevision(layoutRevisionId);
+	}
+
 	/**
 	* Returns the layout revision with the primary key.
 	*

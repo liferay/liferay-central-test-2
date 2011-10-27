@@ -152,6 +152,11 @@ public class JournalFeedLocalServiceWrapper implements JournalFeedLocalService,
 		return _journalFeedLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	public com.liferay.portlet.journal.model.JournalFeed fetchJournalFeed(
+		long id) throws com.liferay.portal.kernel.exception.SystemException {
+		return _journalFeedLocalService.fetchJournalFeed(id);
+	}
+
 	/**
 	* Returns the journal feed with the primary key.
 	*

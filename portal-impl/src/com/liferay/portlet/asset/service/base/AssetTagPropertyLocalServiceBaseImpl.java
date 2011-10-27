@@ -252,6 +252,11 @@ public abstract class AssetTagPropertyLocalServiceBaseImpl
 		return assetTagPropertyPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public AssetTagProperty fetchAssetTagProperty(long tagPropertyId)
+		throws SystemException {
+		return assetTagPropertyPersistence.fetchByPrimaryKey(tagPropertyId);
+	}
+
 	/**
 	 * Returns the asset tag property with the primary key.
 	 *

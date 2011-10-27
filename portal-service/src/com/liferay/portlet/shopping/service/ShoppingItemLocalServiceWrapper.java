@@ -152,6 +152,11 @@ public class ShoppingItemLocalServiceWrapper implements ShoppingItemLocalService
 		return _shoppingItemLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	public com.liferay.portlet.shopping.model.ShoppingItem fetchShoppingItem(
+		long itemId) throws com.liferay.portal.kernel.exception.SystemException {
+		return _shoppingItemLocalService.fetchShoppingItem(itemId);
+	}
+
 	/**
 	* Returns the shopping item with the primary key.
 	*

@@ -149,6 +149,12 @@ public class PermissionLocalServiceWrapper implements PermissionLocalService,
 		return _permissionLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	public com.liferay.portal.model.Permission fetchPermission(
+		long permissionId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _permissionLocalService.fetchPermission(permissionId);
+	}
+
 	/**
 	* Returns the permission with the primary key.
 	*

@@ -158,6 +158,12 @@ public class ExpandoValueLocalServiceUtil {
 		return getService().dynamicQueryCount(dynamicQuery);
 	}
 
+	public static com.liferay.portlet.expando.model.ExpandoValue fetchExpandoValue(
+		long valueId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().fetchExpandoValue(valueId);
+	}
+
 	/**
 	* Returns the expando value with the primary key.
 	*

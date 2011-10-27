@@ -151,6 +151,11 @@ public class AssetTagLocalServiceWrapper implements AssetTagLocalService,
 		return _assetTagLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	public com.liferay.portlet.asset.model.AssetTag fetchAssetTag(long tagId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _assetTagLocalService.fetchAssetTag(tagId);
+	}
+
 	/**
 	* Returns the asset tag with the primary key.
 	*

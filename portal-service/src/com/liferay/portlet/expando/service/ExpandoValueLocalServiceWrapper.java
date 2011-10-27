@@ -152,6 +152,12 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 		return _expandoValueLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	public com.liferay.portlet.expando.model.ExpandoValue fetchExpandoValue(
+		long valueId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _expandoValueLocalService.fetchExpandoValue(valueId);
+	}
+
 	/**
 	* Returns the expando value with the primary key.
 	*

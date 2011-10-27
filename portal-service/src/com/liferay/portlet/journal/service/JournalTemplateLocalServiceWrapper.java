@@ -154,6 +154,11 @@ public class JournalTemplateLocalServiceWrapper
 		return _journalTemplateLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	public com.liferay.portlet.journal.model.JournalTemplate fetchJournalTemplate(
+		long id) throws com.liferay.portal.kernel.exception.SystemException {
+		return _journalTemplateLocalService.fetchJournalTemplate(id);
+	}
+
 	/**
 	* Returns the journal template with the primary key.
 	*

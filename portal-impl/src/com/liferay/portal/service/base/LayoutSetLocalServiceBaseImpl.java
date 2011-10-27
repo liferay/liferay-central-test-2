@@ -398,6 +398,10 @@ public abstract class LayoutSetLocalServiceBaseImpl
 		return layoutSetPersistence.countWithDynamicQuery(dynamicQuery);
 	}
 
+	public LayoutSet fetchLayoutSet(long layoutSetId) throws SystemException {
+		return layoutSetPersistence.fetchByPrimaryKey(layoutSetId);
+	}
+
 	/**
 	 * Returns the layout set with the primary key.
 	 *

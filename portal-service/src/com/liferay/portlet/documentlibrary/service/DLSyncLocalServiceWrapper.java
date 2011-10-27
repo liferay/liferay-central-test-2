@@ -151,6 +151,11 @@ public class DLSyncLocalServiceWrapper implements DLSyncLocalService,
 		return _dlSyncLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
+	public com.liferay.portlet.documentlibrary.model.DLSync fetchDLSync(
+		long syncId) throws com.liferay.portal.kernel.exception.SystemException {
+		return _dlSyncLocalService.fetchDLSync(syncId);
+	}
+
 	/**
 	* Returns the d l sync with the primary key.
 	*
