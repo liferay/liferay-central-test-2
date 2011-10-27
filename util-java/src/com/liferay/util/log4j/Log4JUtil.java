@@ -123,7 +123,9 @@ public class Log4JUtil {
 	 * @see {@link com.liferay.portal.util.FileImpl#getBytes(InputStream, int,
 	 *      boolean)}
 	 */
-	private static byte[] _getBytes(InputStream inputStream) throws IOException {
+	private static byte[] _getBytes(InputStream inputStream)
+		throws IOException {
+
 		UnsyncByteArrayOutputStream unsyncByteArrayOutputStream =
 			new UnsyncByteArrayOutputStream();
 
