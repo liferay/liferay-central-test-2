@@ -841,10 +841,17 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 	}
 
 	private String _getPortletId(String securityPath) {
-		if (_portletIdsByStrutsPath.size() == 0) {
+		if (_portletIdsByStrutsPath.isEmpty()) {
 			for (Portlet portlet : _getPortletsPool().values()) {
-				_portletIdsByStrutsPath.put(
-					portlet.getStrutsPath(), portlet.getPortletId());
+				String strutsPath = portlet.getStrutsPath();
+
+				if (_portletIdsByStrutsPath.containsKey(strutsPath)) {
+					if (_log.isWarnEnabled()) {
+						_log.warn("Duplicate struts path " + strutsPath);
+					}
+				}
+
+				_portletIdsByStrutsPath.put(strutsPath, portlet.getPortletId());
 			}
 		}
 
