@@ -120,13 +120,8 @@ public abstract class BaseAlloyControllerImpl implements AlloyController {
 
 	protected String buildIncludePath(String viewPath) {
 		if (viewPath.equals(_VIEW_PATH_ERROR)) {
-			StringBundler sb = new StringBundler(3);
-
-			sb.append("/WEB-INF/jsp/");
-			sb.append(portlet.getFriendlyURLMapping());
-			sb.append("/views/error.jsp");
-
-			return sb.toString();
+			return "/WEB-INF/jsp/".concat(
+				portlet.getFriendlyURLMapping()).concat("/views/error.jsp");
 		}
 
 		StringBundler sb = new StringBundler(7);
