@@ -489,7 +489,7 @@
 	<portlet>
 		<portlet-name>49</portlet-name>
 		<icon>/html/icons/default.png</icon>
-		<struts-path>my_sites</struts-path>
+		<parent-struts-path>my_sites</parent-struts-path>
 		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<show-portlet-access-denied>false</show-portlet-access-denied>
@@ -1684,7 +1684,8 @@
 	<portlet>
 		<portlet-name>165</portlet-name>
 		<icon>/html/icons/site_settings.png</icon>
-		<struts-path>sites_admin</struts-path>
+		<struts-path>site_settings</struts-path>
+		<parent-struts-path>sites_admin</parent-struts-path>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
 		<control-panel-entry-category>content</control-panel-entry-category>
 		<control-panel-entry-weight>1</control-panel-entry-weight>

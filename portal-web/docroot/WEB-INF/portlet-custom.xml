@@ -376,7 +376,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>29</portlet-name>
-		<display-name>My Communities</display-name>
+		<display-name>My Sites</display-name>
 		<portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>
 		<init-param>
 			<name>view-action</name>
