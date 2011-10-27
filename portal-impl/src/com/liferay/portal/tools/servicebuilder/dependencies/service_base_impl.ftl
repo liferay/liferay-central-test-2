@@ -277,6 +277,12 @@ import javax.sql.DataSource;
 			return ${entity.varName}Persistence.countWithDynamicQuery(dynamicQuery);
 		}
 
+		<#assign serviceBaseExceptions = serviceBuilder.getServiceBaseExceptions(methods, "fetch" + entity.name, [entity.PKClassName], ["SystemException"])>
+
+		public ${entity.name} fetch${entity.name}(${entity.PKClassName} ${entity.PKVarName}) throws ${stringUtil.merge(serviceBaseExceptions)} {
+			return ${entity.varName}Persistence.fetchByPrimaryKey(${entity.PKVarName});
+		}
+
 		<#assign serviceBaseExceptions = serviceBuilder.getServiceBaseExceptions(methods, "get" + entity.name, [entity.PKClassName], ["PortalException", "SystemException"])>
 
 		/**
