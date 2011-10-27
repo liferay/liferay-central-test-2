@@ -424,6 +424,17 @@ public class ResourcePermissionLocalServiceUtil {
 			scope, primKey, roleId, actionIds);
 	}
 
+	public static java.util.Map<java.lang.Long, java.util.Set<java.lang.String>> getAvailableResourcePermissionActionIds(
+		long companyId, java.lang.String name, int scope,
+		java.lang.String primKey, long[] roleIds,
+		java.util.Collection<java.lang.String> actionIds)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .getAvailableResourcePermissionActionIds(companyId, name,
+			scope, primKey, roleIds, actionIds);
+	}
+
 	/**
 	* Returns the resource permission for the role at the scope to perform the
 	* actions on resources of the type.
