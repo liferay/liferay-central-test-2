@@ -416,12 +416,6 @@ public class OrganizationLocalServiceImpl
 		indexer.delete(organization);
 	}
 
-	public Organization fetchOrganization(long organizationId)
-		throws SystemException {
-
-		return organizationPersistence.fetchByPrimaryKey(organizationId);
-	}
-
 	/**
 	 * Returns all the organizations belonging to the group.
 	 *

@@ -707,18 +707,6 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	}
 
 	/**
-	 * Returns the layout with the primary key.
-	 *
-	 * @param  plid the primary key of the layout
-	 * @return the layout, or <code>null</code> if a layout with the primary
-	 *         key could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	public Layout fetchLayout(long plid) throws SystemException {
-		return layoutPersistence.fetchByPrimaryKey(plid);
-	}
-
-	/**
 	 * Returns the layout matching the universally unique identifier and group
 	 * ID
 	 *

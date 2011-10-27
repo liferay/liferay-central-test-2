@@ -14,8 +14,6 @@
 
 package com.liferay.portal.service.impl;
 
-import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.model.RepositoryEntry;
 import com.liferay.portal.service.base.RepositoryEntryLocalServiceBaseImpl;
 
 /**
@@ -23,11 +21,4 @@ import com.liferay.portal.service.base.RepositoryEntryLocalServiceBaseImpl;
  */
 public class RepositoryEntryLocalServiceImpl
 	extends RepositoryEntryLocalServiceBaseImpl {
-
-	public RepositoryEntry fetchRepositoryEntry(long repositoryEntryId)
-		throws SystemException {
-
-		return repositoryEntryPersistence.fetchByPrimaryKey(repositoryEntryId);
-	}
-
 }

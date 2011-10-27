@@ -769,19 +769,6 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 	}
 
 	/**
-	 * Returns the group with the matching primary key.
-	 *
-	 * @param  groupId the primary key of the group
-	 * @return the group with the primary key, or <code>null</code> if a group
-	 *         with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@ThreadLocalCachable
-	public Group fetchGroup(long groupId) throws SystemException {
-		return groupPersistence.fetchByPrimaryKey(groupId);
-	}
-
-	/**
 	 * Returns the group with the matching group name.
 	 *
 	 * @param  companyId the primary key of the company

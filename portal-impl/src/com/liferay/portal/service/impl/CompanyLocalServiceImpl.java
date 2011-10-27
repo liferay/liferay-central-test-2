@@ -525,7 +525,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 	 *         with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public Company fetchCompany(long companyId) throws SystemException {
+	public Company fetchCompanyById(long companyId) throws SystemException {
 		return companyPersistence.fetchByPrimaryKey(companyId);
 	}
 

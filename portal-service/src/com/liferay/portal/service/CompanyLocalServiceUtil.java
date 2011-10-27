@@ -353,6 +353,20 @@ public class CompanyLocalServiceUtil {
 	}
 
 	/**
+	* Returns the company with the primary key.
+	*
+	* @param companyId the primary key of the company
+	* @return the company with the primary key, <code>null</code> if a company
+	with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portal.model.Company fetchCompanyById(
+		long companyId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().fetchCompanyById(companyId);
+	}
+
+	/**
 	* Returns the company with the virtual host name.
 	*
 	* @param virtualHostname the virtual host name

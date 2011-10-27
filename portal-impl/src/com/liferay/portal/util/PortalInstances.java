@@ -491,7 +491,8 @@ public class PortalInstances {
 
 	private boolean _isCompanyActive(long companyId) {
 		try {
-			Company company = CompanyLocalServiceUtil.fetchCompany(companyId);
+			Company company = CompanyLocalServiceUtil.fetchCompanyById(
+				companyId);
 
 			if (company != null) {
 				return company.isActive();
