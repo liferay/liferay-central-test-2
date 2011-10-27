@@ -45,6 +45,10 @@ public class ViewBlogsEntryAssignedToMeTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		assertEquals(RuntimeVariables.replace("Pending Approval"),
 			selenium.getText("//div[@class='entry-content']/h3"));
+		assertEquals(RuntimeVariables.replace("Blogs Entry Title"),
+			selenium.getText("//div[@class='entry-title']/h2/a"));
+		assertEquals(RuntimeVariables.replace("Blogs Entry Content"),
+			selenium.getText("//div[@class='entry-body']/p"));
 		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
