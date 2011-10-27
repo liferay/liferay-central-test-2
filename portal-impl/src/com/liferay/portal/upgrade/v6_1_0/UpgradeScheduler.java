@@ -95,8 +95,6 @@ public class UpgradeScheduler extends UpgradeProcess {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 
-		List<Object[]> arrays = new ArrayList<Object[]>();
-
 		try {
 			con = DataAccess.getConnection();
 
@@ -104,6 +102,8 @@ public class UpgradeScheduler extends UpgradeProcess {
 				"select JOB_NAME, JOB_GROUP, JOB_DATA from QUARTZ_JOB_DETAILS");
 
 			rs = ps.executeQuery();
+
+			List<Object[]> arrays = new ArrayList<Object[]>();
 
 			while (rs.next()) {
 				String jobName = rs.getString("JOB_NAME");
@@ -191,12 +191,12 @@ public class UpgradeScheduler extends UpgradeProcess {
 
 				arrays.add(array);
 			}
+
+			return arrays;
 		}
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
 		}
-
-		return arrays;
 	}
 
 	protected void updateJobDetail(
