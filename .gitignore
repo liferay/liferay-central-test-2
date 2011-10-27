@@ -160,18 +160,6 @@
 /sql/update-*
 /sql/velocity.log*
 
-/support-maven/target
-
-/support-maven/archetypes/liferay-ext-archetype/target
-/support-maven/archetypes/liferay-hook-archetype/target
-/support-maven/archetypes/liferay-layouttpl-archetype/target
-/support-maven/archetypes/liferay-portlet-archetype/target
-/support-maven/archetypes/liferay-servicebuilder-archetype/target
-/support-maven/archetypes/liferay-theme-archetype/target
-/support-maven/archetypes/liferay-web-archetype/target
-
-/support-maven/plugins/liferay-maven-plugin/target
-
 /support-tomcat/*.iml
 /support-tomcat/*.ipr
 /support-tomcat/*.iws
