@@ -26,7 +26,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.CentralizedThreadLocal;
 import com.liferay.portal.kernel.util.FileUtil;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -170,10 +169,10 @@ public class SetupWizardUtil {
 		session.setAttribute(
 			WebKeys.SETUP_WIZARD_PROPERTIES_UPDATED, propertiesFileUpdated);
 
-		if(!databaseConfigured) {
+		if (!databaseConfigured) {
 			_reloadServletContext(request, unicodeProperties);
 		}
-		
+
 		_resetAdminPassword(request);
 	}
 
@@ -187,7 +186,7 @@ public class SetupWizardUtil {
 
 	private static boolean _isDatabaseConfigured(
 		UnicodeProperties unicodeProperties) {
-		
+
 		String defaultDriverClassName = unicodeProperties.get(
 			PropsKeys.JDBC_DEFAULT_DRIVER_CLASS_NAME);
 		String defaultPassword = unicodeProperties.get(
@@ -196,19 +195,19 @@ public class SetupWizardUtil {
 			PropsKeys.JDBC_DEFAULT_URL);
 		String defaultUsername = unicodeProperties.get(
 			PropsKeys.JDBC_DEFAULT_USERNAME);
-		
+
 		if (PropsValues.JDBC_DEFAULT_DRIVER_CLASS_NAME.equals(
 				defaultDriverClassName) &&
 			PropsValues.JDBC_DEFAULT_PASSWORD.equals(defaultPassword) &&
 			PropsValues.JDBC_DEFAULT_URL.equals(defaultURL) &&
 			PropsValues.JDBC_DEFAULT_USERNAME.equals(defaultUsername) ) {
-			
+
 			return true;
 		}
-		
+
 		return false;
 	}
-	
+
 	private static void _processAdminProperties(
 			HttpServletRequest request, UnicodeProperties unicodeProperties)
 		throws Exception {
