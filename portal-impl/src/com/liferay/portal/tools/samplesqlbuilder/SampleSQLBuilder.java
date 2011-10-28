@@ -435,26 +435,29 @@ public class SampleSQLBuilder {
 	}
 
 	protected Writer createFileWriter(String fileName) throws IOException {
-		return createFileWriter(new File(fileName));
+		File file = new File(fileName);
+
+		return createFileWriter(file);
 	}
 
 	protected Writer createFileWriter(File file) throws IOException {
 		FileOutputStream fileOutputStream = new FileOutputStream(file);
 
-		OutputStreamWriter outputStreamWriter = new OutputStreamWriter(
-			fileOutputStream);
+		Writer writer = new OutputStreamWriter(fileOutputStream);
 
-		return createUnsyncBufferedWriter(outputStreamWriter);
+		return createUnsyncBufferedWriter(writer);
 	}
 
 	protected Writer createUnsyncBufferedWriter(Writer writer) {
-		return new UnsyncBufferedWriter(
-			writer, _WRITER_BUFFER_SIZE) {
+		return new UnsyncBufferedWriter(writer, _WRITER_BUFFER_SIZE) {
 
 			@Override
-			public void flush() throws IOException {
-				// Disable FreeMarker's flushing call
+			public void flush() {
+
+				// Disable FreeMarker from flushing
+
 			}
+
 		};
 	}
 

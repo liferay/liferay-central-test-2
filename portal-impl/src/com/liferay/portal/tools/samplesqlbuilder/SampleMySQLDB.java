@@ -18,8 +18,8 @@ import com.liferay.portal.dao.db.MySQLDB;
 import com.liferay.portal.kernel.util.StringUtil;
 
 /**
- * A simplified version of MySQLDB for sample sql generating.
- * This should not be used for other purposes.
+ * A simplified version of MySQLDB for sample SQL generation. This should not be
+ * used for any other purposes.
  *
  * @author Shuyang Zhou
  */

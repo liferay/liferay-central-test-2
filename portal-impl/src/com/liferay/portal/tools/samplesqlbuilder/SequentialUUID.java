@@ -20,9 +20,8 @@ import com.liferay.portal.kernel.util.StringPool;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
- * A simplified version of UUID generator for sample sql generating which
- * generates UUID in a sequential order.
- * This should not be used for other purposes.
+ * A simplified UUID generator for sample SQL generation that generates UUID in
+ * a sequential order. This should not be used for any other purposes.
  *
  * @author Shuyang Zhou
  */
@@ -74,8 +73,8 @@ public class SequentialUUID {
 
 	private static final String _UUID_PREFIX = "00000000-0000-0000-";
 
-	private static final AtomicLong _counter = new AtomicLong();
+	private static SequentialUUID _instance = new SequentialUUID();
 
-	private static final SequentialUUID _instance = new SequentialUUID();
+	private static AtomicLong _counter = new AtomicLong();
 
 }
