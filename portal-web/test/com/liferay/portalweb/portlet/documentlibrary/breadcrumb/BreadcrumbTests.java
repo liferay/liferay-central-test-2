@@ -15,8 +15,8 @@
 package com.liferay.portalweb.portlet.documentlibrary.breadcrumb;
 
 import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portlet.documentlibrary.breadcrumb.viewdlbreadcrumbroot.ViewDLBreadcrumbRootTests;
 import com.liferay.portalweb.portlet.documentlibrary.breadcrumb.viewdlbreadcrumbfolder.ViewDLBreadcrumbFolderTests;
+import com.liferay.portalweb.portlet.documentlibrary.breadcrumb.viewdlbreadcrumbroot.ViewDLBreadcrumbRootTests;
 import com.liferay.portalweb.portlet.documentlibrary.breadcrumb.viewdlbreadcrumbsubfolder.ViewDLBreadcrumbSubfolderTests;
 
 import junit.framework.Test;
@@ -30,8 +30,8 @@ public class BreadcrumbTests extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(ViewDLBreadcrumbRootTests.suite());
 		testSuite.addTest(ViewDLBreadcrumbFolderTests.suite());
+		testSuite.addTest(ViewDLBreadcrumbRootTests.suite());
 		testSuite.addTest(ViewDLBreadcrumbSubfolderTests.suite());
 
 		return testSuite;
