@@ -42,13 +42,13 @@ public class IconHelpTag extends IconTag {
 		ThemeDisplay themeDisplay = (ThemeDisplay)pageContext.getAttribute(
 			"themeDisplay");
 
-		String iconHelperId = PwdGenerator.getPassword(PwdGenerator.KEY3, 4);
-
 		JspWriter jspWriter = pageContext.getOut();
+
+		String id = PwdGenerator.getPassword(PwdGenerator.KEY3, 4);
 
 		jspWriter.write("<span class=\"taglib-icon-help\"><img alt=\"\" ");
 		jspWriter.write("aria-labelledby=\"");
-		jspWriter.write(iconHelperId);
+		jspWriter.write(id);
 		jspWriter.write("\" ");
 		jspWriter.write("onBlur=\"Liferay.Portal.ToolTip.hide();\" ");
 		jspWriter.write("onFocus=\"Liferay.Portal.ToolTip.show(this);\" ");
@@ -59,7 +59,7 @@ public class IconHelpTag extends IconTag {
 		jspWriter.write("/><span ");
 		jspWriter.write("class=\"aui-helper-hidden-accessible tooltip-text\" ");
 		jspWriter.write("id=\"");
-		jspWriter.write(iconHelperId);
+		jspWriter.write(id);
 		jspWriter.write("\" >");
 		jspWriter.write(LanguageUtil.get(pageContext, getMessage()));
 		jspWriter.write("</span></span>");
