@@ -47,18 +47,14 @@
 						boolean supportedAudio = AudioProcessor.isSupportedAudio(fileVersion.getMimeType());
 						boolean supportedVideo = VideoProcessor.isSupportedVideo(fileVersion.getMimeType());
 
-						int smallImageHeight = 100;
-						int smallImageWidth = 100;
-						int playerHeight = 500;
-
-						int topMargin = PrefsPropsUtil.getInteger(PropsKeys.IG_IMAGE_THUMBNAIL_MAX_DIMENSION) - smallImageHeight;
-						int sideMargin = (PrefsPropsUtil.getInteger(PropsKeys.IG_IMAGE_THUMBNAIL_MAX_DIMENSION) - smallImageWidth) / 2;
-
 						String href = themeDisplay.getPathThemeImages() + "/file_system/large/" + DLUtil.getGenericName(fileEntry.getExtension()) + ".png";
 						String src = themeDisplay.getPathThemeImages() + "/file_system/large/" + DLUtil.getGenericName(fileEntry.getExtension()) + ".png";
 
+						int playerHeight = 500;
+
 						if (AudioProcessor.hasAudio(fileVersion)) {
 							href = _getPreviewURL(fileEntry, fileVersion.getVersion(), themeDisplay, HtmlUtil.escapeURL("&audioPreview=1") + "&supportedAudio=1&mediaGallery=1", false);
+
 							playerHeight = 43;
 						}
 						else if (ImageProcessor.hasImages(fileVersion)) {
