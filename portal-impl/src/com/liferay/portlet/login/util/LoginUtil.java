@@ -385,7 +385,7 @@ public class LoginUtil {
 
 		userUUIDCookie.setPath(StringPool.SLASH);
 
-		session.setAttribute("USER_UUID", userUUID);
+		session.setAttribute(WebKeys.USER_UUID, userUUID);
 
 		if (PropsValues.SESSION_DISABLED) {
 			rememberMe = true;

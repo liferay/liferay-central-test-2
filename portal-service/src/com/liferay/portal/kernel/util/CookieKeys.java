@@ -20,9 +20,9 @@ package com.liferay.portal.kernel.util;
  */
 public interface CookieKeys {
 
-	public static final String COOKIE_SUPPORT = "COOKIE_SUPPORT";
-
 	public static final String COMPANY_ID = "COMPANY_ID";
+
+	public static final String COOKIE_SUPPORT = "COOKIE_SUPPORT";
 
 	public static final String GUEST_LANGUAGE_ID = "GUEST_LANGUAGE_ID";
 

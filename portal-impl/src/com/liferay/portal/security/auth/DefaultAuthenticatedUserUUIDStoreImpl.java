@@ -21,7 +21,6 @@ import java.util.Set;
  * @author Michael C. Han
  */
 public class DefaultAuthenticatedUserUUIDStoreImpl
-
 	implements AuthenticatedUserUUIDStore {
 
 	public boolean exists(String userUUID) {

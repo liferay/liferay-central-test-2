@@ -139,6 +139,8 @@ public interface WebKeys {
 
 	public static final String USER_PASSWORD = "USER_PASSWORD";
 
+	public static final String USER_UUID = "USER_UUID";
+
 	public static final String VELOCITY_TAGLIB = "VELOCITY_TAGLIB";
 
 	public static final String VISITED_GROUP_ID_PREVIOUS = "LIFERAY_SHARED_VISITED_GROUP_ID_PREVIOUS";
