@@ -3230,8 +3230,8 @@ public class JournalArticleLocalServiceImpl
 			LocalizationUtil.getDefaultLocale(content));
 
 		if ((classNameId == 0) &&
-				(titleMap.isEmpty() ||
-				 Validator.isNull(titleMap.get(defaultLocale)))) {
+			(titleMap.isEmpty() ||
+			 Validator.isNull(titleMap.get(defaultLocale)))) {
 
 			throw new ArticleTitleException();
 		}
