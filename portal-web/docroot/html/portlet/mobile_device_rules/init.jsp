@@ -14,17 +14,16 @@
  */
 --%>
 
+<%@ include file="/html/portlet/init.jsp" %>
+
 <%@ page import="com.liferay.portal.kernel.mobile.device.DeviceDetectionUtil" %><%@
 page import="com.liferay.portal.kernel.mobile.device.VersionableName" %><%@
 page import="com.liferay.portal.kernel.mobile.device.rulegroup.ActionHandlerManagerUtil" %><%@
 page import="com.liferay.portal.kernel.mobile.device.rulegroup.RuleGroupProcessorUtil" %><%@
 page import="com.liferay.portal.kernel.mobile.device.rulegroup.action.ActionHandler" %><%@
 page import="com.liferay.portal.kernel.mobile.device.rulegroup.rule.UnknownRuleHandlerException" %><%@
-page import="com.liferay.portal.kernel.util.ParamUtil" %><%@
-page import="com.liferay.portal.kernel.util.Validator" %><%@
-page import="com.liferay.portal.service.GroupLocalServiceUtil" %><%@
-page import="com.liferay.portal.util.PortalUtil" %><%@
-page import="com.liferay.portal.util.PortletCategoryKeys" %><%@
+page import="com.liferay.portal.kernel.plugin.PluginPackage" %><%@
+page import="com.liferay.portal.plugin.PluginUtil" %><%@
 page import="com.liferay.portlet.mobiledevicerules.NoSuchActionException" %><%@
 page import="com.liferay.portlet.mobiledevicerules.NoSuchRuleException" %><%@
 page import="com.liferay.portlet.mobiledevicerules.NoSuchRuleGroupException" %><%@
@@ -46,17 +45,13 @@ page import="com.liferay.portlet.mobiledevicerules.service.permission.MDRRuleGro
 page import="com.liferay.portlet.mobiledevicerules.service.permission.MDRRuleGroupPermissionUtil" %><%@
 page import="com.liferay.portlet.mobiledevicerules.util.RuleGroupInstancePriorityComparator" %>
 
-<%@ include file="/html/portlet/init.jsp" %>
-
 <%
 long groupId = ParamUtil.getLong(request, "groupId");
-long globalGroupId = themeDisplay.getCompanyGroupId();
 
-String portletId = (String) request.getAttribute(WebKeys.PORTLET_ID);
-String category = PortalUtil.getControlPanelCategory(portletId, themeDisplay);
+String category = PortalUtil.getControlPanelCategory(portletDisplay.getId(), themeDisplay);
 
-if (!PortletCategoryKeys.CONTENT.equals(category) && groupId == 0) {
-	groupId = globalGroupId;
+if ((groupId == 0) && !category.equals(PortletCategoryKeys.CONTENT)) {
+	groupId = themeDisplay.getCompanyGroupId();
 }
 
 if (groupId == 0) {

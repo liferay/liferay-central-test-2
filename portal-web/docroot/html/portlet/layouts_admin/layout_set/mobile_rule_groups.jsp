@@ -20,15 +20,14 @@
 themeDisplay.setIncludeServiceJs(true);
 
 LayoutSet selLayoutSet = ((LayoutSet)request.getAttribute("edit_pages.jsp-selLayoutSet"));
-long selPlid = ((Long)request.getAttribute("edit_pages.jsp-selPlid")).longValue();
 
-long companyId = selLayoutSet.getCompanyId();
 long groupId = selLayoutSet.getGroupId();
-
 String className = LayoutSet.class.getName();
 long classPK = selLayoutSet.getLayoutSetId();
 %>
 
-<aui:model-context bean="<%= selLayoutSet %>" model="<%= LayoutSet.class %>" />
+<%@ include file="/html/portlet/layouts_admin/layout/mobile_rule_groups_header.jspf" %>
 
-<%@ include file="/html/portlet/layouts_admin/mobile_device_rules_manage.jspf" %>
+<%@ include file="/html/portlet/layouts_admin/layout/mobile_rule_groups_toolbar.jspf" %>
+
+<%@ include file="/html/portlet/layouts_admin/layout/mobile_rule_groups_rule_group_instances.jspf" %>

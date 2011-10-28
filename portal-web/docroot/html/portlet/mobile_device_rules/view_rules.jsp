@@ -17,12 +17,12 @@
 <%@ include file="/html/portlet/mobile_device_rules/init.jsp" %>
 
 <%
-String backURL = ParamUtil.getString(request, "backURL");
 String redirect = ParamUtil.getString(request, "redirect");
+String backURL = ParamUtil.getString(request, "backURL");
 
 long ruleGroupId = ParamUtil.getLong(request, "ruleGroupId");
 
-MDRRuleGroup ruleGroup = MDRRuleGroupLocalServiceUtil.fetchRuleGroup(ruleGroupId);
+MDRRuleGroup ruleGroup = MDRRuleGroupLocalServiceUtil.getRuleGroup(ruleGroupId);
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
@@ -30,22 +30,16 @@ portletURL.setParameter("struts_action", "/mobile_device_rules/view_rules");
 portletURL.setParameter("ruleGroupId", String.valueOf(ruleGroupId));
 portletURL.setParameter("groupId", String.valueOf(groupId));
 portletURL.setParameter("redirect", redirect);
-
-String title = StringPool.BLANK;
-
-if (ruleGroup != null) {
-	title = LanguageUtil.format(pageContext, "rules-for-x", ruleGroup.getName(locale), false);
-}
 %>
 
 <liferay-ui:header
 	backURL="<%= backURL %>"
 	localizeTitle="<%= false %>"
-	title='<%= title %>'
+	title='<%= LanguageUtil.format(pageContext, "rules-for-x", ruleGroup.getName(locale), false) %>'
 />
 
 <div class="lfr-portlet-toolbar">
-	<liferay-portlet:renderURL varImpl="addURL">
+	<liferay-portlet:renderURL var="addURL">
 		<portlet:param name="struts_action" value="/mobile_device_rules/edit_rule" />
 		<portlet:param name="redirect" value="<%= portletURL.toString() %>" />
 		<portlet:param name="ruleGroupId" value="<%= String.valueOf(ruleGroupId) %>" />
@@ -59,14 +53,12 @@ if (ruleGroup != null) {
 <div class="separator"><!-- --></div>
 
 <liferay-ui:search-container
-	curParam="cur1"
 	delta="<%= 5 %>"
 	deltaConfigurable="<%= false %>"
 	emptyResultsMessage="no-rules-are-configured-for-this-rule-group"
 	headerNames="name,type"
 	iteratorURL="<%= portletURL %>"
 >
-
 	<liferay-ui:search-container-results
 		results="<%= MDRRuleLocalServiceUtil.getRules(ruleGroupId, searchContainer.getStart(), searchContainer.getEnd()) %>"
 		total="<%= MDRRuleLocalServiceUtil.getRulesCount(ruleGroupId) %>"
@@ -78,14 +70,14 @@ if (ruleGroup != null) {
 		keyProperty="ruleId"
 		modelVar="rule"
 	>
-		<liferay-portlet:renderURL varImpl="rowURL">
+		<liferay-portlet:renderURL var="rowURL">
 			<portlet:param name="struts_action" value="/mobile_device_rules/edit_rule" />
-			<portlet:param name="backURL" value="<%= currentURL %>" />
-			<portlet:param name='<%= "ruleId" %>' value="<%= String.valueOf(rule.getRuleId()) %>" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
+			<portlet:param name="backURL" value="<%= currentURL %>" />
+			<portlet:param name="ruleId" value="<%= String.valueOf(rule.getRuleId()) %>" />
 		</liferay-portlet:renderURL>
 
-		<%@ include file="/html/portlet/mobile_device_rules/device_rule_columns.jspf" %>
+		<%@ include file="/html/portlet/mobile_device_rules/rule_columns.jspf" %>
 	</liferay-ui:search-container-row>
 
 	<liferay-ui:search-iterator type="more" />

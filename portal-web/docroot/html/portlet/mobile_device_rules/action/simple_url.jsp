@@ -14,26 +14,10 @@
  */
 --%>
 
-<liferay-ui:search-container-column-text
-	href="<%= rowURL %>"
-	name="name"
-	value="<%= action.getName(themeDisplay.getLocale()) %>"
-/>
+<%@ include file="/html/portlet/mobile_device_rules/action/init.jsp" %>
 
-<liferay-ui:search-container-column-text
-	href="<%= rowURL %>"
-	name="description"
-	value="<%= action.getDescription(themeDisplay.getLocale()) %>"
-/>
+<%
+String url = GetterUtil.getString(typeSettingsProperties.get("url"));
+%>
 
-<liferay-ui:search-container-column-text
-	href="<%= rowURL %>"
-	name="type"
-	translate="<%= true %>"
-	value="<%= action.getType() %>"
-/>
-
-<liferay-ui:search-container-column-jsp
-	align="right"
-	path="/html/portlet/mobile_device_rules/device_action_actions.jsp"
-/>
+<aui:input name="url" type="text" value="<%= url %>" />

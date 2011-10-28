@@ -15,25 +15,20 @@
 --%>
 
 <liferay-ui:search-container-column-text
-	href="<%= rowURL %>"
+	href="<%= rowHREF %>"
 	name="name"
-	value="<%= rule.getName(themeDisplay.getLocale()) %>"
+	value="<%= ruleGroup.getName(locale) %>"
 />
 
 <liferay-ui:search-container-column-text
-	href="<%= rowURL %>"
+	href="<%= rowHREF %>"
 	name="description"
-	value="<%= rule.getDescription(themeDisplay.getLocale()) %>"
+	value="<%= ruleGroup.getDescription(locale) %>"
 />
 
-<liferay-ui:search-container-column-text
-	href="<%= rowURL %>"
-	name="type"
-	translate="<%= true %>"
-	value="<%= rule.getType() %>"
-/>
-
-<liferay-ui:search-container-column-jsp
-	align="right"
-	path="/html/portlet/mobile_device_rules/device_rule_actions.jsp"
-/>
+<c:if test="<%= Validator.isNull(chooseCallback) %>">
+	<liferay-ui:search-container-column-jsp
+		align="right"
+		path="/html/portlet/mobile_device_rules/rule_group_actions.jsp"
+	/>
+</c:if>

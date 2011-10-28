@@ -15,28 +15,27 @@
 --%>
 
 <%
-MDRRuleGroup ruleGroup = MDRRuleGroupLocalServiceUtil.fetchRuleGroup(ruleGroupInstance.getRuleGroupId());
+MDRRuleGroup mdrRuleGroup = MDRRuleGroupLocalServiceUtil.fetchRuleGroup(mdrRuleGroupInstance.getRuleGroupId());
 %>
 
 <liferay-ui:search-container-column-text
 	href="<%= rowURL %>"
 	name="name"
-	value="<%= ruleGroup.getName(locale) %>"
+	value="<%= mdrRuleGroup.getName(locale) %>"
 />
 
 <liferay-ui:search-container-column-text
 	href="<%= rowURL %>"
 	name="description"
-	value="<%= ruleGroup.getDescription(locale) %>"
+	value="<%= mdrRuleGroup.getDescription(locale) %>"
 />
 
 <liferay-ui:search-container-column-text
 	href="<%= rowURL %>"
-	name="priority"
-	value="<%= String.valueOf(ruleGroupInstance.getPriority()) %>"
+	property="priority"
 />
 
 <liferay-ui:search-container-column-jsp
 	align="right"
-	path="/html/portlet/mobile_device_rules/device_rule_group_instance_actions.jsp"
+	path="/html/portlet/layouts_admin/layout/mobile_rule_groups_rule_group_instance_action.jsp"
 />

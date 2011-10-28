@@ -17,11 +17,13 @@
 <%@ include file="/html/portlet/mobile_device_rules/action/init.jsp" %>
 
 <%
-String url = actionTypeSettings.get("url");
+String layoutTemplateId = GetterUtil.getString(typeSettingsProperties.getProperty("layoutTemplateId"));
 
-if (url == null) {
-	url = StringPool.BLANK;
-}
+List<LayoutTemplate> layoutTemplates = LayoutTemplateLocalServiceUtil.getLayoutTemplates();
 %>
 
-<aui:input name="url" type="text" value="<%= url %>" />
+<liferay-ui:error-marker key="errorSection" value="layout" />
+
+<h5><%= LanguageUtil.get(pageContext, "layout-template") %></h5>
+
+<%@ include file="/html/portlet/layouts_admin/layout/layout_templates.jspf" %>

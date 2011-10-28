@@ -30,20 +30,20 @@ String toolbarItem = ParamUtil.getString(request, "toolbarItem", "add");
 	</c:if>
 </div>
 
-<liferay-portlet:renderURL portletName="<%= PortletKeys.MOBILE_DEVICE_SITE_ADMIN %>" windowState="<%= LiferayWindowState.POP_UP.toString() %>" varImpl="selectRuleGroupURL">
+<liferay-portlet:renderURL portletName="<%= PortletKeys.MOBILE_DEVICE_SITE_ADMIN %>" varImpl="selectRuleGroupURL" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
 	<portlet:param name="struts_action" value="/mobile_device_rules/view" />
-	<portlet:param name="chooseCallback" value='<%= namespace + "saveRuleGroupInstance" %>'/>
 	<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
-	<portlet:param name='<%= "className" %>' value="<%= className %>" />
-	<portlet:param name='<%= "classPK" %>' value="<%= String.valueOf(classPK) %>" />
+	<portlet:param name="className" value="<%= className %>" />
+	<portlet:param name="classPK" value="<%= String.valueOf(classPK) %>" />
+	<portlet:param name="chooseCallback" value='<%= liferayPortletResponse.getNamespace() + "saveRuleGroupInstance" %>' />
 </liferay-portlet:renderURL>
 
-<liferay-portlet:renderURL portletName="<%= PortletKeys.MOBILE_DEVICE_SITE_ADMIN %>" windowState="<%= LiferayWindowState.POP_UP.toString() %>" varImpl="managePrioritiesURL">
+<liferay-portlet:renderURL portletName="<%= PortletKeys.MOBILE_DEVICE_SITE_ADMIN %>" varImpl="managePrioritiesURL" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
 	<portlet:param name="struts_action" value="/mobile_device_rules/edit_rule_group_instance" />
-	<portlet:param name="saveCallback" value='<%= namespace + "saveRuleGroupsPriorities" %>'/>
 	<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
-	<portlet:param name='<%= "className" %>' value="<%= className %>" />
-	<portlet:param name='<%= "classPK" %>' value="<%= String.valueOf(classPK) %>" />
+	<portlet:param name="className" value="<%= className %>" />
+	<portlet:param name="classPK" value="<%= String.valueOf(classPK) %>" />
+	<portlet:param name="saveCallback" value='<%= liferayPortletResponse.getNamespace() + "saveRuleGroupsPriorities" %>' />
 </liferay-portlet:renderURL>
 
 <aui:script>
@@ -133,7 +133,6 @@ String toolbarItem = ParamUtil.getString(request, "toolbarItem", "add");
 			'click',
 			function(event) {
 				config.dialog.title = '<liferay-ui:message key="rule-groups-priorities" />';
-
 				config.dialog.width = 460;
 
 				config.uri = '<%= managePrioritiesURL %>';

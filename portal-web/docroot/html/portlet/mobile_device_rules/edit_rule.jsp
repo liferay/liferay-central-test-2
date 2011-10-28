@@ -20,39 +20,32 @@
 String redirect = ParamUtil.getString(request, "redirect");
 String backURL = ParamUtil.getString(request, "backURL");
 
-MDRRuleGroup ruleGroup = (MDRRuleGroup)renderRequest.getAttribute(WebKeys.MOBILE_DEVICE_RULES_RULE_GROUP);
 MDRRule rule = (MDRRule)renderRequest.getAttribute(WebKeys.MOBILE_DEVICE_RULES_RULE);
+
+long ruleId = BeanParamUtil.getLong(rule, request, "ruleId");
+
 String type = (String)renderRequest.getAttribute(WebKeys.MOBILE_DEVICE_RULES_RULE_TYPE);
 String editorJSP = (String)renderRequest.getAttribute(WebKeys.MOBILE_DEVICE_RULES_RULE_EDITOR_JSP);
 
+MDRRuleGroup ruleGroup = (MDRRuleGroup)renderRequest.getAttribute(WebKeys.MOBILE_DEVICE_RULES_RULE_GROUP);
+
+long ruleGroupId = BeanParamUtil.getLong(ruleGroup, request, "ruleGroupId");
+
 String title = StringPool.BLANK;
-long ruleId = 0;
-long ruleGroupId = ruleGroup.getRuleGroupId();
 
 if (ruleGroup != null) {
 	title = LanguageUtil.format(pageContext, "new-rule-for-x", ruleGroup.getName(locale), false);
 
 	if (rule != null) {
-		ruleId = rule.getRuleId();
-
 		title = rule.getName(locale) + " (" + ruleGroup.getName(locale) + ")";
 	}
 }
-
-PortletURL portletURL = renderResponse.createRenderURL();
-
-portletURL.setParameter("struts_action", "/mobile_device_rules/edit_rule");
-portletURL.setParameter("redirect", redirect);
-portletURL.setParameter("ruleGroupId", String.valueOf(ruleGroupId));
-portletURL.setParameter("ruleId", String.valueOf(ruleId));
-
-request.setAttribute("view_rule_actions.jsp-portletURL", portletURL);
 %>
 
 <liferay-ui:header
 	backURL="<%= backURL %>"
 	localizeTitle="<%= false %>"
-	title='<%= title %>'
+	title="<%= title %>"
 />
 
 <portlet:actionURL var="editRuleURL">
@@ -65,32 +58,35 @@ request.setAttribute("view_rule_actions.jsp-portletURL", portletURL);
 	<aui:input name="ruleGroupId" type="hidden" value="<%= ruleGroupId %>" />
 	<aui:input name="ruleId" type="hidden" value="<%= ruleId %>" />
 
-	<liferay-ui:error exception="<%= NoSuchRuleGroupException.class %>" message="rule-group-does-not-exist" />
 	<liferay-ui:error exception="<%= NoSuchRuleException.class %>" message="rule-does-not-exist" />
+	<liferay-ui:error exception="<%= NoSuchRuleGroupException.class %>" message="rule-group-does-not-exist" />
 	<liferay-ui:error exception="<%= UnknownRuleHandlerException.class %>" message="please-select-a-rule-type" />
 
 	<aui:model-context bean="<%= rule %>" model="<%= MDRRule.class %>" />
 
 	<aui:fieldset>
 		<aui:input name="name" />
+
 		<aui:input name="description" />
 
 		<aui:select name="type" changesContext="<%= true %>" onChange='<%= renderResponse.getNamespace() + "changeType();" %>'>
-			<aui:option label="select-a-type" selected="<%= StringPool.BLANK.equals(type) %>" disabled="<%= true %>" />
+			<aui:option disabled="<%= true %>" label="select-a-type" selected="<%= Validator.isNull(type) %>" />
 
 			<%
 			for (String ruleHandlerType : RuleGroupProcessorUtil.getRuleHandlerTypes()) {
-				boolean selected = ruleHandlerType.equals(type);
 			%>
-				<aui:option label="<%= ruleHandlerType %>" selected="<%= selected %>" />
+
+				<aui:option label="<%= ruleHandlerType %>" selected="<%= type.equals(ruleHandlerType) %>" />
+
 			<%
 			}
 	   		%>
+
 		</aui:select>
 
 		<div id="<%= renderResponse.getNamespace() %>typeSettings">
-			<c:if test="<%=Validator.isNotNull(editorJSP) %>">
-				<c:import url="<%= editorJSP %>" />
+			<c:if test="<%= Validator.isNotNull(editorJSP) %>">
+				<liferay-util:include page="<%= editorJSP %>" />
 			</c:if>
 		</div>
 	</aui:fieldset>
@@ -100,10 +96,6 @@ request.setAttribute("view_rule_actions.jsp-portletURL", portletURL);
 		<aui:button href="<%= redirect %>" value="cancel" />
 	</aui:button-row>
 </aui:form>
-
-<portlet:resourceURL var="editorURL">
-	<portlet:param name="struts_action" value="/mobile_device_rules/edit_rule_editor" />
-</portlet:resourceURL>
 
 <aui:script>
 	Liferay.provide(
@@ -115,6 +107,10 @@ request.setAttribute("view_rule_actions.jsp-portletURL", portletURL);
 			var typeNode = A.one('#<portlet:namespace /><%= "type" %>');
 
 			A.io.request(
+				<portlet:resourceURL var="editorURL">
+					<portlet:param name="struts_action" value="/mobile_device_rules/edit_rule_editor" />
+				</portlet:resourceURL>
+
 				'<%= editorURL.toString() %>',
 				{
 					data: {

@@ -20,46 +20,43 @@
 <%
 MDRRule rule = (MDRRule)request.getAttribute(WebKeys.MOBILE_DEVICE_RULES_RULE);
 
-Set<String> oses;
+Set<String> operatingSystems = Collections.emptySet();
 int tablet = 0;
 
 if (rule != null) {
-	UnicodeProperties typeSettings = rule.getTypeSettingsProperties();
+	UnicodeProperties typeSettingsProperties = rule.getTypeSettingsProperties();
 
-	String osString = typeSettings.get("os");
-	String tabletStr = typeSettings.get("tablet");
+	operatingSystems = SetUtil.fromArray(StringUtil.split(typeSettingsProperties.get("os")));
 
-	String[] osArray = StringUtil.split(osString);
+	String tabletString = typeSettingsProperties.get("tablet");
 
-	oses = SetUtil.fromArray(osArray);
-
-	if (StringPool.TRUE.equals(tabletStr)) {
+	if (tabletString.equals(StringPool.TRUE)) {
 		tablet = 1;
 	}
-	else if (StringPool.FALSE.equals(tabletStr)) {
+	else if (tabletString.equals(StringPool.FALSE)) {
 		tablet = 2;
 	}
 }
-else {
-	oses = Collections.emptySet();
-}
 %>
 
-<aui:select name="os" multiple="<%= true %>">
-	<aui:option label="any-os" value="" selected="<%= oses.isEmpty() %>" />
-	<%
-	Set<VersionableName> knownOSes = DeviceDetectionUtil.getKnownOperatingSystems();
+<aui:select multiple="<%= true %>" name="os">
+	<aui:option label="any-os" selected="<%= operatingSystems.isEmpty() %>" value="" />
 
-	for (VersionableName versionableName : knownOSes) {
+	<%
+	Set<VersionableName> knownOperationSystems = DeviceDetectionUtil.getKnownOperatingSystems();
+
+	for (VersionableName knownOperationSystem : knownOperationSystems) {
 	%>
-		<aui:option label="<%= versionableName.getName() %>" selected="<%= oses.contains(versionableName.getName()) %>" />
+		<aui:option label="<%= knownOperationSystem.getName() %>" selected="<%= operatingSystems.contains(knownOperationSystem.getName()) %>" />
+
 	<%
 	}
 	%>
+
 </aui:select>
 
-<aui:select name='<%= "tablet" %>'>
-	<aui:option label="any" value="" selected="<%= tablet == 0 %>" />
+<aui:select name="tablet">
+	<aui:option label="any" selected="<%= tablet == 0 %>" value="" />
 	<aui:option label="true" selected="<%= tablet == 1 %>" />
 	<aui:option label="false" selected="<%= tablet == 2 %>" />
 </aui:select>

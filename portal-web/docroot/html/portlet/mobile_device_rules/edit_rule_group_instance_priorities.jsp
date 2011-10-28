@@ -19,6 +19,7 @@
 
 <%
 String redirect = ParamUtil.getString(request, "redirect");
+
 String saveCallback = ParamUtil.getString(request, "saveCallback");
 
 if (Validator.isNotNull(saveCallback)) {
@@ -54,12 +55,15 @@ List<MDRRuleGroupInstance> ruleGroupInstances = MDRRuleGroupInstanceServiceUtil.
 	<aui:input name="ruleGroupsInstancesJSON" type="hidden" />
 
 	<div class="rule-group-instance-container" id="<portlet:namespace />ruleGroupInstancesPriorities">
+
 		<%
 		for (int i = 0; i < ruleGroupInstances.size(); i++) {
 			MDRRuleGroupInstance ruleGroupInstance = ruleGroupInstances.get(i);
+
 			MDRRuleGroup ruleGroup = ruleGroupInstance.getRuleGroup();
 		%>
-			<div class="rule-group-instance <%= i == 0 ? "rule-group-instance-first" : StringPool.BLANK %>" data-rule-group-instance-id="<%= ruleGroupInstance.getRuleGroupInstanceId() %>">
+
+			<div class="rule-group-instance <%= (i == 0) ? "rule-group-instance-first" : StringPool.BLANK %>" data-rule-group-instance-id="<%= ruleGroupInstance.getRuleGroupInstanceId() %>">
 				<span class="rule-group-instance-handle aui-icon aui-icon-grip-dotted-vertical"></span>
 
 				<span class="rule-group-instance-label"><%= ruleGroup.getName(locale) %></span>
@@ -70,9 +74,11 @@ List<MDRRuleGroupInstance> ruleGroupInstances = MDRRuleGroupInstanceServiceUtil.
 					<span class="rule-group-instance-priority-value"><%= ruleGroupInstance.getPriority() %></span>
 				</span>
 			</div>
+
 		<%
 		}
 		%>
+
 	</div>
 
 	<aui:button-row>

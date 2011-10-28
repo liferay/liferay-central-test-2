@@ -17,20 +17,26 @@
 <%@ include file="/html/portlet/mobile_device_rules/action/init.jsp" %>
 
 <%
-String selThemeId = null;
-String selColorSchemeId = null;
-
-if (!isAdd) {
-	selThemeId = actionTypeSettings.get("themeId");
-	selColorSchemeId = actionTypeSettings.get("colorSchemeId");
-}
+String selThemeId = GetterUtil.getString(typeSettingsProperties.get("themeId"));
+String selColorSchemeId = GetterUtil.getString(typeSettingsProperties.get("colorSchemeId"));
 
 if (Validator.isNull(selThemeId)) {
-	if (selLayout != null) {
+	String className = BeanParamUtil.getString(action, request, "className");
+	long classPK = BeanParamUtil.getLong(action, request, "classPK");
+
+	if (className.equals(Layout.class.getName())) {
+		Layout selLayout = LayoutLocalServiceUtil.getLayout(classPK);
+
+		groupId = selLayout.getGroupId();
+
 		selThemeId = selLayout.getThemeId();
 		selColorSchemeId = selLayout.getColorSchemeId();
 	}
-	else if (selLayoutSet != null) {
+	else if (className.equals(LayoutSet.class.getName())) {
+		LayoutSet selLayoutSet = LayoutSetLocalServiceUtil.getLayoutSet(classPK);
+
+		groupId = selLayoutSet.getGroupId();
+
 		selThemeId = selLayoutSet.getThemeId();
 		selColorSchemeId = selLayoutSet.getColorSchemeId();
 	}
@@ -38,10 +44,6 @@ if (Validator.isNull(selThemeId)) {
 
 Theme selTheme = ThemeLocalServiceUtil.getTheme(company.getCompanyId(), selThemeId, false);
 ColorScheme selColorScheme = ThemeLocalServiceUtil.getColorScheme(company.getCompanyId(), selThemeId, selColorSchemeId, false);
-List<Theme> themes = ThemeLocalServiceUtil.getThemes(company.getCompanyId(), groupId, user.getUserId(), false);
-List<ColorScheme> colorSchemes = selTheme.getColorSchemes();
-
-PluginPackage selPluginPackage = selTheme.getPluginPackage();
 %>
 
 <div class="lfr-theme-list">
@@ -52,9 +54,14 @@ PluginPackage selPluginPackage = selTheme.getPluginPackage();
 			<img alt="<%= selTheme.getName() %>" class="theme-screenshot" onclick="document.getElementById('<portlet:namespace />SelTheme').checked = true;" src="<%= selTheme.getStaticResourcePath() %><%= selTheme.getImagesPath() %>/thumbnail.png" title="<%= selTheme.getName() %>" />
 
 			<div class="theme-details">
-				<aui:input checked="<%= true %>" cssClass="selected-theme theme-title" id='SelTheme' label="<%= selTheme.getName() %>" name='themeId' type="radio" value="<%= selTheme.getThemeId() %>" />
+				<aui:input checked="<%= true %>" cssClass="selected-theme theme-title" id='SelTheme' label="<%= selTheme.getName() %>" name="themeId" type="radio" value="<%= selTheme.getThemeId() %>" />
 
 				<dl class="theme-fields">
+
+					<%
+					PluginPackage selPluginPackage = selTheme.getPluginPackage();
+					%>
+
 					<c:if test="<%= (selPluginPackage != null) && Validator.isNotNull(selPluginPackage.getShortDescription()) %>">
 						<dt>
 							<liferay-ui:message key="description" />
@@ -76,10 +83,14 @@ PluginPackage selPluginPackage = selTheme.getPluginPackage();
 			</div>
 		</div>
 
+		<%
+		List<ColorScheme> colorSchemes = selTheme.getColorSchemes();
+		%>
+
 		<c:if test="<%= !colorSchemes.isEmpty() %>">
-			<liferay-ui:panel-container extended="<%= true %>" id="layoutsAdminLookAndFeelPanelContainer" persistState="<%= true %>">
+			<liferay-ui:panel-container extended="<%= true %>" id="mobileDeviceRulesColorSchemesPanelContainer" persistState="<%= true %>">
 				<c:if test="<%= !colorSchemes.isEmpty() %>">
-					<liferay-ui:panel collapsible="<%= true %>" extended="<%= false %>" id="layoutsAdminLookAndFeelColorsPanel" persistState="<%= true %>" title='<%= LanguageUtil.format(pageContext, "color-schemes-x", colorSchemes.size()) %>'>
+					<liferay-ui:panel collapsible="<%= true %>" extended="<%= false %>" id="mobileDeviceRulesColorSchemesPanel" persistState="<%= true %>" title='<%= LanguageUtil.format(pageContext, "color-schemes-x", colorSchemes.size()) %>'>
 						<aui:fieldset cssClass="color-schemes">
 							<div class="lfr-component lfr-theme-list">
 
@@ -115,6 +126,11 @@ PluginPackage selPluginPackage = selTheme.getPluginPackage();
 	<div class="float-container lfr-available-themes">
 		<h3>
 			<span class="header-title">
+
+				<%
+				List<Theme> themes = ThemeLocalServiceUtil.getThemes(company.getCompanyId(), groupId, user.getUserId(), false);
+				%>
+
 				<%= LanguageUtil.format(pageContext, "available-themes-x", (themes.size() - 1)) %>
 			</span>
 		</h3>

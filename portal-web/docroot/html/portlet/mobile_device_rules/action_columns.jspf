@@ -14,24 +14,26 @@
  */
 --%>
 
-<%@ include file="/html/portlet/mobile_device_rules/action/init.jsp" %>
+<liferay-ui:search-container-column-text
+	href="<%= rowURL %>"
+	name="name"
+	value="<%= action.getName(locale) %>"
+/>
 
-<%
-String layoutTemplateId = StringPool.BLANK;
+<liferay-ui:search-container-column-text
+	href="<%= rowURL %>"
+	name="description"
+	value="<%= action.getDescription(locale) %>"
+/>
 
-if (!isAdd) {
-	layoutTemplateId = actionTypeSettings.getProperty("layoutTemplateId");
+<liferay-ui:search-container-column-text
+	href="<%= rowURL %>"
+	name="type"
+	translate="<%= true %>"
+	value="<%= action.getType() %>"
+/>
 
-	if (Validator.isNull(layoutTemplateId)) {
-		layoutTemplateId = StringPool.BLANK;
-	}
-}
-
-List layoutTemplates = LayoutTemplateLocalServiceUtil.getLayoutTemplates();
-%>
-
-<liferay-ui:error-marker key="errorSection" value="layout" />
-
-<h5><%= LanguageUtil.get(pageContext, "layout-template") %></h5>
-
-<%@ include file="/html/portlet/layouts_admin/layout_field.jspf" %>
+<liferay-ui:search-container-column-jsp
+	align="right"
+	path="/html/portlet/mobile_device_rules/action_actions.jsp"
+/>

@@ -19,34 +19,21 @@
 <%
 String redirect = ParamUtil.getString(request, "redirect");
 
-MDRRuleGroupInstance ruleGroupInstance = (MDRRuleGroupInstance)renderRequest.getAttribute(WebKeys.MOBILE_DEVICE_RULES_RULE_GROUP_INSTANCE);
 MDRAction action = (MDRAction)renderRequest.getAttribute(WebKeys.MOBILE_DEVICE_RULES_RULE_GROUP_ACTION);
-String type = (String)renderRequest.getAttribute(WebKeys.MOBILE_DEVICE_RULES_RULE_GROUP_ACTION_TYPE);
+
+long actionId = BeanParamUtil.getLong(action, request, "actionId");
+
 String editorJSP = (String)renderRequest.getAttribute(WebKeys.MOBILE_DEVICE_RULES_RULE_GROUP_ACTION_EDITOR_JSP);
+String type = (String)renderRequest.getAttribute(WebKeys.MOBILE_DEVICE_RULES_RULE_GROUP_ACTION_TYPE);
 
-boolean isAdd = Validator.isNull(action);
-
-long actionId = 0;
-
-if (!isAdd) {
-	actionId = action.getActionId();
-}
-
-Collection<ActionHandler> actionHandlers = ActionHandlerManagerUtil.getActionHandlers();
+MDRRuleGroupInstance ruleGroupInstance = (MDRRuleGroupInstance)renderRequest.getAttribute(WebKeys.MOBILE_DEVICE_RULES_RULE_GROUP_INSTANCE);
 %>
 
-<c:if test='<%= isAdd %>'>
-	<liferay-ui:header
-		backURL="<%= redirect %>"
-		title="add-action"
-	/>
-</c:if>
-<c:if test='<%= !isAdd %>'>
-	<liferay-ui:header
-		backURL="<%= redirect %>"
-		title="edit-action"
-	/>
-</c:if>
+<liferay-ui:header
+	backURL="<%= redirect %>"
+	localizeTitle="<%= (action == null) %>"
+	title='<%= (action == null) ? "new-action" : action.getName(locale) %>'
+/>
 
 <portlet:actionURL var="editActionURL">
 	<portlet:param name="struts_action" value="/mobile_device_rules/edit_action" />
@@ -54,29 +41,29 @@ Collection<ActionHandler> actionHandlers = ActionHandlerManagerUtil.getActionHan
 </portlet:actionURL>
 
 <aui:form action="<%= editActionURL %>" enctype="multipart/form-data" method="post" name="fm">
-	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= isAdd ? Constants.ADD : Constants.UPDATE %>" />
-
+	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= (action == null) ? Constants.ADD : Constants.UPDATE %>" />
 	<aui:input name="actionId" type="hidden" value="<%= actionId %>" />
 	<aui:input name="ruleGroupInstanceId" type="hidden" value="<%= ruleGroupInstance.getRuleGroupInstanceId() %>" />
 
-	<liferay-ui:error exception="<%= NoSuchRuleGroupException.class %>" message="unable-to-edit-a-non-existing-device-rule-group" />
-	<liferay-ui:error exception="<%= NoSuchRuleGroupInstanceException.class %>" message="unable-to-edit-a-non-existing-device-rule" />
-	<liferay-ui:error exception="<%= NoSuchActionException.class %>" message="unable-to-edit-a-non-existing-device-action" />
+	<liferay-ui:error exception="<%= NoSuchActionException.class %>" message="action-does-not-exist" />
+	<liferay-ui:error exception="<%= NoSuchRuleGroupException.class %>" message="rule-group-does-not-exist" />
+	<liferay-ui:error exception="<%= NoSuchRuleGroupInstanceException.class %>" message="rule-group-instance-does-not-exist" />
 
 	<aui:model-context bean="<%= action %>" model="<%= MDRAction.class %>" />
 
 	<aui:fieldset>
 		<aui:input name="name" />
+
 		<aui:input name="description" />
 
 		<aui:select changesContext="<%= true %>" name="type" onChange='<%= renderResponse.getNamespace() + "changeType();" %>'>
-			<aui:option disabled="<%= true %>" label="select-an-action-type" selected="<%= StringPool.BLANK.equals(type) %>" />
+			<aui:option disabled="<%= true %>" label="select-an-action-type" selected="<%= Validator.isNull(type) %>" />
 
 			<%
-			for (ActionHandler actionHandler : actionHandlers) {
+			for (ActionHandler actionHandler : ActionHandlerManagerUtil.getActionHandlers()) {
 	   		%>
 
-				<aui:option label="<%= actionHandler.getType() %>" selected="<%= actionHandler.getType().equals(type) %>" />
+				<aui:option label="<%= actionHandler.getType() %>" selected="<%= type.equals(actionHandler.getType()) %>" />
 
 			<%
 			}
@@ -85,8 +72,8 @@ Collection<ActionHandler> actionHandlers = ActionHandlerManagerUtil.getActionHan
 		</aui:select>
 
 		<div id="<%= renderResponse.getNamespace() %>typeSettings">
-			<c:if test="<%=Validator.isNotNull(editorJSP) %>">
-				<c:import url="<%=editorJSP %>" />
+			<c:if test="<%= Validator.isNotNull(editorJSP) %>">
+				<liferay-util:include page="<%= editorJSP %>" />
 			</c:if>
 		</div>
 	</aui:fieldset>
@@ -99,9 +86,37 @@ Collection<ActionHandler> actionHandlers = ActionHandlerManagerUtil.getActionHan
 </aui:form>
 
 <aui:script>
-	<portlet:resourceURL var="editorURL">
-		<portlet:param name="struts_action" value="/mobile_device_rules/edit_action_editor" />
-	</portlet:resourceURL>
+	Liferay.provide(
+		window,
+		'<portlet:namespace />changeDisplay',
+		function() {
+			var A = AUI();
+
+			A.io.request(
+				<portlet:resourceURL var="siteURLLayoutsURL">
+					<portlet:param name="struts_action" value="/mobile_device_rules/site_url_layouts" />
+				</portlet:resourceURL>
+
+				'<%= siteURLLayoutsURL.toString() %>',
+				{
+					data: {
+						actionGroupId: document.<portlet:namespace />fm.<portlet:namespace />groupId.value,
+						actionPlid: document.<portlet:namespace />fm.<portlet:namespace />actionPlid.value
+					},
+					on: {
+						complete: function(id, obj) {
+							var layouts = A.one('#<portlet:namespace />layouts');
+
+							if (layouts) {
+								layouts.html(this.get('responseData'));
+							}
+						}
+					}
+				}
+			);
+		},
+		['aui-io']
+	);
 
 	Liferay.provide(
 		window,
@@ -110,6 +125,10 @@ Collection<ActionHandler> actionHandlers = ActionHandlerManagerUtil.getActionHan
 			var A = AUI();
 
 			A.io.request(
+				<portlet:resourceURL var="editorURL">
+					<portlet:param name="struts_action" value="/mobile_device_rules/edit_action_editor" />
+				</portlet:resourceURL>
+
 				'<%= editorURL.toString() %>',
 				{
 					data: {
@@ -122,38 +141,6 @@ Collection<ActionHandler> actionHandlers = ActionHandlerManagerUtil.getActionHan
 
 							if (typeSettings) {
 								typeSettings.html(this.get('responseData'));
-							}
-						}
-					}
-				}
-			);
-		},
-		['aui-io']
-	);
-
-	<portlet:resourceURL var="layoutsURL">
-		<portlet:param name="struts_action" value="/mobile_device_rules/view_group_layouts" />
-	</portlet:resourceURL>
-
-	Liferay.provide(
-		window,
-		'<portlet:namespace />changeDisplay',
-		function() {
-			var A = AUI();
-
-			A.io.request(
-				'<%= layoutsURL.toString() %>',
-				{
-					data: {
-						actionGroupId: document.<portlet:namespace />fm.<portlet:namespace />groupId.value,
-						actionLayoutId: document.<portlet:namespace />fm.<portlet:namespace />originalLayoutId.value
-					},
-					on: {
-						complete: function(id, obj) {
-							var layouts = A.one('#<portlet:namespace />layouts');
-
-							if (layouts) {
-								layouts.html(this.get('responseData'));
 							}
 						}
 					}

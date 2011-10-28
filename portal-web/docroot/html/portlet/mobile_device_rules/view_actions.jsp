@@ -21,29 +21,25 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 long ruleGroupInstanceId = ParamUtil.getLong(request, "ruleGroupInstanceId");
 
-MDRRuleGroupInstance ruleGroupInstance = MDRRuleGroupInstanceLocalServiceUtil.fetchRuleGroupInstance(ruleGroupInstanceId);
+MDRRuleGroupInstance ruleGroupInstance = MDRRuleGroupInstanceLocalServiceUtil.getRuleGroupInstance(ruleGroupInstanceId);
 
-request.setAttribute("view_actions.jsp-redirect", currentURL);
+MDRRuleGroup ruleGroup = ruleGroupInstance.getRuleGroup();
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("struts_action", "/mobile_device_rules/view_actions");
 portletURL.setParameter("redirect", redirect);
 portletURL.setParameter("ruleGroupInstanceId", String.valueOf(ruleGroupInstanceId));
-
-MDRRuleGroup ruleGroup = ruleGroupInstance.getRuleGroup();
-
-String title = LanguageUtil.format(pageContext, "actions-for-x", ruleGroup.getName(locale), false);
 %>
 
 <liferay-ui:header
 	backURL="<%= redirect %>"
 	localizeTitle="<%= false %>"
-	title='<%= title %>'
+	title='<%= LanguageUtil.format(pageContext, "actions-for-x", ruleGroup.getName(locale), false) %>'
 />
 
 <c:if test="<%= MDRPermissionUtil.contains(permissionChecker, groupId, ActionKeys.ADD_RULE_GROUP) %>">
-	<liferay-portlet:renderURL varImpl="addURL">
+	<liferay-portlet:renderURL var="addURL">
 		<portlet:param name="struts_action" value="/mobile_device_rules/edit_action" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />
 		<portlet:param name="ruleGroupInstanceId" value="<%= String.valueOf(ruleGroupInstanceId) %>" />
@@ -61,14 +57,12 @@ String title = LanguageUtil.format(pageContext, "actions-for-x", ruleGroup.getNa
 <div class="separator"><!-- --></div>
 
 <liferay-ui:search-container
-	curParam="cur1"
 	delta="<%= 5 %>"
 	deltaConfigurable="<%= false %>"
 	emptyResultsMessage="no-actions-are-configured-for-this-rule-group-instance"
 	headerNames="name,description,type"
 	iteratorURL="<%= portletURL %>"
 >
-
 	<liferay-ui:search-container-results
 		results="<%= MDRActionLocalServiceUtil.getActions(ruleGroupInstanceId, searchContainer.getStart(), searchContainer.getEnd()) %>"
 		total="<%= MDRActionLocalServiceUtil.getActionsCount(ruleGroupInstanceId) %>"
@@ -80,13 +74,13 @@ String title = LanguageUtil.format(pageContext, "actions-for-x", ruleGroup.getNa
 		keyProperty="actionId"
 		modelVar="action"
 	>
-		<liferay-portlet:renderURL varImpl="rowURL">
+		<liferay-portlet:renderURL var="rowURL">
 			<portlet:param name="struts_action" value="/mobile_device_rules/edit_action" />
-			<portlet:param name="actionId" value="<%= String.valueOf(action.getActionId()) %>" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
+			<portlet:param name="actionId" value="<%= String.valueOf(action.getActionId()) %>" />
 		</liferay-portlet:renderURL>
 
-		<%@ include file="/html/portlet/mobile_device_rules/device_action_columns.jspf" %>
+		<%@ include file="/html/portlet/mobile_device_rules/action_columns.jspf" %>
 	</liferay-ui:search-container-row>
 
 	<liferay-ui:search-iterator type="more" />

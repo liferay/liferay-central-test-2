@@ -35,7 +35,7 @@ if (selLayoutTypePortlet != null) {
 	layoutTemplateId = selLayoutTypePortlet.getLayoutTemplateId();
 }
 
-List layoutTemplates = LayoutTemplateLocalServiceUtil.getLayoutTemplates(selTheme.getThemeId());
+List<LayoutTemplate> layoutTemplates = LayoutTemplateLocalServiceUtil.getLayoutTemplates(selTheme.getThemeId());
 %>
 
 <liferay-ui:error-marker key="errorSection" value="layout" />
@@ -44,4 +44,4 @@ List layoutTemplates = LayoutTemplateLocalServiceUtil.getLayoutTemplates(selThem
 
 <h3><liferay-ui:message key="layout" /></h3>
 
-<%@ include file="/html/portlet/layouts_admin/layout_field.jspf" %>
+<%@ include file="/html/portlet/layouts_admin/layout/layout_templates.jspf" %>

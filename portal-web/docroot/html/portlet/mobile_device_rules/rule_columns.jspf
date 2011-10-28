@@ -17,18 +17,23 @@
 <liferay-ui:search-container-column-text
 	href="<%= rowURL %>"
 	name="name"
-	value="<%= ruleGroup.getName(themeDisplay.getLocale()) %>"
+	value="<%= rule.getName(locale) %>"
 />
 
 <liferay-ui:search-container-column-text
 	href="<%= rowURL %>"
 	name="description"
-	value="<%= ruleGroup.getDescription(themeDisplay.getLocale()) %>"
+	value="<%= rule.getDescription(locale) %>"
 />
 
-<c:if test="<%= Validator.isNull(chooseCallback) %>">
-	<liferay-ui:search-container-column-jsp
-		align="right"
-		path="/html/portlet/mobile_device_rules/device_rule_group_actions.jsp"
-	/>
-</c:if>
+<liferay-ui:search-container-column-text
+	href="<%= rowURL %>"
+	name="type"
+	translate="<%= true %>"
+	value="<%= rule.getType() %>"
+/>
+
+<liferay-ui:search-container-column-jsp
+	align="right"
+	path="/html/portlet/mobile_device_rules/rule_actions.jsp"
+/>

@@ -17,28 +17,30 @@
 <%@ include file="/html/portlet/mobile_device_rules/init.jsp" %>
 
 <%
+SearchContainer searchContainer = (SearchContainer)request.getAttribute("liferay-ui:search:searchContainer");
+
+String redirect = searchContainer.getIteratorURL().toString();
+
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
 MDRRuleGroup ruleGroup = (MDRRuleGroup)row.getObject();
-
-PortletURL portletURL = (PortletURL)request.getAttribute("view.jsp-portletURL");
 %>
 
 <liferay-ui:icon-menu>
 	<c:if test="<%= MDRRuleGroupPermissionUtil.contains(permissionChecker, ruleGroup.getRuleGroupId(), ActionKeys.UPDATE) %>">
-		<liferay-portlet:renderURL varImpl="editURL">
+		<liferay-portlet:renderURL var="editURL">
 			<portlet:param name="struts_action" value="/mobile_device_rules/edit_rule_group" />
-			<portlet:param name="redirect" value="<%= portletURL.toString() %>" />
+			<portlet:param name="redirect" value="<%= redirect %>" />
 			<portlet:param name="ruleGroupId" value="<%= String.valueOf(ruleGroup.getRuleGroupId()) %>" />
 		</liferay-portlet:renderURL>
 
-		<liferay-ui:icon image="edit" url="<%= editURL.toString() %>" />
+		<liferay-ui:icon image="edit" url="<%= editURL %>" />
 	</c:if>
 
 	<c:if test="<%= MDRRuleGroupPermissionUtil.contains(permissionChecker, ruleGroup.getRuleGroupId(), ActionKeys.PERMISSIONS) %>">
 		<liferay-security:permissionsURL
 			modelResource="<%= MDRRuleGroup.class.getName() %>"
-			modelResourceDescription="<%= ruleGroup.getName(themeDisplay.getLocale()) %>"
+			modelResourceDescription="<%= ruleGroup.getName(locale) %>"
 			resourcePrimKey="<%= String.valueOf(ruleGroup.getRuleGroupId()) %>"
 			var="permissionsURL"
 		/>
@@ -49,9 +51,9 @@ PortletURL portletURL = (PortletURL)request.getAttribute("view.jsp-portletURL");
 	<c:if test="<%= MDRRuleGroupPermissionUtil.contains(permissionChecker, ruleGroup.getRuleGroupId(), ActionKeys.VIEW) && MDRPermissionUtil.contains(permissionChecker, groupId, ActionKeys.ADD_RULE_GROUP) %>">
 		<portlet:renderURL var="editRulesURL">
 			<portlet:param name="struts_action" value="/mobile_device_rules/view_rules" />
-			<portlet:param name="groupId" value="<%= Long.toString(groupId) %>" />
-			<portlet:param name="redirect" value="<%= portletURL.toString() %>" />
-			<portlet:param name="ruleGroupId" value="<%= Long.toString(ruleGroup.getRuleGroupId()) %>" />
+			<portlet:param name="redirect" value="<%= redirect %>" />
+			<portlet:param name="ruleGroupId" value="<%= String.valueOf(ruleGroup.getRuleGroupId()) %>" />
+			<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
 		</portlet:renderURL>
 
 		<liferay-ui:icon image="manage_nodes" message="manage-rules" url="<%= editRulesURL.toString() %>" />
@@ -59,9 +61,9 @@ PortletURL portletURL = (PortletURL)request.getAttribute("view.jsp-portletURL");
 		<portlet:actionURL var="copyURL">
 			<portlet:param name="struts_action" value="/mobile_device_rules/edit_rule_group" />
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.COPY %>" />
-			<portlet:param name="groupId" value="<%= Long.toString(groupId) %>" />
-			<portlet:param name="redirect" value="<%= portletURL.toString() %>" />
-			<portlet:param name="ruleGroupId" value="<%= Long.toString(ruleGroup.getRuleGroupId()) %>" />
+			<portlet:param name="redirect" value="<%= redirect %>" />
+			<portlet:param name="ruleGroupId" value="<%= String.valueOf(ruleGroup.getRuleGroupId()) %>" />
+			<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
 		</portlet:actionURL>
 
 		<liferay-ui:icon image="copy" url="<%= copyURL.toString() %>" />
@@ -71,8 +73,8 @@ PortletURL portletURL = (PortletURL)request.getAttribute("view.jsp-portletURL");
 		<portlet:actionURL var="deleteURL">
 			<portlet:param name="struts_action" value="/mobile_device_rules/edit_rule_group" />
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
-			<portlet:param name="redirect" value="<%= portletURL.toString() %>" />
-			<portlet:param name="ruleGroupId" value="<%= Long.toString(ruleGroup.getRuleGroupId()) %>" />
+			<portlet:param name="redirect" value="<%= redirect %>" />
+			<portlet:param name="ruleGroupId" value="<%= String.valueOf(ruleGroup.getRuleGroupId()) %>" />
 		</portlet:actionURL>
 
 		<liferay-ui:icon-delete url="<%= deleteURL %>" />

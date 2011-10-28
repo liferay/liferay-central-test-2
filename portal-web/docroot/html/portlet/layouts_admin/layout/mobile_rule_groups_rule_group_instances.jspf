@@ -15,13 +15,11 @@
 --%>
 
 <liferay-ui:search-container
-	curParam="cur1"
 	deltaConfigurable="<%= false %>"
 	emptyResultsMessage="no-rule-group-instances-are-configured"
 	headerNames="name,description,priority"
 	iteratorURL="<%= portletURL %>"
 >
-
 	<liferay-ui:search-container-results
 		results="<%= MDRRuleGroupInstanceServiceUtil.getRuleGroupInstances(className, classPK, searchContainer.getStart(), searchContainer.getEnd(), new RuleGroupInstancePriorityComparator()) %>"
 		total="<%= MDRRuleGroupInstanceServiceUtil.getRuleGroupInstancesCount(className, classPK) %>"
@@ -31,15 +29,15 @@
 		className="com.liferay.portlet.mobiledevicerules.model.MDRRuleGroupInstance"
 		escapedModel="<%= true %>"
 		keyProperty="ruleGroupInstanceId"
-		modelVar="ruleGroupInstance"
+		modelVar="mdrRuleGroupInstance"
 	>
 		<liferay-portlet:renderURL portletName="<%= PortletKeys.MOBILE_DEVICE_SITE_ADMIN %>" varImpl="rowURL">
 			<portlet:param name="struts_action" value="/mobile_device_rules/view_actions" />
-			<portlet:param name="redirect" value="<%= redirect %>" />
-			<portlet:param name="ruleGroupInstanceId" value="<%= String.valueOf(ruleGroupInstance.getRuleGroupInstanceId()) %>" />
+			<portlet:param name="redirect" value="<%= portletURL.toString() %>" />
+			<portlet:param name="ruleGroupInstanceId" value="<%= String.valueOf(mdrRuleGroupInstance.getRuleGroupInstanceId()) %>" />
 		</liferay-portlet:renderURL>
 
-		<%@ include file="/html/portlet/mobile_device_rules/device_rule_group_instance_columns.jspf" %>
+		<%@ include file="/html/portlet/layouts_admin/layout/mobile_rule_groups_rule_group_instance_columns.jspf" %>
 	</liferay-ui:search-container-row>
 
 	<liferay-ui:search-iterator type="more" />

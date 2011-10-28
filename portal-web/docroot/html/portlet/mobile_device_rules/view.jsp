@@ -17,22 +17,15 @@
 <%@ include file="/html/portlet/mobile_device_rules/init.jsp" %>
 
 <%
-String chooseCallback = ParamUtil.getString(request, "chooseCallback");
-
 String className = ParamUtil.getString(request, "className");
 long classPK = ParamUtil.getLong(request, "classPK");
+String chooseCallback = ParamUtil.getString(request, "chooseCallback");
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("struts_action", "/mobile_device_rules/view");
-portletURL.setParameter("chooseCallback", chooseCallback);
 portletURL.setParameter("groupId", String.valueOf(groupId));
-
-request.setAttribute("view.jsp-portletURL", portletURL);
-
-pageContext.setAttribute("portletURL", portletURL);
-
-String portletURLString = portletURL.toString();
+portletURL.setParameter("chooseCallback", chooseCallback);
 %>
 
 <c:if test="<%= Validator.isNotNull(chooseCallback) %>">
@@ -41,75 +34,73 @@ String portletURLString = portletURL.toString();
 	/>
 </c:if>
 
-<liferay-util:include page="/html/portlet/mobile_device_rules/device_rule_group_toolbar.jsp">
+<liferay-util:include page="/html/portlet/mobile_device_rules/toolbar.jsp">
 	<liferay-util:param name="toolbarItem" value="view" />
 </liferay-util:include>
 
-<%
-RuleGroupSearch ruleGroupSearch = null;
+<aui:form action="<%= portletURL.toString() %>" method="post" name="fm">
 
-if (renderRequest != null) {
-	ruleGroupSearch = new RuleGroupSearch(renderRequest, portletURL);
-}
-else {
-	ruleGroupSearch = new RuleGroupSearch(resourceRequest, portletURL);
-}
-%>
+	<%
+	RuleGroupSearch ruleGroupSearch = new RuleGroupSearch(liferayPortletRequest, portletURL);
+	%>
 
-<aui:form action="<%= portletURLString %>" method="post" name="fm">
-	<liferay-ui:search-container searchContainer="<%= ruleGroupSearch %>">
+	<liferay-ui:search-container
+		searchContainer="<%= ruleGroupSearch %>"
+	>
+		<liferay-ui:search-form
+			page="/html/portlet/mobile_device_rules/rule_group_search.jsp"
+		/>
 
 		<%
-		RuleGroupDisplayTerms displayTerms = (RuleGroupDisplayTerms) searchContainer.getDisplayTerms();
-		RuleGroupSearchTerms searchTerms = (RuleGroupSearchTerms) searchContainer.getSearchTerms();
+		RuleGroupSearchTerms searchTerms = (RuleGroupSearchTerms)searchContainer.getSearchTerms();
 		%>
 
-		<liferay-ui:search-form page="/html/portlet/mobile_device_rules/device_rule_group_search.jsp" />
-
 		<liferay-ui:search-container-results>
-
-			<%@ include file="/html/portlet/mobile_device_rules/device_rule_group_search_results.jspf" %>
-
+			<%@ include file="/html/portlet/mobile_device_rules/rule_group_search_results.jspf" %>
 		</liferay-ui:search-container-results>
 
 		<liferay-ui:search-container-row
-				className="com.liferay.portlet.mobiledevicerules.model.MDRRuleGroup"
-				escapedModel="<%= true %>"
-				keyProperty="ruleGroupId"
-				modelVar="ruleGroup"
+			className="com.liferay.portlet.mobiledevicerules.model.MDRRuleGroup"
+			escapedModel="<%= true %>"
+			keyProperty="ruleGroupId"
+			modelVar="ruleGroup"
 		>
-			<%
-			String rowURL = null;
 
-			MDRRuleGroupInstance ruleGroupInstance = MDRRuleGroupInstanceLocalServiceUtil.fetchRuleGroupInstance(className, classPK, ruleGroup.getRuleGroupId());
+			<%
+			String rowHREF = null;
 
 			if (Validator.isNull(chooseCallback)) {
-				%>
-					<liferay-portlet:renderURL varImpl="editURL">
-						<portlet:param name="struts_action" value="/mobile_device_rules/edit_rule_group" />
-						<portlet:param name="redirect" value="<%= portletURLString %>" />
-						<portlet:param name='<%= "ruleGroupId" %>' value="<%= String.valueOf(ruleGroup.getRuleGroupId()) %>" />
-					</liferay-portlet:renderURL>
-				<%
+			%>
 
-				rowURL = editURL.toString();
+				<liferay-portlet:renderURL var="editURL">
+					<portlet:param name="struts_action" value="/mobile_device_rules/edit_rule_group" />
+					<portlet:param name="redirect" value="<%= portletURL.toString() %>" />
+					<portlet:param name="ruleGroupId" value="<%= String.valueOf(ruleGroup.getRuleGroupId()) %>" />
+				</liferay-portlet:renderURL>
+
+			<%
+				rowHREF = editURL;
 			}
-			else if (Validator.isNotNull(chooseCallback) && (ruleGroupInstance == null)) {
-				StringBundler sb = new StringBundler(7);
+			else {
+				MDRRuleGroupInstance ruleGroupInstance = MDRRuleGroupInstanceLocalServiceUtil.fetchRuleGroupInstance(className, classPK, ruleGroup.getRuleGroupId());
 
-				sb.append("javascript:Liferay.Util.getOpener().");
-				sb.append(chooseCallback);
-				sb.append("(");
-				sb.append(ruleGroup.getRuleGroupId());
-				sb.append(",'");
-				sb.append(ruleGroup.getName(locale));
-				sb.append("', Liferay.Util.getWindow());");
+				if (ruleGroupInstance == null) {
+					StringBundler sb = new StringBundler(7);
 
-				rowURL = sb.toString();
+					sb.append("javascript:Liferay.Util.getOpener().");
+					sb.append(chooseCallback);
+					sb.append("(");
+					sb.append(ruleGroup.getRuleGroupId());
+					sb.append(",'");
+					sb.append(ruleGroup.getName(locale));
+					sb.append("', Liferay.Util.getWindow());");
+
+					rowHREF = sb.toString();
+				}
 			}
 			%>
 
-			<%@ include file="/html/portlet/mobile_device_rules/device_rule_group_columns.jspf" %>
+			<%@ include file="/html/portlet/mobile_device_rules/rule_group_columns.jspf" %>
 		</liferay-ui:search-container-row>
 
 		<div class="separator"><!-- --></div>

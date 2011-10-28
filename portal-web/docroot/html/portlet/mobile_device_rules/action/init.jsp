@@ -14,45 +14,17 @@
  */
 --%>
 
-<%@ page import="com.liferay.portal.kernel.plugin.PluginPackage" %><%@
-page import="com.liferay.portal.kernel.util.UnicodeProperties" %><%@
-page import="com.liferay.portal.model.Layout" %><%@
-page import="com.liferay.portal.plugin.PluginUtil" %><%@
-page import="com.liferay.portal.service.LayoutLocalServiceUtil" %><%@
-page import="com.liferay.portal.service.permission.LayoutPermissionUtil" %><%@
-page import="com.liferay.portlet.mobiledevicerules.model.MDRAction" %>
-
 <%@ include file="/html/portlet/mobile_device_rules/init.jsp" %>
 
 <%
 MDRAction action = (MDRAction)request.getAttribute(WebKeys.MOBILE_DEVICE_RULES_RULE_GROUP_ACTION);
 
-boolean isAdd = Validator.isNull(action);
+UnicodeProperties typeSettingsProperties = null;
 
-UnicodeProperties actionTypeSettings = null;
-String className = null;
-long classPK = 0l;
-
-if (!isAdd) {
-	actionTypeSettings = action.getTypeSettingsProperties();
-	className = action.getClassName();
-	classPK = action.getClassPK();
+if (action != null) {
+	typeSettingsProperties = action.getTypeSettingsProperties();
 }
 else {
-	actionTypeSettings = new UnicodeProperties();
-	className = ParamUtil.getString(request, "className");
-	classPK = ParamUtil.getLong(request, "classPK");
-}
-
-Layout selLayout = null;
-LayoutSet selLayoutSet = null;
-
-if (className.equals(LayoutSet.class.getName())) {
-	selLayoutSet = LayoutSetLocalServiceUtil.getLayoutSet(classPK);
-	groupId = selLayoutSet.getGroupId();
-}
-else if (className.equals(Layout.class.getName())) {
-	selLayout = LayoutLocalServiceUtil.getLayout(classPK);
-	groupId = selLayout.getGroupId();
+	typeSettingsProperties = new UnicodeProperties();
 }
 %>
