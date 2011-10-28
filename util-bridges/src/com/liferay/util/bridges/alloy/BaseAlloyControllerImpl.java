@@ -369,7 +369,7 @@ public abstract class BaseAlloyControllerImpl implements AlloyController {
 	}
 
 	protected void renderError(String message) {
-		renderRequest.setAttribute("message", message);
+		portletRequest.setAttribute("message", message);
 
 		render(_VIEW_PATH_ERROR);
 	}
