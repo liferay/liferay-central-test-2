@@ -442,7 +442,6 @@ public class PortletDataContextImpl implements PortletDataContext {
 		List<Role> roles = RoleLocalServiceUtil.getRoles(_companyId);
 
 		PrimitiveLongList roleIds = new PrimitiveLongList(roles.size());
-
 		Map<Long, String> roleIdsToNames = new HashMap<Long, String>();
 
 		for (Role role : roles) {
@@ -456,10 +455,8 @@ public class PortletDataContextImpl implements PortletDataContext {
 
 				String name = role.getName();
 
-				long roleId = role.getRoleId();
-
-				roleIds.add(roleId);
-				roleIdsToNames.put(roleId, name);
+				roleIds.add(role.getRoleId());
+				roleIdsToNames.put(role.getRoleId(), name);
 			}
 			else if ((type == RoleConstants.TYPE_PROVIDER) && role.isTeam()) {
 				Team team = TeamLocalServiceUtil.getTeam(role.getClassPK());
@@ -468,10 +465,8 @@ public class PortletDataContextImpl implements PortletDataContext {
 					String name =
 						PermissionExporter.ROLE_TEAM_PREFIX + team.getName();
 
-					long roleId = role.getRoleId();
-
-					roleIds.add(roleId);
-					roleIdsToNames.put(roleId, name);
+					roleIds.add(role.getRoleId());
+					roleIdsToNames.put(role.getRoleId(), name);
 				}
 			}
 		}

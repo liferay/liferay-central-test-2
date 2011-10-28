@@ -323,7 +323,6 @@ public class PermissionExporter {
 		}
 
 		PrimitiveLongList roleIds = new PrimitiveLongList(roles.size());
-
 		Map<Long, Role> roleIdsToRoles = new HashMap<Long, Role>();
 
 		for (Role role : roles) {
@@ -333,9 +332,7 @@ public class PermissionExporter {
 				continue;
 			}
 
-			long roleId = role.getRoleId();
-
-			roleIds.add(roleId);
+			roleIds.add(role.getRoleId());
 			roleIdsToRoles.put(role.getRoleId(), role);
 		}
 
