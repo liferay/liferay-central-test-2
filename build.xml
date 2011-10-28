@@ -925,7 +925,7 @@ set JAVA_OPTS=-Dfile.encoding=UTF8 -Djava.net.preferIPv4Stack=true -Djonas.felix
 	</target>
 
 	<target name="javadoc-all">
-		<property name="doc.java.dir" value="${doc.dir}/javadocs-internal" />
+		<property name="doc.java.dir" value="${doc.dir}/javadocs-all" />
 
 		<mkdir dir="${doc.java.dir}" />
 
