@@ -404,7 +404,7 @@ public class SampleSQLBuilder {
 
 		StringBundler sb = _insertSQLs.get(tableName);
 
-		if (sb == null || sb.index() == 0) {
+		if ((sb == null) || (sb.index() == 0)) {
 			sb = new StringBundler();
 
 			_insertSQLs.put(tableName, sb);
