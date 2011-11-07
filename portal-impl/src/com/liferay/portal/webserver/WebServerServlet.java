@@ -645,7 +645,6 @@ public class WebServerServlet extends HttpServlet {
 		throws Exception {
 
 		if (!PropsValues.WEB_SERVER_SERVLET_DIRECTORY_INDEXING_ENABLED) {
-
 			response.setStatus(HttpServletResponse.SC_FORBIDDEN);
 
 			return;
@@ -896,7 +895,6 @@ public class WebServerServlet extends HttpServlet {
 		throws Exception {
 
 		if (!PropsValues.WEB_SERVER_SERVLET_DIRECTORY_INDEXING_ENABLED) {
-
 			response.setStatus(HttpServletResponse.SC_FORBIDDEN);
 
 			return;
