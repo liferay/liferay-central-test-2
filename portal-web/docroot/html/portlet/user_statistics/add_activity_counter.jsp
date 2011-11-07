@@ -19,7 +19,7 @@
 <%
 int index = ParamUtil.getInteger(request, "index", GetterUtil.getInteger((String)request.getAttribute("configuration.jsp-index")));
 
-String displayCounterNameValue = PrefsParamUtil.getString(preferences, request, "displayCounterName" + index);
+String displayActivityCounterName = PrefsParamUtil.getString(preferences, request, "displayActivityCounterName" + index);
 
 Collection<String> activityCounterNames = SocialConfigurationUtil.getActivityCounterNames(SocialActivityCounterConstants.TYPE_ACTOR);
 
@@ -28,7 +28,7 @@ activityCounterNames.add(SocialActivityCounterConstants.NAME_USER_ACHIEVEMENT);
 %>
 
 <div class="aui-field-row query-row">
-	<aui:select inlineField="<%= true %>" label="" name='<%= "preferences--displayCounterName" + index + "--" %>'>
+	<aui:select inlineField="<%= true %>" label="" name='<%= "preferences--displayActivityCounterName" + index + "--" %>'>
 
 		<%
 		for (String activityCounterName : activityCounterNames) {
@@ -37,7 +37,7 @@ activityCounterNames.add(SocialActivityCounterConstants.NAME_USER_ACHIEVEMENT);
 			}
 		%>
 
-			<aui:option label='<%= "social.counter." + activityCounterName %>' selected="<%= activityCounterName.equals(displayCounterNameValue) %>" value="<%= activityCounterName %>" />
+			<aui:option label='<%= "social.counter." + activityCounterName %>' selected="<%= activityCounterName.equals(displayActivityCounterName) %>" value="<%= activityCounterName %>" />
 
 		<%
 		}

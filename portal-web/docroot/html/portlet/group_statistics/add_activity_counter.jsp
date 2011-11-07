@@ -19,17 +19,15 @@
 <%
 int index = ParamUtil.getInteger(request, "index", GetterUtil.getInteger((String)request.getAttribute("configuration.jsp-index")));
 
-String currentCounterName = PrefsParamUtil.getString(preferences, request, "displayCounterName" + index);
-String currentChartType = PrefsParamUtil.getString(preferences, request, "chartType" + index);
-String currentDataRange = PrefsParamUtil.getString(preferences, request, "dataRange" + index);
+String displayActivityCounterName = PrefsParamUtil.getString(preferences, request, "displayActivityCounterName" + index);
+String chartType = PrefsParamUtil.getString(preferences, request, "chartType" + index);
+String dataRange = PrefsParamUtil.getString(preferences, request, "dataRange" + index);
 
 Collection<String> activityCounterNames = SocialConfigurationUtil.getActivityCounterNames();
 
 activityCounterNames.add(SocialActivityCounterConstants.NAME_USER_ACHIEVEMENT);
 activityCounterNames.add(SocialActivityCounterConstants.NAME_ASSET_ACTIVITY);
 activityCounterNames.add(SocialActivityCounterConstants.NAME_USER_ACTIVITY);
-
-String assetsLocalized = LanguageUtil.format(pageContext, "assets", StringPool.BLANK);
 %>
 
 <div class="aui-field-row">
@@ -37,19 +35,19 @@ String assetsLocalized = LanguageUtil.format(pageContext, "assets", StringPool.B
 		<liferay-ui:message key="show" />
 	</span>
 
-	<aui:select inlineField="<%= true %>" label="" name='<%= "preferences--displayCounterName" + index + "--" %>'>
+	<aui:select inlineField="<%= true %>" label="" name='<%= "preferences--displayActivityCounterName" + index + "--" %>'>
 
 		<%
-			for (String activityCounterName : activityCounterNames) {
-				if (activityCounterName.equals(SocialActivityCounterConstants.NAME_CONTRIBUTION) || activityCounterName.equals(SocialActivityCounterConstants.NAME_PARTICIPATION)) {
-					continue;
-				}
+		for (String activityCounterName : activityCounterNames) {
+			if (activityCounterName.equals(SocialActivityCounterConstants.NAME_CONTRIBUTION) || activityCounterName.equals(SocialActivityCounterConstants.NAME_PARTICIPATION)) {
+				continue;
+			}
 		%>
 
-			<aui:option label='<%= LanguageUtil.format(pageContext, "social.counter."+ activityCounterName, new Object[] {assetsLocalized}) %>' selected="<%= activityCounterName.equals(currentCounterName) %>" value="<%= activityCounterName %>" />
+			<aui:option label='<%= LanguageUtil.format(pageContext, "social.counter."+ activityCounterName, new Object[] {LanguageUtil.get(pageContext, "assets")}) %>' selected="<%= activityCounterName.equals(displayActivityCounterName) %>" value="<%= activityCounterName %>" />
 
 		<%
-			}
+		}
 		%>
 
 	</aui:select>
@@ -59,10 +57,10 @@ String assetsLocalized = LanguageUtil.format(pageContext, "assets", StringPool.B
 	</span>
 
 	<aui:select inlineField="<%= true %>" label="" name='<%= "preferences--chartType" + index + "--" %>'>
-		<aui:option label="area-diagram" selected='<%= "area".equals(currentChartType) %>' value="area" />
-		<aui:option label="column-diagram" selected='<%= "column".equals(currentChartType) %>' value="column" />
-		<aui:option label="activity-distribution" selected='<%= "pie".equals(currentChartType) %>' value="pie" />
-		<aui:option label="tag-cloud" selected='<%= "tagCloud".equals(currentChartType) %>' value="tagCloud" />
+		<aui:option label="area-diagram" selected='<%= chartType.equals("area") %>' value="area" />
+		<aui:option label="column-diagram" selected='<%= chartType.equals("column") %>' value="column" />
+		<aui:option label="activity-distribution" selected='<%= chartType.equals("pie") %>' value="pie" />
+		<aui:option label="tag-cloud" selected='<%= chartType.equals("tagCloud") %>' value="tagCloud" />
 	</aui:select>
 
 	<span class="aui-field aui-field-inline inline-text">
@@ -70,7 +68,7 @@ String assetsLocalized = LanguageUtil.format(pageContext, "assets", StringPool.B
 	</span>
 
 	<aui:select inlineField="<%= true %>" label="" name='<%= "preferences--dataRange" + index + "--" %>'>
-		<aui:option label="this-year" selected='<%= "year".equals(currentDataRange) %>' value="year" />
-		<aui:option label="last-12-months" selected='<%= "12months".equals(currentDataRange) %>' value="12months" />
+		<aui:option label="this-year" selected='<%= dataRange.equals("year") %>' value="year" />
+		<aui:option label="last-12-months" selected='<%= dataRange.equals("12months") %>' value="12months" />
 	</aui:select>
 </div>

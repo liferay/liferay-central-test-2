@@ -14,20 +14,15 @@
  */
 --%>
 
-<%@ include file="/html/portlet/group_statistics/init.jsp" %>
-
 <%
-String selectedTag = ParamUtil.getString(request, "tag");
-List<AssetTag> tags = (List<AssetTag>)request.getAttribute("group-statistics:data");
+String assetTagName = ParamUtil.getString(request, "tag");
 
 int maxValue = 0;
 int minValue = Integer.MAX_VALUE;
 
-for (int i=0; i < tags.size(); i++) {
-	AssetTag tag = tags.get(i);
-
-	maxValue = Math.max(maxValue, tag.getAssetCount());
-	minValue = Math.min(minValue, tag.getAssetCount());
+for (AssetTag assetTag : assetTags) {
+	maxValue = Math.max(maxValue, assetTag.getAssetCount());
+	minValue = Math.min(minValue, assetTag.getAssetCount());
 }
 
 double multiplier = 1;
@@ -35,41 +30,41 @@ double multiplier = 1;
 if (maxValue != minValue) {
 	multiplier = (double)5 / (maxValue - minValue);
 }
+
+PortletURL portletURL = renderResponse.createRenderURL();
 %>
 
 <ul class="tag-items tag-cloud">
 
 	<%
-	for (int i=0; i < tags.size(); i++) {
-		AssetTag tag = tags.get(i);
-
-		int popularity = (int)(1 + ((maxValue - (maxValue - (tag.getAssetCount() - minValue))) * multiplier));
+	for (AssetTag assetTag : assetTags) {
+		int popularity = (int)(1 + ((maxValue - (maxValue - (assetTag.getAssetCount() - minValue))) * multiplier));
 	%>
 
 		<li class="tag-popularity-<%= popularity %>">
 			<span>
 
 				<%
-					if (tag.getName().equals(selectedTag)) {
-						portletURL.setParameter("tag", "");
+				if (assetTagName.equals(assetTag.getName())) {
+					portletURL.setParameter("tag", StringPool.BLANK);
 				%>
 
 					<a class="tag-selected" href="<%= portletURL %>">
 
 				<%
-					}
-					else {
-						portletURL.setParameter("tag", tag.getName());
+				}
+				else {
+					portletURL.setParameter("tag", assetTag.getName());
 				%>
 
 					<a href="<%= portletURL %>">
 
 				<%
-					}
+				}
 				%>
 
-						<strong><%= tag.getName() %></strong>
-					</a>
+					<strong><%= assetTag.getName() %></strong>
+				</a>
 			</span>
 		</li>
 

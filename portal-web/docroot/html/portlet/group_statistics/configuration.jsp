@@ -30,18 +30,18 @@ String redirect = ParamUtil.getString(request, "redirect");
 	<aui:input name="tabs2" type="hidden" value="<%= tabs2 %>" />
 	<aui:input name="redirect" type="hidden" value="<%= configurationRenderURL.toString() %>" />
 
-	<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="displayCountersPanel" persistState="<%= true %>" title="counters">
-		<div id="<portlet:namespace />displayCounters">
+	<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="groupStatisticsDisplayActivityCounterNamesPanel" persistState="<%= true %>" title="counters">
+		<div id="<portlet:namespace />displayActivityCounterNames">
 			<aui:fieldset label="">
 
 				<%
-				for (int displayCounterNameIndex : displayCounterNameIndexes) {
-					request.setAttribute("configuration.jsp-index", String.valueOf(displayCounterNameIndex));
+				for (int displayActivityCounterNameIndex : displayActivityCounterNameIndexes) {
+					request.setAttribute("configuration.jsp-index", String.valueOf(displayActivityCounterNameIndex));
 				%>
 
 					<div class="lfr-form-row">
 						<div class="row-fields">
-							<liferay-util:include page="/html/portlet/group_statistics/edit_display_counter.jsp" />
+							<liferay-util:include page="/html/portlet/group_statistics/add_activity_counter.jsp" />
 						</div>
 					</div>
 
@@ -55,9 +55,9 @@ String redirect = ParamUtil.getString(request, "redirect");
 		<aui:script use="liferay-auto-fields">
 			var autoFields = new Liferay.AutoFields(
 				{
-					contentBox: '#<portlet:namespace />displayCounters > fieldset',
-					fieldIndexes: '<portlet:namespace />preferences--displayCounterNameIndexes--',
-					url: '<portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/portlet_configuration/edit_group_statistics_counters" /></portlet:renderURL>'
+					contentBox: '#<portlet:namespace />displayActivityCounterNames > fieldset',
+					fieldIndexes: '<portlet:namespace />preferences--displayActivityCounterNameIndexes--',
+					url: '<portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/portlet_configuration/add_group_statistics_activity_counter" /></portlet:renderURL>'
 				}
 			).render();
 		</aui:script>

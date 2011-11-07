@@ -17,92 +17,85 @@
 <%@ include file="/html/portlet/group_statistics/init.jsp" %>
 
 <%
-for (int displayCounterNameIndex : displayCounterNameIndexes) {
-	String counterName = PrefsParamUtil.getString(preferences, request, "displayCounterName" + displayCounterNameIndex);
-	String chartType = PrefsParamUtil.getString(preferences, request, "chartType" + displayCounterNameIndex, "area");
-	String dataRange = PrefsParamUtil.getString(preferences, request, "dataRange" + displayCounterNameIndex, "year");
+for (int displayActivityCounterNameIndex : displayActivityCounterNameIndexes) {
+	String displayActivityCounterName = PrefsParamUtil.getString(preferences, request, "displayActivityCounterName" + displayActivityCounterNameIndex);
+	String chartType = PrefsParamUtil.getString(preferences, request, "chartType" + displayActivityCounterNameIndex, "area");
+	String dataRange = PrefsParamUtil.getString(preferences, request, "dataRange" + displayActivityCounterNameIndex, "year");
 
-	String assetsLocalized = LanguageUtil.format(pageContext, "assets", StringPool.BLANK);
-	String title = LanguageUtil.format(pageContext, "social.counter." + counterName, new Object[] {assetsLocalized});
+	List<AssetTag> assetTags = null;
 
-	request.setAttribute("group-statistics:counter-index", displayCounterNameIndex);
+	List<SocialActivityCounter> activityCounters = null;
 
-	List<?> data = null;
+	String title = LanguageUtil.format(pageContext, "social.counter." + displayActivityCounterName, new Object[] {LanguageUtil.get(pageContext, "assets")});
 
-	if (chartType.equals("pie")) {
+	int displayHeight = 80;
+
+	if (chartType.equals("tagCloud")) {
 		if (dataRange.equals("year")) {
-			data = SocialActivityCounterLocalServiceUtil.getActivityCounterDistribution(scopeGroupId, counterName, SocialCounterPeriodUtil.getFirstActivityDayOfYear(), SocialCounterPeriodUtil.getEndPeriod());
+			assetTags = AssetTagLocalServiceUtil.getTags(scopeGroupId, displayActivityCounterName, SocialCounterPeriodUtil.getFirstActivityDayOfYear(), SocialCounterPeriodUtil.getEndPeriod());
 		}
 		else {
-			data = SocialActivityCounterLocalServiceUtil.getActivityCounterDistribution(scopeGroupId, counterName, 11, true);
+			assetTags = AssetTagLocalServiceUtil.getTags(scopeGroupId, displayActivityCounterName, 11, true);
 		}
-	}
-	else if (chartType.equals("tagCloud")) {
-		if (dataRange.equals("year")) {
-			data = AssetTagLocalServiceUtil.getTags(scopeGroupId, counterName, SocialCounterPeriodUtil.getFirstActivityDayOfYear(), SocialCounterPeriodUtil.getEndPeriod());
-		}
-		else {
-			data = AssetTagLocalServiceUtil.getTags(scopeGroupId, counterName, 11, true);
+
+		if (assetTags.isEmpty()) {
+			continue;
 		}
 
 		title = LanguageUtil.format(pageContext, "tag-cloud-based-on-x", new Object[] {title});
 	}
 	else {
-		if (dataRange.equals("year")) {
-			data = SocialActivityCounterLocalServiceUtil.getActivityCounters(scopeGroupId, counterName, SocialCounterPeriodUtil.getFirstActivityDayOfYear(), SocialCounterPeriodUtil.getEndPeriod());
+		if (chartType.equals("pie")) {
+			if (dataRange.equals("year")) {
+				activityCounters = SocialActivityCounterLocalServiceUtil.getActivityCounterDistribution(scopeGroupId, displayActivityCounterName, SocialCounterPeriodUtil.getFirstActivityDayOfYear(), SocialCounterPeriodUtil.getEndPeriod());
+			}
+			else {
+				activityCounters = SocialActivityCounterLocalServiceUtil.getActivityCounterDistribution(scopeGroupId, displayActivityCounterName, 11, true);
+			}
+
+			displayHeight = Math.max((activityCounters.size() + 1) * 18, displayHeight);
 		}
 		else {
-			data = SocialActivityCounterLocalServiceUtil.getActivityCounters(scopeGroupId, counterName, 11, true);
+			if (dataRange.equals("year")) {
+				activityCounters = SocialActivityCounterLocalServiceUtil.getActivityCounters(scopeGroupId, displayActivityCounterName, SocialCounterPeriodUtil.getFirstActivityDayOfYear(), SocialCounterPeriodUtil.getEndPeriod());
+			}
+			else {
+				activityCounters = SocialActivityCounterLocalServiceUtil.getActivityCounters(scopeGroupId, displayActivityCounterName, 11, true);
+			}
+		}
+
+		if (activityCounters.isEmpty()) {
+			continue;
 		}
 	}
-
-	if (data == null || data.size() == 0) {
-		continue;
-	}
-
-	request.setAttribute("group-statistics:data", data);
-
-	int infoBlockHeight = 0;
-
-	if (chartType.equals("pie")) {
-		infoBlockHeight = (data.size() + 1) * 18;
-	}
-
-	if (infoBlockHeight < 80) {
-		infoBlockHeight = 80;
-	}
-
-	request.setAttribute("group-statistics:info-block-height", infoBlockHeight);
 %>
 
-<div class="group-statistics-container">
-	<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id='<%= "groupStatisticsPanel" + displayCounterNameIndex %>' persistState="<%= true %>" title="<%= title %>">
-		<div class="group-statistics-body" style="height: <%= infoBlockHeight %>px;">
-			<c:choose>
-				<c:when test='<%= chartType.equals("tagCloud") %>'>
-					<liferay-util:include page="/html/portlet/group_statistics/display/tag_cloud.jsp" />
-				</c:when>
-
-				<c:when test='<%= chartType.equals("pie") %>'>
-					<liferay-util:include page="/html/portlet/group_statistics/display/activity_distribution.jsp" />
-				</c:when>
-
-				<c:otherwise>
-					<liferay-util:include page="/html/portlet/group_statistics/display/counter_chart.jsp" />
-				</c:otherwise>
-			</c:choose>
-		</div>
-	</liferay-ui:panel>
-</div>
+	<div class="group-statistics-container">
+		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id='<%= "groupStatisticsPanel" + displayActivityCounterNameIndex %>' persistState="<%= true %>" title="<%= title %>">
+			<div class="group-statistics-body" style="height: <%= displayHeight %>px;">
+				<c:choose>
+					<c:when test='<%= chartType.equals("pie") %>'>
+						<%@ include file="/html/portlet/group_statistics/chart/pie.jspf" %>
+					</c:when>
+					<c:when test='<%= chartType.equals("tagCloud") %>'>
+						<%@ include file="/html/portlet/group_statistics/chart/tag_cloud.jspf" %>
+					</c:when>
+					<c:otherwise>
+						<%@ include file="/html/portlet/group_statistics/chart/other.jspf" %>
+					</c:otherwise>
+				</c:choose>
+			</div>
+		</liferay-ui:panel>
+	</div>
 
 <%
 }
 %>
 
-<c:if test="<%= Validator.isNull(displayCounterNameIndexesParam) %>">
+<c:if test="<%= Validator.isNull(displayActivityCounterNameIndexesParam) %>">
 	<div class="portlet-configuration portlet-msg-info">
 		<a href="<%= portletDisplay.getURLConfiguration() %>" onClick="<%= portletDisplay.getURLConfigurationJS() %>">
-	    	<liferay-ui:message key="please-configure-this-portlet-and-select-at-least-one-activity-counter" />
+			<liferay-ui:message key="please-configure-this-portlet-and-select-at-least-one-activity-counter" />
 		</a>
 	</div>
 </c:if>

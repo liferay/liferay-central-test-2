@@ -14,36 +14,28 @@
  */
 --%>
 
-<%@ include file="/html/portlet/group_statistics/init.jsp" %>
-
 <%
-List<SocialActivityCounter> activityCounters = (List<SocialActivityCounter>)request.getAttribute("group-statistics:data");
-int counterIndex = (Integer)request.getAttribute("group-statistics:counter-index");
-
-String chartType = PrefsParamUtil.getString(preferences, request, "chartType" + counterIndex, "area");
-
 int[] categories = new int[activityCounters.size()];
 int[] values = new int[activityCounters.size()];
-int total = 0;
-int totalDays = 0;
 
-for (int i=0; i < activityCounters.size(); i++) {
+int totalValue = 0;
+
+for (int i = 0; i < activityCounters.size(); i++) {
 	SocialActivityCounter activityCounter = activityCounters.get(i);
 
 	categories[i] = i + 1;
-
 	values[i] = activityCounter.getCurrentValue();
 
-	total = total + values[i];
+	totalValue = totalValue + activityCounter.getCurrentValue();
 }
 
-int infoBlockHeight = (Integer)request.getAttribute("group-statistics:info-block-height");
+DecimalFormat decimalFormat = new DecimalFormat("##.00%");
 %>
 
 <aui:layout>
 	<aui:column columnWidth="70">
-		<div class="group-statistics-chart" style="height: <%= infoBlockHeight - 2 %>px; width: <%= infoBlockHeight - 2 %>px;">
-			<div id="groupStatisticsChart<%= counterIndex %>"></div>
+		<div class="group-statistics-chart" style="height: <%= displayHeight - 2 %>px; width: <%= displayHeight - 2 %>px;">
+			<div id="groupStatisticsChart<%= displayActivityCounterNameIndex %>"></div>
 		</div>
 	</aui:column>
 
@@ -54,32 +46,37 @@ int infoBlockHeight = (Integer)request.getAttribute("group-statistics:info-block
 			<table>
 
 			<%
-				for (int i=0; i < activityCounters.size(); i++) {
-					String model = "model.resource." + PortalUtil.getClassName(activityCounters.get(i).getClassNameId());
-					double percentage = 0;
-
-					if (total > 0) {
-						percentage = (double)activityCounters.get(i).getCurrentValue() / (double)total;
-					}
+			for (int i = 0; i < activityCounters.size(); i++) {
+				SocialActivityCounter activityCounter = activityCounters.get(i);
 			%>
 
 				<tr>
 					<td>
-						<div class="group-statistics-color-marker" style="background-color: <%= colors[i % colors.length] %>"></div>
+						<div class="group-statistics-color-marker" style="background-color: <%= _BACKGROUND_COLORS[i % _BACKGROUND_COLORS.length] %>"></div>
 					</td>
-
 					<td>
-						<liferay-ui:message key="<%= model %>" />
+						<%= ResourceActionsUtil.getModelResource(locale, activityCounter.getClassName()) %>
 					</td>
-
-					<td>:</td>
-
+					<td>
+						:
+					</td>
 					<td align="right">
+
+						<%
+						double percentage = 0;
+
+						if (totalValue > 0) {
+							percentage = (double)activityCounter.getCurrentValue() / (double)totalValue;
+						}
+						%>
+
 						<%= decimalFormat.format(percentage) %>
 					</td>
 				</tr>
 
-			<% } %>
+			<%
+			}
+			%>
 
 			</table>
 		</div>
@@ -92,7 +89,7 @@ int infoBlockHeight = (Integer)request.getAttribute("group-statistics:info-block
 
 	var data = [];
 
-	for(var i = 0; i < categories.length; i++) {
+	for (var i = 0; i < categories.length; i++) {
 		data.push(
 			{
 				category: categories[i],
@@ -116,7 +113,7 @@ int infoBlockHeight = (Integer)request.getAttribute("group-statistics:info-block
 		}
 	};
 
-	var chartContainer = A.one('#groupStatisticsChart<%= counterIndex %>');
+	var chartContainer = A.one('#groupStatisticsChart<%= displayActivityCounterNameIndex %>');
 
 	var chart = new A.Chart(
 		{
@@ -126,7 +123,7 @@ int infoBlockHeight = (Integer)request.getAttribute("group-statistics:info-block
 					categoryKey: 'category',
 					styles: {
 						fill: {
-							colors: ['<%= StringUtil.merge(colors, "', '") %>']
+							colors: ['<%= StringUtil.merge(_BACKGROUND_COLORS, "', '") %>']
 						},
 						border: {
 							alpha: 0.8,
@@ -137,10 +134,10 @@ int infoBlockHeight = (Integer)request.getAttribute("group-statistics:info-block
 					valueKey: 'values'
 				}
 			],
-			height: <%= infoBlockHeight - 2 %>,
+			height: <%= displayHeight - 2 %>,
 			tooltip: tooltip,
 			type: 'pie',
-			width: <%= infoBlockHeight - 2 %>
+			width: <%= displayHeight - 2 %>
 		}
 	).render(chartContainer);
 
@@ -150,10 +147,14 @@ int infoBlockHeight = (Integer)request.getAttribute("group-statistics:info-block
 			var width = chartContainer.width();
 
 			if (width && (event.type == 'portletMoved' && event.portletId == '<%= portletDisplay.getId() %>') ||
-				(event.type == 'liferaypanel:collapse' && event.panelId  == 'groupStatisticsPanel<%= counterIndex %>')) {
+				(event.type == 'liferaypanel:collapse' && event.panelId == 'groupStatisticsPanel<%= displayActivityCounterNameIndex %>')) {
 
 				chart.set('width', width);
 			}
 		}
 	);
 </aui:script>
+
+<%!
+private static final String[] _BACKGROUND_COLORS = new String[] {"#4572A7", "#AA4643", "#89A54E", "#80699B", "#3D96AE", "#DB843D", "#92A8CD", "#A47D7C", "#B5CA92"};
+%>
