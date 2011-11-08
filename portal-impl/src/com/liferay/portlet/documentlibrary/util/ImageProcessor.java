@@ -157,54 +157,56 @@ public class ImageProcessor extends DLPreviewableProcessor {
 
 	private void _generateImages(FileVersion fileVersion) {
 		try {
-			if (PropsValues.DL_FILE_ENTRY_THUMBNAIL_ENABLED) {
-				InputStream inputStream = fileVersion.getContentStream(false);
+			if (!PropsValues.DL_FILE_ENTRY_THUMBNAIL_ENABLED) {
+				return;
+			}
 
-				byte[] bytes = FileUtil.getBytes(inputStream);
+			InputStream inputStream = fileVersion.getContentStream(false);
 
-				ImageBag imageBag = ImageProcessorUtil.read(bytes);
+			byte[] bytes = FileUtil.getBytes(inputStream);
 
-				RenderedImage renderedImage = imageBag.getRenderedImage();
+			ImageBag imageBag = ImageProcessorUtil.read(bytes);
 
-				if (renderedImage == null) {
-					return;
-				}
+			RenderedImage renderedImage = imageBag.getRenderedImage();
 
-				String type = _instance._getType(fileVersion);
+			if (renderedImage == null) {
+				return;
+			}
+
+			String type = _instance._getType(fileVersion);
+
+			_saveThumbnailImage(
+				fileVersion, renderedImage,
+				PropsKeys.DL_FILE_ENTRY_THUMBNAIL_MAX_HEIGHT,
+				PropsKeys.DL_FILE_ENTRY_THUMBNAIL_MAX_WIDTH,
+				getThumbnailFilePath(fileVersion, type));
+
+			if ((PrefsPropsUtil.getInteger(
+					PropsKeys.
+						DL_FILE_ENTRY_THUMBNAIL_CUSTOM_1_MAX_HEIGHT) > 0) ||
+				(PrefsPropsUtil.getInteger(
+					PropsKeys.
+						DL_FILE_ENTRY_THUMBNAIL_CUSTOM_1_MAX_WIDTH) > 0)) {
 
 				_saveThumbnailImage(
 					fileVersion, renderedImage,
-					PropsKeys.DL_FILE_ENTRY_THUMBNAIL_MAX_HEIGHT,
-					PropsKeys.DL_FILE_ENTRY_THUMBNAIL_MAX_WIDTH,
-					getThumbnailFilePath(fileVersion, type));
+					PropsKeys.DL_FILE_ENTRY_THUMBNAIL_CUSTOM_1_MAX_HEIGHT,
+					PropsKeys.DL_FILE_ENTRY_THUMBNAIL_CUSTOM_1_MAX_WIDTH,
+					_getCustom1FilePath(fileVersion, type));
+			}
 
-				if ((PrefsPropsUtil.getInteger(
-						PropsKeys.
-							DL_FILE_ENTRY_THUMBNAIL_CUSTOM_1_MAX_HEIGHT) > 0) ||
-					(PrefsPropsUtil.getInteger(
-						PropsKeys.
-							DL_FILE_ENTRY_THUMBNAIL_CUSTOM_1_MAX_WIDTH) > 0)) {
+			if ((PrefsPropsUtil.getInteger(
+					PropsKeys.
+						DL_FILE_ENTRY_THUMBNAIL_CUSTOM_2_MAX_HEIGHT) > 0) ||
+				(PrefsPropsUtil.getInteger(
+					PropsKeys.
+						DL_FILE_ENTRY_THUMBNAIL_CUSTOM_2_MAX_WIDTH) > 0)) {
 
-					_saveThumbnailImage(
-						fileVersion, renderedImage,
-						PropsKeys.DL_FILE_ENTRY_THUMBNAIL_CUSTOM_1_MAX_HEIGHT,
-						PropsKeys.DL_FILE_ENTRY_THUMBNAIL_CUSTOM_1_MAX_WIDTH,
-						_getCustom1FilePath(fileVersion, type));
-				}
-
-				if ((PrefsPropsUtil.getInteger(
-						PropsKeys.
-							DL_FILE_ENTRY_THUMBNAIL_CUSTOM_2_MAX_HEIGHT) > 0) ||
-					(PrefsPropsUtil.getInteger(
-						PropsKeys.
-							DL_FILE_ENTRY_THUMBNAIL_CUSTOM_2_MAX_WIDTH) > 0)) {
-
-					_saveThumbnailImage(
-						fileVersion, renderedImage,
-						PropsKeys.DL_FILE_ENTRY_THUMBNAIL_CUSTOM_2_MAX_HEIGHT,
-						PropsKeys.DL_FILE_ENTRY_THUMBNAIL_CUSTOM_2_MAX_WIDTH,
-						_getCustom2FilePath(fileVersion, type));
-				}
+				_saveThumbnailImage(
+					fileVersion, renderedImage,
+					PropsKeys.DL_FILE_ENTRY_THUMBNAIL_CUSTOM_2_MAX_HEIGHT,
+					PropsKeys.DL_FILE_ENTRY_THUMBNAIL_CUSTOM_2_MAX_WIDTH,
+					_getCustom2FilePath(fileVersion, type));
 			}
 		}
 		catch (NoSuchFileEntryException nsfee) {
@@ -297,7 +299,7 @@ public class ImageProcessor extends DLPreviewableProcessor {
 						DL_FILE_ENTRY_THUMBNAIL_CUSTOM_1_MAX_HEIGHT) > 0) ||
 				(PrefsPropsUtil.getInteger(
 					PropsKeys.
-						DL_FILE_ENTRY_THUMBNAIL_CUSTOM_1_MAX_HEIGHT) > 0)) {
+						DL_FILE_ENTRY_THUMBNAIL_CUSTOM_1_MAX_WIDTH) > 0)) {
 
 				if (!_hasCustomImage(fileVersion, 1)) {
 					return false;
@@ -309,7 +311,7 @@ public class ImageProcessor extends DLPreviewableProcessor {
 							DL_FILE_ENTRY_THUMBNAIL_CUSTOM_2_MAX_HEIGHT) > 0) ||
 					(PrefsPropsUtil.getInteger(
 						PropsKeys.
-							DL_FILE_ENTRY_THUMBNAIL_CUSTOM_2_MAX_HEIGHT) > 0)) {
+							DL_FILE_ENTRY_THUMBNAIL_CUSTOM_2_MAX_WIDTH) > 0)) {
 
 				if (!_hasCustomImage(fileVersion, 2)) {
 					return false;
@@ -381,10 +383,11 @@ public class ImageProcessor extends DLPreviewableProcessor {
 			int width)
 		throws IOException {
 
-		RenderedImage thumbnail = ImageProcessorUtil.scale(
+		RenderedImage thumbnailRenderedImage = ImageProcessorUtil.scale(
 			renderedImage, height, width);
 
-		byte[] bytes = ImageProcessorUtil.getBytes(thumbnail, contentType);
+		byte[] bytes = ImageProcessorUtil.getBytes(
+			thumbnailRenderedImage, contentType);
 
 		return FileUtil.createTempFile(bytes);
 	}

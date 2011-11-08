@@ -495,13 +495,13 @@ public class EditServerAction extends PortletAction {
 			ActionRequest actionRequest, PortletPreferences preferences)
 		throws Exception {
 
-		String dlFileExtensions = getFileExtensions(
-			actionRequest, "dlFileExtensions");
-		long dlFileMaxSize = ParamUtil.getLong(actionRequest, "dlFileMaxSize");
 		long dlFileEntryThumbnailMaxHeight = ParamUtil.getLong(
 			actionRequest, "dlFileEntryThumbnailMaxHeight");
 		long dlFileEntryThumbnailMaxWidth = ParamUtil.getLong(
 			actionRequest, "dlFileEntryThumbnailMaxWidth");
+		String dlFileExtensions = getFileExtensions(
+			actionRequest, "dlFileExtensions");
+		long dlFileMaxSize = ParamUtil.getLong(actionRequest, "dlFileMaxSize");
 		String journalImageExtensions = getFileExtensions(
 			actionRequest, "journalImageExtensions");
 		long journalImageSmallMaxSize = ParamUtil.getLong(
@@ -528,15 +528,15 @@ public class EditServerAction extends PortletAction {
 			actionRequest, "usersImageMaxSize");
 
 		preferences.setValue(
-			PropsKeys.DL_FILE_EXTENSIONS, dlFileExtensions);
-		preferences.setValue(
-			PropsKeys.DL_FILE_MAX_SIZE, String.valueOf(dlFileMaxSize));
-		preferences.setValue(
 			PropsKeys.DL_FILE_ENTRY_THUMBNAIL_MAX_HEIGHT,
 			String.valueOf(dlFileEntryThumbnailMaxHeight));
 		preferences.setValue(
 			PropsKeys.DL_FILE_ENTRY_THUMBNAIL_MAX_WIDTH,
 			String.valueOf(dlFileEntryThumbnailMaxWidth));
+		preferences.setValue(
+			PropsKeys.DL_FILE_EXTENSIONS, dlFileExtensions);
+		preferences.setValue(
+			PropsKeys.DL_FILE_MAX_SIZE, String.valueOf(dlFileMaxSize));
 		preferences.setValue(
 			PropsKeys.JOURNAL_IMAGE_EXTENSIONS, journalImageExtensions);
 		preferences.setValue(

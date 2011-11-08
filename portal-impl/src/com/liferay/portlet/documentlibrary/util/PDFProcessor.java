@@ -314,7 +314,8 @@ public class PDFProcessor extends DefaultPreviewableProcessor {
 				PrefsPropsUtil.getInteger(
 					PropsKeys.DL_FILE_ENTRY_THUMBNAIL_MAX_HEIGHT),
 				PrefsPropsUtil.getInteger(
-					PropsKeys.DL_FILE_ENTRY_THUMBNAIL_MAX_WIDTH), true);
+					PropsKeys.DL_FILE_ENTRY_THUMBNAIL_MAX_WIDTH),
+				true);
 
 			if (_log.isInfoEnabled()) {
 				_log.info(
@@ -451,8 +452,8 @@ public class PDFProcessor extends DefaultPreviewableProcessor {
 						PrefsPropsUtil.getInteger(
 							PropsKeys.DL_FILE_ENTRY_THUMBNAIL_MAX_HEIGHT),
 						PrefsPropsUtil.getInteger(
-							PropsKeys.DL_FILE_ENTRY_THUMBNAIL_MAX_WIDTH), true,
-						0);
+							PropsKeys.DL_FILE_ENTRY_THUMBNAIL_MAX_WIDTH),
+						true, 0);
 
 					if (_log.isInfoEnabled()) {
 						_log.info(

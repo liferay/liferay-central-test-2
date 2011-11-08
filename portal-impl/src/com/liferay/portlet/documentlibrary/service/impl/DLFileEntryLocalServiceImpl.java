@@ -915,12 +915,13 @@ public class DLFileEntryLocalServiceImpl
 				int width = PrefsPropsUtil.getInteger(
 					PropsKeys.DL_FILE_ENTRY_THUMBNAIL_MAX_WIDTH);
 
-				RenderedImage thumbnail = ImageProcessorUtil.scale(
-					renderedImage, height, width);
+				RenderedImage thumbnailRenderedImage =
+					ImageProcessorUtil.scale(renderedImage, height, width);
 
 				imageLocalService.updateImage(
 					smallImageId,
-					ImageProcessorUtil.getBytes(thumbnail, contentType));
+					ImageProcessorUtil.getBytes(
+						thumbnailRenderedImage, contentType));
 			}
 		}
 		catch (IOException ioe) {
