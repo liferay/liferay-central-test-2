@@ -175,7 +175,7 @@ public class SitesUtil {
 		try {
 			LayoutLocalServiceUtil.importLayouts(
 				userId, targetLayout.getGroupId(),
-				targetLayout.isPrivateLayout(),	parameterMap, file);
+				targetLayout.isPrivateLayout(), parameterMap, file);
 		}
 		finally {
 			file.delete();

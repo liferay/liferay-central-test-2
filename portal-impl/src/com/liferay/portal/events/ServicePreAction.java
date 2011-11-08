@@ -398,7 +398,7 @@ public class ServicePreAction extends Action {
 
 		if (layout != null) {
 			try {
-				if (processLayoutSetPrototype(layout, user)) {
+				if (processLayoutSetPrototype(user, layout)) {
 					layout = LayoutLocalServiceUtil.getLayout(layout.getPlid());
 				}
 			}
@@ -2000,15 +2000,15 @@ public class ServicePreAction extends Action {
 		}
 	}
 
-	protected boolean processLayoutSetPrototype(Layout layout, User user)
+	protected boolean processLayoutSetPrototype(User user, Layout layout)
 		throws Exception {
 
 		if (SitesUtil.isLayoutToBeUpdatedFromTemplate(layout)) {
 			Layout templateLayout = LayoutTypePortletImpl.getTemplateLayout(
 				layout);
 
-			SitesUtil.copyLayout(user.getUserId(), templateLayout, layout,
-				new ServiceContext());
+			SitesUtil.copyLayout(
+				user.getUserId(), templateLayout, layout, new ServiceContext());
 
 			layout = LayoutLocalServiceUtil.getLayout(layout.getPlid());
 
