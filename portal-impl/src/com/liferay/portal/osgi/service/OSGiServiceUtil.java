@@ -445,14 +445,16 @@ public class OSGiServiceUtil {
 	}
 
 	private void _start() throws Exception {
-		if (_framework != null) {
-			FrameworkStartLevel frameworkStartLevel = _framework.adapt(
-				FrameworkStartLevel.class);
-
-			frameworkStartLevel.setStartLevel(
-				PropsValues.OSGI_FRAMEWORK_RUNTIME_START_LEVEL,
-				(FrameworkListener[])null);
+		if (_framework == null) {
+			return;
 		}
+
+		FrameworkStartLevel frameworkStartLevel = _framework.adapt(
+			FrameworkStartLevel.class);
+
+		frameworkStartLevel.setStartLevel(
+			PropsValues.OSGI_FRAMEWORK_RUNTIME_START_LEVEL,
+			(FrameworkListener[])null);
 	}
 
 	private void _startBundle(long bundleId) throws PortalException {
@@ -496,20 +498,24 @@ public class OSGiServiceUtil {
 	}
 
 	private void _stopFramework() throws Exception {
-		if (_framework != null) {
-			_framework.stop();
+		if (_framework == null) {
+			return;
 		}
+
+		_framework.stop();
 	}
 
 	private void _stopRuntime() throws Exception {
-		if (_framework != null) {
-			FrameworkStartLevel frameworkStartLevel = _framework.adapt(
-				FrameworkStartLevel.class);
-
-			frameworkStartLevel.setStartLevel(
-				PropsValues.OSGI_FRAMEWORK_BEGINNING_START_LEVEL,
-				(FrameworkListener[])null);
+		if (_framework == null) {
+			return;
 		}
+
+		FrameworkStartLevel frameworkStartLevel = _framework.adapt(
+			FrameworkStartLevel.class);
+
+		frameworkStartLevel.setStartLevel(
+			PropsValues.OSGI_FRAMEWORK_BEGINNING_START_LEVEL,
+			(FrameworkListener[])null);
 	}
 
 	private void _stopBundle(long bundleId) throws PortalException {
