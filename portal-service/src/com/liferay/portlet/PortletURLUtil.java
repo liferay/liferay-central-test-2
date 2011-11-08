@@ -226,7 +226,7 @@ public class PortletURLUtil {
 
 				if (!PortalUtil.isReservedParameter(name) &&
 					!name.equals("currentURL") &&
-					!isReservedParamInUrlRefresh(name, namespace)) {
+					!isRefreshURLReservedParameter(name, namespace)) {
 
 					String[] values = entry.getValue();
 
@@ -252,30 +252,27 @@ public class PortletURLUtil {
 		return sb.toString();
 	}
 
-	protected static boolean isReservedParamInUrlRefresh(
+	protected static boolean isRefreshURLReservedParameter(
 		String parameter, String namespace) {
 
 		if ((_PORTLET_URL_REFRESH_URL_RESERVED_PARAMETERS == null) ||
-			(_PORTLET_URL_REFRESH_URL_RESERVED_PARAMETERS.length == 0) ||
-			(_PORTLET_URL_REFRESH_URL_RESERVED_PARAMETERS == null)) {
+			(_PORTLET_URL_REFRESH_URL_RESERVED_PARAMETERS.length == 0)) {
 
 			return false;
 		}
-		else {
-			for (int i = 0;
-				 i < _PORTLET_URL_REFRESH_URL_RESERVED_PARAMETERS.length;
-				 i++) {
 
-				String reservedParam = namespace.concat(
-					_PORTLET_URL_REFRESH_URL_RESERVED_PARAMETERS[i]);
+		for (int i = 0; i < _PORTLET_URL_REFRESH_URL_RESERVED_PARAMETERS.length;
+				i++) {
 
-				if (parameter.equals(reservedParam)) {
-					return true;
-				}
+			String reservedParameter = namespace.concat(
+				_PORTLET_URL_REFRESH_URL_RESERVED_PARAMETERS[i]);
+
+			if (parameter.equals(reservedParameter)) {
+				return true;
 			}
-
-			return false;
 		}
+
+		return false;
 	}
 
 	private static final int _CURRENT_URL_PARAMETER_THRESHOLD = 32768;
