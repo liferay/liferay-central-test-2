@@ -42,13 +42,13 @@ import javax.servlet.http.HttpServletRequest;
 public class ActionUtil {
 
 	public static void getArticle(HttpServletRequest request) throws Exception {
+		String cmd = ParamUtil.getString(request, Constants.CMD);
+
 		long groupId = ParamUtil.getLong(request, "groupId");
 		long classNameId = ParamUtil.getLong(request, "classNameId");
 		long classPK = ParamUtil.getLong(request, "classPK");
 		String articleId = ParamUtil.getString(request, "articleId");
 		String structureId = ParamUtil.getString(request, "structureId");
-
-		String cmd = ParamUtil.getString(request, Constants.CMD);
 
 		JournalArticle article = null;
 
