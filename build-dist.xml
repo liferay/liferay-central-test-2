@@ -1362,11 +1362,12 @@ sh startWebLogic.sh</echo>
 			<available file="${zip.executable.dir}/../data" />
 			<then>
 				<delete dir="${zip.executable.dir}/../patching-tool" />
-				<mkdir dir="${zip.executable.dir}/../patching-tool" />
 
 				<if>
 					<available file="${patching.tool.source.dir}" type="dir" />
 					<then>
+						<mkdir dir="${zip.executable.dir}/../patching-tool" />
+
 						<copy todir="${zip.executable.dir}/../patching-tool">
 							<fileset
 								dir="${patching.tool.source.dir}/scripts"
