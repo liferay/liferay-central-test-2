@@ -311,8 +311,10 @@ public class PDFProcessor extends DefaultPreviewableProcessor {
 				fileVersion, file,
 				PropsValues.DL_FILE_ENTRY_THUMBNAIL_DEPTH,
 				PropsValues.DL_FILE_ENTRY_THUMBNAIL_DPI,
-				PropsValues.DL_FILE_ENTRY_THUMBNAIL_HEIGHT,
-				PropsValues.DL_FILE_ENTRY_THUMBNAIL_WIDTH, true);
+				PrefsPropsUtil.getInteger(
+					PropsKeys.DL_FILE_ENTRY_THUMBNAIL_MAX_HEIGHT),
+				PrefsPropsUtil.getInteger(
+					PropsKeys.DL_FILE_ENTRY_THUMBNAIL_MAX_WIDTH), true);
 
 			if (_log.isInfoEnabled()) {
 				_log.info(
@@ -446,8 +448,11 @@ public class PDFProcessor extends DefaultPreviewableProcessor {
 					_generateImagesPB(
 						fileVersion, pdPage,
 						PropsValues.DL_FILE_ENTRY_THUMBNAIL_DPI,
-						PropsValues.DL_FILE_ENTRY_THUMBNAIL_HEIGHT,
-						PropsValues.DL_FILE_ENTRY_THUMBNAIL_WIDTH, true, 0);
+						PrefsPropsUtil.getInteger(
+							PropsKeys.DL_FILE_ENTRY_THUMBNAIL_MAX_HEIGHT),
+						PrefsPropsUtil.getInteger(
+							PropsKeys.DL_FILE_ENTRY_THUMBNAIL_MAX_WIDTH), true,
+						0);
 
 					if (_log.isInfoEnabled()) {
 						_log.info(
