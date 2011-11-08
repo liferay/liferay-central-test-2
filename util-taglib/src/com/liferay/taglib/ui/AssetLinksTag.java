@@ -49,8 +49,8 @@ public class AssetLinksTag extends IncludeTag {
 	protected void setAttributes(HttpServletRequest request) {
 		if ((_assetEntryId <= 0) && (_classPK > 0)) {
 			try {
-				AssetEntry assetEntry = AssetEntryLocalServiceUtil.fetchEntry
-					(_className, _classPK);
+				AssetEntry assetEntry = AssetEntryLocalServiceUtil.fetchEntry(
+					_className, _classPK);
 
 				if (assetEntry != null) {
 					_assetEntryId = assetEntry.getEntryId();
