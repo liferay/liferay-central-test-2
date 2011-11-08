@@ -14,7 +14,6 @@
 
 package com.liferay.portal.upgrade.v6_1_0;
 
-import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
@@ -24,28 +23,31 @@ import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Tuple;
 import com.liferay.portal.model.User;
+import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.asset.model.AssetEntry;
 import com.liferay.portlet.asset.service.AssetEntryLocalServiceUtil;
+import com.liferay.portlet.blogs.model.BlogsEntry;
+import com.liferay.portlet.journal.model.JournalArticle;
+import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.portlet.messageboards.service.MBThreadLocalServiceUtil;
+import com.liferay.portlet.social.model.SocialActivityConstants;
 import com.liferay.portlet.social.model.SocialActivityCounterConstants;
 import com.liferay.portlet.social.model.SocialActivityCounterDefinition;
 import com.liferay.portlet.social.util.SocialCounterPeriodUtil;
+import com.liferay.portlet.wiki.model.WikiNode;
+import com.liferay.portlet.wiki.model.WikiPage;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -53,207 +55,175 @@ import java.util.Map;
  */
 public class UpgradeSocial extends UpgradeProcess {
 
-	@Override
-	protected void doUpgrade() throws Exception {
-		buildMapping();
+	public UpgradeSocial() {
+		putEquityToActivityMap(
+			BlogsEntry.class, ActionKeys.ADD_DISCUSSION,
+			SocialActivityConstants.TYPE_ADD_COMMENT);
+		putEquityToActivityMap(BlogsEntry.class, ActionKeys.ADD_ENTRY, 2);
+		putEquityToActivityMap(
+			BlogsEntry.class, ActionKeys.ADD_VOTE,
+			SocialActivityConstants.TYPE_ADD_VOTE);
+		putEquityToActivityMap(
+			BlogsEntry.class, ActionKeys.SUBSCRIBE,
+			SocialActivityConstants.TYPE_SUBSCRIBE);
+		putEquityToActivityMap(BlogsEntry.class, ActionKeys.UPDATE, 3);
+		putEquityToActivityMap(
+			BlogsEntry.class, ActionKeys.VIEW,
+			SocialActivityConstants.TYPE_VIEW);
 
-		migrateSocialEquityGroupSettings();
+		putEquityToActivityMap(JournalArticle.class, ActionKeys.ADD_ARTICLE, 1);
+		putEquityToActivityMap(
+			JournalArticle.class, ActionKeys.ADD_DISCUSSION,
+			SocialActivityConstants.TYPE_ADD_COMMENT);
+		putEquityToActivityMap(JournalArticle.class, ActionKeys.UPDATE, 2);
+		putEquityToActivityMap(
+			JournalArticle.class, ActionKeys.VIEW,
+			SocialActivityConstants.TYPE_VIEW);
 
-		migrateSocialEquitySettings();
+		putEquityToActivityMap(
+			MBCategory.class, ActionKeys.SUBSCRIBE,
+			SocialActivityConstants.TYPE_SUBSCRIBE);
+		putEquityToActivityMap(MBMessage.class, ActionKeys.ADD_MESSAGE, 1);
+		putEquityToActivityMap(
+			MBMessage.class, ActionKeys.ADD_VOTE,
+			SocialActivityConstants.TYPE_ADD_VOTE);
+		putEquityToActivityMap(MBMessage.class, ActionKeys.REPLY_TO_MESSAGE, 2);
+		putEquityToActivityMap(
+			MBMessage.class, ActionKeys.VIEW,
+			SocialActivityConstants.TYPE_VIEW);
+		putEquityToActivityMap(
+			MBThread.class, ActionKeys.SUBSCRIBE, MBMessage.class,
+			SocialActivityConstants.TYPE_SUBSCRIBE);
 
-		migrateSocialEquityLogs();
+		putEquityToActivityMap(
+			WikiNode.class, ActionKeys.SUBSCRIBE,
+			SocialActivityConstants.TYPE_SUBSCRIBE);
+		putEquityToActivityMap(
+			WikiPage.class, ActionKeys.ADD_ATTACHMENT,
+			SocialActivityConstants.TYPE_ADD_ATTACHMENT);
+		putEquityToActivityMap(
+			WikiPage.class, ActionKeys.ADD_DISCUSSION,
+			SocialActivityConstants.TYPE_ADD_COMMENT);
+		putEquityToActivityMap(WikiPage.class, ActionKeys.ADD_PAGE, 1);
+		putEquityToActivityMap(
+			WikiPage.class, ActionKeys.SUBSCRIBE,
+			SocialActivityConstants.TYPE_SUBSCRIBE);
+		putEquityToActivityMap(WikiPage.class, ActionKeys.UPDATE, 2);
+		putEquityToActivityMap(
+			WikiPage.class, ActionKeys.VIEW, SocialActivityConstants.TYPE_VIEW);
 	}
 
-	protected void migrateSocialEquityLogs() throws Exception {
+	protected void addActivityCounter(
+			long activityCounterId, long groupId, long companyId,
+			long classNameId, long classPK, String name, int ownerType,
+			int currentValue, int totalValue, int graceValue, int startPeriod,
+			int endPeriod)
+		throws Exception {
+
 		Connection con = null;
-		Statement st = null;
+		PreparedStatement ps = null;
 		ResultSet rs = null;
 
 		try {
-			long userClassNameId = PortalUtil.getClassNameId(User.class);
-
 			con = DataAccess.getConnection();
 
-			st = con.createStatement();
+			StringBundler sb = new StringBundler();
 
-			rs = st.executeQuery(_GET_EQUITY_LOGS);
+			sb.append("insert into SocialActivityCounter (activityCounterId, ");
+			sb.append("groupId, companyId, classNameId, classPK, name, ");
+			sb.append("ownerType, currentValue, totalValue, graceValue, ");
+			sb.append("startPeriod, endPeriod) values (?, ?, ?, ?, ?, ?, ?)");
 
-			while (rs.next()) {
-				AssetEntry assetEntry =
-					AssetEntryLocalServiceUtil.fetchAssetEntry(
-						rs.getLong("assetEntryId"));
+			ps = con.prepareStatement(sb.toString());
 
-				if (assetEntry == null) {
-					continue;
-				}
+			ps.setLong(1, activityCounterId);
+			ps.setLong(2, groupId);
+			ps.setLong(3, companyId);
+			ps.setLong(4, classNameId);
+			ps.setLong(5, classPK);
+			ps.setString(6, name);
+			ps.setInt(7, ownerType);
+			ps.setInt(8, currentValue);
+			ps.setInt(9, totalValue);
+			ps.setInt(10, graceValue);
+			ps.setInt(11, startPeriod);
+			ps.setInt(12, endPeriod);
 
-				String actionId = rs.getString("actionId");
-
-				if (actionId.equals("SUBSCRIBE")) {
-					String className = assetEntry.getClassName();
-
-					if (className.equals(MBThread.class.getName())) {
-						MBThread thread = MBThreadLocalServiceUtil.fetchThread(
-							assetEntry.getClassPK());
-
-						assetEntry = AssetEntryLocalServiceUtil.fetchEntry(
-							MBMessage.class.getName(),
-							thread.getRootMessageId());
-					}
-				}
-
-				Date actionDate = SocialCounterPeriodUtil.getDate(
-					rs.getInt("actionDate") - 365);
-
-				int startPeriod = SocialCounterPeriodUtil.getStartPeriod(
-					actionDate.getTime());
-				int endPeriod = SocialCounterPeriodUtil.getEndPeriod(
-					actionDate.getTime());
-
-				if (endPeriod == SocialCounterPeriodUtil.getEndPeriod()) {
-					endPeriod =
-						SocialActivityCounterConstants.END_PERIOD_UNDEFINED;
-				}
-
-				String name =
-					SocialActivityCounterConstants.NAME_PARTICIPATION;
-				int ownerType =
-					SocialActivityCounterConstants.TYPE_ACTOR;
-				long classNameId = userClassNameId;
-				long classPK = rs.getLong("userId");
-
-				if (rs.getInt("type_") == 1) {
-					name = SocialActivityCounterConstants.NAME_CONTRIBUTION;
-					ownerType = SocialActivityCounterConstants.TYPE_CREATOR;
-					long activityCounterId =
-						CounterLocalServiceUtil.increment();
-
-					updateActivityCounter(
-						activityCounterId, assetEntry.getGroupId(),
-						assetEntry.getCompanyId(), userClassNameId,
-						assetEntry.getUserId(), name, ownerType, startPeriod,
-						endPeriod, rs.getInt("value"));
-
-					name = SocialActivityCounterConstants.NAME_POPULARITY;
-					ownerType = SocialActivityCounterConstants.TYPE_ASSET;
-					classNameId = assetEntry.getClassNameId();
-					classPK = assetEntry.getClassPK();
-				}
-
-				updateActivityCounter(
-					rs.getLong("equityLogId"), assetEntry.getGroupId(),
-					assetEntry.getCompanyId(), classNameId, classPK, name,
-					ownerType, startPeriod, endPeriod, rs.getInt("value"));
-			}
-
-			runSQL(
-				"update SocialActivityCounter set endPeriod = -1 " +
-				"where name in ('contribution','popularity','participation') " +
-				"and startPeriod = ( "+
-					" select max(startPeriod) " +
-					" from SocialActivityCounter sac " +
-					" where sac.groupId = SocialActivityCounter.groupId " +
-					" and sac.classNameId = SocialActivityCounter.classNameId" +
-					" and sac.classPK = SocialActivityCounter.classPK " +
-					" and sac.name = SocialActivityCounter.name)");
+			ps.executeUpdate();
 		}
 		finally {
-			DataAccess.cleanUp(con, st, rs);
+			DataAccess.cleanUp(con, ps, rs);
 		}
 	}
 
-	protected void migrateSocialEquityGroupSettings()
+	protected void addActivitySetting(
+			long groupId, long companyId, long classNameId, int activityType,
+			String name, int ownerType, int limitValue, int value)
 		throws Exception {
 
-		List<Object[]> results =
-			runQuery(_GET_EQUITY_GROUP_SETTINGS, new Object[0]);
+		JSONObject valueJSONObject = JSONFactoryUtil.createJSONObject();
 
-		for (Object[] array : results) {
-			String[] args = new String[] {
-				String.valueOf(CounterLocalServiceUtil.increment()),
-				array[0].toString(),
-				array[1].toString(),
-				array[2].toString(),
-				"0",
-				"'enabled'",
-				array[3].toString()
-			};
+		valueJSONObject.put("enabled", true);
+		valueJSONObject.put(
+			"limitPeriod", SocialActivityCounterDefinition.LIMIT_PERIOD_DAY);
+		valueJSONObject.put("limitValue", limitValue);
+		valueJSONObject.put("ownerType", ownerType);
+		valueJSONObject.put("value", value);
 
-			runSQL(
-				"insert into SocialActivitySetting " +
-				"(activitySettingId, groupId, companyId, classNameId," +
-				" activityType, name, value) " +
-				"values ("+ StringUtil.merge(args)+")");
-		}
-
-		long mBMessageClassNameId = PortalUtil.getClassNameId(MBMessage.class);
-		long mBThreadClassNameId = PortalUtil.getClassNameId(MBThread.class);
-
-		runSQL(
-			"update SocialActivitySetting " +
-			"set value = 'true' " +
-			"where classNameId = " + mBMessageClassNameId +
-			" and activityType = 0 and name = 'enabled' " +
-			" and exists (" +
-				"select 1 from SocialActivitySetting sas " +
-				"where sas.groupId = SocialActivitySetting.groupId " +
-				"and sas.activityType = 0 and sas.name = 'enabled' " +
-				"and value = 'true' " +
-				"and sas.classNameId in (" + mBMessageClassNameId + "," +
-					mBThreadClassNameId + ")" +
-				")");
-
-		runSQL(
-			"delete from SocialActivitySetting " +
-			"where classNameId = " + mBThreadClassNameId);
+		addActivitySetting(
+			increment(), groupId, companyId, classNameId, activityType,
+			name, valueJSONObject.toString());
 	}
 
-	protected void migrateSocialEquitySettings()
+	protected void addActivitySetting(
+			long activitySettingId, long groupId, long companyId,
+			long classNameId, int activityType, String name, String value)
 		throws Exception {
 
-		List<Object[]> results =
-			runQuery(_GET_EQUITY_SETTINGS, new Object[0]);
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
 
-		for (Object[] array : results) {
-			Tuple activity = _mapping.get(
-				encodeMappingKey(
-					GetterUtil.getLong(array[2]), array[3].toString()));
+		try {
+			con = DataAccess.getConnection();
 
-			if (activity == null) {
-				_log.warn("Unknown social equity setting '" + array[3] + "' " +
-					"was found. If this is an action defined in plugin " +
-					"please go to social activity in control panel and " +
-					"configure it from there.");
+			ps = con.prepareStatement(
+				"insert into SocialActivitySetting (activitySettingId, " +
+					"groupId, companyId, classNameId, activityType, name, " +
+						"value) values (?, ?, ?, ?, ?, ?, ?)");
 
-				continue;
-			}
+			ps.setLong(1, activitySettingId);
+			ps.setLong(2, groupId);
+			ps.setLong(3, companyId);
+			ps.setLong(4, classNameId);
+			ps.setInt(5, activityType);
+			ps.setString(6, name);
+			ps.setString(7, value);
 
-			for (String counter :
-					_typeMapping[GetterUtil.getInteger(array[6])]) {
-
-				String[] parts = StringUtil.split(counter, "/");
-
-				String[] args = new String[] {
-					String.valueOf(CounterLocalServiceUtil.increment()),
-					array[0].toString(),
-					array[1].toString(),
-					activity.getObject(0).toString(),
-					activity.getObject(1).toString(),
-					StringUtil.quote(parts[0]),
-					StringUtil.quote(
-						toJSON(true, GetterUtil.getInteger(array[4]),
-							SocialActivityCounterDefinition.LIMIT_PERIOD_DAY,
-							GetterUtil.getInteger(parts[1]),
-							GetterUtil.getInteger(array[7])))
-				};
-
-				runSQL(
-					"insert into SocialActivitySetting " +
-					"(activitySettingId, groupId, companyId, classNameId," +
-					" activityType, name, value) " +
-					"values (" + StringUtil.merge(args) + ")");
-			}
+			ps.executeUpdate();
 		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
+	}
+
+	@Override
+	protected void doUpgrade() throws Exception {
+		migrateEquityGroupSettings();
+		migrateEquitySettings();
+		migrateEquityLogs();
+	}
+
+	protected String encodeEquityToActivityKey(
+		long classNameId, String actionId) {
+
+		StringBundler sb = new StringBundler(3);
+
+		sb.append(classNameId);
+		sb.append(StringPool.POUND);
+		sb.append(actionId);
+
+		return sb.toString();
 	}
 
 	protected Object[] getActivityCounter(
@@ -268,7 +238,14 @@ public class UpgradeSocial extends UpgradeProcess {
 		try {
 			con = DataAccess.getConnection();
 
-			ps = con.prepareStatement(_GET_ACTIVITY_COUNTER);
+			StringBundler sb = new StringBundler(4);
+
+			sb.append("select activityCounterId, totalValue from ");
+			sb.append("SocialActivityCounter where groupId = ? and ");
+			sb.append("classNameId = ? and classPK = ? and  name = ? and ");
+			sb.append("ownerType = ? and startPeriod = ? and endPeriod = ?");
+
+			ps = con.prepareStatement(sb.toString());
 
 			ps.setLong(1, groupId);
 			ps.setLong(2, classNameId);
@@ -281,10 +258,10 @@ public class UpgradeSocial extends UpgradeProcess {
 			rs = ps.executeQuery();
 
 			if (rs.next()) {
-				return new Object[] {
-					rs.getLong("activityCounterId"),
-					rs.getInt("totalValue")
-				};
+				long activityCounterId = rs.getLong("activityCounterId");
+				int totalValue = rs.getInt("totalValue");
+
+				return new Object[] {activityCounterId, totalValue};
 			}
 
 			return null;
@@ -294,7 +271,7 @@ public class UpgradeSocial extends UpgradeProcess {
 		}
 	}
 
-	protected int getTotalValueForActivityCounter(
+	protected int getTotalValue(
 			long groupId, long classNameId, long classPK, String name,
 			int ownerType, int startPeriod)
 		throws Exception {
@@ -306,7 +283,14 @@ public class UpgradeSocial extends UpgradeProcess {
 		try {
 			con = DataAccess.getConnection();
 
-			ps = con.prepareStatement(_GET_TOTAL_VALUE_FOR_ACTIVITY_COUNTER);
+			StringBundler sb = new StringBundler(4);
+
+			sb.append("select max(totalValue) as totalValue from ");
+			sb.append("SocialActivityCounter where groupId = ? and ");
+			sb.append("classNameId = ? and classPK = ? and  name = ? and ");
+			sb.append("ownerType = ? and startPeriod < ?");
+
+			ps = con.prepareStatement(sb.toString());
 
 			ps.setLong(1, groupId);
 			ps.setLong(2, classNameId);
@@ -328,100 +312,7 @@ public class UpgradeSocial extends UpgradeProcess {
 		}
 	}
 
-	protected void updateActivityCounter(
-			long activityCounterId, long groupId, long companyId,
-			long classNameId, long classPK, String name, int ownerType,
-			int startPeriod, int endPeriod, int increment)
-		throws Exception {
-
-		Object[] array = getActivityCounter(
-			groupId, classNameId, classPK, name, ownerType, startPeriod,
-			endPeriod);
-
-		if (array == null) {
-			int totalValue = getTotalValueForActivityCounter(
-				groupId, classNameId, classPK, name, ownerType, startPeriod);
-
-			String[] values = new String[] {
-				String.valueOf(activityCounterId),
-				String.valueOf(groupId),
-				String.valueOf(companyId),
-				String.valueOf(classNameId),
-				String.valueOf(classPK),
-				StringUtil.quote(name),
-				String.valueOf(ownerType),
-				String.valueOf(increment),
-				String.valueOf(totalValue + increment),
-				"0",
-				String.valueOf(startPeriod),
-				String.valueOf(endPeriod)
-			};
-
-			runSQL(
-				"insert into SocialActivityCounter " +
-					"(activityCounterId, groupId, companyId, classNameId," +
-					" classPK, name, ownerType, currentValue, totalValue," +
-					" graceValue, startPeriod, endPeriod)" +
-				"values (" + StringUtil.merge(values) + ")");
-		}
-		else {
-			runSQL(
-				"update SocialActivityCounter " +
-					"set currentValue = currentValue + " + increment +
-					", totalValue = totalValue + " + increment +
-				" where activityCounterId = " +
-				GetterUtil.getLong(array[0]));
-		}
-	}
-
-	private void buildMapping() {
-		for (String mappingString : _mappingStrings) {
-			String[] array = StringUtil.split(mappingString, StringPool.COLON);
-
-			String[] socialEquityParts = StringUtil.split(
-				array[0], StringPool.SLASH);
-			String[] socialAcitvityParts = StringUtil.split(
-				array[1], StringPool.SLASH);
-
-			long equityClassNameId =
-				PortalUtil.getClassNameId(socialEquityParts[0]);
-			long activityClassNameId =
-				PortalUtil.getClassNameId(socialAcitvityParts[0]);
-			int activityType = GetterUtil.getInteger(socialAcitvityParts[1]);
-
-			_mapping.put(
-				encodeMappingKey(equityClassNameId, socialEquityParts[1]),
-				new Tuple(activityClassNameId, activityType));
-		}
-	}
-
-	private String toJSON(
-		boolean enabled, int limitValue, int limitPeriod, int ownerType,
-		int value) {
-
-		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
-
-		jsonObject.put("enabled", enabled);
-		jsonObject.put("limitPeriod", limitPeriod);
-		jsonObject.put("limitValue", limitValue);
-		jsonObject.put("ownerType", ownerType);
-		jsonObject.put("value", value);
-
-		return jsonObject.toString();
-	}
-
-	private String encodeMappingKey(long classNameId, String actionId) {
-
-		StringBundler sb = new StringBundler(3);
-
-		sb.append(classNameId);
-		sb.append(StringPool.SLASH);
-		sb.append(actionId);
-
-		return sb.toString();
-	}
-
-	private List<Object[]> runQuery(String sql, Object[] params)
+	protected void migrateEquityGroupSettings()
 		throws Exception {
 
 		Connection con = null;
@@ -431,122 +322,317 @@ public class UpgradeSocial extends UpgradeProcess {
 		try {
 			con = DataAccess.getConnection();
 
-			ps = con.prepareStatement(sql);
-
-			for (int i = 0; i < params.length; i++) {
-				ps.setObject(i + 1,  params[i]);
-			}
+			ps = con.prepareStatement(
+				"select groupId, companyId, classNameId, enabled from " +
+					"SocialEquityGroupSetting where type_ = 1");
 
 			rs = ps.executeQuery();
 
-			List<Object[]> results = new ArrayList<Object[]>();
-
 			while (rs.next()) {
-				Object[] array = new Object[rs.getMetaData().getColumnCount()];
+				long groupId = rs.getLong("groupId");
+				long companyId = rs.getLong("companyId");
+				long classNameId = rs.getLong("classNameId");
+				boolean enabled = rs.getBoolean("enabled");
 
-				for (int i = 0; i < array.length; i++) {
-					array[i] = rs.getObject(i + 1);
+				addActivitySetting(
+					increment(), groupId, companyId, classNameId, 0, "enabled",
+					String.valueOf(enabled));
+			}
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
+
+		StringBundler sb = new StringBundler(12);
+
+		sb.append("update SocialActivitySetting set value = TRUE where ");
+		sb.append("classNameId = ");
+
+		long mbMessageClassNameId = PortalUtil.getClassNameId(MBMessage.class);
+
+		sb.append(mbMessageClassNameId);
+
+		sb.append(" and activityType = 0 and name = 'enabled' and exists ");
+		sb.append("(select 1 from SocialActivitySetting sas where ");
+		sb.append("sas.groupId = SocialActivitySetting.groupId and ");
+		sb.append("sas.activityType = 0 and sas.name = 'enabled' and ");
+		sb.append("value = 'true' and sas.classNameId in (");
+		sb.append(mbMessageClassNameId);
+		sb.append(", ");
+
+		long mbThreadClassNameId = PortalUtil.getClassNameId(MBThread.class);
+
+		sb.append(mbThreadClassNameId);
+
+		sb.append("))");
+
+		runSQL(sb.toString());
+
+		runSQL(
+			"delete from SocialActivitySetting where classNameId = " +
+				mbThreadClassNameId);
+	}
+
+	protected void migrateEquityLog(ResultSet rs) throws Exception {
+		long assetEntryId = rs.getLong("assetEntryId");
+
+		AssetEntry assetEntry = AssetEntryLocalServiceUtil.fetchAssetEntry(
+			assetEntryId);
+
+		if (assetEntry == null) {
+			return;
+		}
+
+		String actionId = rs.getString("actionId");
+
+		if (actionId.equals(ActionKeys.SUBSCRIBE)) {
+			String className = assetEntry.getClassName();
+
+			if (className.equals(MBThread.class.getName())) {
+				MBThread mbThread = MBThreadLocalServiceUtil.fetchThread(
+					assetEntry.getClassPK());
+
+				if (mbThread == null) {
+					return;
 				}
 
-				results.add(array);
+				assetEntry = AssetEntryLocalServiceUtil.fetchEntry(
+					MBMessage.class.getName(), mbThread.getRootMessageId());
+
+				if (assetEntry == null) {
+					return;
+				}
+			}
+		}
+
+		long classNameId = PortalUtil.getClassNameId(User.class);
+		long classPK = rs.getLong("userId");
+		String name = SocialActivityCounterConstants.NAME_PARTICIPATION;
+		int ownerType = SocialActivityCounterConstants.TYPE_ACTOR;
+
+		int actionDate = rs.getInt("actionDate");
+
+		Date actionDateDate = SocialCounterPeriodUtil.getDate(
+			actionDate - 365);
+
+		int startPeriod = SocialCounterPeriodUtil.getStartPeriod(
+			actionDateDate.getTime());
+		int endPeriod = SocialCounterPeriodUtil.getEndPeriod(
+			actionDateDate.getTime());
+
+		if (endPeriod == SocialCounterPeriodUtil.getEndPeriod()) {
+			endPeriod = SocialActivityCounterConstants.END_PERIOD_UNDEFINED;
+		}
+
+		int type = rs.getInt("type_");
+		int value = rs.getInt("value");
+
+		if (type == 1) {
+			name = SocialActivityCounterConstants.NAME_CONTRIBUTION;
+			ownerType = SocialActivityCounterConstants.TYPE_CREATOR;
+
+			updateActivityCounter(
+				increment(), assetEntry.getGroupId(), assetEntry.getCompanyId(),
+				classNameId, assetEntry.getUserId(), name, ownerType,
+				startPeriod, endPeriod, value);
+
+			classNameId = assetEntry.getClassNameId();
+			classPK = assetEntry.getClassPK();
+			name = SocialActivityCounterConstants.NAME_POPULARITY;
+			ownerType = SocialActivityCounterConstants.TYPE_ASSET;
+		}
+
+		long equityLogId = rs.getLong("equityLogId");
+
+		updateActivityCounter(
+			equityLogId, assetEntry.getGroupId(), assetEntry.getCompanyId(),
+			classNameId, classPK, name, ownerType, startPeriod, endPeriod,
+			value);
+	}
+
+	protected void migrateEquityLogs() throws Exception {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = DataAccess.getConnection();
+
+			StringBundler sb = new StringBundler(4);
+
+			sb.append("select AssetEntry.classNameId, AssetEntry.classPK, ");
+			sb.append("SocialEquityLog.* from SocialEquityLog, AssetEntry ");
+			sb.append("where SocialEquityLog.assetEntryId = ");
+			sb.append("AssetEntry.entryId order by actionDate");
+
+			ps = con.prepareStatement(sb.toString());
+
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				migrateEquityLog(rs);
 			}
 
-			return results;
+			sb = new StringBundler(16);
+
+			sb.append("update SocialActivityCounter set endPeriod = ");
+			sb.append(SocialActivityCounterConstants.END_PERIOD_UNDEFINED);
+			sb.append(" where ");
+			sb.append("name in ('");
+			sb.append(SocialActivityCounterConstants.NAME_CONTRIBUTION);
+			sb.append("', '");
+			sb.append(SocialActivityCounterConstants.NAME_PARTICIPATION);
+			sb.append("', '");
+			sb.append(SocialActivityCounterConstants.NAME_POPULARITY);
+			sb.append("') ");
+			sb.append("and startPeriod = (select max(startPeriod) from ");
+			sb.append("SocialActivityCounter sac where sac.groupId = ");
+			sb.append("SocialActivityCounter.groupId  and sac.classNameId = ");
+			sb.append("SocialActivityCounter.classNameId and sac.classPK = ");
+			sb.append("SocialActivityCounter.classPK and sac.name = ");
+			sb.append("SocialActivityCounter.name)");
+
+			runSQL(sb.toString());
 		}
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
 		}
 	}
 
-	private static final String _GET_ACTIVITY_COUNTER =
-		"select activityCounterId, totalValue from SocialActivityCounter " +
-		" where groupId = ? and classNameId = ? and classPK = ? and " +
-		" name = ? and ownerType = ? and startPeriod = ? and endPeriod = ?";
+	protected void migrateEquitySettings()
+		throws Exception {
 
-	private static final String _GET_EQUITY_LOGS =
-		"select AssetEntry.classNameId, AssetEntry.classPK, SocialEquityLog.*" +
-		" from SocialEquityLog, AssetEntry"+
-		" where SocialEquityLog.assetEntryId = AssetEntry.entryId" +
-		" order by actionDate";
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
 
-	private static final String _GET_EQUITY_GROUP_SETTINGS =
-		"select groupId, companyId, classNameId, enabled " +
-		" from SocialEquityGroupSetting where type_ = 1";
+		try {
+			con = DataAccess.getConnection();
 
-	private static final String _GET_EQUITY_SETTINGS =
-		"select groupId, companyId, classNameId, actionId, dailyLimit," +
-		" lifespan, type_, value from SocialEquitySetting";
+			ps = con.prepareStatement(
+				"select groupId, companyId, classNameId, actionId, " +
+					"dailyLimit, type_, value from SocialEquitySetting");
 
-	private static final String _GET_TOTAL_VALUE_FOR_ACTIVITY_COUNTER =
-		"select max(totalValue) as totalValue from SocialActivityCounter " +
-		" where groupId = ? and classNameId = ? and classPK = ? and " +
-		" name = ? and ownerType = ? and startPeriod < ?";
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				long groupId = rs.getLong("groupId");
+				long companyId = rs.getLong("companyId");
+				long classNameId = rs.getLong("classNameId");
+				String actionId = rs.getString("actionId");
+				int dailyLimit = rs.getInt("dailyLimit");
+				int type = rs.getInt("type_");
+				int value = rs.getInt("value");
+
+				Tuple tuple = _equityToActivityMap.get(
+					encodeEquityToActivityKey(classNameId, actionId));
+
+				if (tuple == null) {
+					StringBundler sb = new StringBundler();
+
+					sb.append("Unknown Social Equity setting with action ");
+					sb.append(actionId);
+					sb.append(". Please configure this action using the ");
+					sb.append("Social Activity portlet in the Control Panel.");
+
+					if (_log.isWarnEnabled()) {
+						_log.warn(sb.toString());
+					}
+
+					continue;
+				}
+
+				long activityClassNameId = GetterUtil.getLong(
+					tuple.getObject(0));
+				int activityType = GetterUtil.getInteger(tuple.getObject(1));
+
+				if (type == 1) {
+					addActivitySetting(
+						groupId, companyId, activityClassNameId, activityType,
+						SocialActivityCounterConstants.NAME_CONTRIBUTION,
+						SocialActivityCounterConstants.TYPE_CREATOR, dailyLimit,
+						value);
+
+					addActivitySetting(
+						groupId, companyId, activityClassNameId, activityType,
+						SocialActivityCounterConstants.NAME_POPULARITY,
+						SocialActivityCounterConstants.TYPE_ASSET, dailyLimit,
+						value);
+				}
+				else if (type == 2) {
+					addActivitySetting(
+						groupId, companyId, activityClassNameId, activityType,
+						SocialActivityCounterConstants.NAME_PARTICIPATION,
+						SocialActivityCounterConstants.TYPE_ACTOR, dailyLimit,
+						value);
+				}
+			}
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
+	}
+
+	protected void putEquityToActivityMap(
+		Class<?> equityClass, String equityActionId, Class<?> activityClass,
+		int activityType) {
+
+		long equityClassNameId = PortalUtil.getClassNameId(equityClass);
+		long activityClassNameId = PortalUtil.getClassNameId(activityClass);
+
+		_equityToActivityMap.put(
+			encodeEquityToActivityKey(equityClassNameId, equityActionId),
+			new Tuple(activityClassNameId, activityType));
+	}
+
+	protected void putEquityToActivityMap(
+		Class<?> equityClass, String equityActionId, int activityType) {
+
+		putEquityToActivityMap(
+			equityClass, equityActionId, equityClass, activityType);
+	}
+
+	protected void updateActivityCounter(
+			long activityCounterId, long groupId, long companyId,
+			long classNameId, long classPK, String name, int ownerType,
+			int startPeriod, int endPeriod, int increment)
+		throws Exception {
+
+		Object[] activityCounter = getActivityCounter(
+			groupId, classNameId, classPK, name, ownerType, startPeriod,
+			endPeriod);
+
+		if (activityCounter == null) {
+			int totalValue = getTotalValue(
+				groupId, classNameId, classPK, name, ownerType, startPeriod);
+
+			addActivityCounter(
+				activityCounterId, groupId, companyId, classNameId, classPK,
+				name, ownerType, increment, totalValue + increment, 0,
+				startPeriod, endPeriod);
+
+			return;
+		}
+
+		StringBundler sb = new StringBundler(7);
+
+		sb.append("update SocialActivityCounter set currentValue = ");
+		sb.append("currentValue + ");
+		sb.append(increment);
+		sb.append(", totalValue = totalValue + ");
+		sb.append(increment);
+		sb.append(" where activityCounterId = ");
+
+		activityCounterId = GetterUtil.getLong(activityCounter[0]);
+
+		sb.append(activityCounterId);
+
+		runSQL(sb.toString());
+	}
 
 	private static Log _log = LogFactoryUtil.getLog(UpgradeSocial.class);
 
-	private static final String[] _mappingStrings = new String[] {
-		"com.liferay.portlet.blogs.model.BlogsEntry/ADD_DISCUSSION:" +
-			"com.liferay.portlet.blogs.model.BlogsEntry/10005",
-		"com.liferay.portlet.blogs.model.BlogsEntry/ADD_ENTRY:" +
-			"com.liferay.portlet.blogs.model.BlogsEntry/2",
-		"com.liferay.portlet.blogs.model.BlogsEntry/ADD_VOTE:" +
-			"com.liferay.portlet.blogs.model.BlogsEntry/10004",
-		"com.liferay.portlet.blogs.model.BlogsEntry/SUBSCRIBE:" +
-			"com.liferay.portlet.blogs.model.BlogsEntry/10002",
-		"com.liferay.portlet.blogs.model.BlogsEntry/UPDATE:" +
-			"com.liferay.portlet.blogs.model.BlogsEntry/3",
-		"com.liferay.portlet.blogs.model.BlogsEntry/VIEW:" +
-			"com.liferay.portlet.blogs.model.BlogsEntry/10001",
-		"com.liferay.portlet.journal.JournalArticle/ADD_ARTICLE:" +
-			"com.liferay.portlet.journal.JournalArticle/1",
-		"com.liferay.portlet.journal.JournalArticle/ADD_DISCUSSION:" +
-			"com.liferay.portlet.journal.JournalArticle/10005",
-		"com.liferay.portlet.journal.JournalArticle/UPDATE:" +
-			"com.liferay.portlet.journal.JournalArticle/2",
-		"com.liferay.portlet.journal.JournalArticle/VIEW:" +
-			"com.liferay.portlet.journal.JournalArticle/10001",
-		"com.liferay.portlet.messageboards.model.MBCategory/SUBSCRIBE:" +
-			"com.liferay.portlet.messageboards.model.MBCategory/10002",
-		"com.liferay.portlet.messageboards.model.MBThread/SUBSCRIBE:" +
-			"com.liferay.portlet.messageboards.model.MBMessage/10002",
-		"com.liferay.portlet.messageboards.model.MBMessage/ADD_MESSAGE:" +
-			"com.liferay.portlet.messageboards.model.MBMessage/1",
-		"com.liferay.portlet.messageboards.model.MBMessage/ADD_VOTE:" +
-			"com.liferay.portlet.messageboards.model.MBMessage/10004",
-		"com.liferay.portlet.messageboards.model.MBMessage/REPLY_TO_MESSAGE:" +
-			"com.liferay.portlet.messageboards.model.MBMessage/2",
-		"com.liferay.portlet.messageboards.model.MBMessage/VIEW:" +
-			"com.liferay.portlet.messageboards.model.MBMessage/10001",
-		"com.liferay.portlet.wiki.model.WikiNode/SUBSCRIBE:" +
-			"com.liferay.portlet.wiki.model.WikiNode/10002",
-		"com.liferay.portlet.wiki.model.WikiPage/ADD_ATTACHMENT:" +
-			"com.liferay.portlet.wiki.model.WikiPage/10006",
-		"com.liferay.portlet.wiki.model.WikiPage/ADD_DISCUSSION:" +
-			"com.liferay.portlet.wiki.model.WikiPage/10005",
-		"com.liferay.portlet.wiki.model.WikiPage/ADD_PAGE:" +
-			"com.liferay.portlet.wiki.model.WikiPage/1",
-		"com.liferay.portlet.wiki.model.WikiPage/SUBSCRIBE:" +
-			"com.liferay.portlet.wiki.model.WikiPage/10002",
-		"com.liferay.portlet.wiki.model.WikiPage/UPDATE:" +
-			"com.liferay.portlet.wiki.model.WikiPage/2",
-		"com.liferay.portlet.wiki.model.WikiPage/VIEW:" +
-			"com.liferay.portlet.wiki.model.WikiPage/10001"
-	};
-
-	private static final String[][] _typeMapping = new String[][] {
-		null,
-		new String[] {
-			SocialActivityCounterConstants.NAME_CONTRIBUTION + "/" +
-				SocialActivityCounterConstants.TYPE_CREATOR,
-			SocialActivityCounterConstants.NAME_POPULARITY + "/" +
-				SocialActivityCounterConstants.TYPE_ASSET
-		},
-		new String[] {
-			SocialActivityCounterConstants.NAME_PARTICIPATION + "/" +
-				SocialActivityCounterConstants.TYPE_ACTOR
-		}
-	};
-
-	private Map<String, Tuple> _mapping = new HashMap<String, Tuple>();
+	private Map<String, Tuple> _equityToActivityMap =
+		new HashMap<String, Tuple>();
 
 }
