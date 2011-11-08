@@ -32,14 +32,6 @@ DLFileShortcut fileShortcut = (DLFileShortcut)request.getAttribute("view_entries
 PortletURL tempRowURL = (PortletURL)request.getAttribute("view_entries.jsp-tempRowURL");
 
 boolean showCheckBox = DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.DELETE) || DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.UPDATE);
-
-String rowCheckerName = FileEntry.class.getSimpleName();
-long rowCheckerId = fileEntry.getFileEntryId();
-
-if (fileShortcut != null) {
-	rowCheckerName = DLFileShortcut.class.getSimpleName();
-	rowCheckerId = fileShortcut.getFileShortcutId();
-}
 %>
 
 <%@ include file="/html/portlet/document_library/document_thumbnail.jspf" %>
@@ -78,6 +70,17 @@ if (fileShortcut != null) {
 	<liferay-util:include page="/html/portlet/document_library/file_entry_action.jsp" />
 
 	<c:if test="<%= showCheckBox %>">
+
+		<%
+		String rowCheckerName = FileEntry.class.getSimpleName();
+		long rowCheckerId = fileEntry.getFileEntryId();
+
+		if (fileShortcut != null) {
+			rowCheckerName = DLFileShortcut.class.getSimpleName();
+			rowCheckerId = fileShortcut.getFileShortcutId();
+		}
+		%>
+
 		<aui:input cssClass="overlay document-selector" label="" name="<%= RowChecker.ROW_IDS + rowCheckerName %>" type="checkbox" value="<%= rowCheckerId %>" />
 	</c:if>
 </div>
