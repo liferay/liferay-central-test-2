@@ -116,6 +116,10 @@ public class ImageProcessor extends DLPreviewableProcessor {
 	}
 
 	public static boolean hasImages(FileVersion fileVersion) {
+		if (!PropsValues.DL_FILE_ENTRY_THUMBNAIL_ENABLED) {
+			return false;
+		}
+
 		boolean hasImages = false;
 
 		try {
@@ -153,52 +157,54 @@ public class ImageProcessor extends DLPreviewableProcessor {
 
 	private void _generateImages(FileVersion fileVersion) {
 		try {
-			InputStream inputStream = fileVersion.getContentStream(false);
+			if (PropsValues.DL_FILE_ENTRY_THUMBNAIL_ENABLED) {
+				InputStream inputStream = fileVersion.getContentStream(false);
 
-			byte[] bytes = FileUtil.getBytes(inputStream);
+				byte[] bytes = FileUtil.getBytes(inputStream);
 
-			ImageBag imageBag = ImageProcessorUtil.read(bytes);
+				ImageBag imageBag = ImageProcessorUtil.read(bytes);
 
-			RenderedImage renderedImage = imageBag.getRenderedImage();
+				RenderedImage renderedImage = imageBag.getRenderedImage();
 
-			if (renderedImage == null) {
-				return;
-			}
+				if (renderedImage == null) {
+					return;
+				}
 
-			String type = _instance._getType(fileVersion);
-
-			_saveThumbnailImage(
-				fileVersion, renderedImage,
-				PropsKeys.DL_FILE_ENTRY_THUMBNAIL_MAX_HEIGHT,
-				PropsKeys.DL_FILE_ENTRY_THUMBNAIL_MAX_WIDTH,
-				getThumbnailFilePath(fileVersion, type));
-
-			if ((PrefsPropsUtil.getInteger(
-					PropsKeys.
-						DL_FILE_ENTRY_THUMBNAIL_CUSTOM_1_MAX_HEIGHT) > 0) ||
-				(PrefsPropsUtil.getInteger(
-					PropsKeys.
-						DL_FILE_ENTRY_THUMBNAIL_CUSTOM_1_MAX_WIDTH) > 0)) {
+				String type = _instance._getType(fileVersion);
 
 				_saveThumbnailImage(
 					fileVersion, renderedImage,
-					PropsKeys.DL_FILE_ENTRY_THUMBNAIL_CUSTOM_1_MAX_HEIGHT,
-					PropsKeys.DL_FILE_ENTRY_THUMBNAIL_CUSTOM_1_MAX_WIDTH,
-					_getCustom1FilePath(fileVersion, type));
-			}
+					PropsKeys.DL_FILE_ENTRY_THUMBNAIL_MAX_HEIGHT,
+					PropsKeys.DL_FILE_ENTRY_THUMBNAIL_MAX_WIDTH,
+					getThumbnailFilePath(fileVersion, type));
 
-			if ((PrefsPropsUtil.getInteger(
-					PropsKeys.
-						DL_FILE_ENTRY_THUMBNAIL_CUSTOM_2_MAX_HEIGHT) > 0) ||
-				(PrefsPropsUtil.getInteger(
-					PropsKeys.
-						DL_FILE_ENTRY_THUMBNAIL_CUSTOM_2_MAX_WIDTH) > 0)) {
+				if ((PrefsPropsUtil.getInteger(
+						PropsKeys.
+							DL_FILE_ENTRY_THUMBNAIL_CUSTOM_1_MAX_HEIGHT) > 0) ||
+					(PrefsPropsUtil.getInteger(
+						PropsKeys.
+							DL_FILE_ENTRY_THUMBNAIL_CUSTOM_1_MAX_WIDTH) > 0)) {
 
-				_saveThumbnailImage(
-					fileVersion, renderedImage,
-					PropsKeys.DL_FILE_ENTRY_THUMBNAIL_CUSTOM_2_MAX_HEIGHT,
-					PropsKeys.DL_FILE_ENTRY_THUMBNAIL_CUSTOM_2_MAX_WIDTH,
-					_getCustom2FilePath(fileVersion, type));
+					_saveThumbnailImage(
+						fileVersion, renderedImage,
+						PropsKeys.DL_FILE_ENTRY_THUMBNAIL_CUSTOM_1_MAX_HEIGHT,
+						PropsKeys.DL_FILE_ENTRY_THUMBNAIL_CUSTOM_1_MAX_WIDTH,
+						_getCustom1FilePath(fileVersion, type));
+				}
+
+				if ((PrefsPropsUtil.getInteger(
+						PropsKeys.
+							DL_FILE_ENTRY_THUMBNAIL_CUSTOM_2_MAX_HEIGHT) > 0) ||
+					(PrefsPropsUtil.getInteger(
+						PropsKeys.
+							DL_FILE_ENTRY_THUMBNAIL_CUSTOM_2_MAX_WIDTH) > 0)) {
+
+					_saveThumbnailImage(
+						fileVersion, renderedImage,
+						PropsKeys.DL_FILE_ENTRY_THUMBNAIL_CUSTOM_2_MAX_HEIGHT,
+						PropsKeys.DL_FILE_ENTRY_THUMBNAIL_CUSTOM_2_MAX_WIDTH,
+						_getCustom2FilePath(fileVersion, type));
+				}
 			}
 		}
 		catch (NoSuchFileEntryException nsfee) {
