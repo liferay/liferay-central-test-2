@@ -29,17 +29,17 @@ public class MyWorkflowInstancesControlPanelEntry
 			PermissionChecker permissionChecker, Portlet portlet)
 		throws Exception {
 
-		long companyId = permissionChecker.getCompanyId();
-		long userId = permissionChecker.getUserId();
 
 		if (WorkflowInstanceManagerUtil.getWorkflowInstanceCount(
-				companyId, userId, null, null, Boolean.FALSE) > 0) {
+				permissionChecker.getCompanyId(), permissionChecker.getUserId(),
+				null, null, Boolean.FALSE) > 0) {
 
 			return true;
 		}
 
 		if (WorkflowInstanceManagerUtil.getWorkflowInstanceCount(
-				companyId, userId, null, null, Boolean.TRUE) > 0) {
+				permissionChecker.getCompanyId(), permissionChecker.getUserId(),
+				null, null, Boolean.TRUE) > 0) {
 
 			return true;
 		}
