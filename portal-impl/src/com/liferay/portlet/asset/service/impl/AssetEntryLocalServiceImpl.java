@@ -334,7 +334,7 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 	@BufferedIncrement(incrementClass = NumberIncrement.class)
 	public AssetEntry incrementViewCounter(
 			long userId, String className, long classPK, int increment)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		if (!PropsValues.ASSET_ENTRY_INCREMENT_VIEW_COUNTER_ENABLED) {
 			return null;
