@@ -71,21 +71,23 @@ public class GetLayoutsAction extends JSONAction {
 		List<Layout> layouts = getLayouts(request);
 
 		for (Layout layout : layouts) {
-			String layoutName = layout.getName(themeDisplay.getLocale());
-
-			if (SitesUtil.isLayoutToBeUpdatedFromTemplate(layout)) {
-				Layout templateLayout =
-					LayoutTypePortletImpl.getTemplateLayout(layout);
-
-				layoutName = templateLayout.getName(themeDisplay.getLocale());
-			}
-
 			JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
 			jsonObject.put("contentDisplayPage", layout.isContentDisplayPage());
 			jsonObject.put("hasChildren", layout.hasChildren());
 			jsonObject.put("layoutId", layout.getLayoutId());
-			jsonObject.put("name", layoutName);
+
+			String name = layout.getName(themeDisplay.getLocale());
+
+			if (SitesUtil.isLayoutToBeUpdatedFromTemplate(layout)) {
+				Layout templateLayout = LayoutTypePortletImpl.getTemplateLayout(
+					layout);
+
+				name = templateLayout.getName(themeDisplay.getLocale());
+			}
+			
+			jsonObject.put("name", name);
+
 			jsonObject.put("parentLayoutId", layout.getParentLayoutId());
 			jsonObject.put("plid", layout.getPlid());
 			jsonObject.put("priority", layout.getPriority());

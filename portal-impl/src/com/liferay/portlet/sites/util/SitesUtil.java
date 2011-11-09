@@ -549,9 +549,10 @@ public class SitesUtil {
 		if (isLayoutLocked(layout)) {
 			return true;
 		}
-		else if ((layoutModifiedDate == null) ||
-				((lastCopyDate != null) &&
-					layoutModifiedDate.before(lastCopyDate))) {
+
+		if ((layoutModifiedDate == null) ||
+			((lastCopyDate != null) &&
+			 layoutModifiedDate.before(lastCopyDate))) {
 
 			return true;
 		}
