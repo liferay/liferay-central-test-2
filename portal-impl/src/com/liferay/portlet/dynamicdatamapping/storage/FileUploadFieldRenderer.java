@@ -14,7 +14,6 @@
 
 package com.liferay.portlet.dynamicdatamapping.storage;
 
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSONException;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
@@ -33,8 +32,7 @@ public class FileUploadFieldRenderer extends BaseFieldRenderer {
 
 	@Override
 	protected String doRender(
-			ThemeDisplay themeDisplay, Serializable fieldValue)
-		throws PortalException {
+		ThemeDisplay themeDisplay, Serializable fieldValue) {
 
 		if (Validator.isNull(fieldValue) ||
 			fieldValue.equals(JSONFactoryUtil.getNullJSON())) {
@@ -42,24 +40,24 @@ public class FileUploadFieldRenderer extends BaseFieldRenderer {
 			return StringPool.BLANK;
 		}
 
-		JSONObject fieldValueJSON = null;
+		JSONObject fieldValueJSONObject = null;
 
 		try {
-			fieldValueJSON = JSONFactoryUtil.createJSONObject(
+			fieldValueJSONObject = JSONFactoryUtil.createJSONObject(
 				String.valueOf(fieldValue));
 		}
-		catch (JSONException e) {
+		catch (JSONException jsone) {
 			if (_log.isDebugEnabled()) {
-				_log.debug("Unable to parse JSON", e);
+				_log.debug("Unable to parse JSON", jsone);
 			}
 
 			return StringPool.BLANK;
 		}
 
-		return fieldValueJSON.getString("name");
+		return fieldValueJSONObject.getString("name");
 	}
 
-	private static final Log _log = LogFactoryUtil.getLog(
+	private static Log _log = LogFactoryUtil.getLog(
 		FileUploadFieldRenderer.class);
 
 }

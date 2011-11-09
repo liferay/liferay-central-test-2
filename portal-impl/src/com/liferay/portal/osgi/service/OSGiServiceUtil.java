@@ -617,8 +617,7 @@ public class OSGiServiceUtil {
 		}
 	}
 
-	private static final Log _log = LogFactoryUtil.getLog(
-		OSGiServiceUtil.class);
+	private static final _log = LogFactoryUtil.getLog(OSGiServiceUtil.class);
 
 	private static OSGiServiceUtil _instance = new OSGiServiceUtil();
 

@@ -86,7 +86,7 @@ public class DDLUtil {
 	}
 
 	public static String getRecordFileUploadPath(DDLRecord record) {
-		return RECORD_FILES_PATH.concat(String.valueOf(record.getRecordId()));
+		return "ddl_records/" + record.getRecordId();
 	}
 
 	public static JSONObject getRecordJSONObject(DDLRecord record)
@@ -257,7 +257,7 @@ public class DDLUtil {
 
 		String dirName =
 			getRecordFileUploadPath(record) + StringPool.SLASH +
-			recordVersion.getVersion();
+				recordVersion.getVersion();
 
 		try {
 			DLStoreUtil.addDirectory(
@@ -294,44 +294,45 @@ public class DDLUtil {
 		for (String fieldName : ddmStructure.getFieldNames()) {
 			String fieldDataType = ddmStructure.getFieldDataType(fieldName);
 
-			if (fieldDataType.equals(FieldConstants.FILE_UPLOAD)) {
-				String fileName = uploadPortletRequest.getFileName(fieldName);
+			if (!fieldDataType.equals(FieldConstants.FILE_UPLOAD)) {
+				continue;
+			}
 
-				try {
-					Field field = record.getField(fieldName);
+			String fileName = uploadPortletRequest.getFileName(fieldName);
 
-					String fieldValue = StringPool.BLANK;
+			try {
+				Field field = record.getField(fieldName);
 
-					if (field != null) {
-						fieldValue = String.valueOf(field.getValue());
-					}
+				String fieldValue = StringPool.BLANK;
 
-					inputStream = uploadPortletRequest.getFileAsStream(
-						fieldName, true);
-
-					if (inputStream != null) {
-						String filePath = uploadFieldFile(
-							record, fieldName, inputStream);
-
-						JSONObject recordFileJSONObject =
-							JSONFactoryUtil.createJSONObject();
-
-						recordFileJSONObject.put("name", fileName);
-						recordFileJSONObject.put("path", filePath);
-						recordFileJSONObject.put(
-							"recordId", record.getRecordId());
-
-						fieldValue = recordFileJSONObject.toString();
-					}
-
-					field = new Field(
-						ddmStructure.getStructureId(), fieldName, fieldValue);
-
-					fields.put(field);
+				if (field != null) {
+					fieldValue = String.valueOf(field.getValue());
 				}
-				finally {
-					StreamUtil.cleanUp(inputStream);
+
+				inputStream = uploadPortletRequest.getFileAsStream(
+					fieldName, true);
+
+				if (inputStream != null) {
+					String filePath = uploadFieldFile(
+						record, fieldName, inputStream);
+
+					JSONObject recordFileJSONObject =
+						JSONFactoryUtil.createJSONObject();
+
+					recordFileJSONObject.put("name", fileName);
+					recordFileJSONObject.put("path", filePath);
+					recordFileJSONObject.put("recordId", record.getRecordId());
+
+					fieldValue = recordFileJSONObject.toString();
 				}
+
+				field = new Field(
+					ddmStructure.getStructureId(), fieldName, fieldValue);
+
+				fields.put(field);
+			}
+			finally {
+				StreamUtil.cleanUp(inputStream);
 			}
 		}
 
@@ -342,7 +343,5 @@ public class DDLUtil {
 	}
 
 	private static Transformer _transformer = new DDLTransformer();
-
-	private static final String RECORD_FILES_PATH = "ddl_records/";
 
 }

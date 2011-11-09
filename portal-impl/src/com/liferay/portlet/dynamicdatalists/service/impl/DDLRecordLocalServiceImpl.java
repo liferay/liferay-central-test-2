@@ -144,19 +144,6 @@ public class DDLRecordLocalServiceImpl
 	public void deleteRecord(DDLRecord record)
 		throws PortalException, SystemException {
 
-		// File Uploads
-
-		try {
-			DLStoreUtil.deleteDirectory(
-				record.getCompanyId(), CompanyConstants.SYSTEM,
-				DDLUtil.getRecordFileUploadPath(record));
-		}
-		catch (NoSuchDirectoryException nsde) {
-			if (_log.isDebugEnabled()) {
-				_log.debug(nsde.getMessage());
-			}
-		}
-
 		// Record
 
 		ddlRecordPersistence.remove(record);
@@ -178,6 +165,19 @@ public class DDLRecordLocalServiceImpl
 			workflowInstanceLinkLocalService.deleteWorkflowInstanceLinks(
 				record.getCompanyId(), record.getGroupId(),
 				DDLRecord.class.getName(), recordVersion.getPrimaryKey());
+		}
+
+		// Document library
+
+		try {
+			DLStoreUtil.deleteDirectory(
+				record.getCompanyId(), CompanyConstants.SYSTEM,
+				DDLUtil.getRecordFileUploadPath(record));
+		}
+		catch (NoSuchDirectoryException nsde) {
+			if (_log.isDebugEnabled()) {
+				_log.debug(nsde.getMessage());
+			}
 		}
 	}
 
