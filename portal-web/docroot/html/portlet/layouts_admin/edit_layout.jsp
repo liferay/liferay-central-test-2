@@ -38,6 +38,27 @@ String closeRedirect = ParamUtil.getString(request, "closeRedirect");
 
 long refererPlid = ParamUtil.getLong(request, "refererPlid", LayoutConstants.DEFAULT_PLID);
 
+Set<Long> parentPlids = new HashSet<Long>();
+
+long parentPlid = refererPlid;
+
+while (parentPlid > 0) {
+	try {
+		Layout parentLayout = LayoutLocalServiceUtil.getLayout(parentPlid);
+
+		if (parentLayout.isRootLayout()) {
+			break;
+		}
+
+		parentPlid = parentLayout.getParentPlid();
+
+		parentPlids.add(parentPlid);
+	}
+	catch (Exception e) {
+		break;
+	}
+}
+
 LayoutRevision layoutRevision = LayoutStagingUtil.getLayoutRevision(selLayout);
 
 String layoutSetBranchName = StringPool.BLANK;
@@ -63,26 +84,6 @@ if (!group.isUser() && selLayout.isTypePortlet()) {
 }
 
 String[][] categorySections = {mainSections};
-
-long parentPlid = refererPlid;
-
-Set<Long> parentPlids = new HashSet<Long>();
-Layout parentLayout = null;
-
-while (parentPlid > 0) {
-	try {
-		parentLayout = LayoutLocalServiceUtil.getLayout(parentPlid);
-
-		parentPlid = parentLayout.getParentPlid();
-
-		if (parentPlid > 0) {
-			parentPlids.add(parentPlid);
-		}
-	}
-	catch (Exception e) {
-		parentPlid = -1;
-	}
-}
 %>
 
 <div class="lfr-header-row title">
