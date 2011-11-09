@@ -29,7 +29,6 @@ public class MyWorkflowInstancesControlPanelEntry
 			PermissionChecker permissionChecker, Portlet portlet)
 		throws Exception {
 
-
 		if (WorkflowInstanceManagerUtil.getWorkflowInstanceCount(
 				permissionChecker.getCompanyId(), permissionChecker.getUserId(),
 				null, null, Boolean.FALSE) > 0) {
