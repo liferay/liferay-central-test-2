@@ -590,12 +590,11 @@ public class DDMStructureModelImpl extends BaseModelImpl<DDMStructure>
 	public void setDocument(com.liferay.portal.kernel.xml.Document document) {
 	}
 
-	public java.util.Map<java.lang.String, java.util.Map<java.lang.String, java.lang.String>> getFieldsMap() {
+	public java.util.Map getFieldsMap() {
 		return null;
 	}
 
-	public void setFieldsMap(
-		java.util.Map<java.lang.String, java.util.Map<java.lang.String, java.lang.String>> fieldsMap) {
+	public void setFieldsMap(java.util.Map fieldsMap) {
 	}
 
 	public long getColumnBitmask() {
