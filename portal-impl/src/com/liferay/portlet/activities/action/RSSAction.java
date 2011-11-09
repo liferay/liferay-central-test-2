@@ -14,7 +14,6 @@
 
 package com.liferay.portlet.activities.action;
 
-import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.HtmlUtil;
@@ -42,6 +41,8 @@ import com.sun.syndication.feed.synd.SyndFeed;
 import com.sun.syndication.feed.synd.SyndFeedImpl;
 import com.sun.syndication.io.FeedException;
 
+import edu.emory.mathcs.backport.java.util.Collections;
+
 import java.io.OutputStream;
 
 import java.util.ArrayList;
@@ -49,6 +50,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.portlet.PortletConfig;
+import javax.portlet.PortletRequest;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
 
@@ -72,15 +74,20 @@ public class RSSAction extends PortletAction {
 		OutputStream outputStream = resourceResponse.getPortletOutputStream();
 
 		try {
-			outputStream.write(getRSS(resourceRequest));
+			byte[] bytes = getRSS(resourceRequest);
+
+			outputStream.write(bytes);
 		}
 		finally {
 			outputStream.close();
 		}
 	}
 
-	protected byte[] getRSS(ResourceRequest resourceRequest) throws Exception {
-		ThemeDisplay themeDisplay = (ThemeDisplay)resourceRequest.getAttribute(
+	protected List<SocialActivity> getActivities(
+			PortletRequest portletRequest)
+		throws Exception {
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
 		Group group = GroupLocalServiceUtil.getGroup(
@@ -89,36 +96,46 @@ public class RSSAction extends PortletAction {
 		int start = 0;
 		int end = 10;
 
-		List<SocialActivity> activities = new ArrayList<SocialActivity>();
-
 		if (group.isOrganization()) {
-			activities =
-				SocialActivityLocalServiceUtil.getOrganizationActivities(
-					group.getOrganizationId(), start, end);
+			return SocialActivityLocalServiceUtil.getOrganizationActivities(
+				group.getOrganizationId(), start, end);
 		}
 		else if (group.isRegularSite()) {
-			activities = SocialActivityLocalServiceUtil.getGroupActivities(
+			return SocialActivityLocalServiceUtil.getGroupActivities(
 				group.getGroupId(), start, end);
 		}
 		else if (group.isUser()) {
-			activities = SocialActivityLocalServiceUtil.getUserActivities(
+			return SocialActivityLocalServiceUtil.getUserActivities(
 				group.getClassPK(), start, end);
 		}
 
-		String feedTitle = ParamUtil.getString(resourceRequest, "feedTitle");
-		String feedLink = PortalUtil.getLayoutFullURL(themeDisplay) +
-			Portal.FRIENDLY_URL_SEPARATOR + "activities/rss";
+		return Collections.emptyList();
+	}
+
+	protected byte[] getRSS(PortletRequest portletRequest) throws Exception {
+		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		SyndFeed syndFeed = new SyndFeedImpl();
 
-		syndFeed.setFeedType(RSSUtil.FEED_TYPE_DEFAULT);
-		syndFeed.setTitle(feedTitle);
-		syndFeed.setLink(feedLink);
+		String feedTitle = ParamUtil.getString(portletRequest, "feedTitle");
+
 		syndFeed.setDescription(feedTitle);
+
+		syndFeed.setFeedType(RSSUtil.FEED_TYPE_DEFAULT);
+
+		String feedLink = PortalUtil.getLayoutFullURL(themeDisplay) +
+			Portal.FRIENDLY_URL_SEPARATOR + "activities/rss";
+
+		syndFeed.setLink(feedLink);
+
+		syndFeed.setTitle(feedTitle);
 
 		List<SyndEntry> syndEntries = new ArrayList<SyndEntry>();
 
 		syndFeed.setEntries(syndEntries);
+
+		List<SocialActivity> activities = getActivities(portletRequest);
 
 		for (SocialActivity activity : activities) {
 			SocialActivityFeedEntry activityFeedEntry =
@@ -131,21 +148,20 @@ public class RSSAction extends PortletAction {
 
 			SyndEntry syndEntry = new SyndEntryImpl();
 
-			syndEntry.setTitle(
-				HtmlUtil.extractText(activityFeedEntry.getTitle()));
-
-			if (Validator.isNotNull(activityFeedEntry.getLink())) {
-				syndEntry.setLink(activityFeedEntry.getLink());
-			}
-
-			syndEntry.setPublishedDate(new Date(activity.getCreateDate()));
-
 			SyndContent syndContent = new SyndContentImpl();
 
 			syndContent.setType(RSSUtil.FEED_TYPE_DEFAULT);
 			syndContent.setValue(activityFeedEntry.getBody());
 
 			syndEntry.setDescription(syndContent);
+
+			if (Validator.isNotNull(activityFeedEntry.getLink())) {
+				syndEntry.setLink(activityFeedEntry.getLink());
+			}
+
+			syndEntry.setPublishedDate(new Date(activity.getCreateDate()));
+			syndEntry.setTitle(
+				HtmlUtil.extractText(activityFeedEntry.getTitle()));
 
 			syndEntries.add(syndEntry);
 		}
@@ -162,6 +178,7 @@ public class RSSAction extends PortletAction {
 		return rss.getBytes(StringPool.UTF8);
 	}
 
+	@Override
 	protected boolean isCheckMethodOnProcessAction() {
 		return _CHECK_METHOD_ON_PROCESS_ACTION;
 	}
