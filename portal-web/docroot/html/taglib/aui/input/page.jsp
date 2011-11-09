@@ -72,7 +72,7 @@
 			formName="<%= formName %>"
 			languageId="<%= languageId %>"
 			model="<%= model %>"
-			placeholder="<%= placeholder%>"
+			placeholder="<%= placeholder %>"
 		/>
 	</c:when>
 	<c:when test='<%= type.equals("checkbox") %>'>
