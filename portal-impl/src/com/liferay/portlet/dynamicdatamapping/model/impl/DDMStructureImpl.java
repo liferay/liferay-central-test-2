@@ -63,6 +63,7 @@ public class DDMStructureImpl extends DDMStructureBaseImpl {
 		return rootElement.attributeValue("default-locale");
 	}
 
+	@Override
 	public Document getDocument() {
 		if (_document == null) {
 			try {
@@ -156,6 +157,7 @@ public class DDMStructureImpl extends DDMStructureBaseImpl {
 		return null;
 	}
 
+	@Override
 	public Map<String, Map<String, String>> getFieldsMap() {
 		return _getFieldsMap(getDefaultLocale());
 	}
@@ -180,15 +182,16 @@ public class DDMStructureImpl extends DDMStructureBaseImpl {
 	}
 
 	@Override
+	public void setFieldsMap(Map<String, Map<String, String>> fieldsMap) {
+		_fieldsMap = fieldsMap;
+	}
+
+	@Override
 	public void setXsd(String xsd) {
 		super.setXsd(xsd);
 
 		_document = null;
 		_fieldsMap = null;
-	}
-
-	public void setFieldsMap(Map<String, Map<String, String>> fieldsMap) {
-		_fieldsMap = fieldsMap;
 	}
 
 	private Map<String, String> _getField(Element element, String locale) {
@@ -260,6 +263,7 @@ public class DDMStructureImpl extends DDMStructureBaseImpl {
 
 	@CacheField
 	private Document _document;
+
 	@CacheField
 	private Map<String, Map<String, String>> _fieldsMap;
 
