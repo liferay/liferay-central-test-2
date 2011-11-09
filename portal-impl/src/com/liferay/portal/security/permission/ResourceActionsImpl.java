@@ -21,12 +21,14 @@ import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnmodifiableList;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.Document;
+import com.liferay.portal.kernel.xml.DocumentType;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.model.Group;
@@ -574,6 +576,19 @@ public class ResourceActionsImpl implements ResourceActions {
 
 		Document document = SAXReaderUtil.read(inputStream, true);
 
+		DocumentType documentType = document.getDocumentType();
+
+		String publicId = GetterUtil.getString(documentType.getPublicId());
+
+		if (publicId.equals(
+				"-//Liferay//DTD Resource Action Mapping 6.0.0//EN")) {
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(
+					"Please update " + source + " to use the 6.1.0 format");
+			}
+		}
+
 		Element rootElement = document.getRootElement();
 
 		for (Element resourceElement : rootElement.elements("resource")) {
@@ -1091,7 +1106,7 @@ public class ResourceActionsImpl implements ResourceActions {
 		User.class.getName(), UserGroup.class.getName()
 	};
 
-	private static Log _log = LogFactoryUtil.getLog(ResourceActionsUtil.class);
+	private static Log _log = LogFactoryUtil.getLog(ResourceActionsImpl.class);
 
 	private Map<String, Set<String>> _modelPortletResources;
 	private Map<String, List<String>> _modelResourceActions;
