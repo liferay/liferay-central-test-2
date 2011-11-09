@@ -971,12 +971,12 @@ public class ServicePreAction extends Action {
 
 				themeDisplay.setURLPageSettings(pageSettingsURL);
 
-				boolean site = false;
+				boolean site = group.isSite();
 
-				if (group.isSite() ||
-					(group.isStagingGroup() && group.getLiveGroup().isSite())) {
+				if (!site && group.isStagingGroup()) {
+					Group liveGroup = group.getLiveGroup();
 
-					site = true;
+					site = liveGroup.isSite();
 				}
 
 				if (site &&
