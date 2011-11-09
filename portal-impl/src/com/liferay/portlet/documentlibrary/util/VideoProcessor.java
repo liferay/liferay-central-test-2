@@ -221,8 +221,10 @@ public class VideoProcessor extends DefaultPreviewableProcessor {
 				try {
 					_generateThumbnailXuggler(
 						fileVersion, file,
-						PropsValues.DL_FILE_ENTRY_PREVIEW_VIDEO_HEIGHT,
-						PropsValues.DL_FILE_ENTRY_PREVIEW_VIDEO_WIDTH);
+						PrefsPropsUtil.getInteger(
+							PropsKeys.DL_FILE_ENTRY_THUMBNAIL_MAX_HEIGHT),
+						PrefsPropsUtil.getInteger(
+							PropsKeys.DL_FILE_ENTRY_THUMBNAIL_MAX_WIDTH));
 				}
 				catch (Exception e) {
 					_log.error(e, e);
