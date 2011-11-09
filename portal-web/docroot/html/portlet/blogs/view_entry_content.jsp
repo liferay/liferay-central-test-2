@@ -234,7 +234,9 @@ AssetEntry assetEntry = (AssetEntry)request.getAttribute("view_entry_content.jsp
 					<c:if test="<%= enableRelatedAssets %>">
 						<div class="entry-links">
 							<liferay-ui:asset-links
-								assetEntryId="<%= assetEntry.getEntryId() %>"
+								assetEntryId="<%= (assetEntry != null) ? assetEntry.getEntryId() : 0 %>"
+								className="<%= BlogsEntry.class.getName() %>"
+								classPK="<%= entry.getEntryId() %>"
 							/>
 						</div>
 					</c:if>
