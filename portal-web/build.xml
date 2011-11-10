@@ -975,11 +975,10 @@ var defaultTypes = []]>
 		/>
 
 		<java
-			classname="com.liferay.portal.tools.jspc.common.BatchTimestampFixer"
-			classpathref="jspc.classpath"
+			classname="com.liferay.portal.tools.jspc.common.TimestampUpdater"
+			classpathref="project.classpath"
 			fork="true"
 			newenvironment="true"
-			jvm="${jspc.java.home}/bin/java"
 		>
 			<arg line="${jspc.classes.dir}" />
 		</java>

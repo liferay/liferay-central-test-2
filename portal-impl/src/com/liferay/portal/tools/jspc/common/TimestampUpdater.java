@@ -21,41 +21,39 @@ import org.apache.tools.ant.DirectoryScanner;
 /**
  * @author Minhchau Dang
  */
-public class BatchTimestampFixer {
+public class TimestampUpdater {
 
 	public static void main(String[] args) {
 		if (args.length == 1) {
-			new BatchTimestampFixer(args[0]);
+			new TimestampUpdater(args[0]);
 		}
 		else {
 			throw new IllegalArgumentException();
 		}
 	}
 
-	public BatchTimestampFixer(String classDir) {
-		DirectoryScanner ds = new DirectoryScanner();
+	public TimestampUpdater(String classDir) {
+		DirectoryScanner directoryScanner = new DirectoryScanner();
 
-		ds.setBasedir(classDir);
-		ds.setIncludes(new String[] {"**\\*.java"});
+		directoryScanner.setBasedir(classDir);
+		directoryScanner.setIncludes(new String[] {"**\\*.java"});
 
-		ds.scan();
+		directoryScanner.scan();
 
-		String[] fileNames = ds.getIncludedFiles();
+		String[] fileNames = directoryScanner.getIncludedFiles();
 
 		for (String fileName : fileNames) {
 			File javaFile = new File(classDir, fileName);
-			
-			String fileNameWithoutExtension =
-				fileName.substring(0, fileName.length() - 5);
-			
-			String classFileName =
-				fileNameWithoutExtension.concat(".class");
-		
+
+			String fileNameWithoutExtension = fileName.substring(
+				0, fileName.length() - 5);
+
+			String classFileName = fileNameWithoutExtension.concat(".class");
+
 			File classFile = new File(classDir, classFileName);
-			
-			long lastModified = javaFile.lastModified();
-			
-			classFile.setLastModified(lastModified);
+
+			classFile.setLastModified(javaFile.lastModified());
 		}
 	}
+
 }
