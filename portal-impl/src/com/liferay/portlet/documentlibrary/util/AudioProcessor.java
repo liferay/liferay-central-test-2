@@ -91,7 +91,6 @@ public class AudioProcessor extends DefaultPreviewableProcessor {
 		FileUtil.mkdirs(PREVIEW_TMP_PATH);
 	}
 
-	@Override
 	public boolean isSupported(String mimeType) {
 		return _audioMimeTypes.contains(mimeType);
 	}

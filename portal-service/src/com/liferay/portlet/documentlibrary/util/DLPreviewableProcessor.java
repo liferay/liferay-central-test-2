@@ -84,7 +84,6 @@ public abstract class DLPreviewableProcessor implements DLProcessor {
 			thumbnailType);
 	}
 
-	@Override
 	public boolean isSupported(FileVersion fileVersion) {
 		if (fileVersion == null) {
 			return false;

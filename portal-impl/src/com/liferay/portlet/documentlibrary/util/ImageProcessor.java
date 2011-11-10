@@ -151,7 +151,6 @@ public class ImageProcessor extends DLPreviewableProcessor {
 			custom2ImageId, is, type);
 	}
 
-	@Override
 	public boolean isSupported(String mimeType) {
 		return _imageMimeTypes.contains(mimeType);
 	}

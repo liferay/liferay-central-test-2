@@ -203,19 +203,19 @@ public class PDFProcessor extends DefaultPreviewableProcessor {
 		}
 	}
 
-	@Override
 	public boolean isSupported(String mimeType) {
 		if (mimeType.equals(ContentTypes.APPLICATION_PDF) ||
 			mimeType.equals(ContentTypes.APPLICATION_X_PDF)) {
 
 			return true;
 		}
-		else if (DocumentConversionUtil.isEnabled()) {
+
+		if (DocumentConversionUtil.isEnabled()) {
 			Set<String> extensions = MimeTypesUtil.getExtensions(mimeType);
 
 			for (String extension : extensions) {
 				extension = extension.substring(1);
-				
+
 				String[] targetExtensions =
 					DocumentConversionUtil.getConversions(extension);
 

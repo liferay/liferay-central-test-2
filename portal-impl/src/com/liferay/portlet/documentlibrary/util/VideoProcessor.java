@@ -109,7 +109,6 @@ public class VideoProcessor extends DefaultPreviewableProcessor {
 		FileUtil.mkdirs(THUMBNAIL_TMP_PATH);
 	}
 
-	@Override
 	public boolean isSupported(String mimeType) {
 		return _videoMimeTypes.contains(mimeType);
 	}
