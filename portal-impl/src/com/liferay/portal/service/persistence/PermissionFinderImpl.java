@@ -781,8 +781,9 @@ public class PermissionFinderImpl
 		}
 	}
 
-	public List<Permission> findByR_R(
-			long roleId, long resourceId) throws SystemException {
+	public List<Permission> findByR_R(long roleId, long resourceId)
+		throws SystemException {
+
 		Session session = null;
 
 		try {
@@ -1096,11 +1097,13 @@ public class PermissionFinderImpl
 	}
 
 	protected String getScopes(int[] scopes) {
-		StringBuilder sb = new StringBuilder();
-
-		if (scopes.length > 0) {
-			sb.append("(");
+		if (scopes.length == 0) {
+			return StringPool.BLANK;
 		}
+
+		StringBundler sb = new StringBundler(scopes.length * 2 + 1);
+
+		sb.append("(");
 
 		for (int i = 0; i < scopes.length; i++) {
 			sb.append("ResourceCode.scope = ? ");
@@ -1110,9 +1113,7 @@ public class PermissionFinderImpl
 			}
 		}
 
-		if (scopes.length > 0) {
-			sb.append(")");
-		}
+		sb.append(")");
 
 		return sb.toString();
 	}
