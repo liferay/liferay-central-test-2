@@ -50,6 +50,7 @@ import java.sql.Statement;
 public class GlobalShutdownAction extends SimpleAction {
 
 	@Override
+	@SuppressWarnings("deprecation")
 	public void run(String[] ids) {
 
 		// Auto deploy
@@ -195,25 +196,14 @@ public class GlobalShutdownAction extends SimpleAction {
 
 		// Programmatically exit
 
-		if (GetterUtil.getBoolean(PropsUtil.get(
-				PropsKeys.SHUTDOWN_PROGRAMMATICALLY_EXIT))) {
+		if (GetterUtil.getBoolean(
+				PropsUtil.get(PropsKeys.SHUTDOWN_PROGRAMMATICALLY_EXIT))) {
 
 			Thread currentThread = Thread.currentThread();
 
-			ThreadGroup threadGroup = currentThread.getThreadGroup();
+			ThreadGroup threadGroup = getThreadGroup();
 
-			for (int i = 0; i < 10; i++) {
-				if (threadGroup.getParent() == null) {
-					break;
-				}
-				else {
-					threadGroup = threadGroup.getParent();
-				}
-			}
-
-			Thread[] threads = new Thread[threadGroup.activeCount() * 2];
-
-			threadGroup.enumerate(threads);
+			Thread[] threads = getThreads(threadGroup);
 
 			for (Thread thread : threads) {
 				if ((thread == null) || (thread == currentThread)) {
@@ -229,6 +219,51 @@ public class GlobalShutdownAction extends SimpleAction {
 
 			threadGroup.destroy();
 		}
+
+		ThreadGroup threadGroup = getThreadGroup();
+
+		Thread[] threads = getThreads(threadGroup);
+
+		for (Thread thread : threads) {
+			String name = thread.getName();
+
+			// LPS-22392 or LPS-23031
+
+			if (name.equals("AWT-Windows") ||
+				name.equals("com.google.inject.internal.Finalizer")) {
+
+				try {
+					thread.stop();
+				}
+				catch (Exception e) {
+				}
+			}
+		}
+	}
+
+	protected ThreadGroup getThreadGroup() {
+		Thread currentThread = Thread.currentThread();
+
+		ThreadGroup threadGroup = currentThread.getThreadGroup();
+
+		for (int i = 0; i < 10; i++) {
+			if (threadGroup.getParent() == null) {
+				break;
+			}
+			else {
+				threadGroup = threadGroup.getParent();
+			}
+		}
+
+		return threadGroup;
+	}
+
+	protected Thread[] getThreads(ThreadGroup threadGroup) {
+		Thread[] threads = new Thread[threadGroup.activeCount() * 2];
+
+		threadGroup.enumerate(threads);
+
+		return threads;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(GlobalShutdownAction.class);
