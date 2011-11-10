@@ -236,7 +236,7 @@ ${app.server.tomcat.dir}, then run "ant -buildfile build-dist.xml unzip-tomcat".
 
 						<replace file="${app.server.glassfish.instance.dir}/config/domain.xml">
 							<replacetoken><![CDATA[<jvm-options>-XX:MaxPermSize=192m</jvm-options>]]></replacetoken>
-							<replacevalue><![CDATA[<jvm-options>-XX:MaxPermSize=256m</jvm-options>]]></replacevalue>
+							<replacevalue><![CDATA[<jvm-options>-XX:MaxPermSize=512m</jvm-options>]]></replacevalue>
 						</replace>
 					</then>
 				</if>
