@@ -3309,8 +3309,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			User user, String emailAddress, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		if (user.getEmailAddress().equalsIgnoreCase(emailAddress) &&
-			user.getEmailAddressVerified()) {
+		if (user.isEmailAddressVerified() &&
+			emailAddress.equalsIgnoreCase(user.getEmailAddress())) {
 
 			return;
 		}
