@@ -31,8 +31,6 @@ import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 
-import java.io.IOException;
-
 import javax.portlet.PortletRequest;
 
 import javax.servlet.http.HttpServletRequest;
@@ -50,8 +48,8 @@ public class FacebookConnectImpl implements FacebookConnect {
 		String url = HttpUtil.addParameter(
 			getAccessTokenURL(companyId), "client_id", getAppId(companyId));
 
-		url = HttpUtil.addParameter(url, "redirect_uri",
-			FacebookConnectUtil.getRedirectURL(companyId));
+		url = HttpUtil.addParameter(
+			url, "redirect_uri", FacebookConnectUtil.getRedirectURL(companyId));
 
 		String facebookConnectRedirectURL = getRedirectURL(companyId);
 
@@ -86,7 +84,7 @@ public class FacebookConnectImpl implements FacebookConnect {
 				}
 			}
 		}
-		catch (IOException e) {
+		catch (Exception e) {
 			throw new SystemException(
 				"Unable to retrieve Facebook access token", e);
 		}

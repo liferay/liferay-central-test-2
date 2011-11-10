@@ -39,6 +39,7 @@ import java.util.Locale;
 import javax.portlet.PortletConfig;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -107,7 +108,7 @@ public class FacebookConnectAction extends PortletAction {
 	}
 
 	protected void addUser(
-			long companyId, HttpSession session, JSONObject jsonObject)
+			HttpSession session, long companyId, JSONObject jsonObject)
 		throws Exception {
 
 		long creatorUserId = 0;
@@ -139,10 +140,10 @@ public class FacebookConnectAction extends PortletAction {
 		ServiceContext serviceContext = new ServiceContext();
 
 		User user = UserLocalServiceUtil.addUser(
-			creatorUserId, companyId, autoPassword, password1,
-			password2, autoScreenName, screenName, emailAddress, facebookId,
-			openId, locale, firstName, middleName, lastName, prefixId, suffixId,
-			male, birthdayMonth, birthdayDay, birthdayYear, jobTitle, groupIds,
+			creatorUserId, companyId, autoPassword, password1, password2,
+			autoScreenName, screenName, emailAddress, facebookId, openId,
+			locale, firstName, middleName, lastName, prefixId, suffixId, male,
+			birthdayMonth, birthdayDay, birthdayYear, jobTitle, groupIds,
 			organizationIds, roleIds, userGroupIds, sendEmail, serviceContext);
 
 		UserLocalServiceUtil.updateLastLogin(
@@ -163,7 +164,9 @@ public class FacebookConnectAction extends PortletAction {
 			companyId, "/me", token,
 			"id,email,first_name,last_name,gender");
 
-		if (jsonObject == null || jsonObject.getJSONObject("error") != null) {
+		if ((jsonObject == null) ||
+			(jsonObject.getJSONObject("error") != null)) {
+
 			return;
 		}
 
@@ -173,7 +176,7 @@ public class FacebookConnectAction extends PortletAction {
 
 		if (facebookId > 0) {
 			session.setAttribute(
-				WebKeys.FACEBOOK_USER_ID, jsonObject.getString("id"));
+				WebKeys.FACEBOOK_USER_ID, String.valueOf(facebookId));
 
 			try {
 				user = UserLocalServiceUtil.getUserByFacebookId(
@@ -185,7 +188,7 @@ public class FacebookConnectAction extends PortletAction {
 
 		String emailAddress = jsonObject.getString("email");
 
-		if (user == null && Validator.isNotNull(emailAddress)) {
+		if ((user == null) && Validator.isNotNull(emailAddress)) {
 			session.setAttribute(
 				WebKeys.FACEBOOK_USER_EMAIL_ADDRESS, emailAddress);
 
@@ -198,58 +201,55 @@ public class FacebookConnectAction extends PortletAction {
 		}
 
 		if (user != null) {
-			updateUser(companyId, session, user, jsonObject);
+			updateUser(user, jsonObject);
 		}
 		else {
-			addUser(companyId, session, jsonObject);
+			addUser(session, companyId, jsonObject);
 		}
 	}
 
-	protected void updateUser(
-			long companyId, HttpSession session, User user,
-			JSONObject jsonObject)
+	protected void updateUser(User user, JSONObject jsonObject)
 		throws Exception {
-	
+
 		long facebookId = jsonObject.getLong("id");
 		String emailAddress = jsonObject.getString("email");
 		String firstName = jsonObject.getString("first_name");
 		String lastName = jsonObject.getString("last_name");
 		boolean male = Validator.equals(jsonObject.getString("gender"), "male");
-	
-		if ((user.getFacebookId() == facebookId) &&
-			user.getEmailAddress().equals(emailAddress) &&
-			user.getFirstName().equals(firstName) &&
-			user.getLastName().equals(lastName) && (user.isMale() == male)) {
-	
+
+		if ((facebookId == user.getFacebookId()) &&
+			emailAddress.equals(user.getEmailAddress()) &&
+			firstName.equals(user.getFirstName()) &&
+			lastName.equals(user.getLastName()) && (male == user.isMale())) {
+
 			return;
 		}
-	
+
+		Contact contact = user.getContact();
+
 		Calendar birthdayCal = CalendarFactoryUtil.getCalendar();
-	
-		birthdayCal.setTime(user.getContact().getBirthday());
-	
+
+		birthdayCal.setTime(contact.getBirthday());
+
 		int birthdayMonth = birthdayCal.get(Calendar.MONTH);
 		int birthdayDay = birthdayCal.get(Calendar.DAY_OF_MONTH);
 		int birthdayYear = birthdayCal.get(Calendar.YEAR);
-	
-		Contact contact = user.getContact();
-	
+
 		long[] groupIds = null;
 		long[] organizationIds = null;
 		long[] roleIds = null;
-		long[] userGroupIds = null;
-	
-		ServiceContext serviceContext = new ServiceContext();
-	
 		List<UserGroupRole> userGroupRoles = null;
-	
-		if (!user.getEmailAddress().equalsIgnoreCase(emailAddress)) {
+		long[] userGroupIds = null;
+
+		ServiceContext serviceContext = new ServiceContext();
+
+		if (!emailAddress.equalsIgnoreCase(user.getEmailAddress())) {
 			UserLocalServiceUtil.updateEmailAddress(
 				user.getUserId(), StringPool.BLANK, emailAddress, emailAddress);
 		}
-	
+
 		UserLocalServiceUtil.updateEmailAddressVerified(user.getUserId(), true);
-	
+
 		UserLocalServiceUtil.updateUser(
 			user.getUserId(), StringPool.BLANK, StringPool.BLANK,
 			StringPool.BLANK, false, user.getReminderQueryQuestion(),
