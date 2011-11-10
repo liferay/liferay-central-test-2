@@ -186,7 +186,7 @@ public class ServletResponseUtil {
 
 					if (_log.isDebugEnabled()) {
 						_log.debug(
-							"Ignoring NullPointerException because of " + 
+							"Ignoring NullPointerException because of " +
 								"GLASSFISH-17150");
 					}
 				}
