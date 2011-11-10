@@ -351,9 +351,7 @@ public class UpgradeSocial extends UpgradeProcess {
 					String.valueOf(enabled));
 			}
 
-			DataAccess.cleanUp(rs);
-
-			DataAccess.cleanUp(ps);
+			DataAccess.cleanUp(null, ps, rs);
 
 			StringBundler sb = new StringBundler(12);
 
@@ -380,13 +378,13 @@ public class UpgradeSocial extends UpgradeProcess {
 			while (rs.next()) {
 				long groupId = rs.getLong("groupId");
 
-				sb = new StringBundler(4);
+				sb = new StringBundler(6);
 
 				sb.append("update SocialActivitySetting set value = 'true' ");
 				sb.append("where groupId = ");
 				sb.append(groupId);
-				sb.append(" and activityType = 0 and value = 'enabled'");
-				sb.append(" and classNameId = ");
+				sb.append(" and activityType = 0 and value = 'enabled' and ");
+				sb.append("classNameId = ");
 				sb.append(mbThreadClassNameId);
 
 				runSQL(sb.toString());
@@ -501,9 +499,7 @@ public class UpgradeSocial extends UpgradeProcess {
 				migrateEquityLog(rs);
 			}
 
-			DataAccess.cleanUp(rs);
-
-			DataAccess.cleanUp(ps);
+			DataAccess.cleanUp(null, ps, rs);
 
 			sb = new StringBundler(4);
 
@@ -517,7 +513,28 @@ public class UpgradeSocial extends UpgradeProcess {
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
-				updateActivityCounter(rs);
+				long groupId = rs.getLong("groupId");
+				long classNameId = rs.getLong("classNameId");
+				long classPK = rs.getLong("classPK");
+				String name = rs.getString("name");
+				int startPeriod = rs.getInt("startPeriod");
+
+				sb = new StringBundler(12);
+
+				sb.append("update SocialActivityCounter set endPeriod = ");
+				sb.append(SocialActivityCounterConstants.END_PERIOD_UNDEFINED);
+				sb.append(" where groupId = ");
+				sb.append(groupId);
+				sb.append(" and classNameId = ");
+				sb.append(classNameId);
+				sb.append(" and classPK = ");
+				sb.append(classPK);
+				sb.append(" and name = '");
+				sb.append(name);
+				sb.append("' and startPeriod = ");
+				sb.append(startPeriod);
+
+				runSQL(sb.toString());
 			}
 		}
 		finally {
@@ -563,6 +580,7 @@ public class UpgradeSocial extends UpgradeProcess {
 					String className = PortalUtil.getClassName(classNameId);
 
 					sb.append(className);
+
 					sb.append(". Please configure this action using the ");
 					sb.append("Social Activity portlet in the Control Panel.");
 
@@ -657,31 +675,6 @@ public class UpgradeSocial extends UpgradeProcess {
 		activityCounterId = GetterUtil.getLong(activityCounter[0]);
 
 		sb.append(activityCounterId);
-
-		runSQL(sb.toString());
-	}
-
-	protected void updateActivityCounter(ResultSet rs) throws Exception {
-		long groupId = rs.getLong("groupId");
-		long classNameId = rs.getLong("classNameId");
-		long classPK = rs.getLong("classPK");
-		String name = rs.getString("name");
-		int startPeriod = rs.getInt("startPeriod");
-
-		StringBundler sb = new StringBundler(12);
-
-		sb.append("update SocialActivityCounter set endPeriod = ");
-		sb.append(SocialActivityCounterConstants.END_PERIOD_UNDEFINED);
-		sb.append(" where groupId = ");
-		sb.append(groupId);
-		sb.append(" and classNameId = ");
-		sb.append(classNameId);
-		sb.append(" and classPK = ");
-		sb.append(classPK);
-		sb.append(" and name = '");
-		sb.append(name);
-		sb.append("' and startPeriod = ");
-		sb.append(startPeriod);
 
 		runSQL(sb.toString());
 	}
