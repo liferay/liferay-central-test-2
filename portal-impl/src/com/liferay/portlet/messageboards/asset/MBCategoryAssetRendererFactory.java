@@ -64,6 +64,7 @@ public class MBCategoryAssetRendererFactory extends BaseAssetRendererFactory {
 			permissionChecker, category, actionId);
 	}
 
+	@Override
 	public boolean isCategorizable() {
 		return false;
 	}

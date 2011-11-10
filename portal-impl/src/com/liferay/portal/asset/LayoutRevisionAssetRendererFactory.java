@@ -103,6 +103,7 @@ public class LayoutRevisionAssetRendererFactory
 		return TYPE;
 	}
 
+	@Override
 	public boolean isCategorizable() {
 		return false;
 	}

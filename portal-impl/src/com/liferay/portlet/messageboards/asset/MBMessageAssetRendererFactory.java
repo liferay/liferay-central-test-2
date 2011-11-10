@@ -61,6 +61,7 @@ public class MBMessageAssetRendererFactory extends BaseAssetRendererFactory {
 			permissionChecker, classPK, actionId);
 	}
 
+	@Override
 	public boolean isCategorizable() {
 		return false;
 	}

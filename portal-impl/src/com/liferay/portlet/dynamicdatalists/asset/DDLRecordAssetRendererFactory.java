@@ -73,6 +73,7 @@ public class DDLRecordAssetRendererFactory extends BaseAssetRendererFactory {
 			permissionChecker, record.getRecordSet(), actionId);
 	}
 
+	@Override
 	public boolean isCategorizable() {
 		return false;
 	}
