@@ -50,7 +50,6 @@ import java.sql.Statement;
 public class GlobalShutdownAction extends SimpleAction {
 
 	@Override
-	@SuppressWarnings("deprecation")
 	public void run(String[] ids) {
 
 		// Auto deploy
@@ -218,26 +217,6 @@ public class GlobalShutdownAction extends SimpleAction {
 			}
 
 			threadGroup.destroy();
-		}
-
-		ThreadGroup threadGroup = getThreadGroup();
-
-		Thread[] threads = getThreads(threadGroup);
-
-		for (Thread thread : threads) {
-			String name = thread.getName();
-
-			// LPS-22392 or LPS-23031
-
-			if (name.equals("AWT-Windows") ||
-				name.equals("com.google.inject.internal.Finalizer")) {
-
-				try {
-					thread.stop();
-				}
-				catch (Exception e) {
-				}
-			}
 		}
 	}
 
