@@ -445,9 +445,7 @@ public class OrganizationFinderImpl
 
 		sql = StringUtil.replace(sql, "[$JOIN$]", getJoin(params));
 		sql = StringUtil.replace(sql, "[$WHERE$]", getWhere(params));
-
 		sql = sql.concat(StringPool.CLOSE_PARENTHESIS);
-
 		sql = CustomSQLUtil.replaceKeywords(
 			sql, "lower(Organization_.name)", StringPool.LIKE, false,
 			names);
