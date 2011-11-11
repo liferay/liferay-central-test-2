@@ -5498,7 +5498,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		validateEmailAddress(user.getCompanyId(), emailAddress1);
 		validateEmailAddress(user.getCompanyId(), emailAddress2);
 
-		if (!user.getEmailAddress().equalsIgnoreCase(emailAddress1)) {
+		if (!emailAddress1.equalsIgnoreCase(user.getEmailAddress())) {
 			if (userPersistence.fetchByC_EA(
 					user.getCompanyId(), emailAddress1) != null) {
 
