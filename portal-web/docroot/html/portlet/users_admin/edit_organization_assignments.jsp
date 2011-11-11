@@ -61,7 +61,7 @@ portletURL.setParameter("organizationId", String.valueOf(organization.getOrganiz
 
 	<aui:input name="addUserIds" type="hidden" />
 	<aui:input name="removeUserIds" type="hidden" />
-	
+
 	<liferay-ui:search-container
 		rowChecker="<%= new UserOrganizationChecker(renderResponse, organization) %>"
 		searchContainer="<%= new UserSearch(renderRequest, portletURL) %>"
@@ -69,12 +69,12 @@ portletURL.setParameter("organizationId", String.valueOf(organization.getOrganiz
 		<liferay-ui:search-form
 			page="/html/portlet/users_admin/user_search.jsp"
 		/>
-	
+
 		<%
 		UserSearchTerms searchTerms = (UserSearchTerms)searchContainer.getSearchTerms();
-	
+
 		LinkedHashMap userParams = new LinkedHashMap();
-	
+
 		if (tabs2.equals("current")) {
 			userParams.put("usersOrgs", new Long(organization.getOrganizationId()));
 		}
@@ -82,11 +82,11 @@ portletURL.setParameter("organizationId", String.valueOf(organization.getOrganiz
 			userParams.put("usersOrgsTree", user.getOrganizations());
 		}
 		%>
-	
+
 		<liferay-ui:search-container-results>
 			<%@ include file="/html/portlet/users_admin/user_search_results.jspf" %>
 		</liferay-ui:search-container-results>
-	
+
 		<liferay-ui:search-container-row
 			className="com.liferay.portal.model.User"
 			escapedModel="<%= true %>"
@@ -97,23 +97,23 @@ portletURL.setParameter("organizationId", String.valueOf(organization.getOrganiz
 				name="name"
 				property="fullName"
 			/>
-	
+
 			<liferay-ui:search-container-column-text
 				name="screen-name"
 				property="screenName"
 			/>
 		</liferay-ui:search-container-row>
-	
+
 		<div class="separator"><!-- --></div>
-	
+
 		<%
 		String taglibOnClick = renderResponse.getNamespace() + "updateOrganizationUsers('" + portletURL.toString() + StringPool.AMPERSAND + renderResponse.getNamespace() + "cur=" + cur + "');";
 		%>
-	
+
 		<aui:button onClick="<%= taglibOnClick %>" value="update-associations" />
-	
+
 		<br /><br />
-	
+
 		<liferay-ui:search-iterator />
 	</liferay-ui:search-container>
 </aui:form>
