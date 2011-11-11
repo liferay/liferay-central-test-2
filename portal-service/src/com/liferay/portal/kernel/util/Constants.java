@@ -71,8 +71,6 @@ public interface Constants {
 
 	public static final String MOVE = "move";
 
-	public static final String NEW = "new";
-
 	public static final String PREVIEW = "preview";
 
 	public static final String PRINT = "print";

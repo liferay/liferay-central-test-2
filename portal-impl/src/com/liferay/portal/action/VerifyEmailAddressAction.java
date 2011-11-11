@@ -63,8 +63,8 @@ public class VerifyEmailAddressAction extends Action {
 			return mapping.findForward("portal.verify_email_address");
 		}
 
-		if (cmd.equals(Constants.NEW) && themeDisplay.isSignedIn()) {
-			sendNewVerificationCode(request, response, themeDisplay);
+		if (themeDisplay.isSignedIn() && cmd.equals(Constants.SEND)) {
+			sendEmailAddressVerification(request, response, themeDisplay);
 
 			return mapping.findForward("portal.verify_email_address");
 		}
@@ -101,7 +101,7 @@ public class VerifyEmailAddressAction extends Action {
 		}
 	}
 
-	protected void sendNewVerificationCode(
+	protected void sendEmailAddressVerification(
 			HttpServletRequest request, HttpServletResponse response,
 			ThemeDisplay themeDisplay)
 		throws Exception {
