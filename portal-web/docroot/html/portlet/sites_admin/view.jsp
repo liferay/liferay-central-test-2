@@ -192,36 +192,34 @@ pageContext.setAttribute("portletURL", portletURL);
 
 			row.setParameter("userGroupUser", userGroupUser);
 
-			String iconHelpMessage = StringPool.BLANK;
+			String message = StringPool.BLANK;
 
 			if (organizationUser || userGroupUser) {
-                StringBundler namesString = new StringBundler();
-                
-                for (int j = 0; j < (names.size() - 1); j++) {
-                    namesString.append(names.get(j));
+				StringBundler namesSB = new StringBundler();
 
-                    if (j < (names.size() - 2)) {
-                        namesString.append(StringPool.COMMA);
-                    }
-                }
+				for (int j = 0; j < (names.size() - 1); j++) {
+					namesSB.append(names.get(j));
 
-                if (names.size() == 1) {
-                    iconHelpMessage = LanguageUtil.format(pageContext, "you-are-a-member-of-x-because-you-belong-to-x", new Object[]{HtmlUtil.escape(group.getDescriptiveName()), names.get(0)});
-                }
+					if (j < (names.size() - 2)) {
+						namesSB.append(", ");
+					}
+				}
+
+				if (names.size() == 1) {
+					message = LanguageUtil.format(pageContext, "you-are-a-member-of-x-because-you-belong-to-x", new Object[] {HtmlUtil.escape(group.getDescriptiveName()), names.get(0)});
+				}
 				else {
-                    iconHelpMessage = LanguageUtil.format(pageContext, "you-are-a-member-of-x-because-you-belong-to-x-and-x", new Object[] {HtmlUtil.escape(group.getDescriptiveName()), namesString, names.get(names.size() - 1)});
-                }
+					message = LanguageUtil.format(pageContext, "you-are-a-member-of-x-because-you-belong-to-x-and-x", new Object[] {HtmlUtil.escape(group.getDescriptiveName()), namesSB, names.get(names.size() - 1)});
+				}
 			}
 			%>
 
-			<liferay-util:buffer var="iconHelpTaglib">
-				<liferay-ui:icon-help message="<%= iconHelpMessage %>" />
+			<liferay-util:buffer var="iconHelp">
+				<liferay-ui:icon-help message="<%= message %>" />
 			</liferay-util:buffer>
 
 		<%
-			if (Validator.isNotNull(iconHelpMessage)) {
-				sb.append(iconHelpTaglib);
-			}
+			sb.append(iconHelp);
 		}
 
 		row.addText(sb.toString());

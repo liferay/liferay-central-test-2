@@ -21,8 +21,8 @@ ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_
 
 Group group = (Group)row.getObject();
 
-boolean organizationUser = GetterUtil.getBoolean((Serializable)row.getParameter("organizationUser"), false);
-boolean userGroupUser = GetterUtil.getBoolean((Serializable)row.getParameter("userGroupUser"), false);
+boolean organizationUser = GetterUtil.getBoolean(row.getParameter("organizationUser"));
+boolean userGroupUser = GetterUtil.getBoolean(row.getParameter("userGroupUser"));
 %>
 
 <liferay-ui:icon-menu>
