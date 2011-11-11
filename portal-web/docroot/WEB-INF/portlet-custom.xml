@@ -2960,12 +2960,12 @@
 		<qname xmlns:x="http://www.liferay.com/public-render-parameters">x:categoryId</qname>
 	</public-render-parameter>
 	<public-render-parameter>
-		<identifier>tag</identifier>
-		<qname xmlns:x="http://www.liferay.com/public-render-parameters">x:tag</qname>
-	</public-render-parameter>
-	<public-render-parameter>
 		<identifier>resetCur</identifier>
 		<qname xmlns:w="http://www.liferay.com/public-render-parameters">w:resetCur</qname>
+	</public-render-parameter>
+	<public-render-parameter>
+		<identifier>tag</identifier>
+		<qname xmlns:x="http://www.liferay.com/public-render-parameters">x:tag</qname>
 	</public-render-parameter>
 	<public-render-parameter>
 		<identifier>nodeId</identifier>
