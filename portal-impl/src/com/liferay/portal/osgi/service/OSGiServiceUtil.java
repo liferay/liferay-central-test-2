@@ -418,19 +418,6 @@ public class OSGiServiceUtil {
 		}
 	}
 
-	private void _registerServletContext(ServletContext servletContext) {
-		BundleContext bundleContext = _framework.getBundleContext();
-
-		Hashtable<String, Object> properties = new Hashtable<String, Object>();
-
-		properties.put(OSGiConstants.BEAN_ID, ServletContext.class.getName());
-		properties.put(OSGiConstants.ORIGINAL_BEAN, Boolean.TRUE);
-
-		bundleContext.registerService(
-			new String[] {ServletContext.class.getName()}, servletContext,
-			properties);
-	}
-
 	private void _registerService(
 		BundleContext bundleContext, String beanName, Object bean) {
 
@@ -453,6 +440,19 @@ public class OSGiServiceUtil {
 
 		bundleContext.registerService(
 			names.toArray(new String[names.size()]), bean, properties);
+	}
+
+	private void _registerServletContext(ServletContext servletContext) {
+		BundleContext bundleContext = _framework.getBundleContext();
+
+		Hashtable<String, Object> properties = new Hashtable<String, Object>();
+
+		properties.put(OSGiConstants.BEAN_ID, ServletContext.class.getName());
+		properties.put(OSGiConstants.ORIGINAL_BEAN, Boolean.TRUE);
+
+		bundleContext.registerService(
+			new String[] {ServletContext.class.getName()}, servletContext,
+			properties);
 	}
 
 	private void _setBundleStartLevel(long bundleId, int startLevel)

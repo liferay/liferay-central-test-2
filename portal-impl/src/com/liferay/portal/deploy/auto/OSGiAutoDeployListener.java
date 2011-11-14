@@ -31,7 +31,9 @@ import java.io.InputStream;
 
 import java.net.URI;
 
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
 import java.util.jar.Attributes;
 import java.util.jar.Manifest;
 
@@ -82,7 +84,7 @@ public class OSGiAutoDeployListener implements AutoDeployListener {
 
 		if (framework == null) {
 			if (_log.isDebugEnabled()) {
-				_log.debug("OSGi framework disabled or not installed!");
+				_log.debug("OSGi framework is disabled or not installed");
 			}
 
 			return;
@@ -128,9 +130,8 @@ public class OSGiAutoDeployListener implements AutoDeployListener {
 		}
 	}
 
-	protected void installBundle(
-			Framework framework, File file, Manifest manifest)
-		throws Exception {
+	protected Bundle getBundle(
+		Framework framework, Manifest manifest) {
 
 		BundleContext bundleContext = framework.getBundleContext();
 
@@ -138,28 +139,38 @@ public class OSGiAutoDeployListener implements AutoDeployListener {
 
 		String bundleSymbolicNameAttribute = attributes.getValue(
 			Constants.BUNDLE_SYMBOLICNAME);
+
+		Map<String, Map<String, String>> bundleSymbolicNamesMap =
+			OSGiHeader.parseHeader(bundleSymbolicNameAttribute);
+
+		Set<String> bundleSymbolicNamesSet = bundleSymbolicNamesMap.keySet();
+
+		Iterator<String> bundleSymbolicNamesIterator =
+			bundleSymbolicNamesSet.iterator();
+
+		String bundleSymbolicName = bundleSymbolicNamesIterator.next();
+
 		String bundleVersionAttribute = attributes.getValue(
 			Constants.BUNDLE_VERSION);
 
 		Version bundleVersion = Version.parseVersion(bundleVersionAttribute);
 
-		Map<String, Map<String, String>> bundleSymbolicNameMap =
-			OSGiHeader.parseHeader(bundleSymbolicNameAttribute);
+		for (Bundle bundle : bundleContext.getBundles()) {
+			if (bundleSymbolicName.equals(bundle.getSymbolicName()) &&
+				bundleVersion.equals(bundle.getVersion())) {
 
-		String bundleSymbolicName =
-			bundleSymbolicNameMap.keySet().iterator().next();
-
-		Bundle bundle = null;
-
-		for (Bundle curBundle : bundleContext.getBundles()) {
-			if (curBundle.getSymbolicName().equals(bundleSymbolicName) &&
-				curBundle.getVersion().equals(bundleVersion)) {
-
-				bundle = curBundle;
-
-				break;
+				return bundle;
 			}
 		}
+
+		return null;
+	}
+
+	protected void installBundle(
+			Framework framework, File file, Manifest manifest)
+		throws Exception {
+
+		Bundle bundle = getBundle(framework, manifest);
 
 		InputStream inputStream = new FileInputStream(file);
 
@@ -168,6 +179,8 @@ public class OSGiAutoDeployListener implements AutoDeployListener {
 		}
 		else {
 			try {
+				BundleContext bundleContext = framework.getBundleContext();
+
 				URI uri = file.toURI();
 
 				bundle = bundleContext.installBundle(
@@ -183,7 +196,7 @@ public class OSGiAutoDeployListener implements AutoDeployListener {
 		}
 	}
 
-	private static final Log _log = LogFactoryUtil.getLog(
+	private static Log _log = LogFactoryUtil.getLog(
 		OSGiAutoDeployListener.class);
 
 }
