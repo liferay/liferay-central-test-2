@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
+import com.liferay.portal.kernel.util.SessionParamUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -36,6 +37,7 @@ import com.liferay.portal.service.ThemeLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.tools.SassToCssBuilder;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PropsValues;
 
 import java.io.File;
 
@@ -106,7 +108,8 @@ public class DynamicCSSUtil {
 		File cacheCssRealFile = SassToCssBuilder.getCacheFile(cssRealPath);
 
 		if (cacheCssRealFile.exists() &&
-			(cacheCssRealFile.lastModified() == cssRealFile.lastModified())) {
+			(cacheCssRealFile.lastModified() == cssRealFile.lastModified()) &&
+			_isThemeCssFastLoad(request, themeDisplay)) {
 
 			parsedContent = FileUtil.read(cacheCssRealFile);
 
@@ -248,6 +251,17 @@ public class DynamicCSSUtil {
 		}
 
 		return themeImagesPath;
+	}
+
+	private static boolean _isThemeCssFastLoad(
+		HttpServletRequest request, ThemeDisplay themeDisplay) {
+
+		if (themeDisplay != null) {
+			return themeDisplay.isThemeCssFastLoad();
+		}
+
+		return SessionParamUtil.getBoolean(
+			request, "css_fast_load", PropsValues.THEME_CSS_FAST_LOAD);
 	}
 
 	private static String _parseSass(
