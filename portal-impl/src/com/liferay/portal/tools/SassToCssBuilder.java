@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.SystemProperties;
 import com.liferay.portal.kernel.util.UnsyncPrintWriterPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.ModelHintsConstants;
 import com.liferay.portal.scripting.ruby.RubyExecutor;
 import com.liferay.portal.servlet.filters.minifier.MinifierFilter;
 import com.liferay.portal.util.FastDateFormatFactoryImpl;
@@ -112,7 +113,22 @@ public class SassToCssBuilder {
 	private String _getContent(File file) throws Exception {
 		String content = FileUtil.read(file);
 
-		return MinifierFilter.aggregateCss(file.getParent(), content);
+		content = MinifierFilter.aggregateCss(file.getParent(), content);
+
+		return StringUtil.replace(
+			content,
+			new String[] {
+				"@model_hints_constants_text_display_height@",
+				"@model_hints_constants_text_display_width@",
+				"@model_hints_constants_textarea_display_height@",
+				"@model_hints_constants_textarea_display_width@"
+			},
+			new String[] {
+				ModelHintsConstants.TEXT_DISPLAY_HEIGHT,
+				ModelHintsConstants.TEXT_DISPLAY_WIDTH,
+				ModelHintsConstants.TEXTAREA_DISPLAY_HEIGHT,
+				ModelHintsConstants.TEXTAREA_DISPLAY_WIDTH
+			});
 	}
 
 	private String _getCssThemePath(String fileName) {
