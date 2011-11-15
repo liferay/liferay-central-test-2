@@ -819,6 +819,9 @@ var defaultTypes = []]>
 		<delete dir="test-results" />
 
 		<delete>
+			<fileset dir="docroot/html/css" includes="**/_sass_cache_*.css" />
+			<fileset dir="docroot/html/portlet" includes="**/_sass_cache_*.css" />
+			<fileset dir="docroot/html/themes" includes="**/_sass_cache_*.css" />
 			<fileset dir="docroot/WEB-INF/tld" includes="liferay*.tld" />
 		</delete>
 
