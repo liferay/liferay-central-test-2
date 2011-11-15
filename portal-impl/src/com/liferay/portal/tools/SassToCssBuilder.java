@@ -97,8 +97,6 @@ public class SassToCssBuilder {
 
 		_initUtil(classLoader);
 
-		_rubyExecutor = new RubyExecutor();
-
 		_rubyScript = StringUtil.read(
 			classLoader,
 			"com/liferay/portal/servlet/filters/dynamiccss/main.rb");
@@ -106,6 +104,12 @@ public class SassToCssBuilder {
 		_tempDir = SystemProperties.get(SystemProperties.TMP_DIR);
 
 		for (String dirName : dirNames) {
+
+			// Create a new Ruby executor as a workaround for a bug with Ruby
+			// that breaks "ant build-css" when it parses too many CSS files
+
+			_rubyExecutor = new RubyExecutor();
+
 			_parseSassDirectory(dirName);
 		}
 	}
@@ -187,6 +191,8 @@ public class SassToCssBuilder {
 			}
 			catch (Exception e) {
 				System.out.println("Unable to parse " + fileName);
+
+				e.printStackTrace();
 			}
 		}
 	}
