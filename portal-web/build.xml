@@ -143,7 +143,7 @@
 					</sequential>
 				</for>
 
-				<replaceregexp match="url\(([^)]+)\)" replace="url(&lt;%= themeImagesPath %&gt;/aui/\1)" flags="g" byline="false">
+				<replaceregexp match="url\(([^)]+)\)" replace="url(@theme_image_path@/aui/\1)" flags="g" byline="false">
 					<fileset
 						dir="docroot/html/ALLOY_ZIP/build/aui-skins/tmp/"
 						includes="alloy.css"
@@ -160,7 +160,7 @@
 
 				<copy
 					file="docroot/html/ALLOY_ZIP/build/aui-skins/tmp/alloy.css"
-					tofile="docroot/html/portal/aui/css.jspf"
+					tofile="docroot/html/css/portal/aui.css"
 					overwrite="true"
 				/>
 
@@ -352,7 +352,7 @@
 			newenvironment="true"
 		>
 			<jvmarg value="-Dliferay.lib.portal.dir=${basedir}/../lib/portal" />
-			<arg value="sass.dir.0=${basedir}/docroot/html/portal" />
+			<arg value="sass.dir.0=${basedir}/docroot/html/css" />
 			<arg value="sass.dir.1=${basedir}/docroot/html/portlet" />
 			<arg value="sass.dir.2=${basedir}/docroot/html/themes" />
 		</java>
