@@ -1009,6 +1009,8 @@ Please set the property "jdk.6.home" in build.properties.
 		<antcall target="build-tinymce" />
 		<antcall target="build-vaadin" />
 
+		<antcall target="build-css" />
+
 		<copy todir="docroot/WEB-INF/lib" file="${project.dir}/portal-client/portal-client.jar" failonerror="false" />
 
 		<antcall target="build-common-web.deploy" />
