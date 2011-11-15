@@ -97,7 +97,7 @@ public class PortalCacheClusterEvent implements Serializable {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(5);
+		StringBundler sb = new StringBundler(7);
 
 		sb.append(_cacheName);
 		sb.append(StringPool.COLON);
