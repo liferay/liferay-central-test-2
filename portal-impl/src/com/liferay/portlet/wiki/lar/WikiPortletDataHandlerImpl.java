@@ -354,12 +354,15 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 					_NAMESPACE, "attachments") &&
 				page.isHead()) {
 
-				for (String attachment : page.getAttachmentsFiles()) {
-					int pos = attachment.lastIndexOf(CharPool.SLASH);
+				String[] attachmentsFiles = page.getAttachmentsFiles();
+
+				for (int i = 0; i < attachmentsFiles.length; i++) {
+					String attachment = attachmentsFiles[i];
+					int pos = attachment.lastIndexOf(StringPool.SLASH);
 
 					String name = attachment.substring(pos + 1);
 					String binPath = getPageAttachementBinPath(
-						portletDataContext, page, name);
+						portletDataContext, page, "attachment" + i);
 
 					Element attachmentEl = pageElement.addElement("attachment");
 
@@ -418,7 +421,7 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 
 	protected static String getPageAttachementBinPath(
 		PortletDataContext portletDataContext, WikiPage page,
-		String attachment) {
+		String fileName) {
 
 		StringBundler sb = new StringBundler(5);
 
@@ -426,7 +429,7 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 		sb.append("/bin/");
 		sb.append(page.getPageId());
 		sb.append(StringPool.SLASH);
-		sb.append(attachment);
+		sb.append(fileName);
 
 		return sb.toString();
 	}
