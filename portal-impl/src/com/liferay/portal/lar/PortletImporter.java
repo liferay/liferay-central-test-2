@@ -169,30 +169,34 @@ public class PortletImporter {
 
 				String queryValuesName = "queryValues" + index;
 
-				String[] importedCategoryPKs = portletPreferences.getValues(
-					queryValuesName, null);
+				String[] importedAssetCategoryPKs =
+					portletPreferences.getValues(queryValuesName, null);
 
 				Map<Long, Long> assetCategoryPKs =
 					(Map<Long, Long>)portletDataContext.getNewPrimaryKeysMap(
 						AssetCategory.class);
 
-				String[] newCategoryPKs = new String[
-					importedCategoryPKs.length];
+				String[] newAssetCategoryPKs = new String[
+					importedAssetCategoryPKs.length];
 
 				int i = 0;
 
-				for (String importedCategoryPK : importedCategoryPKs) {
-					String newCategoryPk = StringUtil.valueOf(
-						assetCategoryPKs.get(new Long(importedCategoryPK)));
+				for (String importedAssetCategoryPK :
+						importedAssetCategoryPKs) {
 
-					if (Validator.isNull(newCategoryPk)) {
-						newCategoryPk = importedCategoryPK;
+					String newAssetCategoryPK = StringUtil.valueOf(
+						assetCategoryPKs.get(
+							new Long(importedAssetCategoryPK)));
+
+					if (Validator.isNull(newAssetCategoryPK)) {
+						newAssetCategoryPK = importedAssetCategoryPK;
 					}
 
-					newCategoryPKs[i++] = newCategoryPk;
+					newAssetCategoryPKs[i++] = newAssetCategoryPK;
 				}
 
-				portletPreferences.setValues(queryValuesName, newCategoryPKs);
+				portletPreferences.setValues(
+					queryValuesName, newAssetCategoryPKs);
 			}
 		}
 
