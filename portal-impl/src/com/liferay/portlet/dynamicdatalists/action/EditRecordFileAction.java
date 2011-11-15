@@ -93,8 +93,8 @@ public class EditRecordFileAction extends PortletAction {
 		throws PortalException, SystemException {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
-			WebKeys.THEME_DISPLAY); 
-		
+			WebKeys.THEME_DISPLAY);
+
 		long recordId = ParamUtil.getLong(portletRequest, "recordId");
 
 		DDLRecord record = DDLRecordLocalServiceUtil.getRecord(recordId);
