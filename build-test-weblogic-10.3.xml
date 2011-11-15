@@ -305,7 +305,7 @@
 			</then>
 		</if>
 
-		<record name="log" action="start" />
+		<record action="start" name="log" />
 
 		<antcall target="start-selenium" />
 
@@ -319,7 +319,7 @@
 			<arg line="${vm.drive}\${vm.host}\${vm.host}.vmx stop hard" />
 		</exec>
 
-		<record name="log" action="stop" />
+		<record action="stop" name="log" />
 
 		<antcall target="evaluate-logs" />
 	</target>

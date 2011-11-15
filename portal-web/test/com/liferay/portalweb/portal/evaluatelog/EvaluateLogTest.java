@@ -20,13 +20,11 @@ import com.liferay.portal.kernel.util.FileUtil;
 
 import com.liferay.portal.util.BaseTestCase;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 /**
  * @author Brian Wing Shun Chan
  */
 public class EvaluateLogTest extends BaseTestCase {
+
 	public void testEvaluateLog() throws Exception {
 		assertTrue(evaluateLog());
 	}
@@ -52,11 +50,9 @@ public class EvaluateLogTest extends BaseTestCase {
 				continue;
 			}
 
-			Pattern startedThreadPattern = Pattern.compile(
-				"The web application \\[.*\\] appears to have started");
-			Matcher startedThreadMatcher = startedThreadPattern.matcher(line);
+			if (line.matches(
+					"The web application \\[.*\\] appears to have started")) {
 
-			if (startedThreadMatcher.find()) {
 				if (line.contains("[AWT-Windows]")) {
 					continue;
 				}
@@ -73,4 +69,5 @@ public class EvaluateLogTest extends BaseTestCase {
 
 		return true;
 	}
+
 }

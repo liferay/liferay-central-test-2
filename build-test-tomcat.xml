@@ -228,7 +228,7 @@ web.server.display.node=true</echo>
 	</target>
 
 	<target name="run-tomcat">
-		<record name="log" action="start" />
+		<record action="start" name="log" />
 
 		<antcall target="run-simple-server">
 			<param name="simple.server.dir" value="${app.server.tomcat.dir}" />
@@ -241,7 +241,7 @@ web.server.display.node=true</echo>
 			<param name="simple.server.stop.executable" value="shutdown${file.suffix.bat}" />
 		</antcall>
 
-		<record name="log" action="stop" />
+		<record action="stop" name="log" />
 
 		<antcall target="evaluate-logs" />
 	</target>
