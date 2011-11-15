@@ -14,9 +14,9 @@
 
 package com.liferay.portlet.wiki.engines;
 
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
 import com.liferay.portal.kernel.portlet.Router;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
@@ -55,73 +55,8 @@ public class HtmlEngine implements WikiEngine {
 	public Map<String, Boolean> getOutgoingLinks(WikiPage page)
 		throws PageContentException {
 
-		if (Validator.isNull(page.getContent())) {
-			return Collections.emptyMap();
-		}
-
 		try {
-			_check(page);
-
-			Source source = new Source(page.getContent());
-
-			List<StartTag> tags = source.getAllStartTags("a");
-
-			Map<String, Boolean> links = new HashMap<String, Boolean>();
-
-			for (StartTag tag : tags) {
-				String targetUri = tag.getAttributeValue("href");
-
-				if (Validator.isNotNull(targetUri)) {
-					int indexOfFriendlyURLPath = targetUri.lastIndexOf(
-						_friendlyURLMapping);
-
-					String friendlyURLPath = targetUri.substring(
-						indexOfFriendlyURLPath + _friendlyURLMapping.length());
-
-					if (friendlyURLPath.endsWith(StringPool.SLASH)) {
-						friendlyURLPath = friendlyURLPath.substring(
-							0, friendlyURLPath.length() - 1);
-					}
-
-					Map<String, String> routeParameters =
-						new HashMap<String, String>();
-
-					if (!_router.urlToParameters(
-							friendlyURLPath, routeParameters)) {
-
-						if (_log.isWarnEnabled()) {
-							_log.warn(
-								"No route could be found to match URL " +
-									friendlyURLPath);
-						}
-					}
-					else {
-						String title = routeParameters.get("title");
-						String nodeName = routeParameters.get("nodeName");
-
-						if (Validator.isNotNull(title) &&
-							Validator.isNotNull(nodeName)) {
-
-							try {
-								WikiNodeLocalServiceUtil.getNode(
-									page.getGroupId(), nodeName);
-
-								links.put(title.toLowerCase(), Boolean.TRUE);
-							}
-							catch (NoSuchNodeException nsne) {
-								if (_log.isWarnEnabled()) {
-									_log.warn(
-										"There is no wiki node with groupId " +
-											page.getGroupId() +
-												" and nodeName " + nodeName);
-								}
-							}
-						}
-					}
-				}
-			}
-
-			return links;
+			return _getOutgoingLinks(page);
 		}
 		catch (Exception e) {
 			throw new PageContentException(e);
@@ -138,23 +73,81 @@ public class HtmlEngine implements WikiEngine {
 		return true;
 	}
 
-	private void _check(WikiPage page) throws SystemException {
-		if (Validator.isNull(_friendlyURLMapping) ||
-			Validator.isNull(_router)) {
+	protected Map<String, Boolean> _getOutgoingLinks(WikiPage page)
+		throws Exception {
 
-			Portlet portlet = PortletLocalServiceUtil.getPortletById(
-				page.getCompanyId(), PortletKeys.WIKI);
-
-			_friendlyURLMapping = Portal.FRIENDLY_URL_SEPARATOR +
-				portlet.getFriendlyURLMapping();
-
-			_router = portlet.getFriendlyURLMapperInstance().getRouter();
+		if (Validator.isNull(page.getContent())) {
+			return Collections.emptyMap();
 		}
+
+		Map<String, Boolean> links = new HashMap<String, Boolean>();
+
+		Portlet portlet = PortletLocalServiceUtil.getPortletById(
+			page.getCompanyId(), PortletKeys.WIKI);
+
+		String friendlyURLMapping = Portal.FRIENDLY_URL_SEPARATOR +
+			portlet.getFriendlyURLMapping();
+
+		FriendlyURLMapper friendlyURLMapper =
+			portlet.getFriendlyURLMapperInstance();
+
+		Router router = friendlyURLMapper.getRouter();
+
+		Source source = new Source(page.getContent());
+
+		List<StartTag> startTags = source.getAllStartTags("a");
+
+		for (StartTag startTag : startTags) {
+			String href = startTag.getAttributeValue("href");
+
+			if (Validator.isNull(href)) {
+				continue;
+			}
+
+			int pos = href.lastIndexOf(friendlyURLMapping);
+
+			String friendlyURL = href.substring(
+				pos + friendlyURLMapping.length());
+
+			if (friendlyURL.endsWith(StringPool.SLASH)) {
+				friendlyURL = friendlyURL.substring(
+					0, friendlyURL.length() - 1);
+			}
+
+			Map<String, String> routeParameters = new HashMap<String, String>();
+
+			if (!router.urlToParameters(friendlyURL, routeParameters)) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(
+						"No route could be found to match URL " + friendlyURL);
+				}
+
+				continue;
+			}
+
+			String title = routeParameters.get("title");
+			String nodeName = routeParameters.get("nodeName");
+
+			if (Validator.isNull(title) || Validator.isNull(nodeName)) {
+				continue;
+			}
+
+			try {
+				WikiNodeLocalServiceUtil.getNode(
+					page.getGroupId(), nodeName);
+
+				links.put(title.toLowerCase(), Boolean.TRUE);
+			}
+			catch (NoSuchNodeException nsne) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(nsne.getMessage());
+				}
+			}
+		}
+
+		return links;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(HtmlEngine.class);
-
-	private String _friendlyURLMapping;
-	private Router _router;
 
 }
