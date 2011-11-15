@@ -23,7 +23,6 @@ long assetEntryId = GetterUtil.getLong((String)request.getAttribute("liferay-ui:
 
 List<AssetLink> assetLinks = new ArrayList<AssetLink>();
 
-
 String assetLinkSearchContainerPrimaryKeys = ParamUtil.getString(request, "assetLinkSearchContainerPrimaryKeys");
 
 if (Validator.isNull(assetLinkSearchContainerPrimaryKeys) && SessionErrors.isEmpty(portletRequest) && (assetEntryId > 0)) {
@@ -33,9 +32,9 @@ else {
 	String[] assetEntriesPrimaryKeys = StringUtil.split(assetLinkSearchContainerPrimaryKeys);
 
 	for (String assetEntryPrimaryKey : assetEntriesPrimaryKeys) {
-		long tempAssetEntryId = GetterUtil.getLong(assetEntryPrimaryKey);
+		long assetEntryPrimaryKeyLong = GetterUtil.getLong(assetEntryPrimaryKey);
 
-		AssetEntry assetEntry2 = AssetEntryServiceUtil.getEntry(tempAssetEntryId);
+		AssetEntry assetEntry = AssetEntryServiceUtil.getEntry(assetEntryPrimaryKeyLong);
 
 		AssetLink assetLink = AssetLinkLocalServiceUtil.createAssetLink(0);
 
@@ -46,7 +45,7 @@ else {
 			assetLink.setEntryId1(0);
 		}
 
-		assetLink.setEntryId2(assetEntry2.getEntryId());
+		assetLink.setEntryId2(assetEntry.getEntryId());
 
 		assetLinks.add(assetLink);
 	}
