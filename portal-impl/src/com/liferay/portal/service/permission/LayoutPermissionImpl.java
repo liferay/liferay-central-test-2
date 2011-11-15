@@ -288,7 +288,7 @@ public class LayoutPermissionImpl implements LayoutPermission {
 			String actionId)
 		throws PortalException, SystemException {
 
-		if (actionId.equals(ActionKeys.VIEW)) {
+		if (actionId.equals(ActionKeys.VIEW) && checkViewableGroup) {
 			return isViewableGroup(
 				permissionChecker, layout, controlPanelCategory,
 				checkViewableGroup);
@@ -378,13 +378,6 @@ public class LayoutPermissionImpl implements LayoutPermission {
 			return false;
 		}
 
-		if (containsWithoutViewableGroup(
-				permissionChecker, layout, controlPanelCategory,
-				checkResourcePermission, ActionKeys.VIEW)) {
-
-			return true;
-		}
-
 		// Control panel layouts are only viewable by authenticated users
 
 		if (group.isControlPanel()) {
@@ -471,6 +464,32 @@ public class LayoutPermissionImpl implements LayoutPermission {
 						}
 					}
 				}
+			}
+		}
+
+		// Only check the actual Layout if all of the above has failed
+
+		if (containsWithoutViewableGroup(
+				permissionChecker, layout, controlPanelCategory,
+				ActionKeys.VIEW)) {
+
+			return true;
+		}
+
+		// As a last resort, check if any top level pages are viewable by the
+		// user
+
+		List<Layout> layouts = LayoutLocalServiceUtil.getLayouts(
+			layout.getGroupId(), layout.isPrivateLayout(),
+			LayoutConstants.DEFAULT_PARENT_LAYOUT_ID);
+
+		for (Layout curLayout : layouts) {
+			if (!curLayout.isHidden() &&
+				containsWithoutViewableGroup(
+					permissionChecker, curLayout, controlPanelCategory,
+					ActionKeys.VIEW)) {
+
+				return true;
 			}
 		}
 
