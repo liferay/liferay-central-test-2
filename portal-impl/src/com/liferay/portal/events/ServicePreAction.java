@@ -1571,7 +1571,7 @@ public class ServicePreAction extends Action {
 
 		Group group = layout.getGroup();
 
-		boolean hasUpdateLayoutPermission = false;
+		boolean hasViewLayoutPermission = false;
 		boolean hasViewStagingPermission =
 			(group.isStagingGroup() || group.isStagedRemotely()) &&
 			 GroupPermissionUtil.contains(
@@ -1582,7 +1582,7 @@ public class ServicePreAction extends Action {
 				permissionChecker, layout, ActionKeys.VIEW) ||
 			hasViewStagingPermission) {
 
-			hasUpdateLayoutPermission = true;
+			hasViewLayoutPermission = true;
 		}
 
 		List<Layout> accessibleLayouts = new ArrayList<Layout>();
@@ -1595,7 +1595,7 @@ public class ServicePreAction extends Action {
 					permissionChecker, curLayout, true, ActionKeys.VIEW) ||
 				 hasViewStagingPermission)) {
 
-				if (accessibleLayouts.isEmpty() && !hasUpdateLayoutPermission) {
+				if (accessibleLayouts.isEmpty() && !hasViewLayoutPermission) {
 					layout = curLayout;
 				}
 
@@ -1606,7 +1606,7 @@ public class ServicePreAction extends Action {
 		if (accessibleLayouts.isEmpty()) {
 			layouts = null;
 
-			if (!hasUpdateLayoutPermission) {
+			if (!hasViewLayoutPermission) {
 				SessionErrors.add(
 					request, LayoutPermissionException.class.getName());
 			}
