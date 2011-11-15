@@ -45,11 +45,11 @@ PollsQuestion question = (PollsQuestion)request.getAttribute(WebKeys.POLLS_QUEST
 		boolean hasVoted = PollsUtil.hasVoted(request, question.getQuestionId());
 		%>
 
-		<portlet:actionURL var="votePollURL">
+		<portlet:actionURL var="voteQuestionURL">
 			<portlet:param name="struts_action" value="/polls_display/vote_question" />
 		</portlet:actionURL>
 
-		<aui:form action="<%= votePollURL %>" method="post" name="fm">
+		<aui:form action="<%= voteQuestionURL %>" method="post" name="fm">
 			<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.VOTE %>" />
 			<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
 			<aui:input name="questionId" type="hidden" value="<%= question.getQuestionId() %>" />
