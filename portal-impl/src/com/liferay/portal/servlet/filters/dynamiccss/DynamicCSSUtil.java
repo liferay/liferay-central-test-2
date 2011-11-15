@@ -98,6 +98,12 @@ public class DynamicCSSUtil {
 			theme = _getTheme(request, cssRealPath);
 
 			if (theme == null) {
+				String currentURL = PortalUtil.getCurrentURL(request);
+
+				if (_log.isWarnEnabled()) {
+					_log.warn("No theme found for " + currentURL);
+				}
+
 				return content;
 			}
 		}
