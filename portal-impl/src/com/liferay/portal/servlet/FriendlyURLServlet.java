@@ -233,7 +233,8 @@ public class FriendlyURLServlet extends HttpServlet {
 		}
 
 		if (Validator.isNull(friendlyURL)) {
-			request.setAttribute("REDIRECT_TO_DEFAULT_LAYOUT", Boolean.TRUE);
+			request.setAttribute(
+				WebKeys.REDIRECT_TO_DEFAULT_LAYOUT, Boolean.TRUE);
 		}
 
 		Map<String, Object> requestContext = new HashMap<String, Object>();

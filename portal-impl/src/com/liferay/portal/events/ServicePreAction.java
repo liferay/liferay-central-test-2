@@ -402,7 +402,7 @@ public class ServicePreAction extends Action {
 		}
 
 		Boolean redirectToDefaultLayout = (Boolean)request.getAttribute(
-			"REDIRECT_TO_DEFAULT_LAYOUT");
+			WebKeys.REDIRECT_TO_DEFAULT_LAYOUT);
 
 		if (redirectToDefaultLayout == null) {
 			redirectToDefaultLayout = Boolean.FALSE;
@@ -431,7 +431,7 @@ public class ServicePreAction extends Action {
 				layout = null;
 			}
 			else if (!isViewableGroup ||
-					 (!redirectToDefaultLayout.booleanValue() &&
+					 (!redirectToDefaultLayout &&
 					  !LayoutPermissionUtil.contains(
 						  permissionChecker, layout, false, ActionKeys.VIEW))) {
 

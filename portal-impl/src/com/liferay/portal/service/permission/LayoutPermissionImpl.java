@@ -100,8 +100,8 @@ public class LayoutPermissionImpl implements LayoutPermission {
 		throws PortalException, SystemException {
 
 		return containsWithViewableGroup(
-			permissionChecker, layout, controlPanelCategory,
-			checkViewableGroup, actionId);
+			permissionChecker, layout, controlPanelCategory, checkViewableGroup,
+			actionId);
 	}
 
 	public boolean contains(
@@ -354,8 +354,7 @@ public class LayoutPermissionImpl implements LayoutPermission {
 						ActionKeys.MANAGE_LAYOUTS) ||
 					UserPermissionUtil.contains(
 						permissionChecker, groupUserId,
-						groupUser.getOrganizationIds(),
-						ActionKeys.UPDATE)) {
+						groupUser.getOrganizationIds(), ActionKeys.UPDATE)) {
 
 					return true;
 				}
@@ -467,7 +466,7 @@ public class LayoutPermissionImpl implements LayoutPermission {
 			}
 		}
 
-		// Only check the actual Layout if all of the above has failed
+		// Only check the actual Layout if all of the above failed
 
 		if (containsWithoutViewableGroup(
 				permissionChecker, layout, controlPanelCategory,

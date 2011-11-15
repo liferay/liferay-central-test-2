@@ -72,8 +72,8 @@ public class LayoutPermissionUtil {
 		throws PortalException, SystemException {
 
 		return getLayoutPermission().contains(
-			permissionChecker, layout, controlPanelCategory,
-			checkViewableGroup, actionId);
+			permissionChecker, layout, controlPanelCategory, checkViewableGroup,
+			actionId);
 	}
 
 	public static boolean contains(
