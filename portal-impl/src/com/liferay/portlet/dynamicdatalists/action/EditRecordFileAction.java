@@ -18,15 +18,15 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
-import com.liferay.portal.kernel.servlet.ServletResponseUtil;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.Constants;
-import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.struts.PortletAction;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.documentlibrary.FileSizeException;
 import com.liferay.portlet.dynamicdatalists.model.DDLRecord;
@@ -41,8 +41,6 @@ import javax.portlet.PortletConfig;
 import javax.portlet.PortletRequest;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
-
-import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
@@ -70,8 +68,7 @@ public class EditRecordFileAction extends PortletAction {
 
 	@Override
 	public void serveResource(
-			ActionMapping mapping, ActionForm form,
-			PortletConfig portletConfig,
+			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
 			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
 		throws Exception {
 
@@ -89,36 +86,33 @@ public class EditRecordFileAction extends PortletAction {
 			}
 		}
 
-		HttpServletResponse response = PortalUtil.getHttpServletResponse(
-			resourceResponse);
-
-		response.setContentType(ContentTypes.TEXT_PLAIN);
-
-		ServletResponseUtil.write(response, jsonObject.toString());
+		writeJSON(resourceRequest, resourceResponse, jsonObject);
 	}
 
-	protected void deleteRecordFieldFile(PortletRequest request)
+	protected void deleteRecordFieldFile(PortletRequest portletRequest)
 		throws PortalException, SystemException {
 
-		long recordId = ParamUtil.getLong(request, "recordId");
-		long userId = PortalUtil.getUserId(request);
-
-		String fieldName = ParamUtil.getString(request, "fieldName");
+		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
+			WebKeys.THEME_DISPLAY); 
+		
+		long recordId = ParamUtil.getLong(portletRequest, "recordId");
 
 		DDLRecord record = DDLRecordLocalServiceUtil.getRecord(recordId);
 
-		ServiceContext serviceContext = ServiceContextFactory.getInstance(
-			DDLRecord.class.getName(), request);
-
 		Fields fields = record.getFields();
+
+		String fieldName = ParamUtil.getString(portletRequest, "fieldName");
 
 		Field field = fields.get(fieldName);
 
 		field.setValue(StringPool.BLANK);
 
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			DDLRecord.class.getName(), portletRequest);
+
 		DDLRecordLocalServiceUtil.updateRecord(
-			userId, recordId, false, record.getDisplayIndex(), fields,
-			true, serviceContext);
+			themeDisplay.getUserId(), recordId, false, record.getDisplayIndex(),
+			fields, true, serviceContext);
 	}
 
 	@Override
@@ -131,9 +125,9 @@ public class EditRecordFileAction extends PortletAction {
 
 		long recordId = ParamUtil.getLong(request, "recordId");
 
-		String fieldName = ParamUtil.getString(request, "fieldName");
-
 		DDLRecord record = DDLRecordLocalServiceUtil.getRecord(recordId);
+
+		String fieldName = ParamUtil.getString(request, "fieldName");
 
 		UploadPortletRequest uploadPortletRequest =
 			PortalUtil.getUploadPortletRequest(request);

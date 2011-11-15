@@ -339,6 +339,7 @@ public class DDLUtil {
 		throws Exception {
 
 		DDLRecordSet recordSet = record.getRecordSet();
+
 		DDMStructure ddmStructure = recordSet.getDDMStructure();
 
 		for (String fieldName : ddmStructure.getFieldNames()) {
