@@ -19,6 +19,7 @@ import com.liferay.portal.jcr.JCRFactory;
 import com.liferay.portal.jcr.JCRFactoryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -135,36 +136,35 @@ public class JCRStore extends BaseStore {
 			if (repositoryNode.hasNode(fileName)) {
 				throw new DuplicateFileException(fileName);
 			}
-			else {
-				Node fileNode = repositoryNode.addNode(
-					fileName, JCRConstants.NT_FILE);
 
-				Node contentNode = fileNode.addNode(
-					JCRConstants.JCR_CONTENT, JCRConstants.NT_RESOURCE);
+			Node fileNode = repositoryNode.addNode(
+				fileName, JCRConstants.NT_FILE);
 
-				contentNode.addMixin(JCRConstants.MIX_VERSIONABLE);
-				contentNode.setProperty(
-					JCRConstants.JCR_MIME_TYPE, "text/plain");
+			Node contentNode = fileNode.addNode(
+				JCRConstants.JCR_CONTENT, JCRConstants.NT_RESOURCE);
 
-				ValueFactory valueFactory = session.getValueFactory();
+			contentNode.addMixin(JCRConstants.MIX_VERSIONABLE);
+			contentNode.setProperty(
+				JCRConstants.JCR_MIME_TYPE, ContentTypes.TEXT_PLAIN);
 
-				Binary binary = valueFactory.createBinary(is);
+			ValueFactory valueFactory = session.getValueFactory();
 
-				contentNode.setProperty(JCRConstants.JCR_DATA, binary);
+			Binary binary = valueFactory.createBinary(is);
 
-				contentNode.setProperty(
-					JCRConstants.JCR_LAST_MODIFIED, Calendar.getInstance());
+			contentNode.setProperty(JCRConstants.JCR_DATA, binary);
 
-				session.save();
+			contentNode.setProperty(
+				JCRConstants.JCR_LAST_MODIFIED, Calendar.getInstance());
 
-				Version version = versionManager.checkin(contentNode.getPath());
+			session.save();
 
-				VersionHistory versionHistory =
-					versionManager.getVersionHistory(contentNode.getPath());
+			Version version = versionManager.checkin(contentNode.getPath());
 
-				versionHistory.addVersionLabel(
-					version.getName(), VERSION_DEFAULT, false);
-			}
+			VersionHistory versionHistory =
+				versionManager.getVersionHistory(contentNode.getPath());
+
+			versionHistory.addVersionLabel(
+				version.getName(), VERSION_DEFAULT, false);
 		}
 		catch (RepositoryException re) {
 			throw new SystemException(re);
@@ -633,10 +633,6 @@ public class JCRStore extends BaseStore {
 		try {
 			session = JCRFactoryUtil.createSession();
 
-			Workspace workspace = session.getWorkspace();
-
-			VersionManager versionManager = workspace.getVersionManager();
-
 			Node rootNode = getRootNode(session, companyId);
 
 			Node repositoryNode = getFolderNode(rootNode, repositoryId);
@@ -655,24 +651,24 @@ public class JCRStore extends BaseStore {
 			if (newRepositoryNode.hasNode(fileName)) {
 				throw new DuplicateFileException(fileName);
 			}
-			else {
-				Node fileNode = repositoryNode.getNode(fileName);
 
-				Node contentNode = fileNode.getNode(JCRConstants.JCR_CONTENT);
+			Node fileNode = repositoryNode.getNode(fileName);
 
-				Node newFileNode = newRepositoryNode.addNode(
-					fileName, JCRConstants.NT_FILE);
+			Node contentNode = fileNode.getNode(JCRConstants.JCR_CONTENT);
 
-				String contentNodePath = contentNode.getPath();
-				String newContentNodePath = newFileNode.getPath().concat(
-					StringPool.SLASH).concat(JCRConstants.JCR_CONTENT);
+			String contentNodePath = contentNode.getPath();
 
-				session.move(contentNodePath, newContentNodePath);
+			Node newFileNode = newRepositoryNode.addNode(
+				fileName, JCRConstants.NT_FILE);
 
-				fileNode.remove();
+			String newContentNodePath = newFileNode.getPath().concat(
+				StringPool.SLASH).concat(JCRConstants.JCR_CONTENT);
 
-				session.save();
-			}
+			session.move(contentNodePath, newContentNodePath);
+
+			fileNode.remove();
+
+			session.save();
 		}
 		catch (PathNotFoundException pnfe) {
 			throw new NoSuchFileException(fileName);
@@ -695,10 +691,6 @@ public class JCRStore extends BaseStore {
 		try {
 			session = JCRFactoryUtil.createSession();
 
-			Workspace workspace = session.getWorkspace();
-
-			VersionManager versionManager = workspace.getVersionManager();
-
 			Node rootNode = getRootNode(session, companyId);
 
 			Node repositoryNode = getFolderNode(rootNode, repositoryId);
@@ -715,24 +707,24 @@ public class JCRStore extends BaseStore {
 			if (repositoryNode.hasNode(newFileName)) {
 				throw new DuplicateFileException(newFileName);
 			}
-			else {
-				Node fileNode = repositoryNode.getNode(fileName);
 
-				Node contentNode = fileNode.getNode(JCRConstants.JCR_CONTENT);
+			Node fileNode = repositoryNode.getNode(fileName);
 
-				Node newFileNode = repositoryNode.addNode(
-					newFileName, JCRConstants.NT_FILE);
+			Node contentNode = fileNode.getNode(JCRConstants.JCR_CONTENT);
 
-				String contentNodePath = contentNode.getPath();
-				String newContentNodePath = newFileNode.getPath().concat(
-					StringPool.SLASH).concat(JCRConstants.JCR_CONTENT);
+			String contentNodePath = contentNode.getPath();
 
-				session.move(contentNodePath, newContentNodePath);
+			Node newFileNode = repositoryNode.addNode(
+				newFileName, JCRConstants.NT_FILE);
 
-				fileNode.remove();
+			String newContentNodePath = newFileNode.getPath().concat(
+				StringPool.SLASH).concat(JCRConstants.JCR_CONTENT);
 
-				session.save();
-			}
+			session.move(contentNodePath, newContentNodePath);
+
+			fileNode.remove();
+
+			session.save();
 		}
 		catch (PathNotFoundException pnfe) {
 			throw new NoSuchFileException(fileName);
