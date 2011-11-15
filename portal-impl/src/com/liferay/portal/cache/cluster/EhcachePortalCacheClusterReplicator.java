@@ -20,12 +20,12 @@ import com.liferay.portal.kernel.cache.cluster.PortalCacheClusterLinkUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 
+import java.util.Properties;
+
 import net.sf.ehcache.CacheException;
 import net.sf.ehcache.Ehcache;
 import net.sf.ehcache.Element;
 import net.sf.ehcache.distribution.CacheReplicator;
-
-import java.util.Properties;
 
 /**
  * @author Shuyang Zhou
@@ -35,19 +35,15 @@ public class EhcachePortalCacheClusterReplicator implements CacheReplicator {
 	public EhcachePortalCacheClusterReplicator(Properties properties) {
 		if (properties != null) {
 			_replicatePuts = GetterUtil.getBoolean(
-				properties.getProperty(_REPLICATE_PUTS), false);
-
+				properties.getProperty(_REPLICATE_PUTS));
 			_replicatePutsViaCopy = GetterUtil.getBoolean(
-				properties.getProperty(_REPLICATE_PUTS_VIA_COPY), false);
-
+				properties.getProperty(_REPLICATE_PUTS_VIA_COPY));
 			_replicateRemovals = GetterUtil.getBoolean(
 				properties.getProperty(_REPLICATE_REMOVALS), true);
-
 			_replicateUpdates = GetterUtil.getBoolean(
 				properties.getProperty(_REPLICATE_UPDATES), true);
-
 			_replicateUpdatesViaCopy = GetterUtil.getBoolean(
-				properties.getProperty(_REPLICATE_UPDATES_VIA_COPY), false);
+				properties.getProperty(_REPLICATE_UPDATES_VIA_COPY));
 		}
 	}
 
@@ -144,12 +140,16 @@ public class EhcachePortalCacheClusterReplicator implements CacheReplicator {
 	}
 
 	private static final String _REPLICATE_PUTS = "replicatePuts";
+
 	private static final String _REPLICATE_PUTS_VIA_COPY =
 		"replicatePutsViaCopy";
+
+	private static final String _REPLICATE_REMOVALS = "replicateRemovals";
+
 	private static final String _REPLICATE_UPDATES = "replicateUpdates";
+
 	private static final String _REPLICATE_UPDATES_VIA_COPY =
 		"replicateUpdatesViaCopy";
-	private static final String _REPLICATE_REMOVALS = "replicateRemovals";
 
 	private boolean _replicatePuts;
 	private boolean _replicatePutsViaCopy;

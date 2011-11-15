@@ -101,31 +101,38 @@ public class EhcacheConfigurationUtil {
 
 		cacheConfiguration.addBootstrapCacheLoaderFactory(null);
 
-		List cacheEventListenerConfigurations =
+		List<?> cacheEventListenerConfigurations =
 			cacheConfiguration.getCacheEventListenerConfigurations();
 
-		String properties = null;
+		String cacheEventListenerProperties = null;
 
 		for (Object cacheEventListenerConfiguration :
 				cacheEventListenerConfigurations) {
-			CacheEventListenerFactoryConfiguration configuration =
-				(CacheEventListenerFactoryConfiguration)
-					cacheEventListenerConfiguration;
 
-			if (configuration.getFullyQualifiedClassPath().contains(
+			CacheEventListenerFactoryConfiguration
+				cacheEventListenerFactoryConfiguration =
+					(CacheEventListenerFactoryConfiguration)
+						cacheEventListenerConfiguration;
+
+			String fullyQualifiedClassPath =
+				cacheEventListenerFactoryConfiguration.
+					getFullyQualifiedClassPath();
+
+			if (fullyQualifiedClassPath.contains(
 					"LiferayCacheEventListenerFactory") ||
-				configuration.getFullyQualifiedClassPath().contains(
+				fullyQualifiedClassPath.contains(
 					"net.sf.ehcache.distribution")) {
 
-				properties = configuration.getProperties();
+				cacheEventListenerProperties =
+					cacheEventListenerFactoryConfiguration.getProperties();
 
 				break;
 			}
 		}
 
-		cacheConfiguration.getCacheEventListenerConfigurations().clear();
+		cacheEventListenerConfigurations.clear();
 
-		return properties;
+		return cacheEventListenerProperties;
 	}
 
 	private static void _configureCacheEventListeners(
@@ -163,11 +170,13 @@ public class EhcacheConfigurationUtil {
 		if (clearCachePeerProviderConfigurations ||
 			(!usingDefault && usingLiferayCacheEventListenerFactory)) {
 
-			String properties = _clearCacheEventListenerConfigurations(
-				cacheConfiguration);
+			String cacheEventListenerProperties =
+				_clearCacheEventListenerConfigurations(
+					cacheConfiguration);
 
 			if (enableClusterLinkReplication) {
-				_enableClusterLinkReplication(cacheConfiguration, properties);
+				_enableClusterLinkReplication(
+					cacheConfiguration, cacheEventListenerProperties);
 			}
 		}
 	}

@@ -78,12 +78,12 @@ public class PortalCacheClusterEvent implements Serializable {
 		return _elementKey;
 	}
 
-	public PortalCacheClusterEventType getEventType() {
-		return _portalCacheClusterEventType;
-	}
-
 	public Serializable getElementValue() {
 		return _elementValue;
+	}
+
+	public PortalCacheClusterEventType getEventType() {
+		return _portalCacheClusterEventType;
 	}
 
 	@Override
