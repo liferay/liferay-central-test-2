@@ -4044,7 +4044,7 @@ public class ServiceBuilder {
 				if (col.isPrimary()) {
 					sb.append(" not null");
 				}
-				else if (colType.equals("String") || colType.equals("Date")) {
+				else if (colType.equals("Date") || colType.equals("String")) {
 					sb.append(" null");
 				}
 
@@ -4161,7 +4161,7 @@ public class ServiceBuilder {
 					sb.append(" primary key");
 				}
 			}
-			else if (colType.equals("String") || colType.equals("Date")) {
+			else if (colType.equals("Date") || colType.equals("String")) {
 				sb.append(" null");
 			}
 
