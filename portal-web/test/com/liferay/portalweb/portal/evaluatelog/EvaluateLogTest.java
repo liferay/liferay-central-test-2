@@ -52,7 +52,7 @@ public class EvaluateLogTest extends BaseTestCase {
 
 			if (line.matches(
 					".*The web application \\[.*\\] appears to have started " +
-					"a thread.*")) {
+						"a thread.*")) {
 
 				if (line.contains("[AWT-Windows]")) {
 					continue;
