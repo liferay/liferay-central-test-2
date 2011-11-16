@@ -26,7 +26,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 Group group = (Group)request.getAttribute(WebKeys.GROUP);
 
-if (group != null && group.isStagingGroup()) {
+if ((group != null) && group.isStagingGroup()) {
 	group = group.getLiveGroup();
 }
 
