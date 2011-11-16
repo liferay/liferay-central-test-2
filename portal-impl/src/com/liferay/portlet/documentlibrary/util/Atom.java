@@ -14,10 +14,10 @@
 
 package com.liferay.portlet.documentlibrary.util;
 
+import com.liferay.portal.kernel.util.ArrayUtil;
+
 import java.io.IOException;
 import java.io.RandomAccessFile;
-
-import java.util.Arrays;
 
 /**
  * Atoms are self-contained data units in that contain information about an MP4
@@ -124,7 +124,7 @@ public class Atom {
 
 	public void patchAtom() {
 		for (int index = 4; index < _size - 4; index++) {
-			String type = new String(Arrays.copyOfRange(
+			String type = new String(ArrayUtil.clone(
 				_buffer, index, index + 4));
 
 			if (type.equalsIgnoreCase(Atom.STCO)) {
@@ -163,7 +163,7 @@ public class Atom {
 	}
 
 	protected boolean hasCompressedMoovAtom() {
-		String type = new String(Arrays.copyOfRange(_buffer, 12, 15));
+		String type = new String(ArrayUtil.clone(_buffer, 12, 15));
 
 		if (type.equalsIgnoreCase(Atom.CMOV)) {
 			return true;
@@ -174,16 +174,16 @@ public class Atom {
 	}
 
 	protected int patchCo64Atom(int index) {
-		int size = (int)bytesToLong(Arrays.copyOfRange(
+		int size = (int)bytesToLong(ArrayUtil.clone(
 			_buffer, index - 4, index));
 
-		int offsetCount = (int)bytesToLong(Arrays.copyOfRange(
+		int offsetCount = (int)bytesToLong(ArrayUtil.clone(
 			_buffer, index + 8, index + 12));
 
 		for (int i = 0; i < offsetCount; i++) {
 			int offsetIndex = index + 12 + i * 8;
 
-			long offset = bytesToLong(Arrays.copyOfRange(
+			long offset = bytesToLong(ArrayUtil.clone(
 				_buffer, offsetIndex, offsetIndex + 8));
 
 			offset += _size;
@@ -202,16 +202,16 @@ public class Atom {
 	}
 
 	protected int patchStcoAtom(int index) {
-		int size = (int)bytesToLong(Arrays.copyOfRange(
+		int size = (int)bytesToLong(ArrayUtil.clone(
 			_buffer, index - 4, index));
 
-		int offsetCount = (int)bytesToLong(Arrays.copyOfRange(
+		int offsetCount = (int)bytesToLong(ArrayUtil.clone(
 			_buffer, index + 8, index + 12));
 
 		for (int i = 0; i < offsetCount; i++) {
 			int offsetIndex = index + 12 + i * 4;
 
-			int offset = (int)bytesToLong(Arrays.copyOfRange(
+			int offset = (int)bytesToLong(ArrayUtil.clone(
 				_buffer, offsetIndex, offsetIndex + 4));
 
 			offset += _size;
