@@ -165,8 +165,8 @@ public class SassToCssBuilder {
 		directoryScanner.setBasedir(dirName);
 		directoryScanner.setExcludes(
 			new String[] {
-				"**\\_diffs\\**", "**\\_sass_cache_*\\**", "**\\_styled\\**",
-				"**\\_unstyled\\**"
+				"**\\_diffs\\**", "**\\.sass_cache_*\\**",
+				"**\\_sass_cache_*\\**", "**\\_styled\\**", "**\\_unstyled\\**"
 			});
 		directoryScanner.setIncludes(new String[] {"**\\*.css"});
 
