@@ -33,8 +33,6 @@ page import="com.liferay.portlet.dynamicdatamapping.service.permission.DDMTempla
 <%
 PortletPreferences preferences = renderRequest.getPreferences();
 
-String ddmResource = portletConfig.getInitParameter("ddm-resource");
-
 String portletResource = ParamUtil.getString(request, "portletResource");
 
 if (Validator.isNotNull(portletResource)) {
@@ -48,6 +46,8 @@ long listDDMTemplateId = GetterUtil.getLong(preferences.getValue("listDDMTemplat
 
 boolean editable = GetterUtil.getBoolean(preferences.getValue("editable", Boolean.TRUE.toString()));
 boolean spreadsheet = GetterUtil.getBoolean(preferences.getValue("spreadsheet", Boolean.FALSE.toString()));
+
+String ddmResource = portletConfig.getInitParameter("ddm-resource");
 
 Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZone);
 %>
