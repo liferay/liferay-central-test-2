@@ -143,6 +143,13 @@ public class PluginsEnvironmentBuilder {
 		portalJars.add("commons-logging.jar");
 		portalJars.add("log4j.jar");
 
+		String libDirPath = StringUtil.replace(
+			libDir.getPath(), StringPool.BACK_SLASH, StringPool.SLASH);
+
+		if (libDirPath.contains("/ext/")) {
+			portalJars.add("struts.jar");
+		}
+
 		portalJars = ListUtil.sort(portalJars);
 
 		String[] customJarsArray = libDir.list(new GlobFilenameFilter("*.jar"));
@@ -206,9 +213,6 @@ public class PluginsEnvironmentBuilder {
 		addClasspathEntry(sb, "/portal/util-bridges/util-bridges.jar");
 		addClasspathEntry(sb, "/portal/util-java/util-java.jar");
 		addClasspathEntry(sb, "/portal/util-taglib/util-taglib.jar");
-
-		String libDirPath = StringUtil.replace(
-			libDir.getPath(), StringPool.BACK_SLASH, StringPool.SLASH);
 
 		if (libDirPath.contains("/ext/")) {
 			for (String dirName : new String[] {"global", "portal"}) {
