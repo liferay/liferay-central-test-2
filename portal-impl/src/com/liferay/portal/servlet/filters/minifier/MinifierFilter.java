@@ -59,6 +59,9 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class MinifierFilter extends BasePortalFilter {
 
+	/**
+	 * @see {@link DynamicCSSUtil#_propagateQueryString(String, String)}
+	 */
 	public static String aggregateCss(String dir, String content)
 		throws IOException {
 
