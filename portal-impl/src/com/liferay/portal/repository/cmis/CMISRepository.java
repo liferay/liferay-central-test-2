@@ -71,7 +71,6 @@ import com.liferay.portlet.documentlibrary.util.comparator.RepositoryModelSizeCo
 
 import java.io.InputStream;
 
-import java.math.BigDecimal;
 import java.math.BigInteger;
 
 import java.util.ArrayList;
