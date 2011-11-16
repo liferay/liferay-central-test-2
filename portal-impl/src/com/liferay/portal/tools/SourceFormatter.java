@@ -412,41 +412,6 @@ public class SourceFormatter {
 		}
 	}
 
-	private static boolean _fitsTwoLines(
-		String line, String previousLine, int previousLineLength) {
-
-		if (Validator.isNull(previousLine)) {
-			return false;
-		}
-
-		if (!previousLine.endsWith(StringPool.OPEN_PARENTHESIS)) {
-			return false;
-		}
-
-		if ((line.length() + previousLineLength) > 80) {
-			return false;
-		}
-
-		if (line.endsWith(StringPool.SEMICOLON)) {
-			return true;
-		}
-
-		previousLine = previousLine.trim();
-
-		if ((line.endsWith(StringPool.OPEN_CURLY_BRACE) ||
-			 line.endsWith(StringPool.CLOSE_PARENTHESIS)) &&
-			(previousLine.startsWith("else ") ||
-			 previousLine.startsWith("if ") ||
-			 previousLine.startsWith("private ") ||
-			 previousLine.startsWith("protected ") ||
-			 previousLine.startsWith("public "))) {
-
-			return true;
-		}
-
-		return false;
-	}
-
 	private static String _fixAntXMLProjectName(
 			String basedir, String fileName, String content)
 		throws IOException {
@@ -1103,7 +1068,7 @@ public class SourceFormatter {
 							fileName, "> 80: " + fileName + " " + lineCount);
 					}
 					else {
-						fitsTwoLines = _fitsTwoLines(
+						fitsTwoLines = _isFitsTwoLines(
 							trimmedLine, previousLine, previousLineLength);
 					}
 				}
@@ -1119,8 +1084,8 @@ public class SourceFormatter {
 			}
 			else {
 				if ((lineCount > 1) &&
-					(!(Validator.isNull(previousLine) &&
-					   (lineToSkipIfEmpty == lineCount - 1)))) {
+					(Validator.isNotNull(previousLine) ||
+					 (lineToSkipIfEmpty != lineCount - 1))) {
 
 					sb.append(previousLine);
 					sb.append("\n");
@@ -1836,6 +1801,41 @@ public class SourceFormatter {
 		sb.append("([^>]|%>)*>");
 
 		return sb.toString();
+	}
+
+	private static boolean _isFitsTwoLines(
+		String line, String previousLine, int previousLineLength) {
+
+		if (Validator.isNull(previousLine)) {
+			return false;
+		}
+
+		if (!previousLine.endsWith(StringPool.OPEN_PARENTHESIS)) {
+			return false;
+		}
+
+		if ((line.length() + previousLineLength) > 80) {
+			return false;
+		}
+
+		if (line.endsWith(StringPool.SEMICOLON)) {
+			return true;
+		}
+
+		previousLine = previousLine.trim();
+
+		if ((line.endsWith(StringPool.OPEN_CURLY_BRACE) ||
+			 line.endsWith(StringPool.CLOSE_PARENTHESIS)) &&
+			(previousLine.startsWith("else ") ||
+			 previousLine.startsWith("if ") ||
+			 previousLine.startsWith("private ") ||
+			 previousLine.startsWith("protected ") ||
+			 previousLine.startsWith("public "))) {
+
+			return true;
+		}
+
+		return false;
 	}
 
 	private static boolean _isGenerated(String content) {
