@@ -308,9 +308,10 @@ public class PluginsEnvironmentBuilder {
 					_fileUtil.delete(dirName + ".gitignore");
 				}
 				else {
-					String s = StringUtil.merge(gitIgnores, "\n");
+					String gitIgnoresString = StringUtil.merge(
+						gitIgnores, "\n");
 
-					_fileUtil.write(dirName + ".gitignore", s);
+					_fileUtil.write(dirName + ".gitignore", gitIgnoresString);
 				}
 			}
 		}
