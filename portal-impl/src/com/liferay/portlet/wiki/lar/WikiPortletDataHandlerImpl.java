@@ -358,18 +358,19 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 				for (int i = 0; i < attachmentsFiles.length; i++) {
 					String attachment = attachmentsFiles[i];
 
-					Element attachmentEl = pageElement.addElement("attachment");
+					Element attachmentElement = pageElement.addElement(
+						"attachment");
 
 					int pos = attachment.lastIndexOf(StringPool.SLASH);
 
 					String name = attachment.substring(pos + 1);
 
-					attachmentEl.addAttribute("name", name);
+					attachmentElement.addAttribute("name", name);
 
 					String binPath = getPageAttachementBinPath(
 						portletDataContext, page, i);
 
-					attachmentEl.addAttribute("bin-path", binPath);
+					attachmentElement.addAttribute("bin-path", binPath);
 
 					byte[] bytes = DLStoreUtil.getFileAsBytes(
 						portletDataContext.getCompanyId(),
