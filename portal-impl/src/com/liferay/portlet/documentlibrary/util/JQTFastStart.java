@@ -39,7 +39,7 @@ public class JQTFastStart {
 		_instance.doConvert(inputFile, outputFile);
 	}
 
-	public void doConvert(File inputFile, File outputFile)
+	protected void doConvert(File inputFile, File outputFile)
 		throws IOException {
 
 		validate(inputFile, outputFile);
@@ -75,6 +75,7 @@ public class JQTFastStart {
 
 				if (atom.isFTYP()) {
 					ftypAtom = atom;
+
 					ftypAtom.fillBuffer(randomAccessInputFile);
 
 					ftypFound = true;
@@ -119,6 +120,7 @@ public class JQTFastStart {
 				ftypAtom.getOffset() + ftypAtom.getSize());
 
 			randomAccessOutputFile = new RandomAccessFile(outputFile, "rw");
+
 			randomAccessOutputFile.setLength(0);
 
 			randomAccessOutputFile.write(ftypAtom.getBuffer());
@@ -127,7 +129,7 @@ public class JQTFastStart {
 			byte[] buffer = new byte[1024 * 1024];
 
 			while ((randomAccessInputFile.getFilePointer() + buffer.length) <
-				moovAtom.getOffset()) {
+						moovAtom.getOffset()) {
 
 				int read = randomAccessInputFile.read(buffer);
 
@@ -140,6 +142,7 @@ public class JQTFastStart {
 			buffer = new byte[bufferSize];
 
 			randomAccessInputFile.readFully(buffer);
+
 			randomAccessOutputFile.write(buffer);
 		}
 		finally {
@@ -170,8 +173,8 @@ public class JQTFastStart {
 		}
 	}
 
-	private static JQTFastStart _instance = new JQTFastStart();
-
 	private static Log _log = LogFactoryUtil.getLog(JQTFastStart.class);
+
+	private static JQTFastStart _instance = new JQTFastStart();
 
 }

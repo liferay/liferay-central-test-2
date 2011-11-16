@@ -64,23 +64,28 @@ for (String previewFileURL : previewFileURLs) {
 		}
 	</style>
 	<aui:script use="aui-base,aui-video">
-	    var previewDivObject = A.one('#<portlet:namespace />previewFileContent');
+		var previewDivObject = A.one('#<portlet:namespace />previewFileContent');
+
 		new A.Video(
 			{
-			    boundingBox: '#<portlet:namespace />previewFileContent',
-			    width: previewDivObject.getStyle('width'),
-		    	height: previewDivObject.getStyle('height'),
-		    	<c:if test="<%= Validator.isNotNull(mp4PreviewFileURL) %>">
-			    	url: '<%= mp4PreviewFileURL %>',
-			    </c:if>
-			    <c:if test="<%= Validator.isNotNull(ogvPreviewFileURL) %>">
-			    	ogvUrl: '<%= ogvPreviewFileURL %>',
-			    </c:if>
-			    poster: '<%= videoThumbnailURL %>',
-			    fixedAttributes: {
-			        allowfullscreen: 'true',
-			        bgColor: '#000000'
-			    }
+				boundingBox: '#<portlet:namespace />previewFileContent',
+				fixedAttributes: {
+					allowfullscreen: 'true',
+					bgColor: '#000000'
+				},
+				height: previewDivObject.getStyle('height'),
+
+				<c:if test="<%= Validator.isNotNull(ogvPreviewFileURL) %>">
+					ogvUrl: '<%= ogvPreviewFileURL %>',
+				</c:if>
+
+				poster: '<%= videoThumbnailURL %>',
+
+				<c:if test="<%= Validator.isNotNull(mp4PreviewFileURL) %>">
+					url: '<%= mp4PreviewFileURL %>',
+				</c:if>
+
+				width: previewDivObject.getStyle('width')
 			}
 		).render();
 	</aui:script>

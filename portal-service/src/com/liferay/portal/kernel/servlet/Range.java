@@ -20,10 +20,10 @@ package com.liferay.portal.kernel.servlet;
 public class Range {
 
 	public Range(long start, long end, long total) {
-		this._start = start;
-		this._end = end;
-		this._length = end - start + 1;
-		this._total = total;
+		_start = start;
+		_end = end;
+		_length = end - start + 1;
+		_total = total;
 	}
 
 	@Override
@@ -36,15 +36,15 @@ public class Range {
 			return false;
 		}
 
-		Range other = (Range) obj;
+		Range range = (Range)obj;
 
-		if ((_end != other._end) || (_length != other._length) ||
-			(_start != other._start) || (_total != other._total)) {
+		if ((_end == range._end) && (_length == range._length) &&
+			(_start == range._start) && (_total == range._total)) {
 
-			return false;
+			return true;
 		}
 
-		return true;
+		return false;
 	}
 
 	public long getEnd() {
@@ -65,14 +65,12 @@ public class Range {
 
 	@Override
 	public int hashCode() {
-		int prime = 31;
-
 		int result = 1;
 
-		result = prime * result + (int) (_end ^ (_end >>> 32));
-		result = prime * result + (int) (_length ^ (_length >>> 32));
-		result = prime * result + (int) (_start ^ (_start >>> 32));
-		result = prime * result + (int) (_total ^ (_total >>> 32));
+		result = _PRIME * result + (int) (_end ^ (_end >>> 32));
+		result = _PRIME * result + (int) (_length ^ (_length >>> 32));
+		result = _PRIME * result + (int) (_start ^ (_start >>> 32));
+		result = _PRIME * result + (int) (_total ^ (_total >>> 32));
 
 		return result;
 	}
@@ -93,12 +91,11 @@ public class Range {
 		_total = total;
 	}
 
-	private long _start;
+	private static final int _PRIME = 31;
 
 	private long _end;
-
 	private long _length;
-
+	private long _start;
 	private long _total;
 
 }

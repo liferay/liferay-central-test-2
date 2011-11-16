@@ -28,23 +28,18 @@ String videoThumbnailURL = ParamUtil.getString(request, "thumbnailURL");
 String[] previewFileURLs = null;
 
 if (Validator.isNotNull(mp4PreviewURL) && Validator.isNotNull(ogvPreviewURL)){
-	previewFileURLs = new String[2];
-	previewFileURLs[0]= mp4PreviewURL;
-	previewFileURLs[1] = ogvPreviewURL;
+	previewFileURLs = new String[] {mp4PreviewURL, ogvPreviewURL};
 }
 else if (Validator.isNotNull(mp4PreviewURL) || Validator.isNotNull(ogvPreviewURL)){
-	previewFileURLs = new String[1];
-
 	if (mp4PreviewURL != null) {
-		previewFileURLs[0] = mp4PreviewURL;
+		previewFileURLs = new String[] {mp4PreviewURL};
 	}
 	else {
-		previewFileURLs[0] = ogvPreviewURL;
+		previewFileURLs = new String[] {ogvPreviewURL};
 	}
 }
 else {
-	previewFileURLs = new String[1];
-	previewFileURLs[0] = audioPreviewURL;
+	previewFileURLs = new String[] {audioPreviewURL};
 }
 
 request.setAttribute("view_file_entry.jsp-supportedAudio", String.valueOf(supportedAudio));

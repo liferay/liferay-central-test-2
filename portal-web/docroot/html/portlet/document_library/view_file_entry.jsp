@@ -309,12 +309,10 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 
 						if (Validator.isNotNull(previewQueryString)) {
 							if (hasVideo) {
-								String[] videoContainer = PropsValues.DL_FILE_ENTRY_PREVIEW_VIDEO_CONTAINERS;
+								previewFileURLs = new String[PropsValues.DL_FILE_ENTRY_PREVIEW_VIDEO_CONTAINERS.length];
 
-								previewFileURLs = new String[videoContainer.length];
-
-								for (int i = 0; i < videoContainer.length; i++) {
-									previewFileURLs[i] = _getPreviewURL(fileEntry, fileVersion, themeDisplay, previewQueryString + "&type=" + videoContainer[i]);
+								for (int i = 0; i < PropsValues.DL_FILE_ENTRY_PREVIEW_VIDEO_CONTAINERS.length; i++) {
+									previewFileURLs[i] = _getPreviewURL(fileEntry, fileVersion, themeDisplay, previewQueryString + "&type=" + PropsValues.DL_FILE_ENTRY_PREVIEW_VIDEO_CONTAINERS[i]);
 								}
 							}
 							else if (hasAudio) {

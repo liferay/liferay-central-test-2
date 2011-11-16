@@ -101,10 +101,6 @@ public abstract class DefaultPreviewableProcessor
 
 	protected abstract String getPreviewType();
 
-	protected String[] getPreviewTypes() {
-		return new String[] { getPreviewType() };
-	}
-
 	protected String getPreviewType(int index) {
 		String[] previewTypes = getPreviewTypes();
 
@@ -114,6 +110,10 @@ public abstract class DefaultPreviewableProcessor
 		else {
 			return getPreviewType();
 		}
+	}
+
+	protected String[] getPreviewTypes() {
+		return new String[] { getPreviewType() };
 	}
 
 	protected String getThumbnailFilePath(FileVersion fileVersion) {

@@ -50,15 +50,14 @@ public class Atom {
 
 	public static final String STCO = "stco";
 
-	public static final String WIDE = "wide";
-
 	public static final String[] TOP_LEVEL_ATOMS = {
-		FREE, FTYP, JUNK, MDAT, MOOV, PICT, PNOT, SKIP, WIDE
+		FREE, FTYP, JUNK, MDAT, MOOV, PICT, PNOT, SKIP, Atom.WIDE
 	};
+
+	public static final String WIDE = "wide";
 
 	public Atom(RandomAccessFile randomAccessFile) throws IOException {
 		_offset = randomAccessFile.getFilePointer();
-
 		_size = randomAccessFile.readInt();
 
 		byte[] bytes = new byte[4];
@@ -70,8 +69,6 @@ public class Atom {
 		if (_size == 1) {
 			_size = randomAccessFile.readLong();
 		}
-
-		// Reset to start of atom
 
 		randomAccessFile.seek(_offset);
 	}
@@ -124,8 +121,8 @@ public class Atom {
 
 	public void patchAtom() {
 		for (int index = 4; index < _size - 4; index++) {
-			String type = new String(ArrayUtil.clone(
-				_buffer, index, index + 4));
+			String type = new String(
+				ArrayUtil.clone(_buffer, index, index + 4));
 
 			if (type.equalsIgnoreCase(Atom.STCO)) {
 				index += patchStcoAtom(index) - 4;
@@ -153,13 +150,13 @@ public class Atom {
 	}
 
 	protected long bytesToLong(byte[] buffer) {
-		long retVal = 0;
+		long value = 0;
 
 		for (int i = 0; i < buffer.length; i++) {
-			retVal += ((buffer[i] & _BITMASK) << 8 * (buffer.length - i - 1));
+			value += ((buffer[i] & _BITMASK) << 8 * (buffer.length - i - 1));
 		}
 
-		return retVal;
+		return value;
 	}
 
 	protected boolean hasCompressedMoovAtom() {
@@ -183,8 +180,8 @@ public class Atom {
 		for (int i = 0; i < offsetCount; i++) {
 			int offsetIndex = index + 12 + i * 8;
 
-			long offset = bytesToLong(ArrayUtil.clone(
-				_buffer, offsetIndex, offsetIndex + 8));
+			long offset = bytesToLong(
+				ArrayUtil.clone(_buffer, offsetIndex, offsetIndex + 8));
 
 			offset += _size;
 
@@ -202,17 +199,17 @@ public class Atom {
 	}
 
 	protected int patchStcoAtom(int index) {
-		int size = (int)bytesToLong(ArrayUtil.clone(
-			_buffer, index - 4, index));
+		int size = (int)bytesToLong(
+			ArrayUtil.clone(_buffer, index - 4, index));
 
-		int offsetCount = (int)bytesToLong(ArrayUtil.clone(
-			_buffer, index + 8, index + 12));
+		int offsetCount = (int)bytesToLong(
+			ArrayUtil.clone(_buffer, index + 8, index + 12));
 
 		for (int i = 0; i < offsetCount; i++) {
 			int offsetIndex = index + 12 + i * 4;
 
-			int offset = (int)bytesToLong(ArrayUtil.clone(
-				_buffer, offsetIndex, offsetIndex + 4));
+			int offset = (int)bytesToLong(
+				ArrayUtil.clone(_buffer, offsetIndex, offsetIndex + 4));
 
 			offset += _size;
 
@@ -228,11 +225,8 @@ public class Atom {
 	private static final int _BITMASK = 0x00000000000000FF;
 
 	private byte[] _buffer;
-
 	private long _offset;
-
 	private long _size;
-
 	private String _type;
 
 }

@@ -51,7 +51,7 @@ public class AudioProcessor extends DefaultPreviewableProcessor {
 	}
 
 	public static Set<String> getAudioMimeTypes() {
-		return _audioMimeTypes;
+		return _instance._audioMimeTypes;
 	}
 
 	public static DLProcessor getInstance() {
@@ -261,8 +261,8 @@ public class AudioProcessor extends DefaultPreviewableProcessor {
 
 	private static AudioProcessor _instance = new AudioProcessor();
 
-	private static Set<String> _audioMimeTypes = SetUtil.fromArray(
+	private Set<String> _audioMimeTypes = SetUtil.fromArray(
 		PropsValues.DL_FILE_ENTRY_PREVIEW_AUDIO_MIME_TYPES);
-	private static List<Long> _fileVersionIds = new Vector<Long>();
+	private List<Long> _fileVersionIds = new Vector<Long>();
 
 }

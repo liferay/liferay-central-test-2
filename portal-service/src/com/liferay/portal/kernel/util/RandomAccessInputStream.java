@@ -30,27 +30,31 @@ public class RandomAccessInputStream extends InputStream {
 	public RandomAccessInputStream(InputStream inputStream) throws IOException {
 		_inputStream = inputStream;
 
-		_tempFile = FileUtil.createTempFile();
+		_file = FileUtil.createTempFile();
 
-		_randomAccessFileCache = new RandomAccessFile(_tempFile, "rw");
+		_randomAccessFileCache = new RandomAccessFile(_file, "rw");
 	}
 
+	@Override
 	public void close() throws IOException {
 		super.close();
 
 		_randomAccessFileCache.close();
 
-		FileUtil.delete(_tempFile);
+		FileUtil.delete(_file);
 	}
 
+	@Override
 	public synchronized void mark(int readLimit) {
 		_markPosition = _pointer;
 	}
 
+	@Override
 	public boolean markSupported() {
 		return true;
 	}
 
+	@Override
 	public int read() throws IOException {
 		long next = _pointer + 1;
 
@@ -66,6 +70,7 @@ public class RandomAccessInputStream extends InputStream {
 		}
 	}
 
+	@Override
 	public int read(byte[] bytes, int offset, int length) throws IOException {
 		if (bytes == null) {
 			throw new NullPointerException();
@@ -97,6 +102,7 @@ public class RandomAccessInputStream extends InputStream {
 		}
 	}
 
+	@Override
 	public synchronized void reset() throws IOException {
 		if (_markPosition != -1) {
 			seek(_markPosition);
@@ -111,6 +117,7 @@ public class RandomAccessInputStream extends InputStream {
 		_pointer = position;
 	}
 
+	@Override
 	protected void finalize() throws Throwable {
 		super.finalize();
 
@@ -155,18 +162,12 @@ public class RandomAccessInputStream extends InputStream {
 		return position;
 	}
 
-	private RandomAccessFile _randomAccessFileCache;
-
-	private File _tempFile;
-
-	private boolean _foundEOF = false;
-
+	private File _file;
+	private boolean _foundEOF;
 	private InputStream _inputStream;
-
-	private long _length = 0;
-
-	private long _markPosition = -1L;
-
-	private long _pointer = 0;
+	private long _length;
+	private long _markPosition = -1;
+	private long _pointer;
+	private RandomAccessFile _randomAccessFileCache;
 
 }

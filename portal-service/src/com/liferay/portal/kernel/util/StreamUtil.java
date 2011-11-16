@@ -131,13 +131,6 @@ public class StreamUtil {
 	}
 
 	public static void transfer(
-			InputStream inputStream, OutputStream outputStream, long length)
-		throws IOException {
-
-		transfer(inputStream, outputStream, BUFFER_SIZE, true, length);
-	}
-
-	public static void transfer(
 			InputStream inputStream, OutputStream outputStream, int bufferSize,
 			boolean cleanUp, long length)
 		throws IOException {
@@ -159,16 +152,12 @@ public class StreamUtil {
 				(outputStream instanceof FileOutputStream)) {
 
 				FileInputStream fileInputStream = (FileInputStream)inputStream;
-
 				FileOutputStream fileOutputStream =
 					(FileOutputStream)outputStream;
 
-				FileChannel sourceFileChannel = fileInputStream.getChannel();
-
-				FileChannel targetFileChannel = fileOutputStream.getChannel();
-
 				transferFileChannel(
-					sourceFileChannel, targetFileChannel, length);
+					fileInputStream.getChannel(), fileOutputStream.getChannel(),
+					length);
 			}
 			else {
 				transferByteArray(
@@ -182,6 +171,13 @@ public class StreamUtil {
 		}
 	}
 
+	public static void transfer(
+			InputStream inputStream, OutputStream outputStream, long length)
+		throws IOException {
+
+		transfer(inputStream, outputStream, BUFFER_SIZE, true, length);
+	}
+
 	protected static void transferByteArray(
 			InputStream inputStream, OutputStream outputStream, int bufferSize,
 			long length)
@@ -189,12 +185,12 @@ public class StreamUtil {
 
 		byte[] bytes = new byte[bufferSize];
 
-		long lengthRemaining = length;
+		long remainingLength = length;
 
-		if (lengthRemaining > 0) {
-			while (lengthRemaining > 0) {
+		if (remainingLength > 0) {
+			while (remainingLength > 0) {
 				int readBytes = inputStream.read(
-					bytes, 0, (int)Math.min(lengthRemaining, bufferSize));
+					bytes, 0, (int)Math.min(remainingLength, bufferSize));
 
 				if (readBytes == -1) {
 					break;
@@ -202,7 +198,7 @@ public class StreamUtil {
 
 				outputStream.write(bytes, 0, readBytes);
 
-				lengthRemaining -= readBytes;
+				remainingLength -= readBytes;
 			}
 		}
 		else {
