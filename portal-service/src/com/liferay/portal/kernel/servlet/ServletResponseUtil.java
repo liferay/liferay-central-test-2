@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.RandomAccessInputStream;
 import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.StreamUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -44,6 +45,7 @@ import java.nio.channels.Channels;
 import java.nio.channels.FileChannel;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.ServletOutputStream;
@@ -61,40 +63,42 @@ public class ServletResponseUtil {
 			long length)
 		throws IOException {
 
+		String rangeString = request.getHeader(HttpHeaders.RANGE);
+
+		if (Validator.isNull(rangeString)) {
+			return Collections.emptyList();
+		}
+
+		if (!rangeString.matches(_RANGE_REGEX)) {
+			throw new IOException(
+				"Range header does not match regular expression");
+		}
+
 		List<Range> ranges = new ArrayList<Range>();
 
-		String range = request.getHeader(HttpHeaders.RANGE);
+		for (String part : StringUtil.split(rangeString.substring(6))) {
+			int index = part.indexOf(StringPool.DASH);
 
-		if (Validator.isNotNull(range)) {
-			if (!range.matches(_RANGE_REGEX)) {
-				throw new IOException("Range header does not match regex");
+			long start = GetterUtil.getLong(part.substring(0, index), -1);
+			long end = GetterUtil.getLong(
+				part.substring(index + 1, part.length()), -1);
+
+			if (start == -1) {
+				start = length - end;
+				end = length - 1;
+			}
+			else if ((end == -1) || (end > length - 1)) {
+				end = length - 1;
 			}
 
-			if (ranges.isEmpty()) {
-				for (String part : range.substring(6).split(",")) {
-					int index = part.indexOf("-");
-
-					long start = getLongFromSubstring(part, 0, index);
-					long end = getLongFromSubstring(
-						part, index + 1, part.length());
-
-					if (start == -1) {
-						start = length - end;
-						end = length - 1;
-					}
-					else if (end == -1 || end > length - 1) {
-						end = length - 1;
-					}
-
-					if (start > end) {
-						throw new IOException(
-							"Range start " + start + " is greater than end " +
-								end);
-					}
-
-					ranges.add(new Range(start, end, length));
-				}
+			if (start > end) {
+				throw new IOException(
+					"Range start " + start + " is greater than end " + end);
 			}
+
+			Range range = new Range(start, end, length);
+
+			ranges.add(range);
 		}
 
 		return ranges;
@@ -200,26 +204,35 @@ public class ServletResponseUtil {
 
 	public static void write(
 			HttpServletRequest request, HttpServletResponse response,
-			String fileName, List<Range> ranges, InputStream input,
+			String fileName, List<Range> ranges, InputStream inputStream,
 			long fullLength, String contentType)
 		throws IOException {
 
-		Range full = new Range(0, fullLength - 1, fullLength);
-		OutputStream output = null;
+		Range fullRange = new Range(0, fullLength - 1, fullLength);
+
+		OutputStream outputStream = null;
 
 		try {
-			output = response.getOutputStream();
+			outputStream = response.getOutputStream();
 
-			if (ranges.isEmpty() || ranges.get(0) == full) {
+			Range firstRange = null;
+
+			if (!ranges.isEmpty()) {
+				firstRange = ranges.get(0);
+			}
+
+			if ((firstRange == null) || firstRange.equals(fullRange)) {
 				if (_log.isDebugEnabled()) {
 					_log.debug("Writing full range");
 				}
 
 				response.setContentType(contentType);
 
-				setHeaders(request, response, fileName, contentType, full);
+				setHeaders(request, response, fileName, contentType, fullRange);
 
-				copyRange(input, output, full.getStart(), full.getLength());
+				copyRange(
+					inputStream, outputStream, fullRange.getStart(),
+					fullRange.getLength());
 			}
 			else if (ranges.size() >= 1) {
 				if (_log.isDebugEnabled()) {
@@ -228,9 +241,7 @@ public class ServletResponseUtil {
 
 				if (ranges.size() > 1 ) {
 					if (_log.isWarnEnabled()) {
-						_log.warn(
-							"Multiple range is not supported. Sending as a " +
-								"single range");
+						_log.warn("Multiple range is not supported");
 					}
 				}
 
@@ -242,12 +253,14 @@ public class ServletResponseUtil {
 
 				response.setStatus(HttpServletResponse.SC_PARTIAL_CONTENT);
 
-				copyRange(input, output, range.getStart(), range.getLength());
+				copyRange(
+					inputStream, outputStream, range.getStart(),
+					range.getLength());
 			}
 		}
 		finally {
 			try {
-				input.close();
+				inputStream.close();
 			}
 			catch (IOException e) {
 			}
@@ -495,62 +508,26 @@ public class ServletResponseUtil {
 		if (inputStream instanceof FileInputStream) {
 			FileInputStream fileInputStream = (FileInputStream)inputStream;
 
-			copyRangeFileChannel(
-				fileInputStream.getChannel(), outputStream, start, length);
+			FileChannel fileChannel = fileInputStream.getChannel();
+
+			fileChannel.transferTo(
+				start, length, Channels.newChannel(outputStream));
 		}
 		else if (inputStream instanceof ByteArrayInputStream) {
 			ByteArrayInputStream byteArrayInputStream =
 				(ByteArrayInputStream)inputStream;
 
-			copyRangeByteArray(
-				byteArrayInputStream, outputStream, start, length);
+			byteArrayInputStream.skip(start);
+
+			StreamUtil.transfer(byteArrayInputStream, outputStream, length);
 		}
 		else {
-			copyRangeOthers(inputStream, outputStream, start, length);
-		}
-	}
+			RandomAccessInputStream randomAccessInputStream =
+				new RandomAccessInputStream(inputStream);
 
-	protected static void copyRangeByteArray(
-			ByteArrayInputStream byteArrayInputStream,
-			OutputStream outputStream, long start, long length)
-		throws IOException {
+			randomAccessInputStream.seek(start);
 
-		byteArrayInputStream.skip(start);
-
-		StreamUtil.transfer(byteArrayInputStream, outputStream, length);
-	}
-
-	protected static void copyRangeFileChannel(
-			FileChannel channel, OutputStream outputStream, long start,
-			long length)
-		throws IOException {
-
-		channel.transferTo(start, length, Channels.newChannel(outputStream));
-	}
-
-	protected static void copyRangeOthers(
-			InputStream inputStream, OutputStream outputStream, long start,
-			long length)
-		throws IOException {
-
-		RandomAccessInputStream fileCacheSeekableStream =
-			new RandomAccessInputStream(inputStream);
-
-		fileCacheSeekableStream.seek(start);
-
-		StreamUtil.transfer(fileCacheSeekableStream, outputStream, length);
-	}
-
-	protected static long getLongFromSubstring(
-		String value, int start, int end) {
-
-		String substring = value.substring(start, end);
-
-		if (substring.length() > 0) {
-			return Long.parseLong(substring);
-		}
-		else {
-			return -1;
+			StreamUtil.transfer(randomAccessInputStream, outputStream, length);
 		}
 	}
 
@@ -571,13 +548,6 @@ public class ServletResponseUtil {
 		HttpServletRequest request, HttpServletResponse response,
 		String fileName, String contentType) {
 
-		setHeaders( request, response, fileName, contentType, false);
-	}
-
-	protected static void setHeaders(
-		HttpServletRequest request, HttpServletResponse response,
-		String fileName, String contentType, boolean acceptRange) {
-
 		if (_log.isDebugEnabled()) {
 			_log.debug("Sending file of type " + contentType);
 		}
@@ -586,12 +556,6 @@ public class ServletResponseUtil {
 
 		if (Validator.isNotNull(contentType)) {
 			response.setContentType(contentType);
-		}
-
-		if (acceptRange) {
-			response.setHeader(
-				HttpHeaders.ACCEPT_RANGES,
-				HttpHeaders.ACCEPT_RANGES_BYTES_VALUE);
 		}
 
 		response.setHeader(
@@ -664,12 +628,21 @@ public class ServletResponseUtil {
 		HttpServletRequest request, HttpServletResponse response,
 		String fileName, String contentType, Range range) {
 
-		setHeaders(request, response, fileName, contentType, true);
+		setHeaders(request, response, fileName, contentType);
 
-		String contentRange = "bytes " + range.getStart() + "-" +
-			range.getEnd() + "/" + range.getTotal();
+		response.setHeader(
+			HttpHeaders.ACCEPT_RANGES, HttpHeaders.ACCEPT_RANGES_BYTES_VALUE);
 
-		response.setHeader(HttpHeaders.CONTENT_RANGE, contentRange);
+		StringBundler sb = new StringBundler(6);
+
+		sb.append("bytes ");
+		sb.append(range.getStart());
+		sb.append(StringPool.DASH);
+		sb.append(range.getEnd());
+		sb.append(StringPool.SLASH);
+		sb.append(range.getTotal());
+
+		response.setHeader(HttpHeaders.CONTENT_RANGE, sb.toString());
 
 		response.setHeader(
 			HttpHeaders.CONTENT_LENGTH, String.valueOf(range.getLength()));
@@ -678,8 +651,8 @@ public class ServletResponseUtil {
 	private static final String _CLIENT_ABORT_EXCEPTION =
 		"org.apache.catalina.connector.ClientAbortException";
 
-	private static Log _log = LogFactoryUtil.getLog(ServletResponseUtil.class);
-
 	private static final String _RANGE_REGEX = "^bytes=\\d*-\\d*(,\\d*-\\d*)*$";
+
+	private static Log _log = LogFactoryUtil.getLog(ServletResponseUtil.class);
 
 }
