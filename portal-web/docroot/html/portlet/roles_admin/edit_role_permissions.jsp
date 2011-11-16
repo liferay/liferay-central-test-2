@@ -57,13 +57,6 @@ portletURL.setParameter("tabs1", tabs1);
 portletURL.setParameter("tabs2", tabs2);
 portletURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 
-PortletURL viewPermissionsURL = renderResponse.createRenderURL();
-
-viewPermissionsURL.setParameter("struts_action", "/roles_admin/edit_role_permissions");
-viewPermissionsURL.setParameter(Constants.CMD, Constants.VIEW);
-viewPermissionsURL.setParameter("tabs1", "roles");
-viewPermissionsURL.setParameter("roleId", String.valueOf(role.getRoleId()));
-
 PortletURL editPermissionsURL = renderResponse.createRenderURL();
 
 editPermissionsURL.setParameter("struts_action", "/roles_admin/edit_role_permissions");
@@ -186,6 +179,16 @@ editPermissionsURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 		var permissionsURL = field.value;
 
 		if (permissionsURL == '') {
+
+			<%
+			PortletURL viewPermissionsURL = renderResponse.createRenderURL();
+
+			viewPermissionsURL.setParameter("struts_action", "/roles_admin/edit_role_permissions");
+			viewPermissionsURL.setParameter(Constants.CMD, Constants.VIEW);
+			viewPermissionsURL.setParameter("tabs1", "roles");
+			viewPermissionsURL.setParameter("roleId", String.valueOf(role.getRoleId()));
+			%>
+
 			permissionsURL = '<%= viewPermissionsURL %>';
 		}
 
