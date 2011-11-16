@@ -53,7 +53,7 @@ public class SassToCssBuilder {
 		int pos = fileName.lastIndexOf(StringPool.SLASH);
 
 		String cacheFileName =
-			fileName.substring(0, pos + 1) + "_sass_cache_" +
+			fileName.substring(0, pos + 1) + ".sass_cache_" +
 				fileName.substring(pos + 1);
 
 		return new File(cacheFileName);
