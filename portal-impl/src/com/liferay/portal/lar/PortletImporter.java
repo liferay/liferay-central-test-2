@@ -718,10 +718,9 @@ public class PortletImporter {
 		}
 		catch (NoSuchTagException nste) {
 			if (_log.isDebugEnabled()) {
-				StringBundler sb = new StringBundler();
+				StringBundler sb = new StringBundler(5);
 
-				sb.append("No AssetTag exists with the key ");
-				sb.append("{groupId=");
+				sb.append("No AssetTag exists with the key {groupId=");
 				sb.append(portletDataContext.getScopeGroupId());
 				sb.append(", name=");
 				sb.append(assetTag.getName());
