@@ -1019,7 +1019,7 @@ public class SourceFormatter {
 					StringUtil.replace(fileName, "\\", "/"));
 			}
 
-			String linesCombined = null;
+			String combinedLines = null;
 
 			if ((excluded == null) &&
 				!line.startsWith("import ") && !line.startsWith("package ") &&
@@ -1040,14 +1040,14 @@ public class SourceFormatter {
 							fileName, "> 80: " + fileName + " " + lineCount);
 					}
 					else {
-						linesCombined = _getLinesCombined(
+						combinedLines = _getCombinedLines(
 							trimmedLine, previousLine);
 					}
 				}
 			}
 
-			if (Validator.isNotNull(linesCombined)) {
-				previousLine = linesCombined;
+			if (Validator.isNotNull(combinedLines)) {
+				previousLine = combinedLines;
 
 				if (line.endsWith(StringPool.OPEN_CURLY_BRACE)) {
 					lineToSkipIfEmpty = lineCount + 1;
@@ -1550,6 +1550,55 @@ public class SourceFormatter {
 		}
 	}
 
+	private static String _getCombinedLines(String line, String previousLine) {
+		if (Validator.isNull(previousLine)) {
+			return null;
+		}
+
+		int previousLineLength = _getLineLength(previousLine);
+		String trimmedPreviousLine = StringUtil.trimLeading(previousLine);
+
+		if ((line.length() + previousLineLength) < 80) {
+			if (trimmedPreviousLine.startsWith("for ") &&
+				previousLine.endsWith(StringPool.COLON) &&
+				line.endsWith(StringPool.OPEN_CURLY_BRACE)) {
+
+				return previousLine + StringPool.SPACE + line;
+			}
+
+			if (previousLine.endsWith(StringPool.EQUAL) &&
+				line.endsWith(StringPool.SEMICOLON)) {
+
+				return previousLine + StringPool.SPACE + line;
+			}
+		}
+
+		if (!previousLine.endsWith(StringPool.OPEN_PARENTHESIS)) {
+			return null;
+		}
+
+		if ((line.length() + previousLineLength) > 80) {
+			return null;
+		}
+
+		if (line.endsWith(StringPool.SEMICOLON)) {
+			return previousLine + line;
+		}
+
+		if ((line.endsWith(StringPool.OPEN_CURLY_BRACE) ||
+			 line.endsWith(StringPool.CLOSE_PARENTHESIS)) &&
+			(trimmedPreviousLine.startsWith("else ") ||
+			 trimmedPreviousLine.startsWith("if ") ||
+			 trimmedPreviousLine.startsWith("private ") ||
+			 trimmedPreviousLine.startsWith("protected ") ||
+			 trimmedPreviousLine.startsWith("public "))) {
+
+			return previousLine + line;
+		}
+
+		return null;
+	}
+
 	private static String _getCopyright() throws IOException {
 		String copyright = _fileUtil.read("copyright.txt");
 
@@ -1617,6 +1666,7 @@ public class SourceFormatter {
 
 	private static int _getLineLength(String line) {
 		int lineLength = 0;
+
 		int tabLength = 4;
 
 		for (char c : line.toCharArray()) {
@@ -1639,55 +1689,6 @@ public class SourceFormatter {
 		}
 
 		return lineLength;
-	}
-
-	private static String _getLinesCombined(String line, String previousLine) {
-		if (Validator.isNull(previousLine)) {
-			return null;
-		}
-
-		int previousLineLength = _getLineLength(previousLine);
-		String trimmedPreviousLine = StringUtil.trimLeading(previousLine);
-
-		if ((line.length() + previousLineLength) < 80) {
-			if (trimmedPreviousLine.startsWith("for ") &&
-				previousLine.endsWith(StringPool.COLON) &&
-				line.endsWith(StringPool.OPEN_CURLY_BRACE)) {
-
-				return previousLine + StringPool.SPACE + line;
-			}
-
-			if (previousLine.endsWith(StringPool.EQUAL) &&
-				line.endsWith(StringPool.SEMICOLON)) {
-
-				return previousLine + StringPool.SPACE + line;
-			}
-		}
-
-		if (!previousLine.endsWith(StringPool.OPEN_PARENTHESIS)) {
-			return null;
-		}
-
-		if ((line.length() + previousLineLength) > 80) {
-			return null;
-		}
-
-		if (line.endsWith(StringPool.SEMICOLON)) {
-			return previousLine + line;
-		}
-
-		if ((line.endsWith(StringPool.OPEN_CURLY_BRACE) ||
-			 line.endsWith(StringPool.CLOSE_PARENTHESIS)) &&
-			(trimmedPreviousLine.startsWith("else ") ||
-			 trimmedPreviousLine.startsWith("if ") ||
-			 trimmedPreviousLine.startsWith("private ") ||
-			 trimmedPreviousLine.startsWith("protected ") ||
-			 trimmedPreviousLine.startsWith("public "))) {
-
-			return previousLine + line;
-		}
-
-		return null;
 	}
 
 	private static String _getOldCopyright() throws IOException {
