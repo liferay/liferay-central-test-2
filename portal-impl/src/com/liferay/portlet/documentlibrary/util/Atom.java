@@ -171,8 +171,7 @@ public class Atom {
 	}
 
 	protected int patchCo64Atom(int index) {
-		int size = (int)bytesToLong(ArrayUtil.clone(
-			_buffer, index - 4, index));
+		int size = (int)bytesToLong(ArrayUtil.clone(_buffer, index - 4, index));
 
 		int offsetCount = (int)bytesToLong(ArrayUtil.clone(
 			_buffer, index + 8, index + 12));
@@ -199,8 +198,7 @@ public class Atom {
 	}
 
 	protected int patchStcoAtom(int index) {
-		int size = (int)bytesToLong(
-			ArrayUtil.clone(_buffer, index - 4, index));
+		int size = (int)bytesToLong(ArrayUtil.clone(_buffer, index - 4, index));
 
 		int offsetCount = (int)bytesToLong(
 			ArrayUtil.clone(_buffer, index + 8, index + 12));
