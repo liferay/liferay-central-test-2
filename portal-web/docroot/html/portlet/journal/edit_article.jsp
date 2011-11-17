@@ -95,7 +95,7 @@ if (Validator.isNotNull(toLanguageId)) {
 	languageId = toLanguageId;
 }
 
-if (article == null && Validator.isNull(defaultLanguageId)) {
+if ((article == null) && Validator.isNull(defaultLanguageId)) {
 	defaultLanguageId = languageId;
 }
 else {
