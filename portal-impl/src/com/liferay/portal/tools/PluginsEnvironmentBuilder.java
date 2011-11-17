@@ -170,11 +170,11 @@ public class PluginsEnvironmentBuilder {
 			return;
 		}
 
-		UniqueList<String> globalJars = new UniqueList<String>();
-		UniqueList<String> portalJars = new UniqueList<String>();
+		List<String> globalJars = new UniqueList<String>();
+		List<String> portalJars = new UniqueList<String>();
 
-		UniqueList<String> extGlobalJars = new UniqueList<String>();
-		UniqueList<String> extPortalJars = new UniqueList<String>();
+		List<String> extGlobalJars = new UniqueList<String>();
+		List<String> extPortalJars = new UniqueList<String>();
 
 		String libDirPath = StringUtil.replace(
 			libDir.getPath(), StringPool.BACK_SLASH, StringPool.SLASH);
@@ -184,24 +184,29 @@ public class PluginsEnvironmentBuilder {
 
 			for (String dirName : new String[] {"global", "portal"}) {
 				File file = new File(libDirPath + "/../ext-lib/" + dirName);
+
 				List<String> jars = ListUtil.toList(file.list(filenameFilter));
 
 				if (dirName.equals("global")) {
 					extGlobalJars.addAll(ListUtil.sort(jars));
 
 					File dir = new File(PropsValues.LIFERAY_LIB_GLOBAL_DIR);
-					String[] files = dir.list(filenameFilter);
 
-					globalJars.addAll(ListUtil.sort(ListUtil.toList(files)));
+					String[] fileNames = dir.list(filenameFilter);
+
+					globalJars.addAll(
+						ListUtil.sort(ListUtil.toList(fileNames)));
 					globalJars.removeAll(extGlobalJars);
 				}
 				else if (dirName.equals("portal")) {
 					extPortalJars.addAll(ListUtil.sort(jars));
 
 					File dir = new File(PropsValues.LIFERAY_LIB_PORTAL_DIR);
-					String[] files = dir.list(filenameFilter);
 
-					portalJars.addAll(ListUtil.sort(ListUtil.toList(files)));
+					String[] fileNames = dir.list(filenameFilter);
+
+					portalJars.addAll(
+						ListUtil.sort(ListUtil.toList(fileNames)));
 					portalJars.removeAll(extPortalJars);
 				}
 			}
@@ -440,12 +445,10 @@ public class PluginsEnvironmentBuilder {
 	private static final String _BRANCH = "trunk";
 
 	private static final String[] _SOURCE_DIR_NAMES = new String[] {
-		"docroot/WEB-INF/ext-impl/src",
-		"docroot/WEB-INF/ext-service/src",
+		"docroot/WEB-INF/ext-impl/src", "docroot/WEB-INF/ext-service/src",
 		"docroot/WEB-INF/ext-util-bridges/src",
 		"docroot/WEB-INF/ext-util-java/src",
-		"docroot/WEB-INF/ext-util-taglib/src",
-		"docroot/WEB-INF/service",
+		"docroot/WEB-INF/ext-util-taglib/src", "docroot/WEB-INF/service",
 		"docroot/WEB-INF/src"
 	};
 
