@@ -6390,27 +6390,6 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 		this.rebuildTreeEnabled = rebuildTreeEnabled;
 	}
 
-	protected String buildSqlInClause(List<Long> assetCategoriesIds) {
-		if (assetCategoriesIds.size() == 0) {
-			return StringPool.BLANK;
-		}
-
-		StringBundler sb = new StringBundler((assetCategoriesIds.size() * 2) -
-				1);
-
-		for (int i = 0; i < assetCategoriesIds.size(); i++) {
-			long assetCategoryId = assetCategoriesIds.get(i);
-
-			sb.append(assetCategoryId);
-
-			if ((i + 1) < assetCategoriesIds.size()) {
-				sb.append(StringPool.COMMA_AND_SPACE);
-			}
-		}
-
-		return sb.toString();
-	}
-
 	protected long countOrphanTreeNodes(long groupId) throws SystemException {
 		Session session = null;
 
@@ -6437,10 +6416,10 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 		}
 	}
 
-	protected void expandNoChildrenLeftCategoryId(long delta, long groupId,
-		long leftCategoryId, List<Long> childrenCategoryIds) {
+	protected void expandNoChildrenLeftCategoryId(long groupId,
+		long leftCategoryId, List<Long> childrenCategoryIds, long delta) {
 		String sql = "UPDATE AssetCategory SET leftcategoryId = (leftcategoryId + ?) WHERE (groupId = ?) AND (leftcategoryId > ?) AND (categoryId NOT IN (" +
-			buildSqlInClause(childrenCategoryIds) + "))";
+			StringUtil.merge(childrenCategoryIds) + "))";
 
 		SqlUpdate _sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
 				sql,
@@ -6452,10 +6431,10 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 		_sqlUpdate.update(new Object[] { delta, groupId, leftCategoryId });
 	}
 
-	protected void expandNoChildrenRightCategoryId(long delta, long groupId,
-		long rightCategoryId, List<Long> childrenCategoryIds) {
+	protected void expandNoChildrenRightCategoryId(long groupId,
+		long rightCategoryId, List<Long> childrenCategoryIds, long delta) {
 		String sql = "UPDATE AssetCategory SET rightcategoryId = (rightcategoryId + ?) WHERE (groupId = ?) AND (rightcategoryId > ?) AND (categoryId NOT IN (" +
-			buildSqlInClause(childrenCategoryIds) + "))";
+			StringUtil.merge(childrenCategoryIds) + "))";
 
 		SqlUpdate _sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
 				sql,
@@ -6490,15 +6469,13 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 			if (childrenDistance > 1) {
 				rightCategoryId = leftCategoryId + childrenDistance;
 
-				long diff = leftCategoryId - assetCategory.getLeftCategoryId();
+				updateChildrenTree(groupId, childrenCategoryIds,
+					leftCategoryId - assetCategory.getLeftCategoryId());
 
-				updateChildrenTree(diff, groupId, childrenCategoryIds);
-
-				expandNoChildrenLeftCategoryId(childrenDistance + 1, groupId,
-					lastRightCategoryId, childrenCategoryIds);
-
-				expandNoChildrenRightCategoryId(childrenDistance + 1, groupId,
-					lastRightCategoryId, childrenCategoryIds);
+				expandNoChildrenLeftCategoryId(groupId, lastRightCategoryId,
+					childrenCategoryIds, childrenDistance + 1);
+				expandNoChildrenRightCategoryId(groupId, lastRightCategoryId,
+					childrenCategoryIds, childrenDistance + 1);
 			}
 			else {
 				rightCategoryId = lastRightCategoryId + 2;
@@ -6519,8 +6496,6 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 
 	protected List<Long> getChildrenTreeCategoryIds(
 		AssetCategory parentAssetCategory) throws SystemException {
-		List<Long> childrenCategoryIds = null;
-
 		Session session = null;
 
 		try {
@@ -6538,7 +6513,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 			qPos.add(parentAssetCategory.getLeftCategoryId() + 1);
 			qPos.add(parentAssetCategory.getRightCategoryId());
 
-			childrenCategoryIds = q.list();
+			return q.list();
 		}
 		catch (Exception e) {
 			throw processException(e);
@@ -6546,8 +6521,6 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 		finally {
 			closeSession(session);
 		}
-
-		return childrenCategoryIds;
 	}
 
 	protected long getLastRightCategoryId(long groupId, long parentCategoryId)
@@ -6660,10 +6633,10 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 	}
 
-	protected void updateChildrenTree(long delta, long groupId,
-		List<Long> childrenCategoryIds) {
+	protected void updateChildrenTree(long groupId,
+		List<Long> childrenCategoryIds, long delta) {
 		String sql = "UPDATE AssetCategory SET leftcategoryId = (leftcategoryId + ?), rightcategoryId = (rightcategoryId + ?) WHERE (groupId = ?) AND (categoryId IN (" +
-			buildSqlInClause(childrenCategoryIds) + "))";
+			StringUtil.merge(childrenCategoryIds) + "))";
 
 		SqlUpdate _sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
 				sql,

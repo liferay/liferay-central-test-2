@@ -535,10 +535,10 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 			}
 			else {
 				if (${entity.varName}.getParent${pkColumn.methodName}() != ${entity.varName}ModelImpl.getOriginalParent${pkColumn.methodName}()) {
-					List<Long> children${pkColumn.methodName}s = getChildrenTree${pkColumn.methodName}s(${entity.varName});
-				
+					List<Long> children${pkColumn.methodNames} = getChildrenTree${pkColumn.methodNames}(${entity.varName});
+
 					shrinkTree(${entity.varName});
-					expandTree(${entity.varName}, children${pkColumn.methodName}s);
+					expandTree(${entity.varName}, children${pkColumn.methodNames});
 				}
 			}
 		</#if>
@@ -3589,26 +3589,6 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 			this.rebuildTreeEnabled = rebuildTreeEnabled;
 		}
 
-		protected String buildSqlInClause(List<Long> ${entity.varNames}Ids) {
-			if (${entity.varNames}Ids.size() == 0) {
-				return StringPool.BLANK;
-			}
-			
-			StringBundler sb = new StringBundler(${entity.varNames}Ids.size() * 2 - 1);
-		
-			for (int i = 0; i < ${entity.varNames}Ids.size(); i++) {
-				long ${entity.varName}Id = ${entity.varNames}Ids.get(i);
-				
-				sb.append(${entity.varName}Id);
-				
-				if ((i + 1) < ${entity.varNames}Ids.size()){
-					sb.append(StringPool.COMMA_AND_SPACE);
-				}
-			}
-		
-			return sb.toString();
-		}
-
 		protected long countOrphanTreeNodes(long ${scopeColumn.name}) throws SystemException {
 			Session session = null;
 
@@ -3633,23 +3613,23 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 			}
 		}
 
-		protected void expandNoChildrenLeft${pkColumn.methodName}(long delta, long ${scopeColumn.name}, long left${pkColumn.methodName}, List<Long> children${pkColumn.methodName}s){
-			String sql = "UPDATE ${entity.name} SET left${entity.PKDBName} = (left${entity.PKDBName} + ?) WHERE (${scopeColumn.name} = ?) AND (left${entity.PKDBName} > ?) AND (${entity.PKDBName} NOT IN (" + buildSqlInClause(children${pkColumn.methodName}s) +"))";
+		protected void expandNoChildrenLeft${pkColumn.methodName}(long ${scopeColumn.name}, long left${pkColumn.methodName}, List<Long> children${pkColumn.methodNames}, long delta) {
+			String sql = "UPDATE ${entity.name} SET left${entity.PKDBName} = (left${entity.PKDBName} + ?) WHERE (${scopeColumn.name} = ?) AND (left${entity.PKDBName} > ?) AND (${entity.PKDBName} NOT IN (" + StringUtil.merge(children${pkColumn.methodNames}) + "))";
 
 			SqlUpdate _sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(), sql, new int[] {java.sql.Types.BIGINT, java.sql.Types.BIGINT, java.sql.Types.BIGINT});
 
-			_sqlUpdate.update(new Object[] { delta, ${scopeColumn.name}, left${pkColumn.methodName} });
+			_sqlUpdate.update(new Object[] {delta, ${scopeColumn.name}, left${pkColumn.methodName} });
 		}
 
-		protected void expandNoChildrenRight${pkColumn.methodName}(long delta, long ${scopeColumn.name}, long right${pkColumn.methodName}, List<Long> children${pkColumn.methodName}s){
-			String sql = "UPDATE ${entity.name} SET right${entity.PKDBName} = (right${entity.PKDBName} + ?) WHERE (${scopeColumn.name} = ?) AND (right${entity.PKDBName} > ?) AND (${entity.PKDBName} NOT IN (" + buildSqlInClause(children${pkColumn.methodName}s) +"))";
+		protected void expandNoChildrenRight${pkColumn.methodName}(long ${scopeColumn.name}, long right${pkColumn.methodName}, List<Long> children${pkColumn.methodNames}, long delta) {
+			String sql = "UPDATE ${entity.name} SET right${entity.PKDBName} = (right${entity.PKDBName} + ?) WHERE (${scopeColumn.name} = ?) AND (right${entity.PKDBName} > ?) AND (${entity.PKDBName} NOT IN (" + StringUtil.merge(children${pkColumn.methodNames}) + "))";
 
 			SqlUpdate _sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(), sql, new int[] {java.sql.Types.BIGINT, java.sql.Types.BIGINT, java.sql.Types.BIGINT});
 
-			_sqlUpdate.update(new Object[] { delta, ${scopeColumn.name}, right${pkColumn.methodName} });
+			_sqlUpdate.update(new Object[] {delta, ${scopeColumn.name}, right${pkColumn.methodName} });
 		}
 
-		protected void expandTree(${entity.name} ${entity.varName}, List<Long> children${pkColumn.methodName}s) throws SystemException {
+		protected void expandTree(${entity.name} ${entity.varName}, List<Long> children${pkColumn.methodNames}) throws SystemException {
 			if (!rebuildTreeEnabled) {
 				return;
 			}
@@ -3663,23 +3643,20 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 			if (lastRight${pkColumn.methodName} > 0) {
 				left${pkColumn.methodName} = lastRight${pkColumn.methodName} + 1;
-				
+
 				long childrenDistance = ${entity.varName}.getRight${pkColumn.methodName}() - ${entity.varName}.getLeft${pkColumn.methodName}();
-				
+
 				if (childrenDistance > 1) {
 					right${pkColumn.methodName} = left${pkColumn.methodName} + childrenDistance;
-					
-					long diff = left${pkColumn.methodName} - ${entity.varName}.getLeft${pkColumn.methodName}();
-					
-					updateChildrenTree(diff, ${scopeColumn.name}, children${pkColumn.methodName}s);
-									
-					expandNoChildrenLeft${pkColumn.methodName}(childrenDistance + 1, ${scopeColumn.name}, lastRight${pkColumn.methodName}, children${pkColumn.methodName}s);
-					
-					expandNoChildrenRight${pkColumn.methodName}(childrenDistance + 1, ${scopeColumn.name}, lastRight${pkColumn.methodName}, children${pkColumn.methodName}s);
+
+					updateChildrenTree(${scopeColumn.name}, children${pkColumn.methodNames}, left${pkColumn.methodName} - ${entity.varName}.getLeft${pkColumn.methodName}());
+
+					expandNoChildrenLeft${pkColumn.methodName}(${scopeColumn.name}, lastRight${pkColumn.methodName}, children${pkColumn.methodNames}, childrenDistance + 1);
+					expandNoChildrenRight${pkColumn.methodName}(${scopeColumn.name}, lastRight${pkColumn.methodName}, children${pkColumn.methodNames}, childrenDistance + 1);
 				}
 				else {
 					right${pkColumn.methodName} = lastRight${pkColumn.methodName} + 2;
-	
+
 					expandTreeLeft${pkColumn.methodName}.expand(${scopeColumn.name}, lastRight${pkColumn.methodName});
 					expandTreeRight${pkColumn.methodName}.expand(${scopeColumn.name}, lastRight${pkColumn.methodName});
 				}
@@ -3694,9 +3671,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 			${entity.varName}.setRight${pkColumn.methodName}(right${pkColumn.methodName});
 		}
 
-		protected List<Long> getChildrenTree${pkColumn.methodName}s(${entity.name} parent${entity.name}) throws SystemException {
-			List<Long> children${pkColumn.methodName}s = null;
-
+		protected List<Long> getChildrenTree${pkColumn.methodNames}(${entity.name} parent${entity.name}) throws SystemException {
 			Session session = null;
 
 			try {
@@ -3712,7 +3687,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 				qPos.add(parent${entity.name}.getLeft${pkColumn.methodName}() + 1);
 				qPos.add(parent${entity.name}.getRight${pkColumn.methodName}());
 
-				children${pkColumn.methodName}s = q.list();
+				return q.list();
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -3720,8 +3695,6 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 			finally {
 				closeSession(session);
 			}
-
-			return children${pkColumn.methodName}s;
 		}
 
 		protected long getLastRight${pkColumn.methodName}(long ${scopeColumn.name}, long parent${pkColumn.methodName}) throws SystemException {
@@ -3827,13 +3800,13 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 			FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
 			FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 		}
-		
-		protected void updateChildrenTree(long delta, long ${scopeColumn.name}, List<Long> children${pkColumn.methodName}s){
-			String sql = "UPDATE ${entity.name} SET left${entity.PKDBName} = (left${entity.PKDBName} + ?), right${entity.PKDBName} = (right${entity.PKDBName} + ?) WHERE (${scopeColumn.name} = ?) AND (${entity.PKDBName} IN (" + buildSqlInClause(children${pkColumn.methodName}s) +"))";
-			
+
+		protected void updateChildrenTree(long ${scopeColumn.name}, List<Long> children${pkColumn.methodNames}, long delta) {
+			String sql = "UPDATE ${entity.name} SET left${entity.PKDBName} = (left${entity.PKDBName} + ?), right${entity.PKDBName} = (right${entity.PKDBName} + ?) WHERE (${scopeColumn.name} = ?) AND (${entity.PKDBName} IN (" + StringUtil.merge(children${pkColumn.methodNames}) + "))";
+
 			SqlUpdate _sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(), sql, new int[] {java.sql.Types.BIGINT, java.sql.Types.BIGINT, java.sql.Types.BIGINT});
-			
-			_sqlUpdate.update(new Object[] { delta, delta, ${scopeColumn.name} });
+
+			_sqlUpdate.update(new Object[] {delta, delta, ${scopeColumn.name} });
 		}
 	</#if>
 
@@ -3915,13 +3888,13 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 			<#assign tempEntitySqlType = serviceBuilder.getSqlType(tempEntity.getPackagePath() + ".model." + entity.getName(), tempEntity.getPKVarName(), tempEntity.getPKClassName())>
 
 			<#if entity.hasPrimitivePK()>
-				<#assign pkVarNameWrapper = "new " + serviceBuilder.getPrimitiveObj(entity.getPKClassName()) + "("+ entity.getPKVarName() +")">
+				<#assign pkVarNameWrapper = "new " + serviceBuilder.getPrimitiveObj(entity.getPKClassName()) + "("+ entity.getPKVarName() + ")">
 			<#else>
 				<#assign pkVarNameWrapper = entity.getPKVarName()>
 			</#if>
 
 			<#if tempEntity.hasPrimitivePK()>
-				<#assign tempEntityPkVarNameWrapper = "new " + serviceBuilder.getPrimitiveObj(tempEntity.getPKClassName()) + "("+ tempEntity.getPKVarName() +")">
+				<#assign tempEntityPkVarNameWrapper = "new " + serviceBuilder.getPrimitiveObj(tempEntity.getPKClassName()) + "("+ tempEntity.getPKVarName() + ")">
 			<#else>
 				<#assign tempEntityPkVarNameWrapper = tempEntity.getPKVarName()>
 			</#if>
@@ -4014,7 +3987,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 							}
 						}
 
-						_sqlUpdate.update(new Object[] { ${pkVarNameWrapper} });
+						_sqlUpdate.update(new Object[] {${pkVarNameWrapper}});
 
 						if ((listeners.length > 0) || (${tempEntity.varName}Listeners.length > 0)) {
 							for (${tempEntity.packagePath}.model.${tempEntity.name} ${tempEntity.varName} : ${tempEntity.varNames}) {

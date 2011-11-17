@@ -295,7 +295,7 @@ public class AssetCategoryPersistenceTest extends BasePersistenceTestCase {
 		return assetCategory;
 	}
 
-	public void testMove() throws Exception {
+	public void testMoveTree() throws Exception {
 		long groupId = nextLong();
 
 		AssetCategory rootAssetCategory = addAssetCategory(groupId, null);
@@ -315,42 +315,6 @@ public class AssetCategoryPersistenceTest extends BasePersistenceTestCase {
 		assertEquals(rootAssetCategory.getLeftCategoryId() + 1,
 			childAssetCategory.getLeftCategoryId());
 		assertEquals(rootAssetCategory.getRightCategoryId() - 1,
-			childAssetCategory.getRightCategoryId());
-	}
-
-	public void testMoveTreeFromRight() throws Exception {
-		long groupId = nextLong();
-
-		AssetCategory rootAssetCategory = addAssetCategory(groupId, null);
-
-		long previousRootLeftCategoryId = rootAssetCategory.getLeftCategoryId();
-		long previousRootRightCategoryId = rootAssetCategory.getRightCategoryId();
-
-		AssetCategory parentAssetCategory = addAssetCategory(groupId, null);
-
-		AssetCategory childAssetCategory = addAssetCategory(groupId,
-				parentAssetCategory.getCategoryId());
-
-		parentAssetCategory = _persistence.fetchByPrimaryKey(parentAssetCategory.getPrimaryKey());
-
-		parentAssetCategory.setParentCategoryId(rootAssetCategory.getCategoryId());
-
-		_persistence.update(parentAssetCategory, false);
-
-		rootAssetCategory = _persistence.fetchByPrimaryKey(rootAssetCategory.getPrimaryKey());
-		childAssetCategory = _persistence.fetchByPrimaryKey(childAssetCategory.getPrimaryKey());
-
-		assertEquals(previousRootLeftCategoryId,
-			rootAssetCategory.getLeftCategoryId());
-		assertEquals(previousRootRightCategoryId + 4,
-			rootAssetCategory.getRightCategoryId());
-		assertEquals(rootAssetCategory.getLeftCategoryId() + 1,
-			parentAssetCategory.getLeftCategoryId());
-		assertEquals(rootAssetCategory.getRightCategoryId() + -1,
-			parentAssetCategory.getRightCategoryId());
-		assertEquals(parentAssetCategory.getLeftCategoryId() + 1,
-			childAssetCategory.getLeftCategoryId());
-		assertEquals(parentAssetCategory.getRightCategoryId() + -1,
 			childAssetCategory.getRightCategoryId());
 	}
 
@@ -390,60 +354,40 @@ public class AssetCategoryPersistenceTest extends BasePersistenceTestCase {
 			childAssetCategory.getRightCategoryId());
 	}
 
-	public void testMoveTreeIntoTreeFromRight() throws Exception {
+	public void testMoveTreeFromRight() throws Exception {
 		long groupId = nextLong();
 
 		AssetCategory rootAssetCategory = addAssetCategory(groupId, null);
-
-		AssetCategory leftRootChildAssetCategory = addAssetCategory(groupId,
-				rootAssetCategory.getCategoryId());
-
-		rootAssetCategory = _persistence.fetchByPrimaryKey(rootAssetCategory.getPrimaryKey());
-
-		AssetCategory rightRootChildAssetCategory = addAssetCategory(groupId,
-				rootAssetCategory.getCategoryId());
-
-		rootAssetCategory = _persistence.fetchByPrimaryKey(rootAssetCategory.getPrimaryKey());
 
 		long previousRootLeftCategoryId = rootAssetCategory.getLeftCategoryId();
 		long previousRootRightCategoryId = rootAssetCategory.getRightCategoryId();
 
 		AssetCategory parentAssetCategory = addAssetCategory(groupId, null);
 
-		AssetCategory parentChildAssetCategory = addAssetCategory(groupId,
+		AssetCategory childAssetCategory = addAssetCategory(groupId,
 				parentAssetCategory.getCategoryId());
 
 		parentAssetCategory = _persistence.fetchByPrimaryKey(parentAssetCategory.getPrimaryKey());
 
-		parentAssetCategory.setParentCategoryId(leftRootChildAssetCategory.getCategoryId());
+		parentAssetCategory.setParentCategoryId(rootAssetCategory.getCategoryId());
 
 		_persistence.update(parentAssetCategory, false);
 
 		rootAssetCategory = _persistence.fetchByPrimaryKey(rootAssetCategory.getPrimaryKey());
-		leftRootChildAssetCategory = _persistence.fetchByPrimaryKey(leftRootChildAssetCategory.getPrimaryKey());
-		rightRootChildAssetCategory = _persistence.fetchByPrimaryKey(rightRootChildAssetCategory.getPrimaryKey());
-		parentChildAssetCategory = _persistence.fetchByPrimaryKey(parentChildAssetCategory.getPrimaryKey());
+		childAssetCategory = _persistence.fetchByPrimaryKey(childAssetCategory.getPrimaryKey());
 
 		assertEquals(previousRootLeftCategoryId,
 			rootAssetCategory.getLeftCategoryId());
 		assertEquals(previousRootRightCategoryId + 4,
 			rootAssetCategory.getRightCategoryId());
 		assertEquals(rootAssetCategory.getLeftCategoryId() + 1,
-			leftRootChildAssetCategory.getLeftCategoryId());
-		assertEquals(rootAssetCategory.getRightCategoryId() - 3,
-			leftRootChildAssetCategory.getRightCategoryId());
-		assertEquals(rootAssetCategory.getLeftCategoryId() + 7,
-			rightRootChildAssetCategory.getLeftCategoryId());
-		assertEquals(rootAssetCategory.getRightCategoryId() - 1,
-			rightRootChildAssetCategory.getRightCategoryId());
-		assertEquals(leftRootChildAssetCategory.getLeftCategoryId() + 1,
 			parentAssetCategory.getLeftCategoryId());
-		assertEquals(leftRootChildAssetCategory.getRightCategoryId() - 1,
+		assertEquals(rootAssetCategory.getRightCategoryId() - 1,
 			parentAssetCategory.getRightCategoryId());
 		assertEquals(parentAssetCategory.getLeftCategoryId() + 1,
-			parentChildAssetCategory.getLeftCategoryId());
+			childAssetCategory.getLeftCategoryId());
 		assertEquals(parentAssetCategory.getRightCategoryId() - 1,
-			parentChildAssetCategory.getRightCategoryId());
+			childAssetCategory.getRightCategoryId());
 	}
 
 	public void testMoveTreeIntoTreeFromLeft() throws Exception {
@@ -502,6 +446,62 @@ public class AssetCategoryPersistenceTest extends BasePersistenceTestCase {
 			parentChildAssetCategory.getRightCategoryId());
 	}
 
+	public void testMoveTreeIntoTreeFromRight() throws Exception {
+		long groupId = nextLong();
+
+		AssetCategory rootAssetCategory = addAssetCategory(groupId, null);
+
+		AssetCategory leftRootChildAssetCategory = addAssetCategory(groupId,
+				rootAssetCategory.getCategoryId());
+
+		rootAssetCategory = _persistence.fetchByPrimaryKey(rootAssetCategory.getPrimaryKey());
+
+		AssetCategory rightRootChildAssetCategory = addAssetCategory(groupId,
+				rootAssetCategory.getCategoryId());
+
+		rootAssetCategory = _persistence.fetchByPrimaryKey(rootAssetCategory.getPrimaryKey());
+
+		long previousRootLeftCategoryId = rootAssetCategory.getLeftCategoryId();
+		long previousRootRightCategoryId = rootAssetCategory.getRightCategoryId();
+
+		AssetCategory parentAssetCategory = addAssetCategory(groupId, null);
+
+		AssetCategory parentChildAssetCategory = addAssetCategory(groupId,
+				parentAssetCategory.getCategoryId());
+
+		parentAssetCategory = _persistence.fetchByPrimaryKey(parentAssetCategory.getPrimaryKey());
+
+		parentAssetCategory.setParentCategoryId(leftRootChildAssetCategory.getCategoryId());
+
+		_persistence.update(parentAssetCategory, false);
+
+		rootAssetCategory = _persistence.fetchByPrimaryKey(rootAssetCategory.getPrimaryKey());
+		leftRootChildAssetCategory = _persistence.fetchByPrimaryKey(leftRootChildAssetCategory.getPrimaryKey());
+		rightRootChildAssetCategory = _persistence.fetchByPrimaryKey(rightRootChildAssetCategory.getPrimaryKey());
+		parentChildAssetCategory = _persistence.fetchByPrimaryKey(parentChildAssetCategory.getPrimaryKey());
+
+		assertEquals(previousRootLeftCategoryId,
+			rootAssetCategory.getLeftCategoryId());
+		assertEquals(previousRootRightCategoryId + 4,
+			rootAssetCategory.getRightCategoryId());
+		assertEquals(rootAssetCategory.getLeftCategoryId() + 1,
+			leftRootChildAssetCategory.getLeftCategoryId());
+		assertEquals(rootAssetCategory.getRightCategoryId() - 3,
+			leftRootChildAssetCategory.getRightCategoryId());
+		assertEquals(rootAssetCategory.getLeftCategoryId() + 7,
+			rightRootChildAssetCategory.getLeftCategoryId());
+		assertEquals(rootAssetCategory.getRightCategoryId() - 1,
+			rightRootChildAssetCategory.getRightCategoryId());
+		assertEquals(leftRootChildAssetCategory.getLeftCategoryId() + 1,
+			parentAssetCategory.getLeftCategoryId());
+		assertEquals(leftRootChildAssetCategory.getRightCategoryId() - 1,
+			parentAssetCategory.getRightCategoryId());
+		assertEquals(parentAssetCategory.getLeftCategoryId() + 1,
+			parentChildAssetCategory.getLeftCategoryId());
+		assertEquals(parentAssetCategory.getRightCategoryId() - 1,
+			parentChildAssetCategory.getRightCategoryId());
+	}
+
 	protected AssetCategory addAssetCategory(long groupId, Long parentCategoryId)
 		throws Exception {
 		long pk = nextLong();
@@ -509,7 +509,6 @@ public class AssetCategoryPersistenceTest extends BasePersistenceTestCase {
 		AssetCategory assetCategory = _persistence.create(pk);
 
 		assetCategory.setUuid(randomString());
-
 		assetCategory.setGroupId(groupId);
 
 		assetCategory.setCompanyId(nextLong());
