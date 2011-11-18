@@ -113,7 +113,7 @@ for (String portletId : PropsValues.DOCKBAR_ADD_PORTLETS) {
 			</li>
 		</c:if>
 
-		<c:if test="<%= !group.isControlPanel() && (themeDisplay.isShowLayoutTemplatesIcon() || themeDisplay.isShowPageSettingsIcon() || themeDisplay.isShowSiteContentIcon() || themeDisplay.isShowSiteMapSettingsIcon() || themeDisplay.isShowManageSiteMembershipsIcon() || themeDisplay.isShowSiteSettingsIcon()) %>">
+		<c:if test="<%= !group.isControlPanel() && (themeDisplay.isShowLayoutTemplatesIcon() || themeDisplay.isShowManageSiteMembershipsIcon() || themeDisplay.isShowPageSettingsIcon() || themeDisplay.isShowSiteContentIcon() || themeDisplay.isShowSiteMapSettingsIcon() || themeDisplay.isShowSiteSettingsIcon()) %>">
 			<li class="manage-content has-submenu" id="<portlet:namespace />manageContent">
 				<a class="menu-button" href="javascript:;">
 					<span>
