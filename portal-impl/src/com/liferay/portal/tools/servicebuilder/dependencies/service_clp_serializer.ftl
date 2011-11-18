@@ -304,7 +304,9 @@ public class ClpSerializer {
 
 	private static Log _log = LogFactoryUtil.getLog(ClpSerializer.class);
 
-	@SuppressWarnings("unused")
+	<#if !entitiesHaveColumns>
+		@SuppressWarnings("unused")
+	</#if>
 	private static ClassLoader _classLoader;
 
 	private static String _servletContextName;
