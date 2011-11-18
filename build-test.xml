@@ -1567,7 +1567,7 @@
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="session-smoke" />
-			<param name="test.ant.script.suite" value="SessionTestSuite" />
+			<param name="test.ant.script.suite" value="SessionSmokeTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
