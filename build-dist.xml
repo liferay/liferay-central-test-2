@@ -276,7 +276,7 @@
 
 	<target name="build-dist-tcat-admin-webapps-portal">
 		<tstamp>
-			<format property="tstamp.value" pattern="yyyyMMdd" />
+			<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
 		</tstamp>
 
 		<mkdir dir="${tstamp.value}/META-INF" />
@@ -749,7 +749,7 @@ release was successful.</echo>
 
 	<target name="rename-dist-plugin-files">
 		<tstamp>
-			<format property="tstamp.value" pattern="yyyyMMdd" />
+			<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
 		</tstamp>
 
 		<for param="dist.plugin.file">
@@ -782,7 +782,7 @@ release was successful.</echo>
 
 	<target name="rename-dist-portal-files">
 		<tstamp>
-			<format property="tstamp.value" pattern="yyyyMMdd" />
+			<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
 		</tstamp>
 
 		<for param="dist.portal.file">
@@ -1170,7 +1170,7 @@ rerun this task.</echo>
 		/>
 
 		<tstamp>
-			<format property="tstamp.value" pattern="yyyyMMdd" />
+			<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
 		</tstamp>
 
 		<mkdir dir="${tstamp.value}" />
