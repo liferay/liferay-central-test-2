@@ -28,6 +28,9 @@ import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.layoutsadmin.action.EditLayoutsAction;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
@@ -37,9 +40,6 @@ import javax.portlet.RenderResponse;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @author Brian Wing Shun Chan
@@ -78,7 +78,7 @@ public class EditLayoutBranchAction extends EditLayoutsAction {
 
 				Map<String, String> data = new HashMap<String, String>();
 
-				data.put("preventNotification", String.valueOf(true));
+				data.put("preventNotification", Boolean.TRUE.toString());
 
 				SessionMessages.add(
 					actionRequest,
