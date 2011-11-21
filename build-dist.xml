@@ -918,6 +918,15 @@ release was successful.</echo>
 					includes="**/SnifferManagerImpl.class"
 					update="yes"
 				/>
+
+				<!-- GRIZZLY-1060 -->
+
+				<zip
+					basedir="tools/servers/glassfish/patches/GRIZZLY-1060/classes"
+					destfile="${app.server.glassfish.dir}/modules/grizzly-utils.jar"
+					includes="**/OutputWriter.class"
+					update="yes"
+				/>
 			</then>
 		</if>
 	</target>
