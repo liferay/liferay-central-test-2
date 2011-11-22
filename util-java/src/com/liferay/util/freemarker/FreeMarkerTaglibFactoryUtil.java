@@ -44,7 +44,7 @@ public class FreeMarkerTaglibFactoryUtil implements CacheRegistryItem {
 	}
 
 	public void invalidate() {
-		_taglibCache.clear();
+		_templateModels.clear();
 	}
 
 	private FreeMarkerTaglibFactoryUtil() {
@@ -54,38 +54,38 @@ public class FreeMarkerTaglibFactoryUtil implements CacheRegistryItem {
 		implements TemplateHashModel {
 
 		public TaglibFactoryCacheWrapper(ServletContext servletContext) {
-			_nameSpace = servletContext.getContextPath();
+			_contextPath = servletContext.getContextPath();
 			_taglibFactory = new TaglibFactory(servletContext);
 		}
 
 		public TemplateModel get(String uri) throws TemplateModelException {
 			String key = uri;
 
-			if (_nameSpace.length() > 0) {
-				key = _nameSpace.concat(uri);
+			if (_contextPath.length() > 0) {
+				key = _contextPath.concat(uri);
 			}
 
-			TemplateModel taglib = _taglibCache.get(key);
+			TemplateModel templateModel = _templateModels.get(key);
 
-			if (taglib == null) {
-				taglib = _taglibFactory.get(uri);
+			if (templateModel == null) {
+				templateModel = _taglibFactory.get(uri);
 
-				_taglibCache.put(key, taglib);
+				_templateModels.put(key, templateModel);
 			}
 
-			return taglib;
+			return templateModel;
 		}
 
-		public boolean isEmpty() throws TemplateModelException {
+		public boolean isEmpty() {
 			return false;
 		}
 
-		private String _nameSpace;
+		private String _contextPath;
 		private TaglibFactory _taglibFactory;
 
 	}
 
-	private static Map<String, TemplateModel> _taglibCache =
+	private static Map<String, TemplateModel> _templateModels =
 		new ConcurrentHashMap<String, TemplateModel>();
 
 	static {
