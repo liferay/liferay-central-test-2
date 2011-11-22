@@ -38,7 +38,6 @@ import com.liferay.portal.service.LockLocalServiceUtil;
 import com.liferay.portal.tools.DBUpgrader;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.messageboards.util.MBIndexer;
-import com.liferay.util.freemarker.FreeMarkerTaglibFactoryUtil;
 
 /**
  * @author Brian Wing Shun Chan
@@ -122,8 +121,6 @@ public class StartupAction extends SimpleAction {
 		}
 
 		FreeMarkerEngineUtil.init();
-
-		FreeMarkerTaglibFactoryUtil.registerCache();
 
 		// Velocity
 
