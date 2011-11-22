@@ -51,10 +51,10 @@ public class FreeMarkerTaglibFactoryUtil implements CacheRegistryItem {
 		_templateModels.clear();
 	}
 
-	private FreeMarkerTaglibFactoryUtil(String namespace) {
-		_namespace = namespace;
+	private FreeMarkerTaglibFactoryUtil(String contextPath) {
+		_contextPath = contextPath;
 		_registryName = FreeMarkerTaglibFactoryUtil.class.getName().concat(
-			StringPool.AT).concat(_namespace);
+			StringPool.AT).concat(_contextPath);
 	}
 
 	private static FreeMarkerTaglibFactoryUtil getInstance(
@@ -63,26 +63,31 @@ public class FreeMarkerTaglibFactoryUtil implements CacheRegistryItem {
 		if (_instance == null) {
 			synchronized(FreeMarkerTaglibFactoryUtil.class) {
 				if (_instance == null) {
-					String namespace = servletContext.getContextPath();
+					String contextPath = servletContext.getContextPath();
 
-					// First call within current ClassLoader
-					_instance = new FreeMarkerTaglibFactoryUtil(namespace);
+					// First call within current class loader
 
-					// Unregister previous one if there is any, this should only
+					_instance = new FreeMarkerTaglibFactoryUtil(contextPath);
+
+					// Unregister previous one if there is one, this should only
 					// happen on plugin redeploy
+
 					CacheRegistryUtil.unregister(_instance._registryName);
 
 					// Register current instance
+
 					CacheRegistryUtil.register(_instance);
 
-					// Bind _instance lifecycle to current ServletContext, this
-					// is preventing memory leak on undeploy
-
-					// Save a hard stack copy to prevent tomcat null out heap
+					// Save a hard stack copy to prevent Tomcat null out heap
 					// reference
+
 					final String name = _instance._registryName;
 
-					FinalizeManager.register(servletContext,
+					// Bind _instance lifecycle to servlet context to prevent
+					// memory leak on undeploy
+
+					FinalizeManager.register(
+						servletContext,
 						new FinalizeAction() {
 
 							public void doFinalize() {
@@ -97,11 +102,21 @@ public class FreeMarkerTaglibFactoryUtil implements CacheRegistryItem {
 		return _instance;
 	}
 
+	private static volatile FreeMarkerTaglibFactoryUtil _instance;
+
+	private final String _contextPath;
+	private final String _registryName;
+	private Map<String, TemplateModel> _templateModels =
+		new ConcurrentHashMap<String, TemplateModel>();
+
 	private static class TaglibFactoryCacheWrapper
 		implements TemplateHashModel {
 
 		public TaglibFactoryCacheWrapper(ServletContext servletContext) {
-			_templateModels = getInstance(servletContext)._templateModels;
+			FreeMarkerTaglibFactoryUtil freeMarkerTaglibFactoryUtil =
+				getInstance(servletContext);
+
+			_templateModels = freeMarkerTaglibFactoryUtil._templateModels;
 			_taglibFactory = new TaglibFactory(servletContext);
 		}
 
@@ -121,17 +136,9 @@ public class FreeMarkerTaglibFactoryUtil implements CacheRegistryItem {
 			return false;
 		}
 
-		private Map<String, TemplateModel> _templateModels;
 		private TaglibFactory _taglibFactory;
+		private Map<String, TemplateModel> _templateModels;
 
 	}
-
-	private static volatile FreeMarkerTaglibFactoryUtil _instance;
-
-	private Map<String, TemplateModel> _templateModels =
-		new ConcurrentHashMap<String, TemplateModel>();
-
-	private final String _namespace;
-	private final String _registryName;
 
 }
