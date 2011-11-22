@@ -639,8 +639,6 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 				Group.class.getName(), group.getGroupId());
 		}
 
-		// Asset Vocabularies
-
 		assetVocabularyLocalService.deleteVocabularies(group.getGroupId());
 
 		// Blogs
