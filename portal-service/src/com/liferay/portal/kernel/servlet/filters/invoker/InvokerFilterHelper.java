@@ -210,7 +210,9 @@ public class InvokerFilterHelper {
 		}
 		else {
 			if (filter instanceof PortalLifecycle) {
-				PortalLifecycleUtil.removeDestroy((PortalLifecycle)filter);
+				PortalLifecycle portalLifecycle = (PortalLifecycle)filter;
+
+				PortalLifecycleUtil.removeDestroy(portalLifecycle);
 			}
 
 			if (_log.isDebugEnabled()) {
