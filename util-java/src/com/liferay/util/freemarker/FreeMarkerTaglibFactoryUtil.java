@@ -16,6 +16,7 @@ package com.liferay.util.freemarker;
 
 import com.liferay.portal.kernel.cache.CacheRegistryItem;
 import com.liferay.portal.kernel.cache.CacheRegistryUtil;
+import com.liferay.portal.kernel.util.StringPool;
 
 import freemarker.ext.jsp.TaglibFactory;
 
@@ -44,7 +45,18 @@ public class FreeMarkerTaglibFactoryUtil implements CacheRegistryItem {
 	}
 
 	public void invalidate() {
-		_templateModels.clear();
+		for (FreeMarkerTaglibFactoryUtil instance : _instances.values()) {
+			instance._templateModels.clear();
+		}
+	}
+
+	public static void registerCache() {
+		FreeMarkerTaglibFactoryUtil portalFreeMarkerTaglibFactoryUtil =
+			new FreeMarkerTaglibFactoryUtil();
+
+		_instances.put(StringPool.BLANK, portalFreeMarkerTaglibFactoryUtil);
+
+		CacheRegistryUtil.register(portalFreeMarkerTaglibFactoryUtil);
 	}
 
 	private FreeMarkerTaglibFactoryUtil() {
@@ -54,16 +66,23 @@ public class FreeMarkerTaglibFactoryUtil implements CacheRegistryItem {
 		implements TemplateHashModel {
 
 		public TaglibFactoryCacheWrapper(ServletContext servletContext) {
-			_contextPath = servletContext.getContextPath();
+			String namespace = servletContext.getContextPath();
+
+			FreeMarkerTaglibFactoryUtil freeMarkerTaglibFactoryUtil =
+				_instances.get(namespace);
+
+			if (freeMarkerTaglibFactoryUtil == null) {
+				freeMarkerTaglibFactoryUtil = new FreeMarkerTaglibFactoryUtil();
+
+				_instances.put(namespace, freeMarkerTaglibFactoryUtil);
+			}
+
+			_templateModels = freeMarkerTaglibFactoryUtil._templateModels;
 			_taglibFactory = new TaglibFactory(servletContext);
 		}
 
 		public TemplateModel get(String uri) throws TemplateModelException {
 			String key = uri;
-
-			if (_contextPath.length() > 0) {
-				key = _contextPath.concat(uri);
-			}
 
 			TemplateModel templateModel = _templateModels.get(key);
 
@@ -80,16 +99,15 @@ public class FreeMarkerTaglibFactoryUtil implements CacheRegistryItem {
 			return false;
 		}
 
-		private String _contextPath;
 		private TaglibFactory _taglibFactory;
+		private Map<String, TemplateModel> _templateModels;
 
 	}
 
-	private static Map<String, TemplateModel> _templateModels =
+	private static Map<String, FreeMarkerTaglibFactoryUtil> _instances =
+		new ConcurrentHashMap<String, FreeMarkerTaglibFactoryUtil>();
+
+	private Map<String, TemplateModel> _templateModels =
 		new ConcurrentHashMap<String, TemplateModel>();
-
-	static {
-		CacheRegistryUtil.register(new FreeMarkerTaglibFactoryUtil());
-	}
 
 }
