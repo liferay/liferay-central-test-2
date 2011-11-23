@@ -278,27 +278,21 @@ public class DLAppServiceTest extends BaseServiceTestCase {
 		}
 	}
 
-	public void testSearchFileInRootFolder() throws Exception {
-		testSearchFile(true);
-	}
-
-	public void testSearchFileInSubFolder() throws Exception {
-		testSearchFile(false);
-	}
-
-	public void testTags() throws Exception {
+	public void testAsstTags() throws Exception {
 		long folderId = _folder.getFolderId();
 		String name = "TestTags.txt";
 		String description = StringPool.BLANK;
 		String changeLog = StringPool.BLANK;
 		byte[] bytes = _CONTENT.getBytes();
-		String[] tagNames = new String[] { "hello", "world" };
 
 		ServiceContext serviceContext = new ServiceContext();
 
 		serviceContext.setAddGroupPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
-		serviceContext.setAssetTagNames(tagNames);
+
+		String[] assetTagNames = new String[] {"hello", "world"};
+
+		serviceContext.setAssetTagNames(assetTagNames);
 
 		FileEntry fileEntry = DLAppServiceUtil.addFileEntry(
 			TestPropsValues.getGroupId(), folderId, name,
@@ -308,7 +302,7 @@ public class DLAppServiceTest extends BaseServiceTestCase {
 		AssetEntry assetEntry = AssetEntryLocalServiceUtil.fetchEntry(
 			DLFileEntry.class.getName(), fileEntry.getFileEntryId());
 
-		assertEqualsSorted(tagNames, assetEntry.getTagNames());
+		assertEqualsSorted(assetTagNames, assetEntry.getTagNames());
 
 		Thread.sleep(1000);
 
@@ -318,9 +312,9 @@ public class DLAppServiceTest extends BaseServiceTestCase {
 		search(false, "world", true);
 		search(false, "liferay", false);
 
-		tagNames = new String[] { "hello", "world", "liferay" };
+		assetTagNames = new String[] {"hello", "world", "liferay"};
 
-		serviceContext.setAssetTagNames(tagNames);
+		serviceContext.setAssetTagNames(assetTagNames);
 
 		fileEntry = DLAppServiceUtil.updateFileEntry(
 			fileEntry.getFileEntryId(), name, ContentTypes.TEXT_PLAIN, name,
@@ -329,7 +323,7 @@ public class DLAppServiceTest extends BaseServiceTestCase {
 		assetEntry = AssetEntryLocalServiceUtil.fetchEntry(
 			DLFileEntry.class.getName(), fileEntry.getFileEntryId());
 
-		assertEqualsSorted(tagNames, assetEntry.getTagNames());
+		assertEqualsSorted(assetTagNames, assetEntry.getTagNames());
 
 		Thread.sleep(1000);
 
@@ -342,6 +336,14 @@ public class DLAppServiceTest extends BaseServiceTestCase {
 		DLAppServiceUtil.deleteFileEntry(_fileEntry.getFileEntryId());
 
 		_fileEntry = null;
+	}
+
+	public void testSearchFileInRootFolder() throws Exception {
+		testSearchFile(true);
+	}
+
+	public void testSearchFileInSubFolder() throws Exception {
+		testSearchFile(false);
 	}
 
 	public void testVersionLabel() throws Exception {
