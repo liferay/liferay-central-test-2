@@ -4,7 +4,7 @@ ${writerRepositoryCSV.write(group.groupId + ", " + group.name + "\n")}
 
 <#assign ddmStructure = dataFactory.addDDMStructure(groupId, companyId, firstUserId, dataFactory.DLFileEntryClassName.classNameId)>
 
-<#assign createDate = dataFactory.getDateAsString(ddmStructure.createDate)>
+<#assign createDate = dataFactory.getDateString(ddmStructure.createDate)>
 
 <#if groupId == 1>
 	insert into DLFileEntryType (fileEntryTypeId, groupId, companyId, userId, createDate, modifiedDate, name) values (0, 0, 0, 0, '${createDate}', '${createDate}', 'Basic Document');

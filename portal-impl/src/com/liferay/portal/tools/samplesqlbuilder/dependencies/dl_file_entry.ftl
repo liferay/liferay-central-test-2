@@ -1,6 +1,6 @@
 <#setting number_format = "0">
 
-<#assign createDate = dataFactory.getDateAsString(dlFileEntry.createDate)>
+<#assign createDate = dataFactory.getDateString(dlFileEntry.createDate)>
 
 insert into DLFileEntry values ('${portalUUIDUtil.generate()}', ${dlFileEntry.fileEntryId}, ${dlFileEntry.groupId}, ${dlFileEntry.companyId}, ${dlFileEntry.userId}, '', ${dlFileEntry.userId}, '', '${createDate}', '${createDate}', ${dlFileEntry.repositoryId}, ${dlFileEntry.folderId}, '${dlFileEntry.name}', '${dlFileEntry.extension}', '${dlFileEntry.mimeType}', '${dlFileEntry.title}','${dlFileEntry.description}', '', 0, '1.0', '${dlFileEntrySize}', 1,'${dlFileEntry.smallImageId}','${dlFileEntry.largeImageId}', 0, 0);
 

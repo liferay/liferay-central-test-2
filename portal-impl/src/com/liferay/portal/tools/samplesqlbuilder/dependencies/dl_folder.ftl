@@ -1,12 +1,12 @@
 <#setting number_format = "0">
 
-<#assign folderCreateDate = dataFactory.getDateAsString(dlFolder.createDate)>
+<#assign dlFolderCreateDate = dataFactory.getDateString(dlFolder.createDate)>
 
-insert into DLFolder values ('${portalUUIDUtil.generate()}', ${dlFolder.folderId}, ${dlFolder.groupId}, ${dlFolder.companyId}, ${dlFolder.userId}, '', '${folderCreateDate}', '${folderCreateDate}', ${dlFolder.repositoryId}, 0, ${dlFolder.parentFolderId}, '${dlFolder.name}', '${dlFolder.description}', null, 0, 0);
+insert into DLFolder values ('${portalUUIDUtil.generate()}', ${dlFolder.folderId}, ${dlFolder.groupId}, ${dlFolder.companyId}, ${dlFolder.userId}, '', '${dlFolderCreateDate}', '${dlFolderCreateDate}', ${dlFolder.repositoryId}, 0, ${dlFolder.parentFolderId}, '${dlFolder.name}', '${dlFolder.description}', null, 0, 0);
 
 <#assign dlSync = dataFactory.addDLSync(dlFolder.companyId, dlFolder.folderId, dlFolder.repositoryId, dlFolder.parentFolderId, true)>
 
-insert into DLSync values (${dlSync.syncId}, ${dlSync.companyId}, '${folderCreateDate}', '${folderCreateDate}', ${dlSync.fileId}, ${dlSync.repositoryId}, ${dlSync.parentFolderId}, '${dlSync.event}', '${dlSync.type}');
+insert into DLSync values (${dlSync.syncId}, ${dlSync.companyId}, '${dlFolderCreateDate}', '${dlFolderCreateDate}', ${dlSync.fileId}, ${dlSync.repositoryId}, ${dlSync.parentFolderId}, '${dlSync.event}', '${dlSync.type}');
 
 ${sampleSQLBuilder.insertSecurity("com.liferay.portlet.documentlibrary.model.DLFolder", dlFolder.folderId)}
 
@@ -16,9 +16,8 @@ ${sampleSQLBuilder.insertSecurity("com.liferay.portlet.documentlibrary.model.DLF
 
 		${sampleSQLBuilder.insertDLFileEntry(dlFileEntry, ddmStructure)}
 
-		<#assign createDate = dataFactory.getDateAsLong(dlFolder.createDate)>
-		<#assign fileCreateDate = dataFactory.getDateAsLong(dlFileEntry.createDate)>
+		<#assign dlFileEntryCreateDate = dataFactory.getDateLong(dlFileEntry.createDate)>
 
-		${writerDocumentLibraryCSV.write(dlFolder.folderId + "," + dlFileEntry.name + "," + dlFileEntry.fileEntryId + "," + fileCreateDate + "," + createDate +"\n")}
+		${writerDocumentLibraryCSV.write(dlFolder.folderId + "," + dlFileEntry.name + "," + dlFileEntry.fileEntryId + "," + dlFileEntryCreateDate + "," + dlFolderCreateDate +"\n")}
 	</#list>
 </#if>

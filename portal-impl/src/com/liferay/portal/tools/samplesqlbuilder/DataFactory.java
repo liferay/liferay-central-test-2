@@ -16,10 +16,12 @@ package com.liferay.portal.tools.samplesqlbuilder;
 
 import com.liferay.counter.model.Counter;
 import com.liferay.counter.model.impl.CounterModelImpl;
+import com.liferay.portal.kernel.util.FastDateFormatFactoryUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
 import com.liferay.portal.kernel.util.KeyValuePair;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.Document;
@@ -101,7 +103,7 @@ import com.liferay.util.SimpleCounter;
 
 import java.io.File;
 
-import java.text.SimpleDateFormat;
+import java.text.Format;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -230,12 +232,11 @@ public class DataFactory {
 
 		DDMStructure ddmStructure = new DDMStructureImpl();
 
-		ddmStructure.setCreateDate(
-			new Date(_DL_CREATE_TIME_BASE + 1000L * _dlDateCounter.get()));
 		ddmStructure.setStructureId(_counter.get());
 		ddmStructure.setGroupId(groupId);
 		ddmStructure.setCompanyId(companyId);
 		ddmStructure.setUserId(userId);
+		ddmStructure.setCreateDate(newCreateDate());
 		ddmStructure.setClassNameId(classNameId);
 
 		return ddmStructure;
@@ -261,12 +262,11 @@ public class DataFactory {
 
 		DLFileEntry dlFileEntry = new DLFileEntryImpl();
 
-		dlFileEntry.setCreateDate(
-			new Date(_DL_CREATE_TIME_BASE + 1000L * _dlDateCounter.get()));
 		dlFileEntry.setFileEntryId(_counter.get());
 		dlFileEntry.setGroupId(groupId);
 		dlFileEntry.setCompanyId(companyId);
 		dlFileEntry.setUserId(userId);
+		dlFileEntry.setCreateDate(newCreateDate());
 		dlFileEntry.setRepositoryId(groupId);
 		dlFileEntry.setFolderId(folderId);
 		dlFileEntry.setName(name);
@@ -333,12 +333,11 @@ public class DataFactory {
 
 		DLFolder dlFolder = new DLFolderImpl();
 
-		dlFolder.setCreateDate(
-			new Date(_DL_CREATE_TIME_BASE + 1000L * _dlDateCounter.get()));
 		dlFolder.setFolderId(_counter.get());
 		dlFolder.setGroupId(groupId);
 		dlFolder.setCompanyId(companyId);
 		dlFolder.setUserId(userId);
+		dlFolder.setCreateDate(newCreateDate());
 		dlFolder.setRepositoryId(groupId);
 		dlFolder.setParentFolderId(parentFolderId);
 		dlFolder.setName(name);
@@ -722,12 +721,12 @@ public class DataFactory {
 		return _counters;
 	}
 
-	public String getDateAsLong(Date date) {
+	public String getDateLong(Date date) {
 		return String.valueOf(date.getTime());
 	}
 
-	public String getDateAsString(Date date) {
-		return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date);
+	public String getDateString(Date date) {
+		return _simpleDateFormat.format(date);
 	}
 
 	public ClassName getDDMContentClassName() {
@@ -1183,6 +1182,10 @@ public class DataFactory {
 		_userNames[1] = lastNames;
 	}
 
+	protected Date newCreateDate() {
+		return new Date(_baseCreateTime + (_dlDateCounter.get() * Time.SECOND));
+	}
+
 	public IntegerWrapper newInteger() {
 		return new IntegerWrapper();
 	}
@@ -1205,9 +1208,8 @@ public class DataFactory {
 		return role;
 	}
 
-	private static final long _DL_CREATE_TIME_BASE;
-
 	private Role _administratorRole;
+	private long _baseCreateTime = System.currentTimeMillis() + Time.YEAR;
 	private String _baseDir;
 	private ClassName _blogsEntryClassName;
 	private List<ClassName> _classNames;
@@ -1239,6 +1241,8 @@ public class DataFactory {
 	private SimpleCounter _resourcePermissionCounter;
 	private ClassName _roleClassName;
 	private List<Role> _roles;
+	private Format _simpleDateFormat =
+		FastDateFormatFactoryUtil.getSimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	private Role _siteAdministratorRole;
 	private Role _siteMemberRole;
 	private Role _siteOwnerRole;
@@ -1247,10 +1251,5 @@ public class DataFactory {
 	private Object[] _userNames;
 	private Role _userRole;
 	private ClassName _wikiPageClassName;
-
-	static {
-		_DL_CREATE_TIME_BASE =
-			System.currentTimeMillis() + 1000L * 3600 * 24 * 365 * 100;
-	}
 
 }
