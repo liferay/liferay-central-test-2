@@ -29,12 +29,10 @@ List<Portlet> portlets = PortletLocalServiceUtil.getPortlets(company.getCompanyI
 
 portlets = ListUtil.sort(portlets, new PortletTitleComparator(application, locale));
 
-ClassLoader portalClassLoader = PortalClassLoaderUtil.getClassLoader();
-
-Iterator itr = portlets.iterator();
+Iterator<Portlet> itr = portlets.iterator();
 
 while (itr.hasNext()) {
-	Portlet portlet = (Portlet)itr.next();
+	Portlet portlet = itr.next();
 
 	if (Validator.isNull(portlet.getOpenSearchClass())) {
 		itr.remove();
@@ -43,7 +41,9 @@ while (itr.hasNext()) {
 	}
 	else {
 		try {
-			Class<?> openSearchClazz = portalClassLoader.loadClass(portlet.getOpenSearchClass());
+			ClassLoader classLoader = PortalClassLoaderUtil.getClassLoader();
+
+			Class<?> openSearchClazz = classLoader.loadClass(portlet.getOpenSearchClass());
 
 			itr.remove();
 
