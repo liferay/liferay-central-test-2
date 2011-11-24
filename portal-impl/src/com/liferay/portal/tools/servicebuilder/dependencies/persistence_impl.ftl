@@ -306,34 +306,32 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 	 */
 	@Override
 	public void clearCache(${entity.name} ${entity.varName}) {
+		EntityCacheUtil.removeResult(${entity.name}ModelImpl.ENTITY_CACHE_ENABLED, ${entity.name}Impl.class, ${entity.varName}.getPrimaryKey());
+
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 
 		<#if entity.getUniqueFinderList()?size &gt; 0>
-			doClearCache(${entity.varName});
-		<#else>
-			EntityCacheUtil.removeResult(${entity.name}ModelImpl.ENTITY_CACHE_ENABLED, ${entity.name}Impl.class, ${entity.varName}.getPrimaryKey());
+			clearUniqueFindersCache(${entity.varName});
 		</#if>
 	}
 
 	@Override
-	public void clearCache(List<${entity.name}> ${entity.varName}List) {
+	public void clearCache(List<${entity.name}> ${entity.varNames}) {
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 
-		for (${entity.name} ${entity.varName} : ${entity.varName}List) {
+		for (${entity.name} ${entity.varName} : ${entity.varNames}) {
+			EntityCacheUtil.removeResult(${entity.name}ModelImpl.ENTITY_CACHE_ENABLED, ${entity.name}Impl.class, ${entity.varName}.getPrimaryKey());
+
 			<#if entity.getUniqueFinderList()?size &gt; 0>
-				doClearCache(${entity.varName});
-			<#else>
-				EntityCacheUtil.removeResult(${entity.name}ModelImpl.ENTITY_CACHE_ENABLED, ${entity.name}Impl.class, ${entity.varName}.getPrimaryKey());
+				clearUniqueFindersCache(${entity.varName});
 			</#if>
 		}
 	}
 
 	<#if entity.getUniqueFinderList()?size &gt; 0>
-		protected void doClearCache(${entity.name} ${entity.varName}) {
-			EntityCacheUtil.removeResult(${entity.name}ModelImpl.ENTITY_CACHE_ENABLED, ${entity.name}Impl.class, ${entity.varName}.getPrimaryKey());
-
+		protected void clearUniqueFindersCache(${entity.name} ${entity.varName}) {
 			<#list entity.getUniqueFinderList() as finder>
 				<#assign finderColsList = finder.getColumns()>
 
