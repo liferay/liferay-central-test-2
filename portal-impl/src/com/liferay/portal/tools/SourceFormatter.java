@@ -977,8 +977,7 @@ public class SourceFormatter {
 			if ((trimmedLine.startsWith("private ") ||
 				 trimmedLine.startsWith("protected ") ||
 				 trimmedLine.startsWith("public ")) &&
-				line.contains(" (") &&
-				!line.contains(StringPool.QUOTE)) {
+				line.contains(" (") && !line.contains(StringPool.QUOTE)) {
 
 				line = StringUtil.replace(line, " (", "(");
 			}
