@@ -108,7 +108,6 @@ if (folder != null) {
 
 		sb.append(curFolder.getName());
 
-
 		row.addText(sb.toString(), rowURL);
 
 		// Statistics
