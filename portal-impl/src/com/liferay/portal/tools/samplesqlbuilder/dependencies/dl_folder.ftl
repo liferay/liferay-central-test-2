@@ -16,9 +16,6 @@ ${sampleSQLBuilder.insertSecurity("com.liferay.portlet.documentlibrary.model.DLF
 
 		${sampleSQLBuilder.insertDLFileEntry(dlFileEntry, ddmStructure)}
 
-		<#assign dlFolderCreateDateLong = dataFactory.getDateLong(dlFolder.createDate)>
-		<#assign dlFileEntryCreateDate = dataFactory.getDateLong(dlFileEntry.createDate)>
-
-		${writerDocumentLibraryCSV.write(dlFolder.folderId + "," + dlFileEntry.name + "," + dlFileEntry.fileEntryId + "," + dlFileEntryCreateDate + "," + dlFolderCreateDateLong +"\n")}
+		${writerDocumentLibraryCSV.write(dlFolder.folderId + "," + dlFileEntry.name + "," + dlFileEntry.fileEntryId + "," + dataFactory.getDateLong(dlFileEntry.createDate) + "," + dataFactory.getDateLong(dlFolder.createDate) +"\n")}
 	</#list>
 </#if>
