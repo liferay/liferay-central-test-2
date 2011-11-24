@@ -240,6 +240,12 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			userId = page.getUserId();
 		}
 
+		socialActivityLocalService.addActivity(
+			userId, page.getGroupId(), WikiPage.class.getName(),
+			page.getResourcePrimKey(),
+			SocialActivityConstants.TYPE_ADD_ATTACHMENT,
+			dirName + "/" + fileName, 0);
+
 		long companyId = page.getCompanyId();
 		long repositoryId = CompanyConstants.SYSTEM;
 		String dirName = page.getAttachmentsDir();
@@ -252,12 +258,6 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		DLStoreUtil.addFile(
 			companyId, repositoryId, dirName + "/" + fileName, file);
-
-		socialActivityLocalService.addActivity(
-			userId, page.getGroupId(), WikiPage.class.getName(),
-			page.getResourcePrimKey(),
-			SocialActivityConstants.TYPE_ADD_ATTACHMENT,
-			dirName + "/" + fileName, 0);
 	}
 
 	public void addPageAttachment(
@@ -275,6 +275,12 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			userId = page.getUserId();
 		}
 
+		socialActivityLocalService.addActivity(
+			userId, page.getGroupId(), WikiPage.class.getName(),
+			page.getResourcePrimKey(),
+			SocialActivityConstants.TYPE_ADD_ATTACHMENT,
+			dirName + "/" + fileName, 0);
+
 		long companyId = page.getCompanyId();
 		long repositoryId = CompanyConstants.SYSTEM;
 		String dirName = page.getAttachmentsDir();
@@ -287,12 +293,6 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		DLStoreUtil.addFile(
 			companyId, repositoryId, dirName + "/" + fileName, inputStream);
-
-		socialActivityLocalService.addActivity(
-			userId, page.getGroupId(), WikiPage.class.getName(),
-			page.getResourcePrimKey(),
-			SocialActivityConstants.TYPE_ADD_ATTACHMENT,
-			dirName + "/" + fileName, 0);
 	}
 
 	public void addPageAttachment(
