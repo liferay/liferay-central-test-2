@@ -244,20 +244,19 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			userId, page.getGroupId(), WikiPage.class.getName(),
 			page.getResourcePrimKey(),
 			SocialActivityConstants.TYPE_ADD_ATTACHMENT,
-			dirName + "/" + fileName, 0);
-
-		long companyId = page.getCompanyId();
-		long repositoryId = CompanyConstants.SYSTEM;
-		String dirName = page.getAttachmentsDir();
+			page.getAttachmentsDir() + "/" + fileName, 0);
 
 		try {
-			DLStoreUtil.addDirectory(companyId, repositoryId, dirName);
+			DLStoreUtil.addDirectory(
+				page.getCompanyId(), CompanyConstants.SYSTEM,
+				page.getAttachmentsDir());
 		}
 		catch (DuplicateDirectoryException dde) {
 		}
 
 		DLStoreUtil.addFile(
-			companyId, repositoryId, dirName + "/" + fileName, file);
+			page.getCompanyId(), CompanyConstants.SYSTEM,
+			page.getAttachmentsDir() + "/" + fileName, file);
 	}
 
 	public void addPageAttachment(
@@ -279,20 +278,19 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			userId, page.getGroupId(), WikiPage.class.getName(),
 			page.getResourcePrimKey(),
 			SocialActivityConstants.TYPE_ADD_ATTACHMENT,
-			dirName + "/" + fileName, 0);
-
-		long companyId = page.getCompanyId();
-		long repositoryId = CompanyConstants.SYSTEM;
-		String dirName = page.getAttachmentsDir();
+			page.getAttachmentsDir() + "/" + fileName, 0);
 
 		try {
-			DLStoreUtil.addDirectory(companyId, repositoryId, dirName);
+			DLStoreUtil.addDirectory(
+				page.getCompanyId(), CompanyConstants.SYSTEM,
+				page.getAttachmentsDir());
 		}
 		catch (DuplicateDirectoryException dde) {
 		}
 
 		DLStoreUtil.addFile(
-			companyId, repositoryId, dirName + "/" + fileName, inputStream);
+			page.getCompanyId(), CompanyConstants.SYSTEM,
+			page.getAttachmentsDir() + "/" + fileName, inputStream);
 	}
 
 	public void addPageAttachment(
