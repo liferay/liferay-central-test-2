@@ -218,26 +218,29 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 	 */
 	@Override
 	public void clearCache(DDMContent ddmContent) {
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		doClearCache(ddmContent);
-	}
-
-	@Override
-	public void clearCache(List<DDMContent> ddmContentList) {
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		for (DDMContent ddmContent : ddmContentList) {
-			doClearCache(ddmContent);
-		}
-	}
-
-	protected void doClearCache(DDMContent ddmContent) {
 		EntityCacheUtil.removeResult(DDMContentModelImpl.ENTITY_CACHE_ENABLED,
 			DDMContentImpl.class, ddmContent.getPrimaryKey());
 
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		clearUniqueFindersCache(ddmContent);
+	}
+
+	@Override
+	public void clearCache(List<DDMContent> ddmContents) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (DDMContent ddmContent : ddmContents) {
+			EntityCacheUtil.removeResult(DDMContentModelImpl.ENTITY_CACHE_ENABLED,
+				DDMContentImpl.class, ddmContent.getPrimaryKey());
+
+			clearUniqueFindersCache(ddmContent);
+		}
+	}
+
+	protected void clearUniqueFindersCache(DDMContent ddmContent) {
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] {
 				ddmContent.getUuid(), Long.valueOf(ddmContent.getGroupId())

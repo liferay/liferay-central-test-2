@@ -156,26 +156,29 @@ public class BrowserTrackerPersistenceImpl extends BasePersistenceImpl<BrowserTr
 	 */
 	@Override
 	public void clearCache(BrowserTracker browserTracker) {
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		doClearCache(browserTracker);
-	}
-
-	@Override
-	public void clearCache(List<BrowserTracker> browserTrackerList) {
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		for (BrowserTracker browserTracker : browserTrackerList) {
-			doClearCache(browserTracker);
-		}
-	}
-
-	protected void doClearCache(BrowserTracker browserTracker) {
 		EntityCacheUtil.removeResult(BrowserTrackerModelImpl.ENTITY_CACHE_ENABLED,
 			BrowserTrackerImpl.class, browserTracker.getPrimaryKey());
 
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		clearUniqueFindersCache(browserTracker);
+	}
+
+	@Override
+	public void clearCache(List<BrowserTracker> browserTrackers) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (BrowserTracker browserTracker : browserTrackers) {
+			EntityCacheUtil.removeResult(BrowserTrackerModelImpl.ENTITY_CACHE_ENABLED,
+				BrowserTrackerImpl.class, browserTracker.getPrimaryKey());
+
+			clearUniqueFindersCache(browserTracker);
+		}
+	}
+
+	protected void clearUniqueFindersCache(BrowserTracker browserTracker) {
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_USERID,
 			new Object[] { Long.valueOf(browserTracker.getUserId()) });
 	}

@@ -317,26 +317,29 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 */
 	@Override
 	public void clearCache(CalEvent calEvent) {
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		doClearCache(calEvent);
-	}
-
-	@Override
-	public void clearCache(List<CalEvent> calEventList) {
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		for (CalEvent calEvent : calEventList) {
-			doClearCache(calEvent);
-		}
-	}
-
-	protected void doClearCache(CalEvent calEvent) {
 		EntityCacheUtil.removeResult(CalEventModelImpl.ENTITY_CACHE_ENABLED,
 			CalEventImpl.class, calEvent.getPrimaryKey());
 
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		clearUniqueFindersCache(calEvent);
+	}
+
+	@Override
+	public void clearCache(List<CalEvent> calEvents) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (CalEvent calEvent : calEvents) {
+			EntityCacheUtil.removeResult(CalEventModelImpl.ENTITY_CACHE_ENABLED,
+				CalEventImpl.class, calEvent.getPrimaryKey());
+
+			clearUniqueFindersCache(calEvent);
+		}
+	}
+
+	protected void clearUniqueFindersCache(CalEvent calEvent) {
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] { calEvent.getUuid(), Long.valueOf(
 					calEvent.getGroupId()) });

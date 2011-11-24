@@ -167,26 +167,29 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 	 */
 	@Override
 	public void clearCache(Shard shard) {
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		doClearCache(shard);
-	}
-
-	@Override
-	public void clearCache(List<Shard> shardList) {
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		for (Shard shard : shardList) {
-			doClearCache(shard);
-		}
-	}
-
-	protected void doClearCache(Shard shard) {
 		EntityCacheUtil.removeResult(ShardModelImpl.ENTITY_CACHE_ENABLED,
 			ShardImpl.class, shard.getPrimaryKey());
 
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		clearUniqueFindersCache(shard);
+	}
+
+	@Override
+	public void clearCache(List<Shard> shards) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (Shard shard : shards) {
+			EntityCacheUtil.removeResult(ShardModelImpl.ENTITY_CACHE_ENABLED,
+				ShardImpl.class, shard.getPrimaryKey());
+
+			clearUniqueFindersCache(shard);
+		}
+	}
+
+	protected void clearUniqueFindersCache(Shard shard) {
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_NAME,
 			new Object[] { shard.getName() });
 

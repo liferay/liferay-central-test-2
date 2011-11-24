@@ -182,26 +182,29 @@ public class DLSyncPersistenceImpl extends BasePersistenceImpl<DLSync>
 	 */
 	@Override
 	public void clearCache(DLSync dlSync) {
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		doClearCache(dlSync);
-	}
-
-	@Override
-	public void clearCache(List<DLSync> dlSyncList) {
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		for (DLSync dlSync : dlSyncList) {
-			doClearCache(dlSync);
-		}
-	}
-
-	protected void doClearCache(DLSync dlSync) {
 		EntityCacheUtil.removeResult(DLSyncModelImpl.ENTITY_CACHE_ENABLED,
 			DLSyncImpl.class, dlSync.getPrimaryKey());
 
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		clearUniqueFindersCache(dlSync);
+	}
+
+	@Override
+	public void clearCache(List<DLSync> dlSyncs) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (DLSync dlSync : dlSyncs) {
+			EntityCacheUtil.removeResult(DLSyncModelImpl.ENTITY_CACHE_ENABLED,
+				DLSyncImpl.class, dlSync.getPrimaryKey());
+
+			clearUniqueFindersCache(dlSync);
+		}
+	}
+
+	protected void clearUniqueFindersCache(DLSync dlSync) {
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_FILEID,
 			new Object[] { Long.valueOf(dlSync.getFileId()) });
 	}

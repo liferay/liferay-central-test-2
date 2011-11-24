@@ -225,28 +225,32 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 	 */
 	@Override
 	public void clearCache(WorkflowDefinitionLink workflowDefinitionLink) {
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		doClearCache(workflowDefinitionLink);
-	}
-
-	@Override
-	public void clearCache(
-		List<WorkflowDefinitionLink> workflowDefinitionLinkList) {
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		for (WorkflowDefinitionLink workflowDefinitionLink : workflowDefinitionLinkList) {
-			doClearCache(workflowDefinitionLink);
-		}
-	}
-
-	protected void doClearCache(WorkflowDefinitionLink workflowDefinitionLink) {
 		EntityCacheUtil.removeResult(WorkflowDefinitionLinkModelImpl.ENTITY_CACHE_ENABLED,
 			WorkflowDefinitionLinkImpl.class,
 			workflowDefinitionLink.getPrimaryKey());
 
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		clearUniqueFindersCache(workflowDefinitionLink);
+	}
+
+	@Override
+	public void clearCache(List<WorkflowDefinitionLink> workflowDefinitionLinks) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (WorkflowDefinitionLink workflowDefinitionLink : workflowDefinitionLinks) {
+			EntityCacheUtil.removeResult(WorkflowDefinitionLinkModelImpl.ENTITY_CACHE_ENABLED,
+				WorkflowDefinitionLinkImpl.class,
+				workflowDefinitionLink.getPrimaryKey());
+
+			clearUniqueFindersCache(workflowDefinitionLink);
+		}
+	}
+
+	protected void clearUniqueFindersCache(
+		WorkflowDefinitionLink workflowDefinitionLink) {
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_C_C_C_T,
 			new Object[] {
 				Long.valueOf(workflowDefinitionLink.getGroupId()),

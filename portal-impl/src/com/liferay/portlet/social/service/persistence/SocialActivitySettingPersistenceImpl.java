@@ -227,28 +227,32 @@ public class SocialActivitySettingPersistenceImpl extends BasePersistenceImpl<So
 	 */
 	@Override
 	public void clearCache(SocialActivitySetting socialActivitySetting) {
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		doClearCache(socialActivitySetting);
-	}
-
-	@Override
-	public void clearCache(
-		List<SocialActivitySetting> socialActivitySettingList) {
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		for (SocialActivitySetting socialActivitySetting : socialActivitySettingList) {
-			doClearCache(socialActivitySetting);
-		}
-	}
-
-	protected void doClearCache(SocialActivitySetting socialActivitySetting) {
 		EntityCacheUtil.removeResult(SocialActivitySettingModelImpl.ENTITY_CACHE_ENABLED,
 			SocialActivitySettingImpl.class,
 			socialActivitySetting.getPrimaryKey());
 
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		clearUniqueFindersCache(socialActivitySetting);
+	}
+
+	@Override
+	public void clearCache(List<SocialActivitySetting> socialActivitySettings) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (SocialActivitySetting socialActivitySetting : socialActivitySettings) {
+			EntityCacheUtil.removeResult(SocialActivitySettingModelImpl.ENTITY_CACHE_ENABLED,
+				SocialActivitySettingImpl.class,
+				socialActivitySetting.getPrimaryKey());
+
+			clearUniqueFindersCache(socialActivitySetting);
+		}
+	}
+
+	protected void clearUniqueFindersCache(
+		SocialActivitySetting socialActivitySetting) {
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_C_A_N,
 			new Object[] {
 				Long.valueOf(socialActivitySetting.getGroupId()),

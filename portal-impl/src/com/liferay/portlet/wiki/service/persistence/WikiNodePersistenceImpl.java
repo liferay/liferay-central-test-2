@@ -235,26 +235,29 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 */
 	@Override
 	public void clearCache(WikiNode wikiNode) {
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		doClearCache(wikiNode);
-	}
-
-	@Override
-	public void clearCache(List<WikiNode> wikiNodeList) {
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		for (WikiNode wikiNode : wikiNodeList) {
-			doClearCache(wikiNode);
-		}
-	}
-
-	protected void doClearCache(WikiNode wikiNode) {
 		EntityCacheUtil.removeResult(WikiNodeModelImpl.ENTITY_CACHE_ENABLED,
 			WikiNodeImpl.class, wikiNode.getPrimaryKey());
 
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		clearUniqueFindersCache(wikiNode);
+	}
+
+	@Override
+	public void clearCache(List<WikiNode> wikiNodes) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (WikiNode wikiNode : wikiNodes) {
+			EntityCacheUtil.removeResult(WikiNodeModelImpl.ENTITY_CACHE_ENABLED,
+				WikiNodeImpl.class, wikiNode.getPrimaryKey());
+
+			clearUniqueFindersCache(wikiNode);
+		}
+	}
+
+	protected void clearUniqueFindersCache(WikiNode wikiNode) {
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] { wikiNode.getUuid(), Long.valueOf(
 					wikiNode.getGroupId()) });

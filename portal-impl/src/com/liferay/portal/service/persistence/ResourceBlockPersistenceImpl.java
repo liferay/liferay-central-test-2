@@ -222,26 +222,29 @@ public class ResourceBlockPersistenceImpl extends BasePersistenceImpl<ResourceBl
 	 */
 	@Override
 	public void clearCache(ResourceBlock resourceBlock) {
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		doClearCache(resourceBlock);
-	}
-
-	@Override
-	public void clearCache(List<ResourceBlock> resourceBlockList) {
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		for (ResourceBlock resourceBlock : resourceBlockList) {
-			doClearCache(resourceBlock);
-		}
-	}
-
-	protected void doClearCache(ResourceBlock resourceBlock) {
 		EntityCacheUtil.removeResult(ResourceBlockModelImpl.ENTITY_CACHE_ENABLED,
 			ResourceBlockImpl.class, resourceBlock.getPrimaryKey());
 
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		clearUniqueFindersCache(resourceBlock);
+	}
+
+	@Override
+	public void clearCache(List<ResourceBlock> resourceBlocks) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (ResourceBlock resourceBlock : resourceBlocks) {
+			EntityCacheUtil.removeResult(ResourceBlockModelImpl.ENTITY_CACHE_ENABLED,
+				ResourceBlockImpl.class, resourceBlock.getPrimaryKey());
+
+			clearUniqueFindersCache(resourceBlock);
+		}
+	}
+
+	protected void clearUniqueFindersCache(ResourceBlock resourceBlock) {
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_G_N_P,
 			new Object[] {
 				Long.valueOf(resourceBlock.getCompanyId()),

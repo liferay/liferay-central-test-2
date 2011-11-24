@@ -223,28 +223,32 @@ public class ResourceTypePermissionPersistenceImpl extends BasePersistenceImpl<R
 	 */
 	@Override
 	public void clearCache(ResourceTypePermission resourceTypePermission) {
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		doClearCache(resourceTypePermission);
-	}
-
-	@Override
-	public void clearCache(
-		List<ResourceTypePermission> resourceTypePermissionList) {
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		for (ResourceTypePermission resourceTypePermission : resourceTypePermissionList) {
-			doClearCache(resourceTypePermission);
-		}
-	}
-
-	protected void doClearCache(ResourceTypePermission resourceTypePermission) {
 		EntityCacheUtil.removeResult(ResourceTypePermissionModelImpl.ENTITY_CACHE_ENABLED,
 			ResourceTypePermissionImpl.class,
 			resourceTypePermission.getPrimaryKey());
 
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		clearUniqueFindersCache(resourceTypePermission);
+	}
+
+	@Override
+	public void clearCache(List<ResourceTypePermission> resourceTypePermissions) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (ResourceTypePermission resourceTypePermission : resourceTypePermissions) {
+			EntityCacheUtil.removeResult(ResourceTypePermissionModelImpl.ENTITY_CACHE_ENABLED,
+				ResourceTypePermissionImpl.class,
+				resourceTypePermission.getPrimaryKey());
+
+			clearUniqueFindersCache(resourceTypePermission);
+		}
+	}
+
+	protected void clearUniqueFindersCache(
+		ResourceTypePermission resourceTypePermission) {
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_G_N_R,
 			new Object[] {
 				Long.valueOf(resourceTypePermission.getCompanyId()),

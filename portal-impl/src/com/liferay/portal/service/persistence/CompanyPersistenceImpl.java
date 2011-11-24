@@ -195,26 +195,29 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 	 */
 	@Override
 	public void clearCache(Company company) {
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		doClearCache(company);
-	}
-
-	@Override
-	public void clearCache(List<Company> companyList) {
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		for (Company company : companyList) {
-			doClearCache(company);
-		}
-	}
-
-	protected void doClearCache(Company company) {
 		EntityCacheUtil.removeResult(CompanyModelImpl.ENTITY_CACHE_ENABLED,
 			CompanyImpl.class, company.getPrimaryKey());
 
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		clearUniqueFindersCache(company);
+	}
+
+	@Override
+	public void clearCache(List<Company> companies) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (Company company : companies) {
+			EntityCacheUtil.removeResult(CompanyModelImpl.ENTITY_CACHE_ENABLED,
+				CompanyImpl.class, company.getPrimaryKey());
+
+			clearUniqueFindersCache(company);
+		}
+	}
+
+	protected void clearUniqueFindersCache(Company company) {
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_WEBID,
 			new Object[] { company.getWebId() });
 

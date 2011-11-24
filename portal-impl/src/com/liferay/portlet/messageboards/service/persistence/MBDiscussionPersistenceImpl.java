@@ -193,26 +193,29 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	 */
 	@Override
 	public void clearCache(MBDiscussion mbDiscussion) {
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		doClearCache(mbDiscussion);
-	}
-
-	@Override
-	public void clearCache(List<MBDiscussion> mbDiscussionList) {
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		for (MBDiscussion mbDiscussion : mbDiscussionList) {
-			doClearCache(mbDiscussion);
-		}
-	}
-
-	protected void doClearCache(MBDiscussion mbDiscussion) {
 		EntityCacheUtil.removeResult(MBDiscussionModelImpl.ENTITY_CACHE_ENABLED,
 			MBDiscussionImpl.class, mbDiscussion.getPrimaryKey());
 
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		clearUniqueFindersCache(mbDiscussion);
+	}
+
+	@Override
+	public void clearCache(List<MBDiscussion> mbDiscussions) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (MBDiscussion mbDiscussion : mbDiscussions) {
+			EntityCacheUtil.removeResult(MBDiscussionModelImpl.ENTITY_CACHE_ENABLED,
+				MBDiscussionImpl.class, mbDiscussion.getPrimaryKey());
+
+			clearUniqueFindersCache(mbDiscussion);
+		}
+	}
+
+	protected void clearUniqueFindersCache(MBDiscussion mbDiscussion) {
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_THREADID,
 			new Object[] { Long.valueOf(mbDiscussion.getThreadId()) });
 

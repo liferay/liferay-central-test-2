@@ -271,26 +271,31 @@ public class DLFileEntryMetadataPersistenceImpl extends BasePersistenceImpl<DLFi
 	 */
 	@Override
 	public void clearCache(DLFileEntryMetadata dlFileEntryMetadata) {
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		doClearCache(dlFileEntryMetadata);
-	}
-
-	@Override
-	public void clearCache(List<DLFileEntryMetadata> dlFileEntryMetadataList) {
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		for (DLFileEntryMetadata dlFileEntryMetadata : dlFileEntryMetadataList) {
-			doClearCache(dlFileEntryMetadata);
-		}
-	}
-
-	protected void doClearCache(DLFileEntryMetadata dlFileEntryMetadata) {
 		EntityCacheUtil.removeResult(DLFileEntryMetadataModelImpl.ENTITY_CACHE_ENABLED,
 			DLFileEntryMetadataImpl.class, dlFileEntryMetadata.getPrimaryKey());
 
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		clearUniqueFindersCache(dlFileEntryMetadata);
+	}
+
+	@Override
+	public void clearCache(List<DLFileEntryMetadata> dlFileEntryMetadatas) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (DLFileEntryMetadata dlFileEntryMetadata : dlFileEntryMetadatas) {
+			EntityCacheUtil.removeResult(DLFileEntryMetadataModelImpl.ENTITY_CACHE_ENABLED,
+				DLFileEntryMetadataImpl.class,
+				dlFileEntryMetadata.getPrimaryKey());
+
+			clearUniqueFindersCache(dlFileEntryMetadata);
+		}
+	}
+
+	protected void clearUniqueFindersCache(
+		DLFileEntryMetadata dlFileEntryMetadata) {
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_D_F,
 			new Object[] {
 				Long.valueOf(dlFileEntryMetadata.getDDMStructureId()),

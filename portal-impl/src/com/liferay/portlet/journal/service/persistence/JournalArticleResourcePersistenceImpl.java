@@ -227,28 +227,32 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 	 */
 	@Override
 	public void clearCache(JournalArticleResource journalArticleResource) {
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		doClearCache(journalArticleResource);
-	}
-
-	@Override
-	public void clearCache(
-		List<JournalArticleResource> journalArticleResourceList) {
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		for (JournalArticleResource journalArticleResource : journalArticleResourceList) {
-			doClearCache(journalArticleResource);
-		}
-	}
-
-	protected void doClearCache(JournalArticleResource journalArticleResource) {
 		EntityCacheUtil.removeResult(JournalArticleResourceModelImpl.ENTITY_CACHE_ENABLED,
 			JournalArticleResourceImpl.class,
 			journalArticleResource.getPrimaryKey());
 
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		clearUniqueFindersCache(journalArticleResource);
+	}
+
+	@Override
+	public void clearCache(List<JournalArticleResource> journalArticleResources) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (JournalArticleResource journalArticleResource : journalArticleResources) {
+			EntityCacheUtil.removeResult(JournalArticleResourceModelImpl.ENTITY_CACHE_ENABLED,
+				JournalArticleResourceImpl.class,
+				journalArticleResource.getPrimaryKey());
+
+			clearUniqueFindersCache(journalArticleResource);
+		}
+	}
+
+	protected void clearUniqueFindersCache(
+		JournalArticleResource journalArticleResource) {
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] {
 				journalArticleResource.getUuid(),

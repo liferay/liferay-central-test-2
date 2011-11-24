@@ -214,26 +214,31 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 	 */
 	@Override
 	public void clearCache(SCProductScreenshot scProductScreenshot) {
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		doClearCache(scProductScreenshot);
-	}
-
-	@Override
-	public void clearCache(List<SCProductScreenshot> scProductScreenshotList) {
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		for (SCProductScreenshot scProductScreenshot : scProductScreenshotList) {
-			doClearCache(scProductScreenshot);
-		}
-	}
-
-	protected void doClearCache(SCProductScreenshot scProductScreenshot) {
 		EntityCacheUtil.removeResult(SCProductScreenshotModelImpl.ENTITY_CACHE_ENABLED,
 			SCProductScreenshotImpl.class, scProductScreenshot.getPrimaryKey());
 
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		clearUniqueFindersCache(scProductScreenshot);
+	}
+
+	@Override
+	public void clearCache(List<SCProductScreenshot> scProductScreenshots) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (SCProductScreenshot scProductScreenshot : scProductScreenshots) {
+			EntityCacheUtil.removeResult(SCProductScreenshotModelImpl.ENTITY_CACHE_ENABLED,
+				SCProductScreenshotImpl.class,
+				scProductScreenshot.getPrimaryKey());
+
+			clearUniqueFindersCache(scProductScreenshot);
+		}
+	}
+
+	protected void clearUniqueFindersCache(
+		SCProductScreenshot scProductScreenshot) {
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_THUMBNAILID,
 			new Object[] { Long.valueOf(scProductScreenshot.getThumbnailId()) });
 

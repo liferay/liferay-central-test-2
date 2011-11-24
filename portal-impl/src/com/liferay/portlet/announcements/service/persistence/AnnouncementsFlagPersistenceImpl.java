@@ -194,26 +194,29 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 	 */
 	@Override
 	public void clearCache(AnnouncementsFlag announcementsFlag) {
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		doClearCache(announcementsFlag);
-	}
-
-	@Override
-	public void clearCache(List<AnnouncementsFlag> announcementsFlagList) {
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		for (AnnouncementsFlag announcementsFlag : announcementsFlagList) {
-			doClearCache(announcementsFlag);
-		}
-	}
-
-	protected void doClearCache(AnnouncementsFlag announcementsFlag) {
 		EntityCacheUtil.removeResult(AnnouncementsFlagModelImpl.ENTITY_CACHE_ENABLED,
 			AnnouncementsFlagImpl.class, announcementsFlag.getPrimaryKey());
 
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		clearUniqueFindersCache(announcementsFlag);
+	}
+
+	@Override
+	public void clearCache(List<AnnouncementsFlag> announcementsFlags) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (AnnouncementsFlag announcementsFlag : announcementsFlags) {
+			EntityCacheUtil.removeResult(AnnouncementsFlagModelImpl.ENTITY_CACHE_ENABLED,
+				AnnouncementsFlagImpl.class, announcementsFlag.getPrimaryKey());
+
+			clearUniqueFindersCache(announcementsFlag);
+		}
+	}
+
+	protected void clearUniqueFindersCache(AnnouncementsFlag announcementsFlag) {
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_U_E_V,
 			new Object[] {
 				Long.valueOf(announcementsFlag.getUserId()),

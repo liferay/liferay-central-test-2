@@ -261,26 +261,29 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	 */
 	@Override
 	public void clearCache(AssetLink assetLink) {
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		doClearCache(assetLink);
-	}
-
-	@Override
-	public void clearCache(List<AssetLink> assetLinkList) {
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		for (AssetLink assetLink : assetLinkList) {
-			doClearCache(assetLink);
-		}
-	}
-
-	protected void doClearCache(AssetLink assetLink) {
 		EntityCacheUtil.removeResult(AssetLinkModelImpl.ENTITY_CACHE_ENABLED,
 			AssetLinkImpl.class, assetLink.getPrimaryKey());
 
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		clearUniqueFindersCache(assetLink);
+	}
+
+	@Override
+	public void clearCache(List<AssetLink> assetLinks) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (AssetLink assetLink : assetLinks) {
+			EntityCacheUtil.removeResult(AssetLinkModelImpl.ENTITY_CACHE_ENABLED,
+				AssetLinkImpl.class, assetLink.getPrimaryKey());
+
+			clearUniqueFindersCache(assetLink);
+		}
+	}
+
+	protected void clearUniqueFindersCache(AssetLink assetLink) {
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_E_E_T,
 			new Object[] {
 				Long.valueOf(assetLink.getEntryId1()),

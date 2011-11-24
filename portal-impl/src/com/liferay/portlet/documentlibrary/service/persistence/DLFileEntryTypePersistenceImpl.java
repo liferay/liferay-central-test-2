@@ -237,26 +237,29 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	 */
 	@Override
 	public void clearCache(DLFileEntryType dlFileEntryType) {
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		doClearCache(dlFileEntryType);
-	}
-
-	@Override
-	public void clearCache(List<DLFileEntryType> dlFileEntryTypeList) {
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		for (DLFileEntryType dlFileEntryType : dlFileEntryTypeList) {
-			doClearCache(dlFileEntryType);
-		}
-	}
-
-	protected void doClearCache(DLFileEntryType dlFileEntryType) {
 		EntityCacheUtil.removeResult(DLFileEntryTypeModelImpl.ENTITY_CACHE_ENABLED,
 			DLFileEntryTypeImpl.class, dlFileEntryType.getPrimaryKey());
 
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		clearUniqueFindersCache(dlFileEntryType);
+	}
+
+	@Override
+	public void clearCache(List<DLFileEntryType> dlFileEntryTypes) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (DLFileEntryType dlFileEntryType : dlFileEntryTypes) {
+			EntityCacheUtil.removeResult(DLFileEntryTypeModelImpl.ENTITY_CACHE_ENABLED,
+				DLFileEntryTypeImpl.class, dlFileEntryType.getPrimaryKey());
+
+			clearUniqueFindersCache(dlFileEntryType);
+		}
+	}
+
+	protected void clearUniqueFindersCache(DLFileEntryType dlFileEntryType) {
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] {
 				dlFileEntryType.getUuid(),

@@ -241,26 +241,29 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 	 */
 	@Override
 	public void clearCache(SCProductEntry scProductEntry) {
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		doClearCache(scProductEntry);
-	}
-
-	@Override
-	public void clearCache(List<SCProductEntry> scProductEntryList) {
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		for (SCProductEntry scProductEntry : scProductEntryList) {
-			doClearCache(scProductEntry);
-		}
-	}
-
-	protected void doClearCache(SCProductEntry scProductEntry) {
 		EntityCacheUtil.removeResult(SCProductEntryModelImpl.ENTITY_CACHE_ENABLED,
 			SCProductEntryImpl.class, scProductEntry.getPrimaryKey());
 
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		clearUniqueFindersCache(scProductEntry);
+	}
+
+	@Override
+	public void clearCache(List<SCProductEntry> scProductEntries) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (SCProductEntry scProductEntry : scProductEntries) {
+			EntityCacheUtil.removeResult(SCProductEntryModelImpl.ENTITY_CACHE_ENABLED,
+				SCProductEntryImpl.class, scProductEntry.getPrimaryKey());
+
+			clearUniqueFindersCache(scProductEntry);
+		}
+	}
+
+	protected void clearUniqueFindersCache(SCProductEntry scProductEntry) {
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_RG_RA,
 			new Object[] {
 				scProductEntry.getRepoGroupId(),

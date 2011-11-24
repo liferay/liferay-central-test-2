@@ -262,26 +262,29 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	 */
 	@Override
 	public void clearCache(DLFileShortcut dlFileShortcut) {
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		doClearCache(dlFileShortcut);
-	}
-
-	@Override
-	public void clearCache(List<DLFileShortcut> dlFileShortcutList) {
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		for (DLFileShortcut dlFileShortcut : dlFileShortcutList) {
-			doClearCache(dlFileShortcut);
-		}
-	}
-
-	protected void doClearCache(DLFileShortcut dlFileShortcut) {
 		EntityCacheUtil.removeResult(DLFileShortcutModelImpl.ENTITY_CACHE_ENABLED,
 			DLFileShortcutImpl.class, dlFileShortcut.getPrimaryKey());
 
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		clearUniqueFindersCache(dlFileShortcut);
+	}
+
+	@Override
+	public void clearCache(List<DLFileShortcut> dlFileShortcuts) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (DLFileShortcut dlFileShortcut : dlFileShortcuts) {
+			EntityCacheUtil.removeResult(DLFileShortcutModelImpl.ENTITY_CACHE_ENABLED,
+				DLFileShortcutImpl.class, dlFileShortcut.getPrimaryKey());
+
+			clearUniqueFindersCache(dlFileShortcut);
+		}
+	}
+
+	protected void clearUniqueFindersCache(DLFileShortcut dlFileShortcut) {
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] {
 				dlFileShortcut.getUuid(),

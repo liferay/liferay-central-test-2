@@ -730,26 +730,29 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 */
 	@Override
 	public void clearCache(MBMessage mbMessage) {
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		doClearCache(mbMessage);
-	}
-
-	@Override
-	public void clearCache(List<MBMessage> mbMessageList) {
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		for (MBMessage mbMessage : mbMessageList) {
-			doClearCache(mbMessage);
-		}
-	}
-
-	protected void doClearCache(MBMessage mbMessage) {
 		EntityCacheUtil.removeResult(MBMessageModelImpl.ENTITY_CACHE_ENABLED,
 			MBMessageImpl.class, mbMessage.getPrimaryKey());
 
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		clearUniqueFindersCache(mbMessage);
+	}
+
+	@Override
+	public void clearCache(List<MBMessage> mbMessages) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (MBMessage mbMessage : mbMessages) {
+			EntityCacheUtil.removeResult(MBMessageModelImpl.ENTITY_CACHE_ENABLED,
+				MBMessageImpl.class, mbMessage.getPrimaryKey());
+
+			clearUniqueFindersCache(mbMessage);
+		}
+	}
+
+	protected void clearUniqueFindersCache(MBMessage mbMessage) {
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] {
 				mbMessage.getUuid(), Long.valueOf(mbMessage.getGroupId())

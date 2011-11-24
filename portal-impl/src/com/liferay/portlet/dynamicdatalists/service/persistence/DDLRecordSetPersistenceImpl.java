@@ -219,26 +219,29 @@ public class DDLRecordSetPersistenceImpl extends BasePersistenceImpl<DDLRecordSe
 	 */
 	@Override
 	public void clearCache(DDLRecordSet ddlRecordSet) {
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		doClearCache(ddlRecordSet);
-	}
-
-	@Override
-	public void clearCache(List<DDLRecordSet> ddlRecordSetList) {
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		for (DDLRecordSet ddlRecordSet : ddlRecordSetList) {
-			doClearCache(ddlRecordSet);
-		}
-	}
-
-	protected void doClearCache(DDLRecordSet ddlRecordSet) {
 		EntityCacheUtil.removeResult(DDLRecordSetModelImpl.ENTITY_CACHE_ENABLED,
 			DDLRecordSetImpl.class, ddlRecordSet.getPrimaryKey());
 
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		clearUniqueFindersCache(ddlRecordSet);
+	}
+
+	@Override
+	public void clearCache(List<DDLRecordSet> ddlRecordSets) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (DDLRecordSet ddlRecordSet : ddlRecordSets) {
+			EntityCacheUtil.removeResult(DDLRecordSetModelImpl.ENTITY_CACHE_ENABLED,
+				DDLRecordSetImpl.class, ddlRecordSet.getPrimaryKey());
+
+			clearUniqueFindersCache(ddlRecordSet);
+		}
+	}
+
+	protected void clearUniqueFindersCache(DDLRecordSet ddlRecordSet) {
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] {
 				ddlRecordSet.getUuid(), Long.valueOf(ddlRecordSet.getGroupId())

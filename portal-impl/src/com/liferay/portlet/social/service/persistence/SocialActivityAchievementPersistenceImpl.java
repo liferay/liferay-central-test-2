@@ -275,29 +275,33 @@ public class SocialActivityAchievementPersistenceImpl
 	 */
 	@Override
 	public void clearCache(SocialActivityAchievement socialActivityAchievement) {
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		doClearCache(socialActivityAchievement);
-	}
-
-	@Override
-	public void clearCache(
-		List<SocialActivityAchievement> socialActivityAchievementList) {
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		for (SocialActivityAchievement socialActivityAchievement : socialActivityAchievementList) {
-			doClearCache(socialActivityAchievement);
-		}
-	}
-
-	protected void doClearCache(
-		SocialActivityAchievement socialActivityAchievement) {
 		EntityCacheUtil.removeResult(SocialActivityAchievementModelImpl.ENTITY_CACHE_ENABLED,
 			SocialActivityAchievementImpl.class,
 			socialActivityAchievement.getPrimaryKey());
 
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		clearUniqueFindersCache(socialActivityAchievement);
+	}
+
+	@Override
+	public void clearCache(
+		List<SocialActivityAchievement> socialActivityAchievements) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (SocialActivityAchievement socialActivityAchievement : socialActivityAchievements) {
+			EntityCacheUtil.removeResult(SocialActivityAchievementModelImpl.ENTITY_CACHE_ENABLED,
+				SocialActivityAchievementImpl.class,
+				socialActivityAchievement.getPrimaryKey());
+
+			clearUniqueFindersCache(socialActivityAchievement);
+		}
+	}
+
+	protected void clearUniqueFindersCache(
+		SocialActivityAchievement socialActivityAchievement) {
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_U_N,
 			new Object[] {
 				Long.valueOf(socialActivityAchievement.getGroupId()),

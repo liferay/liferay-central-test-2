@@ -220,26 +220,29 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 	 */
 	@Override
 	public void clearCache(MBMailingList mbMailingList) {
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		doClearCache(mbMailingList);
-	}
-
-	@Override
-	public void clearCache(List<MBMailingList> mbMailingListList) {
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		for (MBMailingList mbMailingList : mbMailingListList) {
-			doClearCache(mbMailingList);
-		}
-	}
-
-	protected void doClearCache(MBMailingList mbMailingList) {
 		EntityCacheUtil.removeResult(MBMailingListModelImpl.ENTITY_CACHE_ENABLED,
 			MBMailingListImpl.class, mbMailingList.getPrimaryKey());
 
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		clearUniqueFindersCache(mbMailingList);
+	}
+
+	@Override
+	public void clearCache(List<MBMailingList> mbMailingLists) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (MBMailingList mbMailingList : mbMailingLists) {
+			EntityCacheUtil.removeResult(MBMailingListModelImpl.ENTITY_CACHE_ENABLED,
+				MBMailingListImpl.class, mbMailingList.getPrimaryKey());
+
+			clearUniqueFindersCache(mbMailingList);
+		}
+	}
+
+	protected void clearUniqueFindersCache(MBMailingList mbMailingList) {
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] {
 				mbMailingList.getUuid(),

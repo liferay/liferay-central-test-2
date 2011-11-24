@@ -204,26 +204,31 @@ public class SocialActivityLimitPersistenceImpl extends BasePersistenceImpl<Soci
 	 */
 	@Override
 	public void clearCache(SocialActivityLimit socialActivityLimit) {
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		doClearCache(socialActivityLimit);
-	}
-
-	@Override
-	public void clearCache(List<SocialActivityLimit> socialActivityLimitList) {
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		for (SocialActivityLimit socialActivityLimit : socialActivityLimitList) {
-			doClearCache(socialActivityLimit);
-		}
-	}
-
-	protected void doClearCache(SocialActivityLimit socialActivityLimit) {
 		EntityCacheUtil.removeResult(SocialActivityLimitModelImpl.ENTITY_CACHE_ENABLED,
 			SocialActivityLimitImpl.class, socialActivityLimit.getPrimaryKey());
 
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		clearUniqueFindersCache(socialActivityLimit);
+	}
+
+	@Override
+	public void clearCache(List<SocialActivityLimit> socialActivityLimits) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (SocialActivityLimit socialActivityLimit : socialActivityLimits) {
+			EntityCacheUtil.removeResult(SocialActivityLimitModelImpl.ENTITY_CACHE_ENABLED,
+				SocialActivityLimitImpl.class,
+				socialActivityLimit.getPrimaryKey());
+
+			clearUniqueFindersCache(socialActivityLimit);
+		}
+	}
+
+	protected void clearUniqueFindersCache(
+		SocialActivityLimit socialActivityLimit) {
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_U_C_C_A_A,
 			new Object[] {
 				Long.valueOf(socialActivityLimit.getGroupId()),

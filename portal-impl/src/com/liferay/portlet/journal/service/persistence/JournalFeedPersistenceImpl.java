@@ -218,26 +218,29 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl<JournalFeed>
 	 */
 	@Override
 	public void clearCache(JournalFeed journalFeed) {
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		doClearCache(journalFeed);
-	}
-
-	@Override
-	public void clearCache(List<JournalFeed> journalFeedList) {
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		for (JournalFeed journalFeed : journalFeedList) {
-			doClearCache(journalFeed);
-		}
-	}
-
-	protected void doClearCache(JournalFeed journalFeed) {
 		EntityCacheUtil.removeResult(JournalFeedModelImpl.ENTITY_CACHE_ENABLED,
 			JournalFeedImpl.class, journalFeed.getPrimaryKey());
 
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		clearUniqueFindersCache(journalFeed);
+	}
+
+	@Override
+	public void clearCache(List<JournalFeed> journalFeeds) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (JournalFeed journalFeed : journalFeeds) {
+			EntityCacheUtil.removeResult(JournalFeedModelImpl.ENTITY_CACHE_ENABLED,
+				JournalFeedImpl.class, journalFeed.getPrimaryKey());
+
+			clearUniqueFindersCache(journalFeed);
+		}
+	}
+
+	protected void clearUniqueFindersCache(JournalFeed journalFeed) {
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] {
 				journalFeed.getUuid(), Long.valueOf(journalFeed.getGroupId())

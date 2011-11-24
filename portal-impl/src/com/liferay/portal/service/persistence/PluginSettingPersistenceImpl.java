@@ -190,26 +190,29 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl<PluginSett
 	 */
 	@Override
 	public void clearCache(PluginSetting pluginSetting) {
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		doClearCache(pluginSetting);
-	}
-
-	@Override
-	public void clearCache(List<PluginSetting> pluginSettingList) {
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		for (PluginSetting pluginSetting : pluginSettingList) {
-			doClearCache(pluginSetting);
-		}
-	}
-
-	protected void doClearCache(PluginSetting pluginSetting) {
 		EntityCacheUtil.removeResult(PluginSettingModelImpl.ENTITY_CACHE_ENABLED,
 			PluginSettingImpl.class, pluginSetting.getPrimaryKey());
 
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		clearUniqueFindersCache(pluginSetting);
+	}
+
+	@Override
+	public void clearCache(List<PluginSetting> pluginSettings) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (PluginSetting pluginSetting : pluginSettings) {
+			EntityCacheUtil.removeResult(PluginSettingModelImpl.ENTITY_CACHE_ENABLED,
+				PluginSettingImpl.class, pluginSetting.getPrimaryKey());
+
+			clearUniqueFindersCache(pluginSetting);
+		}
+	}
+
+	protected void clearUniqueFindersCache(PluginSetting pluginSetting) {
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_I_T,
 			new Object[] {
 				Long.valueOf(pluginSetting.getCompanyId()),

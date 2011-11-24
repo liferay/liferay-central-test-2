@@ -586,26 +586,29 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 */
 	@Override
 	public void clearCache(WikiPage wikiPage) {
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		doClearCache(wikiPage);
-	}
-
-	@Override
-	public void clearCache(List<WikiPage> wikiPageList) {
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		for (WikiPage wikiPage : wikiPageList) {
-			doClearCache(wikiPage);
-		}
-	}
-
-	protected void doClearCache(WikiPage wikiPage) {
 		EntityCacheUtil.removeResult(WikiPageModelImpl.ENTITY_CACHE_ENABLED,
 			WikiPageImpl.class, wikiPage.getPrimaryKey());
 
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		clearUniqueFindersCache(wikiPage);
+	}
+
+	@Override
+	public void clearCache(List<WikiPage> wikiPages) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (WikiPage wikiPage : wikiPages) {
+			EntityCacheUtil.removeResult(WikiPageModelImpl.ENTITY_CACHE_ENABLED,
+				WikiPageImpl.class, wikiPage.getPrimaryKey());
+
+			clearUniqueFindersCache(wikiPage);
+		}
+	}
+
+	protected void clearUniqueFindersCache(WikiPage wikiPage) {
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] { wikiPage.getUuid(), Long.valueOf(
 					wikiPage.getGroupId()) });

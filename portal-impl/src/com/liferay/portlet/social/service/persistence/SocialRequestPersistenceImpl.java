@@ -386,26 +386,29 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 	 */
 	@Override
 	public void clearCache(SocialRequest socialRequest) {
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		doClearCache(socialRequest);
-	}
-
-	@Override
-	public void clearCache(List<SocialRequest> socialRequestList) {
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		for (SocialRequest socialRequest : socialRequestList) {
-			doClearCache(socialRequest);
-		}
-	}
-
-	protected void doClearCache(SocialRequest socialRequest) {
 		EntityCacheUtil.removeResult(SocialRequestModelImpl.ENTITY_CACHE_ENABLED,
 			SocialRequestImpl.class, socialRequest.getPrimaryKey());
 
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		clearUniqueFindersCache(socialRequest);
+	}
+
+	@Override
+	public void clearCache(List<SocialRequest> socialRequests) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (SocialRequest socialRequest : socialRequests) {
+			EntityCacheUtil.removeResult(SocialRequestModelImpl.ENTITY_CACHE_ENABLED,
+				SocialRequestImpl.class, socialRequest.getPrimaryKey());
+
+			clearUniqueFindersCache(socialRequest);
+		}
+	}
+
+	protected void clearUniqueFindersCache(SocialRequest socialRequest) {
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] {
 				socialRequest.getUuid(),

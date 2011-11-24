@@ -177,26 +177,29 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 	 */
 	@Override
 	public void clearCache(Portlet portlet) {
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		doClearCache(portlet);
-	}
-
-	@Override
-	public void clearCache(List<Portlet> portletList) {
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		for (Portlet portlet : portletList) {
-			doClearCache(portlet);
-		}
-	}
-
-	protected void doClearCache(Portlet portlet) {
 		EntityCacheUtil.removeResult(PortletModelImpl.ENTITY_CACHE_ENABLED,
 			PortletImpl.class, portlet.getPrimaryKey());
 
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		clearUniqueFindersCache(portlet);
+	}
+
+	@Override
+	public void clearCache(List<Portlet> portlets) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (Portlet portlet : portlets) {
+			EntityCacheUtil.removeResult(PortletModelImpl.ENTITY_CACHE_ENABLED,
+				PortletImpl.class, portlet.getPrimaryKey());
+
+			clearUniqueFindersCache(portlet);
+		}
+	}
+
+	protected void clearUniqueFindersCache(Portlet portlet) {
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_P,
 			new Object[] {
 				Long.valueOf(portlet.getCompanyId()),

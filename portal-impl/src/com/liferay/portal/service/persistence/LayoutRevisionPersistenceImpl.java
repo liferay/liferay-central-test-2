@@ -353,26 +353,29 @@ public class LayoutRevisionPersistenceImpl extends BasePersistenceImpl<LayoutRev
 	 */
 	@Override
 	public void clearCache(LayoutRevision layoutRevision) {
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		doClearCache(layoutRevision);
-	}
-
-	@Override
-	public void clearCache(List<LayoutRevision> layoutRevisionList) {
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		for (LayoutRevision layoutRevision : layoutRevisionList) {
-			doClearCache(layoutRevision);
-		}
-	}
-
-	protected void doClearCache(LayoutRevision layoutRevision) {
 		EntityCacheUtil.removeResult(LayoutRevisionModelImpl.ENTITY_CACHE_ENABLED,
 			LayoutRevisionImpl.class, layoutRevision.getPrimaryKey());
 
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		clearUniqueFindersCache(layoutRevision);
+	}
+
+	@Override
+	public void clearCache(List<LayoutRevision> layoutRevisions) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (LayoutRevision layoutRevision : layoutRevisions) {
+			EntityCacheUtil.removeResult(LayoutRevisionModelImpl.ENTITY_CACHE_ENABLED,
+				LayoutRevisionImpl.class, layoutRevision.getPrimaryKey());
+
+			clearUniqueFindersCache(layoutRevision);
+		}
+	}
+
+	protected void clearUniqueFindersCache(LayoutRevision layoutRevision) {
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_L_H_P,
 			new Object[] {
 				Long.valueOf(layoutRevision.getLayoutSetBranchId()),

@@ -222,26 +222,29 @@ public class RepositoryEntryPersistenceImpl extends BasePersistenceImpl<Reposito
 	 */
 	@Override
 	public void clearCache(RepositoryEntry repositoryEntry) {
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		doClearCache(repositoryEntry);
-	}
-
-	@Override
-	public void clearCache(List<RepositoryEntry> repositoryEntryList) {
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		for (RepositoryEntry repositoryEntry : repositoryEntryList) {
-			doClearCache(repositoryEntry);
-		}
-	}
-
-	protected void doClearCache(RepositoryEntry repositoryEntry) {
 		EntityCacheUtil.removeResult(RepositoryEntryModelImpl.ENTITY_CACHE_ENABLED,
 			RepositoryEntryImpl.class, repositoryEntry.getPrimaryKey());
 
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		clearUniqueFindersCache(repositoryEntry);
+	}
+
+	@Override
+	public void clearCache(List<RepositoryEntry> repositoryEntries) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (RepositoryEntry repositoryEntry : repositoryEntries) {
+			EntityCacheUtil.removeResult(RepositoryEntryModelImpl.ENTITY_CACHE_ENABLED,
+				RepositoryEntryImpl.class, repositoryEntry.getPrimaryKey());
+
+			clearUniqueFindersCache(repositoryEntry);
+		}
+	}
+
+	protected void clearUniqueFindersCache(RepositoryEntry repositoryEntry) {
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] {
 				repositoryEntry.getUuid(),

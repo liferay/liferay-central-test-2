@@ -270,28 +270,32 @@ public class SocialActivityCounterPersistenceImpl extends BasePersistenceImpl<So
 	 */
 	@Override
 	public void clearCache(SocialActivityCounter socialActivityCounter) {
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		doClearCache(socialActivityCounter);
-	}
-
-	@Override
-	public void clearCache(
-		List<SocialActivityCounter> socialActivityCounterList) {
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		for (SocialActivityCounter socialActivityCounter : socialActivityCounterList) {
-			doClearCache(socialActivityCounter);
-		}
-	}
-
-	protected void doClearCache(SocialActivityCounter socialActivityCounter) {
 		EntityCacheUtil.removeResult(SocialActivityCounterModelImpl.ENTITY_CACHE_ENABLED,
 			SocialActivityCounterImpl.class,
 			socialActivityCounter.getPrimaryKey());
 
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		clearUniqueFindersCache(socialActivityCounter);
+	}
+
+	@Override
+	public void clearCache(List<SocialActivityCounter> socialActivityCounters) {
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (SocialActivityCounter socialActivityCounter : socialActivityCounters) {
+			EntityCacheUtil.removeResult(SocialActivityCounterModelImpl.ENTITY_CACHE_ENABLED,
+				SocialActivityCounterImpl.class,
+				socialActivityCounter.getPrimaryKey());
+
+			clearUniqueFindersCache(socialActivityCounter);
+		}
+	}
+
+	protected void clearUniqueFindersCache(
+		SocialActivityCounter socialActivityCounter) {
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_C_C_N_O_S,
 			new Object[] {
 				Long.valueOf(socialActivityCounter.getGroupId()),
