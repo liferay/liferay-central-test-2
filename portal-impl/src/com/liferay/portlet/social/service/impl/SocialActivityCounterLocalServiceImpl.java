@@ -395,11 +395,11 @@ public class SocialActivityCounterLocalServiceImpl
 		}
 
 		AssetEntry assetEntry = activity.getAssetEntry();
-        String activityCounterName = activityCounterDefinition.getName();
+
+		String name = activityCounterDefinition.getName();
 
         if ((user.getUserId() == assetEntry.getUserId()) &&
-            !activityCounterName.equals(
-                SocialActivityCounterConstants.NAME_PARTICIPATION)) {
+            !name.equals(SocialActivityCounterConstants.NAME_PARTICIPATION)) {
 
             return false;
         }
