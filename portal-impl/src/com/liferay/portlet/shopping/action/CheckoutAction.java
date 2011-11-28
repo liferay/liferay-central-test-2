@@ -168,7 +168,8 @@ public class CheckoutAction extends CartAction {
 			ServiceContext serviceContext = ServiceContextFactory.getInstance(
 				actionRequest);
 
-			ShoppingOrderLocalServiceUtil.sendEmail(order, "confirmation", serviceContext);
+			ShoppingOrderLocalServiceUtil.sendEmail(
+				order, "confirmation", serviceContext);
 
 			actionResponse.sendRedirect(returnURL);
 		}
