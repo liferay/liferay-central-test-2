@@ -1186,10 +1186,14 @@
 			<forward name="portlet.mobile_device_rules.error" path="portlet.mobile_device_rules.error" />
 		</action>
 
+		<action path="/mobile_device_rules/edit_action_editor" type="com.liferay.portlet.mobiledevicerules.action.EditActionAction" />
+
 		<action path="/mobile_device_rules/edit_rule" type="com.liferay.portlet.mobiledevicerules.action.EditRuleAction">
 			<forward name="portlet.mobile_device_rules.edit_rule" path="portlet.mobile_device_rules.edit_rule" />
 			<forward name="portlet.mobile_device_rules.error" path="portlet.mobile_device_rules.error" />
 		</action>
+
+		<action path="/mobile_device_rules/edit_rule_editor" type="com.liferay.portlet.mobiledevicerules.action.EditRuleAction" />
 
 		<action path="/mobile_device_rules/edit_rule_group" type="com.liferay.portlet.mobiledevicerules.action.EditRuleGroupAction">
 			<forward name="portlet.mobile_device_rules.edit_rule_group" path="portlet.mobile_device_rules.edit_rule_group" />
@@ -1200,10 +1204,6 @@
 			<forward name="portlet.mobile_device_rules.edit_rule_group_instance_priorities" path="portlet.mobile_device_rules.edit_rule_group_instance_priorities" />
 			<forward name="portlet.mobile_device_rules.error" path="portlet.mobile_device_rules.error" />
 		</action>
-
-		<action path="/mobile_device_rules/edit_action_editor" type="com.liferay.portlet.mobiledevicerules.action.EditActionAction" />
-
-		<action path="/mobile_device_rules/edit_rule_editor" type="com.liferay.portlet.mobiledevicerules.action.EditRuleAction" />
 
 		<action path="/mobile_device_rules/edit_rule_group_instance_editor" type="com.liferay.portlet.mobiledevicerules.action.EditRuleGroupInstanceAction" />
 
