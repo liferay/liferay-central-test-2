@@ -17,11 +17,10 @@
 <%@ page import="com.liferay.alloy.util.json.StringTransformer" %>
 
 <%
-HashMap<String, Object> optionsJSON = (HashMap<String, Object>)request.getAttribute("aui:component:optionsJSON");
-
 String scriptPosition = GetterUtil.getString((Serializable)_options.get("scriptPosition"), "inline");
-
 boolean useJavaScript = GetterUtil.getBoolean((Serializable)_options.get("useJavaScript"), true);
+
+Map<String, Object> jsonifiedOptions = (Map<String, Object>)request.getAttribute("aui:component:jsonifiedOptions");
 
 Object render = String.valueOf(_options.get("render"));
 
@@ -32,15 +31,14 @@ else if (render.equals("true") || render.equals("false")) {
 	render = GetterUtil.getBoolean((String)render);
 }
 
-optionsJSON.put("render", render);
+jsonifiedOptions.put("render", render);
 %>
 
 <%!
 public String _serialize(Object value, String javaScriptAttributes) {
 	StringTransformer stringTransformer = new StringTransformer();
 
-	stringTransformer.setJavaScriptAttributes(
-		Arrays.asList(StringUtil.split(javaScriptAttributes)));
+	stringTransformer.setJavaScriptAttributes(Arrays.asList(StringUtil.split(javaScriptAttributes)));
 
 	return JSONFactoryUtil.looseSerialize(value, stringTransformer, String.class);
 }

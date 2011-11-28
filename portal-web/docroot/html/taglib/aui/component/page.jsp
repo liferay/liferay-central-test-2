@@ -17,11 +17,11 @@
 <%@ include file="/html/taglib/aui/component/init.jsp" %>
 
 <c:if test="<%= useJavaScript %>">
-	<aui:script use="<%= module %>" position="<%= scriptPosition %>">
+	<aui:script position="<%= scriptPosition %>" use="<%= module %>">
 		<c:if test="<%= Validator.isNotNull(var) %>">
-				<%= var %> =
+			<%= var %> =
 		</c:if>
 
-		(new A.<%= name %>(<%= _serialize(optionsJSON, javaScriptAttributes) %>));
+		(new A.<%= name %>(<%= _serialize(jsonifiedOptions, javaScriptAttributes) %>));
 	</aui:script>
 </c:if>

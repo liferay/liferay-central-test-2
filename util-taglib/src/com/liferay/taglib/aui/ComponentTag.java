@@ -15,14 +15,13 @@
 package com.liferay.taglib.aui;
 
 import com.liferay.alloy.util.ReservedAttributeUtil;
-import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.taglib.aui.base.BaseComponentTag;
 
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -51,11 +50,11 @@ public class ComponentTag extends BaseComponentTag {
 			return true;
 		}
 
-		List<String> excludeAttributesList = Arrays.asList(
+		Set<String> excludeAttributesSet = SetUtil.fromArray(
 			StringUtil.split(excludeAttributes));
 
 		if (key.equals("dynamicAttributes") ||
-			excludeAttributesList.contains(key)) {
+			excludeAttributesSet.contains(key)) {
 
 			return false;
 		}
@@ -64,10 +63,9 @@ public class ComponentTag extends BaseComponentTag {
 	}
 
 	protected void proccessAttributes(
-		Map<String, Object> options, Map<String, Object> newOptions) {
+		Map<String, Object> options, Map<String, Object> jsonifiedOptions) {
 
 		Map<String, String> afterEventOptions = new HashMap<String, String>();
-
 		Map<String, String> onEventOptions = new HashMap<String, String>();
 
 		for (String key : options.keySet()) {
@@ -75,56 +73,54 @@ public class ComponentTag extends BaseComponentTag {
 				continue;
 			}
 
-			Object optionValue = options.get(key);
+			Object value = options.get(key);
 
 			String originalKey = ReservedAttributeUtil.getOriginalName(
 				getName(), key);
 
-			if (optionValue instanceof Map) {
+			if (value instanceof Map) {
 				Map<String, Object> childOptions =
 					new HashMap<String, Object>();
 
-				proccessAttributes((Map)optionValue, childOptions);
+				proccessAttributes((Map<String, Object>)value, childOptions);
 
-				newOptions.put(originalKey, childOptions);
+				jsonifiedOptions.put(originalKey, childOptions);
 
 				continue;
 			}
 
 			if (isEventAttribute(key)) {
 				processEventAttribute(
-					key, String.valueOf(optionValue), afterEventOptions,
+					key, String.valueOf(value), afterEventOptions,
 					onEventOptions);
-			} else {
-				newOptions.put(originalKey, optionValue);
+			}
+			else {
+				jsonifiedOptions.put(originalKey, value);
 			}
 		}
 
-		if (afterEventOptions.size() > 0) {
-			newOptions.put("after", afterEventOptions);
+		if (!afterEventOptions.isEmpty()) {
+			jsonifiedOptions.put("after", afterEventOptions);
 		}
 
-		if (onEventOptions.size() > 0) {
-			newOptions.put("on", onEventOptions);
+		if (!onEventOptions.isEmpty()) {
+			jsonifiedOptions.put("on", onEventOptions);
 		}
 	}
 
 	protected void processEventAttribute(
-			String key, String value, Map<String, String> afterEventOptionsMap,
-			Map<String, String> onEventsOptionsMap) {
+			String key, String value, Map<String, String> afterEventOptions,
+			Map<String, String> onEventsOptions) {
 
 		if (key.startsWith("after")) {
-			String eventName = StringUtils.uncapitalize(
-				StringUtil.remove(key, "after", StringPool.BLANK));
+			String eventName = StringUtils.uncapitalize(key.substring(5));
 
-			afterEventOptionsMap.put(eventName, value);
-		} else {
-			String eventName = StringUtils.uncapitalize(
-				StringUtil.remove(key, "on", StringPool.BLANK));
+			afterEventOptions.put(eventName, value);
+		}
+		else {
+			String eventName = StringUtils.uncapitalize(key.substring(2));
 
-			eventName = StringUtils.uncapitalize(eventName);
-
-			onEventsOptionsMap.put(eventName, value);
+			onEventsOptions.put(eventName, value);
 		}
 	}
 
@@ -132,14 +128,14 @@ public class ComponentTag extends BaseComponentTag {
 	protected void setAttributes(HttpServletRequest request) {
 		Map<String, Object> options = getOptions();
 
-		HashMap<String, Object> optionsJSON = new HashMap<String, Object>();
+		Map<String, Object> jsonifiedOptions = new HashMap<String, Object>();
 
-		proccessAttributes(options, optionsJSON);
+		proccessAttributes(options, jsonifiedOptions);
 
 		super.setAttributes(request);
 
+		setNamespacedAttribute(request, "jsonifiedOptions", jsonifiedOptions);
 		setNamespacedAttribute(request, "options", options);
-		setNamespacedAttribute(request, "optionsJSON", optionsJSON);
 	}
 
 }
