@@ -390,12 +390,12 @@ public class ArrayUtil_IW {
 		return ArrayUtil.toLongArray(array);
 	}
 
-	public <T> java.lang.String toString(T[] list,
+	public <T, V> java.lang.String toString(T[] list,
 		com.liferay.portal.kernel.util.Accessor<T, V> accessor) {
 		return ArrayUtil.toString(list, accessor);
 	}
 
-	public <T> java.lang.String toString(T[] list,
+	public <T, V> java.lang.String toString(T[] list,
 		com.liferay.portal.kernel.util.Accessor<T, V> accessor,
 		java.lang.String delimiter) {
 		return ArrayUtil.toString(list, accessor, delimiter);
