@@ -101,14 +101,14 @@ public interface PortletPreferencesFactory {
 	public PortletPreferences getPortletSetup(PortletRequest portletRequest)
 		throws PortalException, SystemException;
 
+	public PortletPreferences getPortletSetup(
+			PortletRequest portletRequest, String portletId)
+		throws PortalException, SystemException;
+
 	public Map<Long, PortletPreferences> getPortletSetupMap(
 			long companyId, long groupId, long ownerId, int ownerType,
 			String portletId, boolean privateLayout)
 		throws SystemException;
-
-	public PortletPreferences getPortletSetup(
-			PortletRequest portletRequest, String portletId)
-		throws PortalException, SystemException;
 
 	public PortletPreferences getPreferences(HttpServletRequest request);
 

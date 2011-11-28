@@ -90,7 +90,7 @@ public class PortletPreferencesFinderImpl
 			qPos.add(ownerId);
 			qPos.add(ownerType);
 			qPos.add(portletId);
-			qPos.add(portletId + "_INSTANCE_%");
+			qPos.add(portletId.concat("_INSTANCE_%"));
 			qPos.add(privateLayout);
 
 			return q.list(true);
