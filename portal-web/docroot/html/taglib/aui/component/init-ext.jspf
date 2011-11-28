@@ -14,7 +14,7 @@
  */
 --%>
 
-<%@ page import="com.liferay.alloy.util.json.StringTransformer" %>
+<%@ page import="com.liferay.portal.kernel.json.JSONTransformer" %>
 
 <%
 String scriptPosition = GetterUtil.getString((Serializable)_options.get("scriptPosition"), "inline");
@@ -36,10 +36,10 @@ jsonifiedOptions.put("render", render);
 
 <%!
 public String _serialize(Object value, String javaScriptAttributes) {
-	StringTransformer stringTransformer = new StringTransformer();
+	List<String> javaScriptAttributesList = Arrays.asList(StringUtil.split(javaScriptAttributes));
 
-	stringTransformer.setJavaScriptAttributes(Arrays.asList(StringUtil.split(javaScriptAttributes)));
+	JSONTransformer jsonTransformer = JSONFactoryUtil.createJavaScriptNormalizerJSONTransformer(javaScriptAttributesList);
 
-	return JSONFactoryUtil.looseSerialize(value, stringTransformer, String.class);
+	return JSONFactoryUtil.looseSerialize(value, jsonTransformer, String.class);
 }
 %>

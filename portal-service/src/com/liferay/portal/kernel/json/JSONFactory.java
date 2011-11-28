@@ -14,6 +14,8 @@
 
 package com.liferay.portal.kernel.json;
 
+import java.util.List;
+
 /**
  * @author Brian Wing Shun Chan
  */
@@ -26,6 +28,9 @@ public interface JSONFactory {
 	public String convertXMLtoJSONMLArray(String xml);
 
 	public String convertXMLtoJSONMLObject(String xml);
+
+	public JSONTransformer createJavaScriptNormalizerJSONTransformer(
+		List<String> javaScriptAttributes);
 
 	public JSONArray createJSONArray();
 
