@@ -951,10 +951,10 @@ public class JournalArticleLocalServiceImpl
 					Element pageElement = null;
 
 					if (Validator.isNotNull(targetPage)) {
-						XPath xpathSelector = SAXReaderUtil.createXPath(
+						XPath xPathSelector = SAXReaderUtil.createXPath(
 							"/root/page[@id = '" + targetPage + "']");
 
-						pageElement = (Element)xpathSelector.selectSingleNode(
+						pageElement = (Element)xPathSelector.selectSingleNode(
 							document);
 					}
 
@@ -2597,10 +2597,10 @@ public class JournalArticleLocalServiceImpl
 
 		Document contentDoc = SAXReaderUtil.read(oldArticle.getContent());
 
-		XPath xpathSelector = SAXReaderUtil.createXPath(
+		XPath xPathSelector = SAXReaderUtil.createXPath(
 			"//dynamic-element[@type='image']");
 
-		List<Node> imageNodes = xpathSelector.selectNodes(contentDoc);
+		List<Node> imageNodes = xPathSelector.selectNodes(contentDoc);
 
 		for (Node imageNode : imageNodes) {
 			Element imageEl = (Element)imageNode;
