@@ -18,7 +18,6 @@ import com.liferay.mail.model.FileAttachment;
 import com.liferay.mail.service.MailServiceUtil;
 import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.mail.MailMessage;
@@ -200,7 +199,7 @@ public class SubscriptionSender implements Serializable {
 		return _context.get(key);
 	}
 
-	public void initialize() throws PortalException, SystemException {
+	public void initialize() throws Exception {
 		if (_initialized) {
 			return;
 		}
@@ -354,9 +353,7 @@ public class SubscriptionSender implements Serializable {
 			subscription.getSubscriptionId());
 	}
 
-	protected String getPortalURL(String virtualHostname)
-		throws PortalException, SystemException {
-
+	protected String getPortalURL(String virtualHostname) throws Exception {
 		String portalURL = PortalUtil.getPortalURL(
 			virtualHostname, Http.HTTP_PORT, false);
 
