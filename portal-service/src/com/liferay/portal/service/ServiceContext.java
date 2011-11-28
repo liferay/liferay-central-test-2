@@ -48,8 +48,8 @@ public class ServiceContext implements Cloneable, Serializable {
 	/**
 	 * Creates a new service context object with an attributes map and an
 	 * expando bridge attributes map. The attributes map contains standard
-	 * service context parameters and the expando bridge attributes map
-	 * contains optional service context parameters.
+	 * service context parameters and the expando bridge attributes map contains
+	 * optional service context parameters.
 	 */
 	public ServiceContext() {
 		_attributes = new LinkedHashMap<String, Serializable>();
@@ -103,13 +103,13 @@ public class ServiceContext implements Cloneable, Serializable {
 
 	/**
 	 * Returns <code>true</code> if this service context is being passed as a
-	 * parameter to a method which manipulates a resource to which default
-	 * group permissions apply.
+	 * parameter to a method which manipulates a resource to which default group
+	 * permissions apply.
 	 *
 	 * @return     <code>true</code> if this service context is being passed as
-	 *             a parameter to a method which manipulates a resource to
-	 *             which default community permissions apply;
-	 *             <code>false</code> otherwise
+	 *             a parameter to a method which manipulates a resource to which
+	 *             default community permissions apply; <code>false</code>
+	 *             otherwise
 	 * @deprecated As of 6.1, renamed to {@link #getAddGroupPermissions()}
 	 */
 	public boolean getAddCommunityPermissions() {
@@ -118,8 +118,8 @@ public class ServiceContext implements Cloneable, Serializable {
 
 	/**
 	 * Returns <code>true</code> if this service context is being passed as a
-	 * parameter to a method which manipulates a resource to which default
-	 * guest permissions apply.
+	 * parameter to a method which manipulates a resource to which default guest
+	 * permissions apply.
 	 *
 	 * @return <code>true</code> if this service context is being passed as a
 	 *         parameter to a method which manipulates a resource to which
@@ -131,8 +131,8 @@ public class ServiceContext implements Cloneable, Serializable {
 
 	/**
 	 * Returns <code>true</code> if this service context is being passed as a
-	 * parameter to a method which manipulates a resource to which default
-	 * group permissions apply.
+	 * parameter to a method which manipulates a resource to which default group
+	 * permissions apply.
 	 *
 	 * @return <code>true</code> if this service context is being passed as a
 	 *         parameter to a method which manipulates a resource to which
@@ -154,8 +154,8 @@ public class ServiceContext implements Cloneable, Serializable {
 	}
 
 	/**
-	 * Returns the primary keys of the asset entries linked to an asset entry
-	 * if the service context is being passed as a parameter to a method which
+	 * Returns the primary keys of the asset entries linked to an asset entry if
+	 * the service context is being passed as a parameter to a method which
 	 * manipulates the asset entry.
 	 *
 	 * @return the primary keys of the asset entries
@@ -220,8 +220,7 @@ public class ServiceContext implements Cloneable, Serializable {
 	}
 
 	/**
-	 * Returns the company ID of this service context's current portal
-	 * instance.
+	 * Returns the company ID of this service context's current portal instance.
 	 *
 	 * @return the company ID
 	 */
@@ -299,8 +298,8 @@ public class ServiceContext implements Cloneable, Serializable {
 	 * available.
 	 *
 	 * @return the user ID, or guest ID if there is no user in this service
-	 *         context, or <code>0</code> if there is no company in this
-	 *         service context
+	 *         context, or <code>0</code> if there is no company in this service
+	 *         context
 	 * @throws PortalException if a default user for the company could not be
 	 *         found
 	 * @throws SystemException if a system exception occurred
@@ -415,8 +414,7 @@ public class ServiceContext implements Cloneable, Serializable {
 	}
 
 	/**
-	 * Returns the portal layout ID of the current page of this service
-	 * context.
+	 * Returns the portal layout ID of the current page of this service context.
 	 *
 	 * @return the portal layout ID of the current page
 	 */
@@ -425,17 +423,17 @@ public class ServiceContext implements Cloneable, Serializable {
 	}
 
 	/**
-	 * Returns the URL of this service context's portal, including the
-	 * protocol, domain, and non-default port relative to the company instance
-	 * and any virtual host.
+	 * Returns the URL of this service context's portal, including the protocol,
+	 * domain, and non-default port relative to the company instance and any
+	 * virtual host.
 	 *
 	 * <p>
 	 * The URL returned does not include the port if a default port is used.
 	 * </p>
 	 *
-	 * @return the URL of this service context's portal, including the
-	 *         protocol, domain, and non-default port relative to company
-	 *         instance and any virtual host
+	 * @return the URL of this service context's portal, including the protocol,
+	 *         domain, and non-default port relative to company instance and any
+	 *         virtual host
 	 */
 	public String getPortalURL() {
 		return _portalURL;
@@ -458,12 +456,12 @@ public class ServiceContext implements Cloneable, Serializable {
 	}
 
 	/**
-	 * Returns the portlet preferences IDs of the current portlet if the
-	 * service context is being passed as a parameter to a portlet.
+	 * Returns the portlet preferences IDs of the current portlet if the service
+	 * context is being passed as a parameter to a portlet.
 	 *
 	 * <p>
-	 * The {@link com.liferay.portal.model.PortletPreferencesIds} can be used
-	 * to look up portlet preferences of the current portlet.
+	 * The {@link com.liferay.portal.model.PortletPreferencesIds} can be used to
+	 * look up portlet preferences of the current portlet.
 	 * </p>
 	 *
 	 * @return the portlet preferences IDs of the current portlet
@@ -474,8 +472,8 @@ public class ServiceContext implements Cloneable, Serializable {
 	}
 
 	/**
-	 * Returns the remote address of the user making the request in this
-	 * service context.
+	 * Returns the remote address of the user making the request in this service
+	 * context.
 	 *
 	 * @return the remote address of the user making the request
 	 */
@@ -519,11 +517,11 @@ public class ServiceContext implements Cloneable, Serializable {
 	}
 
 	/**
-	 * Returns the complete URL of this service context's current user's
-	 * profile page.
+	 * Returns the complete URL of this service context's current user's profile
+	 * page.
 	 *
-	 * @return the complete URL of this service context's current user's
-	 *         profile page
+	 * @return the complete URL of this service context's current user's profile
+	 *         page
 	 */
 	public String getUserDisplayURL() {
 		return _userDisplayURL;
@@ -564,8 +562,8 @@ public class ServiceContext implements Cloneable, Serializable {
 	}
 
 	/**
-	 * Returns <code>true</code> if this service context contains an add
-	 * command (i.e. has command value {@link
+	 * Returns <code>true</code> if this service context contains an add command
+	 * (i.e. has command value {@link
 	 * com.liferay.portal.kernel.util.Constants#ADD})
 	 *
 	 * @return <code>true</code> if this service context contains an add
@@ -609,11 +607,11 @@ public class ServiceContext implements Cloneable, Serializable {
 	}
 
 	/**
-	 * Returns <code>true</code> if the sender of this service context's
-	 * request is signed in.
+	 * Returns <code>true</code> if the sender of this service context's request
+	 * is signed in.
 	 *
-	 * @return <code>true</code> if the sender of this service context's
-	 *         request is signed in; <code>false</code> otherwise
+	 * @return <code>true</code> if the sender of this service context's request
+	 *         is signed in; <code>false</code> otherwise
 	 */
 	public boolean isSignedIn() {
 		return _signedIn;
@@ -703,8 +701,7 @@ public class ServiceContext implements Cloneable, Serializable {
 	}
 
 	/**
-	 * Sets a mapping of a standard parameter's name to its serializable
-	 * object.
+	 * Sets a mapping of a standard parameter's name to its serializable object.
 	 *
 	 * @param name the standard parameter name to associate with the value
 	 * @param value the serializable object to be associated with the name
@@ -737,8 +734,8 @@ public class ServiceContext implements Cloneable, Serializable {
 	}
 
 	/**
-	 * Sets an array containing specific community permissions for a resource
-	 * if this service context is being passed as a parameter to a method which
+	 * Sets an array containing specific community permissions for a resource if
+	 * this service context is being passed as a parameter to a method which
 	 * manipulates the resource.
 	 *
 	 * @param      communityPermissions the community permissions (optionally
@@ -752,16 +749,16 @@ public class ServiceContext implements Cloneable, Serializable {
 	/**
 	 * Sets the company ID of this service context's current portal instance.
 	 *
-	 * @param companyId the primary key of this service context's current
-	 *        portal instance
+	 * @param companyId the primary key of this service context's current portal
+	 *        instance
 	 */
 	public void setCompanyId(long companyId) {
 		_companyId = companyId;
 	}
 
 	/**
-	 * Sets the date when an entity was created if this service context is
-	 * being passed as a parameter to a method which creates an entity.
+	 * Sets the date when an entity was created if this service context is being
+	 * passed as a parameter to a method which creates an entity.
 	 *
 	 * @param createDate the date the entity was created
 	 */
@@ -838,9 +835,8 @@ public class ServiceContext implements Cloneable, Serializable {
 	 * service context as a parameter does indexing.
 	 * </p>
 	 *
-	 * @param indexingEnabled whether the primary entity of this service
-	 *        context is to be indexed/re-indexed (default is
-	 *        <code>true</code>)
+	 * @param indexingEnabled whether the primary entity of this service context
+	 *        is to be indexed/re-indexed (default is <code>true</code>)
 	 */
 	public void setIndexingEnabled(boolean indexingEnabled) {
 		_indexingEnabled = indexingEnabled;
@@ -849,8 +845,8 @@ public class ServiceContext implements Cloneable, Serializable {
 	/**
 	 * Sets the language ID of the locale of this service context.
 	 *
-	 * @param languageId the language ID of the locale of this service
-	 *        context's current user
+	 * @param languageId the language ID of the locale of this service context's
+	 *        current user
 	 */
 	public void setLanguageId(String languageId) {
 		_languageId = languageId;
@@ -925,8 +921,8 @@ public class ServiceContext implements Cloneable, Serializable {
 	 * context is being passed as a parameter to a portlet.
 	 *
 	 * <p>
-	 * The {@link com.liferay.portal.model.PortletPreferencesIds} can be used
-	 * to look up portlet preferences of the current portlet.
+	 * The {@link com.liferay.portal.model.PortletPreferencesIds} can be used to
+	 * look up portlet preferences of the current portlet.
 	 * </p>
 	 *
 	 * @param portletPreferencesIds the portlet preferences
@@ -964,8 +960,8 @@ public class ServiceContext implements Cloneable, Serializable {
 	 * Sets the ID of the group corresponding to the current data scope of this
 	 * service context.
 	 *
-	 * @param scopeGroupId the ID of the group corresponding to the current
-	 *        data scope of this service context
+	 * @param scopeGroupId the ID of the group corresponding to the current data
+	 *        scope of this service context
 	 * @see   com.liferay.portal.model.Group
 	 */
 	public void setScopeGroupId(long scopeGroupId) {
@@ -986,8 +982,7 @@ public class ServiceContext implements Cloneable, Serializable {
 	 * Sets the complete URL of this service context's current user's profile
 	 * page.
 	 *
-	 * @param userDisplayURL the complete URL of the current user's profile
-	 *        page
+	 * @param userDisplayURL the complete URL of the current user's profile page
 	 */
 	public void setUserDisplayURL(String userDisplayURL) {
 		_userDisplayURL = userDisplayURL;
