@@ -28,7 +28,7 @@ if (rule != null) {
 
 	operatingSystems = SetUtil.fromArray(StringUtil.split(typeSettingsProperties.get("os")));
 
-	String tabletString = typeSettingsProperties.get("tablet");
+	String tabletString = GetterUtil.getString(typeSettingsProperties.get("tablet"));
 
 	if (tabletString.equals(StringPool.TRUE)) {
 		tablet = 1;
