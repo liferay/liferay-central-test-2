@@ -56,7 +56,6 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
-import com.liferay.portal.util.SubscriptionSender;
 import com.liferay.portlet.asset.model.AssetEntry;
 import com.liferay.portlet.asset.model.AssetLinkConstants;
 import com.liferay.portlet.calendar.EventDurationException;
@@ -1213,13 +1212,6 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 				toAddress = contact.getSmsSn();
 			}
 
-			SubscriptionSender subscriptionSender = new SubscriptionSender();
-
-			subscriptionSender.setScopeGroupId(event.getGroupId());
-
-			String portalUrl = subscriptionSender.getPortalURL(
-				company.getVirtualHostname());
-
 			String subject = CalUtil.getEmailEventReminderSubject(preferences);
 			String body = CalUtil.getEmailEventReminderBody(preferences);
 
@@ -1245,7 +1237,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 					event.getTitle(),
 					fromAddress,
 					fromName,
-					portalUrl,
+					company.getPortalURL(event.getGroupId()),
 					portletName,
 					HtmlUtil.escape(toAddress),
 					HtmlUtil.escape(toName),
@@ -1270,7 +1262,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 					event.getTitle(),
 					fromAddress,
 					fromName,
-					portalUrl,
+					company.getPortalURL(event.getGroupId()),
 					portletName,
 					HtmlUtil.escape(toAddress),
 					HtmlUtil.escape(toName),

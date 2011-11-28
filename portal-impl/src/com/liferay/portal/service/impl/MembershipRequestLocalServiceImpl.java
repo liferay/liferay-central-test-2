@@ -328,8 +328,8 @@ public class MembershipRequestLocalServiceImpl
 		subscriptionSender.setHtmlFormat(true);
 		subscriptionSender.setMailId(
 			"membership_request", membershipRequest.getMembershipRequestId());
-		subscriptionSender.setServiceContext(serviceContext);
 		subscriptionSender.setScopeGroupId(membershipRequest.getGroupId());
+		subscriptionSender.setServiceContext(serviceContext);
 		subscriptionSender.setSubject(subject);
 		subscriptionSender.setUserId(userId);
 

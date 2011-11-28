@@ -62,10 +62,6 @@ public class ReplyMembershipRequestAction extends PortletAction {
 			String replyComments = ParamUtil.getString(
 				actionRequest, "replyComments");
 
-			MembershipRequest membershipRequest =
-				MembershipRequestServiceUtil.getMembershipRequest(
-					membershipRequestId);
-
 			ServiceContext serviceContext = ServiceContextFactory.getInstance(
 				actionRequest);
 
@@ -73,6 +69,10 @@ public class ReplyMembershipRequestAction extends PortletAction {
 				membershipRequestId, replyComments, statusId, serviceContext);
 
 			if (statusId == MembershipRequestConstants.STATUS_APPROVED) {
+				MembershipRequest membershipRequest =
+					MembershipRequestServiceUtil.getMembershipRequest(
+						membershipRequestId);
+
 				LiveUsers.joinGroup(
 					themeDisplay.getCompanyId(),
 					membershipRequest.getGroupId(),
