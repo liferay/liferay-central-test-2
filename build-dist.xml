@@ -915,7 +915,7 @@ release was successful.</echo>
 				<zip
 					basedir="tools/servers/glassfish/patches/GLASSFISH-17242/classes"
 					destfile="${app.server.glassfish.dir}/modules/kernel.jar"
-					includes="**/SnifferManagerImpl.class"
+					includes="**/SnifferManagerImpl*.class"
 					update="yes"
 				/>
 
