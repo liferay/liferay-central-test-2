@@ -14,6 +14,8 @@
 
 package com.liferay.portal.xml.xpath;
 
+import java.util.Map;
+
 import org.jaxen.NamespaceContext;
 
 /**
@@ -21,22 +23,18 @@ import org.jaxen.NamespaceContext;
  */
 public class LiferayNamespaceContext implements NamespaceContext {
 
-	public LiferayNamespaceContext() {
-		_contextMap = new LiferayNamespaceContextMap();
-	}
-
-	public LiferayNamespaceContext(LiferayNamespaceContextMap contextMap) {
-		_contextMap = contextMap;
-	}
-
-	public void setContextMap(LiferayNamespaceContextMap contextMap) {
-		_contextMap = contextMap;
+	public LiferayNamespaceContext(Map<String, String> namespaceContextMap) {
+		_namespaceContextMap = namespaceContextMap;
 	}
 
 	public String translateNamespacePrefixToUri(String prefix) {
-		return _contextMap.get(prefix);
+		if (_namespaceContextMap == null) {
+			return null;
+		}
+
+		return _namespaceContextMap.get(prefix);
 	}
 
-	private LiferayNamespaceContextMap _contextMap;
+	private Map<String, String> _namespaceContextMap;
 
 }

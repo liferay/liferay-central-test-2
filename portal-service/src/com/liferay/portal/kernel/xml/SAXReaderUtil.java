@@ -14,8 +14,6 @@
 
 package com.liferay.portal.kernel.xml;
 
-import com.liferay.portal.xml.xpath.LiferayNamespaceContextMap;
-
 import java.io.File;
 import java.io.InputStream;
 import java.io.Reader;
@@ -104,9 +102,9 @@ public class SAXReaderUtil {
 	}
 
 	public static XPath createXPath(
-			String xPathExpression, LiferayNamespaceContextMap contextMap) {
+		String xPathExpression, Map<String, String> namespaceContextMap) {
 
-		return getSAXReader().createXPath(xPathExpression, contextMap);
+		return getSAXReader().createXPath(xPathExpression, namespaceContextMap);
 	}
 
 	public static XPath createXPath(
@@ -182,26 +180,26 @@ public class SAXReaderUtil {
 	}
 
 	public static List<Node> selectNodes(
-		String xpathFilterExpression, List<Node> nodes) {
+		String xPathFilterExpression, List<Node> nodes) {
 
-		return getSAXReader().selectNodes(xpathFilterExpression, nodes);
+		return getSAXReader().selectNodes(xPathFilterExpression, nodes);
 	}
 
 	public static List<Node> selectNodes(
-		String xpathFilterExpression, Node node) {
+		String xPathFilterExpression, Node node) {
 
-		return getSAXReader().selectNodes(xpathFilterExpression, node);
+		return getSAXReader().selectNodes(xPathFilterExpression, node);
 	}
 
-	public static void sort(List<Node> nodes, String xpathExpression) {
+	public static void sort(List<Node> nodes, String xPathExpression) {
 
-		getSAXReader().sort(nodes, xpathExpression);
+		getSAXReader().sort(nodes, xPathExpression);
 	}
 
 	public static void sort(
-		List<Node> nodes, String xpathExpression, boolean distinct) {
+		List<Node> nodes, String xPathExpression, boolean distinct) {
 
-		getSAXReader().sort(nodes, xpathExpression, distinct);
+		getSAXReader().sort(nodes, xPathExpression, distinct);
 	}
 
 	public void setSAXReader(SAXReader saxReader) {

@@ -30,7 +30,6 @@ import com.liferay.portal.kernel.xml.Text;
 import com.liferay.portal.kernel.xml.XPath;
 import com.liferay.portal.util.EntityResolver;
 import com.liferay.portal.util.PropsValues;
-import com.liferay.portal.xml.xpath.LiferayNamespaceContextMap;
 import com.liferay.util.xml.XMLSafeReader;
 
 import java.io.File;
@@ -41,6 +40,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -293,51 +293,50 @@ public class SAXReaderImpl implements SAXReader {
 	}
 
 	public XPath createXPath(String xPathExpression) {
-		return new XPathImpl(DocumentHelper.createXPath(xPathExpression));
+		return createXPath(xPathExpression, null);
 	}
 
 	public XPath createXPath(
-		String xPathExpression, LiferayNamespaceContextMap contextMap) {
+		String xPathExpression, Map<String, String> namespaceContextMap) {
 
 		return new XPathImpl(
-			DocumentHelper.createXPath(xPathExpression), contextMap);
+			DocumentHelper.createXPath(xPathExpression), namespaceContextMap);
 	}
 
 	public XPath createXPath(
 		String xPathExpression, String prefix, String namespace) {
 
-		LiferayNamespaceContextMap contextMap =
-			new LiferayNamespaceContextMap();
+		Map<String, String> namespaceContextMap = new HashMap<String, String>();
 
-		contextMap.put(prefix, namespace);
+		namespaceContextMap.put(prefix, namespace);
 
-		return createXPath(xPathExpression, contextMap);
+		return createXPath(xPathExpression, namespaceContextMap);
 	}
 
 	public List<Node> selectNodes(
-		String xpathFilterExpression, List<Node> nodes) {
+		String xPathFilterExpression, List<Node> nodes) {
 
 		return toNewNodes(
 			DocumentHelper.selectNodes(
-				xpathFilterExpression, toOldNodes(nodes)));
+				xPathFilterExpression, toOldNodes(nodes)));
 	}
 
-	public List<Node> selectNodes(String xpathFilterExpression, Node node) {
+	public List<Node> selectNodes(String xPathFilterExpression, Node node) {
 		NodeImpl nodeImpl = (NodeImpl)node;
 
 		return toNewNodes(
 			DocumentHelper.selectNodes(
-				xpathFilterExpression, nodeImpl.getWrappedNode()));
+				xPathFilterExpression, nodeImpl.getWrappedNode()));
 	}
 
-	public void sort(List<Node> nodes, String xpathExpression) {
-		DocumentHelper.sort(toOldNodes(nodes), xpathExpression);
+	public void sort(List<Node> nodes, String xPathExpression) {
+		DocumentHelper.sort(toOldNodes(nodes), xPathExpression);
 	}
 
 	public void sort(
-		List<Node> nodes, String xpathExpression, boolean distinct) {
+		List<Node> nodes, String xPathExpression, boolean distinct) {
 
-		DocumentHelper.sort(toOldNodes(nodes), xpathExpression, distinct);
+		DocumentHelper.sort(toOldNodes(nodes), xPathExpression, distinct);
 	}
 
 	public Document read(File file) throws DocumentException {

@@ -18,31 +18,29 @@ import com.liferay.portal.kernel.xml.Node;
 import com.liferay.portal.kernel.xml.XPath;
 import com.liferay.portal.xml.xpath.LiferayFunctionContext;
 import com.liferay.portal.xml.xpath.LiferayNamespaceContext;
-import com.liferay.portal.xml.xpath.LiferayNamespaceContextMap;
 
 import java.util.List;
+import java.util.Map;
 
 import org.jaxen.FunctionContext;
+import org.jaxen.NamespaceContext;
 
 /**
  * @author Brian Wing Shun Chan
  */
 public class XPathImpl implements XPath {
 
-	public XPathImpl(org.dom4j.XPath xPath) {
-		this(xPath, null);
-	}
-
 	public XPathImpl(
-		org.dom4j.XPath xPath, LiferayNamespaceContextMap contextMap) {
+		org.dom4j.XPath xPath, Map<String, String> namespaceContextMap) {
 
 		_xPath = xPath;
 
 		_xPath.setFunctionContext(_functionContext);
 
-		_namespaceContext.setContextMap(contextMap);
+		NamespaceContext namespaceContext = new LiferayNamespaceContext(
+			namespaceContextMap);
 
-		_xPath.setNamespaceContext(_namespaceContext);
+		_xPath.setNamespaceContext(namespaceContext);
 	}
 
 	public boolean booleanValueOf(Object context) {
@@ -179,11 +177,8 @@ public class XPathImpl implements XPath {
 		}
 	}
 
-	private static final FunctionContext _functionContext =
+	private static FunctionContext _functionContext =
 		new LiferayFunctionContext();
-
-	private static final LiferayNamespaceContext _namespaceContext =
-		new LiferayNamespaceContext();
 
 	private org.dom4j.XPath _xPath;
 
