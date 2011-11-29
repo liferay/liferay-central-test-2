@@ -406,8 +406,8 @@ public abstract class PortletRequestImpl implements LiferayPortletRequest {
 			return _session.getId();
 		}
 		else {
-			// do not create a new session if one does not exist!
 			HttpSession session = _request.getSession(false);
+
 			if (session == null) {
 				return StringPool.BLANK;
 			}
