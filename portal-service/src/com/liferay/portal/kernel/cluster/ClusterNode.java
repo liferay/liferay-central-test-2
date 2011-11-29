@@ -37,18 +37,18 @@ public class ClusterNode implements Comparable<ClusterNode>, Serializable {
 
 		String curIpAddress = _inetAddress.getHostAddress();
 
-		int result = curIpAddress.compareTo(ipAddress);
+		int value = curIpAddress.compareTo(ipAddress);
 
-		if (result == 0) {
+		if (value == 0) {
 			if (_port > clusterNode._port) {
-				result = 1;
+				value = 1;
 			}
 			else if (_port < clusterNode._port) {
-				result = -1;
+				value = -1;
 			}
 		}
 
-		return result;
+		return value;
 	}
 
 	@Override
