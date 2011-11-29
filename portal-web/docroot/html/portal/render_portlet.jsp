@@ -1031,21 +1031,21 @@ if (themeDisplay.isStatePopUp()) {
 			refreshPortletId = portletResourcePortlet.getPortletId();
 		}
 
-		Map<String, String> data = (Map<String, String>)SessionMessages.get(renderRequestImpl, portletConfig.getPortletName() + SessionMessages.KEY_SUFFIX_REFRESH_PORTLET_DATA);
+		Map<String, String> refreshPortletData = (Map<String, String>)SessionMessages.get(renderRequestImpl, portletConfig.getPortletName() + SessionMessages.KEY_SUFFIX_REFRESH_PORTLET_DATA);
 %>
 
 		<aui:script position="inline" use="aui-base">
 			if (window.parent) {
-				var refreshPortletData = {
+				var data = {
 					portletAjaxable: <%= !((portletResourcePortlet != null && !portletResourcePortlet.isAjaxable()) || SessionMessages.contains(renderRequestImpl, portletConfig.getPortletName() + SessionMessages.KEY_SUFFIX_PORTLET_NOT_AJAXABLE)) %>
 
 					<c:if test="<%= (refreshPortletData != null) && !refreshPortletData.isEmpty() %>">
 
 						<%
-						for (String key : refreshPortletData.keySet()) {
+						for (Map.Entry<String, String> entry : refreshPortletData.entrySet()) {
 						%>
 
-							, '<%= key %>': <%= refreshPortletData.get(key) %>
+							, '<%= entry.getKey() %>': <%= entry.getValue() %>
 
 						<%
 						}
@@ -1055,7 +1055,7 @@ if (themeDisplay.isStatePopUp()) {
 
 				};
 
-				Liferay.Util.getOpener().Liferay.Portlet.refresh('#p_p_id_<%= refreshPortletId %>_', refreshPortletData);
+				Liferay.Util.getOpener().Liferay.Portlet.refresh('#p_p_id_<%= refreshPortletId %>_', data);
 			}
 		</aui:script>
 
