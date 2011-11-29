@@ -1024,28 +1024,28 @@ else {
 
 <%
 if (themeDisplay.isStatePopUp()) {
-	String doRefreshPortletId = null;
+	String refreshPortletId = null;
 
-	if ((doRefreshPortletId = (String)SessionMessages.get(renderRequestImpl, portletConfig.getPortletName() + ".doRefresh")) != null) {
-		if (Validator.isNull(doRefreshPortletId) && (portletResourcePortlet != null)) {
-			doRefreshPortletId = portletResourcePortlet.getPortletId();
+	if ((refreshPortletId = (String)SessionMessages.get(renderRequestImpl, portletConfig.getPortletName() + SessionMessages.KEY_SUFFIX_REFRESH_PORTLET)) != null) {
+		if (Validator.isNull(refreshPortletId) && (portletResourcePortlet != null)) {
+			refreshPortletId = portletResourcePortlet.getPortletId();
 		}
 
-		Map<String, String> data = (Map<String, String>)SessionMessages.get(renderRequestImpl, portletConfig.getPortletName() + ".doRefreshData");
+		Map<String, String> data = (Map<String, String>)SessionMessages.get(renderRequestImpl, portletConfig.getPortletName() + SessionMessages.KEY_SUFFIX_REFRESH_PORTLET_DATA);
 %>
 
 		<aui:script position="inline" use="aui-base">
 			if (window.parent) {
-				var data = {
-					portletAjaxable: <%= !((portletResourcePortlet != null && !portletResourcePortlet.isAjaxable()) || SessionMessages.contains(renderRequestImpl, portletConfig.getPortletName() + ".notAjaxable")) %>
+				var refreshPortletData = {
+					portletAjaxable: <%= !((portletResourcePortlet != null && !portletResourcePortlet.isAjaxable()) || SessionMessages.contains(renderRequestImpl, portletConfig.getPortletName() + SessionMessages.KEY_SUFFIX_PORTLET_NOT_AJAXABLE)) %>
 
-					<c:if test="<%= data != null && data.size() > 0 %>">
+					<c:if test="<%= (refreshPortletData != null) && !refreshPortletData.isEmpty() %>">
 
 						<%
-						for (String key : data.keySet()) {
+						for (String key : refreshPortletData.keySet()) {
 						%>
 
-							, '<%= key %>': <%= data.get(key) %>
+							, '<%= key %>': <%= refreshPortletData.get(key) %>
 
 						<%
 						}
@@ -1055,16 +1055,16 @@ if (themeDisplay.isStatePopUp()) {
 
 				};
 
-				Liferay.Util.getOpener().Liferay.Portlet.refresh('#p_p_id_<%= doRefreshPortletId %>_', data);
+				Liferay.Util.getOpener().Liferay.Portlet.refresh('#p_p_id_<%= refreshPortletId %>_', refreshPortletData);
 			}
 		</aui:script>
 
 <%
 	}
 
-	String doCloseRedirect = null;
+	String closeRedirect = null;
 
-	if ((doCloseRedirect = (String)SessionMessages.get(renderRequestImpl, portletConfig.getPortletName() + ".doCloseRedirect")) != null) {
+	if ((closeRedirect = (String)SessionMessages.get(renderRequestImpl, portletConfig.getPortletName() + SessionMessages.KEY_SUFFIX_CLOSE_REDIRECT)) != null) {
 %>
 
 		<aui:script use="aui-base">
@@ -1089,7 +1089,7 @@ if (themeDisplay.isStatePopUp()) {
 							}
 						);
 
-						refreshWindow.location.href = '<%= doCloseRedirect %>';
+						refreshWindow.location.href = '<%= closeRedirect %>';
 					}
 				}
 			);

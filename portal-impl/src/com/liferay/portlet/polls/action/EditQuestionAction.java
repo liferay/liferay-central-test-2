@@ -132,9 +132,10 @@ public class EditQuestionAction extends PortletAction {
 
 				SessionErrors.add(actionRequest, e.getClass().getName());
 
-				SessionErrors.add(
+				SessionMessages.add(
 					actionRequest,
-					portletConfig.getPortletName() + ".hideDefaultError");
+					portletConfig.getPortletName() +
+						SessionMessages.KEY_SUFFIX_HIDE_DEFAULT_ERROR_MESSAGE);
 			}
 			else if (e instanceof QuestionExpiredException) {
 			}
@@ -198,7 +199,9 @@ public class EditQuestionAction extends PortletAction {
 		preferences.store();
 
 		SessionMessages.add(
-			portletRequest, portletConfig.getPortletName() + ".doRefresh",
+			portletRequest,
+			portletConfig.getPortletName() +
+				SessionMessages.KEY_SUFFIX_REFRESH_PORTLET,
 			referringPortletResource);
 	}
 

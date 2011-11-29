@@ -75,7 +75,8 @@ public class EditFileEntryTypeAction extends PortletAction {
 			if (SessionErrors.isEmpty(actionRequest)) {
 				SessionMessages.add(
 					actionRequest,
-					portletConfig.getPortletName() + ".doRefresh",
+					portletConfig.getPortletName() +
+						SessionMessages.KEY_SUFFIX_REFRESH_PORTLET,
 					PortletKeys.DOCUMENT_LIBRARY);
 			}
 
