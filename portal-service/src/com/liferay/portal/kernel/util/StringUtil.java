@@ -82,7 +82,11 @@ public class StringUtil {
 		return s;
 	}
 
-	public static String appendCount(String s, int count) {
+	public static String appendParentheticalSuffix(String s, int suffix) {
+		return appendParentheticalSuffix(s, String.valueOf(suffix));
+	}
+
+	public static String appendParentheticalSuffix(String s, String suffix) {
 		if (Pattern.matches(".* \\(\\d+\\)", s)) {
 			int pos = s.lastIndexOf(" (");
 
@@ -94,7 +98,7 @@ public class StringUtil {
 		sb.append(s);
 		sb.append(StringPool.SPACE);
 		sb.append(StringPool.OPEN_PARENTHESIS);
-		sb.append(count);
+		sb.append(suffix);
 		sb.append(StringPool.CLOSE_PARENTHESIS);
 
 		return sb.toString();

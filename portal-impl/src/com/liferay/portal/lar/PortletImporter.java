@@ -523,7 +523,7 @@ public class PortletImporter {
 			return name;
 		}
 
-		name = StringUtil.appendCount(name, count);
+		name = StringUtil.appendParentheticalSuffix(name, count);
 
 		return getAssetCategoryName(uuid, parentCategoryId, name, ++count);
 	}
@@ -578,7 +578,7 @@ public class PortletImporter {
 			return name;
 		}
 
-		name = StringUtil.appendCount(name, count);
+		name = StringUtil.appendParentheticalSuffix(name, count);
 
 		return getAssetVocabularyName(uuid, groupId, name, ++count);
 	}

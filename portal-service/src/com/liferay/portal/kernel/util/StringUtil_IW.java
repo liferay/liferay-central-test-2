@@ -14,8 +14,6 @@
 
 package com.liferay.portal.kernel.util;
 
-import java.util.regex.Pattern;
-
 /**
  * @author Brian Wing Shun Chan
  */
@@ -38,8 +36,14 @@ public class StringUtil_IW {
 		return StringUtil.add(s, add, delimiter, allowDuplicates);
 	}
 
-	public java.lang.String appendCount(java.lang.String s, int count) {
-		return StringUtil.appendCount(s, count);
+	public java.lang.String appendParentheticalSuffix(java.lang.String s,
+		int suffix) {
+		return StringUtil.appendParentheticalSuffix(s, suffix);
+	}
+
+	public java.lang.String appendParentheticalSuffix(java.lang.String s,
+		java.lang.String suffix) {
+		return StringUtil.appendParentheticalSuffix(s, suffix);
 	}
 
 	public java.lang.String bytesToHexString(byte[] bytes) {

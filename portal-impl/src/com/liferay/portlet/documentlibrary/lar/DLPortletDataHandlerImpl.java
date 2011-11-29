@@ -887,7 +887,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 			return name;
 		}
 
-		name = StringUtil.appendCount(name, count);
+		name = StringUtil.appendParentheticalSuffix(name, count);
 
 		return getFolderName(uuid, groupId, parentFolderId, name, ++count);
 	}
