@@ -40,6 +40,7 @@ import com.xuggle.xuggler.IVideoResampler;
 import java.io.File;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 
 /**
@@ -101,8 +102,7 @@ public class LiferayVideoConverter extends LiferayConverter {
 			}
 			catch (Exception e) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(
-						"Error while moving MOOV atom to front of MP4 file");
+					_log.warn("Unable to move MOOV atom to front of MP4 file");
 				}
 			}
 			finally {
@@ -282,8 +282,10 @@ public class LiferayVideoConverter extends LiferayConverter {
 
 	@Override
 	protected ICodec getAudioEncodingICodec(IContainer outputIContainer) {
-		String outputFormat =
-			outputIContainer.getContainerFormat().getOutputFormatShortName();
+		IContainerFormat iContainerFormat =
+			outputIContainer.getContainerFormat();
+
+		String outputFormat = iContainerFormat.getOutputFormatShortName();
 
 		if (outputFormat.equals("ogg")) {
 			return ICodec.findEncodingCodec(ICodec.ID.CODEC_ID_VORBIS);
@@ -298,26 +300,27 @@ public class LiferayVideoConverter extends LiferayConverter {
 	}
 
 	protected void initVideoBitRateMap() {
-		if (VIDEO_BIT_RATE_MAP != null) {
+		if (_videoBitRateMap != null) {
 			return;
 		}
 
-		VIDEO_BIT_RATE_MAP = new HashMap<String, Integer>();
+		_videoBitRateMap = new HashMap<String, Integer>();
 
 		for (String previewVideoContainer :
 				PropsValues.DL_FILE_ENTRY_PREVIEW_VIDEO_CONTAINERS) {
 
 			Filter filter = new Filter(previewVideoContainer);
 
-			int videoBitRate = GetterUtil.getInteger(PropsUtil.get(
-				PropsKeys.DL_FILE_ENTRY_PREVIEW_VIDEO_BIT_RATE, filter));
+			int videoBitRate = GetterUtil.getInteger(
+				PropsUtil.get(
+					PropsKeys.DL_FILE_ENTRY_PREVIEW_VIDEO_BIT_RATE, filter));
 
-			if (videoBitRate > VIDEO_BIT_RATE_MAX) {
-				videoBitRate = VIDEO_BIT_RATE_MAX;
+			if (videoBitRate > _VIDEO_BIT_RATE_MAX) {
+				videoBitRate = _VIDEO_BIT_RATE_MAX;
 			}
 
 			if (videoBitRate > 0) {
-				VIDEO_BIT_RATE_MAP.put(previewVideoContainer, videoBitRate);
+				_videoBitRateMap.put(previewVideoContainer, videoBitRate);
 
 				if (_log.isInfoEnabled()) {
 					_log.info(
@@ -329,35 +332,37 @@ public class LiferayVideoConverter extends LiferayConverter {
 	}
 
 	protected void initVideoFrameRateMap() {
-		if (VIDEO_FRAME_RATE_MAP != null) {
+		if (_videoFrameRateMap != null) {
 			return;
 		}
 
-		VIDEO_FRAME_RATE_MAP = new HashMap<String, IRational>();
+		_videoFrameRateMap = new HashMap<String, IRational>();
 
 		for (String previewVideoContainer :
 				PropsValues.DL_FILE_ENTRY_PREVIEW_VIDEO_CONTAINERS) {
 
 			Filter filter = new Filter(previewVideoContainer);
 
-			int numerator = GetterUtil.getInteger(PropsUtil.get(
-				PropsKeys.DL_FILE_ENTRY_PREVIEW_VIDEO_FRAME_RATE_NUMERATOR,
-				filter));
-
-			int denominator = GetterUtil.getInteger(PropsUtil.get(
-				PropsKeys.DL_FILE_ENTRY_PREVIEW_VIDEO_FRAME_RATE_DENOMINATOR,
-				filter));
+			int numerator = GetterUtil.getInteger(
+				PropsUtil.get(
+					PropsKeys.DL_FILE_ENTRY_PREVIEW_VIDEO_FRAME_RATE_NUMERATOR,
+					filter));
+			int denominator = GetterUtil.getInteger(
+				PropsUtil.get(
+					PropsKeys.
+						DL_FILE_ENTRY_PREVIEW_VIDEO_FRAME_RATE_DENOMINATOR,
+					filter));
 
 			if ((numerator > 0) && (denominator > 0)) {
-				IRational frameRate = IRational.make(numerator, denominator);
+				IRational iRational = IRational.make(numerator, denominator);
 
-				VIDEO_FRAME_RATE_MAP.put(previewVideoContainer, frameRate);
+				_videoFrameRateMap.put(previewVideoContainer, iRational);
 
 				if (_log.isInfoEnabled()) {
 					_log.info(
 						"Frame rate for " + previewVideoContainer + " set to " +
-							frameRate.getNumerator() + "/" +
-								frameRate.getDenominator());
+							iRational.getNumerator() + "/" +
+								iRational.getDenominator());
 				}
 			}
 		}
@@ -392,11 +397,11 @@ public class LiferayVideoConverter extends LiferayConverter {
 		}
 
 		if (bitRate == 0) {
-			bitRate = GetterUtil.get(
-				VIDEO_BIT_RATE_MAP.get(outputFormat), VIDEO_BIT_RATE_DEFAULT);
+			bitRate = GetterUtil.getInteger(
+				_videoBitRateMap.get(outputFormat), _VIDEO_BIT_RATE_DEFAULT);
 		}
-		else if (bitRate > VIDEO_BIT_RATE_MAX) {
-			bitRate = VIDEO_BIT_RATE_MAX;
+		else if (bitRate > _VIDEO_BIT_RATE_MAX) {
+			bitRate = _VIDEO_BIT_RATE_MAX;
 		}
 
 		if (_log.isInfoEnabled()) {
@@ -420,6 +425,26 @@ public class LiferayVideoConverter extends LiferayConverter {
 
 		outputIStreamCoder.setCodec(iCodec);
 
+		IRational iRational = inputIStreamCoder.getFrameRate();
+
+		if (_log.isInfoEnabled()) {
+			_log.info(
+				"Original frame rate " + iRational.getNumerator() + "/" +
+					iRational.getDenominator());
+		}
+
+		if (_videoFrameRateMap.containsKey(outputFormat)) {
+			iRational = _videoFrameRateMap.get(outputFormat);
+		}
+
+		if (_log.isInfoEnabled()) {
+			_log.info(
+				"Modified frame rate " + iRational.getNumerator() + "/" +
+					iRational.getDenominator());
+		}
+
+		outputIStreamCoder.setFrameRate(iRational);
+
 		if (inputIStreamCoder.getHeight() <= 0) {
 			throw new RuntimeException(
 				"Unable to determine height for " + _inputURL);
@@ -427,30 +452,10 @@ public class LiferayVideoConverter extends LiferayConverter {
 
 		outputIStreamCoder.setHeight(_height);
 
-		IRational frameRate = inputIStreamCoder.getFrameRate();
-
-		if (_log.isInfoEnabled()) {
-			_log.info(
-				"Original frameRate " + frameRate.getNumerator() + "/" +
-					frameRate.getDenominator());
-		}
-
-		if (VIDEO_FRAME_RATE_MAP.containsKey(outputFormat)) {
-			frameRate = VIDEO_FRAME_RATE_MAP.get(outputFormat);
-		}
-
-		if (_log.isInfoEnabled()) {
-			_log.info(
-				"Modified frameRate " + frameRate.getNumerator() + "/" +
-					frameRate.getDenominator());
-		}
-
-		outputIStreamCoder.setFrameRate(frameRate);
-
 		outputIStreamCoder.setPixelType(Type.YUV420P);
 		outputIStreamCoder.setTimeBase(
 			IRational.make(
-				frameRate.getDenominator(), frameRate.getNumerator()));
+				iRational.getDenominator(), iRational.getNumerator()));
 
 		if (inputIStreamCoder.getWidth() <= 0) {
 			throw new RuntimeException(
@@ -469,13 +474,22 @@ public class LiferayVideoConverter extends LiferayConverter {
 			outputIStreamCoder.getPixelType(), outputIStreamCoder.getWidth(),
 			outputIStreamCoder.getHeight());
 
-		if (iCodec.getID().equals(ICodec.ID.CODEC_ID_H264)) {
+		ICodec.ID iCodecID = iCodec.getID();
+
+		if (iCodecID.equals(ICodec.ID.CODEC_ID_H264)) {
 			Configuration.configure(_ffpresetProperties, outputIStreamCoder);
 		}
 	}
 
+	private static final int _VIDEO_BIT_RATE_DEFAULT = 250000;
+
+	private static final int _VIDEO_BIT_RATE_MAX = 1200000;
+
 	private static Log _log = LogFactoryUtil.getLog(
 		LiferayVideoConverter.class);
+
+	private static Map<String, Integer> _videoBitRateMap;
+	private static Map<String, IRational> _videoFrameRateMap;
 
 	private Properties _ffpresetProperties;
 	private int _height = 240;

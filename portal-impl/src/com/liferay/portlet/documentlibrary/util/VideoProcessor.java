@@ -218,7 +218,8 @@ public class VideoProcessor extends DefaultPreviewableProcessor {
 		if (_log.isInfoEnabled()) {
 			_log.info(
 				"Xuggler generated a thumbnail for " +
-					fileVersion.getTitle() + " in " + stopWatch);
+					fileVersion.getTitle() + " in " + stopWatch.getTime() +
+						"ms");
 		}
 	}
 
@@ -337,7 +338,8 @@ public class VideoProcessor extends DefaultPreviewableProcessor {
 		if (_log.isInfoEnabled()) {
 			_log.info(
 				"Xuggler generated a " + containerType + " preview video for " +
-					fileVersion.getTitle() + " in " + stopWatch);
+					fileVersion.getTitle() + " in " + stopWatch.getTime() +
+						"ms");
 		}
 	}
 

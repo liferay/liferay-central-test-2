@@ -40,8 +40,6 @@ import java.awt.image.RenderedImage;
 import java.io.File;
 import java.io.FileOutputStream;
 
-import java.util.Map;
-
 import javax.imageio.ImageIO;
 
 /**
@@ -221,7 +219,7 @@ public abstract class LiferayConverter {
 
 			offset += value;
 
-			// Workaround for ffmpeg bug. See
+			// Workaround for FFmpeg bug. See
 			// http://comments.gmane.org/gmane.comp.video.ffmpeg.devel/135657
 
 			ICodec.ID iCodecID = inputIStreamCoder.getCodecID();
@@ -538,7 +536,7 @@ public abstract class LiferayConverter {
 		}
 
 		if (bitRate == 0) {
-			bitRate = AUDIO_BIT_RATE_DEFAULT;
+			bitRate = _AUDIO_BIT_RATE_DEFAULT;
 		}
 
 		if (_log.isInfoEnabled()) {
@@ -569,7 +567,7 @@ public abstract class LiferayConverter {
 
 		outputIStreamCoder.setGlobalQuality(0);
 
-		outputIStreamCoder.setSampleRate(AUDIO_SAMPLE_RATE_DEFAULT);
+		outputIStreamCoder.setSampleRate(_AUDIO_SAMPLE_RATE_DEFAULT);
 
 		iAudioResamplers[index] = createIAudioResampler(
 			inputIStreamCoder, outputIStreamCoder);
@@ -728,19 +726,11 @@ public abstract class LiferayConverter {
 		}
 	}
 
-	protected static final int AUDIO_BIT_RATE_DEFAULT = 64000;
-
-	protected static final int AUDIO_SAMPLE_RATE_DEFAULT = 44100;
-
 	protected static final int DECODE_VIDEO_THUMBNAIL = 2;
 
-	protected static final int VIDEO_BIT_RATE_DEFAULT = 250000;
+	private static final int _AUDIO_BIT_RATE_DEFAULT = 64000;
 
-	protected static final int VIDEO_BIT_RATE_MAX = 1200000;
-
-	protected static Map<String, Integer> VIDEO_BIT_RATE_MAP;
-
-	protected static Map<String, IRational> VIDEO_FRAME_RATE_MAP;
+	private static final int _AUDIO_SAMPLE_RATE_DEFAULT = 44100;
 
 	private static Log _log = LogFactoryUtil.getLog(LiferayConverter.class);
 
