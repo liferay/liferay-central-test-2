@@ -134,7 +134,7 @@ public class EditQuestionAction extends PortletAction {
 
 				SessionErrors.add(
 					actionRequest,
-					portletConfig.getPortletName() + "hide-default-error");
+					portletConfig.getPortletName() + ".hideDefaultError");
 			}
 			else if (e instanceof QuestionExpiredException) {
 			}
