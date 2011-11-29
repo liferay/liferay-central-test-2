@@ -1050,7 +1050,7 @@
 		<comments>
 			Removed testdata.* because it conflicts with JBoss 5.1.
 			Version 1.6.6 is required to prevent issue with JBoss 7. Do not
-			upgrade until AspectJ issue is fixed see LPS-23053.
+			upgrade until AspectJ issue is fixed see LPS-23012.
 		</comments>
 	</library>
 	<library>
