@@ -16,7 +16,7 @@ package com.liferay.portal.service.impl;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.util.LocaleThreadLocal;
+import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.LayoutConstants;
@@ -72,16 +72,16 @@ public class LayoutPrototypeLocalServiceImpl
 		Group group = groupLocalService.addGroup(
 			userId, LayoutPrototype.class.getName(),
 			layoutPrototype.getLayoutPrototypeId(),
-			layoutPrototype.getName(LocaleThreadLocal.getThemeDisplayLocale()),
-			null, 0, friendlyURL, false, true, null);
+			layoutPrototype.getName(LocaleUtil.getDefault()), null, 0,
+			friendlyURL, false, true, null);
 
 		ServiceContext serviceContext = new ServiceContext();
 
 		layoutLocalService.addLayout(
 			userId, group.getGroupId(), true,
 			LayoutConstants.DEFAULT_PARENT_LAYOUT_ID,
-			layoutPrototype.getName(LocaleThreadLocal.getThemeDisplayLocale()),
-			null, null, LayoutConstants.TYPE_PORTLET, false, "/layout", false,
+			layoutPrototype.getName(LocaleUtil.getDefault()), null, null,
+			LayoutConstants.TYPE_PORTLET, false, "/layout", false,
 			serviceContext);
 
 		return layoutPrototype;
@@ -176,8 +176,7 @@ public class LayoutPrototypeLocalServiceImpl
 		Group group = groupLocalService.getLayoutPrototypeGroup(
 			layoutPrototype.getCompanyId(), layoutPrototypeId);
 
-		group.setName(
-			layoutPrototype.getName(LocaleThreadLocal.getThemeDisplayLocale()));
+		group.setName(layoutPrototype.getName(LocaleUtil.getDefault()));
 
 		groupPersistence.update(group, false);
 
