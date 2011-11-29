@@ -377,6 +377,9 @@ public class ClusterExecutorImpl
 		ObjectValuePair<Address, ClusterNode> liveInstance =
 			new ObjectValuePair<Address, ClusterNode>(address, clusterNode);
 
+		// Go through the extra step of removing, and then putting the new
+		// expiration time. See LPS-23463.
+
 		Long oldExpirationTime = _liveInstances.remove(liveInstance);
 
 		_liveInstances.put(liveInstance, expirationTime);
