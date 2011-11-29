@@ -39,9 +39,11 @@ public class LocaleThreadLocal {
 
 	private static ThreadLocal<Locale> _defaultLocale =
 		new AutoResetThreadLocal<Locale>(
-			LocaleThreadLocal.class + "._defaultLocale");
+			LocaleThreadLocal.class + "._defaultLocale",
+			LocaleUtil.getDefault());
 	private static ThreadLocal<Locale> _themeDisplayLocale =
 		new AutoResetThreadLocal<Locale>(
-			LocaleThreadLocal.class + "._themeDisplayLocale");
+			LocaleThreadLocal.class + "._themeDisplayLocale",
+			LocaleUtil.getDefault());
 
 }
