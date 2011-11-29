@@ -111,7 +111,8 @@ public class VirtualHostFilter extends BasePortalFilter {
 			friendlyURL.startsWith(_PATH_VTI) ||
 			friendlyURL.startsWith(_PATH_WAP) ||
 			friendlyURL.startsWith(_PATH_WIDGET) ||
-			friendlyURL.startsWith(_PATH_XMLRPC)) {
+			friendlyURL.startsWith(_PATH_XMLRPC) ||
+			friendlyURL.startsWith(_PATH_TUNNEL_WEB)) {
 
 			return false;
 		}
@@ -359,6 +360,8 @@ public class VirtualHostFilter extends BasePortalFilter {
 	private static final String _PATH_WIDGET = "/widget/";
 
 	private static final String _PATH_XMLRPC = "/xmlrpc/";
+
+	private static final String _PATH_TUNNEL_WEB = "/tunnel-web/";
 
 	private static final String _PRIVATE_GROUP_SERVLET_MAPPING =
 		PropsValues.LAYOUT_FRIENDLY_URL_PRIVATE_GROUP_SERVLET_MAPPING;

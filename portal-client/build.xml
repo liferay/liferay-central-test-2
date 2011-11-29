@@ -28,7 +28,7 @@
 			newenvironment="true"
 		>
 			<jvmarg value="-Dexternal-properties=com/liferay/portal/tools/dependencies/portal-tools.properties" />
-			<arg value="${project.dir}/tunnel-web/docroot/WEB-INF/server-config.wsdd" />
+			<arg value="${project.dir}/portal-web/docroot/WEB-INF/server-config.wsdd" />
 			<arg value="src" />
 			<arg value="namespace-mapping.properties" />
 			<arg value="${client.url}" />
