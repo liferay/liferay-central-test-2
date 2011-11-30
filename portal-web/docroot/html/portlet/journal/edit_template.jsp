@@ -164,7 +164,7 @@ if (template == null) {
 
 			<c:if test="<%= portletDisplay.isWebDAVEnabled() %>">
 				<aui:field-wrapper label="webdav-url">
-					<liferay-ui:input-resource url='<%= themeDisplay.getPortalURL() + "/tunnel-web/secure/webdav" + group.getFriendlyURL() + "/journal/Templates/" + templateId %>' />
+					<liferay-ui:input-resource url='<%= themeDisplay.getPortalURL() + "/api/secure/webdav" + group.getFriendlyURL() + "/journal/Templates/" + templateId %>' />
 				</aui:field-wrapper>
 			</c:if>
 		</c:if>

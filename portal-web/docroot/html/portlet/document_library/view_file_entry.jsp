@@ -103,7 +103,7 @@ if (portletDisplay.isWebDAVEnabled()) {
 
 	Group group = themeDisplay.getScopeGroup();
 
-	webDavUrl = themeDisplay.getPortalURL() + "/tunnel-web/secure/webdav" + group.getFriendlyURL() + "/document_library" + sb.toString();
+	webDavUrl = themeDisplay.getPortalURL() + "/api/secure/webdav" + group.getFriendlyURL() + "/document_library" + sb.toString();
 }
 
 boolean hasAudio = AudioProcessor.hasAudio(fileVersion);
