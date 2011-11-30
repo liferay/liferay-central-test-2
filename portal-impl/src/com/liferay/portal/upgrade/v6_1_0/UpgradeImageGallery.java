@@ -622,7 +622,6 @@ public class UpgradeImageGallery extends UpgradeProcess {
 		"com.liferay.portlet.imagegallery.model.IGImage";
 
 	private Hook _sourceHook;
-
 	private String _sourceHookClassName;
 
 }
