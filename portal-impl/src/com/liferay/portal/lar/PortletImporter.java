@@ -502,10 +502,10 @@ public class PortletImporter {
 	}
 
 	/**
-	 * @see {@link DLPortletDataHandlerImpl#getFolderName(String, long, long,
-	 *      String, int)}
 	 * @see {@link DLPortletDataHandlerImpl#getFileEntryTypeName(String, long,
 	 *      long, String, int)}
+	 * @see {@link DLPortletDataHandlerImpl#getFolderName(String, long, long,
+	 *      String, int)}
 	 */
 	protected String getAssetCategoryName(
 			String uuid, long parentCategoryId, String name, int count)
@@ -560,10 +560,10 @@ public class PortletImporter {
 	}
 
 	/**
-	 * @see {@link DLPortletDataHandlerImpl#getFolderName(String, long, long,
-	 *      String, int)}
 	 * @see {@link DLPortletDataHandlerImpl#getFileEntryTypeName(String, long,
 	 *      long, String, int)}
+	 * @see {@link DLPortletDataHandlerImpl#getFolderName(String, long, long,
+	 *      String, int)}
 	 */
 	protected String getAssetVocabularyName(
 			String uuid, long groupId, String name, int count)
