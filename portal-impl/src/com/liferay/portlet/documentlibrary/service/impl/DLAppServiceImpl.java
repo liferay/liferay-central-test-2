@@ -456,7 +456,8 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 		FileVersion fileVersion = fileEntry.getLatestFileVersion();
 
 		dlAppHelperLocalService.updateFileEntry(
-			getUserId(), fileEntry, fileVersion, fileVersion.getFileVersionId());
+			getUserId(), fileEntry, fileVersion,
+			fileVersion.getFileVersionId());
 	}
 
 	/**
@@ -490,10 +491,6 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 		repository.checkInFileEntry(fileEntryId, lockUuid);
 
 		FileEntry fileEntry = getFileEntry(fileEntryId);
-
-		ServiceContext serviceContext = new ServiceContext();
-
-		serviceContext.setWorkflowAction(WorkflowConstants.ACTION_PUBLISH);
 
 		FileVersion fileVersion = fileEntry.getLatestFileVersion();
 
