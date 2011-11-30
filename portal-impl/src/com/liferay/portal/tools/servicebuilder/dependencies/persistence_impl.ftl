@@ -379,19 +379,21 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 		return ${entity.varName};
 	}
 
-	<#if entity.hasPrimitivePK(false)>
-		/**
-		 * Removes the ${entity.humanName} with the primary key from the database. Also notifies the appropriate model listeners.
-		 *
-		 * @param ${entity.PKVarName} the primary key of the ${entity.humanName}
-		 * @return the ${entity.humanName} that was removed
-		 * @throws ${packagePath}.${noSuchEntity}Exception if a ${entity.humanName} with the primary key could not be found
-		 * @throws SystemException if a system exception occurred
-		 */
-		public ${entity.name} remove(${entity.PKClassName} ${entity.PKVarName}) throws ${noSuchEntity}Exception, SystemException {
+	/**
+	 * Removes the ${entity.humanName} with the primary key from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param ${entity.PKVarName} the primary key of the ${entity.humanName}
+	 * @return the ${entity.humanName} that was removed
+	 * @throws ${packagePath}.${noSuchEntity}Exception if a ${entity.humanName} with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public ${entity.name} remove(${entity.PKClassName} ${entity.PKVarName}) throws ${noSuchEntity}Exception, SystemException {
+		<#if entity.hasPrimitivePK(false)>
 			return remove(${serviceBuilder.getPrimitiveObj("${entity.PKClassName}")}.valueOf(${entity.PKVarName}));
-		}
-	</#if>
+		<#else>
+			return remove((Serializable)${entity.PKVarName});
+		</#if>
+	}
 
 	/**
 	 * Removes the ${entity.humanName} with the primary key from the database. Also notifies the appropriate model listeners.
