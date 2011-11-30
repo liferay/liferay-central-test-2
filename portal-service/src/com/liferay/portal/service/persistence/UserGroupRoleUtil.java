@@ -94,14 +94,6 @@ public class UserGroupRoleUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
-	 */
-	public static UserGroupRole remove(UserGroupRole userGroupRole)
-		throws SystemException {
-		return getPersistence().remove(userGroupRole);
-	}
-
-	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
 	 */
 	public static UserGroupRole update(UserGroupRole userGroupRole,
@@ -146,6 +138,21 @@ public class UserGroupRoleUtil {
 	public static com.liferay.portal.model.UserGroupRole create(
 		com.liferay.portal.service.persistence.UserGroupRolePK userGroupRolePK) {
 		return getPersistence().create(userGroupRolePK);
+	}
+
+	/**
+	* Removes the user group role with the primary key from the database. Also notifies the appropriate model listeners.
+	*
+	* @param userGroupRolePK the primary key of the user group role
+	* @return the user group role that was removed
+	* @throws com.liferay.portal.NoSuchUserGroupRoleException if a user group role with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portal.model.UserGroupRole remove(
+		com.liferay.portal.service.persistence.UserGroupRolePK userGroupRolePK)
+		throws com.liferay.portal.NoSuchUserGroupRoleException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().remove(userGroupRolePK);
 	}
 
 	public static com.liferay.portal.model.UserGroupRole updateImpl(

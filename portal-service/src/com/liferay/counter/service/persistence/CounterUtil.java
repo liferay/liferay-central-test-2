@@ -95,13 +95,6 @@ public class CounterUtil {
 	}
 
 	/**
-	 * @see com.liferay.portal.service.persistence.BasePersistence#remove(com.liferay.portal.model.BaseModel)
-	 */
-	public static Counter remove(Counter counter) throws SystemException {
-		return getPersistence().remove(counter);
-	}
-
-	/**
 	 * @see com.liferay.portal.service.persistence.BasePersistence#update(com.liferay.portal.model.BaseModel, boolean)
 	 */
 	public static Counter update(Counter counter, boolean merge)
@@ -145,6 +138,21 @@ public class CounterUtil {
 	public static com.liferay.counter.model.Counter create(
 		java.lang.String name) {
 		return getPersistence().create(name);
+	}
+
+	/**
+	* Removes the counter with the primary key from the database. Also notifies the appropriate model listeners.
+	*
+	* @param name the primary key of the counter
+	* @return the counter that was removed
+	* @throws com.liferay.counter.NoSuchCounterException if a counter with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.counter.model.Counter remove(
+		java.lang.String name)
+		throws com.liferay.counter.NoSuchCounterException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().remove(name);
 	}
 
 	public static com.liferay.counter.model.Counter updateImpl(
