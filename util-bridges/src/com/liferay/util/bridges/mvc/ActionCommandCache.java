@@ -106,8 +106,7 @@ public class ActionCommandCache {
 
 		actionCommands = new ArrayList<ActionCommand>();
 
-		String[] actionCommandNames = StringUtil.split(
-			actionCommandChain, CharPool.COMMA);
+		String[] actionCommandNames = StringUtil.split(actionCommandChain);
 
 		for (String actionCommandName : actionCommandNames) {
 			ActionCommand actionCommand = getActionCommand(actionCommandName);
