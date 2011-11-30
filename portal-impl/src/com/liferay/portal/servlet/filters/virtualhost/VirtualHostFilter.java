@@ -77,7 +77,7 @@ public class VirtualHostFilter extends BasePortalFilter {
 				keyword = StringPool.SLASH + keyword + StringPool.SLASH;
 			}
 
-			_slashedKeywords[i] = StringUtil.quote(keyword, StringPool.SLASH);
+			_slashedKeywords[i] = keyword;
 		}
 	}
 
