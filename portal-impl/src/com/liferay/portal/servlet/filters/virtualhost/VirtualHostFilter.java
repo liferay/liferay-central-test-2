@@ -68,8 +68,16 @@ public class VirtualHostFilter extends BasePortalFilter {
 		for (int i = 0; i < PropsValues.LAYOUT_FRIENDLY_URL_KEYWORDS.length;
 				i++) {
 
-			_slashedKeywords[i] = StringUtil.quote(
-				PropsValues.LAYOUT_FRIENDLY_URL_KEYWORDS[i], StringPool.SLASH);
+			String keyword = PropsValues.LAYOUT_FRIENDLY_URL_KEYWORDS[i];
+
+			if (keyword.contains(StringPool.PERIOD)) {
+				keyword = StringPool.SLASH + keyword;
+			}
+			else {
+				keyword = StringPool.SLASH + keyword + StringPool.SLASH;
+			}
+
+			_slashedKeywords[i] = StringUtil.quote(keyword, StringPool.SLASH);
 		}
 	}
 
