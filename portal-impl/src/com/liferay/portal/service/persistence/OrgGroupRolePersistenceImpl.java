@@ -252,19 +252,6 @@ public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl<OrgGroupRol
 		}
 	}
 
-	/**
-	 * Removes the org group role with the primary key from the database. Also notifies the appropriate model listeners.
-	 *
-	 * @param orgGroupRolePK the primary key of the org group role
-	 * @return the org group role that was removed
-	 * @throws com.liferay.portal.NoSuchOrgGroupRoleException if a org group role with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	public OrgGroupRole remove(OrgGroupRolePK orgGroupRolePK)
-		throws NoSuchOrgGroupRoleException, SystemException {
-		return remove((Serializable)orgGroupRolePK);
-	}
-
 	@Override
 	protected OrgGroupRole removeImpl(OrgGroupRole orgGroupRole)
 		throws SystemException {

@@ -319,19 +319,6 @@ public class UserGroupRolePersistenceImpl extends BasePersistenceImpl<UserGroupR
 		}
 	}
 
-	/**
-	 * Removes the user group role with the primary key from the database. Also notifies the appropriate model listeners.
-	 *
-	 * @param userGroupRolePK the primary key of the user group role
-	 * @return the user group role that was removed
-	 * @throws com.liferay.portal.NoSuchUserGroupRoleException if a user group role with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	public UserGroupRole remove(UserGroupRolePK userGroupRolePK)
-		throws NoSuchUserGroupRoleException, SystemException {
-		return remove((Serializable)userGroupRolePK);
-	}
-
 	@Override
 	protected UserGroupRole removeImpl(UserGroupRole userGroupRole)
 		throws SystemException {

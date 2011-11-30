@@ -60,18 +60,6 @@ public interface CounterPersistence extends BasePersistence<Counter> {
 	*/
 	public com.liferay.counter.model.Counter create(java.lang.String name);
 
-	/**
-	* Removes the counter with the primary key from the database. Also notifies the appropriate model listeners.
-	*
-	* @param name the primary key of the counter
-	* @return the counter that was removed
-	* @throws com.liferay.counter.NoSuchCounterException if a counter with the primary key could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public com.liferay.counter.model.Counter remove(java.lang.String name)
-		throws com.liferay.counter.NoSuchCounterException,
-			com.liferay.portal.kernel.exception.SystemException;
-
 	public com.liferay.counter.model.Counter updateImpl(
 		com.liferay.counter.model.Counter counter, boolean merge)
 		throws com.liferay.portal.kernel.exception.SystemException;

@@ -60,19 +60,6 @@ public interface OrgGroupPermissionPersistence extends BasePersistence<OrgGroupP
 	public com.liferay.portal.model.OrgGroupPermission create(
 		com.liferay.portal.service.persistence.OrgGroupPermissionPK orgGroupPermissionPK);
 
-	/**
-	* Removes the org group permission with the primary key from the database. Also notifies the appropriate model listeners.
-	*
-	* @param orgGroupPermissionPK the primary key of the org group permission
-	* @return the org group permission that was removed
-	* @throws com.liferay.portal.NoSuchOrgGroupPermissionException if a org group permission with the primary key could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public com.liferay.portal.model.OrgGroupPermission remove(
-		com.liferay.portal.service.persistence.OrgGroupPermissionPK orgGroupPermissionPK)
-		throws com.liferay.portal.NoSuchOrgGroupPermissionException,
-			com.liferay.portal.kernel.exception.SystemException;
-
 	public com.liferay.portal.model.OrgGroupPermission updateImpl(
 		com.liferay.portal.model.OrgGroupPermission orgGroupPermission,
 		boolean merge)

@@ -148,21 +148,6 @@ public class OrgGroupRoleUtil {
 		return getPersistence().create(orgGroupRolePK);
 	}
 
-	/**
-	* Removes the org group role with the primary key from the database. Also notifies the appropriate model listeners.
-	*
-	* @param orgGroupRolePK the primary key of the org group role
-	* @return the org group role that was removed
-	* @throws com.liferay.portal.NoSuchOrgGroupRoleException if a org group role with the primary key could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public static com.liferay.portal.model.OrgGroupRole remove(
-		com.liferay.portal.service.persistence.OrgGroupRolePK orgGroupRolePK)
-		throws com.liferay.portal.NoSuchOrgGroupRoleException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().remove(orgGroupRolePK);
-	}
-
 	public static com.liferay.portal.model.OrgGroupRole updateImpl(
 		com.liferay.portal.model.OrgGroupRole orgGroupRole, boolean merge)
 		throws com.liferay.portal.kernel.exception.SystemException {
