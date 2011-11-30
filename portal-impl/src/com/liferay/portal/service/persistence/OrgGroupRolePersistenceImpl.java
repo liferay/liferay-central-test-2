@@ -262,7 +262,7 @@ public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl<OrgGroupRol
 	 */
 	public OrgGroupRole remove(OrgGroupRolePK orgGroupRolePK)
 		throws NoSuchOrgGroupRoleException, SystemException {
-		return remove(orgGroupRolePK);
+		return remove((Serializable)orgGroupRolePK);
 	}
 
 	@Override

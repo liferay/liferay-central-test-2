@@ -271,7 +271,7 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 	 */
 	public OrgGroupPermission remove(OrgGroupPermissionPK orgGroupPermissionPK)
 		throws NoSuchOrgGroupPermissionException, SystemException {
-		return remove(orgGroupPermissionPK);
+		return remove((Serializable)orgGroupPermissionPK);
 	}
 
 	@Override

@@ -334,7 +334,7 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 	 */
 	public UserGroupGroupRole remove(UserGroupGroupRolePK userGroupGroupRolePK)
 		throws NoSuchUserGroupGroupRoleException, SystemException {
-		return remove(userGroupGroupRolePK);
+		return remove((Serializable)userGroupGroupRolePK);
 	}
 
 	@Override

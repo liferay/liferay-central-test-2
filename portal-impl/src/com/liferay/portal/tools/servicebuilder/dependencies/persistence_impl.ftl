@@ -429,7 +429,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 		<#if entity.hasPrimitivePK(false)>
 			return remove(${serviceBuilder.getPrimitiveObj("${entity.PKClassName}")}.valueOf(${entity.PKVarName}));
 		<#else>
-			return remove(${entity.PKVarName});
+			return remove((Serializable)${entity.PKVarName});
 		</#if>
 	}
 
