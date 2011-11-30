@@ -193,8 +193,7 @@ public class AudioProcessor extends DefaultPreviewableProcessor {
 		if (_log.isInfoEnabled()) {
 			_log.info(
 				"Xuggler generated a preview audio for " +
-					fileVersion.getTitle() + " in " + stopWatch.getTime() +
-						"ms");
+					fileVersion.getTitle() + " in " + stopWatch);
 		}
 	}
 
