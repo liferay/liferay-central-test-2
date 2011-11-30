@@ -119,6 +119,10 @@ public class SessionAuthToken implements AuthToken {
 			Portlet portlet = PortletLocalServiceUtil.getPortletById(
 				companyId, ppid);
 
+			if (portlet == null) {
+				return false;
+			}
+
 			String strutsPath = strutsAction.substring(
 				1, strutsAction.lastIndexOf(CharPool.SLASH));
 
