@@ -87,10 +87,12 @@ public class JSONWebServiceServlet extends JSONServlet {
 			return;
 		}
 
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher(
-			"/WEB-INF/jsp/jsonws/index.jsp");
+		String mainPath = PortalUtil.getPathMain();
 
-		requestDispatcher.include(request, response);
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher(
+			mainPath + "/portal/api/jsonws");
+
+		requestDispatcher.forward(request, response);
 	}
 
 	@Override
