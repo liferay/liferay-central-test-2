@@ -142,7 +142,7 @@ public class NavItem implements Serializable {
 
 		Object velocityTaglib = request.getAttribute(WebKeys.VELOCITY_TAGLIB);
 
-		Method method = MethodCache.get(_LAYOUT_ICON_METHOD_KEY);
+		Method method = MethodCache.get(_methodKey);
 
 		method.invoke(velocityTaglib, _layout);
 	}
@@ -162,9 +162,9 @@ public class NavItem implements Serializable {
 			_vars.getAncestorPlid());
 	}
 
-	private static final MethodKey _LAYOUT_ICON_METHOD_KEY =
-		new MethodKey("com.liferay.taglib.util.VelocityTaglib", "layoutIcon",
-			new Class[] {Layout.class});
+	private static MethodKey _methodKey = new MethodKey(
+		"com.liferay.taglib.util.VelocityTaglib", "layoutIcon",
+		new Class[] {Layout.class});
 
 	private RequestVars _vars;
 	private Layout _layout;
