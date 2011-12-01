@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -45,8 +46,6 @@ import com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil;
 
 import java.io.InputStream;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -112,19 +111,14 @@ public class ConvertDocumentLibrary extends ConvertProcess {
 		PropsValues.DL_STORE_IMPL = targetStoreClassName;
 	}
 
-	protected List<DLFileVersion> getSortedDLFileVersions(
-		DLFileEntry fileEntry, boolean ascending) throws SystemException {
+	protected List<DLFileVersion> getDLFileVersions(DLFileEntry dlFileEntry)
+		throws SystemException {
 
-		List<DLFileVersion> dlFileVersions = fileEntry.getFileVersions(
+		List<DLFileVersion> dlFileVersions = dlFileEntry.getFileVersions(
 			WorkflowConstants.STATUS_ANY);
 
-		List<DLFileVersion> sortedDlFileVersions =
-			new ArrayList<DLFileVersion>(dlFileVersions);
-
-		Collections.sort(
-			sortedDlFileVersions, new FileVersionVersionComparator(ascending));
-
-		return sortedDlFileVersions;
+		return ListUtil.sort(
+			dlFileVersions, new FileVersionVersionComparator(true));
 	}
 
 	protected void migrateDL() throws Exception {
@@ -156,8 +150,7 @@ public class ConvertDocumentLibrary extends ConvertProcess {
 
 		String fileName = fileEntry.getName();
 
-		List<DLFileVersion> dlFileVersions = getSortedDLFileVersions(
-			fileEntry, true);
+		List<DLFileVersion> dlFileVersions = getDLFileVersions(fileEntry);
 
 		if (dlFileVersions.isEmpty()) {
 			String versionNumber = Store.VERSION_DEFAULT;
