@@ -1183,7 +1183,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 
 		for (Layout layout : layouts) {
 			if (LayoutPermissionUtil.contains(
-					getPermissionChecker(), layout.getLayoutId(),
+					getPermissionChecker(), layout.getPlid(),
 					ActionKeys.VIEW)) {
 
 				filteredLayouts.add(layout);
