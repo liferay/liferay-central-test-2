@@ -87,8 +87,8 @@ public class UserGroupServiceImpl extends UserGroupServiceBaseImpl {
 	 * @param  privateLayoutSetPrototypeId the primary key of the user group's
 	 *         private layout set
 	 * @return the user group
-	 * @throws PortalException if the user group's information was invalid or
-	 *         if the user did not have permission to add the user group
+	 * @throws PortalException if the user group's information was invalid or if
+	 *         the user did not have permission to add the user group
 	 * @throws SystemException if a system exception occurred
 	 */
 	public UserGroup addUserGroup(
@@ -110,8 +110,8 @@ public class UserGroupServiceImpl extends UserGroupServiceBaseImpl {
 	 * Deletes the user group.
 	 *
 	 * @param  userGroupId the primary key of the user group
-	 * @throws PortalException if a user group with the primary key could not
-	 *         be found, if the user did not have permission to delete the user
+	 * @throws PortalException if a user group with the primary key could not be
+	 *         found, if the user did not have permission to delete the user
 	 *         group, or if the user group had a workflow in approved status
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -129,8 +129,8 @@ public class UserGroupServiceImpl extends UserGroupServiceBaseImpl {
 	 *
 	 * @param  userGroupId the primary key of the user group
 	 * @return Returns the user group with the primary key
-	 * @throws PortalException if a user group with the primary key could not
-	 *         be found or if the user did not have permission to view the user
+	 * @throws PortalException if a user group with the primary key could not be
+	 *         found or if the user did not have permission to view the user
 	 *         group
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -229,8 +229,8 @@ public class UserGroupServiceImpl extends UserGroupServiceBaseImpl {
 	 *         private layout set
 	 * @return the user group
 	 * @throws PortalException if a user group with the primary key was not
-	 *         found, if the new information was invalid, or if the user did
-	 *         not have permission to update the user group information
+	 *         found, if the new information was invalid, or if the user did not
+	 *         have permission to update the user group information
 	 * @throws SystemException if a system exception occurred
 	 */
 	public UserGroup updateUserGroup(
