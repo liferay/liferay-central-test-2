@@ -42,6 +42,7 @@ import jargs.gnu.CmdLineParser;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.InputStream;
 import java.io.Reader;
 
 import java.util.ArrayList;
@@ -967,14 +968,13 @@ public class JavadocFormatter {
 	}
 
 	private void _format(String fileName) throws Exception {
-		FileInputStream fis = new FileInputStream(
-			new File(_basedir + fileName));
+		InputStream inputStream = new FileInputStream(_basedir + fileName);
 
-		byte[] bytes = new byte[fis.available()];
+		byte[] bytes = new byte[inputStream.available()];
 
-		fis.read(bytes);
+		inputStream.read(bytes);
 
-		fis.close();
+		inputStream.close();
 
 		String originalContent = new String(bytes);
 
