@@ -220,10 +220,10 @@ public class AssetEntryServiceImpl extends AssetEntryServiceBaseImpl {
 			entryQuery);
 
 		List<AssetEntry> filteredEntries = null;
-		int length = 0;
+		int filteredEntriesCount = 0;
 
 		if (entryQuery.isEnablePermissions()) {
-					PermissionChecker permissionChecker = getPermissionChecker();
+			PermissionChecker permissionChecker = getPermissionChecker();
 
 			filteredEntries = new ArrayList<AssetEntry>();
 
@@ -250,15 +250,15 @@ public class AssetEntryServiceImpl extends AssetEntryServiceBaseImpl {
 				}
 			}
 
-			length = filteredEntries.size();
+			filteredEntriesCount = filteredEntries.size();
 
 			if ((end != QueryUtil.ALL_POS) && (start != QueryUtil.ALL_POS)) {
-				if (end > length) {
-					end = length;
+				if (end > filteredEntriesCount) {
+					end = filteredEntriesCount;
 				}
 
-				if (start > length) {
-					start = length;
+				if (start > filteredEntriesCount) {
+					start = filteredEntriesCount;
 				}
 
 				filteredEntries = filteredEntries.subList(start, end);
@@ -269,10 +269,10 @@ public class AssetEntryServiceImpl extends AssetEntryServiceBaseImpl {
 		}
 		else {
 			filteredEntries = entries;
-			length = entries.size();
+			filteredEntriesCount = entries.size();
 		}
 
-		results = new Object[] {filteredEntries, length};
+		results = new Object[] {filteredEntries, filteredEntriesCount};
 
 		threadLocalCache.put(key, results);
 

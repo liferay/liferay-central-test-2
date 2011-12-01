@@ -170,10 +170,6 @@ public class AssetEntryQuery {
 		return _anyTagIds;
 	}
 
-	public boolean isEnablePermissions() {
-		return _enablePermissions;
-	}
-
 	public long[] getClassNameIds() {
 		return _classNameIds;
 	}
@@ -250,6 +246,10 @@ public class AssetEntryQuery {
 		return _start;
 	}
 
+	public boolean isEnablePermissions() {
+		return _enablePermissions;
+	}
+
 	public boolean isExcludeZeroViewCount() {
 		return _excludeZeroViewCount;
 	}
@@ -282,10 +282,6 @@ public class AssetEntryQuery {
 		_toString = null;
 	}
 
-	public void setEnablePermissions(boolean enablePermissions) {
-		this._enablePermissions = enablePermissions;
-	}
-
 	public void setClassName(String className) {
 		long classNameId = PortalUtil.getClassNameId(className);
 
@@ -304,6 +300,10 @@ public class AssetEntryQuery {
 		_classTypeIds = classTypeIds;
 
 		_toString = null;
+	}
+
+	public void setEnablePermissions(boolean enablePermissions) {
+		_enablePermissions = enablePermissions;
 	}
 
 	public void setLayout(Layout layout) {
