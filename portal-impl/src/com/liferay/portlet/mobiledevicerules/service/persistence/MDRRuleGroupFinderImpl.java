@@ -43,6 +43,22 @@ public class MDRRuleGroupFinderImpl extends BasePersistenceImpl<MDRRuleGroup>
 	public static String FIND_BY_G_N =
 		MDRRuleGroupFinder.class.getName() + ".findByG_N";
 
+	public int countByKeywords(long groupId, String keywords)
+		throws SystemException {
+
+		String[] names = null;
+		boolean andOperator = false;
+
+		if (Validator.isNotNull(keywords)) {
+			names = CustomSQLUtil.keywords(keywords);
+		}
+		else {
+			andOperator = true;
+		}
+
+		return countByG_N(groupId, names, andOperator);
+	}
+
 	public int countByG_N(long groupId, String name, boolean andOperator)
 		throws SystemException {
 
@@ -96,7 +112,8 @@ public class MDRRuleGroupFinderImpl extends BasePersistenceImpl<MDRRuleGroup>
 		}
 	}
 
-	public int countByKeywords(long groupId, String keywords)
+	public List<MDRRuleGroup> findByKeywords(
+			long groupId, String keywords, int start, int end)
 		throws SystemException {
 
 		String[] names = null;
@@ -109,7 +126,7 @@ public class MDRRuleGroupFinderImpl extends BasePersistenceImpl<MDRRuleGroup>
 			andOperator = true;
 		}
 
-		return countByG_N(groupId, names, andOperator);
+		return findByG_N(groupId, names, andOperator, start, end);
 	}
 
 	public List<MDRRuleGroup> findByG_N(
@@ -165,23 +182,6 @@ public class MDRRuleGroupFinderImpl extends BasePersistenceImpl<MDRRuleGroup>
 		finally {
 			closeSession(session);
 		}
-	}
-
-	public List<MDRRuleGroup> findByKeywords(
-			long groupId, String keywords, int start, int end)
-		throws SystemException {
-
-		String[] names = null;
-		boolean andOperator = false;
-
-		if (Validator.isNotNull(keywords)) {
-			names = CustomSQLUtil.keywords(keywords);
-		}
-		else {
-			andOperator = true;
-		}
-
-		return findByG_N(groupId, names, andOperator, start, end);
 	}
 
 }

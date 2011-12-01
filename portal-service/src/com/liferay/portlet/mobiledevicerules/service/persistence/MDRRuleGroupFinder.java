@@ -18,6 +18,9 @@ package com.liferay.portlet.mobiledevicerules.service.persistence;
  * @author Edward C. Han
  */
 public interface MDRRuleGroupFinder {
+	public int countByKeywords(long groupId, java.lang.String keywords)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public int countByG_N(long groupId, java.lang.String name,
 		boolean andOperator)
 		throws com.liferay.portal.kernel.exception.SystemException;
@@ -26,7 +29,8 @@ public interface MDRRuleGroupFinder {
 		boolean andOperator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public int countByKeywords(long groupId, java.lang.String keywords)
+	public java.util.List<com.liferay.portlet.mobiledevicerules.model.MDRRuleGroup> findByKeywords(
+		long groupId, java.lang.String keywords, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portlet.mobiledevicerules.model.MDRRuleGroup> findByG_N(
@@ -40,8 +44,4 @@ public interface MDRRuleGroupFinder {
 	public java.util.List<com.liferay.portlet.mobiledevicerules.model.MDRRuleGroup> findByG_N(
 		long groupId, java.lang.String[] names, boolean andOperator, int start,
 		int end) throws com.liferay.portal.kernel.exception.SystemException;
-
-	public java.util.List<com.liferay.portlet.mobiledevicerules.model.MDRRuleGroup> findByKeywords(
-		long groupId, java.lang.String keywords, int start, int end)
-		throws com.liferay.portal.kernel.exception.SystemException;
 }
