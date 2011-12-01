@@ -451,6 +451,7 @@ public class LiferayLocalRepository
 		return typeSettingsProperties;
 	}
 
+	@Override
 	protected void initByFileEntryId(long fileEntryId) {
 		try {
 			DLFileEntry dlFileEntry = dlFileEntryLocalService.getFileEntry(
@@ -470,6 +471,7 @@ public class LiferayLocalRepository
 		}
 	}
 
+	@Override
 	protected void initByFileVersionId(long fileVersionId) {
 		try {
 			DLFileVersion dlFileVersion =
@@ -489,6 +491,7 @@ public class LiferayLocalRepository
 		}
 	}
 
+	@Override
 	protected void initByFolderId(long folderId) {
 		try {
 			DLFolder dlFolder = dlFolderLocalService.getFolder(folderId);
@@ -507,17 +510,18 @@ public class LiferayLocalRepository
 		}
 	}
 
+	@Override
 	protected void initByRepositoryId(long repositoryId) {
-		setRepositoryId(repositoryId);
 		setGroupId(repositoryId);
+		setRepositoryId(repositoryId);
 
 		try {
 			Repository repository = repositoryLocalService.getRepository(
 				repositoryId);
 
-			setRepositoryId(repository.getRepositoryId());
-			setGroupId(repository.getGroupId());
 			setDlFolderId(repository.getDlFolderId());
+			setGroupId(repository.getGroupId());
+			setRepositoryId(repository.getRepositoryId());
 		}
 		catch (Exception e) {
 		}

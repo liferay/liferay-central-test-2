@@ -205,16 +205,16 @@ public abstract class LiferayRepositoryBase extends LiferayBase {
 
 	protected abstract void initByRepositoryId(long repositoryId);
 
-	protected void setRepositoryId(long repositoryId) {
-		_repositoryId = repositoryId;
+	protected void setDlFolderId(long dlFolderId) {
+		_dlFolderId = dlFolderId;
 	}
 
 	protected void setGroupId(long groupId) {
 		_groupId = groupId;
 	}
 
-	protected void setDlFolderId(long dlFolderId) {
-		_dlFolderId = dlFolderId;
+	protected void setRepositoryId(long repositoryId) {
+		_repositoryId = repositoryId;
 	}
 
 	protected boolean isDefaultRepository() {

@@ -641,6 +641,7 @@ public class LiferayRepository
 			toFolderId(folderId), lockUuid);
 	}
 
+	@Override
 	protected void initByFileEntryId(long fileEntryId) {
 		try {
 			DLFileEntry dlFileEntry = dlFileEntryService.getFileEntry(
@@ -660,6 +661,7 @@ public class LiferayRepository
 		}
 	}
 
+	@Override
 	protected void initByFileVersionId(long fileVersionId) {
 		try {
 			DLFileVersion dlFileVersion =
@@ -679,6 +681,7 @@ public class LiferayRepository
 		}
 	}
 
+	@Override
 	protected void initByFolderId(long folderId) {
 		try {
 			DLFolder dlFolder = dlFolderService.getFolder(folderId);
@@ -697,17 +700,18 @@ public class LiferayRepository
 		}
 	}
 
+	@Override
 	protected void initByRepositoryId(long repositoryId) {
-		setRepositoryId(repositoryId);
 		setGroupId(repositoryId);
+		setRepositoryId(repositoryId);
 
 		try {
 			com.liferay.portal.model.Repository repository =
 				repositoryService.getRepository(repositoryId);
 
-			setRepositoryId(repository.getRepositoryId());
-			setGroupId(repository.getGroupId());
 			setDlFolderId(repository.getDlFolderId());
+			setGroupId(repository.getGroupId());
+			setRepositoryId(repository.getRepositoryId());
 		}
 		catch (Exception e) {
 		}

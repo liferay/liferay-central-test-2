@@ -128,6 +128,7 @@ public class RepositoryLocalServiceImpl extends RepositoryLocalServiceBaseImpl {
 		dlFolderLocalService.deleteAll(groupId);
 	}
 
+	@Override
 	public void deleteRepository(long repositoryId)
 		throws PortalException, SystemException {
 
@@ -225,6 +226,7 @@ public class RepositoryLocalServiceImpl extends RepositoryLocalServiceBaseImpl {
 		return localRepositoryImpl;
 	}
 
+	@Override
 	public Repository getRepository(long repositoryId)
 		throws PortalException, SystemException {
 
@@ -315,10 +317,12 @@ public class RepositoryLocalServiceImpl extends RepositoryLocalServiceBaseImpl {
 			long repositoryId, String name, String description)
 		throws PortalException, SystemException {
 
+		Date now = new Date();
+
 		Repository repository = repositoryPersistence.findByPrimaryKey(
 			repositoryId);
 
-		repository.setModifiedDate(new Date());
+		repository.setModifiedDate(now);
 		repository.setName(name);
 		repository.setDescription(description);
 
@@ -327,7 +331,7 @@ public class RepositoryLocalServiceImpl extends RepositoryLocalServiceBaseImpl {
 		DLFolder dlFolder = dlFolderPersistence.findByPrimaryKey(
 			repository.getDlFolderId());
 
-		dlFolder.setModifiedDate(new Date());
+		dlFolder.setModifiedDate(now);
 		dlFolder.setName(name);
 		dlFolder.setDescription(description);
 
@@ -461,7 +465,7 @@ public class RepositoryLocalServiceImpl extends RepositoryLocalServiceBaseImpl {
 
 		if (repositoryEntryId == 0) {
 			throw new RepositoryException(
-				"Missing a valid ID for folder, fileEntry or fileVersion");
+				"Missing a valid ID for folder, file entry or file version");
 		}
 
 		return repositoryEntryId;
