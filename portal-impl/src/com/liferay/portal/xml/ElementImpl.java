@@ -475,7 +475,7 @@ public class ElementImpl extends BranchImpl implements Element {
 		Map<String, Attribute> attributesMap = new TreeMap<String, Attribute>();
 
 		List<Attribute> attributes = attributes();
-		
+
 		for (Attribute attribute : attributes) {
 			attribute.detach();
 
@@ -487,16 +487,16 @@ public class ElementImpl extends BranchImpl implements Element {
 
 			add(attribute);
 		}
-		
+
 		if (!recursive) {
-			return;			
+			return;
 		}
 
 		List<Element> elements = elements();
 
 		for (Element element : elements) {
 			element.sortAttributes(true);
-		}		
+		}
 	}
 
 	public void sortElementsByAttribute(
