@@ -90,11 +90,6 @@ public class EditFileEntryTypeAction extends PortletAction {
 
 				SessionErrors.add(actionRequest, e.getClass().getName());
 			}
-			else if (e instanceof RequiredStructureException) {
-				SessionErrors.add(actionRequest, e.getClass().getName());
-
-				sendRedirect(actionRequest, actionResponse);
-			}
 			else if (e instanceof NoSuchFileEntryTypeException ||
 					 e instanceof NoSuchStructureException ||
 					 e instanceof PrincipalException) {
@@ -102,6 +97,11 @@ public class EditFileEntryTypeAction extends PortletAction {
 				SessionErrors.add(actionRequest, e.getClass().getName());
 
 				setForward(actionRequest, "portlet.document_library.error");
+			}
+			else if (e instanceof RequiredStructureException) {
+				SessionErrors.add(actionRequest, e.getClass().getName());
+
+				sendRedirect(actionRequest, actionResponse);
 			}
 			else {
 				throw e;
