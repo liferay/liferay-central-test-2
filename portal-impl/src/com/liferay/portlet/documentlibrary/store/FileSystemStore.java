@@ -374,14 +374,20 @@ public class FileSystemStore extends BaseStore {
 		fromFileNameVersionFile.renameTo(toFileNameVersionFile);
 	}
 
+	protected void deleteEmptyAncestors(File file) {
+		deleteEmptyAncestors(-1, -1, file);
+	}
+
 	protected void deleteEmptyAncestors(
 		long companyId, long repositoryId, File file) {
 
 		String[] fileNames = file.list();
 
 		if (fileNames.length == 0) {
+			String fileName = file.getName();
+
 			if ((repositoryId > 0) &&
-				String.valueOf(repositoryId).equals(file.getName())) {
+				fileName.equals(String.valueOf(repositoryId))) {
 
 				RepositoryDirKey repositoryDirKey = new RepositoryDirKey(
 					companyId, repositoryId);
@@ -395,10 +401,6 @@ public class FileSystemStore extends BaseStore {
 
 			deleteEmptyAncestors(companyId, repositoryId, parentFile);
 		}
-	}
-
-	protected void deleteEmptyAncestors(File file) {
-		deleteEmptyAncestors(-1, -1, file);
 	}
 
 	protected File getCompanyDir(long companyId) {
