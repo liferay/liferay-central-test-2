@@ -715,11 +715,11 @@ public class PropsValues {
 
 	public static final String[] JSON_SERVICE_INVALID_CLASS_NAMES = PropsUtil.getArray(PropsKeys.JSON_SERVICE_INVALID_CLASS_NAMES);
 
-	public static final boolean JSONWS_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.JSONWS_ENABLED));
+	public static final boolean JSON_WEB_SERVICE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.JSON_WEB_SERVICE_ENABLED));
 
-	public static final String[] JSONWS_HTTP_METHODS = PropsUtil.getArray(PropsKeys.JSONWS_HTTP_METHODS);
+	public static final String[] JSONWS_WEB_SERVICE_INVALID_HTTP_METHODS = PropsUtil.getArray(PropsKeys.JSONWS_WEB_SERVICE_INVALID_HTTP_METHODS);
 
-	public static final boolean JSONWS_HTTP_METHODS_IGNORE = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.JSONWS_HTTP_METHODS_IGNORE));
+	public static final boolean JSONWS_WEB_SERVICE_STRICT_HTTP_METHOD = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.JSONWS_WEB_SERVICE_STRICT_HTTP_METHOD));
 
 	public static final String LAYOUT_CLONE_IMPL = PropsUtil.get(PropsKeys.LAYOUT_CLONE_IMPL);
 

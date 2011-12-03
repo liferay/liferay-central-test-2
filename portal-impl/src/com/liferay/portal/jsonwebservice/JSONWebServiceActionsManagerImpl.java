@@ -82,10 +82,6 @@ public class JSONWebServiceActionsManagerImpl
 		String[] parameterNames =
 			jsonWebServiceActionParameters.getParameterNames();
 
-		if (PropsValues.JSONWS_HTTP_METHODS_IGNORE) {
-			method = null;
-		}
-
 		int jsonWebServiceActionConfigIndex =
 			_getJSONWebServiceActionConfigIndex(path, method, parameterNames);
 
@@ -220,7 +216,9 @@ public class JSONWebServiceActionsManagerImpl
 			String jsonWebServiceActionConfigMethod =
 				jsonWebServiceActionConfig.getMethod();
 
-			if (method != null) {
+			if (PropsValues.JSONWS_WEB_SERVICE_STRICT_HTTP_METHOD &&
+				(method != null)) {
+
 				if ((jsonWebServiceActionConfigMethod != null) &&
 					!jsonWebServiceActionConfigMethod.equals(method)) {
 
