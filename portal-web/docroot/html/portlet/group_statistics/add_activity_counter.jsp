@@ -17,13 +17,14 @@
 <%@ include file="/html/portlet/group_statistics/init.jsp" %>
 
 <%
-	int index = ParamUtil.getInteger(request, "index", GetterUtil.getInteger((String)request.getAttribute("configuration.jsp-index")));
+int index = ParamUtil.getInteger(request, "index", GetterUtil.getInteger((String)request.getAttribute("configuration.jsp-index")));
 
 String displayActivityCounterName = PrefsParamUtil.getString(preferences, request, "displayActivityCounterName" + index);
 String chartType = PrefsParamUtil.getString(preferences, request, "chartType" + index);
 String dataRange = PrefsParamUtil.getString(preferences, request, "dataRange" + index);
 
 Collection<String> activityCounterNames = SocialConfigurationUtil.getActivityCounterNames(SocialActivityCounterConstants.TYPE_ACTOR);
+
 activityCounterNames.addAll(SocialConfigurationUtil.getActivityCounterNames(SocialActivityCounterConstants.TYPE_ASSET));
 
 activityCounterNames.add(SocialActivityCounterConstants.NAME_USER_ACHIEVEMENTS);
