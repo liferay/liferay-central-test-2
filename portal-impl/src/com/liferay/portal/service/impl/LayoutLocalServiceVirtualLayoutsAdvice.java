@@ -314,7 +314,7 @@ public class LayoutLocalServiceVirtualLayoutsAdvice
 
 		Date modifiedDate = layoutSetPrototype.getModifiedDate();
 
-		if (lastMergeTime > modifiedDate.getTime()) {
+		if (lastMergeTime >= modifiedDate.getTime()) {
 			return;
 		}
 
