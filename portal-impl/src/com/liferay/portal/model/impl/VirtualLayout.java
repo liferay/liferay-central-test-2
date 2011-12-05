@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2011 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -16,11 +16,14 @@ package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.LayoutWrapper;
+import com.liferay.portal.model.VirtualLayoutConstants;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -29,29 +32,30 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class VirtualLayout extends LayoutWrapper {
 
-	public static final String CANONICAL_URL_SEPARATOR = "/~";
-
-	public VirtualLayout(Layout layout, Group hostGroup) {
+	public VirtualLayout(Layout layout, Group virtualGroup) {
 		super(layout);
 
-		_hostGroup = hostGroup;
+		_virtualGroup = virtualGroup;
 	}
 
 	@Override
-	public java.lang.Object clone() {
-		return new VirtualLayout((Layout)super.clone(), _hostGroup);
+	public Object clone() {
+		return new VirtualLayout((Layout)super.clone(), _virtualGroup);
 	}
 
 	@Override
 	public String getFriendlyURL() {
-		StringBundler sb = new StringBundler();
+		StringBundler sb = new StringBundler(4);
 
-		sb.append(CANONICAL_URL_SEPARATOR);
+		sb.append(VirtualLayoutConstants.CANONICAL_URL_SEPARATOR);
 
 		try {
-			sb.append(super.getGroup().getFriendlyURL());
+			Group group = super.getGroup();
+
+			sb.append(group.getFriendlyURL());
 		}
 		catch (Exception e) {
+			_log.error(e, e);
 		}
 
 		sb.append(super.getFriendlyURL());
@@ -60,30 +64,26 @@ public class VirtualLayout extends LayoutWrapper {
 	}
 
 	@Override
-	public Group getGroup() throws PortalException, SystemException {
+	public Group getGroup() {
 		return getHostGroup();
 	}
 
 	@Override
 	public long getGroupId() {
-		return getHostGroupId();
+		return getVirtualGroupId();
 	}
 
-	public Group getHostGroup() throws PortalException, SystemException {
-		return _hostGroup;
-	}
-
-	public long getHostGroupId() {
-		return _hostGroup.getGroupId();
+	public Group getHostGroup() {
+		return _virtualGroup;
 	}
 
 	@Override
-	public LayoutSet getLayoutSet() throws PortalException, SystemException {
+	public LayoutSet getLayoutSet() {
 		if (isPrivateLayout()) {
-			return _hostGroup.getPrivateLayoutSet();
+			return _virtualGroup.getPrivateLayoutSet();
 		}
 
-		return _hostGroup.getPublicLayoutSet();
+		return _virtualGroup.getPublicLayoutSet();
 	}
 
 	@Override
@@ -92,7 +92,7 @@ public class VirtualLayout extends LayoutWrapper {
 
 		String layoutURL = super.getRegularURL(request);
 
-		return injectHostGroupURL(layoutURL);
+		return injectVirtualGroupURL(layoutURL);
 	}
 
 	@Override
@@ -101,7 +101,7 @@ public class VirtualLayout extends LayoutWrapper {
 
 		String layoutURL = super.getResetLayoutURL(request);
 
-		return injectHostGroupURL(layoutURL);
+		return injectVirtualGroupURL(layoutURL);
 	}
 
 	@Override
@@ -110,32 +110,33 @@ public class VirtualLayout extends LayoutWrapper {
 
 		String layoutURL = super.getResetMaxStateURL(request);
 
-		return injectHostGroupURL(layoutURL);
+		return injectVirtualGroupURL(layoutURL);
 	}
 
 	public long getSourceGroupId() {
 		return super.getGroupId();
 	}
 
-	protected String injectHostGroupURL(String layoutURL) {
+	public long getVirtualGroupId() {
+		return _virtualGroup.getGroupId();
+	}
+
+	protected String injectVirtualGroupURL(String layoutURL) {
 		try {
 			Group group = super.getGroup();
 
 			int pos = layoutURL.indexOf(group.getFriendlyURL());
 
-			StringBundler sb = new StringBundler(3);
-
-			sb.append(layoutURL.substring(0, pos));
-			sb.append(_hostGroup.getFriendlyURL());
-			sb.append(getFriendlyURL());
-
-			return sb.toString();
+			return layoutURL.substring(0, pos).concat(
+				_virtualGroup.getFriendlyURL()).concat(getFriendlyURL());
 		}
 		catch (Exception e) {
 			throw new IllegalStateException(e);
 		}
 	}
 
-	private Group _hostGroup;
+	private static Log _log = LogFactoryUtil.getLog(VirtualLayout.class);
+
+	private Group _virtualGroup;
 
 }

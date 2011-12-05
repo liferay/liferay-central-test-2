@@ -45,9 +45,9 @@ public class LayoutSetPrototypeLocalServiceImpl
 			boolean allowLayoutAddition, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		Date now = new Date();
-
 		// Layout set prototype
+
+		Date now = new Date();
 
 		long layoutSetPrototypeId = counterLocalService.increment();
 

@@ -367,15 +367,17 @@ public class ServicePreAction extends Action {
 		List<Layout> layouts = null;
 
 		long plid = ParamUtil.getLong(request, "p_l_id");
-		long hostGroupId = ParamUtil.getLong(request, "hostGroupId");
 
 		if (plid > 0) {
 			layout = LayoutLocalServiceUtil.getLayout(plid);
 
-			if (hostGroupId > 0) {
-				Group hostGroup = GroupLocalServiceUtil.getGroup(hostGroupId);
+			long virtualGroupId = ParamUtil.getLong(request, "p_v_g_id");
 
-				layout = new VirtualLayout(layout, hostGroup);
+			if (virtualGroupId > 0) {
+				Group virtualGroup = GroupLocalServiceUtil.getGroup(
+					virtualGroupId);
+
+				layout = new VirtualLayout(layout, virtualGroup);
 			}
 		}
 		else {

@@ -103,6 +103,7 @@ import com.liferay.portal.model.Ticket;
 import com.liferay.portal.model.TicketConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
+import com.liferay.portal.model.VirtualLayoutConstants;
 import com.liferay.portal.model.impl.LayoutTypePortletImpl;
 import com.liferay.portal.model.impl.VirtualLayout;
 import com.liferay.portal.plugin.PluginPackageUtil;
@@ -411,17 +412,25 @@ public class PortalImpl implements Portal {
 
 		_reservedParams = new HashSet<String>();
 
+		// Portal authentication
+
 		_reservedParams.add("p_auth");
 		_reservedParams.add("p_auth_secret");
+
+		// Portal layout
+
 		_reservedParams.add("p_l_id");
 		_reservedParams.add("p_l_reset");
+
+		// Portal portlet
+
 		_reservedParams.add("p_p_auth");
 		_reservedParams.add("p_p_id");
 		_reservedParams.add("p_p_i_id");
 		_reservedParams.add("p_p_lifecycle");
 		_reservedParams.add("p_p_url_type");
 		_reservedParams.add("p_p_state");
-		_reservedParams.add("p_p_state_rcv");
+		_reservedParams.add("p_p_state_rcv"); // LPS-14144
 		_reservedParams.add("p_p_mode");
 		_reservedParams.add("p_p_resource_id");
 		_reservedParams.add("p_p_cacheability");
@@ -431,10 +440,29 @@ public class PortalImpl implements Portal {
 		_reservedParams.add("p_p_col_count");
 		_reservedParams.add("p_p_static");
 		_reservedParams.add("p_p_isolated");
-		_reservedParams.add("p_t_lifecycle");
-		_reservedParams.add("p_o_p_id");
+
+		// Portal theme
+
+		_reservedParams.add("p_t_lifecycle"); // LPS-14383
+
+		// Portal virtual group
+
+		_reservedParams.add("p_v_g_id"); // LPS-23010
+
+		// Portal outer portlet
+
+		_reservedParams.add("p_o_p_id"); // LPS-12097
+
+		// Portal fragment
+
 		_reservedParams.add("p_f_id");
-		_reservedParams.add("p_j_a_id");
+
+		// Portal journal article
+
+		_reservedParams.add("p_j_a_id"); // LPS-16418
+
+		// Miscellaneous
+
 		_reservedParams.add("saveLastPath");
 		_reservedParams.add("scroll");
 	}
@@ -761,7 +789,7 @@ public class PortalImpl implements Portal {
 				}
 			}
 			else if (friendlyURL.startsWith(
-						VirtualLayout.CANONICAL_URL_SEPARATOR)) {
+						VirtualLayoutConstants.CANONICAL_URL_SEPARATOR)) {
 
 				try {
 					actualURL = getVirtualLayoutActualURL(
@@ -2032,11 +2060,12 @@ public class PortalImpl implements Portal {
 		variables.put("liferay:groupId", String.valueOf(layout.getGroupId()));
 		variables.put("liferay:mainPath", mainPath);
 		variables.put("liferay:plid", String.valueOf(layout.getPlid()));
-		variables.put("liferay:hostGroupId", "0");
 
 		if (layout instanceof VirtualLayout) {
-			variables.put(
-				"liferay:hostGroupId", String.valueOf(layout.getGroupId()));
+			variables.put("liferay:pvgid", String.valueOf(layout.getGroupId()));
+		}
+		else {
+			variables.put("liferay:pvgid", "0");
 		}
 
 		LayoutType layoutType = layout.getLayoutType();
@@ -4051,7 +4080,7 @@ public class PortalImpl implements Portal {
 			params, requestContext);
 
 		return HttpUtil.addParameter(
-			HttpUtil.removeParameter(actualURL, "hostGroupId"), "hostGroupId",
+			HttpUtil.removeParameter(actualURL, "p_v_g_id"), "p_v_g_id",
 			groupId);
 	}
 

@@ -14,7 +14,6 @@
 
 package com.liferay.portal.service.impl;
 
-import com.liferay.portal.ModelListenerException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.model.BaseModelListener;
@@ -31,23 +30,21 @@ public class LayoutSetPrototypeLayoutSetListener
 	extends BaseModelListener<LayoutSet> {
 
 	@Override
-	public void onAfterCreate(LayoutSet layoutSet) throws ModelListenerException {
+	public void onAfterCreate(LayoutSet layoutSet) {
 		updateLayoutSetPrototype(layoutSet);
 	}
 
 	@Override
-	public void onAfterRemove(LayoutSet layoutSet) throws ModelListenerException {
+	public void onAfterRemove(LayoutSet layoutSet) {
 		updateLayoutSetPrototype(layoutSet);
 	}
 
 	@Override
-	public void onAfterUpdate(LayoutSet layoutSet) throws ModelListenerException {
+	public void onAfterUpdate(LayoutSet layoutSet) {
 		updateLayoutSetPrototype(layoutSet);
 	}
 
-	protected void updateLayoutSetPrototype(LayoutSet layoutSet)
-		throws ModelListenerException {
-
+	protected void updateLayoutSetPrototype(LayoutSet layoutSet) {
 		try {
 			Group group = layoutSet.getGroup();
 
@@ -68,7 +65,7 @@ public class LayoutSetPrototypeLayoutSetListener
 		}
 	}
 
-	private static final Log _log = LogFactoryUtil.getLog(
+	private static Log _log = LogFactoryUtil.getLog(
 		LayoutSetPrototypeLayoutListener.class);
 
 }

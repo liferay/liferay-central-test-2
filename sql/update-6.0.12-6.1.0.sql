@@ -350,9 +350,9 @@ create table LayoutSetBranch (
 	master BOOLEAN
 );
 
+alter table LayoutSetPrototype add uuid_ VARCHAR(75) null;
 alter table LayoutSetPrototype add createDate DATE null;
 alter table LayoutSetPrototype add modifiedDate DATE null;
-alter table LayoutSetPrototype add uuid_ VARCHAR(75) null;
 
 COMMIT_TRANSACTION;
 

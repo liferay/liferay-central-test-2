@@ -62,14 +62,14 @@ import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 
+import java.security.Key;
+
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
-
-import java.security.Key;
 
 import javax.portlet.PortletMode;
 import javax.portlet.PortletModeException;
@@ -132,8 +132,8 @@ public class PortletURLImpl
 
 		Layout layout = (Layout)request.getAttribute(WebKeys.LAYOUT);
 
-		if ((layout != null) && (layout instanceof VirtualLayout) &&
-			(layout.getPlid() == _plid)) {
+		if ((layout != null) && (layout.getPlid() == _plid) &&
+			(layout instanceof VirtualLayout)) {
 
 			_layout = layout;
 		}

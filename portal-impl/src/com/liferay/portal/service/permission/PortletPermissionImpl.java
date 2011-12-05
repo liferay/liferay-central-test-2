@@ -252,10 +252,10 @@ public class PortletPermissionImpl implements PortletPermission {
 		name = PortletConstants.getRootPortletId(portletId);
 		primKey = getPrimaryKey(layout.getPlid(), portletId);
 
-		if ((!actionId.equals(ActionKeys.VIEW)) &&
+		if (!actionId.equals(ActionKeys.VIEW) &&
 			(layout instanceof VirtualLayout)) {
 
-			return hasCustomizablePermission(
+			return hasCustomizePermission(
 				permissionChecker, layout, portletId, actionId);
 		}
 
@@ -294,7 +294,7 @@ public class PortletPermissionImpl implements PortletPermission {
 				groupId, name, primKey, actionId);
 		}
 
-		if (hasCustomizablePermission(
+		if (hasCustomizePermission(
 				permissionChecker, layout, portletId, actionId)) {
 
 			return true;
@@ -302,35 +302,6 @@ public class PortletPermissionImpl implements PortletPermission {
 
 		return permissionChecker.hasPermission(
 			groupId, name, primKey, actionId);
-	}
-
-	private boolean hasCustomizablePermission(
-			PermissionChecker permissionChecker, Layout layout, String portletId,
-			String actionId)
-		throws PortalException , SystemException {
-
-		LayoutTypePortlet layoutTypePortlet =
-			(LayoutTypePortlet)layout.getLayoutType();
-
-		Portlet portlet = PortletLocalServiceUtil.getPortletById(
-			layout.getCompanyId(), portletId);
-
-		if (layoutTypePortlet.isCustomizedView() &&
-			layoutTypePortlet.isPortletCustomizable(portletId) &&
-			LayoutPermissionUtil.contains(
-				permissionChecker, layout, ActionKeys.CUSTOMIZE)) {
-
-			if (actionId.equals(ActionKeys.VIEW)) {
-				return true;
-			}
-			else if (actionId.equals(ActionKeys.CONFIGURATION) &&
-					 portlet.isPreferencesUniquePerLayout()) {
-
-				return true;
-			}
-		}
-
-		return false;
 	}
 
 	public boolean contains(
@@ -456,7 +427,13 @@ public class PortletPermissionImpl implements PortletPermission {
 		String portletId, String actionId) {
 
 		try {
-			return hasLayoutManagerPermissionImpl(portletId, actionId);
+			portletId = PortletConstants.getRootPortletId(portletId);
+
+			List<String> layoutManagerActions =
+				ResourceActionsUtil.getPortletResourceLayoutManagerActions(
+					portletId);
+
+			return layoutManagerActions.contains(actionId);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -465,16 +442,33 @@ public class PortletPermissionImpl implements PortletPermission {
 		}
 	}
 
-	protected boolean hasLayoutManagerPermissionImpl(
-		String portletId, String actionId) {
+	protected boolean hasCustomizePermission(
+			PermissionChecker permissionChecker, Layout layout,
+			String portletId, String actionId)
+		throws PortalException, SystemException {
 
-		portletId = PortletConstants.getRootPortletId(portletId);
+		LayoutTypePortlet layoutTypePortlet =
+			(LayoutTypePortlet)layout.getLayoutType();
 
-		List<String> layoutManagerActions =
-			ResourceActionsUtil.getPortletResourceLayoutManagerActions(
-				portletId);
+		if (layoutTypePortlet.isCustomizedView() &&
+			layoutTypePortlet.isPortletCustomizable(portletId) &&
+			LayoutPermissionUtil.contains(
+				permissionChecker, layout, ActionKeys.CUSTOMIZE)) {
 
-		return layoutManagerActions.contains(actionId);
+			if (actionId.equals(ActionKeys.VIEW)) {
+				return true;
+			}
+			else if (actionId.equals(ActionKeys.CONFIGURATION)) {
+				Portlet portlet = PortletLocalServiceUtil.getPortletById(
+					layout.getCompanyId(), portletId);
+
+				if (portlet.isPreferencesUniquePerLayout()) {
+					return true;
+				}
+			}
+		}
+
+		return false;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(

@@ -155,7 +155,7 @@ public class LayoutPermissionImpl implements LayoutPermission {
 			String controlPanelCategory, String actionId)
 		throws PortalException, SystemException {
 
-		if ((!actionId.equals(ActionKeys.VIEW)) &&
+		if (!actionId.equals(ActionKeys.VIEW) &&
 			(layout instanceof VirtualLayout)) {
 
 			return false;

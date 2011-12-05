@@ -20,10 +20,9 @@ import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.lar.UserIdStrategy;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.DateFormatFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.SystemProperties;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
@@ -55,8 +54,6 @@ import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-
-import java.text.DateFormat;
 
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
@@ -99,9 +96,11 @@ public class LayoutLocalServiceVirtualLayoutsAdvice
 				mergeLayoutSetProtypeLayouts(
 					permissionChecker, group, layoutSet);
 
-				if (!PropsValues.USER_GROUPS_COPY_LAYOUTS_TO_USER_PERSONAL_SITE &&
+				if (!PropsValues.
+						USER_GROUPS_COPY_LAYOUTS_TO_USER_PERSONAL_SITE &&
 					group.isUser() &&
-					(parentLayoutId == LayoutConstants.DEFAULT_PARENT_LAYOUT_ID)) {
+					(parentLayoutId ==
+						LayoutConstants.DEFAULT_PARENT_LAYOUT_ID)) {
 
 					Object returnValue = methodInvocation.proceed();
 
@@ -137,63 +136,14 @@ public class LayoutLocalServiceVirtualLayoutsAdvice
 				userGroupGroup.getGroupId(), layoutSet.isPrivateLayout());
 
 			for (Layout userGroupLayout : userGroupLayouts) {
-				layouts.add(new VirtualLayout(userGroupLayout, group));
+				Layout virtualLayout = new VirtualLayout(
+					userGroupLayout, group);
+
+				layouts.add(virtualLayout);
 			}
 		}
 
 		return layouts;
-	}
-
-	protected void mergeLayoutSetProtypeLayouts(
-			PermissionChecker permissionChecker, Group group,
-			LayoutSet layoutSet)
-		throws Exception {
-
-		if ((permissionChecker == null) || !permissionChecker.isSignedIn() ||
-			!layoutSet.getLayoutSetPrototypeLinkEnabled() ||
-			Validator.isNull(layoutSet.getLayoutSetPrototypeUuid()) ||
-			group.isLayoutPrototype() || group.isLayoutSetPrototype()) {
-
-			return;
-		}
-
-		LayoutSetPrototype layoutSetPrototype =
-			LayoutSetPrototypeLocalServiceUtil.getLayoutSetPrototypeByUuid(
-				layoutSet.getLayoutSetPrototypeUuid());
-
-		UnicodeProperties settingsProperties =
-			layoutSet.getSettingsProperties();
-
-		DateFormat dateFormat = DateFormatFactoryUtil.getSimpleDateFormat(
-			PropsValues.INDEX_DATE_FORMAT_PATTERN);
-
-		String lastMergeDateString = settingsProperties.getProperty(
-			_LAST_MERGE_DATE, _NULL_DATE);
-
-		Date lastMergeDate = dateFormat.parse(lastMergeDateString);
-
-		if (!layoutSetPrototype.getModifiedDate().after(lastMergeDate)) {
-			return;
-		}
-
-		Map<String, String[]> parameterMap = null;
-
-		if (lastMergeDateString.equals(_NULL_DATE)) {
-			parameterMap = getLayoutTemplatesParameters(true);
-		}
-		else {
-			parameterMap = getLayoutTemplatesParameters(false);
-		}
-
-		importLayoutSetPrototype(
-			permissionChecker, layoutSetPrototype, layoutSet.getGroupId(),
-			layoutSet.isPrivateLayout(), parameterMap);
-
-		settingsProperties.setProperty(
-			_LAST_MERGE_DATE, dateFormat.format(
-				layoutSetPrototype.getModifiedDate()));
-
-		LayoutSetLocalServiceUtil.updateLayoutSet(layoutSet, false);
 	}
 
 	protected Map<String, String[]> getLayoutTemplatesParameters(
@@ -202,29 +152,6 @@ public class LayoutLocalServiceVirtualLayoutsAdvice
 		Map<String, String[]> parameterMap =
 			new LinkedHashMap<String, String[]>();
 
-		if (firstTime) {
-			parameterMap.put(
-				PortletDataHandlerKeys.DATA_STRATEGY,
-				new String[] {PortletDataHandlerKeys.DATA_STRATEGY_MIRROR});
-			parameterMap.put(
-				PortletDataHandlerKeys.PORTLET_DATA,
-				new String[] {Boolean.TRUE.toString()});
-			parameterMap.put(
-				PortletDataHandlerKeys.PORTLET_DATA_ALL,
-				new String[] {Boolean.TRUE.toString()});
-		}
-		else {
-			parameterMap.put(
-				PortletDataHandlerKeys.PORTLET_DATA,
-				new String[] {Boolean.FALSE.toString()});
-			parameterMap.put(
-				PortletDataHandlerKeys.PORTLET_DATA_ALL,
-				new String[] {Boolean.FALSE.toString()});
-		}
-
-		parameterMap.put(
-			PortletDataHandlerKeys.LAYOUT_SET_PROTOTYPE_INHERITED,
-			new String[] {Boolean.TRUE.toString()});
 		parameterMap.put(
 			PortletDataHandlerKeys.CATEGORIES,
 			new String[] {Boolean.TRUE.toString()});
@@ -236,6 +163,9 @@ public class LayoutLocalServiceVirtualLayoutsAdvice
 			new String[] {Boolean.FALSE.toString()});
 		parameterMap.put(
 			PortletDataHandlerKeys.IGNORE_LAST_PUBLISH_DATE,
+			new String[] {Boolean.TRUE.toString()});
+		parameterMap.put(
+			PortletDataHandlerKeys.LAYOUT_SET_PROTOTYPE_INHERITED,
 			new String[] {Boolean.TRUE.toString()});
 		parameterMap.put(
 			PortletDataHandlerKeys.PERMISSIONS,
@@ -259,6 +189,26 @@ public class LayoutLocalServiceVirtualLayoutsAdvice
 			PortletDataHandlerKeys.USER_ID_STRATEGY,
 			new String[] {UserIdStrategy.CURRENT_USER_ID});
 
+		if (firstTime) {
+			parameterMap.put(
+				PortletDataHandlerKeys.DATA_STRATEGY,
+				new String[] {PortletDataHandlerKeys.DATA_STRATEGY_MIRROR});
+			parameterMap.put(
+				PortletDataHandlerKeys.PORTLET_DATA,
+				new String[] {Boolean.TRUE.toString()});
+			parameterMap.put(
+				PortletDataHandlerKeys.PORTLET_DATA_ALL,
+				new String[] {Boolean.TRUE.toString()});
+		}
+		else {
+			parameterMap.put(
+				PortletDataHandlerKeys.PORTLET_DATA,
+				new String[] {Boolean.FALSE.toString()});
+			parameterMap.put(
+				PortletDataHandlerKeys.PORTLET_DATA_ALL,
+				new String[] {Boolean.FALSE.toString()});
+		}
+
 		return parameterMap;
 	}
 
@@ -272,8 +222,7 @@ public class LayoutLocalServiceVirtualLayoutsAdvice
 				layoutSetPrototype.getCompanyId(),
 				LayoutSetPrototype.class.getName(),
 				ResourceConstants.SCOPE_INDIVIDUAL,
-				String.valueOf(
-					layoutSetPrototype.getLayoutSetPrototypeId()),
+				String.valueOf(layoutSetPrototype.getLayoutSetPrototypeId()),
 				permissionChecker.getOwnerRoleId());
 
 		return resourcePermission.getOwnerId();
@@ -285,46 +234,43 @@ public class LayoutLocalServiceVirtualLayoutsAdvice
 			boolean privateLayout, Map<String, String[]> parameterMap)
 		throws PortalException, SystemException {
 
-		StringBundler sb = new StringBundler(3);
-
-		sb.append(_TEMP_DIR);
-		sb.append(layoutSetPrototype.getUuid());
-		sb.append(".lar");
-
-		long modifiedTime = layoutSetPrototype.getModifiedDate().getTime();
-
-		File cacheFile = new File(sb.toString());
 		File file = null;
-		boolean isNewFile = false;
 
-		if (cacheFile.exists() &&
-			(cacheFile.lastModified() >= modifiedTime)) {
+		File cacheFile = new File(
+			_TEMP_DIR.concat(layoutSetPrototype.getUuid()).concat(".lar"));
 
-			if (_log.isDebugEnabled()) {
-				_log.debug(
-					"Using cached layoutSetPrototype LAR file " +
-						cacheFile.getAbsolutePath());
+		if (cacheFile.exists()) {
+			Date modifiedDate = layoutSetPrototype.getModifiedDate();
+
+			if (cacheFile.lastModified() >= modifiedDate.getTime()) {
+				if (_log.isDebugEnabled()) {
+					_log.debug(
+						"Using cached layout set prototype LAR file " +
+							cacheFile.getAbsolutePath());
+				}
+
+				file = cacheFile;
 			}
-
-			file = cacheFile;
 		}
 
-		Group layoutSetPrototypeGroup = layoutSetPrototype.getGroup();
-
-		long userId = getOwnerUserId(permissionChecker, layoutSetPrototype);
+		boolean newFile = false;
 
 		if (file == null) {
+			Group layoutSetPrototypeGroup = layoutSetPrototype.getGroup();
+
 			file = LayoutLocalServiceUtil.exportLayoutsAsFile(
 				layoutSetPrototypeGroup.getGroupId(), true, null,
 				parameterMap, null, null);
 
-			isNewFile = true;
+			newFile = true;
 		}
+
+		long userId = getOwnerUserId(permissionChecker, layoutSetPrototype);
 
 		LayoutLocalServiceUtil.importLayouts(
 			userId, groupId, privateLayout, parameterMap, file);
 
-		if (isNewFile) {
+		if (newFile) {
 			try {
 				FileUtil.copyFile(file, cacheFile);
 
@@ -336,19 +282,60 @@ public class LayoutLocalServiceVirtualLayoutsAdvice
 			}
 			catch (Exception e) {
 				_log.error(
-					"File " + file.getAbsolutePath() +
-						" could not be copied to " +
-							cacheFile.getAbsolutePath(), e);
+					"Unable to copy file " + file.getAbsolutePath() + " to " +
+						cacheFile.getAbsolutePath(),
+					e);
 			}
 		}
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(
-		LayoutLocalServiceVirtualLayoutsAdvice.class);
+	protected void mergeLayoutSetProtypeLayouts(
+			PermissionChecker permissionChecker, Group group,
+			LayoutSet layoutSet)
+		throws Exception {
 
-	private static final String _LAST_MERGE_DATE = "lastMergeDate";
+		if ((permissionChecker == null) || !permissionChecker.isSignedIn() ||
+			!layoutSet.getLayoutSetPrototypeLinkEnabled() ||
+			Validator.isNull(layoutSet.getLayoutSetPrototypeUuid()) ||
+			group.isLayoutPrototype() || group.isLayoutSetPrototype()) {
 
-	private static final String _NULL_DATE = "00000000000000";
+			return;
+		}
+
+		LayoutSetPrototype layoutSetPrototype =
+			LayoutSetPrototypeLocalServiceUtil.getLayoutSetPrototypeByUuid(
+				layoutSet.getLayoutSetPrototypeUuid());
+
+		UnicodeProperties settingsProperties =
+			layoutSet.getSettingsProperties();
+
+		long lastMergeTime = GetterUtil.getInteger(
+			settingsProperties.getProperty("lastMergeTime"));
+
+		Date modifiedDate = layoutSetPrototype.getModifiedDate();
+
+		if (lastMergeTime > modifiedDate.getTime()) {
+			return;
+		}
+
+		Map<String, String[]> parameterMap = null;
+
+		if (lastMergeTime > 0) {
+			parameterMap = getLayoutTemplatesParameters(false);
+		}
+		else {
+			parameterMap = getLayoutTemplatesParameters(true);
+		}
+
+		importLayoutSetPrototype(
+			permissionChecker, layoutSetPrototype, layoutSet.getGroupId(),
+			layoutSet.isPrivateLayout(), parameterMap);
+
+		settingsProperties.setProperty(
+			"lastMergeTime", String.valueOf(modifiedDate.getTime()));
+
+		LayoutSetLocalServiceUtil.updateLayoutSet(layoutSet, false);
+	}
 
 	private static final String _TEMP_DIR =
 		SystemProperties.get(SystemProperties.TMP_DIR) +
@@ -357,9 +344,13 @@ public class LayoutLocalServiceVirtualLayoutsAdvice
 	private static final Class<?>[] _TYPES_L_B_L = new Class<?>[] {
 		Long.TYPE, Boolean.TYPE, Long.TYPE
 	};
+
 	private static final Class<?>[] _TYPES_L_B_L_B_I_I = new Class<?>[] {
 		Long.TYPE, Boolean.TYPE, Long.TYPE, Boolean.TYPE, Integer.TYPE,
 		Integer.TYPE
 	};
+
+	private static Log _log = LogFactoryUtil.getLog(
+		LayoutLocalServiceVirtualLayoutsAdvice.class);
 
 }

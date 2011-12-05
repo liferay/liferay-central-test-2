@@ -159,11 +159,11 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 	 * Copies the user group's layouts to the users who are not already members
 	 * of the user group.
 	 *
-	 * @param  userGroupId the primary key of the user group
-	 * @param  userIds the primary keys of the users
-	 * @throws PortalException if any one of the users could not be found or if
-	 *         a portal exception occurred
-	 * @throws SystemException if a system exception occurred
+	 * @param      userGroupId the primary key of the user group
+	 * @param      userIds the primary keys of the users
+	 * @throws     PortalException if any one of the users could not be found or
+	 *             if a portal exception occurred
+	 * @throws     SystemException if a system exception occurred
 	 * @deprecated
 	 */
 	public void copyUserGroupLayouts(long userGroupId, long userIds[])
@@ -194,11 +194,11 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 	/**
 	 * Copies the user groups' layouts to the user.
 	 *
-	 * @param  userGroupIds the primary keys of the user groups
-	 * @param  userId the primary key of the user
-	 * @throws PortalException if a user with the primary key could not be found
-	 *         or if a portal exception occurred
-	 * @throws SystemException if a system exception occurred
+	 * @param      userGroupIds the primary keys of the user groups
+	 * @param      userId the primary key of the user
+	 * @throws     PortalException if a user with the primary key could not be
+	 *             found or if a portal exception occurred
+	 * @throws     SystemException if a system exception occurred
 	 * @deprecated
 	 */
 	public void copyUserGroupLayouts(long userGroupIds[], long userId)
@@ -214,11 +214,11 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 	/**
 	 * Copies the user group's layout to the user.
 	 *
-	 * @param  userGroupId the primary key of the user group
-	 * @param  userId the primary key of the user
-	 * @throws PortalException if a user with the primary key could not be found
-	 *         or if a portal exception occurred
-	 * @throws SystemException if a system exception occurred
+	 * @param      userGroupId the primary key of the user group
+	 * @param      userId the primary key of the user
+	 * @throws     PortalException if a user with the primary key could not be
+	 *             found or if a portal exception occurred
+	 * @throws     SystemException if a system exception occurred
 	 * @deprecated
 	 */
 	public void copyUserGroupLayouts(long userGroupId, long userId)
@@ -580,18 +580,19 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 
 		File[] files = new File[2];
 
-		UserGroup userGroup = userGroupLocalService.getUserGroup(userGroupId);
+		UserGroup userGroup = userGroupPersistence.findByPrimaryKey(
+			userGroupId);
 
-		long groupId = userGroup.getGroup().getGroupId();
+		Group group = userGroup.getGroup();
 
 		if (userGroup.hasPrivateLayouts()) {
 			files[0] = layoutLocalService.exportLayoutsAsFile(
-				groupId, true, null, parameterMap, null, null);
+				group.getGroupId(), true, null, parameterMap, null, null);
 		}
 
 		if (userGroup.hasPublicLayouts()) {
 			files[1] = layoutLocalService.exportLayoutsAsFile(
-				groupId, false, null, parameterMap, null, null);
+				group.getGroupId(), false, null, parameterMap, null, null);
 		}
 
 		return files;

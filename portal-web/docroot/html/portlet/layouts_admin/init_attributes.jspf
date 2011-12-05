@@ -180,7 +180,7 @@ LayoutLister layoutLister = new LayoutLister();
 
 String pagesName = null;
 
-if (liveGroup.isUserGroup() || liveGroup.isLayoutSetPrototype() || liveGroup.isLayoutPrototype()) {
+if (liveGroup.isLayoutPrototype() || liveGroup.isLayoutSetPrototype() || liveGroup.isUserGroup()) {
 	pagesName = "pages";
 }
 else if (privateLayout) {

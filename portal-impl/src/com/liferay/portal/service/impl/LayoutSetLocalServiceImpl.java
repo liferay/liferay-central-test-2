@@ -237,9 +237,7 @@ public class LayoutSetLocalServiceImpl extends LayoutSetLocalServiceBaseImpl {
 		LayoutSet layoutSet = layoutSetPersistence.findByG_P(
 			groupId, privateLayout);
 
-		Date now = new Date();
-
-		layoutSet.setModifiedDate(now);
+		layoutSet.setModifiedDate(new Date());
 		layoutSet.setLogo(logo);
 
 		if (logo) {
@@ -281,9 +279,7 @@ public class LayoutSetLocalServiceImpl extends LayoutSetLocalServiceBaseImpl {
 		LayoutSet layoutSet = layoutSetPersistence.findByG_P(
 			groupId, privateLayout);
 
-		Date now = new Date();
-
-		layoutSet.setModifiedDate(now);
+		layoutSet.setModifiedDate(new Date());
 
 		if (Validator.isNull(themeId)) {
 			themeId = ThemeImpl.getDefaultRegularThemeId(
@@ -336,9 +332,7 @@ public class LayoutSetLocalServiceImpl extends LayoutSetLocalServiceBaseImpl {
 		LayoutSet layoutSet = layoutSetPersistence.findByG_P(
 			groupId, privateLayout);
 
-		Date now = new Date();
-
-		layoutSet.setModifiedDate(now);
+		layoutSet.setModifiedDate(new Date());
 		layoutSet.setPageCount(pageCount);
 
 		layoutSetPersistence.update(layoutSet, false);
@@ -353,9 +347,7 @@ public class LayoutSetLocalServiceImpl extends LayoutSetLocalServiceBaseImpl {
 		LayoutSet layoutSet = layoutSetPersistence.findByG_P(
 			groupId, privateLayout);
 
-		Date now = new Date();
-
-		layoutSet.setModifiedDate(now);
+		layoutSet.setModifiedDate(new Date());
 		layoutSet.setSettings(settings);
 
 		layoutSetPersistence.update(layoutSet, false);

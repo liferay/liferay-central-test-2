@@ -35,9 +35,9 @@
 					data: {
 						cmd: 'delete',
 						doAsUserId: event.doAsUserId,
-						hostGroupId: themeDisplay.getGroupId(),
 						p_l_id: event.plid,
-						p_p_id: event.portletId
+						p_p_id: event.portletId,
+						p_v_g_id: themeDisplay.getGroupId()
 					}
 				}
 			);
@@ -164,13 +164,13 @@
 				cmd: 'add',
 				dataType: 'json',
 				doAsUserId: doAsUserId,
-				hostGroupId: themeDisplay.getGroupId(),
 				p_l_id: plid,
 				p_p_col_id: currentColumnId,
 				p_p_col_pos: portletPosition,
 				p_p_id: portletId,
 				p_p_i_id: portletItemId,
-				p_p_isolated: true
+				p_p_isolated: true,
+				p_v_g_id: themeDisplay.getGroupId()
 			};
 
 			var firstPortlet = container.one('.portlet-boundary');
@@ -435,10 +435,10 @@
 							data: {
 								cmd: 'minimize',
 								doAsUserId: doAsUserId,
-								hostGroupId: themeDisplay.getGroupId(),
 								p_l_id: plid,
 								p_p_id: portlet.portletId,
-								p_p_restore: restore
+								p_p_restore: restore,
+								p_v_g_id: themeDisplay.getGroupId()
 							}
 						}
 					);

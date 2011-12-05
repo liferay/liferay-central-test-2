@@ -224,10 +224,10 @@ AUI().add(
 							data: {
 								cmd: cmd,
 								doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
-								hostGroupId: themeDisplay.getGroupId(),
 								layoutRevisionId: layoutRevisionId,
 								layoutSetBranchId: layoutSetBranchId,
-								p_l_id: themeDisplay.getPlid()
+								p_l_id: themeDisplay.getPlid(),
+								p_v_g_id: themeDisplay.getGroupId()
 							},
 							on: {
 								success: function(event, id, obj) {
