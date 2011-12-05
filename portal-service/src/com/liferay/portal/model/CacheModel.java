@@ -20,7 +20,7 @@ import java.io.Serializable;
  * @author Shuyang Zhou
  */
 public interface CacheModel<T> extends Serializable {
-	
+
 	public T toEntityModel();
-	
+
 }
