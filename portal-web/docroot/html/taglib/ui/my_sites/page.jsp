@@ -23,7 +23,7 @@ if (max <= 0) {
 	max = PropsValues.MY_SITES_MAX_ELEMENTS;
 }
 
-List<Group> mySites = user.getMySites(max, true);
+List<Group> mySites = user.getMySites(true, max);
 %>
 
 <c:if test="<%= !mySites.isEmpty() %>">
