@@ -150,7 +150,7 @@ AUI().add(
 				'<div class="aui-helper-hidden settings-limit">',
 					'<tpl for="rows">',
 						'<div class="settings-limit-row">',
-							'<span class="field field-text">{text}</span>',
+							'<span class="field field-text">{limitFirstText}</span>',
 							'<select id="{parent.languageKey}_{type}LimitValue" class="settings-field-node">',
 								'<tpl for="limitValues">',
 									'<option {[ (values == parent.limitValue) ? "selected" : "" ]} title="{.}" value="{.}">{.}</option>',
@@ -161,8 +161,8 @@ AUI().add(
 									'<option {[ ($index == parent.limitPeriod) ? "selected" : "" ]} title="{.}" value="{$index}">{.}</option>',
 								'</tpl>',
 							'</select>',
-							'<tpl if="limitLastText">',
-								'<span class="field field-text">{limitLastText}.</span>',
+							'<tpl if="limitSecondText">',
+								'<span class="field field-text">{limitSecondText}.</span>',
 							'</tpl>',
 						'</div>',
 					'</tpl>',
@@ -618,12 +618,12 @@ AUI().add(
 						value: STR_BLANK
 					},
 
-					participationLimitEnabeld: {
-						value: true
-					},
-
 					participationIncrement: {
 						value: 0
+					},
+
+					participationLimitEnabeld: {
+						value: true
 					},
 
 					participationLimitPeriod: {
@@ -707,12 +707,12 @@ AUI().add(
 						if (instance.get(STR_CONTRIBUTION_LIMIT_ENABLED)) {
 							rows.push(
 								{
-									limitLastText: Liferay.Language.get('social-activity-setting-limit-last-text'),
+									limitFirstText: Liferay.Language.get('social-activity-setting-contribution-limit-first-text'),
 									limitPeriod: instance.get(STR_CONTRIBUTION_LIMIT_PERIOD),
 									limitPeriods: COL_LIMIT_TYPE,
+									limitSecondText: Liferay.Language.get('social-activity-setting-limit-second-text'),
 									limitValue: instance.get(STR_CONTRIBUTION_LIMIT_VALUE),
 									limitValues: counterSettings.contributionLimitValues,
-									text: Liferay.Language.get('social-activity-setting-contribution-limit-first-text'),
 									type: 'contribution'
 								}
 							);
@@ -721,12 +721,12 @@ AUI().add(
 						if (instance.get(STR_PARTICIPATION_LIMIT_ENABLED)) {
 							rows.push(
 								{
-									limitLastText: null,
+									limitFirstText: Liferay.Language.get('social-activity-setting-participation-limit-first-text'),
 									limitPeriod: instance.get(STR_PARTICIPATION_LIMIT_PERIOD),
 									limitPeriods: COL_LIMIT_TYPE,
+									limitSecondText: null,
 									limitValue: instance.get(STR_PARTICIPATION_LIMIT_VALUE),
 									limitValues: counterSettings.participationLimitValues,
-									text: Liferay.Language.get('social-activity-setting-participation-limit-first-text'),
 									type: 'participation'
 								}
 							);
@@ -748,14 +748,14 @@ AUI().add(
 								contributionIncrement: instance.get(STR_CONTRIBUTION_INCREMENT),
 								contributionIncrements: counterSettings.contributionIncrements,
 								firstText: Liferay.Language.get('social-activity-setting-first-text'),
+								fourthText: Lang.sub(Liferay.Language.get('social-activity-setting-fourth-text'), [TPL_CONTRIBUTION_INCREMENT]),
 								labelText: instance.get(STR_LOCALIZED_NAME),
 								languageKey: instance.get(STR_LANGUAGE_KEY),
 								participationIncrement: instance.get(STR_PARTICIPATION_INCREMENT),
 								participationIncrements: counterSettings.participationIncrements,
 								rows: rows,
 								secondText: Liferay.Language.get('social-activity-setting-second-text'),
-								thirdText: Liferay.Language.get('social-activity-setting-third-text'),
-								fourthText: Lang.sub(Liferay.Language.get('social-activity-setting-fourth-text'), [TPL_CONTRIBUTION_INCREMENT])
+								thirdText: Liferay.Language.get('social-activity-setting-third-text')
 							}
 						);
 

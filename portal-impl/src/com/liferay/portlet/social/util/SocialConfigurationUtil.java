@@ -292,7 +292,6 @@ public class SocialConfigurationUtil {
 
 		Element contributionValueElement = activityElement.element(
 			"contribution-value");
-
 		Element contributionLimitElement = activityElement.element(
 			"contribution-limit");
 
@@ -365,12 +364,12 @@ public class SocialConfigurationUtil {
 
 		Element participationValueElement = activityElement.element(
 			"participation-value");
-
 		Element participationLimitElement = activityElement.element(
-				"participation-limit");
+			"participation-limit");
 
 		if ((participationValueElement == null) &&
 			(participationLimitElement == null)) {
+
 			return;
 		}
 
