@@ -103,7 +103,7 @@ public JSONArray _addDetailTemplateFieldAttributes(DDMStructure structure, JSONA
 			jsonObject.put("readOnlyAttributes", _getFieldReadOnlyAttributes(structure, fieldName));
 			jsonObject.put("unique", true);
 		}
-		catch (NoSuchStructureFieldException nssfe) {
+		catch (StructureFieldException sfe) {
 		}
 	}
 

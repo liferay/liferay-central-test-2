@@ -661,24 +661,24 @@ public class DDMStructureWrapper implements DDMStructure,
 	}
 
 	public java.lang.String getFieldDataType(java.lang.String fieldName)
-		throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureFieldException {
+		throws com.liferay.portlet.dynamicdatamapping.StructureFieldException {
 		return _ddmStructure.getFieldDataType(fieldName);
 	}
 
 	public boolean getFieldDisplayChildLabelAsValue(java.lang.String fieldName)
-		throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureFieldException {
+		throws com.liferay.portlet.dynamicdatamapping.StructureFieldException {
 		return _ddmStructure.getFieldDisplayChildLabelAsValue(fieldName);
 	}
 
 	public java.lang.String getFieldLabel(java.lang.String fieldName,
 		java.util.Locale locale)
-		throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureFieldException {
+		throws com.liferay.portlet.dynamicdatamapping.StructureFieldException {
 		return _ddmStructure.getFieldLabel(fieldName, locale);
 	}
 
 	public java.lang.String getFieldLabel(java.lang.String fieldName,
 		java.lang.String locale)
-		throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureFieldException {
+		throws com.liferay.portlet.dynamicdatamapping.StructureFieldException {
 		return _ddmStructure.getFieldLabel(fieldName, locale);
 	}
 
@@ -688,18 +688,18 @@ public class DDMStructureWrapper implements DDMStructure,
 
 	public java.lang.String getFieldProperty(java.lang.String fieldName,
 		java.lang.String property)
-		throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureFieldException {
+		throws com.liferay.portlet.dynamicdatamapping.StructureFieldException {
 		return _ddmStructure.getFieldProperty(fieldName, property);
 	}
 
 	public java.lang.String getFieldProperty(java.lang.String fieldName,
 		java.lang.String property, java.lang.String locale)
-		throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureFieldException {
+		throws com.liferay.portlet.dynamicdatamapping.StructureFieldException {
 		return _ddmStructure.getFieldProperty(fieldName, property, locale);
 	}
 
 	public boolean getFieldRequired(java.lang.String fieldName)
-		throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureFieldException {
+		throws com.liferay.portlet.dynamicdatamapping.StructureFieldException {
 		return _ddmStructure.getFieldRequired(fieldName);
 	}
 
@@ -726,7 +726,7 @@ public class DDMStructureWrapper implements DDMStructure,
 	}
 
 	public java.lang.String getFieldType(java.lang.String fieldName)
-		throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureFieldException {
+		throws com.liferay.portlet.dynamicdatamapping.StructureFieldException {
 		return _ddmStructure.getFieldType(fieldName);
 	}
 

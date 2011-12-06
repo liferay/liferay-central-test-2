@@ -187,13 +187,13 @@
 		<exception>Content</exception>
 		<exception>ContentName</exception>
 		<exception>ContentXml</exception>
-		<exception>NoSuchStructureField</exception>
 		<exception>RequiredStructure</exception>
 		<exception>Storage</exception>
 		<exception>StorageFieldName</exception>
 		<exception>StorageFieldRequired</exception>
 		<exception>StructureDuplicateElement</exception>
 		<exception>StructureDuplicateStructureKey</exception>
+		<exception>StructureField</exception>
 		<exception>StructureName</exception>
 		<exception>StructureXsd</exception>
 		<exception>TemplateName</exception>

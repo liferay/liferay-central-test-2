@@ -28,7 +28,7 @@ import com.liferay.portal.kernel.xml.Node;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.kernel.xml.XPath;
 import com.liferay.portal.model.CacheField;
-import com.liferay.portlet.dynamicdatamapping.NoSuchStructureFieldException;
+import com.liferay.portlet.dynamicdatamapping.StructureFieldException;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -98,26 +98,26 @@ public class DDMStructureImpl extends DDMStructureBaseImpl {
 	}
 
 	public String getFieldDataType(String fieldName)
-		throws NoSuchStructureFieldException {
+		throws StructureFieldException {
 
 		return getFieldProperty(fieldName, "dataType");
 	}
 
 	public boolean getFieldDisplayChildLabelAsValue(String fieldName)
-		throws NoSuchStructureFieldException {
+		throws StructureFieldException {
 
 		return GetterUtil.getBoolean(
 			getFieldProperty(fieldName, "displayChildLabelAsValue"));
 	}
 
 	public String getFieldLabel(String fieldName, Locale locale)
-		throws NoSuchStructureFieldException {
+		throws StructureFieldException {
 
 		return getFieldLabel(fieldName, locale.getLanguage());
 	}
 
 	public String getFieldLabel(String fieldName, String locale)
-		throws NoSuchStructureFieldException {
+		throws StructureFieldException {
 
 		return GetterUtil.getString(
 			getFieldProperty(fieldName, "label", locale), fieldName);
@@ -130,17 +130,17 @@ public class DDMStructureImpl extends DDMStructureBaseImpl {
 	}
 
 	public String getFieldProperty(String fieldName, String property)
-		throws NoSuchStructureFieldException {
+		throws StructureFieldException {
 
 		return getFieldProperty(fieldName, property, getDefaultLocale());
 	}
 
 	public String getFieldProperty(
 			String fieldName, String property, String locale)
-		throws NoSuchStructureFieldException {
+		throws StructureFieldException {
 
 		if (!hasField(fieldName)) {
-			throw new NoSuchStructureFieldException();
+			throw new StructureFieldException();
 		}
 
 		Map<String, Map<String, String>> fieldsMap = _getFieldsMap(locale);
@@ -151,7 +151,7 @@ public class DDMStructureImpl extends DDMStructureBaseImpl {
 	}
 
 	public boolean getFieldRequired(String fieldName)
-		throws NoSuchStructureFieldException {
+		throws StructureFieldException {
 
 		return GetterUtil.getBoolean(getFieldProperty(fieldName, "required"));
 	}
@@ -204,7 +204,7 @@ public class DDMStructureImpl extends DDMStructureBaseImpl {
 	}
 
 	public String getFieldType(String fieldName)
-		throws NoSuchStructureFieldException {
+		throws StructureFieldException {
 
 		return getFieldProperty(fieldName, "type");
 	}
