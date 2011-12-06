@@ -310,7 +310,7 @@ public class LayoutLocalServiceVirtualLayoutsAdvice
 			layoutSet.getSettingsProperties();
 
 		long lastMergeTime = GetterUtil.getLong(
-			settingsProperties.getProperty("lastMergeTime"));
+			settingsProperties.getProperty("last-merge-time"));
 
 		Date modifiedDate = layoutSetPrototype.getModifiedDate();
 
