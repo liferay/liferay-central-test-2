@@ -4685,11 +4685,11 @@ public class PortalImpl implements Portal {
 					!PortletPermissionUtil.contains(
 						themeDisplay.getPermissionChecker(),
 						themeDisplay.getPlid(), portlet.getPortletId(),
-						ActionKeys.CONFIGURATION) &&
+						ActionKeys.ADD_TO_PAGE) &&
 					!PortletPermissionUtil.contains(
 						themeDisplay.getPermissionChecker(),
 						themeDisplay.getPlid(), portlet.getPortletId(),
-						ActionKeys.ADD_TO_PAGE)) {
+						ActionKeys.CONFIGURATION)) {
 
 					showPortlet = false;
 				}
