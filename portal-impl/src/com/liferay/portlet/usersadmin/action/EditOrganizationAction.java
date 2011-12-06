@@ -135,6 +135,7 @@ public class EditOrganizationAction extends PortletAction {
 				if (e instanceof RequiredOrganizationException) {
 					String redirect = PortalUtil.escapeRedirect(
 						ParamUtil.getString(actionRequest, "redirect"));
+
 					long organizationId = ParamUtil.getLong(
 						actionRequest, "organizationId");
 
