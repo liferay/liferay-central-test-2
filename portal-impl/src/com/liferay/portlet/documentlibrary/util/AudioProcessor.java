@@ -100,7 +100,7 @@ public class AudioProcessor extends DefaultPreviewableProcessor {
 	public boolean isSupported(String mimeType) {
 		try {
 			if (PrefsPropsUtil.getBoolean(
-				PropsKeys.XUGGLER_ENABLED, PropsValues.XUGGLER_ENABLED)) {
+					PropsKeys.XUGGLER_ENABLED, PropsValues.XUGGLER_ENABLED)) {
 
 				return _audioMimeTypes.contains(mimeType);
 			}

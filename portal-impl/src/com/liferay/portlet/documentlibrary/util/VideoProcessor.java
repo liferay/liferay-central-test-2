@@ -156,7 +156,7 @@ public class VideoProcessor extends DefaultPreviewableProcessor {
 	public boolean isSupported(String mimeType) {
 		try {
 			if (PrefsPropsUtil.getBoolean(
-				PropsKeys.XUGGLER_ENABLED, PropsValues.XUGGLER_ENABLED)) {
+					PropsKeys.XUGGLER_ENABLED, PropsValues.XUGGLER_ENABLED)) {
 
 				return _videoMimeTypes.contains(mimeType);
 			}
@@ -164,7 +164,8 @@ public class VideoProcessor extends DefaultPreviewableProcessor {
 		catch (Exception e) {
 		}
 
-		return false; }
+		return false;
+	}
 
 	public void trigger(FileVersion fileVersion) {
 		_instance._queueGeneration(fileVersion);
