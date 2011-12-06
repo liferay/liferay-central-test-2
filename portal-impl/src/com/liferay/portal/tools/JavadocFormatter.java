@@ -1066,6 +1066,10 @@ public class JavadocFormatter {
 
 		Tuple tuple = _javadocxXmlTuples.get(srcDirName);
 
+		if (tuple != null) {
+			return tuple;
+		}
+
 		File javadocsXmlFile = new File(srcDirName, "META-INF/javadocs.xml");
 
 		if (!javadocsXmlFile.exists()) {
