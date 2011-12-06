@@ -99,6 +99,7 @@ public class VirtualHostFilter extends BasePortalFilter {
 		friendlyURL = friendlyURL.toLowerCase();
 
 		if (PortalInstances.isVirtualHostsIgnorePath(friendlyURL) ||
+			friendlyURL.startsWith(_PATH_DISPLAY_CHART) ||
 			friendlyURL.startsWith(_PATH_VTI) ||
 			friendlyURL.startsWith(_PRIVATE_GROUP_SERVLET_MAPPING_SLASH) ||
 			friendlyURL.startsWith(_PRIVATE_USER_SERVLET_MAPPING_SLASH) ||
@@ -304,6 +305,8 @@ public class VirtualHostFilter extends BasePortalFilter {
 				VirtualHostFilter.class, request, response, filterChain);
 		}
 	}
+
+	private static final String _PATH_DISPLAY_CHART = "/display_chart";
 
 	private static final String _PATH_DOCUMENTS = "/documents/";
 
