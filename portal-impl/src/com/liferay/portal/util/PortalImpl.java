@@ -445,9 +445,9 @@ public class PortalImpl implements Portal {
 
 		_reservedParams.add("p_t_lifecycle"); // LPS-14383
 
-		// Portal virtual group
+		// Portal virtual layout
 
-		_reservedParams.add("p_v_g_id"); // LPS-23010
+		_reservedParams.add("p_v_l_s_g_id"); // LPS-23010
 
 		// Portal outer portlet
 
@@ -2062,10 +2062,11 @@ public class PortalImpl implements Portal {
 		variables.put("liferay:plid", String.valueOf(layout.getPlid()));
 
 		if (layout instanceof VirtualLayout) {
-			variables.put("liferay:pvgid", String.valueOf(layout.getGroupId()));
+			variables.put(
+				"liferay:pvlsgid", String.valueOf(layout.getGroupId()));
 		}
 		else {
-			variables.put("liferay:pvgid", "0");
+			variables.put("liferay:pvlsgid", "0");
 		}
 
 		LayoutType layoutType = layout.getLayoutType();
@@ -4080,7 +4081,7 @@ public class PortalImpl implements Portal {
 			params, requestContext);
 
 		return HttpUtil.addParameter(
-			HttpUtil.removeParameter(actualURL, "p_v_g_id"), "p_v_g_id",
+			HttpUtil.removeParameter(actualURL, "p_v_l_s_g_id"), "p_v_l_s_g_id",
 			groupId);
 	}
 

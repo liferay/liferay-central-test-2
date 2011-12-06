@@ -32,15 +32,16 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class VirtualLayout extends LayoutWrapper {
 
-	public VirtualLayout(Layout layout, Group virtualGroup) {
-		super(layout);
+	public VirtualLayout(Layout sourceLayout, Group targetGroup) {
+		super(sourceLayout);
 
-		_virtualGroup = virtualGroup;
+		_sourceLayout = sourceLayout;
+		_targetGroup = targetGroup;
 	}
 
 	@Override
 	public Object clone() {
-		return new VirtualLayout((Layout)super.clone(), _virtualGroup);
+		return new VirtualLayout((Layout)_sourceLayout.clone(), _targetGroup);
 	}
 
 	@Override
@@ -50,7 +51,7 @@ public class VirtualLayout extends LayoutWrapper {
 		sb.append(VirtualLayoutConstants.CANONICAL_URL_SEPARATOR);
 
 		try {
-			Group group = super.getGroup();
+			Group group = _sourceLayout.getGroup();
 
 			sb.append(group.getFriendlyURL());
 		}
@@ -58,7 +59,7 @@ public class VirtualLayout extends LayoutWrapper {
 			_log.error(e, e);
 		}
 
-		sb.append(super.getFriendlyURL());
+		sb.append(_sourceLayout.getFriendlyURL());
 
 		return sb.toString();
 	}
@@ -74,23 +75,23 @@ public class VirtualLayout extends LayoutWrapper {
 	}
 
 	public Group getHostGroup() {
-		return _virtualGroup;
+		return _targetGroup;
 	}
 
 	@Override
 	public LayoutSet getLayoutSet() {
 		if (isPrivateLayout()) {
-			return _virtualGroup.getPrivateLayoutSet();
+			return _targetGroup.getPrivateLayoutSet();
 		}
 
-		return _virtualGroup.getPublicLayoutSet();
+		return _targetGroup.getPublicLayoutSet();
 	}
 
 	@Override
 	public String getRegularURL(HttpServletRequest request)
 		throws PortalException, SystemException {
 
-		String layoutURL = super.getRegularURL(request);
+		String layoutURL = _sourceLayout.getRegularURL(request);
 
 		return injectVirtualGroupURL(layoutURL);
 	}
@@ -99,7 +100,7 @@ public class VirtualLayout extends LayoutWrapper {
 	public String getResetLayoutURL(HttpServletRequest request)
 		throws PortalException, SystemException {
 
-		String layoutURL = super.getResetLayoutURL(request);
+		String layoutURL = _sourceLayout.getResetLayoutURL(request);
 
 		return injectVirtualGroupURL(layoutURL);
 	}
@@ -108,27 +109,27 @@ public class VirtualLayout extends LayoutWrapper {
 	public String getResetMaxStateURL(HttpServletRequest request)
 		throws PortalException, SystemException {
 
-		String layoutURL = super.getResetMaxStateURL(request);
+		String layoutURL = _sourceLayout.getResetMaxStateURL(request);
 
 		return injectVirtualGroupURL(layoutURL);
 	}
 
 	public long getSourceGroupId() {
-		return super.getGroupId();
+		return _sourceLayout.getGroupId();
 	}
 
 	public long getVirtualGroupId() {
-		return _virtualGroup.getGroupId();
+		return _targetGroup.getGroupId();
 	}
 
 	protected String injectVirtualGroupURL(String layoutURL) {
 		try {
-			Group group = super.getGroup();
+			Group group = _sourceLayout.getGroup();
 
 			int pos = layoutURL.indexOf(group.getFriendlyURL());
 
 			return layoutURL.substring(0, pos).concat(
-				_virtualGroup.getFriendlyURL()).concat(getFriendlyURL());
+				_targetGroup.getFriendlyURL()).concat(getFriendlyURL());
 		}
 		catch (Exception e) {
 			throw new IllegalStateException(e);
@@ -137,6 +138,7 @@ public class VirtualLayout extends LayoutWrapper {
 
 	private static Log _log = LogFactoryUtil.getLog(VirtualLayout.class);
 
-	private Group _virtualGroup;
+	private Layout _sourceLayout;
+	private Group _targetGroup;
 
 }
