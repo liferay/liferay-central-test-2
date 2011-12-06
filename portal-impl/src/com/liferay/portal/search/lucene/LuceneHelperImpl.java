@@ -179,15 +179,6 @@ public class LuceneHelperImpl implements LuceneHelper {
 	}
 
 	public void addTerm(
-		BooleanQuery booleanQuery, String field, String[] values,
-		boolean like) {
-
-		for (String value : values) {
-			addTerm(booleanQuery, field, value, like);
-		}
-	}
-
-	public void addTerm(
 		BooleanQuery booleanQuery, String field, String value, boolean like,
 		BooleanClauseOccur booleanClauseOccur) {
 
@@ -208,10 +199,10 @@ public class LuceneHelperImpl implements LuceneHelper {
 
 			BooleanClause.Occur occur = null;
 
-			if (booleanClauseOccur == BooleanClauseOccur.MUST) {
+			if (booleanClauseOccur.equals(BooleanClauseOccur.MUST)) {
 				occur = BooleanClause.Occur.MUST;
 			}
-			else if (booleanClauseOccur == BooleanClauseOccur.MUST_NOT) {
+			else if (booleanClauseOccur.equals(BooleanClauseOccur.MUST_NOT)) {
 				occur = BooleanClause.Occur.MUST_NOT;
 			}
 			else {
@@ -222,6 +213,15 @@ public class LuceneHelperImpl implements LuceneHelper {
 		}
 		catch (Exception e) {
 			_log.error(e, e);
+		}
+	}
+
+	public void addTerm(
+		BooleanQuery booleanQuery, String field, String[] values,
+		boolean like) {
+
+		for (String value : values) {
+			addTerm(booleanQuery, field, value, like);
 		}
 	}
 
@@ -808,6 +808,26 @@ public class LuceneHelperImpl implements LuceneHelper {
 		}
 	}
 
+	private static final long _BOOTUP_CLUSTER_NODE_RESPONSE_TIMEOUT = 10000;
+
+	private static Log _log = LogFactoryUtil.getLog(LuceneHelperImpl.class);
+
+	private static MethodKey _createTokenMethodKey =
+		new MethodKey(TransientTokenUtil.class.getName(), "createToken",
+		long.class);
+	private static MethodKey _getLastGenerationMethodKey =
+		new MethodKey(LuceneHelperUtil.class.getName(), "getLastGeneration",
+		long.class);
+
+	private static final long _TRANSIENT_TOKEN_KEEP_ALIVE_TIME = 10000;
+
+	private Analyzer _analyzer;
+	private Map<Long, IndexAccessor> _indexAccessors =
+		new ConcurrentHashMap<Long, IndexAccessor>();
+	private LoadIndexClusterEventListener _loadIndexClusterEventListener;
+	private ThreadPoolExecutor _luceneIndexThreadPoolExecutor;
+	private Version _version;
+
 	private class LoadIndexClusterEventListener
 		implements ClusterEventListener {
 
@@ -859,25 +879,5 @@ public class LuceneHelperImpl implements LuceneHelper {
 		}
 
 	}
-
-	private static final long _BOOTUP_CLUSTER_NODE_RESPONSE_TIMEOUT = 10000;
-
-	private static final long _TRANSIENT_TOKEN_KEEP_ALIVE_TIME = 10000;
-
-	private static Log _log = LogFactoryUtil.getLog(LuceneHelperImpl.class);
-
-	private static MethodKey _createTokenMethodKey =
-		new MethodKey(TransientTokenUtil.class.getName(), "createToken",
-		long.class);
-	private static MethodKey _getLastGenerationMethodKey =
-		new MethodKey(LuceneHelperUtil.class.getName(), "getLastGeneration",
-		long.class);
-
-	private Analyzer _analyzer;
-	private Map<Long, IndexAccessor> _indexAccessors =
-		new ConcurrentHashMap<Long, IndexAccessor>();
-	private LoadIndexClusterEventListener _loadIndexClusterEventListener;
-	private ThreadPoolExecutor _luceneIndexThreadPoolExecutor;
-	private Version _version;
 
 }

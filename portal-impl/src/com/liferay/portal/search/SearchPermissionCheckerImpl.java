@@ -461,11 +461,11 @@ public class SearchPermissionCheckerImpl implements SearchPermissionChecker {
 					userGroupRole.getRoleId());
 		}
 
-		if (!groupsQuery.clauses().isEmpty()) {
+		if (groupsQuery.hasClauses()) {
 			permissionQuery.add(groupsQuery, BooleanClauseOccur.SHOULD);
 		}
 
-		if (!rolesQuery.clauses().isEmpty()) {
+		if (rolesQuery.hasClauses()) {
 			permissionQuery.add(rolesQuery, BooleanClauseOccur.SHOULD);
 		}
 
@@ -561,11 +561,11 @@ public class SearchPermissionCheckerImpl implements SearchPermissionChecker {
 					userGroupRole.getRoleId());
 		}
 
-		if (!groupsQuery.clauses().isEmpty()) {
+		if (groupsQuery.hasClauses()) {
 			permissionQuery.add(groupsQuery, BooleanClauseOccur.SHOULD);
 		}
 
-		if (!rolesQuery.clauses().isEmpty()) {
+		if (rolesQuery.hasClauses()) {
 			permissionQuery.add(rolesQuery, BooleanClauseOccur.SHOULD);
 		}
 

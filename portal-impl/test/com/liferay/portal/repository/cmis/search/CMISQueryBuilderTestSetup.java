@@ -17,10 +17,14 @@ package com.liferay.portal.repository.cmis.search;
 import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.search.BooleanQueryFactoryUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.search.generic.BooleanQueryFactoryImpl;
 import com.liferay.portal.service.ServiceTestUtil;
 import com.liferay.portal.util.InitUtil;
 import com.liferay.portal.util.PropsUtil;
+
+import java.lang.reflect.Field;
 
 import junit.extensions.TestSetup;
 
@@ -37,44 +41,54 @@ public class CMISQueryBuilderTestSetup extends TestSetup {
 
 	@Override
 	public void setUp() {
-		PropsUtil.set("spring.configs",
-			"META-INF/management-spring.xml,META-INF/util-spring.xml," +
-			"META-INF/messaging-core-spring.xml," +
-			"META-INF/messaging-misc-spring.xml,META-INF/search-spring.xml," +
-			"META-INF/service-builder-spring.xml");
 		PropsUtil.set(
-			PropsKeys.RESOURCE_ACTIONS_READ_PORTLET_RESOURCES, "false");
+			PropsKeys.EHCACHE_PORTAL_CACHE_MANAGER_JMX_ENABLED,
+			Boolean.FALSE.toString());
+		PropsUtil.set(PropsKeys.RESOURCE_ACTIONS_CONFIGS, StringPool.BLANK);
 		PropsUtil.set(
-			PropsKeys.EHCACHE_PORTAL_CACHE_MANAGER_JMX_ENABLED, "false");
-		PropsUtil.set(PropsKeys.RESOURCE_ACTIONS_CONFIGS, "");
+			PropsKeys.RESOURCE_ACTIONS_READ_PORTLET_RESOURCES,
+			Boolean.FALSE.toString());
+		PropsUtil.set(
+			PropsKeys.SPRING_CONFIGS, StringUtil.merge(_SPRING_CONFIGS));
 
 		InitUtil.initWithSpring();
 
-		BooleanQueryFactoryUtil util = new BooleanQueryFactoryUtil();
+		BooleanQueryFactoryUtil booleanQueryFactoryUtil =
+			new BooleanQueryFactoryUtil();
 
-		for (java.lang.reflect.Field field :
-			util.getClass().getDeclaredFields()) {
+		Class<?> clazz = booleanQueryFactoryUtil.getClass();
 
-			BeanReference ref = field.getAnnotation(BeanReference.class);
+		for (Field field : clazz.getDeclaredFields()) {
+			BeanReference beanReference = field.getAnnotation(
+				BeanReference.class);
 
-			if (ref != null) {
-				field.setAccessible(true);
+			if (beanReference == null) {
+				continue;
+			}
 
-				try {
-					field.set(util, util);
-				}
-				catch (Exception e) {
-					e.printStackTrace();
-				}
+			field.setAccessible(true);
+
+			try {
+				field.set(booleanQueryFactoryUtil, booleanQueryFactoryUtil);
+			}
+			catch (Exception e) {
+				e.printStackTrace();
 			}
 		}
 
-		util.setGenericQueryFactory(new BooleanQueryFactoryImpl());
+		booleanQueryFactoryUtil.setGenericQueryFactory(
+			new BooleanQueryFactoryImpl());
 	}
 
 	@Override
 	public void tearDown() {
 		ServiceTestUtil.destroyServices();
 	}
+
+	private static final String[] _SPRING_CONFIGS = {
+		"META-INF/management-spring.xml", "META-INF/util-spring.xml",
+		"META-INF/messaging-core-spring.xml",
+		"META-INF/messaging-misc-spring.xml", "META-INF/search-spring.xml"
+	};
 
 }

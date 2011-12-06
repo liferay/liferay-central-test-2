@@ -26,7 +26,13 @@ public class RepositorySearchQueryBuilderUtil {
 	public static BooleanQuery getFullQuery(SearchContext searchContext)
 		throws SearchException {
 
-		return _repositorySearchQueryBuilder.getFullQuery(searchContext);
+		return getRepositorySearchQueryBuilder().getFullQuery(searchContext);
+	}
+
+	public static RepositorySearchQueryBuilder
+		getRepositorySearchQueryBuilder() {
+
+		return _repositorySearchQueryBuilder;
 	}
 
 	public void setRepositorySearchQueryBuilder(

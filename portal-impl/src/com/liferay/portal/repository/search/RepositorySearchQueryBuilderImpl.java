@@ -67,7 +67,6 @@ public class RepositorySearchQueryBuilderImpl
 		catch (Exception e) {
 			throw new SearchException(e);
 		}
-
 	}
 
 	public void setAnalyzer(Analyzer analyzer) {
@@ -103,6 +102,36 @@ public class RepositorySearchQueryBuilderImpl
 		}
 	}
 
+	protected void addSearchKeywords(
+			BooleanQuery searchQuery, SearchContext searchContext)
+		throws Exception {
+
+		String keywords = searchContext.getKeywords();
+
+		if (Validator.isNull(keywords)) {
+			return;
+		}
+
+		BooleanQuery titleQuery = BooleanQueryFactoryUtil.create(searchContext);
+
+		addTerm(titleQuery, searchContext, Field.TITLE, keywords);
+
+		if (titleQuery.hasClauses() && !contains(searchQuery, titleQuery)) {
+			searchQuery.add(titleQuery, BooleanClauseOccur.SHOULD);
+		}
+
+		BooleanQuery userNameQuery = BooleanQueryFactoryUtil.create(
+			searchContext);
+
+		addTerm(userNameQuery, searchContext, Field.USER_NAME, keywords);
+
+		if (userNameQuery.hasClauses() &&
+			!contains(searchQuery, userNameQuery)) {
+
+			searchQuery.add(userNameQuery, BooleanClauseOccur.SHOULD);
+		}
+	}
+
 	protected void addTerm(
 		BooleanQuery booleanQuery, SearchContext searchContext,
 		String field, String value) {
@@ -113,8 +142,7 @@ public class RepositorySearchQueryBuilderImpl
 
 		try {
 			QueryParser queryParser = new QueryParser(
-				LuceneHelperUtil.getVersion(), field,
-				_analyzer);
+				LuceneHelperUtil.getVersion(), field, _analyzer);
 
 			queryParser.setAllowLeadingWildcard(true);
 			queryParser.setLowercaseExpandedTerms(false);
@@ -130,44 +158,12 @@ public class RepositorySearchQueryBuilderImpl
 		}
 	}
 
-	protected void addSearchKeywords(
-			BooleanQuery searchQuery, SearchContext searchContext)
-		throws Exception {
-
-		String keywords = searchContext.getKeywords();
-
-		if (Validator.isNull(keywords)) {
-			return;
-		}
-
-		BooleanQuery titleQuery = BooleanQueryFactoryUtil.create(searchContext);
-
-		addTerm(titleQuery, searchContext, Field.TITLE, keywords);
-
-		if (!titleQuery.clauses().isEmpty() &&
-			!contains(searchQuery, titleQuery)) {
-
-			searchQuery.add(titleQuery, BooleanClauseOccur.SHOULD);
-		}
-
-		BooleanQuery userNameQuery = BooleanQueryFactoryUtil.create(
-			searchContext);
-
-		addTerm(userNameQuery, searchContext, Field.USER_NAME, keywords);
-
-		if (!userNameQuery.clauses().isEmpty() &&
-			!contains(searchQuery, userNameQuery)) {
-
-			searchQuery.add(userNameQuery, BooleanClauseOccur.SHOULD);
-		}
-	}
-
 	protected boolean contains(Query query1, Query query2) {
 		if (query1 instanceof BooleanQuery) {
 			BooleanQuery booleanQuery = (BooleanQuery)query1;
 
 			for (com.liferay.portal.kernel.search.BooleanClause booleanClause :
-				booleanQuery.clauses()) {
+					booleanQuery.clauses()) {
 
 				if (contains(booleanClause.getQuery(), query2)) {
 					return true;
@@ -180,7 +176,7 @@ public class RepositorySearchQueryBuilderImpl
 			BooleanQuery booleanQuery = (BooleanQuery)query2;
 
 			for (com.liferay.portal.kernel.search.BooleanClause booleanClause :
-				booleanQuery.clauses()) {
+					booleanQuery.clauses()) {
 
 				if (contains(query1, booleanClause.getQuery())) {
 					return true;
@@ -189,26 +185,38 @@ public class RepositorySearchQueryBuilderImpl
 
 			return false;
 		}
-		else if (query1 instanceof TermQuery && query2 instanceof TermQuery) {
-			QueryTerm queryTerm1 = ((TermQuery)query1).getQueryTerm();
-			QueryTerm queryTerm2 = ((TermQuery)query2).getQueryTerm();
+		else if ((query1 instanceof TermQuery) &&
+				 (query2 instanceof TermQuery)) {
 
-			if (queryTerm1.getField().equals(queryTerm2.getField()) &&
-				queryTerm1.getValue().equals(queryTerm2.getValue())) {
+			TermQuery termQuery1 = (TermQuery)query1;
 
+			QueryTerm queryTerm1 = termQuery1.getQueryTerm();
+
+			String field1 = queryTerm1.getField();
+			String value1 = queryTerm1.getValue();
+
+			TermQuery termQuery2 = (TermQuery)query2;
+
+			QueryTerm queryTerm2 = termQuery2.getQueryTerm();
+
+			String field2 = queryTerm2.getField();
+			String value2 = queryTerm2.getValue();
+
+			if (field1.equals(field2) && value1.equals(value2)) {
 				return true;
 			}
 		}
-		else if (query1 instanceof TermRangeQuery &&
-			query2 instanceof TermRangeQuery) {
+		else if ((query1 instanceof TermRangeQuery) &&
+				 (query2 instanceof TermRangeQuery)) {
 
 			TermRangeQuery termRangeQuery1 = (TermRangeQuery)query1;
-			TermRangeQuery termRangeQuery2 = (TermRangeQuery)query2;
 
 			boolean includesLower1 = termRangeQuery1.includesLower();
 			boolean includesUpper1 = termRangeQuery1.includesUpper();
 			String lowerTerm1 = termRangeQuery1.getLowerTerm();
 			String upperTerm1 = termRangeQuery1.getUpperTerm();
+
+			TermRangeQuery termRangeQuery2 = (TermRangeQuery)query2;
 
 			boolean includesLower2 = termRangeQuery2.includesLower();
 			boolean includesUpper2 = termRangeQuery2.includesUpper();
@@ -223,18 +231,24 @@ public class RepositorySearchQueryBuilderImpl
 				return true;
 			}
 		}
-		else if (query1 instanceof WildcardQuery &&
-				query2 instanceof WildcardQuery) {
+		else if ((query1 instanceof WildcardQuery) &&
+				 (query2 instanceof WildcardQuery)) {
 
 			WildcardQuery wildcardQuery1 = (WildcardQuery)query1;
-			WildcardQuery wildcardQuery2 = (WildcardQuery)query2;
 
 			QueryTerm queryTerm1 = wildcardQuery1.getQueryTerm();
+
+			String field1 = queryTerm1.getField();
+			String value1 = queryTerm1.getValue();
+
+			WildcardQuery wildcardQuery2 = (WildcardQuery)query2;
+
 			QueryTerm queryTerm2 = wildcardQuery2.getQueryTerm();
 
-			if (queryTerm1.getField().equals(queryTerm2.getField()) &&
-				queryTerm1.getValue().equals(queryTerm2.getValue())) {
+			String field2 = queryTerm2.getField();
+			String value2 = queryTerm2.getValue();
 
+			if (field1.equals(field2) && value1.equals(value2)) {
 				return true;
 			}
 		}
@@ -242,32 +256,32 @@ public class RepositorySearchQueryBuilderImpl
 		return false;
 	}
 
+	protected org.apache.lucene.search.BooleanClause.Occur
+		getBooleanClauseOccur(BooleanClauseOccur occur) {
+
+		if (occur.equals(BooleanClauseOccur.MUST)) {
+			return org.apache.lucene.search.BooleanClause.Occur.MUST;
+		}
+		else if (occur.equals(BooleanClauseOccur.MUST_NOT)) {
+			return org.apache.lucene.search.BooleanClause.Occur.MUST_NOT;
+		}
+
+		return org.apache.lucene.search.BooleanClause.Occur.SHOULD;
+	}
+
 	protected BooleanClauseOccur getBooleanClauseOccur(
 		org.apache.lucene.search.BooleanClause.Occur occur) {
 
-		if (occur == org.apache.lucene.search.BooleanClause.Occur.MUST) {
+		if (occur.equals(org.apache.lucene.search.BooleanClause.Occur.MUST)) {
 			return BooleanClauseOccur.MUST;
 		}
-		else if (
-			occur == org.apache.lucene.search.BooleanClause.Occur.MUST_NOT) {
+		else if (occur.equals(
+					org.apache.lucene.search.BooleanClause.Occur.MUST_NOT)) {
 
 			return BooleanClauseOccur.MUST_NOT;
 		}
 
 		return BooleanClauseOccur.SHOULD;
-	}
-
-	protected org.apache.lucene.search.BooleanClause.Occur
-		getBooleanClauseOccur(BooleanClauseOccur occur) {
-
-		if (occur == BooleanClauseOccur.MUST) {
-			return org.apache.lucene.search.BooleanClause.Occur.MUST;
-		}
-		else if (occur == BooleanClauseOccur.MUST_NOT) {
-			return org.apache.lucene.search.BooleanClause.Occur.MUST_NOT;
-		}
-
-		return org.apache.lucene.search.BooleanClause.Occur.SHOULD;
 	}
 
 	protected void translateQuery(
@@ -301,30 +315,31 @@ public class RepositorySearchQueryBuilderImpl
 				searchContext);
 
 			for (org.apache.lucene.search.BooleanClause booleanClause :
-				curBooleanQuery.getClauses()) {
+					curBooleanQuery.getClauses()) {
 
-				BooleanClauseOccur curOccur = getBooleanClauseOccur(
-					booleanClause.getOccur());
+				BooleanClauseOccur curBooleanClauseOccur =
+					getBooleanClauseOccur(booleanClause.getOccur());
 
-				BooleanQuery subBooleanQuery = null;
+				BooleanQuery subbooleanQuery = null;
 
-				if (curOccur == BooleanClauseOccur.SHOULD) {
-					subBooleanQuery = disjunctionQuery;
+				if (curBooleanClauseOccur.equals(BooleanClauseOccur.SHOULD)) {
+					subbooleanQuery = disjunctionQuery;
 				}
 				else {
-					subBooleanQuery = conjunctionQuery;
+					subbooleanQuery = conjunctionQuery;
 				}
 
 				translateQuery(
-					subBooleanQuery, searchContext, booleanClause.getQuery(),
+					subbooleanQuery, searchContext, booleanClause.getQuery(),
 					booleanClause.getOccur());
 
 			}
 
-			if (!conjunctionQuery.clauses().isEmpty()) {
+			if (conjunctionQuery.hasClauses()) {
 				booleanQuery.add(conjunctionQuery, BooleanClauseOccur.MUST);
 			}
-			if (!disjunctionQuery.clauses().isEmpty()) {
+
+			if (disjunctionQuery.hasClauses()) {
 				booleanQuery.add(disjunctionQuery, BooleanClauseOccur.SHOULD);
 			}
 		}
@@ -388,8 +403,8 @@ public class RepositorySearchQueryBuilderImpl
 		else {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
-					"Ignoring unknown query type: " + query.getClass() +
-					" with query: " + query);
+					"Ignoring unknown query type " + query.getClass() +
+						" with query " + query);
 			}
 		}
 	}

@@ -243,17 +243,20 @@ public class BooleanQueryImpl extends BaseBooleanQueryImpl {
 	}
 
 	public List<BooleanClause> clauses() {
-		List<org.apache.lucene.search.BooleanClause> luceneClauses =
+		List<org.apache.lucene.search.BooleanClause> luceneBooleanClauses =
 			_booleanQuery.clauses();
 
-		List<BooleanClause> clauses = new ArrayList<BooleanClause>(
-			luceneClauses.size());
+		List<BooleanClause> booleanClauses = new ArrayList<BooleanClause>(
+			luceneBooleanClauses.size());
 
-		for (int i = 0; i < luceneClauses.size(); i++) {
-			clauses.add(new BooleanClauseImpl(luceneClauses.get(i)));
+		for (int i = 0; i < luceneBooleanClauses.size(); i++) {
+			BooleanClause booleanClause = new BooleanClauseImpl(
+				luceneBooleanClauses.get(i));
+
+			booleanClauses.add(booleanClause);
 		}
 
-		return clauses;
+		return booleanClauses;
 	}
 
 	public org.apache.lucene.search.BooleanQuery getBooleanQuery() {
@@ -263,6 +266,10 @@ public class BooleanQueryImpl extends BaseBooleanQueryImpl {
 	@Override
 	public Object getWrappedQuery() {
 		return getBooleanQuery();
+	}
+
+	public boolean hasClauses() {
+		return !clauses().isEmpty();
 	}
 
 	@Override

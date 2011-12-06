@@ -39,7 +39,7 @@ import java.util.List;
 public class BooleanQueryImpl extends BaseBooleanQueryImpl {
 
 	public void add(Query query, BooleanClauseOccur booleanClauseOccur) {
-		_clauses.add(new BooleanClauseImpl(query, booleanClauseOccur));
+		_booleanClauses.add(new BooleanClauseImpl(query, booleanClauseOccur));
 	}
 
 	public void add(Query query, String occur) {
@@ -329,7 +329,7 @@ public class BooleanQueryImpl extends BaseBooleanQueryImpl {
 	}
 
 	public List<BooleanClause> clauses() {
-		return Collections.unmodifiableList(_clauses);
+		return Collections.unmodifiableList(_booleanClauses);
 	}
 
 	@Override
@@ -337,8 +337,13 @@ public class BooleanQueryImpl extends BaseBooleanQueryImpl {
 		return this;
 	}
 
+	public boolean hasClauses() {
+		return !_booleanClauses.isEmpty();
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(BooleanQueryImpl.class);
 
-	private List<BooleanClause> _clauses = new ArrayList<BooleanClause>();
+	private List<BooleanClause> _booleanClauses =
+		new ArrayList<BooleanClause>();
 
 }

@@ -57,17 +57,19 @@ public class CMISParameterValueUtil {
 			}
 			catch (ParseException pe) {
 				_log.warn(
-					"Unable to parse date " + value + " for field" + field);
+					"Unable to parse date " + value + " for field " + field);
 			}
 		}
 		else {
-			value = StringUtil.replace(value, StringPool.APOSTROPHE, "\\'");
-			value = StringUtil.replace(value, StringPool.UNDERLINE, "\\_");
+			value = StringUtil.replace(
+				value,
+				new String[] {StringPool.APOSTROPHE, StringPool.UNDERLINE},
+				new String[] {"\\'", "\\_"});
 
 			if (wildcard) {
-				value = StringUtil.replace(value, StringPool.PERCENT, "\\%");
 				value = StringUtil.replace(
-					value, StringPool.STAR, StringPool.PERCENT);
+					value, new String[] {StringPool.PERCENT, StringPool.STAR},
+					new String[] {"\\%", StringPool.PERCENT});
 			}
 		}
 

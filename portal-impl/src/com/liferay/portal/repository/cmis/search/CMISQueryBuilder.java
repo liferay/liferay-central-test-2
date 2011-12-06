@@ -97,7 +97,7 @@ public class CMISQueryBuilder {
 					sb.append(", ");
 				}
 
-				sb.append(_fieldNameMap.get(fieldName));
+				sb.append(_cmisFields.get(fieldName));
 
 				if (sort.isReverse()) {
 					sb.append(" DESC");
@@ -178,7 +178,7 @@ public class CMISQueryBuilder {
 				field, value, wildcard);
 
 			cmisCriterion = new CMISSimpleExpression(
-				_fieldNameMap.get(field), value, cmisSimpleExpressionOperator);
+				_cmisFields.get(field), value, cmisSimpleExpressionOperator);
 		}
 
 		return cmisCriterion;
@@ -252,7 +252,7 @@ public class CMISQueryBuilder {
 
 			String fieldName = termRangeQuery.getField();
 
-			String cmisField = _fieldNameMap.get(fieldName);
+			String cmisField = _cmisFields.get(fieldName);
 			String cmisLowerTerm = CMISParameterValueUtil.formatParameterValue(
 				fieldName, termRangeQuery.getLowerTerm());
 			String cmisUpperTerm = CMISParameterValueUtil.formatParameterValue(
@@ -285,18 +285,18 @@ public class CMISQueryBuilder {
 
 	private static Log _log = LogFactoryUtil.getLog(CMISQueryBuilder.class);
 
-	private static Map<String, String> _fieldNameMap;
+	private static Map<String, String> _cmisFields;
 	private static Set<String> _supportedFields;
 
 	static {
-		_fieldNameMap = new HashMap<String, String>();
+		_cmisFields = new HashMap<String, String>();
 
-		_fieldNameMap.put(Field.CREATE_DATE, PropertyIds.CREATION_DATE);
-		_fieldNameMap.put(
+		_cmisFields.put(Field.CREATE_DATE, PropertyIds.CREATION_DATE);
+		_cmisFields.put(
 			Field.MODIFIED_DATE, PropertyIds.LAST_MODIFICATION_DATE);
-		_fieldNameMap.put(Field.NAME, PropertyIds.NAME);
-		_fieldNameMap.put(Field.TITLE, PropertyIds.NAME);
-		_fieldNameMap.put(Field.USER_NAME, PropertyIds.CREATED_BY);
+		_cmisFields.put(Field.NAME, PropertyIds.NAME);
+		_cmisFields.put(Field.TITLE, PropertyIds.NAME);
+		_cmisFields.put(Field.USER_NAME, PropertyIds.CREATED_BY);
 
 		_supportedFields = new HashSet<String>();
 

@@ -60,11 +60,11 @@ public interface LuceneHelper {
 		BooleanQuery booleanQuery, String field, String value, boolean like);
 
 	public void addTerm(
-		BooleanQuery booleanQuery, String field, String[] values, boolean like);
-
-	public void addTerm(
 		BooleanQuery booleanQuery, String field, String value, boolean like,
 		BooleanClauseOccur booleanClauseOccur);
+
+	public void addTerm(
+		BooleanQuery booleanQuery, String field, String[] values, boolean like);
 
 	public int countScoredFieldNames(Query query, String[] fieldNames);
 

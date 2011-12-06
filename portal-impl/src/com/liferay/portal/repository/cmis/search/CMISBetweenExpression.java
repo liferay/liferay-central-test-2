@@ -22,12 +22,12 @@ import com.liferay.portal.kernel.util.StringBundler;
 public class CMISBetweenExpression implements CMISCriterion {
 
 	public CMISBetweenExpression(
-		String field, String lower, String upper, boolean includesLower,
+		String field, String lowerTerm, String upperTerm, boolean includesLower,
 		boolean includesUpper) {
 
 		_field = field;
-		_lower = lower;
-		_upper = upper;
+		_lowerTerm = lowerTerm;
+		_upperTerm = upperTerm;
 		_includesLower = includesLower;
 		_includesUpper = includesUpper;
 	}
@@ -44,7 +44,7 @@ public class CMISBetweenExpression implements CMISCriterion {
 			sb.append(" > ");
 		}
 
-		sb.append(_lower);
+		sb.append(_lowerTerm);
 		sb.append(" AND ");
 		sb.append(_field);
 
@@ -55,7 +55,7 @@ public class CMISBetweenExpression implements CMISCriterion {
 			sb.append(" < ");
 		}
 
-		sb.append(_upper);
+		sb.append(_upperTerm);
 
 		return sb.toString();
 	}
@@ -63,7 +63,7 @@ public class CMISBetweenExpression implements CMISCriterion {
 	private String _field;
 	private boolean _includesLower;
 	private boolean _includesUpper;
-	private String _lower;
-	private String _upper;
+	private String _lowerTerm;
+	private String _upperTerm;
 
 }

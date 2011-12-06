@@ -123,4 +123,6 @@ public interface BooleanQuery extends Query {
 
 	public List<BooleanClause> clauses();
 
+	public boolean hasClauses();
+
 }

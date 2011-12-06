@@ -269,18 +269,18 @@ public class LuceneHelperUtil {
 	}
 
 	public static void addTerm(
-		BooleanQuery booleanQuery, String field, String[] values,
-		boolean like) {
-
-		getLuceneHelper().addTerm(booleanQuery, field, values, like);
-	}
-
-	public static void addTerm(
 		BooleanQuery booleanQuery, String field, String value, boolean like,
 		BooleanClauseOccur booleanClauseOccur) {
 
 		getLuceneHelper().addTerm(
 			booleanQuery, field, value, like, booleanClauseOccur);
+	}
+
+	public static void addTerm(
+		BooleanQuery booleanQuery, String field, String[] values,
+		boolean like) {
+
+		getLuceneHelper().addTerm(booleanQuery, field, values, like);
 	}
 
 	public static int countScoredFieldNames(Query query, String[] fieldNames) {
