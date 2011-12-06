@@ -91,9 +91,9 @@ public class ExpandoColumnConstants {
 
 	public static final String LONG_LABEL = "custom.field.long";
 
-	public static final int NUMBER = 13;
+	public static final int NUMBER = 17;
 
-	public static final int NUMBER_ARRAY = 14;
+	public static final int NUMBER_ARRAY = 18;
 
 	public static final String NUMBER_ARRAY_LABEL = "custom.field.number.array";
 
@@ -121,17 +121,17 @@ public class ExpandoColumnConstants {
 
 	public static final String PROPERTY_WIDTH = "width";
 
-	public static final int SHORT = 15;
+	public static final int SHORT = 13;
 
-	public static final int SHORT_ARRAY = 16;
+	public static final int SHORT_ARRAY = 14;
 
 	public static final String SHORT_ARRAY_LABEL = "custom.field.short.array";
 
 	public static final String SHORT_LABEL = "custom.field.short";
 
-	public static final int STRING = 17;
+	public static final int STRING = 15;
 
-	public static final int STRING_ARRAY = 18;
+	public static final int STRING_ARRAY = 16;
 
 	public static final String STRING_ARRAY_LABEL =
 		"custom.field.java.lang.String.array";
