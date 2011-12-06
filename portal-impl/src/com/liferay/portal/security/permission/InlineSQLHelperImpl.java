@@ -15,6 +15,7 @@
 package com.liferay.portal.security.permission;
 
 import com.liferay.portal.kernel.util.ArrayUtil;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -449,7 +450,8 @@ public class InlineSQLHelperImpl implements InlineSQLHelper {
 
 				sb.append("(");
 				sb.append(
-					classPKField.substring(0, classPKField.lastIndexOf('.')));
+					classPKField.substring(
+						0, classPKField.lastIndexOf(CharPool.PERIOD)));
 				sb.append(".groupId = ");
 				sb.append(groupId);
 				sb.append(")");
