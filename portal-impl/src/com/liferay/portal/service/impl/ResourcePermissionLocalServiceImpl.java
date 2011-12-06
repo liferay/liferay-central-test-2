@@ -38,7 +38,6 @@ import com.liferay.portal.service.base.ResourcePermissionLocalServiceBaseImpl;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.ResourcePermissionsThreadLocal;
-import com.liferay.portal.verify.VerifyPermission;
 
 import java.util.ArrayList;
 import java.util.Collection;
