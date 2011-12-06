@@ -38,6 +38,7 @@ import com.liferay.portal.service.base.ResourcePermissionLocalServiceBaseImpl;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.ResourcePermissionsThreadLocal;
+import com.liferay.portal.verify.VerifyPermission;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -65,6 +66,12 @@ import java.util.concurrent.locks.Lock;
  */
 public class ResourcePermissionLocalServiceImpl
 	extends ResourcePermissionLocalServiceBaseImpl {
+
+	/**
+	 * @see {@link VerifyPermission#fixOrganizationRolePermissions_6} and
+	 *      LPS-23704
+	 */
+	public static String[] EMPTY_ACTION_IDS = {null};
 
 	/**
 	 * Grants the role permission at the scope to perform the action on

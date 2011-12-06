@@ -41,6 +41,7 @@ import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.ResourcePermissionLocalServiceUtil;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portal.service.impl.ResourcePermissionLocalServiceImpl;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PropsValues;
 
@@ -239,8 +240,6 @@ public class VerifyPermission extends VerifyProcess {
 		List<ResourcePermission> resourcePermissions =
 			ResourcePermissionLocalServiceUtil.dynamicQuery(dynamicQuery);
 
-		String[] actionIds = new String[] {null};
-
 		for (ResourcePermission resourcePermission : resourcePermissions) {
 			ResourcePermission groupResourcePermission = null;
 
@@ -257,7 +256,8 @@ public class VerifyPermission extends VerifyProcess {
 					resourcePermission.getCompanyId(), Group.class.getName(),
 					resourcePermission.getScope(),
 					resourcePermission.getPrimKey(),
-					resourcePermission.getRoleId(), actionIds);
+					resourcePermission.getRoleId(),
+					ResourcePermissionLocalServiceImpl.EMPTY_ACTION_IDS);
 
 				groupResourcePermission =
 					ResourcePermissionLocalServiceUtil.getResourcePermission(
