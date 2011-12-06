@@ -17,6 +17,8 @@
 <%@ include file="/html/portlet/layouts_admin/init.jsp" %>
 
 <%
+String closeRedirect = ParamUtil.getString(request, "closeRedirect");
+
 Group selGroup = (Group)request.getAttribute(WebKeys.GROUP);
 
 Group group = (Group)request.getAttribute("edit_pages.jsp-group");
@@ -33,9 +35,6 @@ boolean privateLayout = ((Boolean)request.getAttribute("edit_pages.jsp-privateLa
 
 PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portletURL");
 PortletURL redirectURL = (PortletURL)request.getAttribute("edit_pages.jsp-redirectURL");
-
-String closeRedirect = ParamUtil.getString(request, "closeRedirect");
-String layoutTemplateId = ParamUtil.getString(request, "layoutTemplateId", PropsValues.DEFAULT_LAYOUT_TEMPLATE_ID);
 
 long refererPlid = ParamUtil.getLong(request, "refererPlid", LayoutConstants.DEFAULT_PLID);
 
@@ -77,6 +76,8 @@ if (layoutRevision != null) {
 		layoutSetBranchName = layoutSetBranch.getName();
 	}
 }
+
+String layoutTemplateId = ParamUtil.getString(request, "layoutTemplateId", PropsValues.DEFAULT_LAYOUT_TEMPLATE_ID);
 
 String[] mainSections = PropsValues.LAYOUT_FORM_UPDATE;
 
