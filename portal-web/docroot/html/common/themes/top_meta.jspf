@@ -20,7 +20,7 @@
 int refreshRate = ParamUtil.getInteger(request, "refresh_rate");
 %>
 
-<c:if test="<%= refreshRate != 0 %>">
+<c:if test="<%= refreshRate > 0 %>">
 	<meta content="<%= refreshRate %>;" http-equiv="Refresh" />
 </c:if>
 
