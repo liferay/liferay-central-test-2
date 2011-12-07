@@ -1253,30 +1253,20 @@ public class StagingImpl implements Staging {
 		else if (stagingType == StagingConstants.TYPE_REMOTE_STAGING) {
 			String remoteAddress = ParamUtil.getString(
 				portletRequest, "remoteAddress");
+
+			remoteAddress = stripProtocolFromRemoteAddress(remoteAddress);
+
 			long remoteGroupId = ParamUtil.getLong(
 				portletRequest, "remoteGroupId");
 			int remotePort = ParamUtil.getInteger(portletRequest, "remotePort");
 			boolean secureConnection = ParamUtil.getBoolean(
 				portletRequest, "secureConnection");
 
-			remoteAddress = processRemoteAddress(remoteAddress);
-
 			enableRemoteStaging(
 				userId, scopeGroup, liveGroup, branchingPublic,
 				branchingPrivate, remoteAddress, remoteGroupId, remotePort,
 				secureConnection, serviceContext);
 		}
-	}
-
-	protected String processRemoteAddress(String remoteAddress) {
-		if (remoteAddress.startsWith(Http.HTTP_WITH_SLASH)) {
-			remoteAddress = remoteAddress.substring(Http.HTTP_WITH_SLASH.length());
-		}
-		else if(remoteAddress.startsWith(Http.HTTPS_WITH_SLASH)) {
-			remoteAddress = remoteAddress.substring(Http.HTTPS_WITH_SLASH.length());
-		}
-
-		return remoteAddress;
 	}
 
 	protected void addWeeklyDayPos(
@@ -1845,6 +1835,9 @@ public class StagingImpl implements Staging {
 		String remoteAddress = ParamUtil.getString(
 			portletRequest, "remoteAddress",
 			groupTypeSettingsProperties.getProperty("remoteAddress"));
+
+		remoteAddress = stripProtocolFromRemoteAddress(remoteAddress);
+
 		long remoteGroupId = ParamUtil.getLong(
 			portletRequest, "remoteGroupId",
 			GetterUtil.getLong(
@@ -1859,8 +1852,6 @@ public class StagingImpl implements Staging {
 			portletRequest, "secureConnection",
 			GetterUtil.getBoolean(
 				groupTypeSettingsProperties.getProperty("secureConnection")));
-
-		remoteAddress = processRemoteAddress(remoteAddress);
 
 		validate(remoteAddress, remoteGroupId, remotePort, secureConnection);
 
@@ -2043,6 +2034,19 @@ public class StagingImpl implements Staging {
 			Staging.class.getName(),
 			getRecentLayoutBranchIdKey(layoutSetBranchId, plid),
 			String.valueOf(layoutBranchId));
+	}
+
+	protected String stripProtocolFromRemoteAddress(String remoteAddress) {
+		if (remoteAddress.startsWith(Http.HTTP_WITH_SLASH)) {
+			remoteAddress = remoteAddress.substring(
+				Http.HTTP_WITH_SLASH.length());
+		}
+		else if (remoteAddress.startsWith(Http.HTTPS_WITH_SLASH)) {
+			remoteAddress = remoteAddress.substring(
+				Http.HTTPS_WITH_SLASH.length());
+		}
+
+		return remoteAddress;
 	}
 
 	protected void validate(

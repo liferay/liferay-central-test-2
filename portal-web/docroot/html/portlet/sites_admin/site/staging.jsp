@@ -53,7 +53,7 @@ UnicodeProperties liveGroupTypeSettings = (UnicodeProperties)request.getAttribut
 		}
 		%>
 
-		<div class="<%= (showRemoteOptions ? StringPool.BLANK : "aui-helper-hidden") %> staging-section" id="<portlet:namespace />remoteStagingOptions">
+		<div class="<%= showRemoteOptions ? StringPool.BLANK : "aui-helper-hidden" %> staging-section" id="<portlet:namespace />remoteStagingOptions">
 			<br />
 
 			<liferay-ui:error exception="<%= RemoteExportException.class %>">
@@ -71,7 +71,7 @@ UnicodeProperties liveGroupTypeSettings = (UnicodeProperties)request.getAttribut
 				</c:if>
 
 				<c:if test="<%= ree.getType() == RemoteExportException.NO_PERMISSIONS %>">
-					<liferay-ui:message arguments="<%= ree.getGroupId() %>" key="you-don't-have-permissions-to-edit-the-site-with-id-x-on-the-remote-server" />
+					<liferay-ui:message arguments="<%= ree.getGroupId() %>" key="you-do-not-have-permissions-to-edit-the-site-with-id-x-on-the-remote-server" />
 				</c:if>
 			</liferay-ui:error>
 

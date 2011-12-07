@@ -159,8 +159,7 @@ public class TunnelUtil {
 			url = new URL(httpPrincipal.getUrl() + "/api/liferay/do");
 		}
 		else {
-			url = new URL(
-				httpPrincipal.getUrl() + "/api/secure/liferay/do");
+			url = new URL(httpPrincipal.getUrl() + "/api/secure/liferay/do");
 		}
 
 		HttpURLConnection httpURLConnection =
