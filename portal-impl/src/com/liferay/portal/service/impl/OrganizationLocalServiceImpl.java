@@ -955,8 +955,6 @@ public class OrganizationLocalServiceImpl
 		String country = null;
 		boolean andOperator = false;
 
-		params.put("keywords", keywords);
-
 		if (Validator.isNotNull(keywords)) {
 			name = keywords;
 			type = keywords;
@@ -969,6 +967,8 @@ public class OrganizationLocalServiceImpl
 		else {
 			andOperator = true;
 		}
+
+		params.put("keywords", keywords);
 
 		return search(
 			companyId, parentOrganizationId, name, type, street, city, zip,
@@ -1288,13 +1288,14 @@ public class OrganizationLocalServiceImpl
 			searchContext.setAttributes(attributes);
 			searchContext.setCompanyId(companyId);
 			searchContext.setEnd(end);
-			searchContext.setSorts(new Sort[] {sort});
 
 			String keywords = (String)params.remove("keywords");
 
 			if (Validator.isNotNull(keywords)) {
 				searchContext.setKeywords(keywords);
 			}
+
+			searchContext.setSorts(new Sort[] {sort});
 
 			QueryConfig queryConfig = new QueryConfig();
 
