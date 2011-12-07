@@ -149,12 +149,11 @@ public class PhoneLocalServiceImpl extends PhoneLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		if (Validator.isNull(number)) {
-			throw new PhoneNumberException(PhoneNumberException.PHONE_NUMBER);
+			throw new PhoneNumberException(PhoneNumberException.NUMBER);
 		}
 
 		if (Validator.isNotNull(extension) && !Validator.isNumber(extension)) {
-			throw new PhoneNumberException(
-				PhoneNumberException.PHONE_EXCEPTION);
+			throw new PhoneNumberException(PhoneNumberException.EXTENSION);
 		}
 
 		if (phoneId > 0) {

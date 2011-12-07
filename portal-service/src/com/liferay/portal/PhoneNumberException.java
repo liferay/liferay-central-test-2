@@ -21,9 +21,9 @@ import com.liferay.portal.kernel.exception.PortalException;
  */
 public class PhoneNumberException extends PortalException {
 
-	public static final int PHONE_NUMBER = 1;
+	public static final int NUMBER = 1;
 
-	public static final int PHONE_EXCEPTION = 2;
+	public static final int EXTENSION = 2;
 
 	public PhoneNumberException(int type) {
 		_type = type;
