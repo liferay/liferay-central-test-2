@@ -60,8 +60,8 @@ public class SubscriptionPermissionImpl implements SubscriptionPermission {
 		}
 
 		if (className.equals(BlogsEntry.class.getName())) {
-			BlogsEntry blogsEntry =
-				BlogsEntryLocalServiceUtil.getBlogsEntry(classPK);
+			BlogsEntry blogsEntry = BlogsEntryLocalServiceUtil.getBlogsEntry(
+				classPK);
 
 			return BlogsPermission.contains(
 				permissionChecker, blogsEntry.getGroupId(),
@@ -84,10 +84,10 @@ public class SubscriptionPermissionImpl implements SubscriptionPermission {
 			}
 		}
 		else if (className.equals(MBThread.class.getName())) {
-			MBThread thread = MBThreadLocalServiceUtil.fetchThread(classPK);
+			MBThread mbThread = MBThreadLocalServiceUtil.fetchThread(classPK);
 
 			return MBMessagePermission.contains(
-				permissionChecker, thread.getRootMessageId(),
+				permissionChecker, mbThread.getRootMessageId(),
 				ActionKeys.SUBSCRIBE);
 		}
 		else if (className.equals(WikiNode.class.getName())) {
