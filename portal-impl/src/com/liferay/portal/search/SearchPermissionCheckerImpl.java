@@ -233,10 +233,12 @@ public class SearchPermissionCheckerImpl implements SearchPermissionChecker {
 		long[] roleIdsArray = new long[roles.size()];
 
 		for (int i = 0; i < roleIdsArray.length; i++) {
-			roleIdsArray[i] = roles.get(i).getRoleId();
+			Role role = roles.get(i);
+
+			roleIdsArray[i] = role.getRoleId();
 		}
 
-		boolean[] hasRoles =
+		boolean[] hasResourcePermissions =
 			ResourcePermissionLocalServiceUtil.hasResourcePermissions(
 				companyId, className, ResourceConstants.SCOPE_INDIVIDUAL,
 				classPK, roleIdsArray, ActionKeys.VIEW);
@@ -244,20 +246,20 @@ public class SearchPermissionCheckerImpl implements SearchPermissionChecker {
 		List<Long> roleIds = new ArrayList<Long>();
 		List<String> groupRoleIds = new ArrayList<String>();
 
-		for (int i = 0; i < hasRoles.length; i++) {
-			if (hasRoles[i]) {
-				Role role = roles.get(i);
+		for (int i = 0; i < hasResourcePermissions.length; i++) {
+			if (!hasResourcePermissions[i]) {
+				continue;
+			}
 
-				long roleId = role.getRoleId();
+			Role role = roles.get(i);
 
-				if ((role.getType() == RoleConstants.TYPE_ORGANIZATION) ||
-					(role.getType() == RoleConstants.TYPE_SITE)) {
+			if ((role.getType() == RoleConstants.TYPE_ORGANIZATION) ||
+				(role.getType() == RoleConstants.TYPE_SITE)) {
 
-					groupRoleIds.add(groupId + StringPool.DASH + roleId);
-				}
-				else {
-					roleIds.add(roleId);
-				}
+				groupRoleIds.add(groupId + StringPool.DASH + role.getRoleId());
+			}
+			else {
+				roleIds.add(role.getRoleId());
 			}
 		}
 

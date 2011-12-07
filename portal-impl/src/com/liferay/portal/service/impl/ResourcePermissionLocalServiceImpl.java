@@ -736,10 +736,10 @@ public class ResourcePermissionLocalServiceImpl
 			resourcePermissionPersistence.findByC_N_S_P_R(
 				companyId, name, scope, primKey, roleIds);
 
-		boolean[] results = new boolean[roleIds.length];
+		boolean[] hasResourcePermissions = new boolean[roleIds.length];
 
 		if (resourcePermissions.isEmpty()) {
-			return results;
+			return hasResourcePermissions;
 		}
 
 		for (ResourcePermission resourcePermission : resourcePermissions) {
@@ -748,13 +748,13 @@ public class ResourcePermissionLocalServiceImpl
 
 				for (int i = 0; i < roleIds.length; i++) {
 					if (roleIds[i] == roleId) {
-						results[i] = true;
+						hasResourcePermissions[i] = true;
 					}
 				}
 			}
 		}
 
-		return results;
+		return hasResourcePermissions;
 	}
 
 	/**
