@@ -70,9 +70,10 @@ public class SubscriptionPermissionImpl implements SubscriptionPermission {
 			}
 
 			long groupId = classPK;
-			String title = assetEntry.getTitle();
 
-			if (!title.equals(String.valueOf(classPK))) {
+			String classPKString = String.valueOf(classPK); 
+
+			if (!classPKString.equals(assetEntry.getTitle())) {
 				BlogsEntry blogsEntry =
 					BlogsEntryLocalServiceUtil.getBlogsEntry(classPK);
 
