@@ -76,9 +76,27 @@ public class LayoutLocalServiceVirtualLayoutsAdvice
 
 		Class<?>[] parameterTypes = method.getParameterTypes();
 
-		if ((methodName.equals("getLayouts") &&
-			 Arrays.equals(parameterTypes, _TYPES_L_B_L)) ||
-			 Arrays.equals(parameterTypes, _TYPES_L_B_L_B_I_I)) {
+		if (methodName.equals("getLayout") &&
+			(Arrays.equals(parameterTypes, _TYPES_L) ||
+			 Arrays.equals(parameterTypes, _TYPES_L_B_L))) {
+
+			Layout layout = (Layout)methodInvocation.proceed();
+
+			if (Validator.isNull(layout.getTemplateLayoutUuid())) {
+				return layout;
+			}
+
+			PermissionChecker permissionChecker =
+				PermissionThreadLocal.getPermissionChecker();
+
+			Group group = layout.getGroup();
+			LayoutSet layoutSet = layout.getLayoutSet();
+
+			mergeLayoutSetProtypeLayouts(permissionChecker, group, layoutSet);
+		}
+		else if (methodName.equals("getLayouts") &&
+				 (Arrays.equals(parameterTypes, _TYPES_L_B_L) ||
+				  Arrays.equals(parameterTypes, _TYPES_L_B_L_B_I_I))) {
 
 			long groupId = (Long)arguments[0];
 			boolean privateLayout = (Boolean)arguments[1];
@@ -114,25 +132,6 @@ public class LayoutLocalServiceVirtualLayoutsAdvice
 
 				throw e;
 			}
-		}
-		else if (methodName.equals("getLayout") &&
-			 (Arrays.equals(parameterTypes, _TYPES_L) ||
-			  Arrays.equals(parameterTypes, _TYPES_L_B_L))) {
-
-			Layout layout = (Layout)methodInvocation.proceed();
-
-			if (Validator.isNull(layout.getTemplateLayoutUuid())) {
-				return layout;
-			}
-
-			PermissionChecker permissionChecker =
-				PermissionThreadLocal.getPermissionChecker();
-
-			Group group = layout.getGroup();
-			LayoutSet layoutSet = layout.getLayoutSet();
-
-			mergeLayoutSetProtypeLayouts(
-				permissionChecker, group, layoutSet);
 		}
 
 		return methodInvocation.proceed();
@@ -356,22 +355,22 @@ public class LayoutLocalServiceVirtualLayoutsAdvice
 		LayoutSetLocalServiceUtil.updateLayoutSet(layoutSet, false);
 	}
 
+	private static Log _log = LogFactoryUtil.getLog(
+		LayoutLocalServiceVirtualLayoutsAdvice.class);
+
 	private static final String _TEMP_DIR =
 		SystemProperties.get(SystemProperties.TMP_DIR) +
 			"/liferay/layout_set_prototype/";
 
-	private static final Class<?>[] _TYPES_L = new Class<?>[]{Long.TYPE};
+	private static final Class<?>[] _TYPES_L = {Long.TYPE};
 
-	private static final Class<?>[] _TYPES_L_B_L = new Class<?>[] {
+	private static final Class<?>[] _TYPES_L_B_L = {
 		Long.TYPE, Boolean.TYPE, Long.TYPE
 	};
 
-	private static final Class<?>[] _TYPES_L_B_L_B_I_I = new Class<?>[] {
+	private static final Class<?>[] _TYPES_L_B_L_B_I_I = {
 		Long.TYPE, Boolean.TYPE, Long.TYPE, Boolean.TYPE, Integer.TYPE,
 		Integer.TYPE
 	};
-
-	private static Log _log = LogFactoryUtil.getLog(
-		LayoutLocalServiceVirtualLayoutsAdvice.class);
 
 }
