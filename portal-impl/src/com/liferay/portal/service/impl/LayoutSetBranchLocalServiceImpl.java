@@ -57,7 +57,7 @@ public class LayoutSetBranchLocalServiceImpl
 		Date now = new Date();
 
 		validate(
-			groupId, LayoutSetBranchConstants.NO_BRANCHES, privateLayout, name,
+			LayoutSetBranchConstants.NO_BRANCHES, groupId, privateLayout, name,
 			master);
 
 		long layoutSetBranchId = counterLocalService.increment();
@@ -303,10 +303,9 @@ public class LayoutSetBranchLocalServiceImpl
 			layoutSetBranchPersistence.findByPrimaryKey(layoutSetBranchId);
 
 		validate(
-			layoutSetBranch.getGroupId(),
 			layoutSetBranch.getLayoutSetBranchId(),
-			layoutSetBranch.getPrivateLayout(), name,
-			layoutSetBranch.isMaster());
+			layoutSetBranch.getGroupId(), layoutSetBranch.getPrivateLayout(),
+			name, layoutSetBranch.isMaster());
 
 		layoutSetBranch.setName(name);
 		layoutSetBranch.setDescription(description);
@@ -317,7 +316,7 @@ public class LayoutSetBranchLocalServiceImpl
 	}
 
 	protected void validate(
-			long groupId, long layoutSetBranchId, boolean privateLayout,
+			long layoutSetBranchId, long groupId, boolean privateLayout,
 			String name, boolean master)
 		throws PortalException, SystemException {
 
@@ -347,7 +346,7 @@ public class LayoutSetBranchLocalServiceImpl
 					layoutSetBranchFinder.findByMaster(groupId, privateLayout);
 
 				if (layoutSetBranchId !=
-					masterLayoutSetBranch.getLayoutSetBranchId()) {
+						masterLayoutSetBranch.getLayoutSetBranchId()) {
 
 					throw new LayoutSetBranchNameException(
 						LayoutSetBranchNameException.MASTER);

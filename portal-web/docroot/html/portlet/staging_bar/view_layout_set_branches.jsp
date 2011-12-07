@@ -40,7 +40,7 @@ request.setAttribute("view_layout_set_branches.jsp-currentLayoutSetBranchId", St
 	</c:if>
 
 	<c:if test="<%= lsbne.getType() == LayoutSetBranchNameException.MASTER %>">
-		<liferay-ui:message arguments="<%= new Object[] {4, 100} %>" key="only-one-site-pages-variation-can-be-the-main-one" />
+		<liferay-ui:message key="only-one-site-pages-variation-can-be-the-main-one" />
 	</c:if>
 
 	<c:if test="<%= lsbne.getType() == LayoutSetBranchNameException.TOO_LONG %>">
