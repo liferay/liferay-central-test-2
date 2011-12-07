@@ -441,7 +441,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 	@Override
 	public PortletDataHandlerControl[] getExportControls() {
 		return new PortletDataHandlerControl[] {
-			_foldersAndDocuments, _repositories, _shortcuts, _ranks,
+			_repositories, _foldersAndDocuments, _shortcuts, _ranks,
 			_categories, _comments, _ratings, _tags
 		};
 	}
@@ -449,7 +449,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 	@Override
 	public PortletDataHandlerControl[] getImportControls() {
 		return new PortletDataHandlerControl[] {
-			_foldersAndDocuments, _repositories, _shortcuts, _ranks,
+			_repositories, _foldersAndDocuments, _shortcuts, _ranks,
 			_categories, _comments, _ratings, _tags
 		};
 	}
@@ -1348,16 +1348,15 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 		Repository repository =
 			(Repository)portletDataContext.getZipEntryAsObject(path);
 
+		long userId = portletDataContext.getUserId(repository.getUserUuid());
+		long classNameId = PortalUtil.getClassNameId(
+			repositoryElement.attributeValue("repositoryClassName"));
+
 		String repositoryPath = getImportRepositoryPath(
 			portletDataContext, repository.getRepositoryId());
 
-		long userId = portletDataContext.getUserId(repository.getUserUuid());
-
 		ServiceContext serviceContext = portletDataContext.createServiceContext(
 			repositoryPath, repository, _NAMESPACE);
-
-		long classNameId = PortalUtil.getClassNameId(
-			repositoryElement.attributeValue("repositoryClassName"));
 
 		RepositoryLocalServiceUtil.addRepository(
 			userId, portletDataContext.getScopeGroupId(), classNameId,
@@ -1448,13 +1447,13 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 				"root-folder-id", String.valueOf(rootFolderId));
 		}
 
+		Element repositoryElement = rootElement.addElement("repositories");
 		Element fileEntryTypesElement = rootElement.addElement(
 			"file-entry-types");
 		Element foldersElement = rootElement.addElement("folders");
 		Element fileEntriesElement = rootElement.addElement("file-entries");
 		Element fileShortcutsElement = rootElement.addElement("file-shortcuts");
 		Element fileRanksElement = rootElement.addElement("file-ranks");
-		Element repositoryElement = rootElement.addElement("repositories");
 
 		List<DLFileEntryType> dlFileEntryTypes =
 			DLFileEntryTypeServiceUtil.getFileEntryTypes(
@@ -1483,11 +1482,10 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 			}
 			else {
 				if (portletDataContext.getBooleanParameter(
-					_NAMESPACE, "repositories")) {
+						_NAMESPACE, "repositories")) {
 
-					Repository repository =
-						RepositoryUtil.findByPrimaryKey(
-							folder.getRepositoryId());
+					Repository repository = RepositoryUtil.findByPrimaryKey(
+						folder.getRepositoryId());
 
 					exportRepository(
 						portletDataContext, repositoryElement, repository);
@@ -1535,6 +1533,19 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		Element rootElement = document.getRootElement();
 
+		if (portletDataContext.getBooleanParameter(
+				_NAMESPACE, "repositories")) {
+
+			Element repositoriesElement = rootElement.element("repositories");
+
+			List<Element> repositoryElements = repositoriesElement.elements(
+				"repository");
+
+			for (Element repositoryElement : repositoryElements) {
+				importRepository(portletDataContext, repositoryElement);
+			}
+		}
+
 		Element fileEntryTypesElement = rootElement.element("file-entry-types");
 
 		List<Element> fileEntryTypeElements = fileEntryTypesElement.elements(
@@ -1578,17 +1589,6 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 
 			for (Element fileRankElement : fileRankElements) {
 				importFileRank(portletDataContext, fileRankElement);
-			}
-		}
-
-		if (portletDataContext.getBooleanParameter(
-				_NAMESPACE, "repositories")) {
-
-			List<Element> repositoryElements = rootElement.element(
-				"repositories").elements("repository");
-
-			for (Element repositoryElement : repositoryElements) {
-				importRepository(portletDataContext, repositoryElement);
 			}
 		}
 
