@@ -96,7 +96,7 @@ Map<String, String> hints = ModelHintsUtil.getHints(model, field);
 				cal.setTime(date);
 			}
 
-			boolean fetchNewDate = false;
+			boolean updateFromDefaultDelta = false;
 
 			int month = ParamUtil.getInteger(request, fieldParam + "Month", -1);
 
@@ -108,7 +108,7 @@ Map<String, String> hints = ModelHintsUtil.getHints(model, field);
 
 					cal.add(Calendar.MONTH, defaultMonthDelta);
 
-					fetchNewDate = true;
+					updateFromDefaultDelta = true;
 				}
 			}
 
@@ -128,7 +128,7 @@ Map<String, String> hints = ModelHintsUtil.getHints(model, field);
 
 					cal.add(Calendar.DATE, defaultDayDelta);
 
-					fetchNewDate = true;
+					updateFromDefaultDelta = true;
 				}
 			}
 
@@ -148,11 +148,11 @@ Map<String, String> hints = ModelHintsUtil.getHints(model, field);
 
 					cal.add(Calendar.YEAR, defaultYearDelta);
 
-					fetchNewDate = true;
+					updateFromDefaultDelta = true;
 				}
 			}
 
-			if (fetchNewDate) {
+			if (updateFromDefaultDelta) {
 				month = cal.get(Calendar.MONTH);
 				day = cal.get(Calendar.DATE);
 				year = cal.get(Calendar.YEAR);
