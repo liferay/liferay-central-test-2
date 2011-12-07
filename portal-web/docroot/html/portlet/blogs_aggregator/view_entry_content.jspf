@@ -79,6 +79,7 @@
 					<%= StringUtil.shorten(HtmlUtil.stripHtml(entry.getDescription()), 200, StringPool.BLANK) %>
 
 					<c:if test="<%= entry.isSmallImage() %>">
+
 						<%
 						String src = StringPool.BLANK;
 

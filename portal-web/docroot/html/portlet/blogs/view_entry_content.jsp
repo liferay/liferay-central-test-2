@@ -144,6 +144,7 @@ AssetEntry assetEntry = (AssetEntry)request.getAttribute("view_entry_content.jsp
 						<%= StringUtil.shorten(HtmlUtil.stripHtml(entry.getDescription()), pageAbstractLength) %>
 
 						<c:if test="<%= entry.isSmallImage() %>">
+
 							<%
 							String src = StringPool.BLANK;
 
@@ -156,6 +157,7 @@ AssetEntry assetEntry = (AssetEntry)request.getAttribute("view_entry_content.jsp
 								<img alt="" class="asset-small-image" src="<%= HtmlUtil.escape(src) %>" width="150" />
 							</div>
 						</c:if>
+
 						<br />
 
 						 <aui:a href="<%= viewEntryURL %>"><liferay-ui:message arguments='<%= new Object[] {"aui-helper-hidden-accessible", entry.getTitle()} %>' key="read-more-x-about-x" /> &raquo;</aui:a>

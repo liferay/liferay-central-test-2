@@ -363,14 +363,13 @@ public class EditEntryAction extends PortletAction {
 			boolean ajax = ParamUtil.getBoolean(actionRequest, "ajax");
 
 			if (!ajax) {
-
 				smallImage = ParamUtil.getBoolean(actionRequest, "smallImage");
 				smallImageURL = ParamUtil.getString(
 					actionRequest, "smallImageURL");
 
 				if (smallImage && Validator.isNull(smallImageURL)) {
 					boolean attachments = ParamUtil.getBoolean(
-							actionRequest, "attachments", false);
+						actionRequest, "attachments");
 
 					if (attachments) {
 						UploadPortletRequest uploadPortletRequest =
