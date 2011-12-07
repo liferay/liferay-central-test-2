@@ -330,6 +330,11 @@ create table LayoutRevision (
 
 alter table LayoutSet add createDate DATE null;
 alter table LayoutSet add modifiedDate DATE null;
+alter table LayoutSet add layoutSetPrototypeUuid VARCHAR(75) null;
+alter table LayoutSet add layoutSetPrototypeLinkEnabled BOOLEAN null;
+alter table LayoutSet drop column layoutSetPrototypeId;
+
+drop index IX_5ABC2905 on LayoutSet;
 
 COMMIT_TRANSACTION;
 
