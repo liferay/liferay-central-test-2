@@ -62,8 +62,8 @@ public class SubscriptionPermissionImpl implements SubscriptionPermission {
 		}
 
 		if (className.equals(BlogsEntry.class.getName())) {
-			AssetEntry assetEntry =
-				AssetEntryLocalServiceUtil.fetchEntry(className, classPK);
+			AssetEntry assetEntry = AssetEntryLocalServiceUtil.fetchEntry(
+				className, classPK);
 
 			if (assetEntry == null) {
 				return false;
