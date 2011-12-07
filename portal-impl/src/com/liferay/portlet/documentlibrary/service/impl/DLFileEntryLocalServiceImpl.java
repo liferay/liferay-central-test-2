@@ -416,6 +416,7 @@ public class DLFileEntryLocalServiceImpl
 		throws PortalException, SystemException {
 
 		int count = dlFileEntryFinder.countByExtraSettings();
+
 		int pages = count / Indexer.DEFAULT_INTERVAL;
 
 		for (int i = 0; i <= pages; i++) {
@@ -495,17 +496,16 @@ public class DLFileEntryLocalServiceImpl
 	public void deleteFileEntries(long groupId, long folderId)
 		throws PortalException, SystemException {
 
-		int fileEntryCount = dlFileEntryPersistence.countByG_F(
-			groupId, folderId);
+		int count = dlFileEntryPersistence.countByG_F(groupId, folderId);
 
-		int fileEntryPages = fileEntryCount / _DELETE_INTERVAL;
+		int pages = count / _DELETE_INTERVAL;
 
-		for (int i = 0; i <= fileEntryPages; i++) {
-			int fileEntryStart = (i * _DELETE_INTERVAL);
-			int fileEntryEnd = fileEntryStart + _DELETE_INTERVAL;
+		for (int i = 0; i <= pages; i++) {
+			int start = (i * _DELETE_INTERVAL);
+			int end = start + _DELETE_INTERVAL;
 
 			List<DLFileEntry> dlFileEntries = dlFileEntryPersistence.findByG_F(
-				groupId, folderId, fileEntryStart, fileEntryEnd);
+				groupId, folderId, start, end);
 
 			for (DLFileEntry dlFileEntry : dlFileEntries) {
 				dlAppHelperLocalService.deleteFileEntry(

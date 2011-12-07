@@ -123,10 +123,11 @@ public class ConvertDocumentLibrary extends ConvertProcess {
 
 	protected void migrateDL() throws Exception {
 		int count = DLFileEntryLocalServiceUtil.getFileEntriesCount();
-		int pages = count / Indexer.DEFAULT_INTERVAL;
 
 		MaintenanceUtil.appendStatus(
 			"Migrating " + count + " document library files");
+
+		int pages = count / Indexer.DEFAULT_INTERVAL;
 
 		for (int i = 0; i <= pages; i++) {
 			int start = (i * Indexer.DEFAULT_INTERVAL);
@@ -212,10 +213,11 @@ public class ConvertDocumentLibrary extends ConvertProcess {
 
 	protected void migrateMB() throws Exception {
 		int count = MBMessageLocalServiceUtil.getMBMessagesCount();
-		int pages = count / Indexer.DEFAULT_INTERVAL;
 
 		MaintenanceUtil.appendStatus(
 			"Migrating message boards attachments in " + count + " messages");
+
+		int pages = count / Indexer.DEFAULT_INTERVAL;
 
 		for (int i = 0; i <= pages; i++) {
 			int start = (i * Indexer.DEFAULT_INTERVAL);
@@ -240,10 +242,11 @@ public class ConvertDocumentLibrary extends ConvertProcess {
 
 	protected void migrateWiki() throws Exception {
 		int count = WikiPageLocalServiceUtil.getWikiPagesCount();
-		int pages = count / Indexer.DEFAULT_INTERVAL;
 
 		MaintenanceUtil.appendStatus(
 			"Migrating wiki page attachments in " + count + " pages");
+
+		int pages = count / Indexer.DEFAULT_INTERVAL;
 
 		for (int i = 0; i <= pages; i++) {
 			int start = (i * Indexer.DEFAULT_INTERVAL);
