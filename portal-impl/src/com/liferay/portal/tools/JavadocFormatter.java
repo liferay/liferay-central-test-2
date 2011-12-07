@@ -196,10 +196,6 @@ public class JavadocFormatter {
 
 			value = StringUtil.replace(value, " </", "</");
 
-			if (name.equals("author") || name.equals("see") ||
-				name.equals("since") || name.equals("version")) {
-			}
-
 			Element element = parentElement.addElement(name);
 
 			element.addCDATA(value);
@@ -344,11 +340,15 @@ public class JavadocFormatter {
 		DocletTag[] paramDocletTags) {
 
 		String name = javaParameter.getName();
-		String type = javaParameter.getType().getValue();
+
+		Type type = javaParameter.getType();
+
+		String typeValue = type.getValue();
+
 		String value = null;
 
-		if (javaParameter.getType().isArray()) {
-			type += "[]";
+		if (type.isArray()) {
+			typeValue += "[]";
 		}
 
 		for (DocletTag paramDocletTag : paramDocletTags) {
@@ -367,7 +367,7 @@ public class JavadocFormatter {
 		Element paramElement = methodElement.addElement("param");
 
 		DocUtil.add(paramElement, "name", name);
-		DocUtil.add(paramElement, "type", type);
+		DocUtil.add(paramElement, "type", typeValue);
 
 		if (value != null) {
 			value = value.substring(name.length());
@@ -398,7 +398,13 @@ public class JavadocFormatter {
 
 		Type returns = javaMethod.getReturns();
 
-		if ((returns == null) || returns.getValue().equals("void")) {
+		if (returns == null) {
+			return;
+		}
+
+		String returnsValue = returns.getValue();
+
+		if (returnsValue.equals("void")) {
 			return;
 		}
 
@@ -406,9 +412,13 @@ public class JavadocFormatter {
 	}
 
 	private void _addThrowsElement(
-		Element methodElement, Type exception, DocletTag[] throwsDocletTags) {
+		Element methodElement, Type exceptionType,
+		DocletTag[] throwsDocletTags) {
 
-		String name = exception.getJavaClass().getName();
+		JavaClass javaClass = exceptionType.getJavaClass();
+
+		String name = javaClass.getName();
+
 		String value = null;
 
 		for (DocletTag throwsDocletTag : throwsDocletTags) {
@@ -427,7 +437,7 @@ public class JavadocFormatter {
 		Element throwsElement = methodElement.addElement("throws");
 
 		DocUtil.add(throwsElement, "name", name);
-		DocUtil.add(throwsElement, "type", exception.getValue());
+		DocUtil.add(throwsElement, "type", exceptionType.getValue());
 
 		if (value != null) {
 			value = value.substring(name.length());
@@ -444,12 +454,12 @@ public class JavadocFormatter {
 	private void _addThrowsElements(
 		Element methodElement, JavaMethod javaMethod) {
 
-		Type[] exceptions = javaMethod.getExceptions();
+		Type[] exceptionTypes = javaMethod.getExceptions();
 
 		DocletTag[] throwsDocletTags = javaMethod.getTagsByName("throws");
 
-		for (Type exception : exceptions) {
-			_addThrowsElement(methodElement, exception, throwsDocletTags);
+		for (Type exceptionType : exceptionTypes) {
+			_addThrowsElement(methodElement, exceptionType, throwsDocletTags);
 		}
 	}
 
@@ -642,7 +652,9 @@ public class JavadocFormatter {
 		for (Annotation annotation : annotations) {
 			int annotationLineNumber = annotation.getLineNumber();
 
-			if (annotation.getPropertyMap().isEmpty()) {
+			Map<String, String> propertyMap = annotation.getPropertyMap(); 
+
+			if (propertyMap.isEmpty()) {
 				annotationLineNumber--;
 			}
 
@@ -821,7 +833,10 @@ public class JavadocFormatter {
 		for (JavaParameter javaParameter : javaParameters) {
 			sb.append(javaParameter.getName());
 			sb.append("|");
-			sb.append(javaParameter.getType().getValue());
+
+			Type type = javaParameter.getType();
+
+			sb.append(type.getValue());
 			sb.append(",");
 		}
 
@@ -1000,7 +1015,7 @@ public class JavadocFormatter {
 
 		inputStream.close();
 
-		String originalContent = new String(bytes, "UTF-8");
+		String originalContent = new String(bytes, StringPool.UTF8);
 
 		if (fileName.endsWith("JavadocFormatter.java") ||
 			fileName.endsWith("SourceFormatter.java") ||
@@ -1039,7 +1054,7 @@ public class JavadocFormatter {
 
 	private Tuple _getJavadocsXmlTuple(String fileName) throws Exception {
 		File file = new File(fileName);
-		
+
 		String absolutePath = file.getAbsolutePath();
 
 		absolutePath = StringUtil.replace(absolutePath, "\\", "/");
@@ -1252,7 +1267,7 @@ public class JavadocFormatter {
 		if (!originalContent.equals(formattedContent)) {
 			File file = new File(_basedir + fileName);
 
-			_fileUtil.write(file, formattedContent.getBytes("UTF-8"));
+			_fileUtil.write(file, formattedContent.getBytes(StringPool.UTF8));
 
 			System.out.println("Writing " + file);
 		}
