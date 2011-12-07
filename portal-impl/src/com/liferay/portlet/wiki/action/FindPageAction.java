@@ -61,6 +61,9 @@ public class FindPageAction extends FindAction {
 
 	@Override
 	protected String[] initPortletIds() {
+
+		// Order is important. See LPS-23770.
+
 		return new String[] {
 			PortletKeys.WIKI_ADMIN, PortletKeys.WIKI, PortletKeys.WIKI_DISPLAY
 		};

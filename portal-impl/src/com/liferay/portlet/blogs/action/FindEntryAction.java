@@ -71,6 +71,9 @@ public class FindEntryAction extends FindAction {
 
 	@Override
 	protected String[] initPortletIds() {
+
+		// Order is important. See LPS-23770.
+
 		return new String[] {
 			PortletKeys.BLOGS_ADMIN, PortletKeys.BLOGS,
 			PortletKeys.BLOGS_AGGREGATOR
