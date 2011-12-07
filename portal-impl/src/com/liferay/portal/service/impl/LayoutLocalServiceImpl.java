@@ -74,8 +74,6 @@ import com.liferay.portal.util.comparator.LayoutPriorityComparator;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 
-import edu.emory.mathcs.backport.java.util.Collections;
-
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -83,6 +81,7 @@ import java.io.InputStream;
 import java.text.DateFormat;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -2105,9 +2104,9 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	}
 
 	protected List<Locale> getModifiedLocales(
-		Map<Locale, String> oldNameMap, Map<Locale, String> newNameMap) {
+		Map<Locale, String> oldMap, Map<Locale, String> newMap) {
 
-		if ((newNameMap == null) || newNameMap.isEmpty()) {
+		if ((newMap == null) || newMap.isEmpty()) {
 			return Collections.emptyList();
 		}
 
@@ -2116,10 +2115,10 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		Locale[] locales = LanguageUtil.getAvailableLocales();
 
 		for (Locale locale : locales) {
-			String oldName = oldNameMap.get(locale);
-			String newName = newNameMap.get(locale);
+			String oldValue = oldMap.get(locale);
+			String newValue = newMap.get(locale);
 
-			if (!oldName.equals(newName)) {
+			if (!oldValue.equals(newValue)) {
 				modifiedLocales.add(locale);
 			}
 		}
