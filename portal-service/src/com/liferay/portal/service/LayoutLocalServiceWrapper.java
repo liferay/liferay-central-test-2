@@ -410,23 +410,6 @@ public class LayoutLocalServiceWrapper implements LayoutLocalService,
 	}
 
 	/**
-	* Deletes the layout with the plid, also deleting the layout's child
-	* layouts, and associated resources.
-	*
-	* @param plid the primary key of the layout
-	* @param serviceContext the service context
-	* @throws PortalException if a layout with the primary key could not be
-	found , or if some other portal exception occurred
-	* @throws SystemException if a system exception occurred
-	*/
-	public void deleteLayout(long plid,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		_layoutLocalService.deleteLayout(plid, serviceContext);
-	}
-
-	/**
 	* Deletes the layout with the primary key, also deleting the layout's child
 	* layouts, and associated resources.
 	*
@@ -444,6 +427,23 @@ public class LayoutLocalServiceWrapper implements LayoutLocalService,
 			com.liferay.portal.kernel.exception.SystemException {
 		_layoutLocalService.deleteLayout(groupId, privateLayout, layoutId,
 			serviceContext);
+	}
+
+	/**
+	* Deletes the layout with the plid, also deleting the layout's child
+	* layouts, and associated resources.
+	*
+	* @param plid the primary key of the layout
+	* @param serviceContext the service context
+	* @throws PortalException if a layout with the primary key could not be
+	found , or if some other portal exception occurred
+	* @throws SystemException if a system exception occurred
+	*/
+	public void deleteLayout(long plid,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_layoutLocalService.deleteLayout(plid, serviceContext);
 	}
 
 	/**
@@ -1327,6 +1327,16 @@ public class LayoutLocalServiceWrapper implements LayoutLocalService,
 		return _layoutLocalService.updatePriority(plid, priority);
 	}
 
+	public void updateScopedPortletNames(long groupId, boolean privateLayout,
+		long layoutId,
+		java.util.Map<java.util.Locale, java.lang.String> nameMap,
+		java.util.List<java.util.Locale> nameMapModifiedLocales)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_layoutLocalService.updateScopedPortletNames(groupId, privateLayout,
+			layoutId, nameMap, nameMapModifiedLocales);
+	}
+
 	/**
 	* Updates the names of the portlets within scope of the group, the scope of
 	* the layout's universally unique identifier, and the privacy.
@@ -1347,30 +1357,6 @@ public class LayoutLocalServiceWrapper implements LayoutLocalService,
 			com.liferay.portal.kernel.exception.SystemException {
 		_layoutLocalService.updateScopedPortletNames(groupId, privateLayout,
 			layoutId, name, languageId);
-	}
-
-	/**
-	* Updates the names of the portlets within scope of the group, the scope of
-	* the layout's universally unique identifier, and the privacy.
-	*
-	* @param groupId the primary key of the group
-	* @param privateLayout whether the layout is private to the group
-	* @param layoutId the primary key of the layout whose universally unique
-	identifier to match
-	* @param newNamesMap Map with the new names for the portlets for each language
-	* @param locales locales list to check
-	* @throws PortalException if a matching layout could not be found
-	* @throws SystemException if a system exception occurred
-	* @see com.liferay.portlet.portletconfiguration.action.EditScopeAction
-	*/
-	public void updateScopedPortletNames(long groupId, boolean privateLayout,
-		long layoutId,
-		java.util.Map<java.util.Locale, java.lang.String> newNamesMap,
-		java.util.List<java.util.Locale> locales)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		_layoutLocalService.updateScopedPortletNames(groupId, privateLayout,
-			layoutId, newNamesMap, locales);
 	}
 
 	/**
