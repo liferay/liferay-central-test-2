@@ -21,10 +21,13 @@ import com.liferay.portal.LayoutParentLayoutIdException;
 import com.liferay.portal.LayoutTypeException;
 import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.RequiredLayoutException;
+import com.liferay.portal.kernel.dao.orm.Criterion;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.Junction;
+import com.liferay.portal.kernel.dao.orm.Projection;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.Property;
 import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -70,6 +73,8 @@ import com.liferay.portal.util.comparator.LayoutComparator;
 import com.liferay.portal.util.comparator.LayoutPriorityComparator;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.expando.model.ExpandoBridge;
+
+import edu.emory.mathcs.backport.java.util.Collections;
 
 import java.io.File;
 import java.io.IOException;
@@ -468,24 +473,6 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	}
 
 	/**
-	 * Deletes the layout with the plid, also deleting the layout's child
-	 * layouts, and associated resources.
-	 *
-	 * @param  plid the primary key of the layout
-	 * @param  serviceContext the service context
-	 * @throws PortalException if a layout with the primary key could not be
-	 *         found , or if some other portal exception occurred
-	 * @throws SystemException if a system exception occurred
-	 */
-	public void deleteLayout(long plid, ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		Layout layout = layoutPersistence.findByPrimaryKey(plid);
-
-		deleteLayout(layout, true, serviceContext);
-	}
-
-	/**
 	 * Deletes the layout with the primary key, also deleting the layout's child
 	 * layouts, and associated resources.
 	 *
@@ -504,6 +491,24 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		Layout layout = layoutPersistence.findByG_P_L(
 			groupId, privateLayout, layoutId);
+
+		deleteLayout(layout, true, serviceContext);
+	}
+
+	/**
+	 * Deletes the layout with the plid, also deleting the layout's child
+	 * layouts, and associated resources.
+	 *
+	 * @param  plid the primary key of the layout
+	 * @param  serviceContext the service context
+	 * @throws PortalException if a layout with the primary key could not be
+	 *         found , or if some other portal exception occurred
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void deleteLayout(long plid, ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		Layout layout = layoutPersistence.findByPrimaryKey(plid);
 
 		deleteLayout(layout, true, serviceContext);
 	}
@@ -1500,8 +1505,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		Layout layout = layoutPersistence.findByG_P_L(
 			groupId, privateLayout, layoutId);
 
-		List<Locale> modifiedLocales = getLocalesModifiedByName(
-			layout, nameMap);
+		List<Locale> modifiedLocales = getModifiedLocales(
+			layout.getNameMap(), nameMap);
 
 		if (parentLayoutId != layout.getParentLayoutId()) {
 			layout.setPriority(
@@ -1556,7 +1561,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		// Portlet preferences
 
-		if (modifiedLocales.size() > 0) {
+		if (!modifiedLocales.isEmpty()) {
 			updateScopedPortletNames(
 				groupId, privateLayout, layoutId, nameMap, modifiedLocales);
 		}
@@ -1912,6 +1917,119 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		return updatePriority(layout, priority);
 	}
 
+	public void updateScopedPortletNames(
+			long groupId, boolean privateLayout, long layoutId,
+			Map<Locale, String> nameMap, List<Locale> nameMapModifiedLocales)
+		throws PortalException, SystemException {
+
+		Layout layout = layoutPersistence.findByG_P_L(
+			groupId, privateLayout, layoutId);
+
+		DynamicQuery portletPreferencesDynamicQuery =
+			DynamicQueryFactoryUtil.forClass(
+				PortletPreferences.class, PortletPreferencesImpl.TABLE_NAME);
+
+		Property plidProperty = PropertyFactoryUtil.forName("plid");
+
+		DynamicQuery layoutDynamicQuery = DynamicQueryFactoryUtil.forClass(
+			Layout.class, LayoutImpl.TABLE_NAME);
+
+		Projection plidProjection = ProjectionFactoryUtil.property("plid");
+
+		layoutDynamicQuery.setProjection(plidProjection);
+
+		Property groupIdProperty = PropertyFactoryUtil.forName("groupId");
+
+		layoutDynamicQuery.add(groupIdProperty.eq(groupId));
+
+		Property privateLayoutProperty = PropertyFactoryUtil.forName(
+			"privateLayout");
+
+		layoutDynamicQuery.add(privateLayoutProperty.eq(privateLayout));
+
+		portletPreferencesDynamicQuery.add(plidProperty.in(layoutDynamicQuery));
+
+		Junction junction = RestrictionsFactoryUtil.disjunction();
+
+		List<Portlet> scopablePortlets =
+			portletLocalService.getScopablePortlets();
+
+		for (Portlet scopablePortlet :scopablePortlets) {
+			if (scopablePortlet.isInstanceable()) {
+				Criterion criterion = RestrictionsFactoryUtil.like(
+					"portletId",
+					scopablePortlet.getPortletId() +
+						PortletConstants.INSTANCE_SEPARATOR +
+							StringPool.PERCENT);
+
+				junction.add(criterion);
+			}
+			else{
+				Criterion criterion = RestrictionsFactoryUtil.eq(
+					"portletId", scopablePortlet.getPortletId());
+
+				junction.add(criterion);
+			}
+		}
+
+		portletPreferencesDynamicQuery.add(junction);
+
+		List<PortletPreferences> portletPreferencesList =
+			portletPreferencesLocalService.dynamicQuery(
+				portletPreferencesDynamicQuery);
+
+		for (PortletPreferences portletPreferences : portletPreferencesList) {
+			if ((portletPreferences.getPortletId() == null)) {
+				continue;
+			}
+
+			Layout curLayout = layoutPersistence.findByPrimaryKey(
+				portletPreferences.getPlid());
+
+			javax.portlet.PortletPreferences jxPreferences =
+				PortletPreferencesFactoryUtil.getLayoutPortletSetup(
+					curLayout, portletPreferences.getPortletId());
+
+			String scopeLayoutUuid = GetterUtil.getString(
+				jxPreferences.getValue("lfrScopeLayoutUuid", null));
+
+			if (!scopeLayoutUuid.equals(layout.getUuid())) {
+				continue;
+			}
+
+			for (Locale locale : nameMapModifiedLocales) {
+				String languageId = LanguageUtil.getLanguageId(locale);
+
+				String portletTitle = PortalUtil.getPortletTitle(
+					PortletConstants.getRootPortletId(
+						portletPreferences.getPortletId()), languageId);
+
+				String newPortletTitle = PortalUtil.getNewPortletTitle(
+					portletTitle, curLayout.getName(languageId),
+					nameMap.get(locale));
+
+				if (newPortletTitle.equals(portletTitle)) {
+					continue;
+				}
+
+				try {
+					jxPreferences.setValue(
+						"portletSetupTitle_" + languageId, newPortletTitle);
+					jxPreferences.setValue(
+						"portletSetupUseCustomTitle", Boolean.TRUE.toString());
+
+					jxPreferences.store();
+				}
+				catch (IOException ioe) {
+					throw new SystemException(ioe);
+				}
+				catch (PortletException pe) {
+					throw new SystemException(pe);
+				}
+			}
+		}
+	}
+
 	/**
 	 * Updates the names of the portlets within scope of the group, the scope of
 	 * the layout's universally unique identifier, and the privacy.
@@ -1931,7 +2049,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			String languageId)
 		throws PortalException, SystemException {
 
-		Map<Locale,String> map = new HashMap<Locale,String>();
+		Map<Locale, String> map = new HashMap<Locale, String>();
 
 		Locale locale = LocaleUtil.fromLanguageId(languageId);
 
@@ -1943,115 +2061,6 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		updateScopedPortletNames(
 			groupId, privateLayout, layoutId, map, locales);
-	}
-
-	/**
-	 * Updates the names of the portlets within scope of the group, the scope of
-	 * the layout's universally unique identifier, and the privacy.
-	 *
-	 * @param  groupId the primary key of the group
-	 * @param  privateLayout whether the layout is private to the group
-	 * @param  layoutId the primary key of the layout whose universally unique
-	 *         identifier to match
-	 * @param  newNamesMap Map with the new names for the portlets for each language
-	 * @param  locales locales list to check
-	 * @throws PortalException if a matching layout could not be found
-	 * @throws SystemException if a system exception occurred
-	 * @see    com.liferay.portlet.portletconfiguration.action.EditScopeAction
-	 */
-	public void updateScopedPortletNames(
-			long groupId, boolean privateLayout, long layoutId,
-			Map<Locale,String> newNamesMap, List<Locale> locales)
-		throws PortalException, SystemException {
-
-		Layout layout = getLayout(groupId, privateLayout, layoutId);
-
-		DynamicQuery dq0 = DynamicQueryFactoryUtil.forClass(Layout.class,
-			LayoutImpl.TABLE_NAME)
-			.setProjection(ProjectionFactoryUtil.property("plid"))
-			.add(PropertyFactoryUtil.forName("groupId").eq(groupId))
-			.add(PropertyFactoryUtil.forName("privateLayout")
-				.eq(privateLayout));
-
-		DynamicQuery query = DynamicQueryFactoryUtil.forClass(
-			PortletPreferences.class, PortletPreferencesImpl.TABLE_NAME)
-			.add(PropertyFactoryUtil.forName("plid").in(dq0));
-
-		List<Portlet> scopablePortlets =
-			portletLocalService.getScopablePortlets();
-
-		Junction junction = RestrictionsFactoryUtil.disjunction();
-
-		for (Portlet scopablePortlet :scopablePortlets) {
-			if (scopablePortlet.isInstanceable()) {
-				junction.add(
-					RestrictionsFactoryUtil.like("portletId",
-						scopablePortlet.getPortletId() +
-						PortletConstants.INSTANCE_SEPARATOR +
-						StringPool.PERCENT));
-			}
-			else{
-				junction.add(
-					RestrictionsFactoryUtil.eq("portletId",
-						scopablePortlet.getPortletId()));
-			}
-		}
-
-		query.add(junction);
-
-		List<PortletPreferences> portletPreferencesList =
-			portletPreferencesLocalService.dynamicQuery(query);
-
-		for (PortletPreferences portletPreferences : portletPreferencesList) {
-			if ((portletPreferences.getPortletId() == null)) {
-				continue;
-			}
-
-			Layout curLayout = layoutPersistence.findByPrimaryKey(
-				portletPreferences.getPlid());
-
-			javax.portlet.PortletPreferences preferences =
-				PortletPreferencesFactoryUtil.getLayoutPortletSetup(
-					curLayout, portletPreferences.getPortletId());
-
-			String scopeLayoutUuid = GetterUtil.getString(
-				preferences.getValue("lfrScopeLayoutUuid", null));
-
-			if (!scopeLayoutUuid.equals(layout.getUuid())) {
-				continue;
-			}
-
-			for (Locale locale : locales) {
-				String languageId = LanguageUtil.getLanguageId(locale);
-
-				String portletTitle = PortalUtil.getPortletTitle(
-					PortletConstants.getRootPortletId(
-						portletPreferences.getPortletId()),languageId);
-
-				String newPortletTitle = PortalUtil.getNewPortletTitle(
-					portletTitle, curLayout.getName(languageId),
-					newNamesMap.get(locale));
-
-				if (newPortletTitle.equals(portletTitle)) {
-					continue;
-				}
-
-				try {
-					preferences.setValue(
-						"portletSetupTitle_" + languageId, newPortletTitle);
-					preferences.setValue(
-						"portletSetupUseCustomTitle", Boolean.TRUE.toString());
-
-					preferences.store();
-				}
-				catch (IOException ioe) {
-					throw new SystemException(ioe);
-				}
-				catch (PortletException pe) {
-					throw new SystemException(pe);
-				}
-			}
-		}
 	}
 
 	protected String getFriendlyURL(
@@ -2095,25 +2104,22 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		return FriendlyURLNormalizerUtil.normalize(friendlyURL);
 	}
 
-	protected List<Locale> getLocalesModifiedByName(
-			Layout layout, Map<Locale, String> nameMap) {
+	protected List<Locale> getModifiedLocales(
+		Map<Locale, String> oldNameMap, Map<Locale, String> newNameMap) {
+
+		if ((newNameMap == null) || newNameMap.isEmpty()) {
+			return Collections.emptyList();
+		}
 
 		List<Locale> modifiedLocales = new ArrayList<Locale>();
 
-		if (nameMap == null) {
-			return modifiedLocales;
-		}
-
 		Locale[] locales = LanguageUtil.getAvailableLocales();
 
-		Map<Locale, String> currentNameMap = layout.getNameMap();
-
 		for (Locale locale : locales) {
-			String currentName = currentNameMap.get(locale);
+			String oldName = oldNameMap.get(locale);
+			String newName = newNameMap.get(locale);
 
-			String newName = nameMap.get(locale);
-
-			if (!currentName.equals(newName)) {
+			if (!oldName.equals(newName)) {
 				modifiedLocales.add(locale);
 			}
 		}
