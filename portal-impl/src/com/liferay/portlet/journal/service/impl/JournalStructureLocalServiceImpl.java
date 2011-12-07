@@ -575,9 +575,7 @@ public class JournalStructureLocalServiceImpl
 
 		Locale locale = LocaleUtil.getDefault();
 
-		if (nameMap.entrySet().isEmpty() ||
-			Validator.isNull(nameMap.get(locale))) {
-
+		if (nameMap.isEmpty() || Validator.isNull(nameMap.get(locale))) {
 			throw new StructureNameException();
 		}
 

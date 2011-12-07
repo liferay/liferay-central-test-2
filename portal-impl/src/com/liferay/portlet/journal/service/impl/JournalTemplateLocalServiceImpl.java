@@ -633,9 +633,7 @@ public class JournalTemplateLocalServiceImpl
 
 		Locale locale = LocaleUtil.getDefault();
 
-		if (nameMap.isEmpty() ||
-			Validator.isNull(nameMap.get(locale))) {
-
+		if (nameMap.isEmpty() || Validator.isNull(nameMap.get(locale))) {
 			throw new TemplateNameException();
 		}
 		else if (Validator.isNull(xsl)) {
