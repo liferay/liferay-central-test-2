@@ -91,9 +91,9 @@ portletURL.setParameter("nodeName", node.getName());
 				<%
 				PortletURL frontPageURL = PortletURLUtil.clone(portletURL, renderResponse);
 
-				frontPageURL.setParameter("tag", "");
 				frontPageURL.setParameter("struts_action", "/wiki/view");
 				frontPageURL.setParameter("title", WikiPageConstants.FRONT_PAGE);
+				frontPageURL.setParameter("tag", StringPool.BLANK);
 				%>
 
 				<liferay-ui:icon
