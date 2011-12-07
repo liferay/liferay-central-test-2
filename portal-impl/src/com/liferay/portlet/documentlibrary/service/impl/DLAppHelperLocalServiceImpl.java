@@ -126,7 +126,7 @@ public class DLAppHelperLocalServiceImpl
 		if (!isStagingGroup(fileEntry.getGroupId())) {
 			dlSyncLocalService.updateSync(
 				fileEntry.getFileEntryId(), fileEntry.getFolderId(),
-				fileEntry.getTitle(), DLSyncConstants.EVENT_DELETE, 
+				fileEntry.getTitle(), DLSyncConstants.EVENT_DELETE,
 				fileEntry.getVersion());
 		}
 
@@ -423,16 +423,16 @@ public class DLAppHelperLocalServiceImpl
 
 				if (event.equals(DLSyncConstants.EVENT_ADD)) {
 					dlSyncLocalService.addSync(
-						fileEntry.getFileEntryId(), fileEntry.getUuid(), 
-						fileEntry.getCompanyId(), fileEntry.getRepositoryId(), 
-						fileEntry.getFolderId(), fileEntry.getTitle(), 
+						fileEntry.getFileEntryId(), fileEntry.getUuid(),
+						fileEntry.getCompanyId(), fileEntry.getRepositoryId(),
+						fileEntry.getFolderId(), fileEntry.getTitle(),
 						DLSyncConstants.TYPE_FILE, fileEntry.getVersion());
 				}
 				else if (event.equals(DLSyncConstants.EVENT_UPDATE)) {
 					dlSyncLocalService.updateSync(
 						fileEntry.getFileEntryId(), fileEntry.getFolderId(),
-						fileEntry.getTitle(), DLSyncConstants.EVENT_UPDATE, 
-						fileEntry.getVersion()); 
+						fileEntry.getTitle(), DLSyncConstants.EVENT_UPDATE,
+						fileEntry.getVersion());
 				}
 			}
 
