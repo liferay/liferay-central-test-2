@@ -22,8 +22,7 @@
 			String taglibOnChange = renderResponse.getNamespace() + "toggleChildren(this, '" + renderResponse.getNamespace() + "permissionsUl');";
 			%>
 
-			<aui:input helpMessage="export-import-permissions-help" inlineLabel="right" label="permissions" name="<%= PortletDataHandlerKeys.PERMISSIONS %>" onchange="<%= taglibOnChange %>" type="checkbox" />
-
+			<aui:input helpMessage="export-import-permissions-help" inlineLabel="right" label="permissions" name="<%= PortletDataHandlerKeys.PERMISSIONS %>" onChange="<%= taglibOnChange %>" type="checkbox" />
 
 			<ul id="<portlet:namespace />permissionsUl">
 				<c:choose>
@@ -43,15 +42,12 @@
 				</c:choose>
 			</ul>
 		</li>
-
 		<li class="tree-item">
 			<aui:input helpMessage="export-import-theme-help" inlineLabel="right" label="theme" name="<%= PortletDataHandlerKeys.THEME %>" type="checkbox" value="<%= true %>" />
 		</li>
-
 		<li class="tree-item">
 			<aui:input helpMessage="export-import-theme-settings-help" inlineLabel="right" label="theme-settings" name="<%= PortletDataHandlerKeys.THEME_REFERENCE %>" type="checkbox" value="<%= true %>" />
 		</li>
-
 		<li class="tree-item">
 			<aui:input helpMessage="export-import-categories-help" inlineLabel="right" label="categories" name="<%= PortletDataHandlerKeys.CATEGORIES %>" type="checkbox" value="<%= false %>" />
 		</li>
