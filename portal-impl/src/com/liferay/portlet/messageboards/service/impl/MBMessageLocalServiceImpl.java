@@ -1718,10 +1718,6 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			String className, MBMessage message)
 		throws PortalException, SystemException {
 
-		if (message == null) {
-			return;
-		}
-
 		MBDiscussion discussion = mbDiscussionPersistence.findByThreadId(
 			message.getThreadId());
 
