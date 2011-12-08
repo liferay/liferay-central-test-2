@@ -111,12 +111,14 @@ public class SocialActivityCounterLocalServiceImpl
 
 		AssetEntry assetEntry = activity.getAssetEntry();
 
-		User creator = userPersistence.findByPrimaryKey(assetEntry.getUserId());
+		User assetEntryUser = userPersistence.findByPrimaryKey(
+			assetEntry.getUserId());
 
 		for (SocialActivityCounterDefinition activityCounterDefinition :
 				activityDefinition.getActivityCounterDefinitions()) {
 
-			if (addActivityCounter(user, creator, activityCounterDefinition) &&
+			if (addActivityCounter(
+					user, assetEntryUser, activityCounterDefinition) &&
 				checkActivityLimit(user, activity, activityCounterDefinition)) {
 
 				incrementActivityCounter(
@@ -140,8 +142,7 @@ public class SocialActivityCounterLocalServiceImpl
 				SocialActivityCounterConstants.TYPE_ACTOR, 1);
 		}
 
-		if (!creator.isDefaultUser() && creator.isActive()) {
-
+		if (!assetEntryUser.isDefaultUser() && assetEntryUser.isActive()) {
 			incrementActivityCounter(
 				activity.getGroupId(), activity.getClassNameId(),
 				activity.getClassPK(),
@@ -355,9 +356,8 @@ public class SocialActivityCounterLocalServiceImpl
 	}
 
 	protected boolean addActivityCounter(
-			User user, User creator,
-			SocialActivityCounterDefinition activityCounterDefinition)
-		throws PortalException, SystemException {
+		User user, User assetEntryUser,
+		SocialActivityCounterDefinition activityCounterDefinition) {
 
 		if ((user.isDefaultUser() || !user.isActive()) &&
 			(activityCounterDefinition.getOwnerType() !=
@@ -366,7 +366,7 @@ public class SocialActivityCounterLocalServiceImpl
 			return false;
 		}
 
-		if ((creator.isDefaultUser() || !creator.isActive()) &&
+		if ((assetEntryUser.isDefaultUser() || !assetEntryUser.isActive()) &&
 			(activityCounterDefinition.getOwnerType() !=
 				SocialActivityCounterConstants.TYPE_ACTOR)) {
 
