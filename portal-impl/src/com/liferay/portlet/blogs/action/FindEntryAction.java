@@ -46,11 +46,11 @@ public class FindEntryAction extends FindAction {
 
 		String strutsAction = StringPool.BLANK;
 
-		if (portletId.equals(PortletKeys.BLOGS)) {
-			strutsAction = "/blogs";
-		}
-		else if (portletId.equals(PortletKeys.BLOGS_ADMIN)) {
+		if (portletId.equals(PortletKeys.BLOGS_ADMIN)) {
 			strutsAction = "/blogs_admin";
+		}
+		else if (portletId.equals(PortletKeys.BLOGS)) {
+			strutsAction = "/blogs";
 		}
 		else {
 			strutsAction = "/blogs_aggregator";

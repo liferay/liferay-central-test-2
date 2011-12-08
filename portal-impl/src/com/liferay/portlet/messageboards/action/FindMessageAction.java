@@ -45,8 +45,9 @@ public class FindMessageAction extends FindAction {
 		if (portletId.equals(PortletKeys.MESSAGE_BOARDS_ADMIN)) {
 			return "/message_boards_admin/view_message";
 		}
-
-		return "/message_boards/view_message";
+		else {
+			return "/message_boards/view_message";
+		}
 	}
 
 	@Override
