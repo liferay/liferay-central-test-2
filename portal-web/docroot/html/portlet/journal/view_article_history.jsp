@@ -77,14 +77,14 @@ JournalArticle article = (JournalArticle)request.getAttribute(WebKeys.JOURNAL_AR
 			searchTerms.setAdvancedSearch(true);
 			searchTerms.setArticleId(article.getArticleId());
 
-	List<JournalArticle> results = JournalArticleServiceUtil.getArticlesByArticleId(searchTerms.getGroupId(), searchTerms.getArticleId(), searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
+			List<JournalArticle> results = JournalArticleServiceUtil.getArticlesByArticleId(searchTerms.getGroupId(), searchTerms.getArticleId(), searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
 
-	searchContainer.setResults(results);
+			searchContainer.setResults(results);
 
-	int total = JournalArticleServiceUtil.getArticlesCountByArticleId(searchTerms.getGroupId(), searchTerms.getArticleId());
+			int total = JournalArticleServiceUtil.getArticlesCountByArticleId(searchTerms.getGroupId(), searchTerms.getArticleId());
 
-	searchContainer.setTotal(total);
-	%>
+			searchContainer.setTotal(total);
+			%>
 
 			<c:if test="<%= !results.isEmpty() %>">
 				<aui:button-row>
