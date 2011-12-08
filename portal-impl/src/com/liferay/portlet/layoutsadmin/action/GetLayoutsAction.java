@@ -95,7 +95,7 @@ public class GetLayoutsAction extends JSONAction {
 			jsonObject.put("priority", layout.getPriority());
 			jsonObject.put("privateLayout", layout.isPrivateLayout());
 			
-			jsonObject.put("updateable", !SitesUtil.isLayoutLocked(layout));
+			jsonObject.put("updateable", SitesUtil.isLayoutUpdateable(layout));
 
 			if ((layoutAncestors != null) && layoutAncestors.contains(layout)) {
 				jsonObject.put("selLayoutAncestor", true);
