@@ -79,11 +79,13 @@ public class GetLayoutsAction extends JSONAction {
 
 			String name = layout.getName(themeDisplay.getLocale());
 
-			if (SitesUtil.isLayoutToBeUpdatedFromTemplate(layout)) {
-				Layout templateLayout = LayoutTypePortletImpl.getTemplateLayout(
-					layout);
+			if (SitesUtil.isLayoutToBeUpdatedFromSourcePrototype(layout)) {
+				Layout sourcePrototypeLayout =
+					LayoutTypePortletImpl.getSourcePrototypeLayout(layout);
 
-				name = templateLayout.getName(themeDisplay.getLocale());
+				if (sourcePrototypeLayout != null) {
+					name = sourcePrototypeLayout.getName(themeDisplay.getLocale());
+				}
 			}
 
 			jsonObject.put("name", name);
