@@ -15,6 +15,8 @@
 package com.liferay.portal.struts;
 
 import com.liferay.portal.NoSuchLayoutException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -136,10 +138,18 @@ public abstract class FindAction extends Action {
 
 		long groupId = 0;
 
-		try {
-			groupId = getGroupId(primaryKey);
+		if (primaryKey > 0) {
+			try {
+				groupId = getGroupId(primaryKey);
+			}
+			catch (Exception e) {
+				if (_log.isDebugEnabled()) {
+					_log.debug(e, e);
+				}
+			}
 		}
-		catch (Exception e) {
+
+		if (groupId <= 0) {
 			ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 				WebKeys.THEME_DISPLAY);
 
@@ -170,6 +180,8 @@ public abstract class FindAction extends Action {
 
 		return portletURL;
 	}
+
+	private static Log _log = LogFactoryUtil.getLog(FindAction.class);
 
 	private String[] _portletIds;
 
