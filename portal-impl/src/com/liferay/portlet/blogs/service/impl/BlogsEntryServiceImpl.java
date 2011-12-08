@@ -158,20 +158,8 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 		return entry;
 	}
 
-	public List<BlogsEntry> getGroupEntries(long groupId, int status, int max)
-		throws SystemException {
-
-		if (status == WorkflowConstants.STATUS_ANY) {
-			return blogsEntryPersistence.filterFindByGroupId(groupId, 0, max);
-		}
-		else {
-			return blogsEntryPersistence.filterFindByG_S(
-				groupId, status, 0, max);
-		}
-	}
-
 	public List<BlogsEntry> getGroupEntries(
-			long groupId, int status, Date displayDate, int max)
+			long groupId, Date displayDate, int status, int max)
 		throws SystemException {
 
 		if (status == WorkflowConstants.STATUS_ANY) {
@@ -181,6 +169,18 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 		else {
 			return blogsEntryPersistence.filterFindByG_LtD_S(
 				groupId, displayDate, status, 0, max);
+		}
+	}
+
+	public List<BlogsEntry> getGroupEntries(long groupId, int status, int max)
+		throws SystemException {
+
+		if (status == WorkflowConstants.STATUS_ANY) {
+			return blogsEntryPersistence.filterFindByGroupId(groupId, 0, max);
+		}
+		else {
+			return blogsEntryPersistence.filterFindByG_S(
+				groupId, status, 0, max);
 		}
 	}
 
@@ -210,7 +210,7 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 	}
 
 	public String getGroupEntriesRSS(
-			long groupId, int status, Date displayDate, int max, String type,
+			long groupId, Date displayDate, int status, int max, String type,
 			double version, String displayStyle, String feedURL,
 			String entryURL, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
@@ -220,7 +220,7 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 		String name = HtmlUtil.escape(group.getDescriptiveName());
 		String description = name;
 		List<BlogsEntry> blogsEntries = getGroupEntries(
-			groupId, status, displayDate, max);
+			groupId, displayDate, status, max);
 
 		return exportToRSS(
 			name, description, type, version, displayStyle, feedURL, entryURL,

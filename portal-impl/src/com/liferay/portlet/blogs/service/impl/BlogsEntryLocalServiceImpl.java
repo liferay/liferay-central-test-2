@@ -376,19 +376,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 	}
 
 	public List<BlogsEntry> getGroupEntries(
-			long groupId, int status, int start, int end)
-		throws SystemException {
-
-		if (status == WorkflowConstants.STATUS_ANY) {
-			return blogsEntryPersistence.findByGroupId(groupId, start, end);
-		}
-		else {
-			return blogsEntryPersistence.findByG_S(groupId, status, start, end);
-		}
-	}
-
-	public List<BlogsEntry> getGroupEntries(
-			long groupId, int status, Date displayDate, int start, int end)
+			long groupId, Date displayDate, int status, int start, int end)
 		throws SystemException {
 
 		if (status == WorkflowConstants.STATUS_ANY) {
@@ -398,6 +386,18 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		else {
 			return blogsEntryPersistence.findByG_LtD_S(
 				groupId, new Date(), status, start, end);
+		}
+	}
+
+	public List<BlogsEntry> getGroupEntries(
+			long groupId, int status, int start, int end)
+		throws SystemException {
+
+		if (status == WorkflowConstants.STATUS_ANY) {
+			return blogsEntryPersistence.findByGroupId(groupId, start, end);
+		}
+		else {
+			return blogsEntryPersistence.findByG_S(groupId, status, start, end);
 		}
 	}
 

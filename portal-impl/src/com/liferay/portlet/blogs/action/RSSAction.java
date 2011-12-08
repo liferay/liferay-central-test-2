@@ -130,7 +130,7 @@ public class RSSAction extends PortletAction {
 			entryURL = feedURL;
 
 			rss = BlogsEntryServiceUtil.getGroupEntriesRSS(
-				groupId, status, new Date(), max, type, version, displayStyle,
+				groupId, new Date(), status, max, type, version, displayStyle,
 				feedURL, entryURL, themeDisplay);
 		}
 		else if (organizationId > 0) {
@@ -150,7 +150,7 @@ public class RSSAction extends PortletAction {
 			entryURL = feedURL;
 
 			rss = BlogsEntryServiceUtil.getGroupEntriesRSS(
-				groupId, status, new Date(), max, type, version, displayStyle,
+				groupId, new Date(), status, max, type, version, displayStyle,
 				feedURL, entryURL, themeDisplay);
 		}
 
