@@ -106,22 +106,24 @@ public class JSONWebServiceActionConfig
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(13);
+		StringBundler sb = new StringBundler(17);
 
 		sb.append("{actionClass=");
 		sb.append(_actionClass);
 		sb.append(", actionMethod=");
 		sb.append(_actionMethod);
 		sb.append(", fullPath=");
-		sb.append(_signature);
+		sb.append(_fullPath);
 		sb.append(", method=");
 		sb.append(_method);
 		sb.append(", methodParameters=");
 		sb.append(_methodParameters);
-		sb.append(", servletContextName=");
-		sb.append(_servletContextName);
 		sb.append(", path=");
 		sb.append(_path);
+		sb.append(", servletContextName=");
+		sb.append(_servletContextName);
+		sb.append(", signature=");
+		sb.append(_signature);
 		sb.append("}");
 
 		return sb.toString();

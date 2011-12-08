@@ -35,6 +35,7 @@ import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 /**
  * @author Igor Spasic
@@ -83,8 +84,9 @@ public class JSONWebServiceActionsManagerImpl
 		String[] parameterNames =
 			jsonWebServiceActionParameters.getParameterNames();
 
-		ServletContext servletContext =
-			request.getSession().getServletContext();
+		HttpSession session = request.getSession();
+
+		ServletContext servletContext = session.getServletContext();
 
 		String servletContextName = servletContext.getServletContextName();
 
@@ -129,21 +131,22 @@ public class JSONWebServiceActionsManagerImpl
 		for (JSONWebServiceActionConfig jsonWebServiceActionConfig :
 				_jsonWebServiceActionConfigs) {
 
-			String jsonwsServletContextName =
+			String jsonWebServiceServletContextName =
 				jsonWebServiceActionConfig.getServletContextName();
 
 			if (servletContextName == null) {
-				if (jsonwsServletContextName == null) {
+				if (jsonWebServiceServletContextName == null) {
 					jsonWebServiceActionMappings.add(
 						jsonWebServiceActionConfig);
 				}
 			}
 			else {
-				if (servletContextName.equals(jsonwsServletContextName)) {
+				if (servletContextName.equals(
+						jsonWebServiceServletContextName)) {
+
 					jsonWebServiceActionMappings.add(
 						jsonWebServiceActionConfig);
 				}
-
 			}
 		}
 

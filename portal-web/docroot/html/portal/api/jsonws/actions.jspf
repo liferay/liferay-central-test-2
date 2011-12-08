@@ -15,9 +15,7 @@
 --%>
 
 <%
-String servletContextName = session.getServletContext().getServletContextName();
-
-List<JSONWebServiceActionMapping> jsonWebServiceActionMappings = JSONWebServiceActionsManagerUtil.getJSONWebServiceActionMappings(servletContextName);
+List<JSONWebServiceActionMapping> jsonWebServiceActionMappings = JSONWebServiceActionsManagerUtil.getJSONWebServiceActionMappings(application.getServletContextName());
 %>
 
 <p>
