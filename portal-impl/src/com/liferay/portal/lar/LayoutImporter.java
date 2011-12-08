@@ -1177,7 +1177,7 @@ public class LayoutImporter {
 					user.getUserId(), user.getCompanyId(),
 					layoutSetPrototype.getNameMap(),
 					layoutSetPrototype.getDescription(),
-					layoutSetPrototype.getActive(), true, true, serviceContext);
+					layoutSetPrototype.getActive(), true, serviceContext);
 		}
 
 		InputStream inputStream = portletDataContext.getZipEntryAsInputStream(

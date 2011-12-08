@@ -305,7 +305,7 @@ public class SitesUtil {
 						layout.getUuid(), linkedLayoutSet.getGroupId());
 
 				if ((linkedLayout != null) &&
-					(isLayoutLocked(linkedLayout) ||
+					(!isLayoutUpdateable(linkedLayout) ||
 					 isLayoutToBeUpdatedFromTemplate(linkedLayout))) {
 
 					LayoutServiceUtil.deleteLayout(
@@ -435,26 +435,29 @@ public class SitesUtil {
 			parameterMap, inputStream);
 	}
 
-	public static boolean isLayoutLocked(Layout layout) {
+	public static boolean isLayoutUpdateable(Layout layout) {
 		try {
 			LayoutSet layoutSet = layout.getLayoutSet();
 
-			if (layout.isLayoutPrototypeLinkEnabled() ||
-				layoutSet.isLayoutSetPrototypeLinkEnabled()) {
+			if ((layout.isLayoutPrototypeLinkEnabled() ||
+				layoutSet.isLayoutSetPrototypeLinkEnabled()) &&
+				(Validator.isNotNull(layout.getTemplateLayoutUuid()))) {
 
 				LayoutTypePortletImpl layoutTypePortlet =
 					new LayoutTypePortletImpl(layout);
 
-				return isLayoutLocked(layoutTypePortlet);
+				return isLayoutUpdateable(layoutTypePortlet);
 			}
 		}
 		catch (Exception e) {
 		}
 
-		return false;
+		return true;
 	}
 
-	public static boolean isLayoutLocked(LayoutTypePortlet layoutTypePortlet) {
+	public static boolean isLayoutUpdateable(
+		LayoutTypePortlet layoutTypePortlet) {
+
 		Layout layout = layoutTypePortlet.getLayout();
 
 		try {
@@ -463,58 +466,22 @@ public class SitesUtil {
 			if (layout.isLayoutPrototypeLinkEnabled() ||
 				layoutSet.isLayoutSetPrototypeLinkEnabled()) {
 
-				String locked = layoutTypePortlet.getTemplateProperty("locked");
+				boolean layoutsUpdateable = isLayoutsUpdateable(layoutSet);
 
-				if (Validator.isNotNull(locked)) {
-					return GetterUtil.getBoolean(locked);
+				if (!layoutsUpdateable) {
+					return false;
 				}
-				else if (Validator.isNotNull(layout.getTemplateLayoutUuid())) {
-					return isLayoutSetLocked(layoutSet);
-				}
+
+				String layoutUpdateable =
+					layoutTypePortlet.getTemplateProperty("layoutUpdateable");
+
+				return GetterUtil.getBoolean(layoutUpdateable, true);
 			}
-		}
-		catch (Exception e) {
-		}
-
-		return false;
-	}
-
-	public static boolean isLayoutSetLocked(
-		Group group, boolean privateLayout) {
-
-		try {
-			LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
-				group.getGroupId(), privateLayout);
-
-			return isLayoutSetLocked(layoutSet);
 		}
 		catch (Exception e) {
 		}
 
 		return true;
-	}
-
-	public static boolean isLayoutSetLocked(LayoutSet layoutSet) {
-		if (layoutSet.isLayoutSetPrototypeLinkEnabled()) {
-			try {
-				LayoutSetPrototype layoutSetPrototype =
-					LayoutSetPrototypeLocalServiceUtil.
-						getLayoutSetPrototypeByUuid(
-							layoutSet.getLayoutSetPrototypeUuid());
-
-				String allowModifications =
-					layoutSetPrototype.getSettingsProperty(
-						"allowModifications");
-
-				if (Validator.isNotNull(allowModifications)) {
-					return !GetterUtil.getBoolean(allowModifications);
-				}
-			}
-			catch (Exception e) {
-			}
-		}
-
-		return false;
 	}
 
 	public static boolean isLayoutToBeUpdatedFromTemplate(Layout layout)
@@ -549,7 +516,7 @@ public class SitesUtil {
 			return false;
 		}
 
-		if (isLayoutLocked(layout)) {
+		if (!isLayoutUpdateable(layout)) {
 			return true;
 		}
 
@@ -561,6 +528,28 @@ public class SitesUtil {
 		}
 
 		return false;
+	}
+
+	public static boolean isLayoutsUpdateable(LayoutSet layoutSet) {
+		if (layoutSet.isLayoutSetPrototypeLinkEnabled()) {
+			try {
+				LayoutSetPrototype layoutSetPrototype =
+					LayoutSetPrototypeLocalServiceUtil.
+						getLayoutSetPrototypeByUuid(
+							layoutSet.getLayoutSetPrototypeUuid());
+
+				String layoutsUpdateable =
+					layoutSetPrototype.getSettingsProperty("layoutsUpdateable");
+
+				if (Validator.isNotNull(layoutsUpdateable)) {
+					return GetterUtil.getBoolean(layoutsUpdateable, true);
+				}
+			}
+			catch (Exception e) {
+			}
+		}
+
+		return true;
 	}
 
 }
