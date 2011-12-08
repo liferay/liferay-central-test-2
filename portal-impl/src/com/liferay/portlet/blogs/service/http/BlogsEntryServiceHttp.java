@@ -135,7 +135,8 @@ public class BlogsEntryServiceHttp {
 	}
 
 	public static java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> getCompanyEntries(
-		HttpPrincipal httpPrincipal, long companyId, int status, int max)
+		HttpPrincipal httpPrincipal, long companyId,
+		java.util.Date displayDate, int status, int max)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
@@ -143,7 +144,7 @@ public class BlogsEntryServiceHttp {
 					"getCompanyEntries", _getCompanyEntriesParameterTypes2);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
-					companyId, status, max);
+					companyId, displayDate, status, max);
 
 			Object returnObj = null;
 
@@ -172,8 +173,9 @@ public class BlogsEntryServiceHttp {
 	}
 
 	public static java.lang.String getCompanyEntriesRSS(
-		HttpPrincipal httpPrincipal, long companyId, int status, int max,
-		java.lang.String type, double version, java.lang.String displayStyle,
+		HttpPrincipal httpPrincipal, long companyId,
+		java.util.Date displayDate, int status, int max, java.lang.String type,
+		double version, java.lang.String displayStyle,
 		java.lang.String feedURL, java.lang.String entryURL,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -183,8 +185,8 @@ public class BlogsEntryServiceHttp {
 					"getCompanyEntriesRSS", _getCompanyEntriesRSSParameterTypes3);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
-					companyId, status, max, type, version, displayStyle,
-					feedURL, entryURL, themeDisplay);
+					companyId, displayDate, status, max, type, version,
+					displayStyle, feedURL, entryURL, themeDisplay);
 
 			Object returnObj = null;
 
@@ -319,11 +321,44 @@ public class BlogsEntryServiceHttp {
 	}
 
 	public static java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> getGroupEntries(
-		HttpPrincipal httpPrincipal, long groupId, int status, int max)
+		HttpPrincipal httpPrincipal, long groupId, java.util.Date displayDate,
+		int status, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(BlogsEntryServiceUtil.class.getName(),
 					"getGroupEntries", _getGroupEntriesParameterTypes7);
+
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					displayDate, status, start, end);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
+					throw (com.liferay.portal.kernel.exception.SystemException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+
+			return (java.util.List<com.liferay.portlet.blogs.model.BlogsEntry>)returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> getGroupEntries(
+		HttpPrincipal httpPrincipal, long groupId, int status, int max)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		try {
+			MethodKey methodKey = new MethodKey(BlogsEntryServiceUtil.class.getName(),
+					"getGroupEntries", _getGroupEntriesParameterTypes8);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					status, max);
@@ -350,47 +385,15 @@ public class BlogsEntryServiceHttp {
 		}
 	}
 
-	public static java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> getGroupEntries(
-		HttpPrincipal httpPrincipal, long groupId, int status, int start,
-		int end) throws com.liferay.portal.kernel.exception.SystemException {
-		try {
-			MethodKey methodKey = new MethodKey(BlogsEntryServiceUtil.class.getName(),
-					"getGroupEntries", _getGroupEntriesParameterTypes8);
-
-			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					status, start, end);
-
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
-					throw (com.liferay.portal.kernel.exception.SystemException)e;
-				}
-
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
-			}
-
-			return (java.util.List<com.liferay.portlet.blogs.model.BlogsEntry>)returnObj;
-		}
-		catch (com.liferay.portal.kernel.exception.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
 	public static int getGroupEntriesCount(HttpPrincipal httpPrincipal,
-		long groupId, int status)
+		long groupId, java.util.Date displayDate, int status)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(BlogsEntryServiceUtil.class.getName(),
 					"getGroupEntriesCount", _getGroupEntriesCountParameterTypes9);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					status);
+					displayDate, status);
 
 			Object returnObj = null;
 
@@ -457,8 +460,8 @@ public class BlogsEntryServiceHttp {
 	}
 
 	public static java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> getGroupsEntries(
-		HttpPrincipal httpPrincipal, long companyId, long groupId, int status,
-		int max)
+		HttpPrincipal httpPrincipal, long companyId, long groupId,
+		java.util.Date displayDate, int status, int max)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
@@ -466,7 +469,7 @@ public class BlogsEntryServiceHttp {
 					"getGroupsEntries", _getGroupsEntriesParameterTypes11);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
-					companyId, groupId, status, max);
+					companyId, groupId, displayDate, status, max);
 
 			Object returnObj = null;
 
@@ -495,7 +498,8 @@ public class BlogsEntryServiceHttp {
 	}
 
 	public static java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> getOrganizationEntries(
-		HttpPrincipal httpPrincipal, long organizationId, int status, int max)
+		HttpPrincipal httpPrincipal, long organizationId,
+		java.util.Date displayDate, int status, int max)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
@@ -504,7 +508,7 @@ public class BlogsEntryServiceHttp {
 					_getOrganizationEntriesParameterTypes12);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
-					organizationId, status, max);
+					organizationId, displayDate, status, max);
 
 			Object returnObj = null;
 
@@ -533,8 +537,9 @@ public class BlogsEntryServiceHttp {
 	}
 
 	public static java.lang.String getOrganizationEntriesRSS(
-		HttpPrincipal httpPrincipal, long organizationId, int status, int max,
-		java.lang.String type, double version, java.lang.String displayStyle,
+		HttpPrincipal httpPrincipal, long organizationId,
+		java.util.Date displayDate, int status, int max, java.lang.String type,
+		double version, java.lang.String displayStyle,
 		java.lang.String feedURL, java.lang.String entryURL,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -545,8 +550,8 @@ public class BlogsEntryServiceHttp {
 					_getOrganizationEntriesRSSParameterTypes13);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
-					organizationId, status, max, type, version, displayStyle,
-					feedURL, entryURL, themeDisplay);
+					organizationId, displayDate, status, max, type, version,
+					displayStyle, feedURL, entryURL, themeDisplay);
 
 			Object returnObj = null;
 
@@ -698,12 +703,13 @@ public class BlogsEntryServiceHttp {
 			long.class
 		};
 	private static final Class<?>[] _getCompanyEntriesParameterTypes2 = new Class[] {
-			long.class, int.class, int.class
+			long.class, java.util.Date.class, int.class, int.class
 		};
 	private static final Class<?>[] _getCompanyEntriesRSSParameterTypes3 = new Class[] {
-			long.class, int.class, int.class, java.lang.String.class,
-			double.class, java.lang.String.class, java.lang.String.class,
-			java.lang.String.class, com.liferay.portal.theme.ThemeDisplay.class
+			long.class, java.util.Date.class, int.class, int.class,
+			java.lang.String.class, double.class, java.lang.String.class,
+			java.lang.String.class, java.lang.String.class,
+			com.liferay.portal.theme.ThemeDisplay.class
 		};
 	private static final Class<?>[] _getEntryParameterTypes4 = new Class[] {
 			long.class
@@ -715,13 +721,13 @@ public class BlogsEntryServiceHttp {
 			long.class, java.util.Date.class, int.class, int.class
 		};
 	private static final Class<?>[] _getGroupEntriesParameterTypes7 = new Class[] {
-			long.class, int.class, int.class
+			long.class, java.util.Date.class, int.class, int.class, int.class
 		};
 	private static final Class<?>[] _getGroupEntriesParameterTypes8 = new Class[] {
-			long.class, int.class, int.class, int.class
+			long.class, int.class, int.class
 		};
 	private static final Class<?>[] _getGroupEntriesCountParameterTypes9 = new Class[] {
-			long.class, int.class
+			long.class, java.util.Date.class, int.class
 		};
 	private static final Class<?>[] _getGroupEntriesRSSParameterTypes10 = new Class[] {
 			long.class, java.util.Date.class, int.class, int.class,
@@ -730,15 +736,16 @@ public class BlogsEntryServiceHttp {
 			com.liferay.portal.theme.ThemeDisplay.class
 		};
 	private static final Class<?>[] _getGroupsEntriesParameterTypes11 = new Class[] {
-			long.class, long.class, int.class, int.class
+			long.class, long.class, java.util.Date.class, int.class, int.class
 		};
 	private static final Class<?>[] _getOrganizationEntriesParameterTypes12 = new Class[] {
-			long.class, int.class, int.class
+			long.class, java.util.Date.class, int.class, int.class
 		};
 	private static final Class<?>[] _getOrganizationEntriesRSSParameterTypes13 = new Class[] {
-			long.class, int.class, int.class, java.lang.String.class,
-			double.class, java.lang.String.class, java.lang.String.class,
-			java.lang.String.class, com.liferay.portal.theme.ThemeDisplay.class
+			long.class, java.util.Date.class, int.class, int.class,
+			java.lang.String.class, double.class, java.lang.String.class,
+			java.lang.String.class, java.lang.String.class,
+			com.liferay.portal.theme.ThemeDisplay.class
 		};
 	private static final Class<?>[] _subscribeParameterTypes14 = new Class[] {
 			long.class
