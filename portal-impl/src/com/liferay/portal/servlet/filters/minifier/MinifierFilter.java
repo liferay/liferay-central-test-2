@@ -36,7 +36,6 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.SystemProperties;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.servlet.ComboServlet;
 import com.liferay.portal.servlet.filters.BasePortalFilter;
 import com.liferay.portal.servlet.filters.dynamiccss.DynamicCSSUtil;
 import com.liferay.portal.util.JavaScriptBundleUtil;
@@ -173,9 +172,21 @@ public class MinifierFilter extends BasePortalFilter {
 		if (Validator.isNull(_servletContextName)) {
 			_tempDir += "/portal";
 		}
+	}
 
-		_cacheKeyGenerator = CacheKeyGeneratorUtil.getCacheKeyGenerator(
-			ComboServlet.class.getName());
+	protected String getCacheFileName(HttpServletRequest request) {
+		String key = request.getRequestURI();
+
+		String queryString = request.getQueryString();
+
+		if (queryString != null) {
+			key = key.concat(_QUESTION_SEPARATOR).concat(
+				sterilizeQueryString(queryString));
+		}
+
+		String cacheKey = String.valueOf(_cacheKeyGenerator.getCacheKey(key));
+
+		return _tempDir.concat(StringPool.SLASH).concat(cacheKey);
 	}
 
 	protected Object getMinifiedBundleContent(
@@ -204,22 +215,7 @@ public class MinifierFilter extends BasePortalFilter {
 			return null;
 		}
 
-		StringBundler sb = new StringBundler(4);
-
-		sb.append(request.getRequestURI());
-
-		String queryString = request.getQueryString();
-
-		if (queryString != null) {
-			sb.append(_QUESTION_SEPARATOR);
-			sb.append(sterilizeQueryString(queryString));
-		}
-
-		String fileNameHashCode = _cacheKeyGenerator.getCacheKey(
-			sb.toString()).toString();
-
-		String cacheFileName =
-			_tempDir.concat(StringPool.SLASH).concat(fileNameHashCode);
+		String cacheFileName = getCacheFileName(request);
 
 		String[] fileNames = JavaScriptBundleUtil.getFileNames(
 			minifierBundleId);
@@ -257,7 +253,7 @@ public class MinifierFilter extends BasePortalFilter {
 			minifiedContent = StringPool.BLANK;
 		}
 		else {
-			sb = new StringBundler(fileNames.length * 2);
+			StringBundler sb = new StringBundler(fileNames.length * 2);
 
 			for (String fileName : fileNames) {
 				String content = FileUtil.read(
@@ -321,23 +317,7 @@ public class MinifierFilter extends BasePortalFilter {
 			return null;
 		}
 
-		StringBundler sb = new StringBundler(4);
-
-		sb.append(_tempDir);
-		sb.append(requestURI);
-
-		String queryString = request.getQueryString();
-
-		if (queryString != null) {
-			sb.append(_QUESTION_SEPARATOR);
-			sb.append(sterilizeQueryString(queryString));
-		}
-
-		String fileNameHashCode = _cacheKeyGenerator.getCacheKey(
-			sb.toString()).toString();
-
-		String cacheCommonFileName =
-			_tempDir.concat(StringPool.SLASH).concat(fileNameHashCode);
+		String cacheCommonFileName = getCacheFileName(request);
 
 		File cacheContentTypeFile = new File(
 			cacheCommonFileName + "_E_CONTENT_TYPE");
@@ -524,7 +504,9 @@ public class MinifierFilter extends BasePortalFilter {
 	private static Pattern _pattern = Pattern.compile(
 		"^(\\.ie|\\.js\\.ie)([^}]*)}", Pattern.MULTILINE);
 
-	private CacheKeyGenerator _cacheKeyGenerator;
+	private CacheKeyGenerator _cacheKeyGenerator =
+		CacheKeyGeneratorUtil.getCacheKeyGenerator(
+			MinifierFilter.class.getName());
 	private ServletContext _servletContext;
 	private String _servletContextName;
 	private String _tempDir = _TEMP_DIR;

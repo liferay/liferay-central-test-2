@@ -26,12 +26,10 @@ import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.SystemProperties;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.servlet.ComboServlet;
 import com.liferay.portal.servlet.filters.BasePortalFilter;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.servlet.filters.CacheResponseUtil;
@@ -66,9 +64,21 @@ public class DynamicCSSFilter extends BasePortalFilter {
 		}
 
 		DynamicCSSUtil.init();
+	}
 
-		_cacheKeyGenerator = CacheKeyGeneratorUtil.getCacheKeyGenerator(
-			ComboServlet.class.getName());
+	protected String getCacheFileName(HttpServletRequest request) {
+		String key = request.getRequestURI();
+
+		String queryString = request.getQueryString();
+
+		if (queryString != null) {
+			key = key.concat(_QUESTION_SEPARATOR).concat(
+				sterilizeQueryString(queryString));
+		}
+
+		String cacheKey = String.valueOf(_cacheKeyGenerator.getCacheKey(key));
+
+		return _tempDir.concat(StringPool.SLASH).concat(cacheKey);
 	}
 
 	protected Object getDynamicContent(
@@ -98,23 +108,7 @@ public class DynamicCSSFilter extends BasePortalFilter {
 
 		File file = new File(realPath);
 
-		StringBundler sb = new StringBundler(4);
-
-		sb.append(_tempDir);
-		sb.append(requestURI);
-
-		String queryString = request.getQueryString();
-
-		if (queryString != null) {
-			sb.append(_QUESTION_SEPARATOR);
-			sb.append(sterilizeQueryString(queryString));
-		}
-
-		String fileNameHashCode = _cacheKeyGenerator.getCacheKey(
-			sb.toString()).toString();
-
-		String cacheCommonFileName =
-			_tempDir.concat(StringPool.SLASH).concat(fileNameHashCode);
+		String cacheCommonFileName = getCacheFileName(request);
 
 		File cacheContentTypeFile = new File(
 			cacheCommonFileName + "_E_CONTENT_TYPE");
@@ -243,7 +237,9 @@ public class DynamicCSSFilter extends BasePortalFilter {
 
 	private static Log _log = LogFactoryUtil.getLog(DynamicCSSFilter.class);
 
-	private CacheKeyGenerator _cacheKeyGenerator;
+	private CacheKeyGenerator _cacheKeyGenerator =
+		CacheKeyGeneratorUtil.getCacheKeyGenerator(
+			DynamicCSSFilter.class.getName());
 	private ServletContext _servletContext;
 	private String _servletContextName;
 	private String _tempDir = _TEMP_DIR;
