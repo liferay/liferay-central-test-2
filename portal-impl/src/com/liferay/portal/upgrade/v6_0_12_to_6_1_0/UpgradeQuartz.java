@@ -46,7 +46,9 @@ public class UpgradeQuartz extends UpgradeProcess {
 		ClassLoader classLoader = clazz.getClassLoader();
 
 		String quartzTableSQL = StringUtil.read(
-			classLoader, QUARTZ_TABLES_DEPENDENCIES);
+			classLoader,
+			"com/liferay/portal/upgrade/v6_0_12_to_6_1_0/dependencies/" +
+				"quartz-tables.sql");
 
 		String[] createTableSQLs = StringUtil.split(quartzTableSQL, ";");
 
@@ -115,9 +117,5 @@ public class UpgradeQuartz extends UpgradeProcess {
 			throw new RuntimeException("Invalid column type " + columnType);
 		}
 	}
-
-	protected static final String QUARTZ_TABLES_DEPENDENCIES =
-		"com/liferay/portal/upgrade/v6_0_12_to_6_1_0/dependencies/" +
-			"quartz-tables.sql";
 
 }
