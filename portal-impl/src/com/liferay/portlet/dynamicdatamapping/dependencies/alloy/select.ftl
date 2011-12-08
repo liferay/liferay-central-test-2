@@ -1,7 +1,5 @@
 <#include "../init.ftl">
 
-<#-- Multiple -->
-
 <#assign multiple = false>
 
 <#if fieldStructure.multiple?? && (fieldStructure.multiple == "true")>
