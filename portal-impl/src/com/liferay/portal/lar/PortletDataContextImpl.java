@@ -21,10 +21,8 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.lar.PortletDataContext;
 import com.liferay.portal.kernel.lar.PortletDataContextListener;
 import com.liferay.portal.kernel.lar.PortletDataException;
-import com.liferay.portal.kernel.lar.PortletDataFutureDateException;
 import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
-import com.liferay.portal.kernel.lar.PortletDataStartEndDateException;
 import com.liferay.portal.kernel.lar.UserIdStrategy;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -1458,22 +1456,31 @@ public class PortletDataContextImpl implements PortletDataContext {
 	protected void validateDateRange(Date startDate, Date endDate)
 		throws PortletDataException {
 
-		if ((startDate == null) ^ (endDate == null)) {
+		if ((startDate == null) && (endDate != null)) {
 			throw new PortletDataException(
-				"Both start and end dates must have valid values or be null");
+				PortletDataException.END_DATE_IS_MISSING_START_DATE);
+		}
+		else if ((startDate != null) && (endDate == null)) {
+			throw new PortletDataException(
+				PortletDataException.START_DATE_IS_MISSING_END_DATE);
 		}
 
 		if (startDate != null) {
 			if (startDate.after(endDate) || startDate.equals(endDate)) {
-				throw new PortletDataStartEndDateException(
-					"The start date cannot be after the end date");
+				throw new PortletDataException(
+					PortletDataException.START_DATE_AFTER_END_DATE);
 			}
 
 			Date now = new Date();
 
-			if (startDate.after(now) || endDate.after(now)) {
-				throw new PortletDataFutureDateException(
-					"Dates must not be in the future");
+			if (startDate.after(now)) {
+				throw new PortletDataException(
+					PortletDataException.FUTURE_START_DATE);
+			}
+
+			if (endDate.after(now)) {
+				throw new PortletDataException(
+					PortletDataException.FUTURE_END_DATE);
 			}
 		}
 	}

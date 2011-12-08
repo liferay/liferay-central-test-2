@@ -89,8 +89,25 @@ if (layout.isTypeControlPanel()) {
 		<liferay-ui:error exception="<%= LayoutImportException.class %>" message="an-unexpected-error-occurred-while-importing-your-file" />
 		<liferay-ui:error exception="<%= NoSuchLayoutException.class %>" message="an-error-occurred-because-the-live-group-does-not-have-the-current-page" />
 		<liferay-ui:error exception="<%= PortletIdException.class %>" message="please-import-a-lar-file-for-the-current-portlet" />
-		<liferay-ui:error exception="<%= PortletDataFutureDateException.class %>" message="dates-must-not-be-in-the-future" />
-		<liferay-ui:error exception="<%= PortletDataStartEndDateException.class %>" message="please-enter-a-start-date-that-comes-before-the-end-date" />
+
+		<liferay-ui:error exception="<%= PortletDataException.class %>">
+
+			<%
+			PortletDataException pde = (PortletDataException)errorException;
+			%>
+
+			<c:if test="<%= pde.getType() == PortletDataException.FUTURE_END_DATE %>">
+				<liferay-ui:message key="please-enter-a-valid-end-date-that-is-in-the-past" />
+			</c:if>
+
+			<c:if test="<%= pde.getType() == PortletDataException.FUTURE_START_DATE %>">
+				<liferay-ui:message key="please-enter-a-valid-start-date-that-is-in-the-past" />
+			</c:if>
+
+			<c:if test="<%= pde.getType() == PortletDataException.START_DATE_AFTER_END_DATE %>">
+				<liferay-ui:message key="please-enter-a-start-date-that-comes-before-the-end-date" />
+			</c:if>
+		</liferay-ui:error>
 
 		<portlet:actionURL var="exportImportPagesURL">
 			<portlet:param name="struts_action" value="/portlet_configuration/export_import" />
