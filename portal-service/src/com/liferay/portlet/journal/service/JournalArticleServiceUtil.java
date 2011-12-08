@@ -206,8 +206,7 @@ public class JournalArticleServiceUtil {
 	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> getArticlesByArticleId(
 		long groupId, java.lang.String articleId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .getArticlesByArticleId(groupId, articleId, start, end, obc);
 	}
@@ -220,8 +219,7 @@ public class JournalArticleServiceUtil {
 
 	public static int getArticlesCountByArticleId(long groupId,
 		java.lang.String articleId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getArticlesCountByArticleId(groupId, articleId);
 	}
 

@@ -251,7 +251,7 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 	public List<JournalArticle> getArticlesByArticleId(
 			long groupId, String articleId, int start, int end,
 			OrderByComparator obc)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return journalArticlePersistence.filterFindByG_A(
 			groupId, articleId, start, end, obc);
@@ -265,7 +265,7 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 	}
 
 	public int getArticlesCountByArticleId(long groupId, String articleId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return journalArticlePersistence.filterCountByG_A(groupId, articleId);
 	}
