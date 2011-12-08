@@ -56,6 +56,7 @@ public class FindPageAction extends FindAction {
 		}
 		else if (portletId.equals(PortletKeys.WIKI)) {
 			return "/wiki/view";
+		}
 		else {
 			return "/wiki_display/view";
 		}
