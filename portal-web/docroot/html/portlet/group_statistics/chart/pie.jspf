@@ -39,7 +39,7 @@ DecimalFormat decimalFormat = new DecimalFormat("##.00%");
 		</div>
 	</aui:column>
 
-	<aui:column columnWidth="<%= (100 - chartWidth) %>" cssClass="info-column">
+	<aui:column columnWidth="<%= 100 - chartWidth %>" cssClass="info-column">
 		<div class="group-statistics-info">
 			<strong><liferay-ui:message key="activities-by-area" />:</strong>
 
@@ -149,19 +149,20 @@ DecimalFormat decimalFormat = new DecimalFormat("##.00%");
 		}
 	).render(chartContainer);
 
-	// To be fixed pending fix in http://yuilibrary.com/projects/yui3/ticket/2531555
-	//Liferay.after(
-	//	['portletMoved', 'liferaypanel:collapse'],
-	//	function(event) {
-	//		var width = getContainerWidth(chartContainer);
+	// TODO http://yuilibrary.com/projects/yui3/ticket/2531555
 
-	//		if (width && (event.type == 'portletMoved' && event.portletId == '<%= portletDisplay.getId() %>') ||
-	//			(event.type == 'liferaypanel:collapse' && event.panelId == 'groupStatisticsPanel<%= displayActivityCounterNameIndex %>')) {
+	/*Liferay.after(
+		['portletMoved', 'liferaypanel:collapse'],
+		function(event) {
+			var width = getContainerWidth(chartContainer);
 
-	//			chart.set('width', width);
-	//		}
-	//	}
-	//);
+			if (width && (event.type == 'portletMoved' && event.portletId == '<%= portletDisplay.getId() %>') ||
+				(event.type == 'liferaypanel:collapse' && event.panelId == 'groupStatisticsPanel<%= displayActivityCounterNameIndex %>')) {
+
+				chart.set('width', width);
+			}
+		}
+	);*/
 </aui:script>
 
 <%!

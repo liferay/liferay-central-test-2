@@ -77,6 +77,7 @@ Collections.sort(activityCounterNames, new SocialActivityCounterNameComparator(l
 		<aui:option label="group-statistics-data-range-last-12-months" selected='<%= dataRange.equals("12months") %>' value="12months" />
 	</aui:select>
 </div>
+
 <div class="aui-field-row">
 	<span class="aui-field aui-field-inline inline-text">
 		<liferay-ui:message key="chart-width" />:
@@ -88,7 +89,7 @@ Collections.sort(activityCounterNames, new SocialActivityCounterNameComparator(l
 		for (int i = 5; i < 100; i = i + 5) {
 		%>
 
-			<aui:option label='<%= String.valueOf(i) + StringPool.PERCENT %>' selected="<%= (chartWidth == i) %>" value="<%= i %>" />
+			<aui:option label="<%= i + StringPool.PERCENT %>" selected="<%= chartWidth == i %>" value="<%= i %>" />
 
 		<%
 		}
