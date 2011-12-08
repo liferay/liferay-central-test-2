@@ -306,7 +306,7 @@ public class SitesUtil {
 
 				if ((linkedLayout != null) &&
 					(!isLayoutUpdateable(linkedLayout) ||
-					 isLayoutToBeUpdatedFromTemplate(linkedLayout))) {
+					 isLayoutToBeUpdatedFromSourcePrototype(linkedLayout))) {
 
 					LayoutServiceUtil.deleteLayout(
 						linkedLayout.getPlid(), serviceContext);
@@ -441,7 +441,7 @@ public class SitesUtil {
 
 			if ((layout.isLayoutPrototypeLinkEnabled() ||
 				layoutSet.isLayoutSetPrototypeLinkEnabled()) &&
-				(Validator.isNotNull(layout.getTemplateLayoutUuid()))) {
+				(Validator.isNotNull(layout.getSourcePrototypeLayoutUuid()))) {
 
 				LayoutTypePortletImpl layoutTypePortlet =
 					new LayoutTypePortletImpl(layout);
@@ -484,7 +484,7 @@ public class SitesUtil {
 		return true;
 	}
 
-	public static boolean isLayoutToBeUpdatedFromTemplate(Layout layout)
+	public static boolean isLayoutToBeUpdatedFromSourcePrototype(Layout layout)
 		throws Exception {
 
 		if (layout == null) {
@@ -497,7 +497,8 @@ public class SitesUtil {
 			return false;
 		}
 
-		Layout templateLayout = LayoutTypePortletImpl.getTemplateLayout(layout);
+		Layout sourcePrototypeLayout =
+			LayoutTypePortletImpl.getSourcePrototypeLayout(layout);
 
 		Date layoutModifiedDate = layout.getModifiedDate();
 
@@ -511,7 +512,7 @@ public class SitesUtil {
 		}
 
 		if ((lastCopyDate != null) &&
-			lastCopyDate.after(templateLayout.getModifiedDate())) {
+			lastCopyDate.after(sourcePrototypeLayout.getModifiedDate())) {
 
 			return false;
 		}
