@@ -225,12 +225,6 @@ public class PortalUtil {
 		return getPortal().getBasicAuthUserId(request);
 	}
 
-	public static long getDigestAuthUserId(HttpServletRequest request)
-		throws PortalException, SystemException {
-
-		return getPortal().getDigestAuthUserId(request);
-	}
-
 	public static long getBasicAuthUserId(
 			HttpServletRequest request, long companyId)
 		throws PortalException, SystemException {
@@ -420,6 +414,12 @@ public class PortalUtil {
 
 	public static long getDefaultCompanyId() {
 		return getPortal().getDefaultCompanyId();
+	}
+
+	public static long getDigestAuthUserId(HttpServletRequest request)
+		throws PortalException, SystemException {
+
+		return getPortal().getDigestAuthUserId(request);
 	}
 
 	public static String getEmailFromAddress(
@@ -827,6 +827,12 @@ public class PortalUtil {
 		return getPortal().getPortalURL(request, secure);
 	}
 
+	public static String getPortalURL(Layout layout, ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
+
+		return getPortal().getPortalURL(layout, themeDisplay);
+	}
+
 	public static String getPortalURL(PortletRequest portletRequest) {
 		return getPortal().getPortalURL(portletRequest);
 	}
@@ -841,12 +847,6 @@ public class PortalUtil {
 		String serverName, int serverPort, boolean secure) {
 
 		return getPortal().getPortalURL(serverName, serverPort, secure);
-	}
-
-	public static String getPortalURL(Layout layout, ThemeDisplay themeDisplay)
-		throws PortalException, SystemException {
-
-		return getPortal().getPortalURL(layout, themeDisplay);
 	}
 
 	public static String getPortalURL(ThemeDisplay themeDisplay)
@@ -1128,16 +1128,16 @@ public class PortalUtil {
 		return getPortal().getSystemSiteRoles();
 	}
 
-	public static UploadServletRequest getUploadServletRequest(
-		HttpServletRequest request) {
-
-		return getPortal().getUploadServletRequest(request);
-	}
-
 	public static UploadPortletRequest getUploadPortletRequest(
 		PortletRequest portletRequest) {
 
 		return getPortal().getUploadPortletRequest(portletRequest);
+	}
+
+	public static UploadServletRequest getUploadServletRequest(
+		HttpServletRequest request) {
+
+		return getPortal().getUploadServletRequest(request);
 	}
 
 	public static Date getUptime() {
@@ -1394,12 +1394,6 @@ public class PortalUtil {
 		return getPortal().isValidResourceId(resourceId);
 	}
 
-	public void removePortalPortEventListener(
-		PortalPortEventListener portalPortEventListener) {
-
-		getPortal().removePortalPortEventListener(portalPortEventListener);
-	}
-
 	public static String renderPage(
 			ServletContext servletContext, HttpServletRequest request,
 			HttpServletResponse response, String path, boolean writeOutput)
@@ -1574,6 +1568,12 @@ public class PortalUtil {
 
 		return getPortal().updateWindowState(
 			portletId, user, layout, windowState, request);
+	}
+
+	public void removePortalPortEventListener(
+		PortalPortEventListener portalPortEventListener) {
+
+		getPortal().removePortalPortEventListener(portalPortEventListener);
 	}
 
 	public void setPortal(Portal portal) {

@@ -2816,6 +2816,29 @@ public class PortalImpl implements Portal {
 			request.getServerName(), request.getServerPort(), secure);
 	}
 
+	public String getPortalURL(Layout layout, ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
+
+		String serverName = themeDisplay.getServerName();
+
+		if (layout == null) {
+			layout = themeDisplay.getLayout();
+		}
+
+		if (layout != null) {
+			LayoutSet layoutSet = layout.getLayoutSet();
+
+			String virtualHostname = layoutSet.getVirtualHostname();
+
+			if (Validator.isNotNull(virtualHostname)) {
+				serverName = virtualHostname;
+			}
+		}
+
+		return getPortalURL(
+			serverName, themeDisplay.getServerPort(), themeDisplay.isSecure());
+	}
+
 	public String getPortalURL(PortletRequest portletRequest) {
 		return getPortalURL(portletRequest, portletRequest.isSecure());
 	}
@@ -2880,29 +2903,6 @@ public class PortalImpl implements Portal {
 		}
 
 		return sb.toString();
-	}
-
-	public String getPortalURL(Layout layout, ThemeDisplay themeDisplay)
-		throws PortalException, SystemException {
-
-		String serverName = themeDisplay.getServerName();
-
-		if (layout == null) {
-			layout = themeDisplay.getLayout();
-		}
-
-		if (layout != null) {
-			LayoutSet layoutSet = layout.getLayoutSet();
-
-			String virtualHostname = layoutSet.getVirtualHostname();
-
-			if (Validator.isNotNull(virtualHostname)) {
-				serverName = virtualHostname;
-			}
-		}
-
-		return getPortalURL(
-			serverName, themeDisplay.getServerPort(), themeDisplay.isSecure());
 	}
 
 	public String getPortalURL(ThemeDisplay themeDisplay)
@@ -3150,10 +3150,6 @@ public class PortalImpl implements Portal {
 		return getPortletLongTitle(portlet.getPortletId(), locale);
 	}
 
-	public String getPortletLongTitle(Portlet portlet, String languageId) {
-		return getPortletLongTitle(portlet.getPortletId(), languageId);
-	}
-
 	public String getPortletLongTitle(
 		Portlet portlet, ServletContext servletContext, Locale locale) {
 
@@ -3178,6 +3174,10 @@ public class PortalImpl implements Portal {
 		catch (Exception e) {
 			return getPortletTitle(portlet, servletContext, locale);
 		}
+	}
+
+	public String getPortletLongTitle(Portlet portlet, String languageId) {
+		return getPortletLongTitle(portlet.getPortletId(), languageId);
 	}
 
 	public String getPortletLongTitle(Portlet portlet, User user) {
@@ -3217,10 +3217,6 @@ public class PortalImpl implements Portal {
 		return getPortletTitle(portlet.getPortletId(), locale);
 	}
 
-	public String getPortletTitle(Portlet portlet, String languageId) {
-		return getPortletTitle(portlet.getPortletId(), languageId);
-	}
-
 	public String getPortletTitle(
 		Portlet portlet, ServletContext servletContext, Locale locale) {
 
@@ -3230,6 +3226,10 @@ public class PortalImpl implements Portal {
 		ResourceBundle resourceBundle = portletConfig.getResourceBundle(locale);
 
 		return resourceBundle.getString(JavaConstants.JAVAX_PORTLET_TITLE);
+	}
+
+	public String getPortletTitle(Portlet portlet, String languageId) {
+		return getPortletTitle(portlet.getPortletId(), languageId);
 	}
 
 	public String getPortletTitle(Portlet portlet, User user) {
@@ -3730,6 +3730,26 @@ public class PortalImpl implements Portal {
 		return _allSystemSiteRoles;
 	}
 
+	public UploadPortletRequest getUploadPortletRequest(
+		PortletRequest portletRequest) {
+
+		PortletRequestImpl portletRequestImpl =
+			(PortletRequestImpl)portletRequest;
+
+		DynamicServletRequest dynamicRequest =
+			(DynamicServletRequest)portletRequestImpl.getHttpServletRequest();
+
+		HttpServletRequestWrapper requestWrapper =
+			(HttpServletRequestWrapper)dynamicRequest.getRequest();
+
+		UploadServletRequest uploadServletRequest = getUploadServletRequest(
+			requestWrapper);
+
+		return new UploadPortletRequestImpl(
+			uploadServletRequest,
+			getPortletNamespace(portletRequestImpl.getPortletName()));
+	}
+
 	public UploadServletRequest getUploadServletRequest(
 		HttpServletRequest request) {
 
@@ -3772,28 +3792,8 @@ public class PortalImpl implements Portal {
 		return uploadServletRequest;
 	}
 
-	public UploadPortletRequest getUploadPortletRequest(
-		PortletRequest portletRequest) {
-
-		PortletRequestImpl portletRequestImpl =
-			(PortletRequestImpl)portletRequest;
-
-		DynamicServletRequest dynamicRequest =
-			(DynamicServletRequest)portletRequestImpl.getHttpServletRequest();
-
-		HttpServletRequestWrapper requestWrapper =
-			(HttpServletRequestWrapper)dynamicRequest.getRequest();
-
-		UploadServletRequest uploadServletRequest = getUploadServletRequest(
-			requestWrapper);
-
-		return new UploadPortletRequestImpl(
-			uploadServletRequest,
-			getPortletNamespace(portletRequestImpl.getPortletName()));
-	}
-
 	public Date getUptime() {
-		return _UP_TIME;
+		return _upTime;
 	}
 
 	public String getURLWithSessionId(String url, String sessionId) {
@@ -4435,27 +4435,6 @@ public class PortalImpl implements Portal {
 		return false;
 	}
 
-	public boolean isSecure(HttpServletRequest request) {
-		HttpSession session = request.getSession();
-
-		Boolean httpsInitial = (Boolean)session.getAttribute(
-			WebKeys.HTTPS_INITIAL);
-
-		boolean secure = false;
-
-		if ((PropsValues.COMPANY_SECURITY_AUTH_REQUIRES_HTTPS) &&
-			(!PropsValues.SESSION_ENABLE_PHISHING_PROTECTION) &&
-			(httpsInitial != null) && (!httpsInitial.booleanValue())) {
-
-			secure = false;
-		}
-		else {
-			secure = request.isSecure();
-		}
-
-		return secure;
-	}
-
 	public boolean isGroupAdmin(User user, long groupId) throws Exception {
 		PermissionChecker permissionChecker =
 			PermissionCheckerFactoryUtil.create(user, true);
@@ -4576,6 +4555,27 @@ public class PortalImpl implements Portal {
 
 	public boolean isReservedParameter(String name) {
 		return _reservedParams.contains(name);
+	}
+
+	public boolean isSecure(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+
+		Boolean httpsInitial = (Boolean)session.getAttribute(
+			WebKeys.HTTPS_INITIAL);
+
+		boolean secure = false;
+
+		if ((PropsValues.COMPANY_SECURITY_AUTH_REQUIRES_HTTPS) &&
+			(!PropsValues.SESSION_ENABLE_PHISHING_PROTECTION) &&
+			(httpsInitial != null) && (!httpsInitial.booleanValue())) {
+
+			secure = false;
+		}
+		else {
+			secure = request.isSecure();
+		}
+
+		return secure;
 	}
 
 	public boolean isSystemGroup(String groupName) {
@@ -5780,16 +5780,19 @@ public class PortalImpl implements Portal {
 	private static final String _PUBLIC_GROUP_SERVLET_MAPPING =
 		PropsValues.LAYOUT_FRIENDLY_URL_PUBLIC_SERVLET_MAPPING;
 
-	private static final Date _UP_TIME = new Date();
-
 	private static Log _log = LogFactoryUtil.getLog(PortalImpl.class);
 
 	private static Log _logWebServerServlet = LogFactoryUtil.getLog(
 		WebServerServlet.class);
 
+	private static Map<Long, String> _cdnHostHttpMap =
+		new ConcurrentHashMap<Long, String>();
+	private static Map<Long, String> _cdnHostHttpsMap =
+		new ConcurrentHashMap<Long, String>();
 	private static MethodHandler _resetCDNHostsMethodHandler =
 		new MethodHandler(
 			new MethodKey(PortalUtil.class.getName(), "resetCDNHosts"));
+	private static Date _upTime = new Date();
 
 	private String[] _allSystemGroups;
 	private String[] _allSystemOrganizationRoles;
@@ -5800,10 +5803,6 @@ public class PortalImpl implements Portal {
 	private Pattern _bannedResourceIdPattern = Pattern.compile(
 		PropsValues.PORTLET_RESOURCE_ID_BANNED_PATHS_REGEXP,
 		Pattern.CASE_INSENSITIVE);
-	private static Map<Long, String> _cdnHostHttpMap =
-		new ConcurrentHashMap<Long, String>();
-	private static Map<Long, String> _cdnHostHttpsMap =
-		new ConcurrentHashMap<Long, String>();
 	private String _computerAddress;
 	private String _computerName;
 	private String[] _customSqlKeys;
