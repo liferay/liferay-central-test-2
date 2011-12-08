@@ -127,11 +127,11 @@ public class LayoutLocalServiceStagingAdvice
 
 				returnValue = localMethod.invoke(this, arguments);
 			}
-			catch (NoSuchMethodException nsme) {
-				throw new SystemException(nsme);
-			}
 			catch (InvocationTargetException ite) {
 				throw ite.getTargetException();
+			}
+			catch (NoSuchMethodException nsme) {
+				throw new SystemException(nsme);
 			}
 		}
 
