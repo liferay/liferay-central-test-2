@@ -33,7 +33,7 @@ public class AudioProcessorMessageListener extends BaseMessageListener {
 
 		AudioProcessor.generateAudio(fileVersion);
 
-		if (PropsValues.DL_FILE_ENTRY_PROCESSORS_PROCESS_SYNCHRONOUSLY) {
+		if (PropsValues.DL_FILE_ENTRY_PROCESSORS_TRIGGER_SYNCHRONOUSLY) {
 			MessageBusUtil.sendMessage(
 				message.getResponseDestinationName(), message);
 		}

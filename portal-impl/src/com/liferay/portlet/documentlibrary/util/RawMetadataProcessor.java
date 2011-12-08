@@ -161,7 +161,7 @@ public class RawMetadataProcessor implements DLProcessor {
 	 *        to be generated
 	 */
 	public void trigger(FileVersion fileVersion) {
-		if (PropsValues.DL_FILE_ENTRY_PROCESSORS_PROCESS_SYNCHRONOUSLY) {
+		if (PropsValues.DL_FILE_ENTRY_PROCESSORS_TRIGGER_SYNCHRONOUSLY) {
 			try {
 				MessageBusUtil.sendSynchronousMessage(
 					DestinationNames.DOCUMENT_LIBRARY_RAW_METADATA_PROCESSOR,

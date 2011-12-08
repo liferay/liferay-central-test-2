@@ -278,7 +278,7 @@ public class AudioProcessor extends DefaultPreviewableProcessor {
 
 		_fileVersionIds.add(fileVersion.getFileVersionId());
 
-		if (PropsValues.DL_FILE_ENTRY_PROCESSORS_PROCESS_SYNCHRONOUSLY) {
+		if (PropsValues.DL_FILE_ENTRY_PROCESSORS_TRIGGER_SYNCHRONOUSLY) {
 			try {
 				MessageBusUtil.sendSynchronousMessage(
 					DestinationNames.DOCUMENT_LIBRARY_AUDIO_PROCESSOR,

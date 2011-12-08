@@ -354,7 +354,7 @@ public class ImageProcessor extends DLPreviewableProcessor {
 			isSupported(fileVersion) && !_hasImages(fileVersion)) {
 			_fileVersionIds.add(fileVersion.getFileVersionId());
 
-			if (PropsValues.DL_FILE_ENTRY_PROCESSORS_PROCESS_SYNCHRONOUSLY) {
+			if (PropsValues.DL_FILE_ENTRY_PROCESSORS_TRIGGER_SYNCHRONOUSLY) {
 				try {
 					MessageBusUtil.sendSynchronousMessage(
 						DestinationNames.DOCUMENT_LIBRARY_IMAGE_PROCESSOR,

@@ -551,7 +551,7 @@ public interface PropsKeys {
 
 	public static final String DL_FILE_ENTRY_PROCESSORS = "dl.file.entry.processors";
 
-	public static final String DL_FILE_ENTRY_PROCESSORS_PROCESS_SYNCHRONOUSLY = "dl.file.entry.processors.process.synchronously";
+	public static final String DL_FILE_ENTRY_PROCESSORS_TRIGGER_SYNCHRONOUSLY = "dl.file.entry.processors.trigger.synchronously";
 
 	public static final String DL_FILE_ENTRY_READ_COUNT_ENABLED = "dl.file.entry.read.count.enabled";
 

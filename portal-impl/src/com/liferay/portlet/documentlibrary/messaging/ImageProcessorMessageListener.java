@@ -32,7 +32,7 @@ public class ImageProcessorMessageListener extends BaseMessageListener {
 
 		ImageProcessor.generateImages(fileVersion);
 
-		if (PropsValues.DL_FILE_ENTRY_PROCESSORS_PROCESS_SYNCHRONOUSLY) {
+		if (PropsValues.DL_FILE_ENTRY_PROCESSORS_TRIGGER_SYNCHRONOUSLY) {
 			MessageBusUtil.sendMessage(
 				message.getResponseDestinationName(), message);
 		}
