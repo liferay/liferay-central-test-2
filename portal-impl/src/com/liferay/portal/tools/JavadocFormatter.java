@@ -347,10 +347,6 @@ public class JavadocFormatter {
 
 		String value = null;
 
-		if (type.isArray()) {
-			typeValue += "[]";
-		}
-
 		for (DocletTag paramDocletTag : paramDocletTags) {
 			String curValue = paramDocletTag.getValue();
 
