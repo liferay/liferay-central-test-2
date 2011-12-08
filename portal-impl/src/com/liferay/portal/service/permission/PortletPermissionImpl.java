@@ -294,9 +294,9 @@ public class PortletPermissionImpl implements PortletPermission {
 				groupId, name, primKey, actionId);
 		}
 
-		if (hasCustomizePermission(
+		if (hasConfigurePermission(
 				permissionChecker, layout, portletId, actionId) ||
-			hasConfigurePermission(
+			hasCustomizePermission(
 				permissionChecker, layout, portletId, actionId)) {
 
 			return true;
