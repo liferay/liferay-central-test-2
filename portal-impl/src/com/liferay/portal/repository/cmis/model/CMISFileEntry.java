@@ -169,12 +169,11 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 	public List<FileVersion> getFileVersions(int status)
 		throws SystemException {
 
-		List<FileVersion> fileVersions = null;
-
 		try {
 			List<Document> documents = getAllVersions();
 
-			fileVersions = new ArrayList<FileVersion>(documents.size());
+			List<FileVersion> fileVersions = new ArrayList<FileVersion>(
+				documents.size());
 
 			for (Document document : documents) {
 				FileVersion fileVersion =
@@ -183,12 +182,12 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 
 				fileVersions.add(fileVersion);
 			}
+
+			return fileVersions;
 		}
 		catch (PortalException pe) {
 			throw new RepositoryException(pe);
 		}
-
-		return fileVersions;
 	}
 
 	public Folder getFolder() {

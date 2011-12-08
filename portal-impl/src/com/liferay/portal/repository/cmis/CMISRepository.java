@@ -223,7 +223,8 @@ public class CMISRepository extends BaseCmisRepository {
 		catch (Exception e) {
 			_log.error(
 				"Unable to cancel checkout for file entry with {fileEntryId=" +
-				fileEntryId + "}", e);
+					fileEntryId + "}",
+				e);
 		}
 	}
 
@@ -291,7 +292,8 @@ public class CMISRepository extends BaseCmisRepository {
 		catch (Exception e) {
 			_log.error(
 				"Unable checkout file entry with {fileEntryId=" + fileEntryId +
-				"}", e);
+					"}",
+				e);
 		}
 
 		return getFileEntry(fileEntryId);
@@ -479,7 +481,8 @@ public class CMISRepository extends BaseCmisRepository {
 		catch (CmisObjectNotFoundException confe) {
 			throw new NoSuchFileEntryException(
 				"No CMIS file entry with {folderId=" + folderId + ", title=" +
-					title + "}", confe);
+					title + "}",
+				confe);
 		}
 		catch (SystemException se) {
 			throw se;
@@ -587,7 +590,8 @@ public class CMISRepository extends BaseCmisRepository {
 		catch (CmisObjectNotFoundException confe) {
 			throw new NoSuchFolderException(
 				"No CMIS folder with {parentFolderId=" + parentFolderId +
-					", title=" + title + "}", confe);
+					", title=" + title + "}",
+				confe);
 		}
 		catch (SystemException se) {
 			throw se;
@@ -835,8 +839,9 @@ public class CMISRepository extends BaseCmisRepository {
 			processException(e);
 
 			throw new RepositoryException(
-				"Unable to initialize CMIS session for repository " +
-					getRepositoryId(), e);
+				"Unable to initialize CMIS session for repository with " +
+					"{repositoryId=" + getRepositoryId() + "}",
+				e);
 		}
 	}
 
@@ -929,6 +934,7 @@ public class CMISRepository extends BaseCmisRepository {
 				new ObjectIdImpl(newFolderObjectId));
 
 			String versionSeriesId = toFileEntryId(fileEntryId);
+
 			String newObjectId = document.getVersionSeriesId();
 
 			if (!versionSeriesId.equals(newObjectId)) {
@@ -977,7 +983,8 @@ public class CMISRepository extends BaseCmisRepository {
 
 			if (parentCmisFolder == null) {
 				throw new RepositoryException(
-					"Cannot move CMIS root folder " + folderId);
+					"Unable to move CMIS root folder with {folderId=" +
+						folderId + "}");
 			}
 
 			String objectId = toFolderId(session, folderId);
@@ -1685,9 +1692,9 @@ public class CMISRepository extends BaseCmisRepository {
 	protected Document getCmisDocument(Session session, long fileEntryId)
 		throws PortalException, SystemException {
 
-		String versionSeriesId = toFileEntryId(fileEntryId);
-
 		try {
+			String versionSeriesId = toFileEntryId(fileEntryId);
+
 			Document document = (Document)session.getObject(versionSeriesId);
 
 			return document;
@@ -1736,7 +1743,8 @@ public class CMISRepository extends BaseCmisRepository {
 		catch (CmisObjectNotFoundException confe) {
 			throw new NoSuchFileVersionException(
 				"No CMIS file version with {fileVersionId=" + fileVersionId +
-				"}", confe);
+					"}",
+				confe);
 		}
 	}
 
@@ -1754,7 +1762,6 @@ public class CMISRepository extends BaseCmisRepository {
 			throw new NoSuchFolderException(
 				"No CMIS folder with {folderId=" + folderId + "}", confe);
 		}
-
 	}
 
 	protected List<Folder> getFolders(long folderId) throws SystemException {
@@ -1952,7 +1959,8 @@ public class CMISRepository extends BaseCmisRepository {
 		}
 		else if (!dlFolder.isMountPoint()) {
 			throw new RepositoryException(
-				"CMIS repository should not be used for folder ID " + folderId);
+				"CMIS repository should not be used with {folderId=" +
+					folderId + "}");
 		}
 
 		RepositoryInfo repositoryInfo = session.getRepositoryInfo();
