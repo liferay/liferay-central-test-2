@@ -123,8 +123,9 @@ public class EditArticleAction extends PortletAction {
 					throw new PortalException(uploadException.getCause());
 				}
 			}
-			else if (cmd.equals(Constants.ADD) || cmd.equals(Constants.TRANSLATE) ||
-				cmd.equals(Constants.UPDATE)) {
+			else if (cmd.equals(Constants.ADD) ||
+					 cmd.equals(Constants.TRANSLATE) ||
+					 cmd.equals(Constants.UPDATE)) {
 
 				Object[] returnValue = updateArticle(actionRequest);
 
