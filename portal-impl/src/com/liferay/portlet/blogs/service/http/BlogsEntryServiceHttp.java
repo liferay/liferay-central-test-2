@@ -286,14 +286,15 @@ public class BlogsEntryServiceHttp {
 	}
 
 	public static java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> getGroupEntries(
-		HttpPrincipal httpPrincipal, long groupId, int status, int max)
+		HttpPrincipal httpPrincipal, long groupId, java.util.Date displayDate,
+		int status, int max)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(BlogsEntryServiceUtil.class.getName(),
 					"getGroupEntries", _getGroupEntriesParameterTypes6);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					status, max);
+					displayDate, status, max);
 
 			Object returnObj = null;
 
@@ -318,15 +319,14 @@ public class BlogsEntryServiceHttp {
 	}
 
 	public static java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> getGroupEntries(
-		HttpPrincipal httpPrincipal, long groupId, int status,
-		java.util.Date displayDate, int max)
+		HttpPrincipal httpPrincipal, long groupId, int status, int max)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(BlogsEntryServiceUtil.class.getName(),
 					"getGroupEntries", _getGroupEntriesParameterTypes7);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					status, displayDate, max);
+					status, max);
 
 			Object returnObj = null;
 
@@ -415,10 +415,10 @@ public class BlogsEntryServiceHttp {
 	}
 
 	public static java.lang.String getGroupEntriesRSS(
-		HttpPrincipal httpPrincipal, long groupId, int status,
-		java.util.Date displayDate, int max, java.lang.String type,
-		double version, java.lang.String displayStyle,
-		java.lang.String feedURL, java.lang.String entryURL,
+		HttpPrincipal httpPrincipal, long groupId, java.util.Date displayDate,
+		int status, int max, java.lang.String type, double version,
+		java.lang.String displayStyle, java.lang.String feedURL,
+		java.lang.String entryURL,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -427,7 +427,7 @@ public class BlogsEntryServiceHttp {
 					"getGroupEntriesRSS", _getGroupEntriesRSSParameterTypes10);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					status, displayDate, max, type, version, displayStyle,
+					displayDate, status, max, type, version, displayStyle,
 					feedURL, entryURL, themeDisplay);
 
 			Object returnObj = null;
@@ -712,10 +712,10 @@ public class BlogsEntryServiceHttp {
 			long.class, java.lang.String.class
 		};
 	private static final Class<?>[] _getGroupEntriesParameterTypes6 = new Class[] {
-			long.class, int.class, int.class
+			long.class, java.util.Date.class, int.class, int.class
 		};
 	private static final Class<?>[] _getGroupEntriesParameterTypes7 = new Class[] {
-			long.class, int.class, java.util.Date.class, int.class
+			long.class, int.class, int.class
 		};
 	private static final Class<?>[] _getGroupEntriesParameterTypes8 = new Class[] {
 			long.class, int.class, int.class, int.class
@@ -724,7 +724,7 @@ public class BlogsEntryServiceHttp {
 			long.class, int.class
 		};
 	private static final Class<?>[] _getGroupEntriesRSSParameterTypes10 = new Class[] {
-			long.class, int.class, java.util.Date.class, int.class,
+			long.class, java.util.Date.class, int.class, int.class,
 			java.lang.String.class, double.class, java.lang.String.class,
 			java.lang.String.class, java.lang.String.class,
 			com.liferay.portal.theme.ThemeDisplay.class

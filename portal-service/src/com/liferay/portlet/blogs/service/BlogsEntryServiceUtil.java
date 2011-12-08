@@ -96,15 +96,15 @@ public class BlogsEntryServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> getGroupEntries(
-		long groupId, int status, int max)
+		long groupId, java.util.Date displayDate, int status, int max)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getGroupEntries(groupId, status, max);
+		return getService().getGroupEntries(groupId, displayDate, status, max);
 	}
 
 	public static java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> getGroupEntries(
-		long groupId, int status, java.util.Date displayDate, int max)
+		long groupId, int status, int max)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getGroupEntries(groupId, status, displayDate, max);
+		return getService().getGroupEntries(groupId, status, max);
 	}
 
 	public static java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> getGroupEntries(
@@ -118,15 +118,15 @@ public class BlogsEntryServiceUtil {
 		return getService().getGroupEntriesCount(groupId, status);
 	}
 
-	public static java.lang.String getGroupEntriesRSS(long groupId, int status,
-		java.util.Date displayDate, int max, java.lang.String type,
+	public static java.lang.String getGroupEntriesRSS(long groupId,
+		java.util.Date displayDate, int status, int max, java.lang.String type,
 		double version, java.lang.String displayStyle,
 		java.lang.String feedURL, java.lang.String entryURL,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .getGroupEntriesRSS(groupId, status, displayDate, max, type,
+				   .getGroupEntriesRSS(groupId, displayDate, status, max, type,
 			version, displayStyle, feedURL, entryURL, themeDisplay);
 	}
 
