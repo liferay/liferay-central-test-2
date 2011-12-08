@@ -72,8 +72,8 @@ public class ServiceContext implements Cloneable, Serializable {
 		serviceContext.setAddGroupPermissions(getAddGroupPermissions());
 		serviceContext.setAddGuestPermissions(getAddGuestPermissions());
 		serviceContext.setAssetCategoryIds(getAssetCategoryIds());
-		serviceContext.setAssetLinkEntryIds(getAssetLinkEntryIds());
 		serviceContext.setAssetEntryVisible(isAssetEntryVisible());
+		serviceContext.setAssetLinkEntryIds(getAssetLinkEntryIds());
 		serviceContext.setAssetTagNames(getAssetTagNames());
 		serviceContext.setAttributes(getAttributes());
 		serviceContext.setCommand(getCommand());
@@ -569,14 +569,6 @@ public class ServiceContext implements Cloneable, Serializable {
 		return _workflowAction;
 	}
 
-	/**
-	 * Returns <code>true</code> if a service using this service context
-	 * should create an asset entry that is visible in the asset publisher.
-	 *
-	 * @return <code>true</code> if a service using this service context
-	 * 		   should create an asset entry that is visible in the asset
-	 * 		   publisher.  <code>false</code> otherwise
-	 */
 	public boolean isAssetEntryVisible() {
 		return _assetEntryVisible;
 	}
@@ -697,16 +689,6 @@ public class ServiceContext implements Cloneable, Serializable {
 		_assetCategoryIds = assetCategoryIds;
 	}
 
-	/**
-	 *
-	 * Sets whether or not the asset entry created when this service
-	 * context is passed as a parameter to a service should be visible in the
-	 * asset publisher.
-	 *
-	 * @param assetEntryVisible indicates whether or not the asset entry
-	 * 		  created when this service context is passed as a parameter
-	 * 		  to a service should be visible in the asset publisher
-	 */
 	public void setAssetEntryVisible(boolean assetEntryVisible) {
 		_assetEntryVisible = assetEntryVisible;
 	}
