@@ -341,10 +341,6 @@ public class JavadocFormatter {
 
 		String name = javaParameter.getName();
 
-		Type type = javaParameter.getType();
-
-		String typeValue = type.getValue();
-
 		String value = null;
 
 		for (DocletTag paramDocletTag : paramDocletTags) {
@@ -363,7 +359,7 @@ public class JavadocFormatter {
 		Element paramElement = methodElement.addElement("param");
 
 		DocUtil.add(paramElement, "name", name);
-		DocUtil.add(paramElement, "type", typeValue);
+		DocUtil.add(paramElement, "type", _getTypeValue(javaParameter));
 
 		if (value != null) {
 			value = value.substring(name.length());
@@ -829,10 +825,7 @@ public class JavadocFormatter {
 		for (JavaParameter javaParameter : javaParameters) {
 			sb.append(javaParameter.getName());
 			sb.append("|");
-
-			Type type = javaParameter.getType();
-
-			sb.append(type.getValue());
+			sb.append(_getTypeValue(javaParameter));
 			sb.append(",");
 		}
 
@@ -849,6 +842,18 @@ public class JavadocFormatter {
 		}
 
 		return indent;
+	}
+
+	private String _getTypeValue(JavaParameter javaParameter) {
+		Type type = javaParameter.getType();
+
+		String typeValue = type.getValue();
+
+		if (type.isArray()) {
+			typeValue += "[]";
+		}
+
+		return typeValue;
 	}
 
 	private boolean _hasAnnotation(
