@@ -15146,7 +15146,7 @@ This method handles the creation of the layout including its resources, metadata
 		<author><![CDATA[Jorge Ferrer]]></author>
 		<author><![CDATA[Julio Camarero]]></author>
 		<author><![CDATA[Hugo Huijser]]></author>
-		<author><![CDATA[Juan FernÃ¡ndez]]></author>
+		<author><![CDATA[Juan Fernández]]></author>
 		<method>
 			<name>addGroupOrganizations</name>
 			<comment><![CDATA[Adds the organizations to the group.]]></comment>
@@ -15231,7 +15231,7 @@ This method handles the creation and bookkeeping of the organization including i
 			<param>
 				<name>serviceContext</name>
 				<type>com.liferay.portal.service.ServiceContext</type>
-				<comment><![CDATA[the organization's service context (optionally <code>null</code>). Can specify the organization's asset category IDs, asset tag names, and expando bridge attributes.]]></comment>
+				<comment><![CDATA[the organization's service context (optionally <code>null</code>). Can set asset category IDs, asset tag names, and expando bridge attributes for the organization.]]></comment>
 			</param>
 			<return><![CDATA[the organization]]></return>
 			<throws>
@@ -15337,7 +15337,7 @@ This method handles the creation and bookkeeping of the organization including i
 			<throws>
 				<name>PortalException</name>
 				<type>com.liferay.portal.kernel.exception.PortalException</type>
-				<comment><![CDATA[if the organization had a workflow in approved status or if the organization was a parent organization.]]></comment>
+				<comment><![CDATA[if the organization had a workflow in approved status or if the organization was a parent organization]]></comment>
 			</throws>
 			<throws>
 				<name>SystemException</name>
@@ -15753,7 +15753,7 @@ its child organizations.
 			<param>
 				<name>includeSpecifiedOrganization</name>
 				<type>boolean</type>
-				<comment><![CDATA[if <code>true</code> the organization specified by <code>organizationId</code> is considered in the determination.]]></comment>
+				<comment><![CDATA[if <code>true</code> the organization specified by <code>organizationId</code> is considered in the determination]]></comment>
 			</param>
 			<return><![CDATA[<code>true</code> if the user has access to the organization; <code>false</code> otherwise]]></return>
 			<throws>
@@ -15783,7 +15783,7 @@ Only call this method if the tree has become stale through operations other than
 			<throws>
 				<name>PortalException</name>
 				<type>com.liferay.portal.kernel.exception.PortalException</type>
-				<comment><![CDATA[]]></comment>
+				<comment><![CDATA[if an organization with the primary key could not be found]]></comment>
 			</throws>
 			<throws>
 				<name>SystemException</name>
@@ -15794,31 +15794,36 @@ Only call this method if the tree has become stale through operations other than
 		</method>
 		<method>
 			<name>search</name>
-			<comment><![CDATA[]]></comment>
+			<comment><![CDATA[Returns a range of all the organizations of the company.
+
+<p>
+Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+</p>]]></comment>
 			<param>
 				<name>companyId</name>
 				<type>long</type>
-				<comment><![CDATA[]]></comment>
+				<comment><![CDATA[the primary key of the company]]></comment>
 			</param>
 			<param>
 				<name>params</name>
 				<type>java.util.LinkedHashMap</type>
-				<comment><![CDATA[]]></comment>
+				<comment><![CDATA[the finder parameters (optionally <code>null</code>). For more information see {@link com.liferay.portlet.enterpriseadmin.util.OrganizationIndexer}]]></comment>
 			</param>
 			<param>
 				<name>start</name>
 				<type>int</type>
-				<comment><![CDATA[]]></comment>
+				<comment><![CDATA[the lower bound of the range of organizations to return]]></comment>
 			</param>
 			<param>
 				<name>end</name>
 				<type>int</type>
-				<comment><![CDATA[]]></comment>
+				<comment><![CDATA[the upper bound of the range of organizations to return (not inclusive)]]></comment>
 			</param>
+			<return><![CDATA[the range of all the organizations of the company]]></return>
 			<throws>
 				<name>SystemException</name>
 				<type>com.liferay.portal.kernel.exception.SystemException</type>
-				<comment><![CDATA[]]></comment>
+				<comment><![CDATA[if a system exception occurred]]></comment>
 			</throws>
 		</method>
 		<method>
@@ -16221,7 +16226,7 @@ Useful when paginating results. Returns a maximum of <code>end - start</code> in
 			<param>
 				<name>andSearch</name>
 				<type>boolean</type>
-				<comment><![CDATA[whether every field must match its keywords or just one field.]]></comment>
+				<comment><![CDATA[whether every field must match its keywords or just one field]]></comment>
 			</param>
 			<param>
 				<name>start</name>
@@ -16520,7 +16525,7 @@ Useful when paginating results. Returns a maximum of <code>end - start</code> in
 			<param>
 				<name>serviceContext</name>
 				<type>com.liferay.portal.service.ServiceContext</type>
-				<comment><![CDATA[the organization's service context (optionally <code>null</code>). Can specify the organization's replacement asset category IDs, replacement asset tag names, and new expando bridge attributes.]]></comment>
+				<comment><![CDATA[the organization's service context (optionally <code>null</code>). Can set asset category IDs and asset tag names for the organization, and merge expando bridge attributes for the organization.]]></comment>
 			</param>
 			<return><![CDATA[the organization]]></return>
 			<throws>
@@ -16844,7 +16849,7 @@ This method handles the creation and bookkeeping of the organization including i
 			<param>
 				<name>serviceContext</name>
 				<type>com.liferay.portal.service.ServiceContext</type>
-				<comment><![CDATA[the organization's service context (optionally <code>null</code>). Can specify the organization's asset category IDs, asset tag names, and expando bridge attributes.]]></comment>
+				<comment><![CDATA[the organization's service context (optionally <code>null</code>). Can set asset category IDs, asset tag names, and expando bridge attributes for the organization.]]></comment>
 			</param>
 			<return><![CDATA[the organization]]></return>
 			<throws>
@@ -16913,7 +16918,7 @@ This method handles the creation and bookkeeping of the organization including i
 			<param>
 				<name>serviceContext</name>
 				<type>com.liferay.portal.service.ServiceContext</type>
-				<comment><![CDATA[the organization's service context (optionally <code>null</code>). Can specify the organization's asset category IDs, asset tag names, and expando bridge attributes.]]></comment>
+				<comment><![CDATA[the organization's service context (optionally <code>null</code>). Can set asset category IDs, asset tag names, and expando bridge attributes for the organization.]]></comment>
 			</param>
 			<return><![CDATA[the organization]]></return>
 			<throws>
@@ -17213,7 +17218,7 @@ Useful when paginating results. Returns a maximum of <code>end - start</code> in
 			<throws>
 				<name>PortalException</name>
 				<type>com.liferay.portal.kernel.exception.PortalException</type>
-				<comment><![CDATA[if a password policy or organization with the primary key could not be found, or if the user did not have permission to update the password policy.]]></comment>
+				<comment><![CDATA[if a password policy or organization with the primary key could not be found, or if the user did not have permission to update the password policy]]></comment>
 			</throws>
 			<throws>
 				<name>SystemException</name>
@@ -17302,7 +17307,7 @@ Useful when paginating results. Returns a maximum of <code>end - start</code> in
 			<param>
 				<name>serviceContext</name>
 				<type>com.liferay.portal.service.ServiceContext</type>
-				<comment><![CDATA[the organization's service context (optionally <code>null</code>). Can specify the organization's replacement asset category IDs, replacement asset tag names, and new expando bridge attributes.]]></comment>
+				<comment><![CDATA[the organization's service context (optionally <code>null</code>). Can set asset category IDs and asset tag names for the organization, and merge expando bridge attributes for the organization.]]></comment>
 			</param>
 			<return><![CDATA[the organization]]></return>
 			<throws>
@@ -17372,7 +17377,7 @@ Useful when paginating results. Returns a maximum of <code>end - start</code> in
 			<param>
 				<name>serviceContext</name>
 				<type>com.liferay.portal.service.ServiceContext</type>
-				<comment><![CDATA[the organization's service context (optionally <code>null</code>). Can specify the organization's replacement asset category IDs, replacement asset tag names, and new expando bridge attributes.]]></comment>
+				<comment><![CDATA[the organization's service context (optionally <code>null</code>). Can set asset category IDs and asset tag names for the organization, and merge expando bridge attributes for the organization.]]></comment>
 			</param>
 			<return><![CDATA[the organization]]></return>
 			<throws>
