@@ -15,12 +15,12 @@
 --%>
 
 <%
+boolean hiddenEntry = false;
 boolean readEntry = false;
-boolean hideEntry = false;
 
 if (flagValue == AnnouncementsFlagConstants.HIDDEN) {
+	hiddenEntry = true;
 	readEntry = true;
-	hideEntry = true;
 }
 else {
 	try {
@@ -62,7 +62,7 @@ if (entry.getPriority() > 0) {
 	boolean showScopeName = false;
 	%>
 
-	<div class="<%= hideEntry ? "aui-helper-hidden" : "" %> entry-content entry-type-<%= entry.getType() %>">
+	<div class="<%= hiddenEntry ? "aui-helper-hidden" : "" %> entry-content entry-type-<%= entry.getType() %>">
 		<%@ include file="/html/portlet/announcements/entry_scope.jspf" %>
 
 		<%= entry.getContent() %>
