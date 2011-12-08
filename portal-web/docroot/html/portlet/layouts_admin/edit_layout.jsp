@@ -77,8 +77,6 @@ if (layoutRevision != null) {
 	}
 }
 
-String layoutTemplateId = ParamUtil.getString(request, "layoutTemplateId", PropsValues.DEFAULT_LAYOUT_TEMPLATE_ID);
-
 String[] mainSections = PropsValues.LAYOUT_FORM_UPDATE;
 
 if (!group.isUser() && selLayout.isTypePortlet()) {
