@@ -17,10 +17,8 @@ package com.liferay.portlet.polls.service.impl;
 import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
-import com.liferay.portal.service.ServiceContextUtil;
 import com.liferay.portlet.polls.DuplicateVoteException;
 import com.liferay.portlet.polls.NoSuchQuestionException;
 import com.liferay.portlet.polls.QuestionExpiredException;
@@ -78,11 +76,11 @@ public class PollsVoteLocalServiceImpl extends PollsVoteLocalServiceBaseImpl {
 
 			try {
 				User user = userPersistence.findByPrimaryKey(userId);
+
 				userName = user.getFullName();
 			}
 			catch (NoSuchUserException nsue) {
-				userName = LanguageUtil.get(
-					ServiceContextUtil.getLocale(serviceContext), "anonymous");
+				userName = serviceContext.translate("anonymous");
 			}
 
 			long voteId = counterLocalService.increment();

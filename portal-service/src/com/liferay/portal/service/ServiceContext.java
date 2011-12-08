@@ -16,8 +16,10 @@ package com.liferay.portal.service;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.util.Constants;
+import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.PortletPreferencesIds;
@@ -26,6 +28,7 @@ import java.io.Serializable;
 
 import java.util.Date;
 import java.util.LinkedHashMap;
+import java.util.Locale;
 import java.util.Map;
 
 /**
@@ -370,6 +373,10 @@ public class ServiceContext implements Cloneable, Serializable {
 	 */
 	public String getLayoutURL() {
 		return _layoutURL;
+	}
+
+	public Locale getLocale() {
+		return LocaleUtil.fromLanguageId(_languageId);
 	}
 
 	/**
@@ -1017,6 +1024,12 @@ public class ServiceContext implements Cloneable, Serializable {
 	 */
 	public void setWorkflowAction(int workflowAction) {
 		_workflowAction = workflowAction;
+	}
+
+	public String translate(String pattern, Object... arguments) {
+		Locale locale = getLocale();
+
+		return LanguageUtil.format(locale, pattern, arguments);
 	}
 
 	private boolean _addGroupPermissions;

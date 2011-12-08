@@ -19,7 +19,6 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
-import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.sanitizer.SanitizerUtil;
@@ -1883,8 +1882,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		if (message.isAnonymous()) {
 			emailAddress = StringPool.BLANK;
-			fullName = LanguageUtil.get(
-				ServiceContextUtil.getLocale(serviceContext), "anonymous");
+			fullName = serviceContext.translate("anonymous");
 		}
 
 		MBCategory category = message.getCategory();
@@ -1894,9 +1892,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		if (category.getCategoryId() ==
 				MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) {
 
-			categoryName = LanguageUtil.get(
-				ServiceContextUtil.getLocale(serviceContext),
-					"message-boards-home");
+			categoryName = serviceContext.translate("message-boards-home");
 
 			categoryName += " - " + group.getDescriptiveName();
 		}
