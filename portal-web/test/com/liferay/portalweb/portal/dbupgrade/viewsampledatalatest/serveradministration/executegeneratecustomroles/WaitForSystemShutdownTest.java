@@ -31,6 +31,7 @@ public class WaitForSystemShutdownTest extends BaseTestCase {
 			try {
 				if (selenium.isTextPresent(
 						"The system is shutdown. Please try again later.")) {
+
 					break;
 				}
 			}
