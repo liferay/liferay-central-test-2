@@ -39,10 +39,10 @@ for (int displayActivityCounterNameIndex : displayActivityCounterNameIndexes) {
 
 	if (chartType.equals("tag-cloud")) {
 		if (dataRange.equals("year")) {
-			assetTags = AssetTagLocalServiceUtil.getTags(scopeGroupId, displayActivityCounterName, SocialCounterPeriodUtil.getFirstActivityDayOfYear(), SocialCounterPeriodUtil.getEndPeriod());
+			assetTags = AssetTagLocalServiceUtil.getSocialActivityCounterPeriodTags(scopeGroupId, displayActivityCounterName, SocialCounterPeriodUtil.getFirstActivityDayOfYear(), SocialCounterPeriodUtil.getEndPeriod());
 		}
 		else {
-			assetTags = AssetTagLocalServiceUtil.getTagsByOffset(scopeGroupId, displayActivityCounterName, -12, 0);
+			assetTags = AssetTagLocalServiceUtil.getSocialActivityCounterOffsetTags(scopeGroupId, displayActivityCounterName, -12, 0);
 		}
 
 		title = LanguageUtil.format(pageContext, "tag-cloud-based-on-x", new Object[] {title});
@@ -52,20 +52,20 @@ for (int displayActivityCounterNameIndex : displayActivityCounterNameIndexes) {
 	else {
 		if (chartType.equals("pie")) {
 			if (dataRange.equals("year")) {
-				activityCounters = SocialActivityCounterLocalServiceUtil.getActivityCounterDistributionByPeriod(scopeGroupId, displayActivityCounterName, SocialCounterPeriodUtil.getFirstActivityDayOfYear(), SocialCounterPeriodUtil.getEndPeriod());
+				activityCounters = SocialActivityCounterLocalServiceUtil.getPeriodActivityCounterDistribution(scopeGroupId, displayActivityCounterName, SocialCounterPeriodUtil.getFirstActivityDayOfYear(), SocialCounterPeriodUtil.getEndPeriod());
 			}
 			else {
-				activityCounters = SocialActivityCounterLocalServiceUtil.getActivityCounterDistributionByOffset(scopeGroupId, displayActivityCounterName, -12, 0);
+				activityCounters = SocialActivityCounterLocalServiceUtil.getOffsetActivityCounterDistribution(scopeGroupId, displayActivityCounterName, -12, 0);
 			}
 
 			displayHeight = Math.max((activityCounters.size() + 1) * 18, displayHeight);
 		}
 		else {
 			if (dataRange.equals("year")) {
-				activityCounters = SocialActivityCounterLocalServiceUtil.getActivityCountersByPeriod(scopeGroupId, displayActivityCounterName, SocialCounterPeriodUtil.getFirstActivityDayOfYear(), SocialCounterPeriodUtil.getEndPeriod());
+				activityCounters = SocialActivityCounterLocalServiceUtil.getPeriodActivityCounters(scopeGroupId, displayActivityCounterName, SocialCounterPeriodUtil.getFirstActivityDayOfYear(), SocialCounterPeriodUtil.getEndPeriod());
 			}
 			else {
-				activityCounters = SocialActivityCounterLocalServiceUtil.getActivityCountersByOffset(scopeGroupId, displayActivityCounterName, -12, 0);
+				activityCounters = SocialActivityCounterLocalServiceUtil.getOffsetActivityCounters(scopeGroupId, displayActivityCounterName, -12, 0);
 			}
 		}
 

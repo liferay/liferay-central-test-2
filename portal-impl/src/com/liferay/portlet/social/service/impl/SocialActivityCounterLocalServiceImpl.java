@@ -236,18 +236,38 @@ public class SocialActivityCounterLocalServiceImpl
 			retrieveFromCache);
 	}
 
-	public List<SocialActivityCounter> getActivityCounterDistributionByOffset(
+	public SocialActivityCounter getLatestActivityCounter(
+			long groupId, long classNameId, long classPK, String name,
+			int ownerType)
+		throws NoSuchActivityCounterException, SystemException {
+
+		return socialActivityCounterPersistence.findByG_C_C_N_O_E(
+			groupId, classNameId, classPK, name, ownerType,
+			SocialActivityCounterConstants.END_PERIOD_UNDEFINED);
+	}
+
+	public List<SocialActivityCounter> getOffsetActivityCounterDistribution(
 			long groupId, String name, int startOffset, int endOffset)
 		throws SystemException {
 
 		int startPeriod = SocialCounterPeriodUtil.getStartPeriod(startOffset);
 		int endPeriod = SocialCounterPeriodUtil.getEndPeriod(endOffset);
 
-		return getActivityCounterDistributionByPeriod(
+		return getPeriodActivityCounterDistribution(
 			groupId, name, startPeriod, endPeriod);
 	}
 
-	public List<SocialActivityCounter> getActivityCounterDistributionByPeriod(
+	public List<SocialActivityCounter> getOffsetActivityCounters(
+			long groupId, String name, int startOffset, int endOffset)
+		throws SystemException {
+
+		int startPeriod = SocialCounterPeriodUtil.getStartPeriod(startOffset);
+		int endPeriod = SocialCounterPeriodUtil.getEndPeriod(endOffset);
+
+		return getPeriodActivityCounters(groupId, name, startPeriod, endPeriod);
+	}
+
+	public List<SocialActivityCounter> getPeriodActivityCounterDistribution(
 			long groupId, String name, int startPeriod, int endPeriod)
 		throws SystemException {
 
@@ -259,18 +279,7 @@ public class SocialActivityCounterLocalServiceImpl
 			groupId, name, startPeriod, endPeriod, periodLength);
 	}
 
-	public List<SocialActivityCounter> getActivityCountersByOffset(
-			long groupId, String name, int startOffset, int endOffset)
-		throws SystemException {
-
-		int startPeriod = SocialCounterPeriodUtil.getStartPeriod(startOffset);
-		int endPeriod = SocialCounterPeriodUtil.getEndPeriod(endOffset);
-
-		return getActivityCountersByPeriod(
-			groupId, name, startPeriod, endPeriod);
-	}
-
-	public List<SocialActivityCounter> getActivityCountersByPeriod(
+	public List<SocialActivityCounter> getPeriodActivityCounters(
 			long groupId, String name, int startPeriod, int endPeriod)
 		throws SystemException {
 
@@ -280,16 +289,6 @@ public class SocialActivityCounterLocalServiceImpl
 
 		return socialActivityCounterFinder.findAC_ByG_N_S_E_1(
 			groupId, name, startPeriod, endPeriod, periodLength);
-	}
-
-	public SocialActivityCounter getLatestActivityCounter(
-			long groupId, long classNameId, long classPK, String name,
-			int ownerType)
-		throws NoSuchActivityCounterException, SystemException {
-
-		return socialActivityCounterPersistence.findByG_C_C_N_O_E(
-			groupId, classNameId, classPK, name, ownerType,
-			SocialActivityCounterConstants.END_PERIOD_UNDEFINED);
 	}
 
 	public int getUserActivityCounters(long groupId, String[] rankingNames)
