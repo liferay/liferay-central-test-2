@@ -17,13 +17,11 @@ package com.liferay.portal.service.permission;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.Group;
-import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.GroupLocalServiceUtil;
-import com.liferay.portal.service.LayoutSetLocalServiceUtil;
 import com.liferay.portal.service.OrganizationLocalServiceUtil;
 
 import java.util.List;
@@ -77,9 +75,6 @@ public class GroupPermissionImpl implements GroupPermission {
 		}
 
 		if (actionId.equals(ActionKeys.ADD_LAYOUT)) {
-			LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
-				groupId, false);
-
 			if (permissionChecker.hasPermission(
 					groupId, Group.class.getName(), groupId,
 					ActionKeys.MANAGE_LAYOUTS)) {
