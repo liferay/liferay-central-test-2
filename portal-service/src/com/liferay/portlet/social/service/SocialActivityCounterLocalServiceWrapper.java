@@ -343,15 +343,6 @@ public class SocialActivityCounterLocalServiceWrapper
 			classNameId, classPK, name, ownerType);
 	}
 
-	public com.liferay.portlet.social.model.SocialActivityCounter getLatestActivityCounter(
-		long groupId, long classNameId, long classPK, java.lang.String name,
-		int ownerType, boolean retrieveFromCache)
-		throws com.liferay.portal.kernel.exception.SystemException,
-			com.liferay.portlet.social.NoSuchActivityCounterException {
-		return _socialActivityCounterLocalService.getLatestActivityCounter(groupId,
-			classNameId, classPK, name, ownerType, retrieveFromCache);
-	}
-
 	public int getUserActivityCounters(long groupId,
 		java.lang.String[] rankingNames)
 		throws com.liferay.portal.kernel.exception.SystemException {

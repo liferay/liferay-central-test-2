@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Tuple;
 import com.liferay.portal.model.Group;
@@ -46,8 +47,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import jodd.util.StringPool;
 
 /**
  * @author Zsolt Berentey
@@ -299,15 +298,6 @@ public class SocialActivityCounterLocalServiceImpl
 			int ownerType)
 		throws NoSuchActivityCounterException, SystemException {
 
-		return getLatestActivityCounter(
-			groupId, classNameId, classPK, name, ownerType, true);
-	}
-
-	public SocialActivityCounter getLatestActivityCounter(
-			long groupId, long classNameId, long classPK, String name,
-			int ownerType, boolean retrieveFromCache)
-		throws NoSuchActivityCounterException, SystemException {
-
 		return socialActivityCounterPersistence.findByG_C_C_N_O_E(
 			groupId, classNameId, classPK, name, ownerType,
 			SocialActivityCounterConstants.END_PERIOD_UNDEFINED);
@@ -377,33 +367,6 @@ public class SocialActivityCounterLocalServiceImpl
 			SocialActivityCounterConstants.TYPE_ACTOR, 1);
 	}
 
-	protected boolean addActivityCounter(
-		User user, User assetEntryUser,
-		SocialActivityCounterDefinition activityCounterDefinition) {
-
-		if ((user.isDefaultUser() || !user.isActive()) &&
-			(activityCounterDefinition.getOwnerType() !=
-				SocialActivityCounterConstants.TYPE_ASSET)) {
-
-			return false;
-		}
-
-		if ((assetEntryUser.isDefaultUser() || !assetEntryUser.isActive()) &&
-			(activityCounterDefinition.getOwnerType() !=
-				SocialActivityCounterConstants.TYPE_ACTOR)) {
-
-			return false;
-		}
-
-		if (!activityCounterDefinition.isEnabled() ||
-			(activityCounterDefinition.getIncrement() == 0)) {
-
-			return false;
-		}
-
-		return true;
-	}
-
 	protected SocialActivityCounter addActivityCounter(
 			long groupId, long classNameId, long classPK, String name,
 			int ownerType, int overallValue)
@@ -411,7 +374,7 @@ public class SocialActivityCounterLocalServiceImpl
 
 		SocialActivityCounter activityCounter = null;
 
-		String lockKey = createLockKey(
+		String lockKey = getLockKey(
 			groupId, classNameId, classPK, name, ownerType);
 
 		Lock lock = null;
@@ -421,10 +384,11 @@ public class SocialActivityCounterLocalServiceImpl
 				lock = lockLocalService.lock(
 					SocialActivityCounter.class.getName(), lockKey,
 					lockKey, false);
-			} catch (Exception ex) {
+			}
+			catch (Exception e) {
 				if (_log.isWarnEnabled()) {
-					_log.warn("Could not acquire activity counter lock" +
-						", retrying...");
+					_log.warn(
+						"Unable to acquire activity counter lock. Retrying.");
 				}
 
 				continue;
@@ -451,6 +415,33 @@ public class SocialActivityCounterLocalServiceImpl
 		}
 
 		return activityCounter;
+	}
+
+	protected boolean addActivityCounter(
+		User user, User assetEntryUser,
+		SocialActivityCounterDefinition activityCounterDefinition) {
+
+		if ((user.isDefaultUser() || !user.isActive()) &&
+			(activityCounterDefinition.getOwnerType() !=
+				SocialActivityCounterConstants.TYPE_ASSET)) {
+
+			return false;
+		}
+
+		if ((assetEntryUser.isDefaultUser() || !assetEntryUser.isActive()) &&
+			(activityCounterDefinition.getOwnerType() !=
+				SocialActivityCounterConstants.TYPE_ACTOR)) {
+
+			return false;
+		}
+
+		if (!activityCounterDefinition.isEnabled() ||
+			(activityCounterDefinition.getIncrement() == 0)) {
+
+			return false;
+		}
+
+		return true;
 	}
 
 	protected SocialActivityCounter addNewPeriod(
@@ -540,6 +531,23 @@ public class SocialActivityCounterLocalServiceImpl
 		return false;
 	}
 
+	protected String getLockKey(
+		long groupId, long classNameId, long classPK, String name,
+		int ownerType) {
+
+		StringBundler sb = new StringBundler(7);
+
+		sb.append(StringUtil.toHexString(groupId));
+		sb.append(StringPool.POUND);
+		sb.append(StringUtil.toHexString(classNameId));
+		sb.append(StringPool.POUND);
+		sb.append(StringUtil.toHexString(classPK));
+		sb.append(StringPool.POUND);
+		sb.append(name);
+
+		return sb.toString();
+	}
+
 	protected void incrementActivityCounter(
 			long groupId, long classNameId, long classPK, String name,
 			int ownerType, int increment)
@@ -591,23 +599,6 @@ public class SocialActivityCounterLocalServiceImpl
 				activityCounterDefinition.getName(), ownerType,
 				activityCounterDefinition.getIncrement());
 		}
-	}
-
-	private String createLockKey(
-		long groupId, long classNameId, long classPK, String name,
-		int ownerType) {
-
-		StringBundler sb = new StringBundler(7);
-
-		sb.append(StringUtil.toHexString(groupId));
-		sb.append(StringPool.UNDERSCORE);
-		sb.append(StringUtil.toHexString(classNameId));
-		sb.append(StringPool.UNDERSCORE);
-		sb.append(StringUtil.toHexString(classPK));
-		sb.append(StringPool.UNDERSCORE);
-		sb.append(name);
-
-		return sb.toString();
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(
