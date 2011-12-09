@@ -113,13 +113,6 @@ public interface PortletDataHandler {
 	 */
 	public boolean isAlwaysExportable();
 
-	/**
-	 * Returns <code>true</code> to allow the user to select if the data for
-	 * this portlet is exported.
-	 *
-	 * @return <code>true</code> to allow the user to select if the data for
-	 *         this portlet is exported
-	 */
 	public boolean isAlwaysStaged();
 
 	/**
