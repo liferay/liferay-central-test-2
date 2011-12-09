@@ -2257,7 +2257,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 				LayoutTypeException.FIRST_LAYOUT);
 
 			lte.setLayoutType(type);
-			
+
 			throw lte;
 		}
 	}
