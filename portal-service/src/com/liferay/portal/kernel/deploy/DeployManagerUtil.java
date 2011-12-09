@@ -43,16 +43,16 @@ public class DeployManagerUtil {
 		return _deployManager;
 	}
 
+	public static String getInstalledDir() throws Exception {
+		return getDeployManager().getInstalledDir();
+	}
+
 	public static PluginPackage getInstalledPluginPackage(String context) {
 		return getDeployManager().getInstalledPluginPackage(context);
 	}
 
 	public static List<PluginPackage> getInstalledPluginPackages() {
 		return getDeployManager().getInstalledPluginPackages();
-	}
-
-	public static File getUpdateDir() throws Exception {
-		return getDeployManager().getUpdateDir();
 	}
 
 	public static boolean isDeployed(String context) {
