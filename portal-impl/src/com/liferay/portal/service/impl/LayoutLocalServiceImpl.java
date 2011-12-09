@@ -2253,8 +2253,12 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		throws PortalException {
 
 		if (Validator.isNull(type) || !PortalUtil.isLayoutFirstPageable(type)) {
-			throw new LayoutTypeException(
-				LayoutTypeException.FIRST_LAYOUT, type);
+			LayoutTypeException lte = new LayoutTypeException(
+				LayoutTypeException.FIRST_LAYOUT);
+
+			lte.setLayoutType(type);
+			
+			throw lte;
 		}
 	}
 

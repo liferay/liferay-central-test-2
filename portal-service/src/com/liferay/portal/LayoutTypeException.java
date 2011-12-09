@@ -21,29 +21,27 @@ import com.liferay.portal.kernel.exception.PortalException;
  */
 public class LayoutTypeException extends PortalException {
 
-	public static final int NOT_PARENTABLE = 1;
-
 	public static final int FIRST_LAYOUT = 2;
+
+	public static final int NOT_PARENTABLE = 1;
 
 	public LayoutTypeException(int type) {
 		_type = type;
-	}
-
-	public LayoutTypeException(int type, String layoutType) {
-		_type = type;
-		_layoutType = layoutType;
-	}
-
-	public int getType() {
-		return _type;
 	}
 
 	public String getLayoutType() {
 		return _layoutType;
 	}
 
-	private int _type;
+	public int getType() {
+		return _type;
+	}
+
+	public void setLayoutType(String layoutType) {
+		_layoutType = layoutType;
+	}
 
 	private String _layoutType;
+	private int _type;
 
 }
