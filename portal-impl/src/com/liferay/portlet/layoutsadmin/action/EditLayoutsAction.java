@@ -799,7 +799,8 @@ public class EditLayoutsAction extends PortletAction {
 			uploadPortletRequest, "copyLayoutId");
 
 		String layoutTemplateId = ParamUtil.getString(
-			uploadPortletRequest, "layoutTemplateId");
+			uploadPortletRequest, "layoutTemplateId",
+			PropsValues.DEFAULT_LAYOUT_TEMPLATE_ID);
 
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			Layout.class.getName(), actionRequest);
