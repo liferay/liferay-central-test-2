@@ -1031,7 +1031,8 @@ public class PortalUtil {
 			boolean checkStagingGroup)
 		throws PortalException, SystemException {
 
-		return getPortal().getScopeGroupId(request, portletId, checkStagingGroup);
+		return getPortal().getScopeGroupId(
+			request, portletId, checkStagingGroup);
 	}
 
 	public static long getScopeGroupId(Layout layout) {

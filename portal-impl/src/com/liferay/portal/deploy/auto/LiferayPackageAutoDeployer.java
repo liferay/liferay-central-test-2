@@ -25,8 +25,8 @@ import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsValues;
 
 import java.io.File;
-import java.io.InputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 import java.util.Enumeration;
 import java.util.zip.ZipEntry;
