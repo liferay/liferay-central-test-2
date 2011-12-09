@@ -339,6 +339,24 @@ public class AssetTagLocalServiceUtil {
 		return getService().getGroupTagsCount(groupId);
 	}
 
+	public static java.util.List<com.liferay.portlet.asset.model.AssetTag> getSocialActivityCounterOffsetTags(
+		long groupId, java.lang.String socialActivityCounterName,
+		int startOffset, int endOffset)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .getSocialActivityCounterOffsetTags(groupId,
+			socialActivityCounterName, startOffset, endOffset);
+	}
+
+	public static java.util.List<com.liferay.portlet.asset.model.AssetTag> getSocialActivityCounterPeriodTags(
+		long groupId, java.lang.String socialActivityCounterName,
+		int startPeriod, int endPeriod)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .getSocialActivityCounterPeriodTags(groupId,
+			socialActivityCounterName, startPeriod, endPeriod);
+	}
+
 	public static com.liferay.portlet.asset.model.AssetTag getTag(long tagId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -404,27 +422,9 @@ public class AssetTagLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetTag> getTags(
-		long groupId, java.lang.String socialActivityCounterName,
-		int startPeriod, int endPeriod)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService()
-				   .getTags(groupId, socialActivityCounterName, startPeriod,
-			endPeriod);
-	}
-
-	public static java.util.List<com.liferay.portlet.asset.model.AssetTag> getTags(
 		java.lang.String className, long classPK)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getTags(className, classPK);
-	}
-
-	public static java.util.List<com.liferay.portlet.asset.model.AssetTag> getTagsByOffset(
-		long groupId, java.lang.String socialActivityCounterName,
-		int startOffset, int endOffset)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService()
-				   .getTagsByOffset(groupId, socialActivityCounterName,
-			startOffset, endOffset);
 	}
 
 	public static int getTagsSize(long groupId, long classNameId,
