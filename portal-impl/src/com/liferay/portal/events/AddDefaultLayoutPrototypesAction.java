@@ -157,10 +157,10 @@ public class AddDefaultLayoutPrototypesAction extends SimpleAction {
 		throws Exception {
 
 		Portlet portlet = PortletLocalServiceUtil.getPortletById(
-				layout.getCompanyId(), portletId);
+			layout.getCompanyId(), portletId);
 
 		PortalUtil.addPortletDefaultResource(
-				layout.getCompanyId(), layout, portlet);
+			layout.getCompanyId(), layout, portlet);
 	}
 
 	protected void addWebContentPage(

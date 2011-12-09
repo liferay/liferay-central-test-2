@@ -5341,8 +5341,8 @@ public class PortalImpl implements Portal {
 			boolean portletActions)
 		throws PortalException, SystemException {
 
-		addDefaultResource(themeDisplay.getCompanyId(), layout,
-				portlet, portletActions);
+		addDefaultResource(
+			themeDisplay.getCompanyId(), layout, portlet, portletActions);
 	}
 
 	protected List<Portlet> filterControlPanelPortlets(
