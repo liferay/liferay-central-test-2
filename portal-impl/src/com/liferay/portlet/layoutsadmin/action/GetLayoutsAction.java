@@ -129,7 +129,6 @@ public class GetLayoutsAction extends JSONAction {
 				if (!layoutBranch.isMaster()) {
 					jsonObject.put(
 						"layoutBranchId", layoutBranch.getLayoutBranchId());
-
 					jsonObject.put("layoutBranchName", layoutBranch.getName());
 				}
 
