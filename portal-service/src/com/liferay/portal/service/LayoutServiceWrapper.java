@@ -714,7 +714,6 @@ public class LayoutServiceWrapper implements LayoutService,
 	String)}.
 	* @param iconImage whether the icon image will be updated
 	* @param iconBytes the byte array of the layout's new icon image
-	* @param locked whether the layout is locked
 	* @param serviceContext the service context. Can specify the replacement
 	modified date and new expando bridge attributes.
 	* @return the updated layout
