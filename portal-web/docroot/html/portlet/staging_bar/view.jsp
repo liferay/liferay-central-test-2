@@ -95,12 +95,12 @@ if (layout != null) {
 			<c:if test="<%= group.isStagedRemotely() %>">
 
 				<%
-				UnicodeProperties typeSettings = group.getTypeSettingsProperties();
+				UnicodeProperties typeSettingsProperties = group.getTypeSettingsProperties();
 
-				String remoteAddress = typeSettings.getProperty("remoteAddress");
-				int remotePort = GetterUtil.getInteger(typeSettings.getProperty("remotePort"));
-				boolean secureConnection = GetterUtil.getBoolean(typeSettings.getProperty("secureConnection"));
-				long remoteGroupId = GetterUtil.getLong(typeSettings.getProperty("remoteGroupId"));
+				String remoteAddress = typeSettingsProperties.getProperty("remoteAddress");
+				int remotePort = GetterUtil.getInteger(typeSettingsProperties.getProperty("remotePort"));
+				boolean secureConnection = GetterUtil.getBoolean(typeSettingsProperties.getProperty("secureConnection"));
+				long remoteGroupId = GetterUtil.getLong(typeSettingsProperties.getProperty("remoteGroupId"));
 
 				String remoteURL = StagingUtil.buildRemoteURL(remoteAddress, remotePort, secureConnection, remoteGroupId, layout.isPrivateLayout());
 				%>
