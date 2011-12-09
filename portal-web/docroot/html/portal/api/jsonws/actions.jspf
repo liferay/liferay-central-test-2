@@ -1,4 +1,3 @@
-<%@ page import="com.liferay.portal.kernel.util.ContextPathUtil" %>
 <%--
 /**
  * Copyright (c) 2000-2011 Liferay, Inc. All rights reserved.
@@ -17,14 +16,12 @@
 
 <%
 String contextPath = request.getParameter("contextPath");
-if (contextPath == null) {
-	contextPath = ContextPathUtil.getContextPath(application);
-}
+
 List<JSONWebServiceActionMapping> jsonWebServiceActionMappings = JSONWebServiceActionsManagerUtil.getJSONWebServiceActionMappings(contextPath);
 %>
 
 <p>
-	Context path: <b><%= contextPath %></b><br/>
+	Context Path: <b><%= Validator.isNull(contextPath) ? StringPool.SLASH : contextPath %></b><br />
 	Total Methods: <b><%= jsonWebServiceActionMappings.size() %></b>
 </p>
 

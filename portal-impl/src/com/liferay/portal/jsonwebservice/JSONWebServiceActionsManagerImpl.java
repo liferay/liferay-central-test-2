@@ -89,8 +89,8 @@ public class JSONWebServiceActionsManagerImpl
 
 		ServletContext servletContext = session.getServletContext();
 
-		String servletContextPath =
-			ContextPathUtil.getContextPath(servletContext);
+		String servletContextPath = ContextPathUtil.getContextPath(
+			servletContext);
 
 		int jsonWebServiceActionConfigIndex =
 			_getJSONWebServiceActionConfigIndex(
@@ -137,7 +137,6 @@ public class JSONWebServiceActionsManagerImpl
 				jsonWebServiceActionConfig.getServletContextPath();
 
 			if (servletContextPath.equals(jsonWebServiceServletContextPath)) {
-
 				jsonWebServiceActionMappings.add(jsonWebServiceActionConfig);
 			}
 		}

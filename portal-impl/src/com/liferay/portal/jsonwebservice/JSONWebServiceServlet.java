@@ -18,8 +18,7 @@ import com.liferay.portal.kernel.servlet.PortletServlet;
 import com.liferay.portal.kernel.upload.UploadServletRequest;
 import com.liferay.portal.kernel.util.ContextPathUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.PropsKeys;
-import com.liferay.portal.kernel.util.PropsUtil;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StreamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
@@ -33,19 +32,20 @@ import com.liferay.portal.servlet.UserResolver;
 import com.liferay.portal.struts.JSONAction;
 import com.liferay.portal.upload.UploadServletRequestImpl;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PropsValues;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
 import java.net.URL;
-import java.net.URLDecoder;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * @author Igor Spasic
@@ -97,45 +97,46 @@ public class JSONWebServiceServlet extends JSONServlet {
 			return;
 		}
 
-		String mainPath = PortalUtil.getPathMain();
+		String apiPath = PortalUtil.getPathMain() + "/portal/api/jsonws";
 
-		String apiPath = mainPath + "/portal/api/jsonws";
+		HttpSession session = request.getSession();
 
-		ServletContext servletContext =
-			request.getSession().getServletContext();
+		ServletContext servletContext = session.getServletContext();
 
-		String portalContextPath = PropsUtil.get(PropsKeys.PORTAL_CTX);
-
-		if (servletContext.getContext(portalContextPath) != null) {
-			RequestDispatcher requestDispatcher =
-						request.getRequestDispatcher(apiPath);
+		if (servletContext.getContext(PropsValues.PORTAL_CTX) != null) {
+			RequestDispatcher requestDispatcher = request.getRequestDispatcher(
+				apiPath);
 
 			requestDispatcher.forward(request, response);
 		}
 		else {
-			String requestUri = request.getRequestURI();
-			String requestUrl = request.getRequestURL().toString();
-	 		String queryString = request.getQueryString();
+			String requestURI = request.getRequestURI();
+			String requestURL = String.valueOf(request.getRequestURL());
 
-			String serverUrl = requestUrl.substring(
-				0, requestUrl.length() - requestUri.length());
+			String serverURL = requestURL.substring(
+				0, requestURL.length() - requestURI.length());
+
+			String queryString = request.getQueryString();
 
 			if (Validator.isNull(queryString)) {
+				String servletContextPath = ContextPathUtil.getContextPath(
+					servletContext);
 
-				String servletContextPath =
-					ContextPathUtil.getContextPath(servletContext);
-
-				queryString = "contextPath=" +
-					URLDecoder.decode(servletContextPath, "UTF-8");
+				queryString =
+					"contextPath=" + HttpUtil.encodeURL(servletContextPath);
 			}
 
-			apiPath = serverUrl + apiPath + '?' + queryString;
+			apiPath = serverURL + apiPath + StringPool.QUESTION + queryString;
 
 			URL url = new URL(apiPath);
+
 			InputStream inputStream = null;
+
 			try {
 				inputStream = url.openStream();
+
 				OutputStream outputStream = response.getOutputStream();
+
 				StreamUtil.transfer(inputStream, outputStream);
 			}
 			finally {

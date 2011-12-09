@@ -33,8 +33,8 @@ import org.apache.struts.action.ActionMapping;
  */
 public class JSONWebServiceServiceAction extends JSONServiceAction {
 
-	public JSONWebServiceServiceAction(String servletContextPath,
-		ClassLoader classLoader) {
+	public JSONWebServiceServiceAction(
+		String servletContextPath, ClassLoader classLoader) {
 
 		_jsonWebServiceConfigurator = new JSONWebServiceConfigurator(
 			servletContextPath);
