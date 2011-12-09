@@ -468,9 +468,9 @@ public class SocialActivityCounterLocalServiceImpl
 			return true;
 		}
 
-		String name = activityCounterDefinition.getName();
-
 		long classPK = activity.getClassPK();
+
+		String name = activityCounterDefinition.getName();
 
 		if (name.equals(SocialActivityCounterConstants.NAME_PARTICIPATION)) {
 			classPK = 0;
