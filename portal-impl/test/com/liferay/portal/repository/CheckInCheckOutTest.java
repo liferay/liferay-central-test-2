@@ -57,16 +57,6 @@ public class CheckInCheckOutTest extends TestCase {
 		assertEquals("1.0", fileEntry.getVersion());
 	}
 
-	public void testCheckOut() throws Exception {
-		DLAppServiceUtil.checkOutFileEntry(_fileEntry.getFileEntryId());
-
-		FileVersion fileVersion = _fileEntry.getLatestFileVersion();
-
-		assertEquals("PWC", fileVersion.getVersion());
-
-		getAssetEntry(fileVersion.getFileVersionId(), true);
-	}
-
 	public void testCheckIn() throws Exception {
 		DLAppServiceUtil.checkOutFileEntry(_fileEntry.getFileEntryId());
 
@@ -86,6 +76,16 @@ public class CheckInCheckOutTest extends TestCase {
 		assertEquals("1.1", fileEntry.getVersion());
 
 		getAssetEntry(fileVersion.getFileVersionId(), false);
+	}
+
+	public void testCheckOut() throws Exception {
+		DLAppServiceUtil.checkOutFileEntry(_fileEntry.getFileEntryId());
+
+		FileVersion fileVersion = _fileEntry.getLatestFileVersion();
+
+		assertEquals("PWC", fileVersion.getVersion());
+
+		getAssetEntry(fileVersion.getFileVersionId(), true);
 	}
 
 	public void testUpdateFileEntry() throws Exception {
@@ -176,8 +176,8 @@ public class CheckInCheckOutTest extends TestCase {
 		return assetEntry;
 	}
 
+	@Override
 	protected void setUp() throws Exception {
-
 		long repositoryId = TestPropsValues.getGroupId();
 
 		_folder = createFolder(repositoryId, "CheckInCheckOutTest");
@@ -190,9 +190,8 @@ public class CheckInCheckOutTest extends TestCase {
 			repositoryId, _folder.getFolderId(), "test1.txt", _serviceContext);
 	}
 
-	protected void tearDown()
-		throws Exception {
-
+	@Override
+	protected void tearDown() throws Exception {
 		DLAppServiceUtil.deleteFolder(_folder.getFolderId());
 	}
 
@@ -209,11 +208,11 @@ public class CheckInCheckOutTest extends TestCase {
 			serviceContext);
 	}
 
+	private static final String _TEST_CONTENT =
+		"LIFERAY\nEnterprise. Open Source. For Life.";
+
 	private FileEntry _fileEntry;
 	private Folder _folder;
 	private ServiceContext _serviceContext;
-
-	private static final String _TEST_CONTENT =
-		"LIFERAY\nEnterprise. Open Source. For Life.";
 
 }

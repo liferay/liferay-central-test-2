@@ -28,7 +28,6 @@ public class RepositoryTestSuite extends TestSuite {
 		TestSuite testSuite = new TestSuite();
 
 		testSuite.addTestSuite(CheckInCheckOutTest.class);
-
 		testSuite.addTestSuite(RepositoryTest.class);
 
 		testSuite.addTestSuite(CMISQueryBuilderTest.class);
