@@ -96,12 +96,6 @@ public class BlogsEntryServiceWrapper implements BlogsEntryService,
 	}
 
 	public java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> getGroupEntries(
-		long groupId, int status, int start, int end)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return _blogsEntryService.getGroupEntries(groupId, status, start, end);
-	}
-
-	public java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> getGroupEntries(
 		long groupId, java.util.Date displayDate, int status, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _blogsEntryService.getGroupEntries(groupId, displayDate, status,
@@ -114,15 +108,21 @@ public class BlogsEntryServiceWrapper implements BlogsEntryService,
 		return _blogsEntryService.getGroupEntries(groupId, status, max);
 	}
 
-	public int getGroupEntriesCount(long groupId, int status)
+	public java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> getGroupEntries(
+		long groupId, int status, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return _blogsEntryService.getGroupEntriesCount(groupId, status);
+		return _blogsEntryService.getGroupEntries(groupId, status, start, end);
 	}
 
 	public int getGroupEntriesCount(long groupId, java.util.Date displayDate,
 		int status) throws com.liferay.portal.kernel.exception.SystemException {
 		return _blogsEntryService.getGroupEntriesCount(groupId, displayDate,
 			status);
+	}
+
+	public int getGroupEntriesCount(long groupId, int status)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _blogsEntryService.getGroupEntriesCount(groupId, status);
 	}
 
 	public java.lang.String getGroupEntriesRSS(long groupId,
