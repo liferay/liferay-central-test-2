@@ -850,7 +850,7 @@ public interface Portal {
 
 	public long getScopeGroupId(
 			HttpServletRequest request, String portletId,
-			boolean getStagedGroupId)
+			boolean checkStagingGroup)
 		throws PortalException, SystemException;
 
 	public long getScopeGroupId(Layout layout);

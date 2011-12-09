@@ -3328,7 +3328,7 @@ public class PortalImpl implements Portal {
 
 	public long getScopeGroupId(
 			HttpServletRequest request, String portletId,
-			boolean getStagedGroupId)
+			boolean checkStagingGroup)
 		throws PortalException, SystemException {
 
 		Layout layout = (Layout)request.getAttribute(WebKeys.LAYOUT);
@@ -3386,10 +3386,12 @@ public class PortalImpl implements Portal {
 						scopeGroupId = getScopeGroupId(
 							liveGroupLayout, portletId);
 					}
-					else if (getStagedGroupId &&
+					else if (checkStagingGroup &&
 							 !liveGroup.isStagedRemotely()) {
 
-						scopeGroupId = liveGroup.getStagingGroup().getGroupId();
+						Group stagingGroup = liveGroup.getStagingGroup();
+
+						scopeGroupId = stagingGroup.getGroupId();
 					}
 					else {
 						scopeGroupId = liveGroup.getGroupId();
