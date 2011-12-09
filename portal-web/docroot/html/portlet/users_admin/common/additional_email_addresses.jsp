@@ -65,7 +65,7 @@ else {
 <h3><liferay-ui:message key="additional-email-addresses" /></h3>
 
 <div class="portlet-msg-info">
-	<liferay-ui:message key="email-address-and-type-are-required-fields"/>
+	<liferay-ui:message key="email-address-and-type-are-required-fields" />
 </div>
 
 <liferay-ui:error exception="<%= EmailAddressException.class %>" message="please-enter-a-valid-email-address" />

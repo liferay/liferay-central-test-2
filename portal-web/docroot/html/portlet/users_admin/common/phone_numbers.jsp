@@ -67,7 +67,7 @@ else {
 <h3><liferay-ui:message key="phone-numbers" /></h3>
 
 <div class="portlet-msg-info">
-	<liferay-ui:message key="phone-number-and-type-are-required-fields.-extension-must-be-numeric"/>
+	<liferay-ui:message key="phone-number-and-type-are-required-fields.-extension-must-be-numeric" />
 </div>
 
 <liferay-ui:error key="<%= NoSuchListTypeException.class.getName() + className + ListTypeConstants.PHONE %>" message="please-select-a-type" />
