@@ -35,67 +35,25 @@ import org.hibernate.exception.LockAcquisitionException;
  */
 public class LockLocalServiceTest extends BaseServiceTestCase {
 
-	public void testMutualExcludeLockingSerial() throws Exception {
-		String testClassName = "testClassName";
-		String testKey = "testKey";
-
-		String owner1 = "owner1";
-		String owner2 = "owner2";
-
-		// Owner1 create the lock
-		Lock lock1 = LockLocalServiceUtil.lock(
-			testClassName, testKey, owner1, false);
-
-		assertEquals(owner1, lock1.getOwner());
-		assertTrue(lock1.isNew());
-
-		// Owner2 fetch back owner1's lock
-		Lock lock2 = LockLocalServiceUtil.lock(
-			testClassName, testKey, owner2, false);
-
-		assertEquals(owner1, lock2.getOwner());
-		assertFalse(lock2.isNew());
-
-		// Owner1 release the lock
-		LockLocalServiceUtil.unlock(testClassName, testKey, owner1, false);
-
-		// Owner2 create the lock again
-
-		lock2 = LockLocalServiceUtil.lock(
-			testClassName, testKey, owner2, false);
-
-		assertEquals(owner2, lock2.getOwner());
-		assertTrue(lock2.isNew());
-
-		// Owner2 release the lock
-		LockLocalServiceUtil.unlock(testClassName, testKey, owner2, false);
-	}
-
 	public void testMutualExcludeLockingParallel() throws Exception {
-		String testClassName = "testClassName";
-		String testKey = "testKey";
-		String testOwner = "owner";
-
 		ExecutorService executorService = Executors.newFixedThreadPool(10);
 
-		List<LockingJob> lockingJobList = new ArrayList<LockingJob>();
+		List<LockingJob> lockingJobs = new ArrayList<LockingJob>();
 
 		for (int i = 0; i < 10; i++) {
 			LockingJob lockingJob = new LockingJob(
-				testClassName, testKey, testOwner, 10);
+				"className", "key", "owner", 10);
 
-			lockingJobList.add(lockingJob);
+			lockingJobs.add(lockingJob);
 
 			executorService.execute(lockingJob);
 		}
 
 		executorService.shutdown();
-		boolean success = executorService.awaitTermination(
-			600, TimeUnit.SECONDS);
 
-		assertTrue(success);
+		assertTrue(executorService.awaitTermination(600, TimeUnit.SECONDS));
 
-		for (LockingJob lockingJob : lockingJobList) {
+		for (LockingJob lockingJob : lockingJobs) {
 			SystemException systemException = lockingJob.getSystemException();
 
 			if (systemException != null) {
@@ -104,14 +62,42 @@ public class LockLocalServiceTest extends BaseServiceTestCase {
 		}
 	}
 
+	public void testMutualExcludeLockingSerial() throws Exception {
+		String className = "testClassName";
+		String key = "testKey";
+		String owner1 = "testOwner1";
+
+		Lock lock1 = LockLocalServiceUtil.lock(className, key, owner1, false);
+
+		assertEquals(owner1, lock1.getOwner());
+		assertTrue(lock1.isNew());
+
+		String owner2 = "owner2";
+
+		Lock lock2 = LockLocalServiceUtil.lock(className, key, owner2, false);
+
+		assertEquals(owner1, lock2.getOwner());
+		assertFalse(lock2.isNew());
+
+		LockLocalServiceUtil.unlock(className, key, owner1, false);
+
+		lock2 = LockLocalServiceUtil.lock(className, key, owner2, false);
+
+		assertEquals(owner2, lock2.getOwner());
+		assertTrue(lock2.isNew());
+
+		LockLocalServiceUtil.unlock(className, key, owner2, false);
+	}
+
 	private class LockingJob implements Runnable {
 
 		public LockingJob(
-			String testClassName, String testKey, String testOwner,
+			String className, String key, String owner,
 			int requiredSuccessCount) {
-			_testClassName = testClassName;
-			_testKey = testKey;
-			_testOwner = testOwner;
+
+			_className = className;
+			_key = key;
+			_owner = owner;
 			_requiredSuccessCount = requiredSuccessCount;
 		}
 
@@ -125,10 +111,10 @@ public class LockLocalServiceTest extends BaseServiceTestCase {
 			while (true) {
 				try {
 					Lock lock = LockLocalServiceUtil.lock(
-						_testClassName, _testKey, _testOwner, false);
+						_className, _key, _owner, false);
 
 					if (lock.isNew()) {
-						LockLocalServiceUtil.unlock(_testClassName, _testKey);
+						LockLocalServiceUtil.unlock(_className, _key);
 
 						if (++count >= _requiredSuccessCount) {
 							break;
@@ -145,14 +131,16 @@ public class LockLocalServiceTest extends BaseServiceTestCase {
 							continue;
 						}
 
-						// PostgreSQL fails to do row/table level locking.
-						// To enforce the mutual exclude locking an unique index
-						// is required. So it could end up with failing
-						// inserting by violating unique index constraint
+						// PostgreSQL fails to do row or table level locking.
+						// A unique index is required to enforce mutual exclude
+						// locking, but it may do so by violating a unique index
+						// constraint.
+
 						DB db = DBFactoryUtil.getDB();
 
 						if ((db instanceof PostgreSQLDB) &&
 							(cause instanceof ConstraintViolationException)) {
+
 							continue;
 						}
 					}
@@ -164,11 +152,11 @@ public class LockLocalServiceTest extends BaseServiceTestCase {
 			}
 		}
 
+		private String _className;
+		private String _key;
+		private String _owner;
 		private int _requiredSuccessCount;
 		private SystemException _systemException;
-		private String _testClassName;
-		private String _testKey;
-		private String _testOwner;
 
 	}
 
