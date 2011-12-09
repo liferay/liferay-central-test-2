@@ -613,8 +613,9 @@ if (Validator.isNotNull(content)) {
 			if (cmd == '<%= Constants.DELETE_TRANSLATION %>') {
 				var availableLocales = A.one('#<portlet:namespace />availableLocales' + newLanguageId);
 
-				translationLink.remove();
 				availableLocales.remove();
+
+				translationLink.remove();
 			}
 			else if (!translationLink) {
 				statusNode.removeClass('workflow-status-approved');
