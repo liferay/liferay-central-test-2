@@ -20,6 +20,8 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.lar.UserIdStrategy;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
@@ -435,50 +437,28 @@ public class SitesUtil {
 			parameterMap, inputStream);
 	}
 
-	public static boolean isLayoutUpdateable(Layout layout) {
+	public static boolean isLayoutsUpdateable(LayoutSet layoutSet) {
+		if (!layoutSet.isLayoutSetPrototypeLinkEnabled()) {
+			return true;
+		}
+
 		try {
-			LayoutSet layoutSet = layout.getLayoutSet();
+			LayoutSetPrototype layoutSetPrototype =
+				LayoutSetPrototypeLocalServiceUtil.
+					getLayoutSetPrototypeByUuid(
+						layoutSet.getLayoutSetPrototypeUuid());
 
-			if ((layout.isLayoutPrototypeLinkEnabled() ||
-				layoutSet.isLayoutSetPrototypeLinkEnabled()) &&
-				(Validator.isNotNull(layout.getSourcePrototypeLayoutUuid()))) {
+			String layoutsUpdateable = layoutSetPrototype.getSettingsProperty(
+				"layoutsUpdateable");
 
-				LayoutTypePortletImpl layoutTypePortlet =
-					new LayoutTypePortletImpl(layout);
-
-				return isLayoutUpdateable(layoutTypePortlet);
+			if (Validator.isNotNull(layoutsUpdateable)) {
+				return GetterUtil.getBoolean(layoutsUpdateable, true);
 			}
 		}
 		catch (Exception e) {
-		}
-
-		return true;
-	}
-
-	public static boolean isLayoutUpdateable(
-		LayoutTypePortlet layoutTypePortlet) {
-
-		Layout layout = layoutTypePortlet.getLayout();
-
-		try {
-			LayoutSet layoutSet = layout.getLayoutSet();
-
-			if (layout.isLayoutPrototypeLinkEnabled() ||
-				layoutSet.isLayoutSetPrototypeLinkEnabled()) {
-
-				boolean layoutsUpdateable = isLayoutsUpdateable(layoutSet);
-
-				if (!layoutsUpdateable) {
-					return false;
-				}
-
-				String layoutUpdateable =
-					layoutTypePortlet.getTemplateProperty("layoutUpdateable");
-
-				return GetterUtil.getBoolean(layoutUpdateable, true);
+			if (_log.isDebugEnabled()) {
+				_log.debug(e, e);
 			}
-		}
-		catch (Exception e) {
 		}
 
 		return true;
@@ -531,26 +511,61 @@ public class SitesUtil {
 		return false;
 	}
 
-	public static boolean isLayoutsUpdateable(LayoutSet layoutSet) {
-		if (layoutSet.isLayoutSetPrototypeLinkEnabled()) {
-			try {
-				LayoutSetPrototype layoutSetPrototype =
-					LayoutSetPrototypeLocalServiceUtil.
-						getLayoutSetPrototypeByUuid(
-							layoutSet.getLayoutSetPrototypeUuid());
+	public static boolean isLayoutUpdateable(Layout layout) {
+		try {
+			LayoutSet layoutSet = layout.getLayoutSet();
 
-				String layoutsUpdateable =
-					layoutSetPrototype.getSettingsProperty("layoutsUpdateable");
+			if ((layout.isLayoutPrototypeLinkEnabled() ||
+				 layoutSet.isLayoutSetPrototypeLinkEnabled()) &&
+				Validator.isNotNull(layout.getSourcePrototypeLayoutUuid())) {
 
-				if (Validator.isNotNull(layoutsUpdateable)) {
-					return GetterUtil.getBoolean(layoutsUpdateable, true);
-				}
+				LayoutTypePortletImpl layoutTypePortlet =
+					new LayoutTypePortletImpl(layout);
+
+				return isLayoutUpdateable(layoutTypePortlet);
 			}
-			catch (Exception e) {
+		}
+		catch (Exception e) {
+			if (_log.isDebugEnabled()) {
+				_log.debug(e, e);
 			}
 		}
 
 		return true;
 	}
+
+	public static boolean isLayoutUpdateable(
+		LayoutTypePortlet layoutTypePortlet) {
+
+		Layout layout = layoutTypePortlet.getLayout();
+
+		try {
+			LayoutSet layoutSet = layout.getLayoutSet();
+
+			if (layout.isLayoutPrototypeLinkEnabled() ||
+				layoutSet.isLayoutSetPrototypeLinkEnabled()) {
+
+				boolean layoutsUpdateable = isLayoutsUpdateable(layoutSet);
+
+				if (!layoutsUpdateable) {
+					return false;
+				}
+
+				String layoutUpdateable = layoutTypePortlet.getTemplateProperty(
+					"layoutUpdateable");
+
+				return GetterUtil.getBoolean(layoutUpdateable, true);
+			}
+		}
+		catch (Exception e) {
+			if (_log.isDebugEnabled()) {
+				_log.debug(e, e);
+			}
+		}
+
+		return true;
+	}
+
+	private static Log _log = LogFactoryUtil.getLog(SitesUtil.class);
 
 }

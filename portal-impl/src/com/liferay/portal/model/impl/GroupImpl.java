@@ -225,7 +225,7 @@ public class GroupImpl extends GroupBaseImpl {
 				getGroupId(), true);
 		}
 		catch (Exception e) {
-			_log.error(e);
+			_log.error(e, e);
 		}
 
 		return layoutSet;
@@ -249,7 +249,7 @@ public class GroupImpl extends GroupBaseImpl {
 			return pageCount;
 		}
 		catch (Exception e) {
-			_log.error(e);
+			_log.error(e, e);
 		}
 
 		return 0;
@@ -263,7 +263,7 @@ public class GroupImpl extends GroupBaseImpl {
 				getGroupId(), false);
 		}
 		catch (Exception e) {
-			_log.error(e);
+			_log.error(e, e);
 		}
 
 		return layoutSet;
@@ -287,7 +287,7 @@ public class GroupImpl extends GroupBaseImpl {
 			return pageCount;
 		}
 		catch (Exception e) {
-			_log.error(e);
+			_log.error(e, e);
 		}
 
 		return 0;

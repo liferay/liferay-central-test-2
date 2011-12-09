@@ -581,6 +581,10 @@ public class LayoutTypePortletImpl
 		return portlets;
 	}
 
+	public Layout getSourcePrototypeLayout() {
+		return _sourcePrototypeLayout;
+	}
+
 	public String getStateMax() {
 		return getTypeSettingsProperties().getProperty(
 			LayoutTypePortletConstants.STATE_MAX);
@@ -600,10 +604,6 @@ public class LayoutTypePortletImpl
 	public String getStateMin() {
 		return getTypeSettingsProperties().getProperty(
 			LayoutTypePortletConstants.STATE_MIN);
-	}
-
-	public Layout getSourcePrototypeLayout() {
-		return _sourcePrototypeLayout;
 	}
 
 	public String getTemplateProperty(String key) {
@@ -835,8 +835,8 @@ public class LayoutTypePortletImpl
 
 			if (hasTemplate()) {
 				String propertiesModifiedDateString =
-					_sourcePrototypeLayout.getTypeSettingsProperties().getProperty(
-						_MODIFIED_DATE, _NULL_DATE);
+					_sourcePrototypeLayout.getTypeSettingsProperties().
+						getProperty(_MODIFIED_DATE, _NULL_DATE);
 
 				Date propertiesModifiedDate = dateFormat.parse(
 					propertiesModifiedDateString);

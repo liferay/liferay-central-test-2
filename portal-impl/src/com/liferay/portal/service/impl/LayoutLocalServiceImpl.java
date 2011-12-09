@@ -364,8 +364,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		return addLayout(
 			userId, groupId, privateLayout, parentLayoutId, localeNamesMap,
 			new HashMap<Locale, String>(), new HashMap<Locale, String>(),
-			new HashMap<Locale, String>(), new HashMap<Locale, String>(),
-			type, hidden, friendlyURL, serviceContext);
+			new HashMap<Locale, String>(), new HashMap<Locale, String>(), type,
+			hidden, friendlyURL, serviceContext);
 	}
 
 	/**
@@ -1488,7 +1488,6 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	 *         String)}.
 	 * @param  iconImage whether the icon image will be updated
 	 * @param  iconBytes the byte array of the layout's new icon image
-	 * @param  locked whether the layout is locked
 	 * @param  serviceContext the service context. Can specify the replacement
 	 *         modified date and new expando bridge attributes.
 	 * @return the updated layout

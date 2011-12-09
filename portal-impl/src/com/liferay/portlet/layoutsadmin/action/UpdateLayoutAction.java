@@ -159,8 +159,8 @@ public class UpdateLayoutAction extends JSONAction {
 
 			layout = LayoutServiceUtil.addLayout(
 				groupId, privateLayout, parentLayoutId, name, title,
-				description, layoutPrototypeLayout.getType(),
-				false, friendlyURL, serviceContext);
+				description, layoutPrototypeLayout.getType(), false,
+				friendlyURL, serviceContext);
 
 			LayoutServiceUtil.updateLayout(
 				layout.getGroupId(), layout.isPrivateLayout(),

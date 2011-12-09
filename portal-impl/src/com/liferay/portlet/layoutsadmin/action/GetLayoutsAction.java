@@ -84,7 +84,8 @@ public class GetLayoutsAction extends JSONAction {
 					LayoutTypePortletImpl.getSourcePrototypeLayout(layout);
 
 				if (sourcePrototypeLayout != null) {
-					name = sourcePrototypeLayout.getName(themeDisplay.getLocale());
+					name = sourcePrototypeLayout.getName(
+						themeDisplay.getLocale());
 				}
 			}
 
@@ -94,14 +95,13 @@ public class GetLayoutsAction extends JSONAction {
 			jsonObject.put("plid", layout.getPlid());
 			jsonObject.put("priority", layout.getPriority());
 			jsonObject.put("privateLayout", layout.isPrivateLayout());
-			
-			jsonObject.put("updateable", SitesUtil.isLayoutUpdateable(layout));
 
 			if ((layoutAncestors != null) && layoutAncestors.contains(layout)) {
 				jsonObject.put("selLayoutAncestor", true);
 			}
 
 			jsonObject.put("type", layout.getType());
+			jsonObject.put("updateable", SitesUtil.isLayoutUpdateable(layout));
 			jsonObject.put("uuid", layout.getUuid());
 
 			LayoutRevision layoutRevision = LayoutStagingUtil.getLayoutRevision(

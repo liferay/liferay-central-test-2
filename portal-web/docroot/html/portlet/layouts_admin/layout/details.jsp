@@ -23,6 +23,7 @@ Layout selLayout = (Layout)request.getAttribute("edit_pages.jsp-selLayout");
 
 boolean layoutUpdateable = SitesUtil.isLayoutUpdateable(selLayout);
 boolean layoutsUpdateable = SitesUtil.isLayoutsUpdateable(selLayout.getLayoutSet());
+
 boolean layoutUpdateableDisabled = false;
 
 if (!layoutsUpdateable) {
