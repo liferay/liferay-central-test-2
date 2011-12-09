@@ -618,6 +618,13 @@ public class LayoutLocalServiceUtil {
 			parameterMap, startDate, endDate);
 	}
 
+	public static com.liferay.portal.model.Layout fetchFirstLayout(
+		long groupId, boolean privateLayout, long parentLayoutId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .fetchFirstLayout(groupId, privateLayout, parentLayoutId);
+	}
+
 	/**
 	* Returns the layout matching the universally unique identifier and group
 	* ID
@@ -698,14 +705,6 @@ public class LayoutLocalServiceUtil {
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .getFriendlyURLLayout(groupId, privateLayout, friendlyURL);
-	}
-
-	public static com.liferay.portal.model.Layout getFirstLayout(long groupId,
-		boolean privateLayout, long parentLayoutId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return getService()
-				   .getFirstLayout(groupId, privateLayout, parentLayoutId);
 	}
 
 	/**

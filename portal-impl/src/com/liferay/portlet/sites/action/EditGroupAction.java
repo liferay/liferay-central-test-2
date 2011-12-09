@@ -100,11 +100,10 @@ public class EditGroupAction extends PortletAction {
 				Group group = (Group)returnValue[0];
 				String oldFriendlyURL = (String)returnValue[1];
 				String oldStagingFriendlyURL = (String)returnValue[2];
-				Long newRefererPlid = (Long)returnValue[3];
+				long newRefererPlid = (Long)returnValue[3];
 
 				redirect = HttpUtil.setParameter(
 					redirect, "doAsGroupId", group.getGroupId());
-
 				redirect = HttpUtil.setParameter(
 					redirect, "refererPlid", newRefererPlid);
 
@@ -469,18 +468,18 @@ public class EditGroupAction extends PortletAction {
 
 		String redirect = ParamUtil.getString(actionRequest, "redirect");
 
-		long refererPlid = GetterUtil.getLong(HttpUtil.getParameter(
-			redirect, "refererPlid", false));
+		long refererPlid = GetterUtil.getLong(
+			HttpUtil.getParameter(redirect, "refererPlid", false));
 
-		if (refererPlid > 0 && liveGroup.hasStagingGroup() && (
-			themeDisplay.getScopeGroupId() != liveGroup.getGroupId())) {
+		if ((refererPlid > 0) && liveGroup.hasStagingGroup() &&
+			(themeDisplay.getScopeGroupId() != liveGroup.getGroupId())) {
 
-			Layout firstLayout = LayoutLocalServiceUtil.getFirstLayout(
+			Layout firstLayout = LayoutLocalServiceUtil.fetchFirstLayout(
 				liveGroup.getGroupId(), false,
 				LayoutConstants.DEFAULT_PARENT_LAYOUT_ID);
 
 			if (firstLayout == null) {
-				firstLayout = LayoutLocalServiceUtil.getFirstLayout(
+				firstLayout = LayoutLocalServiceUtil.fetchFirstLayout(
 					liveGroup.getGroupId(), true,
 					LayoutConstants.DEFAULT_PARENT_LAYOUT_ID);
 			}

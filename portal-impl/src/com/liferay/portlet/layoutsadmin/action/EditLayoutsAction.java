@@ -141,10 +141,9 @@ public class EditLayoutsAction extends PortletAction {
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		try {
+			String redirect = ParamUtil.getString(actionRequest, "redirect");
 			String closeRedirect = ParamUtil.getString(
 				actionRequest, "closeRedirect");
-
-			String redirect = ParamUtil.getString(actionRequest, "redirect");
 
 			Layout layout = null;
 			String oldFriendlyURL = StringPool.BLANK;
@@ -156,11 +155,10 @@ public class EditLayoutsAction extends PortletAction {
 				layout = (Layout)returnValue[0];
 				oldFriendlyURL = (String)returnValue[1];
 
-				closeRedirect = updateCloseRedirect(
-					closeRedirect, null, layout, oldFriendlyURL);
-
 				redirect = updateCloseRedirect(
 					redirect, null, layout, oldFriendlyURL);
+				closeRedirect = updateCloseRedirect(
+					closeRedirect, null, layout, oldFriendlyURL);
 			}
 			else if (cmd.equals(Constants.DELETE)) {
 				Object[] returnValue = SitesUtil.deleteLayout(
@@ -168,16 +166,15 @@ public class EditLayoutsAction extends PortletAction {
 
 				Group group = (Group)returnValue[0];
 				oldFriendlyURL = (String)returnValue[1];
-				Long newRefererPlid = (Long)returnValue[2];
-
-				closeRedirect = updateCloseRedirect(
-					closeRedirect, group, null, oldFriendlyURL);
+				long newRefererPlid = (Long)returnValue[2];
 
 				redirect = updateCloseRedirect(
 					redirect, group, null, oldFriendlyURL);
-
 				redirect = HttpUtil.setParameter(
 					redirect, "refererPlid", newRefererPlid);
+
+				closeRedirect = updateCloseRedirect(
+					closeRedirect, group, null, oldFriendlyURL);
 			}
 			else if (cmd.equals("copy_from_live")) {
 				StagingUtil.copyFromLive(actionRequest);

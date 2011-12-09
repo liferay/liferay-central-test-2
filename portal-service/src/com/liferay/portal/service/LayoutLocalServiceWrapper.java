@@ -601,6 +601,13 @@ public class LayoutLocalServiceWrapper implements LayoutLocalService,
 			portletId, parameterMap, startDate, endDate);
 	}
 
+	public com.liferay.portal.model.Layout fetchFirstLayout(long groupId,
+		boolean privateLayout, long parentLayoutId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _layoutLocalService.fetchFirstLayout(groupId, privateLayout,
+			parentLayoutId);
+	}
+
 	/**
 	* Returns the layout matching the universally unique identifier and group
 	* ID
@@ -682,14 +689,6 @@ public class LayoutLocalServiceWrapper implements LayoutLocalService,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _layoutLocalService.getFriendlyURLLayout(groupId, privateLayout,
 			friendlyURL);
-	}
-
-	public com.liferay.portal.model.Layout getFirstLayout(long groupId,
-		boolean privateLayout, long parentLayoutId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _layoutLocalService.getFirstLayout(groupId, privateLayout,
-			parentLayoutId);
 	}
 
 	/**

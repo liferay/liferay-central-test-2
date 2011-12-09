@@ -285,8 +285,6 @@ public class SitesUtil {
 
 		LayoutSet layoutSet = layout.getLayoutSet();
 
-		long validPlid = layout.getParentPlid();
-
 		Group layoutSetGroup = layoutSet.getGroup();
 
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
@@ -319,17 +317,19 @@ public class SitesUtil {
 		LayoutServiceUtil.deleteLayout(
 			groupId, privateLayout, layoutId, serviceContext);
 
-		if ((validPlid <= 0)) {
-			Layout firstLayout = LayoutLocalServiceUtil.getFirstLayout(
+		long newPlid = layout.getParentPlid();
+
+		if (newPlid <= 0) {
+			Layout firstLayout = LayoutLocalServiceUtil.fetchFirstLayout(
 				layoutSet.getGroupId(), layoutSet.getPrivateLayout(),
 				LayoutConstants.DEFAULT_PARENT_LAYOUT_ID);
 
 			if (firstLayout != null) {
-				validPlid = firstLayout.getPlid();
+				newPlid = firstLayout.getPlid();
 			}
 		}
 
-		return new Object[] {group, oldFriendlyURL, validPlid};
+		return new Object[] {group, oldFriendlyURL, newPlid};
 	}
 
 	public static void deleteLayout(

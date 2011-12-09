@@ -551,6 +551,11 @@ public interface LayoutLocalService extends PersistedModelLocalService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portal.model.Layout fetchFirstLayout(long groupId,
+		boolean privateLayout, long parentLayoutId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	/**
 	* Returns the layout matching the universally unique identifier and group
 	* ID
@@ -624,12 +629,6 @@ public interface LayoutLocalService extends PersistedModelLocalService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.Layout getFriendlyURLLayout(long groupId,
 		boolean privateLayout, java.lang.String friendlyURL)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public com.liferay.portal.model.Layout getFirstLayout(long groupId,
-		boolean privateLayout, long parentLayoutId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 

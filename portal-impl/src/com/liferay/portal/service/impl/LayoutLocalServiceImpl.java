@@ -730,6 +730,23 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		}
 	}
 
+	public Layout fetchFirstLayout(
+			long groupId, boolean privateLayout, long parentLayoutId)
+		throws SystemException {
+
+		Layout firstLayout = null;
+
+		try {
+			firstLayout = layoutPersistence.findByG_P_P_First(
+				groupId, privateLayout, parentLayoutId,
+				new LayoutPriorityComparator());
+		}
+		catch (NoSuchLayoutException nsle) {
+		}
+
+		return firstLayout;
+	}
+
 	/**
 	 * Returns the layout matching the universally unique identifier and group
 	 * ID
@@ -829,23 +846,6 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		}
 
 		return LayoutConstants.DEFAULT_PLID;
-	}
-
-	public Layout getFirstLayout(
-			long groupId, boolean privateLayout, long parentLayoutId)
-		throws PortalException, SystemException {
-
-		Layout firstLayout = null;
-
-		try {
-			firstLayout = layoutPersistence.findByG_P_P_First(
-				groupId, privateLayout, parentLayoutId,
-				new LayoutPriorityComparator(null, false));
-		}
-		catch (NoSuchLayoutException nsle) {
-		}
-
-		return firstLayout;
 	}
 
 	/**
