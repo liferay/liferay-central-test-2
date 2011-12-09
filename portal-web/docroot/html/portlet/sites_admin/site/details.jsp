@@ -26,14 +26,18 @@ List<LayoutSetPrototype> layoutSetPrototypes = LayoutSetPrototypeServiceUtil.sea
 
 LayoutSet privateLayoutSet = null;
 LayoutSetPrototype privateLayoutSetPrototype = null;
+boolean privateLayoutSetPrototypeLinkEnabled = true;
 
 LayoutSet publicLayoutSet = null;
 LayoutSetPrototype publicLayoutSetPrototype = null;
+boolean publicLayoutSetPrototypeLinkEnabled = true;
 
 if (showPrototypes && (group != null)) {
 	if (group.getPrivateLayoutsPageCount() > 0) {
 		try {
 			privateLayoutSet = LayoutSetLocalServiceUtil.getLayoutSet(group.getGroupId(), true);
+
+			privateLayoutSetPrototypeLinkEnabled = privateLayoutSet.getLayoutSetPrototypeLinkEnabled();
 
 			String layoutSetPrototypeUuid = privateLayoutSet.getLayoutSetPrototypeUuid();
 
@@ -47,6 +51,8 @@ if (showPrototypes && (group != null)) {
 	if (group.getPublicLayoutsPageCount() > 0) {
 		try {
 			publicLayoutSet = LayoutSetLocalServiceUtil.getLayoutSet(group.getGroupId(), false);
+
+			publicLayoutSetPrototypeLinkEnabled = publicLayoutSet.getLayoutSetPrototypeLinkEnabled();
 
 			String layoutSetPrototypeUuid = publicLayoutSet.getLayoutSetPrototypeUuid();
 
@@ -103,106 +109,140 @@ if (showPrototypes && (group != null)) {
 <aui:fieldset>
 	<c:choose>
 		<c:when test="<%= showPrototypes && ((group != null) || (!layoutSetPrototypes.isEmpty() && (layoutSetPrototype == null))) %>">
-			<aui:fieldset label="public-pages">
-				<c:choose>
-					<c:when test="<%= ((group == null) || (group.getPublicLayoutsPageCount() == 0)) && !layoutSetPrototypes.isEmpty() %>">
-						<aui:select helpMessage="site-templates-with-an-incompatible-application-adapter-are-disabled" label="public-pages" name="publicLayoutSetPrototypeId">
-							<aui:option label="none" selected="<%= true %>" value="" />
+			<liferay-ui:panel-container extended="<%= false %>">
+				<liferay-ui:panel defaultState='<%= (group.getPublicLayoutsPageCount() > 0) ? "open" : "closed" %>' collapsible="<%= true %>" title="public-pages">
+                    <c:choose>
+                        <c:when test="<%= ((group == null) || (group.getPublicLayoutsPageCount() == 0)) && !layoutSetPrototypes.isEmpty() %>">
+                            <aui:select helpMessage="site-templates-with-an-incompatible-application-adapter-are-disabled" label="public-pages" name="publicLayoutSetPrototypeId">
+                                <aui:option label="none" selected="<%= true %>" value="" />
 
-							<%
-							for (LayoutSetPrototype curLayoutSetPrototype : layoutSetPrototypes) {
-								UnicodeProperties settingsProperties = curLayoutSetPrototype.getSettingsProperties();
+                                <%
+                                for (LayoutSetPrototype curLayoutSetPrototype : layoutSetPrototypes) {
+                                    UnicodeProperties settingsProperties = curLayoutSetPrototype.getSettingsProperties();
 
-								String servletContextName = settingsProperties.getProperty("customJspServletContextName", StringPool.BLANK);
-							%>
+                                    String servletContextName = settingsProperties.getProperty("customJspServletContextName", StringPool.BLANK);
+                                %>
 
-								<aui:option data-servletContextName="<%= servletContextName %>" value="<%= curLayoutSetPrototype.getLayoutSetPrototypeId() %>"><%= HtmlUtil.escape(curLayoutSetPrototype.getName(user.getLanguageId())) %></aui:option>
+                                    <aui:option data-servletContextName="<%= servletContextName %>" value="<%= curLayoutSetPrototype.getLayoutSetPrototypeId() %>"><%= HtmlUtil.escape(curLayoutSetPrototype.getName(user.getLanguageId())) %></aui:option>
 
-							<%
-							}
-							%>
+                                <%
+                                }
+                                %>
 
-						</aui:select>
-					</c:when>
-					<c:otherwise>
-						<c:if test="<%= (publicLayoutSetPrototype != null) %>">
-							<liferay-ui:message arguments="<%= new Object[] {publicLayoutSetPrototype.getName(locale)} %>" key="these-pages-are-linked-to-site-template-x" />
-						</c:if>
+                            </aui:select>
 
-						<c:choose>
-							<c:when test="<%= (group != null) && (group.getPublicLayoutsPageCount() > 0) %>">
-								<liferay-portlet:actionURL var="publicPagesURL" portletName="<%= PortletKeys.MY_SITES %>">
-									<portlet:param name="struts_action" value="/my_sites/view" />
-									<portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
-									<portlet:param name="privateLayout" value="<%= Boolean.FALSE.toString() %>" />
-								</liferay-portlet:actionURL>
+                            <c:choose>
+                                <c:when test="<%= PortalPermissionUtil.contains(permissionChecker, ActionKeys.UNLINK_LAYOUT_SET_PROTOTYPE)%>">
+                                    <aui:input label="keep-a-link-to-the-site-template" name="publicLayoutSetPrototypeLinkEnabled" type="checkbox" value="<%= publicLayoutSetPrototypeLinkEnabled %>" />
+                                </c:when>
+                                <c:otherwise>
+                                    <aui:input name="publicLayoutSetPrototypeLinkEnabled" type="hidden" value="<%= true %>" />
+                                </c:otherwise>
+                            </c:choose>
+                        </c:when>
+                        <c:otherwise>
+                            <c:choose>
+                                <c:when test="<%= (group != null) && (group.getPublicLayoutsPageCount() > 0) %>">
+                                    <liferay-portlet:actionURL var="publicPagesURL" portletName="<%= PortletKeys.MY_SITES %>">
+                                        <portlet:param name="struts_action" value="/my_sites/view" />
+                                        <portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
+                                        <portlet:param name="privateLayout" value="<%= Boolean.FALSE.toString() %>" />
+                                    </liferay-portlet:actionURL>
 
-								<liferay-ui:icon
-									image="view"
-									label="<%= true %>"
-									message="open-public-pages"
-									method="get"
-									target="_blank"
-									url="<%= publicPagesURL.toString() %>"
-								/>
-							</c:when>
-							<c:otherwise>
-								<liferay-ui:message key="this-site-does-not-have-any-public-pages" />
-							</c:otherwise>
-						</c:choose>
-					</c:otherwise>
-				</c:choose>
-			</aui:fieldset>
-			<aui:fieldset label="private-pages">
-				<c:choose>
-					<c:when test="<%= ((group == null) || (group.getPrivateLayoutsPageCount() == 0)) && !layoutSetPrototypes.isEmpty() %>">
-						<aui:select helpMessage="site-templates-with-an-incompatible-application-adapter-are-disabled" label="private-pages" name="privateLayoutSetPrototypeId">
-							<aui:option label="none" selected="<%= true %>" value="" />
+                                    <liferay-ui:icon
+                                        image="view"
+                                        label="<%= true %>"
+                                        message="open-public-pages"
+                                        method="get"
+                                        target="_blank"
+                                        url="<%= publicPagesURL.toString() %>"
+                                    />
 
-							<%
-							for (LayoutSetPrototype curLayoutSetPrototype : layoutSetPrototypes) {
-								UnicodeProperties settingsProperties = curLayoutSetPrototype.getSettingsProperties();
+                                    <c:choose>
+                                        <c:when test="<%= (publicLayoutSetPrototype != null) && PortalPermissionUtil.contains(permissionChecker, ActionKeys.UNLINK_LAYOUT_SET_PROTOTYPE)%>">
+                                            <aui:input label='<%= LanguageUtil.format(pageContext, "keep-a-link-to-the-site-template-x", publicLayoutSetPrototype.getName(user.getLanguageId())) %>' name="publicLayoutSetPrototypeLinkEnabled" type="checkbox" value="<%= publicLayoutSetPrototypeLinkEnabled %>" />
+                                        </c:when>
+                                        <c:when test="<%= publicLayoutSetPrototype != null %>">
+                                            <liferay-ui:message arguments="<%= new Object[] {publicLayoutSetPrototype.getName(locale)} %>" key="these-pages-are-linked-to-site-template-x" />
 
-								String servletContextName = settingsProperties.getProperty("customJspServletContextName", StringPool.BLANK);
-							%>
+                                            <aui:input name="layoutSetPrototypeLinkEnabled" type="hidden" value="<%= true %>" />
+                                        </c:when>
+                                    </c:choose>
+                                </c:when>
+                                <c:otherwise>
+                                    <liferay-ui:message key="this-site-does-not-have-any-public-pages" />
+                                </c:otherwise>
+                            </c:choose>
+                        </c:otherwise>
+                    </c:choose>
+                </liferay-ui:panel>
+                <liferay-ui:panel defaultState='<%= (group.getPrivateLayoutsPageCount() > 0) ? "open" : "closed" %>' collapsible="<%= true %>" title="private-pages">
+                    <c:choose>
+                        <c:when test="<%= ((group == null) || (group.getPrivateLayoutsPageCount() == 0)) && !layoutSetPrototypes.isEmpty() %>">
+                            <aui:select helpMessage="site-templates-with-an-incompatible-application-adapter-are-disabled" label="private-pages" name="privateLayoutSetPrototypeId">
+                                <aui:option label="none" selected="<%= true %>" value="" />
 
-								<aui:option data-servletContextName="<%= servletContextName %>" value="<%= curLayoutSetPrototype.getLayoutSetPrototypeId() %>"><%= HtmlUtil.escape(curLayoutSetPrototype.getName(user.getLanguageId())) %></aui:option>
+                                <%
+                                for (LayoutSetPrototype curLayoutSetPrototype : layoutSetPrototypes) {
+                                    UnicodeProperties settingsProperties = curLayoutSetPrototype.getSettingsProperties();
 
-							<%
-							}
-							%>
+                                    String servletContextName = settingsProperties.getProperty("customJspServletContextName", StringPool.BLANK);
+                                %>
 
-						</aui:select>
-					</c:when>
-					<c:otherwise>
-						<c:if test="<%= (privateLayoutSetPrototype != null) %>">
-							<liferay-ui:message arguments="<%= new Object[] {privateLayoutSetPrototype.getName(locale)} %>" key="these-pages-are-linked-to-site-template-x" />
-						</c:if>
+                                    <aui:option data-servletContextName="<%= servletContextName %>" value="<%= curLayoutSetPrototype.getLayoutSetPrototypeId() %>"><%= HtmlUtil.escape(curLayoutSetPrototype.getName(user.getLanguageId())) %></aui:option>
 
-						<c:choose>
-							<c:when test="<%= (group != null) && (group.getPrivateLayoutsPageCount() > 0) %>">
-								<liferay-portlet:actionURL var="privatePagesURL" portletName="<%= PortletKeys.MY_SITES %>">
-										<portlet:param name="struts_action" value="/my_sites/view" />
-										<portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
-										<portlet:param name="privateLayout" value="<%= Boolean.TRUE.toString() %>" />
-								</liferay-portlet:actionURL>
+                                <%
+                                }
+                                %>
 
-								<liferay-ui:icon
-									image="view"
-									label="<%= true %>"
-									message="open-private-pages"
-									method="get"
-									target="_blank"
-									url="<%= privatePagesURL.toString() %>"
-								/>
-							</c:when>
-							<c:otherwise>
-								<liferay-ui:message key="this-site-does-not-have-any-private-pages" />
-							</c:otherwise>
-						</c:choose>
-					</c:otherwise>
-				</c:choose>
-			</aui:fieldset>
+                            </aui:select>
+
+                            <c:choose>
+                                <c:when test="<%= PortalPermissionUtil.contains(permissionChecker, ActionKeys.UNLINK_LAYOUT_SET_PROTOTYPE)%>">
+                                    <aui:input helpMessage="enable-the-link-to-the-site-template-so-that-changes-done-to-the-template-are-propagate-to-the-site" label="keep-a-link-to-the-site-template" name="privateLayoutSetPrototypeLinkEnabled" type="checkbox" value="<%= privateLayoutSetPrototypeLinkEnabled %>" />
+                                </c:when>
+                                <c:otherwise>
+                                    <aui:input name="privateLayoutSetPrototypeLinkEnabled" type="hidden" value="<%= true %>" />
+                                </c:otherwise>
+                            </c:choose>
+                        </c:when>
+                        <c:otherwise>
+                            <c:choose>
+                                <c:when test="<%= (group != null) && (group.getPrivateLayoutsPageCount() > 0) %>">
+                                    <liferay-portlet:actionURL var="privatePagesURL" portletName="<%= PortletKeys.MY_SITES %>">
+                                        <portlet:param name="struts_action" value="/my_sites/view" />
+                                        <portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
+                                        <portlet:param name="privateLayout" value="<%= Boolean.TRUE.toString() %>" />
+                                    </liferay-portlet:actionURL>
+
+                                    <liferay-ui:icon
+                                        image="view"
+                                        label="<%= true %>"
+                                        message="open-private-pages"
+                                        method="get"
+                                        target="_blank"
+                                        url="<%= privatePagesURL.toString() %>"
+                                    />
+
+                                    <c:choose>
+                                        <c:when test="<%= (privateLayoutSetPrototype != null) && PortalPermissionUtil.contains(permissionChecker, ActionKeys.UNLINK_LAYOUT_SET_PROTOTYPE)%>">
+                                            <aui:input helpMessage="enable-the-link-to-the-site-template-so-that-changes-done-to-the-template-are-propagate-to-the-site" label='<%= LanguageUtil.format(pageContext, "keep-a-link-to-the-site-template-x", privateLayoutSetPrototype.getName(user.getLanguageId())) %>' name="privateLayoutSetPrototypeLinkEnabled" type="checkbox" value="<%= privateLayoutSetPrototypeLinkEnabled %>" />
+                                        </c:when>
+                                        <c:when test="<%= privateLayoutSetPrototype != null %>">
+                                            <liferay-ui:message arguments="<%= new Object[] {privateLayoutSetPrototype.getName(locale)} %>" key="these-pages-are-linked-to-site-template-x" />
+
+                                            <aui:input name="layoutSetPrototypeLinkEnabled" type="hidden" value="<%= true %>" />
+                                        </c:when>
+                                    </c:choose>
+                                </c:when>
+                                <c:otherwise>
+                                    <liferay-ui:message key="this-site-does-not-have-any-private-pages" />
+                                </c:otherwise>
+                            </c:choose>
+                        </c:otherwise>
+                    </c:choose>
+                </liferay-ui:panel>
+			</liferay-ui:panel-container>
 
 			<%
 			Set<String> servletContextNames = CustomJspRegistryUtil.getServletContextNames();
@@ -242,14 +282,19 @@ if (showPrototypes && (group != null)) {
 			<aui:fieldset label="pages">
 				<aui:input name="layoutSetPrototypeId" type="hidden" value="<%= layoutSetPrototype.getLayoutSetPrototypeId() %>" />
 
-				<div class="portlet-msg-info">
-					<liferay-ui:message key="select-whether-the-pages-of-the-site-template-x-will-be-copied-as-public-or-as-private-pages" arguments="<%= new String[] {layoutSetPrototype.getName(user.getLanguageId())} %>"/>
-				</div>
+				<aui:field-wrapper label="copy-as">
+					<aui:input checked="<%= true %>" helpMessage='<%= LanguageUtil.format(pageContext, "select-this-to-copy-the-pages-of-the-site-template-x-as-private-pages-for-this-site", layoutSetPrototype.getName(user.getLanguageId())) %>' label="public-pages" name="layoutSetVisibility" type="radio" value="0" />
+					<aui:input helpMessage='<%= LanguageUtil.format(pageContext, "select-this-to-copy-the-pages-of-the-site-template-x-as-private-pages-for-this-site", layoutSetPrototype.getName(user.getLanguageId())) %>' label="private-pages" name="layoutSetVisibility" type="radio" value="1" />
+				</aui:field-wrapper>
 
-				<aui:select label="" name="layoutSetVisibility">
-					<aui:option label="public-pages" value="0" />
-					<aui:option label="private-pages" value="1" />
-				</aui:select>
+				<c:choose>
+					<c:when test="<%= PortalPermissionUtil.contains(permissionChecker, ActionKeys.UNLINK_LAYOUT_SET_PROTOTYPE)%>">
+						<aui:input helpMessage="keep-the-link-so-that-changes-done-to-the-site-template-are-propagated-to-the-site" label="keep-a-link-to-the-site-template" name="layoutSetPrototypeLinkEnabled" type="checkbox" value="<%= true %>" />
+					</c:when>
+					<c:otherwise>
+						<aui:input name="layoutSetPrototypeLinkEnabled" type="hidden" value="<%= true %>" />
+					</c:otherwise>
+				</c:choose>
 			</aui:fieldset>
 		</c:when>
 	</c:choose>

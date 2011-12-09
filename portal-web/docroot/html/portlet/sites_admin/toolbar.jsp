@@ -77,16 +77,7 @@ String toolbarItem = ParamUtil.getString(request, "toolbarItem", "view-all");
 
 					<%
 					}
-
-					addSiteURL.setParameter("layoutSetPrototypeId", "0");
 					%>
-
-					<liferay-ui:icon
-						image="site_icon"
-						message="site-with-public-and-private-pages"
-						method="get"
-						url='<%= addSiteURL.toString() %>'
-					/>
 
 					<c:if test="<%= PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_LAYOUT_SET_PROTOTYPE) %>">
 						<liferay-portlet:renderURL varImpl="manageSiteTemplateURL" portletName="<%= PortletKeys.LAYOUT_SET_PROTOTYPE %>">
