@@ -15,7 +15,6 @@
 package com.liferay.portalweb.portal.dbupgrade.viewsampledatalatest.serveradministration.executegeneratecustomroles;
 
 import com.liferay.portalweb.portal.BaseTestCase;
-import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * @author Brian Wing Shun Chan
