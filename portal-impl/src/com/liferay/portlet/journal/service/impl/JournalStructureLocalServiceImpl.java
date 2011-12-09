@@ -502,7 +502,7 @@ public class JournalStructureLocalServiceImpl
 			return parentStructure;
 		}
 
-		Group group = groupLocalService.getGroup(groupId);
+		Group group = groupPersistence.findByPrimaryKey(groupId);
 
 		Group companyGroup = groupLocalService.getCompanyGroup(
 			group.getCompanyId());
