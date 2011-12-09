@@ -143,9 +143,8 @@ public class SQLTransformer {
 		else if (_vendorFirebird || _vendorInterbase) {
 			return matcher.replaceAll("BIN_AND($1, $2)");
 		}
-		else if (
-			_vendorMySQL || _vendorPostgreSQL || _vendorSQLServer ||
-			_vendorSybase) {
+		else if (_vendorMySQL || _vendorPostgreSQL || _vendorSQLServer ||
+				 _vendorSybase) {
 
 			return matcher.replaceAll("($1 & $2)");
 		}
