@@ -43,7 +43,7 @@ public class LockTable {
 	public static final String TABLE_SQL_DROP = "drop table Lock_";
 
 	public static final String[] TABLE_SQL_ADD_INDEXES = {
-		"create index IX_228562AD on Lock_ (className, key_)",
+		"create unique index IX_228562AD on Lock_ (className, key_)",
 		"create index IX_E3F1286B on Lock_ (expirationDate)",
 		"create index IX_13C5CD3A on Lock_ (uuid_)"
 	};
