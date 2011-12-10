@@ -17,10 +17,10 @@
 <%@ include file="/html/portlet/sites_admin/init.jsp" %>
 
 <%
-Group liveGroup = (Group)request.getAttribute("site.liveGroup");
 Group group = (Group)request.getAttribute("site.group");
+Group liveGroup = (Group)request.getAttribute("site.liveGroup");
 LayoutSetPrototype layoutSetPrototype = (LayoutSetPrototype)request.getAttribute("site.layoutSetPrototype");
-Boolean showPrototypes = (Boolean)request.getAttribute("site.showPrototypes");
+boolean showPrototypes = GetterUtil.getBoolean(request.getAttribute("site.showPrototypes"));
 
 List<LayoutSetPrototype> layoutSetPrototypes = LayoutSetPrototypeServiceUtil.search(company.getCompanyId(), Boolean.TRUE, null);
 
@@ -48,6 +48,7 @@ if (showPrototypes && (group != null)) {
 		catch (Exception e) {
 		}
 	}
+
 	if (group.getPublicLayoutsPageCount() > 0) {
 		try {
 			publicLayoutSet = LayoutSetLocalServiceUtil.getLayoutSet(group.getGroupId(), false);
@@ -132,7 +133,7 @@ if (showPrototypes && (group != null)) {
                             </aui:select>
 
                             <c:choose>
-                                <c:when test="<%= PortalPermissionUtil.contains(permissionChecker, ActionKeys.UNLINK_LAYOUT_SET_PROTOTYPE)%>">
+                                <c:when test="<%= PortalPermissionUtil.contains(permissionChecker, ActionKeys.UNLINK_LAYOUT_SET_PROTOTYPE) %>">
                                     <aui:input label="keep-a-link-to-the-site-template" name="publicLayoutSetPrototypeLinkEnabled" type="checkbox" value="<%= publicLayoutSetPrototypeLinkEnabled %>" />
                                 </c:when>
                                 <c:otherwise>
@@ -159,7 +160,7 @@ if (showPrototypes && (group != null)) {
                                     />
 
                                     <c:choose>
-                                        <c:when test="<%= (publicLayoutSetPrototype != null) && PortalPermissionUtil.contains(permissionChecker, ActionKeys.UNLINK_LAYOUT_SET_PROTOTYPE)%>">
+                                        <c:when test="<%= (publicLayoutSetPrototype != null) && PortalPermissionUtil.contains(permissionChecker, ActionKeys.UNLINK_LAYOUT_SET_PROTOTYPE) %>">
                                             <aui:input label='<%= LanguageUtil.format(pageContext, "keep-a-link-to-the-site-template-x", publicLayoutSetPrototype.getName(user.getLanguageId())) %>' name="publicLayoutSetPrototypeLinkEnabled" type="checkbox" value="<%= publicLayoutSetPrototypeLinkEnabled %>" />
                                         </c:when>
                                         <c:when test="<%= publicLayoutSetPrototype != null %>">
@@ -198,7 +199,7 @@ if (showPrototypes && (group != null)) {
                             </aui:select>
 
                             <c:choose>
-                                <c:when test="<%= PortalPermissionUtil.contains(permissionChecker, ActionKeys.UNLINK_LAYOUT_SET_PROTOTYPE)%>">
+                                <c:when test="<%= PortalPermissionUtil.contains(permissionChecker, ActionKeys.UNLINK_LAYOUT_SET_PROTOTYPE) %>">
                                     <aui:input helpMessage="enable-the-link-to-the-site-template-so-that-changes-done-to-the-template-are-propagate-to-the-site" label="keep-a-link-to-the-site-template" name="privateLayoutSetPrototypeLinkEnabled" type="checkbox" value="<%= privateLayoutSetPrototypeLinkEnabled %>" />
                                 </c:when>
                                 <c:otherwise>
@@ -225,7 +226,7 @@ if (showPrototypes && (group != null)) {
                                     />
 
                                     <c:choose>
-                                        <c:when test="<%= (privateLayoutSetPrototype != null) && PortalPermissionUtil.contains(permissionChecker, ActionKeys.UNLINK_LAYOUT_SET_PROTOTYPE)%>">
+                                        <c:when test="<%= (privateLayoutSetPrototype != null) && PortalPermissionUtil.contains(permissionChecker, ActionKeys.UNLINK_LAYOUT_SET_PROTOTYPE) %>">
                                             <aui:input helpMessage="enable-the-link-to-the-site-template-so-that-changes-done-to-the-template-are-propagate-to-the-site" label='<%= LanguageUtil.format(pageContext, "keep-a-link-to-the-site-template-x", privateLayoutSetPrototype.getName(user.getLanguageId())) %>' name="privateLayoutSetPrototypeLinkEnabled" type="checkbox" value="<%= privateLayoutSetPrototypeLinkEnabled %>" />
                                         </c:when>
                                         <c:when test="<%= privateLayoutSetPrototype != null %>">
@@ -288,8 +289,8 @@ if (showPrototypes && (group != null)) {
 				</aui:field-wrapper>
 
 				<c:choose>
-					<c:when test="<%= PortalPermissionUtil.contains(permissionChecker, ActionKeys.UNLINK_LAYOUT_SET_PROTOTYPE)%>">
-						<aui:input helpMessage="keep-the-link-so-that-changes-done-to-the-site-template-are-propagated-to-the-site" label="keep-a-link-to-the-site-template" name="layoutSetPrototypeLinkEnabled" type="checkbox" value="<%= true %>" />
+					<c:when test="<%= PortalPermissionUtil.contains(permissionChecker, ActionKeys.UNLINK_LAYOUT_SET_PROTOTYPE) %>">
+						<aui:input helpMessage="keep-a-link-to-the-site-template-help" label="keep-a-link-to-the-site-template" name="layoutSetPrototypeLinkEnabled" type="checkbox" value="<%= true %>" />
 					</c:when>
 					<c:otherwise>
 						<aui:input name="layoutSetPrototypeLinkEnabled" type="hidden" value="<%= true %>" />

@@ -466,24 +466,26 @@ public class EditGroupAction extends PortletAction {
 		}
 		else {
 			LayoutSet privateLayoutSet = liveGroup.getPrivateLayoutSet();
-			LayoutSet publicLayoutSet = liveGroup.getPublicLayoutSet();
 
 			boolean privateLayoutSetPrototypeLinkEnabled = ParamUtil.getBoolean(
 				serviceContext, "privateLayoutSetPrototypeLinkEnabled");
-			boolean publicLayoutSetPrototypeLinkEnabled = ParamUtil.getBoolean(
-				serviceContext, "publicLayoutSetPrototypeLinkEnabled");
 
 			if (privateLayoutSetPrototypeLinkEnabled !=
-				privateLayoutSet.getLayoutSetPrototypeLinkEnabled()) {
+					privateLayoutSet.getLayoutSetPrototypeLinkEnabled()) {
 
-				LayoutSetServiceUtil.updateLayoutSetPrototypeLink(
+				LayoutSetServiceUtil.updateLayoutSetPrototypeLinkEnabled(
 					liveGroupId, true, privateLayoutSetPrototypeLinkEnabled);
 			}
 
-			if (publicLayoutSetPrototypeLinkEnabled !=
-				publicLayoutSet.getLayoutSetPrototypeLinkEnabled()) {
+			boolean publicLayoutSetPrototypeLinkEnabled = ParamUtil.getBoolean(
+				serviceContext, "publicLayoutSetPrototypeLinkEnabled");
 
-				LayoutSetServiceUtil.updateLayoutSetPrototypeLink(
+			LayoutSet publicLayoutSet = liveGroup.getPublicLayoutSet();
+
+			if (publicLayoutSetPrototypeLinkEnabled !=
+					publicLayoutSet.getLayoutSetPrototypeLinkEnabled()) {
+
+				LayoutSetServiceUtil.updateLayoutSetPrototypeLinkEnabled(
 					liveGroupId, false, publicLayoutSetPrototypeLinkEnabled);
 			}
 		}

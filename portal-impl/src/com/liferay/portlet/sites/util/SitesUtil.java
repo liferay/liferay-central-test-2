@@ -583,8 +583,8 @@ public class SitesUtil {
 			PermissionThreadLocal.getPermissionChecker();
 
 		if ((permissionChecker == null) ||
-		    !PortalPermissionUtil.contains(
-			    permissionChecker, ActionKeys.UNLINK_LAYOUT_SET_PROTOTYPE)) {
+			!PortalPermissionUtil.contains(
+				permissionChecker, ActionKeys.UNLINK_LAYOUT_SET_PROTOTYPE)) {
 
 			return;
 		}
@@ -602,8 +602,7 @@ public class SitesUtil {
 				PortletDataHandlerKeys.LAYOUT_SET_PROTOTYPE_LINK_ENABLED,
 				new String[] {
 					String.valueOf(privateLayoutSetPrototypeLinkEnabled)
-				}
-			);
+				});
 		}
 		else {
 			boolean publicLayoutSetPrototypeLinkEnabled = ParamUtil.getBoolean(
@@ -618,8 +617,7 @@ public class SitesUtil {
 				PortletDataHandlerKeys.LAYOUT_SET_PROTOTYPE_LINK_ENABLED,
 				new String[] {
 					String.valueOf(publicLayoutSetPrototypeLinkEnabled)
-				}
-			);
+				});
 		}
 	}
 

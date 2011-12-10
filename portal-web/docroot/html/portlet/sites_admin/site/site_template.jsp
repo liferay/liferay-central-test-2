@@ -47,7 +47,7 @@ if (Validator.isNotNull(publicLayoutSet.getLayoutSetPrototypeUuid())) {
 
 <c:if test="<%= (publicLayoutSetPrototype == null) && (privateLayoutSetPrototype == null) %>">
 	<div class="portlet-msg-info">
-		<liferay-ui:message key="this-site-is-not-related-to-any-site-template" />
+		<liferay-ui:message key="this-site-is-not-related-to-a-site-template" />
 	</div>
 </c:if>
 

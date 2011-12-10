@@ -29,12 +29,12 @@ import java.io.InputStream;
  */
 public class LayoutSetServiceImpl extends LayoutSetServiceBaseImpl {
 
-	public void updateLayoutSetPrototypeLink(
+	public void updateLayoutSetPrototypeLinkEnabled(
 			long groupId, boolean privateLayout,
 			boolean layoutSetPrototypeLinkEnabled)
 		throws PortalException, SystemException {
 
-		layoutSetLocalService.updateLayoutSetPrototypeLink(
+		layoutSetLocalService.updateLayoutSetPrototypeLinkEnabled(
 			groupId, privateLayout, layoutSetPrototypeLinkEnabled);
 	}
 	public void updateLogo(
