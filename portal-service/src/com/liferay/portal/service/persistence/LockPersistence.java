@@ -355,8 +355,8 @@ public interface LockPersistence extends BasePersistence<Lock> {
 	* @throws com.liferay.portal.NoSuchLockException if a matching lock could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public com.liferay.portal.model.Lock findByC_K(java.lang.String className,
-		java.lang.String key, java.lang.String owner)
+	public com.liferay.portal.model.Lock findByC_K_O(
+		java.lang.String className, java.lang.String key, java.lang.String owner)
 		throws com.liferay.portal.NoSuchLockException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -369,7 +369,7 @@ public interface LockPersistence extends BasePersistence<Lock> {
 	* @return the matching lock, or <code>null</code> if a matching lock could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public com.liferay.portal.model.Lock fetchByC_K(
+	public com.liferay.portal.model.Lock fetchByC_K_O(
 		java.lang.String className, java.lang.String key, java.lang.String owner)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
@@ -383,7 +383,7 @@ public interface LockPersistence extends BasePersistence<Lock> {
 	* @return the matching lock, or <code>null</code> if a matching lock could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public com.liferay.portal.model.Lock fetchByC_K(
+	public com.liferay.portal.model.Lock fetchByC_K_O(
 		java.lang.String className, java.lang.String key,
 		java.lang.String owner, boolean retrieveFromCache)
 		throws com.liferay.portal.kernel.exception.SystemException;
@@ -467,7 +467,7 @@ public interface LockPersistence extends BasePersistence<Lock> {
 	* @param owner the owner
 	* @throws SystemException if a system exception occurred
 	*/
-	public void removeByC_K(java.lang.String className, java.lang.String key,
+	public void removeByC_K_O(java.lang.String className, java.lang.String key,
 		java.lang.String owner)
 		throws com.liferay.portal.NoSuchLockException,
 			com.liferay.portal.kernel.exception.SystemException;
@@ -520,7 +520,7 @@ public interface LockPersistence extends BasePersistence<Lock> {
 	* @return the number of matching locks
 	* @throws SystemException if a system exception occurred
 	*/
-	public int countByC_K(java.lang.String className, java.lang.String key,
+	public int countByC_K_O(java.lang.String className, java.lang.String key,
 		java.lang.String owner)
 		throws com.liferay.portal.kernel.exception.SystemException;
 

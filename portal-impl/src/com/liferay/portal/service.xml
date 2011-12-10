@@ -882,7 +882,7 @@
 			<finder-column name="className" />
 			<finder-column name="key" />
 		</finder>
-		<finder name="C_K" return-type="Lock" unique="true">
+		<finder name="C_K_O" return-type="Lock" unique="true">
 			<finder-column name="className" />
 			<finder-column name="key" />
 			<finder-column name="owner" />
