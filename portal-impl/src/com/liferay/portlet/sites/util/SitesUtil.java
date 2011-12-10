@@ -31,7 +31,6 @@ import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.LayoutSetPrototype;
-import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.impl.LayoutTypePortletImpl;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
@@ -445,7 +444,7 @@ public class SitesUtil {
 			parameterMap, inputStream);
 	}
 
-	public static boolean isLayoutsUpdateable(LayoutSet layoutSet) {
+	public static boolean isLayoutSetPrototypeUpdateable(LayoutSet layoutSet) {
 		if (!layoutSet.isLayoutSetPrototypeLinkEnabled()) {
 			return true;
 		}
@@ -527,40 +526,19 @@ public class SitesUtil {
 				 layoutSet.isLayoutSetPrototypeLinkEnabled()) &&
 				Validator.isNotNull(layout.getSourcePrototypeLayoutUuid())) {
 
-				LayoutTypePortletImpl layoutTypePortlet =
-					new LayoutTypePortletImpl(layout);
+				boolean layoutSetPrototypeUpdateable =
+					isLayoutSetPrototypeUpdateable(layoutSet);
 
-				return isLayoutUpdateable(layoutTypePortlet);
-			}
-		}
-		catch (Exception e) {
-			if (_log.isDebugEnabled()) {
-				_log.debug(e, e);
-			}
-		}
-
-		return true;
-	}
-
-	public static boolean isLayoutUpdateable(
-		LayoutTypePortlet layoutTypePortlet) {
-
-		Layout layout = layoutTypePortlet.getLayout();
-
-		try {
-			LayoutSet layoutSet = layout.getLayoutSet();
-
-			if (layout.isLayoutPrototypeLinkEnabled() ||
-				layoutSet.isLayoutSetPrototypeLinkEnabled()) {
-
-				boolean layoutsUpdateable = isLayoutsUpdateable(layoutSet);
-
-				if (!layoutsUpdateable) {
+				if (!layoutSetPrototypeUpdateable) {
 					return false;
 				}
 
-				String layoutUpdateable = layoutTypePortlet.getTemplateProperty(
-					"layoutUpdateable");
+				LayoutTypePortletImpl layoutTypePortlet =
+					new LayoutTypePortletImpl(layout);
+
+				String layoutUpdateable =
+					layoutTypePortlet.getSourcePrototypeLayoutProperty(
+						"layoutUpdateable");
 
 				return GetterUtil.getBoolean(layoutUpdateable, true);
 			}
