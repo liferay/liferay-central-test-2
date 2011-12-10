@@ -85,7 +85,8 @@ public class LockModelImpl extends BaseModelImpl<Lock> implements LockModel {
 	public static long CLASSNAME_COLUMN_BITMASK = 1L;
 	public static long EXPIRATIONDATE_COLUMN_BITMASK = 2L;
 	public static long KEY_COLUMN_BITMASK = 4L;
-	public static long UUID_COLUMN_BITMASK = 8L;
+	public static long OWNER_COLUMN_BITMASK = 8L;
+	public static long UUID_COLUMN_BITMASK = 16L;
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.Lock"));
 
@@ -246,7 +247,17 @@ public class LockModelImpl extends BaseModelImpl<Lock> implements LockModel {
 	}
 
 	public void setOwner(String owner) {
+		_columnBitmask |= OWNER_COLUMN_BITMASK;
+
+		if (_originalOwner == null) {
+			_originalOwner = _owner;
+		}
+
 		_owner = owner;
+	}
+
+	public String getOriginalOwner() {
+		return GetterUtil.getString(_originalOwner);
 	}
 
 	public boolean getInheritable() {
@@ -383,6 +394,8 @@ public class LockModelImpl extends BaseModelImpl<Lock> implements LockModel {
 		lockModelImpl._originalClassName = lockModelImpl._className;
 
 		lockModelImpl._originalKey = lockModelImpl._key;
+
+		lockModelImpl._originalOwner = lockModelImpl._owner;
 
 		lockModelImpl._originalExpirationDate = lockModelImpl._expirationDate;
 
@@ -567,6 +580,7 @@ public class LockModelImpl extends BaseModelImpl<Lock> implements LockModel {
 	private String _key;
 	private String _originalKey;
 	private String _owner;
+	private String _originalOwner;
 	private boolean _inheritable;
 	private Date _expirationDate;
 	private Date _originalExpirationDate;
