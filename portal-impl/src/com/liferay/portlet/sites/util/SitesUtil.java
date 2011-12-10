@@ -575,9 +575,8 @@ public class SitesUtil {
 	}
 
 	protected static void setLayoutSetPrototypeLinkEnabled(
-			Map<String, String[]> parameterMap, LayoutSet targetLayoutSet,
-			ServiceContext serviceContext)
-		throws PortalException, SystemException {
+		Map<String, String[]> parameterMap, LayoutSet targetLayoutSet,
+		ServiceContext serviceContext) {
 
 		PermissionChecker permissionChecker =
 			PermissionThreadLocal.getPermissionChecker();
