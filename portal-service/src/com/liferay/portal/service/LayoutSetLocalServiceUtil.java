@@ -301,12 +301,12 @@ public class LayoutSetLocalServiceUtil {
 				   .getLayoutSetsByLayoutSetPrototypeUuid(layoutSetPrototypeUuid);
 	}
 
-	public static void updateLayoutSetPrototypeLink(long groupId,
+	public static void updateLayoutSetPrototypeLinkEnabled(long groupId,
 		boolean privateLayout, boolean layoutSetPrototypeLinkEnabled)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService()
-			.updateLayoutSetPrototypeLink(groupId, privateLayout,
+			.updateLayoutSetPrototypeLinkEnabled(groupId, privateLayout,
 			layoutSetPrototypeLinkEnabled);
 	}
 

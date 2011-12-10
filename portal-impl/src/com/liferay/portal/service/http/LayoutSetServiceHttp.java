@@ -52,15 +52,15 @@ import com.liferay.portal.service.LayoutSetServiceUtil;
  * @generated
  */
 public class LayoutSetServiceHttp {
-	public static void updateLayoutSetPrototypeLink(
+	public static void updateLayoutSetPrototypeLinkEnabled(
 		HttpPrincipal httpPrincipal, long groupId, boolean privateLayout,
 		boolean layoutSetPrototypeLinkEnabled)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(LayoutSetServiceUtil.class.getName(),
-					"updateLayoutSetPrototypeLink",
-					_updateLayoutSetPrototypeLinkParameterTypes0);
+					"updateLayoutSetPrototypeLinkEnabled",
+					_updateLayoutSetPrototypeLinkEnabledParameterTypes0);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					privateLayout, layoutSetPrototypeLinkEnabled);
@@ -270,7 +270,7 @@ public class LayoutSetServiceHttp {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(LayoutSetServiceHttp.class);
-	private static final Class<?>[] _updateLayoutSetPrototypeLinkParameterTypes0 =
+	private static final Class<?>[] _updateLayoutSetPrototypeLinkEnabledParameterTypes0 =
 		new Class[] { long.class, boolean.class, boolean.class };
 	private static final Class<?>[] _updateLogoParameterTypes1 = new Class[] {
 			long.class, boolean.class, boolean.class, java.io.InputStream.class

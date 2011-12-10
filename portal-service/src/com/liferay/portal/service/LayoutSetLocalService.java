@@ -262,7 +262,7 @@ public interface LayoutSetLocalService extends PersistedModelLocalService {
 		java.lang.String layoutSetPrototypeUuid)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public void updateLayoutSetPrototypeLink(long groupId,
+	public void updateLayoutSetPrototypeLinkEnabled(long groupId,
 		boolean privateLayout, boolean layoutSetPrototypeLinkEnabled)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;

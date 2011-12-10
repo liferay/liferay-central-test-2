@@ -289,11 +289,11 @@ public class LayoutSetLocalServiceWrapper implements LayoutSetLocalService,
 		return _layoutSetLocalService.getLayoutSetsByLayoutSetPrototypeUuid(layoutSetPrototypeUuid);
 	}
 
-	public void updateLayoutSetPrototypeLink(long groupId,
+	public void updateLayoutSetPrototypeLinkEnabled(long groupId,
 		boolean privateLayout, boolean layoutSetPrototypeLinkEnabled)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		_layoutSetLocalService.updateLayoutSetPrototypeLink(groupId,
+		_layoutSetLocalService.updateLayoutSetPrototypeLinkEnabled(groupId,
 			privateLayout, layoutSetPrototypeLinkEnabled);
 	}
 
