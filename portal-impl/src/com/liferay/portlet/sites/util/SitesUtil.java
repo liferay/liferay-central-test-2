@@ -32,6 +32,7 @@ import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.LayoutSetPrototype;
 import com.liferay.portal.model.impl.LayoutTypePortletImpl;
+import com.liferay.portal.model.impl.VirtualLayout;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
@@ -487,6 +488,10 @@ public class SitesUtil {
 		Layout sourcePrototypeLayout =
 			LayoutTypePortletImpl.getSourcePrototypeLayout(layout);
 
+		if (sourcePrototypeLayout == null) {
+			return false;
+		}
+
 		Date layoutModifiedDate = layout.getModifiedDate();
 
 		Date lastCopyDate = null;
@@ -520,6 +525,10 @@ public class SitesUtil {
 
 	public static boolean isLayoutUpdateable(Layout layout) {
 		try {
+			if (layout instanceof VirtualLayout) {
+				return false;
+			}
+
 			LayoutSet layoutSet = layout.getLayoutSet();
 
 			if ((layout.isLayoutPrototypeLinkEnabled() ||
