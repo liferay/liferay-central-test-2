@@ -305,27 +305,27 @@ public class LayoutLocalServiceVirtualLayoutsAdvice
 			return;
 		}
 
-		LayoutSetPrototype layoutSetPrototype =
-			LayoutSetPrototypeLocalServiceUtil.getLayoutSetPrototypeByUuid(
-				layoutSet.getLayoutSetPrototypeUuid());
-
-		LayoutSet layoutSetPrototypeLayoutSet =
-			layoutSetPrototype.getLayoutSet();
-
-		UnicodeProperties layoutSetPrototypeSettingsProperties =
-			layoutSetPrototypeLayoutSet.getSettingsProperties();
-
 		UnicodeProperties settingsProperties =
 			layoutSet.getSettingsProperties();
 
 		long lastMergeTime = GetterUtil.getLong(
 			settingsProperties.getProperty("last-merge-time"));
 
+		LayoutSetPrototype layoutSetPrototype =
+			LayoutSetPrototypeLocalServiceUtil.getLayoutSetPrototypeByUuid(
+				layoutSet.getLayoutSetPrototypeUuid());
+
 		Date modifiedDate = layoutSetPrototype.getModifiedDate();
 
 		if (lastMergeTime >= modifiedDate.getTime()) {
 			return;
 		}
+
+		LayoutSet layoutSetPrototypeLayoutSet =
+			layoutSetPrototype.getLayoutSet();
+
+		UnicodeProperties layoutSetPrototypeSettingsProperties =
+			layoutSetPrototypeLayoutSet.getSettingsProperties();
 
 		int mergeFailCount = GetterUtil.getInteger(
 			layoutSetPrototypeSettingsProperties.getProperty(
@@ -344,25 +344,23 @@ public class LayoutLocalServiceVirtualLayoutsAdvice
 				LayoutLocalServiceVirtualLayoutsAdvice.class.getName(),
 				String.valueOf(layoutSet.getLayoutSetId()), owner, false);
 
-			long lockTimeMillis = lock.getCreateDate().getTime();
-
-			// This double deep checking is on purpose.
+			// Double deep check
 
 			if (!owner.equals(lock.getOwner())) {
-				if (((System.currentTimeMillis() - lockTimeMillis) >=
+				Date createDate = lock.getCreateDate();
+
+				if (((System.currentTimeMillis() - createDate.getTime()) >=
 						PropsValues.LAYOUT_SET_PROTOTYPE_MERGE_LOCK_MAX_TIME)) {
 
-					// If the lock is older than the lock max time, we can try
-					// to gain it for ourselves.
+					// Acquire lock if the lock is older than the lock max time
 
 					lock = LockLocalServiceUtil.lock(
 						LayoutLocalServiceVirtualLayoutsAdvice.class.getName(),
 						String.valueOf(layoutSet.getLayoutSetId()),
 						lock.getOwner(), owner, false);
 
-					// We have to check to see of the grabbing the lock for
-					// ourselves actually worked. Otherwise, some other process
-					// gained the lock.
+					// Check if acquiring the lock succeeded or if another
+					// process has the lock
 
 					if (!owner.equals(lock.getOwner())) {
 						return;
@@ -402,8 +400,9 @@ public class LayoutLocalServiceVirtualLayoutsAdvice
 			layoutSetPrototypeSettingsProperties.setProperty(
 				"merge-fail-count", String.valueOf(++mergeFailCount));
 
-			LayoutSetUtil.updateImpl(
-				layoutSetPrototypeLayoutSet, false);
+			// Invoke updateImpl so that we do not trigger the listeners
+
+			LayoutSetUtil.updateImpl(layoutSetPrototypeLayoutSet, false);
 		}
 		finally {
 			LockLocalServiceUtil.unlock(
