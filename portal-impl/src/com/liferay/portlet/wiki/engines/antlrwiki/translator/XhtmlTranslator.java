@@ -232,14 +232,14 @@ public class XhtmlTranslator extends XhtmlTranslationVisitor {
 
 			append(_viewPageURL.toString());
 
-			resetWikiPageTitle(_viewPageURL);
+			_viewPageURL.setParameter("title", _wikiPage.getTitle());
 		}
 		else if (_editPageURL != null) {
 			_editPageURL.setParameter("title", pageTitle);
 
 			append(_editPageURL.toString());
 
-			resetWikiPageTitle(_editPageURL);
+			_editPageURL.setParameter("title", _wikiPage.getTitle());
 		}
 	}
 
@@ -260,10 +260,6 @@ public class XhtmlTranslator extends XhtmlTranslationVisitor {
 			new UnformattedHeadingTextVisitor();
 
 		return unformattedHeadingTextVisitor.getUnformattedText(headingNode);
-	}
-
-	protected void resetWikiPageTitle(PortletURL portletURL) {
-		portletURL.setParameter("title", _wikiPage.getTitle());
 	}
 
 	private static final String _HEADING_ANCHOR_PREFIX = "section-";
