@@ -438,7 +438,7 @@ public class LayoutImporter {
 		List<Layout> previousLayouts = LayoutUtil.findByG_P(
 			groupId, privateLayout);
 
-		// Remove layouts that were deleted from the LayoutSetPrototype
+		// Remove layouts that were deleted from the layout set prototype
 
 		if (Validator.isNotNull(layoutSetPrototypeUuid) &&
 			layoutSetPrototypeLinkEnabled) {
@@ -447,22 +447,21 @@ public class LayoutImporter {
 				LayoutSetPrototypeLocalServiceUtil.getLayoutSetPrototypeByUuid(
 					layoutSetPrototypeUuid);
 
-			long layoutSetPrototypeGroupId =
-				layoutSetPrototype.getGroup().getGroupId();
+			Group group = layoutSetPrototype.getGroup();
 
 			for (Layout layout : previousLayouts) {
 				String sourcePrototypeLayoutUuid =
 					layout.getSourcePrototypeLayoutUuid();
 
-				if (Validator.isNotNull(
-						layout.getSourcePrototypeLayoutUuid())) {
+				if (Validator.isNull(layout.getSourcePrototypeLayoutUuid())) {
+					continue;
+				}
 
-					Layout sourcePrototypeLayout = LayoutUtil.fetchByUUID_G(
-						sourcePrototypeLayoutUuid, layoutSetPrototypeGroupId);
+				Layout sourcePrototypeLayout = LayoutUtil.fetchByUUID_G(
+					sourcePrototypeLayoutUuid, group.getGroupId());
 
-					if (sourcePrototypeLayout == null) {
-						LayoutLocalServiceUtil.deleteLayout(layout);
-					}
+				if (sourcePrototypeLayout == null) {
+					LayoutLocalServiceUtil.deleteLayout(layout);
 				}
 			}
 		}
