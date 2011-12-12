@@ -565,10 +565,13 @@ public class SitesUtil {
 
 	public static boolean isUserGroupLayoutSetViewable(
 			PermissionChecker permissionChecker, Group userGroupGroup)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		if (UserLocalServiceUtil.hasUserGroupUser(
-			userGroupGroup.getGroupId(), permissionChecker.getUserId())) {
+				userGroupGroup.getGroupId(), permissionChecker.getUserId()) ||
+			GroupPermissionUtil.contains(
+				permissionChecker, userGroupGroup.getGroupId(),
+				ActionKeys.VIEW)) {
 
 			return true;
 		}

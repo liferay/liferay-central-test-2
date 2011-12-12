@@ -478,8 +478,6 @@ public class LayoutPermissionImpl implements LayoutPermission {
 
 				return true;
 			}
-
-			return false;
 		}
 
 		// Only check the actual Layout if all of the above failed
