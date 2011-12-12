@@ -17,6 +17,12 @@
 <%@ include file="/html/portlet/search/init.jsp" %>
 
 <%
+String redirect = ParamUtil.getString(request, "redirect");
+
+if (Validator.isNotNull(redirect)) {
+	portletDisplay.setURLBack(redirect);
+}
+
 String primarySearch = ParamUtil.getString(request, "primarySearch");
 
 if (Validator.isNotNull(primarySearch)) {
@@ -43,12 +49,6 @@ portletURL.setParameter("keywords", keywords);
 portletURL.setParameter("format", format);
 
 request.setAttribute("search.jsp-portletURL", portletURL);
-
-String redirect = ParamUtil.getString(request, "redirect");
-
-if (Validator.isNotNull(redirect)) {
-	portletDisplay.setURLBack(redirect);
-}
 %>
 
 <liferay-portlet:renderURL varImpl="searchURL">
