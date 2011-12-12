@@ -472,6 +472,15 @@ public class LayoutPermissionImpl implements LayoutPermission {
 				}
 			}
 		}
+		else if (group.isUserGroup()) {
+			if (UserGroupPermissionUtil.contains(
+					permissionChecker, group.getClassPK(), ActionKeys.UPDATE)) {
+
+				return true;
+			}
+
+			return false;
+		}
 
 		// Only check the actual Layout if all of the above failed
 
