@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.kernel.util.ServiceLoader;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -253,9 +254,6 @@ public class OSGiServiceUtil {
 				continue;
 			}
 
-			String bundleVersionString = attributes.getValue(
-				Constants.BUNDLE_VERSION);
-
 			for (String curBundleSymbolicName : bundleSymbolicNames) {
 				if (!bundleSymbolicName.startsWith(curBundleSymbolicName)) {
 					continue;
@@ -273,17 +271,26 @@ public class OSGiServiceUtil {
 					String javaPackage = entry.getKey();
 					Map<String, String> javaPackageMap = entry.getValue();
 
+					StringBundler sb = new StringBundler(4);
+
+					sb.append(javaPackage);
+					sb.append(";version=\"");
+
 					if (javaPackageMap.containsKey("version")) {
 						String version = javaPackageMap.get("version");
 
-						javaPackage = javaPackage.concat(
-							";version=\"").concat(version).concat("\"");
+						sb.append(version);
 					}
 					else {
-						javaPackage = javaPackage.concat(
-							";version=\"").concat(bundleVersionString).concat(
-								"\"");
+						String bundleVersionString = attributes.getValue(
+							Constants.BUNDLE_VERSION);
+
+						sb.append(bundleVersionString);
 					}
+
+					sb.append("\"");
+
+					javaPackage = sb.toString();
 
 					packages.add(javaPackage);
 				}

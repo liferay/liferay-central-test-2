@@ -194,9 +194,7 @@ public class OSGiAutoDeployListener implements AutoDeployListener {
 			return;
 		}
 
-		// Don't start fragment bundles
-
-		Dictionary<String,String> headers = bundle.getHeaders();
+		Dictionary<String, String> headers = bundle.getHeaders();
 
 		if (headers.get(Constants.FRAGMENT_HOST) != null) {
 			return;

@@ -28,8 +28,6 @@ public class ServiceListener implements org.osgi.framework.ServiceListener {
 
 	public void serviceChanged(ServiceEvent serviceEvent) {
 		try {
-			int type = serviceEvent.getType();
-
 			ServiceReference<?> serviceReference =
 				serviceEvent.getServiceReference();
 
@@ -41,16 +39,16 @@ public class ServiceListener implements org.osgi.framework.ServiceListener {
 				return;
 			}
 
-			String message = serviceReference.toString();
+			int type = serviceEvent.getType();
 
 			if (type == ServiceEvent.MODIFIED) {
-				log.info("[MODIFIED] " + message);
+				log.info("[MODIFIED] " + serviceReference.toString());
 			}
 			else if (type == ServiceEvent.REGISTERED) {
-				log.info("[REGISTERED] " + message);
+				log.info("[REGISTERED] " + serviceReference.toString());
 			}
 			else if (type == ServiceEvent.UNREGISTERING) {
-				log.info("[UNREGISTERING] " + message);
+				log.info("[UNREGISTERING] " + serviceReference.toString());
 			}
 		}
 		catch (Exception e) {
