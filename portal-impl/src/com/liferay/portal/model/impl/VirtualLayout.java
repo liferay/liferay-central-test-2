@@ -153,5 +153,4 @@ public class VirtualLayout extends LayoutWrapper {
 	private Layout _sourceLayout;
 	private Group _targetGroup;
 
-
 }
