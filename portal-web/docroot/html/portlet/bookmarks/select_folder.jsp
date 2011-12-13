@@ -111,6 +111,7 @@ if (folder != null) {
 
 	boolean showAddFolderButton = BookmarksFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.ADD_FOLDER);
 	%>
+
 	<aui:button-row>
 		<c:if test="<%= showAddFolderButton %>">
 			<portlet:renderURL var="editFolderURL">
@@ -123,7 +124,7 @@ if (folder != null) {
 		</c:if>
 
 		<%
-		String taglibSelectOnClick = "opener." + renderResponse.getNamespace() + "selectFolder('" + folderId + "','" + folderName + "');window.close();";
+		String taglibSelectOnClick = "opener." + renderResponse.getNamespace() + "selectFolder('" + folderId + "','" + folderName + "'); window.close();";
 		%>
 
 		<aui:button onClick="<%= taglibSelectOnClick %>" value="choose-this-folder" />
