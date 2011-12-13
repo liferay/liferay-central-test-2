@@ -514,66 +514,7 @@ public class CustomSQL {
 		}
 	}
 
-	protected void read(ClassLoader classLoader, String source)
-		throws Exception {
-
-		InputStream is = classLoader.getResourceAsStream(source);
-
-		if (is == null) {
-			return;
-		}
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Loading " + source);
-		}
-
-		Document document = SAXReaderUtil.read(is);
-
-		Element rootElement = document.getRootElement();
-
-		for (Element sqlElement : rootElement.elements("sql")) {
-			String file = sqlElement.attributeValue("file");
-
-			if (Validator.isNotNull(file)) {
-				read(classLoader, file);
-			}
-			else {
-				String id = sqlElement.attributeValue("id");
-				String content = transform(sqlElement.getText());
-
-				content = replaceIsNull(content);
-
-				_sqlPool.put(id, content);
-			}
-		}
-	}
-
-	protected String transform(String sql) {
-		sql = PortalUtil.transformCustomSQL(sql);
-
-		StringBundler sb = new StringBundler();
-
-		try {
-			UnsyncBufferedReader unsyncBufferedReader =
-				new UnsyncBufferedReader(new UnsyncStringReader(sql));
-
-			String line = null;
-
-			while ((line = unsyncBufferedReader.readLine()) != null) {
-				sb.append(line.trim());
-				sb.append(StringPool.SPACE);
-			}
-
-			unsyncBufferedReader.close();
-		}
-		catch (IOException ioe) {
-			return sql;
-		}
-
-		return sb.toString();
-	}
-
-	private void loadCustomSQL() throws SQLException {
+	protected void loadCustomSQL() throws SQLException {
 		Connection con = DataAccess.getConnection();
 
 		String functionIsNull = PortalUtil.getCustomSQLFunctionIsNull();
@@ -693,6 +634,65 @@ public class CustomSQL {
 		catch (Exception e) {
 			_log.error(e, e);
 		}
+	}
+
+	protected void read(ClassLoader classLoader, String source)
+		throws Exception {
+
+		InputStream is = classLoader.getResourceAsStream(source);
+
+		if (is == null) {
+			return;
+		}
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Loading " + source);
+		}
+
+		Document document = SAXReaderUtil.read(is);
+
+		Element rootElement = document.getRootElement();
+
+		for (Element sqlElement : rootElement.elements("sql")) {
+			String file = sqlElement.attributeValue("file");
+
+			if (Validator.isNotNull(file)) {
+				read(classLoader, file);
+			}
+			else {
+				String id = sqlElement.attributeValue("id");
+				String content = transform(sqlElement.getText());
+
+				content = replaceIsNull(content);
+
+				_sqlPool.put(id, content);
+			}
+		}
+	}
+
+	protected String transform(String sql) {
+		sql = PortalUtil.transformCustomSQL(sql);
+
+		StringBundler sb = new StringBundler();
+
+		try {
+			UnsyncBufferedReader unsyncBufferedReader =
+				new UnsyncBufferedReader(new UnsyncStringReader(sql));
+
+			String line = null;
+
+			while ((line = unsyncBufferedReader.readLine()) != null) {
+				sb.append(line.trim());
+				sb.append(StringPool.SPACE);
+			}
+
+			unsyncBufferedReader.close();
+		}
+		catch (IOException ioe) {
+			return sql;
+		}
+
+		return sb.toString();
 	}
 
 	private static final String _GROUP_BY_CLAUSE = " GROUP BY ";
