@@ -208,31 +208,6 @@ public class JavadocFormatter {
 		}
 	}
 
-	private void _addDocletMethodReturnElement(
-			Element methodElement, JavaMethod javaMethod) {
-
-		DocletTag[] returnDocletTags = javaMethod.getTagsByName("return");
-
-		String returnComment = StringPool.BLANK;
-		if (returnDocletTags.length > 0) {
-
-			// initial population of value from tag
-
-			returnComment = returnDocletTags[0].getValue();
-
-			if (Validator.isNull(returnComment)) {
-				returnComment = StringPool.BLANK;
-			}
-		}
-
-		returnComment = _trimMultilineText(returnComment);
-
-		Element returnElement = methodElement.addElement("return");
-
-		Element commentElement = returnElement.addElement("comment");
-		commentElement.addCDATA(returnComment);
-	}
-
 	private String _addDocletTags(
 		Element parentElement, String[] names, String indent) {
 
@@ -302,7 +277,6 @@ public class JavadocFormatter {
 					String elementName = element.elementText("name");
 
 					if (Validator.isNotNull(elementName)) {
-
 						if (Validator.isNotNull(comment)) {
 							comment = elementName + " " + comment;
 						}
@@ -435,7 +409,23 @@ public class JavadocFormatter {
 			return;
 		}
 
-		_addDocletMethodReturnElement(methodElement, javaMethod);
+		Element returnElement = methodElement.addElement("return");
+
+		Element commentElement = returnElement.addElement("comment");
+
+		DocletTag[] returnDocletTags = javaMethod.getTagsByName("return");
+
+		String comment = StringPool.BLANK;
+
+		if (returnDocletTags.length > 0) {
+			DocletTag returnDocletTag = returnDocletTags[0];
+
+			comment = GetterUtil.getString(returnDocletTag.getValue());
+		}
+
+		comment = _trimMultilineText(comment);
+
+		commentElement.addCDATA(comment);
 	}
 
 	private void _addThrowsElement(
@@ -895,12 +885,7 @@ public class JavadocFormatter {
 
 		String comment = methodElement.elementText("comment");
 
-		if (_initializeMissingJavadocs) {
-
-			sb.append(_wrapText(comment, indent + " * "));
-		}
-		else if ((comment != null) && !comment.isEmpty()) {
-
+		if (_initializeMissingJavadocs || Validator.isNotNull(comment)) {
 			sb.append(_wrapText(comment, indent + " * "));
 		}
 
