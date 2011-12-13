@@ -171,17 +171,16 @@ String[][] categorySections = {mainSections};
 					windowState="<%= LiferayWindowState.POP_UP.toString() %>"
 				/>
 
+				<%
+				Group selLayoutGroup = selLayout.getGroup();
+				%>
+
 				<c:choose>
 					<c:when test="<%= !SitesUtil.isLayoutUpdateable(selLayout) %>">
 						<div class="portlet-msg-alert">
 							<liferay-ui:message key="this-page-cannot-be-modified-because-it-is-associated-to-a-site-template-does-not-allow-modifications-to-it" />
 						</div>
 					</c:when>
-
-					<%
-					Group selLayoutGroup = selLayout.getGroup();
-					%>
-
 					<c:when test="<%= (selLayout.getGroupId() != groupId) && (selLayoutGroup.isUserGroup()) %>">
 
 						<%
