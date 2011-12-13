@@ -304,11 +304,11 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 	public String getMimeType() {
 		String mimeType = _document.getContentStreamMimeType();
 
-		if (Validator.isNull(mimeType)) {
-			mimeType = MimeTypesUtil.getContentType(getTitle());
+		if (Validator.isNotNull(mimeType)) {
+			return mimeType;
 		}
 
-		return mimeType;
+		return MimeTypesUtil.getContentType(getTitle());
 	}
 
 	public String getMimeType(String version) {
@@ -318,16 +318,17 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 
 		try {
 			for (Document document : getAllVersions()) {
-				if (version.equals(document.getVersionLabel())) {
-					String mimeType = document.getContentStreamMimeType();
+				if (!version.equals(document.getVersionLabel())) {
+					continue;
+				}
 
-					if (Validator.isNull(mimeType)) {
-						mimeType = MimeTypesUtil.getContentType(
-							document.getName());
-					}
+				String mimeType = document.getContentStreamMimeType();
 
+				if (Validator.isNotNull(mimeType)) {
 					return mimeType;
 				}
+
+				return MimeTypesUtil.getContentType(document.getName());
 			}
 		}
 		catch (PortalException pe) {
