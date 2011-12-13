@@ -303,7 +303,7 @@
 #if ($is_guest_group)
 	#set ($show_site_name = false)
 #else
-	#set ($show_site_name = $getterUtil.getBoolean($layout.layoutSet.getSettingsProperty("showSiteName"), true))	
+	#set ($show_site_name = $getterUtil.getBoolean($layout.layoutSet.getSettingsProperty("showSiteName"), true))
 #end
 
 #set($site_logo = $company_logo)
