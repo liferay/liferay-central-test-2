@@ -24,8 +24,6 @@ String redirect = searchContainer.getIteratorURL().toString();
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
 UserGroup userGroup = (UserGroup)row.getObject();
-
-Group userGroupGroup = userGroup.getGroup();
 %>
 
 <liferay-ui:icon-menu>
@@ -71,6 +69,10 @@ Group userGroupGroup = userGroup.getGroup();
 		/>
 	</c:if>
 
+	<%
+	Group userGroupGroup = userGroup.getGroup();
+	%>
+
 	<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, userGroupGroup.getGroupId(), ActionKeys.MANAGE_LAYOUTS) %>">
 		<portlet:renderURL var="managePagesURL">
 			<portlet:param name="struts_action" value="/users_admin/edit_layouts" />
@@ -95,7 +97,7 @@ Group userGroupGroup = userGroup.getGroup();
 
 		<liferay-ui:icon
 			image="view"
-			message="go-to-the-site-public-pages"
+			message="go-to-the-site's-public-pages"
 			target="_blank"
 			url="<%= viewPublicPagesURL %>"
 		/>
@@ -111,7 +113,7 @@ Group userGroupGroup = userGroup.getGroup();
 
 		<liferay-ui:icon
 			image="view"
-			message="go-to-the-site-private-pages"
+			message="go-to-the-site's-private-pages"
 			target="_blank"
 			url="<%= viewPrivatePagesURL %>"
 		/>

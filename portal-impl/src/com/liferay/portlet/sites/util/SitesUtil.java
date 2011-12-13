@@ -567,11 +567,11 @@ public class SitesUtil {
 			PermissionChecker permissionChecker, Group userGroupGroup)
 		throws PortalException, SystemException {
 
-		if (UserLocalServiceUtil.hasUserGroupUser(
-				userGroupGroup.getGroupId(), permissionChecker.getUserId()) ||
-			GroupPermissionUtil.contains(
+		if (GroupPermissionUtil.contains(
 				permissionChecker, userGroupGroup.getGroupId(),
-				ActionKeys.VIEW)) {
+				ActionKeys.VIEW) ||
+			UserLocalServiceUtil.hasUserGroupUser(
+				userGroupGroup.getGroupId(), permissionChecker.getUserId())) {
 
 			return true;
 		}
