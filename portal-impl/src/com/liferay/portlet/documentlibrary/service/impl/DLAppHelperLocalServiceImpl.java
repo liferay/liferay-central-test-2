@@ -35,7 +35,6 @@ import com.liferay.portlet.asset.NoSuchEntryException;
 import com.liferay.portlet.asset.model.AssetEntry;
 import com.liferay.portlet.asset.model.AssetLink;
 import com.liferay.portlet.asset.model.AssetLinkConstants;
-import com.liferay.portlet.asset.service.AssetEntryLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileEntryConstants;
 import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
@@ -109,7 +108,7 @@ public class DLAppHelperLocalServiceImpl
 			long userId, FileEntry fileEntry, FileVersion fileVersion)
 		throws PortalException, SystemException {
 
-		AssetEntry fileEntryAssetEntry = AssetEntryLocalServiceUtil.fetchEntry(
+		AssetEntry fileEntryAssetEntry = assetEntryLocalService.fetchEntry(
 			DLFileEntryConstants.getClassName(), fileEntry.getFileEntryId());
 
 		long[] assetCategoryIds = new long[0];
@@ -128,10 +127,9 @@ public class DLAppHelperLocalServiceImpl
 				false);
 		}
 
-		AssetEntry fileVersionAssetEntry =
-			AssetEntryLocalServiceUtil.fetchEntry(
-				DLFileEntryConstants.getClassName(),
-				fileVersion.getFileVersionId());
+		AssetEntry fileVersionAssetEntry = assetEntryLocalService.fetchEntry(
+			DLFileEntryConstants.getClassName(),
+			fileVersion.getFileVersionId());
 
 		if ((fileVersionAssetEntry == null) && !fileVersion.isApproved() &&
 			!fileVersion.getVersion().equals(
