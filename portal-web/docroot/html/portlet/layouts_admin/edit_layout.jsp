@@ -184,7 +184,7 @@ String[][] categorySections = {mainSections};
 					<c:when test="<%= (selLayout.getGroupId() != groupId) && (selLayoutGroup.isUserGroup()) %>">
 
 						<%
-						UserGroup userGroup = UserGroupLocalServiceUtil.getUserGroup(selLayoutGroup.getGroupId());
+						UserGroup userGroup = UserGroupLocalServiceUtil.getUserGroup(selLayoutGroup.getClassPK());
 						%>
 
 						<div class="portlet-msg-alert">
