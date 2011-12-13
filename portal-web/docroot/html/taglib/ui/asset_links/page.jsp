@@ -47,7 +47,7 @@ if (assetEntryId > 0) {
 					continue;
 				}
 
-                assetLinkEntry = assetLinkEntry.toEscapedModel();
+				assetLinkEntry = assetLinkEntry.toEscapedModel();
 
 				AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(PortalUtil.getClassName(assetLinkEntry.getClassNameId()));
 
