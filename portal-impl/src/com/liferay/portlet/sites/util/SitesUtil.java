@@ -31,6 +31,7 @@ import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.LayoutSetPrototype;
+import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.impl.LayoutTypePortletImpl;
 import com.liferay.portal.model.impl.VirtualLayout;
 import com.liferay.portal.security.auth.PrincipalException;
@@ -542,8 +543,8 @@ public class SitesUtil {
 					return false;
 				}
 
-				LayoutTypePortletImpl layoutTypePortlet =
-					new LayoutTypePortletImpl(layout);
+				LayoutTypePortlet layoutTypePortlet = new LayoutTypePortletImpl(
+					layout);
 
 				String layoutUpdateable =
 					layoutTypePortlet.getSourcePrototypeLayoutProperty(

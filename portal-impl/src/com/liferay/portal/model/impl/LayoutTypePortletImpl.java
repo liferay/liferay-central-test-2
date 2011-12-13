@@ -585,6 +585,17 @@ public class LayoutTypePortletImpl
 		return _sourcePrototypeLayout;
 	}
 
+	public String getSourcePrototypeLayoutProperty(String key) {
+		if (_sourcePrototypeLayout == null) {
+			return StringPool.BLANK;
+		}
+
+		UnicodeProperties typeSettingsProperties =
+			_sourcePrototypeLayout.getTypeSettingsProperties();
+
+		return typeSettingsProperties.getProperty(key);
+	}
+
 	public String getStateMax() {
 		return getTypeSettingsProperties().getProperty(
 			LayoutTypePortletConstants.STATE_MAX);
@@ -604,17 +615,6 @@ public class LayoutTypePortletImpl
 	public String getStateMin() {
 		return getTypeSettingsProperties().getProperty(
 			LayoutTypePortletConstants.STATE_MIN);
-	}
-
-	public String getSourcePrototypeLayoutProperty(String key) {
-		if (_sourcePrototypeLayout == null) {
-			return StringPool.BLANK;
-		}
-
-		UnicodeProperties typeSettingsProperties =
-			_sourcePrototypeLayout.getTypeSettingsProperties();
-
-		return typeSettingsProperties.getProperty(key);
 	}
 
 	public boolean hasDefaultScopePortletId(long groupId, String portletId)
@@ -705,6 +705,14 @@ public class LayoutTypePortletImpl
 		return false;
 	}
 
+	public boolean hasSourcePrototypeLayout() {
+		if (_sourcePrototypeLayout != null) {
+			return true;
+		}
+
+		return false;
+	}
+
 	public boolean hasStateMax() {
 		String[] stateMax = StringUtil.split(getStateMax());
 
@@ -754,14 +762,6 @@ public class LayoutTypePortletImpl
 		else {
 			return true;
 		}
-	}
-
-	public boolean hasSourcePrototypeLayout() {
-		if (_sourcePrototypeLayout != null) {
-			return true;
-		}
-
-		return false;
 	}
 
 	public boolean hasUpdatePermission() {
