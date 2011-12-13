@@ -2056,16 +2056,15 @@ public class PortalImpl implements Portal {
 		Locale locale = getLocale(request);
 
 		addPageSubtitle(journalArticle.getTitle(locale), request);
-		addPageDescription(
-			journalArticle.getDescription(locale), request);
+		addPageDescription(journalArticle.getDescription(locale), request);
 
-		List<AssetTag> articleTags =
+		List<AssetTag> assetTags =
 			AssetTagLocalServiceUtil.getTags(
 				JournalArticle.class.getName(), journalArticle.getPrimaryKey());
 
-		if (!articleTags.isEmpty()) {
+		if (!assetTags.isEmpty()) {
 			addPageKeywords(
-				ListUtil.toString(articleTags, AssetTag.NAME_ACCESSOR),
+				ListUtil.toString(assetTags, AssetTag.NAME_ACCESSOR),
 				request);
 		}
 
