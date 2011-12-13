@@ -138,9 +138,11 @@ public class DLAppHelperLocalServiceImpl
 				DLFileEntryConstants.VERSION_DEFAULT)) {
 
 			assetCategoryIds = assetCategoryLocalService.getCategoryIds(
-				DLFileEntryConstants.getClassName(), fileEntry.getFileEntryId());
+				DLFileEntryConstants.getClassName(),
+				fileEntry.getFileEntryId());
 			assetTagNames = assetTagLocalService.getTagNames(
-				DLFileEntryConstants.getClassName(), fileEntry.getFileEntryId());
+				DLFileEntryConstants.getClassName(),
+				fileEntry.getFileEntryId());
 
 			fileVersionAssetEntry = assetEntryLocalService.updateEntry(
 				userId, fileEntry.getGroupId(),
@@ -155,7 +157,8 @@ public class DLAppHelperLocalServiceImpl
 				fileEntryAssetEntry.getEntryId());
 
 			long[] assetLinkIds = StringUtil.split(
-				ListUtil.toString(assetLinks, AssetLink.ENTRY_ID2_ACCESSOR), 0L);
+				ListUtil.toString(assetLinks, AssetLink.ENTRY_ID2_ACCESSOR),
+				0L);
 
 			assetLinkLocalService.updateLinks(
 				userId, fileVersionAssetEntry.getEntryId(), assetLinkIds,
