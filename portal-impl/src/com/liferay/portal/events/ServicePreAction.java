@@ -388,7 +388,7 @@ public class ServicePreAction extends Action {
 					sourceGroupId);
 
 				if (SitesUtil.isUserGroupLayoutSetViewable(
-						permissionChecker, sourceGroup)) {
+						permissionChecker, layout.getGroup())) {
 
 					layout = new VirtualLayout(layout, sourceGroup);
 				}

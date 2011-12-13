@@ -32,6 +32,7 @@ import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.LayoutSetPrototype;
 import com.liferay.portal.model.LayoutTypePortlet;
+import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.model.impl.LayoutTypePortletImpl;
 import com.liferay.portal.model.impl.VirtualLayout;
 import com.liferay.portal.security.auth.PrincipalException;
@@ -45,6 +46,7 @@ import com.liferay.portal.service.LayoutSetLocalServiceUtil;
 import com.liferay.portal.service.LayoutSetPrototypeLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
+import com.liferay.portal.service.UserGroupLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
 import com.liferay.portal.service.permission.LayoutPermissionUtil;
@@ -567,11 +569,21 @@ public class SitesUtil {
 			PermissionChecker permissionChecker, Group userGroupGroup)
 		throws PortalException, SystemException {
 
+		if (!userGroupGroup.isUserGroup()) {
+			return false;
+		}
+
 		if (GroupPermissionUtil.contains(
 				permissionChecker, userGroupGroup.getGroupId(),
-				ActionKeys.VIEW) ||
-			UserLocalServiceUtil.hasUserGroupUser(
-				userGroupGroup.getGroupId(), permissionChecker.getUserId())) {
+				ActionKeys.VIEW)) {
+			return true;
+		}
+
+		UserGroup userGroup = UserGroupLocalServiceUtil.getUserGroup(
+			userGroupGroup.getClassPK());
+
+		if (UserLocalServiceUtil.hasUserGroupUser(
+				userGroup.getUserGroupId(), permissionChecker.getUserId())) {
 
 			return true;
 		}
