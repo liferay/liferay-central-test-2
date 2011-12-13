@@ -68,12 +68,12 @@ public class AddDefaultDocumentLibraryStructuresAction
 	protected void addDLFileEntryType(
 			long userId, long groupId, String dlFileEntryTypeName,
 			String dlFileEntryTypeDescription, String dynamicDDMStructureName,
-			List<String> ddmStructuresName, ServiceContext serviceContext)
+			List<String> ddmStructureNames, ServiceContext serviceContext)
 		throws Exception {
 
 		List<Long> ddmStructureIds = new ArrayList<Long>();
 
-		for (String ddmStructureName : ddmStructuresName) {
+		for (String ddmStructureName : ddmStructureNames) {
 			String ddmStructureKey = ddmStructureName;
 
 			DDMStructure ddmStructure =
@@ -110,39 +110,39 @@ public class AddDefaultDocumentLibraryStructuresAction
 			long userId, long groupId, ServiceContext serviceContext)
 		throws Exception {
 
-		List<String> ddmStructuresName = new ArrayList<String>();
+		List<String> ddmStructureNames = new ArrayList<String>();
 
 		addDLFileEntryType(
 			userId, groupId, DLFileEntryTypeConstants.NAME_CONTRACT,
 			"Legal Contracts", DLFileEntryTypeConstants.NAME_CONTRACT,
-			ddmStructuresName, serviceContext);
+			ddmStructureNames, serviceContext);
 
-		ddmStructuresName = new ArrayList<String>();
+		ddmStructureNames.clear();
 
-		ddmStructuresName.add("Marketing Campaign Theme Metadata");
+		ddmStructureNames.add("Marketing Campaign Theme Metadata");
 
 		addDLFileEntryType(
 			userId, groupId, DLFileEntryTypeConstants.NAME_MARKETING_BANNER,
 			"Marketing Banner", DLFileEntryTypeConstants.NAME_MARKETING_BANNER,
-			ddmStructuresName, serviceContext);
+			ddmStructureNames, serviceContext);
 
-		ddmStructuresName = new ArrayList<String>();
+		ddmStructureNames.clear();
 
-		ddmStructuresName.add("Learning Module Metadata");
+		ddmStructureNames.add("Learning Module Metadata");
 
 		addDLFileEntryType(
 			userId, groupId, DLFileEntryTypeConstants.NAME_ONLINE_TRAINING,
 			"Online Training", DLFileEntryTypeConstants.NAME_ONLINE_TRAINING,
-			ddmStructuresName, serviceContext);
+			ddmStructureNames, serviceContext);
 
-		ddmStructuresName = new ArrayList<String>();
+		ddmStructureNames.clear();
 
-		ddmStructuresName.add("Meeting Metadata");
+		ddmStructureNames.add("Meeting Metadata");
 
 		addDLFileEntryType(
 			userId, groupId, DLFileEntryTypeConstants.NAME_SALES_PRESENTATION,
 			"Sales Presentation",
-			DLFileEntryTypeConstants.NAME_SALES_PRESENTATION, ddmStructuresName,
+			DLFileEntryTypeConstants.NAME_SALES_PRESENTATION, ddmStructureNames,
 			serviceContext);
 	}
 

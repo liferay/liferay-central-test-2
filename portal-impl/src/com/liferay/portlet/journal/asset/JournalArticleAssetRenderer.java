@@ -161,7 +161,7 @@ public class JournalArticleAssetRenderer extends BaseAssetRenderer {
 
 		return groupFriendlyURL.concat(
 			JournalArticleConstants.CANONICAL_URL_SEPARATOR).concat(
-                HtmlUtil.escape(_article.getUrlTitle()));
+				HtmlUtil.escape(_article.getUrlTitle()));
 	}
 
 	public long getUserId() {

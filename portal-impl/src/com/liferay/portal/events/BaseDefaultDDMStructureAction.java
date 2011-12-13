@@ -47,10 +47,10 @@ public abstract class BaseDefaultDDMStructureAction extends SimpleAction {
 		List<Element> structureElements = getDDMStructures(fileName);
 
 		for (Element structureElement : structureElements) {
-			boolean dynamicStructureName = GetterUtil.getBoolean(
+			boolean dynamicStructure = GetterUtil.getBoolean(
 				structureElement.elementText("dynamic-structure"));
 
-			if (dynamicStructureName) {
+			if (dynamicStructure) {
 				continue;
 			}
 
@@ -98,22 +98,20 @@ public abstract class BaseDefaultDDMStructureAction extends SimpleAction {
 
 		Element rootElement = document.getRootElement();
 
-		List<Element> structureElements = rootElement.elements("structure");
-
-		return structureElements;
+		return rootElement.elements("structure");
 	}
 
 	protected String getDynamicDDMStructureXSD(
 			String fileName, String dynamicDDMStructureName)
-		throws DocumentException, PortalException, SystemException {
+		throws DocumentException {
 
 		List<Element> structureElements = getDDMStructures(fileName);
 
 		for (Element structureElement : structureElements) {
-			boolean dynamicStructureName = GetterUtil.getBoolean(
+			boolean dynamicStructure = GetterUtil.getBoolean(
 				structureElement.elementText("dynamic-structure"));
 
-			if (!dynamicStructureName) {
+			if (!dynamicStructure) {
 				continue;
 			}
 

@@ -66,11 +66,13 @@ public class DLFileEntryTypeServiceTest extends BaseServiceTestCase {
 		for (DLFileEntryType dlFileEntryType : _dlFileEntryTypes) {
 			String name = dlFileEntryType.getName();
 
-			if (name.equals(DLFileEntryTypeConstants.NAME_IMAGE)) {
-				_imageDLFileEntryType = dlFileEntryType;
+			if (name.equals(DLFileEntryTypeConstants.NAME_CONTRACT)) {
+				_contractDLFileEntryType = dlFileEntryType;
 			}
-			else if (name.equals(DLFileEntryTypeConstants.NAME_VIDEO)) {
-				_videoDLFileEntryType = dlFileEntryType;
+			else if (name.equals(
+						DLFileEntryTypeConstants.NAME_MARKETING_BANNER)) {
+
+				_marketingBannerDLFileEntryType = dlFileEntryType;
 			}
 		}
 	}
@@ -87,11 +89,11 @@ public class DLFileEntryTypeServiceTest extends BaseServiceTestCase {
 			DLFileEntryTypeConstants.NAME_BASIC_DOCUMENT + " cannot be null",
 			_basicDocumentDLFileEntryType);
 		assertNotNull(
-			DLFileEntryTypeConstants.NAME_IMAGE + " cannot be null",
-			_imageDLFileEntryType);
+			DLFileEntryTypeConstants.NAME_CONTRACT + " cannot be null",
+			_contractDLFileEntryType);
 		assertNotNull(
-			DLFileEntryTypeConstants.NAME_VIDEO + " cannot be null",
-			_videoDLFileEntryType);
+			DLFileEntryTypeConstants.NAME_MARKETING_BANNER + " cannot be null",
+			_marketingBannerDLFileEntryType);
 	}
 
 	public void testFileEntryTypeRestrictions() throws Exception {
@@ -101,11 +103,11 @@ public class DLFileEntryTypeServiceTest extends BaseServiceTestCase {
 		DLFolderLocalServiceUtil.updateFolder(
 			_folder.getFolderId(), _folder.getParentFolderId(),
 			_folder.getName(), _folder.getDescription(),
-			_imageDLFileEntryType.getPrimaryKey(),
+			_contractDLFileEntryType.getPrimaryKey(),
 			ListUtil.toList(
 				new long[] {
-					_imageDLFileEntryType.getPrimaryKey(),
-					_videoDLFileEntryType.getPrimaryKey()
+					_contractDLFileEntryType.getPrimaryKey(),
+					_marketingBannerDLFileEntryType.getPrimaryKey()
 				}),
 			true, getServiceContext());
 
@@ -118,7 +120,7 @@ public class DLFileEntryTypeServiceTest extends BaseServiceTestCase {
 			TestPropsValues.getGroupId(), _folder.getFolderId(), name,
 			ContentTypes.TEXT_PLAIN, name, "", "", bytes, getServiceContext());
 
-		assertFileEntryType(fileEntry, _imageDLFileEntryType);
+		assertFileEntryType(fileEntry, _contractDLFileEntryType);
 
 		// Add file to subfolder
 
@@ -126,7 +128,7 @@ public class DLFileEntryTypeServiceTest extends BaseServiceTestCase {
 			TestPropsValues.getGroupId(), _subfolder.getFolderId(), name,
 			ContentTypes.TEXT_PLAIN, name, "", "", bytes, getServiceContext());
 
-		assertFileEntryType(fileEntry, _imageDLFileEntryType);
+		assertFileEntryType(fileEntry, _contractDLFileEntryType);
 
 		// Configure subfolder
 
@@ -158,10 +160,10 @@ public class DLFileEntryTypeServiceTest extends BaseServiceTestCase {
 		"Content: Enterprise. Open Source. For Life.";
 
 	private DLFileEntryType _basicDocumentDLFileEntryType;
+	private DLFileEntryType _contractDLFileEntryType;
 	private List<DLFileEntryType> _dlFileEntryTypes;
 	private Folder _folder;
-	private DLFileEntryType _imageDLFileEntryType;
+	private DLFileEntryType _marketingBannerDLFileEntryType;
 	private Folder _subfolder;
-	private DLFileEntryType _videoDLFileEntryType;
 
 }
