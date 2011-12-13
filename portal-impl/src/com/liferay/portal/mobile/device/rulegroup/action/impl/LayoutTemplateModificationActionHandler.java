@@ -18,9 +18,7 @@ import com.liferay.portal.kernel.mobile.device.rulegroup.action.ActionHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.model.Layout;
-import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutTypePortlet;
-import com.liferay.portal.model.LayoutTypePortletConstants;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.mobiledevicerules.model.MDRAction;
@@ -56,7 +54,7 @@ public class LayoutTemplateModificationActionHandler implements ActionHandler {
 
 		Layout layout = themeDisplay.getLayout();
 
-		if (LayoutConstants.TYPE_PORTLET.equals(layout.getType())) {
+		if (layout.isTypePortlet()) {
 			LayoutTypePortlet layoutTypePortlet =
 				(LayoutTypePortlet)layout.getLayoutType();
 
