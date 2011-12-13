@@ -83,7 +83,6 @@ import com.liferay.portal.theme.ThemeDisplayFactory;
 import com.liferay.portal.util.CookieKeys;
 import com.liferay.portal.util.LayoutClone;
 import com.liferay.portal.util.LayoutCloneFactory;
-import com.liferay.portal.util.Portal;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletCategoryKeys;
 import com.liferay.portal.util.PortletKeys;
@@ -424,8 +423,6 @@ public class ServicePreAction extends Action {
 				request.setAttribute(WebKeys.REQUESTED_LAYOUT, layout);
 			}
 
-			boolean isLoginRequest = request.getRequestURI().startsWith(
-				Portal.PATH_MAIN.concat("/portal/login"));
 			boolean isViewableGroup = LayoutPermissionUtil.contains(
 				permissionChecker, layout, controlPanelCategory, true,
 				ActionKeys.VIEW);
@@ -441,7 +438,7 @@ public class ServicePreAction extends Action {
 			else if (!isViewableGroup && group.isStagingGroup()) {
 				layout = null;
 			}
-			else if (!isLoginRequest &&
+			else if (!isLoginRequest(request) &&
 					 (!isViewableGroup ||
 					  (!redirectToDefaultLayout &&
 					   !LayoutPermissionUtil.contains(
@@ -449,24 +446,23 @@ public class ServicePreAction extends Action {
 						   ActionKeys.VIEW)))) {
 
 				if (user.isDefaultUser()) {
-					throw new PrincipalException("User not authenticated.");
+					throw new PrincipalException("User is not authenticated");
 				}
-				else {
-					sb = new StringBundler(6);
 
-					sb.append("User ");
-					sb.append(user.getUserId());
-					sb.append(" is not allowed to access the ");
-					sb.append(layout.isPrivateLayout() ? "private": "public");
-					sb.append(" pages of group ");
-					sb.append(layout.getGroupId());
+				sb = new StringBundler(6);
 
-					if (_log.isWarnEnabled()) {
-						_log.warn(sb.toString());
-					}
+				sb.append("User ");
+				sb.append(user.getUserId());
+				sb.append(" is not allowed to access the ");
+				sb.append(layout.isPrivateLayout() ? "private": "public");
+				sb.append(" pages of group ");
+				sb.append(layout.getGroupId());
 
-					throw new NoSuchLayoutException(sb.toString());
+				if (_log.isWarnEnabled()) {
+					_log.warn(sb.toString());
 				}
+
+				throw new NoSuchLayoutException(sb.toString());
 			}
 			else if (group.isLayoutPrototype()) {
 				layouts = new ArrayList<Layout>();
@@ -1703,6 +1699,19 @@ public class ServicePreAction extends Action {
 					_log.debug("Using public LAR file " + publicLARFileName);
 				}
 			}
+		}
+	}
+
+	protected boolean isLoginRequest(HttpServletRequest request) {
+		String requestURI = request.getRequestURI();
+
+		String mainPath = PortalUtil.getPathMain();
+
+		if (requestURI.startsWith(mainPath.concat("/portal/login"))) {
+			return true;
+		}
+		else {
+			return false;
 		}
 	}
 
