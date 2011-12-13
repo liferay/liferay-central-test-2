@@ -39,11 +39,12 @@ public class StructureStructureKeyComparator extends OrderByComparator {
 	@Override
 	public int compare(Object obj1, Object obj2) {
 		DDMStructure structure1 = (DDMStructure)obj1;
-		DDMStructure structure2 = (DDMStructure)obj2;
 
 		String structureKey1 = structure1.getStructureKey();
 
 		structureKey1 = structureKey1.toLowerCase();
+
+		DDMStructure structure2 = (DDMStructure)obj2;
 
 		String structureKey2 = structure2.getStructureKey();
 
