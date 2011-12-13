@@ -27,8 +27,8 @@ addPortletURLs = getAddPortletURLs(liferayPortletRequest, liferayPortletResponse
 	>
 
 		<%
-		boolean hasDocTypes = hasSubtypes(DLFileEntry.class.getName(), addPortletURLs);
-		boolean hasWebContentTypes = hasSubtypes(JournalArticle.class.getName(), addPortletURLs);
+		boolean hasDLFileEntrySubtype = hasSubtype(DLFileEntry.class.getName(), addPortletURLs);
+		boolean hasJournalArticleSubtype = hasSubtype(JournalArticle.class.getName(), addPortletURLs);
 
 		for (Map.Entry<String, PortletURL> entry : addPortletURLs.entrySet()) {
 			String className = entry.getKey();
@@ -36,10 +36,10 @@ addPortletURLs = getAddPortletURLs(liferayPortletRequest, liferayPortletResponse
 			String message = StringPool.BLANK;
 
 			if (className.equals(DLFileEntry.class.getName())) {
-				message = hasDocTypes ? "basic-document" : "document";
+				message = hasDLFileEntrySubtype ? "basic-document" : "document";
 			}
 			else if (className.equals(JournalArticle.class.getName())) {
-				message = hasWebContentTypes ? "basic-web-content" : "web-content";
+				message = hasJournalArticleSubtype ? "basic-web-content" : "web-content";
 			}
 			else {
 				message = ResourceActionsUtil.getModelResourceNamePrefix() + className;
@@ -210,11 +210,11 @@ public Map<String, PortletURL> getAddPortletURLs(LiferayPortletRequest liferayPo
 	return addPortletURLs;
 }
 
-public boolean hasSubtypes(String className, Map<String, PortletURL> urlMap) {
-	for (Map.Entry<String, PortletURL> entry : urlMap.entrySet()) {
-		String key = entry.getKey();
+public boolean hasSubtype(String subtypeClassName, Map<String, PortletURL> addPortletURLs) {
+	for (Map.Entry<String, PortletURL> entry : addPortletURLs.entrySet()) {
+		String className = entry.getKey();
 
-		if (key.startsWith(className) && !key.equals(className)) {
+		if (className.startsWith(subtypeClassName) && !className.equals(subtypeClassName)) {
 			return true;
 		}
 	}
