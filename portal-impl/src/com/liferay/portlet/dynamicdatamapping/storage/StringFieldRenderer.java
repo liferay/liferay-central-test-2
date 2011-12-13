@@ -14,8 +14,6 @@
 
 package com.liferay.portlet.dynamicdatamapping.storage;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -29,44 +27,41 @@ import java.util.Map;
 public class StringFieldRenderer extends BaseFieldRenderer {
 
 	@Override
-	protected String doRender(ThemeDisplay themeDisplay, Field field) {
+	protected String doRender(ThemeDisplay themeDisplay, Field field)
+		throws Exception {
+
 		String value = String.valueOf(field.getValue());
 
-		try {
-			DDMStructure ddmStructure = field.getDDMStructure();
+		DDMStructure ddmStructure = field.getDDMStructure();
 
-			String fieldName = field.getName();
-			String fieldType = ddmStructure.getFieldType(fieldName);
+		String fieldType = ddmStructure.getFieldType(field.getName());
 
-			if (fieldType.equals("radio") || fieldType.equals("select")) {
-				String[] values = StringUtil.split(value);
+		if (!fieldType.equals("radio") && !fieldType.equals("select")) {
+			return value;
+		}
 
-				StringBundler sb = new StringBundler(values.length * 2);
+		String[] values = StringUtil.split(value);
 
-				for (int i = 0; i < values.length; i++) {
-					Map<String, String> option = ddmStructure.getFields(
-						fieldName, FieldConstants.VALUE, values[i]);
+		StringBundler sb = new StringBundler(values.length * 2);
 
-					if (option != null) {
-						sb.append(option.get(FieldConstants.LABEL));
+		for (int i = 0; i < values.length; i++) {
+			Map<String, String> fields = ddmStructure.getFields(
+				field.getName(), FieldConstants.VALUE, values[i]);
 
-						if (i < (values.length - 1)) {
-							sb.append(", ");
-						}
-					}
-				}
-
-				value = sb.toString();
+			if (fields == null) {
+				continue;
 			}
-		} catch (Exception e) {
-			if (_log.isDebugEnabled()) {
-				_log.debug("Unable render field value: " + value, e);
+
+			sb.append(fields.get(FieldConstants.LABEL));
+
+			if ((i + 1) > values.length) {
+				sb.append(", ");
 			}
 		}
 
+		value = sb.toString();
+
 		return value;
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(StringFieldRenderer.class);
 
 }
