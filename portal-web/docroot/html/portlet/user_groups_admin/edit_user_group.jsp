@@ -62,11 +62,11 @@ long userGroupId = BeanParamUtil.getLong(userGroup, request, "userGroupId");
 
 		<%
 		Group userGroupGroup = null;
-			
+
 		if (userGroup != null) {
 			userGroupGroup = userGroup.getGroup();
 		}
-			
+
 		LayoutSet privateLayoutSet = null;
 		LayoutSetPrototype privateLayoutSetPrototype = null;
 		boolean privateLayoutSetPrototypeLinkEnabled = true;
