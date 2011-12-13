@@ -134,7 +134,7 @@ if (showPrototypes && (group != null)) {
 
 							<c:choose>
 								<c:when test="<%= PortalPermissionUtil.contains(permissionChecker, ActionKeys.UNLINK_LAYOUT_SET_PROTOTYPE) %>">
-									<aui:input label="keep-a-link-to-the-site-template" name="publicLayoutSetPrototypeLinkEnabled" type="checkbox" value="<%= publicLayoutSetPrototypeLinkEnabled %>" />
+									<aui:input helpMessage="keep-a-link-to-the-site-template-help" label="keep-a-link-to-the-site-template" name="publicLayoutSetPrototypeLinkEnabled" type="checkbox" value="<%= publicLayoutSetPrototypeLinkEnabled %>" />
 								</c:when>
 								<c:otherwise>
 									<aui:input name="publicLayoutSetPrototypeLinkEnabled" type="hidden" value="<%= true %>" />
@@ -200,7 +200,7 @@ if (showPrototypes && (group != null)) {
 
 							<c:choose>
 								<c:when test="<%= PortalPermissionUtil.contains(permissionChecker, ActionKeys.UNLINK_LAYOUT_SET_PROTOTYPE) %>">
-									<aui:input helpMessage="enable-the-link-to-the-site-template-so-that-changes-done-to-the-template-are-propagate-to-the-site" label="keep-a-link-to-the-site-template" name="privateLayoutSetPrototypeLinkEnabled" type="checkbox" value="<%= privateLayoutSetPrototypeLinkEnabled %>" />
+									<aui:input helpMessage="keep-a-link-to-the-site-template-help"  label="keep-a-link-to-the-site-template" name="privateLayoutSetPrototypeLinkEnabled" type="checkbox" value="<%= privateLayoutSetPrototypeLinkEnabled %>" />
 								</c:when>
 								<c:otherwise>
 									<aui:input name="privateLayoutSetPrototypeLinkEnabled" type="hidden" value="<%= true %>" />

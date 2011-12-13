@@ -596,7 +596,7 @@ public class SitesUtil {
 
 		if (targetLayoutSet.isPrivateLayout()) {
 			boolean privateLayoutSetPrototypeLinkEnabled = ParamUtil.getBoolean(
-				serviceContext, "privateLayoutSetPrototypeLinkEnabled");
+				serviceContext, "privateLayoutSetPrototypeLinkEnabled", true);
 
 			if (!privateLayoutSetPrototypeLinkEnabled) {
 				privateLayoutSetPrototypeLinkEnabled = ParamUtil.getBoolean(
@@ -615,7 +615,7 @@ public class SitesUtil {
 
 			if (!publicLayoutSetPrototypeLinkEnabled) {
 				publicLayoutSetPrototypeLinkEnabled = ParamUtil.getBoolean(
-					serviceContext, "layoutSetPrototypeLinkEnabled");
+					serviceContext, "layoutSetPrototypeLinkEnabled",true);
 			}
 
 			parameterMap.put(
