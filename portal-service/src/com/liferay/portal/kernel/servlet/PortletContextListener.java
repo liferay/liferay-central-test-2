@@ -135,8 +135,9 @@ public class PortletContextListener
 		}
 		catch (NamingException ne) {
 			try {
-				Method method = dataSource.getClass().getMethod(
-					"getTargetDataSource");
+				Class<?> clazz = dataSource.getClass();
+
+				Method method = clazz.getMethod("getTargetDataSource");
 
 				dataSource = (DataSource)method.invoke(dataSource);
 			}
