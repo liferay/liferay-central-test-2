@@ -20,7 +20,7 @@ import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
 /**
  * @author Miguel Pastor
  */
-public class DDMStructureStructureKeyComparator extends OrderByComparator {
+public class StructureStructureKeyComparator extends OrderByComparator {
 
 	public static final String ORDER_BY_ASC = "DDMStructure.structureKey ASC";
 
@@ -28,21 +28,28 @@ public class DDMStructureStructureKeyComparator extends OrderByComparator {
 
 	public static final String[] ORDER_BY_FIELDS = {"structureKey"};
 
-	public DDMStructureStructureKeyComparator() {
+	public StructureStructureKeyComparator() {
 		this(false);
 	}
 
-	public DDMStructureStructureKeyComparator(boolean ascending) {
+	public StructureStructureKeyComparator(boolean ascending) {
 		_ascending = ascending;
 	}
 
 	@Override
 	public int compare(Object obj1, Object obj2) {
-		DDMStructure ddmStructure1 = (DDMStructure)obj1;
-		DDMStructure ddmStructure2 = (DDMStructure)obj2;
+		DDMStructure structure1 = (DDMStructure)obj1;
+		DDMStructure structure2 = (DDMStructure)obj2;
 
-		int value = ddmStructure1.getStructureKey().toLowerCase().compareTo(
-			ddmStructure2.getStructureKey().toLowerCase());
+		String structureKey1 = structure1.getStructureKey();
+
+		structureKey1 = structureKey1.toLowerCase();
+
+		String structureKey2 = structure2.getStructureKey();
+
+		structureKey2 = structureKey2.toLowerCase();
+
+		int value = structureKey1.compareTo(structureKey2);
 
 		if (_ascending) {
 			return value;

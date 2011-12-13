@@ -231,20 +231,20 @@ public class DDMStructureLocalServiceImpl
 	}
 
 	public List<DDMStructure> getClassStructures(
+			long classNameId, int start, int end)
+		throws SystemException {
+
+		return ddmStructurePersistence.findByClassNameId(
+			classNameId, start, end);
+	}
+
+	public List<DDMStructure> getClassStructures(
 			long classNameId, OrderByComparator orderByComparator)
 		throws SystemException {
 
 		return ddmStructurePersistence.findByClassNameId(
 			classNameId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
 			orderByComparator);
-	}
-
-	public List<DDMStructure> getClassStructures(
-			long classNameId, int start, int end)
-		throws SystemException {
-
-		return ddmStructurePersistence.findByClassNameId(
-			classNameId, start, end);
 	}
 
 	public List<DDMStructure> getDLFileEntryTypeStructures(
