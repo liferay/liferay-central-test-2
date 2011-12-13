@@ -182,14 +182,12 @@ public class JSONWebServiceActionsManagerImpl
 		int matched = 0;
 
 		for (MethodParameter methodParameter : methodParameters) {
-
 			String methodParameterName = methodParameter.getName();
 
-			methodParameterName =
-				CamelCaseUtil.fixCamelCase(methodParameterName);
+			methodParameterName = CamelCaseUtil.fixCamelCase(
+				methodParameterName);
 
 			for (String parameterName : parameterNames) {
-
 				if (parameterName.equals(methodParameterName)) {
 					matched++;
 

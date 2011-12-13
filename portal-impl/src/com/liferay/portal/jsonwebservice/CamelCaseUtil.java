@@ -15,94 +15,87 @@
 package com.liferay.portal.jsonwebservice;
 
 import com.liferay.portal.kernel.util.CharPool;
+import com.liferay.portal.kernel.util.StringBundler;
 
 /**
  * @author Igor Spasic
  */
 public class CamelCaseUtil {
 
-	public static String fixCamelCase(String string) {
-		StringBuilder s = new StringBuilder();
-
-		int length = string.length();
-
-		boolean isPreviousCharUppercase = false;
-
-		for (int i = 0; i < length; i++) {
-
-			char ch = string.charAt(i);
-
-			if (Character.isUpperCase(ch) && (i > 0)) {
-				if (isPreviousCharUppercase) {
-					ch = Character.toLowerCase(ch);
-				}
-				isPreviousCharUppercase = true;
-			}
-			else {
-				isPreviousCharUppercase = false;
-			}
-
-			s.append(ch);
-		}
-
-		return s.toString();
-	}
-
-	public static String toCamelCase(String string) {
-
-		int length = string.length();
-
-		StringBuilder s = new StringBuilder(length);
+	public static String fixCamelCase(String s) {
+		StringBundler sb = new StringBundler();
 
 		boolean upperCase = false;
 
-		for (int i = 0; i < length; i++) {
-			char ch = string.charAt(i);
+		for (int i = 0; i < s.length(); i++) {
+			char c = s.charAt(i);
 
-			if (ch == CharPool.DASH) {
+			if ((i > 0) && Character.isUpperCase(c)) {
+				if (upperCase) {
+					c = Character.toLowerCase(c);
+				}
+
+				upperCase = true;
+			}
+			else {
+				upperCase = false;
+			}
+
+			sb.append(c);
+		}
+
+		return sb.toString();
+	}
+
+	public static String toCamelCase(String s) {
+		StringBundler sb = new StringBundler(s.length());
+
+		boolean upperCase = false;
+
+		for (int i = 0; i < s.length(); i++) {
+			char c = s.charAt(i);
+
+			if (c == CharPool.DASH) {
 				upperCase = true;
 			}
 			else if (upperCase) {
-				s.append(Character.toUpperCase(ch));
+				sb.append(Character.toUpperCase(c));
 
 				upperCase = false;
 			}
 			else {
-				s.append(ch);
+				sb.append(c);
 			}
 		}
-		return s.toString();
 
+		return sb.toString();
 	}
 
-	public static String toSeparatedWords(String string) {
-		StringBuilder s = new StringBuilder();
+	public static String toSeparateWords(String s) {
+		StringBundler sb = new StringBundler();
 
-		int length = string.length();
+		boolean upperCase = false;
 
-		boolean isPreviousCharUppercase = false;
+		for (int i = 0; i < s.length(); i++) {
+			char c = s.charAt(i);
 
-		for (int i = 0; i < length; i++) {
-
-			char ch = string.charAt(i);
-
-			if (Character.isUpperCase(ch) && (i > 0)) {
-				if (!isPreviousCharUppercase) {
-					s.append(CharPool.DASH);
+			if ((i > 0) && Character.isUpperCase(c)) {
+				if (!upperCase) {
+					sb.append(CharPool.DASH);
 				}
 
-				ch = Character.toLowerCase(ch);
+				c = Character.toLowerCase(c);
 
-				isPreviousCharUppercase = true;
+				upperCase = true;
 			}
 			else {
-				isPreviousCharUppercase = false;
+				upperCase = false;
 			}
 
-			s.append(ch);
+			sb.append(c);
 		}
 
-		return s.toString();
+		return sb.toString();
 	}
 
 }
