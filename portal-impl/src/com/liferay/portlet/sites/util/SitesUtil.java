@@ -576,6 +576,7 @@ public class SitesUtil {
 		if (GroupPermissionUtil.contains(
 				permissionChecker, userGroupGroup.getGroupId(),
 				ActionKeys.VIEW)) {
+
 			return true;
 		}
 
@@ -627,7 +628,7 @@ public class SitesUtil {
 
 			if (!publicLayoutSetPrototypeLinkEnabled) {
 				publicLayoutSetPrototypeLinkEnabled = ParamUtil.getBoolean(
-					serviceContext, "layoutSetPrototypeLinkEnabled",true);
+					serviceContext, "layoutSetPrototypeLinkEnabled", true);
 			}
 
 			parameterMap.put(

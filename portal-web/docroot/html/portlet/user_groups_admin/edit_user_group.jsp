@@ -208,7 +208,6 @@ long userGroupId = BeanParamUtil.getLong(userGroup, request, "userGroupId");
 					<aui:field-wrapper label="private-pages">
 						<c:choose>
 							<c:when test="<%= (userGroupGroup != null) && (userGroupGroup.getPrivateLayoutsPageCount() > 0) %>">
-
 								<liferay-portlet:actionURL var="privatePagesURL" portletName="<%= PortletKeys.SITE_REDIRECTOR %>">
 									<portlet:param name="struts_action" value="/MY_SITES/view" />
 									<portlet:param name="groupId" value="<%= String.valueOf(userGroupGroup.getGroupId()) %>" />

@@ -14,7 +14,6 @@
  */
 --%>
 
-<%@ page import="com.liferay.portal.model.impl.VirtualLayout" %><%@
-page import="com.liferay.portlet.sites.util.SitesUtil" %>
-
 <%@ include file="/html/portlet/init.jsp" %>
+
+<%@ page import="com.liferay.portlet.sites.util.SitesUtil" %>
