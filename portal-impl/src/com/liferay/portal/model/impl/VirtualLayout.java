@@ -127,19 +127,21 @@ public class VirtualLayout extends LayoutWrapper {
 		try {
 			Group group = _sourceLayout.getGroup();
 
-			String params = StringPool.BLANK;
-
-			int paramsPos = layoutURL.indexOf(StringPool.QUESTION);
-
-			if (paramsPos > 0) {
-				params = layoutURL.substring(paramsPos, layoutURL.length());
-			}
+			StringBundler sb = new StringBundler(4);
 
 			int pos = layoutURL.indexOf(group.getFriendlyURL());
 
-			return layoutURL.substring(0, pos).concat(
-				_targetGroup.getFriendlyURL()).concat(getFriendlyURL()).concat(
-					params);
+			sb.append(layoutURL.substring(0, pos));
+			sb.append(_targetGroup.getFriendlyURL());
+			sb.append(getFriendlyURL());
+
+			pos = layoutURL.indexOf(StringPool.QUESTION);
+
+			if (pos > 0) {
+				sb.append(layoutURL.substring(pos, layoutURL.length()));
+			}
+
+			return sb.toString();
 		}
 		catch (Exception e) {
 			throw new IllegalStateException(e);
