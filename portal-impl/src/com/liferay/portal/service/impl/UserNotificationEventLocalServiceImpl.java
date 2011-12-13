@@ -146,8 +146,7 @@ public class UserNotificationEventLocalServiceImpl
 	public int getUserNotificationEventsCount(long userId, boolean archived)
 		throws SystemException {
 
-		return userNotificationEventPersistence.countByU_A(
-			userId, archived);
+		return userNotificationEventPersistence.countByU_A(userId, archived);
 	}
 
 	public UserNotificationEvent updateUserNotificationEvent(
