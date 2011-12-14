@@ -595,7 +595,8 @@ public class DocumentImpl implements Document {
 	private static final String _UID_PORTLET = "_PORTLET_";
 
 	private static Format _dateFormat =
-		FastDateFormatFactoryUtil.getSimpleDateFormat(_DATE_FORMAT_PATTERN);
+		FastDateFormatFactoryUtil.getSimpleDateFormat(
+			_INDEX_DATE_FORMAT_PATTERN);
 	private static Set<String> _sortableTextFields = SetUtil.fromArray(
 		PropsUtil.getArray(PropsKeys.INDEX_SORTABLE_TEXT_FIELDS));
 
