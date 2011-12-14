@@ -93,8 +93,8 @@ public class SocialActivityCounterLocalServiceImpl
 
 				long activityCounterId = counterLocalService.increment();
 
-				activityCounter =
-					socialActivityCounterPersistence.create(activityCounterId);
+				activityCounter = socialActivityCounterPersistence.create(
+					activityCounterId);
 
 				activityCounter.setGroupId(groupId);
 				activityCounter.setCompanyId(group.getCompanyId());
