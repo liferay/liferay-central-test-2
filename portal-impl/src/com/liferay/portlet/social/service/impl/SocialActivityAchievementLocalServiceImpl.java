@@ -83,17 +83,17 @@ public class SocialActivityAchievementLocalServiceImpl
 		return socialActivityAchievementPersistence.findByGroupId(groupId);
 	}
 
-	public int getGroupAchievementsCount(long groupId)
-		throws SystemException {
-
-		return socialActivityAchievementPersistence.countByGroupId(groupId);
-	}
-
 	public List<SocialActivityAchievement> getGroupAchievements(
 			long groupId, String name)
 		throws SystemException {
 
 		return socialActivityAchievementPersistence.findByG_N(groupId, name);
+	}
+
+	public int getGroupAchievementsCount(long groupId)
+		throws SystemException {
+
+		return socialActivityAchievementPersistence.countByGroupId(groupId);
 	}
 
 	public int getGroupAchievementsCount(long groupId, String name)
