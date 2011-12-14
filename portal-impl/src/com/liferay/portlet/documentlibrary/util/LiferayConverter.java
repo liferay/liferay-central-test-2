@@ -52,20 +52,52 @@ public abstract class LiferayConverter {
 
 	public abstract void convert() throws Exception;
 
+	protected void cleanUp(IPacket inputIPacket, IPacket outputIPacket) {
+		if (Validator.isNotNull(inputIPacket)) {
+			inputIPacket.delete();
+		}
+
+		if (Validator.isNotNull(outputIPacket)) {
+			outputIPacket.delete();
+		}
+	}
+
 	protected void cleanUp(
 		IStreamCoder[] inputIStreamCoders, IStreamCoder[] outputIStreamCoders) {
 
-		for (int i = 0; i < inputIStreamCoders.length; i++) {
-			IStreamCoder inputIStreamCoder = inputIStreamCoders[i];
+		if (Validator.isNotNull(inputIStreamCoders)) {
+			for (IStreamCoder iStreamCoder : inputIStreamCoders) {
+				if (Validator.isNotNull(iStreamCoder)) {
+					iStreamCoder.close();
+				}
+			}
+		}
 
-			if (inputIStreamCoder != null) {
-				inputIStreamCoder.close();
+		if (Validator.isNotNull(outputIStreamCoders)) {
+			for (IStreamCoder iStreamCoder : outputIStreamCoders) {
+				if (Validator.isNotNull(iStreamCoder)) {
+					iStreamCoder.close();
+				}
+			}
+		}
 			}
 
-			IStreamCoder outputIStreamCoder = outputIStreamCoders[i];
+	protected void cleanUp(
+		RefCounted[] inputRefCountedArray, RefCounted[] outputRefCountedArray) {
 
-			if (outputIStreamCoder != null) {
-				outputIStreamCoder.close();
+		if (Validator.isNotNull(inputRefCountedArray)) {
+			for (RefCounted refCounted : inputRefCountedArray) {
+				if (Validator.isNotNull(refCounted)) {
+					refCounted.delete();
+				}
+			}
+		}
+
+		if (Validator.isNotNull(outputRefCountedArray)) {
+			for (RefCounted refCounted : outputRefCountedArray) {
+				if (Validator.isNotNull(refCounted)) {
+					refCounted.delete();
+				}
 			}
 		}
 	}
