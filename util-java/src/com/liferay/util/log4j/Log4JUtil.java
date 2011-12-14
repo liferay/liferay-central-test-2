@@ -94,9 +94,9 @@ public class Log4JUtil {
 		try {
 			SAXReader saxReader = new SAXReader();
 
-			Reader urlReader = new StringReader(urlContent);
+			Reader reader = new StringReader(urlContent);
 
-			Document document = saxReader.read(urlReader, url.toExternalForm());
+			Document document = saxReader.read(reader, url.toExternalForm());
 
 			Element rootElement = document.getRootElement();
 
@@ -117,13 +117,13 @@ public class Log4JUtil {
 		}
 	}
 
-	public static HashMap<String, String> getCustomLogSettings() {
+	public static Map<String, String> getCustomLogSettings() {
 		return new HashMap<String, String>(_customLogSettings);
 	}
 
 	public static void initLog4J(
 		String serverId, String liferayHome, ClassLoader classLoader,
-		LogFactory logFactory, HashMap<String, String> customLogSettings) {
+		LogFactory logFactory, Map<String, String> customLogSettings) {
 
 		ServerDetector.init(serverId);
 
@@ -197,7 +197,6 @@ public class Log4JUtil {
 
 		return _liferayHome;
 	}
-
 	private static String _getURLContent(URL url) {
 		Map<String, String> variables = new HashMap<String, String>();
 
@@ -250,9 +249,8 @@ public class Log4JUtil {
 		return urlContent;
 	}
 
-	private static final Map<String, String> _customLogSettings =
+	private static Map<String, String> _customLogSettings =
 		new ConcurrentHashMap<String, String>();
-
 	private static String _liferayHome;
 
 }

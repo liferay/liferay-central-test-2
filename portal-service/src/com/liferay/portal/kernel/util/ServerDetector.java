@@ -52,6 +52,10 @@ public class ServerDetector {
 		return _instance;
 	}
 
+	public static String getServerId() {
+		return getInstance()._serverId;
+	}
+
 	public static void init(String serverId) {
 		ServerDetector serverDetector = new ServerDetector();
 
@@ -92,10 +96,6 @@ public class ServerDetector {
 		}
 
 		_instance = serverDetector;
-	}
-
-	public static String getServerId() {
-		return getInstance()._serverId;
 	}
 
 	public static boolean isGeronimo() {
@@ -278,7 +278,6 @@ public class ServerDetector {
 
 	private static ServerDetector _instance;
 
-	private String _serverId;
 	private boolean _geronimo;
 	private boolean _glassfish;
 	private boolean _jBoss;
@@ -286,6 +285,7 @@ public class ServerDetector {
 	private boolean _jonas;
 	private boolean _oc4j;
 	private boolean _resin;
+	private String _serverId;
 	private boolean _supportsComet;
 	private boolean _tomcat;
 	private boolean _webLogic;

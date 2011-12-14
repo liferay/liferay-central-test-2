@@ -44,8 +44,8 @@ import com.liferay.util.log4j.Log4JUtil;
 import java.io.File;
 import java.io.InputStream;
 
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 import java.util.Vector;
@@ -559,12 +559,16 @@ public class VideoProcessor extends DefaultPreviewableProcessor {
 
 	private static VideoProcessor _instance = new VideoProcessor();
 
+	private Set<String> _videoMimeTypes = SetUtil.fromArray(
+		PropsValues.DL_FILE_ENTRY_PREVIEW_VIDEO_MIME_TYPES);
+	private List<Long> _fileVersionIds = new Vector<Long>();
+
 	private static class LiferayVideoProcessCallable
 		implements ProcessCallable<String> {
 
 		public LiferayVideoProcessCallable(
 			String serverId, String liferayHome,
-			HashMap<String, String> customLogSettings, String inputURL,
+			Map<String, String> customLogSettings, String inputURL,
 			String outputURL, String tempFileName, Properties videoProperties,
 			Properties ffpresetProperties) {
 
@@ -579,9 +583,13 @@ public class VideoProcessor extends DefaultPreviewableProcessor {
 		}
 
 		public String call() throws ProcessException {
+			Class<?> clazz = getClass();
+
+			ClassLoader classLoader = clazz.getClassLoader();
+
 			Log4JUtil.initLog4J(
-				_serverId, _liferayHome, this.getClass().getClassLoader(),
-				new Log4jLogFactoryImpl(), _customLogSettings);
+				_serverId, _liferayHome, classLoader, new Log4jLogFactoryImpl(),
+				_customLogSettings);
 
 			try {
 				LiferayConverter liferayConverter = new LiferayVideoConverter(
@@ -597,7 +605,7 @@ public class VideoProcessor extends DefaultPreviewableProcessor {
 			return StringPool.BLANK;
 		}
 
-		private HashMap<String, String> _customLogSettings;
+		private Map<String, String> _customLogSettings;
 		private Properties _ffpresetProperties;
 		private String _inputURL;
 		private String _liferayHome;
@@ -613,9 +621,9 @@ public class VideoProcessor extends DefaultPreviewableProcessor {
 
 		public LiferayVideoThumbnailProcessCallable(
 			String serverId, String liferayHome,
-			HashMap<String, String> customLogSettings, String inputURL,
-			File outputFile, String extension, int height,
-			int width, int percentage) {
+			Map<String, String> customLogSettings, String inputURL,
+			File outputFile, String extension, int height, int width,
+			int percentage) {
 
 			_serverId = serverId;
 			_liferayHome = liferayHome;
@@ -629,9 +637,13 @@ public class VideoProcessor extends DefaultPreviewableProcessor {
 		}
 
 		public String call() throws ProcessException {
+			Class<?> clazz = getClass();
+
+			ClassLoader classLoader = clazz.getClassLoader();
+
 			Log4JUtil.initLog4J(
-				_serverId, _liferayHome, this.getClass().getClassLoader(),
-				new Log4jLogFactoryImpl(), _customLogSettings);
+				_serverId, _liferayHome, classLoader, new Log4jLogFactoryImpl(),
+				_customLogSettings);
 
 			try {
 				LiferayConverter liferayConverter =
@@ -648,7 +660,7 @@ public class VideoProcessor extends DefaultPreviewableProcessor {
 			return StringPool.BLANK;
 		}
 
-		private HashMap<String, String> _customLogSettings;
+		private Map<String, String> _customLogSettings;
 		private String _extension;
 		private int _height;
 		private String _inputURL;
@@ -659,9 +671,5 @@ public class VideoProcessor extends DefaultPreviewableProcessor {
 		private int _width;
 
 	}
-
-	private Set<String> _videoMimeTypes = SetUtil.fromArray(
-		PropsValues.DL_FILE_ENTRY_PREVIEW_VIDEO_MIME_TYPES);
-	private List<Long> _fileVersionIds = new Vector<Long>();
 
 }

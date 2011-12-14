@@ -45,6 +45,7 @@ public class LiferayVideoThumbnailConverter extends LiferayConverter {
 		_percentage = percentage;
 	}
 
+	@Override
 	public void convert() throws Exception {
 		try {
 			doConvert();

@@ -722,10 +722,10 @@ public class PDFProcessor extends DefaultPreviewableProcessor {
 
 	private static Log _log = LogFactoryUtil.getLog(PDFProcessor.class);
 
-	private static String _globalSearchPath;
-
 	private static PDFProcessor _instance = new PDFProcessor();
 
+	private List<Long> _fileVersionIds = new Vector<Long>();
+	private static String _globalSearchPath;
 	private static boolean _warned;
 
 	private static class ImageMagickProcessCallable
@@ -749,11 +749,9 @@ public class PDFProcessor extends DefaultPreviewableProcessor {
 			return StringPool.BLANK;
 		}
 
-		private String _globalSearchPath;
 		private LinkedList<String> _commandArguments;
+		private String _globalSearchPath;
 
 	}
-
-	private List<Long> _fileVersionIds = new Vector<Long>();
 
 }

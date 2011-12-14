@@ -56,26 +56,23 @@ public class LiferayVideoConverter extends LiferayConverter {
 		_inputURL = inputURL;
 		_outputURL = outputURL;
 		_tempFileName = tempFileName;
+		_ffpresetProperties = ffpresetProperties;
 
 		_height = GetterUtil.getInteger(
 			videoProperties.getProperty(
 				PropsKeys.DL_FILE_ENTRY_PREVIEW_VIDEO_HEIGHT), _height);
-
 		_width = GetterUtil.getInteger(
 			videoProperties.getProperty(
 				PropsKeys.DL_FILE_ENTRY_PREVIEW_VIDEO_WIDTH), _width);
-
 		_previewVideoContainers = StringUtil.split(
 			videoProperties.getProperty(
 				PropsKeys.DL_FILE_ENTRY_PREVIEW_VIDEO_CONTAINERS));
 
 		initVideoBitRateMap(videoProperties);
-
 		initVideoFrameRateMap(videoProperties);
-
-		_ffpresetProperties = ffpresetProperties;
 	}
 
+	@Override
 	public void convert() throws Exception {
 		try {
 			doConvert();
@@ -317,8 +314,7 @@ public class LiferayVideoConverter extends LiferayConverter {
 			int videoBitRate = GetterUtil.getInteger(
 				videoProperties.getProperty(
 					PropsKeys.DL_FILE_ENTRY_PREVIEW_VIDEO_BIT_RATE
-						+ StringPool.OPEN_BRACKET + previewVideoContainer
-							+ StringPool.CLOSE_BRACKET));
+						+ "[" + previewVideoContainer + "]"));
 
 			if (videoBitRate > _VIDEO_BIT_RATE_MAX) {
 				videoBitRate = _VIDEO_BIT_RATE_MAX;
@@ -342,9 +338,8 @@ public class LiferayVideoConverter extends LiferayConverter {
 		for (String previewVideoContainer : _previewVideoContainers) {
 			int numerator = GetterUtil.getInteger(
 				videoProperties.getProperty(
-					PropsKeys.DL_FILE_ENTRY_PREVIEW_VIDEO_FRAME_RATE_NUMERATOR
-						+ StringPool.OPEN_BRACKET + previewVideoContainer
-							+ StringPool.CLOSE_BRACKET));
+					PropsKeys.DL_FILE_ENTRY_PREVIEW_VIDEO_FRAME_RATE_NUMERATOR +
+						"[" + previewVideoContainer + "]"));
 			int denominator = GetterUtil.getInteger(
 				videoProperties.getProperty(
 					PropsKeys.DL_FILE_ENTRY_PREVIEW_VIDEO_FRAME_RATE_DENOMINATOR

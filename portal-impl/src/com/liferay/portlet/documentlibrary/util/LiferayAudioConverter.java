@@ -37,6 +37,7 @@ public class LiferayAudioConverter extends LiferayConverter {
 		_outputURL = outputURL;
 	}
 
+	@Override
 	public void convert() throws Exception {
 		try {
 			doConvert();
