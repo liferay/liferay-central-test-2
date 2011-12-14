@@ -52,15 +52,15 @@ public class ProcessExecutor {
 
 			if (errorInputStream.available() > 0) {
 				ProcessException processException =
-					(ProcessException)_readObject(errorInputStream, true,
-						System.err);
+					(ProcessException)_readObject(
+						errorInputStream, System.err, true);
 
 				if (processException != null) {
 					throw processException;
 				}
 			}
 
-			return (T)_readObject(process.getInputStream(), true, System.out);
+			return (T)_readObject(process.getInputStream(), System.out, true);
 		}
 		catch (Exception e) {
 			throw new ProcessException(e);
@@ -72,7 +72,7 @@ public class ProcessExecutor {
 
 		try {
 			ProcessCallable<?> processCallable =
-				(ProcessCallable<?>)_readObject(System.in, false, null);
+				(ProcessCallable<?>)_readObject(System.in, null, false);
 
 			Object result = processCallable.call();
 
@@ -84,14 +84,15 @@ public class ProcessExecutor {
 	}
 
 	private static Object _readObject(
-			InputStream inputStream, boolean close,
-			OutputStream failDumpOutputStream)
+			InputStream inputStream, OutputStream outputStream,
+			boolean close)
 		throws ClassNotFoundException, IOException {
 
-		if (failDumpOutputStream != null) {
+		if (outputStream != null) {
 			inputStream = new UnsyncBufferedInputStream(inputStream);
 
 			// Mark ObjectInputStream's magic header
+
 			inputStream.mark(4);
 		}
 
@@ -109,16 +110,16 @@ public class ProcessExecutor {
 			}
 		}
 		catch (ObjectStreamException ose) {
-			if (failDumpOutputStream != null) {
+			if (outputStream != null) {
 				inputStream.reset();
 
-				int ch = -1;
+				int b = -1;
 
-				while ((ch = inputStream.read()) != -1) {
-					failDumpOutputStream.write(ch);
+				while ((b = inputStream.read()) != -1) {
+					outputStream.write(b);
 				}
 
-				failDumpOutputStream.flush();
+				outputStream.flush();
 
 				return null;
 			}
