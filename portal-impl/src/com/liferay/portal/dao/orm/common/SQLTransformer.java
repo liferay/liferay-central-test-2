@@ -34,6 +34,10 @@ import java.util.regex.Pattern;
  */
 public class SQLTransformer {
 
+	public static void reloadSQLTransformer() {
+		_instance._loadSQLTransformer();
+	}
+	
 	public static String transform(String sql) {
 		return _instance._transform(sql);
 	}
@@ -47,6 +51,10 @@ public class SQLTransformer {
 	}
 
 	private SQLTransformer() {
+		_loadSQLTransformer();
+	}
+
+	private void _loadSQLTransformer() {
 		DB db = DBFactoryUtil.getDB();
 
 		String dbType = db.getType();
@@ -90,7 +98,7 @@ public class SQLTransformer {
 			_vendorSybase = true;
 		}
 	}
-
+	
 	private String _removeLower(String sql) {
 		int x = sql.indexOf(_LOWER_OPEN);
 
