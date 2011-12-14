@@ -83,7 +83,8 @@ public class JournalArticleAssetRendererFactory
 				    article = JournalArticleLocalServiceUtil.getDisplayArticle(
 					    articleResource.getGroupId(),
                         articleResource.getArticleId());
-                } catch (NoSuchArticleException nsae1) {
+                }
+                catch (NoSuchArticleException nsae1) {
                     approvedArticleAvailable = false;
                 }
 			}
