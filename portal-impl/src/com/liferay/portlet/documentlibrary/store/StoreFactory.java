@@ -38,9 +38,9 @@ public class StoreFactory {
 		if (Validator.isNotNull(dlHookImpl)) {
 			boolean found = false;
 
-			for (String[] dlHookStore : _DL_HOOK_STORE_MAP) {
-				if (dlHookImpl.equals(dlHookStore[0])) {
-					PropsValues.DL_STORE_IMPL = dlHookStore[1];
+			for (String[] dlHookStoreParts : _DL_HOOK_STORES) {
+				if (dlHookImpl.equals(dlHookStoreParts[0])) {
+					PropsValues.DL_STORE_IMPL = dlHookStoreParts[1];
 
 					found = true;
 
@@ -105,7 +105,7 @@ public class StoreFactory {
 		_store = store;
 	}
 
-	private static final String[][] _DL_HOOK_STORE_MAP = new String[][] {
+	private static final String[][] _DL_HOOK_STORES = new String[][] {
 		new String[] {
 			"com.liferay.documentlibrary.util.AdvancedFileSystemHook",
 			AdvancedFileSystemStore.class.getName()
@@ -130,7 +130,6 @@ public class StoreFactory {
 	private static Log _log = LogFactoryUtil.getLog(StoreFactory.class);
 
 	private static Store _store;
-
 	private static boolean _warned;
 
 }
