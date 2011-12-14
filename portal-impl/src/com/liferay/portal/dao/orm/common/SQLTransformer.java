@@ -55,6 +55,13 @@ public class SQLTransformer {
 	}
 
 	private void _reloadSQLTransformer() {
+		if (_transformedSqls == null) {
+			_transformedSqls = new ConcurrentHashMap<String, String>();
+		}
+		else {
+			_transformedSqls.clear();
+		}
+
 		_vendorDB2 = false;
 		_vendorDerby = false;
 		_vendorFirebird = false;
@@ -67,8 +74,6 @@ public class SQLTransformer {
 		_vendorPostgreSQL = false;
 		_vendorSQLServer = false;
 		_vendorSybase = false;
-
-		_transformedSqls.clear();
 
 		DB db = DBFactoryUtil.getDB();
 
@@ -396,12 +401,11 @@ public class SQLTransformer {
 		"MOD\\((.+?),(.+?)\\)", Pattern.CASE_INSENSITIVE);
 	private static Pattern _negativeComparisonPattern = Pattern.compile(
 		"(!=)?( -([0-9]+)?)", Pattern.CASE_INSENSITIVE);
-	private static Map<String, String> _transformedSqls =
-		new ConcurrentHashMap<String, String>();
 	private static Pattern _unionAllPattern = Pattern.compile(
 		"SELECT \\* FROM(.*)TEMP_TABLE(.*)", Pattern.CASE_INSENSITIVE);
 
 	private DB _db;
+	private Map<String, String> _transformedSqls;
 	private boolean _vendorDB2;
 	private boolean _vendorDerby;
 	private boolean _vendorFirebird;
