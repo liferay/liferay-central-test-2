@@ -280,16 +280,16 @@ public class SocialActivityAchievementLocalServiceWrapper
 		return _socialActivityAchievementLocalService.getGroupAchievements(groupId);
 	}
 
-	public int getGroupAchievementsCount(long groupId)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return _socialActivityAchievementLocalService.getGroupAchievementsCount(groupId);
-	}
-
 	public java.util.List<com.liferay.portlet.social.model.SocialActivityAchievement> getGroupAchievements(
 		long groupId, java.lang.String name)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _socialActivityAchievementLocalService.getGroupAchievements(groupId,
 			name);
+	}
+
+	public int getGroupAchievementsCount(long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _socialActivityAchievementLocalService.getGroupAchievementsCount(groupId);
 	}
 
 	public int getGroupAchievementsCount(long groupId, java.lang.String name)
