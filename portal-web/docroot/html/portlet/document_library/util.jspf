@@ -55,11 +55,12 @@ private static final String _getPreviewURL(FileEntry fileEntry, FileVersion file
 
 	sb.append(queryString);
 
+	String previewURL = sb.toString();
+
 	if (themeDisplay.isAddSessionIdToURL()) {
-		return PortalUtil.getURLWithSessionId(
-			sb.toString(), themeDisplay.getSessionId());
+		return PortalUtil.getURLWithSessionId(previewURL, themeDisplay.getSessionId());
 	}
 
-	return sb.toString();
+	return previewURL;
 }
 %>
