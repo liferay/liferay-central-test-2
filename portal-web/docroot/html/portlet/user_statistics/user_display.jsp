@@ -33,7 +33,7 @@ if (contributionActivityCounter == null) {
 	contributionActivityCounter.setName(SocialActivityCounterConstants.NAME_CONTRIBUTION);
 }
 
-if (!contributionActivityCounter.isActivePeriod()) {
+if (!contributionActivityCounter.isActivePeriod(SocialActivityCounterConstants.PERIOD_LENGTH_SYSTEM)) {
 	contributionActivityCounter.setCurrentValue(0);
 }
 
@@ -45,7 +45,7 @@ if (participationActivityCounter == null) {
 	participationActivityCounter.setName(SocialActivityCounterConstants.NAME_PARTICIPATION);
 }
 
-if (!participationActivityCounter.isActivePeriod()) {
+if (!participationActivityCounter.isActivePeriod(SocialActivityCounterConstants.PERIOD_LENGTH_SYSTEM)) {
 	participationActivityCounter.setCurrentValue(0);
 }
 
@@ -85,7 +85,7 @@ activityCounters.remove(SocialActivityCounterConstants.NAME_PARTICIPATION);
 
 	<%
 	for (SocialActivityCounter activityCounter : activityCounters.values()) {
-		if (!activityCounter.isActivePeriod()) {
+		if (!activityCounter.isActivePeriod(SocialActivityCounterConstants.PERIOD_LENGTH_SYSTEM)) {
 			activityCounter.setCurrentValue(0);
 		}
 	%>
