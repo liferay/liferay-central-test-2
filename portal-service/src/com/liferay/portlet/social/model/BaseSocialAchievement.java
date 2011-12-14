@@ -28,6 +28,10 @@ import com.liferay.portlet.asset.model.AssetEntry;
 import com.liferay.portlet.asset.service.AssetEntryLocalServiceUtil;
 import com.liferay.portlet.social.service.SocialActivityAchievementLocalServiceUtil;
 import com.liferay.portlet.social.service.SocialActivityCounterLocalServiceUtil;
+
+/**
+ * @author Zsolt Berentey
+ */
 public class BaseSocialAchievement implements SocialAchievement {
 
 	public int getCounterIncrement() {
@@ -51,12 +55,12 @@ public class BaseSocialAchievement implements SocialAchievement {
 	}
 
 	public String getDescriptionKey() {
-		return _DEFAULT_ACHIEVEMENT_PREFIX + _DESCRIPTION + _name;
+		return _ACHIEVEMENT_DESCRIPTION_PREFIX.concat(_name);
 	}
 
 	public String getIcon() {
 		if (_icon == null) {
-			return _name + _ICON + ".jpg";
+			return _name.concat(_ICON_SUFFIX);
 		}
 
 		return _icon;
@@ -67,50 +71,39 @@ public class BaseSocialAchievement implements SocialAchievement {
 	}
 
 	public String getNameKey() {
-		return _DEFAULT_ACHIEVEMENT_PREFIX + _NAME + _name;
+		return _ACHIEVEMENT_NAME_PREFIX.concat(_name);
 	}
 
 	public void initialize(SocialActivityDefinition activityDefinition) {
 		SocialActivityCounterDefinition activityCounterDefinition =
 			activityDefinition.getActivityCounterDefinition(_counterName);
 
-		if (activityCounterDefinition == null) {
-			activityCounterDefinition = new SocialActivityCounterDefinition();
-
-			activityCounterDefinition.setEnabled(true);
-			activityCounterDefinition.setIncrement(_counterIncrement);
-			activityCounterDefinition.setName(_counterName);
-			activityCounterDefinition.setOwnerType(_counterOwner);
-
-			if (_counterPeriodLength > 0) {
-				activityCounterDefinition.setPeriodLength(_counterPeriodLength);
-				activityCounterDefinition.setTransient(true);
-			}
-
-			activityDefinition.addCounter(activityCounterDefinition);
-		}
-	}
-
-	public void processActivity(SocialActivity activity) {
-		if (_counterThreshold == 0) {
+		if (activityCounterDefinition != null) {
 			return;
 		}
 
+		activityCounterDefinition = new SocialActivityCounterDefinition();
+
+		activityCounterDefinition.setEnabled(true);
+		activityCounterDefinition.setIncrement(_counterIncrement);
+		activityCounterDefinition.setName(_counterName);
+		activityCounterDefinition.setOwnerType(_counterOwner);
+
+		if (_counterPeriodLength > 0) {
+			activityCounterDefinition.setPeriodLength(_counterPeriodLength);
+			activityCounterDefinition.setTransient(true);
+		}
+
+		activityDefinition.addCounter(activityCounterDefinition);
+	}
+
+	public void processActivity(SocialActivity activity) {
 		try {
-			int count =
-				SocialActivityAchievementLocalServiceUtil.
-					getUserAchievementCount(
-						activity.getUserId(), activity.getGroupId(), _name);
-
-			if (count > 0) {
-				return;
-			}
-
 			doProcessActivity(activity);
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("Unable to process activity.", e);
+				_log.warn("Unable to process activity", e);
 			}
 		}
 	}
@@ -150,16 +143,16 @@ public class BaseSocialAchievement implements SocialAchievement {
 	}
 
 	public void setName(String name) {
-		name = StringUtil.replace(name, " ", StringPool.UNDERLINE);
+		name = StringUtil.replace(name, StringPool.SPACE, StringPool.UNDERLINE);
 		name = name.toLowerCase();
 
-		_name = StringUtil.extract(name, _SUPPORTED_CHARS_IN_NAME);
+		_name = StringUtil.extract(name, _NAME_SUPPORTED_CHARS);
 	}
 
 	public void setProperty(String name, String value) {
 		if (name.equals("counterIncrement") ||
-			name.equals("counterThreshold") ||
-			name.equals("counterPeriodLength")) {
+			name.equals("counterPeriodLength") ||
+			name.equals("counterThreshold")) {
 
 			BeanPropertiesUtil.setProperty(
 				this, name, GetterUtil.getInteger(value, 0));
@@ -171,6 +164,18 @@ public class BaseSocialAchievement implements SocialAchievement {
 
 	protected void doProcessActivity(SocialActivity activity)
 		throws PortalException, SystemException {
+
+		if (_counterThreshold == 0) {
+			return;
+		}
+
+		int count =
+			SocialActivityAchievementLocalServiceUtil.getUserAchievementCount(
+				activity.getUserId(), activity.getGroupId(), _name);
+
+		if (count > 0) {
+			return;
+		}
 
 		long classNameId = activity.getClassNameId();
 		long classPK = activity.getClassPK();
@@ -202,12 +207,15 @@ public class BaseSocialAchievement implements SocialAchievement {
 		}
 	}
 
-	private static final String _DEFAULT_ACHIEVEMENT_PREFIX =
-		"social.achievement.";
-	private static final String _DESCRIPTION = ".description.";
-	private static final String _ICON = "-icon";
-	private static final String _NAME = ".name.";
-	private static final char[] _SUPPORTED_CHARS_IN_NAME =
+	private static final String _ACHIEVEMENT_DESCRIPTION_PREFIX =
+		"social.achievement.description.";
+
+	private static final String _ACHIEVEMENT_NAME_PREFIX =
+		"social.achievement.name.";
+
+	private static final String _ICON_SUFFIX = "-icon.jpg";
+
+	private static final char[] _NAME_SUPPORTED_CHARS =
 		"abcdefghijklmnopqrstuvwxyz123456789_-.".toCharArray();
 
 	private static Log _log = LogFactoryUtil.getLog(

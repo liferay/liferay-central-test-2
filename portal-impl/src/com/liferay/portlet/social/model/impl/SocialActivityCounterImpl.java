@@ -32,7 +32,7 @@ public class SocialActivityCounterImpl extends SocialActivityCounterBaseImpl {
 		if (periodLength !=
 				SocialActivityCounterConstants.PERIOD_LENGTH_SYSTEM) {
 
-			if (getStartPeriod() + periodLength >
+			if ((getStartPeriod() + periodLength) >
 					SocialCounterPeriodUtil.getActivityDay()) {
 
 				return true;

@@ -192,19 +192,17 @@ public class StringUtil {
 		}
 	}
 
-	public static String extract(String s, char[] extractChars) {
+	public static String extract(String s, char[] chars) {
 		if (s == null) {
 			return StringPool.BLANK;
 		}
 
 		StringBundler sb = new StringBundler();
 
-		char[] chars = s.toCharArray();
-
-		for (char c : chars) {
-			for (char c2 : extractChars) {
-				if (c == c2) {
-					sb.append(c);
+		for (char c1 : s.toCharArray()) {
+			for (char c2 : chars) {
+				if (c1 == c2) {
+					sb.append(c1);
 
 					break;
 				}

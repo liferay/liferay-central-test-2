@@ -180,7 +180,8 @@ public class SocialActivityCounterLocalServiceImpl
 				PortalUtil.getClassNameId(User.class.getName()),
 				activity.getUserId(),
 				SocialActivityCounterConstants.NAME_USER_ACTIVITIES,
-				SocialActivityCounterConstants.TYPE_ACTOR, 1);
+				SocialActivityCounterConstants.TYPE_ACTOR, 1,
+				SocialActivityCounterConstants.PERIOD_LENGTH_SYSTEM);
 		}
 
 		if (!assetEntryUser.isDefaultUser() && assetEntryUser.isActive()) {
@@ -188,7 +189,8 @@ public class SocialActivityCounterLocalServiceImpl
 				activity.getGroupId(), activity.getClassNameId(),
 				activity.getClassPK(),
 				SocialActivityCounterConstants.NAME_ASSET_ACTIVITIES,
-				SocialActivityCounterConstants.TYPE_ASSET, 1);
+				SocialActivityCounterConstants.TYPE_ASSET, 1,
+				SocialActivityCounterConstants.PERIOD_LENGTH_SYSTEM);
 		}
 	}
 
@@ -223,7 +225,8 @@ public class SocialActivityCounterLocalServiceImpl
 					startPeriod) {
 
 				latestContributionActivityCounter = addNewPeriod(
-					latestContributionActivityCounter);
+					latestContributionActivityCounter,
+					SocialActivityCounterConstants.PERIOD_LENGTH_SYSTEM);
 			}
 
 			if (latestPopularityActivityCounter.getStartPeriod() ==
@@ -391,7 +394,8 @@ public class SocialActivityCounterLocalServiceImpl
 		incrementActivityCounter(
 			groupId, PortalUtil.getClassNameId(User.class.getName()), userId,
 			SocialActivityCounterConstants.NAME_USER_ACHIEVEMENTS,
-			SocialActivityCounterConstants.TYPE_ACTOR, 1);
+			SocialActivityCounterConstants.TYPE_ACTOR, 1,
+			SocialActivityCounterConstants.PERIOD_LENGTH_SYSTEM);
 	}
 
 	protected boolean addActivityCounter(
@@ -438,15 +442,15 @@ public class SocialActivityCounterLocalServiceImpl
 			return null;
 		}
 
-		if (periodLength == 
-			SocialActivityCounterConstants.PERIOD_LENGTH_SYSTEM) { 
+		if (periodLength ==
+				SocialActivityCounterConstants.PERIOD_LENGTH_SYSTEM) {
 
 			activityCounter.setEndPeriod(
 				SocialCounterPeriodUtil.getStartPeriod() - 1);
 		}
 		else {
 			activityCounter.setEndPeriod(
-				activityCounter.getStartPeriod() + periodLength - 1); 
+				activityCounter.getStartPeriod() + periodLength - 1);
 		}
 
 		socialActivityCounterPersistence.update(activityCounter, false);
@@ -576,7 +580,8 @@ public class SocialActivityCounterLocalServiceImpl
 			incrementActivityCounter(
 				groupId, userClassNameId, user.getUserId(),
 				activityCounterDefinition.getName(), ownerType,
-				activityCounterDefinition.getIncrement());
+				activityCounterDefinition.getIncrement(),
+				activityCounterDefinition.getPeriodLength());
 		}
 		else if (ownerType == SocialActivityCounterConstants.TYPE_ASSET) {
 			incrementActivityCounter(

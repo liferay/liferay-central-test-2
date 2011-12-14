@@ -71,6 +71,10 @@ public class StringUtil_IW {
 		return StringUtil.endsWith(s, end);
 	}
 
+	public java.lang.String extract(java.lang.String s, char[] chars) {
+		return StringUtil.extract(s, chars);
+	}
+
 	public java.lang.String extractChars(java.lang.String s) {
 		return StringUtil.extractChars(s);
 	}
