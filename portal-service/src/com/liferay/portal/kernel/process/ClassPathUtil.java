@@ -56,15 +56,16 @@ public class ClassPathUtil {
 
 		StringBundler sb = new StringBundler(7);
 
+		String appServerGlobalClassPath = _buildClassPath(
+			classLoader, ServletException.class.getName());
+
+		sb.append(appServerGlobalClassPath);
+		sb.append(File.pathSeparator);
+
 		String portalGlobalClassPath = _buildClassPath(
 			classLoader, PortalException.class.getName());
 
 		sb.append(portalGlobalClassPath);
-		sb.append(File.pathSeparator);
-
-		String appServerGlobalClassPath = _buildClassPath(
-			classLoader, ServletException.class.getName());
-		sb.append(appServerGlobalClassPath);
 
 		_globalClassPath = sb.toString();
 
