@@ -100,8 +100,8 @@ public class HeaderFilter extends BasePortalFilter {
 
 			boolean addHeader = true;
 
-			if (name.equalsIgnoreCase(HttpHeaders.EXPIRES) ||
-				name.equalsIgnoreCase(HttpHeaders.CACHE_CONTROL)) {
+			if (name.equalsIgnoreCase(HttpHeaders.CACHE_CONTROL) ||
+				name.equalsIgnoreCase(HttpHeaders.EXPIRES)) {
 
 				boolean newSession = false;
 
@@ -117,8 +117,8 @@ public class HeaderFilter extends BasePortalFilter {
 					addHeader = false;
 				}
 				else if (PropsValues.WEB_SERVER_PROXY_LEGACY_MODE &&
-					contextPath.equals(PortalUtil.getPathContext()) &&
-					newSession) {
+						 newSession &&
+						 contextPath.equals(PortalUtil.getPathContext())) {
 
 					addHeader = false;
 				}
