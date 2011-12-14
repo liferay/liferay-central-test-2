@@ -339,7 +339,7 @@ public class LangBuilder {
 								"use another IP.");
 					}
 
-					translatedText = _fixText(translatedText);
+					translatedText = _fixTranslation(translatedText);
 
 					unsyncBufferedWriter.write(key + "=" + translatedText);
 
@@ -411,9 +411,23 @@ public class LangBuilder {
 		unsyncBufferedWriter.close();
 	}
 
-	private String _fixText(String text) {
-		text = StringUtil.replace(
-			text.trim(),
+	private String _fixEnglishTranslation(String key, String value) {
+		if (value.contains(" this ")) {
+			if (value.contains(".") || value.contains("?") ||
+				value.contains(":") ||
+				key.equals("the-url-of-the-page-comparing-this-page-content-with-the-previous-version")) {
+			}
+			else {
+				value = StringUtil.replace(value, " this ", " This ");
+			}
+		}
+
+		return value;
+	}
+
+	private String _fixTranslation(String value) {
+		value = StringUtil.replace(
+			value.trim(),
 			new String[] {
 				"  ", "<b>", "</b>", "<i>", "</i>", " url ", "&#39;",
 				"&#39 ;", "&quot;", "&quot ;"
@@ -423,7 +437,7 @@ public class LangBuilder {
 				"\'", "\"", "\""
 			});
 
-		return text;
+		return value;
 	}
 
 	private String _orderProperties(File propertiesFile) throws IOException {
@@ -449,7 +463,11 @@ public class LangBuilder {
 
 			if (pos != -1) {
 				String key = line.substring(0, pos);
-				String value = _fixText(line.substring(pos + 1, line.length()));
+
+				String value = _fixTranslation(
+					line.substring(pos + 1, line.length()));
+
+				value = _fixEnglishTranslation(key, value);
 
 				if (_portalLanguageProperties != null) {
 					String portalValue = String.valueOf(
