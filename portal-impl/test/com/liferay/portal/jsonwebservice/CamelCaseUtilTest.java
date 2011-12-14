@@ -19,31 +19,29 @@ import junit.framework.TestCase;
 /**
  * @author Igor Spasic
  */
-public class CamelCaseUtilTest extends TestCase/* BaseTestCase*/ {
+public class CamelCaseUtilTest extends TestCase {
 
 	public void testFromCamelCase() {
 		assertEquals("camel-case", CamelCaseUtil.fromCamelCase("camelCase"));
 		assertEquals(
 			"camel-case-word", CamelCaseUtil.fromCamelCase("camelCASEWord"));
-		assertEquals(
-			"camel-case", CamelCaseUtil.fromCamelCase("camelCASE"));
+		assertEquals("camel-case", CamelCaseUtil.fromCamelCase("camelCASE"));
 	}
 
 	public void testNormalization() {
-		assertEquals("camelCase",
-			CamelCaseUtil.normalizeCamelCase("camelCase"));
-		assertEquals("camelCaseWord",
-			CamelCaseUtil.normalizeCamelCase("camelCASEWord"));
-		assertEquals("camelCase",
-			CamelCaseUtil.normalizeCamelCase("camelCASE"));
+		assertEquals(
+			"camelCase", CamelCaseUtil.normalizeCamelCase("camelCase"));
+		assertEquals(
+			"camelCaseWord", CamelCaseUtil.normalizeCamelCase("camelCASEWord"));
+		assertEquals(
+			"camelCase", CamelCaseUtil.normalizeCamelCase("camelCASE"));
 	}
 
 	public void testToCamelCase() {
 		assertEquals("camelCase", CamelCaseUtil.toCamelCase("camel-case"));
 		assertEquals(
 			"camelCASEWord", CamelCaseUtil.toCamelCase("camel-CASE-word"));
-		assertEquals(
-			"camelCASE", CamelCaseUtil.toCamelCase("camel-CASE"));
+		assertEquals("camelCASE", CamelCaseUtil.toCamelCase("camel-CASE"));
 	}
 
 }
