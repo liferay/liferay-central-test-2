@@ -76,20 +76,20 @@ public class JournalArticleAssetRendererFactory
 				JournalArticleResourceLocalServiceUtil.getArticleResource(
 					classPK);
 
-            boolean approvedArticleAvailable = true;
+			boolean approvedArticleAvailable = true;
 
 			if (type == TYPE_LATEST_APPROVED) {
-                try {
-				    article = JournalArticleLocalServiceUtil.getDisplayArticle(
-					    articleResource.getGroupId(),
-                        articleResource.getArticleId());
-                }
-                catch (NoSuchArticleException nsae1) {
-                    approvedArticleAvailable = false;
-                }
+				try {
+					article = JournalArticleLocalServiceUtil.getDisplayArticle(
+						articleResource.getGroupId(),
+						articleResource.getArticleId());
+				}
+				catch (NoSuchArticleException nsae1) {
+					approvedArticleAvailable = false;
+				}
 			}
 
-            if ((type != TYPE_LATEST_APPROVED) || !approvedArticleAvailable) {
+			if ((type != TYPE_LATEST_APPROVED) || !approvedArticleAvailable) {
 				article = JournalArticleLocalServiceUtil.getLatestArticle(
 					articleResource.getGroupId(),
 					articleResource.getArticleId(),
