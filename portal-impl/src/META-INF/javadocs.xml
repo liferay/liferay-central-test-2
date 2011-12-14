@@ -3952,7 +3952,7 @@ which are later inherited by users assigned to the UserGroup
 			<param>
 				<name>serviceContext</name>
 				<type>com.liferay.portal.service.ServiceContext</type>
-				<comment><![CDATA[the service context to be applied (optionally <code>null</code>). Can specify the group's asset category IDs, asset tag names, and whether the group is for staging]]></comment>
+				<comment><![CDATA[the service context to be applied (optionally <code>null</code>). Can set asset category IDs and asset tag names for the group, and whether the group is for staging.]]></comment>
 			</param>
 			<return>
 				<comment><![CDATA[the group]]></comment>
@@ -4019,7 +4019,7 @@ which are later inherited by users assigned to the UserGroup
 			<param>
 				<name>serviceContext</name>
 				<type>com.liferay.portal.service.ServiceContext</type>
-				<comment><![CDATA[the service context to be applied (optionally <code>null</code>). Can specify the group's asset category IDs, asset tag names, and whether the group is for staging]]></comment>
+				<comment><![CDATA[the service context to be applied (optionally <code>null</code>). Can set asset category IDs and asset tag names for the group, and whether the group is for staging.]]></comment>
 			</param>
 			<return>
 				<comment><![CDATA[the group]]></comment>
@@ -5483,7 +5483,7 @@ Useful when paginating results. Returns a maximum of <code>end - start</code> in
 			<param>
 				<name>serviceContext</name>
 				<type>com.liferay.portal.service.ServiceContext</type>
-				<comment><![CDATA[the service context to be applied (optionally <code>null</code>). Can specify the group's replacement asset category IDs and replacement asset tag names]]></comment>
+				<comment><![CDATA[the service context to be applied (optionally <code>null</code>). Can set asset category IDs and asset tag names for the group.]]></comment>
 			</param>
 			<return>
 				<comment><![CDATA[the group]]></comment>
@@ -5972,7 +5972,7 @@ Useful when paginating results. Returns a maximum of <code>end - start</code> in
 			<param>
 				<name>serviceContext</name>
 				<type>com.liferay.portal.service.ServiceContext</type>
-				<comment><![CDATA[the service context to be applied (optionally <code>null</code>). Can specify the group's asset category IDs, asset tag names, and whether the group is for staging]]></comment>
+				<comment><![CDATA[the service context to be applied (optionally <code>null</code>). Can set the asset category IDs and asset tag names for the group, and can set whether the group is for staging]]></comment>
 			</param>
 			<return>
 				<comment><![CDATA[the group]]></comment>
@@ -6024,7 +6024,7 @@ Useful when paginating results. Returns a maximum of <code>end - start</code> in
 			<param>
 				<name>serviceContext</name>
 				<type>com.liferay.portal.service.ServiceContext</type>
-				<comment><![CDATA[the service context to be applied (optionally <code>null</code>). Can specify the group's asset category IDs, asset tag names, and whether the group is for staging]]></comment>
+				<comment><![CDATA[the service context to be applied (optionally <code>null</code>). Can set asset category IDs and asset tag names for the group, and can set whether the group is for staging]]></comment>
 			</param>
 			<return>
 				<comment><![CDATA[the group]]></comment>
@@ -6634,7 +6634,7 @@ Useful when paginating results. Returns a maximum of <code>end - start</code> in
 			<param>
 				<name>serviceContext</name>
 				<type>com.liferay.portal.service.ServiceContext</type>
-				<comment><![CDATA[the service context to be applied (optionally <code>null</code>). Can specify the group's replacement asset category IDs and replacement asset tag names]]></comment>
+				<comment><![CDATA[the service context to be applied (optionally <code>null</code>). Can set the asset category IDs and asset tag names for the group.]]></comment>
 			</param>
 			<return>
 				<comment><![CDATA[the group]]></comment>
@@ -7707,7 +7707,7 @@ This method handles the creation of the layout including its resources, metadata
 			<param>
 				<name>serviceContext</name>
 				<type>com.liferay.portal.service.ServiceContext</type>
-				<comment><![CDATA[the service context. Must specify the replacement universally unique identifier and can specify the replacement create date, replacement modified date and the new expando bridge attributes. For layouts that belong to a layout set prototype, an attribute named 'layoutUpdateable' can be set to specify whether site administrators can modify this page within their site.]]></comment>
+				<comment><![CDATA[the service context. Must set the universally unique identifier (UUID) for the layout. Can set the creation date, modification date and the expando bridge attributes for the layout. For layouts that belong to a layout set prototype, an attribute named 'layoutUpdateable' can be set to specify whether site administrators can modify this page within their site.]]></comment>
 			</param>
 			<return>
 				<comment><![CDATA[the layout]]></comment>
@@ -7783,7 +7783,7 @@ This method handles the creation of the layout including its resources, metadata
 			<param>
 				<name>serviceContext</name>
 				<type>com.liferay.portal.service.ServiceContext</type>
-				<comment><![CDATA[the service context. Must specify the universally unique identifier and can specify the create date and modified date. For layouts that belong to a layout set prototype, an attribute named 'layoutUpdateable' can be set to specify whether site administrators can modify this page within their site.]]></comment>
+				<comment><![CDATA[the service context. Must set the universally unique identifier (UUID) for the layout. Can set the creation date and modification date for the layout. For layouts that belong to a layout set prototype, an attribute named 'layoutUpdateable' can be set to specify whether site administrators can modify this page within their site.]]></comment>
 			</param>
 			<return>
 				<comment><![CDATA[the layout]]></comment>
@@ -9019,7 +9019,7 @@ Useful when paginating results. Returns a maximum of <code>end - start</code> in
 			<param>
 				<name>serviceContext</name>
 				<type>com.liferay.portal.service.ServiceContext</type>
-				<comment><![CDATA[the service context. Can specify the replacement modified date and new expando bridge attributes.]]></comment>
+				<comment><![CDATA[the service context. Can set the modification date and expando bridge attributes for the layout.]]></comment>
 			</param>
 			<return>
 				<comment><![CDATA[the updated layout]]></comment>
@@ -11143,7 +11143,7 @@ This method handles the creation of the layout including its resources, metadata
 			<param>
 				<name>serviceContext</name>
 				<type>com.liferay.portal.service.ServiceContext</type>
-				<comment><![CDATA[the service context. Must specify the replacement universally unique identifier and can specify the replacement create date, replacement modified date and the new expando bridge attributes. For layouts that belong to a layout set prototype, an attribute named 'layoutUpdateable' can be used to specify whether site administrators can modify this page within their site.]]></comment>
+				<comment><![CDATA[the service context. Must set the universally unique identifier (UUID) for the layout. Can set the creation date, modification date and the expando bridge attributes for the layout. For layouts that belong to a layout set prototype, an attribute named 'layoutUpdateable' can be used to specify whether site administrators can modify this page within their site.]]></comment>
 			</param>
 			<return>
 				<comment><![CDATA[the layout]]></comment>
@@ -11214,7 +11214,7 @@ This method handles the creation of the layout including its resources, metadata
 			<param>
 				<name>serviceContext</name>
 				<type>com.liferay.portal.service.ServiceContext</type>
-				<comment><![CDATA[the service context. Must specify the replacement universally unique identifier and can specify the replacement create date, replacement modified date and the new expando bridge attributes. For layouts that belong to a layout set prototype, an attribute named 'layoutUpdateable' can be used to specify whether site administrators can modify this page within their site.]]></comment>
+				<comment><![CDATA[the service context. Must set the universally unique identifier (UUID) for the layout. Can specify the creation date, modification date and the expando bridge attributes for the layout. For layouts that belong to a layout set prototype, an attribute named 'layoutUpdateable' can be used to specify whether site administrators can modify this page within their site.]]></comment>
 			</param>
 			<return>
 				<comment><![CDATA[the layout]]></comment>
@@ -12180,7 +12180,7 @@ This method handles the creation of the layout including its resources, metadata
 			<param>
 				<name>serviceContext</name>
 				<type>com.liferay.portal.service.ServiceContext</type>
-				<comment><![CDATA[the service context. Can specify the replacement modified date and new expando bridge attributes.]]></comment>
+				<comment><![CDATA[the service context. Can set the modification date and expando bridge attributes for the layout.]]></comment>
 			</param>
 			<return>
 				<comment><![CDATA[the updated layout]]></comment>
@@ -38434,7 +38434,7 @@ This method handles the creation and bookkeeping of the user including its resou
 			<param>
 				<name>serviceContext</name>
 				<type>com.liferay.portal.service.ServiceContext</type>
-				<comment><![CDATA[the user's service context (optionally <code>null</code>). Can specify the user's universally unique identifier (with the <code>uuid</code> attribute), asset category IDs, asset tag names, and expando bridge attributes.]]></comment>
+				<comment><![CDATA[the user's service context (optionally <code>null</code>). Can set the universally unique identifier (with the <code>uuid</code> attribute), asset category IDs, asset tag names, and expando bridge attributes for the user.]]></comment>
 			</param>
 			<return>
 				<comment><![CDATA[the new user]]></comment>
@@ -38614,7 +38614,7 @@ This method handles the creation and bookkeeping of the user including its resou
 			<param>
 				<name>serviceContext</name>
 				<type>com.liferay.portal.service.ServiceContext</type>
-				<comment><![CDATA[the user's service context (optionally <code>null</code>). Can specify the user's universally unique identifier (with the <code>uuid</code> attribute), asset category IDs, asset tag names, and expando bridge attributes.]]></comment>
+				<comment><![CDATA[the user's service context (optionally <code>null</code>). Can set the universally unique identifier (with the <code>uuid</code> attribute), asset category IDs, asset tag names, and expando bridge attributes for the user.]]></comment>
 			</param>
 			<return>
 				<comment><![CDATA[the new user]]></comment>
@@ -39057,7 +39057,7 @@ user's primary key
 			<param>
 				<name>serviceContext</name>
 				<type>com.liferay.portal.service.ServiceContext</type>
-				<comment><![CDATA[the user's service context. Can specify whether a password should be generated (with the <code>autoPassword</code> attribute) and whether the confirmation email should be sent (with the <code>sendEmail</code> attribute).]]></comment>
+				<comment><![CDATA[the user's service context. Can set whether a password should be generated (with the <code>autoPassword</code> attribute) and whether the confirmation email should be sent (with the <code>sendEmail</code> attribute) for the user.]]></comment>
 			</param>
 			<throws>
 				<name>PortalException</name>
@@ -40652,7 +40652,7 @@ Useful when paginating results. Returns a maximum of <code>end - start</code> in
 			<param>
 				<name>serviceContext</name>
 				<type>com.liferay.portal.service.ServiceContext</type>
-				<comment><![CDATA[the user's service context (optionally <code>null</code>). Can specify the user's expando bridge attributes.]]></comment>
+				<comment><![CDATA[the user's service context (optionally <code>null</code>). Can set expando bridge attributes for the user.]]></comment>
 			</param>
 			<return>
 				<comment><![CDATA[the user]]></comment>
@@ -41031,7 +41031,7 @@ Useful when paginating results. Returns a maximum of <code>end - start</code> in
 			<param>
 				<name>serviceContext</name>
 				<type>com.liferay.portal.service.ServiceContext</type>
-				<comment><![CDATA[the service context. Must specify the portal URL, main path, primary key of the layout, remote address, remote host, and user agent.]]></comment>
+				<comment><![CDATA[the service context. Must set the portal URL, main path, primary key of the layout, remote address, remote host, and agent for the user.]]></comment>
 			</param>
 			<throws>
 				<name>PortalException</name>
@@ -42281,7 +42281,7 @@ Useful when paginating results. Returns a maximum of <code>end - start</code> in
 			<param>
 				<name>serviceContext</name>
 				<type>com.liferay.portal.service.ServiceContext</type>
-				<comment><![CDATA[the user's service context (optionally <code>null</code>). Can specify the user's universally unique identifier (with the <code>uuid</code> attribute), replacement asset category IDs, replacement asset tag names, and new expando bridge attributes.]]></comment>
+				<comment><![CDATA[the user's service context (optionally <code>null</code>). Can set the universally unique identifier (with the <code>uuid</code> attribute), asset category IDs, asset tag names, and new expando bridge attributes for the user.]]></comment>
 			</param>
 			<return>
 				<comment><![CDATA[the user]]></comment>
@@ -43533,7 +43533,7 @@ This method handles the creation and bookkeeping of the user including its resou
 			<param>
 				<name>serviceContext</name>
 				<type>com.liferay.portal.service.ServiceContext</type>
-				<comment><![CDATA[the user's service context (optionally <code>null</code>). Can specify the user's universally unique identifier (with the <code>uuid</code> attribute), asset category IDs, asset tag names, and expando bridge attributes.]]></comment>
+				<comment><![CDATA[the user's service context (optionally <code>null</code>). Can set the universally unique identifier (with the <code>uuid</code> attribute), asset category IDs, asset tag names, and expando bridge attributes for the user.]]></comment>
 			</param>
 			<return>
 				<comment><![CDATA[the new user]]></comment>
@@ -43684,7 +43684,7 @@ This method handles the creation and bookkeeping of the user including its resou
 			<param>
 				<name>serviceContext</name>
 				<type>com.liferay.portal.service.ServiceContext</type>
-				<comment><![CDATA[the user's service context (optionally <code>null</code>). Can specify the user's universally unique identifier (with the <code>uuid</code> attribute), asset category IDs, asset tag names, and expando bridge attributes.]]></comment>
+				<comment><![CDATA[the user's service context (optionally <code>null</code>). Can set the universally unique identifier (with the <code>uuid</code> attribute), asset category IDs, asset tag names, and expando bridge attributes for the user.]]></comment>
 			</param>
 			<return>
 				<comment><![CDATA[the new user]]></comment>
@@ -43860,7 +43860,7 @@ This method handles the creation and bookkeeping of the user including its resou
 			<param>
 				<name>serviceContext</name>
 				<type>com.liferay.portal.service.ServiceContext</type>
-				<comment><![CDATA[the user's service context (optionally <code>null</code>). Can specify the user's universally unique identifier (with the <code>uuid</code> attribute), asset category IDs, asset tag names, and expando bridge attributes.]]></comment>
+				<comment><![CDATA[the user's service context (optionally <code>null</code>). Can set the universally unique identifier (with the <code>uuid</code> attribute), asset category IDs, asset tag names, and expando bridge attributes for the user.]]></comment>
 			</param>
 			<return>
 				<comment><![CDATA[the new user]]></comment>
@@ -44011,7 +44011,7 @@ This method handles the creation and bookkeeping of the user including its resou
 			<param>
 				<name>serviceContext</name>
 				<type>com.liferay.portal.service.ServiceContext</type>
-				<comment><![CDATA[the user's service context (optionally <code>null</code>). Can specify the user's universally unique identifier (with the <code>uuid</code> attribute), asset category IDs, asset tag names, and expando bridge attributes.]]></comment>
+				<comment><![CDATA[the user's service context (optionally <code>null</code>). Can set the universally unique identifier (with the <code>uuid</code> attribute), asset category IDs, asset tag names, and expando bridge attributes for the user.]]></comment>
 			</param>
 			<return>
 				<comment><![CDATA[the new user]]></comment>
@@ -44528,7 +44528,7 @@ This method handles the creation and bookkeeping of the user including its resou
 			<param>
 				<name>serviceContext</name>
 				<type>com.liferay.portal.service.ServiceContext</type>
-				<comment><![CDATA[the user's service context (optionally <code>null</code>). Can specify the user's expando bridge attributes.]]></comment>
+				<comment><![CDATA[the user's service context (optionally <code>null</code>). Can set the expando bridge attributes for the user.]]></comment>
 			</param>
 			<return>
 				<comment><![CDATA[the user]]></comment>
@@ -45274,7 +45274,7 @@ This method handles the creation and bookkeeping of the user including its resou
 			<param>
 				<name>serviceContext</name>
 				<type>com.liferay.portal.service.ServiceContext</type>
-				<comment><![CDATA[the user's service context (optionally <code>null</code>). Can specify the user's universally unique identifier (with the <code>uuid</code> attribute), replacement asset category IDs, replacement asset tag names, and new expando bridge attributes.]]></comment>
+				<comment><![CDATA[the user's service context (optionally <code>null</code>). Can set the universally unique identifier (with the <code>uuid</code> attribute), asset category IDs, asset tag names, and new expando bridge attributes for the user.]]></comment>
 			</param>
 			<return>
 				<comment><![CDATA[the user]]></comment>
@@ -45496,7 +45496,7 @@ This method handles the creation and bookkeeping of the user including its resou
 			<param>
 				<name>serviceContext</name>
 				<type>com.liferay.portal.service.ServiceContext</type>
-				<comment><![CDATA[the user's service context (optionally <code>null</code>). Can specify the user's universally unique identifier (with the <code>uuid</code> attribute), replacement asset category IDs, replacement asset tag names, and new expando bridge attributes.]]></comment>
+				<comment><![CDATA[the user's service context (optionally <code>null</code>). Can set the universally unique identifier (with the <code>uuid</code> attribute), asset category IDs, asset tag names, and new expando bridge attributes for the user.]]></comment>
 			</param>
 			<return>
 				<comment><![CDATA[the user]]></comment>
@@ -62498,7 +62498,7 @@ This method takes two file names, the <code>sourceFileName</code> and the <code>
 			<param>
 				<name>serviceContext</name>
 				<type>com.liferay.portal.service.ServiceContext</type>
-				<comment><![CDATA[the service context to be applied. Can specify the file entry's asset category IDs, asset tag names, and expando bridge attributes. In a Liferay repository, it may include:  <ul> <li> fileEntryTypeId - ID for a custom file entry type </li> <li> fieldsMap - mapping for fields associated with a custom file entry type </li> </ul>]]></comment>
+				<comment><![CDATA[the service context to be applied. Can set the asset category IDs, asset tag names, and expando bridge attributes for the file entry. In a Liferay repository, it may include:  <ul> <li> fileEntryTypeId - ID for a custom file entry type </li> <li> fieldsMap - mapping for fields associated with a custom file entry type </li> </ul>]]></comment>
 			</param>
 			<return>
 				<comment><![CDATA[the file entry]]></comment>
@@ -62569,7 +62569,7 @@ This method takes two file names, the <code>sourceFileName</code> and the <code>
 			<param>
 				<name>serviceContext</name>
 				<type>com.liferay.portal.service.ServiceContext</type>
-				<comment><![CDATA[the service context to be applied. Can specify the file entry's asset category IDs, asset tag names, and expando bridge attributes. In a Liferay repository, it may include:  <ul> <li> fileEntryTypeId - ID for a custom file entry type </li> <li> fieldsMap - mapping for fields associated with a custom file entry type </li> </ul>]]></comment>
+				<comment><![CDATA[the service context to be applied. Can set the asset category IDs, asset tag names, and expando bridge attributes for the file entry. In a Liferay repository, it may include:  <ul> <li> fileEntryTypeId - ID for a custom file entry type </li> <li> fieldsMap - mapping for fields associated with a custom file entry type </li> </ul>]]></comment>
 			</param>
 			<return>
 				<comment><![CDATA[the file entry]]></comment>
@@ -62645,7 +62645,7 @@ This method takes two file names, the <code>sourceFileName</code> and the <code>
 			<param>
 				<name>serviceContext</name>
 				<type>com.liferay.portal.service.ServiceContext</type>
-				<comment><![CDATA[the service context to be applied. Can specify the file entry's asset category IDs, asset tag names, and expando bridge attributes. In a Liferay repository, it may include:  <ul> <li> fileEntryTypeId - ID for a custom file entry type </li> <li> fieldsMap - mapping for fields associated with a custom file entry type </li> </ul>]]></comment>
+				<comment><![CDATA[the service context to be applied. Can set the asset category IDs, asset tag names, and expando bridge attributes for the file entry. In a Liferay repository, it may include:  <ul> <li> fileEntryTypeId - ID for a custom file entry type </li> <li> fieldsMap - mapping for fields associated with a custom file entry type </li> </ul>]]></comment>
 			</param>
 			<return>
 				<comment><![CDATA[the file entry]]></comment>
@@ -62724,7 +62724,7 @@ This method takes two file names, the <code>sourceFileName</code> and the <code>
 			<param>
 				<name>serviceContext</name>
 				<type>com.liferay.portal.service.ServiceContext</type>
-				<comment><![CDATA[the service context to be applied. Can specify the file entry's asset category IDs, asset tag names, and expando bridge attributes.]]></comment>
+				<comment><![CDATA[the service context to be applied. Can set the asset category IDs, asset tag names, and expando bridge attributes for the file entry.]]></comment>
 			</param>
 			<return>
 				<comment><![CDATA[the file shortcut]]></comment>
@@ -64174,7 +64174,7 @@ This method takes two file names, the <code>sourceFileName</code> and the <code>
 			<param>
 				<name>serviceContext</name>
 				<type>com.liferay.portal.service.ServiceContext</type>
-				<comment><![CDATA[the service context to be applied. Can specify the file entry's asset category IDs, asset tag names, and expando bridge attributes. In a Liferay repository, it may include:  <ul> <li> fileEntryTypeId - ID for a custom file entry type </li> <li> fieldsMap - mapping for fields associated with a custom file entry type </li> </ul>]]></comment>
+				<comment><![CDATA[the service context to be applied. Can set the asset category IDs, asset tag names, and expando bridge attributes for the file entry. In a Liferay repository, it may include:  <ul> <li> fileEntryTypeId - ID for a custom file entry type </li> <li> fieldsMap - mapping for fields associated with a custom file entry type </li> </ul>]]></comment>
 			</param>
 			<return>
 				<comment><![CDATA[the file entry]]></comment>
@@ -64245,7 +64245,7 @@ This method takes two file names, the <code>sourceFileName</code> and the <code>
 			<param>
 				<name>serviceContext</name>
 				<type>com.liferay.portal.service.ServiceContext</type>
-				<comment><![CDATA[the service context to be applied. Can specify the file entry's asset category IDs, asset tag names, and expando bridge attributes. In a Liferay repository, it may include:  <ul> <li> fileEntryTypeId - ID for a custom file entry type </li> <li> fieldsMap - mapping for fields associated with a custom file entry type </li> </ul>]]></comment>
+				<comment><![CDATA[the service context to be applied. Can set the asset category IDs, asset tag names, and expando bridge attributes for the file entry. In a Liferay repository, it may include:  <ul> <li> fileEntryTypeId - ID for a custom file entry type </li> <li> fieldsMap - mapping for fields associated with a custom file entry type </li> </ul>]]></comment>
 			</param>
 			<return>
 				<comment><![CDATA[the file entry]]></comment>
@@ -64321,7 +64321,7 @@ This method takes two file names, the <code>sourceFileName</code> and the <code>
 			<param>
 				<name>serviceContext</name>
 				<type>com.liferay.portal.service.ServiceContext</type>
-				<comment><![CDATA[the service context to be applied. Can specify the file entry's asset category IDs, asset tag names, and expando bridge attributes. In a Liferay repository, it may include:  <ul> <li> fileEntryTypeId - ID for a custom file entry type </li> <li> fieldsMap - mapping for fields associated with a custom file entry type </li> </ul>]]></comment>
+				<comment><![CDATA[the service context to be applied. Can set the asset category IDs, asset tag names, and expando bridge attributes for the file entry. In a Liferay repository, it may include:  <ul> <li> fileEntryTypeId - ID for a custom file entry type </li> <li> fieldsMap - mapping for fields associated with a custom file entry type </li> </ul>]]></comment>
 			</param>
 			<return>
 				<comment><![CDATA[the file entry]]></comment>
@@ -64400,7 +64400,7 @@ This method takes two file names, the <code>sourceFileName</code> and the <code>
 			<param>
 				<name>serviceContext</name>
 				<type>com.liferay.portal.service.ServiceContext</type>
-				<comment><![CDATA[the service context to be applied. Can specify the file entry's asset category IDs, asset tag names, and expando bridge attributes.]]></comment>
+				<comment><![CDATA[the service context to be applied. Can set the asset category IDs, asset tag names, and expando bridge attributes for the file entry.]]></comment>
 			</param>
 			<return>
 				<comment><![CDATA[the file shortcut]]></comment>
@@ -64770,7 +64770,7 @@ This method takes two file names, the <code>sourceFileName</code> and the <code>
 			<param>
 				<name>serviceContext</name>
 				<type>com.liferay.portal.service.ServiceContext</type>
-				<comment><![CDATA[the service context to be applied. Can specify the file entry's asset category IDs, asset tag names, and expando bridge attributes. In a Liferay repository, it may include:  <ul> <li> fileEntryTypeId - ID for a custom file entry type </li> <li> fieldsMap - mapping for fields associated with a custom file entry type </li> </ul>]]></comment>
+				<comment><![CDATA[the service context to be applied. Can set the asset category IDs, asset tag names, and expando bridge attributes for the file entry. In a Liferay repository, it may include:  <ul> <li> fileEntryTypeId - ID for a custom file entry type </li> <li> fieldsMap - mapping for fields associated with a custom file entry type </li> </ul>]]></comment>
 			</param>
 			<return>
 				<comment><![CDATA[the file entry]]></comment>
@@ -64836,7 +64836,7 @@ This method takes two file names, the <code>sourceFileName</code> and the <code>
 			<param>
 				<name>serviceContext</name>
 				<type>com.liferay.portal.service.ServiceContext</type>
-				<comment><![CDATA[the service context to be applied. Can specify the file entry's asset category IDs, asset tag names, and expando bridge attributes. In a Liferay repository, it may include:  <ul> <li> fileEntryTypeId - ID for a custom file entry type </li> <li> fieldsMap - mapping for fields associated with a custom file entry type </li> </ul>]]></comment>
+				<comment><![CDATA[the service context to be applied. Can set the asset category IDs, asset tag names, and expando bridge attributes for the file entry. In a Liferay repository, it may include:  <ul> <li> fileEntryTypeId - ID for a custom file entry type </li> <li> fieldsMap - mapping for fields associated with a custom file entry type </li> </ul>]]></comment>
 			</param>
 			<return>
 				<comment><![CDATA[the file entry]]></comment>
@@ -64907,7 +64907,7 @@ This method takes two file names, the <code>sourceFileName</code> and the <code>
 			<param>
 				<name>serviceContext</name>
 				<type>com.liferay.portal.service.ServiceContext</type>
-				<comment><![CDATA[the service context to be applied. Can specify the file entry's asset category IDs, asset tag names, and expando bridge attributes. In a Liferay repository, it may include:  <ul> <li> fileEntryTypeId - ID for a custom file entry type </li> <li> fieldsMap - mapping for fields associated with a custom file entry type </li> </ul>]]></comment>
+				<comment><![CDATA[the service context to be applied. Can set the asset category IDs, asset tag names, and expando bridge attributes for the file entry. In a Liferay repository, it may include:  <ul> <li> fileEntryTypeId - ID for a custom file entry type </li> <li> fieldsMap - mapping for fields associated with a custom file entry type </li> </ul>]]></comment>
 			</param>
 			<return>
 				<comment><![CDATA[the file entry]]></comment>
@@ -64944,7 +64944,7 @@ This method takes two file names, the <code>sourceFileName</code> and the <code>
 			<param>
 				<name>serviceContext</name>
 				<type>com.liferay.portal.service.ServiceContext</type>
-				<comment><![CDATA[the service context to be applied. Can specify the file entry's asset category IDs, asset tag names, and expando bridge attributes.]]></comment>
+				<comment><![CDATA[the service context to be applied. Can set the asset category IDs, asset tag names, and expando bridge attributes for the file entry.]]></comment>
 			</param>
 			<return>
 				<comment><![CDATA[the file shortcut]]></comment>
@@ -67419,7 +67419,7 @@ This method takes two file names, the <code>sourceFileName</code> and the <code>
 			<param>
 				<name>serviceContext</name>
 				<type>com.liferay.portal.service.ServiceContext</type>
-				<comment><![CDATA[the service context to be applied. Can specify the file entry's asset category IDs, asset tag names, and expando bridge attributes. In a Liferay repository, it may include:  <ul> <li> fileEntryTypeId - ID for a custom file entry type </li> <li> fieldsMap - mapping for fields associated with a custom file entry type </li> </ul>]]></comment>
+				<comment><![CDATA[the service context to be applied. Can set the asset category IDs, asset tag names, and expando bridge attributes for the file entry. In a Liferay repository, it may include:  <ul> <li> fileEntryTypeId - ID for a custom file entry type </li> <li> fieldsMap - mapping for fields associated with a custom file entry type </li> </ul>]]></comment>
 			</param>
 			<return>
 				<comment><![CDATA[the file entry]]></comment>
@@ -67485,7 +67485,7 @@ This method takes two file names, the <code>sourceFileName</code> and the <code>
 			<param>
 				<name>serviceContext</name>
 				<type>com.liferay.portal.service.ServiceContext</type>
-				<comment><![CDATA[the service context to be applied. Can specify the file entry's asset category IDs, asset tag names, and expando bridge attributes. In a Liferay repository, it may include:  <ul> <li> fileEntryTypeId - ID for a custom file entry type </li> <li> fieldsMap - mapping for fields associated with a custom file entry type </li> </ul>]]></comment>
+				<comment><![CDATA[the service context to be applied. Can set the asset category IDs, asset tag names, and expando bridge attributes for the file entry. In a Liferay repository, it may include:  <ul> <li> fileEntryTypeId - ID for a custom file entry type </li> <li> fieldsMap - mapping for fields associated with a custom file entry type </li> </ul>]]></comment>
 			</param>
 			<return>
 				<comment><![CDATA[the file entry]]></comment>
@@ -67556,7 +67556,7 @@ This method takes two file names, the <code>sourceFileName</code> and the <code>
 			<param>
 				<name>serviceContext</name>
 				<type>com.liferay.portal.service.ServiceContext</type>
-				<comment><![CDATA[the service context to be applied. Can specify the file entry's asset category IDs, asset tag names, and expando bridge attributes. In a Liferay repository, it may include:  <ul> <li> fileEntryTypeId - ID for a custom file entry type </li> <li> fieldsMap - mapping for fields associated with a custom file entry type </li> </ul>]]></comment>
+				<comment><![CDATA[the service context to be applied. Can set the asset category IDs, asset tag names, and expando bridge attributes for the file entry. In a Liferay repository, it may include:  <ul> <li> fileEntryTypeId - ID for a custom file entry type </li> <li> fieldsMap - mapping for fields associated with a custom file entry type </li> </ul>]]></comment>
 			</param>
 			<return>
 				<comment><![CDATA[the file entry]]></comment>
@@ -67722,7 +67722,7 @@ This method takes two file names, the <code>sourceFileName</code> and the <code>
 			<param>
 				<name>serviceContext</name>
 				<type>com.liferay.portal.service.ServiceContext</type>
-				<comment><![CDATA[the service context to be applied. Can specify the file entry's asset category IDs, asset tag names, and expando bridge attributes.]]></comment>
+				<comment><![CDATA[the service context to be applied. Can set the asset category IDs, asset tag names, and expando bridge attributes for the file entry.]]></comment>
 			</param>
 			<return>
 				<comment><![CDATA[the file shortcut]]></comment>
