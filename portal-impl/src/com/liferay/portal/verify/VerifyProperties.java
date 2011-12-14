@@ -57,11 +57,11 @@ public class VerifyProperties extends VerifyProcess {
 			verifyRenamedPortalProperty(oldKey, newKey);
 		}
 
-		StoreFactory.checkProperties();
-
 		for (String key : _OBSOLETE_PORTAL_KEYS) {
 			verifyObsoletePortalProperty(key);
 		}
+
+		StoreFactory.checkProperties();
 	}
 
 	protected void verifyMigratedSystemProperty(String oldKey, String newKey)
