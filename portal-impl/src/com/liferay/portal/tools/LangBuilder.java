@@ -89,10 +89,10 @@ public class LangBuilder {
 
 			ClassLoader classLoader = clazz.getClassLoader();
 
-			InputStream is = classLoader.getResourceAsStream(
+			InputStream inputStream = classLoader.getResourceAsStream(
 				"content/Language.properties");
 
-			_portalLanguageProperties.load(is);
+			_portalLanguageProperties.load(inputStream);
 		}
 
 		File renameKeysFile = new File(_langDir + "/rename.properties");
@@ -339,16 +339,7 @@ public class LangBuilder {
 								"use another IP.");
 					}
 
-					translatedText = StringUtil.replace(
-						translatedText.trim(),
-						new String[] {
-							"  ", "<b>", "</b>", "<i>", "</i>", " url ",
-							"&#39;", "&#39 ;", "&quot;", "&quot ;"
-						},
-						new String[] {
-							" ", "<strong>", "</strong>", "<em>", "</em>",
-							" URL ", "\'", "\'", "\"", "\""
-						});
+					translatedText = _fixText(translatedText);
 
 					unsyncBufferedWriter.write(key + "=" + translatedText);
 
@@ -420,6 +411,21 @@ public class LangBuilder {
 		unsyncBufferedWriter.close();
 	}
 
+	private String _fixText(String text) {
+		text = StringUtil.replace(
+			text.trim(),
+			new String[] {
+				"  ", "<b>", "</b>", "<i>", "</i>", " url ", "&#39;",
+				"&#39 ;", "&quot;", "&quot ;"
+			},
+			new String[] {
+				" ", "<strong>", "</strong>", "<em>", "</em>", " URL ", "\'",
+				"\'", "\"", "\""
+			});
+
+		return text;
+	}
+
 	private String _orderProperties(File propertiesFile) throws IOException {
 		if (!propertiesFile.exists()) {
 			return null;
@@ -443,7 +449,7 @@ public class LangBuilder {
 
 			if (pos != -1) {
 				String key = line.substring(0, pos);
-				String value = line.substring(pos + 1, line.length());
+				String value = _fixText(line.substring(pos + 1, line.length()));
 
 				if (_portalLanguageProperties != null) {
 					String portalValue = String.valueOf(
