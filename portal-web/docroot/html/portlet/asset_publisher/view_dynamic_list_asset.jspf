@@ -33,10 +33,12 @@ for (int assetEntryIndex = 0; assetEntryIndex < results.size(); assetEntryIndex+
 	    assetRenderer = assetRendererFactory.getAssetRenderer(classPK);
     }
     catch (Exception e) {
-        _log.error(e.getMessage());
+		if (_log.isWarnEnabled()) {
+			_log.warn(e, e);
+		}
     }
 
-	if (assetRenderer == null || !assetRenderer.isDisplayable()) {
+	if ((assetRenderer == null) || !assetRenderer.isDisplayable()) {
 		continue;
 	}
 
