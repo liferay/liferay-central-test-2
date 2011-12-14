@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.io.DummyWriter;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.StreamUtil;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -56,14 +57,7 @@ public class TikaRawMetadataProcessor extends XugglerRawMetadataProcessor {
 			throw new SystemException(ioe);
 		}
 		finally {
-			if (inputStream != null) {
-				try {
-					inputStream.close();
-				}
-				catch (IOException ioe) {
-					throw new SystemException(ioe);
-				}
-			}
+			StreamUtil.cleanUp(inputStream);
 		}
 	}
 
