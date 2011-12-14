@@ -35,9 +35,13 @@ import java.util.regex.Pattern;
 public class SQLTransformer {
 
 	public static void reloadSQLTransformer() {
+		_instance._clearTransformedSqlsCache();
+
+		_instance.resetVendor();
+
 		_instance._loadSQLTransformer();
 	}
-	
+
 	public static String transform(String sql) {
 		return _instance._transform(sql);
 	}
@@ -52,6 +56,10 @@ public class SQLTransformer {
 
 	private SQLTransformer() {
 		_loadSQLTransformer();
+	}
+
+	private void _clearTransformedSqlsCache() {
+		_transformedSqls.clear();
 	}
 
 	private void _loadSQLTransformer() {
@@ -98,7 +106,7 @@ public class SQLTransformer {
 			_vendorSybase = true;
 		}
 	}
-	
+
 	private String _removeLower(String sql) {
 		int x = sql.indexOf(_LOWER_OPEN);
 
@@ -236,6 +244,21 @@ public class SQLTransformer {
 		Matcher matcher = _unionAllPattern.matcher(sql);
 
 		return matcher.replaceAll("$1 $2");
+	}
+
+	private void resetVendor() {
+		_vendorDB2 = false;
+		_vendorDerby = false;
+		_vendorFirebird = false;
+		// _vendorHypersonic = false;
+		_vendorInformix = false;
+		_vendorIngres = false;
+		_vendorInterbase = false;
+		_vendorMySQL = false;
+		_vendorOracle = false;
+		_vendorPostgreSQL = false;
+		_vendorSQLServer = false;
+		_vendorSybase = false;
 	}
 
 	private String _transform(String sql) {

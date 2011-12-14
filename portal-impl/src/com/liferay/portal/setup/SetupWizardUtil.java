@@ -313,9 +313,9 @@ public class SetupWizardUtil {
 		// Reload Custom SQL
 
 		CustomSQLUtil.reloadCustomSQL();
-		
+
 		// Reload SQLTransformer
-		
+
 		SQLTransformer.reloadSQLTransformer();
 
 		HttpSession session = request.getSession();
