@@ -88,7 +88,7 @@ portletsList = ListUtil.sort(portletsList, new PortletTitleComparator(applicatio
 			<ul id="<portlet:namespace />portletDataControls">
 				<li class="tree-item">
 					<aui:fieldset cssClass="portlet-data-section" label="range">
-						<aui:input  id="rangeAll" label="all" name="range" type="radio" value="all" />
+						<aui:input id="rangeAll" label="all" name="range" type="radio" value="all" />
 
 						<aui:input checked="<%= true %>"  id="rangeLastPublish" label="from-last-publish-date" name="range" type="radio" value="fromLastPublishDate" />
 
