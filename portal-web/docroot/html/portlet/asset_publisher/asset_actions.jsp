@@ -45,8 +45,7 @@ if (showEditURL && (editPortletURL != null)) {
 	redirectURL.setParameter("struts_action", "/asset_publisher/add_asset_redirect");
 
 	editPortletURL.setParameter("redirect", redirectURL.toString());
-
-    editPortletURL.setParameter("originalRedirect", redirectURL.toString());
+	editPortletURL.setParameter("originalRedirect", redirectURL.toString());
 
 	editPortletURLString = editPortletURL.toString();
 

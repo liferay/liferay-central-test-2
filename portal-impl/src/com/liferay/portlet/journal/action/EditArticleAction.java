@@ -15,7 +15,6 @@
 package com.liferay.portlet.journal.action;
 
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.upload.UploadException;
@@ -201,7 +200,8 @@ public class EditArticleAction extends PortletAction {
 				Layout layout = themeDisplay.getLayout();
 
 				if (cmd.equals(Constants.DELETE_VERSIONS) &&
-						deleteAllVersions(actionRequest)) {
+					hasArticle(actionRequest)) {
+
 					redirect = ParamUtil.getString(
 						actionRequest, "originalRedirect");
 				}
@@ -307,22 +307,6 @@ public class EditArticleAction extends PortletAction {
 				"/html/portlet/journal/editor.jsp");
 
 		portletRequestDispatcher.include(resourceRequest, resourceResponse);
-	}
-
-	protected boolean deleteAllVersions(ActionRequest actionRequest)
-		throws SystemException, PortalException {
-
-		long groupId = ParamUtil.getLong(actionRequest, "groupId");
-		String articleId = ParamUtil.getString(actionRequest, "articleId");
-
-		try {
-			JournalArticleLocalServiceUtil.getArticle(groupId, articleId);
-		}
-		catch (NoSuchArticleException nsae) {
-			return true;
-		}
-
-		return false;
 	}
 
 	protected void deleteArticles(ActionRequest actionRequest)
@@ -460,6 +444,22 @@ public class EditArticleAction extends PortletAction {
 		portletURL.setParameter("languageId", languageId, false);
 
 		return portletURL.toString();
+	}
+
+	protected boolean hasArticle(ActionRequest actionRequest)
+		throws Exception {
+
+		long groupId = ParamUtil.getLong(actionRequest, "groupId");
+		String articleId = ParamUtil.getString(actionRequest, "articleId");
+
+		try {
+			JournalArticleLocalServiceUtil.getArticle(groupId, articleId);
+		}
+		catch (NoSuchArticleException nsae) {
+			return true;
+		}
+
+		return false;
 	}
 
 	protected void removeArticlesLocale(ActionRequest actionRequest)
