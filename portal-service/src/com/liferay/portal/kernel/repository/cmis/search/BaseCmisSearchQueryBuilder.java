@@ -213,7 +213,7 @@ public class BaseCmisSearchQueryBuilder implements CMISSearchQueryBuilder {
 					cmisJunction = anyCMISConjunction;
 				}
 				else if (booleanClauseOccur.equals(
-					BooleanClauseOccur.MUST_NOT)) {
+							BooleanClauseOccur.MUST_NOT)) {
 
 					cmisJunction = notCMISConjunction;
 				}
@@ -315,4 +315,5 @@ public class BaseCmisSearchQueryBuilder implements CMISSearchQueryBuilder {
 		_supportedFields.add(Field.USER_ID);
 		_supportedFields.add(Field.USER_NAME);
 	}
+
 }

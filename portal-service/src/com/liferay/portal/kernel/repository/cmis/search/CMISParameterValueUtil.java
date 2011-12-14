@@ -46,7 +46,7 @@ public class CMISParameterValueUtil {
 			try {
 				DateFormat searchSimpleDateFormat =
 					DateFormatFactoryUtil.getSimpleDateFormat(
-						PropsUtil.get(PropsKeys.INDEX_DATE_FORMAT_PATTERN));
+						_INDEX_DATE_FORMAT_PATTERN);
 
 				Date date = searchSimpleDateFormat.parse(value);
 
@@ -76,6 +76,9 @@ public class CMISParameterValueUtil {
 
 		return value;
 	}
+
+	private static final String _INDEX_DATE_FORMAT_PATTERN = PropsUtil.get(
+		PropsKeys.INDEX_DATE_FORMAT_PATTERN);
 
 	private static Log _log = LogFactoryUtil.getLog(
 		CMISParameterValueUtil.class);

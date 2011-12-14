@@ -508,7 +508,7 @@ public class DocumentImpl implements Document {
 
 	public Date getDate(String name) throws ParseException {
 		DateFormat dateFormat = DateFormatFactoryUtil.getSimpleDateFormat(
-			_DATE_FORMAT_PATTERN);
+			_INDEX_DATE_FORMAT_PATTERN);
 
 		return dateFormat.parse(get(name));
 	}
@@ -580,7 +580,7 @@ public class DocumentImpl implements Document {
 		return sb.toString();
 	}
 
-	private static final String _DATE_FORMAT_PATTERN = PropsUtil.get(
+	private static final String _INDEX_DATE_FORMAT_PATTERN = PropsUtil.get(
 		PropsKeys.INDEX_DATE_FORMAT_PATTERN);
 
 	private static final String _SORTABLE_TEXT_FIELD_SUFFIX = "sortable";
