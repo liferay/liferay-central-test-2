@@ -28,7 +28,7 @@ String backURL = ParamUtil.getString(request, "backURL");
 
 String referringPortletResource = ParamUtil.getString(request, "referringPortletResource");
 
-String referringPortletName = PortletConstants.getRootPortletId(referringPortletResource);
+String referringPortletResourceRootPortletId = PortletConstants.getRootPortletId(referringPortletResource);
 
 String uploadProgressId = "dlFileEntryUploadProgress";
 
@@ -255,7 +255,7 @@ else if (dlFileEntryType != null) {
 		<aui:field-wrapper label="folder">
 			<aui:a href="<%= viewFolderURL %>" id="folderName"><%= folderName %></aui:a>
 
-			<c:if test="<%= referringPortletName.equals(PortletKeys.ASSET_PUBLISHER) %>">
+			<c:if test="<%= referringPortletResourceRootPortletId.equals(PortletKeys.ASSET_PUBLISHER) %>">
 				<aui:button name="openFolderSelectorButton" onClick='<%= renderResponse.getNamespace() + "openFolderSelector();" %>' value="select" />
 
 				<%
@@ -522,6 +522,7 @@ else {
 	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "add-file-entry"), currentURL);
 }
 %>
+
 <%!
 private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.portlet.document_library.edit_file_entry_jsp");
 %>
