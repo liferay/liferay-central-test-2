@@ -124,7 +124,7 @@ private void _buildCategoriesNavigation(List<AssetCategory> categories, long cat
 		sb.append("<li><span>");
 
 		if (categoryId == category.getCategoryId()) {
-			portletURL.setParameter("categoryId", "");
+			portletURL.setParameter("categoryId", StringPool.BLANK);
 
 			sb.append("<a class=\"tag-selected\" href=\"");
 		}
