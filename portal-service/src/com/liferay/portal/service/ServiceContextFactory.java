@@ -89,7 +89,9 @@ public class ServiceContextFactory {
 				user = PortalUtil.getUser(request);
 			}
 			catch (NoSuchUserException nsue) {
+
 				// LPS-24160
+
 			}
 
 			if (user != null) {
