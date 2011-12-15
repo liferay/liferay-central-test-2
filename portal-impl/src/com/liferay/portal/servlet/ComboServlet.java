@@ -14,7 +14,6 @@
 
 package com.liferay.portal.servlet;
 
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
@@ -126,20 +125,18 @@ public class ComboServlet extends HttpServlet {
 
 					return;
 				}
-				else {
-					byte[] bytes = new byte[0];
 
-					if (Validator.isNotNull(modulePath)) {
-						modulePath = StringUtil.replaceFirst(
-							p.concat(modulePath), contextPath,
-							StringPool.BLANK);
+				byte[] bytes = new byte[0];
 
-						bytes = getFileContent(
-							request, response, modulePath, minifierType);
-					}
+				if (Validator.isNotNull(modulePath)) {
+					modulePath = StringUtil.replaceFirst(
+						p.concat(modulePath), contextPath, StringPool.BLANK);
 
-					bytesArray[--length] = bytes;
+					bytes = getFileContent(
+						request, response, modulePath, minifierType);
 				}
+
+				bytesArray[--length] = bytes;
 			}
 
 			if (modulePathsString != null) {
@@ -289,7 +286,7 @@ public class ComboServlet extends HttpServlet {
 	}
 
 	protected boolean validateModuleExtension(String moduleName)
-		throws SystemException {
+		throws Exception {
 
 		boolean validModuleExtension = false;
 
