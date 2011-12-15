@@ -302,11 +302,6 @@ public class SetupWizardUtil {
 		WebCachePoolUtil.clear();
 		CentralizedThreadLocal.clearShortLivedThreadLocals();
 
-		// SQL
-
-		CustomSQLUtil.reloadCustomSQL();
-		SQLTransformer.reloadSQLTransformer();
-
 		// Startup
 
 		QuartzLocalServiceUtil.checkQuartzTables();
@@ -314,6 +309,11 @@ public class SetupWizardUtil {
 		StartupAction startupAction = new StartupAction();
 
 		startupAction.run(null);
+
+		// SQL
+
+		CustomSQLUtil.reloadCustomSQL();
+		SQLTransformer.reloadSQLTransformer();
 
 		// Servlet context
 
