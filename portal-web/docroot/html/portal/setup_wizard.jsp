@@ -109,22 +109,38 @@
 										<dl class="database-values">
 											<c:choose>
 												<c:when test="<%= Validator.isNotNull(PropsValues.JDBC_DEFAULT_JNDI_NAME) %>">
-													<dt><liferay-ui:message key="jdbc-default-jndi-name" /></dt>
-
-													<dd><%= PropsValues.JDBC_DEFAULT_JNDI_NAME %></dd>
+													<dt>
+														<liferay-ui:message key="jdbc-default-jndi-name" />
+													</dt>
+													<dd>
+														<%= PropsValues.JDBC_DEFAULT_JNDI_NAME %>
+													</dd>
 												</c:when>
 												<c:otherwise>
-														<dt><liferay-ui:message key="jdbc-url" /></dt>
-														<dd><%= PropsValues.JDBC_DEFAULT_URL %></dd>
-
-														<dt><liferay-ui:message key="jdbc-driver-class-name" /></dt>
-														<dd><%= PropsValues.JDBC_DEFAULT_DRIVER_CLASS_NAME %></dd>
-
-														<dt><liferay-ui:message key="user-name" /></dt>
-														<dd><%= PropsValues.JDBC_DEFAULT_USERNAME %></dd>
-
-														<dt><liferay-ui:message key="password" /></dt>
-														<dd>*****</dd>
+													<dt>
+														<liferay-ui:message key="jdbc-url" />
+													</dt>
+													<dd>
+														<%= PropsValues.JDBC_DEFAULT_URL %>
+													</dd>
+													<dt>
+														<liferay-ui:message key="jdbc-driver-class-name" />
+													</dt>
+													<dd>
+														<%= PropsValues.JDBC_DEFAULT_DRIVER_CLASS_NAME %>
+													</dd>
+													<dt>
+														<liferay-ui:message key="user-name" />
+													</dt>
+													<dd>
+														<%= PropsValues.JDBC_DEFAULT_USERNAME %>
+													</dd>
+													<dt>
+														<liferay-ui:message key="password" />
+													</dt>
+													<dd>
+														********
+													</dd>
 												</c:otherwise>
 											</c:choose>
 										</dl>

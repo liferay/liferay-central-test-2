@@ -127,8 +127,8 @@ body {
 }
 
 .database-values dt {
-	font-weight: bold;
 	float: left;
+	font-weight: bold;
 	margin-right: 1em;
 }
 
