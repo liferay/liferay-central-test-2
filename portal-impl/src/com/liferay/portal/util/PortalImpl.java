@@ -1754,7 +1754,7 @@ public class PortalImpl implements Portal {
 			ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
-		String facebookURL = _getServletURL(
+		String facebookURL = getServletURL(
 			portlet, FacebookUtil.FACEBOOK_SERVLET_PATH + facebookCanvasPageURL,
 			themeDisplay);
 
@@ -1791,7 +1791,7 @@ public class PortalImpl implements Portal {
 	public String getGoogleGadgetURL(Portlet portlet, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
-		return _getServletURL(
+		return getServletURL(
 			portlet, PropsValues.GOOGLE_GADGET_SERVLET_MAPPING, themeDisplay);
 	}
 
@@ -2439,7 +2439,7 @@ public class PortalImpl implements Portal {
 	public String getNetvibesURL(Portlet portlet, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
-		return _getServletURL(
+		return getServletURL(
 			portlet, PropsValues.NETVIBES_SERVLET_MAPPING, themeDisplay);
 	}
 
@@ -2633,7 +2633,7 @@ public class PortalImpl implements Portal {
 		Long plidObj = _plidToPortletIdMap.get(key);
 
 		if (plidObj == null) {
-			plid = _getPlidFromPortletId(groupId, privateLayout, portletId);
+			plid = doGetPlidFromPortletId(groupId, privateLayout, portletId);
 
 			if (plid != LayoutConstants.DEFAULT_PLID) {
 				_plidToPortletIdMap.put(key, plid);
@@ -2662,7 +2662,8 @@ public class PortalImpl implements Portal {
 			if (!validPlid) {
 				_plidToPortletIdMap.remove(key);
 
-				plid = _getPlidFromPortletId(groupId, privateLayout, portletId);
+				plid = doGetPlidFromPortletId(
+					groupId, privateLayout, portletId);
 
 				if (plid != LayoutConstants.DEFAULT_PLID) {
 					_plidToPortletIdMap.put(key, plid);
@@ -3635,7 +3636,7 @@ public class PortalImpl implements Portal {
 			return StringPool.BLANK;
 		}
 
-		return _getPortletParam(request, "struts_action");
+		return getPortletParam(request, "struts_action");
 	}
 
 	public String[] getSystemGroups() {
@@ -3833,7 +3834,7 @@ public class PortalImpl implements Portal {
 
 		String path = GetterUtil.getString(request.getPathInfo());
 		String strutsAction = getStrutsAction(request);
-		String actionName = _getPortletParam(request, "actionName");
+		String actionName = getPortletParam(request, "actionName");
 
 		boolean alwaysAllowDoAsUser = false;
 
@@ -4074,7 +4075,7 @@ public class PortalImpl implements Portal {
 	public String getWidgetURL(Portlet portlet, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
-		return _getServletURL(
+		return getServletURL(
 			portlet, PropsValues.WIDGET_SERVLET_MAPPING, themeDisplay);
 	}
 
@@ -5345,6 +5346,46 @@ public class PortalImpl implements Portal {
 		return i18nPath;
 	}
 
+	protected long doGetPlidFromPortletId(
+			long groupId, boolean privateLayout, String portletId)
+		throws PortalException, SystemException {
+
+		long scopeGroupId = groupId;
+
+		try {
+			Group group = GroupLocalServiceUtil.getGroup(groupId);
+
+			if (group.isLayout()) {
+				Layout scopeLayout = LayoutLocalServiceUtil.getLayout(
+					group.getClassPK());
+
+				groupId = scopeLayout.getGroupId();
+			}
+		}
+		catch (Exception e) {
+		}
+
+		long plid = LayoutConstants.DEFAULT_PLID;
+
+		List<Layout> layouts = LayoutLocalServiceUtil.getLayouts(
+			groupId, privateLayout, LayoutConstants.TYPE_PORTLET);
+
+		for (Layout layout : layouts) {
+			LayoutTypePortlet layoutTypePortlet =
+				(LayoutTypePortlet)layout.getLayoutType();
+
+			if (layoutTypePortlet.hasPortletId(portletId)) {
+				if (getScopeGroupId(layout, portletId) == scopeGroupId) {
+					plid = layout.getPlid();
+
+					break;
+				}
+			}
+		}
+
+		return plid;
+	}
+
 	protected List<Portlet> filterControlPanelPortlets(
 		Set<Portlet> portlets, String category, ThemeDisplay themeDisplay) {
 
@@ -5625,6 +5666,114 @@ public class PortalImpl implements Portal {
 		return sb.toString();
 	}
 
+	protected String getPortletParam(HttpServletRequest request, String name) {
+		String portletId = ParamUtil.getString(request, "p_p_id");
+
+		if (Validator.isNull(portletId)) {
+			return StringPool.BLANK;
+		}
+
+		String value = null;
+
+		int valueCount = 0;
+
+		String keyName = StringPool.UNDERLINE.concat(name);
+
+		Map<String, String[]> parameterMap = request.getParameterMap();
+
+		for (Map.Entry<String, String[]> entry : parameterMap.entrySet()) {
+			String parameterName = entry.getKey();
+
+			int pos = parameterName.indexOf(keyName);
+
+			if (pos == -1) {
+				continue;
+			}
+
+			valueCount++;
+
+			// There should never be more than one value
+
+			if (valueCount > 1) {
+				return StringPool.BLANK;
+			}
+
+			String[] parameterValues = entry.getValue();
+
+			if ((parameterValues == null) || (parameterValues.length == 0) ||
+				Validator.isNull(parameterValues[0])) {
+
+				continue;
+			}
+
+			// The Struts action must be for the correct portlet
+
+			String portletId1 = parameterName.substring(1, pos);
+
+			if (portletId.equals(portletId1)) {
+				value = parameterValues[0];
+			}
+		}
+
+		if (value == null) {
+			value = StringPool.BLANK;
+		}
+
+		return value;
+	}
+
+	protected String getServletURL(
+			Portlet portlet, String servletPath, ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
+
+		Layout layout = themeDisplay.getLayout();
+
+		StringBundler sb = new StringBundler();
+
+		sb.append(themeDisplay.getPortalURL());
+
+		if (Validator.isNotNull(_pathContext)) {
+			sb.append(_pathContext);
+		}
+
+		if (themeDisplay.isI18n()) {
+			sb.append(themeDisplay.getI18nPath());
+		}
+
+		sb.append(servletPath);
+
+		Group group = layout.getGroup();
+
+		if (layout.isPrivateLayout()) {
+			if (group.isUser()) {
+				sb.append(_PRIVATE_USER_SERVLET_MAPPING);
+			}
+			else {
+				sb.append(_PRIVATE_GROUP_SERVLET_MAPPING);
+			}
+		}
+		else {
+			sb.append(_PUBLIC_GROUP_SERVLET_MAPPING);
+		}
+
+		sb.append(group.getFriendlyURL());
+		sb.append(layout.getFriendlyURL());
+
+		sb.append(FRIENDLY_URL_SEPARATOR);
+
+		FriendlyURLMapper friendlyURLMapper =
+			portlet.getFriendlyURLMapperInstance();
+
+		if ((friendlyURLMapper != null) && !portlet.isInstanceable()) {
+			sb.append(friendlyURLMapper.getMapping());
+		}
+		else {
+			sb.append(portlet.getPortletId());
+		}
+
+		return sb.toString();
+	}
+
 	protected boolean isAlwaysAllowDoAsUser(HttpServletRequest request)
 		throws Exception {
 
@@ -5707,154 +5856,6 @@ public class PortalImpl implements Portal {
 		}
 
 		return url;
-	}
-
-	private long _getPlidFromPortletId(
-			long groupId, boolean privateLayout, String portletId)
-		throws PortalException, SystemException {
-
-		long scopeGroupId = groupId;
-
-		try {
-			Group group = GroupLocalServiceUtil.getGroup(groupId);
-
-			if (group.isLayout()) {
-				Layout scopeLayout = LayoutLocalServiceUtil.getLayout(
-					group.getClassPK());
-
-				groupId = scopeLayout.getGroupId();
-			}
-		}
-		catch (Exception e) {
-		}
-
-		long plid = LayoutConstants.DEFAULT_PLID;
-
-		List<Layout> layouts = LayoutLocalServiceUtil.getLayouts(
-			groupId, privateLayout, LayoutConstants.TYPE_PORTLET);
-
-		for (Layout layout : layouts) {
-			LayoutTypePortlet layoutTypePortlet =
-				(LayoutTypePortlet)layout.getLayoutType();
-
-			if (layoutTypePortlet.hasPortletId(portletId)) {
-				if (getScopeGroupId(layout, portletId) == scopeGroupId) {
-					plid = layout.getPlid();
-
-					break;
-				}
-			}
-		}
-
-		return plid;
-	}
-
-	private String _getPortletParam(HttpServletRequest request, String name) {
-		String portletId = ParamUtil.getString(request, "p_p_id");
-
-		if (Validator.isNull(portletId)) {
-			return StringPool.BLANK;
-		}
-
-		String value = null;
-
-		int valueCount = 0;
-
-		String keyName = StringPool.UNDERLINE.concat(name);
-
-		Map<String, String[]> parameterMap = request.getParameterMap();
-
-		for (Map.Entry<String, String[]> entry : parameterMap.entrySet()) {
-			String parameterName = entry.getKey();
-
-			int pos = parameterName.indexOf(keyName);
-
-			if (pos == -1) {
-				continue;
-			}
-
-			valueCount++;
-
-			// There should never be more than one value
-
-			if (valueCount > 1) {
-				return StringPool.BLANK;
-			}
-
-			String[] parameterValues = entry.getValue();
-
-			if ((parameterValues == null) || (parameterValues.length == 0) ||
-				Validator.isNull(parameterValues[0])) {
-
-				continue;
-			}
-
-			// The Struts action must be for the correct portlet
-
-			String portletId1 = parameterName.substring(1, pos);
-
-			if (portletId.equals(portletId1)) {
-				value = parameterValues[0];
-			}
-		}
-
-		if (value == null) {
-			value = StringPool.BLANK;
-		}
-
-		return value;
-	}
-
-	private String _getServletURL(
-			Portlet portlet, String servletPath, ThemeDisplay themeDisplay)
-		throws PortalException, SystemException {
-
-		Layout layout = themeDisplay.getLayout();
-
-		StringBundler sb = new StringBundler();
-
-		sb.append(themeDisplay.getPortalURL());
-
-		if (Validator.isNotNull(_pathContext)) {
-			sb.append(_pathContext);
-		}
-
-		if (themeDisplay.isI18n()) {
-			sb.append(themeDisplay.getI18nPath());
-		}
-
-		sb.append(servletPath);
-
-		Group group = layout.getGroup();
-
-		if (layout.isPrivateLayout()) {
-			if (group.isUser()) {
-				sb.append(_PRIVATE_USER_SERVLET_MAPPING);
-			}
-			else {
-				sb.append(_PRIVATE_GROUP_SERVLET_MAPPING);
-			}
-		}
-		else {
-			sb.append(_PUBLIC_GROUP_SERVLET_MAPPING);
-		}
-
-		sb.append(group.getFriendlyURL());
-		sb.append(layout.getFriendlyURL());
-
-		sb.append(FRIENDLY_URL_SEPARATOR);
-
-		FriendlyURLMapper friendlyURLMapper =
-			portlet.getFriendlyURLMapperInstance();
-
-		if ((friendlyURLMapper != null) && !portlet.isInstanceable()) {
-			sb.append(friendlyURLMapper.getMapping());
-		}
-		else {
-			sb.append(portlet.getPortletId());
-		}
-
-		return sb.toString();
 	}
 
 	private static final String _J_SECURITY_CHECK = "j_security_check";
