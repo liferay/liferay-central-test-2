@@ -244,14 +244,12 @@ public class LayoutExporter {
 		ServiceContext serviceContext =
 			ServiceContextThreadLocal.getServiceContext();
 
-		// serviceContext can be null if we've been called by a worker thread
-
 		if (serviceContext == null) {
 			serviceContext = new ServiceContext();
 
 			serviceContext.setCompanyId(companyId);
-			serviceContext.setUserId(defaultUserId);
 			serviceContext.setSignedIn(false);
+			serviceContext.setUserId(defaultUserId);
 
 			ServiceContextThreadLocal.pushServiceContext(serviceContext);
 		}
