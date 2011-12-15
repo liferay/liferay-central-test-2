@@ -822,8 +822,7 @@ public class PortalImpl implements Portal {
 	}
 
 	public String getAlternateURL(
-			HttpServletRequest request, String canonicalURL, Locale locale)
-		throws PortalException, SystemException {
+		HttpServletRequest request, String canonicalURL, Locale locale) {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
@@ -840,33 +839,31 @@ public class PortalImpl implements Portal {
 
 			virtualHost = company.getVirtualHostname();
 		}
-	
-		String i18nPath = generateI18NPath(locale);
+
+		String i18nPath = buildI18NPath(locale);
 
 		if (Validator.isNull(virtualHost)) {
 			return canonicalURL.replaceFirst(
-				_PUBLIC_GROUP_SERVLET_MAPPING, 
+				_PUBLIC_GROUP_SERVLET_MAPPING,
 				i18nPath.concat(_PUBLIC_GROUP_SERVLET_MAPPING));
 		}
-		
-		// www.liferay.com:8080/page --> www.liferay.com:8080/es/page
 
-		String pattern = virtualHost.concat("(:\\d{1,5})?");
+		// www.liferay.com:8080/page to www.liferay.com:8080/es/page
 
-		String parts[] = canonicalURL.split(pattern, 2);
+		String[] canonicalURLParts = canonicalURL.split(
+			virtualHost.concat("(:\\d{1,5})?"), 2);
 
-		if (parts.length > 0 && Validator.isNotNull(parts[1])) {
-			StringBuffer sb = new StringBuffer(canonicalURL);
-			
-			int posPage = canonicalURL.indexOf(parts[1], parts[0].length());
-			
-			sb.insert(posPage, i18nPath);
-			
-			return sb.toString();
+		if ((canonicalURLParts.length > 0) &&
+			Validator.isNotNull(canonicalURLParts[1])) {
+
+			int pos = canonicalURL.indexOf(
+				canonicalURLParts[1], canonicalURLParts[0].length());
+
+			return canonicalURL.substring(0, pos).concat(i18nPath).concat(
+				canonicalURL.substring(pos));
 		}
-		else {
-			return canonicalURL.concat(i18nPath);
-		}
+
+		return canonicalURL.concat(i18nPath);
 	}
 
 	public Set<String> getAuthTokenIgnoreActions() {
@@ -1027,7 +1024,7 @@ public class PortalImpl implements Portal {
 		}
 
 		String groupFriendlyURL = completeURL;
-		
+
 		if (pos != -1) {
 			groupFriendlyURL = completeURL.substring(0, pos);
 
@@ -1037,13 +1034,13 @@ public class PortalImpl implements Portal {
 		Layout layout = themeDisplay.getLayout();
 
 		String layoutFriendlyURL = StringPool.BLANK;
-		
+
 		if (groupFriendlyURL.contains(layout.getFriendlyURL()) && (
 			!layout.isFirstParent() || Validator.isNotNull(parametersURL))) {
-		
+
 			layoutFriendlyURL = layout.getFriendlyURL();
 		}
-		
+
 		Group group = layout.getGroup();
 
 		groupFriendlyURL = getGroupFriendlyURL(
@@ -2120,8 +2117,7 @@ public class PortalImpl implements Portal {
 				(PropsValues.LOCALE_PREPEND_FRIENDLY_URL_STYLE == 2)) {
 
 				tempI18nLanguageId = locale.toString();
-
-				tempI18nPath = generateI18NPath(locale);
+				tempI18nPath = buildI18NPath(locale);
 			}
 
 			themeDisplay.setI18nLanguageId(tempI18nLanguageId);
@@ -5327,6 +5323,28 @@ public class PortalImpl implements Portal {
 			themeDisplay.getCompanyId(), layout, portlet, portletActions);
 	}
 
+	protected String buildI18NPath(Locale locale) {
+		if (Validator.isNull(locale.toString())) {
+			return null;
+		}
+
+		String i18nPath = StringPool.SLASH.concat(locale.toString());
+
+		if (!LanguageUtil.isDuplicateLanguageCode(locale.getLanguage())) {
+			i18nPath = StringPool.SLASH.concat(locale.getLanguage());
+		}
+		else {
+			Locale priorityLocale = LanguageUtil.getLocale(
+				locale.getLanguage());
+
+			if (locale.equals(priorityLocale)) {
+				i18nPath = StringPool.SLASH.concat(locale.getLanguage());
+			}
+		}
+
+		return i18nPath;
+	}
+
 	protected List<Portlet> filterControlPanelPortlets(
 		Set<Portlet> portlets, String category, ThemeDisplay themeDisplay) {
 
@@ -5373,28 +5391,6 @@ public class PortalImpl implements Portal {
 		}
 
 		return filteredPortlets;
-	}
-	
-	protected String generateI18NPath(Locale locale) {
-		String tempI18nPath = null;
-
-		if (Validator.isNotNull(locale.toString())) {
-			tempI18nPath = StringPool.SLASH + locale.toString();
-
-			if (!LanguageUtil.isDuplicateLanguageCode(locale.getLanguage())) {
-				tempI18nPath = StringPool.SLASH + locale.getLanguage();
-			}
-			else {
-				Locale priorityLocale = LanguageUtil.getLocale(
-					locale.getLanguage());
-
-				if (locale.equals(priorityLocale)) {
-					tempI18nPath = StringPool.SLASH + locale.getLanguage();
-				}
-			}
-		}
-
-		return tempI18nPath;
 	}
 
 	protected long getDefaultScopeGroupId(long companyId)
@@ -5505,7 +5501,7 @@ public class PortalImpl implements Portal {
 			return 0;
 		}
 	}
-	
+
 	protected String getGroupFriendlyURL(
 			Group group, boolean privateLayoutSet, ThemeDisplay themeDisplay,
 			boolean canonicalURL)
@@ -5570,9 +5566,10 @@ public class PortalImpl implements Portal {
 
 				LayoutSet curLayoutSet = curLayout.getLayoutSet();
 
-				if (canonicalURL || (layoutSet.getLayoutSetId() !=
+				if (canonicalURL ||
+					((layoutSet.getLayoutSetId() !=
 						curLayoutSet.getLayoutSetId()) &&
-					(group.getClassPK() != themeDisplay.getUserId())) {
+					 (group.getClassPK() != themeDisplay.getUserId()))) {
 
 					if (group.isControlPanel()) {
 						virtualHostname = curLayoutSet.getVirtualHostname();

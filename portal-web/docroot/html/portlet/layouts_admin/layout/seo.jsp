@@ -78,5 +78,5 @@ if (selLayout != null) {
 
 	<h3><liferay-ui:message key="alternate-links" /></h3>
 
-	<aui:input helpMessage="alternate-links-help" label="show-alternate-links" name="TypeSettingsProperties--show-alternate-links--" type="checkbox" value="<%= showAlternateLinks %>" />
+	<aui:input helpMessage="show-alternate-links-help" label="show-alternate-links" name="TypeSettingsProperties--show-alternate-links--" type="checkbox" value="<%= showAlternateLinks %>" />
 </aui:fieldset>

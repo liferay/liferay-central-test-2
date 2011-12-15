@@ -30,16 +30,19 @@
 <%
 if (!themeDisplay.isSignedIn() && layout.isPublicLayout()) {
 	String completeURL = PortalUtil.getCurrentCompleteURL(request);
-	
+
 	String canonicalURL = PortalUtil.getCanonicalURL(completeURL, themeDisplay);
 %>
-	
+
 	<link href="<%= canonicalURL %>" rel="canonical" />
-	
+
 	<%
 	Locale defaultLocale = LocaleUtil.getDefault();
+	%>
 
-	if (locale.equals(defaultLocale)) {
+	<c:if test="<%= locale.equals(defaultLocale) %>">
+
+		<%
 		boolean showAlternateLinks = GetterUtil.getBoolean(layout.getTypeSettingsProperties().get("show-alternate-links"), true);
 
 		if (showAlternateLinks) {
@@ -48,16 +51,20 @@ if (!themeDisplay.isSignedIn() && layout.isPublicLayout()) {
 			if (availableLocales.length > 1) {
 				for (Locale curLocale : availableLocales) {
 					if (!curLocale.equals(defaultLocale)) {
-	%>
+		%>
 
 						<link href="<%= PortalUtil.getAlternateURL(request, canonicalURL, curLocale) %>" hreflang="<%= LocaleUtil.toW3cLanguageId(curLocale) %>" rel="alternate" />
 
-	<%
+		<%
 					}
 				}
 			}
 		}
-	}
+		%>
+
+	</c:if>
+
+<%
 }
 %>
 
