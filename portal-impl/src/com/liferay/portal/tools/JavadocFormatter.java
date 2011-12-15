@@ -210,7 +210,7 @@ public class JavadocFormatter {
 
 	private String _addDocletTags(
 		Element parentElement, String[] names, String indent,
-		boolean isPublic) {
+		boolean publicAccess) {
 
 		StringBundler sb = new StringBundler();
 
@@ -311,7 +311,7 @@ public class JavadocFormatter {
 			}
 		}
 
-		if (!isPublic && !hasComments) {
+		if (!publicAccess && !hasComments) {
 			return null;
 		}
 
@@ -699,8 +699,7 @@ public class JavadocFormatter {
 			new String[] {
 				"author", "version", "see", "since", "serial", "deprecated"
 			},
-			indent + " * ",
-			_isPublicEntity(javaClass));
+			indent + " * ", _hasPublicModifier(javaClass));
 
 		if (Validator.isNotNull(docletTags)) {
 			if (_initializeMissingJavadocs || Validator.isNotNull(comment)) {
@@ -853,8 +852,7 @@ public class JavadocFormatter {
 		String docletTags = _addDocletTags(
 			fieldElement,
 			new String[] {"version", "see", "since", "deprecated"},
-			indent + " * ",
-			_isPublicEntity(javaField));
+			indent + " * ", _hasPublicModifier(javaField));
 
 		if (Validator.isNotNull(docletTags)) {
 			if (_initializeMissingJavadocs || Validator.isNotNull(comment)) {
@@ -874,7 +872,7 @@ public class JavadocFormatter {
 			return null;
 		}
 
-		if (!_isPublicEntity(javaField) && Validator.isNull(comment) &&
+		if (!_hasPublicModifier(javaField) && Validator.isNull(comment) &&
 			Validator.isNull(docletTags)) {
 
 			return null;
@@ -914,8 +912,7 @@ public class JavadocFormatter {
 				"version", "param", "return", "throws", "see", "since",
 				"deprecated"
 			},
-			indent + " * ",
-			_isPublicEntity(javaMethod));
+			indent + " * ", _hasPublicModifier(javaMethod));
 
 		if (Validator.isNotNull(docletTags)) {
 			if (_initializeMissingJavadocs || Validator.isNotNull(comment)) {
@@ -935,7 +932,7 @@ public class JavadocFormatter {
 			return null;
 		}
 
-		if (!_isPublicEntity(javaMethod) && Validator.isNull(comment) &&
+		if (!_hasPublicModifier(javaMethod) && Validator.isNull(comment) &&
 			Validator.isNull(docletTags)) {
 
 			return null;
@@ -1037,24 +1034,20 @@ public class JavadocFormatter {
 		}
 	}
 
-	private boolean _isPublicEntity(AbstractJavaEntity javaEntity) {
+	private boolean _hasPublicModifier(AbstractJavaEntity abstractJavaEntity) {
+		String[] modifiers = abstractJavaEntity.getModifiers();
 
-		boolean isPublic = false;
+		if (modifiers == null) {
+			return false;
+		}
 
-		String[] modifiers = javaEntity.getModifiers();
-
-		if (modifiers != null) {
-
-			for (int ii=0; ii<modifiers.length; ii++) {
-
-				if (modifiers[ii].equals("public")) {
-					isPublic = true;
-					break;
-				}
+		for (String modifier : modifiers) {
+			if (modifier.equals("public")) {
+				return true;
 			}
 		}
 
-		return isPublic;
+		return false;
 	}
 
 	private boolean  _isOverrideMethod(
