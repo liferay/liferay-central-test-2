@@ -18,6 +18,7 @@ import com.liferay.portal.image.ImageProcessorImpl;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
+import com.xuggle.ferry.RefCounted;
 import com.xuggle.xuggler.Global;
 import com.xuggle.xuggler.IAudioResampler;
 import com.xuggle.xuggler.IAudioSamples.Format;
@@ -53,11 +54,11 @@ public abstract class LiferayConverter {
 	public abstract void convert() throws Exception;
 
 	protected void cleanUp(IPacket inputIPacket, IPacket outputIPacket) {
-		if (Validator.isNotNull(inputIPacket)) {
+		if (inputIPacket != null) {
 			inputIPacket.delete();
 		}
 
-		if (Validator.isNotNull(outputIPacket)) {
+		if (outputIPacket != null) {
 			outputIPacket.delete();
 		}
 	}
@@ -65,37 +66,37 @@ public abstract class LiferayConverter {
 	protected void cleanUp(
 		IStreamCoder[] inputIStreamCoders, IStreamCoder[] outputIStreamCoders) {
 
-		if (Validator.isNotNull(inputIStreamCoders)) {
+		if (inputIStreamCoders != null) {
 			for (IStreamCoder iStreamCoder : inputIStreamCoders) {
-				if (Validator.isNotNull(iStreamCoder)) {
+				if (iStreamCoder != null) {
 					iStreamCoder.close();
 				}
 			}
 		}
 
-		if (Validator.isNotNull(outputIStreamCoders)) {
+		if (outputIStreamCoders != null) {
 			for (IStreamCoder iStreamCoder : outputIStreamCoders) {
-				if (Validator.isNotNull(iStreamCoder)) {
+				if (iStreamCoder != null) {
 					iStreamCoder.close();
 				}
 			}
 		}
-			}
+	}
 
 	protected void cleanUp(
 		RefCounted[] inputRefCountedArray, RefCounted[] outputRefCountedArray) {
 
-		if (Validator.isNotNull(inputRefCountedArray)) {
+		if (inputRefCountedArray != null) {
 			for (RefCounted refCounted : inputRefCountedArray) {
-				if (Validator.isNotNull(refCounted)) {
+				if (refCounted != null) {
 					refCounted.delete();
 				}
 			}
 		}
 
-		if (Validator.isNotNull(outputRefCountedArray)) {
+		if (outputRefCountedArray != null) {
 			for (RefCounted refCounted : outputRefCountedArray) {
-				if (Validator.isNotNull(refCounted)) {
+				if (refCounted != null) {
 					refCounted.delete();
 				}
 			}

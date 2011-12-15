@@ -267,11 +267,11 @@ public class LiferayVideoConverter extends LiferayConverter {
 				"Unable to write trailer to output file");
 		}
 
-		cleanUp(inputIStreamCoders, outputIStreamCoders);
+		cleanUp(iAudioResamplers, iVideoResamplers);
 		cleanUp(inputIAudioSamples, outputIAudioSamples);
 		cleanUp(inputIVideoPictures, outputIVideoPictures);
+		cleanUp(inputIStreamCoders, outputIStreamCoders);
 		cleanUp(inputIPacket, outputIPacket);
-		cleanUp(iAudioResamplers, iVideoResamplers);
 
 		createMP4FastStart();
 	}

@@ -151,10 +151,10 @@ public class LiferayAudioConverter extends LiferayConverter {
 				"Unable to write trailer to output file");
 		}
 
-		cleanUp(inputIStreamCoders, outputIStreamCoders);
-		cleanUp(inputIAudioSamples, outputIAudioSamples);
-		cleanUp(inputIPacket, outputIPacket);
 		cleanUp(iAudioResamplers, null);
+		cleanUp(inputIAudioSamples, outputIAudioSamples);
+		cleanUp(inputIStreamCoders, outputIStreamCoders);
+		cleanUp(inputIPacket, outputIPacket);
 	}
 
 	@Override

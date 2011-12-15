@@ -125,8 +125,8 @@ public class LiferayVideoThumbnailConverter extends LiferayConverter {
 			generateThumbnail(inputIStreamCoders, inputIVideoPictures);
 		}
 
-		cleanUp(inputIStreamCoders, null);
 		cleanUp(inputIVideoPictures, null);
+		cleanUp(inputIStreamCoders, null);
 	}
 
 	protected boolean generateThumbnail(
