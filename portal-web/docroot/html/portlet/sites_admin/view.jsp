@@ -22,8 +22,6 @@ PortletURL portletURL = renderResponse.createRenderURL();
 portletURL.setParameter("struts_action", "/sites_admin/view");
 
 pageContext.setAttribute("portletURL", portletURL);
-
-Group scopeGroup = themeDisplay.getScopeGroup();
 %>
 
 <liferay-ui:success key="membership_request_sent" message="your-request-was-sent-you-will-receive-a-reply-by-email" />
@@ -114,7 +112,7 @@ Group scopeGroup = themeDisplay.getScopeGroup();
 
 	headerNames.add("active");
 
-	if (permissionChecker.isGroupAdmin(scopeGroup.getGroupId())) {
+	if (permissionChecker.isGroupAdmin(themeDisplay.getScopeGroupId())) {
 		headerNames.add("pending-requests");
 	}
 
@@ -293,7 +291,7 @@ Group scopeGroup = themeDisplay.getScopeGroup();
 
 		// Restricted number of petitions
 
-		if (permissionChecker.isGroupAdmin(scopeGroup.getGroupId())) {
+		if (permissionChecker.isGroupAdmin(themeDisplay.getScopeGroupId())) {
 			if (group.getType() == GroupConstants.TYPE_SITE_RESTRICTED) {
 				int pendingRequests = MembershipRequestLocalServiceUtil.searchCount(group.getGroupId(), MembershipRequestConstants.STATUS_PENDING);
 
