@@ -153,7 +153,8 @@ public class SetupWizardUtil {
 		boolean databaseConfigured = _isDatabaseConfigured(unicodeProperties);
 
 		_processAdminProperties(request, unicodeProperties);
-		_processDatabaseProperties(request, unicodeProperties);
+		_processDatabaseProperties(
+			request, unicodeProperties, databaseConfigured);
 
 		updateLanguage(request, response);
 
@@ -265,13 +266,14 @@ public class SetupWizardUtil {
 	}
 
 	private static void _processDatabaseProperties(
-			HttpServletRequest request, UnicodeProperties unicodeProperties)
+			HttpServletRequest request, UnicodeProperties unicodeProperties,
+			boolean databaseConfigured)
 		throws Exception {
 
 		boolean defaultDatabase = ParamUtil.getBoolean(
 			request, "defaultDatabase", true);
 
-		if (defaultDatabase) {
+		if (defaultDatabase || databaseConfigured) {
 			unicodeProperties.remove(PropsKeys.JDBC_DEFAULT_URL);
 			unicodeProperties.remove(PropsKeys.JDBC_DEFAULT_DRIVER_CLASS_NAME);
 			unicodeProperties.remove(PropsKeys.JDBC_DEFAULT_USERNAME);
