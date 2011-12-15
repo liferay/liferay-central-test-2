@@ -202,8 +202,6 @@
 							jdbcDefaultDriverClassName.val(driverClassName);
 						}
 
-						onChangeDatabaseSelector();
-
 						databaseSelector.on('change', onChangeDatabaseSelector);
 
 						A.one('#changeLanguageButton').on(
