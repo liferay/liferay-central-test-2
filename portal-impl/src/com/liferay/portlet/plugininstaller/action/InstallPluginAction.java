@@ -553,7 +553,7 @@ public class InstallPluginAction extends PortletAction {
 
 		DeployUtil.undeploy(appServerType, deployDir);
 
-		SessionMessages.add(actionRequest, "portletUndeploystarted");
+		SessionMessages.add(actionRequest, "triggeredPortletUndeploy");
 	}
 
 	private static final String _DOWNLOAD_DIR = "download";
