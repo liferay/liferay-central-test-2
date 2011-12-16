@@ -76,7 +76,9 @@ public class XMLStorageAdapter extends BaseStorageAdapter {
 			Object value = field.getValue();
 
 			if (value instanceof Date) {
-				value = ((Date)value).getTime();
+				Date valueDate = (Date)value;
+
+				value = valueDate.getTime();
 			}
 
 			_appendField(rootElement, field.getName(), String.valueOf(value));
