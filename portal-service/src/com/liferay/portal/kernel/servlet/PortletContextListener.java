@@ -153,7 +153,8 @@ public class PortletContextListener
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
-					"Unable to dynamically bind the Liferay data source", e);
+					"Unable to dynamically bind the Liferay data source: " +
+						e.getMessage());
 			}
 		}
 	}
