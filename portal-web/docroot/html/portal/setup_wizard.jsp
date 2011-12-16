@@ -152,9 +152,11 @@
 									</c:otherwise>
 								</c:choose>
 
-								<a href="<%= HttpUtil.addParameter(themeDisplay.getPathMain() + "/portal/setup_wizard", "defaultDatabase", false) %>" id="customDatabaseOptionsLink">
-									(<liferay-ui:message key="change" />)
-								</a>
+								<c:if test="<%= Validator.isNull(PropsValues.JDBC_DEFAULT_JNDI_NAME) %>">
+									<a href="<%= HttpUtil.addParameter(themeDisplay.getPathMain() + "/portal/setup_wizard", "defaultDatabase", false) %>" id="customDatabaseOptionsLink">
+										(<liferay-ui:message key="change" />)
+									</a>
+								</c:if>
 							</div>
 
 							<div class="aui-helper-hidden" id="customDatabaseOptions">
