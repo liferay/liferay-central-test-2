@@ -116,18 +116,18 @@ portletsList = ListUtil.sort(portletsList, new PortletTitleComparator(applicatio
 
 <c:if test='<%= cmd.equals(Constants.IMPORT) && SessionMessages.contains(renderRequest, "request_processed") %>'>
 	<aui:script>
-	var opener = Liferay.Util.getOpener();
+		var opener = Liferay.Util.getOpener();
 
-	if (opener.<portlet:namespace />saveLayoutset) {
-		Liferay.fire(
-			'closeWindow',
-			{
-				id: '<portlet:namespace />importDialog'
-			}
-		);
+		if (opener.<portlet:namespace />saveLayoutset) {
+			Liferay.fire(
+				'closeWindow',
+				{
+					id: '<portlet:namespace />importDialog'
+				}
+			);
 
-		opener.<portlet:namespace />saveLayoutset();
-	}
+			opener.<portlet:namespace />saveLayoutset();
+		}
 	</aui:script>
 </c:if>
 

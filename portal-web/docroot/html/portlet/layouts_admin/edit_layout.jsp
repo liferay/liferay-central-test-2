@@ -265,7 +265,6 @@ String[][] categorySections = {mainSections};
 											},
 											{
 												handler: function(event) {
-
 													<portlet:renderURL var="exportPagesURL" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
 														<portlet:param name="struts_action" value="/layouts_admin/export_layouts" />
 														<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.EXPORT %>" />
