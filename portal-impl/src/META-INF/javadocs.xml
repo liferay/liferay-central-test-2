@@ -16621,7 +16621,7 @@ Useful when paginating results. Returns a maximum of <code>end - start</code> in
 		</method>
 		<method>
 			<name>getUserOrganizations</name>
-			<comment><![CDATA[Returns all the organizations associated with the user, optionally including the organizations associated with the user groups to which the user belongs.]]></comment>
+			<comment><![CDATA[Returns all the organizations associated with the user.]]></comment>
 			<param>
 				<name>userId</name>
 				<type>long</type>
@@ -16643,7 +16643,7 @@ Useful when paginating results. Returns a maximum of <code>end - start</code> in
 		</method>
 		<method>
 			<name>getUserOrganizations</name>
-			<comment><![CDATA[Returns a range of all the organizations associated with the user, optionally including the organizations associated with the user groups to which the user belongs.
+			<comment><![CDATA[Returns a range of all the organizations associated with the user.
 
 <p>
 Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
