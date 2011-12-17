@@ -99,6 +99,7 @@ import javax.portlet.PortletException;
  * The implementation of the layout local service.
  *
  * @author Brian Wing Shun Chan
+ * @author Jorge Ferrer
  * @author Joel Kozikowski
  * @author Charles May
  * @author Raymond Augé
@@ -1539,7 +1540,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	 * @param  serviceContext the service context. Can set the modification date
 	 *         and expando bridge attributes for the layout. For layouts that
 	 *         are linked to a layout prototype, attributes named
-	 *        'layoutPrototypeUuid' and 'layoutPrototypeLinkedEnabled' can be
+	 *         'layoutPrototypeUuid' and 'layoutPrototypeLinkedEnabled' can be
 	 *         specified to provide the unique identifier of the source
 	 *         prototype and a boolean to determined whether a link to it should
 	 *         be enabled to activate propagation of changes made to the linked
@@ -1627,7 +1628,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		String layoutPrototypeUuid = ParamUtil.getString(
 			serviceContext, "layoutPrototypeUuid");
 		boolean layoutPrototypeLinkEnabled = ParamUtil.getBoolean(
-			serviceContext, "layoutPrototypeLinkEnabled", false);
+			serviceContext, "layoutPrototypeLinkEnabled");
 
 		if (Validator.isNotNull(layoutPrototypeUuid)) {
 			layout.setLayoutPrototypeUuid(layoutPrototypeUuid);
