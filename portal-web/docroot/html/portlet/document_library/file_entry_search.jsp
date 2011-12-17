@@ -63,16 +63,7 @@ List<Folder> mountFolders = DLAppServiceUtil.getMountFolders(repositoryId, DLFol
 					'<portlet:namespace />folderId': '<%= folderId %>',
 					'<portlet:namespace />searchFolderId': '<%= folderId %>',
 					'<portlet:namespace />keywords': document.<portlet:namespace />fm1.<portlet:namespace />keywords.value,
-
-					<c:choose>
-						<c:when test="<%= (repositoryId == scopeGroupId) && (folderId == DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) %>">
-							'<portlet:namespace />searchType': <%= DLSearchConstants.MULTIPLE %>
-						</c:when>
-						<c:otherwise>
-							'<portlet:namespace />searchType': <%= DLSearchConstants.SINGLE %>
-						</c:otherwise>
-					</c:choose>
-
+					'<portlet:namespace />searchType': <%= ((repositoryId == scopeGroupId) && (folderId == DLFolderConstants.DEFAULT_PARENT_FOLDER_ID)) ? DLSearchConstants.MULTIPLE : DLSearchConstants.SINGLE %>,
 					'<portlet:namespace />viewDisplayStyleButtons': <%= Boolean.TRUE.toString() %>
 				},
 				src: Liferay.DL_SEARCH
