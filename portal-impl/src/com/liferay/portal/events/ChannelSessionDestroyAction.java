@@ -35,7 +35,7 @@ public class ChannelSessionDestroyAction extends SessionAction {
 	@Override
 	public void run(HttpSession session) {
 		User user = null;
-		
+
 		try {
 			user = (User)session.getAttribute(WebKeys.USER);
 		}
