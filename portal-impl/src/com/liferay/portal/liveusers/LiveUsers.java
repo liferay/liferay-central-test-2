@@ -138,7 +138,6 @@ public class LiveUsers {
 				clusterUsers.entrySet()) {
 
 			long companyId = companyUsers.getKey();
-
 			Map<Long, Set<String>> userSessionsMap = companyUsers.getValue();
 
 			for (Map.Entry<Long, Set<String>> userSessions :
@@ -339,7 +338,6 @@ public class LiveUsers {
 				clusterUsers.entrySet()) {
 
 			long companyId = companyUsers.getKey();
-
 			Map<Long, Set<String>> userSessionsMap = companyUsers.getValue();
 
 			for (Map.Entry<Long, Set<String>> userSessions :

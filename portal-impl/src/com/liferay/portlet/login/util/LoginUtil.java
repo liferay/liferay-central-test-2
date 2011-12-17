@@ -257,20 +257,18 @@ public class LoginUtil {
 
 				JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-				jsonObject.put("command", "signOut");
-
 				ClusterNode clusterNode =
 					ClusterExecutorUtil.getLocalClusterNode();
 
 				jsonObject.put("clusterNodeId", clusterNode.getClusterNodeId());
+				jsonObject.put("command", "signOut");
 
 				long companyId = CompanyLocalServiceUtil.getCompanyIdByUserId(
 					userId);
 
 				jsonObject.put("companyId", companyId);
-
-				jsonObject.put("userId", userId);
 				jsonObject.put("sessionId", userTracker.getSessionId());
+				jsonObject.put("userId", userId);
 
 				MessageBusUtil.sendMessage(
 					DestinationNames.LIVE_USERS, jsonObject.toString());

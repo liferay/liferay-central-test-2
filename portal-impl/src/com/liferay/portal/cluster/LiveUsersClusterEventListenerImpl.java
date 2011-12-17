@@ -56,8 +56,8 @@ public class LiveUsersClusterEventListenerImpl implements ClusterEventListener {
 
 		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-		jsonObject.put("command", "removeClusterNode");
 		jsonObject.put("clusterNodeId", clusterNode.getClusterNodeId());
+		jsonObject.put("command", "removeClusterNode");
 
 		message.setPayload(jsonObject.toString());
 
@@ -71,8 +71,8 @@ public class LiveUsersClusterEventListenerImpl implements ClusterEventListener {
 
 		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-		jsonObject.put("command", "addClusterNode");
 		jsonObject.put("clusterNodeId", clusterNode.getClusterNodeId());
+		jsonObject.put("command", "addClusterNode");
 
 		message.setPayload(jsonObject.toString());
 
