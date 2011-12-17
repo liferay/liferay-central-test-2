@@ -28,8 +28,6 @@ AUI().add(
 
 		var CSS_SELECTED = 'selected';
 
-        var EXPAND_FOLDER = 'expandFolder';
-
 		var DATA_FOLDER_ID = 'data-folder-id';
 
 		var DATA_VIEW_ENTRIES = 'data-view-entries';
@@ -43,6 +41,8 @@ AUI().add(
 		var DOCUMENT_DRAGGABLE = '[data-draggable]';
 
 		var DOCUMENT_LIBRARY_GROUP = 'document-library';
+
+        var EXPAND_FOLDER = 'expandFolder';
 
 		var PARENT_NODE = 'parentNode';
 

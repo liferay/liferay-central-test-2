@@ -58,20 +58,22 @@ List<Folder> mountFolders = DLAppServiceUtil.getMountFolders(repositoryId, DLFol
 			{
 				requestParams: {
 					'<portlet:namespace />struts_action': '/document_library/search',
-					'<portlet:namespace />repositoryId': '<%= String.valueOf(repositoryId) %>',
-					'<portlet:namespace />searchRepositoryId': '<%= String.valueOf(repositoryId) %>',
-					'<portlet:namespace />folderId': '<%= String.valueOf(folderId) %>',
-					'<portlet:namespace />searchFolderId': '<%= String.valueOf(folderId) %>',
+					'<portlet:namespace />repositoryId': '<%= repositoryId %>',
+					'<portlet:namespace />searchRepositoryId': '<%= repositoryId %>',
+					'<portlet:namespace />folderId': '<%= folderId %>',
+					'<portlet:namespace />searchFolderId': '<%= folderId %>',
 					'<portlet:namespace />keywords': document.<portlet:namespace />fm1.<portlet:namespace />keywords.value,
-					'<portlet:namespace />viewDisplayStyleButtons': <%= Boolean.TRUE.toString() %>,
+
 					<c:choose>
 						<c:when test="<%= (repositoryId == scopeGroupId) && (folderId == DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) %>">
-							'<portlet:namespace />searchType': <%= String.valueOf(DLSearchConstants.MULTIPLE) %>
+							'<portlet:namespace />searchType': <%= DLSearchConstants.MULTIPLE %>
 						</c:when>
 						<c:otherwise>
-							'<portlet:namespace />searchType': <%= String.valueOf(DLSearchConstants.SINGLE) %>
+							'<portlet:namespace />searchType': <%= DLSearchConstants.SINGLE %>
 						</c:otherwise>
 					</c:choose>
+
+					'<portlet:namespace />viewDisplayStyleButtons': <%= Boolean.TRUE.toString() %>
 				},
 				src: Liferay.DL_SEARCH
 			}
@@ -87,13 +89,13 @@ List<Folder> mountFolders = DLAppServiceUtil.getMountFolders(repositoryId, DLFol
 					{
 						requestParams: {
 							'<portlet:namespace />struts_action': '/document_library/search',
-							'<portlet:namespace />repositoryId': '<%= String.valueOf(mountFolder.getRepositoryId()) %>',
-							'<portlet:namespace />searchRepositoryId': '<%= String.valueOf(mountFolder.getRepositoryId()) %>',
-							'<portlet:namespace />folderId': '<%= String.valueOf(mountFolder.getFolderId()) %>',
-							'<portlet:namespace />searchFolderId': '<%= String.valueOf(mountFolder.getFolderId()) %>',
+							'<portlet:namespace />repositoryId': '<%= mountFolder.getRepositoryId() %>',
+							'<portlet:namespace />searchRepositoryId': '<%= mountFolder.getRepositoryId() %>',
+							'<portlet:namespace />folderId': '<%= mountFolder.getFolderId() %>',
+							'<portlet:namespace />searchFolderId': '<%= mountFolder.getFolderId() %>',
 							'<portlet:namespace />keywords': document.<portlet:namespace />fm1.<portlet:namespace />keywords.value,
-							'<portlet:namespace />viewDisplayStyleButtons': <%= Boolean.TRUE.toString() %>,
-							'<portlet:namespace />searchType': <%= String.valueOf(DLSearchConstants.MULTIPLE) %>
+							'<portlet:namespace />searchType': <%= DLSearchConstants.MULTIPLE %>,
+							'<portlet:namespace />viewDisplayStyleButtons': <%= Boolean.TRUE.toString() %>
 
 						},
 						src: Liferay.DL_SEARCH

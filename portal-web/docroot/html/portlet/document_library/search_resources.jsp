@@ -102,19 +102,12 @@ int total = 0;
 					{
 						requestParams: {
 							'<portlet:namespace />struts_action': '/document_library/search',
-							'<portlet:namespace />repositoryId': '<%= String.valueOf(repositoryId) %>',
-							'<portlet:namespace />searchRepositoryId': '<%= ((folder == null) || folder.isDefaultRepository()) ? String.valueOf(repositoryId) : String.valueOf(scopeGroupId) %>',
-							'<portlet:namespace />folderId': '<%= String.valueOf(folderId) %>',
-							'<portlet:namespace />searchFolderId': '<%= (folder != null) ? String.valueOf(DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) : String.valueOf(folderId) %>',
+							'<portlet:namespace />repositoryId': '<%= repositoryId %>',
+							'<portlet:namespace />searchRepositoryId': '<%= ((folder == null) || folder.isDefaultRepository()) ? repositoryId : scopeGroupId %>',
+							'<portlet:namespace />folderId': '<%= folderId %>',
+							'<portlet:namespace />searchFolderId': '<%= (folder != null) ? DLFolderConstants.DEFAULT_PARENT_FOLDER_ID : folderId %>',
 							'<portlet:namespace />keywords': document.<portlet:namespace />fm1.<portlet:namespace />keywords.value,
-							<c:choose>
-								<c:when test="<%= (folder != null) %>">
-									'<portlet:namespace />searchType': <%= String.valueOf(DLSearchConstants.MULTIPLE) %>
-								</c:when>
-								<c:otherwise>
-									'<portlet:namespace />searchType': <%= String.valueOf(DLSearchConstants.SINGLE) %>
-								</c:otherwise>
-							</c:choose>
+							'<portlet:namespace />searchType': <%= (folder != null) ? DLSearchConstants.MULTIPLE : DLSearchConstants.SINGLE %>
 						},
 						src: Liferay.DL_SEARCH
 					}
@@ -130,12 +123,12 @@ int total = 0;
 							{
 								requestParams: {
 									'<portlet:namespace />struts_action': '/document_library/search',
-									'<portlet:namespace />repositoryId': '<%= String.valueOf(mountFolder.getRepositoryId()) %>',
-									'<portlet:namespace />searchRepositoryId': '<%= String.valueOf(mountFolder.getRepositoryId()) %>',
-									'<portlet:namespace />folderId': '<%= String.valueOf(mountFolder.getFolderId()) %>',
-									'<portlet:namespace />searchFolderId': '<%= String.valueOf(mountFolder.getFolderId()) %>',
+									'<portlet:namespace />repositoryId': '<%= mountFolder.getRepositoryId() %>',
+									'<portlet:namespace />searchRepositoryId': '<%= mountFolder.getRepositoryId() %>',
+									'<portlet:namespace />folderId': '<%= mountFolder.getFolderId() %>',
+									'<portlet:namespace />searchFolderId': '<%= mountFolder.getFolderId() %>',
 									'<portlet:namespace />keywords': document.<portlet:namespace />fm1.<portlet:namespace />keywords.value,
-									'<portlet:namespace />searchType': <%= String.valueOf(DLSearchConstants.MULTIPLE) %>
+									'<portlet:namespace />searchType': <%= DLSearchConstants.MULTIPLE %>
 								},
 								src: Liferay.DL_SEARCH
 							}
@@ -413,7 +406,7 @@ int total = 0;
 </liferay-util:buffer>
 
 <c:choose>
-	<c:when test="<%= (searchType == DLSearchConstants.MULTIPLE) %>">
+	<c:when test="<%= searchType == DLSearchConstants.MULTIPLE %>">
 		<c:choose>
 			<c:when test="<%= (searchRepositoryId == scopeGroupId) %>">
 				<span id="<portlet:namespace />searchResultsContainer">
@@ -453,12 +446,12 @@ int total = 0;
 			</c:when>
 		</c:choose>
 	</c:when>
-	<c:when test="<%= (searchType == DLSearchConstants.SINGLE) %>">
+	<c:when test="<%= searchType == DLSearchConstants.SINGLE %>">
 		<div id="<portlet:namespace />singleSearchResults">
 			<%= results %>
 		</div>
 	</c:when>
-	<c:when test="<%= (searchType == DLSearchConstants.FRAGMENT) %>">
+	<c:when test="<%= searchType == DLSearchConstants.FRAGMENT %>">
 		<div id="<portlet:namespace />fragmentSearchResults">
 			<%= results %>
 		</div>

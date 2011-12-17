@@ -101,7 +101,7 @@ if (folder != null) {
 				</c:when>
 				<c:when test="<%= ((folderId != rootFolderId) && (parentFolderId == 0)) || ((folderId == rootFolderId) && (parentFolderId == 0) && expandFolder) %>">
 					<span>
-						<%= LanguageUtil.get(pageContext, "home") %>
+						<liferay-ui:message key="home" />
 					</span>
 				</c:when>
 			</c:choose>
