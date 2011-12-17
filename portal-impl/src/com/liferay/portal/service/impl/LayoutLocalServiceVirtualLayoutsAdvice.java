@@ -521,9 +521,6 @@ public class LayoutLocalServiceVirtualLayoutsAdvice
 		}
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(
-		LayoutLocalServiceVirtualLayoutsAdvice.class);
-
 	private static final String _TEMP_DIR =
 		SystemProperties.get(SystemProperties.TMP_DIR) +
 			"/liferay/layout_set_prototype/";
@@ -538,5 +535,8 @@ public class LayoutLocalServiceVirtualLayoutsAdvice
 		Long.TYPE, Boolean.TYPE, Long.TYPE, Boolean.TYPE, Integer.TYPE,
 		Integer.TYPE
 	};
+
+	private static Log _log = LogFactoryUtil.getLog(
+		LayoutLocalServiceVirtualLayoutsAdvice.class);
 
 }
