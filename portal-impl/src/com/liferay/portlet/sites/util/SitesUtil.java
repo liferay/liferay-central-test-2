@@ -145,9 +145,9 @@ public class SitesUtil {
 
 		ServiceContext serviceContext = new ServiceContext();
 
+		serviceContext.setAttribute("layoutPrototypeLinkEnabled", linkEnabled);
 		serviceContext.setAttribute(
 			"layoutPrototypeUuid", layoutPrototype.getUuid());
-		serviceContext.setAttribute("layoutPrototypeLinkEnabled", linkEnabled);
 
 		targetLayout = LayoutServiceUtil.updateLayout(
 			targetLayout.getGroupId(), targetLayout.isPrivateLayout(),
@@ -284,6 +284,83 @@ public class SitesUtil {
 			targetLayout.getGroupId(), targetLayout.isPrivateLayout(),
 			targetLayout.getLayoutId(), sourceLayout.getWapThemeId(),
 			sourceLayout.getWapColorSchemeId(), sourceLayout.getCss(), true);
+	}
+
+	public static void copyPortletPermissions(
+		Layout targetLayout, Layout sourceLayout)
+		throws Exception {
+
+		long companyId = targetLayout.getCompanyId();
+
+		List<Role> roles = RoleLocalServiceUtil.getRoles(companyId);
+
+		LayoutTypePortlet sourceLayoutTypePortlet =
+			(LayoutTypePortlet)sourceLayout.getLayoutType();
+
+		List<String> sourcePortletIds = sourceLayoutTypePortlet.getPortletIds();
+
+		for (String sourcePortletId : sourcePortletIds) {
+			String resourceName = PortletConstants.getRootPortletId(
+				sourcePortletId);
+
+			String sourceResourcePrimKey = PortletPermissionUtil.getPrimaryKey(
+				sourceLayout.getPlid(), sourcePortletId);
+
+			String targetResourcePrimKey = PortletPermissionUtil.getPrimaryKey(
+				targetLayout.getPlid(), sourcePortletId);
+
+			List<String> actionIds =
+				ResourceActionsUtil.getPortletResourceActions(resourceName);
+
+			for (Role role : roles) {
+				String roleName = role.getName();
+
+				if (roleName.equals(RoleConstants.ADMINISTRATOR)) {
+					continue;
+				}
+
+				List<String> actions =
+					ResourcePermissionLocalServiceUtil.
+						getAvailableResourcePermissionActionIds(
+							companyId, resourceName,
+							ResourceConstants.SCOPE_INDIVIDUAL,
+							sourceResourcePrimKey, role.getRoleId(), actionIds);
+
+				ResourcePermissionLocalServiceUtil.setResourcePermissions(
+					companyId, resourceName, ResourceConstants.SCOPE_INDIVIDUAL,
+					targetResourcePrimKey, role.getRoleId(),
+					actions.toArray(new String[actions.size()]));
+			}
+		}
+	}
+
+	public static void copyPortletSetups(
+			Layout sourceLayout, Layout targetLayout)
+		throws Exception {
+
+		LayoutTypePortlet sourceLayoutTypePortlet =
+			(LayoutTypePortlet)sourceLayout.getLayoutType();
+
+		List<String> sourcePortletIds = sourceLayoutTypePortlet.getPortletIds();
+
+		for (String sourcePortletId : sourcePortletIds) {
+			PortletPreferences sourcePreferences =
+				PortletPreferencesFactoryUtil.getPortletSetup(
+					sourceLayout, sourcePortletId, null);
+
+			PortletPreferences targetPreferences =
+				PortletPreferencesFactoryUtil.getPortletSetup(
+					targetLayout, sourcePortletId, null);
+
+			PortletPreferencesImpl targetPreferencesImpl =
+				(PortletPreferencesImpl)targetPreferences;
+
+			PortletPreferencesLocalServiceUtil.updatePreferences(
+				targetPreferencesImpl.getOwnerId(),
+				targetPreferencesImpl.getOwnerType(),
+				targetPreferencesImpl.getPlid(), sourcePortletId,
+				sourcePreferences);
+		}
 	}
 
 	public static void copyTypeSettings(Group sourceGroup, Group targetGroup)
@@ -689,83 +766,6 @@ public class SitesUtil {
 				ResourceConstants.SCOPE_INDIVIDUAL,
 				String.valueOf(targetLayout.getPlid()), role.getRoleId(),
 				actions.toArray(new String[actions.size()]));
-		}
-	}
-
-	public static void copyPortletPermissions(
-		Layout targetLayout, Layout sourceLayout)
-		throws Exception {
-
-		long companyId = targetLayout.getCompanyId();
-
-		List<Role> roles = RoleLocalServiceUtil.getRoles(companyId);
-
-		LayoutTypePortlet sourceLayoutTypePortlet =
-			(LayoutTypePortlet)sourceLayout.getLayoutType();
-
-		List<String> sourcePortletIds = sourceLayoutTypePortlet.getPortletIds();
-
-		for (String sourcePortletId : sourcePortletIds) {
-			String resourceName = PortletConstants.getRootPortletId(
-				sourcePortletId);
-
-			String sourceResourcePrimKey = PortletPermissionUtil.getPrimaryKey(
-				sourceLayout.getPlid(), sourcePortletId);
-
-			String targetResourcePrimKey = PortletPermissionUtil.getPrimaryKey(
-				targetLayout.getPlid(), sourcePortletId);
-
-			List<String> actionIds =
-				ResourceActionsUtil.getPortletResourceActions(resourceName);
-
-			for (Role role : roles) {
-				String roleName = role.getName();
-
-				if (roleName.equals(RoleConstants.ADMINISTRATOR)) {
-					continue;
-				}
-
-				List<String> actions =
-					ResourcePermissionLocalServiceUtil.
-						getAvailableResourcePermissionActionIds(
-							companyId, resourceName,
-							ResourceConstants.SCOPE_INDIVIDUAL,
-							sourceResourcePrimKey, role.getRoleId(), actionIds);
-
-				ResourcePermissionLocalServiceUtil.setResourcePermissions(
-					companyId, resourceName, ResourceConstants.SCOPE_INDIVIDUAL,
-					targetResourcePrimKey, role.getRoleId(),
-					actions.toArray(new String[actions.size()]));
-			}
-		}
-	}
-
-	public static void copyPortletSetups(
-			Layout sourceLayout, Layout targetLayout)
-		throws Exception {
-
-		LayoutTypePortlet sourceLayoutTypePortlet =
-			(LayoutTypePortlet)sourceLayout.getLayoutType();
-
-		List<String> sourcePortletIds = sourceLayoutTypePortlet.getPortletIds();
-
-		for (String sourcePortletId : sourcePortletIds) {
-			PortletPreferences sourcePreferences =
-				PortletPreferencesFactoryUtil.getPortletSetup(
-					sourceLayout, sourcePortletId, null);
-
-			PortletPreferences targetPreferences =
-				PortletPreferencesFactoryUtil.getPortletSetup(
-					targetLayout, sourcePortletId, null);
-
-			PortletPreferencesImpl targetPreferencesImpl =
-				(PortletPreferencesImpl)targetPreferences;
-
-			PortletPreferencesLocalServiceUtil.updatePreferences(
-				targetPreferencesImpl.getOwnerId(),
-				targetPreferencesImpl.getOwnerType(),
-				targetPreferencesImpl.getPlid(), sourcePortletId,
-				sourcePreferences);
 		}
 	}
 
