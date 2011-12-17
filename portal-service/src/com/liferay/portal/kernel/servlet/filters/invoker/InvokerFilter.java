@@ -78,11 +78,10 @@ public class InvokerFilter extends BasePortalLifecycle implements Filter {
 
 		_contextPath = servletContext.getContextPath();
 
-		Thread currentThread = Thread.currentThread();
+		boolean registerPortalLifecycle = GetterUtil.getBoolean(
+			_filterConfig.getInitParameter("register-portal-lifecycle"), true);
 
-		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
-
-		if (contextClassLoader != PortalClassLoaderUtil.getClassLoader()) {
+		if (registerPortalLifecycle) {
 			registerPortalLifecycle();
 		}
 		else {
