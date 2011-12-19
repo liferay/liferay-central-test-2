@@ -133,6 +133,7 @@ if (layout != null) {
 			function() {
 				new Liferay.Navigation(
 					{
+						hasPermission: <%= GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.MANAGE_LAYOUTS) %>,
 						layoutIds: [
 
 							<%
@@ -143,11 +144,11 @@ if (layout != null) {
 								boolean deleteable = updateable && LayoutPermissionUtil.contains(themeDisplay.getPermissionChecker(), curLayout, ActionKeys.DELETE);
 							%>
 
-		                    	{
-									id: <%= curLayout.getLayoutId() %>,
-									updateable: <%= updateable %>,
+								{
 									deletable: <%= deleteable %>,
-		                        },
+									id: <%= curLayout.getLayoutId() %>,
+									updateable: <%= updateable %>
+								},
 
 							<%
 							}
@@ -159,8 +160,7 @@ if (layout != null) {
 							layoutSetBranchId: '<%= layoutRevision.getLayoutSetBranchId() %>',
 						</c:if>
 
-						navBlock: navBlock,
-						hasPermission: <%= GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.MANAGE_LAYOUTS) %>
+						navBlock: navBlock
 					}
 				);
 			}

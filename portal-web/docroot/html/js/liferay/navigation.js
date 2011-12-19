@@ -350,7 +350,6 @@ AUI().add(
 
 						obj.each(
 							function(item, index, collection) {
-								console.log(item.hasClass('lfr-nav-deletable'));
 								if (item.hasClass('lfr-nav-deletable')) {
 									instance._createDeleteButton(item);
 								}

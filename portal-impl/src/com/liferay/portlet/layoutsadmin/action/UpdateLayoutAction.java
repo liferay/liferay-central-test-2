@@ -101,10 +101,10 @@ public class UpdateLayoutAction extends JSONAction {
 		if (cmd.equals("add")) {
 			String[] array = addPage(themeDisplay, request, response);
 
-			jsonObj.put("layoutId", array[0]);
-			jsonObj.put("url", array[1]);
 			jsonObj.put("deletable", Boolean.valueOf(array[2]));
+			jsonObj.put("layoutId", array[0]);
 			jsonObj.put("updateable", Boolean.valueOf(array[3]));
+			jsonObj.put("url", array[1]);
 		}
 		else if (cmd.equals("delete")) {
 			SitesUtil.deleteLayout(request, response);
