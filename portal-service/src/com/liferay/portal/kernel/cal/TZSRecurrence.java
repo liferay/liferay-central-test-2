@@ -27,8 +27,6 @@ import java.util.TimeZone;
  */
 public class TZSRecurrence extends Recurrence {
 
-	private TimeZone _timeZone;
-
 	public TZSRecurrence() {
 	}
 
@@ -106,11 +104,13 @@ public class TZSRecurrence extends Recurrence {
 
 	@Override
 	protected boolean matchesIndividualByDay(
-		Calendar candidateCalendar, DayAndPosition pos) {
+		Calendar candidateCalendar, DayAndPosition dayAndPosition) {
 
 		Calendar adjustedCandidate = getAdjustedCalendar(candidateCalendar);
 
-		return super.matchesIndividualByDay(adjustedCandidate, pos);
+		return super.matchesIndividualByDay(adjustedCandidate, dayAndPosition);
 	}
+
+	private TimeZone _timeZone;
 
 }

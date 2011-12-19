@@ -27,66 +27,69 @@ import java.util.TimeZone;
  */
 public class TZSRecurrenceTest extends RecurrenceTestCase {
 
-	public final Duration durationHour = getDuration(0, 0, 1, 0, 0);
-
-	// EST is -5:00 UTC, during DST -4:00 UTC
-
-	public final TimeZone EST = TimeZone.getTimeZone("America/New_York");
-
-	public void testTimeZone() {
-		completeTimeZoneTest(true);
-		completeTimeZoneTest(false);
+	public void testCompleteTimeZoneWithinTSZRecurrence() {
+		testWithinTSZRecurrence(_timeZone);
 	}
 
-	public void testTZSRecurrenceAcrossDaylightSavings() {
+	public void testIncompleteTimeZoneWithinTSZRecurrence() {
+		testWithinTSZRecurrence(getIncompleteTimeZone());
+	}
 
-		// Event starting within DST match by first Sunday of month
+	public void testInsideDSTTZSRecurrence() {
 
-		// Creates a recurrence object based on the UTC start date of the event
+		// Event starting inside DST matched by first Sunday of the month
 
-		TZSRecurrence firstSunOfMonth = getMonthByDayRecurrence(
-			insideDSTStart, durationHour, SUNDAY, 1, 1, EST);
+		TZSRecurrence firstSunOfMonth = getMonthByDayTSZRecurrence(
+			_insideDSTCalendar, _durationHour, SUNDAY, 1, 1, _timeZone);
 
-		// UTC Time for midnight with given timeZone of recurrence
+		testWithinTSZRecurrence(
+			getInsideDSTCalendar(AUGUST, 7), _durationHour, firstSunOfMonth);
+		testWithinTSZRecurrence(
+			getInsideDSTCalendar(DECEMBER, 4), _durationHour,
+			firstSunOfMonth);
 
-		Calendar insideDST1 = getCalendar(2011, AUGUST, 7, 4, 0);
-		Calendar outsideDST1 = getCalendar(2011, DECEMBER, 4, 4, 0);
+		// Events starting inside DST matched second day of the month
 
-		limitTest(insideDST1, durationHour, firstSunOfMonth);
-		limitTest(outsideDST1, durationHour, firstSunOfMonth);
+		TZSRecurrence secondDayOfMonthTSZRecurrence =
+			getMonthByMonthDayTSZRecurrence(
+					_insideDSTCalendar, _durationHour, 2, 1, _timeZone);
 
-		// Events starting within DST match By date of the second
+		testWithinTSZRecurrence(
+			getInsideDSTCalendar(AUGUST, 2), _durationHour,
+			secondDayOfMonthTSZRecurrence);
+		testWithinTSZRecurrence(
+			getInsideDSTCalendar(DECEMBER, 2), _durationHour,
+			secondDayOfMonthTSZRecurrence);
+	}
 
-		TZSRecurrence secondOfMonth = getMonthByMonthDayRecurrence(
-			insideDSTStart, durationHour, 2, 1, EST);
+	public void testOutsideDSTTZSRecurrence() {
 
-		Calendar insideDST2 = getCalendar(2011, AUGUST, 2, 4, 0);
-		Calendar outsideDST2 = getCalendar(2011, DECEMBER, 2, 4, 0);
+		// Event starting outside of DST matched by the first Monday of the
+		// month
 
-		limitTest(insideDST2, durationHour, secondOfMonth);
-		limitTest(outsideDST2, durationHour, secondOfMonth);
+		TZSRecurrence firstMondayOfMonthTSZRecurrence =
+			getMonthByDayTSZRecurrence(
+				_outsideDSTCalendar, _durationHour, MONDAY, 1, 1, _timeZone);
 
-		// Event starting outside of DST matched by first Monday of month
+		testWithinTSZRecurrence(
+			getOutsideDSTCalendar(AUGUST, 1), _durationHour,
+			firstMondayOfMonthTSZRecurrence);
+		testWithinTSZRecurrence(
+			getOutsideDSTCalendar(DECEMBER, 5), _durationHour,
+			firstMondayOfMonthTSZRecurrence);
 
-		TZSRecurrence firstMonOfMonth = getMonthByDayRecurrence(
-			outsideDSTStart, durationHour, MONDAY, 1, 1, EST);
+		// Event starting outside of DST matched by the sixth day of the month
 
-		Calendar insideDST3 = getCalendar(2011, AUGUST, 1, 5, 0);
-		Calendar outsideDST3 = getCalendar(2011, DECEMBER, 5, 5, 0);
+		TZSRecurrence sixthDayOfMonthTSZRecurrence =
+			getMonthByMonthDayTSZRecurrence(
+				_outsideDSTCalendar, _durationHour, 6, 1, _timeZone);
 
-		limitTest(insideDST3, durationHour, firstMonOfMonth);
-		limitTest(outsideDST3, durationHour, firstMonOfMonth);
-
-		// Event starting outside of DST matched by the date of the sixth
-
-		TZSRecurrence sixthOfMonth = getMonthByMonthDayRecurrence(
-			outsideDSTStart, durationHour, 6, 1, EST);
-
-		Calendar insideDST4 = getCalendar(2011, AUGUST, 6, 5, 0);
-		Calendar outsideDST4 = getCalendar(2011, DECEMBER, 6, 5, 0);
-
-		limitTest(insideDST4, durationHour, sixthOfMonth);
-		limitTest(outsideDST4, durationHour, sixthOfMonth);
+		testWithinTSZRecurrence(
+			getOutsideDSTCalendar(AUGUST, 6), _durationHour,
+			sixthDayOfMonthTSZRecurrence);
+		testWithinTSZRecurrence(
+			getOutsideDSTCalendar(DECEMBER, 6), _durationHour,
+			sixthDayOfMonthTSZRecurrence);
 	}
 
 	protected void assertTZSRecurrenceEquals(
@@ -95,87 +98,133 @@ public class TZSRecurrenceTest extends RecurrenceTestCase {
 		assertEquals(expected, recurrence.isInRecurrence(calendar));
 	}
 
-	protected void completeTimeZoneTest(boolean completeTimeZone) {
-		TimeZone timeZone = EST;
+	protected TimeZone getIncompleteTimeZone() {
 
-		if (!completeTimeZone) {
-			timeZone = (TimeZone) TimeZone.getTimeZone("UTC").clone();
-			timeZone.setID("America/New_York");
-			timeZone.setRawOffset(-5 * 60 * 60 * 1000);
-		}
+		// An incomplete time zone is missing the daylight savings settings and
+		// other information
 
-		TZSRecurrence recurJuly = getMonthByDayRecurrence(
-			insideDSTStart, durationHour, SUNDAY, 1, 1, timeZone);
+		TimeZone timeZone = TimeZone.getTimeZone("UTC");
 
-		Calendar insideDST = getCalendar(2013, JULY, 7, 4, 0);
+		timeZone = (TimeZone)timeZone.clone();
 
-		limitTest(insideDST, durationHour, recurJuly);
+		timeZone.setID("America/New_York");
+		timeZone.setRawOffset((int)Time.HOUR * -5);
 
-		TZSRecurrence firstSunOfMonth = getMonthByDayRecurrence(
-			outsideDSTStart, durationHour, SUNDAY, 1, 1, timeZone);
-
-		Calendar outsideDST = getCalendar(2013, JANUARY, 6, 5, 0);
-
-		limitTest(outsideDST, durationHour, firstSunOfMonth);
+		return timeZone;
 	}
 
-	protected void limitTest(
-		Calendar candidate, Duration duration, TZSRecurrence recur) {
+	protected Calendar getInsideDSTCalendar(int month, int date) {
 
-		long candidateTimeInMills = candidate.getTimeInMillis();
-		long durationInMills = duration.getInterval();
+		// Returns a candidate calendar for an event that has a start date
+		// inside DST. Set the hour to 4 because it will be midnight in New
+		// York (EST) but 4 am at Greenwich (UTC).
 
-		Calendar beforeRecurPeriod = Calendar.getInstance();
-		Calendar startOfRecurPeriod = Calendar.getInstance();
-		Calendar endOfRecurPeriod = Calendar.getInstance();
-		Calendar afterRecurPeriod = Calendar.getInstance();
-
-		beforeRecurPeriod.setTimeInMillis(candidateTimeInMills - Time.MINUTE);
-		startOfRecurPeriod.setTimeInMillis(candidateTimeInMills + Time.MINUTE);
-		endOfRecurPeriod.setTimeInMillis(
-			candidateTimeInMills + durationInMills - Time.MINUTE);
-		afterRecurPeriod.setTimeInMillis(
-			candidateTimeInMills + durationInMills + Time.MINUTE);
-
-		assertTZSRecurrenceEquals(false, recur, beforeRecurPeriod);
-		assertTZSRecurrenceEquals(true, recur, startOfRecurPeriod);
-		assertTZSRecurrenceEquals(true, recur, endOfRecurPeriod);
-		assertTZSRecurrenceEquals(false, recur, afterRecurPeriod);
+		return getCalendar(2011, month, date, 4, 0);
 	}
 
-	protected TZSRecurrence getMonthByDayRecurrence(
+	protected TZSRecurrence getMonthByDayTSZRecurrence(
 		Calendar dtStart, Duration duration, int day, int position,
-		int interval, TimeZone tz) {
+		int interval, TimeZone timeZone) {
 
-		TZSRecurrence recurrence = new TZSRecurrence(
+		// Returns a month by day (e.g. first Monday, second Tuesday of every
+		// month) recurrence object based on the UTC start date of the event
+
+		TZSRecurrence tszRecurrence = new TZSRecurrence(
 			dtStart, duration, Recurrence.MONTHLY);
 
-		DayAndPosition[] days = {new DayAndPosition(day, position)};
+		DayAndPosition[] dayAndPositions = {new DayAndPosition(day, position)};
 
-		recurrence.setByDay(days);
-		recurrence.setInterval(interval);
-		recurrence.setTimeZone(tz);
+		tszRecurrence.setByDay(dayAndPositions);
 
-		return recurrence;
+		tszRecurrence.setInterval(interval);
+		tszRecurrence.setTimeZone(timeZone);
+
+		return tszRecurrence;
 	}
 
-	protected TZSRecurrence getMonthByMonthDayRecurrence(
+	protected TZSRecurrence getMonthByMonthDayTSZRecurrence(
 		Calendar dtStart, Duration duration, int monthDay, int interval,
-		TimeZone tz) {
+		TimeZone timeZone) {
 
-		TZSRecurrence recurrence = new TZSRecurrence(
+		// Returns a month by month day (e.g. the 5th, or the 6th of every
+		// month) recurrence object based on the UTC start date of the event
+
+		TZSRecurrence tszRecurrence = new TZSRecurrence(
 			dtStart, duration, Recurrence.MONTHLY);
 
-		int[] monthDays = {monthDay};
+		tszRecurrence.setByMonthDay(new int[] {monthDay});
+		tszRecurrence.setInterval(interval);
+		tszRecurrence.setTimeZone(timeZone);
 
-		recurrence.setByMonthDay(monthDays);
-		recurrence.setInterval(interval);
-		recurrence.setTimeZone(tz);
-
-		return recurrence;
+		return tszRecurrence;
 	}
 
-	protected Calendar insideDSTStart = getCalendar(2011, JULY, 3, 4, 0);
-	protected Calendar outsideDSTStart = getCalendar(2011, FEBRUARY, 7, 5, 0);
+	protected Calendar getOutsideDSTCalendar(int month, int date) {
+
+		// Returns a candidate calendar for an event that has a start date
+		// outside DST. Set the hour to 5 because it will be midnight in New
+		// York (EST) but 5 am at Greenwich (UTC).
+
+		return getCalendar(2011, month, date, 5, 0);
+	}
+
+	protected void testWithinTSZRecurrence(
+		Calendar calendar, Duration duration, TZSRecurrence tszRecurrence) {
+
+		Calendar afterTSZRecurrenceCalendar = Calendar.getInstance();
+
+		afterTSZRecurrenceCalendar.setTimeInMillis(
+			calendar.getTimeInMillis() + duration.getInterval() + Time.MINUTE);
+
+		assertTZSRecurrenceEquals(
+			false, tszRecurrence, afterTSZRecurrenceCalendar);
+
+		Calendar beforeTSZRecurrenceCalendar = Calendar.getInstance();
+
+		beforeTSZRecurrenceCalendar.setTimeInMillis(
+			calendar.getTimeInMillis() - Time.MINUTE);
+
+		assertTZSRecurrenceEquals(
+			false, tszRecurrence, beforeTSZRecurrenceCalendar);
+
+		Calendar endOfTSZRecurrenceCalendar = Calendar.getInstance();
+
+		endOfTSZRecurrenceCalendar.setTimeInMillis(
+			calendar.getTimeInMillis() + duration.getInterval() - Time.MINUTE);
+
+		assertTZSRecurrenceEquals(
+			true, tszRecurrence, endOfTSZRecurrenceCalendar);
+
+		Calendar startOfTSZRecurrenceCalendar = Calendar.getInstance();
+
+		startOfTSZRecurrenceCalendar.setTimeInMillis(
+			calendar.getTimeInMillis() + Time.MINUTE);
+
+		assertTZSRecurrenceEquals(
+			true, tszRecurrence, startOfTSZRecurrenceCalendar);
+	}
+
+	protected void testWithinTSZRecurrence(TimeZone timeZone) {
+		TZSRecurrence insideDSTTSZRecurrence = getMonthByDayTSZRecurrence(
+			_insideDSTCalendar, _durationHour, SUNDAY, 1, 1, timeZone);
+
+		Calendar insideDSTCalendar = getCalendar(2013, JULY, 7, 4, 0);
+
+		testWithinTSZRecurrence(
+			insideDSTCalendar, _durationHour, insideDSTTSZRecurrence);
+
+		TZSRecurrence outsideDSTTSZRecurrence = getMonthByDayTSZRecurrence(
+			_outsideDSTCalendar, _durationHour, SUNDAY, 1, 1, timeZone);
+
+		Calendar outsideDSTCalendar = getCalendar(2013, JANUARY, 6, 5, 0);
+
+		testWithinTSZRecurrence(
+			outsideDSTCalendar, _durationHour, outsideDSTTSZRecurrence);
+	}
+
+	private Duration _durationHour = getDuration(0, 0, 1, 0, 0);
+	private Calendar _insideDSTCalendar = getCalendar(2011, JULY, 3, 4, 0);
+	private Calendar _outsideDSTCalendar = getCalendar(2011, FEBRUARY, 7, 5, 0);
+	private TimeZone _timeZone = TimeZone.getTimeZone("America/New_York");
 
 }
