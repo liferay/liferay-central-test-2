@@ -188,10 +188,14 @@ public class UpdateLayoutAction extends JSONAction {
 				themeDisplay.getDoAsUserLanguageId());
 		}
 
-		boolean deleteable = true;
-		boolean updateable = true;
+		boolean updateable = SitesUtil.isLayoutUpdateable(layout);
+		boolean deleteable = updateable && LayoutPermissionUtil.contains(
+			themeDisplay.getPermissionChecker(), layout, ActionKeys.DELETE);
 
-		return new String[] {String.valueOf(layout.getLayoutId()), layoutURL, String.valueOf(deleteable), String.valueOf(updateable)};
+		return new String[] {
+			String.valueOf(layout.getLayoutId()), layoutURL,
+			String.valueOf(deleteable), String.valueOf(updateable)
+		};
 	}
 
 	protected void updateDisplayOrder(HttpServletRequest request)
