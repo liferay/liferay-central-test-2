@@ -19,7 +19,6 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.metadata.RawMetadataProcessor;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portlet.dynamicdatamapping.storage.Fields;
 
@@ -78,23 +77,22 @@ public abstract class BaseRawMetadataProcessor implements RawMetadataProcessor {
 		Fields ddmFields = new Fields();
 
 		for (Field field : fields) {
+			Class<?> fieldClass = field.getDeclaringClass();
+
+			String fieldClassName = fieldClass.getSimpleName();
+
+			String name = fieldClassName.concat(
+				StringPool.UNDERLINE).concat(field.getName());
+
 			String value = getMetadataValue(metadata, field);
 
 			if (value == null) {
 				continue;
 			}
 
-			String fieldClassname = field.getDeclaringClass().getSimpleName();
-
-			StringBundler sb = new StringBundler(3);
-
-			sb.append(fieldClassname);
-			sb.append(StringPool.UNDERLINE);
-			sb.append(field.getName());
-
 			com.liferay.portlet.dynamicdatamapping.storage.Field ddmField =
 				new com.liferay.portlet.dynamicdatamapping.storage.Field(
-					sb.toString(), value);
+					name, value);
 
 			ddmFields.put(ddmField);
 		}
@@ -166,11 +164,9 @@ public abstract class BaseRawMetadataProcessor implements RawMetadataProcessor {
 		}
 	}
 
-	private static void addFields(Class<?> clazz, List<Field> fieldsList) {
-		Field[] fields = clazz.getFields();
-
-		for (int i = 0; i < fields.length; i++) {
-			fieldsList.add(fields[i]);
+	private static void _addFields(Class<?> clazz, List<Field> fields) {
+		for (Field field : clazz.getFields()) {
+			fields.add(field);
 		}
 	}
 
@@ -180,25 +176,23 @@ public abstract class BaseRawMetadataProcessor implements RawMetadataProcessor {
 	private static Map<String, Field[]> _fields =
 		new HashMap<String, Field[]>();
 
-	private static List<Field> _fieldList = new ArrayList<Field>();
-
-	private final static String _TIKA_RAW_METADATA = "TikaRawMetadata";
-
 	static {
-		addFields(ClimateForcast.class, _fieldList);
-		addFields(CreativeCommons.class, _fieldList);
-		addFields(DublinCore.class, _fieldList);
-		addFields(Geographic.class, _fieldList);
-		addFields(HttpHeaders.class, _fieldList);
-		addFields(Message.class, _fieldList);
-		addFields(MSOffice.class, _fieldList);
-		addFields(TIFF.class, _fieldList);
-		addFields(TikaMetadataKeys.class, _fieldList);
-		addFields(TikaMimeKeys.class, _fieldList);
-		addFields(XMPDM.class, _fieldList);
+		List<Field> fields = new ArrayList<Field>();
 
-		_fields.put(_TIKA_RAW_METADATA,
-			_fieldList.toArray(new Field[_fieldList.size()]));
+		_addFields(ClimateForcast.class, fields);
+		_addFields(CreativeCommons.class, fields);
+		_addFields(DublinCore.class, fields);
+		_addFields(Geographic.class, fields);
+		_addFields(HttpHeaders.class, fields);
+		_addFields(Message.class, fields);
+		_addFields(MSOffice.class, fields);
+		_addFields(TIFF.class, fields);
+		_addFields(TikaMetadataKeys.class, fields);
+		_addFields(TikaMimeKeys.class, fields);
+		_addFields(XMPDM.class, fields);
+
+		_fields.put(
+			"TikaRawMetadata", fields.toArray(new Field[fields.size()]));
 	}
 
 }
