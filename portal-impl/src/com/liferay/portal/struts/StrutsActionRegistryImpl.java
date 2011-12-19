@@ -29,7 +29,19 @@ import org.apache.struts.action.Action;
 public class StrutsActionRegistryImpl implements StrutsActionRegistry {
 
 	public Action getAction(String path) {
-		return _actions.get(path);
+		Action action = _actions.get(path);
+
+		if (action != null) {
+			return action;
+		}
+
+		for (String curPath : _actions.keySet()) {
+			if (path.startsWith(curPath)) {
+				return _actions.get(curPath);
+			}
+		}
+
+		return null;
 	}
 
 	public Map<String, Action> getActions() {
