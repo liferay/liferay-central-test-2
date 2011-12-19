@@ -18,13 +18,15 @@ import com.liferay.portal.kernel.util.DiffResult;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
-import org.incava.util.diff.Diff;
-import org.incava.util.diff.Difference;
 
 import java.io.Reader;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import org.incava.util.diff.Diff;
+import org.incava.util.diff.Difference;
 
 /**
  * <p>
@@ -249,45 +251,42 @@ public class DiffImpl implements com.liferay.portal.kernel.util.Diff {
 
 		for (; i <= difference.getDeletedEnd(); i++) {
 			for (; j <= difference.getAddedEnd(); j++) {
-				aligned = !_isMaxLineLengthExceeded(
-					sourceStringList.get(i), targetStringList.get(j)) &&
+				if (!_isMaxLineLengthExceeded(
+						sourceStringList.get(i), targetStringList.get(j)) &&
 					_lineDiff(
 						sourceResults, targetResults, sourceStringList,
 						targetStringList, addedMarkerStart, addedMarkerEnd,
-						deletedMarkerStart, deletedMarkerEnd, i, j, false);
+						deletedMarkerStart, deletedMarkerEnd, i, j, false)) {
 
-				if (aligned) {
+					aligned = true;
+
 					break;
 				}
-				else {
-					_highlightLines(
-						targetStringList, addedMarkerStart, addedMarkerEnd, j,
-						j);
 
-					DiffResult targetResult = new DiffResult(
-						j, targetStringList.subList(j, j + 1));
+				_highlightLines(
+					targetStringList, addedMarkerStart, addedMarkerEnd, j, j);
 
-					targetResults.add(targetResult);
+				DiffResult targetResult = new DiffResult(
+					j, targetStringList.subList(j, j + 1));
 
-					sourceResults.add(new DiffResult(j, CONTEXT_LINE));
-				}
+				targetResults.add(targetResult);
+
+				sourceResults.add(new DiffResult(j, CONTEXT_LINE));
 			}
 
 			if (aligned) {
 				 break;
 			}
-			else {
-				_highlightLines(
-					sourceStringList, deletedMarkerStart, deletedMarkerEnd, i,
-					i);
 
-				DiffResult sourceResult = new DiffResult(
-					i, sourceStringList.subList(i, i + 1));
+			_highlightLines(
+				sourceStringList, deletedMarkerStart, deletedMarkerEnd, i, i);
 
-				sourceResults.add(sourceResult);
+			DiffResult sourceResult = new DiffResult(
+				i, sourceStringList.subList(i, i + 1));
 
-				targetResults.add(new DiffResult(i, CONTEXT_LINE));
-			}
+			sourceResults.add(sourceResult);
+
+			targetResults.add(new DiffResult(i, CONTEXT_LINE));
 		}
 
 		i = i + 1;
@@ -299,7 +298,7 @@ public class DiffImpl implements com.liferay.portal.kernel.util.Diff {
 				i++, j++) {
 
 			if (!_isMaxLineLengthExceeded(
-				sourceStringList.get(i), targetStringList.get(j))) {
+					sourceStringList.get(i), targetStringList.get(j))) {
 
 				_lineDiff(
 					sourceResults, targetResults, sourceStringList,
@@ -390,10 +389,10 @@ public class DiffImpl implements com.liferay.portal.kernel.util.Diff {
 	}
 
 	private static boolean _isMaxLineLengthExceeded(
-		String source, String target) {
+		String sourceString, String targetString) {
 
-		if (source.length() > _DIFF_MAX_LINE_LENGTH ||
-			target.length() > _DIFF_MAX_LINE_LENGTH) {
+		if ((sourceString.length() > _DIFF_MAX_LINE_LENGTH) ||
+			(targetString.length() > _DIFF_MAX_LINE_LENGTH)) {
 
 			return true;
 		}
