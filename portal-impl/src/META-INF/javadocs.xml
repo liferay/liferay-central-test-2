@@ -2298,6 +2298,9 @@ by the Search portlet.]]></comment>
 				<type>byte[]</type>
 				<comment><![CDATA[the bytes of the company's logo image]]></comment>
 			</param>
+			<return>
+				<comment><![CDATA[the company with the primary key]]></comment>
+			</return>
 			<throws>
 				<name>PortalException</name>
 				<type>com.liferay.portal.kernel.exception.PortalException</type>
@@ -2322,6 +2325,9 @@ by the Search portlet.]]></comment>
 				<type>java.io.File</type>
 				<comment><![CDATA[the file of the company's logo image]]></comment>
 			</param>
+			<return>
+				<comment><![CDATA[the company with the primary key]]></comment>
+			</return>
 			<throws>
 				<name>PortalException</name>
 				<type>com.liferay.portal.kernel.exception.PortalException</type>
@@ -2346,6 +2352,9 @@ by the Search portlet.]]></comment>
 				<type>java.io.InputStream</type>
 				<comment><![CDATA[the input stream of the company's logo image]]></comment>
 			</param>
+			<return>
+				<comment><![CDATA[the company with the primary key]]></comment>
+			</return>
 			<throws>
 				<name>PortalException</name>
 				<type>com.liferay.portal.kernel.exception.PortalException</type>
@@ -2431,7 +2440,7 @@ by the Search portlet.]]></comment>
 			</throws>
 		</method>
 		<method>
-			<name>getLogoId</name>
+			<name>checkLogo</name>
 			<comment><![CDATA[]]></comment>
 			<param>
 				<name>companyId</name>
@@ -3044,6 +3053,9 @@ through {@link com.liferay.portal.service.CompanyService}.]]></comment>
 				<type>java.io.InputStream</type>
 				<comment><![CDATA[the input stream of the company's logo image]]></comment>
 			</param>
+			<return>
+				<comment><![CDATA[the company with the primary key]]></comment>
+			</return>
 			<throws>
 				<name>PortalException</name>
 				<type>com.liferay.portal.kernel.exception.PortalException</type>

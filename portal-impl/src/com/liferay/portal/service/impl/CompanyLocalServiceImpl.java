@@ -1010,7 +1010,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 	public Company updateLogo(long companyId, byte[] bytes)
 		throws PortalException, SystemException {
 
-		Company company = checkCompanyLogo(companyId);
+		Company company = checkLogo(companyId);
 
 		imageLocalService.updateImage(company.getLogoId(), bytes);
 
@@ -1030,7 +1030,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 	public Company updateLogo(long companyId, File file)
 		throws PortalException, SystemException {
 
-		Company company = checkCompanyLogo(companyId);
+		Company company = checkLogo(companyId);
 
 		imageLocalService.updateImage(company.getLogoId(), file);
 
@@ -1050,7 +1050,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 	public Company updateLogo(long companyId, InputStream is)
 		throws PortalException, SystemException {
 
-		Company company = checkCompanyLogo(companyId);
+		Company company = checkLogo(companyId);
 
 		imageLocalService.updateImage(company.getLogoId(), is);
 
@@ -1186,7 +1186,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 		}
 	}
 
-	protected Company checkCompanyLogo(long companyId)
+	protected Company checkLogo(long companyId)
 		throws PortalException, SystemException {
 
 		Company company = companyPersistence.findByPrimaryKey(companyId);
