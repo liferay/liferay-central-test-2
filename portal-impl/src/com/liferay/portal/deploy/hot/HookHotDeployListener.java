@@ -2986,7 +2986,8 @@ public class HookHotDeployListener
 
 		public void registerStrutsAction(String path, Object strutsAction) {
 			if (strutsAction instanceof StrutsAction) {
-				StrutsActionRegistryUtil.register(path, (StrutsAction)strutsAction);
+				StrutsActionRegistryUtil.register(
+					path, (StrutsAction)strutsAction);
 			}
 			else {
 				StrutsActionRegistryUtil.register(

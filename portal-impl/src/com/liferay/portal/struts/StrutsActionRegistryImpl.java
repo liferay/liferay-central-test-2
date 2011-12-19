@@ -42,9 +42,7 @@ public class StrutsActionRegistryImpl implements StrutsActionRegistry {
 		_actions.put(path, action);
 	}
 
-	public void register(
-		String path, StrutsPortletAction strutsPortletAction) {
-
+	public void register(String path, StrutsPortletAction strutsPortletAction) {
 		Action action = new PortletActionAdapter(strutsPortletAction);
 
 		_actions.put(path, action);
