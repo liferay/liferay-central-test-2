@@ -23,11 +23,9 @@ import com.liferay.portal.kernel.workflow.WorkflowConstants;
  */
 public class JournalArticleConstants {
 
-	public static final int[] ASSET_ENTRY_CREATION_STATUSES =
-		new int[] {
-			WorkflowConstants.STATUS_APPROVED,
-			WorkflowConstants.STATUS_EXPIRED
-		};
+	public static final int[] ASSET_ENTRY_CREATION_STATUSES = {
+		WorkflowConstants.STATUS_APPROVED, WorkflowConstants.STATUS_EXPIRED
+	};
 
 	public static final String CANONICAL_URL_SEPARATOR = "/-/";
 
