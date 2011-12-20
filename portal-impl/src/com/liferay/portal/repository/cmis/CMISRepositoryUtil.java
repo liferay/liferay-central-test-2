@@ -84,11 +84,11 @@ public class CMISRepositoryUtil {
 
 			return new SessionImpl(session);
 		}
-		catch (CmisUnauthorizedException cue) {
-			throw new PrincipalException();
-		}
 		catch (CmisPermissionDeniedException cpde) {
 			throw new PrincipalException(cpde);
+		}
+		catch (CmisUnauthorizedException cue) {
+			throw new PrincipalException();
 		}
 		catch (Exception e) {
 			throw new RepositoryException(e);
