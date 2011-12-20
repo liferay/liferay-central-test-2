@@ -387,15 +387,6 @@ public interface DLAppService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public com.liferay.portal.model.Lock lockFileEntry(long fileEntryId,
-		java.lang.String owner, long expirationTime)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	public void unlockFileEntry(long fileEntryId, java.lang.String lockUuid)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
-
 	/**
 	* Performs a deep copy of the folder.
 	*
@@ -1430,6 +1421,15 @@ public interface DLAppService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
+	public com.liferay.portal.model.Lock lockFileEntry(long fileEntryId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.portal.model.Lock lockFileEntry(long fileEntryId,
+		java.lang.String owner, long expirationTime)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
 	/**
 	* Locks the folder. This method is primarily used by WebDAV.
 	*
@@ -1557,6 +1557,14 @@ public interface DLAppService {
 		com.liferay.portal.kernel.search.SearchContext searchContext,
 		com.liferay.portal.kernel.search.Query query)
 		throws com.liferay.portal.kernel.search.SearchException;
+
+	public void unlockFileEntry(long fileEntryId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	public void unlockFileEntry(long fileEntryId, java.lang.String lockUuid)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
 	* Unlocks the folder. This method is primarily used by WebDAV.

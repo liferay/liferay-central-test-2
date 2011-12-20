@@ -682,8 +682,6 @@ Liferay.Service.registerClass(
 		cancelCheckOut: true,
 		checkInFileEntry: true,
 		checkOutFileEntry: true,
-		lockFileEntry: true,
-		unlockFileEntry: true,
 		copyFolder: true,
 		deleteFileEntry: true,
 		deleteFileEntryByTitle: true,
@@ -706,6 +704,7 @@ Liferay.Service.registerClass(
 		getMountFolders: true,
 		getSubfolderIds: true,
 		getTempFileEntryNames: true,
+		lockFileEntry: true,
 		lockFolder: true,
 		moveFileEntry: true,
 		moveFolder: true,
@@ -713,6 +712,7 @@ Liferay.Service.registerClass(
 		refreshFolderLock: true,
 		revertFileEntry: true,
 		search: true,
+		unlockFileEntry: true,
 		unlockFolder: true,
 		updateFileShortcut: true,
 		updateFolder: true,
@@ -741,13 +741,13 @@ Liferay.Service.registerClass(
 		getGroupFileEntriesCount: true,
 		hasFileEntryLock: true,
 		isFileEntryCheckedOut: true,
+		lockFileEntry: true,
 		moveFileEntry: true,
 		refreshFileEntryLock: true,
 		revertFileEntry: true,
+		unlockFileEntry: true,
 		verifyFileEntryCheckOut: true,
-		verifyFileEntryLock: true,
-		lockFileEntry: true,
-		unlockFileEntry: true
+		verifyFileEntryLock: true
 	}
 );
 

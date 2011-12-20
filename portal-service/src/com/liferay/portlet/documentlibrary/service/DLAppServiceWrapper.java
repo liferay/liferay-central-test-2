@@ -410,19 +410,6 @@ public class DLAppServiceWrapper implements DLAppService,
 			expirationTime);
 	}
 
-	public com.liferay.portal.model.Lock lockFileEntry(long fileEntryId,
-		java.lang.String owner, long expirationTime)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _dlAppService.lockFileEntry(fileEntryId, owner, expirationTime);
-	}
-
-	public void unlockFileEntry(long fileEntryId, java.lang.String lockUuid)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		_dlAppService.unlockFileEntry(fileEntryId, lockUuid);
-	}
-
 	/**
 	* Performs a deep copy of the folder.
 	*
@@ -1541,6 +1528,19 @@ public class DLAppServiceWrapper implements DLAppService,
 			tempFolderName);
 	}
 
+	public com.liferay.portal.model.Lock lockFileEntry(long fileEntryId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _dlAppService.lockFileEntry(fileEntryId);
+	}
+
+	public com.liferay.portal.model.Lock lockFileEntry(long fileEntryId,
+		java.lang.String owner, long expirationTime)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _dlAppService.lockFileEntry(fileEntryId, owner, expirationTime);
+	}
+
 	/**
 	* Locks the folder. This method is primarily used by WebDAV.
 	*
@@ -1685,6 +1685,18 @@ public class DLAppServiceWrapper implements DLAppService,
 		com.liferay.portal.kernel.search.Query query)
 		throws com.liferay.portal.kernel.search.SearchException {
 		return _dlAppService.search(repositoryId, searchContext, query);
+	}
+
+	public void unlockFileEntry(long fileEntryId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_dlAppService.unlockFileEntry(fileEntryId);
+	}
+
+	public void unlockFileEntry(long fileEntryId, java.lang.String lockUuid)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_dlAppService.unlockFileEntry(fileEntryId, lockUuid);
 	}
 
 	/**

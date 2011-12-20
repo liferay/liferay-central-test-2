@@ -486,7 +486,7 @@ public class LiferayRepository
 	}
 
 	public Lock lockFileEntry(
-		long fileEntryId, String owner, long expirationTime)
+			long fileEntryId, String owner, long expirationTime)
 		throws PortalException, SystemException {
 
 		return dlFileEntryService.lockFileEntry(
@@ -660,6 +660,12 @@ public class LiferayRepository
 			fileEntryId, lockUuid);
 	}
 
+	public boolean verifyFileEntryLock(long fileEntryId, String lockUuid)
+		throws PortalException, SystemException {
+
+		return dlFileEntryService.verifyFileEntryLock(fileEntryId, lockUuid);
+	}
+
 	public boolean verifyInheritableLock(long folderId, String lockUuid)
 		throws PortalException, SystemException {
 
@@ -741,12 +747,6 @@ public class LiferayRepository
 		}
 		catch (Exception e) {
 		}
-	}
-
-	public boolean verifyFileEntryLock(long fileEntryId, String lockUuid)
-		throws PortalException, SystemException {
-
-		return dlFileEntryService.verifyFileEntryLock(fileEntryId, lockUuid);
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(LiferayRepository.class);

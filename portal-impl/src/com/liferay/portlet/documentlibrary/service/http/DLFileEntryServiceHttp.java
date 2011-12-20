@@ -939,6 +939,81 @@ public class DLFileEntryServiceHttp {
 		}
 	}
 
+	public static com.liferay.portal.model.Lock lockFileEntry(
+		HttpPrincipal httpPrincipal, long fileEntryId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		try {
+			MethodKey methodKey = new MethodKey(DLFileEntryServiceUtil.class.getName(),
+					"lockFileEntry", _lockFileEntryParameterTypes25);
+
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					fileEntryId);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
+					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
+					throw (com.liferay.portal.kernel.exception.SystemException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+
+			return (com.liferay.portal.model.Lock)returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static com.liferay.portal.model.Lock lockFileEntry(
+		HttpPrincipal httpPrincipal, long fileEntryId, java.lang.String owner,
+		long expirationTime)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		try {
+			MethodKey methodKey = new MethodKey(DLFileEntryServiceUtil.class.getName(),
+					"lockFileEntry", _lockFileEntryParameterTypes26);
+
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					fileEntryId, owner, expirationTime);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
+					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
+					throw (com.liferay.portal.kernel.exception.SystemException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+
+			return (com.liferay.portal.model.Lock)returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry moveFileEntry(
 		HttpPrincipal httpPrincipal, long fileEntryId, long newFolderId,
 		com.liferay.portal.service.ServiceContext serviceContext)
@@ -946,7 +1021,7 @@ public class DLFileEntryServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(DLFileEntryServiceUtil.class.getName(),
-					"moveFileEntry", _moveFileEntryParameterTypes25);
+					"moveFileEntry", _moveFileEntryParameterTypes27);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					fileEntryId, newFolderId, serviceContext);
@@ -985,7 +1060,7 @@ public class DLFileEntryServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(DLFileEntryServiceUtil.class.getName(),
 					"refreshFileEntryLock",
-					_refreshFileEntryLockParameterTypes26);
+					_refreshFileEntryLockParameterTypes28);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					lockUuid, expirationTime);
@@ -1023,10 +1098,76 @@ public class DLFileEntryServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(DLFileEntryServiceUtil.class.getName(),
-					"revertFileEntry", _revertFileEntryParameterTypes27);
+					"revertFileEntry", _revertFileEntryParameterTypes29);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					fileEntryId, version, serviceContext);
+
+			try {
+				TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
+					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
+					throw (com.liferay.portal.kernel.exception.SystemException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static void unlockFileEntry(HttpPrincipal httpPrincipal,
+		long fileEntryId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		try {
+			MethodKey methodKey = new MethodKey(DLFileEntryServiceUtil.class.getName(),
+					"unlockFileEntry", _unlockFileEntryParameterTypes30);
+
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					fileEntryId);
+
+			try {
+				TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
+					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
+					throw (com.liferay.portal.kernel.exception.SystemException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static void unlockFileEntry(HttpPrincipal httpPrincipal,
+		long fileEntryId, java.lang.String lockUuid)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		try {
+			MethodKey methodKey = new MethodKey(DLFileEntryServiceUtil.class.getName(),
+					"unlockFileEntry", _unlockFileEntryParameterTypes31);
+
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					fileEntryId, lockUuid);
 
 			try {
 				TunnelUtil.invoke(httpPrincipal, methodHandler);
@@ -1062,7 +1203,7 @@ public class DLFileEntryServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(DLFileEntryServiceUtil.class.getName(),
-					"updateFileEntry", _updateFileEntryParameterTypes28);
+					"updateFileEntry", _updateFileEntryParameterTypes32);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					fileEntryId, sourceFileName, mimeType, title, description,
@@ -1102,7 +1243,7 @@ public class DLFileEntryServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(DLFileEntryServiceUtil.class.getName(),
 					"verifyFileEntryCheckOut",
-					_verifyFileEntryCheckOutParameterTypes29);
+					_verifyFileEntryCheckOutParameterTypes33);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					fileEntryId, lockUuid);
@@ -1139,7 +1280,7 @@ public class DLFileEntryServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(DLFileEntryServiceUtil.class.getName(),
-					"verifyFileEntryLock", _verifyFileEntryLockParameterTypes30);
+					"verifyFileEntryLock", _verifyFileEntryLockParameterTypes34);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					fileEntryId, lockUuid);
@@ -1162,147 +1303,6 @@ public class DLFileEntryServiceHttp {
 			}
 
 			return ((Boolean)returnObj).booleanValue();
-		}
-		catch (com.liferay.portal.kernel.exception.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
-	public static com.liferay.portal.model.Lock lockFileEntry(
-		HttpPrincipal httpPrincipal, long fileEntryId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		try {
-			MethodKey methodKey = new MethodKey(DLFileEntryServiceUtil.class.getName(),
-					"lockFileEntry", _lockFileEntryParameterTypes31);
-
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					fileEntryId);
-
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
-				}
-
-				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
-					throw (com.liferay.portal.kernel.exception.SystemException)e;
-				}
-
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
-			}
-
-			return (com.liferay.portal.model.Lock)returnObj;
-		}
-		catch (com.liferay.portal.kernel.exception.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
-	public static com.liferay.portal.model.Lock lockFileEntry(
-		HttpPrincipal httpPrincipal, long fileEntryId, java.lang.String owner,
-		long expirationTime)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		try {
-			MethodKey methodKey = new MethodKey(DLFileEntryServiceUtil.class.getName(),
-					"lockFileEntry", _lockFileEntryParameterTypes32);
-
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					fileEntryId, owner, expirationTime);
-
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
-				}
-
-				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
-					throw (com.liferay.portal.kernel.exception.SystemException)e;
-				}
-
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
-			}
-
-			return (com.liferay.portal.model.Lock)returnObj;
-		}
-		catch (com.liferay.portal.kernel.exception.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
-	public static void unlockFileEntry(HttpPrincipal httpPrincipal,
-		long fileEntryId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		try {
-			MethodKey methodKey = new MethodKey(DLFileEntryServiceUtil.class.getName(),
-					"unlockFileEntry", _unlockFileEntryParameterTypes33);
-
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					fileEntryId);
-
-			try {
-				TunnelUtil.invoke(httpPrincipal, methodHandler);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
-				}
-
-				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
-					throw (com.liferay.portal.kernel.exception.SystemException)e;
-				}
-
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
-			}
-		}
-		catch (com.liferay.portal.kernel.exception.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
-	public static void unlockFileEntry(HttpPrincipal httpPrincipal,
-		long fileEntryId, java.lang.String lockUuid)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		try {
-			MethodKey methodKey = new MethodKey(DLFileEntryServiceUtil.class.getName(),
-					"unlockFileEntry", _unlockFileEntryParameterTypes34);
-
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					fileEntryId, lockUuid);
-
-			try {
-				TunnelUtil.invoke(httpPrincipal, methodHandler);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
-				}
-
-				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
-					throw (com.liferay.portal.kernel.exception.SystemException)e;
-				}
-
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
-			}
 		}
 		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);
@@ -1395,40 +1395,40 @@ public class DLFileEntryServiceHttp {
 	private static final Class<?>[] _isFileEntryCheckedOutParameterTypes24 = new Class[] {
 			long.class
 		};
-	private static final Class<?>[] _moveFileEntryParameterTypes25 = new Class[] {
+	private static final Class<?>[] _lockFileEntryParameterTypes25 = new Class[] {
+			long.class
+		};
+	private static final Class<?>[] _lockFileEntryParameterTypes26 = new Class[] {
+			long.class, java.lang.String.class, long.class
+		};
+	private static final Class<?>[] _moveFileEntryParameterTypes27 = new Class[] {
 			long.class, long.class,
 			com.liferay.portal.service.ServiceContext.class
 		};
-	private static final Class<?>[] _refreshFileEntryLockParameterTypes26 = new Class[] {
+	private static final Class<?>[] _refreshFileEntryLockParameterTypes28 = new Class[] {
 			java.lang.String.class, long.class
 		};
-	private static final Class<?>[] _revertFileEntryParameterTypes27 = new Class[] {
+	private static final Class<?>[] _revertFileEntryParameterTypes29 = new Class[] {
 			long.class, java.lang.String.class,
 			com.liferay.portal.service.ServiceContext.class
 		};
-	private static final Class<?>[] _updateFileEntryParameterTypes28 = new Class[] {
+	private static final Class<?>[] _unlockFileEntryParameterTypes30 = new Class[] {
+			long.class
+		};
+	private static final Class<?>[] _unlockFileEntryParameterTypes31 = new Class[] {
+			long.class, java.lang.String.class
+		};
+	private static final Class<?>[] _updateFileEntryParameterTypes32 = new Class[] {
 			long.class, java.lang.String.class, java.lang.String.class,
 			java.lang.String.class, java.lang.String.class,
 			java.lang.String.class, boolean.class, long.class,
 			java.util.Map.class, java.io.File.class, java.io.InputStream.class,
 			long.class, com.liferay.portal.service.ServiceContext.class
 		};
-	private static final Class<?>[] _verifyFileEntryCheckOutParameterTypes29 = new Class[] {
+	private static final Class<?>[] _verifyFileEntryCheckOutParameterTypes33 = new Class[] {
 			long.class, java.lang.String.class
 		};
-	private static final Class<?>[] _verifyFileEntryLockParameterTypes30 = new Class[] {
-			long.class, java.lang.String.class
-		};
-	private static final Class<?>[] _lockFileEntryParameterTypes31 = new Class[] {
-			long.class
-		};
-	private static final Class<?>[] _lockFileEntryParameterTypes32 = new Class[] {
-			long.class, java.lang.String.class, long.class
-		};
-	private static final Class<?>[] _unlockFileEntryParameterTypes33 = new Class[] {
-			long.class
-		};
-	private static final Class<?>[] _unlockFileEntryParameterTypes34 = new Class[] {
+	private static final Class<?>[] _verifyFileEntryLockParameterTypes34 = new Class[] {
 			long.class, java.lang.String.class
 		};
 }

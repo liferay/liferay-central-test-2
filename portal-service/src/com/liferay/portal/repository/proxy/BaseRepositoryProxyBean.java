@@ -409,7 +409,7 @@ public class BaseRepositoryProxyBean
 	}
 
 	public Lock lockFileEntry(
-		long fileEntryId, String owner, long expirationTime)
+			long fileEntryId, String owner, long expirationTime)
 		throws PortalException, SystemException {
 
 		Lock lock = _baseRepository.lockFileEntry(
@@ -608,7 +608,7 @@ public class BaseRepositoryProxyBean
 
 	public boolean verifyFileEntryLock(long fileEntryId, String lockUuid)
 		throws PortalException, SystemException {
-	
+
 		return _baseRepository.verifyFileEntryLock(fileEntryId, lockUuid);
 	}
 

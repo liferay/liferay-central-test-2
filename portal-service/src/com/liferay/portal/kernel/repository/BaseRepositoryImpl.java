@@ -212,15 +212,12 @@ public abstract class BaseRepositoryImpl implements BaseRepository {
 	public abstract void initRepository()
 		throws PortalException, SystemException;
 
-	public Lock lockFileEntry(long fileEntryId)
-		throws PortalException, SystemException {
-
+	public Lock lockFileEntry(long fileEntryId) {
 		throw new UnsupportedOperationException();
 	}
 
 	public Lock lockFileEntry(
-		long fileEntryId, String owner, long expirationTime)
-		throws PortalException, SystemException {
+		long fileEntryId, String owner, long expirationTime) {
 
 		throw new UnsupportedOperationException();
 	}
@@ -280,15 +277,11 @@ public abstract class BaseRepositoryImpl implements BaseRepository {
 		this.userLocalService = userLocalService;
 	}
 
-	public void unlockFileEntry(long fileEntryId)
-		throws PortalException, SystemException {
-
+	public void unlockFileEntry(long fileEntryId) {
 		throw new UnsupportedOperationException();
 	}
 
-	public void unlockFileEntry(long fileEntryId, String lockUuid)
-		throws PortalException, SystemException {
-
+	public void unlockFileEntry(long fileEntryId, String lockUuid) {
 		throw new UnsupportedOperationException();
 	}
 
@@ -331,9 +324,7 @@ public abstract class BaseRepositoryImpl implements BaseRepository {
 		}
 	}
 
-	public boolean verifyFileEntryLock(long fileEntryId, String lockUuid)
-		throws PortalException, SystemException {
-
+	public boolean verifyFileEntryLock(long fileEntryId, String lockUuid) {
 		throw new UnsupportedOperationException();
 	}
 
