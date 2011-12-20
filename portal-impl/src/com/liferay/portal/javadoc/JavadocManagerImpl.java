@@ -15,25 +15,24 @@
 package com.liferay.portal.javadoc;
 
 import com.liferay.portal.kernel.javadoc.BaseJavadoc;
-import com.liferay.portal.kernel.javadoc.JavadocConstructor;
+import com.liferay.portal.kernel.javadoc.JavadocClass;
 import com.liferay.portal.kernel.javadoc.JavadocManager;
 import com.liferay.portal.kernel.javadoc.JavadocMethod;
-import com.liferay.portal.kernel.javadoc.JavadocType;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StreamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.xml.Document;
-import com.liferay.portal.kernel.xml.Node;
+import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 
 import java.io.InputStream;
 
-import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 
 import java.net.URL;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -45,62 +44,70 @@ import java.util.Map;
 public class JavadocManagerImpl implements JavadocManager {
 
 	public void load(String servletContextName, ClassLoader classLoader) {
-		if (_log.isDebugEnabled()) {
-			_log.debug("Loading javadocs.xml");
+		if (_log.isInfoEnabled()) {
+			_log.info("Loading Javadocs for " + servletContextName);
 		}
 
-		Document document = _loadJavadocsXmlFile(classLoader);
+		Document document = getDocument(classLoader);
 
 		if (document == null) {
 			return;
 		}
 
-		_parseJavadocsDocument(document, servletContextName, classLoader);
+		parseDocument(servletContextName, classLoader, document);
 
 		if (_log.isInfoEnabled()) {
-			_log.info("Javadocs loaded for: " + servletContextName);
+			_log.info("Loaded Javadocs for " + servletContextName);
 		}
 	}
 
-	public JavadocMethod lookupJavadoc(Method method) {
-		return _javadocMethods.get(method);
-	}
+	public JavadocMethod lookupJavadocMethod(Method method) {
+		JavadocMethod javadocMethod = _javadocMethods.get(method);
 
-	public JavadocConstructor lookupJavadoc(Constructor constructor) {
-		return _javadocConstructors.get(constructor);
-	}
+		if (javadocMethod != null) {
+			return javadocMethod;
+		}
 
-	public JavadocType lookupJavadoc(Class type) {
-		return _javadocTypes.get(type);
-	}
+		Class<?> clazz = method.getDeclaringClass();
 
-	public JavadocMethod lookupServiceUtilMethodJavadoc(Method method) {
-		String implClassName = method.getDeclaringClass().getName();
+		String className = clazz.getName();
 
-		implClassName =
-			StringUtil.replace(implClassName, "ServiceUtil", "ServiceImpl");
+		if (!className.contains(".service.") ||
+			!className.endsWith("ServiceUtil")) {
 
-		implClassName =
-			StringUtil.replace(implClassName, "service.", "service.impl.");
+			return null;
+		}
+
+		String implClassName = StringUtil.replace(
+			className, new String[] {".service.", "ServiceUtil"},
+			new String[] {".service.impl.", "ServiceImpl"});
+
+		if (_log.isDebugEnabled()) {
+			_log.debug(
+				"Attempting to load method from class " + implClassName +
+					" instead of " + className);
+		}
 
 		try {
-			Class methodDeclaringClass = method.getDeclaringClass();
+			Class<?> implClass = JavadocUtil.loadClass(
+				clazz.getClassLoader(), implClassName);
 
-			ClassLoader methodDeclaringClassClassLoader
-				= methodDeclaringClass.getClassLoader();
-
-			Class implClass = JavadocUtil.loadClass(
-				implClassName, methodDeclaringClassClassLoader);
-
-			method = implClass.getMethod(
+			Method implMethod = implClass.getMethod(
 				method.getName(), method.getParameterTypes());
 
-			return lookupJavadoc(method);
+			return _javadocMethods.get(implMethod);
+		}
+		catch (NoSuchMethodException nsme) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(
+					"Unable to load method " + method.getName() +
+						" from class " + implClassName);
+			}
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
-					"Implementation class " + implClassName + " not found", e);
+					"Unable to load implementation class " + implClassName);
 			}
 		}
 
@@ -108,82 +115,29 @@ public class JavadocManagerImpl implements JavadocManager {
 	}
 
 	public void unload(String servletContextName) {
-
-		Iterator<? extends BaseJavadoc> iterator = null;
-
-		iterator = _javadocMethods.values().iterator();
-
-		while (iterator.hasNext()) {
-			BaseJavadoc javadoc = iterator.next();
-
-			if (javadoc.getServletContextName().equals(servletContextName)) {
-				iterator.remove();
-			}
+		if (_log.isInfoEnabled()) {
+			_log.info("Unoading Javadocs for " + servletContextName);
 		}
 
-		iterator = _javadocConstructors.values().iterator();
-
-		while (iterator.hasNext()) {
-			BaseJavadoc javadoc = iterator.next();
-
-			if (javadoc.getServletContextName().equals(servletContextName)) {
-				iterator.remove();
-			}
-		}
-
-		iterator = _javadocTypes.values().iterator();
-
-		while (iterator.hasNext()) {
-			BaseJavadoc javadoc = iterator.next();
-
-			if (javadoc.getServletContextName().equals(servletContextName)) {
-				iterator.remove();
-			}
-		}
+		unload(servletContextName, _javadocClasses.values());
+		unload(servletContextName, _javadocMethods.values());
 
 		if (_log.isInfoEnabled()) {
-			_log.info("Javadocs unloaded for: " + servletContextName);
+			_log.info("Unloaded Javadocs for " + servletContextName);
 		}
 	}
 
-	private String _getChildNodeText(Node rootNode, String childNodeName) {
-		Node childNode = rootNode.selectSingleNode(childNodeName);
-
-		if (childNode == null) {
-			return null;
-		}
-
-		String text = childNode.getText();
-
-		if (text == null) {
-			return null;
-		}
-
-		text = text.trim();
-
-		if (text.length() == 0) {
-			return null;
-		}
-
-		return text;
-	}
-
-	private Document _loadJavadocsXmlFile(ClassLoader classLoader) {
-
+	protected Document getDocument(ClassLoader classLoader) {
 		InputStream inputStream = null;
 
 		try {
-			URL javadocsUrl =
-				classLoader.getResource("META-INF/javadocs.xml");
+			URL url = classLoader.getResource("META-INF/javadocs.xml");
 
-			if (javadocsUrl == null) {
-				if (_log.isInfoEnabled()) {
-					_log.info("Javadocs not available.");
-				}
+			if (url == null) {
 				return null;
 			}
 
-			inputStream = javadocsUrl.openStream();
+			inputStream = url.openStream();
 
 			return SAXReaderUtil.read(inputStream, true);
 		}
@@ -193,213 +147,168 @@ public class JavadocManagerImpl implements JavadocManager {
 		finally {
 			StreamUtil.cleanUp(inputStream);
 		}
+
 		return null;
 	}
 
-	private JavadocConstructor _parseJavadocConstructor(
-		Class clazz, Node ctorNode) throws ClassNotFoundException {
+	protected void parseDocument(
+		String servletContextName, ClassLoader classLoader, Document document) {
 
-		String ctorComment = _getChildNodeText(ctorNode, "comment");
+		Element rootElement = document.getRootElement();
 
-		List<Node> paramNodes = ctorNode.selectNodes("param");
+		List<Element> javadocElements = rootElement.elements("javadoc");
 
-		String[] parametersComments = new String[paramNodes.size()];
-		Class<?>[] parameterTypes = new Class<?>[paramNodes.size()];
+		for (Element javadocElement : javadocElements) {
+			String type = javadocElement.elementText("type");
 
-		int index = 0;
+			Class<?> clazz = null;
 
-		for (Node paramNode : paramNodes) {
+			try {
+				clazz = JavadocUtil.loadClass(classLoader, type);
+			}
+			catch (ClassNotFoundException cnfe) {
+				if (_log.isWarnEnabled()) {
+					_log.warn("Unable to load class " + type);
+				}
 
-			String parameterComment = _getChildNodeText(paramNode, "comment");
-			String parameterTypeName = _getChildNodeText(paramNode, "type");
+				continue;
+			}
 
-			Class parametarType = JavadocUtil.loadClass(
-				parameterTypeName, clazz.getClassLoader());
+			JavadocClass javadocClass = parseJavadocClass(
+				servletContextName, javadocElement, clazz);
 
-			parameterTypes[index] = parametarType;
-			parametersComments[index] = parameterComment;
+			_javadocClasses.put(clazz, javadocClass);
 
-			index++;
-		}
+			List<Element> methodElements = javadocElement.elements("method");
 
-		Constructor constructor = null;
-		try {
-			constructor = clazz.getDeclaredConstructor(parameterTypes);
-		}
-		catch (NoSuchMethodException nsmex) {
-			if (_log.isWarnEnabled()) {
-				_log.warn("Constructor not found: " + nsmex.getMessage());
+			for (Element methodElement : methodElements) {
+				try {
+					JavadocMethod javadocMethod = parseJavadocMethod(
+						servletContextName, clazz, methodElement);
+
+					_javadocMethods.put(
+						javadocMethod.getMethod(), javadocMethod);
+				}
+				catch (Exception e) {
+					String methodName = methodElement.elementText("name");
+
+					if (_log.isWarnEnabled()) {
+						_log.warn(
+							"Unable to load method " + methodName +
+								" from class " + type);
+					}
+				}
 			}
 		}
-
-		JavadocConstructor javadocConstructor =
-			new JavadocConstructor(constructor, ctorComment);
-
-		javadocConstructor.setParametersComments(parametersComments);
-		javadocConstructor.setThrowsComments(_parseThrowsComments(ctorNode));
-
-		return javadocConstructor;
 	}
 
-	private JavadocMethod _parseJavadocMethod(Class clazz, Node methodNode)
-		throws ClassNotFoundException {
+	protected JavadocClass parseJavadocClass(
+		String servletContextName, Element javadocElement, Class<?> clazz) {
 
-		String methodName = _getChildNodeText(methodNode, "name");
-		String methodComment = _getChildNodeText(methodNode, "comment");
-		String methodReturnComment = _getChildNodeText(methodNode, "return");
+		JavadocClass javadocClass = new JavadocClass(clazz);
 
-		List<Node> paramNodes = methodNode.selectNodes("param");
+		List<Element> authorElements = javadocElement.elements("author");
 
-		String[] parametersComments = new String[paramNodes.size()];
-		Class<?>[] parameterTypes = new Class<?>[paramNodes.size()];
+		String[] authors = new String[authorElements.size()];
 
-		int index = 0;
+		for (int i = 0; i < authorElements.size(); i++) {
+			Element authorElement = authorElements.get(i);
 
-		for (Node paramNode : paramNodes) {
-
-			String parameterComment = _getChildNodeText(paramNode, "comment");
-			String parameterTypeName = _getChildNodeText(paramNode, "type");
-
-			Class parametarType = JavadocUtil.loadClass(
-				parameterTypeName, clazz.getClassLoader());
-
-			parameterTypes[index] = parametarType;
-			parametersComments[index] = parameterComment;
-
-			index++;
+			authors[i] = authorElement.getText();
 		}
 
-		Method method = null;
-		try {
-			method = clazz.getDeclaredMethod(methodName, parameterTypes);
-		}
-		catch (NoSuchMethodException nsmex) {
-			if (_log.isWarnEnabled()) {
-				_log.warn("Method not found: " + nsmex.getMessage());
-			}
+		javadocClass.setAuthors(authors);
+
+		String comment = javadocElement.elementText("comment");
+
+		javadocClass.setComment(comment);
+
+		javadocClass.setServletContextName(servletContextName);
+
+		return javadocClass;
+	}
+
+	protected JavadocMethod parseJavadocMethod(
+			String servletContextName, Class<?> clazz, Element methodElement)
+		throws Exception {
+
+		String name = methodElement.elementText("name");
+
+		List<Element> paramElements = methodElement.elements("param");
+
+		Class<?>[] parameterTypeClasses = new Class<?>[paramElements.size()];
+		String[] parameterComments = new String[paramElements.size()];
+
+		for (int i = 0; i < paramElements.size(); i++) {
+			Element paramElement = paramElements.get(i);
+
+			String parameterType = paramElement.elementText("type");
+
+			Class<?> parametarTypeClass = JavadocUtil.loadClass(
+				clazz.getClassLoader(), parameterType);
+
+			parameterTypeClasses[i] = parametarTypeClass;
+
+			String parameterComment = paramElement.elementText("comment");
+
+			parameterComments[i] = parameterComment;
 		}
 
-		JavadocMethod javadocMethod = new JavadocMethod(method, methodComment);
+		Method method = clazz.getDeclaredMethod(name, parameterTypeClasses);
 
-		javadocMethod.setParametersComments(parametersComments);
-		javadocMethod.setReturnComment(methodReturnComment);
-		javadocMethod.setThrowsComments(_parseThrowsComments(methodNode));
+		JavadocMethod javadocMethod = new JavadocMethod(method);
+
+		String comment = methodElement.elementText("comment");
+
+		javadocMethod.setComment(comment);
+
+		javadocMethod.setParameterComments(parameterComments);
+
+		Element returnElement = methodElement.element("return");
+
+		if (javadocMethod != null) {
+			String returnComment = returnElement.elementText("comment");
+
+			javadocMethod.setReturnComment(returnComment);
+		}
+
+		javadocMethod.setServletContextName(servletContextName);
+
+		List<Element> throwsElements = methodElement.elements("throws");
+
+		String[] throwsComments = new String[throwsElements.size()];
+
+		for (int i = 0; i < throwsElements.size(); i++) {
+			Element throwElement = throwsElements.get(i);
+
+			throwsComments[i] = throwElement.elementText("comment");
+		}
+
+		javadocMethod.setThrowsComments(throwsComments);
 
 		return javadocMethod;
 	}
 
-	private JavadocType _parseJavadocType(Class type, Node typeNode) {
-		String typeComment = _getChildNodeText(typeNode, "comment");
+	protected void unload(
+		String servletContextName,
+		Collection<? extends BaseJavadoc> collection) {
 
-		List<Node> authorNodeList = typeNode.selectNodes("author");
+		Iterator<? extends BaseJavadoc> iterator = collection.iterator();
 
-		String[] authors = new String[authorNodeList.size()];
+		while (iterator.hasNext()) {
+			BaseJavadoc javadoc = iterator.next();
 
-		int index = 0;
-
-		for (Node author : authorNodeList) {
-
-			authors[index] = author.getText();
-
-			index++;
-		}
-
-		JavadocType javadocType = new JavadocType(type, typeComment);
-
-		javadocType.setAuthors(authors);
-
-		return javadocType;
-	}
-
-	private void _parseJavadocsDocument(
-		Document document, String servletContextName, ClassLoader classLoader) {
-
-		List<Node> nodeList = document.selectNodes("/javadocs/javadoc");
-
-		for (Node javadocNode : nodeList) {
-			String typeName = _getChildNodeText(javadocNode, "type");
-
-			Class type = null;
-			try {
-				type = JavadocUtil.loadClass(typeName, classLoader);
-			}
-			catch (ClassNotFoundException e) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(typeName + " not found.", e);
-				}
-			}
-
-			JavadocType javadocType = _parseJavadocType(type, javadocNode);
-
-			javadocType.setServletContextName(servletContextName);
-
-			_javadocTypes.put(type, javadocType);
-
-			List<Node> methodNodeList = javadocNode.selectNodes("method");
-
-			for (Node methodNode : methodNodeList) {
-
-				String methodName = _getChildNodeText(methodNode, "name");
-
-				try {
-					if (type.getSimpleName().equals(methodName)) {
-
-						JavadocConstructor javadocConstructor =
-							_parseJavadocConstructor(type, methodNode);
-
-						javadocConstructor.setServletContextName(
-							servletContextName);
-
-						_javadocConstructors.put(
-							javadocConstructor.getConstructor(),
-							javadocConstructor);
-					}
-					else {
-						JavadocMethod javadocMethod =
-							_parseJavadocMethod(type, methodNode);
-
-						javadocMethod.setServletContextName(
-							servletContextName);
-
-						_javadocMethods.put(
-							javadocMethod.getMethod(), javadocMethod);
-					}
-				}
-				catch (Exception e) {
-					if (_log.isWarnEnabled()) {
-						_log.warn(
-							typeName + '#' + methodName + " not found.", e);
-					}
-				}
+			if (servletContextName.equals(javadoc.getServletContextName())) {
+				iterator.remove();
 			}
 		}
-	}
-
-	private String[] _parseThrowsComments(Node methodNode) {
-		List<Node> throwsNodes = methodNode.selectNodes("throws");
-
-		if ((throwsNodes == null) || throwsNodes.isEmpty()) {
-			return null;
-		}
-
-		String[] throwsComments = new String[throwsNodes.size()];
-
-		int index = 0;
-
-		for (Node throwNode : throwsNodes) {
-			throwsComments[index] = _getChildNodeText(throwNode, "comment");
-			index++;
-		}
-
-		return throwsComments;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(JavadocManager.class);
-	private Map<Constructor, JavadocConstructor> _javadocConstructors =
-		new HashMap<Constructor, JavadocConstructor>();
+
+	private Map<Class<?>, JavadocClass> _javadocClasses =
+		new HashMap<Class<?>, JavadocClass>();
 	private Map<Method, JavadocMethod> _javadocMethods =
 		new HashMap<Method, JavadocMethod>();
-	private Map<Class, JavadocType> _javadocTypes =
-		new HashMap<Class, JavadocType>();
 
 }

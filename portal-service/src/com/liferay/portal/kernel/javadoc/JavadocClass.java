@@ -17,34 +17,29 @@ package com.liferay.portal.kernel.javadoc;
 /**
  * @author Igor Spasic
  */
-public class JavadocType extends BaseJavadoc {
+public class JavadocClass extends BaseJavadoc {
 
-	public JavadocType(Class type) {
-		this(type, null);
-	}
-
-	public JavadocType(Class type, String comment) {
-		this._type = type;
-		setComment(comment);
+	public JavadocClass(Class<?> clazz) {
+		_clazz = clazz;
 	}
 
 	public String[] getAuthors() {
 		return _authors;
 	}
 
-	public Class<?> getType() {
-		return _type;
+	public Class<?> getClazz() {
+		return _clazz;
 	}
 
 	public void setAuthors(String[] authors) {
-		this._authors = authors;
+		_authors = authors;
 	}
 
-	public void setType(Class<?> type) {
-		this._type = type;
+	public void setClazz(Class<?> clazz) {
+		_clazz = clazz;
 	}
 
 	private String[] _authors;
-	private Class<?> _type;
+	private Class<?> _clazz;
 
 }

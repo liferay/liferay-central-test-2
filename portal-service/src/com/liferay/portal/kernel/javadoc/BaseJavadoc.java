@@ -28,11 +28,11 @@ public abstract class BaseJavadoc {
 	}
 
 	public void setComment(String comment) {
-		this._comment = comment;
+		_comment = comment;
 	}
 
 	public void setServletContextName(String servletContextName) {
-		this._servletContextName = servletContextName;
+		_servletContextName = servletContextName;
 	}
 
 	private String _comment;

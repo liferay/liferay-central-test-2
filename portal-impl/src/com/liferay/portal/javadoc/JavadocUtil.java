@@ -24,16 +24,16 @@ import java.util.Arrays;
  */
 public class JavadocUtil {
 
-	public static Class loadClass(String className, ClassLoader classLoader)
+	public static Class<?> loadClass(ClassLoader classLoader, String className)
 		throws ClassNotFoundException {
 
-		className = _prepareClassnameForLoading(className);
+		className = _getLoadableClassName(className);
 
 		if ((className.indexOf('.') == -1) || (className.indexOf('[') == -1)) {
-			// maybe a primitive
-			int primitiveNdx = _getPrimitiveClassName(className);
-			if (primitiveNdx >= 0) {
-				return PRIMITIVE_TYPES[primitiveNdx];
+			int primitiveIndex = _getPrimitiveIndex(className);
+
+			if (primitiveIndex >= 0) {
+				return _PRIMITIVE_TYPES[primitiveIndex];
 			}
 		}
 
@@ -41,87 +41,74 @@ public class JavadocUtil {
 			try {
 				return classLoader.loadClass(className);
 			}
-			catch (ClassNotFoundException cnfex) {
+			catch (ClassNotFoundException cnfe) {
 			}
 		}
 
 		Thread currentThread = Thread.currentThread();
 
-		ClassLoader currentThreadClassLoader =
-			currentThread.getContextClassLoader();
+		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
 
-		if (currentThreadClassLoader != classLoader) {
+		if (classLoader != contextClassLoader) {
 			try {
-				return currentThreadClassLoader.loadClass(className);
+				return contextClassLoader.loadClass(className);
 			}
-			catch (ClassNotFoundException cnfex) {
+			catch (ClassNotFoundException cnfe) {
 			}
-		}
-		
-		try {
-			Class.forName(className);
-		}
-		catch (ClassNotFoundException cnfex) {
 		}
 
-		throw new ClassNotFoundException("Class not found: " + className);
+		return Class.forName(className);
 	}
 
-	private static int _getPrimitiveClassName(String className) {
-		int dotIndex = className.indexOf('.');
-		if (dotIndex != -1) {
-			return -1;
-		}
-		return Arrays.binarySearch(PRIMITIVE_TYPE_NAMES, className);
-	}
-
-	/**
-	 * Prepares classname for loading.
-	 */
-	private static String _prepareClassnameForLoading(String className) {
+	private static String _getLoadableClassName(String className) {
 		int bracketCount = StringUtil.count(className, StringPool.OPEN_BRACKET);
+
 		if (bracketCount == 0) {
 			return className;
 		}
 
-		char[] bracketsChars = new char[bracketCount];
+		StringBuilder sb = new StringBuilder(bracketCount);
+
 		for (int i = 0; i < bracketCount; i++) {
-			bracketsChars[i] = '[';
+			sb.append('[');
 		}
-		String brackets = new String(bracketsChars);
 
 		int bracketIndex = className.indexOf('[');
+
 		className = className.substring(0, bracketIndex);
 
-		int primitiveNdx = _getPrimitiveClassName(className);
-		if (primitiveNdx >= 0) {
-			className = String.valueOf(PRIMITIVE_BYTECODE_NAME[primitiveNdx]);
+		int primitiveIndex = _getPrimitiveIndex(className);
 
-			return brackets + className;
+		if (primitiveIndex >= 0) {
+			className = String.valueOf(
+				_PRIMITIVE_BYTECODE_NAME[primitiveIndex]);
+
+			return sb.toString() + className;
 		}
 		else {
-			return brackets + 'L' + className + ';';
+			return sb.toString() + 'L' + className + ';';
 		}
 	}
-	/**
-	 * List of primitive bytecode characters that matches names list.
-	 */
-	private static final char[] PRIMITIVE_BYTECODE_NAME = new char[] {
+
+	private static int _getPrimitiveIndex(String className) {
+		if (className.indexOf('.') != -1) {
+			return -1;
+		}
+
+		return Arrays.binarySearch(_PRIMITIVE_TYPE_NAMES, className);
+	}
+
+	private static final char[] _PRIMITIVE_BYTECODE_NAME = {
 		'Z', 'B', 'C', 'D', 'F', 'I', 'J', 'S'
 	};
-	/**
-	 * List of primitive types that matches names list.
-	 */
-	private static final Class[] PRIMITIVE_TYPES = new Class[] {
-		boolean.class, byte.class, char.class, double.class, float.class,
-		int.class, long.class, short.class,
+
+	private static final String[] _PRIMITIVE_TYPE_NAMES = {
+		"boolean", "byte", "char", "double", "float", "int", "long", "short",
 	};
 
-	/**
-	 * List of primitive type names.
-	 */
-	private static final String[] PRIMITIVE_TYPE_NAMES = new String[] {
-		"boolean", "byte", "char", "double", "float", "int", "long", "short",
+	private static final Class<?>[] _PRIMITIVE_TYPES = new Class[] {
+		boolean.class, byte.class, char.class, double.class, float.class,
+		int.class, long.class, short.class,
 	};
 
 }

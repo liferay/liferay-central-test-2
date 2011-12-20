@@ -14,7 +14,6 @@
 
 package com.liferay.portal.kernel.javadoc;
 
-import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 
 /**
@@ -24,13 +23,7 @@ public interface JavadocManager {
 
 	public void load(String servletContextName, ClassLoader classLoader);
 
-	public JavadocMethod lookupJavadoc(Method method);
-
-	public JavadocType lookupJavadoc(Class type);
-
-	public JavadocConstructor lookupJavadoc(Constructor type);
-
-	public JavadocMethod lookupServiceUtilMethodJavadoc(Method method);
+	public JavadocMethod lookupJavadocMethod(Method method);
 
 	public void unload(String servletContextName);
 

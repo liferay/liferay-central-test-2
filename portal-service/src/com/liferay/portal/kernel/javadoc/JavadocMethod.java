@@ -26,7 +26,8 @@ public class JavadocMethod extends BaseJavadoc {
 	}
 
 	public JavadocMethod(Method method, String comment) {
-		this._method = method;
+		_method = method;
+
 		setComment(comment);
 	}
 
@@ -34,15 +35,16 @@ public class JavadocMethod extends BaseJavadoc {
 		return _method;
 	}
 
-	public String getParametersComment(int index) {
-		if (_parametersComments == null) {
+	public String getParameterComment(int index) {
+		if (_parameterComments == null) {
 			return null;
 		}
-		return _parametersComments[index];
+
+		return _parameterComments[index];
 	}
 
-	public String[] getParametersComments() {
-		return _parametersComments;
+	public String[] getParameterComments() {
+		return _parameterComments;
 	}
 
 	public String getReturnComment() {
@@ -53,6 +55,7 @@ public class JavadocMethod extends BaseJavadoc {
 		if (_throwsComments == null) {
 			return null;
 		}
+
 		return _throwsComments[index];
 	}
 
@@ -61,23 +64,23 @@ public class JavadocMethod extends BaseJavadoc {
 	}
 
 	public void setMethod(Method method) {
-		this._method = method;
+		_method = method;
 	}
 
-	public void setParametersComments(String[] parametersComments) {
-		this._parametersComments = parametersComments;
+	public void setParameterComments(String[] parameterComments) {
+		_parameterComments = parameterComments;
 	}
 
 	public void setReturnComment(String returnComment) {
-		this._returnComment = returnComment;
+		_returnComment = returnComment;
 	}
 
 	public void setThrowsComments(String[] throwsComments) {
-		this._throwsComments = throwsComments;
+		_throwsComments = throwsComments;
 	}
 
 	private Method _method;
-	private String[] _parametersComments;
+	private String[] _parameterComments;
 	private String _returnComment;
 	private String[] _throwsComments;
 

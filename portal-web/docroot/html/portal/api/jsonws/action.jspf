@@ -18,8 +18,6 @@
 
 	<%
 	JSONWebServiceActionMapping jsonWebServiceActionMapping = JSONWebServiceActionsManagerUtil.getJSONWebServiceActionMapping(signature);
-
-	JavadocMethod javadocMethod = JavadocManagerUtil.lookupServiceUtilMethodJavadoc(jsonWebServiceActionMapping.getActionMethod());
 	%>
 
 	<%= jsonWebServiceActionMapping.getServletContextPath() %><%= jsonWebServiceActionMapping.getPath() %>
@@ -53,14 +51,20 @@
 </div>
 
 <%
-	if (javadocMethod != null && javadocMethod.getComment() != null) {
+JavadocMethod javadocMethod = JavadocManagerUtil.lookupJavadocMethod(jsonWebServiceActionMapping.getActionMethod());
+
+String comment = null;
+
+if (javadocMethod != null) {
+	comment = javadocMethod.getComment();
+}
 %>
-<div class="comment">
-	<%=javadocMethod.getComment()%>
-</div>
-<%
-	}
-%>
+
+<c:if test="<%= comment != null %>">
+	<div class="comment">
+		<%= comment %>
+	</div>
+</c:if>
 
 <h3>
 	Parameters
@@ -72,29 +76,34 @@ MethodParameter[] methodParameters = jsonWebServiceActionMapping.getMethodParame
 for (int i = 0; i < methodParameters.length; i++) {
 	MethodParameter methodParameter = methodParameters[i];
 
-	Class methodParameterType = methodParameter.getType();
+	Class methodParameterTypeClass = methodParameter.getType();
 
-	String methodParameterTypeName = null;
+	String methodParameterTypeClassName = null;
 
-	if (methodParameterType.isArray()) {
-		methodParameterTypeName = methodParameterType.getComponentType() + "[]";
+	if (methodParameterTypeClass.isArray()) {
+		methodParameterTypeClassName = methodParameterTypeClass.getComponentType() + "[]";
 	}
 	else {
-		methodParameterTypeName = methodParameterType.getName();
+		methodParameterTypeClassName = methodParameterTypeClass.getName();
 	}
-
-	String methodComment = null;
-	if (javadocMethod != null) {
-		methodComment = javadocMethod.getParametersComment(i);
-	}
-
 %>
+
 	<div class="param">
-		&bull; <%= methodParameter.getName() %> <span><%= methodParameterTypeName %></span>
-<%	if (methodComment != null) { %>
-		<div class="comment-param"><%= methodComment %></div>
-<%	} %>
+		&bull; <%= methodParameter.getName() %> <span><%= methodParameterTypeClassName %></span>
+
+		<%
+		String parameterComment = null;
+
+		if (javadocMethod != null) {
+			parameterComment = javadocMethod.getParameterComment(i);
+		}
+		%>
+
+		<c:if test="<%= parameterComment != null %>">
+			<div class="comment-param"><%= parameterComment %></div>
+		</c:if>
 	</div>
+
 <%
 }
 %>
@@ -102,39 +111,51 @@ for (int i = 0; i < methodParameters.length; i++) {
 <h3>Return</h3>
 
 <div class="param">
+
 	<%
 	Class<?> returnTypeClass = actionMethod.getReturnType();
 	%>
 
 	<%= returnTypeClass.getName() %>
-<%
-	if (javadocMethod != null && javadocMethod.getReturnComment() != null) {
-%>
-<div class="comment-param">
-	<%=javadocMethod.getReturnComment()%>
-</div>
-<%
+
+	<%
+	String returnComment = null;
+
+	if (javadocMethod != null) {
+		returnComment = javadocMethod.getReturnComment();
 	}
-%>
+	%>
+
+	<c:if test="<%= returnComment != null %>">
+		<div class="comment-param">
+			<%= returnComment %>
+		</div>
+	</c:if>
 </div>
 
 <h3>Exception</h3>
+
 <%
-	Class<?>[] exceptionTypes = actionMethod.getExceptionTypes();
+Class<?>[] exceptionTypeClasses = actionMethod.getExceptionTypes();
 
-	for (int i = 0; i < exceptionTypes.length; i++) {
-		Class<?> exceptionType = exceptionTypes[i];
+for (int i = 0; i < exceptionTypeClasses.length; i++) {
+	Class<?> exceptionTypeClass = exceptionTypeClasses[i];
+%>
 
+	<div class="param">
+		&bull; <%= exceptionTypeClass.getName() %>
+
+		<%
 		String throwsComment = null;
+
 		if (javadocMethod != null) {
 			throwsComment = javadocMethod.getThrowsComment(i);
 		}
-%>
-	<div class="param">
-		&bull; <%= exceptionType.getName() %>
-		<%	if (throwsComment != null) { %>
-				<div class="comment-param"><%= throwsComment %></div>
-		<%	} %>
+		%>
+
+		<c:if test="<%= throwsComment != null %>">
+			<div class="comment-param"><%= throwsComment %></div>
+		</c:if>
 	</div>
 
 <%
@@ -149,9 +170,9 @@ for (int i = 0; i < methodParameters.length; i++) {
 String enctype = StringPool.BLANK;
 
 for (MethodParameter methodParameter : methodParameters) {
-	Class<?> methodParameterType = methodParameter.getType();
+	Class<?> methodParameterTypeClass = methodParameter.getType();
 
-	if (methodParameterType.equals(File.class)) {
+	if (methodParameterTypeClass.equals(File.class)) {
 		enctype = "enctype=\"multipart/form-data\"";
 
 		break;
@@ -171,30 +192,29 @@ for (MethodParameter methodParameter : methodParameters) {
 			continue;
 		}
 
-		Class<?> methodParameterType = methodParameter.getType();
+		Class<?> methodParameterTypeClass = methodParameter.getType();
 
-		String methodParameterTypeName = null;
+		String methodParameterTypeClassName = null;
 
-		if (methodParameterType.isArray()) {
-			methodParameterTypeName = methodParameterType.getComponentType() + "[]";
+		if (methodParameterTypeClass.isArray()) {
+			methodParameterTypeClassName = methodParameterTypeClass.getComponentType() + "[]";
 		}
 		else {
-			methodParameterTypeName = methodParameterType.getName();
+			methodParameterTypeClassName = methodParameterTypeClass.getName();
 		}
-
 	%>
 
-		<label for="field<%= i %>"><%= methodParameterName %> <span>(<%= methodParameterTypeName %>)</span></label>
+		<label for="field<%= i %>"><%= methodParameterName %> <span>(<%= methodParameterTypeClassName %>)</span></label>
 
 		<%
-		if (methodParameterType.equals(File.class)) {
+		if (methodParameterTypeClass.equals(File.class)) {
 		%>
 
 			<input id="field<%= i %>" type="file" name="<%= methodParameterName %>" />
 
 		<%
 		}
-		else if (methodParameterType.equals(boolean.class)) {
+		else if (methodParameterTypeClass.equals(boolean.class)) {
 		%>
 
 			<input checked="checked" id="field<%= i %>" name="<%= methodParameterName %>" type="radio" value="false" />false &nbsp; <input id="field<%= i %>" name="<%= methodParameterName %>" type="radio" value="true" />true
@@ -204,7 +224,7 @@ for (MethodParameter methodParameter : methodParameters) {
 		else {
 			int size = 10;
 
-			if (methodParameterType.equals(String.class)) {
+			if (methodParameterTypeClass.equals(String.class)) {
 				size = 60;
 			}
 		%>

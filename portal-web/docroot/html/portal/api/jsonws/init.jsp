@@ -16,8 +16,8 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<%@ page import="com.liferay.portal.kernel.javadoc.JavadocMethod" %><%@
-page import="com.liferay.portal.kernel.javadoc.JavadocManagerUtil" %><%@
+<%@ page import="com.liferay.portal.kernel.javadoc.JavadocManagerUtil" %><%@
+page import="com.liferay.portal.kernel.javadoc.JavadocMethod" %><%@
 page import="com.liferay.portal.kernel.jsonwebservice.JSONWebServiceActionMapping" %><%@
 page import="com.liferay.portal.kernel.jsonwebservice.JSONWebServiceActionsManagerUtil" %><%@
 page import="com.liferay.portal.kernel.util.ArrayUtil" %><%@

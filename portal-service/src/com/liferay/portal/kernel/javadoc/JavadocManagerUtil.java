@@ -27,15 +27,12 @@ public class JavadocManagerUtil {
 
 	public static void load(
 		String servletContextName, ClassLoader classLoader) {
+
 		getJavadocManager().load(servletContextName, classLoader);
 	}
 
-	public static JavadocMethod lookupMethodJavadoc(Method method) {
-		return getJavadocManager().lookupJavadoc(method);
-	}
-
-	public static JavadocMethod lookupServiceUtilMethodJavadoc(Method method) {
-		return getJavadocManager().lookupServiceUtilMethodJavadoc(method);
+	public static JavadocMethod lookupJavadocMethod(Method method) {
+		return getJavadocManager().lookupJavadocMethod(method);
 	}
 
 	public static void unload(String servletContextName) {

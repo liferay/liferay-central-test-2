@@ -261,6 +261,14 @@ public class GlobalStartupAction extends SimpleAction {
 			_log.error(t);
 		}
 
+		// Javadoc
+
+		Thread thread = Thread.currentThread();
+
+		ClassLoader classLoader = thread.getContextClassLoader();
+
+		JavadocManagerUtil.load(StringPool.BLANK, classLoader);
+
 		// JCR
 
 		try {
@@ -295,14 +303,6 @@ public class GlobalStartupAction extends SimpleAction {
 				_log.warn(e.getMessage());
 			}
 		}
-
-		// Javadoc
-
-		Thread thread = Thread.currentThread();
-
-		ClassLoader classLoader = thread.getContextClassLoader();
-
-		JavadocManagerUtil.load(StringPool.BLANK, classLoader);
 
 		// POP server
 
