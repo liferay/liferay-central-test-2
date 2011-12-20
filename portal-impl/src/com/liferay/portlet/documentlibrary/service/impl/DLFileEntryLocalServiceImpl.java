@@ -290,7 +290,7 @@ public class DLFileEntryLocalServiceImpl
 		if (serviceContext.getWorkflowAction() ==
 		 		WorkflowConstants.ACTION_PUBLISH) {
 
-			doStartWorkflowInstance(
+			startWorkflowInstance(
 				userId, serviceContext, dlFileVersion,
 				DLSyncConstants.EVENT_UPDATE);
 		}
@@ -1331,23 +1331,6 @@ public class DLFileEntryLocalServiceImpl
 		indexer.delete(dlFileEntry);
 	}
 
-	protected void doStartWorkflowInstance(
-			long userId, ServiceContext serviceContext,
-			DLFileVersion dlFileVersion, String syncEventType)
-		throws PortalException, SystemException {
-
-		Map<String, Serializable> workflowContext =
-			new HashMap<String, Serializable>();
-
-		workflowContext.put("event", syncEventType);
-
-		WorkflowHandlerRegistryUtil.startWorkflowInstance(
-			dlFileVersion.getCompanyId(), dlFileVersion.getGroupId(),
-			userId, DLFileEntry.class.getName(),
-			dlFileVersion.getFileVersionId(), dlFileVersion, serviceContext,
-			workflowContext);
-	}
-
 	protected String getExtension(String title, String sourceFileName) {
 		if (Validator.isNull(sourceFileName)) {
 			sourceFileName = title;
@@ -1482,6 +1465,23 @@ public class DLFileEntryLocalServiceImpl
 		indexer.reindex(dlFileEntry);
 	}
 
+	protected void startWorkflowInstance(
+			long userId, ServiceContext serviceContext,
+			DLFileVersion dlFileVersion, String syncEventType)
+		throws PortalException, SystemException {
+
+		Map<String, Serializable> workflowContext =
+			new HashMap<String, Serializable>();
+
+		workflowContext.put("event", syncEventType);
+
+		WorkflowHandlerRegistryUtil.startWorkflowInstance(
+			dlFileVersion.getCompanyId(), dlFileVersion.getGroupId(),
+			userId, DLFileEntry.class.getName(),
+			dlFileVersion.getFileVersionId(), dlFileVersion, serviceContext,
+			workflowContext);
+	}
+
 	protected DLFileEntry updateFileEntry(
 			long userId, long fileEntryId, String sourceFileName,
 			String extension, String mimeType, String title, String description,
@@ -1598,17 +1598,16 @@ public class DLFileEntryLocalServiceImpl
 			else if (serviceContext.getWorkflowAction() ==
 						WorkflowConstants.ACTION_PUBLISH) {
 
-				String syncEventType = DLSyncConstants.EVENT_UPDATE;
+				String syncEvent = DLSyncConstants.EVENT_UPDATE;
 
 				if (dlFileVersion.getVersion().equals(
 						DLFileEntryConstants.VERSION_DEFAULT)) {
 
-					syncEventType = DLSyncConstants.EVENT_ADD;
+					syncEvent = DLSyncConstants.EVENT_ADD;
 				}
 
-				doStartWorkflowInstance(
-					userId, serviceContext, dlFileVersion,
-					syncEventType);
+				startWorkflowInstance(
+					userId, serviceContext, dlFileVersion, syncEvent);
 			}
 		}
 		catch (PortalException pe) {
