@@ -146,12 +146,12 @@ public class DLFolderPermission {
 
 		if (folderId == DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
 
-			// LPS-24245 - Prevent the propagation of checks for actions that
-			// are not supported at the application resource level.
+			// Prevent the propagation of checks for actions that are not
+			// supported at the application resource level. See LPS-24245.
 
 			if (actionId.equals(ActionKeys.ACCESS) ||
-				actionId.equals(ActionKeys.DELETE) ||
-				actionId.equals(ActionKeys.ADD_SUBFOLDER)) {
+				actionId.equals(ActionKeys.ADD_SUBFOLDER) ||
+				actionId.equals(ActionKeys.DELETE)) {
 
 				return false;
 			}
