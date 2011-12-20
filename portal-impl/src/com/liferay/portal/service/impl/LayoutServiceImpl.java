@@ -1021,8 +1021,10 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 			getPermissionChecker(), groupId, privateLayout, layoutId,
 			ActionKeys.UPDATE);
 
-		pluginSettingLocalService.checkPermission(
-			getUserId(), themeId, Plugin.TYPE_THEME);
+		if (Validator.isNotNull(themeId)) {
+			pluginSettingLocalService.checkPermission(
+				getUserId(), themeId, Plugin.TYPE_THEME);
+		}
 
 		return layoutLocalService.updateLookAndFeel(
 			groupId, privateLayout, layoutId, themeId, colorSchemeId, css,
