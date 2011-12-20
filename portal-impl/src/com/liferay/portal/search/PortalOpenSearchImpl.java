@@ -110,6 +110,10 @@ public class PortalOpenSearchImpl extends BaseOpenSearchImpl {
 				long resultScopeGroupId = GetterUtil.getLong(
 					result.get(Field.SCOPE_GROUP_ID));
 
+				if (resultScopeGroupId == 0) {
+					resultScopeGroupId = themeDisplay.getScopeGroupId();
+				}
+
 				String entryClassName = GetterUtil.getString(
 					result.get(Field.ENTRY_CLASS_NAME));
 
@@ -117,10 +121,6 @@ public class PortalOpenSearchImpl extends BaseOpenSearchImpl {
 					result.get(Field.ENTRY_CLASS_PK));
 
 				String title = StringPool.BLANK;
-
-				if (resultScopeGroupId == 0) {
-					resultScopeGroupId = themeDisplay.getScopeGroupId();
-				}
 
 				PortletURL portletURL = getPortletURL(
 					request, portletId, resultScopeGroupId);

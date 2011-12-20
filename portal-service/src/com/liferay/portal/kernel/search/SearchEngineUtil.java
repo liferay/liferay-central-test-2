@@ -24,7 +24,6 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
 
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -203,18 +202,18 @@ public class SearchEngineUtil {
 	}
 
 	public static String[] getEntryClassNames() {
-		Set<String> entryClassNamesSet = new HashSet<String>();
+		Set<String> assetEntryClassNames = new HashSet<String>();
 
 		for (Indexer indexer : IndexerRegistryUtil.getIndexers()) {
 			for (String className : indexer.getClassNames()) {
-				if (!_entryClassNameExclusionMap.containsKey(className)) {
-					entryClassNamesSet.add(className);
+				if (!_excludedEntryClassNames.contains(className)) {
+					assetEntryClassNames.add(className);
 				}
 			}
 		}
 
-		return entryClassNamesSet.toArray(
-			new String[entryClassNamesSet.size()]);
+		return assetEntryClassNames.toArray(
+			new String[assetEntryClassNames.size()]);
 	}
 
 	public static SearchEngine getSearchEngine() {
@@ -474,6 +473,12 @@ public class SearchEngineUtil {
 		_searchPermissionChecker.updatePermissionFields(name, primKey);
 	}
 
+	public void setExcludedEntryClassNames(
+		List<String> excludedEntryClassNames) {
+
+		_excludedEntryClassNames.addAll(excludedEntryClassNames);
+	}
+
 	public void setSearchEngine(SearchEngine searchEngine) {
 		_searchEngines.put(SYSTEM_ENGINE_ID, searchEngine);
 	}
@@ -488,17 +493,9 @@ public class SearchEngineUtil {
 		_searchPermissionChecker = searchPermissionChecker;
 	}
 
-	public void setEntryClassNameExclusions(List<String> exclusionClassNames) {
-		for (String exclusionClassName : exclusionClassNames) {
-			_entryClassNameExclusionMap.put(
-				exclusionClassName, exclusionClassName);
-		}
-	}
-
 	private static Log _log = LogFactoryUtil.getLog(SearchEngineUtil.class);
 
-	private static Map<String, String> _entryClassNameExclusionMap =
-		new HashMap<String, String>();
+	private static Set<String> _excludedEntryClassNames = new HashSet<String>();
 	private static boolean _indexReadOnly = GetterUtil.getBoolean(
 		PropsUtil.get(PropsKeys.INDEX_READ_ONLY));
 	private static Map<String, SearchEngine> _searchEngines =

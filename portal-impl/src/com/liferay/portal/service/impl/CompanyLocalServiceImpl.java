@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.FacetedSearcher;
-import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.SearchContext;
@@ -795,27 +794,6 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 		try {
 			SearchContext searchContext = new SearchContext();
 
-			searchContext.setSearchEngineId(SearchEngineUtil.SYSTEM_ENGINE_ID);
-
-			searchContext.setCompanyId(companyId);
-
-			searchContext.setStart(start);
-			searchContext.setEnd(end);
-
-			if (groupId > 0) {
-				searchContext.setGroupIds(new long[]{groupId});
-			}
-
-			searchContext.setEntryClassNames(
-				SearchEngineUtil.getEntryClassNames());
-
-			searchContext.setKeywords(keywords);
-			if (Validator.isNotNull(portletId)) {
-				searchContext.setPortletIds(new String[] {portletId});
-			}
-
-			searchContext.setUserId(userId);
-
 			Facet assetEntriesFacet = new AssetEntriesFacet(searchContext);
 
 			assetEntriesFacet.setStatic(true);
@@ -827,6 +805,25 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			scopeFacet.setStatic(true);
 
 			searchContext.addFacet(scopeFacet);
+
+			searchContext.setCompanyId(companyId);
+			searchContext.setEnd(end);
+			searchContext.setEntryClassNames(
+				SearchEngineUtil.getEntryClassNames());
+
+			if (groupId > 0) {
+				searchContext.setGroupIds(new long[]{groupId});
+			}
+
+			searchContext.setKeywords(keywords);
+
+			if (Validator.isNotNull(portletId)) {
+				searchContext.setPortletIds(new String[] {portletId});
+			}
+
+			searchContext.setSearchEngineId(SearchEngineUtil.SYSTEM_ENGINE_ID);
+			searchContext.setStart(start);
+			searchContext.setUserId(userId);
 
 			Indexer indexer = FacetedSearcher.getInstance();
 
@@ -1294,10 +1291,5 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 		CompanyLocalServiceImpl.class);
 
 	private static final String _DEFAULT_VIRTUAL_HOST = "localhost";
-
-	private static final String[] _KEYWORDS_FIELDS = {
-		Field.ASSET_TAG_NAMES, Field.CONTENT, Field.DESCRIPTION,
-		Field.PROPERTIES, Field.TITLE
-	};
 
 }
