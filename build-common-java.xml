@@ -127,19 +127,18 @@
 						import java.io.File;
 
 						String os = System.getProperty("os.name").toLowerCase();
-						boolean isWindows = (os.indexOf("win") >= 0);
 
 						String buildRevision = "";
 
 						try {
 							File projectDir = new File(project.getProperty("project.dir"));
 
-							File repoDataDir = new File(projectDir, ".svn");
+							File svnDir = new File(projectDir, ".svn");
 
-							String command = "";
+							String command = null;
 
-							if (repoDataDir.exists()) {
-								if (isWindows) {
+							if (svnDir.exists()) {
+								if (os.contains("win")) {
 									command = "cmd /c svnversion .";
 								}
 								else {
@@ -147,10 +146,10 @@
 								}
 							}
 
-							repoDataDir = new File(projectDir, ".git");
+							File gitDir = new File(projectDir, ".git");
 
-							if (repoDataDir.exists()) {
-								if (isWindows) {
+							if (gitDir.exists()) {
+								if (os.contains("win")) {
 									command = "cmd /c git rev-parse HEAD";
 								}
 								else {
@@ -158,10 +157,12 @@
 								}
 							}
 
-							if (!command.equals("")) {
-								Process child = Runtime.getRuntime().exec(command);
+							if (command != null) {
+								Runtime runtime = Runtime.getRuntime();
 
-								buildRevision = StringUtil.read(child.getInputStream());
+								Process process = runtime.exec(command);
+
+								buildRevision = StringUtil.read(process.getInputStream());
 							}
 						}
 						catch (Exception e) {
@@ -169,6 +170,7 @@
 						}
 
 						project.setProperty("build.revision", buildRevision);
+
 						project.setProperty("release.info.code.name", ReleaseInfo.getCodeName());
 						project.setProperty("release.info.build.date", String.valueOf(ReleaseInfo.getBuildDate()));
 						project.setProperty("release.info.build.number", String.valueOf(ReleaseInfo.getBuildNumber()));
@@ -189,12 +191,20 @@
 
 				<mkdir dir="classes/META-INF" />
 
+				<tstamp>
+					<format property="build.time" pattern="EEE MMM d HH:mm:ss z yyyy" />
+				</tstamp>
+
 				<manifest file="classes/META-INF/MANIFEST.MF">
 					<attribute name="Bundle-ManifestVersion" value="2" />
 					<attribute name="Bundle-RequiredExecutionEnvironment" value="J2SE-1.5" />
 					<attribute name="Bundle-Vendor" value="${release.info.vendor}" />
 					<attribute name="Bundle-Version" value="${release.info.version}" />
 					<attribute name="Export-Package" value="${export.packages}" />
+					<attribute name="Java-Compiler" value="javac.compiler=${javac.compiler}" />
+					<attribute name="Java-Debug" value="javac.debug=${javac.debug}" />
+					<attribute name="Java-Deprecation" value="javac.encoding=${javac.encoding}" />
+					<attribute name="Jsp-Precompile" value="jsp.precompile=${jsp.precompile}" />
 					<attribute name="Liferay-Portal-Code-Name" value="${release.info.code.name}" />
 					<attribute name="Liferay-Portal-Build-Date" value="${release.info.build.date}" />
 					<attribute name="Liferay-Portal-Build-Number" value="${release.info.build.number}" />
@@ -203,10 +213,6 @@
 					<attribute name="Liferay-Portal-Release-Info" value="${release.info.release.info}" />
 					<attribute name="Liferay-Portal-Server-Info" value="${release.info.server.info}" />
 					<attribute name="Liferay-Portal-Version" value="${release.info.version}" />
-					<attribute name="Java-Compiler" value="javac.compiler=${javac.compiler}" />
-					<attribute name="Java-Debug" value="javac.debug=${javac.debug}" />
-					<attribute name="Java-Deprecation" value="javac.encoding=${javac.encoding}" />
-					<attribute name="Jsp-Precompile" value="jsp.precompile=${jsp.precompile}" />
 				</manifest>
 
 				<if>
