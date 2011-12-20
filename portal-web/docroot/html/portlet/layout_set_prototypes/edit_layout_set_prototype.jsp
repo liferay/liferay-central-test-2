@@ -96,7 +96,7 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 		}
 		%>
 
-		<c:if test="<%= servletContextNames.size() > 0 %>">
+		<c:if test="<%= !servletContextNames.isEmpty() %>">
 			<aui:select label="application-adapter" name="customJspServletContextName">
 				<aui:option label="none" />
 
