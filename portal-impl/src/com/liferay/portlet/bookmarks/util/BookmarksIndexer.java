@@ -269,4 +269,5 @@ public class BookmarksIndexer extends BaseIndexer {
 	}
 
 	private static final boolean _PERMISSION_AWARE = true;
+
 }

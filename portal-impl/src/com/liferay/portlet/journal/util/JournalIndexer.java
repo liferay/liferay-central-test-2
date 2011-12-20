@@ -529,9 +529,9 @@ public class JournalIndexer extends BaseIndexer {
 		SearchEngineUtil.updateDocuments(companyId, documents);
 	}
 
-	private static final boolean _PERMISSION_AWARE = true;
-
 	private static final String _FIELD_NAMESPACE = "web_content";
+
+	private static final boolean _PERMISSION_AWARE = true;
 
 	private static Log _log = LogFactoryUtil.getLog(JournalIndexer.class);
 
