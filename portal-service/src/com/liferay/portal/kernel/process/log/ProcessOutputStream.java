@@ -30,9 +30,10 @@ public class ProcessOutputStream extends UnsyncByteArrayOutputStream {
 	}
 
 	public ProcessOutputStream(
-		ObjectOutputStream objectOutputStream, boolean errorLog) {
-		_errorLog = errorLog;
+		ObjectOutputStream objectOutputStream, boolean error) {
+
 		_objectOutputStream = objectOutputStream;
+		_error = error;
 	}
 
 	@Override
@@ -43,10 +44,10 @@ public class ProcessOutputStream extends UnsyncByteArrayOutputStream {
 	@Override
 	public void flush() throws IOException {
 		if (index > 0) {
-			byte[] logData = toByteArray();
+			byte[] bytes = toByteArray();
 
 			LoggingProcessCallable loggingProcessCallable =
-				new LoggingProcessCallable(logData, _errorLog);
+				new LoggingProcessCallable(bytes, _error);
 
 			writeProcessCallable(loggingProcessCallable);
 
@@ -58,10 +59,11 @@ public class ProcessOutputStream extends UnsyncByteArrayOutputStream {
 		throws IOException {
 
 		_objectOutputStream.writeObject(processCallable);
+
 		_objectOutputStream.flush();
 	}
 
-	private final boolean _errorLog;
+	private final boolean _error;
 	private final ObjectOutputStream _objectOutputStream;
 
 }

@@ -38,6 +38,25 @@ import junit.framework.TestCase;
  */
 public class CheckInCheckOutTest extends TestCase {
 
+	@Override
+	public void setUp() throws Exception {
+		long repositoryId = TestPropsValues.getGroupId();
+
+		_folder = createFolder(repositoryId, "CheckInCheckOutTest");
+
+		_serviceContext = new ServiceContext();
+
+		_serviceContext.setWorkflowAction(WorkflowConstants.ACTION_PUBLISH);
+
+		_fileEntry = createFileEntry(
+			repositoryId, _folder.getFolderId(), "test1.txt", _serviceContext);
+	}
+
+	@Override
+	public void tearDown() throws Exception {
+		DLAppServiceUtil.deleteFolder(_folder.getFolderId());
+	}
+
 	public void testCancelCheckIn() throws Exception {
 		DLAppServiceUtil.checkOutFileEntry(_fileEntry.getFileEntryId());
 
@@ -174,25 +193,6 @@ public class CheckInCheckOutTest extends TestCase {
 		}
 
 		return assetEntry;
-	}
-
-	@Override
-	protected void setUp() throws Exception {
-		long repositoryId = TestPropsValues.getGroupId();
-
-		_folder = createFolder(repositoryId, "CheckInCheckOutTest");
-
-		_serviceContext = new ServiceContext();
-
-		_serviceContext.setWorkflowAction(WorkflowConstants.ACTION_PUBLISH);
-
-		_fileEntry = createFileEntry(
-			repositoryId, _folder.getFolderId(), "test1.txt", _serviceContext);
-	}
-
-	@Override
-	protected void tearDown() throws Exception {
-		DLAppServiceUtil.deleteFolder(_folder.getFolderId());
 	}
 
 	protected FileEntry updateFileEntry(

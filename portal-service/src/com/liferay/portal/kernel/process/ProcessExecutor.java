@@ -42,17 +42,6 @@ import java.util.concurrent.Future;
  */
 public class ProcessExecutor {
 
-	public void destroy() {
-		if (_executorService != null) {
-			synchronized (ProcessExecutor.class) {
-				if (_executorService != null) {
-					_executorService.shutdownNow();
-					_executorService = null;
-				}
-			}
-		}
-	}
-
 	public static <T extends Serializable> T execute(
 			ProcessCallable<T> processCallable, String classPath)
 		throws ProcessException {
@@ -67,11 +56,11 @@ public class ProcessExecutor {
 
 			ExecutorService executorService = _getExecutorService();
 
-			SubProcessReactor subProcessReactor = new SubProcessReactor(
+			SubprocessReactor subprocessReactor = new SubprocessReactor(
 				process.getInputStream());
 
 			Future<ProcessCallable<?>> futureResponseProcessCallable =
-				executorService.submit(subProcessReactor);
+				executorService.submit(subprocessReactor);
 
 			int exitCode = process.waitFor();
 
@@ -96,15 +85,13 @@ public class ProcessExecutor {
 
 			if (_log.isWarnEnabled()) {
 				_log.warn(
-					"SubProcessReactor quited without a valid return " +
-					"ProcessCallable, this means sub-process terminated " +
-					"exceptionally.");
+					"Subprocess reactor exited without a valid return " +
+						"because the subprocess terminated with an exception");
 			}
 
 			return null;
 		}
 		catch (ProcessException pe) {
-			// Don't wrap ProcessException
 			throw pe;
 		}
 		catch (Exception e) {
@@ -115,24 +102,24 @@ public class ProcessExecutor {
 	public static void main(String[] arguments)
 		throws ClassNotFoundException, IOException {
 
-		// Use default System.out as communication channel
-		PrintStream oldOut = System.out;
+		ObjectOutputStream objectOutputStream = new ObjectOutputStream(
+			System.out);
 
-		ObjectOutputStream objectOutputStream = new ObjectOutputStream(oldOut);
-
-		// Install std-out logging
-		ProcessOutputStream processOut = new ProcessOutputStream(
+		ProcessOutputStream outProcessOutputStream = new ProcessOutputStream(
 			objectOutputStream, false);
-		PrintStream newOut = new PrintStream(processOut, true);
 
-		System.setOut(newOut);
+		PrintStream outPrintStream = new PrintStream(
+			outProcessOutputStream, true);
 
-		// Install std-err logging
-		ProcessOutputStream processErr = new ProcessOutputStream(
+		System.setOut(outPrintStream);
+
+		ProcessOutputStream errProcessOutputStream = new ProcessOutputStream(
 			objectOutputStream, true);
-		PrintStream newErr = new PrintStream(processErr, true);
 
-		System.setErr(newErr);
+		PrintStream errPrintStream = new PrintStream(
+			errProcessOutputStream, true);
+
+		System.setErr(errPrintStream);
 
 		try {
 			ProcessCallable<?> processCallable =
@@ -140,32 +127,49 @@ public class ProcessExecutor {
 
 			Serializable result = processCallable.call();
 
-			newOut.flush();
+			outPrintStream.flush();
 
-			processOut.writeProcessCallable(
+			outProcessOutputStream.writeProcessCallable(
 				new ReturnProcessCallable<Serializable>(result));
 
-			processOut.close();
+			outProcessOutputStream.close();
 		}
 		catch (ProcessException pe) {
-			newErr.flush();
+			errPrintStream.flush();
 
-			processErr.writeProcessCallable(new ExceptionProcessCallable(pe));
+			errProcessOutputStream.writeProcessCallable(
+				new ExceptionProcessCallable(pe));
 
-			processErr.close();
+			errProcessOutputStream.close();
+		}
+	}
+
+	public void destroy() {
+		if (_executorService == null) {
+			return;
+		}
+
+		synchronized (ProcessExecutor.class) {
+			if (_executorService != null) {
+				_executorService.shutdownNow();
+
+				_executorService = null;
+			}
 		}
 	}
 
 	private static ExecutorService _getExecutorService() {
-		if (_executorService == null) {
-			synchronized (ProcessExecutor.class) {
-				if (_executorService == null) {
-					_executorService = Executors.newCachedThreadPool(
-						new NamedThreadFactory(
-							"ProcessExecutor Reactor Thread",
-							Thread.MIN_PRIORITY,
-							PortalClassLoaderUtil.getClassLoader()));
-				}
+		if (_executorService != null) {
+			return _executorService;
+		}
+
+		synchronized (ProcessExecutor.class) {
+			if (_executorService == null) {
+				_executorService = Executors.newCachedThreadPool(
+					new NamedThreadFactory(
+						ProcessExecutor.class.getName(),
+						Thread.MIN_PRIORITY,
+						PortalClassLoaderUtil.getClassLoader()));
 			}
 		}
 
@@ -206,68 +210,77 @@ public class ProcessExecutor {
 
 	private static volatile ExecutorService _executorService;
 
-	private static class SubProcessReactor
+	private static class SubprocessReactor
 		implements Callable<ProcessCallable<? extends Serializable>> {
 
-		public SubProcessReactor(InputStream inputStream) {
-			_ubis = new UnsyncBufferedInputStream(inputStream);
+		public SubprocessReactor(InputStream inputStream) {
+			_unsyncBufferedInputStream = new UnsyncBufferedInputStream(
+				inputStream);
 		}
 
 		public ProcessCallable<? extends Serializable> call() throws Exception {
 			try {
 				ObjectInputStream objectInputStream = null;
 
-				// Corrupted log collector
-				UnsyncByteArrayOutputStream ubaos =
+				UnsyncByteArrayOutputStream unsyncByteArrayOutputStream =
 					new UnsyncByteArrayOutputStream();
 
 				while (true) {
 					try {
-						// Be ready for bad header
-						_ubis.mark(4);
+
+						// Be ready for a bad header
+
+						_unsyncBufferedInputStream.mark(4);
 
 						objectInputStream =
-							new PortalClassLoaderObjectInputStream(_ubis);
+							new PortalClassLoaderObjectInputStream(
+								_unsyncBufferedInputStream);
 
-						// Found the beginning of ObjectInputStream, flush out
-						// corrupted log if there is any.
-						if (ubaos.size() > 0) {
+						// Found the beginning of the object input stream. Flush
+						// out corrupted log if necessary.
+
+						if (unsyncByteArrayOutputStream.size() > 0) {
 							if (_log.isWarnEnabled()) {
-								_log.warn("Found corrupted leading log : " +
-									ubaos.toString());
+								_log.warn(
+									"Found corrupted leading log: " +
+										unsyncByteArrayOutputStream.toString());
 							}
 						}
 
-						ubaos = null;
+						unsyncByteArrayOutputStream = null;
 
 						break;
 					}
 					catch (StreamCorruptedException sce) {
-						// Collecting bad header as log data
-						_ubis.reset();
 
-						ubaos.write(_ubis.read());
+						// Collecting bad header as log information
+
+						_unsyncBufferedInputStream.reset();
+
+						unsyncByteArrayOutputStream.write(
+							_unsyncBufferedInputStream.read());
 					}
 				}
 
 				while (true) {
-					ProcessCallable processCallable =
-						(ProcessCallable)objectInputStream.readObject();
+					ProcessCallable<?> processCallable =
+						(ProcessCallable<?>)objectInputStream.readObject();
 
-					if (processCallable instanceof ReturnProcessCallable<?>) {
+					if (processCallable instanceof ExceptionProcessCallable) {
 						return processCallable;
 					}
 
-					if (processCallable instanceof ExceptionProcessCallable) {
+					if (processCallable instanceof ReturnProcessCallable<?>) {
 						return processCallable;
 					}
 
 					Serializable result = processCallable.call();
 
 					if (_log.isDebugEnabled()) {
-						_log.debug("Invoked generic ProcessCallable : " +
-							processCallable + ", with return value : " +
-							result);
+						_log.debug(
+							"Invoked generic process callable " +
+								processCallable + " with return value " +
+									result);
 					}
 				}
 			}
@@ -277,7 +290,7 @@ public class ProcessExecutor {
 			return null;
 		}
 
-		private final UnsyncBufferedInputStream _ubis;
+		private final UnsyncBufferedInputStream _unsyncBufferedInputStream;
 
 	}
 

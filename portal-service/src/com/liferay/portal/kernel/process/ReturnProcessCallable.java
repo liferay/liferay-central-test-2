@@ -26,7 +26,7 @@ public class ReturnProcessCallable<T extends Serializable>
 		_returnValue = returnValue;
 	}
 
-	public T call() throws ProcessException {
+	public T call() {
 		return _returnValue;
 	}
 

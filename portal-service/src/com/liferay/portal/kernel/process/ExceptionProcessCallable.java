@@ -24,7 +24,7 @@ public class ExceptionProcessCallable implements
 		_processException = processException;
 	}
 
-	public ProcessException call() throws ProcessException {
+	public ProcessException call() {
 		return _processException;
 	}
 

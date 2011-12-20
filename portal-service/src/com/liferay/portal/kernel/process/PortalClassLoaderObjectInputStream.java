@@ -29,19 +29,19 @@ import java.util.Map;
  */
 public class PortalClassLoaderObjectInputStream extends ObjectInputStream {
 
-	public PortalClassLoaderObjectInputStream(InputStream is)
+	public PortalClassLoaderObjectInputStream(InputStream inputStream)
 		throws IOException {
 
-		super(is);
+		super(inputStream);
 
 		_portalClassLoader = PortalClassLoaderUtil.getClassLoader();
 	}
 
 	@Override
-	protected Class<?> resolveClass(ObjectStreamClass desc)
-		throws IOException, ClassNotFoundException {
+	protected Class<?> resolveClass(ObjectStreamClass objectStreamClass)
+		throws ClassNotFoundException {
 
-		String name = desc.getName();
+		String name = objectStreamClass.getName();
 
 		try {
 			return Class.forName(name, false, _portalClassLoader);

@@ -17,7 +17,6 @@ package com.liferay.portal.kernel.process.log;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.process.ProcessCallable;
-import com.liferay.portal.kernel.process.ProcessException;
 import com.liferay.portal.kernel.util.StringPool;
 
 import java.io.IOException;
@@ -27,27 +26,27 @@ import java.io.IOException;
  */
 public class LoggingProcessCallable implements ProcessCallable<String> {
 
-	public LoggingProcessCallable(byte[] logData) {
-		this(logData, false);
+	public LoggingProcessCallable(byte[] bytes) {
+		this(bytes, false);
 	}
 
-	public LoggingProcessCallable(byte[] logData, boolean errorLog) {
-		_errorLog = errorLog;
-		_logData = logData;
+	public LoggingProcessCallable(byte[] bytes, boolean error) {
+		_bytes = bytes;
+		_error = error;
 	}
 
-	public String call() throws ProcessException {
+	public String call() {
 		try {
-			if (_errorLog) {
-				System.err.write(_logData);
+			if (_error) {
+				System.err.write(_bytes);
 			}
 			else {
-				System.out.write(_logData);
+				System.out.write(_bytes);
 			}
 		}
 		catch (IOException ioe) {
-			_log.error("Failed to output log message : " + new String(_logData),
-				ioe);
+			_log.error(
+				"Unable to output log message: " + new String(_bytes), ioe);
 		}
 
 		return StringPool.BLANK;
@@ -56,7 +55,7 @@ public class LoggingProcessCallable implements ProcessCallable<String> {
 	private static Log _log = LogFactoryUtil.getLog(
 		LoggingProcessCallable.class);
 
-	private final boolean _errorLog;
-	private final byte[] _logData;
+	private final byte[] _bytes;
+	private final boolean _error;
 
 }

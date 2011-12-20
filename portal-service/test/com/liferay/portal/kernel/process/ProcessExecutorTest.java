@@ -26,6 +26,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
 import java.util.concurrent.Callable;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
@@ -36,42 +37,76 @@ import java.util.concurrent.atomic.AtomicReference;
  */
 public class ProcessExecutorTest extends TestCase {
 
+	private static ExecutorService getExecutorService() throws Exception {
+		Field field = ProcessExecutor.class.getDeclaredField(
+			"_executorService");
+
+		field.setAccessible(true);
+
+		return (ExecutorService)field.get(null);
+	}
+
+	private static ExecutorService invokeGetExecutorService() throws Exception {
+		Method method = ProcessExecutor.class.getDeclaredMethod(
+			"_getExecutorService");
+
+		method.setAccessible(true);
+
+		return (ExecutorService)method.invoke(method);
+	}
+
+	private static void waitForSignalFile(
+			File signalFile, boolean expectedExists)
+		throws Exception {
+
+		while (expectedExists != signalFile.exists()) {
+			Thread.sleep(100);
+		}
+	}
+
+	private final String _classPath = System.getProperty("java.class.path");
+
 	@Override
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		super.setUp();
 
 		PortalClassLoaderUtil.setClassLoader(getClass().getClassLoader());
 	}
 
 	@Override
-	protected void tearDown() throws Exception {
+	public void tearDown() throws Exception {
 		super.tearDown();
 
 		PortalClassLoaderUtil.setClassLoader(null);
 	}
 
 	public void testCrash() throws Exception {
-		// Non Zero crash
+
+		// Negative one crash
+
 		KillJVMProcessCallable killJVMProcessCallable =
 			new KillJVMProcessCallable(-1);
 
 		try {
 			ProcessExecutor.execute(killJVMProcessCallable, _classPath);
+
 			fail();
 		}
 		catch (ProcessException pe) {
 		}
 
 		// Zero crash
+
 		killJVMProcessCallable = new KillJVMProcessCallable(0);
 
-		Serializable result = ProcessExecutor.execute(killJVMProcessCallable,
-			_classPath);
+		Serializable result = ProcessExecutor.execute(
+			killJVMProcessCallable, _classPath);
 
 		assertNull(result);
 	}
 
 	public void testDestroy() throws Exception {
+
 		// Clean destroy
 
 		ProcessExecutor processExecutor = new ProcessExecutor();
@@ -85,7 +120,6 @@ public class ProcessExecutorTest extends TestCase {
 		ExecutorService executorService = invokeGetExecutorService();
 
 		assertNotNull(executorService);
-
 		assertNotNull(getExecutorService());
 
 		processExecutor.destroy();
@@ -96,11 +130,14 @@ public class ProcessExecutorTest extends TestCase {
 
 		executorService = invokeGetExecutorService();
 
-		Future<Void> futureResult = executorService.submit(new DummyJob());
-
 		assertNotNull(executorService);
-
 		assertNotNull(getExecutorService());
+
+		DummyJob dummyJob = new DummyJob();
+
+		Future<Void> futureResult = executorService.submit(dummyJob);
+
+		dummyJob.waitUntilStarted();
 
 		processExecutor.destroy();
 
@@ -133,72 +170,92 @@ public class ProcessExecutorTest extends TestCase {
 	}
 
 	public void testLogging() throws Exception {
+		PrintStream oldOutPrintStream = System.out;
+
+		ByteArrayOutputStream outByteArrayOutputStream =
+			new ByteArrayOutputStream();
+
+		PrintStream newOutPrintStream = new PrintStream(
+			outByteArrayOutputStream, true);
+
+		System.setOut(newOutPrintStream);
+
+		PrintStream oldErrPrintStream = System.err;
+
+		ByteArrayOutputStream errByteArrayOutputStream =
+			new ByteArrayOutputStream();
+
+		PrintStream newErrPrintStream = new PrintStream(
+			errByteArrayOutputStream, true);
+
+		System.setErr(newErrPrintStream);
+
 		File signalFile = new File("signal");
 
 		signalFile.delete();
 
-		String logMessage= "Log Message";
-
-		PrintStream oldOut = System.out;
-		PrintStream oldErr = System.err;
-
-		ByteArrayOutputStream outBaos = new ByteArrayOutputStream();
-		ByteArrayOutputStream errBaos = new ByteArrayOutputStream();
-
-		PrintStream newOut = new PrintStream(outBaos, true);
-		PrintStream newErr = new PrintStream(errBaos, true);
-
-		System.setOut(newOut);
-		System.setErr(newErr);
-
 		try {
+			String logMessage= "Log Message";
+
 			final LoggingProcessCallable loggingProcessCallable =
 				new LoggingProcessCallable(logMessage, signalFile);
 
-			final AtomicReference<Exception> exceptionReference =
+			final AtomicReference<Exception> exceptionAtomicReference =
 				new AtomicReference<Exception>();
 
 			Thread launchThread = new Thread() {
 
+				@Override
 				public void run() {
 					try {
 						ProcessExecutor.execute(loggingProcessCallable,
 							_classPath);
 					}
 					catch (ProcessException pe) {
-						exceptionReference.set(pe);
+						exceptionAtomicReference.set(pe);
 					}
 				}
+
 			};
 
 			launchThread.start();
 
-			// Notify the sub-process to log
+			// Notify the subprocess to log
 
 			boolean result = signalFile.createNewFile();
+
 			assertTrue(result);
 
-			// Wait signalFile to be removed, indicating log is done.
+			// Wait for signal file to be removed indicating the log is done
 
 			waitForSignalFile(signalFile, false);
 
-			assertTrue(outBaos.toString().contains(logMessage));
-			assertTrue(errBaos.toString().contains(logMessage));
+			String outByteArrayOutputStreamString =
+				outByteArrayOutputStream.toString();
+
+			assertTrue(outByteArrayOutputStreamString.contains(logMessage));
+
+			String errByteArrayOutputStreamString =
+				errByteArrayOutputStream.toString();
+
+			assertTrue(errByteArrayOutputStreamString.contains(logMessage));
 
 			result = signalFile.createNewFile();
+
 			assertTrue(result);
 
 			launchThread.join();
 
-			Exception e = exceptionReference.get();
+			Exception e = exceptionAtomicReference.get();
 
 			if (e != null) {
 				throw e;
 			}
 		}
 		finally {
-			System.setOut(oldOut);
-			System.setErr(oldErr);
+			System.setOut(oldOutPrintStream);
+			System.setErr(oldErrPrintStream);
+
 			signalFile.delete();
 		}
 	}
@@ -213,31 +270,6 @@ public class ProcessExecutorTest extends TestCase {
 		assertEquals(DummyReturnProcessCallable.class.getName(), result);
 	}
 
-	private static ExecutorService getExecutorService() throws Exception {
-		Field field =ProcessExecutor.class.getDeclaredField("_executorService");
-
-		field.setAccessible(true);
-
-		return (ExecutorService)field.get(null);
-	}
-
-	private static ExecutorService invokeGetExecutorService() throws Exception {
-		Method method = ProcessExecutor.class.getDeclaredMethod(
-			"_getExecutorService");
-
-		method.setAccessible(true);
-
-		return (ExecutorService)method.invoke(method);
-	}
-
-	private static void waitForSignalFile(File signalFile, boolean expectExist)
-		throws Exception {
-
-		while (signalFile.exists() != expectExist) {
-			Thread.sleep(100);
-		}
-	}
-
 	private static class DummyExceptionProcessCallable
 		implements ProcessCallable<Serializable> {
 
@@ -250,18 +282,30 @@ public class ProcessExecutorTest extends TestCase {
 
 	private static class DummyJob implements Callable<Void> {
 
+		public DummyJob() {
+			_countDownLatch = new CountDownLatch(1);
+		}
+
 		public Void call() throws Exception {
+			_countDownLatch.countDown();
+
 			Thread.sleep(Long.MAX_VALUE);
 
 			return null;
 		}
+
+		public void waitUntilStarted() throws InterruptedException {
+			_countDownLatch.await();
+		}
+
+		private final CountDownLatch _countDownLatch;
 
 	}
 
 	private static class DummyReturnProcessCallable
 		implements ProcessCallable<String> {
 
-		public String call() throws ProcessException {
+		public String call() {
 			return DummyReturnProcessCallable.class.getName();
 		}
 
@@ -274,7 +318,7 @@ public class ProcessExecutorTest extends TestCase {
 			_exitCode = exitCode;
 		}
 
-		public Serializable call() throws ProcessException {
+		public Serializable call() {
 			System.exit(_exitCode);
 
 			return null;
@@ -302,8 +346,9 @@ public class ProcessExecutorTest extends TestCase {
 				boolean result = _signalFile.delete();
 
 				if (!result) {
-					throw new ProcessException("Failed to remove file : " +
-						_signalFile.getAbsolutePath());
+					throw new ProcessException(
+						"Unable to remove file " +
+							_signalFile.getAbsolutePath());
 				}
 
 				waitForSignalFile(_signalFile, true);
@@ -317,8 +362,7 @@ public class ProcessExecutorTest extends TestCase {
 
 		private final String _logMessage;
 		private final File _signalFile;
-	}
 
-	private final String _classPath = System.getProperty("java.class.path");
+	}
 
 }
