@@ -182,23 +182,24 @@ public class DataSourceSwapper {
 		throws Exception {
 
 		List<PortletSessionFactoryImpl> portletSessionFactoryImpls =
-			SessionFactoryImpl.getPortletSessionFactorys();
+			SessionFactoryImpl.getPortletSessionFactories();
 
 		for (PortletSessionFactoryImpl portletSessionFactoryImpl :
-			portletSessionFactoryImpls) {
+				portletSessionFactoryImpls) {
+
+			ClassLoader oldPortletClassLoader =
+				PortletClassLoaderUtil.getClassLoader();
 
 			ClassLoader portletClassLoader =
 				portletSessionFactoryImpl.getSessionFactoryClassLoader();
 
-			ClassLoader oldPortletClassLoader =
-				PortletClassLoaderUtil.getClassLoader();
+			PortletClassLoaderUtil.setClassLoader(portletClassLoader);
 
 			Thread currentThread = Thread.currentThread();
 
 			ClassLoader oldContextClassLoader =
 				currentThread.getContextClassLoader();
 
-			PortletClassLoaderUtil.setClassLoader(portletClassLoader);
 			currentThread.setContextClassLoader(portletClassLoader);
 
 			try {
@@ -218,6 +219,7 @@ public class DataSourceSwapper {
 			}
 			finally {
 				PortletClassLoaderUtil.setClassLoader(oldPortletClassLoader);
+
 				currentThread.setContextClassLoader(oldContextClassLoader);
 			}
 		}

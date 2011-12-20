@@ -36,7 +36,7 @@ import org.hibernate.engine.SessionFactoryImplementor;
  */
 public class SessionFactoryImpl implements SessionFactory {
 
-	public static List<PortletSessionFactoryImpl> getPortletSessionFactorys() {
+	public static List<PortletSessionFactoryImpl> getPortletSessionFactories() {
 		return portletSessionFactories;
 	}
 
@@ -114,11 +114,11 @@ public class SessionFactoryImpl implements SessionFactory {
 		return liferaySession;
 	}
 
+	private static Log _log = LogFactoryUtil.getLog(SessionFactoryImpl.class);
+
 	protected static final List<PortletSessionFactoryImpl>
 		portletSessionFactories =
 			new CopyOnWriteArrayList<PortletSessionFactoryImpl>();
-
-	private static Log _log = LogFactoryUtil.getLog(SessionFactoryImpl.class);
 
 	private ClassLoader _sessionFactoryClassLoader;
 	private SessionFactoryImplementor _sessionFactoryImplementor;

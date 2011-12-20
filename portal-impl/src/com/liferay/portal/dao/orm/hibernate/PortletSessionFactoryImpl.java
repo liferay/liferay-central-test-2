@@ -41,13 +41,15 @@ public class PortletSessionFactoryImpl extends SessionFactoryImpl {
 
 	public void afterPropertiesSet() {
 		if (_dataSource == InfrastructureUtil.getDataSource()) {
-			// Register only if the current SessionFactory is using the Portal
-			// DataSource
+
+			// Register only if the current session factory is using the portal
+			// data source
 
 			portletSessionFactories.add(this);
 		}
 	}
 
+	@Override
 	public void destroy() {
 		portletSessionFactories.remove(this);
 	}
