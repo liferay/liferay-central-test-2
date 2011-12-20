@@ -1,33 +1,6 @@
 <?xml version="1.0"?>
 
 <custom-sql>
-	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder.countByG_U_F">
-		<![CDATA[
-			SELECT
-				COUNT(DISTINCT DLFileEntry.fileEntryId) AS COUNT_VALUE
-			FROM
-				DLFileEntry, DLFileVersion
-			WHERE
-				(DLFileVersion.groupId = ?) AND
-				(DLFileVersion.userId = ?) AND
-				(DLFileVersion.fileEntryId = DLFileEntry.fileEntryId) AND
-				[$FOLDER_ID$]
-		]]>
-	</sql>
-	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder.countByG_U_F_S">
-		<![CDATA[
-			SELECT
-				COUNT(DISTINCT DLFileEntry.fileEntryId) AS COUNT_VALUE
-			FROM
-				DLFileEntry, DLFileVersion
-			WHERE
-				(DLFileVersion.groupId = ?) AND
-				(DLFileVersion.userId = ?) AND
-				(DLFileVersion.status = ?) AND
-				(DLFileVersion.fileEntryId = DLFileEntry.fileEntryId) AND
-				[$FOLDER_ID$]
-		]]>
-	</sql>
 	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder.countByExtraSettings">
 		<![CDATA[
 			SELECT
@@ -52,6 +25,19 @@
 				[$FOLDER_ID$]
 		]]>
 	</sql>
+	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder.countByG_U_F">
+		<![CDATA[
+			SELECT
+				COUNT(DISTINCT DLFileEntry.fileEntryId) AS COUNT_VALUE
+			FROM
+				DLFileEntry, DLFileVersion
+			WHERE
+				(DLFileVersion.groupId = ?) AND
+				(DLFileVersion.userId = ?) AND
+				(DLFileVersion.fileEntryId = DLFileEntry.fileEntryId) AND
+				[$FOLDER_ID$]
+		]]>
+	</sql>
 	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder.countByG_F_S">
 		<![CDATA[
 			SELECT
@@ -62,6 +48,20 @@
 			WHERE
 				(DLFileVersion.groupId = ?) AND
 				(DLFileVersion.status = ?) AND
+				[$FOLDER_ID$]
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder.countByG_U_F_S">
+		<![CDATA[
+			SELECT
+				COUNT(DISTINCT DLFileEntry.fileEntryId) AS COUNT_VALUE
+			FROM
+				DLFileEntry, DLFileVersion
+			WHERE
+				(DLFileVersion.groupId = ?) AND
+				(DLFileVersion.userId = ?) AND
+				(DLFileVersion.status = ?) AND
+				(DLFileVersion.fileEntryId = DLFileEntry.fileEntryId) AND
 				[$FOLDER_ID$]
 		]]>
 	</sql>
@@ -76,59 +76,6 @@
 				(DLFileEntry.largeImageId = ?) OR
 				(DLFileEntry.custom1ImageId = ?) OR
 				(DLFileEntry.custom2ImageId = ?)
-		]]>
-	</sql>
-	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder.findByG_F">
-		<![CDATA[
-			SELECT
-				DISTINCT {DLFileEntry.*}
-			FROM
-				DLFileEntry
-			WHERE
-				(DLFileEntry.groupId = ?) AND
-				[$FOLDER_ID$]
-		]]>
-	</sql>
-	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder.findByG_F_S">
-		<![CDATA[
-			SELECT
-				DISTINCT {DLFileEntry.*}
-			FROM
-				DLFileEntry
-			INNER JOIN
-				DLFileVersion ON
-					(DLFileVersion.fileEntryId = DLFileEntry.fileEntryId)
-			WHERE
-				(DLFileEntry.groupId = ?) AND
-				(DLFileVersion.status = ?) AND
-				[$FOLDER_ID$]
-		]]>
-	</sql>
-	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder.findByG_U_F">
-		<![CDATA[
-			SELECT
-				DISTINCT {DLFileEntry.*}
-			FROM
-				DLFileEntry, DLFileVersion
-			WHERE
-				(DLFileVersion.groupId = ?) AND
-				(DLFileVersion.userId = ?) AND
-				(DLFileVersion.fileEntryId = DLFileEntry.fileEntryId) AND
-				[$FOLDER_ID$]
-		]]>
-	</sql>
-	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder.findByG_U_F_S">
-		<![CDATA[
-			SELECT
-				DISTINCT {DLFileEntry.*}
-			FROM
-				DLFileEntry, DLFileVersion
-			WHERE
-				(DLFileVersion.groupId = ?) AND
-				(DLFileVersion.userId = ?) AND
-				(DLFileVersion.status = ?) AND
-				(DLFileVersion.fileEntryId = DLFileEntry.fileEntryId) AND
-				[$FOLDER_ID$]
 		]]>
 	</sql>
 	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder.findByNoAssets">
@@ -176,6 +123,59 @@
 					FROM
 						Group_
 				))
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder.findByG_F">
+		<![CDATA[
+			SELECT
+				DISTINCT {DLFileEntry.*}
+			FROM
+				DLFileEntry
+			WHERE
+				(DLFileEntry.groupId = ?) AND
+				[$FOLDER_ID$]
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder.findByG_U_F">
+		<![CDATA[
+			SELECT
+				DISTINCT {DLFileEntry.*}
+			FROM
+				DLFileEntry, DLFileVersion
+			WHERE
+				(DLFileVersion.groupId = ?) AND
+				(DLFileVersion.userId = ?) AND
+				(DLFileVersion.fileEntryId = DLFileEntry.fileEntryId) AND
+				[$FOLDER_ID$]
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder.findByG_F_S">
+		<![CDATA[
+			SELECT
+				DISTINCT {DLFileEntry.*}
+			FROM
+				DLFileEntry
+			INNER JOIN
+				DLFileVersion ON
+					(DLFileVersion.fileEntryId = DLFileEntry.fileEntryId)
+			WHERE
+				(DLFileEntry.groupId = ?) AND
+				(DLFileVersion.status = ?) AND
+				[$FOLDER_ID$]
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder.findByG_U_F_S">
+		<![CDATA[
+			SELECT
+				DISTINCT {DLFileEntry.*}
+			FROM
+				DLFileEntry, DLFileVersion
+			WHERE
+				(DLFileVersion.groupId = ?) AND
+				(DLFileVersion.userId = ?) AND
+				(DLFileVersion.status = ?) AND
+				(DLFileVersion.fileEntryId = DLFileEntry.fileEntryId) AND
+				[$FOLDER_ID$]
 		]]>
 	</sql>
 	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryTypeFinder.countByC_G_N_D_S">

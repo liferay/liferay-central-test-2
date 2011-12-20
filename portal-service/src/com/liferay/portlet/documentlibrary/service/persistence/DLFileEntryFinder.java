@@ -42,12 +42,6 @@ public interface DLFileEntryFinder {
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 
-	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> findByG_U_F_M_S(
-		long groupId, long userId, java.util.List<java.lang.Long> folderIds,
-		java.lang.String[] mimeTypes, int status, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
 	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> findByExtraSettings(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
@@ -56,5 +50,11 @@ public interface DLFileEntryFinder {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> findByOrphanedFileEntries()
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> findByG_U_F_M_S(
+		long groupId, long userId, java.util.List<java.lang.Long> folderIds,
+		java.lang.String[] mimeTypes, int status, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.kernel.exception.SystemException;
 }
