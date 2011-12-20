@@ -578,8 +578,8 @@ public class CMISStore extends BaseStore {
 				PropsValues.DL_STORE_CMIS_REPOSITORY_URL);
 			parameters.put(
 				SessionParameter.BINDING_TYPE, BindingType.ATOMPUB.value());
-			parameters.put(SessionParameter.COMPRESSION,
-				Boolean.TRUE.toString());
+			parameters.put(
+				SessionParameter.COMPRESSION, Boolean.TRUE.toString());
 
 			Locale locale = LocaleUtil.getDefault();
 
@@ -598,8 +598,10 @@ public class CMISStore extends BaseStore {
 			SessionFactory sessionFactory =
 				CMISRepositoryUtil.getSessionFactory();
 
-			Repository repository =
-				sessionFactory.getRepositories(parameters).get(0);
+			List<Repository> repositories = sessionFactory.getRepositories(
+				parameters);
+
+			Repository repository = repositories.get(0);
 
 			session = repository.createSession();
 
