@@ -42,7 +42,9 @@ StringBuilder friendlyURLBase = new StringBuilder();
 	<%
 	friendlyURLBase.append(themeDisplay.getPortalURL());
 
-	String virtualHostname = selLayout.getLayoutSet().getVirtualHostname();
+	LayoutSet layoutSet = selLayout.getLayoutSet();
+
+	String virtualHostname = layoutSet.getVirtualHostname();
 
 	if (Validator.isNull(virtualHostname) || (friendlyURLBase.indexOf(virtualHostname) == -1)) {
 		friendlyURLBase.append(group.getPathFriendlyURL(privateLayout, themeDisplay));
@@ -118,16 +120,10 @@ StringBuilder friendlyURLBase = new StringBuilder();
 				LayoutSetPrototype layoutSetPrototype = LayoutSetPrototypeLocalServiceUtil.getLayoutSetPrototype(group.getClassPK());
 
 				boolean layoutSetPrototypeUpdateable = GetterUtil.getBoolean(layoutSetPrototype.getSettingsProperty("layoutsUpdateable"), true);
-				boolean layoutUpdateable = GetterUtil.getBoolean(selLayoutTypePortlet.getTypeSettingsProperties().getProperty("layoutUpdateable"), true);
-
-				boolean layoutUpdateableDisabled = false;
-
-				if (!layoutSetPrototypeUpdateable) {
-					layoutUpdateableDisabled = true;
-				}
+				boolean layoutUpdateable = GetterUtil.getBoolean(selLayoutTypePortlet.getTypeSettingsProperty("layoutUpdateable"), true);
 				%>
 
-				<aui:input disabled="<%= layoutUpdateableDisabled %>" helpMessage="allow-site-administrators-to-modify-this-page-for-their-site-help" label="allow-site-administrators-to-modify-this-page-for-their-site" name="layoutUpdateable" type="checkbox" value="<%= layoutUpdateable %>" />
+				<aui:input disabled="<%= !layoutSetPrototypeUpdateable %>" helpMessage="allow-site-administrators-to-modify-this-page-for-their-site-help" label="allow-site-administrators-to-modify-this-page-for-their-site" name="layoutUpdateable" type="checkbox" value="<%= layoutUpdateable %>" />
 			</c:if>
 		</c:when>
 		<c:otherwise>

@@ -64,8 +64,7 @@ public class CustomizationSettingsProcessor implements ColumnProcessor {
 
 		if (_templateLayout != null) {
 			templateCustomizable = GetterUtil.getBoolean(
-				_templateLayout.getTypeSettingsProperties().getProperty(
-					customizableKey, String.valueOf(false)));
+				_templateLayout.getTypeSettingsProperty(customizableKey));
 		}
 
 		boolean customizable = false;

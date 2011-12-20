@@ -43,7 +43,7 @@ if (!themeDisplay.isSignedIn() && layout.isPublicLayout()) {
 	<c:if test="<%= locale.equals(defaultLocale) %>">
 
 		<%
-		boolean showAlternateLinks = GetterUtil.getBoolean(layout.getTypeSettingsProperties().get("show-alternate-links"), true);
+		boolean showAlternateLinks = GetterUtil.getBoolean(layout.getTypeSettingsProperty("show-alternate-links"), true);
 
 		if (showAlternateLinks) {
 			Locale[] availableLocales = LanguageUtil.getAvailableLocales();

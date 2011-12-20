@@ -395,6 +395,12 @@ public class LayoutImpl extends LayoutBaseImpl {
 		return typeSettingsProperties.getProperty(key);
 	}
 
+	public String getTypeSettingsProperty(String key, String defaultValue) {
+		UnicodeProperties typeSettingsProperties = getTypeSettingsProperties();
+
+		return typeSettingsProperties.getProperty(key, defaultValue);
+	}
+
 	public ColorScheme getWapColorScheme()
 		throws PortalException, SystemException {
 

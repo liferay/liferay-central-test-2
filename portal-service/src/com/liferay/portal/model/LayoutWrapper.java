@@ -1358,6 +1358,11 @@ public class LayoutWrapper implements Layout, ModelWrapper<Layout> {
 		return _layout.getTypeSettingsProperty(key);
 	}
 
+	public java.lang.String getTypeSettingsProperty(java.lang.String key,
+		java.lang.String defaultValue) {
+		return _layout.getTypeSettingsProperty(key, defaultValue);
+	}
+
 	public com.liferay.portal.model.ColorScheme getWapColorScheme()
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
