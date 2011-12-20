@@ -45,7 +45,7 @@ public class JavadocManagerImpl implements JavadocManager {
 
 	public void load(String servletContextName, ClassLoader classLoader) {
 		if (_log.isInfoEnabled()) {
-			_log.info("Loading Javadocs for " + servletContextName);
+			_log.info("Loading Javadocs for \"" + servletContextName + '\"');
 		}
 
 		Document document = getDocument(classLoader);
@@ -57,7 +57,7 @@ public class JavadocManagerImpl implements JavadocManager {
 		parseDocument(servletContextName, classLoader, document);
 
 		if (_log.isInfoEnabled()) {
-			_log.info("Loaded Javadocs for " + servletContextName);
+			_log.info("Loaded Javadocs for \"" + servletContextName + '\"');
 		}
 	}
 
@@ -116,14 +116,14 @@ public class JavadocManagerImpl implements JavadocManager {
 
 	public void unload(String servletContextName) {
 		if (_log.isInfoEnabled()) {
-			_log.info("Unoading Javadocs for '" + servletContextName + '\'');
+			_log.info("Unloading Javadocs for \"" + servletContextName + '\"');
 		}
 
 		unload(servletContextName, _javadocClasses.values());
 		unload(servletContextName, _javadocMethods.values());
 
 		if (_log.isInfoEnabled()) {
-			_log.info("Unloaded Javadocs for '" + servletContextName + '\'');
+			_log.info("Unloaded Javadocs for \"" + servletContextName + '\"');
 		}
 	}
 
