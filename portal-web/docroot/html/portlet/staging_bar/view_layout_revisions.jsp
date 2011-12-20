@@ -130,7 +130,6 @@ List<LayoutRevision> rootLayoutRevisions = LayoutRevisionLocalServiceUtil.getChi
 								statusMessage = WorkflowConstants.toLabel(status);
 
 								if (status == WorkflowConstants.STATUS_PENDING) {
-
 									StringBundler sb = new StringBundler(4);
 
 									try {
