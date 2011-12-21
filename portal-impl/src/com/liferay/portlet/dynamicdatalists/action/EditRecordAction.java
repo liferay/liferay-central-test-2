@@ -185,10 +185,10 @@ public class EditRecordAction extends PortletAction {
 			}
 
 			if (fieldType.equals("radio") || fieldType.equals("select")) {
-				String[] valuesArray = ParamUtil.getParameterValues(
+				String[] fieldValues = ParamUtil.getParameterValues(
 					actionRequest, fieldName);
 
-				fieldValue = JSONFactoryUtil.serialize(valuesArray);
+				fieldValue = JSONFactoryUtil.serialize(fieldValues);
 			}
 
 			Serializable fieldValueSerializable =

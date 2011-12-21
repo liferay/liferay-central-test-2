@@ -152,6 +152,7 @@
 									var data = obj.record.get('data');
 
 									var label = '';
+
 									var value = data.value;
 
 									if (value !== '') {

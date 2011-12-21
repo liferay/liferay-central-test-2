@@ -119,8 +119,9 @@ public class DDLUtil {
 			if (fieldValue instanceof Date) {
 				jsonObject.put(fieldName, ((Date)fieldValue).getTime());
 			}
-			else if ((fieldType.equals("radio") || fieldType.equals("select"))
-					&& Validator.isNotNull(fieldValue)) {
+			else if ((fieldType.equals("radio") ||
+					  fieldType.equals("select")) &&
+					 Validator.isNotNull(fieldValue)) {
 
 				fieldValue = JSONFactoryUtil.createJSONArray(
 					String.valueOf(fieldValue));

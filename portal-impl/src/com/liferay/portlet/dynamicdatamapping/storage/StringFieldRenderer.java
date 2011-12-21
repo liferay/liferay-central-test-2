@@ -49,22 +49,20 @@ public class StringFieldRenderer extends BaseFieldRenderer {
 
 		JSONArray valuesJSONArray = JSONFactoryUtil.createJSONArray(value);
 
-		int length = valuesJSONArray.length();
+		StringBundler sb = new StringBundler(valuesJSONArray.length() * 2);
 
-		StringBundler sb = new StringBundler(length * 2);
-
-		for (int i = 0; i < length; i++) {
-			Map<String, String> fields = ddmStructure.getFields(
+		for (int i = 0; i < valuesJSONArray.length(); i++) {
+			Map<String, String> fieldsMap = ddmStructure.getFields(
 				field.getName(), FieldConstants.VALUE,
 				valuesJSONArray.getString(i));
 
-			if (fields == null) {
+			if (fieldsMap == null) {
 				continue;
 			}
 
-			sb.append(fields.get(FieldConstants.LABEL));
+			sb.append(fieldsMap.get(FieldConstants.LABEL));
 
-			if ((i + 1) < length) {
+			if ((i + 1) < valuesJSONArray.length()) {
 				sb.append(", ");
 			}
 		}
