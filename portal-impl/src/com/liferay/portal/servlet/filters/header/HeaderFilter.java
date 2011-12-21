@@ -15,10 +15,10 @@
 package com.liferay.portal.servlet.filters.header;
 
 import com.liferay.portal.kernel.servlet.HttpHeaders;
-import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.FastDateFormatFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
+import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.TimeZoneUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.servlet.filters.BasePortalFilter;
@@ -32,6 +32,7 @@ import java.util.Enumeration;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -81,9 +82,7 @@ public class HeaderFilter extends BasePortalFilter {
 		while (enu.hasMoreElements()) {
 			String name = enu.nextElement();
 
-			if (ArrayUtil.contains(
-					PropsValues.REQUEST_HEADER_IGNORE_INIT_PARAMS, name)) {
-
+			if (_requestHeaderIgnoreInitParams.contains(name)) {
 				continue;
 			}
 
@@ -157,7 +156,8 @@ public class HeaderFilter extends BasePortalFilter {
 
 	private static final String _TIME_ZONE = "GMT";
 
-	private static final String _URL_REGEX_PATTERN = "url-regex-pattern";
+	private static Set<String> _requestHeaderIgnoreInitParams =
+		SetUtil.fromArray(PropsValues.REQUEST_HEADER_IGNORE_INIT_PARAMS);
 
 	private Format _dateFormat;
 	private FilterConfig _filterConfig;
