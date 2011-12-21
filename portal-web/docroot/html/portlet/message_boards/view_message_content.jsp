@@ -17,6 +17,8 @@
 <%@ include file="/html/portlet/message_boards/init.jsp" %>
 
 <%
+String redirect = ParamUtil.getString(request, "redirect");
+
 MBMessageDisplay messageDisplay = (MBMessageDisplay)request.getAttribute(WebKeys.MESSAGE_BOARDS_MESSAGE);
 
 MBMessage message = messageDisplay.getMessage();
@@ -31,34 +33,30 @@ MBThread nextThread = messageDisplay.getNextThread();
 String threadView = messageDisplay.getThreadView();
 
 MBThreadFlag threadFlag = MBThreadFlagLocalServiceUtil.getThreadFlag(themeDisplay.getUserId(), thread);
-
-String redirect = ParamUtil.getString(request, "redirect");
-String backLabel = null;
-
-if (Validator.isNull(redirect)) {
-	PortletURL portletURL = renderResponse.createRenderURL();
-	portletURL.setParameter("struts_action", "/message_boards/view");
-
-	long mbCategoryId = MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID;
-	backLabel = "message-boards-home";
-
-	if (category != null) {
-		mbCategoryId = category.getCategoryId();
-		backLabel = category.getName();
-	}
-
-	portletURL.setParameter("mbCategoryId", String.valueOf(mbCategoryId));
-
-	redirect = portletURL.toString();
-}
 %>
 
-<liferay-ui:header
-	backLabel='<%= backLabel %>'
-	backURL="<%= redirect %>"
-	localizeTitle="<%= false %>"
-	title="<%= message.getSubject() %>"
-/>
+<c:choose>
+	<c:when test="<%= Validator.isNull(redirect) %>">
+		<portlet:renderURL var="backURL">
+			<portlet:param name="struts_action" value="/message_boards/view" />
+			<portlet:param name="mbCategoryId" value="<%= (category != null) ? String.valueOf(category.getCategoryId()) : String.valueOf(MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) %>" />
+		</portlet:renderURL>
+
+		<liferay-ui:header
+			backLabel='<%= (category != null) ? category.getName() : "message-boards-home" %>'
+			backURL="<%= backURL.toString() %>"
+			localizeTitle="<%= false %>"
+			title="<%= message.getSubject() %>"
+		/>
+	</c:when>
+	<c:otherwise>
+		<liferay-ui:header
+			backURL="<%= redirect %>"
+			localizeTitle="<%= false %>"
+			title="<%= message.getSubject() %>"
+		/>
+	</c:otherwise>
+</c:choose>
 
 <table cellpadding="0" cellspacing="0" class="thread-view-controls" width="100%">
 <tr>
