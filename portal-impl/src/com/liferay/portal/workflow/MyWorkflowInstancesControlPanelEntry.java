@@ -16,7 +16,6 @@ package com.liferay.portal.workflow;
 
 import com.liferay.portal.kernel.workflow.WorkflowInstanceManagerUtil;
 import com.liferay.portal.model.Portlet;
-import com.liferay.portal.model.impl.PermissionModelImpl;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.util.PortletKeys;
@@ -47,8 +46,7 @@ public class MyWorkflowInstancesControlPanelEntry
 		}
 
 		return permissionChecker.hasPermission(
-			0, PortletKeys.MY_WORKFLOW_INSTANCES, "0", ActionKeys.VIEW);
-
+			0, PortletKeys.MY_WORKFLOW_INSTANCES, 0, ActionKeys.VIEW);
 	}
 
 }

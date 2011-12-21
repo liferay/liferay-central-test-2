@@ -59,7 +59,7 @@ public class MyWorkflowTasksControlPanelEntry
 		}
 
 		return permissionChecker.hasPermission(
-			0, PortletKeys.MY_WORKFLOW_TASKS, "0", ActionKeys.VIEW);
+			0, PortletKeys.MY_WORKFLOW_TASKS, 0, ActionKeys.VIEW);
 	}
 
 }
