@@ -128,6 +128,19 @@ public class InputTag extends BaseInputTag {
 			bean = pageContext.getAttribute("aui:model-context:bean");
 		}
 
+		String defaultLanguageId = getDefaultLanguageId();
+
+		if (Validator.isNull(defaultLanguageId)) {
+			defaultLanguageId = (String)pageContext.getAttribute(
+				"aui:model-context:defaultLanguageId");
+		}
+
+		if (Validator.isNull(defaultLanguageId)) {
+			Locale defaultLocale = LocaleUtil.getDefault();
+
+			defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
+		}
+
 		String name = getName();
 
 		int pos = name.indexOf(StringPool.DOUBLE_DASH);
@@ -178,18 +191,6 @@ public class InputTag extends BaseInputTag {
 		if (model == null) {
 			model = (Class<?>)pageContext.getAttribute(
 				"aui:model-context:model");
-		}
-
-		String defaultLanguageId = getDefaultLanguageId();
-
-		if (Validator.isNull(defaultLanguageId)) {
-			defaultLanguageId = (String)pageContext.getAttribute(
-				"aui:model-context:defaultLanguageId");
-		}
-
-		if (Validator.isNull(defaultLanguageId)) {
-			Locale defaultLocale = LocaleUtil.getDefault();
-			defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
 		}
 
 		_forLabel = id;
