@@ -23,14 +23,14 @@ import java.io.InputStream;
  */
 public class PDFProcessorUtil {
 
-	public static String getGlobalSearchPath() throws Exception {
-		return getPDFProcessor().getGlobalSearchPath();
-	}
-
 	public static void generateImages(FileVersion fileVersion)
 		throws Exception {
 
 		getPDFProcessor().generateImages(fileVersion);
+	}
+
+	public static String getGlobalSearchPath() throws Exception {
+		return getPDFProcessor().getGlobalSearchPath();
 	}
 
 	public static PDFProcessor getPDFProcessor() {
@@ -86,20 +86,20 @@ public class PDFProcessorUtil {
 		return getPDFProcessor().isImageMagickEnabled();
 	}
 
+	public static boolean isSupported(String mimeType) {
+		return getPDFProcessor().isSupported(mimeType);
+	}
+
 	public static void reset() throws Exception {
 		getPDFProcessor().reset();
 	}
 
+	public static void trigger(FileVersion fileVersion) {
+		getPDFProcessor().trigger(fileVersion);
+	}
+
 	public void setPDFProcessor(PDFProcessor pdfProcessor) {
 		_pdfProcessor = pdfProcessor;
-	}
-
-	public boolean isSupported(String mimeType) {
-		return getPDFProcessor().isSupported(mimeType);
-	}
-
-	public void trigger(FileVersion fileVersion) {
-		getPDFProcessor().trigger(fileVersion);
 	}
 
 	private static PDFProcessor _pdfProcessor;

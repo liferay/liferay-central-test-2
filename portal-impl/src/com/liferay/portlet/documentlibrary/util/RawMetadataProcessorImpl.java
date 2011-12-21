@@ -56,7 +56,7 @@ public class RawMetadataProcessorImpl
 	}
 
 	public void generateMetadata(FileVersion fileVersion)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		long fileEntryMetadataCount =
 			DLFileEntryMetadataLocalServiceUtil.getFileEntryMetadataCount(

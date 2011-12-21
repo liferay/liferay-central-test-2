@@ -53,11 +53,11 @@ public interface VideoProcessor {
 
 	public boolean hasVideo(FileVersion fileVersion);
 
+	public boolean isSupported(String mimeType);
+
 	public boolean isVideoSupported(FileVersion fileVersion);
 
 	public boolean isVideoSupported(String mimeType);
-
-	public boolean isSupported(String mimeType);
 
 	public void trigger(FileVersion fileVersion);
 

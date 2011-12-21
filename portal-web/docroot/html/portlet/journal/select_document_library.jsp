@@ -144,11 +144,6 @@ if (folder != null) {
 	for (int i = 0; i < results.size(); i++) {
 		FileEntry fileEntry = (FileEntry)results.get(i);
 
-		DLFileShortcut fileShortcut = null;
-
-		String thumbnailSrc = DLUtil.getThumbnailSrc(fileEntry, fileShortcut, themeDisplay);
-		String thumbnailStyle = DLUtil.getThumbnailStyle();
-
 		ResultRow row = new ResultRow(fileEntry, fileEntry.getFileEntryId(), i);
 
 		String rowHREF = themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + themeDisplay.getScopeGroupId() + StringPool.SLASH + folderId + StringPool.SLASH + HttpUtil.encodeURL(fileEntry.getTitle(), true);
@@ -158,8 +153,16 @@ if (folder != null) {
 		StringBundler sb = new StringBundler(10);
 
 		sb.append("<img alt=\"\" align=\"left\" border=\"0\" src=\"");
+
+		DLFileShortcut fileShortcut = null;
+
+		String thumbnailSrc = DLUtil.getThumbnailSrc(fileEntry, fileShortcut, themeDisplay);
+
 		sb.append(thumbnailSrc);
 		sb.append("\" style=\"");
+
+		String thumbnailStyle = DLUtil.getThumbnailStyle();
+
 		sb.append(thumbnailStyle);
 		sb.append("\">");
 		sb.append(fileEntry.getTitle());

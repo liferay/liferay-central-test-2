@@ -108,6 +108,14 @@ public class ImageProcessorImpl
 		return _instance.isSupported(mimeType);
 	}
 
+	public boolean isSupported(String mimeType) {
+		if (Validator.isNull(mimeType)) {
+			return false;
+		}
+
+		return _imageMimeTypes.contains(mimeType);
+	}
+
 	public void storeThumbnail(
 			long companyId, long groupId, long fileEntryId, long fileVersionId,
 			long custom1ImageId, long custom2ImageId,
@@ -119,16 +127,24 @@ public class ImageProcessorImpl
 			custom2ImageId, is, type);
 	}
 
-	public boolean isSupported(String mimeType) {
-		if (Validator.isNull(mimeType)) {
-			return false;
-		}
-
-		return _imageMimeTypes.contains(mimeType);
-	}
-
 	public void trigger(FileVersion fileVersion) {
 		_instance._queueGeneration(fileVersion);
+	}
+
+	@Override
+	protected String getPreviewType(FileVersion fileVersion) {
+		return null;
+	}
+
+	@Override
+	protected String getThumbnailType(FileVersion fileVersion) {
+		String type = fileVersion.getExtension();
+
+		if (type.equals("jpeg")) {
+			type = "jpg";
+		}
+
+		return type;
 	}
 
 	private void _generateImages(FileVersion fileVersion) {
@@ -159,22 +175,6 @@ public class ImageProcessorImpl
 		finally {
 			_fileVersionIds.remove(fileVersion.getFileVersionId());
 		}
-	}
-
-	@Override
-	protected String getPreviewType(FileVersion fileVersion) {
-		return null;
-	}
-
-	@Override
-	protected String getThumbnailType(FileVersion fileVersion) {
-		String type = fileVersion.getExtension();
-
-		if (type.equals("jpeg")) {
-			type = "jpg";
-		}
-
-		return type;
 	}
 
 	private boolean _hasImages(FileVersion fileVersion) {

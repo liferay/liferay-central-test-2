@@ -70,6 +70,7 @@ public interface RawMetadataProcessor {
 	 */
 	public void saveMetadata(FileVersion fileVersion)
 		throws PortalException, SystemException;
+
 	/**
 	 * Launches extraction of raw metadata from the file version.
 	 *

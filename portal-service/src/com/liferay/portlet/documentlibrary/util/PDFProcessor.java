@@ -28,10 +28,10 @@ public interface PDFProcessor {
 
 	public static final String THUMBNAIL_TYPE = ImageTool.TYPE_PNG;
 
-	public String getGlobalSearchPath() throws Exception;
-
 	public void generateImages(FileVersion fileVersion)
 		throws Exception;
+
+	public String getGlobalSearchPath() throws Exception;
 
 	public InputStream getPreviewAsStream(FileVersion fileVersion, int index)
 		throws Exception;
@@ -57,9 +57,9 @@ public interface PDFProcessor {
 
 	public boolean isImageMagickEnabled() throws Exception;
 
-	public void reset() throws Exception;
-
 	public boolean isSupported(String mimeType);
+
+	public void reset() throws Exception;
 
 	public void trigger(FileVersion fileVersion);
 

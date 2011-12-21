@@ -204,9 +204,9 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 					<span class="document-thumbnail">
 
 						<%
-						DLFileShortcut fileShortcut = null;
+						DLFileShortcut dlFileShortcut = null;
 
-						String thumbnailSrc = DLUtil.getThumbnailSrc(fileEntry, fileShortcut, themeDisplay);
+						String thumbnailSrc = DLUtil.getThumbnailSrc(fileEntry, dlFileShortcut, themeDisplay);
 
 						if (layoutAssetEntry != null) {
 							AssetEntry incrementAssetEntry = AssetEntryServiceUtil.incrementViewCounter(layoutAssetEntry.getClassName(), assetClassPK);

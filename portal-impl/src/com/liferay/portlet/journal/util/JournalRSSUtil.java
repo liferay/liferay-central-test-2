@@ -45,6 +45,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * @author Raymond Augé
@@ -302,9 +303,10 @@ public class JournalRSSUtil {
 		else {
 			FileEntry fileEntry = getFileEntry(url);
 
+			Set<String> imageMimeTypes = ImageProcessorUtil.getImageMimeTypes();
+
 			if ((fileEntry != null) &&
-				ImageProcessorUtil.getImageMimeTypes().contains(
-					fileEntry.getMimeType())) {
+				imageMimeTypes.contains(fileEntry.getMimeType())) {
 
 				type = fileEntry.getExtension();
 				size = fileEntry.getSize();

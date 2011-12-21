@@ -74,6 +74,10 @@ public class ImageProcessorUtil {
 		return getImageProcessor().isImageSupported(mimeType);
 	}
 
+	public static boolean isSupported(String mimeType) {
+		return getImageProcessor().isSupported(mimeType);
+	}
+
 	public static void storeThumbnail(
 			long companyId, long groupId, long fileEntryId, long fileVersionId,
 			long custom1ImageId, long custom2ImageId,
@@ -85,16 +89,12 @@ public class ImageProcessorUtil {
 			custom2ImageId, is, type);
 	}
 
-	public void setImageProcessor(ImageProcessor imageProcessor) {
-		_imageProcessor = imageProcessor;
-	}
-
-	public static boolean isSupported(String mimeType) {
-		return getImageProcessor().isSupported(mimeType);
-	}
-
 	public static void trigger(FileVersion fileVersion) {
 		getImageProcessor().trigger(fileVersion);
+	}
+
+	public void setImageProcessor(ImageProcessor imageProcessor) {
+		_imageProcessor = imageProcessor;
 	}
 
 	private static ImageProcessor _imageProcessor;

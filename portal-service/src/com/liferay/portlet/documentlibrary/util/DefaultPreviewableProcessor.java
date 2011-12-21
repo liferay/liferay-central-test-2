@@ -87,6 +87,10 @@ public abstract class DefaultPreviewableProcessor
 		return getPreviewTempFilePath(id, index, getPreviewType());
 	}
 
+	protected String getPreviewType() {
+		return getPreviewType(null);
+	}
+
 	protected String getPreviewType(int index) {
 		String[] previewTypes = getPreviewTypes();
 
@@ -115,10 +119,6 @@ public abstract class DefaultPreviewableProcessor
 
 	protected String getThumbnailTempFilePath(String id) {
 		return getThumbnailTempFilePath(id, getThumbnailType());
-	}
-
-	protected String getPreviewType() {
-		return getPreviewType(null);
 	}
 
 	protected String getThumbnailType() {

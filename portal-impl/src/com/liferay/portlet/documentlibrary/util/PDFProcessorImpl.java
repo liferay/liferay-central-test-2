@@ -75,6 +75,12 @@ import org.im4java.core.IMOperation;
 public class PDFProcessorImpl
 	extends DefaultPreviewableProcessor implements PDFProcessor {
 
+	public void generateImages(FileVersion fileVersion) throws Exception {
+		_initialize();
+
+		_instance._generateImages(fileVersion);
+	}
+
 	public String getGlobalSearchPath() throws Exception {
 		PortletPreferences preferences = PrefsPropsUtil.getPreferences();
 
@@ -99,14 +105,6 @@ public class PDFProcessorImpl
 
 		return PropsUtil.get(
 			PropsKeys.IMAGEMAGICK_GLOBAL_SEARCH_PATH, new Filter(filterName));
-	}
-
-	public void generateImages(FileVersion fileVersion)
-		throws Exception {
-
-		_initialize();
-
-		_instance._generateImages(fileVersion);
 	}
 
 	public InputStream getPreviewAsStream(FileVersion fileVersion, int index)
@@ -204,12 +202,6 @@ public class PDFProcessorImpl
 		return false;
 	}
 
-	public void reset() throws Exception {
-		if (isImageMagickEnabled()) {
-			_globalSearchPath = getGlobalSearchPath();
-		}
-	}
-
 	public boolean isSupported(String mimeType) {
 		if (Validator.isNull(mimeType)) {
 			return false;
@@ -237,6 +229,12 @@ public class PDFProcessorImpl
 		}
 
 		return false;
+	}
+
+	public void reset() throws Exception {
+		if (isImageMagickEnabled()) {
+			_globalSearchPath = getGlobalSearchPath();
+		}
 	}
 
 	public void trigger(FileVersion fileVersion) {
@@ -725,8 +723,8 @@ public class PDFProcessorImpl
 	private static PDFProcessorImpl _instance;
 
 	private List<Long> _fileVersionIds = new Vector<Long>();
-	private static String _globalSearchPath;
-	private static boolean _warned;
+	private String _globalSearchPath;
+	private boolean _warned;
 
 	private static class ImageMagickProcessCallable
 		implements ProcessCallable<String> {

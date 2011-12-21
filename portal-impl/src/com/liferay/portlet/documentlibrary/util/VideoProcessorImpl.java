@@ -221,7 +221,6 @@ public class VideoProcessorImpl
 
 			storeThumbnailmage(
 				fileVersion, renderedImage, THUMBNAIL_INDEX_CUSTOM_1);
-
 			storeThumbnailmage(
 				fileVersion, renderedImage, THUMBNAIL_INDEX_CUSTOM_2);
 		}

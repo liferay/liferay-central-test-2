@@ -36,11 +36,11 @@ import com.liferay.portal.kernel.repository.model.FileVersion;
  */
 public class RawMetadataProcessorUtil {
 
-	public void cleanUp(FileEntry fileEntry) {
+	public static void cleanUp(FileEntry fileEntry) {
 		getRawMetadataProcessor().cleanUp(fileEntry);
 	}
 
-	public void cleanUp(FileVersion fileVersion) {
+	public static void cleanUp(FileVersion fileVersion) {
 		getRawMetadataProcessor().cleanUp(fileVersion);
 	}
 
@@ -62,11 +62,11 @@ public class RawMetadataProcessorUtil {
 		return _rawMetadataProcessor;
 	}
 
-	public boolean isSupported(FileVersion fileVersion) {
+	public static boolean isSupported(FileVersion fileVersion) {
 		return getRawMetadataProcessor().isSupported(fileVersion);
 	}
 
-	public boolean isSupported(String mimeType) {
+	public static boolean isSupported(String mimeType) {
 		return getRawMetadataProcessor().isSupported(mimeType);
 	}
 
@@ -89,12 +89,6 @@ public class RawMetadataProcessorUtil {
 		getRawMetadataProcessor().saveMetadata(fileVersion);
 	}
 
-	public void setRawMetadataProcessor(
-		RawMetadataProcessor rawMetadataProcessor) {
-
-		_rawMetadataProcessor = rawMetadataProcessor;
-	}
-
 	/**
 	 * Launches extraction of raw metadata from the file version.
 	 *
@@ -105,8 +99,14 @@ public class RawMetadataProcessorUtil {
 	 * @param fileVersion the latest file version from which the raw metadata is
 	 *        to be generated
 	 */
-	public void trigger(FileVersion fileVersion) {
+	public static void trigger(FileVersion fileVersion) {
 		getRawMetadataProcessor().trigger(fileVersion);
+	}
+
+	public void setRawMetadataProcessor(
+		RawMetadataProcessor rawMetadataProcessor) {
+
+		_rawMetadataProcessor = rawMetadataProcessor;
 	}
 
 	private static RawMetadataProcessor _rawMetadataProcessor;

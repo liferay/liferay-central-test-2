@@ -85,6 +85,10 @@ public class VideoProcessorUtil {
 		return getVideoProcessor().hasVideo(fileVersion);
 	}
 
+	public static boolean isSupported(String mimeType) {
+		return getVideoProcessor().isSupported(mimeType);
+	}
+
 	public static boolean isVideoSupported(FileVersion fileVersion) {
 		return getVideoProcessor().hasVideo(fileVersion);
 	}
@@ -93,16 +97,12 @@ public class VideoProcessorUtil {
 		return getVideoProcessor().isVideoSupported(mimeType);
 	}
 
+	public static void trigger(FileVersion fileVersion) {
+		getVideoProcessor().trigger(fileVersion);
+	}
+
 	public void setVideoProcessor(VideoProcessor videoProcessor) {
 		_videoProcessor = videoProcessor;
-	}
-
-	public boolean isSupported(String mimeType) {
-		return getVideoProcessor().isSupported(mimeType);
-	}
-
-	public void trigger(FileVersion fileVersion) {
-		getVideoProcessor().trigger(fileVersion);
 	}
 
 	private static VideoProcessor _videoProcessor;

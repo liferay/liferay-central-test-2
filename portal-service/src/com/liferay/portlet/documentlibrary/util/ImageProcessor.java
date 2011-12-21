@@ -48,13 +48,13 @@ public interface ImageProcessor {
 
 	public boolean isImageSupported(String mimeType);
 
+	public boolean isSupported(String mimeType);
+
 	public void storeThumbnail(
 			long companyId, long groupId, long fileEntryId, long fileVersionId,
 			long custom1ImageId, long custom2ImageId,
 			InputStream is, String type)
 		throws Exception;
-
-	public boolean isSupported(String mimeType);
 
 	public void trigger(FileVersion fileVersion);
 

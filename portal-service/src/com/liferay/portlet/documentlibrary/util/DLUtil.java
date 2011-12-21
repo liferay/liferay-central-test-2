@@ -326,7 +326,7 @@ public class DLUtil {
 		return sb.toString();
 	}
 
-	public static final String getFileEntryImage(
+	public static String getFileEntryImage(
 		FileEntry fileEntry, ThemeDisplay themeDisplay) {
 
 		StringBundler sb = new StringBundler(5);
@@ -387,19 +387,16 @@ public class DLUtil {
 	}
 
 	public static String getPreviewURL(
-			FileEntry fileEntry, FileVersion fileVersion,
-			ThemeDisplay themeDisplay, String queryString)
-		throws PortalException, SystemException {
+		FileEntry fileEntry, FileVersion fileVersion, ThemeDisplay themeDisplay,
+		String queryString) {
 
 		return getPreviewURL(
 			fileEntry, fileVersion, themeDisplay, queryString, true);
 	}
 
 	public static String getPreviewURL(
-			FileEntry fileEntry, FileVersion fileVersion,
-			ThemeDisplay themeDisplay, String queryString,
-			boolean appendToken)
-		throws PortalException, SystemException {
+		FileEntry fileEntry, FileVersion fileVersion, ThemeDisplay themeDisplay,
+		String queryString, boolean appendToken) {
 
 		StringBundler sb = new StringBundler(13);
 
@@ -410,8 +407,8 @@ public class DLUtil {
 		sb.append(StringPool.SLASH);
 		sb.append(fileEntry.getFolderId());
 		sb.append(StringPool.SLASH);
-		sb.append(HttpUtil.encodeURL(
-			HtmlUtil.unescape(fileEntry.getTitle()), true));
+		sb.append(
+			HttpUtil.encodeURL(HtmlUtil.unescape(fileEntry.getTitle()), true));
 		sb.append("?version=");
 		sb.append(fileVersion.getVersion());
 
@@ -532,11 +529,13 @@ public class DLUtil {
 		StringBundler sb = new StringBundler(5);
 
 		sb.append("max-height: ");
-		sb.append(PrefsPropsUtil.getLong(
-			PropsKeys.DL_FILE_ENTRY_THUMBNAIL_MAX_HEIGHT));
+		sb.append(
+			PrefsPropsUtil.getLong(
+				PropsKeys.DL_FILE_ENTRY_THUMBNAIL_MAX_HEIGHT));
 		sb.append("px; max-width: ");
-		sb.append(PrefsPropsUtil.getLong(
-			PropsKeys.DL_FILE_ENTRY_THUMBNAIL_MAX_WIDTH));
+		sb.append(
+			PrefsPropsUtil.getLong(
+				PropsKeys.DL_FILE_ENTRY_THUMBNAIL_MAX_WIDTH));
 		sb.append("px;");
 
 		return sb.toString();

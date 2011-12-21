@@ -789,9 +789,9 @@ public class WebServerServlet extends HttpServlet {
 			int thumbnailIndex = imageThumbnail - 1;
 
 			inputStream = ImageProcessorUtil.getThumbnailAsStream(
-					fileVersion, thumbnailIndex);
+				fileVersion, thumbnailIndex);
 			contentLength = ImageProcessorUtil.getThumbnailFileSize(
-					fileVersion, thumbnailIndex);
+				fileVersion, thumbnailIndex);
 
 			converted = true;
 		}
@@ -831,8 +831,8 @@ public class WebServerServlet extends HttpServlet {
 
 			fileName = FileUtil.stripExtension(fileName).concat(
 				StringPool.PERIOD).concat(type);
-			inputStream =
-				VideoProcessorUtil.getPreviewAsStream(fileVersion, type);
+			inputStream = VideoProcessorUtil.getPreviewAsStream(
+				fileVersion, type);
 			contentLength = VideoProcessorUtil.getPreviewFileSize(
 				fileVersion, type);
 

@@ -61,16 +61,16 @@ public class AudioProcessorUtil {
 		return getAudioProcessor().isAudioSupported(mimeType);
 	}
 
-	public void setAudioProcessor(AudioProcessor audioProcessor) {
-		_audioProcessor = audioProcessor;
-	}
-
-	public boolean isSupported(String mimeType) {
+	public static boolean isSupported(String mimeType) {
 		return getAudioProcessor().isSupported(mimeType);
 	}
 
-	public void trigger(FileVersion fileVersion) {
+	public static void trigger(FileVersion fileVersion) {
 		getAudioProcessor().trigger(fileVersion);
+	}
+
+	public void setAudioProcessor(AudioProcessor audioProcessor) {
+		_audioProcessor = audioProcessor;
 	}
 
 	private static AudioProcessor _audioProcessor;
