@@ -323,6 +323,10 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread>
 	public void setLastPostDate(Date lastPostDate) {
 		_columnBitmask = -1L;
 
+		if (_originalLastPostDate == null) {
+			_originalLastPostDate = _lastPostDate;
+		}
+
 		_lastPostDate = lastPostDate;
 	}
 
@@ -337,6 +341,12 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread>
 
 	public void setPriority(double priority) {
 		_columnBitmask = -1L;
+
+		if (!_setOriginalPriority) {
+			_setOriginalPriority = true;
+
+			_originalPriority = _priority;
+		}
 
 		_priority = priority;
 	}

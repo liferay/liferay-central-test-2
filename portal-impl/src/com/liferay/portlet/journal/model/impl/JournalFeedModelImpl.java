@@ -312,6 +312,10 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed>
 	public void setFeedId(String feedId) {
 		_columnBitmask = -1L;
 
+		if (_originalFeedId == null) {
+			_originalFeedId = _feedId;
+		}
+
 		_feedId = feedId;
 	}
 

@@ -354,6 +354,12 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage>
 	public void setNodeId(long nodeId) {
 		_columnBitmask = -1L;
 
+		if (!_setOriginalNodeId) {
+			_setOriginalNodeId = true;
+
+			_originalNodeId = _nodeId;
+		}
+
 		_nodeId = nodeId;
 	}
 
@@ -374,6 +380,10 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage>
 	public void setTitle(String title) {
 		_columnBitmask = -1L;
 
+		if (_originalTitle == null) {
+			_originalTitle = _title;
+		}
+
 		_title = title;
 	}
 
@@ -388,6 +398,12 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage>
 
 	public void setVersion(double version) {
 		_columnBitmask = -1L;
+
+		if (!_setOriginalVersion) {
+			_setOriginalVersion = true;
+
+			_originalVersion = _version;
+		}
 
 		_version = version;
 	}

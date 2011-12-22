@@ -405,6 +405,10 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry>
 	public void setDisplayDate(Date displayDate) {
 		_columnBitmask = -1L;
 
+		if (_originalDisplayDate == null) {
+			_originalDisplayDate = _displayDate;
+		}
+
 		_displayDate = displayDate;
 	}
 

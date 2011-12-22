@@ -153,6 +153,12 @@ public class PollsChoiceModelImpl extends BaseModelImpl<PollsChoice>
 	public void setQuestionId(long questionId) {
 		_columnBitmask = -1L;
 
+		if (!_setOriginalQuestionId) {
+			_setOriginalQuestionId = true;
+
+			_originalQuestionId = _questionId;
+		}
+
 		_questionId = questionId;
 	}
 
@@ -171,6 +177,10 @@ public class PollsChoiceModelImpl extends BaseModelImpl<PollsChoice>
 
 	public void setName(String name) {
 		_columnBitmask = -1L;
+
+		if (_originalName == null) {
+			_originalName = _name;
+		}
 
 		_name = name;
 	}

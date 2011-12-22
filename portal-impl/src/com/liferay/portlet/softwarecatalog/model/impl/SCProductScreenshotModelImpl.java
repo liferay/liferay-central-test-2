@@ -142,6 +142,12 @@ public class SCProductScreenshotModelImpl extends BaseModelImpl<SCProductScreens
 	public void setProductEntryId(long productEntryId) {
 		_columnBitmask = -1L;
 
+		if (!_setOriginalProductEntryId) {
+			_setOriginalProductEntryId = true;
+
+			_originalProductEntryId = _productEntryId;
+		}
+
 		_productEntryId = productEntryId;
 	}
 
@@ -195,6 +201,12 @@ public class SCProductScreenshotModelImpl extends BaseModelImpl<SCProductScreens
 
 	public void setPriority(int priority) {
 		_columnBitmask = -1L;
+
+		if (!_setOriginalPriority) {
+			_setOriginalPriority = true;
+
+			_originalPriority = _priority;
+		}
 
 		_priority = priority;
 	}

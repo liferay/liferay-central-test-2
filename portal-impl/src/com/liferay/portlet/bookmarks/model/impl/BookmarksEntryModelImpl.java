@@ -326,6 +326,12 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry>
 	public void setFolderId(long folderId) {
 		_columnBitmask = -1L;
 
+		if (!_setOriginalFolderId) {
+			_setOriginalFolderId = true;
+
+			_originalFolderId = _folderId;
+		}
+
 		_folderId = folderId;
 	}
 

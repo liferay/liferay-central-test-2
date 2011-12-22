@@ -321,6 +321,12 @@ public class BookmarksFolderModelImpl extends BaseModelImpl<BookmarksFolder>
 	public void setParentFolderId(long parentFolderId) {
 		_columnBitmask = -1L;
 
+		if (!_setOriginalParentFolderId) {
+			_setOriginalParentFolderId = true;
+
+			_originalParentFolderId = _parentFolderId;
+		}
+
 		_parentFolderId = parentFolderId;
 	}
 

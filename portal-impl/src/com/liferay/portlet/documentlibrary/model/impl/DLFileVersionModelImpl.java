@@ -321,6 +321,12 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion>
 	public void setFileEntryId(long fileEntryId) {
 		_columnBitmask = -1L;
 
+		if (!_setOriginalFileEntryId) {
+			_setOriginalFileEntryId = true;
+
+			_originalFileEntryId = _fileEntryId;
+		}
+
 		_fileEntryId = fileEntryId;
 	}
 

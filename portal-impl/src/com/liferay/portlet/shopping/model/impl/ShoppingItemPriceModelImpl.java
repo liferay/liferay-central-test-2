@@ -128,6 +128,12 @@ public class ShoppingItemPriceModelImpl extends BaseModelImpl<ShoppingItemPrice>
 	public void setItemId(long itemId) {
 		_columnBitmask = -1L;
 
+		if (!_setOriginalItemId) {
+			_setOriginalItemId = true;
+
+			_originalItemId = _itemId;
+		}
+
 		_itemId = itemId;
 	}
 

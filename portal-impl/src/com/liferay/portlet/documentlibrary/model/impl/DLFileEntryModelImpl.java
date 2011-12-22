@@ -383,6 +383,12 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 	public void setFolderId(long folderId) {
 		_columnBitmask = -1L;
 
+		if (!_setOriginalFolderId) {
+			_setOriginalFolderId = true;
+
+			_originalFolderId = _folderId;
+		}
+
 		_folderId = folderId;
 	}
 
@@ -402,6 +408,10 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 
 	public void setName(String name) {
 		_columnBitmask = -1L;
+
+		if (_originalName == null) {
+			_originalName = _name;
+		}
 
 		_name = name;
 	}

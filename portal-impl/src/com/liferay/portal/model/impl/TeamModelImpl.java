@@ -275,6 +275,10 @@ public class TeamModelImpl extends BaseModelImpl<Team> implements TeamModel {
 	public void setName(String name) {
 		_columnBitmask = -1L;
 
+		if (_originalName == null) {
+			_originalName = _name;
+		}
+
 		_name = name;
 	}
 

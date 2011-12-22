@@ -311,6 +311,10 @@ public class JournalTemplateModelImpl extends BaseModelImpl<JournalTemplate>
 	public void setTemplateId(String templateId) {
 		_columnBitmask = -1L;
 
+		if (_originalTemplateId == null) {
+			_originalTemplateId = _templateId;
+		}
+
 		_templateId = templateId;
 	}
 

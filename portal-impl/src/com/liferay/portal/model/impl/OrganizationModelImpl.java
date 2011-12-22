@@ -255,6 +255,10 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization>
 	public void setName(String name) {
 		_columnBitmask = -1L;
 
+		if (_originalName == null) {
+			_originalName = _name;
+		}
+
 		_name = name;
 	}
 

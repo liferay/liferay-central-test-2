@@ -187,6 +187,12 @@ public class OrgLaborModelImpl extends BaseModelImpl<OrgLabor>
 	public void setOrganizationId(long organizationId) {
 		_columnBitmask = -1L;
 
+		if (!_setOriginalOrganizationId) {
+			_setOriginalOrganizationId = true;
+
+			_originalOrganizationId = _organizationId;
+		}
+
 		_organizationId = organizationId;
 	}
 

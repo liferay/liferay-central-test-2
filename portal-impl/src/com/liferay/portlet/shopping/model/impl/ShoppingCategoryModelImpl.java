@@ -259,6 +259,12 @@ public class ShoppingCategoryModelImpl extends BaseModelImpl<ShoppingCategory>
 	public void setParentCategoryId(long parentCategoryId) {
 		_columnBitmask = -1L;
 
+		if (!_setOriginalParentCategoryId) {
+			_setOriginalParentCategoryId = true;
+
+			_originalParentCategoryId = _parentCategoryId;
+		}
+
 		_parentCategoryId = parentCategoryId;
 	}
 

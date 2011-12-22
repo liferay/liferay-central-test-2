@@ -304,6 +304,12 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory>
 	public void setParentCategoryId(long parentCategoryId) {
 		_columnBitmask = -1L;
 
+		if (!_setOriginalParentCategoryId) {
+			_setOriginalParentCategoryId = true;
+
+			_originalParentCategoryId = _parentCategoryId;
+		}
+
 		_parentCategoryId = parentCategoryId;
 	}
 

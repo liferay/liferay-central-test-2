@@ -296,6 +296,10 @@ public class WorkflowDefinitionLinkModelImpl extends BaseModelImpl<WorkflowDefin
 	public void setWorkflowDefinitionName(String workflowDefinitionName) {
 		_columnBitmask = -1L;
 
+		if (_originalWorkflowDefinitionName == null) {
+			_originalWorkflowDefinitionName = _workflowDefinitionName;
+		}
+
 		_workflowDefinitionName = workflowDefinitionName;
 	}
 

@@ -435,6 +435,10 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 	public void setArticleId(String articleId) {
 		_columnBitmask = -1L;
 
+		if (_originalArticleId == null) {
+			_originalArticleId = _articleId;
+		}
+
 		_articleId = articleId;
 	}
 
@@ -449,6 +453,12 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 
 	public void setVersion(double version) {
 		_columnBitmask = -1L;
+
+		if (!_setOriginalVersion) {
+			_setOriginalVersion = true;
+
+			_originalVersion = _version;
+		}
 
 		_version = version;
 	}

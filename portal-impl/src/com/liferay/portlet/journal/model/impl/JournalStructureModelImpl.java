@@ -300,6 +300,10 @@ public class JournalStructureModelImpl extends BaseModelImpl<JournalStructure>
 	public void setStructureId(String structureId) {
 		_columnBitmask = -1L;
 
+		if (_originalStructureId == null) {
+			_originalStructureId = _structureId;
+		}
+
 		_structureId = structureId;
 	}
 

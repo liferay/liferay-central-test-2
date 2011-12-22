@@ -356,6 +356,12 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 	public void setParentLayoutId(long parentLayoutId) {
 		_columnBitmask = -1L;
 
+		if (!_setOriginalParentLayoutId) {
+			_setOriginalParentLayoutId = true;
+
+			_originalParentLayoutId = _parentLayoutId;
+		}
+
 		_parentLayoutId = parentLayoutId;
 	}
 

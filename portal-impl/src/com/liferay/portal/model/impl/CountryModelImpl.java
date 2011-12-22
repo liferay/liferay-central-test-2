@@ -178,6 +178,10 @@ public class CountryModelImpl extends BaseModelImpl<Country>
 	public void setName(String name) {
 		_columnBitmask = -1L;
 
+		if (_originalName == null) {
+			_originalName = _name;
+		}
+
 		_name = name;
 	}
 
