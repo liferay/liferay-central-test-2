@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2000-2011 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
@@ -26,10 +26,10 @@ import org.slf4j.spi.LocationAwareLogger;
 /**
  * @author Michael C. Han
  */
-public class LiferayLoggerAdapter extends MarkerIgnoringBase
-	implements LocationAwareLogger, Serializable {
+public class LiferayLoggerAdapter
+	extends MarkerIgnoringBase implements LocationAwareLogger, Serializable {
 
-	LiferayLoggerAdapter(Log log) {
+	public LiferayLoggerAdapter(Log log) {
 		_log = log;
 	}
 
@@ -37,25 +37,26 @@ public class LiferayLoggerAdapter extends MarkerIgnoringBase
 		_log.debug(message);
 	}
 
-	public void debug(String format, Object arg) {
+	public void debug(String format, Object argument) {
 		if (isDebugEnabled()) {
-			String message = MessageFormatter.format(format, arg);
+			String message = MessageFormatter.format(format, argument);
 
 			_log.debug(message);
 		}
 	}
 
-	public void debug(String format, Object arg1, Object arg2) {
+	public void debug(String format, Object argument1, Object argument2) {
 		if (isDebugEnabled()) {
-			String message = MessageFormatter.format(format, arg1, arg2);
+			String message = MessageFormatter.format(
+				format, argument1, argument2);
 
 			_log.debug(message);
 		}
 	}
 
-	public void debug(String format, Object[] argArray) {
+	public void debug(String format, Object[] arguments) {
 		if (isDebugEnabled()) {
-			String message = MessageFormatter.format(format, argArray);
+			String message = MessageFormatter.format(format, arguments);
 
 			_log.debug(message);
 		}
@@ -69,25 +70,26 @@ public class LiferayLoggerAdapter extends MarkerIgnoringBase
 		_log.error(message);
 	}
 
-	public void error(String format, Object arg) {
+	public void error(String format, Object argument) {
 		if (isErrorEnabled()) {
-			String message = MessageFormatter.format(format, arg);
+			String message = MessageFormatter.format(format, argument);
 
 			_log.error(message);
 		}
 	}
 
-	public void error(String format, Object arg1, Object arg2) {
+	public void error(String format, Object argument1, Object argument2) {
 		if (isErrorEnabled()) {
-			String message = MessageFormatter.format(format, arg1, arg2);
+			String message = MessageFormatter.format(
+				format, argument1, argument2);
 
 			_log.error(message);
 		}
 	}
 
-	public void error(String format, Object[] argArray) {
+	public void error(String format, Object[] arguments) {
 		if (isErrorEnabled()) {
-			String message = MessageFormatter.format(format, argArray);
+			String message = MessageFormatter.format(format, arguments);
 
 			_log.error(message);
 		}
@@ -95,6 +97,39 @@ public class LiferayLoggerAdapter extends MarkerIgnoringBase
 
 	public void error(String message, Throwable t) {
 		_log.error(message, t);
+	}
+
+	public void info(String message) {
+		_log.info(message);
+	}
+
+	public void info(String format, Object argument) {
+		if (isInfoEnabled()) {
+			String message = MessageFormatter.format(format, argument);
+
+			_log.info(message);
+		}
+	}
+
+	public void info(String format, Object argument1, Object argument2) {
+		if (isInfoEnabled()) {
+			String message = MessageFormatter.format(
+				format, argument1, argument2);
+
+			_log.info(message);
+		}
+	}
+
+	public void info(String format, Object[] arguments) {
+		if (isInfoEnabled()) {
+			String message = MessageFormatter.format(format, arguments);
+
+			_log.info(message);
+		}
+	}
+
+	public void info(String message, Throwable t) {
+		_log.info(message, t);
 	}
 
 	public boolean isDebugEnabled() {
@@ -117,67 +152,36 @@ public class LiferayLoggerAdapter extends MarkerIgnoringBase
 		return _log.isWarnEnabled();
 	}
 
-	public void info(String message) {
-		_log.info(message);
-	}
-
-	public void info(String format, Object arg) {
-		if (isInfoEnabled()) {
-			String message = MessageFormatter.format(format, arg);
-
-			_log.info(message);
-		}
-	}
-
-	public void info(String format, Object arg1, Object arg2) {
-		if (isInfoEnabled()) {
-			String message = MessageFormatter.format(format, arg1, arg2);
-
-			_log.info(message);
-		}
-	}
-
-	public void info(String format, Object[] argArray) {
-		if (isInfoEnabled()) {
-			String message = MessageFormatter.format(format, argArray);
-
-			_log.info(message);
-		}
-	}
-
-	public void info(String message, Throwable t) {
-		_log.info(message, t);
-	}
-
 	public void log(
 		Marker marker, String fqcn, int level, String message, Throwable t) {
-		throw new UnsupportedOperationException();
 
+		throw new UnsupportedOperationException();
 	}
 
 	public void trace(String message) {
 		_log.trace(message);
 	}
 
-	public void trace(String format, Object arg) {
+	public void trace(String format, Object argument) {
 		if (isTraceEnabled()) {
-			String message = MessageFormatter.format(format, arg);
+			String message = MessageFormatter.format(format, argument);
 
 			_log.trace(message);
 		}
 	}
 
-	public void trace(String format, Object arg1, Object arg2) {
+	public void trace(String format, Object argument1, Object argument2) {
 		if (isTraceEnabled()) {
-			String message = MessageFormatter.format(format, arg1, arg2);
+			String message = MessageFormatter.format(
+				format, argument1, argument2);
 
 			_log.trace(message);
 		}
 	}
 
-	public void trace(String format, Object[] argArray) {
+	public void trace(String format, Object[] arguments) {
 		if (isTraceEnabled()) {
-			String message = MessageFormatter.format(format, argArray);
+			String message = MessageFormatter.format(format, arguments);
 
 			_log.trace(message);
 		}
@@ -191,25 +195,26 @@ public class LiferayLoggerAdapter extends MarkerIgnoringBase
 		_log.warn(message);
 	}
 
-	public void warn(String format, Object arg) {
+	public void warn(String format, Object argument) {
 		if (isWarnEnabled()) {
-			String message = MessageFormatter.format(format, arg);
+			String message = MessageFormatter.format(format, argument);
 
 			_log.warn(message);
 		}
 	}
 
-	public void warn(String format, Object[] argArray) {
+	public void warn(String format, Object argument1, Object argument2) {
 		if (isWarnEnabled()) {
-			String message = MessageFormatter.format(format, argArray);
+			String message = MessageFormatter.format(
+				format, argument1, argument2);
 
 			_log.warn(message);
 		}
 	}
 
-	public void warn(String format, Object arg1, Object arg2) {
+	public void warn(String format, Object[] arguments) {
 		if (isWarnEnabled()) {
-			String message = MessageFormatter.format(format, arg1, arg2);
+			String message = MessageFormatter.format(format, arguments);
 
 			_log.warn(message);
 		}

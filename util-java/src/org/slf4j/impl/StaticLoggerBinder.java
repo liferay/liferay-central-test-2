@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2000-2011 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
@@ -31,7 +31,7 @@ public class StaticLoggerBinder implements LoggerFactoryBinder {
 	}
 
 	public ILoggerFactory getLoggerFactory() {
-		return _loggerFactory;
+		return _iLoggerFactory;
 	}
 
 	public String getLoggerFactoryClassStr() {
@@ -39,7 +39,7 @@ public class StaticLoggerBinder implements LoggerFactoryBinder {
 	}
 
 	private StaticLoggerBinder() {
-		_loggerFactory = new LiferayLoggerFactory();
+		_iLoggerFactory = new LiferayLoggerFactory();
 	}
 
 	private static final String _LOGGER_FACTORY_CLASS_NAME =
@@ -48,6 +48,6 @@ public class StaticLoggerBinder implements LoggerFactoryBinder {
 	private static final StaticLoggerBinder _SINGLETON =
 		new StaticLoggerBinder();
 
-	private ILoggerFactory _loggerFactory;
+	private ILoggerFactory _iLoggerFactory;
 
 }

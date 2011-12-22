@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2000-2011 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
@@ -26,7 +26,7 @@ public class StaticMarkerBinder implements MarkerFactoryBinder {
 	public static final StaticMarkerBinder SINGLETON = new StaticMarkerBinder();
 
 	public IMarkerFactory getMarkerFactory() {
-		return markerFactory;
+		return _iMarkerFactory;
 	}
 
 	public String getMarkerFactoryClassStr() {
@@ -36,6 +36,6 @@ public class StaticMarkerBinder implements MarkerFactoryBinder {
 	private StaticMarkerBinder() {
 	}
 
-	private IMarkerFactory markerFactory = new BasicMarkerFactory();
+	private IMarkerFactory _iMarkerFactory = new BasicMarkerFactory();
 
 }

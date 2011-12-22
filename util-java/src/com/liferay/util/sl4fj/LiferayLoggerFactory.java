@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2000-2011 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
@@ -44,7 +44,7 @@ public class LiferayLoggerFactory implements ILoggerFactory {
 		_readLock.lock();
 
 		try {
-			logger = _loggerMap.get(name);
+			logger = _loggers.get(name);
 		}
 		finally {
 			_readLock.unlock();
@@ -58,7 +58,7 @@ public class LiferayLoggerFactory implements ILoggerFactory {
 
 				logger = new LiferayLoggerAdapter(log);
 
-				_loggerMap.put(name, logger);
+				_loggers.put(name, logger);
 			}
 			finally {
 				_writeLock.unlock();
@@ -69,7 +69,7 @@ public class LiferayLoggerFactory implements ILoggerFactory {
 		return logger;
 	}
 
-	private Map<String, Logger> _loggerMap = new HashMap<String, Logger>();
+	private Map<String, Logger> _loggers = new HashMap<String, Logger>();
 	private Lock _readLock;
 	private Lock _writeLock;
 
