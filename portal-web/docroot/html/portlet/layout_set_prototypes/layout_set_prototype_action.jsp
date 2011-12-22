@@ -63,11 +63,11 @@ Group group = layoutSetPrototype.getGroup();
 			</liferay-portlet:actionURL>
 
 			<liferay-ui:icon
-					image="view"
-					message="view-pages"
-					target="_blank"
-					url="<%= viewPagesURL %>"
-					/>
+				image="view"
+				message="view-pages"
+				target="_blank"
+				url="<%= viewPagesURL %>"
+			/>
 		</c:if>
 	</c:if>
 
