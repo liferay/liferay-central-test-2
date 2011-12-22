@@ -285,10 +285,10 @@ public class DDMXSDImpl implements DDMXSD {
 
 			jsonObject.put("id", dynamicElementElement.attributeValue("name"));
 
-			String type = jsonObject.getString("type");
-
 			JSONArray hiddenAttributesJSONArray =
 				JSONFactoryUtil.createJSONArray();
+
+			String type = jsonObject.getString("type");
 
 			if (type.equals(_TYPE_CHECKBOX)) {
 				hiddenAttributesJSONArray.put("required");
