@@ -21,8 +21,6 @@ ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_
 
 BookmarksFolder folder = null;
 
-long curFolderId = GetterUtil.getLong((String)request.getAttribute("view.jsp-folderId"));
-
 long folderId = 0;
 
 if (row != null) {
@@ -33,7 +31,7 @@ if (row != null) {
 else {
 	folder = (BookmarksFolder)request.getAttribute("view.jsp-folder");
 
-	folderId = curFolderId;
+	folderId = GetterUtil.getLong((String)request.getAttribute("view.jsp-folderId"));
 }
 
 String modelResource = null;
@@ -69,8 +67,8 @@ if (row == null) {
 		<portlet:renderURL var="editURL">
 			<portlet:param name="struts_action" value="/bookmarks/edit_folder" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
-			<portlet:param name="curFolderId" value="<%= String.valueOf(curFolderId) %>" />
 			<portlet:param name="folderId" value="<%= String.valueOf(folder.getFolderId()) %>" />
+			<portlet:param name="mergeWithParentFolderDisabled" value="<%= (row == null) && (folderId == folder.getFolderId()) %>" />
 		</portlet:renderURL>
 
 		<liferay-ui:icon

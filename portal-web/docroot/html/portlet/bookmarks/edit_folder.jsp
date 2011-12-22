@@ -21,11 +21,11 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 BookmarksFolder folder = (BookmarksFolder)request.getAttribute(WebKeys.BOOKMARKS_FOLDER);
 
-long curFolderId = ParamUtil.getLong(request, "curFolderId");
-
 long folderId = BeanParamUtil.getLong(folder, request, "folderId");
 
 long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", BookmarksFolderConstants.DEFAULT_PARENT_FOLDER_ID);
+
+long mergeWithParentFolderDisabled = ParamUtil.getBoolean(request, "mergeWithParentFolderDisabled");
 %>
 
 <liferay-util:include page="/html/portlet/bookmarks/top_links.jsp" />
@@ -90,7 +90,7 @@ long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", B
 
 				<aui:button name="removeFolderButton" onClick="<%= taglibRemoveFolder %>" value="remove" />
 
-				<aui:input disabled="<%= (curFolderId == folderId) %>" inlineLabel="left" label="merge-with-parent-folder" name="mergeWithParentFolder" type="checkbox" />
+				<aui:input disabled="<%= mergeWithParentFolderDisabled %>" inlineLabel="left" label="merge-with-parent-folder" name="mergeWithParentFolder" type="checkbox" />
 			</aui:field-wrapper>
 		</c:if>
 
