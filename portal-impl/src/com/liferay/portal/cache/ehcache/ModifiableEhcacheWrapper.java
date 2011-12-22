@@ -471,7 +471,7 @@ public class ModifiableEhcacheWrapper implements Ehcache {
 	}
 
 	public void removeAll() throws CacheException, IllegalStateException {
-		if (!_ehcache.getStatus().equals(Status.STATUS_ALIVE)) {
+		if (!isStatusAlive()) {
 			return;
 		}
 
@@ -481,7 +481,7 @@ public class ModifiableEhcacheWrapper implements Ehcache {
 	public void removeAll(boolean doNotNotifyCacheReplicators)
 		throws CacheException, IllegalStateException {
 
-		if (!_ehcache.getStatus().equals(Status.STATUS_ALIVE)) {
+		if (!isStatusAlive()) {
 			return;
 		}
 
@@ -495,7 +495,7 @@ public class ModifiableEhcacheWrapper implements Ehcache {
 	}
 
 	public boolean removeElement(Element element) throws NullPointerException {
-		if (!_ehcache.getStatus().equals(Status.STATUS_ALIVE)) {
+		if (!isStatusAlive()) {
 			return true;
 		}
 
@@ -509,7 +509,7 @@ public class ModifiableEhcacheWrapper implements Ehcache {
 	}
 
 	public boolean removeQuiet(Object key) throws IllegalStateException {
-		if (!_ehcache.getStatus().equals(Status.STATUS_ALIVE)) {
+		if (!isStatusAlive()) {
 			return true;
 		}
 
@@ -517,7 +517,7 @@ public class ModifiableEhcacheWrapper implements Ehcache {
 	}
 
 	public boolean removeQuiet(Serializable key) throws IllegalStateException {
-		if (!_ehcache.getStatus().equals(Status.STATUS_ALIVE)) {
+		if (!isStatusAlive()) {
 			return true;
 		}
 
@@ -531,7 +531,7 @@ public class ModifiableEhcacheWrapper implements Ehcache {
 	public boolean removeWithWriter(Object key)
 		throws CacheException, IllegalStateException {
 
-		if (!_ehcache.getStatus().equals(Status.STATUS_ALIVE)) {
+		if (!isStatusAlive()) {
 			return true;
 		}
 
@@ -541,12 +541,12 @@ public class ModifiableEhcacheWrapper implements Ehcache {
 	public Element replace(Element element) throws NullPointerException {
 		return _ehcache.replace(element);
 	}
-
 	public boolean replace(Element oldElement, Element newElement)
 		throws IllegalArgumentException, NullPointerException {
 
 		return _ehcache.replace(oldElement, newElement);
 	}
+
 	public void setBootstrapCacheLoader(
 			BootstrapCacheLoader bootstrapCacheLoader)
 		throws CacheException {
@@ -650,6 +650,17 @@ public class ModifiableEhcacheWrapper implements Ehcache {
 		throws UnsupportedOperationException {
 
 		_ehcache.waitUntilClusterCoherent();
+	}
+
+	protected boolean isStatusAlive() {
+		Status status = _ehcache.getStatus(); 
+
+		if (status.equals(Status.STATUS_ALIVE)) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	private Ehcache _ehcache;
