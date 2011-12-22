@@ -249,7 +249,7 @@ public class SitesUtil {
 		Map<String, String[]> parameterMap = getLayoutSetPrototypeParameters(
 			serviceContext);
 
-		setLayoutSetPrototypeLinkEnabled(
+		setLayoutSetPrototypeLinkEnabledParameter(
 			parameterMap, targetLayoutSet, serviceContext);
 
 		if (!targetLayoutSet.isPrivateLayout()) {
@@ -582,7 +582,7 @@ public class SitesUtil {
 		Map<String, String[]> parameterMap = getLayoutSetPrototypeParameters(
 			serviceContext);
 
-		setLayoutSetPrototypeLinkEnabled(
+		setLayoutSetPrototypeLinkEnabledParameter(
 			parameterMap, layoutSet, serviceContext);
 
 		LayoutServiceUtil.importLayouts(
@@ -769,7 +769,7 @@ public class SitesUtil {
 		}
 	}
 
-	protected static void setLayoutSetPrototypeLinkEnabled(
+	protected static void setLayoutSetPrototypeLinkEnabledParameter(
 		Map<String, String[]> parameterMap, LayoutSet targetLayoutSet,
 		ServiceContext serviceContext) {
 
