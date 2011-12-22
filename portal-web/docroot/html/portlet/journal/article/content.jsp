@@ -893,9 +893,8 @@ private void _format(long groupId, Element contentParentElement, Element xsdPare
 					if (Validator.isNull(elLanguageId)) {
 						continue;
 					}
-					else {
-						elLanguageId = toLanguageId;
-					}
+
+					elLanguageId = toLanguageId;
 				}
 			}
 			else {
