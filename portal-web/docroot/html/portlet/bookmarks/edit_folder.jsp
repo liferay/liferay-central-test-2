@@ -25,7 +25,7 @@ long folderId = BeanParamUtil.getLong(folder, request, "folderId");
 
 long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", BookmarksFolderConstants.DEFAULT_PARENT_FOLDER_ID);
 
-long mergeWithParentFolderDisabled = ParamUtil.getBoolean(request, "mergeWithParentFolderDisabled");
+boolean mergeWithParentFolderDisabled = ParamUtil.getBoolean(request, "mergeWithParentFolderDisabled");
 %>
 
 <liferay-util:include page="/html/portlet/bookmarks/top_links.jsp" />
