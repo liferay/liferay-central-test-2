@@ -1296,6 +1296,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 		}
 
 		// Permissions
+
 		if (!MapUtil.getBoolean(
 				_parameterMap, PortletDataHandlerKeys.PERMISSIONS)) {
 
