@@ -653,7 +653,7 @@ public class ModifiableEhcacheWrapper implements Ehcache {
 	}
 
 	protected boolean isStatusAlive() {
-		Status status = _ehcache.getStatus(); 
+		Status status = _ehcache.getStatus();
 
 		if (status.equals(Status.STATUS_ALIVE)) {
 			return true;
