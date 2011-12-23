@@ -37,7 +37,6 @@ import com.liferay.portal.model.Company;
 import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.Group;
-import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.PasswordPolicy;
 import com.liferay.portal.model.Phone;
@@ -511,17 +510,19 @@ public class UserImpl extends UserBaseImpl {
 		int max = PropsValues.MY_SITES_MAX_ELEMENTS;
 
 		if (max == 1) {
-			// Ensure try to query not just control panel group
+
+			// Increment so that we return more than just the Control Panel
+			// group
+
 			max++;
 		}
 
-		List<Group> groups = getMySites(
-			true, PropsValues.MY_SITES_MAX_ELEMENTS);
+		List<Group> groups = getMySites(true, max);
 
 		if (groups.size() == 1) {
 			Group group = groups.get(0);
 
-			if (GroupConstants.CONTROL_PANEL.equals(group.getName())) {
+			if (group.isControlPanel()) {
 				return false;
 			}
 			else {
