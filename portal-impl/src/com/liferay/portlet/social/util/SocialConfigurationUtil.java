@@ -404,7 +404,6 @@ public class SocialConfigurationUtil {
 		if (participationValueElement != null) {
 			increment = GetterUtil.getInteger(
 				participationValueElement.getText());
-
 		}
 
 		activityCounterDefinition.setIncrement(increment);
