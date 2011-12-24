@@ -590,6 +590,30 @@ public class SitesUtil {
 			parameterMap, inputStream);
 	}
 
+	public static boolean isLayoutModifiedSinceLastMerge(Layout layout)
+		throws PortalException, SystemException {
+
+		if (layout == null) {
+			return false;
+		}
+
+		LayoutSet existingLayoutSet = layout.getLayoutSet();
+
+		long lastMergeTime = GetterUtil.getLong(
+			existingLayoutSet.getSettingsProperty("last-merge-time"));
+
+		Date existingLayoutModifiedDate = layout.getModifiedDate();
+
+		if ((existingLayoutModifiedDate != null) &&
+			(existingLayoutModifiedDate.getTime() > lastMergeTime) &&
+			isLayoutUpdateable(layout)) {
+
+			return true;
+		}
+
+		return false;
+	}
+
 	public static boolean isLayoutSetPrototypeUpdateable(LayoutSet layoutSet) {
 		if (!layoutSet.isLayoutSetPrototypeLinkEnabled()) {
 			return true;

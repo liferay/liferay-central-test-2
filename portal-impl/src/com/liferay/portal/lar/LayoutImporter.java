@@ -876,6 +876,12 @@ public class LayoutImporter {
 
 			existingLayout = LayoutUtil.fetchByG_P_SPLU(
 				groupId, privateLayout, layout.getUuid());
+
+			if (SitesUtil.isLayoutModifiedSinceLastMerge(existingLayout)) {
+				newLayoutsMap.put(oldLayoutId, existingLayout);
+
+				return;
+			}
 		}
 		else {
 

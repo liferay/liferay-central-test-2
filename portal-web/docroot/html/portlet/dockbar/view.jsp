@@ -18,9 +18,11 @@
 
 <%
 Group group = null;
+LayoutSet layoutSet = null;
 
 if (layout != null) {
 	group = layout.getGroup();
+	layoutSet = layout.getLayoutSet();
 }
 
 List<Portlet> portlets = new ArrayList<Portlet>();
@@ -364,7 +366,15 @@ for (String portletId : PropsValues.DOCKBAR_ADD_PORTLETS) {
 	</c:if>
 </div>
 
-<c:if test="<%= !SitesUtil.isLayoutUpdateable(layout) || layout.isLayoutPrototypeLinkEnabled() %>">
+<c:if test="<%= (layoutSet != null) && Validator.isNotNull(layoutSet.getLayoutSetPrototypeUuid()) && layoutSet.isLayoutSetPrototypeLinkEnabled() && SitesUtil.isLayoutModifiedSinceLastMerge(layout) %>">
+	<div class="page-customization-bar">
+		<img alt="" class="customized-icon" src="<%= themeDisplay.getPathThemeImages() %>/common/edit.png" />
+
+		<liferay-ui:message key="this-page-has-been-changed-since-the-last-update-from-the-site-template" />
+	</div>
+</c:if>
+
+<c:if test="<%= layout.isLayoutPrototypeLinkEnabled() %>">
 	<div class="page-customization-bar">
 		<img alt="" class="customized-icon" src="<%= themeDisplay.getPathThemeImages() %>/common/site_icon.png" />
 
