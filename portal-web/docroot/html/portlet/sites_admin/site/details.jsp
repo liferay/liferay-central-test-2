@@ -37,7 +37,7 @@ if (showPrototypes && (group != null)) {
 		try {
 			privateLayoutSet = LayoutSetLocalServiceUtil.getLayoutSet(liveGroup.getGroupId(), true);
 
-			privateLayoutSetPrototypeLinkEnabled = privateLayoutSet.getLayoutSetPrototypeLinkEnabled();
+			privateLayoutSetPrototypeLinkEnabled = privateLayoutSet.isLayoutSetPrototypeLinkEnabled();
 
 			String layoutSetPrototypeUuid = privateLayoutSet.getLayoutSetPrototypeUuid();
 
@@ -53,7 +53,7 @@ if (showPrototypes && (group != null)) {
 		try {
 			publicLayoutSet = LayoutSetLocalServiceUtil.getLayoutSet(liveGroup.getGroupId(), false);
 
-			publicLayoutSetPrototypeLinkEnabled = publicLayoutSet.getLayoutSetPrototypeLinkEnabled();
+			publicLayoutSetPrototypeLinkEnabled = publicLayoutSet.isLayoutSetPrototypeLinkEnabled();
 
 			String layoutSetPrototypeUuid = publicLayoutSet.getLayoutSetPrototypeUuid();
 

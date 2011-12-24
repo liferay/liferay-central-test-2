@@ -80,7 +80,7 @@ long userGroupId = BeanParamUtil.getLong(userGroup, request, "userGroupId");
 				try {
 					privateLayoutSet = LayoutSetLocalServiceUtil.getLayoutSet(userGroupGroup.getGroupId(), true);
 
-					privateLayoutSetPrototypeLinkEnabled = privateLayoutSet.getLayoutSetPrototypeLinkEnabled();
+					privateLayoutSetPrototypeLinkEnabled = privateLayoutSet.isLayoutSetPrototypeLinkEnabled();
 
 					String layoutSetPrototypeUuid = privateLayoutSet.getLayoutSetPrototypeUuid();
 
@@ -96,7 +96,7 @@ long userGroupId = BeanParamUtil.getLong(userGroup, request, "userGroupId");
 				try {
 					publicLayoutSet = LayoutSetLocalServiceUtil.getLayoutSet(userGroupGroup.getGroupId(), false);
 
-					publicLayoutSetPrototypeLinkEnabled = publicLayoutSet.getLayoutSetPrototypeLinkEnabled();
+					publicLayoutSetPrototypeLinkEnabled = publicLayoutSet.isLayoutSetPrototypeLinkEnabled();
 
 					String layoutSetPrototypeUuid = publicLayoutSet.getLayoutSetPrototypeUuid();
 

@@ -434,19 +434,19 @@ public class EditGroupAction extends PortletAction {
 		liveGroup = GroupServiceUtil.updateGroup(
 			liveGroup.getGroupId(), typeSettingsProperties.toString());
 
+		// Layout set prototypes
+
 		LayoutSet privateLayoutSet = liveGroup.getPrivateLayoutSet();
 		LayoutSet publicLayoutSet = liveGroup.getPublicLayoutSet();
 
-		// Layout set prototypes
-
 		if (!liveGroup.isStaged()) {
-			long publicLayoutSetPrototypeId = ParamUtil.getLong(
-				actionRequest, "publicLayoutSetPrototypeId");
 			long privateLayoutSetPrototypeId = ParamUtil.getLong(
 				actionRequest, "privateLayoutSetPrototypeId");
+			long publicLayoutSetPrototypeId = ParamUtil.getLong(
+				actionRequest, "publicLayoutSetPrototypeId");
 
-			if ((publicLayoutSetPrototypeId == 0) &&
-				(privateLayoutSetPrototypeId == 0)) {
+			if ((privateLayoutSetPrototypeId == 0) &&
+				(publicLayoutSetPrototypeId == 0)) {
 
 				long layoutSetPrototypeId = ParamUtil.getLong(
 					actionRequest, "layoutSetPrototypeId");
@@ -469,22 +469,24 @@ public class EditGroupAction extends PortletAction {
 					privateLayoutSetPrototypeId, serviceContext);
 			}
 			else {
-			boolean privateLayoutSetPrototypeLinkEnabled = ParamUtil.getBoolean(
-				serviceContext, "privateLayoutSetPrototypeLinkEnabled");
+				boolean privateLayoutSetPrototypeLinkEnabled =
+					ParamUtil.getBoolean(
+						serviceContext, "privateLayoutSetPrototypeLinkEnabled");
 
 				if (privateLayoutSetPrototypeLinkEnabled !=
-					privateLayoutSet.getLayoutSetPrototypeLinkEnabled()) {
+						privateLayoutSet.isLayoutSetPrototypeLinkEnabled()) {
 
 					LayoutSetServiceUtil.updateLayoutSetPrototypeLinkEnabled(
 						liveGroupId, true,
 						privateLayoutSetPrototypeLinkEnabled);
 				}
 
-			boolean publicLayoutSetPrototypeLinkEnabled = ParamUtil.getBoolean(
-				serviceContext, "publicLayoutSetPrototypeLinkEnabled");
+				boolean publicLayoutSetPrototypeLinkEnabled =
+					ParamUtil.getBoolean(
+						serviceContext, "publicLayoutSetPrototypeLinkEnabled");
 
 				if (publicLayoutSetPrototypeLinkEnabled !=
-					publicLayoutSet.getLayoutSetPrototypeLinkEnabled()) {
+						publicLayoutSet.isLayoutSetPrototypeLinkEnabled()) {
 
 					LayoutSetServiceUtil.updateLayoutSetPrototypeLinkEnabled(
 						liveGroupId, false,

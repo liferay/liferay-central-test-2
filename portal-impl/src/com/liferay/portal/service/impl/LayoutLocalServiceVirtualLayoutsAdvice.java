@@ -414,7 +414,7 @@ public class LayoutLocalServiceVirtualLayoutsAdvice
 			Group group, LayoutSet layoutSet)
 		throws Exception {
 
-		if (!layoutSet.getLayoutSetPrototypeLinkEnabled() ||
+		if (!layoutSet.isLayoutSetPrototypeLinkEnabled() ||
 			Validator.isNull(layoutSet.getLayoutSetPrototypeUuid()) ||
 			group.isLayoutPrototype() || group.isLayoutSetPrototype()) {
 

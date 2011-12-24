@@ -23,14 +23,12 @@ UnicodeProperties liveGroupTypeSettings = (UnicodeProperties)request.getAttribut
 
 LayoutSet privateLayoutSet = LayoutSetLocalServiceUtil.getLayoutSet(liveGroup.getGroupId(), true);
 LayoutSet publicLayoutSet = LayoutSetLocalServiceUtil.getLayoutSet(liveGroup.getGroupId(), false);
-
-boolean linkEnabled = (Validator.isNotNull(privateLayoutSet.getLayoutSetPrototypeUuid()) && privateLayoutSet.isLayoutSetPrototypeLinkEnabled()) || (Validator.isNotNull(publicLayoutSet.getLayoutSetPrototypeUuid()) && publicLayoutSet.isLayoutSetPrototypeLinkEnabled());
 %>
 
 <liferay-ui:error-marker key="errorSection" value="staging" />
 
 <c:choose>
-	<c:when test="<%= linkEnabled %>">
+	<c:when test="<%= Validator.isNotNull(privateLayoutSet.getLayoutSetPrototypeUuid()) && privateLayoutSet.isLayoutSetPrototypeLinkEnabled()) || (Validator.isNotNull(publicLayoutSet.getLayoutSetPrototypeUuid()) && publicLayoutSet.isLayoutSetPrototypeLinkEnabled() %>">
 		<div class="portlet-msg-info">
 			<liferay-ui:message key="staging-cannot-be-used-for-this-site-because-the-propagation-of-changes-from-the-site-template-is-enabled" />
 			<c:choose>
