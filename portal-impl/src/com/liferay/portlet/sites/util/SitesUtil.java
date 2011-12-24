@@ -593,7 +593,10 @@ public class SitesUtil {
 	public static boolean isLayoutModifiedSinceLastMerge(Layout layout)
 		throws PortalException, SystemException {
 
-		if (layout == null) {
+		if ((layout == null) ||
+			Validator.isNull(layout.getSourcePrototypeLayoutUuid()) ||
+			layout.isLayoutPrototypeLinkActive()) {
+
 			return false;
 		}
 
