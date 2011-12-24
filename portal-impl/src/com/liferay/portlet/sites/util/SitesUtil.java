@@ -716,7 +716,11 @@ public class SitesUtil {
 					layoutTypePortlet.getSourcePrototypeLayoutProperty(
 						"layoutUpdateable");
 
-				return GetterUtil.getBoolean(layoutUpdateable, true);
+				if (Validator.isNull(layoutUpdateable)) {
+					return true;
+				}
+
+				return GetterUtil.getBoolean(layoutUpdateable);
 			}
 		}
 		catch (Exception e) {
