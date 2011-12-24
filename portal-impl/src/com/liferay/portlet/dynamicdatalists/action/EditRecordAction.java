@@ -150,6 +150,7 @@ public class EditRecordAction extends PortletAction {
 			PortalUtil.getUploadPortletRequest(actionRequest);
 
 		long recordId = ParamUtil.getLong(uploadPortletRequest, "recordId");
+
 		long recordSetId = ParamUtil.getLong(
 			uploadPortletRequest, "recordSetId");
 
