@@ -701,6 +701,10 @@ public class SitesUtil {
 				return false;
 			}
 
+			if (Validator.isNull(layout.getSourcePrototypeLayoutUuid())) {
+				return true;
+			}
+
 			LayoutSet layoutSet = layout.getLayoutSet();
 
 			if (layoutSet.isLayoutSetPrototypeLinkActive()) {
