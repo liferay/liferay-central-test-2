@@ -927,14 +927,17 @@ public class LayoutImporter {
 						LAYOUTS_IMPORT_MODE_CREATED_FROM_PROTOTYPE)) {
 
 				importedLayout.setSourcePrototypeLayoutUuid(layout.getUuid());
+
+				layoutId = LayoutLocalServiceUtil.getNextLayoutId(
+					groupId, privateLayout);
 			}
 			else {
 				importedLayout.setUuid(layout.getUuid());
 			}
 
 			importedLayout.setGroupId(groupId);
-			importedLayout.setPrivateLayout(privateLayout);
 			importedLayout.setLayoutId(layoutId);
+			importedLayout.setPrivateLayout(privateLayout);
 
 			if (layout.isIconImage()) {
 				long iconImageId = CounterLocalServiceUtil.increment();
