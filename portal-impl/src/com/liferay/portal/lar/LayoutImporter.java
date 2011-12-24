@@ -936,8 +936,8 @@ public class LayoutImporter {
 			}
 
 			importedLayout.setGroupId(groupId);
-			importedLayout.setLayoutId(layoutId);
 			importedLayout.setPrivateLayout(privateLayout);
+			importedLayout.setLayoutId(layoutId);
 
 			if (layout.isIconImage()) {
 				long iconImageId = CounterLocalServiceUtil.increment();

@@ -708,7 +708,6 @@ public class SitesUtil {
 			LayoutSet layoutSet = layout.getLayoutSet();
 
 			if (layoutSet.isLayoutSetPrototypeLinkActive()) {
-
 				boolean layoutSetPrototypeUpdateable =
 					isLayoutSetPrototypeUpdateable(layoutSet);
 
