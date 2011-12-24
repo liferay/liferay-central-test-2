@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2011 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -54,8 +54,7 @@ public interface DDL {
 
 	public String getRecordFileUploadPath(DDLRecord record);
 
-	public JSONObject getRecordJSONObject(DDLRecord record)
-		throws Exception;
+	public JSONObject getRecordJSONObject(DDLRecord record) throws Exception;
 
 	public JSONArray getRecordSetJSONArray(DDLRecordSet recordSet)
 		throws Exception;

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2011 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -106,8 +106,7 @@ public class DDLUtil {
 	}
 
 	public static String storeRecordFieldFile(
-			DDLRecord record, String fieldName,
-			InputStream inputStream)
+			DDLRecord record, String fieldName, InputStream inputStream)
 		throws Exception {
 
 		return getDDL().storeRecordFieldFile(record, fieldName, inputStream);
@@ -133,8 +132,7 @@ public class DDLUtil {
 	}
 
 	public static void uploadRecordFieldFiles(
-			DDLRecord record,
-			UploadPortletRequest uploadPortletRequest,
+			DDLRecord record, UploadPortletRequest uploadPortletRequest,
 			ServiceContext serviceContext)
 		throws Exception {
 

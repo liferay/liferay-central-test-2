@@ -145,15 +145,17 @@ public class DDLImpl implements DDL {
 				fieldValue = JSONFactoryUtil.serialize(fieldValues);
 			}
 
-			if (fieldValue != null) {
-				Serializable fieldValueSerializable =
-					FieldConstants.getSerializable(
-						fieldDataType, GetterUtil.getString(fieldValue));
-
-				field.setValue(fieldValueSerializable);
-
-				fields.put(field);
+			if (fieldValue == null) {
+				continue;
 			}
+
+			Serializable fieldValueSerializable =
+				FieldConstants.getSerializable(
+					fieldDataType, GetterUtil.getString(fieldValue));
+
+			field.setValue(fieldValueSerializable);
+
+			fields.put(field);
 		}
 
 		return fields;
@@ -163,9 +165,7 @@ public class DDLImpl implements DDL {
 		return "ddl_records/" + record.getRecordId();
 	}
 
-	public JSONObject getRecordJSONObject(DDLRecord record)
-		throws Exception {
-
+	public JSONObject getRecordJSONObject(DDLRecord record) throws Exception {
 		DDLRecordSet recordSet = record.getRecordSet();
 
 		DDMStructure ddmStructure = recordSet.getDDMStructure();
@@ -401,14 +401,12 @@ public class DDLImpl implements DDL {
 			ServiceContext serviceContext)
 		throws Exception {
 
-		DDLRecordSet recordSet = record.getRecordSet();
-		DDMStructure ddmStructure = recordSet.getDDMStructure();
-
 		Fields fields = new Fields();
 
 		String fileName = uploadPortletRequest.getFileName(fieldName);
 
 		Field field = record.getField(fieldName);
+
 		String fieldValue = StringPool.BLANK;
 
 		if (field != null) {
@@ -433,6 +431,10 @@ public class DDLImpl implements DDL {
 
 				fieldValue = recordFileJSONObject.toString();
 			}
+
+			DDLRecordSet recordSet = record.getRecordSet();
+
+			DDMStructure ddmStructure = recordSet.getDDMStructure();
 
 			field = new Field(
 				ddmStructure.getStructureId(), fieldName, fieldValue);
