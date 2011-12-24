@@ -615,7 +615,7 @@ public class SitesUtil {
 	}
 
 	public static boolean isLayoutSetPrototypeUpdateable(LayoutSet layoutSet) {
-		if (!layoutSet.isLayoutSetPrototypeLinkEnabled()) {
+		if (!layoutSet.isLayoutSetPrototypeLinkActive()) {
 			return true;
 		}
 
@@ -650,7 +650,7 @@ public class SitesUtil {
 
 		LayoutSet layoutSet = layout.getLayoutSet();
 
-		if (!layoutSet.isLayoutSetPrototypeLinkEnabled()) {
+		if (!layoutSet.isLayoutSetPrototypeLinkActive()) {
 			return false;
 		}
 
@@ -700,8 +700,7 @@ public class SitesUtil {
 
 			LayoutSet layoutSet = layout.getLayoutSet();
 
-			if (layoutSet.isLayoutSetPrototypeLinkEnabled() &&
-				Validator.isNotNull(layout.getSourcePrototypeLayoutUuid())) {
+			if (layoutSet.isLayoutSetPrototypeLinkActive()) {
 
 				boolean layoutSetPrototypeUpdateable =
 					isLayoutSetPrototypeUpdateable(layoutSet);
