@@ -182,8 +182,10 @@ public class SchedulerEngineUtil {
 		return _instance._getStartTime(jobName, groupName, storageType);
 	}
 
-	public static void initLifecycle() throws SchedulerException {
-		new SchedulerLifecycle().registerPortalLifecycle();
+	public static void initLifecycle() {
+		SchedulerLifecycle schedulerLifecycle = new SchedulerLifecycle();
+
+		schedulerLifecycle.registerPortalLifecycle();
 	}
 
 	public static String namespaceGroupName(
