@@ -736,8 +736,7 @@ public class PDFProcessorImpl
 
 	private static PDFProcessorImpl _instance;
 
-	private static ConvertCmd _convertCmd;
-
+	private ConvertCmd _convertCmd;
 	private List<Long> _fileVersionIds = new Vector<Long>();
 	private String _globalSearchPath;
 	private boolean _warned;
