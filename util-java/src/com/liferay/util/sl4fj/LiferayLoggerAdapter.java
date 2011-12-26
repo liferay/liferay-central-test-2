@@ -168,33 +168,38 @@ public class LiferayLoggerAdapter
 	}
 
 	public void log(
-		Marker marker, String fqcn, int level,
-		String message, Object[] arguments, Throwable t) {
+		Marker marker, String fqcn, int level, String message,
+		Object[] arguments, Throwable t) {
 
 		FormattingTuple formattingTuple = MessageFormatter.format(
 			message, arguments);
 
 		switch (level) {
-			case LocationAwareLogger.TRACE_INT:
-				_log.trace(formattingTuple.getMessage(), t);
-
-				break;
 			case LocationAwareLogger.DEBUG_INT:
 				_log.debug(formattingTuple.getMessage(), t);
 
 				break;
-			case LocationAwareLogger.INFO_INT:
-				_log.info(formattingTuple.getMessage(), t);
 
-				break;
-			case LocationAwareLogger.WARN_INT:
-				_log.warn(formattingTuple.getMessage(), t);
-
-				break;
 			case LocationAwareLogger.ERROR_INT:
 				_log.error(formattingTuple.getMessage(), t);
 
 				break;
+
+			case LocationAwareLogger.INFO_INT:
+				_log.info(formattingTuple.getMessage(), t);
+
+				break;
+
+			case LocationAwareLogger.TRACE_INT:
+				_log.trace(formattingTuple.getMessage(), t);
+
+				break;
+
+			case LocationAwareLogger.WARN_INT:
+				_log.warn(formattingTuple.getMessage(), t);
+
+				break;
+
 			default:
 				_log.info(formattingTuple.getMessage(), t);
 		}
