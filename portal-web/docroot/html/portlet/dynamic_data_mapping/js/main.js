@@ -269,14 +269,12 @@ AUI().add(
 							AArray.each(
 								options,
 								function(item, index, collection) {
-									var optionValue = item.value;
-
 									var typeElementOption = instance._createDynamicNode(
 										'dynamic-element',
 										{
 											name: instance._formatOptionsKey(item.label),
 											type: 'option',
-											value: Liferay.Util.escapeHTML(optionValue)
+											value: Liferay.Util.escapeHTML(item.value)
 										}
 									);
 
