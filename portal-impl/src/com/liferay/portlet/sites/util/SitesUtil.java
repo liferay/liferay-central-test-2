@@ -187,8 +187,7 @@ public class SitesUtil {
 		UnicodeProperties prototypeTypeSettingsProperties =
 			layoutPrototypeLayout.getTypeSettingsProperties();
 
-		prototypeTypeSettingsProperties.setProperty(
-			"merge-fail-count", "0");
+		prototypeTypeSettingsProperties.setProperty("merge-fail-count", "0");
 
 		LayoutLocalServiceUtil.updateLayout(layoutPrototypeLayout, false);
 	}
