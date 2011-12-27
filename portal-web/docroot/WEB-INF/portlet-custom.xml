@@ -29,7 +29,7 @@
 			<value>/search/view</value>
 		</init-param>
 		<init-param>
-			<name>config-jsp</name>
+			<name>config-template</name>
 			<value>/html/portlet/search/configuration.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
@@ -56,7 +56,7 @@
 			<value>/calendar/view</value>
 		</init-param>
 		<init-param>
-			<name>config-jsp</name>
+			<name>config-template</name>
 			<value>/html/portlet/calendar/configuration.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
@@ -137,7 +137,7 @@
 			<value>/journal/view</value>
 		</init-param>
 		<init-param>
-			<name>config-jsp</name>
+			<name>config-template</name>
 			<value>/html/portlet/journal/configuration.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
@@ -202,7 +202,7 @@
 			<value>/message_boards/view</value>
 		</init-param>
 		<init-param>
-			<name>config-jsp</name>
+			<name>config-template</name>
 			<value>/html/portlet/message_boards/configuration.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
@@ -252,7 +252,7 @@
 			<value>/document_library/view</value>
 		</init-param>
 		<init-param>
-			<name>config-jsp</name>
+			<name>config-template</name>
 			<value>/html/portlet/document_library/configuration.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
@@ -278,7 +278,7 @@
 		<display-name>Dictionary</display-name>
 		<portlet-class>com.liferay.util.bridges.mvc.MVCPortlet</portlet-class>
 		<init-param>
-			<name>view-jsp</name>
+			<name>view-template</name>
 			<value>/html/portlet/dictionary/view.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
@@ -318,7 +318,7 @@
 		<display-name>Translator</display-name>
 		<portlet-class>com.liferay.portlet.translator.TranslatorPortlet</portlet-class>
 		<init-param>
-			<name>view-jsp</name>
+			<name>view-template</name>
 			<value>/html/portlet/translator/view.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
@@ -338,7 +338,7 @@
 		<display-name>Unit Converter</display-name>
 		<portlet-class>com.liferay.util.bridges.mvc.MVCPortlet</portlet-class>
 		<init-param>
-			<name>view-jsp</name>
+			<name>view-template</name>
 			<value>/html/portlet/unit_converter/view.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
@@ -362,7 +362,7 @@
 			<value>/bookmarks/view</value>
 		</init-param>
 		<init-param>
-			<name>config-jsp</name>
+			<name>config-template</name>
 			<value>/html/portlet/bookmarks/configuration.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
@@ -429,7 +429,7 @@
 			<value>/image_gallery_display/view</value>
 		</init-param>
 		<init-param>
-			<name>config-jsp</name>
+			<name>config-template</name>
 			<value>/html/portlet/image_gallery_display/configuration.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
@@ -459,7 +459,7 @@
 			<value>/blogs/view</value>
 		</init-param>
 		<init-param>
-			<name>config-jsp</name>
+			<name>config-template</name>
 			<value>/html/portlet/blogs/configuration.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
@@ -489,7 +489,7 @@
 			<value>/shopping/view</value>
 		</init-param>
 		<init-param>
-			<name>config-jsp</name>
+			<name>config-template</name>
 			<value>/html/portlet/shopping/configuration.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
@@ -513,7 +513,7 @@
 			<value>/wiki/view</value>
 		</init-param>
 		<init-param>
-			<name>config-jsp</name>
+			<name>config-template</name>
 			<value>/html/portlet/wiki/configuration.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
@@ -543,7 +543,7 @@
 			<value>/rss/view</value>
 		</init-param>
 		<init-param>
-			<name>config-jsp</name>
+			<name>config-template</name>
 			<value>/html/portlet/rss/configuration.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
@@ -598,7 +598,7 @@
 		<display-name>IFrame</display-name>
 		<portlet-class>com.liferay.portlet.iframe.IFramePortlet</portlet-class>
 		<init-param>
-			<name>config-jsp</name>
+			<name>config-template</name>
 			<value>/html/portlet/iframe/configuration.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
@@ -699,7 +699,7 @@
 			<value>/wiki_display/view</value>
 		</init-param>
 		<init-param>
-			<name>config-jsp</name>
+			<name>config-template</name>
 			<value>/html/portlet/wiki_display/configuration.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
@@ -723,7 +723,7 @@
 			<value>/journal_content/view</value>
 		</init-param>
 		<init-param>
-			<name>config-jsp</name>
+			<name>config-template</name>
 			<value>/html/portlet/journal_content/configuration.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
@@ -753,7 +753,7 @@
 			<value>/login/login</value>
 		</init-param>
 		<init-param>
-			<name>config-jsp</name>
+			<name>config-template</name>
 			<value>/html/portlet/login/configuration.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
@@ -780,7 +780,7 @@
 			<value>/polls_display/view</value>
 		</init-param>
 		<init-param>
-			<name>config-jsp</name>
+			<name>config-template</name>
 			<value>/html/portlet/polls_display/configuration.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
@@ -800,7 +800,7 @@
 		<display-name>Loan Calculator</display-name>
 		<portlet-class>com.liferay.util.bridges.mvc.MVCPortlet</portlet-class>
 		<init-param>
-			<name>view-jsp</name>
+			<name>view-template</name>
 			<value>/html/portlet/loan_calculator/view.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
@@ -824,7 +824,7 @@
 			<value>/journal_articles/view</value>
 		</init-param>
 		<init-param>
-			<name>config-jsp</name>
+			<name>config-template</name>
 			<value>/html/portlet/journal_articles/configuration.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
@@ -867,7 +867,7 @@
 		<display-name>Web Proxy</display-name>
 		<portlet-class>com.liferay.portlet.webproxy.WebProxyPortlet</portlet-class>
 		<init-param>
-			<name>config-jsp</name>
+			<name>config-template</name>
 			<value>/html/portlet/web_proxy/configuration.jsp</value>
 		</init-param>
 		<init-param>
@@ -983,7 +983,7 @@
 			<value>/amazon_rankings/view</value>
 		</init-param>
 		<init-param>
-			<name>config-jsp</name>
+			<name>config-template</name>
 			<value>/html/portlet/amazon_rankings/configuration.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
@@ -1014,7 +1014,7 @@
 		<display-name>Password Generator</display-name>
 		<portlet-class>com.liferay.util.bridges.mvc.MVCPortlet</portlet-class>
 		<init-param>
-			<name>view-jsp</name>
+			<name>view-template</name>
 			<value>/html/portlet/password_generator/view.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
@@ -1038,7 +1038,7 @@
 			<value>/navigation/view</value>
 		</init-param>
 		<init-param>
-			<name>config-jsp</name>
+			<name>config-template</name>
 			<value>/html/portlet/navigation/configuration.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
@@ -1065,7 +1065,7 @@
 			<value>/breadcrumb/view</value>
 		</init-param>
 		<init-param>
-			<name>config-jsp</name>
+			<name>config-template</name>
 			<value>/html/portlet/breadcrumb/configuration.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
@@ -1092,7 +1092,7 @@
 			<value>/journal_content_search/view</value>
 		</init-param>
 		<init-param>
-			<name>config-jsp</name>
+			<name>config-template</name>
 			<value>/html/portlet/journal_content_search/configuration.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
@@ -1119,7 +1119,7 @@
 			<value>/language/view</value>
 		</init-param>
 		<init-param>
-			<name>config-jsp</name>
+			<name>config-template</name>
 			<value>/html/portlet/language/configuration.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
@@ -1186,7 +1186,7 @@
 			<value>/site_map/view</value>
 		</init-param>
 		<init-param>
-			<name>config-jsp</name>
+			<name>config-template</name>
 			<value>/html/portlet/site_map/configuration.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
@@ -1327,7 +1327,7 @@
 			<value>/invitation/view</value>
 		</init-param>
 		<init-param>
-			<name>config-jsp</name>
+			<name>config-template</name>
 			<value>/html/portlet/invitation/configuration.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
@@ -1351,7 +1351,7 @@
 			<value>/asset_publisher/view</value>
 		</init-param>
 		<init-param>
-			<name>config-jsp</name>
+			<name>config-template</name>
 			<value>/html/portlet/asset_publisher/configuration.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
@@ -1381,7 +1381,7 @@
 			<value>/xsl_content/view</value>
 		</init-param>
 		<init-param>
-			<name>config-jsp</name>
+			<name>config-template</name>
 			<value>/html/portlet/xsl_content/configuration.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
@@ -1475,7 +1475,7 @@
 			<value>/document_library_display/view</value>
 		</init-param>
 		<init-param>
-			<name>config-jsp</name>
+			<name>config-template</name>
 			<value>/html/portlet/document_library_display/configuration.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
@@ -1547,11 +1547,11 @@
 		<display-name>Recent Bloggers</display-name>
 		<portlet-class>com.liferay.util.bridges.mvc.MVCPortlet</portlet-class>
 		<init-param>
-			<name>view-jsp</name>
+			<name>view-template</name>
 			<value>/html/portlet/recent_bloggers/view.jsp</value>
 		</init-param>
 		<init-param>
-			<name>config-jsp</name>
+			<name>config-template</name>
 			<value>/html/portlet/recent_bloggers/configuration.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
@@ -1578,7 +1578,7 @@
 			<value>/blogs_aggregator/view</value>
 		</init-param>
 		<init-param>
-			<name>config-jsp</name>
+			<name>config-template</name>
 			<value>/html/portlet/blogs_aggregator/configuration.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
@@ -1628,7 +1628,7 @@
 			<value>/nested_portlets/view</value>
 		</init-param>
 		<init-param>
-			<name>config-jsp</name>
+			<name>config-template</name>
 			<value>/html/portlet/nested_portlets/configuration.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
@@ -1698,7 +1698,7 @@
 			<value>/asset_categories_navigation/view</value>
 		</init-param>
 		<init-param>
-			<name>config-jsp</name>
+			<name>config-template</name>
 			<value>/html/portlet/asset_categories_navigation/configuration.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
@@ -1966,7 +1966,7 @@
 			<value>/asset_tags_navigation/view</value>
 		</init-param>
 		<init-param>
-			<name>config-jsp</name>
+			<name>config-template</name>
 			<value>/html/portlet/asset_tags_navigation/configuration.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
@@ -2118,7 +2118,7 @@
 			<value>/asset_tags_cloud/view</value>
 		</init-param>
 		<init-param>
-			<name>config-jsp</name>
+			<name>config-template</name>
 			<value>/html/portlet/asset_tags_navigation/configuration.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
@@ -2260,7 +2260,7 @@
 			<value>/wiki_admin/view_nodes</value>
 		</init-param>
 		<init-param>
-			<name>config-jsp</name>
+			<name>config-template</name>
 			<value>/html/portlet/wiki/configuration.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
@@ -2383,7 +2383,7 @@
 			<value>/login/login</value>
 		</init-param>
 		<init-param>
-			<name>config-jsp</name>
+			<name>config-template</name>
 			<value>/html/portlet/login/configuration.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
@@ -2472,7 +2472,7 @@
 			<value>/dynamic_data_list_display/view</value>
 		</init-param>
 		<init-param>
-			<name>config-jsp</name>
+			<name>config-template</name>
 			<value>/html/portlet/dynamic_data_list_display/configuration.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
@@ -2539,7 +2539,7 @@
 			<value>/asset_publisher/view</value>
 		</init-param>
 		<init-param>
-			<name>config-jsp</name>
+			<name>config-template</name>
 			<value>/html/portlet/asset_publisher/configuration.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
@@ -2600,7 +2600,7 @@
 			<value>/asset_publisher/view</value>
 		</init-param>
 		<init-param>
-			<name>config-jsp</name>
+			<name>config-template</name>
 			<value>/html/portlet/asset_publisher/configuration.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
@@ -2636,7 +2636,7 @@
 		<display-name>License Manager</display-name>
 		<portlet-class>com.liferay.util.bridges.mvc.MVCPortlet</portlet-class>
 		<init-param>
-			<name>view-jsp</name>
+			<name>view-template</name>
 			<value>/html/portlet/license_manager/view.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
@@ -2710,11 +2710,11 @@
 		<display-name>User Statistics</display-name>
 		<portlet-class>com.liferay.util.bridges.mvc.MVCPortlet</portlet-class>
 		<init-param>
-			<name>view-jsp</name>
+			<name>view-template</name>
 			<value>/html/portlet/user_statistics/view.jsp</value>
 		</init-param>
 		<init-param>
-			<name>config-jsp</name>
+			<name>config-template</name>
 			<value>/html/portlet/user_statistics/configuration.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
@@ -2767,11 +2767,11 @@
 		<display-name>Group Statistics</display-name>
 		<portlet-class>com.liferay.util.bridges.mvc.MVCPortlet</portlet-class>
 		<init-param>
-			<name>view-jsp</name>
+			<name>view-template</name>
 			<value>/html/portlet/group_statistics/view.jsp</value>
 		</init-param>
 		<init-param>
-			<name>config-jsp</name>
+			<name>config-template</name>
 			<value>/html/portlet/group_statistics/configuration.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
