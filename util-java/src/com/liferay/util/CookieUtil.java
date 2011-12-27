@@ -34,11 +34,11 @@ public class CookieUtil {
 	}
 
 	public static String get(
-		HttpServletRequest request, String name, boolean doNameUpperCase) {
+		HttpServletRequest request, String name, boolean toUpperCase) {
 
 		Map<String, Cookie> cookieMap = _getCookieMap(request);
 
-		if (doNameUpperCase) {
+		if (toUpperCase) {
 			name = name.toUpperCase();
 		}
 

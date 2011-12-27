@@ -94,9 +94,9 @@ public class CookieKeys implements com.liferay.portal.kernel.util.CookieKeys {
 	}
 
 	public static String getCookie(
-		HttpServletRequest request, String name, boolean doNameUpperCase) {
+		HttpServletRequest request, String name, boolean toUpperCase) {
 
-		String value = CookieUtil.get(request, name, doNameUpperCase);
+		String value = CookieUtil.get(request, name, toUpperCase);
 
 		if ((value != null) && isEncodedCookie(name)) {
 			try {

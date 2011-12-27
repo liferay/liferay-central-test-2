@@ -15,9 +15,6 @@
 package com.liferay.portal.kernel.util;
 
 /**
- * All keys defined in this interface should be in upper case to avoid the
- * runtime {@link String#toUpperCase()} conversion.
- *
  * @author Brian Wing Shun Chan
  * @author Minhchau Dang
  */
