@@ -132,7 +132,9 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 			groupName = fixMaxLength(
 				getOriginalGroupName(groupName), GROUP_NAME_MAX_LENGTH);
 
-			scheduler.deleteJob(new JobKey(jobName, groupName));
+			JobKey jobKey = new JobKey(jobName, groupName);
+
+			scheduler.deleteJob(jobKey);
 		}
 		catch (Exception e) {
 			throw new SchedulerException(
@@ -167,7 +169,9 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 			groupName = fixMaxLength(
 				getOriginalGroupName(groupName), GROUP_NAME_MAX_LENGTH);
 
-			return getScheduledJob(scheduler, new JobKey(jobName, groupName));
+			JobKey jobKey = new JobKey(jobName, groupName);
+
+			return getScheduledJob(scheduler, jobKey);
 		}
 		catch (Exception e) {
 			throw new SchedulerException(
@@ -370,11 +374,11 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 				message = message.clone();
 			}
 
+			TriggerKey triggerKey = quartzTrigger.getKey();
+
 			message.put(
 				RECEIVER_KEY,
-				getFullName(
-					quartzTrigger.getKey().getName(),
-					quartzTrigger.getKey().getGroup()));
+				getFullName(triggerKey.getName(), triggerKey.getGroup()));
 
 			schedule(
 				scheduler, storageType, quartzTrigger, description, destination,
@@ -441,8 +445,9 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 			groupName = fixMaxLength(
 				getOriginalGroupName(groupName), GROUP_NAME_MAX_LENGTH);
 
-			updateJobState(
-				scheduler, new JobKey(jobName, groupName), null, true);
+			JobKey jobKey = new JobKey(jobName, groupName);
+
+			updateJobState(scheduler, jobKey, null, true);
 		}
 		catch (Exception e) {
 			throw new SchedulerException(
@@ -490,7 +495,9 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 			groupName = fixMaxLength(
 				getOriginalGroupName(groupName), GROUP_NAME_MAX_LENGTH);
 
-			unschedule(scheduler, new JobKey(jobName, groupName));
+			JobKey jobKey = new JobKey(jobName, groupName);
+
+			unschedule(scheduler, jobKey);
 		}
 		catch (Exception e) {
 			throw new SchedulerException(
@@ -566,10 +573,16 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 			return null;
 		}
 
+		Date endDate = trigger.getEndDate();
+		String jobName = fixMaxLength(
+			trigger.getJobName(), JOB_NAME_MAX_LENGTH);
+		String groupName = fixMaxLength(
+			trigger.getGroupName(), GROUP_NAME_MAX_LENGTH);
+
 		Date startDate = trigger.getStartDate();
 
 		if (startDate == null) {
-			if (ServerDetector.getServerId().equals(ServerDetector.TOMCAT_ID)) {
+			if (ServerDetector.isTomcat()) {
 				startDate = new Date(System.currentTimeMillis() + Time.MINUTE);
 			}
 			else {
@@ -578,26 +591,27 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 			}
 		}
 
-		Date endDate = trigger.getEndDate();
-
-		String jobName = fixMaxLength(
-			trigger.getJobName(), JOB_NAME_MAX_LENGTH);
-		String groupName = fixMaxLength(
-			trigger.getGroupName(), GROUP_NAME_MAX_LENGTH);
-
 		Trigger quartzTrigger = null;
 
 		TriggerType triggerType = trigger.getTriggerType();
 
 		if (triggerType.equals(TriggerType.CRON)) {
 			try {
-				quartzTrigger =
-					TriggerBuilder.newTrigger().
-						withIdentity(jobName, groupName).withSchedule(
-							CronScheduleBuilder.cronSchedule(
-								(String)trigger.getTriggerContent())).
-						forJob(jobName, groupName).startAt(startDate).
-						endAt(endDate).build();
+				TriggerBuilder<Trigger>triggerBuilder =
+					TriggerBuilder.newTrigger();
+
+				triggerBuilder.endAt(endDate);
+				triggerBuilder.forJob(jobName, groupName);
+				triggerBuilder.startAt(startDate);
+				triggerBuilder.withIdentity(jobName, groupName);
+
+				CronScheduleBuilder cronScheduleBuilder =
+					CronScheduleBuilder.cronSchedule(
+						(String)trigger.getTriggerContent());
+
+				triggerBuilder.withSchedule(cronScheduleBuilder);
+
+				quartzTrigger = triggerBuilder.build();
 			}
 			catch (ParseException pe) {
 				throw new SchedulerException(
@@ -617,15 +631,23 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 				return null;
 			}
 
-			quartzTrigger =
-				TriggerBuilder.newTrigger().withIdentity(jobName, groupName).
-					withSchedule(
-						SimpleScheduleBuilder.simpleSchedule().
-							withIntervalInMilliseconds(interval).
-							withRepeatCount(
-								SimpleTrigger.REPEAT_INDEFINITELY)).
-					forJob(jobName, groupName).startAt(startDate).
-					endAt(endDate).build();
+			TriggerBuilder<Trigger>triggerBuilder = TriggerBuilder.newTrigger();
+
+			triggerBuilder.endAt(endDate);
+			triggerBuilder.forJob(jobName, groupName);
+			triggerBuilder.startAt(startDate);
+			triggerBuilder.withIdentity(jobName, groupName);
+
+			SimpleScheduleBuilder simpleScheduleBuilder =
+				SimpleScheduleBuilder.simpleSchedule();
+
+			simpleScheduleBuilder.withIntervalInMilliseconds(interval);
+			simpleScheduleBuilder.withRepeatCount(
+				SimpleTrigger.REPEAT_INDEFINITELY);
+
+			triggerBuilder.withSchedule(simpleScheduleBuilder);
+
+			quartzTrigger = triggerBuilder.build();
 		}
 		else {
 			throw new SchedulerException(
@@ -658,8 +680,9 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 		String jobName = jobKey.getName();
 		String groupName = jobKey.getGroup();
 
-		Trigger trigger = scheduler.getTrigger(
-			new TriggerKey(jobName, groupName));
+		TriggerKey triggerKey = new TriggerKey(jobName, groupName);
+
+		Trigger trigger = scheduler.getTrigger(triggerKey);
 
 		JobState jobState = getJobState(jobDataMap);
 
@@ -835,10 +858,12 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 		try {
 			JobDetail jobDetail = null;
 
-			jobDetail = JobBuilder.newJob(MessageSenderJob.class).
-				withIdentity(trigger.getJobKey()).storeDurably(
-					scheduler == _persistedScheduler).
-				build();
+			JobBuilder jobBuilder = JobBuilder.newJob(MessageSenderJob.class);
+
+			jobBuilder.storeDurably(scheduler == _persistedScheduler);
+			jobBuilder.withIdentity(trigger.getJobKey());
+
+			jobDetail = jobBuilder.build();
 
 			JobDataMap jobDataMap = jobDetail.getJobDataMap();
 
@@ -848,14 +873,10 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 			jobDataMap.put(STORAGE_TYPE, storageType.toString());
 
 			JobState jobState = new JobState(
-				TriggerState.NORMAL,
-				message.getInteger(EXCEPTIONS_MAX_SIZE));
+				TriggerState.NORMAL, message.getInteger(EXCEPTIONS_MAX_SIZE));
 
 			jobDataMap.put(
-				JOB_STATE, JobStateSerializeUtil.serialize(jobState));
-
-			jobDataMap.put(
-				JOB_STATE, JobStateSerializeUtil.serialize(jobState));
+			JOB_STATE, JobStateSerializeUtil.serialize(jobState));
 
 			synchronized (this) {
 				scheduler.deleteJob(trigger.getJobKey());
@@ -922,13 +943,14 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 			return;
 		}
 
-		JobKey jobKey = quartzTrigger.getJobKey();
 		TriggerKey triggerKey = quartzTrigger.getKey();
 
 		if (scheduler.getTrigger(triggerKey) != null) {
 			scheduler.rescheduleJob(triggerKey, quartzTrigger);
 		}
 		else {
+			JobKey jobKey = quartzTrigger.getJobKey();
+
 			JobDetail jobDetail = scheduler.getJobDetail(jobKey);
 
 			if (jobDetail == null) {
