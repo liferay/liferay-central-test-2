@@ -1895,10 +1895,12 @@ AUI.add(
 
 					_resetCategoriesProperties: function(event) {
 						var instance = this;
-						var namespace = instance._prefixedPortletId;
 
 						var contextPanel = event.currentTarget;
 						var boundingBox = contextPanel.get('boundingBox');
+
+						var namespace = instance._prefixedPortletId;
+
 						var propertiesTrigger = boundingBox.one('fieldset#' + namespace + 'categoryProperties');
 
 						var autoFieldsInstance = propertiesTrigger.getData('autoFieldsInstance');
