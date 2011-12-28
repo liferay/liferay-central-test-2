@@ -108,29 +108,6 @@ else {
 	</c:if>
 
 	<c:if test="<%= LayoutPermissionUtil.contains(permissionChecker, layoutRevision.getPlid(), ActionKeys.UPDATE) %>">
-
-		<%
-		List<LayoutRevision> pendingLayoutRevisions = LayoutRevisionLocalServiceUtil.getLayoutRevisions(layoutRevision.getLayoutSetBranchId(), layoutRevision.getPlid(), WorkflowConstants.STATUS_PENDING);
-
-		boolean enabled = !layoutRevision.isPending() && pendingLayoutRevisions.isEmpty() && !layoutRevision.isHead();
-
-		String icon = "circle-check";
-		String label = null;
-
-		if (layoutRevision.getStatus() == WorkflowConstants.STATUS_INCOMPLETE) {
-			label = LanguageUtil.format(pageContext, "enable-in-x", layoutSetBranch.getName());
-		}
-		else {
-			if(WorkflowDefinitionLinkLocalServiceUtil.hasWorkflowDefinitionLink(themeDisplay.getCompanyId(), scopeGroupId, LayoutRevision.class.getName())) {
-				icon = "shuffle";
-				label = "submit-for-publication";
-			}
-			else {
-				label = "mark-as-ready-for-publication";
-			}
-		}
-		%>
-
 		stagingBar.layoutRevisionToolbar.add(
 			{
 				type: 'ToolbarSpacer'
@@ -149,8 +126,13 @@ else {
 
 		stagingBar.layoutRevisionToolbar.add(
 			{
+
+				<%
+				List<LayoutRevision> pendingLayoutRevisions = LayoutRevisionLocalServiceUtil.getLayoutRevisions(layoutRevision.getLayoutSetBranchId(), layoutRevision.getPlid(), WorkflowConstants.STATUS_PENDING);
+				%>
+
 				<c:choose>
-					<c:when test="<%= enabled %>">
+					<c:when test="<%= !layoutRevision.isPending() && pendingLayoutRevisions.isEmpty() && !layoutRevision.isHead() %>">
 						handler: function(event) {
 							A.io.request(
 								'<%= publishURL %>',
@@ -167,12 +149,12 @@ else {
 					<c:otherwise>
 
 						<%
-						String submitMessage = "you-can-not-submit-your-changes-because-someone-else-has-submitted-changes-for-approval";
+						String submitMessage = "you-cannot-submit-your-changes-because-someone-else-has-submitted-changes-for-approval";
 
 						LayoutRevision pendingLayoutRevision = pendingLayoutRevisions.get(0);
 
 						if (pendingLayoutRevision != null && (pendingLayoutRevision.getUserId() == user.getUserId())) {
-							submitMessage = "you-can-not-submit-your-changes-because-your-previous-submission-is-still-waiting-for-approval";
+							submitMessage = "you-cannot-submit-your-changes-because-your-previous-submission-is-still-waiting-for-approval";
 						}
 						%>
 
@@ -180,6 +162,24 @@ else {
 						disabled: true,
 					</c:otherwise>
 				</c:choose>
+
+				<%
+				String icon = "circle-check";
+				String label = null;
+
+				if (layoutRevision.getStatus() == WorkflowConstants.STATUS_INCOMPLETE) {
+					label = LanguageUtil.format(pageContext, "enable-in-x", layoutSetBranch.getName());
+				}
+				else {
+					if(WorkflowDefinitionLinkLocalServiceUtil.hasWorkflowDefinitionLink(themeDisplay.getCompanyId(), scopeGroupId, LayoutRevision.class.getName())) {
+						icon = "shuffle";
+						label = "submit-for-publication";
+					}
+					else {
+						label = "mark-as-ready-for-publication";
+					}
+				}
+				%>
 
 				icon: '<%= icon %>',
 				label: '<%= UnicodeLanguageUtil.get(pageContext, label) %>'

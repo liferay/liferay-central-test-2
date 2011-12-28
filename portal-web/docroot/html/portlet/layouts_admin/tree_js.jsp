@@ -19,6 +19,8 @@
 <%@ include file="/html/portlet/layouts_admin/init_attributes.jspf" %>
 
 <%
+boolean incomplete = ParamUtil.getBoolean(request, "incomplete", true);
+
 String treeLoading = PortalUtil.generateRandomKey(request, "treeLoading");
 
 String treeId = ParamUtil.getString(request, "treeId");
@@ -26,7 +28,6 @@ boolean checkContentDisplayPage = ParamUtil.getBoolean(request, "checkContentDis
 boolean expandFirstNode = ParamUtil.getBoolean(request, "expandFirstNode", true);
 boolean saveState = ParamUtil.getBoolean(request, "saveState", true);
 boolean selectableTree = ParamUtil.getBoolean(request, "selectableTree");
-boolean incomplete = ParamUtil.getBoolean(request, "incomplete", true);
 
 boolean rootNodeExpanded = GetterUtil.getBoolean(SessionClicks.get(request, treeId + "RootNode", null), true);
 

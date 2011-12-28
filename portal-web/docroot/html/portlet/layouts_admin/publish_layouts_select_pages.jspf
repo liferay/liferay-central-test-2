@@ -48,6 +48,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	<%
 	LayoutRevision layoutRevision = null;
+
 	String layoutBranchName = null;
 
 	if (LayoutStagingUtil.isBranchingLayout(curLayout)) {
@@ -55,12 +56,12 @@ for (int i = 0; i < results.size(); i++) {
 			try {
 				layoutRevision = LayoutRevisionLocalServiceUtil.getLayoutRevision(layoutSetBranchId, curLayout.getPlid(), true);
 			}
-			catch(NoSuchLayoutRevisionException nslre) {
+			catch (NoSuchLayoutRevisionException nslre) {
 			}
-		
+
 			if (layoutRevision != null) {
 				List<LayoutBranch> layoutBranches = LayoutBranchLocalServiceUtil.getLayoutBranches(layoutSetBranchId, curLayout.getPlid(), QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
-				
+
 				if (layoutBranches.size() > 1) {
 					LayoutBranch layoutBranch = layoutRevision.getLayoutBranch();
 
@@ -81,7 +82,7 @@ for (int i = 0; i < results.size(); i++) {
 		</c:if>
 
 		<c:if test="<%= layoutRevision == null %>">
-			<liferay-ui:icon-help message="there-is-not-any-version-of-this-page-marked-as-ready-for-publication" />
+			<liferay-ui:icon-help message="there-is-not-a-version-of-this-page-marked-as-ready-for-publication" />
 		</c:if>
 	</span>
 </liferay-util:buffer>
