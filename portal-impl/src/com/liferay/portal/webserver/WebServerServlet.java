@@ -132,7 +132,7 @@ public class WebServerServlet extends HttpServlet {
 			if (pathArray.length == 0) {
 				return true;
 			}
-			else if (_DDL_PATH.equals(pathArray[0])) {
+			else if (_PATH_DDL.equals(pathArray[0])) {
 				_checkDDLRecord(pathArray);
 			}
 			else if (Validator.isNumber(pathArray[0])) {
@@ -229,7 +229,7 @@ public class WebServerServlet extends HttpServlet {
 					request.getServletPath() + StringPool.SLASH + path);
 			}
 			else {
-				if (_DDL_PATH.equals(pathArray[0])) {
+				if (_PATH_DDL.equals(pathArray[0])) {
 					sendDDLRecordFile(request, response, pathArray);
 				}
 				else if (Validator.isNumber(pathArray[0])) {
@@ -1004,7 +1004,7 @@ public class WebServerServlet extends HttpServlet {
 		freeMarkerContext.put("serverInfo", ReleaseInfo.getServerInfo());
 		freeMarkerContext.put("validator", Validator_IW.getInstance());
 
-		String html = FreeMarkerUtil.process(_TPL_TEMPLATE, freeMarkerContext);
+		String html = FreeMarkerUtil.process(_TEMPLATE_FTL, freeMarkerContext);
 
 		response.setContentType(ContentTypes.TEXT_HTML_UTF8);
 
@@ -1141,15 +1141,15 @@ public class WebServerServlet extends HttpServlet {
 
 	private static final String _DATE_FORMAT_PATTERN = "d MMM yyyy HH:mm z";
 
-	private static final String _DDL_PATH = "ddl";
+	private static final String _PATH_DDL = "ddl";
 
-	private static final String _TPL_TEMPLATE =
+	private static final String _TEMPLATE_FTL =
 		"com/liferay/portal/webserver/dependencies/template.ftl";
+
+	private static Log _log = LogFactoryUtil.getLog(WebServerServlet.class);
 
 	private static Format _dateFormat =
 		FastDateFormatFactoryUtil.getSimpleDateFormat(_DATE_FORMAT_PATTERN);
-
-	private static Log _log = LogFactoryUtil.getLog(WebServerServlet.class);
 
 	private boolean _lastModified = true;
 
