@@ -68,13 +68,13 @@
 	}
 
 	if (officeDoc != null) {
-		String openOfficeDocumentUrl = "javascript:" + liferayPortletResponse.getNamespace() + "openDocument('" + fileUrl + "','" + webDavUrl + "','" + officeDoc + "');";
+		String taglibOpenInMSOffice = "javascript:" + liferayPortletResponse.getNamespace() + "openDocument('" + fileUrl + "','" + webDavUrl + "','" + officeDoc + "');";
 	%>
 
 		<liferay-ui:icon
 			image="../document_library/msoffice"
 			message="open-in-ms-office"
-			url="<%= openOfficeDocumentUrl %>"
+			url="<%= taglibOpenInMSOffice %>"
 		/>
 
 	<%
