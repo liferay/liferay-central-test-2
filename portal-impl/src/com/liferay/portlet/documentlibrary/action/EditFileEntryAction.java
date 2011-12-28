@@ -398,12 +398,13 @@ public class EditFileEntryAction extends PortletAction {
 		if (e instanceof AssetCategoryException) {
 			AssetCategoryException ace = (AssetCategoryException)e;
 
-			AssetVocabulary vocabulary = ace.getVocabulary();
+			AssetVocabulary assetVocabulary = ace.getVocabulary();
 
 			String vocabularyTitle = StringPool.BLANK;
 
-			if (vocabulary != null) {
-				vocabularyTitle = vocabulary.getTitle(themeDisplay.getLocale());
+			if (assetVocabulary != null) {
+				vocabularyTitle = assetVocabulary.getTitle(
+					themeDisplay.getLocale());
 			}
 
 			if (ace.getType() == AssetCategoryException.AT_LEAST_ONE_CATEGORY) {
@@ -412,8 +413,8 @@ public class EditFileEntryAction extends PortletAction {
 					"please-select-at-least-one-category-for-x",
 					vocabularyTitle);
 			}
-			else if (
-				ace.getType() == AssetCategoryException.TOO_MANY_CATEGORIES) {
+			else if (ace.getType() ==
+						AssetCategoryException.TOO_MANY_CATEGORIES) {
 
 				errorMessage = LanguageUtil.format(
 					themeDisplay.getLocale(),
