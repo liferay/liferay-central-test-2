@@ -123,7 +123,7 @@ public abstract class BaseRepositoryImpl implements BaseRepository {
 	public abstract List<Object> getFoldersAndFileEntries(
 			long folderId, String[] mimeTypes, int start, int end,
 			OrderByComparator obc)
-		throws SystemException;
+		throws PortalException, SystemException;
 
 	public List<Object> getFoldersAndFileEntriesAndFileShortcuts(
 			long folderId, int status, boolean includeMountFolders, int start,
@@ -137,7 +137,7 @@ public abstract class BaseRepositoryImpl implements BaseRepository {
 			long folderId, int status, String[] mimeTypes,
 			boolean includeMountFolders, int start, int end,
 			OrderByComparator obc)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		return getFoldersAndFileEntries(folderId, mimeTypes, start, end, obc);
 	}
@@ -152,7 +152,7 @@ public abstract class BaseRepositoryImpl implements BaseRepository {
 	public int getFoldersAndFileEntriesAndFileShortcutsCount(
 			long folderId, int status, String[] mimeTypes,
 			boolean includeMountFolders)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		return getFoldersAndFileEntriesCount(folderId, mimeTypes);
 	}
@@ -162,7 +162,7 @@ public abstract class BaseRepositoryImpl implements BaseRepository {
 
 	public abstract int getFoldersAndFileEntriesCount(
 			long folderId, String[] mimeTypes)
-	throws SystemException;
+		throws PortalException, SystemException;
 
 	public long getGroupId() {
 		return _groupId;
@@ -207,7 +207,7 @@ public abstract class BaseRepositoryImpl implements BaseRepository {
 	public List<FileEntry> getRepositoryFileEntries(
 			long userId, long rootFolderId, String[] mimeTypes, int status,
 			int start, int end, OrderByComparator obc)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		return getFileEntries(rootFolderId, mimeTypes, start, end, obc);
 	}
@@ -220,7 +220,7 @@ public abstract class BaseRepositoryImpl implements BaseRepository {
 
 	public int getRepositoryFileEntriesCount(
 			long userId, long rootFolderId, String[] mimeTypes, int status)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		return getFileEntriesCount(rootFolderId, mimeTypes);
 	}

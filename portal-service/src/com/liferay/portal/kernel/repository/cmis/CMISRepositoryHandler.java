@@ -144,7 +144,7 @@ public abstract class CMISRepositoryHandler extends BaseRepositoryImpl {
 	public List<FileEntry> getFileEntries(
 			long folderId, String[] mimeTypes, int start, int end,
 			OrderByComparator obc)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		return _baseCmisRepository.getFileEntries(
 			folderId, mimeTypes, start, end, obc);
@@ -162,7 +162,7 @@ public abstract class CMISRepositoryHandler extends BaseRepositoryImpl {
 	}
 
 	public int getFileEntriesCount(long folderId, String[] mimeTypes)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		return _baseCmisRepository.getFileEntriesCount(folderId, mimeTypes);
 	}
@@ -206,7 +206,7 @@ public abstract class CMISRepositoryHandler extends BaseRepositoryImpl {
 	public List<Folder> getFolders(
 			long parentFolderId, boolean includeMountfolders, int start,
 			int end, OrderByComparator obc)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		return _baseCmisRepository.getFolders(
 			parentFolderId, includeMountfolders, start, end, obc);
@@ -225,7 +225,7 @@ public abstract class CMISRepositoryHandler extends BaseRepositoryImpl {
 	public List<Object> getFoldersAndFileEntries(
 			long folderId, String[] mimeTypes, int start, int end,
 			OrderByComparator obc)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		return _baseCmisRepository.getFoldersAndFileEntries(
 			folderId, mimeTypes, start, end, obc);
@@ -240,14 +240,14 @@ public abstract class CMISRepositoryHandler extends BaseRepositoryImpl {
 
 	@Override
 	public int getFoldersAndFileEntriesCount(long folderId, String[] mimeTypes)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		return _baseCmisRepository.getFoldersAndFileEntriesCount(
-				folderId, mimeTypes);
+			folderId, mimeTypes);
 	}
 
 	public int getFoldersCount(long parentFolderId, boolean includeMountfolders)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		return _baseCmisRepository.getFoldersCount(
 			parentFolderId, includeMountfolders);

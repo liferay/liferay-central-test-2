@@ -187,7 +187,7 @@ public class BaseRepositoryProxyBean
 	public List<FileEntry> getFileEntries(
 			long folderId, String[] mimeTypes, int start, int end,
 			OrderByComparator obc)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		List<FileEntry> fileEntries = _baseRepository.getFileEntries(
 			folderId, mimeTypes, start, end, obc);
@@ -225,7 +225,7 @@ public class BaseRepositoryProxyBean
 	}
 
 	public int getFileEntriesCount(long folderId, String[] mimeTypes)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		return _baseRepository.getFileEntriesCount(folderId, mimeTypes);
 	}
@@ -281,7 +281,7 @@ public class BaseRepositoryProxyBean
 	public List<Folder> getFolders(
 			long parentFolderId, boolean includeMountfolders, int start,
 			int end, OrderByComparator obc)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		List<Folder> folders = _baseRepository.getFolders(
 			parentFolderId, includeMountfolders, start, end, obc);
@@ -305,7 +305,7 @@ public class BaseRepositoryProxyBean
 			long folderId, int status, String[] mimeTypes,
 			boolean includeMountFolders, int start, int end,
 			OrderByComparator obc)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		List<Object> objects =
 			_baseRepository.getFoldersAndFileEntriesAndFileShortcuts(
@@ -326,14 +326,14 @@ public class BaseRepositoryProxyBean
 	public int getFoldersAndFileEntriesAndFileShortcutsCount(
 			long folderId, int status, String[] mimeTypes,
 			boolean includeMountFolders)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		return _baseRepository.getFoldersAndFileEntriesAndFileShortcutsCount(
 			folderId, status, mimeTypes, includeMountFolders);
 	}
 
 	public int getFoldersCount(long parentFolderId, boolean includeMountfolders)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		return _baseRepository.getFoldersCount(
 			parentFolderId, includeMountfolders);
@@ -385,7 +385,7 @@ public class BaseRepositoryProxyBean
 	public List<FileEntry> getRepositoryFileEntries(
 			long userId, long rootFolderId, String[] mimeTypes, int status,
 			int start, int end, OrderByComparator obc)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		List<FileEntry> fileEntries = _baseRepository.getRepositoryFileEntries(
 			userId, rootFolderId, mimeTypes, status, start, end, obc);
@@ -402,7 +402,7 @@ public class BaseRepositoryProxyBean
 
 	public int getRepositoryFileEntriesCount(
 			long userId, long rootFolderId, String[] mimeTypes, int status)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		return _baseRepository.getRepositoryFileEntriesCount(
 			userId, rootFolderId, mimeTypes, status);

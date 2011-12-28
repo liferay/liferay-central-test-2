@@ -238,11 +238,12 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 		throws SystemException {
 
 		List<Long> folderIds = new ArrayList<Long>();
+
 		folderIds.add(folderId);
 
 		return dlFileEntryFinder.findByG_U_F_M_S(
-				groupId, 0, folderIds, mimeTypes, WorkflowConstants.STATUS_ANY,
-				start, end, obc);
+			groupId, 0, folderIds, mimeTypes, WorkflowConstants.STATUS_ANY,
+			start, end, obc);
 	}
 
 	public int getFileEntriesCount(long groupId, long folderId)
@@ -264,11 +265,11 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 		throws SystemException {
 
 		List<Long> folderIds = new ArrayList<Long>();
+
 		folderIds.add(folderId);
 
 		return dlFileEntryFinder.countByG_U_F_M_S(
-				groupId, 0L, folderIds, mimeTypes,
-				WorkflowConstants.STATUS_ANY);
+			groupId, 0, folderIds, mimeTypes, WorkflowConstants.STATUS_ANY);
 	}
 
 	public DLFileEntry getFileEntry(long fileEntryId)
