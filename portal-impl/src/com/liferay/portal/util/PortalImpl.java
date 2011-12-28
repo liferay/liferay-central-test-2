@@ -850,16 +850,16 @@ public class PortalImpl implements Portal {
 
 		// www.liferay.com:8080/page to www.liferay.com:8080/es/page
 
-		int index = canonicalURL.indexOf(virtualHost);
+		int pos = canonicalURL.indexOf(virtualHost);
 
-		if (index > 0) {
-			index += virtualHost.length();
+		if (pos > 0) {
+			pos += virtualHost.length();
 
-			index = canonicalURL.indexOf(CharPool.SLASH, index);
+			pos = canonicalURL.indexOf(CharPool.SLASH, pos);
 
-			if ((index > 0) && (index < canonicalURL.length())) {
-				return canonicalURL.substring(0, index).concat(
-					i18nPath).concat(canonicalURL.substring(index));
+			if ((pos > 0) && (pos < canonicalURL.length())) {
+				return canonicalURL.substring(0, pos).concat(
+					i18nPath).concat(canonicalURL.substring(pos));
 			}
 		}
 
