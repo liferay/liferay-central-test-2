@@ -178,14 +178,15 @@ public class GlobalShutdownAction extends SimpleAction {
 		catch (Exception e) {
 		}
 
-		// Shutdown scheduler engine and wait 1 second so Quartz threads can
-		// cleanly shutdown
+		// Scheduler engine
 
 		try {
 			SchedulerEngineUtil.shutdown();
 		}
 		catch (Exception e) {
 		}
+
+		// Wait 1 second so Quartz threads can cleanly shutdown
 
 		try {
 			Thread.sleep(1000);
