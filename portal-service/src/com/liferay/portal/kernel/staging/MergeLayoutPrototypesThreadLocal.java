@@ -12,12 +12,14 @@
  * details.
  */
 
-package com.liferay.portal.kernel.util;
+package com.liferay.portal.kernel.staging;
+
+import com.liferay.portal.kernel.util.AutoResetThreadLocal;
 
 /**
  * @author Raymond Augé
  */
-public class MergePrototypesThreadLocal {
+public class MergeLayoutPrototypesThreadLocal {
 
 	public static boolean isInProgress() {
 		return _inProgress.get().booleanValue();
@@ -29,6 +31,6 @@ public class MergePrototypesThreadLocal {
 
 	private static ThreadLocal<Boolean> _inProgress =
 		new AutoResetThreadLocal<Boolean>(
-			MergePrototypesThreadLocal.class + "._inProgress", false);
+			MergeLayoutPrototypesThreadLocal.class + "._inProgress", false);
 
 }

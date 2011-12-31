@@ -838,9 +838,9 @@ public class EditLayoutsAction extends PortletAction {
 					LayoutPrototypeServiceUtil.getLayoutPrototype(
 						layoutPrototypeId);
 
+				serviceContext.setAttribute("layoutPrototypeLinkEnabled", true);
 				serviceContext.setAttribute(
 					"layoutPrototypeUuid", layoutPrototype.getUuid());
-				serviceContext.setAttribute("layoutPrototypeLinkEnabled", true);
 
 				layout = LayoutServiceUtil.addLayout(
 					groupId, privateLayout, parentLayoutId, nameMap,

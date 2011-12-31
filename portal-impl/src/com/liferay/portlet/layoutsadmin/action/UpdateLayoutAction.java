@@ -156,9 +156,9 @@ public class UpdateLayoutAction extends JSONAction {
 				LayoutPrototypeServiceUtil.getLayoutPrototype(
 					layoutPrototypeId);
 
+			serviceContext.setAttribute("layoutPrototypeLinkEnabled", true);
 			serviceContext.setAttribute(
 				"layoutPrototypeUuid", layoutPrototype.getUuid());
-			serviceContext.setAttribute("layoutPrototypeLinkEnabled", true);
 
 			layout = LayoutServiceUtil.addLayout(
 				groupId, privateLayout, parentLayoutId, name, title,

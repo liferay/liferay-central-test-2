@@ -20,10 +20,10 @@ import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.lar.UserIdStrategy;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.staging.MergeLayoutPrototypesThreadLocal;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
-import com.liferay.portal.kernel.util.MergePrototypesThreadLocal;
 import com.liferay.portal.kernel.util.SystemProperties;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
@@ -108,14 +108,14 @@ public class LayoutLocalServiceVirtualLayoutsAdvice
 			LayoutSet layoutSet = layout.getLayoutSet();
 
 			try {
-				MergePrototypesThreadLocal.setInProgress(true);
+				MergeLayoutPrototypesThreadLocal.setInProgress(true);
 				WorkflowThreadLocal.setEnabled(false);
 
 				mergeLayoutProtypeLayout(group, layout);
 				mergeLayoutSetProtypeLayouts(group, layoutSet);
 			}
 			finally {
-				MergePrototypesThreadLocal.setInProgress(false);
+				MergeLayoutPrototypesThreadLocal.setInProgress(false);
 				WorkflowThreadLocal.setEnabled(workflowEnabled);
 			}
 		}
@@ -134,13 +134,13 @@ public class LayoutLocalServiceVirtualLayoutsAdvice
 					groupId, privateLayout);
 
 				try {
-					MergePrototypesThreadLocal.setInProgress(true);
+					MergeLayoutPrototypesThreadLocal.setInProgress(true);
 					WorkflowThreadLocal.setEnabled(false);
 
 					mergeLayoutSetProtypeLayouts(group, layoutSet);
 				}
 				finally {
-					MergePrototypesThreadLocal.setInProgress(false);
+					MergeLayoutPrototypesThreadLocal.setInProgress(false);
 					WorkflowThreadLocal.setEnabled(workflowEnabled);
 				}
 

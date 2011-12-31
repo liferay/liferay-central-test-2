@@ -18,9 +18,9 @@ import com.liferay.portal.NoSuchLayoutRevisionException;
 import com.liferay.portal.NoSuchPortletPreferencesException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.staging.MergeLayoutPrototypesThreadLocal;
 import com.liferay.portal.kernel.staging.StagingUtil;
 import com.liferay.portal.kernel.util.AutoResetThreadLocal;
-import com.liferay.portal.kernel.util.MergePrototypesThreadLocal;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
@@ -354,7 +354,7 @@ public class LayoutRevisionLocalServiceImpl
 
 		int workflowAction = serviceContext.getWorkflowAction();
 
-		if (!MergePrototypesThreadLocal.isInProgress() &&
+		if (!MergeLayoutPrototypesThreadLocal.isInProgress() &&
 			(workflowAction != WorkflowConstants.ACTION_PUBLISH) &&
 			(_layoutRevisionId.get() <= 0)) {
 
