@@ -155,7 +155,6 @@ public class PortalContextLoaderListener extends ContextLoaderListener {
 		if (PropsValues.OSGI_ENABLED) {
 			try {
 				OSGiServiceUtil.registerContext(servletContext);
-
 				OSGiServiceUtil.registerContext(applicationContext);
 
 				OSGiServiceUtil.start();
