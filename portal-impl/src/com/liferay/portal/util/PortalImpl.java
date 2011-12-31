@@ -465,7 +465,6 @@ public class PortalImpl implements Portal {
 
 		// Miscellaneous
 
-		_reservedParams.add("controlPanelCategory");
 		_reservedParams.add("saveLastPath");
 		_reservedParams.add("scroll");
 	}
