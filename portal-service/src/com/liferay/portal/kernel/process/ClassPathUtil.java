@@ -93,7 +93,7 @@ public class ClassPathUtil {
 		URL url = classloader.getResource(pathOfClass);
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("build class path from: " + url);
+			_log.debug("Build class path from " + url);
 		}
 
 		String protocol = url.getProtocol();
@@ -102,15 +102,17 @@ public class ClassPathUtil {
 			try {
 				URLConnection urlConnection = url.openConnection();
 
-				Method getLocalUrlMethod =
-					urlConnection.getClass().getDeclaredMethod("getLocalURL");
+				Class<?> clazz = urlConnection.getClass();
 
-				getLocalUrlMethod.setAccessible(true);
+				Method getLocalURLMethod = clazz.getDeclaredMethod(
+					"getLocalURL");
 
-				url = (URL) getLocalUrlMethod.invoke(urlConnection);
+				getLocalURLMethod.setAccessible(true);
+
+				url = (URL)getLocalURLMethod.invoke(urlConnection);
 			}
 			catch (Exception e) {
-				_log.error("Failed to resolve local url from bundle.", e);
+				_log.error("Unable to resolve local URL from bundle", e);
 
 				return StringPool.BLANK;
 			}
@@ -119,7 +121,6 @@ public class ClassPathUtil {
 		String path = URLCodec.decodeURL(url.getPath());
 
 		if (ServerDetector.isWebLogic()) {
-
 			if (protocol.equals("zip")) {
 				path = "file:".concat(path);
 			}
