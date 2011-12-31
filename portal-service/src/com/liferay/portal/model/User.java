@@ -191,6 +191,14 @@ public interface User extends UserModel, PersistedModel {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
+	public boolean hasPrivateLayouts()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	public boolean hasPublicLayouts()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
 	public boolean hasReminderQuery();
 
 	public boolean isActive();

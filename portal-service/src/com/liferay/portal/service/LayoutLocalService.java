@@ -786,6 +786,18 @@ public interface LayoutLocalService extends PersistedModelLocalService {
 		java.lang.String preferencesKey, java.lang.String preferencesValue)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getLayoutsCount(com.liferay.portal.model.Group group,
+		boolean privateLayout)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getLayoutsCount(com.liferay.portal.model.User user,
+		boolean privateLayout)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
 	/**
 	* Returns the primary key to use for the next layout.
 	*
@@ -821,6 +833,12 @@ public interface LayoutLocalService extends PersistedModelLocalService {
 		long groupId, boolean privateLayout)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public boolean hasLayouts(com.liferay.portal.model.Group group,
+		boolean privateLayout)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
 	/**
 	* Returns <code>true</code> if the group has any layouts;
 	* <code>false</code> otherwise.
@@ -838,7 +856,8 @@ public interface LayoutLocalService extends PersistedModelLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public boolean hasLayouts(long companyId, long userId, boolean privateLayout)
+	public boolean hasLayouts(com.liferay.portal.model.User user,
+		boolean privateLayout)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
