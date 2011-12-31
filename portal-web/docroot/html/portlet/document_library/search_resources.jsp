@@ -433,7 +433,7 @@ int total = 0;
 							<liferay-ui:section>
 								<div id="<portlet:namespace />repositorySearchResultsContainer<%= mountFolder.getRepositoryId() %>">
 									<div class="portlet-msg-info">
-										<%= LanguageUtil.get(pageContext, "searching-please-wait") %>
+										<%= LanguageUtil.get(pageContext, "searching,-please-wait") %>
 									</div>
 								</div>
 							</liferay-ui:section>
