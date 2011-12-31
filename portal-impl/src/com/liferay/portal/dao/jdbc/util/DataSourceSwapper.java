@@ -164,7 +164,7 @@ public class DataSourceSwapper {
 				"liferayTransactionManager");
 
 		if (abstractPlatformTransactionManager instanceof
-			HibernateTransactionManager) {
+				HibernateTransactionManager) {
 
 			HibernateTransactionManager hibernateTransactionManager =
 				(HibernateTransactionManager)abstractPlatformTransactionManager;
@@ -173,10 +173,10 @@ public class DataSourceSwapper {
 				sessionFactoryImplementor);
 		}
 		else if (_log.isWarnEnabled()) {
-			_log.warn("Non-HibernateTransactionManager is detected for " +
-				"Hibernate Persistence infrastructure. Unable to swap to new " +
-				"SessionFactoryImplementor. This may cause subsequence " +
-				"transaction failure.");
+			_log.warn(
+				"Unable to swap to session factory for " +
+					abstractPlatformTransactionManager.getClass() +
+						" which may cause subsequent transaction failures");
 		}
 	}
 
