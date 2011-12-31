@@ -19,12 +19,13 @@
 <%
 String redirect = ParamUtil.getString(request, "redirect");
 
+long repositoryId = ParamUtil.getLong(request, "repositoryId");
+long folderId = ParamUtil.getLong(request, "folderId");
+
 long breadcrumbsFolderId = ParamUtil.getLong(request, "breadcrumbsFolderId");
 
 long searchFolderId = ParamUtil.getLong(request, "searchFolderId");
 long searchFolderIds = ParamUtil.getLong(request, "searchFolderIds");
-
-long folderId = ParamUtil.getLong(request, "folderId");
 
 long[] folderIdsArray = null;
 
@@ -41,11 +42,9 @@ else {
 	folderIdsArray = StringUtil.split(StringUtil.merge(folderIds), 0L);
 }
 
-long repositoryId = ParamUtil.getLong(request, "repositoryId");
+String keywords = ParamUtil.getString(request, "keywords");
 
 int mountFoldersCount = DLAppServiceUtil.getMountFoldersCount(scopeGroupId, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID);
-
-String keywords = ParamUtil.getString(request, "keywords");
 %>
 
 <liferay-portlet:renderURL varImpl="searchURL">
@@ -192,7 +191,7 @@ String keywords = ParamUtil.getString(request, "keywords");
 				sb.append(mountFolder.getName());
 				sb.append("</a>");
 
-				if (i != (mountFoldersCount - 1)) {
+				if ((i + 1) > mountFoldersCount) {
 					sb.append(", ");
 				}
 			}
