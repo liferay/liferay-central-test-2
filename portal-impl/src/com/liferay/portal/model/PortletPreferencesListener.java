@@ -76,9 +76,9 @@ public class PortletPreferencesListener
 
 	protected void updateLayout(PortletPreferences portletPreferences) {
 		try {
-			if ((portletPreferences.getPlid() > 0) &&
-				(portletPreferences.getOwnerType() ==
-					PortletKeys.PREFS_OWNER_TYPE_LAYOUT)) {
+			if ((portletPreferences.getOwnerType() ==
+					PortletKeys.PREFS_OWNER_TYPE_LAYOUT) &&
+				(portletPreferences.getPlid() > 0)) {
 
 				Layout layout = LayoutLocalServiceUtil.fetchLayout(
 					portletPreferences.getPlid());
@@ -93,10 +93,11 @@ public class PortletPreferencesListener
 			}
 		}
 		catch (Exception e) {
-			_log.error("Error updating the layout modified date", e);
+			_log.error("Unable to update the layout's modified date", e);
 		}
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(
 		PortletPreferencesListener.class);
+
 }
