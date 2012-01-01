@@ -821,8 +821,8 @@ public class PortletExporter {
 
 		if (exportPortletUserPreferences) {
 			List<PortletPreferences> portletPreferencesList =
-				PortletPreferencesLocalServiceUtil.getUserPortletPreferences(
-					plid, portletId);
+				PortletPreferencesLocalServiceUtil.getPortletPreferences(
+					PortletKeys.PREFS_OWNER_TYPE_USER, plid, portletId);
 
 			for (PortletPreferences portletPreferences :
 					portletPreferencesList) {
