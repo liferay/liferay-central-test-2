@@ -17,7 +17,6 @@ package com.liferay.portal.kernel.jmx;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -35,7 +34,6 @@ import javax.management.ObjectName;
 public class MBeanRegistry {
 
 	public void destroy() throws Exception {
-
 		synchronized (_objectNameCache) {
 			for (ObjectName objectName : _objectNameCache.values()) {
 				try {
