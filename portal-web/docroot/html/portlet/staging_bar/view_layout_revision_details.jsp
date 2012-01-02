@@ -160,8 +160,8 @@ else {
 						}
 						%>
 
-							title: '<%= UnicodeLanguageUtil.get(pageContext, submitMessage) %>',
-							disabled: true,
+						disabled: true,
+						title: '<%= UnicodeLanguageUtil.get(pageContext, submitMessage) %>',
 
 					</c:when>
 				</c:choose>
