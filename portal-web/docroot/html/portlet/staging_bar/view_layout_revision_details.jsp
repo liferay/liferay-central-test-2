@@ -148,27 +148,22 @@ else {
 							);
 						},
 					</c:when>
-					<c:otherwise>
+					<c:when test="<%= workflowEnabled && !pendingLayoutRevisions.isEmpty() %>">
 
 						<%
-						if (workflowEnabled) {
-							String submitMessage = "you-cannot-submit-your-changes-because-someone-else-has-submitted-changes-for-approval";
+						String submitMessage = "you-cannot-submit-your-changes-because-someone-else-has-submitted-changes-for-approval";
 
-							LayoutRevision pendingLayoutRevision = pendingLayoutRevisions.get(0);
+						LayoutRevision pendingLayoutRevision = pendingLayoutRevisions.get(0);
 
-							if (pendingLayoutRevision != null && (pendingLayoutRevision.getUserId() == user.getUserId())) {
-								submitMessage = "you-cannot-submit-your-changes-because-your-previous-submission-is-still-waiting-for-approval";
-							}
+						if (pendingLayoutRevision != null && (pendingLayoutRevision.getUserId() == user.getUserId())) {
+							submitMessage = "you-cannot-submit-your-changes-because-your-previous-submission-is-still-waiting-for-approval";
+						}
 						%>
 
 							title: '<%= UnicodeLanguageUtil.get(pageContext, submitMessage) %>',
 							disabled: true,
 
-						<%
-						}
-						%>
-
-					</c:otherwise>
+					</c:when>
 				</c:choose>
 
 				<%
