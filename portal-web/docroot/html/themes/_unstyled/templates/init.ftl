@@ -55,7 +55,7 @@
 
 <#assign company_id = company.getCompanyId() />
 <#assign company_name = company.getName() />
-<#assign company_logo = theme_display.getCompanyLogo() />
+<#assign company_logo = htmlUtil.escape(theme_display.getCompanyLogo()) />
 <#assign company_logo_height = theme_display.getCompanyLogoHeight() />
 <#assign company_logo_width = theme_display.getCompanyLogoWidth() />
 <#assign company_url = theme_display.getURLHome() />
