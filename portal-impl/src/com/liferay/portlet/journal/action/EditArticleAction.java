@@ -579,7 +579,7 @@ public class EditArticleAction extends PortletAction {
 		String layoutUuid = ParamUtil.getString(
 			uploadPortletRequest, "layoutUuid");
 
-		// The target page must exist within the group of the article
+		// The target page and the article must belong to the same group
 
 		Layout targetLayout =
 			LayoutLocalServiceUtil.fetchLayoutByUuidAndGroupId(
