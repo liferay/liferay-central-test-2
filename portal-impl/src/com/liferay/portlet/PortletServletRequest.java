@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.util.portlet.PortletRequestUtil;
 import com.liferay.util.servlet.GenericServletInputStream;
 
 import java.io.BufferedReader;
@@ -384,7 +385,7 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 
 	@Override
 	public String getServerName() {
-		return _portletRequest.getServerName();
+		return PortletRequestUtil.getServerName(_portletRequest);
 	}
 
 	@Override

@@ -44,6 +44,7 @@ import com.liferay.portal.kernel.servlet.FileTimestampUtil;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.servlet.HttpMethods;
 import com.liferay.portal.kernel.servlet.PipingServletResponse;
+import com.liferay.portal.kernel.servlet.ServletRequestUtil;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.StringServletResponse;
 import com.liferay.portal.kernel.servlet.taglib.ui.BreadcrumbEntry;
@@ -187,6 +188,7 @@ import com.liferay.util.Encryptor;
 import com.liferay.util.JS;
 import com.liferay.util.PwdGenerator;
 import com.liferay.util.UniqueList;
+import com.liferay.util.portlet.PortletRequestUtil;
 import com.liferay.util.servlet.DynamicServletRequest;
 
 import java.io.IOException;
@@ -2725,11 +2727,7 @@ public class PortalImpl implements Portal {
 	}
 
 	public String getPortalURL(HttpServletRequest request, boolean secure) {
-		String serverName = request.getServerName();
-
-		if (!Validator.isDomain(serverName)) {
-			throw new RuntimeException("Invalid server name " + serverName);
-		}
+		String serverName = ServletRequestUtil.getServerName(request);
 
 		return getPortalURL(serverName, request.getServerPort(), secure);
 	}
@@ -2762,9 +2760,9 @@ public class PortalImpl implements Portal {
 	}
 
 	public String getPortalURL(PortletRequest portletRequest, boolean secure) {
-		return getPortalURL(
-			portletRequest.getServerName(), portletRequest.getServerPort(),
-			secure);
+		String serverName = PortletRequestUtil.getServerName(portletRequest);
+
+		return getPortalURL(serverName, portletRequest.getServerPort(), secure);
 	}
 
 	public String getPortalURL(
