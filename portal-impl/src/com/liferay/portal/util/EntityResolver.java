@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.util.KeyValuePair;
 import java.io.InputStream;
 
 import org.apache.xerces.xni.XNIException;
+
 import org.xml.sax.InputSource;
 
 /**
@@ -72,8 +73,7 @@ public class EntityResolver implements org.xml.sax.EntityResolver {
 			}
 
 			if (!systemId.endsWith(".dtd") || !systemId.endsWith(".xsd")) {
-				throw new XNIException(
-					"Invalid system resource specified: " + systemId);
+				throw new XNIException("Invalid system id " + systemId);
 			}
 
 			InputStream inputStream = classLoader.getResourceAsStream(systemId);
@@ -86,15 +86,13 @@ public class EntityResolver implements org.xml.sax.EntityResolver {
 				return inputSource;
 			}
 			else {
-				throw new XNIException(
-					"Invalid system resource specified: " + systemId);
+				throw new XNIException("Invalid system id " + systemId);
 			}
 		}
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("No entity found for " + publicId + " " + systemId);
 		}
-
 
 		return null;
 	}
