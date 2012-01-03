@@ -52,10 +52,10 @@ for (int displayActivityCounterNameIndex : displayActivityCounterNameIndexes) {
 	else {
 		if (chartType.equals("pie")) {
 			if (dataRange.equals("year")) {
-				activityCounters = SocialActivityCounterLocalServiceUtil.getPeriodActivityCounterDistribution(scopeGroupId, displayActivityCounterName, SocialCounterPeriodUtil.getFirstActivityDayOfYear(), SocialCounterPeriodUtil.getEndPeriod());
+				activityCounters = SocialActivityCounterLocalServiceUtil.getPeriodDistributionActivityCounters(scopeGroupId, displayActivityCounterName, SocialCounterPeriodUtil.getFirstActivityDayOfYear(), SocialCounterPeriodUtil.getEndPeriod());
 			}
 			else {
-				activityCounters = SocialActivityCounterLocalServiceUtil.getOffsetActivityCounterDistribution(scopeGroupId, displayActivityCounterName, -12, 0);
+				activityCounters = SocialActivityCounterLocalServiceUtil.getOffsetDistributionActivityCounters(scopeGroupId, displayActivityCounterName, -12, 0);
 			}
 
 			displayHeight = Math.max((activityCounters.size() + 1) * 18, displayHeight);

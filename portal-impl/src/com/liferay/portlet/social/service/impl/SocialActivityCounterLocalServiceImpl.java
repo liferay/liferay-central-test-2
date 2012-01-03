@@ -32,7 +32,6 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.asset.model.AssetEntry;
-import com.liferay.portlet.social.NoSuchActivityCounterException;
 import com.liferay.portlet.social.model.SocialAchievement;
 import com.liferay.portlet.social.model.SocialActivity;
 import com.liferay.portlet.social.model.SocialActivityCounter;
@@ -338,17 +337,6 @@ public class SocialActivityCounterLocalServiceImpl
 			SocialActivityCounterConstants.END_PERIOD_UNDEFINED);
 	}
 
-	public List<SocialActivityCounter> getOffsetActivityCounterDistribution(
-			long groupId, String name, int startOffset, int endOffset)
-		throws SystemException {
-
-		int startPeriod = SocialCounterPeriodUtil.getStartPeriod(startOffset);
-		int endPeriod = SocialCounterPeriodUtil.getEndPeriod(endOffset);
-
-		return getPeriodActivityCounterDistribution(
-			groupId, name, startPeriod, endPeriod);
-	}
-
 	public List<SocialActivityCounter> getOffsetActivityCounters(
 			long groupId, String name, int startOffset, int endOffset)
 		throws SystemException {
@@ -359,16 +347,15 @@ public class SocialActivityCounterLocalServiceImpl
 		return getPeriodActivityCounters(groupId, name, startPeriod, endPeriod);
 	}
 
-	public List<SocialActivityCounter> getPeriodActivityCounterDistribution(
-			long groupId, String name, int startPeriod, int endPeriod)
+	public List<SocialActivityCounter> getOffsetDistributionActivityCounters(
+			long groupId, String name, int startOffset, int endOffset)
 		throws SystemException {
 
-		int offset = SocialCounterPeriodUtil.getOffset(endPeriod);
+		int startPeriod = SocialCounterPeriodUtil.getStartPeriod(startOffset);
+		int endPeriod = SocialCounterPeriodUtil.getEndPeriod(endOffset);
 
-		int periodLength = SocialCounterPeriodUtil.getPeriodLength(offset);
-
-		return socialActivityCounterFinder.findAC_ByG_N_S_E_2(
-			groupId, name, startPeriod, endPeriod, periodLength);
+		return getPeriodDistributionActivityCounters(
+			groupId, name, startPeriod, endPeriod);
 	}
 
 	public List<SocialActivityCounter> getPeriodActivityCounters(
@@ -383,11 +370,16 @@ public class SocialActivityCounterLocalServiceImpl
 			groupId, name, startPeriod, endPeriod, periodLength);
 	}
 
-	public int getUserActivityCounters(long groupId, String[] rankingNames)
+	public List<SocialActivityCounter> getPeriodDistributionActivityCounters(
+			long groupId, String name, int startPeriod, int endPeriod)
 		throws SystemException {
 
-		return SocialActivityCounterFinderUtil.countU_ByG_N(
-			groupId, rankingNames);
+		int offset = SocialCounterPeriodUtil.getOffset(endPeriod);
+
+		int periodLength = SocialCounterPeriodUtil.getPeriodLength(offset);
+
+		return socialActivityCounterFinder.findAC_ByG_N_S_E_2(
+			groupId, name, startPeriod, endPeriod, periodLength);
 	}
 
 	public List<Tuple> getUserActivityCounters(
@@ -436,6 +428,13 @@ public class SocialActivityCounterLocalServiceImpl
 		}
 
 		return Arrays.asList(userActivityCounters);
+	}
+
+	public int getUserActivityCountersCount(long groupId, String[] rankingNames)
+		throws SystemException {
+
+		return SocialActivityCounterFinderUtil.countU_ByG_N(
+			groupId, rankingNames);
 	}
 
 	public void incrementUserAchievementCounter(long userId, long groupId)

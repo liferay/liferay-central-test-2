@@ -34,7 +34,7 @@ String[] rankingNames = rankingNamesList.toArray(new String[rankingNamesList.siz
 if (!rankingNamesList.isEmpty()) {
 	SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, 5, portletURL, null, null);
 
-	int total = SocialActivityCounterLocalServiceUtil.getUserActivityCounters(scopeGroupId, rankingNames);
+	int total = SocialActivityCounterLocalServiceUtil.getUserActivityCountersCount(scopeGroupId, rankingNames);
 
 	searchContainer.setTotal(total);
 
