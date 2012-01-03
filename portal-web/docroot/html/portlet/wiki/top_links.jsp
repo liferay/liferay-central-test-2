@@ -46,7 +46,7 @@ portletURL.setParameter("nodeName", node.getName());
 
 long categoryId = ParamUtil.getLong(request, "categoryId");
 
-if (categoryId > 0)	{
+if (categoryId > 0) {
 	portletURL.setParameter("categoryId", "0");
 }
 %>
