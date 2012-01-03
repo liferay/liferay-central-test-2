@@ -43,7 +43,6 @@ public class ValidHtmlFilter extends BasePortalFilter {
 		HttpServletRequest request, HttpServletResponse response) {
 
 		if (isAlreadyFiltered(request)) {
-
 			return false;
 		}
 		else {
