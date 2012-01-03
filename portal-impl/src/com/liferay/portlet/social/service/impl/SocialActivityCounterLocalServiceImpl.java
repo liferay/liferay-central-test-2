@@ -48,6 +48,7 @@ import com.liferay.portlet.social.util.SocialCounterPeriodUtil;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -102,28 +103,30 @@ public class SocialActivityCounterLocalServiceImpl
 				break;
 			}
 
-			long elapsedTime = System.currentTimeMillis() -
-				lock.getCreateDate().getTime();
+			Date createDate = lock.getCreateDate();
 
-			if (elapsedTime >= _lockTimeout) {
+			if ((System.currentTimeMillis() - createDate.getTime()) >=
+					PropsValues.SOCIAL_ACTIVITY_COUNTER_LOCK_TIMEOUT) {
 
 				lockLocalService.unlock(
 					SocialActivityCounter.class.getName(), lockKey,
 					lock.getOwner(), false);
 
 				if (_log.isWarnEnabled()) {
-					_log.warn("Forcibly removed timeout Lock : " + lock +
-						". Please increase the " + _lockTimeoutKey +
-						" value, if this is a false remove.");
+					_log.warn(
+						"Forcibly removed lock " + lock + ". See " +
+							PropsKeys.SOCIAL_ACTIVITY_COUNTER_LOCK_TIMEOUT);
 				}
 			}
 			else {
 				try {
-					Thread.sleep(_lockRetryDelay);
+					Thread.sleep(
+						PropsValues.SOCIAL_ACTIVITY_COUNTER_LOCK_RETRY_DELAY);
 				}
 				catch (InterruptedException ie) {
 					if (_log.isWarnEnabled()) {
-						_log.warn("Interrupted from Lock retry delay.", ie);
+						_log.warn(
+							"Interrupted while waiting to reacquire lock", ie);
 					}
 				}
 			}
@@ -213,13 +216,6 @@ public class SocialActivityCounterLocalServiceImpl
 			groupId, classNameId, classPK, name, ownerType, false);
 
 		if (activityCounter != null) {
-
-			// Brian, please remove this line. I added it here just to prove my
-			// point that, within current new tx, you can see previously
-			// concurrent added SocialActivityCounter.
-			System.out.println("Found a concurrent added " +
-				"SocialActivityCounter : " + activityCounter);
-
 			return activityCounter;
 		}
 
@@ -655,14 +651,5 @@ public class SocialActivityCounterLocalServiceImpl
 
 	private static Log _log = LogFactoryUtil.getLog(
 		SocialActivityCounterLocalService.class);
-
-	private long _lockRetryDelay =
-		PropsValues.SOCIAL_ACTIVITY_COUNTER_CONCURRENT_ADD_LOCK_RETRY_DELAY;
-
-	private long _lockTimeout =
-		PropsValues.SOCIAL_ACTIVITY_COUNTER_CONCURRENT_ADD_LOCK_TIMEOUT;
-
-	private String _lockTimeoutKey =
-		PropsKeys.SOCIAL_ACTIVITY_COUNTER_CONCURRENT_ADD_LOCK_TIMEOUT;
 
 }

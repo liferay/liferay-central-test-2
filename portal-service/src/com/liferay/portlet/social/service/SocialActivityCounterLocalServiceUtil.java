@@ -272,6 +272,13 @@ public class SocialActivityCounterLocalServiceUtil {
 			ownerType, currentValue, totalValue);
 	}
 
+	public static void addActivityCounters(
+		com.liferay.portlet.social.model.SocialActivity activity)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().addActivityCounters(activity);
+	}
+
 	public static com.liferay.portlet.social.model.SocialActivityCounter createActivityCounter(
 		long groupId, long classNameId, long classPK, java.lang.String name,
 		int ownerType, int currentValue, int totalValue)
@@ -280,13 +287,6 @@ public class SocialActivityCounterLocalServiceUtil {
 		return getService()
 				   .createActivityCounter(groupId, classNameId, classPK, name,
 			ownerType, currentValue, totalValue);
-	}
-
-	public static void addActivityCounters(
-		com.liferay.portlet.social.model.SocialActivity activity)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		getService().addActivityCounters(activity);
 	}
 
 	public static void deleteActivityCounters(
