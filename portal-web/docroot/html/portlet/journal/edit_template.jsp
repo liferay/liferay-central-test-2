@@ -106,7 +106,7 @@ if (template == null) {
 	<aui:input name="groupId" type="hidden" value="<%= groupId %>" />
 	<aui:input name="templateId" type="hidden" value="<%= templateId %>" />
 	<aui:input name="xslContent" type="hidden" value="<%= JS.encodeURIComponent(xsl) %>" />
-	<aui:input disabled="true" name="editorContentInput" type="hidden" value="<%= JS.encodeURIComponent(editorContent) %>" />
+	<aui:input disabled="<%= true %>" name="editorContentInput" type="hidden" value="<%= JS.encodeURIComponent(editorContent) %>" />
 	<aui:input name="saveAndContinue" type="hidden" />
 
 	<liferay-ui:header
