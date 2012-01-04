@@ -14,8 +14,6 @@
 
 package com.liferay.portlet.blogs.action;
 
-import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.struts.FindAction;
@@ -87,7 +85,7 @@ public class FindEntryAction extends FindAction {
 	@Override
 	protected void setPrimaryKeyParameter(
 			PortletURL portletURL, long primaryKey)
-		throws PortalException, SystemException {
+		throws Exception {
 
 		BlogsEntry entry = BlogsEntryLocalServiceUtil.getEntry(primaryKey);
 

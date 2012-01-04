@@ -15,8 +15,6 @@
 package com.liferay.portal.struts;
 
 import com.liferay.portal.NoSuchLayoutException;
-import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -184,7 +182,7 @@ public abstract class FindAction extends Action {
 
 	protected void setPrimaryKeyParameter(
 			PortletURL portletURL, long primaryKey)
-		throws PortalException, SystemException {
+		throws Exception {
 
 		portletURL.setParameter(
 			getPrimaryKeyParameterName(), String.valueOf(primaryKey));
