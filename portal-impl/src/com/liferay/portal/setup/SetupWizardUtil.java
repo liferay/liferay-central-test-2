@@ -56,6 +56,7 @@ import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 
@@ -161,6 +162,8 @@ public class SetupWizardUtil {
 
 		UnicodeProperties unicodeProperties =
 			PropertiesParamUtil.getProperties(request, _PROPERTIES_PREFIX);
+
+		PropsUtil.addProperties(unicodeProperties);
 
 		unicodeProperties.setProperty(
 			PropsKeys.LIFERAY_HOME,
