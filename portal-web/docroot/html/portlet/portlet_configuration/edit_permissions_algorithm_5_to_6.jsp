@@ -219,8 +219,12 @@ definePermissionsURL.setParameter(Constants.CMD, Constants.VIEW);
 			if (name.equals(RoleConstants.GUEST) && modelResource.equals(Layout.class.getName())) {
 				Layout resourceLayout = LayoutLocalServiceUtil.getLayout(GetterUtil.getLong(resourcePrimKey));
 
-				if (resourceLayout.isPrivateLayout() && !resourceLayout.getGroup().isLayoutSetPrototype()) {
-					itr.remove();
+				if (resourceLayout.isPrivateLayout()) {
+					Group resourceLayoutGroup = resourceLayout.getGroup();
+
+					if (!resourceLayoutGroup.isLayoutSetPrototype()) {
+						itr.remove();
+					}
 				}
 			}
 
@@ -232,8 +236,12 @@ definePermissionsURL.setParameter(Constants.CMD, Constants.VIEW);
 
 					Layout resourceLayout = LayoutLocalServiceUtil.getLayout(resourcePlid);
 
-					if (resourceLayout.isPrivateLayout() && !resourceLayout.getGroup().isLayoutSetPrototype()) {
-						itr.remove();
+					if (resourceLayout.isPrivateLayout()) {
+						Group resourceLayoutGroup = resourceLayout.getGroup();
+
+						if (!resourceLayoutGroup.isLayoutSetPrototype()) {
+							itr.remove();
+						}
 					}
 				}
 			}
