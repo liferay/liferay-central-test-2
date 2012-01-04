@@ -181,11 +181,11 @@ public abstract class FindAction extends Action {
 
 		return portletURL;
 	}
-	
+
 	protected void setPrimaryKeyParameter(
 			PortletURL portletURL, long primaryKey)
 		throws PortalException, SystemException {
-	
+
 		portletURL.setParameter(
 			getPrimaryKeyParameterName(), String.valueOf(primaryKey));
 	}
