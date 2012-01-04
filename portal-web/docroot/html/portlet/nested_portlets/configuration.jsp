@@ -61,7 +61,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 				</c:if>
 
 		<%
-				++i;
+				i++;
 			}
 		}
 		%>
