@@ -163,7 +163,11 @@ public class SetupWizardUtil {
 		UnicodeProperties unicodeProperties =
 			PropertiesParamUtil.getProperties(request, _PROPERTIES_PREFIX);
 
-		PropsUtil.addProperties(unicodeProperties);
+		Properties properties = new Properties();
+
+		properties.putAll(unicodeProperties);
+
+		PropsUtil.addProperties(properties);
 
 		unicodeProperties.setProperty(
 			PropsKeys.LIFERAY_HOME,
