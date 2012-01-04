@@ -393,6 +393,7 @@ AUI.add(
 						var instance = this;
 
 						var currentTarget = event.currentTarget;
+
 						var assetId;
 
 						if (A.instanceOf(currentTarget, A.Node)) {
