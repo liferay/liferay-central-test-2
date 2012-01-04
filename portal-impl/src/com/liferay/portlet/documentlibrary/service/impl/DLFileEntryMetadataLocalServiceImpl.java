@@ -18,7 +18,6 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portlet.documentlibrary.NoSuchFileEntryMetadataException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntryMetadata;
 import com.liferay.portlet.documentlibrary.model.DLFileEntryType;
 import com.liferay.portlet.documentlibrary.service.base.DLFileEntryMetadataLocalServiceBaseImpl;
@@ -134,6 +133,7 @@ public class DLFileEntryMetadataLocalServiceImpl
 				fileEntryMetadata.getDDMStorageId(), fields, serviceContext);
 		}
 		else {
+
 			// File entry metadata
 
 			long fileEntryMetadataId = counterLocalService.increment();
