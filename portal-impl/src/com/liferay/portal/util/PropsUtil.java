@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.SystemProperties;
+import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.security.auth.CompanyThreadLocal;
 
@@ -43,6 +44,10 @@ public class PropsUtil {
 
 	public static void addProperties(Properties properties) {
 		_instance._addProperties(properties);
+	}
+
+	public static void addProperties(UnicodeProperties unicodeProperties) {
+		_instance._addProperties(unicodeProperties);
 	}
 
 	public static boolean contains(String key) {
@@ -186,6 +191,14 @@ public class PropsUtil {
 
 	private void _addProperties(Properties properties) {
 		_getConfiguration().addProperties(properties);
+	}
+
+	private void _addProperties(UnicodeProperties unicodeProperties) {
+		Properties properties = new Properties();
+
+		properties.putAll(unicodeProperties);
+
+		_addProperties(properties);
 	}
 
 	private boolean _contains(String key) {
