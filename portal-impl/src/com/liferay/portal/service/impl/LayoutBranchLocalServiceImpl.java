@@ -21,7 +21,6 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.LayoutBranch;
-import com.liferay.portal.model.LayoutBranchConstants;
 import com.liferay.portal.model.LayoutRevision;
 import com.liferay.portal.model.LayoutRevisionConstants;
 import com.liferay.portal.model.LayoutSetBranch;
@@ -76,8 +75,7 @@ public class LayoutBranchLocalServiceImpl
 			layoutRevisionPersistence.findByPrimaryKey(layoutRevisionId);
 
 		validate(
-			LayoutBranchConstants.NO_BRANCHES,
-			layoutRevision.getLayoutSetBranchId(), layoutRevision.getPlid(),
+			0, layoutRevision.getLayoutSetBranchId(), layoutRevision.getPlid(),
 			name);
 
 		LayoutBranch layoutBranch = addLayoutBranch(
@@ -166,7 +164,7 @@ public class LayoutBranchLocalServiceImpl
 			layoutBranchPersistence.findByPrimaryKey(layoutBranchId);
 
 		validate(
-			layoutBranch.getLayoutBranchId(), 
+			layoutBranch.getLayoutBranchId(),
 			layoutBranch.getLayoutSetBranchId(), layoutBranch.getPlid(), name);
 
 		layoutBranch.setName(name);
@@ -190,7 +188,7 @@ public class LayoutBranchLocalServiceImpl
 			throw new LayoutBranchNameException(
 				LayoutBranchNameException.TOO_LONG);
 		}
-		
+
 		try {
 			LayoutBranch layoutBranch = layoutBranchPersistence.findByL_P_N(
 				layoutSetBranchId, plid, name);
