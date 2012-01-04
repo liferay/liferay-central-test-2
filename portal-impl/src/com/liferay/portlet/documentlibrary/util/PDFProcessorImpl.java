@@ -84,9 +84,9 @@ public class PDFProcessorImpl
 		super();
 
 		ReadWriteLock readWriteLock = new ReentrantReadWriteLock();
+
 		_initializedReadLock = readWriteLock.readLock();
 		_initializedWriteLock = readWriteLock.writeLock();
-
 	}
 
 	public void generateImages(FileVersion fileVersion) throws Exception {
@@ -276,15 +276,18 @@ public class PDFProcessorImpl
 
 	protected void initialize() {
 		_initializedReadLock.lock();
+
 		try {
 			if (_initialized) {
 				return;
 			}
-		} finally {
+		}
+		finally {
 			_initializedReadLock.unlock();
 		}
 
 		_initializedWriteLock.lock();
+
 		try {
 			FileUtil.mkdirs(PREVIEW_TMP_PATH);
 			FileUtil.mkdirs(THUMBNAIL_TMP_PATH);
