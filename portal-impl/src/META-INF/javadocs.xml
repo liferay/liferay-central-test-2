@@ -65782,6 +65782,43 @@ Useful when paginating results. Returns a maximum of <code>end - start</code> in
 			</throws>
 		</method>
 		<method>
+			<name>getFileEntriesAndFileShortcutsCount</name>
+			<comment><![CDATA[Returns the number of file entries and shortcuts in the folder.]]></comment>
+			<param>
+				<name>repositoryId</name>
+				<type>long</type>
+				<comment><![CDATA[the primary key of the repository]]></comment>
+			</param>
+			<param>
+				<name>folderId</name>
+				<type>long</type>
+				<comment><![CDATA[the primary key of the folder]]></comment>
+			</param>
+			<param>
+				<name>status</name>
+				<type>int</type>
+				<comment><![CDATA[the workflow status]]></comment>
+			</param>
+			<param>
+				<name>mimeTypes</name>
+				<type>java.lang.String[]</type>
+				<comment><![CDATA[allowed media types]]></comment>
+			</param>
+			<return>
+				<comment><![CDATA[the number of file entries and shortcuts in the folder]]></comment>
+			</return>
+			<throws>
+				<name>PortalException</name>
+				<type>com.liferay.portal.kernel.exception.PortalException</type>
+				<comment><![CDATA[if the folder ould not be found]]></comment>
+			</throws>
+			<throws>
+				<name>SystemException</name>
+				<type>com.liferay.portal.kernel.exception.SystemException</type>
+				<comment><![CDATA[if a system exception occurred]]></comment>
+			</throws>
+		</method>
+		<method>
 			<name>getFileEntriesCount</name>
 			<comment><![CDATA[Returns the number of file entries in the folder.]]></comment>
 			<param>

@@ -909,7 +909,7 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 		Repository repository = getRepository(repositoryId);
 
 		return repository.getFileEntriesAndFileShortcutsCount(
-				folderId, status, mimeTypes);
+			folderId, status, mimeTypes);
 	}
 
 	/**

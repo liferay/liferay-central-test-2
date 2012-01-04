@@ -133,8 +133,8 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 			long groupId, long folderId, int status, String[] mimeTypes)
 		throws SystemException {
 
-		return dlFolderFinder.filterCountFE_FS_ByG_F_S(groupId, folderId,
-			status, mimeTypes);
+		return dlFolderFinder.filterCountFE_FS_ByG_F_S_M(
+			groupId, folderId, status, mimeTypes);
 	}
 
 	public DLFolder getFolder(long folderId)
@@ -199,7 +199,7 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 			OrderByComparator obc)
 		throws SystemException {
 
-		return dlFolderFinder.filterFindF_FE_FS_ByG_F_S(
+		return dlFolderFinder.filterFindF_FE_FS_ByG_F_S_M_M(
 			groupId, folderId, status, null, includeMountFolders, start, end,
 			obc);
 	}
@@ -209,7 +209,7 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 			boolean includeMountFolders)
 		throws SystemException {
 
-		return dlFolderFinder.filterCountF_FE_FS_ByG_F_S(
+		return dlFolderFinder.filterCountF_FE_FS_ByG_F_S_M_M(
 			groupId, folderId, status, mimeTypes, includeMountFolders);
 	}
 
@@ -219,7 +219,7 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 			OrderByComparator obc)
 		throws SystemException {
 
-		return dlFolderFinder.filterFindF_FE_FS_ByG_F_S(
+		return dlFolderFinder.filterFindF_FE_FS_ByG_F_S_M_M(
 			groupId, folderId, status, mimeTypes, includeMountFolders, start,
 			end, obc);
 	}
@@ -229,7 +229,7 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 			boolean includeMountFolders)
 		throws SystemException {
 
-		return dlFolderFinder.filterCountF_FE_FS_ByG_F_S(
+		return dlFolderFinder.filterCountF_FE_FS_ByG_F_S_M_M(
 			groupId, folderId, status, null, includeMountFolders);
 	}
 
@@ -238,7 +238,7 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 			boolean includeMountFolders)
 		throws SystemException {
 
-		return dlFolderFinder.filterCountF_FE_FS_ByG_F_S(
+		return dlFolderFinder.filterCountF_FE_FS_ByG_F_S_M_M(
 			groupId, folderId, status, mimeTypes, includeMountFolders);
 	}
 

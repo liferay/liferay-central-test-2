@@ -194,11 +194,11 @@ request.setAttribute("view_entries.jsp-total", String.valueOf(total));
 	<c:when test="<%= results.isEmpty() %>">
 		<div class="portlet-msg-info">
 			<liferay-ui:message key="there-are-no-documents-or-media-files-in-this-folder" />
-		</div>	
+		</div>
 	</c:when>
 	<c:when test="<%= System.currentTimeMillis() > 1328126400000L %>">
 		<div class="portlet-msg-info sync-notification">
-			<a href="http://www.liferay.com/products/liferay-sync">
+			<a href="http://www.liferay.com/products/liferay-sync" target="_blank">
 				<liferay-ui:message key="access-these-files-offline-using-liferay-sync" />
 			</a>
 		</div>

@@ -270,7 +270,7 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 			OrderByComparator obc)
 		throws SystemException {
 
-		return dlFolderFinder.findF_FE_FS_ByG_F_S(
+		return dlFolderFinder.findF_FE_FS_ByG_F_S_M_M(
 			groupId, folderId, status, null, includeMountFolders, start, end,
 			obc);
 	}
@@ -281,7 +281,7 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 			OrderByComparator obc)
 		throws SystemException {
 
-		return dlFolderFinder.findF_FE_FS_ByG_F_S(
+		return dlFolderFinder.findF_FE_FS_ByG_F_S_M_M(
 			groupId, folderId, status, mimeTypes, includeMountFolders, start,
 			end, obc);
 	}
@@ -291,7 +291,7 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 			boolean includeMountFolders)
 		throws SystemException {
 
-		return dlFolderFinder.countF_FE_FS_ByG_F_S(
+		return dlFolderFinder.countF_FE_FS_ByG_F_S_M_M(
 			groupId, folderId, status, null, includeMountFolders);
 	}
 
@@ -300,7 +300,7 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 			boolean includeMountFolders)
 		throws SystemException {
 
-		return dlFolderFinder.countF_FE_FS_ByG_F_S(
+		return dlFolderFinder.countF_FE_FS_ByG_F_S_M_M(
 			groupId, folderId, status, mimeTypes, includeMountFolders);
 	}
 
