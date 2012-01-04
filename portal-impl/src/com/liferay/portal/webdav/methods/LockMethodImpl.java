@@ -15,7 +15,6 @@
 package com.liferay.portal.webdav.methods;
 
 import com.liferay.portal.NoSuchLockException;
-import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.ServletResponseUtil;
@@ -84,17 +83,16 @@ public class LockMethodImpl implements Method {
 					_log.debug("Request XML\n" + XMLFormatter.toString(xml));
 				}
 
-				Document doc = SAXReaderUtil.read(new UnsyncStringReader(xml));
+				Document document = SAXReaderUtil.read(xml);
 
-				Element root = doc.getRootElement();
+				Element rootElement = document.getRootElement();
 
 				boolean exclusive = false;
 
-				List<Element> lockscopeEls = root.element(
-					"lockscope").elements();
+				Element lockscopeElement = rootElement.element("lockscope");
 
-				for (Element scopeEl : lockscopeEls) {
-					String name = GetterUtil.getString(scopeEl.getName());
+				for (Element element : lockscopeElement.elements()) {
+					String name = GetterUtil.getString(element.getName());
 
 					if (name.equals("exclusive")) {
 						exclusive = true;
@@ -105,16 +103,17 @@ public class LockMethodImpl implements Method {
 					return HttpServletResponse.SC_BAD_REQUEST;
 				}
 
-				Element ownerEl = root.element("owner");
+				Element ownerElement = rootElement.element("owner");
 
-				owner = ownerEl.getTextTrim();
+				owner = ownerElement.getTextTrim();
 
 				if (Validator.isNull(owner)) {
-					List<Element> childEls = ownerEl.elements("href");
+					List<Element> hrefElements = ownerElement.elements("href");
 
-					for (Element childEl : childEls) {
+					for (Element hrefElement : hrefElements) {
 						owner =
-							"<D:href>" + childEl.getTextTrim() + "</D:href>";
+							"<D:href>" + hrefElement.getTextTrim() +
+								"</D:href>";
 					}
 				}
 			}
