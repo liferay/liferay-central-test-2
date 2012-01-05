@@ -155,8 +155,8 @@ public class LayoutPermissionImpl implements LayoutPermission {
 			String controlPanelCategory, String actionId)
 		throws PortalException, SystemException {
 
-		if (!actionId.equals(ActionKeys.VIEW) &&
-			!actionId.equals(ActionKeys.CUSTOMIZE) &&
+		if (!actionId.equals(ActionKeys.CUSTOMIZE) &&
+			!actionId.equals(ActionKeys.VIEW) &&
 			(layout instanceof VirtualLayout)) {
 
 			return false;
@@ -165,7 +165,9 @@ public class LayoutPermissionImpl implements LayoutPermission {
 		if (actionId.equals(ActionKeys.CUSTOMIZE) &&
 			(layout instanceof VirtualLayout)) {
 
-			layout = ((VirtualLayout)layout).getWrappedModel();
+			VirtualLayout virtualLayout = (VirtualLayout)layout;
+
+			layout = virtualLayout.getWrappedModel();
 		}
 
 		if ((layout.isPrivateLayout() &&
