@@ -24,7 +24,7 @@ public class ConfigurePortletMaximumItemsToDisplay2Test extends BaseTestCase {
 	public void testConfigurePortletMaximumItemsToDisplay2()
 		throws Exception {
 		selenium.open("/web/guest/home/");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -45,7 +45,7 @@ public class ConfigurePortletMaximumItemsToDisplay2Test extends BaseTestCase {
 		selenium.clickAt("link=Asset Publisher Test Page",
 			RuntimeVariables.replace("Asset Publisher Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		Thread.sleep(5000);
 		assertEquals(RuntimeVariables.replace("Options"),
 			selenium.getText("//strong/a"));
@@ -96,7 +96,7 @@ public class ConfigurePortletMaximumItemsToDisplay2Test extends BaseTestCase {
 		selenium.clickAt("//input[@value='Save']",
 			RuntimeVariables.replace("Save"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace(
 				"You have successfully updated the setup."),
 			selenium.getText("//div[@class='portlet-msg-success']"));

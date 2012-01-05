@@ -28,7 +28,7 @@ public class ConfigurePortletDisplaySettingsTest extends BaseTestCase {
 			switch (label) {
 			case 1:
 				selenium.open("/web/guest/home/");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 
 				for (int second = 0;; second++) {
 					if (second >= 90) {
@@ -49,7 +49,7 @@ public class ConfigurePortletDisplaySettingsTest extends BaseTestCase {
 				selenium.clickAt("link=Image Gallery Test Page",
 					RuntimeVariables.replace("Image Gallery Test Page"));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 				Thread.sleep(5000);
 				assertEquals(RuntimeVariables.replace("Options"),
 					selenium.getText("//strong/a"));
@@ -167,12 +167,12 @@ public class ConfigurePortletDisplaySettingsTest extends BaseTestCase {
 				selenium.clickAt("//input[@value='Save']",
 					RuntimeVariables.replace("Save"));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 				assertEquals(RuntimeVariables.replace(
 						"You have successfully updated the setup."),
 					selenium.getText("//div[@class='portlet-msg-success']"));
 				selenium.open("/web/guest/home/");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 
 				for (int second = 0;; second++) {
 					if (second >= 90) {
@@ -193,7 +193,7 @@ public class ConfigurePortletDisplaySettingsTest extends BaseTestCase {
 				selenium.clickAt("link=Image Gallery Test Page",
 					RuntimeVariables.replace("Image Gallery Test Page"));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 				assertTrue(selenium.isVisible("//input[@id='_31_keywords1']"));
 				assertTrue(selenium.isVisible(
 						"//div[@class='top-links-navigation']"));

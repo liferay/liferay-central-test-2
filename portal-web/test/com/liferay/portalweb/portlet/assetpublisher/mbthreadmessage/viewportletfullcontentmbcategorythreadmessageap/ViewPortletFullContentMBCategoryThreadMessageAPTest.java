@@ -25,7 +25,7 @@ public class ViewPortletFullContentMBCategoryThreadMessageAPTest
 	public void testViewPortletFullContentMBCategoryThreadMessageAP()
 		throws Exception {
 		selenium.open("/web/guest/home/");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -46,7 +46,7 @@ public class ViewPortletFullContentMBCategoryThreadMessageAPTest
 		selenium.clickAt("link=Asset Publisher Test Page",
 			RuntimeVariables.replace("Asset Publisher Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace(
 				"MB Category Thread Message Subject"),
 			selenium.getText("//h1[@class='header-title']"));
@@ -57,7 +57,7 @@ public class ViewPortletFullContentMBCategoryThreadMessageAPTest
 		selenium.clickAt("//div[@class='asset-more']/a",
 			RuntimeVariables.replace("View in Context \u00bb"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace(
 				"MB Category Thread Message Subject"),
 			selenium.getText("//h1[@class='header-title']/span"));

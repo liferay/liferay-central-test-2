@@ -24,7 +24,7 @@ public class ErrorAddUserScreenNameNumberSiteIdTest extends BaseTestCase {
 	public void testErrorAddUserScreenNameNumberSiteId()
 		throws Exception {
 		selenium.open("/web/guest/home/");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -45,10 +45,10 @@ public class ErrorAddUserScreenNameNumberSiteIdTest extends BaseTestCase {
 		selenium.clickAt("link=Control Panel",
 			RuntimeVariables.replace("Control Panel"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		selenium.clickAt("link=Sites", RuntimeVariables.replace("Sites"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		selenium.clickAt("//span[@title='Actions']/ul/li/strong/a",
 			RuntimeVariables.replace("Actions"));
 
@@ -75,7 +75,7 @@ public class ErrorAddUserScreenNameNumberSiteIdTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		String SiteID = selenium.getFirstNumber("//fieldset/div/div[1]/div");
 		RuntimeVariables.setValue("SiteID", SiteID);
@@ -99,7 +99,7 @@ public class ErrorAddUserScreenNameNumberSiteIdTest extends BaseTestCase {
 		selenium.clickAt("link=Users and Organizations",
 			RuntimeVariables.replace("Users and Organizations"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		selenium.clickAt("link=Add", RuntimeVariables.replace("Add"));
 
 		for (int second = 0;; second++) {
@@ -125,7 +125,7 @@ public class ErrorAddUserScreenNameNumberSiteIdTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"//div[@class='lfr-component lfr-menu-list']/ul/li/a"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		selenium.type("//input[@id='_125_screenName']",
 			RuntimeVariables.replace(RuntimeVariables.getValue("SiteID")));
 		selenium.type("//input[@id='_125_emailAddress']",
@@ -137,7 +137,7 @@ public class ErrorAddUserScreenNameNumberSiteIdTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Save']",
 			RuntimeVariables.replace("Save"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace(
 				"Your request failed to complete."),
 			selenium.getText("xPath=(//div[@class='portlet-msg-error'])[1]"));

@@ -25,7 +25,7 @@ public class Guest_ViewPermissionsMBThreadMessageGuestViewOffTest
 	public void testGuest_ViewPermissionsMBThreadMessageGuestViewOff()
 		throws Exception {
 		selenium.open("/web/guest/home/");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -46,7 +46,7 @@ public class Guest_ViewPermissionsMBThreadMessageGuestViewOffTest
 		selenium.clickAt("link=Message Boards Test Page",
 			RuntimeVariables.replace("Message Boards Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace(
 				"There are no threads in this category."),
 			selenium.getText("//div[@class='portlet-msg-info']"));

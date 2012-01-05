@@ -23,7 +23,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class AssertNodeTwoTest extends BaseTestCase {
 	public void testAssertNodeTwo() throws Exception {
 		selenium.open("/web/guest/home/");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -47,7 +47,7 @@ public class AssertNodeTwoTest extends BaseTestCase {
 			RuntimeVariables.replace("test"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Sign In']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("Node: [$CLUSTER_NODE_1$]"),
 			selenium.getText("//div[@id='content']/div[3]"));
 	}

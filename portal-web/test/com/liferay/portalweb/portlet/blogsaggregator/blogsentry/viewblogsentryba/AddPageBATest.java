@@ -23,7 +23,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class AddPageBATest extends BaseTestCase {
 	public void testAddPageBA() throws Exception {
 		selenium.open("/web/guest/home/");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		selenium.clickAt("//nav[@id='navigation']",
 			RuntimeVariables.replace("Navigation"));
 
@@ -86,6 +86,6 @@ public class AddPageBATest extends BaseTestCase {
 		selenium.clickAt("link=Blogs Aggregator Test Page",
 			RuntimeVariables.replace("Blogs Aggregator Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 	}
 }

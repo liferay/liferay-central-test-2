@@ -29,7 +29,7 @@ public class LoginPlugins2Test extends BaseTestCase {
 			case 1:
 				selenium.setTimeout("180000");
 				selenium.open("/web/guest/home");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 
 				for (int second = 0;; second++) {
 					if (second >= 90) {
@@ -49,7 +49,7 @@ public class LoginPlugins2Test extends BaseTestCase {
 
 				selenium.clickAt("link=Sign In", RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 
 				for (int second = 0;; second++) {
 					if (second >= 90) {
@@ -108,7 +108,7 @@ public class LoginPlugins2Test extends BaseTestCase {
 				selenium.clickAt("//input[@value='Sign In']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 				Thread.sleep(5000);
 
 				boolean iAgreePresent = selenium.isElementPresent(
@@ -140,7 +140,7 @@ public class LoginPlugins2Test extends BaseTestCase {
 				selenium.click(RuntimeVariables.replace(
 						"//input[@value='I Agree']"));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 
 			case 2:
 
@@ -182,7 +182,7 @@ public class LoginPlugins2Test extends BaseTestCase {
 				selenium.click(RuntimeVariables.replace(
 						"//input[@value='Save']"));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 
 			case 100:
 				label = -1;

@@ -23,7 +23,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class ViewMBCategoryMessageReplyTest extends BaseTestCase {
 	public void testViewMBCategoryMessageReply() throws Exception {
 		selenium.open("/web/guest/home/");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -44,7 +44,7 @@ public class ViewMBCategoryMessageReplyTest extends BaseTestCase {
 		selenium.clickAt("link=Message Boards Test Page",
 			RuntimeVariables.replace("Message Boards Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("MB Category Name"),
 			selenium.getText("//td[1]/a/strong"));
 		assertEquals(RuntimeVariables.replace("0"),
@@ -56,7 +56,7 @@ public class ViewMBCategoryMessageReplyTest extends BaseTestCase {
 		selenium.clickAt("//td[1]/a/strong",
 			RuntimeVariables.replace("MB Category Name"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace(
 				"MB Category Thread Message Subject"),
 			selenium.getText("//td[1]/a"));
@@ -72,7 +72,7 @@ public class ViewMBCategoryMessageReplyTest extends BaseTestCase {
 		selenium.clickAt("//td[1]/a",
 			RuntimeVariables.replace("MB Category Thread Message Subject"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace(
 				"MB Category Thread Message Subject"),
 			selenium.getText("//h1[@class='header-title']"));

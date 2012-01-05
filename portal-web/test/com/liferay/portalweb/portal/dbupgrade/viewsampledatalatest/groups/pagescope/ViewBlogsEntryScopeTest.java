@@ -23,7 +23,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class ViewBlogsEntryScopeTest extends BaseTestCase {
 	public void testViewBlogsEntryScope() throws Exception {
 		selenium.open("/web/group-page-scope-community/");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -44,7 +44,7 @@ public class ViewBlogsEntryScopeTest extends BaseTestCase {
 		selenium.clickAt("link=Blogs Page Scope Current Page",
 			RuntimeVariables.replace("Blogs Page Scope Current Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("Blogs Entry Scope Current Page"),
 			selenium.getText("//div[@class='entry-title']/h2/a"));
 		assertEquals(RuntimeVariables.replace(
@@ -70,7 +70,7 @@ public class ViewBlogsEntryScopeTest extends BaseTestCase {
 		selenium.clickAt("link=Blogs Page Scope Default",
 			RuntimeVariables.replace("Blogs Page Scope Default"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertFalse(selenium.isTextPresent("Blogs Entry Scope Current Page"));
 		assertFalse(selenium.isElementPresent(
 				"//div[@class='entry-title']/h2/a"));

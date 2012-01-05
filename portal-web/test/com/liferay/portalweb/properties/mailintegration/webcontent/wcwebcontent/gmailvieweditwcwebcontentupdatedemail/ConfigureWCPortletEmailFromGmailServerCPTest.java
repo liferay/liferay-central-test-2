@@ -24,7 +24,7 @@ public class ConfigureWCPortletEmailFromGmailServerCPTest extends BaseTestCase {
 	public void testConfigureWCPortletEmailFromGmailServerCP()
 		throws Exception {
 		selenium.open("/web/guest/home/");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -45,7 +45,7 @@ public class ConfigureWCPortletEmailFromGmailServerCPTest extends BaseTestCase {
 		selenium.clickAt("link=Control Panel",
 			RuntimeVariables.replace("Control Panel"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		selenium.clickAt("//strong/a", RuntimeVariables.replace("Site Name"));
 
 		for (int second = 0;; second++) {
@@ -68,11 +68,11 @@ public class ConfigureWCPortletEmailFromGmailServerCPTest extends BaseTestCase {
 			selenium.getText("link=Site Name"));
 		selenium.clickAt("link=Site Name", RuntimeVariables.replace("Site Name"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		selenium.clickAt("link=Web Content",
 			RuntimeVariables.replace("Web Content"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("Options"),
 			selenium.getText("//span[@title='Options']/ul/li/strong/a"));
 		selenium.clickAt("//span[@title='Options']/ul/li/strong/a",
@@ -119,7 +119,7 @@ public class ConfigureWCPortletEmailFromGmailServerCPTest extends BaseTestCase {
 		selenium.clickAt("link=Email From",
 			RuntimeVariables.replace("Email From"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		selenium.type("//input[@id='_86_emailFromName']",
 			RuntimeVariables.replace("Administrator"));
 		selenium.type("//input[@id='_86_emailFromAddress']",
@@ -127,7 +127,7 @@ public class ConfigureWCPortletEmailFromGmailServerCPTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Save']",
 			RuntimeVariables.replace("Save"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace(
 				"You have successfully updated the setup."),
 			selenium.getText("//div[@class='portlet-msg-success']"));

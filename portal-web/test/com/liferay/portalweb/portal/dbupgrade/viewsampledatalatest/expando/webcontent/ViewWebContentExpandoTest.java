@@ -23,7 +23,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class ViewWebContentExpandoTest extends BaseTestCase {
 	public void testViewWebContentExpando() throws Exception {
 		selenium.open("/web/expando-web-content-community/");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -44,7 +44,7 @@ public class ViewWebContentExpandoTest extends BaseTestCase {
 		selenium.clickAt("link=Web Content Display Page",
 			RuntimeVariables.replace("Web Content Display Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("First Expando Bank"),
 			selenium.getText("//div[@class='journal-content-article']/h1"));
 		assertTrue(selenium.isElementPresent("//input[@value='Create Account']"));

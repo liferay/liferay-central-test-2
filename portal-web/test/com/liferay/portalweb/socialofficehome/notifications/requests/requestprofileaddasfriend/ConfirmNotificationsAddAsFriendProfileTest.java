@@ -24,7 +24,7 @@ public class ConfirmNotificationsAddAsFriendProfileTest extends BaseTestCase {
 	public void testConfirmNotificationsAddAsFriendProfile()
 		throws Exception {
 		selenium.open("/user/joebloggs/home/");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -45,7 +45,7 @@ public class ConfirmNotificationsAddAsFriendProfileTest extends BaseTestCase {
 		selenium.clickAt("//div/div/div/div[1]/ul/li[1]/a",
 			RuntimeVariables.replace("Home"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("Notifications"),
 			selenium.getText("//div[2]/div/section/header/h1/span"));
 
@@ -73,12 +73,12 @@ public class ConfirmNotificationsAddAsFriendProfileTest extends BaseTestCase {
 		selenium.clickAt("//div[2]/span[1]/a",
 			RuntimeVariables.replace("Confirm"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace(
 				"Your request completed successfully."),
 			selenium.getText("//div[@class='portlet-msg-success']"));
 		selenium.open("/user/joebloggs/home/");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -99,7 +99,7 @@ public class ConfirmNotificationsAddAsFriendProfileTest extends BaseTestCase {
 		selenium.clickAt("//div/div/div/div[1]/ul/li[2]/a",
 			RuntimeVariables.replace("Contacts Center"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertTrue(selenium.isVisible("//div[1]/a/img"));
 		assertEquals(RuntimeVariables.replace("Manage 1 friends."),
 			selenium.getText("//div[1]/div/div/div/div[2]/a"));
@@ -111,7 +111,7 @@ public class ConfirmNotificationsAddAsFriendProfileTest extends BaseTestCase {
 				"socialofficefriendea@liferay.com"),
 			selenium.getText("//div[3]/span"));
 		selenium.open("/user/joebloggs/home/");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertFalse(selenium.isElementPresent(
 				"//section/div/div/div/div/div[2]"));
 		assertFalse(selenium.isElementPresent(

@@ -28,7 +28,7 @@ public class TearDownOrganizationAllTest extends BaseTestCase {
 			switch (label) {
 			case 1:
 				selenium.open("/web/guest/home/");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 
 				for (int second = 0;; second++) {
 					if (second >= 90) {
@@ -49,17 +49,17 @@ public class TearDownOrganizationAllTest extends BaseTestCase {
 				selenium.clickAt("link=Control Panel",
 					RuntimeVariables.replace("Control Panel"));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 				selenium.clickAt("link=Users and Organizations",
 					RuntimeVariables.replace("Users and Organizations"));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 				selenium.type("//input[@id='_125_keywords']",
 					RuntimeVariables.replace("organization"));
 				selenium.clickAt("//input[@value='Search']",
 					RuntimeVariables.replace("Search"));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 
 				boolean organization1Present = selenium.isElementPresent(
 						"//input[@name='_125_rowIds']");
@@ -78,7 +78,7 @@ public class TearDownOrganizationAllTest extends BaseTestCase {
 				selenium.click(RuntimeVariables.replace(
 						"//input[@value='Delete']"));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 				selenium.type("//input[@id='_125_keywords']",
@@ -86,7 +86,7 @@ public class TearDownOrganizationAllTest extends BaseTestCase {
 				selenium.clickAt("//input[@value='Search']",
 					RuntimeVariables.replace("Search"));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 
 				boolean organization2Present = selenium.isElementPresent(
 						"//input[@name='_125_rowIds']");
@@ -105,7 +105,7 @@ public class TearDownOrganizationAllTest extends BaseTestCase {
 				selenium.click(RuntimeVariables.replace(
 						"//input[@value='Delete']"));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 				selenium.type("//input[@id='_125_keywords']",
@@ -113,7 +113,7 @@ public class TearDownOrganizationAllTest extends BaseTestCase {
 				selenium.clickAt("//input[@value='Search']",
 					RuntimeVariables.replace("Search"));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 
 				boolean organization3Present = selenium.isElementPresent(
 						"//input[@name='_125_rowIds']");
@@ -132,7 +132,7 @@ public class TearDownOrganizationAllTest extends BaseTestCase {
 				selenium.click(RuntimeVariables.replace(
 						"//input[@value='Delete']"));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 				selenium.type("//input[@id='_125_keywords']",
@@ -140,7 +140,7 @@ public class TearDownOrganizationAllTest extends BaseTestCase {
 				selenium.clickAt("//input[@value='Search']",
 					RuntimeVariables.replace("Search"));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 
 				boolean organization4Present = selenium.isElementPresent(
 						"//input[@name='_125_rowIds']");
@@ -159,7 +159,7 @@ public class TearDownOrganizationAllTest extends BaseTestCase {
 				selenium.click(RuntimeVariables.replace(
 						"//input[@value='Delete']"));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 				selenium.type("//input[@id='_125_keywords']",
@@ -167,7 +167,7 @@ public class TearDownOrganizationAllTest extends BaseTestCase {
 				selenium.clickAt("//input[@value='Search']",
 					RuntimeVariables.replace("Search"));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 
 				boolean organization5Present = selenium.isElementPresent(
 						"//input[@name='_125_rowIds']");
@@ -186,7 +186,7 @@ public class TearDownOrganizationAllTest extends BaseTestCase {
 				selenium.click(RuntimeVariables.replace(
 						"//input[@value='Delete']"));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 

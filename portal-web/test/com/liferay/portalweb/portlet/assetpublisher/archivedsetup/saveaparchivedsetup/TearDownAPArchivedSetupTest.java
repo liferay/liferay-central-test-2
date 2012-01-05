@@ -28,7 +28,7 @@ public class TearDownAPArchivedSetupTest extends BaseTestCase {
 			switch (label) {
 			case 1:
 				selenium.open("/web/guest/home/");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 
 				for (int second = 0;; second++) {
 					if (second >= 90) {
@@ -49,7 +49,7 @@ public class TearDownAPArchivedSetupTest extends BaseTestCase {
 				selenium.clickAt("link=Asset Publisher Test Page",
 					RuntimeVariables.replace("Asset Publisher Test Page"));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 				Thread.sleep(5000);
 				assertEquals(RuntimeVariables.replace("Options"),
 					selenium.getText("//span[@title='Options']/ul/li/strong/a"));
@@ -102,7 +102,7 @@ public class TearDownAPArchivedSetupTest extends BaseTestCase {
 				selenium.clickAt("//div[@class='archived-setups']/span/a/span",
 					RuntimeVariables.replace("Archive/Restore Setup"));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 
 				boolean archive1Present = selenium.isElementPresent(
 						"//span[@title='Actions']/ul/li/strong");
@@ -142,7 +142,7 @@ public class TearDownAPArchivedSetupTest extends BaseTestCase {
 				selenium.click(RuntimeVariables.replace(
 						"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a[@id='_86_ctvk']"));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 
@@ -184,7 +184,7 @@ public class TearDownAPArchivedSetupTest extends BaseTestCase {
 				selenium.click(RuntimeVariables.replace(
 						"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a[@id='_86_ctvk']"));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 
@@ -226,7 +226,7 @@ public class TearDownAPArchivedSetupTest extends BaseTestCase {
 				selenium.click(RuntimeVariables.replace(
 						"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a[@id='_86_ctvk']"));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 
@@ -268,7 +268,7 @@ public class TearDownAPArchivedSetupTest extends BaseTestCase {
 				selenium.click(RuntimeVariables.replace(
 						"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a[@id='_86_ctvk']"));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 
@@ -310,7 +310,7 @@ public class TearDownAPArchivedSetupTest extends BaseTestCase {
 				selenium.click(RuntimeVariables.replace(
 						"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a[@id='_86_ctvk']"));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 

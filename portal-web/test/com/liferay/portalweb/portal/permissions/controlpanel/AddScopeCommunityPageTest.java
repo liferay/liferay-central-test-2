@@ -28,7 +28,7 @@ public class AddScopeCommunityPageTest extends BaseTestCase {
 			switch (label) {
 			case 1:
 				selenium.open("/web/guest/home/");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 
 				for (int second = 0;; second++) {
 					if (second >= 90) {
@@ -49,11 +49,11 @@ public class AddScopeCommunityPageTest extends BaseTestCase {
 				selenium.clickAt("link=Control Panel",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 				selenium.clickAt("link=Communities",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 
 				for (int second = 0;; second++) {
 					if (second >= 90) {
@@ -76,7 +76,7 @@ public class AddScopeCommunityPageTest extends BaseTestCase {
 				selenium.clickAt("//input[@value='Search']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 				Thread.sleep(5000);
 
 				for (int second = 0;; second++) {
@@ -121,7 +121,7 @@ public class AddScopeCommunityPageTest extends BaseTestCase {
 				selenium.click(RuntimeVariables.replace(
 						"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a"));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 				assertEquals(RuntimeVariables.replace("Public Pages"),
 					selenium.getText("//li[1]/span/span/a"));
 				assertEquals(RuntimeVariables.replace("Pages"),
@@ -166,7 +166,7 @@ public class AddScopeCommunityPageTest extends BaseTestCase {
 				selenium.clickAt("//input[@value='Add Page']",
 					RuntimeVariables.replace(""));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 				assertTrue(selenium.isTextPresent(
 						"Your request completed successfully."));
 

@@ -23,7 +23,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class AddFolderTest extends BaseTestCase {
 	public void testAddFolder() throws Exception {
 		selenium.open("web/document-library-document-lock-community/");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -44,7 +44,7 @@ public class AddFolderTest extends BaseTestCase {
 		selenium.clickAt("link=Document Lock Page",
 			RuntimeVariables.replace("Document Lock Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		selenium.clickAt("//span[3]/span/ul/li/strong/a",
 			RuntimeVariables.replace("Add"));
 
@@ -71,7 +71,7 @@ public class AddFolderTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"//div[@class='lfr-component lfr-menu-list']/ul/li/a"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		selenium.type("//input[@id='_20_name']",
 			RuntimeVariables.replace("Test1 Folder1"));
 		selenium.type("//textarea[@id='_20_description']",
@@ -79,7 +79,7 @@ public class AddFolderTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Save']",
 			RuntimeVariables.replace("Save"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {

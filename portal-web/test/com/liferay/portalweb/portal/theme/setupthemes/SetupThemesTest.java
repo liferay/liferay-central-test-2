@@ -42,7 +42,7 @@ public class SetupThemesTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"document.getElementById('my-community-private-pages')"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -63,7 +63,7 @@ public class SetupThemesTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Add Community']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -103,17 +103,17 @@ public class SetupThemesTest extends BaseTestCase {
 			RuntimeVariables.replace("Themes Testing Community"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		selenium.click(RuntimeVariables.replace("link=Available Communities"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		selenium.click("//strong/span");
 		selenium.click(RuntimeVariables.replace("//body/div[2]/ul/li[2]/a"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		selenium.click(RuntimeVariables.replace("link=Export / Import"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -133,7 +133,7 @@ public class SetupThemesTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Import"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -178,16 +178,16 @@ public class SetupThemesTest extends BaseTestCase {
 		selenium.click("_29_alwaysCurrentUserId");
 		selenium.click(RuntimeVariables.replace("//input[@value='Import']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		selenium.click(RuntimeVariables.replace("link=Pages"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		selenium.click(RuntimeVariables.replace("link=Settings"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		selenium.click(RuntimeVariables.replace("link=Virtual Host"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -209,9 +209,9 @@ public class SetupThemesTest extends BaseTestCase {
 			RuntimeVariables.replace("/themetesting"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		selenium.open("web/themetesting/testpage06");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -251,7 +251,7 @@ public class SetupThemesTest extends BaseTestCase {
 			RuntimeVariables.replace("Comment 1"));
 		selenium.click(RuntimeVariables.replace("_107_postReplyButton0"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -291,7 +291,7 @@ public class SetupThemesTest extends BaseTestCase {
 			RuntimeVariables.replace("Comment 2"));
 		selenium.click(RuntimeVariables.replace("_107_postReplyButton0"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -332,7 +332,7 @@ public class SetupThemesTest extends BaseTestCase {
 			RuntimeVariables.replace("Comment 3"));
 		selenium.click(RuntimeVariables.replace("_107_postReplyButton2"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -373,6 +373,6 @@ public class SetupThemesTest extends BaseTestCase {
 			RuntimeVariables.replace("Comment 4"));
 		selenium.click(RuntimeVariables.replace("_107_postReplyButton2"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 	}
 }

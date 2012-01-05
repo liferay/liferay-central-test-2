@@ -28,7 +28,7 @@ public class AdvancedSearchTemplateIDTest extends BaseTestCase {
 			switch (label) {
 			case 1:
 				selenium.open("/web/guest/home/");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 
 				for (int second = 0;; second++) {
 					if (second >= 90) {
@@ -49,15 +49,15 @@ public class AdvancedSearchTemplateIDTest extends BaseTestCase {
 				selenium.clickAt("link=Control Panel",
 					RuntimeVariables.replace("Control Panel"));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 				selenium.clickAt("link=Web Content",
 					RuntimeVariables.replace("Web Content"));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 				selenium.clickAt("link=Templates",
 					RuntimeVariables.replace("Templates"));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 
 				String templateID = selenium.getText("//td[2]/a");
 				RuntimeVariables.setValue("templateID", templateID);
@@ -99,7 +99,7 @@ public class AdvancedSearchTemplateIDTest extends BaseTestCase {
 				selenium.clickAt("//input[@value='Search']",
 					RuntimeVariables.replace("Search"));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 				selenium.type("//input[@id='_15_searchTemplateId']",
 					RuntimeVariables.replace(""));
 				assertEquals(RuntimeVariables.replace(
@@ -113,7 +113,7 @@ public class AdvancedSearchTemplateIDTest extends BaseTestCase {
 				selenium.clickAt("//input[@value='Search']",
 					RuntimeVariables.replace("Search"));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 				selenium.type("//input[@id='_15_searchTemplateId']",
 					RuntimeVariables.replace(""));
 				assertFalse(selenium.isTextPresent("Web Content Template Name"));

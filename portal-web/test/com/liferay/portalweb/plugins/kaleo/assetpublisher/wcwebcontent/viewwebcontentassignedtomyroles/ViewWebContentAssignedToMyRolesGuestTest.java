@@ -24,7 +24,7 @@ public class ViewWebContentAssignedToMyRolesGuestTest extends BaseTestCase {
 	public void testViewWebContentAssignedToMyRolesGuest()
 		throws Exception {
 		selenium.open("/web/guest/home/");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -45,7 +45,7 @@ public class ViewWebContentAssignedToMyRolesGuestTest extends BaseTestCase {
 		selenium.clickAt("link=Asset Publisher Page",
 			RuntimeVariables.replace("Asset Publisher Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertFalse(selenium.isTextPresent("Web Content Name"));
 		assertFalse(selenium.isTextPresent("Web Content Content"));
 	}

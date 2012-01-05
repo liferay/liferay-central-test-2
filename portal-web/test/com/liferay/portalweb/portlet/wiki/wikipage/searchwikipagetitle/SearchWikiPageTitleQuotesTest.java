@@ -23,7 +23,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class SearchWikiPageTitleQuotesTest extends BaseTestCase {
 	public void testSearchWikiPageTitleQuotes() throws Exception {
 		selenium.open("/web/guest/home/");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -44,20 +44,20 @@ public class SearchWikiPageTitleQuotesTest extends BaseTestCase {
 		selenium.clickAt("link=Wiki Test Page",
 			RuntimeVariables.replace("Wiki Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		selenium.type("//input[@id='_36_keywords']",
 			RuntimeVariables.replace("\"Wiki Page Test\""));
 		selenium.clickAt("//input[@value='Search']",
 			RuntimeVariables.replace("Search"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertTrue(selenium.isElementPresent("link=Wiki Page Test"));
 		selenium.type("//input[@id='_36_keywords']",
 			RuntimeVariables.replace("\"Wiki1 Page1 Test1\""));
 		selenium.clickAt("//input[@value='Search']",
 			RuntimeVariables.replace("Search"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertFalse(selenium.isElementPresent("link=Wiki Page Test"));
 	}
 }

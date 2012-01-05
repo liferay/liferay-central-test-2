@@ -23,7 +23,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class SOFr_MarkAsUnreadPMMessageTest extends BaseTestCase {
 	public void testSOFr_MarkAsUnreadPMMessage() throws Exception {
 		selenium.open("/user/socialofficefriendsn/home");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -60,7 +60,7 @@ public class SOFr_MarkAsUnreadPMMessageTest extends BaseTestCase {
 		selenium.clickAt("//div[2]/div[1]/ul/li[4]/a",
 			RuntimeVariables.replace("Private Messaging"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("Private Messaging"),
 			selenium.getText("//h1/span[2]"));
 		assertEquals(RuntimeVariables.replace("Joe Bloggs"),
@@ -74,7 +74,7 @@ public class SOFr_MarkAsUnreadPMMessageTest extends BaseTestCase {
 		selenium.clickAt("//td[4]/a",
 			RuntimeVariables.replace("Message Subject\n Message Body"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("Message Subject"),
 			selenium.getText("//div[1]/h1/span"));
 		assertEquals(RuntimeVariables.replace("Between Joe Bloggs and you"),
@@ -84,7 +84,7 @@ public class SOFr_MarkAsUnreadPMMessageTest extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace("Message Body"),
 			selenium.getText("//td[2]/div[2]/div"));
 		selenium.open("/user/socialofficefriendsn/home");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -105,7 +105,7 @@ public class SOFr_MarkAsUnreadPMMessageTest extends BaseTestCase {
 		selenium.clickAt("//div[2]/div[1]/ul/li[4]/a",
 			RuntimeVariables.replace("Private Messaging"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("Private Messaging"),
 			selenium.getText("//h1/span[2]"));
 		assertFalse(selenium.isElementPresent(
@@ -118,7 +118,7 @@ public class SOFr_MarkAsUnreadPMMessageTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Mark as Unread']",
 			RuntimeVariables.replace("Mark as Unread"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertTrue(selenium.isElementPresent(
 				"//tr[contains(@class, 'unread')]/td[4]/a"));
 	}

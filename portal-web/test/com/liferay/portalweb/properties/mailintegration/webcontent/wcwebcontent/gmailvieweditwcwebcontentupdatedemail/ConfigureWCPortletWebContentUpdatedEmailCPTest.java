@@ -24,7 +24,7 @@ public class ConfigureWCPortletWebContentUpdatedEmailCPTest extends BaseTestCase
 	public void testConfigureWCPortletWebContentUpdatedEmailCP()
 		throws Exception {
 		selenium.open("/web/guest/home/");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -45,7 +45,7 @@ public class ConfigureWCPortletWebContentUpdatedEmailCPTest extends BaseTestCase
 		selenium.clickAt("link=Control Panel",
 			RuntimeVariables.replace("Control Panel"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		selenium.clickAt("//strong/a", RuntimeVariables.replace("Site Name"));
 
 		for (int second = 0;; second++) {
@@ -68,11 +68,11 @@ public class ConfigureWCPortletWebContentUpdatedEmailCPTest extends BaseTestCase
 			selenium.getText("link=Site Name"));
 		selenium.clickAt("link=Site Name", RuntimeVariables.replace("Site Name"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		selenium.clickAt("link=Web Content",
 			RuntimeVariables.replace("Web Content"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		Thread.sleep(5000);
 		assertEquals(RuntimeVariables.replace("Options"),
 			selenium.getText("//span[@title='Options']/ul/li/strong/a"));
@@ -120,7 +120,7 @@ public class ConfigureWCPortletWebContentUpdatedEmailCPTest extends BaseTestCase
 		selenium.clickAt("link=Web Content Updated Email",
 			RuntimeVariables.replace("Web Content Updated Email"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		Thread.sleep(5000);
 		assertFalse(selenium.isChecked(
 				"//input[@id='_86_emailArticleUpdatedEnabledCheckbox']"));
@@ -130,7 +130,7 @@ public class ConfigureWCPortletWebContentUpdatedEmailCPTest extends BaseTestCase
 				"//input[@id='_86_emailArticleUpdatedEnabledCheckbox']"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace(
 				"You have successfully updated the setup."),
 			selenium.getText("//div[@class='portlet-msg-success']"));

@@ -28,7 +28,7 @@ public class EditWikiFrontPageMinorChangeTest extends BaseTestCase {
 			switch (label) {
 			case 1:
 				selenium.open("/web/guest/home/");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 
 				for (int second = 0;; second++) {
 					if (second >= 90) {
@@ -49,7 +49,7 @@ public class EditWikiFrontPageMinorChangeTest extends BaseTestCase {
 				selenium.clickAt("link=Wiki Display Test Page",
 					RuntimeVariables.replace("Wiki Display Test Page"));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 				assertEquals(RuntimeVariables.replace("Wiki Front Page Content"),
 					selenium.getText("//div[@class='wiki-body']/p"));
 				assertEquals(RuntimeVariables.replace("Edit"),
@@ -57,7 +57,7 @@ public class EditWikiFrontPageMinorChangeTest extends BaseTestCase {
 				selenium.clickAt("//span[1]/a/span",
 					RuntimeVariables.replace("Edit"));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 				Thread.sleep(5000);
 
 				for (int second = 0;; second++) {
@@ -97,7 +97,7 @@ public class EditWikiFrontPageMinorChangeTest extends BaseTestCase {
 				selenium.clickAt("//input[@value='Publish']",
 					RuntimeVariables.replace("Publish"));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 				assertEquals(RuntimeVariables.replace(
 						"Your request completed successfully."),
 					selenium.getText("//div[@class='portlet-msg-success']"));
@@ -108,7 +108,7 @@ public class EditWikiFrontPageMinorChangeTest extends BaseTestCase {
 						"Wiki Front Page Content"),
 					selenium.getText("//div[@class='wiki-body']/p"));
 				selenium.open("/web/guest/home/");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 
 				for (int second = 0;; second++) {
 					if (second >= 90) {
@@ -129,17 +129,17 @@ public class EditWikiFrontPageMinorChangeTest extends BaseTestCase {
 				selenium.clickAt("link=Wiki Display Test Page",
 					RuntimeVariables.replace("Wiki Display Test Page"));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 				assertEquals(RuntimeVariables.replace("Details"),
 					selenium.getText("//div[3]/span[2]/a/span"));
 				selenium.clickAt("//div[3]/span[2]/a/span",
 					RuntimeVariables.replace("Details"));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 				selenium.clickAt("link=History",
 					RuntimeVariables.replace("History"));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 				assertEquals(RuntimeVariables.replace("1.2 (Minor Edit)"),
 					selenium.getText("//td[4]/a"));
 				assertEquals(RuntimeVariables.replace("1.1"),

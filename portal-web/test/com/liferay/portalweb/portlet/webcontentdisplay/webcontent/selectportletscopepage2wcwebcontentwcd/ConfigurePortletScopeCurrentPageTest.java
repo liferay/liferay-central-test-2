@@ -24,7 +24,7 @@ public class ConfigurePortletScopeCurrentPageTest extends BaseTestCase {
 	public void testConfigurePortletScopeCurrentPage()
 		throws Exception {
 		selenium.open("/web/guest/home/");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -45,7 +45,7 @@ public class ConfigurePortletScopeCurrentPageTest extends BaseTestCase {
 		selenium.clickAt("link=Web Content Display Test Page2",
 			RuntimeVariables.replace("Web Content Display Test Page2"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("Options"),
 			selenium.getText("//strong/a"));
 		Thread.sleep(5000);
@@ -91,7 +91,7 @@ public class ConfigurePortletScopeCurrentPageTest extends BaseTestCase {
 
 		selenium.clickAt("link=Scope", RuntimeVariables.replace("Scope"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		selenium.select("//select[@id='_86_scopeType']",
 			RuntimeVariables.replace("label=Select Layout"));
 
@@ -117,7 +117,7 @@ public class ConfigurePortletScopeCurrentPageTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Save']",
 			RuntimeVariables.replace("Save"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace(
 				"You have successfully updated the setup."),
 			selenium.getText("//div[@class='portlet-msg-success']"));

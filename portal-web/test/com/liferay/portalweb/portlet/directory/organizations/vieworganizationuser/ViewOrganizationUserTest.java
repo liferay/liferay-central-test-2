@@ -28,7 +28,7 @@ public class ViewOrganizationUserTest extends BaseTestCase {
 			switch (label) {
 			case 1:
 				selenium.open("/web/guest/home/");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 
 				for (int second = 0;; second++) {
 					if (second >= 90) {
@@ -49,11 +49,11 @@ public class ViewOrganizationUserTest extends BaseTestCase {
 				selenium.clickAt("link=Directory Test Page",
 					RuntimeVariables.replace("Directory Test Page"));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 				selenium.clickAt("link=Organizations",
 					RuntimeVariables.replace("Organizations"));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 
 				boolean basicVisible = selenium.isVisible("link=\u00ab Basic");
 
@@ -72,7 +72,7 @@ public class ViewOrganizationUserTest extends BaseTestCase {
 				selenium.clickAt("//input[@value='Search']",
 					RuntimeVariables.replace("Search"));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 				selenium.type("//input[@name='_11_keywords']",
 					RuntimeVariables.replace(""));
 				assertEquals(RuntimeVariables.replace("Test Organization"),
@@ -90,7 +90,7 @@ public class ViewOrganizationUserTest extends BaseTestCase {
 				selenium.clickAt("link=View Users",
 					RuntimeVariables.replace("View Users"));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 				assertEquals(RuntimeVariables.replace("userfn"),
 					selenium.getText("//td[1]/a"));
 				assertEquals(RuntimeVariables.replace("userln"),
@@ -103,7 +103,7 @@ public class ViewOrganizationUserTest extends BaseTestCase {
 					selenium.getText("//td[5]/a"));
 				selenium.clickAt("//td[1]/a", RuntimeVariables.replace("userfn"));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 				assertEquals(RuntimeVariables.replace("userfn usermn userln"),
 					selenium.getText(
 						"//div[@class='user-information']/div[1]/h2"));

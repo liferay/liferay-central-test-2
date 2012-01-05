@@ -23,7 +23,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class Member_AssertViewWCSTest extends BaseTestCase {
 	public void testMember_AssertViewWCS() throws Exception {
 		selenium.open("/web/guest/home/");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -45,7 +45,7 @@ public class Member_AssertViewWCSTest extends BaseTestCase {
 		selenium.clickAt("link=Web Content Search Permissions Page",
 			RuntimeVariables.replace("Web Content Search Permissions Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertFalse(selenium.isTextPresent(
 				"You do not have the roles required to access this portlet."));
 	}

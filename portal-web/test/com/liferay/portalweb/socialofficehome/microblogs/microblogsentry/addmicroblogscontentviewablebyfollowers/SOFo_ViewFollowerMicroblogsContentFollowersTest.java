@@ -25,7 +25,7 @@ public class SOFo_ViewFollowerMicroblogsContentFollowersTest
 	public void testSOFo_ViewFollowerMicroblogsContentFollowers()
 		throws Exception {
 		selenium.open("/user/socialofficefollowersn/home/");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -46,7 +46,7 @@ public class SOFo_ViewFollowerMicroblogsContentFollowersTest
 		selenium.clickAt("//div/div/div/div[1]/ul/li[1]/a",
 			RuntimeVariables.replace("Home"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("What's happening?"),
 			selenium.getText("//div[1]/h1/span"));
 		assertTrue(selenium.isElementPresent("//textarea"));
@@ -56,7 +56,7 @@ public class SOFo_ViewFollowerMicroblogsContentFollowersTest
 		selenium.clickAt("//div/div/div/div[1]/ul/li[3]/a",
 			RuntimeVariables.replace("Microblogs"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("Microblogs"),
 			selenium.getText("//div[2]/div/div/div/section/header/h1/span[2]"));
 

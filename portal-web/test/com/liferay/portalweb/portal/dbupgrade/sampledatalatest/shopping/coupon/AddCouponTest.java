@@ -23,7 +23,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class AddCouponTest extends BaseTestCase {
 	public void testAddCoupon() throws Exception {
 		selenium.open("/web/shopping-coupon-community/");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -44,14 +44,14 @@ public class AddCouponTest extends BaseTestCase {
 		selenium.clickAt("link=Shopping Coupon Page",
 			RuntimeVariables.replace("Shopping Coupon Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		selenium.clickAt("link=Coupons", RuntimeVariables.replace("Coupons"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		selenium.clickAt("//input[@value='Add Coupon']",
 			RuntimeVariables.replace("Add Coupon"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertTrue(selenium.isElementPresent(
 				"//input[@id='_34_autoCodeCheckbox']"));
 		selenium.clickAt("//input[@id='_34_autoCodeCheckbox']",
@@ -66,7 +66,7 @@ public class AddCouponTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Save']",
 			RuntimeVariables.replace("Save"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {

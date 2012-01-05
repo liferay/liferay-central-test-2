@@ -24,7 +24,7 @@ public class AddAnnouncementsEntryTest extends BaseTestCase {
 	public void testAddAnnouncementsEntry() throws Exception {
 		selenium.open(
 			"/web/announcements-entry-community/announcements-entry-page");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -45,15 +45,15 @@ public class AddAnnouncementsEntryTest extends BaseTestCase {
 		selenium.clickAt("link=Announcements Entry Page",
 			RuntimeVariables.replace("Announcements Entry Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		selenium.clickAt("link=Manage Entries",
 			RuntimeVariables.replace("Manage Entries"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		selenium.clickAt("//input[@value='Add Entry']",
 			RuntimeVariables.replace("Add Entry"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		selenium.type("//input[@id='_84_title']",
 			RuntimeVariables.replace("Announcements Entry Name"));
 		selenium.type("//input[@id='_84_url']",
@@ -83,17 +83,17 @@ public class AddAnnouncementsEntryTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Save']",
 			RuntimeVariables.replace("Save"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		selenium.clickAt("link=Entries", RuntimeVariables.replace("Entries"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("Announcements Entry Name"),
 			selenium.getText("//div/h3/a"));
 		assertTrue(selenium.isPartialText("//p", "Announcements Entry Content"));
 		selenium.clickAt("//div/h3/a",
 			RuntimeVariables.replace("Announcements Entry Name"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertTrue(selenium.isElementPresent("//img[@alt='Liferay']"));
 	}
 }

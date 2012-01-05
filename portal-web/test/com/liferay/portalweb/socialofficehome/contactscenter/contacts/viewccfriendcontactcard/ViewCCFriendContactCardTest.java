@@ -23,7 +23,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class ViewCCFriendContactCardTest extends BaseTestCase {
 	public void testViewCCFriendContactCard() throws Exception {
 		selenium.open("/user/joebloggs/home/");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -44,7 +44,7 @@ public class ViewCCFriendContactCardTest extends BaseTestCase {
 		selenium.clickAt("//div/div/div/div[1]/ul/li[2]/a",
 			RuntimeVariables.replace("Contacts Center"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertTrue(selenium.isVisible("//div[1]/a/img"));
 		assertEquals(RuntimeVariables.replace("Manage 1 friends."),
 			selenium.getText("//div[1]/div/div/div/div[2]/a"));
@@ -57,7 +57,7 @@ public class ViewCCFriendContactCardTest extends BaseTestCase {
 			selenium.getText("//div[3]/span"));
 		selenium.clickAt("//div[1]/a/img", RuntimeVariables.replace("Thumbnail"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace(
 				"socialofficefriendfn socialofficefriendmn socialofficefriendln"),
 			selenium.getText("//div[2]/h1/span"));

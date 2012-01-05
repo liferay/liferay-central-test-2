@@ -23,7 +23,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class SiteAdmin_AddImageTest extends BaseTestCase {
 	public void testSiteAdmin_AddImage() throws Exception {
 		selenium.open("/web/guest/home/");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -45,7 +45,7 @@ public class SiteAdmin_AddImageTest extends BaseTestCase {
 		selenium.clickAt("link=Media Gallery Permissions Test Page",
 			RuntimeVariables.replace("Media Gallery Permissions Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace(
 				"Media Gallery Permissions Test Folder"),
 			selenium.getText(
@@ -53,7 +53,7 @@ public class SiteAdmin_AddImageTest extends BaseTestCase {
 		selenium.clickAt("//a[@title='Media Gallery Permissions Test Folder - ']",
 			RuntimeVariables.replace("Media Gallery Permissions Test Folder"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace(
 				"Media Gallery Permissions Test Subfolder"),
 			selenium.getText(
@@ -61,14 +61,14 @@ public class SiteAdmin_AddImageTest extends BaseTestCase {
 		selenium.clickAt("//a[@title='Media Gallery Permissions Test Subfolder - ']",
 			RuntimeVariables.replace("Media Gallery Permissions Test Subfolder"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("Add Media"),
 			selenium.getText(
 				"//div[@class='lfr-component lfr-menu-list lfr-menu-expanded align-right null']/ul/li[7]/a"));
 		selenium.clickAt("//div[@class='lfr-component lfr-menu-list lfr-menu-expanded align-right null']/ul/li[7]/a",
 			RuntimeVariables.replace("Add Media"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		selenium.type("//input[@id='_31_file']",
 			RuntimeVariables.replace(
 				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portal\\permissions\\imagegallery\\assertactions\\dependencies\\DLP_test_image.jpg"));
@@ -77,7 +77,7 @@ public class SiteAdmin_AddImageTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Publish']",
 			RuntimeVariables.replace("Publish"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {

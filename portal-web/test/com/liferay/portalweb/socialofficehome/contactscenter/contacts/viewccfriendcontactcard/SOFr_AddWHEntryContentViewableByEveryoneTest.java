@@ -24,7 +24,7 @@ public class SOFr_AddWHEntryContentViewableByEveryoneTest extends BaseTestCase {
 	public void testSOFr_AddWHEntryContentViewableByEveryone()
 		throws Exception {
 		selenium.open("/user/socialofficefriendsn/home/");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -45,7 +45,7 @@ public class SOFr_AddWHEntryContentViewableByEveryoneTest extends BaseTestCase {
 		selenium.clickAt("//nav/ul/li[1]/a/span",
 			RuntimeVariables.replace("Home"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("What's happening?"),
 			selenium.getText("//div[1]/h1/span"));
 		assertTrue(selenium.isElementPresent("//textarea"));

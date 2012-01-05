@@ -24,7 +24,7 @@ public class ViewConfigurePortletAvailableWikiPageAPTest extends BaseTestCase {
 	public void testViewConfigurePortletAvailableWikiPageAP()
 		throws Exception {
 		selenium.open("/web/guest/home/");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -45,7 +45,7 @@ public class ViewConfigurePortletAvailableWikiPageAPTest extends BaseTestCase {
 		selenium.clickAt("link=Asset Publisher Test Page",
 			RuntimeVariables.replace("Asset Publisher Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertFalse(selenium.isTextPresent("FrontPage"));
 		assertFalse(selenium.isTextPresent("Wiki Front Page Body"));
 	}

@@ -24,7 +24,7 @@ public class MoveCategoryMessageToCategoryExplanationTest extends BaseTestCase {
 	public void testMoveCategoryMessageToCategoryExplanation()
 		throws Exception {
 		selenium.open("/web/guest/home/");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -45,13 +45,13 @@ public class MoveCategoryMessageToCategoryExplanationTest extends BaseTestCase {
 		selenium.clickAt("link=Message Boards Test Page",
 			RuntimeVariables.replace("Message Boards Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("MB Category1 Name"),
 			selenium.getText("//a/strong"));
 		selenium.clickAt("//a/strong",
 			RuntimeVariables.replace("MB Category1 Name"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace(
 				"MB Category1 Thread Message Subject"),
 			selenium.getText("//td[1]/a"));
@@ -83,7 +83,7 @@ public class MoveCategoryMessageToCategoryExplanationTest extends BaseTestCase {
 		selenium.clickAt("//div[@class='lfr-component lfr-menu-list']/ul/li[6]/a",
 			RuntimeVariables.replace("Move Thread"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("MB Category1 Name"),
 			selenium.getText("//a[@id='_19_categoryName']"));
 		selenium.clickAt("//input[@value='Select']",
@@ -165,9 +165,9 @@ public class MoveCategoryMessageToCategoryExplanationTest extends BaseTestCase {
 		selenium.selectFrame("relative=top");
 		selenium.click(RuntimeVariables.replace("//input[@value='Move Thread']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		selenium.open("/web/guest/home/");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -188,17 +188,17 @@ public class MoveCategoryMessageToCategoryExplanationTest extends BaseTestCase {
 		selenium.clickAt("link=Message Boards Test Page",
 			RuntimeVariables.replace("Message Boards Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("MB Category1 Name"),
 			selenium.getText("//a/strong"));
 		selenium.clickAt("//a/strong",
 			RuntimeVariables.replace("MB Category1 Name"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertFalse(selenium.isTextPresent(
 				"MB Category1 Thread Message Subject"));
 		selenium.open("/web/guest/home/");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -219,20 +219,20 @@ public class MoveCategoryMessageToCategoryExplanationTest extends BaseTestCase {
 		selenium.clickAt("link=Message Boards Test Page",
 			RuntimeVariables.replace("Message Boards Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("MB Category2 Name"),
 			selenium.getText("//tr[4]/td[1]/a/strong"));
 		selenium.clickAt("//tr[4]/td[1]/a/strong",
 			RuntimeVariables.replace("MB Category2 Name"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace(
 				"MB Category1 Thread Message Subject"),
 			selenium.getText("//td[1]/a"));
 		selenium.clickAt("//td[1]/a",
 			RuntimeVariables.replace("MB Category1 Thread Message Subject"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("MB Explanation Post Subject"),
 			selenium.getText("//tr[2]/td[1]/a"));
 		assertEquals(RuntimeVariables.replace("MB Explanation Post Subject"),

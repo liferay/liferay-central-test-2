@@ -23,7 +23,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class Member_DismissAnnouncementTest extends BaseTestCase {
 	public void testMember_DismissAnnouncement() throws Exception {
 		selenium.open("/web/site-name/");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -44,7 +44,7 @@ public class Member_DismissAnnouncementTest extends BaseTestCase {
 		selenium.clickAt("link=Announcements Permissions Page",
 			RuntimeVariables.replace("Announcements Permissions Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		selenium.clickAt("link=Mark as Read",
 			RuntimeVariables.replace("Mark as Read"));
 

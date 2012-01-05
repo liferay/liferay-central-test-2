@@ -24,7 +24,7 @@ public class SOCo_ViewMicroblogsEntryActivityCoworkersTest extends BaseTestCase 
 	public void testSOCo_ViewMicroblogsEntryActivityCoworkers()
 		throws Exception {
 		selenium.open("/user/socialofficecoworkersn/home/");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -45,7 +45,7 @@ public class SOCo_ViewMicroblogsEntryActivityCoworkersTest extends BaseTestCase 
 		selenium.clickAt("//div/div/div/div[1]/ul/li[1]/a",
 			RuntimeVariables.replace("Home"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("Activities"),
 			selenium.getText("//div[2]/div/section/header/h1/span"));
 		assertEquals(RuntimeVariables.replace("Coworkers"),
@@ -53,7 +53,7 @@ public class SOCo_ViewMicroblogsEntryActivityCoworkersTest extends BaseTestCase 
 		selenium.clickAt("//div/ul/li[2]/span/a",
 			RuntimeVariables.replace("Coworkers"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertTrue(selenium.isVisible("//div[1]/span[1]/img"));
 		assertTrue(selenium.isVisible("//span[2]/span/img"));
 		assertEquals(RuntimeVariables.replace("Microblogs Content"),

@@ -25,7 +25,7 @@ public class ViewSelectScopePage2WebContentListCurrentPageTest
 	public void testViewSelectScopePage2WebContentListCurrentPage()
 		throws Exception {
 		selenium.open("/web/guest/home/");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -46,7 +46,7 @@ public class ViewSelectScopePage2WebContentListCurrentPageTest
 		selenium.clickAt("link=Web Content Display Test Page2",
 			RuntimeVariables.replace("Web Content Display Test Page2"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("Options"),
 			selenium.getText("//strong/a"));
 		Thread.sleep(5000);
@@ -92,7 +92,7 @@ public class ViewSelectScopePage2WebContentListCurrentPageTest
 
 		selenium.clickAt("link=Setup", RuntimeVariables.replace("Setup"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertTrue(selenium.isPartialText("//div[@class='portlet-msg-info']",
 				"Displaying Content: WCD Web Content Title"));
 		assertEquals(RuntimeVariables.replace("WCD Web Content Title"),

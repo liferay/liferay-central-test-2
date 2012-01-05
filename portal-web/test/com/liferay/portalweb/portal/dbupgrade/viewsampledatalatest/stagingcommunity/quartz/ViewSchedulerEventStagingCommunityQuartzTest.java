@@ -24,7 +24,7 @@ public class ViewSchedulerEventStagingCommunityQuartzTest extends BaseTestCase {
 	public void testViewSchedulerEventStagingCommunityQuartz()
 		throws Exception {
 		selenium.open("/web/community-staging-community-quartz-staging/");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -45,7 +45,7 @@ public class ViewSchedulerEventStagingCommunityQuartzTest extends BaseTestCase {
 		selenium.clickAt("link=Page Staging Community Quartz",
 			RuntimeVariables.replace("Page Staging Community Quartz"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		Thread.sleep(5000);
 		selenium.clickAt("//strong/a",
 			RuntimeVariables.replace("Staging Drop Down"));

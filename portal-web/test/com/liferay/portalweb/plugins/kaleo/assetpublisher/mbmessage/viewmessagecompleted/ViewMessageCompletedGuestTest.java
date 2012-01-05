@@ -23,7 +23,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class ViewMessageCompletedGuestTest extends BaseTestCase {
 	public void testViewMessageCompletedGuest() throws Exception {
 		selenium.open("/web/guest/home/");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -44,7 +44,7 @@ public class ViewMessageCompletedGuestTest extends BaseTestCase {
 		selenium.clickAt("link=Asset Publisher Page",
 			RuntimeVariables.replace("Asset Publisher Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertTrue(selenium.isElementPresent("//section"));
 		assertEquals(RuntimeVariables.replace("Asset Publisher"),
 			selenium.getText("//h1/span[2]"));
@@ -56,7 +56,7 @@ public class ViewMessageCompletedGuestTest extends BaseTestCase {
 		assertFalse(selenium.isTextPresent("There are no results."));
 		selenium.clickAt("//div[2]/a", RuntimeVariables.replace("Read More"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("Message Boards Message Subject"),
 			selenium.getText("//div[1]/h1/span"));
 		assertTrue(selenium.isPartialText("//div/div/div/div[2]/div[1]",

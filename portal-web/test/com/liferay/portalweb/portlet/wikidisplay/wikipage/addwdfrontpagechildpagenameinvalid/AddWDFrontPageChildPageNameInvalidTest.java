@@ -24,7 +24,7 @@ public class AddWDFrontPageChildPageNameInvalidTest extends BaseTestCase {
 	public void testAddWDFrontPageChildPageNameInvalid()
 		throws Exception {
 		selenium.open("/web/guest/home/");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -45,13 +45,13 @@ public class AddWDFrontPageChildPageNameInvalidTest extends BaseTestCase {
 		selenium.clickAt("link=Wiki Display Test Page",
 			RuntimeVariables.replace("Wiki Display Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("Add Child Page"),
 			selenium.getText("//div[1]/span[1]/a/span"));
 		selenium.clickAt("//div[1]/span[1]/a/span",
 			RuntimeVariables.replace("Add Child Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		selenium.type("//div/span[1]/span/span/input",
 			RuntimeVariables.replace(
 				"Wiki\\ Front\\ Page\\ Child\\ Page\\ Title\\"));
@@ -81,7 +81,7 @@ public class AddWDFrontPageChildPageNameInvalidTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Publish']",
 			RuntimeVariables.replace("Publish"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace(
 				"Your request failed to complete."),
 			selenium.getText("xPath=(//div[@class='portlet-msg-error'])[1]"));
@@ -89,13 +89,13 @@ public class AddWDFrontPageChildPageNameInvalidTest extends BaseTestCase {
 			selenium.getText("xPath=(//div[@class='portlet-msg-error'])[2]"));
 		selenium.clickAt("link=FrontPage", RuntimeVariables.replace("FrontPage"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("Add Child Page"),
 			selenium.getText("//div[1]/span[1]/a/span"));
 		selenium.clickAt("//div[1]/span[1]/a/span",
 			RuntimeVariables.replace("Add Child Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		selenium.type("//div/span[1]/span/span/input",
 			RuntimeVariables.replace("Wiki] Front] Page] Child] Page] Title]"));
 		Thread.sleep(5000);
@@ -123,7 +123,7 @@ public class AddWDFrontPageChildPageNameInvalidTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Publish']",
 			RuntimeVariables.replace("Publish"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace(
 				"Your request failed to complete."),
 			selenium.getText("xPath=(//div[@class='portlet-msg-error'])[1]"));
@@ -131,13 +131,13 @@ public class AddWDFrontPageChildPageNameInvalidTest extends BaseTestCase {
 			selenium.getText("xPath=(//div[@class='portlet-msg-error'])[2]"));
 		selenium.clickAt("link=FrontPage", RuntimeVariables.replace("FrontPage"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("Add Child Page"),
 			selenium.getText("//div[1]/span[1]/a/span"));
 		selenium.clickAt("//div[1]/span[1]/a/span",
 			RuntimeVariables.replace("Add Child Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		selenium.type("//div/span[1]/span/span/input",
 			RuntimeVariables.replace("Wiki[ Front[ Page[ Child[ Page[ Title["));
 		Thread.sleep(5000);
@@ -165,7 +165,7 @@ public class AddWDFrontPageChildPageNameInvalidTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Publish']",
 			RuntimeVariables.replace("Publish"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace(
 				"Your request failed to complete."),
 			selenium.getText("xPath=(//div[@class='portlet-msg-error'])[1]"));
@@ -173,13 +173,13 @@ public class AddWDFrontPageChildPageNameInvalidTest extends BaseTestCase {
 			selenium.getText("xPath=(//div[@class='portlet-msg-error'])[2]"));
 		selenium.clickAt("link=FrontPage", RuntimeVariables.replace("FrontPage"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("Add Child Page"),
 			selenium.getText("//div[1]/span[1]/a/span"));
 		selenium.clickAt("//div[1]/span[1]/a/span",
 			RuntimeVariables.replace("Add Child Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		selenium.type("//div/span[1]/span/span/input",
 			RuntimeVariables.replace("Wiki; Front; Page; Child; Page; Title;"));
 		Thread.sleep(5000);
@@ -207,7 +207,7 @@ public class AddWDFrontPageChildPageNameInvalidTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Publish']",
 			RuntimeVariables.replace("Publish"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace(
 				"Your request failed to complete."),
 			selenium.getText("xPath=(//div[@class='portlet-msg-error'])[1]"));
@@ -215,13 +215,13 @@ public class AddWDFrontPageChildPageNameInvalidTest extends BaseTestCase {
 			selenium.getText("xPath=(//div[@class='portlet-msg-error'])[2]"));
 		selenium.clickAt("link=FrontPage", RuntimeVariables.replace("FrontPage"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("Add Child Page"),
 			selenium.getText("//div[1]/span[1]/a/span"));
 		selenium.clickAt("//div[1]/span[1]/a/span",
 			RuntimeVariables.replace("Add Child Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		selenium.type("//div/span[1]/span/span/input",
 			RuntimeVariables.replace("Wiki: Front: Page: Child: Page: Title:"));
 		Thread.sleep(5000);
@@ -249,7 +249,7 @@ public class AddWDFrontPageChildPageNameInvalidTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Publish']",
 			RuntimeVariables.replace("Publish"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace(
 				"Your request failed to complete."),
 			selenium.getText("xPath=(//div[@class='portlet-msg-error'])[1]"));
@@ -257,13 +257,13 @@ public class AddWDFrontPageChildPageNameInvalidTest extends BaseTestCase {
 			selenium.getText("xPath=(//div[@class='portlet-msg-error'])[2]"));
 		selenium.clickAt("link=FrontPage", RuntimeVariables.replace("FrontPage"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("Add Child Page"),
 			selenium.getText("//div[1]/span[1]/a/span"));
 		selenium.clickAt("//div[1]/span[1]/a/span",
 			RuntimeVariables.replace("Add Child Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		selenium.type("//div/span[1]/span/span/input",
 			RuntimeVariables.replace("Wiki| Front| Page| Child| Page| Title|"));
 		Thread.sleep(5000);
@@ -291,7 +291,7 @@ public class AddWDFrontPageChildPageNameInvalidTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Publish']",
 			RuntimeVariables.replace("Publish"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace(
 				"Your request failed to complete."),
 			selenium.getText("xPath=(//div[@class='portlet-msg-error'])[1]"));
@@ -299,13 +299,13 @@ public class AddWDFrontPageChildPageNameInvalidTest extends BaseTestCase {
 			selenium.getText("xPath=(//div[@class='portlet-msg-error'])[2]"));
 		selenium.clickAt("link=FrontPage", RuntimeVariables.replace("FrontPage"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("Add Child Page"),
 			selenium.getText("//div[1]/span[1]/a/span"));
 		selenium.clickAt("//div[1]/span[1]/a/span",
 			RuntimeVariables.replace("Add Child Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		selenium.type("//div/span[1]/span/span/input",
 			RuntimeVariables.replace("Wiki< Front< Page< Child< Page< Title<"));
 		Thread.sleep(5000);
@@ -333,7 +333,7 @@ public class AddWDFrontPageChildPageNameInvalidTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Publish']",
 			RuntimeVariables.replace("Publish"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace(
 				"Your request failed to complete."),
 			selenium.getText("xPath=(//div[@class='portlet-msg-error'])[1]"));
@@ -341,13 +341,13 @@ public class AddWDFrontPageChildPageNameInvalidTest extends BaseTestCase {
 			selenium.getText("xPath=(//div[@class='portlet-msg-error'])[2]"));
 		selenium.clickAt("link=FrontPage", RuntimeVariables.replace("FrontPage"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("Add Child Page"),
 			selenium.getText("//div[1]/span[1]/a/span"));
 		selenium.clickAt("//div[1]/span[1]/a/span",
 			RuntimeVariables.replace("Add Child Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		selenium.type("//div/span[1]/span/span/input",
 			RuntimeVariables.replace("Wiki> Front> Page> Child> Page> Title>"));
 		Thread.sleep(5000);
@@ -375,7 +375,7 @@ public class AddWDFrontPageChildPageNameInvalidTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Publish']",
 			RuntimeVariables.replace("Publish"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace(
 				"Your request failed to complete."),
 			selenium.getText("xPath=(//div[@class='portlet-msg-error'])[1]"));

@@ -23,7 +23,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class ViewLinkContactsCenterTest extends BaseTestCase {
 	public void testViewLinkContactsCenter() throws Exception {
 		selenium.open("/user/joebloggs/home/");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -45,7 +45,7 @@ public class ViewLinkContactsCenterTest extends BaseTestCase {
 		selenium.clickAt("//section/div/div/div/div[1]/ul/li[2]/a",
 			RuntimeVariables.replace("Contacts Center"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("Contacts Center"),
 			selenium.getText("//div[2]/div/div/div/section/header/h1/span[2]"));
 		assertEquals(RuntimeVariables.replace("You have no contacts."),

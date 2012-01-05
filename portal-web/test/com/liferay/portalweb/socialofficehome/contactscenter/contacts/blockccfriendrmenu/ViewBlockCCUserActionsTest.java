@@ -23,7 +23,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class ViewBlockCCUserActionsTest extends BaseTestCase {
 	public void testViewBlockCCUserActions() throws Exception {
 		selenium.open("/user/joebloggs/home/");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -44,7 +44,7 @@ public class ViewBlockCCUserActionsTest extends BaseTestCase {
 		selenium.clickAt("//div/div/div/div[1]/ul/li[2]/a",
 			RuntimeVariables.replace("Contacts Center"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("You have no contacts."),
 			selenium.getText("//div[@class='portlet-msg-info']"));
 		assertEquals(RuntimeVariables.replace("Find People"),
@@ -52,13 +52,13 @@ public class ViewBlockCCUserActionsTest extends BaseTestCase {
 		selenium.clickAt("//span[3]/a/span",
 			RuntimeVariables.replace("Find People"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		selenium.type("//form/span/span[1]/span/span/input",
 			RuntimeVariables.replace("socialofficefriendea@liferay.com"));
 		selenium.clickAt("//span[2]/span/input",
 			RuntimeVariables.replace("Search"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace(
 				"socialofficefriendfn socialofficefriendmn socialofficefriendln"),
 			selenium.getText("//div[2]/div[1]/a"));
@@ -89,7 +89,7 @@ public class ViewBlockCCUserActionsTest extends BaseTestCase {
 			selenium.getText("//li[1]/a"));
 		selenium.clickAt("//li[1]/a", RuntimeVariables.replace("View Profile"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace(
 				"socialofficefriendfn socialofficefriendmn socialofficefriendln"),
 			selenium.getText("//div[2]/h1/span"));

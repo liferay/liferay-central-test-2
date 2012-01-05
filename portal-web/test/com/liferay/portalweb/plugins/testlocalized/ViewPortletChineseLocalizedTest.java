@@ -23,7 +23,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class ViewPortletChineseLocalizedTest extends BaseTestCase {
 	public void testViewPortletChineseLocalized() throws Exception {
 		selenium.open("/web/guest/home/");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -44,12 +44,12 @@ public class ViewPortletChineseLocalizedTest extends BaseTestCase {
 		selenium.clickAt("link=Test Localized Page",
 			RuntimeVariables.replace("Test Localized Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("Chinese"),
 			selenium.getText("//section/div/div/div/a[1]"));
 		selenium.click(RuntimeVariables.replace("//section/div/div/div/a[1]"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace(
 				"Override a portal language entry from a hook."),
 			selenium.getText("//td[1]"));

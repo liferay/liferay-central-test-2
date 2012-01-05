@@ -23,7 +23,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class SelectWebContentTest extends BaseTestCase {
 	public void testSelectWebContent() throws Exception {
 		selenium.open("/web/staging-organization-wcd/");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -45,14 +45,14 @@ public class SelectWebContentTest extends BaseTestCase {
 		selenium.clickAt("link=Page Staging Organization Web Content Display",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertTrue(selenium.isElementPresent(
 				"//body[@class='blue live-view controls-visible signed-in public-page dockbar-ready']"));
 		assertFalse(selenium.isElementPresent(
 				"//body[@class='blue staging controls-visible signed-in public-page dockbar-ready']"));
 		selenium.clickAt("link=View Staged Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertFalse(selenium.isElementPresent(
 				"//body[@class='blue live-view controls-visible signed-in public-page dockbar-ready']"));
 		assertTrue(selenium.isElementPresent(
@@ -107,7 +107,7 @@ public class SelectWebContentTest extends BaseTestCase {
 				"Displaying Content:"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace(
 				"You have successfully updated the setup."),
 			selenium.getText("//div[@class='portlet-msg-success']"));

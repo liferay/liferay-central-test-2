@@ -42,7 +42,7 @@ public class ScreengrabLayoutTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Test Page 8"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		selenium.click("link=Layout Template");
 
 		for (int second = 0;; second++) {
@@ -68,6 +68,6 @@ public class ScreengrabLayoutTest extends BaseTestCase {
 			"");
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 	}
 }

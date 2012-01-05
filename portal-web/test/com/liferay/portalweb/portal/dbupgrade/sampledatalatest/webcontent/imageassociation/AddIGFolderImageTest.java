@@ -23,7 +23,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class AddIGFolderImageTest extends BaseTestCase {
 	public void testAddIGFolderImage() throws Exception {
 		selenium.open("/web/web-content-image-association-community/");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -44,17 +44,17 @@ public class AddIGFolderImageTest extends BaseTestCase {
 		selenium.clickAt("link=Image Gallery Page",
 			RuntimeVariables.replace("Image Gallery Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		selenium.clickAt("//a/strong", RuntimeVariables.replace("Folder Test"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("Add Image"),
 			selenium.getText(
 				"//div[@class='lfr-component lfr-menu-list lfr-menu-expanded align-right null']/ul/li[5]/a"));
 		selenium.click(RuntimeVariables.replace(
 				"//div[@class='lfr-component lfr-menu-list lfr-menu-expanded align-right null']/ul/li[5]/a"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		Thread.sleep(5000);
 		selenium.selectWindow("null");
 		selenium.windowFocus();
@@ -99,7 +99,7 @@ public class AddIGFolderImageTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Save']",
 			RuntimeVariables.replace("Save"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		Thread.sleep(5000);
 		assertTrue(selenium.isElementPresent("//img[@alt='ImageGallery - ']"));
 		assertEquals(RuntimeVariables.replace("ImageGallery"),

@@ -24,7 +24,7 @@ public class LoginLegacy51xTest extends BaseTestCase {
 	public void testLoginLegacy51x() throws Exception {
 		selenium.setTimeout("180000");
 		selenium.open("/web/guest/home");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -44,14 +44,14 @@ public class LoginLegacy51xTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Sign In"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		selenium.type("login", RuntimeVariables.replace("test@liferay.com"));
 		selenium.type("password", RuntimeVariables.replace("test"));
 		selenium.click("rememberMeCheckbox");
 		selenium.click(RuntimeVariables.replace(
 				"document.getElementById('tabs1already-registeredTabsSection').getElementsByTagName('div')[0].getElementsByTagName('form')[0].getElementsByTagName('fieldset')[0].getElementsByTagName('div')[3].getElementsByTagName('input')[0]"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -71,10 +71,10 @@ public class LoginLegacy51xTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("//input[@value='I Agree']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		selenium.click(RuntimeVariables.replace(
 				"document.getElementById('my-community-private-pages')"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 	}
 }

@@ -23,7 +23,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class AddPortletShoppingOrderTest extends BaseTestCase {
 	public void testAddPortletShoppingOrder() throws Exception {
 		selenium.open("/web/shopping-order-community/");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -44,7 +44,7 @@ public class AddPortletShoppingOrderTest extends BaseTestCase {
 		selenium.clickAt("link=Shopping Order Page",
 			RuntimeVariables.replace("Shopping Order Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertTrue(selenium.isPartialText("//a[@id='_145_addApplication']",
 				"More"));
 		selenium.clickAt("//a[@id='_145_addApplication']",

@@ -24,7 +24,7 @@ public class SOFo_NewPasswordTest extends BaseTestCase {
 	public void testSOFo_NewPassword() throws Exception {
 		selenium.setTimeout("180000");
 		selenium.open("/user/joebloggs/home");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -44,7 +44,7 @@ public class SOFo_NewPasswordTest extends BaseTestCase {
 
 		selenium.clickAt("link=Sign In", RuntimeVariables.replace("Sign In"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -104,7 +104,7 @@ public class SOFo_NewPasswordTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Sign In']",
 			RuntimeVariables.replace("Sign In"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertFalse(selenium.isTextPresent("Terms of Use"));
 		assertEquals(RuntimeVariables.replace("Please set a new password."),
 			selenium.getText("//div[@class='portlet-msg-info']"));
@@ -165,7 +165,7 @@ public class SOFo_NewPasswordTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("Please choose a reminder query."),
 			selenium.getText("//div[@class='portlet-msg-info']"));
 
@@ -206,8 +206,8 @@ public class SOFo_NewPasswordTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		selenium.open("/user/socialofficefollowersn/home");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 	}
 }

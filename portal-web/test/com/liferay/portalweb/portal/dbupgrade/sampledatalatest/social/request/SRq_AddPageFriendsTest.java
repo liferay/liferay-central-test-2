@@ -23,7 +23,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class SRq_AddPageFriendsTest extends BaseTestCase {
 	public void testSRq_AddPageFriends() throws Exception {
 		selenium.open("/web/socialrequestsn1/home/");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		selenium.clickAt("//nav[@id='navigation']",
 			RuntimeVariables.replace("Navigation"));
 
@@ -86,6 +86,6 @@ public class SRq_AddPageFriendsTest extends BaseTestCase {
 		selenium.clickAt("link=Friends Test Page",
 			RuntimeVariables.replace("Friends Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 	}
 }

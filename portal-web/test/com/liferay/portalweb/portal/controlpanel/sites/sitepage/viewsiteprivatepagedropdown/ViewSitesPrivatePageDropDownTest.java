@@ -23,7 +23,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class ViewSitesPrivatePageDropDownTest extends BaseTestCase {
 	public void testViewSitesPrivatePageDropDown() throws Exception {
 		selenium.open("/web/guest/home/");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -48,7 +48,7 @@ public class ViewSitesPrivatePageDropDownTest extends BaseTestCase {
 		selenium.clickAt("//li[6]/a/span",
 			RuntimeVariables.replace("Community Name"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("Private Page"),
 			selenium.getText("//nav/ul/li/a/span"));
 		assertEquals(RuntimeVariables.replace("Private Page"),

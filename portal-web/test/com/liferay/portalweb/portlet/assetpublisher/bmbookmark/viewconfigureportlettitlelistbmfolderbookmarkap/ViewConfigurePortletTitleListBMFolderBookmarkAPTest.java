@@ -25,7 +25,7 @@ public class ViewConfigurePortletTitleListBMFolderBookmarkAPTest
 	public void testViewConfigurePortletTitleListBMFolderBookmarkAP()
 		throws Exception {
 		selenium.open("/web/guest/home/");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -46,13 +46,13 @@ public class ViewConfigurePortletTitleListBMFolderBookmarkAPTest
 		selenium.clickAt("link=Asset Publisher Test Page",
 			RuntimeVariables.replace("Asset Publisher Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("BM Folder Bookmark Name"),
 			selenium.getText("//span/a/span"));
 		selenium.clickAt("//span/a/span",
 			RuntimeVariables.replace("BM Folder Bookmark Name"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("BM Folder Bookmark Name"),
 			selenium.getText("//h1[@class='header-title']/span"));
 		assertEquals(RuntimeVariables.replace(
@@ -63,11 +63,11 @@ public class ViewConfigurePortletTitleListBMFolderBookmarkAPTest
 		selenium.clickAt("//div[@class='asset-more']/a",
 			RuntimeVariables.replace("View in Context \u00bb"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		selenium.clickAt("link=exact:http://www.liferay.com",
 			RuntimeVariables.replace("exact:http://www.liferay.com"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertTrue(selenium.isElementPresent("//img[@alt='Liferay']"));
 	}
 }

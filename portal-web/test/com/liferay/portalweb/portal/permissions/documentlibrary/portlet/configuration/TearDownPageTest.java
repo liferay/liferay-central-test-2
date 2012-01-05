@@ -28,7 +28,7 @@ public class TearDownPageTest extends BaseTestCase {
 			switch (label) {
 			case 1:
 				selenium.open("/web/guest/home/");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 				selenium.clickAt("//div[@id='dockbar']",
 					RuntimeVariables.replace("Dockbar"));
 
@@ -153,7 +153,7 @@ public class TearDownPageTest extends BaseTestCase {
 					selenium.getText("//button[3]"));
 				selenium.click(RuntimeVariables.replace("//button[3]"));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete the selected page[\\s\\S]$"));
 				selenium.clickAt("//div[@id='_88_layoutsTreeOutput']/ul/li/div/div[1]",
@@ -228,7 +228,7 @@ public class TearDownPageTest extends BaseTestCase {
 					selenium.getText("//button[3]"));
 				selenium.click(RuntimeVariables.replace("//button[3]"));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete the selected page[\\s\\S]$"));
 				selenium.clickAt("//div[@id='_88_layoutsTreeOutput']/ul/li/div/div[1]",
@@ -303,7 +303,7 @@ public class TearDownPageTest extends BaseTestCase {
 					selenium.getText("//button[3]"));
 				selenium.click(RuntimeVariables.replace("//button[3]"));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete the selected page[\\s\\S]$"));
 				selenium.clickAt("//div[@id='_88_layoutsTreeOutput']/ul/li/div/div[1]",
@@ -378,7 +378,7 @@ public class TearDownPageTest extends BaseTestCase {
 					selenium.getText("//button[3]"));
 				selenium.click(RuntimeVariables.replace("//button[3]"));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete the selected page[\\s\\S]$"));
 				selenium.clickAt("//div[@id='_88_layoutsTreeOutput']/ul/li/div/div[1]",
@@ -453,7 +453,7 @@ public class TearDownPageTest extends BaseTestCase {
 					selenium.getText("//button[3]"));
 				selenium.click(RuntimeVariables.replace("//button[3]"));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete the selected page[\\s\\S]$"));
 

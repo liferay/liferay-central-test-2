@@ -23,7 +23,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class ImportLARTest extends BaseTestCase {
 	public void testImportLAR() throws Exception {
 		selenium.open("/web/guest/home/");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		selenium.clickAt("//div[@id='dockbar']",
 			RuntimeVariables.replace("Dockbar"));
 
@@ -68,7 +68,7 @@ public class ImportLARTest extends BaseTestCase {
 		selenium.clickAt("//ul[@class='category-portlets']/li[6]/a",
 			RuntimeVariables.replace("Message Boards"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("Options"),
 			selenium.getText(
 				"//div[2]/div/div/div/div/div/div/section/header/menu/span/ul/li/strong/a"));
@@ -96,10 +96,10 @@ public class ImportLARTest extends BaseTestCase {
 		selenium.clickAt("//a[@id='_162_xafr']",
 			RuntimeVariables.replace("Export / Import"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		selenium.click(RuntimeVariables.replace("link=Import"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		selenium.type("//input[@id='_86_importFileName']",
 			RuntimeVariables.replace(
 				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\messageboards\\lar\\importlar\\dependencies\\Message_Boards-Selenium.portlet.lar"));
@@ -117,7 +117,7 @@ public class ImportLARTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Import']",
 			RuntimeVariables.replace("Import"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace(
 				"Your request completed successfully."),
 			selenium.getText("//div[@class='portlet-msg-success']"));

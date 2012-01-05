@@ -24,7 +24,7 @@ public class ViewPortletScopeDefaultBlogsEntryCPTest extends BaseTestCase {
 	public void testViewPortletScopeDefaultBlogsEntryCP()
 		throws Exception {
 		selenium.open("/web/guest/home/");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -45,13 +45,13 @@ public class ViewPortletScopeDefaultBlogsEntryCPTest extends BaseTestCase {
 		selenium.clickAt("link=Control Panel",
 			RuntimeVariables.replace("Control Panel"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("Scope: Default"),
 			selenium.getText(
 				"//div[@id='panel-manage-content']/div[2]/div/span/ul/li/strong/a"));
 		selenium.clickAt("link=Blogs", RuntimeVariables.replace("Blogs"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("Blogs"),
 			selenium.getText("//span[@class='portlet-title-text']"));
 		assertFalse(selenium.isTextPresent("Blogs Entry Title"));

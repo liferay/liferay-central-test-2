@@ -23,7 +23,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class GetAppointmentEventsTest extends BaseTestCase {
 	public void testGetAppointmentEvents() throws Exception {
 		selenium.open("/web/guest/home/");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -44,43 +44,43 @@ public class GetAppointmentEventsTest extends BaseTestCase {
 		selenium.clickAt("link=Control Panel",
 			RuntimeVariables.replace("Control Panel"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		selenium.clickAt("link=Calendar", RuntimeVariables.replace("Calendar"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		selenium.clickAt("link=Day", RuntimeVariables.replace("Day"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		selenium.select("//select",
 			RuntimeVariables.replace("label=Appointment"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertTrue(selenium.isElementPresent("link=Test Event"));
 		assertFalse(selenium.isElementPresent("link=Off to Yosemite!"));
 		assertFalse(selenium.isElementPresent("link=Caedmon's Call Concert!"));
 		selenium.clickAt("link=Week", RuntimeVariables.replace("Week"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		selenium.select("//select",
 			RuntimeVariables.replace("label=Appointment"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertTrue(selenium.isElementPresent("link=Test Event"));
 		assertFalse(selenium.isElementPresent("link=Off to Yosemite!"));
 		assertFalse(selenium.isElementPresent("link=Caedmon's Call Concert!"));
 		selenium.clickAt("link=Month", RuntimeVariables.replace("Month"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		selenium.select("//select",
 			RuntimeVariables.replace("label=Appointment"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertTrue(selenium.isElementPresent("link=Test Event"));
 		assertFalse(selenium.isElementPresent("link=Off to Yosemite!"));
 		assertFalse(selenium.isElementPresent("link=Caedmon's Call Concert!"));
 		selenium.clickAt("link=Events", RuntimeVariables.replace("Events"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertTrue(selenium.isElementPresent("link=Test Event"));
 	}
 }

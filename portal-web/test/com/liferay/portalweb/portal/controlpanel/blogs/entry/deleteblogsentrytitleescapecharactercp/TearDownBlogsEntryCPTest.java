@@ -28,7 +28,7 @@ public class TearDownBlogsEntryCPTest extends BaseTestCase {
 			switch (label) {
 			case 1:
 				selenium.open("/web/guest/home/");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 
 				for (int second = 0;; second++) {
 					if (second >= 90) {
@@ -49,10 +49,10 @@ public class TearDownBlogsEntryCPTest extends BaseTestCase {
 				selenium.clickAt("link=Control Panel",
 					RuntimeVariables.replace("Control Panel"));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 				selenium.clickAt("link=Blogs", RuntimeVariables.replace("Blogs"));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 
 				boolean entry1Present = selenium.isElementPresent("//td[2]/a");
 
@@ -66,7 +66,7 @@ public class TearDownBlogsEntryCPTest extends BaseTestCase {
 				selenium.clickAt("//input[@value='Delete']",
 					RuntimeVariables.replace("Delete"));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete the selected entries[\\s\\S]$"));
 
@@ -84,7 +84,7 @@ public class TearDownBlogsEntryCPTest extends BaseTestCase {
 				selenium.clickAt("//input[@value='Delete']",
 					RuntimeVariables.replace("Delete"));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete the selected entries[\\s\\S]$"));
 
@@ -102,7 +102,7 @@ public class TearDownBlogsEntryCPTest extends BaseTestCase {
 				selenium.clickAt("//input[@value='Delete']",
 					RuntimeVariables.replace("Delete"));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete the selected entries[\\s\\S]$"));
 
@@ -120,7 +120,7 @@ public class TearDownBlogsEntryCPTest extends BaseTestCase {
 				selenium.clickAt("//input[@value='Delete']",
 					RuntimeVariables.replace("Delete"));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete the selected entries[\\s\\S]$"));
 
@@ -138,7 +138,7 @@ public class TearDownBlogsEntryCPTest extends BaseTestCase {
 				selenium.clickAt("//input[@value='Delete']",
 					RuntimeVariables.replace("Delete"));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete the selected entries[\\s\\S]$"));
 

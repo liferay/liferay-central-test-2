@@ -24,7 +24,7 @@ public class ViewConfigurePortletAvailableBlogsEntryAPTest extends BaseTestCase 
 	public void testViewConfigurePortletAvailableBlogsEntryAP()
 		throws Exception {
 		selenium.open("/web/guest/home/");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -45,7 +45,7 @@ public class ViewConfigurePortletAvailableBlogsEntryAPTest extends BaseTestCase 
 		selenium.clickAt("link=Asset Publisher Test Page",
 			RuntimeVariables.replace("Asset Publisher Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertFalse(selenium.isTextPresent("Blogs Entry Title"));
 		assertFalse(selenium.isTextPresent("Blogs Entry Content"));
 	}

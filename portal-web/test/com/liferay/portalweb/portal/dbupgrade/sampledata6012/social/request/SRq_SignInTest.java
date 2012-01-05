@@ -29,7 +29,7 @@ public class SRq_SignInTest extends BaseTestCase {
 			case 1:
 				selenium.setTimeout("180000");
 				selenium.open("/web/guest/home");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 
 				for (int second = 0;; second++) {
 					if (second >= 90) {
@@ -50,7 +50,7 @@ public class SRq_SignInTest extends BaseTestCase {
 				selenium.clickAt("link=Sign In",
 					RuntimeVariables.replace("Sign In"));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 
 				for (int second = 0;; second++) {
 					if (second >= 90) {
@@ -111,7 +111,7 @@ public class SRq_SignInTest extends BaseTestCase {
 				selenium.clickAt("//input[@value='Sign In']",
 					RuntimeVariables.replace("Sign In"));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 
 				boolean iAgreePresent = selenium.isElementPresent(
 						"//span/input");
@@ -142,7 +142,7 @@ public class SRq_SignInTest extends BaseTestCase {
 				selenium.click(RuntimeVariables.replace(
 						"//input[@value='I Agree']"));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 				selenium.type("reminderQueryAnswer",
 					RuntimeVariables.replace("Test"));
 
@@ -181,7 +181,7 @@ public class SRq_SignInTest extends BaseTestCase {
 				selenium.click(RuntimeVariables.replace(
 						"//input[@value='Save']"));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 
 			case 2:
 			case 100:

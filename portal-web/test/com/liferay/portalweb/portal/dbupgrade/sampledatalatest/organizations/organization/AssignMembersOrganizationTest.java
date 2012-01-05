@@ -28,7 +28,7 @@ public class AssignMembersOrganizationTest extends BaseTestCase {
 			switch (label) {
 			case 1:
 				selenium.open("/web/guest/home/");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 
 				for (int second = 0;; second++) {
 					if (second >= 90) {
@@ -49,17 +49,17 @@ public class AssignMembersOrganizationTest extends BaseTestCase {
 				selenium.clickAt("link=Control Panel",
 					RuntimeVariables.replace("Control Panel"));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 				selenium.clickAt("link=Users and Organizations",
 					RuntimeVariables.replace("Users and Organizations"));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 				selenium.type("//input[@id='_125_keywords']",
 					RuntimeVariables.replace("Sample"));
 				selenium.clickAt("//input[@value='Search']",
 					RuntimeVariables.replace("Search"));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 				selenium.clickAt("//td[4]/span/ul/li/strong/a/span",
 					RuntimeVariables.replace("Actions"));
 
@@ -86,11 +86,11 @@ public class AssignMembersOrganizationTest extends BaseTestCase {
 				selenium.click(RuntimeVariables.replace(
 						"//div[@class='lfr-component lfr-menu-list']/ul/li[3]/a"));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 				selenium.clickAt("link=Available",
 					RuntimeVariables.replace("Available"));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 
 				boolean basic2Visible = selenium.isVisible("link=\u00ab Basic");
 
@@ -109,7 +109,7 @@ public class AssignMembersOrganizationTest extends BaseTestCase {
 				selenium.clickAt("//input[@value='Search']",
 					RuntimeVariables.replace("Search"));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 
 				boolean userChecked = selenium.isChecked("_125_rowIds");
 
@@ -126,7 +126,7 @@ public class AssignMembersOrganizationTest extends BaseTestCase {
 				selenium.clickAt("//input[@value='Update Associations']",
 					RuntimeVariables.replace("Update Associations"));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 
 				for (int second = 0;; second++) {
 					if (second >= 90) {
@@ -151,7 +151,7 @@ public class AssignMembersOrganizationTest extends BaseTestCase {
 				selenium.clickAt("link=Current",
 					RuntimeVariables.replace("Current"));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 				assertEquals(RuntimeVariables.replace("Joe Bloggs"),
 					selenium.getText(
 						"//tr[@class='portlet-section-body results-row last']/td[2]"));

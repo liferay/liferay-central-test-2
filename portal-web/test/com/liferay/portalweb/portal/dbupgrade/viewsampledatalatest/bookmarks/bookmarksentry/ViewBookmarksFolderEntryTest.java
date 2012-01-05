@@ -23,7 +23,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class ViewBookmarksFolderEntryTest extends BaseTestCase {
 	public void testViewBookmarksFolderEntry() throws Exception {
 		selenium.open("/web/bookmarks-entry-community/");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -44,11 +44,11 @@ public class ViewBookmarksFolderEntryTest extends BaseTestCase {
 		selenium.clickAt("link=Bookmarks Entry Page",
 			RuntimeVariables.replace("Bookmarks Entry Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		selenium.clickAt("//a/strong",
 			RuntimeVariables.replace("Bookmarks Folder Name"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("Bookmarks Entry Name"),
 			selenium.getText("//td[1]/a"));
 		assertEquals(RuntimeVariables.replace("http://www.liferay.com"),
@@ -56,7 +56,7 @@ public class ViewBookmarksFolderEntryTest extends BaseTestCase {
 		selenium.clickAt("//td[1]/a",
 			RuntimeVariables.replace("Bookmarks Entry Name"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -77,7 +77,7 @@ public class ViewBookmarksFolderEntryTest extends BaseTestCase {
 		selenium.clickAt("//div[@class='lfr-asset-url']/a",
 			RuntimeVariables.replace("http://www.liferay.com"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertTrue(selenium.isElementPresent("//img[@alt='Liferay']"));
 	}
 }

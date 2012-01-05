@@ -24,7 +24,7 @@ public class AddPage1DLFolder1Document1Comment1Test extends BaseTestCase {
 	public void testAddPage1DLFolder1Document1Comment1()
 		throws Exception {
 		selenium.open("/web/document-library-page-scope-community/");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -45,7 +45,7 @@ public class AddPage1DLFolder1Document1Comment1Test extends BaseTestCase {
 		selenium.clickAt("link=DL Page1 Name",
 			RuntimeVariables.replace("DL Page1 Name"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {

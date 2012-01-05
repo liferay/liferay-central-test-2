@@ -23,7 +23,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class AddToShoppingCartCategoryItemTest extends BaseTestCase {
 	public void testAddToShoppingCartCategoryItem() throws Exception {
 		selenium.open("/web/shopping-order-community/");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -44,17 +44,17 @@ public class AddToShoppingCartCategoryItemTest extends BaseTestCase {
 		selenium.clickAt("link=Shopping Order Page",
 			RuntimeVariables.replace("Shopping Order Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		selenium.clickAt("//td[1]/a", RuntimeVariables.replace("Category Test"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		selenium.clickAt("//td[2]/a", RuntimeVariables.replace("Item Test"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Add to Shopping Cart']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {

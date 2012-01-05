@@ -25,7 +25,7 @@ public class SOCo_ViewConfirmNotificationsAddAsCoworkerCCTest
 	public void testSOCo_ViewConfirmNotificationsAddAsCoworkerCC()
 		throws Exception {
 		selenium.open("/user/socialofficecoworkersn/home/");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -46,7 +46,7 @@ public class SOCo_ViewConfirmNotificationsAddAsCoworkerCCTest
 		selenium.clickAt("//div/div/div/div[1]/ul/li[2]/a",
 			RuntimeVariables.replace("Contacts Center"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertTrue(selenium.isVisible("//div[1]/a/img"));
 		assertEquals(RuntimeVariables.replace("Manage 1 coworkers."),
 			selenium.getText("//div[1]/div/div/div/div[2]/a"));

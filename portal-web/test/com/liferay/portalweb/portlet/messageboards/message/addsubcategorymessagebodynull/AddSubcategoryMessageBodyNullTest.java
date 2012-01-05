@@ -23,7 +23,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class AddSubcategoryMessageBodyNullTest extends BaseTestCase {
 	public void testAddSubcategoryMessageBodyNull() throws Exception {
 		selenium.open("/web/guest/home/");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -44,13 +44,13 @@ public class AddSubcategoryMessageBodyNullTest extends BaseTestCase {
 		selenium.clickAt("link=Message Boards Test Page",
 			RuntimeVariables.replace("Message Boards Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("MB Category Name"),
 			selenium.getText("//a/strong"));
 		selenium.clickAt("//a/strong",
 			RuntimeVariables.replace("MB Category Name"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("MB Category Name"),
 			selenium.getText("//h1[@class='header-title']/span"));
 		assertEquals(RuntimeVariables.replace("MB Subcategory Name"),
@@ -58,11 +58,11 @@ public class AddSubcategoryMessageBodyNullTest extends BaseTestCase {
 		selenium.clickAt("//a/strong",
 			RuntimeVariables.replace("MB Subcategory Name"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		selenium.clickAt("//input[@value='Post New Thread']",
 			RuntimeVariables.replace("Post New Thread"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		selenium.type("//input[@id='_19_subject']",
 			RuntimeVariables.replace("MB Subcategory Thread Message Subject"));
 		Thread.sleep(5000);
@@ -90,7 +90,7 @@ public class AddSubcategoryMessageBodyNullTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Publish']",
 			RuntimeVariables.replace("Publish"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace(
 				"MB Subcategory Thread Message Subject"),
 			selenium.getText("//div[@class='subject']/a/strong"));
@@ -98,7 +98,7 @@ public class AddSubcategoryMessageBodyNullTest extends BaseTestCase {
 				"MB Subcategory Thread Message Subject"),
 			selenium.getText("//div[@class='thread-body']"));
 		selenium.open("/web/guest/home/");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -119,7 +119,7 @@ public class AddSubcategoryMessageBodyNullTest extends BaseTestCase {
 		selenium.clickAt("link=Message Boards Test Page",
 			RuntimeVariables.replace("Message Boards Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("MB Category Name"),
 			selenium.getText("//a/strong"));
 		assertEquals(RuntimeVariables.replace("1"),
@@ -131,7 +131,7 @@ public class AddSubcategoryMessageBodyNullTest extends BaseTestCase {
 		selenium.clickAt("//a/strong",
 			RuntimeVariables.replace("MB Category Name"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("MB Subcategory Name"),
 			selenium.getText("//a/strong"));
 		assertEquals(RuntimeVariables.replace("0"),
@@ -143,7 +143,7 @@ public class AddSubcategoryMessageBodyNullTest extends BaseTestCase {
 		selenium.clickAt("//a/strong",
 			RuntimeVariables.replace("MB Subcategory Name"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace(
 				"MB Subcategory Thread Message Subject"),
 			selenium.getText("//td[1]/a"));

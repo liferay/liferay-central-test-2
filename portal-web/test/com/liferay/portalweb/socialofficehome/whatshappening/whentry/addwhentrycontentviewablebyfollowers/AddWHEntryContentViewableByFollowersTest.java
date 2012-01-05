@@ -24,7 +24,7 @@ public class AddWHEntryContentViewableByFollowersTest extends BaseTestCase {
 	public void testAddWHEntryContentViewableByFollowers()
 		throws Exception {
 		selenium.open("/user/joebloggs/home/");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -45,7 +45,7 @@ public class AddWHEntryContentViewableByFollowersTest extends BaseTestCase {
 		selenium.clickAt("//div/div/div/div[1]/ul/li[1]/a",
 			RuntimeVariables.replace("Home"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("What's happening?"),
 			selenium.getText("//div[1]/h1/span"));
 		assertTrue(selenium.isElementPresent("//textarea"));

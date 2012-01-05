@@ -24,7 +24,7 @@ public class SiteAdmin_RemoveGuestViewImagePermissionsTest extends BaseTestCase 
 	public void testSiteAdmin_RemoveGuestViewImagePermissions()
 		throws Exception {
 		selenium.open("/web/guest/home/");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -46,7 +46,7 @@ public class SiteAdmin_RemoveGuestViewImagePermissionsTest extends BaseTestCase 
 		selenium.clickAt("link=Media Gallery Permissions Test Page",
 			RuntimeVariables.replace("Media Gallery Permissions Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace(
 				"Media Gallery Permissions Test Folder 2 Edited"),
 			selenium.getText(
@@ -55,7 +55,7 @@ public class SiteAdmin_RemoveGuestViewImagePermissionsTest extends BaseTestCase 
 			RuntimeVariables.replace(
 				"Media Gallery Permissions Test Folder 2 Edited"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace(
 				"Media Gallery Permissions Test Subfolder 2"),
 			selenium.getText(
@@ -64,7 +64,7 @@ public class SiteAdmin_RemoveGuestViewImagePermissionsTest extends BaseTestCase 
 			RuntimeVariables.replace(
 				"Media Gallery Permissions Test Subfolder 2"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("Permissions Image Test Edited"),
 			selenium.getText("//a[@title='Permissions Image Test Edited - ']"));
 		selenium.clickAt("//a[@title='Permissions Image Test Edited - ']",
@@ -95,7 +95,7 @@ public class SiteAdmin_RemoveGuestViewImagePermissionsTest extends BaseTestCase 
 		selenium.clickAt("//input[@value='Save']",
 			RuntimeVariables.replace("Save"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace(
 				"Your request completed successfully."),
 			selenium.getText("//div[@class='portlet-msg-success']"));

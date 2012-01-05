@@ -28,7 +28,7 @@ public class RestoreUserTest extends BaseTestCase {
 			switch (label) {
 			case 1:
 				selenium.open("/web/guest/home/");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 
 				for (int second = 0;; second++) {
 					if (second >= 90) {
@@ -49,17 +49,17 @@ public class RestoreUserTest extends BaseTestCase {
 				selenium.clickAt("link=Control Panel",
 					RuntimeVariables.replace("Control Panel"));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 				selenium.clickAt("link=Users and Organizations",
 					RuntimeVariables.replace("Users and Organizations"));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 				assertEquals(RuntimeVariables.replace("Search All Users"),
 					selenium.getText("//span/a/span"));
 				selenium.clickAt("//span/a/span",
 					RuntimeVariables.replace("Search All Users"));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 
 				boolean advancedVisible = selenium.isVisible(
 						"link=Advanced \u00bb");
@@ -96,13 +96,13 @@ public class RestoreUserTest extends BaseTestCase {
 				selenium.clickAt("//input[@value='Search']",
 					RuntimeVariables.replace("Search"));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 				selenium.clickAt("//input[@name='_125_rowIds']",
 					RuntimeVariables.replace("Check All"));
 				selenium.clickAt("//input[@value='Restore']",
 					RuntimeVariables.replace("Restore"));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 
 				for (int second = 0;; second++) {
 					if (second >= 90) {
@@ -127,13 +127,13 @@ public class RestoreUserTest extends BaseTestCase {
 				selenium.clickAt("link=Users and Organizations",
 					RuntimeVariables.replace("Users and Organizations"));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 				assertEquals(RuntimeVariables.replace("Search All Users"),
 					selenium.getText("//a[@id='_125_allUsersLink']"));
 				selenium.clickAt("//a[@id='_125_allUsersLink']",
 					RuntimeVariables.replace("Search All Users"));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 				selenium.clickAt("link=\u00ab Basic",
 					RuntimeVariables.replace("\u00ab Basic"));
 				selenium.type("//input[@name='_125_keywords']",
@@ -141,7 +141,7 @@ public class RestoreUserTest extends BaseTestCase {
 				selenium.clickAt("//input[@value='Search']",
 					RuntimeVariables.replace("Search"));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 				assertEquals(RuntimeVariables.replace("selen01"),
 					selenium.getText("//td[2]/a"));
 				assertEquals(RuntimeVariables.replace("nium01"),

@@ -42,7 +42,7 @@ public class ScreengrabPageCommentTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Test Page 6"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {

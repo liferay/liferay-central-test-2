@@ -28,7 +28,7 @@ public class User_SignInTest extends BaseTestCase {
 			switch (label) {
 			case 1:
 				selenium.open("/web/guest/home/");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 
 				for (int second = 0;; second++) {
 					if (second >= 90) {
@@ -67,7 +67,7 @@ public class User_SignInTest extends BaseTestCase {
 				selenium.clickAt("//input[@value='Sign In']",
 					RuntimeVariables.replace("Sign In"));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 
 				boolean iAgreeVisible = selenium.isElementPresent(
 						"//span/input");
@@ -81,7 +81,7 @@ public class User_SignInTest extends BaseTestCase {
 				selenium.clickAt("//input[@value='I Agree']",
 					RuntimeVariables.replace("I Agree"));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 
 			case 3:
 
@@ -108,7 +108,7 @@ public class User_SignInTest extends BaseTestCase {
 				selenium.clickAt("//input[@value='Save']",
 					RuntimeVariables.replace("Save"));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 
 				boolean passwordReminderVisible = selenium.isElementPresent(
 						"reminderQueryAnswer");
@@ -127,7 +127,7 @@ public class User_SignInTest extends BaseTestCase {
 				selenium.clickAt("//input[@value='Save']",
 					RuntimeVariables.replace("Save"));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 
 			case 4:
 			case 100:

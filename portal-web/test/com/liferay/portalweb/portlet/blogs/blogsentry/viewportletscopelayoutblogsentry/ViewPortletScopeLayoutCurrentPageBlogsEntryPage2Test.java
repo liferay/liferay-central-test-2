@@ -25,7 +25,7 @@ public class ViewPortletScopeLayoutCurrentPageBlogsEntryPage2Test
 	public void testViewPortletScopeLayoutCurrentPageBlogsEntryPage2()
 		throws Exception {
 		selenium.open("/web/guest/home/");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -46,7 +46,7 @@ public class ViewPortletScopeLayoutCurrentPageBlogsEntryPage2Test
 		selenium.clickAt("link=Blogs2 Test2 Page2",
 			RuntimeVariables.replace("Blogs2 Test2 Page2"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("Blogs (Blogs2 Test2 Page2)"),
 			selenium.getText("//span[@class='portlet-title-text']"));
 		assertEquals(RuntimeVariables.replace("Blogs Entry Title"),
@@ -92,7 +92,7 @@ public class ViewPortletScopeLayoutCurrentPageBlogsEntryPage2Test
 
 		selenium.clickAt("link=Scope", RuntimeVariables.replace("Scope"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {

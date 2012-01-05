@@ -29,7 +29,7 @@ public class RemovePortletPermissionsGuestViewTest extends BaseTestCase {
 			switch (label) {
 			case 1:
 				selenium.open("/web/guest/home");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 
 				for (int second = 0;; second++) {
 					if (second >= 90) {
@@ -51,7 +51,7 @@ public class RemovePortletPermissionsGuestViewTest extends BaseTestCase {
 				selenium.clickAt("link=Blogs Portlet Permissions Page",
 					RuntimeVariables.replace("Blogs Portlet Permissions Page"));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 				selenium.clickAt("//strong/a",
 					RuntimeVariables.replace("Options"));
 
@@ -97,7 +97,7 @@ public class RemovePortletPermissionsGuestViewTest extends BaseTestCase {
 				selenium.clickAt("link=Permissions",
 					RuntimeVariables.replace("Permissions"));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 
 				boolean guestViewChecked = selenium.isChecked("15_ACTION_VIEW");
 
@@ -114,7 +114,7 @@ public class RemovePortletPermissionsGuestViewTest extends BaseTestCase {
 				selenium.clickAt("//input[@value='Save']",
 					RuntimeVariables.replace("Save"));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 				assertEquals(RuntimeVariables.replace(
 						"Your request processed successfully."),
 					selenium.getText("//div[@id='p_p_id_86_']/div/div[1]"));

@@ -25,7 +25,7 @@ public class Guest_ViewPermissionsBookmarksEntryGuestViewOffTest
 	public void testGuest_ViewPermissionsBookmarksEntryGuestViewOff()
 		throws Exception {
 		selenium.open("/web/guest/home/");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -46,7 +46,7 @@ public class Guest_ViewPermissionsBookmarksEntryGuestViewOffTest
 		selenium.clickAt("link=Bookmarks Test Page",
 			RuntimeVariables.replace("Bookmarks Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace(
 				"There are no bookmarks in this folder."),
 			selenium.getText("//div[@class='portlet-msg-info']"));

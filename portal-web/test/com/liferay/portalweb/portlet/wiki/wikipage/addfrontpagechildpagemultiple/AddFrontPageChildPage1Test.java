@@ -23,7 +23,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class AddFrontPageChildPage1Test extends BaseTestCase {
 	public void testAddFrontPageChildPage1() throws Exception {
 		selenium.open("/web/guest/home/");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -44,13 +44,13 @@ public class AddFrontPageChildPage1Test extends BaseTestCase {
 		selenium.clickAt("link=Wiki Test Page",
 			RuntimeVariables.replace("Wiki Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("Add Child Page"),
 			selenium.getText("//div[1]/span[1]/a/span"));
 		selenium.clickAt("//div[1]/span[1]/a/span",
 			RuntimeVariables.replace("Add Child Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		selenium.type("//input[@id='_36_title']",
 			RuntimeVariables.replace("Wiki Front Page Child Page1 Title"));
 		Thread.sleep(5000);
@@ -79,7 +79,7 @@ public class AddFrontPageChildPage1Test extends BaseTestCase {
 		selenium.clickAt("//input[@value='Publish']",
 			RuntimeVariables.replace("Publish"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace(
 				"Your request completed successfully."),
 			selenium.getText("//div[@class='portlet-msg-success']"));
@@ -89,7 +89,7 @@ public class AddFrontPageChildPage1Test extends BaseTestCase {
 		selenium.clickAt("//div[@class='child-pages']/ul/li/a",
 			RuntimeVariables.replace("Wiki Front Page Child Page1 Title"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace(
 				"Wiki Front Page Child Page1 Title"),
 			selenium.getText("//h1[@class='header-title']/span"));

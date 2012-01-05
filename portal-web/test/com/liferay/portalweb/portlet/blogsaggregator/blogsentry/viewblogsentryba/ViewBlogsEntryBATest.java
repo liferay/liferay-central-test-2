@@ -23,7 +23,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class ViewBlogsEntryBATest extends BaseTestCase {
 	public void testViewBlogsEntryBA() throws Exception {
 		selenium.open("/web/guest/home/");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -44,7 +44,7 @@ public class ViewBlogsEntryBATest extends BaseTestCase {
 		selenium.clickAt("link=Blogs Aggregator Test Page",
 			RuntimeVariables.replace("Blogs Aggregator Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("Blogs Entry Title"),
 			selenium.getText("//span[@class='entry-title']/a"));
 		assertEquals(RuntimeVariables.replace("Blogs Entry Description"),
@@ -55,7 +55,7 @@ public class ViewBlogsEntryBATest extends BaseTestCase {
 		selenium.clickAt("//div[@class='comments']/a",
 			RuntimeVariables.replace("Read More About Blogs Entry Title \u00bb"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("Blogs Entry Title"),
 			selenium.getText("//h1[@class='header-title']/span"));
 		assertEquals(RuntimeVariables.replace("Blogs Entry Content"),

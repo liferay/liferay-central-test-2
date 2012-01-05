@@ -25,7 +25,7 @@ public class Guest_ViewWebContentVersion2AssignedToMyRolesTest
 	public void testGuest_ViewWebContentVersion2AssignedToMyRoles()
 		throws Exception {
 		selenium.open("/web/guest/home/");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -46,7 +46,7 @@ public class Guest_ViewWebContentVersion2AssignedToMyRolesTest
 		selenium.clickAt("link=Web Content Display Test Page",
 			RuntimeVariables.replace("Web Content Display Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("WC Web Content Content"),
 			selenium.getText("//div[@class='journal-content-article']/p"));
 	}

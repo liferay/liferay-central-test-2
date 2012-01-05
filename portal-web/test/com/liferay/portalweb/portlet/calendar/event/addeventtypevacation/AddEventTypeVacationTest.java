@@ -23,7 +23,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class AddEventTypeVacationTest extends BaseTestCase {
 	public void testAddEventTypeVacation() throws Exception {
 		selenium.open("/web/guest/home/");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -43,11 +43,11 @@ public class AddEventTypeVacationTest extends BaseTestCase {
 
 		selenium.clickAt("link=Calendar Test Page", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		selenium.clickAt("//input[@value='Add Event']",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		selenium.type("_8_title", RuntimeVariables.replace("Off to Yosemite."));
 		selenium.type("_8_description",
 			RuntimeVariables.replace("Looking forward to camping."));
@@ -56,7 +56,7 @@ public class AddEventTypeVacationTest extends BaseTestCase {
 		selenium.select("_8_type", RuntimeVariables.replace("label=Vacation"));
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertTrue(selenium.isTextPresent(
 				"Your request completed successfully."));
 		assertEquals(RuntimeVariables.replace("Off to Yosemite."),

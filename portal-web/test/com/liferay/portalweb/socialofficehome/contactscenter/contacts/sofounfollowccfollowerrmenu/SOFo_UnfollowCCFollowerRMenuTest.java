@@ -23,7 +23,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class SOFo_UnfollowCCFollowerRMenuTest extends BaseTestCase {
 	public void testSOFo_UnfollowCCFollowerRMenu() throws Exception {
 		selenium.open("/user/socialofficefollowersn/home/");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -44,7 +44,7 @@ public class SOFo_UnfollowCCFollowerRMenuTest extends BaseTestCase {
 		selenium.clickAt("//div/div/div/div[1]/ul/li[2]/a",
 			RuntimeVariables.replace("Contacts Center"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertTrue(selenium.isVisible("//div[1]/a/img"));
 		assertEquals(RuntimeVariables.replace(
 				"Manage 1 people you are following."),
@@ -54,7 +54,7 @@ public class SOFo_UnfollowCCFollowerRMenuTest extends BaseTestCase {
 			selenium.getText("//li/div[2]/div[1]"));
 		selenium.clickAt("//div[1]/a/img", RuntimeVariables.replace("Thumbnail"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("Joe Bloggs"),
 			selenium.getText("//div[2]/h1/span"));
 		assertEquals(RuntimeVariables.replace("Following"),
@@ -64,7 +64,7 @@ public class SOFo_UnfollowCCFollowerRMenuTest extends BaseTestCase {
 		selenium.clickAt("//div[2]/ul/li[3]/a",
 			RuntimeVariables.replace("Unfollow"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace(
 				"Your request completed successfully."),
 			selenium.getText("//div[@class='portlet-msg-success']"));

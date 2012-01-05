@@ -23,7 +23,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class ViewCCRequestsLinkTest extends BaseTestCase {
 	public void testViewCCRequestsLink() throws Exception {
 		selenium.open("/user/joebloggs/home/");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -44,7 +44,7 @@ public class ViewCCRequestsLinkTest extends BaseTestCase {
 		selenium.clickAt("//div/div/div/div[1]/ul/li[2]/a",
 			RuntimeVariables.replace("Contacts Center"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("Contacts Center"),
 			selenium.getText("//div[2]/div/div/div/section/header/h1/span[2]"));
 
@@ -69,7 +69,7 @@ public class ViewCCRequestsLinkTest extends BaseTestCase {
 		selenium.clickAt("//div[2]/div/div[1]/div/div[1]/div/a",
 			RuntimeVariables.replace("You have a pending request."));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("Requests"),
 			selenium.getText(
 				"//section/div/div/div/div[1]/div/div[1]/span[2]/span"));
@@ -101,7 +101,7 @@ public class ViewCCRequestsLinkTest extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace("Ignore"),
 			selenium.getText("//div[3]/span[2]/a"));
 		selenium.open("/user/joebloggs/home/");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -122,13 +122,13 @@ public class ViewCCRequestsLinkTest extends BaseTestCase {
 		selenium.clickAt("//div/div/div/div[1]/ul/li[2]/a",
 			RuntimeVariables.replace("Contacts Center"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("Requests"),
 			selenium.getText("//span[2]/a/span"));
 		selenium.clickAt("//span[2]/a/span",
 			RuntimeVariables.replace("Requests"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {

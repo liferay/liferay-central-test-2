@@ -24,7 +24,7 @@ public class SOFr_ViewEditWHContentViewableByFriendsTest extends BaseTestCase {
 	public void testSOFr_ViewEditWHContentViewableByFriends()
 		throws Exception {
 		selenium.open("/web/socialofficefriendsn/home");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -45,7 +45,7 @@ public class SOFr_ViewEditWHContentViewableByFriendsTest extends BaseTestCase {
 		selenium.clickAt("//div/div[1]/div/div/div/ul[1]/li[1]/a",
 			RuntimeVariables.replace("Home"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("What's happening?"),
 			selenium.getText("//div[1]/h1/span"));
 		assertTrue(selenium.isVisible("//div[@class='entry-bubble ']"));

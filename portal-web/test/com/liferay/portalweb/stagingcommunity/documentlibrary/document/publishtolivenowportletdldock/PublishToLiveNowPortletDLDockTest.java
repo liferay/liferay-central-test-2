@@ -28,7 +28,7 @@ public class PublishToLiveNowPortletDLDockTest extends BaseTestCase {
 			switch (label) {
 			case 1:
 				selenium.open("/web/guest/home/");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 
 				for (int second = 0;; second++) {
 					if (second >= 90) {
@@ -49,11 +49,11 @@ public class PublishToLiveNowPortletDLDockTest extends BaseTestCase {
 				selenium.clickAt("link=Site Name",
 					RuntimeVariables.replace("Site Name"));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 				selenium.clickAt("link=Document Library Test Page",
 					RuntimeVariables.replace("Document Library Test Page"));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 				assertTrue(selenium.isElementPresent(
 						"//body[contains(@class,'live-view')]"));
 				assertFalse(selenium.isElementPresent(
@@ -64,7 +64,7 @@ public class PublishToLiveNowPortletDLDockTest extends BaseTestCase {
 				selenium.clickAt("//li[2]/span/a",
 					RuntimeVariables.replace("Staging"));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 				assertTrue(selenium.isElementPresent(
 						"//body[contains(@class,'local-staging')]"));
 				assertFalse(selenium.isElementPresent(
@@ -72,7 +72,7 @@ public class PublishToLiveNowPortletDLDockTest extends BaseTestCase {
 				selenium.clickAt("link=Document Library Test Page",
 					RuntimeVariables.replace("Document Library Test Page"));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 				Thread.sleep(5000);
 				assertEquals(RuntimeVariables.replace("DL Document Title"),
 					selenium.getText("//a[@class='document-link']"));
@@ -190,7 +190,7 @@ public class PublishToLiveNowPortletDLDockTest extends BaseTestCase {
 				selenium.click(RuntimeVariables.replace(
 						"//input[@value='Publish']"));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to publish these pages[\\s\\S]$"));
 

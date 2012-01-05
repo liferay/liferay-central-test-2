@@ -24,7 +24,7 @@ public class ViewNotificationsAddAsCoworkerProfileTest extends BaseTestCase {
 	public void testViewNotificationsAddAsCoworkerProfile()
 		throws Exception {
 		selenium.open("/user/joebloggs/home/");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -45,7 +45,7 @@ public class ViewNotificationsAddAsCoworkerProfileTest extends BaseTestCase {
 		selenium.clickAt("//div/div/div/div[1]/ul/li[1]/a",
 			RuntimeVariables.replace("Home"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("Notifications"),
 			selenium.getText("//div[2]/div/section/header/h1/span"));
 

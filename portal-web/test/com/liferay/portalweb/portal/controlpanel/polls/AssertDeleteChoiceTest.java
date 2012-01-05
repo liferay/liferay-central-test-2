@@ -23,7 +23,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class AssertDeleteChoiceTest extends BaseTestCase {
 	public void testAssertDeleteChoice() throws Exception {
 		selenium.open("/web/guest/home/");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -44,14 +44,14 @@ public class AssertDeleteChoiceTest extends BaseTestCase {
 		selenium.clickAt("link=Control Panel",
 			RuntimeVariables.replace("Control Panel"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		selenium.clickAt("link=Polls", RuntimeVariables.replace("Polls"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		selenium.clickAt("//input[@value='Add Question']",
 			RuntimeVariables.replace("Add Question"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		selenium.type("//input[@id='_25_title_en_US']",
 			RuntimeVariables.replace("Delete Choice Title Test"));
 		selenium.type("//textarea[@id='_25_description_en_US']",
@@ -63,19 +63,19 @@ public class AssertDeleteChoiceTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Add Choice']",
 			RuntimeVariables.replace("Add Choice"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		selenium.type("//input[@id='_25_choiceDescriptionc_en_US']",
 			RuntimeVariables.replace("Delete Choice C"));
 		selenium.clickAt("//input[@value='Add Choice']",
 			RuntimeVariables.replace("Add Choice"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		selenium.type("//input[@id='_25_choiceDescriptiond_en_US']",
 			RuntimeVariables.replace("Delete Choice D"));
 		selenium.clickAt("//input[@value='Add Choice']",
 			RuntimeVariables.replace("Add Choice"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		selenium.type("//input[@id='_25_choiceDescriptione_en_US']",
 			RuntimeVariables.replace("Delete Choice E"));
 		assertEquals("Delete Choice C",
@@ -87,7 +87,7 @@ public class AssertDeleteChoiceTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Delete']",
 			RuntimeVariables.replace("Delete"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals("Delete Choice C",
 			selenium.getValue("//input[@id='_25_choiceDescriptionc_en_US']"));
 		assertEquals("Delete Choice D",
@@ -97,7 +97,7 @@ public class AssertDeleteChoiceTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Delete']",
 			RuntimeVariables.replace("Delete"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals("Delete Choice C",
 			selenium.getValue("//input[@id='_25_choiceDescriptionc_en_US']"));
 		assertFalse(selenium.isElementPresent(
@@ -107,7 +107,7 @@ public class AssertDeleteChoiceTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Delete']",
 			RuntimeVariables.replace("Delete"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertFalse(selenium.isElementPresent(
 				"//input[@id='_25_choiceDescriptionc_en_US']"));
 		assertFalse(selenium.isElementPresent(

@@ -24,7 +24,7 @@ public class ViewEditTasksTaskAssignedToMeDescriptionTest extends BaseTestCase {
 	public void testViewEditTasksTaskAssignedToMeDescription()
 		throws Exception {
 		selenium.open("/user/joebloggs/home/");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -47,7 +47,7 @@ public class ViewEditTasksTaskAssignedToMeDescriptionTest extends BaseTestCase {
 		selenium.clickAt("//div[2]/div[1]/ul/li[5]/a",
 			RuntimeVariables.replace("Tasks"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("Tasks"),
 			selenium.getText("//h1/span[2]"));
 		assertEquals(RuntimeVariables.replace("Assigned to Me"),
@@ -55,7 +55,7 @@ public class ViewEditTasksTaskAssignedToMeDescriptionTest extends BaseTestCase {
 		selenium.clickAt("link=Assigned to Me",
 			RuntimeVariables.replace("Assigned to Me"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("Task Description Edit"),
 			selenium.getText("link=Task Description Edit"));
 		selenium.clickAt("link=Task Description Edit",

@@ -25,7 +25,7 @@ public class ViewSelectScopePage2WCWebContentNullDefaultTest
 	public void testViewSelectScopePage2WCWebContentNullDefault()
 		throws Exception {
 		selenium.open("/web/guest/home/");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -46,7 +46,7 @@ public class ViewSelectScopePage2WCWebContentNullDefaultTest
 		selenium.clickAt("link=Web Content Display Test Page1",
 			RuntimeVariables.replace("Web Content Display Test Page1"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("Web Content Display"),
 			selenium.getText("//span[@class='portlet-title-text']"));
 		assertFalse(selenium.isTextPresent("WCD Web Content Content"));

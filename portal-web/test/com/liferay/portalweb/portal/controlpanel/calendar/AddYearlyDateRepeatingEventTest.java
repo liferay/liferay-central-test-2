@@ -23,7 +23,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class AddYearlyDateRepeatingEventTest extends BaseTestCase {
 	public void testAddYearlyDateRepeatingEvent() throws Exception {
 		selenium.open("/web/guest/home/");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -44,13 +44,13 @@ public class AddYearlyDateRepeatingEventTest extends BaseTestCase {
 		selenium.clickAt("link=Control Panel",
 			RuntimeVariables.replace("Control Panel"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		selenium.clickAt("link=Calendar", RuntimeVariables.replace("Calendar"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		selenium.clickAt("link=Events", RuntimeVariables.replace("Events"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("Actions"),
 			selenium.getText("//td[6]/span/ul/li/strong/a"));
 		selenium.clickAt("//td[6]/span/ul/li/strong/a",
@@ -79,7 +79,7 @@ public class AddYearlyDateRepeatingEventTest extends BaseTestCase {
 		selenium.clickAt("//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a",
 			RuntimeVariables.replace("Edit"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -134,13 +134,13 @@ public class AddYearlyDateRepeatingEventTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Save']",
 			RuntimeVariables.replace("Save"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace(
 				"Your request completed successfully."),
 			selenium.getText("//div[@class='portlet-msg-success']"));
 		selenium.clickAt("link=Year", RuntimeVariables.replace("Year"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -160,7 +160,7 @@ public class AddYearlyDateRepeatingEventTest extends BaseTestCase {
 
 		selenium.select("//select", RuntimeVariables.replace("2010"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -182,7 +182,7 @@ public class AddYearlyDateRepeatingEventTest extends BaseTestCase {
 		selenium.clickAt("//a[contains(@href, 'javascript:_8_updateCalendar(4, 31, 2010);')]",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -202,7 +202,7 @@ public class AddYearlyDateRepeatingEventTest extends BaseTestCase {
 
 		selenium.clickAt("link=Year", RuntimeVariables.replace("Year"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -222,7 +222,7 @@ public class AddYearlyDateRepeatingEventTest extends BaseTestCase {
 
 		selenium.select("//select", RuntimeVariables.replace("2011"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -244,7 +244,7 @@ public class AddYearlyDateRepeatingEventTest extends BaseTestCase {
 		selenium.clickAt("//a[contains(@href, 'javascript:_8_updateCalendar(4, 31, 2011);')]",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -265,7 +265,7 @@ public class AddYearlyDateRepeatingEventTest extends BaseTestCase {
 		assertTrue(selenium.isVisible("link=Repeating Test Event"));
 		selenium.clickAt("link=Year", RuntimeVariables.replace("Year"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -285,7 +285,7 @@ public class AddYearlyDateRepeatingEventTest extends BaseTestCase {
 
 		selenium.select("//select", RuntimeVariables.replace("2012"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -307,7 +307,7 @@ public class AddYearlyDateRepeatingEventTest extends BaseTestCase {
 		selenium.clickAt("//a[contains(@href, 'javascript:_8_updateCalendar(4, 31, 2012);')]",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -328,7 +328,7 @@ public class AddYearlyDateRepeatingEventTest extends BaseTestCase {
 		assertTrue(selenium.isVisible("link=Repeating Test Event"));
 		selenium.clickAt("link=Year", RuntimeVariables.replace("Year"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -348,7 +348,7 @@ public class AddYearlyDateRepeatingEventTest extends BaseTestCase {
 
 		selenium.select("//select", RuntimeVariables.replace("2013"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -370,7 +370,7 @@ public class AddYearlyDateRepeatingEventTest extends BaseTestCase {
 		selenium.clickAt("//a[contains(@href, 'javascript:_8_updateCalendar(4, 31, 2013);')]",
 			RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {

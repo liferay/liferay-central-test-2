@@ -23,7 +23,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class SiteAdmin_EditImageTest extends BaseTestCase {
 	public void testSiteAdmin_EditImage() throws Exception {
 		selenium.open("/web/guest/home/");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -45,7 +45,7 @@ public class SiteAdmin_EditImageTest extends BaseTestCase {
 		selenium.clickAt("link=Media Gallery Permissions Test Page",
 			RuntimeVariables.replace("Media Gallery Permissions Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace(
 				"Media Gallery Permissions Test Folder 2 Edited"),
 			selenium.getText(
@@ -54,7 +54,7 @@ public class SiteAdmin_EditImageTest extends BaseTestCase {
 			RuntimeVariables.replace(
 				"Media Gallery Permissions Test Folder 2 Edited"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace(
 				"Media Gallery Permissions Test Subfolder 2"),
 			selenium.getText(
@@ -63,7 +63,7 @@ public class SiteAdmin_EditImageTest extends BaseTestCase {
 			RuntimeVariables.replace(
 				"Media Gallery Permissions Test Subfolder 2"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("Permissions Image Test"),
 			selenium.getText("//a[@title='Permissions Image Test - ']"));
 		selenium.click("//a[@title='Permissions Image Test - ']");
@@ -107,7 +107,7 @@ public class SiteAdmin_EditImageTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Publish']",
 			RuntimeVariables.replace("Publish"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -129,7 +129,7 @@ public class SiteAdmin_EditImageTest extends BaseTestCase {
 				"Your request completed successfully."),
 			selenium.getText("//div[@class='portlet-msg-success']"));
 		selenium.open("/web/guest/home/");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -151,7 +151,7 @@ public class SiteAdmin_EditImageTest extends BaseTestCase {
 		selenium.clickAt("link=Media Gallery Permissions Test Page",
 			RuntimeVariables.replace("Media Gallery Permissions Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace(
 				"Media Gallery Permissions Test Folder 2 Edited"),
 			selenium.getText(
@@ -160,7 +160,7 @@ public class SiteAdmin_EditImageTest extends BaseTestCase {
 			RuntimeVariables.replace(
 				"Media Gallery Permissions Test Folder 2 Edited"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace(
 				"Media Gallery Permissions Test Subfolder 2"),
 			selenium.getText(
@@ -169,7 +169,7 @@ public class SiteAdmin_EditImageTest extends BaseTestCase {
 			RuntimeVariables.replace(
 				"Media Gallery Permissions Test Subfolder 2"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("Permissions Image Test Edited"),
 			selenium.getText("//a[@title='Permissions Image Test Edited - ']"));
 	}

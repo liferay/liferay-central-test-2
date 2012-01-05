@@ -23,7 +23,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class AddCategoryNameNullTest extends BaseTestCase {
 	public void testAddCategoryNameNull() throws Exception {
 		selenium.open("/web/guest/home/");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -44,11 +44,11 @@ public class AddCategoryNameNullTest extends BaseTestCase {
 		selenium.clickAt("link=Message Boards Test Page",
 			RuntimeVariables.replace("Message Boards Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		selenium.clickAt("//input[@value='Add Category']",
 			RuntimeVariables.replace("Add Category"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		selenium.type("//textarea[@id='_19_description']",
 			RuntimeVariables.replace("MB Category Description"));
 		selenium.clickAt("//input[@value='Save']",
@@ -77,7 +77,7 @@ public class AddCategoryNameNullTest extends BaseTestCase {
 			selenium.getText(
 				"//div[@class='aui-form-validator-message required']"));
 		selenium.open("/web/guest/home/");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -98,7 +98,7 @@ public class AddCategoryNameNullTest extends BaseTestCase {
 		selenium.clickAt("link=Message Boards Test Page",
 			RuntimeVariables.replace("Message Boards Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertFalse(selenium.isTextPresent("MB Category Description"));
 		assertFalse(selenium.isElementPresent("//td[5]/span/ul/li/strong/a"));
 	}

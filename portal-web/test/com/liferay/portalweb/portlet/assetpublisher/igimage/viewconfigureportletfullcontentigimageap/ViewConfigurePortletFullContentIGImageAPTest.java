@@ -24,7 +24,7 @@ public class ViewConfigurePortletFullContentIGImageAPTest extends BaseTestCase {
 	public void testViewConfigurePortletFullContentIGImageAP()
 		throws Exception {
 		selenium.open("/web/guest/home/");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -45,7 +45,7 @@ public class ViewConfigurePortletFullContentIGImageAPTest extends BaseTestCase {
 		selenium.clickAt("link=Asset Publisher Test Page",
 			RuntimeVariables.replace("Asset Publisher Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("IG Folder Image Name"),
 			selenium.getText("//h1[@class='header-title']/span"));
 		assertTrue(selenium.isVisible(
@@ -57,7 +57,7 @@ public class ViewConfigurePortletFullContentIGImageAPTest extends BaseTestCase {
 		selenium.clickAt("//div[@class='asset-more']/a",
 			RuntimeVariables.replace("View in Context \u00bb"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertTrue(selenium.isVisible(
 				"//img[@class='lfr-preview-file-image-current']"));
 		assertEquals(RuntimeVariables.replace("IG Folder Image Name"),

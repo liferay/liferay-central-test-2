@@ -74,7 +74,7 @@ public class Gmail_ViewWCWebContentAddedEmailTest extends BaseTestCase {
 				selenium.clickAt("//a[@id='button']",
 					RuntimeVariables.replace("Sign in to Gmail"));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 
 			case 3:
 			case 4:
@@ -95,7 +95,7 @@ public class Gmail_ViewWCWebContentAddedEmailTest extends BaseTestCase {
 					RuntimeVariables.replace(
 						"Sign out and sign in as a different user"));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 
 			case 5:
 
@@ -139,7 +139,7 @@ public class Gmail_ViewWCWebContentAddedEmailTest extends BaseTestCase {
 				selenium.clickAt("//input[@id='signIn']",
 					RuntimeVariables.replace("Sign In"));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 				Thread.sleep(5000);
 
 				for (int second = 0;; second++) {

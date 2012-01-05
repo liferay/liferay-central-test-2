@@ -24,7 +24,7 @@ public class SOFo_SignInTest extends BaseTestCase {
 	public void testSOFo_SignIn() throws Exception {
 		selenium.setTimeout("180000");
 		selenium.open("/user/socialofficefollowersn/home");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -44,7 +44,7 @@ public class SOFo_SignInTest extends BaseTestCase {
 
 		selenium.clickAt("link=Sign In", RuntimeVariables.replace("Sign In"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -104,6 +104,6 @@ public class SOFo_SignInTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Sign In']",
 			RuntimeVariables.replace("Sign In"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 	}
 }

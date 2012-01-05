@@ -24,7 +24,7 @@ public class AddDataDefinitionFileUploadTest extends BaseTestCase {
 	public void testAddDataDefinitionFileUpload() throws Exception {
 		selenium.selectFrame("relative=top");
 		selenium.open("/web/guest/home/");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -45,11 +45,11 @@ public class AddDataDefinitionFileUploadTest extends BaseTestCase {
 		selenium.clickAt("link=Control Panel",
 			RuntimeVariables.replace("Control Panel"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		selenium.clickAt("link=Dynamic Data Lists",
 			RuntimeVariables.replace("Dynamic Data Lists"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -109,7 +109,7 @@ public class AddDataDefinitionFileUploadTest extends BaseTestCase {
 
 		selenium.clickAt("link=Add", RuntimeVariables.replace("Add"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		selenium.type("//input[@id='_166_name_en_US']",
 			RuntimeVariables.replace("Data Definition File Upload"));
 		assertEquals(RuntimeVariables.replace("File Upload"),
@@ -120,7 +120,7 @@ public class AddDataDefinitionFileUploadTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Save']",
 			RuntimeVariables.replace("Save"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace(
 				"Your request completed successfully."),
 			selenium.getText("//div[@class='portlet-msg-success']"));

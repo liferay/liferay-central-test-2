@@ -24,7 +24,7 @@ public class ViewAnnouncementsEntryTest extends BaseTestCase {
 	public void testViewAnnouncementsEntry() throws Exception {
 		selenium.open(
 			"/web/announcements-entry-community/announcements-entry-page");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -45,14 +45,14 @@ public class ViewAnnouncementsEntryTest extends BaseTestCase {
 		selenium.clickAt("link=Announcements Entry Page",
 			RuntimeVariables.replace("Announcements Entry Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("Announcements Entry Name"),
 			selenium.getText("//div/h3/a"));
 		assertTrue(selenium.isPartialText("//p", "Announcements Entry Content"));
 		selenium.clickAt("//div/h3/a",
 			RuntimeVariables.replace("Announcements Entry Name"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertTrue(selenium.isElementPresent("//img[@alt='Liferay']"));
 	}
 }

@@ -24,7 +24,7 @@ public class PermissionsPage2BlogsEntry4GuestViewOffTest extends BaseTestCase {
 	public void testPermissionsPage2BlogsEntry4GuestViewOff()
 		throws Exception {
 		selenium.open("/web/blogs-page-scope-community/");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -45,7 +45,7 @@ public class PermissionsPage2BlogsEntry4GuestViewOffTest extends BaseTestCase {
 		selenium.clickAt("link=Blogs Test Page2",
 			RuntimeVariables.replace("Blogs Test Page2"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -76,7 +76,7 @@ public class PermissionsPage2BlogsEntry4GuestViewOffTest extends BaseTestCase {
 		selenium.clickAt("//td[2]/span/a/span",
 			RuntimeVariables.replace("Permissions"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertTrue(selenium.isChecked("//input[@name='16_ACTION_VIEW']"));
 		selenium.clickAt("//input[@name='16_ACTION_VIEW']",
 			RuntimeVariables.replace("Guest View"));
@@ -84,7 +84,7 @@ public class PermissionsPage2BlogsEntry4GuestViewOffTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Save']",
 			RuntimeVariables.replace("Save"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace(
 				"Your request completed successfully."),
 			selenium.getText("//div[@class='portlet-msg-success']"));

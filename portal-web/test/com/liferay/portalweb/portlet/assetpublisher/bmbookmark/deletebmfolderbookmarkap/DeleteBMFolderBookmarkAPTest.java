@@ -23,7 +23,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class DeleteBMFolderBookmarkAPTest extends BaseTestCase {
 	public void testDeleteBMFolderBookmarkAP() throws Exception {
 		selenium.open("/web/guest/home/");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -44,7 +44,7 @@ public class DeleteBMFolderBookmarkAPTest extends BaseTestCase {
 		selenium.clickAt("link=Asset Publisher Test Page",
 			RuntimeVariables.replace("Asset Publisher Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("BM Folder Bookmark Name"),
 			selenium.getText("//h3[@class='asset-title']/a"));
 		Thread.sleep(5000);
@@ -96,7 +96,7 @@ public class DeleteBMFolderBookmarkAPTest extends BaseTestCase {
 			selenium.getText("//td[2]/a"));
 		selenium.click(RuntimeVariables.replace("//img[@alt='Delete']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 		assertEquals(RuntimeVariables.replace(
@@ -105,7 +105,7 @@ public class DeleteBMFolderBookmarkAPTest extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace("No assets selected."),
 			selenium.getText("//div[@class='portlet-msg-info']"));
 		selenium.open("/web/guest/home/");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -126,7 +126,7 @@ public class DeleteBMFolderBookmarkAPTest extends BaseTestCase {
 		selenium.clickAt("link=Asset Publisher Test Page",
 			RuntimeVariables.replace("Asset Publisher Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertFalse(selenium.isTextPresent("BM Folder Bookmark Name"));
 	}
 }

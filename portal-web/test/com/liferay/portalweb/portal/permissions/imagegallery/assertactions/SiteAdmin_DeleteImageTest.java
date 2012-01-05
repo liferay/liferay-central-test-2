@@ -23,7 +23,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class SiteAdmin_DeleteImageTest extends BaseTestCase {
 	public void testSiteAdmin_DeleteImage() throws Exception {
 		selenium.open("/web/guest/home/");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -45,7 +45,7 @@ public class SiteAdmin_DeleteImageTest extends BaseTestCase {
 		selenium.clickAt("link=Media Gallery Permissions Test Page",
 			RuntimeVariables.replace("Media Gallery Permissions Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace(
 				"Media Gallery Permissions Test Folder 2 Edited"),
 			selenium.getText(
@@ -54,7 +54,7 @@ public class SiteAdmin_DeleteImageTest extends BaseTestCase {
 			RuntimeVariables.replace(
 				"Media Gallery Permissions Test Folder 2 Edited"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace(
 				"Media Gallery Permissions Test Subfolder 2"),
 			selenium.getText(
@@ -63,7 +63,7 @@ public class SiteAdmin_DeleteImageTest extends BaseTestCase {
 			RuntimeVariables.replace(
 				"Media Gallery Permissions Test Subfolder 2"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("Permissions Image Test Edited"),
 			selenium.getText("//a[@title='Permissions Image Test Edited - ']"));
 		selenium.clickAt("//a[@title='Permissions Image Test Edited - ']",
@@ -87,7 +87,7 @@ public class SiteAdmin_DeleteImageTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("//img[@alt='Delete']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 

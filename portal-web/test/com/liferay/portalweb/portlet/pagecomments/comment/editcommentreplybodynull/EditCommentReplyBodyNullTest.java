@@ -23,7 +23,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class EditCommentReplyBodyNullTest extends BaseTestCase {
 	public void testEditCommentReplyBodyNull() throws Exception {
 		selenium.open("/web/guest/home/");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -44,7 +44,7 @@ public class EditCommentReplyBodyNullTest extends BaseTestCase {
 		selenium.clickAt("link=Page Comments Test Page",
 			RuntimeVariables.replace("Page Comments Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("PC Comment Reply"),
 			selenium.getText(
 				"xPath=(//div[@class='lfr-discussion-message'])[2]"));
@@ -101,7 +101,7 @@ public class EditCommentReplyBodyNullTest extends BaseTestCase {
 		assertFalse(selenium.isTextPresent(
 				"Your request processed successfully."));
 		selenium.open("/web/guest/home/");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -122,7 +122,7 @@ public class EditCommentReplyBodyNullTest extends BaseTestCase {
 		selenium.clickAt("link=Page Comments Test Page",
 			RuntimeVariables.replace("Page Comments Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("PC Comment Reply"),
 			selenium.getText(
 				"xPath=(//div[@class='lfr-discussion-message'])[2]"));

@@ -30,7 +30,7 @@ public class TearDownPortletScopeLayoutCurrentPageBlogsEntryPage2Test
 			switch (label) {
 			case 1:
 				selenium.open("/web/guest/home/");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 
 				for (int second = 0;; second++) {
 					if (second >= 90) {
@@ -51,7 +51,7 @@ public class TearDownPortletScopeLayoutCurrentPageBlogsEntryPage2Test
 				selenium.clickAt("link=Blogs2 Test2 Page2",
 					RuntimeVariables.replace("Blogs2 Test2 Page2"));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 
 				boolean blogsEntry1Present = selenium.isElementPresent(
 						"link=Delete");
@@ -64,7 +64,7 @@ public class TearDownPortletScopeLayoutCurrentPageBlogsEntryPage2Test
 
 				selenium.click(RuntimeVariables.replace("link=Delete"));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 
@@ -81,7 +81,7 @@ public class TearDownPortletScopeLayoutCurrentPageBlogsEntryPage2Test
 
 				selenium.click(RuntimeVariables.replace("link=Delete"));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 
@@ -98,7 +98,7 @@ public class TearDownPortletScopeLayoutCurrentPageBlogsEntryPage2Test
 
 				selenium.click(RuntimeVariables.replace("link=Delete"));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 
@@ -115,7 +115,7 @@ public class TearDownPortletScopeLayoutCurrentPageBlogsEntryPage2Test
 
 				selenium.click(RuntimeVariables.replace("link=Delete"));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 
@@ -132,7 +132,7 @@ public class TearDownPortletScopeLayoutCurrentPageBlogsEntryPage2Test
 
 				selenium.click(RuntimeVariables.replace("link=Delete"));
 				selenium.waitForPageToLoad("30000");
-				selenium.getEval("window.Liferay.fire('initDockbar');");
+				loadRequiredJavaScriptModules();
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 

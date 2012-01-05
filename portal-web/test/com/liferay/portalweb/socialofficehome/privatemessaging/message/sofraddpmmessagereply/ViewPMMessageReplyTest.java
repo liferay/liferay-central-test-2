@@ -23,7 +23,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class ViewPMMessageReplyTest extends BaseTestCase {
 	public void testViewPMMessageReply() throws Exception {
 		selenium.open("/user/joebloggs/home/");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -60,7 +60,7 @@ public class ViewPMMessageReplyTest extends BaseTestCase {
 		selenium.clickAt("//div[2]/div[1]/ul/li[4]/a",
 			RuntimeVariables.replace("Private Messaging"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("Private Messaging"),
 			selenium.getText("//h1/span[2]"));
 		assertEquals(RuntimeVariables.replace(
@@ -74,7 +74,7 @@ public class ViewPMMessageReplyTest extends BaseTestCase {
 		selenium.clickAt("//td[4]/a",
 			RuntimeVariables.replace("Message Subject\n Message Subject Reply"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("Message Subject"),
 			selenium.getText("//div[1]/h1/span"));
 		assertEquals(RuntimeVariables.replace(

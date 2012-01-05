@@ -23,7 +23,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class ViewPortletForgotPasswordTest extends BaseTestCase {
 	public void testViewPortletForgotPassword() throws Exception {
 		selenium.open("/web/guest/home/");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -44,13 +44,13 @@ public class ViewPortletForgotPasswordTest extends BaseTestCase {
 		selenium.clickAt("link=Sign In Test Page",
 			RuntimeVariables.replace("Sign In Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("Forgot Password"),
 			selenium.getText("//li[3]/a/span"));
 		selenium.clickAt("//li[3]/a/span",
 			RuntimeVariables.replace("Forgot Password"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertTrue(selenium.isVisible("//input[@id='_58_emailAddress']"));
 		selenium.type("//input[@id='_58_emailAddress']",
 			RuntimeVariables.replace("test@liferay.com"));
@@ -59,7 +59,7 @@ public class ViewPortletForgotPasswordTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Next']",
 			RuntimeVariables.replace("Next"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace(
 				"Your request failed to complete."),
 			selenium.getText("xPath=(//div[@class='portlet-msg-error'])[1]"));
@@ -73,7 +73,7 @@ public class ViewPortletForgotPasswordTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Next']",
 			RuntimeVariables.replace("Next"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace(
 				"Your request failed to complete."),
 			selenium.getText("xPath=(//div[@class='portlet-msg-error'])[1]"));

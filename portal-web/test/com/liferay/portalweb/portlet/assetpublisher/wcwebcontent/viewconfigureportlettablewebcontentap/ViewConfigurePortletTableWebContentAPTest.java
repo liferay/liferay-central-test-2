@@ -24,7 +24,7 @@ public class ViewConfigurePortletTableWebContentAPTest extends BaseTestCase {
 	public void testViewConfigurePortletTableWebContentAP()
 		throws Exception {
 		selenium.open("/web/guest/home/");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -45,7 +45,7 @@ public class ViewConfigurePortletTableWebContentAPTest extends BaseTestCase {
 		selenium.clickAt("link=Asset Publisher Test Page",
 			RuntimeVariables.replace("Asset Publisher Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("Title"),
 			selenium.getText("//th[1]"));
 		assertEquals(RuntimeVariables.replace("WC Web Content Title"),
@@ -53,7 +53,7 @@ public class ViewConfigurePortletTableWebContentAPTest extends BaseTestCase {
 		selenium.clickAt("//td[1]/a",
 			RuntimeVariables.replace("WC Web Content Title"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("WC Web Content Title"),
 			selenium.getText("//h1[@class='header-title']/span"));
 		assertEquals(RuntimeVariables.replace("WC Web Content Content"),

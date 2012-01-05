@@ -23,7 +23,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class DefineRoleWebContentEditorCPTest extends BaseTestCase {
 	public void testDefineRoleWebContentEditorCP() throws Exception {
 		selenium.open("/web/guest/home/");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -44,16 +44,16 @@ public class DefineRoleWebContentEditorCPTest extends BaseTestCase {
 		selenium.clickAt("link=Control Panel",
 			RuntimeVariables.replace("Control Panel"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		selenium.clickAt("link=Roles", RuntimeVariables.replace("Roles"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		selenium.type("//input[@id='_128_keywords']",
 			RuntimeVariables.replace("Web Content Editor"));
 		selenium.clickAt("//input[@value='Search']",
 			RuntimeVariables.replace("Search"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("Web Content Editor"),
 			selenium.getText("//td/a"));
 		assertEquals(RuntimeVariables.replace("Regular"),
@@ -64,17 +64,17 @@ public class DefineRoleWebContentEditorCPTest extends BaseTestCase {
 		selenium.clickAt("//td/a",
 			RuntimeVariables.replace("Web Content Editor"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("Web Content Editor"),
 			selenium.getText("//h1[@class='header-title']"));
 		selenium.clickAt("link=Define Permissions",
 			RuntimeVariables.replace("Define Permissions"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		selenium.select("//select[@id='_128_add-permissions']",
 			RuntimeVariables.replace("label=Web Content"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertFalse(selenium.isChecked(
 				"//input[@name='_128_rowIds' and @value='com.liferay.portlet.journalSUBSCRIBE']"));
 		selenium.check(
@@ -84,20 +84,20 @@ public class DefineRoleWebContentEditorCPTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Save']",
 			RuntimeVariables.replace("Save"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace(
 				"The role permissions were updated."),
 			selenium.getText("//div[@class='portlet-msg-success']"));
 		selenium.clickAt("link=Define Permissions",
 			RuntimeVariables.replace("Define Permissions"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		selenium.typeKeys("//select[@id='_128_add-permissions']",
 			RuntimeVariables.replace("wwwwwwwww"));
 		selenium.keyPress("//select[@id='_128_add-permissions']",
 			RuntimeVariables.replace("\\13"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertFalse(selenium.isChecked(
 				"//input[@value='15ACCESS_IN_CONTROL_PANEL']"));
 		selenium.check("//input[@value='15ACCESS_IN_CONTROL_PANEL']");
@@ -106,7 +106,7 @@ public class DefineRoleWebContentEditorCPTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Save']",
 			RuntimeVariables.replace("Save"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace(
 				"The role permissions were updated."),
 			selenium.getText("//div[@class='portlet-msg-success']"));

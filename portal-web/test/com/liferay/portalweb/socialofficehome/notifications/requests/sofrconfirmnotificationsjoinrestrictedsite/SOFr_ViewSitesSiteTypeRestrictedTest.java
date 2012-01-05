@@ -24,7 +24,7 @@ public class SOFr_ViewSitesSiteTypeRestrictedTest extends BaseTestCase {
 	public void testSOFr_ViewSitesSiteTypeRestricted()
 		throws Exception {
 		selenium.open("/user/socialofficefriendsn/home");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -45,7 +45,7 @@ public class SOFr_ViewSitesSiteTypeRestrictedTest extends BaseTestCase {
 		selenium.clickAt("//div/div/div/div/ul/li/a",
 			RuntimeVariables.replace("Home"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("Sites"),
 			selenium.getText("//div[3]/div/section/header/h1/span"));
 
@@ -72,7 +72,7 @@ public class SOFr_ViewSitesSiteTypeRestrictedTest extends BaseTestCase {
 		selenium.clickAt("//li[contains(@class, 'social-office-enabled')]/span[2]/a",
 			RuntimeVariables.replace("Restricted Site Name"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("Restricted Site Name"),
 			selenium.getText("//h2/a/span"));
 		assertEquals(RuntimeVariables.replace("Home"),

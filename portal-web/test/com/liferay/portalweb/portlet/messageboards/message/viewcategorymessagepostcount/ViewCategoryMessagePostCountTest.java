@@ -23,7 +23,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class ViewCategoryMessagePostCountTest extends BaseTestCase {
 	public void testViewCategoryMessagePostCount() throws Exception {
 		selenium.open("/web/guest/home/");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -44,7 +44,7 @@ public class ViewCategoryMessagePostCountTest extends BaseTestCase {
 		selenium.clickAt("link=Message Boards Test Page",
 			RuntimeVariables.replace("Message Boards Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("3"),
 			selenium.getText(
 				"//tr[@class='portlet-section-body results-row last']/td[3]"));
@@ -56,7 +56,7 @@ public class ViewCategoryMessagePostCountTest extends BaseTestCase {
 		selenium.clickAt("//a/strong",
 			RuntimeVariables.replace("MB Category Name"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("4"),
 			selenium.getText(
 				"//table[@class='taglib-search-iterator']/tbody/tr[3]/td[4]"));
@@ -69,14 +69,14 @@ public class ViewCategoryMessagePostCountTest extends BaseTestCase {
 		selenium.clickAt("link=MB Category Thread1 Message Subject",
 			RuntimeVariables.replace("MB Category Thread1 Message Subject"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("Delete"),
 			selenium.getText(
 				"//div[7]/table/tbody/tr[2]/td/ul/li[5]/span/a/span"));
 		selenium.clickAt("//div[7]/table/tbody/tr[2]/td/ul/li[5]/span/a/span",
 			RuntimeVariables.replace("Delete"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 
@@ -103,7 +103,7 @@ public class ViewCategoryMessagePostCountTest extends BaseTestCase {
 				"Your request completed successfully."),
 			selenium.getText("//div[@class='portlet-msg-success']"));
 		selenium.open("/web/guest/home/");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -124,7 +124,7 @@ public class ViewCategoryMessagePostCountTest extends BaseTestCase {
 		selenium.clickAt("link=Message Boards Test Page",
 			RuntimeVariables.replace("Message Boards Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("3"),
 			selenium.getText(
 				"//tr[@class='portlet-section-body results-row last']/td[3]"));
@@ -136,7 +136,7 @@ public class ViewCategoryMessagePostCountTest extends BaseTestCase {
 		selenium.clickAt("//a/strong",
 			RuntimeVariables.replace("MB Category Name"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("3"),
 			selenium.getText(
 				"//table[@class='taglib-search-iterator']/tbody/tr[3]/td[4]"));
@@ -149,14 +149,14 @@ public class ViewCategoryMessagePostCountTest extends BaseTestCase {
 		selenium.clickAt("link=MB Category Thread1 Message Subject",
 			RuntimeVariables.replace("MB Category Thread1 Message Subject"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("Delete"),
 			selenium.getText(
 				"//div[6]/table/tbody/tr[2]/td/ul/li[5]/span/a/span"));
 		selenium.clickAt("//div[6]/table/tbody/tr[2]/td/ul/li[5]/span/a/span",
 			RuntimeVariables.replace("Delete"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 
@@ -183,7 +183,7 @@ public class ViewCategoryMessagePostCountTest extends BaseTestCase {
 				"Your request completed successfully."),
 			selenium.getText("//div[@class='portlet-msg-success']"));
 		selenium.open("/web/guest/home/");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -204,7 +204,7 @@ public class ViewCategoryMessagePostCountTest extends BaseTestCase {
 		selenium.clickAt("link=Message Boards Test Page",
 			RuntimeVariables.replace("Message Boards Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("3"),
 			selenium.getText(
 				"//tr[@class='portlet-section-body results-row last']/td[3]"));
@@ -216,7 +216,7 @@ public class ViewCategoryMessagePostCountTest extends BaseTestCase {
 		selenium.clickAt("//a/strong",
 			RuntimeVariables.replace("MB Category Name"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("2"),
 			selenium.getText(
 				"//table[@class='taglib-search-iterator']/tbody/tr[3]/td[4]"));
@@ -254,11 +254,11 @@ public class ViewCategoryMessagePostCountTest extends BaseTestCase {
 		selenium.clickAt("//div[@class='lfr-component lfr-menu-list']/ul/li[7]/a",
 			RuntimeVariables.replace("Delete"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 		selenium.open("/web/guest/home/");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -279,7 +279,7 @@ public class ViewCategoryMessagePostCountTest extends BaseTestCase {
 		selenium.clickAt("link=Message Boards Test Page",
 			RuntimeVariables.replace("Message Boards Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("2"),
 			selenium.getText(
 				"//tr[@class='portlet-section-body results-row last']/td[3]"));
@@ -291,7 +291,7 @@ public class ViewCategoryMessagePostCountTest extends BaseTestCase {
 		selenium.clickAt("//a/strong",
 			RuntimeVariables.replace("MB Category Name"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("1"),
 			selenium.getText(
 				"//table[@class='taglib-search-iterator']/tbody/tr[3]/td[4]"));

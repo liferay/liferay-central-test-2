@@ -23,7 +23,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class ViewTasksTaskAssignedToMeTest extends BaseTestCase {
 	public void testViewTasksTaskAssignedToMe() throws Exception {
 		selenium.open("/user/joebloggs/home/");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -46,7 +46,7 @@ public class ViewTasksTaskAssignedToMeTest extends BaseTestCase {
 		selenium.clickAt("//div[2]/div[1]/ul/li[5]/a",
 			RuntimeVariables.replace("Tasks"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("Tasks"),
 			selenium.getText("//h1/span[2]"));
 		assertEquals(RuntimeVariables.replace("Assigned to Me"),
@@ -54,7 +54,7 @@ public class ViewTasksTaskAssignedToMeTest extends BaseTestCase {
 		selenium.clickAt("link=Assigned to Me",
 			RuntimeVariables.replace("Assigned to Me"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("Task Description"),
 			selenium.getText("link=Task Description"));
 		selenium.clickAt("link=Task Description",

@@ -23,7 +23,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class ConfirmCCCoworkerRequestTest extends BaseTestCase {
 	public void testConfirmCCCoworkerRequest() throws Exception {
 		selenium.open("/user/joebloggs/home/");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -44,7 +44,7 @@ public class ConfirmCCCoworkerRequestTest extends BaseTestCase {
 		selenium.clickAt("//div/div/div/div[1]/ul/li[2]/a",
 			RuntimeVariables.replace("Contacts Center"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("Contacts Center"),
 			selenium.getText("//div[2]/div/div/div/section/header/h1/span[2]"));
 
@@ -69,7 +69,7 @@ public class ConfirmCCCoworkerRequestTest extends BaseTestCase {
 		selenium.clickAt("//div[2]/div/div[1]/div/div[1]/div/a",
 			RuntimeVariables.replace("You have a pending request."));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -98,14 +98,14 @@ public class ConfirmCCCoworkerRequestTest extends BaseTestCase {
 		selenium.clickAt("//div[3]/span[1]/a",
 			RuntimeVariables.replace("Confirm"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace(
 				"Your request completed successfully."),
 			selenium.getText("//div[@class='portlet-msg-success']"));
 		assertEquals(RuntimeVariables.replace("You have no pending request."),
 			selenium.getText("//div[@class='portlet-msg-info']"));
 		selenium.open("/user/joebloggs/home/");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -126,7 +126,7 @@ public class ConfirmCCCoworkerRequestTest extends BaseTestCase {
 		selenium.clickAt("//div/div/div/div[1]/ul/li[2]/a",
 			RuntimeVariables.replace("Contacts Center"));
 		selenium.waitForPageToLoad("30000");
-		selenium.getEval("window.Liferay.fire('initDockbar');");
+		loadRequiredJavaScriptModules();
 		assertTrue(selenium.isVisible("//div[1]/a/img"));
 		assertEquals(RuntimeVariables.replace("Manage 1 coworkers."),
 			selenium.getText("//div[1]/div/div/div/div[2]/a"));
