@@ -56,11 +56,7 @@ public class SeleneseToJavaBuilder {
 			new String[] {
 				"**\\EvaluateLogTest.java", "**\\IterateThemeTest.java",
 				"**\\StopSeleniumTest.java",
-				"**\\WaitForSystemShutdownTest.java",
-				"**\\liferay\\portalweb\\portal\\dbupgrade\\sampledata523\\**" +
-					"\\*Test.html",
-				"**\\liferay\\portalweb\\portal\\dbupgrade\\sampledata523\\**" +
-					"\\*Test.java"
+				"**\\WaitForSystemShutdownTest.java"
 			});
 		ds.setIncludes(new String[] {"**\\*Test.html", "**\\*Test.java"});
 		/*ds.setIncludes(
@@ -89,46 +85,14 @@ public class SeleneseToJavaBuilder {
 			);*/
 
 			if (fileName.endsWith("Test.html")) {
-				translate(basedir, fileName, true);
+				translate(basedir, fileName);
 			}
 			else if (fileName.endsWith("Test.java")) {
 				if (!fileNames.contains(
 						fileName.substring(0, fileName.length() - 5) +
 							".html")) {
 
-					System.out.println("unused: " + fileName);
-				}
-			}
-		}
-
-		ds.setExcludes(
-			new String[] {
-				"**\\EvaluateLogTest.java", "**\\IterateThemeTest.java",
-				"**\\StopSeleniumTest.java",
-				"**\\WaitForSystemShutdownTest.java"
-			});
-		ds.setIncludes(
-			new String[] {
-				"**\\liferay\\portalweb\\portal\\dbupgrade\\sampledata523\\**" +
-					"\\*Test.html",
-				"**\\liferay\\portalweb\\portal\\dbupgrade\\sampledata523\\**" +
-					"\\*Test.java"
-			});
-
-		ds.scan();
-
-		fileNames = SetUtil.fromArray(ds.getIncludedFiles());
-
-		for (String fileName : fileNames) {
-			if (fileName.endsWith("Test.html")) {
-				translate(basedir, fileName, false);
-			}
-			else if (fileName.endsWith("Test.java")) {
-				if (!fileNames.contains(
-						fileName.substring(0, fileName.length() - 5) +
-							".html")) {
-
-					System.out.println("unused: " + fileName);
+					System.out.println("Unused: " + fileName);
 				}
 			}
 		}
@@ -181,9 +145,17 @@ public class SeleneseToJavaBuilder {
 		return params;
 	}
 
-	protected void translate(String basedir, String fileName, boolean includeJs)
-		throws Exception {
+	protected void injectInitJS(String fileName, StringBundler sb) {
+		if (fileName.contains("sampledata523")) {
+			return;
+		}
 
+		sb.append("selenium.getEval(\"");
+		sb.append("window.Liferay.fire(\'initDockbar\');");
+		sb.append("\");");
+	}
+
+	protected void translate(String basedir, String fileName) throws Exception {
 		fileName = StringUtil.replace(
 			fileName, StringPool.BACK_SLASH, StringPool.SLASH);
 
@@ -631,10 +603,8 @@ public class SeleneseToJavaBuilder {
 
 				sb.append(");");
 
-				if (param1.equals("open") && includeJs) {
-					sb.append("selenium.getEval(\"");
-					sb.append("window.Liferay.fire(\'initDockbar\');");
-					sb.append("\");");
+				if (param1.equals("open")) {
+					injectInitJS(fileName, sb);
 				}
 			}
 			else if (param1.equals("clickAndWait")) {
@@ -643,11 +613,7 @@ public class SeleneseToJavaBuilder {
 				sb.append("\"));");
 				sb.append("selenium.waitForPageToLoad(\"30000\");");
 
-				if (includeJs) {
-					sb.append("selenium.getEval(\"");
-					sb.append("window.Liferay.fire(\'initDockbar\');");
-					sb.append("\");");
-				}
+				injectInitJS(fileName, sb);
 			}
 			else if (param1.equals("clickAtAndWait") ||
 					 param1.equals("keyPressAndWait") ||
@@ -665,11 +631,7 @@ public class SeleneseToJavaBuilder {
 				sb.append("\"));");
 				sb.append("selenium.waitForPageToLoad(\"30000\");");
 
-				if (includeJs) {
-					sb.append("selenium.getEval(\"");
-					sb.append("window.Liferay.fire(\'initDockbar\');");
-					sb.append("\");");
-				}
+				injectInitJS(fileName, sb);
 			}
 			else if (param1.equals("close") || param1.equals("refresh") ||
 					 param1.equals("setBrowserOption") ||
@@ -728,11 +690,7 @@ public class SeleneseToJavaBuilder {
 				sb.append("();");
 				sb.append("selenium.waitForPageToLoad(\"30000\");");
 
-				if (includeJs) {
-					sb.append("selenium.getEval(\"");
-					sb.append("window.Liferay.fire(\'initDockbar\');");
-					sb.append("\");");
-				}
+				injectInitJS(fileName, sb);
 			}
 			else if (param1.equals("store")) {
 				sb.append("boolean ");
