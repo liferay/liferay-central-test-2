@@ -676,10 +676,6 @@
 		<finder name="Plid" return-type="Collection">
 			<finder-column name="plid" />
 		</finder>
-		<finder name="P_NotS" return-type="Collection">
-			<finder-column name="plid" />
-			<finder-column name="status" comparator="!=" />
-		</finder>
 		<finder name="L_H" return-type="Collection">
 			<finder-column name="layoutSetBranchId" />
 			<finder-column name="head" />
@@ -695,6 +691,10 @@
 		<finder name="H_P" return-type="Collection">
 			<finder-column name="head" />
 			<finder-column name="plid" />
+		</finder>
+		<finder name="P_NotS" return-type="Collection">
+			<finder-column name="plid" />
+			<finder-column name="status" comparator="!=" />
 		</finder>
 		<finder name="L_L_P" return-type="Collection" where="status != 5">
 			<finder-column name="layoutSetBranchId" />
