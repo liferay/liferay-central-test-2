@@ -774,8 +774,8 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 			return;
 		}
 
-		Element repositoryElement =
-			repositoriesElement.addElement("repository");
+		Element repositoryElement = repositoriesElement.addElement(
+			"repository");
 
 		repositoryElement.addAttribute(
 			"repositoryClassName", repository.getClassName());
