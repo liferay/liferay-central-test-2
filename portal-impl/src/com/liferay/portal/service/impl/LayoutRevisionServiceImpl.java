@@ -47,11 +47,11 @@ public class LayoutRevisionServiceImpl extends LayoutRevisionServiceBaseImpl {
 			ActionKeys.ADD_LAYOUT_BRANCH);
 
 		return layoutRevisionLocalService.addLayoutRevision(
-			userId, layoutSetBranchId, layoutBranchId,
-			parentLayoutRevisionId, head, plid, portletPreferencesPlid,
-			privateLayout, name, title, description, keywords, robots,
-			typeSettings, iconImage, iconImageId, themeId, colorSchemeId,
-			wapThemeId, wapColorSchemeId, css, serviceContext);
+			userId, layoutSetBranchId, layoutBranchId, parentLayoutRevisionId,
+			head, plid, portletPreferencesPlid, privateLayout, name, title,
+			description, keywords, robots, typeSettings, iconImage, iconImageId,
+			themeId, colorSchemeId, wapThemeId, wapColorSchemeId, css,
+			serviceContext);
 	}
 
 }

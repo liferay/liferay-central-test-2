@@ -336,6 +336,12 @@ public class LayoutRevisionLocalServiceUtil {
 			parentLayoutRevision, plid);
 	}
 
+	public static com.liferay.portal.model.LayoutRevision fetchLastLayoutRevision(
+		long plid, boolean head)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().fetchLastLayoutRevision(plid, head);
+	}
+
 	public static com.liferay.portal.model.LayoutRevision getLayoutRevision(
 		long layoutSetBranchId, long plid, boolean head)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -396,12 +402,6 @@ public class LayoutRevisionLocalServiceUtil {
 		return getService()
 				   .getLayoutRevisionsCount(layoutSetBranchId, layoutBranchId,
 			plid);
-	}
-
-	public static com.liferay.portal.model.LayoutRevision getLastLayoutRevision(
-		long plid, boolean head)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getLastLayoutRevision(plid, head);
 	}
 
 	public static com.liferay.portal.model.LayoutRevision updateLayoutRevision(

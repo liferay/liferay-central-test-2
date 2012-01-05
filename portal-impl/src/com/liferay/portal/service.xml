@@ -676,10 +676,6 @@
 		<finder name="Plid" return-type="Collection">
 			<finder-column name="plid" />
 		</finder>
-		<finder name="H_P" return-type="Collection">
-			<finder-column name="head" />
-			<finder-column name="plid" />
-		</finder>
 		<finder name="L_H" return-type="Collection">
 			<finder-column name="layoutSetBranchId" />
 			<finder-column name="head" />
@@ -691,6 +687,10 @@
 		<finder name="L_S" return-type="Collection">
 			<finder-column name="layoutSetBranchId" />
 			<finder-column name="status" />
+		</finder>
+		<finder name="H_P" return-type="Collection">
+			<finder-column name="head" />
+			<finder-column name="plid" />
 		</finder>
 		<finder name="L_L_P" return-type="Collection" where="status != 5">
 			<finder-column name="layoutSetBranchId" />

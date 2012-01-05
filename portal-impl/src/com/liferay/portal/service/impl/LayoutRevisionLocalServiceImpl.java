@@ -47,13 +47,12 @@ public class LayoutRevisionLocalServiceImpl
 
 	public LayoutRevision addLayoutRevision(
 			long userId, long layoutSetBranchId, long layoutBranchId,
-			long parentLayoutRevisionId, boolean head,
-			long plid, long portletPreferencesPlid, boolean privateLayout,
-			String name, String title, String description, String keywords,
-			String robots, String typeSettings, boolean iconImage,
-			long iconImageId, String themeId, String colorSchemeId,
-			String wapThemeId, String wapColorSchemeId, String css,
-			ServiceContext serviceContext)
+			long parentLayoutRevisionId, boolean head, long plid,
+			long portletPreferencesPlid, boolean privateLayout, String name,
+			String title, String description, String keywords, String robots,
+			String typeSettings, boolean iconImage, long iconImageId,
+			String themeId, String colorSchemeId, String wapThemeId,
+			String wapColorSchemeId, String css, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Layout revision
@@ -236,6 +235,18 @@ public class LayoutRevisionLocalServiceImpl
 			layoutSetBranchId, parentLayoutRevision, plid);
 	}
 
+	public LayoutRevision fetchLastLayoutRevision(long plid, boolean head)
+		throws SystemException {
+
+		try {
+			return layoutRevisionPersistence.findByH_P_Last(
+				head, plid, new LayoutRevisionCreateDateComparator(true));
+		}
+		catch (NoSuchLayoutRevisionException nslre) {
+			return null;
+		}
+	}
+
 	@Override
 	public LayoutRevision getLayoutRevision(long layoutRevisionId)
 		throws PortalException, SystemException {
@@ -318,18 +329,6 @@ public class LayoutRevisionLocalServiceImpl
 
 		return layoutRevisionPersistence.countByL_L_P(
 			layoutSetBranchId, layoutBranchId, plid);
-	}
-
-	public LayoutRevision getLastLayoutRevision(long plid, boolean head)
-		throws SystemException {
-
-		try {
-			return layoutRevisionPersistence.findByH_P_Last(
-				head, plid, new LayoutRevisionCreateDateComparator(true));
-		}
-		catch(NoSuchLayoutRevisionException nslre) {
-			return null;
-		}
 	}
 
 	public LayoutRevision updateLayoutRevision(

@@ -104,7 +104,7 @@ public class LayoutSetBranchLocalServiceImpl
 						serviceContext);
 
 				LayoutRevision lastLayoutRevision =
-					layoutRevisionLocalService.getLastLayoutRevision(
+					layoutRevisionLocalService.fetchLastLayoutRevision(
 						layout.getPlid(), true);
 
 				if (lastLayoutRevision != null) {
@@ -134,16 +134,17 @@ public class LayoutSetBranchLocalServiceImpl
 					layoutRevisionLocalService.addLayoutRevision(
 						userId, layoutSetBranchId,
 						layoutBranch.getLayoutBranchId(),
-						LayoutRevisionConstants.DEFAULT_PARENT_LAYOUT_REVISION_ID,
+						LayoutRevisionConstants.
+							DEFAULT_PARENT_LAYOUT_REVISION_ID,
 						true, layout.getPlid(), LayoutConstants.DEFAULT_PLID,
-						layout.getPrivateLayout(),
-						layout.getName(), layout.getTitle(),
-						layout.getDescription(), layout.getKeywords(),
-						layout.getRobots(), layout.getTypeSettings(),
-						layout.isIconImage(), layout.getIconImageId(),
-						layout.getThemeId(), layout.getColorSchemeId(),
-						layout.getWapThemeId(), layout.getWapColorSchemeId(),
-						layout.getCss(), serviceContext);
+						layout.getPrivateLayout(), layout.getName(),
+						layout.getTitle(), layout.getDescription(),
+						layout.getKeywords(), layout.getRobots(),
+						layout.getTypeSettings(), layout.isIconImage(),
+						layout.getIconImageId(), layout.getThemeId(),
+						layout.getColorSchemeId(), layout.getWapThemeId(),
+						layout.getWapColorSchemeId(), layout.getCss(),
+						serviceContext);
 				}
 			}
 		}
