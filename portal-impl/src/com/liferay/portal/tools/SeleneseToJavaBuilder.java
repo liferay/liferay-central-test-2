@@ -145,16 +145,6 @@ public class SeleneseToJavaBuilder {
 		return params;
 	}
 
-	protected void injectInitJS(String fileName, StringBundler sb) {
-		if (fileName.contains("sampledata523")) {
-			return;
-		}
-
-		sb.append("selenium.getEval(\"");
-		sb.append("window.Liferay.fire(\'initDockbar\');");
-		sb.append("\");");
-	}
-
 	protected void translate(String basedir, String fileName) throws Exception {
 		fileName = StringUtil.replace(
 			fileName, StringPool.BACK_SLASH, StringPool.SLASH);
@@ -604,7 +594,7 @@ public class SeleneseToJavaBuilder {
 				sb.append(");");
 
 				if (param1.equals("open")) {
-					injectInitJS(fileName, sb);
+					sb.append("loadRequiredJavaScriptModules();");
 				}
 			}
 			else if (param1.equals("clickAndWait")) {
@@ -613,7 +603,7 @@ public class SeleneseToJavaBuilder {
 				sb.append("\"));");
 				sb.append("selenium.waitForPageToLoad(\"30000\");");
 
-				injectInitJS(fileName, sb);
+				sb.append("loadRequiredJavaScriptModules();");
 			}
 			else if (param1.equals("clickAtAndWait") ||
 					 param1.equals("keyPressAndWait") ||
@@ -631,7 +621,7 @@ public class SeleneseToJavaBuilder {
 				sb.append("\"));");
 				sb.append("selenium.waitForPageToLoad(\"30000\");");
 
-				injectInitJS(fileName, sb);
+				sb.append("loadRequiredJavaScriptModules();");
 			}
 			else if (param1.equals("close") || param1.equals("refresh") ||
 					 param1.equals("setBrowserOption") ||
@@ -690,7 +680,7 @@ public class SeleneseToJavaBuilder {
 				sb.append("();");
 				sb.append("selenium.waitForPageToLoad(\"30000\");");
 
-				injectInitJS(fileName, sb);
+				sb.append("loadRequiredJavaScriptModules();");
 			}
 			else if (param1.equals("store")) {
 				sb.append("boolean ");

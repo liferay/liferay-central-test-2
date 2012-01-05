@@ -36,4 +36,16 @@ public class BaseTestCase extends LiferaySeleneseTestCase {
 	public void tearDown() throws Exception {
 	}
 
+	protected void loadRequiredJavaScriptModules() {
+		Class<?> clazz = getClass();
+
+		String className = clazz.getName();
+
+		if (className.contains(".sampledata523.")) {
+			return;
+		}
+
+		selenium.getEval("window.Liferay.fire(\'initDockbar\');");
+	}
+
 }
