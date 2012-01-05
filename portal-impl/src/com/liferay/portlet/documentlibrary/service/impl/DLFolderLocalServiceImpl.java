@@ -96,6 +96,11 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 				serviceContext.getAddGuestPermissions());
 		}
 		else {
+			if (serviceContext.isDeriveDefaultPermissions()) {
+				serviceContext.deriveDefaultPermissions(
+					repositoryId, DLFolderConstants.getClassName());
+			}
+
 			addFolderResources(
 				dlFolder, serviceContext.getGroupPermissions(),
 				serviceContext.getGuestPermissions());

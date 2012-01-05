@@ -24,6 +24,7 @@ import com.liferay.portal.service.RepositoryLocalService;
 import com.liferay.portal.service.RepositoryService;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
+import com.liferay.portlet.documentlibrary.model.DLFileEntryConstants;
 import com.liferay.portlet.documentlibrary.model.DLFileEntryType;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.service.DLAppHelperLocalService;
@@ -121,6 +122,12 @@ public abstract class LiferayRepositoryBase extends LiferayBase {
 				serviceContext.getAddGuestPermissions());
 		}
 		else {
+			if (serviceContext.isDeriveDefaultPermissions()) {
+				serviceContext.deriveDefaultPermissions(
+					dlFileEntry.getRepositoryId(),
+					DLFileEntryConstants.getClassName());
+			}
+
 			dlFileEntryLocalService.addFileEntryResources(
 				dlFileEntry, serviceContext.getGroupPermissions(),
 				serviceContext.getGuestPermissions());

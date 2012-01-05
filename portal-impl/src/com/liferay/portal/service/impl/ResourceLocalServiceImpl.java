@@ -78,6 +78,11 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 				getPermissionedModel(auditedModel));
 		}
 		else {
+			if (serviceContext.isDeriveDefaultPermissions()) {
+				serviceContext.deriveDefaultPermissions(
+					getGroupId(auditedModel), classedModel.getModelClassName());
+			}
+
 			addModelResources(
 				auditedModel.getCompanyId(), getGroupId(auditedModel),
 				auditedModel.getUserId(), classedModel.getModelClassName(),
