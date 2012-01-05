@@ -259,8 +259,7 @@
 
 		<replace file="docroot/html/js/editor/ckeditor/_source/plugins/link/dialogs/link.js">
 			<replacetoken><![CDATA[return 'mailto:' +]]></replacetoken>
-			<replacevalue><![CDATA[rest = decodeURIComponent(rest); return "mailto:" + ]]>
-			</replacevalue>
+			<replacevalue><![CDATA[rest = decodeURIComponent(rest); return "mailto:" + ]]></replacevalue>
 		</replace>
 
 		<replace file="docroot/html/js/editor/ckeditor/_source/plugins/link/dialogs/link.js">
