@@ -31,4 +31,6 @@ public class LayoutSetBranchConstants {
 
 	public static final String MASTER_BRANCH_NAME = "main-variation";
 
+	public static final long NO_BRANCHES = -1;
+
 }
