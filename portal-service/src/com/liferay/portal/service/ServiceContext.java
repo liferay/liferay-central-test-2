@@ -76,8 +76,8 @@ public class ServiceContext implements Cloneable, Serializable {
 	public Object clone() {
 		ServiceContext serviceContext = new ServiceContext();
 
-		serviceContext.setAddGroupPermissions(getAddGroupPermissions());
-		serviceContext.setAddGuestPermissions(getAddGuestPermissions());
+		serviceContext.setAddGroupPermissions(isAddGroupPermissions());
+		serviceContext.setAddGuestPermissions(isAddGuestPermissions());
 		serviceContext.setAssetCategoryIds(getAssetCategoryIds());
 		serviceContext.setAssetEntryVisible(isAssetEntryVisible());
 		serviceContext.setAssetLinkEntryIds(getAssetLinkEntryIds());
@@ -174,36 +174,10 @@ public class ServiceContext implements Cloneable, Serializable {
 	 *             a parameter to a method which manipulates a resource to which
 	 *             default community permissions apply; <code>false</code>
 	 *             otherwise
-	 * @deprecated As of 6.1, renamed to {@link #getAddGroupPermissions()}
+	 * @deprecated As of 6.1, renamed to {@link #isAddGroupPermissions()}
 	 */
 	public boolean getAddCommunityPermissions() {
-		return getAddGroupPermissions();
-	}
-
-	/**
-	 * Returns <code>true</code> if this service context is being passed as a
-	 * parameter to a method which manipulates a resource to which default guest
-	 * permissions apply.
-	 *
-	 * @return <code>true</code> if this service context is being passed as a
-	 *         parameter to a method which manipulates a resource to which
-	 *         default guest permissions apply; <code>false</code> otherwise
-	 */
-	public boolean getAddGuestPermissions() {
-		return _addGuestPermissions;
-	}
-
-	/**
-	 * Returns <code>true</code> if this service context is being passed as a
-	 * parameter to a method which manipulates a resource to which default group
-	 * permissions apply.
-	 *
-	 * @return <code>true</code> if this service context is being passed as a
-	 *         parameter to a method which manipulates a resource to which
-	 *         default group permissions apply; <code>false</code> otherwise
-	 */
-	public boolean getAddGroupPermissions() {
-		return _addGroupPermissions;
+		return isAddGroupPermissions();
 	}
 
 	/**
@@ -627,6 +601,32 @@ public class ServiceContext implements Cloneable, Serializable {
 	 */
 	public int getWorkflowAction() {
 		return _workflowAction;
+	}
+
+	/**
+	 * Returns <code>true</code> if this service context is being passed as a
+	 * parameter to a method which manipulates a resource to which default guest
+	 * permissions apply.
+	 *
+	 * @return <code>true</code> if this service context is being passed as a
+	 *         parameter to a method which manipulates a resource to which
+	 *         default guest permissions apply; <code>false</code> otherwise
+	 */
+	public boolean isAddGuestPermissions() {
+		return _addGuestPermissions;
+	}
+
+	/**
+	 * Returns <code>true</code> if this service context is being passed as a
+	 * parameter to a method which manipulates a resource to which default group
+	 * permissions apply.
+	 *
+	 * @return <code>true</code> if this service context is being passed as a
+	 *         parameter to a method which manipulates a resource to which
+	 *         default group permissions apply; <code>false</code> otherwise
+	 */
+	public boolean isAddGroupPermissions() {
+		return _addGroupPermissions;
 	}
 
 	public boolean isAssetEntryVisible() {

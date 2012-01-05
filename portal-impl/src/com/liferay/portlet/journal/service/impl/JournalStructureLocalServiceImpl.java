@@ -114,12 +114,12 @@ public class JournalStructureLocalServiceImpl
 
 		// Resources
 
-		if (serviceContext.getAddGroupPermissions() ||
-			serviceContext.getAddGuestPermissions()) {
+		if (serviceContext.isAddGroupPermissions() ||
+			serviceContext.isAddGuestPermissions()) {
 
 			addStructureResources(
-				structure, serviceContext.getAddGroupPermissions(),
-				serviceContext.getAddGuestPermissions());
+				structure, serviceContext.isAddGroupPermissions(),
+				serviceContext.isAddGuestPermissions());
 		}
 		else {
 			addStructureResources(

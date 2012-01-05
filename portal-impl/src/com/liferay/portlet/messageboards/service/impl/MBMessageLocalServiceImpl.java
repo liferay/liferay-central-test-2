@@ -354,12 +354,12 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			if (user.isDefaultUser()) {
 				addMessageResources(message, true, true);
 			}
-			else if (serviceContext.getAddGroupPermissions() ||
-					 serviceContext.getAddGuestPermissions()) {
+			else if (serviceContext.isAddGroupPermissions() ||
+					 serviceContext.isAddGuestPermissions()) {
 
 				addMessageResources(
-					message, serviceContext.getAddGroupPermissions(),
-					serviceContext.getAddGuestPermissions());
+					message, serviceContext.isAddGroupPermissions(),
+					serviceContext.isAddGuestPermissions());
 			}
 			else {
 				addMessageResources(
