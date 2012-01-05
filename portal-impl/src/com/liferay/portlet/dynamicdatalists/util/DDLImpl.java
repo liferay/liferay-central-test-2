@@ -285,6 +285,20 @@ public class DDLImpl implements DDL {
 		return getRecordsJSONArray(recordSet.getRecords(), false);
 	}
 
+	public JSONArray getRecordsJSONArray(List<DDLRecord> records)
+		throws Exception {
+
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+
+		for (DDLRecord record : records) {
+			JSONObject jsonObject = getRecordJSONObject(record);
+
+			jsonArray.put(jsonObject);
+		}
+
+		return jsonArray;
+	}
+
 	public JSONArray getRecordsJSONArray(
 			List<DDLRecord> records, boolean latestRecordVersion)
 		throws Exception {
@@ -294,20 +308,6 @@ public class DDLImpl implements DDL {
 		for (DDLRecord record : records) {
 			JSONObject jsonObject = getRecordJSONObject(
 				record, latestRecordVersion);
-
-			jsonArray.put(jsonObject);
-		}
-
-		return jsonArray;
-	}
-
-	public JSONArray getRecordsJSONArray(List<DDLRecord> records)
-		throws Exception {
-
-		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
-
-		for (DDLRecord record : records) {
-			JSONObject jsonObject = getRecordJSONObject(record);
 
 			jsonArray.put(jsonObject);
 		}
