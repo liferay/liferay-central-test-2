@@ -1940,20 +1940,10 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			body += "\n--\n" + signature;
 		}
 
-		String inReplyTo = null;
-
-		if (message.getParentMessageId() !=
-				MBMessageConstants.DEFAULT_PARENT_MESSAGE_ID) {
-
-			inReplyTo = PortalUtil.getMailId(
-				company.getMx(), MBUtil.MESSAGE_POP_PORTLET_PREFIX,
-				message.getCategoryId(), message.getParentMessageId());
-		}
-
 		String messageBody = message.getBody();
-		
+
 		boolean htmlFormat = MBUtil.getEmailHtmlFormat(preferences);
-		
+
 		if (htmlFormat) {
 			try {
 				messageBody = BBCodeTranslatorUtil.getHTML(messageBody);
@@ -1965,20 +1955,30 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			}
 		}
 
+		String inReplyTo = null;
+
+		if (message.getParentMessageId() !=
+				MBMessageConstants.DEFAULT_PARENT_MESSAGE_ID) {
+
+			inReplyTo = PortalUtil.getMailId(
+				company.getMx(), MBUtil.MESSAGE_POP_PORTLET_PREFIX,
+				message.getCategoryId(), message.getParentMessageId());
+		}
+
 		SubscriptionSender subscriptionSenderPrototype =
 			new MBSubscriptionSender();
 
 		subscriptionSenderPrototype.setBody(body);
 		subscriptionSenderPrototype.setBulk(true);
 		subscriptionSenderPrototype.setCompanyId(message.getCompanyId());
+		subscriptionSenderPrototype.setContextAttribute(
+			"[$MESSAGE_BODY$]", messageBody, false);
 		subscriptionSenderPrototype.setContextAttributes(
 			"[$CATEGORY_NAME$]", categoryName, "[$MAILING_LIST_ADDRESS$]",
 			mailingListAddress, "[$MESSAGE_ID$]", message.getMessageId(),
 			"[$MESSAGE_SUBJECT$]", message.getSubject(), "[$MESSAGE_URL$]",
 			messageURL, "[$MESSAGE_USER_ADDRESS$]", emailAddress,
 			"[$MESSAGE_USER_NAME$]", fullName);
-		subscriptionSenderPrototype.setContextAttribute(
-			"[$MESSAGE_BODY$]", messageBody, false);
 		subscriptionSenderPrototype.setFrom(fromAddress, fromName);
 		subscriptionSenderPrototype.setHtmlFormat(htmlFormat);
 		subscriptionSenderPrototype.setInReplyTo(inReplyTo);
