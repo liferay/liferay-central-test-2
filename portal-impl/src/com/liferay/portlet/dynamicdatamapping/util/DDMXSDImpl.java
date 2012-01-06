@@ -305,14 +305,14 @@ public class DDMXSDImpl implements DDMXSD {
 			String key = "fields";
 
 			if (type.equals(_TYPE_RADIO) || type.equals(_TYPE_SELECT)) {
+				key = "options";
+
 				String predefinedValue = jsonObject.getString(
 					"predefinedValue");
 
 				jsonObject.put(
-					"predefinedValue", JSONFactoryUtil.createJSONArray(
-						predefinedValue));
-
-				key = "options";
+					"predefinedValue",
+					JSONFactoryUtil.createJSONArray(predefinedValue));
 			}
 
 			jsonObject.put(key, getJSONArray(dynamicElementElement));
