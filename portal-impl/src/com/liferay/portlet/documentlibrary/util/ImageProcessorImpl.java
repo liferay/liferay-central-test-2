@@ -275,8 +275,7 @@ public class ImageProcessorImpl
 
 	private static Log _log = LogFactoryUtil.getLog(ImageProcessorImpl.class);
 
-	private static final ImageProcessorImpl _instance =
-		new ImageProcessorImpl();
+	private static ImageProcessorImpl _instance = new ImageProcessorImpl();
 
 	static {
 		InstancePool.put(ImageProcessorImpl.class.getName(), _instance);

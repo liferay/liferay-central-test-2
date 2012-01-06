@@ -578,17 +578,17 @@
 	</bean>
 	<bean id="com.liferay.portlet.documentlibrary.util.PDFProcessorUtil" class="com.liferay.portlet.documentlibrary.util.PDFProcessorUtil">
 		<property name="pDFProcessor">
-			<bean class="com.liferay.portlet.documentlibrary.util.PDFProcessorImpl" factory-method="getInstance"/>
+			<bean class="com.liferay.portlet.documentlibrary.util.PDFProcessorImpl" factory-method="getInstance" />
 		</property>
 	</bean>
     <bean id="com.liferay.portlet.documentlibrary.util.RawMetadataProcessorUtil" class="com.liferay.portlet.documentlibrary.util.RawMetadataProcessorUtil">
         <property name="rawMetadataProcessor">
-            <bean class="com.liferay.portlet.documentlibrary.util.RawMetadataProcessorImpl" factory-method="getInstance"/>
+            <bean class="com.liferay.portlet.documentlibrary.util.RawMetadataProcessorImpl" factory-method="getInstance" />
         </property>
     </bean>
 	<bean id="com.liferay.portlet.documentlibrary.util.VideoProcessorUtil" class="com.liferay.portlet.documentlibrary.util.VideoProcessorUtil">
 		<property name="videoProcessor">
-			<bean class="com.liferay.portlet.documentlibrary.util.VideoProcessorImpl" factory-method="getInstance"/>
+			<bean class="com.liferay.portlet.documentlibrary.util.VideoProcessorImpl" factory-method="getInstance" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.dynamicdatalists.util.DDLExporterFactory" class="com.liferay.portlet.dynamicdatalists.util.DDLExporterFactory">

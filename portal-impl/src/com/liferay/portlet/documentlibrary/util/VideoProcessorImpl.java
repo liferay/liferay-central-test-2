@@ -611,8 +611,7 @@ public class VideoProcessorImpl
 
 	private static Log _log = LogFactoryUtil.getLog(VideoProcessorImpl.class);
 
-	private static final VideoProcessorImpl _instance =
-		new VideoProcessorImpl();
+	private static VideoProcessorImpl _instance = new VideoProcessorImpl();
 
 	static {
 		InstancePool.put(VideoProcessorImpl.class.getName(), _instance);

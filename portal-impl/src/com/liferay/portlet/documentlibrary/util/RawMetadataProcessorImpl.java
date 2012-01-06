@@ -151,7 +151,7 @@ public class RawMetadataProcessorImpl
 	private static Log _log = LogFactoryUtil.getLog(
 		RawMetadataProcessorImpl.class);
 
-	private static final RawMetadataProcessorImpl _instance =
+	private static RawMetadataProcessorImpl _instance =
 		new RawMetadataProcessorImpl();
 
 	static {

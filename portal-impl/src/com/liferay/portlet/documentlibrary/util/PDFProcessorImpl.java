@@ -723,7 +723,7 @@ public class PDFProcessorImpl
 
 	private static Log _log = LogFactoryUtil.getLog(PDFProcessorImpl.class);
 
-	private static final PDFProcessorImpl _instance = new PDFProcessorImpl();
+	private static PDFProcessorImpl _instance = new PDFProcessorImpl();
 
 	static {
 		InstancePool.put(PDFProcessorImpl.class.getName(), _instance);
@@ -762,12 +762,14 @@ public class PDFProcessorImpl
 
 	private static class Initializer {
 
-		private static final PDFProcessorImpl _initializedInstance;
+		private static PDFProcessorImpl _initializedInstance;
 
 		static {
 			_instance.initialize();
+
 			_initializedInstance = _instance;
 		}
+
 	}
 
 }

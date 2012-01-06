@@ -334,8 +334,7 @@ public class AudioProcessorImpl
 
 	private static Log _log = LogFactoryUtil.getLog(AudioProcessorImpl.class);
 
-	private static final AudioProcessorImpl _instance =
-		new AudioProcessorImpl();
+	private static AudioProcessorImpl _instance = new AudioProcessorImpl();
 
 	static {
 		InstancePool.put(AudioProcessorImpl.class.getName(), _instance);
