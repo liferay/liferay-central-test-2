@@ -22,7 +22,9 @@ import com.liferay.portal.kernel.io.delta.DeltaUtil;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StreamUtil;
+import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.service.permission.GroupPermissionUtil;
 import com.liferay.portlet.documentlibrary.model.DLSync;
 import com.liferay.portlet.documentlibrary.model.DLSyncUpdate;
 import com.liferay.portlet.documentlibrary.service.base.DLSyncServiceBaseImpl;
@@ -32,10 +34,12 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
+
 import java.nio.channels.Channels;
 import java.nio.channels.FileChannel;
 import java.nio.channels.ReadableByteChannel;
 import java.nio.channels.WritableByteChannel;
+
 import java.util.Date;
 import java.util.List;
 
@@ -48,10 +52,9 @@ public class DLSyncServiceImpl extends DLSyncServiceBaseImpl {
 			long companyId, long repositoryId, Date lastAccessDate)
 		throws PortalException, SystemException {
 
-		// Make sure we have permission to access this site
+		GroupPermissionUtil.check(
+			getPermissionChecker(), repositoryId, ActionKeys.VIEW);
 
-		groupService.getGroup(repositoryId);
-		
 		Date now = new Date();
 
 		List<DLSync> dlSyncs = null;
