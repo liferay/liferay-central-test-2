@@ -262,46 +262,51 @@ public class JournalStructureLocalServiceImpl
 			structure.getCompanyId());
 
 		if (structure.getGroupId() == companyGroup.getGroupId()) {
-			if (journalArticlePersistence.countByStructureId(
-					structure.getStructureId()) > 0) {
+			int count = journalArticlePersistence.countByStructureId(
+				structure.getStructureId());
 
+			if (count > 0) {
 				throw new RequiredStructureException(
 					RequiredStructureException.REFERENCED_WEB_CONTENT);
 			}
 
-			if (journalStructurePersistence.countByParentStructureId(
-					structure.getStructureId()) > 0) {
+			count = journalStructurePersistence.countByParentStructureId(
+				structure.getStructureId());
 
+			if (count > 0) {
 				throw new RequiredStructureException(
 					RequiredStructureException.REFERENCED_STRUCTURE);
 			}
 
-			if (journalTemplatePersistence.countByStructureId(
-					structure.getStructureId()) > 0) {
+			count = journalTemplatePersistence.countByStructureId(
+				structure.getStructureId());
 
+			if (count > 0) {
 				throw new RequiredStructureException(
 					RequiredStructureException.REFERENCED_TEMPLATE);
 			}
 		}
 		else {
-			if (journalArticlePersistence.countByG_C_S(
-					structure.getGroupId(), 0,
-					structure.getStructureId()) > 0) {
+			int count = journalArticlePersistence.countByG_C_S(
+				structure.getGroupId(), 0, structure.getStructureId());
 
+			if (count > 0) {
 				throw new RequiredStructureException(
 					RequiredStructureException.REFERENCED_WEB_CONTENT);
 			}
 
-			if (journalStructurePersistence.countByG_P(
-					structure.getGroupId(), structure.getStructureId()) > 0) {
+			count = journalStructurePersistence.countByG_P(
+				structure.getGroupId(), structure.getStructureId());
 
+			if (count > 0) {
 				throw new RequiredStructureException(
 					RequiredStructureException.REFERENCED_STRUCTURE);
 			}
 
-			if (journalTemplatePersistence.countByG_S(
-					structure.getGroupId(), structure.getStructureId()) > 0) {
+			count = journalTemplatePersistence.countByG_S(
+				structure.getGroupId(), structure.getStructureId());
 
+			if (count > 0) {
 				throw new RequiredStructureException(
 					RequiredStructureException.REFERENCED_TEMPLATE);
 			}

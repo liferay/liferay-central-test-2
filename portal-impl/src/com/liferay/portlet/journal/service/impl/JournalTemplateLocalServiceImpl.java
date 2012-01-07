@@ -319,16 +319,18 @@ public class JournalTemplateLocalServiceImpl
 			template.getCompanyId());
 
 		if (template.getGroupId() == companyGroup.getGroupId()) {
-			if (journalArticlePersistence.countByTemplateId(
-					template.getTemplateId()) > 0) {
+			int count = journalArticlePersistence.countByTemplateId(
+				template.getTemplateId());
 
+			if (count > 0) {
 				throw new RequiredTemplateException();
 			}
 		}
 		else {
-			if (journalArticlePersistence.countByG_C_T(
-					template.getGroupId(), 0, template.getTemplateId()) > 0) {
+			int count = journalArticlePersistence.countByG_C_T(
+				template.getGroupId(), 0, template.getTemplateId());
 
+			if (count > 0) {
 				throw new RequiredTemplateException();
 			}
 		}
