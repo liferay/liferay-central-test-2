@@ -115,8 +115,8 @@ public class SharepointServlet extends HttpServlet {
 			byte[] bytes = unsyncByteArrayOutputStream.toByteArray();
 
 			UnsyncBufferedReader unsyncBufferedReader =
-				new UnsyncBufferedReader(new InputStreamReader(
-					new ByteArrayInputStream(bytes)));
+				new UnsyncBufferedReader(
+					new InputStreamReader(new ByteArrayInputStream(bytes)));
 
 			String url = unsyncBufferedReader.readLine();
 
