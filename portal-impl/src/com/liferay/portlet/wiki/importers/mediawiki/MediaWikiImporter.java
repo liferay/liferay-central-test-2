@@ -94,17 +94,17 @@ public class MediaWikiImporter implements WikiImporter {
 		InputStream imagesInputStream = inputStreams[2];
 
 		try {
-			Document doc = SAXReaderUtil.read(pagesInputStream);
+			Document document = SAXReaderUtil.read(pagesInputStream);
 
 			Map<String, String> usersMap = readUsersFile(usersInputStream);
 
-			Element root = doc.getRootElement();
+			Element rootElement = document.getRootElement();
 
-			List<String> specialNamespaces = readSpecialNamespaces(root);
+			List<String> specialNamespaces = readSpecialNamespaces(rootElement);
 
-			processSpecialPages(userId, node, root, specialNamespaces);
+			processSpecialPages(userId, node, rootElement, specialNamespaces);
 			processRegularPages(
-				userId, node, root, specialNamespaces, usersMap,
+				userId, node, rootElement, specialNamespaces, usersMap,
 				imagesInputStream, options);
 			processImages(userId, node, imagesInputStream);
 
@@ -170,6 +170,7 @@ public class MediaWikiImporter implements WikiImporter {
 
 			if (Validator.isNull(redirectTitle)) {
 				_translator.setStrictImportMode(strictImportMode);
+
 				content = _translator.translate(content);
 			}
 			else {
@@ -407,13 +408,12 @@ public class MediaWikiImporter implements WikiImporter {
 	}
 
 	protected void processRegularPages(
-		long userId, WikiNode node, Element root,
+		long userId, WikiNode node, Element rootElement,
 		List<String> specialNamespaces, Map<String, String> usersMap,
 		InputStream imagesInputStream, Map<String, String[]> options) {
 
 		boolean importLatestVersion = MapUtil.getBoolean(
 			options, WikiImporterKeys.OPTIONS_IMPORT_LATEST_VERSION);
-
 		boolean strictImportMode = MapUtil.getBoolean(
 			options, WikiImporterKeys.OPTIONS_STRICT_IMPORT_MODE);
 
@@ -422,30 +422,26 @@ public class MediaWikiImporter implements WikiImporter {
 
 		int count = 0;
 
-		List<Element> pages = root.elements("page");
-
-		int total = pages.size();
-
-		Iterator<Element> itr = root.elements("page").iterator();
-
 		int percentage = 10;
+
 		int maxPercentage = 50;
 
 		if (imagesInputStream == null) {
 			maxPercentage = 99;
 		}
 
-		int percentageRange = maxPercentage - percentage;
+		List<Element> pageElements = rootElement.elements("page");
 
-		for (int i = 0; itr.hasNext(); i++) {
-			Element pageEl = itr.next();
+		for (int i = 0; i < pageElements.size(); i++) {
+			Element pageElement = pageElements.get(i);
 
-			String title = pageEl.elementText("title");
+			String title = pageElement.elementText("title");
 
 			title = normalizeTitle(title);
 
 			percentage = Math.min(
-				10 + (i * percentageRange) / total, maxPercentage);
+				10 + (i * (maxPercentage - percentage)) / pageElements.size(),
+				maxPercentage);
 
 			progressTracker.updateProgress(percentage);
 
@@ -453,22 +449,25 @@ public class MediaWikiImporter implements WikiImporter {
 				continue;
 			}
 
-			List<Element> revisionEls = pageEl.elements("revision");
+			List<Element> revisionElements = pageElement.elements("revision");
 
 			if (importLatestVersion) {
-				Element lastRevisionEl = revisionEls.get(
-					revisionEls.size() - 1);
+				Element lastRevisionElement = revisionElements.get(
+					revisionElements.size() - 1);
 
-				revisionEls = new ArrayList<Element>();
+				revisionElements = new ArrayList<Element>();
 
-				revisionEls.add(lastRevisionEl);
+				revisionElements.add(lastRevisionElement);
 			}
 
-			for (Element curRevisionEl : revisionEls) {
-				String author = curRevisionEl.element(
-					"contributor").elementText("username");
-				String content = curRevisionEl.elementText("text");
-				String summary = curRevisionEl.elementText("comment");
+			for (Element revisionElement : revisionElements) {
+				Element contributorElement = revisionElement.element(
+					"contributor");
+
+				String author = contributorElement.elementText("username");
+
+				String content = revisionElement.elementText("text");
+				String summary = revisionElement.elementText("comment");
 
 				try {
 					importPage(
@@ -477,13 +476,10 @@ public class MediaWikiImporter implements WikiImporter {
 				}
 				catch (Exception e) {
 					if (_log.isWarnEnabled()) {
-						StringBundler sb = new StringBundler(3);
-
-						sb.append("Page with title ");
-						sb.append(title);
-						sb.append(" could not be imported");
-
-						_log.warn(sb.toString(), e);
+						_log.warn(
+							"Page with title " + title +
+								" could not be imported",
+							e);
 					}
 				}
 			}
@@ -497,27 +493,23 @@ public class MediaWikiImporter implements WikiImporter {
 	}
 
 	protected void processSpecialPages(
-			long userId, WikiNode node, Element root,
+			long userId, WikiNode node, Element rootElement,
 			List<String> specialNamespaces)
 		throws PortalException {
 
 		ProgressTracker progressTracker =
 			ProgressTrackerThreadLocal.getProgressTracker();
 
-		List<Element> pages = root.elements("page");
+		List<Element> pageElements = rootElement.elements("page");
 
-		int total = pages.size();
+		for (int i = 0; i < pageElements.size(); i++) {
+			Element pageElement = pageElements.get(i);
 
-		Iterator<Element> itr = pages.iterator();
-
-		for (int i = 0; itr.hasNext(); i++) {
-			Element page = itr.next();
-
-			String title = page.elementText("title");
+			String title = pageElement.elementText("title");
 
 			if (!title.startsWith("Category:")) {
 				if (isSpecialMediaWikiPage(title, specialNamespaces)) {
-					root.remove(page);
+					rootElement.remove(pageElement);
 				}
 
 				continue;
@@ -527,7 +519,9 @@ public class MediaWikiImporter implements WikiImporter {
 
 			categoryName = normalize(categoryName, 75);
 
-			String description = page.element("revision").elementText("text");
+			Element revisionElement = pageElement.element("revision");
+
+			String description = revisionElement.elementText("text");
 
 			description = normalizeDescription(description);
 
@@ -560,7 +554,7 @@ public class MediaWikiImporter implements WikiImporter {
 			}
 
 			if ((i % 5) == 0) {
-				progressTracker.updateProgress((i * 10) / total);
+				progressTracker.updateProgress((i * 10) / pageElements.size());
 			}
 		}
 	}
