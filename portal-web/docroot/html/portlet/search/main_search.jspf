@@ -52,10 +52,6 @@ String[] queryTerms = hits.getQueryTerms();
 request.setAttribute("search.jsp-queryTerms", queryTerms);
 
 boolean showMenu = displayAssetTypeFacet || displayAssetTagsFacet || displayAssetCategoriesFacet || displayModifiedRangeFacet;
-
-List<Facet> facets = ListUtil.fromCollection(searchContext.getFacets().values());
-
-facets = ListUtil.sort(facets, new PropertyComparator("facetConfiguration.weight", false, false));
 %>
 
 <aui:layout cssClass='<%= "search-layout" + (showMenu ? " menu-column" : StringPool.BLANK) %>'>
@@ -63,7 +59,13 @@ facets = ListUtil.sort(facets, new PropertyComparator("facetConfiguration.weight
 		<aui:column cssClass="menu" first="<%= true %>" id="facetNavigation">
 
 			<%
-			for (Facet facet : facets) {
+			Map<String, Facet> facets = searchContext.getFacets();
+
+			List<Facet> facetsList = ListUtil.fromCollection(facets.values());
+
+			facetsList = ListUtil.sort(facetsList, new PropertyComparator("facetConfiguration.weight", false, false));
+
+			for (Facet facet : facetsList) {
 				if (facet.isStatic()) {
 					continue;
 				}
@@ -105,8 +107,6 @@ facets = ListUtil.sort(facets, new PropertyComparator("facetConfiguration.weight
 
 										if (field) {
 											field.value = term.attr('data-value');
-
-											
 
 											submitForm(document.<portlet:namespace />fm);
 										}

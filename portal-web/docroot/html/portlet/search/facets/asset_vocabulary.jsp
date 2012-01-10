@@ -77,10 +77,10 @@ private void _buildCategoriesNavigation(String[] assetCategoryIdsOrNames, boolea
 	for (AssetCategory assetCategory : assetCategories) {
 		String term = String.valueOf(assetCategory.getCategoryId());
 
-		String categoryName = HtmlUtil.escape(assetCategory.getName());
+		String assetCategoryName = HtmlUtil.escape(assetCategory.getName());
 
 		if (matchByName) {
-			term = categoryName;
+			term = assetCategoryName;
 		}
 
 		int frequency = 0;
@@ -96,18 +96,13 @@ private void _buildCategoriesNavigation(String[] assetCategoryIdsOrNames, boolea
 		if (ArrayUtil.contains(assetCategoryIdsOrNames, term)) {
 			sb.append(" current-term");
 
-			ScriptTag.doTag(
-				null, "liferay-token-list",
-				"Liferay.Search.tokenList.add({clearFields: '" +
-				UnicodeFormatter.toString(clearFields) + "', text: '" +
-				UnicodeFormatter.toString(categoryName) + "'});",
-				null, pageContext);
+			ScriptTag.doTag(null, "liferay-token-list", "Liferay.Search.tokenList.add({clearFields: '" + UnicodeFormatter.toString(clearFields) + "', text: '" + UnicodeFormatter.toString(assetCategoryName) + "'});", null, pageContext);
 		}
 
 		sb.append("\"><a href=\"#\" data-value=\"");
 		sb.append(HtmlUtil.escapeAttribute(term));
 		sb.append("\">");
-		sb.append(categoryName);
+		sb.append(assetCategoryName);
 		sb.append("</a> <span class=\"frequency\">(");
 		sb.append(frequency);
 		sb.append(")</span>");

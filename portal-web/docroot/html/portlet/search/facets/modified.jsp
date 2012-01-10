@@ -30,30 +30,6 @@ cal.setTime(now);
 DateFormat dateFormat = DateFormatFactoryUtil.getSimpleDateFormat("yyyyMMddHHmmss", timeZone);
 
 String nowString = dateFormat.format(cal.getTime());
-
-String modifiedLabel = StringPool.BLANK;
-
-if (fieldParamSelection.equals("0")) {
-	modifiedLabel = LanguageUtil.get(pageContext, "any-time");
-}
-else if (fieldParamSelection.equals("1")) {
-	modifiedLabel = LanguageUtil.get(pageContext, "past-hour");
-}
-else if (fieldParamSelection.equals("2")) {
-	modifiedLabel = LanguageUtil.get(pageContext, "past-24-hours");
-}
-else if (fieldParamSelection.equals("3")) {
-	modifiedLabel = LanguageUtil.get(pageContext, "past-week");
-}
-else if (fieldParamSelection.equals("4")) {
-	modifiedLabel = LanguageUtil.get(pageContext, "past-month");
-}
-else if (fieldParamSelection.equals("5")) {
-	modifiedLabel = LanguageUtil.get(pageContext, "past-year");
-}
-else if (fieldParamSelection.equals("6")) {
-	modifiedLabel = LanguageUtil.get(pageContext, "custom-range");
-}
 %>
 
 <div class="<%= cssClass %>" data-facetFieldName="<%= facet.getFieldName() %>" id="<%= randomNamespace %>facet">
@@ -157,12 +133,38 @@ else if (fieldParamSelection.equals("6")) {
 </div>
 
 <c:if test='<%= !fieldParamSelection.equals("0") %>'>
+
 	<%
-		String fieldName = renderResponse.getNamespace() + facet.getFieldName();
+	String fieldName = renderResponse.getNamespace() + facet.getFieldName();
 	%>
 
 	<aui:script use="liferay-token-list">
+
 		<%
+		String modifiedLabel = StringPool.BLANK;
+
+		if (fieldParamSelection.equals("0")) {
+			modifiedLabel = LanguageUtil.get(pageContext, "any-time");
+		}
+		else if (fieldParamSelection.equals("1")) {
+			modifiedLabel = LanguageUtil.get(pageContext, "past-hour");
+		}
+		else if (fieldParamSelection.equals("2")) {
+			modifiedLabel = LanguageUtil.get(pageContext, "past-24-hours");
+		}
+		else if (fieldParamSelection.equals("3")) {
+			modifiedLabel = LanguageUtil.get(pageContext, "past-week");
+		}
+		else if (fieldParamSelection.equals("4")) {
+			modifiedLabel = LanguageUtil.get(pageContext, "past-month");
+		}
+		else if (fieldParamSelection.equals("5")) {
+			modifiedLabel = LanguageUtil.get(pageContext, "past-year");
+		}
+		else if (fieldParamSelection.equals("6")) {
+			modifiedLabel = LanguageUtil.get(pageContext, "custom-range");
+		}
+
 		String tokenLabel = modifiedLabel;
 
 		if (fieldParamSelection.equals("6")) {

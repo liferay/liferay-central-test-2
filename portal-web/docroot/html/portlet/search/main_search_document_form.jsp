@@ -58,11 +58,11 @@ PortletURL portletURL = (PortletURL)request.getAttribute("search.jsp-portletURL"
 	</span>
 
 	<%
-	String[] assetTagNames = document.getValues(Field.ASSET_TAG_NAMES);
 	String[] assetCategoryIds = document.getValues(Field.ASSET_CATEGORY_IDS);
+	String[] assetTagNames = document.getValues(Field.ASSET_TAG_NAMES);
 	%>
 
-	<c:if test="<%= Validator.isNotNull(assetTagNames[0]) || Validator.isNotNull(assetCategoryIds[0]) %>">
+	<c:if test="<%= Validator.isNotNull(assetCategoryIds[0]) || Validator.isNotNull(assetTagNames[0]) %>">
 		<div class="asset-entry-content">
 			<c:if test="<%= Validator.isNotNull(assetTagNames[0]) %>">
 				<div class="asset-entry-tags">

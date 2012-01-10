@@ -17,10 +17,10 @@
 <%@ include file="/html/portlet/search/facets/init.jsp" %>
 
 <%
-String dateString = StringPool.BLANK;
-
 String fieldParamFrom = ParamUtil.getString(request, facet.getFieldName() + "from");
 String fieldParamTo = ParamUtil.getString(request, facet.getFieldName() + "to");
+
+String dateString = StringPool.BLANK;
 
 Calendar cal = Calendar.getInstance();
 
