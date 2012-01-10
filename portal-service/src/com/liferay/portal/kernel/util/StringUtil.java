@@ -902,10 +902,9 @@ public class StringUtil {
 		if (!exactMatch) {
 			return replace(s, oldSubs, newSubs);
 		}
-		else {
-			for (int i = 0; i < oldSubs.length; i++) {
-				s = s.replaceAll("\\b" + oldSubs[i] + "\\b" , newSubs[i]);
-			}
+
+		for (int i = 0; i < oldSubs.length; i++) {
+			s = s.replaceAll("\\b" + oldSubs[i] + "\\b" , newSubs[i]);
 		}
 
 		return s;
