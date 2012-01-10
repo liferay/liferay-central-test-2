@@ -554,13 +554,8 @@ public class UpgradeImageGallery extends UpgradeProcess {
 						largeImageId, custom1ImageId, custom2ImageId);
 				}
 				catch (Exception e) {
-					StringBundler sb = new StringBundler(3);
-
-					sb.append(title);
-					sb.append(StringPool.SPACE);
-					sb.append(imageId);
-
-					title = sb.toString();
+					title = title.concat(StringPool.SPACE).concat(
+						String.valueOf(imageId));
 
 					addDLFileEntry(
 						uuid, imageId, groupId, companyId, userId, userName,
