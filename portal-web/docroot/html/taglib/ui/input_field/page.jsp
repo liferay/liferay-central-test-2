@@ -56,10 +56,10 @@ Map<String, String> hints = ModelHintsUtil.getHints(model, field);
 			}
 
 			boolean value = BeanPropertiesUtil.getBooleanSilent(bean, field, defaultBoolean);
-				
+
 			if (!ignoreRequestValue) {
 				value = ParamUtil.getBoolean(request, fieldParam, value);
-			}	
+			}
 			%>
 
 			<liferay-ui:input-checkbox cssClass="<%= cssClass %>" formName="<%= formName %>" param="<%= fieldParam %>" defaultValue="<%= value %>" disabled="<%= disabled %>" />
@@ -333,7 +333,7 @@ Map<String, String> hints = ModelHintsUtil.getHints(model, field);
 				if (!ignoreRequestValue) {
 					doubleValue = ParamUtil.getDouble(request, fieldParam, doubleValue);
 				}
-					
+
 				if (format != null) {
 					value = format.format(doubleValue);
 				}
@@ -347,7 +347,7 @@ Map<String, String> hints = ModelHintsUtil.getHints(model, field);
 				if (!ignoreRequestValue) {
 					intValue = ParamUtil.getInteger(request, fieldParam, intValue);
 				}
-					
+
 				if (format != null) {
 					value = format.format(intValue);
 				}
