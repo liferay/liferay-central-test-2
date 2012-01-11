@@ -257,7 +257,9 @@ public class PasswordPolicyLocalServiceImpl
 			long[] organizationIds = new long[organizations.size()];
 
 			for (int i = 0; i < organizationIds.length; i++) {
-				organizationIds[i] = organizations.get(i).getOrganizationId();
+				Organization organization = organizations.get(i);
+
+				organizationIds[i] = organization.getOrganizationId();
 			}
 
 			return getPasswordPolicy(user.getCompanyId(), organizationIds);
