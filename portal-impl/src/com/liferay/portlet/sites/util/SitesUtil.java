@@ -777,7 +777,6 @@ public class SitesUtil {
 		updateLayoutSetPrototypeLink(
 			group.getGroupId(), true, privateLayoutSetPrototypeId,
 			serviceContext);
-
 		updateLayoutSetPrototypeLink(
 			group.getGroupId(), false, publicLayoutSetPrototypeId,
 			serviceContext);
