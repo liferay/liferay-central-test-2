@@ -242,6 +242,8 @@ public class EditEntryAction extends PortletAction {
 			DLAppServiceUtil.deleteFolder(deleteFolderIds[i]);
 		}
 
+		// Delete file shortcuts before file entries. See LPS-21348.
+
 		long[] deleteFileShortcutIds = StringUtil.split(
 			ParamUtil.getString(actionRequest, "fileShortcutIds"), 0L);
 
