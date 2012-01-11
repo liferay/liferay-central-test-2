@@ -68,9 +68,9 @@ import java.io.IOException;
 import java.sql.Connection;
 
 import java.util.Calendar;
-import java.util.Map;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Properties;
 
 import javax.servlet.http.HttpServletRequest;
@@ -317,17 +317,19 @@ public class SetupWizardUtil {
 	}
 
 	private static void _reconfigurePersistenceBeans() throws Exception {
-		Map<String, BasePersistenceImpl> persistenceBeans =
+		@SuppressWarnings("rawtypes")
+		Map<String, BasePersistenceImpl> beanPersistenceImpls =
 			PortalBeanLocatorUtil.locate(BasePersistenceImpl.class);
 
 		SessionFactory sessionFactory =
 			(SessionFactory)PortalBeanLocatorUtil.locate(
 				"liferaySessionFactory");
 
-		for (String beanName : persistenceBeans.keySet()) {
-			BasePersistenceImpl bean = persistenceBeans.get(beanName);
+		for (String name : beanPersistenceImpls.keySet()) {
+			BasePersistenceImpl<?> beanPersistenceImpl =
+				beanPersistenceImpls.get(name);
 
-			bean.setSessionFactory(sessionFactory);
+			beanPersistenceImpl.setSessionFactory(sessionFactory);
 		}
 	}
 

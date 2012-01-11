@@ -28,9 +28,9 @@ public interface BeanLocator {
 
 	public Class<?> getType(String name) throws BeanLocatorException;
 
-	public Object locate(String name) throws BeanLocatorException;
-
 	public <T> Map<String, T> locate(Class<T> clazz)
 		throws BeanLocatorException;
+
+	public Object locate(String name) throws BeanLocatorException;
 
 }
