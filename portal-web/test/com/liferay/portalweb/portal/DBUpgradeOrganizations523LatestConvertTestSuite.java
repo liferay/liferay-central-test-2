@@ -24,7 +24,8 @@ import junit.framework.TestSuite;
 /**
  * @author Brian Wing Shun Chan
  */
-public class DBUpgradeOrganizations523LatestConvertTestSuite extends BaseTestSuite {
+public class DBUpgradeOrganizations523LatestConvertTestSuite
+	extends BaseTestSuite {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();

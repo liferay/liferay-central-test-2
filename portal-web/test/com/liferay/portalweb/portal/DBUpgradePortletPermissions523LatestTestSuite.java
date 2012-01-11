@@ -24,7 +24,8 @@ import junit.framework.TestSuite;
 /**
  * @author Brian Wing Shun Chan
  */
-public class DBUpgradePortletPermissions523LatestTestSuite extends BaseTestSuite {
+public class DBUpgradePortletPermissions523LatestTestSuite
+	extends BaseTestSuite {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
