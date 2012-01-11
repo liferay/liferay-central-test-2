@@ -23,7 +23,7 @@ import junit.framework.TestSuite;
 /**
  * @author Brian Wing Shun Chan
  */
-public class PluginsSampleIcefacesJSF11SunFaceletsTestSuite extends BaseTests {
+public class PluginsSampleIcefacesJSF11SunFaceletsTestSuite extends BaseTestSuite {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
