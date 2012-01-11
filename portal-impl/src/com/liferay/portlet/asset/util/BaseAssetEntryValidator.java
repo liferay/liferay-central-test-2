@@ -103,7 +103,7 @@ public class BaseAssetEntryValidator implements AssetEntryValidator {
 				className);
 
 		if ((assetRendererFactory == null) ||
-			(!assetRendererFactory.isCategorizable())) {
+			!assetRendererFactory.isCategorizable()) {
 
 			return;
 		}
