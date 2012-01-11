@@ -91,7 +91,7 @@ public class PortalSessionDestroyer extends BasePortalLifecycle {
 
 				if (clusterNode != null) {
 					jsonObject.put(
-							"clusterNodeId", clusterNode.getClusterNodeId());
+						"clusterNodeId", clusterNode.getClusterNodeId());
 				}
 
 				jsonObject.put("command", "signOut");
