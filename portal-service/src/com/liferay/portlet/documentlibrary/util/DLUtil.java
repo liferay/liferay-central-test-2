@@ -569,7 +569,7 @@ public class DLUtil {
 
 		return themeDisplay.getPortalURL() + themeDisplay.getPathContext() +
 			"/api/secure/webdav" + group.getFriendlyURL() +
-			"/document_library" + sb.toString();
+				"/document_library" + sb.toString();
 	}
 
 	private static long _getDefaultFolderId(HttpServletRequest request)

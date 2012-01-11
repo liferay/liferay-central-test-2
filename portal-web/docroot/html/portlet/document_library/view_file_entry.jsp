@@ -80,7 +80,6 @@ String fileUrl = themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "
 String webDavUrl = StringPool.BLANK;
 
 if (portletDisplay.isWebDAVEnabled()) {
-
 	webDavUrl = DLUtil.getWebDavURL(themeDisplay, folder, fileEntry);
 }
 

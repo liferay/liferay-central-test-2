@@ -411,7 +411,7 @@ if (row == null && (portletName.equals(PortletKeys.DOCUMENT_LIBRARY_DISPLAY) || 
 			<label><liferay-ui:message key="webdav-url" /></label>
 
 			<liferay-ui:input-resource
-				url='<%= DLUtil.getWebDavURL(themeDisplay, folder, null) %>'
+				url="<%= DLUtil.getWebDavURL(themeDisplay, folder, null) %>"
 			/>
 		</div>
 	</div>
