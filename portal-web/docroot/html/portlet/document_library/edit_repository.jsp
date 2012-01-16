@@ -87,23 +87,23 @@ long folderId = ParamUtil.getLong(request, "folderId");
 					</dd>
 
 					<%
-					UnicodeProperties repositoryTypeSettings = repository.getTypeSettingsProperties();
+					UnicodeProperties typeSettingsProperties = repository.getTypeSettingsProperties();
 
-					String configuration = repositoryTypeSettings.get("configuration-type");
+					String configuration = typeSettingsProperties.get("configuration-type");
 
 					String[] supportedParameters = RepositoryServiceUtil.getSupportedParameters(repository.getClassNameId(), configuration);
 
 					for (String supportedParameter : supportedParameters) {
-						String configurationParameterVal = repositoryTypeSettings.getProperty(supportedParameter);
+						String supportedParameterValue = typeSettingsProperties.getProperty(supportedParameter);
 
-						if (Validator.isNotNull(configurationParameterVal)) {
+						if (Validator.isNotNull(supportedParameterValue)) {
 					%>
 
 							<dt>
 								<%= LanguageUtil.get(pageContext, StringUtil.replace(supportedParameter.toLowerCase(), CharPool.UNDERLINE, CharPool.DASH)) %>
 							</dt>
 							<dd>
-								<%= configurationParameterVal %>
+								<%= supportedParameterValue %>
 							</dd>
 
 					<%
