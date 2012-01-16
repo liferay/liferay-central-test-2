@@ -32,8 +32,8 @@ portletURL.setParameter("struts_action", "/message_boards/view");
 
 <div class="top-links-container">
 	<div class="top-links">
-        <ul class="top-links-navigation">
-            <li class="top-link first">
+		<ul class="top-links-navigation">
+			<li class="top-link first">
 
 				<%
 				portletURL.setParameter("topLink", "message-boards-home");
@@ -45,9 +45,9 @@ portletURL.setParameter("struts_action", "/message_boards/view");
 					message="message-boards-home"
 					url='<%= (topLink.equals("message-boards-home") && categoryId == 0 && viewCategory) ? StringPool.BLANK : portletURL.toString() %>'
 				/>
-            </li>
+			</li>
 
-            <li class="top-link">
+			<li class="top-link">
 
 				<%
 				portletURL.setParameter("topLink", "recent-posts");
