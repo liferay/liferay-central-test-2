@@ -35,6 +35,7 @@ portletURL.setParameter("tag", StringPool.BLANK);
 	<div class="top-links">
 		<ul class="top-links-navigation">
 			<li class="top-link first">
+
 				<%
 				portletURL.setParameter("topLink", "home");
 				%>
