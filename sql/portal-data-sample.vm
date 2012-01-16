@@ -273,7 +273,7 @@ insert into Users_Roles values ($testUserId, $userRoleId);
 
 	insert into Users_Roles values ($batchUserId, $userRoleId);
 
-    insert into AssetEntry (entryId, groupId, companyId, userId, userName, createDate, modifiedDate, classNameId, classPK, classUuid, classTypeId, visible, startDate, endDate, publishDate, expirationDate, mimeType, title, description, summary, url, layoutUuid, height, width, priority, viewCount) VALUES ($counter.get(), $batchGroupId, $companyId, $testUserId, 'Joe Blogs', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 13, $batchUserId, '', 0, 0, NULL, NULL, NULL, NULL, '', 'Test LAX $cur', '', '', '', 0, 0, 0, 0, 0);
+	insert into AssetEntry (entryId, groupId, companyId, userId, userName, createDate, modifiedDate, classNameId, classPK, classUuid, classTypeId, visible, startDate, endDate, publishDate, expirationDate, mimeType, title, description, summary, url, layoutUuid, height, width, priority, viewCount) VALUES ($counter.get(), $batchGroupId, $companyId, $testUserId, 'Joe Blogs', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 13, $batchUserId, '', 0, 0, NULL, NULL, NULL, NULL, '', 'Test LAX $cur', '', '', '', 0, 0, 0, 0, 0);
 #end
 
 #foreach($count in [200..209])
