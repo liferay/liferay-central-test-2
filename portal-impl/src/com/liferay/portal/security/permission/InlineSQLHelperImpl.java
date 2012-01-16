@@ -439,9 +439,10 @@ public class InlineSQLHelperImpl implements InlineSQLHelper {
 		sb.append(") AND (");
 
 		long userId = getUserId();
-		List<Long> accessibleGroupIds = new ArrayList<Long>();
 
 		boolean hasPreviousViewableGroup = false;
+
+		List<Long> viewableGroupIds = new ArrayList<Long>();
 
 		for (int j = 0; j < groupIds.length; j++) {
 			long groupId = groupIds[j];
@@ -500,20 +501,20 @@ public class InlineSQLHelperImpl implements InlineSQLHelper {
 				sb.append(")");
 			}
 			else {
-				accessibleGroupIds.add(groupId);
+				viewableGroupIds.add(groupId);
 			}
 		}
 
 		sb.append(")");
 
-		if (!accessibleGroupIds.isEmpty()) {
-			for (Long accessibleGroupId : accessibleGroupIds) {
+		if (!viewableGroupIds.isEmpty()) {
+			for (Long viewableGroupId : viewableGroupIds) {
 				sb.append(" OR (");
 				sb.append(
 					classPKField.substring(
 						0, classPKField.lastIndexOf(CharPool.PERIOD)));
 				sb.append(".groupId = ");
-				sb.append(accessibleGroupId);
+				sb.append(viewableGroupId);
 				sb.append(")");
 			}
 		}
