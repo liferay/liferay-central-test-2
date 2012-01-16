@@ -47,23 +47,22 @@ public class PortletPreferencesLocalServiceStagingAdvice
 				return methodInvocation.proceed();
 			}
 
-			String methodName = methodInvocation.getMethod().getName();
+			Method method = methodInvocation.getMethod();
+
+			String methodName = method.getName();
 
 			if (methodName.equals("getPortletPreferences") &&
 				(arguments.length == 4)) {
 
 				return getPortletPreferences(methodInvocation);
 			}
-
-			if (methodName.equals("getPreferences")) {
+			else if (methodName.equals("getPreferences")) {
 				return getPreferences(methodInvocation);
 			}
-
-			if (methodName.equals("getStrictPreferences")) {
+			else if (methodName.equals("getStrictPreferences")) {
 				return getPreferences(methodInvocation);
 			}
-
-			if (methodName.equals("updatePreferences")) {
+			else if (methodName.equals("updatePreferences")) {
 				return updatePreferences(methodInvocation);
 			}
 
