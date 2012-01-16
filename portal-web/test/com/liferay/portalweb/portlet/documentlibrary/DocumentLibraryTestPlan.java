@@ -18,6 +18,7 @@ import com.liferay.portalweb.portal.BaseTestSuite;
 import com.liferay.portalweb.portlet.documentlibrary.breadcrumb.BreadcrumbTestPlan;
 import com.liferay.portalweb.portlet.documentlibrary.comment.CommentTestPlan;
 import com.liferay.portalweb.portlet.documentlibrary.document.DocumentTestPlan;
+import com.liferay.portalweb.portlet.documentlibrary.documenttype.DocumentTypeTestPlan;
 import com.liferay.portalweb.portlet.documentlibrary.folder.FolderTestPlan;
 import com.liferay.portalweb.portlet.documentlibrary.image.ImageTestPlan;
 import com.liferay.portalweb.portlet.documentlibrary.lar.LARTestPlan;
@@ -41,7 +42,7 @@ public class DocumentLibraryTestPlan extends BaseTestSuite {
 		testSuite.addTest(ImageTestPlan.suite());
 		testSuite.addTest(LARTestPlan.suite());
 		testSuite.addTest(PortletTestPlan.suite());
-
+		testSuite.addTest(DocumentTypeTestPlan.suite());
 		return testSuite;
 	}
 
