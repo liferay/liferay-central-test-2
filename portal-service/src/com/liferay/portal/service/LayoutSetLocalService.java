@@ -266,14 +266,13 @@ public interface LayoutSetLocalService extends PersistedModelLocalService {
 	* Updates the state of the layout set prototype link.
 	*
 	* <p>
-	* <strong>Important:</strong> This method can disable the layout set
-	* prototype's link by setting <code>layoutSetPrototypeLinkEnabled</code> to
-	* <code>false</code>. However, this method can only enable the layout set
-	* prototype's link if the layout set prototype's current uuid is not
-	* <code>null</code>. Setting the <code>layoutSetPrototypeLinkEnabled</code>
-	* to <code>true</code> when the layout set prototype's current uuid is
-	* <code>null</code> will result in an
-	* <code>java.lang.IllegalStateException</code>.
+	* This method can disable the layout set prototype's link by setting
+	* <code>layoutSetPrototypeLinkEnabled</code> to <code>false</code>.
+	* However, this method can only enable the layout set prototype's link if
+	* the layout set prototype's current uuid is not <code>null</code>. Setting
+	* the <code>layoutSetPrototypeLinkEnabled</code> to <code>true</code> when
+	* the layout set prototype's current uuid is <code>null</code> will result
+	* in an <code>IllegalStateException</code>.
 	* </p>
 	*
 	* @param groupId the primary key of the group
