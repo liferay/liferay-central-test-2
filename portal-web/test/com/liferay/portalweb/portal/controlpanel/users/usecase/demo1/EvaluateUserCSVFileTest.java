@@ -14,10 +14,7 @@
 
 package com.liferay.portalweb.portal.controlpanel.users.usecase.demo1;
 
-import com.liferay.portal.kernel.io.unsync.UnsyncBufferedReader;
-import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
 import com.liferay.portal.kernel.util.FileUtil;
-
 import com.liferay.portal.util.BaseTestCase;
 
 import com.liferay.portalweb.portal.util.TestPropsValues;
@@ -41,7 +38,7 @@ public class EvaluateUserCSVFileTest extends BaseTestCase {
 		}
 
 		if (!xml.contains(
-			"selen01 lenn nium01,liferay.qa.server.trunk2@gmail.com")) {
+				"selen01 lenn nium01,liferay.qa.server.trunk2@gmail.com")) {
 
 			return false;
 		}
