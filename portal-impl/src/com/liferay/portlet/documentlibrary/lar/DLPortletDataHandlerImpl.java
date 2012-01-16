@@ -1068,8 +1068,8 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 		if (fileEntry == null) {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
-					"Unable to retrieve file: " + fileEntryUuid +
-					" to import file rank.");
+					"Unable to retrieve file " + fileEntryUuid +
+						" to import file rank");
 			}
 
 			return;
@@ -1136,7 +1136,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
 					"Unable to fetch file entry {uuid=" + fileEntryUuid +
-						",groupId=" + groupId + "}");
+						", groupId=" + groupId + "}");
 			}
 
 			return;
@@ -1361,15 +1361,18 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 		try {
 			RepositoryLocalServiceUtil.addRepository(
 				userId, portletDataContext.getScopeGroupId(), classNameId,
-				DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, repository.getName(),
-				repository.getDescription(), repository.getPortletId(),
+				DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
+				repository.getName(), repository.getDescription(),
+				repository.getPortletId(),
 				repository.getTypeSettingsProperties(), serviceContext);
 		}
-		catch (PortalException e) {
+		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
-					"Unable to connect to repository. " + repository.getName() +
-					":" + repository.getTypeSettingsProperties(), e);
+					"Unable to connect to repository {name=" +
+						repository.getName() + ",typeSettings=" +
+							repository.getTypeSettingsProperties() + "}",
+					e);
 			}
 		}
 	}
