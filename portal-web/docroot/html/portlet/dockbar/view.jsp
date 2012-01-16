@@ -387,9 +387,9 @@ for (String portletId : PropsValues.DOCKBAR_ADD_PORTLETS) {
 
 		<liferay-portlet:actionURL portletName="<%= PortletKeys.LAYOUTS_ADMIN %>" var="resetPrototypeURL">
 			<portlet:param name="struts_action" value="/layouts_admin/edit_layouts" />
-			<portlet:param name="groupId" value="<%= String.valueOf(themeDisplay.getParentGroupId()) %>" />
 			<portlet:param name="<%= Constants.CMD %>" value="reset_prototype" />
 			<portlet:param name="redirect" value="<%= PortalUtil.getLayoutURL(themeDisplay) %>" />
+			<portlet:param name="groupId" value="<%= String.valueOf(themeDisplay.getParentGroupId()) %>" />
 		</liferay-portlet:actionURL>
 
 		<aui:form action="<%= resetPrototypeURL %>" cssClass="reset-prototype" name="resetFm">
