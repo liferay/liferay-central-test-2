@@ -45,6 +45,7 @@ String imageHover = (String)request.getAttribute("liferay-ui:icon:imageHover");
 boolean auiImage = (image != null) && image.startsWith(_AUI_PATH);
 
 String alt = (String)request.getAttribute("liferay-ui:icon:alt");
+
 String message = (String)request.getAttribute("liferay-ui:icon:message");
 
 if (message == null) {
