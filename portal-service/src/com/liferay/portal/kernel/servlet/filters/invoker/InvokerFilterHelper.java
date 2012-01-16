@@ -200,7 +200,7 @@ public class InvokerFilterHelper {
 			filter.init(filterConfig);
 		}
 		catch (Exception e) {
-			_log.error("Failed to initialize filter " + filterClassName, e);
+			_log.error("Unable to initialize filter " + filterClassName, e);
 
 			return;
 		}
