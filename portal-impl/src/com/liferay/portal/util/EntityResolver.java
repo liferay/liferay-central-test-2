@@ -192,6 +192,11 @@ public class EntityResolver implements org.xml.sax.EntityResolver {
 		),
 
 		new KeyValuePair(
+			"-//Liferay//DTD Hook 6.2.0//EN",
+			"liferay-hook_6_2_0.dtd"
+		),
+
+		new KeyValuePair(
 			"-//Liferay//DTD Layout Templates 3.6.0//EN",
 			"liferay-layout-templates_3_6_0.dtd"
 		),
