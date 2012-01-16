@@ -141,7 +141,6 @@ if ((article != null) && article.isDraft()) {
 		);
 	</c:if>
 
-
 	new A.Toolbar(
 		{
 			activeState: false,

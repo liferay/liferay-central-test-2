@@ -89,6 +89,7 @@ String keywords = ParamUtil.getString(request, "keywords");
 		<%
 		for (int i = 0; i < displayViews.length; i++) {
 		%>
+
 			displayStyleToolbarChildren.push(
 				{
 					handler: A.bind(onButtonClick, null, '<%= displayViews[i] %>'),
@@ -96,6 +97,7 @@ String keywords = ParamUtil.getString(request, "keywords");
 					title: '<%= UnicodeLanguageUtil.get(pageContext, displayViews[i] + "-view") %>'
 				}
 			);
+
 		<%
 		}
 		%>
