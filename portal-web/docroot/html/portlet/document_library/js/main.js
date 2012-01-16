@@ -154,8 +154,8 @@ AUI.add(
 						instance._dataRetrieveFailure = instance.ns('dataRetrieveFailure');
 						instance._eventDataRequest = instance.ns('dataRequest');
 						instance._eventDataRetrieveSuccess = instance.ns('dataRetrieveSuccess');
-						instance._eventPageLoaded = instance.ns('pageLoaded');
 						instance._eventOpenDocument = instance.ns('openDocument');
+						instance._eventPageLoaded = instance.ns('pageLoaded');
 
 						instance._displayStyleToolbarNode = instance.byId(DISPLAY_STYLE_TOOLBAR);
 						instance._entriesContainer = instance.byId('documentContainer');
@@ -219,8 +219,8 @@ AUI.add(
 							Liferay.on(instance._dataRetrieveFailure, instance._onDataRetrieveFailure, instance),
 							Liferay.on(instance._eventDataRequest, instance._onDataRequest, instance),
 							Liferay.on(instance._eventDataRetrieveSuccess, instance._onDataRetrieveSuccess, instance),
-							Liferay.on(instance._eventPageLoaded, instance._onPageLoaded, instance),
-							Liferay.on(instance._eventOpenDocument, instance._openDocument, instance)
+							Liferay.on(instance._eventOpenDocument, instance._openDocument, instance),
+							Liferay.on(instance._eventPageLoaded, instance._onPageLoaded, instance)
 						];
 
 						var folderContainer = instance.byId(STR_FOLDER_CONTAINER);

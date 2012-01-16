@@ -23,15 +23,15 @@
 		String curExtension = fileEntry.getExtension();
 
 		if (curExtension.equalsIgnoreCase("doc") ||
+			curExtension.equalsIgnoreCase("docx") ||
 			curExtension.equalsIgnoreCase("dot") ||
 			curExtension.equalsIgnoreCase("ppt") ||
-			curExtension.equalsIgnoreCase("xls") ||
-			curExtension.equalsIgnoreCase("docx") ||
 			curExtension.equalsIgnoreCase("pptx") ||
+			curExtension.equalsIgnoreCase("xls") ||
 			curExtension.equalsIgnoreCase("xlsx")) {
 
 			String taglibOnClick = "Liferay.fire('" + liferayPortletResponse.getNamespace() + "openDocument', {webDavUrl: '" + webDavUrl + "'});";
-		%>
+	%>
 
 			<liferay-ui:icon
 				image="../document_library/msoffice"
@@ -40,10 +40,8 @@
 				url="javascript:;"
 			/>
 
-		<%
-		}
-		%>
 	<%
+		}
 	}
 	%>
 </c:if>
