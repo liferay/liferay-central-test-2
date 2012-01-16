@@ -271,13 +271,13 @@ for (String portletId : PropsValues.DOCKBAR_ADD_PORTLETS) {
 			<span class="user-links <%= themeDisplay.isImpersonated() ? "menu-button": "" %>">
 
 				<%
-					String controlPanelCategory = StringPool.BLANK;
-					String useDialog = StringPool.BLANK;
+				String controlPanelCategory = StringPool.BLANK;
+				String useDialog = StringPool.BLANK;
 
-					if (!group.isControlPanel()) {
-						controlPanelCategory = PortletCategoryKeys.MY;
-						useDialog = StringPool.SPACE + "use-dialog";
-					}
+				if (!group.isControlPanel()) {
+					controlPanelCategory = PortletCategoryKeys.MY;
+					useDialog = StringPool.SPACE + "use-dialog";
+				}
 				%>
 
 				<aui:a cssClass='<%= "user-portrait" + useDialog %>' data-controlPanelCategory="<%= controlPanelCategory %>" href="<%= themeDisplay.getURLMyAccount().toString() %>" title="manage-my-account">
