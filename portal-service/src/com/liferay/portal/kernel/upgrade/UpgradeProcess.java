@@ -234,13 +234,22 @@ public abstract class UpgradeProcess {
 	protected void doUpgrade() throws Exception {
 	}
 
+	protected void upgradeTable(String tableName, Object[][] tableColumns)
+		throws Exception {
+
+		UpgradeTable upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
+			tableName, tableColumns);
+
+		upgradeTable.updateTable();
+	}
+
 	protected void upgradeTable(
 			String tableName, Object[][] tableColumns, String sqlCreate,
 			String[] sqlAddIndexes)
 		throws Exception {
 
 		UpgradeTable upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
-				tableName, tableColumns);
+			tableName, tableColumns);
 
 		upgradeTable.setCreateSQL(sqlCreate);
 		upgradeTable.setIndexesSQL(sqlAddIndexes);
