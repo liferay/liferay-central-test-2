@@ -159,18 +159,16 @@ public class JournalRSSUtil {
 		if (url.startsWith("/documents/")) {
 			String[] pathArray = StringUtil.split(url, CharPool.SLASH);
 
+			String uuid = null;
 			long groupId = GetterUtil.getLong(pathArray[2]);
-
 			long folderId = 0;
 			String title = null;
-			String uuid = null;
 
 			if (pathArray.length == 4) {
 				uuid = pathArray[3];
 			}
 			else if (pathArray.length == 5) {
 				folderId = GetterUtil.getLong(pathArray[3]);
-
 				title = HttpUtil.decodeURL(pathArray[4], true);
 			}
 			else if (pathArray.length > 5) {

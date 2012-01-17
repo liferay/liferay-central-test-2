@@ -380,21 +380,28 @@ public class DLUtil {
 		return mimeTypesArray;
 	}
 
+	/**
+	 * @deprecated {@link #getPreviewURL(FileEntry, FileVersion, ThemeDisplay,
+	 *             String, boolean, boolean)}
+	 */
 	public static String getPreviewURL(
 		FileEntry fileEntry, FileVersion fileVersion, ThemeDisplay themeDisplay,
 		String queryString) {
 
 		return getPreviewURL(
-			fileEntry, fileVersion, themeDisplay, queryString, true);
+			fileEntry, fileVersion, themeDisplay, queryString, true, true);
 	}
 
+	/**
+	 * @deprecated {@link #getPreviewURL(FileEntry, FileVersion, ThemeDisplay,
+	 *             String, boolean, boolean)}
+	 */
 	public static String getPreviewURL(
 		FileEntry fileEntry, FileVersion fileVersion, ThemeDisplay themeDisplay,
-		String queryString, boolean appendVersion) {
+		String queryString, boolean appendToken) {
 
 		return getPreviewURL(
-			fileEntry, fileVersion, themeDisplay, queryString, appendVersion,
-			true);
+			fileEntry, fileVersion, themeDisplay, queryString, true, true);		
 	}
 
 	public static String getPreviewURL(
@@ -533,7 +540,8 @@ public class DLUtil {
 
 			if (Validator.isNotNull(thumbnailQueryString)) {
 				thumbnailSrc = getPreviewURL(
-					fileEntry, fileVersion, themeDisplay, thumbnailQueryString);
+					fileEntry, fileVersion, themeDisplay, thumbnailQueryString,
+					true, true);
 			}
 		}
 

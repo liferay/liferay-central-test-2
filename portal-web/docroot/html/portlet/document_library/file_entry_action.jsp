@@ -99,7 +99,7 @@ viewFolderURL.setParameter("folderId", String.valueOf(folderId));
 					<liferay-ui:icon
 						image="download"
 						message='<%= LanguageUtil.get(pageContext, "download") + " (" + TextFormatter.formatKB(fileEntry.getSize(), locale) + "k)" %>'
-						url='<%= DLUtil.getPreviewURL(fileEntry, fileEntry.getFileVersion(), themeDisplay, StringPool.BLANK, false) %>'
+						url="<%= DLUtil.getPreviewURL(fileEntry, fileEntry.getFileVersion(), themeDisplay, StringPool.BLANK, false, true) %>"
 					/>
 				</c:if>
 

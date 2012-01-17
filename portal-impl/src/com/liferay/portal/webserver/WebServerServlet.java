@@ -285,6 +285,9 @@ public class WebServerServlet extends HttpServlet {
 				return false;
 			}
 
+			ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+				WebKeys.THEME_DISPLAY);
+
 			String queryString = StringPool.BLANK;
 
 			if (imageId == dlFileEntry.getSmallImageId()) {
@@ -297,13 +300,10 @@ public class WebServerServlet extends HttpServlet {
 				queryString = "&imageThumbnail=3";
 			}
 
-			ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
-				WebKeys.THEME_DISPLAY);
-
 			String url = DLUtil.getPreviewURL(
 				new LiferayFileEntry(dlFileEntry),
 				new LiferayFileVersion(dlFileEntry.getFileVersion()),
-				themeDisplay, queryString, true);
+				themeDisplay, queryString, true, true);
 
 			response.setHeader(HttpHeaders.LOCATION, url);
 			response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
