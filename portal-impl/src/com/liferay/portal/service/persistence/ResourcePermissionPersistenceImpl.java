@@ -28,12 +28,14 @@ import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InstanceFactory;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.CacheModel;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.model.ResourcePermission;
@@ -1073,6 +1075,16 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 		List<ResourcePermission> list = (List<ResourcePermission>)FinderCacheUtil.getResult(finderPath,
 				finderArgs, this);
 
+		if ((list != null) && !list.isEmpty()) {
+			for (ResourcePermission resourcePermission : list) {
+				if ((scope != resourcePermission.getScope())) {
+					list = null;
+
+					break;
+				}
+			}
+		}
+
 		if (list == null) {
 			StringBundler query = null;
 
@@ -1418,6 +1430,16 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 		List<ResourcePermission> list = (List<ResourcePermission>)FinderCacheUtil.getResult(finderPath,
 				finderArgs, this);
 
+		if ((list != null) && !list.isEmpty()) {
+			for (ResourcePermission resourcePermission : list) {
+				if (!ArrayUtil.contains(scopes, resourcePermission.getScope())) {
+					list = null;
+
+					break;
+				}
+			}
+		}
+
 		if (list == null) {
 			StringBundler query = new StringBundler();
 
@@ -1549,6 +1571,16 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 
 		List<ResourcePermission> list = (List<ResourcePermission>)FinderCacheUtil.getResult(finderPath,
 				finderArgs, this);
+
+		if ((list != null) && !list.isEmpty()) {
+			for (ResourcePermission resourcePermission : list) {
+				if ((roleId != resourcePermission.getRoleId())) {
+					list = null;
+
+					break;
+				}
+			}
+		}
 
 		if (list == null) {
 			StringBundler query = null;
@@ -1900,6 +1932,18 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 
 		List<ResourcePermission> list = (List<ResourcePermission>)FinderCacheUtil.getResult(finderPath,
 				finderArgs, this);
+
+		if ((list != null) && !list.isEmpty()) {
+			for (ResourcePermission resourcePermission : list) {
+				if ((companyId != resourcePermission.getCompanyId()) ||
+						!Validator.equals(name, resourcePermission.getName()) ||
+						(scope != resourcePermission.getScope())) {
+					list = null;
+
+					break;
+				}
+			}
+		}
 
 		if (list == null) {
 			StringBundler query = null;
@@ -2313,6 +2357,20 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 
 		List<ResourcePermission> list = (List<ResourcePermission>)FinderCacheUtil.getResult(finderPath,
 				finderArgs, this);
+
+		if ((list != null) && !list.isEmpty()) {
+			for (ResourcePermission resourcePermission : list) {
+				if ((companyId != resourcePermission.getCompanyId()) ||
+						!Validator.equals(name, resourcePermission.getName()) ||
+						(scope != resourcePermission.getScope()) ||
+						!Validator.equals(primKey,
+							resourcePermission.getPrimKey())) {
+					list = null;
+
+					break;
+				}
+			}
+		}
 
 		if (list == null) {
 			StringBundler query = null;
@@ -2768,6 +2826,20 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 
 		List<ResourcePermission> list = (List<ResourcePermission>)FinderCacheUtil.getResult(finderPath,
 				finderArgs, this);
+
+		if ((list != null) && !list.isEmpty()) {
+			for (ResourcePermission resourcePermission : list) {
+				if ((companyId != resourcePermission.getCompanyId()) ||
+						!Validator.equals(name, resourcePermission.getName()) ||
+						!Validator.equals(primKey,
+							resourcePermission.getPrimKey()) ||
+						(ownerId != resourcePermission.getOwnerId())) {
+					list = null;
+
+					break;
+				}
+			}
+		}
 
 		if (list == null) {
 			StringBundler query = null;
@@ -3228,6 +3300,21 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 
 		List<ResourcePermission> list = (List<ResourcePermission>)FinderCacheUtil.getResult(finderPath,
 				finderArgs, this);
+
+		if ((list != null) && !list.isEmpty()) {
+			for (ResourcePermission resourcePermission : list) {
+				if ((companyId != resourcePermission.getCompanyId()) ||
+						!Validator.equals(name, resourcePermission.getName()) ||
+						(scope != resourcePermission.getScope()) ||
+						!Validator.equals(primKey,
+							resourcePermission.getPrimKey()) ||
+						(roleId != resourcePermission.getRoleId())) {
+					list = null;
+
+					break;
+				}
+			}
+		}
 
 		if (list == null) {
 			StringBundler query = null;
@@ -3714,6 +3801,22 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 		List<ResourcePermission> list = (List<ResourcePermission>)FinderCacheUtil.getResult(finderPath,
 				finderArgs, this);
 
+		if ((list != null) && !list.isEmpty()) {
+			for (ResourcePermission resourcePermission : list) {
+				if ((companyId != resourcePermission.getCompanyId()) ||
+						!Validator.equals(name, resourcePermission.getName()) ||
+						(scope != resourcePermission.getScope()) ||
+						!Validator.equals(primKey,
+							resourcePermission.getPrimKey()) ||
+						!ArrayUtil.contains(roleIds,
+							resourcePermission.getRoleId())) {
+					list = null;
+
+					break;
+				}
+			}
+		}
+
 		if (list == null) {
 			StringBundler query = new StringBundler();
 
@@ -3932,6 +4035,21 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 
 		List<ResourcePermission> list = (List<ResourcePermission>)FinderCacheUtil.getResult(finderPath,
 				finderArgs, this);
+
+		if ((list != null) && !list.isEmpty()) {
+			for (ResourcePermission resourcePermission : list) {
+				if ((companyId != resourcePermission.getCompanyId()) ||
+						!Validator.equals(name, resourcePermission.getName()) ||
+						!Validator.equals(primKey,
+							resourcePermission.getPrimKey()) ||
+						(roleId != resourcePermission.getRoleId()) ||
+						(actionIds != resourcePermission.getActionIds())) {
+					list = null;
+
+					break;
+				}
+			}
+		}
 
 		if (list == null) {
 			StringBundler query = null;
@@ -4419,6 +4537,22 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 
 		List<ResourcePermission> list = (List<ResourcePermission>)FinderCacheUtil.getResult(finderPath,
 				finderArgs, this);
+
+		if ((list != null) && !list.isEmpty()) {
+			for (ResourcePermission resourcePermission : list) {
+				if ((companyId != resourcePermission.getCompanyId()) ||
+						!Validator.equals(name, resourcePermission.getName()) ||
+						(scope != resourcePermission.getScope()) ||
+						!Validator.equals(primKey,
+							resourcePermission.getPrimKey()) ||
+						(roleId != resourcePermission.getRoleId()) ||
+						(actionIds != resourcePermission.getActionIds())) {
+					list = null;
+
+					break;
+				}
+			}
+		}
 
 		if (list == null) {
 			StringBundler query = null;
@@ -4931,6 +5065,23 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 		List<ResourcePermission> list = (List<ResourcePermission>)FinderCacheUtil.getResult(finderPath,
 				finderArgs, this);
 
+		if ((list != null) && !list.isEmpty()) {
+			for (ResourcePermission resourcePermission : list) {
+				if ((companyId != resourcePermission.getCompanyId()) ||
+						!Validator.equals(name, resourcePermission.getName()) ||
+						(scope != resourcePermission.getScope()) ||
+						!Validator.equals(primKey,
+							resourcePermission.getPrimKey()) ||
+						!ArrayUtil.contains(roleIds,
+							resourcePermission.getRoleId()) ||
+						(actionIds != resourcePermission.getActionIds())) {
+					list = null;
+
+					break;
+				}
+			}
+		}
+
 		if (list == null) {
 			StringBundler query = new StringBundler();
 
@@ -5179,6 +5330,20 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 		if (retrieveFromCache) {
 			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_C_N_S_P_R_O_A,
 					finderArgs, this);
+		}
+
+		if (result instanceof ResourcePermission) {
+			ResourcePermission resourcePermission = (ResourcePermission)result;
+
+			if ((companyId != resourcePermission.getCompanyId()) ||
+					!Validator.equals(name, resourcePermission.getName()) ||
+					(scope != resourcePermission.getScope()) ||
+					!Validator.equals(primKey, resourcePermission.getPrimKey()) ||
+					(roleId != resourcePermission.getRoleId()) ||
+					(ownerId != resourcePermission.getOwnerId()) ||
+					(actionIds != resourcePermission.getActionIds())) {
+				result = null;
+			}
 		}
 
 		if (result == null) {
