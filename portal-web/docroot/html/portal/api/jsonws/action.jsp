@@ -231,6 +231,7 @@ String signature = ParamUtil.getString(request, "signature");
 			</aui:script>
 
 			<aui:form action='<%= jsonWebServiceActionMapping.getServletContextPath() + "/api/secure/jsonws" + jsonWebServiceActionMapping.getPath() %>' enctype="<%= enctype %>" name="execute"  method="<%= jsonWebServiceActionMapping.getMethod() %>">
+
 				<%
 				for (int i = 0; i < methodParameters.length; i++) {
 					MethodParameter methodParameter = methodParameters[i];
@@ -302,7 +303,7 @@ String signature = ParamUtil.getString(request, "signature");
 					Liferay.TPL_DATA_TYPES['<%= jsObjectType %>']['<%= methodParameterName %>'] = true;
 				</aui:script>
 
-				<%				
+				<%
 				}
 				%>
 
@@ -391,17 +392,15 @@ String signature = ParamUtil.getString(request, "signature");
 			);
 		</aui:script>
 
-<%-- Note: these template blocks are whitespace sensitive and need to be formatted like this  --%>
-
 <textarea class="aui-helper-hidden" id="scriptTpl">
 Liferay.Service(
   '<%= jsonWebServiceActionMapping.getServletContextPath() + jsonWebServiceActionMapping.getPath() %>',
   <tpl if="data.length">data: {
-    <tpl for="data">{key}: {value}<tpl if="!$last">,
-    </tpl></tpl>
+<%= StringPool.FOUR_SPACES %><tpl for="data">{key}: {value}<tpl if="!$last">,
+<%= StringPool.FOUR_SPACES %></tpl></tpl>
   },
   </tpl>function(obj) {
-    console.log(obj);
+<%= StringPool.FOUR_SPACES %>console.log(obj);
   }
 );
 </textarea>

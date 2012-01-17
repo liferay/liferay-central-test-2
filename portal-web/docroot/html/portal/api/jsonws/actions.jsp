@@ -17,15 +17,7 @@
 <%@ include file="/html/portal/api/jsonws/init.jsp" %>
 
 <%
-String contextPath = request.getParameter("contextPath");
-
 String signature = ParamUtil.getString(request, "signature");
-
-if (contextPath == null) {
-	contextPath = ContextPathUtil.getContextPath(application);
-}
-
-List<JSONWebServiceActionMapping> jsonWebServiceActionMappings = JSONWebServiceActionsManagerUtil.getJSONWebServiceActionMappings(contextPath);
 %>
 
 <aui:input cssClass="lfr-api-service-search" label="" name="serviceSearch" placeholder="search" />
@@ -33,7 +25,15 @@ List<JSONWebServiceActionMapping> jsonWebServiceActionMappings = JSONWebServiceA
 <div class="services" id="services">
 
 	<%
-	LinkedHashMap<String, LinkedHashSet> jsonWebServiceClasses = new LinkedHashMap<String, LinkedHashSet>();
+	Map<String, Set> jsonWebServiceClasses = new LinkedHashMap<String, Set>();
+
+	String contextPath = request.getParameter("contextPath");
+
+	if (contextPath == null) {
+		contextPath = ContextPathUtil.getContextPath(application);
+	}
+
+	List<JSONWebServiceActionMapping> jsonWebServiceActionMappings = JSONWebServiceActionsManagerUtil.getJSONWebServiceActionMappings(contextPath);
 
 	for (JSONWebServiceActionMapping jsonWebServiceActionMapping : jsonWebServiceActionMappings) {
 		Class<?> actionClass = jsonWebServiceActionMapping.getActionClass();
@@ -44,7 +44,7 @@ List<JSONWebServiceActionMapping> jsonWebServiceActionMappings = JSONWebServiceA
 			actionClassName = actionClassName.substring(0, actionClassName.length() - 11);
 		}
 
-		LinkedHashSet<JSONWebServiceActionMapping> jsonWebServiceMappings = jsonWebServiceClasses.get(actionClassName);
+		Set<JSONWebServiceActionMapping> jsonWebServiceMappings = jsonWebServiceClasses.get(actionClassName);
 
 		if (Validator.isNull(jsonWebServiceMappings)) {
 			jsonWebServiceMappings = new LinkedHashSet<JSONWebServiceActionMapping>();
@@ -55,36 +55,37 @@ List<JSONWebServiceActionMapping> jsonWebServiceActionMappings = JSONWebServiceA
 		jsonWebServiceMappings.add(jsonWebServiceActionMapping);
 	}
 
-
 	for (String jsonWebServiceClassName : jsonWebServiceClasses.keySet()) {
-		LinkedHashSet<JSONWebServiceActionMapping> jsonWebServiceMappings = jsonWebServiceClasses.get(jsonWebServiceClassName);
+		Set<JSONWebServiceActionMapping> jsonWebServiceMappings = jsonWebServiceClasses.get(jsonWebServiceClassName);
 	%>
 
 		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id='<%= "apiService" + jsonWebServiceClassName + "Panel" %>' persistState="<%= true %>" title="<%= jsonWebServiceClassName %>">
-		<ul class="lfr-component">
+			<ul class="lfr-component">
 
-			<%
-			for (JSONWebServiceActionMapping jsonWebServiceActionMapping : jsonWebServiceMappings) {
-				String path = jsonWebServiceActionMapping.getPath();
+				<%
+				for (JSONWebServiceActionMapping jsonWebServiceActionMapping : jsonWebServiceMappings) {
+					String path = jsonWebServiceActionMapping.getPath();
 
-				int pos = path.lastIndexOf(CharPool.SLASH);
+					int pos = path.lastIndexOf(CharPool.SLASH);
 
-				path = path.substring(pos + 1);
+					path = path.substring(pos + 1);
 
-				String serviceSignature = jsonWebServiceActionMapping.getSignature();
-			%>
-				<li class="lfr-api-signature <%= (serviceSignature.equals(signature)) ? "selected" : StringPool.BLANK %>">
-					<a class="method-name lfr-api-service-result" data-metaData="<%= jsonWebServiceClassName %>" href="?signature=<%= serviceSignature %>">
-						<%= path %>
-					</a>
-				</li>
-			<%
-			}
-			%>
+					String serviceSignature = jsonWebServiceActionMapping.getSignature();
+				%>
+
+					<li class="lfr-api-signature <%= (serviceSignature.equals(signature)) ? "selected" : StringPool.BLANK %>">
+						<a class="method-name lfr-api-service-result" data-metaData="<%= jsonWebServiceClassName %>" href="?signature=<%= serviceSignature %>">
+							<%= path %>
+						</a>
+					</li>
+
+				<%
+				}
+				%>
 
 			</ul>
 		</liferay-ui:panel>
-	
+
 	<%
 	}
 	%>
@@ -127,8 +128,8 @@ List<JSONWebServiceActionMapping> jsonWebServiceActionMappings = JSONWebServiceA
 		function(item, index, collection) {
 			results.push(
 				{
-					node: item,
 					el: item._node,
+					node: item,
 					text: Lang.trim(item.text())
 				}
 			);

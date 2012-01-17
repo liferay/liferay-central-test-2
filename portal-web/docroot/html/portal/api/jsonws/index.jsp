@@ -16,10 +16,6 @@
 
 <%@ include file="/html/portal/api/jsonws/init.jsp" %>
 
-<%
-String signature = ParamUtil.getString(request, "signature");
-%>
-
 <style>
 	<%@ include file="/html/portal/api/jsonws/css.jspf" %>
 </style>
