@@ -556,7 +556,6 @@
 		<!-- Transactions -->
 
 		<tx-required>getFileDeltaAsStream</tx-required>
-		
 	</entity>
 	<exceptions>
 		<exception>DirectoryName</exception>
