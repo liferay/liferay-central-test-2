@@ -358,8 +358,8 @@ public interface Portal {
 	 *
 	 * @param  completeURL the complete URL of the page
 	 * @param  themeDisplay the current theme display
-	 * @param  layout the layout. If it is null, then it is generated for the
-	 * 		   current layout
+	 * @param  layout the layout. If it is <code>null</code>, then it is
+	 *         generated for the current layout
 	 * @return the canonical URL
 	 * @throws PortalException if a friendly URL or the group could not be
 	 *         retrieved
