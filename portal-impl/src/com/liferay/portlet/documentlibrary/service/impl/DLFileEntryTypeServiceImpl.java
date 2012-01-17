@@ -84,8 +84,8 @@ public class DLFileEntryTypeServiceImpl extends DLFileEntryTypeServiceBaseImpl {
 	}
 
 	public int searchCount(
-		long companyId, long[] groupIds, String keywords,
-		boolean includeBasicFileEntryType)
+			long companyId, long[] groupIds, String keywords,
+			boolean includeBasicFileEntryType)
 		throws SystemException {
 
 		return dlFileEntryTypeFinder.filterCountByKeywords(
