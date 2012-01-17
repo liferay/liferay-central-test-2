@@ -84,25 +84,25 @@ public class ProcessExecutorTest extends TestCase {
 
 		processExecutor.destroy();
 
-		assertNull(getExecutorService());
+		assertNull(_getExecutorService());
 
 		// Idle destroy
 
-		ExecutorService executorService = invokeGetExecutorService();
+		ExecutorService executorService = _invokeGetExecutorService();
 
 		assertNotNull(executorService);
-		assertNotNull(getExecutorService());
+		assertNotNull(_getExecutorService());
 
 		processExecutor.destroy();
 
-		assertNull(getExecutorService());
+		assertNull(_getExecutorService());
 
 		// Busy destroy
 
-		executorService = invokeGetExecutorService();
+		executorService = _invokeGetExecutorService();
 
 		assertNotNull(executorService);
-		assertNotNull(getExecutorService());
+		assertNotNull(_getExecutorService());
 
 		DummyJob dummyJob = new DummyJob();
 
@@ -123,7 +123,7 @@ public class ProcessExecutorTest extends TestCase {
 			assertTrue(throwable instanceof InterruptedException);
 		}
 
-		assertNull(getExecutorService());
+		assertNull(_getExecutorService());
 	}
 
 	public void testException() throws Exception {
@@ -199,7 +199,7 @@ public class ProcessExecutorTest extends TestCase {
 
 			// Wait for signal file to be removed indicating the log is done
 
-			waitForSignalFile(signalFile, false);
+			_waitForSignalFile(signalFile, false);
 
 			String outByteArrayOutputStreamString =
 				outByteArrayOutputStream.toString();
@@ -241,7 +241,7 @@ public class ProcessExecutorTest extends TestCase {
 		assertEquals(DummyReturnProcessCallable.class.getName(), result);
 	}
 
-	private static ExecutorService getExecutorService() throws Exception {
+	private static ExecutorService _getExecutorService() throws Exception {
 		Field field = ProcessExecutor.class.getDeclaredField(
 			"_executorService");
 
@@ -250,7 +250,7 @@ public class ProcessExecutorTest extends TestCase {
 		return (ExecutorService)field.get(null);
 	}
 
-	private static ExecutorService invokeGetExecutorService() throws Exception {
+	private static ExecutorService _invokeGetExecutorService() throws Exception {
 		Method method = ProcessExecutor.class.getDeclaredMethod(
 			"_getExecutorService");
 
@@ -259,7 +259,7 @@ public class ProcessExecutorTest extends TestCase {
 		return (ExecutorService)method.invoke(method);
 	}
 
-	private static void waitForSignalFile(
+	private static void _waitForSignalFile(
 			File signalFile, boolean expectedExists)
 		throws Exception {
 
@@ -338,7 +338,7 @@ public class ProcessExecutorTest extends TestCase {
 
 		public Serializable call() throws ProcessException {
 			try {
-				waitForSignalFile(_signalFile, true);
+				_waitForSignalFile(_signalFile, true);
 
 				System.out.print(_logMessage);
 				System.err.print(_logMessage);
@@ -351,7 +351,7 @@ public class ProcessExecutorTest extends TestCase {
 							_signalFile.getAbsolutePath());
 				}
 
-				waitForSignalFile(_signalFile, true);
+				_waitForSignalFile(_signalFile, true);
 			}
 			catch (Exception e) {
 				throw new ProcessException(e);

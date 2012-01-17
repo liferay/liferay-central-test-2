@@ -34,12 +34,10 @@ import javax.servlet.http.HttpSession;
  */
 public class SessionParameters {
 
-	public static final boolean USE_SESSION_PARAMETERS = GetterUtil.getBoolean(
-		SystemProperties.get(SessionParameters.class.getName()), true);
-
 	public static final String KEY = SessionParameters.class.getName();
 
-	// Servlet Request
+	public static final boolean USE_SESSION_PARAMETERS = GetterUtil.getBoolean(
+		SystemProperties.get(SessionParameters.class.getName()), true);
 
 	public static String get(HttpServletRequest request, String parameter) {
 		return get(request.getSession(), parameter);
@@ -64,8 +62,6 @@ public class SessionParameters {
 		return newParameter;
 	}
 
-	// Portlet Request
-
 	public static String get(PortletRequest portletRequest, String parameter) {
 		return get(portletRequest.getPortletSession(), parameter);
 	}
@@ -89,8 +85,6 @@ public class SessionParameters {
 		return newParameter;
 	}
 
-	// Servlet Request
-
 	private static Map<String, String> _getParameters(HttpSession session) {
 		Map<String, String> parameters = null;
 
@@ -109,8 +103,6 @@ public class SessionParameters {
 
 		return parameters;
 	}
-
-	// Portlet Request
 
 	private static Map<String, String> _getParameters(
 		PortletSession portletSession) {

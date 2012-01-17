@@ -14,6 +14,7 @@
 
 package com.liferay.portal.convert.util;
 
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.upgrade.util.Table;
@@ -33,7 +34,7 @@ public class ResourcePermissionView extends Table {
 	}
 
 	public static long getCompanyId(String[] values) {
-		return Long.parseLong(values[0]);
+		return GetterUtil.getLong(values[0]);
 	}
 
 	public static String getPrimaryKey(String[] values) {
@@ -41,11 +42,11 @@ public class ResourcePermissionView extends Table {
 	}
 
 	public static long getRoleId(String[] values) {
-		return Long.parseLong(values[3]);
+		return GetterUtil.getLong(values[3]);
 	}
 
 	public static int getScope(String[] values) {
-		return Integer.parseInt(values[1]);
+		return GetterUtil.getInteger(values[1]);
 	}
 
 	public ResourcePermissionView(String name) {

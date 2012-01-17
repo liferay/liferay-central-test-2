@@ -329,6 +329,17 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 	private static ThreadLocal<LRUMap> _localCache;
 	private static boolean _localCacheAvailable;
 
+	static {
+		if (PropsValues.VALUE_OBJECT_ENTITY_THREAD_LOCAL_CACHE_MAX_SIZE > 0) {
+			_localCache = new AutoResetThreadLocal<LRUMap>(
+				EntityCacheImpl.class + "._localCache",
+				new LRUMap(
+					PropsValues.
+						VALUE_OBJECT_ENTITY_THREAD_LOCAL_CACHE_MAX_SIZE));
+			_localCacheAvailable = true;
+		}
+	}
+
 	private MultiVMPool _multiVMPool;
 	private ConcurrentMap<String, PortalCache> _portalCaches =
 		new ConcurrentHashMap<String, PortalCache>();
@@ -407,17 +418,6 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 		private final Serializable _primaryKey;
 		private final String _shardName;
 
-	}
-
-	static {
-		if (PropsValues.VALUE_OBJECT_ENTITY_THREAD_LOCAL_CACHE_MAX_SIZE > 0) {
-			_localCache = new AutoResetThreadLocal<LRUMap>(
-				EntityCacheImpl.class + "._localCache",
-				new LRUMap(
-					PropsValues.
-						VALUE_OBJECT_ENTITY_THREAD_LOCAL_CACHE_MAX_SIZE));
-			_localCacheAvailable = true;
-		}
 	}
 
 }
