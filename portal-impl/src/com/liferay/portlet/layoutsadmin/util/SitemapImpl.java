@@ -209,7 +209,6 @@ public class SitemapImpl implements Sitemap {
 		}
 
 		visitArticles(element, layout, themeDisplay);
-
 		visitLayouts(element, layout.getChildren(), themeDisplay);
 	}
 
