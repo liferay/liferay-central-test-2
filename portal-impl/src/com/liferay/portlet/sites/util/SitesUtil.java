@@ -970,6 +970,22 @@ public class SitesUtil {
 		}
 	}
 
+	public static void resetPrototype(Layout layout)
+		throws PortalException, SystemException {
+
+		layout.setModifiedDate(null);
+
+		LayoutLocalServiceUtil.updateLayout(layout, false);
+
+		LayoutSet layoutSet = layout.getLayoutSet();
+		UnicodeProperties settingsProperties =
+			layoutSet.getSettingsProperties();
+
+		settingsProperties.remove("last-merge-time");
+
+		LayoutSetLocalServiceUtil.updateLayoutSet(layoutSet, false);
+	}
+
 	public static void updateLayoutSetPrototypesLinks(
 			Group group, long publicLayoutSetPrototypeId,
 			long privateLayoutSetPrototypeId,
@@ -1121,22 +1137,6 @@ public class SitesUtil {
 		}
 	}
 
-	public static void resetPrototype(Layout layout)
-		throws PortalException, SystemException {
-
-		layout.setModifiedDate(null);
-
-		LayoutLocalServiceUtil.updateLayout(layout, false);
-
-		LayoutSet layoutSet = layout.getLayoutSet();
-		UnicodeProperties settingsProperties =
-			layoutSet.getSettingsProperties();
-
-		settingsProperties.remove("last-merge-time");
-
-		LayoutSetLocalServiceUtil.updateLayoutSet(layoutSet, false);
-	}
-
 	protected static void setLayoutSetPrototypeLinkEnabledParameter(
 		Map<String, String[]> parameterMap, LayoutSet targetLayoutSet,
 		ServiceContext serviceContext) {
@@ -1215,10 +1215,10 @@ public class SitesUtil {
 			layoutSetPrototypeUuid);
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(SitesUtil.class);
-
 	private static final String _TEMP_DIR =
 		SystemProperties.get(SystemProperties.TMP_DIR) +
 			"/liferay/layout_set_prototype/";
+
+	private static Log _log = LogFactoryUtil.getLog(SitesUtil.class);
 
 }
