@@ -250,7 +250,9 @@ public class ProcessExecutorTest extends TestCase {
 		return (ExecutorService)field.get(null);
 	}
 
-	private static ExecutorService _invokeGetExecutorService() throws Exception {
+	private static ExecutorService _invokeGetExecutorService()
+		throws Exception {
+
 		Method method = ProcessExecutor.class.getDeclaredMethod(
 			"_getExecutorService");
 
