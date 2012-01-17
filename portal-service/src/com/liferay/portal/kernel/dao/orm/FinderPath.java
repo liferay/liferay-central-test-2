@@ -36,34 +36,14 @@ public class FinderPath {
 		String[] params) {
 
 		this(
-			entityCacheEnabled, finderCacheEnabled, resultClass, true,
-			cacheName, methodName, params, -1);
-	}
-
-	public FinderPath(
-		boolean entityCacheEnabled, boolean finderCacheEnabled,
-		Class<?> resultClass, boolean useModelCacheKeyGenerator,
-		String cacheName, String methodName, String[] params) {
-
-		this(
-			entityCacheEnabled, finderCacheEnabled, resultClass,
-			useModelCacheKeyGenerator, cacheName, methodName, params, -1);
+			entityCacheEnabled, finderCacheEnabled, resultClass, cacheName,
+			methodName, params, -1);
 	}
 
 	public FinderPath(
 		boolean entityCacheEnabled, boolean finderCacheEnabled,
 		Class<?> resultClass, String cacheName, String methodName,
 		String[] params, long columnBitmask) {
-
-		this(entityCacheEnabled, finderCacheEnabled, resultClass, true,
-			cacheName, methodName, params, columnBitmask);
-	}
-
-	public FinderPath(
-		boolean entityCacheEnabled, boolean finderCacheEnabled,
-		Class<?> resultClass, boolean useModelCacheKeyGenerator,
-		String cacheName, String methodName, String[] params,
-		long columnBitmask) {
 
 		_entityCacheEnabled = entityCacheEnabled;
 		_finderCacheEnabled = finderCacheEnabled;
@@ -73,8 +53,10 @@ public class FinderPath {
 		_params = params;
 		_columnBitmask = columnBitmask;
 
-		_isModelResult = useModelCacheKeyGenerator &&
-			BaseModel.class.isAssignableFrom(_resultClass);
+		if (BaseModel.class.isAssignableFrom(_resultClass)) {
+			_cacheKeyGeneratorCacheName =
+				FinderCache.class.getName() + "#BaseModel";
+		}
 
 		_initCacheKeyPrefix();
 		_initLocalCacheKeyPrefix();
@@ -92,15 +74,7 @@ public class FinderPath {
 			sb.append(StringUtil.toHexString(arg));
 		}
 
-		if (_isModelResult) {
-			return _modelCacheKeyGenerator.getCacheKey(sb);
-		}
-
-		CacheKeyGenerator cacheKeyGenerator =
-			CacheKeyGeneratorUtil.getCacheKeyGenerator(
-				FinderCache.class.getName());
-
-		return cacheKeyGenerator.getCacheKey(sb);
+		return _getCacheKey(sb);
 	}
 
 	public Serializable encodeLocalCacheKey(Object[] args) {
@@ -115,15 +89,7 @@ public class FinderPath {
 			sb.append(StringUtil.toHexString(arg));
 		}
 
-		if (_isModelResult) {
-			return _modelCacheKeyGenerator.getCacheKey(sb);
-		}
-
-		CacheKeyGenerator cacheKeyGenerator =
-			CacheKeyGeneratorUtil.getCacheKeyGenerator(
-				FinderCache.class.getName());
-
-		return cacheKeyGenerator.getCacheKey(sb);
+		return _getCacheKey(sb);
 	}
 
 	public String getCacheName() {
@@ -154,14 +120,25 @@ public class FinderPath {
 		return _finderCacheEnabled;
 	}
 
-	public static FinderPath setModelCacheKeyGenerator(
-		CacheKeyGenerator modelCacheKeyGenerator) {
-		_modelCacheKeyGenerator = modelCacheKeyGenerator;
+	public void setCacheKeyGeneratorCacheName(
+		String cacheKeyGeneratorCacheName) {
 
-		return new FinderPath();
+		_cacheKeyGeneratorCacheName = cacheKeyGeneratorCacheName;
 	}
 
-	private FinderPath() {
+	private Serializable _getCacheKey(StringBundler sb) {
+		CacheKeyGenerator cacheKeyGenerator = null;
+
+		if (_cacheKeyGeneratorCacheName != null) {
+			cacheKeyGenerator = CacheKeyGeneratorUtil.getCacheKeyGenerator(
+				_cacheKeyGeneratorCacheName);
+		}
+		else {
+			cacheKeyGenerator = CacheKeyGeneratorUtil.getCacheKeyGenerator(
+				FinderCache.class.getName());
+		}
+
+		return cacheKeyGenerator.getCacheKey(sb);
 	}
 
 	private void _initCacheKeyPrefix() {
@@ -189,14 +166,12 @@ public class FinderPath {
 
 	private static final String _PARAMS_SEPARATOR = "_P_";
 
-	private static CacheKeyGenerator _modelCacheKeyGenerator;
-
+	private String _cacheKeyGeneratorCacheName;
 	private String _cacheKeyPrefix;
 	private String _cacheName;
 	private long _columnBitmask;
 	private boolean _entityCacheEnabled;
 	private boolean _finderCacheEnabled;
-	private boolean _isModelResult;
 	private String _localCacheKeyPrefix;
 	private String _methodName;
 	private String[] _params;

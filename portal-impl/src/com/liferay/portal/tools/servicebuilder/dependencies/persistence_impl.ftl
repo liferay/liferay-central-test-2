@@ -676,7 +676,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 						if (
 							<#list finderColsList as finderCol>
 								<#if finderCol.isPrimitiveType()>
-									${entity.varName}.get${finderCol.methodName}() != ${entity.varName}ModelImpl.getOriginal${finderCol.methodName}()
+									(${entity.varName}.get${finderCol.methodName}() != ${entity.varName}ModelImpl.getOriginal${finderCol.methodName}())
 								<#else>
 									!Validator.equals(${entity.varName}.get${finderCol.methodName}(), ${entity.varName}ModelImpl.getOriginal${finderCol.methodName}())
 								</#if>
@@ -686,7 +686,6 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 								</#if>
 							</#list>
 						) {
-
 							Object[] args = new Object[] {
 								<#list finderColsList as finderCol>
 									<#if finderCol.isPrimitiveType()>
@@ -1077,19 +1076,20 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 				if ((list != null) && !list.isEmpty()) {
 					for (${entity.name} ${entity.varName} : list) {
 						if (
-						<#list finderColsList as finderCol>
-							<#if finderCol.isPrimitiveType(false)>
-								${finderCol.name} != ${entity.varName}.get${finderCol.methodName}()
-							<#else>
-								!Validator.equals(${finderCol.name}, ${entity.varName}.get${finderCol.methodName}())
-							</#if>
+							<#list finderColsList as finderCol>
+								<#if finderCol.isPrimitiveType(false)>
+									(${finderCol.name} != ${entity.varName}.get${finderCol.methodName}())
+								<#else>
+									!Validator.equals(${finderCol.name}, ${entity.varName}.get${finderCol.methodName}())
+								</#if>
 
-							<#if finderCol_has_next>
-								||
-							</#if>
-						</#list>
+								<#if finderCol_has_next>
+									||
+								</#if>
+							</#list>
 						) {
 							list = null;
+
 							break;
 						}
 					}
@@ -1508,23 +1508,24 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 					if ((list != null) && !list.isEmpty()) {
 						for (${entity.name} ${entity.varName} : list) {
 							if (
-							<#list finderColsList as finderCol>
-								<#if finderCol.hasArrayableOperator()>
-									!ArrayUtil.contains(${finderCol.names}, ${entity.varName}.get${finderCol.methodName}())
-								<#else>
-									<#if finderCol.isPrimitiveType(false)>
-										${finderCol.name} != ${entity.varName}.get${finderCol.methodName}()
+								<#list finderColsList as finderCol>
+									<#if finderCol.hasArrayableOperator()>
+										!ArrayUtil.contains(${finderCol.names}, ${entity.varName}.get${finderCol.methodName}())
 									<#else>
-										!Validator.equals(${finderCol.name}, ${entity.varName}.get${finderCol.methodName}())
+										<#if finderCol.isPrimitiveType(false)>
+											(${finderCol.name} != ${entity.varName}.get${finderCol.methodName}())
+										<#else>
+											!Validator.equals(${finderCol.name}, ${entity.varName}.get${finderCol.methodName}())
+										</#if>
 									</#if>
-								</#if>
 
-								<#if finderCol_has_next>
-									||
-								</#if>
-							</#list>
+									<#if finderCol_has_next>
+										||
+									</#if>
+								</#list>
 							) {
 								list = null;
+
 								break;
 							}
 						}
@@ -2381,16 +2382,17 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 					${entity.name} ${entity.varName} = (${entity.name})result;
 
 					if (
-					<#list finderColsList as finderCol>
-						<#if finderCol.isPrimitiveType(false)>
-							${finderCol.name} != ${entity.varName}.get${finderCol.methodName}()
-						<#else>
-							!Validator.equals(${finderCol.name}, ${entity.varName}.get${finderCol.methodName}())
-						</#if>
-						<#if finderCol_has_next>
-							||
-						</#if>
-					</#list>
+						<#list finderColsList as finderCol>
+							<#if finderCol.isPrimitiveType(false)>
+								(${finderCol.name} != ${entity.varName}.get${finderCol.methodName}())
+							<#else>
+								!Validator.equals(${finderCol.name}, ${entity.varName}.get${finderCol.methodName}())
+							</#if>
+
+							<#if finderCol_has_next>
+								||
+							</#if>
+						</#list>
 					) {
 						result = null;
 					}
@@ -2435,20 +2437,17 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 							cacheResult(${entity.varName});
 
 							if (
+								<#list finderColsList as finderCol>
+									<#if finderCol.isPrimitiveType()>
+										(${entity.varName}.get${finderCol.methodName}() != ${finderCol.name})
+									<#else>
+										(${entity.varName}.get${finderCol.methodName}() == null) || !${entity.varName}.get${finderCol.methodName}().equals(${finderCol.name})
+									</#if>
 
-							<#list finderColsList as finderCol>
-								<#if finderCol.isPrimitiveType()>
-									(${entity.varName}.get${finderCol.methodName}() != ${finderCol.name})
-								<#else>
-									(${entity.varName}.get${finderCol.methodName}() == null) ||
-									!${entity.varName}.get${finderCol.methodName}().equals(${finderCol.name})
-								</#if>
-
-								<#if finderCol_has_next>
-									||
-								</#if>
-							</#list>
-
+									<#if finderCol_has_next>
+										||
+									</#if>
+								</#list>
 							) {
 								FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_${finder.name?upper_case}, finderArgs, ${entity.varName});
 							}
@@ -3127,12 +3126,10 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 				<#if column.mappingTable??>
 					${entity.name}ModelImpl.FINDER_CACHE_ENABLED_${stringUtil.upperCase(column.mappingTable)},
 					${tempEntity.packagePath}.model.impl.${tempEntity.name}Impl.class,
-					false,
 					${entity.name}ModelImpl.MAPPING_TABLE_${stringUtil.upperCase(column.mappingTable)}_NAME,
 				<#else>
 					${tempEntity.packagePath}.model.impl.${tempEntity.name}ModelImpl.FINDER_CACHE_ENABLED,
 					${tempEntity.packagePath}.model.impl.${tempEntity.name}Impl.class,
-					false,
 					${tempEntity.packagePath}.service.persistence.${tempEntity.name}PersistenceImpl.FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
 				</#if>
 
@@ -3146,6 +3143,10 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 					.class.getName(), "java.lang.Integer", "java.lang.Integer", "com.liferay.portal.kernel.util.OrderByComparator"
 				});
+
+			static {
+				FINDER_PATH_GET_${tempEntity.names?upper_case}.setCacheKeyGeneratorCacheName(null);
+			}
 
 			/**
 			 * Returns an ordered range of all the ${tempEntity.humanNames} associated with the ${entity.humanName}.
@@ -3223,12 +3224,10 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 				<#if column.mappingTable??>
 					${entity.name}ModelImpl.FINDER_CACHE_ENABLED_${stringUtil.upperCase(column.mappingTable)},
 					Long.class,
-					false,
 					${entity.name}ModelImpl.MAPPING_TABLE_${stringUtil.upperCase(column.mappingTable)}_NAME,
 				<#else>
 					${tempEntity.packagePath}.model.impl.${tempEntity.name}ModelImpl.FINDER_CACHE_ENABLED,
 					${tempEntity.packagePath}.model.impl.${tempEntity.name}Impl.class,
-					false,
 					${tempEntity.packagePath}.service.persistence.${tempEntity.name}PersistenceImpl.FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
 				</#if>
 
@@ -3242,6 +3241,10 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 					.class.getName()
 				});
+
+			static {
+				FINDER_PATH_GET_${tempEntity.names?upper_case}_SIZE.setCacheKeyGeneratorCacheName(null);
+			}
 
 			/**
 			 * Returns the number of ${tempEntity.humanNames} associated with the ${entity.humanName}.

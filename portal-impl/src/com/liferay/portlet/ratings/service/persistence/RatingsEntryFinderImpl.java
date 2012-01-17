@@ -63,9 +63,10 @@ public class RatingsEntryFinderImpl
 
 		if ((list != null) && !list.isEmpty()) {
 			for (RatingsEntry ratingsEntry : list) {
-				if (userId != ratingsEntry.getUserId() ||
-					classNameId != ratingsEntry.getClassNameId() ||
+				if ((userId != ratingsEntry.getUserId()) ||
+					(classNameId != ratingsEntry.getClassNameId()) ||
 					!classPKs.contains(ratingsEntry.getClassPK())) {
+
 					list = null;
 
 					break;

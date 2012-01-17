@@ -60,8 +60,9 @@ public class RatingsStatsFinderImpl
 
 		if ((list != null) && !list.isEmpty()) {
 			for (RatingsStats ratingsStats : list) {
-				if (classNameId != ratingsStats.getClassNameId() ||
+				if ((classNameId != ratingsStats.getClassNameId()) ||
 					!classPKs.contains(ratingsStats.getClassPK())) {
+
 					list = null;
 
 					break;

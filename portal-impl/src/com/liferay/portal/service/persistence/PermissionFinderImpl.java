@@ -715,6 +715,7 @@ public class PermissionFinderImpl
 				if (!Validator.equals(actionId, permission.getActionId()) ||
 					!ArrayUtil.contains(
 						resourceIds, permission.getResourceId())) {
+
 					list = null;
 
 					break;
