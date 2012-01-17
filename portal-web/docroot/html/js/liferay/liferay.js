@@ -23,7 +23,7 @@ Liferay = window.Liferay || {};
 	 * service {string|object}: Either the service name, or an IO configuration object containing a property named service.
 	 *
 	 * Optional
-	 * data {object|node|string}: The data to send to the service. If the object passed is the ID of a form or a form element, the form fields will be serialized and used as the data. 
+	 * data {object|node|string}: The data to send to the service. If the object passed is the ID of a form or a form element, the form fields will be serialized and used as the data.
 	 * successCallback {function}: A function to execute when the server returns a response. It receives a JSON object as it's first parameter.
 	 * exceptionCallback {function}: A function to execute when the response from the server contains a service exception. It receives a the exception message as it's first parameter.
 	 */
