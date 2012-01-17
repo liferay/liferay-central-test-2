@@ -1198,14 +1198,17 @@ public class SitesUtil {
 			if (layoutSetPrototype != null) {
 				layoutSetPrototypeUuid = layoutSetPrototype.getUuid();
 
-				// This means merge without creating a link
+				// Merge without creating a link
 
-				if (!layoutSetPrototypeLinkEnabled && (layoutSetPrototypeId > 0)) {
+				if (!layoutSetPrototypeLinkEnabled &&
+					(layoutSetPrototypeId > 0)) {
+
 					Map<String, String[]> parameterMap =
 						getLayoutSetPrototypesParameters(true);
 
 					importLayoutSetPrototype(
-						layoutSetPrototype, groupId, privateLayout, parameterMap);
+						layoutSetPrototype, groupId, privateLayout,
+						parameterMap);
 				}
 			}
 		}
