@@ -250,7 +250,7 @@ public interface Portal {
 	 * @return the array of alternate locales
 	 */
 	public Locale[] getAlternateLocales(HttpServletRequest request)
-			throws SystemException, PortalException;
+		throws PortalException, SystemException;
 
 	/**
 	 * Returns the alternate URL of the page, to distinguish it from its

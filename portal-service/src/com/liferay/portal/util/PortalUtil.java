@@ -200,11 +200,11 @@ public class PortalUtil {
 	}
 
 	public static Locale[] getAlternateLocales(HttpServletRequest request)
-			throws SystemException, PortalException {
-	
-			return getPortal().getAlternateLocales(request);
+		throws PortalException, SystemException {
+
+		return getPortal().getAlternateLocales(request);
 	}
-	
+
 	public static String getAlternateURL(
 		String canonicalURL, ThemeDisplay themeDisplay, Locale locale) {
 

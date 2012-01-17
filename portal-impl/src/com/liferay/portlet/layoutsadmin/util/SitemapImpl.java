@@ -73,6 +73,38 @@ public class SitemapImpl implements Sitemap {
 		return document.asXML();
 	}
 
+	protected void addURLElement(
+		Element element, String url, UnicodeProperties typeSettingsProperties) {
+
+		Element urlElement = element.addElement("url");
+
+		Element locElement = urlElement.addElement("loc");
+
+		locElement.addText(encodeXML(url));
+
+		if (typeSettingsProperties == null) {
+			return;
+		}
+
+		String changefreq = typeSettingsProperties.getProperty(
+			"sitemap-changefreq");
+
+		if (Validator.isNotNull(changefreq)) {
+			Element changefreqElement = urlElement.addElement("changefreq");
+
+			changefreqElement.addText(changefreq);
+		}
+
+		String priority = typeSettingsProperties.getProperty(
+			"sitemap-priority");
+
+		if (Validator.isNotNull(priority)) {
+			Element priorityElement = urlElement.addElement("priority");
+
+			priorityElement.addText(priority);
+		}
+	}
+
 	protected void visitArticles(
 			Element element, Layout layout, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
@@ -115,18 +147,19 @@ public class SitemapImpl implements Sitemap {
 			String articleURL = PortalUtil.getCanonicalURL(
 				sb.toString(), themeDisplay, layout);
 
-			generateSitemapTag(element, articleURL, null);
-			
-			Locale defaultLocale = LocaleUtil.getDefault();
+			addURLElement(element, articleURL, null);
+
 			Locale[] availableLocales = LanguageUtil.getAvailableLocales();
 
 			if (availableLocales.length > 1) {
-				for (Locale curLocale : availableLocales) {
-					if (!curLocale.equals(defaultLocale)) {
-						String alternateURL = PortalUtil.getAlternateURL(
-							articleURL, themeDisplay, curLocale);
+				Locale defaultLocale = LocaleUtil.getDefault();
 
-						generateSitemapTag(element, alternateURL, null);
+				for (Locale availableLocale : availableLocales) {
+					if (!availableLocale.equals(defaultLocale)) {
+						String alternateURL = PortalUtil.getAlternateURL(
+							articleURL, themeDisplay, availableLocale);
+
+						addURLElement(element, alternateURL, null);
 					}
 				}
 			}
@@ -154,61 +187,30 @@ public class SitemapImpl implements Sitemap {
 			layout, themeDisplay);
 
 		layoutFullURL = PortalUtil.getCanonicalURL(
-					layoutFullURL, themeDisplay, layout);
+			layoutFullURL, themeDisplay, layout);
 
-		generateSitemapTag(element, layoutFullURL, typeSettingsProperties);
-		
-		Locale defaultLocale = LocaleUtil.getDefault();
+		addURLElement(element, layoutFullURL, typeSettingsProperties);
+
 		Locale[] availableLocales = LanguageUtil.getAvailableLocales();
 
 		if (availableLocales.length > 1) {
-			for (Locale curLocale : availableLocales) {
-				if (curLocale.equals(defaultLocale)) {
+			Locale defaultLocale = LocaleUtil.getDefault();
+
+			for (Locale availableLocale : availableLocales) {
+				if (availableLocale.equals(defaultLocale)) {
 					continue;
 				}
 
 				String alternateURL = PortalUtil.getAlternateURL(
-					layoutFullURL, themeDisplay, curLocale);
+					layoutFullURL, themeDisplay, availableLocale);
 
-				generateSitemapTag(element, alternateURL, null);
+				addURLElement(element, alternateURL, null);
 			}
 		}
 
 		visitArticles(element, layout, themeDisplay);
 
-		List<Layout> children = layout.getChildren();
-
-		visitLayouts(element, children, themeDisplay);
-	}
-	
-	protected void generateSitemapTag(
-		Element element, String url, UnicodeProperties typeSettingsProperties) {
-		
-		Element urlElement = element.addElement("url");
-
-		Element locElement = urlElement.addElement("loc");
-
-		locElement.addText(encodeXML(url));
-
-		if(typeSettingsProperties != null) {
-			String changefreq = typeSettingsProperties.getProperty(
-				"sitemap-changefreq");
-
-			if (Validator.isNotNull(changefreq)) {
-				Element changefreqElement = urlElement.addElement("changefreq");
-
-				changefreqElement.addText(changefreq);
-			}
-
-			String priority = typeSettingsProperties.getProperty(
-				"sitemap-priority");
-
-			if (Validator.isNotNull(priority)) {
-				Element priorityElement = urlElement.addElement("priority");
-
-				priorityElement.addText(priority);
-			}
-		}
+		visitLayouts(element, layout.getChildren(), themeDisplay);
 	}
 
 	protected void visitLayouts(
