@@ -510,17 +510,18 @@ public class DLUtil {
 	}
 
 	public static String getThumbnailSrc(
-			FileEntry fileEntry, DLFileShortcut fileShortcut,
+			FileEntry fileEntry, DLFileShortcut dlFileShortcut,
 			ThemeDisplay themeDisplay)
 		throws Exception {
 
 		return getThumbnailSrc(
-			fileEntry, fileEntry.getFileVersion(), fileShortcut, themeDisplay);
+			fileEntry, fileEntry.getFileVersion(), dlFileShortcut,
+			themeDisplay);
 	}
 
 	public static String getThumbnailSrc(
 			FileEntry fileEntry, FileVersion fileVersion,
-			DLFileShortcut fileShortcut, ThemeDisplay themeDisplay)
+			DLFileShortcut dlFileShortcut, ThemeDisplay themeDisplay)
 		throws Exception {
 
 		StringBundler sb = new StringBundler(4);
@@ -532,7 +533,7 @@ public class DLUtil {
 
 		String thumbnailSrc = sb.toString();
 
-		if (fileShortcut == null) {
+		if (dlFileShortcut == null) {
 			String thumbnailQueryString = null;
 
 			if (ImageProcessorUtil.hasImages(fileVersion)) {
