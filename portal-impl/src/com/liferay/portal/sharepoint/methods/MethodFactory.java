@@ -117,11 +117,9 @@ public class MethodFactory {
 		return methodImpl;
 	}
 
-	private static final String _CHECKOUT_METHOD_IMPL =
-		GetterUtil.getString(
-			PropsUtil.get(
-				MethodFactory.class.getName() + ".CHECKOUT"),
-			CheckoutMethodImpl.class.getName());
+	private static final String _CHECKOUT_METHOD_IMPL = GetterUtil.getString(
+		PropsUtil.get(MethodFactory.class.getName() + ".CHECKOUT"),
+		CheckoutMethodImpl.class.getName());
 
 	private static final String _CREATE_URL_DIRECTORIES_METHOD_IMPL =
 		GetterUtil.getString(

@@ -187,11 +187,13 @@ public abstract class BasePropMethodImpl implements Method {
 
 			Lock lock = resource.getLock();
 
-			if (lock == null || resource.isLocked()) {
-				DocUtil.add(successPropElement, ISREADONLY, "false");
+			if ((lock == null) || resource.isLocked()) {
+				DocUtil.add(
+					successPropElement, ISREADONLY, Boolean.FALSE.toString());
 			}
 			else {
-				DocUtil.add(successPropElement, ISREADONLY, "true");
+				DocUtil.add(
+					successPropElement, ISREADONLY, Boolean.TRUE.toString());
 			}
 
 			hasSuccess = true;
