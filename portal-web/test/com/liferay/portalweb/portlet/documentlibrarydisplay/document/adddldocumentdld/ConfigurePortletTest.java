@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2011 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portalweb.portlet.documentlibrarydisplay.portlet.adddocumentportlet;
+package com.liferay.portalweb.portlet.documentlibrarydisplay.document.adddldocumentdld;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
@@ -28,6 +28,7 @@ public class ConfigurePortletTest extends BaseTestCase {
 			switch (label) {
 			case 1:
 				selenium.open("/web/guest/home/");
+				loadRequiredJavaScriptModules();
 
 				for (int second = 0;; second++) {
 					if (second >= 90) {
@@ -50,10 +51,11 @@ public class ConfigurePortletTest extends BaseTestCase {
 					RuntimeVariables.replace(
 						"Documents and Media Display Test Page"));
 				selenium.waitForPageToLoad("30000");
+				loadRequiredJavaScriptModules();
 				Thread.sleep(5000);
 				assertEquals(RuntimeVariables.replace("Options"),
-					selenium.getText("//strong/a"));
-				selenium.clickAt("//strong/a",
+					selenium.getText("//span[@title='Options']/ul/li/strong/a"));
+				selenium.clickAt("//span[@title='Options']/ul/li/strong/a",
 					RuntimeVariables.replace("Options"));
 
 				for (int second = 0;; second++) {
@@ -110,6 +112,7 @@ public class ConfigurePortletTest extends BaseTestCase {
 				selenium.clickAt("//input[@value='Save']",
 					RuntimeVariables.replace("Save"));
 				selenium.waitForPageToLoad("30000");
+				loadRequiredJavaScriptModules();
 				assertEquals(RuntimeVariables.replace(
 						"You have successfully updated the setup."),
 					selenium.getText("//div[@class='portlet-msg-success']"));
@@ -130,6 +133,7 @@ public class ConfigurePortletTest extends BaseTestCase {
 				selenium.clickAt("//input[@value='Save']",
 					RuntimeVariables.replace("Save"));
 				selenium.waitForPageToLoad("30000");
+				loadRequiredJavaScriptModules();
 				assertEquals(RuntimeVariables.replace(
 						"You have successfully updated the setup."),
 					selenium.getText("//div[@class='portlet-msg-success']"));

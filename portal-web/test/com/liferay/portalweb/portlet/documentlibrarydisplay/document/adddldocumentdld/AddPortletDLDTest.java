@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2011 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portalweb.portlet.documentlibrarydisplay.portlet.adddocumentportlet;
+package com.liferay.portalweb.portlet.documentlibrarydisplay.document.adddldocumentdld;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
@@ -20,9 +20,10 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 /**
  * @author Brian Wing Shun Chan
  */
-public class AddDLDDocumentTest extends BaseTestCase {
-	public void testAddDLDDocument() throws Exception {
+public class AddPortletDLDTest extends BaseTestCase {
+	public void testAddPortletDLD() throws Exception {
 		selenium.open("/web/guest/home/");
+		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -44,7 +45,11 @@ public class AddDLDDocumentTest extends BaseTestCase {
 		selenium.clickAt("link=Documents and Media Display Test Page",
 			RuntimeVariables.replace("Documents and Media Display Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.clickAt("link=Add Document", RuntimeVariables.replace(""));
+		loadRequiredJavaScriptModules();
+		assertTrue(selenium.isPartialText("//a[@id='_145_addApplication']",
+				"More"));
+		selenium.clickAt("//a[@id='_145_addApplication']",
+			RuntimeVariables.replace("More"));
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -52,7 +57,8 @@ public class AddDLDDocumentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("//iframe")) {
+				if (selenium.isElementPresent(
+							"//div[@title='Documents and Media Display']/p/a")) {
 					break;
 				}
 			}
@@ -62,7 +68,8 @@ public class AddDLDDocumentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.selectFrame("//iframe");
+		selenium.clickAt("//div[@title='Documents and Media Display']/p/a",
+			RuntimeVariables.replace("Add"));
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -70,7 +77,7 @@ public class AddDLDDocumentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("link=Basic Document")) {
+				if (selenium.isVisible("//section")) {
 					break;
 				}
 			}
@@ -80,37 +87,6 @@ public class AddDLDDocumentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("link=Basic Document",
-			RuntimeVariables.replace("Basic Document"));
-		selenium.selectFrame("relative=top");
-
-		for (int second = 0;; second++) {
-			if (second >= 90) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isVisible("//input[@type='file']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.type("//input[@type='file']",
-			RuntimeVariables.replace(
-				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\documentlibrarydisplay\\dependencies\\DLDocument.docx"));
-		selenium.clickAt("//input[@value='Publish']",
-			RuntimeVariables.replace("Publish"));
-		selenium.waitForPageToLoad("30000");
-		Thread.sleep(5000);
-		assertEquals(RuntimeVariables.replace(
-				"Your request completed successfully."),
-			selenium.getText("//div[@class='portlet-msg-success']"));
-		assertEquals(RuntimeVariables.replace("DLDocument.txt"),
-			selenium.getText("//span[@class='entry-title']"));
+		assertTrue(selenium.isVisible("//section"));
 	}
 }

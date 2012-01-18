@@ -1,12 +1,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>AddDLDDocumentTest</title>
+<title>AddDLDocumentDLDTest</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">AddDLDDocumentTest</td></tr>
+<tr><td rowspan="1" colspan="3">AddDLDocumentDLDTest</td></tr>
 </thead><tbody>
 <tr>
 	<td>open</td>
@@ -24,9 +24,14 @@
 	<td>Documents and Media Display Test Page</td>
 </tr>
 <tr>
+	<td>assertText</td>
+	<td>//div[contains(@class,'lfr-component lfr-menu-list')]/ul/li[5]/a</td>
+	<td>Add Document</td>
+</tr>
+<tr>
 	<td>clickAt</td>
-	<td>link=Add Document</td>
-	<td></td>
+	<td>//div[contains(@class,'lfr-component lfr-menu-list')]/ul/li[5]/a</td>
+	<td>Add Document</td>
 </tr>
 <tr>
 	<td>waitForVisible</td>
@@ -37,6 +42,11 @@
 	<td>selectFrame</td>
 	<td>//iframe</td>
 	<td>Select Document Type</td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
 </tr>
 <tr>
 	<td>waitForVisible</td>
@@ -56,7 +66,7 @@
 <tr>
 	<td>waitForVisible</td>
 	<td>//input[@type='file']</td>
-	<td></td>
+	<td>File</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -69,9 +79,9 @@
 	<td>Publish</td>
 </tr>
 <tr>
-	<td>pause</td>
-	<td>5000</td>
-	<td></td>
+	<td>waitForText</td>
+	<td>//div[@class='portlet-msg-success']</td>
+	<td>Your request completed successfully.</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -81,9 +91,8 @@
 <tr>
 	<td>assertText</td>
 	<td>//span[@class='entry-title']</td>
-	<td>DLDocument.txt</td>
+	<td>DLDocument.docx</td>
 </tr>
-
 </tbody></table>
 </body>
 </html>

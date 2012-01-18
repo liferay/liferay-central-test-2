@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2011 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portalweb.portlet.documentlibrarydisplay.portlet.adddocumentportlet;
+package com.liferay.portalweb.portlet.documentlibrarydisplay.document.adddldocumentdld;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
@@ -28,6 +28,7 @@ public class TearDownDLDocumentTest extends BaseTestCase {
 			switch (label) {
 			case 1:
 				selenium.open("/web/guest/home/");
+				loadRequiredJavaScriptModules();
 
 				for (int second = 0;; second++) {
 					if (second >= 90) {
@@ -48,9 +49,11 @@ public class TearDownDLDocumentTest extends BaseTestCase {
 				selenium.clickAt("link=Control Panel",
 					RuntimeVariables.replace("Control Panel"));
 				selenium.waitForPageToLoad("30000");
+				loadRequiredJavaScriptModules();
 				selenium.clickAt("link=Documents and Media",
 					RuntimeVariables.replace("Documents and Media"));
 				selenium.waitForPageToLoad("30000");
+				loadRequiredJavaScriptModules();
 
 				boolean iconViewNotSelected = selenium.isElementPresent(
 						"//button[contains(@class,'item-focused') and @title='Icon View']");
@@ -128,6 +131,7 @@ public class TearDownDLDocumentTest extends BaseTestCase {
 				selenium.clickAt("//div[@class='lfr-component lfr-menu-list']/ul/li[5]/a",
 					RuntimeVariables.replace("Delete"));
 				selenium.waitForPageToLoad("30000");
+				loadRequiredJavaScriptModules();
 				assertTrue(selenium.getConfirmation()
 								   .matches("^Are you sure you want to delete the selected entries[\\s\\S]$"));
 
