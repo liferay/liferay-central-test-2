@@ -62,8 +62,10 @@ public class Table {
 
 	public static final String[][] SAFE_CHARS = {
 		{StringPool.RETURN, StringPool.COMMA, StringPool.NEW_LINE},
-		{Table.SAFE_RETURN_CHARACTER, Table.SAFE_COMMA_CHARACTER,
-			Table.SAFE_NEWLINE_CHARACTER}
+		{
+			Table.SAFE_RETURN_CHARACTER, Table.SAFE_COMMA_CHARACTER,
+			Table.SAFE_NEWLINE_CHARACTER
+		}
 	};
 
 	public static final String SAFE_COMMA_CHARACTER = "_SAFE_COMMA_CHARACTER_";
