@@ -401,7 +401,7 @@ public class DLUtil {
 		String queryString, boolean appendToken) {
 
 		return getPreviewURL(
-			fileEntry, fileVersion, themeDisplay, queryString, true, true);		
+			fileEntry, fileVersion, themeDisplay, queryString, true, true);
 	}
 
 	public static String getPreviewURL(
