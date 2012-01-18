@@ -216,10 +216,9 @@ public class DataSourceSwapper {
 			ClassLoader portletClassLoader =
 				portletSessionFactoryImpl.getSessionFactoryClassLoader();
 
-			Thread currentThread = Thread.currentThread();
+			PortletClassLoaderUtil.setClassLoader(portletClassLoader);
 
-			PortletClassLoaderUtil.setClassLoader(
-				currentThread.getId(), portletClassLoader);
+			Thread currentThread = Thread.currentThread();
 
 			ClassLoader oldContextClassLoader =
 				currentThread.getContextClassLoader();
@@ -242,8 +241,7 @@ public class DataSourceSwapper {
 					sessionFactoryImplementor);
 			}
 			finally {
-				PortletClassLoaderUtil.setClassLoader(
-					currentThread.getId(), oldPortletClassLoader);
+				PortletClassLoaderUtil.setClassLoader(oldPortletClassLoader);
 
 				currentThread.setContextClassLoader(oldContextClassLoader);
 			}

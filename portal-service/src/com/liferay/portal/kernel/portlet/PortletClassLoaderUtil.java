@@ -27,11 +27,9 @@ import javax.servlet.ServletContext;
 public class PortletClassLoaderUtil {
 
 	public static ClassLoader getClassLoader() {
-		return _classLoadersByThread.get(Thread.currentThread().getId());
-	}
+		Thread currentThread = Thread.currentThread();
 
-	public static ClassLoader getClassLoader(Long threadId) {
-		return _classLoadersByThread.get(threadId);
+		return _classLoaders.get(currentThread.getId());
 	}
 
 	public static ClassLoader getClassLoader(String portletId) {
@@ -54,15 +52,17 @@ public class PortletClassLoaderUtil {
 		return _servletContextName;
 	}
 
-	public static void setClassLoader(Long threadId, ClassLoader classLoader) {
-		_classLoadersByThread.put(threadId, classLoader);
+	public static void setClassLoader(ClassLoader classLoader) {
+		Thread currentThread = Thread.currentThread();
+
+		_classLoaders.put(currentThread.getId(), classLoader);
 	}
 
 	public static void setServletContextName(String servletContextName) {
 		_servletContextName = servletContextName;
 	}
 
-	private static Map<Long, ClassLoader> _classLoadersByThread =
+	private static Map<Long, ClassLoader> _classLoaders =
 		new HashMap<Long, ClassLoader>();
 
 	private static String _servletContextName;

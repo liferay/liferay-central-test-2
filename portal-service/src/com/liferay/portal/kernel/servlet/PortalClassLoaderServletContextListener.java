@@ -52,11 +52,10 @@ public abstract class PortalClassLoaderServletContextListener
 
 	@Override
 	protected void doPortalDestroy() {
-		Thread currentThread = Thread.currentThread();
-
-		PortletClassLoaderUtil.setClassLoader(
-			currentThread.getId(), _portletClassLoader);
+		PortletClassLoaderUtil.setClassLoader(_portletClassLoader);
 		PortletClassLoaderUtil.setServletContextName(_servletContextName);
+
+		Thread currentThread = Thread.currentThread();
 
 		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
 
@@ -69,18 +68,17 @@ public abstract class PortalClassLoaderServletContextListener
 		finally {
 			currentThread.setContextClassLoader(contextClassLoader);
 
-			PortletClassLoaderUtil.setClassLoader(currentThread.getId(), null);
+			PortletClassLoaderUtil.setClassLoader(null);
 			PortletClassLoaderUtil.setServletContextName(null);
 		}
 	}
 
 	@Override
 	protected void doPortalInit() throws Exception {
-		Thread currentThread = Thread.currentThread();
-
-		PortletClassLoaderUtil.setClassLoader(
-			currentThread.getId(), _portletClassLoader);
+		PortletClassLoaderUtil.setClassLoader(_portletClassLoader);
 		PortletClassLoaderUtil.setServletContextName(_servletContextName);
+
+		Thread currentThread = Thread.currentThread();
 
 		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
 
