@@ -16,7 +16,6 @@ package com.liferay.portal.kernel.dao.orm;
 
 import com.liferay.portal.kernel.cache.key.CacheKeyGenerator;
 import com.liferay.portal.kernel.cache.key.CacheKeyGeneratorUtil;
-import com.liferay.portal.kernel.cache.key.ThreadSafeCacheKeyGenerator;
 import com.liferay.portal.kernel.dao.shard.ShardUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -67,8 +66,7 @@ public class FinderPath {
 				_cacheKeyGeneratorCacheName);
 
 		if (cacheKeyGenerator.isCallingGetCacheKeyThreadSafe()) {
-			_cacheKeyGenerator = new ThreadSafeCacheKeyGenerator(
-				cacheKeyGenerator);
+			_cacheKeyGenerator = cacheKeyGenerator;
 		}
 
 		_initCacheKeyPrefix();
@@ -147,8 +145,7 @@ public class FinderPath {
 				cacheKeyGeneratorCacheName);
 
 		if (cacheKeyGenerator.isCallingGetCacheKeyThreadSafe()) {
-			_cacheKeyGenerator = new ThreadSafeCacheKeyGenerator(
-				cacheKeyGenerator);
+			_cacheKeyGenerator = cacheKeyGenerator;
 		}
 		else {
 			_cacheKeyGenerator = null;
