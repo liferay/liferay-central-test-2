@@ -324,6 +324,7 @@ Group scopeGroup = themeDisplay.getScopeGroup();
 						</c:if>
 
 						<aui:fieldset label="asset-entry-type">
+
 							<%
 							Set<Long> availableClassNameIdsSet = SetUtil.fromArray(availableClassNameIds);
 
