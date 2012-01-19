@@ -677,9 +677,10 @@ public class WebServerServlet extends HttpServlet {
 			Field field = null;
 
 			if (className.equals(DDLRecord.class.getName())) {
-				DDLRecord record = DDLRecordLocalServiceUtil.getRecord(classPK);
+				DDLRecord ddlRecord = DDLRecordLocalServiceUtil.getRecord(
+					classPK);
 
-				field = record.getField(fieldName);
+				field = ddlRecord.getField(fieldName);
 			}
 			else if (className.equals(DLFileEntryMetadata.class.getName())) {
 				DLFileEntryMetadata fileEntryMetadata =

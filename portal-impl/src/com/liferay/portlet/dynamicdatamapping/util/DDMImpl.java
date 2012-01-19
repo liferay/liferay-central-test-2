@@ -19,7 +19,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.servlet.ServletResponseUtil;
-import com.liferay.portal.kernel.upload.UploadHttpRequest;
+import com.liferay.portal.kernel.upload.UploadRequest;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.MimeTypesUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -60,6 +60,14 @@ import javax.servlet.http.HttpServletResponse;
  * @author Eduardo Lundgren
  */
 public class DDMImpl implements DDM {
+
+	public static final String TYPE_CHECKBOX = "checkbox";
+
+	public static final String TYPE_DDM_FILEUPLOAD = "ddm-fileupload";
+
+	public static final String TYPE_RADIO = "radio";
+
+	public static final String TYPE_SELECT = "select";
 
 	public Fields getFields(
 			long ddmStructureId, long ddmTemplateId,
@@ -111,10 +119,10 @@ public class DDMImpl implements DDM {
 				Object value = serviceContext.getAttribute(
 					fieldNamespace + fieldName);
 
-				String[] fieldValues = new String[] {};
+				String[] fieldValues = {};
 
 				if (value instanceof String) {
-					fieldValues = new String[] { String.valueOf(value) };
+					fieldValues = new String[] {String.valueOf(value)};
 				}
 				else if (value instanceof String[]) {
 					fieldValues = (String[])value;
@@ -243,11 +251,11 @@ public class DDMImpl implements DDM {
 
 		HttpServletRequest request = serviceContext.getRequest();
 
-		if (!(request instanceof UploadHttpRequest)) {
+		if (!(request instanceof UploadRequest)) {
 			return StringPool.BLANK;
 		}
 
-		UploadHttpRequest uploadRequest = (UploadHttpRequest)request;
+		UploadRequest uploadRequest = (UploadRequest)request;
 
 		String fileName = uploadRequest.getFileName(fieldNamespace + fieldName);
 
@@ -319,13 +327,5 @@ public class DDMImpl implements DDM {
 
 		return fileName;
 	}
-
-	public static final String TYPE_CHECKBOX = "checkbox";
-
-	public static final String TYPE_DDM_FILEUPLOAD = "ddm-fileupload";
-
-	public static final String TYPE_RADIO = "radio";
-
-	public static final String TYPE_SELECT = "select";
 
 }

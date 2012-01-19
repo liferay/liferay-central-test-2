@@ -252,9 +252,9 @@ public class DDMXSDImpl implements DDMXSD {
 				jsonObject.put(attribute.getName(), attribute.getValue());
 			}
 
-			String type = jsonObject.getString("type");
-
 			jsonObject.put("id", dynamicElementElement.attributeValue("name"));
+
+			String type = jsonObject.getString("type");
 
 			List<Element> metadataElements = dynamicElementElement.elements(
 				"meta-data");
@@ -479,7 +479,7 @@ public class DDMXSDImpl implements DDMXSD {
 						attributeName,
 						JSONFactoryUtil.createJSONArray(attributeValue));
 				}
-				catch(Exception e) {
+				catch (Exception e) {
 				}
 
 				return;
