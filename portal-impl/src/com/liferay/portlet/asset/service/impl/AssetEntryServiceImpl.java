@@ -73,9 +73,7 @@ public class AssetEntryServiceImpl extends AssetEntryServiceBaseImpl {
 		AssetEntryQuery filteredEntryQuery = buildFilteredEntryQuery(
 			entryQuery);
 
-		if (hasEntryQueryResults(
-				entryQuery, filteredEntryQuery)) {
-
+		if (hasEntryQueryResults(entryQuery, filteredEntryQuery)) {
 			return new ArrayList<AssetEntry>();
 		}
 
@@ -90,9 +88,7 @@ public class AssetEntryServiceImpl extends AssetEntryServiceBaseImpl {
 		AssetEntryQuery filteredEntryQuery = buildFilteredEntryQuery(
 			entryQuery);
 
-		if (hasEntryQueryResults(
-				entryQuery, filteredEntryQuery)) {
-
+		if (hasEntryQueryResults(entryQuery, filteredEntryQuery)) {
 			return 0;
 		}
 
