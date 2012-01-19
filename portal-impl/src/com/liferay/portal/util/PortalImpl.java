@@ -4389,7 +4389,7 @@ public class PortalImpl implements Portal {
 		}
 
 		if (layout.isTypePanel() &&
-			isSelectedPanelPortlet(portletId, themeDisplay)) {
+			isPanelSelectedPortlet(themeDisplay, portletId)) {
 
 			return true;
 		}
@@ -4788,25 +4788,6 @@ public class PortalImpl implements Portal {
 		}
 
 		return secure;
-	}
-
-	public boolean isSelectedPanelPortlet(
-		String portletId, ThemeDisplay themeDisplay) {
-
-		boolean selected = false;
-
-		Layout layout = themeDisplay.getLayout();
-
-		String panelSelectedPortlets =
-			layout.getTypeSettingsProperty("panelSelectedPortlets");
-
-		if (Validator.isNotNull(panelSelectedPortlets)) {
-			String[] selectedPortletIds = panelSelectedPortlets.split(",");
-
-			selected = ArrayUtil.contains(selectedPortletIds, portletId);
-		}
-
-		return selected;
 	}
 
 	public boolean isSystemGroup(String groupName) {
@@ -6065,6 +6046,24 @@ public class PortalImpl implements Portal {
 		TicketLocalServiceUtil.updateTicket(ticket, false);
 
 		return true;
+	}
+
+	protected boolean isPanelSelectedPortlet(
+		ThemeDisplay themeDisplay, String portletId) {
+
+		Layout layout = themeDisplay.getLayout();
+
+		String panelSelectedPortlets = layout.getTypeSettingsProperty(
+			"panelSelectedPortlets");
+
+		if (Validator.isNotNull(panelSelectedPortlets)) {
+			String[] panelSelectedPortletsArray = StringUtil.split(
+				panelSelectedPortlets);
+
+			return ArrayUtil.contains(panelSelectedPortletsArray, portletId);
+		}
+
+		return false;
 	}
 
 	protected void notifyPortalPortEventListeners(int portalPort) {
