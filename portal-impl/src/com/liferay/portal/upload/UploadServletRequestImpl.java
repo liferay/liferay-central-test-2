@@ -395,16 +395,16 @@ public class UploadServletRequestImpl
 			parameterValues = values.toArray(new String[values.size()]);
 		}
 
-		String[] parentValues = super.getParameterValues(name);
+		String[] parentParameterValues = super.getParameterValues(name);
 
 		if (parameterValues == null) {
-			return parentValues;
+			return parentParameterValues;
 		}
-		else if (parentValues == null) {
+		else if (parentParameterValues == null) {
 			return parameterValues;
 		}
 
-		return ArrayUtil.append(parameterValues, parentValues);
+		return ArrayUtil.append(parameterValues, parentParameterValues);
 	}
 
 	public Long getSize(String name) {

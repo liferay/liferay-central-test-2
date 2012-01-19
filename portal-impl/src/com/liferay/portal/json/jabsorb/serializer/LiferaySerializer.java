@@ -29,7 +29,6 @@ import org.jabsorb.serializer.ObjectMatch;
 import org.jabsorb.serializer.SerializerState;
 import org.jabsorb.serializer.UnmarshallException;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
@@ -38,18 +37,21 @@ import org.json.JSONObject;
 public class LiferaySerializer extends AbstractSerializer {
 
 	@Override
-	public boolean canSerialize(Class clazz, Class jsonClass) {
-		Constructor publicDefaultConstructor = null;
+	public boolean canSerialize(
+		@SuppressWarnings("rawtypes") Class clazz,
+		@SuppressWarnings("rawtypes") Class jsonClass) {
+
+		Constructor<?> constructor = null;
 
 		try {
-			publicDefaultConstructor = clazz.getConstructor();
+			constructor = clazz.getConstructor();
 		}
 		catch (Exception e) {
 		}
 
-		if ((jsonClass == null || jsonClass == JSONObject.class) &&
-			Serializable.class.isAssignableFrom(clazz) &&
-			(publicDefaultConstructor != null)) {
+		if (Serializable.class.isAssignableFrom(clazz) &&
+			((jsonClass == null) || (jsonClass == JSONObject.class)) &&
+			(constructor != null)) {
 
 			return true;
 		}
@@ -57,11 +59,11 @@ public class LiferaySerializer extends AbstractSerializer {
 		return false;
 	}
 
-	public Class[] getJSONClasses() {
+	public Class<?>[] getJSONClasses() {
 		return _JSON_CLASSES;
 	}
 
-	public Class[] getSerializableClasses() {
+	public Class<?>[] getSerializableClasses() {
 		return _SERIALIZABLE_CLASSES;
 	}
 
@@ -69,28 +71,29 @@ public class LiferaySerializer extends AbstractSerializer {
 			SerializerState serializerState, Object parentObject, Object object)
 		throws MarshallException {
 
-		Class javaClass = object.getClass();
-
 		JSONObject jsonObject = new JSONObject();
-		JSONObject serializableData = new JSONObject();
+
+		Class<?> javaClass = object.getClass();
 
 		if (ser.getMarshallClassHints()) {
 			try {
-				jsonObject.put("javaClass", object.getClass().getName());
+				jsonObject.put("javaClass", javaClass.getName());
 			}
-			catch (JSONException e) {
-				throw new MarshallException("javaClass not found", e);
+			catch (Exception e) {
+				throw new MarshallException("Unable to put javaClass", e);
 			}
 		}
+
+		JSONObject serializableJSONObject = new JSONObject();
 
 		try {
-			jsonObject.put("serializable", serializableData);
+			jsonObject.put("serializable", serializableJSONObject);
 
-			serializerState.push(object, serializableData, "serializable");
+			serializerState.push(
+				object, serializableJSONObject, "serializable");
 		}
-		catch (JSONException e) {
-			throw new MarshallException(
-				"Could not add serializable to object: " + e.getMessage(), e);
+		catch (Exception e) {
+			throw new MarshallException("Unable to put serializable", e);
 		}
 
 		String fieldName = null;
@@ -102,7 +105,7 @@ public class LiferaySerializer extends AbstractSerializer {
 				for (Field field : declaredFields) {
 					int modifiers = field.getModifiers();
 
-					// Only marshall fields that are not final, static or
+					// Only marshall fields that are not final, static, or
 					// transient
 
 					if (((modifiers & Modifier.FINAL) == Modifier.FINAL) ||
@@ -123,15 +126,15 @@ public class LiferaySerializer extends AbstractSerializer {
 						fieldName = fieldName.substring(1);
 					}
 
-					Object json = ser.marshall(
-						serializerState, serializableData, field.get(object),
-						fieldName);
+					Object fieldObject = ser.marshall(
+						serializerState, serializableJSONObject,
+						field.get(object), fieldName);
 
-					// Omit the object entirely if it's a circular reference or
-					// duplicate it will be regenerated in the fixups phase
+					// Omit the object entirely if it is a circular reference or
+					// duplicate. It will be regenerated in the fixups phase.
 
-					if (JSONSerializer.CIRC_REF_OR_DUPLICATE != json) {
-						serializableData.put(fieldName, json);
+					if (JSONSerializer.CIRC_REF_OR_DUPLICATE != fieldObject) {
+						serializableJSONObject.put(fieldName, fieldObject);
 					}
 				}
 
@@ -140,7 +143,7 @@ public class LiferaySerializer extends AbstractSerializer {
 		}
 		catch (Exception e) {
 			throw new MarshallException(
-				"field " + fieldName + " " + e.getMessage(), e);
+				"Unable to match field " + fieldName, e);
 		}
 		finally {
 			serializerState.pop();
@@ -150,134 +153,137 @@ public class LiferaySerializer extends AbstractSerializer {
 	}
 
 	public ObjectMatch tryUnmarshall(
-			SerializerState serializerState, Class clazz, Object object)
+			SerializerState serializerState,
+			@SuppressWarnings("rawtypes") Class clazz, Object object)
 		throws UnmarshallException {
 
 		JSONObject jsonObject = (JSONObject)object;
 
-		String className;
+		String javaClassName = null;
 
 		try {
-			className = jsonObject.getString("javaClass");
+			javaClassName = jsonObject.getString("javaClass");
 		}
-		catch (JSONException e) {
-			throw new UnmarshallException("could not read javaClass", e);
+		catch (Exception e) {
+			throw new UnmarshallException("Unable to get javaClass", e);
 		}
 
-		if (className == null) {
-			throw new UnmarshallException("no javaClass hint");
+		if (javaClassName == null) {
+			throw new UnmarshallException("javaClass is undefined");
 		}
 
 		try {
-			Class javaClass = Class.forName(className);
+			Class<?> javaClass = Class.forName(javaClassName);
 
 			Serializable.class.isAssignableFrom(javaClass);
 		}
 		catch (Exception e) {
 			throw new UnmarshallException(
-				"error handling javaClass hint " + e.getMessage(), e);
+				"Unable to load javaClass " + javaClassName, e);
 		}
 
-		JSONObject jsonSerializable;
+		JSONObject serializableJSONObject = null;
 
 		try {
-			jsonSerializable = jsonObject.getJSONObject("serializable");
+			serializableJSONObject = jsonObject.getJSONObject("serializable");
 		}
-		catch (JSONException e) {
-			throw new UnmarshallException(
-				"could not read serializable: " + e.getMessage(), e);
+		catch (Exception e) {
+			throw new UnmarshallException("Unable to get serializable", e);
 		}
 
-		if (jsonSerializable == null) {
-			throw new UnmarshallException("serializable missing");
+		if (serializableJSONObject == null) {
+			throw new UnmarshallException("serializable is undefined");
 		}
 
 		ObjectMatch objectMatch = new ObjectMatch(-1);
 
-		Iterator iterator = jsonSerializable.keys();
+		serializerState.setSerialized(object, objectMatch);
 
 		String fieldName = null;
 
-		serializerState.setSerialized(object, objectMatch);
-
 		try {
+			Iterator<?> iterator = serializableJSONObject.keys();
+
 			while (iterator.hasNext()) {
-				fieldName = (String) iterator.next();
+				fieldName = (String)iterator.next();
 
-				ObjectMatch curObjectMatch = ser.tryUnmarshall(
-					serializerState, null, jsonSerializable.get(fieldName));
+				ObjectMatch fieldObjectMatch = ser.tryUnmarshall(
+					serializerState, null,
+					serializableJSONObject.get(fieldName));
 
-				int mismatch = curObjectMatch.max(objectMatch).getMismatch();
+				ObjectMatch maxFieldObjectMatch = fieldObjectMatch.max(
+					objectMatch);
 
-				objectMatch.setMismatch(mismatch);
+				objectMatch.setMismatch(maxFieldObjectMatch.getMismatch());
 			}
 		}
 		catch (Exception e) {
 			throw new UnmarshallException(
-				"field " + fieldName + " " + e.getMessage(), e);
+				"Unable to match field " + fieldName, e);
 		}
 
 		return objectMatch;
 	}
 
 	public Object unmarshall(
-			SerializerState serializerState, Class clazz, Object object)
+			SerializerState serializerState,
+			@SuppressWarnings("rawtypes") Class clazz, Object object)
 		throws UnmarshallException {
 
 		JSONObject jsonObject = (JSONObject)object;
 
-		String className;
+		String javaClassName = null;
 
 		try {
-			className = jsonObject.getString("javaClass");
+			javaClassName = jsonObject.getString("javaClass");
 		}
-		catch (JSONException e) {
-			throw new UnmarshallException("could not read javaClass", e);
-		}
-
-		if (className == null) {
-			throw new UnmarshallException("no javaClass hint");
+		catch (Exception e) {
+			throw new UnmarshallException("Unable to get javaClass", e);
 		}
 
-		Class javaClass = null;
-		Object serializedObject = null;
+		if (javaClassName == null) {
+			throw new UnmarshallException("javaClass is undefined");
+		}
+
+		Class<?> javaClass = null;
+
+		Object javaClassInstance = null;
 
 		try {
-			javaClass = Class.forName(className);
+			javaClass = Class.forName(javaClassName);
 
-			serializedObject = javaClass.newInstance();
+			javaClassInstance = javaClass.newInstance();
 		}
 		catch (Exception e) {
 			throw new UnmarshallException(
-				"error handling javaClass hints " + e.getMessage(), e);
+				"Unable to load javaClass " + javaClassName, e);
 		}
 
-		JSONObject jsonSerializable;
+		JSONObject serializableJSONObject = null;
 
 		try {
-			jsonSerializable = jsonObject.getJSONObject("serializable");
+			serializableJSONObject = jsonObject.getJSONObject("serializable");
 		}
-		catch (JSONException e) {
-			throw new UnmarshallException(
-				"could not read serializable: " + e.getMessage(), e);
-		}
-
-		if (jsonSerializable == null) {
-			throw new UnmarshallException("serializable missing");
+		catch (Exception e) {
+			throw new UnmarshallException("Unable to get serializable", e);
 		}
 
-		serializerState.setSerialized(object, serializedObject);
+		if (serializableJSONObject == null) {
+			throw new UnmarshallException("serializable is undefined");
+		}
+
+		serializerState.setSerialized(object, javaClassInstance);
 
 		String fieldName = null;
 
 		try {
 			while (javaClass != null) {
-				Field[] declaredFields = javaClass.getDeclaredFields();
+				Field[] fields = javaClass.getDeclaredFields();
 
-				for (Field field : declaredFields) {
+				for (Field field : fields) {
 					int modifiers = field.getModifiers();
 
-					// Only unmarshall fields that are not final, static or
+					// Only unmarshall fields that are not final, static, or
 					// transient
 
 					if (((modifiers & Modifier.FINAL) == Modifier.FINAL) ||
@@ -303,13 +309,13 @@ public class LiferaySerializer extends AbstractSerializer {
 					try {
 						value = ser.unmarshall(
 							serializerState, null,
-							jsonSerializable.get(fieldName));
+							serializableJSONObject.get(fieldName));
 					}
-					catch (UnmarshallException me) {
+					catch (Exception e) {
 					}
 
 					if (value != null) {
-						field.set(serializedObject, value);
+						field.set(javaClassInstance, value);
 					}
 				}
 
@@ -318,14 +324,14 @@ public class LiferaySerializer extends AbstractSerializer {
 		}
 		catch (Exception e) {
 			throw new UnmarshallException(
-				"field " + fieldName + " " + e.getMessage(), e);
+				"Unable to match field " + fieldName, e);
 		}
 
-		return serializedObject;
+		return javaClassInstance;
 	}
 
-	private static Class[] _JSON_CLASSES = new Class[] { JSONObject.class };
-	private static Class[] _SERIALIZABLE_CLASSES = new Class[] {
-		Serializable.class};
+	private static Class<?>[] _JSON_CLASSES = {JSONObject.class};
+
+	private static Class<?>[] _SERIALIZABLE_CLASSES = {Serializable.class};
 
 }

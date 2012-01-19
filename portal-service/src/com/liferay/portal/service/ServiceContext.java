@@ -38,6 +38,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * Contains context information about a given API call.
  *
@@ -534,13 +536,7 @@ public class ServiceContext implements Cloneable, Serializable {
 		return _remoteHost;
 	}
 
-	/**
-	 * Gets the optional request used when instantiating this service context.
-	 * The field is volatile and so will be discarded on serialization.
-	 *
-	 * @return the request
-	 */
-	public javax.servlet.http.HttpServletRequest getRequest() {
+	public HttpServletRequest getRequest() {
 		return _request;
 	}
 
@@ -1057,7 +1053,7 @@ public class ServiceContext implements Cloneable, Serializable {
 	 *
 	 * @param request the request
 	 */
-	public void setRequest(javax.servlet.http.HttpServletRequest request) {
+	public void setRequest(HttpServletRequest request) {
 		_request = request;
 	}
 
@@ -1156,7 +1152,7 @@ public class ServiceContext implements Cloneable, Serializable {
 	private PortletPreferencesIds _portletPreferencesIds;
 	private String _remoteAddr;
 	private String _remoteHost;
-	private transient javax.servlet.http.HttpServletRequest _request;
+	private transient HttpServletRequest _request;
 	private long _scopeGroupId;
 	private boolean _signedIn;
 	private String _userDisplayURL;

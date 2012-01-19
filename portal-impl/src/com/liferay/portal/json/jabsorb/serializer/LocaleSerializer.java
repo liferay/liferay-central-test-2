@@ -24,7 +24,6 @@ import org.jabsorb.serializer.ObjectMatch;
 import org.jabsorb.serializer.SerializerState;
 import org.jabsorb.serializer.UnmarshallException;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
@@ -33,9 +32,12 @@ import org.json.JSONObject;
 public class LocaleSerializer extends AbstractSerializer {
 
 	@Override
-	public boolean canSerialize(Class clazz, Class jsonClazz) {
-		if ((jsonClazz == null || jsonClazz == JSONObject.class) &&
-			Locale.class.isAssignableFrom(clazz)) {
+	public boolean canSerialize(
+		@SuppressWarnings("rawtypes") Class clazz,
+		@SuppressWarnings("rawtypes") Class jsonClazz) {
+
+		if (Locale.class.isAssignableFrom(clazz) &&
+			((jsonClazz == null) || (jsonClazz == JSONObject.class))) {
 
 			return true;
 		}
@@ -43,11 +45,11 @@ public class LocaleSerializer extends AbstractSerializer {
 		return false;
 	}
 
-	public Class[] getJSONClasses() {
+	public Class<?>[] getJSONClasses() {
 		return _JSON_CLASSES;
 	}
 
-	public Class[] getSerializableClasses() {
+	public Class<?>[] getSerializableClasses() {
 		return _SERIALIZABLE_CLASSES;
 	}
 
@@ -55,37 +57,40 @@ public class LocaleSerializer extends AbstractSerializer {
 			SerializerState serializerState, Object parentObject, Object object)
 		throws MarshallException {
 
-		Locale locale = (Locale)object;
-
 		JSONObject jsonObject = new JSONObject();
-		JSONObject localeData = new JSONObject();
 
 		if (ser.getMarshallClassHints()) {
 			try {
-				jsonObject.put("javaClass", object.getClass().getName());
+				Class<?> javaClass = object.getClass();
+
+				jsonObject.put("javaClass", javaClass.getName());
 			}
-			catch (JSONException e) {
-				throw new MarshallException("javaClass not found", e);
+			catch (Exception e) {
+				throw new MarshallException("Unable to put javaClass", e);
 			}
 		}
+
+		JSONObject localeJSONObject = new JSONObject();
 
 		try {
-			jsonObject.put("locale", localeData);
+			jsonObject.put("locale", localeJSONObject);
 
-			serializerState.push(object, localeData, "locale");
-		}
-		catch (JSONException e) {
-			throw new MarshallException(
-				"Could not add locale to object: " + e.getMessage(), e);
-		}
-
-		try {
-			localeData.put("language", locale.getLanguage());
-			localeData.put("country", locale.getCountry());
-			localeData.put("variant", locale.getVariant());
+			serializerState.push(object, localeJSONObject, "locale");
 		}
 		catch (Exception e) {
-			throw new MarshallException("locale " + e.getMessage(), e);
+			throw new MarshallException("Unable to put locale", e);
+		}
+
+		try {
+			Locale locale = (Locale)object;
+
+			localeJSONObject.put("country", locale.getCountry());
+			localeJSONObject.put("language", locale.getLanguage());
+			localeJSONObject.put("variant", locale.getVariant());
+		}
+		catch (Exception e) {
+			throw new MarshallException(
+				"Unable to put country, language, and variant", e);
 		}
 		finally {
 			serializerState.pop();
@@ -95,51 +100,15 @@ public class LocaleSerializer extends AbstractSerializer {
 	}
 
 	public ObjectMatch tryUnmarshall(
-			SerializerState serializerState, Class clazz, Object object)
+			SerializerState serializerState,
+			@SuppressWarnings("rawtypes") Class clazz, Object object)
 		throws UnmarshallException {
 
-		JSONObject jsonObject = (JSONObject)object;
-
-		String className;
-
-		try {
-			className = jsonObject.getString("javaClass");
-		}
-		catch (JSONException e) {
-			throw new UnmarshallException("could not read javaClass", e);
-		}
-
-		if (className == null) {
-			throw new UnmarshallException("no javaClass hint");
-		}
-
-		try {
-			Class javaClass = Class.forName(className);
-
-			Locale.class.isAssignableFrom(javaClass);
-		}
-		catch (Exception e) {
-			throw new UnmarshallException(
-				"error handling javaClass hint " + e.getMessage(), e);
-		}
-
-		JSONObject jsonLocale;
-
-		try {
-			jsonLocale = jsonObject.getJSONObject("locale");
-		}
-		catch (JSONException e) {
-			throw new UnmarshallException(
-				"could not read locale: " + e.getMessage(), e);
-		}
-
-		if (jsonLocale == null) {
-			throw new UnmarshallException("locale missing");
-		}
+		JSONObject localeJSONObject = getLocaleJSONObject(object);
 
 		ObjectMatch objectMatch = ObjectMatch.ROUGHLY_SIMILAR;
 
-		if (jsonLocale.has("language")) {
+		if (localeJSONObject.has("language")) {
 			objectMatch = ObjectMatch.OKAY;
 		}
 
@@ -149,95 +118,104 @@ public class LocaleSerializer extends AbstractSerializer {
 	}
 
 	public Object unmarshall(
-			SerializerState serializerState, Class clazz, Object object)
+			SerializerState serializerState,
+			@SuppressWarnings("rawtypes") Class clazz, Object object)
 		throws UnmarshallException {
 
-		JSONObject jsonObject = (JSONObject)object;
+		JSONObject localeJSONObject = getLocaleJSONObject(object);
 
-		String className;
-
-		try {
-			className = jsonObject.getString("javaClass");
-		}
-		catch (JSONException e) {
-			throw new UnmarshallException("could not read javaClass", e);
-		}
-
-		if (className == null) {
-			throw new UnmarshallException("no javaClass hint");
-		}
+		String country = null;
 
 		try {
-			Class javaClass = Class.forName(className);
-
-			Locale.class.isAssignableFrom(javaClass);
+			country = localeJSONObject.getString("country");
 		}
 		catch (Exception e) {
-			throw new UnmarshallException(
-				"error handling javaClass hints " + e.getMessage(), e);
-		}
-
-		JSONObject jsonLocale;
-
-		try {
-			jsonLocale = jsonObject.getJSONObject("locale");
-		}
-		catch (JSONException e) {
-			throw new UnmarshallException(
-				"could not read locale: " + e.getMessage(), e);
-		}
-
-		if (jsonLocale == null) {
-			throw new UnmarshallException("locale missing");
 		}
 
 		String language = null;
 
 		try {
-			language = jsonLocale.getString("language");
+			language = localeJSONObject.getString("language");
 		}
-		catch (JSONException e) {
-			throw new UnmarshallException("language missing");
-		}
-
-		String country = null;
-
-		try {
-			country = jsonLocale.getString("country");
-		}
-		catch (JSONException e) {
+		catch (Exception e) {
+			throw new UnmarshallException("language is undefined");
 		}
 
 		String variant = null;
 
 		try {
-			variant = jsonLocale.getString("variant");
+			variant = localeJSONObject.getString("variant");
 		}
-		catch (JSONException e) {
+		catch (Exception e) {
 		}
 
-		Locale localeObject = null;
+		Locale locale = null;
 
-		if (Validator.isNotNull(language) && Validator.isNotNull(country) &&
+		if (Validator.isNotNull(country) && Validator.isNotNull(language) &&
 			Validator.isNotNull(variant)) {
 
-			localeObject = new Locale(language, country, variant);
+			locale = new Locale(language, country, variant);
 		}
-		else if (Validator.isNotNull(language) &&
-				 Validator.isNotNull(country)) {
+		else if (Validator.isNotNull(country) &&
+				 Validator.isNotNull(language)) {
 
-			localeObject = new Locale(language, country);
+			locale = new Locale(language, country);
 		}
 		else {
-			localeObject = new Locale(language);
+			locale = new Locale(language);
 		}
 
-		serializerState.setSerialized(object, localeObject);
+		serializerState.setSerialized(object, locale);
 
-		return localeObject;
+		return locale;
 	}
 
-	private static Class[] _JSON_CLASSES = new Class[] { JSONObject.class };
-	private static Class[] _SERIALIZABLE_CLASSES = new Class[] {Locale.class};
+	protected JSONObject getLocaleJSONObject(Object object)
+		throws UnmarshallException {
+
+		JSONObject jsonObject = (JSONObject)object;
+
+		String javaClassName = null;
+
+		try {
+			javaClassName = jsonObject.getString("javaClass");
+		}
+		catch (Exception e) {
+			throw new UnmarshallException("Unable to get javaClass", e);
+		}
+
+		if (javaClassName == null) {
+			throw new UnmarshallException("javaClass is undefined");
+		}
+
+		try {
+			Class<?> javaClass = Class.forName(javaClassName);
+
+			Locale.class.isAssignableFrom(javaClass);
+		}
+		catch (Exception e) {
+			throw new UnmarshallException(
+				"Unable to load javaClass " + javaClassName, e);
+		}
+
+		JSONObject localeJSONObject = null;
+
+		try {
+			localeJSONObject = jsonObject.getJSONObject("locale");
+		}
+		catch (Exception e) {
+			throw new UnmarshallException("Unable to get locale", e);
+		}
+
+		if (localeJSONObject == null) {
+			throw new UnmarshallException("locale is undefined");
+		}
+
+		return localeJSONObject;
+	}
+
+	private static Class<?>[] _JSON_CLASSES = {JSONObject.class};
+
+	private static Class<?>[] _SERIALIZABLE_CLASSES = {Locale.class};
 
 }
