@@ -204,15 +204,14 @@ public class DirectServletRegistry {
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.DIRECT_SERVLET_CONTEXT_RELOAD));
 
-	private Map<String, Long> _dependantTimestamps =
-		new ConcurrentHashMap<String, Long>();
-
 	private static Log _log = LogFactoryUtil.getLog(
 		DirectServletRegistry.class);
 
 	private static DirectServletRegistry _instance =
 		new DirectServletRegistry();
 
+	private Map<String, Long> _dependantTimestamps =
+		new ConcurrentHashMap<String, Long>();
 	private static boolean _reloadDependents = true;
 
 	private Map<String, ServletInfo> _servletInfos =
