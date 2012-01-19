@@ -182,7 +182,7 @@ public class LayoutRevisionPersistenceImpl extends BasePersistenceImpl<LayoutRev
 			"findByH_P",
 			new String[] {
 				Boolean.class.getName(), Long.class.getName(),
-				
+
 			"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			});
@@ -203,7 +203,7 @@ public class LayoutRevisionPersistenceImpl extends BasePersistenceImpl<LayoutRev
 			"findByP_NotS",
 			new String[] {
 				Long.class.getName(), Integer.class.getName(),
-				
+
 			"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			});
@@ -3191,7 +3191,7 @@ public class LayoutRevisionPersistenceImpl extends BasePersistenceImpl<LayoutRev
 			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_P_NOTS;
 			finderArgs = new Object[] {
 					plid, status,
-					
+
 					start, end, orderByComparator
 				};
 		}

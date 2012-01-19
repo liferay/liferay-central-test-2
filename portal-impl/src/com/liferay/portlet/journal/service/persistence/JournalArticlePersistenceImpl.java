@@ -12454,7 +12454,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_G_A_ST;
 			finderArgs = new Object[] {
 					groupId, articleId, StringUtil.merge(statuses),
-					
+
 					start, end, orderByComparator
 				};
 		}

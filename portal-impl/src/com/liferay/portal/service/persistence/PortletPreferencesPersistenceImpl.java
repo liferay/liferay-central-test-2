@@ -148,7 +148,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 			new String[] {
 				Integer.class.getName(), Long.class.getName(),
 				String.class.getName(),
-				
+
 			"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			});
@@ -501,7 +501,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 				Object[] args = new Object[] {
 						Integer.valueOf(portletPreferencesModelImpl.getOriginalOwnerType()),
 						Long.valueOf(portletPreferencesModelImpl.getOriginalPlid()),
-						
+
 						portletPreferencesModelImpl.getOriginalPortletId()
 					};
 
@@ -512,7 +512,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 				args = new Object[] {
 						Integer.valueOf(portletPreferencesModelImpl.getOwnerType()),
 						Long.valueOf(portletPreferencesModelImpl.getPlid()),
-						
+
 						portletPreferencesModelImpl.getPortletId()
 					};
 
@@ -1864,7 +1864,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_O_P_P;
 			finderArgs = new Object[] {
 					ownerType, plid, portletId,
-					
+
 					start, end, orderByComparator
 				};
 		}
