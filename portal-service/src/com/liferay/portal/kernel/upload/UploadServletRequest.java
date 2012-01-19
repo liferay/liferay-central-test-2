@@ -19,5 +19,5 @@ package com.liferay.portal.kernel.upload;
  * @author Zongliang Li
  * @author Harry Mark
  */
-public interface UploadServletRequest extends UploadHttpRequest {
+public interface UploadServletRequest extends UploadRequest {
 }

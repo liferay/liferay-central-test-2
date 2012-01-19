@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletRequest;
  * @author Brian Wing Shun Chan
  * @author Eduardo Lundgren
  */
-public interface UploadHttpRequest extends HttpServletRequest {
+public interface UploadRequest extends HttpServletRequest {
 
 	public void cleanUp();
 

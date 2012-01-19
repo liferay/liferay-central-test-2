@@ -17,5 +17,5 @@ package com.liferay.portal.kernel.upload;
 /**
  * @author Brian Wing Shun Chan
  */
-public interface UploadPortletRequest extends UploadHttpRequest {
+public interface UploadPortletRequest extends UploadRequest {
 }

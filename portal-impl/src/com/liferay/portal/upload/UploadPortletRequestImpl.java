@@ -232,7 +232,7 @@ public class UploadPortletRequestImpl
 		}
 
 		if (size == null) {
-			return new Long(0);
+			return Long.valueOf(0);
 		}
 
 		return size;
