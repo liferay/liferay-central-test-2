@@ -59,17 +59,21 @@ public class EditWorkflowInstanceAction extends PortletAction {
 
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
-		_redirect = ParamUtil.getString(actionRequest, "redirect");
-
 		try {
+			String redirect = null;
+
 			if (cmd.equals(Constants.DELETE)) {
-				deleteInstance(actionRequest);
+				redirect = deleteInstance(actionRequest);
 			}
 			else if (cmd.equals(Constants.SIGNAL)) {
 				signalInstance(actionRequest);
 			}
 
-			sendRedirect(actionRequest, actionResponse, _redirect);
+			if (redirect == null) {
+				redirect = ParamUtil.getString(actionRequest, "redirect");
+			}
+
+			sendRedirect(actionRequest, actionResponse, redirect);
 		}
 		catch (Exception e) {
 			if (e instanceof PrincipalException ||
@@ -112,7 +116,7 @@ public class EditWorkflowInstanceAction extends PortletAction {
 		return mapping.findForward(forward);
 	}
 
-	protected void deleteInstance(ActionRequest actionRequest)
+	protected String deleteInstance(ActionRequest actionRequest)
 		throws Exception {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
@@ -156,8 +160,10 @@ public class EditWorkflowInstanceAction extends PortletAction {
 			(WorkflowInstanceManagerUtil.getWorkflowInstanceCount(
 				companyId, userId, null, null, Boolean.FALSE) == 0)) {
 
-			_redirect = themeDisplay.getURLControlPanel();
+			return themeDisplay.getURLControlPanel();
 		}
+
+		return null;
 	}
 
 	@Override
@@ -183,7 +189,5 @@ public class EditWorkflowInstanceAction extends PortletAction {
 	}
 
 	private static final boolean _CHECK_METHOD_ON_PROCESS_ACTION = false;
-
-	private String _redirect;
 
 }
