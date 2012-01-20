@@ -213,8 +213,8 @@ public class LayoutSetLocalServiceImpl extends LayoutSetLocalServiceBaseImpl {
 	 * However, this method can only enable the layout set prototype's link if
 	 * the layout set prototype's current uuid is not <code>null</code>. Setting
 	 * the <code>layoutSetPrototypeLinkEnabled</code> to <code>true</code> when
-	 * the layout set prototype's current uuid is <code>null</code> will have
-	 * no effect.
+	 * the layout set prototype's current uuid is <code>null</code> will have no
+	 * effect.
 	 * </p>
 	 *
 	 * @param      groupId the primary key of the group
