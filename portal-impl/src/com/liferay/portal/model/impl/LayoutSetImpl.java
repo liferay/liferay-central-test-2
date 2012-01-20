@@ -82,15 +82,15 @@ public class LayoutSetImpl extends LayoutSetBaseImpl {
 
 		return settingsProperties.getProperty(key);
 	}
-	
+
 	public long getStagingLogoId() {
 		long logoId = 0;
-		
+
 		Group group = null;
 
 		try {
 			group = getGroup();
-			
+
 			if (!group.isStagingGroup()) {
 				return logoId;
 			}
@@ -98,7 +98,7 @@ public class LayoutSetImpl extends LayoutSetBaseImpl {
 		catch (Exception e) {
 			return logoId;
 		}
-		
+
 		Group liveGroup = group.getLiveGroup();
 
 		LayoutSet liveLayoutSet = null;
@@ -107,7 +107,7 @@ public class LayoutSetImpl extends LayoutSetBaseImpl {
 			liveLayoutSet = liveGroup.getPrivateLayoutSet();
 		}
 		else {
-			liveLayoutSet =	liveGroup.getPublicLayoutSet();
+			liveLayoutSet = liveGroup.getPublicLayoutSet();
 		}
 
 		return liveLayoutSet.getLogoId();
