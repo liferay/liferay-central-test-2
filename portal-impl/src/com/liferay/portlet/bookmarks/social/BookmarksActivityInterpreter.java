@@ -59,9 +59,10 @@ public class BookmarksActivityInterpreter
 
 		String creatorUserName = getUserName(
 			activity.getUserId(), themeDisplay);
-
 		String receiverUserName = getUserName(
 			activity.getReceiverUserId(), themeDisplay);
+
+		int activityType = activity.getType();
 
 		// Link
 
@@ -73,8 +74,6 @@ public class BookmarksActivityInterpreter
 				"/bookmarks/find_entry?entryId=" + activity.getClassPK();
 
 		// Title
-
-		int activityType = activity.getType();
 
 		String titlePattern = null;
 
