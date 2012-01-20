@@ -17,24 +17,8 @@ package com.liferay.portal.kernel.util;
 /**
  * @author Brian Wing Shun Chan
  */
-public class OrderByComparatorFactoryUtil {
+public interface OrderByComparatorFactory {
 
-	public static OrderByComparator create(
-		String tableName, Object... columns) {
-
-		return getOrderByComparatorFactory().create(tableName, columns);
-	}
-
-	public static OrderByComparatorFactory getOrderByComparatorFactory() {
-		return _orderByComparatorFactory;
-	}
-
-	public void setOrderByComparatorFactory(
-		OrderByComparatorFactory orderByComparatorFactory) {
-
-		_orderByComparatorFactory = orderByComparatorFactory;
-	}
-
-	private static OrderByComparatorFactory _orderByComparatorFactory;
+	public OrderByComparator create(String tableName, Object... columns);
 
 }
