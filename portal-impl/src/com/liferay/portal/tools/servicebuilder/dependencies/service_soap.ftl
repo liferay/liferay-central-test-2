@@ -9,6 +9,7 @@ import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.LocalizationUtil;
 
 import java.rmi.RemoteException;
+
 import java.util.Locale;
 import java.util.Map;
 
@@ -72,7 +73,6 @@ public class ${entity.name}ServiceSoap {
 			<#assign returnTypeGenericsName = serviceBuilder.getTypeGenericsName(method.returns)>
 			<#assign extendedModelName = packagePath + ".model." + entity.name>
 			<#assign soapModelName = packagePath + ".model." + entity.name + "Soap">
-			<#assign mapVariables = "">
 
 			${serviceBuilder.getJavadocComment(method)}
 			public static
@@ -109,6 +109,8 @@ public class ${entity.name}ServiceSoap {
 
 			${method.name}(
 
+			<#assign localizationMapVariables = "">
+
 			<#list method.parameters as parameter>
 				<#assign parameterTypeName = serviceBuilder.getTypeGenericsName(parameter.type)>
 				<#assign parameterListActualType = serviceBuilder.getListActualTypeArguments(parameter.type)>
@@ -130,7 +132,7 @@ public class ${entity.name}ServiceSoap {
 				<#if parameterTypeName == "java.util.Map<java.util.Locale, java.lang.String>">
 					java.lang.String[] ${parameter.name}LanguageIds, java.lang.String[] ${parameter.name}Values
 
-					<#assign mapVariables = mapVariables + "Map<Locale, String>" + parameter.name + " = LocalizationUtil.getLocalizationMap(" + parameter.name + "LanguageIds, " + parameter.name + "Values);">
+					<#assign localizationMapVariables = localizationMapVariables + "Map<Locale, String>" + parameter.name + " = LocalizationUtil.getLocalizationMap(" + parameter.name + "LanguageIds, " + parameter.name + "Values);">
 				<#else>
 					${parameterTypeName} ${parameter.name}
 				</#if>
@@ -142,7 +144,7 @@ public class ${entity.name}ServiceSoap {
 
 			) throws RemoteException {
 				try {
-		            ${mapVariables}
+		            ${localizationMapVariables}
 
 					<#if returnValueName != "void">
 						${returnTypeGenericsName} returnValue =

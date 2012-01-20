@@ -1491,9 +1491,9 @@ public class ServiceBuilder {
 		JavaParameter[] parameters = method.getParameters();
 
 		for (JavaParameter javaParameter : parameters) {
-			String parameterTypeName =
-				javaParameter.getType().getValue() +
-					_getDimensions(javaParameter.getType());
+			Type type = javaParameter.getType();
+
+			String parameterTypeName = type.getValue() + _getDimensions(type);
 
 			if (parameterTypeName.equals(
 					"com.liferay.portal.kernel.util.UnicodeProperties") ||
@@ -4374,16 +4374,25 @@ public class ServiceBuilder {
 	}
 
 	private boolean _isStringLocaleMap(JavaParameter javaParameter) {
-		Type[] typeArguments = javaParameter.getType().getActualTypeArguments();
+		Type type = javaParameter.getType();
 
-		if ((typeArguments.length == 2) &&
-			typeArguments[1].getValue().equals(String.class.getName()) &&
-			typeArguments[0].getValue().equals(Locale.class.getName())) {
+		Type[] actualArgumentTypes = type.getActualTypeArguments();
 
-			return true;
+		if (actualArgumentTypes.length != 2) {
+			return false;
 		}
 
-		return false;
+		if (!_isTypeValue(actualArgumentTypes[0], Locale.class.getName()) ||
+			!_isTypeValue(actualArgumentTypes[1], String.class.getName())) {
+
+			return false;
+		}
+
+		return true;
+	}
+
+	private boolean _isTypeValue(Type type, String value) {
+		return value.equals(type.getValue());
 	}
 
 	private List<Entity> _mergeReferenceList(List<Entity> referenceList) {
