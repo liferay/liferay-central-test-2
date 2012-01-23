@@ -102,9 +102,9 @@ if (Validator.isNull(orderByCol)) {
 	orderByType = portalPreferences.getValue(PortletKeys.DOCUMENT_LIBRARY, "order-by-type", "asc");
 }
 else {
-	boolean saveSortBy = ParamUtil.getBoolean(request, "saveSortBy");
+	boolean saveOrderBy = ParamUtil.getBoolean(request, "saveOrderBy");
 
-	if (saveSortBy) {
+	if (saveOrderBy) {
 		portalPreferences.setValue(PortletKeys.DOCUMENT_LIBRARY, "order-by-col", orderByCol);
 		portalPreferences.setValue(PortletKeys.DOCUMENT_LIBRARY, "order-by-type", orderByType);
 	}
