@@ -134,16 +134,17 @@ public class DDLImpl implements DDL {
 			else if (fieldType.equals(DDMImpl.TYPE_DDM_DOCUMENTLIBRARY) &&
 					 Validator.isNotNull(fieldValue)) {
 
-				JSONObject jsonValueObject = JSONFactoryUtil.createJSONObject(
-				      String.valueOf(fieldValue));
+				JSONObject fieldValueJSONObject =
+					JSONFactoryUtil.createJSONObject(
+						String.valueOf(fieldValue));
 
-				String uuid = jsonValueObject.getString("uuid");
+				String uuid = fieldValueJSONObject.getString("uuid");
+				long groupId = fieldValueJSONObject.getLong("groupId");
 
-				long groupId = jsonValueObject.getLong("groupId");
+				fieldValueJSONObject.put(
+					"title", getFileEntryTitle(uuid, groupId));
 
-				jsonValueObject.put("title", getFileEntryTitle(uuid, groupId));
-
-				jsonObject.put(fieldName, jsonValueObject.toString());
+				jsonObject.put(fieldName, fieldValueJSONObject.toString());
 			}
 			else if ((fieldType.equals(DDMImpl.TYPE_RADIO) ||
 					  fieldType.equals(DDMImpl.TYPE_SELECT)) &&
