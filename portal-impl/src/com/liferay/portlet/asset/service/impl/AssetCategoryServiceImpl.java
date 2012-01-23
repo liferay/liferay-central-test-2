@@ -139,7 +139,7 @@ public class AssetCategoryServiceImpl extends AssetCategoryServiceBaseImpl {
 		for (AssetCategory category : categories) {
 			String categoryJSON = JSONFactoryUtil.looseSerialize(category);
 
-			JSONObject jsonObject = JSONFactoryUtil.createJSONObject(
+			JSONObject categoryJSONObject = JSONFactoryUtil.createJSONObject(
 				categoryJSON);
 
 			List<String> names = new ArrayList<String>();
@@ -161,15 +161,15 @@ public class AssetCategoryServiceImpl extends AssetCategoryServiceBaseImpl {
 			AssetVocabulary vocabulary = assetVocabularyService.getVocabulary(
 				category.getVocabularyId());
 
-			StringBundler path = new StringBundler(3);
+			StringBundler sb = new StringBundler(2 + names.size());
 
-			path.append(" - ");
-			path.append(vocabulary.getName());
-			path.append(names.toArray(new String[names.size()]));
+			sb.append(" - ");
+			sb.append(vocabulary.getName());
+			sb.append(names.toArray(new String[names.size()]));
 
-			jsonObject.put("path", path.toString());
+			categoryJSONObject.put("path", vocabulary.getName());
 
-			jsonArray.put(jsonObject);
+			jsonArray.put(categoryJSONObject);
 		}
 
 		return jsonArray;
