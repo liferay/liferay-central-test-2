@@ -193,8 +193,8 @@ public class BaseCmisSearchQueryBuilder implements CMISSearchQueryBuilder {
 	}
 
 	protected boolean isSupportsFullText(QueryConfig queryConfig) {
-		String capabilityQuery =
-			(String)queryConfig.getAttribute("capabilityQuery");
+		String capabilityQuery = (String)queryConfig.getAttribute(
+			"capabilityQuery");
 
 		if (Validator.isNull(capabilityQuery)) {
 			return false;
@@ -210,15 +210,14 @@ public class BaseCmisSearchQueryBuilder implements CMISSearchQueryBuilder {
 	}
 
 	protected boolean isSupportsOnlyFullText(QueryConfig queryConfig) {
-		String capabilityQuery =
-			(String)queryConfig.getAttribute("capabilityQuery");
+		String capabilityQuery = (String)queryConfig.getAttribute(
+			"capabilityQuery");
 
 		if (Validator.isNull(capabilityQuery)) {
 			return false;
 		}
 
 		if (capabilityQuery.equals("fulltextonly")) {
-
 			return true;
 		}
 
@@ -292,9 +291,9 @@ public class BaseCmisSearchQueryBuilder implements CMISSearchQueryBuilder {
 					add = false;
 				}
 				else if (!((cmisExpression instanceof CMISContainsExpression) ||
-						(cmisExpression instanceof CMISInFolderExpression) ||
-						(cmisExpression instanceof CMISInTreeExpression)) &&
-						isSupportsOnlyFullText(queryConfig)) {
+						   (cmisExpression instanceof CMISInFolderExpression) ||
+						   (cmisExpression instanceof CMISInTreeExpression)) &&
+						 isSupportsOnlyFullText(queryConfig)) {
 
 					add = false;
 				}
@@ -347,12 +346,12 @@ public class BaseCmisSearchQueryBuilder implements CMISSearchQueryBuilder {
 					add = false;
 				}
 				else if (!((cmisCriterion instanceof CMISContainsExpression) ||
-							(cmisCriterion instanceof CMISInFolderExpression) ||
-							(cmisCriterion instanceof CMISInTreeExpression)) &&
-							isSupportsOnlyFullText(queryConfig)) {
+						   (cmisCriterion instanceof CMISInFolderExpression) ||
+						   (cmisCriterion instanceof CMISInTreeExpression)) &&
+						 isSupportsOnlyFullText(queryConfig)) {
 
-							add = false;
-						}
+					add = false;
+				}
 
 				if (add) {
 					criterion.add(cmisCriterion);
