@@ -35,8 +35,11 @@ public class TaskQueue<E> {
 		}
 
 		_capacity = capacity;
+
 		_headNode = new Node<E>(null);
 		_tailNode = _headNode;
+
+		_notEmptyCondition = _takeLock.newCondition();
 	}
 
 	public int drainTo(Collection<E> collection) {
@@ -315,7 +318,7 @@ public class TaskQueue<E> {
 	private final int _capacity;
 	private final AtomicInteger _count = new AtomicInteger();
 	private Node<E> _headNode;
-	private final Condition _notEmptyCondition = getTakeLock().newCondition();
+	private final Condition _notEmptyCondition;
 	private final ReentrantLock _putLock = new ReentrantLock();
 	private Node<E> _tailNode;
 	private final ReentrantLock _takeLock = new ReentrantLock();
