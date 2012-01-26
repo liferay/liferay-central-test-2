@@ -981,7 +981,7 @@ public class EditLayoutsAction extends PortletAction {
 			layoutRevision.getColorSchemeId(), layoutRevision.getWapThemeId(),
 			layoutRevision.getWapColorSchemeId(), layoutRevision.getCss(),
 			serviceContext);
-		
+
 		if (layoutRevision.getStatus() == WorkflowConstants.STATUS_INCOMPLETE) {
 			LayoutRevision lastLayoutRevision =
 				LayoutRevisionLocalServiceUtil.fetchLastLayoutRevision(
@@ -1010,7 +1010,7 @@ public class EditLayoutsAction extends PortletAction {
 						lastLayoutRevision.getWapThemeId(),
 						lastLayoutRevision.getWapColorSchemeId(),
 						lastLayoutRevision.getCss(), serviceContext);
-				
+
 				StagingUtil.setRecentLayoutRevisionId(
 					themeDisplay.getUser(),
 					newLayoutRevision.getLayoutSetBranchId(),
