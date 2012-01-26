@@ -3133,13 +3133,13 @@
 	</library>
 	<library>
 		<file-name>portal/vaadin.jar</file-name>
-		<version>6.4.10</version>
+		<version>6.7.4</version>
 		<project-name>Vaadin</project-name>
 		<project-url>http://vaadin.com</project-url>
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
-				<copyright-notice>Copyright (c) 2011 Vaadin Ltd</copyright-notice>
+				<copyright-notice>Copyright (c) 2012 Vaadin Ltd</copyright-notice>
 			</license>
 		</licenses>
 	</library>
