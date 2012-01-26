@@ -71,13 +71,13 @@ public class EvaluateLogTest extends BaseTestCase {
 				}
 
 				if (line.contains(
-					"[MultiThreadedHttpConnectionManager cleanup]")) {
+						"[MultiThreadedHttpConnectionManager cleanup]")) {
 
 					continue;
 				}
 
 				if (line.contains(
-					"[org.python.google.common.base.internal.Finalizer]")) {
+						"[org.python.google.common.base.internal.Finalizer]")) {
 
 					continue;
 				}
