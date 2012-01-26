@@ -970,7 +970,7 @@ public class EditLayoutsAction extends PortletAction {
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			actionRequest);
 
-		LayoutRevision enableLayoutRevision = 
+		LayoutRevision enableLayoutRevision =
 			LayoutRevisionLocalServiceUtil.updateLayoutRevision(
 			serviceContext.getUserId(), layoutRevisionId,
 			layoutRevision.getLayoutBranchId(), layoutRevision.getName(),
