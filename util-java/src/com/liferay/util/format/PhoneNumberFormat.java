@@ -15,15 +15,11 @@
 package com.liferay.util.format;
 
 /**
- * @author Brian Wing Shun Chan
- * @author Manuel de la Peña
+ * @author     Brian Wing Shun Chan
+ * @author     Manuel de la Peña
+ * @deprecated Moved to {@link
+ *             com.liferay.portal.kernel.format.PhoneNumberFormat}
  */
-public interface PhoneNumberFormat {
-
-	public String format(String phoneNumber);
-
-	public String strip(String phoneNumber);
-
-	public boolean validate(String phoneNumber);
-
+public interface PhoneNumberFormat
+	extends com.liferay.portal.kernel.format.PhoneNumberFormat {
 }

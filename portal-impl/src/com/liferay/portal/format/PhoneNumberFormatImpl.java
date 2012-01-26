@@ -12,32 +12,22 @@
  * details.
  */
 
-package com.liferay.util.format;
+package com.liferay.portal.format;
 
 import com.liferay.portal.kernel.format.PhoneNumberFormat;
-import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.format.PhoneNumberFormatWrapper;
+import com.liferay.portal.kernel.util.InstancePool;
+import com.liferay.portal.util.PropsValues;
 
 /**
- * @author     Brian Wing Shun Chan
- * @author     Manuel de la Peña
- * @deprecated {@link com.liferay.portal.format.IdenticalPhoneNumberFormatImpl}
+ * @author Brian Wing Shun Chan
  */
-public class IdenticalPhoneNumberFormat implements PhoneNumberFormat {
+public class PhoneNumberFormatImpl extends PhoneNumberFormatWrapper {
 
-	public String format(String phoneNumber) {
-		return phoneNumber;
-	}
-
-	public String strip(String phoneNumber) {
-		return phoneNumber;
-	}
-
-	public boolean validate(String phoneNumber) {
-		if (Validator.isNull(phoneNumber)) {
-			return false;
-		}
-
-		return true;
+	public PhoneNumberFormatImpl() {
+		super(
+			(PhoneNumberFormat)InstancePool.get(
+				PropsValues.PHONE_NUMBER_FORMAT_IMPL));
 	}
 
 }

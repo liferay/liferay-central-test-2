@@ -12,14 +12,18 @@
  * details.
  */
 
-package com.liferay.util.format;
-
-import com.liferay.portal.kernel.format.PhoneNumberFormatUtil;
+package com.liferay.portal.kernel.format;
 
 /**
- * @author     Brian Wing Shun Chan
- * @author     Manuel de la Peña
- * @deprecated Moved to {@link PhoneNumberFormatUtil}
+ * @author Brian Wing Shun Chan
+ * @author Manuel de la Peña
  */
-public class PhoneNumberUtil extends PhoneNumberFormatUtil {
+public interface PhoneNumberFormat {
+
+	public String format(String phoneNumber);
+
+	public String strip(String phoneNumber);
+
+	public boolean validate(String phoneNumber);
+
 }

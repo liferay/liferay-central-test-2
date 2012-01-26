@@ -12,17 +12,17 @@
  * details.
  */
 
-package com.liferay.util.format;
+package com.liferay.portal.format;
 
 import com.liferay.portal.kernel.format.PhoneNumberFormat;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.util.PropsValues;
 
 /**
- * @author     Brian Wing Shun Chan
- * @author     Manuel de la Peña
- * @deprecated {@link com.liferay.portal.format.IdenticalPhoneNumberFormatImpl}
+ * @author Brian Wing Shun Chan
+ * @author Manuel de la Peña
  */
-public class IdenticalPhoneNumberFormat implements PhoneNumberFormat {
+public class InternationalPhoneNumberFormatImpl implements PhoneNumberFormat {
 
 	public String format(String phoneNumber) {
 		return phoneNumber;
@@ -37,7 +37,8 @@ public class IdenticalPhoneNumberFormat implements PhoneNumberFormat {
 			return false;
 		}
 
-		return true;
+		return phoneNumber.matches(
+			PropsValues.PHONE_NUMBER_FORMAT_INTERNATIONAL_REGEXP);
 	}
 
 }

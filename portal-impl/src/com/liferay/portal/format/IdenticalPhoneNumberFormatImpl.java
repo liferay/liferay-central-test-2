@@ -12,17 +12,16 @@
  * details.
  */
 
-package com.liferay.util.format;
+package com.liferay.portal.format;
 
 import com.liferay.portal.kernel.format.PhoneNumberFormat;
 import com.liferay.portal.kernel.util.Validator;
 
 /**
- * @author     Brian Wing Shun Chan
- * @author     Manuel de la Peña
- * @deprecated {@link com.liferay.portal.format.IdenticalPhoneNumberFormatImpl}
+ * @author Brian Wing Shun Chan
+ * @author Manuel de la Peña
  */
-public class IdenticalPhoneNumberFormat implements PhoneNumberFormat {
+public class IdenticalPhoneNumberFormatImpl implements PhoneNumberFormat {
 
 	public String format(String phoneNumber) {
 		return phoneNumber;

@@ -17,6 +17,7 @@ package com.liferay.portal.service.impl;
 import com.liferay.portal.PhoneNumberException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.format.PhoneNumberFormatUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Account;
 import com.liferay.portal.model.Contact;
@@ -26,7 +27,6 @@ import com.liferay.portal.model.Phone;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.base.PhoneLocalServiceBaseImpl;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.util.format.PhoneNumberUtil;
 
 import java.util.Date;
 import java.util.Iterator;
@@ -166,8 +166,16 @@ public class PhoneLocalServiceImpl extends PhoneLocalServiceBaseImpl {
 			String number, String extension, int typeId, boolean primary)
 		throws PortalException, SystemException {
 
-		if (!validatePhoneNumber(number) || !validateExtension(extension)) {
+		if (!PhoneNumberFormatUtil.validate(number)) {
 			throw new PhoneNumberException();
+		}
+
+		if (Validator.isNotNull(extension)) {
+			for (int i = 0;i < extension.length();i++) {
+				if (!Character.isDigit(extension.charAt(i))) {
+					throw new PhoneNumberException();
+				}
+			}
 		}
 
 		if (phoneId > 0) {
@@ -187,27 +195,6 @@ public class PhoneLocalServiceImpl extends PhoneLocalServiceBaseImpl {
 		}
 
 		validate(phoneId, companyId, classNameId, classPK, primary);
-	}
-
-	protected boolean validateExtension(String extension) {
-
-		// Extension is not required
-
-		if (Validator.isNull(extension)) {
-			return true;
-		}
-
-		for (int i = 0;i < extension.length();i++) {
-			if (!Character.isDigit(extension.charAt(i))) {
-				return false;
-			}
-		}
-
-		return true;
-	}
-
-	protected boolean validatePhoneNumber(String phoneNumber) {
-		return PhoneNumberUtil.validate(phoneNumber);
 	}
 
 }

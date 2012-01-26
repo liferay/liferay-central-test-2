@@ -12,22 +12,20 @@
  * details.
  */
 
-package com.liferay.util.format;
+package com.liferay.portal.format;
 
 import com.liferay.portal.kernel.format.PhoneNumberFormat;
-import com.liferay.portal.kernel.util.PropsKeys;
-import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.util.PropsValues;
 
 /**
- * @author     Brian Wing Shun Chan
- * @author     Manuel de la Peña
- * @deprecated {@link com.liferay.portal.format.USAPhoneNumberFormatImpl}
+ * @author Brian Wing Shun Chan
+ * @author Manuel de la Peña
  */
-public class USAPhoneNumberFormat implements PhoneNumberFormat {
+public class USAPhoneNumberFormatImpl implements PhoneNumberFormat {
 
 	public String format(String phoneNumber) {
 		if (Validator.isNull(phoneNumber)) {
@@ -77,8 +75,7 @@ public class USAPhoneNumberFormat implements PhoneNumberFormat {
 			return false;
 		}
 
-		return phoneNumber.matches(
-			PropsUtil.get(PropsKeys.PHONE_NUMBER_FORMAT_USA_REGEXP));
+		return phoneNumber.matches(PropsValues.PHONE_NUMBER_FORMAT_USA_REGEXP);
 	}
 
 }

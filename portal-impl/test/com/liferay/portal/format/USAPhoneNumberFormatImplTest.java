@@ -12,32 +12,34 @@
  * details.
  */
 
-package com.liferay.util.format;
+package com.liferay.portal.format;
 
 import com.liferay.portal.kernel.format.PhoneNumberFormat;
-import com.liferay.portal.kernel.util.Validator;
 
 /**
- * @author     Brian Wing Shun Chan
- * @author     Manuel de la Peña
- * @deprecated {@link com.liferay.portal.format.IdenticalPhoneNumberFormatImpl}
+ * @author Brian Wing Shun Chan
+ * @author Manuel de la Peña
  */
-public class IdenticalPhoneNumberFormat implements PhoneNumberFormat {
+public class USAPhoneNumberFormatImplTest
+	extends BasePhoneNumberFormatImplTestCase {
 
-	public String format(String phoneNumber) {
-		return phoneNumber;
+	@Override
+	public String[] getInvalidPhoneNumbers() {
+		return new String[0];
 	}
 
-	public String strip(String phoneNumber) {
-		return phoneNumber;
+	@Override
+	public PhoneNumberFormat getPhoneNumberFormat() {
+		return new USAPhoneNumberFormatImpl();
 	}
 
-	public boolean validate(String phoneNumber) {
-		if (Validator.isNull(phoneNumber)) {
-			return false;
-		}
-
-		return true;
+	@Override
+	public String[] getValidPhoneNumbers() {
+		return new String[] {
+			"1234567890", "123-456-7890", "123.456.7890", "123 456 7890",
+			"(123) 456 7890", "(012) 345-6789", "(123) 456-7890", "012-3456",
+			"+1 (123) 456-7890", "1-123-456-7890", "1.123.456.7890"
+		};
 	}
 
 }
