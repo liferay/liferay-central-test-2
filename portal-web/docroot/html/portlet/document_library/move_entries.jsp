@@ -70,8 +70,8 @@ for (FileEntry curFileEntry : fileEntries) {
 
 List<DLFileShortcut> fileShortcuts = (List<DLFileShortcut>)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FILE_SHORTCUTS);
 
-List<DLFileShortcut> validShortcutEntries = new ArrayList<DLFileShortcut>();
 List<DLFileShortcut> invalidShortcutEntries = new ArrayList<DLFileShortcut>();
+List<DLFileShortcut> validShortcutEntries = new ArrayList<DLFileShortcut>();
 
 for (DLFileShortcut curFileShortcut : fileShortcuts) {
 	boolean movePermission = DLFileShortcutPermission.contains(permissionChecker, curFileShortcut, ActionKeys.UPDATE);
