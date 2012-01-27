@@ -330,6 +330,18 @@ public class LayoutSetBranchLocalServiceImpl
 		return layoutSetBranchFinder.findByMaster(groupId, privateLayout);
 	}
 
+	/**
+	 * @deprecated {@link #getUserLayoutSetBranch(long, long, boolean, long, long)}
+	 */
+	public LayoutSetBranch getUserLayoutSetBranch(
+			long userId, long groupId, boolean privateLayout,
+			long layoutSetBranchId)
+		throws PortalException, SystemException {
+
+		return getUserLayoutSetBranch(
+			userId, groupId, privateLayout, 0, layoutSetBranchId);
+	}
+
 	public LayoutSetBranch getUserLayoutSetBranch(
 			long userId, long groupId, boolean privateLayout, long layoutSetId,
 			long layoutSetBranchId)
