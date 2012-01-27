@@ -531,7 +531,7 @@ public class EditLayoutsAction extends PortletAction {
 		}
 	}
 
-	protected void deleteThemeSettings(
+	protected void deleteThemeSettingsProperties(
 		UnicodeProperties typeSettingsProperties, String device) {
 
 		String keyPrefix = ThemeSettingImpl.namespaceProperty(device);
@@ -632,11 +632,6 @@ public class EditLayoutsAction extends PortletAction {
 		return new byte[0];
 	}
 
-	@Override
-	protected boolean isCheckMethodOnProcessAction() {
-		return _CHECK_METHOD_ON_PROCESS_ACTION;
-	}
-
 	protected UnicodeProperties getThemeSettingsProperties(
 			ActionRequest actionRequest, long companyId,
 			UnicodeProperties typeSettingsProperties, String device,
@@ -646,7 +641,7 @@ public class EditLayoutsAction extends PortletAction {
 		Theme theme = ThemeLocalServiceUtil.getTheme(
 			companyId, themeId, wapTheme);
 
-		deleteThemeSettings(typeSettingsProperties, device);
+		deleteThemeSettingsProperties(typeSettingsProperties, device);
 
 		Map<String, ThemeSetting> configurableSettings =
 			theme.getConfigurableSettings();
@@ -678,6 +673,11 @@ public class EditLayoutsAction extends PortletAction {
 		}
 
 		return typeSettingsProperties;
+	}
+
+	@Override
+	protected boolean isCheckMethodOnProcessAction() {
+		return _CHECK_METHOD_ON_PROCESS_ACTION;
 	}
 
 	protected void selectLayoutBranch(ActionRequest actionRequest)
@@ -1055,7 +1055,7 @@ public class EditLayoutsAction extends PortletAction {
 				themeId = ThemeImpl.getDefaultRegularThemeId(companyId);
 				colorSchemeId = StringPool.BLANK;
 
-				deleteThemeSettings(typeSettingsProperties, device);
+				deleteThemeSettingsProperties(typeSettingsProperties, device);
 			}
 			else if (Validator.isNotNull(themeId)) {
 				colorSchemeId = getColorSchemeId(
