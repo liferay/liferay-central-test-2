@@ -147,9 +147,6 @@ public class LayoutSetStagingHandler implements InvocationHandler {
 	private static Set<String> _layoutSetBranchMethodNames =
 		new HashSet<String>();
 
-	private static Set<String> _layoutSetBranchInheritanceMethodNames =
-			new HashSet<String>();
-
 	private LayoutSet _layoutSet;
 	private LayoutSetBranch _layoutSetBranch;
 
