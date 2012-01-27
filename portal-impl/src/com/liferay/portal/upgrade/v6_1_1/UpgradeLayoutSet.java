@@ -37,11 +37,11 @@ public class UpgradeLayoutSet extends UpgradeProcess {
 		try {
 			con = DataAccess.getConnection();
 
-			StringBundler sb = new StringBundler(7);
+			StringBundler sb = new StringBundler(4);
 
 			sb.append("select Group_.groupId, Group_.liveGroupId, ");
 			sb.append("LayoutSet.layoutSetId from LayoutSet inner join ");
-			sb.append("Group_ ON (LayoutSet.groupId = Group_.groupId and ");
+			sb.append("Group_ on (LayoutSet.groupId = Group_.groupId and ");
 			sb.append("Group_.liveGroupId > 0 and LayoutSet.logo = ?)");
 
 			ps = con.prepareStatement(sb.toString());
@@ -56,7 +56,7 @@ public class UpgradeLayoutSet extends UpgradeProcess {
 
 				runSQL(
 					"update LayoutSet set logoId = 0 where groupId = " +
-							groupId + " and layoutSetId = " + layoutSetId);
+						groupId + " and layoutSetId = " + layoutSetId);
 			}
 		}
 		finally {

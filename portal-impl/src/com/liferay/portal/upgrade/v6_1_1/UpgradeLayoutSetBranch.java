@@ -37,25 +37,19 @@ public class UpgradeLayoutSetBranch extends UpgradeProcess {
 		try {
 			con = DataAccess.getConnection();
 
-			StringBundler sb = new StringBundler(7);
-
-			sb.append("select LayoutSetBranch.LayoutSetBranchId, ");
-			sb.append("LayoutSetBranch.groupId, LayoutSetBranch.privateLayout");
-			sb.append(" from LayoutSetBranch");
-			
-			ps = con.prepareStatement(sb.toString());
+			ps = con.prepareStatement(
+				"select groupId, layoutSetBranchId, privateLayout from " +
+					"LayoutSetBranch");
 
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
-				long groupId = rs.getLong("LayoutSetBranch.groupId");
-				long layoutSetBranchId = rs.getLong(
-					"LayoutSetBranch.LayoutSetBranchId");
-				boolean privateLayout = rs.getBoolean(
-					"LayoutSetBranch.privateLayout");
+				long layoutSetBranchId = rs.getLong("layoutSetBranchId");
+				long groupId = rs.getLong("groupId");
+				boolean privateLayout = rs.getBoolean("privateLayout");
 
 				upgradeLayoutSetBranch(
-					groupId, privateLayout, layoutSetBranchId);
+					layoutSetBranchId, groupId, privateLayout);
 			}
 		}
 		finally {
@@ -63,59 +57,6 @@ public class UpgradeLayoutSetBranch extends UpgradeProcess {
 		}
 	}
 
-	protected void upgradeLayoutSetBranch(
-			long groupId, boolean privateLayout, long layoutSetBranchId)
-		throws Exception {
-
-		Connection con = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-
-		try {
-			con = DataAccess.getConnection();
-
-			StringBundler sb = new StringBundler(7);
-
-			sb.append("select LayoutSet.layoutSetId, ");
-			sb.append("LayoutSet.themeId, LayoutSet.colorSchemeId, ");
-			sb.append("LayoutSet.wapThemeId, LayoutSet.wapColorSchemeId, ");
-			sb.append("LayoutSet.css, LayoutSet.settings_, ");
-			sb.append("LayoutSet.layoutSetPrototypeUuid, ");
-			sb.append("LayoutSet.layoutSetPrototypeLinkEnabled ");
-			sb.append("from LayoutSet where groupId = ? and privateLayout = ?");
-
-			ps = con.prepareStatement(sb.toString());
-
-			ps.setLong(1, groupId);
-			ps.setBoolean(2, privateLayout);
-
-			rs = ps.executeQuery();
-
-			while (rs.next()) {
-				long layoutSetId = rs.getLong("LayoutSet.layoutSetId");
-				String themeId = rs.getString("LayoutSet.themeId");
-				String colorSchemeId = rs.getString("LayoutSet.colorSchemeId");
-				String wapThemeId = rs.getString("LayoutSet.wapThemeId");
-				String wapColorSchemeId = rs.getString(
-					"LayoutSet.wapColorSchemeId");
-				String css = rs.getString("LayoutSet.css");
-				String settings = rs.getString("LayoutSet.settings_");
-				String layoutSetPrototypeUuid = rs.getString(
-					"LayoutSet.layoutSetPrototypeUuid");
-				boolean layoutSetPrototypeLinkEnabled = rs.getBoolean(
-					"LayoutSet.layoutSetPrototypeLinkEnabled");
-
-				updateLayoutSetBranch(
-					layoutSetBranchId, themeId, colorSchemeId, wapThemeId,
-					wapColorSchemeId, css, settings, layoutSetPrototypeUuid,
-					layoutSetPrototypeLinkEnabled);
-			}
-		}
-		finally {
-			DataAccess.cleanUp(con, ps, rs);
-		}
-	}
-	
 	protected void updateLayoutSetBranch(
 			long layoutSetBranchId, String themeId, String colorSchemeId,
 			String wapThemeId, String wapColorSchemeId, String css,
@@ -131,11 +72,11 @@ public class UpgradeLayoutSetBranch extends UpgradeProcess {
 
 			StringBundler sb = new StringBundler(5);
 
-			sb.append("update LayoutSetBranch set themeId = ?, colorSchemeId = ?, ");
-			sb.append("wapThemeId = ?, wapColorSchemeId = ?, css = ?, ");
+			sb.append("update LayoutSetBranch set themeId = ?, colorSchemeId ");
+			sb.append("= ?, wapThemeId = ?, wapColorSchemeId = ?, css = ?, ");
 			sb.append("settings_ = ?, layoutSetPrototypeUuid = ?, ");
-			sb.append("layoutSetPrototypeLinkEnabled = ? ");
-			sb.append("where layoutSetBranchId = ?");
+			sb.append("layoutSetPrototypeLinkEnabled = ? where ");
+			sb.append("layoutSetBranchId = ?");
 
 			ps = con.prepareStatement(sb.toString());
 
@@ -153,6 +94,54 @@ public class UpgradeLayoutSetBranch extends UpgradeProcess {
 		}
 		finally {
 			DataAccess.cleanUp(con, ps);
+		}
+	}
+
+	protected void upgradeLayoutSetBranch(
+			long layoutSetBranchId, long groupId, boolean privateLayout)
+		throws Exception {
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = DataAccess.getConnection();
+
+			StringBundler sb = new StringBundler(4);
+
+			sb.append("select themeId, colorSchemeId, wapThemeId, ");
+			sb.append("wapColorSchemeId, css, settings_, ");
+			sb.append("layoutSetPrototypeUuid, layoutSetPrototypeLinkEnabled ");
+			sb.append("from LayoutSet where groupId = ? and privateLayout = ?");
+
+			ps = con.prepareStatement(sb.toString());
+
+			ps.setLong(1, groupId);
+			ps.setBoolean(2, privateLayout);
+
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				String themeId = rs.getString("themeId");
+				String colorSchemeId = rs.getString("colorSchemeId");
+				String wapThemeId = rs.getString("wapThemeId");
+				String wapColorSchemeId = rs.getString("wapColorSchemeId");
+				String css = rs.getString("css");
+				String settings = rs.getString("settings_");
+				String layoutSetPrototypeUuid = rs.getString(
+					"layoutSetPrototypeUuid");
+				boolean layoutSetPrototypeLinkEnabled = rs.getBoolean(
+					"layoutSetPrototypeLinkEnabled");
+
+				updateLayoutSetBranch(
+					layoutSetBranchId, themeId, colorSchemeId, wapThemeId,
+					wapColorSchemeId, css, settings, layoutSetPrototypeUuid,
+					layoutSetPrototypeLinkEnabled);
+			}
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
 		}
 	}
 

@@ -29,9 +29,6 @@ public interface LayoutSet extends LayoutSetModel, PersistedModel {
 	 *
 	 * Never modify this interface directly. Add methods to {@link com.liferay.portal.model.impl.LayoutSetImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public com.liferay.portal.model.Theme getTheme()
-		throws com.liferay.portal.kernel.exception.SystemException;
-
 	public com.liferay.portal.model.ColorScheme getColorScheme()
 		throws com.liferay.portal.kernel.exception.SystemException;
 
@@ -47,16 +44,19 @@ public interface LayoutSet extends LayoutSetModel, PersistedModel {
 
 	public java.lang.String getSettingsProperty(java.lang.String key);
 
+	public com.liferay.portal.model.Theme getTheme()
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public java.lang.String getThemeSetting(java.lang.String key,
 		java.lang.String device)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.lang.String getVirtualHostname();
 
-	public com.liferay.portal.model.Theme getWapTheme()
+	public com.liferay.portal.model.ColorScheme getWapColorScheme()
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public com.liferay.portal.model.ColorScheme getWapColorScheme()
+	public com.liferay.portal.model.Theme getWapTheme()
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public boolean isLayoutSetPrototypeLinkActive();
