@@ -674,7 +674,9 @@ public class EditUserAction extends PortletAction {
 			}
 		}
 
-		if (!serviceContext.getPortletId().equals(PortletKeys.MY_ACCOUNT)) {
+		String portletId = serviceContext.getPortletId();
+
+		if (!portletId.equals(PortletKeys.MY_ACCOUNT)) {
 			long publicLayoutSetPrototypeId = ParamUtil.getLong(
 				actionRequest, "publicLayoutSetPrototypeId");
 			long privateLayoutSetPrototypeId = ParamUtil.getLong(
