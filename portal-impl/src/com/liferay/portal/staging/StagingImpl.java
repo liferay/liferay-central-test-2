@@ -689,6 +689,12 @@ public class StagingImpl implements Staging {
 			PortletDataHandlerKeys.IGNORE_LAST_PUBLISH_DATE,
 			new String[] {Boolean.TRUE.toString()});
 		parameterMap.put(
+			PortletDataHandlerKeys.LAYOUT_SET_SETTINGS,
+			new String[] {Boolean.FALSE.toString()});
+		parameterMap.put(
+			PortletDataHandlerKeys.LOGO,
+			new String[] {Boolean.FALSE.toString()});
+		parameterMap.put(
 			PortletDataHandlerKeys.PERMISSIONS,
 			new String[] {Boolean.TRUE.toString()});
 		parameterMap.put(
@@ -709,12 +715,6 @@ public class StagingImpl implements Staging {
 		parameterMap.put(
 			PortletDataHandlerKeys.THEME_REFERENCE,
 			new String[] {Boolean.TRUE.toString()});
-		parameterMap.put(
-			PortletDataHandlerKeys.LOGO,
-			new String[] {Boolean.FALSE.toString()});
-		parameterMap.put(
-			PortletDataHandlerKeys.LAYOUT_SET_SETTINGS,
-			new String[] {Boolean.FALSE.toString()});
 		parameterMap.put(
 			PortletDataHandlerKeys.UPDATE_LAST_PUBLISH_DATE,
 			new String[] {Boolean.TRUE.toString()});
@@ -758,6 +758,20 @@ public class StagingImpl implements Staging {
 				new String[] {Boolean.FALSE.toString()});
 		}
 
+		if (!parameterMap.containsKey(
+				PortletDataHandlerKeys.LAYOUT_SET_SETTINGS)) {
+
+			parameterMap.put(
+				PortletDataHandlerKeys.LAYOUT_SET_SETTINGS,
+				new String[] {Boolean.FALSE.toString()});
+		}
+
+		if (!parameterMap.containsKey(PortletDataHandlerKeys.LOGO)) {
+			parameterMap.put(
+				PortletDataHandlerKeys.LOGO,
+				new String[] {Boolean.FALSE.toString()});
+		}
+
 		if (!parameterMap.containsKey(PortletDataHandlerKeys.PORTLET_DATA)) {
 			parameterMap.put(
 				PortletDataHandlerKeys.PORTLET_DATA,
@@ -795,20 +809,6 @@ public class StagingImpl implements Staging {
 		if (!parameterMap.containsKey(PortletDataHandlerKeys.THEME_REFERENCE)) {
 			parameterMap.put(
 				PortletDataHandlerKeys.THEME_REFERENCE,
-				new String[] {Boolean.FALSE.toString()});
-		}
-
-		if (!parameterMap.containsKey(PortletDataHandlerKeys.LOGO)) {
-			parameterMap.put(
-				PortletDataHandlerKeys.LOGO,
-				new String[] {Boolean.FALSE.toString()});
-		}
-
-		if (!parameterMap.containsKey(
-			PortletDataHandlerKeys.LAYOUT_SET_SETTINGS)) {
-
-			parameterMap.put(
-				PortletDataHandlerKeys.LAYOUT_SET_SETTINGS,
 				new String[] {Boolean.FALSE.toString()});
 		}
 
