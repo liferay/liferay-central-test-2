@@ -60,12 +60,12 @@ public class LayoutSetStagingHandler implements InvocationHandler {
 		return _layoutSetBranch;
 	}
 
-	public Object invoke(Object proxy, Method method, Object[] args)
+	public Object invoke(Object proxy, Method method, Object[] arguments)
 		throws Throwable {
 
 		try {
 			if (_layoutSetBranch == null) {
-				return method.invoke(_layoutSet, args);
+				return method.invoke(_layoutSet, arguments);
 			}
 
 			String methodName = method.getName();
@@ -89,7 +89,8 @@ public class LayoutSetStagingHandler implements InvocationHandler {
 					Class<?> layoutSetBranchClass = _layoutSetBranch.getClass();
 
 					method = layoutSetBranchClass.getMethod(
-						methodName, ReflectionUtil.getParameterTypes(args));
+						methodName,
+						ReflectionUtil.getParameterTypes(arguments));
 
 					bean = _layoutSetBranch;
 				}
@@ -98,7 +99,7 @@ public class LayoutSetStagingHandler implements InvocationHandler {
 				}
 			}
 
-			return method.invoke(bean, args);
+			return method.invoke(bean, arguments);
 		}
 		catch (InvocationTargetException ite) {
 			throw ite.getTargetException();
@@ -147,9 +148,6 @@ public class LayoutSetStagingHandler implements InvocationHandler {
 	private static Set<String> _layoutSetBranchMethodNames =
 		new HashSet<String>();
 
-	private LayoutSet _layoutSet;
-	private LayoutSetBranch _layoutSetBranch;
-
 	static {
 		_layoutSetBranchMethodNames.add("getColorScheme");
 		_layoutSetBranchMethodNames.add("getColorSchemeId");
@@ -186,5 +184,8 @@ public class LayoutSetStagingHandler implements InvocationHandler {
 		_layoutSetBranchMethodNames.add("setWapColorSchemeId");
 		_layoutSetBranchMethodNames.add("setWapThemeId");
 	}
+
+	private LayoutSet _layoutSet;
+	private LayoutSetBranch _layoutSetBranch;
 
 }
