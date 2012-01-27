@@ -262,7 +262,7 @@ public class MessageListenerImpl implements MessageListener {
 		int endPos = messageId.indexOf(CharPool.GREATER_THAN, pos);
 
 		if (endPos == -1) {
-		    endPos = messageId.length();
+			endPos = messageId.length();
 		}
 
 		String mx = messageId.substring(pos, endPos);
