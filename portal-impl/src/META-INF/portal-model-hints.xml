@@ -389,8 +389,12 @@
 		<field name="colorSchemeId" type="String" />
 		<field name="wapThemeId" type="String" />
 		<field name="wapColorSchemeId" type="String" />
-		<field name="css" type="String" />
-		<field name="settings" type="String" />
+		<field name="css" type="String">
+			<hint-collection name="TEXTAREA" />
+		</field>
+		<field name="settings" type="String">
+			<hint-collection name="TEXTAREA" />
+		</field>
 		<field name="layoutSetPrototypeUuid" type="String" />
 		<field name="layoutSetPrototypeLinkEnabled" type="boolean" />
 	</model>
