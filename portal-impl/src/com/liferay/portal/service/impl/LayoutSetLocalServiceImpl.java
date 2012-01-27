@@ -84,15 +84,15 @@ public class LayoutSetLocalServiceImpl extends LayoutSetLocalServiceBaseImpl {
 			layoutSet.setLogoId(liveLayoutSet.getLogoId());
 
 			if (liveLayoutSet.isLogo()) {
-				Image liveLogo = imageLocalService.getImage(
+				Image logoImage = imageLocalService.getImage(
 					liveLayoutSet.getLogoId());
 
 				long logoId = counterLocalService.increment();
 
 				imageLocalService.updateImage(
-					logoId, liveLogo.getTextObj(), liveLogo.getType(),
-					liveLogo.getHeight(), liveLogo.getWidth(),
-					liveLogo.getSize());
+					logoId, logoImage.getTextObj(), logoImage.getType(),
+					logoImage.getHeight(), logoImage.getWidth(),
+					logoImage.getSize());
 
 				layoutSet.setLogoId(logoId);
 			}

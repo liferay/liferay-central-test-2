@@ -112,19 +112,18 @@ public class LayoutSetBranchLocalServiceImpl
 		layoutSetBranch.setName(name);
 		layoutSetBranch.setDescription(description);
 		layoutSetBranch.setMaster(master);
-
 		layoutSetBranch.setLogo(logo);
 		layoutSetBranch.setLogoId(logoId);
 
 		if (logo) {
-			Image originalLogo = imageLocalService.getImage(logoId);
+			Image logoImage = imageLocalService.getImage(logoId);
 
 			long layoutSetBranchLogoId = counterLocalService.increment();
 
 			imageLocalService.updateImage(
-				layoutSetBranchLogoId, originalLogo.getTextObj(),
-				originalLogo.getType(), originalLogo.getHeight(),
-				originalLogo.getWidth(), originalLogo.getSize());
+				layoutSetBranchLogoId, logoImage.getTextObj(),
+				logoImage.getType(), logoImage.getHeight(),
+				logoImage.getWidth(), logoImage.getSize());
 
 			layoutSetBranch.setLogoId(layoutSetBranchLogoId);
 		}
