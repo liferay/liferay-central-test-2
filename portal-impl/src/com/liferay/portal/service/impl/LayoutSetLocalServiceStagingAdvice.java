@@ -320,6 +320,8 @@ public class LayoutSetLocalServiceStagingAdvice
 
 		for (int i = 0; i < layoutSets.size(); i++) {
 			LayoutSet wrappedLayoutSet = wrapLayoutSet(layoutSets.get(i));
+
+			wrappedLayoutSets.add(wrappedLayoutSet);
 		}
 
 		return wrappedLayoutSets;
