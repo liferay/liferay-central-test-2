@@ -492,19 +492,23 @@ public class SourceFormatter {
 			return;
 		}
 
+		String definitionNameLowerCase = definitionName.toLowerCase();
+		String previousDefinitionNameLowerCase =
+			previousDefinitionName.toLowerCase();
+
 		if (fileName.contains("persistence") &&
 			(previousDefinitionName.startsWith("doCount") &&
 			 definitionName.startsWith("doCount")) ||
 			(previousDefinitionName.startsWith("doFind") &&
 			 definitionName.startsWith("doFind")) ||
-			(previousDefinitionName.toLowerCase().startsWith("count") &&
-			 definitionName.toLowerCase().startsWith("count")) ||
-			(previousDefinitionName.toLowerCase().startsWith("filter") &&
-			 definitionName.toLowerCase().startsWith("filter")) ||
-			(previousDefinitionName.toLowerCase().startsWith("find") &&
-			 definitionName.toLowerCase().startsWith("find")) ||
-			(previousDefinitionName.toLowerCase().startsWith("join") &&
-			 definitionName.toLowerCase().startsWith("join"))) {
+			(previousDefinitionNameLowerCase.startsWith("count") &&
+			 definitionNameLowerCase.startsWith("count")) ||
+			(previousDefinitionNameLowerCase.startsWith("filter") &&
+			 definitionNameLowerCase.startsWith("filter")) ||
+			(previousDefinitionNameLowerCase.startsWith("find") &&
+			 definitionNameLowerCase.startsWith("find")) ||
+			(previousDefinitionNameLowerCase.startsWith("join") &&
+			 definitionNameLowerCase.startsWith("join"))) {
 
 			return;
 		}
