@@ -40,6 +40,8 @@ public class Demo1Tests extends BaseTestSuite {
 		testSuite.addTestSuite(Test_SignInTest.class);
 		testSuite.addTestSuite(Test_ViewAnnouncementsEntryTest.class);
 		testSuite.addTestSuite(Test_ViewScopedAnnouncementsEntryTest.class);
+		testSuite.addTestSuite(SignOutTest.class);
+		testSuite.addTestSuite(SignInTest.class);
 		testSuite.addTestSuite(TearDownAnnouncementsEntryTest.class);
 		testSuite.addTestSuite(TearDownPageTest.class);
 		testSuite.addTestSuite(TearDownUsersTest.class);
