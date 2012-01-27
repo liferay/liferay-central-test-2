@@ -63,7 +63,14 @@ public class LayoutSetLocalServiceStagingAdvice
 
 		Object returnValue = null;
 
-		if (methodName.equals("updateLogo") && (arguments.length == 5)) {
+		if (methodName.equals("updateLayoutSetPrototypeLinkEnabled") &&
+			(arguments.length == 5)) {
+
+			updateLayoutSetPrototypeLinkEnabled(
+				(Long)arguments[0], (Boolean)arguments[1],
+				(Boolean)arguments[2], (String)arguments[3]);
+		}
+		else if (methodName.equals("updateLogo") && (arguments.length == 5)) {
 			updateLogo(
 				(Long)arguments[0], (Boolean)arguments[1],
 				(Boolean)arguments[2], (InputStream)arguments[3],
@@ -81,13 +88,6 @@ public class LayoutSetLocalServiceStagingAdvice
 			returnValue = updateSettings(
 				(Long)arguments[0], (Boolean)arguments[1],
 				(String)arguments[2]);
-		}
-		else if (methodName.equals("updateLayoutSetPrototypeLinkEnabled") &&
-				 (arguments.length == 5)) {
-
-			updateLayoutSetPrototypeLinkEnabled(
-				(Long)arguments[0], (Boolean)arguments[1],
-				(Boolean)arguments[2], (String)arguments[3]);
 		}
 		else {
 			try {
