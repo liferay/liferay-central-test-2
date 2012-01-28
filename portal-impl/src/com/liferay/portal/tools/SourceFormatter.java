@@ -76,7 +76,7 @@ public class SourceFormatter {
 			_javaTermAlphabetizeExclusionsProperties = _getExclusionsProperties(
 				"source_formatter_javaterm_alphabetize_exclusions.properties");
 			_lineLengthExclusionsProperties = _getExclusionsProperties(
-				"source_formatter_line_lenght_exclusions.properties");
+				"source_formatter_line_length_exclusions.properties");
 
 			Thread thread1 = new Thread () {
 				@Override
