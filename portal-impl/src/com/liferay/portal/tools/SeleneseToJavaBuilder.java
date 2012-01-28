@@ -18,13 +18,15 @@ import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
 import com.liferay.portal.kernel.util.ObjectValuePair;
-import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnicodeFormatter;
 import com.liferay.portal.tools.servicebuilder.ServiceBuilder;
 import com.liferay.portal.util.InitUtil;
+
+import jargs.gnu.CmdLineParser;
 
 import java.io.File;
 
@@ -35,6 +37,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeSet;
 
 import org.apache.tools.ant.DirectoryScanner;
 
@@ -46,49 +49,44 @@ public class SeleneseToJavaBuilder {
 	public static void main(String[] args) throws Exception {
 		InitUtil.initWithSpring();
 
-		if (args.length == 1) {
-			new SeleneseToJavaBuilder(args[0]);
-		}
-		else {
-			throw new IllegalArgumentException();
-		}
+		new SeleneseToJavaBuilder(args);
 	}
 
-	public SeleneseToJavaBuilder(String basedir) throws Exception {
-		DirectoryScanner directoryScanner = new DirectoryScanner();
+	public SeleneseToJavaBuilder(String[] args) throws Exception {
+		CmdLineParser cmdLineParser = new CmdLineParser();
 
-		directoryScanner.setBasedir(basedir);
-		directoryScanner.setExcludes(
-			new String[] {
-				"**\\EvaluateLogTest.java", "**\\EvaluateUserCSVFileTest.java",
-				"**\\IterateThemeTest.java", "**\\StopSeleniumTest.java",
-				"**\\WaitForSystemShutdownTest.java"
-			});
-		directoryScanner.setIncludes(
-			new String[] {
-				"**\\*Test.html", "**\\*Test.java", "**\\*Tests.html",
-				"**\\*Tests.java", "**\\*TestSuite.java"
-			});
+		CmdLineParser.Option basedirOption = cmdLineParser.addStringOption(
+			"basedir");
+		CmdLineParser.Option minimizeOption = cmdLineParser.addStringOption(
+			"minimize");
 
-		directoryScanner.scan();
+		cmdLineParser.parse(args);
+
+		_basedir = (String)cmdLineParser.getOptionValue(basedirOption);
+
+		String minimizeTestFileName =
+			(String)cmdLineParser.getOptionValue(minimizeOption);
+
+		minimizeTestFileName = normalizeFileName(minimizeTestFileName);
+
+		String minimizeTestContent = getNormalizedContent(minimizeTestFileName);
 
 		int testHtmlCount = 0;
 
 		Map<String, ObjectValuePair<String, IntegerWrapper>> testHtmlMap =
 			new HashMap<String, ObjectValuePair<String, IntegerWrapper>>();
 
-		Set<String> fileNames = SetUtil.fromArray(
-			directoryScanner.getIncludedFiles());
+		Set<String> fileNames = getFileNames();
 
 		for (String fileName : fileNames) {
 			if (fileName.endsWith("Test.html")) {
 				testHtmlCount++;
 
-				String content = FileUtil.read(basedir + "/" + fileName);
+				String content = getNormalizedContent(fileName);
 
-				content = content.trim();
-				content = StringUtil.replace(content, "\n", "");
-				content = StringUtil.replace(content, "\r\n", "");
+				if ((content != null) && content.equals(minimizeTestContent)) {
+					minimizeTestCase(fileName, minimizeTestFileName);
+				}
 
 				ObjectValuePair<String, IntegerWrapper> testHtmlOVP =
 					testHtmlMap.get(content);
@@ -105,10 +103,10 @@ public class SeleneseToJavaBuilder {
 					integerWrapper.increment();
 				}
 
-				translateTestCase(basedir, fileName);
+				translateTestCase(fileName);
 			}
 			else if (fileName.endsWith("Tests.html")) {
-				translateTestSuite(basedir, fileName);
+				translateTestSuite(fileName);
 			}
 			else if (fileName.endsWith("Test.java") ||
 					 fileName.endsWith("Tests.java")) {
@@ -158,13 +156,13 @@ public class SeleneseToJavaBuilder {
 			}
 		}
 
-		if (false && sb.length() > 0) {
+		if (sb.length() > 0) {
 			System.out.println(
 				"There are " + duplicateTestHtmlCount +
 					" duplicate tests out of " + testHtmlCount +
-						". See duplicate_selenium_tests.csv.");
+						". See duplicate_selenium_tests.txt.");
 
-			FileUtil.write("duplicate_selenium_tests.csv", sb.toString());
+			FileUtil.write("duplicate_selenium_tests.txt", sb.toString());
 		}
 	}
 
@@ -198,6 +196,86 @@ public class SeleneseToJavaBuilder {
 			sb.toString(), _FIX_PARAM_OLD_SUBS, _FIX_PARAM_NEW_SUBS);
 	}
 
+	protected Set<String> getFileNames() throws Exception {
+		DirectoryScanner directoryScanner = new DirectoryScanner();
+
+		directoryScanner.setBasedir(_basedir);
+		directoryScanner.setExcludes(
+			new String[] {
+				"**\\EvaluateLogTest.java", "**\\EvaluateUserCSVFileTest.java",
+				"**\\IterateThemeTest.java", "**\\StopSeleniumTest.java",
+				"**\\WaitForSystemShutdownTest.java"
+			});
+		directoryScanner.setIncludes(
+			new String[] {
+				"**\\*Test.html", "**\\*Test.java", "**\\*Tests.html",
+				"**\\*Tests.java", "**\\*TestSuite.java"
+			});
+
+		directoryScanner.scan();
+
+		Set<String> fileNames = new TreeSet<String>(
+			new StringComparator() {
+
+				@Override
+				public int compare(String s1, String s2) {
+					if (s1.endsWith("Test.html") &&
+						s2.contains("Tests.html")) {
+
+						return -1;
+					}
+
+					if (s1.endsWith("Tests.html") &&
+						s2.contains("Test.html")) {
+
+						return 1;
+					}
+
+					if (s1.endsWith(".html") && s2.contains(".java")) {
+						return -1;
+					}
+
+					if (s1.endsWith(".java") && s2.contains(".html")) {
+						return 1;
+					}
+
+					return super.compare(s1, s2);
+				}
+
+			});
+
+		for (String fileName : directoryScanner.getIncludedFiles()) {
+			fileName = normalizeFileName(fileName);
+
+			fileNames.add(fileName);
+		}
+
+		if (false) {
+			StringBundler sb = new StringBundler();
+
+			for (String fileName : fileNames) {
+				sb.append(fileName);
+				sb.append("\n");
+			}
+
+			writeFile("selenium_included_files.txt", sb.toString(), false);
+		}
+
+		return fileNames;
+	}
+
+	protected String getNormalizedContent(String fileName) throws Exception {
+		String content = readFile(fileName);
+
+		if (content != null) {
+			content = content.trim();
+			content = StringUtil.replace(content, "\n", "");
+			content = StringUtil.replace(content, "\r\n", "");
+		}
+
+		return content;
+	}
+
 	protected String[] getParams(String step) throws Exception {
 		String[] params = new String[3];
 
@@ -215,11 +293,86 @@ public class SeleneseToJavaBuilder {
 		return params;
 	}
 
-	protected void translateTestCase(String basedir, String fileName)
+	protected void minimizeTestCase(
+			String fileName, String minimizeTestFileName)
 		throws Exception {
 
-		fileName = StringUtil.replace(
+		int x = fileName.lastIndexOf(StringPool.SLASH);
+
+		String dirName = fileName.substring(0, x);
+
+		x = minimizeTestFileName.lastIndexOf(StringPool.SLASH);
+
+		String minimizeTestDirName = minimizeTestFileName.substring(0, x);
+
+		if (dirName.equals(minimizeTestDirName)) {
+			return;
+		}
+
+		String minimizeTestName = minimizeTestFileName.substring(x + 1);
+
+		x = fileName.indexOf("portalweb");
+
+		int count = StringUtil.count(fileName.substring(x), StringPool.SLASH);
+
+		String relativeMinimizeTestFileName = "";
+
+		while (count > 0) {
+			relativeMinimizeTestFileName += "../";
+
+			count--;
+		}
+
+		relativeMinimizeTestFileName +=
+			minimizeTestFileName.substring(
+				minimizeTestFileName.lastIndexOf("/", x) + 1);
+
+		File minimizeTestFile = new File(
+			_basedir + "/" + dirName + "/" + relativeMinimizeTestFileName);
+
+		if (!minimizeTestFile.exists()) {
+			throw new IllegalArgumentException(
+				minimizeTestFile.toString() + " does not exist");
+		}
+
+		String[] subfileNames = FileUtil.listFiles(_basedir + "/" + dirName);
+
+		for (String subfileName : subfileNames) {
+			if (!subfileName.endsWith("Tests.html")) {
+				continue;
+			}
+
+			File subfile = new File(
+				_basedir + "/" + dirName + "/" + subfileName);
+
+			String content = FileUtil.read(subfile);
+
+			content = StringUtil.replace(
+				content, "\"" + minimizeTestName + "\"",
+				"\"" + relativeMinimizeTestFileName + "\"");
+
+			FileUtil.write(subfile, content);
+		}
+
+		FileUtil.delete(_basedir + "/" + fileName);
+		FileUtil.delete(
+			_basedir + "/" + fileName.substring(0, fileName.length() - 5) +
+				".java");
+	}
+
+	protected String normalizeFileName(String fileName) {
+		return StringUtil.replace(
 			fileName, StringPool.BACK_SLASH, StringPool.SLASH);
+	}
+
+	protected String readFile(String fileName) throws Exception {
+		return FileUtil.read(_basedir + "/" + fileName);
+	}
+
+	protected void translateTestCase(String fileName) throws Exception {
+		if (!FileUtil.exists(_basedir + "/" + fileName)) {
+			return;
+		}
 
 		int x = fileName.lastIndexOf(StringPool.SLASH);
 		int y = fileName.indexOf(CharPool.PERIOD);
@@ -230,7 +383,7 @@ public class SeleneseToJavaBuilder {
 		String testMethodName =
 			"test" + testName.substring(0, testName.length() - 4);
 		String testFileName =
-			basedir + "/" + fileName.substring(0, y) + ".java";
+			_basedir + "/" + fileName.substring(0, y) + ".java";
 
 		StringBundler sb = new StringBundler();
 
@@ -252,7 +405,7 @@ public class SeleneseToJavaBuilder {
 		sb.append(testMethodName);
 		sb.append("() throws Exception {");
 
-		String xml = FileUtil.read(basedir + "/" + fileName);
+		String xml = readFile(fileName);
 
 		if ((xml.indexOf("<title>" + testName + "</title>") == -1) ||
 			(xml.indexOf("colspan=\"3\">" + testName + "</td>") == -1)) {
@@ -263,19 +416,19 @@ public class SeleneseToJavaBuilder {
 		if (xml.indexOf("&gt;") != -1) {
 			xml = StringUtil.replace(xml, "&gt;", ">");
 
-			FileUtil.write(basedir + "/" + fileName, xml);
+			writeFile(fileName, xml, false);
 		}
 
 		if (xml.indexOf("&lt;") != -1) {
 			xml = StringUtil.replace(xml, "&lt;", "<");
 
-			FileUtil.write(basedir + "/" + fileName, xml);
+			writeFile(fileName, xml, false);
 		}
 
 		if (xml.indexOf("&quot;") != -1) {
 			xml = StringUtil.replace(xml, "&quot;", "\"");
 
-			FileUtil.write(basedir + "/" + fileName, xml);
+			writeFile(fileName, xml, false);
 		}
 
 		x = xml.indexOf("<tbody>");
@@ -1096,19 +1249,10 @@ public class SeleneseToJavaBuilder {
 		sb.append("}");
 		sb.append("}");
 
-		String content = sb.toString();
-
-		File testFile = new File(testFileName);
-
-		ServiceBuilder.writeFile(testFile, content);
+		writeFile(testFileName, sb.toString(), true);
 	}
 
-	protected void translateTestSuite(String basedir, String fileName)
-		throws Exception {
-
-		fileName = StringUtil.replace(
-			fileName, StringPool.BACK_SLASH, StringPool.SLASH);
-
+	protected void translateTestSuite(String fileName) throws Exception {
 		int x = fileName.lastIndexOf(StringPool.SLASH);
 		int y = fileName.indexOf(StringPool.PERIOD);
 
@@ -1116,7 +1260,7 @@ public class SeleneseToJavaBuilder {
 			fileName.substring(0, x), StringPool.SLASH, StringPool.PERIOD);
 		String testName = fileName.substring(x + 1, y);
 		String testFileName =
-			basedir + "/" + fileName.substring(0, y) + ".java";
+			_basedir + "/" + fileName.substring(0, y) + ".java";
 
 		StringBundler sb = new StringBundler();
 
@@ -1127,7 +1271,7 @@ public class SeleneseToJavaBuilder {
 		sb.append("import com.liferay.portalweb.portal.BaseTestSuite;\n");
 		sb.append("import com.liferay.portalweb.portal.StopSeleniumTest;\n");
 
-		String xml = FileUtil.read(basedir + "/" + fileName);
+		String xml = readFile(fileName);
 
 		x = 0;
 		y = 0;
@@ -1141,6 +1285,14 @@ public class SeleneseToJavaBuilder {
 			if (!testCaseName.contains("..")) {
 				continue;
 			}
+
+			if (!testCaseName.contains("../portalweb/")) {
+				throw new IllegalArgumentException(
+					fileName + " has improper relative path");
+			}
+
+			testCaseName = StringUtil.replace(
+				testCaseName, "../../portalweb/", "../");
 
 			int z = fileName.lastIndexOf(StringPool.SLASH);
 
@@ -1206,20 +1358,27 @@ public class SeleneseToJavaBuilder {
 		sb.append("}");
 		sb.append("}");
 
-		String content = sb.toString();
-
-		File testFile = new File(testFileName);
-
-		ServiceBuilder.writeFile(testFile, content);
+		writeFile(testFileName, sb.toString(), true);
 	}
 
-	private static final String[] _FIX_PARAM_NEW_SUBS = new String[] {
-		"\\n", "\\n"
+	protected void writeFile(String fileName, String content, boolean format)
+		throws Exception {
+
+		if (format) {
+			File file = new File(fileName);
+
+			ServiceBuilder.writeFile(file, content);
+		}
+		else {
+			FileUtil.write(_basedir + "/" + fileName, content);
+		}
 	};
 
-	private static final String[] _FIX_PARAM_OLD_SUBS = new String[] {
-		"\\\\n", "<br />"
-	};
+	private static final String[] _FIX_PARAM_NEW_SUBS = {"\\n", "\\n"};
+
+	private static final String[] _FIX_PARAM_OLD_SUBS = {"\\\\n", "<br />"};
+
+	private String _basedir;
 
 	private class TestHtmlCountComparator
 		implements Comparator<ObjectValuePair<String, IntegerWrapper>> {
@@ -1242,6 +1401,6 @@ public class SeleneseToJavaBuilder {
 			}
 		}
 
-	};
+	}
 
 }

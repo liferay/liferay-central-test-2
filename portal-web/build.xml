@@ -647,6 +647,10 @@ var defaultTypes = []]>
 	<target name="build-selenium">
 		<delete dir="test-classes" />
 
+		<!--
+		ant build-selenium -Dminimize=com/liferay/portalweb/portal/util/TearDownPageTest.html
+		-->
+
 		<java
 			classname="com.liferay.portal.tools.SeleneseToJavaBuilder"
 			classpathref="project.classpath"
@@ -655,7 +659,7 @@ var defaultTypes = []]>
 			newenvironment="true"
 		>
 			<jvmarg value="-Dexternal-properties=com/liferay/portal/tools/dependencies/portal-tools.properties" />
-			<arg line="test" />
+			<arg line="--basedir test --minimize ${minimize}" />
 		</java>
 	</target>
 
