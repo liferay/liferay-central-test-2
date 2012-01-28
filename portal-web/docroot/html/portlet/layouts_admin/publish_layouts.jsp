@@ -113,7 +113,7 @@ long[] selectedLayoutIds = new long[0];
 boolean privateLayout = ParamUtil.getBoolean(request, "privateLayout", tabs1.equals("private-pages"));
 
 if (selPlid > 0) {
-	selectedLayoutIds = new long[] { selLayout.getLayoutId() };
+	selectedLayoutIds = new long[] {selLayout.getLayoutId()};
 }
 else {
 	treeKey = treeKey + privateLayout;

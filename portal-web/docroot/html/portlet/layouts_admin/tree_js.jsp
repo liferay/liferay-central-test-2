@@ -52,16 +52,16 @@ if (!selectableTree) {
 		PREFIX_PLID: '_plid_',
 
 		<%
-		JSONArray selectedNodesArray = JSONFactoryUtil.createJSONArray();
+		JSONArray selectedNodesJSONArray = JSONFactoryUtil.createJSONArray();
 
 		String selectedLayoutIds = SessionTreeJSClicks.getOpenNodes(request, treeId + "SelectedNode");
 
 		if (selectedLayoutIds != null) {
-			for (String curLayoutId : selectedLayoutIds.split(",")) {
+			for (long selectedLayoutId : StringUtil.split(selectedLayoutIds, 0L)) {
 				try {
-					Layout curLayout = LayoutLocalServiceUtil.getLayout(groupId, privateLayout, GetterUtil.getLong(curLayoutId));
+					Layout selectedLayout = LayoutLocalServiceUtil.getLayout(groupId, privateLayout, selectedLayoutId);
 
-					selectedNodesArray.put(String.valueOf(curLayout.getPlid()));
+					selectedNodesJSONArray.put(String.valueOf(selectedLayout.getPlid()));
 				}
 				catch (NoSuchLayoutException nsle) {
 				}
@@ -69,7 +69,7 @@ if (!selectableTree) {
 		}
 		%>
 
-		SELECTED_NODES: <%= selectedNodesArray.toString() %>,
+		SELECTED_NODES: <%= selectedNodesJSONArray.toString() %>,
 
 		afterRenderTree: function(event) {
 			var treeInstance = event.target;

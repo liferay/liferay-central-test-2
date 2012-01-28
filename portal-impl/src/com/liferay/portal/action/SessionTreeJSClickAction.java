@@ -59,12 +59,13 @@ public class SessionTreeJSClickAction extends Action {
 				SessionTreeJSClicks.openNodes(request, treeId, nodeIds);
 			}
 			else if (cmd.equals("layoutCheck")) {
-				long groupId = ParamUtil.getLong(request, "groupId");
 				long plid = ParamUtil.getLong(request, "plid");
-				boolean privateLayout = ParamUtil.getBoolean(
-					request, "privateLayout");
 
 				if (plid == LayoutConstants.DEFAULT_PLID) {
+					long groupId = ParamUtil.getLong(request, "groupId");
+					boolean privateLayout = ParamUtil.getBoolean(
+						request, "privateLayout");
+
 					List<Layout> layouts = LayoutLocalServiceUtil.getLayouts(
 						groupId, privateLayout,
 						LayoutConstants.DEFAULT_PARENT_LAYOUT_ID);
@@ -86,12 +87,13 @@ public class SessionTreeJSClickAction extends Action {
 			else if (cmd.equals("layoutCollpase")) {
 			}
 			else if (cmd.equals("layoutUncheck")) {
-				long groupId = ParamUtil.getLong(request, "groupId");
 				long plid = ParamUtil.getLong(request, "plid");
-				boolean privateLayout = ParamUtil.getBoolean(
-					request, "privateLayout");
 
 				if (plid == LayoutConstants.DEFAULT_PLID) {
+					long groupId = ParamUtil.getLong(request, "groupId");
+					boolean privateLayout = ParamUtil.getBoolean(
+						request, "privateLayout");
+
 					List<Layout> layouts = LayoutLocalServiceUtil.getLayouts(
 						groupId, privateLayout,
 						LayoutConstants.DEFAULT_PARENT_LAYOUT_ID);
