@@ -331,7 +331,7 @@ public class SourceFormatter {
 		}
 	}
 
-	private static void _checkArguments(
+	private static void _checkJSPAttributes(
 		String fileName, String line, int lineCount) {
 
 		String previousArgument = null;
@@ -356,10 +356,8 @@ public class SourceFormatter {
 			if (Validator.isNotNull(previousArgument) &&
 				(previousArgument.compareTo(argument) > 0)) {
 
-				/*
-				_sourceFormatterHelper.printError(
-					fileName, "sort: " + fileName + " " + lineCount);
-				*/
+				//_sourceFormatterHelper.printError(
+				//	fileName, "sort: " + fileName + " " + lineCount);
 
 				return;
 			}
@@ -1753,8 +1751,8 @@ public class SourceFormatter {
 				}
 			}
 
-			if (trimmedLine.startsWith("<liferay-ui:") ||
-				trimmedLine.startsWith("<aui:")) {
+			if (trimmedLine.startsWith("<aui:") ||
+				trimmedLine.startsWith("<liferay-ui:")) {
 
 				if (!trimmedLine.contains(StringPool.SPACE) &&
 					!trimmedLine.endsWith(StringPool.GREATER_THAN)) {
@@ -1762,7 +1760,7 @@ public class SourceFormatter {
 					readArguments = true;
 				}
 				else {
-					_checkArguments(fileName, trimmedLine, lineCount);
+					_checkJSPAttributes(fileName, trimmedLine, lineCount);
 				}
 			}
 
