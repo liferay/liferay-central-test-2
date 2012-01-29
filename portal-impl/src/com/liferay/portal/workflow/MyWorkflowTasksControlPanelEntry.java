@@ -29,17 +29,16 @@ public class MyWorkflowTasksControlPanelEntry
 			PermissionChecker permissionChecker, Portlet portlet)
 		throws Exception {
 
-		long companyId = permissionChecker.getCompanyId();
-		long userId = permissionChecker.getUserId();
-
 		if (WorkflowTaskManagerUtil.getWorkflowTaskCountByUser(
-				companyId, userId, null) > 0) {
+				permissionChecker.getCompanyId(), permissionChecker.getUserId(),
+				null) > 0) {
 
 			return true;
 		}
 
 		if (WorkflowTaskManagerUtil.getWorkflowTaskCountByUserRoles(
-				companyId, userId, null) > 0) {
+				permissionChecker.getCompanyId(), permissionChecker.getUserId(),
+				null) > 0) {
 
 			return true;
 		}
