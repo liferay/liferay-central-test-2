@@ -21,13 +21,7 @@ String fieldParamSelection = ParamUtil.getString(request, facet.getFieldName() +
 String fieldParamFrom = ParamUtil.getString(request, facet.getFieldName() + "from");
 String fieldParamTo = ParamUtil.getString(request, facet.getFieldName() + "to");
 
-Calendar cal = Calendar.getInstance(timeZone);
-
-DateFormat dateFormat = DateFormatFactoryUtil.getSimpleDateFormat("yyyyMMddHHmmss", timeZone);
-
-String nowString = dateFormat.format(cal.getTime());
-
-JSONArray rangeArray = dataJSONObject.getJSONArray("ranges");
+JSONArray rangesJSONArray = dataJSONObject.getJSONArray("ranges");
 
 String modifiedLabel = StringPool.BLANK;
 
@@ -51,26 +45,32 @@ if (fieldParamSelection.equals("0")) {
 			</li>
 
 			<%
-			for (int i = 0; i < rangeArray.length(); i++) {
-				JSONObject rangeObject = rangeArray.getJSONObject(i);
+			for (int i = 0; i < rangesJSONArray.length(); i++) {
+				JSONObject rangesJSONObject = rangesJSONArray.getJSONObject(i);
 
-				String label = rangeObject.getString("label");
-				String range = rangeObject.getString("range");
-				TermCollector termCollector = facetCollector.getTermCollector(range);
+				String label = rangesJSONObject.getString("label");
+				String range = rangesJSONObject.getString("range");
 
 				index = (i + 1);
 
 				if (fieldParamSelection.equals(String.valueOf(index))) {
 					modifiedLabel = LanguageUtil.get(pageContext, label);
 				}
-
-				String taglibSetRange = renderResponse.getNamespace() + facet.getFieldName() + "setRange(" + index + ", '" + range + "');";
 			%>
 
 				<li class="facet-value<%= fieldParamSelection.equals(String.valueOf(index)) ? " current-term" : StringPool.BLANK %>">
+
+					<%
+					String taglibSetRange = renderResponse.getNamespace() + facet.getFieldName() + "setRange(" + index + ", '" + range + "');";
+					%>
+
 					<aui:a href="javascript:;" onClick="<%= taglibSetRange %>">
 						<liferay-ui:message key="<%= label %>" />
 					</aui:a>
+
+					<%
+					TermCollector termCollector = facetCollector.getTermCollector(range);
+					%>
 
 					<c:if test="<%= termCollector != null %>">
 						<span class="frequency">(<%= termCollector.getFrequency() %>)</span>
