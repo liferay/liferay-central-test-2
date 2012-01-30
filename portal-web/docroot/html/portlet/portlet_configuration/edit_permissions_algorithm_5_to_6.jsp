@@ -166,9 +166,9 @@ definePermissionsURL.setParameter(Constants.CMD, Constants.VIEW);
 
 		if (modelResource.equals(Group.class.getName())) {
 			long modelResourceGroupId = GetterUtil.getLong(resourcePrimKey);
-			
+
 			Group modelResourceGroup = GroupLocalServiceUtil.getGroup(modelResourceGroupId);
-			
+
 			if (modelResourceGroup.isLayoutPrototype() || modelResourceGroup.isLayoutSetPrototype() || modelResourceGroup.isUserGroup()) {
 				actions = new ArrayList(actions);
 
