@@ -20,10 +20,8 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Set;
 
 import org.jabsorb.JSONSerializer;
@@ -289,22 +287,23 @@ public class LiferaySerializer extends AbstractSerializer {
 		serializerState.setSerialized(object, javaClassInstance);
 
 		String fieldName = null;
-		List<String> processedFields = new ArrayList<String>();
 
 		try {
+			Set<String> processedFieldNames = new HashSet<String>();
+
 			while (javaClass != null) {
 				Field[] fields = javaClass.getDeclaredFields();
 
 				for (Field field : fields) {
 					fieldName = field.getName();
 
-					// Avoid processing overridden fields of super classes.
+					// Avoid processing overridden fields of super classes
 
-					if (processedFields.contains(fieldName)) {
+					if (processedFieldNames.contains(fieldName)) {
 						continue;
 					}
 
-					processedFields.add(fieldName);
+					processedFieldNames.add(fieldName);
 
 					int modifiers = field.getModifiers();
 
