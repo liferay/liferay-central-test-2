@@ -21,8 +21,10 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import org.jabsorb.JSONSerializer;
 import org.jabsorb.serializer.AbstractSerializer;
@@ -30,6 +32,7 @@ import org.jabsorb.serializer.MarshallException;
 import org.jabsorb.serializer.ObjectMatch;
 import org.jabsorb.serializer.SerializerState;
 import org.jabsorb.serializer.UnmarshallException;
+
 import org.json.JSONObject;
 
 /**
@@ -98,22 +101,23 @@ public class LiferaySerializer extends AbstractSerializer {
 		}
 
 		String fieldName = null;
-		List<String> processedFields = new ArrayList<String>();
 
 		try {
+			Set<String> processedFieldNames = new HashSet<String>();
+
 			while (javaClass != null) {
 				Field[] declaredFields = javaClass.getDeclaredFields();
 
 				for (Field field : declaredFields) {
 					fieldName = field.getName();
 
-					// Avoid processing overridden fields of super classes.
+					// Avoid processing overridden fields of super classes
 
-					if (processedFields.contains(fieldName)) {
+					if (processedFieldNames.contains(fieldName)) {
 						continue;
 					}
 
-					processedFields.add(fieldName);
+					processedFieldNames.add(fieldName);
 
 					int modifiers = field.getModifiers();
 
