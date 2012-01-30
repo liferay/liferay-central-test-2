@@ -5417,15 +5417,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			throw new CompanyMaxUsersException();
 		}
 
-		for (long organizationId : organizationIds) {
-			Organization organization =
-				organizationPersistence.fetchByPrimaryKey(organizationId);
-
-			if (organization == null) {
-				throw new NoSuchOrganizationException();
-			}
-		}
-
 		if (!autoScreenName) {
 			validateScreenName(companyId, userId, screenName);
 		}
@@ -5449,6 +5440,15 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		}
 
 		validateFullName(companyId, firstName, middleName, lastName);
+
+		for (long organizationId : organizationIds) {
+			Organization organization =
+				organizationPersistence.fetchByPrimaryKey(organizationId);
+
+			if (organization == null) {
+				throw new NoSuchOrganizationException();
+			}
+		}
 	}
 
 	protected void validate(
