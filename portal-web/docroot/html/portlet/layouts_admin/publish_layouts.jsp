@@ -173,9 +173,9 @@ if (selGroup.isStaged() && selGroup.isStagedRemotely()) {
 }
 
 portletURL.setParameter("struts_action", "/layouts_admin/edit_layouts");
+portletURL.setParameter("pagesRedirect", currentURL);
 portletURL.setParameter("groupId", String.valueOf(liveGroupId));
 portletURL.setParameter("private", String.valueOf(privateLayout));
-portletURL.setParameter("pagesRedirect", currentURL);
 
 PortletURL selectURL = renderResponse.createRenderURL();
 
