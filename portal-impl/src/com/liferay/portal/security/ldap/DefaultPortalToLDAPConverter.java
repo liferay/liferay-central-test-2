@@ -53,9 +53,9 @@ import org.apache.commons.beanutils.PropertyUtils;
  * @author Marcellus Tavares
  * @author Wesley Gong
  */
-public class BasePortalToLDAPConverter implements PortalToLDAPConverter {
+public class DefaultPortalToLDAPConverter implements PortalToLDAPConverter {
 
-	public BasePortalToLDAPConverter() {
+	public DefaultPortalToLDAPConverter() {
 		_reservedUserFieldNames.put(
 			UserConverterKeys.GROUP, UserConverterKeys.GROUP);
 		_reservedUserFieldNames.put(
@@ -491,7 +491,7 @@ public class BasePortalToLDAPConverter implements PortalToLDAPConverter {
 	private static final String _OBJECT_CLASS = "objectclass";
 
 	private static Log _log = LogFactoryUtil.getLog(
-		BasePortalToLDAPConverter.class);
+		DefaultPortalToLDAPConverter.class);
 
 	private String _groupDNFieldName = GroupConverterKeys.GROUP_NAME;
 	private Map<String, String> _reservedContactFieldNames =

@@ -47,7 +47,7 @@ import javax.naming.directory.Attributes;
  * @author Edward Han
  * @author Brian Wing Shun Chan
  */
-public class BaseLDAPToPortalConverter implements LDAPToPortalConverter {
+public class DefaultLDAPToPortalConverter implements LDAPToPortalConverter {
 
 	public LDAPGroup importLDAPGroup(
 			long companyId, Attributes attributes, Properties groupMappings)
@@ -240,6 +240,6 @@ public class BaseLDAPToPortalConverter implements LDAPToPortalConverter {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(
-		BaseLDAPToPortalConverter.class);
+		DefaultLDAPToPortalConverter.class);
 
 }
