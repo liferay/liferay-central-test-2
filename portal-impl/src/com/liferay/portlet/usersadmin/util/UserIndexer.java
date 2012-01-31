@@ -99,11 +99,18 @@ public class UserIndexer extends BaseIndexer {
 				String key = entry.getKey();
 				Object value = entry.getValue();
 
-				if ((value == null) ||
-					(value.getClass().isArray() &&
-						((Object[])value).length == 0)) {
-
+				if (value == null) {
 					continue;
+				}
+
+				Class<?> clazz = value.getClass();
+
+				if (clazz.isArray()) {
+					Object[] values = (Object[])value;
+
+					if (values.length == 0) {
+						continue;
+					}
 				}
 
 				addContextQueryParams(contextQuery, searchContext, key, value);
