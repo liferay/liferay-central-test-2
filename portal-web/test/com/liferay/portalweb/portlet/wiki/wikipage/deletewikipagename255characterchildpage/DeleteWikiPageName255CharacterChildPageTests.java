@@ -15,6 +15,7 @@
 package com.liferay.portalweb.portlet.wiki.wikipage.deletewikipagename255characterchildpage;
 
 import com.liferay.portalweb.portal.BaseTestSuite;
+import com.liferay.portalweb.portal.util.TearDownPageTest;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
