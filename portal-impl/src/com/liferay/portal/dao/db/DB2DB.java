@@ -74,7 +74,6 @@ public class DB2DB extends BaseDB {
 	@Override
 	public void runSQL(String template) throws IOException, SQLException {
 		if (template.startsWith(ALTER_COLUMN_NAME)) {
-
 			String sql = buildSQL(template);
 
 			String[] alterSqls = StringUtil.split(sql, CharPool.SEMICOLON);
