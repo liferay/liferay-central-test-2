@@ -317,6 +317,7 @@ public class AddProcessKFTest extends BaseTestCase {
 
 		selenium.doubleClickAt("//tbody[@class='yui3-datatable-data']/tr[1]/td[2]",
 			RuntimeVariables.replace("Forms"));
+		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -357,8 +358,46 @@ public class AddProcessKFTest extends BaseTestCase {
 			selenium.getText("//li[@data-text='Developer View']"));
 		selenium.clickAt("//li[@data-text='Developer View']",
 			RuntimeVariables.replace("Developer View"));
+
+		for (int second = 0;; second++) {
+			if (second >= 90) {
+				fail("timeout");
+			}
+
+			try {
+				if (RuntimeVariables.replace("Developer View")
+										.equals(selenium.getValue(
+								"//input[@name='templateName']"))) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.clickAt("//button[@type='submit']",
 			RuntimeVariables.replace("Save"));
+
+		for (int second = 0;; second++) {
+			if (second >= 90) {
+				fail("timeout");
+			}
+
+			try {
+				if (RuntimeVariables.replace("Developer View")
+										.equals(selenium.getText(
+								"//tbody[@class='yui3-datatable-data']/tr[1]/td[2]"))) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		assertEquals(RuntimeVariables.replace("Developer View"),
 			selenium.getText(
 				"//tbody[@class='yui3-datatable-data']/tr[1]/td[2]"));
@@ -385,6 +424,7 @@ public class AddProcessKFTest extends BaseTestCase {
 
 		selenium.doubleClickAt("//tbody[@class='yui3-datatable-data']/tr[1]/td[2]",
 			RuntimeVariables.replace("Forms"));
+		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -425,11 +465,49 @@ public class AddProcessKFTest extends BaseTestCase {
 			selenium.getText("//li[@data-text='Code Review View']"));
 		selenium.clickAt("//li[@data-text='Code Review View']",
 			RuntimeVariables.replace("Code Review View"));
+
+		for (int second = 0;; second++) {
+			if (second >= 90) {
+				fail("timeout");
+			}
+
+			try {
+				if (RuntimeVariables.replace("Code Review View")
+										.equals(selenium.getValue(
+								"//input[@name='templateName']"))) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.clickAt("//button[@type='submit']",
 			RuntimeVariables.replace("Save"));
+
+		for (int second = 0;; second++) {
+			if (second >= 90) {
+				fail("timeout");
+			}
+
+			try {
+				if (RuntimeVariables.replace("Code Review View")
+										.equals(selenium.getText(
+								"//tbody[@class='yui3-datatable-data']/tr[1]/td[2]/div"))) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		assertEquals(RuntimeVariables.replace("Code Review View"),
 			selenium.getText(
-				"//tbody[@class='yui3-datatable-data']/tr[1]/td[2]"));
+				"//tbody[@class='yui3-datatable-data']/tr[1]/td[2]/div"));
 		Thread.sleep(5000);
 		selenium.clickAt("//div[@id='diagramNode_field_QA']/div/div/div",
 			RuntimeVariables.replace("QA"));
@@ -453,6 +531,7 @@ public class AddProcessKFTest extends BaseTestCase {
 
 		selenium.doubleClickAt("//tbody[@class='yui3-datatable-data']/tr[1]/td[2]",
 			RuntimeVariables.replace("Forms"));
+		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -493,8 +572,46 @@ public class AddProcessKFTest extends BaseTestCase {
 			selenium.getText("//li[@data-text='QA View']"));
 		selenium.clickAt("//li[@data-text='QA View']",
 			RuntimeVariables.replace("QA View"));
+
+		for (int second = 0;; second++) {
+			if (second >= 90) {
+				fail("timeout");
+			}
+
+			try {
+				if (RuntimeVariables.replace("QA View")
+										.equals(selenium.getValue(
+								"//input[@name='templateName']"))) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.clickAt("//button[@type='submit']",
 			RuntimeVariables.replace("Save"));
+
+		for (int second = 0;; second++) {
+			if (second >= 90) {
+				fail("timeout");
+			}
+
+			try {
+				if (RuntimeVariables.replace("QA View")
+										.equals(selenium.getText(
+								"//tbody[@class='yui3-datatable-data']/tr[1]/td[2]"))) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		assertEquals(RuntimeVariables.replace("QA View"),
 			selenium.getText(
 				"//tbody[@class='yui3-datatable-data']/tr[1]/td[2]"));
@@ -521,6 +638,7 @@ public class AddProcessKFTest extends BaseTestCase {
 
 		selenium.doubleClickAt("//tbody[@class='yui3-datatable-data']/tr[1]/td[2]",
 			RuntimeVariables.replace("Forms"));
+		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -561,8 +679,46 @@ public class AddProcessKFTest extends BaseTestCase {
 			selenium.getText("//li[@data-text='QA View']"));
 		selenium.clickAt("//li[@data-text='QA View']",
 			RuntimeVariables.replace("QA View"));
+
+		for (int second = 0;; second++) {
+			if (second >= 90) {
+				fail("timeout");
+			}
+
+			try {
+				if (RuntimeVariables.replace("QA View")
+										.equals(selenium.getValue(
+								"//input[@name='templateName']"))) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.clickAt("//button[@type='submit']",
 			RuntimeVariables.replace("Save"));
+
+		for (int second = 0;; second++) {
+			if (second >= 90) {
+				fail("timeout");
+			}
+
+			try {
+				if (RuntimeVariables.replace("QA View")
+										.equals(selenium.getText(
+								"//tbody[@class='yui3-datatable-data']/tr[1]/td[2]"))) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		assertEquals(RuntimeVariables.replace("QA View"),
 			selenium.getText(
 				"//tbody[@class='yui3-datatable-data']/tr[1]/td[2]"));
@@ -589,6 +745,7 @@ public class AddProcessKFTest extends BaseTestCase {
 
 		selenium.doubleClickAt("//tbody[@class='yui3-datatable-data']/tr[1]/td[2]",
 			RuntimeVariables.replace("Forms"));
+		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -630,8 +787,46 @@ public class AddProcessKFTest extends BaseTestCase {
 			selenium.getText("//li[@data-text='Project Manager View']"));
 		selenium.clickAt("//li[@data-text='Project Manager View']",
 			RuntimeVariables.replace("Project Manager View"));
+
+		for (int second = 0;; second++) {
+			if (second >= 90) {
+				fail("timeout");
+			}
+
+			try {
+				if (RuntimeVariables.replace("Project Manager View")
+										.equals(selenium.getValue(
+								"//input[@name='templateName']"))) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.clickAt("//button[@type='submit']",
 			RuntimeVariables.replace("Save"));
+
+		for (int second = 0;; second++) {
+			if (second >= 90) {
+				fail("timeout");
+			}
+
+			try {
+				if (RuntimeVariables.replace("Project Manager View")
+										.equals(selenium.getText(
+								"//tbody[@class='yui3-datatable-data']/tr[1]/td[2]"))) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		assertEquals(RuntimeVariables.replace("Project Manager View"),
 			selenium.getText(
 				"//tbody[@class='yui3-datatable-data']/tr[1]/td[2]"));

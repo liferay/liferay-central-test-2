@@ -92,6 +92,7 @@ public class Demo1Tests extends BaseTestSuite {
 		testSuite.addTestSuite(PM_SignInTest.class);
 		testSuite.addTestSuite(PM_AssignToMeTaskKFTest.class);
 		testSuite.addTestSuite(PM_CompletedTaskKaleoTicketKFTest.class);
+		testSuite.addTestSuite(SignOutTest.class);
 		testSuite.addTestSuite(SA_SignInTest.class);
 		testSuite.addTestSuite(ViewCompletedTaskKaleoTicketKFTest.class);
 		testSuite.addTestSuite(AddTaskJavascriptTicketKFTest.class);

@@ -15,7 +15,6 @@
 package com.liferay.portalweb.portlet.documentlibrary.documenttype.adddldocumenttypemultiple;
 
 import com.liferay.portalweb.portal.BaseTestSuite;
-import com.liferay.portalweb.portlet.documentlibrary.documenttype.adddldocumenttype.TearDownDLDocumentTypeTest;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;

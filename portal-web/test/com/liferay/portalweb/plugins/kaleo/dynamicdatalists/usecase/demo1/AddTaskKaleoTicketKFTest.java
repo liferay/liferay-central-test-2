@@ -45,7 +45,11 @@ public class AddTaskKaleoTicketKFTest extends BaseTestCase {
 			RuntimeVariables.replace("Kaleo Forms Test Page"));
 		selenium.waitForPageToLoad("30000");
 		loadRequiredJavaScriptModules();
-		selenium.click("//span[@title='Submit New']/ul/li/strong/a");
+		Thread.sleep(5000);
+		assertEquals(RuntimeVariables.replace("Submit New"),
+			selenium.getText("//span[@title='Submit New']/ul/li/strong/a"));
+		selenium.clickAt("//span[@title='Submit New']/ul/li/strong/a",
+			RuntimeVariables.replace("Submit New"));
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -84,7 +88,7 @@ public class AddTaskKaleoTicketKFTest extends BaseTestCase {
 				"A user is unable to deploy the Kaleo Designer portlet"));
 		selenium.type("//input[@id='_1_WAR_kaleoformsportlet_attachments']",
 			RuntimeVariables.replace(
-				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\plugins\\kaleo\\usecase\\dependencies\\test.txt"));
+				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\plugins\\kaleo\\dynamicdatalists\\usecase\\dependencies\\test.txt"));
 		selenium.select("//select[@id='_1_WAR_kaleoformsportlet_status']",
 			RuntimeVariables.replace("Open"));
 		selenium.clickAt("//input[@value='Save']",

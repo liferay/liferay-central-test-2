@@ -45,6 +45,7 @@ public class AddTaskJavascriptTicketKFTest extends BaseTestCase {
 			RuntimeVariables.replace("Kaleo Forms Test Page"));
 		selenium.waitForPageToLoad("30000");
 		loadRequiredJavaScriptModules();
+		Thread.sleep(5000);
 		selenium.click("//span[@title='Submit New']/ul/li/strong/a");
 
 		for (int second = 0;; second++) {

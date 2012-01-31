@@ -56,7 +56,7 @@ public class AddWorkflowDefinitionTest extends BaseTestCase {
 			RuntimeVariables.replace("Ticket Process"));
 		selenium.type("//input[@id='_151_file']",
 			RuntimeVariables.replace(
-				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\plugins\\kaleo\\usecase\\dependencies\\workflow.xml"));
+				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\plugins\\kaleo\\dynamicdatalists\\usecase\\dependencies\\workflow.xml"));
 		selenium.clickAt("//input[@value='Save']",
 			RuntimeVariables.replace("Save"));
 		selenium.waitForPageToLoad("30000");
