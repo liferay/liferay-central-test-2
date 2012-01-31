@@ -20,7 +20,6 @@ import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.upload.UploadException;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.Constants;
-import com.liferay.portal.kernel.util.DateFormatFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
@@ -69,7 +68,6 @@ import com.liferay.portlet.journal.util.JournalUtil;
 import java.io.File;
 
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Locale;
@@ -664,13 +662,6 @@ public class EditArticleAction extends PortletAction {
 			JournalArticle.class.getName(), actionRequest);
 
 		serviceContext.setAttribute("defaultLanguageId", defaultLanguageId);
-
-		Date checkModifiedDate = ParamUtil.getDate(
-			uploadPortletRequest, "checkModifiedDate",
-			DateFormatFactoryUtil.getSimpleDateFormat(
-				"yyyy.MM.dd G HH:mm:ss z"));
-
-		serviceContext.setAttribute("checkModifiedDate", checkModifiedDate);
 
 		JournalArticle article = null;
 		String oldUrlTitle = StringPool.BLANK;

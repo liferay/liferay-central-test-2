@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.ContentTypes;
+import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
@@ -1939,13 +1940,6 @@ public class JournalArticleLocalServiceImpl
 
 		boolean incrementVersion = false;
 
-		Date checkModifiedDate = serviceContext.getModifiedDate();
-
-		if (serviceContext.getAttribute("checkModifiedDate") != null) {
-			checkModifiedDate = (Date)serviceContext.getAttribute(
-				"checkModifiedDate");
-		}
-
 		boolean imported = GetterUtil.getBoolean(
 			serviceContext.getAttribute("imported"));
 
@@ -1972,7 +1966,10 @@ public class JournalArticleLocalServiceImpl
 				throw new ArticleVersionException();
 			}
 
-			if (oldArticle.getModifiedDate().compareTo(checkModifiedDate) > 0) {
+			if (DateUtil.compareTo(
+					oldArticle.getModifiedDate(), serviceContext.getFormDate())
+						> 0) {
+
 				throw new ArticleVersionException();
 			}
 
@@ -2125,6 +2122,21 @@ public class JournalArticleLocalServiceImpl
 			serviceContext);
 	}
 
+	/**
+	 * @deprecated {@link #updateArticleTranslation(long, String, double,
+	 *             Locale, String, String, String, Map, ServiceContext)}
+	 */
+	public JournalArticle updateArticleTranslation(
+			long groupId, String articleId, double version, Locale locale,
+			String title, String description, String content,
+			Map<String, byte[]> images)
+		throws PortalException, SystemException {
+
+		return updateArticleTranslation(
+			groupId, articleId, version, locale, title, description, content,
+			images, null);
+	}
+
 	public JournalArticle updateArticleTranslation(
 			long groupId, String articleId, double version, Locale locale,
 			String title, String description, String content,
@@ -2142,15 +2154,13 @@ public class JournalArticleLocalServiceImpl
 			throw new ArticleVersionException();
 		}
 
-		Date checkModifiedDate = serviceContext.getModifiedDate();
+		if (serviceContext != null) {
+			if (DateUtil.compareTo(
+					oldArticle.getModifiedDate(), serviceContext.getFormDate())
+						> 0) {
 
-		if (serviceContext.getAttribute("checkModifiedDate") != null) {
-			checkModifiedDate = (Date)serviceContext.getAttribute(
-				"checkModifiedDate");
-		}
-
-		if (oldArticle.getModifiedDate().compareTo(checkModifiedDate) > 0) {
-			throw new ArticleVersionException();
+				throw new ArticleVersionException();
+			}
 		}
 
 		JournalArticle article = null;
