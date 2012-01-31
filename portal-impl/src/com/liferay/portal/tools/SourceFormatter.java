@@ -1762,8 +1762,8 @@ public class SourceFormatter {
 				!trimmedLine.startsWith("<%") &&
 				!trimmedLine.startsWith("<!")) {
 
-				if (!trimmedLine.contains(StringPool.SPACE) &&
-					!trimmedLine.contains(StringPool.GREATER_THAN)) {
+				if (!trimmedLine.contains(StringPool.GREATER_THAN) &&
+					!trimmedLine.contains(StringPool.SPACE)) {
 
 					readAttributes = true;
 				}
