@@ -37,9 +37,12 @@ public class VideoProcessorMessageListener extends BaseMessageListener {
 			VideoProcessorUtil.generateVideo(fileVersion);
 		}
 		catch (Exception e) {
-			_log.warn(
-				"Unable to generate video for file version: " +
-					fileVersion.getFileVersionId(), e);
+			if (_log.isWarnEnabled()) {
+				_log.warn(
+					"Unable to generate video for file version " +
+						fileVersion.getFileVersionId(),
+					e);
+			}
 		}
 
 		if (PropsValues.DL_FILE_ENTRY_PROCESSORS_TRIGGER_SYNCHRONOUSLY) {
