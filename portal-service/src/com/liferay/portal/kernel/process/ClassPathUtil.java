@@ -120,10 +120,14 @@ public class ClassPathUtil {
 
 		String path = URLCodec.decodeURL(url.getPath());
 
+		if (_log.isDebugEnabled()) {
+			_log.debug("Path " + path);
+		}
+
 		path = StringUtil.replace(path, CharPool.BACK_SLASH, CharPool.SLASH);
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Decoded path: " + path);
+			_log.debug("Decoded path " + path);
 		}
 
 		if (ServerDetector.isWebLogic()) {
