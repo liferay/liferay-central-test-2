@@ -76,8 +76,7 @@ public class PrefsPropsUtil {
 		}
 	}
 
-	public static int getInteger(
-			long companyId, String name, int defaultValue)
+	public static int getInteger(long companyId, String name, int defaultValue)
 		throws Exception {
 
 		Object returnObj = PortalClassInvoker.invoke(
@@ -117,8 +116,7 @@ public class PrefsPropsUtil {
 		}
 	}
 
-	public static long getLong(
-			long companyId, String name, long defaultValue)
+	public static long getLong(long companyId, String name, long defaultValue)
 		throws Exception {
 
 		Object returnObj = PortalClassInvoker.invoke(
