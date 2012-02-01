@@ -27,11 +27,11 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.ContactConstants;
 import com.liferay.portal.model.User;
-import com.liferay.portal.model.impl.ContactImpl;
-import com.liferay.portal.model.impl.UserImpl;
 import com.liferay.portal.security.auth.FullNameGenerator;
 import com.liferay.portal.security.auth.FullNameGeneratorFactory;
 import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.service.persistence.ContactUtil;
+import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 
 import java.util.Calendar;
@@ -135,7 +135,7 @@ public class DefaultLDAPToPortalConverter implements LDAPToPortalConverter {
 		ldapUser.setAutoPassword(password.equals(StringPool.BLANK));
 		ldapUser.setAutoScreenName(autoScreenName);
 
-		Contact contact = new ContactImpl();
+		Contact contact = ContactUtil.create(0);
 
 		Calendar birthdayCalendar = CalendarFactoryUtil.getCalendar(
 			1970, Calendar.JANUARY, 1);
@@ -185,7 +185,7 @@ public class DefaultLDAPToPortalConverter implements LDAPToPortalConverter {
 
 		ldapUser.setUpdatePassword(!password.equals(StringPool.BLANK));
 
-		User user = new UserImpl();
+		User user = UserUtil.create(0);
 
 		user.setCompanyId(companyId);
 		user.setEmailAddress(emailAddress);

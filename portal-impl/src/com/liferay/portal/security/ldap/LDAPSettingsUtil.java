@@ -25,8 +25,6 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsValues;
 
-import java.io.IOException;
-
 import java.util.Properties;
 
 /**
@@ -83,8 +81,8 @@ public class LDAPSettingsUtil {
 	}
 
 	public static Properties getContactMappings(
-		long ldapServerId, long companyId)
-		throws IOException, SystemException {
+			long ldapServerId, long companyId)
+		throws Exception {
 
 		String postfix = LDAPSettingsUtil.getPropertyPostfix(ldapServerId);
 
