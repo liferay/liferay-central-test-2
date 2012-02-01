@@ -196,6 +196,7 @@ request.setAttribute(WebKeys.WORKFLOW_ASSET_PREVIEW, Boolean.TRUE);
 								editPortletURL.setPortletMode(PortletMode.VIEW);
 
 								String editPortletURLString = editPortletURL.toString();
+
 								editPortletURLString = HttpUtil.addParameter(editPortletURLString, "doAsGroupId", assetRenderer.getGroupId());
 								editPortletURLString = HttpUtil.addParameter(editPortletURLString, "refererPlid", plid);
 
@@ -204,8 +205,9 @@ request.setAttribute(WebKeys.WORKFLOW_ASSET_PREVIEW, Boolean.TRUE);
 
 								<c:choose>
 									<c:when test="<%= assetRenderer.hasEditPermission(permissionChecker) && showEditURL %>">
+
 										<%
-											String taglibEditURL = "javascript:Liferay.Util.openWindow({dialog: {width: 960}, id: '" + renderResponse.getNamespace() + "', title: '" + LanguageUtil.format(pageContext, "edit-x", HtmlUtil.escape(assetRenderer.getTitle(locale))) + "', uri:'" + HtmlUtil.escapeURL(editPortletURLString) + "'});";
+										String taglibEditURL = "javascript:Liferay.Util.openWindow({dialog: {width: 960}, id: '" + renderResponse.getNamespace() + "', title: '" + LanguageUtil.format(pageContext, "edit-x", HtmlUtil.escape(assetRenderer.getTitle(locale))) + "', uri:'" + HtmlUtil.escapeURL(editPortletURLString) + "'});";
 										%>
 
 										<liferay-ui:icon image="edit" url="<%= taglibEditURL %>" />
