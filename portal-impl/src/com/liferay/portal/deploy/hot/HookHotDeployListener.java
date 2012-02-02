@@ -2182,7 +2182,8 @@ public class HookHotDeployListener
 
 			boolean indexOnUpgrade = GetterUtil.getBoolean(
 				unfilteredPortalProperties.getProperty(
-					PropsKeys.INDEX_ON_UPGRADE), PropsValues.INDEX_ON_UPGRADE);
+					PropsKeys.INDEX_ON_UPGRADE),
+				PropsValues.INDEX_ON_UPGRADE);
 
 			UpgradeProcessUtil.upgradeProcess(
 				release.getBuildNumber(), upgradeProcessClassNames,
