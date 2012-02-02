@@ -886,6 +886,7 @@ public class ServiceBuilder {
 			}
 
 			String refPackageDir = StringUtil.replace(refPackage, ".", "/");
+
 			String refFileName =
 				_implDir + "/" + refPackageDir + "/service.xml";
 
