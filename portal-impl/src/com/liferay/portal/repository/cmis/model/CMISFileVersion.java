@@ -59,9 +59,9 @@ public class CMISFileVersion extends CMISModel implements FileVersion {
 		Document document) {
 
 		_cmisRepository = cmisRepository;
+		_uuid = uuid;
 		_fileVersionId = fileVersionId;
 		_document = document;
-		_uuid = uuid;
 	}
 
 	public Map<String, Serializable> getAttributes() {

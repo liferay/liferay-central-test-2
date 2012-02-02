@@ -206,8 +206,6 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 		FileEntry fileEntry = (FileEntry)portletDataContext.getZipEntryAsObject(
 			path);
 
-		FileVersion fileVersion = fileEntry.getFileVersion();
-
 		long userId = portletDataContext.getUserId(fileEntry.getUserUuid());
 
 		Map<Long, Long> folderPKs =
@@ -250,8 +248,6 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 			is = portletDataContext.getZipEntryAsInputStream(binPath);
 		}
 
-		String folderUuid = StringPool.BLANK;
-
 		if ((folderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) &&
 			(folderId == fileEntry.getFolderId())) {
 
@@ -269,8 +265,6 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 				"//folder[@path='".concat(folderPath).concat("']"));
 
 			importFolder(portletDataContext, folderPath, folderElement, folder);
-
-			folderUuid = folder.getUuid();
 
 			folderId = MapUtil.getLong(
 				folderPKs, fileEntry.getFolderId(), fileEntry.getFolderId());
@@ -290,6 +284,8 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 		if (portletDataContext.isDataStrategyMirror()) {
 			FileEntry existingFileEntry = FileEntryUtil.fetchByUUID_R(
 				fileEntry.getUuid(), portletDataContext.getScopeGroupId());
+
+			FileVersion fileVersion = fileEntry.getFileVersion();
 
 			if (existingFileEntry == null) {
 				FileEntry existingTitleFileEntry = FileEntryUtil.fetchByR_F_T(
@@ -330,6 +326,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 				}
 
 				serviceContext.setUuid(fileEntry.getUuid());
+
 				serviceContext.setAttribute(
 					"fileVersionUuid", fileVersion.getUuid());
 
@@ -344,7 +341,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 					existingFileEntry.getLatestFileVersion();
 
 				if (!fileVersion.getUuid().equals(
-					latestExistingFileVersion.getUuid())) {
+						latestExistingFileVersion.getUuid())) {
 
 					DLFileVersion alreadyExistingFileVersion =
 						DLFileVersionLocalServiceUtil.
