@@ -288,17 +288,17 @@ public class DLFileVersionLocalServiceWrapper
 		return _dlFileVersionLocalService.getFileVersion(fileEntryId, version);
 	}
 
-	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileVersion> getFileVersions(
-		long fileEntryId, int status)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return _dlFileVersionLocalService.getFileVersions(fileEntryId, status);
-	}
-
 	public com.liferay.portlet.documentlibrary.model.DLFileVersion getFileVersionByUuidAndGroupId(
 		java.lang.String uuid, long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _dlFileVersionLocalService.getFileVersionByUuidAndGroupId(uuid,
 			groupId);
+	}
+
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileVersion> getFileVersions(
+		long fileEntryId, int status)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _dlFileVersionLocalService.getFileVersions(fileEntryId, status);
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFileVersion getLatestFileVersion(
