@@ -108,6 +108,15 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 			getUserId(), fileEntryId, lockUuid);
 	}
 
+	/**
+	 * @deprecated {@link #checkOutFileEntry(long, ServiceContext)}
+	 */
+	public DLFileEntry checkOutFileEntry(long fileEntryId)
+		throws PortalException, SystemException {
+
+		return checkOutFileEntry(fileEntryId, new ServiceContext());
+	}
+
 	public DLFileEntry checkOutFileEntry(
 			long fileEntryId, ServiceContext serviceContext)
 		throws PortalException, SystemException {
@@ -115,6 +124,18 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 		return checkOutFileEntry(
 			fileEntryId, null, DLFileEntryImpl.LOCK_EXPIRATION_TIME,
 			serviceContext);
+	}
+
+	/**
+	 * @deprecated {@link #checkOutFileEntry(long, String, long,
+	 *             ServiceContext)}
+	 */
+	public DLFileEntry checkOutFileEntry(
+			long fileEntryId, String owner, long expirationTime)
+		throws PortalException, SystemException {
+
+		return checkOutFileEntry(
+			fileEntryId, owner, expirationTime, new ServiceContext());
 	}
 
 	public DLFileEntry checkOutFileEntry(

@@ -325,13 +325,34 @@ public class DLFileEntryLocalServiceImpl
 			userId, fileEntryId, false, StringPool.BLANK, new ServiceContext());
 	}
 
+	/**
+	 * @deprecated {@link #checkOutFileEntry(long, long, ServiceContext)}
+	 */
+	public DLFileEntry checkOutFileEntry(long userId, long fileEntryId)
+		throws PortalException, SystemException {
+
+		return checkOutFileEntry(userId, fileEntryId, new ServiceContext());
+	}
+
 	public DLFileEntry checkOutFileEntry(
-		long userId, long fileEntryId, ServiceContext serviceContext)
+			long userId, long fileEntryId, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		return checkOutFileEntry(
 			userId, fileEntryId, StringPool.BLANK,
 			DLFileEntryImpl.LOCK_EXPIRATION_TIME, serviceContext);
+	}
+
+	/**
+	 * @deprecated {@link #checkOutFileEntry(long, long, String, long,
+	 *             ServiceContext)}
+	 */
+	public DLFileEntry checkOutFileEntry(
+			long userId, long fileEntryId, String owner, long expirationTime)
+		throws PortalException, SystemException {
+
+		return checkOutFileEntry(
+			userId, fileEntryId, owner, expirationTime, new ServiceContext());
 	}
 
 	public DLFileEntry checkOutFileEntry(
@@ -370,8 +391,8 @@ public class DLFileEntryLocalServiceImpl
 		if (!version.equals(
 				DLFileEntryConstants.PRIVATE_WORKING_COPY_VERSION)) {
 
-			long existingDLFileVersionId = ParamUtil.get(
-				serviceContext, "existingDLFileVersionId", 0);
+			long existingDLFileVersionId = ParamUtil.getLong(
+				serviceContext, "existingDLFileVersionId");
 
 			if (existingDLFileVersionId > 0) {
 				DLFileVersion existingDLFileVersion =
@@ -1144,23 +1165,27 @@ public class DLFileEntryLocalServiceImpl
 		DLFileVersion dlFileVersion = dlFileVersionPersistence.create(
 			fileVersionId);
 
+		String uuid = ParamUtil.getString(
+			serviceContext, "fileVersionUuid", serviceContext.getUuid());
+
+		dlFileVersion.setUuid(uuid);
+
+		dlFileVersion.setGroupId(dlFileEntry.getGroupId());
+		dlFileVersion.setCompanyId(dlFileEntry.getCompanyId());
+
 		long versionUserId = dlFileEntry.getVersionUserId();
 
 		if (versionUserId <= 0) {
 			versionUserId = dlFileEntry.getUserId();
 		}
 
+		dlFileVersion.setUserId(versionUserId);
+
 		String versionUserName = GetterUtil.getString(
 			dlFileEntry.getVersionUserName(), dlFileEntry.getUserName());
 
-		String uuid = ParamUtil.get(
-			serviceContext, "fileVersionUuid", serviceContext.getUuid());
-
-		dlFileVersion.setUuid(uuid);
-		dlFileVersion.setGroupId(dlFileEntry.getGroupId());
-		dlFileVersion.setCompanyId(dlFileEntry.getCompanyId());
-		dlFileVersion.setUserId(versionUserId);
 		dlFileVersion.setUserName(versionUserName);
+
 		dlFileVersion.setCreateDate(modifiedDate);
 		dlFileVersion.setModifiedDate(modifiedDate);
 		dlFileVersion.setRepositoryId(dlFileEntry.getRepositoryId());
