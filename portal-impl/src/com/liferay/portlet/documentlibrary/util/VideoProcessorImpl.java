@@ -113,18 +113,16 @@ public class VideoProcessorImpl
 		return _instance.doGetPreviewFileSize(fileVersion, type);
 	}
 
-	public InputStream getThumbnailAsStream(
-			FileVersion fileVersion, int thumbnailIndex)
+	public InputStream getThumbnailAsStream(FileVersion fileVersion, int index)
 		throws Exception {
 
-		return _instance.doGetThumbnailAsStream(fileVersion, thumbnailIndex);
+		return _instance.doGetThumbnailAsStream(fileVersion, index);
 	}
 
-	public long getThumbnailFileSize(
-			FileVersion fileVersion, int thumbnailIndex)
+	public long getThumbnailFileSize(FileVersion fileVersion, int index)
 		throws Exception {
 
-		return _instance.doGetThumbnailFileSize(fileVersion, thumbnailIndex);
+		return _instance.doGetThumbnailFileSize(fileVersion, index);
 	}
 
 	public Set<String> getVideoMimeTypes() {
@@ -288,11 +286,11 @@ public class VideoProcessorImpl
 						previewType);
 				}
 				else {
-					FileVersion importedfileVersion =
+					FileVersion importedFileVersion =
 						importedFileEntry.getFileVersion();
 
 					String previewFilePath = getPreviewFilePath(
-						importedfileVersion, previewType);
+						importedFileVersion, previewType);
 
 					FileVersion fileVersion = fileEntry.getFileVersion();
 

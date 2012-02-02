@@ -153,18 +153,16 @@ public class PDFProcessorImpl
 			fileVersion, index);
 	}
 
-	public InputStream getThumbnailAsStream(
-			FileVersion fileVersion, int thumbnailIndex)
+	public InputStream getThumbnailAsStream(FileVersion fileVersion, int index)
 		throws Exception {
 
-		return doGetThumbnailAsStream(fileVersion, thumbnailIndex);
+		return doGetThumbnailAsStream(fileVersion, index);
 	}
 
-	public long getThumbnailFileSize(
-			FileVersion fileVersion, int thumbnailIndex)
+	public long getThumbnailFileSize(FileVersion fileVersion, int index)
 		throws Exception {
 
-		return doGetThumbnailFileSize(fileVersion, thumbnailIndex);
+		return doGetThumbnailFileSize(fileVersion, index);
 	}
 
 	public boolean hasImages(FileVersion fileVersion) {
@@ -360,11 +358,11 @@ public class PDFProcessorImpl
 						"bin-path-pdf-preview-" + (i + 1), (i + 1));
 			}
 			else {
-				FileVersion importedfileVersion =
+				FileVersion importedFileVersion =
 					importedFileEntry.getFileVersion();
 
 				String previewFilePath = getPreviewFilePath(
-					importedfileVersion, PREVIEW_TYPE);
+					importedFileVersion, PREVIEW_TYPE);
 
 				FileVersion fileVersion = fileEntry.getFileVersion();
 

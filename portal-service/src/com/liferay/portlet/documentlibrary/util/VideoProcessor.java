@@ -49,12 +49,10 @@ public interface VideoProcessor {
 	public long getPreviewFileSize(FileVersion fileVersion, String type)
 		throws Exception;
 
-	public InputStream getThumbnailAsStream(
-			FileVersion fileVersion, int thumbnailIndex)
+	public InputStream getThumbnailAsStream(FileVersion fileVersion, int index)
 		throws Exception;
 
-	public long getThumbnailFileSize(
-			FileVersion fileVersion, int thumbnailIndex)
+	public long getThumbnailFileSize(FileVersion fileVersion, int index)
 		throws Exception;
 
 	public Set<String> getVideoMimeTypes();

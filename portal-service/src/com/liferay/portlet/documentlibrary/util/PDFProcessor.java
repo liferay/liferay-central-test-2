@@ -49,12 +49,10 @@ public interface PDFProcessor {
 	public long getPreviewFileSize(FileVersion fileVersion, int index)
 		throws Exception;
 
-	public InputStream getThumbnailAsStream(
-			FileVersion fileVersion, int thumbnailIndex)
+	public InputStream getThumbnailAsStream(FileVersion fileVersion, int index)
 		throws Exception;
 
-	public long getThumbnailFileSize(
-			FileVersion fileVersion, int thumbnailIndex)
+	public long getThumbnailFileSize(FileVersion fileVersion, int index)
 		throws Exception;
 
 	public boolean hasImages(FileVersion fileVersion);
