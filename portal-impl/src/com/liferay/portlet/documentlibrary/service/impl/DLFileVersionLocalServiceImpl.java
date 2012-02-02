@@ -45,6 +45,13 @@ public class DLFileVersionLocalServiceImpl
 		return dlFileVersionPersistence.findByF_V(fileEntryId, version);
 	}
 
+	public DLFileVersion getFileVersionByUuidAndGroupId(
+			String uuid, long groupId)
+		throws SystemException {
+
+		return dlFileVersionPersistence.fetchByUUID_G(uuid, groupId);
+	}
+
 	public List<DLFileVersion> getFileVersions(long fileEntryId, int status)
 		throws SystemException {
 
@@ -54,13 +61,6 @@ public class DLFileVersionLocalServiceImpl
 		else {
 			return dlFileVersionPersistence.findByF_S(fileEntryId, status);
 		}
-	}
-
-	public DLFileVersion getFileVersionByUuidAndGroupId(
-			String uuid, long groupId)
-		throws SystemException {
-
-		return dlFileVersionPersistence.fetchByUUID_G(uuid, groupId);
 	}
 
 	public DLFileVersion getLatestFileVersion(
