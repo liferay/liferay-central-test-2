@@ -57,7 +57,7 @@ public class LayoutRevisionAssetRenderer extends BaseAssetRenderer {
 	}
 
 	public String getSummary(Locale locale) {
-		StringBundler sb = new StringBundler(12);
+		StringBundler sb = new StringBundler(16);
 
 		sb.append("<strong>");
 		sb.append(LanguageUtil.get(locale, "page"));
@@ -107,8 +107,8 @@ public class LayoutRevisionAssetRenderer extends BaseAssetRenderer {
 		}
 	}
 
-	private LayoutRevision _layoutRevision;
 	private LayoutBranch _layoutBranch;
+	private LayoutRevision _layoutRevision;
 	private LayoutSetBranch _layoutSetBranch;
 
 }
