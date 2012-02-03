@@ -31,7 +31,6 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import javax.servlet.http.HttpServletRequestWrapper;
 
@@ -179,9 +178,7 @@ public class UploadPortletRequestImpl
 		Map<String, FileItem[]> multipartParameterMap =
 			uploadServletRequestImpl.getMultipartParameterMap();
 
-		Set<String> keySet = multipartParameterMap.keySet();
-
-		for (String name : keySet) {
+		for (String name : multipartParameterMap.keySet()) {
 			if (name.startsWith(_namespace)) {
 				map.put(
 					name.substring(_namespace.length(), name.length()),
