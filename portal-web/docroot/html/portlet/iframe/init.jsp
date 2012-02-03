@@ -69,3 +69,5 @@ while (enu.hasMoreElements()) {
 <%!
 private static final String _IFRAME_PREFIX = "iframe_";
 %>
+
+<%@ include file="/html/portlet/iframe/init-ext.jsp" %>

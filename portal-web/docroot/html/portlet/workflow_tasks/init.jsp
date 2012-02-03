@@ -66,3 +66,5 @@ private boolean _isAssignedToUser(WorkflowTask workflowTask, User user) {
 	return false;
 }
 %>
+
+<%@ include file="/html/portlet/workflow_tasks/init-ext.jsp" %>
