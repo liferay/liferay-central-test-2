@@ -14,20 +14,13 @@
 
 package com.liferay.util.ant;
 
-import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.util.StringPool;
+
+import java.text.MessageFormat;
+
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.Project;
-import org.apache.tools.ant.Task;
-import org.apache.tools.ant.taskdefs.Copy;
 import org.apache.tools.ant.taskdefs.Echo;
-import org.apache.tools.ant.types.FileSet;
-import org.apache.tools.ant.types.FilterSet;
-
-import java.io.File;
-import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 /**
  * @author Miguel Pastor
@@ -35,10 +28,12 @@ import java.util.Map;
 public class FormatTask extends Echo {
 
 	@Override
-	public void execute () throws BuildException {
-		_validateTaskConfiguration();
+	public void execute() throws BuildException {
+		if (message == null) {
+			throw new BuildException("The message attribute is mandatory");
+		}
 
-		String[] arguments = _arguments.split(_separator);
+		Object[] arguments = _arguments.split(_separator);
 
 		String value = MessageFormat.format(message, arguments);
 
@@ -46,13 +41,12 @@ public class FormatTask extends Echo {
 			Project project = getProject();
 
 			project.setProperty(_property, value);
-
-			return;
 		}
+		else {
+			setMessage(value);
 
-		setMessage(value);
-
-		super.execute();
+			super.execute();
+		}
 	}
 
 	public void setArguments(String arguments) {
@@ -67,18 +61,8 @@ public class FormatTask extends Echo {
 		_separator = separator;
 	}
 
-	private void _validateTaskConfiguration() throws BuildException {
-		if (message == null) {
-			throw new BuildException("The message attribute is mandatory");
-		}
-
-		return;
-	}
-
 	private String _arguments;
-
 	private String _property;
-
-	private String _separator = ",";
+	private String _separator = StringPool.COMMA;
 
 }
