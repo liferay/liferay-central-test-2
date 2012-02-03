@@ -21,7 +21,7 @@
 
 	<property name="selenium.nanny.executable" location="${project.dir}/tools/selenium/selenium_nanny.exe" />
 
-	<taskdef classname="com.liferay.util.ant.FormatTask" classpathref="project.classpath" name="format" />
+	<taskdef classname="com.liferay.util.ant.FormatTask" classpathref="project.classpath" name="liferay-format" />
 
 	<target name="append-ant-script">
 		<loadfile property="template.content" srcfile="portal-web/test-ant-templates/${ant.script.template}">
@@ -2092,10 +2092,14 @@
 
 		<antcall target="revert-test-properties" />
 
-		<format message="${scm.revert.command}" arguments="portal-web/docroot/WEB-INF/web.xml" property="revert.command" />
+		<liferay-format
+			arguments="portal-web/docroot/WEB-INF/web.xml"
+			message="${scm.revert.command}"
+			property="scm.revert.command.formatted"
+		/>
 
-		<exec executable="${executable.shell.path}">
-			<arg line="${revert.command}" />
+		<exec executable="${shell.executable}">
+			<arg line="${scm.revert.command.formatted}" />
 		</exec>
 
 		<replace
@@ -2425,10 +2429,14 @@ auto.deploy.dest.dir=C:/WINDOWS/system32/config/systemprofile/liferay/websphere-
 	</target>
 
 	<target name="prepare-portal-properties">
-		<format message="${scm.revert.command}" arguments="portal-impl/src/portal.properties" property="revert.command" />
+		<liferay-format
+			arguments="portal-impl/src/portal.properties"
+			message="${scm.revert.command}"
+			property="scm.revert.command.formatted"
+		/>
 
-		<exec executable="${executable.shell.path}">
-			<arg line="${revert.command}" />
+		<exec executable="${shell.executable}">
+			<arg line="${scm.revert.command.formatted}" />
 		</exec>
 
 		<replace file="portal-impl/src/portal.properties">
@@ -3233,16 +3241,24 @@ file.
 	</target>
 
 	<target name="revert-test-properties">
-		<format message="${scm.revert.command}" arguments="portal-impl/test/test-portal-impl.properties" property="revert.command" />
+		<liferay-format
+			arguments="portal-impl/test/test-portal-impl.properties"
+			message="${scm.revert.command}"
+			property="scm.revert.command.formatted"
+		/>
 
-		<exec executable="${executable.shell.path}">
-			<arg line="${revert.command}" />
+		<exec executable="${shell.executable}">
+			<arg line="${scm.revert.command.formatted}" />
 		</exec>
 
-		<format message="${scm.revert.command}" arguments="portal-web/test/test-portal-web.properties" property="revert.command" />
+		<liferay-format
+			arguments="portal-web/test/test-portal-web.properties"
+			message="${scm.revert.command}"
+			property="scm.revert.command.formatted"
+		/>
 
-		<exec executable="${executable.shell.path}">
-			<arg line="${revert.command}" />
+		<exec executable="${shell.executable}">
+			<arg line="${scm.revert.command.formatted}" />
 		</exec>
 	</target>
 
