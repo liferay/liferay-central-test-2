@@ -303,26 +303,24 @@ print AdminConfig.save()</echo>
 		<delete dir="${lp.plugins.dir}/portlets/sample-service-builder-portlet/docroot/WEB-INF/src/META-INF" />
 
 		<if>
-			<equals arg1="${scm.tool}" arg2="svn" />
+			<equals arg1="${scm.tool}" arg2="git" />
 			<then>
-				<exec executable="${executable.shell.path}">
-					<arg line="/c svn --username ${svn.username} --password ${svn.password} update ${lp.plugins.dir}/portlets/sample-service-builder-portlet/docroot/WEB-INF" />
-				</exec>
-
-				<exec executable="${executable.shell.path}">
-					<arg line="/c svn revert --recursive ${lp.plugins.dir}/portlets/sample-service-builder-portlet" />
+				<exec dir="${lp.plugins.dir}" executable="${shell.executable}">
+					<arg line="-c &quot;git checkout portlets/sample-service-builder-portlet&quot;" />
 				</exec>
 			</then>
-			<else>
-				<if>
-					<equals arg1="${scm.tool}" arg2="git" />
-					<then>
-						<exec dir="${lp.plugins.dir}" executable="${executable.shell.path}">
-							<arg line='-c "git checkout portlets/sample-service-builder-portlet"' />
-						</exec>
-					</then>
-				</if>
-			</else>
+			<elseif>
+				<equals arg1="${scm.tool}" arg2="svn" />
+				<then>
+					<exec executable="${shell.executable}">
+						<arg line="/c svn --username ${svn.username} --password ${svn.password} update ${lp.plugins.dir}/portlets/sample-service-builder-portlet/docroot/WEB-INF" />
+					</exec>
+
+					<exec executable="${shell.executable}">
+						<arg line="/c svn revert --recursive ${lp.plugins.dir}/portlets/sample-service-builder-portlet" />
+					</exec>
+				</then>
+			</elseif>
 		</if>
 	</target>
 </project>
