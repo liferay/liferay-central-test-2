@@ -1233,13 +1233,10 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			throw new PageVersionException();
 		}
 
-		if (serviceContext != null) {
-			if (DateUtil.compareTo(
-					oldPage.getModifiedDate(), serviceContext.getFormDate())
-						> 0) {
+		if (DateUtil.compareTo(
+				oldPage.getModifiedDate(), serviceContext.getFormDate()) > 0) {
 
-				throw new PageVersionException();
-			}
+			throw new PageVersionException();
 		}
 
 		long resourcePrimKey =
