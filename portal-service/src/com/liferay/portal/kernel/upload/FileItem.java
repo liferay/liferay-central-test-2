@@ -23,7 +23,13 @@ import java.io.InputStream;
  */
 public interface FileItem {
 
+	public void delete();
+
+	public String getContentType();
+
 	public String getEncodedString();
+
+	public String getFieldName();
 
 	public String getFileName();
 
@@ -31,26 +37,20 @@ public interface FileItem {
 
 	public String getFullFileName();
 
-	public int getSizeThreshold();
-
-	public String getString();
-
-	public void setString(String encode);
-
-	public boolean isFormField();
-
-	public String getFieldName();
-
-	public void delete();
-
-	public String getContentType();
-
-	public File getStoreLocation();
-
-	public boolean isInMemory();
-
 	public InputStream getInputStream() throws IOException;
 
 	public long getSize();
+
+	public int getSizeThreshold();
+
+	public File getStoreLocation();
+
+	public String getString();
+
+	public boolean isFormField();
+
+	public boolean isInMemory();
+
+	public void setString(String encode);
 
 }

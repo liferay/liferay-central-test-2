@@ -72,7 +72,6 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Set;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -396,11 +395,9 @@ public class EditArticleAction extends PortletAction {
 		Map<String, FileItem[]> multipartParameterMap =
 			uploadPortletRequest.getMultipartParameterMap();
 
-		Set<String> parameterNames = multipartParameterMap.keySet();
-
 		String imagePrefix = "structure_image_";
 
-		for (String name : parameterNames) {
+		for (String name : multipartParameterMap.keySet()) {
 			if (name.startsWith(imagePrefix)) {
 				File file = uploadPortletRequest.getFile(name);
 				byte[] bytes = FileUtil.getBytes(file);
