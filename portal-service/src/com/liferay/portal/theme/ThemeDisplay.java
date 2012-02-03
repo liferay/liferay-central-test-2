@@ -872,8 +872,7 @@ public class ThemeDisplay implements Serializable {
 			setPathThemeImages(
 				host + themeStaticResourcePath + theme.getImagesPath());
 			setPathThemeJavaScript(
-				dynamicResourcesHost + themeStaticResourcePath +
-					theme.getJavaScriptPath());
+				host + themeStaticResourcePath + theme.getJavaScriptPath());
 			setPathThemeRoot(themeStaticResourcePath + theme.getRootPath());
 			setPathThemeTemplates(
 				host + themeStaticResourcePath + theme.getTemplatesPath());
