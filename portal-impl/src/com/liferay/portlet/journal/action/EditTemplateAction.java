@@ -47,9 +47,9 @@ import com.liferay.portlet.journal.util.JournalUtil;
 import com.liferay.util.JS;
 
 import java.io.File;
-
 import java.io.IOException;
 import java.io.InputStream;
+
 import java.util.Locale;
 import java.util.Map;
 
@@ -229,7 +229,8 @@ public class EditTemplateAction extends PortletAction {
 
 				is.close();
 			}
-		} catch (IOException ioe) {
+		}
+		catch (IOException ioe) {
 			if (_log.isWarnEnabled()) {
 				_log.warn(ioe, ioe);
 			}
