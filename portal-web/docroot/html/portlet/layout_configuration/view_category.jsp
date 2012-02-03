@@ -73,8 +73,6 @@ while (itr.hasNext()) {
 
 portlets = ListUtil.sort(portlets, new PortletTitleComparator(application, locale));
 
-String[] runtimePortletIds = request.getParameter("runtimePortletIds").split(",");
-
 if (!categories.isEmpty() || !portlets.isEmpty()) {
 %>
 
@@ -102,6 +100,8 @@ if (!categories.isEmpty() || !portlets.isEmpty()) {
 				portletCategoryIndex++;
 			}
 
+			String[] runtimePortletIds = StringUtil.split(ParamUtil.getString(request, "runtimePortletIds"));
+
 			itr = portlets.iterator();
 
 			while (itr.hasNext()) {
@@ -119,12 +119,14 @@ if (!categories.isEmpty() || !portlets.isEmpty()) {
 				}
 
 				boolean portletInstanceable = portlet.isInstanceable();
+
 				boolean portletUsed = layoutTypePortlet.hasPortletId(portlet.getPortletId());
 
 				for (String runtimePortletId : runtimePortletIds) {
-					if (runtimePortletId.equals(portlet.getPortletId()) ||
-						runtimePortletId.startsWith(
-							portlet.getPortletId().concat(PortletConstants.INSTANCE_SEPARATOR))) {
+					String portletId = portlet.getPortletId();
+
+					if (runtimePortletId.equals(portletId) ||
+						runtimePortletId.startsWith(portletId.concat(PortletConstants.INSTANCE_SEPARATOR))) {
 
 						portletUsed = true;
 					}

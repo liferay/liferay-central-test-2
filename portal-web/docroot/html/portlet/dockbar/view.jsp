@@ -34,8 +34,6 @@ for (String portletId : PropsValues.DOCKBAR_ADD_PORTLETS) {
 		portlets.add(portlet);
 	}
 }
-
-Set<String> runtimePortletIds = (Set<String>)request.getAttribute(com.liferay.portal.kernel.util.WebKeys.RUNTIME_PORTLET_IDS);
 %>
 
 <div class="dockbar" data-namespace="<portlet:namespace />" id="dockbar">
@@ -73,29 +71,33 @@ Set<String> runtimePortletIds = (Set<String>)request.getAttribute(com.liferay.po
 												<ul>
 
 													<%
+													Set<String> runtimePortletIds = (Set<String>)request.getAttribute(WebKeys.RUNTIME_PORTLET_IDS);
+
 													int j = 0;
 
 													for (int i = 0; i < portlets.size(); i++) {
 														Portlet portlet = portlets.get(i);
 
 														boolean portletInstanceable = portlet.isInstanceable();
+
 														boolean portletUsed = layoutTypePortlet.hasPortletId(portlet.getPortletId());
 
 														for (String runtimePortletId : runtimePortletIds) {
-															if (runtimePortletId.equals(portlet.getPortletId()) ||
-																runtimePortletId.startsWith(
-																	portlet.getPortletId().concat(PortletConstants.INSTANCE_SEPARATOR))) {
-												
+															String portletId = portlet.getPortletId();
+
+															if (runtimePortletId.equals(portletId) ||
+																runtimePortletId.startsWith(portletId.concat(PortletConstants.INSTANCE_SEPARATOR))) {
+
 																portletUsed = true;
 															}
 														}
 
 														boolean portletLocked = (!portletInstanceable && portletUsed);
 
-													if (!PortletPermissionUtil.contains(permissionChecker, layout, portlet.getPortletId(), ActionKeys.ADD_TO_PAGE)) {
-														continue;
-													}
-												%>
+														if (!PortletPermissionUtil.contains(permissionChecker, layout, portlet.getPortletId(), ActionKeys.ADD_TO_PAGE)) {
+															continue;
+														}
+													%>
 
 														<li class="<%= (j == 0) ? "first" : "" %>">
 															<a class="app-shortcut <c:if test="<%= portletLocked %>">lfr-portlet-used</c:if> <c:if test="<%= portletInstanceable %>">lfr-instanceable</c:if>" data-portlet-id="<%= portlet.getPortletId() %>" href="javascript:;" <c:if test="<%= portletLocked %>">tabIndex="-1"</c:if>>
