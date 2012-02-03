@@ -21,7 +21,6 @@ import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
-import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.MathUtil;
@@ -1233,11 +1232,8 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			throw new PageVersionException();
 		}
 
-		if (DateUtil.compareTo(
-				oldPage.getModifiedDate(), serviceContext.getFormDate()) > 0) {
-
-			throw new PageVersionException();
-		}
+		serviceContext.validateModifiedDate(
+			oldPage, PageVersionException.class);
 
 		long resourcePrimKey =
 			wikiPageResourceLocalService.getPageResourcePrimKey(nodeId, title);
