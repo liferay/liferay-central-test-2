@@ -216,9 +216,7 @@ public class EditTemplateAction extends PortletAction {
 		return portletURL.toString();
 	}
 
-	protected String getTemplateScript(
-		UploadPortletRequest uploadPortletRequest) {
-
+	protected String getXsl(UploadPortletRequest uploadPortletRequest) {
 		String xsl = null;
 
 		try {
@@ -261,7 +259,7 @@ public class EditTemplateAction extends PortletAction {
 		Map<Locale, String> descriptionMap =
 			LocalizationUtil.getLocalizationMap(actionRequest, "description");
 
-		String xsl = getTemplateScript(uploadPortletRequest);
+		String xsl = getXsl(uploadPortletRequest);
 		String xslContent = JS.decodeURIComponent(
 			ParamUtil.getString(uploadPortletRequest, "xslContent"));
 		boolean formatXsl = ParamUtil.getBoolean(
