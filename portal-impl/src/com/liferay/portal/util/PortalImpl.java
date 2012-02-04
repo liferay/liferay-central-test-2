@@ -4512,6 +4512,14 @@ public class PortalImpl implements Portal {
 		return false;
 	}
 
+	public boolean isCDNDynamicResourcesEnabled(HttpServletRequest request)
+		throws PortalException, SystemException {
+
+		Company company = getCompany(request);
+
+		return isCDNDynamicResourcesEnabled(company.getCompanyId());
+	}
+
 	public boolean isCDNDynamicResourcesEnabled(long companyId) {
 		try {
 			return PrefsPropsUtil.getBoolean(
@@ -4522,14 +4530,6 @@ public class PortalImpl implements Portal {
 		}
 
 		return PropsValues.CDN_DYNAMIC_RESOURCES_ENABLED;
-	}
-
-	public boolean isCDNDynamicResourcesEnabled(HttpServletRequest request)
-		throws PortalException, SystemException {
-
-		Company company = getCompany(request);
-
-		return isCDNDynamicResourcesEnabled(company.getCompanyId());
 	}
 
 	/**

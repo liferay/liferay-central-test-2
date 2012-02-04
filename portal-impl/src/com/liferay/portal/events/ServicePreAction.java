@@ -746,7 +746,7 @@ public class ServicePreAction extends Action {
 		// because other methods (setLookAndFeel) depend on them being set
 
 		themeDisplay.setCDNHost(cdnHost);
-		themeDisplay.setDynamicResourcesCDNHost(dynamicResourcesCDNHost);
+		themeDisplay.setCDNDynamicResourcesHost(dynamicResourcesCDNHost);
 		themeDisplay.setPortalURL(portalURL);
 		themeDisplay.setFacebookCanvasPageURL(facebookCanvasPageURL);
 		themeDisplay.setWidget(widget);

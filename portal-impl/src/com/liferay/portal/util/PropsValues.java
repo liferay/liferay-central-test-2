@@ -262,7 +262,7 @@ public class PropsValues {
 
 	public static final String CAS_SERVICE_URL = PropsUtil.get(PropsKeys.CAS_SERVICE_URL);
 
-	public static final boolean CDN_DYNAMIC_RESOURCES_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.CDN_DYNAMIC_RESOURCES_ENABLED), true);
+	public static final boolean CDN_DYNAMIC_RESOURCES_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.CDN_DYNAMIC_RESOURCES_ENABLED));
 
 	public static final String CDN_HOST_HTTP = PropsUtil.get(PropsKeys.CDN_HOST_HTTP);
 

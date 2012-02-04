@@ -114,6 +114,9 @@
 			},
 
 			ThemeDisplay: {
+				getCDNDynamicResourcesHost: function() {
+					return "<%= themeDisplay.getCDNDynamicResourcesHost() %>";
+				},
 				getCDNHost: function() {
 					return "<%= themeDisplay.getCDNHost() %>";
 				},
@@ -135,9 +138,6 @@
 
 				getDoAsUserIdEncoded: function() {
 					return "<%= UnicodeFormatter.toString(themeDisplay.getDoAsUserId()) %>";
-				},
-				getDynamicResourcesCDNHost: function() {
-					return "<%= themeDisplay.getDynamicResourcesCDNHost() %>";
 				},
 				getPlid: function() {
 					return "<%= themeDisplay.getPlid() %>";
@@ -242,7 +242,7 @@
 
 		String alloyBaseURL = PortalUtil.getPortalURL(request) + alloyRootPath;
 
-		String alloyComboPath = PortalUtil.getStaticResourceURL(request, themeDisplay.getDynamicResourcesCDNHost() + themeDisplay.getPathContext() + "/combo/", "minifierType=", javaScriptLastModified);
+		String alloyComboPath = PortalUtil.getStaticResourceURL(request, themeDisplay.getCDNDynamicResourcesHost() + themeDisplay.getPathContext() + "/combo/", "minifierType=", javaScriptLastModified);
 		%>
 
 		Liferay.AUI = {
@@ -306,10 +306,10 @@
 	<c:when test="<%= themeDisplay.isThemeJsFastLoad() %>">
 		<c:choose>
 			<c:when test="<%= themeDisplay.isThemeJsBarebone() %>">
-				<script src="<%= HtmlUtil.escape(PortalUtil.getStaticResourceURL(request, themeDisplay.getDynamicResourcesCDNHost() + themeDisplay.getPathJavaScript() + "/barebone.jsp", "minifierBundleId=javascript.barebone.files", javaScriptLastModified)) %>" type="text/javascript"></script>
+				<script src="<%= HtmlUtil.escape(PortalUtil.getStaticResourceURL(request, themeDisplay.getCDNDynamicResourcesHost() + themeDisplay.getPathJavaScript() + "/barebone.jsp", "minifierBundleId=javascript.barebone.files", javaScriptLastModified)) %>" type="text/javascript"></script>
 			</c:when>
 			<c:otherwise>
-				<script src="<%= HtmlUtil.escape(PortalUtil.getStaticResourceURL(request, themeDisplay.getDynamicResourcesCDNHost() + themeDisplay.getPathJavaScript() + "/everything.jsp", "minifierBundleId=javascript.everything.files", javaScriptLastModified)) %>" type="text/javascript"></script>
+				<script src="<%= HtmlUtil.escape(PortalUtil.getStaticResourceURL(request, themeDisplay.getCDNDynamicResourcesHost() + themeDisplay.getPathJavaScript() + "/everything.jsp", "minifierBundleId=javascript.everything.files", javaScriptLastModified)) %>" type="text/javascript"></script>
 			</c:otherwise>
 		</c:choose>
 	</c:when>

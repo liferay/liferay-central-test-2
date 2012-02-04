@@ -69,6 +69,10 @@ public class ThemeDisplay implements Serializable {
 		return _account;
 	}
 
+	public String getCDNDynamicResourcesHost() {
+		return _cdnDynamicResourcesHost;
+	}
+
 	public String getCDNHost() {
 		return _cdnHost;
 	}
@@ -139,10 +143,6 @@ public class ThemeDisplay implements Serializable {
 
 	public String getDoAsUserLanguageId() {
 		return _doAsUserLanguageId;
-	}
-
-	public String getDynamicResourcesCDNHost() {
-		return _dynamicResourcesCDNHost;
 	}
 
 	public String getFacebookCanvasPageURL() {
@@ -699,6 +699,10 @@ public class ThemeDisplay implements Serializable {
 		_addSessionIdToURL = addSessionIdToURL;
 	}
 
+	public void setCDNDynamicResourcesHost(String cdnDynamicResourcesHost) {
+		_cdnDynamicResourcesHost = cdnDynamicResourcesHost;
+	}
+
 	public void setCDNHost(String cdnHost) {
 		_cdnHost = cdnHost;
 	}
@@ -746,10 +750,6 @@ public class ThemeDisplay implements Serializable {
 
 	public void setDoAsUserLanguageId(String doAsUserLanguageId) {
 		_doAsUserLanguageId = doAsUserLanguageId;
-	}
-
-	public void setDynamicResourcesCDNHost(String dynamicResourcesCDNHost) {
-		_dynamicResourcesCDNHost = dynamicResourcesCDNHost;
 	}
 
 	public void setFacebookCanvasPageURL(String facebookCanvasPageURL) {
@@ -851,12 +851,7 @@ public class ThemeDisplay implements Serializable {
 		if ((theme != null) && (colorScheme != null)) {
 			String themeStaticResourcePath = theme.getStaticResourcePath();
 
-			String dynamicResourcesHost = getDynamicResourcesCDNHost();
 			String host = getCDNHost();
-
-			if (Validator.isNull(dynamicResourcesHost) && isFacebook()) {
-				dynamicResourcesHost = getPortalURL();
-			}
 
 			if (Validator.isNull(host) && isFacebook()) {
 				host = getPortalURL();
@@ -866,9 +861,16 @@ public class ThemeDisplay implements Serializable {
 				host + themeStaticResourcePath +
 					colorScheme.getColorSchemeImagesPath());
 
+			String dynamicResourcesHost = getCDNDynamicResourcesHost();
+
+			if (Validator.isNull(dynamicResourcesHost) && isFacebook()) {
+				dynamicResourcesHost = getPortalURL();
+			}
+
 			setPathThemeCss(
 				dynamicResourcesHost + themeStaticResourcePath +
 					theme.getCssPath());
+
 			setPathThemeImages(
 				host + themeStaticResourcePath + theme.getImagesPath());
 			setPathThemeJavaScript(
@@ -1254,6 +1256,7 @@ public class ThemeDisplay implements Serializable {
 
 	private Account _account;
 	private boolean _addSessionIdToURL;
+	private String _cdnDynamicResourcesHost = StringPool.BLANK;
 	private String _cdnHost = StringPool.BLANK;
 	private ColorScheme _colorScheme;
 	private Company _company;
@@ -1268,7 +1271,6 @@ public class ThemeDisplay implements Serializable {
 	private long _doAsGroupId = 0;
 	private String _doAsUserId = StringPool.BLANK;
 	private String _doAsUserLanguageId = StringPool.BLANK;
-	private String _dynamicResourcesCDNHost = StringPool.BLANK;
 	private boolean _facebook;
 	private String _facebookCanvasPageURL;
 	private boolean _freeformLayout;

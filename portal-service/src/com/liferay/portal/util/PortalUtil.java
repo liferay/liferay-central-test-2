@@ -1292,15 +1292,15 @@ public class PortalUtil {
 		return getPortal().isAllowAddPortletDefaultResource(request, portlet);
 	}
 
-	public static boolean isCDNDynamicResourcesEnabled(long companyId) {
-		return getPortal().isCDNDynamicResourcesEnabled(companyId);
-	}
-
 	public static boolean isCDNDynamicResourcesEnabled(
 			HttpServletRequest request)
 		throws PortalException, SystemException {
 
 		return getPortal().isCDNDynamicResourcesEnabled(request);
+	}
+
+	public static boolean isCDNDynamicResourcesEnabled(long companyId) {
+		return getPortal().isCDNDynamicResourcesEnabled(companyId);
 	}
 
 	/**
