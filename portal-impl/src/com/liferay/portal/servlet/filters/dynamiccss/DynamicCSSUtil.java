@@ -172,11 +172,9 @@ public class DynamicCSSUtil {
 			cssThemePath = themeDisplay.getPathThemeCss();
 		}
 		else {
-			boolean cdnDynamicResourcesEnabled =
-				PortalUtil.isCDNDynamicResourcesEnabled(request);
 			String cdnHost = StringPool.BLANK;
 
-			if (cdnDynamicResourcesEnabled){
+			if (PortalUtil.isCDNDynamicResourcesEnabled(request)) {
 				cdnHost = PortalUtil.getCDNHost(request);
 			}
 
