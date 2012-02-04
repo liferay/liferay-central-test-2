@@ -52,6 +52,7 @@ import com.liferay.portal.kernel.search.IndexerPostProcessor;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.servlet.DirectServletRegistry;
 import com.liferay.portal.kernel.servlet.LiferayFilter;
+import com.liferay.portal.kernel.servlet.LiferayFilterTracker;
 import com.liferay.portal.kernel.servlet.ServletContextPool;
 import com.liferay.portal.kernel.servlet.TryFilter;
 import com.liferay.portal.kernel.servlet.TryFinallyFilter;
@@ -444,6 +445,25 @@ public class HookHotDeployListener
 				PropsKeys.USERS_SCREEN_NAME_VALIDATOR)) {
 
 			ScreenNameValidatorFactory.setInstance(null);
+		}
+
+		Set<String> liferayFilterClassNames =
+			LiferayFilterTracker.getClassNames();
+
+		for (String liferayFilterClassName : liferayFilterClassNames) {
+			if (!portalProperties.containsKey(liferayFilterClassName)) {
+				continue;
+			}
+
+			boolean filterEnabled = GetterUtil.getBoolean(
+				PropsUtil.get(liferayFilterClassName));
+
+			Set<LiferayFilter> liferayFilters =
+				LiferayFilterTracker.getLiferayFilters(liferayFilterClassName);
+
+			for (LiferayFilter liferayFilter : liferayFilters) {
+				liferayFilter.setFilterEnabled(filterEnabled);
+			}
 		}
 	}
 
@@ -1766,6 +1786,25 @@ public class HookHotDeployListener
 					screenNameValidatorClassName);
 
 			ScreenNameValidatorFactory.setInstance(screenNameValidator);
+		}
+
+		Set<String> liferayFilterClassNames =
+			LiferayFilterTracker.getClassNames();
+
+		for (String liferayFilterClassName : liferayFilterClassNames) {
+			if (!portalProperties.containsKey(liferayFilterClassName)) {
+				continue;
+			}
+
+			boolean filterEnabled = GetterUtil.getBoolean(
+				portalProperties.getProperty(liferayFilterClassName));
+
+			Set<LiferayFilter> liferayFilters =
+				LiferayFilterTracker.getLiferayFilters(liferayFilterClassName);
+
+			for (LiferayFilter liferayFilter : liferayFilters) {
+				liferayFilter.setFilterEnabled(filterEnabled);
+			}
 		}
 
 		if (unfilteredPortalProperties.containsKey(
