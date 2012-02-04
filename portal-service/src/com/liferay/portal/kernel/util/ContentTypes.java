@@ -40,8 +40,7 @@ public interface ContentTypes {
 	public static final String APPLICATION_VND_MS_POWERPOINT =
 		"application/vnd.ms-powerpoint";
 
-	public static final String APPLICATION_X_GZIP =
-		"application/x-gzip";
+	public static final String APPLICATION_X_GZIP = "application/x-gzip";
 
 	public static final String APPLICATION_X_JAVA_SERIALIZED_OBJECT =
 		"application/x-java-serialized-object";

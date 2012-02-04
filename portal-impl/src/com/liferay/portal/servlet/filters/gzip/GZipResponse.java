@@ -22,7 +22,6 @@ import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.UnsyncPrintWriterPool;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.util.RSSThreadLocal;
 
 import java.io.IOException;
@@ -90,7 +89,7 @@ public class GZipResponse extends HttpServletResponseWrapper {
 		}
 
 		if (_servletOutputStream == null) {
-			if (_contentTypeGzip) {
+			if (_gZipContentType) {
 				_servletOutputStream = _response.getOutputStream();
 			}
 			else {
@@ -144,10 +143,12 @@ public class GZipResponse extends HttpServletResponseWrapper {
 	public void setContentType(String contentType) {
 		super.setContentType(contentType);
 
-		if (Validator.equals(contentType, ContentTypes.APPLICATION_GZIP) ||
-			Validator.equals(contentType, ContentTypes.APPLICATION_X_GZIP)) {
+		if (contentType != null) {
+			if (contentType.equals(ContentTypes.APPLICATION_GZIP) ||
+				contentType.equals(ContentTypes.APPLICATION_X_GZIP)) {
 
-			_contentTypeGzip = true;
+				_gZipContentType = true;
+			}
 		}
 	}
 
@@ -155,8 +156,8 @@ public class GZipResponse extends HttpServletResponseWrapper {
 
 	private static Log _log = LogFactoryUtil.getLog(GZipResponse.class);
 
-	private boolean _contentTypeGzip;
 	private boolean _firefox;
+	private boolean _gZipContentType;
 	private PrintWriter _printWriter;
 	private HttpServletResponse _response;
 	private ServletOutputStream _servletOutputStream;
