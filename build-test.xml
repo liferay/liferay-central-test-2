@@ -28,6 +28,8 @@
 		<catch>
 			<ant antfile="portal-service/build.xml" target="compile" inheritAll="false" />
 			<ant antfile="util-java/build.xml" target="compile" inheritAll="false" />
+
+			<taskdef classname="com.liferay.util.ant.FormatTask" classpathref="project.classpath" name="liferay-format" />
 		</catch>
 	</trycatch>
 
