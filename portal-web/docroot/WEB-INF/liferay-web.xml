@@ -510,10 +510,6 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 	<filter-mapping>
-		<filter-name>Session Max Allowed Filter</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
-	<filter-mapping>
 		<filter-name>Char Buffer Pool Filter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
@@ -531,6 +527,10 @@
 	</filter-mapping>
 	<filter-mapping>
 		<filter-name>Session Id Filter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>Session Max Allowed Filter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 	<filter-mapping>
