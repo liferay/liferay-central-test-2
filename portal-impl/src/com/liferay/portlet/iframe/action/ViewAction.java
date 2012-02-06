@@ -52,7 +52,7 @@ public class ViewAction extends PortletAction {
 		String src = transformSrc(renderRequest, renderResponse);
 
 		if (Validator.isNull(src) || src.equals(Http.HTTP_WITH_SLASH) ||
-				src.equals(Http.HTTPS_WITH_SLASH)) {
+			src.equals(Http.HTTPS_WITH_SLASH)) {
 
 			return mapping.findForward("/portal/portlet_not_setup");
 		}
