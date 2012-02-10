@@ -5747,7 +5747,6 @@ public class PortalImpl implements Portal {
 
 		User realUser = UserLocalServiceUtil.getUserById(
 			realUserIdObj.longValue());
-		boolean checkGuest = true;
 
 		PermissionChecker permissionChecker =
 			PermissionCheckerFactoryUtil.create(realUser);
