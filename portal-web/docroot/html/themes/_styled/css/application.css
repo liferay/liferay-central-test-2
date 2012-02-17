@@ -492,7 +492,7 @@
 
 .aui-menu-content a, .lfr-menu-list li .taglib-icon, .aui-menu-content .disabled, .lfr-actions .lfr-trigger, .lfr-actions .lfr-trigger strong {
 	font-weight: bold;
-	text-shadow: 1px 1px #FFF;
+	text-shadow: 1px 1px 0 0 #FFF;
 }
 
 /* ---------- Toolbar ---------- */
