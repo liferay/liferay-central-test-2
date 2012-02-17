@@ -120,7 +120,7 @@ public class ProcessExecutor {
 		ProcessOutputStream outProcessOutputStream = new ProcessOutputStream(
 			objectOutputStream, false);
 
-		ProcessContext.setProcessOutputStream(outProcessOutputStream);
+		ProcessContext._setProcessOutputStream(outProcessOutputStream);
 
 		PrintStream outPrintStream = new PrintStream(
 			outProcessOutputStream, true);
@@ -181,8 +181,7 @@ public class ProcessExecutor {
 			return _processOutputStream;
 		}
 
-		// This method should only be called inside subprocess main.
-		private static void setProcessOutputStream(
+		private static void _setProcessOutputStream(
 			ProcessOutputStream processOutputStream) {
 
 			_processOutputStream = processOutputStream;
