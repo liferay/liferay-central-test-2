@@ -91,6 +91,7 @@ public class ProcessExecutorTest extends TestCase {
 
 		try {
 			future.get();
+
 			fail();
 		}
 		catch (CancellationException ce) {
@@ -98,58 +99,55 @@ public class ProcessExecutorTest extends TestCase {
 
 		assertTrue(future.isCancelled());
 		assertTrue(future.isDone());
-
 		assertFalse(future.cancel(true));
 	}
 
 	public void testConcurrentCreateExecutorService() throws Exception {
 		_nullOutExecutorService();
 
-		final AtomicReference<ExecutorService> executorServiceReference =
+		final AtomicReference<ExecutorService> atomicReference =
 			new AtomicReference<ExecutorService>();
 
-		Thread secondCreateThread = new Thread() {
+		Thread thread = new Thread() {
+
+			@Override
 			public void run() {
 				try {
 					ExecutorService executorService =
 						_invokeGetExecutorService();
 
-					executorServiceReference.set(executorService);
+					atomicReference.set(executorService);
 				}
 				catch (Exception e) {
 					fail();
 				}
 			}
+
 		};
 
 		ExecutorService executorService = null;
 
-		// Lock up monitor
 		synchronized (ProcessExecutor.class) {
-			// Start second create thread.
-			secondCreateThread.start();
+			thread.start();
 
-			// Wait until blocked on monitor
-			while (secondCreateThread.getState() != Thread.State.BLOCKED);
+			while (thread.getState() != Thread.State.BLOCKED);
 
-			// First create
 			executorService = _invokeGetExecutorService();
 		}
 
-		// Wait until second create thread dead
-		secondCreateThread.join();
+		thread.join();
 
-		assertSame(executorService, executorServiceReference.get());
+		assertSame(executorService, atomicReference.get());
 	}
 
 	public void testCrash() throws Exception {
 		Logger logger = _getLogger();
 
-		Level oldLevel = logger.getLevel();
-
-		logger.setLevel(Level.OFF);
+		Level level = logger.getLevel();
 
 		try {
+			logger.setLevel(Level.OFF);
+
 			// Negative one crash
 
 			KillJVMProcessCallable killJVMProcessCallable =
@@ -198,11 +196,12 @@ public class ProcessExecutorTest extends TestCase {
 			}
 		}
 		finally {
-			logger.setLevel(oldLevel);
+			logger.setLevel(level);
 		}
 	}
 
 	public void testCreateProcessContext() throws Exception {
+
 		// Useless test to satisfy Cobertura
 
 		Constructor<ProcessContext> constructor =
@@ -243,14 +242,14 @@ public class ProcessExecutorTest extends TestCase {
 
 		DummyJob dummyJob = new DummyJob();
 
-		Future<Void> futureResult = executorService.submit(dummyJob);
+		Future<Void> future = executorService.submit(dummyJob);
 
 		dummyJob.waitUntilStarted();
 
 		processExecutor.destroy();
 
 		try {
-			futureResult.get();
+			future.get();
 
 			fail();
 		}
@@ -262,37 +261,32 @@ public class ProcessExecutorTest extends TestCase {
 
 		assertNull(_getExecutorService());
 
-		// Concurrent Destroy, if fail second destroy thread should throw NPE.
+		// Concurrent destroy
+
 		_invokeGetExecutorService();
 
-		final ProcessExecutor processExecutorRef = processExecutor;
+		final ProcessExecutor referenceProcessExecutor = processExecutor;
 
-		Thread secondDestroyThread = new Thread() {
+		Thread thread = new Thread() {
+
+			@Override
 			public void run() {
-				processExecutorRef.destroy();
+				referenceProcessExecutor.destroy();
 			}
+
 		};
 
-		// Lock up the monitor
 		synchronized (ProcessExecutor.class) {
-			// Start second destroy thread.
-			secondDestroyThread.start();
+			thread.start();
 
-			// Wait until blocked on monitor
-			while (secondDestroyThread.getState() != Thread.State.BLOCKED);
+			while (thread.getState() != Thread.State.BLOCKED);
 
-			// First destroy
 			processExecutor.destroy();
 		}
 
-		// Wait until second destroy thread dead
-		secondDestroyThread.join();
-
-		// Destroy after destroyed
+		thread.join();
 
 		_invokeGetExecutorService();
-
-		processExecutor.destroy();
 
 		processExecutor.destroy();
 
@@ -323,6 +317,7 @@ public class ProcessExecutorTest extends TestCase {
 	}
 
 	public void testGetWithTimeout() throws Exception {
+
 		// Success return
 
 		DummyReturnProcessCallable dummyReturnProcessCallable =
@@ -331,10 +326,9 @@ public class ProcessExecutorTest extends TestCase {
 		Future<String> future = ProcessExecutor.execute(
 			_classPath, dummyReturnProcessCallable);
 
-		String result = future.get(100, TimeUnit.SECONDS);
+		String returnValue = future.get(100, TimeUnit.SECONDS);
 
-		assertEquals(DummyReturnProcessCallable.class.getName(), result);
-
+		assertEquals(DummyReturnProcessCallable.class.getName(), returnValue);
 		assertFalse(future.isCancelled());
 		assertTrue(future.isDone());
 
@@ -348,6 +342,7 @@ public class ProcessExecutorTest extends TestCase {
 
 		try {
 			future.get(1, TimeUnit.SECONDS);
+
 			fail();
 		}
 		catch (TimeoutException te) {
@@ -357,7 +352,9 @@ public class ProcessExecutorTest extends TestCase {
 		assertFalse(future.isDone());
 
 		ExecutorService executorService = _getExecutorService();
+
 		executorService.shutdownNow();
+
 		executorService.awaitTermination(10, TimeUnit.SECONDS);
 
 		assertFalse(future.isCancelled());
@@ -367,14 +364,15 @@ public class ProcessExecutorTest extends TestCase {
 	}
 
 	public void testLeadingLog() throws Exception {
+
+		// Warn level
+
 		String leadingLog = "Test leading log.\n";
 		String bodyLog = "Test body log.\n";
 
 		Logger logger = _getLogger();
 
-		Level oldLevel = logger.getLevel();
-
-		// Test warn level
+		Level level = logger.getLevel();
 
 		logger.setLevel(Level.WARNING);
 
@@ -396,22 +394,23 @@ public class ProcessExecutorTest extends TestCase {
 			assertFalse(future.isCancelled());
 			assertTrue(future.isDone());
 
-			List<LogRecord> capturedLogRecords =
-				captureHandler.getCapturedLogRecords();
+			List<LogRecord> logRecords = captureHandler.getLogRecords();
 
-			assertEquals(1, capturedLogRecords.size());
+			assertEquals(1, logRecords.size());
 
-			LogRecord logRecord = capturedLogRecords.get(0);
+			LogRecord logRecord = logRecords.get(0);
 
-			assertEquals("Found corrupted leading log: " + leadingLog,
+			assertEquals(
+				"Found corrupt leading log " + leadingLog,
 				logRecord.getMessage());
 		}
 		finally {
 			logger.removeHandler(captureHandler);
-			logger.setLevel(oldLevel);
+
+			logger.setLevel(level);
 		}
 
-		// Test fine level
+		// Fine level
 
 		logger.setLevel(Level.FINE);
 
@@ -429,30 +428,33 @@ public class ProcessExecutorTest extends TestCase {
 				_classPath, arguments, leadingLogProcessCallable);
 
 			future.get();
+
 			assertFalse(future.isCancelled());
 			assertTrue(future.isDone());
 
-			List<LogRecord> capturedLogRecords =
-				captureHandler.getCapturedLogRecords();
+			List<LogRecord> logRecords = captureHandler.getLogRecords();
 
-			assertEquals(2, capturedLogRecords.size());
+			assertEquals(2, logRecords.size());
 
-			LogRecord logRecord1 = capturedLogRecords.get(0);
+			LogRecord logRecord1 = logRecords.get(0);
 
-			assertEquals("Found corrupted leading log: " + leadingLog,
+			assertEquals(
+				"Found corrupt leading log " + leadingLog,
 				logRecord1.getMessage());
 
-			LogRecord logRecord2 = capturedLogRecords.get(1);
+			LogRecord logRecord2 = logRecords.get(1);
 
-			assertTrue(logRecord2.getMessage().contains(
-				"Invoked generic process callable "));
+			String message = logRecord2.getMessage();
+
+			assertTrue(message.contains("Invoked generic process callable "));
 		}
 		finally {
 			logger.removeHandler(captureHandler);
-			logger.setLevel(oldLevel);
+
+			logger.setLevel(level);
 		}
 
-		// Test fine level
+		// Severe level
 
 		logger.setLevel(Level.SEVERE);
 
@@ -470,17 +472,18 @@ public class ProcessExecutorTest extends TestCase {
 				_classPath, arguments, leadingLogProcessCallable);
 
 			future.get();
+
 			assertFalse(future.isCancelled());
 			assertTrue(future.isDone());
 
-			List<LogRecord> capturedLogRecords =
-				captureHandler.getCapturedLogRecords();
+			List<LogRecord> logRecords = captureHandler.getLogRecords();
 
-			assertEquals(0, capturedLogRecords.size());
+			assertEquals(0, logRecords.size());
 		}
 		finally {
 			logger.removeHandler(captureHandler);
-			logger.setLevel(oldLevel);
+
+			logger.setLevel(level);
 		}
 	}
 
@@ -518,16 +521,16 @@ public class ProcessExecutorTest extends TestCase {
 			final AtomicReference<Exception> exceptionAtomicReference =
 				new AtomicReference<Exception>();
 
-			Thread launchThread = new Thread() {
+			Thread thread = new Thread() {
 
 				@Override
 				public void run() {
 					try {
-						Future<Serializable> future =
-							ProcessExecutor.execute(
-								_classPath, loggingProcessCallable);
+						Future<Serializable> future = ProcessExecutor.execute(
+							_classPath, loggingProcessCallable);
 
 						future.get();
+
 						assertFalse(future.isCancelled());
 						assertTrue(future.isDone());
 					}
@@ -538,15 +541,9 @@ public class ProcessExecutorTest extends TestCase {
 
 			};
 
-			launchThread.start();
+			thread.start();
 
-			// Notify the subprocess to log
-
-			boolean result = signalFile.createNewFile();
-
-			assertTrue(result);
-
-			// Wait for signal file to be removed indicating the log is done
+			assertTrue(signalFile.createNewFile());
 
 			_waitForSignalFile(signalFile, false);
 
@@ -559,12 +556,9 @@ public class ProcessExecutorTest extends TestCase {
 				errByteArrayOutputStream.toString();
 
 			assertTrue(errByteArrayOutputStreamString.contains(logMessage));
+			assertTrue(signalFile.createNewFile());
 
-			result = signalFile.createNewFile();
-
-			assertTrue(result);
-
-			launchThread.join();
+			thread.join();
 
 			Exception e = exceptionAtomicReference.get();
 
@@ -595,7 +589,6 @@ public class ProcessExecutorTest extends TestCase {
 			_classPath, arguments, readPropertyProcessCallable);
 
 		assertEquals(propertyValue, future.get());
-
 		assertFalse(future.isCancelled());
 		assertTrue(future.isDone());
 	}
@@ -610,22 +603,18 @@ public class ProcessExecutorTest extends TestCase {
 		assertEquals(DummyReturnProcessCallable.class.getName(), future.get());
 		assertFalse(future.isCancelled());
 		assertTrue(future.isDone());
-
-		// Cancel after done
 		assertFalse(future.cancel(true));
 	}
 
 	public void testReturnWithoutExit() throws Exception {
-		String returnValue = "Premature return value";
-
 		ReturnWithoutExitProcessCallable returnWithoutExitProcessCallable =
-			new ReturnWithoutExitProcessCallable(returnValue);
+			new ReturnWithoutExitProcessCallable("Premature return value");
 
 		ProcessExecutor processExecutor = new ProcessExecutor();
 
 		_nullOutExecutorService();
 
-		Future<String> future = processExecutor.execute(
+		Future<String> future = ProcessExecutor.execute(
 			_classPath, returnWithoutExitProcessCallable);
 
 		ThreadPoolExecutor threadPoolExecutor =
@@ -643,34 +632,35 @@ public class ProcessExecutorTest extends TestCase {
 		Field threadField = ReflectionUtil.getDeclaredField(
 			worker.getClass(), "thread");
 
-		Thread executorThread = (Thread)threadField.get(worker);
+		Thread thread = (Thread)threadField.get(worker);
 
 		Logger logger = _getLogger();
 
 		if (OSDetector.isWindows()) {
-			logger.log(Level.WARNING, "Can not do Thread.State checking on " +
-				"Windows! Blindly waiting 10 seconds for blocking on" +
-				"Process.waitFor(), on slow machine this may not be enough, " +
-				"which will cause this test to fail");
+
+			// Wait 10 seconds for the thread to be in a waiting state
+
+			logger.log(
+				Level.WARNING,
+				"Windows does not properly update thread states. This test " +
+					"may fail on slow machines.");
+
 			Thread.sleep(10000);
 		}
 		else {
-			// Wait until executorThread is waiting on subprocess to exit.
-			while (executorThread.getState() != Thread.State.WAITING);
+			while (thread.getState() != Thread.State.WAITING);
 		}
 
-		Level oldLevel = logger.getLevel();
+		Level level = logger.getLevel();
 
-		// Temporarily turn off logging
 		logger.setLevel(Level.OFF);
 
 		try {
-			// Interrupt executor thread
 			processExecutor.destroy();
 
 			try {
-				// Check Subprocess result, should throw ExecutionException
 				future.get();
+
 				fail();
 			}
 			catch (ExecutionException ee) {
@@ -687,7 +677,7 @@ public class ProcessExecutorTest extends TestCase {
 			}
 		}
 		finally {
-			logger.setLevel(oldLevel);
+			logger.setLevel(level);
 		}
 	}
 
@@ -728,13 +718,11 @@ public class ProcessExecutorTest extends TestCase {
 	private static List<String> _createArguments() {
 		List<String> arguments = new ArrayList<String>();
 
-		// Carry on cobertura code coverage, if present.
-		String coberturaDatafile =
-			System.getProperty("net.sourceforge.cobertura.datafile");
+		String fileName = System.getProperty(
+			"net.sourceforge.cobertura.datafile");
 
-		if (coberturaDatafile != null) {
-			arguments.add("-D" + "net.sourceforge.cobertura.datafile" + "=" +
-				coberturaDatafile);
+		if (fileName != null) {
+			arguments.add("-Dnet.sourceforge.cobertura.datafile=" + fileName);
 		}
 
 		return arguments;
@@ -753,25 +741,25 @@ public class ProcessExecutorTest extends TestCase {
 		LogWrapper loggerWrapper = (LogWrapper)LogFactoryUtil.getLog(
 			ProcessExecutor.class);
 
-		Field logField = ReflectionUtil.getDeclaredField(
-			LogWrapper.class, "_log");
+		Field field = ReflectionUtil.getDeclaredField(LogWrapper.class, "_log");
 
-		Jdk14LogImpl jdk14LogImpl = (Jdk14LogImpl)logField.get(loggerWrapper);
+		Jdk14LogImpl jdk14LogImpl = (Jdk14LogImpl)field.get(loggerWrapper);
 
-		logField = ReflectionUtil.getDeclaredField(Jdk14LogImpl.class, "_log");
+		field = ReflectionUtil.getDeclaredField(Jdk14LogImpl.class, "_log");
 
-		return (Logger)logField.get(jdk14LogImpl);
+		return (Logger)field.get(jdk14LogImpl);
 	}
 
 	private static PrintStream _getOriginalSystemOut() throws Exception {
 		ProcessOutputStream processOutputStream =
 			ProcessExecutor.ProcessContext.getProcessOutputStream();
 
-		Field _objectOutputStreamField = ReflectionUtil.getDeclaredField(
+		Field objectOutputStreamField = ReflectionUtil.getDeclaredField(
 			ProcessOutputStream.class, "_objectOutputStream");
 
-		ObjectOutputStream objectOutputStream = (ObjectOutputStream)
-			_objectOutputStreamField.get(processOutputStream);
+		ObjectOutputStream objectOutputStream =
+			(ObjectOutputStream)objectOutputStreamField.get(
+				processOutputStream);
 
 		Field boutField = ReflectionUtil.getDeclaredField(
 			ObjectOutputStream.class, "bout");
@@ -818,35 +806,35 @@ public class ProcessExecutorTest extends TestCase {
 		}
 	}
 
-	private final String _classPath = System.getProperty("java.class.path");
+	private String _classPath = System.getProperty("java.class.path");
 
 	private static class CaptureHandler extends Handler {
 
 		@Override
 		public void close() throws SecurityException {
-			_recordList.clear();
+			_logRecords.clear();
 		}
 
 		@Override
 		public void flush() {
-			_recordList.clear();
+			_logRecords.clear();
 		}
 
-		public List<LogRecord> getCapturedLogRecords() {
-			return _recordList;
+		public List<LogRecord> getLogRecords() {
+			return _logRecords;
 		}
 
 		@Override
-		public boolean isLoggable(LogRecord record) {
+		public boolean isLoggable(LogRecord logRecord) {
 			return true;
 		}
 
 		@Override
-		public void publish(LogRecord record) {
-			_recordList.add(record);
+		public void publish(LogRecord logRecord) {
+			_logRecords.add(logRecord);
 		}
 
-		private final List<LogRecord> _recordList =
+		private final List<LogRecord> _logRecords =
 			new CopyOnWriteArrayList<LogRecord>();
 
 	}
@@ -919,11 +907,11 @@ public class ProcessExecutorTest extends TestCase {
 
 		public Serializable call() throws ProcessException {
 			try {
-				PrintStream systemOut = _getOriginalSystemOut();
+				PrintStream printStream = _getOriginalSystemOut();
 
-				systemOut.print(_leadingLog);
+				printStream.print(_leadingLog);
 
-				systemOut.flush();
+				printStream.flush();
 
 				System.out.print(_bodyLog);
 			}
@@ -983,7 +971,7 @@ public class ProcessExecutorTest extends TestCase {
 			_propertyKey = propertyKey;
 		}
 
-		public String call() throws ProcessException {
+		public String call() {
 			return System.getProperty(_propertyKey);
 		}
 
@@ -1003,9 +991,10 @@ public class ProcessExecutorTest extends TestCase {
 				ProcessOutputStream processOutputStream =
 					ProcessExecutor.ProcessContext.getProcessOutputStream();
 
-				// Force to write a fake premature ReturnProcessCallable
+				// Forcibly write a premature ReturnProcessCallable
+
 				processOutputStream.writeProcessCallable(
-					new ReturnProcessCallable(_returnValue));
+					new ReturnProcessCallable<String>(_returnValue));
 
 				Thread.sleep(Long.MAX_VALUE);
 			}
@@ -1023,10 +1012,11 @@ public class ProcessExecutorTest extends TestCase {
 	private static class UnserializableProcessCallable
 		implements ProcessCallable<Serializable> {
 
-		public Serializable call() throws ProcessException {
+		public Serializable call() {
 			return UnserializableProcessCallable.class.getName();
 		}
 
+		@SuppressWarnings("unused")
 		private final Object _unserializableObject = new Object();
 
 	}

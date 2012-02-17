@@ -60,7 +60,8 @@ public class ProcessExecutor {
 			ProcessCallable<? extends Serializable> processCallable)
 		throws ProcessException {
 
-		return execute("java", classPath, Collections.<String>emptyList(),
+		return execute(
+			"java", classPath, Collections.<String>emptyList(),
 			processCallable);
 	}
 
@@ -70,17 +71,16 @@ public class ProcessExecutor {
 		throws ProcessException {
 
 		try {
-			List<String> commandList = new ArrayList<String>(
-				arguments.size() + 4);
+			List<String> commands = new ArrayList<String>(arguments.size() + 4);
 
-			commandList.add(java);
-			commandList.add("-cp");
-			commandList.add(classPath);
-			commandList.addAll(arguments);
-			commandList.add(ProcessExecutor.class.getName());
+			commands.add(java);
+			commands.add("-cp");
+			commands.add(classPath);
+			commands.addAll(arguments);
+			commands.add(ProcessExecutor.class.getName());
 
 			ProcessBuilder processBuilder = new ProcessBuilder(
-				commandList.toArray(new String[commandList.size()]));
+				commands.toArray(new String[commands.size()]));
 
 			Process process = processBuilder.start();
 
@@ -175,28 +175,23 @@ public class ProcessExecutor {
 		}
 	}
 
-	/**
-	 * ProcessContext needs to be initialied at the beginning of main method,
-	 * before invoking the ProcessCallable. This will ensure all context
-	 * variables are setted before main thread forking other threads.
-	 * Therefore variables setting happens-before any reading, memory visibility
-	 * ensured. QED
-	 */
 	public static class ProcessContext {
-
-		private ProcessContext() {
-		}
 
 		public static ProcessOutputStream getProcessOutputStream() {
 			return _processOutputStream;
 		}
 
-		private static void setProcessOutputStream(
+		public static void setProcessOutputStream(
 			ProcessOutputStream processOutputStream) {
+
 			_processOutputStream = processOutputStream;
 		}
 
+		private ProcessContext() {
+		}
+
 		private static ProcessOutputStream _processOutputStream;
+
 	}
 
 	private static ExecutorService _getExecutorService() {
@@ -223,60 +218,56 @@ public class ProcessExecutor {
 	private static class ProcessExecutionFutureResult<T> implements Future<T> {
 
 		public ProcessExecutionFutureResult(
-			Future<ProcessCallable<? extends Serializable>>
-				futureResponseProcessCallable,
+			Future<ProcessCallable<? extends Serializable>> future,
 			Process process) {
-			_futureResponseProcessCallable = futureResponseProcessCallable;
+
+			_future = future;
 			_process = process;
 		}
 
 		public boolean cancel(boolean mayInterruptIfRunning) {
-			if (_futureResponseProcessCallable.isCancelled() ||
-				_futureResponseProcessCallable.isDone()) {
+			if (_future.isCancelled() || _future.isDone()) {
 				return false;
 			}
 
-			_futureResponseProcessCallable.cancel(true);
+			_future.cancel(true);
 			_process.destroy();
 
 			return true;
 		}
 
 		public boolean isCancelled() {
-			return _futureResponseProcessCallable.isCancelled();
+			return _future.isCancelled();
 		}
 
 		public boolean isDone() {
-			return _futureResponseProcessCallable.isDone();
+			return _future.isDone();
 		}
 
-		public T get() throws InterruptedException, ExecutionException {
-			ProcessCallable<?> responseProcessCallable =
-				_futureResponseProcessCallable.get();
+		public T get() throws ExecutionException, InterruptedException {
+			ProcessCallable<?> processCallable = _future.get();
 
-			return get(responseProcessCallable);
+			return get(processCallable);
 		}
 
-		public T get(long timeout, TimeUnit unit)
-			throws InterruptedException, ExecutionException, TimeoutException {
+		public T get(long timeout, TimeUnit timeUnit)
+			throws ExecutionException, InterruptedException, TimeoutException {
 
-			ProcessCallable<?> responseProcessCallable =
-				_futureResponseProcessCallable.get(timeout, unit);
+			ProcessCallable<?> processCallable = _future.get(timeout, timeUnit);
 
-			return get(responseProcessCallable);
+			return get(processCallable);
 		}
 
-		private T get(ProcessCallable<?> responseProcessCallable)
+		private T get(ProcessCallable<?> processCallable)
 			throws ExecutionException {
 
 			try {
-				if (responseProcessCallable instanceof
-					ReturnProcessCallable<?>) {
-					return (T)responseProcessCallable.call();
+				if (processCallable instanceof ReturnProcessCallable<?>) {
+					return (T)processCallable.call();
 				}
 				else {
 					ExceptionProcessCallable exceptionProcessCallable =
-						(ExceptionProcessCallable)responseProcessCallable;
+						(ExceptionProcessCallable)processCallable;
 
 					throw exceptionProcessCallable.call();
 				}
@@ -286,7 +277,7 @@ public class ProcessExecutor {
 			}
 		}
 
-		private final Future<ProcessCallable<?>> _futureResponseProcessCallable;
+		private final Future<ProcessCallable<?>> _future;
 		private final Process _process;
 
 	}
@@ -325,7 +316,7 @@ public class ProcessExecutor {
 						if (unsyncByteArrayOutputStream.size() > 0) {
 							if (_log.isWarnEnabled()) {
 								_log.warn(
-									"Found corrupted leading log: " +
+									"Found corrupt leading log " +
 										unsyncByteArrayOutputStream.toString());
 							}
 						}
@@ -357,19 +348,19 @@ public class ProcessExecutor {
 						return processCallable;
 					}
 
-					Serializable result = processCallable.call();
+					Serializable returnValue = processCallable.call();
 
 					if (_log.isDebugEnabled()) {
 						_log.debug(
 							"Invoked generic process callable " +
 								processCallable + " with return value " +
-									result);
+									returnValue);
 					}
 				}
 			}
 			catch (EOFException eofe) {
 				throw new ProcessException(
-					"Subprocess piping back ended prematurely.", eofe);
+					"Subprocess piping back ended prematurely", eofe);
 			}
 			finally {
 				try {
@@ -384,7 +375,7 @@ public class ProcessExecutor {
 					_process.destroy();
 
 					throw new ProcessException(
-						"Force killed Subprocess on interruption", ie);
+						"Forcibly killed subprocess on interruption", ie);
 				}
 			}
 		}
