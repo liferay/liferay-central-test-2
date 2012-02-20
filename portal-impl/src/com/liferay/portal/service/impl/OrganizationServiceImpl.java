@@ -149,32 +149,7 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 				Indexer indexer = IndexerRegistryUtil.getIndexer(
 					Organization.class);
 
-				if (parentOrganizationId > 0) {
-					String treePath = organization.getTreePath();
-
-					if (treePath != null) {
-						if (treePath.startsWith(StringPool.SLASH)) {
-							treePath = treePath.substring(1);
-						}
-
-						String[] ids = StringUtil.split(
-								treePath, StringPool.SLASH);
-
-						long[] organizationIds = new long[ids.length];
-
-						for (int i=0; i<ids.length; i++) {
-							organizationIds[i] = Long.valueOf(ids[i]);
-						}
-
-						indexer.reindex(organizationIds);
-					}
-					else{
-						indexer.reindex(organization);
-					}
-				}
-				else {
-					indexer.reindex(organization);
-				}
+				indexer.reindex(organization);
 			}
 
 			return organization;
