@@ -161,8 +161,15 @@ List<Group> mySites = user.getMySites(true, max);
 						boolean selectedSite = false;
 
 						if (layout != null) {
-							if ((layout.getGroupId() == mySite.getGroupId()) || (mySite.hasStagingGroup() && (layout.getGroupId() == mySite.getStagingGroup().getGroupId()))) {
+							if (layout.getGroupId() == mySite.getGroupId()) {
 								selectedSite = true;
+							}
+							else if (mySite.hasStagingGroup()) {
+								Group stagingGroup = mySite.getStagingGroup();
+
+								if (layout.getGroupId() == stagingGroup.getGroupId()) {
+									selectedSite = true;
+								}
 							}
 						}
 
@@ -196,10 +203,10 @@ List<Group> mySites = user.getMySites(true, max);
 								<%
 								portletURL.setParameter("privateLayout", Boolean.FALSE.toString());
 
-								boolean showPrivateSiteStaging = false;
-								boolean showPublicSiteStaging = false;
-
 								long stagingGroupId = 0;
+
+								boolean showPublicSiteStaging = false;
+								boolean showPrivateSiteStaging = false;
 
 								if (mySite.hasStagingGroup()) {
 									Group stagingGroup = mySite.getStagingGroup();
