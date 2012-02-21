@@ -1284,6 +1284,7 @@ public class SourceFormatter {
 				}
 				else {
 					int pos = 0;
+
 					String temp = line;
 
 					while (temp.startsWith(StringPool.FOUR_SPACES)) {
