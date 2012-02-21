@@ -342,7 +342,7 @@ public class DLIndexer extends BaseIndexer {
 
 			document.addKeyword(Field.ASSET_CATEGORY_IDS, assetCategoryIds);
 
-			addLocalizedAssetCategoryTitles(
+			addSearchAssetCategoryTitles(
 				document, Field.ASSET_CATEGORY_TITLES, assetCategories);
 
 			String[] assetTagNames = AssetTagLocalServiceUtil.getTagNames(

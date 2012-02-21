@@ -387,52 +387,6 @@ public abstract class BaseIndexer implements Indexer {
 			new IndexerPostProcessor[indexerPostProcessorsList.size()]);
 	}
 
-	protected void addLocalizedAssetCategoryTitles(
-		Document document, String field, List<AssetCategory> assetCategories) {
-
-		Map<Locale, List<String>> assetCategoryTitles =
-			new HashMap<Locale, List<String>>();
-
-		Locale defaultLocale = LocaleUtil.getDefault();
-
-		for (AssetCategory assetCategory : assetCategories) {
-			for (Map.Entry<Locale, String> titleEntry :
-					assetCategory.getTitleMap().entrySet()) {
-
-				Locale locale = titleEntry.getKey();
-				String title = titleEntry.getValue();
-
-				if (Validator.isNull(title)) {
-					continue;
-				}
-
-				List<String> titleList = assetCategoryTitles.get(locale);
-
-				if (titleList == null) {
-					titleList = new ArrayList<String>();
-					assetCategoryTitles.put(locale, titleList);
-				}
-
-				titleList.add(title);
-			}
-		}
-
-		for (Map.Entry<Locale, List<String>> entry :
-				assetCategoryTitles.entrySet()) {
-
-			Locale locale = entry.getKey();
-			List<String> titles = entry.getValue();
-			String[] titlesArray = titles.toArray(new String[0]);
-
-			if (locale.equals(defaultLocale)) {
-				document.addKeyword(field, titlesArray);
-			}
-
-			document.addKeyword(field.concat(StringPool.UNDERLINE).concat(
-				locale.toString()), titlesArray);
-		}
-	}
-
 	/**
 	 * @deprecated {@link #addSearchLocalizedTerm(BooleanQuery, SearchContext,
 	 *             String, boolean)}
@@ -560,6 +514,55 @@ public abstract class BaseIndexer implements Indexer {
 		multiValueFacet.setStatic(true);
 
 		searchContext.addFacet(multiValueFacet);
+	}
+
+	protected void addSearchAssetCategoryTitles(
+		Document document, String field, List<AssetCategory> assetCategories) {
+
+		Map<Locale, List<String>> assetCategoryTitles =
+			new HashMap<Locale, List<String>>();
+
+		Locale defaultLocale = LocaleUtil.getDefault();
+
+		for (AssetCategory assetCategory : assetCategories) {
+			Map<Locale, String> titleMap = assetCategory.getTitleMap();
+
+			for (Map.Entry<Locale, String> entry : titleMap.entrySet()) {
+				Locale locale = entry.getKey();
+				String title = entry.getValue();
+
+				if (Validator.isNull(title)) {
+					continue;
+				}
+
+				List<String> titles = assetCategoryTitles.get(locale);
+
+				if (titles == null) {
+					titles = new ArrayList<String>();
+
+					assetCategoryTitles.put(locale, titles);
+				}
+
+				titles.add(title);
+			}
+		}
+
+		for (Map.Entry<Locale, List<String>> entry :
+				assetCategoryTitles.entrySet()) {
+
+			Locale locale = entry.getKey();
+			List<String> titles = entry.getValue();
+
+			String[] titlesArray = titles.toArray(new String[0]);
+
+			if (locale.equals(defaultLocale)) {
+				document.addKeyword(field, titlesArray);
+			}
+
+			document.addKeyword(
+				field.concat(StringPool.UNDERLINE).concat(locale.toString()),
+				titlesArray);
+		}
 	}
 
 	protected void addSearchAssetTagNames(
@@ -937,7 +940,7 @@ public abstract class BaseIndexer implements Indexer {
 
 		document.addKeyword(Field.ASSET_CATEGORY_IDS, assetCategoryIds);
 
-		addLocalizedAssetCategoryTitles(
+		addSearchAssetCategoryTitles(
 			document, Field.ASSET_CATEGORY_TITLES, assetCategories);
 
 		String[] assetTagNames = AssetTagLocalServiceUtil.getTagNames(
