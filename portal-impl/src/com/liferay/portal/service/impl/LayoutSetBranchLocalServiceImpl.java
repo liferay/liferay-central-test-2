@@ -21,7 +21,6 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.staging.StagingUtil;
-import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.FastDateFormatFactoryUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -43,6 +42,7 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.base.LayoutSetBranchLocalServiceBaseImpl;
 
 import java.text.Format;
+
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -384,24 +384,23 @@ public class LayoutSetBranchLocalServiceImpl
 
 		LayoutSetBranch layoutSetBranch =
 			layoutSetBranchPersistence.findByPrimaryKey(layoutSetBranchId);
-
 		LayoutSetBranch mergeLayoutSetBranch =
 			layoutSetBranchPersistence.findByPrimaryKey(mergeLayoutSetBranchId);
-
-		List<LayoutRevision> layoutRevisions =
-			layoutRevisionLocalService.getLayoutRevisions(
-				mergeLayoutSetBranchId, true);
-
-		serviceContext.setWorkflowAction(WorkflowConstants.STATUS_DRAFT);
 
 		Locale locale = serviceContext.getLocale();
 
 		Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(
 			locale);
-		
-		String date = dateFormatDateTime.format(new Date());
-		
-		for (LayoutRevision layoutRevision : layoutRevisions) {					
+
+		String nowString = dateFormatDateTime.format(new Date());
+
+		serviceContext.setWorkflowAction(WorkflowConstants.STATUS_DRAFT);
+
+		List<LayoutRevision> layoutRevisions =
+			layoutRevisionLocalService.getLayoutRevisions(
+				mergeLayoutSetBranchId, true);
+
+		for (LayoutRevision layoutRevision : layoutRevisions) {
 			String layoutBranchName = getLayoutBranchName(
 				layoutSetBranch.getLayoutSetBranchId(), locale,
 				layoutRevision.getLayoutBranch().getName(),
@@ -411,11 +410,12 @@ public class LayoutSetBranchLocalServiceImpl
 
 			sb.append(mergeLayoutSetBranch.getDescription());
 			sb.append(StringPool.SPACE);
-			sb.append(LanguageUtil.format(
-				locale,"merged-from-x-x",
-				new String[] {mergeLayoutSetBranch.getName(), date}));
-			
-			LayoutBranch layoutBranch = 
+			sb.append(
+				LanguageUtil.format(
+					locale, "merged-from-x-x",
+					new String[] {mergeLayoutSetBranch.getName(), nowString}));
+
+			LayoutBranch layoutBranch =
 				layoutBranchLocalService.addLayoutBranch(
 					layoutSetBranch.getLayoutSetBranchId(),
 					layoutRevision.getPlid(), layoutBranchName, sb.toString(),
@@ -462,20 +462,19 @@ public class LayoutSetBranchLocalServiceImpl
 
 		return layoutSetBranch;
 	}
-	
+
 	protected String getLayoutBranchName(
 			long layoutSetBranchId, Locale locale, String mergeBranchName,
 			String mergeLayoutSetBranchName, long plid)
 		throws SystemException {
-		
-		LayoutBranch layoutBranch =
-			layoutBranchPersistence.fetchByL_P_N(
-				layoutSetBranchId, plid, mergeBranchName);
+
+		LayoutBranch layoutBranch = layoutBranchPersistence.fetchByL_P_N(
+			layoutSetBranchId, plid, mergeBranchName);
 
 		if (layoutBranch == null) {
 			return mergeBranchName;
 		}
-		
+
 		StringBundler sb = new StringBundler(5);
 
 		sb.append(LanguageUtil.get(locale, mergeBranchName));
@@ -483,9 +482,9 @@ public class LayoutSetBranchLocalServiceImpl
 		sb.append(StringPool.OPEN_PARENTHESIS);
 		sb.append(LanguageUtil.get(locale, mergeLayoutSetBranchName));
 		sb.append(StringPool.CLOSE_PARENTHESIS);
-		
+
 		String layoutBranchName = sb.toString();
-	
+
 		for (int i = 1;; i++) {
 			layoutBranch = layoutBranchPersistence.fetchByL_P_N(
 				layoutSetBranchId, plid, layoutBranchName);
@@ -496,7 +495,7 @@ public class LayoutSetBranchLocalServiceImpl
 
 			layoutBranchName = sb.toString() + StringPool.SPACE + i;
 		}
-		
+
 		return layoutBranchName;
 	}
 
