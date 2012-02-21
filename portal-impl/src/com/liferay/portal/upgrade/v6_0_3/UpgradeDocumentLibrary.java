@@ -134,14 +134,14 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 
 				for (long tableId : tableIds) {
 					runSQL(
-						"update ExpandoRow set classPK = " + latestFileVersionId +
-							" where tableId = " + tableId + " and classPK = " +
-								fileEntryId);
+						"update ExpandoRow set classPK = " +
+							latestFileVersionId + " where tableId = " +
+								tableId + " and classPK = " + fileEntryId);
 
 					runSQL(
-						"update ExpandoValue set classPK = " + latestFileVersionId +
-							" where tableId = " + tableId + " and classPK = " +
-								fileEntryId);
+						"update ExpandoValue set classPK = " +
+							latestFileVersionId + " where tableId = " +
+								tableId + " and classPK = " + fileEntryId);
 				}
 			}
 		}
