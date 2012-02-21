@@ -294,7 +294,9 @@ public class JournalUtil {
 			StringUtil.replace(name, CharPool.DASH, CharPool.UNDERLINE), value);
 	}
 
-	public static String processXMLAttributes(String xsd) throws PortalException {
+	public static String processXMLAttributes(String xsd)
+		throws PortalException {
+
 		try {
 			Document document = SAXReaderUtil.read(xsd);
 
@@ -1049,12 +1051,14 @@ public class JournalUtil {
 
 			if (Validator.isNotNull(elName)) {
 				elName = JS.decodeURIComponent(elName);
-				element.attribute("name").setValue(elName);
+
+				element.setAttribute("name", elName);
 			}
 
 			if (Validator.isNotNull(elType)) {
 				elType = JS.decodeURIComponent(elType);
-				element.attribute("type").setValue(elType);
+
+				element.setAttribute("type", elType);
 			}
 
 			_decodeXMLAttributes(element.elements());
