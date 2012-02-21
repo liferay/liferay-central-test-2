@@ -81,11 +81,9 @@ JournalTemplate template = (JournalTemplate)row.getObject();
 
 		<%
 		JournalStructure structure = JournalStructureLocalServiceUtil.getStructure(scopeGroupId, template.getStructureId());
-
-		boolean hasUpdateStructurePermission = JournalStructurePermission.contains(permissionChecker, structure, ActionKeys.UPDATE);
 		%>
 
-		<c:if test="<%= hasUpdateStructurePermission %>">
+		<c:if test="<%= JournalStructurePermission.contains(permissionChecker, structure, ActionKeys.UPDATE) %>">
 			<portlet:renderURL var="editStructureURL">
 				<portlet:param name="struts_action" value="/journal/edit_structure" />
 				<portlet:param name="redirect" value="<%= currentURL %>" />
