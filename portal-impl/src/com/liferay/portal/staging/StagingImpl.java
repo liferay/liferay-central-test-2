@@ -1574,7 +1574,6 @@ public class StagingImpl implements Staging {
 			for (long selPlid : rowIds) {
 				boolean delete = ParamUtil.getBoolean(
 					portletRequest, "delete_" + selPlid);
-
 				boolean includeChildren = ParamUtil.getBoolean(
 					portletRequest, "includeChildren_" + selPlid);
 
@@ -1739,7 +1738,6 @@ public class StagingImpl implements Staging {
 			for (long selPlid : rowIds) {
 				boolean delete = ParamUtil.getBoolean(
 					portletRequest, "delete_" + selPlid);
-
 				boolean includeChildren = ParamUtil.getBoolean(
 					portletRequest, "includeChildren_" + selPlid);
 
