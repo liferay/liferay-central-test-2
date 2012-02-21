@@ -294,27 +294,6 @@ public class JournalUtil {
 			StringUtil.replace(name, CharPool.DASH, CharPool.UNDERLINE), value);
 	}
 
-	public static String processXMLAttributes(String xsd)
-		throws PortalException {
-
-		try {
-			Document document = SAXReaderUtil.read(xsd);
-
-			Element rootElement = document.getRootElement();
-
-			List<Element> elements = new ArrayList<Element>();
-
-			elements.addAll(rootElement.elements());
-
-			_decodeXMLAttributes(elements);
-
-			return document.asXML();
-		}
-		catch (Exception e) {
-			throw new StructureXsdException();
-		}
-	}
-
 	public static String formatVM(String vm) {
 		return vm;
 	}
@@ -874,6 +853,27 @@ public class JournalUtil {
 		return curContent;
 	}
 
+	public static String processXMLAttributes(String xsd)
+		throws PortalException {
+
+		try {
+			Document document = SAXReaderUtil.read(xsd);
+
+			Element rootElement = document.getRootElement();
+
+			List<Element> elements = new ArrayList<Element>();
+
+			elements.addAll(rootElement.elements());
+
+			_decodeXMLAttributes(elements);
+
+			return document.asXML();
+		}
+		catch (Exception e) {
+			throw new StructureXsdException();
+		}
+	}
+
 	public static void removeArticleLocale(Element element, String languageId)
 		throws PortalException, SystemException {
 
@@ -1052,13 +1052,13 @@ public class JournalUtil {
 			if (Validator.isNotNull(elName)) {
 				elName = JS.decodeURIComponent(elName);
 
-				element.setAttribute("name", elName);
+				element.addAttribute("name", elName);
 			}
 
 			if (Validator.isNotNull(elType)) {
 				elType = JS.decodeURIComponent(elType);
 
-				element.setAttribute("type", elType);
+				element.addAttribute("type", elType);
 			}
 
 			_decodeXMLAttributes(element.elements());
