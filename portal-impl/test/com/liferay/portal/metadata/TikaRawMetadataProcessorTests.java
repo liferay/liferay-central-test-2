@@ -33,47 +33,56 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
+import org.mockito.stubbing.OngoingStubbing;
 
+import org.powermock.api.mockito.PowerMockito;
+import org.powermock.api.mockito.expectation.PowerMockitoStubber;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
 import org.xml.sax.ContentHandler;
-
-import static org.powermock.api.mockito.PowerMockito.*;
 
 /**
  * @author Miguel Pastor
  */
 @PrepareForTest(PrefsPropsUtil.class)
 @RunWith(PowerMockRunner.class)
-public class TikaRawMetadataProcessorTests {
+public class TikaRawMetadataProcessorTests extends PowerMockito {
 
 	@Test
 	public void extractMetadataFromInputStream() {
-
 		mockStatic(PrefsPropsUtil.class);
 
 		try {
-			when(PrefsPropsUtil.getBoolean(
-				PropsKeys.XUGGLER_ENABLED, PropsValues.XUGGLER_ENABLED)).
-					thenReturn(Boolean.FALSE);
+			OngoingStubbing<Boolean> ongoingStubbing = when(
+				PrefsPropsUtil.getBoolean(
+					PropsKeys.XUGGLER_ENABLED, PropsValues.XUGGLER_ENABLED));
+
+			ongoingStubbing.thenReturn(Boolean.FALSE);
 
 			ContentHandler contentHandler = Mockito.any(ContentHandler.class);
+
 			Metadata metadata = Mockito.any(Metadata.class);
+
 			InputStream inputStream = Mockito.any(InputStream.class);
 			ParseContext parseContext = Mockito.any(ParseContext.class);
 
 			_parser.parse(inputStream, contentHandler, metadata, parseContext);
 
-			doAnswer(new Answer<Object>() {
-				@Override
-				public Object answer(InvocationOnMock invocationOnMock)
-					throws Throwable {
+			PowerMockitoStubber powerMockitoStubber = doAnswer(
+				new Answer<Object>() {
 
-					return new Metadata();
-				}
-			}).when(_parser).parse(
-				inputStream, contentHandler, metadata, parseContext);
+					public Object answer(InvocationOnMock invocationOnMock)
+						throws Throwable {
+
+						return new Metadata();
+					}
+
+				});
+
+			Parser parser = powerMockitoStubber.when(_parser);
+
+			parser.parse(inputStream, contentHandler, metadata, parseContext);
 
 			metadata = _tikaRawMetadataProcessor.extractMetadata(
 				"pdf", "application/pdf", inputStream);
@@ -81,7 +90,8 @@ public class TikaRawMetadataProcessorTests {
 			Assert.assertNotNull(metadata);
 			Assert.assertEquals(0, metadata.size());
 
-		} catch (Exception e) {
+		}
+		catch (Exception e) {
 			Assert.fail("Unexpected error");
 		}
 	}

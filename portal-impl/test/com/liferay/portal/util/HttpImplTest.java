@@ -21,19 +21,20 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import org.mockito.stubbing.OngoingStubbing;
+
+import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PowerMockIgnore;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
-import static org.powermock.api.mockito.PowerMockito.*;
-
 /**
  * @author Miguel Pastor
  */
-@RunWith(PowerMockRunner.class)
-@PrepareForTest({PortalUtil.class})
 @PowerMockIgnore("javax.xml.datatype.*")
-public class HttpImplTest {
+@PrepareForTest({PortalUtil.class})
+@RunWith(PowerMockRunner.class)
+public class HttpImplTest extends PowerMockito {
 
 	@Test
 	public void addBooleanParameter() {
@@ -42,8 +43,7 @@ public class HttpImplTest {
 
 	@Test
 	public void addDoubleParameter() {
-		double d = 111.1;
-		_addParameter("http://foo.com", "p", String.valueOf(d));
+		_addParameter("http://foo.com", "p", String.valueOf(111.1D));
 	}
 
 	@Test
@@ -58,8 +58,7 @@ public class HttpImplTest {
 
 	@Test
 	public void addShortParameter() {
-		short s = 1;
-		_addParameter("http://foo.com", "p", String.valueOf(s));
+		_addParameter("http://foo.com", "p", String.valueOf((short)1));
 	}
 
 	@Test
@@ -70,8 +69,8 @@ public class HttpImplTest {
 	@Test
 	public void decodeMultipleCharacterEncodedPath() {
 		Assert.assertEquals(
-				"http://foo?p=$param",
-				_httpImpl.decodePath("http://foo%3Fp%3D%24param"));
+			"http://foo?p=$param",
+			_httpImpl.decodePath("http://foo%3Fp%3D%24param"));
 	}
 
 	@Test
@@ -109,24 +108,25 @@ public class HttpImplTest {
 
 		mockStatic(PortalUtil.class);
 
-		when(PortalUtil.stripURLAnchor(
-			url, StringPool.POUND)).thenReturn(
-				new String[] {url, StringPool.BLANK});
+		OngoingStubbing<String[]> ongoingStubbing = when(
+			PortalUtil.stripURLAnchor(url, StringPool.POUND));
 
-		String composedUrl = _httpImpl.addParameter(
-				url, parameterName, parameterValue);
+		ongoingStubbing.thenReturn(new String[] {url, StringPool.BLANK});
+
+		String newURL = _httpImpl.addParameter(
+			url, parameterName, parameterValue);
 
 		verifyStatic();
 
-		StringBundler stringBundler = new StringBundler(5);
+		StringBundler sb = new StringBundler(5);
 
-		stringBundler.append(url);
-		stringBundler.append(StringPool.QUESTION);
-		stringBundler.append(parameterName);
-		stringBundler.append(StringPool.EQUAL);
-		stringBundler.append(parameterValue);
+		sb.append(url);
+		sb.append(StringPool.QUESTION);
+		sb.append(parameterName);
+		sb.append(StringPool.EQUAL);
+		sb.append(parameterValue);
 
-		Assert.assertEquals(stringBundler.toString(), composedUrl);
+		Assert.assertEquals(sb.toString(), newURL);
 	}
 
 	private HttpImpl _httpImpl = new HttpImpl();

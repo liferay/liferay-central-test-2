@@ -15,8 +15,8 @@
 package com.liferay.portlet.wiki.engine.creole;
 
 import com.liferay.portal.parsers.creole.visitor.impl.XhtmlTranslationVisitor;
-
 import com.liferay.portal.test.LiferayIntegrationJUnitTestRunner;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -435,8 +435,8 @@ public class TranslationToXHTMLTests extends AbstractWikiParserTests {
 	@Test
 	public void translateOneNoWikiBlock() {
 		Assert.assertEquals(
-				"<pre>\t//This// does **not** get [[formatted]]</pre>",
-				translate("nowikiblock-1.creole"));
+			"<pre>\t//This// does **not** get [[formatted]]</pre>",
+			translate("nowikiblock-1.creole"));
 	}
 
 	protected String translate(String fileName) {
