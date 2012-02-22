@@ -22,12 +22,12 @@ public interface ResourceFinder {
 		long codeId, long classNameId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public java.util.List<com.liferay.portal.model.Resource> findByMissingAction(
-		long codeId, java.lang.String actionId)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
 	public java.util.List<com.liferay.portal.model.Resource> findByName(
 		java.lang.String name)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portal.model.Resource> findByNoActions(
+		long codeId, java.lang.String actionId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Resource> findByC_P(

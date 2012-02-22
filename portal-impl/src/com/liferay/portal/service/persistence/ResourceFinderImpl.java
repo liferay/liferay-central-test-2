@@ -35,11 +35,11 @@ public class ResourceFinderImpl
 	public static final String FIND_BY_CONTAINER_RESOURCE =
 		ResourceFinder.class.getName() + ".findByContainerResource";
 
-	public static final String FIND_BY_MISSING_ACTION =
-		ResourceFinder.class.getName() + ".findByMissingAction";
-
 	public static final String FIND_BY_NAME =
 		ResourceFinder.class.getName() + ".findByName";
+
+	public static final String FIND_BY_NO_ACTIONS =
+		ResourceFinder.class.getName() + ".findByNoActions";
 
 	public static final String FIND_BY_C_P =
 		ResourceFinder.class.getName() + ".findByC_P";
@@ -79,35 +79,6 @@ public class ResourceFinderImpl
 		}
 	}
 
-	public List<Resource> findByMissingAction(long codeId, String actionId)
-		throws SystemException {
-
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			String sql = CustomSQLUtil.get(FIND_BY_MISSING_ACTION);
-
-			SQLQuery q = session.createSQLQuery(sql);
-
-			q.addEntity("Resource_", ResourceImpl.class);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(codeId);
-			qPos.add(actionId);
-
-			return q.list(true);
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
 	public List<Resource> findByName(String name) throws SystemException {
 		Session session = null;
 
@@ -123,6 +94,35 @@ public class ResourceFinderImpl
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			qPos.add(name);
+
+			return q.list(true);
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public List<Resource> findByNoActions(long codeId, String actionId)
+		throws SystemException {
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			String sql = CustomSQLUtil.get(FIND_BY_NO_ACTIONS);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity("Resource_", ResourceImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(codeId);
+			qPos.add(actionId);
 
 			return q.list(true);
 		}

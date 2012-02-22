@@ -252,7 +252,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 				companyId, name, ResourceConstants.SCOPE_INDIVIDUAL);
 
 			for (String actionId : actionIds) {
-				List<Resource> resources = resourceFinder.findByMissingAction(
+				List<Resource> resources = resourceFinder.findByNoActions(
 					resourceCode.getCodeId(), actionId);
 
 				for (Resource resource : resources) {
@@ -1521,15 +1521,15 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 			return;
 		}
 
-		Role role = rolePersistence.findByC_N(companyId, roleName);
-
 		long classNameId = 0;
 
-		if (role.getType() == RoleConstants.TYPE_SITE) {
-			classNameId = PortalUtil.getClassNameId(Group.class);
-		}
-		else if (role.getType() == RoleConstants.TYPE_ORGANIZATION) {
+		Role role = rolePersistence.findByC_N(companyId, roleName);
+
+		if (role.getType() == RoleConstants.TYPE_ORGANIZATION) {
 			classNameId = PortalUtil.getClassNameId(Organization.class);
+		}
+		else if (role.getType() == RoleConstants.TYPE_SITE) {
+			classNameId = PortalUtil.getClassNameId(Group.class);
 		}
 
 		List<Resource> resources = resourceFinder.findByContainerResource(
