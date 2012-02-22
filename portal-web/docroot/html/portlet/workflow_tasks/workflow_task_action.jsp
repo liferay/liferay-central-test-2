@@ -19,6 +19,8 @@
 <%
 String randomId = StringPool.BLANK;
 
+String closeRedirect = ParamUtil.getString(request, "closeRedirect");
+
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
 WorkflowTask workflowTask = null;
@@ -35,8 +37,6 @@ else {
 }
 
 long[] pooledActorsIds = WorkflowTaskManagerUtil.getPooledActorsIds(company.getCompanyId(), workflowTask.getWorkflowTaskId());
-
-String closeRedirect = ParamUtil.getString(request, "closeRedirect");
 %>
 
 <liferay-ui:icon-menu showExpanded="<%= (row == null) %>" showWhenSingleIcon="<%= (row == null) %>">

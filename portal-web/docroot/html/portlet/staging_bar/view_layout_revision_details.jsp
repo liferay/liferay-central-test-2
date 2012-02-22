@@ -43,7 +43,7 @@ if (layoutRevision.isHead()) {
 	taglibHelpMessage = LanguageUtil.format(pageContext, "this-version-will-be-published-when-x-is-published-to-live", layoutSetBranch.getName());
 }
 else if (hasWorkflowTask) {
-	taglibHelpMessage = "you-are-currently-reviewing-this-page.you-can-make-changes-and-send-them-to-the-next-step-in-the-workflow-when-ready";
+	taglibHelpMessage = "you-are-currently-reviewing-this-page.-you-can-make-changes-and-send-them-to-the-next-step-in-the-workflow-when-ready";
 }
 else {
 	taglibHelpMessage = "a-new-version-will-be-created-automatically-if-this-page-is-modified";
@@ -92,22 +92,21 @@ else {
 					handler: function(event) {
 
 						<%
-						WorkflowTask task = StagingUtil.getWorkflowTask(user.getUserId(), layoutRevision);
-
 						Group controlPanelGroup = GroupLocalServiceUtil.getGroup(themeDisplay.getCompanyId(), GroupConstants.CONTROL_PANEL);
 
 						long controlPanelPlid = LayoutLocalServiceUtil.getDefaultPlid(controlPanelGroup.getGroupId(), true);
 
-						PortletURL portletURL = liferayPortletResponse.createLiferayPortletURL(
-							controlPanelPlid, PortletKeys.MY_WORKFLOW_TASKS, PortletRequest.RENDER_PHASE);
-
-						portletURL.setWindowState(LiferayWindowState.POP_UP);
-						portletURL.setPortletMode(PortletMode.VIEW);
+						PortletURL portletURL = liferayPortletResponse.createLiferayPortletURL(controlPanelPlid, PortletKeys.MY_WORKFLOW_TASKS, PortletRequest.RENDER_PHASE);
 
 						portletURL.setParameter("struts_action", "/my_workflow_tasks/edit_workflow_task");
-						portletURL.setParameter("workflowTaskId", String.valueOf(task.getWorkflowTaskId()));
-							
-						
+
+						WorkflowTask workflowTask = StagingUtil.getWorkflowTask(user.getUserId(), layoutRevision);
+
+						portletURL.setParameter("workflowTaskId", String.valueOf(workflowTask.getWorkflowTaskId()));
+
+						portletURL.setPortletMode(PortletMode.VIEW);
+						portletURL.setWindowState(LiferayWindowState.POP_UP);
+
 						String layoutURL = PortalUtil.getLayoutFriendlyURL(layout, themeDisplay);
 
 						layoutURL = HttpUtil.addParameter(layoutURL, "layoutSetBranchId", layoutRevision.getLayoutSetBranchId());

@@ -858,14 +858,12 @@ public class StagingImpl implements Staging {
 		return null;
 	}
 
-	public boolean hasWorkflowTask(
-			long userId, LayoutRevision layoutRevision)
+	public boolean hasWorkflowTask(long userId, LayoutRevision layoutRevision)
 		throws PortalException, SystemException {
 
-		WorkflowTask task = getWorkflowTask(
-			userId, layoutRevision);
+		WorkflowTask workflowTask = getWorkflowTask(userId, layoutRevision);
 
-		if (task != null) {
+		if (workflowTask != null) {
 			return true;
 		}
 

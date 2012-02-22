@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutBranch;
 import com.liferay.portal.model.LayoutRevision;
@@ -95,26 +96,27 @@ public class LayoutRevisionAssetRenderer extends BaseAssetRenderer {
 		LiferayPortletResponse liferayPortletResponse,
 		String noSuchEntryRedirect) {
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)liferayPortletRequest.getAttribute(
-				com.liferay.portal.kernel.util.WebKeys.THEME_DISPLAY);
-
-		StringBundler sb = new StringBundler(5);
-
 		try {
+			ThemeDisplay themeDisplay =
+				(ThemeDisplay)liferayPortletRequest.getAttribute(
+					WebKeys.THEME_DISPLAY);
+
 			Layout layout = LayoutLocalServiceUtil.getLayout(
 				_layoutRevision.getPlid());
+
+			StringBundler sb = new StringBundler(5);
 
 			sb.append(PortalUtil.getLayoutFriendlyURL(layout, themeDisplay));
 			sb.append("?layoutSetBranchId=");
 			sb.append(_layoutRevision.getLayoutSetBranchId());
 			sb.append("&layoutRevisionId=");
 			sb.append(_layoutRevision.getLayoutRevisionId());
+
+			return sb.toString();
 		}
 		catch (Exception e) {
+			return StringPool.BLANK;
 		}
-
-		return sb.toString();
 	}
 
 	public long getUserId() {

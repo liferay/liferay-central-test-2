@@ -351,12 +351,12 @@ public class LayoutRevisionLocalServiceImpl
 
 		int workflowAction = serviceContext.getWorkflowAction();
 
-		boolean isRevisionInProgress = ParamUtil.get(
-			serviceContext, "isRevisionInProgress", false);
+		boolean revisionInProgress = ParamUtil.getBoolean(
+			serviceContext, "revisionInProgress");
 
 		if (!MergeLayoutPrototypesThreadLocal.isInProgress() &&
 			(workflowAction != WorkflowConstants.ACTION_PUBLISH) &&
-			(_layoutRevisionId.get() <= 0) && !isRevisionInProgress) {
+			(_layoutRevisionId.get() <= 0) && !revisionInProgress) {
 
 			long newLayoutRevisionId = counterLocalService.increment();
 

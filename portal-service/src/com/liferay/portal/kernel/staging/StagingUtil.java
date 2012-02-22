@@ -220,8 +220,7 @@ public class StagingUtil {
 			long userId, LayoutRevision layoutRevision)
 		throws PortalException, SystemException {
 
-		return getStaging().getWorkflowTask(
-			userId, layoutRevision);
+		return getStaging().getWorkflowTask(userId, layoutRevision);
 	}
 
 	public static boolean hasWorkflowTask(

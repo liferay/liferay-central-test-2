@@ -126,12 +126,11 @@ public interface Staging {
 		PortletRequest PortletRequest);
 
 	public WorkflowTask getWorkflowTask(
-		long userId, LayoutRevision layoutRevision)
+			long userId, LayoutRevision layoutRevision)
 		throws PortalException, SystemException;
 
-	public boolean hasWorkflowTask(
-			long userId, LayoutRevision layoutRevision)
-			throws PortalException, SystemException;
+	public boolean hasWorkflowTask(long userId, LayoutRevision layoutRevision)
+		throws PortalException, SystemException;
 
 	public boolean isIncomplete(Layout layout, long layoutSetBranchId);
 
