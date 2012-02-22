@@ -125,8 +125,8 @@ import java.util.Map;
 public class DataFactory {
 
 	public DataFactory(
-		String baseDir, int maxGroupsCount, int maxUserToGroupCount,
-		int maxWebContentSize, SimpleCounter counter,
+		String baseDir, int maxGroupsCount, int maxJournalArticleSize,
+		int maxUserToGroupCount, SimpleCounter counter,
 		SimpleCounter dlDateCounter, SimpleCounter permissionCounter,
 		SimpleCounter resourceCounter, SimpleCounter resourceCodeCounter,
 		SimpleCounter resourcePermissionCounter,
@@ -149,10 +149,10 @@ public class DataFactory {
 			initCompany();
 			initDefaultUser();
 			initGroups();
+			initJournalArticle(maxJournalArticleSize);
 			initResourceCodes();
 			initRoles();
 			initUserNames();
-			initWebContent(maxWebContentSize);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -395,16 +395,16 @@ public class DataFactory {
 	}
 
 	public JournalArticle addJournalArticle(
-		long groupId, long companyId, long resourcePrimKey, String articleId) {
+		long resourcePrimKey, long groupId, long companyId, String articleId) {
 
 		JournalArticle journalArticle = new JournalArticleImpl();
 
-		journalArticle.setArticleId(articleId);
-		journalArticle.setCompanyId(companyId);
-		journalArticle.setContent(_webContent);
-		journalArticle.setGroupId(groupId);
 		journalArticle.setId(_counter.get());
 		journalArticle.setResourcePrimKey(resourcePrimKey);
+		journalArticle.setGroupId(groupId);
+		journalArticle.setCompanyId(companyId);
+		journalArticle.setArticleId(articleId);
+		journalArticle.setContent(_journalArticleContent);
 
 		return journalArticle;
 	}
@@ -413,9 +413,9 @@ public class DataFactory {
 		JournalArticleResource journalArticleResource =
 			new JournalArticleResourceImpl();
 
-		journalArticleResource.setArticleId(String.valueOf(_counter.get()));
-		journalArticleResource.setGroupId(groupId);
 		journalArticleResource.setResourcePrimKey(_counter.get());
+		journalArticleResource.setGroupId(groupId);
+		journalArticleResource.setArticleId(String.valueOf(_counter.get()));
 
 		return journalArticleResource;
 	}
@@ -551,15 +551,15 @@ public class DataFactory {
 	}
 
 	public PortletPreferences addPortletPreferences(
-		long plid, long ownerId, String portletId, String preferences) {
+		long ownerId, long plid, String portletId, String preferences) {
 
 		PortletPreferences portletPreferences = new PortletPreferencesImpl();
 
+		portletPreferences.setPortletPreferencesId(_counter.get());
 		portletPreferences.setOwnerId(ownerId);
 		portletPreferences.setOwnerType(PortletKeys.PREFS_OWNER_TYPE_LAYOUT);
 		portletPreferences.setPlid(plid);
 		portletPreferences.setPortletId(portletId);
-		portletPreferences.setPortletPreferencesId(_counter.get());
 		portletPreferences.setPreferences(preferences);
 
 		return portletPreferences;
@@ -1239,18 +1239,18 @@ public class DataFactory {
 		_userNames[1] = lastNames;
 	}
 
-	public void initWebContent(int maxWebContentSize) throws Exception {
-		if (maxWebContentSize <= 0) {
-			maxWebContentSize = 1;
+	public void initJournalArticle(int maxJournalArticleSize) throws Exception {
+		if (maxJournalArticleSize <= 0) {
+			maxJournalArticleSize = 1;
 		}
 
-		char[] chars = new char[maxWebContentSize];
+		char[] chars = new char[maxJournalArticleSize];
 
-		for (int i = 0; i < maxWebContentSize; i++) {
+		for (int i = 0; i < maxJournalArticleSize; i++) {
 			chars[i] = (char)(CharPool.LOWER_CASE_A + (i % 26));
 		}
 
-		_webContent = new String(chars);
+		_journalArticleContent = new String(chars);
 	}
 
 	public IntegerWrapper newInteger() {
@@ -1298,6 +1298,7 @@ public class DataFactory {
 	private Map<String, Long> _individualResourceCodeIds;
 	private Map<Long, String> _individualResourceNames;
 	private ClassName _journalArticleClassName;
+	private String _journalArticleContent;
 	private int _maxGroupsCount;
 	private int _maxUserToGroupCount;
 	private ClassName _mbMessageClassName;
@@ -1322,7 +1323,6 @@ public class DataFactory {
 	private ClassName _userClassName;
 	private Object[] _userNames;
 	private Role _userRole;
-	private String _webContent;
 	private ClassName _wikiPageClassName;
 
 }

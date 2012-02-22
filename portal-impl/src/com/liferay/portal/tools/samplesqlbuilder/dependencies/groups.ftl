@@ -26,19 +26,19 @@
 		dataFactory.addLayout(5, "Wiki", "/wiki", "", "36,")
 	]>
 
-	<#assign webContentLayouts = []>
+	<#assign journalArticleLayouts = []>
 
-	<#list 1..maxWebContentPageCount as webContentPageCount>
-		<#assign webContentLayouts = webContentLayouts + [dataFactory.addLayout(5 + webContentPageCount, "web content display " + webContentPageCount, "/web_content_display_" + webContentPageCount, "", "56,")]>
+	<#list 1..maxJournalArticleCount as journalArticleCount>
+		<#assign journalArticleLayouts = journalArticleLayouts + [dataFactory.addLayout(5 + journalArticleCount, "Web Content " + journalArticleCount, "/journal_article_" + journalArticleCount, "", "56,")]>
 
-		${writerPagesCSV.write("web_content_display_" + webContentPageCount + "\n")}
+		${writerLayoutCSV.write("journal_article_" + journalArticleCount + "\n")}
 	</#list>
 
-	<#assign publicLayouts = publicLayouts + webContentLayouts>
-	
+	<#assign publicLayouts = publicLayouts + journalArticleLayouts>
+
 	${sampleSQLBuilder.insertGroup(group, privateLayouts, publicLayouts)}
 
-	${sampleSQLBuilder.insertWebContent(groupId, webContentLayouts)}
+	${sampleSQLBuilder.insertJournalArticle(groupId, journalArticleLayouts)}
 
 	<#include "users.ftl">
 
