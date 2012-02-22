@@ -1016,6 +1016,20 @@ public class DataFactory {
 		_guestGroup = group;
 	}
 
+	public void initJournalArticle(int maxJournalArticleSize) throws Exception {
+		if (maxJournalArticleSize <= 0) {
+			maxJournalArticleSize = 1;
+		}
+
+		char[] chars = new char[maxJournalArticleSize];
+
+		for (int i = 0; i < maxJournalArticleSize; i++) {
+			chars[i] = (char)(CharPool.LOWER_CASE_A + (i % 26));
+		}
+
+		_journalArticleContent = new String(chars);
+	}
+
 	public void initResourceCodes() throws Exception {
 		if (_resourceCodes != null) {
 			return;
@@ -1237,20 +1251,6 @@ public class DataFactory {
 
 		_userNames[0] = firstNames;
 		_userNames[1] = lastNames;
-	}
-
-	public void initJournalArticle(int maxJournalArticleSize) throws Exception {
-		if (maxJournalArticleSize <= 0) {
-			maxJournalArticleSize = 1;
-		}
-
-		char[] chars = new char[maxJournalArticleSize];
-
-		for (int i = 0; i < maxJournalArticleSize; i++) {
-			chars[i] = (char)(CharPool.LOWER_CASE_A + (i % 26));
-		}
-
-		_journalArticleContent = new String(chars);
 	}
 
 	public IntegerWrapper newInteger() {
