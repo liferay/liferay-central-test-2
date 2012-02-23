@@ -79,7 +79,9 @@ public class ProcessExecutorTest extends TestCase {
 	public void setUp() throws Exception {
 		super.setUp();
 
-		PortalClassLoaderUtil.setClassLoader(getClass().getClassLoader());
+		Class<?> clazz = getClass();
+
+		PortalClassLoaderUtil.setClassLoader(clazz.getClassLoader());
 	}
 
 	@Override
@@ -90,7 +92,8 @@ public class ProcessExecutorTest extends TestCase {
 	}
 
 	public void testAttach1() throws Exception {
-		// Test no attach
+
+		// No attach
 
 		ServerSocket serverSocket = _createServerSocket(12342);
 
@@ -100,7 +103,7 @@ public class ProcessExecutorTest extends TestCase {
 			ProcessExecutor.execute(
 				_classPath, _createArguments(),
 				new AttachParentProcessCallable(
-					AttachChildProcessCallable.class.getName(), port));
+					AttachChildProcessCallable1.class.getName(), port));
 
 			Socket parentSocket = serverSocket.accept();
 
@@ -136,7 +139,8 @@ public class ProcessExecutorTest extends TestCase {
 	}
 
 	public void testAttach2() throws Exception {
-		// Test attach
+
+		// Attach
 
 		ServerSocket serverSocket = _createServerSocket(12342);
 
@@ -162,7 +166,9 @@ public class ProcessExecutorTest extends TestCase {
 
 			assertFalse(ServerThread.isAlive(parentSocket));
 
-			_log.info("Waiting subprocess to exit...");
+			if (_log.isInfoEnabled()) {
+				_log.info("Waiting subprocess to exit");
+			}
 
 			long startTime = System.currentTimeMillis();
 
@@ -170,9 +176,12 @@ public class ProcessExecutorTest extends TestCase {
 				Thread.sleep(10);
 
 				if (!ServerThread.isAlive(childSocket)) {
-
-					_log.info("Subprocess exited. Waited " +
-						(System.currentTimeMillis() - startTime) + " ms");
+					if (_log.isInfoEnabled()) {
+						_log.info(
+							"Subprocess exited. Waited " +
+								(System.currentTimeMillis() - startTime) +
+										" ms");
+					}
 
 					return;
 				}
@@ -184,7 +193,8 @@ public class ProcessExecutorTest extends TestCase {
 	}
 
 	public void testAttach3() throws Exception {
-		// Test detach
+
+		// Detach
 
 		ServerSocket serverSocket = _createServerSocket(12342);
 
@@ -232,7 +242,8 @@ public class ProcessExecutorTest extends TestCase {
 	}
 
 	public void testAttach4() throws Exception {
-		// Test shutdown by interruption
+
+		// Shutdown by interruption
 
 		ServerSocket serverSocket = _createServerSocket(12342);
 
@@ -258,7 +269,7 @@ public class ProcessExecutorTest extends TestCase {
 
 			assertFalse(ServerThread.isAlive(childSocket));
 
-			// Kill parent to clean up
+			// Kill parent
 
 			ServerThread.exit(parentSocket);
 
@@ -270,6 +281,7 @@ public class ProcessExecutorTest extends TestCase {
 	}
 
 	public void testAttach5() throws Exception {
+
 		// Bad shutdown hook
 
 		ServerSocket serverSocket = _createServerSocket(12342);
@@ -296,7 +308,7 @@ public class ProcessExecutorTest extends TestCase {
 
 			assertFalse(ServerThread.isAlive(childSocket));
 
-			// Kill parent to clean up
+			// Kill parent
 
 			ServerThread.exit(parentSocket);
 
@@ -308,6 +320,7 @@ public class ProcessExecutorTest extends TestCase {
 	}
 
 	public void testAttach6() throws Exception {
+
 		// NPE on heartbeat piping back
 
 		ServerSocket serverSocket = _createServerSocket(12342);
@@ -328,11 +341,13 @@ public class ProcessExecutorTest extends TestCase {
 
 			assertTrue(ServerThread.isAlive(childSocket));
 
-			// Null out child process' OOS to cause NPE in heartbeat Thread
+			// Null out child process' OOS to cause NPE in heartbeat thread
 
 			ServerThread.nullOutOOS(childSocket);
 
-			_log.info("Waiting subprocess to exit...");
+			if (_log.isInfoEnabled()) {
+				_log.info("Waiting subprocess to exit");
+			}
 
 			long startTime = System.currentTimeMillis();
 
@@ -340,15 +355,18 @@ public class ProcessExecutorTest extends TestCase {
 				Thread.sleep(10);
 
 				if (!ServerThread.isAlive(childSocket)) {
-
-					_log.info("Subprocess exited. Waited " +
-						(System.currentTimeMillis() - startTime) + " ms");
+					if (_log.isInfoEnabled()) {
+						_log.info(
+							"Subprocess exited. Waited " +
+								(System.currentTimeMillis() - startTime) +
+									" ms");
+					}
 
 					break;
 				}
 			}
 
-			// Kill parent to clean up
+			// Kill parent
 
 			ServerThread.exit(parentSocket);
 
@@ -1025,16 +1043,16 @@ public class ProcessExecutorTest extends TestCase {
 
 	private static Thread _getHeartbeatThread(boolean remove) throws Exception {
 		Field field = ReflectionUtil.getDeclaredField(
-			ProcessContext.class, "_attachThreadReference");
+			ProcessContext.class, "_heartbeatThreadReference");
 
-		AtomicReference<? extends Thread> threadReference =
+		AtomicReference<? extends Thread> heartbeatThreadReference =
 			(AtomicReference<? extends Thread>)field.get(null);
 
 		if (remove) {
-			return threadReference.getAndSet(null);
+			return heartbeatThreadReference.getAndSet(null);
 		}
 		else {
-			return threadReference.get();
+			return heartbeatThreadReference.get();
 		}
 	}
 
@@ -1090,10 +1108,10 @@ public class ProcessExecutorTest extends TestCase {
 	private static void _setDetachField(Thread heartbeatThread, boolean detach)
 		throws Exception {
 
-		Field detachField = ReflectionUtil.getDeclaredField(
+		Field field = ReflectionUtil.getDeclaredField(
 			heartbeatThread.getClass(), "_detach");
 
-		detachField.set(heartbeatThread, detach);
+		field.set(heartbeatThread, detach);
 	}
 
 	private static void _waitForSignalFile(
@@ -1128,29 +1146,23 @@ public class ProcessExecutorTest extends TestCase {
 
 	private static String _classPath = System.getProperty("java.class.path");
 
-	/**
-	 * No attach
-	 */
-	private static class AttachChildProcessCallable
+	private static class AttachChildProcessCallable1
 		implements ProcessCallable<Serializable> {
 
-		public AttachChildProcessCallable(int serverPort) {
+		public AttachChildProcessCallable1(int serverPort) {
 			_serverPort = serverPort;
 		}
 
 		public Serializable call() throws ProcessException {
 			try {
 				ServerThread serverThread = new ServerThread(
-					Thread.currentThread(), "Child Server Thread",
-					_serverPort);
+					Thread.currentThread(), "Child Server Thread", _serverPort);
 
 				serverThread.start();
 			}
 			catch (Exception e) {
 				throw new ProcessException(e);
 			}
-
-			// Block main thread until ServerThread interrupts
 
 			try {
 				Thread.sleep(Long.MAX_VALUE);
@@ -1161,52 +1173,42 @@ public class ProcessExecutorTest extends TestCase {
 			return null;
 		}
 
-		private final int _serverPort;
+		private int _serverPort;
 
 	}
 
-	/**
-	 * Attach
-	 */
 	private static class AttachChildProcessCallable2
-		extends AttachChildProcessCallable {
+		extends AttachChildProcessCallable1 {
 
 		public AttachChildProcessCallable2(int serverPort) {
 			super(serverPort);
 		}
 
+		@Override
 		public Serializable call() throws ProcessException {
 			try {
-				// 1. IAE Attach
-
 				try {
 					ProcessContext.attach("Child Process", 100, null);
 
-					throw new ProcessException(
-						"Failed to throw IllegalArgumentException for null " +
-						"ShutdownHook");
+					throw new ProcessException("Shutdown hook is null");
 				}
 				catch (IllegalArgumentException iae) {
 				}
 
-				boolean result = ProcessContext.attach("Child Process", 100,
-					new TestShutdownHook());
+				boolean result = ProcessContext.attach(
+					"Child Process", 100, new TestShutdownHook());
 
 				if (!result || !ProcessContext.isAttached()) {
 					throw new ProcessException("Attach failed!");
 				}
 
-				// Wait 10 periods to ensure pingback
-
 				Thread.sleep(1000);
 
-				// 2. Attach after attached
-
-				result = ProcessContext.attach("Child Process", 100,
-					new TestShutdownHook());
+				result = ProcessContext.attach(
+					"Child Process", 100, new TestShutdownHook());
 
 				if (result) {
-					throw new ProcessException("Duplicate attach successed!");
+					throw new ProcessException("Duplicate attach");
 				}
 
 				super.call();
@@ -1220,23 +1222,17 @@ public class ProcessExecutorTest extends TestCase {
 
 	}
 
-	/**
-	 * Detach
-	 */
 	private static class AttachChildProcessCallable3
-		extends AttachChildProcessCallable {
+		extends AttachChildProcessCallable1 {
 
 		public AttachChildProcessCallable3(int serverPort) {
 			super(serverPort);
 		}
 
+		@Override
 		public Serializable call() throws ProcessException {
 			try {
-				// 1. Detach
-
 				ProcessContext.detach();
-
-				// 2. Attach
 
 				boolean result = ProcessContext.attach(
 					"Child Process", Long.MAX_VALUE, new TestShutdownHook());
@@ -1245,7 +1241,6 @@ public class ProcessExecutorTest extends TestCase {
 					throw new ProcessException("Attach failed!");
 				}
 
-				// 3. Detach after attached, on Thread sleeping
 				Thread heartbeatThread = _getHeartbeatThread(false);
 
 				while (heartbeatThread.getState() !=
@@ -1254,18 +1249,16 @@ public class ProcessExecutorTest extends TestCase {
 				ProcessContext.detach();
 
 				if (ProcessContext.isAttached()) {
-					throw new ProcessException("Detach failed!");
+					throw new ProcessException("Unable to detach");
 				}
 
-				// 4. Attach after detached
-				result = ProcessContext.attach("Child Process", 100,
-					new TestShutdownHook());
+				result = ProcessContext.attach(
+					"Child Process", 100, new TestShutdownHook());
 
 				if (!result || !ProcessContext.isAttached()) {
-					throw new ProcessException("Attach failed!");
+					throw new ProcessException("Unable to attach");
 				}
 
-				// 5. Detach by set flag
 				heartbeatThread = _getHeartbeatThread(true);
 
 				_setDetachField(heartbeatThread, true);
@@ -1273,15 +1266,14 @@ public class ProcessExecutorTest extends TestCase {
 				heartbeatThread.join();
 
 				if (ProcessContext.isAttached()) {
-					throw new ProcessException("Detach failed!");
+					throw new ProcessException("Unable to detach");
 				}
 
-				// 6. Final attach for kill test
-				result = ProcessContext.attach("Child Process", 100,
-					new TestShutdownHook());
+				result = ProcessContext.attach(
+					"Child Process", 100, new TestShutdownHook());
 
 				if (!result || !ProcessContext.isAttached()) {
-					throw new ProcessException("Attach failed!");
+					throw new ProcessException("Unable to attach");
 				}
 
 				super.call();
@@ -1295,23 +1287,21 @@ public class ProcessExecutorTest extends TestCase {
 
 	}
 
-	/**
-	 * Shutdown by interruption
-	 */
 	private static class AttachChildProcessCallable4
-		extends AttachChildProcessCallable {
+		extends AttachChildProcessCallable1 {
 
 		public AttachChildProcessCallable4(int serverPort) {
 			super(serverPort);
 		}
 
+		@Override
 		public Serializable call() throws ProcessException {
 			try {
 				boolean result = ProcessContext.attach(
 					"Child Process", Long.MAX_VALUE, new TestShutdownHook());
 
 				if (!result || !ProcessContext.isAttached()) {
-					throw new ProcessException("Attach failed!");
+					throw new ProcessException("Unable to attach");
 				}
 
 				super.call();
@@ -1325,16 +1315,14 @@ public class ProcessExecutorTest extends TestCase {
 
 	}
 
-	/**
-	 * Bad Shutdown Hook
-	 */
 	private static class AttachChildProcessCallable5
-		extends AttachChildProcessCallable {
+		extends AttachChildProcessCallable1 {
 
 		public AttachChildProcessCallable5(int serverPort) {
 			super(serverPort);
 		}
 
+		@Override
 		public Serializable call() throws ProcessException {
 			try {
 				boolean result = ProcessContext.attach(
@@ -1342,7 +1330,7 @@ public class ProcessExecutorTest extends TestCase {
 					new TestShutdownHook(true));
 
 				if (!result || !ProcessContext.isAttached()) {
-					throw new ProcessException("Attach failed!");
+					throw new ProcessException("Unable to attach");
 				}
 
 				super.call();
@@ -1356,23 +1344,21 @@ public class ProcessExecutorTest extends TestCase {
 
 	}
 
-	/**
-	 * NPE on heartbeat piping back
-	 */
 	private static class AttachChildProcessCallable6
-		extends AttachChildProcessCallable {
+		extends AttachChildProcessCallable1 {
 
 		public AttachChildProcessCallable6(int serverPort) {
 			super(serverPort);
 		}
 
+		@Override
 		public Serializable call() throws ProcessException {
 			try {
 				boolean result = ProcessContext.attach(
 					"Child Process", 100, new NPEOOSShutdownHook());
 
 				if (!result || !ProcessContext.isAttached()) {
-					throw new ProcessException("Attach failed!");
+					throw new ProcessException("Unable to attach");
 				}
 
 				super.call();
@@ -1395,9 +1381,9 @@ public class ProcessExecutorTest extends TestCase {
 		}
 
 		public Serializable call() throws ProcessException {
-			PortalClassLoaderUtil.setClassLoader(getClass().getClassLoader());
+			Logger logger = Logger.getLogger("");
 
-			Logger.getLogger("").setLevel(Level.FINE);
+			logger.setLevel(Level.FINE);
 
 			try {
 				ServerThread serverThread = new ServerThread(
@@ -1406,10 +1392,10 @@ public class ProcessExecutorTest extends TestCase {
 
 				serverThread.start();
 
-				Class<ProcessCallable> clazz =
-					(Class<ProcessCallable>)Class.forName(_className);
+				Class<ProcessCallable<?>> clazz =
+					(Class<ProcessCallable<?>>)Class.forName(_className);
 
-				Constructor<ProcessCallable> constructor=
+				Constructor<ProcessCallable<?>> constructor =
 					clazz.getConstructor(int.class);
 
 				ProcessExecutor.execute(
@@ -1420,8 +1406,6 @@ public class ProcessExecutorTest extends TestCase {
 				throw new ProcessException(e);
 			}
 
-			// Block main thread until ServerThread interrupts
-
 			try {
 				Thread.sleep(Long.MAX_VALUE);
 			}
@@ -1431,8 +1415,8 @@ public class ProcessExecutorTest extends TestCase {
 			return null;
 		}
 
-		private final String _className;
-		private final int _serverPort;
+		private String _className;
+		private int _serverPort;
 
 	}
 
@@ -1462,7 +1446,7 @@ public class ProcessExecutorTest extends TestCase {
 			_logRecords.add(logRecord);
 		}
 
-		private final List<LogRecord> _logRecords =
+		private List<LogRecord> _logRecords =
 			new CopyOnWriteArrayList<LogRecord>();
 
 	}
@@ -1495,7 +1479,7 @@ public class ProcessExecutorTest extends TestCase {
 			_countDownLatch.await();
 		}
 
-		private final CountDownLatch _countDownLatch;
+		private CountDownLatch _countDownLatch;
 
 	}
 
@@ -1521,7 +1505,7 @@ public class ProcessExecutorTest extends TestCase {
 			return null;
 		}
 
-		private final int _exitCode;
+		private int _exitCode;
 
 	}
 
@@ -1551,8 +1535,8 @@ public class ProcessExecutorTest extends TestCase {
 			return null;
 		}
 
-		private final String _bodyLog;
-		private final String _leadingLog;
+		private String _bodyLog;
+		private String _leadingLog;
 
 	}
 
@@ -1588,8 +1572,8 @@ public class ProcessExecutorTest extends TestCase {
 			return null;
 		}
 
-		private final String _logMessage;
-		private final File _signalFile;
+		private String _logMessage;
+		private File _signalFile;
 
 	}
 
@@ -1610,8 +1594,6 @@ public class ProcessExecutorTest extends TestCase {
 
 		public boolean shutdown(int shutdownCode, Throwable shutdownError) {
 			try {
-				// Restore oos
-
 				ProcessOutputStream processOutputStream =
 					ProcessContext.getProcessOutputStream();
 
@@ -1629,8 +1611,8 @@ public class ProcessExecutorTest extends TestCase {
 			return true;
 		}
 
-		private final ObjectOutputStream _oldObjectOutputStream;
-		private final Thread _thread;
+		private ObjectOutputStream _oldObjectOutputStream;
+		private Thread _thread;
 
 	}
 
@@ -1645,7 +1627,7 @@ public class ProcessExecutorTest extends TestCase {
 			return System.getProperty(_propertyKey);
 		}
 
-		private final String _propertyKey;
+		private String _propertyKey;
 
 	}
 
@@ -1675,7 +1657,7 @@ public class ProcessExecutorTest extends TestCase {
 			return null;
 		}
 
-		private final String _returnValue;
+		private String _returnValue;
 
 	}
 
@@ -1685,12 +1667,13 @@ public class ProcessExecutorTest extends TestCase {
 			InputStream inputStream = socket.getInputStream();
 			OutputStream outputStream = socket.getOutputStream();
 
-			outputStream.write(_exit);
+			outputStream.write(_CODE_EXIT);
 			outputStream.close();
 
 			try {
 				int code = inputStream.read();
-				fail("Failed to exit subprocess, response code : " + code);
+
+				fail("Failed to exit subprocess with response code " + code);
 			}
 			catch (SocketException se) {
 			}
@@ -1702,12 +1685,13 @@ public class ProcessExecutorTest extends TestCase {
 			InputStream inputStream = socket.getInputStream();
 			OutputStream outputStream = socket.getOutputStream();
 
-			outputStream.write(_interrupt);
+			outputStream.write(_CODE_INTERRUPT);
 			outputStream.close();
 
 			try {
 				int code = inputStream.read();
-				fail("Failed to interrupt subprocess, response code : " + code);
+
+				fail("Failed to exit subprocess with response code " + code);
 			}
 			catch (SocketException se) {
 			}
@@ -1718,10 +1702,11 @@ public class ProcessExecutorTest extends TestCase {
 				InputStream inputStream = socket.getInputStream();
 				OutputStream outputStream = socket.getOutputStream();
 
-				outputStream.write(_echo);
+				outputStream.write(_CODE_ECHO);
+
 				outputStream.flush();
 
-				if (inputStream.read() == _echo) {
+				if (inputStream.read() == _CODE_ECHO) {
 					return true;
 				}
 				else {
@@ -1737,12 +1722,12 @@ public class ProcessExecutorTest extends TestCase {
 			InputStream inputStream = socket.getInputStream();
 			OutputStream outputStream = socket.getOutputStream();
 
-			outputStream.write(_nullOutOOS);
+			outputStream.write(_CODE_NULL_OUT_OOS);
 			outputStream.flush();
 
 			int code = inputStream.read();
 
-			if (code != _nullOutOOS) {
+			if (code != _CODE_NULL_OUT_OOS) {
 				fail("Failed to null out oos, response code : " + code);
 			}
 		}
@@ -1753,10 +1738,11 @@ public class ProcessExecutorTest extends TestCase {
 			_mainThread = mainThread;
 			_socket = new Socket("localhost", serverPort);
 
-			setName(name);
 			setDaemon(true);
+			setName(name);
 		}
 
+		@Override
 		public void run() {
 			try {
 				InputStream inputStream = _socket.getInputStream();
@@ -1766,22 +1752,29 @@ public class ProcessExecutorTest extends TestCase {
 
 				while ((command = inputStream.read()) != -1) {
 					switch (command) {
-						case _echo :
-							outputStream.write(_echo);
+						case _CODE_ECHO :
+							outputStream.write(_CODE_ECHO);
+
 							outputStream.flush();
+
 							break;
-						case _exit :
+
+						case _CODE_EXIT :
 							_socket.close();
+
 							break;
-						case  _interrupt :
+
+						case  _CODE_INTERRUPT :
 							Thread heartbeatThread = _getHeartbeatThread(false);
 
 							heartbeatThread.interrupt();
 							heartbeatThread.join();
+
 							_socket.close();
 
 							break;
-						case _nullOutOOS :
+
+						case _CODE_NULL_OUT_OOS :
 							Field objectOutputStreamField =
 								_getObjectOutputStreamField();
 
@@ -1791,7 +1784,8 @@ public class ProcessExecutorTest extends TestCase {
 							objectOutputStreamField.set(
 								processOutputStream, null);
 
-							outputStream.write(_nullOutOOS);
+							outputStream.write(_CODE_NULL_OUT_OOS);
+
 							outputStream.flush();
 
 							break;
@@ -1803,6 +1797,7 @@ public class ProcessExecutorTest extends TestCase {
 			finally {
 				try {
 					_socket.close();
+
 					_mainThread.interrupt();
 				}
 				catch (IOException ioe) {
@@ -1810,13 +1805,16 @@ public class ProcessExecutorTest extends TestCase {
 			}
 		}
 
-		private static final int _echo = 1;
-		private static final int _exit = 2;
-		private static final int _interrupt = 3;
-		private static final int _nullOutOOS = 4;
+		private static final int _CODE_ECHO = 1;
 
-		private final Thread _mainThread;
-		private final Socket _socket;
+		private static final int _CODE_EXIT = 2;
+
+		private static final int _CODE_INTERRUPT = 3;
+
+		private static final int _CODE_NULL_OUT_OOS = 4;
+
+		private Thread _mainThread;
+		private Socket _socket;
 
 	}
 
@@ -1827,23 +1825,22 @@ public class ProcessExecutorTest extends TestCase {
 		}
 
 		public TestShutdownHook(boolean failToShutdown) {
-			_thread = Thread.currentThread();
 			_failToShutdown = failToShutdown;
+			_thread = Thread.currentThread();
 		}
 
-		public boolean shutdown(int shutdownCode, Throwable shutdownError) {
+		public boolean shutdown(int shutdownCode, Throwable shutdownThrowable) {
 			_thread.interrupt();
 
 			if (_failToShutdown) {
-				throw new RuntimeException(
-					"Intended failure in TestShutdownHook");
+				throw new RuntimeException();
 			}
 
 			return true;
 		}
 
-		private final boolean _failToShutdown;
-		private final Thread _thread;
+		private boolean _failToShutdown;
+		private Thread _thread;
 
 	}
 
@@ -1855,7 +1852,7 @@ public class ProcessExecutorTest extends TestCase {
 		}
 
 		@SuppressWarnings("unused")
-		private final Object _unserializableObject = new Object();
+		private Object _unserializableObject = new Object();
 
 	}
 

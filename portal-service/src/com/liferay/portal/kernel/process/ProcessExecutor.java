@@ -117,17 +117,14 @@ public class ProcessExecutor {
 	public static void main(String[] arguments)
 		throws ClassNotFoundException, IOException {
 
-		PrintStream oldOut = System.out;
+		PrintStream oldOutPrintStream = System.out;
 
 		ObjectOutputStream objectOutputStream = null;
 		ProcessOutputStream outProcessOutputStream = null;
 
-		// Lock up to prevent concurrent writing
-		synchronized (oldOut) {
-			// Flush out data
-			oldOut.flush();
+		synchronized (oldOutPrintStream) {
+			oldOutPrintStream.flush();
 
-			// Open FileOutputStream on FileDescriptor.out
 			FileOutputStream fileOutputStream = new FileOutputStream(
 				FileDescriptor.out);
 
@@ -139,10 +136,10 @@ public class ProcessExecutor {
 
 			ProcessContext._setProcessOutputStream(outProcessOutputStream);
 
-			PrintStream outPrintStream = new PrintStream(
+			PrintStream newOutPrintStream = new PrintStream(
 				outProcessOutputStream, true);
 
-			System.setOut(outPrintStream);
+			System.setOut(newOutPrintStream);
 		}
 
 		ProcessOutputStream errProcessOutputStream = new ProcessOutputStream(
@@ -198,26 +195,26 @@ public class ProcessExecutor {
 		public static boolean attach(
 			String message, long interval, ShutdownHook shutdownHook) {
 
-			HeartbeatThread attachThread = new HeartbeatThread(
+			HeartbeatThread heartbeatThread = new HeartbeatThread(
 				message, interval, shutdownHook);
 
-			boolean result = _attachThreadReference.compareAndSet(
-				null, attachThread);
+			boolean value = _heartbeatThreadReference.compareAndSet(
+				null, heartbeatThread);
 
-			if (result) {
-				attachThread.start();
+			if (value) {
+				heartbeatThread.start();
 			}
 
-			return result;
+			return value;
 		}
 
 		public static void detach() throws InterruptedException {
-			HeartbeatThread attachThread = _attachThreadReference.getAndSet(
-				null);
+			HeartbeatThread heartbeatThread =
+				_heartbeatThreadReference.getAndSet(null);
 
-			if (attachThread != null) {
-				attachThread.detach();
-				attachThread.join();
+			if (heartbeatThread != null) {
+				heartbeatThread.detach();
+				heartbeatThread.join();
 			}
 		}
 
@@ -226,7 +223,7 @@ public class ProcessExecutor {
 		}
 
 		public static boolean isAttached() {
-			HeartbeatThread attachThread = _attachThreadReference.get();
+			HeartbeatThread attachThread = _heartbeatThreadReference.get();
 
 			if (attachThread != null) {
 				return true;
@@ -245,9 +242,8 @@ public class ProcessExecutor {
 		private ProcessContext() {
 		}
 
-		private static AtomicReference<HeartbeatThread> _attachThreadReference =
-			new AtomicReference<HeartbeatThread>();
-
+		private static AtomicReference<HeartbeatThread>
+			_heartbeatThreadReference = new AtomicReference<HeartbeatThread>();
 		private static ProcessOutputStream _processOutputStream;
 
 	}
@@ -260,7 +256,7 @@ public class ProcessExecutor {
 
 		public static final int UNKNOW_CODE = 3;
 
-		public boolean shutdown(int shutdownCode, Throwable shutdownError);
+		public boolean shutdown(int shutdownCode, Throwable shutdownThrowable);
 
 	}
 
@@ -291,7 +287,7 @@ public class ProcessExecutor {
 			String message, long interval, ShutdownHook shutdownHook) {
 
 			if (shutdownHook == null) {
-				throw new IllegalArgumentException("Missing ShutdownHook");
+				throw new IllegalArgumentException("Shutdown hook is null");
 			}
 
 			_interval = interval;
@@ -299,21 +295,23 @@ public class ProcessExecutor {
 
 			_pringBackProcessCallable = new PingbackProcessCallable(message);
 
-			setName(HeartbeatThread.class.getSimpleName());
 			setDaemon(true);
+			setName(HeartbeatThread.class.getSimpleName());
 		}
 
 		public void detach() {
 			_detach = true;
+
 			interrupt();
 		}
 
+		@Override
 		public void run() {
 			ProcessOutputStream processOutputStream =
 				ProcessContext.getProcessOutputStream();
 
 			int shutdownCode = 0;
-			Throwable shutdownError = null;
+			Throwable shutdownThrowable = null;
 
 			while (!_detach) {
 				try {
@@ -327,32 +325,30 @@ public class ProcessExecutor {
 						return;
 					}
 					else {
-						shutdownError = ie;
+						shutdownThrowable = ie;
 
 						shutdownCode = ShutdownHook.INTERRUPTION_CODE;
 					}
 				}
 				catch (IOException ioe) {
-					shutdownError = ioe;
+					shutdownThrowable = ioe;
 
 					shutdownCode = ShutdownHook.BROKEN_PIPE_CODE;
 				}
 				catch (Throwable throwable) {
-					shutdownError = throwable;
+					shutdownThrowable = throwable;
 
 					shutdownCode = ShutdownHook.UNKNOW_CODE;
 				}
 
-				// No need to put into finally, since we already catch Throwable
 				if (shutdownCode != 0) {
 					_detach = _shutdownHook.shutdown(
-						shutdownCode, shutdownError);
+						shutdownCode, shutdownThrowable);
 				}
 			}
 		}
 
 		private volatile boolean _detach;
-
 		private final long _interval;
 		private final ProcessCallable<String> _pringBackProcessCallable;
 		private final ShutdownHook _shutdownHook;
@@ -362,15 +358,15 @@ public class ProcessExecutor {
 	private static class PingbackProcessCallable
 		implements ProcessCallable<String> {
 
-		public PingbackProcessCallable(String pingMessage) {
-			_pingMessage = pingMessage;
+		public PingbackProcessCallable(String message) {
+			_message = message;
 		}
 
-		public String call() throws ProcessException {
-			return _pingMessage;
+		public String call() {
+			return _message;
 		}
 
-		private final String _pingMessage;
+		private final String _message;
 
 	}
 
