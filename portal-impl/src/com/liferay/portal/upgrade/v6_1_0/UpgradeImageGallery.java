@@ -301,6 +301,23 @@ public class UpgradeImageGallery extends UpgradeProcess {
 		DLStoreUtil.addFile(companyId, repositoryId, name, true, bytes);
 	}
 
+	protected void migrateImage(long imageId) throws Exception {
+		Image image = ImageLocalServiceUtil.getImage(imageId);
+
+		try {
+			migrateFile(0, 0, null, image);
+		}
+		catch (Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("Ignoring exception for image " + imageId, e);
+			}
+
+			return;
+		}
+
+		_sourceHook.deleteImage(image);
+	}
+
 	protected void migrateImage(
 			long fileEntryId, long companyId, long groupId, long folderId,
 			String name, long smallImageId, long largeImageId,
@@ -326,7 +343,6 @@ public class UpgradeImageGallery extends UpgradeProcess {
 			}
 		}
 
-		Image thumbnailImage = null;
 		long thumbnailImageId = 0;
 
 		if (smallImageId != 0) {
@@ -338,6 +354,8 @@ public class UpgradeImageGallery extends UpgradeProcess {
 		else if (custom2ImageId != 0) {
 			thumbnailImageId = custom2ImageId;
 		}
+
+		Image thumbnailImage = null;
 
 		if (thumbnailImageId != 0) {
 			thumbnailImage = ImageLocalServiceUtil.getImage(thumbnailImageId);
@@ -390,23 +408,6 @@ public class UpgradeImageGallery extends UpgradeProcess {
 		}
 	}
 
-	protected void migrateImage(long imageId) throws Exception {
-		Image image = ImageLocalServiceUtil.getImage(imageId);
-
-		try {
-			migrateFile(0, 0, null, image);
-		}
-		catch (Exception e) {
-			if (_log.isWarnEnabled()) {
-				_log.warn(
-					"Ignoring exception for image " + imageId, e);
-			}
-
-			return;
-		}
-
-		_sourceHook.deleteImage(image);
-	}
 	protected void migrateImageFiles() throws Exception {
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -415,18 +416,15 @@ public class UpgradeImageGallery extends UpgradeProcess {
 		try {
 			con = DataAccess.getConnection();
 
-			StringBundler sb = new StringBundler(11);
+			StringBundler sb = new StringBundler(8);
 
 			sb.append("select fileEntryId, companyId, groupId, folderId, ");
 			sb.append("name, smallImageId, largeImageId, custom1ImageId, ");
-			sb.append("custom2ImageId from DLFileEntry where ");
-			sb.append("((smallImageId is not null) and ");
-			sb.append("(smallImageId != 0)) or ");
-			sb.append("((largeImageId is not null) and ");
-			sb.append("(largeImageId != 0)) or ");
-			sb.append("((custom1ImageId is not null) and ");
-			sb.append("(custom1ImageId != 0)) or ");
-			sb.append("((custom2ImageId is not null) and ");
+			sb.append("custom2ImageId from DLFileEntry where ((smallImageId ");
+			sb.append("is not null) and (smallImageId != 0)) or ");
+			sb.append("((largeImageId is not null) and (largeImageId != 0)) ");
+			sb.append("or ((custom1ImageId is not null) and (custom1ImageId ");
+			sb.append("!= 0)) or ((custom2ImageId is not null) and ");
 			sb.append("(custom2ImageId != 0))");
 
 			ps = con.prepareStatement(sb.toString());
@@ -439,7 +437,6 @@ public class UpgradeImageGallery extends UpgradeProcess {
 				long groupId = rs.getLong("groupId");
 				long folderId = rs.getLong("folderId");
 				String name = rs.getString("name");
-
 				long smallImageId = rs.getLong("smallImageId");
 				long largeImageId = rs.getLong("largeImageId");
 				long custom1ImageId = rs.getLong("custom1ImageId");
