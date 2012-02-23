@@ -26,12 +26,7 @@ import javax.portlet.PortletException;
  */
 public class MonitoringPortletFactoryImpl extends InvokerPortletFactoryImpl {
 
-	public MonitoringPortletFactoryImpl(
-		SingleDestinationMessageSender singleDestinationMessageSender) {
-
-		_singleDestinationMessageSender = singleDestinationMessageSender;
-	}
-
+	@Override
 	public InvokerPortlet create(
 			com.liferay.portal.model.Portlet portletModel, Portlet portlet,
 			PortletConfig portletConfig, PortletContext portletContext,
@@ -47,6 +42,7 @@ public class MonitoringPortletFactoryImpl extends InvokerPortletFactoryImpl {
 			invokerPortlet, _singleDestinationMessageSender);
 	}
 
+	@Override
 	public InvokerPortlet create(
 			com.liferay.portal.model.Portlet portletModel, Portlet portlet,
 			PortletContext portletContext)
@@ -57,6 +53,12 @@ public class MonitoringPortletFactoryImpl extends InvokerPortletFactoryImpl {
 
 		return new MonitoringPortlet(
 			invokerPortlet, _singleDestinationMessageSender);
+	}
+
+	public void setSingleDestinationMessageSender(
+		SingleDestinationMessageSender singleDestinationMessageSender) {
+
+		_singleDestinationMessageSender = singleDestinationMessageSender;
 	}
 
 	private SingleDestinationMessageSender _singleDestinationMessageSender;
