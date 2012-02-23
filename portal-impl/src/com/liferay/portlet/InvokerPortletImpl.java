@@ -172,8 +172,8 @@ public class InvokerPortletImpl implements InvokerPortlet {
 			"org.apache.portals.bridges.struts.StrutsPortlet");
 
 		_initialize(
-			portletModel, portlet, null, portletContext,
-			checkAuthToken, facesPortlet, strutsPortlet, strutsBridgePortlet);
+			portletModel, portlet, null, portletContext, checkAuthToken,
+			facesPortlet, strutsPortlet, strutsBridgePortlet);
 	}
 
 	public void destroy() {
@@ -660,13 +660,9 @@ public class InvokerPortletImpl implements InvokerPortlet {
 	private static Log _log = LogFactoryUtil.getLog(InvokerPortletImpl.class);
 
 	private List<ActionFilter> _actionFilters = new ArrayList<ActionFilter>();
-	private List<EventFilter> _eventFilters = new ArrayList<EventFilter>();
-	private List<RenderFilter> _renderFilters = new ArrayList<RenderFilter>();
-	private List<ResourceFilter> _resourceFilters =
-		new ArrayList<ResourceFilter>();
-
 	private boolean _checkAuthToken;
 	private boolean _destroyable;
+	private List<EventFilter> _eventFilters = new ArrayList<EventFilter>();
 	private Integer _expCache;
 	private boolean _facesPortlet;
 	private Portlet _portlet;
@@ -674,6 +670,9 @@ public class InvokerPortletImpl implements InvokerPortlet {
 	private PortletContextImpl _portletContextImpl;
 	private String _portletId;
 	private com.liferay.portal.model.Portlet _portletModel;
+	private List<RenderFilter> _renderFilters = new ArrayList<RenderFilter>();
+	private List<ResourceFilter> _resourceFilters =
+		new ArrayList<ResourceFilter>();
 	private boolean _strutsBridgePortlet;
 	private boolean _strutsPortlet;
 
