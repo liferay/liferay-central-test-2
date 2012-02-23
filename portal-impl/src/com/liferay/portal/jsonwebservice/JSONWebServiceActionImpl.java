@@ -50,7 +50,7 @@ public class JSONWebServiceActionImpl implements JSONWebServiceAction {
 		_jsonWebServiceActionParameters = jsonWebServiceActionParameters;
 	}
 
-	public JSONWebServiceActionMapping getActionMapping() {
+	public JSONWebServiceActionMapping getJSONWebServiceActionMapping() {
 		return _jsonWebServiceActionConfig;
 	}
 
