@@ -83,8 +83,8 @@ public class JSONServiceAction extends JSONAction {
 		String className = ParamUtil.getString(request, "serviceClassName");
 		String methodName = ParamUtil.getString(request, "serviceMethodName");
 
-		checkMethodPublicAccess(request, methodName,
-			PropsValues.JSON_SERVICE_PUBLIC_METHODS);
+		checkMethodPublicAccess(
+			request, methodName, PropsValues.JSON_SERVICE_PUBLIC_METHODS);
 
 		String[] serviceParameters = getStringArrayFromJSON(
 			request, "serviceParameters");
@@ -160,7 +160,7 @@ public class JSONServiceAction extends JSONAction {
 		String remoteUser = request.getRemoteUser();
 
 		if (remoteUser == null) {
-			throw new PrincipalException("Public access denied.");
+			throw new PrincipalException("Public access denied");
 		}
 	}
 

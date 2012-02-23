@@ -1003,9 +1003,9 @@ public interface PropsKeys {
 
 	public static final String JSONWS_WEB_SERVICE_INVALID_HTTP_METHODS = "jsonws.web.service.invalid.http.methods";
 
-	public static final String JSONWS_WEB_SERVICE_STRICT_HTTP_METHOD = "jsonws.web.service.strict.http.method";
-	
 	public static final String JSONWS_WEB_SERVICE_PUBLIC_METHODS = "jsonws.web.service.public.methods";
+	
+	public static final String JSONWS_WEB_SERVICE_STRICT_HTTP_METHOD = "jsonws.web.service.strict.http.method";
 
 	public static final String JSP_WRITER_BUFFER_SIZE = "jsp.writer.buffer.size";
 
@@ -1545,6 +1545,8 @@ public interface PropsKeys {
 
 	public static final String PASSWORDS_TOOLKIT = "passwords.toolkit";
 
+	public static final String PERMISSIONS_CHECK_GUEST_ENABLED = "permissions.check.guest.enabled";
+
 	public static final String PERMISSIONS_CHECKER = "permissions.checker";
 
 	public static final String PERMISSIONS_CUSTOM_ATTRIBUTE_READ_CHECK_BY_DEFAULT = "permissions.custom.attribute.read.check.by.default";
@@ -1552,8 +1554,6 @@ public interface PropsKeys {
 	public static final String PERMISSIONS_CUSTOM_ATTRIBUTE_WRITE_CHECK_BY_DEFAULT = "permissions.custom.attribute.write.check.by.default";
 
 	public static final String PERMISSIONS_INLINE_SQL_CHECK_ENABLED = "permissions.inline.sql.check.enabled";
-
-	public static final String PERMISSIONS_CHECK_GUEST_ENABLED = "permissions.check.guest.enabled";
 
 	public static final String PERMISSIONS_LIST_FILTER = "permissions.list.filter";
 

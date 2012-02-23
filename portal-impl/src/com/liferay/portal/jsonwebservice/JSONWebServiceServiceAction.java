@@ -23,6 +23,8 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.util.PropsValues;
 
+import java.lang.reflect.Method;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -73,13 +75,12 @@ public class JSONWebServiceServiceAction extends JSONServiceAction {
 					request);
 
 			JSONWebServiceActionMapping jsonWebServiceActionMapping =
-				jsonWebServiceAction.getActionMapping();
+				jsonWebServiceAction.getJSONWebServiceActionMapping();
 
-			String actionMethodName =
-				jsonWebServiceActionMapping.getActionMethod().getName();
+			Method actionMethod = jsonWebServiceActionMapping.getActionMethod();
 
 			checkMethodPublicAccess(
-				request, actionMethodName,
+				request, actionMethod.getName(),
 				PropsValues.JSONWS_WEB_SERVICE_PUBLIC_METHODS);
 
 			Object returnObj = jsonWebServiceAction.invoke();
