@@ -161,7 +161,7 @@
 	<bean id="com.liferay.portlet.PortletInstanceFactoryUtil" class="com.liferay.portlet.PortletInstanceFactoryUtil">
 		<property name="portletInstanceFactory">
 			<bean class="com.liferay.portlet.PortletInstanceFactoryImpl">
-				<property name="internalInvokerPortletPrototype" ref="com.liferay.portlet.MonitoringPortlet" />
+				<property name="invokerPortletFactory" ref="com.liferay.portlet.MonitoringPortletFactoryImpl" />
 			</bean>
 		</property>
 	</bean>
