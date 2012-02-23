@@ -1381,7 +1381,9 @@ public class ProcessExecutorTest extends TestCase {
 		}
 
 		public Serializable call() throws ProcessException {
-			PortalClassLoaderUtil.setClassLoader(getClass().getClassLoader());
+			Class<?> clazz = getClass();
+
+			PortalClassLoaderUtil.setClassLoader(clazz.getClassLoader());
 
 			Logger logger = Logger.getLogger("");
 
@@ -1394,11 +1396,11 @@ public class ProcessExecutorTest extends TestCase {
 
 				serverThread.start();
 
-				Class<ProcessCallable<?>> clazz =
+				Class<ProcessCallable<?>> processCallableClass =
 					(Class<ProcessCallable<?>>)Class.forName(_className);
 
 				Constructor<ProcessCallable<?>> constructor =
-					clazz.getConstructor(int.class);
+					processCallableClass.getConstructor(int.class);
 
 				ProcessExecutor.execute(
 					_classPath, _createArguments(),
