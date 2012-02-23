@@ -201,14 +201,6 @@ searchContainer.setResults(results);
 searchContainer.setTotal(total);
 
 request.setAttribute("view_entries.jsp-total", String.valueOf(total));
-
-boolean showSyncMessage = GetterUtil.getBoolean(SessionClicks.get(request, liferayPortletResponse.getNamespace() + "show-sync-message", "true"));
-
-String cssClass = StringPool.BLANK;
-
-if (!showSyncMessage || !PropsValues.DL_SHOW_LIFERAY_SYNC_MESSAGE) {
-	cssClass = "aui-helper-hidden";
-}
 %>
 
 <c:choose>
@@ -218,6 +210,17 @@ if (!showSyncMessage || !PropsValues.DL_SHOW_LIFERAY_SYNC_MESSAGE) {
 		</div>
 	</c:when>
 	<c:otherwise>
+
+		<%
+		boolean showSyncMessage = GetterUtil.getBoolean(SessionClicks.get(request, liferayPortletResponse.getNamespace() + "show-sync-message", "true"));
+
+		String cssClass = StringPool.BLANK;
+
+		if (!showSyncMessage || !PropsValues.DL_SHOW_LIFERAY_SYNC_MESSAGE) {
+			cssClass = "aui-helper-hidden";
+		}
+		%>
+
 		<div class="<%= cssClass %>" id="<portlet:namespace />syncNotification">
 			<div class="lfr-message-info sync-notification" id="<portlet:namespace />syncNotificationContent">
 				<a href="http://www.liferay.com/products/liferay-sync" target="_blank">
