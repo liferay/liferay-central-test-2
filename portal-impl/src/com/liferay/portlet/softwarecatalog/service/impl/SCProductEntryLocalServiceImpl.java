@@ -232,6 +232,12 @@ public class SCProductEntryLocalServiceImpl
 			ResourceConstants.SCOPE_INDIVIDUAL,
 			productEntry.getProductEntryId());
 
+		// Subscriptions
+
+		subscriptionLocalService.deleteSubscriptions(
+			productEntry.getCompanyId(), SCProductEntry.class.getName(),
+			productEntry.getProductEntryId());
+
 		// Product screenshots
 
 		scProductScreenshotLocalService.deleteProductScreenshots(
@@ -240,12 +246,6 @@ public class SCProductEntryLocalServiceImpl
 		// Product versions
 
 		scProductVersionLocalService.deleteProductVersions(
-			productEntry.getProductEntryId());
-
-		// Subscriptions
-
-		subscriptionLocalService.deleteSubscriptions(
-			productEntry.getCompanyId(), SCProductEntry.class.getName(),
 			productEntry.getProductEntryId());
 
 		// Message boards
