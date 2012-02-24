@@ -96,8 +96,8 @@ public class AutoLoginFilter extends BasePortalFilter {
 					UserTracker userTracker =
 						UserTrackerLocalServiceUtil.fetchUserTracker(userId);
 
-					if (userTracker == null &&
-						session.getAttribute(WebKeys.USER) == null) {
+					if ((userTracker == null) &&
+						(session.getAttribute(WebKeys.USER) == null)) {
 
 						session.invalidate();
 
