@@ -1184,8 +1184,8 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 			account = accountPersistence.create(accountId);
 
-			account.setCreateDate(now);
 			account.setCompanyId(company.getCompanyId());
+			account.setCreateDate(now);
 			account.setUserId(0);
 			account.setUserName(StringPool.BLANK);
 
@@ -1206,8 +1206,8 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 		account.setSize(size);
 
 		accountPersistence.update(account, false);
-
 	}
+
 	protected void updateVirtualHost(long companyId, String virtualHostname)
 		throws CompanyVirtualHostException, SystemException {
 
