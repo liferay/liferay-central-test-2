@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.upgrade.UpgradeException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.upgrade.UpgradeProcessUtil;
@@ -81,8 +82,11 @@ public class StartupHelper {
 			PropsKeys.UPGRADE_PROCESSES + StringPool.PERIOD + buildNumber);
 
 		if (upgradeProcessClassNames.length == 0) {
-			upgradeProcessClassNames = getUpgradeProcessClassNames(
-				PropsKeys.UPGRADE_PROCESSES);
+			System.out.println(
+				"Upgrading from " + buildNumber + " to " +
+					ReleaseInfo.getBuildNumber() + " is not supported");
+
+			System.exit(0);
 		}
 
 		_upgraded = UpgradeProcessUtil.upgradeProcess(
