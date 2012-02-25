@@ -46,8 +46,8 @@ public class HeaderCacheServletResponse extends HttpServletResponseWrapper {
 
 		Header header = new Header();
 
-		header.setType(Header.COOKIE_TYPE);
 		header.setCookieValue(cookie);
+		header.setType(Header.COOKIE_TYPE);
 
 		if (values.contains(header)) {
 			return;
@@ -70,8 +70,8 @@ public class HeaderCacheServletResponse extends HttpServletResponseWrapper {
 
 		Header header = new Header();
 
-		header.setType(Header.DATE_TYPE);
 		header.setDateValue(value);
+		header.setType(Header.DATE_TYPE);
 
 		if (values.contains(header)) {
 			return;
@@ -94,8 +94,8 @@ public class HeaderCacheServletResponse extends HttpServletResponseWrapper {
 
 		Header header = new Header();
 
-		header.setType(Header.STRING_TYPE);
 		header.setStringValue(value);
+		header.setType(Header.STRING_TYPE);
 
 		values.add(header);
 
@@ -122,8 +122,8 @@ public class HeaderCacheServletResponse extends HttpServletResponseWrapper {
 
 		Header header = new Header();
 
-		header.setType(Header.INTEGER_TYPE);
 		header.setIntValue(value);
+		header.setType(Header.INTEGER_TYPE);
 
 		if (values.contains(header)) {
 			return;
@@ -209,8 +209,8 @@ public class HeaderCacheServletResponse extends HttpServletResponseWrapper {
 
 		Header header = new Header();
 
-		header.setType(Header.DATE_TYPE);
 		header.setDateValue(value);
+		header.setType(Header.DATE_TYPE);
 
 		values.add(header);
 
@@ -225,8 +225,8 @@ public class HeaderCacheServletResponse extends HttpServletResponseWrapper {
 
 		Header header = new Header();
 
-		header.setType(Header.STRING_TYPE);
 		header.setStringValue(value);
+		header.setType(Header.STRING_TYPE);
 
 		values.add(header);
 
@@ -245,8 +245,8 @@ public class HeaderCacheServletResponse extends HttpServletResponseWrapper {
 
 		Header header = new Header();
 
-		header.setType(Header.INTEGER_TYPE);
 		header.setIntValue(value);
+		header.setType(Header.INTEGER_TYPE);
 
 		values.add(header);
 

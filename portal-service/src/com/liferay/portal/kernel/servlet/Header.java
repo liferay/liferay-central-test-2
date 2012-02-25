@@ -39,20 +39,19 @@ public class Header implements Serializable {
 			return false;
 		}
 
-		Header header = null;
-
-		try {
-			header = (Header)obj;
-		}
-		catch (ClassCastException cce) {
+		if (!(obj instanceof Header)) {
 			return false;
 		}
 
-		if (header.getType() != getType()) {
+		Header header = (Header)obj;
+
+		if (_type != header.getType()) {
 			return false;
 		}
 
-		return toString().equals(header.toString());
+		String string = toString();
+
+		return string.equals(header.toString());
 	}
 
 	public Cookie getCookieValue() {
@@ -98,24 +97,24 @@ public class Header implements Serializable {
 	@Override
 	public String toString() {
 		if (_type == COOKIE_TYPE) {
-			StringBundler sb = new StringBundler();
+			StringBundler sb = new StringBundler(17);
 
-			sb.append("{name=");
-			sb.append(_cookieValue.getName());
+			sb.append("{comment=");
+			sb.append(_cookieValue.getComment());
 			sb.append(", domain=");
 			sb.append(_cookieValue.getDomain());
+			sb.append(", maxAge=");
+			sb.append(_cookieValue.getMaxAge());
+			sb.append(", name=");
+			sb.append(_cookieValue.getName());
 			sb.append(", path=");
 			sb.append(_cookieValue.getPath());
 			sb.append(", secure=");
 			sb.append(_cookieValue.getSecure());
-			sb.append(", maxAge=");
-			sb.append(_cookieValue.getMaxAge());
-			sb.append(", version=");
-			sb.append(_cookieValue.getVersion());
-			sb.append(", comment=");
-			sb.append(_cookieValue.getComment());
 			sb.append(", value=");
 			sb.append(_cookieValue.getValue());
+			sb.append(", version=");
+			sb.append(_cookieValue.getVersion());
 			sb.append("}");
 
 			return sb.toString();
