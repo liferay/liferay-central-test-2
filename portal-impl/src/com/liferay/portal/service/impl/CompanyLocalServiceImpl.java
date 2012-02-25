@@ -1172,7 +1172,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			Company company, String name, String legalName, String legalId,
 			String legalType, String sicCode, String tickerSymbol,
 			String industry, String type, String size)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		Date now = new Date();
 
