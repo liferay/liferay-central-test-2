@@ -67,7 +67,6 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroupRole;
 import com.liferay.portal.model.Website;
 import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.service.EmailAddressServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.service.UserLocalServiceUtil;
@@ -84,8 +83,6 @@ import com.liferay.portlet.announcements.model.AnnouncementsDelivery;
 import com.liferay.portlet.announcements.model.AnnouncementsEntryConstants;
 import com.liferay.portlet.announcements.model.impl.AnnouncementsDeliveryImpl;
 import com.liferay.portlet.announcements.service.AnnouncementsDeliveryLocalServiceUtil;
-import com.liferay.portlet.asset.model.AssetCategory;
-import com.liferay.portlet.asset.model.AssetTag;
 import com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil;
 import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
 import com.liferay.portlet.sites.util.SitesUtil;
@@ -495,6 +492,21 @@ public class EditUserAction extends PortletAction {
 		return announcementsDeliveries;
 	}
 
+	protected List<AnnouncementsDelivery> getAnnouncementsDeliveries(
+			ActionRequest actionRequest, User user)
+		throws Exception {
+
+		if (actionRequest.getParameter(
+				"announcementsType" + AnnouncementsEntryConstants.TYPES[0] +
+					"Email") == null) {
+
+			return AnnouncementsDeliveryLocalServiceUtil.getUserDeliveries(
+				user.getUserId());
+		}
+
+		return getAnnouncementsDeliveries(actionRequest);
+	}
+
 	protected long[] getLongArray(PortletRequest portletRequest, String name) {
 		String value = portletRequest.getParameter(name);
 
@@ -621,57 +633,16 @@ public class EditUserAction extends PortletAction {
 
 		long[] userGroupIds = getLongArray(
 			actionRequest, "userGroupsSearchContainerPrimaryKeys");
-
-		List<Address> addresses = null;
-
-		if (actionRequest.getParameter("addressesIndexes") != null) {
-			addresses = UsersAdminUtil.getAddresses(actionRequest);
-		}
-		else {
-			addresses = user.getAddresses();
-		}
-
-		List<EmailAddress> emailAddresses = null;
-
-		if (actionRequest.getParameter("emailAddressesIndexes") != null) {
-			emailAddresses = UsersAdminUtil.getEmailAddresses(actionRequest);
-		}
-		else {
-			emailAddresses = EmailAddressServiceUtil.getEmailAddresses(
-				User.class.getName(), user.getUserId());
-		}
-
-		List<Phone> phones = null;
-
-		if (actionRequest.getParameter("phonesIndexes") != null) {
-			phones = UsersAdminUtil.getPhones(actionRequest);
-		}
-		else {
-			phones = user.getPhones();
-		}
-
-		List<Website> websites = null;
-
-		if (actionRequest.getParameter("websitesIndexes") != null) {
-			websites = UsersAdminUtil.getWebsites(actionRequest);
-		}
-		else {
-			websites = user.getWebsites();
-		}
-
-		List<AnnouncementsDelivery> announcementsDeliveries = null;
-
-		if (actionRequest.getParameter(
-				"announcementsType" + AnnouncementsEntryConstants.TYPES[0] +
-					"Email") != null) {
-
-			announcementsDeliveries = getAnnouncementsDeliveries(actionRequest);
-		}
-		else {
-			announcementsDeliveries =
-				AnnouncementsDeliveryLocalServiceUtil.getUserDeliveries(
-					user.getUserId());
-		}
+		List<Address> addresses = UsersAdminUtil.getAddresses(
+			actionRequest, user.getAddresses());
+		List<EmailAddress> emailAddresses = UsersAdminUtil.getEmailAddresses(
+			actionRequest, user.getEmailAddresses());
+		List<Phone> phones = UsersAdminUtil.getPhones(
+			actionRequest, user.getPhones());
+		List<Website> websites = UsersAdminUtil.getWebsites(
+			actionRequest, user.getWebsites());
+		List<AnnouncementsDelivery> announcementsDeliveries =
+			getAnnouncementsDeliveries(actionRequest, user);
 
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			User.class.getName(), actionRequest);
