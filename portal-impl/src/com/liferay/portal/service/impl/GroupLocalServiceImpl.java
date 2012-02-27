@@ -1914,8 +1914,8 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			StringPool.BLANK, friendlyURL);
 
 		if ((classNameId <= 0) || className.equals(Group.class.getName())) {
-			validateName(group.getGroupId(), group.getCompanyId(), name,
-				group.getSite());
+			validateName(
+				group.getGroupId(), group.getCompanyId(), name, group.isSite());
 		}
 		else if (className.equals(Organization.class.getName())) {
 			name = getOrgGroupName(classPK, name);
@@ -2523,10 +2523,12 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		catch (NoSuchGroupException nsge) {
 		}
 
-		Company company = companyLocalService.getCompany(companyId);
+		if (site) {
+			Company company = companyLocalService.getCompany(companyId);
 
-		if (site && company.getName().equals(name)) {
-			throw new DuplicateGroupException();
+			if (name.equals(company.getName())) {
+				throw new DuplicateGroupException();
+			}
 		}
 	}
 
