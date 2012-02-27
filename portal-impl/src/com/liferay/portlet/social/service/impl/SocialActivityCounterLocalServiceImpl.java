@@ -238,6 +238,22 @@ public class SocialActivityCounterLocalServiceImpl
 		}
 	}
 
+	/**
+	 * @deprecated {@link #createActivityCounter(long, long, long, String, int,
+	 *             int, int, int, int, long, int)}
+	 */
+	@Transactional(propagation = Propagation.REQUIRES_NEW)
+	public SocialActivityCounter createActivityCounter(
+			long groupId, long classNameId, long classPK, String name,
+			int ownerType, int currentValue, int totalValue, int startPeriod,
+			int endPeriod)
+		throws PortalException, SystemException {
+
+		return createActivityCounter(
+			groupId, classNameId, classPK, name, ownerType, currentValue,
+			totalValue, startPeriod, endPeriod, 0, 0);
+	}
+
 	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	public SocialActivityCounter createActivityCounter(
 			long groupId, long classNameId, long classPK, String name,
