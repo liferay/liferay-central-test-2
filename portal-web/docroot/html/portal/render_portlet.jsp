@@ -919,7 +919,7 @@ if ((layout.isTypePanel() || layout.isTypeControlPanel()) && !portletDisplay.get
 				if (definition != null) {
 					templatePath = StrutsUtil.TEXT_HTML_DIR + definition.getPath();
 				}
-				
+
 				String portletContent = "/portal/portlet_error.jsp";
 
 				if (!access && !portletException) {
