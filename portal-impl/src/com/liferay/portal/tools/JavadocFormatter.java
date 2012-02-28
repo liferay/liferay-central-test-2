@@ -237,9 +237,8 @@ public class JavadocFormatter {
 
 				if (Validator.isNull(comment) &&
 					(!publicAccess || !_initializeMissingJavadocs) &&
-						(name.equals("param") ||
-						 name.equals("return") ||
-						 name.equals("throws"))) {
+					(name.equals("param") || name.equals("return") ||
+					 name.equals("throws"))) {
 
 					continue;
 				}
@@ -273,9 +272,8 @@ public class JavadocFormatter {
 
 				if (Validator.isNull(comment) &&
 					(!publicAccess || !_initializeMissingJavadocs) &&
-						(name.equals("param") ||
-						 name.equals("return") ||
-						 name.equals("throws"))) {
+					(name.equals("param") || name.equals("return") ||
+					 name.equals("throws"))) {
 
 					continue;
 				}
