@@ -67,8 +67,9 @@ public class ViewAction extends PortletAction {
 		throws PortalException, SystemException {
 
 		PortletPreferences preferences = renderRequest.getPreferences();
-		String password =
-			preferences.getValue("basicPassword", StringPool.BLANK);
+
+		String password = preferences.getValue(
+			"basicPassword", StringPool.BLANK);
 
 		return IFrameUtil.getPassword(renderRequest, password);
 	}
@@ -90,8 +91,9 @@ public class ViewAction extends PortletAction {
 		throws PortalException, SystemException {
 
 		PortletPreferences preferences = renderRequest.getPreferences();
-		String userName =
-			preferences.getValue("basicUserName", StringPool.BLANK);
+
+		String userName = preferences.getValue(
+			"basicUserName", StringPool.BLANK);
 
 		return IFrameUtil.getUserName(renderRequest, userName);
 	}
@@ -108,8 +110,8 @@ public class ViewAction extends PortletAction {
 			preferences.getValue("auth", StringPool.BLANK));
 
 		if (auth) {
-			String authType =
-				preferences.getValue("authType", StringPool.BLANK);
+			String authType = preferences.getValue(
+				"authType", StringPool.BLANK);
 
 			if (authType.equals("basic")) {
 				String userName = getUserName(renderRequest, renderResponse);
