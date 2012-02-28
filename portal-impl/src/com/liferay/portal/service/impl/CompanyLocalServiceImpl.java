@@ -751,7 +751,8 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 				searchContext.setPortletIds(new String[] {portletId});
 			}
 
-			searchContext.setSearchEngineId(SearchEngineUtil.SYSTEM_ENGINE_ID);
+			searchContext.setSearchEngineId(
+				SearchEngineUtil.getDefaultSearchEngineId());
 			searchContext.setStart(start);
 			searchContext.setUserId(userId);
 
