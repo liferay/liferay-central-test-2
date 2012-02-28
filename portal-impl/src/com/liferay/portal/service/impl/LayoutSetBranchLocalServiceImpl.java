@@ -524,7 +524,7 @@ public class LayoutSetBranchLocalServiceImpl
 					LayoutSetBranchNameException.DUPLICATE);
 			}
 		}
-		catch (NoSuchLayoutSetBranchException nsbe) {
+		catch (NoSuchLayoutSetBranchException nslsbe) {
 		}
 
 		if (master) {
@@ -539,7 +539,7 @@ public class LayoutSetBranchLocalServiceImpl
 						LayoutSetBranchNameException.MASTER);
 				}
 			}
-			catch (NoSuchLayoutSetBranchException nsbe) {
+			catch (NoSuchLayoutSetBranchException nslsbe) {
 			}
 		}
 	}
