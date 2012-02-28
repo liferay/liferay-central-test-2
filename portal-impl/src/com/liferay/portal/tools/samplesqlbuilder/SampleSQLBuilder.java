@@ -92,7 +92,7 @@ public class SampleSQLBuilder {
 		int maxDDLRecordCount = GetterUtil.getInteger(
 			arguments.get("sample.sql.ddl.record.count"));
 		int maxDDLRecordSetCount = GetterUtil.getInteger(
-			arguments.get("sample.sql.ddl.recordset.count"));
+			arguments.get("sample.sql.ddl.record.set.count"));
 		int maxDLFileEntryCount = GetterUtil.getInteger(
 			arguments.get("sample.sql.dl.file.entry.count"));
 		int maxDLFileEntrySize = GetterUtil.getInteger(
@@ -544,8 +544,9 @@ public class SampleSQLBuilder {
 			protected void createSample() throws Exception {
 				_writerBlogsCSV = getWriter("blogs.csv");
 				_writerCompanyCSV = getWriter("company.csv");
-				_writerDDLCSV = getWriter("ddl.csv");
 				_writerDocumentLibraryCSV = getWriter("document_library.csv");
+				_writerDynamicDataListsCSV = getWriter(
+					"dynamic_data_lists.csv");
 				_writerLayoutCSV = getWriter("layout.csv");
 				_writerMessageBoardsCSV = getWriter("message_boards.csv");
 				_writerRepositoryCSV = getWriter("repository.csv");
@@ -558,8 +559,8 @@ public class SampleSQLBuilder {
 
 				_writerBlogsCSV.close();
 				_writerCompanyCSV.close();
-				_writerDDLCSV.close();
 				_writerDocumentLibraryCSV.close();
+				_writerDynamicDataListsCSV.close();
 				_writerLayoutCSV.close();
 				_writerMessageBoardsCSV.close();
 				_writerRepositoryCSV.close();
@@ -611,8 +612,8 @@ public class SampleSQLBuilder {
 		put(context, "userScreenNameIncrementer", _userScreenNameIncrementer);
 		put(context, "writerBlogsCSV", _writerBlogsCSV);
 		put(context, "writerCompanyCSV", _writerCompanyCSV);
-		put(context, "writerDDLCSV", _writerDDLCSV);
 		put(context, "writerDocumentLibraryCSV", _writerDocumentLibraryCSV);
+		put(context, "writerDynamicDataListsCSV", _writerDynamicDataListsCSV);
 		put(context, "writerLayoutCSV", _writerLayoutCSV);
 		put(context, "writerMessageBoardsCSV", _writerMessageBoardsCSV);
 		put(context, "writerRepositoryCSV", _writerRepositoryCSV);
@@ -790,7 +791,7 @@ public class SampleSQLBuilder {
 	private SimpleCounter _userScreenNameIncrementer;
 	private Writer _writerBlogsCSV;
 	private Writer _writerCompanyCSV;
-	private Writer _writerDDLCSV;
+	private Writer _writerDynamicDataListsCSV;
 	private Writer _writerDocumentLibraryCSV;
 	private Writer _writerLayoutCSV;
 	private Writer _writerMessageBoardsCSV;

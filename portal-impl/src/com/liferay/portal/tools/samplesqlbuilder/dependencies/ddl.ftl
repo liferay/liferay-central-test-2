@@ -18,7 +18,7 @@
 
 				${sampleSQLBuilder.insertDDLRecord(ddlRecord, ddlRecordSet)}
 
-				${writerDDLCSV.write(ddlRecordSet.recordSetId + "," + ddlRecord.recordId + "," + dataFactory.getDateLong(ddlRecord.createDate) + "\n")}
+				${writerDynamicDataListsCSV.write(ddlRecordSet.recordSetId + "," + ddlRecord.recordId + "," + dataFactory.getDateLong(ddlRecord.createDate) + "\n")}
 			</#list>
 		</#if>
 	</#list>
