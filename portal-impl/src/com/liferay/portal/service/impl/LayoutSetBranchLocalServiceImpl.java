@@ -336,7 +336,8 @@ public class LayoutSetBranchLocalServiceImpl
 	}
 
 	/**
-	 * @deprecated {@link #getUserLayoutSetBranch(long, long, boolean, long, long)}
+	 * @deprecated {@link #getUserLayoutSetBranch(long, long, boolean, long,
+	 *             long)}
 	 */
 	public LayoutSetBranch getUserLayoutSetBranch(
 			long userId, long groupId, boolean privateLayout,

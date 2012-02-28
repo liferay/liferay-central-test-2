@@ -791,8 +791,8 @@ public class SampleSQLBuilder {
 	private SimpleCounter _userScreenNameIncrementer;
 	private Writer _writerBlogsCSV;
 	private Writer _writerCompanyCSV;
-	private Writer _writerDynamicDataListsCSV;
 	private Writer _writerDocumentLibraryCSV;
+	private Writer _writerDynamicDataListsCSV;
 	private Writer _writerLayoutCSV;
 	private Writer _writerMessageBoardsCSV;
 	private Writer _writerRepositoryCSV;
