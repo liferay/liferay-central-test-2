@@ -270,17 +270,23 @@ public class PluginsEnvironmentBuilder {
 		sb.append("\t<classpathentry kind=\"con\" ");
 		sb.append("path=\"org.eclipse.jdt.launching.JRE_CONTAINER\" />\n");
 
+		boolean addJunitJars = false;
+
 		for (String testType:_TEST_TYPES) {
 			String testFolder = "test/" + testType;
 
 			if (_fileUtil.exists(projectDirName + "/" + testFolder)) {
+				addJunitJars = true;
+
 				sb.append("\t<classpathentry excluding=\"**/.svn/**|.svn/\" ");
 				sb.append("kind=\"src\" path=\""+ testFolder + "\" />\n");
 			}
 		}
 
-		addClasspathEntry(sb, "/portal/lib/development/junit.jar");
-		addClasspathEntry(sb, "/portal/lib/portal/commons-io.jar");
+		if (addJunitJars) {
+			addClasspathEntry(sb, "/portal/lib/development/junit.jar");
+			addClasspathEntry(sb, "/portal/lib/portal/commons-io.jar");
+		}
 
 		addClasspathEntry(sb, "/portal/lib/development/activation.jar");
 		addClasspathEntry(sb, "/portal/lib/development/annotations.jar");
@@ -467,9 +473,8 @@ public class PluginsEnvironmentBuilder {
 		"docroot/WEB-INF/src"
 	};
 
-	private static final String[] _TEST_TYPES = new String[] {
-		"integration", "unit" };
-			
+	private static final String[] _TEST_TYPES = {"integration", "unit"};
+
 	private static FileImpl _fileUtil = FileImpl.getInstance();
 
 }
