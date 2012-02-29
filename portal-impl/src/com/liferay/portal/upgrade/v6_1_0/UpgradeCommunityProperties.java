@@ -86,12 +86,12 @@ public class UpgradeCommunityProperties extends UpgradeProcess {
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
-				long id = rs.getLong(primaryKeyColumnName);
+				long primaryKey = rs.getLong(primaryKeyColumnName);
 				String preferences = rs.getString("preferences");
 
 				updatePreferences(
-					tableName, primaryKeyColumnName, oldValue, newValue, id,
-					preferences);
+					tableName, primaryKeyColumnName, oldValue, newValue,
+					primaryKey, preferences);
 			}
 		}
 		finally {
@@ -101,7 +101,7 @@ public class UpgradeCommunityProperties extends UpgradeProcess {
 
 	protected void updatePreferences(
 			String tableName, String primaryKeyColumnName, String oldValue,
-			String newValue, long id, String preferences)
+			String newValue, long primaryKey, String preferences)
 		throws Exception {
 
 		preferences = StringUtil.replace(preferences, oldValue, newValue);
@@ -124,7 +124,7 @@ public class UpgradeCommunityProperties extends UpgradeProcess {
 			ps = con.prepareStatement(sb.toString());
 
 			ps.setString(1, preferences);
-			ps.setLong(2, id);
+			ps.setLong(2, primaryKey);
 
 			ps.executeUpdate();
 		}

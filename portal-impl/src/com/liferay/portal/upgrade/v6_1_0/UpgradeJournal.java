@@ -91,6 +91,9 @@ public class UpgradeJournal extends UpgradeProcess {
 				long id = rs.getLong("id_");
 				String xsd = rs.getString("xsd");
 
+				xsd = StringUtil.replace(
+					xsd, "image_gallery", "document_library");
+
 				updateStructureXsd(id, xsd);
 			}
 		}
@@ -103,8 +106,6 @@ public class UpgradeJournal extends UpgradeProcess {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-
-		xsd = StringUtil.replace(xsd, "image_gallery", "document_library");
 
 		try {
 			con = DataAccess.getConnection();
