@@ -43,10 +43,10 @@
 
 </table>
 
-<#if serverInfo??>
-<hr />
+<#if releaseInfo??>
+	<hr />
 
-<i>${serverInfo}</i>
+	<i>${releaseInfo}</i>
 </#if>
 
 </body>
