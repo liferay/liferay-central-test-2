@@ -93,11 +93,11 @@
 	</antelope:stringutil>
 
 	<condition property="file.suffix.bat" value=".bat" else=".sh">
-		<contains string="${os.name}" substring="Windows" casesensitive="false"/>
+		<contains string="${os.name}" substring="Windows" casesensitive="false" />
 	</condition>
 
 	<condition property="file.suffix.exe" value=".exe" else="">
-		<contains string="${os.name}" substring="Windows" casesensitive="false"/>
+		<contains string="${os.name}" substring="Windows" casesensitive="false" />
 	</condition>
 
 	<property name="definitions.dir" value="${project.dir}/definitions" />
@@ -298,21 +298,21 @@ Please set the environment variable ANT_OPTS to the recommended value of
 	</target>
 
 	<target name="compile-test">
+		<antcall target="compile-test-functional" inheritall="false" />
 		<antcall target="compile-test-integration" inheritall="false" />
 		<antcall target="compile-test-unit" inheritall="false" />
-		<antcall target="compile-test-functional" inheritall="false" />
 	</target>
 
-	<target name="compile-test-cmd" if="type">
+	<target name="compile-test-cmd">
 		<if>
-			<available file="test/${type}" type="dir" />
+			<available file="test/${test.type}" type="dir" />
 			<then>
-				<mkdir dir="test-classes/${type}" />
-				<mkdir dir="test-results/${type}" />
+				<mkdir dir="test-classes/${test.type}" />
+				<mkdir dir="test-results/${test.type}" />
 
-				<copy todir="test-classes/${type}">
+				<copy todir="test-classes/${test.type}">
 					<fileset dir="test" includes="*.properties" />
-					<fileset dir="test/${type}" includes="**/*.properties,**/dependencies/**" />
+					<fileset dir="test/${test.type}" includes="**/*.properties,**/dependencies/**" />
 				</copy>
 
 				<javac
@@ -320,31 +320,31 @@ Please set the environment variable ANT_OPTS to the recommended value of
 					compiler="${javac.compiler}"
 					debug="${javac.debug}"
 					deprecation="${javac.deprecation}"
-					destdir="test-classes/${type}"
+					destdir="test-classes/${test.type}"
 					encoding="${javac.encoding}"
 					includeAntRuntime="false"
 					nowarn="${javac.nowarn}"
-					srcdir="test/${type}"
+					srcdir="test/${test.type}"
 				/>
 			</then>
 		</if>
 	</target>
 
+	<target name="compile-test-functional">
+		<ant target="compile-test-cmd">
+			<property name="test.type" value="" />
+		</ant>
+	</target>
+
 	<target name="compile-test-integration">
 		<ant target="compile-test-cmd">
-			<property name="type" value="integration" />
+			<property name="test.type" value="integration" />
 		</ant>
 	</target>
 
 	<target name="compile-test-unit">
 		<ant target="compile-test-cmd">
-			<property name="type" value="unit" />
-		</ant>
-	</target>
-
-	<target name="compile-test-functional">
-		<ant target="compile-test-cmd">
-			<property name="type" value="" />
+			<property name="test.type" value="unit" />
 		</ant>
 	</target>
 
@@ -485,7 +485,7 @@ Please set the environment variable ANT_OPTS to the recommended value of
 		<antcall target="report-test-coverage" />
 	</target>
 
-	<target name="test-class" depends="compile,instrument-test-coverage,compile-test" if="class">
+	<target name="test-class" depends="compile,instrument-test-coverage,compile-test">
 		<resourcecount property="integration.test.count">
 			<fileset id="integration.test.class" dir="test-classes/integration" includes="**/${class}.class" />
 		</resourcecount>
@@ -495,33 +495,29 @@ Please set the environment variable ANT_OPTS to the recommended value of
 		</resourcecount>
 
 		<if>
-			<equals arg1="${integration.test.count}" arg2="1"/>
+			<equals arg1="${integration.test.count}" arg2="1" />
 			<then>
-				<property name="test.type" value="integration" />
+				<var name="test.type" value="integration" />
 			</then>
 			<elseif>
-				<equals arg1="${unit.test.count}" arg2="1"/>
+				<equals arg1="${unit.test.count}" arg2="1" />
 				<then>
-					<property name="test.type" value="unit" />
+					<var name="test.type" value="unit" />
 				</then>
 			</elseif>
 			<else>
-				<property name="test.type" value="" />
+				<var name="test.type" value="" />
 			</else>
 		</if>
 
 		<ant target="test-cmd">
-			<property name="type" value="${test.type}" />
+			<property name="test.type" value="${test.type}" />
 		</ant>
 
 		<antcall target="report-test-coverage" />
 	</target>
 
-	<target name="test-cmd" if="type">
-		<!--
-		The perTest mode allow us to run our test in an isolated way. This makes our tests run in a little bit slower.
-		Because some of our integration tests are dependant each other; this is the easier way to isolate thier execution
-		-->
+	<target name="test-cmd">
 		<junit dir="${project.dir}" fork="on" forkmode="perTest" haltonfailure="${junit.halt.on.failure}" outputtoformatters="false" printsummary="on" showoutput="true">
 			<sysproperty key="net.sourceforge.cobertura.datafile" file="test-coverage/cobertura.ser" />
 			<jvmarg line="${junit.debug.jpda}" />
@@ -533,13 +529,8 @@ Please set the environment variable ANT_OPTS to the recommended value of
 			<classpath refid="test.classpath" />
 			<formatter type="brief" usefile="false" />
 			<formatter type="xml" />
-			<batchtest todir="test-results/${type}">
-				<fileset dir="test-classes/${type}" includes="**/${class}.class">
-					<!--
-					We need to start Tomcat before the integration testing process
-					and shutdhown it at the end.
-					Work in progress
-					-->
+			<batchtest todir="test-results/${test.type}">
+				<fileset dir="test-classes/${test.type}" includes="**/${class}.class">
 					<exclude name="**/ServiceHttpTestSuite.class" />
 					<exclude name="**/ServiceSoapTestSuite.class" />
 				</fileset>
@@ -548,31 +539,20 @@ Please set the environment variable ANT_OPTS to the recommended value of
 	</target>
 
 	<target name="test-integration" depends="compile,instrument-test-coverage,compile-test-integration">
+		<property name="class" value="*TestSuite" />
 
-		<property name="class" value="*TestSuite"/>
 		<ant target="test-cmd">
-			<property name="type" value="integration" />
+			<property name="test.type" value="integration" />
 		</ant>
-
-		<!--
-		Establish some convention over configuration rule in order to be able
-		to run TestSuites and Single tests
-		-->
-
-		<!--
-		<property name="class" value="*Test"/>
-		<ant target="test-cmd">
-			<property name="type" value="integration" />
-		</ant>
-		-->
 
 		<antcall target="report-test-coverage" />
 	</target>
 
 	<target name="test-unit" depends="compile,instrument-test-coverage,compile-test-unit">
-		<property name="class" value="*Test"/>
+		<property name="class" value="*Test" />
+
 		<ant target="test-cmd">
-			<property name="type" value="unit" />
+			<property name="test.type" value="unit" />
 		</ant>
 
 		<antcall target="report-test-coverage" />
