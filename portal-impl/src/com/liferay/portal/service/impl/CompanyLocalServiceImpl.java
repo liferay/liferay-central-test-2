@@ -792,19 +792,10 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 		throws SystemException {
 
 		try {
+
+			// Context
+
 			SearchContext searchContext = new SearchContext();
-
-			Facet assetEntriesFacet = new AssetEntriesFacet(searchContext);
-
-			assetEntriesFacet.setStatic(true);
-
-			searchContext.addFacet(assetEntriesFacet);
-
-			Facet scopeFacet = new ScopeFacet(searchContext);
-
-			scopeFacet.setStatic(true);
-
-			searchContext.addFacet(scopeFacet);
 
 			searchContext.setCompanyId(companyId);
 			searchContext.setEnd(end);
@@ -821,10 +812,27 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 				searchContext.setPortletIds(new String[] {portletId});
 			}
 
-			searchContext.setSearchEngineId(
-				SearchEngineUtil.getDefaultSearchEngineId());
 			searchContext.setStart(start);
 			searchContext.setUserId(userId);
+
+			// Facets
+
+			// Always add facets as late as possible so that the search context
+			// fields can be considered by the facets
+
+			Facet assetEntriesFacet = new AssetEntriesFacet(searchContext);
+
+			assetEntriesFacet.setStatic(true);
+
+			searchContext.addFacet(assetEntriesFacet);
+
+			Facet scopeFacet = new ScopeFacet(searchContext);
+
+			scopeFacet.setStatic(true);
+
+			searchContext.addFacet(scopeFacet);
+
+			// Search
 
 			Indexer indexer = FacetedSearcher.getInstance();
 
