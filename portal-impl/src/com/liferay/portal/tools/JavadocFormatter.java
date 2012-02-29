@@ -212,16 +212,9 @@ public class JavadocFormatter {
 		Element parentElement, String[] tagNames, String indent,
 		boolean publicAccess) {
 
-		ArrayList<String> allTags = new ArrayList<String>();
-		ArrayList<String> commonCommentedTags = new ArrayList<String>();
-		ArrayList<String> nonCommonTags = new ArrayList<String>();
-
-		// Aggregate the tag names into the following lists ...
-		//   - allTags: superset of all of the tags found for the element's
-		//     comments and the element's signature
-		//   - commonCommentedTags: param, return, and throws tags that have
-		//     comments
-		//   - nonCommonTags: any tags other than the common tags
+		List<String> allTagNames = new ArrayList<String>();
+		List<String> commonTagNamesWithComments = new ArrayList<String>();
+		List<String> customTagNames = new ArrayList<String>();
 
 		for (String tagName : tagNames) {
 			List<Element> elements = parentElement.elements(tagName);
@@ -244,66 +237,42 @@ public class JavadocFormatter {
 					tagName.equals("throws")) {
 
 					if (Validator.isNotNull(comment)) {
-						commonCommentedTags.add(tagName);
+						commonTagNamesWithComments.add(tagName);
 					}
 				}
 				else {
-					nonCommonTags.add(tagName);
+					customTagNames.add(tagName);
 				}
 
-				allTags.add(tagName);
+				allTagNames.add(tagName);
 			}
 		}
 
-		// Aggregate the tag names to be measured for max tag name length based
-		// on the following logic:
-		//
-		// - If init mode, consider length of all existing tags and common tags
-		//   of signature.
-		// - If format-only mode (i.e. not init mode), consider length of all
-		//   existing tags.
+		int maxTagNameLength = 0;
 
-		ArrayList<String> tagsToMeasure = new ArrayList<String>();
+		List<String> maxTagNameLengthTags = new ArrayList<String>();
 
 		if (_initializeMissingJavadocs) {
-
-			// Consider length of ALL tags
-
-			tagsToMeasure.addAll(allTags);
-
+			maxTagNameLengthTags.addAll(allTagNames);
 		}
 		else {
-
-			// Only consider the length of commented tags and non-common tags
-
-			tagsToMeasure.addAll(commonCommentedTags);
-			tagsToMeasure.addAll(nonCommonTags);
+			maxTagNameLengthTags.addAll(commonTagNamesWithComments);
+			maxTagNameLengthTags.addAll(customTagNames);
 		}
 
-		// Determine the longest tag name
-
-		int maxNameLength = 0;
-
-		for (String tagName : tagsToMeasure) {
-			if (tagName.length() > maxNameLength) {
-				maxNameLength = tagName.length();
+		for (String name : maxTagNameLengthTags) {
+			if (name.length() > maxTagNameLength) {
+				maxTagNameLength = name.length();
 			}
 		}
 
-		// Populate the comments based on the following logic
-		//
-		// - If init mode, write ALL of the common tags of signature and all
-		//   non-common tags.
-		// - If format-only mode (i.e. not init mode), format the names and
-		//   comments, but leave the comment contents as-is.
+		// There should be an @ sign before the tag name and a space after it
+
+		maxTagNameLength += 2;
+
+		String tagNameIndent = _getSpacesIndent(maxTagNameLength);
 
 		StringBundler sb = new StringBundler();
-
-		// There should be  an @ sign before the tag name and a space after it
-
-		maxNameLength += 2;
-
-		String nameIndent = _getSpacesIndent(maxNameLength);
 
 		for (String tagName : tagNames) {
 			List<Element> elements = parentElement.elements(tagName);
@@ -327,37 +296,39 @@ public class JavadocFormatter {
 				}
 
 				if (Validator.isNotNull(comment)) {
-
 					comment = _assembleTagComment(
-						tagName, elementName, comment, indent, nameIndent);
+						tagName, elementName, comment, indent, tagNameIndent);
 
 					sb.append(comment);
-				} else {
-
+				}
+				else {
 					if (_initializeMissingJavadocs && publicAccess) {
 
 						// Write out all tags
 
 						comment = _assembleTagComment(
-							tagName, elementName, comment, indent, nameIndent);
+							tagName, elementName, comment, indent,
+							tagNameIndent);
 
 						sb.append(comment);
-					} else {
-
+					}
+					else {
 						if (!tagName.equals("param") &&
 							!tagName.equals("return") &&
 							!tagName.equals("throws")) {
 
-							// Write out non-common tag
+							// Write out custom tag name
 
 							comment = _assembleTagComment(
 								tagName, elementName, comment, indent,
-								nameIndent);
+								tagNameIndent);
 
 							sb.append(comment);
 						}
 						else {
-							// Don't write out empty common tag
+
+							// Skip empty common tag name
+
 						}
 					}
 				}
@@ -541,10 +512,10 @@ public class JavadocFormatter {
 	}
 
 	private String _assembleTagComment(
-		String tagName, String elementName, String comment, String commentStart,
-		String nameIndent) {
+		String tagName, String elementName, String comment, String indent,
+		String tagNameIndent) {
 
-		String commentStartPlusTag = commentStart + StringPool.AT + tagName;
+		String indentAndTagName = indent + StringPool.AT + tagName;
 
 		if (Validator.isNotNull(elementName)) {
 
@@ -560,31 +531,31 @@ public class JavadocFormatter {
 
 			// <name indent> elementName [comment]
 
-			comment = _wrapText(comment, commentStart + nameIndent);
+			comment = _wrapText(comment, indent + tagNameIndent);
 
-			// * @tagName <name indent> elementName [comment]
+			// * @name <name indent> elementName [comment]
 
-			comment = commentStartPlusTag +
-				comment.substring(commentStartPlusTag.length());
-
-		} else {
-
+			comment =
+				indentAndTagName + comment.substring(indentAndTagName.length());
+		}
+		else {
 			if (Validator.isNotNull(comment)) {
 
 				// <name indent> comment
 
-				comment = _wrapText(comment, commentStart + nameIndent);
+				comment = _wrapText(comment, indent + tagNameIndent);
 
-				// * @tagName <name indent> comment
+				// * @name <name indent> comment
 
-				comment = commentStartPlusTag +
-					comment.substring(commentStartPlusTag.length());
+				comment =
+					indentAndTagName +
+						comment.substring(indentAndTagName.length());
 			}
 			else {
 
-				// * @tagName
+				// * @name
 
-				comment = commentStartPlusTag + "\n";
+				comment = indentAndTagName + "\n";
 			}
 		}
 
