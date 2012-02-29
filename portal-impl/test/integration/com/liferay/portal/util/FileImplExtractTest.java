@@ -113,14 +113,12 @@ public class FileImplExtractTest extends BaseTestCase {
 	}
 
 	protected String extractText(String fileName) {
-		InputStream fileInputStream = null;
-
 		Class<?> clazz = getClass();
 
-		fileInputStream = clazz.getResourceAsStream(
+		InputStream inputStream = clazz.getResourceAsStream(
 			"dependencies/" + fileName);
 
-		String text = FileUtil.extractText(fileInputStream, fileName);
+		String text = FileUtil.extractText(inputStream, fileName);
 
 		return text.trim();
 	}

@@ -16,7 +16,6 @@ package com.liferay.portal.util;
 
 import com.liferay.portal.kernel.util.MimeTypesUtil;
 
-import java.io.FileInputStream;
 import java.io.InputStream;
 
 /**
