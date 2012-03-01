@@ -858,10 +858,10 @@ public class Creole10Parser]]></replacevalue>
 		<antcall target="build-wsdd-portlets" />
 	</target>
 
-	<target name="build-yuicompressor">
-		<jarjar jarfile="${project.dir}/lib/portal/liferay-yuicompressor.jar.new">
-			<zipfileset src="${project.dir}/tools/yuicompressor-2.4.2.jar" />
+	<target name="build-yui-compressor">
+		<jarjar jarfile="${project.dir}/lib/portal/liferay-yui-compressor.jar.new">
 			<rule pattern="org.mozilla.**" result="com.yahoo.platform.yui.mozilla.@1" />
+			<zipfileset src="${project.dir}/tools/yuicompressor-2.4.2.jar" />
 		</jarjar>
 	</target>
 
