@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -638,13 +639,13 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		entry.setSmallImageURL(smallImageURL);
 
-		if (!entry.isPending() && !entry.isDraft()) {
-			if (entry.isApproved()) {
-				entry.setStatus(WorkflowConstants.STATUS_DRAFT_FROM_APPROVED);
-			}
-			else {
-				entry.setStatus(WorkflowConstants.STATUS_DRAFT);
-			}
+		if (entry.isPending() || entry.isDraft()) {
+		}
+		else if (entry.isApproved()) {
+			entry.setStatus(WorkflowConstants.STATUS_DRAFT_FROM_APPROVED);
+		}
+		else {
+			entry.setStatus(WorkflowConstants.STATUS_DRAFT);
 		}
 
 		entry.setExpandoBridgeAttributes(serviceContext);
@@ -682,6 +683,10 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		serviceContext.setAttribute(
 			"pingOldTrackbacks", String.valueOf(pingOldTrackbacks));
+
+		if (entry.getStatus() != WorkflowConstants.STATUS_DRAFT) {
+			serviceContext.setAttribute("update", Boolean.TRUE.toString());
+		}
 
 		if (Validator.isNotNull(trackbacks)) {
 			serviceContext.setAttribute("trackbacks", trackbacks);
@@ -723,17 +728,6 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		int oldStatus = entry.getStatus();
 
-		if (entry.isPending() &&
-				(status == WorkflowConstants.STATUS_APPROVED)) {
-
-			oldStatus = GetterUtil.getInteger(
-				serviceContext.getAttribute("modelStatus"),
-				WorkflowConstants.STATUS_DRAFT);
-		}
-		else if (entry.isDraft()) {
-			serviceContext.setAttribute("modelStatus", oldStatus);
-		}
-
 		entry.setModifiedDate(serviceContext.getModifiedDate(now));
 		entry.setStatus(status);
 		entry.setStatusByUserId(user.getUserId());
@@ -761,17 +755,19 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 				// Social
 
-				if (oldStatus == WorkflowConstants.STATUS_DRAFT) {
-					socialActivityLocalService.addUniqueActivity(
-						user.getUserId(), entry.getGroupId(),
-						BlogsEntry.class.getName(), entryId,
-						BlogsActivityKeys.ADD_ENTRY, StringPool.BLANK, 0);
-				}
-				else {
+				boolean update = ParamUtil.getBoolean(serviceContext, "update");
+
+				if (update) {
 					socialActivityLocalService.addActivity(
 						user.getUserId(), entry.getGroupId(),
 						BlogsEntry.class.getName(), entryId,
 						BlogsActivityKeys.UPDATE_ENTRY, StringPool.BLANK, 0);
+				}
+				else {
+					socialActivityLocalService.addUniqueActivity(
+						user.getUserId(), entry.getGroupId(),
+						BlogsEntry.class.getName(), entryId,
+						BlogsActivityKeys.ADD_ENTRY, StringPool.BLANK, 0);
 				}
 			}
 

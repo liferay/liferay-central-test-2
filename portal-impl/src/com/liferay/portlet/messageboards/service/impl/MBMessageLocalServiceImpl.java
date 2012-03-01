@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -1369,11 +1370,12 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			message.setPriority(priority);
 		}
 
-		if (!message.isPending() && !message.isDraft() &&
-			(serviceContext.getWorkflowAction() ==
+		if ((serviceContext.getWorkflowAction() ==
 				WorkflowConstants.ACTION_SAVE_DRAFT)) {
 
-			if (message.isApproved()) {
+			if (message.isPending() || message.isDraft()) {
+			}
+			else if (message.isApproved()) {
 				message.setStatus(WorkflowConstants.STATUS_DRAFT_FROM_APPROVED);
 			}
 			else {
@@ -1459,6 +1461,10 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		// Workflow
 
+		if (message.getStatus() != WorkflowConstants.STATUS_DRAFT) {
+			serviceContext.setAttribute("update", Boolean.TRUE.toString());
+		}
+
 		WorkflowHandlerRegistryUtil.startWorkflowInstance(
 			companyId, message.getGroupId(), userId,
 			message.getWorkflowClassName(), message.getMessageId(), message,
@@ -1489,23 +1495,6 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		MBMessage message = getMessage(messageId);
 
 		int oldStatus = message.getStatus();
-
-		if (message.isPending() &&
-			(status == WorkflowConstants.STATUS_APPROVED)) {
-
-			oldStatus = GetterUtil.getInteger(
-				serviceContext.getAttribute("modelStatus"),
-				WorkflowConstants.STATUS_DRAFT);
-		}
-		else {
-			if (message.isApproved() &&
-				(status == WorkflowConstants.STATUS_PENDING)) {
-
-				oldStatus = WorkflowConstants.STATUS_DRAFT_FROM_APPROVED;
-			}
-
-			serviceContext.setAttribute("modelStatus", oldStatus);
-		}
 
 		User user = userPersistence.findByPrimaryKey(userId);
 		Date now = new Date();
@@ -1591,7 +1580,9 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 						true);
 				}
 
-				if (oldStatus == WorkflowConstants.STATUS_DRAFT) {
+				boolean update = ParamUtil.getBoolean(serviceContext, "update");
+
+				if (!update) {
 
 					// Social
 
@@ -1882,14 +1873,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				defaultPreferences);
 		}
 
-		boolean update = true;
-
-		int oldStatus = GetterUtil.getInteger(
-			serviceContext.getAttribute("modelStatus"));
-
-		if (oldStatus == WorkflowConstants.STATUS_DRAFT) {
-			update = false;
-		}
+		boolean update = ParamUtil.getBoolean(serviceContext, "update");
 
 		if (!update && MBUtil.getEmailMessageAddedEnabled(preferences)) {
 		}
