@@ -28,6 +28,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -44,14 +45,15 @@ public class JSONWebServiceInvokerAction implements JSONWebServiceAction {
 
 	public JSONWebServiceInvokerAction(HttpServletRequest request) {
 		_request = request;
+
 		_command = request.getParameter("cmd");
 
 		if (_command == null) {
 			try {
 				_command = ServletUtil.readRequestBody(request);
 			}
-			catch (IOException e) {
-				throw new IllegalArgumentException(e);
+			catch (IOException ioe) {
+				throw new IllegalArgumentException(ioe);
 			}
 		}
 	}
@@ -60,28 +62,27 @@ public class JSONWebServiceInvokerAction implements JSONWebServiceAction {
 		return null;
 	}
 
-	@SuppressWarnings("unchecked")
 	public Object invoke() throws Exception {
-		Object deserializedCommand = JSONFactoryUtil.looseDeserialize(_command);
+		Object command = JSONFactoryUtil.looseDeserialize(_command);
 
-		List list = null;
+		List<Object> list = null;
 
 		boolean batchMode = false;
 
-		if (deserializedCommand instanceof List) {
-			list = (List)deserializedCommand;
+		if (command instanceof List) {
+			list = (List<Object>)command;
 
 			batchMode = true;
 		}
-		else if (deserializedCommand instanceof Map) {
-			list = new ArrayList(1);
+		else if (command instanceof Map) {
+			list = new ArrayList<Object>(1);
 
-			list.add(deserializedCommand);
+			list.add(command);
 
 			batchMode = false;
 		}
 		else {
-			throw new IllegalArgumentException("Invalid argument type");
+			throw new IllegalArgumentException();
 		}
 
 		for (int i = 0; i < list.size(); i++) {
@@ -89,11 +90,16 @@ public class JSONWebServiceInvokerAction implements JSONWebServiceAction {
 				(Map<String, Map<String, Object>>)list.get(i);
 
 			if (map.isEmpty()) {
-				throw new IllegalArgumentException("Invalid input");
+				throw new IllegalArgumentException();
 			}
 
-			Map.Entry<String, Map<String, Object>> entry =
-				map.entrySet().iterator().next();
+			Set<Map.Entry<String, Map<String, Object>>> entrySet =
+				map.entrySet();
+
+			Iterator<Map.Entry<String, Map<String, Object>>> iterator =
+				entrySet.iterator();
+
+			Map.Entry<String, Map<String, Object>> entry = iterator.next();
 
 			Statement statement = _parseStatement(
 				entry.getKey(), entry.getValue());
@@ -110,39 +116,41 @@ public class JSONWebServiceInvokerAction implements JSONWebServiceAction {
 		return list;
 	}
 
-	@SuppressWarnings("unchecked")
 	private Map<String, Object> _convertObjectToMap(Object object) {
-		if (object instanceof Map == false) {
-			// this is a potential performance pitfall
-
+		if (!(object instanceof Map)) {
 			String json = JSONFactoryUtil.looseSerialize(object);
 
 			object = JSONFactoryUtil.looseDeserialize(json, HashMap.class);
 		}
 
-		return (Map<String, Object>) object;
+		return (Map<String, Object>)object;
 	}
 
 	private Object _executeStatement(Statement statement) throws Exception {
-		JSONWebServiceAction action =
+		JSONWebServiceAction jsonWebServiceAction =
 			JSONWebServiceActionsManagerUtil.getJSONWebServiceAction(
-				_request, statement.method, null, statement.parameters);
+				_request, statement.getMethod(), null,
+				statement.getParameterMap());
 
-		Object result = action.invoke();
+		Object result = jsonWebServiceAction.invoke();
 
-		_populateFlags(statement.name, result);
+		_populateFlags(statement.getName(), result);
 
 		result = _filterResult(statement, result);
 
-		if (statement.variables != null) {
-			for (Statement variable : statement.variables) {
-				Object variableValue = _executeStatement(variable);
+		List<Statement> variableStatements = statement.getVariableStatements();
 
-				Map<String, Object> target = _convertObjectToMap(result);
+		if (variableStatements != null) {
+			for (Statement variableStatement : variableStatements) {
+				String name = variableStatement.getName();
 
-				target.put(variable.name.substring(1), variableValue);
+				Object variableResult = _executeStatement(variableStatement);
 
-				result = target;
+				Map<String, Object> map = _convertObjectToMap(result);
+
+				map.put(name.substring(1), variableResult);
+
+				result = map;
 			}
 		}
 
@@ -154,103 +162,104 @@ public class JSONWebServiceInvokerAction implements JSONWebServiceAction {
 			return result;
 		}
 
-		if (statement.whitelist == null) {
+		String[] whitelist = statement.getWhitelist();
+
+		if (whitelist == null) {
 			return result;
 		}
 
 		Map<String, Object> map = _convertObjectToMap(result);
 
-		Map<String, Object> whitelistedMap =
-			new HashMap<String, Object>(statement.whitelist.length);
+		Map<String, Object> whitelistMap = new HashMap<String, Object>(
+			whitelist.length);
 
-		for (int i = 0; i < statement.whitelist.length; i++) {
-			String key = statement.whitelist[i];
-
+		for (String key : whitelist) {
 			Object value = map.get(key);
 
-			whitelistedMap.put(key, value);
+			whitelistMap.put(key, value);
 		}
 
-		return whitelistedMap;
+		return whitelistMap;
 	}
 
-	@SuppressWarnings("unchecked")
 	private Statement _parseStatement(
-		String assignment, Map<String, Object> value) {
+		String assignment, Map<String, Object> parameterMap) {
 
 		Statement statement = new Statement();
 
-		statements.add(statement);
+		_statements.add(statement);
 
-		// name and method
+		int x = assignment.indexOf(StringPool.EQUAL);
 
-		int index = assignment.indexOf(StringPool.EQUAL);
-
-		if (index == -1) {
-			statement.method = assignment.trim();
+		if (x == -1) {
+			statement.setMethod(assignment.trim());
 		}
 		else {
-			String name = assignment.substring(0, index).trim();
+			String name = assignment.substring(0, x).trim();
 
-			int bracketIndex = name.indexOf(StringPool.OPEN_BRACKET);
+			int y = name.indexOf(StringPool.OPEN_BRACKET);
 
-			if (bracketIndex != -1) {
-				String whiteSpaceList = name.substring(
-					bracketIndex + 1, name.length() - 1);
+			if (y != -1) {
+				String whitelistString = name.substring(
+					y + 1, name.length() - 1);
 
-				statement.whitelist = StringUtil.split(whiteSpaceList);
+				statement.setWhitelist(StringUtil.split(whitelistString));
 
-				name = name.substring(0, bracketIndex);
+				name = name.substring(0, y);
 			}
 
-			statement.name = name;
+			statement.setName(name);
 
-			statement.method = assignment.substring(index + 1).trim();
+			statement.setMethod(assignment.substring(x + 1).trim());
 		}
 
-		statement.parameters = value;
+		statement.setParameterMap(parameterMap);
 
-		// variables
+		Set<String> keySet = parameterMap.keySet();
 
-		Iterator<String> iterator = statement.parameters.keySet().iterator();
+		Iterator<String> iterator = keySet.iterator();
 
 		while (iterator.hasNext()) {
 			String key = iterator.next();
 
-			if (key.startsWith(StringPool.DOLLAR)) {	// variable
-				Map<String, Object> innerMap =
-					(Map<String, Object>)statement.parameters.get(key);
+			if (key.startsWith(StringPool.AT)) {
+				String value = (String)parameterMap.get(key);
 
 				iterator.remove();
 
-				if (statement.variables == null) {
-					statement.variables = new ArrayList<Statement>();
+				List<Flag> flags = statement.getFlags();
+
+				if (flags == null) {
+					flags = new ArrayList<Flag>();
+
+					statement.setFlags(flags);
 				}
 
-				Statement variableStatement = _parseStatement(key, innerMap);
-
-				statement.variables.add(variableStatement);
-
-				continue;
-			}
-
-			if (key.startsWith(StringPool.AT)) {		// flag
-				String innerValue = (String)statement.parameters.get(key);
-
-				iterator.remove();
-
-				KeyValue<String, String> flag = new KeyValue<String, String>();
+				Flag flag = new Flag();
 
 				flag.setKey(key.substring(1));
-				flag.setValue(innerValue);
+				flag.setValue(value);
 
-				if (statement.flags == null) {
-					statement.flags = new ArrayList<KeyValue<String, String>>();
+				flags.add(flag);
+			}
+			else if (key.startsWith(StringPool.DOLLAR)) {
+				Map<String, Object> map = (Map<String, Object>)parameterMap.get(
+					key);
+
+				iterator.remove();
+
+				List<Statement> variableStatements =
+					statement.getVariableStatements();
+
+				if (variableStatements == null) {
+					variableStatements = new ArrayList<Statement>();
+
+					statement.setVariableStatements(variableStatements);
 				}
 
-				statement.flags.add(flag);
+				Statement variableStatement = _parseStatement(key, map);
 
-				continue;
+				variableStatements.add(variableStatement);
 			}
 		}
 
@@ -262,47 +271,98 @@ public class JSONWebServiceInvokerAction implements JSONWebServiceAction {
 			return;
 		}
 
-		name += StringPool.PERIOD;
+		name = name.concat(StringPool.PERIOD);
 
-		int nameLength = name.length();
+		for (Statement statement : _statements) {
+			List<Flag> flags = statement.getFlags();
 
-		for (Statement statement : statements) {
-			List<KeyValue<String, String>> statementFlags = statement.flags;
-
-			if (statementFlags == null) {
+			if (flags == null) {
 				continue;
 			}
 
-			for (KeyValue<String, String> flag : statementFlags) {
-				String flagReference = flag.getValue();
+			for (Flag flag : flags) {
+				String value = flag.getValue();
 
-				if (flagReference == null) {
+				if ((value == null) || !value.startsWith(name)) {
 					continue;
 				}
 
-				if (flagReference.startsWith(name)) {
-					Object flagValue = BeanUtil.getDeclaredProperty(
-						object, flagReference.substring(nameLength));
+				Map<String, Object> parameterMap = statement.getParameterMap();
 
-					statement.parameters.put(flag.getKey(), flagValue);
+				Object propertyValue = BeanUtil.getDeclaredProperty(
+					object, value.substring(name.length()));
 
-					flag.setValue(null);
-				}
+				parameterMap.put(flag.getKey(), propertyValue);
+
+				flag.setValue(null);
 			}
 		}
 	}
 
-	static class Statement {
-		List<KeyValue<String, String>> flags;
-		String method;
-		String name;
-		Map<String, Object> parameters;
-		List<Statement> variables;
-		String[] whitelist;
-	}
-
 	private String _command;
 	private HttpServletRequest _request;
-	private List<Statement> statements = new ArrayList<Statement>();
+	private List<Statement> _statements = new ArrayList<Statement>();
+
+	private class Flag extends KeyValue<String, String> {
+	}
+
+	private class Statement {
+
+		public List<Flag> getFlags() {
+			return _flags;
+		}
+
+		public String getMethod() {
+			return _method;
+		}
+
+		public String getName() {
+			return _name;
+		}
+
+		public Map<String, Object> getParameterMap() {
+			return _parameterMap;
+		}
+
+		public List<Statement> getVariableStatements() {
+			return _variableStatements;
+		}
+
+		public String[] getWhitelist() {
+			return _whitelist;
+		}
+
+		public void setFlags(List<Flag> flags) {
+			_flags = flags;
+		}
+
+		public void setMethod(String method) {
+			_method = method;
+		}
+
+		public void setName(String name) {
+			_name = name;
+		}
+
+		public void setParameterMap(Map<String, Object> parameterMap) {
+			_parameterMap = parameterMap;
+		}
+
+		public void setVariableStatements(List<Statement> variableStatements) {
+			_variableStatements = variableStatements;
+		}
+
+		public void setWhitelist(String[] whitelist) {
+			_whitelist = whitelist;
+		}
+
+		private List<Flag> _flags;
+		private String _method;
+		private String _name;
+		private Map<String, Object> _parameterMap;
+		private List<Statement> _variableStatements;
+		private String[] _whitelist;
+
+	}
 
 }

@@ -48,29 +48,35 @@ public class JSONWebServiceActionsManagerImpl
 	public JSONWebServiceAction getJSONWebServiceAction(
 		HttpServletRequest request) {
 
-		String path = GetterUtil.getString(request.getPathInfo());
+		HttpSession session = request.getSession();
 
+		ServletContext servletContext = session.getServletContext();
+
+		String servletContextPath = ContextPathUtil.getContextPath(
+			servletContext);
+
+		String path = GetterUtil.getString(request.getPathInfo());
 		String method = GetterUtil.getString(request.getMethod());
 
-		String pathParameters = null;
+		String parameterPath = null;
 
-		JSONRPCRequest jsonRpcRequest = null;
+		JSONRPCRequest jsonRPCRequest = null;
 
-		int pathParametersIndex = _getPathParametersIndex(path);
+		int parameterPathIndex = _getParameterPathIndex(path);
 
-		if (pathParametersIndex != -1) {
-			pathParameters = path.substring(pathParametersIndex);
+		if (parameterPathIndex != -1) {
+			parameterPath = path.substring(parameterPathIndex);
 
-			path = path.substring(0, pathParametersIndex);
+			path = path.substring(0, parameterPathIndex);
 		}
 		else {
 			if (method.equals(HttpMethods.POST) &&
 				!PortalUtil.isMultipartRequest(request)) {
 
-				jsonRpcRequest = JSONRPCRequest.detectJSONRPCRequest(request);
+				jsonRPCRequest = JSONRPCRequest.detectJSONRPCRequest(request);
 
-				if (jsonRpcRequest != null) {
-					path += StringPool.SLASH + jsonRpcRequest.getMethod();
+				if (jsonRPCRequest != null) {
+					path += StringPool.SLASH + jsonRPCRequest.getMethod();
 
 					method = null;
 				}
@@ -81,21 +87,12 @@ public class JSONWebServiceActionsManagerImpl
 			new JSONWebServiceActionParameters();
 
 		jsonWebServiceActionParameters.collectAll(
-			request, pathParameters, jsonRpcRequest, null);
-
-		String[] parameterNames =
-			jsonWebServiceActionParameters.getParameterNames();
-
-		HttpSession session = request.getSession();
-
-		ServletContext servletContext = session.getServletContext();
-
-		String servletContextPath = ContextPathUtil.getContextPath(
-			servletContext);
+			request, parameterPath, jsonRPCRequest, null);
 
 		int jsonWebServiceActionConfigIndex =
 			_getJSONWebServiceActionConfigIndex(
-				servletContextPath, path, method, parameterNames);
+				servletContextPath, path, method,
+				jsonWebServiceActionParameters.getParameterNames());
 
 		if (jsonWebServiceActionConfigIndex == -1) {
 			throw new RuntimeException(
@@ -111,14 +108,14 @@ public class JSONWebServiceActionsManagerImpl
 	}
 
 	public JSONWebServiceAction getJSONWebServiceAction(
-			HttpServletRequest request, String path, String method,
-			Map<String, Object> parameters) {
+		HttpServletRequest request, String path, String method,
+		Map<String, Object> parameterMap) {
 
 		JSONWebServiceActionParameters jsonWebServiceActionParameters =
 			new JSONWebServiceActionParameters();
 
 		jsonWebServiceActionParameters.collectAll(
-			request, null, null, parameters);
+			request, null, null, parameterMap);
 
 		String[] parameterNames =
 			jsonWebServiceActionParameters.getParameterNames();
@@ -311,7 +308,7 @@ public class JSONWebServiceActionsManagerImpl
 		return index;
 	}
 
-	private int _getPathParametersIndex(String path) {
+	private int _getParameterPathIndex(String path) {
 		int index = path.indexOf(CharPool.SLASH, 1);
 
 		if (index != -1) {
