@@ -21,7 +21,6 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 
 import com.yahoo.platform.yui.compressor.CssCompressor;
 import com.yahoo.platform.yui.compressor.JavaScriptCompressor;
-
 import com.yahoo.platform.yui.mozilla.javascript.ErrorReporter;
 import com.yahoo.platform.yui.mozilla.javascript.EvaluatorException;
 
