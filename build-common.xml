@@ -518,37 +518,37 @@ Please set the environment variable ANT_OPTS to the recommended value of
 	</target>
 
 	<target name="test-cmd">
-		<junit dir="${project.dir}" fork="on" forkmode="perTest" haltonfailure="${junit.halt.on.failure}" outputtoformatters="false" printsummary="on" showoutput="true">
-			<sysproperty key="net.sourceforge.cobertura.datafile" file="test-coverage/cobertura.ser" />
-			<jvmarg line="${junit.debug.jpda}" />
-			<jvmarg value="-Xmx1024m" />
-			<jvmarg value="-XX:MaxPermSize=256m" />
-			<jvmarg value="-Duser.timezone=GMT" />
-			<jvmarg value="-Dexternal-properties=${test.properties}" />
-			<classpath location="test-coverage" />
-			<classpath refid="test.classpath" />
-			<formatter type="brief" usefile="false" />
-			<formatter type="xml" />
-			<batchtest todir="test-results/${test.type}">
-				<fileset dir="test-classes/${test.type}" includes="**/${class}.class">
-					<exclude name="**/ServiceHttpTestSuite.class" />
-					<exclude name="**/ServiceSoapTestSuite.class" />
-				</fileset>
-			</batchtest>
-		</junit>
+		<if>
+			<available file="test/${test.type}" type="dir" />
+			<then>
+				<junit dir="${project.dir}" fork="on" forkmode="perTest" haltonfailure="${junit.halt.on.failure}" outputtoformatters="false" printsummary="on" showoutput="true">
+					<sysproperty key="net.sourceforge.cobertura.datafile" file="test-coverage/cobertura.ser" />
+					<jvmarg line="${junit.debug.jpda}" />
+					<jvmarg value="-Xmx1024m" />
+					<jvmarg value="-XX:MaxPermSize=256m" />
+					<jvmarg value="-Duser.timezone=GMT" />
+					<jvmarg value="-Dexternal-properties=${test.properties}" />
+					<classpath location="test-coverage" />
+					<classpath refid="test.classpath" />
+					<formatter type="brief" usefile="false" />
+					<formatter type="xml" />
+					<batchtest todir="test-results/${test.type}">
+						<fileset dir="test-classes/${test.type}" includes="**/${class}.class">
+							<exclude name="**/ServiceHttpTestSuite.class" />
+							<exclude name="**/ServiceSoapTestSuite.class" />
+						</fileset>
+					</batchtest>
+				</junit>
+			</then>
+		</if>
 	</target>
 
 	<target name="test-integration" depends="compile,instrument-test-coverage,compile-test-integration">
 		<property name="class" value="*TestSuite" />
 
-		<if>
-			<available file="test-classes/integration" type="dir" />
-			<then>
-				<ant target="test-cmd">
-					<property name="test.type" value="integration" />
-				</ant>
-			</then>
-		</if>
+		<ant target="test-cmd">
+			<property name="test.type" value="integration" />
+		</ant>
 
 		<antcall target="report-test-coverage" />
 	</target>
@@ -556,14 +556,9 @@ Please set the environment variable ANT_OPTS to the recommended value of
 	<target name="test-unit" depends="compile,instrument-test-coverage,compile-test-unit">
 		<property name="class" value="*Test" />
 
-		<if>
-			<available file="test-classes/unit" type="dir" />
-			<then>
-				<ant target="test-cmd">
-					<property name="test.type" value="unit" />
-				</ant>
-			</then>
-		</if>
+		<ant target="test-cmd">
+			<property name="test.type" value="unit" />
+		</ant>
 
 		<antcall target="report-test-coverage" />
 	</target>
