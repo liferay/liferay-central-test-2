@@ -2656,7 +2656,10 @@ executable ZIP file.
 
 				<mkdir dir="${selenium.output.dir}" />
 
-				<unzip src="${selenium.output.zip}" dest="${selenium.output.dir}" />
+				<unzip
+					dest="${selenium.output.dir}"
+					src="${selenium.output.zip}"
+				/>
 			</then>
 		</if>
 
