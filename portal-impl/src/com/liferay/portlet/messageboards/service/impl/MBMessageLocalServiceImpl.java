@@ -1373,7 +1373,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		if ((serviceContext.getWorkflowAction() ==
 				WorkflowConstants.ACTION_SAVE_DRAFT)) {
 
-			if (message.isPending() || message.isDraft()) {
+			if (message.isDraft() || message.isPending()) {
 			}
 			else if (message.isApproved()) {
 				message.setStatus(WorkflowConstants.STATUS_DRAFT_FROM_APPROVED);
