@@ -154,7 +154,7 @@ AUI.add(
 				dialog.render();
 			}
 			else {
-				if(!dialog.get('visible')) {
+				if (!dialog.get('visible')) {
 					dialog.show();
 
 					dialog.iframe.set('uri', uri);
