@@ -35,10 +35,10 @@ public class JSONWebServiceActionsManagerUtil {
 
 	public static JSONWebServiceAction getJSONWebServiceAction(
 		HttpServletRequest request, String path, String method,
-		Map<String, Object> parameters) {
+		Map<String, Object> parameterMap) {
 
 		return getJSONWebServiceActionsManager().getJSONWebServiceAction(
-			request, path, method, parameters);
+			request, path, method, parameterMap);
 	}
 
 	public static JSONWebServiceActionMapping getJSONWebServiceActionMapping(
