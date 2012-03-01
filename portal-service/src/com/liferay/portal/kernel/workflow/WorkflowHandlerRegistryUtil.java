@@ -101,6 +101,7 @@ public class WorkflowHandlerRegistryUtil {
 
 		if (WorkflowThreadLocal.isEnabled() &&
 			WorkflowEngineManagerUtil.isDeployed()) {
+
 			try {
 				workflowDefinitionLink =
 					workflowHandler.getWorkflowDefinitionLink(
@@ -138,8 +139,7 @@ public class WorkflowHandlerRegistryUtil {
 
 		if (workflowDefinitionLink != null) {
 			workflowHandler.startWorkflowInstance(
-				companyId, groupId, userId, classPK, model,
-				workflowContext);
+				companyId, groupId, userId, classPK, model, workflowContext);
 		}
 	}
 
