@@ -16,14 +16,6 @@
 
 <%@ include file="/html/portal/api/jsonws/init.jsp" %>
 
-<%
-String contextPath = request.getParameter("contextPath");
-
-if (contextPath == null) {
-	contextPath = ContextPathUtil.getContextPath(application);
-}
-%>
-
 <style>
 	<%@ include file="/html/portal/api/jsonws/css.jspf" %>
 </style>
