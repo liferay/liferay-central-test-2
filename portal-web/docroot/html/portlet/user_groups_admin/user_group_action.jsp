@@ -92,10 +92,10 @@ UserGroup userGroup = (UserGroup)row.getObject();
 	</c:if>
 
 	<%
-	boolean showViewButton = GroupPermissionUtil.contains(permissionChecker, userGroupGroup.getGroupId(), ActionKeys.VIEW);
+	boolean hasViewPermission = GroupPermissionUtil.contains(permissionChecker, userGroupGroup.getGroupId(), ActionKeys.VIEW);
 	%>
 
-	<c:if test="<%= (userGroupGroup.getPublicLayoutsPageCount() > 0) && showViewButton %>">
+	<c:if test="<%= hasViewPermission && (userGroupGroup.getPublicLayoutsPageCount() > 0) %>">
 		<portlet:actionURL var="viewPublicPagesURL">
 			<portlet:param name="struts_action" value="/sites_admin/page" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
@@ -111,7 +111,7 @@ UserGroup userGroup = (UserGroup)row.getObject();
 		/>
 	</c:if>
 
-	<c:if test="<%= (userGroupGroup.getPrivateLayoutsPageCount() > 0) && showViewButton %>">
+	<c:if test="<%= hasViewPermission && (userGroupGroup.getPrivateLayoutsPageCount() > 0) %>">
 		<portlet:actionURL var="viewPrivatePagesURL">
 			<portlet:param name="struts_action" value="/sites_admin/page" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />

@@ -35,8 +35,8 @@ for (String portletId : PropsValues.DOCKBAR_ADD_PORTLETS) {
 	}
 }
 
-boolean hasLayoutUpdatePermission = LayoutPermissionUtil.contains(permissionChecker, layout, ActionKeys.UPDATE);
 boolean hasLayoutCustomizePermission = LayoutPermissionUtil.contains(permissionChecker, layout, ActionKeys.CUSTOMIZE);
+boolean hasLayoutUpdatePermission = LayoutPermissionUtil.contains(permissionChecker, layout, ActionKeys.UPDATE);
 %>
 
 <div class="dockbar" data-namespace="<portlet:namespace />" id="dockbar">
