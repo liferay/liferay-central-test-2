@@ -273,9 +273,6 @@ public class RSSAction extends PortletAction {
 			preferences.getValue("anyAssetType", Boolean.TRUE.toString()));
 		String assetLinkBehavior = preferences.getValue(
 			"assetLinkBehavior", "showFullContent");
-		boolean excludeZeroViewCount = GetterUtil.getBoolean(
-			preferences.getValue("excludeZeroViewCount", "0"));
-
 		String orderByColumn1 = GetterUtil.getString(
 			preferences.getValue("orderByColumn1", "modifiedDate"));
 		String orderByColumn2 = GetterUtil.getString(
@@ -284,6 +281,8 @@ public class RSSAction extends PortletAction {
 			preferences.getValue("orderByType1", "DESC"));
 		String orderByType2 = GetterUtil.getString(
 			preferences.getValue("orderByType2", "ASC"));
+		boolean excludeZeroViewCount = GetterUtil.getBoolean(
+			preferences.getValue("excludeZeroViewCount", "0"));
 
 		int rssDelta = GetterUtil.getInteger(
 			preferences.getValue("rssDelta", "20"));
