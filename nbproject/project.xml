@@ -39,12 +39,12 @@
                     <location>portal-service/src</location>
                     <encoding>UTF-8</encoding>
                 </source-folder>
-                <source-folder>
+                <!--<source-folder>
                     <label>portal-service\test\integration</label>
                     <type>java</type>
                     <location>portal-service/test/integration</location>
                     <encoding>UTF-8</encoding>
-                </source-folder>
+                </source-folder>-->
                 <source-folder>
                     <label>portal-service\test\unit</label>
                     <type>java</type>
@@ -139,10 +139,10 @@
                         <label>portal-service\src</label>
                         <location>portal-service/src</location>
                     </source-folder>
-                    <source-folder style="packages">
+                    <!--<source-folder style="packages">
                         <label>portal-service\test\integration</label>
                         <location>portal-service/test/integration</location>
-                    </source-folder>
+                    </source-folder>-->
                     <source-folder style="packages">
                         <label>portal-service\test\unit</label>
                         <location>portal-service/test/unit</location>
@@ -198,7 +198,7 @@
                 <package-root>portal-impl/test/integration</package-root>
                 <package-root>portal-impl/test/unit</package-root>
                 <package-root>portal-service/src</package-root>
-                <package-root>portal-service/test/integration</package-root>
+                <!--<package-root>portal-service/test/integration</package-root>-->
                 <package-root>portal-service/test/unit</package-root>
                 <package-root>portal-web/test</package-root>
                 <package-root>support-tomcat/src</package-root>
