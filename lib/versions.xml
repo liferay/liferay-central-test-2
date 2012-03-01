@@ -340,6 +340,17 @@
 		</licenses>
 	</library>
 	<library>
+		<file-name>development/jarjar.jar</file-name>
+		<version>1.2</version>
+		<project-name>Jar Jar Links</project-name>
+		<project-url>http://code.google.com/p/jarjar</project-url>
+		<licenses>
+			<license>
+				<license-name>Apache License 2.0</license-name>
+			</license>
+		</licenses>
+	</library>
+	<library>
 		<file-name>development/jaxb-api.jar</file-name>
 		<version>2.1.9</version>
 		<project-name>Java Architecture for XML Binding</project-name>
@@ -2667,7 +2678,7 @@
 			</license>
 		</licenses>
 		<comments>
-			See LPS-3169
+			See LPS-3169 and LPS-25836.
 		</comments>
 	</library>
 	<library>
