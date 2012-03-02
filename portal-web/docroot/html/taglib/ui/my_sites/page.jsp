@@ -92,13 +92,17 @@ List<Group> mySites = user.getMySites(true, max);
 
 			boolean showPublicSite = true;
 
-			boolean hasPowerUserRole = RoleLocalServiceUtil.hasUserRole(user.getUserId(), user.getCompanyId(), RoleConstants.POWER_USER, true);
-
 			Layout defaultLayout = null;
-			boolean hasViewPermission = false;
 
 			if (mySite.getDefaultPublicPlid() > 0) {
 				defaultLayout = LayoutLocalServiceUtil.getLayout(mySite.getDefaultPublicPlid());
+			}
+
+			boolean hasPowerUserRole = RoleLocalServiceUtil.hasUserRole(user.getUserId(), user.getCompanyId(), RoleConstants.POWER_USER, true);
+
+			boolean hasViewPermission = false;
+
+			if (defaultLayout != null) {
 				hasViewPermission = LayoutPermissionUtil.contains(permissionChecker, defaultLayout, true, ActionKeys.VIEW);
 			}
 
