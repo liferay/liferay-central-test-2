@@ -28,7 +28,8 @@ public class BooleanClauseFactoryUtil {
 	public static BooleanClause create(
 		SearchContext searchContext, String field, String value, String occur) {
 
-		return getBooleanClauseFactory(searchContext).create(field, value, occur);
+		return getBooleanClauseFactory(searchContext).create(
+			field, value, occur);
 	}
 
 	public static BooleanClauseFactory getBooleanClauseFactory(

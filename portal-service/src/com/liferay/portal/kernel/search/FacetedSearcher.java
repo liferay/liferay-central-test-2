@@ -165,10 +165,13 @@ public class FacetedSearcher extends BaseIndexer {
 		for (String entryClassName : searchContext.getEntryClassNames()) {
 			Indexer indexer = IndexerRegistryUtil.getIndexer(entryClassName);
 
-			if ((indexer == null) ||
-				(!searchContext.getSearchEngineId().equals(
-					indexer.getSearchEngineId()))) {
+			if (indexer == null) {
+				continue;
+			}
 
+			String searchEngineId = searchContext.getSearchEngineId();
+
+			if (!searchEngineId.equals(indexer.getSearchEngineId())) {
 				continue;
 			}
 
@@ -220,10 +223,13 @@ public class FacetedSearcher extends BaseIndexer {
 		for (String entryClassName : searchContext.getEntryClassNames()) {
 			Indexer indexer = IndexerRegistryUtil.getIndexer(entryClassName);
 
-			if ((indexer == null) ||
-				(!searchContext.getSearchEngineId().equals(
-					indexer.getSearchEngineId()))) {
+			if (indexer == null) {
+				continue;
+			}
 
+			String searchEngineId = searchContext.getSearchEngineId();
+
+			if (!searchEngineId.equals(indexer.getSearchEngineId())) {
 				continue;
 			}
 

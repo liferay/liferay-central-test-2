@@ -47,7 +47,6 @@ import com.liferay.portlet.documentlibrary.FileNameException;
 import com.liferay.portlet.documentlibrary.FileSizeException;
 import com.liferay.portlet.documentlibrary.SourceFileNameException;
 import com.liferay.portlet.documentlibrary.antivirus.AntivirusScannerUtil;
-import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileEntryConstants;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.service.permission.DLFolderPermission;
@@ -306,19 +305,21 @@ public class DLStoreImpl implements DLStore {
 		throws SystemException {
 
 		try {
-			Indexer indexer = IndexerRegistryUtil.getIndexer(
-				DLFileEntryConstants.getClassName());
-
 			SearchContext searchContext = new SearchContext();
 
 			searchContext.setCompanyId(companyId);
-			searchContext.setGroupIds(new long[] {groupId});
-			searchContext.setUserId(userId);
-			searchContext.setEntryClassNames(
-				new String[] {DLFileEntry.class.getName()});
-			searchContext.setSearchEngineId(indexer.getSearchEngineId());
-			searchContext.setStart(start);
 			searchContext.setEnd(end);
+			searchContext.setEntryClassNames(
+				new String[] {DLFileEntryConstants.getClassName()});
+			searchContext.setGroupIds(new long[] {groupId});
+
+			Indexer indexer = IndexerRegistryUtil.getIndexer(
+				DLFileEntryConstants.getClassName());
+
+			searchContext.setSearchEngineId(indexer.getSearchEngineId());
+
+			searchContext.setStart(start);
+			searchContext.setUserId(userId);
 
 			BooleanQuery contextQuery = BooleanQueryFactoryUtil.create(
 				searchContext);

@@ -67,13 +67,13 @@
 	<!-- Generic search engine -->
 
 	<bean id="com.liferay.portal.search.generic.GenericSearchEngineImpl" class="com.liferay.portal.kernel.search.BaseSearchEngine">
-		<property name="luceneBased" value="false" />
 		<property name="booleanClauseFactory" >
 			<bean class="com.liferay.portal.search.generic.BooleanClauseFactoryImpl" />
 		</property>
 		<property name="booleanQueryFactory" >
 			<bean class="com.liferay.portal.search.generic.BooleanQueryFactoryImpl" />
 		</property>
+		<property name="luceneBased" value="false" />
 		<property name="termQueryFactory">
 			<bean class="com.liferay.portal.search.generic.TermQueryFactoryImpl" />
 		</property>
@@ -87,6 +87,12 @@
 	<bean id="com.liferay.portal.search.lucene.LuceneIndexSearcherImpl" class="com.liferay.portal.search.lucene.LuceneIndexSearcherImpl" />
 	<bean id="com.liferay.portal.search.lucene.LuceneIndexWriterImpl" class="com.liferay.portal.search.lucene.LuceneIndexWriterImpl" />
 	<bean id="com.liferay.portal.search.lucene.LuceneSearchEngineImpl" class="com.liferay.portal.kernel.search.BaseSearchEngine">
+		<property name="booleanClauseFactory" >
+			<bean class="com.liferay.portal.search.generic.BooleanClauseFactoryImpl" />
+		</property>
+		<property name="booleanQueryFactory" >
+			<bean class="com.liferay.portal.search.lucene.BooleanQueryFactoryImpl" />
+		</property>
 		<property name="clusteredWrite" value="true" />
 		<property name="clusteredWritePriority">
 			<util:constant static-field="com.liferay.portal.kernel.cluster.Priority.LEVEL5" />
@@ -94,19 +100,13 @@
 		<property name="indexSearcher" ref="com.liferay.portal.search.lucene.LuceneIndexSearcherImpl" />
 		<property name="indexWriter" ref="com.liferay.portal.search.lucene.LuceneIndexWriterImpl" />
 		<property name="luceneBased" value="true" />
-		<property name="vendor" value="Lucene" />
-		<property name="booleanClauseFactory" >
-			<bean class="com.liferay.portal.search.generic.BooleanClauseFactoryImpl" />
-		</property>
-		<property name="booleanQueryFactory" >
-			<bean class="com.liferay.portal.search.lucene.BooleanQueryFactoryImpl" />
-		</property>
 		<property name="termQueryFactory">
 			<bean class="com.liferay.portal.search.lucene.TermQueryFactoryImpl" />
 		</property>
 		<property name="termRangeQueryFactory">
 			<bean class="com.liferay.portal.search.lucene.TermRangeQueryFactoryImpl" />
 		</property>
+		<property name="vendor" value="Lucene" />
 	</bean>
 	<bean id="com.liferay.portal.search.lucene.LuceneHelperImpl" class="com.liferay.portal.search.lucene.LuceneHelperImpl">
 		<property name="analyzer" ref="com.liferay.portal.search.lucene.PerFieldAnalyzerWrapper" />
