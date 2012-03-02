@@ -1654,6 +1654,7 @@ public class ProcessExecutorTest extends TestCase {
 			OutputStream outputStream = socket.getOutputStream();
 
 			outputStream.write(_CODE_EXIT);
+
 			socket.shutdownOutput();
 
 			int code = inputStream.read();
@@ -1670,6 +1671,7 @@ public class ProcessExecutorTest extends TestCase {
 			OutputStream outputStream = socket.getOutputStream();
 
 			outputStream.write(_CODE_INTERRUPT);
+
 			socket.shutdownOutput();
 
 			int code = inputStream.read();
