@@ -48,7 +48,7 @@ import java.util.List;
  */
 public class VerifyDocumentLibrary extends VerifyProcess {
 
-	protected void addFileVersion(DLFileEntry dlFileEntry)
+	protected void addDLFileVersion(DLFileEntry dlFileEntry)
 		throws SystemException {
 
 		long fileVersionId = CounterLocalServiceUtil.increment();
@@ -72,8 +72,6 @@ public class VerifyDocumentLibrary extends VerifyProcess {
 
 		dlFileVersion.setUserName(versionUserName);
 
-		Date now = new Date();
-
 		dlFileVersion.setCreateDate(dlFileEntry.getModifiedDate());
 		dlFileVersion.setModifiedDate(dlFileEntry.getModifiedDate());
 		dlFileVersion.setRepositoryId(dlFileEntry.getRepositoryId());
@@ -90,12 +88,12 @@ public class VerifyDocumentLibrary extends VerifyProcess {
 		dlFileVersion.setStatus(WorkflowConstants.STATUS_APPROVED);
 		dlFileVersion.setStatusByUserId(versionUserId);
 		dlFileVersion.setStatusByUserName(versionUserName);
-		dlFileVersion.setStatusDate(now);
+		dlFileVersion.setStatusDate(new Date());
 
 		DLFileVersionLocalServiceUtil.updateDLFileVersion(dlFileVersion);
 	}
 
-	protected void checkFileEntryType() throws Exception {
+	protected void checkDLFileEntryType() throws Exception {
 		DLFileEntryType dlFileEntryType =
 			DLFileEntryTypeLocalServiceUtil.fetchDLFileEntryType(
 				DLFileEntryTypeConstants.FILE_ENTRY_TYPE_ID_BASIC_DOCUMENT);
@@ -116,7 +114,7 @@ public class VerifyDocumentLibrary extends VerifyProcess {
 		DLFileEntryTypeLocalServiceUtil.updateDLFileEntryType(dlFileEntryType);
 	}
 
-	protected void checkMisversionedFileEntries() throws Exception {
+	protected void checkMisversionedDLFileEntries() throws Exception {
 		List<DLFileEntry> dlFileEntries =
 			DLFileEntryLocalServiceUtil.getMisversionedFileEntries();
 
@@ -127,9 +125,9 @@ public class VerifyDocumentLibrary extends VerifyProcess {
 		}
 
 		for (DLFileEntry dlFileEntry : dlFileEntries) {
-			copyFile(dlFileEntry);
+			copyDLFileEntry(dlFileEntry);
 
-			addFileVersion(dlFileEntry);
+			addDLFileVersion(dlFileEntry);
 		}
 
 		if (_log.isDebugEnabled()) {
@@ -137,7 +135,7 @@ public class VerifyDocumentLibrary extends VerifyProcess {
 		}
 	}
 
-	protected void copyFile(DLFileEntry dlFileEntry)
+	protected void copyDLFileEntry(DLFileEntry dlFileEntry)
 		throws PortalException, SystemException {
 
 		long companyId = dlFileEntry.getCompanyId();
@@ -179,13 +177,13 @@ public class VerifyDocumentLibrary extends VerifyProcess {
 
 	@Override
 	protected void doVerify() throws Exception {
-		checkFileEntryType();
-		checkMisversionedFileEntries();
-		removeOrphanedFileEntries();
+		checkDLFileEntryType();
+		checkMisversionedDLFileEntries();
+		removeOrphanedDLFileEntries();
 		updateAssets();
 	}
 
-	protected void removeOrphanedFileEntries() throws Exception {
+	protected void removeOrphanedDLFileEntries() throws Exception {
 		List<DLFileEntry> dlFileEntries =
 			DLFileEntryLocalServiceUtil.getOrphanedFileEntries();
 

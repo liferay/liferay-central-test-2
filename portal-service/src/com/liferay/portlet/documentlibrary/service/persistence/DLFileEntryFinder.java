@@ -46,7 +46,7 @@ public interface DLFileEntryFinder {
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> findByMisversionedFileEntries()
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> findByMisversioned()
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> findByNoAssets()

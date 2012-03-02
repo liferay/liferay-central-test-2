@@ -773,7 +773,7 @@ public class DLFileEntryLocalServiceImpl
 	public List<DLFileEntry> getMisversionedFileEntries()
 		throws SystemException {
 
-		return dlFileEntryFinder.findByMisversionedFileEntries();
+		return dlFileEntryFinder.findByMisversioned();
 	}
 
 	public List<DLFileEntry> getNoAssetFileEntries() throws SystemException {

@@ -64,8 +64,8 @@ public class DLFileEntryFinderImpl
 	public static final String FIND_BY_EXTRA_SETTINGS =
 		DLFileEntryFinder.class.getName() + ".findByExtraSettings";
 
-	public static final String FIND_BY_MISVERSIONED_FILE_ENTRIES =
-		DLFileEntryFinder.class.getName() + ".findByMisversionedFileEntries";
+	public static final String FIND_BY_MISVERSIONED =
+		DLFileEntryFinder.class.getName() + ".findByMisversioned";
 
 	public static final String FIND_BY_NO_ASSETS =
 		DLFileEntryFinder.class.getName() + ".findByNoAssets";
@@ -294,15 +294,13 @@ public class DLFileEntryFinderImpl
 		}
 	}
 
-	public List<DLFileEntry> findByMisversionedFileEntries()
-		throws SystemException {
-
+	public List<DLFileEntry> findByMisversioned() throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			String sql = CustomSQLUtil.get(FIND_BY_MISVERSIONED_FILE_ENTRIES);
+			String sql = CustomSQLUtil.get(FIND_BY_MISVERSIONED);
 
 			SQLQuery q = session.createSQLQuery(sql);
 

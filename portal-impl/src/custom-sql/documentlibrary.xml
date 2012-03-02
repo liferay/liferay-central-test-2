@@ -78,7 +78,7 @@
 				(DLFileEntry.custom2ImageId = ?)
 		]]>
 	</sql>
-	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder.findByMisversionedFileEntries">
+	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder.findByMisversioned">
 		<![CDATA[
 			SELECT
 				{DLFileEntry.*}
