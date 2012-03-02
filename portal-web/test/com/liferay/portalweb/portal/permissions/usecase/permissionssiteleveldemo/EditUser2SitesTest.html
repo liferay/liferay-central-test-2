@@ -13,6 +13,25 @@
 	<td>/web/guest/home/</td>
 	<td></td>
 </tr>
+	<td>waitForVisible</td>
+	<td>//div[@id='dockbar']</td>
+	<td>Dock Bar</td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>//div[@id='dockbar']</td>
+	<td>Dock Bar</td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>//li[@id='_145_mySites']/a/span</td>
+	<td>Go To</td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>//li[@id='_145_mySites']/a/span</td>
+	<td>Go To</td>
+</tr>
 <tr>
 	<td>waitForVisible</td>
 	<td>link=Control Panel</td>
@@ -69,44 +88,74 @@
 	<td>Edit</td>
 </tr>
 <tr>
-	<td>waitForVisible</td>
+	<td>assertPartialText</td>
 	<td>//a[@id='_125_sitesLink']</td>
 	<td>Sites</td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>//a[@id='_125_sitesLink']</td>
+	<td>Sites</td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>//div[4]/span/a/span</td>
+	<td>Select</td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>//div[4]/span/a/span</td>
+	<td>Select</td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>title=Users and Organizations</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>//input[@id='_125_name']</td>
+	<td>Site Name</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//input[@id='_125_name']</td>
+	<td>Site Name</td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>//a[@id='_125_sitesLink']</td>
-	<td>Sites</td>
-</tr>
-<tr>
-	<td>waitForVisible</td>
-	<td>//div[4]/span/a/span</td>
-	<td>Select</td>
-</tr>
-<tr>
-	<td>clickAt</td>
-	<td>//div[4]/span/a/span</td>
-	<td>Select</td>
-</tr>
-<tr>
-	<td>waitForVisible</td>
-	<td>//tr[4]/td/a</td>
-	<td>Site Name</td>
-</tr>
-<tr>
-	<td>clickAt</td>
-	<td>//tr[4]/td/a</td>
-	<td>Site Name</td>
+	<td>//input[@value="Search"]</td>
+	<td>Search</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//table/tr/td</td>
+	<td>//tr[3]/td/a</td>
+	<td>Site Name</td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>//tr[3]/td/a</td>
 	<td>Site Name</td>
 </tr>
 <tr>
 	<td>selectWindow</td>
 	<td>null</td>
 	<td></td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>//table/tr/td</td>
+	<td>Site Name</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//table/tr/td</td>
+	<td>Site Name</td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>

@@ -24,6 +24,27 @@ public class EditUser2SitesTest extends BaseTestCase {
 	public void testEditUser2Sites() throws Exception {
 		selenium.open("/web/guest/home/");
 		loadRequiredJavaScriptModules();
+		selenium.clickAt("//div[@id='dockbar']",
+			RuntimeVariables.replace("Dock Bar"));
+
+		for (int second = 0;; second++) {
+			if (second >= 90) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("//li[@id='_145_mySites']/a/span")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("//li[@id='_145_mySites']/a/span",
+			RuntimeVariables.replace("Go To"));
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -82,27 +103,9 @@ public class EditUser2SitesTest extends BaseTestCase {
 		selenium.clickAt("//ul/li[1]/a", RuntimeVariables.replace("Edit"));
 		selenium.waitForPageToLoad("30000");
 		loadRequiredJavaScriptModules();
-
-		for (int second = 0;; second++) {
-			if (second >= 90) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isVisible("//a[@id='_125_sitesLink']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
+		assertTrue(selenium.isPartialText("//a[@id='_125_sitesLink']", "Sites"));
 		selenium.clickAt("//a[@id='_125_sitesLink']",
 			RuntimeVariables.replace("Sites"));
-		selenium.waitForPageToLoad("30000");
-		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -122,6 +125,8 @@ public class EditUser2SitesTest extends BaseTestCase {
 
 		selenium.clickAt("//div[4]/span/a/span",
 			RuntimeVariables.replace("Select"));
+		Thread.sleep(5000);
+		selenium.selectWindow("title=Users and Organizations");
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -129,7 +134,7 @@ public class EditUser2SitesTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("//tr[4]/td/a")) {
+				if (selenium.isVisible("//input[@id='_125_name']")) {
 					break;
 				}
 			}
@@ -139,10 +144,35 @@ public class EditUser2SitesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//tr[4]/td/a", RuntimeVariables.replace("Site Name"));
+		selenium.type("//input[@id='_125_name']",
+			RuntimeVariables.replace("Site Name"));
+		selenium.clickAt("//input[@value=\"Search\"]",
+			RuntimeVariables.replace("Search"));
+		selenium.waitForPageToLoad("30000");
+		loadRequiredJavaScriptModules();
+		assertEquals(RuntimeVariables.replace("Site Name"),
+			selenium.getText("//tr[3]/td/a"));
+		selenium.clickAt("//tr[3]/td/a", RuntimeVariables.replace("Site Name"));
+		selenium.selectWindow("null");
+
+		for (int second = 0;; second++) {
+			if (second >= 90) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("//table/tr/td")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		assertEquals(RuntimeVariables.replace("Site Name"),
 			selenium.getText("//table/tr/td"));
-		selenium.selectWindow("null");
 		selenium.clickAt("//input[@value='Save']",
 			RuntimeVariables.replace("Save"));
 		selenium.waitForPageToLoad("30000");

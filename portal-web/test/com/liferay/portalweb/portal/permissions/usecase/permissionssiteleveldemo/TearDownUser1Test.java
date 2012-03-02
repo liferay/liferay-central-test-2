@@ -29,6 +29,28 @@ public class TearDownUser1Test extends BaseTestCase {
 			case 1:
 				selenium.open("/web/guest/home/");
 				loadRequiredJavaScriptModules();
+				selenium.clickAt("//div[@id='dockbar']",
+					RuntimeVariables.replace("Dock Bar"));
+
+				for (int second = 0;; second++) {
+					if (second >= 90) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isVisible(
+									"//li[@id='_145_mySites']/a/span")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
+				selenium.clickAt("//li[@id='_145_mySites']/a/span",
+					RuntimeVariables.replace("Go To"));
 
 				for (int second = 0;; second++) {
 					if (second >= 90) {
@@ -65,7 +87,7 @@ public class TearDownUser1Test extends BaseTestCase {
 				}
 
 				selenium.type("//input[@id='_125_keywords']",
-					RuntimeVariables.replace("userfn2"));
+					RuntimeVariables.replace("userfn1"));
 				selenium.clickAt("//input[@value='Search']",
 					RuntimeVariables.replace("Search"));
 				selenium.waitForPageToLoad("30000");
