@@ -393,7 +393,7 @@
 								<c:if test="<%= !passwordUpdated %>">
 									<p>
 										<span class="aui-field-hint">
-											<liferay-ui:message arguments="<%= PropsValues.DEFAULT_ADMIN_PASSWORD %>" key="your-password-is-x.-you-will-be-required-to-change-it-the-next-time-you-log-into-the-portal" />
+											<liferay-ui:message arguments="<%= PropsValues.DEFAULT_ADMIN_PASSWORD %>" key="your-password-is-x.-you-will-be-required-to-change-your-password-the-next-time-you-log-into-the-portal" />
 										</span>
 									</p>
 								</c:if>
