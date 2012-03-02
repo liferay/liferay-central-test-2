@@ -92,18 +92,12 @@ List<Group> mySites = user.getMySites(true, max);
 
 			boolean showPublicSite = true;
 
+			boolean hasPowerUserRole = RoleLocalServiceUtil.hasUserRole(user.getUserId(), user.getCompanyId(), RoleConstants.POWER_USER, true);
+
 			Layout defaultLayout = null;
 
 			if (mySite.getDefaultPublicPlid() > 0) {
 				defaultLayout = LayoutLocalServiceUtil.getLayout(mySite.getDefaultPublicPlid());
-			}
-
-			boolean hasPowerUserRole = RoleLocalServiceUtil.hasUserRole(user.getUserId(), user.getCompanyId(), RoleConstants.POWER_USER, true);
-
-			boolean hasViewPermission = false;
-
-			if (defaultLayout != null) {
-				hasViewPermission = LayoutPermissionUtil.contains(permissionChecker, defaultLayout, true, ActionKeys.VIEW);
 			}
 
 			if (mySite.getPublicLayoutsPageCount() == 0) {
@@ -118,7 +112,7 @@ List<Group> mySites = user.getMySites(true, max);
 					}
 				}
 			}
-			else if ((defaultLayout != null ) && !hasViewPermission) {
+			else if ((defaultLayout != null ) && !LayoutPermissionUtil.contains(permissionChecker, defaultLayout, true, ActionKeys.VIEW)) {
 				showPublicSite = false;
 			}
 
@@ -140,7 +134,7 @@ List<Group> mySites = user.getMySites(true, max);
 					}
 				}
 			}
-			else if ((defaultLayout != null ) && !hasViewPermission) {
+			else if ((defaultLayout != null ) && !LayoutPermissionUtil.contains(permissionChecker, defaultLayout, true, ActionKeys.VIEW)) {
 				showPrivateSite = false;
 			}
 		%>
@@ -219,14 +213,12 @@ List<Group> mySites = user.getMySites(true, max);
 
 									stagingGroupId = stagingGroup.getGroupId();
 
-									if (GroupPermissionUtil.contains(permissionChecker, mySite.getGroupId(), ActionKeys.VIEW_STAGING)) {
-										if ((mySite.getPublicLayoutsPageCount() == 0) && (stagingGroup.getPublicLayoutsPageCount() > 0)) {
-											showPublicSiteStaging = true;
-										}
+									if ((mySite.getPublicLayoutsPageCount() == 0) && (stagingGroup.getPublicLayoutsPageCount() > 0) && GroupPermissionUtil.contains(permissionChecker, mySite.getGroupId(), ActionKeys.VIEW_STAGING)) {
+										showPublicSiteStaging = true;
+									}
 
-										if ((mySite.getPrivateLayoutsPageCount() == 0) && (stagingGroup.getPrivateLayoutsPageCount() > 0)) {
-											showPrivateSiteStaging = true;
-										}
+									if ((mySite.getPrivateLayoutsPageCount() == 0) && (stagingGroup.getPrivateLayoutsPageCount() > 0) && GroupPermissionUtil.contains(permissionChecker, mySite.getGroupId(), ActionKeys.VIEW_STAGING)) {
+										showPrivateSiteStaging = true;
 									}
 								}
 								%>
