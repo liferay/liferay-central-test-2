@@ -23,48 +23,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class User2_ViewSiteMemberRolePermissionTest extends BaseTestCase {
 	public void testUser2_ViewSiteMemberRolePermission()
 		throws Exception {
-		selenium.open("/web/guest/home/");
-		loadRequiredJavaScriptModules();
-		selenium.clickAt("//div[@id='dockbar']",
-			RuntimeVariables.replace("Dock Bar"));
-
-		for (int second = 0;; second++) {
-			if (second >= 90) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isVisible("//li[@id='_145_mySites']/a/span")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.clickAt("//li[@id='_145_mySites']/a/span",
-			RuntimeVariables.replace("Go To"));
-
-		for (int second = 0;; second++) {
-			if (second >= 90) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Site Name")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.clickAt("link=Site Name", RuntimeVariables.replace("Site Name"));
-		selenium.waitForPageToLoad("30000");
+		selenium.open("/web/site-name/");
 		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
@@ -87,10 +46,8 @@ public class User2_ViewSiteMemberRolePermissionTest extends BaseTestCase {
 			RuntimeVariables.replace("Blogs Test Page"));
 		selenium.waitForPageToLoad("30000");
 		loadRequiredJavaScriptModules();
-		assertTrue(selenium.isElementPresent(
-				"//div[@class='entry '][1]/div[@class='lfr-meta-actions edit-actions entry']"));
 		assertEquals(RuntimeVariables.replace("Edit"),
-			selenium.getText("//span/a/span"));
+			selenium.getText("//td[1]/span/a/span"));
 		assertEquals(RuntimeVariables.replace("Permissions"),
 			selenium.getText("//td[2]/span/a/span"));
 		assertEquals(RuntimeVariables.replace("Delete"),

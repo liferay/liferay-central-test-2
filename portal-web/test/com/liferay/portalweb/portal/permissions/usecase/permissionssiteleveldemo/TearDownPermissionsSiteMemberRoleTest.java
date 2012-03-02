@@ -20,12 +20,14 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 /**
  * @author Brian Wing Shun Chan
  */
-public class TearDownSiteMemberRoleTest extends BaseTestCase {
-	public void testTearDownSiteMemberRole() throws Exception {
+public class TearDownPermissionsSiteMemberRoleTest extends BaseTestCase {
+	public void testTearDownPermissionsSiteMemberRole()
+		throws Exception {
 		selenium.open("/web/guest/home/");
 		loadRequiredJavaScriptModules();
-		selenium.clickAt("//div[@id='dockbar']",
-			RuntimeVariables.replace("Dock Bar"));
+		assertEquals(RuntimeVariables.replace("Go to"),
+			selenium.getText("//li[@id='_145_mySites']/a/span"));
+		selenium.mouseOver("//li[@id='_145_mySites']/a/span");
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -33,26 +35,7 @@ public class TearDownSiteMemberRoleTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("//li[@id='_145_mySites']/a/span")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.clickAt("//li[@id='_145_mySites']/a/span",
-			RuntimeVariables.replace("Go To"));
-
-		for (int second = 0;; second++) {
-			if (second >= 90) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Control Panel")) {
+				if (selenium.isVisible("link=Control Panel")) {
 					break;
 				}
 			}

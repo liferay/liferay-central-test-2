@@ -15,6 +15,11 @@
 package com.liferay.portalweb.portal.permissions.usecase.permissionssiteleveldemo;
 
 import com.liferay.portalweb.portal.BaseTestSuite;
+import com.liferay.portalweb.portal.controlpanel.users.user.adduser.AddUser1Test;
+import com.liferay.portalweb.portal.controlpanel.users.user.adduser.AddUser2Test;
+import com.liferay.portalweb.portal.controlpanel.users.user.adduser.EditUser1PasswordTest;
+import com.liferay.portalweb.portal.controlpanel.users.user.adduser.EditUser2PasswordTest;
+import com.liferay.portalweb.portal.controlpanel.users.user.adduser.TearDownUserTest;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -23,13 +28,12 @@ import junit.framework.TestSuite;
  * @author Brian Wing Shun Chan
  */
 public class PermissionsSiteLevelDemoTests extends BaseTestSuite {
-
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 		testSuite.addTestSuite(AddUser1Test.class);
-		testSuite.addTestSuite(AddUser1PasswordTest.class);
+		testSuite.addTestSuite(EditUser1PasswordTest.class);
 		testSuite.addTestSuite(AddUser2Test.class);
-		testSuite.addTestSuite(AddUser2PasswordTest.class);
+		testSuite.addTestSuite(EditUser2PasswordTest.class);
 		testSuite.addTestSuite(AddSitesTest.class);
 		testSuite.addTestSuite(AddPageBlogsSiteTest.class);
 		testSuite.addTestSuite(AddPortletBlogsSiteTest.class);
@@ -50,10 +54,9 @@ public class PermissionsSiteLevelDemoTests extends BaseTestSuite {
 		testSuite.addTestSuite(User2_ViewSiteMemberRolePermissionTest.class);
 		testSuite.addTestSuite(SignOutTest.class);
 		testSuite.addTestSuite(SignInTest.class);
-		testSuite.addTestSuite(TearDownUser1Test.class);
-		testSuite.addTestSuite(TearDownUser2Test.class);
+		testSuite.addTestSuite(TearDownUserTest.class);
 		testSuite.addTestSuite(TearDownSitesTest.class);
-		testSuite.addTestSuite(TearDownSiteMemberRoleTest.class);
+		testSuite.addTestSuite(TearDownPermissionsSiteMemberRoleTest.class);
 
 		return testSuite;
 	}

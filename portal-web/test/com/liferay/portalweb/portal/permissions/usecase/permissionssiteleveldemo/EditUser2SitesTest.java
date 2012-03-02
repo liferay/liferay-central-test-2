@@ -24,27 +24,9 @@ public class EditUser2SitesTest extends BaseTestCase {
 	public void testEditUser2Sites() throws Exception {
 		selenium.open("/web/guest/home/");
 		loadRequiredJavaScriptModules();
-		selenium.clickAt("//div[@id='dockbar']",
-			RuntimeVariables.replace("Dock Bar"));
-
-		for (int second = 0;; second++) {
-			if (second >= 90) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isVisible("//li[@id='_145_mySites']/a/span")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.clickAt("//li[@id='_145_mySites']/a/span",
-			RuntimeVariables.replace("Go To"));
+		assertEquals(RuntimeVariables.replace("Go to"),
+			selenium.getText("//li[@id='_145_mySites']/a/span"));
+		selenium.mouseOver("//li[@id='_145_mySites']/a/span");
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -71,7 +53,7 @@ public class EditUser2SitesTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		loadRequiredJavaScriptModules();
 		selenium.type("//input[@id='_125_keywords']",
-			RuntimeVariables.replace("userfn2*"));
+			RuntimeVariables.replace("userfn2"));
 		selenium.clickAt("//input[@value='Search']",
 			RuntimeVariables.replace("Search"));
 		selenium.waitForPageToLoad("30000");
@@ -82,7 +64,10 @@ public class EditUser2SitesTest extends BaseTestCase {
 			selenium.getText("//td[3]/a"));
 		assertEquals(RuntimeVariables.replace("usersn2"),
 			selenium.getText("//td[4]/a"));
-		selenium.clickAt("link=Actions", RuntimeVariables.replace("Actions"));
+		assertEquals(RuntimeVariables.replace("Actions"),
+			selenium.getText("//span[@title='Actions']/ul/li/strong/a/span"));
+		selenium.clickAt("//span[@title='Actions']/ul/li/strong/a/span",
+			RuntimeVariables.replace("Actions"));
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -90,7 +75,8 @@ public class EditUser2SitesTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("//ul/li[1]/a")) {
+				if (selenium.isVisible(
+							"//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a")) {
 					break;
 				}
 			}
@@ -100,7 +86,11 @@ public class EditUser2SitesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//ul/li[1]/a", RuntimeVariables.replace("Edit"));
+		assertEquals(RuntimeVariables.replace("Edit"),
+			selenium.getText(
+				"//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a"));
+		selenium.clickAt("//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a",
+			RuntimeVariables.replace("Edit"));
 		selenium.waitForPageToLoad("30000");
 		loadRequiredJavaScriptModules();
 		assertTrue(selenium.isPartialText("//a[@id='_125_sitesLink']", "Sites"));

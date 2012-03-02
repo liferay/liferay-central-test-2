@@ -24,8 +24,9 @@ public class AddPageBlogsSiteTest extends BaseTestCase {
 	public void testAddPageBlogsSite() throws Exception {
 		selenium.open("/web/guest/home/");
 		loadRequiredJavaScriptModules();
-		selenium.clickAt("//div[@id='dockbar']",
-			RuntimeVariables.replace("Dock Bar"));
+		assertEquals(RuntimeVariables.replace("Go to"),
+			selenium.getText("//li[@id='_145_mySites']/a/span"));
+		selenium.mouseOver("//li[@id='_145_mySites']/a/span");
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -33,26 +34,7 @@ public class AddPageBlogsSiteTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("//li[@id='_145_mySites']/a/span")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.clickAt("//li[@id='_145_mySites']/a/span",
-			RuntimeVariables.replace("Go To"));
-
-		for (int second = 0;; second++) {
-			if (second >= 90) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Control Panel")) {
+				if (selenium.isVisible("link=Control Panel")) {
 					break;
 				}
 			}
@@ -106,7 +88,24 @@ public class AddPageBlogsSiteTest extends BaseTestCase {
 		loadRequiredJavaScriptModules();
 		selenium.clickAt("//div[@id='_156_layoutSetToolbar']/span/button[1]",
 			RuntimeVariables.replace("Add Page"));
-		selenium.type("//input[@id='_156_addLayoutName_en_US']",
+
+		for (int second = 0;; second++) {
+			if (second >= 90) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("//input[@name='_156_name_en_US']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.type("//input[@name='_156_name_en_US']",
 			RuntimeVariables.replace("Blogs Test Page"));
 		selenium.clickAt("//input[@value='Add Page']",
 			RuntimeVariables.replace("Add Page"));

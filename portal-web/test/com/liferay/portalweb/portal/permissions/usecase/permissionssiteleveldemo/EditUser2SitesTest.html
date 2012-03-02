@@ -13,24 +13,15 @@
 	<td>/web/guest/home/</td>
 	<td></td>
 </tr>
-	<td>waitForVisible</td>
-	<td>//div[@id='dockbar']</td>
-	<td>Dock Bar</td>
-</tr>
 <tr>
-	<td>clickAt</td>
-	<td>//div[@id='dockbar']</td>
-	<td>Dock Bar</td>
-</tr>
-<tr>
-	<td>waitForVisible</td>
+	<td>assertText</td>
 	<td>//li[@id='_145_mySites']/a/span</td>
-	<td>Go To</td>
+	<td>Go to</td>
 </tr>
 <tr>
-	<td>clickAt</td>
+	<td>mouseOver</td>
 	<td>//li[@id='_145_mySites']/a/span</td>
-	<td>Go To</td>
+	<td>Go to</td>
 </tr>
 <tr>
 	<td>waitForVisible</td>
@@ -50,7 +41,7 @@
 <tr>
 	<td>type</td>
 	<td>//input[@id='_125_keywords']</td>
-	<td>userfn2*</td>
+	<td>userfn2</td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
@@ -73,18 +64,28 @@
 	<td>usersn2</td>
 </tr>
 <tr>
+	<td>assertText</td>
+	<td>//span[@title='Actions']/ul/li/strong/a/span</td>
+	<td>Actions</td>
+</tr>
+<tr>
 	<td>clickAt</td>
-	<td>link=Actions</td>
+	<td>//span[@title='Actions']/ul/li/strong/a/span</td>
 	<td>Actions</td>
 </tr>
 <tr>
 	<td>waitForVisible</td>
-	<td>//ul/li[1]/a</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a</td>
+	<td>Edit</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a</td>
 	<td>Edit</td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>//ul/li[1]/a</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a</td>
 	<td>Edit</td>
 </tr>
 <tr>

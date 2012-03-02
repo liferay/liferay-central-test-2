@@ -13,30 +13,20 @@
 	<td>/web/guest/home/</td>
 	<td></td>
 </tr>
-</tr>
-	<td>waitForVisible</td>
-	<td>//div[@id='dockbar']</td>
-	<td>Dock Bar</td>
-</tr>
 <tr>
-	<td>clickAt</td>
-	<td>//div[@id='dockbar']</td>
-	<td>Dock Bar</td>
-</tr>
-<tr>
-	<td>waitForVisible</td>
+	<td>assertText</td>
 	<td>//li[@id='_145_mySites']/a/span</td>
-	<td>Go To</td>
+	<td>Go to</td>
 </tr>
 <tr>
-	<td>clickAt</td>
+	<td>mouseOver</td>
 	<td>//li[@id='_145_mySites']/a/span</td>
-	<td>Go To</td>
+	<td>Go to</td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>waitForVisible</td>
 	<td>link=Control Panel</td>
-	<td></td>
+	<td>Control Panel</td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
@@ -89,8 +79,13 @@
 	<td>Add Page</td>
 </tr>
 <tr>
+	<td>waitForVisible</td>
+	<td>//input[@name='_156_name_en_US']</td>
+	<td>Blogs Test Page</td>
+</tr>
+<tr>
 	<td>type</td>
-	<td>//input[@id='_156_addLayoutName_en_US']</td>
+	<td>//input[@name='_156_name_en_US']</td>
 	<td>Blogs Test Page</td>
 </tr>
 <tr>

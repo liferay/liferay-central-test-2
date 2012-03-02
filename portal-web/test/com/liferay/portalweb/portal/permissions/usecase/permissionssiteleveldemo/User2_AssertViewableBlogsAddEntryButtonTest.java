@@ -15,6 +15,7 @@
 package com.liferay.portalweb.portal.permissions.usecase.permissionssiteleveldemo;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * @author Brian Wing Shun Chan
@@ -22,9 +23,28 @@ import com.liferay.portalweb.portal.BaseTestCase;
 public class User2_AssertViewableBlogsAddEntryButtonTest extends BaseTestCase {
 	public void testUser2_AssertViewableBlogsAddEntryButton()
 		throws Exception {
-		selenium.open("/web/guest/home/");
+		selenium.open("/web/site-name/");
 		loadRequiredJavaScriptModules();
-		selenium.open("/web/site-name/blogs-test-page/");
+
+		for (int second = 0;; second++) {
+			if (second >= 90) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("link=Blogs Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("link=Blogs Test Page",
+			RuntimeVariables.replace("Blogs Test Page"));
+		selenium.waitForPageToLoad("30000");
 		loadRequiredJavaScriptModules();
 		assertTrue(selenium.isVisible("//input[@value='Add Blog Entry']"));
 	}
