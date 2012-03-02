@@ -198,7 +198,9 @@ public class ClusterExecutorImpl
 			return false;
 		}
 
-		return getAddresses(_controlChannel).contains(address);
+		List<Address> addresses = getAddresses(_controlChannel);
+
+		return addresses.contains(address);
 	}
 
 	public boolean isClusterNodeAlive(String clusterNodeId) {
@@ -233,9 +235,7 @@ public class ClusterExecutorImpl
 			_controlChannel.send(null, null, clusterRequest);
 		}
 		catch (Exception e) {
-			if (_log.isErrorEnabled()) {
-				_log.error("Unable to determine configure node port", e);
-			}
+			_log.error("Unable to determine configure node port", e);
 		}
 	}
 
@@ -289,12 +289,12 @@ public class ClusterExecutorImpl
 		String controlProperty = controlProperties.getProperty(
 			PropsKeys.CLUSTER_LINK_CHANNEL_PROPERTIES_CONTROL);
 
-		ClusterRequestReceiver clusterInvokeReceiver =
+		ClusterRequestReceiver clusterRequestReceiver =
 			new ClusterRequestReceiver(this);
 
 		try {
 			_controlChannel = createJChannel(
-				controlProperty, clusterInvokeReceiver, _DEFAULT_CLUSTER_NAME);
+				controlProperty, clusterRequestReceiver, _DEFAULT_CLUSTER_NAME);
 		}
 		catch (ChannelException ce) {
 			_log.error(ce, ce);
@@ -342,7 +342,6 @@ public class ClusterExecutorImpl
 			clusterNode.getClusterNodeId(), joinAddress);
 
 		if ((previousAddress == null) && !_localAddress.equals(joinAddress)) {
-
 			ClusterEvent clusterEvent = ClusterEvent.join(clusterNode);
 
 			fireClusterEvent(clusterEvent);
@@ -350,24 +349,26 @@ public class ClusterExecutorImpl
 	}
 
 	protected void memberRemoved(List<Address> departAddresses) {
-		List<ClusterNode> departingClusterNodes = new ArrayList<ClusterNode>();
+		List<ClusterNode> departClusterNodes = new ArrayList<ClusterNode>();
 
 		for (Address departAddress : departAddresses) {
-			ClusterNode departingClusterNode = _liveInstances.remove(
+			ClusterNode departClusterNode = _liveInstances.remove(
 				departAddress);
-			if (departingClusterNode != null) {
-				departingClusterNodes.add(departingClusterNode);
 
-				_clusterNodeAddresses.remove(
-					departingClusterNode.getClusterNodeId());
+			if (departClusterNode == null) {
+				continue;
 			}
+
+			departClusterNodes.add(departClusterNode);
+
+			_clusterNodeAddresses.remove(departClusterNode.getClusterNodeId());
 		}
 
-		if (departingClusterNodes.isEmpty()) {
+		if (departClusterNodes.isEmpty()) {
 			return;
 		}
 
-		ClusterEvent clusterEvent = ClusterEvent.depart(departingClusterNodes);
+		ClusterEvent clusterEvent = ClusterEvent.depart(departClusterNodes);
 
 		fireClusterEvent(clusterEvent);
 	}
@@ -462,7 +463,7 @@ public class ClusterExecutorImpl
 			_controlChannel.send(null, null, clusterRequest);
 		}
 		catch (ChannelException ce) {
-			_log.error("Unable to send multicast message ", ce);
+			_log.error("Unable to send multicast message", ce);
 		}
 	}
 

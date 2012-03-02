@@ -205,26 +205,34 @@ public class ClusterRequest implements Serializable {
 
 		sb.append("{clusterMessageType=");
 		sb.append(_clusterMessageType);
+
+		boolean clusterMessageTypeNotifyOrUpdate = false;
+
+		if (_clusterMessageType.equals(ClusterMessageType.NOTIFY) ||
+			_clusterMessageType.equals(ClusterMessageType.UPDATE)) {
+
+			clusterMessageTypeNotifyOrUpdate = true;
+		}
+
+		if (!clusterMessageTypeNotifyOrUpdate) {
+			sb.append(", methodHandler=");
+			sb.append(_methodHandler);
+		}
+
 		sb.append(", multicast=");
 		sb.append(_multicast);
+
+		if (clusterMessageTypeNotifyOrUpdate) {
+			sb.append(", originatingClusterNode=");
+			sb.append(_originatingClusterNode);
+		}
+
 		sb.append(", servletContextName=");
 		sb.append(_servletContextName);
 		sb.append(", skipLocal=");
 		sb.append(_skipLocal);
 		sb.append(", uuid=");
 		sb.append(_uuid);
-
-		if (_clusterMessageType.equals(ClusterMessageType.NOTIFY) ||
-			_clusterMessageType.equals(ClusterMessageType.UPDATE)) {
-
-			sb.append(", originatingClusterNode=");
-			sb.append(_originatingClusterNode);
-		}
-		else {
-			sb.append(", methodHandler=");
-			sb.append(_methodHandler);
-		}
-
 		sb.append("}");
 
 		return sb.toString();
