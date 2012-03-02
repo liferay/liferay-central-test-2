@@ -117,7 +117,7 @@ public class MailEngine {
 			Message message = new MimeMessage(
 				session, new UnsyncByteArrayInputStream(bytes));
 
-			_send(session, message, null, _DEFAULT_MAIL_BATCH_SIZE);
+			_send(session, message, null, _BATCH_SIZE);
 		}
 		catch (Exception e) {
 			throw new MailEngineException(e);
@@ -323,8 +323,7 @@ public class MailEngine {
 			}
 
 			int batchSize = GetterUtil.getInteger(
-				PropsUtil.get(PropsKeys.MAIL_BATCH_SIZE),
-				_DEFAULT_MAIL_BATCH_SIZE);
+				PropsUtil.get(PropsKeys.MAIL_BATCH_SIZE), _BATCH_SIZE);
 
 			_send(session, message, bulkAddresses, batchSize);
 		}
@@ -417,23 +416,23 @@ public class MailEngine {
 		}
 	}
 
-	private static Address[] _getNextBatch(
-		Address[] addresses, int current, int batchSize) {
+	private static Address[] _getBatchAddresses(
+		Address[] addresses, int index, int batchSize) {
 
-		if ((batchSize == _DEFAULT_MAIL_BATCH_SIZE) && (current == 0)) {
+		if ((batchSize == _BATCH_SIZE) && (index == 0)) {
 			return addresses;
 		}
-		else if (batchSize == _DEFAULT_MAIL_BATCH_SIZE) {
+		else if (batchSize == _BATCH_SIZE) {
 			return null;
 		}
 
-		int start = current * batchSize;
+		int start = index * batchSize;
 
 		if (start > addresses.length) {
 			return null;
 		}
 
-		int end = ((current + 1) * batchSize);
+		int end = ((index + 1) * batchSize);
 
 		if (end > addresses.length) {
 			end = addresses.length;
@@ -510,28 +509,26 @@ public class MailEngine {
 
 				transport.connect(smtpHost, smtpPort, user, password);
 
-				int curBatch = 0;
-
-				Address[] portion = null;
-				Address[] recipientAddresses = null;
+				Address[] addresses = null;
 
 				if (Validator.isNotNull(bulkAddresses)) {
-					recipientAddresses = bulkAddresses;
+					addresses = bulkAddresses;
 				}
 				else {
-					recipientAddresses = message.getAllRecipients();
+					addresses = message.getAllRecipients();
 				}
 
-				portion = _getNextBatch(
-					recipientAddresses, curBatch, batchSize);
+				for (int i = 0;; i++) {
+					Address[] batchAddresses = _getBatchAddresses(
+						addresses, i, batchSize);
 
-				while (Validator.isNotNull(portion)) {
-					transport.sendMessage(message, portion);
+					if ((batchAddresses == null) ||
+						(batchAddresses.length == 0)) {
 
-					curBatch++;
+						break;
+					}
 
-					portion = _getNextBatch(
-						recipientAddresses, curBatch, batchSize);
+					transport.sendMessage(message, batchAddresses);
 				}
 
 				transport.close();
@@ -540,7 +537,7 @@ public class MailEngine {
 				if (Validator.isNotNull(bulkAddresses)) {
 					int curBatch = 0;
 
-					Address[] portion = _getNextBatch(
+					Address[] portion = _getBatchAddresses(
 						bulkAddresses, curBatch, batchSize);
 
 					while (Validator.isNotNull(portion)) {
@@ -548,7 +545,7 @@ public class MailEngine {
 
 						curBatch++;
 
-						portion = _getNextBatch(
+						portion = _getBatchAddresses(
 							bulkAddresses, curBatch, batchSize);
 					}
 				}
@@ -574,7 +571,7 @@ public class MailEngine {
 		}
 	}
 
-	private static final int _DEFAULT_MAIL_BATCH_SIZE = 0;
+	private static final int _BATCH_SIZE = 0;
 
 	private static final String _MULTIPART_TYPE_ALTERNATIVE = "alternative";
 
