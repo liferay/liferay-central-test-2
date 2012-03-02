@@ -65,23 +65,28 @@
 </tr>
 <tr>
 	<td>assertNotChecked</td>
-	<td>//input[@name='_125_allRowIds']</td>
+	<td>xpath=(//input[@name='_125_allRowIds'])[2]</td>
 	<td>Select All</td>
 </tr>
 <tr>
 	<td>clickAt</td>
-	<td>//input[@name='_125_allRowIds']</td>
+	<td>xpath=(//input[@name='_125_allRowIds'])[2]</td>
 	<td>Select All</td>
 </tr>
 <tr>
 	<td>assertChecked</td>
-	<td>//input[@name='_125_allRowIds']</td>
+	<td>xpath=(//input[@name='_125_allRowIds'])[2]</td>
 	<td>Select All</td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
 	<td>//input[@value='Deactivate']</td>
 	<td>Deactivate</td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure you want to deactivate the selected users?</td>
+	<td></td>
 </tr>
 <tr>
 	<td>waitForVisible</td>
@@ -167,6 +172,11 @@
 	<td>clickAtAndWait</td>
 	<td>//input[@value='Delete']</td>
 	<td>Delete</td>
+</tr>
+<tr>
+	<td>assertConfirmation</td>
+	<td>Are you sure you want to permanently delete the selected users?</td>
+	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>

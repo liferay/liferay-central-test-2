@@ -86,12 +86,18 @@ public class TearDownUser2Test extends BaseTestCase {
 					continue;
 				}
 
+				selenium.type("//input[@id='_125_keywords']",
+					RuntimeVariables.replace("userfn2"));
+				selenium.clickAt("//input[@value='Search']",
+					RuntimeVariables.replace("Search"));
+				selenium.waitForPageToLoad("30000");
+				loadRequiredJavaScriptModules();
 				assertFalse(selenium.isChecked(
-						"xPath=(//input[@name='_125_allRowIds'])[2]"));
-				selenium.clickAt("xPath=(//input[@name='_125_allRowIds'])[2]",
+						"xpath=(//input[@name='_125_allRowIds'])[2]"));
+				selenium.clickAt("xpath=(//input[@name='_125_allRowIds'])[2]",
 					RuntimeVariables.replace("Select All"));
 				assertTrue(selenium.isChecked(
-						"xPath=(//input[@name='_125_allRowIds'])[2]"));
+						"xpath=(//input[@name='_125_allRowIds'])[2]"));
 				selenium.clickAt("//input[@value='Deactivate']",
 					RuntimeVariables.replace("Deactivate"));
 				selenium.waitForPageToLoad("30000");

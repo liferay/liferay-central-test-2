@@ -93,14 +93,17 @@ public class TearDownUser1Test extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				loadRequiredJavaScriptModules();
 				assertFalse(selenium.isChecked(
-						"//input[@name='_125_allRowIds']"));
-				selenium.clickAt("//input[@name='_125_allRowIds']",
+						"xpath=(//input[@name='_125_allRowIds'])[2]"));
+				selenium.clickAt("xpath=(//input[@name='_125_allRowIds'])[2]",
 					RuntimeVariables.replace("Select All"));
-				assertTrue(selenium.isChecked("//input[@name='_125_allRowIds']"));
+				assertTrue(selenium.isChecked(
+						"xpath=(//input[@name='_125_allRowIds'])[2]"));
 				selenium.clickAt("//input[@value='Deactivate']",
 					RuntimeVariables.replace("Deactivate"));
 				selenium.waitForPageToLoad("30000");
 				loadRequiredJavaScriptModules();
+				assertTrue(selenium.getConfirmation()
+								   .matches("^Are you sure you want to deactivate the selected users[\\s\\S]$"));
 
 				for (int second = 0;; second++) {
 					if (second >= 90) {
@@ -184,6 +187,8 @@ public class TearDownUser1Test extends BaseTestCase {
 					RuntimeVariables.replace("Delete"));
 				selenium.waitForPageToLoad("30000");
 				loadRequiredJavaScriptModules();
+				assertTrue(selenium.getConfirmation()
+								   .matches("^Are you sure you want to permanently delete the selected users[\\s\\S]$"));
 				assertEquals(RuntimeVariables.replace(
 						"Your request completed successfully."),
 					selenium.getText("//div[@class='portlet-msg-success']"));
