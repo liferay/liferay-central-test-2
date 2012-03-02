@@ -92,6 +92,7 @@ public class ClusterRequestReceiver extends BaseReceiver {
 		}
 	}
 
+	@Override
 	public void viewAccepted(View view) {
 		super.viewAccepted(view);
 
@@ -102,7 +103,6 @@ public class ClusterRequestReceiver extends BaseReceiver {
 		}
 
 		List<Address> departAddresses = getDepartAddresses(view);
-
 		List<Address> newAddresses = getNewAddresses(view);
 
 		_lastView = view;
@@ -128,17 +128,19 @@ public class ClusterRequestReceiver extends BaseReceiver {
 		if (departJGroupsAddresses.isEmpty()) {
 			return Collections.emptyList();
 		}
-		else {
-			List<Address> departAddresses = new ArrayList<Address>(
-				departJGroupsAddresses.size());
 
-			for (org.jgroups.Address departJGroupsAddress :
+		List<Address> departAddresses = new ArrayList<Address>(
+			departJGroupsAddresses.size());
+
+		for (org.jgroups.Address departJGroupsAddress :
 				departJGroupsAddresses) {
-				departAddresses.add(new AddressImpl(departJGroupsAddress));
-			}
 
-			return departAddresses;
+			Address departAddress = new AddressImpl(departJGroupsAddress);
+
+			departAddresses.add(departAddress);
 		}
+
+		return departAddresses;
 	}
 
 	protected List<Address> getNewAddresses(View view) {
@@ -153,16 +155,17 @@ public class ClusterRequestReceiver extends BaseReceiver {
 		if (newJGroupsAddresses.isEmpty()) {
 			return Collections.emptyList();
 		}
-		else {
-			List<Address> newAddresses = new ArrayList<Address>(
-				newJGroupsAddresses.size());
 
-			for (org.jgroups.Address newJGroupsAddress : newJGroupsAddresses) {
-				newAddresses.add(new AddressImpl(newJGroupsAddress));
-			}
+		List<Address> newAddresses = new ArrayList<Address>(
+			newJGroupsAddresses.size());
 
-			return newAddresses;
+		for (org.jgroups.Address newJGroupsAddress : newJGroupsAddresses) {
+			Address newAddress = new AddressImpl(newJGroupsAddress);
+
+			newAddresses.add(newAddress);
 		}
+
+		return newAddresses;
 	}
 
 	protected Object invoke(
@@ -286,8 +289,9 @@ public class ClusterRequestReceiver extends BaseReceiver {
 			}
 			else {
 				clusterNodeResponse.setException(
-				new ClusterException(
-					"Payload is not of type " + MethodHandler.class.getName()));
+					new ClusterException(
+						"Payload is not of type " +
+							MethodHandler.class.getName()));
 			}
 		}
 
