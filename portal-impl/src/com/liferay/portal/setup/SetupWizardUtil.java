@@ -58,7 +58,6 @@ import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalInstances;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
@@ -342,24 +341,20 @@ public class SetupWizardUtil {
 			HttpServletRequest request, UnicodeProperties unicodeProperties)
 		throws Exception {
 
-		String firstName = ParamUtil.getString(
-			request, "adminFirstName", PropsValues.DEFAULT_ADMIN_FIRST_NAME);
-
-		String lastName = ParamUtil.getString(
-			request, "adminLastName", PropsValues.DEFAULT_ADMIN_LAST_NAME);
-
-		FullNameGenerator fullNameGenerator =
-			FullNameGeneratorFactory.getInstance();
-
-		String fullName = fullNameGenerator.getFullName(
-			firstName, null, lastName);
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		Company company = CompanyLocalServiceUtil.getCompanyById(
-			PortalInstances.getDefaultCompanyId());
+			themeDisplay.getCompanyId());
 
-		String emailAddress = ParamUtil.getString(request, "adminEmailAddress",
+		String emailAddress = ParamUtil.getString(
+			request, "adminEmailAddress",
 			PropsValues.DEFAULT_ADMIN_EMAIL_ADDRESS_PREFIX + StringPool.AT +
 				company.getMx());
+
+		PropsValues.ADMIN_EMAIL_FROM_ADDRESS = emailAddress;
+
+		unicodeProperties.put(PropsKeys.ADMIN_EMAIL_FROM_ADDRESS, emailAddress);
 
 		ScreenNameGenerator screenNameGenerator =
 			ScreenNameGeneratorFactory.getInstance();
@@ -372,24 +367,30 @@ public class SetupWizardUtil {
 		catch (Exception e) {
 		}
 
-		PropsValues.ADMIN_EMAIL_FROM_ADDRESS = emailAddress;
+		String firstName = ParamUtil.getString(
+			request, "adminFirstName", PropsValues.DEFAULT_ADMIN_FIRST_NAME);
+		String lastName = ParamUtil.getString(
+			request, "adminLastName", PropsValues.DEFAULT_ADMIN_LAST_NAME);
+
+		FullNameGenerator fullNameGenerator =
+			FullNameGeneratorFactory.getInstance();
+
+		String fullName = fullNameGenerator.getFullName(
+			firstName, null, lastName);
+
 		PropsValues.ADMIN_EMAIL_FROM_NAME = fullName;
 
-		unicodeProperties.put(
-			PropsKeys.ADMIN_EMAIL_FROM_ADDRESS, emailAddress);
 		unicodeProperties.put(PropsKeys.ADMIN_EMAIL_FROM_NAME, fullName);
-
-		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
-			WebKeys.THEME_DISPLAY);
 
 		User user = null;
 
 		try {
 			user = UserLocalServiceUtil.getUserByEmailAddress(
-				PortalUtil.getDefaultCompanyId(), emailAddress);
+				themeDisplay.getCompanyId(), emailAddress);
 
-			String greeting = LanguageUtil.format(themeDisplay.getLocale(),
-				"welcome-x", StringPool.SPACE + fullName, false);
+			String greeting = LanguageUtil.format(
+				themeDisplay.getLocale(), "welcome-x",
+				StringPool.SPACE + fullName, false);
 
 			Contact contact = user.getContact();
 
@@ -418,23 +419,22 @@ public class SetupWizardUtil {
 				new ServiceContext());
 		}
 		catch (NoSuchUserException nsue) {
-			CompanyLocalServiceUtil.createAdminUser(
-				PortalUtil.getDefaultCompanyId(), themeDisplay.getLocale(),
-				firstName, lastName, emailAddress, screenName);
+			UserLocalServiceUtil.addDefaultAdminUser(
+				themeDisplay.getCompanyId(), screenName, emailAddress,
+				themeDisplay.getLocale(), firstName, StringPool.BLANK,
+				lastName);
 
 			user = UserLocalServiceUtil.getUserByEmailAddress(
-				PortalUtil.getDefaultCompanyId(), emailAddress);
+				themeDisplay.getCompanyId(), emailAddress);
 		}
-
-		// Password
 
 		user = UserLocalServiceUtil.updatePasswordReset(user.getUserId(), true);
 
 		HttpSession session = request.getSession();
 
+		session.setAttribute(WebKeys.EMAIL_ADDRESS, emailAddress);
 		session.setAttribute(WebKeys.SETUP_WIZARD_PASSWORD_UPDATED, true);
 		session.setAttribute(WebKeys.USER_ID, user.getUserId());
-		session.setAttribute(WebKeys.EMAIL_ADDRESS, emailAddress);
 	}
 
 	private static void _updateCompany(HttpServletRequest request)
@@ -474,15 +474,18 @@ public class SetupWizardUtil {
 				PropsValues.LIFERAY_HOME, PROPERTIES_FILE_NAME,
 				unicodeProperties.toString());
 
-			return FileUtil.exists(
-				PropsValues.LIFERAY_HOME + StringPool.SLASH +
-					PROPERTIES_FILE_NAME);
+			if (FileUtil.exists(
+					PropsValues.LIFERAY_HOME + StringPool.SLASH +
+						PROPERTIES_FILE_NAME)) {
+
+				return true;
+			}
 		}
 		catch (IOException ioe) {
 			_log.error(ioe, ioe);
-
-			return false;
 		}
+
+		return false;
 	}
 
 	private static final String _PROPERTIES_PREFIX = "properties--";
