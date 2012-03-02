@@ -723,7 +723,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 		try {
 
-			// Context
+			// Search context
 
 			SearchContext searchContext = new SearchContext();
 
@@ -744,8 +744,6 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 			searchContext.setStart(start);
 			searchContext.setUserId(userId);
-
-			// Facets
 
 			// Always add facets as late as possible so that the search context
 			// fields can be considered by the facets

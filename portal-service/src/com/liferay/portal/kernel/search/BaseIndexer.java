@@ -83,7 +83,7 @@ import javax.portlet.PortletURL;
 public abstract class BaseIndexer implements Indexer {
 
 	public static final int INDEX_FILTER_SEARCH_LIMIT = GetterUtil.getInteger(
-			PropsUtil.get(PropsKeys.INDEX_FILTER_SEARCH_LIMIT));
+		PropsUtil.get(PropsKeys.INDEX_FILTER_SEARCH_LIMIT));
 
 	public void delete(long companyId, String uid) throws SearchException {
 		try {
@@ -203,33 +203,33 @@ public abstract class BaseIndexer implements Indexer {
 	}
 
 	public String getSearchEngineId() {
+		if (_searchEngineId != null) {
+			return _searchEngineId;
+		}
+
+		Class<?> clazz = getClass();
+
+		String searchEngineId = GetterUtil.getString(
+			PropsUtil.get(
+				PropsKeys.INDEX_SEARCH_ENGINE_ID, new Filter(clazz.getName())));
+
+		if (Validator.isNotNull(searchEngineId)) {
+			SearchEngine searchEngine = SearchEngineUtil.getSearchEngine(
+				searchEngineId);
+
+			if (searchEngine != null) {
+				_searchEngineId = searchEngineId;
+			}
+		}
+
 		if (_searchEngineId == null) {
-			String searchEngineId = GetterUtil.getString(
-				PropsUtil.get(PropsKeys.INDEX_SEARCH_ENGINE_ID,
-					new Filter(this.getClass().getName())));
+			_searchEngineId = SearchEngineUtil.getDefaultSearchEngineId();
+		}
 
-			// Validate that the specified engine exists
-
-			if (Validator.isNotNull(searchEngineId)) {
-				SearchEngine searchEngine = SearchEngineUtil.getSearchEngine(
+		if (_log.isDebugEnabled()) {
+			_log.debug(
+				"Search engine ID for " + clazz.getName() + " is " +
 					searchEngineId);
-
-				if (searchEngine != null) {
-					_searchEngineId = searchEngineId;
-				}
-			}
-
-			// Fall back to the default engine
-
-			if (_searchEngineId == null) {
-				_searchEngineId = SearchEngineUtil.getDefaultSearchEngineId();
-			}
-
-			if (_log.isDebugEnabled()) {
-				_log.debug(
-					"searchEngineId for " + this.getClass() + " is " +
-						searchEngineId);
-			}
 		}
 
 		return _searchEngineId;

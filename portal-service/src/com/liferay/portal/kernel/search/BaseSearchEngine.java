@@ -119,7 +119,8 @@ public class BaseSearchEngine implements SearchEngine {
 
 			if (!isLuceneBased()) {
 				className =
-					"com.liferay.portal.search.generic.TermRangeQueryFactoryImpl";
+					"com.liferay.portal.search.generic." +
+						"TermRangeQueryFactoryImpl";
 			}
 
 			try {
@@ -203,8 +204,8 @@ public class BaseSearchEngine implements SearchEngine {
 	private IndexSearcher _indexSearcher;
 	private IndexWriter _indexWriter;
 	private boolean _luceneBased;
-	private TermRangeQueryFactory _termRangeQueryFactory;
 	private TermQueryFactory _termQueryFactory;
+	private TermRangeQueryFactory _termRangeQueryFactory;
 	private String _vendor;
 
 }

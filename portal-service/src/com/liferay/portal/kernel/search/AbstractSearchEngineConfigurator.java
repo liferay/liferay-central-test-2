@@ -214,7 +214,7 @@ public abstract class AbstractSearchEngineConfigurator {
 		String searchEngineId, SearchEngine searchEngine) {
 
 		SearchEngineRegistration searchEngineRegistration =
-			new SearchEngineRegistration(searchEngineId, searchEngine);
+			new SearchEngineRegistration(searchEngineId);
 
 		_searchEngineRegistrations.add(searchEngineRegistration);
 
@@ -290,8 +290,8 @@ public abstract class AbstractSearchEngineConfigurator {
 
 		baseSearchEngineMessageListener.setManager(manager);
 		baseSearchEngineMessageListener.setMessageBus(getMessageBus());
-		baseSearchEngineMessageListener.setSearchEngineId(searchEngineId);
 		baseSearchEngineMessageListener.setSearchEngine(searchEngine);
+		baseSearchEngineMessageListener.setSearchEngineId(searchEngineId);
 
 		destination.register(
 			baseSearchEngineMessageListener, getOperatingClassloader());
@@ -336,11 +336,8 @@ public abstract class AbstractSearchEngineConfigurator {
 
 	private class SearchEngineRegistration {
 
-		private SearchEngineRegistration(
-			String searchEngineId, SearchEngine searchEngine) {
-
+		private SearchEngineRegistration(String searchEngineId) {
 			_searchEngineId = searchEngineId;
-			_searchEngine = searchEngine;
 		}
 
 		public void addOriginalSearchReaderMessageListener(
@@ -369,10 +366,6 @@ public abstract class AbstractSearchEngineConfigurator {
 			getOriginalSearchWriterMessageListeners() {
 
 			return _originalSearchWriterMessageListeners;
-		}
-
-		public SearchEngine getSearchEngine() {
-			return _searchEngine;
 		}
 
 		public String getSearchEngineId() {
@@ -421,7 +414,6 @@ public abstract class AbstractSearchEngineConfigurator {
 			_originalSearchWriterMessageListeners =
 				new ArrayList<InvokerMessageListener>();
 		private boolean _override;
-		private SearchEngine _searchEngine;
 		private String _searchEngineId;
 		private String _searchReaderDestinationName;
 		private String _searchWriterDestinationName;
