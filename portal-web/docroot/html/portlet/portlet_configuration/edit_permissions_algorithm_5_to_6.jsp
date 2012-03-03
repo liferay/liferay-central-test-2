@@ -188,36 +188,36 @@ definePermissionsURL.setParameter(Constants.CMD, Constants.VIEW);
 
 		List<Role> roles = ResourceActionsUtil.getRoles(company.getCompanyId(), group, modelResource, roleTypes);
 
-		Role administrator = RoleLocalServiceUtil.getRole(company.getCompanyId(), RoleConstants.ADMINISTRATOR);
+		Role administratorRole = RoleLocalServiceUtil.getRole(company.getCompanyId(), RoleConstants.ADMINISTRATOR);
 
-		roles.remove(administrator);
+		roles.remove(administratorRole);
 
 		if (!ResourceActionsUtil.isPortalModelResource(modelResource)) {
-			Role organizationAdministrator = RoleLocalServiceUtil.getRole(company.getCompanyId(), RoleConstants.ORGANIZATION_ADMINISTRATOR);
+			Role organizationAdministratorRole = RoleLocalServiceUtil.getRole(company.getCompanyId(), RoleConstants.ORGANIZATION_ADMINISTRATOR);
 
-			roles.remove(organizationAdministrator);
+			roles.remove(organizationAdministratorRole);
 
-			Role organizationOwner = RoleLocalServiceUtil.getRole(company.getCompanyId(), RoleConstants.ORGANIZATION_OWNER);
+			Role organizationOwnerRole = RoleLocalServiceUtil.getRole(company.getCompanyId(), RoleConstants.ORGANIZATION_OWNER);
 
-			roles.remove(organizationOwner);
+			roles.remove(organizationOwnerRole);
 
-			Role siteAdministrator = RoleLocalServiceUtil.getRole(company.getCompanyId(), RoleConstants.SITE_ADMINISTRATOR);
+			Role siteAdministratorRole = RoleLocalServiceUtil.getRole(company.getCompanyId(), RoleConstants.SITE_ADMINISTRATOR);
 
-			roles.remove(siteAdministrator);
+			roles.remove(siteAdministratorRole);
 
-			Role siteOwner = RoleLocalServiceUtil.getRole(company.getCompanyId(), RoleConstants.SITE_OWNER);
+			Role siteOwnerRole = RoleLocalServiceUtil.getRole(company.getCompanyId(), RoleConstants.SITE_OWNER);
 
-			roles.remove(siteOwner);
+			roles.remove(siteOwnerRole);
 		}
 
-		long selRoleId = 0;
+		long modelResourceRoleId = 0;
 
 		if (modelResource.equals(Role.class.getName())) {
-			selRoleId = Long.valueOf(resourcePrimKey);
+			modelResourceRoleId = GetterUtil.getLong(resourcePrimKey);
 
-			Role selRole = RoleLocalServiceUtil.getRole(selRoleId);
+			Role role = RoleLocalServiceUtil.getRole(modelResourceRoleId);
 
-			roles.remove(selRole);
+			roles.remove(role);
 		}
 
 		List<Team> teams = null;
@@ -233,7 +233,7 @@ definePermissionsURL.setParameter(Constants.CMD, Constants.VIEW);
 			for (Team team : teams) {
 				Role role = RoleLocalServiceUtil.getTeamRole(team.getCompanyId(), team.getTeamId());
 
-				if (role.getRoleId() == selRoleId) {
+				if (role.getRoleId() == modelResourceRoleId) {
 					continue;
 				}
 
