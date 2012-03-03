@@ -28,6 +28,7 @@ import java.io.File;
 
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Properties;
 import java.util.Set;
 import java.util.TreeSet;
@@ -112,6 +113,7 @@ public class PluginsSummaryBuilder {
 		}
 
 		x = file.indexOf(File.separator, x) + 1;
+
 		int y = file.indexOf(File.separator, x);
 
 		String artifactId = file.substring(x, y);
@@ -136,17 +138,17 @@ public class PluginsSummaryBuilder {
 			licenses = _readProperty(properties, "licenses");
 		}
 		else {
-			Document doc = SAXReaderUtil.read(content);
+			Document document = SAXReaderUtil.read(content);
 
-			Element root = doc.getRootElement();
+			Element rootElement = document.getRootElement();
 
-			name = root.elementText("name");
-			tags = _readList(root.element("tags"), "tag");
-			shortDescription = root.elementText("short-description");
-			changeLog = root.elementText("change-log");
-			pageURL = root.elementText("page-url");
-			author = root.elementText("author");
-			licenses = _readList(root.element("licenses"), "license");
+			name = rootElement.elementText("name");
+			tags = _readList(rootElement.element("tags"), "tag");
+			shortDescription = rootElement.elementText("short-description");
+			changeLog = rootElement.elementText("change-log");
+			pageURL = rootElement.elementText("page-url");
+			author = rootElement.elementText("author");
+			licenses = _readList(rootElement.element("licenses"), "license");
 		}
 
 		_distinctAuthors.add(author);
@@ -183,20 +185,26 @@ public class PluginsSummaryBuilder {
 		sb.append("\t</plugin>\n");
 	}
 
-	private String _readList(Element parentEl, String name) {
-		if ((parentEl == null) || parentEl.elements(name).isEmpty()) {
+	private String _readList(Element parentElement, String name) {
+		if (parentElement == null) {
+			return StringPool.BLANK;
+		}
+
+		List<Element> elements = parentElement.elements(name);
+
+		if (elements.isEmpty()) {
 			return StringPool.BLANK;
 		}
 
 		StringBundler sb = new StringBundler(
-			parentEl.elements(name).size() * 2 - 1);
+			parentElement.elements(name).size() * 2 - 1);
 
-		Iterator<Element> itr = parentEl.elements(name).iterator();
+		Iterator<Element> itr = elements.iterator();
 
 		while (itr.hasNext()) {
-			Element el = itr.next();
+			Element element = itr.next();
 
-			String text = el.getText().trim();
+			String text = element.getText().trim();
 
 			sb.append(text);
 
