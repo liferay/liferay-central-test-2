@@ -73,12 +73,12 @@ public class PluginsSummaryBuilder {
 
 		ds.scan();
 
-		String[] files = ds.getIncludedFiles();
+		String[] fileNames = ds.getIncludedFiles();
 
-		Arrays.sort(files);
+		Arrays.sort(fileNames);
 
-		for (String file : files) {
-			_createPluginSummary(file, sb);
+		for (String fileName : fileNames) {
+			_createPluginSummary(fileName, sb);
 		}
 
 		for (String author : _distinctAuthors) {
@@ -99,24 +99,24 @@ public class PluginsSummaryBuilder {
 			pluginsDir + File.separator + "summary.xml", sb.toString());
 	}
 
-	private void _createPluginSummary(String file, StringBundler sb)
+	private void _createPluginSummary(String fileName, StringBundler sb)
 		throws Exception {
 
-		String content = FileUtil.read(file);
+		String content = FileUtil.read(fileName);
 
-		int x = file.indexOf(File.separatorChar);
+		int x = fileName.indexOf(File.separatorChar);
 
-		String type = file.substring(0, x);
+		String type = fileName.substring(0, x);
 
 		if (type.endsWith("s")) {
 			type = type.substring(0, type.length() - 1);
 		}
 
-		x = file.indexOf(File.separator, x) + 1;
+		x = fileName.indexOf(File.separator, x) + 1;
 
-		int y = file.indexOf(File.separator, x);
+		int y = fileName.indexOf(File.separator, x);
 
-		String artifactId = file.substring(x, y);
+		String artifactId = fileName.substring(x, y);
 
 		String name = StringPool.BLANK;
 		String tags = StringPool.BLANK;
@@ -126,7 +126,7 @@ public class PluginsSummaryBuilder {
 		String author = StringPool.BLANK;
 		String licenses = StringPool.BLANK;
 
-		if (file.endsWith(".properties")) {
+		if (fileName.endsWith(".properties")) {
 			Properties properties = PropertiesUtil.load(content);
 
 			name = _readProperty(properties, "name");
