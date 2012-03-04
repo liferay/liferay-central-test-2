@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
@@ -50,34 +51,41 @@ public class PluginsSummaryBuilder {
 
 	public PluginsSummaryBuilder(File pluginsDir) {
 		try {
-			_createPluginsSummary(pluginsDir);
+			_pluginsDir = pluginsDir;
+
+			_createPluginsSummary();
 		}
 		catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	private void _createPluginsSummary(File pluginsDir) throws Exception {
+	private void _createPluginsSummary() throws Exception {
 		StringBundler sb = new StringBundler();
 
 		sb.append("<plugins-summary>\n");
 
-		DirectoryScanner ds = new DirectoryScanner();
+		DirectoryScanner directoryScanner = new DirectoryScanner();
 
-		ds.setBasedir(pluginsDir);
-		ds.setIncludes(
+		directoryScanner.setBasedir(_pluginsDir);
+		directoryScanner.setExcludes(
+			new String[] {"**\\tmp\\**", "**\\tools\\**"});
+		directoryScanner.setIncludes(
 			new String[] {
 				"**\\liferay-plugin-package.properties",
 				"**\\liferay-plugin-package.xml"
 			});
 
-		ds.scan();
+		directoryScanner.scan();
 
-		String[] fileNames = ds.getIncludedFiles();
+		String[] fileNames = directoryScanner.getIncludedFiles();
 
 		Arrays.sort(fileNames);
 
 		for (String fileName : fileNames) {
+			fileName = StringUtil.replace(
+				fileName, StringPool.BACK_SLASH, StringPool.SLASH);
+
 			_createPluginSummary(fileName, sb);
 		}
 
@@ -95,8 +103,7 @@ public class PluginsSummaryBuilder {
 
 		sb.append("</plugins-summary>");
 
-		FileUtil.write(
-			pluginsDir + File.separator + "summary.xml", sb.toString());
+		FileUtil.write(_pluginsDir + "/summary.xml", sb.toString());
 	}
 
 	private void _createPluginSummary(String fileName, StringBundler sb)
@@ -104,7 +111,7 @@ public class PluginsSummaryBuilder {
 
 		String content = FileUtil.read(fileName);
 
-		int x = fileName.indexOf(File.separatorChar);
+		int x = fileName.indexOf(StringPool.SLASH);
 
 		String type = fileName.substring(0, x);
 
@@ -112,9 +119,9 @@ public class PluginsSummaryBuilder {
 			type = type.substring(0, type.length() - 1);
 		}
 
-		x = fileName.indexOf(File.separator, x) + 1;
+		x = fileName.indexOf(StringPool.SLASH, x) + 1;
 
-		int y = fileName.indexOf(File.separator, x);
+		int y = fileName.indexOf(StringPool.SLASH, x);
 
 		String artifactId = fileName.substring(x, y);
 
@@ -155,33 +162,20 @@ public class PluginsSummaryBuilder {
 		_distinctLicenses.add(licenses);
 
 		sb.append("\t<plugin>\n");
-		sb.append("\t\t<artifact-id>");
-		sb.append(artifactId);
-		sb.append("</artifact-id>\n");
-		sb.append("\t\t<name>");
-		sb.append(name);
-		sb.append("</name>\n");
-		sb.append("\t\t<type>");
-		sb.append(type);
-		sb.append("</type>\n");
-		sb.append("\t\t<tags>");
-		sb.append(tags);
-		sb.append("</tags>\n");
-		sb.append("\t\t<short-description>");
-		sb.append(shortDescription);
-		sb.append("</short-description>\n");
-		sb.append("\t\t<change-log>");
-		sb.append(changeLog);
-		sb.append("</change-log>\n");
-		sb.append("\t\t<page-url>");
-		sb.append(pageURL);
-		sb.append("</page-url>\n");
-		sb.append("\t\t<author>");
-		sb.append(author);
-		sb.append("</author>\n");
-		sb.append("\t\t<licenses>");
-		sb.append(licenses);
-		sb.append("</licenses>\n");
+
+		_writeElement(sb, "artifact-id", artifactId, 2);
+		_writeElement(sb, "name", name, 2);
+		_writeElement(sb, "type", type, 2);
+		_writeElement(sb, "tags", tags, 2);
+		_writeElement(sb, "short-description", shortDescription, 2);
+		_writeElement(sb, "change-log", changeLog, 2);
+		_writeElement(sb, "page-url", pageURL, 2);
+		_writeElement(sb, "author", author, 2);
+		_writeElement(sb, "licenses", licenses, 2);
+
+		sb.append("\t\t<releng>\n");
+		sb.append(_readReleng(fileName));
+		sb.append("\t\t</releng>\n");
 		sb.append("\t</plugin>\n");
 	}
 
@@ -220,7 +214,103 @@ public class PluginsSummaryBuilder {
 		return GetterUtil.getString(properties.getProperty(key));
 	}
 
+	private String _readReleng(String fileName) throws Exception {
+		int x = fileName.indexOf("WEB-INF");
+
+		String relengPropertiesFileName =
+			_pluginsDir + StringPool.SLASH + fileName.substring(0, x + 8) +
+				"liferay-releng.properties";
+
+		Properties relengProperties = null;
+
+		if (FileUtil.exists(relengPropertiesFileName)) {
+			String relengPropertiesContent = FileUtil.read(
+				relengPropertiesFileName);
+
+			relengProperties = PropertiesUtil.load(relengPropertiesContent);
+		}
+		else {
+			relengProperties = new Properties();
+		}
+
+		String relengPropertiesContent = _updateRelengPropertiesFile(
+			relengPropertiesFileName, relengProperties);
+
+		relengProperties = PropertiesUtil.load(relengPropertiesContent);
+
+		StringBundler sb = new StringBundler();
+
+		_writeElement(sb, "bundle", relengProperties, 3);
+		_writeElement(sb, "labs", relengProperties, 3);
+		_writeElement(sb, "marketplace", relengProperties, 3);
+		_writeElement(sb, "parent-app", relengProperties, 3);
+		_writeElement(sb, "standalone-app", relengProperties, 3);
+		_writeElement(sb, "supported", relengProperties, 3);
+
+		return sb.toString();
+	}
+
+	private String _updateRelengPropertiesFile(
+			String relengPropertiesFileName, Properties relengProperties)
+		throws Exception {
+
+		StringBundler sb = new StringBundler();
+
+		_writeProperty(sb, relengProperties, "bundle", "false");
+		_writeProperty(sb, relengProperties, "labs", "true");
+		_writeProperty(sb, relengProperties, "marketplace", "false");
+		_writeProperty(sb, relengProperties, "parent-app", "");
+		_writeProperty(sb, relengProperties, "public", "true");
+		_writeProperty(sb, relengProperties, "standalone-app", "true");
+		_writeProperty(sb, relengProperties, "supported", "false");
+
+		String relengPropertiesContent = sb.toString();
+
+		FileUtil.write(relengPropertiesFileName, relengPropertiesContent);
+
+		return relengPropertiesContent;
+	}
+
+	private void _writeElement(
+		StringBundler sb, String name, Properties properties, int tabsCount) {
+
+		_writeElement(sb, name, _readProperty(properties, name), tabsCount);
+	}
+
+	private void _writeElement(
+		StringBundler sb, String name, String value, int tabsCount) {
+
+		for (int i = 0; i < tabsCount; i++) {
+			sb.append("\t");
+		}
+
+		sb.append("<");
+		sb.append(name);
+		sb.append(">");
+		sb.append(value);
+		sb.append("</");
+		sb.append(name);
+		sb.append(">\n");
+	}
+
+	private void _writeProperty(
+		StringBundler sb, Properties properties, String key,
+		String defaultValue) {
+
+		String value = GetterUtil.getString(
+			properties.getProperty(key), defaultValue);
+
+		if (sb.length() > 0) {
+			sb.append(StringPool.NEW_LINE);
+		}
+
+		sb.append(key);
+		sb.append(StringPool.EQUAL);
+		sb.append(value);
+	}
+
 	private Set<String> _distinctAuthors = new TreeSet<String>();
 	private Set<String> _distinctLicenses = new TreeSet<String>();
+	private File _pluginsDir;
 
 }
