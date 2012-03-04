@@ -244,6 +244,7 @@ public class PluginsSummaryBuilder {
 		_writeElement(sb, "labs", relengProperties, 3);
 		_writeElement(sb, "marketplace", relengProperties, 3);
 		_writeElement(sb, "parent-app", relengProperties, 3);
+		_writeElement(sb, "public", relengProperties, 3);
 		_writeElement(sb, "standalone-app", relengProperties, 3);
 		_writeElement(sb, "supported", relengProperties, 3);
 
