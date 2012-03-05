@@ -1734,7 +1734,7 @@ public class ProcessExecutorTest extends TestCase {
 				int command = 0;
 
 				while (((command = inputStream.read()) != -1) &&
-					_mainThread.isAlive()) {
+					   _mainThread.isAlive()) {
 
 					switch (command) {
 						case _CODE_ECHO :
