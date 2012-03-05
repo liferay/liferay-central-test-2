@@ -30,7 +30,6 @@ import com.liferay.portal.kernel.xml.XPath;
 import com.liferay.portal.model.CacheField;
 import com.liferay.portlet.dynamicdatamapping.StructureFieldException;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -38,6 +37,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author Brian Wing Shun Chan
@@ -264,33 +264,33 @@ public class DDMStructureImpl extends DDMStructureBaseImpl {
 	}
 
 	private Map<String, Map<String, String>> _getFieldsMap(String locale) {
-		if (_localizedFieldsMap.get(locale) == null) {
+		Map<String, Map<String, String>> fieldsMap = _localizedFieldsMap.get(
+			locale);
+
+		if (fieldsMap == null) {
 			synchronized (this) {
-				if (_localizedFieldsMap.get(locale) == null) {
-					Map<String, Map<String, String>> fieldsMap =
-						new LinkedHashMap<String, Map<String, String>>();
+				fieldsMap = new LinkedHashMap<String, Map<String, String>>();
 
-					XPath xPathSelector = SAXReaderUtil.createXPath(
-						"//dynamic-element[@dataType]");
+				XPath xPathSelector = SAXReaderUtil.createXPath(
+					"//dynamic-element[@dataType]");
 
-					List<Node> nodes = xPathSelector.selectNodes(getDocument());
+				List<Node> nodes = xPathSelector.selectNodes(getDocument());
 
-					Iterator<Node> itr = nodes.iterator();
+				Iterator<Node> itr = nodes.iterator();
 
-					while (itr.hasNext()) {
-						Element element = (Element)itr.next();
+				while (itr.hasNext()) {
+					Element element = (Element)itr.next();
 
-						String name = element.attributeValue("name");
+					String name = element.attributeValue("name");
 
-						fieldsMap.put(name, _getField(element, locale));
-					}
-
-					_localizedFieldsMap.put(locale, fieldsMap);
+					fieldsMap.put(name, _getField(element, locale));
 				}
+
+				_localizedFieldsMap.put(locale, fieldsMap);
 			}
 		}
 
-		return _localizedFieldsMap.get(locale);
+		return fieldsMap;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(DDMStructureImpl.class);
@@ -299,7 +299,6 @@ public class DDMStructureImpl extends DDMStructureBaseImpl {
 	private Document _document;
 
 	private Map<String, Map<String, Map<String, String>>> _localizedFieldsMap =
-		Collections.synchronizedMap(
-			new LinkedHashMap<String, Map<String, Map<String, String>>>());
+		new ConcurrentHashMap<String, Map<String, Map<String, String>>>();
 
 }
