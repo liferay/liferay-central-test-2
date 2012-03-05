@@ -268,26 +268,24 @@ public class DDMStructureImpl extends DDMStructureBaseImpl {
 			locale);
 
 		if (fieldsMap == null) {
-			synchronized (this) {
-				fieldsMap = new LinkedHashMap<String, Map<String, String>>();
+			fieldsMap = new LinkedHashMap<String, Map<String, String>>();
 
-				XPath xPathSelector = SAXReaderUtil.createXPath(
-					"//dynamic-element[@dataType]");
+			XPath xPathSelector = SAXReaderUtil.createXPath(
+				"//dynamic-element[@dataType]");
 
-				List<Node> nodes = xPathSelector.selectNodes(getDocument());
+			List<Node> nodes = xPathSelector.selectNodes(getDocument());
 
-				Iterator<Node> itr = nodes.iterator();
+			Iterator<Node> itr = nodes.iterator();
 
-				while (itr.hasNext()) {
-					Element element = (Element)itr.next();
+			while (itr.hasNext()) {
+				Element element = (Element)itr.next();
 
-					String name = element.attributeValue("name");
+				String name = element.attributeValue("name");
 
-					fieldsMap.put(name, _getField(element, locale));
-				}
-
-				_localizedFieldsMap.put(locale, fieldsMap);
+				fieldsMap.put(name, _getField(element, locale));
 			}
+
+			_localizedFieldsMap.put(locale, fieldsMap);
 		}
 
 		return fieldsMap;
