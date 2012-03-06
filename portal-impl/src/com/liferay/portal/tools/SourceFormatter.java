@@ -352,7 +352,7 @@ public class SourceFormatter {
 		int max = StringUtil.count(ifClause, StringPool.OPEN_PARENTHESIS);
 		int previousParenthesisPos = -1;
 
-		int levels[] = new int[max];
+		int[] levels = new int[max];
 
 		for (int i = 0; i < ifClause.length(); i++) {
 			char c = ifClause.charAt(i);
@@ -368,7 +368,7 @@ public class SourceFormatter {
 				}
 
 				previousParenthesisPos = i;
-	
+
 				if (c == CharPool.OPEN_PARENTHESIS) {
 					levels[level] = i;
 
