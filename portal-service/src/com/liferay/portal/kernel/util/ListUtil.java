@@ -180,6 +180,25 @@ public class ListUtil {
 		return fromArray(StringUtil.splitLines(s));
 	}
 
+	/**
+	 * @deprecated
+	 */
+	public static <E> boolean remove(List<E> list, E element) {
+		Iterator<E> itr = list.iterator();
+
+		while (itr.hasNext()) {
+			E curElement = itr.next();
+
+			if ((curElement == element) || curElement.equals(element)) {
+				itr.remove();
+
+				return true;
+			}
+		}
+
+		return false;
+	}
+
 	public static <E> List<E> sort(List<E> list) {
 		return sort(list, null);
 	}
