@@ -163,8 +163,7 @@ public class AddSuborganizationTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isVisible(
-									"//input[@id='_125_addressStreet1_0']")) {
+						if (selenium.isVisible("//input[@id='_125_street1']")) {
 							break;
 						}
 					}
@@ -174,13 +173,13 @@ public class AddSuborganizationTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.type("//input[@id='_125_addressStreet1_0']",
+				selenium.type("//input[@id='_125_street1']",
 					RuntimeVariables.replace("11111 Main Street USA"));
 				selenium.select("//select[@id='_125_addressTypeId0']",
 					RuntimeVariables.replace("Billing"));
-				selenium.type("//input[@id='_125_addressZip0']",
+				selenium.type("//input[@id='_125_zip']",
 					RuntimeVariables.replace("90210"));
-				selenium.type("//input[@id='_125_addressCity0']",
+				selenium.type("//input[@id='_125_city']",
 					RuntimeVariables.replace("Cerritos"));
 				selenium.clickAt("//input[@id='_125_addressPrimary0']",
 					RuntimeVariables.replace("Primary"));
@@ -205,7 +204,7 @@ public class AddSuborganizationTest extends BaseTestCase {
 
 				selenium.select("//select[@id='_125_addressCountryId0']",
 					RuntimeVariables.replace("United States"));
-				selenium.clickAt("//input[@id='_125_addressMailing0Checkbox']",
+				selenium.clickAt("//input[@id='_125_mailingCheckbox']",
 					RuntimeVariables.replace("Mailing"));
 
 				for (int second = 0;; second++) {
