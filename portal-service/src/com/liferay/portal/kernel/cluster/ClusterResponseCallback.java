@@ -26,7 +26,8 @@ public interface ClusterResponseCallback {
 
 	public void callback(ClusterNodeResponses clusterNodeResponses);
 
-	public void processInterruptedException(InterruptedException exception);
+	public void processInterruptedException(
+		InterruptedException interruptedException);
 
 	public void processTimeoutException(TimeoutException timeoutException);
 

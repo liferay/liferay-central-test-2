@@ -61,8 +61,9 @@ public class ClusterRequestReceiver extends BaseReceiver {
 			_countDownLatch.await();
 		}
 		catch (InterruptedException ie) {
-			_log.error("Latch opened prematurely by interruption, " +
-				"dependence may not be ready yet.");
+			_log.error(
+				"Latch opened prematurely by interruption. Dependence may " +
+					"not be ready.");
 		}
 
 		Channel controlChannel = _clusterExecutorImpl.getControlChannel();
@@ -125,8 +126,9 @@ public class ClusterRequestReceiver extends BaseReceiver {
 			_countDownLatch.await();
 		}
 		catch (InterruptedException ie) {
-			_log.error("Latch opened prematurely by interruption, " +
-				"dependence may not be ready yet.");
+			_log.error(
+				"Latch opened prematurely by interruption. Dependence may " +
+					"not be ready.");
 		}
 
 		if (!newAddresses.isEmpty()) {

@@ -64,6 +64,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 import org.apache.lucene.analysis.Analyzer;
@@ -693,8 +694,6 @@ public class LuceneHelperImpl implements LuceneHelper {
 			IndexAccessor indexAccessor, long localLastGeneration)
 		throws SystemException {
 
-		long companyId = indexAccessor.getCompanyId();
-
 		List<Address> clusterNodeAddresses =
 			ClusterExecutorUtil.getClusterNodeAddresses();
 
@@ -711,7 +710,9 @@ public class LuceneHelperImpl implements LuceneHelper {
 		}
 
 		ClusterRequest clusterRequest = ClusterRequest.createMulticastRequest(
-			new MethodHandler(_getLastGenerationMethodKey, companyId), true);
+			new MethodHandler(
+				_getLastGenerationMethodKey, indexAccessor.getCompanyId()),
+			true);
 
 		ClusterExecutorUtil.execute(
 			clusterRequest,
@@ -798,12 +799,14 @@ public class LuceneHelperImpl implements LuceneHelper {
 			IndexAccessor indexAccessor, int clusterNodeAddressesCount,
 			long localLastGeneration) {
 
+			_indexAccessor = indexAccessor;
 			_clusterNodeAddressesCount = clusterNodeAddressesCount;
 			_localLastGeneration = localLastGeneration;
-			_indexAccessor = indexAccessor;
+
 			_companyId = _indexAccessor.getCompanyId();
 		}
 
+		@Override
 		public void callback(BlockingQueue<ClusterNodeResponse> blockingQueue) {
 			Address bootupAddress = null;
 
@@ -815,7 +818,7 @@ public class LuceneHelperImpl implements LuceneHelper {
 				try {
 					clusterNodeResponse = blockingQueue.poll(
 						_BOOTUP_CLUSTER_NODE_RESPONSE_TIMEOUT,
-						java.util.concurrent.TimeUnit.MILLISECONDS);
+						TimeUnit.MILLISECONDS);
 				}
 				catch (Exception e) {
 					_log.error("Unable to get cluster node response", e);
@@ -826,7 +829,7 @@ public class LuceneHelperImpl implements LuceneHelper {
 						_log.debug(
 							"Unable to get cluster node response in " +
 								_BOOTUP_CLUSTER_NODE_RESPONSE_TIMEOUT +
-									java.util.concurrent.TimeUnit.MILLISECONDS);
+									TimeUnit.MILLISECONDS);
 					}
 
 					continue;
@@ -860,11 +863,11 @@ public class LuceneHelperImpl implements LuceneHelper {
 					if (_log.isDebugEnabled()) {
 						_log.debug(
 							"Cluster node " + clusterNode +
-							" has invalid port");
+								" has invalid port");
 					}
 				}
-			} while (
-				(bootupAddress == null) && (_clusterNodeAddressesCount > 1));
+			}
+			while ((bootupAddress == null) && (_clusterNodeAddressesCount > 1));
 
 			if (bootupAddress == null) {
 				return;
@@ -896,6 +899,7 @@ public class LuceneHelperImpl implements LuceneHelper {
 			}
 		}
 
+		@Override
 		public void processTimeoutException(TimeoutException timeoutException) {
 			_log.error(
 				"Uanble to load index for company " + _companyId,
@@ -904,8 +908,8 @@ public class LuceneHelperImpl implements LuceneHelper {
 
 		private int _clusterNodeAddressesCount;
 		private long _companyId;
-		private long _localLastGeneration;
 		private IndexAccessor _indexAccessor;
+		private long _localLastGeneration;
 
 	}
 
