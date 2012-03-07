@@ -15,6 +15,7 @@
 package com.liferay.portalweb.portlet.documentlibrary.usecase.demo6;
 
 import com.liferay.portalweb.portal.BaseTestSuite;
+import com.liferay.portalweb.portal.controlpanel.users.user.adduser.AddUserTest;
 import com.liferay.portalweb.portal.controlpanel.users.user.adduser.TearDownUserTest;
 import com.liferay.portalweb.portal.controlpanel.users.user.edituserpassword.EditUserPasswordTest;
 import com.liferay.portalweb.portal.controlpanel.users.user.signin.SignInTest;
