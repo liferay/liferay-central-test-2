@@ -163,7 +163,8 @@ public class AddSuborganizationTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isVisible("//input[@id='_125_street1']")) {
+						if (selenium.isVisible(
+									"//input[@id='_125_addressStreet1_0']")) {
 							break;
 						}
 					}
@@ -173,15 +174,32 @@ public class AddSuborganizationTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.type("//input[@id='_125_street1']",
+				for (int second = 0;; second++) {
+					if (second >= 90) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isVisible(
+									"//input[@id='_125_addressStreet1_0']")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
+				selenium.type("//input[@id='_125_addressStreet1_0']",
 					RuntimeVariables.replace("11111 Main Street USA"));
 				selenium.select("//select[@id='_125_addressTypeId0']",
 					RuntimeVariables.replace("Billing"));
-				selenium.type("//input[@id='_125_zip']",
+				selenium.type("//input[@id='_125_addressZip0']",
 					RuntimeVariables.replace("90210"));
-				selenium.type("//input[@id='_125_city']",
+				selenium.type("//input[@id='_125_addressCity0']",
 					RuntimeVariables.replace("Cerritos"));
-				selenium.clickAt("//input[@id='_125_addressPrimary0']",
+				selenium.clickAt("//input[@name='_125_addressPrimary']",
 					RuntimeVariables.replace("Primary"));
 
 				for (int second = 0;; second++) {
@@ -204,7 +222,7 @@ public class AddSuborganizationTest extends BaseTestCase {
 
 				selenium.select("//select[@id='_125_addressCountryId0']",
 					RuntimeVariables.replace("United States"));
-				selenium.clickAt("//input[@id='_125_mailingCheckbox']",
+				selenium.clickAt("//input[@id='_125_addressMailing0Checkbox']",
 					RuntimeVariables.replace("Mailing"));
 
 				for (int second = 0;; second++) {
