@@ -67,6 +67,9 @@ import org.jgroups.JChannel;
 public class ClusterExecutorImpl
 	extends ClusterBase implements ClusterExecutor, PortalPortEventListener {
 
+	public static final String CLUSTER_EXECUTOR_CALLBACK_THREAD_POOL =
+		"CLUSTER_EXECUTOR_CALLBACK_THREAD_POOL";
+
 	public void addClusterEventListener(
 		ClusterEventListener clusterEventListener) {
 
@@ -535,11 +538,6 @@ public class ClusterExecutorImpl
 		}
 	}
 
-	// Public thread pool name to allow user customize setting in
-	// executor-spring.xml
-	static public final String CLUSTER_EXECUTOR_CALLBACK_THREAD_POOL =
-		"CLUSTER_EXECUTOR_CALLBACK_THREAD_POOL";
-
 	private static final String _DEFAULT_CLUSTER_NAME =
 		"LIFERAY-CONTROL-CHANNEL";
 
@@ -568,8 +566,8 @@ public class ClusterExecutorImpl
 			_clusterResponseCallback = clusterResponseCallback;
 			_futureClusterResponses = futureClusterResponses;
 			_timeout = -1;
-			_timeUnit = TimeUnit.SECONDS;
 			_timeoutGet = false;
+			_timeUnit = TimeUnit.SECONDS;
 		}
 
 		public ClusterResponseCallbackJob(
@@ -580,8 +578,8 @@ public class ClusterExecutorImpl
 			_clusterResponseCallback = clusterResponseCallback;
 			_futureClusterResponses = futureClusterResponses;
 			_timeout = timeout;
-			_timeUnit = timeUnit;
 			_timeoutGet = true;
+			_timeUnit = timeUnit;
 		}
 
 		public void run() {
@@ -613,9 +611,9 @@ public class ClusterExecutorImpl
 
 		private final ClusterResponseCallback _clusterResponseCallback;
 		private final FutureClusterResponses _futureClusterResponses;
-		private final TimeUnit _timeUnit;
 		private final long _timeout;
 		private final boolean _timeoutGet;
+		private final TimeUnit _timeUnit;
 
 	}
 

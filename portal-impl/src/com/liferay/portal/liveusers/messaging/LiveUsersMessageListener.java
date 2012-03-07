@@ -108,6 +108,7 @@ public class LiveUsersMessageListener extends BaseMessageListener {
 
 	private static Log _log = LogFactoryUtil.getLog(
 		LiveUsersMessageListener.class);
+
 	private static MethodHandler _getLocalClusterUsersMethodHandler =
 		new MethodHandler(
 			new MethodKey(LiveUsers.class.getName(), "getLocalClusterUsers"));
@@ -119,6 +120,7 @@ public class LiveUsersMessageListener extends BaseMessageListener {
 			_clusterNodeId = clusterNodeId;
 		}
 
+		@Override
 		public void callback(ClusterNodeResponses clusterNodeResponses) {
 			ClusterNodeResponse clusterNodeResponse =
 				clusterNodeResponses.getClusterResponse(_clusterNodeId);
@@ -135,16 +137,15 @@ public class LiveUsersMessageListener extends BaseMessageListener {
 
 				LiveUsers.addClusterNode(_clusterNodeId, clusterUsers);
 			}
-			catch (Exception ex) {
-				_log.error(
-					"Unable to add cluster node with Id :" + _clusterNodeId,
-					ex);
+			catch (Exception e) {
+				_log.error("Unable to add cluster node " + _clusterNodeId, e);
 			}
 		}
 
+		@Override
 		public void processTimeoutException(TimeoutException timeoutException) {
 			_log.error(
-				"Uanble to add cluster node with Id :" + _clusterNodeId,
+				"Uanble to add cluster node " + _clusterNodeId,
 				timeoutException);
 		}
 
