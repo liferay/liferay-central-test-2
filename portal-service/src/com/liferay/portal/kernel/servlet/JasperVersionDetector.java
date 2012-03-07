@@ -87,12 +87,12 @@ public class JasperVersionDetector {
 				}
 			}
 
-			Attributes.Name bundleVersionAttrName = new Attributes.Name(
+			Attributes.Name bundleVersionAttributesName = new Attributes.Name(
 				"Bundle-Version");
 
-			if (attributes.containsKey(bundleVersionAttrName)) {
+			if (attributes.containsKey(bundleVersionAttributesName)) {
 				_jasperVersion = GetterUtil.getString(
-					attributes.get(bundleVersionAttrName));
+					attributes.get(bundleVersionAttributesName));
 
 				if (_isValidJasperVersion(_jasperVersion)) {
 					return;
