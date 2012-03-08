@@ -18,6 +18,7 @@ import java.io.File;
 
 import java.lang.reflect.Constructor;
 
+import java.net.URI;
 import java.net.URL;
 import java.net.URLClassLoader;
 
@@ -30,18 +31,23 @@ import java.util.concurrent.Callable;
  */
 public class NewClassLoaderTestCase extends TestCase {
 
+	@Override
 	public void setUp() throws Exception{
-		String[] paths = System.getProperty("java.class.path").split(
-			File.pathSeparator);
+		String pathsString = System.getProperty("java.class.path"); 
 
-		List<URL> urlList = new ArrayList<URL>();
+		String[] paths = pathsString.split(File.pathSeparator);
+
+		List<URL> urlsList = new ArrayList<URL>();
 
 		for (String path : paths) {
 			File file = new File(path);
-			urlList.add(file.toURI().toURL());
+
+			URI uri = file.toURI();
+
+			urlsList.add(uri.toURL());
 		}
 
-		urls = urlList.toArray(new URL[urlList.size()]);
+		urls = urlsList.toArray(new URL[urlsList.size()]);
 	}
 
 	protected <T> T runInNewClassLoader(Class<? extends Callable<T>> clazz)
@@ -51,18 +57,18 @@ public class NewClassLoaderTestCase extends TestCase {
 			clazz + " is not enclosed by " + getClass(), getClass(),
 			clazz.getEnclosingClass());
 
-		Constructor<? extends Callable<T>> constructor;
+		Constructor<? extends Callable<T>> constructor = null;
 
 		try {
 			constructor = clazz.getDeclaredConstructor();
 		}
-		catch (NoSuchMethodException nsme) {
+		catch (NoSuchMethodException nsme1) {
 			try {
 				constructor = clazz.getDeclaredConstructor(getClass());
 			}
 			catch (NoSuchMethodException nsme2) {
 				throw new Exception(
-					clazz.getName() + " does not have a default Constructor.");
+					clazz.getName() + " does not have a default constructor");
 			}
 		}
 
@@ -73,10 +79,12 @@ public class NewClassLoaderTestCase extends TestCase {
 			Constructor<? extends Callable<T>> constructor, Object... arguments)
 		throws Exception {
 
-		// Prepare new ClassLoader
+		// Prepare new class loader
+
 		URLClassLoader urlClassLoader = new URLClassLoader(urls, null);
 
-		// Get loaded Class
+		// Get loaded class
+
 		Class<? extends Callable<T>> callableClass =
 			constructor.getDeclaringClass();
 
@@ -84,11 +92,13 @@ public class NewClassLoaderTestCase extends TestCase {
 			callableClass + " is not enclosed by " + getClass(), getClass(),
 			callableClass.getEnclosingClass());
 
-		// Reload Class with new ClassLoader
+		// Reload class with new class loader
+
 		callableClass = (Class<? extends Callable<T>>)urlClassLoader.loadClass(
 			callableClass.getName());
 
-		// Reload Constructor paramter types
+		// Reload constructor paramter types
+
 		Class<?>[] parameterTypes = constructor.getParameterTypes();
 
 		for (int i = 0; i < parameterTypes.length; i++) {
@@ -96,17 +106,21 @@ public class NewClassLoaderTestCase extends TestCase {
 				parameterTypes[i].getName());
 		}
 
-		// Refetch Constructor
+		// Refetch constructor
+
 		constructor = callableClass.getDeclaredConstructor(parameterTypes);
 
 		// Inner class requires outter reference
-		if (constructor.getParameterTypes().length > arguments.length) {
 
-			// Reload outter class with new ClassLoader
+		if (parameterTypes.length > arguments.length) {
+
+			// Reload outter class with new class loader
+
 			Class<?> outterClass = urlClassLoader.loadClass(
 				getClass().getName());
 
 			// Create outter object for the inner class instance
+
 			Object outterObject = outterClass.newInstance();
 
 			Object[] newArguments = new Object[arguments.length + 1];
@@ -120,10 +134,12 @@ public class NewClassLoaderTestCase extends TestCase {
 
 		constructor.setAccessible(true);
 
-		// Create Callable instance which is fully loaded by new ClassLoader
+		// Create callable instance that is fully loaded by the new class loader
+
 		Callable<T> callable = constructor.newInstance(arguments);
 
-		// Run Callable within new ClassLoader
+		// Run callable with new class loader
+
 		Thread currentThread = Thread.currentThread();
 
 		ClassLoader classLoader = currentThread.getContextClassLoader();

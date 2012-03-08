@@ -25,36 +25,34 @@ import java.util.concurrent.Callable;
  */
 public class ModifyStaticFinalTest extends NewClassLoaderTestCase {
 
-	public void testModifyStaticFinal1() throws Exception {
-		// Anonymous Class
+	public void testAnonymousClass() throws Exception {
+		assertFalse(StaticFinalClass.VALUE);
+
+		System.setProperty(_TEST_KEY, "true");
 
 		assertFalse(StaticFinalClass.VALUE);
 
-		System.setProperty(_testKey, "true");
+		Callable<Boolean> callable = new Callable<Boolean>() {
 
-		assertFalse(StaticFinalClass.VALUE);
+			public Boolean call() throws Exception {
+				return StaticFinalClass.VALUE;
+			}
 
-		boolean result = runInNewClassLoader(
-			new Callable<Boolean>() {
+		};
 
-				public Boolean call() throws Exception {
-					return StaticFinalClass.VALUE;
-				}
-			}.getClass());
-
-		assertTrue(result);
+		assertTrue(
+			runInNewClassLoader(
+				(Class<? extends Callable<Boolean>>)callable.getClass()));
 	}
 
-	public void testModifyStaticFinal2() throws Exception {
-		// Local Class
+	public void testLocalClass() throws Exception {
+		assertFalse(StaticFinalClass.VALUE);
+
+		System.setProperty(_TEST_KEY, "true");
 
 		assertFalse(StaticFinalClass.VALUE);
 
-		System.setProperty(_testKey, "true");
-
-		assertFalse(StaticFinalClass.VALUE);
-
-		class LocalTestCallable implements Callable<Boolean> {
+		class LocalCallable implements Callable<Boolean> {
 
 			public Boolean call() throws Exception {
 				return StaticFinalClass.VALUE;
@@ -62,52 +60,40 @@ public class ModifyStaticFinalTest extends NewClassLoaderTestCase {
 
 		}
 
-		boolean result = runInNewClassLoader(LocalTestCallable.class);
-
-		assertTrue(result);
+		assertTrue(runInNewClassLoader(LocalCallable.class));
 	}
 
-	public void testModifyStaticFinal3() throws Exception {
-		// Member Class
+	public void testMemberClass() throws Exception {
+		assertFalse(StaticFinalClass.VALUE);
+
+		System.setProperty(_TEST_KEY, "true");
 
 		assertFalse(StaticFinalClass.VALUE);
 
-		System.setProperty(_testKey, "true");
-
-		assertFalse(StaticFinalClass.VALUE);
-
-		boolean result = runInNewClassLoader(MemberTestCallable.class);
-
-		assertTrue(result);
+		assertTrue(runInNewClassLoader(MemberCallable.class));
 	}
 
-	public void testModifyStaticFinal4() throws Exception {
-		// Static Member Class
+	public void testStaticMemberClass() throws Exception {
+		assertFalse(StaticFinalClass.VALUE);
+
+		System.setProperty(_TEST_KEY, "true");
 
 		assertFalse(StaticFinalClass.VALUE);
 
-		System.setProperty(_testKey, "true");
-
-		assertFalse(StaticFinalClass.VALUE);
-
-		boolean result = runInNewClassLoader(StaticMemberTestCallable.class);
-
-		assertTrue(result);
+		assertTrue(runInNewClassLoader(StaticMemberCallable.class));
 	}
 
-	public void testModifyStaticFinal5() throws Exception {
-		// No default Constructor
+	public void testNoDefaultConstructor() throws Exception {
+		assertFalse(StaticFinalClass.VALUE);
+
+		System.setProperty(_TEST_KEY, "true");
 
 		assertFalse(StaticFinalClass.VALUE);
 
-		System.setProperty(_testKey, "true");
+		class NoDefaultConstructorCallable implements Callable<Boolean> {
 
-		assertFalse(StaticFinalClass.VALUE);
-
-		class ConstructorTestCallable implements Callable<Boolean> {
-
-			// Dummy Constructor to eliminate default one
-			public ConstructorTestCallable(String dummyValue) {
+			@SuppressWarnings("unused")
+			public NoDefaultConstructorCallable(String value) {
 			}
 
 			public Boolean call() throws Exception {
@@ -117,33 +103,32 @@ public class ModifyStaticFinalTest extends NewClassLoaderTestCase {
 		}
 
 		try {
-			runInNewClassLoader(ConstructorTestCallable.class);
+			runInNewClassLoader(NoDefaultConstructorCallable.class);
 
 			fail();
 		}
 		catch (Exception e) {
 		}
 
-		Constructor<ConstructorTestCallable> constructor =
-			ConstructorTestCallable.class.getDeclaredConstructor(
+		Constructor<NoDefaultConstructorCallable> constructor =
+			NoDefaultConstructorCallable.class.getDeclaredConstructor(
 				getClass(), String.class);
 
-		boolean result = runInNewClassLoader(constructor, "dummyValue");
-
-		assertTrue(result);
+		assertTrue(runInNewClassLoader(constructor, "value"));
 	}
 
-	public void testModifyStaticFinal6() throws Exception {
-		// Error Callable to satisfy code coverage
-
+	public void testThrowsException() throws Exception {
 		try {
-			runInNewClassLoader(
-				new Callable<Boolean>() {
+			Callable<Boolean> callable = new Callable<Boolean>() {
 
-					public Boolean call() throws Exception {
-						throw new Exception();
-					}
-				}.getClass());
+				public Boolean call() throws Exception {
+					throw new Exception();
+				}
+
+			};
+
+			runInNewClassLoader(
+				(Class<? extends Callable<Boolean>>)callable.getClass());
 
 			fail();
 		}
@@ -151,16 +136,16 @@ public class ModifyStaticFinalTest extends NewClassLoaderTestCase {
 		}
 	}
 
-	private static final String _testKey = "test.key";
+	private static final String _TEST_KEY = "test.key";
 
 	private static class StaticFinalClass {
 
 		public static final boolean VALUE = Boolean.valueOf(
-			System.getProperty(_testKey));
+			System.getProperty(_TEST_KEY));
 
 	}
 
-	private static class StaticMemberTestCallable implements Callable<Boolean> {
+	private static class StaticMemberCallable implements Callable<Boolean> {
 
 		public Boolean call() throws Exception {
 			return StaticFinalClass.VALUE;
@@ -168,7 +153,7 @@ public class ModifyStaticFinalTest extends NewClassLoaderTestCase {
 
 	}
 
-	private class MemberTestCallable implements Callable<Boolean> {
+	private class MemberCallable implements Callable<Boolean> {
 
 		public Boolean call() throws Exception {
 			return StaticFinalClass.VALUE;
