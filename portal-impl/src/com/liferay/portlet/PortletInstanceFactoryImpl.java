@@ -52,7 +52,6 @@ public class PortletInstanceFactoryImpl implements PortletInstanceFactory {
 			rootPortletId);
 
 		if (portletInstances != null) {
-
 			InvokerPortlet rootInvokerPortletInstance = portletInstances.remove(
 				rootPortletId);
 
@@ -74,10 +73,11 @@ public class PortletInstanceFactoryImpl implements PortletInstanceFactory {
 		throws PortletException {
 
 		boolean instanceable = false;
+
 		boolean deployed = !portlet.isUndeployedPortlet();
 
 		if (portlet.isInstanceable() && deployed &&
-			PortletConstants.isInstanceId(portlet.getPortletId())) {
+			PortletConstants.hasInstanceId(portlet.getPortletId())) {
 
 			instanceable = true;
 		}
@@ -103,7 +103,6 @@ public class PortletInstanceFactoryImpl implements PortletInstanceFactory {
 						portletInstances.get(portlet.getPortletId());
 
 					if (instanceInvokerPortletInstance != null) {
-						// Instanceable and hit cache
 						return instanceInvokerPortletInstance;
 					}
 				}
@@ -147,11 +146,9 @@ public class PortletInstanceFactoryImpl implements PortletInstanceFactory {
 		}
 
 		if (!instanceable) {
-			// Not instanceable, return root
 			return rootInvokerPortletInstance;
 		}
 
-		// Instanceable, missing cache, create a new one
 		javax.portlet.Portlet portletInstance =
 			rootInvokerPortletInstance.getPortletInstance();
 
@@ -180,7 +177,7 @@ public class PortletInstanceFactoryImpl implements PortletInstanceFactory {
 	}
 
 	public void delete(Portlet portlet) {
-		if (PortletConstants.isInstanceId(portlet.getPortletId())) {
+		if (PortletConstants.hasInstanceId(portlet.getPortletId())) {
 			Map<String, InvokerPortlet> portletInstances = _pool.get(
 				portlet.getRootPortletId());
 
