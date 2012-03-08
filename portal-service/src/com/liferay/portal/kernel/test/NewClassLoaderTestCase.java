@@ -33,7 +33,7 @@ public class NewClassLoaderTestCase extends TestCase {
 
 	@Override
 	public void setUp() throws Exception{
-		String pathsString = System.getProperty("java.class.path"); 
+		String pathsString = System.getProperty("java.class.path");
 
 		String[] paths = pathsString.split(File.pathSeparator);
 
