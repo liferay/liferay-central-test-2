@@ -70,6 +70,7 @@ import com.liferay.portlet.documentlibrary.util.DLProcessorThreadLocal;
 import com.liferay.portlet.documentlibrary.util.DLUtil;
 import com.liferay.portlet.dynamicdatamapping.lar.DDMPortletDataHandlerImpl;
 import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
+import com.liferay.portlet.dynamicdatamapping.service.DDMStructureLocalServiceUtil;
 import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMStructureUtil;
 import com.liferay.portlet.dynamicdatamapping.storage.Fields;
 import com.liferay.portlet.dynamicdatamapping.storage.StorageEngineUtil;
@@ -1125,6 +1126,20 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		portletDataContext.importClassedModel(
 			dlFileEntryType, importedDLFileEntryType, _NAMESPACE);
+
+		List<DDMStructure> structures =
+			importedDLFileEntryType.getDDMStructures();
+
+		for (DDMStructure structure : structures) {
+			String structureKey = structure.getStructureKey();
+
+			if (structureKey.startsWith("auto_")) {
+				structure.setStructureKey(
+					"auto_" + importedDLFileEntryType.getPrimaryKey());
+
+				DDMStructureLocalServiceUtil.updateDDMStructure(structure);
+			}
+		}
 	}
 
 	protected static void importFileRank(

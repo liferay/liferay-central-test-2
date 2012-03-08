@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.SortedArrayList;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
@@ -510,6 +511,10 @@ public class DLFileEntryTypeLocalServiceImpl
 					DDMStructureConstants.TYPE_AUTO, serviceContext);
 			}
 			else {
+				if (Validator.isNull(xsd)) {
+					xsd = ddmStructure.getXsd();
+				}
+
 				ddmStructure = ddmStructureLocalService.updateStructure(
 					ddmStructure.getStructureId(), nameMap, descriptionMap, xsd,
 					serviceContext);
