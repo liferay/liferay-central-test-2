@@ -610,8 +610,9 @@ public class StringUtil {
 			}
 		}
 
-		int flags = Pattern.CANON_EQ | Pattern.CASE_INSENSITIVE |
-			Pattern.LITERAL | Pattern.UNICODE_CASE;
+		int flags =
+			Pattern.CANON_EQ | Pattern.CASE_INSENSITIVE | Pattern.LITERAL |
+				Pattern.UNICODE_CASE;
 
 		Pattern pattern = Pattern.compile(sb.toString(), flags);
 
