@@ -195,22 +195,6 @@ Liferay = window.Liferay || {};
 				}
 			},
 
-			_ioRequest: function(uri, config) {
-				var instance = this;
-
-				if (A.io && A.io.request) {
-					A.io.request(uri, config);
-				}
-				else {
-					A.use(
-						'aui-io-request',
-						function(A) {
-							A.io.request(uri, config);
-						}
-					);
-				}
-			},
-
 			getParameters: function(options) {
 				var instance = this;
 
@@ -298,6 +282,22 @@ Liferay = window.Liferay || {};
 				}
 
 				return instance._JSONParser;
+			},
+
+			_ioRequest: function(uri, config) {
+				var instance = this;
+
+				if (A.io && A.io.request) {
+					A.io.request(uri, config);
+				}
+				else {
+					A.use(
+						'aui-io-request',
+						function(A) {
+							A.io.request(uri, config);
+						}
+					);
+				}
 			}
 		}
 	);
