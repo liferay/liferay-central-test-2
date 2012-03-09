@@ -162,6 +162,8 @@ public class DirectServletRegistry {
 				Long previousLastModified = _dependantTimestamps.get(dependant);
 
 				if (previousLastModified == null) {
+					_dependantTimestamps.put(dependant, lastModified);
+
 					previousLastModified = lastModified;
 				}
 
