@@ -179,9 +179,8 @@ public class InvokerPortletImpl implements InvokerPortlet {
 
 	public void destroy() {
 		if (PortletConstants.hasInstanceId(_portletModel.getPortletId())) {
-
 			if (_log.isWarnEnabled()) {
-				_log.warn("Destroy instance InvokerPortlet is not allowed.");
+				_log.warn("Destroying an instanced portlet is not allowed");
 			}
 
 			return;
