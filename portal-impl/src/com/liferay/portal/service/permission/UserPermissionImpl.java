@@ -139,7 +139,7 @@ public class UserPermissionImpl implements UserPermission {
 
 						Group organizationGroup = organization.getGroup();
 
-						// organization administrators can only manage normal
+						// Organization administrators can only manage normal
 						// users, owners can only manage normal users and
 						// administrators
 
