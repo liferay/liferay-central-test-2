@@ -119,54 +119,54 @@ public class UserPermissionImpl implements UserPermission {
 				return true;
 			}
 
-			if (user != null) {
-				if (organizationIds == null) {
-					organizationIds = user.getOrganizationIds();
-				}
+			if (user == null) {
+				return false;
+			}
 
-				for (long organizationId : organizationIds) {
-					if (OrganizationPermissionUtil.contains(
-							permissionChecker, organizationId,
-							ActionKeys.MANAGE_USERS)) {
+			if (organizationIds == null) {
+				organizationIds = user.getOrganizationIds();
+			}
 
-						if (permissionChecker.getUserId() == user.getUserId()) {
-							return true;
-						}
+			for (long organizationId : organizationIds) {
+				if (OrganizationPermissionUtil.contains(
+						permissionChecker, organizationId,
+						ActionKeys.MANAGE_USERS)) {
 
-						Organization organization =
-							OrganizationLocalServiceUtil.getOrganization(
-								organizationId);
+					if (permissionChecker.getUserId() == user.getUserId()) {
+						return true;
+					}
 
-						Group organizationGroup = organization.getGroup();
+					Organization organization =
+						OrganizationLocalServiceUtil.getOrganization(
+							organizationId);
 
-						// Organization administrators can only manage normal
-						// users, owners can only manage normal users and
-						// administrators
+					Group organizationGroup = organization.getGroup();
 
-						if (UserGroupRoleLocalServiceUtil.hasUserGroupRole(
+					// Organization administrators can only manage normal
+					// users. Owners can only manage normal users and
+					// administrators.
+
+					if (UserGroupRoleLocalServiceUtil.hasUserGroupRole(
+							user.getUserId(), organizationGroup.getGroupId(),
+							RoleConstants.ORGANIZATION_OWNER, true)) {
+
+						continue;
+					}
+					else if (UserGroupRoleLocalServiceUtil.hasUserGroupRole(
+								user.getUserId(),
+								organizationGroup.getGroupId(),
+								RoleConstants.ORGANIZATION_ADMINISTRATOR,
+								true) &&
+							 !UserGroupRoleLocalServiceUtil.hasUserGroupRole(
 								user.getUserId(),
 								organizationGroup.getGroupId(),
 								RoleConstants.ORGANIZATION_OWNER, true)) {
 
 							continue;
 						}
-						else if (UserGroupRoleLocalServiceUtil.hasUserGroupRole(
-									user.getUserId(),
-									organizationGroup.getGroupId(),
-									RoleConstants.ORGANIZATION_ADMINISTRATOR,
-									true)) {
-
-							if (!UserGroupRoleLocalServiceUtil.hasUserGroupRole(
-									permissionChecker.getUserId(),
-									organizationGroup.getGroupId(),
-									RoleConstants.ORGANIZATION_OWNER, true)) {
-
-								continue;
-							}
-						}
-
-						return true;
 					}
+
+					return true;
 				}
 			}
 		}
