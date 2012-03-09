@@ -88,6 +88,8 @@ public class StripFilterTest extends PowerMockito {
 	public void testProcessCSS() throws Exception {
 		StripFilter stripFilter = new StripFilter();
 
+		_mockCacheGenerationUtil();
+
 		// Missing close tag
 
 		CharBuffer charBuffer = CharBuffer.wrap("style type=\"text/css\">abc");
@@ -115,8 +117,6 @@ public class StripFilterTest extends PowerMockito {
 
 		charBuffer = CharBuffer.wrap("style type=\"text/css\"> \r\t\n</style>");
 		stringWriter = new StringWriter();
-
-		_mockCacheGenerationUtil();
 
 		stripFilter.processCSS(null, null, charBuffer, stringWriter);
 
@@ -374,8 +374,8 @@ public class StripFilterTest extends PowerMockito {
 		mockStatic(CacheKeyGeneratorUtil.class);
 
 		OngoingStubbing<CacheKeyGenerator> ongoingStubbing = when(
-				CacheKeyGeneratorUtil.getCacheKeyGenerator(
-						StripFilter.class.getName()));
+			CacheKeyGeneratorUtil.getCacheKeyGenerator(
+				StripFilter.class.getName()));
 
 		ongoingStubbing.thenReturn(new HashCodeCacheKeyGenerator());
 	}

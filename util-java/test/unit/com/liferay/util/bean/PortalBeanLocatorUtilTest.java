@@ -38,11 +38,10 @@ public class PortalBeanLocatorUtilTest extends PowerMockito {
 
 	@Test
 	public void testBeanLocatorHasNotBeenSet() {
-		try
-		{
+		try {
 			PortalBeanLocatorUtil.locate("beanName");
 		}
-		catch(BeanLocatorException ble) {
+		catch (BeanLocatorException ble) {
 			Assert.assertTrue(true);
 			return;
 		}

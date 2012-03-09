@@ -59,12 +59,12 @@ public class KeywordsUtilTest {
 	}
 
 	@Test
-	public void testToWildcarSimpleText() {
+	public void testToWildcardSimpleText() {
 		Assert.assertEquals("abc*", KeywordsUtil.toWildcard("abc"));
 	}
 
 	@Test
-	public void testToWildcarWidlcarText() {
+	public void testToWildcardWildcardText() {
 		Assert.assertEquals("abc*", KeywordsUtil.toWildcard("abc*"));
 	}
 

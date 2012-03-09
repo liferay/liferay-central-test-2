@@ -28,48 +28,48 @@ public class InternetAddressUtilTest {
 
 	@Before
 	public void setUp() throws AddressException {
-		_internetAddresses = buildEmailAddresses(11);
+		_internetAddresses = buildInternetAddresses(11);
 	}
 
 	@Test
-	public void testContainsNullEmailAddress() throws AddressException {
+	public void testContainsNullEmailAddress() {
 		Assert.assertFalse(
 			InternetAddressUtil.contains(_internetAddresses, null));
 	}
 
 	@Test
-	public void testContainsValidEmailAddress() throws AddressException {
+	public void testContainsValidEmailAddress() {
 		Assert.assertTrue(
 			InternetAddressUtil.contains(_internetAddresses, "1@liferay.com"));
 	}
 
 	@Test
-	public void testNotContainsValidEmailAddress() throws AddressException {
+	public void testInvalidEmailAddress() {
+		Assert.assertFalse(InternetAddressUtil.isValid("miguel.pastor"));
+	}
+
+	@Test
+	public void testInvalidEmailAddressWithAt() {
+		Assert.assertFalse(InternetAddressUtil.isValid("miguel.pastor@"));
+	}
+
+	@Test
+	public void testNotContainsValidEmailAddress() {
 		Assert.assertFalse(
 			InternetAddressUtil.contains(_internetAddresses, "12@liferay.com"));
 	}
 
 	@Test
-	public void testNoValidEmail() {
-		Assert.assertFalse(InternetAddressUtil.isValid("miguel.pastor"));
-	}
-
-	@Test
-	public void testNoValidEmailWithAt() {
-		Assert.assertFalse(InternetAddressUtil.isValid("miguel.pastor@"));
-	}
-
-	@Test
-	public void testRemoveExistingEmailAddress() throws AddressException {
-		InternetAddress[] restOfInternetAddresses =
+	public void testRemoveExistingEmailAddress() {
+		InternetAddress[] internetAddresses =
 			InternetAddressUtil.removeEntry(
 				_internetAddresses, "1@liferay.com");
 
-		Assert.assertEquals(10, restOfInternetAddresses.length);
+		Assert.assertEquals(10, internetAddresses.length);
 	}
 
 	@Test
-	public void testRemoveNonExistingEmailAddress() throws AddressException {
+	public void testRemoveNonexistentEmailAddress() {
 		InternetAddress[] restOfInternetAddresses =
 			InternetAddressUtil.removeEntry(
 				_internetAddresses, "12@liferay.com");
@@ -78,17 +78,17 @@ public class InternetAddressUtilTest {
 	}
 
 	@Test
-	public void testValidEmail() {
+	public void testValidEmailAddress() {
 		Assert.assertTrue(
 			InternetAddressUtil.isValid("miguel.pastor@liferay.com"));
 	}
 
-	protected InternetAddress[] buildEmailAddresses(
-		int numOfAddress) throws AddressException {
+	protected InternetAddress[] buildInternetAddresses(int size)
+		throws AddressException {
 
-		InternetAddress[] internetAddresses = new InternetAddress[numOfAddress];
+		InternetAddress[] internetAddresses = new InternetAddress[size];
 
-		for (int i=0; i < numOfAddress; i++) {
+		for (int i = 0; i < size; i++) {
 			internetAddresses[i] = new InternetAddress(
 				String.valueOf(i) + _INTERNET_ADDRESS_SUFFIX);
 		}

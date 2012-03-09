@@ -14,6 +14,8 @@
 
 package com.liferay.util;
 
+import com.liferay.util.NumberFormatUtil;
+
 import java.text.NumberFormat;
 
 import java.util.Locale;
@@ -28,16 +30,14 @@ public class NumberFormatUtilTest {
 
 	@Test
 	public void testNoDecimal() {
-		String d = NumberFormatUtil.format(_numberFormat, 1d, 1.1);
-
-		Assert.assertEquals("1", d);
+		Assert.assertEquals(
+			"1", NumberFormatUtil.format(_numberFormat, 1, 1.1));
 	}
 
 	@Test
 	public void testOneDecimal() {
-		String d = NumberFormatUtil.format(_numberFormat, 1.1d, 1.1);
-
-		Assert.assertEquals("1.1", d);
+		Assert.assertEquals(
+			"1.1", NumberFormatUtil.format(_numberFormat, 1.1, 1.1));
 	}
 
 	private NumberFormat _numberFormat = NumberFormat.getNumberInstance(
