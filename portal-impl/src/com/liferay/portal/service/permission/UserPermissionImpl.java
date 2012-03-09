@@ -162,8 +162,7 @@ public class UserPermissionImpl implements UserPermission {
 								organizationGroup.getGroupId(),
 								RoleConstants.ORGANIZATION_OWNER, true)) {
 
-							continue;
-						}
+						continue;
 					}
 
 					return true;
