@@ -17,8 +17,6 @@ package com.liferay.portal.poller;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.notifications.ChannelException;
 import com.liferay.portal.kernel.notifications.ChannelHubManagerUtil;
 import com.liferay.portal.kernel.notifications.ChannelListener;
@@ -84,9 +82,6 @@ public class SynchronousPollerChannelListener implements ChannelListener {
 
 		this.notify();
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(
-		SynchronousPollerChannelListener.class);
 
 	private long _companyId;
 	private boolean _complete;
