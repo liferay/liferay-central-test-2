@@ -158,7 +158,7 @@ public class UserPermissionImpl implements UserPermission {
 								RoleConstants.ORGANIZATION_ADMINISTRATOR,
 								true) &&
 							 !UserGroupRoleLocalServiceUtil.hasUserGroupRole(
-								user.getUserId(),
+								permissionChecker.getUserId(),
 								organizationGroup.getGroupId(),
 								RoleConstants.ORGANIZATION_OWNER, true)) {
 
