@@ -37,6 +37,13 @@ public class WarTask {
 		war.setExcludes(excludes);
 		war.setWebxml(webxml);
 
+		// LPS-18996: preserve original plugin MANIFEST.MF
+		File manifestFile = new File(baseDir.getAbsolutePath() + File.separator
+				+ "META-INF" + File.separator + "MANIFEST.MF");
+		if (manifestFile.exists()) {
+			war.setManifest(manifestFile);
+		}
+		
 		war.execute();
 	}
 
