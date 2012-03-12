@@ -110,7 +110,7 @@ public class CacheFilter extends BasePortalFilter {
 
 		if (queryString == null) {
 			queryString = (String)request.getAttribute(
-				"javax.servlet.forward.query_string");
+				JavaConstants.JAVAX_SERVLET_FORWARD_QUERY_STRING);
 
 			if (queryString == null) {
 				String url = (String)request.getAttribute(
