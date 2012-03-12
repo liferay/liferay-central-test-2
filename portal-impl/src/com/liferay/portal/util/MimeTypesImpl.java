@@ -79,7 +79,7 @@ public class MimeTypesImpl implements MimeTypes, MimeTypesReaderMetKeys {
 	}
 
 	public String getContentType(File file, String fileName) {
-		if (file == null || !file.exists()) {
+		if ((file == null) || !file.exists()) {
 			return getContentType(fileName);
 		}
 
