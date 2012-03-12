@@ -29,6 +29,7 @@ import java.util.Map;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
+import javax.portlet.PortletContext;
 import javax.portlet.PortletException;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
@@ -261,8 +262,9 @@ public class StrutsPortlet extends LiferayPortlet {
 	protected String viewAction;
 
 	private PortletRequestProcessor _getPortletRequestProcessor() {
+		PortletContext portletContext = getPortletContext();
 
-		return (PortletRequestProcessor)getPortletContext().getAttribute(
+		return (PortletRequestProcessor)portletContext.getAttribute(
 			WebKeys.PORTLET_STRUTS_PROCESSOR);
 	}
 
