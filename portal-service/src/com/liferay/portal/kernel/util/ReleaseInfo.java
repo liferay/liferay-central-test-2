@@ -106,13 +106,13 @@ public class ReleaseInfo {
 		return _VERSION;
 	}
 
-	private static final String _BUILD = "6200";
+	private static final String _BUILD = "6101";
 
 	private static final int _BUILD_NUMBER = Integer.parseInt(_BUILD);
 
-	private static final String _CODE_NAME = "Newton";
+	private static final String _CODE_NAME = "Paton";
 
-	private static final String _DATE = "January 18, 2012";
+	private static final String _DATE = "April 9, 2012";
 
 	private static final String _NAME = "Liferay Portal Community Edition";
 
@@ -124,9 +124,9 @@ public class ReleaseInfo {
 
 	private static final String _VENDOR = "Liferay, Inc.";
 
-	private static final String _VERSION = "6.2.0";
+	private static final String _VERSION = "6.1.1";
 
-	private static final String _VERSION_DISPLAY_NAME = "6.2.0 CE";
+	private static final String _VERSION_DISPLAY_NAME = "6.1.1 CE";
 
 	private static String _releaseInfo;
 	private static String _serverInfo;
