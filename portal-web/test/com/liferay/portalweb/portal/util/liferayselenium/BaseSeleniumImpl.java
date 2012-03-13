@@ -12,98 +12,61 @@
  * details.
  */
 
-package com.liferay.portalweb.portal.util;
+package com.liferay.portalweb.portal.util.liferayselenium;
 
 import com.liferay.portal.kernel.util.FileUtil;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portalweb.portal.util.TestPropsValues;
 
 import com.thoughtworks.selenium.CommandProcessor;
-import com.thoughtworks.selenium.DefaultSelenium;
+import com.thoughtworks.selenium.Selenium;
 
-import java.io.File;
+import java.lang.reflect.Field;
 
 /**
  * @author Brian Wing Shun Chan
  */
-public class LiferayDefaultSelenium
-	extends DefaultSelenium implements LiferaySelenium {
+public abstract class BaseSeleniumImpl
+	extends SeleniumWrapper implements LiferaySelenium {
 
-	public LiferayDefaultSelenium(CommandProcessor processor) {
-		super(processor);
-	}
+	public BaseSeleniumImpl(String projectDir, Selenium selenium) {
+		super(selenium);
 
-	public LiferayDefaultSelenium(
-		String serverHost, int serverPort, String browserStartCommand,
-		String browserURL) {
+		_projectDir = projectDir;
 
-		super(serverHost, serverPort, browserStartCommand, browserURL);
+		initCommandProcessor();
 
-		File file = new File(StringPool.PERIOD);
-
-		String absolutePath = file.getAbsolutePath();
-
-		if (absolutePath.endsWith(StringPool.PERIOD)) {
-			absolutePath = absolutePath.substring(0, absolutePath.length() - 1);
-
-			_projectDir = absolutePath;
-		}
+		selenium.start();
 	}
 
 	public void downloadTempFile(String value) {
-		if (!_BROWSER_TYPE.equals("*chrome") &&
-			!_BROWSER_TYPE.equals("*firefox") &&
-			!_BROWSER_TYPE.equals("*iehta") &&
-			!_BROWSER_TYPE.equals("*iexplore")) {
-
-			return;
-		}
-
-		try {
-			String[] commands = {
-				RuntimeVariables.replace(
-					_SELENIUM_EXECUTABLE_DIR +
-						TestPropsValues.SELENIUM_DOWNLOAD_FILE),
-				TestPropsValues.OUTPUT_DIR + value
-			};
-
-			Runtime runtime = Runtime.getRuntime();
-
-			Thread.sleep(5000);
-
-			runtime.exec(commands);
-
-			Thread.sleep(30000);
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
+		LiferaySeleniumHelper.downloadTempFile(value);
 	}
 
 	public String getCurrentDay() {
-		return commandProcessor.getString("getCurrentDay", new String[0]);
+		return _commandProcessor.getString("getCurrentDay", new String[0]);
 	}
 
 	public String getCurrentMonth() {
-		return commandProcessor.getString("getCurrentMonth", new String[0]);
+		return _commandProcessor.getString("getCurrentMonth", new String[0]);
 	}
 
 	public String getCurrentYear() {
-		return commandProcessor.getString("getCurrentYear", new String[0]);
+		return _commandProcessor.getString("getCurrentYear", new String[0]);
 	}
 
 	public String getFirstNumber(String locator) {
-		return commandProcessor.getString(
+		return _commandProcessor.getString(
 			"getFirstNumber", new String[] {locator,});
 	}
 
 	public String getFirstNumberIncrement(String locator) {
-		return commandProcessor.getString(
+		return _commandProcessor.getString(
 			"getFirstNumberIncrement", new String[] {locator,});
 	}
 
 	public boolean isPartialText(String locator, String value) {
-		return commandProcessor.getBoolean(
+		return _commandProcessor.getBoolean(
 			"isPartialText", new String[] {locator, value,});
 	}
 
@@ -128,26 +91,7 @@ public class LiferayDefaultSelenium
 	}
 
 	public void setBrowserOption() {
-		if (!_BROWSER_TYPE.equals("*chrome") &&
-			!_BROWSER_TYPE.equals("*firefox")) {
-
-			return;
-		}
-
-		try {
-			String command = RuntimeVariables.replace(
-				_SELENIUM_EXECUTABLE_DIR +
-					TestPropsValues.SELENIUM_SET_BROWSER_OPTION);
-
-			Runtime runtime = Runtime.getRuntime();
-
-			runtime.exec(command);
-
-			Thread.sleep(10000);
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
+		LiferaySeleniumHelper.setBrowserOption();
 	}
 
 	@Override
@@ -205,14 +149,27 @@ public class LiferayDefaultSelenium
 		throw new RuntimeException("Unable to find screenshot file name");
 	}
 
-	private static final String _BROWSER_TYPE = TestPropsValues.BROWSER_TYPE;
+	protected void initCommandProcessor() {
+		try {
+			Selenium selenium = getWrappedSelenium();
+
+			Class<?> clazz = selenium.getClass();
+
+			Field field = clazz.getField("commandProcessor");
+
+			field.setAccessible(true);
+
+			_commandProcessor = (CommandProcessor)field.get(selenium);
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
 
 	private static final String _OUTPUT_SCREENSHOTS_DIR =
 		TestPropsValues.OUTPUT_DIR + "screenshots/";
 
-	private static final String _SELENIUM_EXECUTABLE_DIR =
-		TestPropsValues.SELENIUM_EXECUTABLE_DIR;
-
+	private CommandProcessor _commandProcessor;
 	private String _projectDir;
 	private String _timeout = "90000";
 
