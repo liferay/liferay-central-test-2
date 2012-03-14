@@ -37,7 +37,8 @@
 						(TEMP_TABLE.tempGroupId = JournalArticle.groupId) AND
 						(TEMP_TABLE.tempArticleId = JournalArticle.articleId) AND
 						(TEMP_TABLE.tempVersion = JournalArticle.version)
-			WHERE (type_ = ? [$AND_OR_NULL_CHECK$])
+			WHERE
+				(type_ = ? [$AND_OR_NULL_CHECK$])
 		]]>
 	</sql>
 	<sql id="com.liferay.portlet.journal.service.persistence.JournalArticleFinder.findByExpirationDate">
@@ -115,7 +116,8 @@
 						(TEMP_TABLE.tempGroupId = JournalArticle.groupId) AND
 						(TEMP_TABLE.tempArticleId = JournalArticle.articleId) AND
 						(TEMP_TABLE.tempVersion = JournalArticle.version)
-			WHERE (type_ = ? [$AND_OR_NULL_CHECK$])
+			WHERE
+				(type_ = ? [$AND_OR_NULL_CHECK$])
 			ORDER BY
 				id_ ASC
 		]]>
