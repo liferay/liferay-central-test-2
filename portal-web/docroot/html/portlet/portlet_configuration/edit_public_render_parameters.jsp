@@ -52,7 +52,7 @@ editPublicRenderParameterURL.setParameter("portletResource", portletResource);
 	<aui:input name="portletResource" type="hidden" value="<%= portletResource %>" />
 
 	<liferay-ui:search-container
-		id="publicRenderParametersSearchContainer"
+		id="publicRenderParameterConfigurationsSearchContainer"
 	>
 		<liferay-ui:search-container-results
 			results="<%= ListUtil.subList(publicRenderParameterConfigurations, searchContainer.getStart(), searchContainer.getEnd()) %>"

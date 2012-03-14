@@ -37,7 +37,7 @@ portletURL.setParameter("struts_action", "/blogs_admin/view");
 	</liferay-util:include>
 
 	<liferay-ui:search-container
-		id="blogEntriesSearchContaniner"
+		id="blogsEntriesSearchContainer"
 		rowChecker="<%= new RowChecker(renderResponse) %>"
 		searchContainer="<%= new EntrySearch(renderRequest, portletURL) %>"
 	>
