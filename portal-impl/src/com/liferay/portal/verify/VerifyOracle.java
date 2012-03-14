@@ -51,7 +51,7 @@ public class VerifyOracle extends VerifyProcess {
 
 			ps = con.prepareStatement(
 				"select table_name, column_name, data_length from " +
-					"user_tab_columns where data_type = 'VARCHAR2' AND " +
+					"user_tab_columns where data_type = 'VARCHAR2' and " +
 						"char_used = 'B'");
 
 			rs = ps.executeQuery();
