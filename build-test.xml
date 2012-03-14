@@ -3634,7 +3634,17 @@ file.
 	</target>
 
 	<target name="start-selenium">
-		<java jar="lib/development/selenium-server.jar" fork="true" spawn="true">
+		<!--<java
+			jar="lib/development/selenium-server.jar"
+			fork="true"
+			spawn="true"
+		>-->
+		<java
+			classname="org.openqa.grid.selenium.GridLauncher"
+			classpathref="project.classpath"
+			fork="true"
+			spawn="true"
+		>
 			<arg line="-port 14444 -singleWindow" />
 		</java>
 	</target>
@@ -3646,7 +3656,7 @@ file.
 	</target>
 
 	<target name="stop-selenium">
-		<antelope:post to="http://localhost:14444/selenium-server/driver/?cmd=shutDown" wantresponse="true" />
+		<antelope:post to="http://localhost:14444/selenium-server/driver/?cmd=shutDownSeleniumServer" wantresponse="true" />
 	</target>
 
 	<target name="stop-selenium-nanny">
