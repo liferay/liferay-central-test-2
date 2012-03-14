@@ -272,38 +272,38 @@ public class PluginPackageHotDeployListener extends BaseHotDeployListener {
 		URL cacheConfigurationURL = classLoader.getResource(
 			cacheConfigurationPath);
 
-		if (cacheConfigurationURL != null) {
+		if (cacheConfigurationURL == null) {
+			return;
+		}
 
-			ClassLoader aggregateClassLoader =
-				AggregateClassLoader.getAggregateClassLoader(
-					new ClassLoader[] {
-						PortalClassLoaderUtil.getClassLoader(), classLoader
-					});
-			
-			ClassLoader contextClassLoader = 
-				Thread.currentThread().getContextClassLoader();
+		ClassLoader aggregateClassLoader =
+			AggregateClassLoader.getAggregateClassLoader(
+				new ClassLoader[] {
+					PortalClassLoaderUtil.getClassLoader(), classLoader
+				});
 
-			try {
-				Thread.currentThread().setContextClassLoader(
-					aggregateClassLoader);
+		Thread currentThread = Thread.currentThread();
 
-				PortalCacheManager portalCacheManager =
-					(PortalCacheManager)PortalBeanLocatorUtil.locate(
-						portalCacheManagerBeanId);
+		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
 
-				if (_log.isInfoEnabled()) {
-					_log.info(
-						"Reconfiguring caches in cache manager " +
-							portalCacheManagerBeanId + " using " +
-								cacheConfigurationURL);
-				}
+		try {
+			currentThread.setContextClassLoader(aggregateClassLoader);
 
-				portalCacheManager.reconfigureCaches(cacheConfigurationURL);
-			} 
-			finally {
-				Thread.currentThread().setContextClassLoader(
-					contextClassLoader);
+			PortalCacheManager portalCacheManager =
+				(PortalCacheManager)PortalBeanLocatorUtil.locate(
+					portalCacheManagerBeanId);
+
+			if (_log.isInfoEnabled()) {
+				_log.info(
+					"Reconfiguring caches in cache manager " +
+						portalCacheManagerBeanId + " using " +
+							cacheConfigurationURL);
 			}
+
+			portalCacheManager.reconfigureCaches(cacheConfigurationURL);
+		}
+		finally {
+			currentThread.setContextClassLoader(contextClassLoader);
 		}
 	}
 

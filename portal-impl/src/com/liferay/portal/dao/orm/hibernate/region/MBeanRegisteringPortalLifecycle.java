@@ -20,7 +20,6 @@ import com.liferay.portal.kernel.util.BasePortalLifecycle;
 import javax.management.MBeanServer;
 
 import net.sf.ehcache.CacheManager;
-import net.sf.ehcache.event.CacheManagerEventListenerRegistry;
 import net.sf.ehcache.management.ManagementService;
 
 /**

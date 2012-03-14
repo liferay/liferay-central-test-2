@@ -102,13 +102,10 @@ public class MBeanRegistry {
 				try {
 					_mBeanServer.unregisterMBean(defaultObjectName);
 				}
-				catch (InstanceNotFoundException e) {
-					//it's not an error if unable to remove a previously
-					//unregistered mbean.
+				catch (InstanceNotFoundException infe) {
 					if (_log.isInfoEnabled()) {
 						_log.info(
-							"Unable to find MBean to unregister: " +
-								defaultObjectName, e);
+							"Unable to unregister " + defaultObjectName, infe);
 					}
 				}
 			}
