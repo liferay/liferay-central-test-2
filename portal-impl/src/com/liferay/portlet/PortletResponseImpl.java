@@ -85,16 +85,16 @@ public abstract class PortletResponseImpl implements LiferayPortletResponse {
 		PortletResponse portletResponse) {
 
 		while (!(portletResponse instanceof PortletResponseImpl)) {
-
 			if (portletResponse instanceof PortletResponseWrapper) {
 				PortletResponseWrapper portletResponseWrapper =
 					(PortletResponseWrapper)portletResponse;
+
 				portletResponse = portletResponseWrapper.getResponse();
 			}
 			else {
 				throw new RuntimeException(
 					"Unable to unwrap the portlet response from " +
-						portletResponse.getClass().getName());
+						portletResponse.getClass());
 			}
 		}
 

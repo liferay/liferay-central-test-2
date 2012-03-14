@@ -87,16 +87,16 @@ public abstract class PortletRequestImpl implements LiferayPortletRequest {
 		PortletRequest portletRequest) {
 
 		while (!(portletRequest instanceof PortletRequestImpl)) {
-
 			if (portletRequest instanceof PortletRequestWrapper) {
 				PortletRequestWrapper portletRequestWrapper =
 					(PortletRequestWrapper)portletRequest;
+
 				portletRequest = portletRequestWrapper.getRequest();
 			}
 			else {
 				throw new RuntimeException(
 					"Unable to unwrap the portlet request from " +
-						portletRequest.getClass().getName());
+						portletRequest.getClass());
 			}
 		}
 
