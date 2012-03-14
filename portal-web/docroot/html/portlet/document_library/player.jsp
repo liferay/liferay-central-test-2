@@ -54,11 +54,13 @@ for (String previewFileURL : previewFileURLs) {
 						allowfullscreen: 'true'
 					},
 					height: 32
+
+					<c:if test="<%= Validator.isNotNull(oggPreviewFileURL) %>">
+						, oggUrl: '<%= oggPreviewFileURL %>'
+					</c:if>
+
 					<c:if test="<%= Validator.isNotNull(mp3PreviewFileURL) %>">
 						, url: '<%= mp3PreviewFileURL %>'
-					</c:if>
-					<c:if test="<%= Validator.isNotNull(oggPreviewFileURL) %>">
-						, oggUrl: '<%= oggPreviewFileURL %>',
 					</c:if>
 				}
 			).render();

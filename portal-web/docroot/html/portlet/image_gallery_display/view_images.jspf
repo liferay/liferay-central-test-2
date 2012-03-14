@@ -52,6 +52,7 @@
 					String src = themeDisplay.getPathThemeImages() + "/file_system/large/" + DLUtil.getGenericName(fileEntry.getExtension()) + ".png";
 
 					int playerHeight = 500;
+
 					String dataOptions = StringPool.BLANK;
 
 					if (hasAudio) {
