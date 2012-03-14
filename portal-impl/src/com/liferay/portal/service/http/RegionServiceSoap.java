@@ -80,10 +80,10 @@ public class RegionServiceSoap {
 		}
 	}
 
-	public static com.liferay.portal.model.RegionSoap fetchRegionByRegionCode(
+	public static com.liferay.portal.model.RegionSoap fetchRegion(
 		long countryId, java.lang.String regionCode) throws RemoteException {
 		try {
-			com.liferay.portal.model.Region returnValue = RegionServiceUtil.fetchRegionByRegionCode(countryId,
+			com.liferay.portal.model.Region returnValue = RegionServiceUtil.fetchRegion(countryId,
 					regionCode);
 
 			return com.liferay.portal.model.RegionSoap.toSoapModel(returnValue);
@@ -99,6 +99,21 @@ public class RegionServiceSoap {
 		throws RemoteException {
 		try {
 			com.liferay.portal.model.Region returnValue = RegionServiceUtil.getRegion(regionId);
+
+			return com.liferay.portal.model.RegionSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portal.model.RegionSoap getRegion(
+		long countryId, java.lang.String regionCode) throws RemoteException {
+		try {
+			com.liferay.portal.model.Region returnValue = RegionServiceUtil.getRegion(countryId,
+					regionCode);
 
 			return com.liferay.portal.model.RegionSoap.toSoapModel(returnValue);
 		}

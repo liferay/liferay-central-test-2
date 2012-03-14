@@ -42,6 +42,12 @@ public class CountryServiceWrapper implements CountryService,
 		return _countryService.fetchCountry(countryId);
 	}
 
+	public com.liferay.portal.model.Country fetchCountryByA2(
+		java.lang.String a2)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _countryService.fetchCountryByA2(a2);
+	}
+
 	public com.liferay.portal.model.Country fetchCountryByA3(
 		java.lang.String a3)
 		throws com.liferay.portal.kernel.exception.SystemException {
