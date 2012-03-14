@@ -334,16 +334,18 @@ public class PortletExporter {
 		throws Exception {
 
 		Element assetsElement = rootElement.element("assets");
-		Element assetCategoriesElement = rootElement.element("categories");
-		Element assetVocabulariesElement = rootElement.element("vocabularies");
 
 		if (assetsElement == null) {
 			assetsElement = rootElement.addElement("assets");
 		}
 
+		Element assetCategoriesElement = rootElement.element("categories");
+
 		if (assetCategoriesElement == null) {
 			assetCategoriesElement = rootElement.addElement("categories");
 		}
+
+		Element assetVocabulariesElement = rootElement.element("vocabularies");
 
 		if (assetVocabulariesElement == null) {
 			assetVocabulariesElement = rootElement.addElement("vocabularies");
