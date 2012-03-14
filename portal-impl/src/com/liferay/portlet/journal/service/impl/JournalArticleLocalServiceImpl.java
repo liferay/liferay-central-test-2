@@ -2756,6 +2756,7 @@ public class JournalArticleLocalServiceImpl
 						ContentTypes.TEXT_HTML, staticContent);
 
 					staticContentElement.clearContent();
+
 					staticContentElement.addCDATA(staticContent);
 				}
 			}
