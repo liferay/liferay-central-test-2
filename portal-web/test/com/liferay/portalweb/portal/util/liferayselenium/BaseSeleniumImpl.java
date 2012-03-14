@@ -155,7 +155,7 @@ public abstract class BaseSeleniumImpl
 
 			Class<?> clazz = selenium.getClass();
 
-			Field field = clazz.getField("commandProcessor");
+			Field field = clazz.getDeclaredField("commandProcessor");
 
 			field.setAccessible(true);
 
