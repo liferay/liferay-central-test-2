@@ -39,10 +39,10 @@ public class VerifyCalendar extends VerifyProcess {
 	@Override
 	protected void doVerify() throws Exception {
 		verifyNoAssets();
-		verifySerialization();
+		verifyRecurrence();
 	}
 
-	protected void updateCalEvent(long eventId, String recurrence)
+	protected void updateEvent(long eventId, String recurrence)
 		throws Exception {
 
 		Connection con = null;
@@ -91,7 +91,7 @@ public class VerifyCalendar extends VerifyProcess {
 
 	}
 
-	protected void verifySerialization() throws Exception {
+	protected void verifyRecurrence() throws Exception {
 		JSONSerializer jsonSerializer = new JSONSerializer();
 
 		jsonSerializer.registerDefaultSerializers();
@@ -105,20 +105,21 @@ public class VerifyCalendar extends VerifyProcess {
 
 			ps = con.prepareStatement(
 				"select eventId, recurrence from CalEvent where recurrence " +
-					"not like '%serializable%'");
+					"is not null and recurrence != '' and recurrence not " +
+						"like '%serializable%'");
 
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
 				long eventId = rs.getLong("eventId");
-				String oldRecurrence = rs.getString("recurrence");
+				String recurrence = rs.getString("recurrence");
 
-				TZSRecurrence recurrence =
-					(TZSRecurrence)jsonSerializer.fromJSON(oldRecurrence);
+				TZSRecurrence recurrenceObj =
+					(TZSRecurrence)jsonSerializer.fromJSON(recurrence);
 
-				String newRecurrence = JSONFactoryUtil.serialize(recurrence);
+				String newRecurrence = JSONFactoryUtil.serialize(recurrenceObj);
 
-				updateCalEvent(eventId, newRecurrence);
+				updateEvent(eventId, newRecurrence);
 			}
 		}
 		finally {
