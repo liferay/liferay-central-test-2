@@ -29,9 +29,9 @@ if (Validator.isNull(id)) {
 
 	if (Validator.isNotNull(id)) {
 		String simpleClassName = id;
-		
+
 		int pos = id.indexOf(StringPool.PERIOD);
-		
+
 		if (pos != -1) {
 			simpleClassName = id.substring(pos + 1);
 		}
