@@ -28,7 +28,17 @@ if (Validator.isNull(id)) {
 	id = searchContainer.getClassName();
 
 	if (Validator.isNotNull(id)) {
-		id = TextFormatter.format(StringUtil.extractLast(id, StringPool.PERIOD), TextFormatter.F);
+		String simpleClassName = id;
+		
+		int pos = id.indexOf(StringPool.PERIOD);
+		
+		if (pos != -1) {
+			simpleClassName = id.substring(pos + 1);
+		}
+
+		String variableCasingSimpleClassName = TextFormatter.format(simpleClassName, TextFormatter.I);
+
+		id = TextFormatter.formatPlural(variableCasingSimpleClassName);
 	}
 	else {
 		id = PortalUtil.generateRandomKey(request, "taglib_search_container");
