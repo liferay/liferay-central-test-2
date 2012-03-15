@@ -179,12 +179,12 @@ public class ConvertDatabase extends ConvertProcess {
 				ServiceComponentLocalServiceUtil.getServiceComponents(
 					QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
-			Set<String> validIndexes = new HashSet<String>();
+			Set<String> validIndexNames = new HashSet<String>();
 
 			for (ServiceComponent serviceComponent : serviceComponents) {
 				String indexesSQL = serviceComponent.getIndexesSQL();
 
-				db.addIndexes(connection, indexesSQL, validIndexes);
+				db.addIndexes(connection, indexesSQL, validIndexNames);
 			}
 		}
 		finally {
