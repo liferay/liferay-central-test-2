@@ -88,7 +88,7 @@ if (!(portletName.equals(PortletKeys.PASSWORD_POLICIES_ADMIN) || portletName.equ
 boolean filterManageableGroups = true;
 boolean filterManageableOrganizations = true;
 
-if (permissionChecker.hasPermission(themeDisplay.getScopeGroupId(), Organization.class.getName(), String.valueOf(company.getCompanyId()), ActionKeys.VIEW)) {
+if (permissionChecker.hasPermission(0, Organization.class.getName(), String.valueOf(company.getCompanyId()), ActionKeys.VIEW)) {
 	filterManageableOrganizations = false;
 }
 
@@ -98,6 +98,7 @@ boolean filterManageableUserGroups = true;
 
 if (portletName.equals(PortletKeys.MY_ACCOUNT)) {
 	filterManageableGroups = false;
+	filterManageableOrganizations = false;
 	filterManageableRoles = false;
 	filterManageableUserGroupRoles = false;
 	filterManageableUserGroups = false;
