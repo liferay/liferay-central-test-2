@@ -270,8 +270,8 @@ public class PortletURLImpl
 		return _portletRequest;
 	}
 
-	public Set<String> getRemovedParamNames() {
-		return _removedParamNames;
+	public Set<String> getRemovedParameterNames() {
+		return _removedParameterNames;
 	}
 
 	public Map<String, String> getReservedParameterMap() {
@@ -615,8 +615,8 @@ public class PortletURLImpl
 		clearCache();
 	}
 
-	public void setRemovedParamNames(Set<String> removedParamNames) {
-		_removedParamNames = removedParamNames;
+	public void setRemovedParameterNames(Set<String> removedParameterNames) {
+		_removedParameterNames = removedParameterNames;
 
 		clearCache();
 	}
@@ -1264,8 +1264,8 @@ public class PortletURLImpl
 			}
 
 			if (!_lifecycle.equals(PortletRequest.RESOURCE_PHASE) &&
-				(_removedParamNames != null) &&
-				_removedParamNames.contains(name)) {
+				(_removedParameterNames != null) &&
+				_removedParameterNames.contains(name)) {
 
 				continue;
 			}
@@ -1397,7 +1397,7 @@ public class PortletURLImpl
 	private PortletMode _portletMode;
 	private PortletRequest _portletRequest;
 	private long _refererPlid;
-	private Set<String> _removedParamNames;
+	private Set<String> _removedParameterNames;
 	private Map<String, String[]> _removePublicRenderParameters;
 	private HttpServletRequest _request;
 	private Map<String, String> _reservedParameters;

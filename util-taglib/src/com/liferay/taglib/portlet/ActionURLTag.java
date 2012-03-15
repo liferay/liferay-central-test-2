@@ -53,8 +53,8 @@ public class ActionURLTag extends ParamAndPropertyAncestorTagImpl {
 			String resourceID, String cacheability, long plid, long refererPlid,
 			String portletName, Boolean anchor, Boolean encrypt,
 			long doAsGroupId, long doAsUserId, Boolean portletConfiguration,
-			Map<String, String[]> params, Set<String> removedParamNames,
-			PageContext pageContext)
+			Map<String, String[]> parameterMap,
+			Set<String> removedParameterNames, PageContext pageContext)
 		throws Exception {
 
 		HttpServletRequest request =
@@ -152,13 +152,13 @@ public class ActionURLTag extends ParamAndPropertyAncestorTagImpl {
 			liferayPortletURL.setParameter("previewWidth", previewWidth);
 		}
 
-		if (params != null) {
-			MapUtil.merge(liferayPortletURL.getParameterMap(), params);
+		if (parameterMap != null) {
+			MapUtil.merge(liferayPortletURL.getParameterMap(), parameterMap);
 
-			liferayPortletURL.setParameters(params);
+			liferayPortletURL.setParameters(parameterMap);
 		}
 
-		liferayPortletURL.setRemovedParamNames(removedParamNames);
+		liferayPortletURL.setRemovedParameterNames(removedParameterNames);
 
 		String portletURLToString = liferayPortletURL.toString();
 
@@ -183,7 +183,7 @@ public class ActionURLTag extends ParamAndPropertyAncestorTagImpl {
 				_secure, _copyCurrentRenderParameters, _escapeXml, _name,
 				_resourceID, _cacheability, _plid, _refererPlid, _portletName,
 				_anchor, _encrypt, _doAsGroupId, _doAsUserId,
-				_portletConfiguration, getParams(), getRemovedParamNames(),
+				_portletConfiguration, getParams(), getRemovedParameterNames(),
 				pageContext);
 
 			return EVAL_PAGE;

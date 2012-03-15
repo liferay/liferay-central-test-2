@@ -41,16 +41,15 @@ public class ParamAndPropertyAncestorTagImpl
 		}
 
 		// PLT.26.6
+
 		if ((value == null) || (value.length() == 0)) {
-			// Remove on empty value
 			_params.remove(name);
 
-			// Record name for Action/RenderURL checking
-			if (_removedParamNames == null) {
-				_removedParamNames = new HashSet<String>();
+			if (_removedParameterNames == null) {
+				_removedParameterNames = new HashSet<String>();
 			}
 
-			_removedParamNames.add(name);
+			_removedParameterNames.add(name);
 
 			return;
 		}
@@ -101,8 +100,8 @@ public class ParamAndPropertyAncestorTagImpl
 			_params.clear();
 		}
 
-		if (_removedParamNames != null) {
-			_removedParamNames.clear();
+		if (_removedParameterNames != null) {
+			_removedParameterNames.clear();
 		}
 	}
 
@@ -120,8 +119,8 @@ public class ParamAndPropertyAncestorTagImpl
 		return _properties;
 	}
 
-	public Set<String> getRemovedParamNames() {
-		return _removedParamNames;
+	public Set<String> getRemovedParameterNames() {
+		return _removedParameterNames;
 	}
 
 	public ServletContext getServletContext() {
@@ -166,7 +165,7 @@ public class ParamAndPropertyAncestorTagImpl
 
 	private Map<String, String[]> _params;
 	private Map<String, String[]> _properties;
-	private Set<String> _removedParamNames;
+	private Set<String> _removedParameterNames;
 	private ServletContext _servletContext;
 
 }
