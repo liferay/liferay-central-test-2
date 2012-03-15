@@ -101,7 +101,7 @@ pageContext.setAttribute("portletURL", portletURL);
 			escapedModel="<%= true %>"
 			keyProperty="groupId"
 			modelVar="group"
-		    rowVar="row"
+			rowVar="row"
 		>
 			<liferay-portlet:renderURL doAsGroupId="<%= group.getGroupId() %>" portletName="<%= PortletKeys.SITE_SETTINGS %>" varImpl="rowURL">
 				<portlet:param name="redirect" value="<%= currentURL %>" />
