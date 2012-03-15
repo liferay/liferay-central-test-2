@@ -19,16 +19,12 @@ import com.liferay.portal.kernel.util.StringPool;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-
-import org.powermock.api.mockito.PowerMockito;
-import org.powermock.modules.junit4.PowerMockRunner;
 
 /**
  * @author Julio Camarero
  */
 public class FriendlyURLNormalizerImplTest extends TestCase {
-	
+
 	@Test
 	public void testNormalizeBlank() {
 		Assert.assertEquals(
@@ -38,8 +34,7 @@ public class FriendlyURLNormalizerImplTest extends TestCase {
 
 	@Test
 	public void testNormalizeNull() {
-		Assert.assertEquals(
-			null, _friendlyURLNormalizerImpl.normalize(null));
+		Assert.assertEquals(null, _friendlyURLNormalizerImpl.normalize(null));
 	}
 
 	@Test
@@ -95,12 +90,10 @@ public class FriendlyURLNormalizerImplTest extends TestCase {
 
 	@Test
 	public void testNormalizeWordReplacingChars() {
-		char[] replaceChars = {'e', 'w'};
-
 		Assert.assertEquals(
 			"s-nt-nc-ith-r-plac-chars",
 			_friendlyURLNormalizerImpl.normalize(
-				"sentence with replace chars", replaceChars));
+				"sentence with replace chars", new char[] {'e', 'w'}));
 	}
 
 	@Test
