@@ -15,7 +15,7 @@
 package com.liferay.portalweb.socialofficehome.contactscenter.contacts.sousaddasconnectionccuser;
 
 import com.liferay.portalweb.portal.BaseTestSuite;
-import com.liferay.portalweb.portal.controlpanel.users.user.signin.SignOutSOTest;
+import com.liferay.portalweb.socialoffice.users.user.signinso.SignOutSOTest;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;

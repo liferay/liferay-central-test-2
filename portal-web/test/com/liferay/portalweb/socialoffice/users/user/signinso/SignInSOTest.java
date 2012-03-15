@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portalweb.portal.controlpanel.users.user.signin;
+package com.liferay.portalweb.socialoffice.users.user.signinso;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
@@ -20,12 +20,10 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 /**
  * @author Brian Wing Shun Chan
  */
-public class SignOutSOTest extends BaseTestCase {
-	public void testSignOutSO() throws Exception {
+public class SignInSOTest extends BaseTestCase {
+	public void testSignInSO() throws Exception {
 		selenium.open("/web/guest/home/");
 		loadRequiredJavaScriptModules();
-		assertTrue(selenium.isElementPresent("//li[@id='_145_userMenu']/a"));
-		selenium.mouseOver("//li[@id='_145_userMenu']/a");
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -33,7 +31,7 @@ public class SignOutSOTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("link=Sign Out")) {
+				if (selenium.isVisible("link=Sign In")) {
 					break;
 				}
 			}
@@ -43,7 +41,7 @@ public class SignOutSOTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("link=Sign Out", RuntimeVariables.replace("Sign Out"));
+		selenium.clickAt("link=Sign In", RuntimeVariables.replace("Sign In"));
 		selenium.waitForPageToLoad("30000");
 		loadRequiredJavaScriptModules();
 
@@ -53,7 +51,7 @@ public class SignOutSOTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("//input[@value='Sign In']")) {
+				if (selenium.isVisible("//input[@id='_58_login']")) {
 					break;
 				}
 			}
@@ -63,6 +61,17 @@ public class SignOutSOTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertTrue(selenium.isVisible("//input[@value='Sign In']"));
+		selenium.type("//input[@id='_58_login']",
+			RuntimeVariables.replace("test@liferay.com"));
+		selenium.type("//input[@id='_58_password']",
+			RuntimeVariables.replace("test"));
+		assertFalse(selenium.isChecked("//input[@id='_58_rememberMeCheckbox']"));
+		selenium.clickAt("//input[@id='_58_rememberMeCheckbox']",
+			RuntimeVariables.replace("Remember Me"));
+		assertTrue(selenium.isChecked("//input[@id='_58_rememberMeCheckbox']"));
+		selenium.clickAt("//input[@value='Sign In']",
+			RuntimeVariables.replace("Sign In"));
+		selenium.waitForPageToLoad("30000");
+		loadRequiredJavaScriptModules();
 	}
 }
