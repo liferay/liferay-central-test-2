@@ -41,28 +41,39 @@ public class PortalmplTest extends PowerMockito {
 	public void testUpdateRedirectRemoveLayoutURL() {
 		mockStatic(HttpUtil.class);
 
-		when(HttpUtil.getQueryString(Mockito.anyString()))
-		.thenReturn(StringPool.BLANK);
+		when(
+			HttpUtil.getQueryString(Mockito.anyString())
+		).thenReturn(
+			StringPool.BLANK
+		);
 
-		when(HttpUtil.getParameter(
-			Mockito.anyString(), Mockito.anyString(), Mockito.eq(false)))
-		.thenReturn(StringPool.BLANK);
+		when(
+			HttpUtil.getParameter(
+				Mockito.anyString(), Mockito.anyString(), Mockito.eq(false))
+		).thenReturn(
+			StringPool.BLANK
+		);
 
-		when(HttpUtil.encodeURL(Mockito.anyString()))
-		.thenAnswer(new ReturnArgumentCalledAnswer<String>(0));
+		when(
+			HttpUtil.encodeURL(Mockito.anyString())
+		).thenAnswer(
+			new ReturnArgumentCalledAnswer<String>(0)
+		);
 
-		when(HttpUtil.getPath(Mockito.anyString()))
-		.thenAnswer(new ReturnArgumentCalledAnswer<String>(0));
+		when(
+			HttpUtil.getPath(Mockito.anyString())
+		).thenAnswer(
+			new ReturnArgumentCalledAnswer<String>(0)
+		);
 
-		String result = _portal.updateRedirect(
-			"/web/group/layout", "/group/layout", "/group");
-
-		Assert.assertEquals("/web/group", result);
+		Assert.assertEquals(
+			"/web/group",
+			_portalImpl.updateRedirect(
+				"/web/group/layout", "/group/layout", "/group"));
 
 		verifyStatic();
-
 	}
 
-	private PortalImpl _portal = new PortalImpl();
+	private PortalImpl _portalImpl = new PortalImpl();
 
 }

@@ -27,7 +27,7 @@ public class ReturnArgumentCalledAnswer<T> implements Answer<T> {
 	}
 
 	public T answer(InvocationOnMock invocationOnMock) {
-		return (T) invocationOnMock.getArguments()[_position];
+		return (T)invocationOnMock.getArguments()[_position];
 	}
 
 	private int _position;

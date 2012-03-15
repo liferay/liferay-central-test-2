@@ -53,8 +53,10 @@ public class TikaRawMetadataProcessorTest extends PowerMockito {
 		try {
 			when(
 				PrefsPropsUtil.getBoolean(
-					PropsKeys.XUGGLER_ENABLED, PropsValues.XUGGLER_ENABLED))
-			.thenReturn(Boolean.FALSE);
+					PropsKeys.XUGGLER_ENABLED, PropsValues.XUGGLER_ENABLED)
+			).thenReturn(
+				Boolean.FALSE
+			);
 
 			InputStream inputStream = Mockito.any(InputStream.class);
 			ContentHandler contentHandler = Mockito.any(ContentHandler.class);
