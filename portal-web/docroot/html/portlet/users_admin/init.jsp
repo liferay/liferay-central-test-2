@@ -86,6 +86,7 @@ if (!(portletName.equals(PortletKeys.PASSWORD_POLICIES_ADMIN) || portletName.equ
 }
 
 boolean filterManageableGroups = true;
+
 boolean filterManageableOrganizations = true;
 
 if (permissionChecker.hasPermission(0, Organization.class.getName(), String.valueOf(company.getCompanyId()), ActionKeys.VIEW)) {
