@@ -35,14 +35,6 @@ public class WebDriverToSeleniumBridge
 		super(webDriver);
 	}
 
-	public void acceptConfirmation() {
-		WebDriver.TargetLocator targetLocator = switchTo();
-
-		Alert alert = targetLocator.alert();
-
-		alert.accept();
-	}
-
 	public void addCustomRequestHeader(String key, String value) {
 		throw new UnsupportedOperationException();
 	}
@@ -357,33 +349,6 @@ public class WebDriverToSeleniumBridge
 	public String getValue(String locator) {
 		throw new UnsupportedOperationException();
 	}
-
-	public WebElement getWebElement(String locator) {					
-		if (locator.startsWith("//")) {
-			return findElement(By.xpath(locator));
-		}
-		else if (locator.startsWith("xpath=")) {
-			return findElement(By.xpath(locator.substring(6)));
-		}
-		else if (locator.startsWith("link=")) {
-			return findElement(By.linkText(locator.substring(5)));
-		}
-		else if (locator.startsWith("name=")) {
-			return findElement(By.name(locator.substring(5)));
-		}
-		else if (locator.startsWith("class=")) {
-			return findElement(By.className(locator.substring(6)));
-		}
-		else if (locator.startsWith("tag=")) {
-			return findElement(By.tagName(locator.substring(4)));
-		}
-		else if (locator.startsWith("css=")) {
-			return findElement(By.cssSelector(locator.substring(4)));			
-		}
-		else {
-			return findElement(By.id(locator));
-		}
-	}	
 
 	public boolean getWhetherThisFrameMatchFrameExpression(
 		String currentFrameString, String target) {
@@ -703,6 +668,41 @@ public class WebDriverToSeleniumBridge
 
 	public void windowMaximize() {
 		throw new UnsupportedOperationException();
+	}
+
+	protected void acceptConfirmation() {
+		WebDriver.TargetLocator targetLocator = switchTo();
+
+		Alert alert = targetLocator.alert();
+
+		alert.accept();
+	}
+
+	protected WebElement getWebElement(String locator) {
+		if (locator.startsWith("//")) {
+			return findElement(By.xpath(locator));
+		}
+		else if (locator.startsWith("class=")) {
+			return findElement(By.className(locator.substring(6)));
+		}
+		else if (locator.startsWith("css=")) {
+			return findElement(By.cssSelector(locator.substring(4)));
+		}
+		else if (locator.startsWith("link=")) {
+			return findElement(By.linkText(locator.substring(5)));
+		}
+		else if (locator.startsWith("name=")) {
+			return findElement(By.name(locator.substring(5)));
+		}
+		else if (locator.startsWith("tag=")) {
+			return findElement(By.tagName(locator.substring(4)));
+		}
+		else if (locator.startsWith("xpath=")) {
+			return findElement(By.xpath(locator.substring(6)));
+		}
+		else {
+			return findElement(By.id(locator));
+		}
 	}
 
 }
