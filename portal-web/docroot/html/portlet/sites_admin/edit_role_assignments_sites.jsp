@@ -36,14 +36,14 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_role_assignments.
 />
 
 <%
-GroupSearch searchContainer = new GroupSearch(renderRequest, portletURL);
+GroupSearch groupSearchContainer = new GroupSearch(renderRequest, portletURL);
 
-searchContainer.setRowChecker(new GroupRoleChecker(renderResponse, role));
+groupSearchContainer.setRowChecker(new GroupRoleChecker(renderResponse, role));
 %>
 
 <liferay-ui:search-form
 	page="/html/portlet/users_admin/group_search.jsp"
-	searchContainer="<%= searchContainer %>"
+	searchContainer="<%= groupSearchContainer %>"
 />
 
 <liferay-ui:search-container
