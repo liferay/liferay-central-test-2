@@ -59,7 +59,6 @@ portletURL.setParameter("tabs1", "default-configuration");
 	<aui:input name="groupId" type="hidden" value="<%= groupId %>" />
 
 	<liferay-ui:search-container
-		id="workflowHandlersSearchContainer"
 		iteratorURL="<%= portletURL %>"
 	>
 		<liferay-ui:search-container-results
@@ -162,7 +161,6 @@ portletURL.setParameter("tabs1", "default-configuration");
 	</div>
 
 	<liferay-ui:search-container
-		id="hiddenWorkflowHandlersSearchContainer"
 		iteratorURL="<%= portletURL %>"
 	>
 		<liferay-ui:search-container-results

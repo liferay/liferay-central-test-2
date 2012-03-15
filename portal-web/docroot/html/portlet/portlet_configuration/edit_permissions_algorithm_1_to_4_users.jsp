@@ -46,7 +46,6 @@ int userIdsPos = ParamUtil.getInteger(request, "userIdsPos");
 		/>
 
 		<liferay-ui:search-container
-			id="usersSearchContainer"
 			rowChecker="<%= new RowChecker(renderResponse) %>"
 			searchContainer="<%= new UserSearch(renderRequest, portletURL) %>"
 		>

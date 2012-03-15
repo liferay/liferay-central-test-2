@@ -35,7 +35,6 @@ portletURL.setParameter("struts_action", "/document_library/view_file_entry_type
 <div class="separator"></div>
 
 <liferay-ui:search-container
-	id="dlFileEntryTypesSearchContainer"
 	searchContainer="<%= new StructureSearch(renderRequest, portletURL) %>"
 >
 	<liferay-ui:search-container-results>

@@ -82,7 +82,6 @@ List<Group> groups = new ArrayList<Group>(mvp.keySet());
 %>
 
 <liferay-ui:search-container
-	id="rolesSearchContainer"
 	searchContainer='<%= new SearchContainer(renderRequest, portletURL, null, "there-are-no-generated-roles-to-merge") %>'
 >
 	<liferay-ui:search-container-results

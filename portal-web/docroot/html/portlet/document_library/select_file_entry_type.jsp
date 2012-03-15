@@ -37,7 +37,6 @@
 	<div class="separator"><!-- --></div>
 
 	<liferay-ui:search-container
-		id="dlFileEntryTypesSearchContainer"
 		searchContainer="<%= new StructureSearch(renderRequest, portletURL) %>"
 	>
 		<liferay-ui:search-container-results>

@@ -123,7 +123,6 @@ while (rolesItr.hasNext()) {
 %>
 
 <liferay-ui:search-container
-	id="rolesSearchContainer"
 	searchContainer='<%= new SearchContainer(renderRequest, portletURL, null, "there-are-no-generated-roles-to-reassign") %>'
 >
 	<liferay-ui:search-container-results

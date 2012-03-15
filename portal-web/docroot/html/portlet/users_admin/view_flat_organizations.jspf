@@ -15,7 +15,6 @@
 --%>
 
 <liferay-ui:search-container
-	id="organizationsSearchContainer"
 	rowChecker="<%= new RowChecker(renderResponse) %>"
 	searchContainer="<%= new OrganizationSearch(renderRequest, portletURL) %>"
 >

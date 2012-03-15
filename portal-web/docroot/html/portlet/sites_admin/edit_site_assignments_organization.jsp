@@ -33,9 +33,8 @@ if (group.isOrganization()) {
 
 	<aui:input name="tabs1" type="hidden" value="organizations" />
 
-	<liferay-ui:search-container
-		id="rolesSearchContainer"
-	>
+	<liferay-ui:search-container>
+
 		<liferay-ui:search-container-results
 			results="<%= roles %>"
 			total="<%= roles.size() %>"

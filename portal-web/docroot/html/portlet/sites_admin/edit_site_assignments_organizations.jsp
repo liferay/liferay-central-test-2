@@ -58,7 +58,6 @@ organizationSearch.setEmptyResultsMessage(emptyResultsMessage);
 <aui:input name="removeOrganizationIds" type="hidden" />
 
 <liferay-ui:search-container
-	id="organizationsSearchContainer"
 	rowChecker="<%= organizationGroupChecker %>"
 	searchContainer="<%= organizationSearch %>"
 >

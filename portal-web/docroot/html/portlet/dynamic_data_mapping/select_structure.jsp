@@ -42,7 +42,6 @@
 	<div class="separator"><!-- --></div>
 
 	<liferay-ui:search-container
-		id="ddmStructuresSearchContainer"
 		searchContainer="<%= new StructureSearch(renderRequest, portletURL) %>"
 	>
 		<liferay-ui:search-container-results>

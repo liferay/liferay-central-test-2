@@ -63,7 +63,6 @@ portletURL.setParameter("organizationId", String.valueOf(organization.getOrganiz
 	<aui:input name="removeUserIds" type="hidden" />
 
 	<liferay-ui:search-container
-		id="usersSearchContainer"
 		rowChecker="<%= new UserOrganizationChecker(renderResponse, organization) %>"
 		searchContainer="<%= new UserSearch(renderRequest, portletURL) %>"
 	>

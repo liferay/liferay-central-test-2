@@ -156,7 +156,6 @@ request.setAttribute(WebKeys.WORKFLOW_ASSET_PREVIEW, Boolean.TRUE);
 
 					<liferay-ui:search-container
 						emptyResultsMessage="there-are-no-tasks"
-						id="workflowTasksSearchContainer"
 						iteratorURL="<%= portletURL %>"
 					>
 						<liferay-ui:search-container-results

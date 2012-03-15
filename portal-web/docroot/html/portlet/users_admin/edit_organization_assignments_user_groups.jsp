@@ -38,7 +38,6 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_organization_assi
 />
 
 <liferay-ui:search-container
-	id="userGroupsSearchContainer"
 	rowChecker="<%= new UserGroupGroupChecker(renderResponse, group) %>"
 	searchContainer="<%= new UserGroupSearch(renderRequest, portletURL) %>"
 >

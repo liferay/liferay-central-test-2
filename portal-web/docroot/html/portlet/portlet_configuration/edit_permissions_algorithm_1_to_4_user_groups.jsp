@@ -44,7 +44,6 @@ int userGroupIdsPos = ParamUtil.getInteger(request, "userGroupIdsPos");
 		/>
 
 		<liferay-ui:search-container
-			id="userGroupsSearchContainer"
 			rowChecker="<%= new RowChecker(renderResponse) %>"
 			searchContainer="<%= new UserGroupSearch(renderRequest, portletURL) %>"
 		>

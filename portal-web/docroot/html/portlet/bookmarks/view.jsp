@@ -116,7 +116,6 @@ request.setAttribute("view.jsp-useAssetEntryQuery", String.valueOf(useAssetEntry
 								delta="<%= foldersPerPage %>"
 								deltaConfigurable="<%= false %>"
 								headerNames="<%= StringUtil.merge(folderColumns) %>"
-								id="bookmarksFoldersSearchContainer"
 								iteratorURL="<%= portletURL %>"
 							>
 								<liferay-ui:search-container-results
@@ -193,7 +192,6 @@ request.setAttribute("view.jsp-useAssetEntryQuery", String.valueOf(useAssetEntry
 				delta="<%= entriesPerPage %>"
 				deltaConfigurable="<%= false %>"
 				emptyResultsMessage="there-are-no-entries"
-				id="bookmarksEntriesSearchContainer"
 				iteratorURL="<%= portletURL %>"
 			>
 

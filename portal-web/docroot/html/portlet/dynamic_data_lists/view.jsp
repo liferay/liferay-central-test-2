@@ -31,7 +31,6 @@ portletURL.setParameter("struts_action", "/dynamic_data_lists/view");
 	</liferay-util:include>
 
 	<liferay-ui:search-container
-		id="ddlRecordSetsSearchContainer"
 		searchContainer="<%= new RecordSetSearch(renderRequest, portletURL) %>"
 	>
 

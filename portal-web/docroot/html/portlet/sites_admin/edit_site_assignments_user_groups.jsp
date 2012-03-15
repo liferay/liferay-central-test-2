@@ -58,7 +58,6 @@ userGroupSearch.setEmptyResultsMessage(emptyResultsMessage);
 <aui:input name="removeUserGroupIds" type="hidden" />
 
 <liferay-ui:search-container
-	id="userGroupsSearchContainer"
 	rowChecker="<%= userGroupGroupChecker %>"
 	searchContainer="<%= userGroupSearch %>"
 >

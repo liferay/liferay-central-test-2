@@ -45,7 +45,6 @@ portletURL.setParameter("chooseCallback", chooseCallback);
 	%>
 
 	<liferay-ui:search-container
-		id="mdrRuleGroupsSearchContainer"
 		searchContainer="<%= ruleGroupSearch %>"
 	>
 		<liferay-ui:search-form

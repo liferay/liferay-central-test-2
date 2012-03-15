@@ -58,7 +58,6 @@ portletURL.setParameter("structureId", String.valueOf(structureId));
 <div class="separator"></div>
 
 <liferay-ui:search-container
-	id="ddmTemplatesSearchContainer"
 	searchContainer="<%= new TemplateSearch(renderRequest, portletURL) %>"
 >
 	<liferay-ui:search-container-results>

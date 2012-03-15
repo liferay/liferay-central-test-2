@@ -31,7 +31,6 @@ if (Validator.isNotNull(viewUsersRedirect)) {
 </c:if>
 
 <liferay-ui:search-container
-	id="usersSearchContainer"
 	searchContainer="<%= new UserSearch(renderRequest, portletURL) %>"
 >
 	<aui:input disabled="<%= true %>" name="usersRedirect" type="hidden" value="<%= portletURL.toString() %>" />
@@ -105,7 +104,6 @@ if (Validator.isNotNull(viewUsersRedirect)) {
 	<liferay-ui:search-container-row
 		className="com.liferay.portal.model.User"
 		escapedModel="<%= true %>"
-		idProperty="screenName"
 		keyProperty="userId"
 		modelVar="user2"
 	>

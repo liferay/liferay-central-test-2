@@ -39,7 +39,6 @@ PortletURL portletURL = (PortletURL)request.getAttribute("view.jsp-portletURL");
 <liferay-ui:search-container
 	curParam="cur1"
 	headerNames="folder,num-of-folders,num-of-images"
-	id="foldersSearchContainer"
 	iteratorURL="<%= portletURL %>"
 >
 	<liferay-ui:search-container-results

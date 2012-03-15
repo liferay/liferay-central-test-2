@@ -15,7 +15,6 @@
 --%>
 
 <liferay-ui:search-container
-	id="userGroupsSearchContainer"
 	rowChecker="<%= new RowChecker(renderResponse) %>"
 	searchContainer="<%= new UserGroupSearch(renderRequest, portletURL) %>"
 >

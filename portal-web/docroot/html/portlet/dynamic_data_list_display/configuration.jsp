@@ -114,7 +114,6 @@ request.setAttribute("record_set_action.jsp-selRecordSet", selRecordSet);
 		<br />
 
 		<liferay-ui:search-container
-			id="ddlRecordSetsSearchContainer"
 			searchContainer="<%= new RecordSetSearch(renderRequest, configurationRenderURL) %>"
 		>
 
