@@ -234,21 +234,22 @@ public class ServiceContextFactory {
 
 		boolean assetEntryVisible = ParamUtil.getBoolean(
 			request, "assetEntryVisible", true);
+
+		serviceContext.setAssetEntryVisible(assetEntryVisible);
+
 		long[] assetLinkEntryIds = StringUtil.split(
 			ParamUtil.getString(
 				request, "assetLinksSearchContainerPrimaryKeys"), 0L);
 
-		String assetTagNamesParam = request.getParameter("assetTagNames");
+		serviceContext.setAssetLinkEntryIds(assetLinkEntryIds);
 
+		String assetTagNamesString = request.getParameter("assetTagNames");
 
-		if (assetTagNamesParam != null) {
-			String[] assetTagNames = StringUtil.split(assetTagNamesParam);
+		if (assetTagNamesString != null) {
+			String[] assetTagNames = StringUtil.split(assetTagNamesString);
 
 			serviceContext.setAssetTagNames(assetTagNames);
 		}
-
-		serviceContext.setAssetEntryVisible(assetEntryVisible);
-		serviceContext.setAssetLinkEntryIds(assetLinkEntryIds);
 
 		// Workflow
 
@@ -424,17 +425,19 @@ public class ServiceContextFactory {
 
 		boolean assetEntryVisible = ParamUtil.getBoolean(
 			portletRequest, "assetEntryVisible", true);
+
+		serviceContext.setAssetEntryVisible(assetEntryVisible);
+
 		long[] assetLinkEntryIds = StringUtil.split(
 			ParamUtil.getString(
 				portletRequest, "assetLinksSearchContainerPrimaryKeys"), 0L);
 
-		serviceContext.setAssetEntryVisible(assetEntryVisible);
 		serviceContext.setAssetLinkEntryIds(assetLinkEntryIds);
 
-		String assetTagNamesParam = request.getParameter("assetTagNames");
+		String assetTagNamesString = request.getParameter("assetTagNames");
 
-		if (assetTagNamesParam != null) {
-			String[] assetTagNames = StringUtil.split(assetTagNamesParam);
+		if (assetTagNamesString != null) {
+			String[] assetTagNames = StringUtil.split(assetTagNamesString);
 
 			serviceContext.setAssetTagNames(assetTagNames);
 		}

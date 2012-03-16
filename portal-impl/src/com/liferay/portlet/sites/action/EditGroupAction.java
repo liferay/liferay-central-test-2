@@ -332,11 +332,11 @@ public class EditGroupAction extends PortletAction {
 
 			// Add group
 
-			active = ParamUtil.getBoolean(actionRequest, "active");
-			description = ParamUtil.getString(actionRequest, "description");
-			friendlyURL = ParamUtil.getString(actionRequest, "friendlyURL");
 			name = ParamUtil.getString(actionRequest, "name");
+			description = ParamUtil.getString(actionRequest, "description");
 			type = ParamUtil.getInteger(actionRequest, "type");
+			friendlyURL = ParamUtil.getString(actionRequest, "friendlyURL");
+			active = ParamUtil.getBoolean(actionRequest, "active");
 
 			liveGroup = GroupServiceUtil.addGroup(
 				name, description, type, friendlyURL, true, active,
@@ -353,16 +353,16 @@ public class EditGroupAction extends PortletAction {
 
 			oldFriendlyURL = liveGroup.getFriendlyURL();
 
-			active = ParamUtil.getBoolean(
-				actionRequest, "active", liveGroup.getActive());
-			description = ParamUtil.getString(
-				actionRequest, "description", liveGroup.getDescription());
-			friendlyURL = ParamUtil.getString(
-				actionRequest, "friendlyURL", liveGroup.getFriendlyURL());
 			name = ParamUtil.getString(
 				actionRequest, "name", liveGroup.getName());
+			description = ParamUtil.getString(
+				actionRequest, "description", liveGroup.getDescription());
 			type = ParamUtil.getInteger(
 				actionRequest, "type", liveGroup.getType());
+			friendlyURL = ParamUtil.getString(
+				actionRequest, "friendlyURL", liveGroup.getFriendlyURL());
+			active = ParamUtil.getBoolean(
+				actionRequest, "active", liveGroup.getActive());
 
 			liveGroup = GroupServiceUtil.updateGroup(
 				liveGroupId, name, description, type, friendlyURL, active,
@@ -397,7 +397,7 @@ public class EditGroupAction extends PortletAction {
 
 		String customJspServletContextName = ParamUtil.getString(
 			actionRequest, "customJspServletContextName",
-			liveGroup.getTypeSettingsProperty("customJspServletContextName"));
+			typeSettingsProperties.getProperty("customJspServletContextName"));
 
 		typeSettingsProperties.setProperty(
 			"customJspServletContextName", customJspServletContextName);
@@ -419,20 +419,22 @@ public class EditGroupAction extends PortletAction {
 		typeSettingsProperties.setProperty("false-robots.txt", publicRobots);
 		typeSettingsProperties.setProperty("true-robots.txt", privateRobots);
 
-		// Virtual Hosts
+		// Virtual hosts
 
 		LayoutSet publicLayoutSet = liveGroup.getPublicLayoutSet();
-		LayoutSet privateLayoutSet = liveGroup.getPrivateLayoutSet();
 
 		String publicVirtualHost = ParamUtil.getString(
 			actionRequest, "publicVirtualHost",
 			publicLayoutSet.getVirtualHostname());
-		String privateVirtualHost = ParamUtil.getString(
-			actionRequest, "privateVirtualHost",
-			privateLayoutSet.getVirtualHostname());
 
 		LayoutSetServiceUtil.updateVirtualHost(
 			liveGroup.getGroupId(), false, publicVirtualHost);
+
+		LayoutSet privateLayoutSet = liveGroup.getPrivateLayoutSet();
+
+		String privateVirtualHost = ParamUtil.getString(
+			actionRequest, "privateVirtualHost",
+			privateLayoutSet.getVirtualHostname());
 
 		LayoutSetServiceUtil.updateVirtualHost(
 			liveGroup.getGroupId(), true, privateVirtualHost);
@@ -444,29 +446,32 @@ public class EditGroupAction extends PortletAction {
 
 			oldStagingFriendlyURL = stagingGroup.getFriendlyURL();
 
-			LayoutSet stagingPublicLayoutSet =
-				stagingGroup.getPublicLayoutSet();
-			LayoutSet stagingPrivateLayoutSet =
-				stagingGroup.getPrivateLayoutSet();
-
-			publicVirtualHost = ParamUtil.getString(
-				actionRequest, "stagingPublicVirtualHost",
-				stagingPublicLayoutSet.getVirtualHostname());
-			privateVirtualHost = ParamUtil.getString(
-				actionRequest, "stagingPrivateVirtualHost",
-				stagingPrivateLayoutSet.getVirtualHostname());
 			friendlyURL = ParamUtil.getString(
 				actionRequest, "stagingFriendlyURL",
 				stagingGroup.getFriendlyURL());
 
+			GroupServiceUtil.updateFriendlyURL(
+				stagingGroup.getGroupId(), friendlyURL);
+
+			LayoutSet stagingPublicLayoutSet =
+				stagingGroup.getPublicLayoutSet();
+
+			publicVirtualHost = ParamUtil.getString(
+				actionRequest, "stagingPublicVirtualHost",
+				stagingPublicLayoutSet.getVirtualHostname());
+
 			LayoutSetServiceUtil.updateVirtualHost(
 				stagingGroup.getGroupId(), false, publicVirtualHost);
 
+			LayoutSet stagingPrivateLayoutSet =
+				stagingGroup.getPrivateLayoutSet();
+
+			privateVirtualHost = ParamUtil.getString(
+				actionRequest, "stagingPrivateVirtualHost",
+				stagingPrivateLayoutSet.getVirtualHostname());
+
 			LayoutSetServiceUtil.updateVirtualHost(
 				stagingGroup.getGroupId(), true, privateVirtualHost);
-
-			GroupServiceUtil.updateFriendlyURL(
-				stagingGroup.getGroupId(), friendlyURL);
 		}
 
 		liveGroup = GroupServiceUtil.updateGroup(

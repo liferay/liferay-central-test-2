@@ -1333,17 +1333,12 @@ public class StagingImpl implements Staging {
 			return;
 		}
 
-		int stagingType = getStagingType(liveGroup, portletRequest);
+		int stagingType = getStagingType(portletRequest, liveGroup);
 
-		boolean defaultBranchingPublic = GetterUtil.getBoolean(
-			liveGroup.getTypeSettingsProperty("branchingPublic"));
-		boolean defaultBranchingPrivate = GetterUtil.getBoolean(
-			liveGroup.getTypeSettingsProperty("branchingPrivate"));
-		
-		boolean branchingPublic = ParamUtil.getBoolean(
-			portletRequest, "branchingPublic", defaultBranchingPublic);
-		boolean branchingPrivate = ParamUtil.getBoolean(
-			portletRequest, "branchingPrivate", defaultBranchingPrivate);
+		boolean branchingPublic = getBoolean(
+			portletRequest, liveGroup, "branchingPublic");
+		boolean branchingPrivate = getBoolean(
+			portletRequest, liveGroup, "branchingPrivate");
 
 		ServiceContext serviceContext =
 			ServiceContextThreadLocal.getServiceContext();
@@ -1360,31 +1355,17 @@ public class StagingImpl implements Staging {
 				branchingPrivate, serviceContext);
 		}
 		else if (stagingType == StagingConstants.TYPE_REMOTE_STAGING) {
-			String defaultRemoteAddress = GetterUtil.getString(
-				liveGroup.getTypeSettingsProperty("remoteAddress"));
-			
-			String remoteAddress = ParamUtil.getString(
-				portletRequest, "remoteAddress", defaultRemoteAddress);
+			String remoteAddress = getString(
+				portletRequest, liveGroup, "remoteAddress");
 
 			remoteAddress = stripProtocolFromRemoteAddress(remoteAddress);
 
-			long defaultRemoteGroupId = GetterUtil.getLong(
-				liveGroup.getTypeSettingsProperty("remoteGroupId"));
-
-			long remoteGroupId = ParamUtil.getLong(
-				portletRequest, "remoteGroupId", defaultRemoteGroupId);
-
-			int defaultRemotePort = GetterUtil.getInteger(
-				liveGroup.getTypeSettingsProperty("remotePort"));
-
-			int remotePort = ParamUtil.getInteger(
-				portletRequest, "remotePort", defaultRemotePort);
-
-			boolean defaultSecureConnection = GetterUtil.getBoolean(
-				liveGroup.getTypeSettingsProperty("secureConnection"));
-
-			boolean secureConnection = ParamUtil.getBoolean(
-				portletRequest, "secureConnection", defaultSecureConnection);
+			long remoteGroupId = getLong(
+				portletRequest, liveGroup, "remoteGroupId");
+			int remotePort = getInteger(
+				portletRequest, liveGroup, "remotePort");
+			boolean secureConnection = getBoolean(
+				portletRequest, liveGroup, "secureConnection");
 
 			enableRemoteStaging(
 				userId, scopeGroup, liveGroup, branchingPublic,
@@ -1462,6 +1443,14 @@ public class StagingImpl implements Staging {
 			getRecentLayoutRevisionIdKey(layoutSetBranchId, plid), null);
 	}
 
+	protected boolean getBoolean(
+		PortletRequest portletRequest, Group group, String param) {
+
+		return ParamUtil.getBoolean(
+			portletRequest, param,
+			GetterUtil.getBoolean(group.getTypeSettingsProperty(param)));
+	}
+
 	protected Calendar getDate(
 			PortletRequest portletRequest, String paramPrefix,
 			boolean timeZoneSensitive)
@@ -1509,6 +1498,22 @@ public class StagingImpl implements Staging {
 		cal.set(Calendar.MILLISECOND, 0);
 
 		return cal;
+	}
+
+	protected int getInteger(
+		PortletRequest portletRequest, Group group, String param) {
+
+		return ParamUtil.getInteger(
+			portletRequest, param,
+			GetterUtil.getInteger(group.getTypeSettingsProperty(param)));
+	}
+
+	protected long getLong(
+		PortletRequest portletRequest, Group group, String param) {
+
+		return ParamUtil.getLong(
+			portletRequest, param,
+			GetterUtil.getLong(group.getTypeSettingsProperty(param)));
 	}
 
 	protected PortalPreferences getPortalPreferences(User user)
@@ -1611,7 +1616,7 @@ public class StagingImpl implements Staging {
 	}
 
 	protected int getStagingType(
-		Group liveGroup, PortletRequest portletRequest) {
+		PortletRequest portletRequest, Group liveGroup) {
 
 		String stagingType = portletRequest.getParameter("stagingType");
 
@@ -1628,6 +1633,14 @@ public class StagingImpl implements Staging {
 		}
 
 		return StagingConstants.TYPE_NOT_STAGED;
+	}
+
+	protected String getString(
+		PortletRequest portletRequest, Group group, String param) {
+
+		return ParamUtil.getString(
+			portletRequest, param,
+			GetterUtil.getString(group.getTypeSettingsProperty(param)));
 	}
 
 	protected void publishLayouts(
