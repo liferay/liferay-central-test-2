@@ -62,7 +62,6 @@ public class TestContextHandler {
 	}
 
 	public void runBeforeTestClasses() {
-
 		for (ExecutionTestListener executionTestListener :
 				_executionTestListeners) {
 

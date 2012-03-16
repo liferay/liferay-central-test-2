@@ -47,7 +47,9 @@ public class RunAfterTestClassesCallback extends AbstractStatementCallback {
 		}
 
 		try {
-			getTextContextHandler().runAfterTestClasses();
+			TestContextHandler testContextHandler = getTestContextHandler();
+
+			testContextHandler.runAfterTestClasses();
 		}
 		catch (Exception e) {
 			throwables.add(e);

@@ -22,19 +22,20 @@ import org.junit.runners.model.Statement;
 public abstract class AbstractStatementCallback extends Statement {
 
 	public AbstractStatementCallback(
-			Statement statement, TestContextHandler testContextHandler) {
+		Statement statement, TestContextHandler testContextHandler) {
 
 		_statement = statement;
 		_testContextHandler = testContextHandler;
 	}
 
+	@Override
 	public abstract void evaluate() throws Throwable;
 
 	public Statement getStatement() {
 		return _statement;
 	}
 
-	public TestContextHandler getTextContextHandler() {
+	public TestContextHandler getTestContextHandler() {
 		return _testContextHandler;
 	}
 

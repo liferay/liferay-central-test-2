@@ -35,14 +35,15 @@ public class RunBeforeTestMethodCallback extends AbstractStatementCallback {
 
 	@Override
 	public void evaluate() throws Throwable {
-		getTextContextHandler().runBeforeTestMethod(_instance, _method);
+		TestContextHandler testContextHandler = getTestContextHandler();
+
+		testContextHandler.runBeforeTestMethod(_instance, _method);
 
 		Statement statement = getStatement();
 
 		if (statement != null) {
 			statement.evaluate();
 		}
-
 	}
 
 	private Object _instance;

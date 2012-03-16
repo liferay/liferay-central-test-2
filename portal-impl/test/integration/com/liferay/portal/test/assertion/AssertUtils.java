@@ -40,7 +40,7 @@ public class AssertUtils {
 	}
 
 	public static void assertEqualsSorted(
-			String[] expectedStringArray, String[] actualStringArray) {
+		String[] expectedStringArray, String[] actualStringArray) {
 
 		if (expectedStringArray != null) {
 			Arrays.sort(expectedStringArray);

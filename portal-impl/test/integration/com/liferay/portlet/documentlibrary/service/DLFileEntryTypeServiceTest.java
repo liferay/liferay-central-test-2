@@ -148,7 +148,7 @@ public class DLFileEntryTypeServiceTest {
 			_subfolder.getName(), _subfolder.getDescription(),
 			_basicDocumentDLFileEntryType.getPrimaryKey(),
 			ListUtil.toList(
-				new long[]{_basicDocumentDLFileEntryType.getPrimaryKey()}),
+				new long[] {_basicDocumentDLFileEntryType.getPrimaryKey()}),
 			true, ServiceTestUtil.getServiceContext());
 
 		fileEntry = DLAppServiceUtil.getFileEntry(fileEntry.getFileEntryId());

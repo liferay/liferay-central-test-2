@@ -29,7 +29,9 @@ public class RunBeforeTestClassesCallback extends AbstractStatementCallback {
 
 	@Override
 	public void evaluate() throws Throwable {
-		getTextContextHandler().runBeforeTestClasses();
+		TestContextHandler testContextHandler = getTestContextHandler();
+
+		testContextHandler.runBeforeTestClasses();
 
 		Statement statement = getStatement();
 

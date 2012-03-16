@@ -75,7 +75,7 @@ public class ServiceTestUtil {
 		throws Exception {
 
 		User user = UserLocalServiceUtil.fetchUserByScreenName(
-				TestPropsValues.getCompanyId(), screenName);
+			TestPropsValues.getCompanyId(), screenName);
 
 		if (user != null) {
 			return user;
