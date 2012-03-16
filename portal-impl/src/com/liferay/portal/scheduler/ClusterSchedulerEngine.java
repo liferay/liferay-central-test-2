@@ -927,7 +927,9 @@ public class ClusterSchedulerEngine
 
 		StorageType storageType = getStorageType(groupName);
 
-		if (storageType.equals(StorageType.PERSISTED)) {
+		if (storageType.equals(StorageType.PERSISTED) ||
+			PortletContextLifecycleThreadLocal.isDestroying()) {
+
 			SchedulerException schedulerException = new SchedulerException();
 
 			schedulerException.setSwallowable(true);
