@@ -64,6 +64,7 @@ import org.junit.runner.RunWith;
 public class DLAppServiceTest extends BaseDLAppTestCase {
 
 	@Before
+	@Override
 	public void setUp() throws Exception {
 		_userIds = new long[ServiceTestUtil.THREAD_COUNT];
 
@@ -77,6 +78,7 @@ public class DLAppServiceTest extends BaseDLAppTestCase {
 	}
 
 	@After
+	@Override
 	public void tearDown() throws Exception {
 		if (_fileEntry != null) {
 			DLAppServiceUtil.deleteFileEntry(_fileEntry.getFileEntryId());
