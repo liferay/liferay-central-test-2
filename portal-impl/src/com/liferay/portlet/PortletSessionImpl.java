@@ -38,10 +38,10 @@ import javax.servlet.http.HttpSession;
 public class PortletSessionImpl implements LiferayPortletSession {
 
 	public PortletSessionImpl(
-		HttpSession httpSession, PortletContext portletContext,
-		String portletName, long plid) {
+		HttpSession session, PortletContext portletContext, String portletName,
+		long plid) {
 
-		_httpSession = httpSession;
+		_session = session;
 		_portletContext = portletContext;
 		_portletScope = _getPortletScope(portletName, plid);
 	}
@@ -53,7 +53,7 @@ public class PortletSessionImpl implements LiferayPortletSession {
 
 		String scopeName = _getPortletScopeName(name);
 
-		return _httpSession.getAttribute(scopeName);
+		return _session.getAttribute(scopeName);
 	}
 
 	public Object getAttribute(String name, int scope) {
@@ -65,7 +65,7 @@ public class PortletSessionImpl implements LiferayPortletSession {
 			name = _getPortletScopeName(name);
 		}
 
-		return _httpSession.getAttribute(name);
+		return _session.getAttribute(name);
 	}
 
 	public Map<String, Object> getAttributeMap() {
@@ -82,7 +82,7 @@ public class PortletSessionImpl implements LiferayPortletSession {
 		while (enu.hasMoreElements()) {
 			String name = enu.nextElement();
 
-			Object value = _httpSession.getAttribute(name);
+			Object value = _session.getAttribute(name);
 
 			if (scope == PortletSession.PORTLET_SCOPE) {
 				name = name.substring(portletScopeLength + 1);
@@ -103,23 +103,23 @@ public class PortletSessionImpl implements LiferayPortletSession {
 	}
 
 	public long getCreationTime() {
-		return _httpSession.getCreationTime();
+		return _session.getCreationTime();
 	}
 
 	public HttpSession getHttpSession() {
-		return _httpSession;
+		return _session;
 	}
 
 	public String getId() {
-		return _httpSession.getId();
+		return _session.getId();
 	}
 
 	public long getLastAccessedTime() {
-		return _httpSession.getLastAccessedTime();
+		return _session.getLastAccessedTime();
 	}
 
 	public int getMaxInactiveInterval() {
-		return _httpSession.getMaxInactiveInterval();
+		return _session.getMaxInactiveInterval();
 	}
 
 	public PortletContext getPortletContext() {
@@ -127,11 +127,11 @@ public class PortletSessionImpl implements LiferayPortletSession {
 	}
 
 	public void invalidate() {
-		_httpSession.invalidate();
+		_session.invalidate();
 	}
 
 	public boolean isNew() {
-		return _httpSession.isNew();
+		return _session.isNew();
 	}
 
 	public void removeAttribute(String name) {
@@ -141,7 +141,7 @@ public class PortletSessionImpl implements LiferayPortletSession {
 
 		String scopeName = _getPortletScopeName(name);
 
-		_httpSession.removeAttribute(scopeName);
+		_session.removeAttribute(scopeName);
 	}
 
 	public void removeAttribute(String name, int scope) {
@@ -153,7 +153,7 @@ public class PortletSessionImpl implements LiferayPortletSession {
 			name = _getPortletScopeName(name);
 		}
 
-		_httpSession.removeAttribute(name);
+		_session.removeAttribute(name);
 	}
 
 	public void setAttribute(String name, Object value) {
@@ -163,7 +163,7 @@ public class PortletSessionImpl implements LiferayPortletSession {
 
 		String scopeName = _getPortletScopeName(name);
 
-		_httpSession.setAttribute(scopeName, value);
+		_session.setAttribute(scopeName, value);
 	}
 
 	public void setAttribute(String name, Object value, int scope) {
@@ -175,15 +175,15 @@ public class PortletSessionImpl implements LiferayPortletSession {
 			name = _getPortletScopeName(name);
 		}
 
-		_httpSession.setAttribute(name, value);
+		_session.setAttribute(name, value);
 	}
 
 	public void setHttpSession(HttpSession session) {
-		_httpSession = session;
+		_session = session;
 	}
 
 	public void setMaxInactiveInterval(int interval) {
-		_httpSession.setMaxInactiveInterval(interval);
+		_session.setMaxInactiveInterval(interval);
 	}
 
 	private Enumeration<String> _getAttributeNames(
@@ -194,7 +194,7 @@ public class PortletSessionImpl implements LiferayPortletSession {
 
 			int portletScopeLength = _portletScope.length();
 
-			Enumeration<String> enu = _httpSession.getAttributeNames();
+			Enumeration<String> enu = _session.getAttributeNames();
 
 			while (enu.hasMoreElements()) {
 				String name = enu.nextElement();
@@ -214,7 +214,7 @@ public class PortletSessionImpl implements LiferayPortletSession {
 			return Collections.enumeration(attributeNames);
 		}
 		else {
-			return _httpSession.getAttributeNames();
+			return _session.getAttributeNames();
 		}
 	}
 
@@ -233,8 +233,8 @@ public class PortletSessionImpl implements LiferayPortletSession {
 		return _portletScope.concat(StringPool.QUESTION).concat(name);
 	}
 
-	private HttpSession _httpSession;
 	private PortletContext _portletContext;
 	private String _portletScope;
+	private HttpSession _session;
 
 }
