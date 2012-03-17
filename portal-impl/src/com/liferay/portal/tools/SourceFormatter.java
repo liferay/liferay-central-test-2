@@ -81,6 +81,7 @@ public class SourceFormatter {
 				"source_formatter_line_length_exclusions.properties");
 
 			Thread thread1 = new Thread () {
+
 				@Override
 				public void run() {
 					try {
@@ -97,9 +98,11 @@ public class SourceFormatter {
 						e.printStackTrace();
 					}
 				}
+
 			};
 
 			Thread thread2 = new Thread () {
+
 				@Override
 				public void run() {
 					try {
@@ -109,6 +112,7 @@ public class SourceFormatter {
 						e.printStackTrace();
 					}
 				}
+
 			};
 
 			thread1.start();
