@@ -125,13 +125,6 @@ public class TeamLocalServiceImpl extends TeamLocalServiceBaseImpl {
 		return teamPersistence.findByGroupId(groupId);
 	}
 
-	@Override
-	public Team getTeam(long teamId)
-		throws PortalException, SystemException {
-
-		return teamPersistence.findByPrimaryKey(teamId);
-	}
-
 	public Team getTeam(long groupId, String name)
 		throws PortalException, SystemException {
 
