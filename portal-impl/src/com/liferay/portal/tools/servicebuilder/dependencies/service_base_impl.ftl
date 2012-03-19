@@ -13,6 +13,8 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Indexable;
+import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.search.SearchException;
@@ -123,25 +125,11 @@ import javax.sql.DataSource;
 		</#if>
 		</#list>
 		 */
+		@Indexable(type= IndexableType.REINDEX)
 		public ${entity.name} add${entity.name}(${entity.name} ${entity.varName}) throws ${stringUtil.merge(serviceBaseExceptions)} {
 			${entity.varName}.setNew(true);
 
-			${entity.varName} = ${entity.varName}Persistence.update(${entity.varName}, false);
-
-			Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
-
-			if (indexer != null) {
-				try {
-					indexer.reindex(${entity.varName});
-				}
-				catch (SearchException se) {
-					if (_log.isWarnEnabled()) {
-						_log.warn(se, se);
-					}
-				}
-			}
-
-			return ${entity.varName};
+			return ${entity.varName}Persistence.update(${entity.varName}, false);
 		}
 
 		/**
@@ -160,6 +148,7 @@ import javax.sql.DataSource;
 		 * Deletes the ${entity.humanName} with the primary key from the database. Also notifies the appropriate model listeners.
 		 *
 		 * @param ${entity.PKVarName} the primary key of the ${entity.humanName}
+		 * @return the ${entity.humanName} that was removed
 		<#list serviceBaseExceptions as exception>
 		<#if exception == "PortalException">
 		 * @throws PortalException if a ${entity.humanName} with the primary key could not be found
@@ -170,21 +159,9 @@ import javax.sql.DataSource;
 		</#if>
 		</#list>
 		 */
-		public void delete${entity.name}(${entity.PKClassName} ${entity.PKVarName}) throws ${stringUtil.merge(serviceBaseExceptions)} {
-			${entity.name} ${entity.varName} = ${entity.varName}Persistence.remove(${entity.PKVarName});
-
-			Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
-
-			if (indexer != null) {
-				try {
-					indexer.delete(${entity.varName});
-				}
-				catch (SearchException se) {
-					if (_log.isWarnEnabled()) {
-						_log.warn(se, se);
-					}
-				}
-			}
+		@Indexable(type= IndexableType.DELETE)
+		public ${entity.name} delete${entity.name}(${entity.PKClassName} ${entity.PKVarName}) throws ${stringUtil.merge(serviceBaseExceptions)} {
+			return ${entity.varName}Persistence.remove(${entity.PKVarName});
 		}
 
 		<#assign serviceBaseExceptions = serviceBuilder.getServiceBaseExceptions(methods, "delete" + entity.name, [packagePath + ".model." + entity.name], ["SystemException"])>
@@ -193,6 +170,7 @@ import javax.sql.DataSource;
 		 * Deletes the ${entity.humanName} from the database. Also notifies the appropriate model listeners.
 		 *
 		 * @param ${entity.varName} the ${entity.humanName}
+		 * @return the ${entity.humanName} that was removed
 		<#list serviceBaseExceptions as exception>
 		<#if exception == "SystemException">
 		 * @throws SystemException if a system exception occurred
@@ -201,21 +179,9 @@ import javax.sql.DataSource;
 		</#if>
 		</#list>
 		 */
-		public void delete${entity.name}(${entity.name} ${entity.varName}) throws ${stringUtil.merge(serviceBaseExceptions)} {
-			${entity.varName}Persistence.remove(${entity.varName});
-
-			Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
-
-			if (indexer != null) {
-				try {
-					indexer.delete(${entity.varName});
-				}
-				catch (SearchException se) {
-					if (_log.isWarnEnabled()) {
-						_log.warn(se, se);
-					}
-				}
-			}
+		@Indexable(type= IndexableType.DELETE)
+		public ${entity.name} delete${entity.name}(${entity.name} ${entity.varName}) throws ${stringUtil.merge(serviceBaseExceptions)} {
+			return ${entity.varName}Persistence.remove(${entity.varName});
 		}
 
 		public DynamicQuery dynamicQuery() {
@@ -376,6 +342,7 @@ import javax.sql.DataSource;
 		</#if>
 		</#list>
 		 */
+		@Indexable(type= IndexableType.REINDEX)
 		public ${entity.name} update${entity.name}(${entity.name} ${entity.varName}) throws ${stringUtil.merge(serviceBaseExceptions)} {
 			return update${entity.name}(${entity.varName}, true);
 		}
@@ -394,25 +361,11 @@ import javax.sql.DataSource;
 		</#if>
 		</#list>
 		 */
+		@Indexable(type= IndexableType.REINDEX)
 		public ${entity.name} update${entity.name}(${entity.name} ${entity.varName}, boolean merge) throws ${stringUtil.merge(serviceBaseExceptions)} {
 			${entity.varName}.setNew(false);
 
-			${entity.varName} = ${entity.varName}Persistence.update(${entity.varName}, merge);
-
-			Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
-
-			if (indexer != null) {
-				try {
-					indexer.reindex(${entity.varName});
-				}
-				catch (SearchException se) {
-					if (_log.isWarnEnabled()) {
-						_log.warn(se, se);
-					}
-				}
-			}
-
-			return ${entity.varName};
+			return ${entity.varName}Persistence.update(${entity.varName}, merge);
 		}
 
 		<#list entity.blobList as column>
