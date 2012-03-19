@@ -29,99 +29,6 @@ import java.util.List;
 import java.util.Queue;
 
 /**
- * <table>
- *	<tr><th colspan = 3>Test classes inherited hierarchy</th></tr>
- *	<tr valign="top"><td><pre>
- *	&#64;Type(value = 5)
- *	OriginClass {		-------->
- *		&#64;Method(value = 5)
- *		&#64;Mix(value = 5)
- *		originMethod1()
- *		originMethod2()
- *	}
- *	</pre></td><td><pre>
- *	&#64;Mix(value = 8)
- *	OriginInterface2 {	-------->
- *		&#64;Method(value = 8)
- *		originMethod2()
- *	}
- *	</pre></td><td><pre>
- *	&#64;Type(value = 9)
- *	OriginInterface1 {
- *		&#64;Method(value = 9)
- *		&#64;Mix(value = 9)
- *		originMethod1()
- *	}
- *	</pre></td></tr><tr valign="top"><td><pre>
- *		^
- *		|
- *	</pre></td><td><pre></pre></td><td><pre>
- *		^
- *		|
- *	</pre></td></tr><tr valign="top"><td><pre>
- *	&#64;Mix(value = 2)
- *	SuperClass {		-------->
- *		&#64;Method(value = 2)
- *		originMethod2()
- *		&#64;Method(value = 2)
- *		superMethod1()
- *		superMethod2()
- *	}
- *	</pre></td><td><pre>
- *	&#64;Type(value = 6)
- *	SuperInterface2 {	-------->
- *		&#64;Method(value = 6)
- *		&#64;Mix(value = 6)
- *		originMethod1()
- *		&#64;Method(value = 6)
- *		&#64;Mix(value = 6)
- *		superMethod2()
- *	}
- *	</pre></td><td><pre>
- *	&#64;Mix(value = 7)
- *	SuperInterface1 {
- *		&#64;Method(value = 7)
- *		superMethod1()
- *	}
- *	</pre></td></tr><tr valign="top"><td><pre>
- *		^
- *		|
- *	</pre></td><td><pre>
- *		^
- *		|
- *	</pre></td><td><pre></pre></td></tr><tr valign="top"><td><pre>
- *	&#64;Type(value = 1)
- *	TestClass {		-------->
- *	&#64;Method(value = 1)
- *		&#64;Method(value = 1)
- *		&#64;Mix(value = 1)
- *		originMethod1()
- *		&#64;Method(value = 1)
- *		&#64;Mix(value = 1)
- *		superMethod2()
- *		&#64;Method(value = 1)
- *		&#64;Mix(value = 1)
- *		testMethod1()
- *		testMethod2()
- *	}
- *	</pre></td><td><pre>
- *	&#64;Mix(value = 3)
- *	TestInterface2 {	-------->
- *		&#64;Method(value = 3)
- *		superMethod1()
- *		&#64;Method(value = 3)
- *		testMethod2()
- *	}
- *	</pre></td><td><pre>
- *	&#64;Type(value = 4)
- *	TestInterface1 {
- *		&#64;Method(value = 4)
- *		&#64;Mix(value = 4)
- *		testMethod1()
- *	}
- *	</pre></td></tr>
- * </table>
- *
  * @author Shuyang Zhou
  */
 public class AnnotationLocatorTest extends TestCase {
@@ -171,7 +78,6 @@ public class AnnotationLocatorTest extends TestCase {
 	}
 
 	public void testConstructor() {
-		// Satisfy code coverage
 		new AnnotationLocator();
 	}
 
@@ -185,6 +91,7 @@ public class AnnotationLocatorTest extends TestCase {
 		List<Class<?>> actualClassHierarchy = new ArrayList<Class<?>>();
 
 		Queue<Class<?>> queue = new LinkedList<Class<?>>();
+
 		queue.offer(TestClass.class);
 
 		Class<?> clazz = null;
@@ -200,7 +107,8 @@ public class AnnotationLocatorTest extends TestCase {
 
 	public void testMethodListLocate() {
 		_methodListLocate(
-			TestClass.class, Arrays.asList(
+			TestClass.class,
+			Arrays.asList(
 				new Annotation[] {_method(1), _mix(1), _type(1)},
 				new Annotation[] {_type(1), _method(2), _mix(2)},
 				new Annotation[] {_type(1), _method(2), _mix(2)},
@@ -209,76 +117,69 @@ public class AnnotationLocatorTest extends TestCase {
 				new Annotation[] {_type(1), _method(3), _mix(3)}));
 
 		_methodListLocate(
-			SuperClass.class, Arrays.asList(
+			SuperClass.class,
+			Arrays.asList(
 				new Annotation[] {_mix(2), _method(5), _type(5)},
 				new Annotation[] {_method(2), _mix(2), _type(5)},
 				new Annotation[] {_method(2), _mix(2), _type(6)},
 				new Annotation[] {_mix(2), _method(6), _type(6)},
-				new Annotation[] {},
-				new Annotation[] {}));
+				new Annotation[0], new Annotation[0]));
 
 		_methodListLocate(
-			TestInterface2.class, Arrays.asList(
+			TestInterface2.class,
+			Arrays.asList(
 				new Annotation[] {_mix(3), _method(6), _type(6)},
-				new Annotation[] {},
+				new Annotation[0],
 				new Annotation[] {_method(3), _mix(3), _type(6)},
 				new Annotation[] {_mix(3), _method(6), _type(6)},
 				new Annotation[] {_mix(3), _method(4), _type(4)},
 				new Annotation[] {_method(3), _mix(3)}));
 
 		_methodListLocate(
-			TestInterface1.class, Arrays.asList(
-				new Annotation[] {},
-				new Annotation[] {},
-				new Annotation[] {},
-				new Annotation[] {},
+			TestInterface1.class,
+			Arrays.asList(
+				new Annotation[0], new Annotation[0], new Annotation[0],
+				new Annotation[0],
 				new Annotation[] {_method(4), _mix(4), _type(4)},
-				new Annotation[] {}));
+				new Annotation[0]));
 
 		_methodListLocate(
-			OriginClass.class, Arrays.asList(
+			OriginClass.class,
+			Arrays.asList(
 				new Annotation[] {_method(5), _mix(5), _type(5)},
 				new Annotation[] {_type(5), _method(8), _mix(8)},
-				new Annotation[] {},
-				new Annotation[] {},
-				new Annotation[] {},
-				new Annotation[] {}));
+				new Annotation[0], new Annotation[0], new Annotation[0],
+				new Annotation[0]));
 
 		_methodListLocate(
-			SuperInterface2.class, Arrays.asList(
+			SuperInterface2.class,
+			Arrays.asList(
 				new Annotation[] {_method(6), _mix(6), _type(6)},
-				new Annotation[] {},
+				new Annotation[0],
 				new Annotation[] {_type(6), _method(7), _mix(7)},
 				new Annotation[] {_method(6), _mix(6), _type(6)},
-				new Annotation[] {},
-				new Annotation[] {}));
+				new Annotation[0], new Annotation[0]));
 
 		_methodListLocate(
-			SuperInterface1.class, Arrays.asList(
+			SuperInterface1.class,
+			Arrays.asList(
 				new Annotation[] {_mix(7), _method(9), _type(9)},
-				new Annotation[] {},
-				new Annotation[] {_method(7), _mix(7)},
-				new Annotation[] {},
-				new Annotation[] {},
-				new Annotation[] {}));
+				new Annotation[0], new Annotation[] {_method(7), _mix(7)},
+				new Annotation[0], new Annotation[0], new Annotation[0]));
 
 		_methodListLocate(
-			OriginInterface2.class, Arrays.asList(
+			OriginInterface2.class,
+			Arrays.asList(
 				new Annotation[] {_mix(8), _method(9), _type(9)},
-				new Annotation[] {_method(8), _mix(8)},
-				new Annotation[] {},
-				new Annotation[] {},
-				new Annotation[] {},
-				new Annotation[] {}));
+				new Annotation[] {_method(8), _mix(8)}, new Annotation[0],
+				new Annotation[0], new Annotation[0], new Annotation[0]));
 
 		_methodListLocate(
-			OriginInterface1.class, Arrays.asList(
+			OriginInterface1.class,
+			Arrays.asList(
 				new Annotation[] {_method(9), _mix(9), _type(9)},
-				new Annotation[] {},
-				new Annotation[] {},
-				new Annotation[] {},
-				new Annotation[] {},
-				new Annotation[] {}));
+				new Annotation[0], new Annotation[0], new Annotation[0],
+				new Annotation[0], new Annotation[0]));
 	}
 
 	public void testMethodSingleLocate() {
@@ -385,17 +286,19 @@ public class AnnotationLocatorTest extends TestCase {
 	}
 
 	private Method _method(final int value) {
-		return new Method() {
 
-			public int value() {
-				return value;
-			}
+		return new Method() {
 
 			public Class<? extends Annotation> annotationType() {
 				return Method.class;
 			}
 
+			public int value() {
+				return value;
+			}
+
 		};
+
 	}
 
 	private void _methodListLocate(
@@ -633,7 +536,6 @@ public class AnnotationLocatorTest extends TestCase {
 	}
 
 	private static final java.lang.reflect.Method[] _interfaceMethods;
-
 	private static final java.lang.reflect.Method _queueSuperTypesMethod;
 
 	static {
@@ -642,19 +544,14 @@ public class AnnotationLocatorTest extends TestCase {
 
 			_interfaceMethods[0] = OriginInterface1.class.getDeclaredMethod(
 				"originMethod1");
-
 			_interfaceMethods[1] = OriginInterface2.class.getDeclaredMethod(
 				"originMethod2");
-
 			_interfaceMethods[2] = SuperInterface1.class.getDeclaredMethod(
 				"superMethod1");
-
 			_interfaceMethods[3] = SuperInterface2.class.getDeclaredMethod(
 				"superMethod2");
-
 			_interfaceMethods[4] = TestInterface1.class.getDeclaredMethod(
 				"testMethod1");
-
 			_interfaceMethods[5] = TestInterface2.class.getDeclaredMethod(
 				"testMethod2");
 
@@ -670,55 +567,52 @@ public class AnnotationLocatorTest extends TestCase {
 
 	@Retention(RetentionPolicy.RUNTIME)
 	@Target(ElementType.METHOD)
-	@interface Method {
+	private @interface Method {
 
-		int value();
+		public int value();
 
 	}
 
 	@Retention(RetentionPolicy.RUNTIME)
 	@Target({ElementType.METHOD, ElementType.TYPE})
-	@interface Mix {
+	private @interface Mix {
 
-		int value();
-
-	}
-
-	@Retention(RetentionPolicy.RUNTIME)
-	@Target(ElementType.TYPE)
-	@interface Type {
-
-		int value();
+		public int value();
 
 	}
 
-	@Type(value = 1)
-	class TestClass
-		extends SuperClass implements TestInterface2, TestInterface1 {
+	@Type(value = 5)
+	private class OriginClass implements OriginInterface2, OriginInterface1 {
 
-		@Method(value = 1)
-		@Mix(value = 1)
-		@Override
+		@Method(value = 5)
+		@Mix(value = 5)
 		public void originMethod1() {
 		}
 
-		@Method(value = 1)
-		@Mix(value = 1)
-		public void superMethod2() {
+		public void originMethod2() {
 		}
 
-		@Method(value = 1)
-		@Mix(value = 1)
-		public void testMethod1() {
-		}
+	}
 
-		public void testMethod2() {
-		}
+	@Type(value = 9)
+	private interface OriginInterface1 {
+
+		@Method(value = 9)
+		@Mix(value = 9)
+		public void originMethod1();
+
+	}
+
+	@Mix(value = 8)
+	private interface OriginInterface2 extends OriginInterface1 {
+
+		@Method(value = 8)
+		public void originMethod2();
 
 	}
 
 	@Mix(value = 2)
-	class SuperClass
+	private class SuperClass
 		extends OriginClass implements SuperInterface2, SuperInterface1 {
 
 		@Method(value = 2)
@@ -735,41 +629,16 @@ public class AnnotationLocatorTest extends TestCase {
 
 	}
 
-	@Mix(value = 3)
-	interface TestInterface2 extends TestInterface1, SuperInterface2 {
+	@Mix(value = 7)
+	private interface SuperInterface1 extends OriginInterface1 {
 
-		@Method(value = 3)
+		@Method(value = 7)
 		void superMethod1();
-
-		@Method(value = 3)
-		void testMethod2();
-
-	}
-
-	@Type(value = 4)
-	interface TestInterface1 {
-
-		@Method(value = 4)
-		@Mix(value = 4)
-		void testMethod1();
-
-	}
-
-	@Type(value = 5)
-	class OriginClass implements OriginInterface2, OriginInterface1 {
-
-		@Method(value = 5)
-		@Mix(value = 5)
-		public void originMethod1() {
-		}
-
-		public void originMethod2() {
-		}
 
 	}
 
 	@Type(value = 6)
-	interface SuperInterface2 extends SuperInterface1 {
+	private interface SuperInterface2 extends SuperInterface1 {
 
 		@Method(value = 6)
 		@Mix(value = 6)
@@ -781,28 +650,57 @@ public class AnnotationLocatorTest extends TestCase {
 
 	}
 
-	@Mix(value = 7)
-	interface SuperInterface1 extends OriginInterface1 {
+	@Type(value = 1)
+	private class TestClass
+		extends SuperClass implements TestInterface2, TestInterface1 {
 
-		@Method(value = 7)
-		void superMethod1();
+		@Method(value = 1)
+		@Mix(value = 1)
+		@Override
+		public void originMethod1() {
+		}
+
+		@Method(value = 1)
+		@Mix(value = 1)
+		@Override
+		public void superMethod2() {
+		}
+
+		@Method(value = 1)
+		@Mix(value = 1)
+		public void testMethod1() {
+		}
+
+		public void testMethod2() {
+		}
 
 	}
 
-	@Mix(value = 8)
-	interface OriginInterface2 extends OriginInterface1 {
+	@Type(value = 4)
+	private interface TestInterface1 {
 
-		@Method(value = 8)
-		void originMethod2();
+		@Method(value = 4)
+		@Mix(value = 4)
+		public void testMethod1();
 
 	}
 
-	@Type(value = 9)
-	interface OriginInterface1 {
+	@Mix(value = 3)
+	private interface TestInterface2 extends TestInterface1, SuperInterface2 {
 
-		@Method(value = 9)
-		@Mix(value = 9)
-		void originMethod1();
+		@Method(value = 3)
+		public void superMethod1();
+
+		@Method(value = 3)
+		public void testMethod2();
+
+	}
+
+	@Retention(RetentionPolicy.RUNTIME)
+	@Target(ElementType.TYPE)
+	private @interface Type {
+
+		public int value();
 
 	}
 

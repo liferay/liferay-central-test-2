@@ -32,21 +32,21 @@ public class AnnotationLocator {
 
 		queue.offer(targetClass);
 
-		ArrayList<Annotation> annotationList = new ArrayList<Annotation>();
+		ArrayList<Annotation> annotationsList = new ArrayList<Annotation>();
 
 		Class<?> clazz = null;
 
 		while ((clazz = queue.poll()) != null) {
 			Annotation[] annotations = clazz.getAnnotations();
 
-			_mergeAnnotations(annotations, annotationList);
+			_mergeAnnotations(annotations, annotationsList);
 
 			_queueSuperTypes(queue, clazz);
 		}
 
-		annotationList.trimToSize();
+		annotationsList.trimToSize();
 
-		return annotationList;
+		return annotationsList;
 	}
 
 	public static <T extends Annotation> T locate(
@@ -82,7 +82,7 @@ public class AnnotationLocator {
 			queue.offer(targetClass);
 		}
 
-		ArrayList<Annotation> annotationList = new ArrayList<Annotation>();
+		ArrayList<Annotation> annotationsList = new ArrayList<Annotation>();
 
 		Class<?> clazz = null;
 
@@ -93,18 +93,20 @@ public class AnnotationLocator {
 
 				Annotation[] annotations = specificMethod.getAnnotations();
 
-				_mergeAnnotations(annotations, annotationList);
+				_mergeAnnotations(annotations, annotationsList);
 			}
 			catch (Exception e) {
 			}
 
 			try {
-				// Ensure the clazz has publicly inherited method
+
+				// Ensure the class has a publicly inherited method
+
 				clazz.getMethod(method.getName(), method.getParameterTypes());
 
 				Annotation[] annotations = clazz.getAnnotations();
 
-				_mergeAnnotations(annotations, annotationList);
+				_mergeAnnotations(annotations, annotationsList);
 			}
 			catch (Exception e) {
 			}
@@ -112,9 +114,9 @@ public class AnnotationLocator {
 			_queueSuperTypes(queue, clazz);
 		}
 
-		annotationList.trimToSize();
+		annotationsList.trimToSize();
 
-		return annotationList;
+		return annotationsList;
 	}
 
 	public static <T extends Annotation> T locate(
@@ -148,7 +150,9 @@ public class AnnotationLocator {
 			}
 
 			try {
-				// Ensure the clazz has publicly inherited method
+
+				// Ensure the class has a publicly inherited method
+
 				clazz.getMethod(method.getName(), method.getParameterTypes());
 
 				annotation = clazz.getAnnotation(annotationClass);
@@ -170,15 +174,13 @@ public class AnnotationLocator {
 	private static void _mergeAnnotations(
 		Annotation[] sourceAnnotations, List<Annotation> targetAnnotationList) {
 
-		Outter :
+		merge:
 		for (Annotation sourceAnnotation : sourceAnnotations) {
-
 			for (Annotation targetAnnotation : targetAnnotationList) {
-
 				if (sourceAnnotation.annotationType() ==
-					targetAnnotation.annotationType()) {
+								targetAnnotation.annotationType()) {
 
-					continue Outter;
+					continue merge;
 				}
 			}
 
