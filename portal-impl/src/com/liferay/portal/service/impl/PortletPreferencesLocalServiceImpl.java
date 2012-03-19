@@ -46,8 +46,8 @@ public class PortletPreferencesLocalServiceImpl
 	extends PortletPreferencesLocalServiceBaseImpl {
 
 	public PortletPreferences addPortletPreferences(
-			long ownerId, int ownerType, long plid, String portletId,
-			Portlet portlet, String defaultPreferences)
+			long companyId, long ownerId, int ownerType, long plid,
+			String portletId, Portlet portlet, String defaultPreferences)
 		throws SystemException {
 
 		long portletPreferencesId = counterLocalService.increment();
@@ -314,20 +314,19 @@ public class PortletPreferencesLocalServiceImpl
 				ownerId, ownerType, plid, portletId);
 
 		if (portletPreferences == null) {
-
 			Portlet portlet = portletLocalService.getPortletById(
 				companyId, portletId);
 
 			if (PortletPreferencesThreadLocal.isStrict() &&
 				(Validator.isNull(defaultPreferences) ||
-					((portlet != null) && portlet.isUndeployedPortlet()))) {
+				 ((portlet != null) && portlet.isUndeployedPortlet()))) {
 
 				return new PortletPreferencesImpl();
 			}
 
 			portletPreferences =
 				portletPreferencesLocalService.addPortletPreferences(
-					ownerId, ownerType, plid, portletId, portlet,
+					companyId, ownerId, ownerType, plid, portletId, portlet,
 					defaultPreferences);
 		}
 

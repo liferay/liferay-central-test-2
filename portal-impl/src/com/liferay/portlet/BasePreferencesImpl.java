@@ -47,10 +47,6 @@ public abstract class BasePreferencesImpl implements Serializable {
 	}
 
 	public Map<String, String[]> getMap() {
-		// Undo LPS-6908, the return map is already wrapped as unmodifiable.
-		// There is no need to protect it from concurrent modification, since
-		// it can not be modified at all!
-
 		Map<String, String[]> map = new HashMap<String, String[]>();
 
 		Map<String, Preference> preferences = getPreferences();

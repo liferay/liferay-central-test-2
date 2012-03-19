@@ -523,7 +523,7 @@ public class LayoutRevisionLocalServiceImpl
 
 		for (PortletPreferences portletPreferences : portletPreferencesList) {
 			portletPreferencesLocalService.addPortletPreferences(
-				portletPreferences.getOwnerId(),
+				layoutRevision.getCompanyId(), portletPreferences.getOwnerId(),
 				portletPreferences.getOwnerType(),
 				layoutRevision.getLayoutRevisionId(),
 				portletPreferences.getPortletId(), null,
