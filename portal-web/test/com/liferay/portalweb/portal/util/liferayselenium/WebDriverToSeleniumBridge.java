@@ -125,9 +125,9 @@ public class WebDriverToSeleniumBridge
 	}
 
 	public void click(String locator) {
-		WebElement element = getWebElement(locator);
+		WebElement webElement = getWebElement(locator);
 
-		element.click();
+		webElement.click();
 	}
 
 	public void clickAt(String locator, String coordString) {
