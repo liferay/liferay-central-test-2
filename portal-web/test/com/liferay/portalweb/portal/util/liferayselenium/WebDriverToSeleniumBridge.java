@@ -137,13 +137,13 @@ public class WebDriverToSeleniumBridge
 		WebElement webElement = getWebElement(locator);
 
 		if (coordString.contains(",")) {
-			String [] coords = coordString.split(",");
+			String[] coords = coordString.split(",");
 
-			int x = Integer.parseInt(coords[0]);
-
-			int y = Integer.parseInt(coords[1]);
+			int x = GetterUtil.getInteger(coords[0]);
+			int y = GetterUtil.getInteger(coords[1]);
 
 			actions.moveToElement(webElement, x, y);
+
 			actions.click();
 		}
 		else {
