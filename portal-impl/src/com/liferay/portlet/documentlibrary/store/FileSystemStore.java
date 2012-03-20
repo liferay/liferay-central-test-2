@@ -397,7 +397,7 @@ public class FileSystemStore extends BaseStore {
 
 			File parentFile = file.getParentFile();
 
-			if (file.delete() && parentFile != null) {
+			if (file.delete() && (parentFile != null)) {
 				deleteEmptyAncestors(companyId, repositoryId, parentFile);
 			}
 		}
