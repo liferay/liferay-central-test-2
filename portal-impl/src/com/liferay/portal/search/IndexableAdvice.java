@@ -25,6 +25,7 @@ import com.liferay.portal.spring.aop.AnnotationChainableMethodAdvice;
 import com.liferay.portal.spring.aop.ServiceBeanAopProxy;
 
 import java.lang.annotation.Annotation;
+import java.lang.reflect.Method;
 
 import org.aopalliance.intercept.MethodInvocation;
 
@@ -48,13 +49,14 @@ public class IndexableAdvice
 			return;
 		}
 
-		Class<?> returnType = methodInvocation.getMethod().getReturnType();
+		Method method = methodInvocation.getMethod();
+
+		Class<?> returnType = method.getReturnType();
 
 		if (!BaseModel.class.isAssignableFrom(returnType)) {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
-					methodInvocation +
-					" does not have an Indexable return type.");
+					methodInvocation + " does not have a valid return type");
 			}
 
 			return;
