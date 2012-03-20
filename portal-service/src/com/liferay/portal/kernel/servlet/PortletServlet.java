@@ -67,10 +67,9 @@ public class PortletServlet extends HttpServlet {
 			HttpSession session = request.getSession(false);
 
 			if (session != null) {
-				String key = PortletServlet.class.getName() + ".extend_session";
+				session.setAttribute(WebKeys.EXTEND_SESSION, Boolean.TRUE);
 
-				session.setAttribute(key, Boolean.TRUE);
-				session.removeAttribute(key);
+				session.removeAttribute(WebKeys.EXTEND_SESSION);
 			}
 
 			return;

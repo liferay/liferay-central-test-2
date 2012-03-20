@@ -20,23 +20,27 @@
 for (String servletContextName : ServletContextPool.keySet()) {
 	ServletContext servletContext = ServletContextPool.get(servletContextName);
 
-	if (Validator.isNotNull(servletContextName) && !servletContextName.equals(PortalUtil.getPathContext())) {
-		PortletApp portletApp = PortletLocalServiceUtil.getPortletApp(servletContextName);
+	if (Validator.isNull(servletContextName) || servletContextName.equals(PortalUtil.getPathContext())) {
+		continue;
+	}
 
-		List<Portlet> portlets = portletApp.getPortlets();
+	PortletApp portletApp = PortletLocalServiceUtil.getPortletApp(servletContextName);
 
-		for (Portlet portlet : portlets) {
-			String path = StringPool.SLASH + portlet.getPortletName() + "/invoke";
+	List<Portlet> portlets = portletApp.getPortlets();
 
-			RequestDispatcher requestDispatcher = servletContext.getRequestDispatcher(path);
+	for (Portlet portlet : portlets) {
+		String path = StringPool.SLASH.concat(portlet.getPortletName()).concat("/invoke");
 
-			request.setAttribute(WebKeys.EXTEND_SESSION, Boolean.TRUE);
+		RequestDispatcher requestDispatcher = servletContext.getRequestDispatcher(path);
 
-			try {
-				requestDispatcher.include(request, response);
-			}
-			catch (Exception e) {
-				_log.warn("Unable to extend session for: " + servletContextName);
+		request.setAttribute(WebKeys.EXTEND_SESSION, Boolean.TRUE);
+
+		try {
+			requestDispatcher.include(request, response);
+		}
+		catch (Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("Unable to extend session for " + servletContextName);
 			}
 		}
 	}
