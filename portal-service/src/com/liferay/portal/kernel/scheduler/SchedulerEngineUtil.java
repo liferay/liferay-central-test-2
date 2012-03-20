@@ -52,24 +52,25 @@ public class SchedulerEngineUtil {
 	public static void addJob(
 			Trigger trigger, StorageType storageType, String description,
 			String destinationName, Message message,
-			String messageListenerClass, String portletId,
+			String messageListenerClassName, String portletId,
 			int exceptionsMaxSize)
 		throws SchedulerException {
 
 		_instance._addJob(
 			trigger, storageType, description, destinationName, message,
-			messageListenerClass, portletId, exceptionsMaxSize);
+			messageListenerClassName, portletId, exceptionsMaxSize);
 	}
 
 	public static void addJob(
 			Trigger trigger, StorageType storageType, String description,
-			String destinationName, Object payload, String messageListenerClass,
-			String portletId, int exceptionsMaxSize)
+			String destinationName, Object payload,
+			String messageListenerClassName, String portletId,
+			int exceptionsMaxSize)
 		throws SchedulerException {
 
 		_instance._addJob(
 			trigger, storageType, description, destinationName, payload,
-			messageListenerClass, portletId, exceptionsMaxSize);
+			messageListenerClassName, portletId, exceptionsMaxSize);
 	}
 
 	public static void addScriptingJob(
@@ -372,7 +373,7 @@ public class SchedulerEngineUtil {
 	private void _addJob(
 			Trigger trigger, StorageType storageType, String description,
 			String destinationName, Message message,
-			String messageListenerClass, String portletId,
+			String messageListenerClassName, String portletId,
 			int exceptionsMaxSize)
 		throws SchedulerException {
 
@@ -381,7 +382,8 @@ public class SchedulerEngineUtil {
 		}
 
 		message.put(
-			SchedulerEngine.MESSAGE_LISTENER_CLASS_NAME, messageListenerClass);
+			SchedulerEngine.MESSAGE_LISTENER_CLASS_NAME,
+			messageListenerClassName);
 		message.put(SchedulerEngine.PORTLET_ID, portletId);
 
 		_schedule(
@@ -391,8 +393,9 @@ public class SchedulerEngineUtil {
 
 	private void _addJob(
 			Trigger trigger, StorageType storageType, String description,
-			String destinationName, Object payload, String messageListenerClass,
-			String portletId, int exceptionsMaxSize)
+			String destinationName, Object payload,
+			String messageListenerClassName, String portletId,
+			int exceptionsMaxSize)
 		throws SchedulerException {
 
 		Message message = new Message();
@@ -401,7 +404,7 @@ public class SchedulerEngineUtil {
 
 		_addJob(
 			trigger, storageType, description, destinationName, message,
-			messageListenerClass, portletId, exceptionsMaxSize);
+			messageListenerClassName, portletId, exceptionsMaxSize);
 	}
 
 	private void _addScriptingJob(

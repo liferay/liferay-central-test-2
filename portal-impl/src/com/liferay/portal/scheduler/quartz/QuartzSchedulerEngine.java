@@ -574,7 +574,7 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 	}
 
 	protected MessageListener getMessageListener(
-			String messageListenerClass, ClassLoader classLoader)
+			String messageListenerClassName, ClassLoader classLoader)
 		throws SchedulerException {
 
 		MessageListener schedulerEventListener = null;
@@ -582,7 +582,7 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 		try {
 			Class<? extends MessageListener> clazz =
 				(Class<? extends MessageListener>)classLoader.loadClass(
-					messageListenerClass);
+					messageListenerClassName);
 
 			schedulerEventListener = clazz.newInstance();
 
@@ -595,7 +595,7 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 		catch (Exception e) {
 			throw new SchedulerException(
 				"Unable to register message listener with name " +
-					messageListenerClass,
+					messageListenerClassName,
 				e);
 		}
 
@@ -899,10 +899,10 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 			Message message)
 		throws SchedulerException {
 
-		String messageListenerClass = message.getString(
+		String messageListenerClassName = message.getString(
 			MESSAGE_LISTENER_CLASS_NAME);
 
-		if (messageListenerClass == null) {
+		if (messageListenerClassName == null) {
 			return;
 		}
 
@@ -919,11 +919,11 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 
 		if (classLoader == null) {
 			throw new SchedulerException(
-				"Unable to find cluster for portlet " + portletId);
+				"Unable to find class loader for portlet " + portletId);
 		}
 
 		MessageListener schedulerEventListener = getMessageListener(
-			messageListenerClass, classLoader);
+			messageListenerClassName, classLoader);
 
 		SchedulerEventMessageListenerWrapper schedulerEventListenerWrapper =
 			new SchedulerEventMessageListenerWrapper();
@@ -1027,7 +1027,7 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 			messageListener = invokerMessageListener.getMessageListener();
 
 			if (!(messageListener instanceof
-				SchedulerEventMessageListenerWrapper)) {
+					SchedulerEventMessageListenerWrapper)) {
 
 				continue;
 			}
