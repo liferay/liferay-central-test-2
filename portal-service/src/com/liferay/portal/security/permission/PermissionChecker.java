@@ -235,6 +235,14 @@ public interface PermissionChecker extends Cloneable {
 	 */
 	public boolean isOmniadmin();
 
+	/**
+	 * Returns <code>true</code> if the user is an administrator of the
+	 * organization.
+	 *
+	 * @param  organizationId the primary key of the organization
+	 * @return <code>true</code> if the user is an administrator of the
+	 *         organization; <code>false</code> otherwise
+	 */
 	public boolean isOrganizationAdmin(long organizationId);
 
 	/**

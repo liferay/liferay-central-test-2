@@ -1001,7 +1001,8 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 			if (isCompanyAdminImpl(companyId)) {
 				return true;
 			}
-			else if (name.equals(Organization.class.getName())) {
+
+			if (name.equals(Organization.class.getName())) {
 				long organizationId = GetterUtil.getInteger(primKey);
 
 				if (isOrganizationAdminImpl(organizationId)) {
