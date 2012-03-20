@@ -296,12 +296,12 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public void deleteRole(long roleId)
+	public Role deleteRole(long roleId)
 		throws PortalException, SystemException {
 
 		Role role = rolePersistence.findByPrimaryKey(roleId);
 
-		deleteRole(role);
+		return deleteRole(role);
 	}
 
 	/**
@@ -313,7 +313,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public void deleteRole(Role role)
+	public Role deleteRole(Role role)
 		throws PortalException, SystemException {
 
 		if (PortalUtil.isSystemRole(role.getName())) {
@@ -348,6 +348,8 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		// Permission cache
 
 		PermissionCacheUtil.clearCache();
+
+		return role;
 	}
 
 	/**
