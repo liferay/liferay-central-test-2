@@ -779,7 +779,7 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 		// Group
 
 		try {
-			if ((groupId > 0) && !name.equals(Organization.class.getName())) {
+			if (groupId > 0) {
 				Resource resource = ResourceLocalServiceUtil.getResource(
 					companyId, name, ResourceConstants.SCOPE_GROUP,
 					String.valueOf(groupId));
