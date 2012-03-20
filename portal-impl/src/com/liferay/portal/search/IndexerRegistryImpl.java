@@ -17,6 +17,7 @@ package com.liferay.portal.search;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistry;
 import com.liferay.portal.kernel.util.ListUtil;
+import com.liferay.portal.spring.aop.ServiceBeanAopProxy;
 
 import java.util.List;
 import java.util.Map;
@@ -37,6 +38,8 @@ public class IndexerRegistryImpl implements IndexerRegistry {
 
 	public void register(String className, Indexer indexerInstance) {
 		_indexers.put(className, indexerInstance);
+
+		ServiceBeanAopProxy.clearMethodInterceptorCache();
 	}
 
 	public void unregister(String className) {
