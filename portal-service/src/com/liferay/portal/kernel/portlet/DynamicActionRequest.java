@@ -29,6 +29,7 @@ import javax.portlet.filter.ActionRequestWrapper;
 /**
  * @author Brian Wing Shun Chan
  * @author Eudaldo Alonso
+ * @see    DynamicRenderRequest
  */
 public class DynamicActionRequest extends ActionRequestWrapper {
 
