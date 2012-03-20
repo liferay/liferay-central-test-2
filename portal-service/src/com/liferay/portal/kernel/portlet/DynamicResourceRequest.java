@@ -23,37 +23,38 @@ import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 
-import javax.portlet.ActionRequest;
-import javax.portlet.filter.ActionRequestWrapper;
+import javax.portlet.ResourceRequest;
+import javax.portlet.filter.ResourceRequestWrapper;
 
 /**
  * @author Brian Wing Shun Chan
- * @author Eudaldo Alonso
+ * @see    DynamicActionRequest
  * @see    DynamicEventRequest
  * @see    DynamicRenderRequest
- * @see    DynamicResourceRequest
  */
-public class DynamicActionRequest extends ActionRequestWrapper {
+public class DynamicResourceRequest extends ResourceRequestWrapper {
 
-	public DynamicActionRequest(ActionRequest actionRequest) {
-		this(actionRequest, new HashMap<String, String[]>(), true);
+	public DynamicResourceRequest(ResourceRequest resourceRequest) {
+		this(resourceRequest, new HashMap<String, String[]>(), true);
 	}
 
-	public DynamicActionRequest(
-		ActionRequest actionRequest, Map<String, String[]> params) {
+	public DynamicResourceRequest(
+		ResourceRequest resourceRequest, Map<String, String[]> params) {
 
-		this(actionRequest, params, true);
+		this(resourceRequest, params, true);
 	}
 
-	public DynamicActionRequest(ActionRequest actionRequest, boolean inherit) {
-		this(actionRequest, new HashMap<String, String[]>(), inherit);
+	public DynamicResourceRequest(
+		ResourceRequest resourceRequest, boolean inherit) {
+
+		this(resourceRequest, new HashMap<String, String[]>(), inherit);
 	}
 
-	public DynamicActionRequest(
-		ActionRequest actionRequest, Map<String, String[]> params,
+	public DynamicResourceRequest(
+		ResourceRequest resourceRequest, Map<String, String[]> params,
 		boolean inherit) {
 
-		super(actionRequest);
+		super(resourceRequest);
 
 		_params = new HashMap<String, String[]>();
 		_inherit = inherit;
@@ -64,13 +65,13 @@ public class DynamicActionRequest extends ActionRequestWrapper {
 			}
 		}
 
-		if (_inherit && (actionRequest instanceof DynamicActionRequest)) {
-			DynamicActionRequest dynamicActionRequest =
-				(DynamicActionRequest)actionRequest;
+		if (_inherit && (resourceRequest instanceof DynamicResourceRequest)) {
+			DynamicResourceRequest dynamicResourceRequest =
+				(DynamicResourceRequest)resourceRequest;
 
-			setRequest(dynamicActionRequest.getRequest());
+			setRequest(dynamicResourceRequest.getRequest());
 
-			params = dynamicActionRequest.getDynamicParameterMap();
+			params = dynamicResourceRequest.getDynamicParameterMap();
 
 			if (params != null) {
 				for (Map.Entry<String, String[]> entry : params.entrySet()) {
