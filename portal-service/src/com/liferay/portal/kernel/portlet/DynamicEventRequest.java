@@ -23,37 +23,36 @@ import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 
-import javax.portlet.ActionRequest;
-import javax.portlet.filter.ActionRequestWrapper;
+import javax.portlet.EventRequest;
+import javax.portlet.filter.EventRequestWrapper;
 
 /**
  * @author Brian Wing Shun Chan
- * @author Eudaldo Alonso
- * @see    DynamicEventRequest
+ * @see    DynamicActionRequest
  * @see    DynamicRenderRequest
  * @see    DynamicResourceRequest
  */
-public class DynamicActionRequest extends ActionRequestWrapper {
+public class DynamicEventRequest extends EventRequestWrapper {
 
-	public DynamicActionRequest(ActionRequest actionRequest) {
-		this(actionRequest, new HashMap<String, String[]>(), true);
+	public DynamicEventRequest(EventRequest eventRequest) {
+		this(eventRequest, new HashMap<String, String[]>(), true);
 	}
 
-	public DynamicActionRequest(
-		ActionRequest actionRequest, Map<String, String[]> params) {
+	public DynamicEventRequest(
+		EventRequest eventRequest, Map<String, String[]> params) {
 
-		this(actionRequest, params, true);
+		this(eventRequest, params, true);
 	}
 
-	public DynamicActionRequest(ActionRequest actionRequest, boolean inherit) {
-		this(actionRequest, new HashMap<String, String[]>(), inherit);
+	public DynamicEventRequest(EventRequest eventRequest, boolean inherit) {
+		this(eventRequest, new HashMap<String, String[]>(), inherit);
 	}
 
-	public DynamicActionRequest(
-		ActionRequest actionRequest, Map<String, String[]> params,
+	public DynamicEventRequest(
+		EventRequest eventRequest, Map<String, String[]> params,
 		boolean inherit) {
 
-		super(actionRequest);
+		super(eventRequest);
 
 		_params = new HashMap<String, String[]>();
 		_inherit = inherit;
@@ -64,13 +63,13 @@ public class DynamicActionRequest extends ActionRequestWrapper {
 			}
 		}
 
-		if (_inherit && (actionRequest instanceof DynamicActionRequest)) {
-			DynamicActionRequest dynamicActionRequest =
-				(DynamicActionRequest)actionRequest;
+		if (_inherit && (eventRequest instanceof DynamicEventRequest)) {
+			DynamicEventRequest dynamicEventRequest =
+				(DynamicEventRequest)eventRequest;
 
-			setRequest(dynamicActionRequest.getRequest());
+			setRequest(dynamicEventRequest.getRequest());
 
-			params = dynamicActionRequest.getDynamicParameterMap();
+			params = dynamicEventRequest.getDynamicParameterMap();
 
 			if (params != null) {
 				for (Map.Entry<String, String[]> entry : params.entrySet()) {
