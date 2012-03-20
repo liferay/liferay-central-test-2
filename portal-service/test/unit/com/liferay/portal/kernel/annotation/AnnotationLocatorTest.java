@@ -30,13 +30,11 @@ import java.util.Queue;
 
 /**
  * <table>
- *
  *	<tr>
  *		<th colspan = 3>
- * Test classes inherited hierarchy
+ * Test Classes Inherited Hierarchy
  *		</th>
  *	</tr>
- *
  *	<tr valign="top">
  *		<td>
  *			<pre>
@@ -49,7 +47,6 @@ import java.util.Queue;
  * }
  *			</pre>
  *		</td>
- *
  *		<td>
  *			<pre>
  * &#64;Mix(value = 8)
@@ -59,7 +56,6 @@ import java.util.Queue;
  * }
  *			</pre>
  *		</td>
- *
  *		<td>
  *			<pre>
  * &#64;Type(value = 9)
@@ -71,7 +67,6 @@ import java.util.Queue;
  *			</pre>
  *		</td>
  *	</tr>
- *
  *	<tr valign="top">
  *		<td>
  *			<pre>
@@ -79,12 +74,10 @@ import java.util.Queue;
  *   |
  *			</pre>
  *		</td>
- *
  *		<td>
  *			<pre>
  *			</pre>
  *		</td>
- *
  *		<td>
  *			<pre>
  *   ^
@@ -92,7 +85,6 @@ import java.util.Queue;
  *			</pre>
  *		</td>
  *	</tr>
- *
  *	<tr valign="top">
  *		<td>
  *			<pre>
@@ -106,7 +98,6 @@ import java.util.Queue;
  * }
  *			</pre>
  *		</td>
- *
  *		<td>
  *			<pre>
  * &#64;Type(value = 6)
@@ -120,7 +111,6 @@ import java.util.Queue;
  * }
  *			</pre>
  *		</td>
- *
  *		<td>
  *			<pre>
  * &#64;Mix(value = 7)
@@ -131,7 +121,6 @@ import java.util.Queue;
  *			</pre>
  *		</td>
  *	</tr>
- *
  *	<tr valign="top">
  *		<td>
  *			<pre>
@@ -139,20 +128,17 @@ import java.util.Queue;
  *   |
  *			</pre>
  *		</td>
- *
  *		<td>
  *			<pre>
  *   ^
  *   |
  *			</pre>
  *		</td>
- *
  *		<td>
  *			<pre>
  *			</pre>
  *		</td>
  *	</tr>
- *
  *	<tr valign="top">
  *		<td>
  *			<pre>
@@ -172,7 +158,6 @@ import java.util.Queue;
  * }
  *			</pre>
  *		</td>
- *
  *		<td>
  *			<pre>
  * &#64;Mix(value = 3)
@@ -184,7 +169,6 @@ import java.util.Queue;
  * }
  *			</pre>
  *		</td>
- *
  *		<td>
  *			<pre>
  * &#64;Type(value = 4)
@@ -196,7 +180,6 @@ import java.util.Queue;
  *			</pre>
  *		</td>
  *	</tr>
- *
  * </table>
  *
  * @author Shuyang Zhou
