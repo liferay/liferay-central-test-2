@@ -11,8 +11,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.Indexable;
 import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.search.Indexer;
@@ -577,8 +575,6 @@ import javax.sql.DataSource;
 			@BeanReference(type = PersistedModelLocalServiceRegistry.class)
 			protected PersistedModelLocalServiceRegistry persistedModelLocalServiceRegistry;
 		</#if>
-
-		private static Log _log = LogFactoryUtil.getLog(${entity.name}${sessionTypeName}ServiceBaseImpl.class);
 	</#if>
 
 	private String _beanIdentifier;
