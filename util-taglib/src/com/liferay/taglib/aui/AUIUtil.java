@@ -128,8 +128,18 @@ public class AUIUtil {
 		return sb.toString();
 	}
 
-	public static String buildLabel(String inlineLabel, boolean showForLabel,
-		String forLabel, boolean choiceField) {
+	/**
+	 * @deprecated {@link #buildLabel(String, boolean, String, boolean)}
+	 */
+	public static String buildLabel(
+		String inlineLabel, boolean showForLabel, String forLabel) {
+
+		return buildLabel(inlineLabel, showForLabel, forLabel, false);
+	}
+
+	public static String buildLabel(
+		String inlineLabel, boolean showForLabel, String forLabel,
+		boolean choiceField) {
 
 		StringBundler sb = new StringBundler(4);
 
