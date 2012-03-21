@@ -115,10 +115,6 @@ public class IconMenuTag extends BaseBodyTagSupport implements BodyTag {
 			_icon = themeDisplay.getPathThemeImages() + "/common/tool.png";
 		}
 
-		PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
-
-		String namespace = portletDisplay.getNamespace();
-
 		if (Validator.isNull(_id)) {
 			_id = (String)request.getAttribute(
 				"liferay-ui:search-container-row:rowId");
@@ -130,6 +126,10 @@ public class IconMenuTag extends BaseBodyTagSupport implements BodyTag {
 
 			_id = _id.concat("_menu");
 		}
+
+		PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
+
+		String namespace = portletDisplay.getNamespace();
 
 		_id = namespace.concat(_id);
 
@@ -289,8 +289,7 @@ public class IconMenuTag extends BaseBodyTagSupport implements BodyTag {
 					jspWriter.write(
 						"<a class=\"nobr\" href=\"javascript:;\" id=\"");
 					jspWriter.write(_id);
-					jspWriter.write("Button");
-					jspWriter.write("\">");
+					jspWriter.write("Button\">");
 
 					if (Validator.isNotNull(_icon)) {
 						jspWriter.write("<img alt=\"\" src=\"");

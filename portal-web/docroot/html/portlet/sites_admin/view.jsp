@@ -99,9 +99,9 @@ pageContext.setAttribute("portletURL", portletURL);
 		<liferay-ui:search-container-row
 			className="com.liferay.portal.model.Group"
 			escapedModel="<%= true %>"
-			idProperty="friendlyURL"
 			keyProperty="groupId"
 			modelVar="group"
+			rowIdProperty="friendlyURL"
 			rowVar="row"
 		>
 			<liferay-portlet:renderURL doAsGroupId="<%= group.getGroupId() %>" portletName="<%= PortletKeys.SITE_SETTINGS %>" varImpl="rowURL">

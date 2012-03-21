@@ -60,9 +60,9 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_role_assignments.
 	<liferay-ui:search-container-row
 		className="com.liferay.portal.model.User"
 		escapedModel="<%= true %>"
-		idProperty="screenName"
 		keyProperty="userId"
 		modelVar="user2"
+		rowIdProperty="screenName"
 	>
 		<liferay-ui:search-container-column-text
 			name="name"

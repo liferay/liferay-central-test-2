@@ -43,15 +43,15 @@ public class ResultRow {
 	}
 
 	public ResultRow(Object obj, String primaryKey, int pos, boolean bold) {
-		this(obj, primaryKey, String.valueOf(pos + 1), pos, bold);
+		this(String.valueOf(pos + 1), obj, primaryKey, pos, bold);
 	}
 
 	public ResultRow(
-		Object obj, String primaryKey, String id, int pos, boolean bold) {
+		String rowId, Object obj, String primaryKey, int pos, boolean bold) {
 
+		_rowId = rowId;
 		_obj = obj;
 		_primaryKey = primaryKey;
-		_id = id;
 		_pos = pos;
 		_bold = bold;
 		_searchEntries = new ArrayList<SearchEntry>();
@@ -349,10 +349,6 @@ public class ResultRow {
 		return _searchEntries;
 	}
 
-	public String getId() {
-		return _id;
-	}
-
 	public Object getObject() {
 		return _obj;
 	}
@@ -371,6 +367,10 @@ public class ResultRow {
 
 	public String getPrimaryKey() {
 		return _primaryKey;
+	}
+
+	public String getRowId() {
+		return _rowId;
 	}
 
 	public boolean isBold() {
@@ -405,10 +405,6 @@ public class ResultRow {
 		_data = data;
 	}
 
-	public void setId(String id) {
-		_id = id;
-	}
-
 	public void setObject(Object obj) {
 		_obj = obj;
 	}
@@ -429,6 +425,10 @@ public class ResultRow {
 		_restricted = restricted;
 	}
 
+	public void setRowId(String rowId) {
+		_rowId = rowId;
+	}
+
 	public void setSkip(boolean skip) {
 		_skip = skip;
 	}
@@ -437,12 +437,12 @@ public class ResultRow {
 	private String _classHoverName;
 	private String _className;
 	private Map<String, Object> _data;
-	private String _id;
 	private Object _obj;
 	private Map<String, Object> _params;
 	private int _pos;
 	private String _primaryKey;
 	private boolean _restricted;
+	private String _rowId;
 	private List<SearchEntry> _searchEntries;
 	private boolean _skip;
 

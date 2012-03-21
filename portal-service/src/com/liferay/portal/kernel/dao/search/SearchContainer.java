@@ -212,6 +212,10 @@ public class SearchContainer<R> {
 		return _maxPages;
 	}
 
+	public List<String> getNormalizedHeaderNames() {
+		return _normalizedHeaderNames;
+	}
+
 	public Map<String, String> getOrderableHeaders() {
 		return _orderableHeaders;
 	}
@@ -270,10 +274,6 @@ public class SearchContainer<R> {
 
 	public int getTotal() {
 		return _total;
-	}
-
-	public List<String> getNormalizedHeaderNames() {
-		return _normalizedHeaderNames;
 	}
 
 	public boolean isDeltaConfigurable() {

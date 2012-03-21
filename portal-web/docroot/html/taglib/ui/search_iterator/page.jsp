@@ -64,6 +64,7 @@ if (end > total) {
 if (rowChecker != null) {
 	if (headerNames != null) {
 		headerNames.add(0, rowChecker.getAllRowsCheckBox());
+
 		normalizedHeaderNames.add(0, "rowChecker");
 	}
 }
@@ -105,6 +106,7 @@ int sortColumnIndex = -1;
 			<%
 			for (int i = 0; i < headerNames.size(); i++) {
 				String headerName = headerNames.get(i);
+
 				String normalizedHeaderName = null;
 
 				if (i < normalizedHeaderNames.size()) {
@@ -297,11 +299,9 @@ int sortColumnIndex = -1;
 				row.addSearchEntry(0, textSearchEntry);
 			}
 
+			request.setAttribute("liferay-ui:search-container-row:rowId", id.concat(StringPool.UNDERLINE.concat(row.getRowId())));
+
 			Map<String, Object> data = row.getData();
-
-			String rowId = row.getId();
-
-			request.setAttribute("liferay-ui:search-container-row:rowId", id.concat(StringPool.UNDERLINE.concat(rowId)));
 		%>
 
 			<tr class="<%= rowClassName %>" <%= AUIUtil.buildData(data) %>>
@@ -345,7 +345,8 @@ int sortColumnIndex = -1;
 					<c:if test="<%= (headerNames != null) && (headerNames.size() >= (j + 1)) %>">
 						headers="<%= namespace + id %>_col-<%= normalizedHeaderName %>"
 					</c:if>
-					id="<%= namespace + id %>_col-<%= normalizedHeaderName %>_row-<%= rowId %>"
+
+					id="<%= namespace + id %>_col-<%= normalizedHeaderName %>_row-<%= row.getRowId() %>"
 				>
 
 					<%

@@ -104,9 +104,9 @@ if (Validator.isNotNull(viewUsersRedirect)) {
 	<liferay-ui:search-container-row
 		className="com.liferay.portal.model.User"
 		escapedModel="<%= true %>"
-		idProperty="screenName"
 		keyProperty="userId"
 		modelVar="user2"
+		rowIdProperty="screenName"
 	>
 		<liferay-portlet:renderURL varImpl="rowURL">
 			<portlet:param name="struts_action" value="/directory/view_user" />

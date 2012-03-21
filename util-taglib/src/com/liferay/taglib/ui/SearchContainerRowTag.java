@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.bean.BeanPropertiesUtil;
 import com.liferay.portal.kernel.dao.search.ResultRow;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.repository.model.RepositoryModel;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.FriendlyURLNormalizerUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ServerDetector;
@@ -112,11 +113,11 @@ public class SearchContainerRowTag<R>
 			_bold = false;
 			_className = null;
 			_escapedModel = false;
-			_idProperty = null;
 			_indexVar = DEFAULT_INDEX_VAR;
 			_keyProperty = null;
 			_modelVar = DEFAULT_MODEL_VAR;
 			_orderableHeaders = null;
+			_rowIdProperty = null;
 			_rowVar = DEFAULT_ROW_VAR;
 			_stringKey = false;
 		}
@@ -232,10 +233,6 @@ public class SearchContainerRowTag<R>
 		_headerNamesAssigned = headerNamesAssigned;
 	}
 
-	public void setIdProperty(String idProperty) {
-		_idProperty = idProperty;
-	}
-
 	public void setIndexVar(String indexVar) {
 		_indexVar = indexVar;
 	}
@@ -254,6 +251,10 @@ public class SearchContainerRowTag<R>
 
 	public void setRow(ResultRow row) {
 		_resultRow = row;
+	}
+
+	public void setRowIdProperty(String rowIdProperty) {
+		_rowIdProperty = rowIdProperty;
 	}
 
 	public void setRowVar(String rowVar) {
@@ -299,24 +300,25 @@ public class SearchContainerRowTag<R>
 			primaryKey = String.valueOf(primaryKeyObj);
 		}
 
-		String idKey = null;
+		String rowId = null;
 
-		if (Validator.isNull(_idProperty)) {
-			idKey = String.valueOf(_rowIndex + 1);
+		if (Validator.isNull(_rowIdProperty)) {
+			rowId = String.valueOf(_rowIndex + 1);
 		}
 		else {
-			Object idObj = BeanPropertiesUtil.getObject(model, _idProperty);
+			Object rowIdObj = BeanPropertiesUtil.getObject(
+				model, _rowIdProperty);
 
-			if (Validator.isNull(idObj)) {
-				idKey = String.valueOf(_rowIndex + 1);
+			if (Validator.isNull(rowIdObj)) {
+				rowId = String.valueOf(_rowIndex + 1);
 			}
 			else {
-				idKey = FriendlyURLNormalizerUtil.normalize(
-					String.valueOf(idObj), new char[]{'/'});
+				rowId = FriendlyURLNormalizerUtil.normalize(
+					String.valueOf(rowIdObj), new char[] {CharPool.SLASH});
 			}
 		}
 
-		_resultRow = new ResultRow(model, primaryKey, idKey, _rowIndex, _bold);
+		_resultRow = new ResultRow(rowId, model, primaryKey, _rowIndex, _bold);
 
 		pageContext.setAttribute(_indexVar, _rowIndex);
 		pageContext.setAttribute(_modelVar, model);
@@ -328,7 +330,6 @@ public class SearchContainerRowTag<R>
 	private boolean _escapedModel;
 	private List<String> _headerNames;
 	private boolean _headerNamesAssigned;
-	private String _idProperty;
 	private String _indexVar = DEFAULT_INDEX_VAR;
 	private String _keyProperty;
 	private String _modelVar = DEFAULT_MODEL_VAR;
@@ -336,6 +337,7 @@ public class SearchContainerRowTag<R>
 	private ResultRow _resultRow;
 	private List<ResultRow> _resultRows;
 	private List<R> _results;
+	private String _rowIdProperty;
 	private int _rowIndex;
 	private String _rowVar = DEFAULT_ROW_VAR;
 	private boolean _stringKey;

@@ -57,9 +57,9 @@ portletURL.setParameter("struts_action", "/blogs_admin/view");
 		<liferay-ui:search-container-row
 			className="com.liferay.portlet.blogs.model.BlogsEntry"
 			escapedModel="<%= true %>"
-			idProperty="urlTitle"
 			keyProperty="entryId"
 			modelVar="entry"
+			rowIdProperty="urlTitle"
 		>
 			<liferay-portlet:renderURL varImpl="rowURL">
 				<portlet:param name="struts_action" value="/blogs_admin/view_entry" />
