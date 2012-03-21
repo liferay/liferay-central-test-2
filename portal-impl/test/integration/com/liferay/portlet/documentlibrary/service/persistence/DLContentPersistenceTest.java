@@ -24,9 +24,9 @@ import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.ServiceTestUtil;
+import com.liferay.portal.service.persistence.PersistenceExecutionTestListener;
 import com.liferay.portal.test.ExecutionTestListeners;
 import com.liferay.portal.test.LiferayIntegrationJUnitTestRunner;
-import com.liferay.portal.test.persistence.PersistenceEnvConfigTestListener;
 import com.liferay.portal.util.PropsValues;
 
 import com.liferay.portlet.documentlibrary.NoSuchContentException;
@@ -48,7 +48,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 @ExecutionTestListeners(listeners =  {
-	PersistenceEnvConfigTestListener.class})
+	PersistenceExecutionTestListener.class})
 @RunWith(LiferayIntegrationJUnitTestRunner.class)
 public class DLContentPersistenceTest {
 	@Before

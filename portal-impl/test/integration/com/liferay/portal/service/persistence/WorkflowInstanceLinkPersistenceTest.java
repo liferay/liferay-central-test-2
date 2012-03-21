@@ -23,9 +23,9 @@ import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.model.WorkflowInstanceLink;
 import com.liferay.portal.service.ServiceTestUtil;
+import com.liferay.portal.service.persistence.PersistenceExecutionTestListener;
 import com.liferay.portal.test.ExecutionTestListeners;
 import com.liferay.portal.test.LiferayIntegrationJUnitTestRunner;
-import com.liferay.portal.test.persistence.PersistenceEnvConfigTestListener;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -39,7 +39,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 @ExecutionTestListeners(listeners =  {
-	PersistenceEnvConfigTestListener.class})
+	PersistenceExecutionTestListener.class})
 @RunWith(LiferayIntegrationJUnitTestRunner.class)
 public class WorkflowInstanceLinkPersistenceTest {
 	@Before
