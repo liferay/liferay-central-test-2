@@ -344,23 +344,23 @@ public abstract class PortletRequestImpl implements LiferayPortletRequest {
 		for (Map.Entry<String, String[]> entry : parameterMap.entrySet()) {
 			String name = entry.getKey();
 
-			if (_portlet.getPublicRenderParameter(name) == null) {
-
-				if (privateParameterMap == null) {
-					privateParameterMap = new HashMap<String, String[]>(
-						parameterMap.size(), 1);
-				}
-
-				privateParameterMap.put(name, entry.getValue());
+			if (_portlet.getPublicRenderParameter(name) != null) {
+				continue;
 			}
+
+			if (privateParameterMap == null) {
+				privateParameterMap = new HashMap<String, String[]>(
+					parameterMap.size(), 1);
+			}
+
+			privateParameterMap.put(name, entry.getValue());
 		}
 
 		if (privateParameterMap == null) {
 			return Collections.emptyMap();
 		}
-		else {
-			return Collections.unmodifiableMap(privateParameterMap);
-		}
+
+		return Collections.unmodifiableMap(privateParameterMap);
 	}
 
 	public Enumeration<String> getProperties(String name) {
