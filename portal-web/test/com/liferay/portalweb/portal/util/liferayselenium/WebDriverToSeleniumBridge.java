@@ -14,6 +14,7 @@
 
 package com.liferay.portalweb.portal.util.liferayselenium;
 
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.GetterUtil;
 
 import com.thoughtworks.selenium.Selenium;
@@ -272,11 +273,11 @@ public class WebDriverToSeleniumBridge
 	}
 
 	public String getAttribute(String attributeLocator) {
-		int splitIndex = attributeLocator.lastIndexOf('@');
+		int pos = attributeLocator.lastIndexOf(CharPool.AT);
 
-		String attribute = attributeLocator.substring(splitIndex);
+		String attribute = attributeLocator.substring(pos);
 
-		String locator = attributeLocator.substring(0, splitIndex - 1);
+		String locator = attributeLocator.substring(0, pos - 1);
 
 		WebElement webElement = getWebElement(locator);
 
