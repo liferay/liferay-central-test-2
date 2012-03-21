@@ -148,7 +148,7 @@ public class SearchContainer<R> {
 
 			_headerNames.addAll(headerNames);
 
-			_generateUrlHeaderNames(_headerNames);
+			_buildNormalizedHeaderNames(_headerNames);
 		}
 
 		_emptyResultsMessage = emptyResultsMessage;
@@ -272,8 +272,8 @@ public class SearchContainer<R> {
 		return _total;
 	}
 
-	public List<String> getUrlHeaderNames() {
-		return _urlHeaderNames;
+	public List<String> getNormalizedHeaderNames() {
+		return _normalizedHeaderNames;
 	}
 
 	public boolean isDeltaConfigurable() {
@@ -317,7 +317,7 @@ public class SearchContainer<R> {
 	public void setHeaderNames(List<String> headerNames) {
 		_headerNames = headerNames;
 
-		_generateUrlHeaderNames(headerNames);
+		_buildNormalizedHeaderNames(headerNames);
 	}
 
 	public void setHover(boolean hover) {
@@ -389,6 +389,15 @@ public class SearchContainer<R> {
 		_calculateStartAndEnd();
 	}
 
+	private void _buildNormalizedHeaderNames(List<String> headerNames) {
+		_normalizedHeaderNames = new ArrayList<String>(headerNames.size());
+
+		for (String headerName: headerNames) {
+			_normalizedHeaderNames.add(
+				FriendlyURLNormalizerUtil.normalize(headerName));
+		}
+	}
+
 	private void _calculateStartAndEnd() {
 		_start = (_cur - 1) * _delta;
 		_end = _start + _delta;
@@ -397,15 +406,6 @@ public class SearchContainer<R> {
 
 		if (_resultEnd > _total) {
 			_resultEnd = _total;
-		}
-	}
-
-	private void _generateUrlHeaderNames(List<String> headerNames) {
-		_urlHeaderNames = new ArrayList<String>(headerNames.size());
-
-		for (String headerName: headerNames) {
-			_urlHeaderNames.add(
-				FriendlyURLNormalizerUtil.normalize(headerName));
 		}
 	}
 
@@ -428,6 +428,7 @@ public class SearchContainer<R> {
 	 */
 	private int _maxPages = DEFAULT_MAX_PAGES;
 
+	private List<String> _normalizedHeaderNames;
 	private Map<String, String> _orderableHeaders;
 	private String _orderByCol;
 	private String _orderByColParam = DEFAULT_ORDER_BY_COL_PARAM;
@@ -443,6 +444,5 @@ public class SearchContainer<R> {
 	private DisplayTerms _searchTerms;
 	private int _start;
 	private int _total;
-	private List<String> _urlHeaderNames;
 
 }

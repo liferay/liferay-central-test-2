@@ -52,7 +52,7 @@ int end = searchContainer.getEnd();
 int total = searchContainer.getTotal();
 List resultRows = searchContainer.getResultRows();
 List<String> headerNames = searchContainer.getHeaderNames();
-List<String> urlHeaderNames = searchContainer.getUrlHeaderNames();
+List<String> normalizedHeaderNames = searchContainer.getNormalizedHeaderNames();
 Map orderableHeaders = searchContainer.getOrderableHeaders();
 String emptyResultsMessage = searchContainer.getEmptyResultsMessage();
 RowChecker rowChecker = searchContainer.getRowChecker();
@@ -64,7 +64,7 @@ if (end > total) {
 if (rowChecker != null) {
 	if (headerNames != null) {
 		headerNames.add(0, rowChecker.getAllRowsCheckBox());
-		urlHeaderNames.add(0, "rowChecker");
+		normalizedHeaderNames.add(0, "rowChecker");
 	}
 }
 
@@ -105,14 +105,14 @@ int sortColumnIndex = -1;
 			<%
 			for (int i = 0; i < headerNames.size(); i++) {
 				String headerName = headerNames.get(i);
-				String urlHeaderName = null;
+				String normalizedHeaderName = null;
 
-				if (i < urlHeaderNames.size()) {
-					urlHeaderName = urlHeaderNames.get(i);
+				if (i < normalizedHeaderNames.size()) {
+					normalizedHeaderName = normalizedHeaderNames.get(i);
 				}
 
-				if (Validator.isNull(urlHeaderName)) {
-					urlHeaderName = String.valueOf(i +1);
+				if (Validator.isNull(normalizedHeaderName)) {
+					normalizedHeaderName = String.valueOf(i +1);
 				}
 
 				String orderKey = null;
@@ -159,7 +159,7 @@ int sortColumnIndex = -1;
 				}
 			%>
 
-				<th class="col-<%= i + 1 %> col-<%= urlHeaderName %> <%= cssClass %>" id="<%= namespace + id %>_col-<%= urlHeaderName %>"
+				<th class="col-<%= i + 1 %> col-<%= normalizedHeaderName %> <%= cssClass %>" id="<%= namespace + id %>_col-<%= normalizedHeaderName %>"
 
 					<%--
 
@@ -310,14 +310,14 @@ int sortColumnIndex = -1;
 			for (int j = 0; j < entries.size(); j++) {
 				SearchEntry entry = (SearchEntry)entries.get(j);
 
-				String urlHeaderName = null;
+				String normalizedHeaderName = null;
 
-				if (j < urlHeaderNames.size()) {
-					urlHeaderName = urlHeaderNames.get(j);
+				if (j < normalizedHeaderNames.size()) {
+					normalizedHeaderName = normalizedHeaderNames.get(j);
 				}
 
-				if (Validator.isNull(urlHeaderName)) {
-					urlHeaderName = String.valueOf(j + 1);
+				if (Validator.isNull(normalizedHeaderName)) {
+					normalizedHeaderName = String.valueOf(j + 1);
 				}
 
 				entry.setIndex(j);
@@ -341,11 +341,11 @@ int sortColumnIndex = -1;
 				}
 			%>
 
-				<td class="align-<%= entry.getAlign() %> col-<%= j + 1 %><%= row.isBold() ? " taglib-search-iterator-highlighted" : "" %> col-<%= urlHeaderName %> <%= columnClassName %> valign-<%= entry.getValign() %>" colspan="<%= entry.getColspan() %>"
+				<td class="align-<%= entry.getAlign() %> col-<%= j + 1 %><%= row.isBold() ? " taglib-search-iterator-highlighted" : "" %> col-<%= normalizedHeaderName %> <%= columnClassName %> valign-<%= entry.getValign() %>" colspan="<%= entry.getColspan() %>"
 					<c:if test="<%= (headerNames != null) && (headerNames.size() >= (j + 1)) %>">
-						headers="<%= namespace + id %>_col-<%= urlHeaderName %>"
+						headers="<%= namespace + id %>_col-<%= normalizedHeaderName %>"
 					</c:if>
-					id="<%= namespace + id %>_col-<%= urlHeaderName %>_row-<%= rowId %>"
+					id="<%= namespace + id %>_col-<%= normalizedHeaderName %>_row-<%= rowId %>"
 				>
 
 					<%
