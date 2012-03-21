@@ -525,11 +525,10 @@ public class AssetPublisherUtil {
 			String scopeId, long scopeGroupId, boolean privateLayout)
 		throws Exception {
 
-		String[] scopeIdFragments = StringUtil.split(
-			scopeId, CharPool.UNDERLINE);
+		String[] scopeIdParts = StringUtil.split(scopeId, CharPool.UNDERLINE);
 
-		if (scopeIdFragments[0].equals("Layout")) {
-			long scopeIdLayoutId = GetterUtil.getLong(scopeIdFragments[1]);
+		if (scopeIdParts[0].equals("Layout")) {
+			long scopeIdLayoutId = GetterUtil.getLong(scopeIdParts[1]);
 
 			Layout scopeIdLayout = LayoutLocalServiceUtil.getLayout(
 				scopeGroupId, privateLayout, scopeIdLayoutId);
@@ -539,11 +538,11 @@ public class AssetPublisherUtil {
 			return scopeIdGroup.getGroupId();
 		}
 
-		if (scopeIdFragments[1].equals(GroupConstants.DEFAULT)) {
+		if (scopeIdParts[1].equals(GroupConstants.DEFAULT)) {
 			return scopeGroupId;
 		}
 
-		return GetterUtil.getLong(scopeIdFragments[1]);
+		return GetterUtil.getLong(scopeIdParts[1]);
 	}
 
 	private static Map<String, Long> _getRecentFolderIds(
