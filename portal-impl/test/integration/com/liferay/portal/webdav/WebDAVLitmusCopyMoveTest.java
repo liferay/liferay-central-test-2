@@ -17,7 +17,6 @@ package com.liferay.portal.webdav;
 import com.liferay.portal.test.ExecutionTestListeners;
 import com.liferay.portal.test.LiferayIntegrationJUnitTestRunner;
 import com.liferay.portal.webdav.methods.Method;
-import com.liferay.portal.webdav.test.WebDAVEnvConfigTestListener;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -32,7 +31,7 @@ import org.junit.runner.RunWith;
  *
  * @author Alexander Chow
  */
-@ExecutionTestListeners(listeners = {WebDAVEnvConfigTestListener.class})
+@ExecutionTestListeners(listeners = {WebDAVEnviornmentConfigTestListener.class})
 @RunWith(LiferayIntegrationJUnitTestRunner.class)
 public class WebDAVLitmusCopyMoveTest extends BaseWebDAVTestCase {
 

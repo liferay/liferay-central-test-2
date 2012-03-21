@@ -20,7 +20,7 @@ import com.liferay.portal.kernel.search.BooleanQuery;
 import com.liferay.portal.kernel.search.QueryConfig;
 import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
-import com.liferay.portal.test.EnvironmentConfigTestListener;
+import com.liferay.portal.test.EnvironmentExecutionTestListener;
 import com.liferay.portal.test.ExecutionTestListeners;
 import com.liferay.portal.test.LiferayIntegrationJUnitTestRunner;
 
@@ -33,7 +33,7 @@ import org.junit.runner.RunWith;
 /**
  * @author Mika Koivisto
  */
-@ExecutionTestListeners(listeners = {EnvironmentConfigTestListener.class})
+@ExecutionTestListeners(listeners = {EnvironmentExecutionTestListener.class})
 @RunWith(LiferayIntegrationJUnitTestRunner.class)
 public class CMISQueryBuilderTest {
 

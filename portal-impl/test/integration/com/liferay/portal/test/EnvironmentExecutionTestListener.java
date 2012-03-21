@@ -19,7 +19,7 @@ import com.liferay.portal.service.ServiceTestUtil;
 /**
  * @author Miguel Pastor
  */
-public class EnvironmentConfigTestListener
+public class EnvironmentExecutionTestListener
 	extends AbstractExecutionTestListener {
 
 	@Override

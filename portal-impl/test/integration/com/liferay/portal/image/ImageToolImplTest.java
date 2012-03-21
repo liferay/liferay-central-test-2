@@ -18,7 +18,7 @@ import com.liferay.portal.kernel.image.ImageBag;
 import com.liferay.portal.kernel.image.ImageTool;
 import com.liferay.portal.kernel.image.ImageToolUtil;
 import com.liferay.portal.kernel.util.FileUtil;
-import com.liferay.portal.test.EnvironmentConfigTestListener;
+import com.liferay.portal.test.EnvironmentExecutionTestListener;
 import com.liferay.portal.test.ExecutionTestListeners;
 import com.liferay.portal.test.LiferayIntegrationJUnitTestRunner;
 
@@ -40,7 +40,7 @@ import org.junit.runner.RunWith;
 /**
  * @author Shuyang Zhou
  */
-@ExecutionTestListeners(listeners = {EnvironmentConfigTestListener.class})
+@ExecutionTestListeners(listeners = {EnvironmentExecutionTestListener.class})
 @RunWith(LiferayIntegrationJUnitTestRunner.class)
 public class ImageToolImplTest {
 

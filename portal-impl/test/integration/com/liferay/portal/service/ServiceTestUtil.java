@@ -110,11 +110,6 @@ public class ServiceTestUtil {
 	}
 
 	public static void destroyServices() {
-		//LuceneHelperUtil.shutdown();
-
-		//FileUtil.deltree(PropsValues.DL_STORE_FILE_SYSTEM_ROOT_DIR);
-		//FileUtil.deltree(
-		//	PropsUtil.get(PropsKeys.JCR_JACKRABBIT_REPOSITORY_ROOT));
 		FileUtil.delete(PropsValues.LIFERAY_HOME + "/data");
 	}
 
@@ -157,9 +152,7 @@ public class ServiceTestUtil {
 		InitUtil.initWithSpring();
 
 		FileUtil.delete(PropsValues.LIFERAY_HOME + "/data");
-		//FileUtil.deltree(PropsValues.DL_STORE_FILE_SYSTEM_ROOT_DIR);
-		//FileUtil.deltree(
-		//	PropsUtil.get(PropsKeys.JCR_JACKRABBIT_REPOSITORY_ROOT));
+
 		FileUtil.mkdirs(PropsValues.LUCENE_DIR);
 
 		// JCR

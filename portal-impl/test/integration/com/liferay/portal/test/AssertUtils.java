@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.test.assertion;
+package com.liferay.portal.test;
 
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.StringUtil;

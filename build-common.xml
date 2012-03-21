@@ -601,9 +601,7 @@ Please set the environment variable ANT_OPTS to the recommended value of
 					<formatter type="xml" />
 					<batchtest todir="test-results/${test.type}">
 						<fileset dir="test-classes/${test.type}" includes="**/${class}.class">
-							<!-- Many test were not being executed: need to review this one -->
 							<exclude name="**/DLAppServiceTest.class" />
-
 							<exclude name="**/UserServiceHttpTest.class" />
 							<exclude name="**/UserServiceSoapTest.class" />
 						</fileset>

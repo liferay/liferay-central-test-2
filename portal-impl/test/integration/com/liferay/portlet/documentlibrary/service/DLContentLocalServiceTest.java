@@ -16,10 +16,10 @@ package com.liferay.portlet.documentlibrary.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.service.ServiceTestUtil;
-import com.liferay.portal.test.EnvironmentConfigTestListener;
+import com.liferay.portal.test.AssertUtils;
+import com.liferay.portal.test.EnvironmentExecutionTestListener;
 import com.liferay.portal.test.ExecutionTestListeners;
 import com.liferay.portal.test.LiferayIntegrationJUnitTestRunner;
-import com.liferay.portal.test.assertion.AssertUtils;
 import com.liferay.portlet.documentlibrary.model.DLContent;
 import com.liferay.portlet.documentlibrary.store.Store;
 
@@ -36,7 +36,7 @@ import org.junit.runner.RunWith;
  * @author Tina Tian
  * @author Shuyang Zhou
  */
-@ExecutionTestListeners(listeners = {EnvironmentConfigTestListener.class})
+@ExecutionTestListeners(listeners = {EnvironmentExecutionTestListener.class})
 @RunWith(LiferayIntegrationJUnitTestRunner.class)
 public class DLContentLocalServiceTest {
 

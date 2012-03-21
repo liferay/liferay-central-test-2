@@ -12,12 +12,11 @@
  * details.
  */
 
-package com.liferay.portal.webdav.test;
+package com.liferay.portal.webdav;
 
 import com.liferay.portal.kernel.util.Tuple;
-import com.liferay.portal.test.EnvironmentConfigTestListener;
+import com.liferay.portal.test.EnvironmentExecutionTestListener;
 import com.liferay.portal.test.TestContext;
-import com.liferay.portal.webdav.BaseWebDAVTestCase;
 import com.liferay.portal.webdav.WebDAVServlet;
 import com.liferay.portal.webdav.methods.Method;
 
@@ -31,8 +30,8 @@ import org.junit.Assert;
 /**
  * @author Miguel Pastor
  */
-public class WebDAVEnvConfigTestListener
-		extends EnvironmentConfigTestListener {
+public class WebDAVEnviornmentConfigTestListener
+	extends EnvironmentExecutionTestListener {
 
 	@Override
 	public void runAfterClass(TestContext testContext) {

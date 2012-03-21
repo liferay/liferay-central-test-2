@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.test.persistence;
+package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.test.AbstractExecutionTestListener;
 import com.liferay.portal.test.TestContext;
@@ -21,7 +21,7 @@ import com.liferay.portal.util.PropsValues;
 /**
  * @author Miguel Pastor
  */
-public class PersistenceEnvConfigTestListener
+public class PersistenceExecutionTestListener
 	extends AbstractExecutionTestListener {
 
 	@Override

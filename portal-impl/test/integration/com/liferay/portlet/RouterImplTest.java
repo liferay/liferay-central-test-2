@@ -17,10 +17,10 @@ package com.liferay.portlet;
 import com.liferay.portal.kernel.portlet.Route;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.MapUtil;
-import com.liferay.portal.test.EnvironmentConfigTestListener;
+import com.liferay.portal.test.AssertUtils;
+import com.liferay.portal.test.EnvironmentExecutionTestListener;
 import com.liferay.portal.test.ExecutionTestListeners;
 import com.liferay.portal.test.LiferayIntegrationJUnitTestRunner;
-import com.liferay.portal.test.assertion.AssertUtils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -34,7 +34,7 @@ import org.junit.runner.RunWith;
  * @author Connor McKay
  * @author Brian Wing Shun Chan
  */
-@ExecutionTestListeners(listeners = {EnvironmentConfigTestListener.class})
+@ExecutionTestListeners(listeners = {EnvironmentExecutionTestListener.class})
 @RunWith(LiferayIntegrationJUnitTestRunner.class)
 public class RouterImplTest {
 

@@ -15,7 +15,7 @@
 package com.liferay.portal.util;
 
 import com.liferay.portal.kernel.util.FileUtil;
-import com.liferay.portal.test.EnvironmentConfigTestListener;
+import com.liferay.portal.test.EnvironmentExecutionTestListener;
 import com.liferay.portal.test.ExecutionTestListeners;
 import com.liferay.portal.test.LiferayIntegrationJUnitTestRunner;
 
@@ -29,7 +29,7 @@ import org.junit.runner.RunWith;
  * @author Igor Spasic
  * @see    MimeTypesImplTest
  */
-@ExecutionTestListeners(listeners = {EnvironmentConfigTestListener.class})
+@ExecutionTestListeners(listeners = {EnvironmentExecutionTestListener.class})
 @RunWith(LiferayIntegrationJUnitTestRunner.class)
 public class FileImplExtractTest {
 
