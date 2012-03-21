@@ -275,11 +275,11 @@ public class WebDriverToSeleniumBridge
 	public String getAttribute(String attributeLocator) {
 		int pos = attributeLocator.lastIndexOf(CharPool.AT);
 
-		String attribute = attributeLocator.substring(pos);
-
 		String locator = attributeLocator.substring(0, pos - 1);
 
 		WebElement webElement = getWebElement(locator);
+
+		String attribute = attributeLocator.substring(pos);
 
 		return webElement.getAttribute(attribute);
 	}
