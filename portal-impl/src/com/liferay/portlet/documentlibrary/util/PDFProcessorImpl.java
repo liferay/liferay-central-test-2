@@ -35,6 +35,7 @@ import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.MimeTypesUtil;
 import com.liferay.portal.kernel.util.OSDetector;
 import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.StreamUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
@@ -341,6 +342,8 @@ public class PDFProcessorImpl
 	private void _generateImages(FileVersion fileVersion)
 		throws Exception {
 
+		InputStream inputStream = null;
+
 		try {
 			if (_hasImages(fileVersion)) {
 				return;
@@ -364,12 +367,12 @@ public class PDFProcessorImpl
 					}
 				}
 
-				InputStream inputStream = fileVersion.getContentStream(false);
+				inputStream = fileVersion.getContentStream(false);
 
 				_generateImages(fileVersion, inputStream);
 			}
 			else if (DocumentConversionUtil.isEnabled()) {
-				InputStream inputStream = fileVersion.getContentStream(false);
+				inputStream = fileVersion.getContentStream(false);
 
 				String tempFileId = DLUtil.getTempFileId(
 					fileVersion.getFileEntryId(), fileVersion.getVersion());
@@ -383,6 +386,8 @@ public class PDFProcessorImpl
 		catch (NoSuchFileEntryException nsfee) {
 		}
 		finally {
+			StreamUtil.cleanUp(inputStream);
+
 			_fileVersionIds.remove(fileVersion.getFileVersionId());
 		}
 	}
@@ -553,9 +558,11 @@ public class PDFProcessorImpl
 			FileVersion fileVersion, InputStream inputStream)
 		throws Exception {
 
-		File file = FileUtil.createTempFile(inputStream);
+		File file = null;
 
 		try {
+			file = FileUtil.createTempFile(inputStream);
+
 			_generateImagesIM(fileVersion, file);
 		}
 		finally {

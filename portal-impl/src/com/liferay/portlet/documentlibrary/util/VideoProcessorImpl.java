@@ -34,6 +34,7 @@ import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.SetUtil;
+import com.liferay.portal.kernel.util.StreamUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
@@ -362,9 +363,6 @@ public class VideoProcessorImpl
 		String tempFileId = DLUtil.getTempFileId(
 			fileVersion.getFileEntryId(), fileVersion.getVersion());
 
-		File videoTempFile = FileUtil.createTempFile(
-			fileVersion.getExtension());
-
 		File[] previewTempFiles = new File[_PREVIEW_TYPES.length];
 
 		for (int i = 0; i < _PREVIEW_TYPES.length; i++) {
@@ -372,7 +370,13 @@ public class VideoProcessorImpl
 				tempFileId, _PREVIEW_TYPES[i]);
 		}
 
+		File videoTempFile = null;
+
+		InputStream inputStream = null;
+
 		try {
+			videoTempFile = FileUtil.createTempFile(fileVersion.getExtension());
+
 			if (!PrefsPropsUtil.getBoolean(
 					PropsKeys.XUGGLER_ENABLED, PropsValues.XUGGLER_ENABLED) ||
 				_hasVideo(fileVersion)) {
@@ -395,8 +399,7 @@ public class VideoProcessorImpl
 				}
 
 				if (file == null) {
-					InputStream inputStream = fileVersion.getContentStream(
-						false);
+					inputStream = fileVersion.getContentStream(false);
 
 					FileUtil.write(videoTempFile, inputStream);
 
@@ -431,6 +434,8 @@ public class VideoProcessorImpl
 		catch (NoSuchFileEntryException nsfee) {
 		}
 		finally {
+			StreamUtil.cleanUp(inputStream);
+
 			_fileVersionIds.remove(fileVersion.getFileVersionId());
 
 			for (int i = 0; i < previewTempFiles.length; i++) {

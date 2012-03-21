@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.SetUtil;
+import com.liferay.portal.kernel.util.StreamUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
@@ -245,9 +246,6 @@ public class AudioProcessorImpl
 		String tempFileId = DLUtil.getTempFileId(
 			fileVersion.getFileEntryId(), fileVersion.getVersion());
 
-		File audioTempFile = FileUtil.createTempFile(
-			fileVersion.getExtension());
-
 		File[] previewTempFiles = new File[_PREVIEW_TYPES.length];
 
 		for (int i = 0; i < _PREVIEW_TYPES.length; i++) {
@@ -255,7 +253,13 @@ public class AudioProcessorImpl
 				tempFileId, _PREVIEW_TYPES[i]);
 		}
 
+		File audioTempFile = null;
+
+		InputStream inputStream = null;
+
 		try {
+			audioTempFile = FileUtil.createTempFile(fileVersion.getExtension());
+
 			if (!PrefsPropsUtil.getBoolean(
 					PropsKeys.XUGGLER_ENABLED, PropsValues.XUGGLER_ENABLED) ||
 				_hasAudio(fileVersion)) {
@@ -278,8 +282,7 @@ public class AudioProcessorImpl
 				}
 
 				if (file == null) {
-					InputStream inputStream = fileVersion.getContentStream(
-						false);
+					inputStream = fileVersion.getContentStream(false);
 
 					FileUtil.write(audioTempFile, inputStream);
 
@@ -297,6 +300,8 @@ public class AudioProcessorImpl
 		catch (NoSuchFileEntryException nsfee) {
 		}
 		finally {
+			StreamUtil.cleanUp(inputStream);
+
 			_fileVersionIds.remove(fileVersion.getFileVersionId());
 
 			for (int i = 0; i < previewTempFiles.length; i++) {
