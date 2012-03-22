@@ -93,14 +93,13 @@ public class LayoutPrototypeLocalServiceImpl
 			LayoutPrototype layoutPrototype)
 		throws PortalException, SystemException {
 
-		int layoutsCount = layoutLocalService.countLayoutsByLayoutPrototypeUuid(
-			layoutPrototype.getUuid());
+		// Group
 
-		if (layoutsCount > 0) {
+		if (layoutPersistence.countByLayoutPrototypeUuid(
+				layoutPrototype.getUuid()) > 0) {
+
 			throw new RequiredLayoutPrototypeException();
 		}
-
-		// Group
 
 		Group group = layoutPrototype.getGroup();
 

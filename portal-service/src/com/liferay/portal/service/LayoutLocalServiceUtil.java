@@ -415,18 +415,6 @@ public class LayoutLocalServiceUtil {
 	}
 
 	/**
-	* Returns all layouts belonging to the layout prototype
-	*
-	* @param uuid of the layout prototype
-	* @return the count of matching layouts
-	* @throws SystemException if a system exception occured
-	*/
-	public static int countLayoutsByLayoutPrototypeUuid(java.lang.String uuid)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().countLayoutsByLayoutPrototypeUuid(uuid);
-	}
-
-	/**
 	* Deletes the layout, its child layouts, and its associated resources.
 	*
 	* @param layout the layout
@@ -885,6 +873,13 @@ public class LayoutLocalServiceUtil {
 		return getService()
 				   .getLayouts(companyId, portletId, preferencesKey,
 			preferencesValue);
+	}
+
+	public static int getLayoutsByLayoutPrototypeUuidCount(
+		java.lang.String layoutPrototypeUuid)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .getLayoutsByLayoutPrototypeUuidCount(layoutPrototypeUuid);
 	}
 
 	public static int getLayoutsCount(com.liferay.portal.model.Group group,

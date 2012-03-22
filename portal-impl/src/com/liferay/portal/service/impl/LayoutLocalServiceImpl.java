@@ -392,18 +392,6 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	}
 
 	/**
-	 * Returns all layouts belonging to the layout prototype
-	 * @param  uuid of the layout prototype
-	 * @return the count of matching layouts
-	 * @throws SystemException if a system exception occured
-	 */
-	public int countLayoutsByLayoutPrototypeUuid(String uuid)
-		throws SystemException {
-
-		return layoutPersistence.countByLayoutPrototypeUuid(uuid);
-	}
-
-	/**
 	 * Deletes the layout, its child layouts, and its associated resources.
 	 *
 	 * @param  layout the layout
@@ -1122,6 +1110,13 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		return layoutReferences.toArray(
 			new LayoutReference[layoutReferences.size()]);
+	}
+
+	public int getLayoutsByLayoutPrototypeUuidCount(String layoutPrototypeUuid)
+		throws SystemException {
+
+		return layoutPersistence.countByLayoutPrototypeUuid(
+			layoutPrototypeUuid);
 	}
 
 	public int getLayoutsCount(Group group, boolean privateLayout)
