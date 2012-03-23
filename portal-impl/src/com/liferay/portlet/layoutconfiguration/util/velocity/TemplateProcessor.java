@@ -19,11 +19,11 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PropsValues;
+import com.liferay.portal.util.WebKeys;
 import com.liferay.portal.util.comparator.PortletRenderWeightComparator;
 import com.liferay.portlet.layoutconfiguration.util.RuntimePortletUtil;
 
@@ -78,8 +78,7 @@ public class TemplateProcessor implements ColumnProcessor {
 			}
 
 			Boolean portletParallelRender =
-				(Boolean)_request.getAttribute(
-					com.liferay.portal.util.WebKeys.PORTLET_PARALLEL_RENDER);
+				(Boolean)_request.getAttribute(WebKeys.PORTLET_PARALLEL_RENDER);
 
 			if (Boolean.FALSE.equals(portletParallelRender)) {
 
@@ -87,12 +86,11 @@ public class TemplateProcessor implements ColumnProcessor {
 			}
 		}
 		else {
-			_request.removeAttribute(
-				com.liferay.portal.util.WebKeys.PORTLET_PARALLEL_RENDER);
+			_request.removeAttribute(WebKeys.PORTLET_PARALLEL_RENDER);
 		}
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)_request.getAttribute(
-			com.liferay.portal.util.WebKeys.THEME_DISPLAY);
+			WebKeys.THEME_DISPLAY);
 
 		LayoutTypePortlet layoutTypePortlet =
 			themeDisplay.getLayoutTypePortlet();
