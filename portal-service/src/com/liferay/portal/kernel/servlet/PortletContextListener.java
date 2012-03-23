@@ -82,9 +82,9 @@ public class PortletContextListener
 	private void _doPortletDestroy() {
 		Thread currentThread = Thread.currentThread();
 
-		ClassLoader classLoader = currentThread.getContextClassLoader();
+		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
 
-		if (classLoader != _portletClassLoader) {
+		if (contextClassLoader != _portletClassLoader) {
 			currentThread.setContextClassLoader(_portletClassLoader);
 		}
 
@@ -128,16 +128,16 @@ public class PortletContextListener
 			}
 		}
 		finally {
-			currentThread.setContextClassLoader(classLoader);
+			currentThread.setContextClassLoader(contextClassLoader);
 		}
 	}
 
 	private void _doPortletInit() throws Exception {
 		Thread currentThread = Thread.currentThread();
 
-		ClassLoader classLoader = currentThread.getContextClassLoader();
+		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
 
-		if (classLoader != _portletClassLoader) {
+		if (contextClassLoader != _portletClassLoader) {
 			currentThread.setContextClassLoader(_portletClassLoader);
 		}
 
@@ -203,7 +203,7 @@ public class PortletContextListener
 			}
 		}
 		finally {
-			currentThread.setContextClassLoader(classLoader);
+			currentThread.setContextClassLoader(contextClassLoader);
 		}
 	}
 
