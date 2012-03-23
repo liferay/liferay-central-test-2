@@ -83,8 +83,6 @@ public class SitemapImpl implements Sitemap {
 		Element element, String url, UnicodeProperties typeSettingsProperties,
 		Date modifiedDate) {
 
-		DateFormat iso8601DateFormat = DateUtil.getISO8601Format();
-
 		Element urlElement = element.addElement("url");
 
 		Element locElement = urlElement.addElement("loc");
@@ -112,7 +110,7 @@ public class SitemapImpl implements Sitemap {
 		}
 		else {
 			String changefreq = typeSettingsProperties.getProperty(
-					"sitemap-changefreq");
+				"sitemap-changefreq");
 
 			if (Validator.isNotNull(changefreq)) {
 				Element changefreqElement = urlElement.addElement("changefreq");
@@ -120,7 +118,7 @@ public class SitemapImpl implements Sitemap {
 				changefreqElement.addText(changefreq);
 			}
 			else if (Validator.isNotNull(
-					PropsValues.SITES_SITEMAP_DEFAULT_CHANGE_FREQUENCY)) {
+						PropsValues.SITES_SITEMAP_DEFAULT_CHANGE_FREQUENCY)) {
 
 				Element changefreqElement = urlElement.addElement("changefreq");
 
@@ -137,7 +135,7 @@ public class SitemapImpl implements Sitemap {
 				priorityElement.addText(priority);
 			}
 			else if (Validator.isNotNull(
-					PropsValues.SITES_SITEMAP_DEFAULT_PRIORITY)) {
+						PropsValues.SITES_SITEMAP_DEFAULT_PRIORITY)) {
 
 				Element priorityElement = urlElement.addElement("priority");
 
@@ -149,9 +147,9 @@ public class SitemapImpl implements Sitemap {
 		if (modifiedDate != null) {
 			Element modifiedDateElement = urlElement.addElement("lastmod");
 
-			String formattedDate = iso8601DateFormat.format(modifiedDate);
+			DateFormat iso8601DateFormat = DateUtil.getISO8601Format();
 
-			modifiedDateElement.addText(formattedDate);
+			modifiedDateElement.addText(iso8601DateFormat.format(modifiedDate));
 		}
 	}
 
