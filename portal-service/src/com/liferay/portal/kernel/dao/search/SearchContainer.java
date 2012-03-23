@@ -242,6 +242,10 @@ public class SearchContainer<R> {
 	}
 
 	public List<String> getNormalizedHeaderNames() {
+		if (_normalizedHeaderNames == null) {
+			return new ArrayList<String>();
+		}
+
 		return _normalizedHeaderNames;
 	}
 
