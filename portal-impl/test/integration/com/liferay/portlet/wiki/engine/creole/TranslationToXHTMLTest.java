@@ -14,7 +14,6 @@
 
 package com.liferay.portlet.wiki.engine.creole;
 
-import com.liferay.portal.kernel.util.OSDetector;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.parsers.creole.visitor.impl.XhtmlTranslationVisitor;
 import com.liferay.portal.test.LiferayIntegrationJUnitTestRunner;
@@ -85,23 +84,23 @@ public class TranslationToXHTMLTest extends AbstractWikiParserTests {
 	@Test
 	public void testParseCorrectlyNoWikiBlockWitBraces() {
 		Assert.assertEquals(
-			"<pre>{" + NEW_LINE + "foo" + NEW_LINE + "}" + NEW_LINE + "</pre>",
+			"<pre>{" + _EOL + "foo" + _EOL + "}" + _EOL + "</pre>",
 			translate("nowikiblock-7.creole"));
 	}
 
 	@Test
 	public void testParseCorrectlyNoWikiBlockWitMultipleAndText() {
 		Assert.assertEquals(
-			"<pre>public interface Foo {" + NEW_LINE + "void foo();" +
-				NEW_LINE + "}" + NEW_LINE + "</pre><p>Outside preserve </p>",
+			"<pre>public interface Foo {" + _EOL + "void foo();" + _EOL + "}" +
+				_EOL + "</pre><p>Outside preserve </p>",
 			translate("nowikiblock-9.creole"));
 	}
 
 	@Test
 	public void testParseCorrectlyNoWikiBlockWitMultipleBraces() {
 		Assert.assertEquals(
-			"<pre>public interface Foo {" + NEW_LINE + "void foo();" +
-				NEW_LINE + "}" + NEW_LINE + "</pre>",
+			"<pre>public interface Foo {" + _EOL + "void foo();" + _EOL + "}" +
+				_EOL + "</pre>",
 			translate("nowikiblock-8.creole"));
 	}
 
@@ -159,7 +158,7 @@ public class TranslationToXHTMLTest extends AbstractWikiParserTests {
 	@Test
 	public void testParseCorrectlyOneNonEmptyNoWikiBlockWitMultipleLines() {
 		Assert.assertEquals(
-			"<pre>Multiple" + NEW_LINE + "lines</pre>",
+			"<pre>Multiple" + _EOL + "lines</pre>",
 			translate("nowikiblock-5.creole"));
 	}
 
@@ -448,8 +447,7 @@ public class TranslationToXHTMLTest extends AbstractWikiParserTests {
 		return _xhtmlTranslationVisitor.translate(getWikiPageNode(fileName));
 	}
 
-	private static final String NEW_LINE =
-		OSDetector.isWindows()? StringPool.RETURN_NEW_LINE:StringPool.NEW_LINE;
+	private static final String _EOL = StringPool.OS_EOL;
 
 	private XhtmlTranslationVisitor _xhtmlTranslationVisitor =
 		new XhtmlTranslationVisitor();
