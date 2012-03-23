@@ -16,6 +16,8 @@ package com.liferay.portalweb.portal.util.liferayselenium;
 
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.ListUtil;
+import com.liferay.portal.kernel.util.StringUtil;
 
 import com.thoughtworks.selenium.Selenium;
 
@@ -299,11 +301,9 @@ public class WebDriverToSeleniumBridge
 
 		Alert alert = targetLocator.alert();
 
-		String alertText = alert.getText();
-
 		acceptConfirmation();
 
-		return alertText;
+		return alert.getText();
 	}
 
 	public String getCookie() {
@@ -405,15 +405,8 @@ public class WebDriverToSeleniumBridge
 		List<WebElement> allSelectedOptionsWebElements =
 			select.getAllSelectedOptions();
 
-		String[] selectedOptionLabels =
-			new String[allSelectedOptionsWebElements.size()];
-
-		for (int i = 0; i < allSelectedOptionsWebElements.size(); i++) {
-			selectedOptionLabels[i] = allSelectedOptionsWebElements.get(
-				i).getText();
-		}
-
-		return selectedOptionLabels;
+		return StringUtil.split(
+			ListUtil.toString(allSelectedOptionsWebElements, "text"));
 	}
 
 	public String getSelectedValue(String selectLocator) {
