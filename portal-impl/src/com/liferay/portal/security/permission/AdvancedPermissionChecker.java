@@ -1181,6 +1181,10 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 			return true;
 		}
 
+		if (organizationId <= 0) {
+			return false;
+		}
+
 		Organization organization =
 			OrganizationLocalServiceUtil.fetchOrganization(organizationId);
 
