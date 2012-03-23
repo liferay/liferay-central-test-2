@@ -499,7 +499,7 @@ public class WebDriverToSeleniumBridge
 	public boolean isElementPresent(String locator) {
 		List<WebElement> webElements = getWebElements(locator);
 
-		return (webElements.size() > 0);
+		return !webElements.isEmpty();
 	}
 
 	public boolean isOrdered(String locator1, String locator2) {
@@ -517,9 +517,9 @@ public class WebDriverToSeleniumBridge
 	public boolean isTextPresent(String pattern) {
 		WebElement webElement = findElement(By.tagName("body"));
 
-		String bodyText = webElement.getText();
+		String text = webElement.getText();
 
-		return bodyText.contains(pattern);
+		return text.contains(pattern);
 	}
 
 	public boolean isVisible(String locator) {
