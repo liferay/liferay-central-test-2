@@ -56,8 +56,8 @@ public class PDFProcessorUtil {
 		return getPDFProcessor().getPreviewFileSize(fileVersion, index);
 	}
 
-	public static Properties getResourceLimits() throws Exception {
-		return getPDFProcessor().getResourceLimits();
+	public static Properties getResourceLimitsProperties() throws Exception {
+		return getPDFProcessor().getResourceLimitsProperties();
 	}
 
 	public static InputStream getThumbnailAsStream(
