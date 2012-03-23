@@ -471,6 +471,18 @@ public class EditServerAction extends PortletAction {
 		boolean xugglerEnabled = ParamUtil.getBoolean(
 			actionRequest, "xugglerEnabled");
 
+		preferences.setValue(
+			PropsKeys.IMAGEMAGICK_ENABLED, String.valueOf(imageMagickEnabled));
+		preferences.setValue(
+			PropsKeys.IMAGEMAGICK_GLOBAL_SEARCH_PATH, imageMagickPath);
+		preferences.setValue(
+			PropsKeys.OPENOFFICE_SERVER_ENABLED,
+			String.valueOf(openOfficeEnabled));
+		preferences.setValue(
+			PropsKeys.OPENOFFICE_SERVER_PORT, String.valueOf(openOfficePort));
+		preferences.setValue(
+			PropsKeys.XUGGLER_ENABLED, String.valueOf(xugglerEnabled));
+
 		Enumeration<String> enu = actionRequest.getParameterNames();
 
 		while (enu.hasMoreElements()) {
@@ -484,18 +496,6 @@ public class EditServerAction extends PortletAction {
 					PropsKeys.IMAGEMAGICK_RESOURCE_LIMIT + key, value);
 			}
 		}
-
-		preferences.setValue(
-			PropsKeys.IMAGEMAGICK_ENABLED, String.valueOf(imageMagickEnabled));
-		preferences.setValue(
-			PropsKeys.IMAGEMAGICK_GLOBAL_SEARCH_PATH, imageMagickPath);
-		preferences.setValue(
-			PropsKeys.OPENOFFICE_SERVER_ENABLED,
-			String.valueOf(openOfficeEnabled));
-		preferences.setValue(
-			PropsKeys.OPENOFFICE_SERVER_PORT, String.valueOf(openOfficePort));
-		preferences.setValue(
-			PropsKeys.XUGGLER_ENABLED, String.valueOf(xugglerEnabled));
 
 		preferences.store();
 

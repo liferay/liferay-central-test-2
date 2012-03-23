@@ -51,7 +51,7 @@ public interface PDFProcessor {
 	public long getPreviewFileSize(FileVersion fileVersion, int index)
 		throws Exception;
 
-	public Properties getResourceLimits() throws Exception;
+	public Properties getResourceLimitsProperties() throws Exception;
 
 	public InputStream getThumbnailAsStream(FileVersion fileVersion, int index)
 		throws Exception;

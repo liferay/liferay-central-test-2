@@ -255,7 +255,7 @@ public class PrefsPropsUtil {
 		PortletPreferences preferences, long companyId, String prefix,
 		boolean removePrefix) {
 
-		Properties subProperties = new Properties();
+		Properties newProperties = new Properties();
 
 		Enumeration<String> enu = preferences.getNames();
 
@@ -269,11 +269,11 @@ public class PrefsPropsUtil {
 					key = key.substring(prefix.length());
 				}
 
-				subProperties.setProperty(key, value);
+				newProperties.setProperty(key, value);
 			}
 		}
 
-		return subProperties;
+		return newProperties;
 	}
 
 	public static Properties getProperties(String prefix, boolean removePrefix)
