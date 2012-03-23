@@ -30,17 +30,17 @@ addPortletURLs = getAddPortletURLs(liferayPortletRequest, liferayPortletResponse
 			taglibId = taglibId.concat("Global");
 		}
 		else {
-			Group group = GroupLocalServiceUtil.getGroup(groupId);
+			Group curGroup = GroupLocalServiceUtil.getGroup(groupId);
 
-			if (group.isLayout()) {
-				Layout scopeLayout = LayoutLocalServiceUtil.getLayout(group.getClassPK());
+			if (curGroup.isLayout()) {
+				Layout scopeLayout = LayoutLocalServiceUtil.getLayout(curGroup.getClassPK());
 
 				String friendlyURL = scopeLayout.getFriendlyURL();
 
 				taglibId = taglibId.concat(friendlyURL.substring(1));
 			}
 			else {
-				String friendlyURL = group.getFriendlyURL();
+				String friendlyURL = curGroup.getFriendlyURL();
 
 				taglibId = taglibId.concat(friendlyURL.substring(1));
 			}
