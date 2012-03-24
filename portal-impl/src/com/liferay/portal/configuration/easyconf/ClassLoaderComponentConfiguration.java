@@ -74,14 +74,14 @@ public class ClassLoaderComponentConfiguration extends ComponentConfiguration {
 
 	@Override
 	public ComponentProperties getProperties() {
-		ComponentProperties properties = getAvailableProperties();
+		ComponentProperties componentProperties = _getAvailableProperties();
 
-		if (!properties.hasBaseConfiguration()) {
+		if (!componentProperties.hasBaseConfiguration()) {
 			throw new ConfigurationNotFoundException(
 				_componentName, "The base properties file was not found");
 		}
 
-		return properties;
+		return componentProperties;
 	}
 
 	@Override
@@ -101,33 +101,33 @@ public class ClassLoaderComponentConfiguration extends ComponentConfiguration {
 		throw new UnsupportedOperationException();
 	}
 
-	private ComponentProperties getAvailableProperties() {
+	private ComponentProperties _getAvailableProperties() {
 		if (_properties != null) {
 			return _properties;
 		}
 
 		SystemProperties.set("base.path", ".");
 
-		ClassLoaderAggregateProperties properties =
+		ClassLoaderAggregateProperties classLoaderAggregateProperties =
 			new ClassLoaderAggregateProperties(
 				_classLoader, _companyId, _componentName);
 
-		properties.addGlobalFileName(
+		classLoaderAggregateProperties.addGlobalFileName(
 			Conventions.GLOBAL_CONFIGURATION_FILE +
 				Conventions.PROPERTIES_EXTENSION);
 
-		properties.addBaseFileName(
+		classLoaderAggregateProperties.addBaseFileName(
 			_componentName + Conventions.PROPERTIES_EXTENSION);
 
 		if (_log.isInfoEnabled()) {
 			_log.info(
 				"Properties for " + _componentName + " loaded from " +
-					properties.loadedSources());
+					classLoaderAggregateProperties.loadedSources());
 		}
 
 		try {
-			_properties = _declaredConstructor.newInstance(
-				new Object[] {properties});
+			_properties = _constructor.newInstance(
+				new Object[] {classLoaderAggregateProperties});
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -136,27 +136,27 @@ public class ClassLoaderComponentConfiguration extends ComponentConfiguration {
 		return _properties;
 	}
 
-	private ClassLoader _classLoader;
-	private String _companyId;
-	private String _componentName;
-	private ComponentProperties _properties;
-
-	private static Constructor<ComponentProperties> _declaredConstructor;
-
 	private static Log _log = LogFactoryUtil.getLog(
 		ClassLoaderComponentConfiguration.class);
 
+	private static Constructor<ComponentProperties> _constructor;
+
 	static {
 		try {
-			_declaredConstructor =
+			_constructor =
 				ComponentProperties.class.getDeclaredConstructor(
 					AggregatedProperties.class);
 
-			_declaredConstructor.setAccessible(true);
+			_constructor.setAccessible(true);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
 		}
 	}
+
+	private ClassLoader _classLoader;
+	private String _companyId;
+	private String _componentName;
+	private ComponentProperties _properties;
 
 }

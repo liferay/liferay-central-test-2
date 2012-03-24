@@ -77,13 +77,12 @@ public class ConfigurationImpl
 		printSources(companyId, webId);
 	}
 
-	@SuppressWarnings("unchecked")
 	public void addProperties(Properties properties) {
 		try {
 			ComponentProperties componentProperties =
 				_componentConfiguration.getProperties();
 
-			ClassLoaderAggregateProperties aggregatedProperties =
+			ClassLoaderAggregateProperties classLoaderAggregateProperties =
 				(ClassLoaderAggregateProperties)
 					componentProperties.toConfiguration();
 
@@ -94,9 +93,8 @@ public class ConfigurationImpl
 
 			// Add to configList of base conf
 
-			@SuppressWarnings("unchecked")
 			List<Configuration> configurations =
-				(List<Configuration>)field1.get(aggregatedProperties);
+				(List<Configuration>)field1.get(classLoaderAggregateProperties);
 
 			MapConfiguration newConfiguration = new MapConfiguration(
 				properties);
@@ -106,7 +104,7 @@ public class ConfigurationImpl
 			// Add to configList of AggregatedProperties itself
 
 			CompositeConfiguration compositeConfiguration =
-				aggregatedProperties.getBaseConfiguration();
+				classLoaderAggregateProperties.getBaseConfiguration();
 
 			configurations = (List<Configuration>)field1.get(
 				compositeConfiguration);
@@ -287,12 +285,12 @@ public class ConfigurationImpl
 			ComponentProperties componentProperties =
 				_componentConfiguration.getProperties();
 
-			ClassLoaderAggregateProperties aggregatedProperties =
+			ClassLoaderAggregateProperties classLoaderAggregateProperties =
 				(ClassLoaderAggregateProperties)
 					componentProperties.toConfiguration();
 
 			CompositeConfiguration compositeConfiguration =
-				aggregatedProperties.getBaseConfiguration();
+				classLoaderAggregateProperties.getBaseConfiguration();
 
 			Field field2 = CompositeConfiguration.class.getDeclaredField(
 				"configList");
@@ -318,7 +316,8 @@ public class ConfigurationImpl
 				if (mapConfiguration.getMap() == properties) {
 					itr.remove();
 
-					aggregatedProperties.removeConfiguration(configuration);
+					classLoaderAggregateProperties.removeConfiguration(
+						configuration);
 				}
 			}
 
@@ -417,7 +416,6 @@ public class ConfigurationImpl
 	protected void printSources(long companyId, String webId) {
 		ComponentProperties componentProperties = getComponentProperties();
 
-		@SuppressWarnings("unchecked")
 		List<String> sources = componentProperties.getLoadedSources();
 
 		for (int i = sources.size() - 1; i >= 0; i--) {
