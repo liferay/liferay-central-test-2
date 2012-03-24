@@ -52,21 +52,18 @@ public class ClassLoaderAggregateProperties extends AggregatedProperties {
 		_companyId = companyId;
 		_componentName = componentName;
 
-		_baseConfiguration = new CompositeConfiguration();
-		_globalConfiguration = new CompositeConfiguration();
-		_systemConfiguration = new SystemConfiguration();
 		_prefixedSystemConfiguration = new SubsetConfiguration(
-			_systemConfiguration, getPrefix(), null);
+			_systemConfiguration, _getPrefix(), null);
 	}
 
 	@Override
 	public void addBaseFileName(String fileName) {
 		URL url = _classLoader.getResource(fileName);
 
-		Configuration conf = addPropertiesSource(
-			fileName, url, _baseConfiguration);
+		Configuration configuration = _addPropertiesSource(
+			fileName, url, _baseCompositeConfiguration);
 
-		if ((conf != null) && (!conf.isEmpty())) {
+		if ((configuration != null) && !configuration.isEmpty()) {
 			_baseConfigurationLoaded = true;
 		}
 	}
@@ -75,11 +72,11 @@ public class ClassLoaderAggregateProperties extends AggregatedProperties {
 	public void addGlobalFileName(String fileName) {
 		URL url = _classLoader.getResource(fileName);
 
-		addPropertiesSource(fileName, url, _globalConfiguration);
+		_addPropertiesSource(fileName, url, _globalCompositeConfiguration);
 	}
 
 	public CompositeConfiguration getBaseConfiguration() {
-		return _baseConfiguration;
+		return _baseCompositeConfiguration;
 	}
 
 	@Override
@@ -92,19 +89,20 @@ public class ClassLoaderAggregateProperties extends AggregatedProperties {
 		Object value = null;
 
 		if (value == null) {
-			value = System.getProperty(getPrefix().concat(key));
+			value = System.getProperty(_getPrefix().concat(key));
 		}
 
 		if (value == null) {
-			value = _globalConfiguration.getProperty(getPrefix().concat(key));
+			value = _globalCompositeConfiguration.getProperty(
+				_getPrefix().concat(key));
 		}
 
 		if (value == null) {
-			value = _globalConfiguration.getProperty(key);
+			value = _globalCompositeConfiguration.getProperty(key);
 		}
 
 		if (value == null) {
-			value = _baseConfiguration.getProperty(key);
+			value = _baseCompositeConfiguration.getProperty(key);
 		}
 
 		if (value == null) {
@@ -115,12 +113,12 @@ public class ClassLoaderAggregateProperties extends AggregatedProperties {
 			value = System.getProperty(key);
 		}
 
-		if ((value == null) && (key.equals(Conventions.COMPANY_ID_PROPERTY))) {
+		if ((value == null) && key.equals(Conventions.COMPANY_ID_PROPERTY)) {
 			value = _companyId;
 		}
 
 		if ((value == null) &&
-			(key.equals(Conventions.COMPONENT_NAME_PROPERTY))) {
+			key.equals(Conventions.COMPONENT_NAME_PROPERTY)) {
 
 			value = _componentName;
 		}
@@ -138,51 +136,56 @@ public class ClassLoaderAggregateProperties extends AggregatedProperties {
 		return _loadedSources;
 	}
 
-	private Configuration addDatasourceProperties(String datasourcePath) {
-		DatasourceURL dsUrl = new DatasourceURL(
+	private Configuration _addDatasourceProperties(String datasourcePath) {
+		DatasourceURL datasourceURL = new DatasourceURL(
 			datasourcePath, _companyId, _componentName,
 			DatasourceURL.PROPERTIES_TABLE);
 
-		return dsUrl.getConfiguration();
+		return datasourceURL.getConfiguration();
 	}
 
-	private Configuration addFileProperties(
-			String fileName, CompositeConfiguration loadedConf)
+	private Configuration _addFileProperties(
+			String fileName,
+			CompositeConfiguration loadedCompositeConfiguration)
 		throws ConfigurationException {
 
 		try {
-			FileConfiguration newConf = new PropertiesConfiguration(fileName);
+			FileConfiguration newFileConfiguration =
+				new PropertiesConfiguration(fileName);
 
-			URL fileURL = newConf.getURL();
+			URL url = newFileConfiguration.getURL();
 
 			if (_log.isDebugEnabled()) {
-				_log.debug("Adding file: " + fileURL);
+				_log.debug("Adding file " + url);
 			}
 
-			Long delay = getReloadDelay(loadedConf, newConf);
+			Long delay = _getReloadDelay(
+				loadedCompositeConfiguration, newFileConfiguration);
 
 			if (delay != null) {
-				FileChangedReloadingStrategy reloadingStrategy =
+				FileChangedReloadingStrategy fileChangedReloadingStrategy =
 					new FileConfigurationChangedReloadingStrategy();
 
 				if (_log.isDebugEnabled()) {
 					_log.debug(
-						"File " + fileURL + " will be reloaded every " +
+						"File " + url + " will be reloaded every " +
 							delay + " seconds");
 				}
 
 				long milliseconds = delay.longValue() * 1000;
 
-				reloadingStrategy.setRefreshDelay(milliseconds);
+				fileChangedReloadingStrategy.setRefreshDelay(milliseconds);
 
-				newConf.setReloadingStrategy(reloadingStrategy);
+				newFileConfiguration.setReloadingStrategy(
+					fileChangedReloadingStrategy);
 			}
 
-			addIncludedPropertiesSources(newConf, loadedConf);
+			_addIncludedPropertiesSources(
+				newFileConfiguration, loadedCompositeConfiguration);
 
-			return newConf;
+			return newFileConfiguration;
 		}
-		catch (org.apache.commons.configuration.ConfigurationException e) {
+		catch (org.apache.commons.configuration.ConfigurationException ce) {
 			if (_log.isDebugEnabled()) {
 				_log.debug("Configuration source " + fileName + " ignored");
 			}
@@ -191,71 +194,82 @@ public class ClassLoaderAggregateProperties extends AggregatedProperties {
 		}
 	}
 
-	private Configuration addJndiProperties(String sourcePath) {
-		JndiURL jndiUrl = new JndiURL(sourcePath, _companyId, _componentName);
+	private void _addIncludedPropertiesSources(
+		Configuration newConfiguration,
+		CompositeConfiguration loadedCompositeConfiguration) {
 
-		return jndiUrl.getConfiguration();
-	}
+		CompositeConfiguration tempCompositeConfiguration =
+			new CompositeConfiguration();
 
-	private void addIncludedPropertiesSources(
-		Configuration newConf, CompositeConfiguration loadedConf) {
-
-		CompositeConfiguration tempConf = new CompositeConfiguration();
-
-		tempConf.addConfiguration(_prefixedSystemConfiguration);
-		tempConf.addConfiguration(newConf);
-		tempConf.addConfiguration(_systemConfiguration);
-		tempConf.addProperty(Conventions.COMPANY_ID_PROPERTY, _companyId);
-		tempConf.addProperty(
+		tempCompositeConfiguration.addConfiguration(
+			_prefixedSystemConfiguration);
+		tempCompositeConfiguration.addConfiguration(newConfiguration);
+		tempCompositeConfiguration.addConfiguration(_systemConfiguration);
+		tempCompositeConfiguration.addProperty(
+			Conventions.COMPANY_ID_PROPERTY, _companyId);
+		tempCompositeConfiguration.addProperty(
 			Conventions.COMPONENT_NAME_PROPERTY, _componentName);
 
-		String[] fileNames = tempConf.getStringArray(
+		String[] fileNames = tempCompositeConfiguration.getStringArray(
 			Conventions.INCLUDE_PROPERTY);
 
 		for (String fileName : fileNames) {
 			URL url = _classLoader.getResource(fileName);
 
-			addPropertiesSource(fileName, url, loadedConf);
+			_addPropertiesSource(fileName, url, loadedCompositeConfiguration);
 		}
 	}
 
-	private Configuration addPropertiesSource(
-		String sourceName, URL url, CompositeConfiguration loadedConf) {
+	private Configuration _addJNDIProperties(String sourcePath) {
+		JndiURL jndiURL = new JndiURL(sourcePath, _companyId, _componentName);
+
+		return jndiURL.getConfiguration();
+	}
+
+	private Configuration _addPropertiesSource(
+		String sourceName, URL url,
+		CompositeConfiguration loadedCompositeConfiguration) {
 
 		try {
-			Configuration newConf;
+			Configuration newConfiguration = null;
 
 			if (DatasourceURL.isDatasource(sourceName)) {
-				newConf = addDatasourceProperties(sourceName);
+				newConfiguration = _addDatasourceProperties(sourceName);
 			}
 			else if (JndiURL.isJndi(sourceName)) {
-				newConf = addJndiProperties(sourceName);
+				newConfiguration = _addJNDIProperties(sourceName);
 			}
 			else if (url != null) {
-				newConf = addUrlProperties(url, loadedConf);
+				newConfiguration = _addURLProperties(
+					url, loadedCompositeConfiguration);
 			}
 			else {
-				newConf = addFileProperties(sourceName, loadedConf);
+				newConfiguration = _addFileProperties(
+					sourceName, loadedCompositeConfiguration);
 			}
 
-			if (newConf != null) {
-				loadedConf.addConfiguration(newConf);
-
-				super.addConfiguration(newConf);
-
-				if (newConf instanceof AbstractFileConfiguration) {
-					AbstractFileConfiguration abstractFileConfiguration =
-						(AbstractFileConfiguration)newConf;
-
-					_loadedSources.add(
-						abstractFileConfiguration.getURL().toString());
-				}
-				else {
-					_loadedSources.add(sourceName);
-				}
+			if (newConfiguration == null) {
+				return newConfiguration;
 			}
 
-			return newConf;
+			loadedCompositeConfiguration.addConfiguration(newConfiguration);
+
+			super.addConfiguration(newConfiguration);
+
+			if (newConfiguration instanceof AbstractFileConfiguration) {
+				AbstractFileConfiguration abstractFileConfiguration =
+					(AbstractFileConfiguration)newConfiguration;
+
+				URL abstractFileConfigurationURL =
+					abstractFileConfiguration.getURL();
+
+				_loadedSources.add(abstractFileConfigurationURL.toString());
+			}
+			else {
+				_loadedSources.add(sourceName);
+			}
+
+			return newConfiguration;
 		}
 		catch (Exception ignore) {
 			if (_log.isDebugEnabled()) {
@@ -266,62 +280,67 @@ public class ClassLoaderAggregateProperties extends AggregatedProperties {
 		}
 	}
 
-	private Configuration addUrlProperties(
-			URL url, CompositeConfiguration loadedConf)
+	private Configuration _addURLProperties(
+			URL url, CompositeConfiguration loadedCompositeConfiguration)
 		throws ConfigurationException {
 
-		String resourceURL = url.toString();
-
 		try {
-			FileConfiguration newConf = new PropertiesConfiguration(url);
+			FileConfiguration newFileConfiguration =
+				new PropertiesConfiguration(url);
 
 			if (_log.isDebugEnabled()) {
-				_log.debug("Adding resource: " + resourceURL);
+				_log.debug("Adding resource " + url);
 			}
 
-			Long delay = getReloadDelay(loadedConf, newConf);
+			Long delay = _getReloadDelay(
+				loadedCompositeConfiguration, newFileConfiguration);
 
 			if (delay != null) {
-				FileChangedReloadingStrategy reloadingStrategy =
+				FileChangedReloadingStrategy fileChangedReloadingStrategy =
 					new FileConfigurationChangedReloadingStrategy();
 
 				if (_log.isDebugEnabled()) {
 					_log.debug(
-						"Resource " + resourceURL + " will be reloaded every " +
+						"Resource " + url + " will be reloaded every " +
 							delay + " seconds");
 				}
 
 				long milliseconds = delay.longValue() * 1000;
 
-				reloadingStrategy.setRefreshDelay(milliseconds);
+				fileChangedReloadingStrategy.setRefreshDelay(milliseconds);
 
-				newConf.setReloadingStrategy(reloadingStrategy);
+				newFileConfiguration.setReloadingStrategy(
+					fileChangedReloadingStrategy);
 			}
 
-			addIncludedPropertiesSources(newConf, loadedConf);
+			_addIncludedPropertiesSources(
+				newFileConfiguration, loadedCompositeConfiguration);
 
-			return newConf;
+			return newFileConfiguration;
 		}
-		catch (org.apache.commons.configuration.ConfigurationException e) {
+		catch (org.apache.commons.configuration.ConfigurationException ce) {
 			if (_log.isDebugEnabled()) {
-				_log.debug("Configuration source " + resourceURL + " ignored");
+				_log.debug("Configuration source " + url + " ignored");
 			}
 
 			return null;
 		}
 	}
 
-	private String getPrefix() {
+	private String _getPrefix() {
 		return _componentName.concat(Conventions.PREFIX_SEPARATOR);
 	}
 
-	private Long getReloadDelay(
-		CompositeConfiguration loadedConf, FileConfiguration newConf) {
+	private Long _getReloadDelay(
+		CompositeConfiguration loadedCompositeConfiguration,
+		FileConfiguration newFileConfiguration) {
 
-		Long delay = newConf.getLong(Conventions.RELOAD_DELAY_PROPERTY, null);
+		Long delay = newFileConfiguration.getLong(
+			Conventions.RELOAD_DELAY_PROPERTY, null);
 
 		if (delay == null) {
-			delay = loadedConf.getLong(Conventions.RELOAD_DELAY_PROPERTY, null);
+			delay = loadedCompositeConfiguration.getLong(
+				Conventions.RELOAD_DELAY_PROPERTY, null);
 		}
 
 		return delay;
@@ -330,14 +349,17 @@ public class ClassLoaderAggregateProperties extends AggregatedProperties {
 	private static final Log _log = LogFactoryUtil.getLog(
 		AggregatedProperties.class);
 
-	private boolean _baseConfigurationLoaded = false;
-	private CompositeConfiguration _baseConfiguration;
+	private CompositeConfiguration _baseCompositeConfiguration =
+		new CompositeConfiguration();
+	private boolean _baseConfigurationLoaded;
 	private ClassLoader _classLoader;
 	private String _companyId;
 	private String _componentName;
-	private CompositeConfiguration _globalConfiguration;
+	private CompositeConfiguration _globalCompositeConfiguration =
+		new CompositeConfiguration();
 	private List<String> _loadedSources = new ArrayList<String>();
-	private SystemConfiguration _systemConfiguration;
 	private Configuration _prefixedSystemConfiguration;
+	private SystemConfiguration _systemConfiguration =
+		new SystemConfiguration();
 
 }
