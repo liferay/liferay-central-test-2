@@ -18,7 +18,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.log.LogUtil;
-import com.liferay.portal.kernel.servlet.DirectServletContext;
+import com.liferay.portal.kernel.servlet.DirectRequestDispatcherUtil;
 import com.liferay.portal.kernel.servlet.PipingServletResponse;
 import com.liferay.portal.kernel.servlet.TrackedServletRequest;
 import com.liferay.portal.kernel.servlet.taglib.FileAvailabilityUtil;
@@ -297,18 +297,14 @@ public class IncludeTag extends AttributesTagSupport {
 	protected void include(String page) throws Exception {
 		ServletContext servletContext = getServletContext();
 
-		if (_DIRECT_SERVLET_CONTEXT_ENABLED) {
-			servletContext = new DirectServletContext(servletContext);
-		}
-
 		RequestDispatcher requestDispatcher =
-			servletContext.getRequestDispatcher(page);
+			DirectRequestDispatcherUtil.getRequestDispatcher(
+				servletContext, page);
 
 		HttpServletRequest request = getServletRequest();
 
 		request.setAttribute(
 			WebKeys.SERVLET_CONTEXT_INCLUDE_FILTER_STRICT, _strict);
-		request.setAttribute(WebKeys.SERVLET_PATH, page);
 
 		HttpServletResponse response = new PipingServletResponse(
 			pageContext, isTrimNewLines());
