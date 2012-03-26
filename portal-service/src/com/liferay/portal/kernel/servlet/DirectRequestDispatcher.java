@@ -38,27 +38,26 @@ public class DirectRequestDispatcher implements RequestDispatcher {
 	public DirectRequestDispatcher(Servlet servlet, String queryString) {
 		_servlet = servlet;
 
-		String[] queryParamsArray = StringUtil.split(
-			queryString, CharPool.AMPERSAND);
+		String[] parameters = StringUtil.split(queryString, CharPool.AMPERSAND);
 
-		if (queryParamsArray.length > 0) {
-			_queryParams = new HashMap<String, String[]>();
+		if (parameters.length > 0) {
+			_parameters = new HashMap<String, String[]>();
 
-			for (String queryParam : queryParamsArray) {
-				String[] nameValuePair = StringUtil.split(
-					queryParam, CharPool.EQUAL);
+			for (String parameter : parameters) {
+				String[] parameterParts = StringUtil.split(
+					parameter, CharPool.EQUAL);
 
-				String name = nameValuePair[0];
+				String name = parameterParts[0];
 				String value = StringPool.BLANK;
 
-				if (nameValuePair.length == 2) {
-					value = nameValuePair[1];
+				if (parameterParts.length == 2) {
+					value = parameterParts[1];
 				}
 
-				String[] values = _queryParams.get(name);
+				String[] values = _parameters.get(name);
 
 				if (values == null) {
-					_queryParams.put(name, new String[] {value});
+					_parameters.put(name, new String[] {value});
 				}
 				else {
 					String[] newValues = new String[values.length + 1];
@@ -67,7 +66,7 @@ public class DirectRequestDispatcher implements RequestDispatcher {
 
 					newValues[newValues.length - 1] = value;
 
-					_queryParams.put(name, newValues);
+					_parameters.put(name, newValues);
 				}
 			}
 		}
@@ -77,9 +76,9 @@ public class DirectRequestDispatcher implements RequestDispatcher {
 			ServletRequest servletRequest, ServletResponse servletResponse)
 		throws IOException, ServletException {
 
-		if (_queryParams != null) {
+		if (_parameters != null) {
 			servletRequest = new DynamicServletRequest(
-				(HttpServletRequest)servletRequest, _queryParams);
+				(HttpServletRequest)servletRequest, _parameters);
 		}
 
 		_servlet.service(servletRequest, servletResponse);
@@ -89,15 +88,15 @@ public class DirectRequestDispatcher implements RequestDispatcher {
 			ServletRequest servletRequest, ServletResponse servletResponse)
 		throws IOException, ServletException {
 
-		if (_queryParams != null) {
+		if (_parameters != null) {
 			servletRequest = new DynamicServletRequest(
-				(HttpServletRequest)servletRequest, _queryParams);
+				(HttpServletRequest)servletRequest, _parameters);
 		}
 
 		_servlet.service(servletRequest, servletResponse);
 	}
 
-	private Map<String, String[]> _queryParams;
+	private Map<String, String[]> _parameters;
 	private Servlet _servlet;
 
 }

@@ -46,7 +46,7 @@ public class DirectRequestDispatcherUtil {
 
 		if (path.charAt(0) != CharPool.SLASH) {
 			throw new IllegalArgumentException(
-				"path is not relative to context root : " + path);
+				"Path " + path + " is not relative to context root");
 		}
 
 		String contextPath = ContextPathUtil.getContextPath(servletContext);
@@ -57,8 +57,8 @@ public class DirectRequestDispatcherUtil {
 		int pos = fullPath.indexOf(CharPool.QUESTION);
 
 		if (pos != -1) {
-			queryString = fullPath.substring(pos + 1);
 			fullPath = fullPath.substring(0, pos);
+			queryString = fullPath.substring(pos + 1);
 		}
 
 		Servlet servlet = DirectServletRegistry.getServlet(fullPath);
@@ -95,17 +95,17 @@ public class DirectRequestDispatcherUtil {
 
 		if (servletContext == null) {
 			throw new IllegalStateException(
-				"Can not find ServletContext in request attributes");
+				"Cannot find servlet context in request attributes");
 		}
 
 		return getRequestDispatcher(servletContext, path);
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(
-		DirectRequestDispatcherUtil.class);
-
-	static private final boolean _DIRECT_SERVLET_CONTEXT_ENABLED =
+	private static final boolean _DIRECT_SERVLET_CONTEXT_ENABLED =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.DIRECT_SERVLET_CONTEXT_ENABLED));
+
+	private static Log _log = LogFactoryUtil.getLog(
+		DirectRequestDispatcherUtil.class);
 
 }
