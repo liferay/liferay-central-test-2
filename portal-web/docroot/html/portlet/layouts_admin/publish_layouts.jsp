@@ -181,11 +181,11 @@ selectURL.setParameter("struts_action", "/layouts_admin/publish_layouts");
 selectURL.setParameter(Constants.CMD, cmd);
 selectURL.setParameter("pagesRedirect", pagesRedirect);
 selectURL.setParameter("groupId", String.valueOf(stagingGroupId));
+selectURL.setParameter("selPlid", String.valueOf(selPlid));
 selectURL.setParameter("privateLayout", String.valueOf(privateLayout));
 selectURL.setParameter("layoutSetBranchId", String.valueOf(layoutSetBranchId));
 selectURL.setParameter("selectPages", String.valueOf(!selectPages));
 selectURL.setParameter("schedule", String.valueOf(schedule));
-selectURL.setParameter("selPlid", String.valueOf(selPlid));
 
 request.setAttribute("edit_pages.jsp-groupId", new Long(stagingGroupId));
 request.setAttribute("edit_pages.jsp-selPlid", new Long(selPlid));
