@@ -12,30 +12,37 @@
  * details.
  */
 
-package com.liferay.portal.upgrade;
+package com.liferay.portal.upgrade.v6_2_0;
 
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
-import com.liferay.portal.kernel.util.ReleaseInfo;
-import com.liferay.portal.upgrade.v6_2_0.UpgradeDDMTemplate;
-import com.liferay.portal.upgrade.v6_2_0.UpgradeSchema;
-import com.liferay.portal.upgrade.v6_2_0.UpgradeUser;
+import com.liferay.portal.upgrade.v6_2_0.util.DDMTemplateTable;
+
+import java.sql.SQLException;
 
 /**
- * @author Raymond Augé
  * @author Juan Fernández
  */
-public class UpgradeProcess_6_2_0 extends UpgradeProcess {
-
-	@Override
-	public int getThreshold() {
-		return ReleaseInfo.RELEASE_6_2_0_BUILD_NUMBER;
-	}
+public class UpgradeDDMTemplate extends UpgradeProcess {
 
 	@Override
 	protected void doUpgrade() throws Exception {
-		upgrade(UpgradeSchema.class);
-		upgrade(UpgradeDDMTemplate.class);
-		upgrade(UpgradeUser.class);
+		try {
+			runSQL("alter table DDMTemplate add classNameId LONG");
+
+			runSQL("alter_column_name DDMTemplate structureId classPK LONG");
+
+			runSQL(
+				"update DDMTemplate set classNameId = (select classNameId " +
+					"from ClassName_ where value = '" +
+					"com.liferay.portlet.dynamicdatamapping.model." +
+					"DDMTemplate')");
+		}
+		catch (SQLException sqle) {
+			upgradeTable(
+				DDMTemplateTable.TABLE_NAME, DDMTemplateTable.TABLE_COLUMNS,
+				DDMTemplateTable.TABLE_SQL_CREATE,
+				DDMTemplateTable.TABLE_SQL_ADD_INDEXES);
+		}
 	}
 
 }
