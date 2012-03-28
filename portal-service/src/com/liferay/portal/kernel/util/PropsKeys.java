@@ -501,8 +501,6 @@ public interface PropsKeys {
 
 	public static final String DEFAULT_WAP_THEME_ID = "default.wap.theme.id";
 
-	public static final String DEFINITIONS_PATH = "definitions.path";
-
 	public static final String DIRECT_SERVLET_CONTEXT_ENABLED = "direct.servlet.context.enabled";
 
 	public static final String DIRECT_SERVLET_CONTEXT_RELOAD = "direct.servlet.context.reload";
@@ -680,6 +678,8 @@ public interface PropsKeys {
 	public static final String EHCACHE_SINGLE_VM_CONFIG_LOCATION = "ehcache.single.vm.config.location";
 
 	public static final String EHCACHE_STATISTICS_ENABLED = "ehcache.statistics.enabled";
+
+	public static final String ENTITY_RESOLVER_DEFINITIONS_PATH = "entity.resolver.definitions.path";
 
 	public static final String FACEBOOK_CONNECT_APP_ID = "facebook.connect.app.id";
 
