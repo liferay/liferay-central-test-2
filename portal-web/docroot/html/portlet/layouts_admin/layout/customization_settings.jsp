@@ -23,6 +23,7 @@ boolean curFreeformLayout = false;
 boolean prototypeGroup = false;
 
 String velocityTemplateId = null;
+
 String velocityTemplateContent = null;
 
 if (selLayout != null) {
@@ -84,9 +85,11 @@ if (selLayout != null) {
 </c:choose>
 
 <div class="customization-settings">
-<%
-if (velocityTemplateId != null) {
-	RuntimePortletUtil.processCustomizationSettings(pageContext, velocityTemplateId, velocityTemplateContent);
-}
-%>
+
+	<%
+	if (velocityTemplateId != null) {
+		RuntimePortletUtil.processCustomizationSettings(pageContext, velocityTemplateId, velocityTemplateContent);
+	}
+	%>
+
 </div>

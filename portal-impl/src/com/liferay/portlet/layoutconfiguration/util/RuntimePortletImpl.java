@@ -122,7 +122,9 @@ public class RuntimePortletImpl implements RuntimePortlet {
 			throw e;
 		}
 
-		unsyncStringWriter.getStringBundler().writeTo(pageContext.getOut());
+		StringBundler sb = unsyncStringWriter.getStringBundler();
+
+		sb.writeTo(pageContext.getOut());
 	}
 
 	public void processPortlet(
@@ -161,11 +163,11 @@ public class RuntimePortletImpl implements RuntimePortlet {
 			return;
 		}
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
 		// Capture the current portlet's settings to reset them once the child
 		// portlet is rendered
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
 
@@ -292,7 +294,7 @@ public class RuntimePortletImpl implements RuntimePortlet {
 		throws Exception {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
-				com.liferay.portal.util.WebKeys.THEME_DISPLAY);
+			WebKeys.THEME_DISPLAY);
 
 		Portlet portlet = PortletLocalServiceUtil.getPortletById(
 			themeDisplay.getCompanyId(), portletId);
