@@ -16,29 +16,27 @@
 
 <%@ include file="/html/portlet/portal_settings/init.jsp" %>
 
-<%
-String sectionNames = StringUtil.merge(PropsValues.COMPANY_SETTINGS_FORM_AUTHENTICATION_SECTIONS);
-String jspPath = "/html/portlet/portal_settings/authentication/";
-%>
-
 <liferay-ui:error-marker key="errorSection" value="authentication" />
 
 <h3><liferay-ui:message key="authentication" /></h3>
 
 <liferay-ui:tabs
-	names="<%= sectionNames %>"
+	names="<%= StringUtil.merge(PropsValues.COMPANY_SETTINGS_FORM_AUTHENTICATION_SECTIONS) %>"
 	refresh="<%= false %>"
 >
+
 	<%
 	for (String section : PropsValues.COMPANY_SETTINGS_FORM_AUTHENTICATION_SECTIONS) {
-		String sectionJsp = jspPath.concat(_getSectionJsp(section)).concat(".jsp");
 	%>
+
 		<liferay-ui:section>
-			<liferay-util:include page="<%= sectionJsp %>" portletId="<%= portletDisplay.getRootPortletId() %>" />
+			<liferay-util:include page='<%= "/html/portlet/portal_settings/authentication/" + _getSectionJsp(section) + ".jsp" %>' portletId="<%= portletDisplay.getRootPortletId() %>" />
 		</liferay-ui:section>
+
 	<%
 	}
 	%>
+
 </liferay-ui:tabs>
 
 <%!
