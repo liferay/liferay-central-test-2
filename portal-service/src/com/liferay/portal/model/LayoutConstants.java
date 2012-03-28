@@ -19,13 +19,13 @@ package com.liferay.portal.model;
  */
 public class LayoutConstants {
 
-	public static final String DEFAULT_NAME_CONTROL_PANEL = "Control Panel";
-
 	public static final long DEFAULT_PARENT_LAYOUT_ID = 0;
 
 	public static final long DEFAULT_PLID = 0;
 
 	public static final int FRIENDLY_URL_MAX_LENGTH = 255;
+
+	public static final String NAME_CONTROL_PANEL_DEFAULT = "Control Panel";
 
 	public static final String TYPE_ARTICLE = "article";
 

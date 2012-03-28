@@ -90,7 +90,7 @@ private void _buildLayoutBreadcrumb(Layout selLayout, String selLayoutParam, boo
 	if (selLayout.isTypeControlPanel()) {
 		breadcrumbSB.append(" target=\"_top\"");
 
-		if (layoutName.equals(LayoutConstants.DEFAULT_NAME_CONTROL_PANEL)) {
+		if (layoutName.equals(LayoutConstants.NAME_CONTROL_PANEL_DEFAULT)) {
 			layoutName = LanguageUtil.get(themeDisplay.getLocale(), "control-panel");
 		}
 	}
