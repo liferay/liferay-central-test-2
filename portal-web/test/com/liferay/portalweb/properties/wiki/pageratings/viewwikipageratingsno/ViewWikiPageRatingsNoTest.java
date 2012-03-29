@@ -47,6 +47,5 @@ public class ViewWikiPageRatingsNoTest extends BaseTestCase {
 		loadRequiredJavaScriptModules();
 		assertFalse(selenium.isTextPresent("Your Rating"));
 		assertFalse(selenium.isTextPresent("Average (0 Votes)"));
-		
 	}
 }
