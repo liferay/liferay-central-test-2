@@ -316,7 +316,7 @@ public class PropsValues {
 
 	public static final boolean COMPANY_SECURITY_STRANGERS_WITH_MX = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.COMPANY_SECURITY_STRANGERS_WITH_MX));
 
-	public static String[] COMPANY_SETTINGS_FORM_AUTHENTICATION_SECTIONS = PropsUtil.getArray(PropsKeys.COMPANY_SETTINGS_FORM_AUTHENTICATION_SECTIONS);
+	public static String[] COMPANY_SETTINGS_FORM_AUTHENTICATION = PropsUtil.getArray(PropsKeys.COMPANY_SETTINGS_FORM_AUTHENTICATION);
 
 	public static String[] COMPANY_SETTINGS_FORM_CONFIGURATION = PropsUtil.getArray(PropsKeys.COMPANY_SETTINGS_FORM_CONFIGURATION);
 
