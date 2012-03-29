@@ -25,9 +25,9 @@
 	<aui:input name="deleteEntryIds" type="hidden" />
 
 	<%
-    boolean showDeleteButton = permissionChecker.hasPermission(scopeGroupId, DLFileEntryConstants.getClassName(), scopeGroupId, ActionKeys.DELETE);
-
     RowChecker rowChecker = null;
+
+	boolean showDeleteButton = permissionChecker.hasPermission(scopeGroupId, DLFileEntryConstants.getClassName(), scopeGroupId, ActionKeys.DELETE);
 
 	if (showActions && showDeleteButton) {
 		rowChecker = new RowChecker(renderResponse);
