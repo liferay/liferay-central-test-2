@@ -26,14 +26,14 @@ if (!strutsAction.equals("/login/open_id") && OpenIdUtil.isEnabled(company.getCo
 }
 %>
 
-			<c:if test="<%= showOpenIdIcon %>">
-				<portlet:renderURL var="openIdURL">
-					<portlet:param name="struts_action" value="/login/open_id" />
-				</portlet:renderURL>
+<c:if test="<%= showOpenIdIcon %>">
+	<portlet:renderURL var="openIdURL">
+		<portlet:param name="struts_action" value="/login/open_id" />
+	</portlet:renderURL>
 
-				<liferay-ui:icon
-					message="open-id"
-					src='<%= themeDisplay.getPathThemeImages() + "/common/openid.gif" %>'
-					url="<%= openIdURL %>"
-				/>
-			</c:if>
+	<liferay-ui:icon
+		message="open-id"
+		src='<%= themeDisplay.getPathThemeImages() + "/common/openid.gif" %>'
+		url="<%= openIdURL %>"
+	/>
+</c:if>

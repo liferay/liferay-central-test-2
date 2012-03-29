@@ -18,22 +18,31 @@
 
 <liferay-util:buffer var="navigation">
 	<liferay-ui:icon-list>
+
 		<%
 		for (String section : PropsValues.LOGIN_FORM_NAVIGATION_PRE) {
 		%>
+
 			<liferay-util:include page='<%= "/html/portlet/login/navigation/" + _getSectionJsp(section) + ".jsp" %>' portletId="<%= portletDisplay.getRootPortletId() %>" />
+
 		<%
 		}
-		%>
-		<%
+
 		for (String section : PropsValues.LOGIN_FORM_NAVIGATION_POST) {
 		%>
+
 			<liferay-util:include page='<%= "/html/portlet/login/navigation/" + _getSectionJsp(section) + ".jsp" %>' portletId="<%= portletDisplay.getRootPortletId() %>" />
+
 		<%
 		}
 		%>
+
 	</liferay-ui:icon-list>
 </liferay-util:buffer>
+
+<%
+navigation = navigation.trim();
+%>
 
 <c:if test="<%= Validator.isNotNull(navigation) %>">
 	<div class="navigation">

@@ -26,26 +26,28 @@ if (!strutsAction.startsWith("/login/facebook_connect") && FacebookConnectUtil.i
 }
 %>
 
-			<c:if test="<%= showFacebookConnectIcon %>">
-				<portlet:renderURL var="loginRedirectURL" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
-					<portlet:param name="struts_action" value="/login/login_redirect" />
-				</portlet:renderURL>
+<c:if test="<%= showFacebookConnectIcon %>">
+	<portlet:renderURL var="loginRedirectURL" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
+		<portlet:param name="struts_action" value="/login/login_redirect" />
+	</portlet:renderURL>
 
-				<%
-				String facebookAuthRedirectURL = FacebookConnectUtil.getRedirectURL(themeDisplay.getCompanyId());
-				facebookAuthRedirectURL = HttpUtil.addParameter(facebookAuthRedirectURL, "redirect", HttpUtil.encodeURL(loginRedirectURL.toString()));
+	<%
+	String facebookAuthRedirectURL = FacebookConnectUtil.getRedirectURL(themeDisplay.getCompanyId());
 
-				String facebookAuthURL = FacebookConnectUtil.getAuthURL(themeDisplay.getCompanyId());
-				facebookAuthURL = HttpUtil.addParameter(facebookAuthURL, "client_id", FacebookConnectUtil.getAppId(themeDisplay.getCompanyId()));
-				facebookAuthURL = HttpUtil.addParameter(facebookAuthURL, "redirect_uri", facebookAuthRedirectURL);
-				facebookAuthURL = HttpUtil.addParameter(facebookAuthURL, "scope", "email");
+	facebookAuthRedirectURL = HttpUtil.addParameter(facebookAuthRedirectURL, "redirect", HttpUtil.encodeURL(loginRedirectURL.toString()));
 
-				String taglibOpenFacebookConnectLoginWindow = "javascript:var facebookConnectLoginWindow = window.open('" + facebookAuthURL.toString() + "','facebook', 'align=center,directories=no,height=560,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=1000'); void(''); facebookConnectLoginWindow.focus();";
-				%>
+	String facebookAuthURL = FacebookConnectUtil.getAuthURL(themeDisplay.getCompanyId());
 
-				<liferay-ui:icon
-					image="../social_bookmarks/facebook"
-					message="facebook"
-					url="<%= taglibOpenFacebookConnectLoginWindow %>"
-				/>
-			</c:if>
+	facebookAuthURL = HttpUtil.addParameter(facebookAuthURL, "client_id", FacebookConnectUtil.getAppId(themeDisplay.getCompanyId()));
+	facebookAuthURL = HttpUtil.addParameter(facebookAuthURL, "redirect_uri", facebookAuthRedirectURL);
+	facebookAuthURL = HttpUtil.addParameter(facebookAuthURL, "scope", "email");
+
+	String taglibOpenFacebookConnectLoginWindow = "javascript:var facebookConnectLoginWindow = window.open('" + facebookAuthURL.toString() + "', 'facebook', 'align=center,directories=no,height=560,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=1000'); void(''); facebookConnectLoginWindow.focus();";
+	%>
+
+	<liferay-ui:icon
+		image="../social_bookmarks/facebook"
+		message="facebook"
+		url="<%= taglibOpenFacebookConnectLoginWindow %>"
+	/>
+</c:if>
