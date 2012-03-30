@@ -39,9 +39,8 @@ String newTemplateId = ParamUtil.getString(request, "newTemplateId");
 
 String structureId = BeanParamUtil.getString(template, request, "structureId");
 
-String structureName = StringPool.BLANK;
-
 long structureGroupId = 0;
+String structureName = StringPool.BLANK;
 
 if (Validator.isNotNull(structureId)) {
 	JournalStructure structure = null;
@@ -61,9 +60,8 @@ if (Validator.isNotNull(structureId)) {
 	}
 
 	if (structure != null) {
-		structureName = structure.getName(locale);
-
 		structureGroupId = structure.getGroupId();
+		structureName = structure.getName(locale);
 	}
 }
 
