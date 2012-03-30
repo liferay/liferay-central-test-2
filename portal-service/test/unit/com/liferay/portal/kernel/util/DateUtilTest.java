@@ -14,13 +14,13 @@
 
 package com.liferay.portal.kernel.util;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.util.TimeZone;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -38,15 +38,18 @@ import org.powermock.modules.junit4.PowerMockRunner;
 /**
  * @author Alexander Chow
  * @author Manuel de la Peña
- * @author Ray Augé
+ * @author Raymond Augé
  */
 @PrepareForTest({CalendarFactoryUtil.class, DateFormatFactoryUtil.class})
 @RunWith(PowerMockRunner.class)
 public class DateUtilTest extends PowerMockito {
 
 	@Test
-	public void testGetDaysBetweenSame() throws Exception {
-		_testGetDaysBetween(new Date(), new Date(), 0);
+	public void testGetDaysBetweenLeap() throws Exception {
+		DateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy");
+
+		_testGetDaysBetween(
+			dateFormat.parse("2-28-2012"), dateFormat.parse("3-1-2012"), 2);
 	}
 
 	@Test
@@ -58,22 +61,6 @@ public class DateUtilTest extends PowerMockito {
 	}
 
 	@Test
-	public void testGetDaysBetweenYear() throws Exception {
-		DateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy");
-
-		_testGetDaysBetween(
-			dateFormat.parse("1-1-2011"), dateFormat.parse("1-1-2012"), 365);
-	}
-
-	@Test
-	public void testGetDaysBetweenLeap() throws Exception {
-		DateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy");
-
-		_testGetDaysBetween(
-			dateFormat.parse("2-28-2012"), dateFormat.parse("3-1-2012"), 2);
-	}
-
-	@Test
 	public void testGetDaysBetweenReverse() throws Exception {
 		DateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy");
 
@@ -82,8 +69,21 @@ public class DateUtilTest extends PowerMockito {
 	}
 
 	@Test
-	public void testGetISOFormatLength8() {
-		_testGetISOFormat("01234567","yyyyMMdd");
+	public void testGetDaysBetweenSame() throws Exception {
+		_testGetDaysBetween(new Date(), new Date(), 0);
+	}
+
+	@Test
+	public void testGetDaysBetweenYear() throws Exception {
+		DateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy");
+
+		_testGetDaysBetween(
+			dateFormat.parse("1-1-2011"), dateFormat.parse("1-1-2012"), 365);
+	}
+
+	@Test
+	public void testGetISOFormatAny() {
+		_testGetISOFormat(Mockito.anyString(),"yyyyMMddHHmmssz");
 	}
 
 	@Test
@@ -107,13 +107,13 @@ public class DateUtilTest extends PowerMockito {
 	}
 
 	@Test
-	public void testGetISOFormatT() {
-		_testGetISOFormat("01234567T9012345","yyyyMMdd'T'HHmmssz");
+	public void testGetISOFormatLength8() {
+		_testGetISOFormat("01234567","yyyyMMdd");
 	}
 
 	@Test
-	public void testGetISOFormatAny() {
-		_testGetISOFormat(Mockito.anyString(),"yyyyMMddHHmmssz");
+	public void testGetISOFormatT() {
+		_testGetISOFormat("01234567T9012345","yyyyMMdd'T'HHmmssz");
 	}
 
 	@Test
@@ -141,7 +141,7 @@ public class DateUtilTest extends PowerMockito {
 		);
 
 		Assert.assertEquals(
-			DateUtil.getDaysBetween(date1, date2, _timeZone), expected);
+			expected, DateUtil.getDaysBetween(date1, date2, _timeZone));
 	}
 
 	private void _testGetISOFormat(String text, String pattern) {
@@ -149,9 +149,9 @@ public class DateUtilTest extends PowerMockito {
 
 		DateFormat dateFormat = DateUtil.getISOFormat(text);
 
-		String actualPattern = ((SimpleDateFormat)dateFormat).toPattern();
+		SimpleDateFormat simpleDateFormat = (SimpleDateFormat)dateFormat;
 
-		Assert.assertEquals(pattern, actualPattern);
+		Assert.assertEquals(pattern, simpleDateFormat.toPattern());
 	}
 
 	private void _testGetUTCFormat(String date, String pattern) {
@@ -162,27 +162,35 @@ public class DateUtilTest extends PowerMockito {
 				Mockito.anyString(), Mockito.any(TimeZone.class))
 		).thenAnswer(
 			new Answer<SimpleDateFormat>() {
-				public SimpleDateFormat answer(InvocationOnMock invocation)
+
+				public SimpleDateFormat answer(
+						InvocationOnMock invocationOnMock)
 					throws Throwable {
 
 					return new TestSimpleDateFormat(
-						(String)invocation.getArguments()[0]);
+						(String)invocationOnMock.getArguments()[0]);
 				}
+
 			}
 		);
 
-		DateFormat utcFormat = DateUtil.getUTCFormat(date);
+		DateFormat utcDateFormat = DateUtil.getUTCFormat(date);
 
-		Assert.assertNotNull(utcFormat);
+		Assert.assertNotNull(utcDateFormat);
+		Assert.assertTrue(utcDateFormat instanceof SimpleDateFormat);
 
-		Assert.assertTrue(utcFormat instanceof SimpleDateFormat);
+		TestSimpleDateFormat testSimpleDateFormat =
+			(TestSimpleDateFormat)utcDateFormat;
 
-		TestSimpleDateFormat sdf = (TestSimpleDateFormat)utcFormat;
-
-		Assert.assertEquals(sdf.getPattern(), pattern);
+		Assert.assertEquals(testSimpleDateFormat.getPattern(), pattern);
 	}
 
-	class TestSimpleDateFormat extends SimpleDateFormat {
+	@Mock
+	private TimeZone _timeZone;
+
+	private class TestSimpleDateFormat extends SimpleDateFormat {
+
+		private String _pattern;
 
 		public TestSimpleDateFormat(String pattern) {
 			super(pattern);
@@ -193,11 +201,6 @@ public class DateUtilTest extends PowerMockito {
 		public String getPattern() {
 			return _pattern;
 		}
-
-		private String _pattern;
 	}
-
-	@Mock
-	private TimeZone _timeZone;
 
 }
