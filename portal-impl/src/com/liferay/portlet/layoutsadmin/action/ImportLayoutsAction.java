@@ -18,7 +18,7 @@ import com.liferay.portal.LARFileException;
 import com.liferay.portal.LARTypeException;
 import com.liferay.portal.LayoutImportException;
 import com.liferay.portal.NoSuchGroupException;
-import com.liferay.portal.PrototypeException;
+import com.liferay.portal.LayoutPrototypeException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.SessionErrors;
@@ -82,8 +82,8 @@ public class ImportLayoutsAction extends PortletAction {
 
 				SessionErrors.add(actionRequest, e.getClass().getName());
 			}
-			else if (e instanceof PrototypeException) {
-				PrototypeException prototypeException = (PrototypeException)e;
+			else if (e instanceof LayoutPrototypeException) {
+				LayoutPrototypeException prototypeException = (LayoutPrototypeException)e;
 
 				SessionErrors.add(
 					actionRequest, e.getClass().getName(), prototypeException);

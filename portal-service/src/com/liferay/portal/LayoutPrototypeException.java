@@ -22,38 +22,38 @@ import java.util.List;
 /**
  * @author Julio Camarero
  */
-public class PrototypeException extends PortalException {
+public class LayoutPrototypeException extends PortalException {
 
-	public PrototypeException() {
+	public LayoutPrototypeException() {
 		super();
 	}
 
-	public PrototypeException(String msg) {
+	public LayoutPrototypeException(String msg) {
 		super(msg);
 	}
 
-	public PrototypeException(String msg, Throwable cause) {
+	public LayoutPrototypeException(String msg, Throwable cause) {
 		super(msg, cause);
 	}
 
-	public PrototypeException(Throwable cause) {
+	public LayoutPrototypeException(Throwable cause) {
 		super(cause);
 	}
 
-	public PrototypeException(List<Tuple> missingPrototypes) {
+	public LayoutPrototypeException(List<Tuple> missingLayoutPrototypes) {
 		super();
 
-		_missingPrototypes = missingPrototypes;
+		_missingLayoutPrototypes = missingLayoutPrototypes;
 	}
 
 	public List<Tuple> getMissingPrototypes() {
-		return _missingPrototypes;
+		return _missingLayoutPrototypes;
 	}
 
-	public void setMissingPrototypes(List<Tuple> missingPrototypes) {
-		_missingPrototypes = missingPrototypes;
+	public void setMissingPrototypes(List<Tuple> missingLayoutPrototypes) {
+		_missingLayoutPrototypes = missingLayoutPrototypes;
 	}
 
-	private List<Tuple> _missingPrototypes;
+	private List<Tuple> _missingLayoutPrototypes;
 
 }

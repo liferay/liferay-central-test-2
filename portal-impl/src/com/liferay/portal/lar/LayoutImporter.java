@@ -21,7 +21,7 @@ import com.liferay.portal.LayoutImportException;
 import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.NoSuchLayoutPrototypeException;
 import com.liferay.portal.NoSuchLayoutSetPrototypeException;
-import com.liferay.portal.PrototypeException;
+import com.liferay.portal.LayoutPrototypeException;
 import com.liferay.portal.kernel.cluster.ClusterExecutorUtil;
 import com.liferay.portal.kernel.cluster.ClusterRequest;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -204,11 +204,11 @@ public class LayoutImporter {
 		LayoutSetLocalServiceUtil.updatePageCount(groupId, privateLayout);
 	}
 
-	protected void validatePrototypes(
+	protected void validateLayoutPrototypes(
 			Element layoutsElement, List<Element> layoutElements)
 		throws Exception {
 
-		List<Tuple> missingPrototypes = new ArrayList<Tuple>();
+		List<Tuple> missingLayoutPrototypes = new ArrayList<Tuple>();
 
 		String layoutSetPrototypeUuid = layoutsElement.attributeValue(
 			"layout-set-prototype-uuid");
@@ -222,7 +222,7 @@ public class LayoutImporter {
 				String layoutSetPrototypeName = layoutsElement.attributeValue(
 					"layout-set-prototype-name");
 
-				missingPrototypes.add(
+				missingLayoutPrototypes.add(
 					new Tuple(
 						LayoutSetPrototype.class.getName(),
 						layoutSetPrototypeUuid, layoutSetPrototypeName));
@@ -242,7 +242,7 @@ public class LayoutImporter {
 					String layoutPrototypeName = GetterUtil.getString(
 						layoutElement.attributeValue("layout-prototype-name"));
 
-					missingPrototypes.add(
+					missingLayoutPrototypes.add(
 						new Tuple(
 							LayoutPrototype.class.getName(),
 							layoutPrototypeUuid, layoutPrototypeName));
@@ -250,8 +250,8 @@ public class LayoutImporter {
 			}
 		}
 
-		if (!missingPrototypes.isEmpty()) {
-			throw new PrototypeException(missingPrototypes);
+		if (!missingLayoutPrototypes.isEmpty()) {
+			throw new LayoutPrototypeException(missingLayoutPrototypes);
 		}
 	}
 
@@ -411,7 +411,7 @@ public class LayoutImporter {
 		Element layoutsElement = rootElement.element("layouts");
 		List<Element> layoutElements = layoutsElement.elements("layout");
 
-		validatePrototypes(layoutsElement, layoutElements);
+		validateLayoutPrototypes(layoutsElement, layoutElements);
 
 		// Group id
 
