@@ -137,11 +137,13 @@ public class DateUtil {
 		Calendar startCal = new GregorianCalendar(timeZone);
 
 		startCal.setTime(date1);
+
 		startCal.add(Calendar.MILLISECOND, offset);
 
 		Calendar endCal = new GregorianCalendar(timeZone);
 
 		endCal.setTime(date2);
+
 		endCal.add(Calendar.MILLISECOND, offset);
 
 		int daysBetween = 0;
