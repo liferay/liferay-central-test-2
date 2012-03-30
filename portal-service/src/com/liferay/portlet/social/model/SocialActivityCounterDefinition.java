@@ -48,7 +48,12 @@ public class SocialActivityCounterDefinition implements Serializable {
 		return activityCounterDefinition;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
 		if (!(obj instanceof SocialActivityCounterDefinition)) {
 			return false;
 		}
@@ -56,7 +61,7 @@ public class SocialActivityCounterDefinition implements Serializable {
 		SocialActivityCounterDefinition activityCounterDefinition =
 			(SocialActivityCounterDefinition)obj;
 
-		if (Validator.isNotNull(activityCounterDefinition) &&
+		if ((activityCounterDefinition != null) &&
 			Validator.equals(_enabled, activityCounterDefinition._enabled) &&
 			Validator.equals(
 				_increment, activityCounterDefinition._increment) &&

@@ -14,8 +14,6 @@
 
 package com.liferay.portlet.social.service;
 
-import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.GroupConstants;
@@ -36,72 +34,68 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+/**
+ * @author Zsolt Berentey
+ */
 @ExecutionTestListeners(listeners = {EnvironmentExecutionTestListener.class})
 @RunWith(LiferayIntegrationJUnitTestRunner.class)
 public class SocialActivitySettingLocalServiceTest {
 
 	@Before
 	public void setUp() throws Exception {
-
 		Class<?> clazz = getClass();
 
 		InputStream inputStream = clazz.getResourceAsStream(
-			"dependencies/test-activity.xml");
+			"dependencies/liferay-social.xml");
 
 		String xml = new String(FileUtil.getBytes(inputStream));
 
 		SocialConfigurationUtil.read(
 			clazz.getClassLoader(), new String[] {xml});
 
-		_defaultActivityDefinition =
-			SocialConfigurationUtil.getActivityDefinition(TEST_MODEL, 1);
+		_activityDefinition = SocialConfigurationUtil.getActivityDefinition(
+			TEST_MODEL, 1);
 
-		_guestGroup = GroupLocalServiceUtil.fetchGroup(
+		_group = GroupLocalServiceUtil.getGroup(
 			PortalUtil.getDefaultCompanyId(), GroupConstants.GUEST);
 	}
 
 	@Test
-	public void testGetActivityDefinition() throws SystemException {
+	public void testGetActivityDefinition() throws Exception {
 		SocialActivityDefinition activityDefinition =
 			SocialActivitySettingLocalServiceUtil.getActivityDefinition(
-				_guestGroup.getGroupId(), TEST_MODEL, 1);
+				_group.getGroupId(), TEST_MODEL, 1);
 
-		Assert.assertEquals(_defaultActivityDefinition, activityDefinition);
+		Assert.assertEquals(_activityDefinition, activityDefinition);
 
 		List<SocialActivityDefinition> activityDefinitions =
 			SocialActivitySettingLocalServiceUtil.getActivityDefinitions(
-				_guestGroup.getGroupId(), TEST_MODEL);
+				_group.getGroupId(), TEST_MODEL);
 
 		Assert.assertNotNull(activityDefinitions);
 		Assert.assertEquals(1, activityDefinitions.size());
-		Assert.assertEquals(
-			_defaultActivityDefinition, activityDefinitions.get(0));
+		Assert.assertEquals(_activityDefinition, activityDefinitions.get(0));
 	}
 
 	@Test
-	public void testUpdateActivitySettings()
-		throws PortalException, SystemException {
-
+	public void testUpdateActivitySettings() throws Exception {
 		long classNameId = PortalUtil.getClassNameId(TEST_MODEL);
 
-		boolean enabled = SocialActivitySettingLocalServiceUtil.isEnabled(
-			_guestGroup.getGroupId(), classNameId);
-
-		Assert.assertFalse(enabled);
+		Assert.assertFalse(
+			SocialActivitySettingLocalServiceUtil.isEnabled(
+				_group.getGroupId(), classNameId));
 
 		SocialActivitySettingLocalServiceUtil.updateActivitySetting(
-			_guestGroup.getGroupId(), TEST_MODEL, true);
+			_group.getGroupId(), TEST_MODEL, true);
 
-		enabled = SocialActivitySettingLocalServiceUtil.isEnabled(
-			_guestGroup.getGroupId(), classNameId);
-
-		Assert.assertTrue(enabled);
+		Assert.assertTrue(
+			SocialActivitySettingLocalServiceUtil.isEnabled(
+			_group.getGroupId(), classNameId));
 	}
 
 	private static final String TEST_MODEL = "TEST_MODEL";
 
-	private SocialActivityDefinition _defaultActivityDefinition;
-
-	private Group _guestGroup;
+	private SocialActivityDefinition _activityDefinition;
+	private Group _group;
 
 }

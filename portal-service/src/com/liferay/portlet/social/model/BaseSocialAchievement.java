@@ -35,12 +35,12 @@ import com.liferay.portlet.social.service.SocialActivityCounterLocalServiceUtil;
  */
 public class BaseSocialAchievement implements SocialAchievement {
 
-	public boolean equals(SocialAchievement other) {
-		if (!Validator.equals(_name, other.getName())) {
-			return false;
+	public boolean equals(SocialAchievement socialAchievement) {
+		if (Validator.equals(_name, socialAchievement.getName())) {
+			return true;
 		}
 
-		return true;
+		return false;
 	}
 
 	public int getCounterIncrement() {

@@ -64,7 +64,12 @@ public class SocialActivityDefinition implements Serializable {
 		return activityDefinition;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
 		if (!(obj instanceof SocialActivityDefinition)) {
 			return false;
 		}
@@ -72,23 +77,23 @@ public class SocialActivityDefinition implements Serializable {
 		SocialActivityDefinition activityDefinition =
 			(SocialActivityDefinition)obj;
 
-		if (Validator.isNotNull(activityDefinition) &&
-			Validator.equals(_enabled, activityDefinition.isEnabled()) &&
-			Validator.equals(_modelName, activityDefinition.getModelName()) &&
+		if ((activityDefinition != null) &&
 			Validator.equals(
-				_activityType, activityDefinition.getActivityType()) &&
-			Validator.equals(
-				_languageKey, activityDefinition.getLanguageKey()) &&
-			Validator.equals(
-				_logActivity, activityDefinition.isLogActivity()) &&
-			Validator.equals(
-				_activityProcessor,
-				activityDefinition.getActivityProcessor()) &&
+				_achievements, activityDefinition.getAchievements()) &&
 			Validator.equals(
 				_activityCounterDefinitions,
 				activityDefinition._activityCounterDefinitions) &&
 			Validator.equals(
-				_achievements, activityDefinition.getAchievements())) {
+				_activityProcessor,
+				activityDefinition.getActivityProcessor()) &&
+			Validator.equals(
+				_activityType, activityDefinition.getActivityType()) &&
+			Validator.equals(_enabled, activityDefinition.isEnabled()) &&
+			Validator.equals(
+				_languageKey, activityDefinition.getLanguageKey()) &&
+			Validator.equals(
+				_logActivity, activityDefinition.isLogActivity()) &&
+			Validator.equals(_modelName, activityDefinition.getModelName())) {
 
 			return true;
 		}
