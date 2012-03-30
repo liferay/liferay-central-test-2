@@ -250,9 +250,9 @@ public class BaseDeployer implements Deployer {
 			String jarFullName = jars.get(i);
 
 			String jarName = jarFullName.substring(
-				jarFullName.lastIndexOf("/") + 1, jarFullName.length());
+				jarFullName.lastIndexOf("/") + 1);
 
-			if ((!appServerType.equals(ServerDetector.TOMCAT_ID)) ||
+			if (!appServerType.equals(ServerDetector.TOMCAT_ID) ||
 				(appServerType.equals(ServerDetector.TOMCAT_ID) &&
 				 !jarFullName.equals("util-java.jar"))) {
 
@@ -951,7 +951,7 @@ public class BaseDeployer implements Deployer {
 			Validator.isNotNull(jbossPrefix) &&
 			displayName.startsWith(jbossPrefix)) {
 
-			displayName = displayName.substring(1, displayName.length());
+			displayName = displayName.substring(1);
 		}
 
 		return displayName;
@@ -1185,6 +1185,10 @@ public class BaseDeployer implements Deployer {
 		return sb.toString();
 	}
 
+	public String getPluginContextListener() {
+		return StringPool.BLANK;
+	}
+
 	public String getPluginPackageLicensesXml(List<License> licenses) {
 		if (licenses.isEmpty()) {
 			return StringPool.BLANK;
@@ -1404,7 +1408,7 @@ public class BaseDeployer implements Deployer {
 	}
 
 	public void mergeDirectory(File mergeDir, File targetDir) {
-		if ((mergeDir == null) || (!mergeDir.exists())) {
+		if ((mergeDir == null) || !mergeDir.exists()) {
 			return;
 		}
 
@@ -1749,7 +1753,7 @@ public class BaseDeployer implements Deployer {
 			y = x;
 		}
 		else {
-			if (liferayWebXmlEnabled && webXmlVersion > 2.3) {
+			if (liferayWebXmlEnabled && (webXmlVersion > 2.3)) {
 				webXmlFiltersContent = webXmlContent.substring(x, y + 17);
 
 				y = y + 17;
@@ -1821,16 +1825,24 @@ public class BaseDeployer implements Deployer {
 		webXmlVersion = GetterUtil.getDouble(
 			webXmlRoot.attributeValue("version"), webXmlVersion);
 
+		// Merge Plugin Context Listener
+
+		String pluginContextListener = getPluginContextListener();
+
 		// Merge extra content
 
 		String extraContent = getExtraContent(
 			webXmlVersion, srcFile, displayName);
 
-		int pos = content.indexOf("</web-app>");
+		int pos = content.indexOf("<listener>");
+
+		if (pos == -1) {
+			pos = content.indexOf("</web-app>");
+		}
 
 		String newContent =
-			content.substring(0, pos) + extraContent +
-				content.substring(pos, content.length());
+			content.substring(0, pos) + pluginContextListener +
+			extraContent + content.substring(pos);
 
 		// Replace old package names
 
