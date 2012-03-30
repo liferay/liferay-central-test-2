@@ -46,9 +46,9 @@ import com.liferay.portlet.sites.action.ActionUtil;
 import java.io.File;
 import java.io.FileInputStream;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.LinkedList;
 import java.util.List;
 
 import javax.portlet.ActionRequest;
@@ -85,13 +85,9 @@ public class ExportLayoutsAction extends PortletAction {
 			long groupId = ParamUtil.getLong(actionRequest, "groupId");
 			boolean privateLayout = ParamUtil.getBoolean(
 				actionRequest, "privateLayout");
-
-			String layoutIdsJson = ParamUtil.getString(
-				actionRequest, "layoutIds");
-
-			long[] layoutIds = getLayoutIds(groupId, privateLayout,
-				JSONFactoryUtil.createJSONArray(layoutIdsJson));
-
+			long[] layoutIds = getLayoutIds(
+				groupId, privateLayout,
+				ParamUtil.getString(actionRequest, "layoutIds"));
 			String fileName = ParamUtil.getString(
 				actionRequest, "exportFileName");
 			String range = ParamUtil.getString(actionRequest, "range");
@@ -231,44 +227,46 @@ public class ExportLayoutsAction extends PortletAction {
 			getForward(renderRequest, "portlet.layouts_admin.export_layouts"));
 	}
 
-	private void addAllChildren(
-			long groupId, boolean privateLayout, long layoutId,
-			List<Long> layoutIds)
+	protected void addLayoutIds(
+			List<Long> layoutIds, long groupId, boolean privateLayout,
+			long layoutId)
 		throws Exception {
 
-		List<Layout> childLayouts =
-			LayoutLocalServiceUtil.getLayouts(groupId, privateLayout, layoutId);
+		List<Layout> layouts = LayoutLocalServiceUtil.getLayouts(
+			groupId, privateLayout, layoutId);
 
-		for (Layout childLayout : childLayouts) {
-			layoutIds.add(childLayout.getLayoutId());
+		for (Layout layout : layouts) {
+			layoutIds.add(layout.getLayoutId());
 
-			addAllChildren(
-				childLayout.getGroupId(), childLayout.isPrivateLayout(),
-				childLayout.getLayoutId(), layoutIds);
+			addLayoutIds(
+				layoutIds, layout.getGroupId(), layout.isPrivateLayout(),
+				layout.getLayoutId());
 		}
 	}
 
-	private long[] getLayoutIds(
-			long groupId, boolean privateLayout, JSONArray jsonArray)
+	protected long[] getLayoutIds(
+			long groupId, boolean privateLayout, String layoutIdsJSON)
 		throws Exception {
 
-		List<Long> layoutIdsList = new LinkedList<Long>();
+		List<Long> layoutIds = new ArrayList<Long>();
+
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray(layoutIdsJSON);
 
 		for (int i = 0; i < jsonArray.length(); ++i) {
 			JSONObject jsonObject = jsonArray.getJSONObject(i);
 
 			long layoutId = jsonObject.getLong("layoutId");
 
-			if (layoutId != 0) {
-				layoutIdsList.add(layoutId);
+			if (layoutId > 0) {
+				layoutIds.add(layoutId);
 			}
 
 			if (jsonObject.getBoolean("includeChildren")) {
-				addAllChildren(groupId, privateLayout, layoutId, layoutIdsList);
+				addLayoutIds(layoutIds, groupId, privateLayout, layoutId);
 			}
 		}
 
-		return ArrayUtil.toArray(layoutIdsList.toArray(new Long[0]));
+		return ArrayUtil.toArray(layoutIds.toArray(new Long[layoutIds.size()]));
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(ExportLayoutsAction.class);

@@ -149,13 +149,13 @@ if (!selectableTree) {
 							},
 						</c:if>
 						alwaysShowHitArea: node.hasChildren,
+						<c:if test='<%= !saveState && defaultStateChecked %>'>
+							checked: true,
+						</c:if>
 						draggable: node.updateable,
 						expanded : node.selLayoutAncestor,
 						id: TreeUtil.createListItemId(node.layoutId, node.plid),
 						type: '<%= selectableTree ? "task" : "io" %>'
-						<c:if test='<%= !saveState && defaultStateChecked %>'>
-							, checked: true
-						</c:if>
 					};
 
 					var cssClass = '';
@@ -296,9 +296,9 @@ if (!selectableTree) {
 		{
 			after: {
 				<c:if test="<%= saveState %>">
-				checkedChange: function(event) {
-					TreeUtil.updateSessionTreeClick(<%= LayoutConstants.DEFAULT_PLID %>, event.newVal, '<%= HtmlUtil.escape(treeId) %>SelectedNode');
-				},
+					checkedChange: function(event) {
+						TreeUtil.updateSessionTreeClick(<%= LayoutConstants.DEFAULT_PLID %>, event.newVal, '<%= HtmlUtil.escape(treeId) %>SelectedNode');
+					},
 				</c:if>
 				expandedChange: function(event) {
 					var sessionClickURL = themeDisplay.getPathMain() + '/portal/session_click';
@@ -314,6 +314,9 @@ if (!selectableTree) {
 				}
 			},
 			alwaysShowHitArea: true,
+			<c:if test='<%= !saveState && defaultStateChecked %>'>
+				checked: true,
+			</c:if>
 			draggable: false,
 			<c:choose>
 				<c:when test="<%= saveState %>">
@@ -326,9 +329,6 @@ if (!selectableTree) {
 			id: rootId,
 			label: rootLabel,
 			leaf: false
-			<c:if test='<%= !saveState && defaultStateChecked %>'>
-				,checked: true
-			</c:if>
 		}
 	);
 
