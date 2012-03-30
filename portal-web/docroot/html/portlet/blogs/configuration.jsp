@@ -47,7 +47,7 @@ String emailBody = PrefsParamUtil.getString(preferences, request, emailParam + "
 String editorParam = emailParam + "Body_" + currentLanguageId;
 String editorContent = emailBody;
 
-String[] socialBookmarksTypesEnabled = StringUtil.split(preferences.getValue("socialBookmarksTypes", PropsUtil.get(PropsKeys.SOCIAL_BOOKMARK_TYPES)));
+String[] socialBookmarksTypes = StringUtil.split(preferences.getValue("socialBookmarksTypes", PropsUtil.get(PropsKeys.SOCIAL_BOOKMARK_TYPES)));
 %>
 
 <liferay-portlet:renderURL portletConfiguration="true" var="portletURL">
@@ -329,16 +329,19 @@ String[] socialBookmarksTypesEnabled = StringUtil.split(preferences.getValue("so
 						</aui:select>
 
 						<aui:field-wrapper label="social-bookmarks">
+
 							<%
 							for (String type : PropsUtil.getArray(PropsKeys.SOCIAL_BOOKMARK_TYPES)) {
 							%>
+
 								<aui:field-wrapper inlineLabel="right" label="<%= type %>">
-									<input <%= ArrayUtil.contains(socialBookmarksTypesEnabled, type) ? "checked": "" %> name="preferences--socialBookmarksTypes--" type="checkbox" value="<%= type %>" />
+									<input <%= ArrayUtil.contains(socialBookmarksTypes, type) ? "checked": "" %> name="preferences--socialBookmarksTypes--" type="checkbox" value="<%= type %>" />
 								</aui:field-wrapper>
-								
+
 							<%
 							}
 							%>
+
 						</aui:field-wrapper>
 					</div>
 				</aui:fieldset>
