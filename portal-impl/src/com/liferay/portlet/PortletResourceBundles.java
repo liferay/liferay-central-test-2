@@ -83,7 +83,7 @@ public class PortletResourceBundles {
 
 		if (resourceBundle == null) {
 			try {
-				resourceBundle = new NullSafeResourceBundleWrapper(
+				resourceBundle = new NullSafeResourceBundle(
 					new PropertyResourceBundle(
 						new UnsyncByteArrayInputStream(new byte[0])));
 
@@ -170,7 +170,7 @@ public class PortletResourceBundles {
 		Map<String, ResourceBundle> resourceBundles = _getResourceBundles(
 			servletContextName);
 
-		resourceBundle = new NullSafeResourceBundleWrapper(resourceBundle);
+		resourceBundle = new NullSafeResourceBundle(resourceBundle);
 
 		resourceBundles.put(languageId, resourceBundle);
 	}

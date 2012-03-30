@@ -24,9 +24,9 @@ import java.util.ResourceBundle;
 /**
  * @author Shuyang Zhou
  */
-public class NullSafeResourceBundleWrapper extends ResourceBundle {
+public class NullSafeResourceBundle extends ResourceBundle {
 
-	public NullSafeResourceBundleWrapper(ResourceBundle resourceBundle) {
+	public NullSafeResourceBundle(ResourceBundle resourceBundle) {
 		if (resourceBundle == null) {
 			throw new NullPointerException();
 		}
@@ -49,7 +49,6 @@ public class NullSafeResourceBundleWrapper extends ResourceBundle {
 			return parent.getString(key);
 		}
 		catch (MissingResourceException mre) {
-
 			if (ResourceBundleThreadLocal.isReplace()) {
 				return ResourceBundleUtil.NULL_VALUE;
 			}
