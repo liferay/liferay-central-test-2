@@ -204,57 +204,6 @@ public class LayoutImporter {
 		LayoutSetLocalServiceUtil.updatePageCount(groupId, privateLayout);
 	}
 
-	protected void validateLayoutPrototypes(
-			Element layoutsElement, List<Element> layoutElements)
-		throws Exception {
-
-		List<Tuple> missingLayoutPrototypes = new ArrayList<Tuple>();
-
-		String layoutSetPrototypeUuid = layoutsElement.attributeValue(
-			"layout-set-prototype-uuid");
-
-		if (Validator.isNotNull(layoutSetPrototypeUuid)) {
-			try {
-				LayoutSetPrototypeLocalServiceUtil.getLayoutSetPrototypeByUuid(
-					layoutSetPrototypeUuid);
-			}
-			catch (NoSuchLayoutSetPrototypeException nlspe) {
-				String layoutSetPrototypeName = layoutsElement.attributeValue(
-					"layout-set-prototype-name");
-
-				missingLayoutPrototypes.add(
-					new Tuple(
-						LayoutSetPrototype.class.getName(),
-						layoutSetPrototypeUuid, layoutSetPrototypeName));
-			}
-		}
-
-		for (Element layoutElement : layoutElements) {
-			String layoutPrototypeUuid = GetterUtil.getString(
-				layoutElement.attributeValue("layout-prototype-uuid"));
-
-			if (Validator.isNotNull(layoutPrototypeUuid)) {
-				try {
-					LayoutPrototypeLocalServiceUtil.getLayoutPrototypeByUuid(
-						layoutPrototypeUuid);
-				}
-				catch (NoSuchLayoutPrototypeException nslpe) {
-					String layoutPrototypeName = GetterUtil.getString(
-						layoutElement.attributeValue("layout-prototype-name"));
-
-					missingLayoutPrototypes.add(
-						new Tuple(
-							LayoutPrototype.class.getName(),
-							layoutPrototypeUuid, layoutPrototypeName));
-				}
-			}
-		}
-
-		if (!missingLayoutPrototypes.isEmpty()) {
-			throw new LayoutPrototypeException(missingLayoutPrototypes);
-		}
-	}
-
 	protected void doImportLayouts(
 			long userId, long groupId, boolean privateLayout,
 			Map<String, String[]> parameterMap, File file)
@@ -300,8 +249,8 @@ public class LayoutImporter {
 			layoutSetPrototypeLinkEnabled = false;
 		}
 
-		boolean publishToRemote = MapUtil.getBoolean(
-			parameterMap, PortletDataHandlerKeys.PUBLISH_TO_REMOTE);
+		//boolean publishToRemote = MapUtil.getBoolean(
+		//	parameterMap, PortletDataHandlerKeys.PUBLISH_TO_REMOTE);
 		String layoutsImportMode = MapUtil.getString(
 			parameterMap, PortletDataHandlerKeys.LAYOUTS_IMPORT_MODE,
 			PortletDataHandlerKeys.LAYOUTS_IMPORT_MODE_MERGE_BY_LAYOUT_UUID);
@@ -406,9 +355,10 @@ public class LayoutImporter {
 				"Invalid type of LAR file (" + larType + ")");
 		}
 
-		// Prototypes Validation
+		// Layout prototypes validity
 
 		Element layoutsElement = rootElement.element("layouts");
+
 		List<Element> layoutElements = layoutsElement.elements("layout");
 
 		validateLayoutPrototypes(layoutsElement, layoutElements);
@@ -1517,6 +1467,57 @@ public class LayoutImporter {
 		}
 		catch (IOException ioe) {
 			layout.setTypeSettings(newTypeSettings);
+		}
+	}
+
+	protected void validateLayoutPrototypes(
+			Element layoutsElement, List<Element> layoutElements)
+		throws Exception {
+	
+		List<Tuple> missingLayoutPrototypes = new ArrayList<Tuple>();
+	
+		String layoutSetPrototypeUuid = layoutsElement.attributeValue(
+			"layout-set-prototype-uuid");
+	
+		if (Validator.isNotNull(layoutSetPrototypeUuid)) {
+			try {
+				LayoutSetPrototypeLocalServiceUtil.getLayoutSetPrototypeByUuid(
+					layoutSetPrototypeUuid);
+			}
+			catch (NoSuchLayoutSetPrototypeException nlspe) {
+				String layoutSetPrototypeName = layoutsElement.attributeValue(
+					"layout-set-prototype-name");
+	
+				missingLayoutPrototypes.add(
+					new Tuple(
+						LayoutSetPrototype.class.getName(),
+						layoutSetPrototypeUuid, layoutSetPrototypeName));
+			}
+		}
+	
+		for (Element layoutElement : layoutElements) {
+			String layoutPrototypeUuid = GetterUtil.getString(
+				layoutElement.attributeValue("layout-prototype-uuid"));
+	
+			if (Validator.isNotNull(layoutPrototypeUuid)) {
+				try {
+					LayoutPrototypeLocalServiceUtil.getLayoutPrototypeByUuid(
+						layoutPrototypeUuid);
+				}
+				catch (NoSuchLayoutPrototypeException nslpe) {
+					String layoutPrototypeName = GetterUtil.getString(
+						layoutElement.attributeValue("layout-prototype-name"));
+	
+					missingLayoutPrototypes.add(
+						new Tuple(
+							LayoutPrototype.class.getName(),
+							layoutPrototypeUuid, layoutPrototypeName));
+				}
+			}
+		}
+	
+		if (!missingLayoutPrototypes.isEmpty()) {
+			throw new LayoutPrototypeException(missingLayoutPrototypes);
 		}
 	}
 

@@ -83,10 +83,9 @@ public class ImportLayoutsAction extends PortletAction {
 				SessionErrors.add(actionRequest, e.getClass().getName());
 			}
 			else if (e instanceof LayoutPrototypeException) {
-				LayoutPrototypeException prototypeException = (LayoutPrototypeException)e;
+				LayoutPrototypeException lpe = (LayoutPrototypeException)e;
 
-				SessionErrors.add(
-					actionRequest, e.getClass().getName(), prototypeException);
+				SessionErrors.add(actionRequest, e.getClass().getName(), lpe);
 			}
 			else {
 				_log.error(e, e);

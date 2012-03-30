@@ -219,8 +219,8 @@ public class LayoutExporter {
 			parameterMap, PortletDataHandlerKeys.LOGO);
 		boolean exportLayoutSetSettings = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.LAYOUT_SET_SETTINGS);
-		boolean publishToRemote = MapUtil.getBoolean(
-			parameterMap, PortletDataHandlerKeys.PUBLISH_TO_REMOTE);
+		//boolean publishToRemote = MapUtil.getBoolean(
+		//	parameterMap, PortletDataHandlerKeys.PUBLISH_TO_REMOTE);
 		boolean updateLastPublishDate = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.UPDATE_LAST_PUBLISH_DATE);
 

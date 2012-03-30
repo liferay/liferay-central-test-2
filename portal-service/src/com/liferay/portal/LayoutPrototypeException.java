@@ -28,6 +28,12 @@ public class LayoutPrototypeException extends PortalException {
 		super();
 	}
 
+	public LayoutPrototypeException(List<Tuple> missingLayoutPrototypes) {
+		super();
+
+		_missingLayoutPrototypes = missingLayoutPrototypes;
+	}
+
 	public LayoutPrototypeException(String msg) {
 		super(msg);
 	}
@@ -40,17 +46,13 @@ public class LayoutPrototypeException extends PortalException {
 		super(cause);
 	}
 
-	public LayoutPrototypeException(List<Tuple> missingLayoutPrototypes) {
-		super();
-
-		_missingLayoutPrototypes = missingLayoutPrototypes;
-	}
-
-	public List<Tuple> getMissingPrototypes() {
+	public List<Tuple> getMissingLayoutPrototypes() {
 		return _missingLayoutPrototypes;
 	}
 
-	public void setMissingPrototypes(List<Tuple> missingLayoutPrototypes) {
+	public void setMissingLayoutPrototypes(
+		List<Tuple> missingLayoutPrototypes) {
+
 		_missingLayoutPrototypes = missingLayoutPrototypes;
 	}
 

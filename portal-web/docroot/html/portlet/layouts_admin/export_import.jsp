@@ -99,24 +99,26 @@ portletsList = ListUtil.sort(portletsList, new PortletTitleComparator(applicatio
 				LayoutPrototypeException lpe = (LayoutPrototypeException)errorException;
 				%>
 
-				<liferay-ui:message key="the-lar-file-could-not-be-imported-because-it-requires-templates-which-can-not-be-found.-plase-import-the-following-templates-in-advanced-manually" />
+				<liferay-ui:message key="the-lar-file-could-not-be-imported-because-it-requires-layout-templates-or-layout-set-templates-that-could-not-be-found.-please-import-the-following-templates-manually-with-the-advanced-options" />
 
 				<ul>
 
-				<%
-				List<Tuple> missingLayoutPrototypes = lpe.getMissingLayoutPrototypes();
+					<%
+					List<Tuple> missingLayoutPrototypes = lpe.getMissingLayoutPrototypes();
 
-				for (Tuple missingLayoutPrototype : missingLayoutPrototypes) {
-					String prototypeType = (String)missingLayoutPrototype.getObject(0);
-					String prototypeUuid = (String)missingLayoutPrototype.getObject(1);
-					String prototypeName = (String)missingLayoutPrototype.getObject(2);
-				%>
+					for (Tuple missingLayoutPrototype : missingLayoutPrototypes) {
+						String layoutPrototypeClassName = (String)missingLayoutPrototype.getObject(0);
+						String layoutPrototypeUuid = (String)missingLayoutPrototype.getObject(1);
+						String layoutPrototypeName = (String)missingLayoutPrototype.getObject(2);
+					%>
 
-					<li><liferay-ui:message key='<%= "model.resource." + prototypeType %>' />: <strong><%= prototypeName %></strong> (<%= prototypeUuid %>)</li>
+						<li>
+							<%= ResourceActionsUtil.getModelResource(locale, layoutPrototypeClassName) %>: <strong><%= layoutPrototypeName %></strong> (<%= layoutPrototypeUuid %>)
+						</li>
 
-				<%
-				}
-				%>
+					<%
+					}
+					%>
 
 				</ul>
 			</liferay-ui:error>
