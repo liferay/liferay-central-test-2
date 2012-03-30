@@ -20,6 +20,7 @@ import com.liferay.portal.util.SessionClicks;
 
 import java.util.Enumeration;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -52,6 +53,18 @@ public class SessionClickAction extends Action {
 				}
 			}
 
+			String cmd = ParamUtil.getString(request, "cmd");
+
+			String key = ParamUtil.getString(request, "key");
+
+			if (key != null && cmd.equals("get")) {
+				String result = SessionClicks.get(request, key, cmd);
+
+				ServletOutputStream out = response.getOutputStream();
+
+				out.println(result);
+			}
+
 			return null;
 		}
 		catch (Exception e) {
@@ -60,5 +73,4 @@ public class SessionClickAction extends Action {
 			return null;
 		}
 	}
-
 }
