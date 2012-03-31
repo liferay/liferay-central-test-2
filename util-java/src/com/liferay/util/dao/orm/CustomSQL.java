@@ -40,8 +40,8 @@ import java.sql.DatabaseMetaData;
 import java.sql.SQLException;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
@@ -194,9 +194,9 @@ public class CustomSQL {
 		List<String> keywordsList = new ArrayList<String>();
 
 		for (int i = 0; i < keywords.length(); i++) {
-			char ch = keywords.charAt(i);
+			char c = keywords.charAt(i);
 
-			if (ch == CharPool.QUOTE) {
+			if (c == CharPool.QUOTE) {
 				int pos = i + 1;
 
 				i = keywords.indexOf(CharPool.QUOTE, pos);
@@ -209,35 +209,31 @@ public class CustomSQL {
 					String keyword = keywords.substring(pos, i);
 
 					keywordsList.add(
-						StringPool.PERCENT + keyword + StringPool.PERCENT);
+						StringUtil.quote(keyword, StringPool.PERCENT));
 				}
 			}
 			else {
-				while (Character.isWhitespace(ch)) {
+				while (Character.isWhitespace(c)) {
 					i++;
 
-					ch = keywords.charAt(i);
+					c = keywords.charAt(i);
 				}
 
 				int pos = i;
 
-				while ((i < keywords.length()) && !Character.isWhitespace(ch)) {
+				while ((i < keywords.length()) && !Character.isWhitespace(c)) {
 					i++;
 
-					ch = keywords.charAt(i);
+					c = keywords.charAt(i);
 				}
 
 				String keyword = keywords.substring(pos, i);
 
-				keywordsList.add(
-					StringPool.PERCENT + keyword + StringPool.PERCENT);
+				keywordsList.add(StringUtil.quote(keyword, StringPool.PERCENT));
 			}
 		}
 
-		String[] keywordsArray = new String[keywordsList.size()];
-		keywordsArray = keywordsList.toArray(keywordsArray);
-
-		return keywordsArray;
+		return keywordsList.toArray(new String[keywordsList.size()]);
 	}
 
 	public String[] keywords(String[] keywordsArray) {
