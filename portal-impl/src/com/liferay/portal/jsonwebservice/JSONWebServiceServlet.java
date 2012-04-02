@@ -95,7 +95,7 @@ public class JSONWebServiceServlet extends JSONServlet {
 			}
 
 			if (_log.isDebugEnabled()) {
-				_log.debug("Redirect from secure to public JSONWS api list");
+				_log.debug("Redirect from secure to public");
 			}
 
 			response.sendRedirect(uri);
@@ -104,7 +104,7 @@ public class JSONWebServiceServlet extends JSONServlet {
 		}
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("JSONWS api list for /" + request.getContextPath());
+			_log.debug("Servlet context " + request.getContextPath());
 		}
 
 		String apiPath = PortalUtil.getPathMain() + "/portal/api/jsonws";

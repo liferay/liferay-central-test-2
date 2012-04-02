@@ -61,8 +61,9 @@ public class JSONWebServiceActionsManagerImpl
 		String method = GetterUtil.getString(request.getMethod());
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Request JSONWS [context: /" + servletContextPath +
-				" path: " + path + " method: " + method + "]");
+			_log.debug(
+				"Request JSON web service action with path " + path +
+					" and method " + method + " for /" + servletContextPath);
 		}
 
 		String parameterPath = null;
@@ -135,8 +136,9 @@ public class JSONWebServiceActionsManagerImpl
 			servletContext);
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Require JSONWS [context: /" + servletContextPath +
-				" path: " + path + " method: " + method + "]");
+			_log.debug(
+				"Require JSON web service action with path " + path +
+					" and method " + method + " for /" + servletContextPath);
 		}
 
 		int jsonWebServiceActionConfigIndex =
@@ -145,7 +147,7 @@ public class JSONWebServiceActionsManagerImpl
 
 		if (jsonWebServiceActionConfigIndex == -1) {
 			throw new RuntimeException(
-				"No JSON web service action associated with path " + path +
+				"No JSON web service action with path " + path +
 					" and method " + method + " for /" + servletContextPath);
 		}
 
@@ -266,8 +268,9 @@ public class JSONWebServiceActionsManagerImpl
 
 		if (firstIndex < 0) {
 			if (_log.isDebugEnabled()) {
-				_log.debug("JSONWS path NOT found: " + path + " for context: /"
-					+ servletContextPath);
+				_log.debug(
+					"Unable to find JSON web service actions with path " +
+						path + " for /" + servletContextPath);
 			}
 
 			return -1;
@@ -286,9 +289,9 @@ public class JSONWebServiceActionsManagerImpl
 		if (_log.isDebugEnabled()) {
 			int total = lastIndex - firstIndex + 1;
 
-			_log.debug("Found " + total + " JSONWS path(s): " + path +
-				" for context: /" + servletContextPath +
-				", now matching parameters");
+			_log.debug(
+				"Found " + total + " JSON web service actions with path " +
+					path + " in for /" + servletContextPath);
 		}
 
 		for (int i = firstIndex; i <= lastIndex; i++) {
@@ -332,10 +335,15 @@ public class JSONWebServiceActionsManagerImpl
 
 		if (_log.isDebugEnabled()) {
 			if (index == -1) {
-				_log.debug("No matched JSONWS action found!");
+				_log.debug(
+					"Unable to match parameters to a JSON web service " +
+						"action with path " + path + " for /" +
+							servletContextPath);
 			}
 			else {
-				_log.debug("JSONWS action found and matched!");
+				_log.debug(
+					"Matched parameters to a JSON web service action with " +
+						"path " + path + " for /" + servletContextPath);
 			}
 		}
 
@@ -351,6 +359,9 @@ public class JSONWebServiceActionsManagerImpl
 
 		return index;
 	}
+
+	private static Log _log = LogFactoryUtil.getLog(
+		JSONWebServiceActionParameters.class);
 
 	private SortedArrayList<JSONWebServiceActionConfig>
 		_jsonWebServiceActionConfigs =
@@ -375,8 +386,5 @@ public class JSONWebServiceActionsManagerImpl
 		}
 
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(
-		JSONWebServiceActionParameters.class);
 
 }
