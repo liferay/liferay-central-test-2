@@ -179,7 +179,7 @@ public class JSONWebServiceActionParameters {
 
 				if (i >= parameterPathParts.length) {
 					throw new IllegalArgumentException(
-						"Missing value for path parameter: " + name);
+						"Missing value for parameter " + name);
 				}
 
 				value = parameterPathParts[i];
