@@ -47,13 +47,13 @@ public class WSDDMerger {
 
 		File sourceFile = new File(source);
 
-		Document doc = SAXReaderUtil.read(sourceFile);
+		Document document = SAXReaderUtil.read(sourceFile);
 
-		Element root = doc.getRootElement();
+		Element rootElement = document.getRootElement();
 
-		List<Element> sourceServices = root.elements("service");
+		List<Element> sourceServiceElements = rootElement.elements("service");
 
-		if (sourceServices.size() == 0) {
+		if (sourceServiceElements.isEmpty()) {
 			return;
 		}
 
@@ -61,37 +61,37 @@ public class WSDDMerger {
 
 		File destinationFile = new File(destination);
 
-		doc = SAXReaderUtil.read(destinationFile);
+		document = SAXReaderUtil.read(destinationFile);
 
-		root = doc.getRootElement();
+		rootElement = document.getRootElement();
 
 		Map<String, Element> servicesMap = new TreeMap<String, Element>();
 
-		List<Element> serviceElements = root.elements("service");
+		List<Element> serviceElements = rootElement.elements("service");
 
-		for (Element service : serviceElements) {
-			String name = service.attributeValue("name");
+		for (Element serviceElement : serviceElements) {
+			String name = serviceElement.attributeValue("name");
 
-			servicesMap.put(name, service);
+			servicesMap.put(name, serviceElement);
 
-			service.detach();
+			serviceElement.detach();
 		}
 
-		for (Element service : sourceServices) {
-			String name = service.attributeValue("name");
+		for (Element serviceElement : sourceServiceElements) {
+			String name = serviceElement.attributeValue("name");
 
-			servicesMap.put(name, service);
+			servicesMap.put(name, serviceElement);
 
-			service.detach();
+			serviceElement.detach();
 		}
 
 		for (Map.Entry<String, Element> entry : servicesMap.entrySet()) {
-			Element service = entry.getValue();
+			Element serviceElement = entry.getValue();
 
-			root.add(service);
+			rootElement.add(serviceElement);
 		}
 
-		String content = doc.formattedString();
+		String content = document.formattedString();
 
 		content = StringUtil.replace(content, "\"/>", "\" />");
 

@@ -220,7 +220,7 @@ public class MailServiceImpl implements MailService, IdentifiableBean {
 					advancedPropertiesString);
 
 				for (Map.Entry<Object, Object> entry :
-					advancedProperties.entrySet()) {
+						advancedProperties.entrySet()) {
 
 					String key = (String)entry.getKey();
 					String value = (String)entry.getValue();

@@ -276,6 +276,7 @@ public class DDMStructureImpl extends DDMStructureBaseImpl {
 
 			for (Node node : nodes) {
 				Element element = (Element)node;
+
 				String name = element.attributeValue("name");
 
 				fieldsMap.put(name, _getField(element, locale));

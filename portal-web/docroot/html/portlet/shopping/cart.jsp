@@ -62,13 +62,13 @@ boolean minQuantityMultiple = PrefsPropsUtil.getBoolean(company.getCompanyId(), 
 		var count = 0;
 
 		<%
-		int itemCount= 0;
+		int itemsCount= 0;
 
 		for (ShoppingCartItem cartItem : items.keySet()) {
 			ShoppingItem item = cartItem.getItem();
 		%>
 
-			count = document.<portlet:namespace />fm.<portlet:namespace />item_<%= item.getItemId() %>_<%= itemCount %>_count.value;
+			count = document.<portlet:namespace />fm.<portlet:namespace />item_<%= item.getItemId() %>_<%= itemsCount %>_count.value;
 
 			for (var i = 0; i < count; i++) {
 				itemIds += "<%= cartItem.getCartItemId() %>,";
@@ -77,7 +77,7 @@ boolean minQuantityMultiple = PrefsPropsUtil.getBoolean(company.getCompanyId(), 
 			count = 0;
 
 		<%
-			itemCount++;
+			itemsCount++;
 		}
 		%>
 
@@ -158,7 +158,7 @@ boolean minQuantityMultiple = PrefsPropsUtil.getBoolean(company.getCompanyId(), 
 
 	List resultRows = searchContainer.getResultRows();
 
-	int itemCount = 0;
+	int itemsCount = 0;
 
 	for (Map.Entry<ShoppingCartItem, Integer> entry : items.entrySet()) {
 		ShoppingCartItem cartItem = entry.getKey();
@@ -174,10 +174,10 @@ boolean minQuantityMultiple = PrefsPropsUtil.getBoolean(company.getCompanyId(), 
 		ShoppingItemPrice[] itemPrices = (ShoppingItemPrice[])ShoppingItemPriceLocalServiceUtil.getItemPrices(item.getItemId()).toArray(new ShoppingItemPrice[0]);
 
 		if (!SessionErrors.isEmpty(renderRequest)) {
-			count = new Integer(ParamUtil.getInteger(request, "item_" + item.getItemId() + "_" + itemCount + "_count"));
+			count = new Integer(ParamUtil.getInteger(request, "item_" + item.getItemId() + "_" + itemsCount + "_count"));
 		}
 
-		ResultRow row = new ResultRow(item, item.getItemId(), itemCount);
+		ResultRow row = new ResultRow(item, item.getItemId(), itemsCount);
 
 		PortletURL rowURL = renderResponse.createRenderURL();
 
@@ -336,7 +336,7 @@ boolean minQuantityMultiple = PrefsPropsUtil.getBoolean(company.getCompanyId(), 
 			sb.append("item_");
 			sb.append(item.getItemId());
 			sb.append("_");
-			sb.append(itemCount);
+			sb.append(itemsCount);
 			sb.append("_count\">");
 
 			sb.append("<option value=\"0\">0</option>");
@@ -365,7 +365,7 @@ boolean minQuantityMultiple = PrefsPropsUtil.getBoolean(company.getCompanyId(), 
 			sb.append("item_");
 			sb.append(item.getItemId());
 			sb.append("_");
-			sb.append(itemCount);
+			sb.append(itemsCount);
 			sb.append("_count\" size=\"2\" type=\"text\" value=\"");
 			sb.append(count);
 			sb.append("\">");
@@ -381,7 +381,7 @@ boolean minQuantityMultiple = PrefsPropsUtil.getBoolean(company.getCompanyId(), 
 
 		resultRows.add(row);
 
-		itemCount++;
+		itemsCount++;
 	}
 	%>
 

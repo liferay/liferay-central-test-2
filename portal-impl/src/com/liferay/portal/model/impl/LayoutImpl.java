@@ -132,9 +132,8 @@ public class LayoutImpl extends LayoutBaseImpl {
 
 	public List<Layout> getAllChildren() throws SystemException {
 		List<Layout> layouts = new ArrayList<Layout>();
-		List<Layout> children = getChildren();
 
-		for (Layout layout : children) {
+		for (Layout layout : getChildren()) {
 			layouts.add(layout);
 			layouts.addAll(layout.getAllChildren());
 		}

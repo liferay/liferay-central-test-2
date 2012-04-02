@@ -99,20 +99,20 @@ public class PropfindMethodImpl extends BasePropMethodImpl implements Method {
 						XMLFormatter.toString(xml, StringPool.FOUR_SPACES));
 			}
 
-			Document doc = SAXReaderUtil.read(xml);
+			Document document = SAXReaderUtil.read(xml);
 
-			Element root = doc.getRootElement();
+			Element rootElement = document.getRootElement();
 
-			if (root.element(ALLPROP.getName()) != null) {
+			if (rootElement.element(ALLPROP.getName()) != null) {
 
 				// Generate props if <allprop> tag is used. See LEP-6162.
 
 				return generateProps(props);
 			}
 
-			Element prop = root.element("prop");
+			Element propElement = rootElement.element("prop");
 
-			List<Element> elements = prop.elements();
+			List<Element> elements = propElement.elements();
 
 			for (Element element : elements) {
 				String prefix = element.getNamespacePrefix();
@@ -120,8 +120,8 @@ public class PropfindMethodImpl extends BasePropMethodImpl implements Method {
 
 				Namespace namespace = WebDAVUtil.createNamespace(prefix, uri);
 
-				props.add(SAXReaderUtil.createQName(
-					element.getName(), namespace));
+				props.add(
+					SAXReaderUtil.createQName(element.getName(), namespace));
 			}
 
 			return props;

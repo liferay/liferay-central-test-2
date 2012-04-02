@@ -3339,7 +3339,7 @@ public class ServiceBuilder {
 			prevEntityName = entityName;
 		}
 
-		if (!indexSQLs.values().isEmpty()) {
+		if (!indexSQLs.isEmpty()) {
 			sb.setIndex(sb.index() - 1);
 		}
 
@@ -3368,7 +3368,7 @@ public class ServiceBuilder {
 			prevEntityName = entityName;
 		}
 
-		if (!indexProps.keySet().isEmpty()) {
+		if (!indexProps.isEmpty()) {
 			sb.setIndex(sb.index() - 1);
 		}
 

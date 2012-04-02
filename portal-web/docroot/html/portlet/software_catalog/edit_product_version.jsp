@@ -28,22 +28,20 @@ SCProductVersion productVersion = (SCProductVersion)request.getAttribute(WebKeys
 long productEntryId = productEntry.getProductEntryId();
 long productVersionId = BeanParamUtil.getLong(productVersion, request, "productVersionId");
 
-Set frameworkVersionIds = new HashSet();
+Set<Long> frameworkVersionIds = new HashSet<Long>();
 
 String[] frameworkVersions = request.getParameterValues("frameworkVersions");
 
 if ((productVersion != null) && (frameworkVersions == null)) {
-	List<SCFrameworkVersion> scFrameworkVersions = productVersion.getFrameworkVersions();
-
-	for (SCFrameworkVersion frameworkVersion : scFrameworkVersions) {
-		frameworkVersionIds.add(new Long(frameworkVersion.getFrameworkVersionId()));
+	for (SCFrameworkVersion frameworkVersion : productVersion.getFrameworkVersions()) {
+		frameworkVersionIds.add(frameworkVersion.getFrameworkVersionId());
 	}
 }
 else {
 	long[] frameworkVersionIdsArray = GetterUtil.getLongValues(frameworkVersions);
 
 	for (int i = 0; i < frameworkVersionIdsArray.length; i++) {
-		frameworkVersionIds.add(new Long(frameworkVersionIdsArray[i]));
+		frameworkVersionIds.add(frameworkVersionIdsArray[i]);
 	}
 }
 
@@ -102,12 +100,10 @@ editProductEntryURL.setParameter("productEntryId", String.valueOf(productEntryId
 			<select multiple="true" name="<portlet:namespace />frameworkVersions">
 
 				<%
-				List<SCFrameworkVersion> scFrameworkVersions = SCFrameworkVersionServiceUtil.getFrameworkVersions(scopeGroupId, true);
-
-				for (SCFrameworkVersion frameworkVersion : scFrameworkVersions) {
+				for (SCFrameworkVersion frameworkVersion : SCFrameworkVersionServiceUtil.getFrameworkVersions(scopeGroupId, true)) {
 				%>
 
-					<option <%= (frameworkVersionIds.contains(new Long(frameworkVersion.getFrameworkVersionId()))) ? "selected" : "" %> value="<%= frameworkVersion.getFrameworkVersionId() %>"><%= frameworkVersion.getName() %></option>
+					<option <%= (frameworkVersionIds.contains(frameworkVersion.getFrameworkVersionId())) ? "selected" : "" %> value="<%= frameworkVersion.getFrameworkVersionId() %>"><%= frameworkVersion.getName() %></option>
 
 				<%
 				}

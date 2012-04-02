@@ -64,10 +64,10 @@ public class PortletListerImpl implements PortletLister {
 		PortletCategory portletCategory = (PortletCategory)WebAppPool.get(
 			_user.getCompanyId(), WebKeys.PORTLET_CATEGORY);
 
-		List<PortletCategory> categories = ListUtil.fromCollection(
+		List<PortletCategory> portletCategories = ListUtil.fromCollection(
 			portletCategory.getCategories());
 
-		iterateCategories(categories, _nodeId, 0);
+		iteratePortletCategories(portletCategories, _nodeId, 0);
 
 		return new TreeView(_list, _depth);
 	}
@@ -98,15 +98,16 @@ public class PortletListerImpl implements PortletLister {
 		_user = user;
 	}
 
-	protected void iterateCategories(
-			List<PortletCategory> categories, long parentId, int depth)
+	protected void iteratePortletCategories(
+			List<PortletCategory> portletCategories, long parentId, int depth)
 		throws PortalException, SystemException {
 
-		categories = ListUtil.sort(
-			categories, new PortletCategoryComparator(_user.getLocale()));
+		portletCategories = ListUtil.sort(
+			portletCategories,
+			new PortletCategoryComparator(_user.getLocale()));
 
-		for (int i = 0; i < categories.size(); i++) {
-			PortletCategory portletCategory = categories.get(i);
+		for (int i = 0; i < portletCategories.size(); i++) {
+			PortletCategory portletCategory = portletCategories.get(i);
 
 			if (portletCategory.isHidden()) {
 				continue;
@@ -125,7 +126,7 @@ public class PortletListerImpl implements PortletLister {
 			nodeView.setDepth(depth);
 			nodeView.setLeaf(false);
 
-			if ((i + 1) == categories.size()) {
+			if ((i + 1) == portletCategories.size()) {
 				nodeView.setLs("1");
 			}
 			else {
@@ -143,17 +144,17 @@ public class PortletListerImpl implements PortletLister {
 			List<PortletCategory> subCategories = ListUtil.fromCollection(
 				portletCategory.getCategories());
 
-			iterateCategories(subCategories, nodeId, depth);
+			iteratePortletCategories(subCategories, nodeId, depth);
 
 			if (_iteratePortlets) {
-				_iteratePortlets(
+				iteratePortlets(
 					portletCategory, portletCategory.getPortletIds(), nodeId,
 					depth + 1);
 			}
 		}
 	}
 
-	private void _iteratePortlets(
+	protected void iteratePortlets(
 			PortletCategory portletCategory, Set<String> portletIds,
 			int parentNodeId, int depth)
 		throws PortalException, SystemException {

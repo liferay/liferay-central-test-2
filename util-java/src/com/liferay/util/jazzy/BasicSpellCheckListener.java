@@ -38,9 +38,8 @@ public class BasicSpellCheckListener implements SpellCheckListener {
 
 	public void spellingError(SpellCheckEvent event) {
 		List<String> suggestions = new ArrayList<String>();
-		List<Word> words = (List<Word>)event.getSuggestions();
 
-		for (Word word : words) {
+		for (Word word : (List<Word>)event.getSuggestions()) {
 			suggestions.add(word.getWord());
 		}
 

@@ -137,10 +137,13 @@ public class InstanceWrapperBuilder {
 					TypeVariable typeParameter = typeParameters[i];
 
 					sb.append(typeParameter.getName());
-					sb.append(", ");
+
+					if ((i + 1) != typeParameters.length) {
+						sb.append(", ");
+					}
 				}
 
-				sb.setStringAt("> ", sb.index());
+				sb.append("> ");
 			}
 
 			sb.append(_getTypeGenericsName(javaMethod.getReturns()));
@@ -161,11 +164,10 @@ public class InstanceWrapperBuilder {
 
 				sb.append(" ");
 				sb.append(javaParameter.getName());
-				sb.append(", ");
-			}
 
-			if (javaParameters.length > 0) {
-				sb.setIndex(sb.index() - 1);
+				if ((i + 1) != javaParameters.length) {
+					sb.append(", ");
+				}
 			}
 
 			sb.append(")");
@@ -203,11 +205,10 @@ public class InstanceWrapperBuilder {
 				JavaParameter javaParameter = javaParameters[j];
 
 				sb.append(javaParameter.getName());
-				sb.append(", ");
-			}
 
-			if (javaParameters.length > 0) {
-				sb.setIndex(sb.index() - 1);
+				if ((j + 1) != javaParameters.length) {
+					sb.append(", ");
+				}
 			}
 
 			sb.append(");");
@@ -270,27 +271,26 @@ public class InstanceWrapperBuilder {
 		Type[] actualTypeArguments = type.getActualTypeArguments();
 
 		if (actualTypeArguments == null) {
-			return type.getValue().concat(_getDimensions(type));
+			String value = type.getValue();
+
+			return value.concat(_getDimensions(type));
 		}
 		else {
 			StringBundler sb = new StringBundler(
 				actualTypeArguments.length * 2 + 3);
 
 			sb.append(type.getValue());
-
 			sb.append("<");
 
-			if (actualTypeArguments.length > 0) {
-				for (int i = 0; i < actualTypeArguments.length; i++) {
-					sb.append(_getTypeGenericsName(actualTypeArguments[i]));
+			for (int i = 0; i < actualTypeArguments.length; i++) {
+				if (i > 0) {
 					sb.append(", ");
 				}
 
-				sb.setIndex(sb.index() - 1);
+				sb.append(_getTypeGenericsName(actualTypeArguments[i]));
 			}
 
 			sb.append(">");
-
 			sb.append(_getDimensions(type));
 
 			return sb.toString();

@@ -125,11 +125,9 @@ public class CopyInterfaceBuilder {
 
 					imports.add(javaParameter.getType().getValue());
 
-					sb.append(", ");
-				}
-
-				if (parameters.length > 0) {
-					sb.setIndex(sb.index() - 1);
+					if ((j + 1) != parameters.length) {
+						sb.append(", ");
+					}
 				}
 
 				sb.append(")");
@@ -172,11 +170,10 @@ public class CopyInterfaceBuilder {
 					JavaParameter javaParameter = parameters[j];
 
 					sb.append(javaParameter.getName());
-					sb.append(", ");
-				}
 
-				if (parameters.length > 0) {
-					sb.setIndex(sb.index() - 1);
+					if ((j + 1) != parameters.length) {
+						sb.append(", ");
+					}
 				}
 
 				sb.append(");");

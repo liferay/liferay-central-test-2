@@ -25,20 +25,18 @@ long productEntryId = BeanParamUtil.getLong(productEntry, request, "productEntry
 
 String type = BeanParamUtil.getString(productEntry, request, "type");
 
-Set licenseIds = new HashSet();
+Set<Long> licenseIds = new HashSet<Long>();
 
 if ((productEntry != null) && (request.getParameterValues("licenses") == null)) {
-	List<SCLicense> scLicenses = productEntry.getLicenses();
-
-	for (SCLicense license : scLicenses) {
-		licenseIds.add(new Long(license.getLicenseId()));
+	for (SCLicense license : productEntry.getLicenses()) {
+		licenseIds.add(license.getLicenseId());
 	}
 }
 else {
 	long[] licenses = ParamUtil.getLongValues(request, "licenses");
 
 	for (int i = 0; i < licenses.length; i++) {
-		licenseIds.add(new Long(licenses[i]));
+		licenseIds.add(licenses[i]);
 	}
 }
 
@@ -106,12 +104,10 @@ int screenshotsCount = ParamUtil.getInteger(request, "screenshotsCount", product
 			<optgroup label="<liferay-ui:message key="recommended-licenses" />">
 
 				<%
-				List<SCLicense> scLicenses = SCLicenseLocalServiceUtil.getLicenses(true, true);
-
-				for (SCLicense license : scLicenses) {
+				for (SCLicense license : SCLicenseLocalServiceUtil.getLicenses(true, true)) {
 				%>
 
-					<option <%= licenseIds.contains(new Long(license.getLicenseId())) ? "selected" : "" %> value="<%= license.getLicenseId() %>"><%= license.getName() %></option>
+					<option <%= licenseIds.contains(license.getLicenseId()) ? "selected" : "" %> value="<%= license.getLicenseId() %>"><%= license.getName() %></option>
 
 				<%
 				}
@@ -122,12 +118,10 @@ int screenshotsCount = ParamUtil.getInteger(request, "screenshotsCount", product
 			<optgroup label="<liferay-ui:message key="other-licenses" />">
 
 				<%
-				scLicenses = SCLicenseLocalServiceUtil.getLicenses(true, false);
-
-				for (SCLicense license : scLicenses) {
+				for (SCLicense license : SCLicenseLocalServiceUtil.getLicenses(true, false)) {
 				%>
 
-					<option <%= licenseIds.contains(new Long(license.getLicenseId())) ? "selected" : "" %> value="<%= license.getLicenseId() %>"><%= license.getName() %></option>
+					<option <%= licenseIds.contains(license.getLicenseId()) ? "selected" : "" %> value="<%= license.getLicenseId() %>"><%= license.getName() %></option>
 
 				<%
 				}

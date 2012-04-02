@@ -95,7 +95,6 @@ import net.fortuna.ical4j.data.CalendarBuilder;
 import net.fortuna.ical4j.data.CalendarOutputter;
 import net.fortuna.ical4j.data.ParserException;
 import net.fortuna.ical4j.model.Component;
-import net.fortuna.ical4j.model.ComponentList;
 import net.fortuna.ical4j.model.DateTime;
 import net.fortuna.ical4j.model.Dur;
 import net.fortuna.ical4j.model.Parameter;
@@ -103,7 +102,6 @@ import net.fortuna.ical4j.model.Property;
 import net.fortuna.ical4j.model.PropertyList;
 import net.fortuna.ical4j.model.Recur;
 import net.fortuna.ical4j.model.WeekDay;
-import net.fortuna.ical4j.model.WeekDayList;
 import net.fortuna.ical4j.model.component.VEvent;
 import net.fortuna.ical4j.model.property.CalScale;
 import net.fortuna.ical4j.model.property.Comment;
@@ -695,11 +693,9 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 			net.fortuna.ical4j.model.Calendar calendar = builder.build(
 				inputStream);
 
-			ComponentList vEvents = calendar.getComponents(Component.VEVENT);
+			List<VEvent> vEvents = calendar.getComponents(Component.VEVENT);
 
-			for (Object vEventObject : vEvents) {
-				VEvent vEvent = (VEvent)vEventObject;
-
+			for (VEvent vEvent : vEvents) {
 				importICal4j(userId, groupId, vEvent);
 			}
 		}
@@ -1652,11 +1648,9 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 			List<DayAndPosition> dayPosList = new ArrayList<DayAndPosition>();
 
-			WeekDayList weekDays = recur.getDayList();
+			List<WeekDay> weekDays = recur.getDayList();
 
-			for (Object weekDayObject : weekDays) {
-				WeekDay weekDay = (WeekDay)weekDayObject;
-
+			for (WeekDay weekDay : weekDays) {
 				dayPosList.add(
 					new DayAndPosition(toCalendarWeekDay(weekDay), 0));
 			}
@@ -1671,11 +1665,9 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 			List<DayAndPosition> dayPosList = new ArrayList<DayAndPosition>();
 
-			WeekDayList weekDays = recur.getDayList();
+			List<WeekDay> weekDays = recur.getDayList();
 
-			for (Object weekDayObject : weekDays) {
-				WeekDay weekDay = (WeekDay)weekDayObject;
-
+			for (WeekDay weekDay : weekDays) {
 				dayPosList.add(
 					new DayAndPosition(toCalendarWeekDay(weekDay), 0));
 			}

@@ -59,9 +59,7 @@ List<DiffResult> targetResults = diffResults[1];
 					<table class="taglib-diff-table">
 
 					<%
-					List<String> changedLines = sourceResult.getChangedLines();
-
-					for (String changedLine : changedLines) {
+					for (String changedLine : sourceResult.getChangedLines()) {
 					%>
 
 						<tr class="lfr-top">
@@ -78,9 +76,7 @@ List<DiffResult> targetResults = diffResults[1];
 					<table class="taglib-diff-table">
 
 					<%
-					changedLines = targetResult.getChangedLines();
-
-					for (String changedLine : changedLines) {
+					for (String changedLine : targetResult.getChangedLines()) {
 					%>
 
 						<tr class="lfr-top">

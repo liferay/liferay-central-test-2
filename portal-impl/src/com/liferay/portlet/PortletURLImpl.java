@@ -970,7 +970,7 @@ public class PortletURLImpl
 		}
 
 		for (Map.Entry<String, String[]> entry :
-			_removePublicRenderParameters.entrySet()) {
+				_removePublicRenderParameters.entrySet()) {
 
 			String lastString = sb.stringAt(sb.index() - 1);
 

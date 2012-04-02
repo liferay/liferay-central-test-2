@@ -45,12 +45,12 @@ public class WebXML23Converter {
 		try {
 			String webXML24 = FileUtil.read(input);
 
-			Document doc = SAXReaderUtil.read(webXML24);
+			Document document = SAXReaderUtil.read(webXML24);
 
-			Element root = doc.getRootElement();
+			Element rootElement = document.getRootElement();
 
 			double version = GetterUtil.getDouble(
-				root.attributeValue("version"));
+				rootElement.attributeValue("version"));
 
 			if (version == 2.4) {
 				System.out.println("Convert web.xml because it is Servlet 2.4");
@@ -62,18 +62,19 @@ public class WebXML23Converter {
 				return;
 			}
 
-			List<Element> filterMappings = root.elements("filter-mapping");
+			List<Element> filterMappingElements = rootElement.elements(
+				"filter-mapping");
 
-			for (Element filterMapping : filterMappings) {
-				List<Element> dispatchers = filterMapping.elements(
-					"dispatcher");
+			for (Element filterMappingElement : filterMappingElements) {
+				List<Element> dispatcherElements =
+					filterMappingElement.elements("dispatcher");
 
-				for (Element dispatcher : dispatchers) {
-					dispatcher.detach();
+				for (Element dispatcherElement : dispatcherElements) {
+					dispatcherElement.detach();
 				}
 			}
 
-			String webXML23 = doc.formattedString();
+			String webXML23 = document.formattedString();
 
 			int x = webXML23.indexOf("<web-app");
 			int y = webXML23.indexOf(">", x);

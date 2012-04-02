@@ -299,7 +299,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 			List<MBMessage> messageList =
 				mbMessageLocalService.getCompanyMessages(
 					companyId, status, lastIntervalStart,
-						lastIntervalStart + max, comparator);
+					lastIntervalStart + max, comparator);
 
 			lastIntervalStart += max;
 			listNotExhausted = (messageList.size() == max);

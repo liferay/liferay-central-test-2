@@ -345,10 +345,9 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 		PortletURLImpl portletURL = new PortletURLImpl(
 			request, portletId, plid, PortletRequest.RENDER_PHASE);
 
-		Set<Map.Entry<String, String[]>> entries =
-			request.getParameterMap().entrySet();
+		Map<String, String[]> parameterMap = request.getParameterMap();
 
-		for (Map.Entry<String, String[]> entry : entries) {
+		for (Map.Entry<String, String[]> entry : parameterMap.entrySet()) {
 			String key = entry.getKey();
 
 			if (key.startsWith(namespace)) {

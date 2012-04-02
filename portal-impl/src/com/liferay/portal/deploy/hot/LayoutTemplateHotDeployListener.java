@@ -127,11 +127,9 @@ public class LayoutTemplateHotDeployListener extends BaseHotDeployListener {
 				"Unregistering layout templates for " + servletContextName);
 		}
 
-		for (ObjectValuePair<String, Boolean> layoutTemplateIdValuePair :
-			layoutTemplateIds) {
-
-			String layoutTemplateId = layoutTemplateIdValuePair.getKey();
-			Boolean standard = layoutTemplateIdValuePair.getValue();
+		for (ObjectValuePair<String, Boolean> ovp : layoutTemplateIds) {
+			String layoutTemplateId = ovp.getKey();
+			Boolean standard = ovp.getValue();
 
 			try {
 				LayoutTemplateLocalServiceUtil.uninstallLayoutTemplate(

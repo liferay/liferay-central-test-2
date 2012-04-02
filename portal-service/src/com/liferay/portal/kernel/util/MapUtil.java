@@ -219,10 +219,7 @@ public class MapUtil {
 
 		sb.append(StringPool.OPEN_CURLY_BRACE);
 
-		for (Object entryObject : map.entrySet()) {
-			Map.Entry<Object, Object> entry =
-				(Map.Entry<Object, Object>)entryObject;
-
+		for (Map.Entry<?, ?> entry : map.entrySet()) {
 			Object key = entry.getKey();
 			Object value = entry.getValue();
 

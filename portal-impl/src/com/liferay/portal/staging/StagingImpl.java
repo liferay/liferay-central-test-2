@@ -282,9 +282,7 @@ public class StagingImpl implements Staging {
 				}
 
 				if (includeChildren) {
-					List<Layout> children = layout.getAllChildren();
-
-					for (Layout childLayout : children) {
+					for (Layout childLayout : layout.getAllChildren()) {
 						if (!layouts.contains(childLayout)) {
 							layouts.add(childLayout);
 						}
@@ -292,13 +290,7 @@ public class StagingImpl implements Staging {
 				}
 			}
 
-			long[] layoutIds = new long[layouts.size()];
-
-			for (int i = 0; i < layouts.size(); i++) {
-				Layout curLayout = layouts.get(i);
-
-				layoutIds[i] = curLayout.getLayoutId();
-			}
+			long[] layoutIds = getLayoutIds(layouts);
 
 			if (layoutIds.length <= 0) {
 				throw new RemoteExportException(
@@ -914,11 +906,7 @@ public class StagingImpl implements Staging {
 			layouts.addAll(layout.getAllChildren());
 		}
 
-		long[] layoutIds = new long[layouts.size()];
-
-		for (int i = 0; i < layouts.size(); i++) {
-			layoutIds[i] = layouts.get(i).getLayoutId();
-		}
+		long[] layoutIds = getLayoutIds(layouts);
 
 		publishLayouts(
 			userId, layout.getGroupId(), liveGroupId, layout.isPrivateLayout(),
@@ -976,9 +964,7 @@ public class StagingImpl implements Staging {
 			}
 
 			if (includeChildren) {
-				List<Layout> children = layout.getAllChildren();
-
-				for (Layout childLayout : children) {
+				for (Layout childLayout : layout.getAllChildren()) {
 					if (!layouts.contains(childLayout)) {
 						layouts.add(childLayout);
 					}
@@ -986,13 +972,7 @@ public class StagingImpl implements Staging {
 			}
 		}
 
-		long[] layoutIds = new long[layouts.size()];
-
-		for (int i = 0; i < layouts.size(); i++) {
-			Layout curLayout = layouts.get(i);
-
-			layoutIds[i] = curLayout.getLayoutId();
-		}
+		long[] layoutIds = getLayoutIds(layouts);
 
 		publishLayouts(
 			userId, sourceGroupId, targetGroupId, privateLayout, layoutIds,
@@ -1482,6 +1462,18 @@ public class StagingImpl implements Staging {
 		return ParamUtil.getInteger(
 			portletRequest, param,
 			GetterUtil.getInteger(group.getTypeSettingsProperty(param)));
+	}
+
+	protected long[] getLayoutIds(List<Layout> layouts) {
+		long[] layoutIds = new long[layouts.size()];
+
+		for (int i = 0; i < layouts.size(); i++) {
+			Layout layout = layouts.get(i);
+
+			layoutIds[i] = layout.getLayoutId();
+		}
+
+		return layoutIds;
 	}
 
 	protected long getLong(

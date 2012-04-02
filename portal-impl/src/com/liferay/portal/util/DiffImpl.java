@@ -444,17 +444,15 @@ public class DiffImpl implements com.liferay.portal.kernel.util.Diff {
 		if (!aligned) {
 			for (Difference difference : differences) {
 				if (difference.getDeletedEnd() != Difference.NONE) {
-					deletedChars =
-						deletedChars +
+					deletedChars +=
 						(difference.getDeletedEnd() -
 							difference.getDeletedStart() + 1);
 				}
 
 				if (difference.getAddedEnd() != Difference.NONE) {
-					addedChars =
-						addedChars +
-						(difference.getAddedEnd() -
-							difference.getAddedStart() + 1);
+					addedChars +=
+						(difference.getAddedEnd() - difference.getAddedStart() +
+							1);
 				}
 			}
 		}
@@ -472,6 +470,7 @@ public class DiffImpl implements com.liferay.portal.kernel.util.Diff {
 		boolean targetChanged = false;
 
 		// Iterate over Differences between chars of these lines.
+
 		for (Difference difference : differences) {
 			if (difference.getAddedEnd() == Difference.NONE) {
 
@@ -543,12 +542,12 @@ public class DiffImpl implements com.liferay.portal.kernel.util.Diff {
 	}
 
 	private static List<String> _toList(String line) {
-		String[] stringArray = line.split(StringPool.BLANK);
+		String[] lineParts = line.split(StringPool.BLANK);
 
 		List<String> result = new ArrayList<String>();
 
-		for (int i = 1; i < stringArray.length; i++) {
-			result.add(stringArray[i]);
+		for (int i = 1; i < lineParts.length; i++) {
+			result.add(lineParts[i]);
 		}
 
 		return result;
@@ -561,8 +560,8 @@ public class DiffImpl implements com.liferay.portal.kernel.util.Diff {
 
 		StringBundler sb = new StringBundler(line.size());
 
-		for (String lineElement : line) {
-			sb.append(lineElement);
+		for (String linePart : line) {
+			sb.append(linePart);
 		}
 
 		return sb.toString();

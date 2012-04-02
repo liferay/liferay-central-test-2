@@ -216,16 +216,14 @@ public class ExportUsersAction extends PortletAction {
 
 		StringBundler sb = new StringBundler(users.size());
 
-		int i = 0;
+		for (int i = 0; i < users.size(); i++ ) {
+			User user = users.get(i);
 
-		for (User user : users) {
 			sb.append(getUserCSV(user));
 
 			percentage = Math.min(10 + (i * 90) / total, 99);
 
 			progressTracker.updateProgress(percentage);
-
-			i++;
 		}
 
 		progressTracker.finish();

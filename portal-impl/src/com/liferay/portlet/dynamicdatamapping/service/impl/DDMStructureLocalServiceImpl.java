@@ -415,6 +415,7 @@ public class DDMStructureLocalServiceImpl
 
 		for (Node node : nodes) {
 			Element element = (Element)node;
+
 			String name = element.attributeValue("name");
 
 			XPath templateXPath = SAXReaderUtil.createXPath(

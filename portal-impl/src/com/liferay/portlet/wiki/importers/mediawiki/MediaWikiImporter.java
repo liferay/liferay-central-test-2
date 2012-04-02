@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.xml.Attribute;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.DocumentException;
 import com.liferay.portal.kernel.xml.Element;
@@ -631,18 +632,24 @@ public class MediaWikiImporter implements WikiImporter {
 
 		List<String> namespaces = new ArrayList<String>();
 
-		Element siteinfoEl = root.element("siteinfo");
+		Element siteinfoElement = root.element("siteinfo");
 
-		if (siteinfoEl == null) {
+		if (siteinfoElement == null) {
 			throw new ImportFilesException("Invalid pages XML file");
 		}
 
-		List<Element> namespaceElements = siteinfoEl.element(
-			"namespaces").elements("namespace");
+		Element namespacesElement = siteinfoElement.element("namespaces");
 
-		for (Element namespace : namespaceElements) {
-			if (!namespace.attribute("key").getData().equals("0")) {
-				namespaces.add(namespace.getText());
+		List<Element> namespaceElements = namespacesElement.elements(
+			"namespace");
+
+		for (Element namespaceElement : namespaceElements) {
+			Attribute attribute = namespaceElement.attribute("key");
+
+			String value = attribute.getValue();
+
+			if (!value.equals("0")) {
+				namespaces.add(namespaceElement.getText());
 			}
 		}
 

@@ -219,14 +219,14 @@ public class ModelHintsImpl implements ModelHints {
 			}
 		}
 
-		Document doc = _saxReader.read(is);
+		Document document = _saxReader.read(is);
 
-		Element root = doc.getRootElement();
+		Element rootElement = document.getRootElement();
 
-		List<Element> rootElements = root.elements("hint-collection");
+		List<Element> rootElements = rootElement.elements("hint-collection");
 
-		for (Element hintCollection : rootElements) {
-			String name = hintCollection.attributeValue("name");
+		for (Element hintCollectionElement : rootElements) {
+			String name = hintCollectionElement.attributeValue("name");
 
 			Map<String, String> hints = _hintCollections.get(name);
 
@@ -236,20 +236,20 @@ public class ModelHintsImpl implements ModelHints {
 				_hintCollections.put(name, hints);
 			}
 
-			List<Element> hintElements = hintCollection.elements("hint");
+			List<Element> hintElements = hintCollectionElement.elements("hint");
 
-			for (Element hint : hintElements) {
-				String hintName = hint.attributeValue("name");
-				String hintValue = hint.getText();
+			for (Element hintElement : hintElements) {
+				String hintName = hintElement.attributeValue("name");
+				String hintValue = hintElement.getText();
 
 				hints.put(hintName, hintValue);
 			}
 		}
 
-		rootElements = root.elements("model");
+		rootElements = rootElement.elements("model");
 
-		for (Element model : rootElements) {
-			String name = model.attributeValue("name");
+		for (Element modelElement : rootElements) {
+			String name = modelElement.attributeValue("name");
 
 			if (classLoader != ModelHintsImpl.class.getClassLoader()) {
 				ClassNameLocalServiceUtil.getClassName(name);
@@ -259,14 +259,15 @@ public class ModelHintsImpl implements ModelHints {
 
 			_defaultHints.put(name, defaultHints);
 
-			Element defaultHintsEl = model.element("default-hints");
+			Element defaultHintsElement = modelElement.element("default-hints");
 
-			if (defaultHintsEl != null) {
-				List<Element> hintElements = defaultHintsEl.elements("hint");
+			if (defaultHintsElement != null) {
+				List<Element> hintElements = defaultHintsElement.elements(
+					"hint");
 
-				for (Element hint : hintElements) {
-					String hintName = hint.attributeValue("name");
-					String hintValue = hint.getText();
+				for (Element hintElement : hintElements) {
+					String hintName = hintElement.attributeValue("name");
+					String hintValue = hintElement.getText();
 
 					defaultHints.put(hintName, hintValue);
 				}
@@ -283,44 +284,45 @@ public class ModelHintsImpl implements ModelHints {
 
 			_models.add(name);
 
-			List<Element> modelElements = model.elements("field");
+			List<Element> modelElements = modelElement.elements("field");
 
-			for (Element field : modelElements) {
-				String fieldName = field.attributeValue("name");
-				String fieldType = field.attributeValue("type");
+			for (Element fieldElement : modelElements) {
+				String fieldName = fieldElement.attributeValue("name");
+				String fieldType = fieldElement.attributeValue("type");
 				boolean fieldLocalized = GetterUtil.getBoolean(
-					field.attributeValue("localized"));
+					fieldElement.attributeValue("localized"));
 
 				Map<String, String> fieldHints = new HashMap<String, String>();
 
 				fieldHints.putAll(defaultHints);
 
-				List<Element> fieldElements = field.elements("hint-collection");
+				List<Element> fieldElements = fieldElement.elements(
+					"hint-collection");
 
-				for (Element hintCollection : fieldElements) {
+				for (Element hintCollectionElement : fieldElements) {
 					Map<String, String> hints = _hintCollections.get(
-						hintCollection.attributeValue("name"));
+						hintCollectionElement.attributeValue("name"));
 
 					fieldHints.putAll(hints);
 				}
 
-				fieldElements = field.elements("hint");
+				fieldElements = fieldElement.elements("hint");
 
-				for (Element hint : fieldElements) {
-					String hintName = hint.attributeValue("name");
-					String hintValue = hint.getText();
+				for (Element hintElement : fieldElements) {
+					String hintName = hintElement.attributeValue("name");
+					String hintValue = hintElement.getText();
 
 					fieldHints.put(hintName, hintValue);
 				}
 
 				Tuple fieldSanitize = null;
 
-				Element sanitize = field.element("sanitize");
+				Element sanitizeElement = fieldElement.element("sanitize");
 
-				if (sanitize != null) {
-					String contentType = sanitize.attributeValue(
+				if (sanitizeElement != null) {
+					String contentType = sanitizeElement.attributeValue(
 						"content-type");
-					String modes = sanitize.attributeValue("modes");
+					String modes = sanitizeElement.attributeValue("modes");
 
 					fieldSanitize = new Tuple(fieldName, contentType, modes);
 				}
@@ -328,19 +330,20 @@ public class ModelHintsImpl implements ModelHints {
 				Map<String, Tuple> fieldValidators =
 					new TreeMap<String, Tuple>();
 
-				fieldElements = field.elements("validator");
+				fieldElements = fieldElement.elements("validator");
 
-				for (Element validator : fieldElements) {
-					String validatorName = validator.attributeValue("name");
+				for (Element validatorElement : fieldElements) {
+					String validatorName = validatorElement.attributeValue(
+						"name");
 
 					if (Validator.isNull(validatorName)) {
 						continue;
 					}
 
 					String validatorErrorMessage = GetterUtil.getString(
-						validator.attributeValue("error-message"));
+						validatorElement.attributeValue("error-message"));
 					String validatorValue = GetterUtil.getString(
-						validator.getText());
+						validatorElement.getText());
 					boolean customValidator = isCustomValidator(validatorName);
 
 					if (customValidator) {
@@ -354,7 +357,7 @@ public class ModelHintsImpl implements ModelHints {
 					fieldValidators.put(validatorName, fieldValidator);
 				}
 
-				fields.put(fieldName + _ELEMENTS_SUFFIX, field);
+				fields.put(fieldName + _ELEMENTS_SUFFIX, fieldElement);
 				fields.put(fieldName + _TYPE_SUFFIX, fieldType);
 				fields.put(fieldName + _LOCALIZATION_SUFFIX, fieldLocalized);
 				fields.put(fieldName + _HINTS_SUFFIX, fieldHints);

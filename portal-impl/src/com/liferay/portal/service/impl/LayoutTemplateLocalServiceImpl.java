@@ -161,7 +161,7 @@ public class LayoutTemplateLocalServiceImpl
 					_themesCustom.size());
 
 		for (Map.Entry<String, LayoutTemplate> entry :
-			_portalCustom.entrySet()) {
+				_portalCustom.entrySet()) {
 
 			String layoutTemplateId = entry.getKey();
 			LayoutTemplate layoutTemplate = entry.getValue();
@@ -196,7 +196,7 @@ public class LayoutTemplateLocalServiceImpl
 		}
 
 		for (Map.Entry<String, LayoutTemplate> entry :
-			_themesCustom.entrySet()) {
+				_themesCustom.entrySet()) {
 
 			String layoutTemplateId = entry.getKey();
 
@@ -272,7 +272,7 @@ public class LayoutTemplateLocalServiceImpl
 						pluginPackage);
 
 				for (ObjectValuePair<String, Boolean> ovp :
-					curLayoutTemplateIds) {
+						curLayoutTemplateIds) {
 
 					if (!layoutTemplateIds.contains(ovp)) {
 						layoutTemplateIds.add(ovp);
@@ -289,8 +289,9 @@ public class LayoutTemplateLocalServiceImpl
 
 	public void readLayoutTemplate(
 		String servletContextName, ServletContext servletContext,
-		Set<ObjectValuePair<String, Boolean>> layoutTemplateIds, Element el,
-		boolean standard, String themeId, PluginPackage pluginPackage) {
+		Set<ObjectValuePair<String, Boolean>> layoutTemplateIds,
+		Element element, boolean standard, String themeId,
+		PluginPackage pluginPackage) {
 
 		Map<String, LayoutTemplate> layoutTemplates = null;
 
@@ -319,10 +320,12 @@ public class LayoutTemplateLocalServiceImpl
 			}
 		}
 
-		List<Element> layoutTemplateElements = el.elements("layout-template");
+		List<Element> layoutTemplateElements = element.elements(
+						"layout-template");
 
-		for (Element layoutTemplate : layoutTemplateElements) {
-			String layoutTemplateId = layoutTemplate.attributeValue("id");
+		for (Element layoutTemplateElement : layoutTemplateElements) {
+			String layoutTemplateId = layoutTemplateElement.attributeValue(
+				"id");
 
 			if (layoutTemplateIds != null) {
 				ObjectValuePair<String, Boolean> ovp =
@@ -354,16 +357,16 @@ public class LayoutTemplateLocalServiceImpl
 			layoutTemplateModel.setStandard(standard);
 			layoutTemplateModel.setThemeId(themeId);
 			layoutTemplateModel.setName(GetterUtil.getString(
-				layoutTemplate.attributeValue("name"),
+				layoutTemplateElement.attributeValue("name"),
 				layoutTemplateModel.getName()));
 			layoutTemplateModel.setTemplatePath(GetterUtil.getString(
-				layoutTemplate.elementText("template-path"),
+				layoutTemplateElement.elementText("template-path"),
 				layoutTemplateModel.getTemplatePath()));
 			layoutTemplateModel.setWapTemplatePath(GetterUtil.getString(
-				layoutTemplate.elementText("wap-template-path"),
+				layoutTemplateElement.elementText("wap-template-path"),
 				layoutTemplateModel.getWapTemplatePath()));
 			layoutTemplateModel.setThumbnailPath(GetterUtil.getString(
-				layoutTemplate.elementText("thumbnail-path"),
+				layoutTemplateElement.elementText("thumbnail-path"),
 				layoutTemplateModel.getThumbnailPath()));
 
 			String content = null;
@@ -435,13 +438,14 @@ public class LayoutTemplateLocalServiceImpl
 				}
 			}
 
-			Element rolesEl = layoutTemplate.element("roles");
+			Element rolesElement = layoutTemplateElement.element("roles");
 
-			if (rolesEl != null) {
-				List<Element> roleNames = rolesEl.elements("role-name");
+			if (rolesElement != null) {
+				List<Element> roleNameElements = rolesElement.elements(
+					"role-name");
 
-				for (Element roleNameEl : roleNames) {
-					pluginSetting.addRole(roleNameEl.getText());
+				for (Element roleNameElement : roleNameElements) {
+					pluginSetting.addRole(roleNameElement.getText());
 				}
 			}
 
@@ -563,24 +567,24 @@ public class LayoutTemplateLocalServiceImpl
 			return layoutTemplateIds;
 		}
 
-		Document doc = SAXReaderUtil.read(xml, true);
+		Document document = SAXReaderUtil.read(xml, true);
 
-		Element root = doc.getRootElement();
+		Element rootElement = document.getRootElement();
 
-		Element standardEl = root.element("standard");
+		Element standardElement = rootElement.element("standard");
 
-		if (standardEl != null) {
+		if (standardElement != null) {
 			readLayoutTemplate(
 				servletContextName, servletContext, layoutTemplateIds,
-				standardEl, true, null, pluginPackage);
+				standardElement, true, null, pluginPackage);
 		}
 
-		Element customEl = root.element("custom");
+		Element customElement = rootElement.element("custom");
 
-		if (customEl != null) {
+		if (customElement != null) {
 			readLayoutTemplate(
-				servletContextName, servletContext, layoutTemplateIds, customEl,
-				false, null, pluginPackage);
+				servletContextName, servletContext, layoutTemplateIds,
+				customElement, false, null, pluginPackage);
 		}
 
 		return layoutTemplateIds;

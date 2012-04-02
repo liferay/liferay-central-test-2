@@ -146,7 +146,7 @@ public class PortletResourceBundles {
 		}
 
 		for (Map.Entry<String, Map<String, ResourceBundle>> entry :
-			_resourceBundles.entrySet()) {
+				_resourceBundles.entrySet()) {
 
 			Map<String, ResourceBundle> resourceBundles = entry.getValue();
 

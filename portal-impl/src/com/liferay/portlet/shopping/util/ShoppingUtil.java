@@ -199,7 +199,7 @@ public class ShoppingUtil {
 				new HashMap<ShoppingCartItem, Integer>();
 
 			for (Map.Entry<ShoppingCartItem, Integer> entry :
-				items.entrySet()) {
+					items.entrySet()) {
 
 				ShoppingCartItem cartItem = entry.getKey();
 				Integer count = entry.getValue();
@@ -472,7 +472,7 @@ public class ShoppingUtil {
 			double subtotal = 0.0;
 
 			for (Map.Entry<ShoppingCartItem, Integer> entry :
-				items.entrySet()) {
+					items.entrySet()) {
 
 				ShoppingCartItem cartItem = entry.getKey();
 				Integer count = entry.getValue();
