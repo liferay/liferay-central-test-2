@@ -167,7 +167,6 @@ public abstract class BasePreferencesImpl implements Serializable {
 			throw new ReadOnlyException(key);
 		}
 		else {
-			// Lazy clone
 			preference = (Preference)preference.clone();
 
 			modifiedPreferences.put(key, preference);
@@ -199,7 +198,6 @@ public abstract class BasePreferencesImpl implements Serializable {
 			throw new ReadOnlyException(key);
 		}
 		else {
-			// Lazy clone
 			preference = (Preference)preference.clone();
 
 			modifiedPreferences.put(key, preference);
