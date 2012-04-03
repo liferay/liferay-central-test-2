@@ -204,7 +204,7 @@ public class CalIndexer extends BaseIndexer {
 			return;
 		}
 
-		Collection<Document> documents = new ArrayList<Document>();
+		Collection<Document> documents = new ArrayList<Document>(events.size());
 
 		for (CalEvent event : events) {
 			Document document = getDocument(event);

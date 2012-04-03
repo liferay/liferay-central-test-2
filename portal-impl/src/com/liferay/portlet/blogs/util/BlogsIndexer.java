@@ -255,7 +255,8 @@ public class BlogsIndexer extends BaseIndexer {
 			return;
 		}
 
-		Collection<Document> documents = new ArrayList<Document>();
+		Collection<Document> documents = new ArrayList<Document>(
+			entries.size());
 
 		for (BlogsEntry entry : entries) {
 			Document document = getDocument(entry);

@@ -257,7 +257,8 @@ public class BookmarksIndexer extends BaseIndexer {
 			return;
 		}
 
-		Collection<Document> documents = new ArrayList<Document>();
+		Collection<Document> documents = new ArrayList<Document>(
+			entries.size());
 
 		for (BookmarksEntry entry : entries) {
 			Document document = getDocument(entry);

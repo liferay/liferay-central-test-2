@@ -362,7 +362,8 @@ public class OrganizationIndexer extends BaseIndexer {
 			return;
 		}
 
-		Collection<Document> documents = new ArrayList<Document>();
+		Collection<Document> documents = new ArrayList<Document>(
+			organizations.size());
 
 		for (Organization organization : organizations) {
 			Document document = getDocument(organization);

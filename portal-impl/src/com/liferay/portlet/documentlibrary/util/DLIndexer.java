@@ -602,7 +602,8 @@ public class DLIndexer extends BaseIndexer {
 			return;
 		}
 
-		Collection<Document> documents = new ArrayList<Document>();
+		Collection<Document> documents = new ArrayList<Document>(
+			dlFileEntries.size());
 
 		for (DLFileEntry dlFileEntry : dlFileEntries) {
 			Document document = getDocument(dlFileEntry);

@@ -393,7 +393,7 @@ public class WikiIndexer extends BaseIndexer {
 			return;
 		}
 
-		Collection<Document> documents = new ArrayList<Document>();
+		Collection<Document> documents = new ArrayList<Document>(pages.size());
 
 		for (WikiPage page : pages) {
 			Document document = getDocument(page);

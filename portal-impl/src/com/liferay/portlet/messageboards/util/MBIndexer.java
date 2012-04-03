@@ -504,7 +504,8 @@ public class MBIndexer extends BaseIndexer {
 			return;
 		}
 
-		Collection<Document> documents = new ArrayList<Document>();
+		Collection<Document> documents = new ArrayList<Document>(
+			messages.size());
 
 		for (MBMessage message : messages) {
 			Document document = getDocument(message);

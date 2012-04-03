@@ -467,7 +467,7 @@ public class UserIndexer extends BaseIndexer {
 			return;
 		}
 
-		Collection<Document> documents = new ArrayList<Document>();
+		Collection<Document> documents = new ArrayList<Document>(users.size());
 
 		for (User user : users) {
 			if (user.isDefaultUser()) {

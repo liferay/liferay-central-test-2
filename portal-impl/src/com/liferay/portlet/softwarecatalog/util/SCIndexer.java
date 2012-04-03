@@ -286,7 +286,8 @@ public class SCIndexer extends BaseIndexer {
 			return;
 		}
 
-		Collection<Document> documents = new ArrayList<Document>();
+		Collection<Document> documents = new ArrayList<Document>(
+			productEntries.size());
 
 		for (SCProductEntry productEntry : productEntries) {
 			Document document = getDocument(productEntry);

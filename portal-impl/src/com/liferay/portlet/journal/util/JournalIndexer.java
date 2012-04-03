@@ -587,7 +587,8 @@ public class JournalIndexer extends BaseIndexer {
 			return;
 		}
 
-		Collection<Document> documents = new ArrayList<Document>();
+		Collection<Document> documents = new ArrayList<Document>(
+			articles.size());
 
 		for (JournalArticle article : articles) {
 			if (!article.isIndexable()) {
