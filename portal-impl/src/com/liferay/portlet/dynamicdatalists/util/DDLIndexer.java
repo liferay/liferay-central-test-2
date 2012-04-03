@@ -14,8 +14,13 @@
 
 package com.liferay.portlet.dynamicdatalists.util;
 
-import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.Projection;
+import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.ProjectionList;
+import com.liferay.portal.kernel.dao.orm.Property;
+import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -25,11 +30,11 @@ import com.liferay.portal.kernel.search.BooleanQuery;
 import com.liferay.portal.kernel.search.BooleanQueryFactoryUtil;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Field;
-import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.Summary;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -144,18 +149,16 @@ public class DDLIndexer extends BaseIndexer {
 		addSearchTerm(searchQuery, searchContext, Field.USER_NAME, false);
 	}
 
-	protected void addDDMAttributes(
-			Document document, DDLRecordVersion recordVersion)
-		throws PortalException, SystemException {
+	protected void addReindexCriteria(
+		DynamicQuery dynamicQuery, long companyId) {
 
-		DDLRecordSet recordSet = recordVersion.getRecordSet();
+		Property companyIdProperty = PropertyFactoryUtil.forName("companyId");
 
-		DDMStructure ddmStructure = recordSet.getDDMStructure();
+		dynamicQuery.add(companyIdProperty.eq(companyId));
 
-		Fields fields = StorageEngineUtil.getFields(
-			recordVersion.getDDMStorageId());
+		Property statusProperty = PropertyFactoryUtil.forName("status");
 
-		DDMIndexerUtil.addAttributes(document, ddmStructure, fields);
+		dynamicQuery.add(statusProperty.eq(WorkflowConstants.STATUS_APPROVED));
 	}
 
 	@Override
@@ -169,23 +172,23 @@ public class DDLIndexer extends BaseIndexer {
 	protected Document doGetDocument(Object obj) throws Exception {
 		DDLRecord record = (DDLRecord)obj;
 
-		if (_log.isDebugEnabled()) {
-			_log.debug("Indexing document " + record);
-		}
-
 		Document document = getBaseModelDocument(PORTLET_ID, record);
 
 		DDLRecordVersion recordVersion = record.getRecordVersion();
 
 		document.addKeyword(Field.STATUS, recordVersion.getStatus());
 		document.addKeyword(Field.VERSION, recordVersion.getVersion());
+
 		document.addKeyword("recordSetId", recordVersion.getRecordSetId());
 
-		addDDMAttributes(document, recordVersion);
+		DDLRecordSet recordSet = recordVersion.getRecordSet();
 
-		if (_log.isDebugEnabled()) {
-			_log.debug("Document " + record + " indexed successfully");
-		}
+		DDMStructure ddmStructure = recordSet.getDDMStructure();
+
+		Fields fields = StorageEngineUtil.getFields(
+			recordVersion.getDDMStorageId());
+
+		DDMIndexerUtil.addAttributes(document, ddmStructure, fields);
 
 		return document;
 	}
@@ -255,40 +258,83 @@ public class DDLIndexer extends BaseIndexer {
 			return LanguageUtil.format(locale, "new-record-for-list-x", name);
 		}
 		catch (Exception e) {
-			_log.error(e);
+			_log.error(e, e);
 		}
 
 		return StringPool.BLANK;
 	}
 
 	protected void reindexRecords(long companyId) throws Exception {
-		int recordsCount = DDLRecordLocalServiceUtil.getCompanyRecordsCount(
-			companyId);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			DDLRecord.class, PortalClassLoaderUtil.getClassLoader());
 
-		int recordPages = recordsCount / Indexer.DEFAULT_INTERVAL;
+		Projection minRecordIdProjection = ProjectionFactoryUtil.min(
+			"recordId");
+		Projection maxRecordIdProjection = ProjectionFactoryUtil.max(
+			"recordId");
 
-		for (int i = 0; i <= recordPages; i++) {
-			int start = (i * Indexer.DEFAULT_INTERVAL);
-			int end = start + Indexer.DEFAULT_INTERVAL;
+		ProjectionList projectionList = ProjectionFactoryUtil.projectionList();
 
-			reindexRecords(companyId, start, end);
+		projectionList.add(minRecordIdProjection);
+		projectionList.add(maxRecordIdProjection);
+
+		dynamicQuery.setProjection(projectionList);
+
+		addReindexCriteria(dynamicQuery, companyId);
+
+		List<Object[]> results = DDLRecordLocalServiceUtil.dynamicQuery(
+			dynamicQuery);
+
+		Object[] minAndMaxRecordIds = results.get(0);
+
+		if ((minAndMaxRecordIds[0] == null) ||
+			(minAndMaxRecordIds[1] == null)) {
+
+			return;
+		}
+
+		long minRecordId = (Long)minAndMaxRecordIds[0];
+		long maxRecordId = (Long)minAndMaxRecordIds[1];
+
+		long startRecordId = minRecordId;
+		long endRecordId = startRecordId + DEFAULT_INTERVAL;
+
+		while (startRecordId <= maxRecordId) {
+			reindexRecords(companyId, startRecordId, endRecordId);
+
+			startRecordId = endRecordId;
+			endRecordId += DEFAULT_INTERVAL;
 		}
 	}
 
-	protected void reindexRecords(long companyId, int start, int end)
+	protected void reindexRecords(
+			long companyId, long startRecordId, long endRecordId)
 		throws Exception {
 
-		Collection<Document> documents = new ArrayList<Document>();
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			DDLRecord.class, PortalClassLoaderUtil.getClassLoader());
 
-		List<DDLRecord> records = DDLRecordLocalServiceUtil.getCompanyRecords(
-			companyId, start, end, null);
+		Property property = PropertyFactoryUtil.forName("recordId");
+
+		dynamicQuery.add(property.ge(startRecordId));
+		dynamicQuery.add(property.lt(endRecordId));
+
+		addReindexCriteria(dynamicQuery, companyId);
+
+		List<DDLRecord> records = DDLRecordLocalServiceUtil.dynamicQuery(
+			dynamicQuery);
+
+		if (records.isEmpty()) {
+			return;
+		}
+
+		Collection<Document> documents = new ArrayList<Document>(
+			records.size());
 
 		for (DDLRecord record : records) {
 			Document document = getDocument(record);
 
-			if (document != null) {
-				documents.add(document);
-			}
+			documents.add(document);
 		}
 
 		SearchEngineUtil.updateDocuments(
