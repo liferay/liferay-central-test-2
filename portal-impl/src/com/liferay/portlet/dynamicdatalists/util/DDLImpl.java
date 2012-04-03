@@ -191,8 +191,8 @@ public class DDLImpl implements DDL {
 			catch (NoSuchRecordException nsre) {
 				if (_log.isWarnEnabled()) {
 					_log.warn(
-						"DDL record index is stale and contais record { "+
-							recordId + "}");
+						"DDL record index is stale and contains record " +
+							recordId);
 				}
 
 				Indexer indexer = IndexerRegistryUtil.getIndexer(
