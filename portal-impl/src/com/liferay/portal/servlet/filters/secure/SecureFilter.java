@@ -64,7 +64,7 @@ public class SecureFilter extends BasePortalFilter {
 		_digestAuthEnabled = GetterUtil.getBoolean(
 			filterConfig.getInitParameter("digest_auth"));
 		_usePermissionChecker = GetterUtil.getBoolean(
-				filterConfig.getInitParameter("use_permission_checker"));
+			filterConfig.getInitParameter("use_permission_checker"));
 
 		String propertyPrefix = filterConfig.getInitParameter(
 			"portal_property_prefix");
