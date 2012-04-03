@@ -1514,7 +1514,7 @@ public class ServiceBuilder {
 				"com.liferay.portal.kernel.repository.model.Folder")) {
 		}
 		else if (returnTypeGenericsName.startsWith(
-				"com.liferay.portal.kernel.repository.model.")) {
+					"com.liferay.portal.kernel.repository.model.")) {
 
 			return false;
 		}

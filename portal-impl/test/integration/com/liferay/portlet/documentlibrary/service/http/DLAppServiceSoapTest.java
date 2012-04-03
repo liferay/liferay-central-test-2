@@ -74,17 +74,6 @@ public class DLAppServiceSoapTest {
 		}
 	}
 
-	protected static DLAppServiceSoap getDLAppServiceSoap() throws Exception {
-		DLAppServiceSoapServiceLocator locator =
-			new DLAppServiceSoapServiceLocator();
-
-		DLAppServiceSoap service = locator.getPortlet_DL_DLAppService(
-			TestPropsValues.getSoapURL(
-				locator.getPortlet_DL_DLAppServiceWSDDServiceName()));
-
-		return service;
-	}
-
 	@Test
 	public void testAddFileEntry() throws Exception {
 		addFileEntry("Test Add.txt");
@@ -120,6 +109,17 @@ public class DLAppServiceSoapTest {
 			TestPropsValues.getGroupId(), folderId, title,
 			ContentTypes.TEXT_PLAIN, title, description, changeLog, bytes,
 			serviceContext);
+	}
+
+	protected static DLAppServiceSoap getDLAppServiceSoap() throws Exception {
+		DLAppServiceSoapServiceLocator locator =
+			new DLAppServiceSoapServiceLocator();
+
+		DLAppServiceSoap service = locator.getPortlet_DL_DLAppService(
+			TestPropsValues.getSoapURL(
+				locator.getPortlet_DL_DLAppServiceWSDDServiceName()));
+
+		return service;
 	}
 
 	private static final String _CONTENT =

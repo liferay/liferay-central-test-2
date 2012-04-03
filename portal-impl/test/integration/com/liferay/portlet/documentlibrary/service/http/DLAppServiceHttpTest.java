@@ -14,11 +14,6 @@
 
 package com.liferay.portlet.documentlibrary.service.http;
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.kernel.util.ContentTypes;
@@ -29,6 +24,11 @@ import com.liferay.portal.test.ExecutionTestListeners;
 import com.liferay.portal.test.LiferayIntegrationJUnitTestRunner;
 import com.liferay.portal.util.TestPropsValues;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
+
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
 /**
  * @author Alexander Chow
@@ -108,8 +108,8 @@ public class DLAppServiceHttpTest {
 		serviceContext.setAddGuestPermissions(true);
 
 		return DLAppServiceHttp.addFileEntry(
-			TestPropsValues.getHttpPrincipal(), TestPropsValues.getGroupId(), 
-			folderId, title, ContentTypes.TEXT_PLAIN, title, description, 
+			TestPropsValues.getHttpPrincipal(), TestPropsValues.getGroupId(),
+			folderId, title, ContentTypes.TEXT_PLAIN, title, description,
 			changeLog, bytes, serviceContext);
 	}
 
