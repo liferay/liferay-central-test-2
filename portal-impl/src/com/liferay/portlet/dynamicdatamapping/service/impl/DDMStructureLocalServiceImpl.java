@@ -317,7 +317,7 @@ public class DDMStructureLocalServiceImpl
 	public List<DDMStructure> getStructures(long[] groupIds)
 		throws SystemException {
 
-		return ddmStructurePersistence.findByGroupIds(groupIds);
+		return ddmStructurePersistence.findByGroupId(groupIds);
 	}
 
 	public int getStructuresCount(long groupId) throws SystemException {
