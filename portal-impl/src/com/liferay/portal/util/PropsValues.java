@@ -864,13 +864,13 @@ public class PropsValues {
 
 	public static final String LOGIN_EMAIL_FROM_NAME = PropsUtil.get(PropsKeys.LOGIN_EMAIL_FROM_NAME);
 
-	public static String[] LOGIN_FORM_NAVIGATION_POST = PropsUtil.getArray(PropsKeys.LOGIN_FORM_NAVIGATION_POST);
-
-	public static String[] LOGIN_FORM_NAVIGATION_PRE = PropsUtil.getArray(PropsKeys.LOGIN_FORM_NAVIGATION_PRE);
-
 	public static final String[] LOGIN_EVENTS_POST = PropsUtil.getArray(PropsKeys.LOGIN_EVENTS_POST);
 
 	public static final String[] LOGIN_EVENTS_PRE = PropsUtil.getArray(PropsKeys.LOGIN_EVENTS_PRE);
+
+	public static String[] LOGIN_FORM_NAVIGATION_POST = PropsUtil.getArray(PropsKeys.LOGIN_FORM_NAVIGATION_POST);
+
+	public static String[] LOGIN_FORM_NAVIGATION_PRE = PropsUtil.getArray(PropsKeys.LOGIN_FORM_NAVIGATION_PRE);
 
 	public static final String[] LOGOUT_EVENTS_POST = PropsUtil.getArray(PropsKeys.LOGOUT_EVENTS_POST);
 
@@ -1096,9 +1096,9 @@ public class PropsValues {
 
 	public static final boolean PASSWORDS_DEFAULT_POLICY_ALLOW_DICTIONARY_WORDS = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.PASSWORDS_DEFAULT_POLICY_ALLOW_DICTIONARY_WORDS));
 
-	public static final boolean PASSWORDS_DEFAULT_POLICY_CHANGEABLE = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.PASSWORDS_DEFAULT_POLICY_CHANGEABLE));
-
 	public static final boolean PASSWORDS_DEFAULT_POLICY_CHANGE_REQUIRED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.PASSWORDS_DEFAULT_POLICY_CHANGE_REQUIRED));
+
+	public static final boolean PASSWORDS_DEFAULT_POLICY_CHANGEABLE = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.PASSWORDS_DEFAULT_POLICY_CHANGEABLE));
 
 	public static final boolean PASSWORDS_DEFAULT_POLICY_CHECK_SYNTAX = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.PASSWORDS_DEFAULT_POLICY_CHECK_SYNTAX));
 

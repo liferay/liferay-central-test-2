@@ -1533,9 +1533,9 @@ public interface PropsKeys {
 
 	public static final String PASSWORDS_DEFAULT_POLICY_ALLOW_DICTIONARY_WORDS = "passwords.default.policy.allow.dictionary.words";
 
-	public static final String PASSWORDS_DEFAULT_POLICY_CHANGEABLE = "passwords.default.policy.changeable";
-
 	public static final String PASSWORDS_DEFAULT_POLICY_CHANGE_REQUIRED = "passwords.default.policy.change.required";
+
+	public static final String PASSWORDS_DEFAULT_POLICY_CHANGEABLE = "passwords.default.policy.changeable";
 
 	public static final String PASSWORDS_DEFAULT_POLICY_CHECK_SYNTAX = "passwords.default.policy.check.syntax";
 
