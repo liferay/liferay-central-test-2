@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.kernel.workflow.WorkflowHandlerRegistryUtil;
 import com.liferay.portal.model.CompanyConstants;
@@ -169,6 +170,13 @@ public class DDLRecordLocalServiceImpl
 				DDLRecord.class.getName(), recordVersion.getPrimaryKey());
 		}
 
+		// Indexer
+
+		Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
+			DDLRecord.class);
+
+		indexer.delete(record);
+
 		// Document library
 
 		try {
@@ -181,13 +189,6 @@ public class DDLRecordLocalServiceImpl
 				_log.debug(nsde.getMessage());
 			}
 		}
-
-		// Indexer
-
-		Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
-			DDLRecord.class);
-
-		indexer.delete(record);
 	}
 
 	public void deleteRecord(long recordId)
@@ -502,7 +503,9 @@ public class DDLRecordLocalServiceImpl
 			}
 		}
 		else {
-			if (record.getVersion().equals(recordVersion.getVersion())) {
+			if (Validator.equals(
+					record.getVersion(), recordVersion.getVersion())) {
+
 				String newVersion = DDLRecordConstants.VERSION_DEFAULT;
 
 				List<DDLRecordVersion> approvedRecordVersions =
@@ -521,7 +524,8 @@ public class DDLRecordLocalServiceImpl
 
 			// Indexer
 
-			if (recordVersion.getVersion().equals(
+			if (Validator.equals(
+					recordVersion.getVersion(),
 					DDLRecordConstants.VERSION_DEFAULT)) {
 
 				Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
