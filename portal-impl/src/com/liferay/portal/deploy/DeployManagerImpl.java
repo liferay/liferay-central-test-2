@@ -20,7 +20,6 @@ import com.liferay.portal.kernel.deploy.auto.AutoDeployListener;
 import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.plugin.PluginPackageUtil;
-import com.liferay.portal.tools.deploy.PortletDeployer;
 
 import java.io.File;
 
@@ -104,7 +103,5 @@ public class DeployManagerImpl implements DeployManager {
 
 		DeployUtil.undeploy(ServerDetector.getServerId(), deployDir);
 	}
-
-	private PortletDeployer _portletDeployer = new PortletDeployer();
 
 }
