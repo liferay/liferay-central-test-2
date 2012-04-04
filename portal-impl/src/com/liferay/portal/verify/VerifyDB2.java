@@ -17,6 +17,7 @@ package com.liferay.portal.verify;
 import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
+import com.liferay.portal.kernel.util.StringBundler;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -44,12 +45,14 @@ public class VerifyDB2 extends VerifyProcess {
 		try {
 			con = DataAccess.getConnection();
 
-			ps = con.prepareStatement(
-				"SELECT tbname, name, coltype, length " +
-				"FROM sysibm.syscolumns " +
-				"WHERE tbcreator = " +
-				"(SELECT DISTINCT CURRENT SCHEMA FROM sysibm.sysschemata) " +
-				"AND coltype = 'VARCHAR' and length = 500");
+			StringBundler sb = new StringBundler(4);
+
+			sb.append("select tbname, name, coltype, length from ");
+			sb.append("sysibm.syscolumns where tbcreator = (select distinct ");
+			sb.append("current schema from sysibm.sysschemata) AND coltype = ");
+			sb.append("'VARCHAR' and length = 500");
+
+			ps = con.prepareStatement(sb.toString());
 
 			rs = ps.executeQuery();
 
@@ -58,13 +61,13 @@ public class VerifyDB2 extends VerifyProcess {
 				String columnName = rs.getString(2);
 
 				runSQL(
-					"alter table " + tableName + " ALTER COLUMN " + columnName +
-					" SET DATA TYPE VARCHAR(600)");
+					"alter table " + tableName + " alter column " + columnName +
+						" set data type varchar(600)");
 			}
-	  }
-	  finally {
-	  	DataAccess.cleanUp(con, ps, rs);
-	  }
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
 	}
 
 }
