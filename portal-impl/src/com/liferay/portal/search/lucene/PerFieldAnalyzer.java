@@ -32,7 +32,7 @@ import org.apache.lucene.document.Fieldable;
 public class PerFieldAnalyzer extends Analyzer {
 
 	public PerFieldAnalyzer(
-			Analyzer defaultAnalyzer, Map<String, Analyzer> analyzerMap) {
+		Analyzer defaultAnalyzer, Map<String, Analyzer> analyzerMap) {
 
 		_analyzer = defaultAnalyzer;
 		_analyzers = analyzerMap;
