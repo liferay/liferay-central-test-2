@@ -14,24 +14,21 @@
 
 package com.liferay.portlet.admin.action;
 
-import com.liferay.portal.kernel.language.LanguageUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.struts.PortletAction;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.WebKeys;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 
 import java.io.OutputStream;
-
-import java.util.Locale;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -49,6 +46,7 @@ import org.jfree.chart.plot.MeterInterval;
 import org.jfree.chart.plot.MeterPlot;
 import org.jfree.data.Range;
 import org.jfree.data.general.DefaultValueDataset;
+import org.jfree.data.general.ValueDataset;
 
 /**
  * @author Matthew Kong
@@ -61,55 +59,101 @@ public class ViewChartAction extends PortletAction {
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		try {
-			Locale locale = actionRequest.getLocale();
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
-			long maxMemory = ParamUtil.getLong(actionRequest, "maxMemory");
-			long totalMemory = ParamUtil.getLong(actionRequest, "totalMemory");
-			long usedMemory = ParamUtil.getLong(actionRequest, "usedMemory");
+		String type = ParamUtil.getString(actionRequest, "type", "max");
+		long maxMemory = ParamUtil.getLong(actionRequest, "maxMemory");
+		long totalMemory = ParamUtil.getLong(actionRequest, "totalMemory");
+		long usedMemory = ParamUtil.getLong(actionRequest, "usedMemory");
 
-			String type = ParamUtil.getString(actionRequest, "type", "max");
+		ValueDataset valueDataset = null;
 
-			DefaultValueDataset dataset = null;
+		StringBundler sb = new StringBundler(5);
 
-			StringBundler sb = new StringBundler(5);
+		sb.append(themeDisplay.translate("used-memory"));
+		sb.append(StringPool.SPACE);
+		sb.append(StringPool.FORWARD_SLASH);
+		sb.append(StringPool.SPACE);
 
-			sb.append(LanguageUtil.get(locale, "used-memory"));
-			sb.append(StringPool.SPACE);
-			sb.append(StringPool.FORWARD_SLASH);
-			sb.append(StringPool.SPACE);
+		if (type.equals("total")) {
+			valueDataset = new DefaultValueDataset(
+				(usedMemory * 100) / totalMemory);
 
-			if (type.equals("total")) {
-				dataset = new DefaultValueDataset(
-					(usedMemory * 100) / totalMemory);
-
-				sb.append(LanguageUtil.get(locale, "total-memory"));
-			}
-			else {
-				dataset = new DefaultValueDataset(
-					(usedMemory * 100) / maxMemory);
-
-				sb.append(LanguageUtil.get(locale, "maximum-memory"));
-			}
-
-			MeterPlot plot = _getMeterPlot(dataset, locale);
-
-			JFreeChart chart = _getChart(sb.toString(), plot);
-
-			HttpServletResponse response = PortalUtil.getHttpServletResponse(
-				actionResponse);
-
-			response.setContentType(ContentTypes.IMAGE_JPEG);
-
-			OutputStream os = response.getOutputStream();
-
-			ChartUtilities.writeChartAsPNG(os, chart, 280, 180);
-
-			setForward(actionRequest, ActionConstants.COMMON_NULL);
+			sb.append(themeDisplay.translate("total-memory"));
 		}
-		catch (Exception e) {
-			_log.error(e);
+		else {
+			valueDataset = new DefaultValueDataset(
+				(usedMemory * 100) / maxMemory);
+
+			sb.append(themeDisplay.translate("maximum-memory"));
 		}
+
+		MeterPlot meterPlot = getMeterPlot(themeDisplay, valueDataset);
+
+		JFreeChart jFreeChart = getJFreeChart(sb.toString(), meterPlot);
+
+		HttpServletResponse response = PortalUtil.getHttpServletResponse(
+			actionResponse);
+
+		response.setContentType(ContentTypes.IMAGE_JPEG);
+
+		OutputStream outputStream = response.getOutputStream();
+
+		ChartUtilities.writeChartAsPNG(outputStream, jFreeChart, 280, 180);
+
+		setForward(actionRequest, ActionConstants.COMMON_NULL);
+	}
+
+	protected JFreeChart getJFreeChart(String title, MeterPlot meterPlot) {
+		JFreeChart jFreeChart = new JFreeChart(
+			title, new Font(null, Font.PLAIN, 13), meterPlot, true);
+
+		jFreeChart.removeLegend();
+		jFreeChart.setBackgroundPaint(Color.white);
+
+		return jFreeChart;
+	}
+
+	protected MeterPlot getMeterPlot(
+		ThemeDisplay themeDisplay, ValueDataset valueDataset) {
+
+		MeterPlot meterPlot = new MeterPlot(valueDataset);
+
+		meterPlot.addInterval(
+			new MeterInterval(
+				themeDisplay.translate("normal"), new Range(0.0D, 75D),
+				Color.lightGray, new BasicStroke(2.0F),
+				new Color(0, 255, 0, 64)));
+
+		meterPlot.addInterval(
+			new MeterInterval(
+				themeDisplay.translate("warning"), new Range(75D, 90D),
+				Color.lightGray, new BasicStroke(2.0F),
+				new Color(255, 255, 0, 64)));
+
+		meterPlot.addInterval(
+			new MeterInterval(
+				themeDisplay.translate("critical"), new Range(90D, 100D),
+				Color.lightGray, new BasicStroke(2.0F),
+				new Color(255, 0, 0, 128)));
+
+		meterPlot.setDialBackgroundPaint(Color.white);
+		meterPlot.setDialShape(DialShape.PIE);
+		meterPlot.setDialOutlinePaint(Color.gray);
+		meterPlot.setTickLabelFont(new Font(null, Font.PLAIN, 10));
+		meterPlot.setTickLabelPaint(Color.darkGray);
+		meterPlot.setTickLabelsVisible(true);
+		meterPlot.setTickPaint(Color.lightGray);
+		meterPlot.setTickSize(5D);
+		meterPlot.setMeterAngle(180);
+		meterPlot.setNeedlePaint(Color.darkGray);
+		meterPlot.setRange(new Range(0.0D, 100D));
+		meterPlot.setValueFont(new Font(null, Font.PLAIN, 10));
+		meterPlot.setValuePaint(Color.black);
+		meterPlot.setUnits("%");
+
+		return meterPlot;
 	}
 
 	@Override
@@ -117,60 +161,6 @@ public class ViewChartAction extends PortletAction {
 		return _CHECK_METHOD_ON_PROCESS_ACTION;
 	}
 
-	private JFreeChart _getChart(String title, MeterPlot plot) {
-		JFreeChart chart = new JFreeChart(
-			title, new Font(null, Font.PLAIN, 13), plot, true);
-
-		chart.setBackgroundPaint(Color.white);
-
-		chart.removeLegend();
-
-		return chart;
-	}
-
-	private MeterPlot _getMeterPlot(
-			DefaultValueDataset dataset, Locale locale) {
-
-		MeterPlot plot = new MeterPlot(dataset);
-
-		plot.setDialBackgroundPaint(Color.white);
-		plot.setDialShape(DialShape.PIE);
-		plot.setDialOutlinePaint(Color.gray);
-		plot.setTickLabelFont(new Font(null, Font.PLAIN, 10));
-		plot.setTickLabelPaint(Color.darkGray);
-		plot.setTickLabelsVisible(true);
-		plot.setTickPaint(Color.lightGray);
-		plot.setTickSize(5D);
-		plot.setMeterAngle(180);
-		plot.setNeedlePaint(Color.darkGray);
-		plot.setRange(new Range(0.0D, 100D));
-		plot.setValueFont(new Font(null, Font.PLAIN, 10));
-		plot.setValuePaint(Color.black);
-		plot.setUnits("%");
-
-		plot.addInterval(
-			new MeterInterval(
-				LanguageUtil.get(locale, "normal"), new Range(0.0D, 75D),
-				Color.lightGray, new BasicStroke(2.0F),
-				new Color(0, 255, 0, 64)));
-
-		plot.addInterval(
-			new MeterInterval(
-				LanguageUtil.get(locale, "warning"), new Range(75D, 90D),
-				Color.lightGray, new BasicStroke(2.0F),
-				new Color(255, 255, 0, 64)));
-
-		plot.addInterval(
-			new MeterInterval(
-				LanguageUtil.get(locale, "critical"), new Range(90D, 100D),
-				Color.lightGray, new BasicStroke(2.0F),
-				new Color(255, 0, 0, 128)));
-
-		return plot;
-	}
-
 	private static final boolean _CHECK_METHOD_ON_PROCESS_ACTION = false;
-
-	private static Log _log = LogFactoryUtil.getLog(ViewChartAction.class);
 
 }

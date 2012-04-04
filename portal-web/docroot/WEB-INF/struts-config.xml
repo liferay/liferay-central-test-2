@@ -151,8 +151,6 @@
 
 		<!-- Admin Server -->
 
-		<action path="/admin_server/view_chart" type="com.liferay.portlet.admin.action.ViewChartAction" />
-
 		<action path="/admin_server/edit_site" type="com.liferay.portlet.sites.action.EditGroupAction">
 			<forward name="portlet.sites_admin.edit_site" path="portlet.sites_admin.edit_site" />
 			<forward name="portlet.sites_admin.error" path="portlet.sites_admin.error" />
@@ -189,6 +187,8 @@
 		</action>
 
 		<action path="/admin_server/view" forward="portlet.admin.view" />
+
+		<action path="/admin_server/view_chart" type="com.liferay.portlet.admin.action.ViewChartAction" />
 
 		<!-- Alerts -->
 
