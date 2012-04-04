@@ -84,6 +84,16 @@ public class SQLQueryImpl implements SQLQuery {
 		}
 	}
 
+	public Object iterateNext() throws ORMException {
+		Iterator<?> iterator = iterate(false);
+
+		if (iterator.hasNext()) {
+			return iterator.next();
+		}
+
+		return null;
+	}
+
 	public List<?> list() throws ORMException {
 		return list(false, false);
 	}

@@ -35,6 +35,8 @@ public interface Query {
 	@SuppressWarnings("rawtypes")
 	public Iterator iterate(boolean modifiable) throws ORMException;
 
+	public Object iterateNext() throws ORMException;
+
 	@SuppressWarnings("rawtypes")
 	public List list() throws ORMException;
 
