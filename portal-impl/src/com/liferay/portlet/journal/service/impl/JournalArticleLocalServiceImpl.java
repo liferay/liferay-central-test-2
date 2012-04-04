@@ -2161,7 +2161,7 @@ public class JournalArticleLocalServiceImpl
 
 		JournalArticle article = null;
 
-		User user = userLocalService.getUser(oldArticle.getUserId());
+		User user = userPersistence.findByPrimaryKey(oldArticle.getUserId());
 
 		if (!oldArticle.isDraft()) {
 			double newVersion = MathUtil.format(oldVersion + 0.1, 1, 1);
