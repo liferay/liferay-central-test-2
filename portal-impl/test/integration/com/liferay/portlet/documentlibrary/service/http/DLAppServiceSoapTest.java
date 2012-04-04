@@ -40,7 +40,7 @@ import org.junit.runner.RunWith;
 public class DLAppServiceSoapTest {
 
 	@BeforeClass
-	public static void setUp() throws Exception {
+	public void setUp() throws Exception {
 		String name = "Test Folder";
 		String description = "This is a test folder.";
 
@@ -64,7 +64,7 @@ public class DLAppServiceSoapTest {
 	}
 
 	@AfterClass
-	public static void tearDown() throws Exception {
+	public void tearDown() throws Exception {
 		try {
 			if (_folder != null) {
 				getDLAppServiceSoap().deleteFolder(_folder.getFolderId());
