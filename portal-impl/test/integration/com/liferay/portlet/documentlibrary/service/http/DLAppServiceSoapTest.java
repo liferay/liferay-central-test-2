@@ -111,7 +111,7 @@ public class DLAppServiceSoapTest {
 			serviceContext);
 	}
 
-	protected static DLAppServiceSoap getDLAppServiceSoap() throws Exception {
+	protected DLAppServiceSoap getDLAppServiceSoap() throws Exception {
 		DLAppServiceSoapServiceLocator locator =
 			new DLAppServiceSoapServiceLocator();
 

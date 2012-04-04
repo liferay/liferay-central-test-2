@@ -1513,8 +1513,8 @@ public class ServiceBuilder {
 			returnTypeGenericsName.contains(
 				"com.liferay.portal.kernel.repository.model.Folder")) {
 		}
-		else if (returnTypeGenericsName.startsWith(
-					"com.liferay.portal.kernel.repository.model.")) {
+		else if (returnTypeGenericsName.contains(
+					"com.liferay.portal.kernel.repository.")) {
 
 			return false;
 		}
