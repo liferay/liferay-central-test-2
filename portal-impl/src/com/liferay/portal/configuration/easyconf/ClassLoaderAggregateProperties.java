@@ -220,14 +220,13 @@ public class ClassLoaderAggregateProperties extends AggregatedProperties {
 				url = _classLoader.getResource(fileName);
 			}
 			catch (RuntimeException re) {
-				if (!fileName.startsWith("file:/")) {
-					fileName = "file:/".concat(fileName);
-
-					url = _classLoader.getResource(fileName);
-				}
-				else {
+				if (fileName.startsWith("file:/")) {
 					throw re;
 				}
+
+				fileName = "file:/".concat(fileName);
+
+				url = _classLoader.getResource(fileName);
 			}
 
 			_addPropertiesSource(fileName, url, loadedCompositeConfiguration);
