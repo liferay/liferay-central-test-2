@@ -333,7 +333,8 @@ public class JournalArticleFinderImpl
 			String sql = CustomSQLUtil.get(FIND_BY_EXPIRATION_DATE);
 
 			if (status == WorkflowConstants.STATUS_ANY) {
-				sql = StringUtil.replace(sql, "(status = ?) AND", "");
+				sql = StringUtil.replace(
+					sql, "(status = ?) AND", StringPool.BLANK);
 			}
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -559,7 +560,8 @@ public class JournalArticleFinderImpl
 				COUNT_BY_C_G_C_A_V_T_D_C_T_S_T_D_S_R);
 
 			if (groupId <= 0) {
-				sql = StringUtil.replace(sql, "(groupId = ?) AND", "");
+				sql = StringUtil.replace(
+					sql, "(groupId = ?) AND", StringPool.BLANK);
 			}
 
 			sql = CustomSQLUtil.replaceKeywords(
@@ -567,7 +569,8 @@ public class JournalArticleFinderImpl
 
 			if ((version == null) || (version <= 0)) {
 				sql = StringUtil.replace(
-					sql, "(version = ?) [$AND_OR_CONNECTOR$]", "");
+					sql, "(version = ?) [$AND_OR_CONNECTOR$]",
+					StringPool.BLANK);
 			}
 
 			sql = CustomSQLUtil.replaceKeywords(
@@ -582,7 +585,8 @@ public class JournalArticleFinderImpl
 				sql, "templateId", StringPool.LIKE, false, templateIds);
 
 			if (status == WorkflowConstants.STATUS_ANY) {
-				sql = StringUtil.replace(sql, "(status = ?) AND", "");
+				sql = StringUtil.replace(
+					sql, "(status = ?) AND", StringPool.BLANK);
 			}
 
 			sql = CustomSQLUtil.replaceAndOperator(sql, andOperator);
@@ -595,7 +599,8 @@ public class JournalArticleFinderImpl
 				sql = StringUtil.replace(
 					sql, "MAX(version) AS tempVersion",
 					"version AS tempVersion");
-				sql = StringUtil.replace(sql, "[$GROUP_BY_CLAUSE$]", "");
+				sql = StringUtil.replace(
+					sql, "[$GROUP_BY_CLAUSE$]", StringPool.BLANK);
 			}
 			else {
 				sql = StringUtil.replace(
@@ -697,7 +702,8 @@ public class JournalArticleFinderImpl
 			String sql = CustomSQLUtil.get(FIND_BY_C_G_C_A_V_T_D_C_T_S_T_D_S_R);
 
 			if (groupId <= 0) {
-				sql = StringUtil.replace(sql, "(groupId = ?) AND", "");
+				sql = StringUtil.replace(
+					sql, "(groupId = ?) AND", StringPool.BLANK);
 			}
 
 			sql = CustomSQLUtil.replaceKeywords(
@@ -705,7 +711,8 @@ public class JournalArticleFinderImpl
 
 			if ((version == null) || (version <= 0)) {
 				sql = StringUtil.replace(
-					sql, "(version = ?) [$AND_OR_CONNECTOR$]", "");
+					sql, "(version = ?) [$AND_OR_CONNECTOR$]",
+					StringPool.BLANK);
 			}
 
 			sql = CustomSQLUtil.replaceKeywords(
@@ -720,7 +727,8 @@ public class JournalArticleFinderImpl
 				sql, "templateId", StringPool.LIKE, false, templateIds);
 
 			if (status == WorkflowConstants.STATUS_ANY) {
-				sql = StringUtil.replace(sql, "(status = ?) AND", "");
+				sql = StringUtil.replace(
+					sql, "(status = ?) AND", StringPool.BLANK);
 			}
 
 			sql = CustomSQLUtil.replaceAndOperator(sql, andOperator);
@@ -733,7 +741,8 @@ public class JournalArticleFinderImpl
 				sql = StringUtil.replace(
 					sql, "MAX(version) AS tempVersion",
 					"version AS tempVersion");
-				sql = StringUtil.replace(sql, "[$GROUP_BY_CLAUSE$]", "");
+				sql = StringUtil.replace(
+					sql, "[$GROUP_BY_CLAUSE$]", StringPool.BLANK);
 			}
 			else {
 				sql = StringUtil.replace(

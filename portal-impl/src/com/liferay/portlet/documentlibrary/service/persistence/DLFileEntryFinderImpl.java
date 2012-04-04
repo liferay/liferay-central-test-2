@@ -146,7 +146,7 @@ public class DLFileEntryFinderImpl
 				else {
 					sql = CustomSQLUtil.get(COUNT_BY_G_F_S);
 
-					sql = StringUtil.replace(sql, "[$JOIN$]", "");
+					sql = StringUtil.replace(sql, "[$JOIN$]", StringPool.BLANK);
 				}
 			}
 			else {
@@ -473,7 +473,7 @@ public class DLFileEntryFinderImpl
 				else {
 					table = "DLFileVersion";
 
-					sql = StringUtil.replace(sql, "[$JOIN$]", "");
+					sql = StringUtil.replace(sql, "[$JOIN$]", StringPool.BLANK);
 				}
 			}
 

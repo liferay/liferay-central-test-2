@@ -250,7 +250,7 @@ public class DLFolderFinderImpl
 					groupId);
 			}
 			else {
-				sql = StringUtil.replace(sql, "[$JOIN$]", "");
+				sql = StringUtil.replace(sql, "[$JOIN$]", StringPool.BLANK);
 			}
 
 			sql = StringUtil.replace(
@@ -446,7 +446,7 @@ public class DLFolderFinderImpl
 
 			if (includeMountFolders) {
 				sql = StringUtil.replace(
-					sql, "(DLFolder.mountPoint = ?) AND", "");
+					sql, "(DLFolder.mountPoint = ?) AND", StringPool.BLANK);
 			}
 
 			sql = StringUtil.replace(
@@ -655,7 +655,7 @@ public class DLFolderFinderImpl
 					CustomSQLUtil.get(JOIN_FV_BY_DL_FILE_ENTRY));
 			}
 			else {
-				sql = StringUtil.replace(sql, "[$JOIN$]", "");
+				sql = StringUtil.replace(sql, "[$JOIN$]", StringPool.BLANK);
 			}
 		}
 
@@ -689,7 +689,7 @@ public class DLFolderFinderImpl
 				sql, "[$JOIN$]", CustomSQLUtil.get(JOIN_FS_BY_DL_FILE_ENTRY));
 		}
 		else {
-			sql = StringUtil.replace(sql, "[$JOIN$]", "");
+			sql = StringUtil.replace(sql, "[$JOIN$]", StringPool.BLANK);
 		}
 
 		if (inlineSQLHelper) {
@@ -754,7 +754,8 @@ public class DLFolderFinderImpl
 		String sql, long folderId, int status, boolean includeMountFolders) {
 
 		if (includeMountFolders) {
-			sql = StringUtil.replace(sql, "(DLFolder.mountPoint = ?) AND", "");
+			sql = StringUtil.replace(
+				sql, "(DLFolder.mountPoint = ?) AND", StringPool.BLANK);
 		}
 
 		sql = StringUtil.replace(

@@ -295,11 +295,13 @@ public class DDMTemplateFinderImpl
 			}
 
 			if (groupId <= 0) {
-				sql = StringUtil.replace(sql, "(groupId = ?) AND", "");
+				sql = StringUtil.replace(
+					sql, "(groupId = ?) AND", StringPool.BLANK);
 			}
 
 			if (structureId <= 0) {
-				sql = StringUtil.replace(sql, "(structureId = ?) AND", "");
+				sql = StringUtil.replace(
+					sql, "(structureId = ?) AND", StringPool.BLANK);
 			}
 
 			sql = CustomSQLUtil.replaceKeywords(
@@ -383,11 +385,13 @@ public class DDMTemplateFinderImpl
 			}
 
 			if (groupId <= 0) {
-				sql = StringUtil.replace(sql, "(groupId = ?) AND", "");
+				sql = StringUtil.replace(
+					sql, "(groupId = ?) AND", StringPool.BLANK);
 			}
 
 			if (structureId <= 0) {
-				sql = StringUtil.replace(sql, "(structureId = ?) AND", "");
+				sql = StringUtil.replace(
+					sql, "(structureId = ?) AND", StringPool.BLANK);
 			}
 
 			sql = CustomSQLUtil.replaceKeywords(
