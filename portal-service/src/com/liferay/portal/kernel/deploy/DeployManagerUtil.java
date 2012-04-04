@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.plugin.PluginPackage;
 import java.io.File;
 
 import java.util.List;
+import java.util.Properties;
 
 /**
  * @author Jonathan Potter
@@ -59,8 +60,17 @@ public class DeployManagerUtil {
 		return getDeployManager().isDeployed(context);
 	}
 
-	public static PluginPackage readPluginPackage(File file) {
-		return getDeployManager().readPluginPackage(file);
+	public static PluginPackage readPluginPackageProperties(
+		String displayName, Properties properties) {
+
+		return getDeployManager().readPluginPackageProperties(
+			displayName, properties);
+	}
+
+	public static PluginPackage readPluginPackageXml(String xml)
+		throws Exception {
+
+		return getDeployManager().readPluginPackageXml(xml);
 	}
 
 	public static void redeploy(String context) throws Exception {

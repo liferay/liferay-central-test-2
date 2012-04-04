@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.plugin.PluginPackage;
 import java.io.File;
 
 import java.util.List;
+import java.util.Properties;
 
 /**
  * @author Jonathan Potter
@@ -41,7 +42,10 @@ public interface DeployManager {
 
 	public boolean isDeployed(String context);
 
-	public PluginPackage readPluginPackage(File file);
+	public PluginPackage readPluginPackageProperties(
+		String displayName, Properties properties);
+
+	public PluginPackage readPluginPackageXml(String xml) throws Exception;
 
 	public void redeploy(String context) throws Exception;
 
