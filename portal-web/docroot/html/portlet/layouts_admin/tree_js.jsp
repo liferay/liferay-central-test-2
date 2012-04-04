@@ -30,15 +30,11 @@ boolean expandFirstNode = ParamUtil.getBoolean(request, "expandFirstNode", true)
 boolean saveState = ParamUtil.getBoolean(request, "saveState", true);
 boolean selectableTree = ParamUtil.getBoolean(request, "selectableTree");
 
-boolean rootNodeExpanded = GetterUtil.getBoolean(SessionClicks.get(request, treeId + "RootNode", null), true);
-
 String modules = "aui-io-request,aui-tree-view,dataschema-xml,datatype-xml";
 
 if (!selectableTree) {
 	modules += ",liferay-history-manager";
 }
-
-String openNodes = SessionTreeJSClicks.getOpenNodes(request, treeId);
 %>
 
 <aui:script use="<%= modules %>">
@@ -50,6 +46,11 @@ String openNodes = SessionTreeJSClicks.getOpenNodes(request, treeId);
 
 	var TreeUtil = {
 		DEFAULT_PARENT_LAYOUT_ID: <%= LayoutConstants.DEFAULT_PARENT_LAYOUT_ID %>,
+
+		<%
+		String openNodes = SessionTreeJSClicks.getOpenNodes(request, treeId);
+		%>
+
 		OPEN_NODES: '<%= openNodes %>'.split(','),
 		PREFIX_LAYOUT: '_layout_',
 		PREFIX_LAYOUT_ID: '_layoutId_',
@@ -155,10 +156,13 @@ String openNodes = SessionTreeJSClicks.getOpenNodes(request, treeId);
 								}
 							},
 						</c:if>
+
 						alwaysShowHitArea: node.hasChildren,
+
 						<c:if test='<%= !saveState && defaultStateChecked %>'>
 							checked: true,
 						</c:if>
+
 						children: TreeUtil.formatJSONResults(node.children),
 						draggable: node.updateable,
 						expanded: (node.children && (node.children.length > 0)),
@@ -264,15 +268,6 @@ String openNodes = SessionTreeJSClicks.getOpenNodes(request, treeId);
 				TreeUtil.updateSessionTreeClick(treeId, data);
 			},
 
-			updateSessionTreeOpenedState: function(treeId, nodeId, state) {
-				var data = {
-					nodeId: nodeId,
-					openNode: state,
-				};
-
-				TreeUtil.updateSessionTreeClick(treeId, data);
-			},
-
 			updateSessionTreeClick: function(treeId, data) {
 				var sessionClickURL = themeDisplay.getPathMain() + '/portal/session_tree_js_click';
 
@@ -291,6 +286,15 @@ String openNodes = SessionTreeJSClicks.getOpenNodes(request, treeId);
 						data: data
 					}
 				);
+			},
+
+			updateSessionTreeOpenedState: function(treeId, nodeId, state) {
+				var data = {
+					nodeId: nodeId,
+					openNode: state,
+				};
+
+				TreeUtil.updateSessionTreeClick(treeId, data);
 			}
 		</c:if>
 	};
@@ -338,20 +342,30 @@ String openNodes = SessionTreeJSClicks.getOpenNodes(request, treeId);
 					}
 				},
 			</c:if>
+
 			alwaysShowHitArea: true,
+
 			<c:if test='<%= !saveState && defaultStateChecked %>'>
 				checked: true,
 			</c:if>
-			children: TreeUtil.formatJSONResults(<%= LayoutsTreeUtil.getJSON(request, groupId, privateLayout, LayoutConstants.DEFAULT_PARENT_LAYOUT_ID, StringUtil.split(openNodes, 0L)) %>),
+
+			children: TreeUtil.formatJSONResults(<%= LayoutsTreeUtil.getLayoutsJSON(request, groupId, privateLayout, LayoutConstants.DEFAULT_PARENT_LAYOUT_ID, StringUtil.split(openNodes, 0L)) %>),
 			draggable: false,
+
 			<c:choose>
 				<c:when test="<%= saveState %>">
+
+					<%
+					boolean rootNodeExpanded = GetterUtil.getBoolean(SessionClicks.get(request, treeId + "RootNode", null), true);
+					%>
+
 					expanded: <%= rootNodeExpanded %>,
 				</c:when>
 				<c:otherwise>
 					expanded: <%= expandFirstNode %>,
 				</c:otherwise>
 			</c:choose>
+
 			id: rootId,
 			label: rootLabel,
 			leaf: false

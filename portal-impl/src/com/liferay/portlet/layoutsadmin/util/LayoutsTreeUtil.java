@@ -44,15 +44,29 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class LayoutsTreeUtil {
 
-	public static String getJSON(
+	public static List<Layout> getLayouts(
 			HttpServletRequest request, long groupId, boolean privateLayout,
 			long parentLayoutId)
 		throws Exception {
 
-		return getJSON(request, groupId, privateLayout, parentLayoutId, null);
+		boolean incomplete = ParamUtil.getBoolean(request, "incomplete", true);
+		int start = ParamUtil.getInteger(request, "start");
+		int end = start + PropsValues.LAYOUT_MANAGE_PAGES_INITIAL_CHILDREN;
+
+		return LayoutLocalServiceUtil.getLayouts(
+			groupId, privateLayout, parentLayoutId, incomplete, start, end);
 	}
 
-	public static String getJSON(
+	public static String getLayoutsJSON(
+			HttpServletRequest request, long groupId, boolean privateLayout,
+			long parentLayoutId)
+		throws Exception {
+
+		return getLayoutsJSON(
+			request, groupId, privateLayout, parentLayoutId, null);
+	}
+
+	public static String getLayoutsJSON(
 			HttpServletRequest request, long groupId, boolean privateLayout,
 			long parentLayoutId, long[] expandedLayoutIds)
 		throws Exception {
@@ -81,7 +95,7 @@ public class LayoutsTreeUtil {
 			if ((layoutAncestors != null) && layoutAncestors.contains(layout) ||
 				ArrayUtil.contains(expandedLayoutIds, layout.getLayoutId())) {
 
-				String childrenJSON = getJSON(
+				String childrenJSON = getLayoutsJSON(
 					request, groupId, layout.getPrivateLayout(),
 					layout.getLayoutId(), expandedLayoutIds);
 
@@ -141,19 +155,6 @@ public class LayoutsTreeUtil {
 		}
 
 		return jsonArray.toString();
-	}
-
-	public static List<Layout> getLayouts(
-			HttpServletRequest request, long groupId, boolean privateLayout,
-			long parentLayoutId)
-		throws Exception {
-
-		boolean incomplete = ParamUtil.getBoolean(request, "incomplete", true);
-		int start = ParamUtil.getInteger(request, "start");
-		int end = start + PropsValues.LAYOUT_MANAGE_PAGES_INITIAL_CHILDREN;
-
-		return LayoutLocalServiceUtil.getLayouts(
-			groupId, privateLayout, parentLayoutId, incomplete, start, end);
 	}
 
 }
