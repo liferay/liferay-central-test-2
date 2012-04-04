@@ -292,6 +292,22 @@ public interface DDLRecordLocalService extends PersistedModelLocalService {
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* @deprecated {@link #getCompanyRecords(long, int, int, int, int, OrderByComparator)}
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.portlet.dynamicdatalists.model.DDLRecord> getCompanyRecords(
+		long companyId, int scope, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* @deprecated {@link #getCompanyRecordsCount(long, int, int)}
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getCompanyRecordsCount(long companyId, int scope)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getCompanyRecordsCount(long companyId, int status, int scope)
 		throws com.liferay.portal.kernel.exception.SystemException;
@@ -301,6 +317,17 @@ public interface DDLRecordLocalService extends PersistedModelLocalService {
 		long recordId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.lang.Long[] getMinAndMaxCompanyRecordIds(long companyId,
+		int status, int scope)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.portlet.dynamicdatalists.model.DDLRecord> getMinAndMaxCompanyRecords(
+		long companyId, int status, int scope, long minRecordId,
+		long maxRecordId)
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.dynamicdatalists.model.DDLRecord getRecord(

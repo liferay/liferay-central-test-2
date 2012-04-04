@@ -327,6 +327,25 @@ public class DDLRecordLocalServiceWrapper implements DDLRecordLocalService,
 			scope, start, end, orderByComparator);
 	}
 
+	/**
+	* @deprecated {@link #getCompanyRecords(long, int, int, int, int, OrderByComparator)}
+	*/
+	public java.util.List<com.liferay.portlet.dynamicdatalists.model.DDLRecord> getCompanyRecords(
+		long companyId, int scope, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _ddlRecordLocalService.getCompanyRecords(companyId, scope,
+			start, end, orderByComparator);
+	}
+
+	/**
+	* @deprecated {@link #getCompanyRecordsCount(long, int, int)}
+	*/
+	public int getCompanyRecordsCount(long companyId, int scope)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _ddlRecordLocalService.getCompanyRecordsCount(companyId, scope);
+	}
+
 	public int getCompanyRecordsCount(long companyId, int status, int scope)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _ddlRecordLocalService.getCompanyRecordsCount(companyId, status,
@@ -338,6 +357,21 @@ public class DDLRecordLocalServiceWrapper implements DDLRecordLocalService,
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _ddlRecordLocalService.getLatestRecordVersion(recordId);
+	}
+
+	public java.lang.Long[] getMinAndMaxCompanyRecordIds(long companyId,
+		int status, int scope)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _ddlRecordLocalService.getMinAndMaxCompanyRecordIds(companyId,
+			status, scope);
+	}
+
+	public java.util.List<com.liferay.portlet.dynamicdatalists.model.DDLRecord> getMinAndMaxCompanyRecords(
+		long companyId, int status, int scope, long minRecordId,
+		long maxRecordId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _ddlRecordLocalService.getMinAndMaxCompanyRecords(companyId,
+			status, scope, minRecordId, maxRecordId);
 	}
 
 	public com.liferay.portlet.dynamicdatalists.model.DDLRecord getRecord(

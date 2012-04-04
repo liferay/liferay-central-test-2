@@ -223,6 +223,29 @@ public class DDLRecordLocalServiceImpl
 			companyId, status, scope, start, end, orderByComparator);
 	}
 
+	/**
+	 * @deprecated {@link #getCompanyRecords(long, int, int, int, int, OrderByComparator)}
+	 */
+	public List<DDLRecord> getCompanyRecords(
+			long companyId, int scope, int start, int end,
+			OrderByComparator orderByComparator)
+		throws SystemException {
+
+		return getCompanyRecords(
+			companyId, WorkflowConstants.STATUS_ANY, scope, start, end,
+			orderByComparator);
+	}
+
+	/**
+	 * @deprecated {@link #getCompanyRecordsCount(long, int, int)}
+	 */
+	public int getCompanyRecordsCount(long companyId, int scope)
+		throws SystemException {
+
+		return getCompanyRecordsCount(
+			companyId, WorkflowConstants.STATUS_ANY, scope);
+	}
+
 	public int getCompanyRecordsCount(long companyId, int status, int scope)
 		throws SystemException {
 
@@ -246,6 +269,22 @@ public class DDLRecordLocalServiceImpl
 			recordVersions, new DDLRecordVersionVersionComparator());
 
 		return recordVersions.get(0);
+	}
+
+	public Long[] getMinAndMaxCompanyRecordIds(
+			long companyId, int status, int scope)
+		throws SystemException {
+
+		return ddlRecordFinder.findByC_S_S_MinAndMax(companyId, status, scope);
+	}
+
+	public List<DDLRecord> getMinAndMaxCompanyRecords(
+			long companyId, int status, int scope, long minRecordId,
+			long maxRecordId)
+		throws SystemException {
+
+		return ddlRecordFinder.findByC_S_S_MinAndMax(
+			companyId, status, scope, minRecordId, maxRecordId);
 	}
 
 	public DDLRecord getRecord(long recordId)

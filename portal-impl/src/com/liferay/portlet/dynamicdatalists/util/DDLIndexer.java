@@ -252,26 +252,40 @@ public class DDLIndexer extends BaseIndexer {
 	}
 
 	protected void reindexRecords(long companyId) throws Exception {
-		int recordsCount = DDLRecordLocalServiceUtil.getCompanyRecordsCount(
-			companyId, WorkflowConstants.STATUS_APPROVED,
-			DDLRecordSetConstants.SCOPE_DYNAMIC_DATA_LISTS);
+		Long[] minAndMaxRecordIds =
+			DDLRecordLocalServiceUtil.getMinAndMaxCompanyRecordIds(
+				companyId, WorkflowConstants.STATUS_APPROVED,
+				DDLRecordSetConstants.SCOPE_DYNAMIC_DATA_LISTS);
 
-		int recordPages = recordsCount / DEFAULT_INTERVAL;
+		if ((minAndMaxRecordIds[0] == null) ||
+			(minAndMaxRecordIds[1] == null)) {
 
-		for (int i = 0; i <= recordPages; i++) {
-			int start = (i * DEFAULT_INTERVAL);
-			int end = start + DEFAULT_INTERVAL;
+			return;
+		}
 
-			reindexRecords(companyId, start, end);
+		long minRecordId = minAndMaxRecordIds[0];
+		long maxRecordId = minAndMaxRecordIds[1];
+
+		long startRecordId = minRecordId;
+		long endRecordId = startRecordId + DEFAULT_INTERVAL;
+
+		while (startRecordId <= maxRecordId) {
+			reindexRecords(companyId, startRecordId, endRecordId);
+
+			startRecordId = endRecordId;
+			endRecordId += DEFAULT_INTERVAL;
 		}
 	}
 
-	protected void reindexRecords(long companyId, int start, int end)
+	protected void reindexRecords(
+			long companyId, long startRecordId, long endRecordId)
 		throws Exception {
 
-		List<DDLRecord> records = DDLRecordLocalServiceUtil.getCompanyRecords(
-			companyId, WorkflowConstants.STATUS_APPROVED,
-			DDLRecordSetConstants.SCOPE_DYNAMIC_DATA_LISTS, start, end, null);
+		List<DDLRecord> records =
+			DDLRecordLocalServiceUtil.getMinAndMaxCompanyRecords(
+				companyId, WorkflowConstants.STATUS_APPROVED,
+				DDLRecordSetConstants.SCOPE_DYNAMIC_DATA_LISTS, startRecordId,
+				endRecordId);
 
 		Collection<Document> documents = new ArrayList<Document>(
 			records.size());
