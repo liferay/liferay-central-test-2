@@ -157,18 +157,21 @@ public class DefaultPortalToLDAPConverter implements PortalToLDAPConverter {
 		String groupDN = getGroupDNName(ldapServerId, userGroup, groupMappings);
 		String userDN = getUserDNName(ldapServerId, user, userMappings);
 
-		boolean isGroupMember = PortalLDAPUtil.isGroupMember(
-			ldapServerId, user.getCompanyId(), groupDN, userDN);
+		if (PortalLDAPUtil.isGroupMember(
+				ldapServerId, user.getCompanyId(), groupDN, userDN)) {
 
-		if (!isGroupMember && (ldapOperation == LDAPOperation.ADD)) {
-			modifications.addItem(
-				DirContext.ADD_ATTRIBUTE,
-				groupMappings.getProperty(GroupConverterKeys.USER), userDN);
+			if (ldapOperation == LDAPOperation.REMOVE) {
+				modifications.addItem(
+					DirContext.REMOVE_ATTRIBUTE,
+					groupMappings.getProperty(GroupConverterKeys.USER), userDN);
+			}
 		}
-		else if (isGroupMember && (ldapOperation == LDAPOperation.REMOVE)) {
-			modifications.addItem(
-				DirContext.REMOVE_ATTRIBUTE,
-				groupMappings.getProperty(GroupConverterKeys.USER), userDN);
+		else {
+			if (ldapOperation == LDAPOperation.ADD) {
+				modifications.addItem(
+					DirContext.ADD_ATTRIBUTE,
+					groupMappings.getProperty(GroupConverterKeys.USER), userDN);
+			}
 		}
 
 		return modifications;
