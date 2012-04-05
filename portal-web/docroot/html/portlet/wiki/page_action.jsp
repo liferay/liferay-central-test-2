@@ -51,7 +51,7 @@ WikiPage wikiPage = (WikiPage)row.getObject();
 	</c:if>
 
 	<c:if test="<%= WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.UPDATE) && WikiNodePermission.contains(permissionChecker, wikiPage.getNodeId(), ActionKeys.ADD_PAGE) %>">
-		<liferay-portlet:renderURL allowEmptyParam="true" var="copyPageURL">
+		<liferay-portlet:renderURL allowEmptyParam="<%= true %>" var="copyPageURL">
 			<liferay-portlet:param name="struts_action" value="/wiki/edit_page" />
 			<liferay-portlet:param name="redirect" value="<%= currentURL %>" />
 			<liferay-portlet:param name="nodeId" value="<%= String.valueOf(wikiPage.getNodeId()) %>" />

@@ -66,7 +66,7 @@ if (assetCategoryId != 0) {
 		<span class="asset-entry">
 			<%= assetTagName %>
 
-			<liferay-portlet:renderURL allowEmptyParam="true" var="viewURLWithoutTag">
+			<liferay-portlet:renderURL allowEmptyParam="<%= true %>" var="viewURLWithoutTag">
 				<liferay-portlet:param name="tag" value="" />
 			</liferay-portlet:renderURL>
 

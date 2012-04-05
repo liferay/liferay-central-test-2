@@ -155,7 +155,7 @@ if (choiceName > 0) {
 
 <aui:script>
 	function <portlet:namespace />addPollChoice() {
-		<liferay-portlet:actionURL allowEmptyParam="true" var="addPollChoiceURL">
+		<liferay-portlet:actionURL allowEmptyParam="<%= true %>" var="addPollChoiceURL">
 			<liferay-portlet:param name="struts_action" value="/polls/edit_question" />
 			<liferay-portlet:param name="<%= EditQuestionAction.CHOICE_DESCRIPTION_PREFIX + (char)(96 + choicesCount + 1) %>" value="" />
 		</liferay-portlet:actionURL>
