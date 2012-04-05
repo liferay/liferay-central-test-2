@@ -122,8 +122,6 @@ public class SampleSQLBuilder {
 			arguments.get("sample.sql.wiki.page.comment.count"));
 		int maxWikiPageCount = GetterUtil.getInteger(
 			arguments.get("sample.sql.wiki.page.count"));
-		boolean securityEnabled = GetterUtil.getBoolean(
-			arguments.get("sample.sql.security.enabled"));
 
 		new SampleSQLBuilder(
 			arguments, baseDir, outputDir, outputMerge, dbType,
@@ -133,7 +131,7 @@ public class SampleSQLBuilder {
 			maxJournalArticleCount, maxJournalArticleSize, maxMBCategoryCount,
 			maxMBMessageCount, maxMBThreadCount, maxUserCount,
 			maxUserToGroupCount, maxWikiNodeCount, maxWikiPageCommentCount,
-			maxWikiPageCount, securityEnabled);
+			maxWikiPageCount);
 	}
 
 	public SampleSQLBuilder(
@@ -145,8 +143,7 @@ public class SampleSQLBuilder {
 		int maxJournalArticleSize, int maxMBCategoryCount,
 		int maxMBMessageCount, int maxMBThreadCount, int maxUserCount,
 		int maxUserToGroupCount, int maxWikiNodeCount,
-		int maxWikiPageCommentCount, int maxWikiPageCount,
-		boolean securityEnabled) {
+		int maxWikiPageCommentCount, int maxWikiPageCount) {
 
 		try {
 			_outputDir = outputDir;
@@ -170,7 +167,6 @@ public class SampleSQLBuilder {
 			_maxWikiNodeCount = maxWikiNodeCount;
 			_maxWikiPageCommentCount = maxWikiPageCommentCount;
 			_maxWikiPageCount = maxWikiPageCount;
-			_securityEnabled = securityEnabled;
 
 			int totalMThreadCount = maxMBCategoryCount * maxMBThreadCount;
 			int totalMBMessageCount = totalMThreadCount * maxMBMessageCount;
@@ -747,10 +743,8 @@ public class SampleSQLBuilder {
 	private String _outputDir;
 	private boolean _outputMerge;
 	private SimpleCounter _permissionCounter;
-	private SimpleCounter _resourceCodeCounter;
 	private SimpleCounter _resourceCounter;
 	private SimpleCounter _resourcePermissionCounter;
-	private boolean _securityEnabled;
 	private SimpleCounter _socialActivityCounter;
 	private File _tempDir;
 	private String _tplBlogsEntry = _TPL_ROOT + "blogs_entry.ftl";

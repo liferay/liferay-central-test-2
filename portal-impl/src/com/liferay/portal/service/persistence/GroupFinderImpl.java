@@ -33,7 +33,6 @@ import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.service.ClassNameLocalServiceUtil;
 import com.liferay.portal.service.ResourceBlockLocalServiceUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
-import com.liferay.portal.util.PropsValues;
 import com.liferay.util.dao.orm.CustomSQLUtil;
 
 import java.util.ArrayList;

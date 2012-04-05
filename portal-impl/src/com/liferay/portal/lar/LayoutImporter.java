@@ -681,7 +681,6 @@ public class LayoutImporter {
 
 		if (importPermissions) {
 			if (userId > 0) {
-
 				Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
 					User.class);
 
@@ -1235,7 +1234,6 @@ public class LayoutImporter {
 				importedLayout.getCompanyId(), resourceName,
 				ResourceConstants.SCOPE_INDIVIDUAL, resourcePrimKey,
 				guestRole.getRoleId(), new String[] {ActionKeys.VIEW});
-
 		}
 
 		_portletImporter.importPortletData(

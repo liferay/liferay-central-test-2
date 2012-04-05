@@ -16,7 +16,7 @@ package com.liferay.portal.model;
 
 /**
  * @author Brian Wing Shun Chan
- * @see com.liferay.portal.model.impl.ResourceImpl
+ * @see    com.liferay.portal.model.impl.ResourceImpl
  */
 public interface Resource {
 
@@ -24,9 +24,9 @@ public interface Resource {
 
 	public long getCompanyId();
 
-	public java.lang.String getName();
+	public String getName();
 
-	public java.lang.String getPrimKey();
+	public String getPrimKey();
 
 	public long getResourceId();
 
@@ -36,7 +36,7 @@ public interface Resource {
 
 	public void setCompanyId(long companyId);
 
-	public void setName(java.lang.String name);
+	public void setName(String name);
 
 	public void setPrimKey(String primKey);
 

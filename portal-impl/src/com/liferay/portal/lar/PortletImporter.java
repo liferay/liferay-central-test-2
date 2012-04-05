@@ -88,7 +88,6 @@ import com.liferay.portlet.asset.service.permission.AssetPermission;
 import com.liferay.portlet.asset.service.persistence.AssetCategoryUtil;
 import com.liferay.portlet.asset.service.persistence.AssetTagUtil;
 import com.liferay.portlet.asset.service.persistence.AssetVocabularyUtil;
-import com.liferay.portlet.documentlibrary.lar.DLPortletDataHandlerImpl;
 import com.liferay.portlet.expando.NoSuchTableException;
 import com.liferay.portlet.expando.model.ExpandoColumn;
 import com.liferay.portlet.expando.model.ExpandoTable;
@@ -301,8 +300,6 @@ public class PortletImporter {
 			parameterMap, PortletDataHandlerKeys.DELETE_PORTLET_DATA);
 		boolean importPermissions = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.PERMISSIONS);
-		boolean importUserPermissions = MapUtil.getBoolean(
-			parameterMap, PortletDataHandlerKeys.PERMISSIONS);
 		boolean importPortletData = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.PORTLET_DATA);
 		boolean importPortletArchivedSetups = MapUtil.getBoolean(
@@ -480,7 +477,6 @@ public class PortletImporter {
 				portletElement, portletId);
 
 			if (userId > 0) {
-
 				Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
 					User.class);
 

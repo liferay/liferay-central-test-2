@@ -14,7 +14,6 @@
 
 package com.liferay.portal.service.permission;
 
-import com.liferay.portal.NoSuchResourceException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.Validator;
@@ -253,12 +252,13 @@ public class LayoutPermissionImpl implements LayoutPermission {
 			}
 		}
 
-		if (ResourcePermissionLocalServiceUtil.
-				getResourcePermissionsCount(
-					layout.getCompanyId(), Layout.class.getName(),
-					ResourceConstants.SCOPE_INDIVIDUAL,
-					String.valueOf(layout.getPlid())) == 0) {
+		int resourcePermissionsCount =
+			ResourcePermissionLocalServiceUtil.getResourcePermissionsCount(
+				layout.getCompanyId(), Layout.class.getName(),
+				ResourceConstants.SCOPE_INDIVIDUAL,
+				String.valueOf(layout.getPlid()));
 
+		if (resourcePermissionsCount == 0) {
 			boolean addGroupPermission = true;
 			boolean addGuestPermission = true;
 

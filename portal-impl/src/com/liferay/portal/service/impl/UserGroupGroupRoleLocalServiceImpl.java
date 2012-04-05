@@ -17,8 +17,6 @@ package com.liferay.portal.service.impl;
 import com.liferay.portal.NoSuchUserGroupGroupRoleException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.model.Group;
-import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.model.UserGroupGroupRole;
@@ -36,7 +34,7 @@ public class UserGroupGroupRoleLocalServiceImpl
 
 	public void addUserGroupGroupRoles(
 			long userGroupId, long groupId, long[] roleIds)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		for (long roleId : roleIds) {
 			UserGroupGroupRolePK pk = new UserGroupGroupRolePK(
@@ -57,7 +55,7 @@ public class UserGroupGroupRoleLocalServiceImpl
 
 	public void addUserGroupGroupRoles(
 			long[] userGroupIds, long groupId, long roleId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		for (long userGroupId : userGroupIds) {
 			UserGroupGroupRolePK pk = new UserGroupGroupRolePK(

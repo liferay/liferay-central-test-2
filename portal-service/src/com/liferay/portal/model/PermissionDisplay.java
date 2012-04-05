@@ -23,7 +23,8 @@ import java.io.Serializable;
 public class PermissionDisplay
 	implements Comparable<PermissionDisplay>, Serializable {
 
-	public PermissionDisplay(Object[] permission, Resource resource, String portletName,
+	public PermissionDisplay(
+		Permission permission, Resource resource, String portletName,
 		String portletLabel, String modelName, String modelLabel,
 		String actionId, String actionLabel) {
 
@@ -93,7 +94,7 @@ public class PermissionDisplay
 		return _modelName;
 	}
 
-	public Object[] getPermission() {
+	public Permission getPermission() {
 		return _permission;
 	}
 
@@ -118,7 +119,7 @@ public class PermissionDisplay
 	private String _actionLabel;
 	private String _modelLabel;
 	private String _modelName;
-	private Object[] _permission;
+	private Permission _permission;
 	private String _portletLabel;
 	private String _portletName;
 	private Resource _resource;

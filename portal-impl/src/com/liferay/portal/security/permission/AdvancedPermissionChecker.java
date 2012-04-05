@@ -14,7 +14,6 @@
 
 package com.liferay.portal.security.permission;
 
-import com.liferay.portal.NoSuchResourceException;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
@@ -380,10 +379,9 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 
 			List<Role> roles = new UniqueList<Role>();
 
-			if (groups.size() > 0) {
-				List<Role> userRelatedRoles=
-					RoleLocalServiceUtil.getUserRelatedRoles(
-						userId, groups);
+			if (!groups.isEmpty()) {
+				List<Role> userRelatedRoles =
+					RoleLocalServiceUtil.getUserRelatedRoles(userId, groups);
 
 				roles.addAll(userRelatedRoles);
 			}
@@ -391,25 +389,20 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 				roles.addAll(RoleLocalServiceUtil.getUserRoles(userId));
 			}
 
-			List<Role> userGroupRoles =
-				RoleLocalServiceUtil.getUserGroupRoles(userId, groupId);
+			List<Role> userGroupRoles = RoleLocalServiceUtil.getUserGroupRoles(
+				userId, groupId);
 
 			roles.addAll(userGroupRoles);
 
 			List<Role> userGroupGroupRoles =
-				RoleLocalServiceUtil.getUserGroupGroupRoles(
-					userId, groupId);
+				RoleLocalServiceUtil.getUserGroupGroupRoles(userId, groupId);
 
 			roles.addAll(userGroupGroupRoles);
 
 			if (group != null) {
-				if (group.isOrganization() &&
-					userOrgGroups.contains(group)) {
-
-					Role organizationUserRole =
-						RoleLocalServiceUtil.getRole(
-							group.getCompanyId(),
-							RoleConstants.ORGANIZATION_USER);
+				if (group.isOrganization() && userOrgGroups.contains(group)) {
+					Role organizationUserRole = RoleLocalServiceUtil.getRole(
+						group.getCompanyId(), RoleConstants.ORGANIZATION_USER);
 
 					roles.add(organizationUserRole);
 				}
@@ -469,30 +462,29 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 		}
 
 		try {
-				if (ResourceBlockLocalServiceUtil.isSupported(name)) {
-					PermissionedModel permissionedModel =
-						ResourceBlockLocalServiceUtil.getPermissionedModel(
-							name, GetterUtil.getLong(primKey));
+			if (ResourceBlockLocalServiceUtil.isSupported(name)) {
+				PermissionedModel permissionedModel =
+					ResourceBlockLocalServiceUtil.getPermissionedModel(
+						name, GetterUtil.getLong(primKey));
 
-					long groupId = 0;
+				long groupId = 0;
 
-					if (permissionedModel instanceof GroupedModel) {
-						GroupedModel groupedModel =
-							(GroupedModel)permissionedModel;
+				if (permissionedModel instanceof GroupedModel) {
+					GroupedModel groupedModel = (GroupedModel)permissionedModel;
 
-						groupId = groupedModel.getGroupId();
-					}
-
-					ResourceBlockIdsBag resourceBlockIdsBag =
-						getOwnerResourceBlockIdsBag(companyId, groupId, name);
-
-					return ResourceBlockLocalServiceUtil.hasPermission(
-						name, permissionedModel, actionId, resourceBlockIdsBag);
+					groupId = groupedModel.getGroupId();
 				}
 
-				return ResourcePermissionLocalServiceUtil.hasResourcePermission(
-					companyId, name, ResourceConstants.SCOPE_INDIVIDUAL,
-					primKey, getOwnerRoleId(), actionId);
+				ResourceBlockIdsBag resourceBlockIdsBag =
+					getOwnerResourceBlockIdsBag(companyId, groupId, name);
+
+				return ResourceBlockLocalServiceUtil.hasPermission(
+					name, permissionedModel, actionId, resourceBlockIdsBag);
+			}
+
+			return ResourcePermissionLocalServiceUtil.hasResourcePermission(
+				companyId, name, ResourceConstants.SCOPE_INDIVIDUAL, primKey,
+				getOwnerRoleId(), actionId);
 		}
 		catch (Exception e) {
 			if (_log.isDebugEnabled()) {
@@ -726,79 +718,39 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 
 		List<Resource> resources = new ArrayList<Resource>(4);
 
-		try {
-			Resource resource = ResourceLocalServiceUtil.getResource(
-				companyId, name, ResourceConstants.SCOPE_INDIVIDUAL, primKey);
+		Resource individualResource = ResourceLocalServiceUtil.getResource(
+			companyId, name, ResourceConstants.SCOPE_INDIVIDUAL, primKey);
 
-			resources.add(resource);
-		}
-		catch (NoSuchResourceException nsre) {
-			if (_log.isWarnEnabled()) {
-				_log.warn(
-					"Resource " + companyId + " " + name + " " +
-						ResourceConstants.SCOPE_INDIVIDUAL + " " + primKey +
-							" does not exist");
-			}
-		}
+		resources.add(individualResource);
 
 		// Group
 
-		try {
-			if (groupId > 0) {
-				Resource resource = ResourceLocalServiceUtil.getResource(
-					companyId, name, ResourceConstants.SCOPE_GROUP,
-					String.valueOf(groupId));
+		if (groupId > 0) {
+			Resource groupResource = ResourceLocalServiceUtil.getResource(
+				companyId, name, ResourceConstants.SCOPE_GROUP,
+				String.valueOf(groupId));
 
-				resources.add(resource);
-			}
-		}
-		catch (NoSuchResourceException nsre) {
-			if (_log.isWarnEnabled()) {
-				_log.warn(
-					"Resource " + companyId + " " + name + " " +
-						ResourceConstants.SCOPE_GROUP + " " + groupId +
-							" does not exist");
-			}
+			resources.add(groupResource);
 		}
 
 		// Group template
 
-		try {
-			if (signedIn && (groupId > 0)) {
-				Resource resource = ResourceLocalServiceUtil.getResource(
+		if (signedIn && (groupId > 0)) {
+			Resource groupTemplateResource =
+				ResourceLocalServiceUtil.getResource(
 					companyId, name, ResourceConstants.SCOPE_GROUP_TEMPLATE,
 					String.valueOf(GroupConstants.DEFAULT_PARENT_GROUP_ID));
 
-				resources.add(resource);
-			}
-		}
-		catch (NoSuchResourceException nsre) {
-			if (_log.isWarnEnabled()) {
-				_log.warn(
-					"Resource " + companyId + " " + name + " " +
-						ResourceConstants.SCOPE_GROUP_TEMPLATE + " " +
-							GroupConstants.DEFAULT_PARENT_GROUP_ID +
-								" does not exist");
-			}
+			resources.add(groupTemplateResource);
 		}
 
 		// Company
 
-		try {
-			Resource resource = ResourceLocalServiceUtil.getResource(
-				companyId, name, ResourceConstants.SCOPE_COMPANY,
-				String.valueOf(companyId));
+		Resource companyResource = ResourceLocalServiceUtil.getResource(
+			companyId, name, ResourceConstants.SCOPE_COMPANY,
+			String.valueOf(companyId));
 
-			resources.add(resource);
-		}
-		catch (NoSuchResourceException nsre) {
-			if (_log.isWarnEnabled()) {
-				_log.warn(
-					"Resource " + companyId + " " + name + " " +
-						ResourceConstants.SCOPE_COMPANY + " " + companyId +
-							" does not exist");
-			}
-		}
+		resources.add(companyResource);
 
 		return resources;
 	}
@@ -875,7 +827,6 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 
 		try {
 			if (ResourceBlockLocalServiceUtil.isSupported(name)) {
-
 				ResourceBlockIdsBag resourceBlockIdsBag =
 					getGuestResourceBlockIdsBag(companyId, groupId, name);
 
@@ -980,7 +931,6 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 		logHasUserPermission(groupId, name, primKey, actionId, stopWatch, 1);
 
 		if (ResourceBlockLocalServiceUtil.isSupported(name)) {
-
 			ResourceBlockIdsBag resourceBlockIdsBag = getResourceBlockIdsBag(
 				companyId, groupId, getUserId(), name);
 

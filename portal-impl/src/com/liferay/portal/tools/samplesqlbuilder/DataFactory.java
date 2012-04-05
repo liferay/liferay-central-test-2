@@ -121,8 +121,7 @@ public class DataFactory {
 		String baseDir, int maxGroupsCount, int maxJournalArticleSize,
 		int maxUserToGroupCount, SimpleCounter counter,
 		SimpleCounter dlDateCounter, SimpleCounter permissionCounter,
-		SimpleCounter resourceCounter,
-		SimpleCounter resourcePermissionCounter,
+		SimpleCounter resourceCounter, SimpleCounter resourcePermissionCounter,
 		SimpleCounter socialActivityCounter) {
 
 		try {

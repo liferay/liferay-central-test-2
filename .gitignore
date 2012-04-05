@@ -161,7 +161,6 @@ _sass_cache_*.css
 /sql/sequences
 /sql/sql.*.properties
 /sql/update-*
-!/sql/update-*.sql
 /sql/velocity.log*
 
 /support-tomcat/*.iml

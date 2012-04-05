@@ -15,26 +15,19 @@
 package com.liferay.portlet.portletconfiguration.action;
 
 import com.liferay.portal.kernel.servlet.SessionErrors;
-import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.Layout;
-import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletConstants;
-import com.liferay.portal.model.Resource;
-import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.security.permission.PermissionCheckerUtil;
 import com.liferay.portal.security.permission.PermissionPropagator;
+import com.liferay.portal.service.PermissionServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.ResourceBlockLocalServiceUtil;
 import com.liferay.portal.service.ResourceBlockServiceUtil;
-import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.ResourcePermissionServiceUtil;
-import com.liferay.portal.servlet.filters.cache.CacheUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
@@ -66,8 +59,6 @@ public class EditPermissionsAction extends EditConfigurationAction {
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
-
-		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		try {
 			updateRolePermissions(actionRequest);
@@ -112,7 +103,7 @@ public class EditPermissionsAction extends EditConfigurationAction {
 		}
 
 		try {
-			PermissionCheckerUtil.checkPermission(
+			PermissionServiceUtil.checkPermission(
 				groupId, selResource, resourcePrimKey);
 		}
 		catch (PrincipalException pe) {
@@ -237,4 +228,5 @@ public class EditPermissionsAction extends EditConfigurationAction {
 			}
 		}
 	}
+
 }

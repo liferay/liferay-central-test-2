@@ -56,7 +56,7 @@ public class CleanUpPermissionsUtil {
 	}
 
 	private static void _cleanUpAddToPagePermissions(
-		long companyId, long roleId, boolean limitScope)
+			long companyId, long roleId, boolean limitScope)
 		throws Exception {
 
 		List<ResourcePermission> roleResourcePermissions =

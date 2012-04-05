@@ -15,8 +15,6 @@
 package com.liferay.portal.lar;
 
 import com.liferay.portal.kernel.lar.PortletDataContext;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.KeyValuePair;
@@ -148,9 +146,9 @@ public class PermissionExporter {
 	}
 
 	protected void exportPermissions(
-		LayoutCache layoutCache, long companyId, long groupId,
-		String resourceName, String resourcePrimKey,
-		Element permissionsElement, boolean portletActions)
+			LayoutCache layoutCache, long companyId, long groupId,
+			String resourceName, String resourcePrimKey,
+			Element permissionsElement, boolean portletActions)
 		throws Exception {
 
 		List<Role> roles = layoutCache.getGroupRoles_5(groupId, resourceName);
@@ -389,7 +387,5 @@ public class PermissionExporter {
 
 		return false;
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(PermissionExporter.class);
 
 }

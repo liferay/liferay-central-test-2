@@ -407,9 +407,9 @@ public class UserGroupFinderImpl
 			else if (value instanceof Long[]) {
 				Long[] valueArray = (Long[])value;
 
-				for (Long element : valueArray) {
-					if (Validator.isNotNull(element)) {
-						qPos.add(element);
+				for (int i = 0; i < valueArray.length; i++) {
+					if (Validator.isNotNull(valueArray[i])) {
+						qPos.add(valueArray[i]);
 					}
 				}
 			}

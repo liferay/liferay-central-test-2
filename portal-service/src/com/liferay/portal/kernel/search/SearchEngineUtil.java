@@ -189,7 +189,7 @@ public class SearchEngineUtil {
 		indexWriter.deleteDocuments(searchContext, uids);
 	}
 
-	 /**
+	/**
 	 * @deprecated {@link #deletePortletDocuments(String, long, String)}
 	 */
 	public static void deletePortletDocuments(long companyId, String portletId)

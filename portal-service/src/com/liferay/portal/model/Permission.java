@@ -12,18 +12,28 @@
  * details.
  */
 
-package com.liferay.portal.upgrade.v6_1_1_to_6_2_0;
-
-import com.liferay.portal.kernel.upgrade.UpgradeProcess;
+package com.liferay.portal.model;
 
 /**
- * @author Raymond Augé
+ * @author Brian Wing Shun Chan
+ * @see    com.liferay.portal.model.impl.PermissionImpl
  */
-public class UpgradeSchema extends UpgradeProcess {
+public interface Permission {
 
-	@Override
-	protected void doUpgrade() throws Exception {
-		runSQLTemplate("update-6.1.1-6.2.0.sql", false);
-	}
+	public String getActionId();
+
+	public String getName();
+
+	public String getPrimKey();
+
+	public int getScope();
+
+	public void setActionId(String actionId);
+
+	public void setName(String name);
+
+	public void setPrimKey(String primKey);
+
+	public void setScope(int scope);
 
 }

@@ -149,14 +149,13 @@ public class EditRolePermissionsAction extends PortletAction {
 		if (ResourceBlockLocalServiceUtil.isSupported(name)) {
 			if (scope == ResourceConstants.SCOPE_GROUP) {
 				ResourceBlockServiceUtil.removeGroupScopePermission(
-					themeDisplay.getScopeGroupId(),
-					themeDisplay.getCompanyId(),
+					themeDisplay.getScopeGroupId(), themeDisplay.getCompanyId(),
 					GetterUtil.getLong(primKey), name, roleId, actionId);
 			}
 			else {
 				ResourceBlockServiceUtil.removeCompanyScopePermission(
-					themeDisplay.getScopeGroupId(),
-					themeDisplay.getCompanyId(), name, roleId, actionId);
+					themeDisplay.getScopeGroupId(), themeDisplay.getCompanyId(),
+					name, roleId, actionId);
 			}
 		}
 		else {
@@ -178,8 +177,8 @@ public class EditRolePermissionsAction extends PortletAction {
 	}
 
 	protected void updateAction(
-		Role role, long groupId, String selResource, String actionId,
-		boolean selected, int scope, String[] groupIds)
+			Role role, long groupId, String selResource, String actionId,
+			boolean selected, int scope, String[] groupIds)
 		throws Exception {
 
 		long companyId = role.getCompanyId();
@@ -312,9 +311,7 @@ public class EditRolePermissionsAction extends PortletAction {
 					}
 				}
 
-				if (ResourceBlockLocalServiceUtil.isSupported(
-						selResource)) {
-
+				if (ResourceBlockLocalServiceUtil.isSupported(selResource)) {
 					updateActions_Blocks(
 						role, themeDisplay.getScopeGroupId(), selResource,
 						actionId, selected, scope, groupIds);
@@ -342,8 +339,8 @@ public class EditRolePermissionsAction extends PortletAction {
 	}
 
 	protected void updateActions_Blocks(
-		Role role, long scopeGroupId, String selResource, String actionId,
-		boolean selected, int scope, String[] groupIds)
+			Role role, long scopeGroupId, String selResource, String actionId,
+			boolean selected, int scope, String[] groupIds)
 		throws Exception {
 
 		long companyId = role.getCompanyId();

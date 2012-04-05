@@ -180,7 +180,6 @@
 			<arg value="sample.sql.wiki.node.count=1" />
 			<arg value="sample.sql.wiki.page.comment.count=1" />
 			<arg value="sample.sql.wiki.page.count=1" />
-			<arg value="sample.sql.security.enabled=false" />
 		</java>
 
 		<delete dir="${tstamp.value}" />

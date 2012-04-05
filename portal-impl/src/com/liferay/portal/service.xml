@@ -1179,6 +1179,7 @@
 			<finder-column name="userId" />
 		</finder>
 	</entity>
+	<entity name="Permission" local-service="false" remote-service="true" />
 	<entity name="Phone" local-service="true" remote-service="true">
 
 		<!-- PK fields -->

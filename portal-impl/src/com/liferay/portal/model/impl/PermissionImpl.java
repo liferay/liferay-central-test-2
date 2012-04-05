@@ -14,22 +14,18 @@
 
 package com.liferay.portal.model.impl;
 
-import com.liferay.portal.model.Resource;
+import com.liferay.portal.model.Permission;
 
 /**
  * @author Brian Wing Shun Chan
  */
-public class ResourceImpl implements Resource {
+public class PermissionImpl implements Permission {
 
-	public ResourceImpl() {
+	public PermissionImpl() {
 	}
 
-	public long getCodeId() {
-		return _codeId;
-	}
-
-	public long getCompanyId() {
-		return _companyId;
+	public String getActionId() {
+		return _actionId;
 	}
 
 	public String getName() {
@@ -40,20 +36,12 @@ public class ResourceImpl implements Resource {
 		return _primKey;
 	}
 
-	public long getResourceId() {
-		return _resourceId;
-	}
-
 	public int getScope() {
 		return _scope;
 	}
 
-	public void setCodeId(long codeId) {
-		_codeId = codeId;
-	}
-
-	public void setCompanyId(long companyId) {
-		_companyId = companyId;
+	public void setActionId(String actionId) {
+		_actionId = actionId;
 	}
 
 	public void setName(String name) {
@@ -64,19 +52,13 @@ public class ResourceImpl implements Resource {
 		_primKey = primKey;
 	}
 
-	public void setResourceId(long resourceId) {
-		_resourceId = resourceId;
-	}
-
 	public void setScope(int scope) {
 		_scope = scope;
 	}
 
-	private long _codeId;
-	private long _companyId;
+	private String _actionId;
 	private String _name;
 	private String _primKey;
-	private long _resourceId;
 	private int _scope;
 
 }

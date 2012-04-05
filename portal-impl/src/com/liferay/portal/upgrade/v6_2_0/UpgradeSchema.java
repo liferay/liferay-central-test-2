@@ -12,25 +12,18 @@
  * details.
  */
 
-package com.liferay.portal.upgrade;
+package com.liferay.portal.upgrade.v6_2_0;
 
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
-import com.liferay.portal.kernel.util.ReleaseInfo;
-import com.liferay.portal.upgrade.v6_1_1_to_6_2_0.UpgradeSchema;
 
 /**
  * @author Raymond Augé
  */
-public class UpgradeProcess_6_1_1_to_6_2_0 extends UpgradeProcess {
-
-	@Override
-	public int getThreshold() {
-		return ReleaseInfo.RELEASE_6_1_1_BUILD_NUMBER;
-	}
+public class UpgradeSchema extends UpgradeProcess {
 
 	@Override
 	protected void doUpgrade() throws Exception {
-		upgrade(UpgradeSchema.class);
+		runSQLTemplate("update-6.1.1-6.2.0.sql", false);
 	}
 
 }

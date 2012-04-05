@@ -4785,7 +4785,6 @@ public class ServiceBuilder {
 			}
 
 			if (!_packagePath.equals("com.liferay.portal")) {
-				referenceSet.add("com.liferay.portal.Resource");
 				referenceSet.add("com.liferay.portal.User");
 			}
 

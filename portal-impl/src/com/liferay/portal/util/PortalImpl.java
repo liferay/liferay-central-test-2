@@ -5389,15 +5389,14 @@ public class PortalImpl implements Portal {
 		}
 
 		int count =
-			ResourcePermissionLocalServiceUtil.
-				getResourcePermissionsCount(
-					companyId, name, ResourceConstants.SCOPE_INDIVIDUAL,
-					primaryKey);
+			ResourcePermissionLocalServiceUtil.getResourcePermissionsCount(
+				companyId, name, ResourceConstants.SCOPE_INDIVIDUAL,
+				primaryKey);
 
 		if (count == 0) {
 			ResourceLocalServiceUtil.addResources(
-					companyId, groupId, 0, name, primaryKey, portletActions, true,
-					true);
+				companyId, groupId, 0, name, primaryKey, portletActions, true,
+				true);
 		}
 	}
 

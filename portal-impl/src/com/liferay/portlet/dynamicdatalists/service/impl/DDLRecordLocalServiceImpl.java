@@ -224,7 +224,8 @@ public class DDLRecordLocalServiceImpl
 	}
 
 	/**
-	 * @deprecated {@link #getCompanyRecords(long, int, int, int, int, OrderByComparator)}
+	 * @deprecated {@link #getCompanyRecords(long, int, int, int, int,
+	 *             OrderByComparator)}
 	 */
 	public List<DDLRecord> getCompanyRecords(
 			long companyId, int scope, int start, int end,

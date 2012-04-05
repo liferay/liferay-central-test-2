@@ -476,9 +476,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 
 			Set<String> availableActionIds = roleIdsToActionIds.get(roleId);
 
-			if ((availableActionIds == null) ||
-				availableActionIds.isEmpty()) {
-
+			if ((availableActionIds == null) || availableActionIds.isEmpty()) {
 				continue;
 			}
 

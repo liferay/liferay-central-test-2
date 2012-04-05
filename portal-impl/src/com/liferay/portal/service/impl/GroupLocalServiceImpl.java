@@ -2345,8 +2345,8 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 		if (resourceBlockLocalService.isSupported(name)) {
 			resourceBlockLocalService.setGroupScopePermissions(
-				role.getCompanyId(), group.getGroupId(), name,
-				role.getRoleId(), Arrays.asList(actionIds));
+				role.getCompanyId(), group.getGroupId(), name, role.getRoleId(),
+				Arrays.asList(actionIds));
 		}
 		else {
 			resourcePermissionLocalService.setResourcePermissions(

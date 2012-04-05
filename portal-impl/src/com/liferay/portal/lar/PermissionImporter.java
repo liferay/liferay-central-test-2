@@ -16,8 +16,6 @@ package com.liferay.portal.lar;
 
 import com.liferay.portal.NoSuchTeamException;
 import com.liferay.portal.kernel.lar.PortletDataContext;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.KeyValuePair;
 import com.liferay.portal.kernel.util.LocalizationUtil;
@@ -76,18 +74,16 @@ public class PermissionImporter {
 			String resourceName = Layout.class.getName();
 			String resourcePrimKey = String.valueOf(layout.getPlid());
 
-				importPermissions(
-					layoutCache, companyId, groupId, userId, resourceName,
-					resourcePrimKey, permissionsElement, false);
+			importPermissions(
+				layoutCache, companyId, groupId, userId, resourceName,
+				resourcePrimKey, permissionsElement, false);
 		}
-
-		Element rolesElement = parentElement.element("roles");
 	}
 
 	protected void importPermissions(
-		LayoutCache layoutCache, long companyId, long groupId, long userId,
-		String resourceName, String resourcePrimKey,
-		Element permissionsElement, boolean portletActions)
+			LayoutCache layoutCache, long companyId, long groupId, long userId,
+			String resourceName, String resourcePrimKey,
+			Element permissionsElement, boolean portletActions)
 		throws Exception {
 
 		Map<Long, String[]> roleIdsToActionIds = new HashMap<Long, String[]>();
@@ -171,8 +167,6 @@ public class PermissionImporter {
 				layoutCache, companyId, groupId, userId, resourceName,
 				resourcePrimKey, permissionsElement, true);
 		}
-
-		Element rolesElement = portletElement.element("roles");
 	}
 
 	protected void readPortletDataPermissions(
@@ -219,7 +213,5 @@ public class PermissionImporter {
 				resourceName, resourcePK, permissions);
 		}
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(PermissionImporter.class);
 
 }

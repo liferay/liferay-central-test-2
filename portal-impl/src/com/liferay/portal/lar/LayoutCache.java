@@ -14,7 +14,6 @@
 
 package com.liferay.portal.lar;
 
-import com.liferay.portal.NoSuchResourceException;
 import com.liferay.portal.NoSuchRoleException;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -197,9 +196,8 @@ public class LayoutCache {
 	}
 
 	protected Resource getResource(
-			long companyId, long groupId, String resourceName, int scope,
-			String resourcePrimKey, boolean portletActions)
-		throws PortalException, SystemException {
+		long companyId, long groupId, String resourceName, int scope,
+		String resourcePrimKey, boolean portletActions) {
 
 		StringBundler sb = new StringBundler(5);
 
@@ -214,18 +212,8 @@ public class LayoutCache {
 		Resource resource = resourcesMap.get(key);
 
 		if (resource == null) {
-			try {
-				resource = ResourceLocalServiceUtil.getResource(
-					companyId, resourceName, scope, resourcePrimKey);
-			}
-			catch (NoSuchResourceException nsre) {
-				ResourceLocalServiceUtil.addResources(
-					companyId, groupId, 0, resourceName, resourcePrimKey,
-					portletActions, true, true);
-
-				resource = ResourceLocalServiceUtil.getResource(
-					companyId, resourceName, scope, resourcePrimKey);
-			}
+			resource = ResourceLocalServiceUtil.getResource(
+				companyId, resourceName, scope, resourcePrimKey);
 
 			resourcesMap.put(key, resource);
 		}

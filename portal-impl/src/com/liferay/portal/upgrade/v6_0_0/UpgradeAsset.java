@@ -541,7 +541,6 @@ public class UpgradeAsset extends UpgradeProcess {
 		throws Exception{
 
 		String oldName = "com.liferay.portlet.tags.model.TagsEntry";
-
 		String newName = AssetCategory.class.getName();
 
 		runSQL(

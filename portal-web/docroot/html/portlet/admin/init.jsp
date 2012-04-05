@@ -26,9 +26,6 @@ page import="com.liferay.portal.kernel.dao.shard.ShardUtil" %><%@
 page import="com.liferay.portal.kernel.plugin.PluginPackage" %><%@
 page import="com.liferay.portal.kernel.scripting.ScriptingUtil" %><%@
 page import="com.liferay.portal.kernel.util.InstancePool" %><%@
-page import="com.liferay.portal.kernel.xml.Document" %><%@
-page import="com.liferay.portal.kernel.xml.Element" %><%@
-page import="com.liferay.portal.kernel.xml.SAXReaderUtil" %><%@
 page import="com.liferay.portal.util.PortalInstances" %><%@
 page import="com.liferay.portlet.documentlibrary.model.DLFileEntry" %><%@
 page import="com.liferay.portlet.documentlibrary.model.DLFileVersion" %><%@
@@ -37,8 +34,7 @@ page import="com.liferay.portlet.documentlibrary.util.PDFProcessorUtil" %><%@
 page import="com.liferay.portlet.expando.model.ExpandoBridge" %><%@
 page import="com.liferay.portlet.expando.model.ExpandoColumnConstants" %>
 
-<%@ page import="org.apache.commons.collections.map.MultiValueMap" %><%@
-page import="org.apache.log4j.Level" %><%@
+<%@ page import="org.apache.log4j.Level" %><%@
 page import="org.apache.log4j.LogManager" %><%@
 page import="org.apache.log4j.Logger" %>
 
