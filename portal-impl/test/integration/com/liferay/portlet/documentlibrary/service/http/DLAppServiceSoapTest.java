@@ -27,8 +27,8 @@ import com.liferay.portal.test.LiferayIntegrationJUnitTestRunner;
 import com.liferay.portal.util.TestPropsValues;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -39,8 +39,8 @@ import org.junit.runner.RunWith;
 @RunWith(LiferayIntegrationJUnitTestRunner.class)
 public class DLAppServiceSoapTest {
 
-	@BeforeClass
-	public static void setUp() throws Exception {
+	@Before
+	public void setUp() throws Exception {
 		String name = "Test Folder";
 		String description = "This is a test folder.";
 
@@ -63,8 +63,8 @@ public class DLAppServiceSoapTest {
 			serviceContext);
 	}
 
-	@AfterClass
-	public static void tearDown() throws Exception {
+	@After
+	public void tearDown() throws Exception {
 		try {
 			if (_folder != null) {
 				getDLAppServiceSoap().deleteFolder(_folder.getFolderId());
@@ -94,19 +94,6 @@ public class DLAppServiceSoapTest {
 			fileEntry.getUuid(), fileEntry.getGroupId());
 	}
 
-	protected static DLAppServiceSoap getDLAppServiceSoap() throws Exception {
-		if (_service == null) {
-			DLAppServiceSoapServiceLocator locator =
-				new DLAppServiceSoapServiceLocator();
-
-			_service = locator.getPortlet_DL_DLAppService(
-				TestPropsValues.getSoapURL(
-					locator.getPortlet_DL_DLAppServiceWSDDServiceName()));
-		}
-
-		return _service;
-	}
-
 	protected FileEntrySoap addFileEntry(String title) throws Exception {
 		long folderId = _folder.getFolderId();
 		String description = StringPool.BLANK;
@@ -122,6 +109,19 @@ public class DLAppServiceSoapTest {
 			TestPropsValues.getGroupId(), folderId, title,
 			ContentTypes.TEXT_PLAIN, title, description, changeLog, bytes,
 			serviceContext);
+	}
+
+	protected DLAppServiceSoap getDLAppServiceSoap() throws Exception {
+		if (_service == null) {
+			DLAppServiceSoapServiceLocator locator =
+				new DLAppServiceSoapServiceLocator();
+
+			_service = locator.getPortlet_DL_DLAppService(
+				TestPropsValues.getSoapURL(
+					locator.getPortlet_DL_DLAppServiceWSDDServiceName()));
+		}
+
+		return _service;
 	}
 
 	private static final String _CONTENT =
