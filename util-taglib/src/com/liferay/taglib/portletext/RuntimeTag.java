@@ -75,7 +75,7 @@ public class RuntimeTag extends TagSupport {
 					request, portletId, defaultPreferences);
 			}
 
-			request = DynamicServletRequest.addDynamicQueryString(
+			request = DynamicServletRequest.addQueryString(
 				request, queryString);
 
 			RuntimePortletUtil.processPortlet(request, response, portletId);

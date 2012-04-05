@@ -35,50 +35,51 @@ import javax.servlet.http.HttpServletRequestWrapper;
  */
 public class DynamicServletRequest extends HttpServletRequestWrapper {
 
-	public static HttpServletRequest addDynamicQueryString(
+	public static HttpServletRequest addQueryString(
 		HttpServletRequest request, String queryString) {
 
-		return addDynamicQueryString(request, queryString, true);
+		return addQueryString(request, queryString, true);
 	}
 
-	public static HttpServletRequest addDynamicQueryString(
+	public static HttpServletRequest addQueryString(
 		HttpServletRequest request, String queryString, boolean inherit) {
 
 		String[] parameters = StringUtil.split(queryString, CharPool.AMPERSAND);
 
-		if (parameters.length > 0) {
-			Map<String, String[]> parameterMap =
-				new HashMap<String, String[]>();
+		if (parameters.length == 0) {
+			return request;
+		}
 
-			for (String parameter : parameters) {
-				String[] parameterParts = StringUtil.split(
-					parameter, CharPool.EQUAL);
+		Map<String, String[]> parameterMap = new HashMap<String, String[]>();
 
-				String name = parameterParts[0];
-				String value = StringPool.BLANK;
+		for (String parameter : parameters) {
+			String[] parameterParts = StringUtil.split(
+				parameter, CharPool.EQUAL);
 
-				if (parameterParts.length == 2) {
-					value = parameterParts[1];
-				}
+			String name = parameterParts[0];
+			String value = StringPool.BLANK;
 
-				String[] values = parameterMap.get(name);
-
-				if (values == null) {
-					parameterMap.put(name, new String[] {value});
-				}
-				else {
-					String[] newValues = new String[values.length + 1];
-
-					System.arraycopy(values, 0, newValues, 0, values.length);
-
-					newValues[newValues.length - 1] = value;
-
-					parameterMap.put(name, newValues);
-				}
+			if (parameterParts.length == 2) {
+				value = parameterParts[1];
 			}
 
-			request = new DynamicServletRequest(request, parameterMap, inherit);
+			String[] values = parameterMap.get(name);
+
+			if (values == null) {
+				parameterMap.put(name, new String[] {value});
+			}
+			else {
+				String[] newValues = new String[values.length + 1];
+
+				System.arraycopy(values, 0, newValues, 0, values.length);
+
+				newValues[newValues.length - 1] = value;
+
+				parameterMap.put(name, newValues);
+			}
 		}
+
+		request = new DynamicServletRequest(request, parameterMap, inherit);
 
 		return request;
 	}

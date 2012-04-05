@@ -37,7 +37,7 @@ public class DirectRequestDispatcher implements RequestDispatcher {
 			ServletRequest servletRequest, ServletResponse servletResponse)
 		throws IOException, ServletException {
 
-		servletRequest = DynamicServletRequest.addDynamicQueryString(
+		servletRequest = DynamicServletRequest.addQueryString(
 			(HttpServletRequest)servletRequest, _queryString);
 
 		_servlet.service(servletRequest, servletResponse);
@@ -47,7 +47,7 @@ public class DirectRequestDispatcher implements RequestDispatcher {
 			ServletRequest servletRequest, ServletResponse servletResponse)
 		throws IOException, ServletException {
 
-		servletRequest = DynamicServletRequest.addDynamicQueryString(
+		servletRequest = DynamicServletRequest.addQueryString(
 			(HttpServletRequest)servletRequest, _queryString);
 
 		_servlet.service(servletRequest, servletResponse);

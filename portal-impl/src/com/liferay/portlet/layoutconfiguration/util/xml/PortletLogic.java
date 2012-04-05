@@ -73,8 +73,8 @@ public class PortletLogic extends RuntimeLogic {
 		StringServletResponse stringServletResponse =
 			new StringServletResponse(_response);
 
-		HttpServletRequest request =
-			DynamicServletRequest.addDynamicQueryString(_request, queryString);
+		HttpServletRequest request = DynamicServletRequest.addQueryString(
+			_request, queryString);
 
 		RuntimePortletUtil.processPortlet(
 			request, stringServletResponse, portletId);
