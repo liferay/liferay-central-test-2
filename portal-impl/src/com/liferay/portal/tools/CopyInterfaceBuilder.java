@@ -122,10 +122,9 @@ public class CopyInterfaceBuilder {
 					sb.append(_getDimensions(javaParameter.getType()));
 					sb.append(" ");
 					sb.append(javaParameter.getName());
+					sb.append(", ");
 
 					imports.add(javaParameter.getType().getValue());
-
-					sb.append(", ");
 				}
 
 				if (parameters.length > 0) {
