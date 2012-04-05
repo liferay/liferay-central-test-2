@@ -75,6 +75,7 @@ import com.liferay.portal.service.PasswordPolicyLocalService;
 import com.liferay.portal.service.PasswordPolicyRelLocalService;
 import com.liferay.portal.service.PasswordPolicyService;
 import com.liferay.portal.service.PasswordTrackerLocalService;
+import com.liferay.portal.service.PermissionService;
 import com.liferay.portal.service.PersistedModelLocalServiceRegistry;
 import com.liferay.portal.service.PhoneLocalService;
 import com.liferay.portal.service.PhoneService;
@@ -1903,6 +1904,24 @@ public abstract class PhoneLocalServiceBaseImpl implements PhoneLocalService,
 	public void setPasswordTrackerPersistence(
 		PasswordTrackerPersistence passwordTrackerPersistence) {
 		this.passwordTrackerPersistence = passwordTrackerPersistence;
+	}
+
+	/**
+	 * Returns the permission remote service.
+	 *
+	 * @return the permission remote service
+	 */
+	public PermissionService getPermissionService() {
+		return permissionService;
+	}
+
+	/**
+	 * Sets the permission remote service.
+	 *
+	 * @param permissionService the permission remote service
+	 */
+	public void setPermissionService(PermissionService permissionService) {
+		this.permissionService = permissionService;
 	}
 
 	/**
@@ -3948,6 +3967,8 @@ public abstract class PhoneLocalServiceBaseImpl implements PhoneLocalService,
 	protected PasswordTrackerLocalService passwordTrackerLocalService;
 	@BeanReference(type = PasswordTrackerPersistence.class)
 	protected PasswordTrackerPersistence passwordTrackerPersistence;
+	@BeanReference(type = PermissionService.class)
+	protected PermissionService permissionService;
 	@BeanReference(type = PhoneLocalService.class)
 	protected PhoneLocalService phoneLocalService;
 	@BeanReference(type = PhoneService.class)

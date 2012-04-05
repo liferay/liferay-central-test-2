@@ -234,6 +234,13 @@ Liferay.Service.registerClass(
 );
 
 Liferay.Service.registerClass(
+	Liferay.Service.Portal, "Permission",
+	{
+		checkPermission: true
+	}
+);
+
+Liferay.Service.registerClass(
 	Liferay.Service.Portal, "Phone",
 	{
 		addPhone: true,

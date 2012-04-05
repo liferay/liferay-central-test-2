@@ -81,6 +81,7 @@
 	<bean id="com.liferay.portal.service.persistence.PasswordPolicyRelPersistence" class="com.liferay.portal.service.persistence.PasswordPolicyRelPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portal.service.PasswordTrackerLocalService" class="com.liferay.portal.service.impl.PasswordTrackerLocalServiceImpl" />
 	<bean id="com.liferay.portal.service.persistence.PasswordTrackerPersistence" class="com.liferay.portal.service.persistence.PasswordTrackerPersistenceImpl" parent="basePersistence" />
+	<bean id="com.liferay.portal.service.PermissionService" class="com.liferay.portal.service.impl.PermissionServiceImpl" />
 	<bean id="com.liferay.portal.service.PhoneLocalService" class="com.liferay.portal.service.impl.PhoneLocalServiceImpl" />
 	<bean id="com.liferay.portal.service.PhoneService" class="com.liferay.portal.service.impl.PhoneServiceImpl" />
 	<bean id="com.liferay.portal.service.persistence.PhonePersistence" class="com.liferay.portal.service.persistence.PhonePersistenceImpl" parent="basePersistence" />

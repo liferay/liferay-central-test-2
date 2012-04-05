@@ -241,13 +241,10 @@ public interface UserGroupGroupRoleLocalService
 
 	public void addUserGroupGroupRoles(long userGroupId, long groupId,
 		long[] roleIds)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void addUserGroupGroupRoles(long[] userGroupIds, long groupId,
-		long roleId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
+		long roleId) throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void deleteUserGroupGroupRoles(long userGroupId, long groupId,
 		long[] roleIds)

@@ -32,6 +32,7 @@
 	<import class="com.liferay.portal.model.PasswordPolicy" />
 	<import class="com.liferay.portal.model.PasswordPolicyRel" />
 	<import class="com.liferay.portal.model.PasswordTracker" />
+	<import class="com.liferay.portal.model.Permission" />
 	<import class="com.liferay.portal.model.Phone" />
 	<import class="com.liferay.portal.model.PluginSetting" />
 	<import class="com.liferay.portal.model.Portal" />

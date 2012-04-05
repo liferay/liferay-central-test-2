@@ -123,9 +123,7 @@ public class ResourceLocalServiceWrapper implements ResourceLocalService,
 	}
 
 	public com.liferay.portal.model.Resource getResource(long companyId,
-		java.lang.String name, int scope, java.lang.String primKey)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		java.lang.String name, int scope, java.lang.String primKey) {
 		return _resourceLocalService.getResource(companyId, name, scope, primKey);
 	}
 
@@ -166,8 +164,7 @@ public class ResourceLocalServiceWrapper implements ResourceLocalService,
 
 	public void updateResources(long companyId, java.lang.String name,
 		int scope, java.lang.String primKey, java.lang.String newPrimKey)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		_resourceLocalService.updateResources(companyId, name, scope, primKey,
 			newPrimKey);
 	}

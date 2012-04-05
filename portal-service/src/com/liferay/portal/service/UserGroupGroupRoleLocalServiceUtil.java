@@ -266,15 +266,13 @@ public class UserGroupGroupRoleLocalServiceUtil {
 
 	public static void addUserGroupGroupRoles(long userGroupId, long groupId,
 		long[] roleIds)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getService().addUserGroupGroupRoles(userGroupId, groupId, roleIds);
 	}
 
 	public static void addUserGroupGroupRoles(long[] userGroupIds,
 		long groupId, long roleId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getService().addUserGroupGroupRoles(userGroupIds, groupId, roleId);
 	}
 
