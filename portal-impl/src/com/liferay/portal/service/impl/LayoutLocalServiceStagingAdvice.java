@@ -180,9 +180,6 @@ public class LayoutLocalServiceStagingAdvice
 		Layout originalLayout = layoutPersistence.findByG_P_L(
 			groupId, privateLayout, layoutId);
 
-		LayoutSet layoutSet = layoutSetLocalService.getLayoutSet(
-			groupId, privateLayout);
-
 		Layout layout = wrapLayout(originalLayout);
 
 		LayoutRevision layoutRevision = LayoutStagingUtil.getLayoutRevision(
@@ -197,7 +194,7 @@ public class LayoutLocalServiceStagingAdvice
 
 		if (parentLayoutId != originalLayout.getParentLayoutId()) {
 			int priority = getNextPriority(
-				layoutSet, parentLayoutId,
+				groupId, privateLayout, parentLayoutId,
 				originalLayout.getSourcePrototypeLayoutUuid(), -1);
 
 			originalLayout.setPriority(priority);
