@@ -202,7 +202,11 @@ public class CopyInterfaceBuilder {
 		sb = new StringBundler(imports.size() * 3);
 
 		for (String importClass : imports) {
-			if (!importClass.equals("boolean") && !importClass.equals("double") && !importClass.equals("int") && !importClass.equals("long") && !importClass.equals("short") && !importClass.equals("void")) {
+			if (!importClass.equals("boolean") &&
+				!importClass.equals("double") && !importClass.equals("int") &&
+				!importClass.equals("long") && !importClass.equals("short") &&
+				!importClass.equals("void")) {
+
 				sb.append("import ");
 				sb.append(importClass);
 				sb.append(";");
@@ -213,7 +217,10 @@ public class CopyInterfaceBuilder {
 
 		// Write file
 
-		File file = new File(parentDir + "/" + StringUtil.replace(javaClass.getPackage().getName(), ".", "/") + "/Copy" + javaClass.getName() + ".java");
+		File file = new File(
+			parentDir + "/" +
+				StringUtil.replace(javaClass.getPackage().getName(), ".", "/") +
+					"/Copy" + javaClass.getName() + ".java");
 
 		ServiceBuilder.writeFile(file, content);
 	}
