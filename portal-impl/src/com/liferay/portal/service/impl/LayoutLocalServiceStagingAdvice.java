@@ -191,8 +191,11 @@ public class LayoutLocalServiceStagingAdvice
 		}
 
 		if (parentLayoutId != layout.getParentLayoutId()) {
-			layout.setPriority(
-				getNextPriority(groupId, privateLayout, parentLayoutId));
+			int priority = getNextPriority(
+				groupId, privateLayout, parentLayoutId,
+				layout.getSourcePrototypeLayoutUuid(), -1);
+
+			layout.setPriority(priority);
 		}
 
 		layout.setParentLayoutId(parentLayoutId);
