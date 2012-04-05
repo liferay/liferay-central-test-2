@@ -155,7 +155,7 @@ public class ReleaseLocalServiceImpl extends ReleaseLocalServiceBaseImpl {
 
 			Release release = getRelease(
 				ReleaseConstants.DEFAULT_SERVLET_CONTEXT_NAME,
-				ReleaseInfo.getBuildNumber());
+				ReleaseInfo.getParentBuildNumber());
 
 			return release.getBuildNumber();
 		}
