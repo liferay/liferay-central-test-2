@@ -72,7 +72,6 @@ public class AddPortletShoppingDuplicateTest extends BaseTestCase {
 				"More"));
 		selenium.clickAt("//a[@id='_145_addApplication']",
 			RuntimeVariables.replace("More"));
-		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
