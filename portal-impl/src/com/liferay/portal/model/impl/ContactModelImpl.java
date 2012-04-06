@@ -73,6 +73,7 @@ public class ContactModelImpl extends BaseModelImpl<Contact>
 			{ "classPK", Types.BIGINT },
 			{ "accountId", Types.BIGINT },
 			{ "parentContactId", Types.BIGINT },
+			{ "emailAddress", Types.VARCHAR },
 			{ "firstName", Types.VARCHAR },
 			{ "middleName", Types.VARCHAR },
 			{ "lastName", Types.VARCHAR },
@@ -96,7 +97,7 @@ public class ContactModelImpl extends BaseModelImpl<Contact>
 			{ "jobClass", Types.VARCHAR },
 			{ "hoursOfOperation", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table Contact_ (contactId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,accountId LONG,parentContactId LONG,firstName VARCHAR(75) null,middleName VARCHAR(75) null,lastName VARCHAR(75) null,prefixId INTEGER,suffixId INTEGER,male BOOLEAN,birthday DATE null,smsSn VARCHAR(75) null,aimSn VARCHAR(75) null,facebookSn VARCHAR(75) null,icqSn VARCHAR(75) null,jabberSn VARCHAR(75) null,msnSn VARCHAR(75) null,mySpaceSn VARCHAR(75) null,skypeSn VARCHAR(75) null,twitterSn VARCHAR(75) null,ymSn VARCHAR(75) null,employeeStatusId VARCHAR(75) null,employeeNumber VARCHAR(75) null,jobTitle VARCHAR(100) null,jobClass VARCHAR(75) null,hoursOfOperation VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table Contact_ (contactId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,accountId LONG,parentContactId LONG,emailAddress VARCHAR(75) null,firstName VARCHAR(75) null,middleName VARCHAR(75) null,lastName VARCHAR(75) null,prefixId INTEGER,suffixId INTEGER,male BOOLEAN,birthday DATE null,smsSn VARCHAR(75) null,aimSn VARCHAR(75) null,facebookSn VARCHAR(75) null,icqSn VARCHAR(75) null,jabberSn VARCHAR(75) null,msnSn VARCHAR(75) null,mySpaceSn VARCHAR(75) null,skypeSn VARCHAR(75) null,twitterSn VARCHAR(75) null,ymSn VARCHAR(75) null,employeeStatusId VARCHAR(75) null,employeeNumber VARCHAR(75) null,jobTitle VARCHAR(100) null,jobClass VARCHAR(75) null,hoursOfOperation VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table Contact_";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -133,6 +134,7 @@ public class ContactModelImpl extends BaseModelImpl<Contact>
 		model.setClassPK(soapModel.getClassPK());
 		model.setAccountId(soapModel.getAccountId());
 		model.setParentContactId(soapModel.getParentContactId());
+		model.setEmailAddress(soapModel.getEmailAddress());
 		model.setFirstName(soapModel.getFirstName());
 		model.setMiddleName(soapModel.getMiddleName());
 		model.setLastName(soapModel.getLastName());
@@ -360,6 +362,20 @@ public class ContactModelImpl extends BaseModelImpl<Contact>
 
 	public void setParentContactId(long parentContactId) {
 		_parentContactId = parentContactId;
+	}
+
+	@JSON
+	public String getEmailAddress() {
+		if (_emailAddress == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _emailAddress;
+		}
+	}
+
+	public void setEmailAddress(String emailAddress) {
+		_emailAddress = emailAddress;
 	}
 
 	@JSON
@@ -698,6 +714,7 @@ public class ContactModelImpl extends BaseModelImpl<Contact>
 		contactImpl.setClassPK(getClassPK());
 		contactImpl.setAccountId(getAccountId());
 		contactImpl.setParentContactId(getParentContactId());
+		contactImpl.setEmailAddress(getEmailAddress());
 		contactImpl.setFirstName(getFirstName());
 		contactImpl.setMiddleName(getMiddleName());
 		contactImpl.setLastName(getLastName());
@@ -832,6 +849,14 @@ public class ContactModelImpl extends BaseModelImpl<Contact>
 		contactCacheModel.accountId = getAccountId();
 
 		contactCacheModel.parentContactId = getParentContactId();
+
+		contactCacheModel.emailAddress = getEmailAddress();
+
+		String emailAddress = contactCacheModel.emailAddress;
+
+		if ((emailAddress != null) && (emailAddress.length() == 0)) {
+			contactCacheModel.emailAddress = null;
+		}
 
 		contactCacheModel.firstName = getFirstName();
 
@@ -997,7 +1022,7 @@ public class ContactModelImpl extends BaseModelImpl<Contact>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(65);
+		StringBundler sb = new StringBundler(67);
 
 		sb.append("{contactId=");
 		sb.append(getContactId());
@@ -1019,6 +1044,8 @@ public class ContactModelImpl extends BaseModelImpl<Contact>
 		sb.append(getAccountId());
 		sb.append(", parentContactId=");
 		sb.append(getParentContactId());
+		sb.append(", emailAddress=");
+		sb.append(getEmailAddress());
 		sb.append(", firstName=");
 		sb.append(getFirstName());
 		sb.append(", middleName=");
@@ -1069,7 +1096,7 @@ public class ContactModelImpl extends BaseModelImpl<Contact>
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(100);
+		StringBundler sb = new StringBundler(103);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portal.model.Contact");
@@ -1114,6 +1141,10 @@ public class ContactModelImpl extends BaseModelImpl<Contact>
 		sb.append(
 			"<column><column-name>parentContactId</column-name><column-value><![CDATA[");
 		sb.append(getParentContactId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>emailAddress</column-name><column-value><![CDATA[");
+		sb.append(getEmailAddress());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>firstName</column-name><column-value><![CDATA[");
@@ -1230,6 +1261,7 @@ public class ContactModelImpl extends BaseModelImpl<Contact>
 	private boolean _setOriginalClassPK;
 	private long _accountId;
 	private long _parentContactId;
+	private String _emailAddress;
 	private String _firstName;
 	private String _middleName;
 	private String _lastName;

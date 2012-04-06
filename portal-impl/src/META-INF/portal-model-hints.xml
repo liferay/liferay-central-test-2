@@ -123,6 +123,7 @@
 		<field name="classPK" type="long" />
 		<field name="accountId" type="long" />
 		<field name="parentContactId" type="long" />
+		<field name="emailAddress" type="String" />
 		<field name="firstName" type="String" />
 		<field name="middleName" type="String" />
 		<field name="lastName" type="String" />

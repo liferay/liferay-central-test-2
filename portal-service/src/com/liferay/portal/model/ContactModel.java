@@ -225,6 +225,21 @@ public interface ContactModel extends AttachedModel, AuditedModel,
 	public void setParentContactId(long parentContactId);
 
 	/**
+	 * Returns the email address of this contact.
+	 *
+	 * @return the email address of this contact
+	 */
+	@AutoEscape
+	public String getEmailAddress();
+
+	/**
+	 * Sets the email address of this contact.
+	 *
+	 * @param emailAddress the email address of this contact
+	 */
+	public void setEmailAddress(String emailAddress);
+
+	/**
 	 * Returns the first name of this contact.
 	 *
 	 * @return the first name of this contact

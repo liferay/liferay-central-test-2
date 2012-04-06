@@ -98,6 +98,8 @@ public class ContactPersistenceTest {
 
 		newContact.setParentContactId(ServiceTestUtil.nextLong());
 
+		newContact.setEmailAddress(ServiceTestUtil.randomString());
+
 		newContact.setFirstName(ServiceTestUtil.randomString());
 
 		newContact.setMiddleName(ServiceTestUtil.randomString());
@@ -167,6 +169,8 @@ public class ContactPersistenceTest {
 			newContact.getAccountId());
 		Assert.assertEquals(existingContact.getParentContactId(),
 			newContact.getParentContactId());
+		Assert.assertEquals(existingContact.getEmailAddress(),
+			newContact.getEmailAddress());
 		Assert.assertEquals(existingContact.getFirstName(),
 			newContact.getFirstName());
 		Assert.assertEquals(existingContact.getMiddleName(),
@@ -342,6 +346,8 @@ public class ContactPersistenceTest {
 		contact.setAccountId(ServiceTestUtil.nextLong());
 
 		contact.setParentContactId(ServiceTestUtil.nextLong());
+
+		contact.setEmailAddress(ServiceTestUtil.randomString());
 
 		contact.setFirstName(ServiceTestUtil.randomString());
 

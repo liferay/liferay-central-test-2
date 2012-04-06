@@ -268,6 +268,24 @@ public class ContactWrapper implements Contact, ModelWrapper<Contact> {
 	}
 
 	/**
+	* Returns the email address of this contact.
+	*
+	* @return the email address of this contact
+	*/
+	public java.lang.String getEmailAddress() {
+		return _contact.getEmailAddress();
+	}
+
+	/**
+	* Sets the email address of this contact.
+	*
+	* @param emailAddress the email address of this contact
+	*/
+	public void setEmailAddress(java.lang.String emailAddress) {
+		_contact.setEmailAddress(emailAddress);
+	}
+
+	/**
 	* Returns the first name of this contact.
 	*
 	* @return the first name of this contact

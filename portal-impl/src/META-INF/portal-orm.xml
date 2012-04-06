@@ -144,6 +144,7 @@
 			<basic name="classPK" />
 			<basic name="accountId" />
 			<basic name="parentContactId" />
+			<basic name="emailAddress" />
 			<basic name="firstName" />
 			<basic name="middleName" />
 			<basic name="lastName" />

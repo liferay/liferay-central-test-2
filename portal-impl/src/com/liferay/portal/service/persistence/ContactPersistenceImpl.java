@@ -388,6 +388,7 @@ public class ContactPersistenceImpl extends BasePersistenceImpl<Contact>
 		contactImpl.setClassPK(contact.getClassPK());
 		contactImpl.setAccountId(contact.getAccountId());
 		contactImpl.setParentContactId(contact.getParentContactId());
+		contactImpl.setEmailAddress(contact.getEmailAddress());
 		contactImpl.setFirstName(contact.getFirstName());
 		contactImpl.setMiddleName(contact.getMiddleName());
 		contactImpl.setLastName(contact.getLastName());
