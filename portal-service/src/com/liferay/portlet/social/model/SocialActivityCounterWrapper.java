@@ -121,6 +121,10 @@ public class SocialActivityCounterWrapper implements SocialActivityCounter,
 		return _socialActivityCounter.getClassName();
 	}
 
+	public void setClassName(java.lang.String className) {
+		_socialActivityCounter.setClassName(className);
+	}
+
 	/**
 	* Returns the class name ID of this social activity counter.
 	*
