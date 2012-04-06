@@ -1,5 +1,6 @@
 alter table Contact_ add classNameId LONG;
 alter table Contact_ add classPK LONG;
+alter table Contact_ add emailAddress VARCHAR(75) null;
 
 drop table Groups_Permissions;
 

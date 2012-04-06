@@ -15,6 +15,7 @@
 package com.liferay.portal.upgrade.v6_2_0;
 
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.model.User;
 import com.liferay.portal.util.PortalUtil;
 
@@ -29,9 +30,14 @@ public class UpgradeUser extends UpgradeProcess {
 
 		runSQL("update Contact_ set classNameId = " + classNameId);
 
-		runSQL(
-			"update Contact_ set classPK = (select User_.userId from User_ " +
-				"where User_.contactId = Contact_.contactId)");
+		StringBundler sb = new StringBundler(4);
+		
+		sb.append("update Contact_ set classPK = (select User_.userId from ");
+		sb.append("User_ where User_.contactId = Contact_.contactId), ");
+		sb.append("emailAddress = (select User_.emailAddress from User_ where ");
+		sb.append("User_.contactId = Contact_.contactId)");
+
+		runSQL(sb.toString());
 	}
 
 }

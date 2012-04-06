@@ -786,6 +786,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		contact.setClassPK(user.getUserId());
 		contact.setAccountId(company.getAccountId());
 		contact.setParentContactId(ContactConstants.DEFAULT_PARENT_CONTACT_ID);
+		contact.setEmailAddress(user.getEmailAddress());
 		contact.setFirstName(firstName);
 		contact.setMiddleName(middleName);
 		contact.setLastName(lastName);
@@ -3704,6 +3705,12 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		userPersistence.update(user, false);
 
+		Contact contact = user.getContact();
+
+		contact.setEmailAddress(user.getEmailAddress());
+
+		contactPersistence.update(contact, false);
+
 		return user;
 	}
 
@@ -3739,6 +3746,12 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 				user.getLastName(), emailAddress1);
 
 			userPersistence.update(user, false);
+
+			Contact contact = user.getContact();
+
+			contact.setEmailAddress(user.getEmailAddress());
+
+			contactPersistence.update(contact, false);
 		}
 		else {
 			sendEmailAddressVerification(user, emailAddress1, serviceContext);
@@ -4719,6 +4732,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		}
 
 		contact.setModifiedDate(now);
+		contact.setEmailAddress(user.getEmailAddress());
 		contact.setFirstName(firstName);
 		contact.setMiddleName(middleName);
 		contact.setLastName(lastName);
@@ -4862,6 +4876,12 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			setEmailAddress(
 				user, StringPool.BLANK, user.getFirstName(),
 				user.getMiddleName(), user.getLastName(), emailAddress);
+
+			Contact contact = user.getContact();
+
+			contact.setEmailAddress(user.getEmailAddress());
+
+			contactPersistence.update(contact, false);
 		}
 
 		user.setEmailAddressVerified(true);

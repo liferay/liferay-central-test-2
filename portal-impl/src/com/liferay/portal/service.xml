@@ -197,6 +197,7 @@
 		<column name="classPK" type="long" />
 		<column name="accountId" type="long" />
 		<column name="parentContactId" type="long" />
+		<column name="emailAddress" type="String" />
 		<column name="firstName" type="String" />
 		<column name="middleName" type="String" />
 		<column name="lastName" type="String" />
