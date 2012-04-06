@@ -26,6 +26,10 @@ public class ContactLocalServiceImpl extends ContactLocalServiceBaseImpl {
 	@Override
 	public Contact deleteContact(Contact contact) throws SystemException {
 
+		// Contact
+
+		contactPersistence.remove(contact);
+
 		// Addresses
 
 		addressLocalService.deleteAddresses(
@@ -50,9 +54,7 @@ public class ContactLocalServiceImpl extends ContactLocalServiceBaseImpl {
 			contact.getCompanyId(), Contact.class.getName(),
 			contact.getContactId());
 
-		// Contact
-
-		return contactPersistence.remove(contact);
+		return contact;
 	}
 
 	@Override

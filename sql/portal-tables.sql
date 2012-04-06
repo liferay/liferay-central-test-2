@@ -340,6 +340,8 @@ create table Contact_ (
 	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
+	classNameId LONG,
+	classPK LONG,
 	accountId LONG,
 	parentContactId LONG,
 	firstName VARCHAR(75) null,

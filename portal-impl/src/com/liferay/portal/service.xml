@@ -193,6 +193,8 @@
 
 		<!-- Other fields -->
 
+		<column name="classNameId" type="long" />
+		<column name="classPK" type="long" />
 		<column name="accountId" type="long" />
 		<column name="parentContactId" type="long" />
 		<column name="firstName" type="String" />
@@ -222,6 +224,10 @@
 
 		<finder name="CompanyId" return-type="Collection">
 			<finder-column name="companyId" />
+		</finder>
+		<finder name="C_C" return-type="Collection">
+			<finder-column name="classNameId" />
+			<finder-column name="classPK" />
 		</finder>
 	</entity>
 	<entity name="Country" local-service="false" remote-service="true">

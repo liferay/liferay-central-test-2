@@ -12,27 +12,26 @@
  * details.
  */
 
-package com.liferay.portal.upgrade;
+package com.liferay.portal.upgrade.v6_2_0;
 
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
-import com.liferay.portal.kernel.util.ReleaseInfo;
-import com.liferay.portal.upgrade.v6_2_0.UpgradeSchema;
-import com.liferay.portal.upgrade.v6_2_0.UpgradeUser;
+import com.liferay.portal.model.User;
+import com.liferay.portal.util.PortalUtil;
 
 /**
- * @author Raymond Augé
+ * @author Brian Wing Shun Chan
  */
-public class UpgradeProcess_6_2_0 extends UpgradeProcess {
-
-	@Override
-	public int getThreshold() {
-		return ReleaseInfo.RELEASE_6_2_0_BUILD_NUMBER;
-	}
+public class UpgradeUser extends UpgradeProcess {
 
 	@Override
 	protected void doUpgrade() throws Exception {
-		upgrade(UpgradeSchema.class);
-		upgrade(UpgradeUser.class);
+		long classNameId = PortalUtil.getClassNameId(User.class);
+
+		runSQL("update Contact_ set classNameId = " + classNameId);
+
+		runSQL(
+			"update Contact_ set classPK = (select User_.userId from User_ " +
+				"where User_.contactId = Contact_.contactId)");
 	}
 
 }
