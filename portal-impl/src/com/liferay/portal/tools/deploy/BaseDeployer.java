@@ -1836,7 +1836,7 @@ public class BaseDeployer implements Deployer {
 
 			sb.append("<listener>");
 			sb.append("<listener-class>");
-			sb.append(pluginContextListenerClass);
+			sb.append(pluginContextListenerClass.getName());
 			sb.append("</listener-class>");
 			sb.append("</listener>");
 
