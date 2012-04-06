@@ -376,8 +376,9 @@ public class LayoutAction extends Action {
 
 		// Manually check the p_p_id. See LEP-1724.
 
-		if (Validator.isNotNull(ParamUtil.getString(request, "p_p_id"))) {
+		String ppid = ParamUtil.getString(request, "p_p_id");
 
+		if (Validator.isNotNull(ppid)) {
 			if (layout.isTypePanel()) {
 				path += "/portal/layout/view/panel.jsp";
 			}
@@ -671,6 +672,7 @@ public class LayoutAction extends Action {
 					return null;
 				}
 				else {
+
 					// Include layout content before the page loads because
 					// portlets on the page can set the page title and page
 					// subtitle
