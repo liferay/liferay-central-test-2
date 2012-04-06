@@ -91,15 +91,12 @@ public class PortletContextLoaderListener extends ContextLoaderListener {
 
 		ServletContext servletContext = servletContextEvent.getServletContext();
 
-		HotDeployEvent event = new HotDeployEvent(
+		HotDeployEvent hotDeployEvent = new HotDeployEvent(
 			servletContext, PortletClassLoaderUtil.getClassLoader());
 
-		boolean missingDependencies = HotDeployUtil.checkMissingDependencies(
-			event);
-
-		if (missingDependencies) {
+		if (HotDeployUtil.isMissingDependentServletContext(hotDeployEvent)) {
 			HotDeployUtil.registerDependentServletContextListener(
-				event, servletContextEvent, this);
+				hotDeployEvent, servletContextEvent, this);
 
 			return;
 		}

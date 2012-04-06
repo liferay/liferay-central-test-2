@@ -1185,8 +1185,8 @@ public class BaseDeployer implements Deployer {
 		return sb.toString();
 	}
 
-	public String getPluginContextListener() {
-		return StringPool.BLANK;
+	public Class<?> getPluginContextListenerClass() {
+		return null;
 	}
 
 	public String getPluginPackageLicensesXml(List<License> licenses) {
@@ -1825,11 +1825,23 @@ public class BaseDeployer implements Deployer {
 		webXmlVersion = GetterUtil.getDouble(
 			webXmlRoot.attributeValue("version"), webXmlVersion);
 
-		// Merge Plugin Context Listener
+		// Merge content
 
-		String pluginContextListener = getPluginContextListener();
+		String pluginContextListenerContent = StringPool.BLANK;
 
-		// Merge extra content
+		Class<?> pluginContextListenerClass = getPluginContextListenerClass();
+
+		if (pluginContextListenerClass != null) {
+			StringBundler sb = new StringBundler(5);
+
+			sb.append("<listener>");
+			sb.append("<listener-class>");
+			sb.append(pluginContextListenerClass);
+			sb.append("</listener-class>");
+			sb.append("</listener>");
+
+			pluginContextListenerContent = sb.toString();
+		}
 
 		String extraContent = getExtraContent(
 			webXmlVersion, srcFile, displayName);
@@ -1841,8 +1853,8 @@ public class BaseDeployer implements Deployer {
 		}
 
 		String newContent =
-			content.substring(0, pos) + pluginContextListener +
-			extraContent + content.substring(pos);
+			content.substring(0, pos) + pluginContextListenerContent +
+				extraContent + content.substring(pos);
 
 		// Replace old package names
 

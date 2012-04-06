@@ -14,11 +14,9 @@
 
 package com.liferay.portal.tools.deploy;
 
-import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.servlet.ExtContextListener;
 import com.liferay.portal.model.Plugin;
 import com.liferay.portal.util.InitUtil;
-
-import java.io.File;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,19 +52,8 @@ public class ExtDeployer extends BaseDeployer {
 	}
 
 	@Override
-	public String getPluginContextListener() {
-
-		StringBundler sb = new StringBundler(6);
-
-		// ExtContextListener
-
-		sb.append("<listener>");
-		sb.append("<listener-class>");
-		sb.append("com.liferay.portal.kernel.servlet.ExtContextListener");
-		sb.append("</listener-class>");
-		sb.append("</listener>");
-
-		return sb.toString();
+	public Class<?> getPluginContextListenerClass() {
+		return ExtContextListener.class;
 	}
 
 	@Override
