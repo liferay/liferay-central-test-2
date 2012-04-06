@@ -183,6 +183,55 @@ public class ContactWrapper implements Contact, ModelWrapper<Contact> {
 	}
 
 	/**
+	* Returns the fully qualified class name of this contact.
+	*
+	* @return the fully qualified class name of this contact
+	*/
+	public java.lang.String getClassName() {
+		return _contact.getClassName();
+	}
+
+	public void setClassName(java.lang.String className) {
+		_contact.setClassName(className);
+	}
+
+	/**
+	* Returns the class name ID of this contact.
+	*
+	* @return the class name ID of this contact
+	*/
+	public long getClassNameId() {
+		return _contact.getClassNameId();
+	}
+
+	/**
+	* Sets the class name ID of this contact.
+	*
+	* @param classNameId the class name ID of this contact
+	*/
+	public void setClassNameId(long classNameId) {
+		_contact.setClassNameId(classNameId);
+	}
+
+	/**
+	* Returns the class p k of this contact.
+	*
+	* @return the class p k of this contact
+	*/
+	public long getClassPK() {
+		return _contact.getClassPK();
+	}
+
+	/**
+	* Sets the class p k of this contact.
+	*
+	* @param classPK the class p k of this contact
+	*/
+	public void setClassPK(long classPK) {
+		_contact.setClassPK(classPK);
+	}
+
+	/**
 	* Returns the account ID of this contact.
 	*
 	* @return the account ID of this contact

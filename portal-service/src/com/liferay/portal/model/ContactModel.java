@@ -37,7 +37,8 @@ import java.util.Date;
  * @see com.liferay.portal.model.impl.ContactModelImpl
  * @generated
  */
-public interface ContactModel extends AuditedModel, BaseModel<Contact> {
+public interface ContactModel extends AttachedModel, AuditedModel,
+	BaseModel<Contact> {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -157,6 +158,43 @@ public interface ContactModel extends AuditedModel, BaseModel<Contact> {
 	 * @param modifiedDate the modified date of this contact
 	 */
 	public void setModifiedDate(Date modifiedDate);
+
+	/**
+	 * Returns the fully qualified class name of this contact.
+	 *
+	 * @return the fully qualified class name of this contact
+	 */
+	public String getClassName();
+
+	public void setClassName(String className);
+
+	/**
+	 * Returns the class name ID of this contact.
+	 *
+	 * @return the class name ID of this contact
+	 */
+	public long getClassNameId();
+
+	/**
+	 * Sets the class name ID of this contact.
+	 *
+	 * @param classNameId the class name ID of this contact
+	 */
+	public void setClassNameId(long classNameId);
+
+	/**
+	 * Returns the class p k of this contact.
+	 *
+	 * @return the class p k of this contact
+	 */
+	public long getClassPK();
+
+	/**
+	 * Sets the class p k of this contact.
+	 *
+	 * @param classPK the class p k of this contact
+	 */
+	public void setClassPK(long classPK);
 
 	/**
 	 * Returns the account ID of this contact.

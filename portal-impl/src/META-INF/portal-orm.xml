@@ -72,6 +72,7 @@
 			<basic name="primary">
 				<column name="PRIMARY_" />
 			</basic>
+			<transient name="className" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
 			<transient name="userUuid" />
@@ -91,6 +92,7 @@
 		<attributes>
 			<id name="classNameId" />
 			<basic name="value" />
+			<transient name="className" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
 		</attributes>
@@ -138,6 +140,8 @@
 			<basic name="modifiedDate">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
+			<basic name="classNameId" />
+			<basic name="classPK" />
 			<basic name="accountId" />
 			<basic name="parentContactId" />
 			<basic name="firstName" />
@@ -164,6 +168,7 @@
 			<basic name="jobTitle" />
 			<basic name="jobClass" />
 			<basic name="hoursOfOperation" />
+			<transient name="className" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
 			<transient name="userUuid" />
@@ -208,6 +213,7 @@
 			<basic name="primary">
 				<column name="PRIMARY_" />
 			</basic>
+			<transient name="className" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
 			<transient name="userUuid" />
@@ -233,6 +239,7 @@
 			<basic name="active">
 				<column name="ACTIVE_" />
 			</basic>
+			<transient name="className" />
 			<transient name="creatorUserUuid" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
@@ -657,6 +664,7 @@
 			<basic name="passwordPolicyId" />
 			<basic name="classNameId" />
 			<basic name="classPK" />
+			<transient name="className" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
 		</attributes>
@@ -698,6 +706,7 @@
 			<basic name="primary">
 				<column name="PRIMARY_" />
 			</basic>
+			<transient name="className" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
 			<transient name="userUuid" />
@@ -758,6 +767,7 @@
 			<basic name="name" />
 			<basic name="portletId" />
 			<basic name="classNameId" />
+			<transient name="className" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
 			<transient name="userUuid" />
@@ -833,6 +843,7 @@
 			<basic name="portletId" />
 			<basic name="typeSettings" />
 			<basic name="dlFolderId" />
+			<transient name="className" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
 			<transient name="userUuid" />
@@ -922,6 +933,7 @@
 				<column name="TYPE_" />
 			</basic>
 			<basic name="subtype" />
+			<transient name="className" />
 			<transient name="descriptionCurrentLanguageId" />
 			<transient name="descriptionMap" />
 			<transient name="primaryKey" />
@@ -949,6 +961,7 @@
 			<basic name="classNameId" />
 			<basic name="classPK" />
 			<basic name="name" />
+			<transient name="className" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
 		</attributes>
@@ -968,6 +981,7 @@
 			<basic name="classNameId" />
 			<basic name="classPK" />
 			<basic name="frequency" />
+			<transient name="className" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
 			<transient name="userUuid" />
@@ -1012,6 +1026,7 @@
 			<basic name="expirationDate">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
+			<transient name="className" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
 		</attributes>
@@ -1201,6 +1216,7 @@
 			<basic name="classNameId" />
 			<basic name="classPK" />
 			<basic name="props" />
+			<transient name="className" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
 		</attributes>
@@ -1224,6 +1240,7 @@
 			<basic name="primary">
 				<column name="PRIMARY_" />
 			</basic>
+			<transient name="className" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
 			<transient name="userUuid" />
@@ -1247,6 +1264,7 @@
 			<basic name="typePK" />
 			<basic name="workflowDefinitionName" />
 			<basic name="workflowDefinitionVersion" />
+			<transient name="className" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
 			<transient name="userUuid" />
@@ -1268,6 +1286,7 @@
 			<basic name="classNameId" />
 			<basic name="classPK" />
 			<basic name="workflowInstanceId" />
+			<transient name="className" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
 			<transient name="userUuid" />
@@ -1320,6 +1339,7 @@
 			</basic>
 			<basic name="priority" />
 			<basic name="alert" />
+			<transient name="className" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
 			<transient name="userUuid" />
@@ -1433,6 +1453,7 @@
 			<basic name="width" />
 			<basic name="priority" />
 			<basic name="viewCount" />
+			<transient name="className" />
 			<transient name="descriptionCurrentLanguageId" />
 			<transient name="descriptionMap" />
 			<transient name="primaryKey" />
@@ -1512,6 +1533,7 @@
 			<basic name="tagId" />
 			<basic name="classNameId" />
 			<basic name="assetCount" />
+			<transient name="className" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
 		</attributes>
@@ -2067,6 +2089,7 @@
 			<basic name="classNameId" />
 			<basic name="classPK" />
 			<basic name="structureId" />
+			<transient name="className" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
 		</attributes>
@@ -2096,6 +2119,7 @@
 			<basic name="type">
 				<column name="TYPE_" />
 			</basic>
+			<transient name="className" />
 			<transient name="descriptionCurrentLanguageId" />
 			<transient name="descriptionMap" />
 			<transient name="document" />
@@ -2112,6 +2136,7 @@
 			<basic name="classNameId" />
 			<basic name="classPK" />
 			<basic name="structureId" />
+			<transient name="className" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
 		</attributes>
@@ -2185,6 +2210,7 @@
 			<basic name="companyId" />
 			<basic name="classNameId" />
 			<basic name="name" />
+			<transient name="className" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
 		</attributes>
@@ -2203,6 +2229,7 @@
 			<basic name="data">
 				<column name="DATA_" />
 			</basic>
+			<transient name="className" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
 		</attributes>
@@ -2259,6 +2286,7 @@
 			<basic name="statusDate">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
+			<transient name="className" />
 			<transient name="descriptionCurrentLanguageId" />
 			<transient name="descriptionMap" />
 			<transient name="primaryKey" />
@@ -2473,6 +2501,7 @@
 			<basic name="classNameId" />
 			<basic name="classPK" />
 			<basic name="threadId" />
+			<transient name="className" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
 		</attributes>
@@ -2554,6 +2583,7 @@
 			<basic name="statusDate">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
+			<transient name="className" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
 			<transient name="statusByUserUuid" />
@@ -2642,6 +2672,7 @@
 				<column name="TYPE_" />
 			</basic>
 			<basic name="typeSettings" />
+			<transient name="className" />
 			<transient name="descriptionCurrentLanguageId" />
 			<transient name="descriptionMap" />
 			<transient name="nameCurrentLanguageId" />
@@ -2730,6 +2761,7 @@
 			<basic name="classPK" />
 			<basic name="ruleGroupId" />
 			<basic name="priority" />
+			<transient name="className" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
 			<transient name="userUuid" />
@@ -2820,6 +2852,7 @@
 			<basic name="classNameId" />
 			<basic name="classPK" />
 			<basic name="score" />
+			<transient name="className" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
 			<transient name="userUuid" />
@@ -2833,6 +2866,7 @@
 			<basic name="totalEntries" />
 			<basic name="totalScore" />
 			<basic name="averageScore" />
+			<transient name="className" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
 		</attributes>
@@ -3094,6 +3128,7 @@
 			</basic>
 			<basic name="extraData" />
 			<basic name="receiverUserId" />
+			<transient name="className" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
 			<transient name="receiverUserUuid" />
@@ -3128,6 +3163,7 @@
 			<basic name="graceValue" />
 			<basic name="startPeriod" />
 			<basic name="endPeriod" />
+			<transient name="className" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
 		</attributes>
@@ -3143,6 +3179,7 @@
 			<basic name="activityType" />
 			<basic name="activityCounterName" />
 			<basic name="value" />
+			<transient name="className" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
 			<transient name="userUuid" />
@@ -3157,6 +3194,7 @@
 			<basic name="activityType" />
 			<basic name="name" />
 			<basic name="value" />
+			<transient name="className" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
 		</attributes>
@@ -3197,6 +3235,7 @@
 			<basic name="extraData" />
 			<basic name="receiverUserId" />
 			<basic name="status" />
+			<transient name="className" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
 			<transient name="receiverUserUuid" />

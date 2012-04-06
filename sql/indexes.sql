@@ -128,6 +128,7 @@ create index IX_12566EC2 on Company (mx);
 create index IX_35E3E7C6 on Company (system);
 create unique index IX_EC00543C on Company (webId);
 
+create index IX_791914FA on Contact_ (classNameId, classPK);
 create index IX_66D496A3 on Contact_ (companyId);
 
 create unique index IX_717B97E1 on Country (a2);

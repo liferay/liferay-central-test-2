@@ -260,6 +260,8 @@
 		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="createDate" type="org.hibernate.type.TimestampType" />
 		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
+		<property name="classNameId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="classPK" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="accountId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="parentContactId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="firstName" type="com.liferay.portal.dao.orm.hibernate.StringType" />

@@ -33,7 +33,7 @@ import java.util.Date;
 public class ContactCacheModel implements CacheModel<Contact>, Serializable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(61);
+		StringBundler sb = new StringBundler(65);
 
 		sb.append("{contactId=");
 		sb.append(contactId);
@@ -47,6 +47,10 @@ public class ContactCacheModel implements CacheModel<Contact>, Serializable {
 		sb.append(createDate);
 		sb.append(", modifiedDate=");
 		sb.append(modifiedDate);
+		sb.append(", classNameId=");
+		sb.append(classNameId);
+		sb.append(", classPK=");
+		sb.append(classPK);
 		sb.append(", accountId=");
 		sb.append(accountId);
 		sb.append(", parentContactId=");
@@ -128,6 +132,8 @@ public class ContactCacheModel implements CacheModel<Contact>, Serializable {
 			contactImpl.setModifiedDate(new Date(modifiedDate));
 		}
 
+		contactImpl.setClassNameId(classNameId);
+		contactImpl.setClassPK(classPK);
 		contactImpl.setAccountId(accountId);
 		contactImpl.setParentContactId(parentContactId);
 
@@ -279,6 +285,8 @@ public class ContactCacheModel implements CacheModel<Contact>, Serializable {
 	public String userName;
 	public long createDate;
 	public long modifiedDate;
+	public long classNameId;
+	public long classPK;
 	public long accountId;
 	public long parentContactId;
 	public String firstName;
