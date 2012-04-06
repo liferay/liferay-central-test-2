@@ -122,6 +122,13 @@ public class PortalLDAPExporterImpl implements PortalLDAPExporter {
 		}
 	}
 
+	/**
+	 * @deprecated
+	 */
+	public void exportToLDAP(long userId, long userGroupId) throws Exception {
+		exportToLDAP(userId, userGroupId, LDAPOperation.ADD);
+	}
+
 	public void exportToLDAP(
 			long userId, long userGroupId, LDAPOperation ldapOperation)
 		throws Exception {

@@ -36,6 +36,15 @@ public class PortalLDAPExporterUtil {
 		_portalLDAPExporter.exportToLDAP(contact, contactExpandoAttributes);
 	}
 
+	/**
+	 * @deprecated
+	 */
+	public static void exportToLDAP(long userId, long userGroupId)
+		throws Exception {
+
+		_portalLDAPExporter.exportToLDAP(userId, userGroupId);
+	}
+
 	public static void exportToLDAP(
 			long userId, long userGroupId, LDAPOperation ldapOperation)
 		throws Exception {

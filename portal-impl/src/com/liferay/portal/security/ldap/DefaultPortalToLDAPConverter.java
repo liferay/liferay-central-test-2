@@ -146,6 +146,19 @@ public class DefaultPortalToLDAPConverter implements PortalToLDAPConverter {
 		return attributes;
 	}
 
+	/**
+	 * @deprecated
+	 */
+	public Modifications getLDAPGroupModifications(
+			long ldapServerId, UserGroup userGroup, User user,
+			Properties groupMappings, Properties userMappings)
+		throws Exception {
+
+		return getLDAPGroupModifications(
+			ldapServerId, userGroup, user, groupMappings, userMappings,
+			LDAPOperation.ADD);
+	}
+
 	public Modifications getLDAPGroupModifications(
 			long ldapServerId, UserGroup userGroup, User user,
 			Properties groupMappings, Properties userMappings,

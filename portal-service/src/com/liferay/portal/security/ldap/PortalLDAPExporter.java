@@ -31,6 +31,11 @@ public interface PortalLDAPExporter {
 			Contact contact, Map<String, Serializable> contactExpandoAttributes)
 		throws Exception;
 
+	/**
+	 * @deprecated
+	 */
+	public void exportToLDAP(long userId, long userGroupId) throws Exception;
+
 	public void exportToLDAP(
 			long userId, long userGroupId, LDAPOperation ldapOperation)
 		throws Exception;

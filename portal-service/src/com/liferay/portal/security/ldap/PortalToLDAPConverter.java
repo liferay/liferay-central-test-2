@@ -48,6 +48,14 @@ public interface PortalToLDAPConverter {
 			Properties groupMappings, Properties userMappings)
 		throws Exception;
 
+	/**
+	 * @deprecated
+	 */
+	public Modifications getLDAPGroupModifications(
+			long ldapServerId, UserGroup userGroup, User user,
+			Properties groupMappings, Properties userMappings)
+		throws Exception;
+
 	public Modifications getLDAPGroupModifications(
 			long ldapServerId, UserGroup userGroup, User user,
 			Properties groupMappings, Properties userMappings,
