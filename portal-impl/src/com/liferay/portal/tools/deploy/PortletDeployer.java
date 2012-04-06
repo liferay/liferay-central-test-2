@@ -15,6 +15,7 @@
 package com.liferay.portal.tools.deploy;
 
 import com.liferay.portal.kernel.plugin.PluginPackage;
+import com.liferay.portal.kernel.servlet.PortletContextListener;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
@@ -187,18 +188,8 @@ public class PortletDeployer extends BaseDeployer {
 	}
 
 	@Override
-	public String getPluginContextListener() {
-		StringBundler sb = new StringBundler(5);
-
-		// PortletContextListener
-
-		sb.append("<listener>");
-		sb.append("<listener-class>");
-		sb.append("com.liferay.portal.kernel.servlet.PortletContextListener");
-		sb.append("</listener-class>");
-		sb.append("</listener>");
-
-		return sb.toString();
+	public Class<?> getPluginContextListenerClass() {
+		return PortletContextListener.class;
 	}
 
 	@Override
