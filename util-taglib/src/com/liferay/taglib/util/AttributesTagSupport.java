@@ -14,7 +14,6 @@
 
 package com.liferay.taglib.util;
 
-import com.liferay.portal.kernel.servlet.taglib.CustomAttributes;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 
@@ -42,10 +41,6 @@ public class AttributesTagSupport
 		return _attributeNamespace;
 	}
 
-	public CustomAttributes getCustomAttributes() {
-		return _customAttributes;
-	}
-
 	public Object getDynamicAttribute(String key) {
 		return _dynamicAttributes.get(key);
 	}
@@ -66,10 +61,6 @@ public class AttributesTagSupport
 
 	public void setAttributeNamespace(String attributeNamespace) {
 		_attributeNamespace = attributeNamespace;
-	}
-
-	public void setCustomAttributes(CustomAttributes customAttributes) {
-		_customAttributes = customAttributes;
 	}
 
 	public void setDynamicAttribute(
@@ -120,7 +111,6 @@ public class AttributesTagSupport
 	}
 
 	private String _attributeNamespace = StringPool.BLANK;
-	private CustomAttributes _customAttributes;
 	private Map<String, Object> _dynamicAttributes =
 		new HashMap<String, Object>();
 	private Map<String, Object> _scopedAttributes =

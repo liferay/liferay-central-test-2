@@ -15,7 +15,6 @@
 package com.liferay.taglib.aui;
 
 import com.liferay.portal.kernel.language.LanguageUtil;
-import com.liferay.portal.kernel.servlet.taglib.CustomAttributes;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
@@ -140,12 +139,6 @@ public class ATag extends BaseATag {
 				jspWriter.write("\" ");
 			}
 
-			CustomAttributes customAttributes = getCustomAttributes();
-
-			if (customAttributes != null) {
-				jspWriter.write(customAttributes.toString());
-			}
-
 			if (data != null) {
 				jspWriter.write(AUIUtil.buildData(data));
 			}
@@ -193,12 +186,6 @@ public class ATag extends BaseATag {
 				}
 
 				jspWriter.write("\" ");
-			}
-
-			CustomAttributes customAttributes = getCustomAttributes();
-
-			if (customAttributes != null) {
-				jspWriter.write(customAttributes.toString());
 			}
 
 			if (data != null) {

@@ -193,8 +193,6 @@ public class IncludeTag extends AttributesTagSupport {
 
 		setNamespacedAttribute(request, "bodyContent", getBodyContent());
 		setNamespacedAttribute(
-			request, "customAttributes", getCustomAttributes());
-		setNamespacedAttribute(
 			request, "dynamicAttributes", getDynamicAttributes());
 		setNamespacedAttribute(
 			request, "scopedAttributes", getScopedAttributes());
