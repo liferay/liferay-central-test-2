@@ -212,6 +212,7 @@ public class LangBuilder {
 			new OutputStreamWriter(
 				new FileOutputStream(propertiesFile), StringPool.UTF8));
 
+		boolean firstLine = true;
 		int state = 0;
 
 		String line = null;
@@ -343,9 +344,15 @@ public class LangBuilder {
 
 					translatedText = _fixTranslation(translatedText);
 
+					if (firstLine) {
+						firstLine = false;
+					}
+					else {
+						unsyncBufferedWriter.newLine();
+					}
+
 					unsyncBufferedWriter.write(key + "=" + translatedText);
 
-					unsyncBufferedWriter.newLine();
 					unsyncBufferedWriter.flush();
 				}
 			}
@@ -402,9 +409,15 @@ public class LangBuilder {
 					state = 7;
 				}
 
+				if (firstLine) {
+					firstLine = false;
+				}
+				else {
+					unsyncBufferedWriter.newLine();
+				}
+
 				unsyncBufferedWriter.write(line);
 
-				unsyncBufferedWriter.newLine();
 				unsyncBufferedWriter.flush();
 			}
 		}
@@ -457,6 +470,7 @@ public class LangBuilder {
 		Set<String> messages = new TreeSet<String>();
 
 		boolean begin = false;
+		boolean firstLine = true;
 
 		String line = null;
 
@@ -482,23 +496,29 @@ public class LangBuilder {
 				messages.add(key + "=" + value);
 			}
 			else {
-				if ((begin == true) && line.equals("")) {
-					_sortAndWrite(unsyncBufferedWriter, messages);
+				if (begin && line.equals("")) {
+					_sortAndWrite(unsyncBufferedWriter, messages, firstLine);
 				}
 
 				if (line.equals("")) {
 					begin = !begin;
 				}
 
+				if (firstLine) {
+					firstLine = false;
+				}
+				else {
+					unsyncBufferedWriter.newLine();
+				}
+
 				unsyncBufferedWriter.write(line);
-				unsyncBufferedWriter.newLine();
 			}
 
 			unsyncBufferedWriter.flush();
 		}
 
-		if (messages.size() > 0) {
-			_sortAndWrite(unsyncBufferedWriter, messages);
+		if (!messages.isEmpty()) {
+			_sortAndWrite(unsyncBufferedWriter, messages, firstLine);
 		}
 
 		unsyncBufferedReader.close();
@@ -508,14 +528,18 @@ public class LangBuilder {
 	}
 
 	private void _sortAndWrite(
-			UnsyncBufferedWriter unsyncBufferedWriter, Set<String> messages)
+			UnsyncBufferedWriter unsyncBufferedWriter, Set<String> messages,
+			boolean firstLine)
 		throws IOException {
 
 		String[] messagesArray = messages.toArray(new String[messages.size()]);
 
 		for (int i = 0; i < messagesArray.length; i++) {
+			if (!firstLine || (i != 0)) {
+				unsyncBufferedWriter.newLine();
+			}
+
 			unsyncBufferedWriter.write(messagesArray[i]);
-			unsyncBufferedWriter.newLine();
 		}
 
 		messages.clear();
