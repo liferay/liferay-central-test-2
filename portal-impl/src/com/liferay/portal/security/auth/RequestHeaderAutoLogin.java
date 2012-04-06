@@ -41,8 +41,6 @@ import javax.servlet.http.HttpServletResponse;
 public class RequestHeaderAutoLogin implements AutoLogin {
 
 	public RequestHeaderAutoLogin() {
-		super();
-
 		String[] hostsAllowedArray = PropsUtil.getArray(
 			"request.header.auth.hosts.allowed");
 
