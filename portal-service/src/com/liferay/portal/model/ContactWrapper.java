@@ -767,6 +767,10 @@ public class ContactWrapper implements Contact, ModelWrapper<Contact> {
 		return _contact.getFullName();
 	}
 
+	public boolean isUser() {
+		return _contact.isUser();
+	}
+
 	/**
 	 * @deprecated Renamed to {@link #getWrappedModel}
 	 */
