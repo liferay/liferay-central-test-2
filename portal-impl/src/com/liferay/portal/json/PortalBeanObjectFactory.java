@@ -40,41 +40,42 @@ public class PortalBeanObjectFactory extends BeanObjectFactory {
 
 	@Override
 	public Object instantiate(
-		ObjectBinder context, Object value, Type targetType,
-		Class targetClass) {
+		ObjectBinder objectBinder, Object value, Type targetType,
+		@SuppressWarnings("rawtypes") Class targetClass) {
 
-		String className = targetClass.getName();
+		String targetClassName = targetClass.getName();
 
-		if (className.contains("com.liferay") && className.contains("Util")) {
+		if (targetClassName.contains("com.liferay") &&
+			targetClassName.contains("Util")) {
+
 			throw new JSONException(
-				context.getCurrentPath() +
-					": Unable to instantiate class for security reasons: " +
-					className);
+				"Not instantiating " + targetClass.getName() + " at " +
+					objectBinder.getCurrentPath());
 		}
 
 		try {
 			Object target = instantiate(targetClass);
 
-			Map values = (Map) value;
+			Map<?, ?> values = (Map<?, ?>)value;
 
 			if (PropsValues.JSON_DESERIALIZER_STRICT_MODE) {
-				validateBeanValues(values, targetClass);
+				removeInvalidFields(values, targetClass);
 			}
 
-			return context.bindIntoObject(values, target, targetType);
+			return objectBinder.bindIntoObject(values, target, targetType);
 		}
 		catch (Exception e) {
 			throw new JSONException(
-				context.getCurrentPath() +
-					": Unable to instantiate an instance of " +
-					targetClass.getName(),
+				"Unable to instantiate " + targetClass.getName() + " at " +
+					objectBinder.getCurrentPath(),
 				e);
 		}
 	}
 
-	protected Map<String, Field> getDeclaredFields(Class targetClass) {
-		Map<String, Field> declaredFieldsMap = _declaredFieldsCache.get(
-			targetClass);
+	protected Map<String, Field> getDeclaredFields(
+		@SuppressWarnings("rawtypes") Class targetClass) {
+
+		Map<String, Field> declaredFieldsMap = _declaredFields.get(targetClass);
 
 		if (declaredFieldsMap == null) {
 			declaredFieldsMap = new ConcurrentHashMap<String, Field>();
@@ -91,60 +92,23 @@ public class PortalBeanObjectFactory extends BeanObjectFactory {
 				declaredFieldsMap.put(fieldName, declaredField);
 			}
 
-			_declaredFieldsCache.put(targetClass, declaredFieldsMap);
+			_declaredFields.put(targetClass, declaredFieldsMap);
 		}
 
 		return declaredFieldsMap;
 	}
 
-	protected void validateBeanValues(Map values, Class targetClass) {
-		Map<String, Field> declaredFieldsMap = getDeclaredFields(targetClass);
+	protected boolean isValidField(
+		Map<String, Field> declaredFields, String beanName) {
 
-		BeanAnalyzer beanAnalyzer = BeanAnalyzer.analyze(targetClass);
+		Field declaredField = declaredFields.get(beanName);
 
-		for (BeanProperty beanProperty : beanAnalyzer.getProperties()) {
-			String beanName = beanProperty.getName();
-			String capitalBeanName = null;
-
-			Object beanValue = values.get(beanName);
-
-			if (beanValue == null) {
-				capitalBeanName = Character.toUpperCase(
-					beanName.charAt(0)) + beanName.substring(1);
-
-				beanValue = values.get(capitalBeanName);
-			}
-
-			if ((beanValue != null) &&
-				!validateDeclaredField(declaredFieldsMap, beanName)) {
-
-				if (capitalBeanName != null) {
-					beanName = capitalBeanName;
-				}
-
-				if (_log.isDebugEnabled()) {
-					_log.debug(
-						"Removing field: " + beanName +
-							" for security reasons.");
-				}
-				values.remove(beanName);
-			}
-		}
-	}
-
-	protected boolean validateDeclaredField(
-		Map<String, Field> declaredFieldsMap, String beanName) {
-
-		Field declaredField = declaredFieldsMap.get(beanName);
-
-		//if bean is not part of set of declared fields, do not allow
 		if (declaredField == null) {
 			return false;
 		}
 
 		int modifier = declaredField.getModifiers();
 
-		//if bean is a static field , do not allow
 		if (Modifier.isStatic(modifier)) {
 			return false;
 		}
@@ -152,10 +116,45 @@ public class PortalBeanObjectFactory extends BeanObjectFactory {
 		return true;
 	}
 
+	protected void removeInvalidFields(Map<?, ?> values, Class<?> targetClass) {
+		Map<String, Field> declaredFields = getDeclaredFields(targetClass);
+
+		BeanAnalyzer beanAnalyzer = BeanAnalyzer.analyze(targetClass);
+
+		for (BeanProperty beanProperty : beanAnalyzer.getProperties()) {
+			String beanName = beanProperty.getName();
+
+			String capitalizedBeanName = null;
+
+			Object beanValue = values.get(beanName);
+
+			if (beanValue == null) {
+				capitalizedBeanName = Character.toUpperCase(
+					beanName.charAt(0)) + beanName.substring(1);
+
+				beanValue = values.get(capitalizedBeanName);
+			}
+
+			if ((beanValue != null) &&
+				!isValidField(declaredFields, beanName)) {
+
+				if (capitalizedBeanName != null) {
+					beanName = capitalizedBeanName;
+				}
+
+				if (_log.isDebugEnabled()) {
+					_log.debug("Removing non-JavaBeans field " + beanName);
+				}
+
+				values.remove(beanName);
+			}
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(
 		PortalBeanObjectFactory.class);
 
-	private Map<Class, Map<String, Field>> _declaredFieldsCache =
-		new ConcurrentHashMap<Class, Map<String, Field>>();
+	private Map<Class<?>, Map<String, Field>> _declaredFields =
+		new ConcurrentHashMap<Class<?>, Map<String, Field>>();
 
 }
