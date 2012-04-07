@@ -226,6 +226,9 @@
 		<finder name="CompanyId" return-type="Collection">
 			<finder-column name="companyId" />
 		</finder>
+		<finder name="AccountId" return-type="Collection">
+			<finder-column name="accountId" />
+		</finder>
 		<finder name="C_C" return-type="Collection">
 			<finder-column name="classNameId" />
 			<finder-column name="classPK" />
@@ -2483,6 +2486,7 @@
 		<exception>CompanyVirtualHost</exception>
 		<exception>CompanyWebId</exception>
 		<exception>ContactBirthday</exception>
+		<exception>ContactClassName</exception>
 		<exception>ContactFirstName</exception>
 		<exception>ContactLastName</exception>
 		<exception>CountryA2</exception>
