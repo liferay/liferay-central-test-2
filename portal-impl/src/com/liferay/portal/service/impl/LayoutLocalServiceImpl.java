@@ -2052,8 +2052,6 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		layoutPersistence.update(layout, false);
 
-		priority = 0;
-
 		List<Layout> layouts = layoutPersistence.findByG_P_P(
 			layout.getGroupId(), layout.isPrivateLayout(),
 			layout.getParentLayoutId());
@@ -2066,6 +2064,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		layouts = ListUtil.sort(
 			layouts, new LayoutPriorityComparator(layout, lessThan));
+
+		priority = 0;
 
 		for (Layout curLayout : layouts) {
 			curLayout.setModifiedDate(now);
