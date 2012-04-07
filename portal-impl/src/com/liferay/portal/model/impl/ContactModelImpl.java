@@ -111,9 +111,10 @@ public class ContactModelImpl extends BaseModelImpl<Contact>
 	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.column.bitmask.enabled.com.liferay.portal.model.Contact"),
 			true);
-	public static long CLASSNAMEID_COLUMN_BITMASK = 1L;
-	public static long CLASSPK_COLUMN_BITMASK = 2L;
-	public static long COMPANYID_COLUMN_BITMASK = 4L;
+	public static long ACCOUNTID_COLUMN_BITMASK = 1L;
+	public static long CLASSNAMEID_COLUMN_BITMASK = 2L;
+	public static long CLASSPK_COLUMN_BITMASK = 4L;
+	public static long COMPANYID_COLUMN_BITMASK = 8L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -352,7 +353,19 @@ public class ContactModelImpl extends BaseModelImpl<Contact>
 	}
 
 	public void setAccountId(long accountId) {
+		_columnBitmask |= ACCOUNTID_COLUMN_BITMASK;
+
+		if (!_setOriginalAccountId) {
+			_setOriginalAccountId = true;
+
+			_originalAccountId = _accountId;
+		}
+
 		_accountId = accountId;
+	}
+
+	public long getOriginalAccountId() {
+		return _originalAccountId;
 	}
 
 	@JSON
@@ -802,6 +815,10 @@ public class ContactModelImpl extends BaseModelImpl<Contact>
 		contactModelImpl._originalClassPK = contactModelImpl._classPK;
 
 		contactModelImpl._setOriginalClassPK = false;
+
+		contactModelImpl._originalAccountId = contactModelImpl._accountId;
+
+		contactModelImpl._setOriginalAccountId = false;
 
 		contactModelImpl._columnBitmask = 0;
 	}
@@ -1260,6 +1277,8 @@ public class ContactModelImpl extends BaseModelImpl<Contact>
 	private long _originalClassPK;
 	private boolean _setOriginalClassPK;
 	private long _accountId;
+	private long _originalAccountId;
+	private boolean _setOriginalAccountId;
 	private long _parentContactId;
 	private String _emailAddress;
 	private String _firstName;
