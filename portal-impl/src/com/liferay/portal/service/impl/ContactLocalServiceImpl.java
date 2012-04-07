@@ -18,6 +18,8 @@ import com.liferay.portal.ContactBirthdayException;
 import com.liferay.portal.ContactClassNameException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.search.Indexable;
+import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Contact;
@@ -33,6 +35,7 @@ import java.util.List;
  */
 public class ContactLocalServiceImpl extends ContactLocalServiceBaseImpl {
 
+	@Indexable(type = IndexableType.REINDEX)
 	public Contact addContact(
 			long userId, String className, long classPK, String emailAddress,
 			String firstName, String middleName, String lastName, int prefixId,
@@ -86,6 +89,7 @@ public class ContactLocalServiceImpl extends ContactLocalServiceBaseImpl {
 		return contact;
 	}
 
+	@Indexable(type = IndexableType.DELETE)
 	@Override
 	public Contact deleteContact(Contact contact) throws SystemException {
 
@@ -120,6 +124,7 @@ public class ContactLocalServiceImpl extends ContactLocalServiceBaseImpl {
 		return contact;
 	}
 
+	@Indexable(type = IndexableType.DELETE)
 	@Override
 	public Contact deleteContact(long contactId) throws SystemException {
 		Contact contact = contactPersistence.fetchByPrimaryKey(contactId);
@@ -146,6 +151,7 @@ public class ContactLocalServiceImpl extends ContactLocalServiceBaseImpl {
 		return contactPersistence.countByC_C(classNameId, classPK);
 	}
 
+	@Indexable(type = IndexableType.REINDEX)
 	public Contact updateContact(
 			long contactId, String emailAddress, String firstName,
 			String middleName, String lastName, int prefixId, int suffixId,

@@ -1121,6 +1121,7 @@
 		<portlet-name>125</portlet-name>
 		<icon>/html/icons/users_admin.png</icon>
 		<struts-path>users_admin</struts-path>
+		<indexer-class>com.liferay.portlet.usersadmin.util.ContactIndexer</indexer-class>
 		<indexer-class>com.liferay.portlet.usersadmin.util.OrganizationIndexer</indexer-class>
 		<indexer-class>com.liferay.portlet.usersadmin.util.UserIndexer</indexer-class>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
