@@ -57,17 +57,16 @@ public class ContactIndexer extends BaseIndexer {
 
 	public static final String PORTLET_ID = PortletKeys.USERS_ADMIN;
 
+	public ContactIndexer() {
+		setStagingAware(false);
+	}
+
 	public String[] getClassNames() {
 		return CLASS_NAMES;
 	}
 
 	public String getPortletId() {
 		return PORTLET_ID;
-	}
-
-	@Override
-	public boolean isStagingAware() {
-		return _STAGING_AWARE;
 	}
 
 	@Override
@@ -282,7 +281,5 @@ public class ContactIndexer extends BaseIndexer {
 		SearchEngineUtil.updateDocuments(
 			getSearchEngineId(), companyId, documents);
 	}
-
-	private static final boolean _STAGING_AWARE = false;
 
 }

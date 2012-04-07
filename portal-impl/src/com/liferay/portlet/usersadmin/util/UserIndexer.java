@@ -68,6 +68,8 @@ public class UserIndexer extends BaseIndexer {
 	public static final String PORTLET_ID = PortletKeys.USERS_ADMIN;
 
 	public UserIndexer() {
+		setIndexerEnabled(PropsValues.USERS_INDEXER_ENABLED);
+		setPermissionAware(true);
 		setStagingAware(false);
 	}
 
@@ -77,16 +79,6 @@ public class UserIndexer extends BaseIndexer {
 
 	public String getPortletId() {
 		return PORTLET_ID;
-	}
-
-	@Override
-	public boolean isIndexerEnabled() {
-		return PropsValues.USERS_INDEXER_ENABLED;
-	}
-
-	@Override
-	public boolean isPermissionAware() {
-		return _PERMISSION_AWARE;
 	}
 
 	@Override
@@ -494,7 +486,5 @@ public class UserIndexer extends BaseIndexer {
 		SearchEngineUtil.updateDocuments(
 			getSearchEngineId(), companyId, documents);
 	}
-
-	private static final boolean _PERMISSION_AWARE = true;
 
 }
