@@ -37,7 +37,6 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.service.ContactLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PortletKeys;
-import com.liferay.portal.util.PropsValues;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -58,10 +57,6 @@ public class ContactIndexer extends BaseIndexer {
 
 	public static final String PORTLET_ID = PortletKeys.USERS_ADMIN;
 
-	public ContactIndexer() {
-		setStagingAware(false);
-	}
-
 	public String[] getClassNames() {
 		return CLASS_NAMES;
 	}
@@ -71,13 +66,8 @@ public class ContactIndexer extends BaseIndexer {
 	}
 
 	@Override
-	public boolean isIndexerEnabled() {
-		return PropsValues.USERS_INDEXER_ENABLED;
-	}
-
-	@Override
-	public boolean isPermissionAware() {
-		return _PERMISSION_AWARE;
+	public boolean isStagingAware() {
+		return _STAGING_AWARE;
 	}
 
 	@Override
@@ -293,6 +283,6 @@ public class ContactIndexer extends BaseIndexer {
 			getSearchEngineId(), companyId, documents);
 	}
 
-	private static final boolean _PERMISSION_AWARE = true;
+	private static final boolean _STAGING_AWARE = false;
 
 }
