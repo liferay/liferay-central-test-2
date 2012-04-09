@@ -89,9 +89,7 @@ public class JSONWebServiceActionImpl implements JSONWebServiceAction {
 
 		String className = parameterType.getName();
 
-		if (className.contains("com.liferay") &&
-			className.contains("Util")) {
-
+		if (className.contains("com.liferay") && className.contains("Util")) {
 			throw new IllegalArgumentException(
 				"Not instantiating " + className);
 		}
@@ -162,16 +160,17 @@ public class JSONWebServiceActionImpl implements JSONWebServiceAction {
 		}
 
 		for (KeyValue<String, Object> innerParameter : innerParameters) {
-
 			try {
-				BeanUtil.setProperty(parameterValue, innerParameter.getKey(),
+				BeanUtil.setProperty(
+					parameterValue, innerParameter.getKey(),
 					innerParameter.getValue());
 			}
 			catch (Exception e) {
 				if (_log.isDebugEnabled()) {
-					_log.debug("Unable to set inner parameter: " +
-						parameterName + "." + innerParameter.getKey() +
-						", skipping... ", e);
+					_log.debug(
+						"Unable to set inner parameter " + parameterName + "." +
+							innerParameter.getKey(),
+						e);
 				}
 			}
 		}
