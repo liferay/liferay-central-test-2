@@ -374,6 +374,7 @@ public class LayoutAction extends Action {
 		}
 
 		// Manually check the p_p_id. See LEP-1724.
+
 		if (Validator.isNotNull(portletId)) {
 			if (layout.isTypePanel()) {
 				path += "/portal/layout/view/panel.jsp";
@@ -618,7 +619,7 @@ public class LayoutAction extends Action {
 			if (portlet != null) {
 				if (themeDisplay.isLifecycleAction()) {
 					processPortletRequest(
-						portlet, request, response,
+						request, response, portlet,
 						PortletRequest.ACTION_PHASE);
 
 					ActionResponseImpl actionResponseImpl =
@@ -647,13 +648,13 @@ public class LayoutAction extends Action {
 				}
 				else if (themeDisplay.isLifecycleRender()) {
 					processPortletRequest(
-						portlet, request, response,
+						request, response, portlet,
 						PortletRequest.RENDER_PHASE);
 				}
 
 				if (themeDisplay.isLifecycleResource()) {
 					processPortletRequest(
-						portlet, request, response,
+						request, response, portlet,
 						PortletRequest.RESOURCE_PHASE);
 
 					return null;
@@ -702,8 +703,8 @@ public class LayoutAction extends Action {
 	}
 
 	protected void processPortletRequest(
-			Portlet portlet, HttpServletRequest request,
-			HttpServletResponse response, String lifecycle)
+			HttpServletRequest request, HttpServletResponse response,
+			Portlet portlet, String lifecycle)
 		throws Exception {
 
 		HttpSession session = request.getSession();
