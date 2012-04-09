@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.license.LicenseInfo;
 
 import java.util.Arrays;
@@ -27,7 +28,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.UUID;
 
 /**
  * @author Amos Fong
@@ -71,11 +71,6 @@ public class DefaultLicenseManagerImpl
 			return 0;
 		}
 
-		String productVersion = licenseProperties.get("productVersion");
-		String userCount = licenseProperties.get("userCount");
-
-		String randomUuid = UUID.randomUUID().toString();
-
 		try {
 			JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
@@ -83,10 +78,21 @@ public class DefaultLicenseManagerImpl
 
 			jsonObject.put("cmd", "GET_LICENSE_STATE");
 			jsonObject.put("productId", productId);
+
+			String productVersion = licenseProperties.get("productVersion");
+
 			jsonObject.put("productVersion", productVersion);
+
+			String randomUuid = PortalUUIDUtil.generate();
+
 			jsonObject.put("randomUuid", randomUuid);
+
 			jsonObject.put("serverId", Arrays.toString(serverIdBytes));
+
+			String userCount = licenseProperties.get("userCount");
+			
 			jsonObject.put("userCount", userCount);
+			
 			jsonObject.put("version", 2);
 
 			String response = LicenseUtil.sendRequest(jsonObject.toString());
@@ -100,11 +106,12 @@ public class DefaultLicenseManagerImpl
 				throw new Exception(errorMessage);
 			}
 
-			int licenseState = responseJSONObject.getInt("licenseState");
 			String responseRandomUuid = responseJSONObject.getString(
 				"randomUuid");
 
 			if (responseRandomUuid.equals(randomUuid)) {
+				int licenseState = responseJSONObject.getInt("licenseState");
+
 				return licenseState;
 			}
 		}
