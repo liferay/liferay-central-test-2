@@ -84,28 +84,27 @@ public class TranslationToXHTMLTest extends AbstractWikiParserTests {
 
 	@Test
 	public void testParseCorrectlyNoWikiBlockWitBraces() {
-		String result = dosToUnix(translate("nowikiblock-7.creole"));
-
 		Assert.assertEquals(
-			"<pre>{" + _EOL + "foo" + _EOL + "}" + _EOL + "</pre>", result);
+			"<pre>{" + _NEW_LINE + "foo" + _NEW_LINE + "}" + _NEW_LINE +
+				"</pre>",
+			toUnix(translate("nowikiblock-7.creole")));
 	}
 
 	@Test
 	public void testParseCorrectlyNoWikiBlockWitMultipleAndText() {
-		String result = dosToUnix(translate("nowikiblock-9.creole"));
 
 		Assert.assertEquals(
-			"<pre>public interface Foo {" + _EOL + "void foo();" + _EOL + "}" +
-				_EOL + "</pre><p>Outside preserve </p>", result);
+			"<pre>public interface Foo {" + _NEW_LINE + "void foo();" +
+				_NEW_LINE + "}" + _NEW_LINE + "</pre><p>Outside preserve </p>",
+			toUnix(translate("nowikiblock-9.creole")));
 	}
 
 	@Test
 	public void testParseCorrectlyNoWikiBlockWitMultipleBraces() {
-		String result = dosToUnix(translate("nowikiblock-8.creole"));
-
 		Assert.assertEquals(
-			"<pre>public interface Foo {" + _EOL + "void foo();" + _EOL + "}" +
-				_EOL + "</pre>", result);
+			"<pre>public interface Foo {" + _NEW_LINE + "void foo();" +
+				_NEW_LINE + "}" + _NEW_LINE + "</pre>",
+			toUnix(translate("nowikiblock-8.creole")));
 	}
 
 	@Test
@@ -161,9 +160,9 @@ public class TranslationToXHTMLTest extends AbstractWikiParserTests {
 
 	@Test
 	public void testParseCorrectlyOneNonEmptyNoWikiBlockWitMultipleLines() {
-		String result = dosToUnix(translate("nowikiblock-5.creole"));
-
-		Assert.assertEquals("<pre>Multiple" + _EOL + "lines</pre>", result);
+		Assert.assertEquals(
+			"<pre>Multiple" + _NEW_LINE + "lines</pre>",
+			toUnix(translate("nowikiblock-5.creole")));
 	}
 
 	@Test
@@ -447,7 +446,7 @@ public class TranslationToXHTMLTest extends AbstractWikiParserTests {
 			translate("nowikiblock-1.creole"));
 	}
 
-	protected String dosToUnix(String text) {
+	protected String toUnix(String text) {
 		return StringUtil.replace(
 			text, StringPool.RETURN_NEW_LINE, StringPool.NEW_LINE);
 	}
@@ -456,7 +455,7 @@ public class TranslationToXHTMLTest extends AbstractWikiParserTests {
 		return _xhtmlTranslationVisitor.translate(getWikiPageNode(fileName));
 	}
 
-	private static final String _EOL = StringPool.NEW_LINE;
+	private static final String _NEW_LINE = StringPool.NEW_LINE;
 
 	private XhtmlTranslationVisitor _xhtmlTranslationVisitor =
 		new XhtmlTranslationVisitor();
