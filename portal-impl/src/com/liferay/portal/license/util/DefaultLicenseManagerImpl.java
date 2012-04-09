@@ -90,9 +90,9 @@ public class DefaultLicenseManagerImpl
 			jsonObject.put("serverId", Arrays.toString(serverIdBytes));
 
 			String userCount = licenseProperties.get("userCount");
-			
+
 			jsonObject.put("userCount", userCount);
-			
+
 			jsonObject.put("version", 2);
 
 			String response = LicenseUtil.sendRequest(jsonObject.toString());

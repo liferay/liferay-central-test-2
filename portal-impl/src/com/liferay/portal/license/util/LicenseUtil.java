@@ -84,6 +84,12 @@ import org.apache.commons.io.IOUtils;
  */
 public class LicenseUtil {
 
+	public static final String LICENSE_REPOSITORY_DIR =
+		PropsValues.LIFERAY_HOME.concat("/data/license");
+
+	public static final String LICENSE_SERVER_URL = GetterUtil.get(
+		PropsUtil.get("license.server.url"), "https://www.liferay.com");
+
 	public static Map<String, String> getClusterServerInfo(String clusterNodeId)
 		throws Exception {
 
@@ -248,7 +254,7 @@ public class LicenseUtil {
 		}
 
 		File serverIdFile = new File(
-			_LICENSE_REPOSITORY_DIR + "/server/serverId");
+			LICENSE_REPOSITORY_DIR + "/server/serverId");
 
 		if (!serverIdFile.exists()) {
 			return new byte[0];
@@ -366,7 +372,7 @@ public class LicenseUtil {
 
 			attributes.put(
 				"ERROR_MESSAGE",
-				"There was an error contacting " + _LICENSE_SERVER_URL);
+				"There was an error contacting " + LICENSE_SERVER_URL);
 		}
 
 		return attributes;
@@ -377,7 +383,7 @@ public class LicenseUtil {
 		OutputStream outputStream = null;
 
 		try {
-			String serverURL = _LICENSE_SERVER_URL;
+			String serverURL = LICENSE_SERVER_URL;
 
 			if (!serverURL.endsWith(StringPool.SLASH)) {
 				serverURL += StringPool.SLASH;
@@ -458,7 +464,7 @@ public class LicenseUtil {
 		throws Exception {
 
 		File serverIdFile = new File(
-			_LICENSE_REPOSITORY_DIR + "/server/serverId");
+			LICENSE_REPOSITORY_DIR + "/server/serverId");
 
 		FileUtil.write(serverIdFile, serverIdBytes);
 	}
@@ -640,12 +646,6 @@ public class LicenseUtil {
 				entry.getValue());
 		}
 	}
-
-	private static final String _LICENSE_REPOSITORY_DIR =
-		PropsValues.LIFERAY_HOME.concat("/data/license");
-
-	private static final String _LICENSE_SERVER_URL = GetterUtil.get(
-		PropsUtil.get("license.server.url"), "https://www.liferay.com");
 
 	private static final String _PROXY_PASSWORD = GetterUtil.getString(
 		PropsUtil.get("license.proxy.password"));
