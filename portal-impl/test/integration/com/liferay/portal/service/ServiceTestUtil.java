@@ -169,9 +169,9 @@ public class ServiceTestUtil {
 
 		// Indexers
 
+		IndexerRegistryUtil.register(new ContactIndexer());
 		IndexerRegistryUtil.register(new UserIndexer());
 		IndexerRegistryUtil.register(new BookmarksIndexer());
-		IndexerRegistryUtil.register(new ContactIndexer());
 		IndexerRegistryUtil.register(new DLIndexer());
 		IndexerRegistryUtil.register(new MBIndexer());
 
