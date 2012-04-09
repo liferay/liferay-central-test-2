@@ -84,12 +84,6 @@ import org.apache.commons.io.IOUtils;
  */
 public class LicenseUtil {
 
-	public static final String _LICENSE_REPOSITORY_DIR =
-		PropsValues.LIFERAY_HOME.concat("/data/license");
-
-	public static final String _LICENSE_SERVER_URL = GetterUtil.get(
-		PropsUtil.get("license.server.url"), "https://www.liferay.com");
-
 	public static Map<String, String> getClusterServerInfo(String clusterNodeId)
 		throws Exception {
 
@@ -582,35 +576,37 @@ public class LicenseUtil {
 	private static void _initKeys() {
 		ClassLoader classLoader = PortalClassLoaderUtil.getClassLoader();
 
-		if (_symmetricKey == null) {
-			try {
-				KeyGenerator keyGenerator = KeyGenerator.getInstance("AES");
+		if (_encryptedSymmetricKey != null) {
+			return;
+		}
 
-				keyGenerator.init(128, new SecureRandom());
+		try {
+			URL url = classLoader.getResource(
+				"com/liferay/portal/license/public.key");
 
-				_symmetricKey = keyGenerator.generateKey();
+			byte[] bytes = IOUtils.toByteArray(url.openStream());
 
-				URL url = classLoader.getResource(
-					"com/liferay/portal/license/public.key");
+			X509EncodedKeySpec x509EncodedKeySpec = new X509EncodedKeySpec(
+				bytes);
 
-				byte[] bytes = IOUtils.toByteArray(url.openStream());
+			KeyFactory keyFactory = KeyFactory.getInstance("RSA");
 
-				X509EncodedKeySpec publicKeySpec = new X509EncodedKeySpec(
-					bytes);
+			PublicKey publicKey = keyFactory.generatePublic(x509EncodedKeySpec);
 
-				KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+			KeyGenerator keyGenerator = KeyGenerator.getInstance("AES");
 
-				PublicKey publicKey = keyFactory.generatePublic(publicKeySpec);
+			keyGenerator.init(128, new SecureRandom());
 
-				byte[] encryptedSymmetricKey = Encryptor.encryptUnencoded(
-					publicKey, _symmetricKey.getEncoded());
+			_symmetricKey = keyGenerator.generateKey();
 
-				_encryptedSymmetricKey = Base64.objectToString(
-					encryptedSymmetricKey);
-			}
-			catch (Exception e) {
-				_log.error(e, e);
-			}
+			byte[] encryptedSymmetricKey = Encryptor.encryptUnencoded(
+				publicKey, _symmetricKey.getEncoded());
+
+			_encryptedSymmetricKey = Base64.objectToString(
+				encryptedSymmetricKey);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
 		}
 	}
 
@@ -644,6 +640,12 @@ public class LicenseUtil {
 				entry.getValue());
 		}
 	}
+
+	private static final String _LICENSE_REPOSITORY_DIR =
+		PropsValues.LIFERAY_HOME.concat("/data/license");
+
+	private static final String _LICENSE_SERVER_URL = GetterUtil.get(
+		PropsUtil.get("license.server.url"), "https://www.liferay.com");
 
 	private static final String _PROXY_PASSWORD = GetterUtil.getString(
 		PropsUtil.get("license.proxy.password"));
