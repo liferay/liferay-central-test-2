@@ -248,20 +248,19 @@ public class LayoutAction extends Action {
 
 			return actionForward;
 		}
-		else {
-			try {
-				forwardLayout(request);
 
-				return mapping.findForward(ActionConstants.COMMON_FORWARD_JSP);
-			}
-			catch (Exception e) {
-				PortalUtil.sendError(e, request, headerCacheServletResponse);
+		try {
+			forwardLayout(request);
 
-				CacheResponseUtil.setHeaders(
-					response, headerCacheServletResponse.getHeaders());
+			return mapping.findForward(ActionConstants.COMMON_FORWARD_JSP);
+		}
+		catch (Exception e) {
+			PortalUtil.sendError(e, request, headerCacheServletResponse);
 
-				return null;
-			}
+			CacheResponseUtil.setHeaders(
+				response, headerCacheServletResponse.getHeaders());
+
+			return null;
 		}
 	}
 
@@ -340,9 +339,8 @@ public class LayoutAction extends Action {
 
 			return layoutTypePortlets;
 		}
-		else {
-			return Collections.emptyList();
-		}
+
+		return Collections.emptyList();
 	}
 
 	protected long getScopeGroupId(
