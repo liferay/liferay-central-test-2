@@ -4340,13 +4340,14 @@ public class DDMTemplatePersistenceImpl extends BasePersistenceImpl<DDMTemplate>
 	 * @param groupId the group ID
 	 * @param classNameId the class name ID
 	 * @param classPK the class p k
+	 * @return the d d m template that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
-	public void removeByG_C_C(long groupId, long classNameId, long classPK)
-		throws NoSuchTemplateException, SystemException {
+	public DDMTemplate removeByG_C_C(long groupId, long classNameId,
+		long classPK) throws NoSuchTemplateException, SystemException {
 		DDMTemplate ddmTemplate = findByG_C_C(groupId, classNameId, classPK);
 
-		remove(ddmTemplate);
+		return remove(ddmTemplate);
 	}
 
 	/**

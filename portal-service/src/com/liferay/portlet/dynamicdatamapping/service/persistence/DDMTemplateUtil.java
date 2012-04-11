@@ -1370,13 +1370,14 @@ public class DDMTemplateUtil {
 	* @param groupId the group ID
 	* @param classNameId the class name ID
 	* @param classPK the class p k
+	* @return the d d m template that was removed
 	* @throws SystemException if a system exception occurred
 	*/
-	public static void removeByG_C_C(long groupId, long classNameId,
-		long classPK)
+	public static com.liferay.portlet.dynamicdatamapping.model.DDMTemplate removeByG_C_C(
+		long groupId, long classNameId, long classPK)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.dynamicdatamapping.NoSuchTemplateException {
-		getPersistence().removeByG_C_C(groupId, classNameId, classPK);
+		return getPersistence().removeByG_C_C(groupId, classNameId, classPK);
 	}
 
 	/**

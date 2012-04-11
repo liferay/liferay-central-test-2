@@ -2170,6 +2170,7 @@
 			</basic>
 			<basic name="language" />
 			<basic name="script" />
+			<transient name="className" />
 			<transient name="descriptionCurrentLanguageId" />
 			<transient name="descriptionMap" />
 			<transient name="nameCurrentLanguageId" />

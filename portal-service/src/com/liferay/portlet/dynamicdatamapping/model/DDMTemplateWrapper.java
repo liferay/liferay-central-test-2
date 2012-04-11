@@ -230,6 +230,10 @@ public class DDMTemplateWrapper implements DDMTemplate,
 		return _ddmTemplate.getClassName();
 	}
 
+	public void setClassName(java.lang.String className) {
+		_ddmTemplate.setClassName(className);
+	}
+
 	/**
 	* Returns the class name ID of this d d m template.
 	*

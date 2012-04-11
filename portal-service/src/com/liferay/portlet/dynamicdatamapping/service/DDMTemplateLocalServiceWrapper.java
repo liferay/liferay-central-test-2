@@ -308,13 +308,13 @@ public class DDMTemplateLocalServiceWrapper implements DDMTemplateLocalService,
 	}
 
 	public java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMTemplate> copyTemplates(
-		long userId, long classNameId, long classPK, long newClassPK,
+		long userId, long classNameId, long oldClassPK, long newClassPK,
 		java.lang.String type,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _ddmTemplateLocalService.copyTemplates(userId, classNameId,
-			classPK, newClassPK, type, serviceContext);
+			oldClassPK, newClassPK, type, serviceContext);
 	}
 
 	public void deleteTemplate(
