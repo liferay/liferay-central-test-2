@@ -178,7 +178,7 @@ public class RuntimePortletImpl implements RuntimePortlet {
 			JavaConstants.JAVAX_PORTLET_CONFIG);
 
 		PortletRequest portletRequest = (PortletRequest)request.getAttribute(
-		   JavaConstants.JAVAX_PORTLET_REQUEST);
+			JavaConstants.JAVAX_PORTLET_REQUEST);
 
 		if (!(portletRequest instanceof RenderRequest)) {
 			portletRequest = null;
@@ -190,6 +190,9 @@ public class RuntimePortletImpl implements RuntimePortlet {
 		if (!(portletResponse instanceof RenderResponse)) {
 			portletResponse = null;
 		}
+
+		String lifecycle = (String)request.getAttribute(
+			PortletRequest.LIFECYCLE_PHASE);
 
 		columnId = GetterUtil.getString(columnId);
 
@@ -279,6 +282,11 @@ public class RuntimePortletImpl implements RuntimePortlet {
 			if (portletResponse != null) {
 				request.setAttribute(
 					JavaConstants.JAVAX_PORTLET_RESPONSE, portletResponse);
+			}
+
+			if (lifecycle != null) {
+				request.setAttribute(PortletRequest.LIFECYCLE_PHASE, lifecycle);
+
 			}
 		}
 	}
