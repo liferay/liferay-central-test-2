@@ -395,14 +395,13 @@ public class JournalStructureLocalServiceImpl
 			List<JournalStructure> structures =
 				journalStructurePersistence.findByStructureId(structureId);
 
-			if (structures.size() == 0) {
-				throw new NoSuchStructureException(
-					"No JournalStructure exists with the structure id " +
-						structureId);
-			}
-			else {
+			if (!structures.isEmpty()) {
 				return structures.get(0);
 			}
+
+			throw new NoSuchStructureException(
+				"No JournalStructure exists with the structure id " +
+					structureId);
 		}
 
 		JournalStructure structure = journalStructurePersistence.fetchByG_S(
