@@ -286,7 +286,6 @@ public class RuntimePortletImpl implements RuntimePortlet {
 
 			if (lifecycle != null) {
 				request.setAttribute(PortletRequest.LIFECYCLE_PHASE, lifecycle);
-
 			}
 		}
 	}
