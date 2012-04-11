@@ -23,10 +23,9 @@ import com.liferay.portlet.dynamicdatamapping.service.DDMStructureLocalServiceUt
 /**
  * @author Juan Fernández
  */
-public class DDMTemplateHelperImpl implements
-	DDMTemplateHelper {
+public class DDMTemplateHelperImpl implements DDMTemplateHelper {
 
-	public DDMStructure getDDMStructure(DDMTemplate template) {
+	public DDMStructure fetchStructure(DDMTemplate template) {
 		try {
 			long classNameId = PortalUtil.getClassNameId(DDMStructure.class);
 
@@ -34,7 +33,8 @@ public class DDMTemplateHelperImpl implements
 				return DDMStructureLocalServiceUtil.fetchDDMStructure(
 					template.getClassPK());
 			}
-		} catch (SystemException e) {
+		}
+		catch (SystemException e) {
 		}
 
 		return null;

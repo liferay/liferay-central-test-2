@@ -181,8 +181,6 @@ public class CopyStructureAction extends PortletAction {
 			DDMStructure structure)
 		throws Exception {
 
-		long classNameId = PortalUtil.getClassNameId(DDMStructure.class);
-
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
@@ -194,8 +192,12 @@ public class CopyStructureAction extends PortletAction {
 
 		portletURL.setParameter(
 			"struts_action", "/dynamic_data_mapping/copy_structure");
+
+		long classNameId = PortalUtil.getClassNameId(DDMStructure.class);
+
 		portletURL.setParameter(
 			"classNamId", String.valueOf(classNameId), false);
+
 		portletURL.setParameter(
 			"classPK", String.valueOf(structure.getStructureId()), false);
 		portletURL.setParameter(

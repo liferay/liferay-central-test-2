@@ -173,8 +173,6 @@ public class EditStructureAction extends PortletAction {
 			DDMStructure structure, String redirect)
 		throws Exception {
 
-		long classNameId = PortalUtil.getClassNameId(DDMStructure.class);
-
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
@@ -195,8 +193,12 @@ public class EditStructureAction extends PortletAction {
 		portletURL.setParameter("redirect", redirect, false);
 		portletURL.setParameter(
 			"groupId", String.valueOf(structure.getGroupId()), false);
+
+		long classNameId = PortalUtil.getClassNameId(DDMStructure.class);
+
 		portletURL.setParameter(
 			"classNameId", String.valueOf(classNameId), false);
+
 		portletURL.setParameter(
 			"classPK", String.valueOf(structure.getStructureId()), false);
 		portletURL.setParameter("availableFields", availableFields, false);

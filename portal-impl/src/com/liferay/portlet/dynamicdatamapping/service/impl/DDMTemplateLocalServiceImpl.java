@@ -60,13 +60,13 @@ public class DDMTemplateLocalServiceImpl
 
 		template.setUuid(serviceContext.getUuid());
 		template.setGroupId(groupId);
-		template.setClassNameId(classNameId);
-		template.setClassPK(classPK);
 		template.setCompanyId(user.getCompanyId());
 		template.setUserId(user.getUserId());
 		template.setUserName(user.getFullName());
 		template.setCreateDate(serviceContext.getCreateDate(now));
 		template.setModifiedDate(serviceContext.getModifiedDate(now));
+		template.setClassNameId(classNameId);
+		template.setClassPK(classPK);
 		template.setNameMap(nameMap);
 		template.setDescriptionMap(descriptionMap);
 		template.setType(type);
@@ -118,14 +118,14 @@ public class DDMTemplateLocalServiceImpl
 	}
 
 	public List<DDMTemplate> copyTemplates(
-			long userId, long classNameId, long classPK, long newClassPK,
+			long userId, long classNameId, long oldClassPK, long newClassPK,
 			String type, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		List<DDMTemplate> newTemplates = new ArrayList<DDMTemplate>();
 
 		List<DDMTemplate> oldTemplates = getTemplates(
-			classNameId, classPK, type);
+			classNameId, oldClassPK, type);
 
 		for (DDMTemplate oldTemplate : oldTemplates) {
 			DDMTemplate newTemplate = addTemplate(
@@ -181,9 +181,7 @@ public class DDMTemplateLocalServiceImpl
 		return ddmTemplatePersistence.findByPrimaryKey(templateId);
 	}
 
-	public List<DDMTemplate> getTemplates(long classPK)
-		throws SystemException {
-
+	public List<DDMTemplate> getTemplates(long classPK) throws SystemException {
 		return ddmTemplatePersistence.findByClassPK(classPK);
 	}
 

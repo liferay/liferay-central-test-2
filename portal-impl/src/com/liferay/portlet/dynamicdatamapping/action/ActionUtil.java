@@ -36,15 +36,15 @@ public class ActionUtil {
 	public static void getStructure(HttpServletRequest request)
 		throws Exception {
 
-		long structureClassNameId = PortalUtil.getClassNameId(
-			DDMStructure.class);
-
 		long classNameId = ParamUtil.getLong(request, "classNameId");
 		long classPK = ParamUtil.getLong(request, "classPK");
 
 		DDMStructure structure = null;
 
-		if ((classPK > 0) && (structureClassNameId == classNameId)) {
+		long structureClassNameId = PortalUtil.getClassNameId(
+			DDMStructure.class);
+
+		if ((structureClassNameId == classNameId) && (classPK > 0)) {
 			structure = DDMStructureServiceUtil.getStructure(classPK);
 		}
 

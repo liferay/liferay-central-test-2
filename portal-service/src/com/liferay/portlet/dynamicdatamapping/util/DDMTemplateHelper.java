@@ -22,6 +22,6 @@ import com.liferay.portlet.dynamicdatamapping.model.DDMTemplate;
  */
 public interface DDMTemplateHelper {
 
-	public DDMStructure getDDMStructure(DDMTemplate template);
+	public DDMStructure fetchStructure(DDMTemplate template);
 
 }

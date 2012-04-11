@@ -23,7 +23,7 @@ import com.liferay.portlet.dynamicdatamapping.model.DDMTemplate;
 public class DDMTemplateHelperUtil {
 
 	public static DDMStructure getDDMStructure(DDMTemplate ddmTemplate) {
-		return getDDMTemplateHelper().getDDMStructure(ddmTemplate);
+		return getDDMTemplateHelper().fetchStructure(ddmTemplate);
 	}
 
 	public static DDMTemplateHelper getDDMTemplateHelper() {

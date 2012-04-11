@@ -29,15 +29,13 @@ DDMTemplate template = (DDMTemplate)request.getAttribute(WebKeys.DYNAMIC_DATA_MA
 long templateId = BeanParamUtil.getLong(template, request, "templateId");
 
 long groupId = BeanParamUtil.getLong(template, request, "groupId", scopeGroupId);
-
 long classNameId = BeanParamUtil.getLong(template, request, "classNameId");
-
 long classPK = BeanParamUtil.getLong(template, request, "classPK");
 
 DDMStructure structure = (DDMStructure)request.getAttribute(WebKeys.DYNAMIC_DATA_MAPPING_STRUCTURE);
 
 if ((structure == null) && (template != null)) {
-	structure = DDMTemplateHelperUtil.getDDMStructure(template);
+	structure = DDMTemplateHelperUtil.fetchStructure(template);
 }
 
 String mode = BeanParamUtil.getString(template, request, "mode", "create");

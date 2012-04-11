@@ -24,9 +24,9 @@ String backURL = ParamUtil.getString(request, "backURL");
 long classNameId = ParamUtil.getLong(request, "classNameId");
 long classPK = ParamUtil.getLong(request, "classPK");
 
-long structureClassNameId = PortalUtil.getClassNameId(DDMStructure.class);
-
 DDMStructure structure = null;
+
+long structureClassNameId = PortalUtil.getClassNameId(DDMStructure.class);
 
 if ((classPK > 0) && (structureClassNameId == classNameId)) {
 	structure = DDMStructureServiceUtil.getStructure(classPK);
