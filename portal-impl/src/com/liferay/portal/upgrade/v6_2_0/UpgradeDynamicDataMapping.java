@@ -16,13 +16,15 @@ package com.liferay.portal.upgrade.v6_2_0;
 
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.v6_2_0.util.DDMTemplateTable;
+import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.dynamicdatamapping.model.DDMTemplate;
 
 import java.sql.SQLException;
 
 /**
  * @author Juan Fernández
  */
-public class UpgradeDDMTemplate extends UpgradeProcess {
+public class UpgradeDynamicDataMapping extends UpgradeProcess {
 
 	@Override
 	protected void doUpgrade() throws Exception {
@@ -30,12 +32,6 @@ public class UpgradeDDMTemplate extends UpgradeProcess {
 			runSQL("alter table DDMTemplate add classNameId LONG");
 
 			runSQL("alter_column_name DDMTemplate structureId classPK LONG");
-
-			runSQL(
-				"update DDMTemplate set classNameId = (select classNameId " +
-					"from ClassName_ where value = '" +
-					"com.liferay.portlet.dynamicdatamapping.model." +
-					"DDMTemplate')");
 		}
 		catch (SQLException sqle) {
 			upgradeTable(
@@ -43,6 +39,10 @@ public class UpgradeDDMTemplate extends UpgradeProcess {
 				DDMTemplateTable.TABLE_SQL_CREATE,
 				DDMTemplateTable.TABLE_SQL_ADD_INDEXES);
 		}
+
+		long classNameId = PortalUtil.getClassNameId(DDMTemplate.class);
+
+		runSQL("update DDMTemplate set classNameId = " + classNameId);
 	}
 
 }
