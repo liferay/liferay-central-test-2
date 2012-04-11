@@ -833,7 +833,7 @@ public class DLFileEntryLocalServiceImpl
 	@BufferedIncrement(incrementClass = NumberIncrement.class)
 	public void incrementViewCounter(
 			DLFileEntry dlFileEntry, boolean incrementCounter, int increment)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		if (!PropsValues.DL_FILE_ENTRY_READ_COUNT_ENABLED ||
 			!incrementCounter) {

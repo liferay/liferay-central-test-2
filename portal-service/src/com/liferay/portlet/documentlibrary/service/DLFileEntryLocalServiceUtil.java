@@ -594,8 +594,7 @@ public class DLFileEntryLocalServiceUtil {
 	public static void incrementViewCounter(
 		com.liferay.portlet.documentlibrary.model.DLFileEntry dlFileEntry,
 		boolean incrementCounter, int increment)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getService()
 			.incrementViewCounter(dlFileEntry, incrementCounter, increment);
 	}
