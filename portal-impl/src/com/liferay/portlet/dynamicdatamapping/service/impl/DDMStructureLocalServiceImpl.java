@@ -509,7 +509,7 @@ public class DDMStructureLocalServiceImpl
 			DDMTemplate template, Element templateElement)
 		throws PortalException, SystemException {
 
-		DDMStructure structure = DDMTemplateHelperUtil.getDDMStructure(
+		DDMStructure structure = DDMTemplateHelperUtil.fetchStructure(
 			template);
 
 		List<Element> dynamicElementElements = templateElement.elements(
