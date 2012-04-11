@@ -29,9 +29,9 @@ import org.apache.lucene.store.Directory;
 /**
  * @author Shuyang Zhou
  */
-public class SynchronizedIndexAccessorWrapper implements IndexAccessor {
+public class SynchronizedIndexAccessorImpl implements IndexAccessor {
 
-	public SynchronizedIndexAccessorWrapper(IndexAccessor indexAccessor) {
+	public SynchronizedIndexAccessorImpl(IndexAccessor indexAccessor) {
 		_indexAccessor = indexAccessor;
 
 		ReadWriteLock readWriteLock = new ReentrantReadWriteLock();
