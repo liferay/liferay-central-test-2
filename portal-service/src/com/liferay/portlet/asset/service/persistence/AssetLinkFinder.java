@@ -18,11 +18,11 @@ package com.liferay.portlet.asset.service.persistence;
  * @author Brian Wing Shun Chan
  */
 public interface AssetLinkFinder {
-	public java.util.List<com.liferay.portlet.asset.model.AssetLink> findVisibleDirectLinks(
-		long entryId)
+	public java.util.List<com.liferay.portlet.asset.model.AssetLink> findByE1_V(
+		long entryId1, boolean visible)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public java.util.List<com.liferay.portlet.asset.model.AssetLink> findVisibleDirectLinksByType(
-		long entryId, int typeId)
+	public java.util.List<com.liferay.portlet.asset.model.AssetLink> findByE1_T_V(
+		long entryId1, int type, boolean visible)
 		throws com.liferay.portal.kernel.exception.SystemException;
 }

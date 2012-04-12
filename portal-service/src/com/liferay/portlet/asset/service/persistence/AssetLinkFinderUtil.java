@@ -21,16 +21,16 @@ import com.liferay.portal.kernel.util.ReferenceRegistry;
  * @author Brian Wing Shun Chan
  */
 public class AssetLinkFinderUtil {
-	public static java.util.List<com.liferay.portlet.asset.model.AssetLink> findVisibleDirectLinks(
-		long entryId)
+	public static java.util.List<com.liferay.portlet.asset.model.AssetLink> findByE1_V(
+		long entryId1, boolean visible)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getFinder().findVisibleDirectLinks(entryId);
+		return getFinder().findByE1_V(entryId1, visible);
 	}
 
-	public static java.util.List<com.liferay.portlet.asset.model.AssetLink> findVisibleDirectLinksByType(
-		long entryId, int typeId)
+	public static java.util.List<com.liferay.portlet.asset.model.AssetLink> findByE1_T_V(
+		long entryId1, int type, boolean visible)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getFinder().findVisibleDirectLinksByType(entryId, typeId);
+		return getFinder().findByE1_T_V(entryId1, type, visible);
 	}
 
 	public static AssetLinkFinder getFinder() {
