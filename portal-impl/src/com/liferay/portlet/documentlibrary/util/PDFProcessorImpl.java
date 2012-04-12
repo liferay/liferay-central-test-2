@@ -809,6 +809,7 @@ public class PDFProcessorImpl
 
 		public String call() throws ProcessException {
 			Properties systemProperties = System.getProperties();
+
 			SystemEnv.setProperties(systemProperties);
 
 			try {

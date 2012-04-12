@@ -590,12 +590,13 @@ public class VideoProcessorImpl
 		}
 
 		public String call() throws ProcessException {
+			Properties systemProperties = System.getProperties();
+
+			SystemEnv.setProperties(systemProperties);
+
 			Class<?> clazz = getClass();
 
 			ClassLoader classLoader = clazz.getClassLoader();
-
-			Properties systemProperties = System.getProperties();
-			SystemEnv.setProperties(systemProperties);
 
 			Log4JUtil.initLog4J(
 				_serverId, _liferayHome, classLoader, new Log4jLogFactoryImpl(),
