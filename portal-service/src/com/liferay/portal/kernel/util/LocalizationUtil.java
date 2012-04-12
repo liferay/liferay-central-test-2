@@ -212,6 +212,14 @@ public class LocalizationUtil {
 	}
 
 	public static String updateLocalization(
+		Map<Locale, String> localizationMap, String xml, String key,
+		String defaultLanguageId) {
+
+		return getLocalization().updateLocalization(
+			localizationMap, xml, key, defaultLanguageId);
+	}
+
+	public static String updateLocalization(
 		String xml, String key, String value) {
 
 		return getLocalization().updateLocalization(xml, key, value);
@@ -247,14 +255,6 @@ public class LocalizationUtil {
 		return getLocalization().updateLocalization(
 			xml, key, value, requestedLanguageId, defaultLanguageId, cdata,
 			localized);
-	}
-
-	public static String updateLocalization(
-		Map<Locale, String> localizationMap, String xml, String key,
-		String defaultLanguageId) {
-
-		return getLocalization().updateLocalization(
-			localizationMap, xml, key, defaultLanguageId);
 	}
 
 	public void setLocalization(Localization localization) {
