@@ -174,7 +174,7 @@
 				tagId = ?
 		]]>
 	</sql>
-	<sql id="com.liferay.portlet.asset.service.persistence.AssetLinkFinder.findVisibleDirectLinks">
+	<sql id="com.liferay.portlet.asset.service.persistence.AssetLinkFinder.findByE1_V">
 		<![CDATA[
 			SELECT
 				{AssetLink.*}
@@ -188,7 +188,7 @@
 				(AssetEntry.visible = ?)
 		]]>
 	</sql>
-	<sql id="com.liferay.portlet.asset.service.persistence.AssetLinkFinder.findVisibleDirectLinksByType">
+	<sql id="com.liferay.portlet.asset.service.persistence.AssetLinkFinder.findByE1_T_V">
 		<![CDATA[
 			SELECT
 				{AssetLink.*}
@@ -199,8 +199,8 @@
 					(AssetEntry.entryId = AssetLink.entryId2)
 			WHERE
 				(AssetLink.entryId1 = ?) AND
-				(AssetEntry.visible = ?) AND
-				(AssetLink.type_ = ?)
+				(AssetLink.type_ = ?) AND
+				(AssetEntry.visible = ?)
 		]]>
 	</sql>
 	<sql id="com.liferay.portlet.asset.service.persistence.AssetTagFinder.countByG_N">

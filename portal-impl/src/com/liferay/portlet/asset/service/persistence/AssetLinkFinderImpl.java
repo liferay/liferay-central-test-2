@@ -32,27 +32,13 @@ import java.util.List;
 public class AssetLinkFinderImpl
 	extends BasePersistenceImpl<AssetLink> implements AssetLinkFinder {
 
-	public static final String FIND_VISIBLE_DIRECT_LINKS =
-		AssetLinkFinder.class.getName() + ".findVisibleDirectLinks";
+	public static final String FIND_BY_E1_V =
+		AssetLinkFinder.class.getName() + ".findByE1_V";
 
-	public static final String FIND_VISIBLE_DIRECT_LINKS_BY_TYPE =
-		AssetLinkFinder.class.getName() + ".findVisibleDirectLinksByType";
+	public static final String FIND_BY_E1_T_V =
+		AssetLinkFinder.class.getName() + ".findByE1_T_V";
 
-	public List<AssetLink> findVisibleDirectLinks(long entryId)
-		throws SystemException {
-
-		return findVisible(FIND_VISIBLE_DIRECT_LINKS, entryId, -1);
-	}
-
-	public List<AssetLink> findVisibleDirectLinksByType(
-			long entryId, int typeId)
-		throws SystemException {
-
-		return findVisible(FIND_VISIBLE_DIRECT_LINKS_BY_TYPE, entryId, typeId);
-	}
-
-	protected List<AssetLink> findVisible(
-			String query, long entryId, int typeId)
+	public List<AssetLink> findByE1_V(long entryId1, boolean visible)
 		throws SystemException {
 
 		Session session = null;
@@ -60,7 +46,7 @@ public class AssetLinkFinderImpl
 		try {
 			session = openSession();
 
-			String sql = CustomSQLUtil.get(query);
+			String sql = CustomSQLUtil.get(FIND_BY_E1_V);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -68,12 +54,40 @@ public class AssetLinkFinderImpl
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
-			qPos.add(entryId);
-			qPos.add(Boolean.TRUE);
+			qPos.add(entryId1);
+			qPos.add(visible);
 
-			if (typeId != -1) {
-				qPos.add(typeId);
-			}
+			return (List<AssetLink>)QueryUtil.list(
+				q, getDialect(), QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public List<AssetLink> findByE1_T_V(
+			long entryId1, int type, boolean visible)
+		throws SystemException {
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			String sql = CustomSQLUtil.get(FIND_BY_E1_T_V);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity("AssetLink", AssetLinkImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(entryId1);
+			qPos.add(type);
+			qPos.add(visible);
 
 			return (List<AssetLink>)QueryUtil.list(
 				q, getDialect(), QueryUtil.ALL_POS, QueryUtil.ALL_POS);

@@ -175,7 +175,7 @@ public class AssetLinkLocalServiceImpl extends AssetLinkLocalServiceBaseImpl {
 	 * @throws SystemException if a system exception occurred
 	 */
 	public List<AssetLink> getDirectLinks(long entryId) throws SystemException {
-		return assetLinkFinder.findVisibleDirectLinks(entryId);
+		return assetLinkFinder.findByE1_V(entryId, true);
 	}
 
 	/**
@@ -196,7 +196,7 @@ public class AssetLinkLocalServiceImpl extends AssetLinkLocalServiceBaseImpl {
 	public List<AssetLink> getDirectLinks(long entryId, int typeId)
 		throws SystemException {
 
-		return assetLinkFinder.findVisibleDirectLinksByType(entryId, typeId);
+		return assetLinkFinder.findByE1_T_V(entryId, typeId, true);
 	}
 
 	/**
