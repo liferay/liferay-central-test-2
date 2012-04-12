@@ -165,9 +165,6 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		articleElement.addAttribute(
 			"article-resource-uuid", article.getArticleResourceUuid());
 
-		Group companyGroup = GroupLocalServiceUtil.getCompanyGroup(
-			article.getCompanyId());
-
 		if (Validator.isNotNull(article.getStructureId())) {
 			JournalStructure structure =
 				JournalStructureLocalServiceUtil.getStructure(
