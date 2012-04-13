@@ -5,6 +5,8 @@ AUI.add(
 
 		var isObject = Lang.isObject;
 
+		var TOKEN_SERIALIZE = 'serialize://';
+
 		var Store = function(key, value) {
 			var config = {
 				after: {},
@@ -12,20 +14,27 @@ AUI.add(
 			};
 
 			if (Lang.isFunction(value)) {
-				config.data.cmd = 'get';
+				var cmd = 'get';
 				config.data.key = key;
+
+				if (Lang.isArray(key)) {
+					cmd = 'getAll';
+					config.dataType = 'json';
+				}
+
+				config.data.cmd = cmd;
 
 				var callback = value;
 
 				config.after.success = function(event) {
 					var responseData = this.get('responseData');
 
-					if (responseData.substring(0, 12) === "serialize://"){
-						var responseDataLength = responseData.length - 1;
-
-						responseDataSubString = responseData.substring(12, responseDataLength);
-
-						responseData = A.JSON.parse(responseDataSubString);
+					if (Lang.isString(responseData) && responseData.indexOf(TOKEN_SERIALIZE) === 0) {
+						try {
+							responseData = A.JSON.parse(responseData.substring(TOKEN_SERIALIZE.length));
+						}
+						catch (e) {
+						}
 					}
 
 					callback(responseData);
@@ -40,7 +49,7 @@ AUI.add(
 				}
 
 				if (isObject(value)) {
-					config.data[key] = 'serialize://' + A.JSON.stringify(value);
+					config.data[key] = TOKEN_SERIALIZE + A.JSON.stringify(value);
 				}
 			}
 
