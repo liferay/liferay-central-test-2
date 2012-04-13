@@ -10,6 +10,7 @@
 	<property file="${project.dir}/test.properties" />
 
 	<propertycopy name="db.host" from="db.${db.type}.host" silent="true" />
+	<propertycopy name="db.device.name" from="db.${db.type}.device.name" silent="true" />
 	<propertycopy name="db.driver" from="db.${db.type}.driver" silent="true" />
 	<propertycopy name="db.schema" from="db.${db.type}.schema" silent="true" />
 	<propertycopy name="db.url" from="db.${db.type}.url" silent="true" />
