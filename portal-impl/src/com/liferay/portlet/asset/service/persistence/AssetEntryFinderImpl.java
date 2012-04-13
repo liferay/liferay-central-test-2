@@ -132,7 +132,7 @@ public class AssetEntryFinderImpl
 			String sql = CustomSQLUtil.get(FIND_BY_AND_TAG_IDS);
 
 			sql = StringUtil.replace(
-				sql, "[TAG_ID]", getTagIds(tagIds[i], StringPool.EQUAL));
+				sql, "[$TAG_ID]", getTagIds(tagIds[i], StringPool.EQUAL));
 
 			sb.append(sql);
 
@@ -314,8 +314,8 @@ public class AssetEntryFinderImpl
 
 		if (entryQuery.getAnyTagIds().length > 0) {
 			sb.append(" AND (");
-			sb.append(getAnyTagIds(
-				entryQuery.getAnyTagIds(), StringPool.EQUAL));
+			sb.append(
+				getAnyTagIds(entryQuery.getAnyTagIds(), StringPool.EQUAL));
 			sb.append(") ");
 		}
 
@@ -473,7 +473,7 @@ public class AssetEntryFinderImpl
 			String sql = CustomSQLUtil.get(FIND_BY_AND_TAG_IDS);
 
 			sql = StringUtil.replace(
-				sql, "[TAG_ID]", getTagIds(tagIds[i], StringPool.EQUAL));
+				sql, "[$TAG_ID]", getTagIds(tagIds[i], StringPool.EQUAL));
 
 			sb.append(sql);
 

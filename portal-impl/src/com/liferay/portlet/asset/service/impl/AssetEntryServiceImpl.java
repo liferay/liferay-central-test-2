@@ -299,18 +299,19 @@ public class AssetEntryServiceImpl extends AssetEntryServiceBaseImpl {
 
 			for (long tagId : tagIds) {
 				if (AssetTagPermission.contains(
-					getPermissionChecker(), tagId, ActionKeys.VIEW)) {
+						getPermissionChecker(), tagId, ActionKeys.VIEW)) {
 
 					viewableTagIds.add(tagId);
 				}
 			}
 
-			viewableTagIdsArray.add(ArrayUtil.toArray(
-				viewableTagIds.toArray(new Long[viewableTagIds.size()])));
+			viewableTagIdsArray.add(
+				ArrayUtil.toArray(
+					viewableTagIds.toArray(new Long[viewableTagIds.size()])));
 		}
 
-		return
-			viewableTagIdsArray.toArray(new long[viewableTagIdsArray.size()][]);
+		return viewableTagIdsArray.toArray(
+			new long[viewableTagIdsArray.size()][]);
 	}
 
 	protected long[] filterTagIds(long[] tagIds)

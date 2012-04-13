@@ -142,7 +142,7 @@ public class AssetEntryQuery {
 			_allTagIds = AssetTagLocalServiceUtil.getTagIds(
 				themeDisplay.getParentGroupId(), new String[] {tagName});
 
-			_allTagIdsArray = new long[][]{_allTagIds};
+			_allTagIdsArray = new long[][] {_allTagIds};
 		}
 	}
 
@@ -160,7 +160,7 @@ public class AssetEntryQuery {
 
 		_allTagIdsArray = ArrayUtil.append(_allTagIdsArray, allTagsIds);
 
-		_allTagIds = _flatTagIds(_allTagIdsArray);
+		_allTagIds = _flattenTagIds(_allTagIdsArray);
 	}
 
 	public void addNotAllTagIdsArray(long[] notAllTagsIds) {
@@ -171,7 +171,7 @@ public class AssetEntryQuery {
 		_notAllTagIdsArray = ArrayUtil.append(
 			_notAllTagIdsArray, notAllTagsIds);
 
-		_notAllTagIds = _flatTagIds(_notAllTagIdsArray);
+		_notAllTagIds = _flattenTagIds(_notAllTagIdsArray);
 	}
 
 	public long[] getAllCategoryIds() {
@@ -303,7 +303,7 @@ public class AssetEntryQuery {
 	public void setAllTagIds(long[] allTagIds) {
 		_allTagIds = allTagIds;
 
-		_allTagIdsArray = new long[][]{_allTagIds};
+		_allTagIdsArray = new long[][] {_allTagIds};
 
 		_toString = null;
 	}
@@ -311,7 +311,7 @@ public class AssetEntryQuery {
 	public void setAllTagIdsArray(long[][] allTagIdsArray) {
 		_allTagIdsArray = allTagIdsArray;
 
-		_allTagIds = _flatTagIds(allTagIdsArray);
+		_allTagIds = _flattenTagIds(allTagIdsArray);
 
 		_toString = null;
 	}
@@ -397,7 +397,7 @@ public class AssetEntryQuery {
 	public void setNotAllTagIds(long[] notAllTagIds) {
 		_notAllTagIds = notAllTagIds;
 
-		_notAllTagIdsArray = new long[][]{_notAllTagIds};
+		_notAllTagIdsArray = new long[][] {_notAllTagIds};
 
 		_toString = null;
 	}
@@ -405,7 +405,7 @@ public class AssetEntryQuery {
 	public void setNotAllTagIdsArray(long[][] notAllTagIdsArray) {
 		_notAllTagIdsArray = notAllTagIdsArray;
 
-		_notAllTagIds = _flatTagIds(notAllTagIdsArray);
+		_notAllTagIds = _flattenTagIds(notAllTagIdsArray);
 
 		_toString = null;
 	}
@@ -529,7 +529,7 @@ public class AssetEntryQuery {
 		return _toString;
 	}
 
-	private long[] _flatTagIds(long[][] tagIdsArray) {
+	private long[] _flattenTagIds(long[][] tagIdsArray) {
 		List<Long> tagIdsList = new ArrayList<Long>();
 
 		for (int i = 0; i < tagIdsArray.length; i++) {

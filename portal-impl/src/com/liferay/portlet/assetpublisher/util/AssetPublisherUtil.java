@@ -263,31 +263,37 @@ public class AssetPublisherUtil {
 			}
 		}
 
-		long[] anyAssetTagIds = AssetTagLocalServiceUtil.getTagIds(
-			scopeGroupIds, anyAssetTagNames);
-		long[] notAnyAssetTagIds = AssetTagLocalServiceUtil.getTagIds(
-			scopeGroupIds, notAnyAssetTagNames);
-
 		assetEntryQuery.setAllCategoryIds(allAssetCategoryIds);
-		assetEntryQuery.setAnyCategoryIds(anyAssetCategoryIds);
-		assetEntryQuery.setAnyTagIds(anyAssetTagIds);
-		assetEntryQuery.setNotAllCategoryIds(notAllAssetCategoryIds);
-		assetEntryQuery.setNotAnyCategoryIds(notAnyAssetCategoryIds);
-		assetEntryQuery.setNotAnyTagIds(notAnyAssetTagIds);
 
-		for (String tagName : allAssetTagNames) {
+		for (String assetTagName : allAssetTagNames) {
 			long[] allAssetTagIds = AssetTagLocalServiceUtil.getTagIds(
-				scopeGroupIds, tagName);
+				scopeGroupIds, assetTagName);
 
 			assetEntryQuery.addAllTagIdsArray(allAssetTagIds);
 		}
 
-		for (String tagName : notAllAssetTagNames) {
+		assetEntryQuery.setAnyCategoryIds(anyAssetCategoryIds);
+
+		long[] anyAssetTagIds = AssetTagLocalServiceUtil.getTagIds(
+			scopeGroupIds, anyAssetTagNames);
+
+		assetEntryQuery.setAnyTagIds(anyAssetTagIds);
+
+		assetEntryQuery.setNotAllCategoryIds(notAllAssetCategoryIds);
+
+		for (String assetTagName : notAllAssetTagNames) {
 			long[] notAllAssetTagIds = AssetTagLocalServiceUtil.getTagIds(
-				scopeGroupIds, tagName);
+				scopeGroupIds, assetTagName);
 
 			assetEntryQuery.addNotAllTagIdsArray(notAllAssetTagIds);
 		}
+
+		assetEntryQuery.setNotAnyCategoryIds(notAnyAssetCategoryIds);
+
+		long[] notAnyAssetTagIds = AssetTagLocalServiceUtil.getTagIds(
+			scopeGroupIds, notAnyAssetTagNames);
+
+		assetEntryQuery.setNotAnyTagIds(notAnyAssetTagIds);
 
 		return assetEntryQuery;
 	}
