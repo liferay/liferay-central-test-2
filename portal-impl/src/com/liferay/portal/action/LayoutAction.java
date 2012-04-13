@@ -356,7 +356,7 @@ public class LayoutAction extends Action {
 			}
 
 			if (portlet != null) {
-				PortletContainerUtil.preparePortletServing(request, portlet);
+				PortletContainerUtil.preparePortlet(request, portlet);
 
 				if (themeDisplay.isLifecycleAction()) {
 					PortletContainerUtil.processAction(

@@ -29,11 +29,11 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class PortletContainerUtil {
 
-	public static void preparePortletServing(
+	public static void preparePortlet(
 			HttpServletRequest request, Portlet portlet)
 		throws PortletContainerException {
 
-		_portletContainer.preparePortletServing(request, portlet);
+		_portletContainer.preparePortlet(request, portlet);
 	}
 
 	public static void processAction(

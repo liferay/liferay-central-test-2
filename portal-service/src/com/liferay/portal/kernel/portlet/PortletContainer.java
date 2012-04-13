@@ -27,8 +27,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public interface PortletContainer {
 
-	public void preparePortletServing(
-			HttpServletRequest request, Portlet portlet)
+	public void preparePortlet(HttpServletRequest request, Portlet portlet)
 		throws PortletContainerException;
 
 	public void processAction(

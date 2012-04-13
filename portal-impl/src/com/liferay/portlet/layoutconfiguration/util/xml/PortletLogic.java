@@ -60,13 +60,13 @@ public class PortletLogic extends RuntimeLogic {
 
 	@Override
 	public String processXML(String xml) throws Exception {
-		Document doc = SAXReaderUtil.read(xml);
+		Document document = SAXReaderUtil.read(xml);
 
-		Element root = doc.getRootElement();
+		Element rootElement = document.getRootElement();
 
-		String rootPortletId = root.attributeValue("name");
-		String instanceId = root.attributeValue("instance");
-		String queryString = root.attributeValue("queryString");
+		String rootPortletId = rootElement.attributeValue("name");
+		String instanceId = rootElement.attributeValue("instance");
+		String queryString = rootElement.attributeValue("queryString");
 
 		String portletId = rootPortletId;
 

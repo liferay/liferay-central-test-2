@@ -94,12 +94,11 @@ import javax.servlet.http.HttpSession;
  */
 public class PortletContainerImpl implements PortletContainer {
 
-	public void preparePortletServing(
-			HttpServletRequest request, Portlet portlet)
+	public void preparePortlet(HttpServletRequest request, Portlet portlet)
 		throws PortletContainerException {
 
 		try {
-			_doPreparePortletServing(request, portlet);
+			_doPreparePortlet(request, portlet);
 		}
 		catch (Exception e) {
 			throw new PortletContainerException(e);
@@ -226,24 +225,26 @@ public class PortletContainerImpl implements PortletContainer {
 
 		Layout layout = (Layout)request.getAttribute(WebKeys.LAYOUT);
 
-		for (LayoutTypePortlet layoutTypePortlet :
-			getLayoutTypePortlets(layout)) {
+		List<LayoutTypePortlet> layoutTypePortlets = getLayoutTypePortlets(
+			layout);
 
+		for (LayoutTypePortlet layoutTypePortlet : layoutTypePortlets) {
 			List<Portlet> portlets = layoutTypePortlet.getAllPortlets();
 
 			for (Portlet portlet : portlets) {
-
 				for (Event event : events) {
 					javax.xml.namespace.QName qName = event.getQName();
 
 					QName processingQName = portlet.getProcessingEvent(
 						qName.getNamespaceURI(), qName.getLocalPart());
 
-					if (processingQName != null) {
-						_doProcessEvent(
-							request, response, portlet,
-							layoutTypePortlet.getLayout(), event);
+					if (processingQName == null) {
+						continue;
 					}
+
+					_doProcessEvent(
+						request, response, portlet,
+						layoutTypePortlet.getLayout(), event);
 				}
 			}
 		}
@@ -342,8 +343,7 @@ public class PortletContainerImpl implements PortletContainer {
 		return new EventImpl(event.getName(), event.getQName(), value);
 	}
 
-	private void _doPreparePortletServing(
-			HttpServletRequest request, Portlet portlet)
+	private void _doPreparePortlet(HttpServletRequest request, Portlet portlet)
 		throws Exception {
 
 		User user = PortalUtil.getUser(request);
@@ -678,8 +678,8 @@ public class PortletContainerImpl implements PortletContainer {
 				if (_log.isDebugEnabled()) {
 					_log.debug(
 						"Portlet " + portlet.getPortletId() +
-							" is instanceable but does not have a " +
-								"valid instance id");
+							" is instanceable but does not have a valid " +
+								"instance id");
 				}
 
 				portlet = null;

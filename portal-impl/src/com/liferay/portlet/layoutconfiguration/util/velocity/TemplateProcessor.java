@@ -156,12 +156,12 @@ public class TemplateProcessor implements ColumnProcessor {
 			StringServletResponse stringServletResponse =
 				new StringServletResponse(_response);
 
-			HttpServletRequest setupRequest =
+			HttpServletRequest request =
 				PortletContainerUtil.setupOptionalRenderParameters(
 					_request, path, columnId, columnPos, columnCount);
 
 			PortletContainerUtil.render(
-				setupRequest, stringServletResponse, portlet);
+				request, stringServletResponse, portlet);
 
 			sb.append(stringServletResponse.getString());
 		}

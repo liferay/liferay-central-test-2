@@ -35,7 +35,7 @@ public class TempAttributesServletRequest extends HttpServletRequestWrapper {
 
 	@Override
 	public Object getAttribute(String name) {
-		Object value = _tempAttributes.get(name);
+		Object value = _attributes.get(name);
 
 		if (value == _nullValue) {
 			return null;
@@ -49,10 +49,10 @@ public class TempAttributesServletRequest extends HttpServletRequestWrapper {
 	}
 
 	@Override
-	public Enumeration getAttributeNames() {
+	public Enumeration<String> getAttributeNames() {
 		Enumeration<String> superEnumeration = super.getAttributeNames();
 
-		if (_tempAttributes.isEmpty()) {
+		if (_attributes.isEmpty()) {
 			return superEnumeration;
 		}
 
@@ -62,14 +62,14 @@ public class TempAttributesServletRequest extends HttpServletRequestWrapper {
 			names.add(superEnumeration.nextElement());
 		}
 
-		names.addAll(_tempAttributes.keySet());
+		names.addAll(_attributes.keySet());
 
 		return Collections.enumeration(names);
 	}
 
 	@Override
 	public void removeAttribute(String name) {
-		_tempAttributes.remove(name);
+		_attributes.remove(name);
 
 		super.removeAttribute(name);
 	}
@@ -79,11 +79,11 @@ public class TempAttributesServletRequest extends HttpServletRequestWrapper {
 			value = _nullValue;
 		}
 
-		_tempAttributes.put(name, value);
+		_attributes.put(name, value);
 	}
 
 	private static Object _nullValue = new Object();
 
-	private Map<String, Object> _tempAttributes = new HashMap<String, Object>();
+	private Map<String, Object> _attributes = new HashMap<String, Object>();
 
 }
