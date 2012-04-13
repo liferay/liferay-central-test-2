@@ -9,13 +9,13 @@
 	<property file="${project.dir}/test.${env.HOSTNAME}.properties" />
 	<property file="${project.dir}/test.properties" />
 
-	<propertycopy name="db.host" from="db.${db.type}.host" silent="true" />
 	<propertycopy name="db.device.name" from="db.${db.type}.device.name" silent="true" />
 	<propertycopy name="db.driver" from="db.${db.type}.driver" silent="true" />
+	<propertycopy name="db.host" from="db.${db.type}.host" silent="true" />
+	<propertycopy name="db.password" from="db.${db.type}.password" silent="true" />
 	<propertycopy name="db.schema" from="db.${db.type}.schema" silent="true" />
 	<propertycopy name="db.url" from="db.${db.type}.url" silent="true" />
 	<propertycopy name="db.username" from="db.${db.type}.username" silent="true" />
-	<propertycopy name="db.password" from="db.${db.type}.password" silent="true" />
 
 	<property name="plink.executable" location="${project.dir}/tools/putty/plink.exe" />
 	<property name="pscp.executable" location="${project.dir}/tools/putty/pscp.exe" />
