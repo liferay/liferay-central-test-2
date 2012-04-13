@@ -386,7 +386,6 @@ public class VelocityTaglib {
 	}
 
 	public void journalContentSearch() throws Exception {
-
 		journalContentSearch(true, null, null);
 	}
 
