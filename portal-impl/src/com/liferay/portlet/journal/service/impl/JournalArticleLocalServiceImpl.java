@@ -2363,7 +2363,7 @@ public class JournalArticleLocalServiceImpl
 
 		journalArticlePersistence.update(article, false);
 
-		if (hasChangedLatestApprovedVersion (
+		if (hasModifiedLatestApprovedVersion (
 				article.getGroupId(), article.getArticleId(),
 				article.getVersion())) {
 
@@ -3043,7 +3043,7 @@ public class JournalArticleLocalServiceImpl
 		return newUrlTitle;
 	}
 
-	protected boolean hasChangedLatestApprovedVersion (
+	protected boolean hasModifiedLatestApprovedVersion(
 			long groupId, String articleId, double version)
 		throws PortalException, SystemException {
 
@@ -3059,7 +3059,8 @@ public class JournalArticleLocalServiceImpl
 			else {
 				return false;
 			}
-		} catch (NoSuchArticleException nsae) {
+		}
+		catch (NoSuchArticleException nsae) {
 			return true;
 		}
 	}
