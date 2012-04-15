@@ -126,18 +126,6 @@ else {
 	}
 
 	String[] categoryIdsTitles = _getCategoryIdsTitles(curCategoryIds, curCategoryNames, 0, themeDisplay);
-
-	StringBundler vocabulariesIds = new StringBundler(vocabularies.size());
-
-	for (AssetVocabulary vocabulary : vocabularies) {
-		vocabulary = vocabulary.toEscapedModel();
-
-		if (vocabulariesIds.length() > 0) {
-			vocabulariesIds.append(",");
-		}
-
-		vocabulariesIds.append(vocabulary.getVocabularyId());
-	}
 %>
 
 	<div class="lfr-tags-selector-content" id="<%= namespace + randomNamespace %>assetCategoriesSelector">
@@ -154,8 +142,8 @@ else {
 				hiddenInput: '#<%= namespace + hiddenInput %>',
 				instanceVar: '<%= namespace + randomNamespace %>',
 				portalModelResource: <%= Validator.isNotNull(className) && (ResourceActionsUtil.isPortalModelResource(className) || className.equals(Group.class.getName())) %>,
-				vocabularyIds: '<%= vocabulariesIds.toString() %>',
-				vocabularyGroupIds: '<%= scopeGroupId %>'
+				vocabularyGroupIds: '<%= scopeGroupId %>',
+				vocabularyIds: '<%= ListUtil.toString(vocabularies, "vocabularyId") %>'
 			}
 		).render();
 	</aui:script>

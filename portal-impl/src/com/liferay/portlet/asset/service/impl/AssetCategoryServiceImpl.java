@@ -29,7 +29,6 @@ import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.asset.model.AssetCategory;
 import com.liferay.portlet.asset.model.AssetVocabulary;
-import com.liferay.portlet.asset.service.AssetVocabularyServiceUtil;
 import com.liferay.portlet.asset.service.base.AssetCategoryServiceBaseImpl;
 import com.liferay.portlet.asset.service.permission.AssetCategoryPermission;
 import com.liferay.util.Autocomplete;
@@ -127,42 +126,32 @@ public class AssetCategoryServiceImpl extends AssetCategoryServiceBaseImpl {
 				parentCategoryId, start, end, obc));
 	}
 
-	public JSONArray getJSONByName(
-			long groupId, String name, long[] vocabularyIds, int start,
-			int end)
+	public JSONArray getJSONSearch(
+			long groupId, String name, long[] vocabularyIds, int start, int end)
 		throws PortalException, SystemException {
 
-		JSONArray categories = JSONFactoryUtil.createJSONArray();
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
 		for (AssetVocabulary vocabulary :
-				AssetVocabularyServiceUtil.getVocabularies(vocabularyIds)) {
+				assetVocabularyService.getVocabularies(vocabularyIds)) {
 
-			List<AssetCategory> categoriesVocabulary =
+			List<AssetCategory> vocabularyCategory =
 				assetCategoryFinder.findByG_N_V(
 					groupId, name, vocabulary.getVocabularyId(), start, end,
-						null);
+					null);
 
-			JSONArray convertedCategories = convertToJSON(
-				categoriesVocabulary);
+			JSONArray vocabularyCategoryJSONArray = toJSONArray(
+				vocabularyCategory);
 
-			// there should be JSONArray.addAll method in the interface
-			for (int i = 0; i < convertedCategories.length(); ++i) {
-				categories.put(convertedCategories.getJSONObject(i));
+			for (int i = 0; i < vocabularyCategoryJSONArray.length(); ++i) {
+				JSONObject vocabularyCategoryJSONObject =
+					vocabularyCategoryJSONArray.getJSONObject(i);
+
+				jsonArray.put(vocabularyCategoryJSONObject);
 			}
 		}
 
-		return categories;
-	}
-
-	public JSONArray getJSONSearch(
-			long groupId, String keywords, long vocabularyId, int start,
-			int end, OrderByComparator obc)
-		throws PortalException, SystemException {
-
-		List<AssetCategory> categories = getVocabularyCategories(
-			groupId, keywords, vocabularyId, start, end, obc);
-
-		return convertToJSON(categories);
+		return jsonArray;
 	}
 
 	public JSONObject getJSONVocabularyCategories(
@@ -305,8 +294,31 @@ public class AssetCategoryServiceImpl extends AssetCategoryServiceBaseImpl {
 			vocabularyId, categoryProperties, serviceContext);
 	}
 
-	protected JSONArray convertToJSON(List<AssetCategory> categories)
-			throws PortalException, SystemException {
+	protected List<AssetCategory> filterCategories(
+			List<AssetCategory> categories)
+		throws PortalException {
+
+		PermissionChecker permissionChecker = getPermissionChecker();
+
+		categories = ListUtil.copy(categories);
+
+		Iterator<AssetCategory> itr = categories.iterator();
+
+		while (itr.hasNext()) {
+			AssetCategory category = itr.next();
+
+			if (!AssetCategoryPermission.contains(
+					permissionChecker, category, ActionKeys.VIEW)) {
+
+				itr.remove();
+			}
+		}
+
+		return categories;
+	}
+
+	protected JSONArray toJSONArray(List<AssetCategory> categories)
+		throws PortalException, SystemException {
 
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
@@ -347,29 +359,6 @@ public class AssetCategoryServiceImpl extends AssetCategoryServiceBaseImpl {
 		}
 
 		return jsonArray;
-	}
-
-	protected List<AssetCategory> filterCategories(
-			List<AssetCategory> categories)
-		throws PortalException {
-
-		PermissionChecker permissionChecker = getPermissionChecker();
-
-		categories = ListUtil.copy(categories);
-
-		Iterator<AssetCategory> itr = categories.iterator();
-
-		while (itr.hasNext()) {
-			AssetCategory category = itr.next();
-
-			if (!AssetCategoryPermission.contains(
-					permissionChecker, category, ActionKeys.VIEW)) {
-
-				itr.remove();
-			}
-		}
-
-		return categories;
 	}
 
 }
