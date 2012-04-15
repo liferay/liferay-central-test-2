@@ -15,14 +15,8 @@
 package com.liferay.portal.action;
 
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
-import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONObject;
-
-import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.Validator;
-
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.SessionClicks;
 
@@ -61,35 +55,13 @@ public class SessionClickAction extends Action {
 				}
 			}
 
-			String cmd = ParamUtil.getString(request, "cmd");
+			String value = getValue(request);
 
-			String key = ParamUtil.getString(request, "key");
+			if (value != null) {
+				ServletOutputStream servletOutputStream =
+					response.getOutputStream();
 
-			if (Validator.isNotNull(key) &&
-			    (cmd.equals("get") || cmd.equals("getAll"))) {
-
-				String result = StringPool.BLANK;
-
-				if (cmd.equals("get")) {
-					result = SessionClicks.get(request, key, cmd);
-				}
-				else if (cmd.equals("getAll")) {
-					String[] keys = request.getParameterValues("key");
-
-					JSONObject storedValues = 
-						JSONFactoryUtil.createJSONObject();
-
-					for (String storedKey : keys) {
-						storedValues.put(storedKey,
-							SessionClicks.get(request, storedKey, cmd));
-					}
-
-					result = storedValues.toString();
-				}
-
-				ServletOutputStream out = response.getOutputStream();
-
-				out.println(result);
+				servletOutputStream.print(value);
 			}
 
 			return null;
@@ -100,4 +72,30 @@ public class SessionClickAction extends Action {
 			return null;
 		}
 	}
+
+	protected String getValue(HttpServletRequest request) {
+		String cmd = ParamUtil.getString(request, "cmd");
+
+		if (cmd.equals("get")) {
+			String key = ParamUtil.getString(request, "key");
+
+			return SessionClicks.get(request, key, cmd);
+		}
+		else if (cmd.equals("getAll")) {
+			JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
+
+			String[] keys = request.getParameterValues("key");
+
+			for (String key : keys) {
+				String value = SessionClicks.get(request, key, cmd);
+
+				jsonObject.put(key, value);
+			}
+
+			return jsonObject.toString();
+		}
+
+		return null;
+	}
+
 }
