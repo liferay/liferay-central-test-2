@@ -273,21 +273,23 @@ public class HotDeployUtil {
 	}
 
 	private void _initDependentServletContextListeners() {
+		Set<String> servletContextNames = _dependentServletContexts.keySet();
 
-		Iterator<String> dependentContextKeysIter =
-			_dependentServletContexts.keySet().iterator();
+		Iterator<String> servletContextNamesIterator =
+			servletContextNames.iterator();
 
-		while (dependentContextKeysIter.hasNext()) {
+		while (servletContextNamesIterator.hasNext()) {
+			String servletContextName = servletContextNamesIterator.next();
+
 			Set<DependentServletContext> dependentServletContexts =
-				_dependentServletContexts.get(dependentContextKeysIter.next());
+				_dependentServletContexts.get(servletContextName);
 
-			Iterator<DependentServletContext> dependentServletContextsIter =
+			Iterator<DependentServletContext> dependentServletContextIterator =
 				dependentServletContexts.iterator();
 
-			while (dependentServletContextsIter.hasNext()) {
-
+			while (dependentServletContextIterator.hasNext()) {
 				DependentServletContext dependentServletContext =
-					dependentServletContextsIter.next();
+					dependentServletContextIterator.next();
 
 				HotDeployEvent hotDeployEvent =
 					dependentServletContext.getHotDeployEvent();
@@ -309,11 +311,11 @@ public class HotDeployUtil {
 					currentThread.setContextClassLoader(contextClassLoader);
 				}
 
-				dependentServletContextsIter.remove();
+				dependentServletContextIterator.remove();
 			}
 
 			if (dependentServletContexts.isEmpty()) {
-				dependentContextKeysIter.remove();
+				servletContextNamesIterator.remove();
 			}
 		}
 	}
