@@ -754,6 +754,10 @@ public class PortalLDAPUtil {
 			}
 		}
 		catch (OperationNotSupportedException onse) {
+			if (enu != null) {
+				enu.close();
+			}
+
 			ldapContext.setRequestControls(null);
 
 			enu = ldapContext.search(baseDN, filter, searchControls);
