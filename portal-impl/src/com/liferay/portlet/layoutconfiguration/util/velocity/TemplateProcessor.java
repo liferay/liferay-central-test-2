@@ -157,10 +157,7 @@ public class TemplateProcessor implements ColumnProcessor {
 				Integer columnCount = new Integer(portlets.size());
 
 				_portletsMap.put(
-					portlet,
-					new Object[] {
-						columnId, columnPos, columnCount
-					});
+					portlet, new Object[] {columnId, columnPos, columnCount});
 
 				sb.append("[$TEMPLATE_PORTLET_");
 				sb.append(portlet.getPortletId());

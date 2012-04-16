@@ -19,10 +19,8 @@
 <%
 Portlet portlet = (Portlet)request.getAttribute(WebKeys.RENDER_PORTLET);
 
-String portletId = portlet.getPortletId();
-
-portletDisplay.setId(portletId);
-portletDisplay.setNamespace(PortalUtil.getPortletNamespace(portletId));
+portletDisplay.setId(portlet.getPortletId());
+portletDisplay.setNamespace(PortalUtil.getPortletNamespace(portlet.getPortletId()));
 
 String url = PortletURLUtil.getRefreshURL(request, themeDisplay);
 %>
