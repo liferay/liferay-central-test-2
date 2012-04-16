@@ -46,6 +46,11 @@ public class RenderPortletAction extends Action {
 			HttpServletResponse response)
 		throws Exception {
 
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		themeDisplay.setAjax(true);
+
 		ServletContext servletContext = (ServletContext)request.getAttribute(
 			WebKeys.CTX);
 
@@ -77,11 +82,6 @@ public class RenderPortletAction extends Action {
 		if (ajaxId != null) {
 			response.setHeader("Ajax-ID", ajaxId);
 		}
-
-		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
-		themeDisplay.setAjax(true);
 
 		WindowState windowState = WindowStateFactory.getWindowState(
 			ParamUtil.getString(request, "p_p_state"));
