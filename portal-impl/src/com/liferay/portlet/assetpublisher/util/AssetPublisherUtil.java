@@ -139,12 +139,10 @@ public class AssetPublisherUtil {
 		String[] assetEntryXmls = portletPreferences.getValues(
 			"assetEntryXml", new String[0]);
 
-		List<String> assetEntryXmlsList = ListUtil.fromArray(assetEntryXmls);
-
 		String assetEntryXml = _getAssetEntryXml(
 			assetEntryType, assetEntry.getClassUuid());
 
-		if (!assetEntryXmlsList.contains(assetEntryXml)) {
+		if (!ArrayUtil.contains(assetEntryXmls, assetEntryXml)) {
 			if (assetEntryOrder > -1) {
 				assetEntryXmls[assetEntryOrder] = assetEntryXml;
 			}
