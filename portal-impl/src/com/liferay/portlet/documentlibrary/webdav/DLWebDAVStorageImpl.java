@@ -746,6 +746,7 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		throws WebDAVException {
 
 		Resource resource = getResource(webDavRequest);
+
 		long companyId = webDavRequest.getCompanyId();
 
 		Lock lock = null;

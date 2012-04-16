@@ -1999,7 +1999,8 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 			String lockUuid, long companyId, long expirationTime)
 		throws PortalException, SystemException {
 
-		Lock lock = lockLocalService.getLockByUuid(lockUuid, companyId);
+		Lock lock = lockLocalService.getLockByUuidAndCompanyId(
+			lockUuid, companyId);
 
 		long fileEntryId = GetterUtil.getLong(lock.getKey());
 
@@ -2026,7 +2027,8 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 			String lockUuid, long companyId, long expirationTime)
 		throws PortalException, SystemException {
 
-		Lock lock = lockLocalService.getLockByUuid(lockUuid, companyId);
+		Lock lock = lockLocalService.getLockByUuidAndCompanyId(
+			lockUuid, companyId);
 
 		long folderId = GetterUtil.getLong(lock.getKey());
 

@@ -2614,7 +2614,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	 *         could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public User getUserByUuid(String uuid, long companyId)
+	public User getUserByUuidAndCompanyId(String uuid, long companyId)
 		throws PortalException, SystemException {
 
 		List<User> users = userPersistence.findByUuid_C(uuid, companyId);

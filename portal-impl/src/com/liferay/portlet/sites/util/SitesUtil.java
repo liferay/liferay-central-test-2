@@ -480,7 +480,7 @@ public class SitesUtil {
 
 			LayoutSetPrototype layoutSetPrototype =
 				LayoutSetPrototypeLocalServiceUtil.
-					getLayoutSetPrototypeByUuid(
+					getLayoutSetPrototypeByUuidAndCompanyId(
 						layoutSet.getLayoutSetPrototypeUuid(),
 						layout.getCompanyId());
 
@@ -647,7 +647,7 @@ public class SitesUtil {
 		try {
 			LayoutSetPrototype layoutSetPrototype =
 				LayoutSetPrototypeLocalServiceUtil.
-					getLayoutSetPrototypeByUuid(
+					getLayoutSetPrototypeByUuidAndCompanyId(
 						layoutSet.getLayoutSetPrototypeUuid(),
 						layoutSet.getCompanyId());
 
@@ -758,8 +758,9 @@ public class SitesUtil {
 			typeSettingsProperties.getProperty("last-merge-time"));
 
 		LayoutPrototype layoutPrototype =
-			LayoutPrototypeLocalServiceUtil.getLayoutPrototypeByUuid(
-				layout.getLayoutPrototypeUuid(), layout.getCompanyId());
+			LayoutPrototypeLocalServiceUtil.
+				getLayoutPrototypeByUuidAndCompanyId(
+					layout.getLayoutPrototypeUuid(), layout.getCompanyId());
 
 		Layout layoutPrototypeLayout = layoutPrototype.getLayout();
 
@@ -856,8 +857,10 @@ public class SitesUtil {
 			settingsProperties.getProperty("last-merge-time"));
 
 		LayoutSetPrototype layoutSetPrototype =
-			LayoutSetPrototypeLocalServiceUtil.getLayoutSetPrototypeByUuid(
-				layoutSet.getLayoutSetPrototypeUuid(), layoutSet.getGroupId());
+			LayoutSetPrototypeLocalServiceUtil.
+				getLayoutSetPrototypeByUuidAndCompanyId(
+					layoutSet.getLayoutSetPrototypeUuid(),
+					layoutSet.getGroupId());
 
 		Date modifiedDate = layoutSetPrototype.getModifiedDate();
 

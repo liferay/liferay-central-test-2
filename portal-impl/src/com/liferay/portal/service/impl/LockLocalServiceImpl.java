@@ -60,7 +60,7 @@ public class LockLocalServiceImpl extends LockLocalServiceBaseImpl {
 		return lock;
 	}
 
-	public Lock getLockByUuid(String uuid, long companyId)
+	public Lock getLockByUuidAndCompanyId(String uuid, long companyId)
 		throws PortalException, SystemException {
 
 		List<Lock> locks = lockPersistence.findByUuid_C(uuid, companyId);

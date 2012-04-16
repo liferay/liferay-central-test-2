@@ -251,7 +251,8 @@ public class LayoutCache {
 			params.put("usersGroups", new Long(groupId));
 
 			try {
-				User user = UserLocalServiceUtil.getUserByUuid(uuid, companyId);
+				User user = UserLocalServiceUtil.getUserByUuidAndCompanyId(
+					uuid, companyId);
 
 				users = UserLocalServiceUtil.search(
 					companyId, null, null, null, user.getScreenName(), null,
