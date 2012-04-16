@@ -2607,6 +2607,29 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	/**
 	 * Returns the user with the universally unique identifier.
 	 *
+	 * @param      uuid the user's universally unique identifier
+	 * @return     the user with the universally unique identifier
+	 * @throws     PortalException if a user with the universally unique
+	 *             identifier could not be found
+	 * @throws     SystemException if a system exception occurred
+	 * @deprecated {@link #getUserByUuidAndCompanyId(String, long)}
+	 */
+	public User getUserByUuid(String uuid)
+		throws PortalException, SystemException {
+
+		List<User> users = userPersistence.findByUuid(uuid);
+
+		if (users.isEmpty()) {
+			throw new NoSuchUserException();
+		}
+		else {
+			return users.get(0);
+		}
+	}
+
+	/**
+	 * Returns the user with the universally unique identifier.
+	 *
 	 * @param  uuid the user's universally unique identifier
 	 * @param  companyId the primary key of the user's company
 	 * @return the user with the universally unique identifier

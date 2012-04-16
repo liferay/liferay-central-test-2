@@ -149,6 +149,15 @@ public class LayoutSetPrototypeLocalServiceImpl
 		return deleteLayoutSetPrototype(layoutSetPrototype);
 	}
 
+	/**
+	 * @deprecated {@link getLayoutSetPrototypeByUuidAndCompanyId(String, long)}
+	 */
+	public LayoutSetPrototype getLayoutSetPrototypeByUuid(String uuid)
+		throws PortalException, SystemException {
+
+		return layoutSetPrototypePersistence.findByUuid_First(uuid, null);
+	}
+
 	public LayoutSetPrototype getLayoutSetPrototypeByUuidAndCompanyId(
 			String uuid, long companyId)
 		throws PortalException, SystemException {
