@@ -36,13 +36,12 @@ import javax.servlet.jsp.tagext.Tag;
 public class CustomizationSettingsProcessor implements ColumnProcessor {
 
 	public CustomizationSettingsProcessor(PageContext pageContext) {
-
 		_pageContext = pageContext;
 		_writer = pageContext.getOut();
 
-		ServletRequest request = pageContext.getRequest();
+		ServletRequest servletRequest = pageContext.getRequest();
 
-		Layout selLayout = (Layout)request.getAttribute(
+		Layout selLayout = (Layout)servletRequest.getAttribute(
 			"edit_pages.jsp-selLayout");
 
 		_layoutTypeSettings = selLayout.getTypeSettingsProperties();
