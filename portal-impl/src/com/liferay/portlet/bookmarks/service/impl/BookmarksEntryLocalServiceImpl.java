@@ -110,11 +110,12 @@ public class BookmarksEntryLocalServiceImpl
 			groupId, folderId);
 
 		for (BookmarksEntry entry : entries) {
-			deleteEntry(entry);
+			bookmarksEntryLocalService.deleteEntry(entry);
 		}
 	}
 
-	public void deleteEntry(BookmarksEntry entry)
+	@Indexable(type = IndexableType.DELETE)
+	public BookmarksEntry deleteEntry(BookmarksEntry entry)
 		throws PortalException, SystemException {
 
 		// Entry
@@ -136,21 +137,17 @@ public class BookmarksEntryLocalServiceImpl
 		expandoValueLocalService.deleteValues(
 			BookmarksEntry.class.getName(), entry.getEntryId());
 
-		// Indexer
-
-		Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
-			BookmarksEntry.class);
-
-		indexer.delete(entry);
+		return entry;
 	}
 
-	public void deleteEntry(long entryId)
+	@Indexable(type = IndexableType.DELETE)
+	public BookmarksEntry deleteEntry(long entryId)
 		throws PortalException, SystemException {
 
 		BookmarksEntry entry = bookmarksEntryPersistence.findByPrimaryKey(
 			entryId);
 
-		deleteEntry(entry);
+		return deleteEntry(entry);
 	}
 
 	public List<BookmarksEntry> getEntries(

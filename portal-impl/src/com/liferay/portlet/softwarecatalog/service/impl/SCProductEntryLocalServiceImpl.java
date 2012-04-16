@@ -198,20 +198,22 @@ public class SCProductEntryLocalServiceImpl
 			scProductEntryPersistence.findByGroupId(groupId);
 
 		for (SCProductEntry productEntry : productEntries) {
-			deleteProductEntry(productEntry);
+			scProductEntryLocalService.deleteProductEntry(productEntry);
 		}
 	}
 
-	public void deleteProductEntry(long productEntryId)
+	@Indexable(type = IndexableType.DELETE)
+	public SCProductEntry deleteProductEntry(long productEntryId)
 		throws PortalException, SystemException {
 
 		SCProductEntry productEntry =
 			scProductEntryPersistence.findByPrimaryKey(productEntryId);
 
-		deleteProductEntry(productEntry);
+		return deleteProductEntry(productEntry);
 	}
 
-	public void deleteProductEntry(SCProductEntry productEntry)
+	@Indexable(type = IndexableType.DELETE)
+	public SCProductEntry deleteProductEntry(SCProductEntry productEntry)
 		throws PortalException, SystemException {
 
 		// Product entry
@@ -251,12 +253,7 @@ public class SCProductEntryLocalServiceImpl
 		ratingsStatsLocalService.deleteStats(
 			SCProductEntry.class.getName(), productEntry.getProductEntryId());
 
-		// Indexer
-
-		Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
-			SCProductEntry.class);
-
-		indexer.delete(productEntry);
+		return productEntry;
 	}
 
 	public List<SCProductEntry> getCompanyProductEntries(

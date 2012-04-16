@@ -29,8 +29,6 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.mail.MailMessage;
 import com.liferay.portal.kernel.search.Indexable;
 import com.liferay.portal.kernel.search.IndexableType;
-import com.liferay.portal.kernel.search.Indexer;
-import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.CalendarUtil;
@@ -304,7 +302,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 			User user = userPersistence.fetchByPrimaryKey(event.getUserId());
 
 			if (user == null) {
-				deleteEvent(event);
+				calEventLocalService.deleteEvent(event);
 
 				continue;
 			}
@@ -366,7 +364,8 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		}
 	}
 
-	public void deleteEvent(CalEvent event)
+	@Indexable(type = IndexableType.DELETE)
+	public CalEvent deleteEvent(CalEvent event)
 		throws PortalException, SystemException {
 
 		// Event
@@ -394,24 +393,22 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		expandoValueLocalService.deleteValues(
 			CalEvent.class.getName(), event.getEventId());
 
-		// Indexer
-
-		Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
-			CalEvent.class);
-
-		indexer.delete(event);
-
 		// Pool
 
 		CalEventLocalUtil.clearEventsPool(event.getGroupId());
+
+		return event;
 	}
 
-	public void deleteEvent(long eventId)
+	@Indexable(type = IndexableType.DELETE)
+	public CalEvent deleteEvent(long eventId)
 		throws PortalException, SystemException {
 
 		CalEvent event = calEventPersistence.findByPrimaryKey(eventId);
 
 		deleteEvent(event);
+
+		return event;
 	}
 
 	public void deleteEvents(long groupId)
@@ -420,7 +417,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		List<CalEvent> events = calEventPersistence.findByGroupId(groupId);
 
 		for (CalEvent event : events) {
-			deleteEvent(event);
+			calEventLocalService.deleteEvent(event);
 		}
 	}
 
@@ -1132,7 +1129,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		if (existingEvent == null) {
 			serviceContext.setUuid(uuid);
 
-			existingEvent = addEvent(
+			calEventLocalService.addEvent(
 				userId, title, description, location, startDateMonth,
 				startDateDay, startDateYear, startDateHour, startDateMinute,
 				endDateMonth, endDateDay, endDateYear, durationHour,
@@ -1141,7 +1138,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 				serviceContext);
 		}
 		else {
-			existingEvent = updateEvent(
+			calEventLocalService.updateEvent(
 				userId, existingEvent.getEventId(), title, description,
 				location, startDateMonth, startDateDay, startDateYear,
 				startDateHour, startDateMinute, endDateMonth, endDateDay,
@@ -1149,13 +1146,6 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 				timeZoneSensitive, type, repeating, recurrence, remindBy,
 				firstReminder, secondReminder, serviceContext);
 		}
-
-		// Indexer
-
-		Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
-			CalEvent.class);
-
-		indexer.reindex(existingEvent);
 	}
 
 	protected boolean isICal4jDateOnly(DateProperty dateProperty) {
