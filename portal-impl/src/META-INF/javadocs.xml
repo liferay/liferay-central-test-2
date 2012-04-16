@@ -9925,6 +9925,34 @@ Useful when paginating results. Returns a maximum of <code>end - start</code> in
 				<type>com.liferay.portal.kernel.exception.SystemException</type>
 				<comment><![CDATA[]]></comment>
 			</throws>
+			<deprecated><![CDATA[{@link #getLayoutPrototypeByUuidAndCompanyId(String, long)}]]></deprecated>
+		</method>
+		<method>
+			<name>getLayoutPrototypeByUuidAndCompanyId</name>
+			<comment><![CDATA[]]></comment>
+			<param>
+				<name>uuid</name>
+				<type>java.lang.String</type>
+				<comment><![CDATA[]]></comment>
+			</param>
+			<param>
+				<name>companyId</name>
+				<type>long</type>
+				<comment><![CDATA[]]></comment>
+			</param>
+			<return>
+				<comment><![CDATA[]]></comment>
+			</return>
+			<throws>
+				<name>PortalException</name>
+				<type>com.liferay.portal.kernel.exception.PortalException</type>
+				<comment><![CDATA[]]></comment>
+			</throws>
+			<throws>
+				<name>SystemException</name>
+				<type>com.liferay.portal.kernel.exception.SystemException</type>
+				<comment><![CDATA[]]></comment>
+			</throws>
 		</method>
 		<method>
 			<name>search</name>
@@ -13875,6 +13903,34 @@ This method can disable the layout set prototype's link by setting <code>layoutS
 			<param>
 				<name>uuid</name>
 				<type>java.lang.String</type>
+				<comment><![CDATA[]]></comment>
+			</param>
+			<return>
+				<comment><![CDATA[]]></comment>
+			</return>
+			<throws>
+				<name>PortalException</name>
+				<type>com.liferay.portal.kernel.exception.PortalException</type>
+				<comment><![CDATA[]]></comment>
+			</throws>
+			<throws>
+				<name>SystemException</name>
+				<type>com.liferay.portal.kernel.exception.SystemException</type>
+				<comment><![CDATA[]]></comment>
+			</throws>
+			<deprecated><![CDATA[{@link getLayoutSetPrototypeByUuidAndCompanyId(String, long)}]]></deprecated>
+		</method>
+		<method>
+			<name>getLayoutSetPrototypeByUuidAndCompanyId</name>
+			<comment><![CDATA[]]></comment>
+			<param>
+				<name>uuid</name>
+				<type>java.lang.String</type>
+				<comment><![CDATA[]]></comment>
+			</param>
+			<param>
+				<name>companyId</name>
+				<type>long</type>
 				<comment><![CDATA[]]></comment>
 			</param>
 			<return>
@@ -37305,6 +37361,34 @@ Useful when paginating results. Returns a maximum of <code>end - start</code> in
 				<name>uuid</name>
 				<type>java.lang.String</type>
 				<comment><![CDATA[the user's universally unique identifier]]></comment>
+			</param>
+			<return>
+				<comment><![CDATA[the user with the universally unique identifier]]></comment>
+			</return>
+			<throws>
+				<name>PortalException</name>
+				<type>com.liferay.portal.kernel.exception.PortalException</type>
+				<comment><![CDATA[if a user with the universally unique identifier could not be found]]></comment>
+			</throws>
+			<throws>
+				<name>SystemException</name>
+				<type>com.liferay.portal.kernel.exception.SystemException</type>
+				<comment><![CDATA[if a system exception occurred]]></comment>
+			</throws>
+			<deprecated><![CDATA[{@link #getUserByUuidAndCompanyId(String, long)}]]></deprecated>
+		</method>
+		<method>
+			<name>getUserByUuidAndCompanyId</name>
+			<comment><![CDATA[Returns the user with the universally unique identifier.]]></comment>
+			<param>
+				<name>uuid</name>
+				<type>java.lang.String</type>
+				<comment><![CDATA[the user's universally unique identifier]]></comment>
+			</param>
+			<param>
+				<name>companyId</name>
+				<type>long</type>
+				<comment><![CDATA[the primary key of the user's company]]></comment>
 			</param>
 			<return>
 				<comment><![CDATA[the user with the universally unique identifier]]></comment>
