@@ -101,9 +101,7 @@ public class PluginPackageHotDeployListener extends BaseHotDeployListener {
 		if (servletContext.getResource(
 				"/WEB-INF/liferay-theme-loader.xml") != null) {
 
-			if (pluginPackage != null) {
-				PluginPackageUtil.registerInstalledPluginPackage(pluginPackage);
-			}
+			PluginPackageUtil.registerInstalledPluginPackage(pluginPackage);
 
 			return;
 		}
