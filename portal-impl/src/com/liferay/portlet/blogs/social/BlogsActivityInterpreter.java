@@ -89,7 +89,6 @@ public class BlogsActivityInterpreter extends BaseSocialActivityInterpreter {
 			}
 		}
 		else if (activityType == BlogsActivityKeys.ADD_ENTRY) {
-
 			if (Validator.isNull(groupName)) {
 				titlePattern = "activity-blogs-add-entry";
 			}

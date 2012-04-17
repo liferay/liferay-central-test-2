@@ -83,7 +83,7 @@ public class WikiActivityInterpreter extends BaseSocialActivityInterpreter {
 
 			if (Validator.isNull(groupName)) {
 				titlePattern = "activity-wiki-add-comment";
-			} 
+			}
 			else {
 				titlePattern = "activity-wiki-add-comment-in";
 			}
@@ -91,7 +91,7 @@ public class WikiActivityInterpreter extends BaseSocialActivityInterpreter {
 		else if (activityType == WikiActivityKeys.ADD_PAGE) {
 			if (Validator.isNull(groupName)) {
 				titlePattern = "activity-wiki-add-page";
-			} 
+			}
 			else {
 				titlePattern = "activity-wiki-add-page-in";
 			}
