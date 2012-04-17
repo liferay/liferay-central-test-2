@@ -675,7 +675,8 @@ public class WebDriverToSeleniumBridge
 		Select select = new Select(webElement);
 
 		if (optionLocator.startsWith("index=")) {
-			select.selectByIndex(GetterUtil.getInteger(optionLocator.substring(6)));
+			select.selectByIndex(
+				GetterUtil.getInteger(optionLocator.substring(6)));
 		}
 		else if (optionLocator.startsWith("label=")) {
 			select.selectByVisibleText(optionLocator.substring(6));
@@ -695,11 +696,11 @@ public class WebDriverToSeleniumBridge
 			targetLocator.defaultContent();
 		}
 		else {
-			WebElement frameElement = getWebElement(locator);
+			WebElement webElement = getWebElement(locator);
 
 			WebDriver.TargetLocator targetLocator = switchTo();
 
-			targetLocator.frame(frameElement);
+			targetLocator.frame(webElement);
 		}
 	}
 
