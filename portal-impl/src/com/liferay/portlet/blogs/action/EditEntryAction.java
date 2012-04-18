@@ -255,11 +255,12 @@ public class EditEntryAction extends PortletAction {
 			ActionRequest actionRequest, boolean moveToTrash)
 		throws Exception {
 
-		long entryId = ParamUtil.getLong(actionRequest, "entryId");
 		long[] deleteEntryIds = null;
 
+		long entryId = ParamUtil.getLong(actionRequest, "entryId");
+
 		if (entryId > 0) {
-			deleteEntryIds = new long[] { entryId };
+			deleteEntryIds = new long[] {entryId};
 		}
 		else {
 			deleteEntryIds = StringUtil.split(
