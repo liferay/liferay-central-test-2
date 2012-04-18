@@ -191,6 +191,17 @@ public class MainServlet extends ActionServlet {
 		callParentInit();
 
 		if (_log.isDebugEnabled()) {
+			_log.debug("Initialize servlet context pool");
+		}
+
+		try {
+			initServletContextPool();
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+
+		if (_log.isDebugEnabled()) {
 			_log.debug("Process startup events");
 		}
 
@@ -204,17 +215,6 @@ public class MainServlet extends ActionServlet {
 				"Stopping the server due to unexpected startup errors");
 
 			System.exit(0);
-		}
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Initialize servlet context pool");
-		}
-
-		try {
-			initServletContextPool();
-		}
-		catch (Exception e) {
-			_log.error(e, e);
 		}
 
 		if (_log.isDebugEnabled()) {
