@@ -36,7 +36,6 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.kernel.workflow.WorkflowHandlerRegistryUtil;
 import com.liferay.portal.model.Group;
-import com.liferay.portal.model.ModelHintsUtil;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
@@ -128,29 +127,6 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		BlogsEntry entry = blogsEntryPersistence.create(entryId);
 
-		String urlTitleFromContext = GetterUtil.getString(
-				serviceContext.getAttribute("urlTitle"));
-
-		String urlTitle = null;
-		if (isContextUrlTitleRegexpMatch(urlTitleFromContext)) {
-			urlTitle = BlogsUtil.getUrlTitle(entryId, urlTitleFromContext);
-
-			urlTitle = ModelHintsUtil.trimString(
-				BlogsEntry.class.getName(), "urlTitle", urlTitle);
-
-			BlogsEntry entryWithUrlTitle = blogsEntryPersistence.fetchByG_UT(
-				groupId, urlTitle);
-
-			if ((entryWithUrlTitle != null) &&
-				(entryWithUrlTitle.getEntryId() != entryId)) {
-
-				urlTitle = getUniqueUrlTitle(
-					entry.getEntryId(), groupId, urlTitle);
-			}
-		} else {
-			urlTitle = getUniqueUrlTitle(entryId, groupId, title);
-		}
-
 		entry.setUuid(serviceContext.getUuid());
 		entry.setGroupId(groupId);
 		entry.setCompanyId(user.getCompanyId());
@@ -159,7 +135,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		entry.setCreateDate(serviceContext.getCreateDate(now));
 		entry.setModifiedDate(serviceContext.getModifiedDate(now));
 		entry.setTitle(title);
-		entry.setUrlTitle(urlTitle);
+		entry.setUrlTitle(getUniqueUrlTitle(entry, title, serviceContext));
 		entry.setDescription(description);
 		entry.setContent(content);
 		entry.setDisplayDate(displayDate);
@@ -647,38 +623,9 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		String oldUrlTitle = entry.getUrlTitle();
 
-		String urlTitleFromContext = GetterUtil.getString(
-				serviceContext.getAttribute("urlTitle"));
-
-		String urlTitle = null;
-		if (isContextUrlTitleRegexpMatch(urlTitleFromContext)) {
-			urlTitle = BlogsUtil.getUrlTitle(
-				entry.getEntryId(), urlTitleFromContext);
-
-			urlTitle = ModelHintsUtil.trimString(
-				BlogsEntry.class.getName(), "urlTitle", urlTitle);
-
-			BlogsEntry entryWithUrlTitle = blogsEntryPersistence.fetchByG_UT(
-					serviceContext.getScopeGroupId(), urlTitle);
-
-			if ((entryWithUrlTitle != null) &&
-				(entryWithUrlTitle.getEntryId() != entry.getEntryId())) {
-
-				urlTitle = getUniqueUrlTitle(
-					entry.getEntryId(), entry.getGroupId(), urlTitle);
-			}
-		}
-		else if (isContextUrlTitleRegexpMatch(oldUrlTitle)) {
-			urlTitle = oldUrlTitle;
-		}
-		else {
-			urlTitle = getUniqueUrlTitle(
-					entry.getEntryId(), entry.getGroupId(), title);
-		}
-
 		entry.setModifiedDate(serviceContext.getModifiedDate(null));
 		entry.setTitle(title);
-		entry.setUrlTitle(urlTitle);
+		entry.setUrlTitle(getUniqueUrlTitle(entry, title, serviceContext));
 		entry.setDescription(description);
 		entry.setContent(content);
 		entry.setDisplayDate(displayDate);
@@ -859,46 +806,81 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		return entry;
 	}
 
+	protected String getUniqueUrlTitle(
+			BlogsEntry entry, String title, ServiceContext serviceContext)
+		throws SystemException {
+
+		String serviceContextUrlTitle = GetterUtil.getString(
+			serviceContext.getAttribute("urlTitle"));
+
+		String urlTitle = null;
+
+		if (isMatchesServiceContextUrlTitle(serviceContextUrlTitle)) {
+			urlTitle = BlogsUtil.getUrlTitle(
+				entry.getEntryId(), serviceContextUrlTitle);
+
+			BlogsEntry urlTitleEntry = blogsEntryPersistence.fetchByG_UT(
+				serviceContext.getScopeGroupId(), urlTitle);
+
+			if ((urlTitleEntry != null) &&
+				(urlTitleEntry.getEntryId() != entry.getEntryId())) {
+
+				urlTitle = getUniqueUrlTitle(
+					entry.getEntryId(), serviceContext.getScopeGroupId(),
+					urlTitle);
+			}
+		}
+		else {
+			if (!entry.isNew() &&
+				isMatchesServiceContextUrlTitle(entry.getUrlTitle())) {
+
+				urlTitle = entry.getUrlTitle();
+			}
+			else {
+				urlTitle = getUniqueUrlTitle(
+					entry.getEntryId(), serviceContext.getScopeGroupId(),
+					title);
+			}
+		}
+
+		return urlTitle;
+	}
+
 	protected String getUniqueUrlTitle(long entryId, long groupId, String title)
 		throws SystemException {
 
 		String urlTitle = BlogsUtil.getUrlTitle(entryId, title);
 
-		String newUrlTitle = ModelHintsUtil.trimString(
-			BlogsEntry.class.getName(), "urlTitle", urlTitle);
-
 		for (int i = 1;; i++) {
 			BlogsEntry entry = blogsEntryPersistence.fetchByG_UT(
-				groupId, newUrlTitle);
+				groupId, urlTitle);
 
-			if ((entry == null) || (entry.getEntryId() == entryId)) {
+			if ((entry == null) || (entryId == entry.getEntryId())) {
 				break;
 			}
 			else {
 				String suffix = StringPool.DASH + i;
 
-				String prefix = newUrlTitle;
+				String prefix = urlTitle;
 
-				if (newUrlTitle.length() > suffix.length()) {
-					prefix = newUrlTitle.substring(
-						0, newUrlTitle.length() - suffix.length());
+				if (urlTitle.length() > suffix.length()) {
+					prefix = urlTitle.substring(
+						0, urlTitle.length() - suffix.length());
 				}
 
-				newUrlTitle = prefix + suffix;
+				urlTitle = prefix + suffix;
 			}
 		}
 
-		return newUrlTitle;
+		return urlTitle;
 	}
 
-	protected boolean isContextUrlTitleRegexpMatch(String urlTitle)
-			throws PortalException {
+	protected boolean isMatchesServiceContextUrlTitle(String urlTitle) {
 		if (Validator.isNotNull(urlTitle) &&
-			Validator.isNotNull(
-				PropsValues.BLOGS_ENTRY_CONTEXT_URL_TITLE_REGEXP)) {
+			Validator.isNotNull(PropsValues.BLOGS_ENTRY_URL_TITLE_REGEXP)) {
 
 			Pattern pattern = Pattern.compile(
-				PropsValues.BLOGS_ENTRY_CONTEXT_URL_TITLE_REGEXP);
+				PropsValues.BLOGS_ENTRY_URL_TITLE_REGEXP);
 
 			Matcher matcher = pattern.matcher(urlTitle);
 

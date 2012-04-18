@@ -56,7 +56,6 @@ import com.liferay.portal.kernel.xml.XPath;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Image;
-import com.liferay.portal.model.ModelHintsUtil;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
@@ -218,34 +217,6 @@ public class JournalArticleLocalServiceImpl
 			user, groupId, articleId, version, false, content, structureId,
 			images);
 
-		String urlTitleFromContext = GetterUtil.getString(
-				serviceContext.getAttribute("urlTitle"));
-
-		String urlTitle = null;
-		if (isContextUrlTitleRegexpMatch(urlTitleFromContext)) {
-			urlTitle = JournalUtil.getUrlTitle(id, urlTitleFromContext);
-
-			urlTitle = ModelHintsUtil.trimString(
-				JournalArticle.class.getName(), "urlTitle", urlTitle);
-
-			JournalArticle articleWithUrlTitle = null;
-			try {
-				articleWithUrlTitle = getArticleByUrlTitle(groupId, urlTitle);
-			}
-			catch (NoSuchArticleException nsae) {
-			}
-
-			if ((articleWithUrlTitle != null) &&
-				!articleWithUrlTitle.getArticleId().equals(articleId)) {
-
-				urlTitle = getUniqueUrlTitle(
-					article.getId(), groupId, articleId, urlTitle);
-			}
-		}
-		else {
-			urlTitle = getUniqueUrlTitle(id, groupId, articleId, title);
-		}
-
 		article.setResourcePrimKey(resourcePrimKey);
 		article.setGroupId(groupId);
 		article.setCompanyId(user.getCompanyId());
@@ -258,7 +229,7 @@ public class JournalArticleLocalServiceImpl
 		article.setArticleId(articleId);
 		article.setVersion(version);
 		article.setTitleMap(titleMap, locale);
-		article.setUrlTitle(urlTitle);
+		article.setUrlTitle(getUniqueUrlTitle(article, title, serviceContext));
 		article.setDescriptionMap(descriptionMap, locale);
 		article.setContent(content);
 		article.setType(type);
@@ -2063,42 +2034,9 @@ public class JournalArticleLocalServiceImpl
 			user, groupId, articleId, article.getVersion(), incrementVersion,
 			content, structureId, images);
 
-		String urlTitleFromContext = GetterUtil.getString(
-				serviceContext.getAttribute("urlTitle"));
-
-		String urlTitle = null;
-		if (isContextUrlTitleRegexpMatch(urlTitleFromContext)) {
-			urlTitle = JournalUtil.getUrlTitle(
-				article.getId(), urlTitleFromContext);
-
-			urlTitle = ModelHintsUtil.trimString(
-				JournalArticle.class.getName(), "urlTitle", urlTitle);
-
-			JournalArticle articleWithUrlTitle = null;
-			try {
-				articleWithUrlTitle = getArticleByUrlTitle(groupId, urlTitle);
-			}
-			catch (NoSuchArticleException nsae) {
-			}
-
-			if ((articleWithUrlTitle != null) &&
-				!articleWithUrlTitle.getArticleId().equals(articleId)) {
-
-				urlTitle = getUniqueUrlTitle(
-						article.getId(), groupId, articleId, urlTitle);
-			}
-		}
-		else if (isContextUrlTitleRegexpMatch(oldArticle.getUrlTitle())) {
-			urlTitle = oldArticle.getUrlTitle();
-		}
-		else {
-			urlTitle = getUniqueUrlTitle(
-					article.getId(), groupId, articleId, title);
-		}
-
 		article.setModifiedDate(serviceContext.getModifiedDate(now));
 		article.setTitleMap(titleMap, locale);
-		article.setUrlTitle(urlTitle);
+		article.setUrlTitle(getUniqueUrlTitle(article, title, serviceContext));
 		article.setDescriptionMap(descriptionMap, locale);
 		article.setContent(content);
 		article.setType(type);
@@ -2242,40 +2180,6 @@ public class JournalArticleLocalServiceImpl
 
 			article = journalArticlePersistence.create(id);
 
-			String urlTitleFromContext = GetterUtil.getString(
-					serviceContext.getAttribute("urlTitle"));
-
-			String urlTitle = null;
-			if (isContextUrlTitleRegexpMatch(urlTitleFromContext)) {
-				urlTitle = JournalUtil.getUrlTitle(
-					article.getId(), urlTitleFromContext);
-
-				urlTitle = ModelHintsUtil.trimString(
-					JournalArticle.class.getName(), "urlTitle", urlTitle);
-
-				JournalArticle articleWithUrlTitle = null;
-				try {
-					articleWithUrlTitle = getArticleByUrlTitle(
-						groupId, urlTitle);
-				}
-				catch (NoSuchArticleException nsae) {
-				}
-
-				if ((articleWithUrlTitle != null) &&
-					!articleWithUrlTitle.getArticleId().equals(articleId)) {
-
-					urlTitle = getUniqueUrlTitle(
-						article.getId(), groupId, articleId, urlTitle);
-				}
-			}
-			else if (isContextUrlTitleRegexpMatch(oldArticle.getUrlTitle())) {
-				urlTitle = oldArticle.getUrlTitle();
-			}
-			else {
-				urlTitle = getUniqueUrlTitle(
-						article.getId(), groupId, articleId, title);
-			}
-
 			article.setResourcePrimKey(oldArticle.getResourcePrimKey());
 			article.setGroupId(oldArticle.getGroupId());
 			article.setCompanyId(oldArticle.getCompanyId());
@@ -2288,7 +2192,8 @@ public class JournalArticleLocalServiceImpl
 			article.setArticleId(articleId);
 			article.setVersion(newVersion);
 			article.setTitleMap(oldArticle.getTitleMap());
-			article.setUrlTitle(urlTitle);
+			article.setUrlTitle(
+				getUniqueUrlTitle(article, title, serviceContext));
 			article.setDescriptionMap(oldArticle.getDescriptionMap());
 			article.setType(oldArticle.getType());
 			article.setStructureId(oldArticle.getStructureId());
@@ -3101,41 +3006,85 @@ public class JournalArticleLocalServiceImpl
 	}
 
 	protected String getUniqueUrlTitle(
+			JournalArticle article, String title, ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		String serviceContextUrlTitle = GetterUtil.getString(
+			serviceContext.getAttribute("urlTitle"));
+
+		String urlTitle = null;
+
+		if (isMatchesServiceContextUrlTitle(serviceContextUrlTitle)) {
+			urlTitle = JournalUtil.getUrlTitle(
+				article.getId(), serviceContextUrlTitle);
+
+			JournalArticle urlTitleArticle = null;
+
+			try {
+				urlTitleArticle = getArticleByUrlTitle(
+					serviceContext.getScopeGroupId(), urlTitle);
+			}
+			catch (NoSuchArticleException nsae) {
+			}
+
+			if ((urlTitleArticle != null) &&
+				!Validator.equals(
+					urlTitleArticle.getArticleId(), article.getArticleId())) {
+
+				urlTitle = getUniqueUrlTitle(
+					article.getId(), serviceContext.getScopeGroupId(),
+					article.getArticleId(), urlTitle);
+			}
+		}
+		else {
+			if (!article.isNew() &&
+				isMatchesServiceContextUrlTitle(article.getUrlTitle())) {
+
+				urlTitle = article.getUrlTitle();
+			}
+			else {
+				urlTitle = getUniqueUrlTitle(
+					article.getId(), serviceContext.getScopeGroupId(),
+					article.getArticleId(), title);
+			}
+		}
+
+		return urlTitle;
+	}
+
+	protected String getUniqueUrlTitle(
 			long id, long groupId, String articleId, String title)
 		throws PortalException, SystemException {
 
 		String urlTitle = JournalUtil.getUrlTitle(id, title);
 
-		String newUrlTitle = ModelHintsUtil.trimString(
-			JournalArticle.class.getName(), "urlTitle", urlTitle);
-
 		for (int i = 1;; i++) {
 			JournalArticle article = null;
 
 			try {
-				article = getArticleByUrlTitle(groupId, newUrlTitle);
+				article = getArticleByUrlTitle(groupId, urlTitle);
 			}
 			catch (NoSuchArticleException nsae) {
 			}
 
-			if ((article == null) || article.getArticleId().equals(articleId)) {
+			if ((article == null) || articleId.equals(article.getArticleId())) {
 				break;
 			}
 			else {
 				String suffix = StringPool.DASH + i;
 
-				String prefix = newUrlTitle;
+				String prefix = urlTitle;
 
-				if (newUrlTitle.length() > suffix.length()) {
-					prefix = newUrlTitle.substring(
-						0, newUrlTitle.length() - suffix.length());
+				if (urlTitle.length() > suffix.length()) {
+					prefix = urlTitle.substring(
+						0, urlTitle.length() - suffix.length());
 				}
 
-				newUrlTitle = prefix + suffix;
+				urlTitle = prefix + suffix;
 			}
 		}
 
-		return newUrlTitle;
+		return urlTitle;
 	}
 
 	protected boolean hasModifiedLatestApprovedVersion(
@@ -3160,14 +3109,12 @@ public class JournalArticleLocalServiceImpl
 		}
 	}
 
-	protected boolean isContextUrlTitleRegexpMatch(String urlTitle)
-			throws PortalException {
+	protected boolean isMatchesServiceContextUrlTitle(String urlTitle) {
 		if (Validator.isNotNull(urlTitle) &&
-			Validator.isNotNull(
-				PropsValues.JOURNAL_ARTICLE_CONTEXT_URL_TITLE_REGEXP)) {
+			Validator.isNotNull(PropsValues.JOURNAL_ARTICLE_URL_TITLE_REGEXP)) {
 
 			Pattern pattern = Pattern.compile(
-				PropsValues.JOURNAL_ARTICLE_CONTEXT_URL_TITLE_REGEXP);
+				PropsValues.JOURNAL_ARTICLE_URL_TITLE_REGEXP);
 
 			Matcher matcher = pattern.matcher(urlTitle);
 
