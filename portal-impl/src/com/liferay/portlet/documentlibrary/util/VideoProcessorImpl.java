@@ -471,8 +471,7 @@ public class VideoProcessorImpl
 					PropsUtil.get(PropsKeys.LIFERAY_HOME),
 					Log4JUtil.getCustomLogSettings(),
 					srcFile.getCanonicalPath(), destFile.getCanonicalPath(),
-					FileUtil.createTempFileName(),
-					PropsUtil.getProperties(
+					containerType, PropsUtil.getProperties(
 						PropsKeys.DL_FILE_ENTRY_PREVIEW_VIDEO, false),
 					PropsUtil.getProperties(PropsKeys.XUGGLER_FFPRESET, true));
 
@@ -482,8 +481,7 @@ public class VideoProcessorImpl
 		else {
 			LiferayConverter liferayConverter = new LiferayVideoConverter(
 				srcFile.getCanonicalPath(), destFile.getCanonicalPath(),
-				FileUtil.createTempFileName(),
-				PropsUtil.getProperties(
+				containerType, PropsUtil.getProperties(
 					PropsKeys.DL_FILE_ENTRY_PREVIEW_VIDEO, false),
 				PropsUtil.getProperties(PropsKeys.XUGGLER_FFPRESET, true));
 
@@ -572,7 +570,7 @@ public class VideoProcessorImpl
 		public LiferayVideoProcessCallable(
 			String serverId, String liferayHome,
 			Map<String, String> customLogSettings, String inputURL,
-			String outputURL, String tempFileName, Properties videoProperties,
+			String outputURL, String videoContainer, Properties videoProperties,
 			Properties ffpresetProperties) {
 
 			_serverId = serverId;
@@ -580,7 +578,7 @@ public class VideoProcessorImpl
 			_customLogSettings = customLogSettings;
 			_inputURL = inputURL;
 			_outputURL = outputURL;
-			_tempFileName = tempFileName;
+			_videoContainer = videoContainer;
 			_videoProperties = videoProperties;
 			_ffpresetProperties = ffpresetProperties;
 		}
@@ -596,7 +594,7 @@ public class VideoProcessorImpl
 
 			try {
 				LiferayConverter liferayConverter = new LiferayVideoConverter(
-					_inputURL, _outputURL, _tempFileName, _videoProperties,
+					_inputURL, _outputURL, _videoContainer, _videoProperties,
 					_ffpresetProperties);
 
 				liferayConverter.convert();
@@ -614,7 +612,7 @@ public class VideoProcessorImpl
 		private String _liferayHome;
 		private String _outputURL;
 		private String _serverId;
-		private String _tempFileName;
+		private String _videoContainer;
 		private Properties _videoProperties;
 
 	}

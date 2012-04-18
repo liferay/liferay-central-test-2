@@ -336,15 +336,18 @@ public class AudioProcessorImpl
 						ServerDetector.getServerId(),
 						PropsUtil.get(PropsKeys.LIFERAY_HOME),
 						Log4JUtil.getCustomLogSettings(),
-						srcFile.getCanonicalPath(),
-						destFile.getCanonicalPath());
+						srcFile.getCanonicalPath(), destFile.getCanonicalPath(),
+						containerType, PropsUtil.getProperties(
+							PropsKeys.DL_FILE_ENTRY_PREVIEW_AUDIO, false));
 
 				ProcessExecutor.execute(
 					processCallable, ClassPathUtil.getPortalClassPath());
 			}
 			else {
 				LiferayConverter liferayConverter = new LiferayAudioConverter(
-					srcFile.getCanonicalPath(), destFile.getCanonicalPath());
+					srcFile.getCanonicalPath(), destFile.getCanonicalPath(),
+					containerType, PropsUtil.getProperties(
+						PropsKeys.DL_FILE_ENTRY_PREVIEW_AUDIO, false));
 
 				liferayConverter.convert();
 			}
@@ -435,13 +438,16 @@ public class AudioProcessorImpl
 		public LiferayAudioProcessCallable(
 			String serverId, String liferayHome,
 			Map<String, String> customLogSettings, String inputURL,
-			String outputURL) {
+			String outputURL, String audioContainer,
+			Properties audioProperties) {
 
 			_serverId = serverId;
 			_liferayHome = liferayHome;
 			_customLogSettings = customLogSettings;
 			_inputURL = inputURL;
 			_outputURL = outputURL;
+			_audioContainer = audioContainer;
+			_audioProperties = audioProperties;
 		}
 
 		public String call() throws ProcessException {
@@ -455,7 +461,7 @@ public class AudioProcessorImpl
 
 			try {
 				LiferayConverter liferayConverter = new LiferayAudioConverter(
-					_inputURL, _outputURL);
+					_inputURL, _outputURL, _audioContainer, _audioProperties);
 
 				liferayConverter.convert();
 			}
@@ -471,6 +477,8 @@ public class AudioProcessorImpl
 		private String _liferayHome;
 		private String _outputURL;
 		private String _serverId;
+		private String _audioContainer;
+		private Properties _audioProperties;
 
 	}
 
