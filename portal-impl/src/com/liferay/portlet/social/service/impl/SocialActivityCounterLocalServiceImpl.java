@@ -754,10 +754,10 @@ public class SocialActivityCounterLocalServiceImpl
 	}
 
 	protected void clearFinderCache() {
-		PortalCache cache = MultiVMPoolUtil.getCache(
+		PortalCache portalCache = MultiVMPoolUtil.getCache(
 			SocialActivityCounterFinder.class.getName());
 
-		cache.removeAll();
+		portalCache.removeAll();
 	}
 
 	protected String getLockKey(

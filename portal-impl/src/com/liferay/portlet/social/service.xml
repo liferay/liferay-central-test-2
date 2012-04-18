@@ -271,14 +271,14 @@
 
 		<!-- Finder methods -->
 
-		<finder name="G_A" return-type="Collection">
-			<finder-column name="groupId" />
-			<finder-column name="activityType" />
-		</finder>
         <finder name="G_C" return-type="Collection">
             <finder-column name="groupId" />
             <finder-column name="classNameId" />
         </finder>
+		<finder name="G_A" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="activityType" />
+		</finder>
 		<finder name="G_C_A" return-type="Collection">
 			<finder-column name="groupId" />
 			<finder-column name="classNameId" />
