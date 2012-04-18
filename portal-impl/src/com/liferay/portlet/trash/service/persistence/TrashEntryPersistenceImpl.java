@@ -439,11 +439,11 @@ public class TrashEntryPersistenceImpl extends BasePersistenceImpl<TrashEntry>
 		trashEntryImpl.setEntryId(trashEntry.getEntryId());
 		trashEntryImpl.setGroupId(trashEntry.getGroupId());
 		trashEntryImpl.setCompanyId(trashEntry.getCompanyId());
+		trashEntryImpl.setCreateDate(trashEntry.getCreateDate());
 		trashEntryImpl.setClassNameId(trashEntry.getClassNameId());
 		trashEntryImpl.setClassPK(trashEntry.getClassPK());
-		trashEntryImpl.setStatus(trashEntry.getStatus());
-		trashEntryImpl.setTrashedDate(trashEntry.getTrashedDate());
 		trashEntryImpl.setTypeSettings(trashEntry.getTypeSettings());
+		trashEntryImpl.setStatus(trashEntry.getStatus());
 
 		return trashEntryImpl;
 	}

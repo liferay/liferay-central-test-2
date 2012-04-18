@@ -43,16 +43,16 @@ public class TrashEntryCacheModel implements CacheModel<TrashEntry>,
 		sb.append(groupId);
 		sb.append(", companyId=");
 		sb.append(companyId);
+		sb.append(", createDate=");
+		sb.append(createDate);
 		sb.append(", classNameId=");
 		sb.append(classNameId);
 		sb.append(", classPK=");
 		sb.append(classPK);
-		sb.append(", status=");
-		sb.append(status);
-		sb.append(", trashedDate=");
-		sb.append(trashedDate);
 		sb.append(", typeSettings=");
 		sb.append(typeSettings);
+		sb.append(", status=");
+		sb.append(status);
 		sb.append("}");
 
 		return sb.toString();
@@ -64,16 +64,16 @@ public class TrashEntryCacheModel implements CacheModel<TrashEntry>,
 		trashEntryImpl.setEntryId(entryId);
 		trashEntryImpl.setGroupId(groupId);
 		trashEntryImpl.setCompanyId(companyId);
-		trashEntryImpl.setClassNameId(classNameId);
-		trashEntryImpl.setClassPK(classPK);
-		trashEntryImpl.setStatus(status);
 
-		if (trashedDate == Long.MIN_VALUE) {
-			trashEntryImpl.setTrashedDate(null);
+		if (createDate == Long.MIN_VALUE) {
+			trashEntryImpl.setCreateDate(null);
 		}
 		else {
-			trashEntryImpl.setTrashedDate(new Date(trashedDate));
+			trashEntryImpl.setCreateDate(new Date(createDate));
 		}
+
+		trashEntryImpl.setClassNameId(classNameId);
+		trashEntryImpl.setClassPK(classPK);
 
 		if (typeSettings == null) {
 			trashEntryImpl.setTypeSettings(StringPool.BLANK);
@@ -81,6 +81,8 @@ public class TrashEntryCacheModel implements CacheModel<TrashEntry>,
 		else {
 			trashEntryImpl.setTypeSettings(typeSettings);
 		}
+
+		trashEntryImpl.setStatus(status);
 
 		trashEntryImpl.resetOriginalValues();
 
@@ -90,9 +92,9 @@ public class TrashEntryCacheModel implements CacheModel<TrashEntry>,
 	public long entryId;
 	public long groupId;
 	public long companyId;
+	public long createDate;
 	public long classNameId;
 	public long classPK;
-	public int status;
-	public long trashedDate;
 	public String typeSettings;
+	public int status;
 }

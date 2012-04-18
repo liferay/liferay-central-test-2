@@ -111,6 +111,24 @@ public class TrashEntryWrapper implements TrashEntry, ModelWrapper<TrashEntry> {
 	}
 
 	/**
+	* Returns the create date of this trash entry.
+	*
+	* @return the create date of this trash entry
+	*/
+	public java.util.Date getCreateDate() {
+		return _trashEntry.getCreateDate();
+	}
+
+	/**
+	* Sets the create date of this trash entry.
+	*
+	* @param createDate the create date of this trash entry
+	*/
+	public void setCreateDate(java.util.Date createDate) {
+		_trashEntry.setCreateDate(createDate);
+	}
+
+	/**
 	* Returns the fully qualified class name of this trash entry.
 	*
 	* @return the fully qualified class name of this trash entry
@@ -160,42 +178,6 @@ public class TrashEntryWrapper implements TrashEntry, ModelWrapper<TrashEntry> {
 	}
 
 	/**
-	* Returns the status of this trash entry.
-	*
-	* @return the status of this trash entry
-	*/
-	public int getStatus() {
-		return _trashEntry.getStatus();
-	}
-
-	/**
-	* Sets the status of this trash entry.
-	*
-	* @param status the status of this trash entry
-	*/
-	public void setStatus(int status) {
-		_trashEntry.setStatus(status);
-	}
-
-	/**
-	* Returns the trashed date of this trash entry.
-	*
-	* @return the trashed date of this trash entry
-	*/
-	public java.util.Date getTrashedDate() {
-		return _trashEntry.getTrashedDate();
-	}
-
-	/**
-	* Sets the trashed date of this trash entry.
-	*
-	* @param trashedDate the trashed date of this trash entry
-	*/
-	public void setTrashedDate(java.util.Date trashedDate) {
-		_trashEntry.setTrashedDate(trashedDate);
-	}
-
-	/**
 	* Returns the type settings of this trash entry.
 	*
 	* @return the type settings of this trash entry
@@ -211,6 +193,24 @@ public class TrashEntryWrapper implements TrashEntry, ModelWrapper<TrashEntry> {
 	*/
 	public void setTypeSettings(java.lang.String typeSettings) {
 		_trashEntry.setTypeSettings(typeSettings);
+	}
+
+	/**
+	* Returns the status of this trash entry.
+	*
+	* @return the status of this trash entry
+	*/
+	public int getStatus() {
+		return _trashEntry.getStatus();
+	}
+
+	/**
+	* Sets the status of this trash entry.
+	*
+	* @param status the status of this trash entry
+	*/
+	public void setStatus(int status) {
+		_trashEntry.setStatus(status);
 	}
 
 	public boolean isNew() {

@@ -87,15 +87,15 @@ public class TrashEntryPersistenceTest {
 
 		newTrashEntry.setCompanyId(ServiceTestUtil.nextLong());
 
+		newTrashEntry.setCreateDate(ServiceTestUtil.nextDate());
+
 		newTrashEntry.setClassNameId(ServiceTestUtil.nextLong());
 
 		newTrashEntry.setClassPK(ServiceTestUtil.nextLong());
 
-		newTrashEntry.setStatus(ServiceTestUtil.nextInt());
-
-		newTrashEntry.setTrashedDate(ServiceTestUtil.nextDate());
-
 		newTrashEntry.setTypeSettings(ServiceTestUtil.randomString());
+
+		newTrashEntry.setStatus(ServiceTestUtil.nextInt());
 
 		_persistence.update(newTrashEntry, false);
 
@@ -107,17 +107,17 @@ public class TrashEntryPersistenceTest {
 			newTrashEntry.getGroupId());
 		Assert.assertEquals(existingTrashEntry.getCompanyId(),
 			newTrashEntry.getCompanyId());
+		Assert.assertEquals(Time.getShortTimestamp(
+				existingTrashEntry.getCreateDate()),
+			Time.getShortTimestamp(newTrashEntry.getCreateDate()));
 		Assert.assertEquals(existingTrashEntry.getClassNameId(),
 			newTrashEntry.getClassNameId());
 		Assert.assertEquals(existingTrashEntry.getClassPK(),
 			newTrashEntry.getClassPK());
-		Assert.assertEquals(existingTrashEntry.getStatus(),
-			newTrashEntry.getStatus());
-		Assert.assertEquals(Time.getShortTimestamp(
-				existingTrashEntry.getTrashedDate()),
-			Time.getShortTimestamp(newTrashEntry.getTrashedDate()));
 		Assert.assertEquals(existingTrashEntry.getTypeSettings(),
 			newTrashEntry.getTypeSettings());
+		Assert.assertEquals(existingTrashEntry.getStatus(),
+			newTrashEntry.getStatus());
 	}
 
 	@Test
@@ -259,15 +259,15 @@ public class TrashEntryPersistenceTest {
 
 		trashEntry.setCompanyId(ServiceTestUtil.nextLong());
 
+		trashEntry.setCreateDate(ServiceTestUtil.nextDate());
+
 		trashEntry.setClassNameId(ServiceTestUtil.nextLong());
 
 		trashEntry.setClassPK(ServiceTestUtil.nextLong());
 
-		trashEntry.setStatus(ServiceTestUtil.nextInt());
-
-		trashEntry.setTrashedDate(ServiceTestUtil.nextDate());
-
 		trashEntry.setTypeSettings(ServiceTestUtil.randomString());
+
+		trashEntry.setStatus(ServiceTestUtil.nextInt());
 
 		_persistence.update(trashEntry, false);
 

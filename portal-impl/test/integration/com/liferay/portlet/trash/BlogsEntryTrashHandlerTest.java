@@ -59,21 +59,20 @@ public class BlogsEntryTrashHandlerTest {
 	@Test
 	@Transactional
 	public void testDeleteBlogsEntry() {
-
 		try {
 			ServiceContext serviceContext = ServiceTestUtil.getServiceContext();
 
-			Group group = ServiceTestUtil.addGroup("Delete BlogsEntry Group");
+			Group group = ServiceTestUtil.addGroup(
+				"BlogsEntryTrashHandlerTest#testDeleteBlogsEntry");
 
 			serviceContext.setScopeGroupId(group.getGroupId());
 
-			int initialTrashItemsCount = getTrashEntriesCount(
-				group.getGroupId());
+			BlogsEntry blogsEntry = addBlogsEntry(serviceContext);
 
-			BlogsEntry blogsEntry = createBlogsEntry(serviceContext);
-
-			int afterCreatingBlogsEntryCount = getBlogsEntriesNotInTrashCount(
+			int initialBlogsEntriesCount = getBlogsEntriesNotInTrashCount(
 				blogsEntry.getGroupId());
+			int initialTrashEntriesCount = getTrashEntriesCount(
+				group.getGroupId());
 
 			BlogsEntryServiceUtil.moveEntryToTrash(blogsEntry.getEntryId());
 
@@ -83,22 +82,20 @@ public class BlogsEntryTrashHandlerTest {
 
 			trashHandler.deleteTrashEntry(blogsEntry.getEntryId());
 
-			int finalTrashItemsCount = getTrashEntriesCount(
-				blogsEntry.getGroupId());
-
-			// check deletion
-
-			Assert.assertEquals(initialTrashItemsCount, finalTrashItemsCount);
-
-			int afterDeletingBlogsEntryCount = getBlogsEntriesNotInTrashCount(
+			int finalBlogsEntriesCount = getBlogsEntriesNotInTrashCount(
 				blogsEntry.getGroupId());
 
 			Assert.assertEquals(
-				afterCreatingBlogsEntryCount, afterDeletingBlogsEntryCount + 1);
+				initialBlogsEntriesCount, finalBlogsEntriesCount + 1);
+
+			int finalTrashItemsCount = getTrashEntriesCount(
+				blogsEntry.getGroupId());
+
+			Assert.assertEquals(initialTrashEntriesCount, finalTrashItemsCount);
 		}
 		catch (Exception e) {
 			Assert.fail(
-				"Unexpected error testing deleting blogsEntry: " +
+				"Unexpected error testing deleting blogs entry " +
 					e.getMessage());
 		}
 	}
@@ -110,18 +107,16 @@ public class BlogsEntryTrashHandlerTest {
 			ServiceContext serviceContext = ServiceTestUtil.getServiceContext();
 
 			Group group = ServiceTestUtil.addGroup(
-				"MoveToTrash BlogsEntry Group");
+				"BlogsEntryTrashHandlerTest#testMoveBlogsEntryToTrash");
 
 			serviceContext.setScopeGroupId(group.getGroupId());
 
-			BlogsEntry blogsEntry = createBlogsEntry(serviceContext);
+			BlogsEntry blogsEntry = addBlogsEntry(serviceContext);
 
-			int initialTrashItemsCount = getTrashEntriesCount(
+			int initialTrashEntriesCount = getTrashEntriesCount(
 				group.getGroupId());
 
 			BlogsEntryServiceUtil.moveEntryToTrash(blogsEntry.getEntryId());
-
-			// check status after moving to trash
 
 			Assert.assertEquals(
 				WorkflowConstants.STATUS_IN_TRASH, blogsEntry.getStatus());
@@ -132,40 +127,41 @@ public class BlogsEntryTrashHandlerTest {
 			Assert.assertEquals(
 				blogsEntry.getEntryId(), trashEntry.getClassPK());
 
-			int afterMoveToTrashItemsCount = getTrashEntriesCount(
+			int finalTrashEntriesCount = getTrashEntriesCount(
 				group.getGroupId());
 
 			Assert.assertEquals(
-				initialTrashItemsCount + 1, afterMoveToTrashItemsCount);
+				initialTrashEntriesCount + 1, finalTrashEntriesCount);
 		}
 		catch(Exception e) {
 			Assert.fail(
-				"Unexpected error moving blogsEntry to Trash: " +
+				"Unexpected error moving blogs entry to trash " +
 					e.getMessage());
 		}
 	}
 
 	@Test
 	@Transactional
-	public void testRestoreDraftBlogsEntryFromTrash() {
+	public void testRestoreBlogsEntryFromTrash() {
 		try {
 			ServiceContext serviceContext = ServiceTestUtil.getServiceContext();
 
-			Group group = ServiceTestUtil.addGroup("Restore BlogsEntry Group");
+			Group group = ServiceTestUtil.addGroup(
+				"BlogsEntryTrashHandlerTest#testRestoreBlogsEntryFromTrash");
 
 			serviceContext.setScopeGroupId(group.getGroupId());
 
 			serviceContext.setWorkflowAction(
 				WorkflowConstants.ACTION_SAVE_DRAFT);
 
-			BlogsEntry blogsEntry = createBlogsEntry(serviceContext);
+			BlogsEntry blogsEntry = addBlogsEntry(serviceContext);
 
-			int originalStatus = blogsEntry.getStatus();
+			int oldStatus = blogsEntry.getStatus();
 
 			BlogsEntryServiceUtil.moveEntryToTrash(blogsEntry.getEntryId());
 
-			int afterMovingToTrashBlogsEntryCount =
-				getBlogsEntriesNotInTrashCount(blogsEntry.getGroupId());
+			int initialBlogsEntriesCount = getBlogsEntriesNotInTrashCount(
+				blogsEntry.getGroupId());
 
 			TrashHandler trashHandler =
 				TrashHandlerRegistryUtil.getTrashHandler(
@@ -176,16 +172,13 @@ public class BlogsEntryTrashHandlerTest {
 			blogsEntry = BlogsEntryServiceUtil.getEntry(
 				blogsEntry.getEntryId());
 
-			// original status is restored
+			Assert.assertEquals(oldStatus, blogsEntry.getStatus());
 
-			Assert.assertEquals(originalStatus, blogsEntry.getStatus());
-
-			int afterRestoringFromTrashBlogsEntryCount =
-				getBlogsEntriesNotInTrashCount(blogsEntry.getGroupId());
+			int finalBlogsEntriesCount = getBlogsEntriesNotInTrashCount(
+				blogsEntry.getGroupId());
 
 			Assert.assertEquals(
-				afterMovingToTrashBlogsEntryCount + 1,
-				afterRestoringFromTrashBlogsEntryCount);
+				initialBlogsEntriesCount + 1, finalBlogsEntriesCount);
 		}
 		catch(Exception e) {
 			Assert.fail(
@@ -194,7 +187,7 @@ public class BlogsEntryTrashHandlerTest {
 		}
 	}
 
-	protected BlogsEntry createBlogsEntry(ServiceContext serviceContext)
+	protected BlogsEntry addBlogsEntry(ServiceContext serviceContext)
 		throws Exception {
 
 		String title = "Title";

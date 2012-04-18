@@ -67,16 +67,16 @@ public class TrashEntryModelImpl extends BaseModelImpl<TrashEntry>
 			{ "entryId", Types.BIGINT },
 			{ "groupId", Types.BIGINT },
 			{ "companyId", Types.BIGINT },
+			{ "createDate", Types.TIMESTAMP },
 			{ "classNameId", Types.BIGINT },
 			{ "classPK", Types.BIGINT },
-			{ "status", Types.INTEGER },
-			{ "trashedDate", Types.TIMESTAMP },
-			{ "typeSettings", Types.CLOB }
+			{ "typeSettings", Types.CLOB },
+			{ "status", Types.INTEGER }
 		};
-	public static final String TABLE_SQL_CREATE = "create table TrashEntry (entryId LONG not null primary key,groupId LONG,companyId LONG,classNameId LONG,classPK LONG,status INTEGER,trashedDate DATE null,typeSettings TEXT null)";
+	public static final String TABLE_SQL_CREATE = "create table TrashEntry (entryId LONG not null primary key,groupId LONG,companyId LONG,createDate DATE null,classNameId LONG,classPK LONG,typeSettings TEXT null,status INTEGER)";
 	public static final String TABLE_SQL_DROP = "drop table TrashEntry";
-	public static final String ORDER_BY_JPQL = " ORDER BY trashEntry.trashedDate DESC";
-	public static final String ORDER_BY_SQL = " ORDER BY TrashEntry.trashedDate DESC";
+	public static final String ORDER_BY_JPQL = " ORDER BY trashEntry.createDate DESC";
+	public static final String ORDER_BY_SQL = " ORDER BY TrashEntry.createDate DESC";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
@@ -106,11 +106,11 @@ public class TrashEntryModelImpl extends BaseModelImpl<TrashEntry>
 		model.setEntryId(soapModel.getEntryId());
 		model.setGroupId(soapModel.getGroupId());
 		model.setCompanyId(soapModel.getCompanyId());
+		model.setCreateDate(soapModel.getCreateDate());
 		model.setClassNameId(soapModel.getClassNameId());
 		model.setClassPK(soapModel.getClassPK());
-		model.setStatus(soapModel.getStatus());
-		model.setTrashedDate(soapModel.getTrashedDate());
 		model.setTypeSettings(soapModel.getTypeSettings());
+		model.setStatus(soapModel.getStatus());
 
 		return model;
 	}
@@ -212,6 +212,17 @@ public class TrashEntryModelImpl extends BaseModelImpl<TrashEntry>
 		return _originalCompanyId;
 	}
 
+	@JSON
+	public Date getCreateDate() {
+		return _createDate;
+	}
+
+	public void setCreateDate(Date createDate) {
+		_columnBitmask = -1L;
+
+		_createDate = createDate;
+	}
+
 	public String getClassName() {
 		if (getClassNameId() <= 0) {
 			return StringPool.BLANK;
@@ -273,26 +284,6 @@ public class TrashEntryModelImpl extends BaseModelImpl<TrashEntry>
 	}
 
 	@JSON
-	public int getStatus() {
-		return _status;
-	}
-
-	public void setStatus(int status) {
-		_status = status;
-	}
-
-	@JSON
-	public Date getTrashedDate() {
-		return _trashedDate;
-	}
-
-	public void setTrashedDate(Date trashedDate) {
-		_columnBitmask = -1L;
-
-		_trashedDate = trashedDate;
-	}
-
-	@JSON
 	public String getTypeSettings() {
 		if (_typeSettings == null) {
 			return StringPool.BLANK;
@@ -304,6 +295,15 @@ public class TrashEntryModelImpl extends BaseModelImpl<TrashEntry>
 
 	public void setTypeSettings(String typeSettings) {
 		_typeSettings = typeSettings;
+	}
+
+	@JSON
+	public int getStatus() {
+		return _status;
+	}
+
+	public void setStatus(int status) {
+		_status = status;
 	}
 
 	public long getColumnBitmask() {
@@ -343,11 +343,11 @@ public class TrashEntryModelImpl extends BaseModelImpl<TrashEntry>
 		trashEntryImpl.setEntryId(getEntryId());
 		trashEntryImpl.setGroupId(getGroupId());
 		trashEntryImpl.setCompanyId(getCompanyId());
+		trashEntryImpl.setCreateDate(getCreateDate());
 		trashEntryImpl.setClassNameId(getClassNameId());
 		trashEntryImpl.setClassPK(getClassPK());
-		trashEntryImpl.setStatus(getStatus());
-		trashEntryImpl.setTrashedDate(getTrashedDate());
 		trashEntryImpl.setTypeSettings(getTypeSettings());
+		trashEntryImpl.setStatus(getStatus());
 
 		trashEntryImpl.resetOriginalValues();
 
@@ -357,7 +357,7 @@ public class TrashEntryModelImpl extends BaseModelImpl<TrashEntry>
 	public int compareTo(TrashEntry trashEntry) {
 		int value = 0;
 
-		value = DateUtil.compareTo(getTrashedDate(), trashEntry.getTrashedDate());
+		value = DateUtil.compareTo(getCreateDate(), trashEntry.getCreateDate());
 
 		value = value * -1;
 
@@ -431,20 +431,18 @@ public class TrashEntryModelImpl extends BaseModelImpl<TrashEntry>
 
 		trashEntryCacheModel.companyId = getCompanyId();
 
+		Date createDate = getCreateDate();
+
+		if (createDate != null) {
+			trashEntryCacheModel.createDate = createDate.getTime();
+		}
+		else {
+			trashEntryCacheModel.createDate = Long.MIN_VALUE;
+		}
+
 		trashEntryCacheModel.classNameId = getClassNameId();
 
 		trashEntryCacheModel.classPK = getClassPK();
-
-		trashEntryCacheModel.status = getStatus();
-
-		Date trashedDate = getTrashedDate();
-
-		if (trashedDate != null) {
-			trashEntryCacheModel.trashedDate = trashedDate.getTime();
-		}
-		else {
-			trashEntryCacheModel.trashedDate = Long.MIN_VALUE;
-		}
 
 		trashEntryCacheModel.typeSettings = getTypeSettings();
 
@@ -453,6 +451,8 @@ public class TrashEntryModelImpl extends BaseModelImpl<TrashEntry>
 		if ((typeSettings != null) && (typeSettings.length() == 0)) {
 			trashEntryCacheModel.typeSettings = null;
 		}
+
+		trashEntryCacheModel.status = getStatus();
 
 		return trashEntryCacheModel;
 	}
@@ -467,16 +467,16 @@ public class TrashEntryModelImpl extends BaseModelImpl<TrashEntry>
 		sb.append(getGroupId());
 		sb.append(", companyId=");
 		sb.append(getCompanyId());
+		sb.append(", createDate=");
+		sb.append(getCreateDate());
 		sb.append(", classNameId=");
 		sb.append(getClassNameId());
 		sb.append(", classPK=");
 		sb.append(getClassPK());
-		sb.append(", status=");
-		sb.append(getStatus());
-		sb.append(", trashedDate=");
-		sb.append(getTrashedDate());
 		sb.append(", typeSettings=");
 		sb.append(getTypeSettings());
+		sb.append(", status=");
+		sb.append(getStatus());
 		sb.append("}");
 
 		return sb.toString();
@@ -502,6 +502,10 @@ public class TrashEntryModelImpl extends BaseModelImpl<TrashEntry>
 		sb.append(getCompanyId());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>createDate</column-name><column-value><![CDATA[");
+		sb.append(getCreateDate());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>classNameId</column-name><column-value><![CDATA[");
 		sb.append(getClassNameId());
 		sb.append("]]></column-value></column>");
@@ -510,16 +514,12 @@ public class TrashEntryModelImpl extends BaseModelImpl<TrashEntry>
 		sb.append(getClassPK());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>status</column-name><column-value><![CDATA[");
-		sb.append(getStatus());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>trashedDate</column-name><column-value><![CDATA[");
-		sb.append(getTrashedDate());
-		sb.append("]]></column-value></column>");
-		sb.append(
 			"<column><column-name>typeSettings</column-name><column-value><![CDATA[");
 		sb.append(getTypeSettings());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>status</column-name><column-value><![CDATA[");
+		sb.append(getStatus());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
@@ -538,15 +538,15 @@ public class TrashEntryModelImpl extends BaseModelImpl<TrashEntry>
 	private long _companyId;
 	private long _originalCompanyId;
 	private boolean _setOriginalCompanyId;
+	private Date _createDate;
 	private long _classNameId;
 	private long _originalClassNameId;
 	private boolean _setOriginalClassNameId;
 	private long _classPK;
 	private long _originalClassPK;
 	private boolean _setOriginalClassPK;
-	private int _status;
-	private Date _trashedDate;
 	private String _typeSettings;
+	private int _status;
 	private transient ExpandoBridge _expandoBridge;
 	private long _columnBitmask;
 	private TrashEntry _escapedModelProxy;

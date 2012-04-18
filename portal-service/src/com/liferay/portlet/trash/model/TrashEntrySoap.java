@@ -34,11 +34,11 @@ public class TrashEntrySoap implements Serializable {
 		soapModel.setEntryId(model.getEntryId());
 		soapModel.setGroupId(model.getGroupId());
 		soapModel.setCompanyId(model.getCompanyId());
+		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setClassNameId(model.getClassNameId());
 		soapModel.setClassPK(model.getClassPK());
-		soapModel.setStatus(model.getStatus());
-		soapModel.setTrashedDate(model.getTrashedDate());
 		soapModel.setTypeSettings(model.getTypeSettings());
+		soapModel.setStatus(model.getStatus());
 
 		return soapModel;
 	}
@@ -115,6 +115,14 @@ public class TrashEntrySoap implements Serializable {
 		_companyId = companyId;
 	}
 
+	public Date getCreateDate() {
+		return _createDate;
+	}
+
+	public void setCreateDate(Date createDate) {
+		_createDate = createDate;
+	}
+
 	public long getClassNameId() {
 		return _classNameId;
 	}
@@ -131,22 +139,6 @@ public class TrashEntrySoap implements Serializable {
 		_classPK = classPK;
 	}
 
-	public int getStatus() {
-		return _status;
-	}
-
-	public void setStatus(int status) {
-		_status = status;
-	}
-
-	public Date getTrashedDate() {
-		return _trashedDate;
-	}
-
-	public void setTrashedDate(Date trashedDate) {
-		_trashedDate = trashedDate;
-	}
-
 	public String getTypeSettings() {
 		return _typeSettings;
 	}
@@ -155,12 +147,20 @@ public class TrashEntrySoap implements Serializable {
 		_typeSettings = typeSettings;
 	}
 
+	public int getStatus() {
+		return _status;
+	}
+
+	public void setStatus(int status) {
+		_status = status;
+	}
+
 	private long _entryId;
 	private long _groupId;
 	private long _companyId;
+	private Date _createDate;
 	private long _classNameId;
 	private long _classPK;
-	private int _status;
-	private Date _trashedDate;
 	private String _typeSettings;
+	private int _status;
 }

@@ -103,6 +103,20 @@ public interface TrashEntryModel extends AttachedModel, BaseModel<TrashEntry> {
 	public void setCompanyId(long companyId);
 
 	/**
+	 * Returns the create date of this trash entry.
+	 *
+	 * @return the create date of this trash entry
+	 */
+	public Date getCreateDate();
+
+	/**
+	 * Sets the create date of this trash entry.
+	 *
+	 * @param createDate the create date of this trash entry
+	 */
+	public void setCreateDate(Date createDate);
+
+	/**
 	 * Returns the fully qualified class name of this trash entry.
 	 *
 	 * @return the fully qualified class name of this trash entry
@@ -140,34 +154,6 @@ public interface TrashEntryModel extends AttachedModel, BaseModel<TrashEntry> {
 	public void setClassPK(long classPK);
 
 	/**
-	 * Returns the status of this trash entry.
-	 *
-	 * @return the status of this trash entry
-	 */
-	public int getStatus();
-
-	/**
-	 * Sets the status of this trash entry.
-	 *
-	 * @param status the status of this trash entry
-	 */
-	public void setStatus(int status);
-
-	/**
-	 * Returns the trashed date of this trash entry.
-	 *
-	 * @return the trashed date of this trash entry
-	 */
-	public Date getTrashedDate();
-
-	/**
-	 * Sets the trashed date of this trash entry.
-	 *
-	 * @param trashedDate the trashed date of this trash entry
-	 */
-	public void setTrashedDate(Date trashedDate);
-
-	/**
 	 * Returns the type settings of this trash entry.
 	 *
 	 * @return the type settings of this trash entry
@@ -181,6 +167,20 @@ public interface TrashEntryModel extends AttachedModel, BaseModel<TrashEntry> {
 	 * @param typeSettings the type settings of this trash entry
 	 */
 	public void setTypeSettings(String typeSettings);
+
+	/**
+	 * Returns the status of this trash entry.
+	 *
+	 * @return the status of this trash entry
+	 */
+	public int getStatus();
+
+	/**
+	 * Sets the status of this trash entry.
+	 *
+	 * @param status the status of this trash entry
+	 */
+	public void setStatus(int status);
 
 	public boolean isNew();
 
