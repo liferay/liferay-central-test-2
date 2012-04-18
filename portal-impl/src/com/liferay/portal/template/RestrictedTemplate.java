@@ -19,7 +19,7 @@ import com.liferay.portal.kernel.template.TemplateException;
 
 import java.io.Writer;
 
-import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -29,7 +29,7 @@ import javax.servlet.http.HttpServletRequest;
 public class RestrictedTemplate implements Template {
 
 	public RestrictedTemplate(
-		Template template, List<String> restrictedVariables) {
+		Template template, Set<String> restrictedVariables) {
 
 		_restrictedVariables = restrictedVariables;
 		_template = template;
@@ -55,7 +55,7 @@ public class RestrictedTemplate implements Template {
 		_template.put(key, value);
 	}
 
-	List<String> _restrictedVariables;
-	Template _template;
+	private Set<String> _restrictedVariables;
+	private Template _template;
 
 }

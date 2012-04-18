@@ -18,12 +18,12 @@ import com.liferay.portal.kernel.cache.PortalCache;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.Template;
-import com.liferay.portal.kernel.template.TemplateContextHelper;
 import com.liferay.portal.kernel.template.TemplateContextType;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManager;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.template.RestrictedTemplate;
+import com.liferay.portal.template.TemplateContextHelper;
 import com.liferay.portal.util.PropsValues;
 
 import freemarker.cache.ClassTemplateLoader;

@@ -14,7 +14,11 @@
 
 package com.liferay.portal.kernel.template;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -87,21 +91,19 @@ public class TemplateManagerUtil {
 			templateId, templateContextType);
 	}
 
-	public static TemplateManager getTemplateManager(String templateManagerName)
-		throws TemplateException {
+	public static TemplateManager getTemplateManager(
+		String templateManagerName) {
 
 		return _templateManagers.get(templateManagerName);
 	}
 
 	public static Set<String> getTemplateManagerNames(
-			String templateManagerName)
-		throws TemplateException {
+		String templateManagerName) {
 
 		return _templateManagers.keySet();
 	}
 
-	public static Map<String, TemplateManager> getTemplateManagers()
-		throws TemplateException {
+	public static Map<String, TemplateManager> getTemplateManagers() {
 
 		return Collections.unmodifiableMap(_templateManagers);
 	}

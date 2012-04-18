@@ -15,20 +15,19 @@
 package com.liferay.portal.velocity;
 
 import com.liferay.portal.kernel.io.unsync.UnsyncStringWriter;
-import com.liferay.portal.kernel.template.TemplateContextHelper;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.templateparser.TemplateContext;
 import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.template.TemplateContextHelper;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
-import com.liferay.util.PwdGenerator;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
 import java.util.Collections;
-import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -93,11 +92,11 @@ public class VelocityTemplateTest extends TestCase {
 	}
 
 	public void testGet() throws Exception {
+		String testValue = "testValue";
+
 		VelocityTemplate velocityTemplate = new VelocityTemplate(
 			_TEMPLATE_FILE_NAME, null, null, null, null, _velocityEngine,
 			_templateContextHelper);
-
-		String testValue = randomString();
 
 		velocityTemplate.put(_TEST_KEY, testValue);
 
@@ -113,7 +112,7 @@ public class VelocityTemplateTest extends TestCase {
 	}
 
 	public void testPrepare() throws Exception {
-		String testValue = randomString();
+		String testValue = "testValue";
 
 		VelocityTemplate velocityTemplate = new VelocityTemplate(
 			_TEMPLATE_FILE_NAME, null, null, null, null, _velocityEngine,
@@ -135,7 +134,7 @@ public class VelocityTemplateTest extends TestCase {
 	}
 
 	public void testProcessTemplate1() throws Exception {
-		String testValue = randomString();
+		String testValue = "testValue";
 
 		VelocityTemplate velocityTemplate = new VelocityTemplate(
 			_TEMPLATE_FILE_NAME, null, null, null, null, _velocityEngine,
@@ -153,13 +152,14 @@ public class VelocityTemplateTest extends TestCase {
 	}
 
 	public void testProcessTemplate2() throws Exception {
-		String templateId = randomString();
+		String templateId = "wrongTemplateId";
+		String testValue = "testValue";
 
 		VelocityTemplate velocityTemplate = new VelocityTemplate(
 			templateId, null, null, null, null, _velocityEngine,
 			_templateContextHelper);
 
-		velocityTemplate.put(_TEST_KEY, randomString());
+		velocityTemplate.put(_TEST_KEY, testValue);
 
 		UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter();
 
@@ -182,12 +182,12 @@ public class VelocityTemplateTest extends TestCase {
 	}
 
 	public void testProcessTemplate3() throws Exception {
-		String templateId = randomString();
-		String testValue = randomString();
+		String templateId = "wrongTemplateId";
+		String testValue = "testValue";
 
 		VelocityTemplate velocityTemplate = new VelocityTemplate(
-			templateId, _TEMPLATE_CONTENT, null, null, null, _velocityEngine,
-			_templateContextHelper);
+			templateId, _TEST_TEMPLATE_CONTENT, null, null, null,
+			_velocityEngine, _templateContextHelper);
 
 		velocityTemplate.put(_TEST_KEY, testValue);
 
@@ -201,8 +201,8 @@ public class VelocityTemplateTest extends TestCase {
 	}
 
 	public void testProcessTemplate4() throws Exception {
-		String testValue = randomString();
-		String errorTemplateId = randomString();
+		String errorTemplateId = "wrongTemplateId";
+		String testValue = "testValue";
 
 		VelocityTemplate velocityTemplate = new VelocityTemplate(
 			_TEMPLATE_FILE_NAME, null, errorTemplateId, null, null,
@@ -220,8 +220,8 @@ public class VelocityTemplateTest extends TestCase {
 	}
 
 	public void testProcessTemplate5() throws Exception {
-		String templateId = randomString();
-		String testValue = randomString();
+		String templateId = "wrongTemplateId";
+		String testValue = "testValue";
 
 		VelocityTemplate velocityTemplate = new VelocityTemplate(
 			templateId, null, _TEMPLATE_FILE_NAME, null, null, _velocityEngine,
@@ -239,14 +239,15 @@ public class VelocityTemplateTest extends TestCase {
 	}
 
 	public void testProcessTemplate6() throws Exception {
-		String templateId = randomString();
-		String errorTemplateId = randomString();
+		String templateId = "wrongTemplateId1";
+		String errorTemplateId = "wrongTemplateId2";
+		String testValue = "testValue";
 
 		VelocityTemplate velocityTemplate = new VelocityTemplate(
 			templateId, null, errorTemplateId, null, null, _velocityEngine,
 			_templateContextHelper);
 
-		velocityTemplate.put(_TEST_KEY, randomString());
+		velocityTemplate.put(_TEST_KEY, testValue);
 
 		UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter();
 
@@ -269,12 +270,12 @@ public class VelocityTemplateTest extends TestCase {
 	}
 
 	public void testProcessTemplate7() throws Exception {
-		String templateId = randomString();
-		String errorTemplateId = randomString();
-		String testValue = randomString();
+		String templateId = "wrongTemplateId1";
+		String errorTemplateId = "wrongTemplateId2";
+		String testValue = "testValue";
 
 		VelocityTemplate velocityTemplate = new VelocityTemplate(
-			templateId, null, errorTemplateId, _TEMPLATE_CONTENT, null,
+			templateId, null, errorTemplateId, _TEST_TEMPLATE_CONTENT, null,
 			_velocityEngine, _templateContextHelper);
 
 		velocityTemplate.put(_TEST_KEY, testValue);
@@ -289,7 +290,7 @@ public class VelocityTemplateTest extends TestCase {
 	}
 
 	public void testProcessTemplate8() throws Exception {
-		String testValue = randomString();
+		String testValue = "testValue";
 
 		VelocityContext context = new VelocityContext();
 
@@ -321,7 +322,7 @@ public class VelocityTemplateTest extends TestCase {
 			try {
 				if (_TEMPLATE_FILE_NAME.equals(string)) {
 					return new ByteArrayInputStream(
-						_TEMPLATE_CONTENT.getBytes());
+						_TEST_TEMPLATE_CONTENT.getBytes());
 				}
 
 				throw new ResourceNotFoundException("Unable to find " + string);
@@ -343,31 +344,31 @@ public class VelocityTemplateTest extends TestCase {
 
 	}
 
-	protected String randomString() throws Exception {
-		return PwdGenerator.getPassword();
-	}
-
 	private static final String _TEMPLATE_FILE_NAME = "test.vm";
 	private static final String _TEST_KEY = "TEST_KEY";
-	private static final String _TEMPLATE_CONTENT = "$"+ _TEST_KEY;
+	private static final String _TEST_TEMPLATE_CONTENT = "$"+ _TEST_KEY;
 
 	private TemplateContextHelper _templateContextHelper;
 	private VelocityEngine _velocityEngine;
 
-	private class MockTemplateContextHelper implements TemplateContextHelper {
+	private class MockTemplateContextHelper extends TemplateContextHelper {
 
+		@Override
 		public Map<String, Object> getHelperUtilities() {
-			return Collections.EMPTY_MAP;
+			return Collections.emptyMap();
 		}
 
+		@Override
 		public Map<String, Object> getRestrictedHelperUtilities() {
-			return Collections.EMPTY_MAP;
+			return Collections.emptyMap();
 		}
 
-		public List<String> getRestrictedVariables() {
-			return Collections.EMPTY_LIST;
+		@Override
+		public Set<String> getRestrictedVariables() {
+			return Collections.emptySet();
 		}
 
+		@Override
 		public void prepare(
 				TemplateContext templateContext, HttpServletRequest request)
 			throws TemplateException {

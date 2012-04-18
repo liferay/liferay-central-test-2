@@ -17,23 +17,22 @@ package com.liferay.portal.freemarker;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.templateparser.TemplateContext;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Theme;
-import com.liferay.portal.template.DefaultTemplateContextHelper;
+import com.liferay.portal.template.TemplateContextHelper;
 import com.liferay.portal.template.TemplatePortletPreferences;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 
-import edu.emory.mathcs.backport.java.util.Arrays;
-
 import freemarker.ext.beans.BeansWrapper;
 
 import freemarker.template.utility.ObjectConstructor;
 
-import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -42,7 +41,7 @@ import javax.servlet.http.HttpServletRequest;
  * @author Raymond Augé
  */
 public class FreeMarkerTemplateContextHelper
-	extends DefaultTemplateContextHelper {
+	extends TemplateContextHelper {
 
 	@Override
 	public Map<String, Object> getHelperUtilities() {
@@ -70,8 +69,9 @@ public class FreeMarkerTemplateContextHelper
 		return helperUtilities;
 	}
 
-	public List<String> getRestrictedVariables() {
-		return Arrays.asList(
+	@Override
+	public Set<String> getRestrictedVariables() {
+		return SetUtil.fromArray(
 			PropsValues.JOURNAL_TEMPLATE_FREEMARKER_RESTRICTED_VARIABLES);
 	}
 

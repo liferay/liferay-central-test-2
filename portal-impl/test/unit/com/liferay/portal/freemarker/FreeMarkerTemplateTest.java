@@ -15,11 +15,10 @@
 package com.liferay.portal.freemarker;
 
 import com.liferay.portal.kernel.io.unsync.UnsyncStringWriter;
-import com.liferay.portal.kernel.template.TemplateContextHelper;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.templateparser.TemplateContext;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.util.PwdGenerator;
+import com.liferay.portal.template.TemplateContextHelper;
 
 import freemarker.cache.ClassTemplateLoader;
 import freemarker.cache.MultiTemplateLoader;
@@ -35,8 +34,8 @@ import java.io.StringReader;
 
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -70,7 +69,7 @@ public class FreeMarkerTemplateTest extends TestCase {
 			_TEMPLATE_FILE_NAME, null, null, null, null, _configuration,
 			_templateContextHelper, _stringTemplateLoader);
 
-		String testValue = randomString();
+		String testValue = "testValue";
 
 		freeMarkerTemplate.put(_TEST_KEY, testValue);
 
@@ -86,7 +85,7 @@ public class FreeMarkerTemplateTest extends TestCase {
 	}
 
 	public void testPrepare() throws Exception {
-		String testValue = randomString();
+		String testValue = "testValue";
 
 		FreeMarkerTemplate freeMarkerTemplate = new FreeMarkerTemplate(
 			_TEMPLATE_FILE_NAME, null, null, null, null, _configuration,
@@ -108,7 +107,7 @@ public class FreeMarkerTemplateTest extends TestCase {
 	}
 
 	public void testProcessTemplate1() throws Exception {
-		String testValue = randomString();
+		String testValue = "testValue";
 
 		FreeMarkerTemplate freeMarkerTemplate = new FreeMarkerTemplate(
 			_TEMPLATE_FILE_NAME, null, null, null, null, _configuration,
@@ -126,13 +125,14 @@ public class FreeMarkerTemplateTest extends TestCase {
 	}
 
 	public void testProcessTemplate2() throws Exception {
-		String templateId = randomString();
+		String templateId = "wrongTemplateId";
+		String testValue = "testValue";
 
 		FreeMarkerTemplate freeMarkerTemplate = new FreeMarkerTemplate(
 			templateId, null, null, null, null, _configuration,
 			_templateContextHelper, _stringTemplateLoader);
 
-		freeMarkerTemplate.put(_TEST_KEY, randomString());
+		freeMarkerTemplate.put(_TEST_KEY, testValue);
 
 		UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter();
 
@@ -155,12 +155,12 @@ public class FreeMarkerTemplateTest extends TestCase {
 	}
 
 	public void testProcessTemplate3() throws Exception {
-		String templateId = randomString();
-		String testValue = randomString();
+		String templateId = "wrongTemplateId";
+		String testValue = "testValue";
 
 		FreeMarkerTemplate freeMarkerTemplate = new FreeMarkerTemplate(
-			templateId, _TEMPLATE_CONTENT, null, null, null, _configuration,
-			_templateContextHelper, _stringTemplateLoader);
+			templateId, _TEST_TEMPLATE_CONTENT, null, null, null,
+			_configuration, _templateContextHelper, _stringTemplateLoader);
 
 		freeMarkerTemplate.put(_TEST_KEY, testValue);
 
@@ -174,8 +174,8 @@ public class FreeMarkerTemplateTest extends TestCase {
 	}
 
 	public void testProcessTemplate4() throws Exception {
-		String testValue = randomString();
-		String errorTemplateId = randomString();
+		String errorTemplateId = "wrongTemplateId";
+		String testValue = "testValue";
 
 		FreeMarkerTemplate freeMarkerTemplate = new FreeMarkerTemplate(
 			_TEMPLATE_FILE_NAME, null, errorTemplateId, null, null,
@@ -193,8 +193,8 @@ public class FreeMarkerTemplateTest extends TestCase {
 	}
 
 	public void testProcessTemplate5() throws Exception {
-		String templateId = randomString();
-		String testValue = randomString();
+		String templateId = "wrongTemplateId";
+		String testValue = "testValue";
 
 		FreeMarkerTemplate freeMarkerTemplate = new FreeMarkerTemplate(
 			templateId, null, _TEMPLATE_FILE_NAME, null, null, _configuration,
@@ -212,14 +212,15 @@ public class FreeMarkerTemplateTest extends TestCase {
 	}
 
 	public void testProcessTemplate6() throws Exception {
-		String templateId = randomString();
-		String errorTemplateId = randomString();
+		String templateId = "wrongTemplateId1";
+		String errorTemplateId = "wrongTemplateId2";
+		String testValue = "testValue";
 
 		FreeMarkerTemplate freeMarkerTemplate = new FreeMarkerTemplate(
 			templateId, null, errorTemplateId, null, null, _configuration,
 			_templateContextHelper, _stringTemplateLoader);
 
-		freeMarkerTemplate.put(_TEST_KEY, randomString());
+		freeMarkerTemplate.put(_TEST_KEY, testValue);
 
 		UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter();
 
@@ -242,12 +243,12 @@ public class FreeMarkerTemplateTest extends TestCase {
 	}
 
 	public void testProcessTemplate7() throws Exception {
-		String templateId = randomString();
-		String errorTemplateId = randomString();
-		String testValue = randomString();
+		String templateId = "wrongTemplateId1";
+		String errorTemplateId = "wrongTemplateId2";
+		String testValue = "testValue";
 
 		FreeMarkerTemplate freeMarkerTemplate = new FreeMarkerTemplate(
-			templateId, null, errorTemplateId, _TEMPLATE_CONTENT, null,
+			templateId, null, errorTemplateId, _TEST_TEMPLATE_CONTENT, null,
 			_configuration, _templateContextHelper, _stringTemplateLoader);
 
 		freeMarkerTemplate.put(_TEST_KEY, testValue);
@@ -262,7 +263,7 @@ public class FreeMarkerTemplateTest extends TestCase {
 	}
 
 	public void testProcessTemplate8() throws Exception {
-		String testValue = randomString();
+		String testValue = "testValue";
 
 		Map<String, Object> context = new HashMap<String, Object>();
 
@@ -281,32 +282,32 @@ public class FreeMarkerTemplateTest extends TestCase {
 		assertEquals(testValue, result);
 	}
 
-	protected String randomString() throws Exception {
-		return PwdGenerator.getPassword();
-	}
-
 	private static final String _TEMPLATE_FILE_NAME = "test.ftl";
 	private static final String _TEST_KEY = "TEST_KEY";
-	private static final String _TEMPLATE_CONTENT = "${"+ _TEST_KEY +"}";
+	private static final String _TEST_TEMPLATE_CONTENT = "${"+ _TEST_KEY +"}";
 
 	private Configuration _configuration;
 	private StringTemplateLoader _stringTemplateLoader;
 	private TemplateContextHelper _templateContextHelper;
 
-	private class MockTemplateContextHelper implements TemplateContextHelper {
+	private class MockTemplateContextHelper extends TemplateContextHelper {
 
+		@Override
 		public Map<String, Object> getHelperUtilities() {
-			return Collections.EMPTY_MAP;
+			return Collections.emptyMap();
 		}
 
+		@Override
 		public Map<String, Object> getRestrictedHelperUtilities() {
-			return Collections.EMPTY_MAP;
+			return Collections.emptyMap();
 		}
 
-		public List<String> getRestrictedVariables() {
-			return Collections.EMPTY_LIST;
+		@Override
+		public Set<String> getRestrictedVariables() {
+			return Collections.emptySet();
 		}
 
+		@Override
 		public void prepare(
 				TemplateContext templateContext, HttpServletRequest request)
 			throws TemplateException {
@@ -334,7 +335,7 @@ public class FreeMarkerTemplateTest extends TestCase {
 
 		public Reader getReader(Object o, String string) throws IOException {
 			if (o == _TEMPLATE_FILE_NAME) {
-				return new StringReader(_TEMPLATE_CONTENT);
+				return new StringReader(_TEST_TEMPLATE_CONTENT);
 			}
 
 			throw new ParseException("Unable to find template" + string, 0, 0);

@@ -17,18 +17,18 @@ package com.liferay.portal.velocity;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.templateparser.TemplateContext;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Theme;
 import com.liferay.portal.service.permission.RolePermissionUtil;
-import com.liferay.portal.template.DefaultTemplateContextHelper;
+import com.liferay.portal.template.TemplateContextHelper;
 import com.liferay.portal.template.TemplatePortletPreferences;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -45,8 +45,9 @@ import org.apache.velocity.tools.generic.SortTool;
  * @author Raymond Augé
  */
 public class VelocityTemplateContextHelper
-	extends DefaultTemplateContextHelper {
+	extends TemplateContextHelper {
 
+	@Override
 	public Map<String, Object> getHelperUtilities() {
 		Map<String, Object> velocityContext = super.getHelperUtilities();
 
@@ -91,11 +92,13 @@ public class VelocityTemplateContextHelper
 		return velocityContext;
 	}
 
-	public List<String> getRestrictedVariables() {
-		return Arrays.asList(
+	@Override
+	public Set<String> getRestrictedVariables() {
+		return SetUtil.fromArray(
 			PropsValues.JOURNAL_TEMPLATE_VELOCITY_RESTRICTED_VARIABLES);
 	}
 
+	@Override
 	public void prepare(
 			TemplateContext templateContext, HttpServletRequest request)
 		throws TemplateException {

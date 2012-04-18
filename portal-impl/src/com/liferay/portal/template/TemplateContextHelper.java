@@ -20,7 +20,6 @@ import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.language.UnicodeLanguageUtil;
 import com.liferay.portal.kernel.servlet.BrowserSnifferUtil;
-import com.liferay.portal.kernel.template.TemplateContextHelper;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.templateparser.TemplateContext;
 import com.liferay.portal.kernel.util.ArrayUtil_IW;
@@ -75,6 +74,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
@@ -89,7 +89,7 @@ import org.apache.struts.tiles.ComponentContext;
 /**
  * @author Tina Tian
  */
-public class DefaultTemplateContextHelper implements TemplateContextHelper {
+public class TemplateContextHelper {
 
 	public Map<String, Object> getHelperUtilities() {
 		Map<String, Object> variables = new HashMap<String, Object>();
@@ -299,7 +299,7 @@ public class DefaultTemplateContextHelper implements TemplateContextHelper {
 	public Map<String, Object> getRestrictedHelperUtilities() {
 		Map<String, Object> helperUtilities = getHelperUtilities();
 
-		List<String> restrictedVariables = getRestrictedVariables();
+		Set<String> restrictedVariables = getRestrictedVariables();
 
 		for (String restrictedVariable : restrictedVariables) {
 			helperUtilities.remove(restrictedVariable);
@@ -308,8 +308,8 @@ public class DefaultTemplateContextHelper implements TemplateContextHelper {
 		return helperUtilities;
 	}
 
-	public List<String> getRestrictedVariables() {
-		return Collections.emptyList();
+	public Set<String> getRestrictedVariables() {
+		return Collections.emptySet();
 	}
 
 	public void prepare(

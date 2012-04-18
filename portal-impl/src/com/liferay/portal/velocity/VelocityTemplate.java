@@ -18,10 +18,10 @@ import com.liferay.portal.kernel.io.unsync.UnsyncStringWriter;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.Template;
-import com.liferay.portal.kernel.template.TemplateContextHelper;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.template.TemplateContextHelper;
 import com.liferay.portal.util.PropsValues;
 
 import java.io.Writer;
@@ -87,12 +87,10 @@ public class VelocityTemplate implements Template {
 			}
 		}
 
-		UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter();
-
-		boolean result;
-
 		try {
-			result = _velocityEngine.mergeTemplate(
+			UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter();
+
+			boolean result = _velocityEngine.mergeTemplate(
 				_templateId, StringPool.UTF8, _velocityContext,
 				unsyncStringWriter);
 
@@ -111,16 +109,12 @@ public class VelocityTemplate implements Template {
 				put("line", pee.getLineNumber());
 			}
 
-			unsyncStringWriter.reset();
-
 			handleTemplateContent(_errorTemplateId, _errorTemplateContent);
 
 			try {
 				 _velocityEngine.mergeTemplate(
 					_errorTemplateId, StringPool.UTF8, _velocityContext,
-					unsyncStringWriter);
-
-				unsyncStringWriter.getStringBundler().writeTo(writer);
+					writer);
 
 				return false;
 			}

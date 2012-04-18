@@ -27,9 +27,6 @@ import com.liferay.portal.velocity.VelocityResourceListener;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.GenericPortlet;
@@ -156,44 +153,6 @@ public class VelocityPortlet extends GenericPortlet {
 		}
 	}
 
-	protected Map<String, Object> getVelocityContext(
-		PortletRequest portletRequest, PortletResponse portletResponse) {
-
-		Map<String, Object> velocityContext = new HashMap<String, Object>();
-
-		velocityContext.put("portletConfig", getPortletConfig());
-		velocityContext.put("portletContext", getPortletContext());
-		velocityContext.put("preferences", portletRequest.getPreferences());
-		velocityContext.put(
-			"userInfo", portletRequest.getAttribute(PortletRequest.USER_INFO));
-
-		velocityContext.put("portletRequest", portletRequest);
-
-		if (portletRequest instanceof ActionRequest) {
-			velocityContext.put("actionRequest", portletRequest);
-		}
-		else if (portletRequest instanceof RenderRequest) {
-			velocityContext.put("renderRequest", portletRequest);
-		}
-		else {
-			velocityContext.put("resourceRequest", portletRequest);
-		}
-
-		velocityContext.put("portletResponse", portletResponse);
-
-		if (portletResponse instanceof ActionResponse) {
-			velocityContext.put("actionResponse", portletResponse);
-		}
-		else if (portletRequest instanceof RenderResponse) {
-			velocityContext.put("renderResponse", portletResponse);
-		}
-		else {
-			velocityContext.put("resourceResponse", portletResponse);
-		}
-
-		return velocityContext;
-	}
-
 	protected String getVelocityTemplateId(String name) {
 		if (Validator.isNull(name)) {
 			return name;
@@ -218,12 +177,8 @@ public class VelocityPortlet extends GenericPortlet {
 			TemplateManager.VELOCITY, velocityTemplateId,
 			TemplateContextType.STANDARD);
 
-		Map<String, Object> velocityContext = getVelocityContext(
-			portletRequest, portletResponse);
-
-		for (Map.Entry<String, Object> entry : velocityContext.entrySet()) {
-			velocityTemplate.put(entry.getKey(), entry.getValue());
-		}
+		prepareVelocityContext(
+			velocityTemplate, portletRequest, portletResponse);
 
 		mergeTemplate(
 			velocityTemplateId, velocityTemplate, portletRequest,
@@ -278,6 +233,41 @@ public class VelocityPortlet extends GenericPortlet {
 			}
 			catch (Exception e) {
 			}
+		}
+	}
+
+	protected void prepareVelocityContext(
+		Template velocityTemplate, PortletRequest portletRequest,
+		PortletResponse portletResponse) {
+
+		velocityTemplate.put("portletConfig", getPortletConfig());
+		velocityTemplate.put("portletContext", getPortletContext());
+		velocityTemplate.put("preferences", portletRequest.getPreferences());
+		velocityTemplate.put(
+			"userInfo", portletRequest.getAttribute(PortletRequest.USER_INFO));
+
+		velocityTemplate.put("portletRequest", portletRequest);
+
+		if (portletRequest instanceof ActionRequest) {
+			velocityTemplate.put("actionRequest", portletRequest);
+		}
+		else if (portletRequest instanceof RenderRequest) {
+			velocityTemplate.put("renderRequest", portletRequest);
+		}
+		else {
+			velocityTemplate.put("resourceRequest", portletRequest);
+		}
+
+		velocityTemplate.put("portletResponse", portletResponse);
+
+		if (portletResponse instanceof ActionResponse) {
+			velocityTemplate.put("actionResponse", portletResponse);
+		}
+		else if (portletRequest instanceof RenderResponse) {
+			velocityTemplate.put("renderResponse", portletResponse);
+		}
+		else {
+			velocityTemplate.put("resourceResponse", portletResponse);
 		}
 	}
 

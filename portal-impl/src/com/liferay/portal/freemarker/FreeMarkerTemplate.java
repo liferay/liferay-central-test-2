@@ -18,10 +18,10 @@ import com.liferay.portal.kernel.io.unsync.UnsyncStringWriter;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.Template;
-import com.liferay.portal.kernel.template.TemplateContextHelper;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.template.TemplateContextHelper;
 import com.liferay.portal.util.PropsValues;
 
 import freemarker.core.ParseException;
@@ -98,10 +98,10 @@ public class FreeMarkerTemplate implements Template {
 			}
 		}
 
-		UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter();
-
 		try {
 			template = _configuration.getTemplate(_templateId, StringPool.UTF8);
+
+			UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter();
 
 			template.process(_context, unsyncStringWriter);
 
@@ -129,11 +129,7 @@ public class FreeMarkerTemplate implements Template {
 					template = _configuration.getTemplate(
 						_errorTemplateId, StringPool.UTF8);
 
-					unsyncStringWriter.reset();
-
-					template.process(_context, unsyncStringWriter);
-
-					unsyncStringWriter.getStringBundler().writeTo(writer);
+					template.process(_context, writer);
 				}
 				catch (Exception ex) {
 					throw new TemplateException(
