@@ -45,7 +45,7 @@ public class IconDeleteTag extends IconTag {
 		setImage("delete");
 
 		if (_trash) {
-			setMessage("move-to-recycle-bin");
+			setMessage("move-to-the-recycle-bin");
 		}
 
 		String url = getUrl();

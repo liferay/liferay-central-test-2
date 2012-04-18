@@ -925,14 +925,14 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 				</portlet:renderURL>
 
 				handler: function(event) {
-					if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-move-this-entry-to-recycle-bin") %>')) {
+					if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-move-this-entry-to-the-recycle-bin") %>')) {
 						document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = '<%= Constants.MOVE_TO_TRASH %>';
 						document.<portlet:namespace />fm.<portlet:namespace />redirect.value = '<%= viewFolderURL.toString() %>';
 						submitForm(document.<portlet:namespace />fm);
 					}
 				},
 				icon: 'delete',
-				label: '<%= UnicodeLanguageUtil.get(pageContext, "move-to-recycle-bin") %>'
+				label: '<%= UnicodeLanguageUtil.get(pageContext, "move-to-the-recycle-bin") %>'
 			}
 		);
 	</c:if>
