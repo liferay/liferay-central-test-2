@@ -119,11 +119,10 @@ else if ((searchType == DLSearchConstants.SINGLE) && !ajaxRequest) {
 				<span class="change-search-folder">
 
 					<%
-					String onClick = "Liferay.fire('" + liferayPortletResponse.getNamespace() + "changeSearchFolder', {searchEverywhere: " + (folder != null) + "});";
+					String taglibOnClick = "Liferay.fire('" + liferayPortletResponse.getNamespace() + "changeSearchFolder', {searchEverywhere: " + (folder != null) + "});";
 					%>
 
-					<aui:button onClick='<%= onClick %>' value='<%= (folder != null) ? LanguageUtil.get(pageContext, "search-everywhere") : LanguageUtil.get(pageContext, "search-in-the-current-folder") %>' />
-					<aui:button onClick='<%= onClick %>' value='<%= (folder != null) ? LanguageUtil.get(pageContext, "search-everywhere") : LanguageUtil.get(pageContext, "search-in-the-current-folder") %>' />
+					<aui:button onClick="<%= taglibOnClick %>" value='<%= (folder != null) ? "search-everywhere" : "search-in-the-current-folder" %>' />
 				</span>
 			</c:if>
 
@@ -394,7 +393,7 @@ else if ((searchType == DLSearchConstants.SINGLE) && !ajaxRequest) {
 				paginator: {
 					name: 'entryPaginator',
 					state: {
-						page: <%= total == 0 ? 0 : entryEnd / (entryEnd - entryStart) %>,
+						page: <%= (total == 0) ? 0 : entryEnd / (entryEnd - entryStart) %>,
 						rowsPerPage: <%= (entryEnd - entryStart) %>,
 						total: <%= total %>
 					}
@@ -412,15 +411,14 @@ else if ((searchType == DLSearchConstants.SINGLE) && !ajaxRequest) {
 			<c:when test="<%= showRepositoryTabs %>">
 
 			<%
-				String selectedTab = LanguageUtil.get(pageContext, "local");
+			String selectedTab = LanguageUtil.get(pageContext, "local");
 
-				for (Folder mountFolder : mountFolders) {
-					if (mountFolder.getRepositoryId() == searchRepositoryId) {
-						selectedTab = mountFolder.getName();
-					}
+			for (Folder mountFolder : mountFolders) {
+				if (mountFolder.getRepositoryId() == searchRepositoryId) {
+					selectedTab = mountFolder.getName();
 				}
+			}
 			%>
-
 
 				<div class="search-results-container" id="<portlet:namespace />searchResultsContainer">
 					<liferay-ui:tabs
@@ -432,7 +430,7 @@ else if ((searchType == DLSearchConstants.SINGLE) && !ajaxRequest) {
 							<div class="local-search-results" data-repositoryId="<%= scopeGroupId %>" <%= scopeGroupId == searchRepositoryId ? "data-searchProcessed" : "" %> id="<portlet:namespace />searchResultsContainer<%= scopeGroupId %>">
 								<c:choose>
 									<c:when test="<%= scopeGroupId == searchRepositoryId %>">
-											<%= searchResults %>
+										<%= searchResults %>
 									</c:when>
 									<c:otherwise>
 										<div class="portlet-msg-info">

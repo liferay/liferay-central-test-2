@@ -17,6 +17,8 @@
 <%@ include file="/html/portlet/document_library/init.jsp" %>
 
 <%
+String strutsAction = ParamUtil.getString(request, "struts_action");
+
 Folder folder = (com.liferay.portal.kernel.repository.model.Folder)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FOLDER);
 
 long folderId = BeanParamUtil.getLong(folder, request, "folderId", rootFolderId);
@@ -69,8 +71,6 @@ request.setAttribute("view.jsp-folder", folder);
 request.setAttribute("view.jsp-folderId", String.valueOf(folderId));
 
 request.setAttribute("view.jsp-repositoryId", String.valueOf(repositoryId));
-
-String strutsAction = ParamUtil.getString(request, "struts_action");
 %>
 
 <div id="<portlet:namespace />documentLibraryContainer">
@@ -252,6 +252,7 @@ if (folder != null) {
 				<%
 				}
 				%>
+
 			],
 			rowIds: '<%= RowChecker.ROW_IDS %>',
 			strutsAction: '/document_library/view',
