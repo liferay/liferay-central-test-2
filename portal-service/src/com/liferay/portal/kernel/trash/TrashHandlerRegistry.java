@@ -17,8 +17,8 @@ package com.liferay.portal.kernel.trash;
 import java.util.List;
 
 /**
- * Represents the interface for registering handlers for those entities that
- * can be moved to Trash.
+ * Represents the interface for registering handlers for those entities that can
+ * be moved to Trash.
  *
  * <p>
  * The entities that can be registered are:
@@ -35,12 +35,10 @@ import java.util.List;
 public interface TrashHandlerRegistry {
 
 	/**
-	 * Returns the trash handler associated with the
-	 * class name.
+	 * Returns the trash handler associated with the class name.
 	 *
-	 * @param className class name of the TrashHandler
-	 * @return the trash handler associated with the
-	 * class name
+	 * @param  className class name of the TrashHandler
+	 * @return the trash handler associated with the class name
 	 */
 	public TrashHandler getTrashHandler(String className);
 

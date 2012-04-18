@@ -3171,11 +3171,11 @@ public class PortletImpl extends PortletBaseImpl {
 	}
 
 	/**
-	 * Sets the name of the classes that represent trash handlers associated
-	 * to the portlet.
+	 * Sets the name of the classes that represent trash handlers associated to
+	 * the portlet.
 	 *
-	 * @param trashHandlerClasses the names of the classes that represent
-	 *        trash handlers associated with the portlet
+	 * @param trashHandlerClasses the names of the classes that represent trash
+	 *        handlers associated with the portlet
 	 */
 	public void setTrashHandlerClasses(List<String> trashHandlerClasses) {
 		_trashHandlerClasses = trashHandlerClasses;

@@ -23,7 +23,9 @@ import com.liferay.portlet.asset.model.AssetRendererFactory;
 /**
  * Represents the base class for basic operations with the Trash.
  *
- * <p>The basic operations are:</p>
+ * <p>
+ * The basic operations are:
+ * </p>
  *
  * <ul>
  * <li>
@@ -31,7 +33,7 @@ import com.liferay.portlet.asset.model.AssetRendererFactory;
  * </li>
  * <li>
  * Restore of entries
-* </li>
+ * </li>
  * </ul>
  *
  * @author Alexander Chow

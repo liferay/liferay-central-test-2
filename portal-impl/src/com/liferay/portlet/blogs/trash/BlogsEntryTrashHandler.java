@@ -32,8 +32,9 @@ public class BlogsEntryTrashHandler extends BaseTrashHandler {
 	/**
 	 * Deletes all blogs entries with the matching primary keys.
 	 *
-	 * @param classPKs the primary keys of the blogs entries to be deleted
-	 * @throws PortalException if any one of the blogs entries could not be found
+	 * @param  classPKs the primary keys of the blogs entries to be deleted
+	 * @throws PortalException if any one of the blogs entries could not be
+	 *         found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void deleteTrashEntries(long[] classPKs)
@@ -56,8 +57,9 @@ public class BlogsEntryTrashHandler extends BaseTrashHandler {
 	/**
 	 * Restores all blogs entries with the matching primary keys.
 	 *
-	 * @param classPKs the primary key of the blogs entry to be restored
-	 * @throws PortalException if any one of the blogs entries could not be found
+	 * @param  classPKs the primary key of the blogs entry to be restored
+	 * @throws PortalException if any one of the blogs entries could not be
+	 *         found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void restoreTrashEntries(long[] classPKs)

@@ -33,7 +33,7 @@ public class DLFileEntryTrashHandler extends BaseTrashHandler {
 	/**
 	 * Deletes all file entries with the matching primary keys.
 	 *
-	 * @param classPKs the primary keys of the file entries to be deleted
+	 * @param  classPKs the primary keys of the file entries to be deleted
 	 * @throws PortalException if any one of the file entries could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -57,7 +57,7 @@ public class DLFileEntryTrashHandler extends BaseTrashHandler {
 	/**
 	 * Restores all file entries with the matching primary keys.
 	 *
-	 * @param classPKs the primary keys of the file entries to be deleted
+	 * @param  classPKs the primary keys of the file entries to be deleted
 	 * @throws PortalException if any one of the file entries could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
