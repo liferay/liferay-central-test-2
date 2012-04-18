@@ -52,13 +52,13 @@ public class EditEntryAction extends PortletAction {
 
 		try {
 			if (cmd.equals(Constants.DELETE)) {
-				deleteTrashEntries(actionRequest);
-			}
-			else if (cmd.equals(Constants.RESTORE)) {
-				restoreTrashEntries(actionRequest);
+				deleteEntries(actionRequest);
 			}
 			else if (cmd.equals(Constants.EMPTY_TRASH)) {
 				emptyTrash(actionRequest);
+			}
+			else if (cmd.equals(Constants.RESTORE)) {
+				restoreEntries(actionRequest);
 			}
 
 			sendRedirect(actionRequest, actionResponse);
@@ -78,32 +78,29 @@ public class EditEntryAction extends PortletAction {
 			getForward(renderRequest, "portlet.trash.view"));
 	}
 
-	protected void deleteTrashEntries(ActionRequest actionRequest)
-		throws Exception {
+	protected void deleteEntries(ActionRequest actionRequest) throws Exception {
+		long entryId = ParamUtil.getLong(actionRequest, "entryId");
 
-		long trashEntryId = ParamUtil.getLong(actionRequest, "trashEntryId");
-
-		if (trashEntryId > 0) {
-			deleteTrashEntry(trashEntryId);
+		if (entryId > 0) {
+			deleteEntry(entryId);
 		}
 		else {
-			long[] deleteTrashEntryIds = StringUtil.split(
+			long[] deleteEntryIds = StringUtil.split(
 				ParamUtil.getString(actionRequest, "deleteEntryIds"), 0L);
 
-			for (int i = 0; i < deleteTrashEntryIds.length; i++) {
-				deleteTrashEntry(deleteTrashEntryIds[i]);
+			for (int i = 0; i < deleteEntryIds.length; i++) {
+				deleteEntry(deleteEntryIds[i]);
 			}
 		}
 	}
 
-	protected void deleteTrashEntry(long trashEntryId) throws Exception {
-		TrashEntry trashEntry = TrashEntryLocalServiceUtil.getTrashEntry(
-			trashEntryId);
+	protected void deleteEntry(long entryId) throws Exception {
+		TrashEntry entry = TrashEntryLocalServiceUtil.getTrashEntry(entryId);
 
 		TrashHandler trashHandler = TrashHandlerRegistryUtil.getTrashHandler(
-			trashEntry.getClassName());
+			entry.getClassName());
 
-		trashHandler.deleteTrashEntry(trashEntry.getClassPK());
+		trashHandler.deleteTrashEntry(entry.getClassPK());
 	}
 
 	protected void emptyTrash(ActionRequest actionRequest) throws Exception {
@@ -113,32 +110,31 @@ public class EditEntryAction extends PortletAction {
 		TrashEntryServiceUtil.deleteEntries(themeDisplay.getScopeGroupId());
 	}
 
-	protected void restoreTrashEntries(ActionRequest actionRequest)
+	protected void restoreEntries(ActionRequest actionRequest)
 		throws Exception {
 
-		long trashEntryIds = ParamUtil.getLong(actionRequest, "trashEntryId");
+		long entryId = ParamUtil.getLong(actionRequest, "entryId");
 
-		if (trashEntryIds > 0) {
-			restoreTrashEntry(trashEntryIds);
+		if (entryId > 0) {
+			restoreEntry(entryId);
 		}
 		else {
-			long[] restoreTrashEntryIds = StringUtil.split(
+			long[] restoreEntryIds = StringUtil.split(
 				ParamUtil.getString(actionRequest, "restoreEntryIds"), 0L);
 
-			for (int i = 0; i < restoreTrashEntryIds.length; i++) {
-				restoreTrashEntry(restoreTrashEntryIds[i]);
+			for (int i = 0; i < restoreEntryIds.length; i++) {
+				restoreEntry(restoreEntryIds[i]);
 			}
 		}
 	}
 
-	protected void restoreTrashEntry(long trashEntryId) throws Exception {
-		TrashEntry trashEntry = TrashEntryLocalServiceUtil.getTrashEntry(
-			trashEntryId);
+	protected void restoreEntry(long entryId) throws Exception {
+		TrashEntry entry = TrashEntryLocalServiceUtil.getTrashEntry(entryId);
 
 		TrashHandler trashHandler = TrashHandlerRegistryUtil.getTrashHandler(
-			trashEntry.getClassName());
+			entry.getClassName());
 
-		trashHandler.restoreTrashEntry(trashEntry.getClassPK());
+		trashHandler.restoreTrashEntry(entry.getClassPK());
 	}
 
 }

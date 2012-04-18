@@ -23,7 +23,7 @@ String redirect = searchContainer.getIteratorURL().toString();
 
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
-TrashEntry trashEntry = (TrashEntry)row.getObject();
+TrashEntry entry = (TrashEntry)row.getObject();
 %>
 
 <liferay-ui:icon-menu>
@@ -31,7 +31,7 @@ TrashEntry trashEntry = (TrashEntry)row.getObject();
 		<portlet:param name="struts_action" value="/trash/edit_entry" />
 		<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.RESTORE %>" />
 		<portlet:param name="redirect" value="<%= redirect %>" />
-		<portlet:param name="trashEntryId" value="<%= String.valueOf(trashEntry.getEntryId()) %>" />
+		<portlet:param name="entryId" value="<%= String.valueOf(entry.getEntryId()) %>" />
 	</portlet:actionURL>
 
 	<liferay-ui:icon
@@ -44,7 +44,7 @@ TrashEntry trashEntry = (TrashEntry)row.getObject();
 		<portlet:param name="struts_action" value="/trash/edit_entry" />
 		<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 		<portlet:param name="redirect" value="<%= redirect %>" />
-		<portlet:param name="trashEntryId" value="<%= String.valueOf(trashEntry.getEntryId()) %>" />
+		<portlet:param name="entryId" value="<%= String.valueOf(entry.getEntryId()) %>" />
 	</portlet:actionURL>
 
 	<liferay-ui:icon
