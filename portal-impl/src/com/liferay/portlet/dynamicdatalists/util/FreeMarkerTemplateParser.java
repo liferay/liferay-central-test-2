@@ -41,7 +41,7 @@ public class FreeMarkerTemplateParser extends
 	@Override
 	protected TemplateContext getTemplateContext() throws Exception {
 		return TemplateManagerUtil.getTemplate(
-			TemplateManager.FREE_MARKER, getTemplateId(), getScript(),
+			TemplateManager.FREEMARKER, getTemplateId(), getScript(),
 			getErrorTemplateId(), getErrorTemplateContent(),
 			TemplateContextType.STANDARD);
 	}

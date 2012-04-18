@@ -164,7 +164,7 @@ public class ThemeHelper {
 
 		if (extension.equals(TEMPLATE_EXTENSION_FTL)) {
 			return TemplateManagerUtil.hasTemplate(
-				TemplateManager.FREE_MARKER, resourcePath);
+				TemplateManager.FREEMARKER, resourcePath);
 		}
 		else if (extension.equals(TEMPLATE_EXTENSION_VM)) {
 			return TemplateManagerUtil.hasTemplate(

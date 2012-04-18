@@ -67,15 +67,15 @@ public class RuntimePageImpl implements RuntimePage {
 		CustomizationSettingsProcessor processor =
 			new CustomizationSettingsProcessor(pageContext);
 
-		Template velocityTemplate = TemplateManagerUtil.getTemplate(
+		Template template = TemplateManagerUtil.getTemplate(
 			TemplateManager.VELOCITY, velocityTemplateId,
 			velocityTemplateContent, TemplateContextType.STANDARD);
 
-		velocityTemplate.put("processor", processor);
+		template.put("processor", processor);
 
 		// Velocity variables
 
-		velocityTemplate.prepare(request);
+		template.prepare(request);
 
 		// liferay:include tag library
 
@@ -85,11 +85,11 @@ public class RuntimePageImpl implements RuntimePage {
 
 		Object velocityTaglib = methodHandler.invoke(true);
 
-		velocityTemplate.put("taglibLiferay", velocityTaglib);
-		velocityTemplate.put("theme", velocityTaglib);
+		template.put("taglibLiferay", velocityTaglib);
+		template.put("theme", velocityTaglib);
 
 		try {
-			velocityTemplate.processTemplate(pageContext.getOut());
+			template.processTemplate(pageContext.getOut());
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -124,15 +124,15 @@ public class RuntimePageImpl implements RuntimePage {
 		TemplateProcessor processor = new TemplateProcessor(
 			request, response, portletId);
 
-		Template velocityTemplate = TemplateManagerUtil.getTemplate(
+		Template template = TemplateManagerUtil.getTemplate(
 			TemplateManager.VELOCITY, velocityTemplateId,
 			velocityTemplateContent, TemplateContextType.STANDARD);
 
-		velocityTemplate.put("processor", processor);
+		template.put("processor", processor);
 
 		// Velocity variables
 
-		velocityTemplate.prepare(request);
+		template.prepare(request);
 
 		// liferay:include tag library
 
@@ -145,11 +145,11 @@ public class RuntimePageImpl implements RuntimePage {
 
 		Object velocityTaglib = methodHandler.invoke(true);
 
-		velocityTemplate.put("taglibLiferay", velocityTaglib);
-		velocityTemplate.put("theme", velocityTaglib);
+		template.put("taglibLiferay", velocityTaglib);
+		template.put("theme", velocityTaglib);
 
 		try {
-			velocityTemplate.processTemplate(unsyncStringWriter);
+			template.processTemplate(unsyncStringWriter);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

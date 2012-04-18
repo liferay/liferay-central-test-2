@@ -42,8 +42,10 @@ public class VelocityManager implements TemplateManager {
 			StringResourceLoader.getRepository();
 
 		if (stringResourceRepository != null) {
-			((StringResourceRepositoryImpl)stringResourceRepository).removeAll(
-				);
+			StringResourceRepositoryImpl stringResourceRepositoryImpl =
+				(StringResourceRepositoryImpl)stringResourceRepository;
+
+			stringResourceRepositoryImpl.removeAll();
 		}
 
 		LiferayResourceCacheUtil.removeAll();
@@ -60,39 +62,36 @@ public class VelocityManager implements TemplateManager {
 		LiferayResourceCacheUtil.remove(templateId);
 	}
 
-	public void destroy()throws TemplateException {
-		_restrictedContext = null;
-		_standardContext = null;
+	public void destroy() {
+		_restrictedVelocityContext = null;
+		_standardVelocityContext = null;
 		_velocityEngine = null;
 		_templateContextHelper = null;
-	}
-
-	public String getManagerName() {
-		return VELOCITY;
 	}
 
 	public Template getTemplate(
 		String templateId, String templateContent, String errorTemplateId,
 		String errorTemplateContent, TemplateContextType templateContextType) {
 
-		switch(templateContextType) {
-			case EMPTY:
-				return new VelocityTemplate(
-						templateId, templateContent, errorTemplateId,
-						errorTemplateContent, null, _velocityEngine,
-						_templateContextHelper);
-			case RESTRICTED:
-				return new RestrictedTemplate(
-					new VelocityTemplate(
-						templateId, templateContent, errorTemplateId,
-						errorTemplateContent, _restrictedContext,
-						_velocityEngine, _templateContextHelper),
-					_templateContextHelper.getRestrictedVariables());
-			case STANDARD:
-				return new VelocityTemplate(
-						templateId, templateContent, errorTemplateId,
-						errorTemplateContent, _standardContext, _velocityEngine,
-						_templateContextHelper);
+		if (templateContextType.equals(TemplateContextType.EMPTY)) {
+			return new VelocityTemplate(
+				templateId, templateContent, errorTemplateId,
+				errorTemplateContent, null, _velocityEngine,
+				_templateContextHelper);
+		}
+		else if (templateContextType.equals(TemplateContextType.RESTRICTED)) {
+			return new RestrictedTemplate(
+				new VelocityTemplate(
+					templateId, templateContent, errorTemplateId,
+					errorTemplateContent, _restrictedVelocityContext,
+					_velocityEngine, _templateContextHelper),
+				_templateContextHelper.getRestrictedVariables());
+		}
+		else if (templateContextType.equals(TemplateContextType.STANDARD)) {
+			return new VelocityTemplate(
+				templateId, templateContent, errorTemplateId,
+				errorTemplateContent, _standardVelocityContext, _velocityEngine,
+				_templateContextHelper);
 		}
 
 		return null;
@@ -119,6 +118,10 @@ public class VelocityManager implements TemplateManager {
 		String templateId, TemplateContextType templateContextType) {
 
 		return getTemplate(templateId, null, null, null, templateContextType);
+	}
+
+	public String getTemplateManagerName() {
+		return VELOCITY;
 	}
 
 	public boolean hasTemplate(String templateId) {
@@ -200,21 +203,21 @@ public class VelocityManager implements TemplateManager {
 			throw new TemplateException(e);
 		}
 
-		_restrictedContext = new VelocityContext();
+		_restrictedVelocityContext = new VelocityContext();
 
 		Map<String, Object> helperUtilities =
 			_templateContextHelper.getRestrictedHelperUtilities();
 
 		for (Map.Entry<String, Object> entry : helperUtilities.entrySet()) {
-			_restrictedContext.put(entry.getKey(), entry.getValue());
+			_restrictedVelocityContext.put(entry.getKey(), entry.getValue());
 		}
 
-		_standardContext = new VelocityContext();
+		_standardVelocityContext = new VelocityContext();
 
 		helperUtilities = _templateContextHelper.getHelperUtilities();
 
 		for (Map.Entry<String, Object> entry : helperUtilities.entrySet()) {
-			_standardContext.put(entry.getKey(), entry.getValue());
+			_standardVelocityContext.put(entry.getKey(), entry.getValue());
 		}
 	}
 
@@ -227,8 +230,8 @@ public class VelocityManager implements TemplateManager {
 	private static final String _RESOURCE_LOADER =
 		VelocityEngine.RESOURCE_LOADER;
 
-	private VelocityContext _restrictedContext;
-	private VelocityContext _standardContext;
+	private VelocityContext _restrictedVelocityContext;
+	private VelocityContext _standardVelocityContext;
 	private TemplateContextHelper _templateContextHelper;
 	private VelocityEngine _velocityEngine;
 

@@ -196,7 +196,7 @@ public class GlobalShutdownAction extends SimpleAction {
 			e.printStackTrace();
 		}
 
-		// Template Manager
+		// Template manager
 
 		try {
 			TemplateManagerUtil.destroy();

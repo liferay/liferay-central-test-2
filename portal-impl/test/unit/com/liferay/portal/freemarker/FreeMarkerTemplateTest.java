@@ -15,6 +15,7 @@
 package com.liferay.portal.freemarker;
 
 import com.liferay.portal.kernel.io.unsync.UnsyncStringWriter;
+import com.liferay.portal.kernel.template.Template;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.templateparser.TemplateContext;
 import com.liferay.portal.kernel.util.StringPool;
@@ -48,9 +49,13 @@ public class FreeMarkerTemplateTest extends TestCase {
 
 	@Override
 	public void setUp() throws Exception {
-		_templateContextHelper = new MockTemplateContextHelper();
-		_stringTemplateLoader = new StringTemplateLoader();
 		_configuration = new Configuration();
+
+		_configuration.setLocalizedLookup(false);
+
+		_templateContextHelper = new MockTemplateContextHelper();
+
+		_stringTemplateLoader = new StringTemplateLoader();
 
 		MultiTemplateLoader multiTemplateLoader =
 			new MultiTemplateLoader(
@@ -60,20 +65,17 @@ public class FreeMarkerTemplateTest extends TestCase {
 					_stringTemplateLoader, new MockTemplateLoader()
 				});
 
-		_configuration.setLocalizedLookup(false);
 		_configuration.setTemplateLoader(multiTemplateLoader);
 	}
 
 	public void testGet() throws Exception {
-		FreeMarkerTemplate freeMarkerTemplate = new FreeMarkerTemplate(
+		Template template = new FreeMarkerTemplate(
 			_TEMPLATE_FILE_NAME, null, null, null, null, _configuration,
 			_templateContextHelper, _stringTemplateLoader);
 
-		String testValue = "testValue";
+		template.put(_TEST_KEY, _TEST_VALUE);
 
-		freeMarkerTemplate.put(_TEST_KEY, testValue);
-
-		Object result = freeMarkerTemplate.get(_TEST_KEY);
+		Object result = template.get(_TEST_KEY);
 
 		assertNotNull(result);
 
@@ -81,21 +83,19 @@ public class FreeMarkerTemplateTest extends TestCase {
 
 		String stringResult = (String)result;
 
-		assertEquals(testValue, stringResult);
+		assertEquals(_TEST_VALUE, stringResult);
 	}
 
 	public void testPrepare() throws Exception {
-		String testValue = "testValue";
-
-		FreeMarkerTemplate freeMarkerTemplate = new FreeMarkerTemplate(
+		Template template = new FreeMarkerTemplate(
 			_TEMPLATE_FILE_NAME, null, null, null, null, _configuration,
 			_templateContextHelper, _stringTemplateLoader);
 
-		freeMarkerTemplate.put(_TEST_KEY, testValue);
+		template.put(_TEST_KEY, _TEST_VALUE);
 
-		freeMarkerTemplate.prepare(null);
+		template.prepare(null);
 
-		Object result = freeMarkerTemplate.get(testValue);
+		Object result = template.get(_TEST_VALUE);
 
 		assertNotNull(result);
 
@@ -103,41 +103,36 @@ public class FreeMarkerTemplateTest extends TestCase {
 
 		String stringResult = (String)result;
 
-		assertEquals(testValue, stringResult);
+		assertEquals(_TEST_VALUE, stringResult);
 	}
 
 	public void testProcessTemplate1() throws Exception {
-		String testValue = "testValue";
-
-		FreeMarkerTemplate freeMarkerTemplate = new FreeMarkerTemplate(
+		Template template = new FreeMarkerTemplate(
 			_TEMPLATE_FILE_NAME, null, null, null, null, _configuration,
 			_templateContextHelper, _stringTemplateLoader);
 
-		freeMarkerTemplate.put(_TEST_KEY, testValue);
+		template.put(_TEST_KEY, _TEST_VALUE);
 
 		UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter();
 
-		freeMarkerTemplate.processTemplate(unsyncStringWriter);
+		template.processTemplate(unsyncStringWriter);
 
 		String result = unsyncStringWriter.toString();
 
-		assertEquals(testValue, result);
+		assertEquals(_TEST_VALUE, result);
 	}
 
 	public void testProcessTemplate2() throws Exception {
-		String templateId = "wrongTemplateId";
-		String testValue = "testValue";
-
-		FreeMarkerTemplate freeMarkerTemplate = new FreeMarkerTemplate(
-			templateId, null, null, null, null, _configuration,
+		Template template = new FreeMarkerTemplate(
+			_WRONG_TEMPLATE_ID, null, null, null, null, _configuration,
 			_templateContextHelper, _stringTemplateLoader);
 
-		freeMarkerTemplate.put(_TEST_KEY, testValue);
+		template.put(_TEST_KEY, _TEST_VALUE);
 
 		UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter();
 
 		try {
-			freeMarkerTemplate.processTemplate(unsyncStringWriter);
+			template.processTemplate(unsyncStringWriter);
 
 			fail();
 		}
@@ -145,7 +140,7 @@ public class FreeMarkerTemplateTest extends TestCase {
 			if (e instanceof TemplateException) {
 				String message = e.getMessage();
 
-				assertTrue(message.contains(templateId));
+				assertTrue(message.contains(_WRONG_TEMPLATE_ID));
 
 				return;
 			}
@@ -155,77 +150,64 @@ public class FreeMarkerTemplateTest extends TestCase {
 	}
 
 	public void testProcessTemplate3() throws Exception {
-		String templateId = "wrongTemplateId";
-		String testValue = "testValue";
-
-		FreeMarkerTemplate freeMarkerTemplate = new FreeMarkerTemplate(
-			templateId, _TEST_TEMPLATE_CONTENT, null, null, null,
+		Template template = new FreeMarkerTemplate(
+			_WRONG_TEMPLATE_ID, _TEST_TEMPLATE_CONTENT, null, null, null,
 			_configuration, _templateContextHelper, _stringTemplateLoader);
 
-		freeMarkerTemplate.put(_TEST_KEY, testValue);
+		template.put(_TEST_KEY, _TEST_VALUE);
 
 		UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter();
 
-		freeMarkerTemplate.processTemplate(unsyncStringWriter);
+		template.processTemplate(unsyncStringWriter);
 
 		String result = unsyncStringWriter.toString();
 
-		assertEquals(testValue, result);
+		assertEquals(_TEST_VALUE, result);
 	}
 
 	public void testProcessTemplate4() throws Exception {
-		String errorTemplateId = "wrongTemplateId";
-		String testValue = "testValue";
-
-		FreeMarkerTemplate freeMarkerTemplate = new FreeMarkerTemplate(
-			_TEMPLATE_FILE_NAME, null, errorTemplateId, null, null,
+		Template template = new FreeMarkerTemplate(
+			_TEMPLATE_FILE_NAME, null, _WRONG_ERROR_TEMPLATE_ID, null, null,
 			_configuration, _templateContextHelper, _stringTemplateLoader);
 
-		freeMarkerTemplate.put(_TEST_KEY, testValue);
+		template.put(_TEST_KEY, _TEST_VALUE);
 
 		UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter();
 
-		freeMarkerTemplate.processTemplate(unsyncStringWriter);
+		template.processTemplate(unsyncStringWriter);
 
 		String result = unsyncStringWriter.toString();
 
-		assertEquals(testValue, result);
+		assertEquals(_TEST_VALUE, result);
 	}
 
 	public void testProcessTemplate5() throws Exception {
-		String templateId = "wrongTemplateId";
-		String testValue = "testValue";
+		Template template = new FreeMarkerTemplate(
+			_WRONG_TEMPLATE_ID, null, _TEMPLATE_FILE_NAME, null, null,
+			_configuration, _templateContextHelper, _stringTemplateLoader);
 
-		FreeMarkerTemplate freeMarkerTemplate = new FreeMarkerTemplate(
-			templateId, null, _TEMPLATE_FILE_NAME, null, null, _configuration,
-			_templateContextHelper, _stringTemplateLoader);
-
-		freeMarkerTemplate.put(_TEST_KEY, testValue);
+		template.put(_TEST_KEY, _TEST_VALUE);
 
 		UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter();
 
-		freeMarkerTemplate.processTemplate(unsyncStringWriter);
+		template.processTemplate(unsyncStringWriter);
 
 		String result = unsyncStringWriter.toString();
 
-		assertEquals(testValue, result);
+		assertEquals(_TEST_VALUE, result);
 	}
 
 	public void testProcessTemplate6() throws Exception {
-		String templateId = "wrongTemplateId1";
-		String errorTemplateId = "wrongTemplateId2";
-		String testValue = "testValue";
+		Template template = new FreeMarkerTemplate(
+			_WRONG_TEMPLATE_ID, null, _WRONG_ERROR_TEMPLATE_ID, null, null,
+			_configuration, _templateContextHelper, _stringTemplateLoader);
 
-		FreeMarkerTemplate freeMarkerTemplate = new FreeMarkerTemplate(
-			templateId, null, errorTemplateId, null, null, _configuration,
-			_templateContextHelper, _stringTemplateLoader);
-
-		freeMarkerTemplate.put(_TEST_KEY, testValue);
+		template.put(_TEST_KEY, _TEST_VALUE);
 
 		UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter();
 
 		try {
-			freeMarkerTemplate.processTemplate(unsyncStringWriter);
+			template.processTemplate(unsyncStringWriter);
 
 			fail();
 		}
@@ -233,7 +215,7 @@ public class FreeMarkerTemplateTest extends TestCase {
 			if (e instanceof TemplateException) {
 				String message = e.getMessage();
 
-				assertTrue(message.contains(errorTemplateId));
+				assertTrue(message.contains(_WRONG_ERROR_TEMPLATE_ID));
 
 				return;
 			}
@@ -243,48 +225,52 @@ public class FreeMarkerTemplateTest extends TestCase {
 	}
 
 	public void testProcessTemplate7() throws Exception {
-		String templateId = "wrongTemplateId1";
-		String errorTemplateId = "wrongTemplateId2";
-		String testValue = "testValue";
+		Template template = new FreeMarkerTemplate(
+			_WRONG_TEMPLATE_ID, null, _WRONG_ERROR_TEMPLATE_ID,
+			_TEST_TEMPLATE_CONTENT, null, _configuration,
+			_templateContextHelper, _stringTemplateLoader);
 
-		FreeMarkerTemplate freeMarkerTemplate = new FreeMarkerTemplate(
-			templateId, null, errorTemplateId, _TEST_TEMPLATE_CONTENT, null,
-			_configuration, _templateContextHelper, _stringTemplateLoader);
-
-		freeMarkerTemplate.put(_TEST_KEY, testValue);
+		template.put(_TEST_KEY, _TEST_VALUE);
 
 		UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter();
 
-		freeMarkerTemplate.processTemplate(unsyncStringWriter);
+		template.processTemplate(unsyncStringWriter);
 
 		String result = unsyncStringWriter.toString();
 
-		assertEquals(testValue, result);
+		assertEquals(_TEST_VALUE, result);
 	}
 
 	public void testProcessTemplate8() throws Exception {
-		String testValue = "testValue";
-
 		Map<String, Object> context = new HashMap<String, Object>();
 
-		context.put(_TEST_KEY, testValue);
+		context.put(_TEST_KEY, _TEST_VALUE);
 
-		FreeMarkerTemplate freeMarkerTemplate = new FreeMarkerTemplate(
+		Template template = new FreeMarkerTemplate(
 			_TEMPLATE_FILE_NAME, null, null, null, context, _configuration,
 			_templateContextHelper, _stringTemplateLoader);
 
 		UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter();
 
-		freeMarkerTemplate.processTemplate(unsyncStringWriter);
+		template.processTemplate(unsyncStringWriter);
 
 		String result = unsyncStringWriter.toString();
 
-		assertEquals(testValue, result);
+		assertEquals(_TEST_VALUE, result);
 	}
 
 	private static final String _TEMPLATE_FILE_NAME = "test.ftl";
+
 	private static final String _TEST_KEY = "TEST_KEY";
-	private static final String _TEST_TEMPLATE_CONTENT = "${"+ _TEST_KEY +"}";
+
+	private static final String _TEST_TEMPLATE_CONTENT = "${" + _TEST_KEY + "}";
+
+	private static final String _TEST_VALUE = "TEST_VALUE";
+
+	private static final String _WRONG_ERROR_TEMPLATE_ID =
+		"WRONG_ERROR_TEMPLATE_ID";
+
+	private static final String _WRONG_TEMPLATE_ID = "WRONG_TEMPLATE_ID";
 
 	private Configuration _configuration;
 	private StringTemplateLoader _stringTemplateLoader;
@@ -309,8 +295,7 @@ public class FreeMarkerTemplateTest extends TestCase {
 
 		@Override
 		public void prepare(
-				TemplateContext templateContext, HttpServletRequest request)
-			throws TemplateException {
+			TemplateContext templateContext, HttpServletRequest request) {
 
 			String testValue = (String)templateContext.get(_TEST_KEY);
 
@@ -321,27 +306,32 @@ public class FreeMarkerTemplateTest extends TestCase {
 
 	private class MockTemplateLoader implements TemplateLoader {
 
-		public Object findTemplateSource(String string) throws IOException {
-			if (_TEMPLATE_FILE_NAME.equals(string)) {
+		public void closeTemplateSource(Object templateSource) {
+		}
+
+		public Object findTemplateSource(String name) throws IOException {
+			if (_TEMPLATE_FILE_NAME.equals(name)) {
 				return _TEMPLATE_FILE_NAME;
 			}
 
-			throw new ParseException("Unable to find template" + string, 0, 0);
+			throw new ParseException(
+				"Unable to find template source " + name, 0, 0);
 		}
 
-		public long getLastModified(Object o) {
+		public long getLastModified(Object templateSource) {
 			return 0;
 		}
 
-		public Reader getReader(Object o, String string) throws IOException {
-			if (o == _TEMPLATE_FILE_NAME) {
+		public Reader getReader(Object templateSource, String encoding)
+			throws IOException {
+
+			if (templateSource == _TEMPLATE_FILE_NAME) {
 				return new StringReader(_TEST_TEMPLATE_CONTENT);
 			}
 
-			throw new ParseException("Unable to find template" + string, 0, 0);
-		}
-
-		public void closeTemplateSource(Object o) throws IOException {
+			throw new ParseException(
+				"Unable to get reader for template source " + templateSource, 0,
+				0);
 		}
 
 	}

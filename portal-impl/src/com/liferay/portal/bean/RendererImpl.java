@@ -138,17 +138,17 @@ public class RendererImpl implements Renderer {
 		}
 
 		try {
-			Template velocityTemplate = TemplateManagerUtil.getTemplate(
+			Template template = TemplateManagerUtil.getTemplate(
 				TemplateManager.VELOCITY, className, velocityTemplateContent,
 				TemplateContextType.STANDARD);
 
-			velocityTemplate.prepare(request);
+			template.prepare(request);
 
-			velocityTemplate.put(_BEAN, bean);
+			template.put(_BEAN, bean);
 
 			UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter();
 
-			velocityTemplate.processTemplate(unsyncStringWriter);
+			template.processTemplate(unsyncStringWriter);
 
 			return unsyncStringWriter.toString();
 		}

@@ -104,16 +104,12 @@ public class VelocityPortlet extends GenericPortlet {
 
 		_portletContextName = portletContext.getPortletContextName();
 
-		_actionTemplateId = getVelocityTemplateId(
-			getInitParameter("action-template"));
-		_editTemplateId = getVelocityTemplateId(
-			getInitParameter("edit-template"));
-		_helpTemplateId = getVelocityTemplateId(
-			getInitParameter("help-template"));
-		_resourceTemplateId = getVelocityTemplateId(
+		_actionTemplateId = getTemplateId(getInitParameter("action-template"));
+		_editTemplateId = getTemplateId(getInitParameter("edit-template"));
+		_helpTemplateId = getTemplateId(getInitParameter("help-template"));
+		_resourceTemplateId = getTemplateId(
 			getInitParameter("resource-template"));
-		_viewTemplateId = getVelocityTemplateId(
-			getInitParameter("view-template"));
+		_viewTemplateId = getTemplateId(getInitParameter("view-template"));
 	}
 
 	@Override
@@ -153,7 +149,7 @@ public class VelocityPortlet extends GenericPortlet {
 		}
 	}
 
-	protected String getVelocityTemplateId(String name) {
+	protected String getTemplateId(String name) {
 		if (Validator.isNull(name)) {
 			return name;
 		}
@@ -169,25 +165,21 @@ public class VelocityPortlet extends GenericPortlet {
 	}
 
 	protected void mergeTemplate(
-			String velocityTemplateId, PortletRequest portletRequest,
+			String templateId, PortletRequest portletRequest,
 			PortletResponse portletResponse)
 		throws Exception {
 
-		Template velocityTemplate = TemplateManagerUtil.getTemplate(
-			TemplateManager.VELOCITY, velocityTemplateId,
-			TemplateContextType.STANDARD);
+		Template template = TemplateManagerUtil.getTemplate(
+			TemplateManager.VELOCITY, templateId, TemplateContextType.STANDARD);
 
-		prepareVelocityContext(
-			velocityTemplate, portletRequest, portletResponse);
+		prepareTemplate(template, portletRequest, portletResponse);
 
-		mergeTemplate(
-			velocityTemplateId, velocityTemplate, portletRequest,
-			portletResponse);
+		mergeTemplate(templateId, template, portletRequest, portletResponse);
 	}
 
 	protected void mergeTemplate(
-			String velocityTemplateId, Template velocityTemplate,
-			PortletRequest portletRequest, PortletResponse portletResponse)
+			String templateId, Template template, PortletRequest portletRequest,
+			PortletResponse portletResponse)
 		throws Exception {
 
 		if (portletResponse instanceof MimeResponse) {
@@ -220,7 +212,7 @@ public class VelocityPortlet extends GenericPortlet {
 				velocityWriter.recycle(output);
 			}
 
-			velocityTemplate.processTemplate(velocityWriter);
+			template.processTemplate(velocityWriter);
 		}
 		finally {
 			try {
@@ -236,38 +228,38 @@ public class VelocityPortlet extends GenericPortlet {
 		}
 	}
 
-	protected void prepareVelocityContext(
-		Template velocityTemplate, PortletRequest portletRequest,
+	protected void prepareTemplate(
+		Template template, PortletRequest portletRequest,
 		PortletResponse portletResponse) {
 
-		velocityTemplate.put("portletConfig", getPortletConfig());
-		velocityTemplate.put("portletContext", getPortletContext());
-		velocityTemplate.put("preferences", portletRequest.getPreferences());
-		velocityTemplate.put(
+		template.put("portletConfig", getPortletConfig());
+		template.put("portletContext", getPortletContext());
+		template.put("preferences", portletRequest.getPreferences());
+		template.put(
 			"userInfo", portletRequest.getAttribute(PortletRequest.USER_INFO));
 
-		velocityTemplate.put("portletRequest", portletRequest);
+		template.put("portletRequest", portletRequest);
 
 		if (portletRequest instanceof ActionRequest) {
-			velocityTemplate.put("actionRequest", portletRequest);
+			template.put("actionRequest", portletRequest);
 		}
 		else if (portletRequest instanceof RenderRequest) {
-			velocityTemplate.put("renderRequest", portletRequest);
+			template.put("renderRequest", portletRequest);
 		}
 		else {
-			velocityTemplate.put("resourceRequest", portletRequest);
+			template.put("resourceRequest", portletRequest);
 		}
 
-		velocityTemplate.put("portletResponse", portletResponse);
+		template.put("portletResponse", portletResponse);
 
 		if (portletResponse instanceof ActionResponse) {
-			velocityTemplate.put("actionResponse", portletResponse);
+			template.put("actionResponse", portletResponse);
 		}
 		else if (portletRequest instanceof RenderResponse) {
-			velocityTemplate.put("renderResponse", portletResponse);
+			template.put("renderResponse", portletResponse);
 		}
 		else {
-			velocityTemplate.put("resourceResponse", portletResponse);
+			template.put("resourceResponse", portletResponse);
 		}
 	}
 

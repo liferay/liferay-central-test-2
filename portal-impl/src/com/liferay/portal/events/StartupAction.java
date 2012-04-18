@@ -113,7 +113,7 @@ public class StartupAction extends SimpleAction {
 			System.setSecurityManager(null);
 		}
 
-		// TemplateManager
+		// Template manager
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Initialize template manager");

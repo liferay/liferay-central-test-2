@@ -58,7 +58,7 @@ public class FreeMarkerManager implements TemplateManager {
 		portalCache.remove(templateId);
 	}
 
-	public void destroy() throws TemplateException {
+	public void destroy() {
 		if (_configuration == null) {
 			return;
 		}
@@ -66,48 +66,48 @@ public class FreeMarkerManager implements TemplateManager {
 		_configuration.clearEncodingMap();
 		_configuration.clearSharedVariables();
 		_configuration.clearTemplateCache();
+
 		_configuration = null;
 
 		_restrictedHelperUtilities.clear();
+
 		_restrictedHelperUtilities = null;
 
 		_standardHelperUtilities.clear();
+
 		_standardHelperUtilities = null;
 
 		_stringTemplateLoader.removeTemplates();
+
 		_stringTemplateLoader = null;
 
 		_templateContextHelper = null;
-	}
-
-	public String getManagerName() {
-		return TemplateManager.FREE_MARKER;
 	}
 
 	public Template getTemplate(
 		String templateId, String templateContent, String errorTemplateId,
 		String errorTemplateContent, TemplateContextType templateContextType) {
 
-		switch(templateContextType) {
-			case EMPTY:
-				return new FreeMarkerTemplate(
-						templateId, templateContent, errorTemplateId,
-						errorTemplateContent, null, _configuration,
-						_templateContextHelper, _stringTemplateLoader);
-			case RESTRICTED:
-				return new RestrictedTemplate(
-					new FreeMarkerTemplate(
-						templateId, templateContent, errorTemplateId,
-						errorTemplateContent, _restrictedHelperUtilities,
-						_configuration, _templateContextHelper,
-						_stringTemplateLoader),
-					_templateContextHelper.getRestrictedVariables());
-			case STANDARD:
-				return new FreeMarkerTemplate(
-						templateId, templateContent, errorTemplateId,
-						errorTemplateContent, _standardHelperUtilities,
-						_configuration, _templateContextHelper,
-						_stringTemplateLoader);
+		if (templateContextType.equals(TemplateContextType.EMPTY)) {
+			return new FreeMarkerTemplate(
+					templateId, templateContent, errorTemplateId,
+					errorTemplateContent, null, _configuration,
+					_templateContextHelper, _stringTemplateLoader);
+		}
+		else if (templateContextType.equals(TemplateContextType.RESTRICTED)) {
+			return new RestrictedTemplate(
+				new FreeMarkerTemplate(
+					templateId, templateContent, errorTemplateId,
+					errorTemplateContent, _restrictedHelperUtilities,
+					_configuration, _templateContextHelper,
+					_stringTemplateLoader),
+				_templateContextHelper.getRestrictedVariables());
+		}
+		else if (templateContextType.equals(TemplateContextType.STANDARD)) {
+			return new FreeMarkerTemplate(
+				templateId, templateContent, errorTemplateId,
+				errorTemplateContent, _standardHelperUtilities, _configuration,
+				_templateContextHelper, _stringTemplateLoader);
 		}
 
 		return null;
@@ -134,6 +134,10 @@ public class FreeMarkerManager implements TemplateManager {
 		String templateId, TemplateContextType templateContextType) {
 
 		return getTemplate(templateId, null, null, null, templateContextType);
+	}
+
+	public String getTemplateManagerName() {
+		return TemplateManager.FREEMARKER;
 	}
 
 	public boolean hasTemplate(String templateId) {

@@ -57,7 +57,7 @@ public class FreeMarkerTemplateParser extends VelocityTemplateParser {
 	@Override
 	protected TemplateContext getTemplateContext() throws Exception {
 		return TemplateManagerUtil.getTemplate(
-			TemplateManager.FREE_MARKER, getTemplateId(), getScript(),
+			TemplateManager.FREEMARKER, getTemplateId(), getScript(),
 			getErrorTemplateId(), getErrorTemplateContent(),
 			TemplateContextType.RESTRICTED);
 	}
@@ -68,9 +68,9 @@ public class FreeMarkerTemplateParser extends VelocityTemplateParser {
 			UnsyncStringWriter unsyncStringWriter)
 		throws Exception {
 
-		Template freemarkerTemplate = (Template)templateContext;
+		Template template = (Template)templateContext;
 
-		return freemarkerTemplate.processTemplate(unsyncStringWriter);
+		return template.processTemplate(unsyncStringWriter);
 	}
 
 }

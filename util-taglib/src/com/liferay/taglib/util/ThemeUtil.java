@@ -132,7 +132,7 @@ public class ThemeUtil {
 
 		if (Validator.isNotNull(portletId) &&
 			!TemplateManagerUtil.hasTemplate(
-				TemplateManager.FREE_MARKER, resourcePath) &&
+				TemplateManager.FREEMARKER, resourcePath) &&
 			portletId.contains(PortletConstants.INSTANCE_SEPARATOR)) {
 
 			String rootPortletId = PortletConstants.getRootPortletId(portletId);
@@ -143,33 +143,33 @@ public class ThemeUtil {
 
 		if (Validator.isNotNull(portletId) &&
 			!TemplateManagerUtil.hasTemplate(
-				TemplateManager.FREE_MARKER, resourcePath)) {
+				TemplateManager.FREEMARKER, resourcePath)) {
 
 			resourcePath = theme.getResourcePath(servletContext, null, path);
 		}
 
 		if (!TemplateManagerUtil.hasTemplate(
-				TemplateManager.FREE_MARKER, resourcePath)) {
+				TemplateManager.FREEMARKER, resourcePath)) {
 
 			_log.error(resourcePath + " does not exist");
 
 			return null;
 		}
 
-		Template freemarkerTemplate = TemplateManagerUtil.getTemplate(
-			TemplateManager.FREE_MARKER, resourcePath,
+		Template template = TemplateManagerUtil.getTemplate(
+			TemplateManager.FREEMARKER, resourcePath,
 			TemplateContextType.STANDARD);
 
 		// FreeMarker variables
 
-		freemarkerTemplate.prepare(request);
+		template.prepare(request);
 
 		// Theme servlet context
 
 		ServletContext themeServletContext = ServletContextPool.get(
 			servletContextName);
 
-		freemarkerTemplate.put("themeServletContext", themeServletContext);
+		template.put("themeServletContext", themeServletContext);
 
 		// Tag libraries
 
@@ -194,16 +194,16 @@ public class ThemeUtil {
 
 		request.setAttribute(WebKeys.VELOCITY_TAGLIB, velocityTaglib);
 
-		freemarkerTemplate.put("taglibLiferay", velocityTaglib);
-		freemarkerTemplate.put("theme", velocityTaglib);
-		freemarkerTemplate.put("writer", writer);
+		template.put("taglibLiferay", velocityTaglib);
+		template.put("theme", velocityTaglib);
+		template.put("writer", writer);
 
 		// Portal JSP tag library factory
 
 		TemplateHashModel portalTaglib =
 			FreeMarkerTaglibFactoryUtil.createTaglibFactory(servletContext);
 
-		freemarkerTemplate.put("PortalJspTagLibs", portalTaglib);
+		template.put("PortalJspTagLibs", portalTaglib);
 
 		// Theme JSP tag library factory
 
@@ -211,7 +211,7 @@ public class ThemeUtil {
 			FreeMarkerTaglibFactoryUtil.createTaglibFactory(
 				themeServletContext);
 
-		freemarkerTemplate.put("ThemeJspTaglibs", themeTaglib);
+		template.put("ThemeJspTaglibs", themeTaglib);
 
 		// FreeMarker JSP tag library support
 
@@ -243,16 +243,16 @@ public class ThemeUtil {
 			new ServletContextHashModel(
 				genericServlet, ObjectWrapper.DEFAULT_WRAPPER);
 
-		freemarkerTemplate.put("Application", servletContextHashModel);
+		template.put("Application", servletContextHashModel);
 
 		HttpRequestHashModel httpRequestHashModel = new HttpRequestHashModel(
 			request, response, ObjectWrapper.DEFAULT_WRAPPER);
 
-		freemarkerTemplate.put("Request", httpRequestHashModel);
+		template.put("Request", httpRequestHashModel);
 
 		// Merge templates
 
-		freemarkerTemplate.processTemplate(writer);
+		template.processTemplate(writer);
 
 		if (write) {
 			return null;
@@ -365,24 +365,24 @@ public class ThemeUtil {
 			return null;
 		}
 
-		Template velocityTemplate = TemplateManagerUtil.getTemplate(
+		Template template = TemplateManagerUtil.getTemplate(
 			TemplateManager.VELOCITY, resourcePath,
 			TemplateContextType.STANDARD);
 
 		// Velocity variables
 
-		velocityTemplate.prepare(request);
+		template.prepare(request);
 
 		// Page context
 
-		velocityTemplate.put("pageContext", pageContext);
+		template.put("pageContext", pageContext);
 
 		// Theme servlet context
 
 		ServletContext themeServletContext = ServletContextPool.get(
 			servletContextName);
 
-		velocityTemplate.put("themeServletContext", themeServletContext);
+		template.put("themeServletContext", themeServletContext);
 
 		// Tag libraries
 
@@ -404,13 +404,13 @@ public class ThemeUtil {
 
 		request.setAttribute(WebKeys.VELOCITY_TAGLIB, velocityTaglib);
 
-		velocityTemplate.put("taglibLiferay", velocityTaglib);
-		velocityTemplate.put("theme", velocityTaglib);
-		velocityTemplate.put("writer", writer);
+		template.put("taglibLiferay", velocityTaglib);
+		template.put("theme", velocityTaglib);
+		template.put("writer", writer);
 
 		// Merge templates
 
-		velocityTemplate.processTemplate(writer);
+		template.processTemplate(writer);
 
 		if (write) {
 			return null;

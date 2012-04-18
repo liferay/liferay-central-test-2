@@ -1045,28 +1045,28 @@ public class WebServerServlet extends HttpServlet {
 			List<WebServerEntry> webServerEntries)
 		throws Exception {
 
-		Template freeMarkerTemplate = TemplateManagerUtil.getTemplate(
-			TemplateManager.FREE_MARKER, _TEMPLATE_FTL,
+		Template template = TemplateManagerUtil.getTemplate(
+			TemplateManager.FREEMARKER, _TEMPLATE_FTL,
 			TemplateContextType.RESTRICTED);
 
-		freeMarkerTemplate.put("dateFormat", _dateFormat);
-		freeMarkerTemplate.put("entries", webServerEntries);
-		freeMarkerTemplate.put("path", HttpUtil.encodePath(path));
+		template.put("dateFormat", _dateFormat);
+		template.put("entries", webServerEntries);
+		template.put("path", HttpUtil.encodePath(path));
 
 		if (_WEB_SERVER_SERVLET_VERSION_VERBOSITY_DEFAULT) {
 		}
 		else if (_WEB_SERVER_SERVLET_VERSION_VERBOSITY_PARTIAL) {
-			freeMarkerTemplate.put("releaseInfo", ReleaseInfo.getName());
+			template.put("releaseInfo", ReleaseInfo.getName());
 		}
 		else {
-			freeMarkerTemplate.put("releaseInfo", ReleaseInfo.getReleaseInfo());
+			template.put("releaseInfo", ReleaseInfo.getReleaseInfo());
 		}
 
-		freeMarkerTemplate.put("validator", Validator_IW.getInstance());
+		template.put("validator", Validator_IW.getInstance());
 
 		response.setContentType(ContentTypes.TEXT_HTML_UTF8);
 
-		freeMarkerTemplate.processTemplate(response.getWriter());
+		template.processTemplate(response.getWriter());
 	}
 
 	protected void writeImage(

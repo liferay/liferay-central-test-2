@@ -15,7 +15,6 @@
 package com.liferay.portal.kernel.template;
 
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -29,26 +28,27 @@ public class TemplateManagerUtil {
 	public static void clearCache(String templateManagerName)
 		throws TemplateException {
 
-		_getTemplateManager(templateManagerName).clearCache();
+		TemplateManager templateManager = _getTemplateManager(
+			templateManagerName);
+
+		templateManager.clearCache();
 	}
 
-	public static void clearCache(String templateManager, String templateId)
+	public static void clearCache(String templateManagerName, String templateId)
 		throws TemplateException {
 
-		_getTemplateManager(templateManager).clearCache(templateId);
+		TemplateManager templateManager = _getTemplateManager(
+			templateManagerName);
+
+		templateManager.clearCache(templateId);
 	}
 
-	public static void destroy() throws TemplateException {
-		Iterator<TemplateManager> iterator =
-			_templateManagers.values().iterator();
-
-		while (iterator.hasNext()) {
-			TemplateManager templateManager = iterator.next();
-
-			iterator.remove();
-
+	public static void destroy() {
+		for (TemplateManager templateManager : _templateManagers.values()) {
 			templateManager.destroy();
 		}
+
+		_templateManagers.clear();
 	}
 
 	public static Template getTemplate(
@@ -58,7 +58,10 @@ public class TemplateManagerUtil {
 			TemplateContextType templateContextType)
 		throws TemplateException {
 
-		return _getTemplateManager(templateManagerName).getTemplate(
+		TemplateManager templateManager = _getTemplateManager(
+			templateManagerName);
+
+		return templateManager.getTemplate(
 			templateId, templateContent, errorTemplateId, errorTemplateContent,
 			templateContextType);
 	}
@@ -69,7 +72,10 @@ public class TemplateManagerUtil {
 			TemplateContextType templateContextType)
 		throws TemplateException {
 
-		return _getTemplateManager(templateManagerName).getTemplate(
+		TemplateManager templateManager = _getTemplateManager(
+			templateManagerName);
+
+		return templateManager.getTemplate(
 			templateId, templateContent, errorTemplateId, templateContextType);
 	}
 
@@ -78,7 +84,10 @@ public class TemplateManagerUtil {
 			String templateContent, TemplateContextType templateContextType)
 		throws TemplateException {
 
-		return _getTemplateManager(templateManagerName).getTemplate(
+		TemplateManager templateManager = _getTemplateManager(
+			templateManagerName);
+
+		return templateManager.getTemplate(
 			templateId, templateContent, templateContextType);
 	}
 
@@ -87,8 +96,10 @@ public class TemplateManagerUtil {
 			TemplateContextType templateContextType)
 		throws TemplateException {
 
-		return _getTemplateManager(templateManagerName).getTemplate(
-			templateId, templateContextType);
+		TemplateManager templateManager = _getTemplateManager(
+			templateManagerName);
+
+		return templateManager.getTemplate(templateId, templateContextType);
 	}
 
 	public static TemplateManager getTemplateManager(
@@ -104,7 +115,6 @@ public class TemplateManagerUtil {
 	}
 
 	public static Map<String, TemplateManager> getTemplateManagers() {
-
 		return Collections.unmodifiableMap(_templateManagers);
 	}
 
@@ -112,7 +122,10 @@ public class TemplateManagerUtil {
 			String templateManagerName, String templateId)
 		throws TemplateException {
 
-		return _getTemplateManager(templateManagerName).hasTemplate(templateId);
+		TemplateManager templateManager = _getTemplateManager(
+			templateManagerName);
+
+		return templateManager.hasTemplate(templateId);
 	}
 
 	public static boolean hasTemplateManager(String templateManagerName) {
@@ -131,12 +144,10 @@ public class TemplateManagerUtil {
 		templateManager.init();
 
 		_templateManagers.put(
-			templateManager.getManagerName(), templateManager);
+			templateManager.getTemplateManagerName(), templateManager);
 	}
 
-	public static void unregisterTemplateManager(String templateManagerName)
-		throws TemplateException {
-
+	public static void unregisterTemplateManager(String templateManagerName) {
 		TemplateManager templateManager = _templateManagers.remove(
 			templateManagerName);
 
@@ -148,7 +159,7 @@ public class TemplateManagerUtil {
 	public void setTemplateManagers(List<TemplateManager> templateManagers) {
 		for (TemplateManager templateManager : templateManagers) {
 			_templateManagers.put(
-				templateManager.getManagerName(), templateManager);
+				templateManager.getTemplateManagerName(), templateManager);
 		}
 	}
 
@@ -161,8 +172,7 @@ public class TemplateManagerUtil {
 
 		if (templateManager == null) {
 			throw new TemplateException(
-				"Current system does not support template manager " +
-					templateManagerName);
+				"Unsupported template manager " + templateManagerName);
 		}
 
 		return templateManager;

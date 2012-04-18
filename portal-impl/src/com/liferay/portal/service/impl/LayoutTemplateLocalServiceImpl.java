@@ -483,7 +483,8 @@ public class LayoutTemplateLocalServiceImpl
 			}
 		}
 		catch (Exception e) {
-			_log.error("Unable to uninstall layout template " + templateId, e);
+			_log.error(
+				"Unable to uninstall layout template " + layoutTemplateId, e);
 		}
 	}
 
@@ -506,7 +507,9 @@ public class LayoutTemplateLocalServiceImpl
 			}
 			catch (Exception e) {
 				_log.error(
-					"Unable to uninstall layout template " + templateId, e);
+					"Unable to uninstall layout template " +
+						layoutTemplate.getLayoutTemplateId(),
+					e);
 			}
 		}
 
@@ -529,7 +532,9 @@ public class LayoutTemplateLocalServiceImpl
 			}
 			catch (Exception e) {
 				_log.error(
-					"Unable to uninstall layout template " + templateId, e);
+					"Unable to uninstall layout template " +
+						layoutTemplate.getLayoutTemplateId(),
+					e);
 			}
 		}
 
@@ -542,13 +547,13 @@ public class LayoutTemplateLocalServiceImpl
 		try {
 			InitColumnProcessor processor = new InitColumnProcessor();
 
-			Template velocityTemplate = TemplateManagerUtil.getTemplate(
+			Template template = TemplateManagerUtil.getTemplate(
 				TemplateManager.VELOCITY, velocityTemplateId,
 				velocityTemplateContent, TemplateContextType.STANDARD);
 
-			velocityTemplate.put("processor", processor);
+			template.put("processor", processor);
 
-			velocityTemplate.processTemplate(new DummyWriter());
+			template.processTemplate(new DummyWriter());
 
 			return ListUtil.sort(processor.getColumns());
 		}

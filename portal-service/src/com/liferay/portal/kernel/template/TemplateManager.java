@@ -19,7 +19,7 @@ package com.liferay.portal.kernel.template;
  */
 public interface TemplateManager {
 
-	public static final String FREE_MARKER = "FREE_MARKER";
+	public static final String FREEMARKER = "FREEMARKER";
 
 	public static final String VELOCITY = "VELOCITY";
 
@@ -27,9 +27,7 @@ public interface TemplateManager {
 
 	public void clearCache(String templateId);
 
-	public void destroy()throws TemplateException;
-
-	public String getManagerName();
+	public void destroy();
 
 	public Template getTemplate(
 		String templateId, String templateContent, String errorTemplateId,
@@ -45,6 +43,8 @@ public interface TemplateManager {
 
 	public Template getTemplate(
 		String templateId, TemplateContextType templateContextType);
+
+	public String getTemplateManagerName();
 
 	public boolean hasTemplate(String templateId);
 

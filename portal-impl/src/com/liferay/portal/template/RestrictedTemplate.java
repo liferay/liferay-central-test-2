@@ -31,8 +31,8 @@ public class RestrictedTemplate implements Template {
 	public RestrictedTemplate(
 		Template template, Set<String> restrictedVariables) {
 
-		_restrictedVariables = restrictedVariables;
 		_template = template;
+		_restrictedVariables = restrictedVariables;
 	}
 
 	public Object get(String key) {

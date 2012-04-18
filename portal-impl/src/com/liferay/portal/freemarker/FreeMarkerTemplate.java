@@ -48,14 +48,6 @@ public class FreeMarkerTemplate implements Template {
 		TemplateContextHelper templateContextHelper,
 		StringTemplateLoader stringTemplateLoader) {
 
-		_context = new ConcurrentHashMap<String, Object>();
-
-		if (context != null) {
-			for (Map.Entry<String, Object> entry : context.entrySet()) {
-				put(entry.getKey(), entry.getValue());
-			}
-		}
-
 		_templateId = templateId;
 		_templateContent = templateContent;
 
@@ -63,6 +55,14 @@ public class FreeMarkerTemplate implements Template {
 			_errorTemplateId = errorTemplateId;
 			_errorTemplateContent = errorTemplateContent;
 			_hasErrorTemplate = true;
+		}
+
+		_context = new ConcurrentHashMap<String, Object>();
+
+		if (context != null) {
+			for (Map.Entry<String, Object> entry : context.entrySet()) {
+				put(entry.getKey(), entry.getValue());
+			}
 		}
 
 		_configuration = configuration;
@@ -109,15 +109,15 @@ public class FreeMarkerTemplate implements Template {
 
 			return true;
 		}
-		catch (Exception e) {
-			if (e instanceof ParseException ||
-				e instanceof freemarker.template.TemplateException) {
+		catch (Exception e1) {
+			if ((e1 instanceof ParseException) ||
+				(e1 instanceof freemarker.template.TemplateException)) {
 
-				put("exception", e.getMessage());
+				put("exception", e1.getMessage());
 				put("script", _templateContent);
 
-				if (e instanceof ParseException) {
-					ParseException pe = (ParseException)e;
+				if (e1 instanceof ParseException) {
+					ParseException pe = (ParseException)e1;
 
 					put("column", pe.getColumnNumber());
 					put("line", pe.getLineNumber());
@@ -131,16 +131,16 @@ public class FreeMarkerTemplate implements Template {
 
 					template.process(_context, writer);
 				}
-				catch (Exception ex) {
+				catch (Exception e2) {
 					throw new TemplateException(
 						"Unable to process freemarker template " +
 							_errorTemplateId,
-						ex);
+						e2);
 				}
 			}
 			else {
 				throw new TemplateException(
-					"Unable to process freemarker template " + _templateId, e);
+					"Unable to process freemarker template " + _templateId, e1);
 			}
 		}
 

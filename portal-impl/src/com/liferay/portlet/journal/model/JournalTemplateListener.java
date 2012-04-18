@@ -66,7 +66,7 @@ public class JournalTemplateListener
 				template.getTemplateId();
 
 		TemplateManagerUtil.clearCache(
-			TemplateManager.FREE_MARKER, freeMarkerTemplateId);
+			TemplateManager.FREEMARKER, freeMarkerTemplateId);
 
 		// Journal content
 
@@ -82,6 +82,7 @@ public class JournalTemplateListener
 			_RESOURCE_TEMPLATE_NAME_SPACE.concat(freeMarkerTemplateId));
 
 		// Velocity cache
+
 		TemplateManagerUtil.clearCache(
 			TemplateManager.VELOCITY, freeMarkerTemplateId);
 	}

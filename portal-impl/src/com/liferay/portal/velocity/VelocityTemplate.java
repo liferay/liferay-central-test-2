@@ -41,16 +41,9 @@ public class VelocityTemplate implements Template {
 
 	public VelocityTemplate(
 		String templateId, String templateContent, String errorTemplateId,
-		String errorTemplateContent, VelocityContext context,
+		String errorTemplateContent, VelocityContext velocityContext,
 		VelocityEngine velocityEngine,
 		TemplateContextHelper templateContextHelper) {
-
-		if (context == null) {
-			_velocityContext = new VelocityContext();
-		}
-		else {
-			_velocityContext = new VelocityContext(context);
-		}
 
 		_templateId = templateId;
 		_templateContent = templateContent;
@@ -59,6 +52,13 @@ public class VelocityTemplate implements Template {
 			_errorTemplateId = errorTemplateId;
 			_errorTemplateContent = errorTemplateContent;
 			_hasErrorTemplate = true;
+		}
+
+		if (velocityContext == null) {
+			_velocityContext = new VelocityContext();
+		}
+		else {
+			_velocityContext = new VelocityContext(velocityContext);
 		}
 
 		_velocityEngine = velocityEngine;

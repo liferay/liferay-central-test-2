@@ -174,22 +174,22 @@ public class DDMXSDImpl implements DDMXSD {
 			String resource = resourcePath.toString();
 
 			if (!TemplateManagerUtil.hasTemplate(
-				TemplateManager.FREE_MARKER, resource)) {
+					TemplateManager.FREEMARKER, resource)) {
 
 				resource = defaultResourcePath;
 			}
 
-			Template freemarkerTemplate = TemplateManagerUtil.getTemplate(
-				TemplateManager.FREE_MARKER, resource,
+			Template template = TemplateManagerUtil.getTemplate(
+				TemplateManager.FREEMARKER, resource,
 				TemplateContextType.STANDARD);
 
 			for (Map.Entry<String, Object> entry :
-				freeMarkerContext.entrySet()) {
+					freeMarkerContext.entrySet()) {
 
-				freemarkerTemplate.put(entry.getKey(), entry.getValue());
+				template.put(entry.getKey(), entry.getValue());
 			}
 
-			sb.append(processFTL(pageContext, freemarkerTemplate));
+			sb.append(processFTL(pageContext, template));
 		}
 
 		return sb.toString();
@@ -405,8 +405,7 @@ public class DDMXSDImpl implements DDMXSD {
 	/**
 	 * @see com.liferay.taglib.util.ThemeUtil#includeFTL
 	 */
-	protected String processFTL(
-			PageContext pageContext, Template freeMarkerTemplate)
+	protected String processFTL(PageContext pageContext, Template template)
 		throws Exception {
 
 		HttpServletRequest request =
@@ -414,7 +413,7 @@ public class DDMXSDImpl implements DDMXSD {
 
 		// FreeMarker variables
 
-		freeMarkerTemplate.prepare(request);
+		template.prepare(request);
 
 		// Tag libraries
 
@@ -429,7 +428,7 @@ public class DDMXSDImpl implements DDMXSD {
 			FreeMarkerTaglibFactoryUtil.createTaglibFactory(
 				pageContext.getServletContext());
 
-		freeMarkerTemplate.put("PortalJspTagLibs", portalTaglib);
+		template.put("PortalJspTagLibs", portalTaglib);
 
 		// FreeMarker JSP tag library support
 
@@ -461,16 +460,16 @@ public class DDMXSDImpl implements DDMXSD {
 			new ServletContextHashModel(
 				genericServlet, ObjectWrapper.DEFAULT_WRAPPER);
 
-		freeMarkerTemplate.put("Application", servletContextHashModel);
+		template.put("Application", servletContextHashModel);
 
 		HttpRequestHashModel httpRequestHashModel = new HttpRequestHashModel(
 			request, response, ObjectWrapper.DEFAULT_WRAPPER);
 
-		freeMarkerTemplate.put("Request", httpRequestHashModel);
+		template.put("Request", httpRequestHashModel);
 
 		// Merge templates
 
-		freeMarkerTemplate.processTemplate(writer);
+		template.processTemplate(writer);
 
 		return writer.toString();
 	}

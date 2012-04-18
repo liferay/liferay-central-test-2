@@ -260,12 +260,12 @@
 	<bean id="com.liferay.portal.kernel.template.TemplateManagerUtil" class="com.liferay.portal.kernel.template.TemplateManagerUtil">
 		<property name="templateManagers">
 			<list>
-				<bean class="com.liferay.portal.freemarker.FreeMarkerManager" >
+				<bean class="com.liferay.portal.freemarker.FreeMarkerManager">
 					<property name="templateContextHelper">
 						<bean class="com.liferay.portal.freemarker.FreeMarkerTemplateContextHelper" />
 					</property>
 				</bean>
-				<bean class="com.liferay.portal.velocity.VelocityManager" >
+				<bean class="com.liferay.portal.velocity.VelocityManager">
 					<property name="templateContextHelper">
 						<bean class="com.liferay.portal.velocity.VelocityTemplateContextHelper" />
 					</property>

@@ -144,9 +144,9 @@ public class VelocityTemplateParser extends BaseTemplateParser {
 			UnsyncStringWriter unsyncStringWriter)
 		throws Exception {
 
-		Template velocityContext = (Template)templateContext;
+		Template template = (Template)templateContext;
 
-		return velocityContext.processTemplate(unsyncStringWriter);
+		return template.processTemplate(unsyncStringWriter);
 	}
 
 	@Override

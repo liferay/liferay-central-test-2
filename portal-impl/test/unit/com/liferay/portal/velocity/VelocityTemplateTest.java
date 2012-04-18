@@ -15,6 +15,7 @@
 package com.liferay.portal.velocity;
 
 import com.liferay.portal.kernel.io.unsync.UnsyncStringWriter;
+import com.liferay.portal.kernel.template.Template;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.templateparser.TemplateContext;
 import com.liferay.portal.kernel.util.PropsKeys;
@@ -92,15 +93,13 @@ public class VelocityTemplateTest extends TestCase {
 	}
 
 	public void testGet() throws Exception {
-		String testValue = "testValue";
-
-		VelocityTemplate velocityTemplate = new VelocityTemplate(
+		Template template = new VelocityTemplate(
 			_TEMPLATE_FILE_NAME, null, null, null, null, _velocityEngine,
 			_templateContextHelper);
 
-		velocityTemplate.put(_TEST_KEY, testValue);
+		template.put(_TEST_KEY, _TEST_VALUE);
 
-		Object result = velocityTemplate.get(_TEST_KEY);
+		Object result = template.get(_TEST_KEY);
 
 		assertNotNull(result);
 
@@ -108,21 +107,19 @@ public class VelocityTemplateTest extends TestCase {
 
 		String stringResult = (String)result;
 
-		assertEquals(testValue, stringResult);
+		assertEquals(_TEST_VALUE, stringResult);
 	}
 
 	public void testPrepare() throws Exception {
-		String testValue = "testValue";
-
-		VelocityTemplate velocityTemplate = new VelocityTemplate(
+		Template template = new VelocityTemplate(
 			_TEMPLATE_FILE_NAME, null, null, null, null, _velocityEngine,
 			_templateContextHelper);
 
-		velocityTemplate.put(_TEST_KEY, testValue);
+		template.put(_TEST_KEY, _TEST_VALUE);
 
-		velocityTemplate.prepare(null);
+		template.prepare(null);
 
-		Object result = velocityTemplate.get(testValue);
+		Object result = template.get(_TEST_VALUE);
 
 		assertNotNull(result);
 
@@ -130,41 +127,36 @@ public class VelocityTemplateTest extends TestCase {
 
 		String stringResult = (String)result;
 
-		assertEquals(testValue, stringResult);
+		assertEquals(_TEST_VALUE, stringResult);
 	}
 
 	public void testProcessTemplate1() throws Exception {
-		String testValue = "testValue";
-
-		VelocityTemplate velocityTemplate = new VelocityTemplate(
+		Template template = new VelocityTemplate(
 			_TEMPLATE_FILE_NAME, null, null, null, null, _velocityEngine,
 			_templateContextHelper);
 
-		velocityTemplate.put(_TEST_KEY, testValue);
+		template.put(_TEST_KEY, _TEST_VALUE);
 
 		UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter();
 
-		velocityTemplate.processTemplate(unsyncStringWriter);
+		template.processTemplate(unsyncStringWriter);
 
 		String result = unsyncStringWriter.toString();
 
-		assertEquals(testValue, result);
+		assertEquals(_TEST_VALUE, result);
 	}
 
 	public void testProcessTemplate2() throws Exception {
-		String templateId = "wrongTemplateId";
-		String testValue = "testValue";
-
-		VelocityTemplate velocityTemplate = new VelocityTemplate(
-			templateId, null, null, null, null, _velocityEngine,
+		Template template = new VelocityTemplate(
+			_WRONG_TEMPLATE_ID, null, null, null, null, _velocityEngine,
 			_templateContextHelper);
 
-		velocityTemplate.put(_TEST_KEY, testValue);
+		template.put(_TEST_KEY, _TEST_VALUE);
 
 		UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter();
 
 		try {
-			velocityTemplate.processTemplate(unsyncStringWriter);
+			template.processTemplate(unsyncStringWriter);
 
 			fail();
 		}
@@ -172,7 +164,7 @@ public class VelocityTemplateTest extends TestCase {
 			if (e instanceof TemplateException) {
 				String message = e.getMessage();
 
-				assertTrue(message.contains(templateId));
+				assertTrue(message.contains(_WRONG_TEMPLATE_ID));
 
 				return;
 			}
@@ -182,77 +174,64 @@ public class VelocityTemplateTest extends TestCase {
 	}
 
 	public void testProcessTemplate3() throws Exception {
-		String templateId = "wrongTemplateId";
-		String testValue = "testValue";
-
-		VelocityTemplate velocityTemplate = new VelocityTemplate(
-			templateId, _TEST_TEMPLATE_CONTENT, null, null, null,
+		Template template = new VelocityTemplate(
+			_WRONG_TEMPLATE_ID, _TEST_TEMPLATE_CONTENT, null, null, null,
 			_velocityEngine, _templateContextHelper);
 
-		velocityTemplate.put(_TEST_KEY, testValue);
+		template.put(_TEST_KEY, _TEST_VALUE);
 
 		UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter();
 
-		velocityTemplate.processTemplate(unsyncStringWriter);
+		template.processTemplate(unsyncStringWriter);
 
 		String result = unsyncStringWriter.toString();
 
-		assertEquals(testValue, result);
+		assertEquals(_TEST_VALUE, result);
 	}
 
 	public void testProcessTemplate4() throws Exception {
-		String errorTemplateId = "wrongTemplateId";
-		String testValue = "testValue";
-
-		VelocityTemplate velocityTemplate = new VelocityTemplate(
-			_TEMPLATE_FILE_NAME, null, errorTemplateId, null, null,
+		Template template = new VelocityTemplate(
+			_TEMPLATE_FILE_NAME, null, _WRONG_ERROR_TEMPLATE_ID, null, null,
 			_velocityEngine, _templateContextHelper);
 
-		velocityTemplate.put(_TEST_KEY, testValue);
+		template.put(_TEST_KEY, _TEST_VALUE);
 
 		UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter();
 
-		velocityTemplate.processTemplate(unsyncStringWriter);
+		template.processTemplate(unsyncStringWriter);
 
 		String result = unsyncStringWriter.toString();
 
-		assertEquals(testValue, result);
+		assertEquals(_TEST_VALUE, result);
 	}
 
 	public void testProcessTemplate5() throws Exception {
-		String templateId = "wrongTemplateId";
-		String testValue = "testValue";
+		Template template = new VelocityTemplate(
+			_WRONG_TEMPLATE_ID, null, _TEMPLATE_FILE_NAME, null, null,
+			_velocityEngine, _templateContextHelper);
 
-		VelocityTemplate velocityTemplate = new VelocityTemplate(
-			templateId, null, _TEMPLATE_FILE_NAME, null, null, _velocityEngine,
-			_templateContextHelper);
-
-		velocityTemplate.put(_TEST_KEY, testValue);
+		template.put(_TEST_KEY, _TEST_VALUE);
 
 		UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter();
 
-		velocityTemplate.processTemplate(unsyncStringWriter);
+		template.processTemplate(unsyncStringWriter);
 
 		String result = unsyncStringWriter.toString();
 
-		assertEquals(testValue, result);
+		assertEquals(_TEST_VALUE, result);
 	}
 
 	public void testProcessTemplate6() throws Exception {
-		String templateId = "wrongTemplateId1";
-		String errorTemplateId = "wrongTemplateId2";
-		String testValue = "testValue";
+		Template template = new VelocityTemplate(
+			_WRONG_TEMPLATE_ID, null, _WRONG_ERROR_TEMPLATE_ID, null, null,
+			_velocityEngine, _templateContextHelper);
 
-		VelocityTemplate velocityTemplate = new VelocityTemplate(
-			templateId, null, errorTemplateId, null, null, _velocityEngine,
-			_templateContextHelper);
-
-		velocityTemplate.put(_TEST_KEY, testValue);
+		template.put(_TEST_KEY, _TEST_VALUE);
 
 		UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter();
 
 		try {
-			velocityTemplate.processTemplate(unsyncStringWriter);
+			template.processTemplate(unsyncStringWriter);
 
 			fail();
 		}
@@ -260,7 +239,7 @@ public class VelocityTemplateTest extends TestCase {
 			if (e instanceof TemplateException) {
 				String message = e.getMessage();
 
-				assertTrue(message.contains(errorTemplateId));
+				assertTrue(message.contains(_WRONG_ERROR_TEMPLATE_ID));
 
 				return;
 			}
@@ -270,62 +249,78 @@ public class VelocityTemplateTest extends TestCase {
 	}
 
 	public void testProcessTemplate7() throws Exception {
-		String templateId = "wrongTemplateId1";
-		String errorTemplateId = "wrongTemplateId2";
-		String testValue = "testValue";
+		Template template = new VelocityTemplate(
+			_WRONG_TEMPLATE_ID, null, _WRONG_ERROR_TEMPLATE_ID,
+			_TEST_TEMPLATE_CONTENT, null, _velocityEngine,
+			_templateContextHelper);
 
-		VelocityTemplate velocityTemplate = new VelocityTemplate(
-			templateId, null, errorTemplateId, _TEST_TEMPLATE_CONTENT, null,
-			_velocityEngine, _templateContextHelper);
-
-		velocityTemplate.put(_TEST_KEY, testValue);
+		template.put(_TEST_KEY, _TEST_VALUE);
 
 		UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter();
 
-		velocityTemplate.processTemplate(unsyncStringWriter);
+		template.processTemplate(unsyncStringWriter);
 
 		String result = unsyncStringWriter.toString();
 
-		assertEquals(testValue, result);
+		assertEquals(_TEST_VALUE, result);
 	}
 
 	public void testProcessTemplate8() throws Exception {
-		String testValue = "testValue";
+		VelocityContext velocityContext = new VelocityContext();
 
-		VelocityContext context = new VelocityContext();
+		velocityContext.put(_TEST_KEY, _TEST_VALUE);
 
-		context.put(_TEST_KEY, testValue);
-
-		VelocityTemplate velocityTemplate = new VelocityTemplate(
-			_TEMPLATE_FILE_NAME, null, null, null, context, _velocityEngine,
-			_templateContextHelper);
+		Template template = new VelocityTemplate(
+			_TEMPLATE_FILE_NAME, null, null, null, velocityContext,
+			_velocityEngine, _templateContextHelper);
 
 		UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter();
 
-		velocityTemplate.processTemplate(unsyncStringWriter);
+		template.processTemplate(unsyncStringWriter);
 
 		String result = unsyncStringWriter.toString();
 
-		assertEquals(testValue, result);
+		assertEquals(_TEST_VALUE, result);
 	}
 
-	public static class MockResourceLoader extends ResourceLoader {
+	private static final String _TEMPLATE_FILE_NAME = "test.vm";
+
+	private static final String _TEST_KEY = "TEST_KEY";
+
+	private static final String _TEST_TEMPLATE_CONTENT = "$" + _TEST_KEY;
+
+	private static final String _TEST_VALUE = "TEST_VALUE";
+
+	private static final String _WRONG_ERROR_TEMPLATE_ID =
+		"WRONG_ERROR_TEMPLATE_ID";
+
+	private static final String _WRONG_TEMPLATE_ID = "WRONG_TEMPLATE_ID";
+
+	private TemplateContextHelper _templateContextHelper;
+	private VelocityEngine _velocityEngine;
+
+	private class MockResourceLoader extends ResourceLoader {
 
 		@Override
-		public void init(ExtendedProperties ep) {
+		public void init(ExtendedProperties extendedProperties) {
 		}
 
 		@Override
-		public InputStream getResourceStream(String string)
+		public long getLastModified(Resource resource) {
+			return 0;
+		}
+
+		@Override
+		public InputStream getResourceStream(String source)
 			throws ResourceNotFoundException {
 
 			try {
-				if (_TEMPLATE_FILE_NAME.equals(string)) {
+				if (_TEMPLATE_FILE_NAME.equals(source)) {
 					return new ByteArrayInputStream(
 						_TEST_TEMPLATE_CONTENT.getBytes());
 				}
 
-				throw new ResourceNotFoundException("Unable to find " + string);
+				throw new ResourceNotFoundException("Unable to find " + source);
 			}
 			catch (Exception e) {
 				throw new ResourceNotFoundException(e);
@@ -333,23 +328,11 @@ public class VelocityTemplateTest extends TestCase {
 		}
 
 		@Override
-		public boolean isSourceModified(Resource rsrc) {
+		public boolean isSourceModified(Resource resource) {
 			return false;
 		}
 
-		@Override
-		public long getLastModified(Resource rsrc) {
-			return 0;
-		}
-
 	}
-
-	private static final String _TEMPLATE_FILE_NAME = "test.vm";
-	private static final String _TEST_KEY = "TEST_KEY";
-	private static final String _TEST_TEMPLATE_CONTENT = "$"+ _TEST_KEY;
-
-	private TemplateContextHelper _templateContextHelper;
-	private VelocityEngine _velocityEngine;
 
 	private class MockTemplateContextHelper extends TemplateContextHelper {
 
@@ -370,8 +353,7 @@ public class VelocityTemplateTest extends TestCase {
 
 		@Override
 		public void prepare(
-				TemplateContext templateContext, HttpServletRequest request)
-			throws TemplateException {
+			TemplateContext templateContext, HttpServletRequest request) {
 
 			String testValue = (String)templateContext.get(_TEST_KEY);
 
