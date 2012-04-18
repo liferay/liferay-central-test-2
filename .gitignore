@@ -24,8 +24,8 @@ _sass_cache_*.css
 /build.*.properties
 /dist
 /out
-/release.*.properties
 /rebel.xml
+/release.*.properties
 /svn-revision
 /test.*.properties
 /WEB-INF
