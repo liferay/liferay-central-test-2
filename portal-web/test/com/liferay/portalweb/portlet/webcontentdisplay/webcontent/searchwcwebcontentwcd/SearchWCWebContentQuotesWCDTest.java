@@ -24,23 +24,6 @@ public class SearchWCWebContentQuotesWCDTest extends BaseTestCase {
 	public void testSearchWCWebContentQuotesWCD() throws Exception {
 		selenium.open("/web/guest/home/");
 		loadRequiredJavaScriptModules();
-
-		for (int second = 0;; second++) {
-			if (second >= 90) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isVisible("link=Web Content Display Test Page")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.clickAt("link=Web Content Display Test Page",
 			RuntimeVariables.replace("Web Content Display Test Page"));
 		selenium.waitForPageToLoad("30000");
@@ -71,13 +54,16 @@ public class SearchWCWebContentQuotesWCDTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("WCD Web Content Title"),
-			selenium.getText("//td[2]/a"));
+			selenium.getText("//td[contains(.,'WCD Web Content Title')]/a"));
 		selenium.type("//input[@name='_86_keywords']",
 			RuntimeVariables.replace("\"WCD1 Web1 Content1 Title1\""));
 		selenium.clickAt("//input[@value='Search']",
 			RuntimeVariables.replace("Search"));
 		selenium.waitForPageToLoad("30000");
 		loadRequiredJavaScriptModules();
-		assertFalse(selenium.isTextPresent("WCD Web Content Test"));
+		assertEquals(RuntimeVariables.replace("No Web Content was found."),
+			selenium.getText("xPath=(//div[@class='portlet-msg-info'])[2]"));
+		assertFalse(selenium.isElementPresent(
+				"//td[contains(.,'WCD Web Content Test')]/a"));
 	}
 }

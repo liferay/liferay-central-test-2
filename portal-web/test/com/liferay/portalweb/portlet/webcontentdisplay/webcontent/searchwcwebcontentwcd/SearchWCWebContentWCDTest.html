@@ -14,11 +14,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForVisible</td>
-	<td>link=Web Content Display Test Page</td>
-	<td>Web Content Display Test Page</td>
-</tr>
-<tr>
 	<td>clickAtAndWait</td>
 	<td>link=Web Content Display Test Page</td>
 	<td>Web Content Display Test Page</td>
@@ -31,7 +26,7 @@
 <tr>
 	<td>waitForVisible</td>
 	<td>//input[@name='_86_keywords']</td>
-	<td>Search</td>
+	<td>Search Field</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -45,7 +40,7 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//td[2]/a</td>
+	<td>//td[contains(.,'WCD Web Content Title')]/a</td>
 	<td>WCD Web Content Title</td>
 </tr>
 <tr>
@@ -59,11 +54,15 @@
 	<td>Search</td>
 </tr>
 <tr>
-	<td>assertTextNotPresent</td>
-	<td>WCD Web Content Test</td>
-	<td></td>
+	<td>assertText</td>
+	<td>xPath=(//div[@class='portlet-msg-info'])[2]</td>
+	<td>No Web Content was found.</td>
 </tr>
-
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>//td[contains(.,'WCD Web Content Test')]/a</td>
+	<td>WCD Web Content Test</td>
+</tr>
 </tbody></table>
 </body>
 </html>
