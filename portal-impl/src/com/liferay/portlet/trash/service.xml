@@ -16,19 +16,19 @@
 		<!-- Audit fields -->
 
 		<column name="companyId" type="long" />
+		<column name="createDate" type="Date" />
 
 		<!-- Other fields -->
 
 		<column name="classNameId" type="long" />
 		<column name="classPK" type="long" />
-		<column name="status" type="int" />
-		<column name="trashedDate" type="Date" />
 		<column name="typeSettings" type="String" />
+		<column name="status" type="int" />
 
 		<!-- Order -->
 
 		<order by="desc">
-			<order-column name="trashedDate" />
+			<order-column name="createDate" />
 		</order>
 
 		<!-- Finder methods -->

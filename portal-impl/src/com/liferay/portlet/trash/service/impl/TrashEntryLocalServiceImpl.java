@@ -30,16 +30,6 @@ import java.util.List;
  * The trash local service is responsible for accessing, creating, modifying and
  * deleting trash entries in the Recycle Bin.
  *
- * <p>
- * Here is a listing of entities that can be moved to trash:
- * </p>
- *
- * <ul>
- * <li>
- * {@link com.liferay.portlet.blogs.model.BlogsEntry}
- * </li>
- * </ul>
- *
  * @author Zsolt Berentey
  */
 public class TrashEntryLocalServiceImpl extends TrashEntryLocalServiceBaseImpl {
@@ -47,12 +37,12 @@ public class TrashEntryLocalServiceImpl extends TrashEntryLocalServiceBaseImpl {
 	/**
 	 * Moves an entry to trash.
 	 *
-	 * @param companyId the primary key of the entry's company
-	 * @param groupId the primary key of the entry's group
-	 * @param className the class name of the entity
-	 * @param classPK the primary key of the entity
-	 * @param status the status of the entityy prior to being moved to trash
-	 * @param typeSettingsProperties the type settings properties
+	 * @param  companyId the primary key of the entry's company
+	 * @param  groupId the primary key of the entry's group
+	 * @param  className the class name of the entity
+	 * @param  classPK the primary key of the entity
+	 * @param  status the status of the entityy prior to being moved to trash
+	 * @param  typeSettingsProperties the type settings properties
 	 * @return the trashEntry
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -68,16 +58,17 @@ public class TrashEntryLocalServiceImpl extends TrashEntryLocalServiceBaseImpl {
 		TrashEntryImpl trashEntry =
 			(TrashEntryImpl)trashEntryPersistence.create(entryId);
 
-		trashEntry.setCompanyId(companyId);
 		trashEntry.setGroupId(groupId);
+		trashEntry.setCompanyId(companyId);
+		trashEntry.setCreateDate(new Date());
 		trashEntry.setClassNameId(classNameId);
 		trashEntry.setClassPK(classPK);
-		trashEntry.setStatus(status);
-		trashEntry.setTrashedDate(new Date());
 
 		if (typeSettingsProperties != null) {
 			trashEntry.setTypeSettingsProperties(typeSettingsProperties);
 		}
+
+		trashEntry.setStatus(status);
 
 		trashEntryPersistence.update(trashEntry, false);
 
@@ -87,9 +78,10 @@ public class TrashEntryLocalServiceImpl extends TrashEntryLocalServiceBaseImpl {
 	/**
 	 * Deletes the trash entry with the entity class name and primary key.
 	 *
-	 * @param className the class name of entity
-	 * @param classPK the primary key of the entry
-	 * @throws PortalException if the user did not have permission to delete the entry
+	 * @param  className the class name of entity
+	 * @param  classPK the primary key of the entry
+	 * @throws PortalException if the user did not have permission to delete the
+	 *         entry
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void deleteEntry(String className, long classPK)
@@ -100,14 +92,14 @@ public class TrashEntryLocalServiceImpl extends TrashEntryLocalServiceBaseImpl {
 		try {
 			trashEntryPersistence.removeByC_C(classNameId, classPK);
 		}
-		catch(NoSuchEntryException nsee) {
+		catch (NoSuchEntryException nsee) {
 		}
 	}
 
 	/**
 	 * Returns the trash entry with the primary key.
 	 *
-	 * @param entryId the primary key of the entry
+	 * @param  entryId the primary key of the entry
 	 * @return the trash entry with the primary key
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -118,8 +110,8 @@ public class TrashEntryLocalServiceImpl extends TrashEntryLocalServiceBaseImpl {
 	/**
 	 * Returns the trash entry with the entity class name and primary key.
 	 *
-	 * @param className the class name of the entity
-	 * @param classPK the primary key of the entity
+	 * @param  className the class name of the entity
+	 * @param  classPK the primary key of the entity
 	 * @return the trash entry with the entity class name and primary key
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -134,7 +126,7 @@ public class TrashEntryLocalServiceImpl extends TrashEntryLocalServiceBaseImpl {
 	/**
 	 * Returns the trash entries with the matching group ID.
 	 *
-	 * @param groupId the primary key of the group
+	 * @param  groupId the primary key of the group
 	 * @return the trash entries with the group ID
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -145,10 +137,10 @@ public class TrashEntryLocalServiceImpl extends TrashEntryLocalServiceBaseImpl {
 	/**
 	 * Returns a range of all the trash entries matching the group ID.
 	 *
-	 * @param groupId the primary key of the group
-	 * @param start the lower bound of the range of trash entries to return
-	 * @param end the upper bound of the range of trash entries to return (not
-	 *        inclusive)
+	 * @param  groupId the primary key of the group
+	 * @param  start the lower bound of the range of trash entries to return
+	 * @param  end the upper bound of the range of trash entries to return (not
+	 *         inclusive)
 	 * @return the range of matching trash entries
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -161,7 +153,7 @@ public class TrashEntryLocalServiceImpl extends TrashEntryLocalServiceBaseImpl {
 	/**
 	 * Returns the number of trash entries with the group ID.
 	 *
-	 * @param groupId the primary key of the group
+	 * @param  groupId the primary key of the group
 	 * @return the number of matching trash entries
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -172,7 +164,7 @@ public class TrashEntryLocalServiceImpl extends TrashEntryLocalServiceBaseImpl {
 	/**
 	 * Returns the trash entry with the primary key.
 	 *
-	 * @param entryId the primary key of the trash entry
+	 * @param  entryId the primary key of the trash entry
 	 * @return the trash entry with the primary key
 	 * @throws PortalException if a portal exception occurred
 	 * @throws SystemException if a system exception occurred
@@ -186,8 +178,8 @@ public class TrashEntryLocalServiceImpl extends TrashEntryLocalServiceBaseImpl {
 	/**
 	 * Returns the entry with the entity class name and primary key.
 	 *
-	 * @param className the class name of the entity
-	 * @param classPK the primary key of the entity
+	 * @param  className the class name of the entity
+	 * @param  classPK the primary key of the entity
 	 * @return the trash entry with the entity class name and primary key
 	 * @throws PortalException if a trash entry with the primary key could not
 	 *         be found

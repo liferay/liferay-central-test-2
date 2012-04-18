@@ -32,8 +32,8 @@ import java.util.List;
 
 /**
  * The trash entry remote service is responsible for returning trash entries.
- * For more information on trash entries services and TrashEntry, see
- * {@link com.liferay.portlet.trash.service.impl.TrashEntryLocalServiceImpl}.
+ * For more information on trash entries services and TrashEntry, see {@link
+ * com.liferay.portlet.trash.service.impl.TrashEntryLocalServiceImpl}.
  *
  * @author Julio Camarero
  */
@@ -43,7 +43,7 @@ public class TrashEntryServiceImpl extends TrashEntryServiceBaseImpl {
 	 * Deletes the trash entries with the matching group ID considering
 	 * permissions.
 	 *
-	 * @param groupId the primary key of the group
+	 * @param  groupId the primary key of the group
 	 * @throws SystemException if a system exception occurred
 	 * @throws PrincipalException if a principal exception occurred
 	 */
@@ -81,7 +81,7 @@ public class TrashEntryServiceImpl extends TrashEntryServiceBaseImpl {
 	/**
 	 * Returns the trash entries with the matching group ID.
 	 *
-	 * @param groupId the primary key of the group
+	 * @param  groupId the primary key of the group
 	 * @return the matching trash entries
 	 * @throws SystemException if a system exception occurred
 	 * @throws PrincipalException if a principal exception occurred
@@ -95,10 +95,10 @@ public class TrashEntryServiceImpl extends TrashEntryServiceBaseImpl {
 	/**
 	 * Returns a range of all the trash entries matching the group ID.
 	 *
-	 * @param groupId the primary key of the group
-	 * @param start the lower bound of the range of trash entries to return
-	 * @param end the upper bound of the range of trash entries to return (not
-	 *        inclusive)
+	 * @param  groupId the primary key of the group
+	 * @param  start the lower bound of the range of trash entries to return
+	 * @param  end the upper bound of the range of trash entries to return (not
+	 *         inclusive)
 	 * @return the range of matching trash entries
 	 * @throws SystemException if a system exception occurred
 	 * @throws PrincipalException if a system exception occurred

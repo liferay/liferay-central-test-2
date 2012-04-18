@@ -1967,11 +1967,11 @@ create table TrashEntry (
 	entryId LONG not null primary key,
 	groupId LONG,
 	companyId LONG,
+	createDate DATE null,
 	classNameId LONG,
 	classPK LONG,
-	status INTEGER,
-	trashedDate DATE null,
-	typeSettings TEXT null
+	typeSettings TEXT null,
+	status INTEGER
 );
 
 create table User_ (
