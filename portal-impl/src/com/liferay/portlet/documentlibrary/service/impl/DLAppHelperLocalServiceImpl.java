@@ -214,7 +214,7 @@ public class DLAppHelperLocalServiceImpl
 		ratingsStatsLocalService.deleteStats(
 			DLFileEntryConstants.getClassName(), fileEntry.getFileEntryId());
 
-		// Trash Entry
+		// Trash
 
 		if (!(fileEntry.getModel() instanceof DLFileEntry)) {
 			return;
@@ -308,6 +308,8 @@ public class DLAppHelperLocalServiceImpl
 	public FileEntry moveFileEntryToTrash(long userId, FileEntry fileEntry)
 		throws PortalException, SystemException {
 
+		// File entry
+
 		DLFileEntry dlFileEntry = (DLFileEntry)fileEntry.getModel();
 
 		FileVersion fileVersion = new LiferayFileVersion(
@@ -315,7 +317,7 @@ public class DLAppHelperLocalServiceImpl
 
 		int oldStatus = fileVersion.getStatus();
 
-		// File Version
+		// File version
 
 		dlFileEntryLocalService.updateStatus(
 			userId, fileVersion.getFileVersionId(),
@@ -329,6 +331,13 @@ public class DLAppHelperLocalServiceImpl
 			fileEntry.getFileEntryId(),
 			SocialActivityConstants.TYPE_MOVE_TO_TRASH, StringPool.BLANK, 0);
 
+		// Trash
+
+		trashEntryLocalService.addTrashEntry(
+			fileEntry.getCompanyId(), fileEntry.getGroupId(),
+			DLFileEntryConstants.getClassName(), fileEntry.getFileEntryId(),
+			oldStatus, null);
+
 		// Workflow
 
 		if (oldStatus == WorkflowConstants.STATUS_PENDING) {
@@ -337,13 +346,6 @@ public class DLAppHelperLocalServiceImpl
 				DLFileEntryConstants.getClassName(),
 				fileVersion.getFileVersionId());
 		}
-
-		// Trash Entry
-
-		trashEntryLocalService.addTrashEntry(
-			fileEntry.getCompanyId(), fileEntry.getGroupId(),
-			DLFileEntryConstants.getClassName(), fileEntry.getFileEntryId(),
-			oldStatus, null);
 
 		return fileEntry;
 	}
@@ -361,6 +363,8 @@ public class DLAppHelperLocalServiceImpl
 	public void restoreFileEntryFromTrash(long userId, FileEntry fileEntry)
 		throws PortalException, SystemException {
 
+		// File entry
+
 		DLFileEntry dlFileEntry = (DLFileEntry)fileEntry.getModel();
 
 		FileVersion fileVersion = new LiferayFileVersion(
@@ -369,7 +373,7 @@ public class DLAppHelperLocalServiceImpl
 		TrashEntry trashEntry = trashEntryLocalService.getEntry(
 			DLFileEntryConstants.getClassName(), fileEntry.getFileEntryId());
 
-		// File Version
+		// File version
 
 		dlFileEntryLocalService.updateStatus(
 			userId, fileVersion.getFileVersionId(), trashEntry.getStatus(),
@@ -386,7 +390,7 @@ public class DLAppHelperLocalServiceImpl
 			SocialActivityConstants.TYPE_RESTORE_FROM_TRASH, StringPool.BLANK,
 			0);
 
-		// Trash Entry
+		// Trash
 
 		trashEntryLocalService.deleteTrashEntry(trashEntry.getEntryId());
 	}

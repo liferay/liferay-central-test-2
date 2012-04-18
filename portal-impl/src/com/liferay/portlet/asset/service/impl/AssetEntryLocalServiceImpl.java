@@ -363,6 +363,8 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 	public void moveEntryToTrash(AssetEntry entry)
 		throws PortalException, SystemException {
 
+		// Entry
+
 		entry.setVisible(false);
 
 		assetEntryPersistence.update(entry, false);

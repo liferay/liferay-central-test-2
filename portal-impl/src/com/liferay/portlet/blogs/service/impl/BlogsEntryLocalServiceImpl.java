@@ -305,6 +305,11 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		ratingsStatsLocalService.deleteStats(
 			BlogsEntry.class.getName(), entry.getEntryId());
 
+		// Trash
+
+		trashEntryLocalService.deleteEntry(
+			BlogsEntry.class.getName(), entry.getEntryId());
+
 		// Indexer
 
 		Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
@@ -316,11 +321,6 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		workflowInstanceLinkLocalService.deleteWorkflowInstanceLinks(
 			entry.getCompanyId(), entry.getGroupId(),
-			BlogsEntry.class.getName(), entry.getEntryId());
-
-		// Trash Entry
-
-		trashEntryLocalService.deleteEntry(
 			BlogsEntry.class.getName(), entry.getEntryId());
 	}
 
@@ -590,7 +590,8 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 	}
 
 	/**
-	 * @deprecated {@link #getGroupUserEntries(long, long, Date, QueryDefinition)}
+	 * @deprecated {@link #getGroupUserEntries(long, long, Date,
+	 *             QueryDefinition)}
 	 */
 	public List<BlogsEntry> getGroupUserEntries(
 			long groupId, long userId, Date displayDate, int status, int start,
@@ -605,7 +606,8 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 	}
 
 	/**
-	 * @deprecated {@link #getGroupUserEntries(long, long, Date, QueryDefinition)}
+	 * @deprecated {@link #getGroupUserEntries(long, long, Date,
+	 *             QueryDefinition)}
 	 */
 	public List<BlogsEntry> getGroupUserEntries(
 			long groupId, long userId, Date displayDate, int status, int start,
@@ -639,7 +641,8 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 	}
 
 	/**
-	 * @deprecated {@link #getGroupUserEntriesCount(long, long, Date, QueryDefinition)}
+	 * @deprecated {@link #getGroupUserEntriesCount(long, long, Date,
+	 *             QueryDefinition)}
 	 */
 	public int getGroupUserEntriesCount(
 			long groupId, long userId, Date displayDate, int status)
@@ -710,7 +713,8 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 	}
 
 	/**
-	 * @deprecated {@link #getOrganizationEntriesCount(long, Date, QueryDefinition)}
+	 * @deprecated {@link #getOrganizationEntriesCount(long, Date,
+	 *             QueryDefinition)}
 	 */
 	public int getOrganizationEntriesCount(
 			long organizationId, Date displayDate, int status)
@@ -734,7 +738,9 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 	public void moveEntriesToTrash(long groupId, long userId)
 		throws PortalException, SystemException {
 
-		for (BlogsEntry entry : blogsEntryPersistence.findByGroupId(groupId)) {
+		List<BlogsEntry> entries = blogsEntryPersistence.findByGroupId(groupId);
+
+		for (BlogsEntry entry : entries) {
 			moveEntryToTrash(userId, entry);
 		}
 	}
@@ -742,9 +748,9 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 	public BlogsEntry moveEntryToTrash(long userId, BlogsEntry entry)
 		throws PortalException, SystemException {
 
-		int oldStatus = entry.getStatus();
+		// Entry
 
-		// Blog Entry
+		int oldStatus = entry.getStatus();
 
 		updateStatus(
 			userId, entry.getEntryId(), WorkflowConstants.STATUS_IN_TRASH,
@@ -756,6 +762,12 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			userId, entry.getGroupId(), BlogsEntry.class.getName(),
 			entry.getEntryId(), SocialActivityConstants.TYPE_MOVE_TO_TRASH,
 			StringPool.BLANK, 0);
+
+		// Trash
+
+		trashEntryLocalService.addTrashEntry(
+			entry.getCompanyId(), entry.getGroupId(),
+			BlogsEntry.class.getName(), entry.getEntryId(), oldStatus, null);
 
 		// Workflow
 
@@ -790,12 +802,6 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 				workflowInstanceLink.getWorkflowInstanceId());
 		}
 
-		// Trash Entry
-
-		trashEntryLocalService.addTrashEntry(
-			entry.getCompanyId(), entry.getGroupId(),
-			BlogsEntry.class.getName(), entry.getEntryId(), oldStatus, null);
-
 		return entry;
 	}
 
@@ -810,10 +816,10 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 	public void restoreEntryFromTrash(long userId, long entryId)
 		throws PortalException, SystemException {
 
+		// Entry
+
 		TrashEntry trashEntry = trashEntryLocalService.getEntry(
 			BlogsEntry.class.getName(), entryId);
-
-		// Blogs Entry
 
 		updateStatus(
 			userId, entryId, trashEntry.getStatus(), new ServiceContext());
@@ -828,7 +834,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			entryId, SocialActivityConstants.TYPE_RESTORE_FROM_TRASH,
 			StringPool.BLANK, 0);
 
-		// Trash Entry
+		// Trash
 
 		trashEntryLocalService.deleteTrashEntry(trashEntry.getEntryId());
 	}
@@ -1067,6 +1073,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			indexer.reindex(entry);
 
 			if (oldStatus != WorkflowConstants.STATUS_IN_TRASH) {
+
 				// Subscriptions
 
 				notifySubscribers(entry, serviceContext);

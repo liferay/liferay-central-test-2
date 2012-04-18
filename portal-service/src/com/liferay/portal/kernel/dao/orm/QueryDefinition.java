@@ -123,7 +123,7 @@ public class QueryDefinition {
 
 	private Map<String, Serializable> _attributes;
 	private int _end = QueryUtil.ALL_POS;
-	private boolean _excludeStatus = false;
+	private boolean _excludeStatus;
 	private OrderByComparator _orderByComparator;
 	private int _start = QueryUtil.ALL_POS;
 	private int _status = WorkflowConstants.STATUS_ANY;

@@ -80,19 +80,19 @@ public class ServiceTestUtil {
 	public static final int THREAD_COUNT = 25;
 
 	public static Group addGroup(String name) throws Exception {
-		String description ="This is a test group";
-		int type = GroupConstants.TYPE_SITE_OPEN;
-		String friendlyURL =
-			StringPool.SLASH + FriendlyURLNormalizerUtil.normalize(name);
-		boolean active = true;
-		boolean site = true;
-
 		Group group = GroupLocalServiceUtil.fetchGroup(
 			TestPropsValues.getCompanyId(), name);
 
 		if (group != null) {
 			return group;
 		}
+
+		String description ="This is a test group";
+		int type = GroupConstants.TYPE_SITE_OPEN;
+		String friendlyURL =
+			StringPool.SLASH + FriendlyURLNormalizerUtil.normalize(name);
+		boolean site = true;
+		boolean active = true;
 
 		return GroupLocalServiceUtil.addGroup(
 			TestPropsValues.getUserId(), null, 0, name, description, type,
@@ -254,7 +254,7 @@ public class ServiceTestUtil {
 			e.printStackTrace();
 		}
 
-		// Asset Renderer Factories
+		// Asset
 
 		AssetRendererFactoryRegistryUtil.register(
 			new BlogsEntryAssetRendererFactory());

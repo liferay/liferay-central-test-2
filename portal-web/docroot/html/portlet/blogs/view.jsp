@@ -47,7 +47,6 @@ portletURL.setParameter("struts_action", "/blogs/view");
 		AssetEntryQuery assetEntryQuery = new AssetEntryQuery(BlogsEntry.class.getName(), searchContainer);
 
 		assetEntryQuery.setExcludeZeroViewCount(false);
-
 		assetEntryQuery.setVisible(Boolean.TRUE);
 
 		total = AssetEntryServiceUtil.getEntriesCount(assetEntryQuery);
