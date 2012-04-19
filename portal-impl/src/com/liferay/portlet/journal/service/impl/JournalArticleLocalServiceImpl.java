@@ -3012,6 +3012,41 @@ public class JournalArticleLocalServiceImpl
 	}
 
 	protected String getUniqueUrlTitle(
+			long id, long groupId, String articleId, String title)
+		throws PortalException, SystemException {
+
+		String urlTitle = JournalUtil.getUrlTitle(id, title);
+
+		for (int i = 1;; i++) {
+			JournalArticle article = null;
+
+			try {
+				article = getArticleByUrlTitle(groupId, urlTitle);
+			}
+			catch (NoSuchArticleException nsae) {
+			}
+
+			if ((article == null) || articleId.equals(article.getArticleId())) {
+				break;
+			}
+			else {
+				String suffix = StringPool.DASH + i;
+
+				String prefix = urlTitle;
+
+				if (urlTitle.length() > suffix.length()) {
+					prefix = urlTitle.substring(
+						0, urlTitle.length() - suffix.length());
+				}
+
+				urlTitle = prefix + suffix;
+			}
+		}
+
+		return urlTitle;
+	}
+
+	protected String getUniqueUrlTitle(
 			long id, String articleId, String title, String oldUrlTitle,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
@@ -3048,41 +3083,6 @@ public class JournalArticleLocalServiceImpl
 			else {
 				urlTitle = getUniqueUrlTitle(
 					id, serviceContext.getScopeGroupId(), articleId, title);
-			}
-		}
-
-		return urlTitle;
-	}
-
-	protected String getUniqueUrlTitle(
-			long id, long groupId, String articleId, String title)
-		throws PortalException, SystemException {
-
-		String urlTitle = JournalUtil.getUrlTitle(id, title);
-
-		for (int i = 1;; i++) {
-			JournalArticle article = null;
-
-			try {
-				article = getArticleByUrlTitle(groupId, urlTitle);
-			}
-			catch (NoSuchArticleException nsae) {
-			}
-
-			if ((article == null) || articleId.equals(article.getArticleId())) {
-				break;
-			}
-			else {
-				String suffix = StringPool.DASH + i;
-
-				String prefix = urlTitle;
-
-				if (urlTitle.length() > suffix.length()) {
-					prefix = urlTitle.substring(
-						0, urlTitle.length() - suffix.length());
-				}
-
-				urlTitle = prefix + suffix;
 			}
 		}
 

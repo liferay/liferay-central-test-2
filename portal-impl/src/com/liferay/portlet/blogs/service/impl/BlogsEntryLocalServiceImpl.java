@@ -1114,6 +1114,35 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		return entry;
 	}
 
+	protected String getUniqueUrlTitle(long entryId, long groupId, String title)
+		throws SystemException {
+
+		String urlTitle = BlogsUtil.getUrlTitle(entryId, title);
+
+		for (int i = 1;; i++) {
+			BlogsEntry entry = blogsEntryPersistence.fetchByG_UT(
+				groupId, urlTitle);
+
+			if ((entry == null) || (entryId == entry.getEntryId())) {
+				break;
+			}
+			else {
+				String suffix = StringPool.DASH + i;
+
+				String prefix = urlTitle;
+
+				if (urlTitle.length() > suffix.length()) {
+					prefix = urlTitle.substring(
+						0, urlTitle.length() - suffix.length());
+				}
+
+				urlTitle = prefix + suffix;
+			}
+		}
+
+		return urlTitle;
+	}
+
 	protected String getUniqueUrlTitle(
 			long entryId, String title, String oldUrlTitle,
 			ServiceContext serviceContext)
@@ -1144,35 +1173,6 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			else {
 				urlTitle = getUniqueUrlTitle(
 					entryId, serviceContext.getScopeGroupId(), title);
-			}
-		}
-
-		return urlTitle;
-	}
-
-	protected String getUniqueUrlTitle(long entryId, long groupId, String title)
-		throws SystemException {
-
-		String urlTitle = BlogsUtil.getUrlTitle(entryId, title);
-
-		for (int i = 1;; i++) {
-			BlogsEntry entry = blogsEntryPersistence.fetchByG_UT(
-				groupId, urlTitle);
-
-			if ((entry == null) || (entryId == entry.getEntryId())) {
-				break;
-			}
-			else {
-				String suffix = StringPool.DASH + i;
-
-				String prefix = urlTitle;
-
-				if (urlTitle.length() > suffix.length()) {
-					prefix = urlTitle.substring(
-						0, urlTitle.length() - suffix.length());
-				}
-
-				urlTitle = prefix + suffix;
 			}
 		}
 
