@@ -18,6 +18,8 @@ import com.liferay.portal.kernel.util.Validator;
 
 import java.io.IOException;
 
+import java.lang.reflect.Constructor;
+
 import java.net.URL;
 
 import java.nio.charset.Charset;
@@ -51,8 +53,9 @@ public class BaseJsonClientTestCase {
 	public static final String URL_JSONWS = "/api/secure/jsonws";
 
 	@SuppressWarnings("unchecked")
-	public void checkException(String response) throws Exception {
-		String exceptionString = readResponse(response, "exception", true);
+	public void checkException(String responseContent) throws Exception {
+		String exceptionString = parseResponseContent(
+			responseContent, "exception", true);
 
 		if (Validator.isNull(exceptionString)) {
 			return;
@@ -69,8 +72,10 @@ public class BaseJsonClientTestCase {
 
 			Class<Exception> clazz = (Class<Exception>)Class.forName(className);
 
-			exception = clazz.getDeclaredConstructor(String.class).newInstance(
-				message);
+			Constructor<Exception> constructor = clazz.getDeclaredConstructor(
+				String.class);
+
+			exception = constructor.newInstance(message);
 		}
 		catch (Exception e) {
 		}
@@ -83,42 +88,41 @@ public class BaseJsonClientTestCase {
 		}
 	}
 
-	public String executeHttpRequest(HttpRequest httpRequest) throws Exception {
-		return executeHttpRequest(
-			TestPropsValues.getLogin(), TestPropsValues.USER_PASSWORD,
-			httpRequest);
+	public String executeRequest(HttpRequest request) throws Exception {
+		return executeRequest(
+			TestPropsValues.getLogin(), TestPropsValues.USER_PASSWORD, request);
 	}
 
-	public String executeHttpRequest(
-			String login, String password, HttpRequest httpRequest)
+	public String executeRequest(
+			String login, String password, HttpRequest request)
 		throws Exception {
 
-		DefaultHttpClient httpClient = new DefaultHttpClient();
+		DefaultHttpClient defaultHttpClient = new DefaultHttpClient();
 
 		URL url = new URL(TestPropsValues.PORTAL_URL);
 
-		HttpHost host = new HttpHost(
+		HttpHost httpHost = new HttpHost(
 			url.getHost(), url.getPort(), url.getProtocol());
 
 		CredentialsProvider credentialsProvider =
-			httpClient.getCredentialsProvider();
+			defaultHttpClient.getCredentialsProvider();
 
 		credentialsProvider.setCredentials(
 			new AuthScope(url.getHost(), url.getPort()),
 			new UsernamePasswordCredentials(login, password));
 
-		BasicAuthCache authCache = new BasicAuthCache();
+		BasicAuthCache basicAuthCache = new BasicAuthCache();
 
-		BasicScheme basicAuth = new BasicScheme();
+		BasicScheme basicScheme = new BasicScheme();
 
-		authCache.put(host, basicAuth);
+		basicAuthCache.put(httpHost, basicScheme);
 
-		BasicHttpContext localContext = new BasicHttpContext();
+		BasicHttpContext basicHttpContext = new BasicHttpContext();
 
-		localContext.setAttribute(ClientContext.AUTH_CACHE, authCache);
+		basicHttpContext.setAttribute(ClientContext.AUTH_CACHE, basicAuthCache);
 
-		return httpClient.execute(
-			host, httpRequest, new StringHandler(), localContext);
+		return defaultHttpClient.execute(
+			httpHost, request, new StringHandler(), basicHttpContext);
 	}
 
 	public ContentBody getByteArrayBody(
@@ -144,12 +148,12 @@ public class BaseJsonClientTestCase {
 		return new StringBody(String.valueOf(value), Charset.defaultCharset());
 	}
 
-	public String readResponse(
-		String response, String variable, boolean string) {
+	public String parseResponseContent(
+		String responseContent, String variable, boolean string) {
 
 		variable = "\"" + variable + "\"";
 
-		int beginIndex = response.indexOf(variable);
+		int beginIndex = responseContent.indexOf(variable);
 
 		if (beginIndex == -1) {
 			return null;
@@ -160,36 +164,36 @@ public class BaseJsonClientTestCase {
 		if (string) {
 			beginIndex++;
 
-			int endIndex = response.indexOf("\",", beginIndex);
+			int endIndex = responseContent.indexOf("\",", beginIndex);
 
 			if (endIndex == -1) {
-				endIndex = response.length() - 2;
+				endIndex = responseContent.length() - 2;
 			}
 
-			return response.substring(beginIndex, endIndex);
+			return responseContent.substring(beginIndex, endIndex);
 		}
 		else {
-			return response.substring(
-				beginIndex, response.indexOf(",", beginIndex));
+			return responseContent.substring(
+				beginIndex, responseContent.indexOf(",", beginIndex));
 		}
 	}
 
 	private class StringHandler implements ResponseHandler<String> {
 
-		public String handleResponse(HttpResponse httpResponse)
-			throws HttpResponseException, IOException{
+		public String handleResponse(HttpResponse response)
+			throws HttpResponseException, IOException {
 
-			checkStatusCode(httpResponse.getStatusLine());
+			checkStatusCode(response.getStatusLine());
 
-			HttpEntity entity = httpResponse.getEntity();
+			HttpEntity httpEntity = response.getEntity();
 
-			if (entity == null) {
+			if (httpEntity == null) {
 				return null;
 			}
 
-			String response = EntityUtils.toString(entity);
+			String responseContent = EntityUtils.toString(httpEntity);
 
-			return response;
+			return responseContent;
 		}
 
 		protected void checkStatusCode(StatusLine statusLine)

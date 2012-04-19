@@ -50,7 +50,7 @@ public class DLAppServiceJsonTest extends BaseJsonClientTestCase {
 		HttpPost httpPost = new HttpPost(_URL_DELETE_FOLDER);
 
 		MultipartEntity multipartEntity = getMultipartEntity(
-			new String[] { "repositoryId", "parentFolderId", "name" },
+			new String[] {"repositoryId", "parentFolderId", "name"},
 			new Object[] {
 				TestPropsValues.getGroupId(),
 				DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, name
@@ -58,7 +58,7 @@ public class DLAppServiceJsonTest extends BaseJsonClientTestCase {
 
 		httpPost.setEntity(multipartEntity);
 
-		executeHttpRequest(httpPost);
+		executeRequest(httpPost);
 
 		httpPost = new HttpPost(_URL_ADD_FOLDER);
 
@@ -73,12 +73,12 @@ public class DLAppServiceJsonTest extends BaseJsonClientTestCase {
 
 		httpPost.setEntity(multipartEntity);
 
-		String response = executeHttpRequest(httpPost);
+		String responseContent = executeRequest(httpPost);
 
-		checkException(response);
+		checkException(responseContent);
 
 		_folderId = GetterUtil.getLong(
-			readResponse(response, "folderId", false));
+			parseResponseContent(responseContent, "folderId", false));
 
 		Assert.assertNotSame(0, _folderId);
 	}
@@ -89,29 +89,29 @@ public class DLAppServiceJsonTest extends BaseJsonClientTestCase {
 			HttpPost httpPost = new HttpPost(_URL_DELETE_FOLDER);
 
 			MultipartEntity multipartEntity = getMultipartEntity(
-				new String[] { "folderId" }, new Object[] { _folderId });
+				new String[] {"folderId"}, new Object[] {_folderId});
 
 			httpPost.setEntity(multipartEntity);
 
-			executeHttpRequest(httpPost);
+			executeRequest(httpPost);
 		}
 	}
 
 	@Test
 	public void testAddFileEntry() throws Exception {
-		String response = addFileEntry("Test Add.txt");
+		String responseContent = addFileEntry("Test Add.txt");
 
-		checkException(response);
+		checkException(responseContent);
 	}
 
 	@Test
 	public void testDeleteFileEntry() throws Exception {
-		String response = addFileEntry("Test Delete.txt");
+		String responseContent = addFileEntry("Test Delete.txt");
 
-		checkException(response);
+		checkException(responseContent);
 
 		long fileEntryId = GetterUtil.getLong(
-			readResponse(response, "fileEntryId", false));
+			parseResponseContent(responseContent, "fileEntryId", false));
 
 		Assert.assertNotSame(0, fileEntryId);
 
@@ -122,18 +122,18 @@ public class DLAppServiceJsonTest extends BaseJsonClientTestCase {
 
 		httpPost.setEntity(multipartEntity);
 
-		response = executeHttpRequest(httpPost);
+		responseContent = executeRequest(httpPost);
 
-		checkException(response);
+		checkException(responseContent);
 	}
 
 	@Test
 	public void testGetFileEntry() throws Exception {
-		String response = addFileEntry("Test Get.txt");
+		String responseContent = addFileEntry("Test Get.txt");
 
-		checkException(response);
+		checkException(responseContent);
 
-		String uuid = readResponse(response, "uuid", true);
+		String uuid = parseResponseContent(responseContent, "uuid", true);
 		String groupId = String.valueOf(TestPropsValues.getGroupId());
 
 		String url = StringUtil.replace(
@@ -142,9 +142,9 @@ public class DLAppServiceJsonTest extends BaseJsonClientTestCase {
 
 		HttpGet httpGet = new HttpGet(url);
 
-		response = executeHttpRequest(httpGet);
+		responseContent = executeRequest(httpGet);
 
-		checkException(response);
+		checkException(responseContent);
 	}
 
 	protected String addFileEntry(String title) throws Exception {
@@ -172,7 +172,7 @@ public class DLAppServiceJsonTest extends BaseJsonClientTestCase {
 
 		httpPost.setEntity(multipartEntity);
 
-		return executeHttpRequest(httpPost);
+		return executeRequest(httpPost);
 	}
 
 	private static final String _CONTENT =
