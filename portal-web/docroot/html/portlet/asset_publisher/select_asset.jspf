@@ -15,13 +15,9 @@
 --%>
 
 <%
-String modelResourceName = ResourceActionsUtil.getModelResource(locale, typeSelection);
-
-int assetEntryOrder = ParamUtil.getInteger(request, "assetEntryOrder", -1);
-
 long groupId = ParamUtil.getLong(request, "groupId");
 
-String keywords = ParamUtil.getString(request, "keywords");
+int assetEntryOrder = ParamUtil.getInteger(request, "assetEntryOrder", -1);
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
@@ -29,11 +25,12 @@ portletURL.setParameter("struts_action", "/portlet_configuration/edit_configurat
 portletURL.setParameter("redirect", redirect);
 portletURL.setParameter("backURL", redirect);
 portletURL.setParameter("portletResource", portletResource);
-portletURL.setParameter("typeSelection", typeSelection);
 
 if (groupId > 0) {
 	portletURL.setParameter("groupId", String.valueOf(groupId));
 }
+
+portletURL.setParameter("typeSelection", typeSelection);
 %>
 
 <liferay-ui:header

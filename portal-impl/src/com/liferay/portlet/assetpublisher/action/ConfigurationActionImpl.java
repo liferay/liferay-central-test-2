@@ -91,11 +91,11 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 				else if (cmd.equals("remove-selection")) {
 					removeSelection(actionRequest, preferences);
 				}
-				else if (cmd.equals("selection-style")) {
-					setSelectionStyle(actionRequest, preferences);
-				}
 				else if (cmd.equals("select-scope")) {
 					setScopes(actionRequest, preferences);
+				}
+				else if (cmd.equals("selection-style")) {
+					setSelectionStyle(actionRequest, preferences);
 				}
 
 				if (SessionErrors.isEmpty(actionRequest)) {
