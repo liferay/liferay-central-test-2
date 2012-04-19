@@ -88,6 +88,7 @@ public class DLFileEntryAssetRenderer extends BaseAssetRenderer {
 		return _fileVersion.getTitle();
 	}
 
+	@Override
 	public String getURLDownload(ThemeDisplay themeDisplay) {
 		return DLUtil.getPreviewURL(
 			_fileEntry, _fileVersion, themeDisplay, StringPool.BLANK);
