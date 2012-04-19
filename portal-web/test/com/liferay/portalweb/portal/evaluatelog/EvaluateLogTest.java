@@ -91,9 +91,10 @@ public class EvaluateLogTest extends BaseTestCase {
 
 			// LPS-22821
 
-			if (line.contains("Exception sending context destroyed event to " +
-					"listener instance of class com.liferay.portal.spring." +
-					"context.PortalContextLoaderListener")) {
+			if (line.contains(
+					"Exception sending context destroyed event to listener " +
+						"instance of class com.liferay.portal.spring.context." +
+							"PortalContextLoaderListener")) {
 
 				continue;
 			}
