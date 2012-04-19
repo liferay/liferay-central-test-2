@@ -142,7 +142,8 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		entry.setCreateDate(serviceContext.getCreateDate(now));
 		entry.setModifiedDate(serviceContext.getModifiedDate(now));
 		entry.setTitle(title);
-		entry.setUrlTitle(getUniqueUrlTitle(entry, title, serviceContext));
+		entry.setUrlTitle(
+			getUniqueUrlTitle(entryId, title, null, serviceContext));
 		entry.setDescription(description);
 		entry.setContent(content);
 		entry.setDisplayDate(displayDate);
@@ -918,7 +919,8 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		entry.setModifiedDate(serviceContext.getModifiedDate(null));
 		entry.setTitle(title);
-		entry.setUrlTitle(getUniqueUrlTitle(entry, title, serviceContext));
+		entry.setUrlTitle(
+			getUniqueUrlTitle(entryId, title, oldUrlTitle, serviceContext));
 		entry.setDescription(description);
 		entry.setContent(content);
 		entry.setDisplayDate(displayDate);
@@ -1113,7 +1115,8 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 	}
 
 	protected String getUniqueUrlTitle(
-			BlogsEntry entry, String title, ServiceContext serviceContext)
+			long entryId, String title, String oldUrlTitle,
+			ServiceContext serviceContext)
 		throws SystemException {
 
 		String serviceContextUrlTitle = GetterUtil.getString(
@@ -1122,30 +1125,25 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		String urlTitle = null;
 
 		if (isMatchesServiceContextUrlTitle(serviceContextUrlTitle)) {
-			urlTitle = BlogsUtil.getUrlTitle(
-				entry.getEntryId(), serviceContextUrlTitle);
+			urlTitle = BlogsUtil.getUrlTitle(entryId, serviceContextUrlTitle);
 
 			BlogsEntry urlTitleEntry = blogsEntryPersistence.fetchByG_UT(
 				serviceContext.getScopeGroupId(), urlTitle);
 
 			if ((urlTitleEntry != null) &&
-				(urlTitleEntry.getEntryId() != entry.getEntryId())) {
+				(urlTitleEntry.getEntryId() != entryId)) {
 
 				urlTitle = getUniqueUrlTitle(
-					entry.getEntryId(), serviceContext.getScopeGroupId(),
-					urlTitle);
+					entryId, serviceContext.getScopeGroupId(), urlTitle);
 			}
 		}
 		else {
-			if (!entry.isNew() &&
-				isMatchesServiceContextUrlTitle(entry.getUrlTitle())) {
-
-				urlTitle = entry.getUrlTitle();
+			if (isMatchesServiceContextUrlTitle(oldUrlTitle)) {
+				urlTitle = oldUrlTitle;
 			}
 			else {
 				urlTitle = getUniqueUrlTitle(
-					entry.getEntryId(), serviceContext.getScopeGroupId(),
-					title);
+					entryId, serviceContext.getScopeGroupId(), title);
 			}
 		}
 
