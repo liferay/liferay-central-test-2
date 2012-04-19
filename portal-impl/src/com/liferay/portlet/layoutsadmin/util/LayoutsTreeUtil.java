@@ -106,6 +106,16 @@ public class LayoutsTreeUtil {
 
 			jsonObject.put("contentDisplayPage", layout.isContentDisplayPage());
 			jsonObject.put("friendlyURL", layout.getFriendlyURL());
+
+			if (layout instanceof VirtualLayout) {
+				VirtualLayout virtualLayout = (VirtualLayout)layout;
+
+				jsonObject.put("groupId", virtualLayout.getSourceGroupId());
+			}
+			else {
+				jsonObject.put("groupId", layout.getGroupId());
+			}
+
 			jsonObject.put("hasChildren", layout.hasChildren());
 			jsonObject.put("layoutId", layout.getLayoutId());
 			jsonObject.put("name", layout.getName(themeDisplay.getLocale()));
@@ -116,15 +126,6 @@ public class LayoutsTreeUtil {
 			jsonObject.put("type", layout.getType());
 			jsonObject.put("updateable", SitesUtil.isLayoutUpdateable(layout));
 			jsonObject.put("uuid", layout.getUuid());
-
-			if (layout instanceof VirtualLayout) {
-				VirtualLayout virtualLayout = (VirtualLayout)layout;
-
-				jsonObject.put("groupId", virtualLayout.getSourceGroupId());
-			}
-			else {
-				jsonObject.put("groupId", layout.getGroupId());
-			}
 
 			LayoutRevision layoutRevision = LayoutStagingUtil.getLayoutRevision(
 				layout);

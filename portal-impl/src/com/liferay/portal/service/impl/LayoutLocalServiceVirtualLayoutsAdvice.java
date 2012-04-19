@@ -161,21 +161,21 @@ public class LayoutLocalServiceVirtualLayoutsAdvice
 
 		layouts = ListUtil.copy(layouts);
 
-		List<Layout> childrenLayouts = new ArrayList<Layout>();
+		List<Layout> childLayouts = new ArrayList<Layout>();
 
-		for (Layout userLayout : layouts) {
-			Group layoutGroup = userLayout.getGroup();
+		for (Layout layout : layouts) {
+			Layout childLayout = layout;
 
-			Layout layout = userLayout;
+			Group layoutGroup = layout.getGroup();
 
 			if (layoutGroup.isUserGroup()) {
-				layout = new VirtualLayout(userLayout, group);
+				childLayout = new VirtualLayout(layout, group);
 			}
 
-			childrenLayouts.add(layout);
+			childLayouts.add(childLayout);
 		}
 
-		return childrenLayouts;
+		return childLayouts;
 	}
 
 	protected List<Layout> addUserGroupLayouts(
