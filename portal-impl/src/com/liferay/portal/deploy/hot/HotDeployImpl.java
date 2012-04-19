@@ -213,13 +213,25 @@ public class HotDeployImpl implements HotDeploy {
 
 			_dependentHotDeployEvents.remove(hotDeployEvent);
 
-			initDependentServletContextListeners();
+			ClassLoader contextClassLoader = getContextClassLoader();
 
-			List<HotDeployEvent> dependentEvents =
-				new ArrayList<HotDeployEvent>(_dependentHotDeployEvents);
+			try {
+				setContextClassLoader(PortalClassLoaderUtil.getClassLoader());
 
-			for (HotDeployEvent dependentEvent : dependentEvents) {
-				fireDeployEvent(dependentEvent);
+				initDependentServletContextListeners();
+
+				List<HotDeployEvent> dependentEvents =
+					new ArrayList<HotDeployEvent>(_dependentHotDeployEvents);
+
+				for (HotDeployEvent dependentEvent : dependentEvents) {
+					setContextClassLoader(
+						dependentEvent.getContextClassLoader());
+
+					fireDeployEvent(dependentEvent);
+				}
+			}
+			finally {
+				setContextClassLoader(contextClassLoader);
 			}
 		}
 		else {
@@ -257,6 +269,12 @@ public class HotDeployImpl implements HotDeploy {
 		}
 	}
 
+	protected ClassLoader getContextClassLoader() {
+		Thread thread = Thread.currentThread();
+
+		return thread.getContextClassLoader();
+	}
+
 	protected String getRequiredServletContextNames(
 		HotDeployEvent hotDeployEvent) {
 
@@ -278,7 +296,7 @@ public class HotDeployImpl implements HotDeploy {
 	}
 
 	protected void initDependentServletContextListener(
-		Thread currentThread, DependentServletContext dependentServletContext) {
+		DependentServletContext dependentServletContext) {
 
 		ClassLoader portletClassLoader =
 			PortletClassLoaderUtil.getClassLoader();
@@ -290,9 +308,6 @@ public class HotDeployImpl implements HotDeploy {
 				dependentServletContext.getClassLoader());
 			PortletClassLoaderUtil.setServletContextName(
 				dependentServletContext.getServletContextName());
-
-			currentThread.setContextClassLoader(
-				PortalClassLoaderUtil.getClassLoader());
 
 			ServletContextListener servletContextListener =
 				dependentServletContext.getServletContextListener();
@@ -333,18 +348,7 @@ public class HotDeployImpl implements HotDeploy {
 					continue;
 				}
 
-				Thread currentThread = Thread.currentThread();
-
-				ClassLoader contextClassLoader =
-					currentThread.getContextClassLoader();
-
-				try {
-					initDependentServletContextListener(
-						currentThread, dependentServletContext);
-				}
-				finally {
-					currentThread.setContextClassLoader(contextClassLoader);
-				}
+				initDependentServletContextListener(dependentServletContext);
 
 				dependentServletContextIterator.remove();
 			}
@@ -353,6 +357,12 @@ public class HotDeployImpl implements HotDeploy {
 				servletContextNamesIterator.remove();
 			}
 		}
+	}
+
+	protected void setContextClassLoader(ClassLoader contextClassLoader) {
+		Thread thread = Thread.currentThread();
+
+		thread.setContextClassLoader(contextClassLoader);
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(HotDeployUtil.class);
