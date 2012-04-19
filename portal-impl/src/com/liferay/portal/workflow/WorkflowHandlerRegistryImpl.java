@@ -54,8 +54,7 @@ public class WorkflowHandlerRegistryImpl implements WorkflowHandlerRegistry {
 		_workflowHandlerMap.remove(workflowHandler.getClassName());
 
 		if (workflowHandler.isScopeable()) {
-			_scopeableWorkflowHandlerMap.remove(
-				workflowHandler.getClassName());
+			_scopeableWorkflowHandlerMap.remove(workflowHandler.getClassName());
 		}
 	}
 
