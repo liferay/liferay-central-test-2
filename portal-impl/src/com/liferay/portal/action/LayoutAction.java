@@ -104,6 +104,7 @@ import com.liferay.portlet.ResourceRequestImpl;
 import com.liferay.portlet.ResourceResponseFactory;
 import com.liferay.portlet.ResourceResponseImpl;
 import com.liferay.portlet.StateAwareResponseImpl;
+import com.liferay.portlet.layoutconfiguration.util.RuntimePortletUtil;
 import com.liferay.portlet.login.util.LoginUtil;
 import com.liferay.util.servlet.filters.CacheResponseUtil;
 
@@ -1069,13 +1070,15 @@ public class LayoutAction extends Action {
 			stringResponse = (StringServletResponse)
 				renderResponseImpl.getHttpServletResponse();
 
+			ServletContext servletContext =
+				(ServletContext)request.getAttribute(WebKeys.CTX);
+
 			Portlet portlet = processPortletRequest(
 				request, response, PortletRequest.RENDER_PHASE);
 
-			InvokerPortlet invokerPortlet = PortletInstanceFactoryUtil.create(
-				portlet, null);
-
-			invokerPortlet.render(renderRequestImpl, renderResponseImpl);
+			RuntimePortletUtil.processPortlet(
+				servletContext, request, stringResponse, renderRequestImpl,
+				renderResponseImpl, portlet.getPortletId(), null, true);
 
 			if (Validator.isNull(stringResponse.getString())) {
 				stringResponse.setString(null);
