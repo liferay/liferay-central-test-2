@@ -55,15 +55,17 @@ public class LiferayIdentifyCmd extends IdentifyCmd {
 			_log.info("Excecuting command '" + sb.toString() + "'");
 		}
 
-		ArrayListOutputConsumer outputConsumer = new ArrayListOutputConsumer();
+		ArrayListOutputConsumer arrayListOutputConsumer =
+			new ArrayListOutputConsumer();
 
-		_instance.setOutputConsumer(outputConsumer);
+		_instance.setOutputConsumer(arrayListOutputConsumer);
+
 		_instance.run(arguments);
 
-		List<String> outputList = outputConsumer.getOutput();
+		List<String> output = arrayListOutputConsumer.getOutput();
 
-		if (outputList != null) {
-			return outputList.toArray(new String[0]);
+		if (output != null) {
+			return output.toArray(new String[0]);
 		}
 		else {
 			return new String[0];

@@ -198,8 +198,8 @@ public class ImageMagickImpl implements ImageMagick {
 		public ImageMagickProcessCallable(
 			String serverId, String liferayHome,
 			Map<String, String> customLogSettings, String globalSearchPath,
-			List<String> resourceLimits,
-			List<String> commandArguments, boolean convert) {
+			List<String> resourceLimits, List<String> commandArguments,
+			boolean convert) {
 
 			_serverId = serverId;
 			_liferayHome = liferayHome;

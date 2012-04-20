@@ -15,6 +15,7 @@
 package com.liferay.portal.image;
 
 import com.liferay.portal.kernel.image.ImageBag;
+import com.liferay.portal.kernel.image.ImageMagick;
 import com.liferay.portal.kernel.image.ImageTool;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
@@ -64,7 +65,9 @@ public class ImageToolImpl implements ImageTool {
 	public RenderedImage convertCMYKtoRGB(
 		byte[] bytes, String type, boolean fork) {
 
-		if (!getImageMagickUtil().isEnabled()) {
+		ImageMagick imageMagick = getImageMagick();
+
+		if (!imageMagick.isEnabled()) {
 			return null;
 		}
 
@@ -79,7 +82,7 @@ public class ImageToolImpl implements ImageTool {
 			imOperation.addRawArgs("-format", "%[colorspace]");
 			imOperation.addImage(inputFile.getPath());
 
-			String[] output = getImageMagickUtil().identify(
+			String[] output = imageMagick.identify(
 				imOperation.getCmdArgs(), fork);
 
 			if ((output.length == 1) && output[0].equalsIgnoreCase("CMYK")) {
@@ -93,7 +96,7 @@ public class ImageToolImpl implements ImageTool {
 				imOperation.addImage(inputFile.getPath());
 				imOperation.addImage(outputFile.getPath());
 
-				getImageMagickUtil().convert(imOperation.getCmdArgs(), fork);
+				imageMagick.convert(imOperation.getCmdArgs(), fork);
 
 				bytes = _fileUtil.getBytes(outputFile);
 
@@ -389,14 +392,14 @@ public class ImageToolImpl implements ImageTool {
 		}
 	}
 
-	protected ImageMagickImpl getImageMagickUtil() {
-		if (_imageMagickUtil == null) {
-			_imageMagickUtil = ImageMagickImpl.getInstance();
+	protected ImageMagick getImageMagick() {
+		if (_imageMagick == null) {
+			_imageMagick = ImageMagickImpl.getInstance();
 
-			_imageMagickUtil.reset();
+			_imageMagick.reset();
 		}
 
-		return _imageMagickUtil;
+		return _imageMagick;
 	}
 
 	protected RenderedImage read(byte[] bytes, String type) {
@@ -451,7 +454,6 @@ public class ImageToolImpl implements ImageTool {
 	private static ImageTool _instance = new ImageToolImpl();
 
 	private static FileImpl _fileUtil = FileImpl.getInstance();
-
-	private static ImageMagickImpl _imageMagickUtil;
+	private static ImageMagick _imageMagick;
 
 }
