@@ -1054,8 +1054,7 @@ public abstract class BaseIndexer implements Indexer {
 		Locale[] locales = LanguageUtil.getAvailableLocales();
 
 		for (Locale locale : locales) {
-			String countryName = LanguageUtil.get(
-				locale, "country." + country.getName());
+			String countryName = country.getName(locale);
 
 			countryName = countryName.toLowerCase();
 

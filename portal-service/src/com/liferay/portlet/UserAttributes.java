@@ -16,7 +16,6 @@ package com.liferay.portlet;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -492,8 +491,7 @@ public class UserAttributes {
 			if (_personalAddress != null) {
 				Country country = _personalAddress.getCountry();
 
-				return LanguageUtil.get(
-					_user.getLocale(), "country." + country.getName());
+				return country.getName(_user.getLocale());
 			}
 
 			return StringPool.BLANK;
@@ -636,8 +634,7 @@ public class UserAttributes {
 			if (_businessAddress != null) {
 				Country country = _businessAddress.getCountry();
 
-				return LanguageUtil.get(
-					_user.getLocale(), "country." + country.getName());
+				return country.getName(_user.getLocale());
 			}
 
 			return StringPool.BLANK;
