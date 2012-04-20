@@ -1545,12 +1545,12 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			roleIds = checkRoles(userId, roleIds);
 		}
 
-		if (userGroupIds != null) {
-			userGroupIds = checkUserGroupIds(userId, userGroupIds);
-		}
-
 		if (userGroupRoles != null) {
 			userGroupRoles = checkUserGroupRoles(userId, userGroupRoles);
+		}
+
+		if (userGroupIds != null) {
+			userGroupIds = checkUserGroupIds(userId, userGroupIds);
 		}
 
 		return userLocalService.updateUser(
@@ -1606,6 +1606,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 
 		if ((creatorUserId == 0) ||
 			(creatorUserId == getDefaultUserId(companyId))) {
+
 			if (!company.isStrangersWithMx() &&
 				company.hasCompanyMx(emailAddress)) {
 
@@ -1622,11 +1623,13 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 		PermissionChecker permissionChecker = getPermissionChecker();
 
 		if (userId != CompanyConstants.SYSTEM) {
+
 			// Add back any groups that the administrator does not have the
 			// rights to remove and check that he has the permission to add
-			// any new group
+			// a new group
 
 			List<Group> oldGroups = groupLocalService.getUserGroups(userId);
+
 			oldGroupIds = new long[oldGroups.size()];
 
 			for (int i = 0; i < oldGroups.size(); i++) {
@@ -1664,12 +1667,14 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 		PermissionChecker permissionChecker = getPermissionChecker();
 
 		if (userId != CompanyConstants.SYSTEM) {
+
 			// Add back any organizations that the administrator does not have
 			// the rights to remove and check that he has the permission to add
-			// any new organization
+			// a new organization
 
 			List<Organization> oldOrganizations =
 				organizationLocalService.getUserOrganizations(userId);
+
 			oldOrganizationIds = new long[oldOrganizations.size()];
 
 			for (int i = 0; i < oldOrganizations.size(); i++) {
@@ -1710,11 +1715,13 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 		PermissionChecker permissionChecker = getPermissionChecker();
 
 		if (userId != CompanyConstants.SYSTEM) {
+
 			// Add back any roles that the administrator does not have the
-			// rights to remove and check that he has the permission to add
-			// any new role
+			// rights to remove and check that he has the permission to add a
+			// new role
 
 			List<Role> oldRoles = roleLocalService.getUserRoles(userId);
+
 			oldRoleIds = new long[oldRoles.size()];
 
 			for (int i = 0; i < oldRoles.size(); i++) {
@@ -1752,12 +1759,14 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 		PermissionChecker permissionChecker = getPermissionChecker();
 
 		if (userId != CompanyConstants.SYSTEM) {
+
 			// Add back any user groups that the administrator does not have the
-			// rights to remove and check that he has the permission to add any
+			// rights to remove and check that he has the permission to add a
 			// new user group
 
 			List<UserGroup> oldUserGroups =
 				userGroupLocalService.getUserUserGroups(userId);
+
 			oldUserGroupIds = new long[oldUserGroups.size()];
 
 			for (int i = 0; i < oldUserGroups.size(); i++) {
@@ -1798,11 +1807,13 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 		PermissionChecker permissionChecker = getPermissionChecker();
 
 		if (userId != CompanyConstants.SYSTEM) {
-			// Add back any group roles that the administrator does not have the
-			// rights to remove
 
-			oldUserGroupRoles =
-				userGroupRoleLocalService.getUserGroupRoles(userId);
+			// Add back any user group roles that the administrator does not
+			// have the rights to remove and check that he has the permission to
+			// add a new user group role
+
+			oldUserGroupRoles = userGroupRoleLocalService.getUserGroupRoles(
+				userId);
 
 			for (UserGroupRole oldUserGroupRole : oldUserGroupRoles) {
 				if (!userGroupRoles.contains(oldUserGroupRole) &&
