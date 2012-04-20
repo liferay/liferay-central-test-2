@@ -16,8 +16,12 @@ package com.liferay.portalweb.portlet.messageboards.message.movecategorymessaget
 
 import com.liferay.portalweb.portal.BaseTestSuite;
 import com.liferay.portalweb.portal.util.TearDownPageTest;
-import com.liferay.portalweb.portlet.messageboards.portlet.addportlet.AddPageMBTest;
-import com.liferay.portalweb.portlet.messageboards.portlet.addportlet.AddPortletMBTest;
+import com.liferay.portalweb.portlet.messageboards.mbcategory.addmbcategory.AddMBCategory1Test;
+import com.liferay.portalweb.portlet.messageboards.mbcategory.addmbcategory.AddMBCategory2Test;
+import com.liferay.portalweb.portlet.messageboards.mbcategory.addmbcategory.TearDownMBCategoryTest;
+import com.liferay.portalweb.portlet.messageboards.mbmessage.postnewmbcategorythreadmessage.PostNewMBCategory1ThreadMessageTest;
+import com.liferay.portalweb.portlet.messageboards.portlet.addportletmb.AddPageMBTest;
+import com.liferay.portalweb.portlet.messageboards.portlet.addportletmb.AddPortletMBTest;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -30,9 +34,9 @@ public class MoveCategoryMessageToCategoryTests extends BaseTestSuite {
 		TestSuite testSuite = new TestSuite();
 		testSuite.addTestSuite(AddPageMBTest.class);
 		testSuite.addTestSuite(AddPortletMBTest.class);
-		testSuite.addTestSuite(AddCategory1Test.class);
-		testSuite.addTestSuite(AddCategory2Test.class);
-		testSuite.addTestSuite(AddCategory1MessageTest.class);
+		testSuite.addTestSuite(AddMBCategory1Test.class);
+		testSuite.addTestSuite(AddMBCategory2Test.class);
+		testSuite.addTestSuite(PostNewMBCategory1ThreadMessageTest.class);
 		testSuite.addTestSuite(MoveCategoryMessageToCategoryTest.class);
 		testSuite.addTestSuite(TearDownMBCategoryTest.class);
 		testSuite.addTestSuite(TearDownPageTest.class);

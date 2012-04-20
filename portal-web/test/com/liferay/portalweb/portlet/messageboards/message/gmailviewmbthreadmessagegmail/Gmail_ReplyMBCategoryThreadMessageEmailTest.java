@@ -112,10 +112,32 @@ public class Gmail_ReplyMBCategoryThreadMessageEmailTest extends BaseTestCase {
 					RuntimeVariables.replace("Sign In"));
 				selenium.waitForPageToLoad("30000");
 				loadRequiredJavaScriptModules();
-				assertEquals(RuntimeVariables.replace("liferay.qa.server.trunk"),
-					selenium.getText("//td[5]/div/span"));
-				selenium.clickAt("//td[5]/div/span",
-					RuntimeVariables.replace("liferay.qa.server.trunk"));
+				assertTrue(selenium.isPartialText("//td[5]/div/span",
+						"liferay.qa.server"));
+
+				for (int second = 0;; second++) {
+					if (second >= 90) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isPartialText("//td[6]/div/div/div/span",
+									"MB Message Subject")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
+				assertTrue(selenium.isPartialText("//td[6]/div/div/div/span",
+						"MB Message Subject"));
+				assertTrue(selenium.isPartialText(
+						"//td[6]/div/div/div/span[2]", "MB Message Body"));
+				selenium.clickAt("//td[6]/div/div/div/span[2]",
+					RuntimeVariables.replace("MB Message Body"));
 				Thread.sleep(5000);
 
 				for (int second = 0;; second++) {
