@@ -69,9 +69,11 @@ public class VerifyProperties extends VerifyProcess {
 			verifyObsoletePortalProperty(key);
 		}
 
+		// Document library
+
 		StoreFactory.checkProperties();
 
-		// LDAP properties
+		// LDAP
 
 		verifyLDAPProperties();
 	}
