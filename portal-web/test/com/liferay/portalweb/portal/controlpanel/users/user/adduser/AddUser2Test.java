@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portalweb.portal.controlpanel.users.user.adduserpassword;
+package com.liferay.portalweb.portal.controlpanel.users.user.adduser;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
@@ -20,10 +20,13 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 /**
  * @author Brian Wing Shun Chan
  */
-public class AddUserPasswordTest extends BaseTestCase {
-	public void testAddUserPassword() throws Exception {
+public class AddUser2Test extends BaseTestCase {
+	public void testAddUser2() throws Exception {
 		selenium.open("/web/guest/home/");
 		loadRequiredJavaScriptModules();
+		assertEquals(RuntimeVariables.replace("Go to"),
+			selenium.getText("//li[@id='_145_mySites']/a/span"));
+		selenium.mouseOver("//li[@id='_145_mySites']/a/span");
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -49,15 +52,10 @@ public class AddUserPasswordTest extends BaseTestCase {
 			RuntimeVariables.replace("Users and Organizations"));
 		selenium.waitForPageToLoad("30000");
 		loadRequiredJavaScriptModules();
-		selenium.type("//input[@id='_125_keywords']",
-			RuntimeVariables.replace("selen01"));
-		selenium.clickAt("//input[@value='Search']",
-			RuntimeVariables.replace("Search"));
-		selenium.waitForPageToLoad("30000");
-		loadRequiredJavaScriptModules();
-		selenium.clickAt("//td[2]/a", RuntimeVariables.replace("User Name"));
-		selenium.waitForPageToLoad("30000");
-		loadRequiredJavaScriptModules();
+		assertEquals(RuntimeVariables.replace("Add"),
+			selenium.getText("//span[@title='Add']/ul/li/strong/a/span"));
+		selenium.clickAt("//span[@title='Add']/ul/li/strong/a/span",
+			RuntimeVariables.replace("Add"));
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -65,7 +63,8 @@ public class AddUserPasswordTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("//a[@id='_125_passwordLink']")) {
+				if (selenium.isVisible(
+							"//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a")) {
 					break;
 				}
 			}
@@ -75,54 +74,35 @@ public class AddUserPasswordTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertTrue(selenium.isPartialText("//a[@id='_125_passwordLink']",
-				"Password"));
-		selenium.clickAt("//a[@id='_125_passwordLink']",
-			RuntimeVariables.replace("Password"));
-
-		for (int second = 0;; second++) {
-			if (second >= 90) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isVisible("//input[@id='_125_password1']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.type("//input[@id='_125_password1']",
-			RuntimeVariables.replace("asdf"));
-		selenium.type("//input[@id='_125_password2']",
-			RuntimeVariables.replace("asdf"));
+		assertEquals(RuntimeVariables.replace("User"),
+			selenium.getText(
+				"//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a"));
+		selenium.click(RuntimeVariables.replace(
+				"//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a"));
+		selenium.waitForPageToLoad("30000");
+		loadRequiredJavaScriptModules();
+		selenium.type("//input[@id='_125_screenName']",
+			RuntimeVariables.replace("usersn2"));
+		selenium.type("//input[@id='_125_emailAddress']",
+			RuntimeVariables.replace("userea2@liferay.com"));
+		selenium.type("//input[@id='_125_firstName']",
+			RuntimeVariables.replace("userfn2"));
+		selenium.type("//input[@id='_125_lastName']",
+			RuntimeVariables.replace("userln2"));
 		selenium.clickAt("//input[@value='Save']",
 			RuntimeVariables.replace("Save"));
 		selenium.waitForPageToLoad("30000");
 		loadRequiredJavaScriptModules();
-
-		for (int second = 0;; second++) {
-			if (second >= 90) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isVisible("//div[@class='portlet-msg-success']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		assertEquals(RuntimeVariables.replace(
 				"Your request completed successfully."),
 			selenium.getText("//div[@class='portlet-msg-success']"));
+		assertEquals("usersn2",
+			selenium.getValue("//input[@id='_125_screenName']"));
+		assertEquals("userea2@liferay.com",
+			selenium.getValue("//input[@id='_125_emailAddress']"));
+		assertEquals("userfn2",
+			selenium.getValue("//input[@id='_125_firstName']"));
+		assertEquals("userln2",
+			selenium.getValue("//input[@id='_125_lastName']"));
 	}
 }

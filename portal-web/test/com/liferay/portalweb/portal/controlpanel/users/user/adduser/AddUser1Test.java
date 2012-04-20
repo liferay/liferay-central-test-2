@@ -20,8 +20,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 /**
  * @author Brian Wing Shun Chan
  */
-public class AddUserTest extends BaseTestCase {
-	public void testAddUser() throws Exception {
+public class AddUser1Test extends BaseTestCase {
+	public void testAddUser1() throws Exception {
 		selenium.open("/web/guest/home/");
 		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("Go to"),
@@ -82,13 +82,13 @@ public class AddUserTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		loadRequiredJavaScriptModules();
 		selenium.type("//input[@id='_125_screenName']",
-			RuntimeVariables.replace("usersn"));
+			RuntimeVariables.replace("usersn1"));
 		selenium.type("//input[@id='_125_emailAddress']",
-			RuntimeVariables.replace("userea@liferay.com"));
+			RuntimeVariables.replace("userea1@liferay.com"));
 		selenium.type("//input[@id='_125_firstName']",
-			RuntimeVariables.replace("userfn"));
+			RuntimeVariables.replace("userfn1"));
 		selenium.type("//input[@id='_125_lastName']",
-			RuntimeVariables.replace("userln"));
+			RuntimeVariables.replace("userln1"));
 		selenium.clickAt("//input[@value='Save']",
 			RuntimeVariables.replace("Save"));
 		selenium.waitForPageToLoad("30000");
@@ -96,12 +96,13 @@ public class AddUserTest extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace(
 				"Your request completed successfully."),
 			selenium.getText("//div[@class='portlet-msg-success']"));
-		assertEquals("usersn",
+		assertEquals("usersn1",
 			selenium.getValue("//input[@id='_125_screenName']"));
-		assertEquals("userea@liferay.com",
+		assertEquals("userea1@liferay.com",
 			selenium.getValue("//input[@id='_125_emailAddress']"));
-		assertEquals("userfn",
+		assertEquals("userfn1",
 			selenium.getValue("//input[@id='_125_firstName']"));
-		assertEquals("userln", selenium.getValue("//input[@id='_125_lastName']"));
+		assertEquals("userln1",
+			selenium.getValue("//input[@id='_125_lastName']"));
 	}
 }
