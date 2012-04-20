@@ -29,7 +29,6 @@ import com.liferay.portal.test.AssertUtils;
 import com.liferay.portal.test.EnvironmentExecutionTestListener;
 import com.liferay.portal.test.ExecutionTestListeners;
 import com.liferay.portal.test.LiferayIntegrationJUnitTestRunner;
-import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.TestPropsValues;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
@@ -86,7 +85,7 @@ public class BookmarksFolderServiceTest extends BaseBookmarksServiceTestCase {
 
 		BookmarksEntry entry = addEntry();
 
-		Thread.sleep(1000 * _FACTOR_DELAY);
+		Thread.sleep(1000 * TestPropsValues.JUNIT_DELAY_FACTOR);
 
 		long companyId = entry.getCompanyId();
 		long groupId = entry.getFolder().getGroupId();
@@ -137,7 +136,7 @@ public class BookmarksFolderServiceTest extends BaseBookmarksServiceTestCase {
 
 		BookmarksFolderLocalServiceUtil.deleteFolder(folderId);
 
-		Thread.sleep(1000 * _FACTOR_DELAY);
+		Thread.sleep(1000 * TestPropsValues.JUNIT_DELAY_FACTOR);
 
 		hits = indexer.search(searchContext);
 
@@ -150,7 +149,7 @@ public class BookmarksFolderServiceTest extends BaseBookmarksServiceTestCase {
 		addEntry();
 		addEntry();
 
-		Thread.sleep(1000 * _FACTOR_DELAY);
+		Thread.sleep(1000 * TestPropsValues.JUNIT_DELAY_FACTOR);
 
 		searchContext.setEnd(3);
 		searchContext.setFolderIds(null);
@@ -162,6 +161,4 @@ public class BookmarksFolderServiceTest extends BaseBookmarksServiceTestCase {
 		Assert.assertEquals(2, hits.getDocs().length);
 	}
 
-	private static final long _FACTOR_DELAY = GetterUtil.getLong(
-		PropsUtil.get("junit.factor.delay"));
 }
