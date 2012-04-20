@@ -670,7 +670,6 @@ public abstract class LiferayConverter {
 		outputIStreamCoder.setCodec(iCodec);
 
 		outputIStreamCoder.setGlobalQuality(0);
-
 		outputIStreamCoder.setSampleRate(getAudioSampleRate());
 
 		iAudioResamplers[index] = createIAudioResampler(

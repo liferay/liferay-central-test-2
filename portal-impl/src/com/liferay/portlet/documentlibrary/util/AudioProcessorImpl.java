@@ -337,7 +337,8 @@ public class AudioProcessorImpl
 						PropsUtil.get(PropsKeys.LIFERAY_HOME),
 						Log4JUtil.getCustomLogSettings(),
 						srcFile.getCanonicalPath(), destFile.getCanonicalPath(),
-						containerType, PropsUtil.getProperties(
+						containerType,
+						PropsUtil.getProperties(
 							PropsKeys.DL_FILE_ENTRY_PREVIEW_AUDIO, false));
 
 				ProcessExecutor.execute(
@@ -346,7 +347,8 @@ public class AudioProcessorImpl
 			else {
 				LiferayConverter liferayConverter = new LiferayAudioConverter(
 					srcFile.getCanonicalPath(), destFile.getCanonicalPath(),
-					containerType, PropsUtil.getProperties(
+					containerType,
+					PropsUtil.getProperties(
 						PropsKeys.DL_FILE_ENTRY_PREVIEW_AUDIO, false));
 
 				liferayConverter.convert();
@@ -472,13 +474,13 @@ public class AudioProcessorImpl
 			return StringPool.BLANK;
 		}
 
+		private String _audioContainer;
+		private Properties _audioProperties;
 		private Map<String, String> _customLogSettings;
 		private String _inputURL;
 		private String _liferayHome;
 		private String _outputURL;
 		private String _serverId;
-		private String _audioContainer;
-		private Properties _audioProperties;
 
 	}
 
