@@ -37,18 +37,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * The implementation of the journal article folder local service.
- *
- * <p>
- * All custom service methods should be put in this class. Whenever methods are added, rerun ServiceBuilder to copy their definitions into the {@link com.liferay.portlet.journal.service.JournalFolderLocalService} interface.
- *
- * <p>
- * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
- * </p>
- *
  * @author Juan Fernández
- * @see com.liferay.portlet.journal.service.base.JournalFolderLocalServiceBaseImpl
- * @see com.liferay.portlet.journal.service.JournalFolderLocalServiceUtil
  */
 public class JournalFolderLocalServiceImpl
 	extends JournalFolderLocalServiceBaseImpl {
@@ -160,9 +149,7 @@ public class JournalFolderLocalServiceImpl
 		return journalFolderPersistence.findByPrimaryKey(folderId);
 	}
 
-	public List<JournalFolder> getFolders(long groupId)
-		throws SystemException {
-
+	public List<JournalFolder> getFolders(long groupId) throws SystemException {
 		return journalFolderPersistence.findByGroupId(groupId);
 	}
 
@@ -189,13 +176,7 @@ public class JournalFolderLocalServiceImpl
 			groupId, folderId, start, end, obc);
 	}
 
-	public int getFoldersAndArticlesCount(long groupId, long folderId)
-		throws SystemException {
-
-		return journalFolderFinder.countF_A_ByG_F(groupId, folderId);
-	}
-
-	public int getFoldersArticlesCount(
+	public int getFoldersAndArticlesCount(
 			long groupId, List<Long> folderIds, int status)
 		throws SystemException {
 
@@ -212,11 +193,17 @@ public class JournalFolderLocalServiceImpl
 
 			folderIds.subList(start, end).clear();
 
-			articlesCount += getFoldersArticlesCount(
+			articlesCount += getFoldersAndArticlesCount(
 				groupId, folderIds, status);
 
 			return articlesCount;
 		}
+	}
+
+	public int getFoldersAndArticlesCount(long groupId, long folderId)
+		throws SystemException {
+
+		return journalFolderFinder.countF_A_ByG_F(groupId, folderId);
 	}
 
 	public int getFoldersCount(long groupId, long parentFolderId)
