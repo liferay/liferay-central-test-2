@@ -17,6 +17,8 @@
 <%@ include file="/html/portlet/journal/init.jsp" %>
 
 <%
+String navigation = ParamUtil.getString(request, "navigation");
+
 JournalFolder folder = (JournalFolder)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FOLDER);
 
 long folderId = BeanParamUtil.getLong(folder, request, "folderId", JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID);
@@ -33,8 +35,6 @@ if ((folder == null) && (folderId != JournalFolderConstants.DEFAULT_PARENT_FOLDE
 request.setAttribute("view.jsp-folder", folder);
 
 request.setAttribute("view.jsp-folderId", String.valueOf(folderId));
-
-String navigation = ParamUtil.getString(request, "navigation");
 %>
 
 <div id="<portlet:namespace />journalContainer">
@@ -74,7 +74,7 @@ String navigation = ParamUtil.getString(request, "navigation");
 
 				<div class="journal-container" id="<portlet:namespace />journalContainer">
 					<c:choose>
-						<c:when test='<%= (navigation.equals("recent")) %>'>
+						<c:when test='<%= navigation.equals("recent") %>'>
 							<liferay-util:include page="/html/portlet/journal/view_recent.jsp" />
 						</c:when>
 						<c:otherwise>

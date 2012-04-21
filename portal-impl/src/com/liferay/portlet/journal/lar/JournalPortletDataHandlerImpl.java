@@ -1811,8 +1811,8 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 	}
 
 	protected static void exportParentFolder(
-		PortletDataContext portletDataContext, Element foldersElement,
-		long folderId)
+			PortletDataContext portletDataContext, Element foldersElement,
+			long folderId)
 		throws Exception {
 
 		if (folderId == JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID) {

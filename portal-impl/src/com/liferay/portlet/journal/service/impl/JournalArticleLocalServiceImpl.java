@@ -2083,8 +2083,8 @@ public class JournalArticleLocalServiceImpl
 			user, groupId, articleId, article.getVersion(), incrementVersion,
 			content, structureId, images);
 
-		article.setFolderId(folderId);
 		article.setModifiedDate(serviceContext.getModifiedDate(now));
+		article.setFolderId(folderId);
 		article.setTitleMap(titleMap, locale);
 		article.setUrlTitle(
 			getUniqueUrlTitle(

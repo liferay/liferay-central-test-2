@@ -80,9 +80,7 @@ public class JournalFolderServiceImpl
 		return folder;
 	}
 
-	public List<JournalFolder> getFolders(long groupId)
-		throws SystemException {
-
+	public List<JournalFolder> getFolders(long groupId) throws SystemException {
 		return journalFolderPersistence.filterFindByGroupId(groupId);
 	}
 
@@ -110,13 +108,7 @@ public class JournalFolderServiceImpl
 			groupId, folderId, start, end, obc);
 	}
 
-	public int getFoldersAndArticlesCount(long groupId, long folderId)
-		throws SystemException {
-
-		return journalFolderFinder.filterCountF_A_ByG_F(groupId, folderId);
-	}
-
-	public int getFoldersArticlesCount(
+	public int getFoldersAndArticlesCount(
 			long groupId, List<Long> folderIds, int status)
 		throws SystemException {
 
@@ -133,11 +125,17 @@ public class JournalFolderServiceImpl
 
 			folderIds.subList(start, end).clear();
 
-			articlesCount += getFoldersArticlesCount(
+			articlesCount += getFoldersAndArticlesCount(
 				groupId, folderIds, status);
 
 			return articlesCount;
 		}
+	}
+
+	public int getFoldersAndArticlesCount(long groupId, long folderId)
+		throws SystemException {
+
+		return journalFolderFinder.filterCountF_A_ByG_F(groupId, folderId);
 	}
 
 	public int getFoldersCount(long groupId, long parentFolderId)

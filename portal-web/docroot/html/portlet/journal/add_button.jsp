@@ -25,7 +25,6 @@ Map<String, PortletURL> addArticleURLs = getAddArticleURLs(liferayPortletRequest
 %>
 
 <liferay-ui:icon-menu align="left" direction="down" icon="" message="add" showExpanded="<%= false %>" showWhenSingleIcon="<%= true %>">
-
 	<c:if test="<%= JournalFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.ADD_FOLDER) %>">
 		<portlet:renderURL var="addFolderURL">
 			<portlet:param name="struts_action" value="/journal/edit_folder" />

@@ -159,7 +159,7 @@ request.setAttribute("view_folders.jsp-total", String.valueOf(total));
 						<%
 						for (JournalFolder curFolder : folders) {
 							int foldersCount = JournalFolderServiceUtil.getFoldersCount(scopeGroupId, curFolder.getFolderId());
-							int articlesCount = JournalArticleServiceUtil.getArticlesCountByFolderId(scopeGroupId, curFolder.getFolderId());
+							int articlesCount = JournalArticleServiceUtil.getArticlesCount(scopeGroupId, curFolder.getFolderId());
 
 							request.setAttribute("view_articles.jsp-folder", curFolder);
 							request.setAttribute("view_articles.jsp-folderId", String.valueOf(curFolder.getFolderId()));

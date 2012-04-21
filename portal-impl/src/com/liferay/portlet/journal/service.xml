@@ -83,13 +83,13 @@
 			<finder-column name="resourcePrimKey" />
 			<finder-column name="status" />
 		</finder>
-		<finder name="G_A" return-type="Collection">
-			<finder-column name="groupId" />
-			<finder-column name="articleId" />
-		</finder>
 		<finder name="G_F" return-type="Collection">
 			<finder-column name="groupId" />
 			<finder-column name="folderId" arrayable-operator="OR" />
+		</finder>
+		<finder name="G_A" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="articleId" />
 		</finder>
 		<finder name="G_UT" return-type="Collection">
 			<finder-column name="groupId" />
@@ -119,6 +119,11 @@
 			<finder-column name="companyId" />
 			<finder-column name="status" />
 		</finder>
+		<finder name="G_F_ST" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="folderId" />
+			<finder-column name="status" arrayable-operator="OR" />
+		</finder>
 		<finder name="G_C_C" return-type="Collection">
 			<finder-column name="groupId" />
 			<finder-column name="classNameId" />
@@ -147,11 +152,6 @@
 		<finder name="G_A_ST" return-type="Collection">
 			<finder-column name="groupId" />
 			<finder-column name="articleId" />
-			<finder-column name="status" arrayable-operator="OR" />
-		</finder>
-		<finder name="G_F_ST" return-type="Collection">
-			<finder-column name="groupId" />
-			<finder-column name="folderId" />
 			<finder-column name="status" arrayable-operator="OR" />
 		</finder>
 		<finder name="G_UT_ST" return-type="Collection">

@@ -91,7 +91,7 @@ if (folder != null) {
 		subfolderIds.clear();
 		subfolderIds.add(curFolder.getFolderId());
 
-		articlesCount = JournalArticleServiceUtil.getFoldersArticlesCount(scopeGroupId, subfolderIds);
+		articlesCount = JournalArticleServiceUtil.getFoldersAndArticlesCount(scopeGroupId, subfolderIds);
 
 		if ((foldersCount + articlesCount) > 0) {
 			sb.append("/common/folder_full_document.png\">");

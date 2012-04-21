@@ -24,20 +24,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The extended model implementation for the JournalFolder service. Represents a row in the &quot;JournalFolder&quot; database table, with each column mapped to a property of this class.
- *
- * <p>
- * Helper methods and all application logic should be put in this class. Whenever methods are added, rerun ServiceBuilder to copy their definitions into the {@link com.liferay.portlet.journal.model.JournalFolder} interface.
- * </p>
- *
  * @author Juan Fernández
  */
 public class JournalFolderImpl extends JournalFolderBaseImpl {
-/*
-	 * NOTE FOR DEVELOPERS:
-	 *
-	 * Never reference this class directly. All methods that expect a journal article folder model instance should use the {@link com.liferay.portlet.journal.model.JournalFolder} interface instead.
-	 */
+
 	public JournalFolderImpl() {
 	}
 

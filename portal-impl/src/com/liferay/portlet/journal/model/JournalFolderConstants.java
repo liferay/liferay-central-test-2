@@ -15,8 +15,6 @@
 package com.liferay.portlet.journal.model;
 
 /**
- * <a href="JournalArticleFolderConstants.java.html"><b><i>View Source</i></b></a>
- *
  * @author Juan Fernández
  */
 public class JournalFolderConstants {

@@ -250,6 +250,21 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 			groupId, articleId, null, languageId, themeDisplay);
 	}
 
+	public List<JournalArticle> getArticles(long groupId, long folderId)
+		throws SystemException {
+
+		return journalArticlePersistence.filterFindByG_F(groupId, folderId);
+	}
+
+	public List<JournalArticle> getArticles(
+			long groupId, long folderId, int start, int end,
+			OrderByComparator obc)
+		throws SystemException {
+
+		return journalArticlePersistence.filterFindByG_F(
+			groupId, folderId, start, end, obc);
+	}
+
 	public List<JournalArticle> getArticlesByArticleId(
 			long groupId, String articleId, int start, int end,
 			OrderByComparator obc)
@@ -259,22 +274,6 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 			groupId, articleId, start, end, obc);
 	}
 
-	public List<JournalArticle> getArticlesByFolderId(
-			long groupId, long folderId)
-		throws SystemException {
-
-		return journalArticlePersistence.filterFindByG_F(groupId, folderId);
-	}
-
-	public List<JournalArticle> getArticlesByFolderId(
-			long groupId, long folderId, int start, int end,
-			OrderByComparator obc)
-		throws SystemException {
-
-		return journalArticlePersistence.filterFindByG_F(
-			groupId, folderId, start, end, obc);
-	}
-
 	public List<JournalArticle> getArticlesByLayoutUuid(
 			long groupId, String layoutUuid)
 		throws SystemException {
@@ -282,16 +281,16 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 		return journalArticlePersistence.filterFindByG_L(groupId, layoutUuid);
 	}
 
+	public int getArticlesCount(long groupId, long folderId)
+		throws SystemException {
+
+		return journalArticlePersistence.filterCountByG_F(groupId, folderId);
+	}
+
 	public int getArticlesCountByArticleId(long groupId, String articleId)
 		throws SystemException {
 
 		return journalArticlePersistence.filterCountByG_A(groupId, articleId);
-	}
-
-	public int getArticlesCountByFolderId(long groupId, long folderId)
-		throws SystemException {
-
-		return journalArticlePersistence.filterCountByG_F(groupId, folderId);
 	}
 
 	public JournalArticle getDisplayArticleByUrlTitle(
@@ -308,7 +307,7 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 		return article;
 	}
 
-	public int getFoldersArticlesCount(long groupId, List<Long> folderIds)
+	public int getFoldersAndArticlesCount(long groupId, List<Long> folderIds)
 		throws SystemException {
 
 		return journalArticlePersistence.filterCountByG_F(

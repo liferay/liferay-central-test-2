@@ -1,6 +1,29 @@
 <?xml version="1.0"?>
 
 <custom-sql>
+	<sql id="com.liferay.portlet.journal.service.persistence.JournalArticleFinder.countByG_F">
+		<![CDATA[
+			SELECT
+				COUNT(DISTINCT JournalArticle.articleId) AS COUNT_VALUE
+			FROM
+				JournalArticle
+			WHERE
+				(JournalArticle.groupId = ?)
+				[$FOLDER_ID$]
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.journal.service.persistence.JournalArticleFinder.countByG_F_S">
+		<![CDATA[
+			SELECT
+				COUNT(DISTINCT JournalArticle.articleId) AS COUNT_VALUE
+			FROM
+				JournalArticle
+			WHERE
+				(JournalArticle.groupId = ?) AND
+				(JournalArticle.status = ?)
+				[$FOLDER_ID$]
+		]]>
+	</sql>
 	<sql id="com.liferay.portlet.journal.service.persistence.JournalArticleFinder.countByC_G_F_C_A_V_T_D_C_T_S_T_D_S_R">
 		<![CDATA[
 			SELECT
@@ -40,29 +63,6 @@
 						(TEMP_TABLE.tempVersion = JournalArticle.version)
 			WHERE
 				(type_ = ? [$AND_OR_NULL_CHECK$])
-		]]>
-	</sql>
-	<sql id="com.liferay.portlet.journal.service.persistence.JournalArticleFinder.countByG_F">
-		<![CDATA[
-			SELECT
-				COUNT(DISTINCT JournalArticle.articleId) AS COUNT_VALUE
-			FROM
-				JournalArticle
-			WHERE
-				(JournalArticle.groupId = ?)
-				[$FOLDER_ID$]
-		]]>
-	</sql>
-	<sql id="com.liferay.portlet.journal.service.persistence.JournalArticleFinder.countByG_F_S">
-		<![CDATA[
-			SELECT
-				COUNT(DISTINCT JournalArticle.articleId) AS COUNT_VALUE
-			FROM
-				JournalArticle
-			WHERE
-				(JournalArticle.groupId = ?) AND
-				(JournalArticle.status = ?)
-				[$FOLDER_ID$]
 		]]>
 	</sql>
 	<sql id="com.liferay.portlet.journal.service.persistence.JournalArticleFinder.findByExpirationDate">
@@ -189,10 +189,10 @@
 				JournalArticle
 			WHERE
 				(JournalArticle.groupId = ?)
-				[$JOURNAL_ARTICLE_FOLDER_ID$]
+				[$ARTICLE_FOLDER_ID$]
 		]]>
 	</sql>
-	<sql id="com.liferay.portlet.journal.service.persistence.JournalFolderFinder.countByG_F">
+	<sql id="com.liferay.portlet.journal.service.persistence.JournalFolderFinder.countF_ByG_F">
 		<![CDATA[
 			SELECT
 				COUNT(*) AS COUNT_VALUE
@@ -206,20 +206,20 @@
 	<sql id="com.liferay.portlet.journal.service.persistence.JournalFolderFinder.findA_ByG_F">
 		<![CDATA[
 			SELECT
-				DISTINCT JournalArticle.folderId AS modelFolderId, JournalArticle.createDate as createDate, JournalArticle.modifiedDate as modifiedDate, JournalArticle.title AS title, 0 AS modelFolder, JournalArticle.articleId as articleId, MAX(JournalArticle.version) AS version
+				DISTINCT JournalArticle.folderId AS modelFolderId, JournalArticle.createDate as createDate, JournalArticle.modifiedDate as modifiedDate, JournalArticle.articleId as articleId, MAX(JournalArticle.version) AS version, JournalArticle.title AS title, 0 AS modelFolder
 			FROM
 				JournalArticle
 			WHERE
 				(JournalArticle.groupId = ?)
-				[$JOURNAL_ARTICLE_FOLDER_ID$]
+				[$ARTICLE_FOLDER_ID$]
 			GROUP BY
 				articleId
 		]]>
 	</sql>
-	<sql id="com.liferay.portlet.journal.service.persistence.JournalFolderFinder.findByG_F">
+	<sql id="com.liferay.portlet.journal.service.persistence.JournalFolderFinder.findF_ByG_F">
 		<![CDATA[
 			SELECT
-				DISTINCT folderId AS modelFolderId, JournalFolder.createDate as createDate, JournalFolder.modifiedDate as modifiedDate, JournalFolder.name AS title, 1 AS modelFolder, 0 AS articleId, 0 AS version
+				DISTINCT folderId AS modelFolderId, JournalFolder.createDate as createDate, JournalFolder.modifiedDate as modifiedDate, 0 AS articleId, 0 AS version, JournalFolder.name AS title, 1 AS modelFolder
 			FROM
 				JournalFolder
 			WHERE

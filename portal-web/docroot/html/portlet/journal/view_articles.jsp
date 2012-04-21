@@ -79,8 +79,8 @@ boolean showAddArticleButton = JournalPermission.contains(permissionChecker, sco
 <%
 ArticleSearchTerms searchTerms = (ArticleSearchTerms)searchContainer.getSearchTerms();
 
-searchTerms.setVersion(-1);
 searchTerms.setFolderId(-1);
+searchTerms.setVersion(-1);
 
 String search = ParamUtil.getString(request, displayTerms.ADVANCED_SEARCH, null);
 
@@ -163,7 +163,7 @@ for (int i = 0; i < results.size(); i++) {
 
 			<%
 			int foldersCount = JournalFolderServiceUtil.getFoldersCount(scopeGroupId, curFolder.getFolderId());
-			int articlesCount = JournalArticleServiceUtil.getArticlesCountByFolderId(scopeGroupId, curFolder.getFolderId());
+			int articlesCount = JournalArticleServiceUtil.getArticlesCount(scopeGroupId, curFolder.getFolderId());
 
 			String folderImage = "folder_empty";
 
