@@ -102,7 +102,7 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author Brian Wing Shun Chan
- * @author Raymond Augé
+ * @author Raymond AugÃ©
  * @author Wesley Gong
  * @author Angelo Jefferson
  * @author Hugo Huijser

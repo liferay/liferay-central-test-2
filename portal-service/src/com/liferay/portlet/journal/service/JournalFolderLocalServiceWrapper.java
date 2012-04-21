@@ -352,17 +352,17 @@ public class JournalFolderLocalServiceWrapper
 			folderId, start, end, obc);
 	}
 
+	public int getFoldersAndArticlesCount(long groupId,
+		java.util.List<java.lang.Long> folderIds, int status)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _journalFolderLocalService.getFoldersAndArticlesCount(groupId,
+			folderIds, status);
+	}
+
 	public int getFoldersAndArticlesCount(long groupId, long folderId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _journalFolderLocalService.getFoldersAndArticlesCount(groupId,
 			folderId);
-	}
-
-	public int getFoldersArticlesCount(long groupId,
-		java.util.List<java.lang.Long> folderIds, int status)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return _journalFolderLocalService.getFoldersArticlesCount(groupId,
-			folderIds, status);
 	}
 
 	public int getFoldersCount(long groupId, long parentFolderId)

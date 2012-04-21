@@ -270,6 +270,39 @@ public class JournalArticleServiceSoap {
 		}
 	}
 
+	public static com.liferay.portlet.journal.model.JournalArticleSoap[] getArticles(
+		long groupId, long folderId) throws RemoteException {
+		try {
+			java.util.List<com.liferay.portlet.journal.model.JournalArticle> returnValue =
+				JournalArticleServiceUtil.getArticles(groupId, folderId);
+
+			return com.liferay.portlet.journal.model.JournalArticleSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portlet.journal.model.JournalArticleSoap[] getArticles(
+		long groupId, long folderId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws RemoteException {
+		try {
+			java.util.List<com.liferay.portlet.journal.model.JournalArticle> returnValue =
+				JournalArticleServiceUtil.getArticles(groupId, folderId, start,
+					end, obc);
+
+			return com.liferay.portlet.journal.model.JournalArticleSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.portlet.journal.model.JournalArticleSoap[] getArticlesByArticleId(
 		long groupId, java.lang.String articleId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
@@ -278,40 +311,6 @@ public class JournalArticleServiceSoap {
 			java.util.List<com.liferay.portlet.journal.model.JournalArticle> returnValue =
 				JournalArticleServiceUtil.getArticlesByArticleId(groupId,
 					articleId, start, end, obc);
-
-			return com.liferay.portlet.journal.model.JournalArticleSoap.toSoapModels(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static com.liferay.portlet.journal.model.JournalArticleSoap[] getArticlesByFolderId(
-		long groupId, long folderId) throws RemoteException {
-		try {
-			java.util.List<com.liferay.portlet.journal.model.JournalArticle> returnValue =
-				JournalArticleServiceUtil.getArticlesByFolderId(groupId,
-					folderId);
-
-			return com.liferay.portlet.journal.model.JournalArticleSoap.toSoapModels(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static com.liferay.portlet.journal.model.JournalArticleSoap[] getArticlesByFolderId(
-		long groupId, long folderId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws RemoteException {
-		try {
-			java.util.List<com.liferay.portlet.journal.model.JournalArticle> returnValue =
-				JournalArticleServiceUtil.getArticlesByFolderId(groupId,
-					folderId, start, end, obc);
 
 			return com.liferay.portlet.journal.model.JournalArticleSoap.toSoapModels(returnValue);
 		}
@@ -338,11 +337,11 @@ public class JournalArticleServiceSoap {
 		}
 	}
 
-	public static int getArticlesCountByArticleId(long groupId,
-		java.lang.String articleId) throws RemoteException {
+	public static int getArticlesCount(long groupId, long folderId)
+		throws RemoteException {
 		try {
-			int returnValue = JournalArticleServiceUtil.getArticlesCountByArticleId(groupId,
-					articleId);
+			int returnValue = JournalArticleServiceUtil.getArticlesCount(groupId,
+					folderId);
 
 			return returnValue;
 		}
@@ -353,11 +352,11 @@ public class JournalArticleServiceSoap {
 		}
 	}
 
-	public static int getArticlesCountByFolderId(long groupId, long folderId)
-		throws RemoteException {
+	public static int getArticlesCountByArticleId(long groupId,
+		java.lang.String articleId) throws RemoteException {
 		try {
-			int returnValue = JournalArticleServiceUtil.getArticlesCountByFolderId(groupId,
-					folderId);
+			int returnValue = JournalArticleServiceUtil.getArticlesCountByArticleId(groupId,
+					articleId);
 
 			return returnValue;
 		}
@@ -383,10 +382,10 @@ public class JournalArticleServiceSoap {
 		}
 	}
 
-	public static int getFoldersArticlesCount(long groupId, Long[] folderIds)
+	public static int getFoldersAndArticlesCount(long groupId, Long[] folderIds)
 		throws RemoteException {
 		try {
-			int returnValue = JournalArticleServiceUtil.getFoldersArticlesCount(groupId,
+			int returnValue = JournalArticleServiceUtil.getFoldersAndArticlesCount(groupId,
 					ListUtil.toList(folderIds));
 
 			return returnValue;

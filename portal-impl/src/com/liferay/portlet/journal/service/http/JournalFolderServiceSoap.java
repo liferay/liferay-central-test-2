@@ -156,11 +156,11 @@ public class JournalFolderServiceSoap {
 		}
 	}
 
-	public static int getFoldersAndArticlesCount(long groupId, long folderId)
-		throws RemoteException {
+	public static int getFoldersAndArticlesCount(long groupId,
+		Long[] folderIds, int status) throws RemoteException {
 		try {
 			int returnValue = JournalFolderServiceUtil.getFoldersAndArticlesCount(groupId,
-					folderId);
+					ListUtil.toList(folderIds), status);
 
 			return returnValue;
 		}
@@ -171,11 +171,11 @@ public class JournalFolderServiceSoap {
 		}
 	}
 
-	public static int getFoldersArticlesCount(long groupId, Long[] folderIds,
-		int status) throws RemoteException {
+	public static int getFoldersAndArticlesCount(long groupId, long folderId)
+		throws RemoteException {
 		try {
-			int returnValue = JournalFolderServiceUtil.getFoldersArticlesCount(groupId,
-					ListUtil.toList(folderIds), status);
+			int returnValue = JournalFolderServiceUtil.getFoldersAndArticlesCount(groupId,
+					folderId);
 
 			return returnValue;
 		}

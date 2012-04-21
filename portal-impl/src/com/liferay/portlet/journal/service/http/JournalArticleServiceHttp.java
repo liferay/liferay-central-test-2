@@ -621,47 +621,12 @@ public class JournalArticleServiceHttp {
 		}
 	}
 
-	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> getArticlesByArticleId(
-		HttpPrincipal httpPrincipal, long groupId, java.lang.String articleId,
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		try {
-			MethodKey methodKey = new MethodKey(JournalArticleServiceUtil.class.getName(),
-					"getArticlesByArticleId",
-					_getArticlesByArticleIdParameterTypes14);
-
-			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					articleId, start, end, obc);
-
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
-					throw (com.liferay.portal.kernel.exception.SystemException)e;
-				}
-
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
-			}
-
-			return (java.util.List<com.liferay.portlet.journal.model.JournalArticle>)returnObj;
-		}
-		catch (com.liferay.portal.kernel.exception.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
-	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> getArticlesByFolderId(
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> getArticles(
 		HttpPrincipal httpPrincipal, long groupId, long folderId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(JournalArticleServiceUtil.class.getName(),
-					"getArticlesByFolderId",
-					_getArticlesByFolderIdParameterTypes15);
+					"getArticles", _getArticlesParameterTypes14);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					folderId);
@@ -688,17 +653,50 @@ public class JournalArticleServiceHttp {
 		}
 	}
 
-	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> getArticlesByFolderId(
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> getArticles(
 		HttpPrincipal httpPrincipal, long groupId, long folderId, int start,
 		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(JournalArticleServiceUtil.class.getName(),
-					"getArticlesByFolderId",
-					_getArticlesByFolderIdParameterTypes16);
+					"getArticles", _getArticlesParameterTypes15);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					folderId, start, end, obc);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
+					throw (com.liferay.portal.kernel.exception.SystemException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+
+			return (java.util.List<com.liferay.portlet.journal.model.JournalArticle>)returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> getArticlesByArticleId(
+		HttpPrincipal httpPrincipal, long groupId, java.lang.String articleId,
+		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		try {
+			MethodKey methodKey = new MethodKey(JournalArticleServiceUtil.class.getName(),
+					"getArticlesByArticleId",
+					_getArticlesByArticleIdParameterTypes16);
+
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					articleId, start, end, obc);
 
 			Object returnObj = null;
 
@@ -755,16 +753,15 @@ public class JournalArticleServiceHttp {
 		}
 	}
 
-	public static int getArticlesCountByArticleId(HttpPrincipal httpPrincipal,
-		long groupId, java.lang.String articleId)
+	public static int getArticlesCount(HttpPrincipal httpPrincipal,
+		long groupId, long folderId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(JournalArticleServiceUtil.class.getName(),
-					"getArticlesCountByArticleId",
-					_getArticlesCountByArticleIdParameterTypes18);
+					"getArticlesCount", _getArticlesCountParameterTypes18);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					articleId);
+					folderId);
 
 			Object returnObj = null;
 
@@ -788,16 +785,16 @@ public class JournalArticleServiceHttp {
 		}
 	}
 
-	public static int getArticlesCountByFolderId(HttpPrincipal httpPrincipal,
-		long groupId, long folderId)
+	public static int getArticlesCountByArticleId(HttpPrincipal httpPrincipal,
+		long groupId, java.lang.String articleId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(JournalArticleServiceUtil.class.getName(),
-					"getArticlesCountByFolderId",
-					_getArticlesCountByFolderIdParameterTypes19);
+					"getArticlesCountByArticleId",
+					_getArticlesCountByArticleIdParameterTypes19);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					folderId);
+					articleId);
 
 			Object returnObj = null;
 
@@ -859,13 +856,13 @@ public class JournalArticleServiceHttp {
 		}
 	}
 
-	public static int getFoldersArticlesCount(HttpPrincipal httpPrincipal,
+	public static int getFoldersAndArticlesCount(HttpPrincipal httpPrincipal,
 		long groupId, java.util.List<java.lang.Long> folderIds)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(JournalArticleServiceUtil.class.getName(),
-					"getFoldersArticlesCount",
-					_getFoldersArticlesCountParameterTypes21);
+					"getFoldersAndArticlesCount",
+					_getFoldersAndArticlesCountParameterTypes21);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					folderIds);
@@ -1718,28 +1715,28 @@ public class JournalArticleServiceHttp {
 			long.class, java.lang.String.class, java.lang.String.class,
 			com.liferay.portal.theme.ThemeDisplay.class
 		};
-	private static final Class<?>[] _getArticlesByArticleIdParameterTypes14 = new Class[] {
-			long.class, java.lang.String.class, int.class, int.class,
-			com.liferay.portal.kernel.util.OrderByComparator.class
-		};
-	private static final Class<?>[] _getArticlesByFolderIdParameterTypes15 = new Class[] {
+	private static final Class<?>[] _getArticlesParameterTypes14 = new Class[] {
 			long.class, long.class
 		};
-	private static final Class<?>[] _getArticlesByFolderIdParameterTypes16 = new Class[] {
+	private static final Class<?>[] _getArticlesParameterTypes15 = new Class[] {
 			long.class, long.class, int.class, int.class,
+			com.liferay.portal.kernel.util.OrderByComparator.class
+		};
+	private static final Class<?>[] _getArticlesByArticleIdParameterTypes16 = new Class[] {
+			long.class, java.lang.String.class, int.class, int.class,
 			com.liferay.portal.kernel.util.OrderByComparator.class
 		};
 	private static final Class<?>[] _getArticlesByLayoutUuidParameterTypes17 = new Class[] {
 			long.class, java.lang.String.class
 		};
-	private static final Class<?>[] _getArticlesCountByArticleIdParameterTypes18 =
-		new Class[] { long.class, java.lang.String.class };
-	private static final Class<?>[] _getArticlesCountByFolderIdParameterTypes19 = new Class[] {
+	private static final Class<?>[] _getArticlesCountParameterTypes18 = new Class[] {
 			long.class, long.class
 		};
+	private static final Class<?>[] _getArticlesCountByArticleIdParameterTypes19 =
+		new Class[] { long.class, java.lang.String.class };
 	private static final Class<?>[] _getDisplayArticleByUrlTitleParameterTypes20 =
 		new Class[] { long.class, java.lang.String.class };
-	private static final Class<?>[] _getFoldersArticlesCountParameterTypes21 = new Class[] {
+	private static final Class<?>[] _getFoldersAndArticlesCountParameterTypes21 = new Class[] {
 			long.class, java.util.List.class
 		};
 	private static final Class<?>[] _getLatestArticleParameterTypes22 = new Class[] {

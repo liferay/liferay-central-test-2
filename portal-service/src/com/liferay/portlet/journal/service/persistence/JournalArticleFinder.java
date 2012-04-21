@@ -25,6 +25,10 @@ public interface JournalArticleFinder {
 		java.util.Date displayDateLT, int status, java.util.Date reviewDate)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	public int countByG_F_S(long groupId,
+		java.util.List<java.lang.Long> folderIds, int status)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public int countByC_G_F_C_A_V_T_D_C_T_S_T_D_S_R(long companyId,
 		long groupId, long folderId, long classNameId,
 		java.lang.String articleId, java.lang.Double version,
@@ -55,20 +59,16 @@ public interface JournalArticleFinder {
 		java.util.Date reviewDate, boolean andOperator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public int countByG_F_S(long groupId,
-		java.util.List<java.lang.Long> folderIds, int status)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	public int filterCountByG_F_S(long groupId,
-		java.util.List<java.lang.Long> folderIds, int status)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
 	public int filterCountByKeywords(long companyId, long groupId,
 		long folderId, long classNameId, java.lang.String keywords,
 		java.lang.Double version, java.lang.String type,
 		java.lang.String structureId, java.lang.String templateId,
 		java.util.Date displayDateGT, java.util.Date displayDateLT, int status,
 		java.util.Date reviewDate)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public int filterCountByG_F_S(long groupId,
+		java.util.List<java.lang.Long> folderIds, int status)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int filterCountByC_G_F_C_A_V_T_D_C_T_S_T_D_S_R(long companyId,

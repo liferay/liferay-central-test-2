@@ -34,6 +34,12 @@ public class JournalArticleFinderUtil {
 			displayDateLT, status, reviewDate);
 	}
 
+	public static int countByG_F_S(long groupId,
+		java.util.List<java.lang.Long> folderIds, int status)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getFinder().countByG_F_S(groupId, folderIds, status);
+	}
+
 	public static int countByC_G_F_C_A_V_T_D_C_T_S_T_D_S_R(long companyId,
 		long groupId, long folderId, long classNameId,
 		java.lang.String articleId, java.lang.Double version,
@@ -82,18 +88,6 @@ public class JournalArticleFinderUtil {
 			displayDateLT, status, reviewDate, andOperator);
 	}
 
-	public static int countByG_F_S(long groupId,
-		java.util.List<java.lang.Long> folderIds, int status)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getFinder().countByG_F_S(groupId, folderIds, status);
-	}
-
-	public static int filterCountByG_F_S(long groupId,
-		java.util.List<java.lang.Long> folderIds, int status)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getFinder().filterCountByG_F_S(groupId, folderIds, status);
-	}
-
 	public static int filterCountByKeywords(long companyId, long groupId,
 		long folderId, long classNameId, java.lang.String keywords,
 		java.lang.Double version, java.lang.String type,
@@ -105,6 +99,12 @@ public class JournalArticleFinderUtil {
 				   .filterCountByKeywords(companyId, groupId, folderId,
 			classNameId, keywords, version, type, structureId, templateId,
 			displayDateGT, displayDateLT, status, reviewDate);
+	}
+
+	public static int filterCountByG_F_S(long groupId,
+		java.util.List<java.lang.Long> folderIds, int status)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getFinder().filterCountByG_F_S(groupId, folderIds, status);
 	}
 
 	public static int filterCountByC_G_F_C_A_V_T_D_C_T_S_T_D_S_R(

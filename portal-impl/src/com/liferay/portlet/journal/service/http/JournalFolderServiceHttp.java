@@ -291,7 +291,7 @@ public class JournalFolderServiceHttp {
 	}
 
 	public static int getFoldersAndArticlesCount(HttpPrincipal httpPrincipal,
-		long groupId, long folderId)
+		long groupId, java.util.List<java.lang.Long> folderIds, int status)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(JournalFolderServiceUtil.class.getName(),
@@ -299,7 +299,7 @@ public class JournalFolderServiceHttp {
 					_getFoldersAndArticlesCountParameterTypes7);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					folderId);
+					folderIds, status);
 
 			Object returnObj = null;
 
@@ -323,16 +323,16 @@ public class JournalFolderServiceHttp {
 		}
 	}
 
-	public static int getFoldersArticlesCount(HttpPrincipal httpPrincipal,
-		long groupId, java.util.List<java.lang.Long> folderIds, int status)
+	public static int getFoldersAndArticlesCount(HttpPrincipal httpPrincipal,
+		long groupId, long folderId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(JournalFolderServiceUtil.class.getName(),
-					"getFoldersArticlesCount",
-					_getFoldersArticlesCountParameterTypes8);
+					"getFoldersAndArticlesCount",
+					_getFoldersAndArticlesCountParameterTypes8);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					folderIds, status);
+					folderId);
 
 			Object returnObj = null;
 
@@ -554,10 +554,10 @@ public class JournalFolderServiceHttp {
 			com.liferay.portal.kernel.util.OrderByComparator.class
 		};
 	private static final Class<?>[] _getFoldersAndArticlesCountParameterTypes7 = new Class[] {
-			long.class, long.class
-		};
-	private static final Class<?>[] _getFoldersArticlesCountParameterTypes8 = new Class[] {
 			long.class, java.util.List.class, int.class
+		};
+	private static final Class<?>[] _getFoldersAndArticlesCountParameterTypes8 = new Class[] {
+			long.class, long.class
 		};
 	private static final Class<?>[] _getFoldersCountParameterTypes9 = new Class[] {
 			long.class, long.class

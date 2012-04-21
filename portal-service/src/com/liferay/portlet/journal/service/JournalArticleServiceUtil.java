@@ -203,6 +203,19 @@ public class JournalArticleServiceUtil {
 			themeDisplay);
 	}
 
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> getArticles(
+		long groupId, long folderId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getArticles(groupId, folderId);
+	}
+
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> getArticles(
+		long groupId, long folderId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getArticles(groupId, folderId, start, end, obc);
+	}
+
 	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> getArticlesByArticleId(
 		long groupId, java.lang.String articleId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
@@ -211,35 +224,21 @@ public class JournalArticleServiceUtil {
 				   .getArticlesByArticleId(groupId, articleId, start, end, obc);
 	}
 
-	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> getArticlesByFolderId(
-		long groupId, long folderId)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getArticlesByFolderId(groupId, folderId);
-	}
-
-	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> getArticlesByFolderId(
-		long groupId, long folderId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService()
-				   .getArticlesByFolderId(groupId, folderId, start, end, obc);
-	}
-
 	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> getArticlesByLayoutUuid(
 		long groupId, java.lang.String layoutUuid)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getArticlesByLayoutUuid(groupId, layoutUuid);
 	}
 
+	public static int getArticlesCount(long groupId, long folderId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getArticlesCount(groupId, folderId);
+	}
+
 	public static int getArticlesCountByArticleId(long groupId,
 		java.lang.String articleId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getArticlesCountByArticleId(groupId, articleId);
-	}
-
-	public static int getArticlesCountByFolderId(long groupId, long folderId)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getArticlesCountByFolderId(groupId, folderId);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticle getDisplayArticleByUrlTitle(
@@ -249,10 +248,10 @@ public class JournalArticleServiceUtil {
 		return getService().getDisplayArticleByUrlTitle(groupId, urlTitle);
 	}
 
-	public static int getFoldersArticlesCount(long groupId,
+	public static int getFoldersAndArticlesCount(long groupId,
 		java.util.List<java.lang.Long> folderIds)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getFoldersArticlesCount(groupId, folderIds);
+		return getService().getFoldersAndArticlesCount(groupId, folderIds);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticle getLatestArticle(
