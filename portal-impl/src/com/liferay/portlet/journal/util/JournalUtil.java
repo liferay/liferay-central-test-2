@@ -102,7 +102,7 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author Brian Wing Shun Chan
- * @author Raymond AugÃ©
+ * @author Raymond Augé
  * @author Wesley Gong
  * @author Angelo Jefferson
  * @author Hugo Huijser
@@ -241,7 +241,9 @@ public class JournalUtil {
 
 		portletURL.setParameter("struts_action", "/article/view_article");
 		portletURL.setParameter(
-			"articlePK", String.valueOf(article.getPrimaryKey()));
+			"groupId", String.valueOf(article.getGroupId()));
+		portletURL.setParameter(
+			"articleId", String.valueOf(article.getArticleId()));
 
 		PortalUtil.addPortletBreadcrumbEntry(
 			request, article.getTitle(), portletURL.toString());
