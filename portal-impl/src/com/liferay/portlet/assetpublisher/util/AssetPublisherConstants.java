@@ -19,13 +19,20 @@ package com.liferay.portlet.assetpublisher.util;
  */
 public class AssetPublisherConstants {
 
-	public static final String ASSET_ENTRIES = "asset_entries";
-	public static final String ASSET_ENTRY = "asset_entry";
+	public static final String ASSET_ENTRIES = "assetEntries";
+
+	public static final String ASSET_ENTRY = "assetEntry";
+
+	public static final String ASSET_PUBLISHER_HELPER = "assetPublisherHelper";
+
+	public static final String DDM_TEMPLATE_ID = "ddmTemplateId";
+
 	public static final String LOCALE = "locale";
-	public static final String RENDER_REQUEST ="render_request";
-	public static final String RENDER_RESPONSE ="render_response";
-	public static final String TEMPLATE_HELPER = "template_helper";
-	public static final String TEMPLATE_ID = "template_id";
-	public static final String THEME_DISPLAY = "theme_display";
+
+	public static final String RENDER_REQUEST ="renderRequest";
+
+	public static final String RENDER_RESPONSE ="renderResponse";
+
+	public static final String THEME_DISPLAY = "themeDisplay";
 
 }

@@ -51,7 +51,7 @@ portletURL.setParameter("classPK", String.valueOf(classPK));
 	<c:otherwise>
 		<liferay-ui:header
 			backURL="<%= backURL %>"
-			title='display-styles'
+			title="display-styles"
 		/>
 	</c:otherwise>
 </c:choose>

@@ -14,7 +14,6 @@
 
 package com.liferay.portlet.asset.model.impl;
 
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -39,7 +38,7 @@ public class AssetEntryImpl extends AssetEntryBaseImpl {
 	public AssetEntryImpl() {
 	}
 
-	public AssetRenderer getAssetRenderer() throws SystemException {
+	public AssetRenderer getAssetRenderer() {
 		AssetRendererFactory assetRendererFactory =
 			AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(
 				getClassName());
@@ -47,8 +46,10 @@ public class AssetEntryImpl extends AssetEntryBaseImpl {
 		try {
 			return assetRendererFactory.getAssetRenderer(getClassPK());
 		}
-		catch (PortalException pe) {
-			_log.warn("Error obtaining asset renderer", pe);
+		catch (Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("Unable to get asset renderer", e);
+			}
 		}
 
 		return null;

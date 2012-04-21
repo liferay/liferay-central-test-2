@@ -22,26 +22,12 @@ import com.liferay.portlet.asset.model.AssetEntry;
 /**
  * @author Juan Fernández
  */
-public class TemplateHelperUtil {
+public interface AssetPublisherHelper {
 
-	public static String getAssetViewURL(
+	public String getAssetViewURL(
 			LiferayPortletRequest liferayPortletRequest,
 			LiferayPortletResponse liferayPortletResponse,
 			AssetEntry assetEntry)
-		throws SystemException {
-
-		return getTemplateHelper().getAssetViewURL(
-			liferayPortletRequest, liferayPortletResponse, assetEntry);
-	}
-
-	public static TemplateHelper getTemplateHelper() {
-		return _templateHelper;
-	}
-
-	public void setTemplateHelper(TemplateHelper templateHelper) {
-		_templateHelper = templateHelper;
-	}
-
-	private static TemplateHelper _templateHelper;
+		throws SystemException;
 
 }

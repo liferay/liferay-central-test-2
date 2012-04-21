@@ -175,15 +175,28 @@ if (portletName.equals(PortletKeys.RELATED_ASSETS)) {
 boolean mergeUrlTags = GetterUtil.getBoolean(preferences.getValue("mergeUrlTags", null), true);
 boolean mergeLayoutTags = GetterUtil.getBoolean(preferences.getValue("mergeLayoutTags", null), false);
 
+long assetPublisherDDMTemplateId = 0;
+
 String displayStyle = GetterUtil.getString(preferences.getValue("displayStyle", "abstracts"));
 
-long assetPublisherTemplateId = 0;
-
 if (displayStyle.startsWith("ddmTemplate_")) {
-	assetPublisherTemplateId = Long.valueOf(displayStyle.substring("ddmTemplate_".length()));
+	assetPublisherDDMTemplateId = GetterUtil.getLong(displayStyle.substring("ddmTemplate_".length()));
 }
 else if (Validator.isNull(displayStyle)) {
 	displayStyle = "abstracts";
+}
+
+DDMTemplate assetPublisherDDMTemplate = null;
+
+if (assetPublisherDDMTemplateId > 0) {
+	try {
+		assetPublisherDDMTemplate = DDMTemplateLocalServiceUtil.getDDMTemplate(assetPublisherDDMTemplateId);
+	}
+	catch (NoSuchTemplateException nste) {
+		assetPublisherDDMTemplateId = 0;
+
+		displayStyle = "abstracts";
+	}
 }
 
 boolean showAssetTitle = GetterUtil.getBoolean(preferences.getValue("showAssetTitle", null), true);
@@ -201,18 +214,6 @@ boolean showAvailableLocales = GetterUtil.getBoolean(preferences.getValue("showA
 boolean showMetadataDescriptions = GetterUtil.getBoolean(preferences.getValue("showMetadataDescriptions", null), true);
 
 boolean defaultAssetPublisher = false;
-
-DDMTemplate assetPublisherTemplate = null;
-
-if (assetPublisherTemplateId > 0) {
-	try {
-		assetPublisherTemplate = DDMTemplateLocalServiceUtil.getDDMTemplate(assetPublisherTemplateId);
-	}
-	catch (NoSuchTemplateException nste) {
-		assetPublisherTemplateId = 0;
-		displayStyle = "abstracts";
-	}
-}
 
 UnicodeProperties typeSettingsProperties = layout.getTypeSettingsProperties();
 
@@ -262,9 +263,6 @@ boolean groupByClass = (assetVocabularyId == -1);
 boolean allowEmptyResults = false;
 
 Map<String, PortletURL> addPortletURLs = null;
-
-String ddmResource = "com.liferay.portlet.assetpublisher";
-long displayStyleClassNameId = PortalUtil.getClassNameId("com.liferay.portlet.assetpublisher.DisplayStyle");
 
 Format dateFormatDate = FastDateFormatFactoryUtil.getDate(locale, timeZone);
 %>

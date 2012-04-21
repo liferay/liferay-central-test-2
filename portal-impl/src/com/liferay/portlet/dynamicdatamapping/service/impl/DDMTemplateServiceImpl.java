@@ -46,16 +46,17 @@ public class DDMTemplateServiceImpl extends DDMTemplateServiceBaseImpl {
 
 		String ddmResource = GetterUtil.getString(
 			serviceContext.getAttribute("ddmResource"));
-		String ddmResourceAction = GetterUtil.getString(
-			serviceContext.getAttribute("ddmResourceAction"));
 
-		if (Validator.isNull(ddmResourceAction)) {
-			ddmResourceAction = ActionKeys.ADD_TEMPLATE;
+		String ddmResourceActionId = GetterUtil.getString(
+			serviceContext.getAttribute("ddmResourceActionId"));
+
+		if (Validator.isNull(ddmResourceActionId)) {
+			ddmResourceActionId = ActionKeys.ADD_TEMPLATE;
 		}
 
 		DDMPermission.check(
 			getPermissionChecker(), serviceContext.getScopeGroupId(),
-			ddmResource, ddmResourceAction);
+			ddmResource, ddmResourceActionId);
 
 		return ddmTemplateLocalService.addTemplate(
 			getUserId(), groupId, classNameId, classPK, nameMap, descriptionMap,
@@ -94,14 +95,14 @@ public class DDMTemplateServiceImpl extends DDMTemplateServiceBaseImpl {
 		DDMTemplatePermission.check(
 			getPermissionChecker(), templateId, ActionKeys.VIEW);
 
-		return ddmTemplateLocalService.getTemplate(templateId);
+		return ddmTemplatePersistence.findByPrimaryKey(templateId);
 	}
 
 	public List<DDMTemplate> getTemplates(
 			long groupId, long classNameId, long classPK)
 		throws SystemException {
 
-		return ddmTemplateLocalService.getTemplates(
+		return ddmTemplatePersistence.findByG_C_C(
 			groupId, classNameId, classPK);
 	}
 

@@ -44,39 +44,36 @@ public abstract class BaseTransformer implements Transformer {
 			String script, String langType)
 		throws Exception {
 
-		String output = null;
-
-		if (Validator.isNotNull(langType)) {
-			String templateParserClassName = getTemplateParserClassName(
-				langType);
-
-			if (_log.isDebugEnabled()) {
-				_log.debug(
-					"Template parser class name " + templateParserClassName);
-			}
-
-			if (Validator.isNotNull(templateParserClassName)) {
-				TemplateParser templateParser = null;
-
-				try {
-					templateParser =
-						(TemplateParser)InstanceFactory.newInstance(
-							PortalClassLoaderUtil.getClassLoader(),
-							templateParserClassName);
-				}
-				catch (Exception e) {
-					throw new TransformException(e);
-				}
-
-				templateParser.setContextObjects(contextObjects);
-				templateParser.setScript(script);
-				templateParser.setThemeDisplay(themeDisplay);
-
-				output = templateParser.transform();
-			}
+		if (Validator.isNull(langType)) {
+			return null;
 		}
 
-		return output;
+		String templateParserClassName = getTemplateParserClassName(langType);
+
+		if (Validator.isNull(templateParserClassName)) {
+			return null;
+		}
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Template parser class name " + templateParserClassName);
+		}
+
+		TemplateParser templateParser = null;
+
+		try {
+			templateParser = (TemplateParser)InstanceFactory.newInstance(
+				PortalClassLoaderUtil.getClassLoader(),
+				templateParserClassName);
+		}
+		catch (Exception e) {
+			throw new TransformException(e);
+		}
+
+		templateParser.setContextObjects(contextObjects);
+		templateParser.setScript(script);
+		templateParser.setThemeDisplay(themeDisplay);
+
+		return templateParser.transform();
 	}
 
 	public String transform(
@@ -85,7 +82,7 @@ public abstract class BaseTransformer implements Transformer {
 			String langType)
 		throws Exception {
 
-		// Setup Listeners
+		// Setup listeners
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Language " + languageId);

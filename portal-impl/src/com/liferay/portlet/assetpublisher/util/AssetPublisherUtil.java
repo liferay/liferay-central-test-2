@@ -515,16 +515,16 @@ public class AssetPublisherUtil {
 		}
 	}
 
-	public static String renderTemplate(
-			long templateId, List<AssetEntry> assetEntries,
-			RenderRequest renderRequest, RenderResponse renderResponse)
+	public static String renderDDMTemplate(
+			RenderRequest renderRequest, RenderResponse renderResponse,
+			long ddmTemplateId, List<AssetEntry> assetEntries)
 		throws Exception {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
 		DDMTemplate ddmTemplate = DDMTemplateLocalServiceUtil.getTemplate(
-			templateId);
+			ddmTemplateId);
 
 		Map<String, Object> contextObjects = new HashMap<String, Object>();
 
@@ -536,15 +536,16 @@ public class AssetPublisherUtil {
 		}
 
 		contextObjects.put(
+			AssetPublisherConstants.ASSET_PUBLISHER_HELPER,
+			AssetPublisherHelperUtil.getAssetPublisherHelper());
+		contextObjects.put(
+			AssetPublisherConstants.DDM_TEMPLATE_ID, ddmTemplateId);
+		contextObjects.put(
 			AssetPublisherConstants.LOCALE, renderRequest.getLocale());
 		contextObjects.put(
 			AssetPublisherConstants.RENDER_REQUEST, renderRequest);
 		contextObjects.put(
 			AssetPublisherConstants.RENDER_RESPONSE, renderResponse);
-		contextObjects.put(
-			AssetPublisherConstants.TEMPLATE_HELPER,
-			TemplateHelperUtil.getTemplateHelper());
-		contextObjects.put(AssetPublisherConstants.TEMPLATE_ID, templateId);
 		contextObjects.put(AssetPublisherConstants.THEME_DISPLAY, themeDisplay);
 
 		return _transformer.transform(
@@ -634,6 +635,7 @@ public class AssetPublisherUtil {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(AssetPublisherUtil.class);
+
 	private static Transformer _transformer = new DDLTransformer();
 
 }

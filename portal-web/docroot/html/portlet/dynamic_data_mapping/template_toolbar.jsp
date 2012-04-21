@@ -88,7 +88,7 @@ long classPK = ParamUtil.getLong(request, "classPK");
 			</c:if>
 		</c:when>
 		<c:otherwise>
-			<c:if test="<%= DDMPermission.contains(permissionChecker, scopeGroupId, ddmResource, ddmResourceAction) %>">
+			<c:if test="<%= DDMPermission.contains(permissionChecker, scopeGroupId, ddmResource, ddmResourceActionId) %>">
 				<portlet:renderURL var="addTemplateURL">
 					<portlet:param name="struts_action" value="/dynamic_data_mapping/edit_template" />
 					<portlet:param name="redirect" value="<%= viewTemplatesURL %>" />

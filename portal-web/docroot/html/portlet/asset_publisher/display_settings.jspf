@@ -14,6 +14,10 @@
  */
 --%>
 
+<%
+long assetPublisherDDMTemplateClassNameId = PortalUtil.getClassNameId(AssetEntry.class);
+%>
+
 <aui:fieldset cssClass="general-display-settings">
 	<div class="display-style">
 		<aui:select id="displayStyle" name="preferences--displayStyle--">
@@ -27,17 +31,15 @@
 			<%
 			}
 
-			List<DDMTemplate> assetPublisherTemplates = DDMTemplateLocalServiceUtil.getTemplates(scopeGroupId, displayStyleClassNameId, scopeGroupId);
+			List<DDMTemplate> assetPublisherDDMTemplates = DDMTemplateLocalServiceUtil.getTemplates(scopeGroupId, assetPublisherDDMTemplateClassNameId, scopeGroupId);
 
-			for (DDMTemplate curAssetPublisherTemplate : assetPublisherTemplates) {
-				if (!DDMTemplatePermission.contains(permissionChecker, curAssetPublisherTemplate, ActionKeys.VIEW)) {
+			for (DDMTemplate curAssetPublisherDDMTemplate : assetPublisherDDMTemplates) {
+				if (!DDMTemplatePermission.contains(permissionChecker, curAssetPublisherDDMTemplate, ActionKeys.VIEW)) {
 					continue;
 				}
-
-				String value = "ddmTemplate_" + String.valueOf(curAssetPublisherTemplate.getTemplateId());
 			%>
 
-				<aui:option label="<%= curAssetPublisherTemplate.getName(locale) %>" selected="<%= (assetPublisherTemplate != null) && (curAssetPublisherTemplate.getTemplateId() == assetPublisherTemplate.getTemplateId()) %>" value="<%= value %>" />
+				<aui:option label="<%= curAssetPublisherDDMTemplate.getName(locale) %>" selected="<%= (assetPublisherDDMTemplate != null) && (curAssetPublisherDDMTemplate.getTemplateId() == assetPublisherDDMTemplate.getTemplateId()) %>" value='<%= "ddmTemplate_" + curAssetPublisherDDMTemplate.getTemplateId() %>' />
 
 			<%
 			}
@@ -263,10 +265,10 @@
 			function (event) {
 				Liferay.Util.openDDMPortlet(
 					{
-						classNameId: '<%= String.valueOf(displayStyleClassNameId) %>',
+						classNameId: '<%= String.valueOf(assetPublisherDDMTemplateClassNameId) %>',
 						classPK:'<%= String.valueOf(scopeGroupId) %>',
-						ddmResource: '<%= ddmResource %>',
-						ddmResourceAction: '<%= ActionKeys.ADD_DISPLAY_STYLE %>',
+						ddmResource: 'com.liferay.portlet.assetpublisher',
+						ddmResourceActionId: '<%= ActionKeys.ADD_DISPLAY_STYLE %>',
 						dialog: {
 							width:680
 						},

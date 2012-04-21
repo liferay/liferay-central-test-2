@@ -28,7 +28,7 @@ import javax.portlet.PortletURL;
 /**
  * @author Juan Fernández
  */
-public class TemplateHelperImpl implements TemplateHelper {
+public class AssetPublisherHelperImpl implements AssetPublisherHelper {
 
 	public String getAssetViewURL(
 			LiferayPortletRequest liferayPortletRequest,
@@ -36,20 +36,23 @@ public class TemplateHelperImpl implements TemplateHelper {
 			AssetEntry assetEntry)
 		throws SystemException {
 
+		PortletURL viewURL = liferayPortletResponse.createRenderURL();
+
+		viewURL.setParameter("struts_action", "/asset_publisher/view_content");
+
+		String currentURL = PortalUtil.getCurrentURL(liferayPortletRequest);
+
+		viewURL.setParameter("redirect", currentURL);
+
+		viewURL.setParameter(
+			"assetEntryId", String.valueOf(assetEntry.getEntryId()));
+
 		AssetRendererFactory assetRendererFactory =
 			assetEntry.getAssetRendererFactory();
 
 		AssetRenderer assetRenderer = assetEntry.getAssetRenderer();
 
-		PortletURL viewURL = liferayPortletResponse.createRenderURL();
-
-		String currentURL = PortalUtil.getCurrentURL(liferayPortletRequest);
-
-		viewURL.setParameter("struts_action", "/asset_publisher/view_content");
-		viewURL.setParameter(
-			"assetEntryId", String.valueOf(assetEntry.getEntryId()));
 		viewURL.setParameter("type", assetRendererFactory.getType());
-		viewURL.setParameter("redirect", currentURL);
 
 		if (Validator.isNotNull(assetRenderer.getUrlTitle())) {
 			viewURL.setParameter("urlTitle", assetRenderer.getUrlTitle());
