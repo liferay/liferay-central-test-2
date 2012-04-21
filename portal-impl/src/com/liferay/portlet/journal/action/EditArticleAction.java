@@ -352,9 +352,6 @@ public class EditArticleAction extends PortletAction {
 			catch (NoSuchArticleException nsae) {
 				long deleteFolderId = GetterUtil.getLong(deleteArticleId);
 
-				JournalFolder deleteFolder = JournalFolderServiceUtil.getFolder(
-					deleteFolderId);
-
 				JournalFolderServiceUtil.deleteFolder(deleteFolderId);
 			}
 		}
@@ -400,9 +397,6 @@ public class EditArticleAction extends PortletAction {
 			catch (NoSuchArticleException nsae) {
 				long expireFolderId = GetterUtil.getLong(expireArticleId);
 
-				JournalFolder expireFolder = JournalFolderServiceUtil.getFolder(
-					expireFolderId);
-
 				expireFolder(groupId, expireFolderId, serviceContext);
 			}
 		}
@@ -419,9 +413,8 @@ public class EditArticleAction extends PortletAction {
 			expireFolder(groupId, folder.getFolderId(), serviceContext);
 		}
 
-		List<JournalArticle> articles =
-			JournalArticleServiceUtil.getArticlesByFolderId(
-				groupId, parentFolderId);
+		List<JournalArticle> articles = JournalArticleServiceUtil.getArticles(
+			groupId, parentFolderId);
 
 		for (JournalArticle article : articles) {
 			JournalArticleServiceUtil.expireArticle(
@@ -554,19 +547,15 @@ public class EditArticleAction extends PortletAction {
 		String cmd = ParamUtil.getString(uploadPortletRequest, Constants.CMD);
 
 		long groupId = ParamUtil.getLong(uploadPortletRequest, "groupId");
-
 		long folderId = ParamUtil.getLong(uploadPortletRequest, "folderId");
 		long classNameId = ParamUtil.getLong(
 			uploadPortletRequest, "classNameId");
 		long classPK = ParamUtil.getLong(uploadPortletRequest, "classPK");
-
 		String articleId = ParamUtil.getString(
 			uploadPortletRequest, "articleId");
 		boolean autoArticleId = ParamUtil.getBoolean(
 			uploadPortletRequest, "autoArticleId");
-
 		double version = ParamUtil.getDouble(uploadPortletRequest, "version");
-
 		boolean localized = ParamUtil.getBoolean(
 			uploadPortletRequest, "localized");
 
