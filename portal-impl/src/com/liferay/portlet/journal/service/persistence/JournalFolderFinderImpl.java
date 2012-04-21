@@ -29,15 +29,11 @@ import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalFolder;
 import com.liferay.util.dao.orm.CustomSQLUtil;
 
-import java.math.BigInteger;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 /**
- * <a href="JournalFolderFinderImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Juan Fernández
  */
 public class JournalFolderFinderImpl extends BasePersistenceImpl<JournalFolder>
@@ -46,14 +42,14 @@ public class JournalFolderFinderImpl extends BasePersistenceImpl<JournalFolder>
 	public static final String COUNT_A_BY_G_F =
 		JournalFolderFinder.class.getName() + ".countA_ByG_F";
 
-	public static final String COUNT_BY_G_F =
-		JournalFolderFinder.class.getName() + ".countByG_F";
+	public static final String COUNT_F_BY_G_F =
+		JournalFolderFinder.class.getName() + ".countF_ByG_F";
 
 	public static final String FIND_A_BY_G_F =
 		JournalFolderFinder.class.getName() + ".findA_ByG_F";
 
-	public static final String FIND_BY_G_F =
-		JournalFolderFinder.class.getName() + ".findByG_F";
+	public static final String FIND_F_BY_G_F =
+		JournalFolderFinder.class.getName() + ".findF_ByG_F";
 
 	public int countF_A_ByG_F(long groupId, long folderId)
 		throws SystemException {
@@ -68,21 +64,23 @@ public class JournalFolderFinderImpl extends BasePersistenceImpl<JournalFolder>
 	}
 
 	public List<Object> filterFindF_AByG_F(
-		long groupId, long folderId, int start, int end, OrderByComparator obc)
+			long groupId, long folderId, int start, int end,
+			OrderByComparator obc)
 		throws SystemException {
 
 		return doFindF_AByG_F(groupId, folderId, start, end, obc, true);
 	}
 
 	public List<Object> findF_AByG_F(
-		long groupId, long folderId, int start, int end, OrderByComparator obc)
+			long groupId, long folderId, int start, int end,
+			OrderByComparator obc)
 		throws SystemException {
 
 		return doFindF_AByG_F(groupId, folderId, start, end, obc, false);
 	}
 
 	protected int doCountF_A_ByG_F(
-		long groupId, long folderId, boolean inlineSQLHelper)
+			long groupId, long folderId, boolean inlineSQLHelper)
 		throws SystemException {
 
 	   Session session = null;
@@ -94,7 +92,7 @@ public class JournalFolderFinderImpl extends BasePersistenceImpl<JournalFolder>
 
 			sb.append(StringPool.OPEN_PARENTHESIS);
 
-			String sql = CustomSQLUtil.get(COUNT_BY_G_F);
+			String sql = CustomSQLUtil.get(COUNT_F_BY_G_F);
 
 			if (inlineSQLHelper) {
 				sql = InlineSQLHelperUtil.replacePermissionCheck(
@@ -129,13 +127,13 @@ public class JournalFolderFinderImpl extends BasePersistenceImpl<JournalFolder>
 
 			int count = 0;
 
-			Iterator<BigInteger> itr = q.iterate();
+			Iterator<Long> itr = q.iterate();
 
 			while (itr.hasNext()) {
-				BigInteger bi = itr.next();
+				Long l = itr.next();
 
-				if (bi != null) {
-					count += bi.intValue();
+				if (l != null) {
+					count += l.intValue();
 				}
 			}
 
@@ -150,8 +148,8 @@ public class JournalFolderFinderImpl extends BasePersistenceImpl<JournalFolder>
 	}
 
 	protected List<Object> doFindF_AByG_F(
-		long groupId, long folderId, int start, int end, OrderByComparator obc,
-		boolean inlineSQLHelper)
+			long groupId, long folderId, int start, int end,
+			OrderByComparator obc, boolean inlineSQLHelper)
 		throws SystemException {
 
 		Session session = null;
@@ -163,7 +161,7 @@ public class JournalFolderFinderImpl extends BasePersistenceImpl<JournalFolder>
 
 			sb.append(StringPool.OPEN_PARENTHESIS);
 
-			String sql = CustomSQLUtil.get(FIND_BY_G_F);
+			String sql = CustomSQLUtil.get(FIND_F_BY_G_F);
 
 			if (inlineSQLHelper) {
 				sql = InlineSQLHelperUtil.replacePermissionCheck(
@@ -204,18 +202,17 @@ public class JournalFolderFinderImpl extends BasePersistenceImpl<JournalFolder>
 			while (itr.hasNext()) {
 				Object[] array = itr.next();
 
-				BigInteger curFolderId = (BigInteger) array[0];
-				BigInteger modelFolder = (BigInteger) array[4];
+				long curFolderId = (Long)array[0];
+				long modelFolder = (Long)array[4];
 
 				Object obj = null;
 
-				if (modelFolder.intValue() == 1) {
-					obj = JournalFolderUtil.findByPrimaryKey(
-						curFolderId.intValue());
+				if (modelFolder == 1) {
+					obj = JournalFolderUtil.findByPrimaryKey(curFolderId);
 				}
 				else {
 					String articleId = (String)array[5];
-					Double version = (Double)array[6];
+					double version = (Double)array[6];
 
 					obj = JournalArticleUtil.findByG_A_V(
 						groupId, articleId, version);
@@ -261,34 +258,38 @@ public class JournalFolderFinderImpl extends BasePersistenceImpl<JournalFolder>
 	}
 
 	protected String getFolderId(String table, long folderId) {
+		if (folderId < 0) {
+			return StringPool.BLANK;
+		}
+
 		StringBundler sb = new StringBundler(5);
 
-		if (folderId >= 0) {
-			sb.append(" AND ");
-			sb.append(table);
-			sb.append(".");
+		sb.append(" AND ");
+		sb.append(table);
+		sb.append(".");
 
-			if (table.equals("JournalFolder")) {
-				sb.append("parentFolderId");
-			}
-			else {
-				sb.append("folderId");
-			}
-
-			sb.append(" = ? ");
+		if (table.equals("JournalFolder")) {
+			sb.append("parentFolderId");
 		}
+		else {
+			sb.append("folderId");
+		}
+
+		sb.append(" = ? ");
 
 		return sb.toString();
 	}
 
 	protected String updateSQL(String sql, long folderId) {
 		sql = StringUtil.replace(
-			sql, "[$FOLDER_PARENT_FOLDER_ID$]",
-			getFolderId("JournalFolder", folderId));
-
-		sql = StringUtil.replace(
-			sql, "[$JOURNAL_ARTICLE_FOLDER_ID$]",
-			getFolderId("JournalArticle", folderId));
+			sql,
+			new String[] {
+				"[$ARTICLE_FOLDER_ID$]", "[$FOLDER_PARENT_FOLDER_ID$]"
+			},
+			new String[] {
+				getFolderId("JournalArticle", folderId),
+				getFolderId("JournalFolder", folderId)
+			});
 
 		return sql;
 	}
