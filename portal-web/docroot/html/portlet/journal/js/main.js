@@ -2,8 +2,8 @@ AUI.add(
 	'liferay-portlet-journal',
 	function(A) {
 		var D = A.DataType;
-		var Lang = A.Lang;
 		var JSON = A.JSON;
+		var Lang = A.Lang;
 
 		var generateInstanceId = function() {
 			var instanceId = '';
