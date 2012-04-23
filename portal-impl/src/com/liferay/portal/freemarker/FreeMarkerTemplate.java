@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.Template;
 import com.liferay.portal.kernel.template.TemplateException;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.template.TemplateContextHelper;
@@ -94,7 +95,7 @@ public class FreeMarkerTemplate implements Template {
 			}
 			catch (Exception e) {
 				throw new TemplateException(
-					"Unable to process freemarker template " + _templateId, e);
+					"Unable to process FreeMarker template " + _templateId, e);
 			}
 		}
 
@@ -105,7 +106,9 @@ public class FreeMarkerTemplate implements Template {
 
 			template.process(_context, unsyncStringWriter);
 
-			unsyncStringWriter.getStringBundler().writeTo(writer);
+			StringBundler sb = unsyncStringWriter.getStringBundler();
+
+			sb.writeTo(writer);
 
 			return true;
 		}
@@ -133,14 +136,14 @@ public class FreeMarkerTemplate implements Template {
 				}
 				catch (Exception e2) {
 					throw new TemplateException(
-						"Unable to process freemarker template " +
+						"Unable to process FreeMarker template " +
 							_errorTemplateId,
 						e2);
 				}
 			}
 			else {
 				throw new TemplateException(
-					"Unable to process freemarker template " + _templateId, e1);
+					"Unable to process FreeMarker template " + _templateId, e1);
 			}
 		}
 

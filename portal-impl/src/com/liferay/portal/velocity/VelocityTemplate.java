@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.Template;
 import com.liferay.portal.kernel.template.TemplateException;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.template.TemplateContextHelper;
@@ -83,7 +84,7 @@ public class VelocityTemplate implements Template {
 			}
 			catch (Exception e) {
 				throw new TemplateException(
-					"Unable to process freemarker template " + _templateId, e);
+					"Unable to process Velocity template " + _templateId, e);
 			}
 		}
 
@@ -94,16 +95,18 @@ public class VelocityTemplate implements Template {
 				_templateId, StringPool.UTF8, _velocityContext,
 				unsyncStringWriter);
 
-			unsyncStringWriter.getStringBundler().writeTo(writer);
+			StringBundler sb = unsyncStringWriter.getStringBundler();
+
+			sb.writeTo(writer);
 
 			return result;
 		}
-		catch (Exception e) {
-			put("exception", e.getMessage());
+		catch (Exception e1) {
+			put("exception", e1.getMessage());
 			put("script", _templateContent);
 
-			if (e instanceof ParseErrorException) {
-				ParseErrorException pee = (ParseErrorException)e;
+			if (e1 instanceof ParseErrorException) {
+				ParseErrorException pee = (ParseErrorException)e1;
 
 				put("column", pee.getColumnNumber());
 				put("line", pee.getLineNumber());
@@ -118,10 +121,10 @@ public class VelocityTemplate implements Template {
 
 				return false;
 			}
-			catch (Exception ex) {
+			catch (Exception e2) {
 				throw new TemplateException(
-					"Unable to process freemarker template " + _errorTemplateId,
-					ex);
+					"Unable to process Velocity template " + _errorTemplateId,
+					e2);
 			}
 		}
 	}
