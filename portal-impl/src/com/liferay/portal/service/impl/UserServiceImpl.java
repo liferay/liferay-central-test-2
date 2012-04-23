@@ -1637,7 +1637,6 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 		}
 
 		if ((creatorUserId == 0) || (creatorUserId == defaultUserId)) {
-
 			if (!company.isStrangersWithMx() &&
 				company.hasCompanyMx(emailAddress)) {
 
