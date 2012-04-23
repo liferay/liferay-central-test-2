@@ -244,7 +244,7 @@ public class UserGroupServiceImpl extends UserGroupServiceBaseImpl {
 	}
 
 	protected List<UserGroup> filterUserGroups(List<UserGroup> userGroups)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		List<UserGroup> filteredGroups = new ArrayList<UserGroup>();
 
