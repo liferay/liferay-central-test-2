@@ -23,6 +23,7 @@ import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.base.RoleServiceBaseImpl;
 import com.liferay.portal.service.permission.PortalPermissionUtil;
 import com.liferay.portal.service.permission.RolePermissionUtil;
+import com.liferay.portal.service.permission.UserPermissionUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -176,6 +177,9 @@ public class RoleServiceImpl extends RoleServiceBaseImpl {
 	public List<Role> getUserGroupGroupRoles(long userId, long groupId)
 		throws PortalException, SystemException {
 
+		UserPermissionUtil.check(
+			getPermissionChecker(), userId, ActionKeys.VIEW);
+
 		List<Role> roles = roleLocalService.getUserGroupGroupRoles(
 			userId, groupId);
 
@@ -194,6 +198,9 @@ public class RoleServiceImpl extends RoleServiceBaseImpl {
 	public List<Role> getUserGroupRoles(long userId, long groupId)
 		throws PortalException, SystemException {
 
+		UserPermissionUtil.check(
+			getPermissionChecker(), userId, ActionKeys.VIEW);
+
 		List<Role> roles = roleLocalService.getUserGroupRoles(userId, groupId);
 
 		return filterRoles(roles);
@@ -211,6 +218,9 @@ public class RoleServiceImpl extends RoleServiceBaseImpl {
 	public List<Role> getUserRelatedRoles(long userId, List<Group> groups)
 		throws PortalException, SystemException {
 
+		UserPermissionUtil.check(
+			getPermissionChecker(), userId, ActionKeys.VIEW);
+
 		List<Role> roles = roleLocalService.getUserRelatedRoles(userId, groups);
 
 		return filterRoles(roles);
@@ -226,6 +236,9 @@ public class RoleServiceImpl extends RoleServiceBaseImpl {
 	 */
 	public List<Role> getUserRoles(long userId)
 		throws PortalException, SystemException {
+
+		UserPermissionUtil.check(
+			getPermissionChecker(), userId, ActionKeys.VIEW);
 
 		List<Role> roles = roleLocalService.getUserRoles(userId);
 
@@ -251,6 +264,9 @@ public class RoleServiceImpl extends RoleServiceBaseImpl {
 			long userId, long companyId, String name, boolean inherited)
 		throws PortalException, SystemException {
 
+		UserPermissionUtil.check(
+			getPermissionChecker(), userId, ActionKeys.VIEW);
+
 		return roleLocalService.hasUserRole(userId, companyId, name, inherited);
 	}
 
@@ -273,6 +289,9 @@ public class RoleServiceImpl extends RoleServiceBaseImpl {
 	public boolean hasUserRoles(
 			long userId, long companyId, String[] names, boolean inherited)
 		throws PortalException, SystemException {
+
+		UserPermissionUtil.check(
+			getPermissionChecker(), userId, ActionKeys.VIEW);
 
 		return roleLocalService.hasUserRoles(
 			userId, companyId, names, inherited);
