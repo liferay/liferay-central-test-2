@@ -29,6 +29,9 @@ public class TearDownBookmarkFolderCPTest extends BaseTestCase {
 			case 1:
 				selenium.open("/web/guest/home/");
 				loadRequiredJavaScriptModules();
+				assertEquals(RuntimeVariables.replace("Go to"),
+					selenium.getText("//li[@id='_145_mySites']/a/span"));
+				selenium.mouseOver("//li[@id='_145_mySites']/a/span");
 
 				for (int second = 0;; second++) {
 					if (second >= 90) {
@@ -64,7 +67,10 @@ public class TearDownBookmarkFolderCPTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//td[4]/span/ul/li/strong/a",
+				assertEquals(RuntimeVariables.replace("Actions"),
+					selenium.getText(
+						"//span[@title='Actions']/ul/li/strong/a/span"));
+				selenium.clickAt("//span[@title='Actions']/ul/li/strong/a/span",
 					RuntimeVariables.replace("Actions"));
 
 				for (int second = 0;; second++) {
@@ -73,8 +79,8 @@ public class TearDownBookmarkFolderCPTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent(
-									"//div[@class='lfr-component lfr-menu-list']/ul/li[3]/a")) {
+						if (selenium.isVisible(
+									"//div[@class='lfr-component lfr-menu-list']/ul/li[contains(.,'Delete')]/a")) {
 							break;
 						}
 					}
@@ -84,8 +90,11 @@ public class TearDownBookmarkFolderCPTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				assertEquals(RuntimeVariables.replace("Delete"),
+					selenium.getText(
+						"//div[@class='lfr-component lfr-menu-list']/ul/li[contains(.,'Delete')]/a"));
 				selenium.click(RuntimeVariables.replace(
-						"//div[@class='lfr-component lfr-menu-list']/ul/li[3]/a"));
+						"//div[@class='lfr-component lfr-menu-list']/ul/li[contains(.,'Delete')]/a"));
 				selenium.waitForPageToLoad("30000");
 				loadRequiredJavaScriptModules();
 				assertTrue(selenium.getConfirmation()
@@ -102,7 +111,10 @@ public class TearDownBookmarkFolderCPTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//td[4]/span/ul/li/strong/a",
+				assertEquals(RuntimeVariables.replace("Actions"),
+					selenium.getText(
+						"//span[@title='Actions']/ul/li/strong/a/span"));
+				selenium.clickAt("//span[@title='Actions']/ul/li/strong/a/span",
 					RuntimeVariables.replace("Actions"));
 
 				for (int second = 0;; second++) {
@@ -111,8 +123,8 @@ public class TearDownBookmarkFolderCPTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent(
-									"//div[@class='lfr-component lfr-menu-list']/ul/li[3]/a")) {
+						if (selenium.isVisible(
+									"//div[@class='lfr-component lfr-menu-list']/ul/li[contains(.,'Delete')]/a")) {
 							break;
 						}
 					}
@@ -122,8 +134,11 @@ public class TearDownBookmarkFolderCPTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				assertEquals(RuntimeVariables.replace("Delete"),
+					selenium.getText(
+						"//div[@class='lfr-component lfr-menu-list']/ul/li[contains(.,'Delete')]/a"));
 				selenium.click(RuntimeVariables.replace(
-						"//div[@class='lfr-component lfr-menu-list']/ul/li[3]/a"));
+						"//div[@class='lfr-component lfr-menu-list']/ul/li[contains(.,'Delete')]/a"));
 				selenium.waitForPageToLoad("30000");
 				loadRequiredJavaScriptModules();
 				assertTrue(selenium.getConfirmation()
@@ -140,7 +155,10 @@ public class TearDownBookmarkFolderCPTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//td[4]/span/ul/li/strong/a",
+				assertEquals(RuntimeVariables.replace("Actions"),
+					selenium.getText(
+						"//span[@title='Actions']/ul/li/strong/a/span"));
+				selenium.clickAt("//span[@title='Actions']/ul/li/strong/a/span",
 					RuntimeVariables.replace("Actions"));
 
 				for (int second = 0;; second++) {
@@ -149,8 +167,8 @@ public class TearDownBookmarkFolderCPTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent(
-									"//div[@class='lfr-component lfr-menu-list']/ul/li[3]/a")) {
+						if (selenium.isVisible(
+									"//div[@class='lfr-component lfr-menu-list']/ul/li[contains(.,'Delete')]/a")) {
 							break;
 						}
 					}
@@ -160,8 +178,11 @@ public class TearDownBookmarkFolderCPTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				assertEquals(RuntimeVariables.replace("Delete"),
+					selenium.getText(
+						"//div[@class='lfr-component lfr-menu-list']/ul/li[contains(.,'Delete')]/a"));
 				selenium.click(RuntimeVariables.replace(
-						"//div[@class='lfr-component lfr-menu-list']/ul/li[3]/a"));
+						"//div[@class='lfr-component lfr-menu-list']/ul/li[contains(.,'Delete')]/a"));
 				selenium.waitForPageToLoad("30000");
 				loadRequiredJavaScriptModules();
 				assertTrue(selenium.getConfirmation()
@@ -178,7 +199,10 @@ public class TearDownBookmarkFolderCPTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//td[4]/span/ul/li/strong/a",
+				assertEquals(RuntimeVariables.replace("Actions"),
+					selenium.getText(
+						"//span[@title='Actions']/ul/li/strong/a/span"));
+				selenium.clickAt("//span[@title='Actions']/ul/li/strong/a/span",
 					RuntimeVariables.replace("Actions"));
 
 				for (int second = 0;; second++) {
@@ -187,8 +211,8 @@ public class TearDownBookmarkFolderCPTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent(
-									"//div[@class='lfr-component lfr-menu-list']/ul/li[3]/a")) {
+						if (selenium.isVisible(
+									"//div[@class='lfr-component lfr-menu-list']/ul/li[contains(.,'Delete')]/a")) {
 							break;
 						}
 					}
@@ -198,8 +222,11 @@ public class TearDownBookmarkFolderCPTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				assertEquals(RuntimeVariables.replace("Delete"),
+					selenium.getText(
+						"//div[@class='lfr-component lfr-menu-list']/ul/li[contains(.,'Delete')]/a"));
 				selenium.click(RuntimeVariables.replace(
-						"//div[@class='lfr-component lfr-menu-list']/ul/li[3]/a"));
+						"//div[@class='lfr-component lfr-menu-list']/ul/li[contains(.,'Delete')]/a"));
 				selenium.waitForPageToLoad("30000");
 				loadRequiredJavaScriptModules();
 				assertTrue(selenium.getConfirmation()
@@ -216,7 +243,10 @@ public class TearDownBookmarkFolderCPTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//td[4]/span/ul/li/strong/a",
+				assertEquals(RuntimeVariables.replace("Actions"),
+					selenium.getText(
+						"//span[@title='Actions']/ul/li/strong/a/span"));
+				selenium.clickAt("//span[@title='Actions']/ul/li/strong/a/span",
 					RuntimeVariables.replace("Actions"));
 
 				for (int second = 0;; second++) {
@@ -225,8 +255,8 @@ public class TearDownBookmarkFolderCPTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isElementPresent(
-									"//div[@class='lfr-component lfr-menu-list']/ul/li[3]/a")) {
+						if (selenium.isVisible(
+									"//div[@class='lfr-component lfr-menu-list']/ul/li[contains(.,'Delete')]/a")) {
 							break;
 						}
 					}
@@ -236,8 +266,11 @@ public class TearDownBookmarkFolderCPTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
+				assertEquals(RuntimeVariables.replace("Delete"),
+					selenium.getText(
+						"//div[@class='lfr-component lfr-menu-list']/ul/li[contains(.,'Delete')]/a"));
 				selenium.click(RuntimeVariables.replace(
-						"//div[@class='lfr-component lfr-menu-list']/ul/li[3]/a"));
+						"//div[@class='lfr-component lfr-menu-list']/ul/li[contains(.,'Delete')]/a"));
 				selenium.waitForPageToLoad("30000");
 				loadRequiredJavaScriptModules();
 				assertTrue(selenium.getConfirmation()
