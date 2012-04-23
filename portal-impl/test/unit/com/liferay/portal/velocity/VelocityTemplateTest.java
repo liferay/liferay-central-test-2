@@ -48,6 +48,41 @@ import org.apache.velocity.runtime.resource.util.StringResourceRepositoryImpl;
  */
 public class VelocityTemplateTest extends TestCase {
 
+	public static class MockResourceLoader extends ResourceLoader {
+
+		@Override
+		public void init(ExtendedProperties extendedProperties) {
+		}
+
+		@Override
+		public long getLastModified(Resource resource) {
+			return 0;
+		}
+
+		@Override
+		public InputStream getResourceStream(String source)
+			throws ResourceNotFoundException {
+
+			try {
+				if (_TEMPLATE_FILE_NAME.equals(source)) {
+					return new ByteArrayInputStream(
+						_TEST_TEMPLATE_CONTENT.getBytes());
+				}
+
+				throw new ResourceNotFoundException("Unable to find " + source);
+			}
+			catch (Exception e) {
+				throw new ResourceNotFoundException(e);
+			}
+		}
+
+		@Override
+		public boolean isSourceModified(Resource resource) {
+			return false;
+		}
+
+	}
+
 	@Override
 	public void setUp() throws Exception {
 		_templateContextHelper = new MockTemplateContextHelper();
@@ -298,41 +333,6 @@ public class VelocityTemplateTest extends TestCase {
 
 	private TemplateContextHelper _templateContextHelper;
 	private VelocityEngine _velocityEngine;
-
-	public static class MockResourceLoader extends ResourceLoader {
-
-		@Override
-		public void init(ExtendedProperties extendedProperties) {
-		}
-
-		@Override
-		public long getLastModified(Resource resource) {
-			return 0;
-		}
-
-		@Override
-		public InputStream getResourceStream(String source)
-			throws ResourceNotFoundException {
-
-			try {
-				if (_TEMPLATE_FILE_NAME.equals(source)) {
-					return new ByteArrayInputStream(
-						_TEST_TEMPLATE_CONTENT.getBytes());
-				}
-
-				throw new ResourceNotFoundException("Unable to find " + source);
-			}
-			catch (Exception e) {
-				throw new ResourceNotFoundException(e);
-			}
-		}
-
-		@Override
-		public boolean isSourceModified(Resource resource) {
-			return false;
-		}
-
-	}
 
 	private class MockTemplateContextHelper extends TemplateContextHelper {
 

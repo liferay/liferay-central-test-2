@@ -41,7 +41,7 @@ public class PersistenceExecutionTestListener
 		try {
 			TemplateManagerUtil.init();
 		}
-		catch (TemplateException e) {
+		catch (TemplateException te) {
 			Assert.fail("The template manager can not been initialized");
 		}
 	}
