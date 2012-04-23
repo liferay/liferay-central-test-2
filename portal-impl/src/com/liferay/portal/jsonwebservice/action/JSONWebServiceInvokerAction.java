@@ -299,6 +299,10 @@ public class JSONWebServiceInvokerAction implements JSONWebServiceAction {
 		}
 	}
 
+	private String _command;
+	private HttpServletRequest _request;
+	private List<Statement> _statements = new ArrayList<Statement>();
+
 	private class Flag extends KeyValue<String, String> {
 	}
 
@@ -360,9 +364,5 @@ public class JSONWebServiceInvokerAction implements JSONWebServiceAction {
 		private String[] _whitelist;
 
 	}
-
-	private String _command;
-	private HttpServletRequest _request;
-	private List<Statement> _statements = new ArrayList<Statement>();
 
 }

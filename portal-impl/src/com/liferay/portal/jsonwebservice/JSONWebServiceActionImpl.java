@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.jsonwebservice.JSONWebServiceAction;
 import com.liferay.portal.kernel.jsonwebservice.JSONWebServiceActionMapping;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.MethodParameter;
 import com.liferay.portal.service.ServiceContext;
@@ -218,12 +219,12 @@ public class JSONWebServiceActionImpl implements JSONWebServiceAction {
 					}
 
 					if (!ReflectUtil.isSubclass(
-						parameterType, methodParameters[i].getType())) {
+							parameterType, methodParameters[i].getType())) {
 
 						throw new IllegalArgumentException(
-							"Unmatched argument type: " +
-							parameterType.getName() + " for method argument #"
-							+ i);
+							"Unmatched argument type " +
+								parameterType.getName() +
+									" for method argument " + i);
 					}
 
 					parameterValue = _createDefaultParameterValue(
@@ -233,16 +234,14 @@ public class JSONWebServiceActionImpl implements JSONWebServiceAction {
 					Calendar calendar = Calendar.getInstance();
 
 					calendar.setLenient(false);
-					calendar.setTimeInMillis(Long.parseLong(value.toString()));
+					calendar.setTimeInMillis(
+						GetterUtil.getLong(value.toString()));
 
 					parameterValue = calendar;
 				}
 				else if (parameterType.equals(List.class)) {
-
-					String jsonString = value.toString();
-
 					List<?> list = JSONFactoryUtil.looseDeserializeSafe(
-						jsonString, ArrayList.class);
+						value.toString(), ArrayList.class);
 
 					list = _generifyList(
 						list, methodParameters[i].getGenericTypes());
@@ -254,11 +253,8 @@ public class JSONWebServiceActionImpl implements JSONWebServiceAction {
 						value.toString());
 				}
 				else if (parameterType.equals(Map.class)) {
-
-					String jsonString = value.toString();
-
 					Map<?, ?> map = JSONFactoryUtil.looseDeserializeSafe(
-						jsonString, HashMap.class);
+						value.toString(), HashMap.class);
 
 					map = _generifyMap(
 						map, methodParameters[i].getGenericTypes());
