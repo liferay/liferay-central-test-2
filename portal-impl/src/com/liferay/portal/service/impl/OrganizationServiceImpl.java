@@ -624,12 +624,10 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		Organization organization = updateOrganization(
+		return updateOrganization(
 			organizationId, parentOrganizationId, name, type, recursable,
 			regionId, countryId, statusId, comments, site, null, null, null,
 			null, null, serviceContext);
-
-		return organization;
 	}
 
 }
