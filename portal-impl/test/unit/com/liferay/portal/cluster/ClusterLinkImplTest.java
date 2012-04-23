@@ -28,9 +28,7 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.PwdGenerator;
 
 import java.io.DataInput;
-import java.io.DataInputStream;
 import java.io.DataOutput;
-import java.io.DataOutputStream;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
 
@@ -794,17 +792,10 @@ public class ClusterLinkImplTest extends NewClassLoaderTestCase {
 			return 0;
 		}
 
-		public boolean isMulticastAddress() {
-			return false;
-		}
-
 		public void readExternal(ObjectInput objectInput) {
 		}
 
 		public void readFrom(DataInput dataInput) throws Exception {
-		}
-
-		public void readFrom(DataInputStream dataInputStream) {
 		}
 
 		public int size() {
@@ -815,9 +806,6 @@ public class ClusterLinkImplTest extends NewClassLoaderTestCase {
 		}
 
 		public void writeTo(DataOutput dataOutput) throws Exception {
-		}
-
-		public void writeTo(DataOutputStream dataOutputStream) {
 		}
 
 	}
