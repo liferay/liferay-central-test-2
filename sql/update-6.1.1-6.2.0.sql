@@ -230,9 +230,9 @@ update Country set name = 'yemen' where name = 'Yemen';
 update Country set name = 'zambia' where name = 'Zambia';
 update Country set name = 'zimbabwe' where name = 'Zimbabwe';
 
-alter table JournalArticle add folderId LONG;
-
 drop table Groups_Permissions;
+
+alter table JournalArticle add folderId LONG;
 
 drop table OrgGroupPermission;
 
