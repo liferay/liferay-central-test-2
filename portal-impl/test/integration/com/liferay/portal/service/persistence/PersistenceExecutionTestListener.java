@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.test.AbstractExecutionTestListener;
 import com.liferay.portal.test.TestContext;
 import com.liferay.portal.util.PropsValues;
+
 import org.junit.Assert;
 
 /**
