@@ -14,6 +14,8 @@
 
 package com.liferay.portal.json;
 
+import com.liferay.portal.dao.orm.common.EntityCacheImpl;
+import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 
 import java.util.HashMap;
@@ -31,11 +33,11 @@ public class JSONFactoryTest extends TestCase {
 		new JSONFactoryUtil().setJSONFactory(new JSONFactoryImpl());
 	}
 
-	public void testLooseDeserializationOfForbiddenTypes() {
+	public void testLooseDeserialize() {
 		try {
 			JSONFactoryUtil.looseDeserialize(
-				"{\"class\":" +
-					"\"com.liferay.portal.kernel.dao.orm.EntityCacheUtil\"}}");
+				"{\"class\":\"" + EntityCacheUtil.class.getName() + "\"}}");
+
 			fail();
 		}
 		catch (Exception e) {
@@ -52,8 +54,7 @@ public class JSONFactoryTest extends TestCase {
 		}
 	}
 
-	public void testLooseDeserializationSafe() {
-
+	public void testLooseDeserializeSafe() {
 		Object object = JSONFactoryUtil.looseDeserializeSafe(
 			"{\"class\":\"java.lang.Thread\"}}");
 
@@ -63,21 +64,19 @@ public class JSONFactoryTest extends TestCase {
 			"{\"\u0063lass\":\"java.lang.Thread\"}}");
 
 		assertEquals(HashMap.class, object.getClass());
-		assertTrue(((Map)object).containsKey("class"));
+		assertTrue(((Map<?, ?>)object).containsKey("class"));
 
 		try {
 			JSONFactoryUtil.looseDeserializeSafe(
-				"{\"class\":" +
-					"\"com.liferay.portal.kernel.dao.orm.EntityCacheUtil\"}}");
+				"{\"class\":\"" + EntityCacheUtil.class.getName() + "\"}}");
 		}
 		catch (Exception e) {
 			fail(e.toString());
 		}
 
-		Map map = (Map)JSONFactoryUtil.looseDeserializeSafe(
-			"{\"class\":" +
-				"\"com.liferay.portal.kernel.dao.orm.EntityCacheUtil\"," +
-					"\"foo\": \"boo\"}");
+		Map<?, ?> map = (Map<?, ?>)JSONFactoryUtil.looseDeserializeSafe(
+			"{\"class\":\"" + EntityCacheUtil.class.getName() +
+				"\",\"foo\": \"boo\"}");
 
 		assertNotNull(map);
 		assertEquals(2, map.size());
@@ -86,24 +85,21 @@ public class JSONFactoryTest extends TestCase {
 			map.get("class"));
 		assertEquals("boo", map.get("foo"));
 
-		map = (Map)JSONFactoryUtil.looseDeserializeSafe(
-			"{\"class\":\"com.liferay.portal.kernel.dao.orm.EntityCacheUtil\"" +
-				",\"foo\": \"boo\",\"entityCache\":{\"class\":" +
-					"\"com.liferay.portal.dao.orm.common.EntityCacheImpl\"}}");
+		map = (Map<?, ?>)JSONFactoryUtil.looseDeserializeSafe(
+			"{\"class\":\"" + EntityCacheUtil.class.getName() +
+				"\",\"foo\": \"boo\",\"entityCache\":{\"class\":\"" +
+					EntityCacheImpl.class.getName() + "\"}}");
 
 		assertNotNull(map);
 		assertEquals(3, map.size());
-		assertEquals(
-			"com.liferay.portal.kernel.dao.orm.EntityCacheUtil",
-			map.get("class"));
+		assertEquals( EntityCacheUtil.class.getName(), map.get("class"));
 		assertEquals("boo", map.get("foo"));
 
-		map = (Map)map.get("entityCache");
+		map = (Map<?, ?>)map.get("entityCache");
+
 		assertNotNull(map);
 		assertEquals(1, map.size());
-		assertEquals(
-			"com.liferay.portal.dao.orm.common.EntityCacheImpl",
-			map.get("class"));
+		assertEquals(EntityCacheImpl.class.getName(), map.get("class"));
 	}
 
 }

@@ -171,7 +171,6 @@ public class PortalBeanObjectFactory extends BeanObjectFactory {
 
 	private Map<Class<?>, Map<String, Field>> _declaredFields =
 		new ConcurrentHashMap<Class<?>, Map<String, Field>>();
-
-	private boolean _safeMode = false;
+	private boolean _safeMode;
 
 }
