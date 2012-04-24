@@ -219,6 +219,35 @@ public class SelectRegularRolesSOAdminTest extends BaseTestCase {
 				assertEquals(RuntimeVariables.replace("Social Office User"),
 					selenium.getText(
 						"//tr[contains(., 'Social Office User')]/td"));
+				selenium.open("/web/guest/home/");
+				loadRequiredJavaScriptModules();
+
+				for (int second = 0;; second++) {
+					if (second >= 90) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isElementPresent(
+									"//li[contains(.,'Dashboard')]/a")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
+				assertEquals(RuntimeVariables.replace("Dashboard"),
+					selenium.getText("//li[contains(.,'Dashboard')]/a"));
+				selenium.clickAt("//li[contains(.,'Dashboard')]/a",
+					RuntimeVariables.replace("Dashboard"));
+				selenium.waitForPageToLoad("30000");
+				loadRequiredJavaScriptModules();
+				assertEquals(RuntimeVariables.replace("Dashboard"),
+					selenium.getText(
+						"//nav/ul/li[contains(.,'Dashboard')]/a/span"));
 
 			case 100:
 				label = -1;
