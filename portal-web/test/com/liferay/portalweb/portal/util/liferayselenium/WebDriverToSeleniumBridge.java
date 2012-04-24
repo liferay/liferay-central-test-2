@@ -716,29 +716,24 @@ public class WebDriverToSeleniumBridge
 	public void selectWindow(String windowID) {
 		Set<String> windowHandles = getWindowHandles();
 
-        if (!windowHandles.isEmpty()) {
-        	String selectWindowTitle;
+		if (!windowHandles.isEmpty()) {
+			String title = windowID;
 
-			if (windowID.startsWith("title=")) {
-	        	selectWindowTitle = windowID.substring(6);
-	        }
-	        else {
-	        	selectWindowTitle = windowID;
-	        }
+			if (title.startsWith("title=")) {
+				title = title.substring(6);
+			}
 
-	        for (String windowHandle : windowHandles) {
-	        	WebDriver.TargetLocator targetLocator = switchTo();
+			for (String windowHandle : windowHandles) {
+				WebDriver.TargetLocator targetLocator = switchTo();
 
-	        	targetLocator.window(windowHandle);
+				targetLocator.window(windowHandle);
 
-	        	String currentWindowTitle = getTitle();
-
-	        	if (currentWindowTitle.equals(selectWindowTitle)) {
-	        		break;
-	        	}
-	        }
-	    }
-	    else if (windowID.equals("null")) {
+				if (title.equals(getTitle())) {
+					return;
+				}
+			}
+		}
+		else if (windowID.equals("null")) {
 			WebDriver.TargetLocator targetLocator = switchTo();
 
 			targetLocator.defaultContent();
@@ -839,9 +834,9 @@ public class WebDriverToSeleniumBridge
 	public void uncheck(String locator) {
 		WebElement webElement = getWebElement(locator);
 
-		if (webElement.isSelected()){
+		if (webElement.isSelected()) {
 			webElement.click();
-		} 
+		}
 	}
 
 	public void useXpathLibrary(String libraryName) {
