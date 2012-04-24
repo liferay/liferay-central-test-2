@@ -55,7 +55,6 @@ if (filterManageableOrganizations) {
 		organizationParams.put("organizationsTree", organizations);
 	}
 }
-}
 %>
 
 <c:choose>
