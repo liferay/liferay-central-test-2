@@ -17,6 +17,7 @@ package com.liferay.portal.servlet;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ListUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.util.servlet.NullSession;
 
@@ -56,8 +57,10 @@ public class SharedSessionWrapper implements HttpSession {
 
 		SharedSessionWrapper sharedSessionWrapper = (SharedSessionWrapper)obj;
 
-		if (_portalSession.equals(sharedSessionWrapper._portalSession) &&
-			_portletSession.equals(sharedSessionWrapper._portletSession)) {
+		if (Validator.equals(
+				_portalSession, sharedSessionWrapper._portalSession) &&
+			Validator.equals(
+				_portletSession, sharedSessionWrapper._portletSession)) {
 
 			return true;
 		}
