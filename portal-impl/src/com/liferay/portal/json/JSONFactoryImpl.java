@@ -64,7 +64,9 @@ public class JSONFactoryImpl implements JSONFactory {
 			return JSONML.toString(jsonArray);
 		}
 		catch (Exception e) {
-			_log.error(e, e);
+			if (_log.isWarnEnabled()) {
+				_log.warn(e, e);
+			}
 
 			throw new IllegalStateException("Unable to convert to XML", e);
 		}
@@ -77,7 +79,9 @@ public class JSONFactoryImpl implements JSONFactory {
 			return JSONML.toString(jsonObject);
 		}
 		catch (Exception e) {
-			_log.error(e, e);
+			if (_log.isWarnEnabled()) {
+				_log.warn(e, e);
+			}
 
 			throw new IllegalStateException("Unable to convert to XML", e);
 		}
@@ -90,7 +94,9 @@ public class JSONFactoryImpl implements JSONFactory {
 			return jsonArray.toString();
 		}
 		catch (Exception e) {
-			_log.error(e, e);
+			if (_log.isWarnEnabled()) {
+				_log.warn(e, e);
+			}
 
 			throw new IllegalStateException("Unable to convert to JSONML", e);
 		}
@@ -103,7 +109,9 @@ public class JSONFactoryImpl implements JSONFactory {
 			return jsonObject.toString();
 		}
 		catch (Exception e) {
-			_log.error(e, e);
+			if (_log.isWarnEnabled()) {
+				_log.warn(e, e);
+			}
 
 			throw new IllegalStateException("Unable to convert to JSONML", e);
 		}
@@ -152,7 +160,9 @@ public class JSONFactoryImpl implements JSONFactory {
 			return _jsonSerializer.fromJSON(json);
 		}
 		catch (Exception e) {
-			 _log.error(e, e);
+			if (_log.isWarnEnabled()) {
+				_log.warn(e, e);
+			}
 
 			throw new IllegalStateException("Unable to deserialize object", e);
 		}
@@ -169,7 +179,9 @@ public class JSONFactoryImpl implements JSONFactory {
 			return jsonDeserializer.deserialize(json);
 		}
 		catch (Exception e) {
-			 _log.error(e, e);
+			if (_log.isWarnEnabled()) {
+				_log.warn(e, e);
+			}
 
 			throw new IllegalStateException("Unable to deserialize object", e);
 		}
@@ -192,7 +204,9 @@ public class JSONFactoryImpl implements JSONFactory {
 			return jsonDeserializer.deserialize(json);
 		}
 		catch (Exception e) {
-			 _log.error(e, e);
+			if (_log.isWarnEnabled()) {
+				_log.warn(e, e);
+			}
 
 			throw new IllegalStateException("Unable to deserialize object", e);
 		}
@@ -253,7 +267,9 @@ public class JSONFactoryImpl implements JSONFactory {
 			return _jsonSerializer.toJSON(object);
 		}
 		catch (MarshallException me) {
-			_log.error(me, me);
+			if (_log.isWarnEnabled()) {
+				_log.warn(me, me);
+			}
 
 			throw new IllegalStateException("Unable to serialize oject", me);
 		}
