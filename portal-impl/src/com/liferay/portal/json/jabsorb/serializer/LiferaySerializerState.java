@@ -34,10 +34,9 @@ public class LiferaySerializerState extends SerializerState {
 			return super.store(object);
 		}
 
-		JSONObject jsonObject = (JSONObject) object;
+		JSONObject jsonObject = (JSONObject)object;
 
 		if (jsonObject.has("javaClass")) {
-
 			try {
 				String javaClass = jsonObject.getString("javaClass");
 
@@ -48,8 +47,8 @@ public class LiferaySerializerState extends SerializerState {
 						"Not instantiating " + javaClass);
 				}
 			}
-			catch(JSONException ex) {
-				_log.error("Unable to parse object", ex);
+			catch (JSONException jsone) {
+				_log.error("Unable to parse object", jsone);
 			}
 		}
 
@@ -58,4 +57,5 @@ public class LiferaySerializerState extends SerializerState {
 
 	private static Log _log = LogFactoryUtil.getLog(
 		LiferaySerializerState.class);
+
 }

@@ -25,8 +25,22 @@ import org.jabsorb.serializer.UnmarshallException;
 public class LiferayJSONSerializer extends JSONSerializer {
 
 	@Override
+	public ObjectMatch tryUnmarshall(
+			SerializerState serializerState,
+			@SuppressWarnings("rawtypes") Class clazz, Object json)
+		throws UnmarshallException {
+
+		if (!(serializerState instanceof LiferaySerializerState)) {
+			serializerState = new LiferaySerializerState();
+		}
+
+		return super.tryUnmarshall(serializerState, clazz, json);
+	}
+
+	@Override
 	public Object unmarshall(
-			SerializerState serializerState, Class clazz, Object json)
+			SerializerState serializerState,
+			@SuppressWarnings("rawtypes") Class clazz, Object json)
 		throws UnmarshallException {
 
 		if (!(serializerState instanceof LiferaySerializerState)) {
@@ -36,15 +50,4 @@ public class LiferayJSONSerializer extends JSONSerializer {
 		return super.unmarshall(serializerState, clazz, json);
 	}
 
-	@Override
-	public ObjectMatch tryUnmarshall(
-			SerializerState serializerState, Class clazz, Object json)
-		throws UnmarshallException {
-
-		if (!(serializerState instanceof LiferaySerializerState)) {
-			serializerState = new LiferaySerializerState();
-		}
-
-		return super.tryUnmarshall(serializerState, clazz, json);
-	}
 }
