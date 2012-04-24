@@ -347,11 +347,12 @@ public class UserImpl extends UserBaseImpl {
 		return getOrganizations(false);
 	}
 
-	public List<Organization> getOrganizations(boolean includeNonUser)
+	public List<Organization> getOrganizations(
+			boolean includeIndirectlyAssociated)
 		throws PortalException, SystemException {
 
 		return OrganizationLocalServiceUtil.getUserOrganizations(
-			getUserId(), includeNonUser);
+			getUserId(), includeIndirectlyAssociated);
 	}
 
 	public boolean getPasswordModified() {

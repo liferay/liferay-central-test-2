@@ -668,25 +668,24 @@ public class OrganizationLocalServiceImpl
 	}
 
 	/**
-	 * Returns all the organizations associated with the user. If
-	 * includeNonUser is true, the result includes those organizations that are
+	 * Returns all the organizations associated with the user. If includeNonUser
+	 * is <code>true</code>, the result includes those organizations that are
 	 * not directly associated to the user but he is an owner or an
 	 * administrator of the organization.
 	 *
 	 * @param  userId the primary key of the user
-	 * @param  includeNonUser if <code>true</code> the result includes those
-	 *         organizations that are not directly associated to the user but he
-	 *         is an owner or an administrator of the organization. Otherwise
-	 *         returns the same result as #getUserOrganizations(long).
+	 * @param  includeIndirectlyAssociated whether to includes organizations
+	 *         that are indirectly associated to the user because he is an owner
+	 *         or an administrator of the organization
 	 * @return the organizations associated with the user
 	 * @throws PortalException if a user with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public List<Organization> getUserOrganizations(
-			long userId, boolean includeNonUser)
+			long userId, boolean includeIndirectlyAssociated)
 		throws PortalException, SystemException {
 
-		if (!includeNonUser) {
+		if (!includeIndirectlyAssociated) {
 			return getUserOrganizations(userId);
 		}
 
@@ -700,14 +699,16 @@ public class OrganizationLocalServiceImpl
 
 			String roleName = role.getName();
 
-			if (roleName.equals(RoleConstants.ORGANIZATION_OWNER) ||
-				roleName.equals(RoleConstants.ORGANIZATION_ADMINISTRATOR)) {
+			if (roleName.equals(RoleConstants.ORGANIZATION_ADMINISTRATOR) ||
+				roleName.equals(RoleConstants.ORGANIZATION_OWNER)) {
 
-				Group organizationGroup = userGroupRole.getGroup();
+				Group group = userGroupRole.getGroup();
 
-				organizations.add(
+				Organization organization =
 					organizationPersistence.findByPrimaryKey(
-						organizationGroup.getOrganizationId()));
+						group.getOrganizationId());
+
+				organizations.add(organization);
 			}
 		}
 
@@ -1866,8 +1867,7 @@ public class OrganizationLocalServiceImpl
 				if ((organizationId <= 0) ||
 					(organization.getOrganizationId() != organizationId)) {
 
-					throw new DuplicateOrganizationException(
-						"There is another organization named " + name);
+					throw new DuplicateOrganizationException(name);
 				}
 			}
 		}

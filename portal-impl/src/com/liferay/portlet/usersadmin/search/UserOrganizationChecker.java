@@ -44,7 +44,7 @@ public class UserOrganizationChecker extends RowChecker {
 
 	@Override
 	public boolean isChecked(Object obj) {
-		User user = (User) obj;
+		User user = (User)obj;
 
 		try {
 			return UserLocalServiceUtil.hasOrganizationUser(
@@ -57,12 +57,13 @@ public class UserOrganizationChecker extends RowChecker {
 		}
 	}
 
+	@Override
 	public boolean isDisabled(Object obj) {
 		if (!PropsValues.ORGANIZATIONS_ASSIGNMENT_STRICT) {
 			return false;
 		}
 
-		User user = (User) obj;
+		User user = (User)obj;
 
 		try {
 			PermissionChecker permissionChecker =

@@ -202,16 +202,14 @@ userGroupRoles.addAll(organizationRoles);
 	</aui:script>
 </c:if>
 
-<c:if test="<%= !organizations.isEmpty() %>">
-	<c:if test="<%= !portletName.equals(PortletKeys.MY_ACCOUNT) %>">
-		<liferay-ui:icon
-			cssClass="modify-link"
-			image="add"
-			label="<%= true %>"
-			message="select"
-			url='<%= "javascript:" + renderResponse.getNamespace() + "openOrganizationRoleSelector();" %>'
-		/>
-	</c:if>
+<c:if test="<%= !organizations.isEmpty() && !portletName.equals(PortletKeys.MY_ACCOUNT) %>">
+	<liferay-ui:icon
+		cssClass="modify-link"
+		image="add"
+		label="<%= true %>"
+		message="select"
+		url='<%= "javascript:" + renderResponse.getNamespace() + "openOrganizationRoleSelector();" %>'
+	/>
 </c:if>
 
 <br /><br />

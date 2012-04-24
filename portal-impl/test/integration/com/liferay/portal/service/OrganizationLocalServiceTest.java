@@ -33,8 +33,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 /**
- * <a href="OrganizationLocalServiceTest.java.html"><b><i>View Source</i></b></a>
- *
  * @author Jorge Ferrer
  */
 @ExecutionTestListeners(
@@ -46,32 +44,15 @@ import org.junit.runner.RunWith;
 public class OrganizationLocalServiceTest {
 
 	@Test
-	@Transactional
-	public void testCreateOrganizationAndNotBecomingAUser() throws Exception {
-		long userId = TestPropsValues.getUserId();
+	public void testAddOrganizationWithIndirectAssociation() throws Exception {
+		User user = ServiceTestUtil.addUser(
+			"testAddOrganizationWithIndirectAssociation", false, null);
 
 		Organization organization =
 			OrganizationLocalServiceUtil.addOrganization(
-				userId, OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID,
-				"testCreateOrganizationAndNotBecomingAUser",
-				OrganizationConstants.TYPE_REGULAR_ORGANIZATION, false, 0, 0,
-				ListTypeConstants.ORGANIZATION_STATUS_DEFAULT, StringPool.BLANK,
-				false, null);
-
-		Assert.assertFalse(
-			OrganizationLocalServiceUtil.hasUserOrganization(
-				userId, organization.getOrganizationId()));
-	}
-
-	@Test
-	public void testRetrieveOwnedOrganizations() throws Exception {
-		User user = ServiceTestUtil.addUser("test1", false, null);
-		long userId = user.getUserId();
-
-		Organization organization =
-			OrganizationLocalServiceUtil.addOrganization(
-				userId, OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID,
-				"testRetrieveOwnedOrganizations",
+				user.getUserId(),
+				OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID,
+				"testAddOrganizationWithIndirectAssociation",
 				OrganizationConstants.TYPE_REGULAR_ORGANIZATION, false, 0, 0,
 				ListTypeConstants.ORGANIZATION_STATUS_DEFAULT, StringPool.BLANK,
 				false, null);
@@ -79,24 +60,29 @@ public class OrganizationLocalServiceTest {
 		try {
 			List<Organization> organizations = user.getOrganizations(true);
 
-			boolean found = false;
-
-			for (Organization curOrganization : organizations) {
-				if (curOrganization.getOrganizationId() ==
-						organization.getOrganizationId()) {
-
-					found = true;
-				}
-			}
-
-			Assert.assertTrue(
-				"The organization created and owned by the user has not been " +
-				"returned as one of his organizations", found);
+			Assert.assertTrue(organizations.contains(organization));
 		}
 		finally {
 			OrganizationLocalServiceUtil.deleteOrganization(
 				organization.getOrganizationId());
 		}
+	}
+
+	@Test
+	@Transactional
+	public void testAddOrganizationWithoutDirectAssociation() throws Exception {
+		Organization organization =
+			OrganizationLocalServiceUtil.addOrganization(
+				TestPropsValues.getUserId(),
+				OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID,
+				"testAddOrganizationWithoutDirectAssociation",
+				OrganizationConstants.TYPE_REGULAR_ORGANIZATION, false, 0, 0,
+				ListTypeConstants.ORGANIZATION_STATUS_DEFAULT, StringPool.BLANK,
+				false, null);
+
+		Assert.assertFalse(
+			OrganizationLocalServiceUtil.hasUserOrganization(
+				TestPropsValues.getUserId(), organization.getOrganizationId()));
 	}
 
 }

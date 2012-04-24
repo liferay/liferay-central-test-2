@@ -47,8 +47,8 @@ public class UsersControlPanelEntry extends BaseControlPanelEntry {
 
 			String roleName = role.getName();
 
-			if (roleName.equals(RoleConstants.ORGANIZATION_OWNER) ||
-				roleName.equals(RoleConstants.ORGANIZATION_ADMINISTRATOR)) {
+			if (roleName.equals(RoleConstants.ORGANIZATION_ADMINISTRATOR) ||
+				roleName.equals(RoleConstants.ORGANIZATION_OWNER)) {
 
 				return true;
 			}
