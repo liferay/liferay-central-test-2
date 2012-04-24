@@ -1042,10 +1042,10 @@ public class UserWrapper implements User, ModelWrapper<User> {
 		return _user.getOrganizationIds();
 	}
 
-	public long[] getOrganizationIds(boolean includeNonuser)
+	public long[] getOrganizationIds(boolean includeNonUser)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _user.getOrganizationIds(includeNonuser);
+		return _user.getOrganizationIds(includeNonUser);
 	}
 
 	public java.util.List<com.liferay.portal.model.Organization> getOrganizations()
@@ -1055,10 +1055,10 @@ public class UserWrapper implements User, ModelWrapper<User> {
 	}
 
 	public java.util.List<com.liferay.portal.model.Organization> getOrganizations(
-		boolean includeNonUser)
+		boolean includeIndirectlyAssociated)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _user.getOrganizations(includeNonUser);
+		return _user.getOrganizations(includeIndirectlyAssociated);
 	}
 
 	public boolean getPasswordModified() {
