@@ -50,6 +50,7 @@ public class SharedSessionWrapper implements HttpSession {
 		_portletSession = portletSession;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (!(obj instanceof SharedSessionWrapper)) {
 			return false;
@@ -148,6 +149,7 @@ public class SharedSessionWrapper implements HttpSession {
 		return names.toArray(new String[names.size()]);
 	}
 
+	@Override
 	public int hashCode() {
 		return _portalSession.hashCode() ^ _portletSession.hashCode();
 	}
