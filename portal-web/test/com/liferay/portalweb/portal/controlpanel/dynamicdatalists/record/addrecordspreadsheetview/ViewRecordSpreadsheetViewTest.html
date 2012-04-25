@@ -1,12 +1,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>ViewRecordTest</title>
+<title>ViewRecordSpreadsheetViewTest</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">ViewRecordTest</td></tr>
+<tr><td rowspan="1" colspan="3">ViewRecordSpreadsheetViewTest</td></tr>
 </thead><tbody>
 <tr>
 	<td>open</td>
@@ -14,7 +14,17 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>assertText</td>
+	<td>//li[@id='_145_mySites']/a/span</td>
+	<td>Go to</td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>//li[@id='_145_mySites']/a/span</td>
+	<td>Go to</td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
 	<td>link=Control Panel</td>
 	<td>Control Panel</td>
 </tr>
@@ -64,9 +74,9 @@
 	<td>Date</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>assertPartialText</td>
 	<td>//tr[3]/td[2]</td>
-	<td>4/10/12</td>
+	<td>/10/</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -190,8 +200,13 @@
 </tr>
 <tr>
 	<td>assertText</td>
+	<td>//div[@class='aui-fieldset-content ']/div[2]/label</td>
+	<td>Date</td>
+</tr>
+<tr>
+	<td>assertPartialText</td>
 	<td>//div[@class='aui-fieldset-content ']/div[2]</td>
-	<td>Date 4/10/12</td>
+	<td>/10/</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -244,7 +259,17 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
+	<td>assertText</td>
+	<td>//li[@id='_145_mySites']/a/span</td>
+	<td>Go to</td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>//li[@id='_145_mySites']/a/span</td>
+	<td>Go to</td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
 	<td>link=Control Panel</td>
 	<td>Control Panel</td>
 </tr>
@@ -304,9 +329,9 @@
 	<td>True</td>
 </tr>
 <tr>
-	<td>assertText</td>
+	<td>assertPartialText</td>
 	<td>//td[2]/div</td>
-	<td>2012-04-10</td>
+	<td>-10</td>
 </tr>
 <tr>
 	<td>assertText</td>

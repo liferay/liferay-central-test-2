@@ -20,10 +20,13 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 /**
  * @author Brian Wing Shun Chan
  */
-public class ViewRecordTest extends BaseTestCase {
-	public void testViewRecord() throws Exception {
+public class ViewRecordSpreadsheetViewTest extends BaseTestCase {
+	public void testViewRecordSpreadsheetView() throws Exception {
 		selenium.open("/web/guest/home/");
 		loadRequiredJavaScriptModules();
+		assertEquals(RuntimeVariables.replace("Go to"),
+			selenium.getText("//li[@id='_145_mySites']/a/span"));
+		selenium.mouseOver("//li[@id='_145_mySites']/a/span");
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -31,7 +34,7 @@ public class ViewRecordTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Control Panel")) {
+				if (selenium.isVisible("link=Control Panel")) {
 					break;
 				}
 			}
@@ -67,8 +70,7 @@ public class ViewRecordTest extends BaseTestCase {
 			selenium.getText("//tr[3]/td[1]"));
 		assertEquals(RuntimeVariables.replace("Date"),
 			selenium.getText("//tr[1]/th[2]"));
-		assertEquals(RuntimeVariables.replace("4/10/12"),
-			selenium.getText("//tr[3]/td[2]"));
+		assertTrue(selenium.isPartialText("//tr[3]/td[2]", "/10/"));
 		assertEquals(RuntimeVariables.replace("Decimal"),
 			selenium.getText("//tr[1]/th[3]"));
 		assertEquals(RuntimeVariables.replace("1.23"),
@@ -135,8 +137,11 @@ public class ViewRecordTest extends BaseTestCase {
 		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("Boolean true"),
 			selenium.getText("//div[@class='aui-fieldset-content ']/div[1]"));
-		assertEquals(RuntimeVariables.replace("Date 4/10/12"),
-			selenium.getText("//div[@class='aui-fieldset-content ']/div[2]"));
+		assertEquals(RuntimeVariables.replace("Date"),
+			selenium.getText(
+				"//div[@class='aui-fieldset-content ']/div[2]/label"));
+		assertTrue(selenium.isPartialText(
+				"//div[@class='aui-fieldset-content ']/div[2]", "/10/"));
 		assertEquals(RuntimeVariables.replace("Decimal 1.23"),
 			selenium.getText("//div[@class='aui-fieldset-content ']/div[3]"));
 		assertEquals(RuntimeVariables.replace(
@@ -159,6 +164,9 @@ public class ViewRecordTest extends BaseTestCase {
 			selenium.getText("//div[@class='aui-fieldset-content ']/div[11]"));
 		selenium.open("/web/guest/home/");
 		loadRequiredJavaScriptModules();
+		assertEquals(RuntimeVariables.replace("Go to"),
+			selenium.getText("//li[@id='_145_mySites']/a/span"));
+		selenium.mouseOver("//li[@id='_145_mySites']/a/span");
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -166,7 +174,7 @@ public class ViewRecordTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Control Panel")) {
+				if (selenium.isVisible("link=Control Panel")) {
 					break;
 				}
 			}
@@ -223,8 +231,7 @@ public class ViewRecordTest extends BaseTestCase {
 		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("True"),
 			selenium.getText("//td[1]/div"));
-		assertEquals(RuntimeVariables.replace("2012-04-10"),
-			selenium.getText("//td[2]/div"));
+		assertTrue(selenium.isPartialText("//td[2]/div", "-10"));
 		assertEquals(RuntimeVariables.replace("1.23"),
 			selenium.getText("//td[3]/div"));
 		assertEquals(RuntimeVariables.replace("document.txt"),
