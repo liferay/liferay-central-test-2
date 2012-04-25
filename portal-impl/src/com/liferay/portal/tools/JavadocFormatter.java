@@ -40,8 +40,6 @@ import com.thoughtworks.qdox.model.JavaPackage;
 import com.thoughtworks.qdox.model.JavaParameter;
 import com.thoughtworks.qdox.model.Type;
 
-import jargs.gnu.CmdLineParser;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -77,33 +75,34 @@ public class JavadocFormatter {
 	}
 
 	public JavadocFormatter(String[] args) throws Exception {
-		CmdLineParser cmdLineParser = new CmdLineParser();
+		Map<String, String> arguments = ArgumentsUtil.parseArguments(args);
 
-		CmdLineParser.Option limitOption = cmdLineParser.addStringOption(
-			"limit");
-		CmdLineParser.Option initOption = cmdLineParser.addStringOption(
-			"init");
-		CmdLineParser.Option updateOption = cmdLineParser.addStringOption(
-			"update");
+		_basedir = arguments.get("javadoc.base.dir");
 
-		cmdLineParser.parse(args);
+		if (!_basedir.endsWith("/")) {
+			_basedir += "/";
+		}
 
-		String limit = (String)cmdLineParser.getOptionValue(limitOption);
-		String init = (String)cmdLineParser.getOptionValue(initOption);
-		String update = (String)cmdLineParser.getOptionValue(updateOption);
+		String init = arguments.get("javadoc.init");
 
 		if (Validator.isNotNull(init) && !init.startsWith("$")) {
 			_initializeMissingJavadocs = GetterUtil.getBoolean(init);
 		}
 
+		String limit = arguments.get("javadoc.limit");
+
+		_outputFileName = arguments.get("javadoc.output.file");
+
+		String update = arguments.get("javadoc.update");
+
 		if (Validator.isNotNull(update) && !update.startsWith("$")) {
 			_updateJavadocs = GetterUtil.getBoolean(update);
 		}
 
-		DirectoryScanner ds = new DirectoryScanner();
+		DirectoryScanner directoryScanner = new DirectoryScanner();
 
-		ds.setBasedir(_basedir);
-		ds.setExcludes(
+		directoryScanner.setBasedir(_basedir);
+		directoryScanner.setExcludes(
 			new String[] {"**\\classes\\**", "**\\portal-client\\**"});
 
 		List<String> includes = new ArrayList<String>();
@@ -124,11 +123,12 @@ public class JavadocFormatter {
 			includes.add("**\\*.java");
 		}
 
-		ds.setIncludes(includes.toArray(new String[includes.size()]));
+		directoryScanner.setIncludes(
+			includes.toArray(new String[includes.size()]));
 
-		ds.scan();
+		directoryScanner.scan();
 
-		String[] fileNames = ds.getIncludedFiles();
+		String[] fileNames = directoryScanner.getIncludedFiles();
 
 		if ((fileNames.length == 0) && Validator.isNotNull(limit) &&
 			!limit.startsWith("$")) {
@@ -915,7 +915,8 @@ public class JavadocFormatter {
 			return tuple;
 		}
 
-		File javadocsXmlFile = new File(srcDirName, "META-INF/javadocs.xml");
+		File javadocsXmlFile = new File(
+			srcDirName, "META-INF/" + _outputFileName);
 
 		if (!javadocsXmlFile.exists()) {
 			_fileUtil.write(
@@ -1498,6 +1499,7 @@ public class JavadocFormatter {
 	private boolean _initializeMissingJavadocs;
 	private Map<String, Tuple> _javadocxXmlTuples =
 		new HashMap<String, Tuple>();
+	private String _outputFileName;
 	private boolean _updateJavadocs;
 
 }
