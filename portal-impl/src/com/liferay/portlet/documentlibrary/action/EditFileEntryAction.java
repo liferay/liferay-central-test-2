@@ -483,16 +483,22 @@ public class EditFileEntryAction extends PortletAction {
 		throws Exception {
 
 		long fileEntryId = ParamUtil.getLong(actionRequest, "fileEntryId");
+		String version = ParamUtil.getString(actionRequest, "version");
 
-		if (fileEntryId > 0) {
-			DLAppServiceUtil.deleteFileEntry(fileEntryId);
+		if ((fileEntryId > 0) && Validator.isNotNull(version)) {
+			DLAppServiceUtil.deleteFileVersion(fileEntryId, version);
 		}
 		else {
-			long[] deleteFileEntryIds = StringUtil.split(
-				ParamUtil.getString(actionRequest, "deleteEntryIds"), 0L);
+			if (fileEntryId > 0) {
+				DLAppServiceUtil.deleteFileEntry(fileEntryId);
+			}
+			else {
+				long[] deleteFileEntryIds = StringUtil.split(
+					ParamUtil.getString(actionRequest, "deleteEntryIds"), 0L);
 
-			for (int i = 0; i < deleteFileEntryIds.length; i++) {
-				DLAppServiceUtil.deleteFileEntry(deleteFileEntryIds[i]);
+				for (int i = 0; i < deleteFileEntryIds.length; i++) {
+					DLAppServiceUtil.deleteFileEntry(deleteFileEntryIds[i]);
+				}
 			}
 		}
 	}
