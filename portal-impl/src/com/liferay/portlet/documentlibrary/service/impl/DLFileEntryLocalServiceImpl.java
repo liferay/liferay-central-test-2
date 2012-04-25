@@ -1213,28 +1213,29 @@ public class DLFileEntryLocalServiceImpl
 		// File versions
 
 		if (oldStatus == WorkflowConstants.STATUS_IN_TRASH) {
-			List<DLFileVersion> trashedFileVersions =
+			List<DLFileVersion> trashedDLFileVersions =
 				dlFileVersionPersistence.findByF_S(
 					dlFileEntry.getFileEntryId(),
 					WorkflowConstants.STATUS_IN_TRASH);
 
-			for (DLFileVersion trashedFileVersion : trashedFileVersions) {
-				trashedFileVersion.setStatus(WorkflowConstants.STATUS_APPROVED);
+			for (DLFileVersion trashedDLFileVersion : trashedDLFileVersions) {
+				trashedDLFileVersion.setStatus(
+					WorkflowConstants.STATUS_APPROVED);
 
-				dlFileVersionPersistence.update(trashedFileVersion, false);
+				dlFileVersionPersistence.update(trashedDLFileVersion, false);
 			}
 		}
 		else if (status == WorkflowConstants.STATUS_IN_TRASH) {
-			List<DLFileVersion> approvedFileVersions =
+			List<DLFileVersion> approvedDLFileVersions =
 				dlFileVersionPersistence.findByF_S(
 					dlFileEntry.getFileEntryId(),
 					WorkflowConstants.STATUS_APPROVED);
 
-			for (DLFileVersion approvedFileVersion : approvedFileVersions) {
-				approvedFileVersion.setStatus(
+			for (DLFileVersion approvedDLFileVersion : approvedDLFileVersions) {
+				approvedDLFileVersion.setStatus(
 					WorkflowConstants.STATUS_IN_TRASH);
 
-				dlFileVersionPersistence.update(approvedFileVersion, false);
+				dlFileVersionPersistence.update(approvedDLFileVersion, false);
 			}
 		}
 
