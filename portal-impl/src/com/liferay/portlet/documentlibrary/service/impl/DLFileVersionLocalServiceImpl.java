@@ -52,12 +52,6 @@ public class DLFileVersionLocalServiceImpl
 		return dlFileVersionPersistence.fetchByUUID_G(uuid, groupId);
 	}
 
-	public int getFileVersionCount(long fileEntryId, int status)
-		throws SystemException {
-
-		return dlFileVersionPersistence.countByF_S(fileEntryId, status);
-	}
-
 	public List<DLFileVersion> getFileVersions(long fileEntryId, int status)
 		throws SystemException {
 
@@ -67,6 +61,12 @@ public class DLFileVersionLocalServiceImpl
 		else {
 			return dlFileVersionPersistence.findByF_S(fileEntryId, status);
 		}
+	}
+
+	public int getFileVersionsCount(long fileEntryId, int status)
+		throws SystemException {
+
+		return dlFileVersionPersistence.countByF_S(fileEntryId, status);
 	}
 
 	public DLFileVersion getLatestFileVersion(
