@@ -151,15 +151,15 @@ public class SocialActivitySettingLocalServiceImpl
 		}
 
 		try {
-			JSONObject setting = JSONFactoryUtil.createJSONObject(
+			JSONObject jsonObject = JSONFactoryUtil.createJSONObject(
 				activitySetting.getValue());
 
-			return setting.getBoolean("enabled");
+			return jsonObject.getBoolean("enabled");
 		}
-		catch (JSONException je) {
+		catch (JSONException jsone) {
 			_log.error(
-				"Could not create JSON object from '" +
-				activitySetting.getValue() + "'");
+				"Unable to create JSON object from " +
+					activitySetting.getValue());
 
 			return false;
 		}
@@ -278,11 +278,11 @@ public class SocialActivitySettingLocalServiceImpl
 			activitySetting.setName(name);
 		}
 
-		JSONObject setting = JSONFactoryUtil.createJSONObject();
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-		setting.put("enabled", enabled);
+		jsonObject.put("enabled", enabled);
 
-		activitySetting.setValue(setting.toString());
+		activitySetting.setValue(jsonObject.toString());
 
 		socialActivitySettingPersistence.update(activitySetting, false);
 	}
@@ -415,10 +415,10 @@ public class SocialActivitySettingLocalServiceImpl
 
 	private static final String _PREFIX_CLASS_PK = "_LFR_CLASS_PK_";
 
-	private static PortalCache _activityDefinitions = MultiVMPoolUtil.getCache(
-		SocialActivitySettingLocalServiceImpl.class.getName());
-
 	private static Log _log = LogFactoryUtil.getLog(
 		SocialActivitySettingLocalServiceImpl.class);
+
+	private static PortalCache _activityDefinitions = MultiVMPoolUtil.getCache(
+		SocialActivitySettingLocalServiceImpl.class.getName());
 
 }

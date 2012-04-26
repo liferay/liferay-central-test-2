@@ -35,10 +35,10 @@ import java.io.InputStream;
 /**
  * @author Zsolt Berentey
  */
-public class BaseSocialActivityTest {
+public class BaseSocialActivityTestCase {
 
 	public static void setUp() throws Exception {
-		_classNameIdUser = PortalUtil.getClassNameId(User.class.getName());
+		_userClassNameId = PortalUtil.getClassNameId(User.class.getName());
 
 		Class<?> clazz = SocialActivitySettingLocalServiceTest.class;
 
@@ -51,22 +51,22 @@ public class BaseSocialActivityTest {
 	}
 
 	public static void tearDown() throws Exception {
+		if (_actorUser != null) {
+			UserLocalServiceUtil.deleteUser(_actorUser);
+
+			_actorUser = null;
+		}
+
 		if (_assetEntry != null) {
 			AssetEntryLocalServiceUtil.deleteEntry(_assetEntry);
 
 			_assetEntry = null;
 		}
 
-		if (_userCreator != null) {
-			UserLocalServiceUtil.deleteUser(_userCreator);
+		if (_creatorUser != null) {
+			UserLocalServiceUtil.deleteUser(_creatorUser);
 
-			_userCreator = null;
-		}
-
-		if (_userActor != null) {
-			UserLocalServiceUtil.deleteUser(_userActor);
-
-			_userActor = null;
+			_creatorUser = null;
 		}
 
 		if (_group != null) {
@@ -76,35 +76,37 @@ public class BaseSocialActivityTest {
 		}
 	}
 
-	protected static void createAsset() throws Exception {
+	protected static void addAsset() throws Exception {
 		if (_assetEntry != null) {
 			AssetEntryLocalServiceUtil.deleteEntry(_assetEntry);
 		}
 
 		_assetEntry = AssetEntryLocalServiceUtil.updateEntry(
-			_userCreator.getUserId(), _group.getGroupId(), TEST_MODEL, 1, null,
+			_creatorUser.getUserId(), _group.getGroupId(), TEST_MODEL, 1, null,
 			null);
 	}
 
-	protected static void createGroup(String name) throws Exception {
+	protected static void addGroup(String name) throws Exception {
 		_group = ServiceTestUtil.addGroup(name);
 	}
 
-	protected static void createUsers() throws Exception {
-		if (_userCreator != null) {
-			UserLocalServiceUtil.deleteUser(_userCreator);
+	protected static void addUsers() throws Exception {
+		if (_actorUser != null) {
+			UserLocalServiceUtil.deleteUser(_actorUser);
 		}
-		_userCreator = ServiceTestUtil.addUser(
-			"creator", false, new long[] {_group.getGroupId()});
 
-		if (_userActor != null) {
-			UserLocalServiceUtil.deleteUser(_userActor);
-		}
-		_userActor = ServiceTestUtil.addUser(
+		_actorUser = ServiceTestUtil.addUser(
 			"actor", false, new long[] {_group.getGroupId()});
+
+		if (_creatorUser != null) {
+			UserLocalServiceUtil.deleteUser(_creatorUser);
+		}
+
+		_creatorUser = ServiceTestUtil.addUser(
+			"creator", false, new long[] {_group.getGroupId()});
 	}
 
-	protected SocialActivity createActivity(User user, int activityType) {
+	protected SocialActivity addActivity(User user, int type) {
 		SocialActivity activity = new SocialActivityImpl();
 
 		activity.setAssetEntry(_assetEntry);
@@ -112,7 +114,7 @@ public class BaseSocialActivityTest {
 		activity.setClassPK(_assetEntry.getClassPK());
 		activity.setCompanyId(_group.getCompanyId());
 		activity.setGroupId(_group.getGroupId());
-		activity.setType(activityType);
+		activity.setType(type);
 		activity.setUserId(user.getUserId());
 		activity.setUserUuid(user.getUuid());
 
@@ -128,7 +130,7 @@ public class BaseSocialActivityTest {
 		int ownerType = SocialActivityCounterConstants.TYPE_ACTOR;
 
 		if (owner instanceof User) {
-			classNameId = _classNameIdUser;
+			classNameId = _userClassNameId;
 			classPk = ((User)owner).getUserId();
 		}
 		else if (owner instanceof AssetEntry) {
@@ -165,12 +167,13 @@ public class BaseSocialActivityTest {
 	}
 
 	protected static final String TEST_GROUP = "test-group";
+
 	protected static final String TEST_MODEL = "test-model";
 
+	protected static User _actorUser;
 	protected static AssetEntry _assetEntry;
-	protected static long _classNameIdUser;
+	protected static User _creatorUser;
 	protected static Group _group;
-	protected static User _userActor;
-	protected static User _userCreator;
+	protected static long _userClassNameId;
 
 }

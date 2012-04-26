@@ -41,22 +41,22 @@ import org.junit.runner.RunWith;
 	})
 @RunWith(LiferayIntegrationJUnitTestRunner.class)
 public class SocialActivitySettingLocalServiceTest
-	extends BaseSocialActivityTest {
+	extends BaseSocialActivityTestCase {
 
 	@BeforeClass
 	public static void setUp() throws Exception {
-		BaseSocialActivityTest.setUp();
+		BaseSocialActivityTestCase.setUp();
 
-		createGroup(TEST_GROUP);
+		addGroup(TEST_GROUP);
 
-		createUsers();
+		addUsers();
 
-		createAsset();
+		addAsset();
 	}
 
 	@AfterClass
 	public static void tearDown() throws Exception {
-		BaseSocialActivityTest.tearDown();
+		BaseSocialActivityTestCase.tearDown();
 	}
 
 	@Test
@@ -85,7 +85,6 @@ public class SocialActivitySettingLocalServiceTest
 
 		Assert.assertNotNull(activityDefinitions);
 		Assert.assertFalse(activityDefinitions.isEmpty());
-
 		Assert.assertEquals(
 			defaultActivityDefinitions.size(), activityDefinitions.size());
 		Assert.assertTrue(
@@ -110,7 +109,6 @@ public class SocialActivitySettingLocalServiceTest
 		Assert.assertFalse(
 			SocialActivitySettingLocalServiceUtil.isEnabled(
 			_group.getGroupId(), classNameId));
-
 		Assert.assertTrue(
 			SocialActivitySettingLocalServiceUtil.isEnabled(
 			_group.getGroupId(), classNameId, 1));
