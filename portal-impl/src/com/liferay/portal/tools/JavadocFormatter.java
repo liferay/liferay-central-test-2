@@ -91,7 +91,7 @@ public class JavadocFormatter {
 
 		String limit = arguments.get("javadoc.limit");
 
-		_outputFileName = arguments.get("javadoc.output.file");
+		_outputFilePrefix = arguments.get("javadoc.output.file.prefix");
 
 		String update = arguments.get("javadoc.update");
 
@@ -152,13 +152,11 @@ public class JavadocFormatter {
 		}
 
 		for (Map.Entry<String, Tuple> entry : _javadocxXmlTuples.entrySet()) {
-			Tuple javadocsXmlTuple = entry.getValue();
+			Tuple tuple = entry.getValue();
 
-			File javadocsXmlFile = (File)javadocsXmlTuple.getObject(1);
-			String oldJavadocsXmlContent =
-				(String)javadocsXmlTuple.getObject(2);
-			Document javadocsXmlDocument =
-				(Document)javadocsXmlTuple.getObject(3);
+			File javadocsXmlFile = (File)tuple.getObject(1);
+			String oldJavadocsXmlContent = (String)tuple.getObject(2);
+			Document javadocsXmlDocument = (Document)tuple.getObject(3);
 
 			Element javadocsXmlRootElement =
 				javadocsXmlDocument.getRootElement();
@@ -171,6 +169,27 @@ public class JavadocFormatter {
 
 			if (!oldJavadocsXmlContent.equals(newJavadocsXmlContent)) {
 				_fileUtil.write(javadocsXmlFile, newJavadocsXmlContent);
+			}
+
+			_preserveRuntimeTypes(javadocsXmlRootElement);
+
+			File javadocsRuntimeXmlFile = new File(
+				StringUtil.replaceLast(
+					javadocsXmlFile.toString(), "-all.xml", "-rt.xml"));
+
+			String oldJavadocsAllXmlContent = StringPool.BLANK;
+
+			if (javadocsRuntimeXmlFile.exists()) {
+				oldJavadocsAllXmlContent = _fileUtil.read(
+					javadocsRuntimeXmlFile);
+			}
+
+			String newJavadocsAllXmlContent =
+				javadocsXmlDocument.formattedString();
+
+			if (!oldJavadocsAllXmlContent.equals(newJavadocsAllXmlContent)) {
+				_fileUtil.write(
+					javadocsRuntimeXmlFile, newJavadocsAllXmlContent);
 			}
 		}
 	}
@@ -541,7 +560,6 @@ public class JavadocFormatter {
 		Element commentElement = throwsElement.addElement("comment");
 
 		commentElement.addCDATA(_getCDATA(value));
-
 	}
 
 	private void _addThrowsElements(
@@ -897,7 +915,33 @@ public class JavadocFormatter {
 		if (pos != -1) {
 			srcDirName = absolutePath.substring(0, pos + 17);
 		}
-		else {
+
+		if (srcDirName == null) {
+			pos = absolutePath.indexOf("/portal-kernel/src/");
+
+			if (pos == -1) {
+				pos = absolutePath.indexOf("/portal-service/src/");
+			}
+
+			if (pos == -1) {
+				pos = absolutePath.indexOf("/util-bridges/src/");
+			}
+
+			if (pos == -1) {
+				pos = absolutePath.indexOf("/util-java/src/");
+			}
+
+			if (pos == -1) {
+				pos = absolutePath.indexOf("/util-taglib/src/");
+			}
+
+			if (pos != -1) {
+				srcDirName =
+					absolutePath.substring(0, pos) + "/portal-impl/src/";
+			}
+		}
+
+		if (srcDirName == null) {
 			pos = absolutePath.indexOf("/WEB-INF/src/");
 
 			if (pos != -1) {
@@ -916,7 +960,7 @@ public class JavadocFormatter {
 		}
 
 		File javadocsXmlFile = new File(
-			srcDirName, "META-INF/" + _outputFileName);
+			srcDirName, "META-INF/" + _outputFilePrefix + "-all.xml");
 
 		if (!javadocsXmlFile.exists()) {
 			_fileUtil.write(
@@ -1147,7 +1191,7 @@ public class JavadocFormatter {
 		}
 	}
 
-	private boolean _hasPublicModifier(AbstractJavaEntity abstractJavaEntity) {
+ 	private boolean _hasPublicModifier(AbstractJavaEntity abstractJavaEntity) {
 		String[] modifiers = abstractJavaEntity.getModifiers();
 
 		if (modifiers == null) {
@@ -1220,6 +1264,18 @@ public class JavadocFormatter {
 		}
 
 		return false;
+	}
+
+	private void _preserveRuntimeTypes(Element rootElement) {
+		List<Element> elements = rootElement.elements();
+
+		for (Element element : elements) {
+			String type = element.elementText("type");
+
+			if (!type.contains(".service.") || !type.endsWith("ServiceImpl")) {
+				element.detach();
+			}
+		}
 	}
 
 	private String _removeJavadocFromJava(
@@ -1299,11 +1355,11 @@ public class JavadocFormatter {
 
 		String javaClassFullyQualifiedName = javaClass.getFullyQualifiedName();
 
-		if (!javaClassFullyQualifiedName.contains(".service.") ||
+		/*if (!javaClassFullyQualifiedName.contains(".service.") ||
 			!javaClassFullyQualifiedName.endsWith("ServiceImpl")) {
 
 			return;
-		}
+		}*/
 
 		Tuple javadocsXmlTuple = _getJavadocsXmlTuple(fileName);
 
@@ -1451,7 +1507,7 @@ public class JavadocFormatter {
 		}
 	}
 
- 	private String _wrapText(String text, String indent) {
+	private String _wrapText(String text, String indent) {
 		int indentLength = _getIndentLength(indent);
 
 		// Do not wrap text inside <pre>
@@ -1495,11 +1551,11 @@ public class JavadocFormatter {
 
 	private static SAXReaderImpl _saxReaderUtil = SAXReaderImpl.getInstance();
 
-	private String _basedir = "./";
+	private String _basedir;
 	private boolean _initializeMissingJavadocs;
 	private Map<String, Tuple> _javadocxXmlTuples =
 		new HashMap<String, Tuple>();
-	private String _outputFileName;
+	private String _outputFilePrefix;
 	private boolean _updateJavadocs;
 
 }
