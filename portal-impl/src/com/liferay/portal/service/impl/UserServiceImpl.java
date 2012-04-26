@@ -1451,7 +1451,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 				Contact.class.getName(), user.getContactId(), addresses);
 		}
 
-		if (emailAddress != null) {
+		if (emailAddresses != null) {
 			UsersAdminUtil.updateEmailAddresses(
 				Contact.class.getName(), user.getContactId(), emailAddresses);
 		}
