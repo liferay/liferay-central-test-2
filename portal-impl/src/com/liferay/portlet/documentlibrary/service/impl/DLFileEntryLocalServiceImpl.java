@@ -638,6 +638,15 @@ public class DLFileEntryLocalServiceImpl
 				catch (NoSuchFileVersionException nsfve) {
 				}
 			}
+
+			try {
+				DLStoreUtil.deleteFile(
+					dlFileEntry.getCompanyId(),
+					dlFileEntry.getDataRepositoryId(), dlFileEntry.getName(),
+					version);
+			}
+			catch (NoSuchModelException nsme) {
+			}
 		}
 		finally {
 			unlockFileEntry(fileEntryId);
