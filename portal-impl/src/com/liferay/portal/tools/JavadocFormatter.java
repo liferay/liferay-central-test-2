@@ -172,7 +172,6 @@ public class JavadocFormatter {
 			}
 
 			_detachUnnecessaryTypes(javadocsXmlRootElement);
-			_detachComments(javadocsXmlRootElement);
 
 			File javadocsRuntimeXmlFile = new File(
 				StringUtil.replaceLast(
@@ -640,21 +639,6 @@ public class JavadocFormatter {
 		}
 
 		return comment;
-	}
-
-	private void _detachComments(Element element) {
-		String name = element.getName();
-
-		if (name.equals("comment")) {
-			element.detach();
-		}
-		else {
-			List<Element> elements = element.elements();
-
-			for (Element childElement : elements) {
-				_detachComments(childElement);
-			}
-		}
 	}
 
 	private void _detachUnnecessaryTypes(Element rootElement) {
