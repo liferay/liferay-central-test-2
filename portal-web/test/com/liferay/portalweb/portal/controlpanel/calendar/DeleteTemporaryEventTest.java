@@ -54,8 +54,8 @@ public class DeleteTemporaryEventTest extends BaseTestCase {
 		assertTrue(selenium.isElementPresent("link=Temporary Event"));
 		assertEquals(RuntimeVariables.replace("Actions"),
 			selenium.getText(
-				"xPath=(//span[@title='Actions']/ul/li/strong/a/span)[4]"));
-		selenium.clickAt("xPath=(//span[@title='Actions']/ul/li/strong/a/span)[4]",
+				"//tr[contains(.,'Temporary Event')]/td/span[@title='Actions']/ul/li/strong/a/span"));
+		selenium.clickAt("//tr[contains(.,'Temporary Event')]/td/span[@title='Actions']/ul/li/strong/a/span",
 			RuntimeVariables.replace("Actions"));
 
 		for (int second = 0;; second++) {
