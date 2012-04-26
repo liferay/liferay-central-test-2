@@ -34,7 +34,7 @@ import javax.jcr.Session;
  * @author Shuyang Zhou
  */
 public class JCRSessionInvocationHandler
-	implements InvocationHandler, FinalizeAction {
+	implements FinalizeAction, InvocationHandler {
 
 	public JCRSessionInvocationHandler(Session session) {
 		_session = session;

@@ -50,30 +50,36 @@ public class JCRFactoryUtil {
 		}
 
 		if (!PropsValues.JCR_WRAP_SESSION) {
-			return getJCRFactory().createSession(workspaceName);
+			JCRFactory jcrFactory = getJCRFactory();
+
+			return jcrFactory.createSession(workspaceName);
 		}
 
-		Map<String, Session> sessionMap = _sessionMap.get();
+		Map<String, Session> sessions = _sessions.get();
 
-		Session session = sessionMap.get(workspaceName);
+		Session session = sessions.get(workspaceName);
 
-		if (session == null) {
-			Session jcrSession = getJCRFactory().createSession(workspaceName);
-
-			JCRSessionInvocationHandler jcrSessionInvocationHandler =
-				new JCRSessionInvocationHandler(jcrSession);
-
-			Object sessionProxy = ProxyUtil.newProxyInstance(
-				PortalClassLoaderUtil.getClassLoader(),
-				new Class<?>[] {Map.class, Session.class},
-				jcrSessionInvocationHandler);
-
-			FinalizeManager.register(sessionProxy, jcrSessionInvocationHandler);
-
-			session = (Session)sessionProxy;
-
-			sessionMap.put(workspaceName, session);
+		if (session != null) {
+			return session;
 		}
+
+		JCRFactory jcrFactory = getJCRFactory();
+
+		Session jcrSession = jcrFactory.createSession(workspaceName);
+
+		JCRSessionInvocationHandler jcrSessionInvocationHandler =
+			new JCRSessionInvocationHandler(jcrSession);
+
+		Object sessionProxy = ProxyUtil.newProxyInstance(
+			PortalClassLoaderUtil.getClassLoader(),
+			new Class<?>[] {Map.class, Session.class},
+			jcrSessionInvocationHandler);
+
+		FinalizeManager.register(sessionProxy, jcrSessionInvocationHandler);
+
+		session = (Session)sessionProxy;
+
+		sessions.put(workspaceName, session);
 
 		return session;
 	}
@@ -88,21 +94,27 @@ public class JCRFactoryUtil {
 	}
 
 	public static void initialize() throws RepositoryException {
-		getJCRFactory().initialize();
+		JCRFactory jcrFactory = getJCRFactory();
+
+		jcrFactory.initialize();
 	}
 
 	public static void prepare() throws RepositoryException {
-		getJCRFactory().prepare();
+		JCRFactory jcrFactory = getJCRFactory();
+
+		jcrFactory.prepare();
 	}
 
 	public static void shutdown() {
-		getJCRFactory().shutdown();
+		JCRFactory jcrFactory = getJCRFactory();
+
+		jcrFactory.shutdown();
 	}
 
 	private static JCRFactory _jcrFactory;
-
-	private static ThreadLocal<Map<String, Session>> _sessionMap =
+	private static ThreadLocal<Map<String, Session>> _sessions =
 		new AutoResetThreadLocal<Map<String, Session>>(
-			JCRFactoryUtil.class + "._session", new HashMap<String, Session>());
+			JCRFactoryUtil.class + "._sessions",
+			new HashMap<String, Session>());
 
 }
