@@ -171,25 +171,28 @@ public class JavadocFormatter {
 				_fileUtil.write(javadocsXmlFile, newJavadocsXmlContent);
 			}
 
-			_preserveRuntimeTypes(javadocsXmlRootElement);
+			_detachUnnecessaryTypes(javadocsXmlRootElement);
+			_detachComments(javadocsXmlRootElement);
 
 			File javadocsRuntimeXmlFile = new File(
 				StringUtil.replaceLast(
 					javadocsXmlFile.toString(), "-all.xml", "-rt.xml"));
 
-			String oldJavadocsAllXmlContent = StringPool.BLANK;
+			String oldJavadocsRuntimeXmlContent = StringPool.BLANK;
 
 			if (javadocsRuntimeXmlFile.exists()) {
-				oldJavadocsAllXmlContent = _fileUtil.read(
+				oldJavadocsRuntimeXmlContent = _fileUtil.read(
 					javadocsRuntimeXmlFile);
 			}
 
-			String newJavadocsAllXmlContent =
-				javadocsXmlDocument.formattedString();
+			String newJavadocsRuntimeXmlContent =
+				javadocsXmlDocument.compactString();
 
-			if (!oldJavadocsAllXmlContent.equals(newJavadocsAllXmlContent)) {
+			if (!oldJavadocsRuntimeXmlContent.equals(
+					newJavadocsRuntimeXmlContent)) {
+
 				_fileUtil.write(
-					javadocsRuntimeXmlFile, newJavadocsAllXmlContent);
+					javadocsRuntimeXmlFile, newJavadocsRuntimeXmlContent);
 			}
 		}
 	}
@@ -435,7 +438,7 @@ public class JavadocFormatter {
 		DocUtil.add(methodElement, "name", javaMethod.getName());
 
 		String comment = _getCDATA(javaMethod);
-		
+
 		if (Validator.isNotNull(comment)) {
 			Element commentElement = methodElement.addElement("comment");
 
@@ -637,6 +640,33 @@ public class JavadocFormatter {
 		}
 
 		return comment;
+	}
+
+	private void _detachComments(Element element) {
+		String name = element.getName();
+
+		if (name.equals("comment")) {
+			element.detach();
+		}
+		else {
+			List<Element> elements = element.elements();
+
+			for (Element childElement : elements) {
+				_detachComments(childElement);
+			}
+		}
+	}
+
+	private void _detachUnnecessaryTypes(Element rootElement) {
+		List<Element> elements = rootElement.elements();
+
+		for (Element element : elements) {
+			String type = element.elementText("type");
+
+			if (!type.contains(".service.") || !type.endsWith("ServiceImpl")) {
+				element.detach();
+			}
+		}
 	}
 
 	private void _format(String fileName) throws Exception {
@@ -1282,18 +1312,6 @@ public class JavadocFormatter {
 		}
 
 		return false;
-	}
-
-	private void _preserveRuntimeTypes(Element rootElement) {
-		List<Element> elements = rootElement.elements();
-
-		for (Element element : elements) {
-			String type = element.elementText("type");
-
-			if (!type.contains(".service.") || !type.endsWith("ServiceImpl")) {
-				element.detach();
-			}
-		}
 	}
 
 	private String _removeJavadocFromJava(
