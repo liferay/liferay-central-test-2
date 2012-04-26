@@ -61,11 +61,11 @@ public interface DLFileEntry extends DLFileEntryModel, PersistedModel {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public int getFileVersionCount(int status)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
 	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileVersion> getFileVersions(
 		int status) throws com.liferay.portal.kernel.exception.SystemException;
+
+	public int getFileVersionsCount(int status)
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFolder getFolder();
 

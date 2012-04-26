@@ -298,16 +298,16 @@ public class DLFileVersionLocalServiceWrapper
 			groupId);
 	}
 
-	public int getFileVersionCount(long fileEntryId, int status)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return _dlFileVersionLocalService.getFileVersionCount(fileEntryId,
-			status);
-	}
-
 	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileVersion> getFileVersions(
 		long fileEntryId, int status)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _dlFileVersionLocalService.getFileVersions(fileEntryId, status);
+	}
+
+	public int getFileVersionsCount(long fileEntryId, int status)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _dlFileVersionLocalService.getFileVersionsCount(fileEntryId,
+			status);
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFileVersion getLatestFileVersion(

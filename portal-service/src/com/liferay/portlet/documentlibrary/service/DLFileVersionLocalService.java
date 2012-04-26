@@ -272,12 +272,12 @@ public interface DLFileVersionLocalService extends PersistedModelLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getFileVersionCount(long fileEntryId, int status)
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileVersion> getFileVersions(
+		long fileEntryId, int status)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileVersion> getFileVersions(
-		long fileEntryId, int status)
+	public int getFileVersionsCount(long fileEntryId, int status)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
