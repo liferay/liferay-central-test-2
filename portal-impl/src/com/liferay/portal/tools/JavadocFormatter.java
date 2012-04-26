@@ -77,21 +77,32 @@ public class JavadocFormatter {
 	public JavadocFormatter(String[] args) throws Exception {
 		Map<String, String> arguments = ArgumentsUtil.parseArguments(args);
 
-		_basedir = arguments.get("javadoc.base.dir");
-
-		if (!_basedir.endsWith("/")) {
-			_basedir += "/";
-		}
-
 		String init = arguments.get("javadoc.init");
 
 		if (Validator.isNotNull(init) && !init.startsWith("$")) {
 			_initializeMissingJavadocs = GetterUtil.getBoolean(init);
 		}
 
+		_inputDir = GetterUtil.getString(arguments.get("javadoc.input.dir"));
+
+		if (_inputDir.startsWith("$")) {
+			_inputDir = "./";
+		}
+
+		if (!_inputDir.endsWith("/")) {
+			_inputDir += "/";
+		}
+
+		System.out.println("Input directory is " + _inputDir);
+
 		String limit = arguments.get("javadoc.limit");
 
-		_outputFilePrefix = arguments.get("javadoc.output.file.prefix");
+		_outputFilePrefix = GetterUtil.getString(
+			arguments.get("javadoc.output.file.prefix"));
+
+		if (_outputFilePrefix.startsWith("$")) {
+			_outputFilePrefix = "javadocs";
+		}
 
 		String update = arguments.get("javadoc.update");
 
@@ -101,7 +112,7 @@ public class JavadocFormatter {
 
 		DirectoryScanner directoryScanner = new DirectoryScanner();
 
-		directoryScanner.setBasedir(_basedir);
+		directoryScanner.setBasedir(_inputDir);
 		directoryScanner.setExcludes(
 			new String[] {"**\\classes\\**", "**\\portal-client\\**"});
 
@@ -654,7 +665,7 @@ public class JavadocFormatter {
 	}
 
 	private void _format(String fileName) throws Exception {
-		InputStream inputStream = new FileInputStream(_basedir + fileName);
+		InputStream inputStream = new FileInputStream(_inputDir + fileName);
 
 		byte[] bytes = new byte[inputStream.available()];
 
@@ -934,7 +945,7 @@ public class JavadocFormatter {
 	}
 
 	private Tuple _getJavadocsXmlTuple(String fileName) throws Exception {
-		File file = new File(fileName);
+		File file = new File(_inputDir + fileName);
 
 		String absolutePath = file.getAbsolutePath();
 
@@ -1519,7 +1530,7 @@ public class JavadocFormatter {
 		String formattedContent = sb.toString().trim();
 
 		if (!originalContent.equals(formattedContent)) {
-			File file = new File(_basedir + fileName);
+			File file = new File(_inputDir + fileName);
 
 			_fileUtil.write(file, formattedContent.getBytes(StringPool.UTF8));
 
@@ -1571,8 +1582,8 @@ public class JavadocFormatter {
 
 	private static SAXReaderImpl _saxReaderUtil = SAXReaderImpl.getInstance();
 
-	private String _basedir;
 	private boolean _initializeMissingJavadocs;
+	private String _inputDir;
 	private Map<String, Tuple> _javadocxXmlTuples =
 		new HashMap<String, Tuple>();
 	private String _outputFilePrefix;
