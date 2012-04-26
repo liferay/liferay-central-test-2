@@ -178,9 +178,13 @@ public class JavadocFormatter {
 	private void _addClassCommentElement(
 		Element rootElement, JavaClass javaClass) {
 
-		Element commentElement = rootElement.addElement("comment");
-
 		String comment = _getCDATA(javaClass);
+
+		if (Validator.isNull(comment)) {
+			return;
+		}
+
+		Element commentElement = rootElement.addElement("comment");
 
 		if (comment.startsWith("Copyright (c) 2000-2010 Liferay, Inc.")) {
 			comment = StringPool.BLANK;
@@ -390,9 +394,13 @@ public class JavadocFormatter {
 
 		DocUtil.add(fieldElement, "name", javaField.getName());
 
-		Element commentElement = fieldElement.addElement("comment");
+		String comment = _getCDATA(javaField);
 
-		commentElement.addCDATA(_getCDATA(javaField));
+		if (Validator.isNotNull(comment)) {
+			Element commentElement = fieldElement.addElement("comment");
+
+			commentElement.addCDATA(comment);
+		}
 
 		_addDocletElements(fieldElement, javaField, "version");
 		_addDocletElements(fieldElement, javaField, "see");
@@ -407,9 +415,13 @@ public class JavadocFormatter {
 
 		DocUtil.add(methodElement, "name", javaMethod.getName());
 
-		Element commentElement = methodElement.addElement("comment");
+		String comment = _getCDATA(javaMethod);
 
-		commentElement.addCDATA(_getCDATA(javaMethod));
+		if (Validator.isNotNull(comment)) {
+			Element commentElement = methodElement.addElement("comment");
+
+			commentElement.addCDATA(comment);
+		}
 
 		_addDocletElements(methodElement, javaMethod, "version");
 		_addParamElements(methodElement, javaMethod);
@@ -452,9 +464,11 @@ public class JavadocFormatter {
 
 		value = _trimMultilineText(value);
 
-		Element commentElement = paramElement.addElement("comment");
+		if (Validator.isNotNull(value)) {
+			Element commentElement = paramElement.addElement("comment");
 
-		commentElement.addCDATA(value);
+			commentElement.addCDATA(value);
+		}
 	}
 
 	private void _addParamElements(
@@ -485,10 +499,6 @@ public class JavadocFormatter {
 			return;
 		}
 
-		Element returnElement = methodElement.addElement("return");
-
-		Element commentElement = returnElement.addElement("comment");
-
 		DocletTag[] returnDocletTags = javaMethod.getTagsByName("return");
 
 		String comment = StringPool.BLANK;
@@ -501,7 +511,13 @@ public class JavadocFormatter {
 
 		comment = _trimMultilineText(comment);
 
-		commentElement.addCDATA(comment);
+		if (Validator.isNotNull(comment)) {
+			Element returnElement = methodElement.addElement("return");
+
+			Element commentElement = returnElement.addElement("comment");
+
+			commentElement.addCDATA(comment);
+		}
 	}
 
 	private void _addThrowsElement(
@@ -538,10 +554,11 @@ public class JavadocFormatter {
 
 		value = _trimMultilineText(value);
 
-		Element commentElement = throwsElement.addElement("comment");
+		if (Validator.isNotNull(value)) {
+			Element commentElement = throwsElement.addElement("comment");
 
-		commentElement.addCDATA(_getCDATA(value));
-
+			commentElement.addCDATA(_getCDATA(value));
+		}
 	}
 
 	private void _addThrowsElements(
@@ -897,7 +914,33 @@ public class JavadocFormatter {
 		if (pos != -1) {
 			srcDirName = absolutePath.substring(0, pos + 17);
 		}
-		else {
+
+		if (srcDirName == null) {
+			pos = absolutePath.indexOf("/portal-kernel/src/");
+
+			if (pos == -1) {
+				pos = absolutePath.indexOf("/portal-service/src/");
+			}
+
+			if (pos == -1) {
+				pos = absolutePath.indexOf("/util-bridges/src/");
+			}
+
+			if (pos == -1) {
+				pos = absolutePath.indexOf("/util-java/src/");
+			}
+
+			if (pos == -1) {
+				pos = absolutePath.indexOf("/util-taglib/src/");
+			}
+
+			if (pos != -1) {
+				srcDirName =
+					absolutePath.substring(0, pos) + "/portal-impl/src/";
+			}
+		}
+
+		if (srcDirName == null) {
 			pos = absolutePath.indexOf("/WEB-INF/src/");
 
 			if (pos != -1) {
@@ -1299,11 +1342,11 @@ public class JavadocFormatter {
 
 		String javaClassFullyQualifiedName = javaClass.getFullyQualifiedName();
 
-		if (!javaClassFullyQualifiedName.contains(".service.") ||
+		/*if (!javaClassFullyQualifiedName.contains(".service.") ||
 			!javaClassFullyQualifiedName.endsWith("ServiceImpl")) {
 
 			return;
-		}
+		}*/
 
 		Tuple javadocsXmlTuple = _getJavadocsXmlTuple(fileName);
 
