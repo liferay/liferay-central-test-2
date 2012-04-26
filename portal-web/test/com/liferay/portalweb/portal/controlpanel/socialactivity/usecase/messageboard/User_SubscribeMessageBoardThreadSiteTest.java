@@ -46,23 +46,7 @@ public class User_SubscribeMessageBoardThreadSiteTest extends BaseTestCase {
 			RuntimeVariables.replace("Message Boards Test Page"));
 		selenium.waitForPageToLoad("30000");
 		loadRequiredJavaScriptModules();
-
-		for (int second = 0;; second++) {
-			if (second >= 90) {
-				fail("timeout");
-			}
-
-			try {
-				if (!selenium.isElementPresent("//body[contains(@id,'aui')]")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
+		Thread.sleep(5000);
 		assertEquals(RuntimeVariables.replace("Actions"),
 			selenium.getText("//span[@title='Actions']/ul/li/strong/a/span"));
 		selenium.clickAt("//span[@title='Actions']/ul/li/strong/a/span",
@@ -75,7 +59,7 @@ public class User_SubscribeMessageBoardThreadSiteTest extends BaseTestCase {
 
 			try {
 				if (selenium.isVisible(
-							"//a[@id='_19_mbThreadsSearchContainer_1_menu_subscribe']")) {
+							"//div[@class='lfr-component lfr-menu-list']/ul/li[contains(.,'Subscribe')]/a")) {
 					break;
 				}
 			}
@@ -87,8 +71,8 @@ public class User_SubscribeMessageBoardThreadSiteTest extends BaseTestCase {
 
 		assertEquals(RuntimeVariables.replace("Subscribe"),
 			selenium.getText(
-				"//a[@id='_19_mbThreadsSearchContainer_1_menu_subscribe']"));
-		selenium.clickAt("//a[@id='_19_mbThreadsSearchContainer_1_menu_subscribe']",
+				"//div[@class='lfr-component lfr-menu-list']/ul/li[contains(.,'Subscribe')]/a"));
+		selenium.clickAt("//div[@class='lfr-component lfr-menu-list']/ul/li[contains(.,'Subscribe')]/a",
 			RuntimeVariables.replace("Subscribe"));
 		selenium.waitForPageToLoad("30000");
 		loadRequiredJavaScriptModules();
@@ -115,23 +99,7 @@ public class User_SubscribeMessageBoardThreadSiteTest extends BaseTestCase {
 			RuntimeVariables.replace("Message Boards Test Page"));
 		selenium.waitForPageToLoad("30000");
 		loadRequiredJavaScriptModules();
-
-		for (int second = 0;; second++) {
-			if (second >= 90) {
-				fail("timeout");
-			}
-
-			try {
-				if (!selenium.isElementPresent("//body[contains(@id,'aui')]")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
+		Thread.sleep(5000);
 		assertEquals(RuntimeVariables.replace("Actions"),
 			selenium.getText("//span[@title='Actions']/ul/li/strong/a/span"));
 		selenium.clickAt("//span[@title='Actions']/ul/li/strong/a/span",
@@ -144,7 +112,7 @@ public class User_SubscribeMessageBoardThreadSiteTest extends BaseTestCase {
 
 			try {
 				if (selenium.isVisible(
-							"//a[@id='_19_mbThreadsSearchContainer_1_menu_unsubscribe']")) {
+							"//div[@class='lfr-component lfr-menu-list']/ul/li[contains(.,'Unsubscribe')]/a")) {
 					break;
 				}
 			}
@@ -156,6 +124,6 @@ public class User_SubscribeMessageBoardThreadSiteTest extends BaseTestCase {
 
 		assertEquals(RuntimeVariables.replace("Unsubscribe"),
 			selenium.getText(
-				"//a[@id='_19_mbThreadsSearchContainer_1_menu_unsubscribe']"));
+				"//div[@class='lfr-component lfr-menu-list']/ul/li[contains(.,'Unsubscribe')]/a"));
 	}
 }

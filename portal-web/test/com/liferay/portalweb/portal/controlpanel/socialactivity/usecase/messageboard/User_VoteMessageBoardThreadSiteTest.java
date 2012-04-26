@@ -46,9 +46,8 @@ public class User_VoteMessageBoardThreadSiteTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("MB Thread Message Subject"),
-			selenium.getText(
-				"//td[@id='_19_mbThreadsSearchContainer_col-thread_row-1']/a"));
-		selenium.clickAt("//td[@id='_19_mbThreadsSearchContainer_col-thread_row-1']/a",
+			selenium.getText("//td[1]/a"));
+		selenium.clickAt("//td[1]/a",
 			RuntimeVariables.replace("MB Thread Message Subject"));
 		selenium.waitForPageToLoad("30000");
 		loadRequiredJavaScriptModules();

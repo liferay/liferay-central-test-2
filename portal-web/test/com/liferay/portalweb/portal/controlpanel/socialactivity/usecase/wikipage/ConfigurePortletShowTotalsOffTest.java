@@ -107,7 +107,7 @@ public class ConfigurePortletShowTotalsOffTest extends BaseTestCase {
 
 					try {
 						if (selenium.isVisible(
-									"//iframe[@id='_180_configurationIframeDialog']")) {
+									"//div[contains(@class,'aui-dialog-iframe-bd')]/iframe")) {
 							break;
 						}
 					}
@@ -118,7 +118,7 @@ public class ConfigurePortletShowTotalsOffTest extends BaseTestCase {
 				}
 
 				selenium.selectFrame(
-					"//iframe[@id='_180_configurationIframeDialog']");
+					"//div[contains(@class,'aui-dialog-iframe-bd')]/iframe");
 
 				for (int second = 0;; second++) {
 					if (second >= 90) {

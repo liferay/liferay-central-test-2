@@ -103,7 +103,7 @@ public class ConfigurePortletAddCounter4BlogEntryUpdatesTest
 
 			try {
 				if (selenium.isVisible(
-							"//iframe[@id='_180_configurationIframeDialog']")) {
+							"//div[contains(@class,'aui-dialog-iframe-bd')]/iframe")) {
 					break;
 				}
 			}
@@ -113,7 +113,8 @@ public class ConfigurePortletAddCounter4BlogEntryUpdatesTest
 			Thread.sleep(1000);
 		}
 
-		selenium.selectFrame("//iframe[@id='_180_configurationIframeDialog']");
+		selenium.selectFrame(
+			"//div[contains(@class,'aui-dialog-iframe-bd')]/iframe");
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -157,6 +158,26 @@ public class ConfigurePortletAddCounter4BlogEntryUpdatesTest
 			RuntimeVariables.replace("Save"));
 		selenium.waitForPageToLoad("30000");
 		loadRequiredJavaScriptModules();
+
+		for (int second = 0;; second++) {
+			if (second >= 90) {
+				fail("timeout");
+			}
+
+			try {
+				if (RuntimeVariables.replace(
+							"You have successfully updated the setup.")
+										.equals(selenium.getText(
+								"//div[@class='portlet-msg-success']"))) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		assertEquals(RuntimeVariables.replace(
 				"You have successfully updated the setup."),
 			selenium.getText("//div[@class='portlet-msg-success']"));

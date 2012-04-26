@@ -102,7 +102,7 @@ public class ConfigurePortletAddCounter2SubscriptionsTest extends BaseTestCase {
 
 			try {
 				if (selenium.isVisible(
-							"//iframe[@id='_180_configurationIframeDialog']")) {
+							"//div[contains(@class,'aui-dialog-iframe-bd')]/iframe")) {
 					break;
 				}
 			}
@@ -112,7 +112,8 @@ public class ConfigurePortletAddCounter2SubscriptionsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.selectFrame("//iframe[@id='_180_configurationIframeDialog']");
+		selenium.selectFrame(
+			"//div[contains(@class,'aui-dialog-iframe-bd')]/iframe");
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {

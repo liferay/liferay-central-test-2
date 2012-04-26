@@ -46,23 +46,7 @@ public class User_UnsubscribeMessageBoardThreadSiteTest extends BaseTestCase {
 			RuntimeVariables.replace("Message Boards Test Page"));
 		selenium.waitForPageToLoad("30000");
 		loadRequiredJavaScriptModules();
-
-		for (int second = 0;; second++) {
-			if (second >= 90) {
-				fail("timeout");
-			}
-
-			try {
-				if (!selenium.isElementPresent("//body[contains(@id,'aui')]")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
+		Thread.sleep(5000);
 		assertEquals(RuntimeVariables.replace("Actions"),
 			selenium.getText("//span[@title='Actions']/ul/li/strong/a/span"));
 		selenium.clickAt("//span[@title='Actions']/ul/li/strong/a/span",
@@ -75,7 +59,7 @@ public class User_UnsubscribeMessageBoardThreadSiteTest extends BaseTestCase {
 
 			try {
 				if (selenium.isVisible(
-							"//a[@id='_19_mbThreadsSearchContainer_1_menu_unsubscribe']")) {
+							"//div[@class='lfr-component lfr-menu-list']/ul/li[contains(.,'Unsubscribe')]/a")) {
 					break;
 				}
 			}
@@ -87,10 +71,59 @@ public class User_UnsubscribeMessageBoardThreadSiteTest extends BaseTestCase {
 
 		assertEquals(RuntimeVariables.replace("Unsubscribe"),
 			selenium.getText(
-				"//a[@id='_19_mbThreadsSearchContainer_1_menu_unsubscribe']"));
-		selenium.clickAt("//a[@id='_19_mbThreadsSearchContainer_1_menu_unsubscribe']",
-			RuntimeVariables.replace("Unsubscribe"));
+				"//div[@class='lfr-component lfr-menu-list']/ul/li[contains(.,'Unsubscribe')]/a"));
+		selenium.click(RuntimeVariables.replace(
+				"//div[@class='lfr-component lfr-menu-list']/ul/li[contains(.,'Unsubscribe')]/a"));
 		selenium.waitForPageToLoad("30000");
 		loadRequiredJavaScriptModules();
+		selenium.open("/web/site-name/");
+		loadRequiredJavaScriptModules();
+
+		for (int second = 0;; second++) {
+			if (second >= 90) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("link=Message Boards Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("link=Message Boards Test Page",
+			RuntimeVariables.replace("Message Boards Test Page"));
+		selenium.waitForPageToLoad("30000");
+		loadRequiredJavaScriptModules();
+		Thread.sleep(5000);
+		assertEquals(RuntimeVariables.replace("Actions"),
+			selenium.getText("//span[@title='Actions']/ul/li/strong/a/span"));
+		selenium.clickAt("//span[@title='Actions']/ul/li/strong/a/span",
+			RuntimeVariables.replace("Actions"));
+
+		for (int second = 0;; second++) {
+			if (second >= 90) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible(
+							"//div[@class='lfr-component lfr-menu-list']/ul/li[contains(.,'Subscribe')]/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		assertEquals(RuntimeVariables.replace("Subscribe"),
+			selenium.getText(
+				"//div[@class='lfr-component lfr-menu-list']/ul/li[contains(.,'Subscribe')]/a"));
 	}
 }
