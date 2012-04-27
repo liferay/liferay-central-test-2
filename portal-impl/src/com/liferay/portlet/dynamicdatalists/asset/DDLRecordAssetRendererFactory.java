@@ -75,7 +75,7 @@ public class DDLRecordAssetRendererFactory extends BaseAssetRendererFactory {
 
 	@Override
 	public boolean isCategorizable() {
-		return false;
+		return _CATEGORIZABLE;
 	}
 
 	@Override
@@ -87,6 +87,8 @@ public class DDLRecordAssetRendererFactory extends BaseAssetRendererFactory {
 	protected String getIconPath(ThemeDisplay themeDisplay) {
 		return themeDisplay.getPathThemeImages() + "/common/history.png";
 	}
+
+	private static final boolean _CATEGORIZABLE = false;
 
 	private static final boolean _SELECTABLE = false;
 
