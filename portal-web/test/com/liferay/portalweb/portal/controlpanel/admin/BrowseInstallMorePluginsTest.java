@@ -76,8 +76,8 @@ public class BrowseInstallMorePluginsTest extends BaseTestCase {
 			RuntimeVariables.replace("Hook Plugins"));
 		selenium.waitForPageToLoad("30000");
 		loadRequiredJavaScriptModules();
-		assertEquals(RuntimeVariables.replace("No hook plugins were found."),
-			selenium.getText("//div[@class='portlet-msg-info']"));
+		assertEquals(RuntimeVariables.replace("Hook Plugin"),
+			selenium.getText("//th/span/a"));
 		selenium.clickAt("link=Web Plugins",
 			RuntimeVariables.replace("Web Plugins"));
 		selenium.waitForPageToLoad("30000");
