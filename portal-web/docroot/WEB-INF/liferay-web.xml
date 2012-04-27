@@ -689,10 +689,6 @@
 	</filter-mapping>
 	<filter-mapping>
 		<filter-name>Header Filter</filter-name>
-		<url-pattern>*.html</url-pattern>
-	</filter-mapping>
-	<filter-mapping>
-		<filter-name>Header Filter</filter-name>
 		<url-pattern>*.ico</url-pattern>
 	</filter-mapping>
 	<filter-mapping>
@@ -816,10 +812,6 @@
 	<filter-mapping>
 		<filter-name>Cache Filter - Resource</filter-name>
 		<url-pattern>*.css</url-pattern>
-	</filter-mapping>
-	<filter-mapping>
-		<filter-name>Cache Filter - Resource</filter-name>
-		<url-pattern>*.html</url-pattern>
 	</filter-mapping>
 	<filter-mapping>
 		<filter-name>Cache Filter - Resource</filter-name>
