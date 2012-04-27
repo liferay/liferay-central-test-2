@@ -26,6 +26,23 @@ public class AssertPublicPageHostURLTest extends BaseTestCase {
 		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("http://www.able.com:8080/"),
 			selenium.getLocation());
+
+		for (int second = 0;; second++) {
+			if (second >= 90) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("//li[2]/span/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		assertEquals(RuntimeVariables.replace("Virtual Hosting Community"),
 			selenium.getText("//li[2]/span/a"));
 		assertTrue(selenium.isElementPresent("link=Public Page"));
