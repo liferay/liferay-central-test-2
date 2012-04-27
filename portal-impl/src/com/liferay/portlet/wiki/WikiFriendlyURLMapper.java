@@ -38,7 +38,7 @@ public class WikiFriendlyURLMapper extends DefaultFriendlyURLMapper {
 		if (routeParameters.containsKey("title")) {
 			String title = routeParameters.get("title");
 
-			title = StringUtil.replace(title, UNESCAPED_CHARS, ESCAPED_CHARS);
+			title = StringUtil.replace(title, _UNESCAPED_CHARS, _ESCAPED_CHARS);
 
 			routeParameters.put("title", title);
 		}
@@ -65,7 +65,7 @@ public class WikiFriendlyURLMapper extends DefaultFriendlyURLMapper {
 		if (routeParameters.containsKey("title")) {
 			String title = routeParameters.get("title");
 
-			title = StringUtil.replace(title, ESCAPED_CHARS, UNESCAPED_CHARS);
+			title = StringUtil.replace(title, _ESCAPED_CHARS, _UNESCAPED_CHARS);
 
 			routeParameters.put("title", title);
 		}
@@ -73,11 +73,11 @@ public class WikiFriendlyURLMapper extends DefaultFriendlyURLMapper {
 		super.populateParams(parameterMap, namespace, routeParameters);
 	}
 
-	private static final String[] ESCAPED_CHARS = new String[] {
-		"<PL>", "<QM>", "<SL>"
+	private static final String[] _ESCAPED_CHARS = new String[] {
+		"[$PLUS$]", "[$QUESTION$]", "[$SLASH$]"
 	};
 
-	private static final String[] UNESCAPED_CHARS = new String[] {
+	private static final String[] _UNESCAPED_CHARS = new String[] {
 		StringPool.PLUS, StringPool.QUESTION, StringPool.SLASH
 	};
 
