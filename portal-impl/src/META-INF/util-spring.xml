@@ -247,6 +247,11 @@
 			<bean class="com.liferay.portal.servlet.BrowserSnifferImpl" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.kernel.servlet.DirectServletRegistryUtil" class="com.liferay.portal.kernel.servlet.DirectServletRegistryUtil">
+		<property name="directServletRegistry">
+			<bean class="com.liferay.portal.servlet.DirectServletRegistryImpl" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.kernel.servlet.filters.compoundsessionid.CompoundSessionIdSplitterUtil" class="com.liferay.portal.kernel.servlet.filters.compoundsessionid.CompoundSessionIdSplitterUtil">
 		<property name="compoundSessionIdSplitter">
 			<bean class="com.liferay.portal.servlet.filters.compoundsessionid.CompoundSessionIdSplitterImpl" />

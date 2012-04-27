@@ -19,12 +19,30 @@ import javax.servlet.Servlet;
 /**
  * @author Shuyang Zhou
  */
-public interface DirectServletRegistry {
+public class DirectServletRegistryUtil {
 
-	public void clearServlets();
+	public static void clearServlets() {
+		getDirectServletRegistry().clearServlets();
+	}
 
-	public Servlet getServlet(String path);
+	public static DirectServletRegistry getDirectServletRegistry() {
+		return _directServletRegistry;
+	}
 
-	public void putServlet(String path, Servlet servlet);
+	public static Servlet getServlet(String path) {
+		return getDirectServletRegistry().getServlet(path);
+	}
+
+	public static void putServlet(String path, Servlet servlet) {
+		getDirectServletRegistry().putServlet(path, servlet);
+	}
+
+	public void setDirectServletRegistry(
+		DirectServletRegistry directServletRegistry) {
+
+		_directServletRegistry = directServletRegistry;
+	}
+
+	private static DirectServletRegistry _directServletRegistry;
 
 }
