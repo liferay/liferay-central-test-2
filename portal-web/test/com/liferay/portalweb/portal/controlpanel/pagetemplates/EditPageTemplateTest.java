@@ -56,7 +56,8 @@ public class EditPageTemplateTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("//tr[6]/td[3]/span/ul/li/strong/a")) {
+				if (selenium.isVisible(
+							"//tr[contains(.,'Test Page Template')]/td[3]/span/ul/li/strong/a")) {
 					break;
 				}
 			}
@@ -66,7 +67,7 @@ public class EditPageTemplateTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//tr[6]/td[3]/span/ul/li/strong/a",
+		selenium.clickAt("//tr[contains(.,'Test Page Template')]/td[3]/span/ul/li/strong/a",
 			RuntimeVariables.replace("Actions"));
 
 		for (int second = 0;; second++) {

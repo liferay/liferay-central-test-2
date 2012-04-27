@@ -30,12 +30,12 @@
 </tr>
 <tr>
 	<td>waitForVisible</td>
-	<td>//tr[6]/td[3]/span/ul/li/strong/a</td>
+	<td>//tr[contains(.,'Test Page Template')]/td[3]/span/ul/li/strong/a</td>
 	<td>Actions</td>
 </tr>
 <tr>
 	<td>clickAt</td>
-	<td>//tr[6]/td[3]/span/ul/li/strong/a</td>
+	<td>//tr[contains(.,'Test Page Template')]/td[3]/span/ul/li/strong/a</td>
 	<td>Actions</td>
 </tr>
 <tr>
@@ -67,6 +67,11 @@
 	<td>assertText</td>
 	<td>//div[@class='portlet-msg-success']</td>
 	<td>Your request completed successfully.</td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>Test Page Template</td>
+	<td></td>
 </tr>
 </tbody></table>
 </body>
