@@ -652,7 +652,7 @@ public class PropsValues {
 
 	public static final boolean INDEX_WITH_THREAD = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.INDEX_WITH_THREAD));
 
-	public static final boolean JAVADOCS_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.JAVADOCS_ENABLED));
+	public static final boolean JAVADOC_MANAGER_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.JAVADOC_MANAGER_ENABLED));
 
 	public static final boolean JAVASCRIPT_BAREBONE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.JAVASCRIPT_BAREBONE_ENABLED));
 
