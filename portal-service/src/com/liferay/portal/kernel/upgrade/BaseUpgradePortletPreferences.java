@@ -80,7 +80,7 @@ public abstract class BaseUpgradePortletPreferences extends UpgradeProcess {
 		try {
 			con = DataAccess.getConnection();
 
-			ps = con.prepareStatement(_GET_GROUP_COMPANY_ID);
+			ps = con.prepareStatement(_GET_COMPANY_ID);
 
 			ps.setLong(1, groupId);
 
@@ -314,7 +314,7 @@ public abstract class BaseUpgradePortletPreferences extends UpgradeProcess {
 			String portletId, String xml)
 		throws Exception;
 
-	private static final String _GET_GROUP_COMPANY_ID =
+	private static final String _GET_COMPANY_ID =
 		"select companyId from Group_ where groupId = ?";
 
 	private static final String _GET_LAYOUT =
