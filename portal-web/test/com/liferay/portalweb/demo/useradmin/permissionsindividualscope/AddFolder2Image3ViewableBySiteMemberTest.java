@@ -109,7 +109,7 @@ public class AddFolder2Image3ViewableBySiteMemberTest extends BaseTestCase {
 				loadRequiredJavaScriptModules();
 				selenium.type("//input[@id='_20_file']",
 					RuntimeVariables.replace(
-						"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\demo\\useradmin\\permissionsindividualscope\\dependencies\\test_image_3.jpg"));
+						"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\demo\\media\\dependencies\\Document_3.jpg"));
 				selenium.type("//input[@id='_20_title']",
 					RuntimeVariables.replace("DL Folder 2 Image 3 Title"));
 				selenium.type("//textarea[@id='_20_description']",
@@ -221,7 +221,7 @@ public class AddFolder2Image3ViewableBySiteMemberTest extends BaseTestCase {
 					selenium.getText("//span[@class='document-description']"));
 				assertEquals(RuntimeVariables.replace("Status: Approved"),
 					selenium.getText("//span[@class='workflow-status']"));
-				assertEquals(RuntimeVariables.replace("Download (14.0k)"),
+				assertEquals(RuntimeVariables.replace("Download (16.1k)"),
 					selenium.getText("//span[@class='download-document']"));
 				assertEquals(RuntimeVariables.replace("Content Type image/jpeg"),
 					selenium.getText(

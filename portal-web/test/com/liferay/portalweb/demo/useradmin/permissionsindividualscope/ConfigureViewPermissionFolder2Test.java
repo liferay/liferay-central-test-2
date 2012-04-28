@@ -45,6 +45,7 @@ public class ConfigureViewPermissionFolder2Test extends BaseTestCase {
 			RuntimeVariables.replace("Documents and Media Test Page"));
 		selenium.waitForPageToLoad("30000");
 		loadRequiredJavaScriptModules();
+		Thread.sleep(5000);
 		selenium.clickAt("//div[3]/span[2]/span/ul/li/strong/a",
 			RuntimeVariables.replace("Actions"));
 

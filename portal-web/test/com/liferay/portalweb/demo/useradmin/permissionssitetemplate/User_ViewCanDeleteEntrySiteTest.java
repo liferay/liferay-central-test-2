@@ -22,7 +22,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class User_ViewCanDeleteEntrySiteTest extends BaseTestCase {
 	public void testUser_ViewCanDeleteEntrySite() throws Exception {
-		selenium.open("/web/community-name/blogs-test-site-page/");
+		selenium.open("/web/site-name/");
 		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
@@ -31,7 +31,7 @@ public class User_ViewCanDeleteEntrySiteTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Blogs Test Site Page")) {
+				if (selenium.isVisible("link=Blogs Test Page")) {
 					break;
 				}
 			}
@@ -41,8 +41,8 @@ public class User_ViewCanDeleteEntrySiteTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("link=Blogs Test Site Page",
-			RuntimeVariables.replace("Blogs Test Site Page"));
+		selenium.clickAt("link=Blogs Test Page",
+			RuntimeVariables.replace("Blogs Test Page"));
 		selenium.waitForPageToLoad("30000");
 		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("Delete"),

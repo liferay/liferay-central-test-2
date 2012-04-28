@@ -77,6 +77,7 @@ public class AddFolder1Image1Test extends BaseTestCase {
 
 				assertEquals(RuntimeVariables.replace("DL Folder 1 Name"),
 					selenium.getText("//li[@class='folder selected']/a/span[2]"));
+				Thread.sleep(5000);
 				assertEquals(RuntimeVariables.replace("Add"),
 					selenium.getText("//span[@title='Add']/ul/li/strong/a"));
 				selenium.clickAt("//span[@title='Add']/ul/li/strong/a",
@@ -108,7 +109,7 @@ public class AddFolder1Image1Test extends BaseTestCase {
 				loadRequiredJavaScriptModules();
 				selenium.type("//input[@id='_20_file']",
 					RuntimeVariables.replace(
-						"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\demo\\useradmin\\permissionsindividualscope\\dependencies\\test_image.jpg"));
+						"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\demo\\media\\dependencies\\Document_1.jpg"));
 				selenium.type("//input[@id='_20_title']",
 					RuntimeVariables.replace("DL Folder 1 Image 1 Title"));
 				selenium.type("//textarea[@id='_20_description']",
