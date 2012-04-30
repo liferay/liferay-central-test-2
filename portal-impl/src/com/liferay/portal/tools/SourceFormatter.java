@@ -1212,7 +1212,8 @@ public class SourceFormatter {
 				_sourceFormatterHelper.printError(fileName, "}: " + fileName);
 			}
 
-			if (portalJavaFiles && className.endsWith("ServiceImpl") &&
+			if (portalJavaFiles && !className.equals("BaseServiceImpl") &&
+				className.endsWith("ServiceImpl") &&
 				newContent.contains("ServiceUtil.")) {
 
 				_sourceFormatterHelper.printError(
@@ -2540,6 +2541,7 @@ public class SourceFormatter {
 			"**\\service\\**\\service\\persistence\\*Persistence.java",
 			"**\\service\\**\\service\\persistence\\*Util.java",
 			"**\\service\\base\\*ServiceBaseImpl.java",
+			"**\\service\\base\\*ServiceClpInvoker.java",
 			"**\\service\\http\\*JSONSerializer.java",
 			"**\\service\\http\\*ServiceHttp.java",
 			"**\\service\\http\\*ServiceJSON.java",
@@ -2611,6 +2613,7 @@ public class SourceFormatter {
 				"**\\com\\liferay\\portal\\service\\ServiceContext*.java",
 				"**\\model\\BaseModel.java",
 				"**\\model\\impl\\BaseModelImpl.java",
+				"**\\service\\Base*.java",
 				"**\\service\\PersistedModelLocalService*.java",
 				"**\\service\\base\\PrincipalBean.java",
 				"**\\service\\http\\*HttpTest.java",

@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.service.base;
+package com.liferay.portal.service;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -24,17 +24,15 @@ import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
-import com.liferay.portal.service.UserLocalServiceUtil;
 
 /**
  * @author Brian Wing Shun Chan
- * @deprecated {@link com.liferay.portal.service.BaseServiceImpl}
  */
-public class PrincipalBean {
+public abstract class BaseServiceImpl implements BaseService {
 
 	public static final String[] ANONYMOUS_NAMES = {
-		PrincipalBean.JRUN_ANONYMOUS, PrincipalBean.ORACLE_ANONYMOUS,
-		PrincipalBean.SUN_ANONYMOUS, PrincipalBean.WEBLOGIC_ANONYMOUS
+		BaseServiceImpl.JRUN_ANONYMOUS, BaseServiceImpl.ORACLE_ANONYMOUS,
+		BaseServiceImpl.SUN_ANONYMOUS, BaseServiceImpl.WEBLOGIC_ANONYMOUS
 	};
 
 	public static final String JRUN_ANONYMOUS = "anonymous-guest";
@@ -110,6 +108,12 @@ public class PrincipalBean {
 		}
 
 		return GetterUtil.getLong(name);
+	}
+
+	protected ClassLoader getClassLoader() {
+		Class<?> clazz = getClass();
+
+		return clazz.getClassLoader();
 	}
 
 }
