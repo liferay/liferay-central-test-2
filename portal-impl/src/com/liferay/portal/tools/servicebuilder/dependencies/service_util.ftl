@@ -118,13 +118,10 @@ public class ${entity.name}${sessionTypeName}ServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(${entity.name}${sessionTypeName}Service service) {
-		MethodCache.remove(${entity.name}${sessionTypeName}Service.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(${entity.name}${sessionTypeName}ServiceUtil.class, "_service");
-		MethodCache.remove(${entity.name}${sessionTypeName}Service.class);
 	}
 
 	private static ${entity.name}${sessionTypeName}Service _service;
