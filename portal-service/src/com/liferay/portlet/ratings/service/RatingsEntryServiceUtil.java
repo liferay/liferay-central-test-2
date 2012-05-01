@@ -81,14 +81,10 @@ public class RatingsEntryServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(RatingsEntryService service) {
-		MethodCache.remove(RatingsEntryService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(RatingsEntryServiceUtil.class,
-			"_service");
-		MethodCache.remove(RatingsEntryService.class);
 	}
 
 	private static RatingsEntryService _service;

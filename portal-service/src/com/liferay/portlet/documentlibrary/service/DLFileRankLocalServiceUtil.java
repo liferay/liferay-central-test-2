@@ -331,14 +331,10 @@ public class DLFileRankLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(DLFileRankLocalService service) {
-		MethodCache.remove(DLFileRankLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(DLFileRankLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(DLFileRankLocalService.class);
 	}
 
 	private static DLFileRankLocalService _service;

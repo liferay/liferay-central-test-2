@@ -323,14 +323,10 @@ public class MBThreadFlagLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(MBThreadFlagLocalService service) {
-		MethodCache.remove(MBThreadFlagLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(MBThreadFlagLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(MBThreadFlagLocalService.class);
 	}
 
 	private static MBThreadFlagLocalService _service;

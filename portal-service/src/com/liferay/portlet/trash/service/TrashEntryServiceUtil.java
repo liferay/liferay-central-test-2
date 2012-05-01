@@ -113,14 +113,10 @@ public class TrashEntryServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(TrashEntryService service) {
-		MethodCache.remove(TrashEntryService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(TrashEntryServiceUtil.class,
-			"_service");
-		MethodCache.remove(TrashEntryService.class);
 	}
 
 	private static TrashEntryService _service;

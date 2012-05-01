@@ -310,14 +310,10 @@ public class OrgLaborLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(OrgLaborLocalService service) {
-		MethodCache.remove(OrgLaborLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(OrgLaborLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(OrgLaborLocalService.class);
 	}
 
 	private static OrgLaborLocalService _service;

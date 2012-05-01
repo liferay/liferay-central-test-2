@@ -349,14 +349,10 @@ public class MBStatsUserLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(MBStatsUserLocalService service) {
-		MethodCache.remove(MBStatsUserLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(MBStatsUserLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(MBStatsUserLocalService.class);
 	}
 
 	private static MBStatsUserLocalService _service;

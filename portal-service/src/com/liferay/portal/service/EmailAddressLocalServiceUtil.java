@@ -315,14 +315,10 @@ public class EmailAddressLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(EmailAddressLocalService service) {
-		MethodCache.remove(EmailAddressLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(EmailAddressLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(EmailAddressLocalService.class);
 	}
 
 	private static EmailAddressLocalService _service;

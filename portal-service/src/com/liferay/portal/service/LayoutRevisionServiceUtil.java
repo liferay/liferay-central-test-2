@@ -89,14 +89,10 @@ public class LayoutRevisionServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(LayoutRevisionService service) {
-		MethodCache.remove(LayoutRevisionService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(LayoutRevisionServiceUtil.class,
-			"_service");
-		MethodCache.remove(LayoutRevisionService.class);
 	}
 
 	private static LayoutRevisionService _service;

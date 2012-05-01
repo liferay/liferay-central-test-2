@@ -412,14 +412,10 @@ public class JournalFolderLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(JournalFolderLocalService service) {
-		MethodCache.remove(JournalFolderLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(JournalFolderLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(JournalFolderLocalService.class);
 	}
 
 	private static JournalFolderLocalService _service;

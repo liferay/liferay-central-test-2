@@ -331,13 +331,10 @@ public class RoleServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(RoleService service) {
-		MethodCache.remove(RoleService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(RoleServiceUtil.class, "_service");
-		MethodCache.remove(RoleService.class);
 	}
 
 	private static RoleService _service;

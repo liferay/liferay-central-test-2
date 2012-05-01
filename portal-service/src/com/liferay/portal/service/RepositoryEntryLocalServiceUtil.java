@@ -295,14 +295,10 @@ public class RepositoryEntryLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(RepositoryEntryLocalService service) {
-		MethodCache.remove(RepositoryEntryLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(RepositoryEntryLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(RepositoryEntryLocalService.class);
 	}
 
 	private static RepositoryEntryLocalService _service;

@@ -346,14 +346,10 @@ public class SocialActivityAchievementLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(SocialActivityAchievementLocalService service) {
-		MethodCache.remove(SocialActivityAchievementLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(SocialActivityAchievementLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(SocialActivityAchievementLocalService.class);
 	}
 
 	private static SocialActivityAchievementLocalService _service;

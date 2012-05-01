@@ -140,14 +140,10 @@ public class ShoppingOrderServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(ShoppingOrderService service) {
-		MethodCache.remove(ShoppingOrderService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(ShoppingOrderServiceUtil.class,
-			"_service");
-		MethodCache.remove(ShoppingOrderService.class);
 	}
 
 	private static ShoppingOrderService _service;

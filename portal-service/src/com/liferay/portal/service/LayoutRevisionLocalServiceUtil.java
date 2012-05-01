@@ -451,14 +451,10 @@ public class LayoutRevisionLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(LayoutRevisionLocalService service) {
-		MethodCache.remove(LayoutRevisionLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(LayoutRevisionLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(LayoutRevisionLocalService.class);
 	}
 
 	private static LayoutRevisionLocalService _service;

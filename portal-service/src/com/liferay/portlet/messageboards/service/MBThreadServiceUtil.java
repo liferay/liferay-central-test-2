@@ -159,14 +159,10 @@ public class MBThreadServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(MBThreadService service) {
-		MethodCache.remove(MBThreadService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(MBThreadServiceUtil.class,
-			"_service");
-		MethodCache.remove(MBThreadService.class);
 	}
 
 	private static MBThreadService _service;

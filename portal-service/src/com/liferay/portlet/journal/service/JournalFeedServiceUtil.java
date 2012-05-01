@@ -132,14 +132,10 @@ public class JournalFeedServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(JournalFeedService service) {
-		MethodCache.remove(JournalFeedService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(JournalFeedServiceUtil.class,
-			"_service");
-		MethodCache.remove(JournalFeedService.class);
 	}
 
 	private static JournalFeedService _service;

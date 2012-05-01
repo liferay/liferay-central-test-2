@@ -351,14 +351,10 @@ public class SCProductVersionLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(SCProductVersionLocalService service) {
-		MethodCache.remove(SCProductVersionLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(SCProductVersionLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(SCProductVersionLocalService.class);
 	}
 
 	private static SCProductVersionLocalService _service;

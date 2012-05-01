@@ -2947,14 +2947,10 @@ public class UserLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(UserLocalService service) {
-		MethodCache.remove(UserLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(UserLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(UserLocalService.class);
 	}
 
 	private static UserLocalService _service;

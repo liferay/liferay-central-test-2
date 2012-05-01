@@ -117,13 +117,10 @@ public class RegionServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(RegionService service) {
-		MethodCache.remove(RegionService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(RegionServiceUtil.class, "_service");
-		MethodCache.remove(RegionService.class);
 	}
 
 	private static RegionService _service;

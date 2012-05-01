@@ -312,14 +312,10 @@ public class ClassNameLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(ClassNameLocalService service) {
-		MethodCache.remove(ClassNameLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(ClassNameLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(ClassNameLocalService.class);
 	}
 
 	private static ClassNameLocalService _service;

@@ -87,14 +87,10 @@ public class AnnouncementsFlagServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(AnnouncementsFlagService service) {
-		MethodCache.remove(AnnouncementsFlagService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(AnnouncementsFlagServiceUtil.class,
-			"_service");
-		MethodCache.remove(AnnouncementsFlagService.class);
 	}
 
 	private static AnnouncementsFlagService _service;

@@ -409,14 +409,10 @@ public class ShoppingCategoryLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(ShoppingCategoryLocalService service) {
-		MethodCache.remove(ShoppingCategoryLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(ShoppingCategoryLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(ShoppingCategoryLocalService.class);
 	}
 
 	private static ShoppingCategoryLocalService _service;

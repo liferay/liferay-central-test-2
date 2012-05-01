@@ -101,14 +101,10 @@ public class DLFileShortcutServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(DLFileShortcutService service) {
-		MethodCache.remove(DLFileShortcutService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(DLFileShortcutServiceUtil.class,
-			"_service");
-		MethodCache.remove(DLFileShortcutService.class);
 	}
 
 	private static DLFileShortcutService _service;

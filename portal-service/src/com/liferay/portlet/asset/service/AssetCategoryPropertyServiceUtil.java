@@ -101,14 +101,10 @@ public class AssetCategoryPropertyServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(AssetCategoryPropertyService service) {
-		MethodCache.remove(AssetCategoryPropertyService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(AssetCategoryPropertyServiceUtil.class,
-			"_service");
-		MethodCache.remove(AssetCategoryPropertyService.class);
 	}
 
 	private static AssetCategoryPropertyService _service;

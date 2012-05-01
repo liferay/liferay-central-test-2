@@ -155,14 +155,10 @@ public class RepositoryServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(RepositoryService service) {
-		MethodCache.remove(RepositoryService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(RepositoryServiceUtil.class,
-			"_service");
-		MethodCache.remove(RepositoryService.class);
 	}
 
 	private static RepositoryService _service;

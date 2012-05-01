@@ -1429,14 +1429,10 @@ public class ExpandoValueLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(ExpandoValueLocalService service) {
-		MethodCache.remove(ExpandoValueLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(ExpandoValueLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(ExpandoValueLocalService.class);
 	}
 
 	private static ExpandoValueLocalService _service;

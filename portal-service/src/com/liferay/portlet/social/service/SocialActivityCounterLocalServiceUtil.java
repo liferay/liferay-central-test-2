@@ -862,14 +862,10 @@ public class SocialActivityCounterLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(SocialActivityCounterLocalService service) {
-		MethodCache.remove(SocialActivityCounterLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(SocialActivityCounterLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(SocialActivityCounterLocalService.class);
 	}
 
 	private static SocialActivityCounterLocalService _service;

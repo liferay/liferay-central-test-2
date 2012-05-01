@@ -2187,13 +2187,10 @@ public class DLAppServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(DLAppService service) {
-		MethodCache.remove(DLAppService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(DLAppServiceUtil.class, "_service");
-		MethodCache.remove(DLAppService.class);
 	}
 
 	private static DLAppService _service;

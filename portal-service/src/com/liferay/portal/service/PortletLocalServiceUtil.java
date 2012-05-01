@@ -440,14 +440,10 @@ public class PortletLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(PortletLocalService service) {
-		MethodCache.remove(PortletLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(PortletLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(PortletLocalService.class);
 	}
 
 	private static PortletLocalService _service;

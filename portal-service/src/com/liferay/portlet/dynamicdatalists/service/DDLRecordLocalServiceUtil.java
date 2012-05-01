@@ -521,14 +521,10 @@ public class DDLRecordLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(DDLRecordLocalService service) {
-		MethodCache.remove(DDLRecordLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(DDLRecordLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(DDLRecordLocalService.class);
 	}
 
 	private static DDLRecordLocalService _service;

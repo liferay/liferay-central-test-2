@@ -308,14 +308,10 @@ public class ReleaseLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(ReleaseLocalService service) {
-		MethodCache.remove(ReleaseLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(ReleaseLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(ReleaseLocalService.class);
 	}
 
 	private static ReleaseLocalService _service;

@@ -408,14 +408,10 @@ public class MDRRuleGroupLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(MDRRuleGroupLocalService service) {
-		MethodCache.remove(MDRRuleGroupLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(MDRRuleGroupLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(MDRRuleGroupLocalService.class);
 	}
 
 	private static MDRRuleGroupLocalService _service;

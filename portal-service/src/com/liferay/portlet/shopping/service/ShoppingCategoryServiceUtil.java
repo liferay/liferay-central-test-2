@@ -127,14 +127,10 @@ public class ShoppingCategoryServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(ShoppingCategoryService service) {
-		MethodCache.remove(ShoppingCategoryService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(ShoppingCategoryServiceUtil.class,
-			"_service");
-		MethodCache.remove(ShoppingCategoryService.class);
 	}
 
 	private static ShoppingCategoryService _service;

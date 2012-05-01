@@ -119,14 +119,10 @@ public class MDRRuleGroupInstanceServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(MDRRuleGroupInstanceService service) {
-		MethodCache.remove(MDRRuleGroupInstanceService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(MDRRuleGroupInstanceServiceUtil.class,
-			"_service");
-		MethodCache.remove(MDRRuleGroupInstanceService.class);
 	}
 
 	private static MDRRuleGroupInstanceService _service;

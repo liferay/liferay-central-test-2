@@ -341,14 +341,10 @@ public class MBBanLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(MBBanLocalService service) {
-		MethodCache.remove(MBBanLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(MBBanLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(MBBanLocalService.class);
 	}
 
 	private static MBBanLocalService _service;

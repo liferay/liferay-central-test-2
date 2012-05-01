@@ -179,14 +179,10 @@ public class DDMStructureServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(DDMStructureService service) {
-		MethodCache.remove(DDMStructureService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(DDMStructureServiceUtil.class,
-			"_service");
-		MethodCache.remove(DDMStructureService.class);
 	}
 
 	private static DDMStructureService _service;

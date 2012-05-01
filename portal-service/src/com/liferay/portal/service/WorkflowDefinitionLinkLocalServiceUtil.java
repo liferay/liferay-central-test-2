@@ -399,14 +399,10 @@ public class WorkflowDefinitionLinkLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(WorkflowDefinitionLinkLocalService service) {
-		MethodCache.remove(WorkflowDefinitionLinkLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(WorkflowDefinitionLinkLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(WorkflowDefinitionLinkLocalService.class);
 	}
 
 	private static WorkflowDefinitionLinkLocalService _service;

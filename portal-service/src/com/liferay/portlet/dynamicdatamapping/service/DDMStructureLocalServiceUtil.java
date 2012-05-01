@@ -544,14 +544,10 @@ public class DDMStructureLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(DDMStructureLocalService service) {
-		MethodCache.remove(DDMStructureLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(DDMStructureLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(DDMStructureLocalService.class);
 	}
 
 	private static DDMStructureLocalService _service;

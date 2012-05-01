@@ -448,14 +448,10 @@ public class DDMTemplateLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(DDMTemplateLocalService service) {
-		MethodCache.remove(DDMTemplateLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(DDMTemplateLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(DDMTemplateLocalService.class);
 	}
 
 	private static DDMTemplateLocalService _service;

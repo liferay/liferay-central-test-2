@@ -456,14 +456,10 @@ public class AssetVocabularyLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(AssetVocabularyLocalService service) {
-		MethodCache.remove(AssetVocabularyLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(AssetVocabularyLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(AssetVocabularyLocalService.class);
 	}
 
 	private static AssetVocabularyLocalService _service;

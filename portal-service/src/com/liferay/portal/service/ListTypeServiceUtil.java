@@ -93,14 +93,10 @@ public class ListTypeServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(ListTypeService service) {
-		MethodCache.remove(ListTypeService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(ListTypeServiceUtil.class,
-			"_service");
-		MethodCache.remove(ListTypeService.class);
 	}
 
 	private static ListTypeService _service;

@@ -588,14 +588,10 @@ public class DLFolderLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(DLFolderLocalService service) {
-		MethodCache.remove(DLFolderLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(DLFolderLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(DLFolderLocalService.class);
 	}
 
 	private static DLFolderLocalService _service;

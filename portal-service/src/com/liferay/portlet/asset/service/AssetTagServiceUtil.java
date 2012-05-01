@@ -198,14 +198,10 @@ public class AssetTagServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(AssetTagService service) {
-		MethodCache.remove(AssetTagService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(AssetTagServiceUtil.class,
-			"_service");
-		MethodCache.remove(AssetTagService.class);
 	}
 
 	private static AssetTagService _service;

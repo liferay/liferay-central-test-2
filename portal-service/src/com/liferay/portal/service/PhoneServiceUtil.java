@@ -106,13 +106,10 @@ public class PhoneServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(PhoneService service) {
-		MethodCache.remove(PhoneService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(PhoneServiceUtil.class, "_service");
-		MethodCache.remove(PhoneService.class);
 	}
 
 	private static PhoneService _service;

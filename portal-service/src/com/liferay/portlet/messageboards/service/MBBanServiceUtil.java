@@ -82,13 +82,10 @@ public class MBBanServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(MBBanService service) {
-		MethodCache.remove(MBBanService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(MBBanServiceUtil.class, "_service");
-		MethodCache.remove(MBBanService.class);
 	}
 
 	private static MBBanService _service;

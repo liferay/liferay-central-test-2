@@ -521,14 +521,10 @@ public class JournalTemplateLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(JournalTemplateLocalService service) {
-		MethodCache.remove(JournalTemplateLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(JournalTemplateLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(JournalTemplateLocalService.class);
 	}
 
 	private static JournalTemplateLocalService _service;

@@ -307,14 +307,10 @@ public class MBDiscussionLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(MBDiscussionLocalService service) {
-		MethodCache.remove(MBDiscussionLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(MBDiscussionLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(MBDiscussionLocalService.class);
 	}
 
 	private static MBDiscussionLocalService _service;

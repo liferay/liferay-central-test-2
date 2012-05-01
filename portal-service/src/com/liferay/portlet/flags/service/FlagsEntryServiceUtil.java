@@ -78,14 +78,10 @@ public class FlagsEntryServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(FlagsEntryService service) {
-		MethodCache.remove(FlagsEntryService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(FlagsEntryServiceUtil.class,
-			"_service");
-		MethodCache.remove(FlagsEntryService.class);
 	}
 
 	private static FlagsEntryService _service;

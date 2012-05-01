@@ -314,14 +314,10 @@ public class CounterLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(CounterLocalService service) {
-		MethodCache.remove(CounterLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(CounterLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(CounterLocalService.class);
 	}
 
 	private static CounterLocalService _service;

@@ -204,14 +204,10 @@ public class JournalTemplateServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(JournalTemplateService service) {
-		MethodCache.remove(JournalTemplateService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(JournalTemplateServiceUtil.class,
-			"_service");
-		MethodCache.remove(JournalTemplateService.class);
 	}
 
 	private static JournalTemplateService _service;

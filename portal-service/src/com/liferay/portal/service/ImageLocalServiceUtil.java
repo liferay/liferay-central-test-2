@@ -379,14 +379,10 @@ public class ImageLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(ImageLocalService service) {
-		MethodCache.remove(ImageLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(ImageLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(ImageLocalService.class);
 	}
 
 	private static ImageLocalService _service;

@@ -316,14 +316,10 @@ public class DLFolderServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(DLFolderService service) {
-		MethodCache.remove(DLFolderService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(DLFolderServiceUtil.class,
-			"_service");
-		MethodCache.remove(DLFolderService.class);
 	}
 
 	private static DLFolderService _service;

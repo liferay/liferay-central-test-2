@@ -115,14 +115,10 @@ public class PortletPreferencesServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(PortletPreferencesService service) {
-		MethodCache.remove(PortletPreferencesService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(PortletPreferencesServiceUtil.class,
-			"_service");
-		MethodCache.remove(PortletPreferencesService.class);
 	}
 
 	private static PortletPreferencesService _service;

@@ -358,14 +358,10 @@ public class DDMContentLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(DDMContentLocalService service) {
-		MethodCache.remove(DDMContentLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(DDMContentLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(DDMContentLocalService.class);
 	}
 
 	private static DDMContentLocalService _service;

@@ -399,14 +399,10 @@ public class DLFileEntryServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(DLFileEntryService service) {
-		MethodCache.remove(DLFileEntryService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(DLFileEntryServiceUtil.class,
-			"_service");
-		MethodCache.remove(DLFileEntryService.class);
 	}
 
 	private static DLFileEntryService _service;

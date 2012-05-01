@@ -500,14 +500,10 @@ public class OrganizationServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(OrganizationService service) {
-		MethodCache.remove(OrganizationService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(OrganizationServiceUtil.class,
-			"_service");
-		MethodCache.remove(OrganizationService.class);
 	}
 
 	private static OrganizationService _service;

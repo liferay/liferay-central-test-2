@@ -106,14 +106,10 @@ public class EmailAddressServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(EmailAddressService service) {
-		MethodCache.remove(EmailAddressService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(EmailAddressServiceUtil.class,
-			"_service");
-		MethodCache.remove(EmailAddressService.class);
 	}
 
 	private static EmailAddressService _service;

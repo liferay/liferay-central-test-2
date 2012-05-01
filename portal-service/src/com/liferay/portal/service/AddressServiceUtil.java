@@ -111,13 +111,10 @@ public class AddressServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(AddressService service) {
-		MethodCache.remove(AddressService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(AddressServiceUtil.class, "_service");
-		MethodCache.remove(AddressService.class);
 	}
 
 	private static AddressService _service;

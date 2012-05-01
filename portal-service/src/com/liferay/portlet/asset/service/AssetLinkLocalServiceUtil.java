@@ -475,14 +475,10 @@ public class AssetLinkLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(AssetLinkLocalService service) {
-		MethodCache.remove(AssetLinkLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(AssetLinkLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(AssetLinkLocalService.class);
 	}
 
 	private static AssetLinkLocalService _service;

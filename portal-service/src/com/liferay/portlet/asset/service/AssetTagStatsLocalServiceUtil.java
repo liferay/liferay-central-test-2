@@ -403,14 +403,10 @@ public class AssetTagStatsLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(AssetTagStatsLocalService service) {
-		MethodCache.remove(AssetTagStatsLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(AssetTagStatsLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(AssetTagStatsLocalService.class);
 	}
 
 	private static AssetTagStatsLocalService _service;

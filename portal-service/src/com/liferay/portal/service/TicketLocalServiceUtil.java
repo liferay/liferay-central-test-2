@@ -298,14 +298,10 @@ public class TicketLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(TicketLocalService service) {
-		MethodCache.remove(TicketLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(TicketLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(TicketLocalService.class);
 	}
 
 	private static TicketLocalService _service;

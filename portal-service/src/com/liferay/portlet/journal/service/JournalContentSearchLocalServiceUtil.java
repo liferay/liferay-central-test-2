@@ -380,14 +380,10 @@ public class JournalContentSearchLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(JournalContentSearchLocalService service) {
-		MethodCache.remove(JournalContentSearchLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(JournalContentSearchLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(JournalContentSearchLocalService.class);
 	}
 
 	private static JournalContentSearchLocalService _service;

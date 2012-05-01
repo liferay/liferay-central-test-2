@@ -117,14 +117,10 @@ public class SocialActivitySettingServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(SocialActivitySettingService service) {
-		MethodCache.remove(SocialActivitySettingService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(SocialActivitySettingServiceUtil.class,
-			"_service");
-		MethodCache.remove(SocialActivitySettingService.class);
 	}
 
 	private static SocialActivitySettingService _service;

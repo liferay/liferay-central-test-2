@@ -128,13 +128,10 @@ public class TeamServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(TeamService service) {
-		MethodCache.remove(TeamService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(TeamServiceUtil.class, "_service");
-		MethodCache.remove(TeamService.class);
 	}
 
 	private static TeamService _service;

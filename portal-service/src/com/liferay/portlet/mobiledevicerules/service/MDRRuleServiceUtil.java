@@ -140,13 +140,10 @@ public class MDRRuleServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(MDRRuleService service) {
-		MethodCache.remove(MDRRuleService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(MDRRuleServiceUtil.class, "_service");
-		MethodCache.remove(MDRRuleService.class);
 	}
 
 	private static MDRRuleService _service;

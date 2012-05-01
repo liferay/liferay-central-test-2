@@ -68,13 +68,10 @@ public class AccountServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(AccountService service) {
-		MethodCache.remove(AccountService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(AccountServiceUtil.class, "_service");
-		MethodCache.remove(AccountService.class);
 	}
 
 	private static AccountService _service;

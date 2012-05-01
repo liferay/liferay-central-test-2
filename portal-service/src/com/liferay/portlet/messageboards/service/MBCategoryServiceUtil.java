@@ -189,14 +189,10 @@ public class MBCategoryServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(MBCategoryService service) {
-		MethodCache.remove(MBCategoryService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(MBCategoryServiceUtil.class,
-			"_service");
-		MethodCache.remove(MBCategoryService.class);
 	}
 
 	private static MBCategoryService _service;

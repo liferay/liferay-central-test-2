@@ -166,14 +166,10 @@ public class JournalFolderServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(JournalFolderService service) {
-		MethodCache.remove(JournalFolderService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(JournalFolderServiceUtil.class,
-			"_service");
-		MethodCache.remove(JournalFolderService.class);
 	}
 
 	private static JournalFolderService _service;

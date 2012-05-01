@@ -342,14 +342,10 @@ public class TeamLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(TeamLocalService service) {
-		MethodCache.remove(TeamLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(TeamLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(TeamLocalService.class);
 	}
 
 	private static TeamLocalService _service;

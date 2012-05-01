@@ -768,14 +768,10 @@ public class ResourceBlockLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(ResourceBlockLocalService service) {
-		MethodCache.remove(ResourceBlockLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(ResourceBlockLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(ResourceBlockLocalService.class);
 	}
 
 	private static ResourceBlockLocalService _service;

@@ -287,14 +287,10 @@ public class ShoppingItemPriceLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(ShoppingItemPriceLocalService service) {
-		MethodCache.remove(ShoppingItemPriceLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(ShoppingItemPriceLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(ShoppingItemPriceLocalService.class);
 	}
 
 	private static ShoppingItemPriceLocalService _service;

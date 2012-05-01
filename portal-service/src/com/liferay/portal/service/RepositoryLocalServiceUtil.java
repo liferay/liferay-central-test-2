@@ -362,14 +362,10 @@ public class RepositoryLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(RepositoryLocalService service) {
-		MethodCache.remove(RepositoryLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(RepositoryLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(RepositoryLocalService.class);
 	}
 
 	private static RepositoryLocalService _service;

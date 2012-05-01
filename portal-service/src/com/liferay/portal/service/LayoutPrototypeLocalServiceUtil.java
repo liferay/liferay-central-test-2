@@ -332,14 +332,10 @@ public class LayoutPrototypeLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(LayoutPrototypeLocalService service) {
-		MethodCache.remove(LayoutPrototypeLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(LayoutPrototypeLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(LayoutPrototypeLocalService.class);
 	}
 
 	private static LayoutPrototypeLocalService _service;

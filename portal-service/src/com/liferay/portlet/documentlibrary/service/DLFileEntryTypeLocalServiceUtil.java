@@ -428,14 +428,10 @@ public class DLFileEntryTypeLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(DLFileEntryTypeLocalService service) {
-		MethodCache.remove(DLFileEntryTypeLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(DLFileEntryTypeLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(DLFileEntryTypeLocalService.class);
 	}
 
 	private static DLFileEntryTypeLocalService _service;

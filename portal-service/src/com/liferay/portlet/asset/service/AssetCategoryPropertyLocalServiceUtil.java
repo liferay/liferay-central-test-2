@@ -345,14 +345,10 @@ public class AssetCategoryPropertyLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(AssetCategoryPropertyLocalService service) {
-		MethodCache.remove(AssetCategoryPropertyLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(AssetCategoryPropertyLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(AssetCategoryPropertyLocalService.class);
 	}
 
 	private static AssetCategoryPropertyLocalService _service;

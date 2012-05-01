@@ -255,14 +255,10 @@ public class ResourcePermissionServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(ResourcePermissionService service) {
-		MethodCache.remove(ResourcePermissionService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(ResourcePermissionServiceUtil.class,
-			"_service");
-		MethodCache.remove(ResourcePermissionService.class);
 	}
 
 	private static ResourcePermissionService _service;

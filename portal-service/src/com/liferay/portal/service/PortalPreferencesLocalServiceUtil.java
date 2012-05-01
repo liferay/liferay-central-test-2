@@ -318,14 +318,10 @@ public class PortalPreferencesLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(PortalPreferencesLocalService service) {
-		MethodCache.remove(PortalPreferencesLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(PortalPreferencesLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(PortalPreferencesLocalService.class);
 	}
 
 	private static PortalPreferencesLocalService _service;

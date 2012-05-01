@@ -74,13 +74,10 @@ public class ImageServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(ImageService service) {
-		MethodCache.remove(ImageService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(ImageServiceUtil.class, "_service");
-		MethodCache.remove(ImageService.class);
 	}
 
 	private static ImageService _service;

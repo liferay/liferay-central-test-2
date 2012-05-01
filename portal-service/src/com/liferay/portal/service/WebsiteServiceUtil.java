@@ -102,13 +102,10 @@ public class WebsiteServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(WebsiteService service) {
-		MethodCache.remove(WebsiteService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(WebsiteServiceUtil.class, "_service");
-		MethodCache.remove(WebsiteService.class);
 	}
 
 	private static WebsiteService _service;

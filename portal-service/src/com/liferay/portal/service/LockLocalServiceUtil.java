@@ -383,14 +383,10 @@ public class LockLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(LockLocalService service) {
-		MethodCache.remove(LockLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(LockLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(LockLocalService.class);
 	}
 
 	private static LockLocalService _service;

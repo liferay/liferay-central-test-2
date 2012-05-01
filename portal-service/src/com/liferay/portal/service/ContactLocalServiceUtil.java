@@ -330,14 +330,10 @@ public class ContactLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(ContactLocalService service) {
-		MethodCache.remove(ContactLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(ContactLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(ContactLocalService.class);
 	}
 
 	private static ContactLocalService _service;

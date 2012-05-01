@@ -255,14 +255,10 @@ public class WikiPageServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(WikiPageService service) {
-		MethodCache.remove(WikiPageService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(WikiPageServiceUtil.class,
-			"_service");
-		MethodCache.remove(WikiPageService.class);
 	}
 
 	private static WikiPageService _service;

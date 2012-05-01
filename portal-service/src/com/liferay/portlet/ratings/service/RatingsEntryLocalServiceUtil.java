@@ -335,14 +335,10 @@ public class RatingsEntryLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(RatingsEntryLocalService service) {
-		MethodCache.remove(RatingsEntryLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(RatingsEntryLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(RatingsEntryLocalService.class);
 	}
 
 	private static RatingsEntryLocalService _service;

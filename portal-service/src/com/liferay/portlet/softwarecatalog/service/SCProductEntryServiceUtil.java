@@ -112,14 +112,10 @@ public class SCProductEntryServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(SCProductEntryService service) {
-		MethodCache.remove(SCProductEntryService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(SCProductEntryServiceUtil.class,
-			"_service");
-		MethodCache.remove(SCProductEntryService.class);
 	}
 
 	private static SCProductEntryService _service;

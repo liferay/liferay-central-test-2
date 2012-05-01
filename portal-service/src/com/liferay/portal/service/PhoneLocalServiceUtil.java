@@ -311,14 +311,10 @@ public class PhoneLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(PhoneLocalService service) {
-		MethodCache.remove(PhoneLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(PhoneLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(PhoneLocalService.class);
 	}
 
 	private static PhoneLocalService _service;

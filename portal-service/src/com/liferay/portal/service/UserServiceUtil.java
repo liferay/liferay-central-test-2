@@ -1271,13 +1271,10 @@ public class UserServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(UserService service) {
-		MethodCache.remove(UserService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(UserServiceUtil.class, "_service");
-		MethodCache.remove(UserService.class);
 	}
 
 	private static UserService _service;

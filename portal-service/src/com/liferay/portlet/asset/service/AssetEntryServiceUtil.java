@@ -151,14 +151,10 @@ public class AssetEntryServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(AssetEntryService service) {
-		MethodCache.remove(AssetEntryService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(AssetEntryServiceUtil.class,
-			"_service");
-		MethodCache.remove(AssetEntryService.class);
 	}
 
 	private static AssetEntryService _service;

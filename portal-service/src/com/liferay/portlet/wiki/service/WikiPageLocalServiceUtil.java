@@ -749,14 +749,10 @@ public class WikiPageLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(WikiPageLocalService service) {
-		MethodCache.remove(WikiPageLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(WikiPageLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(WikiPageLocalService.class);
 	}
 
 	private static WikiPageLocalService _service;

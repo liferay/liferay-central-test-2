@@ -1063,14 +1063,10 @@ public class RoleLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(RoleLocalService service) {
-		MethodCache.remove(RoleLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(RoleLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(RoleLocalService.class);
 	}
 
 	private static RoleLocalService _service;

@@ -129,13 +129,10 @@ public class PortalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(PortalService service) {
-		MethodCache.remove(PortalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(PortalServiceUtil.class, "_service");
-		MethodCache.remove(PortalService.class);
 	}
 
 	private static PortalService _service;

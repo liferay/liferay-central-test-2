@@ -430,14 +430,10 @@ public class WikiNodeLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(WikiNodeLocalService service) {
-		MethodCache.remove(WikiNodeLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(WikiNodeLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(WikiNodeLocalService.class);
 	}
 
 	private static WikiNodeLocalService _service;

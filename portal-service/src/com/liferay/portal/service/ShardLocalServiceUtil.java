@@ -288,14 +288,10 @@ public class ShardLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(ShardLocalService service) {
-		MethodCache.remove(ShardLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(ShardLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(ShardLocalService.class);
 	}
 
 	private static ShardLocalService _service;

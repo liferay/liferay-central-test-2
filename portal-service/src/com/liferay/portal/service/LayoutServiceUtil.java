@@ -971,13 +971,10 @@ public class LayoutServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(LayoutService service) {
-		MethodCache.remove(LayoutService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(LayoutServiceUtil.class, "_service");
-		MethodCache.remove(LayoutService.class);
 	}
 
 	private static LayoutService _service;

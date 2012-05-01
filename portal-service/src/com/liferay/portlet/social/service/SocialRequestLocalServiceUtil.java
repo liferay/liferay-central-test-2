@@ -611,14 +611,10 @@ public class SocialRequestLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(SocialRequestLocalService service) {
-		MethodCache.remove(SocialRequestLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(SocialRequestLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(SocialRequestLocalService.class);
 	}
 
 	private static SocialRequestLocalService _service;

@@ -371,14 +371,10 @@ public class PasswordPolicyLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(PasswordPolicyLocalService service) {
-		MethodCache.remove(PasswordPolicyLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(PasswordPolicyLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(PasswordPolicyLocalService.class);
 	}
 
 	private static PasswordPolicyLocalService _service;

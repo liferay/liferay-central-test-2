@@ -369,14 +369,10 @@ public class UserNotificationEventLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(UserNotificationEventLocalService service) {
-		MethodCache.remove(UserNotificationEventLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(UserNotificationEventLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(UserNotificationEventLocalService.class);
 	}
 
 	private static UserNotificationEventLocalService _service;
