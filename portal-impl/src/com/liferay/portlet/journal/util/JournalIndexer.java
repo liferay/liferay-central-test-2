@@ -199,11 +199,8 @@ public class JournalIndexer extends BaseIndexer {
 		String[] languageIds = getLanguageIds(
 			defaultLanguageId, article.getContent());
 
-		boolean dynamicContent = Validator.isNotNull(article.getStructureId());
-
 		for (String languageId : languageIds) {
-			String content = extractContent(
-				article.getContentByLocale(languageId), dynamicContent);
+			String content = extractContent(article, languageId);
 
 			if (languageId.equals(defaultLanguageId)) {
 				document.addText(Field.CONTENT, content);
@@ -330,8 +327,10 @@ public class JournalIndexer extends BaseIndexer {
 		return _FIELD_NAMESPACE.concat(StringPool.FORWARD_SLASH).concat(name);
 	}
 
-	protected String extractContent(String content, boolean dynamicContent) {
-		if (dynamicContent) {
+	protected String extractContent(JournalArticle article, String languageId) {
+		String content = article.getContentByLocale(languageId);
+
+		if (Validator.isNotNull(article.getStructureId())) {
 			content = extractDynamicContent(content);
 		}
 		else {
@@ -341,6 +340,38 @@ public class JournalIndexer extends BaseIndexer {
 		content = HtmlUtil.extractText(content);
 
 		return content;
+	}
+
+	protected String extractDynamicContent(Element rootElement) {
+		StringBundler sb = new StringBundler();
+
+		List<Element> dynamicElementElements = rootElement.elements(
+			"dynamic-element");
+
+		for (Element dynamicElementElement : dynamicElementElements) {
+			String type = dynamicElementElement.attributeValue(
+				"type", StringPool.BLANK);
+
+			if (!type.equals("image") && !type.equals("multi-list") &&
+				!type.equals("list") && !type.equals("document_library") &&
+				!type.equals("boolean") && !type.equals("link_to_layout") &&
+				!type.equals("selection_break")) {
+
+				Element dynamicContentElement = dynamicElementElement.element(
+					"dynamic-content");
+
+				if (dynamicContentElement != null) {
+					String dynamicContent = dynamicContentElement.getText();
+
+					sb.append(dynamicContent);
+					sb.append(StringPool.SPACE);
+				}
+			}
+
+			sb.append(extractDynamicContent(dynamicElementElement));
+		}
+
+		return sb.toString();
 	}
 
 	protected String extractDynamicContent(String content) {
@@ -357,33 +388,6 @@ public class JournalIndexer extends BaseIndexer {
 		}
 
 		return StringPool.BLANK;
-	}
-
-	protected String extractDynamicContent(Element rootElement) {
-
-		StringBundler sb = new StringBundler();
-
-		for (Element element : rootElement.elements("dynamic-element")) {
-			String elType = element.attributeValue("type", StringPool.BLANK);
-
-			if (!elType.equals("image") && !elType.equals("multi-list") &&
-				!elType.equals("list") && !elType.equals("document_library") &&
-				!elType.equals("boolean") && !elType.equals("link_to_layout") &&
-				!elType.equals("selection_break")) {
-
-				Element contentEl = element.element("dynamic-content");
-
-				if (contentEl != null) {
-					String dynamicContent = contentEl.getText();
-
-					sb = sb.append(dynamicContent).append(StringPool.SPACE);
-				}
-			}
-
-			sb = sb.append(extractDynamicContent(element));
-		}
-
-		return sb.toString();
 	}
 
 	protected String extractStaticContent(String content) {
