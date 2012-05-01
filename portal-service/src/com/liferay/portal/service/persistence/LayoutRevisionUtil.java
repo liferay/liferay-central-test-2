@@ -1916,11 +1916,10 @@ public class LayoutRevisionUtil {
 		return _persistence;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setPersistence(LayoutRevisionPersistence persistence) {
-		_persistence = persistence;
-
-		ReferenceRegistry.registerReference(LayoutRevisionUtil.class,
-			"_persistence");
 	}
 
 	private static LayoutRevisionPersistence _persistence;

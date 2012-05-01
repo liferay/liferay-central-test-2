@@ -167,14 +167,10 @@ public class DDMTemplateServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(DDMTemplateService service) {
-		MethodCache.remove(DDMTemplateService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(DDMTemplateServiceUtil.class,
-			"_service");
-		MethodCache.remove(DDMTemplateService.class);
 	}
 
 	private static DDMTemplateService _service;

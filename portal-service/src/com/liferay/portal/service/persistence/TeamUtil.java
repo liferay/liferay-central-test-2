@@ -1010,10 +1010,10 @@ public class TeamUtil {
 		return _persistence;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setPersistence(TeamPersistence persistence) {
-		_persistence = persistence;
-
-		ReferenceRegistry.registerReference(TeamUtil.class, "_persistence");
 	}
 
 	private static TeamPersistence _persistence;

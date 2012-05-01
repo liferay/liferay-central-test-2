@@ -1001,11 +1001,10 @@ public class DLFileEntryMetadataUtil {
 		return _persistence;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setPersistence(DLFileEntryMetadataPersistence persistence) {
-		_persistence = persistence;
-
-		ReferenceRegistry.registerReference(DLFileEntryMetadataUtil.class,
-			"_persistence");
 	}
 
 	private static DLFileEntryMetadataPersistence _persistence;

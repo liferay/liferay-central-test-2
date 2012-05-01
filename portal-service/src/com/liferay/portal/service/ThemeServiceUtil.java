@@ -77,13 +77,10 @@ public class ThemeServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(ThemeService service) {
-		MethodCache.remove(ThemeService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(ThemeServiceUtil.class, "_service");
-		MethodCache.remove(ThemeService.class);
 	}
 
 	private static ThemeService _service;

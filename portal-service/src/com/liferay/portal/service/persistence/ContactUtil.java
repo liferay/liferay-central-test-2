@@ -412,10 +412,10 @@ public class ContactUtil {
 		return _persistence;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setPersistence(ContactPersistence persistence) {
-		_persistence = persistence;
-
-		ReferenceRegistry.registerReference(ContactUtil.class, "_persistence");
 	}
 
 	private static ContactPersistence _persistence;

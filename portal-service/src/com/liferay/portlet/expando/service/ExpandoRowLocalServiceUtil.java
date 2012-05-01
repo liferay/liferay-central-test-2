@@ -425,14 +425,10 @@ public class ExpandoRowLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(ExpandoRowLocalService service) {
-		MethodCache.remove(ExpandoRowLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(ExpandoRowLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(ExpandoRowLocalService.class);
 	}
 
 	private static ExpandoRowLocalService _service;

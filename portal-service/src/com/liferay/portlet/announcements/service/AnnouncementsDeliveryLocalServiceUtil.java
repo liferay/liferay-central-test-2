@@ -339,14 +339,10 @@ public class AnnouncementsDeliveryLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(AnnouncementsDeliveryLocalService service) {
-		MethodCache.remove(AnnouncementsDeliveryLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(AnnouncementsDeliveryLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(AnnouncementsDeliveryLocalService.class);
 	}
 
 	private static AnnouncementsDeliveryLocalService _service;

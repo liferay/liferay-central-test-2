@@ -123,14 +123,10 @@ public class WikiNodeServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(WikiNodeService service) {
-		MethodCache.remove(WikiNodeService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(WikiNodeServiceUtil.class,
-			"_service");
-		MethodCache.remove(WikiNodeService.class);
 	}
 
 	private static WikiNodeService _service;

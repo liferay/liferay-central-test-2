@@ -291,14 +291,10 @@ public class ClusterGroupLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(ClusterGroupLocalService service) {
-		MethodCache.remove(ClusterGroupLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(ClusterGroupLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(ClusterGroupLocalService.class);
 	}
 
 	private static ClusterGroupLocalService _service;

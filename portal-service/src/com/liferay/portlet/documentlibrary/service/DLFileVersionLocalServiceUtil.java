@@ -341,14 +341,10 @@ public class DLFileVersionLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(DLFileVersionLocalService service) {
-		MethodCache.remove(DLFileVersionLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(DLFileVersionLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(DLFileVersionLocalService.class);
 	}
 
 	private static DLFileVersionLocalService _service;

@@ -213,14 +213,10 @@ public class AssetVocabularyServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(AssetVocabularyService service) {
-		MethodCache.remove(AssetVocabularyService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(AssetVocabularyServiceUtil.class,
-			"_service");
-		MethodCache.remove(AssetVocabularyService.class);
 	}
 
 	private static AssetVocabularyService _service;

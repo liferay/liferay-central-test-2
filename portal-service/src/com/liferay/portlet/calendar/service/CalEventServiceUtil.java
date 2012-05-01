@@ -198,14 +198,10 @@ public class CalEventServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(CalEventService service) {
-		MethodCache.remove(CalEventService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(CalEventServiceUtil.class,
-			"_service");
-		MethodCache.remove(CalEventService.class);
 	}
 
 	private static CalEventService _service;

@@ -126,14 +126,10 @@ public class ExpandoValueServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(ExpandoValueService service) {
-		MethodCache.remove(ExpandoValueService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(ExpandoValueServiceUtil.class,
-			"_service");
-		MethodCache.remove(ExpandoValueService.class);
 	}
 
 	private static ExpandoValueService _service;

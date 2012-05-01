@@ -1709,11 +1709,10 @@ public class SocialRequestUtil {
 		return _persistence;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setPersistence(SocialRequestPersistence persistence) {
-		_persistence = persistence;
-
-		ReferenceRegistry.registerReference(SocialRequestUtil.class,
-			"_persistence");
 	}
 
 	private static SocialRequestPersistence _persistence;

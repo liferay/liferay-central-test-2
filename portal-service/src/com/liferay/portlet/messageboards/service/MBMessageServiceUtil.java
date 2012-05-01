@@ -289,14 +289,10 @@ public class MBMessageServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(MBMessageService service) {
-		MethodCache.remove(MBMessageService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(MBMessageServiceUtil.class,
-			"_service");
-		MethodCache.remove(MBMessageService.class);
 	}
 
 	private static MBMessageService _service;

@@ -113,14 +113,10 @@ public class PollsQuestionServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(PollsQuestionService service) {
-		MethodCache.remove(PollsQuestionService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(PollsQuestionServiceUtil.class,
-			"_service");
-		MethodCache.remove(PollsQuestionService.class);
 	}
 
 	private static PollsQuestionService _service;

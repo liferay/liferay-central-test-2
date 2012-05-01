@@ -300,14 +300,10 @@ public class ResourceCodeLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(ResourceCodeLocalService service) {
-		MethodCache.remove(ResourceCodeLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(ResourceCodeLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(ResourceCodeLocalService.class);
 	}
 
 	private static ResourceCodeLocalService _service;

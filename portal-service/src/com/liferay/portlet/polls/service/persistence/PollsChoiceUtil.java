@@ -628,11 +628,10 @@ public class PollsChoiceUtil {
 		return _persistence;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setPersistence(PollsChoicePersistence persistence) {
-		_persistence = persistence;
-
-		ReferenceRegistry.registerReference(PollsChoiceUtil.class,
-			"_persistence");
 	}
 
 	private static PollsChoicePersistence _persistence;

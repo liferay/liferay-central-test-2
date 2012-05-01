@@ -416,13 +416,10 @@ public class CompanyServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(CompanyService service) {
-		MethodCache.remove(CompanyService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(CompanyServiceUtil.class, "_service");
-		MethodCache.remove(CompanyService.class);
 	}
 
 	private static CompanyService _service;

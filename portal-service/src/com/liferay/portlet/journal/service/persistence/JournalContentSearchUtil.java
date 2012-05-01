@@ -1352,11 +1352,10 @@ public class JournalContentSearchUtil {
 		return _persistence;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setPersistence(JournalContentSearchPersistence persistence) {
-		_persistence = persistence;
-
-		ReferenceRegistry.registerReference(JournalContentSearchUtil.class,
-			"_persistence");
 	}
 
 	private static JournalContentSearchPersistence _persistence;

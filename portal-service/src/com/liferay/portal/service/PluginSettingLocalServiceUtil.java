@@ -309,14 +309,10 @@ public class PluginSettingLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(PluginSettingLocalService service) {
-		MethodCache.remove(PluginSettingLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(PluginSettingLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(PluginSettingLocalService.class);
 	}
 
 	private static PluginSettingLocalService _service;

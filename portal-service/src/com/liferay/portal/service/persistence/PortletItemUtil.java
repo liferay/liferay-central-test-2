@@ -684,11 +684,10 @@ public class PortletItemUtil {
 		return _persistence;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setPersistence(PortletItemPersistence persistence) {
-		_persistence = persistence;
-
-		ReferenceRegistry.registerReference(PortletItemUtil.class,
-			"_persistence");
 	}
 
 	private static PortletItemPersistence _persistence;

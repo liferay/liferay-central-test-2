@@ -1445,10 +1445,10 @@ public class AssetEntryUtil {
 		return _persistence;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setPersistence(AssetEntryPersistence persistence) {
-		_persistence = persistence;
-
-		ReferenceRegistry.registerReference(AssetEntryUtil.class, "_persistence");
 	}
 
 	private static AssetEntryPersistence _persistence;

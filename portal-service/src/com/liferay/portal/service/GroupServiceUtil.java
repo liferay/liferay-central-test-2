@@ -573,13 +573,10 @@ public class GroupServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(GroupService service) {
-		MethodCache.remove(GroupService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(GroupServiceUtil.class, "_service");
-		MethodCache.remove(GroupService.class);
 	}
 
 	private static GroupService _service;

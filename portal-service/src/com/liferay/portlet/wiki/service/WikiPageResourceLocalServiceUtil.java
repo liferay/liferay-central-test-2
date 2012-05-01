@@ -312,14 +312,10 @@ public class WikiPageResourceLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(WikiPageResourceLocalService service) {
-		MethodCache.remove(WikiPageResourceLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(WikiPageResourceLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(WikiPageResourceLocalService.class);
 	}
 
 	private static WikiPageResourceLocalService _service;

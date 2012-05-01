@@ -329,14 +329,10 @@ public class DLFileEntryMetadataLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(DLFileEntryMetadataLocalService service) {
-		MethodCache.remove(DLFileEntryMetadataLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(DLFileEntryMetadataLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(DLFileEntryMetadataLocalService.class);
 	}
 
 	private static DLFileEntryMetadataLocalService _service;

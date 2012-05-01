@@ -119,13 +119,10 @@ public class CountryServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(CountryService service) {
-		MethodCache.remove(CountryService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(CountryServiceUtil.class, "_service");
-		MethodCache.remove(CountryService.class);
 	}
 
 	private static CountryService _service;

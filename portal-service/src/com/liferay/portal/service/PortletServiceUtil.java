@@ -80,13 +80,10 @@ public class PortletServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(PortletService service) {
-		MethodCache.remove(PortletService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(PortletServiceUtil.class, "_service");
-		MethodCache.remove(PortletService.class);
 	}
 
 	private static PortletService _service;

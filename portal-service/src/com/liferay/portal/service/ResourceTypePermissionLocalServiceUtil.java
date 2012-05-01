@@ -359,14 +359,10 @@ public class ResourceTypePermissionLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(ResourceTypePermissionLocalService service) {
-		MethodCache.remove(ResourceTypePermissionLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(ResourceTypePermissionLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(ResourceTypePermissionLocalService.class);
 	}
 
 	private static ResourceTypePermissionLocalService _service;

@@ -779,14 +779,10 @@ public class CompanyLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(CompanyLocalService service) {
-		MethodCache.remove(CompanyLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(CompanyLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(CompanyLocalService.class);
 	}
 
 	private static CompanyLocalService _service;

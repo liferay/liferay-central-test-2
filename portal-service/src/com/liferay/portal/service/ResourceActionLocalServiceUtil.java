@@ -313,14 +313,10 @@ public class ResourceActionLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(ResourceActionLocalService service) {
-		MethodCache.remove(ResourceActionLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(ResourceActionLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(ResourceActionLocalService.class);
 	}
 
 	private static ResourceActionLocalService _service;

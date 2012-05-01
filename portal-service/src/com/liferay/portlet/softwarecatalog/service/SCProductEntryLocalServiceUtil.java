@@ -441,14 +441,10 @@ public class SCProductEntryLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(SCProductEntryLocalService service) {
-		MethodCache.remove(SCProductEntryLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(SCProductEntryLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(SCProductEntryLocalService.class);
 	}
 
 	private static SCProductEntryLocalService _service;

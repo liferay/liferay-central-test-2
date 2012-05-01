@@ -519,14 +519,10 @@ public class CalEventLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(CalEventLocalService service) {
-		MethodCache.remove(CalEventLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(CalEventLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(CalEventLocalService.class);
 	}
 
 	private static CalEventLocalService _service;

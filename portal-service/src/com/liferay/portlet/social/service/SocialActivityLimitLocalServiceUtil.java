@@ -290,14 +290,10 @@ public class SocialActivityLimitLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(SocialActivityLimitLocalService service) {
-		MethodCache.remove(SocialActivityLimitLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(SocialActivityLimitLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(SocialActivityLimitLocalService.class);
 	}
 
 	private static SocialActivityLimitLocalService _service;

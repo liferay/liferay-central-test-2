@@ -418,14 +418,10 @@ public class PermissionServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(PermissionService service) {
-		MethodCache.remove(PermissionService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(PermissionServiceUtil.class,
-			"_service");
-		MethodCache.remove(PermissionService.class);
 	}
 
 	private static PermissionService _service;

@@ -285,14 +285,10 @@ public class UserTrackerPathLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(UserTrackerPathLocalService service) {
-		MethodCache.remove(UserTrackerPathLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(UserTrackerPathLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(UserTrackerPathLocalService.class);
 	}
 
 	private static UserTrackerPathLocalService _service;

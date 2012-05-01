@@ -378,14 +378,10 @@ public class UserGroupRoleLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(UserGroupRoleLocalService service) {
-		MethodCache.remove(UserGroupRoleLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(UserGroupRoleLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(UserGroupRoleLocalService.class);
 	}
 
 	private static UserGroupRoleLocalService _service;

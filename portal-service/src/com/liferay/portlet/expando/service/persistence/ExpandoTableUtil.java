@@ -506,11 +506,10 @@ public class ExpandoTableUtil {
 		return _persistence;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setPersistence(ExpandoTablePersistence persistence) {
-		_persistence = persistence;
-
-		ReferenceRegistry.registerReference(ExpandoTableUtil.class,
-			"_persistence");
 	}
 
 	private static ExpandoTablePersistence _persistence;

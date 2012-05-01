@@ -113,14 +113,10 @@ public class LayoutSetBranchServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(LayoutSetBranchService service) {
-		MethodCache.remove(LayoutSetBranchService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(LayoutSetBranchServiceUtil.class,
-			"_service");
-		MethodCache.remove(LayoutSetBranchService.class);
 	}
 
 	private static LayoutSetBranchService _service;

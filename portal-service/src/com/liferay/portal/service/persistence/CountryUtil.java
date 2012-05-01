@@ -606,10 +606,10 @@ public class CountryUtil {
 		return _persistence;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setPersistence(CountryPersistence persistence) {
-		_persistence = persistence;
-
-		ReferenceRegistry.registerReference(CountryUtil.class, "_persistence");
 	}
 
 	private static CountryPersistence _persistence;

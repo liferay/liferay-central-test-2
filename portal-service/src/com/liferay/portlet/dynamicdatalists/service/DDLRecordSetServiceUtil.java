@@ -130,14 +130,10 @@ public class DDLRecordSetServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(DDLRecordSetService service) {
-		MethodCache.remove(DDLRecordSetService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(DDLRecordSetServiceUtil.class,
-			"_service");
-		MethodCache.remove(DDLRecordSetService.class);
 	}
 
 	private static DDLRecordSetService _service;

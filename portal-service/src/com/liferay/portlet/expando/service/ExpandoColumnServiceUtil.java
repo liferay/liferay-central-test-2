@@ -111,14 +111,10 @@ public class ExpandoColumnServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(ExpandoColumnService service) {
-		MethodCache.remove(ExpandoColumnService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(ExpandoColumnServiceUtil.class,
-			"_service");
-		MethodCache.remove(ExpandoColumnService.class);
 	}
 
 	private static ExpandoColumnService _service;

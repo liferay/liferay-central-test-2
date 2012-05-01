@@ -468,14 +468,10 @@ public class JournalStructureLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(JournalStructureLocalService service) {
-		MethodCache.remove(JournalStructureLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(JournalStructureLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(JournalStructureLocalService.class);
 	}
 
 	private static JournalStructureLocalService _service;

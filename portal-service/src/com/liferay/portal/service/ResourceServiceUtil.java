@@ -76,14 +76,10 @@ public class ResourceServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(ResourceService service) {
-		MethodCache.remove(ResourceService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(ResourceServiceUtil.class,
-			"_service");
-		MethodCache.remove(ResourceService.class);
 	}
 
 	private static ResourceService _service;

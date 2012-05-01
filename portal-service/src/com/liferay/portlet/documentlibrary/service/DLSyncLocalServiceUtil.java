@@ -327,14 +327,10 @@ public class DLSyncLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(DLSyncLocalService service) {
-		MethodCache.remove(DLSyncLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(DLSyncLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(DLSyncLocalService.class);
 	}
 
 	private static DLSyncLocalService _service;

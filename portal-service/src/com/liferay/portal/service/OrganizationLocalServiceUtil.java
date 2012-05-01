@@ -1272,14 +1272,10 @@ public class OrganizationLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(OrganizationLocalService service) {
-		MethodCache.remove(OrganizationLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(OrganizationLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(OrganizationLocalService.class);
 	}
 
 	private static OrganizationLocalService _service;

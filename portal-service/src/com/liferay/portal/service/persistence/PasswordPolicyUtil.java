@@ -413,11 +413,10 @@ public class PasswordPolicyUtil {
 		return _persistence;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setPersistence(PasswordPolicyPersistence persistence) {
-		_persistence = persistence;
-
-		ReferenceRegistry.registerReference(PasswordPolicyUtil.class,
-			"_persistence");
 	}
 
 	private static PasswordPolicyPersistence _persistence;

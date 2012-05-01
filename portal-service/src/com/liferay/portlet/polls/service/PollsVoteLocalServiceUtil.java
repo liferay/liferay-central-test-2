@@ -315,14 +315,10 @@ public class PollsVoteLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(PollsVoteLocalService service) {
-		MethodCache.remove(PollsVoteLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(PollsVoteLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(PollsVoteLocalService.class);
 	}
 
 	private static PollsVoteLocalService _service;

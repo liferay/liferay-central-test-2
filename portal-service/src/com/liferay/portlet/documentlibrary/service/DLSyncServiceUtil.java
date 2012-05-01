@@ -99,13 +99,10 @@ public class DLSyncServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(DLSyncService service) {
-		MethodCache.remove(DLSyncService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(DLSyncServiceUtil.class, "_service");
-		MethodCache.remove(DLSyncService.class);
 	}
 
 	private static DLSyncService _service;

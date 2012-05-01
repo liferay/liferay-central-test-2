@@ -78,14 +78,10 @@ public class PluginSettingServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(PluginSettingService service) {
-		MethodCache.remove(PluginSettingService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(PluginSettingServiceUtil.class,
-			"_service");
-		MethodCache.remove(PluginSettingService.class);
 	}
 
 	private static PluginSettingService _service;

@@ -639,11 +639,10 @@ public class DDLRecordVersionUtil {
 		return _persistence;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setPersistence(DDLRecordVersionPersistence persistence) {
-		_persistence = persistence;
-
-		ReferenceRegistry.registerReference(DDLRecordVersionUtil.class,
-			"_persistence");
 	}
 
 	private static DDLRecordVersionPersistence _persistence;

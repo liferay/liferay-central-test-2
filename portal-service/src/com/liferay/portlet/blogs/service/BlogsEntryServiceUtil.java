@@ -238,14 +238,10 @@ public class BlogsEntryServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(BlogsEntryService service) {
-		MethodCache.remove(BlogsEntryService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(BlogsEntryServiceUtil.class,
-			"_service");
-		MethodCache.remove(BlogsEntryService.class);
 	}
 
 	private static BlogsEntryService _service;

@@ -978,11 +978,10 @@ public class LayoutSetPrototypeUtil {
 		return _persistence;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setPersistence(LayoutSetPrototypePersistence persistence) {
-		_persistence = persistence;
-
-		ReferenceRegistry.registerReference(LayoutSetPrototypeUtil.class,
-			"_persistence");
 	}
 
 	private static LayoutSetPrototypePersistence _persistence;

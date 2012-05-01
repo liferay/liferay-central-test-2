@@ -357,14 +357,10 @@ public class SCLicenseLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(SCLicenseLocalService service) {
-		MethodCache.remove(SCLicenseLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(SCLicenseLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(SCLicenseLocalService.class);
 	}
 
 	private static SCLicenseLocalService _service;

@@ -296,14 +296,10 @@ public class UserTrackerLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(UserTrackerLocalService service) {
-		MethodCache.remove(UserTrackerLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(UserTrackerLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(UserTrackerLocalService.class);
 	}
 
 	private static UserTrackerLocalService _service;

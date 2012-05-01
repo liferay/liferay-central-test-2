@@ -347,14 +347,10 @@ public class DDMStructureLinkLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(DDMStructureLinkLocalService service) {
-		MethodCache.remove(DDMStructureLinkLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(DDMStructureLinkLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(DDMStructureLinkLocalService.class);
 	}
 
 	private static DDMStructureLinkLocalService _service;

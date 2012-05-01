@@ -632,11 +632,10 @@ public class ResourceCodeUtil {
 		return _persistence;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setPersistence(ResourceCodePersistence persistence) {
-		_persistence = persistence;
-
-		ReferenceRegistry.registerReference(ResourceCodeUtil.class,
-			"_persistence");
 	}
 
 	private static ResourceCodePersistence _persistence;

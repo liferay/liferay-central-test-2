@@ -1118,14 +1118,10 @@ public class JournalArticleLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(JournalArticleLocalService service) {
-		MethodCache.remove(JournalArticleLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(JournalArticleLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(JournalArticleLocalService.class);
 	}
 
 	private static JournalArticleLocalService _service;

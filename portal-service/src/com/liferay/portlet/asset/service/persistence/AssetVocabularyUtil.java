@@ -929,11 +929,10 @@ public class AssetVocabularyUtil {
 		return _persistence;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setPersistence(AssetVocabularyPersistence persistence) {
-		_persistence = persistence;
-
-		ReferenceRegistry.registerReference(AssetVocabularyUtil.class,
-			"_persistence");
 	}
 
 	private static AssetVocabularyPersistence _persistence;

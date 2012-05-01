@@ -1358,14 +1358,10 @@ public class GroupLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(GroupLocalService service) {
-		MethodCache.remove(GroupLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(GroupLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(GroupLocalService.class);
 	}
 
 	private static GroupLocalService _service;

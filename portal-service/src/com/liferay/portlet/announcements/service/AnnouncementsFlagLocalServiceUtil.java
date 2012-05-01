@@ -309,14 +309,10 @@ public class AnnouncementsFlagLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(AnnouncementsFlagLocalService service) {
-		MethodCache.remove(AnnouncementsFlagLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(AnnouncementsFlagLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(AnnouncementsFlagLocalService.class);
 	}
 
 	private static AnnouncementsFlagLocalService _service;

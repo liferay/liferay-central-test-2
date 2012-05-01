@@ -1497,11 +1497,10 @@ public class BookmarksEntryUtil {
 		return _persistence;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setPersistence(BookmarksEntryPersistence persistence) {
-		_persistence = persistence;
-
-		ReferenceRegistry.registerReference(BookmarksEntryUtil.class,
-			"_persistence");
 	}
 
 	private static BookmarksEntryPersistence _persistence;

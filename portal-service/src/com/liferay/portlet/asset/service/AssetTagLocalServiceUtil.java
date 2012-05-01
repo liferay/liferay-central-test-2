@@ -489,14 +489,10 @@ public class AssetTagLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(AssetTagLocalService service) {
-		MethodCache.remove(AssetTagLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(AssetTagLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(AssetTagLocalService.class);
 	}
 
 	private static AssetTagLocalService _service;

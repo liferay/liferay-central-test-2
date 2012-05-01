@@ -564,11 +564,10 @@ public class OrgGroupPermissionUtil {
 		return _persistence;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setPersistence(OrgGroupPermissionPersistence persistence) {
-		_persistence = persistence;
-
-		ReferenceRegistry.registerReference(OrgGroupPermissionUtil.class,
-			"_persistence");
 	}
 
 	private static OrgGroupPermissionPersistence _persistence;

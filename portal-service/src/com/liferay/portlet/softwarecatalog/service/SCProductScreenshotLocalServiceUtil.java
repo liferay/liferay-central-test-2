@@ -320,14 +320,10 @@ public class SCProductScreenshotLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(SCProductScreenshotLocalService service) {
-		MethodCache.remove(SCProductScreenshotLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(SCProductScreenshotLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(SCProductScreenshotLocalService.class);
 	}
 
 	private static SCProductScreenshotLocalService _service;

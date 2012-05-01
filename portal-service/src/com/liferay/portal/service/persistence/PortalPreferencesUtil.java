@@ -344,11 +344,10 @@ public class PortalPreferencesUtil {
 		return _persistence;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setPersistence(PortalPreferencesPersistence persistence) {
-		_persistence = persistence;
-
-		ReferenceRegistry.registerReference(PortalPreferencesUtil.class,
-			"_persistence");
 	}
 
 	private static PortalPreferencesPersistence _persistence;

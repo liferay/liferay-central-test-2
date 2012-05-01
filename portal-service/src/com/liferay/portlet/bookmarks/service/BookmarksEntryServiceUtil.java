@@ -157,14 +157,10 @@ public class BookmarksEntryServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(BookmarksEntryService service) {
-		MethodCache.remove(BookmarksEntryService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(BookmarksEntryServiceUtil.class,
-			"_service");
-		MethodCache.remove(BookmarksEntryService.class);
 	}
 
 	private static BookmarksEntryService _service;

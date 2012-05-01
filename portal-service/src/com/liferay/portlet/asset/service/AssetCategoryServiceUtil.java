@@ -232,14 +232,10 @@ public class AssetCategoryServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(AssetCategoryService service) {
-		MethodCache.remove(AssetCategoryService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(AssetCategoryServiceUtil.class,
-			"_service");
-		MethodCache.remove(AssetCategoryService.class);
 	}
 
 	private static AssetCategoryService _service;

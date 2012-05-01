@@ -68,13 +68,10 @@ public class ContactServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(ContactService service) {
-		MethodCache.remove(ContactService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(ContactServiceUtil.class, "_service");
-		MethodCache.remove(ContactService.class);
 	}
 
 	private static ContactService _service;

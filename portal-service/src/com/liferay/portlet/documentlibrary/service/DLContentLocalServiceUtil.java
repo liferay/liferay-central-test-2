@@ -370,14 +370,10 @@ public class DLContentLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(DLContentLocalService service) {
-		MethodCache.remove(DLContentLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(DLContentLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(DLContentLocalService.class);
 	}
 
 	private static DLContentLocalService _service;

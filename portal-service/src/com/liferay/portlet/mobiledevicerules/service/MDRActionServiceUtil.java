@@ -142,14 +142,10 @@ public class MDRActionServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(MDRActionService service) {
-		MethodCache.remove(MDRActionService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(MDRActionServiceUtil.class,
-			"_service");
-		MethodCache.remove(MDRActionService.class);
 	}
 
 	private static MDRActionService _service;

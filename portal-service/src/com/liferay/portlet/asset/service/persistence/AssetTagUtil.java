@@ -793,10 +793,10 @@ public class AssetTagUtil {
 		return _persistence;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setPersistence(AssetTagPersistence persistence) {
-		_persistence = persistence;
-
-		ReferenceRegistry.registerReference(AssetTagUtil.class, "_persistence");
 	}
 
 	private static AssetTagPersistence _persistence;

@@ -308,14 +308,10 @@ public class WebsiteLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(WebsiteLocalService service) {
-		MethodCache.remove(WebsiteLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(WebsiteLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(WebsiteLocalService.class);
 	}
 
 	private static WebsiteLocalService _service;

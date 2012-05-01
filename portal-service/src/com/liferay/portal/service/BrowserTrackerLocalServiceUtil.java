@@ -296,14 +296,10 @@ public class BrowserTrackerLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(BrowserTrackerLocalService service) {
-		MethodCache.remove(BrowserTrackerLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(BrowserTrackerLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(BrowserTrackerLocalService.class);
 	}
 
 	private static BrowserTrackerLocalService _service;

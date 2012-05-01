@@ -357,14 +357,10 @@ public class SubscriptionLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(SubscriptionLocalService service) {
-		MethodCache.remove(SubscriptionLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(SubscriptionLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(SubscriptionLocalService.class);
 	}
 
 	private static SubscriptionLocalService _service;

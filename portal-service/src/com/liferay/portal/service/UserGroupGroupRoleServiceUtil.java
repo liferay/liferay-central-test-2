@@ -96,14 +96,10 @@ public class UserGroupGroupRoleServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(UserGroupGroupRoleService service) {
-		MethodCache.remove(UserGroupGroupRoleService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(UserGroupGroupRoleServiceUtil.class,
-			"_service");
-		MethodCache.remove(UserGroupGroupRoleService.class);
 	}
 
 	private static UserGroupGroupRoleService _service;

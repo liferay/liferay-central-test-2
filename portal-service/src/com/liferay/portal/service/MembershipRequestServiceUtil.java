@@ -100,14 +100,10 @@ public class MembershipRequestServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(MembershipRequestService service) {
-		MethodCache.remove(MembershipRequestService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(MembershipRequestServiceUtil.class,
-			"_service");
-		MethodCache.remove(MembershipRequestService.class);
 	}
 
 	private static MembershipRequestService _service;

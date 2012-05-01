@@ -397,14 +397,10 @@ public class SCFrameworkVersionLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(SCFrameworkVersionLocalService service) {
-		MethodCache.remove(SCFrameworkVersionLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(SCFrameworkVersionLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(SCFrameworkVersionLocalService.class);
 	}
 
 	private static SCFrameworkVersionLocalService _service;

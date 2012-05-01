@@ -100,14 +100,10 @@ public class SCLicenseServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(SCLicenseService service) {
-		MethodCache.remove(SCLicenseService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(SCLicenseServiceUtil.class,
-			"_service");
-		MethodCache.remove(SCLicenseService.class);
 	}
 
 	private static SCLicenseService _service;

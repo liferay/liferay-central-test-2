@@ -480,10 +480,10 @@ public class ResourceUtil {
 		return _persistence;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setPersistence(ResourcePersistence persistence) {
-		_persistence = persistence;
-
-		ReferenceRegistry.registerReference(ResourceUtil.class, "_persistence");
 	}
 
 	private static ResourcePersistence _persistence;

@@ -362,14 +362,10 @@ public class MBMailingListLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(MBMailingListLocalService service) {
-		MethodCache.remove(MBMailingListLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(MBMailingListLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(MBMailingListLocalService.class);
 	}
 
 	private static MBMailingListLocalService _service;

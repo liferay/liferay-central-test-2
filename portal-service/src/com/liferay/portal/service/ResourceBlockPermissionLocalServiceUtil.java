@@ -313,14 +313,10 @@ public class ResourceBlockPermissionLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(ResourceBlockPermissionLocalService service) {
-		MethodCache.remove(ResourceBlockPermissionLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(ResourceBlockPermissionLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(ResourceBlockPermissionLocalService.class);
 	}
 
 	private static ResourceBlockPermissionLocalService _service;

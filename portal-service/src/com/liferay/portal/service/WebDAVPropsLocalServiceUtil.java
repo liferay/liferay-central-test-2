@@ -298,14 +298,10 @@ public class WebDAVPropsLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(WebDAVPropsLocalService service) {
-		MethodCache.remove(WebDAVPropsLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(WebDAVPropsLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(WebDAVPropsLocalService.class);
 	}
 
 	private static WebDAVPropsLocalService _service;

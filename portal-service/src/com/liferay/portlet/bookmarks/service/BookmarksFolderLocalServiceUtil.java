@@ -384,14 +384,10 @@ public class BookmarksFolderLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(BookmarksFolderLocalService service) {
-		MethodCache.remove(BookmarksFolderLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(BookmarksFolderLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(BookmarksFolderLocalService.class);
 	}
 
 	private static BookmarksFolderLocalService _service;

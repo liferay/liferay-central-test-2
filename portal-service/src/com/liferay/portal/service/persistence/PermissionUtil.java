@@ -1154,10 +1154,10 @@ public class PermissionUtil {
 		return _persistence;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setPersistence(PermissionPersistence persistence) {
-		_persistence = persistence;
-
-		ReferenceRegistry.registerReference(PermissionUtil.class, "_persistence");
 	}
 
 	private static PermissionPersistence _persistence;

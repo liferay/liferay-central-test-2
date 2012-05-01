@@ -114,14 +114,10 @@ public class PasswordPolicyServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(PasswordPolicyService service) {
-		MethodCache.remove(PasswordPolicyService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(PasswordPolicyServiceUtil.class,
-			"_service");
-		MethodCache.remove(PasswordPolicyService.class);
 	}
 
 	private static PasswordPolicyService _service;

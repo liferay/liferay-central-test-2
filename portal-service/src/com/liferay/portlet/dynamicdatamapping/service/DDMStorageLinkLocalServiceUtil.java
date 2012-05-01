@@ -340,14 +340,10 @@ public class DDMStorageLinkLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(DDMStorageLinkLocalService service) {
-		MethodCache.remove(DDMStorageLinkLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(DDMStorageLinkLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(DDMStorageLinkLocalService.class);
 	}
 
 	private static DDMStorageLinkLocalService _service;

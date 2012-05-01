@@ -633,10 +633,10 @@ public class MDRActionUtil {
 		return _persistence;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setPersistence(MDRActionPersistence persistence) {
-		_persistence = persistence;
-
-		ReferenceRegistry.registerReference(MDRActionUtil.class, "_persistence");
 	}
 
 	private static MDRActionPersistence _persistence;

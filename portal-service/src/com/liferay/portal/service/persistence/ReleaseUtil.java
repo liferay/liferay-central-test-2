@@ -337,10 +337,10 @@ public class ReleaseUtil {
 		return _persistence;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setPersistence(ReleasePersistence persistence) {
-		_persistence = persistence;
-
-		ReferenceRegistry.registerReference(ReleaseUtil.class, "_persistence");
 	}
 
 	private static ReleasePersistence _persistence;

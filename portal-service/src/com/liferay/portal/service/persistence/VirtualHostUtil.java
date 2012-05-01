@@ -408,11 +408,10 @@ public class VirtualHostUtil {
 		return _persistence;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setPersistence(VirtualHostPersistence persistence) {
-		_persistence = persistence;
-
-		ReferenceRegistry.registerReference(VirtualHostUtil.class,
-			"_persistence");
 	}
 
 	private static VirtualHostPersistence _persistence;

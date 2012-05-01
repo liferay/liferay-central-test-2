@@ -3000,10 +3000,10 @@ public class WikiPageUtil {
 		return _persistence;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setPersistence(WikiPagePersistence persistence) {
-		_persistence = persistence;
-
-		ReferenceRegistry.registerReference(WikiPageUtil.class, "_persistence");
 	}
 
 	private static WikiPagePersistence _persistence;

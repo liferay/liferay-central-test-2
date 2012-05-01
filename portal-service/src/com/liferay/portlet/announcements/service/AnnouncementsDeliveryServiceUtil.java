@@ -76,14 +76,10 @@ public class AnnouncementsDeliveryServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(AnnouncementsDeliveryService service) {
-		MethodCache.remove(AnnouncementsDeliveryService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(AnnouncementsDeliveryServiceUtil.class,
-			"_service");
-		MethodCache.remove(AnnouncementsDeliveryService.class);
 	}
 
 	private static AnnouncementsDeliveryService _service;

@@ -2060,10 +2060,10 @@ public class CalEventUtil {
 		return _persistence;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setPersistence(CalEventPersistence persistence) {
-		_persistence = persistence;
-
-		ReferenceRegistry.registerReference(CalEventUtil.class, "_persistence");
 	}
 
 	private static CalEventPersistence _persistence;

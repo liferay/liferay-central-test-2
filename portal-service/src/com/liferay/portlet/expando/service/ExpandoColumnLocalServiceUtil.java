@@ -486,14 +486,10 @@ public class ExpandoColumnLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(ExpandoColumnLocalService service) {
-		MethodCache.remove(ExpandoColumnLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(ExpandoColumnLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(ExpandoColumnLocalService.class);
 	}
 
 	private static ExpandoColumnLocalService _service;

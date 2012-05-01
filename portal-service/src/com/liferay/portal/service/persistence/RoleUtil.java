@@ -2013,10 +2013,10 @@ public class RoleUtil {
 		return _persistence;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setPersistence(RolePersistence persistence) {
-		_persistence = persistence;
-
-		ReferenceRegistry.registerReference(RoleUtil.class, "_persistence");
 	}
 
 	private static RolePersistence _persistence;

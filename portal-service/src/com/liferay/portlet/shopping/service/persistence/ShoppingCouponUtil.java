@@ -481,11 +481,10 @@ public class ShoppingCouponUtil {
 		return _persistence;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setPersistence(ShoppingCouponPersistence persistence) {
-		_persistence = persistence;
-
-		ReferenceRegistry.registerReference(ShoppingCouponUtil.class,
-			"_persistence");
 	}
 
 	private static ShoppingCouponPersistence _persistence;

@@ -82,14 +82,10 @@ public class DLFileVersionServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(DLFileVersionService service) {
-		MethodCache.remove(DLFileVersionService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(DLFileVersionServiceUtil.class,
-			"_service");
-		MethodCache.remove(DLFileVersionService.class);
 	}
 
 	private static DLFileVersionService _service;

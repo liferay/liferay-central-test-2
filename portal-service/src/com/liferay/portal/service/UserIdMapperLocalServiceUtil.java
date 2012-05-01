@@ -311,14 +311,10 @@ public class UserIdMapperLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(UserIdMapperLocalService service) {
-		MethodCache.remove(UserIdMapperLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(UserIdMapperLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(UserIdMapperLocalService.class);
 	}
 
 	private static UserIdMapperLocalService _service;

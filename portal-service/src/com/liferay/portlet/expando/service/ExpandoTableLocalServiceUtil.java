@@ -456,14 +456,10 @@ public class ExpandoTableLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(ExpandoTableLocalService service) {
-		MethodCache.remove(ExpandoTableLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(ExpandoTableLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(ExpandoTableLocalService.class);
 	}
 
 	private static ExpandoTableLocalService _service;

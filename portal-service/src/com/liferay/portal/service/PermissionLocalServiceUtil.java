@@ -940,14 +940,10 @@ public class PermissionLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(PermissionLocalService service) {
-		MethodCache.remove(PermissionLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(PermissionLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(PermissionLocalService.class);
 	}
 
 	private static PermissionLocalService _service;

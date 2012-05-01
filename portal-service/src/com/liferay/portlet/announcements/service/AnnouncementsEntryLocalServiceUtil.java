@@ -446,14 +446,10 @@ public class AnnouncementsEntryLocalServiceUtil {
 		return _service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(AnnouncementsEntryLocalService service) {
-		MethodCache.remove(AnnouncementsEntryLocalService.class);
-
-		_service = service;
-
-		ReferenceRegistry.registerReference(AnnouncementsEntryLocalServiceUtil.class,
-			"_service");
-		MethodCache.remove(AnnouncementsEntryLocalService.class);
 	}
 
 	private static AnnouncementsEntryLocalService _service;
