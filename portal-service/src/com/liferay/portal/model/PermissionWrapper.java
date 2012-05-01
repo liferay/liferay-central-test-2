@@ -14,6 +14,9 @@
 
 package com.liferay.portal.model;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * <p>
  * This class is a wrapper for {@link Permission}.
@@ -34,6 +37,43 @@ public class PermissionWrapper implements Permission, ModelWrapper<Permission> {
 
 	public String getModelClassName() {
 		return Permission.class.getName();
+	}
+
+	public Map<String, Object> getModelAttributes() {
+		Map<String, Object> attributes = new HashMap<String, Object>();
+
+		attributes.put("permissionId", getPermissionId());
+		attributes.put("companyId", getCompanyId());
+		attributes.put("actionId", getActionId());
+		attributes.put("resourceId", getResourceId());
+
+		return attributes;
+	}
+
+	public void setModelAttributes(Map<String, Object> attributes) {
+		Long permissionId = (Long)attributes.get("permissionId");
+
+		if (permissionId != null) {
+			setPermissionId(permissionId);
+		}
+
+		Long companyId = (Long)attributes.get("companyId");
+
+		if (companyId != null) {
+			setCompanyId(companyId);
+		}
+
+		String actionId = (String)attributes.get("actionId");
+
+		if (actionId != null) {
+			setActionId(actionId);
+		}
+
+		Long resourceId = (Long)attributes.get("resourceId");
+
+		if (resourceId != null) {
+			setResourceId(resourceId);
+		}
 	}
 
 	/**

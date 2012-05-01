@@ -21,15 +21,14 @@ import com.liferay.portal.kernel.bean.IdentifiableBean;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.search.Indexer;
-import com.liferay.portal.kernel.search.IndexerRegistryUtil;
-import com.liferay.portal.kernel.search.SearchException;
+import com.liferay.portal.kernel.search.Indexable;
+import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.PersistedModel;
+import com.liferay.portal.service.BaseLocalServiceImpl;
 import com.liferay.portal.service.PersistedModelLocalServiceRegistry;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceService;
@@ -79,7 +78,7 @@ import javax.sql.DataSource;
  * @see com.liferay.portlet.dynamicdatalists.service.DDLRecordLocalServiceUtil
  * @generated
  */
-public abstract class DDLRecordLocalServiceBaseImpl
+public abstract class DDLRecordLocalServiceBaseImpl extends BaseLocalServiceImpl
 	implements DDLRecordLocalService, IdentifiableBean {
 	/*
 	 * NOTE FOR DEVELOPERS:
@@ -94,26 +93,12 @@ public abstract class DDLRecordLocalServiceBaseImpl
 	 * @return the d d l record that was added
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Indexable(type = IndexableType.REINDEX)
 	public DDLRecord addDDLRecord(DDLRecord ddlRecord)
 		throws SystemException {
 		ddlRecord.setNew(true);
 
-		ddlRecord = ddlRecordPersistence.update(ddlRecord, false);
-
-		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
-
-		if (indexer != null) {
-			try {
-				indexer.reindex(ddlRecord);
-			}
-			catch (SearchException se) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(se, se);
-				}
-			}
-		}
-
-		return ddlRecord;
+		return ddlRecordPersistence.update(ddlRecord, false);
 	}
 
 	/**
@@ -130,48 +115,32 @@ public abstract class DDLRecordLocalServiceBaseImpl
 	 * Deletes the d d l record with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
 	 * @param recordId the primary key of the d d l record
+	 * @return the d d l record that was removed
 	 * @throws PortalException if a d d l record with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public void deleteDDLRecord(long recordId)
+	@Indexable(type = IndexableType.DELETE)
+	public DDLRecord deleteDDLRecord(long recordId)
 		throws PortalException, SystemException {
-		DDLRecord ddlRecord = ddlRecordPersistence.remove(recordId);
-
-		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
-
-		if (indexer != null) {
-			try {
-				indexer.delete(ddlRecord);
-			}
-			catch (SearchException se) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(se, se);
-				}
-			}
-		}
+		return ddlRecordPersistence.remove(recordId);
 	}
 
 	/**
 	 * Deletes the d d l record from the database. Also notifies the appropriate model listeners.
 	 *
 	 * @param ddlRecord the d d l record
+	 * @return the d d l record that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
-	public void deleteDDLRecord(DDLRecord ddlRecord) throws SystemException {
-		ddlRecordPersistence.remove(ddlRecord);
+	@Indexable(type = IndexableType.DELETE)
+	public DDLRecord deleteDDLRecord(DDLRecord ddlRecord)
+		throws SystemException {
+		return ddlRecordPersistence.remove(ddlRecord);
+	}
 
-		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
-
-		if (indexer != null) {
-			try {
-				indexer.delete(ddlRecord);
-			}
-			catch (SearchException se) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(se, se);
-				}
-			}
-		}
+	public DynamicQuery dynamicQuery() {
+		return DynamicQueryFactoryUtil.forClass(DDLRecord.class,
+			getClassLoader());
 	}
 
 	/**
@@ -310,6 +279,7 @@ public abstract class DDLRecordLocalServiceBaseImpl
 	 * @return the d d l record that was updated
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Indexable(type = IndexableType.REINDEX)
 	public DDLRecord updateDDLRecord(DDLRecord ddlRecord)
 		throws SystemException {
 		return updateDDLRecord(ddlRecord, true);
@@ -323,26 +293,12 @@ public abstract class DDLRecordLocalServiceBaseImpl
 	 * @return the d d l record that was updated
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Indexable(type = IndexableType.REINDEX)
 	public DDLRecord updateDDLRecord(DDLRecord ddlRecord, boolean merge)
 		throws SystemException {
 		ddlRecord.setNew(false);
 
-		ddlRecord = ddlRecordPersistence.update(ddlRecord, merge);
-
-		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
-
-		if (indexer != null) {
-			try {
-				indexer.reindex(ddlRecord);
-			}
-			catch (SearchException se) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(se, se);
-				}
-			}
-		}
-
-		return ddlRecord;
+		return ddlRecordPersistence.update(ddlRecord, merge);
 	}
 
 	/**
@@ -889,12 +845,6 @@ public abstract class DDLRecordLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
-	protected ClassLoader getClassLoader() {
-		Class<?> clazz = getClass();
-
-		return clazz.getClassLoader();
-	}
-
 	protected Class<?> getModelClass() {
 		return DDLRecord.class;
 	}
@@ -980,6 +930,5 @@ public abstract class DDLRecordLocalServiceBaseImpl
 	protected DDMStructureFinder ddmStructureFinder;
 	@BeanReference(type = PersistedModelLocalServiceRegistry.class)
 	protected PersistedModelLocalServiceRegistry persistedModelLocalServiceRegistry;
-	private static Log _log = LogFactoryUtil.getLog(DDLRecordLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

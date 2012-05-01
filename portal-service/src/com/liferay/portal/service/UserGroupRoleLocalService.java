@@ -35,7 +35,8 @@ import com.liferay.portal.kernel.transaction.Transactional;
  */
 @Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
 	PortalException.class, SystemException.class})
-public interface UserGroupRoleLocalService extends PersistedModelLocalService {
+public interface UserGroupRoleLocalService extends BaseLocalService,
+	PersistedModelLocalService {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -66,10 +67,11 @@ public interface UserGroupRoleLocalService extends PersistedModelLocalService {
 	* Deletes the user group role with the primary key from the database. Also notifies the appropriate model listeners.
 	*
 	* @param userGroupRolePK the primary key of the user group role
+	* @return the user group role that was removed
 	* @throws PortalException if a user group role with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public void deleteUserGroupRole(
+	public com.liferay.portal.model.UserGroupRole deleteUserGroupRole(
 		com.liferay.portal.service.persistence.UserGroupRolePK userGroupRolePK)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
@@ -78,11 +80,14 @@ public interface UserGroupRoleLocalService extends PersistedModelLocalService {
 	* Deletes the user group role from the database. Also notifies the appropriate model listeners.
 	*
 	* @param userGroupRole the user group role
+	* @return the user group role that was removed
 	* @throws SystemException if a system exception occurred
 	*/
-	public void deleteUserGroupRole(
+	public com.liferay.portal.model.UserGroupRole deleteUserGroupRole(
 		com.liferay.portal.model.UserGroupRole userGroupRole)
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery();
 
 	/**
 	* Performs a dynamic query on the database and returns the matching rows.

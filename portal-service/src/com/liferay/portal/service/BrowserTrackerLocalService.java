@@ -35,7 +35,8 @@ import com.liferay.portal.kernel.transaction.Transactional;
  */
 @Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
 	PortalException.class, SystemException.class})
-public interface BrowserTrackerLocalService extends PersistedModelLocalService {
+public interface BrowserTrackerLocalService extends BaseLocalService,
+	PersistedModelLocalService {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -66,10 +67,12 @@ public interface BrowserTrackerLocalService extends PersistedModelLocalService {
 	* Deletes the browser tracker with the primary key from the database. Also notifies the appropriate model listeners.
 	*
 	* @param browserTrackerId the primary key of the browser tracker
+	* @return the browser tracker that was removed
 	* @throws PortalException if a browser tracker with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public void deleteBrowserTracker(long browserTrackerId)
+	public com.liferay.portal.model.BrowserTracker deleteBrowserTracker(
+		long browserTrackerId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -77,11 +80,14 @@ public interface BrowserTrackerLocalService extends PersistedModelLocalService {
 	* Deletes the browser tracker from the database. Also notifies the appropriate model listeners.
 	*
 	* @param browserTracker the browser tracker
+	* @return the browser tracker that was removed
 	* @throws SystemException if a system exception occurred
 	*/
-	public void deleteBrowserTracker(
+	public com.liferay.portal.model.BrowserTracker deleteBrowserTracker(
 		com.liferay.portal.model.BrowserTracker browserTracker)
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery();
 
 	/**
 	* Performs a dynamic query on the database and returns the matching rows.

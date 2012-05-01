@@ -21,13 +21,11 @@ import com.liferay.portal.kernel.bean.IdentifiableBean;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.search.Indexer;
-import com.liferay.portal.kernel.search.IndexerRegistryUtil;
-import com.liferay.portal.kernel.search.SearchException;
+import com.liferay.portal.kernel.search.Indexable;
+import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.PersistedModel;
 import com.liferay.portal.model.WorkflowInstanceLink;
@@ -35,6 +33,7 @@ import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountService;
 import com.liferay.portal.service.AddressLocalService;
 import com.liferay.portal.service.AddressService;
+import com.liferay.portal.service.BaseLocalServiceImpl;
 import com.liferay.portal.service.BrowserTrackerLocalService;
 import com.liferay.portal.service.CMISRepositoryLocalService;
 import com.liferay.portal.service.ClassNameLocalService;
@@ -240,7 +239,8 @@ import javax.sql.DataSource;
  * @generated
  */
 public abstract class WorkflowInstanceLinkLocalServiceBaseImpl
-	implements WorkflowInstanceLinkLocalService, IdentifiableBean {
+	extends BaseLocalServiceImpl implements WorkflowInstanceLinkLocalService,
+		IdentifiableBean {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -254,27 +254,13 @@ public abstract class WorkflowInstanceLinkLocalServiceBaseImpl
 	 * @return the workflow instance link that was added
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Indexable(type = IndexableType.REINDEX)
 	public WorkflowInstanceLink addWorkflowInstanceLink(
 		WorkflowInstanceLink workflowInstanceLink) throws SystemException {
 		workflowInstanceLink.setNew(true);
 
-		workflowInstanceLink = workflowInstanceLinkPersistence.update(workflowInstanceLink,
-				false);
-
-		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
-
-		if (indexer != null) {
-			try {
-				indexer.reindex(workflowInstanceLink);
-			}
-			catch (SearchException se) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(se, se);
-				}
-			}
-		}
-
-		return workflowInstanceLink;
+		return workflowInstanceLinkPersistence.update(workflowInstanceLink,
+			false);
 	}
 
 	/**
@@ -292,51 +278,34 @@ public abstract class WorkflowInstanceLinkLocalServiceBaseImpl
 	 * Deletes the workflow instance link with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
 	 * @param workflowInstanceLinkId the primary key of the workflow instance link
+	 * @return the workflow instance link that was removed
 	 * @throws PortalException if a workflow instance link with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public void deleteWorkflowInstanceLink(long workflowInstanceLinkId)
-		throws PortalException, SystemException {
-		WorkflowInstanceLink workflowInstanceLink = workflowInstanceLinkPersistence.remove(workflowInstanceLinkId);
-
-		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
-
-		if (indexer != null) {
-			try {
-				indexer.delete(workflowInstanceLink);
-			}
-			catch (SearchException se) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(se, se);
-				}
-			}
-		}
+	@Indexable(type = IndexableType.DELETE)
+	public WorkflowInstanceLink deleteWorkflowInstanceLink(
+		long workflowInstanceLinkId) throws PortalException, SystemException {
+		return workflowInstanceLinkPersistence.remove(workflowInstanceLinkId);
 	}
 
 	/**
 	 * Deletes the workflow instance link from the database. Also notifies the appropriate model listeners.
 	 *
 	 * @param workflowInstanceLink the workflow instance link
+	 * @return the workflow instance link that was removed
 	 * @throws PortalException
 	 * @throws SystemException if a system exception occurred
 	 */
-	public void deleteWorkflowInstanceLink(
+	@Indexable(type = IndexableType.DELETE)
+	public WorkflowInstanceLink deleteWorkflowInstanceLink(
 		WorkflowInstanceLink workflowInstanceLink)
 		throws PortalException, SystemException {
-		workflowInstanceLinkPersistence.remove(workflowInstanceLink);
+		return workflowInstanceLinkPersistence.remove(workflowInstanceLink);
+	}
 
-		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
-
-		if (indexer != null) {
-			try {
-				indexer.delete(workflowInstanceLink);
-			}
-			catch (SearchException se) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(se, se);
-				}
-			}
-		}
+	public DynamicQuery dynamicQuery() {
+		return DynamicQueryFactoryUtil.forClass(WorkflowInstanceLink.class,
+			getClassLoader());
 	}
 
 	/**
@@ -462,6 +431,7 @@ public abstract class WorkflowInstanceLinkLocalServiceBaseImpl
 	 * @return the workflow instance link that was updated
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Indexable(type = IndexableType.REINDEX)
 	public WorkflowInstanceLink updateWorkflowInstanceLink(
 		WorkflowInstanceLink workflowInstanceLink) throws SystemException {
 		return updateWorkflowInstanceLink(workflowInstanceLink, true);
@@ -475,28 +445,14 @@ public abstract class WorkflowInstanceLinkLocalServiceBaseImpl
 	 * @return the workflow instance link that was updated
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Indexable(type = IndexableType.REINDEX)
 	public WorkflowInstanceLink updateWorkflowInstanceLink(
 		WorkflowInstanceLink workflowInstanceLink, boolean merge)
 		throws SystemException {
 		workflowInstanceLink.setNew(false);
 
-		workflowInstanceLink = workflowInstanceLinkPersistence.update(workflowInstanceLink,
-				merge);
-
-		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
-
-		if (indexer != null) {
-			try {
-				indexer.reindex(workflowInstanceLink);
-			}
-			catch (SearchException se) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(se, se);
-				}
-			}
-		}
-
-		return workflowInstanceLink;
+		return workflowInstanceLinkPersistence.update(workflowInstanceLink,
+			merge);
 	}
 
 	/**
@@ -4035,12 +3991,6 @@ public abstract class WorkflowInstanceLinkLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
-	protected ClassLoader getClassLoader() {
-		Class<?> clazz = getClass();
-
-		return clazz.getClassLoader();
-	}
-
 	protected Class<?> getModelClass() {
 		return WorkflowInstanceLink.class;
 	}
@@ -4448,6 +4398,5 @@ public abstract class WorkflowInstanceLinkLocalServiceBaseImpl
 	protected CounterLocalService counterLocalService;
 	@BeanReference(type = PersistedModelLocalServiceRegistry.class)
 	protected PersistedModelLocalServiceRegistry persistedModelLocalServiceRegistry;
-	private static Log _log = LogFactoryUtil.getLog(WorkflowInstanceLinkLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
+import com.liferay.portal.service.BaseLocalService;
 import com.liferay.portal.service.PersistedModelLocalService;
 
 /**
@@ -36,7 +37,8 @@ import com.liferay.portal.service.PersistedModelLocalService;
  */
 @Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
 	PortalException.class, SystemException.class})
-public interface SocialActivityLocalService extends PersistedModelLocalService {
+public interface SocialActivityLocalService extends BaseLocalService,
+	PersistedModelLocalService {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -67,10 +69,12 @@ public interface SocialActivityLocalService extends PersistedModelLocalService {
 	* Deletes the social activity with the primary key from the database. Also notifies the appropriate model listeners.
 	*
 	* @param activityId the primary key of the social activity
+	* @return the social activity that was removed
 	* @throws PortalException if a social activity with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public void deleteSocialActivity(long activityId)
+	public com.liferay.portlet.social.model.SocialActivity deleteSocialActivity(
+		long activityId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -78,11 +82,14 @@ public interface SocialActivityLocalService extends PersistedModelLocalService {
 	* Deletes the social activity from the database. Also notifies the appropriate model listeners.
 	*
 	* @param socialActivity the social activity
+	* @return the social activity that was removed
 	* @throws SystemException if a system exception occurred
 	*/
-	public void deleteSocialActivity(
+	public com.liferay.portlet.social.model.SocialActivity deleteSocialActivity(
 		com.liferay.portlet.social.model.SocialActivity socialActivity)
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery();
 
 	/**
 	* Performs a dynamic query on the database and returns the matching rows.

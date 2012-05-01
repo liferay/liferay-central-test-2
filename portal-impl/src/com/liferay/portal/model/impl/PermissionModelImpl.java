@@ -34,7 +34,9 @@ import java.io.Serializable;
 import java.sql.Types;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * The base model implementation for the Permission service. Represents a row in the &quot;Permission_&quot; database table, with each column mapped to a property of this class.
@@ -166,6 +168,45 @@ public class PermissionModelImpl extends BaseModelImpl<Permission>
 
 	public String getModelClassName() {
 		return Permission.class.getName();
+	}
+
+	@Override
+	public Map<String, Object> getModelAttributes() {
+		Map<String, Object> attributes = new HashMap<String, Object>();
+
+		attributes.put("permissionId", getPermissionId());
+		attributes.put("companyId", getCompanyId());
+		attributes.put("actionId", getActionId());
+		attributes.put("resourceId", getResourceId());
+
+		return attributes;
+	}
+
+	@Override
+	public void setModelAttributes(Map<String, Object> attributes) {
+		Long permissionId = (Long)attributes.get("permissionId");
+
+		if (permissionId != null) {
+			setPermissionId(permissionId);
+		}
+
+		Long companyId = (Long)attributes.get("companyId");
+
+		if (companyId != null) {
+			setCompanyId(companyId);
+		}
+
+		String actionId = (String)attributes.get("actionId");
+
+		if (actionId != null) {
+			setActionId(actionId);
+		}
+
+		Long resourceId = (Long)attributes.get("resourceId");
+
+		if (resourceId != null) {
+			setResourceId(resourceId);
+		}
 	}
 
 	@JSON

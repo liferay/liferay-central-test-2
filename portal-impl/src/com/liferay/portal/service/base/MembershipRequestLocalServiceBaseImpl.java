@@ -23,13 +23,11 @@ import com.liferay.portal.kernel.bean.IdentifiableBean;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.search.Indexer;
-import com.liferay.portal.kernel.search.IndexerRegistryUtil;
-import com.liferay.portal.kernel.search.SearchException;
+import com.liferay.portal.kernel.search.Indexable;
+import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.MembershipRequest;
 import com.liferay.portal.model.PersistedModel;
@@ -37,6 +35,7 @@ import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountService;
 import com.liferay.portal.service.AddressLocalService;
 import com.liferay.portal.service.AddressService;
+import com.liferay.portal.service.BaseLocalServiceImpl;
 import com.liferay.portal.service.BrowserTrackerLocalService;
 import com.liferay.portal.service.CMISRepositoryLocalService;
 import com.liferay.portal.service.ClassNameLocalService;
@@ -242,7 +241,8 @@ import javax.sql.DataSource;
  * @generated
  */
 public abstract class MembershipRequestLocalServiceBaseImpl
-	implements MembershipRequestLocalService, IdentifiableBean {
+	extends BaseLocalServiceImpl implements MembershipRequestLocalService,
+		IdentifiableBean {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -256,27 +256,12 @@ public abstract class MembershipRequestLocalServiceBaseImpl
 	 * @return the membership request that was added
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Indexable(type = IndexableType.REINDEX)
 	public MembershipRequest addMembershipRequest(
 		MembershipRequest membershipRequest) throws SystemException {
 		membershipRequest.setNew(true);
 
-		membershipRequest = membershipRequestPersistence.update(membershipRequest,
-				false);
-
-		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
-
-		if (indexer != null) {
-			try {
-				indexer.reindex(membershipRequest);
-			}
-			catch (SearchException se) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(se, se);
-				}
-			}
-		}
-
-		return membershipRequest;
+		return membershipRequestPersistence.update(membershipRequest, false);
 	}
 
 	/**
@@ -293,49 +278,32 @@ public abstract class MembershipRequestLocalServiceBaseImpl
 	 * Deletes the membership request with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
 	 * @param membershipRequestId the primary key of the membership request
+	 * @return the membership request that was removed
 	 * @throws PortalException if a membership request with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public void deleteMembershipRequest(long membershipRequestId)
+	@Indexable(type = IndexableType.DELETE)
+	public MembershipRequest deleteMembershipRequest(long membershipRequestId)
 		throws PortalException, SystemException {
-		MembershipRequest membershipRequest = membershipRequestPersistence.remove(membershipRequestId);
-
-		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
-
-		if (indexer != null) {
-			try {
-				indexer.delete(membershipRequest);
-			}
-			catch (SearchException se) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(se, se);
-				}
-			}
-		}
+		return membershipRequestPersistence.remove(membershipRequestId);
 	}
 
 	/**
 	 * Deletes the membership request from the database. Also notifies the appropriate model listeners.
 	 *
 	 * @param membershipRequest the membership request
+	 * @return the membership request that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
-	public void deleteMembershipRequest(MembershipRequest membershipRequest)
-		throws SystemException {
-		membershipRequestPersistence.remove(membershipRequest);
+	@Indexable(type = IndexableType.DELETE)
+	public MembershipRequest deleteMembershipRequest(
+		MembershipRequest membershipRequest) throws SystemException {
+		return membershipRequestPersistence.remove(membershipRequest);
+	}
 
-		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
-
-		if (indexer != null) {
-			try {
-				indexer.delete(membershipRequest);
-			}
-			catch (SearchException se) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(se, se);
-				}
-			}
-		}
+	public DynamicQuery dynamicQuery() {
+		return DynamicQueryFactoryUtil.forClass(MembershipRequest.class,
+			getClassLoader());
 	}
 
 	/**
@@ -461,6 +429,7 @@ public abstract class MembershipRequestLocalServiceBaseImpl
 	 * @return the membership request that was updated
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Indexable(type = IndexableType.REINDEX)
 	public MembershipRequest updateMembershipRequest(
 		MembershipRequest membershipRequest) throws SystemException {
 		return updateMembershipRequest(membershipRequest, true);
@@ -474,28 +443,13 @@ public abstract class MembershipRequestLocalServiceBaseImpl
 	 * @return the membership request that was updated
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Indexable(type = IndexableType.REINDEX)
 	public MembershipRequest updateMembershipRequest(
 		MembershipRequest membershipRequest, boolean merge)
 		throws SystemException {
 		membershipRequest.setNew(false);
 
-		membershipRequest = membershipRequestPersistence.update(membershipRequest,
-				merge);
-
-		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
-
-		if (indexer != null) {
-			try {
-				indexer.reindex(membershipRequest);
-			}
-			catch (SearchException se) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(se, se);
-				}
-			}
-		}
-
-		return membershipRequest;
+		return membershipRequestPersistence.update(membershipRequest, merge);
 	}
 
 	/**
@@ -4052,12 +4006,6 @@ public abstract class MembershipRequestLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
-	protected ClassLoader getClassLoader() {
-		Class<?> clazz = getClass();
-
-		return clazz.getClassLoader();
-	}
-
 	protected Class<?> getModelClass() {
 		return MembershipRequest.class;
 	}
@@ -4467,6 +4415,5 @@ public abstract class MembershipRequestLocalServiceBaseImpl
 	protected MailService mailService;
 	@BeanReference(type = PersistedModelLocalServiceRegistry.class)
 	protected PersistedModelLocalServiceRegistry persistedModelLocalServiceRegistry;
-	private static Log _log = LogFactoryUtil.getLog(MembershipRequestLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

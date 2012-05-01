@@ -35,8 +35,8 @@ import com.liferay.portal.kernel.transaction.Transactional;
  */
 @Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
 	PortalException.class, SystemException.class})
-public interface ResourceTypePermissionLocalService
-	extends PersistedModelLocalService {
+public interface ResourceTypePermissionLocalService extends BaseLocalService,
+	PersistedModelLocalService {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -67,10 +67,12 @@ public interface ResourceTypePermissionLocalService
 	* Deletes the resource type permission with the primary key from the database. Also notifies the appropriate model listeners.
 	*
 	* @param resourceTypePermissionId the primary key of the resource type permission
+	* @return the resource type permission that was removed
 	* @throws PortalException if a resource type permission with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public void deleteResourceTypePermission(long resourceTypePermissionId)
+	public com.liferay.portal.model.ResourceTypePermission deleteResourceTypePermission(
+		long resourceTypePermissionId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -78,11 +80,14 @@ public interface ResourceTypePermissionLocalService
 	* Deletes the resource type permission from the database. Also notifies the appropriate model listeners.
 	*
 	* @param resourceTypePermission the resource type permission
+	* @return the resource type permission that was removed
 	* @throws SystemException if a system exception occurred
 	*/
-	public void deleteResourceTypePermission(
+	public com.liferay.portal.model.ResourceTypePermission deleteResourceTypePermission(
 		com.liferay.portal.model.ResourceTypePermission resourceTypePermission)
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery();
 
 	/**
 	* Performs a dynamic query on the database and returns the matching rows.

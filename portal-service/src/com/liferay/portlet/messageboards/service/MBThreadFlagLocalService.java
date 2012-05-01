@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
+import com.liferay.portal.service.BaseLocalService;
 import com.liferay.portal.service.PersistedModelLocalService;
 
 /**
@@ -36,7 +37,8 @@ import com.liferay.portal.service.PersistedModelLocalService;
  */
 @Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
 	PortalException.class, SystemException.class})
-public interface MBThreadFlagLocalService extends PersistedModelLocalService {
+public interface MBThreadFlagLocalService extends BaseLocalService,
+	PersistedModelLocalService {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -67,10 +69,12 @@ public interface MBThreadFlagLocalService extends PersistedModelLocalService {
 	* Deletes the message boards thread flag with the primary key from the database. Also notifies the appropriate model listeners.
 	*
 	* @param threadFlagId the primary key of the message boards thread flag
+	* @return the message boards thread flag that was removed
 	* @throws PortalException if a message boards thread flag with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public void deleteMBThreadFlag(long threadFlagId)
+	public com.liferay.portlet.messageboards.model.MBThreadFlag deleteMBThreadFlag(
+		long threadFlagId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -78,11 +82,14 @@ public interface MBThreadFlagLocalService extends PersistedModelLocalService {
 	* Deletes the message boards thread flag from the database. Also notifies the appropriate model listeners.
 	*
 	* @param mbThreadFlag the message boards thread flag
+	* @return the message boards thread flag that was removed
 	* @throws SystemException if a system exception occurred
 	*/
-	public void deleteMBThreadFlag(
+	public com.liferay.portlet.messageboards.model.MBThreadFlag deleteMBThreadFlag(
 		com.liferay.portlet.messageboards.model.MBThreadFlag mbThreadFlag)
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery();
 
 	/**
 	* Performs a dynamic query on the database and returns the matching rows.

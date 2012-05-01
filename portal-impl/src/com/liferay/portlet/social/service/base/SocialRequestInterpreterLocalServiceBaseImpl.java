@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.InfrastructureUtil;
+import com.liferay.portal.service.BaseLocalServiceImpl;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceService;
 import com.liferay.portal.service.UserLocalService;
@@ -66,7 +67,8 @@ import javax.sql.DataSource;
  * @generated
  */
 public abstract class SocialRequestInterpreterLocalServiceBaseImpl
-	implements SocialRequestInterpreterLocalService, IdentifiableBean {
+	extends BaseLocalServiceImpl implements SocialRequestInterpreterLocalService,
+		IdentifiableBean {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -619,12 +621,6 @@ public abstract class SocialRequestInterpreterLocalServiceBaseImpl
 	 */
 	public void setBeanIdentifier(String beanIdentifier) {
 		_beanIdentifier = beanIdentifier;
-	}
-
-	protected ClassLoader getClassLoader() {
-		Class<?> clazz = getClass();
-
-		return clazz.getClassLoader();
 	}
 
 	/**

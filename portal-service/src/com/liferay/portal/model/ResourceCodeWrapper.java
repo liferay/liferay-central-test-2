@@ -14,6 +14,9 @@
 
 package com.liferay.portal.model;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * <p>
  * This class is a wrapper for {@link ResourceCode}.
@@ -35,6 +38,43 @@ public class ResourceCodeWrapper implements ResourceCode,
 
 	public String getModelClassName() {
 		return ResourceCode.class.getName();
+	}
+
+	public Map<String, Object> getModelAttributes() {
+		Map<String, Object> attributes = new HashMap<String, Object>();
+
+		attributes.put("codeId", getCodeId());
+		attributes.put("companyId", getCompanyId());
+		attributes.put("name", getName());
+		attributes.put("scope", getScope());
+
+		return attributes;
+	}
+
+	public void setModelAttributes(Map<String, Object> attributes) {
+		Long codeId = (Long)attributes.get("codeId");
+
+		if (codeId != null) {
+			setCodeId(codeId);
+		}
+
+		Long companyId = (Long)attributes.get("companyId");
+
+		if (companyId != null) {
+			setCompanyId(companyId);
+		}
+
+		String name = (String)attributes.get("name");
+
+		if (name != null) {
+			setName(name);
+		}
+
+		Integer scope = (Integer)attributes.get("scope");
+
+		if (scope != null) {
+			setScope(scope);
+		}
 	}
 
 	/**

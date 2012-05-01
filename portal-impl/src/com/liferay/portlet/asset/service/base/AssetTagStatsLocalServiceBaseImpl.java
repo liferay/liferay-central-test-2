@@ -21,15 +21,14 @@ import com.liferay.portal.kernel.bean.IdentifiableBean;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.search.Indexer;
-import com.liferay.portal.kernel.search.IndexerRegistryUtil;
-import com.liferay.portal.kernel.search.SearchException;
+import com.liferay.portal.kernel.search.Indexable;
+import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.PersistedModel;
+import com.liferay.portal.service.BaseLocalServiceImpl;
 import com.liferay.portal.service.PersistedModelLocalServiceRegistry;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceService;
@@ -90,7 +89,8 @@ import javax.sql.DataSource;
  * @generated
  */
 public abstract class AssetTagStatsLocalServiceBaseImpl
-	implements AssetTagStatsLocalService, IdentifiableBean {
+	extends BaseLocalServiceImpl implements AssetTagStatsLocalService,
+		IdentifiableBean {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -104,26 +104,12 @@ public abstract class AssetTagStatsLocalServiceBaseImpl
 	 * @return the asset tag stats that was added
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Indexable(type = IndexableType.REINDEX)
 	public AssetTagStats addAssetTagStats(AssetTagStats assetTagStats)
 		throws SystemException {
 		assetTagStats.setNew(true);
 
-		assetTagStats = assetTagStatsPersistence.update(assetTagStats, false);
-
-		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
-
-		if (indexer != null) {
-			try {
-				indexer.reindex(assetTagStats);
-			}
-			catch (SearchException se) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(se, se);
-				}
-			}
-		}
-
-		return assetTagStats;
+		return assetTagStatsPersistence.update(assetTagStats, false);
 	}
 
 	/**
@@ -140,49 +126,32 @@ public abstract class AssetTagStatsLocalServiceBaseImpl
 	 * Deletes the asset tag stats with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
 	 * @param tagStatsId the primary key of the asset tag stats
+	 * @return the asset tag stats that was removed
 	 * @throws PortalException if a asset tag stats with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public void deleteAssetTagStats(long tagStatsId)
+	@Indexable(type = IndexableType.DELETE)
+	public AssetTagStats deleteAssetTagStats(long tagStatsId)
 		throws PortalException, SystemException {
-		AssetTagStats assetTagStats = assetTagStatsPersistence.remove(tagStatsId);
-
-		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
-
-		if (indexer != null) {
-			try {
-				indexer.delete(assetTagStats);
-			}
-			catch (SearchException se) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(se, se);
-				}
-			}
-		}
+		return assetTagStatsPersistence.remove(tagStatsId);
 	}
 
 	/**
 	 * Deletes the asset tag stats from the database. Also notifies the appropriate model listeners.
 	 *
 	 * @param assetTagStats the asset tag stats
+	 * @return the asset tag stats that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
-	public void deleteAssetTagStats(AssetTagStats assetTagStats)
+	@Indexable(type = IndexableType.DELETE)
+	public AssetTagStats deleteAssetTagStats(AssetTagStats assetTagStats)
 		throws SystemException {
-		assetTagStatsPersistence.remove(assetTagStats);
+		return assetTagStatsPersistence.remove(assetTagStats);
+	}
 
-		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
-
-		if (indexer != null) {
-			try {
-				indexer.delete(assetTagStats);
-			}
-			catch (SearchException se) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(se, se);
-				}
-			}
-		}
+	public DynamicQuery dynamicQuery() {
+		return DynamicQueryFactoryUtil.forClass(AssetTagStats.class,
+			getClassLoader());
 	}
 
 	/**
@@ -308,6 +277,7 @@ public abstract class AssetTagStatsLocalServiceBaseImpl
 	 * @return the asset tag stats that was updated
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Indexable(type = IndexableType.REINDEX)
 	public AssetTagStats updateAssetTagStats(AssetTagStats assetTagStats)
 		throws SystemException {
 		return updateAssetTagStats(assetTagStats, true);
@@ -321,26 +291,12 @@ public abstract class AssetTagStatsLocalServiceBaseImpl
 	 * @return the asset tag stats that was updated
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Indexable(type = IndexableType.REINDEX)
 	public AssetTagStats updateAssetTagStats(AssetTagStats assetTagStats,
 		boolean merge) throws SystemException {
 		assetTagStats.setNew(false);
 
-		assetTagStats = assetTagStatsPersistence.update(assetTagStats, merge);
-
-		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
-
-		if (indexer != null) {
-			try {
-				indexer.reindex(assetTagStats);
-			}
-			catch (SearchException se) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(se, se);
-				}
-			}
-		}
-
-		return assetTagStats;
+		return assetTagStatsPersistence.update(assetTagStats, merge);
 	}
 
 	/**
@@ -1079,12 +1035,6 @@ public abstract class AssetTagStatsLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
-	protected ClassLoader getClassLoader() {
-		Class<?> clazz = getClass();
-
-		return clazz.getClassLoader();
-	}
-
 	protected Class<?> getModelClass() {
 		return AssetTagStats.class;
 	}
@@ -1190,6 +1140,5 @@ public abstract class AssetTagStatsLocalServiceBaseImpl
 	protected UserFinder userFinder;
 	@BeanReference(type = PersistedModelLocalServiceRegistry.class)
 	protected PersistedModelLocalServiceRegistry persistedModelLocalServiceRegistry;
-	private static Log _log = LogFactoryUtil.getLog(AssetTagStatsLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

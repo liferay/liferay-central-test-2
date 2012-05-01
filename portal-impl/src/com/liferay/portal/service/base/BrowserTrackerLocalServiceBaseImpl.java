@@ -21,13 +21,11 @@ import com.liferay.portal.kernel.bean.IdentifiableBean;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.search.Indexer;
-import com.liferay.portal.kernel.search.IndexerRegistryUtil;
-import com.liferay.portal.kernel.search.SearchException;
+import com.liferay.portal.kernel.search.Indexable;
+import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.BrowserTracker;
 import com.liferay.portal.model.PersistedModel;
@@ -35,6 +33,7 @@ import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountService;
 import com.liferay.portal.service.AddressLocalService;
 import com.liferay.portal.service.AddressService;
+import com.liferay.portal.service.BaseLocalServiceImpl;
 import com.liferay.portal.service.BrowserTrackerLocalService;
 import com.liferay.portal.service.CMISRepositoryLocalService;
 import com.liferay.portal.service.ClassNameLocalService;
@@ -240,7 +239,8 @@ import javax.sql.DataSource;
  * @generated
  */
 public abstract class BrowserTrackerLocalServiceBaseImpl
-	implements BrowserTrackerLocalService, IdentifiableBean {
+	extends BaseLocalServiceImpl implements BrowserTrackerLocalService,
+		IdentifiableBean {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -254,26 +254,12 @@ public abstract class BrowserTrackerLocalServiceBaseImpl
 	 * @return the browser tracker that was added
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Indexable(type = IndexableType.REINDEX)
 	public BrowserTracker addBrowserTracker(BrowserTracker browserTracker)
 		throws SystemException {
 		browserTracker.setNew(true);
 
-		browserTracker = browserTrackerPersistence.update(browserTracker, false);
-
-		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
-
-		if (indexer != null) {
-			try {
-				indexer.reindex(browserTracker);
-			}
-			catch (SearchException se) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(se, se);
-				}
-			}
-		}
-
-		return browserTracker;
+		return browserTrackerPersistence.update(browserTracker, false);
 	}
 
 	/**
@@ -290,49 +276,32 @@ public abstract class BrowserTrackerLocalServiceBaseImpl
 	 * Deletes the browser tracker with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
 	 * @param browserTrackerId the primary key of the browser tracker
+	 * @return the browser tracker that was removed
 	 * @throws PortalException if a browser tracker with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public void deleteBrowserTracker(long browserTrackerId)
+	@Indexable(type = IndexableType.DELETE)
+	public BrowserTracker deleteBrowserTracker(long browserTrackerId)
 		throws PortalException, SystemException {
-		BrowserTracker browserTracker = browserTrackerPersistence.remove(browserTrackerId);
-
-		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
-
-		if (indexer != null) {
-			try {
-				indexer.delete(browserTracker);
-			}
-			catch (SearchException se) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(se, se);
-				}
-			}
-		}
+		return browserTrackerPersistence.remove(browserTrackerId);
 	}
 
 	/**
 	 * Deletes the browser tracker from the database. Also notifies the appropriate model listeners.
 	 *
 	 * @param browserTracker the browser tracker
+	 * @return the browser tracker that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
-	public void deleteBrowserTracker(BrowserTracker browserTracker)
+	@Indexable(type = IndexableType.DELETE)
+	public BrowserTracker deleteBrowserTracker(BrowserTracker browserTracker)
 		throws SystemException {
-		browserTrackerPersistence.remove(browserTracker);
+		return browserTrackerPersistence.remove(browserTracker);
+	}
 
-		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
-
-		if (indexer != null) {
-			try {
-				indexer.delete(browserTracker);
-			}
-			catch (SearchException se) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(se, se);
-				}
-			}
-		}
+	public DynamicQuery dynamicQuery() {
+		return DynamicQueryFactoryUtil.forClass(BrowserTracker.class,
+			getClassLoader());
 	}
 
 	/**
@@ -458,6 +427,7 @@ public abstract class BrowserTrackerLocalServiceBaseImpl
 	 * @return the browser tracker that was updated
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Indexable(type = IndexableType.REINDEX)
 	public BrowserTracker updateBrowserTracker(BrowserTracker browserTracker)
 		throws SystemException {
 		return updateBrowserTracker(browserTracker, true);
@@ -471,26 +441,12 @@ public abstract class BrowserTrackerLocalServiceBaseImpl
 	 * @return the browser tracker that was updated
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Indexable(type = IndexableType.REINDEX)
 	public BrowserTracker updateBrowserTracker(BrowserTracker browserTracker,
 		boolean merge) throws SystemException {
 		browserTracker.setNew(false);
 
-		browserTracker = browserTrackerPersistence.update(browserTracker, merge);
-
-		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
-
-		if (indexer != null) {
-			try {
-				indexer.reindex(browserTracker);
-			}
-			catch (SearchException se) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(se, se);
-				}
-			}
-		}
-
-		return browserTracker;
+		return browserTrackerPersistence.update(browserTracker, merge);
 	}
 
 	/**
@@ -4029,12 +3985,6 @@ public abstract class BrowserTrackerLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
-	protected ClassLoader getClassLoader() {
-		Class<?> clazz = getClass();
-
-		return clazz.getClassLoader();
-	}
-
 	protected Class<?> getModelClass() {
 		return BrowserTracker.class;
 	}
@@ -4442,6 +4392,5 @@ public abstract class BrowserTrackerLocalServiceBaseImpl
 	protected CounterLocalService counterLocalService;
 	@BeanReference(type = PersistedModelLocalServiceRegistry.class)
 	protected PersistedModelLocalServiceRegistry persistedModelLocalServiceRegistry;
-	private static Log _log = LogFactoryUtil.getLog(BrowserTrackerLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

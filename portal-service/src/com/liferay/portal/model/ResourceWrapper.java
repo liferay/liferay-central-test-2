@@ -14,6 +14,9 @@
 
 package com.liferay.portal.model;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * <p>
  * This class is a wrapper for {@link Resource}.
@@ -34,6 +37,36 @@ public class ResourceWrapper implements Resource, ModelWrapper<Resource> {
 
 	public String getModelClassName() {
 		return Resource.class.getName();
+	}
+
+	public Map<String, Object> getModelAttributes() {
+		Map<String, Object> attributes = new HashMap<String, Object>();
+
+		attributes.put("resourceId", getResourceId());
+		attributes.put("codeId", getCodeId());
+		attributes.put("primKey", getPrimKey());
+
+		return attributes;
+	}
+
+	public void setModelAttributes(Map<String, Object> attributes) {
+		Long resourceId = (Long)attributes.get("resourceId");
+
+		if (resourceId != null) {
+			setResourceId(resourceId);
+		}
+
+		Long codeId = (Long)attributes.get("codeId");
+
+		if (codeId != null) {
+			setCodeId(codeId);
+		}
+
+		String primKey = (String)attributes.get("primKey");
+
+		if (primKey != null) {
+			setPrimKey(primKey);
+		}
 	}
 
 	/**

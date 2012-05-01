@@ -34,7 +34,9 @@ import java.io.Serializable;
 import java.sql.Types;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * The base model implementation for the Resource service. Represents a row in the &quot;Resource_&quot; database table, with each column mapped to a property of this class.
@@ -140,6 +142,38 @@ public class ResourceModelImpl extends BaseModelImpl<Resource>
 
 	public String getModelClassName() {
 		return Resource.class.getName();
+	}
+
+	@Override
+	public Map<String, Object> getModelAttributes() {
+		Map<String, Object> attributes = new HashMap<String, Object>();
+
+		attributes.put("resourceId", getResourceId());
+		attributes.put("codeId", getCodeId());
+		attributes.put("primKey", getPrimKey());
+
+		return attributes;
+	}
+
+	@Override
+	public void setModelAttributes(Map<String, Object> attributes) {
+		Long resourceId = (Long)attributes.get("resourceId");
+
+		if (resourceId != null) {
+			setResourceId(resourceId);
+		}
+
+		Long codeId = (Long)attributes.get("codeId");
+
+		if (codeId != null) {
+			setCodeId(codeId);
+		}
+
+		String primKey = (String)attributes.get("primKey");
+
+		if (primKey != null) {
+			setPrimKey(primKey);
+		}
 	}
 
 	@JSON

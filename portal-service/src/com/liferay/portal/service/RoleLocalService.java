@@ -35,7 +35,8 @@ import com.liferay.portal.kernel.transaction.Transactional;
  */
 @Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
 	PortalException.class, SystemException.class})
-public interface RoleLocalService extends PersistedModelLocalService {
+public interface RoleLocalService extends BaseLocalService,
+	PersistedModelLocalService {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -65,10 +66,11 @@ public interface RoleLocalService extends PersistedModelLocalService {
 	* Deletes the role with the primary key from the database. Also notifies the appropriate model listeners.
 	*
 	* @param roleId the primary key of the role
+	* @return the role that was removed
 	* @throws PortalException if a role with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public void deleteRole(long roleId)
+	public com.liferay.portal.model.Role deleteRole(long roleId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -76,12 +78,16 @@ public interface RoleLocalService extends PersistedModelLocalService {
 	* Deletes the role from the database. Also notifies the appropriate model listeners.
 	*
 	* @param role the role
+	* @return the role that was removed
 	* @throws PortalException
 	* @throws SystemException if a system exception occurred
 	*/
-	public void deleteRole(com.liferay.portal.model.Role role)
+	public com.liferay.portal.model.Role deleteRole(
+		com.liferay.portal.model.Role role)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery();
 
 	/**
 	* Performs a dynamic query on the database and returns the matching rows.

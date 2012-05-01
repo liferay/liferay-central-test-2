@@ -21,13 +21,11 @@ import com.liferay.portal.kernel.bean.IdentifiableBean;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.search.Indexer;
-import com.liferay.portal.kernel.search.IndexerRegistryUtil;
-import com.liferay.portal.kernel.search.SearchException;
+import com.liferay.portal.kernel.search.Indexable;
+import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.PersistedModel;
 import com.liferay.portal.model.Team;
@@ -35,6 +33,7 @@ import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountService;
 import com.liferay.portal.service.AddressLocalService;
 import com.liferay.portal.service.AddressService;
+import com.liferay.portal.service.BaseLocalServiceImpl;
 import com.liferay.portal.service.BrowserTrackerLocalService;
 import com.liferay.portal.service.CMISRepositoryLocalService;
 import com.liferay.portal.service.ClassNameLocalService;
@@ -239,8 +238,8 @@ import javax.sql.DataSource;
  * @see com.liferay.portal.service.TeamLocalServiceUtil
  * @generated
  */
-public abstract class TeamLocalServiceBaseImpl implements TeamLocalService,
-	IdentifiableBean {
+public abstract class TeamLocalServiceBaseImpl extends BaseLocalServiceImpl
+	implements TeamLocalService, IdentifiableBean {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -254,25 +253,11 @@ public abstract class TeamLocalServiceBaseImpl implements TeamLocalService,
 	 * @return the team that was added
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Indexable(type = IndexableType.REINDEX)
 	public Team addTeam(Team team) throws SystemException {
 		team.setNew(true);
 
-		team = teamPersistence.update(team, false);
-
-		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
-
-		if (indexer != null) {
-			try {
-				indexer.reindex(team);
-			}
-			catch (SearchException se) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(se, se);
-				}
-			}
-		}
-
-		return team;
+		return teamPersistence.update(team, false);
 	}
 
 	/**
@@ -289,48 +274,30 @@ public abstract class TeamLocalServiceBaseImpl implements TeamLocalService,
 	 * Deletes the team with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
 	 * @param teamId the primary key of the team
+	 * @return the team that was removed
 	 * @throws PortalException if a team with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public void deleteTeam(long teamId) throws PortalException, SystemException {
-		Team team = teamPersistence.remove(teamId);
-
-		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
-
-		if (indexer != null) {
-			try {
-				indexer.delete(team);
-			}
-			catch (SearchException se) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(se, se);
-				}
-			}
-		}
+	@Indexable(type = IndexableType.DELETE)
+	public Team deleteTeam(long teamId) throws PortalException, SystemException {
+		return teamPersistence.remove(teamId);
 	}
 
 	/**
 	 * Deletes the team from the database. Also notifies the appropriate model listeners.
 	 *
 	 * @param team the team
+	 * @return the team that was removed
 	 * @throws PortalException
 	 * @throws SystemException if a system exception occurred
 	 */
-	public void deleteTeam(Team team) throws PortalException, SystemException {
-		teamPersistence.remove(team);
+	@Indexable(type = IndexableType.DELETE)
+	public Team deleteTeam(Team team) throws PortalException, SystemException {
+		return teamPersistence.remove(team);
+	}
 
-		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
-
-		if (indexer != null) {
-			try {
-				indexer.delete(team);
-			}
-			catch (SearchException se) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(se, se);
-				}
-			}
-		}
+	public DynamicQuery dynamicQuery() {
+		return DynamicQueryFactoryUtil.forClass(Team.class, getClassLoader());
 	}
 
 	/**
@@ -452,6 +419,7 @@ public abstract class TeamLocalServiceBaseImpl implements TeamLocalService,
 	 * @return the team that was updated
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Indexable(type = IndexableType.REINDEX)
 	public Team updateTeam(Team team) throws SystemException {
 		return updateTeam(team, true);
 	}
@@ -464,25 +432,11 @@ public abstract class TeamLocalServiceBaseImpl implements TeamLocalService,
 	 * @return the team that was updated
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Indexable(type = IndexableType.REINDEX)
 	public Team updateTeam(Team team, boolean merge) throws SystemException {
 		team.setNew(false);
 
-		team = teamPersistence.update(team, merge);
-
-		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
-
-		if (indexer != null) {
-			try {
-				indexer.reindex(team);
-			}
-			catch (SearchException se) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(se, se);
-				}
-			}
-		}
-
-		return team;
+		return teamPersistence.update(team, merge);
 	}
 
 	/**
@@ -4021,12 +3975,6 @@ public abstract class TeamLocalServiceBaseImpl implements TeamLocalService,
 		_beanIdentifier = beanIdentifier;
 	}
 
-	protected ClassLoader getClassLoader() {
-		Class<?> clazz = getClass();
-
-		return clazz.getClassLoader();
-	}
-
 	protected Class<?> getModelClass() {
 		return Team.class;
 	}
@@ -4434,6 +4382,5 @@ public abstract class TeamLocalServiceBaseImpl implements TeamLocalService,
 	protected CounterLocalService counterLocalService;
 	@BeanReference(type = PersistedModelLocalServiceRegistry.class)
 	protected PersistedModelLocalServiceRegistry persistedModelLocalServiceRegistry;
-	private static Log _log = LogFactoryUtil.getLog(TeamLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

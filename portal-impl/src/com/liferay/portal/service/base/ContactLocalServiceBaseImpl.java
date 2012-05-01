@@ -21,13 +21,11 @@ import com.liferay.portal.kernel.bean.IdentifiableBean;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.search.Indexer;
-import com.liferay.portal.kernel.search.IndexerRegistryUtil;
-import com.liferay.portal.kernel.search.SearchException;
+import com.liferay.portal.kernel.search.Indexable;
+import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.PersistedModel;
@@ -35,6 +33,7 @@ import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountService;
 import com.liferay.portal.service.AddressLocalService;
 import com.liferay.portal.service.AddressService;
+import com.liferay.portal.service.BaseLocalServiceImpl;
 import com.liferay.portal.service.BrowserTrackerLocalService;
 import com.liferay.portal.service.CMISRepositoryLocalService;
 import com.liferay.portal.service.ClassNameLocalService;
@@ -239,8 +238,8 @@ import javax.sql.DataSource;
  * @see com.liferay.portal.service.ContactLocalServiceUtil
  * @generated
  */
-public abstract class ContactLocalServiceBaseImpl implements ContactLocalService,
-	IdentifiableBean {
+public abstract class ContactLocalServiceBaseImpl extends BaseLocalServiceImpl
+	implements ContactLocalService, IdentifiableBean {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -254,25 +253,11 @@ public abstract class ContactLocalServiceBaseImpl implements ContactLocalService
 	 * @return the contact that was added
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Indexable(type = IndexableType.REINDEX)
 	public Contact addContact(Contact contact) throws SystemException {
 		contact.setNew(true);
 
-		contact = contactPersistence.update(contact, false);
-
-		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
-
-		if (indexer != null) {
-			try {
-				indexer.reindex(contact);
-			}
-			catch (SearchException se) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(se, se);
-				}
-			}
-		}
-
-		return contact;
+		return contactPersistence.update(contact, false);
 	}
 
 	/**
@@ -289,48 +274,30 @@ public abstract class ContactLocalServiceBaseImpl implements ContactLocalService
 	 * Deletes the contact with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
 	 * @param contactId the primary key of the contact
+	 * @return the contact that was removed
 	 * @throws PortalException if a contact with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public void deleteContact(long contactId)
+	@Indexable(type = IndexableType.DELETE)
+	public Contact deleteContact(long contactId)
 		throws PortalException, SystemException {
-		Contact contact = contactPersistence.remove(contactId);
-
-		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
-
-		if (indexer != null) {
-			try {
-				indexer.delete(contact);
-			}
-			catch (SearchException se) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(se, se);
-				}
-			}
-		}
+		return contactPersistence.remove(contactId);
 	}
 
 	/**
 	 * Deletes the contact from the database. Also notifies the appropriate model listeners.
 	 *
 	 * @param contact the contact
+	 * @return the contact that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
-	public void deleteContact(Contact contact) throws SystemException {
-		contactPersistence.remove(contact);
+	@Indexable(type = IndexableType.DELETE)
+	public Contact deleteContact(Contact contact) throws SystemException {
+		return contactPersistence.remove(contact);
+	}
 
-		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
-
-		if (indexer != null) {
-			try {
-				indexer.delete(contact);
-			}
-			catch (SearchException se) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(se, se);
-				}
-			}
-		}
+	public DynamicQuery dynamicQuery() {
+		return DynamicQueryFactoryUtil.forClass(Contact.class, getClassLoader());
 	}
 
 	/**
@@ -454,6 +421,7 @@ public abstract class ContactLocalServiceBaseImpl implements ContactLocalService
 	 * @return the contact that was updated
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Indexable(type = IndexableType.REINDEX)
 	public Contact updateContact(Contact contact) throws SystemException {
 		return updateContact(contact, true);
 	}
@@ -466,26 +434,12 @@ public abstract class ContactLocalServiceBaseImpl implements ContactLocalService
 	 * @return the contact that was updated
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Indexable(type = IndexableType.REINDEX)
 	public Contact updateContact(Contact contact, boolean merge)
 		throws SystemException {
 		contact.setNew(false);
 
-		contact = contactPersistence.update(contact, merge);
-
-		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
-
-		if (indexer != null) {
-			try {
-				indexer.reindex(contact);
-			}
-			catch (SearchException se) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(se, se);
-				}
-			}
-		}
-
-		return contact;
+		return contactPersistence.update(contact, merge);
 	}
 
 	/**
@@ -4024,12 +3978,6 @@ public abstract class ContactLocalServiceBaseImpl implements ContactLocalService
 		_beanIdentifier = beanIdentifier;
 	}
 
-	protected ClassLoader getClassLoader() {
-		Class<?> clazz = getClass();
-
-		return clazz.getClassLoader();
-	}
-
 	protected Class<?> getModelClass() {
 		return Contact.class;
 	}
@@ -4437,6 +4385,5 @@ public abstract class ContactLocalServiceBaseImpl implements ContactLocalService
 	protected CounterLocalService counterLocalService;
 	@BeanReference(type = PersistedModelLocalServiceRegistry.class)
 	protected PersistedModelLocalServiceRegistry persistedModelLocalServiceRegistry;
-	private static Log _log = LogFactoryUtil.getLog(ContactLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

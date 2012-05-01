@@ -35,7 +35,8 @@ import com.liferay.portal.kernel.transaction.Transactional;
  */
 @Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
 	PortalException.class, SystemException.class})
-public interface WebsiteLocalService extends PersistedModelLocalService {
+public interface WebsiteLocalService extends BaseLocalService,
+	PersistedModelLocalService {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -65,10 +66,11 @@ public interface WebsiteLocalService extends PersistedModelLocalService {
 	* Deletes the website with the primary key from the database. Also notifies the appropriate model listeners.
 	*
 	* @param websiteId the primary key of the website
+	* @return the website that was removed
 	* @throws PortalException if a website with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public void deleteWebsite(long websiteId)
+	public com.liferay.portal.model.Website deleteWebsite(long websiteId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -76,10 +78,14 @@ public interface WebsiteLocalService extends PersistedModelLocalService {
 	* Deletes the website from the database. Also notifies the appropriate model listeners.
 	*
 	* @param website the website
+	* @return the website that was removed
 	* @throws SystemException if a system exception occurred
 	*/
-	public void deleteWebsite(com.liferay.portal.model.Website website)
+	public com.liferay.portal.model.Website deleteWebsite(
+		com.liferay.portal.model.Website website)
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery();
 
 	/**
 	* Performs a dynamic query on the database and returns the matching rows.

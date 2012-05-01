@@ -21,11 +21,11 @@ import com.liferay.portal.kernel.bean.IdentifiableBean;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.service.BaseServiceImpl;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceService;
 import com.liferay.portal.service.UserLocalService;
 import com.liferay.portal.service.UserService;
-import com.liferay.portal.service.base.PrincipalBean;
 import com.liferay.portal.service.persistence.ResourceFinder;
 import com.liferay.portal.service.persistence.ResourcePersistence;
 import com.liferay.portal.service.persistence.UserFinder;
@@ -60,7 +60,7 @@ import javax.sql.DataSource;
  * @see com.liferay.portlet.mobiledevicerules.service.MDRRuleServiceUtil
  * @generated
  */
-public abstract class MDRRuleServiceBaseImpl extends PrincipalBean
+public abstract class MDRRuleServiceBaseImpl extends BaseServiceImpl
 	implements MDRRuleService, IdentifiableBean {
 	/*
 	 * NOTE FOR DEVELOPERS:
@@ -494,12 +494,6 @@ public abstract class MDRRuleServiceBaseImpl extends PrincipalBean
 	 */
 	public void setBeanIdentifier(String beanIdentifier) {
 		_beanIdentifier = beanIdentifier;
-	}
-
-	protected ClassLoader getClassLoader() {
-		Class<?> clazz = getClass();
-
-		return clazz.getClassLoader();
 	}
 
 	protected Class<?> getModelClass() {

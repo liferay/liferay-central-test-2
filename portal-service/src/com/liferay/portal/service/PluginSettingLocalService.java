@@ -35,7 +35,8 @@ import com.liferay.portal.kernel.transaction.Transactional;
  */
 @Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
 	PortalException.class, SystemException.class})
-public interface PluginSettingLocalService extends PersistedModelLocalService {
+public interface PluginSettingLocalService extends BaseLocalService,
+	PersistedModelLocalService {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -66,10 +67,12 @@ public interface PluginSettingLocalService extends PersistedModelLocalService {
 	* Deletes the plugin setting with the primary key from the database. Also notifies the appropriate model listeners.
 	*
 	* @param pluginSettingId the primary key of the plugin setting
+	* @return the plugin setting that was removed
 	* @throws PortalException if a plugin setting with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public void deletePluginSetting(long pluginSettingId)
+	public com.liferay.portal.model.PluginSetting deletePluginSetting(
+		long pluginSettingId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -77,11 +80,14 @@ public interface PluginSettingLocalService extends PersistedModelLocalService {
 	* Deletes the plugin setting from the database. Also notifies the appropriate model listeners.
 	*
 	* @param pluginSetting the plugin setting
+	* @return the plugin setting that was removed
 	* @throws SystemException if a system exception occurred
 	*/
-	public void deletePluginSetting(
+	public com.liferay.portal.model.PluginSetting deletePluginSetting(
 		com.liferay.portal.model.PluginSetting pluginSetting)
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery();
 
 	/**
 	* Performs a dynamic query on the database and returns the matching rows.

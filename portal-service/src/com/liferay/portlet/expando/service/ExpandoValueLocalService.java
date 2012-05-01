@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
+import com.liferay.portal.service.BaseLocalService;
 import com.liferay.portal.service.PersistedModelLocalService;
 
 /**
@@ -36,7 +37,8 @@ import com.liferay.portal.service.PersistedModelLocalService;
  */
 @Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
 	PortalException.class, SystemException.class})
-public interface ExpandoValueLocalService extends PersistedModelLocalService {
+public interface ExpandoValueLocalService extends BaseLocalService,
+	PersistedModelLocalService {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -67,10 +69,12 @@ public interface ExpandoValueLocalService extends PersistedModelLocalService {
 	* Deletes the expando value with the primary key from the database. Also notifies the appropriate model listeners.
 	*
 	* @param valueId the primary key of the expando value
+	* @return the expando value that was removed
 	* @throws PortalException if a expando value with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public void deleteExpandoValue(long valueId)
+	public com.liferay.portlet.expando.model.ExpandoValue deleteExpandoValue(
+		long valueId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -78,11 +82,14 @@ public interface ExpandoValueLocalService extends PersistedModelLocalService {
 	* Deletes the expando value from the database. Also notifies the appropriate model listeners.
 	*
 	* @param expandoValue the expando value
+	* @return the expando value that was removed
 	* @throws SystemException if a system exception occurred
 	*/
-	public void deleteExpandoValue(
+	public com.liferay.portlet.expando.model.ExpandoValue deleteExpandoValue(
 		com.liferay.portlet.expando.model.ExpandoValue expandoValue)
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery();
 
 	/**
 	* Performs a dynamic query on the database and returns the matching rows.

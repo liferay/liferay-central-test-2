@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
+import com.liferay.portal.service.BaseLocalService;
 import com.liferay.portal.service.PersistedModelLocalService;
 
 /**
@@ -36,7 +37,8 @@ import com.liferay.portal.service.PersistedModelLocalService;
  */
 @Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
 	PortalException.class, SystemException.class})
-public interface DDMContentLocalService extends PersistedModelLocalService {
+public interface DDMContentLocalService extends BaseLocalService,
+	PersistedModelLocalService {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -67,10 +69,12 @@ public interface DDMContentLocalService extends PersistedModelLocalService {
 	* Deletes the d d m content with the primary key from the database. Also notifies the appropriate model listeners.
 	*
 	* @param contentId the primary key of the d d m content
+	* @return the d d m content that was removed
 	* @throws PortalException if a d d m content with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public void deleteDDMContent(long contentId)
+	public com.liferay.portlet.dynamicdatamapping.model.DDMContent deleteDDMContent(
+		long contentId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -78,11 +82,14 @@ public interface DDMContentLocalService extends PersistedModelLocalService {
 	* Deletes the d d m content from the database. Also notifies the appropriate model listeners.
 	*
 	* @param ddmContent the d d m content
+	* @return the d d m content that was removed
 	* @throws SystemException if a system exception occurred
 	*/
-	public void deleteDDMContent(
+	public com.liferay.portlet.dynamicdatamapping.model.DDMContent deleteDDMContent(
 		com.liferay.portlet.dynamicdatamapping.model.DDMContent ddmContent)
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery();
 
 	/**
 	* Performs a dynamic query on the database and returns the matching rows.

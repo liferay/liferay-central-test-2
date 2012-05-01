@@ -21,13 +21,11 @@ import com.liferay.portal.kernel.bean.IdentifiableBean;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.search.Indexer;
-import com.liferay.portal.kernel.search.IndexerRegistryUtil;
-import com.liferay.portal.kernel.search.SearchException;
+import com.liferay.portal.kernel.search.Indexable;
+import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.PersistedModel;
 import com.liferay.portal.model.RepositoryEntry;
@@ -35,6 +33,7 @@ import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountService;
 import com.liferay.portal.service.AddressLocalService;
 import com.liferay.portal.service.AddressService;
+import com.liferay.portal.service.BaseLocalServiceImpl;
 import com.liferay.portal.service.BrowserTrackerLocalService;
 import com.liferay.portal.service.CMISRepositoryLocalService;
 import com.liferay.portal.service.ClassNameLocalService;
@@ -240,7 +239,8 @@ import javax.sql.DataSource;
  * @generated
  */
 public abstract class RepositoryEntryLocalServiceBaseImpl
-	implements RepositoryEntryLocalService, IdentifiableBean {
+	extends BaseLocalServiceImpl implements RepositoryEntryLocalService,
+		IdentifiableBean {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -254,27 +254,12 @@ public abstract class RepositoryEntryLocalServiceBaseImpl
 	 * @return the repository entry that was added
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Indexable(type = IndexableType.REINDEX)
 	public RepositoryEntry addRepositoryEntry(RepositoryEntry repositoryEntry)
 		throws SystemException {
 		repositoryEntry.setNew(true);
 
-		repositoryEntry = repositoryEntryPersistence.update(repositoryEntry,
-				false);
-
-		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
-
-		if (indexer != null) {
-			try {
-				indexer.reindex(repositoryEntry);
-			}
-			catch (SearchException se) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(se, se);
-				}
-			}
-		}
-
-		return repositoryEntry;
+		return repositoryEntryPersistence.update(repositoryEntry, false);
 	}
 
 	/**
@@ -291,49 +276,32 @@ public abstract class RepositoryEntryLocalServiceBaseImpl
 	 * Deletes the repository entry with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
 	 * @param repositoryEntryId the primary key of the repository entry
+	 * @return the repository entry that was removed
 	 * @throws PortalException if a repository entry with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public void deleteRepositoryEntry(long repositoryEntryId)
+	@Indexable(type = IndexableType.DELETE)
+	public RepositoryEntry deleteRepositoryEntry(long repositoryEntryId)
 		throws PortalException, SystemException {
-		RepositoryEntry repositoryEntry = repositoryEntryPersistence.remove(repositoryEntryId);
-
-		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
-
-		if (indexer != null) {
-			try {
-				indexer.delete(repositoryEntry);
-			}
-			catch (SearchException se) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(se, se);
-				}
-			}
-		}
+		return repositoryEntryPersistence.remove(repositoryEntryId);
 	}
 
 	/**
 	 * Deletes the repository entry from the database. Also notifies the appropriate model listeners.
 	 *
 	 * @param repositoryEntry the repository entry
+	 * @return the repository entry that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
-	public void deleteRepositoryEntry(RepositoryEntry repositoryEntry)
-		throws SystemException {
-		repositoryEntryPersistence.remove(repositoryEntry);
+	@Indexable(type = IndexableType.DELETE)
+	public RepositoryEntry deleteRepositoryEntry(
+		RepositoryEntry repositoryEntry) throws SystemException {
+		return repositoryEntryPersistence.remove(repositoryEntry);
+	}
 
-		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
-
-		if (indexer != null) {
-			try {
-				indexer.delete(repositoryEntry);
-			}
-			catch (SearchException se) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(se, se);
-				}
-			}
-		}
+	public DynamicQuery dynamicQuery() {
+		return DynamicQueryFactoryUtil.forClass(RepositoryEntry.class,
+			getClassLoader());
 	}
 
 	/**
@@ -473,6 +441,7 @@ public abstract class RepositoryEntryLocalServiceBaseImpl
 	 * @return the repository entry that was updated
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Indexable(type = IndexableType.REINDEX)
 	public RepositoryEntry updateRepositoryEntry(
 		RepositoryEntry repositoryEntry) throws SystemException {
 		return updateRepositoryEntry(repositoryEntry, true);
@@ -486,28 +455,13 @@ public abstract class RepositoryEntryLocalServiceBaseImpl
 	 * @return the repository entry that was updated
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Indexable(type = IndexableType.REINDEX)
 	public RepositoryEntry updateRepositoryEntry(
 		RepositoryEntry repositoryEntry, boolean merge)
 		throws SystemException {
 		repositoryEntry.setNew(false);
 
-		repositoryEntry = repositoryEntryPersistence.update(repositoryEntry,
-				merge);
-
-		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
-
-		if (indexer != null) {
-			try {
-				indexer.reindex(repositoryEntry);
-			}
-			catch (SearchException se) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(se, se);
-				}
-			}
-		}
-
-		return repositoryEntry;
+		return repositoryEntryPersistence.update(repositoryEntry, merge);
 	}
 
 	/**
@@ -4046,12 +4000,6 @@ public abstract class RepositoryEntryLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
-	protected ClassLoader getClassLoader() {
-		Class<?> clazz = getClass();
-
-		return clazz.getClassLoader();
-	}
-
 	protected Class<?> getModelClass() {
 		return RepositoryEntry.class;
 	}
@@ -4459,6 +4407,5 @@ public abstract class RepositoryEntryLocalServiceBaseImpl
 	protected CounterLocalService counterLocalService;
 	@BeanReference(type = PersistedModelLocalServiceRegistry.class)
 	protected PersistedModelLocalServiceRegistry persistedModelLocalServiceRegistry;
-	private static Log _log = LogFactoryUtil.getLog(RepositoryEntryLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

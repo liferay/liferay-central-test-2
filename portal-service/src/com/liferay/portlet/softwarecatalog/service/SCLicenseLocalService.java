@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
+import com.liferay.portal.service.BaseLocalService;
 import com.liferay.portal.service.PersistedModelLocalService;
 
 /**
@@ -36,7 +37,8 @@ import com.liferay.portal.service.PersistedModelLocalService;
  */
 @Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
 	PortalException.class, SystemException.class})
-public interface SCLicenseLocalService extends PersistedModelLocalService {
+public interface SCLicenseLocalService extends BaseLocalService,
+	PersistedModelLocalService {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -67,10 +69,12 @@ public interface SCLicenseLocalService extends PersistedModelLocalService {
 	* Deletes the s c license with the primary key from the database. Also notifies the appropriate model listeners.
 	*
 	* @param licenseId the primary key of the s c license
+	* @return the s c license that was removed
 	* @throws PortalException if a s c license with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public void deleteSCLicense(long licenseId)
+	public com.liferay.portlet.softwarecatalog.model.SCLicense deleteSCLicense(
+		long licenseId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -78,11 +82,14 @@ public interface SCLicenseLocalService extends PersistedModelLocalService {
 	* Deletes the s c license from the database. Also notifies the appropriate model listeners.
 	*
 	* @param scLicense the s c license
+	* @return the s c license that was removed
 	* @throws SystemException if a system exception occurred
 	*/
-	public void deleteSCLicense(
+	public com.liferay.portlet.softwarecatalog.model.SCLicense deleteSCLicense(
 		com.liferay.portlet.softwarecatalog.model.SCLicense scLicense)
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery();
 
 	/**
 	* Performs a dynamic query on the database and returns the matching rows.

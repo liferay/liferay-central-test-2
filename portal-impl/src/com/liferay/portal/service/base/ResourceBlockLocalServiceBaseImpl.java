@@ -21,13 +21,11 @@ import com.liferay.portal.kernel.bean.IdentifiableBean;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.search.Indexer;
-import com.liferay.portal.kernel.search.IndexerRegistryUtil;
-import com.liferay.portal.kernel.search.SearchException;
+import com.liferay.portal.kernel.search.Indexable;
+import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.PersistedModel;
 import com.liferay.portal.model.ResourceBlock;
@@ -35,6 +33,7 @@ import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountService;
 import com.liferay.portal.service.AddressLocalService;
 import com.liferay.portal.service.AddressService;
+import com.liferay.portal.service.BaseLocalServiceImpl;
 import com.liferay.portal.service.BrowserTrackerLocalService;
 import com.liferay.portal.service.CMISRepositoryLocalService;
 import com.liferay.portal.service.ClassNameLocalService;
@@ -240,7 +239,8 @@ import javax.sql.DataSource;
  * @generated
  */
 public abstract class ResourceBlockLocalServiceBaseImpl
-	implements ResourceBlockLocalService, IdentifiableBean {
+	extends BaseLocalServiceImpl implements ResourceBlockLocalService,
+		IdentifiableBean {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -254,26 +254,12 @@ public abstract class ResourceBlockLocalServiceBaseImpl
 	 * @return the resource block that was added
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Indexable(type = IndexableType.REINDEX)
 	public ResourceBlock addResourceBlock(ResourceBlock resourceBlock)
 		throws SystemException {
 		resourceBlock.setNew(true);
 
-		resourceBlock = resourceBlockPersistence.update(resourceBlock, false);
-
-		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
-
-		if (indexer != null) {
-			try {
-				indexer.reindex(resourceBlock);
-			}
-			catch (SearchException se) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(se, se);
-				}
-			}
-		}
-
-		return resourceBlock;
+		return resourceBlockPersistence.update(resourceBlock, false);
 	}
 
 	/**
@@ -290,49 +276,32 @@ public abstract class ResourceBlockLocalServiceBaseImpl
 	 * Deletes the resource block with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
 	 * @param resourceBlockId the primary key of the resource block
+	 * @return the resource block that was removed
 	 * @throws PortalException if a resource block with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public void deleteResourceBlock(long resourceBlockId)
+	@Indexable(type = IndexableType.DELETE)
+	public ResourceBlock deleteResourceBlock(long resourceBlockId)
 		throws PortalException, SystemException {
-		ResourceBlock resourceBlock = resourceBlockPersistence.remove(resourceBlockId);
-
-		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
-
-		if (indexer != null) {
-			try {
-				indexer.delete(resourceBlock);
-			}
-			catch (SearchException se) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(se, se);
-				}
-			}
-		}
+		return resourceBlockPersistence.remove(resourceBlockId);
 	}
 
 	/**
 	 * Deletes the resource block from the database. Also notifies the appropriate model listeners.
 	 *
 	 * @param resourceBlock the resource block
+	 * @return the resource block that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
-	public void deleteResourceBlock(ResourceBlock resourceBlock)
+	@Indexable(type = IndexableType.DELETE)
+	public ResourceBlock deleteResourceBlock(ResourceBlock resourceBlock)
 		throws SystemException {
-		resourceBlockPersistence.remove(resourceBlock);
+		return resourceBlockPersistence.remove(resourceBlock);
+	}
 
-		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
-
-		if (indexer != null) {
-			try {
-				indexer.delete(resourceBlock);
-			}
-			catch (SearchException se) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(se, se);
-				}
-			}
-		}
+	public DynamicQuery dynamicQuery() {
+		return DynamicQueryFactoryUtil.forClass(ResourceBlock.class,
+			getClassLoader());
 	}
 
 	/**
@@ -458,6 +427,7 @@ public abstract class ResourceBlockLocalServiceBaseImpl
 	 * @return the resource block that was updated
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Indexable(type = IndexableType.REINDEX)
 	public ResourceBlock updateResourceBlock(ResourceBlock resourceBlock)
 		throws SystemException {
 		return updateResourceBlock(resourceBlock, true);
@@ -471,26 +441,12 @@ public abstract class ResourceBlockLocalServiceBaseImpl
 	 * @return the resource block that was updated
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Indexable(type = IndexableType.REINDEX)
 	public ResourceBlock updateResourceBlock(ResourceBlock resourceBlock,
 		boolean merge) throws SystemException {
 		resourceBlock.setNew(false);
 
-		resourceBlock = resourceBlockPersistence.update(resourceBlock, merge);
-
-		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
-
-		if (indexer != null) {
-			try {
-				indexer.reindex(resourceBlock);
-			}
-			catch (SearchException se) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(se, se);
-				}
-			}
-		}
-
-		return resourceBlock;
+		return resourceBlockPersistence.update(resourceBlock, merge);
 	}
 
 	/**
@@ -4029,12 +3985,6 @@ public abstract class ResourceBlockLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
-	protected ClassLoader getClassLoader() {
-		Class<?> clazz = getClass();
-
-		return clazz.getClassLoader();
-	}
-
 	protected Class<?> getModelClass() {
 		return ResourceBlock.class;
 	}
@@ -4442,6 +4392,5 @@ public abstract class ResourceBlockLocalServiceBaseImpl
 	protected CounterLocalService counterLocalService;
 	@BeanReference(type = PersistedModelLocalServiceRegistry.class)
 	protected PersistedModelLocalServiceRegistry persistedModelLocalServiceRegistry;
-	private static Log _log = LogFactoryUtil.getLog(ResourceBlockLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

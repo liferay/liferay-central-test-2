@@ -35,7 +35,8 @@ import com.liferay.portal.kernel.transaction.Transactional;
  */
 @Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
 	PortalException.class, SystemException.class})
-public interface LayoutBranchLocalService extends PersistedModelLocalService {
+public interface LayoutBranchLocalService extends BaseLocalService,
+	PersistedModelLocalService {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -66,10 +67,12 @@ public interface LayoutBranchLocalService extends PersistedModelLocalService {
 	* Deletes the layout branch with the primary key from the database. Also notifies the appropriate model listeners.
 	*
 	* @param LayoutBranchId the primary key of the layout branch
+	* @return the layout branch that was removed
 	* @throws PortalException if a layout branch with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public void deleteLayoutBranch(long LayoutBranchId)
+	public com.liferay.portal.model.LayoutBranch deleteLayoutBranch(
+		long LayoutBranchId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -77,11 +80,14 @@ public interface LayoutBranchLocalService extends PersistedModelLocalService {
 	* Deletes the layout branch from the database. Also notifies the appropriate model listeners.
 	*
 	* @param layoutBranch the layout branch
+	* @return the layout branch that was removed
 	* @throws SystemException if a system exception occurred
 	*/
-	public void deleteLayoutBranch(
+	public com.liferay.portal.model.LayoutBranch deleteLayoutBranch(
 		com.liferay.portal.model.LayoutBranch layoutBranch)
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery();
 
 	/**
 	* Performs a dynamic query on the database and returns the matching rows.

@@ -21,13 +21,11 @@ import com.liferay.portal.kernel.bean.IdentifiableBean;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.search.Indexer;
-import com.liferay.portal.kernel.search.IndexerRegistryUtil;
-import com.liferay.portal.kernel.search.SearchException;
+import com.liferay.portal.kernel.search.Indexable;
+import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.PersistedModel;
 import com.liferay.portal.model.PortalPreferences;
@@ -35,6 +33,7 @@ import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountService;
 import com.liferay.portal.service.AddressLocalService;
 import com.liferay.portal.service.AddressService;
+import com.liferay.portal.service.BaseLocalServiceImpl;
 import com.liferay.portal.service.BrowserTrackerLocalService;
 import com.liferay.portal.service.CMISRepositoryLocalService;
 import com.liferay.portal.service.ClassNameLocalService;
@@ -240,7 +239,8 @@ import javax.sql.DataSource;
  * @generated
  */
 public abstract class PortalPreferencesLocalServiceBaseImpl
-	implements PortalPreferencesLocalService, IdentifiableBean {
+	extends BaseLocalServiceImpl implements PortalPreferencesLocalService,
+		IdentifiableBean {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -254,27 +254,12 @@ public abstract class PortalPreferencesLocalServiceBaseImpl
 	 * @return the portal preferences that was added
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Indexable(type = IndexableType.REINDEX)
 	public PortalPreferences addPortalPreferences(
 		PortalPreferences portalPreferences) throws SystemException {
 		portalPreferences.setNew(true);
 
-		portalPreferences = portalPreferencesPersistence.update(portalPreferences,
-				false);
-
-		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
-
-		if (indexer != null) {
-			try {
-				indexer.reindex(portalPreferences);
-			}
-			catch (SearchException se) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(se, se);
-				}
-			}
-		}
-
-		return portalPreferences;
+		return portalPreferencesPersistence.update(portalPreferences, false);
 	}
 
 	/**
@@ -291,49 +276,32 @@ public abstract class PortalPreferencesLocalServiceBaseImpl
 	 * Deletes the portal preferences with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
 	 * @param portalPreferencesId the primary key of the portal preferences
+	 * @return the portal preferences that was removed
 	 * @throws PortalException if a portal preferences with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public void deletePortalPreferences(long portalPreferencesId)
+	@Indexable(type = IndexableType.DELETE)
+	public PortalPreferences deletePortalPreferences(long portalPreferencesId)
 		throws PortalException, SystemException {
-		PortalPreferences portalPreferences = portalPreferencesPersistence.remove(portalPreferencesId);
-
-		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
-
-		if (indexer != null) {
-			try {
-				indexer.delete(portalPreferences);
-			}
-			catch (SearchException se) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(se, se);
-				}
-			}
-		}
+		return portalPreferencesPersistence.remove(portalPreferencesId);
 	}
 
 	/**
 	 * Deletes the portal preferences from the database. Also notifies the appropriate model listeners.
 	 *
 	 * @param portalPreferences the portal preferences
+	 * @return the portal preferences that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
-	public void deletePortalPreferences(PortalPreferences portalPreferences)
-		throws SystemException {
-		portalPreferencesPersistence.remove(portalPreferences);
+	@Indexable(type = IndexableType.DELETE)
+	public PortalPreferences deletePortalPreferences(
+		PortalPreferences portalPreferences) throws SystemException {
+		return portalPreferencesPersistence.remove(portalPreferences);
+	}
 
-		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
-
-		if (indexer != null) {
-			try {
-				indexer.delete(portalPreferences);
-			}
-			catch (SearchException se) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(se, se);
-				}
-			}
-		}
+	public DynamicQuery dynamicQuery() {
+		return DynamicQueryFactoryUtil.forClass(PortalPreferences.class,
+			getClassLoader());
 	}
 
 	/**
@@ -459,6 +427,7 @@ public abstract class PortalPreferencesLocalServiceBaseImpl
 	 * @return the portal preferences that was updated
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Indexable(type = IndexableType.REINDEX)
 	public PortalPreferences updatePortalPreferences(
 		PortalPreferences portalPreferences) throws SystemException {
 		return updatePortalPreferences(portalPreferences, true);
@@ -472,28 +441,13 @@ public abstract class PortalPreferencesLocalServiceBaseImpl
 	 * @return the portal preferences that was updated
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Indexable(type = IndexableType.REINDEX)
 	public PortalPreferences updatePortalPreferences(
 		PortalPreferences portalPreferences, boolean merge)
 		throws SystemException {
 		portalPreferences.setNew(false);
 
-		portalPreferences = portalPreferencesPersistence.update(portalPreferences,
-				merge);
-
-		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
-
-		if (indexer != null) {
-			try {
-				indexer.reindex(portalPreferences);
-			}
-			catch (SearchException se) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(se, se);
-				}
-			}
-		}
-
-		return portalPreferences;
+		return portalPreferencesPersistence.update(portalPreferences, merge);
 	}
 
 	/**
@@ -4032,12 +3986,6 @@ public abstract class PortalPreferencesLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
-	protected ClassLoader getClassLoader() {
-		Class<?> clazz = getClass();
-
-		return clazz.getClassLoader();
-	}
-
 	protected Class<?> getModelClass() {
 		return PortalPreferences.class;
 	}
@@ -4445,6 +4393,5 @@ public abstract class PortalPreferencesLocalServiceBaseImpl
 	protected CounterLocalService counterLocalService;
 	@BeanReference(type = PersistedModelLocalServiceRegistry.class)
 	protected PersistedModelLocalServiceRegistry persistedModelLocalServiceRegistry;
-	private static Log _log = LogFactoryUtil.getLog(PortalPreferencesLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

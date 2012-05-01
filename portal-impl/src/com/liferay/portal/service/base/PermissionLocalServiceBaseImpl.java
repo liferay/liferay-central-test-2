@@ -21,13 +21,11 @@ import com.liferay.portal.kernel.bean.IdentifiableBean;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.search.Indexer;
-import com.liferay.portal.kernel.search.IndexerRegistryUtil;
-import com.liferay.portal.kernel.search.SearchException;
+import com.liferay.portal.kernel.search.Indexable;
+import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.Permission;
 import com.liferay.portal.model.PersistedModel;
@@ -35,6 +33,7 @@ import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountService;
 import com.liferay.portal.service.AddressLocalService;
 import com.liferay.portal.service.AddressService;
+import com.liferay.portal.service.BaseLocalServiceImpl;
 import com.liferay.portal.service.BrowserTrackerLocalService;
 import com.liferay.portal.service.CMISRepositoryLocalService;
 import com.liferay.portal.service.ClassNameLocalService;
@@ -240,7 +239,8 @@ import javax.sql.DataSource;
  * @generated
  */
 public abstract class PermissionLocalServiceBaseImpl
-	implements PermissionLocalService, IdentifiableBean {
+	extends BaseLocalServiceImpl implements PermissionLocalService,
+		IdentifiableBean {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -254,26 +254,12 @@ public abstract class PermissionLocalServiceBaseImpl
 	 * @return the permission that was added
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Indexable(type = IndexableType.REINDEX)
 	public Permission addPermission(Permission permission)
 		throws SystemException {
 		permission.setNew(true);
 
-		permission = permissionPersistence.update(permission, false);
-
-		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
-
-		if (indexer != null) {
-			try {
-				indexer.reindex(permission);
-			}
-			catch (SearchException se) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(se, se);
-				}
-			}
-		}
-
-		return permission;
+		return permissionPersistence.update(permission, false);
 	}
 
 	/**
@@ -290,49 +276,32 @@ public abstract class PermissionLocalServiceBaseImpl
 	 * Deletes the permission with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
 	 * @param permissionId the primary key of the permission
+	 * @return the permission that was removed
 	 * @throws PortalException if a permission with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public void deletePermission(long permissionId)
+	@Indexable(type = IndexableType.DELETE)
+	public Permission deletePermission(long permissionId)
 		throws PortalException, SystemException {
-		Permission permission = permissionPersistence.remove(permissionId);
-
-		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
-
-		if (indexer != null) {
-			try {
-				indexer.delete(permission);
-			}
-			catch (SearchException se) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(se, se);
-				}
-			}
-		}
+		return permissionPersistence.remove(permissionId);
 	}
 
 	/**
 	 * Deletes the permission from the database. Also notifies the appropriate model listeners.
 	 *
 	 * @param permission the permission
+	 * @return the permission that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
-	public void deletePermission(Permission permission)
+	@Indexable(type = IndexableType.DELETE)
+	public Permission deletePermission(Permission permission)
 		throws SystemException {
-		permissionPersistence.remove(permission);
+		return permissionPersistence.remove(permission);
+	}
 
-		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
-
-		if (indexer != null) {
-			try {
-				indexer.delete(permission);
-			}
-			catch (SearchException se) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(se, se);
-				}
-			}
-		}
+	public DynamicQuery dynamicQuery() {
+		return DynamicQueryFactoryUtil.forClass(Permission.class,
+			getClassLoader());
 	}
 
 	/**
@@ -458,6 +427,7 @@ public abstract class PermissionLocalServiceBaseImpl
 	 * @return the permission that was updated
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Indexable(type = IndexableType.REINDEX)
 	public Permission updatePermission(Permission permission)
 		throws SystemException {
 		return updatePermission(permission, true);
@@ -471,26 +441,12 @@ public abstract class PermissionLocalServiceBaseImpl
 	 * @return the permission that was updated
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Indexable(type = IndexableType.REINDEX)
 	public Permission updatePermission(Permission permission, boolean merge)
 		throws SystemException {
 		permission.setNew(false);
 
-		permission = permissionPersistence.update(permission, merge);
-
-		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
-
-		if (indexer != null) {
-			try {
-				indexer.reindex(permission);
-			}
-			catch (SearchException se) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(se, se);
-				}
-			}
-		}
-
-		return permission;
+		return permissionPersistence.update(permission, merge);
 	}
 
 	/**
@@ -4029,12 +3985,6 @@ public abstract class PermissionLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
-	protected ClassLoader getClassLoader() {
-		Class<?> clazz = getClass();
-
-		return clazz.getClassLoader();
-	}
-
 	protected Class<?> getModelClass() {
 		return Permission.class;
 	}
@@ -4442,6 +4392,5 @@ public abstract class PermissionLocalServiceBaseImpl
 	protected CounterLocalService counterLocalService;
 	@BeanReference(type = PersistedModelLocalServiceRegistry.class)
 	protected PersistedModelLocalServiceRegistry persistedModelLocalServiceRegistry;
-	private static Log _log = LogFactoryUtil.getLog(PermissionLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

@@ -35,7 +35,8 @@ import com.liferay.portal.kernel.transaction.Transactional;
  */
 @Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
 	PortalException.class, SystemException.class})
-public interface GroupLocalService extends PersistedModelLocalService {
+public interface GroupLocalService extends BaseLocalService,
+	PersistedModelLocalService {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -65,10 +66,11 @@ public interface GroupLocalService extends PersistedModelLocalService {
 	* Deletes the group with the primary key from the database. Also notifies the appropriate model listeners.
 	*
 	* @param groupId the primary key of the group
+	* @return the group that was removed
 	* @throws PortalException if a group with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public void deleteGroup(long groupId)
+	public com.liferay.portal.model.Group deleteGroup(long groupId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -76,12 +78,16 @@ public interface GroupLocalService extends PersistedModelLocalService {
 	* Deletes the group from the database. Also notifies the appropriate model listeners.
 	*
 	* @param group the group
+	* @return the group that was removed
 	* @throws PortalException
 	* @throws SystemException if a system exception occurred
 	*/
-	public void deleteGroup(com.liferay.portal.model.Group group)
+	public com.liferay.portal.model.Group deleteGroup(
+		com.liferay.portal.model.Group group)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery();
 
 	/**
 	* Performs a dynamic query on the database and returns the matching rows.

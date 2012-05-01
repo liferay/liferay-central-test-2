@@ -21,13 +21,11 @@ import com.liferay.portal.kernel.bean.IdentifiableBean;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.search.Indexer;
-import com.liferay.portal.kernel.search.IndexerRegistryUtil;
-import com.liferay.portal.kernel.search.SearchException;
+import com.liferay.portal.kernel.search.Indexable;
+import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.PersistedModel;
 import com.liferay.portal.model.Shard;
@@ -35,6 +33,7 @@ import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountService;
 import com.liferay.portal.service.AddressLocalService;
 import com.liferay.portal.service.AddressService;
+import com.liferay.portal.service.BaseLocalServiceImpl;
 import com.liferay.portal.service.BrowserTrackerLocalService;
 import com.liferay.portal.service.CMISRepositoryLocalService;
 import com.liferay.portal.service.ClassNameLocalService;
@@ -239,8 +238,8 @@ import javax.sql.DataSource;
  * @see com.liferay.portal.service.ShardLocalServiceUtil
  * @generated
  */
-public abstract class ShardLocalServiceBaseImpl implements ShardLocalService,
-	IdentifiableBean {
+public abstract class ShardLocalServiceBaseImpl extends BaseLocalServiceImpl
+	implements ShardLocalService, IdentifiableBean {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -254,25 +253,11 @@ public abstract class ShardLocalServiceBaseImpl implements ShardLocalService,
 	 * @return the shard that was added
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Indexable(type = IndexableType.REINDEX)
 	public Shard addShard(Shard shard) throws SystemException {
 		shard.setNew(true);
 
-		shard = shardPersistence.update(shard, false);
-
-		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
-
-		if (indexer != null) {
-			try {
-				indexer.reindex(shard);
-			}
-			catch (SearchException se) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(se, se);
-				}
-			}
-		}
-
-		return shard;
+		return shardPersistence.update(shard, false);
 	}
 
 	/**
@@ -289,48 +274,30 @@ public abstract class ShardLocalServiceBaseImpl implements ShardLocalService,
 	 * Deletes the shard with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
 	 * @param shardId the primary key of the shard
+	 * @return the shard that was removed
 	 * @throws PortalException if a shard with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public void deleteShard(long shardId)
+	@Indexable(type = IndexableType.DELETE)
+	public Shard deleteShard(long shardId)
 		throws PortalException, SystemException {
-		Shard shard = shardPersistence.remove(shardId);
-
-		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
-
-		if (indexer != null) {
-			try {
-				indexer.delete(shard);
-			}
-			catch (SearchException se) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(se, se);
-				}
-			}
-		}
+		return shardPersistence.remove(shardId);
 	}
 
 	/**
 	 * Deletes the shard from the database. Also notifies the appropriate model listeners.
 	 *
 	 * @param shard the shard
+	 * @return the shard that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
-	public void deleteShard(Shard shard) throws SystemException {
-		shardPersistence.remove(shard);
+	@Indexable(type = IndexableType.DELETE)
+	public Shard deleteShard(Shard shard) throws SystemException {
+		return shardPersistence.remove(shard);
+	}
 
-		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
-
-		if (indexer != null) {
-			try {
-				indexer.delete(shard);
-			}
-			catch (SearchException se) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(se, se);
-				}
-			}
-		}
+	public DynamicQuery dynamicQuery() {
+		return DynamicQueryFactoryUtil.forClass(Shard.class, getClassLoader());
 	}
 
 	/**
@@ -452,6 +419,7 @@ public abstract class ShardLocalServiceBaseImpl implements ShardLocalService,
 	 * @return the shard that was updated
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Indexable(type = IndexableType.REINDEX)
 	public Shard updateShard(Shard shard) throws SystemException {
 		return updateShard(shard, true);
 	}
@@ -464,26 +432,12 @@ public abstract class ShardLocalServiceBaseImpl implements ShardLocalService,
 	 * @return the shard that was updated
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Indexable(type = IndexableType.REINDEX)
 	public Shard updateShard(Shard shard, boolean merge)
 		throws SystemException {
 		shard.setNew(false);
 
-		shard = shardPersistence.update(shard, merge);
-
-		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
-
-		if (indexer != null) {
-			try {
-				indexer.reindex(shard);
-			}
-			catch (SearchException se) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(se, se);
-				}
-			}
-		}
-
-		return shard;
+		return shardPersistence.update(shard, merge);
 	}
 
 	/**
@@ -4022,12 +3976,6 @@ public abstract class ShardLocalServiceBaseImpl implements ShardLocalService,
 		_beanIdentifier = beanIdentifier;
 	}
 
-	protected ClassLoader getClassLoader() {
-		Class<?> clazz = getClass();
-
-		return clazz.getClassLoader();
-	}
-
 	protected Class<?> getModelClass() {
 		return Shard.class;
 	}
@@ -4435,6 +4383,5 @@ public abstract class ShardLocalServiceBaseImpl implements ShardLocalService,
 	protected CounterLocalService counterLocalService;
 	@BeanReference(type = PersistedModelLocalServiceRegistry.class)
 	protected PersistedModelLocalServiceRegistry persistedModelLocalServiceRegistry;
-	private static Log _log = LogFactoryUtil.getLog(ShardLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

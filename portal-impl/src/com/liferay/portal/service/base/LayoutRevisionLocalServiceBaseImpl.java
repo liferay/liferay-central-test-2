@@ -21,13 +21,11 @@ import com.liferay.portal.kernel.bean.IdentifiableBean;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.search.Indexer;
-import com.liferay.portal.kernel.search.IndexerRegistryUtil;
-import com.liferay.portal.kernel.search.SearchException;
+import com.liferay.portal.kernel.search.Indexable;
+import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.LayoutRevision;
 import com.liferay.portal.model.PersistedModel;
@@ -35,6 +33,7 @@ import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountService;
 import com.liferay.portal.service.AddressLocalService;
 import com.liferay.portal.service.AddressService;
+import com.liferay.portal.service.BaseLocalServiceImpl;
 import com.liferay.portal.service.BrowserTrackerLocalService;
 import com.liferay.portal.service.CMISRepositoryLocalService;
 import com.liferay.portal.service.ClassNameLocalService;
@@ -240,7 +239,8 @@ import javax.sql.DataSource;
  * @generated
  */
 public abstract class LayoutRevisionLocalServiceBaseImpl
-	implements LayoutRevisionLocalService, IdentifiableBean {
+	extends BaseLocalServiceImpl implements LayoutRevisionLocalService,
+		IdentifiableBean {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -254,26 +254,12 @@ public abstract class LayoutRevisionLocalServiceBaseImpl
 	 * @return the layout revision that was added
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Indexable(type = IndexableType.REINDEX)
 	public LayoutRevision addLayoutRevision(LayoutRevision layoutRevision)
 		throws SystemException {
 		layoutRevision.setNew(true);
 
-		layoutRevision = layoutRevisionPersistence.update(layoutRevision, false);
-
-		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
-
-		if (indexer != null) {
-			try {
-				indexer.reindex(layoutRevision);
-			}
-			catch (SearchException se) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(se, se);
-				}
-			}
-		}
-
-		return layoutRevision;
+		return layoutRevisionPersistence.update(layoutRevision, false);
 	}
 
 	/**
@@ -290,50 +276,33 @@ public abstract class LayoutRevisionLocalServiceBaseImpl
 	 * Deletes the layout revision with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
 	 * @param layoutRevisionId the primary key of the layout revision
+	 * @return the layout revision that was removed
 	 * @throws PortalException if a layout revision with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public void deleteLayoutRevision(long layoutRevisionId)
+	@Indexable(type = IndexableType.DELETE)
+	public LayoutRevision deleteLayoutRevision(long layoutRevisionId)
 		throws PortalException, SystemException {
-		LayoutRevision layoutRevision = layoutRevisionPersistence.remove(layoutRevisionId);
-
-		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
-
-		if (indexer != null) {
-			try {
-				indexer.delete(layoutRevision);
-			}
-			catch (SearchException se) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(se, se);
-				}
-			}
-		}
+		return layoutRevisionPersistence.remove(layoutRevisionId);
 	}
 
 	/**
 	 * Deletes the layout revision from the database. Also notifies the appropriate model listeners.
 	 *
 	 * @param layoutRevision the layout revision
+	 * @return the layout revision that was removed
 	 * @throws PortalException
 	 * @throws SystemException if a system exception occurred
 	 */
-	public void deleteLayoutRevision(LayoutRevision layoutRevision)
+	@Indexable(type = IndexableType.DELETE)
+	public LayoutRevision deleteLayoutRevision(LayoutRevision layoutRevision)
 		throws PortalException, SystemException {
-		layoutRevisionPersistence.remove(layoutRevision);
+		return layoutRevisionPersistence.remove(layoutRevision);
+	}
 
-		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
-
-		if (indexer != null) {
-			try {
-				indexer.delete(layoutRevision);
-			}
-			catch (SearchException se) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(se, se);
-				}
-			}
-		}
+	public DynamicQuery dynamicQuery() {
+		return DynamicQueryFactoryUtil.forClass(LayoutRevision.class,
+			getClassLoader());
 	}
 
 	/**
@@ -459,6 +428,7 @@ public abstract class LayoutRevisionLocalServiceBaseImpl
 	 * @return the layout revision that was updated
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Indexable(type = IndexableType.REINDEX)
 	public LayoutRevision updateLayoutRevision(LayoutRevision layoutRevision)
 		throws SystemException {
 		return updateLayoutRevision(layoutRevision, true);
@@ -472,26 +442,12 @@ public abstract class LayoutRevisionLocalServiceBaseImpl
 	 * @return the layout revision that was updated
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Indexable(type = IndexableType.REINDEX)
 	public LayoutRevision updateLayoutRevision(LayoutRevision layoutRevision,
 		boolean merge) throws SystemException {
 		layoutRevision.setNew(false);
 
-		layoutRevision = layoutRevisionPersistence.update(layoutRevision, merge);
-
-		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
-
-		if (indexer != null) {
-			try {
-				indexer.reindex(layoutRevision);
-			}
-			catch (SearchException se) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(se, se);
-				}
-			}
-		}
-
-		return layoutRevision;
+		return layoutRevisionPersistence.update(layoutRevision, merge);
 	}
 
 	/**
@@ -4030,12 +3986,6 @@ public abstract class LayoutRevisionLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
-	protected ClassLoader getClassLoader() {
-		Class<?> clazz = getClass();
-
-		return clazz.getClassLoader();
-	}
-
 	protected Class<?> getModelClass() {
 		return LayoutRevision.class;
 	}
@@ -4443,6 +4393,5 @@ public abstract class LayoutRevisionLocalServiceBaseImpl
 	protected CounterLocalService counterLocalService;
 	@BeanReference(type = PersistedModelLocalServiceRegistry.class)
 	protected PersistedModelLocalServiceRegistry persistedModelLocalServiceRegistry;
-	private static Log _log = LogFactoryUtil.getLog(LayoutRevisionLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

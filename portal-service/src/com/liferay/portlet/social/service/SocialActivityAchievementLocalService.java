@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
+import com.liferay.portal.service.BaseLocalService;
 import com.liferay.portal.service.PersistedModelLocalService;
 
 /**
@@ -36,8 +37,8 @@ import com.liferay.portal.service.PersistedModelLocalService;
  */
 @Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
 	PortalException.class, SystemException.class})
-public interface SocialActivityAchievementLocalService
-	extends PersistedModelLocalService {
+public interface SocialActivityAchievementLocalService extends BaseLocalService,
+	PersistedModelLocalService {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -68,10 +69,12 @@ public interface SocialActivityAchievementLocalService
 	* Deletes the social activity achievement with the primary key from the database. Also notifies the appropriate model listeners.
 	*
 	* @param activityAchievementId the primary key of the social activity achievement
+	* @return the social activity achievement that was removed
 	* @throws PortalException if a social activity achievement with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public void deleteSocialActivityAchievement(long activityAchievementId)
+	public com.liferay.portlet.social.model.SocialActivityAchievement deleteSocialActivityAchievement(
+		long activityAchievementId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -79,11 +82,14 @@ public interface SocialActivityAchievementLocalService
 	* Deletes the social activity achievement from the database. Also notifies the appropriate model listeners.
 	*
 	* @param socialActivityAchievement the social activity achievement
+	* @return the social activity achievement that was removed
 	* @throws SystemException if a system exception occurred
 	*/
-	public void deleteSocialActivityAchievement(
+	public com.liferay.portlet.social.model.SocialActivityAchievement deleteSocialActivityAchievement(
 		com.liferay.portlet.social.model.SocialActivityAchievement socialActivityAchievement)
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery();
 
 	/**
 	* Performs a dynamic query on the database and returns the matching rows.

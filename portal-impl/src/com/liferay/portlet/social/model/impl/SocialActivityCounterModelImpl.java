@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.CacheModel;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.service.ServiceContext;
@@ -32,6 +33,9 @@ import com.liferay.portlet.social.model.SocialActivityCounterModel;
 import java.io.Serializable;
 
 import java.sql.Types;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * The base model implementation for the SocialActivityCounter service. Represents a row in the &quot;SocialActivityCounter&quot; database table, with each column mapped to a property of this class.
@@ -119,6 +123,101 @@ public class SocialActivityCounterModelImpl extends BaseModelImpl<SocialActivity
 		return SocialActivityCounter.class.getName();
 	}
 
+	@Override
+	public Map<String, Object> getModelAttributes() {
+		Map<String, Object> attributes = new HashMap<String, Object>();
+
+		attributes.put("activityCounterId", getActivityCounterId());
+		attributes.put("groupId", getGroupId());
+		attributes.put("companyId", getCompanyId());
+		attributes.put("classNameId", getClassNameId());
+		attributes.put("classPK", getClassPK());
+		attributes.put("name", getName());
+		attributes.put("ownerType", getOwnerType());
+		attributes.put("currentValue", getCurrentValue());
+		attributes.put("totalValue", getTotalValue());
+		attributes.put("graceValue", getGraceValue());
+		attributes.put("startPeriod", getStartPeriod());
+		attributes.put("endPeriod", getEndPeriod());
+
+		return attributes;
+	}
+
+	@Override
+	public void setModelAttributes(Map<String, Object> attributes) {
+		Long activityCounterId = (Long)attributes.get("activityCounterId");
+
+		if (activityCounterId != null) {
+			setActivityCounterId(activityCounterId);
+		}
+
+		Long groupId = (Long)attributes.get("groupId");
+
+		if (groupId != null) {
+			setGroupId(groupId);
+		}
+
+		Long companyId = (Long)attributes.get("companyId");
+
+		if (companyId != null) {
+			setCompanyId(companyId);
+		}
+
+		Long classNameId = (Long)attributes.get("classNameId");
+
+		if (classNameId != null) {
+			setClassNameId(classNameId);
+		}
+
+		Long classPK = (Long)attributes.get("classPK");
+
+		if (classPK != null) {
+			setClassPK(classPK);
+		}
+
+		String name = (String)attributes.get("name");
+
+		if (name != null) {
+			setName(name);
+		}
+
+		Integer ownerType = (Integer)attributes.get("ownerType");
+
+		if (ownerType != null) {
+			setOwnerType(ownerType);
+		}
+
+		Integer currentValue = (Integer)attributes.get("currentValue");
+
+		if (currentValue != null) {
+			setCurrentValue(currentValue);
+		}
+
+		Integer totalValue = (Integer)attributes.get("totalValue");
+
+		if (totalValue != null) {
+			setTotalValue(totalValue);
+		}
+
+		Integer graceValue = (Integer)attributes.get("graceValue");
+
+		if (graceValue != null) {
+			setGraceValue(graceValue);
+		}
+
+		Integer startPeriod = (Integer)attributes.get("startPeriod");
+
+		if (startPeriod != null) {
+			setStartPeriod(startPeriod);
+		}
+
+		Integer endPeriod = (Integer)attributes.get("endPeriod");
+
+		if (endPeriod != null) {
+			setEndPeriod(endPeriod);
+		}
+	}
+
 	public long getActivityCounterId() {
 		return _activityCounterId;
 	}
@@ -161,6 +260,16 @@ public class SocialActivityCounterModelImpl extends BaseModelImpl<SocialActivity
 		}
 
 		return PortalUtil.getClassName(getClassNameId());
+	}
+
+	public void setClassName(String className) {
+		long classNameId = 0;
+
+		if (Validator.isNotNull(className)) {
+			classNameId = PortalUtil.getClassNameId(className);
+		}
+
+		setClassNameId(classNameId);
 	}
 
 	public long getClassNameId() {

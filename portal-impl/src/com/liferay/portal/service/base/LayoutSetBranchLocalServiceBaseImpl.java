@@ -21,13 +21,11 @@ import com.liferay.portal.kernel.bean.IdentifiableBean;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.search.Indexer;
-import com.liferay.portal.kernel.search.IndexerRegistryUtil;
-import com.liferay.portal.kernel.search.SearchException;
+import com.liferay.portal.kernel.search.Indexable;
+import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.LayoutSetBranch;
 import com.liferay.portal.model.PersistedModel;
@@ -35,6 +33,7 @@ import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountService;
 import com.liferay.portal.service.AddressLocalService;
 import com.liferay.portal.service.AddressService;
+import com.liferay.portal.service.BaseLocalServiceImpl;
 import com.liferay.portal.service.BrowserTrackerLocalService;
 import com.liferay.portal.service.CMISRepositoryLocalService;
 import com.liferay.portal.service.ClassNameLocalService;
@@ -240,7 +239,8 @@ import javax.sql.DataSource;
  * @generated
  */
 public abstract class LayoutSetBranchLocalServiceBaseImpl
-	implements LayoutSetBranchLocalService, IdentifiableBean {
+	extends BaseLocalServiceImpl implements LayoutSetBranchLocalService,
+		IdentifiableBean {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -254,27 +254,12 @@ public abstract class LayoutSetBranchLocalServiceBaseImpl
 	 * @return the layout set branch that was added
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Indexable(type = IndexableType.REINDEX)
 	public LayoutSetBranch addLayoutSetBranch(LayoutSetBranch layoutSetBranch)
 		throws SystemException {
 		layoutSetBranch.setNew(true);
 
-		layoutSetBranch = layoutSetBranchPersistence.update(layoutSetBranch,
-				false);
-
-		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
-
-		if (indexer != null) {
-			try {
-				indexer.reindex(layoutSetBranch);
-			}
-			catch (SearchException se) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(se, se);
-				}
-			}
-		}
-
-		return layoutSetBranch;
+		return layoutSetBranchPersistence.update(layoutSetBranch, false);
 	}
 
 	/**
@@ -291,50 +276,34 @@ public abstract class LayoutSetBranchLocalServiceBaseImpl
 	 * Deletes the layout set branch with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
 	 * @param layoutSetBranchId the primary key of the layout set branch
+	 * @return the layout set branch that was removed
 	 * @throws PortalException if a layout set branch with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public void deleteLayoutSetBranch(long layoutSetBranchId)
+	@Indexable(type = IndexableType.DELETE)
+	public LayoutSetBranch deleteLayoutSetBranch(long layoutSetBranchId)
 		throws PortalException, SystemException {
-		LayoutSetBranch layoutSetBranch = layoutSetBranchPersistence.remove(layoutSetBranchId);
-
-		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
-
-		if (indexer != null) {
-			try {
-				indexer.delete(layoutSetBranch);
-			}
-			catch (SearchException se) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(se, se);
-				}
-			}
-		}
+		return layoutSetBranchPersistence.remove(layoutSetBranchId);
 	}
 
 	/**
 	 * Deletes the layout set branch from the database. Also notifies the appropriate model listeners.
 	 *
 	 * @param layoutSetBranch the layout set branch
+	 * @return the layout set branch that was removed
 	 * @throws PortalException
 	 * @throws SystemException if a system exception occurred
 	 */
-	public void deleteLayoutSetBranch(LayoutSetBranch layoutSetBranch)
+	@Indexable(type = IndexableType.DELETE)
+	public LayoutSetBranch deleteLayoutSetBranch(
+		LayoutSetBranch layoutSetBranch)
 		throws PortalException, SystemException {
-		layoutSetBranchPersistence.remove(layoutSetBranch);
+		return layoutSetBranchPersistence.remove(layoutSetBranch);
+	}
 
-		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
-
-		if (indexer != null) {
-			try {
-				indexer.delete(layoutSetBranch);
-			}
-			catch (SearchException se) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(se, se);
-				}
-			}
-		}
+	public DynamicQuery dynamicQuery() {
+		return DynamicQueryFactoryUtil.forClass(LayoutSetBranch.class,
+			getClassLoader());
 	}
 
 	/**
@@ -460,6 +429,7 @@ public abstract class LayoutSetBranchLocalServiceBaseImpl
 	 * @return the layout set branch that was updated
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Indexable(type = IndexableType.REINDEX)
 	public LayoutSetBranch updateLayoutSetBranch(
 		LayoutSetBranch layoutSetBranch) throws SystemException {
 		return updateLayoutSetBranch(layoutSetBranch, true);
@@ -473,28 +443,13 @@ public abstract class LayoutSetBranchLocalServiceBaseImpl
 	 * @return the layout set branch that was updated
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Indexable(type = IndexableType.REINDEX)
 	public LayoutSetBranch updateLayoutSetBranch(
 		LayoutSetBranch layoutSetBranch, boolean merge)
 		throws SystemException {
 		layoutSetBranch.setNew(false);
 
-		layoutSetBranch = layoutSetBranchPersistence.update(layoutSetBranch,
-				merge);
-
-		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
-
-		if (indexer != null) {
-			try {
-				indexer.reindex(layoutSetBranch);
-			}
-			catch (SearchException se) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(se, se);
-				}
-			}
-		}
-
-		return layoutSetBranch;
+		return layoutSetBranchPersistence.update(layoutSetBranch, merge);
 	}
 
 	/**
@@ -4033,12 +3988,6 @@ public abstract class LayoutSetBranchLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
-	protected ClassLoader getClassLoader() {
-		Class<?> clazz = getClass();
-
-		return clazz.getClassLoader();
-	}
-
 	protected Class<?> getModelClass() {
 		return LayoutSetBranch.class;
 	}
@@ -4446,6 +4395,5 @@ public abstract class LayoutSetBranchLocalServiceBaseImpl
 	protected CounterLocalService counterLocalService;
 	@BeanReference(type = PersistedModelLocalServiceRegistry.class)
 	protected PersistedModelLocalServiceRegistry persistedModelLocalServiceRegistry;
-	private static Log _log = LogFactoryUtil.getLog(LayoutSetBranchLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
+import com.liferay.portal.service.BaseLocalService;
 import com.liferay.portal.service.PersistedModelLocalService;
 
 /**
@@ -36,7 +37,8 @@ import com.liferay.portal.service.PersistedModelLocalService;
  */
 @Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
 	PortalException.class, SystemException.class})
-public interface ShoppingOrderLocalService extends PersistedModelLocalService {
+public interface ShoppingOrderLocalService extends BaseLocalService,
+	PersistedModelLocalService {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -67,10 +69,12 @@ public interface ShoppingOrderLocalService extends PersistedModelLocalService {
 	* Deletes the shopping order with the primary key from the database. Also notifies the appropriate model listeners.
 	*
 	* @param orderId the primary key of the shopping order
+	* @return the shopping order that was removed
 	* @throws PortalException if a shopping order with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public void deleteShoppingOrder(long orderId)
+	public com.liferay.portlet.shopping.model.ShoppingOrder deleteShoppingOrder(
+		long orderId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -78,11 +82,14 @@ public interface ShoppingOrderLocalService extends PersistedModelLocalService {
 	* Deletes the shopping order from the database. Also notifies the appropriate model listeners.
 	*
 	* @param shoppingOrder the shopping order
+	* @return the shopping order that was removed
 	* @throws SystemException if a system exception occurred
 	*/
-	public void deleteShoppingOrder(
+	public com.liferay.portlet.shopping.model.ShoppingOrder deleteShoppingOrder(
 		com.liferay.portlet.shopping.model.ShoppingOrder shoppingOrder)
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery();
 
 	/**
 	* Performs a dynamic query on the database and returns the matching rows.

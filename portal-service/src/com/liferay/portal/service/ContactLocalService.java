@@ -35,7 +35,8 @@ import com.liferay.portal.kernel.transaction.Transactional;
  */
 @Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
 	PortalException.class, SystemException.class})
-public interface ContactLocalService extends PersistedModelLocalService {
+public interface ContactLocalService extends BaseLocalService,
+	PersistedModelLocalService {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -65,10 +66,11 @@ public interface ContactLocalService extends PersistedModelLocalService {
 	* Deletes the contact with the primary key from the database. Also notifies the appropriate model listeners.
 	*
 	* @param contactId the primary key of the contact
+	* @return the contact that was removed
 	* @throws PortalException if a contact with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public void deleteContact(long contactId)
+	public com.liferay.portal.model.Contact deleteContact(long contactId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -76,10 +78,14 @@ public interface ContactLocalService extends PersistedModelLocalService {
 	* Deletes the contact from the database. Also notifies the appropriate model listeners.
 	*
 	* @param contact the contact
+	* @return the contact that was removed
 	* @throws SystemException if a system exception occurred
 	*/
-	public void deleteContact(com.liferay.portal.model.Contact contact)
+	public com.liferay.portal.model.Contact deleteContact(
+		com.liferay.portal.model.Contact contact)
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery();
 
 	/**
 	* Performs a dynamic query on the database and returns the matching rows.

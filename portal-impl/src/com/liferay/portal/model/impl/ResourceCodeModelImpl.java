@@ -31,6 +31,9 @@ import java.io.Serializable;
 
 import java.sql.Types;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * The base model implementation for the ResourceCode service. Represents a row in the &quot;ResourceCode&quot; database table, with each column mapped to a property of this class.
  *
@@ -103,6 +106,45 @@ public class ResourceCodeModelImpl extends BaseModelImpl<ResourceCode>
 
 	public String getModelClassName() {
 		return ResourceCode.class.getName();
+	}
+
+	@Override
+	public Map<String, Object> getModelAttributes() {
+		Map<String, Object> attributes = new HashMap<String, Object>();
+
+		attributes.put("codeId", getCodeId());
+		attributes.put("companyId", getCompanyId());
+		attributes.put("name", getName());
+		attributes.put("scope", getScope());
+
+		return attributes;
+	}
+
+	@Override
+	public void setModelAttributes(Map<String, Object> attributes) {
+		Long codeId = (Long)attributes.get("codeId");
+
+		if (codeId != null) {
+			setCodeId(codeId);
+		}
+
+		Long companyId = (Long)attributes.get("companyId");
+
+		if (companyId != null) {
+			setCompanyId(companyId);
+		}
+
+		String name = (String)attributes.get("name");
+
+		if (name != null) {
+			setName(name);
+		}
+
+		Integer scope = (Integer)attributes.get("scope");
+
+		if (scope != null) {
+			setScope(scope);
+		}
 	}
 
 	public long getCodeId() {

@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
+import com.liferay.portal.service.BaseLocalService;
 import com.liferay.portal.service.PermissionedModelLocalService;
 
 /**
@@ -36,8 +37,8 @@ import com.liferay.portal.service.PermissionedModelLocalService;
  */
 @Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
 	PortalException.class, SystemException.class})
-public interface BookmarksEntryLocalService
-	extends PermissionedModelLocalService {
+public interface BookmarksEntryLocalService extends BaseLocalService,
+	PermissionedModelLocalService {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -68,10 +69,12 @@ public interface BookmarksEntryLocalService
 	* Deletes the bookmarks entry with the primary key from the database. Also notifies the appropriate model listeners.
 	*
 	* @param entryId the primary key of the bookmarks entry
+	* @return the bookmarks entry that was removed
 	* @throws PortalException if a bookmarks entry with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public void deleteBookmarksEntry(long entryId)
+	public com.liferay.portlet.bookmarks.model.BookmarksEntry deleteBookmarksEntry(
+		long entryId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -79,11 +82,14 @@ public interface BookmarksEntryLocalService
 	* Deletes the bookmarks entry from the database. Also notifies the appropriate model listeners.
 	*
 	* @param bookmarksEntry the bookmarks entry
+	* @return the bookmarks entry that was removed
 	* @throws SystemException if a system exception occurred
 	*/
-	public void deleteBookmarksEntry(
+	public com.liferay.portlet.bookmarks.model.BookmarksEntry deleteBookmarksEntry(
 		com.liferay.portlet.bookmarks.model.BookmarksEntry bookmarksEntry)
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery();
 
 	/**
 	* Performs a dynamic query on the database and returns the matching rows.

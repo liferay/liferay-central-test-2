@@ -21,15 +21,14 @@ import com.liferay.portal.kernel.bean.IdentifiableBean;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.search.Indexer;
-import com.liferay.portal.kernel.search.IndexerRegistryUtil;
-import com.liferay.portal.kernel.search.SearchException;
+import com.liferay.portal.kernel.search.Indexable;
+import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.PersistedModel;
+import com.liferay.portal.service.BaseLocalServiceImpl;
 import com.liferay.portal.service.PersistedModelLocalServiceRegistry;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceService;
@@ -90,7 +89,8 @@ import javax.sql.DataSource;
  * @generated
  */
 public abstract class AssetCategoryPropertyLocalServiceBaseImpl
-	implements AssetCategoryPropertyLocalService, IdentifiableBean {
+	extends BaseLocalServiceImpl implements AssetCategoryPropertyLocalService,
+		IdentifiableBean {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -104,27 +104,13 @@ public abstract class AssetCategoryPropertyLocalServiceBaseImpl
 	 * @return the asset category property that was added
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Indexable(type = IndexableType.REINDEX)
 	public AssetCategoryProperty addAssetCategoryProperty(
 		AssetCategoryProperty assetCategoryProperty) throws SystemException {
 		assetCategoryProperty.setNew(true);
 
-		assetCategoryProperty = assetCategoryPropertyPersistence.update(assetCategoryProperty,
-				false);
-
-		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
-
-		if (indexer != null) {
-			try {
-				indexer.reindex(assetCategoryProperty);
-			}
-			catch (SearchException se) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(se, se);
-				}
-			}
-		}
-
-		return assetCategoryProperty;
+		return assetCategoryPropertyPersistence.update(assetCategoryProperty,
+			false);
 	}
 
 	/**
@@ -142,49 +128,32 @@ public abstract class AssetCategoryPropertyLocalServiceBaseImpl
 	 * Deletes the asset category property with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
 	 * @param categoryPropertyId the primary key of the asset category property
+	 * @return the asset category property that was removed
 	 * @throws PortalException if a asset category property with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public void deleteAssetCategoryProperty(long categoryPropertyId)
-		throws PortalException, SystemException {
-		AssetCategoryProperty assetCategoryProperty = assetCategoryPropertyPersistence.remove(categoryPropertyId);
-
-		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
-
-		if (indexer != null) {
-			try {
-				indexer.delete(assetCategoryProperty);
-			}
-			catch (SearchException se) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(se, se);
-				}
-			}
-		}
+	@Indexable(type = IndexableType.DELETE)
+	public AssetCategoryProperty deleteAssetCategoryProperty(
+		long categoryPropertyId) throws PortalException, SystemException {
+		return assetCategoryPropertyPersistence.remove(categoryPropertyId);
 	}
 
 	/**
 	 * Deletes the asset category property from the database. Also notifies the appropriate model listeners.
 	 *
 	 * @param assetCategoryProperty the asset category property
+	 * @return the asset category property that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
-	public void deleteAssetCategoryProperty(
+	@Indexable(type = IndexableType.DELETE)
+	public AssetCategoryProperty deleteAssetCategoryProperty(
 		AssetCategoryProperty assetCategoryProperty) throws SystemException {
-		assetCategoryPropertyPersistence.remove(assetCategoryProperty);
+		return assetCategoryPropertyPersistence.remove(assetCategoryProperty);
+	}
 
-		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
-
-		if (indexer != null) {
-			try {
-				indexer.delete(assetCategoryProperty);
-			}
-			catch (SearchException se) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(se, se);
-				}
-			}
-		}
+	public DynamicQuery dynamicQuery() {
+		return DynamicQueryFactoryUtil.forClass(AssetCategoryProperty.class,
+			getClassLoader());
 	}
 
 	/**
@@ -310,6 +279,7 @@ public abstract class AssetCategoryPropertyLocalServiceBaseImpl
 	 * @return the asset category property that was updated
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Indexable(type = IndexableType.REINDEX)
 	public AssetCategoryProperty updateAssetCategoryProperty(
 		AssetCategoryProperty assetCategoryProperty) throws SystemException {
 		return updateAssetCategoryProperty(assetCategoryProperty, true);
@@ -323,28 +293,14 @@ public abstract class AssetCategoryPropertyLocalServiceBaseImpl
 	 * @return the asset category property that was updated
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Indexable(type = IndexableType.REINDEX)
 	public AssetCategoryProperty updateAssetCategoryProperty(
 		AssetCategoryProperty assetCategoryProperty, boolean merge)
 		throws SystemException {
 		assetCategoryProperty.setNew(false);
 
-		assetCategoryProperty = assetCategoryPropertyPersistence.update(assetCategoryProperty,
-				merge);
-
-		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
-
-		if (indexer != null) {
-			try {
-				indexer.reindex(assetCategoryProperty);
-			}
-			catch (SearchException se) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(se, se);
-				}
-			}
-		}
-
-		return assetCategoryProperty;
+		return assetCategoryPropertyPersistence.update(assetCategoryProperty,
+			merge);
 	}
 
 	/**
@@ -1083,12 +1039,6 @@ public abstract class AssetCategoryPropertyLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
-	protected ClassLoader getClassLoader() {
-		Class<?> clazz = getClass();
-
-		return clazz.getClassLoader();
-	}
-
 	protected Class<?> getModelClass() {
 		return AssetCategoryProperty.class;
 	}
@@ -1194,6 +1144,5 @@ public abstract class AssetCategoryPropertyLocalServiceBaseImpl
 	protected UserFinder userFinder;
 	@BeanReference(type = PersistedModelLocalServiceRegistry.class)
 	protected PersistedModelLocalServiceRegistry persistedModelLocalServiceRegistry;
-	private static Log _log = LogFactoryUtil.getLog(AssetCategoryPropertyLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

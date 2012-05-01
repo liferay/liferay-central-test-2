@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
+import com.liferay.portal.service.BaseLocalService;
 import com.liferay.portal.service.PersistedModelLocalService;
 
 /**
@@ -36,7 +37,8 @@ import com.liferay.portal.service.PersistedModelLocalService;
  */
 @Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
 	PortalException.class, SystemException.class})
-public interface CalEventLocalService extends PersistedModelLocalService {
+public interface CalEventLocalService extends BaseLocalService,
+	PersistedModelLocalService {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -67,10 +69,12 @@ public interface CalEventLocalService extends PersistedModelLocalService {
 	* Deletes the cal event with the primary key from the database. Also notifies the appropriate model listeners.
 	*
 	* @param eventId the primary key of the cal event
+	* @return the cal event that was removed
 	* @throws PortalException if a cal event with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public void deleteCalEvent(long eventId)
+	public com.liferay.portlet.calendar.model.CalEvent deleteCalEvent(
+		long eventId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -78,11 +82,14 @@ public interface CalEventLocalService extends PersistedModelLocalService {
 	* Deletes the cal event from the database. Also notifies the appropriate model listeners.
 	*
 	* @param calEvent the cal event
+	* @return the cal event that was removed
 	* @throws SystemException if a system exception occurred
 	*/
-	public void deleteCalEvent(
+	public com.liferay.portlet.calendar.model.CalEvent deleteCalEvent(
 		com.liferay.portlet.calendar.model.CalEvent calEvent)
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery();
 
 	/**
 	* Performs a dynamic query on the database and returns the matching rows.

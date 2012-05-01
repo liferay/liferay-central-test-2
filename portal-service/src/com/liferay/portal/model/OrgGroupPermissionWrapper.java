@@ -14,6 +14,9 @@
 
 package com.liferay.portal.model;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * <p>
  * This class is a wrapper for {@link OrgGroupPermission}.
@@ -35,6 +38,36 @@ public class OrgGroupPermissionWrapper implements OrgGroupPermission,
 
 	public String getModelClassName() {
 		return OrgGroupPermission.class.getName();
+	}
+
+	public Map<String, Object> getModelAttributes() {
+		Map<String, Object> attributes = new HashMap<String, Object>();
+
+		attributes.put("organizationId", getOrganizationId());
+		attributes.put("groupId", getGroupId());
+		attributes.put("permissionId", getPermissionId());
+
+		return attributes;
+	}
+
+	public void setModelAttributes(Map<String, Object> attributes) {
+		Long organizationId = (Long)attributes.get("organizationId");
+
+		if (organizationId != null) {
+			setOrganizationId(organizationId);
+		}
+
+		Long groupId = (Long)attributes.get("groupId");
+
+		if (groupId != null) {
+			setGroupId(groupId);
+		}
+
+		Long permissionId = (Long)attributes.get("permissionId");
+
+		if (permissionId != null) {
+			setPermissionId(permissionId);
+		}
 	}
 
 	/**

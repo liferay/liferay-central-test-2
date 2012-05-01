@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.CacheModel;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.service.ServiceContext;
@@ -32,6 +33,9 @@ import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 import java.io.Serializable;
 
 import java.sql.Types;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * The base model implementation for the DDMStructureLink service. Represents a row in the &quot;DDMStructureLink&quot; database table, with each column mapped to a property of this class.
@@ -107,6 +111,45 @@ public class DDMStructureLinkModelImpl extends BaseModelImpl<DDMStructureLink>
 		return DDMStructureLink.class.getName();
 	}
 
+	@Override
+	public Map<String, Object> getModelAttributes() {
+		Map<String, Object> attributes = new HashMap<String, Object>();
+
+		attributes.put("structureLinkId", getStructureLinkId());
+		attributes.put("classNameId", getClassNameId());
+		attributes.put("classPK", getClassPK());
+		attributes.put("structureId", getStructureId());
+
+		return attributes;
+	}
+
+	@Override
+	public void setModelAttributes(Map<String, Object> attributes) {
+		Long structureLinkId = (Long)attributes.get("structureLinkId");
+
+		if (structureLinkId != null) {
+			setStructureLinkId(structureLinkId);
+		}
+
+		Long classNameId = (Long)attributes.get("classNameId");
+
+		if (classNameId != null) {
+			setClassNameId(classNameId);
+		}
+
+		Long classPK = (Long)attributes.get("classPK");
+
+		if (classPK != null) {
+			setClassPK(classPK);
+		}
+
+		Long structureId = (Long)attributes.get("structureId");
+
+		if (structureId != null) {
+			setStructureId(structureId);
+		}
+	}
+
 	public long getStructureLinkId() {
 		return _structureLinkId;
 	}
@@ -121,6 +164,16 @@ public class DDMStructureLinkModelImpl extends BaseModelImpl<DDMStructureLink>
 		}
 
 		return PortalUtil.getClassName(getClassNameId());
+	}
+
+	public void setClassName(String className) {
+		long classNameId = 0;
+
+		if (Validator.isNotNull(className)) {
+			classNameId = PortalUtil.getClassNameId(className);
+		}
+
+		setClassNameId(classNameId);
 	}
 
 	public long getClassNameId() {

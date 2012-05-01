@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
+import com.liferay.portal.service.BaseLocalService;
 import com.liferay.portal.service.PersistedModelLocalService;
 
 /**
@@ -36,7 +37,8 @@ import com.liferay.portal.service.PersistedModelLocalService;
  */
 @Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
 	PortalException.class, SystemException.class})
-public interface ShoppingCategoryLocalService extends PersistedModelLocalService {
+public interface ShoppingCategoryLocalService extends BaseLocalService,
+	PersistedModelLocalService {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -67,10 +69,12 @@ public interface ShoppingCategoryLocalService extends PersistedModelLocalService
 	* Deletes the shopping category with the primary key from the database. Also notifies the appropriate model listeners.
 	*
 	* @param categoryId the primary key of the shopping category
+	* @return the shopping category that was removed
 	* @throws PortalException if a shopping category with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public void deleteShoppingCategory(long categoryId)
+	public com.liferay.portlet.shopping.model.ShoppingCategory deleteShoppingCategory(
+		long categoryId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -78,11 +82,14 @@ public interface ShoppingCategoryLocalService extends PersistedModelLocalService
 	* Deletes the shopping category from the database. Also notifies the appropriate model listeners.
 	*
 	* @param shoppingCategory the shopping category
+	* @return the shopping category that was removed
 	* @throws SystemException if a system exception occurred
 	*/
-	public void deleteShoppingCategory(
+	public com.liferay.portlet.shopping.model.ShoppingCategory deleteShoppingCategory(
 		com.liferay.portlet.shopping.model.ShoppingCategory shoppingCategory)
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery();
 
 	/**
 	* Performs a dynamic query on the database and returns the matching rows.

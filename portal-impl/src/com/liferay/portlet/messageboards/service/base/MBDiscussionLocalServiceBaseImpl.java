@@ -21,15 +21,14 @@ import com.liferay.portal.kernel.bean.IdentifiableBean;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.search.Indexer;
-import com.liferay.portal.kernel.search.IndexerRegistryUtil;
-import com.liferay.portal.kernel.search.SearchException;
+import com.liferay.portal.kernel.search.Indexable;
+import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.PersistedModel;
+import com.liferay.portal.service.BaseLocalServiceImpl;
 import com.liferay.portal.service.PersistedModelLocalServiceRegistry;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceService;
@@ -84,7 +83,8 @@ import javax.sql.DataSource;
  * @generated
  */
 public abstract class MBDiscussionLocalServiceBaseImpl
-	implements MBDiscussionLocalService, IdentifiableBean {
+	extends BaseLocalServiceImpl implements MBDiscussionLocalService,
+		IdentifiableBean {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -98,26 +98,12 @@ public abstract class MBDiscussionLocalServiceBaseImpl
 	 * @return the message boards discussion that was added
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Indexable(type = IndexableType.REINDEX)
 	public MBDiscussion addMBDiscussion(MBDiscussion mbDiscussion)
 		throws SystemException {
 		mbDiscussion.setNew(true);
 
-		mbDiscussion = mbDiscussionPersistence.update(mbDiscussion, false);
-
-		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
-
-		if (indexer != null) {
-			try {
-				indexer.reindex(mbDiscussion);
-			}
-			catch (SearchException se) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(se, se);
-				}
-			}
-		}
-
-		return mbDiscussion;
+		return mbDiscussionPersistence.update(mbDiscussion, false);
 	}
 
 	/**
@@ -134,49 +120,32 @@ public abstract class MBDiscussionLocalServiceBaseImpl
 	 * Deletes the message boards discussion with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
 	 * @param discussionId the primary key of the message boards discussion
+	 * @return the message boards discussion that was removed
 	 * @throws PortalException if a message boards discussion with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public void deleteMBDiscussion(long discussionId)
+	@Indexable(type = IndexableType.DELETE)
+	public MBDiscussion deleteMBDiscussion(long discussionId)
 		throws PortalException, SystemException {
-		MBDiscussion mbDiscussion = mbDiscussionPersistence.remove(discussionId);
-
-		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
-
-		if (indexer != null) {
-			try {
-				indexer.delete(mbDiscussion);
-			}
-			catch (SearchException se) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(se, se);
-				}
-			}
-		}
+		return mbDiscussionPersistence.remove(discussionId);
 	}
 
 	/**
 	 * Deletes the message boards discussion from the database. Also notifies the appropriate model listeners.
 	 *
 	 * @param mbDiscussion the message boards discussion
+	 * @return the message boards discussion that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
-	public void deleteMBDiscussion(MBDiscussion mbDiscussion)
+	@Indexable(type = IndexableType.DELETE)
+	public MBDiscussion deleteMBDiscussion(MBDiscussion mbDiscussion)
 		throws SystemException {
-		mbDiscussionPersistence.remove(mbDiscussion);
+		return mbDiscussionPersistence.remove(mbDiscussion);
+	}
 
-		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
-
-		if (indexer != null) {
-			try {
-				indexer.delete(mbDiscussion);
-			}
-			catch (SearchException se) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(se, se);
-				}
-			}
-		}
+	public DynamicQuery dynamicQuery() {
+		return DynamicQueryFactoryUtil.forClass(MBDiscussion.class,
+			getClassLoader());
 	}
 
 	/**
@@ -302,6 +271,7 @@ public abstract class MBDiscussionLocalServiceBaseImpl
 	 * @return the message boards discussion that was updated
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Indexable(type = IndexableType.REINDEX)
 	public MBDiscussion updateMBDiscussion(MBDiscussion mbDiscussion)
 		throws SystemException {
 		return updateMBDiscussion(mbDiscussion, true);
@@ -315,26 +285,12 @@ public abstract class MBDiscussionLocalServiceBaseImpl
 	 * @return the message boards discussion that was updated
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Indexable(type = IndexableType.REINDEX)
 	public MBDiscussion updateMBDiscussion(MBDiscussion mbDiscussion,
 		boolean merge) throws SystemException {
 		mbDiscussion.setNew(false);
 
-		mbDiscussion = mbDiscussionPersistence.update(mbDiscussion, merge);
-
-		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
-
-		if (indexer != null) {
-			try {
-				indexer.reindex(mbDiscussion);
-			}
-			catch (SearchException se) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(se, se);
-				}
-			}
-		}
-
-		return mbDiscussion;
+		return mbDiscussionPersistence.update(mbDiscussion, merge);
 	}
 
 	/**
@@ -955,12 +911,6 @@ public abstract class MBDiscussionLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
-	protected ClassLoader getClassLoader() {
-		Class<?> clazz = getClass();
-
-		return clazz.getClassLoader();
-	}
-
 	protected Class<?> getModelClass() {
 		return MBDiscussion.class;
 	}
@@ -1054,6 +1004,5 @@ public abstract class MBDiscussionLocalServiceBaseImpl
 	protected UserFinder userFinder;
 	@BeanReference(type = PersistedModelLocalServiceRegistry.class)
 	protected PersistedModelLocalServiceRegistry persistedModelLocalServiceRegistry;
-	private static Log _log = LogFactoryUtil.getLog(MBDiscussionLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

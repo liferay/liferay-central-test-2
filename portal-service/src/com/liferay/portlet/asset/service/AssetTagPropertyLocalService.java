@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
+import com.liferay.portal.service.BaseLocalService;
 import com.liferay.portal.service.PersistedModelLocalService;
 
 /**
@@ -36,7 +37,8 @@ import com.liferay.portal.service.PersistedModelLocalService;
  */
 @Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
 	PortalException.class, SystemException.class})
-public interface AssetTagPropertyLocalService extends PersistedModelLocalService {
+public interface AssetTagPropertyLocalService extends BaseLocalService,
+	PersistedModelLocalService {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -67,10 +69,12 @@ public interface AssetTagPropertyLocalService extends PersistedModelLocalService
 	* Deletes the asset tag property with the primary key from the database. Also notifies the appropriate model listeners.
 	*
 	* @param tagPropertyId the primary key of the asset tag property
+	* @return the asset tag property that was removed
 	* @throws PortalException if a asset tag property with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public void deleteAssetTagProperty(long tagPropertyId)
+	public com.liferay.portlet.asset.model.AssetTagProperty deleteAssetTagProperty(
+		long tagPropertyId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -78,11 +82,14 @@ public interface AssetTagPropertyLocalService extends PersistedModelLocalService
 	* Deletes the asset tag property from the database. Also notifies the appropriate model listeners.
 	*
 	* @param assetTagProperty the asset tag property
+	* @return the asset tag property that was removed
 	* @throws SystemException if a system exception occurred
 	*/
-	public void deleteAssetTagProperty(
+	public com.liferay.portlet.asset.model.AssetTagProperty deleteAssetTagProperty(
 		com.liferay.portlet.asset.model.AssetTagProperty assetTagProperty)
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery();
 
 	/**
 	* Performs a dynamic query on the database and returns the matching rows.

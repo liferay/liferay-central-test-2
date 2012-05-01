@@ -35,7 +35,8 @@ import com.liferay.portal.kernel.transaction.Transactional;
  */
 @Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
 	PortalException.class, SystemException.class})
-public interface CompanyLocalService extends PersistedModelLocalService {
+public interface CompanyLocalService extends BaseLocalService,
+	PersistedModelLocalService {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -65,10 +66,11 @@ public interface CompanyLocalService extends PersistedModelLocalService {
 	* Deletes the company with the primary key from the database. Also notifies the appropriate model listeners.
 	*
 	* @param companyId the primary key of the company
+	* @return the company that was removed
 	* @throws PortalException if a company with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public void deleteCompany(long companyId)
+	public com.liferay.portal.model.Company deleteCompany(long companyId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -76,10 +78,14 @@ public interface CompanyLocalService extends PersistedModelLocalService {
 	* Deletes the company from the database. Also notifies the appropriate model listeners.
 	*
 	* @param company the company
+	* @return the company that was removed
 	* @throws SystemException if a system exception occurred
 	*/
-	public void deleteCompany(com.liferay.portal.model.Company company)
+	public com.liferay.portal.model.Company deleteCompany(
+		com.liferay.portal.model.Company company)
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery();
 
 	/**
 	* Performs a dynamic query on the database and returns the matching rows.

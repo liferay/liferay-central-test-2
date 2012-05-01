@@ -21,13 +21,11 @@ import com.liferay.portal.kernel.bean.IdentifiableBean;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.search.Indexer;
-import com.liferay.portal.kernel.search.IndexerRegistryUtil;
-import com.liferay.portal.kernel.search.SearchException;
+import com.liferay.portal.kernel.search.Indexable;
+import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.model.PersistedModel;
@@ -35,6 +33,7 @@ import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountService;
 import com.liferay.portal.service.AddressLocalService;
 import com.liferay.portal.service.AddressService;
+import com.liferay.portal.service.BaseLocalServiceImpl;
 import com.liferay.portal.service.BrowserTrackerLocalService;
 import com.liferay.portal.service.CMISRepositoryLocalService;
 import com.liferay.portal.service.ClassNameLocalService;
@@ -244,8 +243,8 @@ import javax.sql.DataSource;
  * @see com.liferay.portal.service.ImageLocalServiceUtil
  * @generated
  */
-public abstract class ImageLocalServiceBaseImpl implements ImageLocalService,
-	IdentifiableBean {
+public abstract class ImageLocalServiceBaseImpl extends BaseLocalServiceImpl
+	implements ImageLocalService, IdentifiableBean {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -259,25 +258,11 @@ public abstract class ImageLocalServiceBaseImpl implements ImageLocalService,
 	 * @return the image that was added
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Indexable(type = IndexableType.REINDEX)
 	public Image addImage(Image image) throws SystemException {
 		image.setNew(true);
 
-		image = imagePersistence.update(image, false);
-
-		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
-
-		if (indexer != null) {
-			try {
-				indexer.reindex(image);
-			}
-			catch (SearchException se) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(se, se);
-				}
-			}
-		}
-
-		return image;
+		return imagePersistence.update(image, false);
 	}
 
 	/**
@@ -294,48 +279,30 @@ public abstract class ImageLocalServiceBaseImpl implements ImageLocalService,
 	 * Deletes the image with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
 	 * @param imageId the primary key of the image
+	 * @return the image that was removed
 	 * @throws PortalException if a image with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public void deleteImage(long imageId)
+	@Indexable(type = IndexableType.DELETE)
+	public Image deleteImage(long imageId)
 		throws PortalException, SystemException {
-		Image image = imagePersistence.remove(imageId);
-
-		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
-
-		if (indexer != null) {
-			try {
-				indexer.delete(image);
-			}
-			catch (SearchException se) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(se, se);
-				}
-			}
-		}
+		return imagePersistence.remove(imageId);
 	}
 
 	/**
 	 * Deletes the image from the database. Also notifies the appropriate model listeners.
 	 *
 	 * @param image the image
+	 * @return the image that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
-	public void deleteImage(Image image) throws SystemException {
-		imagePersistence.remove(image);
+	@Indexable(type = IndexableType.DELETE)
+	public Image deleteImage(Image image) throws SystemException {
+		return imagePersistence.remove(image);
+	}
 
-		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
-
-		if (indexer != null) {
-			try {
-				indexer.delete(image);
-			}
-			catch (SearchException se) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(se, se);
-				}
-			}
-		}
+	public DynamicQuery dynamicQuery() {
+		return DynamicQueryFactoryUtil.forClass(Image.class, getClassLoader());
 	}
 
 	/**
@@ -457,6 +424,7 @@ public abstract class ImageLocalServiceBaseImpl implements ImageLocalService,
 	 * @return the image that was updated
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Indexable(type = IndexableType.REINDEX)
 	public Image updateImage(Image image) throws SystemException {
 		return updateImage(image, true);
 	}
@@ -469,26 +437,12 @@ public abstract class ImageLocalServiceBaseImpl implements ImageLocalService,
 	 * @return the image that was updated
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Indexable(type = IndexableType.REINDEX)
 	public Image updateImage(Image image, boolean merge)
 		throws SystemException {
 		image.setNew(false);
 
-		image = imagePersistence.update(image, merge);
-
-		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
-
-		if (indexer != null) {
-			try {
-				indexer.reindex(image);
-			}
-			catch (SearchException se) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(se, se);
-				}
-			}
-		}
-
-		return image;
+		return imagePersistence.update(image, merge);
 	}
 
 	/**
@@ -4101,12 +4055,6 @@ public abstract class ImageLocalServiceBaseImpl implements ImageLocalService,
 		_beanIdentifier = beanIdentifier;
 	}
 
-	protected ClassLoader getClassLoader() {
-		Class<?> clazz = getClass();
-
-		return clazz.getClassLoader();
-	}
-
 	protected Class<?> getModelClass() {
 		return Image.class;
 	}
@@ -4522,6 +4470,5 @@ public abstract class ImageLocalServiceBaseImpl implements ImageLocalService,
 	protected DLFileEntryFinder dlFileEntryFinder;
 	@BeanReference(type = PersistedModelLocalServiceRegistry.class)
 	protected PersistedModelLocalServiceRegistry persistedModelLocalServiceRegistry;
-	private static Log _log = LogFactoryUtil.getLog(ImageLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

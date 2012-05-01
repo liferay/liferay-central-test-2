@@ -21,13 +21,11 @@ import com.liferay.portal.kernel.bean.IdentifiableBean;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.search.Indexer;
-import com.liferay.portal.kernel.search.IndexerRegistryUtil;
-import com.liferay.portal.kernel.search.SearchException;
+import com.liferay.portal.kernel.search.Indexable;
+import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.PersistedModel;
 import com.liferay.portal.model.UserGroupRole;
@@ -35,6 +33,7 @@ import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountService;
 import com.liferay.portal.service.AddressLocalService;
 import com.liferay.portal.service.AddressService;
+import com.liferay.portal.service.BaseLocalServiceImpl;
 import com.liferay.portal.service.BrowserTrackerLocalService;
 import com.liferay.portal.service.CMISRepositoryLocalService;
 import com.liferay.portal.service.ClassNameLocalService;
@@ -241,7 +240,8 @@ import javax.sql.DataSource;
  * @generated
  */
 public abstract class UserGroupRoleLocalServiceBaseImpl
-	implements UserGroupRoleLocalService, IdentifiableBean {
+	extends BaseLocalServiceImpl implements UserGroupRoleLocalService,
+		IdentifiableBean {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -255,26 +255,12 @@ public abstract class UserGroupRoleLocalServiceBaseImpl
 	 * @return the user group role that was added
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Indexable(type = IndexableType.REINDEX)
 	public UserGroupRole addUserGroupRole(UserGroupRole userGroupRole)
 		throws SystemException {
 		userGroupRole.setNew(true);
 
-		userGroupRole = userGroupRolePersistence.update(userGroupRole, false);
-
-		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
-
-		if (indexer != null) {
-			try {
-				indexer.reindex(userGroupRole);
-			}
-			catch (SearchException se) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(se, se);
-				}
-			}
-		}
-
-		return userGroupRole;
+		return userGroupRolePersistence.update(userGroupRole, false);
 	}
 
 	/**
@@ -291,49 +277,32 @@ public abstract class UserGroupRoleLocalServiceBaseImpl
 	 * Deletes the user group role with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
 	 * @param userGroupRolePK the primary key of the user group role
+	 * @return the user group role that was removed
 	 * @throws PortalException if a user group role with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public void deleteUserGroupRole(UserGroupRolePK userGroupRolePK)
+	@Indexable(type = IndexableType.DELETE)
+	public UserGroupRole deleteUserGroupRole(UserGroupRolePK userGroupRolePK)
 		throws PortalException, SystemException {
-		UserGroupRole userGroupRole = userGroupRolePersistence.remove(userGroupRolePK);
-
-		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
-
-		if (indexer != null) {
-			try {
-				indexer.delete(userGroupRole);
-			}
-			catch (SearchException se) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(se, se);
-				}
-			}
-		}
+		return userGroupRolePersistence.remove(userGroupRolePK);
 	}
 
 	/**
 	 * Deletes the user group role from the database. Also notifies the appropriate model listeners.
 	 *
 	 * @param userGroupRole the user group role
+	 * @return the user group role that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
-	public void deleteUserGroupRole(UserGroupRole userGroupRole)
+	@Indexable(type = IndexableType.DELETE)
+	public UserGroupRole deleteUserGroupRole(UserGroupRole userGroupRole)
 		throws SystemException {
-		userGroupRolePersistence.remove(userGroupRole);
+		return userGroupRolePersistence.remove(userGroupRole);
+	}
 
-		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
-
-		if (indexer != null) {
-			try {
-				indexer.delete(userGroupRole);
-			}
-			catch (SearchException se) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(se, se);
-				}
-			}
-		}
+	public DynamicQuery dynamicQuery() {
+		return DynamicQueryFactoryUtil.forClass(UserGroupRole.class,
+			getClassLoader());
 	}
 
 	/**
@@ -459,6 +428,7 @@ public abstract class UserGroupRoleLocalServiceBaseImpl
 	 * @return the user group role that was updated
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Indexable(type = IndexableType.REINDEX)
 	public UserGroupRole updateUserGroupRole(UserGroupRole userGroupRole)
 		throws SystemException {
 		return updateUserGroupRole(userGroupRole, true);
@@ -472,26 +442,12 @@ public abstract class UserGroupRoleLocalServiceBaseImpl
 	 * @return the user group role that was updated
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Indexable(type = IndexableType.REINDEX)
 	public UserGroupRole updateUserGroupRole(UserGroupRole userGroupRole,
 		boolean merge) throws SystemException {
 		userGroupRole.setNew(false);
 
-		userGroupRole = userGroupRolePersistence.update(userGroupRole, merge);
-
-		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
-
-		if (indexer != null) {
-			try {
-				indexer.reindex(userGroupRole);
-			}
-			catch (SearchException se) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(se, se);
-				}
-			}
-		}
-
-		return userGroupRole;
+		return userGroupRolePersistence.update(userGroupRole, merge);
 	}
 
 	/**
@@ -4030,12 +3986,6 @@ public abstract class UserGroupRoleLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
-	protected ClassLoader getClassLoader() {
-		Class<?> clazz = getClass();
-
-		return clazz.getClassLoader();
-	}
-
 	protected Class<?> getModelClass() {
 		return UserGroupRole.class;
 	}
@@ -4443,6 +4393,5 @@ public abstract class UserGroupRoleLocalServiceBaseImpl
 	protected CounterLocalService counterLocalService;
 	@BeanReference(type = PersistedModelLocalServiceRegistry.class)
 	protected PersistedModelLocalServiceRegistry persistedModelLocalServiceRegistry;
-	private static Log _log = LogFactoryUtil.getLog(UserGroupRoleLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

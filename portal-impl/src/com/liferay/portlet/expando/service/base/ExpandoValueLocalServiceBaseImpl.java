@@ -21,15 +21,14 @@ import com.liferay.portal.kernel.bean.IdentifiableBean;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.search.Indexer;
-import com.liferay.portal.kernel.search.IndexerRegistryUtil;
-import com.liferay.portal.kernel.search.SearchException;
+import com.liferay.portal.kernel.search.Indexable;
+import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.PersistedModel;
+import com.liferay.portal.service.BaseLocalServiceImpl;
 import com.liferay.portal.service.PersistedModelLocalServiceRegistry;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceService;
@@ -71,7 +70,8 @@ import javax.sql.DataSource;
  * @generated
  */
 public abstract class ExpandoValueLocalServiceBaseImpl
-	implements ExpandoValueLocalService, IdentifiableBean {
+	extends BaseLocalServiceImpl implements ExpandoValueLocalService,
+		IdentifiableBean {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -85,26 +85,12 @@ public abstract class ExpandoValueLocalServiceBaseImpl
 	 * @return the expando value that was added
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Indexable(type = IndexableType.REINDEX)
 	public ExpandoValue addExpandoValue(ExpandoValue expandoValue)
 		throws SystemException {
 		expandoValue.setNew(true);
 
-		expandoValue = expandoValuePersistence.update(expandoValue, false);
-
-		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
-
-		if (indexer != null) {
-			try {
-				indexer.reindex(expandoValue);
-			}
-			catch (SearchException se) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(se, se);
-				}
-			}
-		}
-
-		return expandoValue;
+		return expandoValuePersistence.update(expandoValue, false);
 	}
 
 	/**
@@ -121,49 +107,32 @@ public abstract class ExpandoValueLocalServiceBaseImpl
 	 * Deletes the expando value with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
 	 * @param valueId the primary key of the expando value
+	 * @return the expando value that was removed
 	 * @throws PortalException if a expando value with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public void deleteExpandoValue(long valueId)
+	@Indexable(type = IndexableType.DELETE)
+	public ExpandoValue deleteExpandoValue(long valueId)
 		throws PortalException, SystemException {
-		ExpandoValue expandoValue = expandoValuePersistence.remove(valueId);
-
-		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
-
-		if (indexer != null) {
-			try {
-				indexer.delete(expandoValue);
-			}
-			catch (SearchException se) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(se, se);
-				}
-			}
-		}
+		return expandoValuePersistence.remove(valueId);
 	}
 
 	/**
 	 * Deletes the expando value from the database. Also notifies the appropriate model listeners.
 	 *
 	 * @param expandoValue the expando value
+	 * @return the expando value that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
-	public void deleteExpandoValue(ExpandoValue expandoValue)
+	@Indexable(type = IndexableType.DELETE)
+	public ExpandoValue deleteExpandoValue(ExpandoValue expandoValue)
 		throws SystemException {
-		expandoValuePersistence.remove(expandoValue);
+		return expandoValuePersistence.remove(expandoValue);
+	}
 
-		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
-
-		if (indexer != null) {
-			try {
-				indexer.delete(expandoValue);
-			}
-			catch (SearchException se) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(se, se);
-				}
-			}
-		}
+	public DynamicQuery dynamicQuery() {
+		return DynamicQueryFactoryUtil.forClass(ExpandoValue.class,
+			getClassLoader());
 	}
 
 	/**
@@ -289,6 +258,7 @@ public abstract class ExpandoValueLocalServiceBaseImpl
 	 * @return the expando value that was updated
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Indexable(type = IndexableType.REINDEX)
 	public ExpandoValue updateExpandoValue(ExpandoValue expandoValue)
 		throws SystemException {
 		return updateExpandoValue(expandoValue, true);
@@ -302,26 +272,12 @@ public abstract class ExpandoValueLocalServiceBaseImpl
 	 * @return the expando value that was updated
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Indexable(type = IndexableType.REINDEX)
 	public ExpandoValue updateExpandoValue(ExpandoValue expandoValue,
 		boolean merge) throws SystemException {
 		expandoValue.setNew(false);
 
-		expandoValue = expandoValuePersistence.update(expandoValue, merge);
-
-		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
-
-		if (indexer != null) {
-			try {
-				indexer.reindex(expandoValue);
-			}
-			catch (SearchException se) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(se, se);
-				}
-			}
-		}
-
-		return expandoValue;
+		return expandoValuePersistence.update(expandoValue, merge);
 	}
 
 	/**
@@ -704,12 +660,6 @@ public abstract class ExpandoValueLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
-	protected ClassLoader getClassLoader() {
-		Class<?> clazz = getClass();
-
-		return clazz.getClassLoader();
-	}
-
 	protected Class<?> getModelClass() {
 		return ExpandoValue.class;
 	}
@@ -777,6 +727,5 @@ public abstract class ExpandoValueLocalServiceBaseImpl
 	protected UserFinder userFinder;
 	@BeanReference(type = PersistedModelLocalServiceRegistry.class)
 	protected PersistedModelLocalServiceRegistry persistedModelLocalServiceRegistry;
-	private static Log _log = LogFactoryUtil.getLog(ExpandoValueLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

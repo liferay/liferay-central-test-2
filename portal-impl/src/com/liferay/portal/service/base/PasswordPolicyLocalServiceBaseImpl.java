@@ -21,13 +21,11 @@ import com.liferay.portal.kernel.bean.IdentifiableBean;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.search.Indexer;
-import com.liferay.portal.kernel.search.IndexerRegistryUtil;
-import com.liferay.portal.kernel.search.SearchException;
+import com.liferay.portal.kernel.search.Indexable;
+import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.PasswordPolicy;
 import com.liferay.portal.model.PersistedModel;
@@ -35,6 +33,7 @@ import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountService;
 import com.liferay.portal.service.AddressLocalService;
 import com.liferay.portal.service.AddressService;
+import com.liferay.portal.service.BaseLocalServiceImpl;
 import com.liferay.portal.service.BrowserTrackerLocalService;
 import com.liferay.portal.service.CMISRepositoryLocalService;
 import com.liferay.portal.service.ClassNameLocalService;
@@ -240,7 +239,8 @@ import javax.sql.DataSource;
  * @generated
  */
 public abstract class PasswordPolicyLocalServiceBaseImpl
-	implements PasswordPolicyLocalService, IdentifiableBean {
+	extends BaseLocalServiceImpl implements PasswordPolicyLocalService,
+		IdentifiableBean {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -254,26 +254,12 @@ public abstract class PasswordPolicyLocalServiceBaseImpl
 	 * @return the password policy that was added
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Indexable(type = IndexableType.REINDEX)
 	public PasswordPolicy addPasswordPolicy(PasswordPolicy passwordPolicy)
 		throws SystemException {
 		passwordPolicy.setNew(true);
 
-		passwordPolicy = passwordPolicyPersistence.update(passwordPolicy, false);
-
-		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
-
-		if (indexer != null) {
-			try {
-				indexer.reindex(passwordPolicy);
-			}
-			catch (SearchException se) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(se, se);
-				}
-			}
-		}
-
-		return passwordPolicy;
+		return passwordPolicyPersistence.update(passwordPolicy, false);
 	}
 
 	/**
@@ -290,50 +276,33 @@ public abstract class PasswordPolicyLocalServiceBaseImpl
 	 * Deletes the password policy with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
 	 * @param passwordPolicyId the primary key of the password policy
+	 * @return the password policy that was removed
 	 * @throws PortalException if a password policy with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public void deletePasswordPolicy(long passwordPolicyId)
+	@Indexable(type = IndexableType.DELETE)
+	public PasswordPolicy deletePasswordPolicy(long passwordPolicyId)
 		throws PortalException, SystemException {
-		PasswordPolicy passwordPolicy = passwordPolicyPersistence.remove(passwordPolicyId);
-
-		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
-
-		if (indexer != null) {
-			try {
-				indexer.delete(passwordPolicy);
-			}
-			catch (SearchException se) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(se, se);
-				}
-			}
-		}
+		return passwordPolicyPersistence.remove(passwordPolicyId);
 	}
 
 	/**
 	 * Deletes the password policy from the database. Also notifies the appropriate model listeners.
 	 *
 	 * @param passwordPolicy the password policy
+	 * @return the password policy that was removed
 	 * @throws PortalException
 	 * @throws SystemException if a system exception occurred
 	 */
-	public void deletePasswordPolicy(PasswordPolicy passwordPolicy)
+	@Indexable(type = IndexableType.DELETE)
+	public PasswordPolicy deletePasswordPolicy(PasswordPolicy passwordPolicy)
 		throws PortalException, SystemException {
-		passwordPolicyPersistence.remove(passwordPolicy);
+		return passwordPolicyPersistence.remove(passwordPolicy);
+	}
 
-		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
-
-		if (indexer != null) {
-			try {
-				indexer.delete(passwordPolicy);
-			}
-			catch (SearchException se) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(se, se);
-				}
-			}
-		}
+	public DynamicQuery dynamicQuery() {
+		return DynamicQueryFactoryUtil.forClass(PasswordPolicy.class,
+			getClassLoader());
 	}
 
 	/**
@@ -459,6 +428,7 @@ public abstract class PasswordPolicyLocalServiceBaseImpl
 	 * @return the password policy that was updated
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Indexable(type = IndexableType.REINDEX)
 	public PasswordPolicy updatePasswordPolicy(PasswordPolicy passwordPolicy)
 		throws SystemException {
 		return updatePasswordPolicy(passwordPolicy, true);
@@ -472,26 +442,12 @@ public abstract class PasswordPolicyLocalServiceBaseImpl
 	 * @return the password policy that was updated
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Indexable(type = IndexableType.REINDEX)
 	public PasswordPolicy updatePasswordPolicy(PasswordPolicy passwordPolicy,
 		boolean merge) throws SystemException {
 		passwordPolicy.setNew(false);
 
-		passwordPolicy = passwordPolicyPersistence.update(passwordPolicy, merge);
-
-		Indexer indexer = IndexerRegistryUtil.getIndexer(getModelClassName());
-
-		if (indexer != null) {
-			try {
-				indexer.reindex(passwordPolicy);
-			}
-			catch (SearchException se) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(se, se);
-				}
-			}
-		}
-
-		return passwordPolicy;
+		return passwordPolicyPersistence.update(passwordPolicy, merge);
 	}
 
 	/**
@@ -4030,12 +3986,6 @@ public abstract class PasswordPolicyLocalServiceBaseImpl
 		_beanIdentifier = beanIdentifier;
 	}
 
-	protected ClassLoader getClassLoader() {
-		Class<?> clazz = getClass();
-
-		return clazz.getClassLoader();
-	}
-
 	protected Class<?> getModelClass() {
 		return PasswordPolicy.class;
 	}
@@ -4443,6 +4393,5 @@ public abstract class PasswordPolicyLocalServiceBaseImpl
 	protected CounterLocalService counterLocalService;
 	@BeanReference(type = PersistedModelLocalServiceRegistry.class)
 	protected PersistedModelLocalServiceRegistry persistedModelLocalServiceRegistry;
-	private static Log _log = LogFactoryUtil.getLog(PasswordPolicyLocalServiceBaseImpl.class);
 	private String _beanIdentifier;
 }

@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
+import com.liferay.portal.service.BaseLocalService;
 import com.liferay.portal.service.PersistedModelLocalService;
 
 /**
@@ -36,7 +37,8 @@ import com.liferay.portal.service.PersistedModelLocalService;
  */
 @Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
 	PortalException.class, SystemException.class})
-public interface DLFileVersionLocalService extends PersistedModelLocalService {
+public interface DLFileVersionLocalService extends BaseLocalService,
+	PersistedModelLocalService {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -67,10 +69,12 @@ public interface DLFileVersionLocalService extends PersistedModelLocalService {
 	* Deletes the document library file version with the primary key from the database. Also notifies the appropriate model listeners.
 	*
 	* @param fileVersionId the primary key of the document library file version
+	* @return the document library file version that was removed
 	* @throws PortalException if a document library file version with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public void deleteDLFileVersion(long fileVersionId)
+	public com.liferay.portlet.documentlibrary.model.DLFileVersion deleteDLFileVersion(
+		long fileVersionId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -78,11 +82,14 @@ public interface DLFileVersionLocalService extends PersistedModelLocalService {
 	* Deletes the document library file version from the database. Also notifies the appropriate model listeners.
 	*
 	* @param dlFileVersion the document library file version
+	* @return the document library file version that was removed
 	* @throws SystemException if a system exception occurred
 	*/
-	public void deleteDLFileVersion(
+	public com.liferay.portlet.documentlibrary.model.DLFileVersion deleteDLFileVersion(
 		com.liferay.portlet.documentlibrary.model.DLFileVersion dlFileVersion)
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery();
 
 	/**
 	* Performs a dynamic query on the database and returns the matching rows.

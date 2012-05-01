@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
+import com.liferay.portal.service.BaseLocalService;
 import com.liferay.portal.service.PersistedModelLocalService;
 
 /**
@@ -36,7 +37,8 @@ import com.liferay.portal.service.PersistedModelLocalService;
  */
 @Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
 	PortalException.class, SystemException.class})
-public interface MDRActionLocalService extends PersistedModelLocalService {
+public interface MDRActionLocalService extends BaseLocalService,
+	PersistedModelLocalService {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -67,10 +69,12 @@ public interface MDRActionLocalService extends PersistedModelLocalService {
 	* Deletes the m d r action with the primary key from the database. Also notifies the appropriate model listeners.
 	*
 	* @param actionId the primary key of the m d r action
+	* @return the m d r action that was removed
 	* @throws PortalException if a m d r action with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public void deleteMDRAction(long actionId)
+	public com.liferay.portlet.mobiledevicerules.model.MDRAction deleteMDRAction(
+		long actionId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -78,11 +82,14 @@ public interface MDRActionLocalService extends PersistedModelLocalService {
 	* Deletes the m d r action from the database. Also notifies the appropriate model listeners.
 	*
 	* @param mdrAction the m d r action
+	* @return the m d r action that was removed
 	* @throws SystemException if a system exception occurred
 	*/
-	public void deleteMDRAction(
+	public com.liferay.portlet.mobiledevicerules.model.MDRAction deleteMDRAction(
 		com.liferay.portlet.mobiledevicerules.model.MDRAction mdrAction)
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery();
 
 	/**
 	* Performs a dynamic query on the database and returns the matching rows.

@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
+import com.liferay.portal.service.BaseLocalService;
 import com.liferay.portal.service.PersistedModelLocalService;
 
 /**
@@ -36,8 +37,8 @@ import com.liferay.portal.service.PersistedModelLocalService;
  */
 @Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
 	PortalException.class, SystemException.class})
-public interface MDRRuleGroupInstanceLocalService
-	extends PersistedModelLocalService {
+public interface MDRRuleGroupInstanceLocalService extends BaseLocalService,
+	PersistedModelLocalService {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -68,10 +69,12 @@ public interface MDRRuleGroupInstanceLocalService
 	* Deletes the m d r rule group instance with the primary key from the database. Also notifies the appropriate model listeners.
 	*
 	* @param ruleGroupInstanceId the primary key of the m d r rule group instance
+	* @return the m d r rule group instance that was removed
 	* @throws PortalException if a m d r rule group instance with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public void deleteMDRRuleGroupInstance(long ruleGroupInstanceId)
+	public com.liferay.portlet.mobiledevicerules.model.MDRRuleGroupInstance deleteMDRRuleGroupInstance(
+		long ruleGroupInstanceId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -79,11 +82,14 @@ public interface MDRRuleGroupInstanceLocalService
 	* Deletes the m d r rule group instance from the database. Also notifies the appropriate model listeners.
 	*
 	* @param mdrRuleGroupInstance the m d r rule group instance
+	* @return the m d r rule group instance that was removed
 	* @throws SystemException if a system exception occurred
 	*/
-	public void deleteMDRRuleGroupInstance(
+	public com.liferay.portlet.mobiledevicerules.model.MDRRuleGroupInstance deleteMDRRuleGroupInstance(
 		com.liferay.portlet.mobiledevicerules.model.MDRRuleGroupInstance mdrRuleGroupInstance)
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery();
 
 	/**
 	* Performs a dynamic query on the database and returns the matching rows.
