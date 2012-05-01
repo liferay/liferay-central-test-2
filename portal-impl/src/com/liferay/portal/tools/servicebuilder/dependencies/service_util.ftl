@@ -96,8 +96,10 @@ public class ${entity.name}${sessionTypeName}ServiceUtil {
 	</#list>
 
 	<#if pluginName != "">
+		/**
+		 * @deprecated
+		 */
 		public static void clearService() {
-			_service = null;
 		}
 	</#if>
 
@@ -106,7 +108,12 @@ public class ${entity.name}${sessionTypeName}ServiceUtil {
 			<#if pluginName != "">
 				Invokable${sessionTypeName}Service invokable${sessionTypeName}Service = (Invokable${sessionTypeName}Service)PortletBeanLocatorUtil.locate(ClpSerializer.getServletContextName(), ${entity.name}${sessionTypeName}Service.class.getName());
 
-				_service = new ${entity.name}${sessionTypeName}ServiceClp(invokable${sessionTypeName}Service);
+				if (invokable${sessionTypeName}Service instanceof ${entity.name}${sessionTypeName}Service) {
+					_service = (${entity.name}${sessionTypeName}Service)invokable${sessionTypeName}Service;
+				}
+				else {
+					_service = new ${entity.name}${sessionTypeName}ServiceClp(invokable${sessionTypeName}Service);
+				}
 			<#else>
 				_service = (${entity.name}${sessionTypeName}Service)PortalBeanLocatorUtil.locate(${entity.name}${sessionTypeName}Service.class.getName());
 			</#if>
