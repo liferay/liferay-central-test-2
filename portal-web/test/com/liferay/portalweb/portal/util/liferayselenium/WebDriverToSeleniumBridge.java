@@ -42,8 +42,9 @@ public class WebDriverToSeleniumBridge
 	extends WebDriverWrapper implements Selenium {
 
 	public WebDriverToSeleniumBridge(WebDriver webDriver) {
-		initializeKeyTable();
 		super(webDriver);
+
+		initKeys();
 	}
 
 	public void addCustomRequestHeader(String key, String value) {
@@ -64,7 +65,8 @@ public class WebDriverToSeleniumBridge
 		Select select = new Select(getWebElement(locator));
 
 		if (optionLocator.startsWith("index=")) {
-			select.selectByIndex(Integer.parseInt(optionLocator.substring(6)));
+			select.selectByIndex(
+				GetterUtil.getInteger(optionLocator.substring(6)));
 		}
 		else if (optionLocator.startsWith("label=")) {
 			select.selectByVisibleText(optionLocator.substring(6));
@@ -553,16 +555,17 @@ public class WebDriverToSeleniumBridge
 		if (locator.startsWith("\\")) {
 			int index = GetterUtil.getInteger(keySequence.substring(1));
 
-			Keys key = keyTable[index];
+			Keys keys = _keysArray[index];
 
-			actions.keyDown(webElement, key);
+			actions.keyDown(webElement, keys);
 
-			actions.keyUp(webElement, key);
+			actions.keyUp(webElement, keys);
 
 			actions.build();
 
 			actions.perform();
-		} else {
+		}
+		else {
 			webElement.sendKeys(keySequence);
 		}
 	}
@@ -948,71 +951,74 @@ public class WebDriverToSeleniumBridge
 		}
 	}
 
-	protected void initializeKeyTable() {
-		keyTable[107] = Keys.ADD;
-		keyTable[18] = Keys.ALT;
-		keyTable[40] = Keys.ARROW_DOWN;
-		keyTable[37] = Keys.ARROW_LEFT;
-		keyTable[39] = Keys.ARROW_RIGHT;
-		keyTable[38] = Keys.ARROW_UP;
-		keyTable[8] = Keys.BACK_SPACE;
+	protected void initKeys() {
+
+		// ASCII to WebDriver
+
+		_keysArray[107] = Keys.ADD;
+		_keysArray[18] = Keys.ALT;
+		_keysArray[40] = Keys.ARROW_DOWN;
+		_keysArray[37] = Keys.ARROW_LEFT;
+		_keysArray[39] = Keys.ARROW_RIGHT;
+		_keysArray[38] = Keys.ARROW_UP;
+		_keysArray[8] = Keys.BACK_SPACE;
 		//keyTable[] = Keys.CANCEL;
 		//keyTable[] = Keys.CLEAR;
 		//keyTable[] = Keys.COMMAND;
-		keyTable[17] = Keys.CONTROL;
-		keyTable[110] = Keys.DECIMAL;
-		keyTable[46] = Keys.DELETE;
-		keyTable[111] = Keys.DIVIDE;
+		_keysArray[17] = Keys.CONTROL;
+		_keysArray[110] = Keys.DECIMAL;
+		_keysArray[46] = Keys.DELETE;
+		_keysArray[111] = Keys.DIVIDE;
 		//keyTable[] = Keys.DOWN;
 		//keyTable[] = Keys.END;
-		keyTable[13] = Keys.ENTER;
+		_keysArray[13] = Keys.ENTER;
 		//keyTable[] = Keys.EQUALS;
-		keyTable[27] = Keys.ESCAPE;
-		keyTable[112] = Keys.F1;
-		keyTable[121] = Keys.F10;
-		keyTable[122] = Keys.F11;
-		keyTable[123] = Keys.F12;
-		keyTable[113] = Keys.F2;
-		keyTable[114] = Keys.F3;
-		keyTable[115] = Keys.F4;
-		keyTable[116] = Keys.F5;
-		keyTable[117] = Keys.F6;
-		keyTable[118] = Keys.F7;
-		keyTable[119] = Keys.F8;
-		keyTable[120] = Keys.F9;
+		_keysArray[27] = Keys.ESCAPE;
+		_keysArray[112] = Keys.F1;
+		_keysArray[121] = Keys.F10;
+		_keysArray[122] = Keys.F11;
+		_keysArray[123] = Keys.F12;
+		_keysArray[113] = Keys.F2;
+		_keysArray[114] = Keys.F3;
+		_keysArray[115] = Keys.F4;
+		_keysArray[116] = Keys.F5;
+		_keysArray[117] = Keys.F6;
+		_keysArray[118] = Keys.F7;
+		_keysArray[119] = Keys.F8;
+		_keysArray[120] = Keys.F9;
 		//keyTable[] = Keys.HELP;
-		keyTable[36] = Keys.HOME;
-		keyTable[45] = Keys.INSERT;
+		_keysArray[36] = Keys.HOME;
+		_keysArray[45] = Keys.INSERT;
 		//keyTable[] = Keys.LEFT;
 		//keyTable[] = Keys.LEFT_ALT;
 		//keyTable[] = Keys.LEFT_CONTROL;
 		//keyTable[] = Keys.LEFT_SHIFT;
 		//keyTable[] = Keys.META;
 		//keyTable[] = Keys.NULL;
-		keyTable[96] = Keys.NUMPAD0;
-		keyTable[97] = Keys.NUMPAD1;
-		keyTable[98] = Keys.NUMPAD2;
-		keyTable[99] = Keys.NUMPAD3;
-		keyTable[100] = Keys.NUMPAD4;
-		keyTable[101] = Keys.NUMPAD5;
-		keyTable[102] = Keys.NUMPAD6;
-		keyTable[103] = Keys.NUMPAD7;
-		keyTable[104] = Keys.NUMPAD8;
-		keyTable[105] = Keys.NUMPAD9;
-		keyTable[34] = Keys.PAGE_DOWN;
-		keyTable[33] = Keys.PAGE_UP;
-		keyTable[19] = Keys.PAUSE;
+		_keysArray[96] = Keys.NUMPAD0;
+		_keysArray[97] = Keys.NUMPAD1;
+		_keysArray[98] = Keys.NUMPAD2;
+		_keysArray[99] = Keys.NUMPAD3;
+		_keysArray[100] = Keys.NUMPAD4;
+		_keysArray[101] = Keys.NUMPAD5;
+		_keysArray[102] = Keys.NUMPAD6;
+		_keysArray[103] = Keys.NUMPAD7;
+		_keysArray[104] = Keys.NUMPAD8;
+		_keysArray[105] = Keys.NUMPAD9;
+		_keysArray[34] = Keys.PAGE_DOWN;
+		_keysArray[33] = Keys.PAGE_UP;
+		_keysArray[19] = Keys.PAUSE;
 		//keyTable[] = Keys.RETURN;
 		//keyTable[] = Keys.RIGHT;
 		//keyTable[] = Keys.SEMICOLON;
 		//keyTable[] = Keys.SEPARATOR;
-		keyTable[16] = Keys.SHIFT;
-		keyTable[32] = Keys.SPACE;
-		keyTable[109] = Keys.SUBTRACT;
-		keyTable[9] = Keys.TAB;
+		_keysArray[16] = Keys.SHIFT;
+		_keysArray[32] = Keys.SPACE;
+		_keysArray[109] = Keys.SUBTRACT;
+		_keysArray[9] = Keys.TAB;
 		//keyTable[] = Keys.UP;
 	}
 
-	protected Keys[] keyTable = new Keys[128];
+	private Keys[] _keysArray = new Keys[128];
 
 }
