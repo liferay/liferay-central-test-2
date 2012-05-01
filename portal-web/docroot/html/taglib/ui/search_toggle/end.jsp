@@ -20,7 +20,7 @@
 			<aui:button type="submit" value="<%= buttonLabel %>" />
 		</c:if>
 
-		<div class="toggle-link">
+		<div class="<%= id %>toggle-link">
 			<aui:a href="javascript:;" tabindex="-1">&laquo; <liferay-ui:message key="basic" /></aui:a>
 		</div>
 	</div>
@@ -44,7 +44,7 @@
 		basicControls.attr('disabled', 'disabled');
 	}
 
-	A.all('.toggle-link a').on(
+	A.all(".<%= id %>toggle-link a").on(
 		'click',
 		function() {
 			basicForm.toggle();
