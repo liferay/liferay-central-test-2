@@ -2020,6 +2020,7 @@ public class ServiceBuilder {
 					String methodName = method.getName();
 
 					if (methodName.equals("getBeanIdentifier") ||
+						methodName.equals("invokeMethod") ||
 						methodName.equals("setBeanIdentifier")) {
 
 						continue;
