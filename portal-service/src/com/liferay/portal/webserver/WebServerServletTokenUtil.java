@@ -14,6 +14,8 @@
 
 package com.liferay.portal.webserver;
 
+import com.liferay.portal.kernel.security.pacl.permission.PortalRuntimePermission;
+
 /**
  * @author Brian Wing Shun Chan
  */
@@ -33,6 +35,8 @@ public class WebServerServletTokenUtil {
 
 	public void setWebServerServletToken(
 		WebServerServletToken webServerServletToken) {
+
+		PortalRuntimePermission.checkSetBeanProperty(getClass());
 
 		_webServerServletToken = webServerServletToken;
 	}

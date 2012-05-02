@@ -14,6 +14,8 @@
 
 package com.liferay.portal.kernel.captcha;
 
+import com.liferay.portal.kernel.security.pacl.permission.PortalRuntimePermission;
+
 import java.io.IOException;
 
 import javax.portlet.PortletRequest;
@@ -74,6 +76,8 @@ public class CaptchaUtil {
 	}
 
 	public void setCaptcha(Captcha captcha) {
+		PortalRuntimePermission.checkSetBeanProperty(getClass());
+
 		_captcha = captcha;
 	}
 

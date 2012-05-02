@@ -17,6 +17,7 @@ package com.liferay.portal.kernel.workflow;
 import com.liferay.portal.NoSuchWorkflowDefinitionLinkException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.security.pacl.permission.PortalRuntimePermission;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.service.ServiceContext;
 
@@ -196,6 +197,8 @@ public class WorkflowHandlerRegistryUtil {
 
 	public void setWorkflowHandlerRegistry(
 		WorkflowHandlerRegistry workflowHandlerRegistry) {
+
+		PortalRuntimePermission.checkSetBeanProperty(getClass());
 
 		_workflowHandlerRegistry = workflowHandlerRegistry;
 	}
