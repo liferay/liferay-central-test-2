@@ -1,4 +1,3 @@
-<%@ page import="com.liferay.portlet.asset.model.AssetEntry" %>
 <%--
 /**
  * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
