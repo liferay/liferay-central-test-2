@@ -36,6 +36,7 @@ public class FileEntrySearchTerms extends FileEntryDisplayTerms {
 		size = DAOParamUtil.getString(portletRequest, SIZE);
 	}
 
+	@Override
 	public void setSelectedGroupId(long selectedGroupId) {
 		this.selectedGroupId = selectedGroupId;
 	}
