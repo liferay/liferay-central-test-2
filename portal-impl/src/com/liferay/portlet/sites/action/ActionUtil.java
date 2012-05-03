@@ -51,8 +51,6 @@ public class ActionUtil
 			Layout sourceLayout)
 		throws Exception {
 
-		long companyId = targetLayout.getCompanyId();
-
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
@@ -90,13 +88,15 @@ public class ActionUtil
 
 			PortletPreferences targetPreferences =
 				PortletPreferencesLocalServiceUtil.getPreferences(
-					companyId, PortletKeys.PREFS_OWNER_ID_DEFAULT,
+					themeDisplay.getCompanyId(),
+					PortletKeys.PREFS_OWNER_ID_DEFAULT,
 					PortletKeys.PREFS_OWNER_TYPE_LAYOUT, targetLayout.getPlid(),
 					sourcePortletId);
 
 			sourcePreferences =
 				PortletPreferencesLocalServiceUtil.getPreferences(
-					companyId, PortletKeys.PREFS_OWNER_ID_DEFAULT,
+					themeDisplay.getCompanyId(),
+					PortletKeys.PREFS_OWNER_ID_DEFAULT,
 					PortletKeys.PREFS_OWNER_TYPE_LAYOUT, sourceLayout.getPlid(),
 					sourcePortletId);
 

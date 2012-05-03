@@ -1012,6 +1012,51 @@ public class SitesUtil {
 		LayoutSetLocalServiceUtil.updateLayoutSet(layoutSet, false);
 	}
 
+	public static void updateLayoutScopes(
+			long userId, Layout sourceLayout, Layout targetLayout,
+			PortletPreferences sourcePreferences,
+			PortletPreferences targetPreferences, String sourcePortletId,
+			String languageId)
+		throws Exception {
+
+		String scopeType = GetterUtil.getString(
+			sourcePreferences.getValue("lfrScopeType", null));
+
+		if (Validator.isNull(scopeType) || !scopeType.equals("layout")) {
+			return;
+		}
+
+		Layout targetScopeLayout =
+			LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(
+				targetLayout.getUuid(), targetLayout.getGroupId());
+
+		if (!targetScopeLayout.hasScopeGroup()) {
+			GroupLocalServiceUtil.addGroup(
+				userId, Layout.class.getName(), targetLayout.getPlid(),
+				targetLayout.getName(languageId), null, 0, null, false, true,
+				null);
+		}
+
+		String portletTitle = PortalUtil.getPortletTitle(
+			sourcePortletId, languageId);
+
+		String newPortletTitle = PortalUtil.getNewPortletTitle(
+			portletTitle, String.valueOf(sourceLayout.getLayoutId()),
+			targetLayout.getName(languageId));
+
+		targetPreferences.setValue(
+			"groupId", String.valueOf(targetLayout.getGroupId()));
+		targetPreferences.setValue("lfrScopeType", "layout");
+		targetPreferences.setValue(
+			"lfrScopeLayoutUuid", targetLayout.getUuid());
+		targetPreferences.setValue(
+			"portletSetupTitle_" + languageId, newPortletTitle);
+		targetPreferences.setValue(
+			"portletSetupUseCustomTitle", Boolean.TRUE.toString());
+
+		targetPreferences.store();
+	}
+
 	public static void updateLayoutSetPrototypesLinks(
 			Group group, long publicLayoutSetPrototypeId,
 			long privateLayoutSetPrototypeId,
@@ -1171,49 +1216,6 @@ public class SitesUtil {
 						cacheFile.getAbsolutePath(),
 					e);
 			}
-		}
-	}
-
-	public static void updateLayoutScopes(
-			long userId, Layout sourceLayout, Layout targetLayout,
-			PortletPreferences sourcePreferences,
-			PortletPreferences targetPreferences, String sourcePortletId,
-			String languageId)
-		throws Exception {
-
-		String scopeType = GetterUtil.getString(
-			sourcePreferences.getValue("lfrScopeType", null));
-
-		if (Validator.isNotNull(scopeType) && scopeType.equals("layout")) {
-			Layout targetScopeLayout =
-				LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(
-					targetLayout.getUuid(), targetLayout.getGroupId());
-
-			if (!targetScopeLayout.hasScopeGroup()) {
-				GroupLocalServiceUtil.addGroup(
-					userId, Layout.class.getName(), targetLayout.getPlid(),
-					targetLayout.getName(languageId), null, 0, null, false,
-					true, null);
-			}
-
-			String portletTitle = PortalUtil.getPortletTitle(
-				sourcePortletId, languageId);
-
-			String newPortletTitle = PortalUtil.getNewPortletTitle(
-				portletTitle, String.valueOf(sourceLayout.getLayoutId()),
-				targetLayout.getName(languageId));
-
-			targetPreferences.setValue(
-				"groupId", String.valueOf(targetLayout.getGroupId()));
-			targetPreferences.setValue("lfrScopeType", "layout");
-			targetPreferences.setValue(
-				"lfrScopeLayoutUuid", targetLayout.getUuid());
-			targetPreferences.setValue(
-				"portletSetupTitle_" + languageId, newPortletTitle);
-			targetPreferences.setValue(
-				"portletSetupUseCustomTitle", Boolean.TRUE.toString());
-
-			targetPreferences.store();
 		}
 	}
 
