@@ -54,13 +54,13 @@ public class FileEntrySearch extends SearchContainer<FileEntry> {
 		iteratorURL.setParameter(
 			FileEntryDisplayTerms.DOCUMENT, displayTerms.getDocument());
 		iteratorURL.setParameter(
+			FileEntryDisplayTerms.LOCKED,
+			String.valueOf(displayTerms.isLocked()));
+		iteratorURL.setParameter(
 			FileEntryDisplayTerms.SELECTED_GROUP_ID,
 			String.valueOf(displayTerms.getSelectedGroupId()));
 		iteratorURL.setParameter(
 			FileEntryDisplayTerms.SIZE, displayTerms.getSize());
-		iteratorURL.setParameter(
-			FileEntryDisplayTerms.LOCKED,
-			String.valueOf(displayTerms.isLocked()));
 	}
 
 	public FileEntrySearch(

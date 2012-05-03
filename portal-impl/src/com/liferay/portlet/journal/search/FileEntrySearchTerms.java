@@ -30,10 +30,9 @@ public class FileEntrySearchTerms extends FileEntryDisplayTerms {
 
 		document = DAOParamUtil.getString(portletRequest, DOCUMENT);
 		downloads = ParamUtil.getInteger(portletRequest, DOWNLOADS);
+		locked = DAOParamUtil.getBoolean(portletRequest, LOCKED);
 		selectedGroupId = DAOParamUtil.getLong(
 			portletRequest, SELECTED_GROUP_ID);
-
-		locked = DAOParamUtil.getBoolean(portletRequest, LOCKED);
 		size = DAOParamUtil.getString(portletRequest, SIZE);
 	}
 

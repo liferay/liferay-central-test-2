@@ -17,17 +17,17 @@
 <%@ include file="/html/portlet/document_library_display/init.jsp" %>
 
 <%
-Folder folder = (Folder)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FOLDER);
-
-long folderId = BeanParamUtil.getLong(folder, request, "folderId", DLFolderConstants.DEFAULT_PARENT_FOLDER_ID);
-
-long searchFolderIds = ParamUtil.getLong(request, "searchFolderIds");
-
 long groupId = ParamUtil.getLong(request, FileEntryDisplayTerms.SELECTED_GROUP_ID);
 
 if (groupId == 0) {
 	groupId = ParamUtil.getLong(request, "groupId");
 }
+
+Folder folder = (Folder)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FOLDER);
+
+long folderId = BeanParamUtil.getLong(folder, request, "folderId", DLFolderConstants.DEFAULT_PARENT_FOLDER_ID);
+
+long searchFolderIds = ParamUtil.getLong(request, "searchFolderIds");
 
 long[] folderIdsArray = null;
 
@@ -46,31 +46,24 @@ else {
 	folderIdsArray = StringUtil.split(StringUtil.merge(folderIds), 0L);
 }
 
-String keywords = ParamUtil.getString(request, "keywords");
-
 long repositoryId = groupId;
 
 if (folder != null) {
 	repositoryId = folder.getRepositoryId();
+
+	DLUtil.addPortletBreadcrumbEntries(folder, request, renderResponse);
 }
 
 int entryStart = ParamUtil.getInteger(request, "entryStart");
 int entryEnd = ParamUtil.getInteger(request, "entryEnd", PropsValues.SEARCH_CONTAINER_PAGE_DEFAULT_DELTA);
 
+String keywords = ParamUtil.getString(request, "keywords");
+
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("struts_action", "/journal/select_document_library");
-portletURL.setParameter("folderId", String.valueOf(folderId));
 portletURL.setParameter("groupId", String.valueOf(groupId));
-
-PortletURL backURL = renderResponse.createRenderURL();
-
-backURL.setParameter("struts_action", "/journal/select_document_library");
-backURL.setParameter("groupId", String.valueOf(groupId));
-
-if (folder != null) {
-	DLUtil.addPortletBreadcrumbEntries(folder, request, renderResponse);
-}
+portletURL.setParameter("folderId", String.valueOf(folderId));
 %>
 
 <aui:form method="post" name="fm">
@@ -79,16 +72,8 @@ if (folder != null) {
 	FileEntrySearch fileEntrySearchContainer = new FileEntrySearch(renderRequest, portletURL);
 
 	FileEntryDisplayTerms displayTerms = (FileEntryDisplayTerms)fileEntrySearchContainer.getDisplayTerms();
-	FileEntrySearchTerms searchTerms = (FileEntrySearchTerms)fileEntrySearchContainer.getSearchTerms();
+
 	displayTerms.setSelectedGroupId(groupId);
-
-	boolean isSearch = Validator.isNotNull(displayTerms.getKeywords());
-
-	List<String> headerNames = new ArrayList<String>();
-
-	int total = 0;
-	List results = null;
-	List resultRows = null;
 	%>
 
 	<liferay-ui:search-form
@@ -96,7 +81,7 @@ if (folder != null) {
 		searchContainer="<%= fileEntrySearchContainer %>"
 	/>
 
-	<c:if test="<%= !isSearch %>">
+	<c:if test="<%= Validator.isNull(displayTerms.getKeywords()) %>">
 		<liferay-ui:header
 			title="folders"
 		/>
@@ -104,21 +89,23 @@ if (folder != null) {
 		<liferay-ui:breadcrumb showGuestGroup="<%= false %>" showLayout="<%= false %>" showParentGroups="<%= false %>" />
 
 		<%
+		List<String> headerNames = new ArrayList<String>();
+
 		headerNames.add("folder");
 		headerNames.add("num-of-folders");
 		headerNames.add("num-of-documents");
 
 		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, "cur1", SearchContainer.DEFAULT_DELTA, portletURL, headerNames, "there-are-no-folders");
 
-		total = DLAppServiceUtil.getFoldersCount(groupId, folderId);
+		int total = DLAppServiceUtil.getFoldersCount(groupId, folderId);
 
 		searchContainer.setTotal(total);
 
-		results = DLAppServiceUtil.getFolders(repositoryId, folderId, searchContainer.getStart(), searchContainer.getEnd());
+		List results = DLAppServiceUtil.getFolders(repositoryId, folderId, searchContainer.getStart(), searchContainer.getEnd());
 
 		searchContainer.setResults(results);
 
-		resultRows = searchContainer.getResultRows();
+		List resultRows = searchContainer.getResultRows();
 
 		for (int i = 0; i < results.size(); i++) {
 			Folder curFolder = (Folder)results.get(i);
@@ -128,8 +115,8 @@ if (folder != null) {
 			PortletURL rowURL = renderResponse.createRenderURL();
 
 			rowURL.setParameter("struts_action", "/journal/select_document_library");
-			rowURL.setParameter("folderId", String.valueOf(curFolder.getFolderId()));
 			rowURL.setParameter("groupId", String.valueOf(groupId));
+			rowURL.setParameter("folderId", String.valueOf(curFolder.getFolderId()));
 
 			// Name
 
@@ -168,12 +155,20 @@ if (folder != null) {
 	</c:if>
 
 	<c:choose>
-		<c:when test="<%= !isSearch %>">
+		<c:when test="<%= Validator.isNull(displayTerms.getKeywords()) %>">
 			<liferay-ui:header
 				title="documents"
 			/>
 		</c:when>
 		<c:otherwise>
+
+			<%
+			PortletURL backURL = renderResponse.createRenderURL();
+
+			backURL.setParameter("struts_action", "/journal/select_document_library");
+			backURL.setParameter("groupId", String.valueOf(groupId));
+			%>
+
 			<liferay-ui:header
 				backURL="<%= backURL.toString() %>"
 				title="documents"
@@ -182,7 +177,7 @@ if (folder != null) {
 	</c:choose>
 
 	<%
-	headerNames.clear();
+	List<String> headerNames = new ArrayList<String>();
 
 	headerNames.add("document");
 	headerNames.add("size");
@@ -194,39 +189,39 @@ if (folder != null) {
 	headerNames.add("locked");
 	headerNames.add(StringPool.BLANK);
 
-	if (!isSearch) {
+	if (Validator.isNull(displayTerms.getKeywords())) {
 		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, "cur2", SearchContainer.DEFAULT_DELTA, portletURL, headerNames, "there-are-no-documents-in-this-folder");
 
-		total = DLAppServiceUtil.getFileEntriesCount(groupId, folderId);
+		int total = DLAppServiceUtil.getFileEntriesCount(groupId, folderId);
 
 		searchContainer.setTotal(total);
 
-		results = DLAppServiceUtil.getFileEntries(repositoryId, folderId, searchContainer.getStart(), searchContainer.getEnd());
+		List results = DLAppServiceUtil.getFileEntries(repositoryId, folderId, searchContainer.getStart(), searchContainer.getEnd());
 
 		searchContainer.setResults(results);
 
-		resultRows = searchContainer.getResultRows();
-		%>
+		List resultRows = searchContainer.getResultRows();
+	%>
 
 		<%@ include file="/html/portlet/journal/select_document_library_search_results.jspf" %>
 
 		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 
-		<%
+	<%
 	}
 	else {
-		portletURL = renderResponse.createRenderURL();
+		PortletURL iteratorURL = renderResponse.createRenderURL();
 
-		portletURL.setParameter("struts_action", "/journal/select_document_library");
-		portletURL.setParameter("folderId", String.valueOf(folderId));
-		portletURL.setParameter("groupId", String.valueOf(groupId));
+		iteratorURL.setParameter("struts_action", "/journal/select_document_library");
+		iteratorURL.setParameter("groupId", String.valueOf(groupId));
+		iteratorURL.setParameter("folderId", String.valueOf(folderId));
 
-		fileEntrySearchContainer = new FileEntrySearch(renderRequest, displayTerms, searchTerms, "cur2", SearchContainer.DEFAULT_DELTA, portletURL, headerNames, "there-are-no-documents-in-this-folder");
+		fileEntrySearchContainer = new FileEntrySearch(renderRequest, displayTerms, (FileEntrySearchTerms)fileEntrySearchContainer.getSearchTerms(), "cur2", SearchContainer.DEFAULT_DELTA, iteratorURL, headerNames, "there-are-no-documents-in-this-folder");
 
 		try {
 			SearchContext searchContext = SearchContextFactory.getInstance(request);
 
-			searchContext.setAttribute("groupId",groupId);
+			searchContext.setAttribute("groupId", groupId);
 			searchContext.setAttribute("paginationType", "regular");
 			searchContext.setEnd(entryEnd);
 			searchContext.setFolderIds(folderIdsArray);
@@ -238,19 +233,14 @@ if (folder != null) {
 
 			Hits hits = DLAppServiceUtil.search(repositoryId, searchContext);
 
-			results = new ArrayList();
+			fileEntrySearchContainer.setTotal(hits.getLength());
 
-			fileEntrySearchContainer.getResultRows().clear();
-
-			resultRows = fileEntrySearchContainer.getResultRows();
+			List results = new ArrayList();
 
 			Document[] docs = hits.getDocs();
 
 			if (docs != null) {
 				for (Document doc : docs) {
-
-					// Folder and document
-
 					long fileEntryId = GetterUtil.getLong(doc.get(Field.ENTRY_CLASS_PK));
 
 					FileEntry fileEntry = null;
@@ -274,24 +264,23 @@ if (folder != null) {
 				}
 			}
 
-			total = hits.getLength();
-
 			fileEntrySearchContainer.setResults(results);
-			fileEntrySearchContainer.setTotal(total);
-			%>
+
+			List resultRows = fileEntrySearchContainer.getResultRows();
+	%>
 
 			<%@ include file="/html/portlet/journal/select_document_library_search_results.jspf" %>
 
-			<%
+	<%
 		}
 		catch (Exception e) {
 			_log.error(e, e);
 		}
-		%>
+	%>
 
 		<liferay-ui:search-iterator searchContainer="<%= fileEntrySearchContainer %>" />
 
-		<%
+	<%
 	}
 	%>
 
