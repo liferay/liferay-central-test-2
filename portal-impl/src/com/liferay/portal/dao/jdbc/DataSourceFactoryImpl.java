@@ -448,7 +448,7 @@ public class DataSourceFactoryImpl implements DataSourceFactory {
 				fileUtil.setFile(new FileImpl());
 			}
 
-			JarUtil.downloadAndInstallJar(true, url, name);
+			JarUtil.downloadAndInstallJar(true, url, name, null);
 		}
 	}
 
