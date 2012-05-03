@@ -151,7 +151,7 @@ Element contentEl = (Element)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 						editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>"
 						height="460"
 						initMethod='<%= "initEditor" + elInstanceId %>'
-						name='<%= textAreaInputName %>'
+						name="<%= textAreaInputName %>"
 						toolbarSet="liferay-article"
 						width="500"
 					/>
@@ -313,7 +313,7 @@ Element contentEl = (Element)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 						}
 						%>
 
-						<aui:select ignoreRequestValue="true" label="" multiple="true" name="<%= multiListInputName %>">
+						<aui:select ignoreRequestValue="<%= true %>" label="" multiple="<%= true %>" name="<%= multiListInputName %>">
 
 							<%
 							List<Element> children = el.elements();
@@ -390,7 +390,7 @@ Element contentEl = (Element)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 					}
 					%>
 
-					<aui:select label="" name='<%= linkSelectName %>' showEmptyOption="<%= true %>">
+					<aui:select label="" name="<%= linkSelectName %>" showEmptyOption="<%= true %>">
 
 						<%
 						boolean privateLayout = false;
