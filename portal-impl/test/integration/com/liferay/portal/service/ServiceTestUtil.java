@@ -149,16 +149,6 @@ public class ServiceTestUtil {
 		FileUtil.delete(PropsValues.LIFERAY_HOME + "/data");
 	}
 
-	public static ServiceContext getServiceContext() throws Exception {
-		ServiceContext serviceContext = new ServiceContext();
-
-		serviceContext.setCompanyId(TestPropsValues.getCompanyId());
-		serviceContext.setScopeGroupId(TestPropsValues.getGroupId());
-		serviceContext.setUserId(TestPropsValues.getUserId());
-
-		return serviceContext;
-	}
-
 	public static SearchContext getSearchContext() throws Exception {
 		SearchContext searchContext = new SearchContext();
 
@@ -167,6 +157,16 @@ public class ServiceTestUtil {
 		searchContext.setUserId(TestPropsValues.getUserId());
 
 		return searchContext;
+	}
+
+	public static ServiceContext getServiceContext() throws Exception {
+		ServiceContext serviceContext = new ServiceContext();
+
+		serviceContext.setCompanyId(TestPropsValues.getCompanyId());
+		serviceContext.setScopeGroupId(TestPropsValues.getGroupId());
+		serviceContext.setUserId(TestPropsValues.getUserId());
+
+		return serviceContext;
 	}
 
 	public static void initPermissions() {

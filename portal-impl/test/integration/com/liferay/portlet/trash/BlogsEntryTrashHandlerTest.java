@@ -26,7 +26,6 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.Group;
-import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceTestUtil;
@@ -68,19 +67,19 @@ public class BlogsEntryTrashHandlerTest {
 
 	@Test
 	@Transactional
-	public void testTrashAndDelete() {
+	public void testTrashAndDelete() throws Exception {
 		testTrash(false, true);
 	}
 
 	@Test
 	@Transactional
-	public void testTrashAndRestoreApproved() {
+	public void testTrashAndRestoreApproved() throws Exception {
 		testTrash(true, false);
 	}
 
 	@Test
 	@Transactional
-	public void testTrashAndRestoreDraft() {
+	public void testTrashAndRestoreDraft() throws Exception {
 		testTrash(false, false);
 	}
 
@@ -141,7 +140,7 @@ public class BlogsEntryTrashHandlerTest {
 		return (Integer)result[1];
 	}
 
-	protected long getUserId() throws PrincipalException {
+	protected long getUserId() {
 		return GetterUtil.getLong(PrincipalThreadLocal.getName());
 	}
 
@@ -164,28 +163,84 @@ public class BlogsEntryTrashHandlerTest {
 		return results.getLength();
 	}
 
-	protected void testTrash(boolean approved, boolean delete) {
-		try {
-			Group group = ServiceTestUtil.addGroup(
-				"BlogsEntryTrashHandlerTest#testGroup");
+	protected void testTrash(boolean approved, boolean delete)
+		throws Exception {
 
-			int initialBlogsEntriesCount = getBlogsEntriesNotInTrashCount(
-				group.getGroupId());
-			int initialTrashEntriesCount = getTrashEntriesCount(
-				group.getGroupId());
-			int initialBlogsEntriesSearchCount = searchBlogsEntriesCount(
-				group.getGroupId());
+		Group group = ServiceTestUtil.addGroup(
+			"BlogsEntryTrashHandlerTest#testGroup");
 
-			BlogsEntry blogsEntry = addBlogsEntry(group, approved);
+		int initialBlogsEntriesCount = getBlogsEntriesNotInTrashCount(
+			group.getGroupId());
+		int initialTrashEntriesCount = getTrashEntriesCount(group.getGroupId());
+		int initialBlogsEntriesSearchCount = searchBlogsEntriesCount(
+			group.getGroupId());
 
-			int oldStatus = blogsEntry.getStatus();
+		BlogsEntry blogsEntry = addBlogsEntry(group, approved);
 
+		int oldStatus = blogsEntry.getStatus();
+
+		Assert.assertEquals(
+			initialBlogsEntriesCount + 1,
+			getBlogsEntriesNotInTrashCount(group.getGroupId()));
+		Assert.assertEquals(
+			initialTrashEntriesCount, getTrashEntriesCount(group.getGroupId()));
+
+		if (approved) {
+			Assert.assertTrue(isAssetEntryVisible(blogsEntry.getEntryId()));
+			Assert.assertEquals(
+				initialBlogsEntriesSearchCount + 1,
+				searchBlogsEntriesCount(group.getGroupId()));
+		}
+		else {
+			Assert.assertFalse(isAssetEntryVisible(blogsEntry.getEntryId()));
+			Assert.assertEquals(
+				initialBlogsEntriesSearchCount,
+				searchBlogsEntriesCount(group.getGroupId()));
+		}
+
+		BlogsEntryServiceUtil.moveEntryToTrash(blogsEntry.getEntryId());
+
+		TrashEntry trashEntry = TrashEntryLocalServiceUtil.getEntry(
+			BlogsEntry.class.getName(), blogsEntry.getEntryId());
+
+		Assert.assertEquals(blogsEntry.getEntryId(), trashEntry.getClassPK());
+		Assert.assertEquals(
+			WorkflowConstants.STATUS_IN_TRASH, blogsEntry.getStatus());
+		Assert.assertEquals(
+			initialBlogsEntriesCount,
+			getBlogsEntriesNotInTrashCount(group.getGroupId()));
+		Assert.assertEquals(
+			initialTrashEntriesCount + 1,
+			getTrashEntriesCount(group.getGroupId()));
+		Assert.assertFalse(isAssetEntryVisible(blogsEntry.getEntryId()));
+		Assert.assertEquals(
+			initialBlogsEntriesSearchCount,
+			searchBlogsEntriesCount(group.getGroupId()));
+
+		TrashHandler trashHandler = TrashHandlerRegistryUtil.getTrashHandler(
+			blogsEntry.getModelClassName());
+
+		if (delete) {
+			trashHandler.deleteTrashEntry(blogsEntry.getEntryId());
+
+			Assert.assertEquals(
+				initialBlogsEntriesCount,
+				getBlogsEntriesNotInTrashCount(group.getGroupId()));
+			Assert.assertNull(fetchAssetEntry(blogsEntry.getEntryId()));
+			Assert.assertEquals(
+				initialBlogsEntriesSearchCount,
+				searchBlogsEntriesCount(group.getGroupId()));
+		}
+		else {
+			trashHandler.restoreTrashEntry(blogsEntry.getEntryId());
+
+			blogsEntry = BlogsEntryServiceUtil.getEntry(
+				blogsEntry.getEntryId());
+
+			Assert.assertEquals(oldStatus, blogsEntry.getStatus());
 			Assert.assertEquals(
 				initialBlogsEntriesCount + 1,
 				getBlogsEntriesNotInTrashCount(group.getGroupId()));
-			Assert.assertEquals(
-				initialTrashEntriesCount,
-				getTrashEntriesCount(group.getGroupId()));
 
 			if (approved) {
 				Assert.assertTrue(isAssetEntryVisible(blogsEntry.getEntryId()));
@@ -200,74 +255,6 @@ public class BlogsEntryTrashHandlerTest {
 					initialBlogsEntriesSearchCount,
 					searchBlogsEntriesCount(group.getGroupId()));
 			}
-
-			BlogsEntryServiceUtil.moveEntryToTrash(blogsEntry.getEntryId());
-
-			TrashEntry trashEntry = TrashEntryLocalServiceUtil.getEntry(
-				BlogsEntry.class.getName(), blogsEntry.getEntryId());
-
-			Assert.assertEquals(
-				blogsEntry.getEntryId(), trashEntry.getClassPK());
-			Assert.assertEquals(
-				WorkflowConstants.STATUS_IN_TRASH, blogsEntry.getStatus());
-			Assert.assertEquals(
-				initialBlogsEntriesCount,
-				getBlogsEntriesNotInTrashCount(group.getGroupId()));
-			Assert.assertEquals(
-				initialTrashEntriesCount + 1,
-				getTrashEntriesCount(group.getGroupId()));
-			Assert.assertFalse(isAssetEntryVisible(blogsEntry.getEntryId()));
-			Assert.assertEquals(
-				initialBlogsEntriesSearchCount,
-				searchBlogsEntriesCount(group.getGroupId()));
-
-			TrashHandler trashHandler =
-				TrashHandlerRegistryUtil.getTrashHandler(
-					blogsEntry.getModelClassName());
-
-			if (delete) {
-				trashHandler.deleteTrashEntry(blogsEntry.getEntryId());
-
-				Assert.assertEquals(
-					initialBlogsEntriesCount,
-					getBlogsEntriesNotInTrashCount(group.getGroupId()));
-				Assert.assertNull(fetchAssetEntry(blogsEntry.getEntryId()));
-				Assert.assertEquals(
-					initialBlogsEntriesSearchCount,
-					searchBlogsEntriesCount(group.getGroupId()));
-			}
-			else {
-				trashHandler.restoreTrashEntry(blogsEntry.getEntryId());
-
-				blogsEntry = BlogsEntryServiceUtil.getEntry(
-					blogsEntry.getEntryId());
-
-				Assert.assertEquals(oldStatus, blogsEntry.getStatus());
-				Assert.assertEquals(
-					initialBlogsEntriesCount + 1,
-					getBlogsEntriesNotInTrashCount(group.getGroupId()));
-
-				if (approved) {
-					Assert.assertTrue(
-						isAssetEntryVisible(blogsEntry.getEntryId()));
-					Assert.assertEquals(
-						initialBlogsEntriesSearchCount + 1,
-						searchBlogsEntriesCount(group.getGroupId()));
-				}
-				else {
-					Assert.assertFalse(
-						isAssetEntryVisible(blogsEntry.getEntryId()));
-					Assert.assertEquals(
-						initialBlogsEntriesSearchCount,
-						searchBlogsEntriesCount(group.getGroupId()));
-				}
-			}
-		}
-
-		catch(Exception e) {
-			Assert.fail(
-				"Unexpected error restoring blogsEntry from Trash: " +
-					e.getMessage());
 		}
 	}
 
