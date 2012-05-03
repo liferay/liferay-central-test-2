@@ -34,22 +34,22 @@ public class PortalCacheClusterEventCoalesceComparator
 			return 1;
 		}
 
-		if (portalCacheClusterEvent1.getCacheName().equals(
+		if (Validator.equals(
+				portalCacheClusterEvent1.getCacheName(),
 				portalCacheClusterEvent2.getCacheName()) &&
-			(portalCacheClusterEvent1.getEventType() ==
-				portalCacheClusterEvent2.getEventType()) &&
 			Validator.equals(
 				portalCacheClusterEvent1.getElementKey(),
-				portalCacheClusterEvent2.getElementKey())) {
+				portalCacheClusterEvent2.getElementKey()) &&
+			(portalCacheClusterEvent1.getEventType() ==
+				portalCacheClusterEvent2.getEventType())) {
 
 			portalCacheClusterEvent1.setElementValue(
 				portalCacheClusterEvent2.getElementValue());
 
 			return 0;
 		}
-		else {
-			return -1;
-		}
+
+		return -1;
 	}
 
 }
