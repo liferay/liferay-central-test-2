@@ -981,17 +981,6 @@ public class BaseDeployer implements Deployer {
 		sb.append("</listener-class>");
 		sb.append("</listener>");
 
-		File serviceXml = new File(srcFile + "/WEB-INF/service.xml");
-
-		if (serviceXml.exists()) {
-			sb.append("<listener>");
-			sb.append("<listener-class>");
-			sb.append("com.liferay.portal.kernel.spring.context.");
-			sb.append("PortletContextLoaderListener");
-			sb.append("</listener-class>");
-			sb.append("</listener>");
-		}
-
 		File serverConfigWsdd = new File(
 			srcFile + "/WEB-INF/server-config.wsdd");
 
@@ -1846,11 +1835,15 @@ public class BaseDeployer implements Deployer {
 		String extraContent = getExtraContent(
 			webXmlVersion, srcFile, displayName);
 
-		int pos = content.indexOf("</web-app>");
+		int pos = content.indexOf("<listener>");
+
+		if (pos == -1) {
+			pos = content.indexOf("</web-app>");
+		}
 
 		String newContent =
-			content.substring(0, pos) + extraContent +
-				pluginContextListenerContent + content.substring(pos);
+			content.substring(0, pos) + pluginContextListenerContent +
+				extraContent + content.substring(pos);
 
 		// Replace old package names
 

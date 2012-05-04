@@ -17,7 +17,6 @@ package com.liferay.portal.deploy.hot;
 import com.liferay.portal.apache.bridges.struts.LiferayServletContextProvider;
 import com.liferay.portal.kernel.atom.AtomCollectionAdapter;
 import com.liferay.portal.kernel.atom.AtomCollectionAdapterRegistryUtil;
-import com.liferay.portal.kernel.concurrent.LockRegistry;
 import com.liferay.portal.kernel.configuration.Configuration;
 import com.liferay.portal.kernel.configuration.ConfigurationFactoryUtil;
 import com.liferay.portal.kernel.deploy.hot.BaseHotDeployListener;
@@ -60,8 +59,6 @@ import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.ResourceActionLocalServiceUtil;
 import com.liferay.portal.service.ResourceCodeLocalServiceUtil;
-import com.liferay.portal.spring.context.PortletContextLoader;
-import com.liferay.portal.spring.context.PortletContextLoaderListener;
 import com.liferay.portal.util.Portal;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PropsValues;
@@ -92,7 +89,6 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.Set;
-import java.util.concurrent.locks.Lock;
 
 import javax.portlet.PortletURLGenerationListener;
 
@@ -222,26 +218,6 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 			_log.debug("Invoking deploy for " + servletContextName);
 		}
 
-		// Spring initialization lock
-
-		String configLocation = servletContext.getInitParameter(
-			PortletContextLoader.PORTAL_CONFIG_LOCATION_PARAM);
-
-		Properties serviceBuilderProperties =
-			(Properties)servletContext.getAttribute(
-				PluginPackageHotDeployListener.SERVICE_BUILDER_PROPERTIES);
-
-		if (Validator.isNotNull(configLocation) ||
-			(serviceBuilderProperties != null)) {
-
-			String lockKey = PortletContextLoaderListener.getLockKey(
-				servletContext);
-
-			Lock lock = LockRegistry.allocateLock(lockKey, lockKey);
-
-			lock.lock();
-		}
-
 		// Company ids
 
 		long[] companyIds = PortalInstances.getCompanyIds();
@@ -355,11 +331,7 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 
 		// Resource actions, resource codes, and check
 
-		itr = portlets.iterator();
-
-		while (itr.hasNext()) {
-			Portlet portlet = itr.next();
-
+		for (Portlet portlet : portlets) {
 			List<String> modelNames =
 				ResourceActionsUtil.getPortletModelResources(
 					portlet.getPortletId());
@@ -468,11 +440,7 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 				_log.info("Unregistering portlets for " + servletContextName);
 			}
 
-			Iterator<Portlet> itr = portlets.iterator();
-
-			while (itr.hasNext()) {
-				Portlet portlet = itr.next();
-
+			for (Portlet portlet : portlets) {
 				destroyPortlet(portlet, portletIds);
 			}
 		}

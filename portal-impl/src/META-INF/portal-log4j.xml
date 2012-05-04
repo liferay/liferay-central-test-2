@@ -146,6 +146,10 @@
 		<priority value="INFO" />
 	</category>
 
+	<category name="com.liferay.portal.deploy.hot.HotDeployImpl">
+		<priority value="INFO" />
+	</category>
+
 	<category name="com.liferay.portal.deploy.hot.PluginPackageHotDeployListener">
 		<priority value="ERROR" />
 	</category>
