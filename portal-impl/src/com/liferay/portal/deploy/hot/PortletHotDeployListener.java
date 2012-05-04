@@ -253,16 +253,11 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 			servletContextName, servletContext, xmls,
 			hotDeployEvent.getPluginPackage());
 
-		// Class loader
-
-		ClassLoader portletClassLoader = hotDeployEvent.getContextClassLoader();
-
-		servletContext.setAttribute(
-			PortletServlet.PORTLET_CLASS_LOADER, portletClassLoader);
-
 		// Logger
 
-		initLogger(portletClassLoader);
+		ClassLoader classLoader = hotDeployEvent.getContextClassLoader();
+
+		initLogger(classLoader);
 
 		// Portlet context wrapper
 
@@ -271,7 +266,7 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 
 		PortletBagFactory portletBagFactory = new PortletBagFactory();
 
-		portletBagFactory.setClassLoader(portletClassLoader);
+		portletBagFactory.setClassLoader(classLoader);
 		portletBagFactory.setServletContext(servletContext);
 		portletBagFactory.setWARFile(true);
 
@@ -289,7 +284,7 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 				if (!_portletAppInitialized) {
 					initPortletApp(
 						portlet, servletContextName, servletContext,
-						portletClassLoader);
+						classLoader);
 
 					_portletAppInitialized = true;
 				}
@@ -334,7 +329,7 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 
 		// Portlet properties
 
-		processPortletProperties(servletContextName, portletClassLoader);
+		processPortletProperties(servletContextName, classLoader);
 
 		// Resource actions, resource codes, and check
 
@@ -378,11 +373,11 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 
 		// ClpMessageListener
 
-		registerClpMessageListeners(servletContext, portletClassLoader);
+		registerClpMessageListeners(servletContext, classLoader);
 
 		// Javadoc
 
-		JavadocManagerUtil.load(servletContextName, portletClassLoader);
+		JavadocManagerUtil.load(servletContextName, classLoader);
 
 		// Clear cache
 
@@ -475,9 +470,9 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 		}
 	}
 
-	protected void initLogger(ClassLoader portletClassLoader) {
+	protected void initLogger(ClassLoader classLoader) {
 		Log4JUtil.configureLog4J(
-			portletClassLoader.getResource("META-INF/portal-log4j.xml"));
+			classLoader.getResource("META-INF/portal-log4j.xml"));
 	}
 
 	protected PortletBag initPortlet(
@@ -503,7 +498,7 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 
 	protected void initPortletApp(
 			Portlet portlet, String servletContextName,
-			ServletContext servletContext, ClassLoader portletClassLoader)
+			ServletContext servletContext, ClassLoader classLoader)
 		throws Exception {
 
 		PortletContextBag portletContextBag = new PortletContextBag(
@@ -524,7 +519,7 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 			String attrCustomClass = entry.getValue();
 
 			CustomUserAttributes customUserAttributesInstance =
-				(CustomUserAttributes)portletClassLoader.loadClass(
+				(CustomUserAttributes)classLoader.loadClass(
 					attrCustomClass).newInstance();
 
 			portletContextBag.getCustomUserAttributes().put(
@@ -536,7 +531,7 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 		for (PortletFilter portletFilter : portletFilters) {
 			javax.portlet.filter.PortletFilter portletFilterInstance =
 				(javax.portlet.filter.PortletFilter)newInstance(
-					portletClassLoader,
+					classLoader,
 					new Class<?>[] {
 						javax.portlet.filter.ActionFilter.class,
 						javax.portlet.filter.EventFilter.class,
@@ -561,7 +556,7 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 		for (PortletURLListener portletURLListener : portletURLListeners) {
 			PortletURLGenerationListener portletURLListenerInstance =
 				(PortletURLGenerationListener)newInstance(
-					portletClassLoader, PortletURLGenerationListener.class,
+					classLoader, PortletURLGenerationListener.class,
 					portletURLListener.getListenerClass());
 
 			portletContextBag.getPortletURLListeners().put(
@@ -579,7 +574,7 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 	}
 
 	protected void processPortletProperties(
-			String servletContextName, ClassLoader portletClassLoader)
+			String servletContextName, ClassLoader classLoader)
 		throws Exception {
 
 		Configuration portletPropertiesConfiguration = null;
@@ -587,7 +582,7 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 		try {
 			portletPropertiesConfiguration =
 				ConfigurationFactoryUtil.getConfiguration(
-					portletClassLoader, "portlet");
+					classLoader, "portlet");
 		}
 		catch (Exception e) {
 			if (_log.isDebugEnabled()) {
@@ -612,7 +607,7 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 
 			for (Locale locale : locales) {
 				ResourceBundle resourceBundle = ResourceBundle.getBundle(
-					languageBundleName, locale, portletClassLoader);
+					languageBundleName, locale, classLoader);
 
 				PortletResourceBundles.put(
 					servletContextName, LocaleUtil.toLanguageId(locale),
@@ -625,7 +620,7 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 
 		for (String resourceActionConfig : resourceActionConfigs) {
 			ResourceActionsUtil.read(
-				servletContextName, portletClassLoader, resourceActionConfig);
+				servletContextName, classLoader, resourceActionConfig);
 		}
 	}
 

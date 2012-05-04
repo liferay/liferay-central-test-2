@@ -28,6 +28,8 @@ import javax.servlet.ServletContextListener;
 public class PluginContextListener
 	extends BasePortalLifecycle implements ServletContextListener {
 
+	public static final String PLUGIN_CLASS_LOADER = "PLUGIN_CLASS_LOADER";
+
 	public void contextDestroyed(ServletContextEvent servletContextEvent) {
 		portalDestroy();
 	}
@@ -38,6 +40,8 @@ public class PluginContextListener
 		Thread currentThread = Thread.currentThread();
 
 		pluginClassLoader = currentThread.getContextClassLoader();
+
+		servletContext.setAttribute(PLUGIN_CLASS_LOADER, pluginClassLoader);
 
 		registerPortalLifecycle();
 	}
