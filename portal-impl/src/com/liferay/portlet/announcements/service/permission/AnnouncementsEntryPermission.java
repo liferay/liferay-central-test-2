@@ -40,20 +40,20 @@ public class AnnouncementsEntryPermission {
 	}
 
 	public static void check(
-			PermissionChecker permissionChecker, long entryId, String actionId)
-		throws PortalException, SystemException {
-
-		if (!contains(permissionChecker, entryId, actionId)) {
-			throw new PrincipalException();
-		}
-	}
-
-	public static void check(
 			PermissionChecker permissionChecker, Layout layout, String name,
 			String actionId)
 		throws PortalException, SystemException {
 
 		if (!contains(permissionChecker, layout, name, actionId)) {
+			throw new PrincipalException();
+		}
+	}
+
+	public static void check(
+			PermissionChecker permissionChecker, long entryId, String actionId)
+		throws PortalException, SystemException {
+
+		if (!contains(permissionChecker, entryId, actionId)) {
 			throw new PrincipalException();
 		}
 	}
@@ -86,6 +86,21 @@ public class AnnouncementsEntryPermission {
 	}
 
 	public static boolean contains(
+			PermissionChecker permissionChecker, Layout layout, String name,
+			String actionId)
+		throws PortalException, SystemException {
+
+		if (permissionChecker.isGroupAdmin(layout.getGroupId()) ||
+			permissionChecker.isGroupOwner(layout.getGroupId())) {
+
+			return true;
+		}
+
+		return PortletPermissionUtil.contains(
+				permissionChecker, layout, name, actionId);
+	}
+
+	public static boolean contains(
 			PermissionChecker permissionChecker, long entryId, String actionId)
 		throws PortalException, SystemException {
 
@@ -93,21 +108,6 @@ public class AnnouncementsEntryPermission {
 			entryId);
 
 		return contains(permissionChecker, entry, actionId);
-	}
-
-	public static boolean contains(
-			PermissionChecker permissionChecker, Layout layout, String name,
-			String actionId)
-		throws PortalException, SystemException {
-
-		if (permissionChecker.isGroupAdmin(layout.getGroupId()) ||
-				permissionChecker.isGroupOwner(layout.getGroupId())) {
-
-			return true;
-		}
-
-		return PortletPermissionUtil.contains(
-				permissionChecker, layout, name, actionId);
 	}
 
 	public static boolean contains(
