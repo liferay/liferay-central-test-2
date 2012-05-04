@@ -708,6 +708,12 @@ public class DLFileEntryLocalServiceImpl
 						dlFileVersionLocalService.getLatestFileVersion(
 							dlFileEntry.getFileEntryId(), true);
 
+					dlFileEntry.setVersionUserId(
+						dlLatestFileVersion.getUserId());
+					dlFileEntry.setVersionUserName(
+						dlLatestFileVersion.getUserName());
+					dlFileEntry.setModifiedDate(
+						dlLatestFileVersion.getCreateDate());
 					dlFileEntry.setExtension(
 						dlLatestFileVersion.getExtension());
 					dlFileEntry.setTitle(dlLatestFileVersion.getTitle());
@@ -718,12 +724,6 @@ public class DLFileEntryLocalServiceImpl
 					dlFileEntry.setFileEntryTypeId(
 						dlLatestFileVersion.getFileEntryTypeId());
 					dlFileEntry.setVersion(dlLatestFileVersion.getVersion());
-					dlFileEntry.setVersionUserId(
-						dlLatestFileVersion.getUserId());
-					dlFileEntry.setVersionUserName(
-						dlLatestFileVersion.getUserName());
-					dlFileEntry.setModifiedDate(
-						dlLatestFileVersion.getCreateDate());
 					dlFileEntry.setSize(dlLatestFileVersion.getSize());
 
 					dlFileEntryPersistence.update(dlFileEntry, false);
