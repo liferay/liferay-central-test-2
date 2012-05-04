@@ -20,7 +20,6 @@ import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.dao.orm.Type;
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
@@ -594,11 +593,10 @@ public class UserFinderImpl
 	}
 
 	protected List<Long> countByC_FN_MN_LN_SN_EA_S(
-			Session session, long companyId, String[] firstNames,
-			String[] middleNames, String[] lastNames, String[] screenNames,
-			String[] emailAddresses, int status,
-			LinkedHashMap<String, Object> params, boolean andOperator)
-		throws PortalException, SystemException {
+		Session session, long companyId, String[] firstNames,
+		String[] middleNames, String[] lastNames, String[] screenNames,
+		String[] emailAddresses, int status,
+		LinkedHashMap<String, Object> params, boolean andOperator) {
 
 		String sql = CustomSQLUtil.get(COUNT_BY_C_FN_MN_LN_SN_EA_S);
 
