@@ -994,6 +994,8 @@ public class MainServlet extends ActionServlet {
 
 		field.setAccessible(true);
 
+		// org.eclipse.jetty.webapp.WebAppContext
+
 		Object webAppContext = field.get(servletContext);
 
 		Class abstractHandlerClass = webAppContext.getClass();
@@ -1002,9 +1004,13 @@ public class MainServlet extends ActionServlet {
 			abstractHandlerClass = abstractHandlerClass.getSuperclass();
 		}
 
+		// org.eclipse.jetty.server.handler.AbstractHandler
+
 		field = abstractHandlerClass.getDeclaredField("_server");
 
 		field.setAccessible(true);
+
+		// org.eclipse.jetty.server.Server
 
 		Object server = field.get(webAppContext);
 
@@ -1013,6 +1019,8 @@ public class MainServlet extends ActionServlet {
 		for (int i = 0; i < 4; i++) {
 			aggregateLifeCycleClass = aggregateLifeCycleClass.getSuperclass();
 		}
+
+		// org.eclipse.jetty.util.component.AggregateLifeCycle
 
 		field = aggregateLifeCycleClass.getDeclaredField("_dependentBeans");
 
@@ -1036,6 +1044,8 @@ public class MainServlet extends ActionServlet {
 		if (deploymentManager == null) {
 			throw new Exception("DeploymentManager not found.");
 		}
+
+		// org.eclipse.jetty.deploy.DeploymentManager
 
 		field = deploymentManager.getClass().getDeclaredField("_providers");
 
