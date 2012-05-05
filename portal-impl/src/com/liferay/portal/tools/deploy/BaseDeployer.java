@@ -22,6 +22,9 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.plugin.License;
 import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.servlet.PluginContextListener;
+import com.liferay.portal.kernel.servlet.PortletServlet;
+import com.liferay.portal.kernel.servlet.SecurePluginContextListener;
+import com.liferay.portal.kernel.servlet.SecureServlet;
 import com.liferay.portal.kernel.servlet.filters.invoker.InvokerFilter;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -52,6 +55,7 @@ import com.liferay.util.ant.DeleteTask;
 import com.liferay.util.ant.ExpandTask;
 import com.liferay.util.ant.UpToDateTask;
 import com.liferay.util.ant.WarTask;
+import com.liferay.util.xml.DocUtil;
 import com.liferay.util.xml.XMLFormatter;
 
 import java.io.File;
@@ -1568,6 +1572,61 @@ public class BaseDeployer implements Deployer {
 		}
 	}
 
+	public String secureWebXml(String content) throws Exception {
+		Document document = SAXReaderUtil.read(content);
+
+		Element rootElement = document.getRootElement();
+
+		List<String> listenerClasses = new ArrayList<String>();
+
+		List<Element> listenerElements = rootElement.elements("listener");
+
+		for (Element listenerElement : listenerElements) {
+			String listenerClass = GetterUtil.getString(
+				listenerElement.elementText("listener-class"));
+
+			if (listenerClass.equals(
+					SecurePluginContextListener.class.getName())) {
+
+				continue;
+			}
+
+			listenerClasses.add(listenerClass);
+
+			listenerElement.detach();
+		}
+
+		Element contextParamElement = rootElement.addElement("context-param");
+
+		DocUtil.add(contextParamElement, "param-name", "portalListenerClasses");
+		DocUtil.add(
+			contextParamElement, "param-value",
+			StringUtil.merge(listenerClasses));
+
+		List<Element> servletElements = rootElement.elements("servlet");
+
+		for (Element servletElement : servletElements) {
+			Element servletClassElement = servletElement.element(
+				"servlet-class");
+
+			String servletClass = GetterUtil.getString(
+				servletClassElement.getText());
+
+			if (servletClass.equals(PortletServlet.class.getName())) {
+				continue;
+			}
+
+			servletClassElement.setText(SecureServlet.class.getName());
+
+			Element initParamElement = servletElement.addElement("init-param");
+
+			DocUtil.add(initParamElement, "param-name", "servlet-class");
+			DocUtil.add(initParamElement, "param-value", servletClass);
+		}
+
+		return document.compactString();
+	}
+
 	public void setAppServerType(String appServerType) {
 		this.appServerType = appServerType;
 	}
@@ -1770,7 +1829,23 @@ public class BaseDeployer implements Deployer {
 
 		sb.append("<listener>");
 		sb.append("<listener-class>");
-		sb.append(PluginContextListener.class.getName());
+
+		boolean securityManagerEnabled = false;
+
+		Properties properties = getPluginPackageProperties(srcFile);
+
+		if (properties != null) {
+			securityManagerEnabled = GetterUtil.getBoolean(
+				properties.getProperty("security-manager-enabled"));
+		}
+
+		if (securityManagerEnabled) {
+			sb.append(SecurePluginContextListener.class.getName());
+		}
+		else {
+			sb.append(PluginContextListener.class.getName());
+		}
+
 		sb.append("</listener-class>");
 		sb.append("</listener>");
 
@@ -1795,6 +1870,10 @@ public class BaseDeployer implements Deployer {
 		newContent = updateLiferayWebXml(webXmlVersion, srcFile, newContent);
 
 		// Update web.xml
+
+		if (securityManagerEnabled) {
+			newContent = secureWebXml(newContent);
+		}
 
 		newContent = WebXMLBuilder.organizeWebXML(newContent);
 

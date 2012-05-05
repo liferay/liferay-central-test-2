@@ -298,6 +298,10 @@
 		<priority value="WARN" />
 	</category>
 
+	<category name="com.liferay.portal.kernel.servlet.SecurePluginContextListener">
+		<priority value="ERROR" />
+	</category>
+
 	<category name="com.liferay.portal.kernel.servlet.ServletContextPool">
 		<priority value="ERROR" />
 	</category>
