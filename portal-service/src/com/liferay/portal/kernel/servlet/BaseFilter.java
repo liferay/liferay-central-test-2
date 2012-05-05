@@ -16,7 +16,6 @@ package com.liferay.portal.kernel.servlet;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.servlet.filters.invoker.FilterMapping;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 
 import java.io.IOException;
@@ -89,14 +88,9 @@ public abstract class BaseFilter implements LiferayFilter {
 
 		ServletContext servletContext = _filterConfig.getServletContext();
 
-		_invokerEnabled = GetterUtil.get(
-			servletContext.getInitParameter("liferay-invoker-enabled"), true);
-
-		if (!_invokerEnabled) {
-			_filterMapping = new FilterMapping(
-				this, filterConfig, new ArrayList<String>(0),
-				new ArrayList<String>(0));
-		}
+		_filterMapping = new FilterMapping(
+			this, filterConfig, new ArrayList<String>(0),
+			new ArrayList<String>(0));
 
 		LiferayFilterTracker.addLiferayFilter(this);
 	}
