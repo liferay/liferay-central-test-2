@@ -101,7 +101,7 @@ public class SpringHotDeployListener extends BaseHotDeployListener {
 		String servletContextName = servletContext.getServletContextName();
 
 		ContextLoaderListener contextLoaderListener =
-			_contextLoaderListeners.get(servletContextName);
+			_contextLoaderListeners.remove(servletContextName);
 
 		if (contextLoaderListener == null) {
 			return;
