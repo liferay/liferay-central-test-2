@@ -18,7 +18,6 @@ import com.liferay.portal.kernel.deploy.hot.HotDeploy;
 import com.liferay.portal.kernel.deploy.hot.HotDeployEvent;
 import com.liferay.portal.kernel.deploy.hot.HotDeployException;
 import com.liferay.portal.kernel.deploy.hot.HotDeployListener;
-import com.liferay.portal.kernel.deploy.hot.HotDeployUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.BasePortalLifecycle;
@@ -65,7 +64,7 @@ public class HotDeployImpl implements HotDeploy {
 
 				@Override
 				protected void doPortalInit() {
-					HotDeployUtil.fireDeployEvent(hotDeployEvent);
+					fireDeployEvent(hotDeployEvent);
 				}
 
 			};
@@ -75,7 +74,7 @@ public class HotDeployImpl implements HotDeploy {
 		}
 		else {
 
-			// Fire current event
+			// Fire event
 
 			doFireDeployEvent(hotDeployEvent);
 		}
@@ -243,7 +242,7 @@ public class HotDeployImpl implements HotDeploy {
 		thread.setContextClassLoader(contextClassLoader);
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(HotDeployUtil.class);
+	private static Log _log = LogFactoryUtil.getLog(HotDeployImpl.class);
 
 	private boolean _capturePrematureEvents = true;
 	private List<HotDeployEvent> _dependentHotDeployEvents;

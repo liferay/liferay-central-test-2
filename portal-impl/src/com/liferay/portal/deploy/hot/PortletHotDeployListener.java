@@ -40,9 +40,11 @@ import com.liferay.portal.kernel.servlet.ServletContextProvider;
 import com.liferay.portal.kernel.util.ClassUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
+import com.liferay.portal.kernel.util.InfrastructureUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.webdav.WebDAVUtil;
@@ -78,6 +80,7 @@ import com.liferay.portlet.asset.AssetRendererFactoryRegistryUtil;
 import com.liferay.portlet.asset.model.AssetRendererFactory;
 import com.liferay.portlet.social.service.SocialActivityInterpreterLocalServiceUtil;
 import com.liferay.portlet.social.service.SocialRequestInterpreterLocalServiceUtil;
+import com.liferay.util.bridges.php.PHPPortlet;
 import com.liferay.util.log4j.Log4JUtil;
 
 import java.util.HashMap;
@@ -90,9 +93,15 @@ import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.Set;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+
 import javax.portlet.PortletURLGenerationListener;
 
 import javax.servlet.ServletContext;
+
+import javax.sql.DataSource;
 
 import org.apache.portals.bridges.struts.StrutsPortlet;
 
@@ -125,6 +134,55 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 		catch (Throwable t) {
 			throwHotDeployException(
 				hotDeployEvent, "Error unregistering portlets for ", t);
+		}
+	}
+
+	protected void bindDataSource(String servletContextName) throws Exception {
+		if (ServerDetector.isGlassfish() || ServerDetector.isJOnAS()) {
+			return;
+		}
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Dynamically binding the Liferay data source");
+		}
+
+		DataSource dataSource = InfrastructureUtil.getDataSource();
+
+		if (dataSource == null) {
+			if (_log.isDebugEnabled()) {
+				_log.debug(
+					"Abort dynamically binding the Liferay data source " +
+						"because it is not available");
+			}
+
+			return;
+		}
+
+		Context context = new InitialContext();
+
+		try {
+			try {
+				context.lookup(_JNDI_JDBC);
+			}
+			catch (NamingException ne) {
+				context.createSubcontext(_JNDI_JDBC);
+			}
+
+			try {
+				context.lookup(_JNDI_JDBC_LIFERAY_POOL);
+			}
+			catch (NamingException ne) {
+				context.bind(_JNDI_JDBC_LIFERAY_POOL, dataSource);
+			}
+
+			_dataSourceBindStates.put(servletContextName, true);
+		}
+		catch (Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(
+					"Unable to dynamically bind the Liferay data source: " +
+						e.getMessage());
+			}
 		}
 	}
 
@@ -208,8 +266,6 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 	protected void doInvokeDeploy(HotDeployEvent hotDeployEvent)
 		throws Exception {
 
-		// Servlet context
-
 		ServletContext servletContext = hotDeployEvent.getServletContext();
 
 		String servletContextName = servletContext.getServletContextName();
@@ -217,12 +273,6 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 		if (_log.isDebugEnabled()) {
 			_log.debug("Invoking deploy for " + servletContextName);
 		}
-
-		// Company ids
-
-		long[] companyIds = PortalInstances.getCompanyIds();
-
-		// Initialize portlets
 
 		String[] xmls = new String[] {
 			HttpUtil.URLtoString(
@@ -240,22 +290,22 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 			return;
 		}
 
-		logRegistration(servletContextName);
+		if (_log.isInfoEnabled()) {
+			_log.info("Registering portlets for " + servletContextName);
+		}
 
 		List<Portlet> portlets = PortletLocalServiceUtil.initWAR(
 			servletContextName, servletContext, xmls,
 			hotDeployEvent.getPluginPackage());
 
-		// Logger
-
 		ClassLoader classLoader = hotDeployEvent.getContextClassLoader();
 
 		initLogger(classLoader);
 
-		// Portlet context wrapper
+		boolean portletAppInitialized = false;
 
-		_portletAppInitialized = false;
-		_strutsBridges = false;
+		boolean phpPortlet = false;
+		boolean strutsBridges = false;
 
 		PortletBagFactory portletBagFactory = new PortletBagFactory();
 
@@ -274,37 +324,57 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 				itr.remove();
 			}
 			else {
-				if (!_portletAppInitialized) {
+				if (!portletAppInitialized) {
 					initPortletApp(
 						portlet, servletContextName, servletContext,
 						classLoader);
 
-					_portletAppInitialized = true;
+					portletAppInitialized = true;
+				}
+
+				javax.portlet.Portlet portletInstance =
+					portletBag.getPortletInstance();
+
+				if (ClassUtil.isSubclass(
+						portletInstance.getClass(),
+						PHPPortlet.class.getName())) {
+
+					phpPortlet = true;
+
+				}
+
+				if (ClassUtil.isSubclass(
+						portletInstance.getClass(),
+						StrutsPortlet.class.getName())) {
+
+					strutsBridges = true;
 				}
 			}
 		}
 
-		// Struts bridges
+		if (phpPortlet) {
+			bindDataSource(servletContextName);
+		}
 
-		if (!_strutsBridges) {
-			_strutsBridges = GetterUtil.getBoolean(
+		if (!strutsBridges) {
+			strutsBridges = GetterUtil.getBoolean(
 				servletContext.getInitParameter(
 					"struts-bridges-context-provider"));
 		}
 
-		if (_strutsBridges) {
+		if (strutsBridges) {
 			servletContext.setAttribute(
 				ServletContextProvider.STRUTS_BRIDGES_CONTEXT_PROVIDER,
 				new LiferayServletContextProvider());
 		}
-
-		// Portlet display
 
 		String xml = HttpUtil.URLtoString(
 			servletContext.getResource("/WEB-INF/liferay-display.xml"));
 
 		PortletCategory newPortletCategory =
 			PortletLocalServiceUtil.getWARDisplay(servletContextName, xml);
+
+		long[] companyIds = PortalInstances.getCompanyIds();
 
 		for (long companyId : companyIds) {
 			PortletCategory portletCategory = (PortletCategory)WebAppPool.get(
@@ -320,11 +390,7 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 			}
 		}
 
-		// Portlet properties
-
 		processPortletProperties(servletContextName, classLoader);
-
-		// Resource actions, resource codes, and check
 
 		for (Portlet portlet : portlets) {
 			List<String> modelNames =
@@ -364,8 +430,6 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 			}
 		}
 
-		// Ready
-
 		for (Portlet portlet : portlets) {
 			boolean ready = GetterUtil.getBoolean(
 				servletContext.getInitParameter(
@@ -374,22 +438,14 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 			portlet.setReady(ready);
 		}
 
-		// ClpMessageListener
-
 		registerClpMessageListeners(servletContext, classLoader);
 
-		// Javadoc
-
 		JavadocManagerUtil.load(servletContextName, classLoader);
-
-		// Clear cache
 
 		DirectServletRegistryUtil.clearServlets();
 		FileTimestampUtil.reset();
 
-		// Variables
-
-		_vars.put(
+		_portlets.put(
 			servletContextName,
 			new ObjectValuePair<long[], List<Portlet>>(companyIds, portlets));
 
@@ -418,7 +474,7 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 			_log.debug("Invoking undeploy for " + servletContextName);
 		}
 
-		ObjectValuePair<long[], List<Portlet>> ovp = _vars.remove(
+		ObjectValuePair<long[], List<Portlet>> ovp = _portlets.remove(
 			servletContextName);
 
 		if (ovp == null) {
@@ -455,9 +511,14 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 		PortletContextBagPool.remove(servletContextName);
 		PortletResourceBundles.remove(servletContextName);
 
+		unbindDataSource(servletContextName);
+
 		unregisterClpMessageListeners(servletContext);
 
 		JavadocManagerUtil.unload(servletContextName);
+
+		DirectServletRegistryUtil.clearServlets();
+		FileTimestampUtil.reset();
 
 		if (_log.isInfoEnabled()) {
 			if (portlets.size() == 1) {
@@ -482,21 +543,7 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 			Portlet portlet, PortletBagFactory portletBagFactory)
 		throws Exception {
 
-		PortletBag portletBag = portletBagFactory.create(portlet);
-
-		if (portletBag == null) {
-			return null;
-		}
-
-		javax.portlet.Portlet portletInstance = portletBag.getPortletInstance();
-
-		if (ClassUtil.isSubclass(
-				portletInstance.getClass(), StrutsPortlet.class.getName())) {
-
-			_strutsBridges = true;
-		}
-
-		return portletBag;
+		return portletBagFactory.create(portlet);
 	}
 
 	protected void initPortletApp(
@@ -570,12 +617,6 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 		}
 	}
 
-	protected void logRegistration(String servletContextName) {
-		if (_log.isInfoEnabled()) {
-			_log.info("Registering portlets for " + servletContextName);
-		}
-	}
-
 	protected void processPortletProperties(
 			String servletContextName, ClassLoader classLoader)
 		throws Exception {
@@ -627,13 +668,58 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 		}
 	}
 
+	protected void unbindDataSource(String servletContextName) {
+		Boolean dataSourceBindState = _dataSourceBindStates.remove(
+			servletContextName);
+
+		if (dataSourceBindState == null) {
+			return;
+		}
+
+		try {
+			if (_log.isDebugEnabled()) {
+				_log.debug("Dynamically unbinding the Liferay data source");
+			}
+
+			Context context = new InitialContext();
+
+			try {
+				context.lookup(_JNDI_JDBC_LIFERAY_POOL);
+
+				context.unbind(_JNDI_JDBC_LIFERAY_POOL);
+			}
+			catch (NamingException ne) {
+			}
+
+			try {
+				context.lookup(_JNDI_JDBC);
+
+				context.destroySubcontext(_JNDI_JDBC);
+			}
+			catch (NamingException ne) {
+			}
+		}
+		catch (Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(
+					"Unable to dynamically unbind the Liferay data source: " +
+						e.getMessage());
+			}
+		}
+	}
+
+	private static final String _JNDI_JDBC = "java_liferay:jdbc";
+
+	private static final String _JNDI_JDBC_LIFERAY_POOL =
+		_JNDI_JDBC + "/LiferayPool";
+
 	private static Log _log = LogFactoryUtil.getLog(
 		PortletHotDeployListener.class);
 
-	private static Map<String, ObjectValuePair<long[], List<Portlet>>> _vars =
-		new HashMap<String, ObjectValuePair<long[], List<Portlet>>>();
-
-	private boolean _portletAppInitialized;
-	private boolean _strutsBridges;
+	private static Map<String, Boolean> _dataSourceBindStates =
+		new HashMap<String, Boolean>();
+	private static Map<String, ObjectValuePair<long[], List<Portlet>>>
+		_portlets =
+			new HashMap<String, ObjectValuePair<long[], List<Portlet>>>();
 
 }
