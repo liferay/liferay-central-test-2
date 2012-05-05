@@ -14,8 +14,19 @@
 
 package com.liferay.portal.kernel.servlet;
 
+import javax.servlet.ServletContextEvent;
+import javax.servlet.ServletContextListener;
+
 /**
- * @author Brian Wing Shun Chan
+ * @author     Brian Wing Shun Chan
+ * @deprecated
  */
-public class ThemeLoaderContextListener extends PluginContextListener {
+public class ThemeLoaderContextListener implements ServletContextListener {
+
+	public void contextDestroyed(ServletContextEvent servletContextEvent) {
+	}
+
+	public void contextInitialized(ServletContextEvent servletContextEvent) {
+	}
+
 }

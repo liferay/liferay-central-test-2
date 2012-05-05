@@ -24,7 +24,6 @@ import java.util.ArrayList;
 
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -85,8 +84,6 @@ public abstract class BaseFilter implements LiferayFilter {
 
 	public void init(FilterConfig filterConfig) {
 		_filterConfig = filterConfig;
-
-		ServletContext servletContext = _filterConfig.getServletContext();
 
 		_filterMapping = new FilterMapping(
 			this, filterConfig, new ArrayList<String>(0),

@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.plugin.License;
 import com.liferay.portal.kernel.plugin.PluginPackage;
+import com.liferay.portal.kernel.servlet.PluginContextListener;
 import com.liferay.portal.kernel.servlet.filters.invoker.InvokerFilter;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -1148,10 +1149,6 @@ public class BaseDeployer implements Deployer {
 		return sb.toString();
 	}
 
-	public Class<?> getPluginContextListenerClass() {
-		return null;
-	}
-
 	public String getPluginPackageLicensesXml(List<License> licenses) {
 		if (licenses.isEmpty()) {
 			return StringPool.BLANK;
@@ -1740,6 +1737,8 @@ public class BaseDeployer implements Deployer {
 			PluginPackage pluginPackage)
 		throws Exception {
 
+		// Check version
+
 		String content = FileUtil.read(webXml);
 
 		int x = content.indexOf("<display-name>");
@@ -1765,23 +1764,19 @@ public class BaseDeployer implements Deployer {
 					" must be updated to the Servlet 2.4 specification");
 		}
 
+		// Plugin context listener
+
+		StringBundler sb = new StringBundler(5);
+
+		sb.append("<listener>");
+		sb.append("<listener-class>");
+		sb.append(PluginContextListener.class.getName());
+		sb.append("</listener-class>");
+		sb.append("</listener>");
+
+		String pluginContextListenerContent = sb.toString();
+
 		// Merge content
-
-		String pluginContextListenerContent = StringPool.BLANK;
-
-		Class<?> pluginContextListenerClass = getPluginContextListenerClass();
-
-		if (pluginContextListenerClass != null) {
-			StringBundler sb = new StringBundler(5);
-
-			sb.append("<listener>");
-			sb.append("<listener-class>");
-			sb.append(pluginContextListenerClass.getName());
-			sb.append("</listener-class>");
-			sb.append("</listener>");
-
-			pluginContextListenerContent = sb.toString();
-		}
 
 		String extraContent = getExtraContent(srcFile, displayName);
 
@@ -1794,12 +1789,6 @@ public class BaseDeployer implements Deployer {
 		String newContent =
 			content.substring(0, pos) + pluginContextListenerContent +
 				extraContent + content.substring(pos);
-
-		// Replace old package names
-
-		newContent = StringUtil.replace(
-			newContent, "com.liferay.portal.shared.",
-			"com.liferay.portal.kernel.");
 
 		// Update liferay-web.xml
 

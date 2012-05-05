@@ -19,7 +19,7 @@ import com.liferay.portal.kernel.util.InitialThreadLocal;
 /**
  * @author Tina Tian
  */
-public class PortletContextLifecycleThreadLocal {
+public class PluginContextLifecycleThreadLocal {
 
 	public static boolean isDestroying() {
 		return _destroying.get();
@@ -39,11 +39,11 @@ public class PortletContextLifecycleThreadLocal {
 
 	private static ThreadLocal<Boolean> _destroying =
 		new InitialThreadLocal<Boolean>(
-			PortletContextLifecycleThreadLocal.class + "._destroying",
+			PluginContextLifecycleThreadLocal.class + "._destroying",
 			Boolean.FALSE);
 	private static ThreadLocal<Boolean> _initializing =
 		new InitialThreadLocal<Boolean>(
-			PortletContextLifecycleThreadLocal.class + "._initializing",
+			PluginContextLifecycleThreadLocal.class + "._initializing",
 			Boolean.FALSE);
 
 }
