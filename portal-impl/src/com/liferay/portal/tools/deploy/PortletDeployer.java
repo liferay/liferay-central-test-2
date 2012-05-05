@@ -113,8 +113,7 @@ public class PortletDeployer extends BaseDeployer {
 	}
 
 	@Override
-	public String getExtraContent(
-			double webXmlVersion, File srcFile, String displayName)
+	public String getExtraContent(File srcFile, String displayName)
 		throws Exception {
 
 		StringBundler sb = new StringBundler();
@@ -152,8 +151,7 @@ public class PortletDeployer extends BaseDeployer {
 			sb.append("</listener>");
 		}
 
-		String extraContent = super.getExtraContent(
-			webXmlVersion, srcFile, displayName);
+		String extraContent = super.getExtraContent(srcFile, displayName);
 
 		sb.append(extraContent);
 
