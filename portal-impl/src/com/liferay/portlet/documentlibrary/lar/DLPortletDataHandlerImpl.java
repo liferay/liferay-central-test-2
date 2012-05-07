@@ -326,6 +326,8 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 					portletDataContext.getScopeGroupId(), folderId,
 					fileEntry.getTitle());
 
+				String newFileEntryTitle = fileEntry.getTitle();
+
 				if (existingTitleFileEntry != null) {
 					if (portletDataContext.
 							isDataStrategyMirrorWithOverwritting()) {
@@ -334,23 +336,31 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 							existingTitleFileEntry.getFileEntryId());
 					}
 					else {
-						String originalTitle = fileEntry.getTitle();
 						String dotExtension = StringPool.PERIOD + extension;
 
-						if (originalTitle.endsWith(dotExtension)) {
-							int pos = originalTitle.lastIndexOf(dotExtension);
+						if (newFileEntryTitle.endsWith(dotExtension)) {
+							int pos = newFileEntryTitle.lastIndexOf(
+								dotExtension);
 
-							originalTitle = originalTitle.substring(0, pos);
+							newFileEntryTitle = newFileEntryTitle.substring(
+								0, pos);
 						}
 
 						for (int i = 1;; i++) {
-							titleWithExtension =
-								originalTitle + StringPool.SPACE + i +
-									dotExtension;
+							newFileEntryTitle =
+								newFileEntryTitle + StringPool.SPACE + i;
 
-							existingTitleFileEntry = FileEntryUtil.findByR_F_T(
+							titleWithExtension =
+								newFileEntryTitle + dotExtension;
+
+							if (fileEntry.getTitle().endsWith(dotExtension)) {
+								newFileEntryTitle =
+									newFileEntryTitle + dotExtension;
+							}
+
+							existingTitleFileEntry = FileEntryUtil.fetchByR_F_T(
 								portletDataContext.getScopeGroupId(), folderId,
-								titleWithExtension);
+								newFileEntryTitle);
 
 							if (existingTitleFileEntry == null) {
 								break;
@@ -366,7 +376,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 				importedFileEntry = DLAppLocalServiceUtil.addFileEntry(
 					userId, portletDataContext.getScopeGroupId(), folderId,
 					titleWithExtension, fileEntry.getMimeType(),
-					fileEntry.getTitle(), fileEntry.getDescription(), null, is,
+					newFileEntryTitle, fileEntry.getDescription(), null, is,
 					fileEntry.getSize(), serviceContext);
 
 				if (fileVersion.getStatus() ==
