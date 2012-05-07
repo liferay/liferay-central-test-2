@@ -329,8 +329,8 @@ JAVA_OPTS="$JAVA_OPTS -Dfile.encoding=UTF-8 -Djava.net.preferIPv4Stack=true -Dus
 				</if>
 
 				<replace file="${app.server.instance.dir}/configuration/standalone.xml">
-					<replacetoken><![CDATA[<subsystem xmlns="urn:jboss:domain:web:1.0" default-virtual-server="default-host">]]></replacetoken>
-					<replacevalue><![CDATA[<subsystem xmlns="urn:jboss:domain:web:1.0" default-virtual-server="default-host">
+					<replacetoken><![CDATA[<subsystem xmlns="urn:jboss:domain:web:1.1" default-virtual-server="default-host" native="false">]]></replacetoken>
+					<replacevalue><![CDATA[<subsystem xmlns="urn:jboss:domain:web:1.1" default-virtual-server="default-host" native="false">
 						<configuration>
 							<jsp-configuration development="true" />
 						</configuration>]]>
