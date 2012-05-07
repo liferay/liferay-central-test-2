@@ -36,8 +36,8 @@ public class EntryDisplayTerms extends DisplayTerms {
 		super(portletRequest);
 
 		name = ParamUtil.getString(portletRequest, NAME);
-		removedBy = ParamUtil.getString(portletRequest, REMOVED_BY);
 		removedDate = ParamUtil.getString(portletRequest, REMOVED_DATE);
+		removedBy = ParamUtil.getString(portletRequest, REMOVED_BY);
 		type = ParamUtil.getString(portletRequest, TYPE);
 	}
 

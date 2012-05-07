@@ -27,8 +27,8 @@ public class EntrySearchTerms extends EntryDisplayTerms {
 		super(portletRequest);
 
 		name = DAOParamUtil.getString(portletRequest, NAME);
-		removedBy = DAOParamUtil.getString(portletRequest, REMOVED_BY);
 		removedDate = DAOParamUtil.getString(portletRequest, REMOVED_DATE);
+		removedBy = DAOParamUtil.getString(portletRequest, REMOVED_BY);
 		type = DAOParamUtil.getString(portletRequest, TYPE);
 	}
 
