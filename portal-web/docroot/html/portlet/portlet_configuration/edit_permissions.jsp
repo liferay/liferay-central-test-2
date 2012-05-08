@@ -26,7 +26,8 @@ String modelResource = ParamUtil.getString(request, "modelResource");
 String modelResourceDescription = ParamUtil.getString(request, "modelResourceDescription");
 String modelResourceName = ResourceActionsUtil.getModelResource(pageContext, modelResource);
 
-String resourceGroupId = ParamUtil.getString(request, "resourceGroupId");
+long resourceGroupId = ParamUtil.getLong(request, "resourceGroupId");
+
 String resourcePrimKey = ParamUtil.getString(request, "resourcePrimKey");
 
 if (Validator.isNull(resourcePrimKey)) {
@@ -110,7 +111,7 @@ actionPortletURL.setParameter("returnToFullPageURL", returnToFullPageURL);
 actionPortletURL.setParameter("portletResource", portletResource);
 actionPortletURL.setParameter("modelResource", modelResource);
 actionPortletURL.setParameter("modelResourceDescription", modelResourceDescription);
-actionPortletURL.setParameter("resourceGroupId", resourceGroupId);
+actionPortletURL.setParameter("resourceGroupId", String.valueOf(resourceGroupId));
 actionPortletURL.setParameter("resourcePrimKey", resourcePrimKey);
 actionPortletURL.setParameter("roleTypes", roleTypesParam);
 
@@ -123,7 +124,7 @@ renderPortletURL.setParameter("returnToFullPageURL", returnToFullPageURL);
 renderPortletURL.setParameter("portletResource", portletResource);
 renderPortletURL.setParameter("modelResource", modelResource);
 renderPortletURL.setParameter("modelResourceDescription", modelResourceDescription);
-renderPortletURL.setParameter("resourceGroupId", resourceGroupId);
+renderPortletURL.setParameter("resourceGroupId", String.valueOf(resourceGroupId));
 renderPortletURL.setParameter("resourcePrimKey", resourcePrimKey);
 renderPortletURL.setParameter("roleTypes", roleTypesParam);
 
