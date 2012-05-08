@@ -47,7 +47,7 @@ public class SuccessTag extends IncludeTag {
 
 	@Override
 	protected boolean isCleanUpSetAttributes() {
-		return true;
+		return _CLEAN_UP_SET_ATTRIBUTES;
 	}
 
 	@Override
@@ -58,6 +58,8 @@ public class SuccessTag extends IncludeTag {
 			"liferay-ui:success:translateMessage",
 			String.valueOf(_translateMessage));
 	}
+
+	private static final boolean _CLEAN_UP_SET_ATTRIBUTES = true;
 
 	private static final String _PAGE = "/html/taglib/ui/success/page.jsp";
 
