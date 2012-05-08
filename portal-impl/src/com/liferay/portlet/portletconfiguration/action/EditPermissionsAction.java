@@ -338,7 +338,7 @@ public class EditPermissionsAction extends EditConfigurationAction {
 		}
 
 		long resourceGroupId = ParamUtil.getLong(
-			actionRequest, "resourceGroupId");
+			actionRequest, "resourceGroupId", themeDisplay.getScopeGroupId());
 		String resourcePrimKey = ParamUtil.getString(
 			actionRequest, "resourcePrimKey");
 
