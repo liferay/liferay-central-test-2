@@ -25,7 +25,6 @@ import com.liferay.portal.servlet.filters.BasePortalFilter;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsValues;
-import com.liferay.portal.util.WebKeys;
 
 import javax.servlet.FilterChain;
 import javax.servlet.http.HttpServletRequest;
