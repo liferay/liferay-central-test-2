@@ -2849,7 +2849,7 @@
 			<name>ddm-resource</name>
 			<value>com.liferay.portlet.dynamicdatalists</value>
 		</init-param>
-				<init-param>
+		<init-param>
 			<name>template-path</name>
 			<value>/html/portlet/dynamic_data_lists/</value>
 		</init-param>
@@ -2881,7 +2881,7 @@
 			<name>ddm-resource</name>
 			<value>com.liferay.portlet.dynamicdatalists</value>
 		</init-param>
-				<init-param>
+		<init-param>
 			<name>template-path</name>
 			<value>/html/portlet/dynamic_data_list_display/</value>
 		</init-param>
@@ -2960,7 +2960,7 @@
 			<name>config-template</name>
 			<value>/html/portlet/asset_publisher/configuration.jsp</value>
 		</init-param>
-				<init-param>
+		<init-param>
 			<name>template-path</name>
 			<value>/html/portlet/asset_publisher/</value>
 		</init-param>
