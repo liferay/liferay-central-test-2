@@ -354,7 +354,7 @@ public class JournalIndexer extends BaseIndexer {
 
 			if (!type.equals("boolean") && !type.equals("document_library") &&
 				!type.equals("image") && !type.equals("list") &&
-				!type.equals("link_to_layout") && !type.equals("multi-list") && 
+				!type.equals("link_to_layout") && !type.equals("multi-list") &&
 				!type.equals("selection_break")) {
 
 				Element dynamicContentElement = dynamicElementElement.element(
