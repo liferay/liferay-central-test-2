@@ -29,6 +29,8 @@ String modelResource = ParamUtil.getString(request, "modelResource");
 String modelResourceDescription = ParamUtil.getString(request, "modelResourceDescription");
 String modelResourceName = ResourceActionsUtil.getModelResource(pageContext, modelResource);
 
+long resourceGroupId = ParamUtil.getLong(request, "resourceGroupId");
+
 String resourcePrimKey = ParamUtil.getString(request, "resourcePrimKey");
 
 if (Validator.isNull(resourcePrimKey)) {
@@ -92,6 +94,7 @@ portletURL.setParameter("returnToFullPageURL", returnToFullPageURL);
 portletURL.setParameter("portletResource", portletResource);
 portletURL.setParameter("modelResource", modelResource);
 portletURL.setParameter("modelResourceDescription", modelResourceDescription);
+portletURL.setParameter("resourceGroupId", String.valueOf(resourceGroupId));
 portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 
 request.setAttribute("edit_permissions_algorithm_1_to_4.jsp-tabs2", tabs2);
