@@ -474,6 +474,10 @@ public class VelocityTaglib {
 		mySitesTag.runTag();
 	}
 
+	/**
+	 * @deprecated {@link #permissionsURL(String, String, String, long, String,
+	 *             String, int[])}
+	 */
 	public void permissionsURL(
 			String redirect, String modelResource,
 			String modelResourceDescription, String resourcePrimKey,
@@ -481,13 +485,13 @@ public class VelocityTaglib {
 		throws Exception {
 
 		permissionsURL(
-			redirect, modelResourceDescription, modelResourceDescription, null,
+			redirect, modelResourceDescription, modelResourceDescription, 0,
 			resourcePrimKey, windowState, roleTypes);
 	}
 
 	public void permissionsURL(
 			String redirect, String modelResource,
-			String modelResourceDescription, String resourceGroupId,
+			String modelResourceDescription, long resourceGroupId,
 			String resourcePrimKey, String windowState, int[] roleTypes)
 		throws Exception {
 
