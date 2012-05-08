@@ -20,11 +20,9 @@ import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.InstanceFactory;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
-import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.search.lucene.dump.DumpIndexDeletionPolicy;
 import com.liferay.portal.search.lucene.dump.IndexCommitSerializationUtil;
-import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 
 import java.io.File;
@@ -41,6 +39,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
+import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.LimitTokenCountAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.IndexReader;
@@ -330,6 +329,21 @@ public class IndexAccessorImpl implements IndexAccessor {
 		return directory;
 	}
 
+	private MergePolicy _getMergePolicy() throws Exception {
+		ClassLoader classLoader = PortalClassLoaderUtil.getClassLoader();
+
+		MergePolicy mergePolicy = (MergePolicy)InstanceFactory.newInstance(
+			classLoader, PropsValues.LUCENE_MERGE_POLICY);
+
+		if (mergePolicy instanceof LogMergePolicy) {
+			LogMergePolicy logMergePolicy = (LogMergePolicy)mergePolicy;
+
+			logMergePolicy.setMergeFactor(PropsValues.LUCENE_MERGE_FACTOR);
+		}
+
+		return mergePolicy;
+	}
+
 	private String _getPath() {
 		return PropsValues.LUCENE_DIR.concat(String.valueOf(_companyId)).concat(
 			StringPool.SLASH);
@@ -367,49 +381,26 @@ public class IndexAccessorImpl implements IndexAccessor {
 
 	private void _initIndexWriter() {
 		try {
-			LimitTokenCountAnalyzer analyzer = new LimitTokenCountAnalyzer(
-				LuceneHelperUtil.getAnalyzer(), _DEFAULT_MAX_FIELD_LENGTH);
+			Analyzer analyzer = new LimitTokenCountAnalyzer(
+				LuceneHelperUtil.getAnalyzer(),
+				PropsValues.LUCENE_ANALYZER_MAX_TOKENS);
 
 			IndexWriterConfig indexWriterConfig = new IndexWriterConfig(
 				LuceneHelperUtil.getVersion(), analyzer);
 
-			// Merge Policy
-
-			String mergePolicyClassName = PropsUtil.get(
-				PropsKeys.LUCENE_MERGE_POLICY);
-
-			ClassLoader classLoader = PortalClassLoaderUtil.getClassLoader();
-
-			MergePolicy mergePolicy = (MergePolicy)InstanceFactory.newInstance(
-				classLoader, mergePolicyClassName);
-
-			if (mergePolicy instanceof LogMergePolicy) {
-				LogMergePolicy logMergePolicy = (LogMergePolicy)mergePolicy;
-
-				logMergePolicy.setMergeFactor(PropsValues.LUCENE_MERGE_FACTOR);
-			}
-
-			indexWriterConfig.setMergePolicy(mergePolicy);
-
-			// Buffer Size
-
+			indexWriterConfig.setIndexDeletionPolicy(_dumpIndexDeletionPolicy);
+			indexWriterConfig.setMergePolicy(_getMergePolicy());
 			indexWriterConfig.setRAMBufferSizeMB(
 				PropsValues.LUCENE_BUFFER_SIZE);
 
-			// Index Deletion Policy
-
-			indexWriterConfig.setIndexDeletionPolicy(_dumpIndexDeletionPolicy);
-
 			_indexWriter = new IndexWriter(getLuceneDir(), indexWriterConfig);
 
-			// LUCENE-2386
+			if (!IndexReader.indexExists(getLuceneDir())) {
 
-			IndexReader indexReader = IndexReader.open(_indexWriter, false);
+				// Workaround for LUCENE-2386
 
-			if (!indexReader.indexExists(getLuceneDir())) {
 				if (_log.isDebugEnabled()) {
-					_log.debug("Index file does not exists, creating empty" +
-						" index, please reindex to make it up-to-date.");
+					_log.debug("Creating missing index");
 				}
 
 				_doCommit();
@@ -436,8 +427,6 @@ public class IndexAccessorImpl implements IndexAccessor {
 			_commit();
 		}
 	}
-
-	private static final int _DEFAULT_MAX_FIELD_LENGTH = 10000;
 
 	private static final String _LUCENE_STORE_TYPE_FILE = "file";
 

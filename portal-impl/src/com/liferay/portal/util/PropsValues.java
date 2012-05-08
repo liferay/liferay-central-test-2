@@ -892,6 +892,8 @@ public class PropsValues {
 
 	public static final boolean LOOK_AND_FEEL_MODIFIABLE = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.LOOK_AND_FEEL_MODIFIABLE));
 
+	public static final int LUCENE_ANALYZER_MAX_TOKENS = GetterUtil.getInteger(PropsUtil.get(PropsKeys.LUCENE_ANALYZER_MAX_TOKENS));
+
 	public static final int LUCENE_BUFFER_SIZE = GetterUtil.getInteger(PropsUtil.get(PropsKeys.LUCENE_BUFFER_SIZE));
 
 	public static final int LUCENE_COMMIT_BATCH_SIZE = GetterUtil.getInteger(PropsUtil.get(PropsKeys.LUCENE_COMMIT_BATCH_SIZE));
@@ -905,6 +907,8 @@ public class PropsValues {
 	public static final String LUCENE_FILE_EXTRACTOR_REGEXP_STRIP = PropsUtil.get(PropsKeys.LUCENE_FILE_EXTRACTOR_REGEXP_STRIP);
 
 	public static final int LUCENE_MERGE_FACTOR = GetterUtil.getInteger(PropsUtil.get(PropsKeys.LUCENE_MERGE_FACTOR));
+
+	public static String LUCENE_MERGE_POLICY = PropsUtil.get(PropsKeys.LUCENE_MERGE_POLICY);
 
 	public static final boolean LUCENE_REPLICATE_WRITE = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.LUCENE_REPLICATE_WRITE));
 
