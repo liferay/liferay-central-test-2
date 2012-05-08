@@ -989,16 +989,20 @@ public class MainServlet extends ActionServlet {
 	}
 
 	protected void initServerDetectorJetty() throws Exception {
-		ServletContext servletContext = getServletContext();
-
-		Field outerClassField = servletContext.getClass().getDeclaredField(
-			"this$0");
-
-		outerClassField.setAccessible(true);
 
 		// org.eclipse.jetty.webapp.WebAppContext
 
+		ServletContext servletContext = getServletContext();
+
+		Class<?> servletContextClass = servletContext.getClass();
+
+		Field outerClassField = servletContextClass.getDeclaredField("this$0");
+
+		outerClassField.setAccessible(true);
+
 		Object webAppContext = outerClassField.get(servletContext);
+
+		// org.eclipse.jetty.server.handler.AbstractHandler
 
 		Class<?> abstractHandlerClass = webAppContext.getClass();
 
@@ -1006,15 +1010,15 @@ public class MainServlet extends ActionServlet {
 			abstractHandlerClass = abstractHandlerClass.getSuperclass();
 		}
 
-		// org.eclipse.jetty.server.handler.AbstractHandler
+		// org.eclipse.jetty.server.Server
 
 		Field serverField = abstractHandlerClass.getDeclaredField("_server");
 
 		serverField.setAccessible(true);
 
-		// org.eclipse.jetty.server.Server
-
 		Object server = serverField.get(webAppContext);
+
+		// org.eclipse.jetty.util.component.AggregateLifeCycle
 
 		Class<?> aggregateLifeCycleClass = server.getClass();
 
@@ -1022,54 +1026,58 @@ public class MainServlet extends ActionServlet {
 			aggregateLifeCycleClass = aggregateLifeCycleClass.getSuperclass();
 		}
 
-		// org.eclipse.jetty.util.component.AggregateLifeCycle
+		// org.eclipse.jetty.deploy.DeploymentManager
 
 		Field dependentBeansField = aggregateLifeCycleClass.getDeclaredField(
 			"_dependentBeans");
 
 		dependentBeansField.setAccessible(true);
 
-		List dependentBeans = (List)dependentBeansField.get(server);
+		List<?> dependentBeans = (List<?>)dependentBeansField.get(server);
 
 		Object deploymentManager = null;
 
-		for (Object bean : dependentBeans) {
-			Class<?> beanClass = bean.getClass();
+		for (Object dependentBean : dependentBeans) {
+			Class<?> dependentBeanClass = dependentBean.getClass();
 
-			if (beanClass.getName().equals(
-				"org.eclipse.jetty.deploy.DeploymentManager")) {
+			String dependentBeanClassName = dependentBeanClass.getName();
 
-				deploymentManager = bean;
+			if (dependentBeanClassName.equals(
+					"org.eclipse.jetty.deploy.DeploymentManager")) {
+
+				deploymentManager = dependentBean;
 
 				break;
 			}
 		}
 
 		if (deploymentManager == null) {
-			throw new Exception("DeploymentManager not found.");
+			throw new Exception("DeploymentManager not found");
 		}
 
-		// org.eclipse.jetty.deploy.DeploymentManager
+		// org.eclipse.jetty.deploy.providers.ScanningAppProvider
 
-		Field providersField = deploymentManager.getClass().getDeclaredField(
+		Class<?> deploymentManagerClass = deploymentManager.getClass();
+
+		Field providersField = deploymentManagerClass.getDeclaredField(
 			"_providers");
 
 		providersField.setAccessible(true);
 
-		List providers = (List)providersField.get(deploymentManager);
+		List<?> providers = (List<?>)providersField.get(deploymentManager);
 
 		boolean hotDeploySupported = false;
 
 		for (Object provider : providers) {
 			Class<?> providerClass = provider.getClass();
 
-			if (!providerClass.getName().equals(
-				"org.eclipse.jetty.deploy.providers.ContextProvider")) {
+			String providerClassName = providerClass.getName();
+
+			if (!providerClassName.equals(
+					"org.eclipse.jetty.deploy.providers.ContextProvider")) {
 
 				continue;
 			}
-
-			// org.eclipse.jetty.deploy.providers.ScanningAppProvider
 
 			Class<?> scanningAppProviderClass = providerClass.getSuperclass();
 
@@ -1091,9 +1099,10 @@ public class MainServlet extends ActionServlet {
 	}
 
 	protected void initServerDetectorTomcat() throws Exception {
-		ServletContext servletContext = getServletContext();
 
 		// org.apache.catalina.core.ApplicationContextFacade
+
+		ServletContext servletContext = getServletContext();
 
 		Class<?> applicationContextFacadeClass = servletContext.getClass();
 
