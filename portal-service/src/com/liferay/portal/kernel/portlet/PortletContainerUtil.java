@@ -76,7 +76,7 @@ public class PortletContainerUtil {
 		HttpServletRequest request, String renderPath, String columnId,
 		Integer columnPos, Integer columnCount) {
 
-		if (_restrict) {
+		if (_PORTLET_CONTAINER_RESTRICT) {
 			RestrictPortletServletRequest restrictPortletServletRequest =
 				new RestrictPortletServletRequest(request);
 
@@ -131,7 +131,7 @@ public class PortletContainerUtil {
 	}
 
 	public void setPortletContainer(PortletContainer portletContainer) {
-		if (_restrict) {
+		if (_PORTLET_CONTAINER_RESTRICT) {
 			portletContainer = new RestrictPortletContainerWrapper(
 				portletContainer);
 		}
@@ -139,8 +139,9 @@ public class PortletContainerUtil {
 		_portletContainer = portletContainer;
 	}
 
-	private static final boolean _restrict = GetterUtil.getBoolean(
-		PropsUtil.get(PropsKeys.PORTLET_CONTAINER_RESTRICT));
+	private static final boolean _PORTLET_CONTAINER_RESTRICT =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsKeys.PORTLET_CONTAINER_RESTRICT));
 
 	private static PortletContainer _portletContainer;
 

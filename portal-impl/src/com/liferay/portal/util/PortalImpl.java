@@ -2677,7 +2677,7 @@ public class PortalImpl implements Portal {
 					"com.liferay.")) {
 
 			if (originalRequest instanceof
-				PersistentHttpServletRequestWrapper) {
+					PersistentHttpServletRequestWrapper) {
 
 				persistentHttpServletRequestWrappers.add(
 					(HttpServletRequestWrapper)originalRequest);
@@ -2686,12 +2686,15 @@ public class PortalImpl implements Portal {
 			// Get original request so that portlets inside portlets render
 			// properly
 
-			originalRequest = (HttpServletRequest)
-				((HttpServletRequestWrapper)originalRequest).getRequest();
+			HttpServletRequestWrapper httpServletRequestWrapper =
+				(HttpServletRequestWrapper)originalRequest;
+
+			originalRequest =
+				(HttpServletRequest)httpServletRequestWrapper.getRequest();
 		}
 
 		for (int i = persistentHttpServletRequestWrappers.size() - 1; i >= 0;
-			i--) {
+				i--) {
 
 			HttpServletRequestWrapper httpServletRequestWrapper =
 				persistentHttpServletRequestWrappers.get(i);

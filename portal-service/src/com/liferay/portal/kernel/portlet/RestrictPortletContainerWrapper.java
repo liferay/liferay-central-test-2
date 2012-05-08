@@ -116,6 +116,6 @@ public class RestrictPortletContainerWrapper implements PortletContainer {
 		}
 	}
 
-	private final PortletContainer _portletContainer;
+	private PortletContainer _portletContainer;
 
 }
