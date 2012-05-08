@@ -54,7 +54,7 @@ public class RestrictPortletServletRequest
 	}
 
 	@Override
-	public Enumeration getAttributeNames() {
+	public Enumeration<String> getAttributeNames() {
 		Enumeration<String> superEnumeration = super.getAttributeNames();
 
 		if (_attributes.isEmpty()) {
@@ -100,24 +100,20 @@ public class RestrictPortletServletRequest
 					servletRequest.removeAttribute(name);
 
 					if (_log.isInfoEnabled()) {
-						_log.info("Remove shared attribute. Name : " + name);
+						_log.info("Remove shared attribute " + name);
 					}
 				}
 				else {
 					servletRequest.setAttribute(name, value);
 
 					if (_log.isInfoEnabled()) {
-						_log.info(
-							"Set shared attribute. Name : " + name +
-							", value : " + value);
+						_log.info("Set shared attribute " + name);
 					}
 				}
 			}
 			else {
 				if ((value != _nullValue) && _log.isDebugEnabled()) {
-					_log.debug(
-						"Ignore setting restricted attribute. Name : " +
-						name + ", value : " + value);
+					_log.debug("Ignore setting restricted attribute " + name);
 				}
 			}
 		}
@@ -140,7 +136,7 @@ public class RestrictPortletServletRequest
 	private static final Log _log = LogFactoryUtil.getLog(
 		RestrictPortletServletRequest.class);
 
-	private static final Object _nullValue = new Object();
+	private static Object _nullValue = new Object();
 
 	private Map<String, Object> _attributes = new HashMap<String, Object>();
 
