@@ -12,7 +12,7 @@
 	#end
 
 	<div class="asset-abstract">
-		<div class="lfr-meta-actions asset-actions">
+		<div class="asset-actions lfr-meta-actions">
 			<span>
 				<a class="taglib-icon" href="$assetRenderer.getURLEdit($renderRequest, $renderResponse)">
 					<img alt="#language("edit")" class="icon" src="$themeDisplay.getPathThemeImages()/common/edit.png" />

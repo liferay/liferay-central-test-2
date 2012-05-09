@@ -12,14 +12,14 @@
 			#set ($viewURL = $assetRenderer.getURLViewInContext($renderRequest, $renderResponse, $viewURL))
 		#end
 
-		<li class="title-list document">
+		<li class="document title-list">
 			<a class="taglib-icon" href="$viewURL">
 				<img alt="$assetEntry.getTitle($locale)" class="icon" src="$assetRenderer.getIconPath($renderRequest)" />
 
 				<span class="taglib-text">$assetEntry.getTitle($locale)</span>
 			</a>
 
-			<div class="lfr-meta-actions asset-actions">
+			<div class="asset-actions lfr-meta-actions">
 				<a class="taglib-icon" href="$assetRenderer.getURLEdit($renderRequest, $renderResponse)">
 					<img alt="#language("edit") $assetEntry.getTitle($locale)" class="icon" src="$themeDisplay.getPathThemeImages()/common/edit.png" title="#language("edit") $assetEntry.getTitle($locale)" />
 				</a>
