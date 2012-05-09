@@ -52,49 +52,13 @@ public class AddDefaultDDMTemplatesAction extends SimpleAction {
 		}
 	}
 
-	protected void doRun(long companyId) throws Exception {
-		ServiceContext serviceContext = new ServiceContext();
-
-		Group group = GroupLocalServiceUtil.getGroup(
-			companyId, GroupConstants.GUEST);
-
-		serviceContext.setScopeGroupId(group.getGroupId());
-
-		long defaultUserId = UserLocalServiceUtil.getDefaultUserId(companyId);
-
-		serviceContext.setUserId(defaultUserId);
-
-		addDefaultDDMTemplates(
-			defaultUserId, group.getGroupId(), serviceContext);
-	}
-
-	protected void addDefaultDDMTemplates(
-			long userId, long groupId, ServiceContext serviceContext)
-		throws SystemException, PortalException {
-
-		// Custom Abstracts
-
-		addDDMTemplate(
-        	groupId, userId, DDMTemplateConstants.TEMPLATE_KEY_CUSTOM_ABSTRACTS,
-        	"custom-abstracts", "custom-abstracts-description",
-        	"asset-publisher-custom-abstracts.vm", serviceContext);
-
-		// Custom Title List
-
-    	addDDMTemplate(
-			groupId, userId,
-			DDMTemplateConstants.TEMPLATE_KEY_CUSTOM_TITLE_LIST,
-			"custom-title-list", "custom-title-list-description",
-			"asset-publisher-custom-title-list.vm", serviceContext);
-	}
-
 	protected void addDDMTemplate(
-			long groupId, long userId, String ddmTemplateKey, String name,
+			long userId, long groupId, String templateKey, String name,
 			String description, String fileName, ServiceContext serviceContext)
 		throws SystemException, PortalException {
 
 		DDMTemplate ddmTemplate = DDMTemplateLocalServiceUtil.fetchTemplate(
-			groupId, ddmTemplateKey);
+			groupId, templateKey);
 
 		if (ddmTemplate != null) {
 			return;
@@ -113,12 +77,41 @@ public class AddDefaultDDMTemplatesAction extends SimpleAction {
 
 		descriptionMap.put(locale, LanguageUtil.get(locale, description));
 
-		long classNameId = PortalUtil.getClassNameId(AssetEntry.class);
-		long classPK = groupId;
-
 		DDMTemplateLocalServiceUtil.addTemplate(
-			userId, groupId, classNameId, classPK, ddmTemplateKey, nameMap,
-			descriptionMap, "list", null, "vm", script, serviceContext);
+			userId, groupId, PortalUtil.getClassNameId(AssetEntry.class),
+			groupId, templateKey, nameMap, descriptionMap, "list", null, "vm",
+			script, serviceContext);
+	}
+
+	protected void addDDMTemplates(
+			long userId, long groupId, ServiceContext serviceContext)
+		throws SystemException, PortalException {
+
+		addDDMTemplate(
+			userId, groupId, DDMTemplateConstants.TEMPLATE_KEY_CUSTOM_ABSTRACTS,
+			"custom-abstracts", "custom-abstracts-description",
+			"asset-publisher-custom-abstracts.vm", serviceContext);
+
+		addDDMTemplate(
+			userId, groupId,
+			DDMTemplateConstants.TEMPLATE_KEY_CUSTOM_TITLE_LIST,
+			"custom-title-list", "custom-title-list-description",
+			"asset-publisher-custom-title-list.vm", serviceContext);
+	}
+
+	protected void doRun(long companyId) throws Exception {
+		ServiceContext serviceContext = new ServiceContext();
+
+		Group group = GroupLocalServiceUtil.getGroup(
+			companyId, GroupConstants.GUEST);
+
+		serviceContext.setScopeGroupId(group.getGroupId());
+
+		long defaultUserId = UserLocalServiceUtil.getDefaultUserId(companyId);
+
+		serviceContext.setUserId(defaultUserId);
+
+		addDDMTemplates(defaultUserId, group.getGroupId(), serviceContext);
 	}
 
 }
