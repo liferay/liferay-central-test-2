@@ -788,8 +788,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			ServiceContext serviceContext = (ServiceContext)workflowContext.get(
 				WorkflowConstants.CONTEXT_SERVICE_CONTEXT);
 
-			boolean update = ParamUtil.getBoolean(
-				serviceContext, "update", false);
+			boolean update = ParamUtil.getBoolean(serviceContext, "update");
 
 			if (update) {
 				entry.setStatus(WorkflowConstants.STATUS_DRAFT_FROM_APPROVED);
