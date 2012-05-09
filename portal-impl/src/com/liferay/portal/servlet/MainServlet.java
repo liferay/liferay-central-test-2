@@ -1032,31 +1032,32 @@ public class MainServlet extends ActionServlet {
 
 		beansField.setAccessible(true);
 
-		List<?> beans = (List<?>)beansField.get(server);
-
 		Object deploymentManager = null;
 
-		for (Object bean : beans) {
+		List<?> aggregateLifeCycleBeans = (List<?>)beansField.get(server);
+
+		for (Object aggregateLifeCycleBean : aggregateLifeCycleBeans) {
 
 			// org.eclipse.jetty.util.component.AggregateLifeCycle$Bean
 
-			Class<?> aggregateLifeCycleBeanClass = bean.getClass();
+			Class<?> aggregateLifeCycleBeanClass =
+				aggregateLifeCycleBean.getClass();
 
 			Field beanField = aggregateLifeCycleBeanClass.getDeclaredField(
 				"_bean");
 
 			beanField.setAccessible(true);
 
-			Object beanBean = beanField.get(bean);
+			Object bean = beanField.get(aggregateLifeCycleBean);
 
-			Class<?> beanBeanClass = beanBean.getClass();
+			Class<?> beanClass = bean.getClass();
 
-			String beanBeanClassName = beanBeanClass.getName();
+			String beanClassName = beanClass.getName();
 
-			if (beanBeanClassName.equals(
+			if (beanClassName.equals(
 					"org.eclipse.jetty.deploy.DeploymentManager")) {
 
-				deploymentManager = beanBean;
+				deploymentManager = bean;
 
 				break;
 			}
