@@ -104,12 +104,12 @@ public abstract class PortletRequestImpl implements LiferayPortletRequest {
 	}
 
 	public void cleanUp() {
-		_request.removeAttribute(WebKeys.PORTLET_ID);
-		_request.removeAttribute(WebKeys.PORTLET_CONTENT);
 		_request.removeAttribute(JavaConstants.JAVAX_PORTLET_CONFIG);
 		_request.removeAttribute(JavaConstants.JAVAX_PORTLET_REQUEST);
 		_request.removeAttribute(JavaConstants.JAVAX_PORTLET_RESPONSE);
 		_request.removeAttribute(PortletRequest.LIFECYCLE_PHASE);
+		_request.removeAttribute(WebKeys.PORTLET_ID);
+		_request.removeAttribute(WebKeys.PORTLET_CONTENT);
 	}
 
 	public void defineObjects(

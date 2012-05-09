@@ -192,6 +192,8 @@ public class ThemeUtil {
 			servletContext, request,
 			new PipingServletResponse(response, writer), pageContext);
 
+		request.setAttribute(WebKeys.VELOCITY_TAGLIB, velocityTaglib);
+
 		template.put("taglibLiferay", velocityTaglib);
 		template.put("theme", velocityTaglib);
 		template.put("writer", writer);
@@ -242,8 +244,6 @@ public class ThemeUtil {
 				genericServlet, ObjectWrapper.DEFAULT_WRAPPER);
 
 		template.put("Application", servletContextHashModel);
-
-		request.setAttribute(WebKeys.VELOCITY_TAGLIB, velocityTaglib);
 
 		HttpRequestHashModel httpRequestHashModel = new HttpRequestHashModel(
 			request, response, ObjectWrapper.DEFAULT_WRAPPER);
