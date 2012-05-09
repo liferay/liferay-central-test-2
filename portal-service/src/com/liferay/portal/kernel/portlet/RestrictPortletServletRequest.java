@@ -91,63 +91,18 @@ public class RestrictPortletServletRequest
 		return _attributes;
 	}
 
-	@SuppressWarnings("unchecked")
 	public void mergeSharedAttributes() {
 		ServletRequest servletRequest = getRequest();
 
 		Lock mergeLock = (Lock)servletRequest.getAttribute(
-			WebKeys.PARALLEL_RENDERRING_MERGE_LOCK);
+			WebKeys.PARALLEL_RENDERING_MERGE_LOCK);
 
 		if (mergeLock != null) {
 			mergeLock.lock();
 		}
 
 		try {
-			for (Map.Entry<String, Object> entry : _attributes.entrySet()) {
-				String name = entry.getKey();
-				Object value = entry.getValue();
-
-				if (name.startsWith("LIFERAY_SHARED_")) {
-					if (value == _nullValue) {
-						servletRequest.removeAttribute(name);
-
-						if (_log.isInfoEnabled()) {
-							_log.info("Remove shared attribute " + name);
-						}
-					}
-					else {
-						Object masterValue = servletRequest.getAttribute(name);
-
-						if ((masterValue == null) ||
-							!(value instanceof Mergeable)) {
-
-							servletRequest.setAttribute(name, value);
-
-							if (_log.isInfoEnabled()) {
-								_log.info("Set shared attribute " + name);
-							}
-						}
-						else {
-							Mergeable<Object> masterMergeable =
-								(Mergeable<Object>)value;
-							Mergeable<Object> slaveMergeable =
-								(Mergeable<Object>)value;
-
-							masterMergeable.merge(slaveMergeable);
-
-							if (_log.isInfoEnabled()) {
-								_log.info("Merge shared attribute " + name);
-							}
-						}
-					}
-				}
-				else {
-					if ((value != _nullValue) && _log.isDebugEnabled()) {
-						_log.debug(
-							"Ignore setting restricted attribute " + name);
-					}
-				}
-			}
+			doMergeSharedAttributes(servletRequest);
 		}
 		finally {
 			if (mergeLock != null) {
@@ -170,7 +125,59 @@ public class RestrictPortletServletRequest
 		_attributes.put(name, value);
 	}
 
-	private static final Log _log = LogFactoryUtil.getLog(
+	protected void doMergeSharedAttributes(ServletRequest servletRequest) {
+		for (Map.Entry<String, Object> entry : _attributes.entrySet()) {
+			String name = entry.getKey();
+			Object value = entry.getValue();
+
+			doMergeSharedAttributes(servletRequest, name, value);
+		}
+	}
+
+	protected void doMergeSharedAttributes(
+		ServletRequest servletRequest, String name, Object value) {
+
+		if (name.startsWith(LIFERAY_SHARED_PREFIX)) {
+			if (value == _nullValue) {
+				servletRequest.removeAttribute(name);
+
+				if (_log.isInfoEnabled()) {
+					_log.info("Remove shared attribute " + name);
+				}
+			}
+			else {
+				Object masterValue = servletRequest.getAttribute(name);
+
+				if ((masterValue == null) || !(value instanceof Mergeable)) {
+					servletRequest.setAttribute(name, value);
+
+					if (_log.isInfoEnabled()) {
+						_log.info("Set shared attribute " + name);
+					}
+				}
+				else {
+					Mergeable<Object> masterMergeable =
+						(Mergeable<Object>)value;
+					Mergeable<Object> slaveMergeable = (Mergeable<Object>)value;
+
+					masterMergeable.merge(slaveMergeable);
+
+					if (_log.isInfoEnabled()) {
+						_log.info("Merge shared attribute " + name);
+					}
+				}
+			}
+		}
+		else {
+			if ((value != _nullValue) && _log.isDebugEnabled()) {
+				_log.debug("Ignore setting restricted attribute " + name);
+			}
+		}
+	}
+
+	private static final String LIFERAY_SHARED_PREFIX = "LIFERAY_SHARED_";
+
+	private static Log _log = LogFactoryUtil.getLog(
 		RestrictPortletServletRequest.class);
 
 	private static Object _nullValue = new Object();

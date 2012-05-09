@@ -32,13 +32,13 @@ import java.util.concurrent.ConcurrentMap;
 public class ScriptData implements Mergeable<ScriptData> {
 
 	public void append(String portletId, String content, String use) {
-		PortletData portletData = getPortletData(portletId);
+		PortletData portletData = _getPortletData(portletId);
 
 		portletData.append(content, use);
 	}
 
 	public void append(String portletId, StringBundler contentSB, String use) {
-		PortletData portletData = getPortletData(portletId);
+		PortletData portletData = _getPortletData(portletId);
 
 		portletData.append(contentSB, use);
 	}
@@ -73,15 +73,15 @@ public class ScriptData implements Mergeable<ScriptData> {
 		return useSet;
 	}
 
-	public ScriptData merge(ScriptData slaveScriptData) {
-		if ((slaveScriptData != null) && (slaveScriptData != this)) {
-			_portletDataMap.putAll(slaveScriptData._portletDataMap);
+	public ScriptData merge(ScriptData scriptData) {
+		if ((scriptData != null) && (scriptData != this)) {
+			_portletDataMap.putAll(scriptData._portletDataMap);
 		}
 
 		return this;
 	}
 
-	private PortletData getPortletData(String portletId) {
+	private PortletData _getPortletData(String portletId) {
 		if (Validator.isNull(portletId)) {
 			portletId = StringPool.BLANK;
 		}
@@ -89,7 +89,6 @@ public class ScriptData implements Mergeable<ScriptData> {
 		PortletData portletData = _portletDataMap.get(portletId);
 
 		if (portletData == null) {
-
 			portletData = new PortletData();
 
 			PortletData oldPortletData = _portletDataMap.putIfAbsent(

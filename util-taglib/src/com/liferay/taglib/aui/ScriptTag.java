@@ -117,11 +117,11 @@ public class ScriptTag extends BaseScriptTag {
 		boolean positionInline = isPositionInLine();
 
 		try {
+			String portletId = (String)request.getAttribute(WebKeys.PORTLET_ID);
+
 			StringBundler bodyContentSB = getBodyContentAsStringBundler();
 
 			String use = getUse();
-
-			String portletId = (String)request.getAttribute(WebKeys.PORTLET_ID);
 
 			if (positionInline) {
 				ScriptData scriptData = new ScriptData();
