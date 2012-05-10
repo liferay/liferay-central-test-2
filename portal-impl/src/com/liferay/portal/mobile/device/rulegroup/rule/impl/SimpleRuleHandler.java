@@ -53,7 +53,7 @@ public class SimpleRuleHandler implements RuleHandler {
 
 		if (Validator.isNotNull(os)) {
 			String[] operatingSystems = StringUtil.split(os);
-			
+
 			if (ArrayUtil.contains(operatingSystems, device.getOS())) {
 				result = true;
 			}
