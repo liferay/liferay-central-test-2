@@ -1417,9 +1417,9 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 			int endPos3 = content.indexOf(CharPool.CLOSE_CURLY_BRACE, beginPos);
 			int endPos4 = content.indexOf(CharPool.CLOSE_PARENTHESIS, beginPos);
 			int endPos5 = content.indexOf(CharPool.LESS_THAN, beginPos);
-			int endPos6 = content.indexOf(CharPool.QUOTE, beginPos);
-			int endPos7 = content.indexOf(CharPool.SPACE, beginPos);
-			int endPos8 = content.indexOf(CharPool.QUESTION, beginPos);
+			int endPos6 = content.indexOf(CharPool.QUESTION, beginPos);
+			int endPos7 = content.indexOf(CharPool.QUOTE, beginPos);
+			int endPos8 = content.indexOf(CharPool.SPACE, beginPos);
 
 			int endPos = endPos1;
 
@@ -1709,12 +1709,16 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 			int endPos2 = content.indexOf(
 				CharPool.CLOSE_BRACKET, beginPos + hrefLength);
 			int endPos3 = content.indexOf(
-				CharPool.CLOSE_PARENTHESIS, beginPos + hrefLength);
+				CharPool.CLOSE_CURLY_BRACE, beginPos + hrefLength);
 			int endPos4 = content.indexOf(
-				CharPool.LESS_THAN, beginPos + hrefLength);
+				CharPool.CLOSE_PARENTHESIS, beginPos + hrefLength);
 			int endPos5 = content.indexOf(
-				CharPool.QUOTE, beginPos + hrefLength);
+				CharPool.LESS_THAN, beginPos + hrefLength);
 			int endPos6 = content.indexOf(
+				CharPool.QUESTION, beginPos + hrefLength);
+			int endPos7 = content.indexOf(
+				CharPool.QUOTE, beginPos + hrefLength);
+			int endPos8 = content.indexOf(
 				CharPool.SPACE, beginPos + hrefLength);
 
 			int endPos = endPos1;
@@ -1737,6 +1741,14 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 			if ((endPos == -1) || ((endPos6 != -1) && (endPos6 < endPos))) {
 				endPos = endPos6;
+			}
+
+			if ((endPos == -1) || ((endPos7 != -1) && (endPos7 < endPos))) {
+				endPos = endPos7;
+			}
+
+			if ((endPos == -1) || ((endPos8 != -1) && (endPos8 < endPos))) {
+				endPos = endPos8;
 			}
 
 			if (endPos == -1) {
