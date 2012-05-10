@@ -49,7 +49,11 @@ public class StripFilterTest extends PowerMockito {
 	public void setUp() {
 		mockStatic(PropsUtil.class);
 
-		when(PropsUtil.get(PropsKeys.TCK_URL)).thenReturn("tck.url");
+		when(
+			PropsUtil.get(PropsKeys.TCK_URL)
+		).thenReturn(
+			PropsKeys.TCK_URL
+		);
 	}
 
 	@Test
