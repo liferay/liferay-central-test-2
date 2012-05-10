@@ -38,6 +38,9 @@ public class PortletContextLoader extends ContextLoader {
 			PORTAL_CONFIG_LOCATION_PARAM);
 
 		configurableWebApplicationContext.setConfigLocation(configLocation);
+
+		configurableWebApplicationContext.addBeanFactoryPostProcessor(
+			new PortletBeanFactoryPostProcessor());
 	}
 
 	@Override
