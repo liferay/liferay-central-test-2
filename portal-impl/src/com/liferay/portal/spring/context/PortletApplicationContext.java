@@ -22,11 +22,21 @@ import com.liferay.portal.kernel.portlet.PortletClassLoaderUtil;
 import com.liferay.portal.kernel.util.AggregateClassLoader;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
+import com.liferay.portal.kernel.util.PreloadClassLoader;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.spring.util.FilterClassLoader;
 
 import java.io.FileNotFoundException;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import org.aopalliance.aop.Advice;
+
+import org.springframework.aop.Advisor;
+import org.springframework.aop.SpringProxy;
+import org.springframework.aop.TargetSource;
+import org.springframework.aop.framework.Advised;
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 import org.springframework.web.context.support.XmlWebApplicationContext;
 
@@ -43,6 +53,22 @@ import org.springframework.web.context.support.XmlWebApplicationContext;
  * @see    PortletContextLoaderListener
  */
 public class PortletApplicationContext extends XmlWebApplicationContext {
+
+	public static ClassLoader getBeanClassLoader() {
+		if (_isUseRestrictedClassLoader()) {
+			return new PreloadClassLoader(
+				PortletClassLoaderUtil.getClassLoader(), _classes);
+		}
+
+		ClassLoader beanClassLoader =
+			AggregateClassLoader.getAggregateClassLoader(
+				new ClassLoader[] {
+					PortletClassLoaderUtil.getClassLoader(),
+					PortalClassLoaderUtil.getClassLoader()
+				});
+
+		return new FilterClassLoader(beanClassLoader);
+	}
 
 	@Override
 	protected String[] getDefaultConfigLocations() {
@@ -79,16 +105,7 @@ public class PortletApplicationContext extends XmlWebApplicationContext {
 	protected void initBeanDefinitionReader(
 		XmlBeanDefinitionReader xmlBeanDefinitionReader) {
 
-		ClassLoader beanClassLoader =
-			AggregateClassLoader.getAggregateClassLoader(
-				new ClassLoader[] {
-					PortletClassLoaderUtil.getClassLoader(),
-					PortalClassLoaderUtil.getClassLoader()
-				});
-
-		beanClassLoader = new FilterClassLoader(beanClassLoader);
-
-		xmlBeanDefinitionReader.setBeanClassLoader(beanClassLoader);
+		xmlBeanDefinitionReader.setBeanClassLoader(getBeanClassLoader());
 	}
 
 	@Override
@@ -120,7 +137,25 @@ public class PortletApplicationContext extends XmlWebApplicationContext {
 		}
 	}
 
+	private static boolean _isUseRestrictedClassLoader() {
+
+		// TODO
+
+		return false;
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(
 		PortletApplicationContext.class);
+
+	private static Map<String, Class<?>> _classes =
+		new HashMap<String, Class<?>>();
+
+	static {
+		_classes.put(Advice.class.getName(), Advice.class);
+		_classes.put(Advised.class.getName(), Advised.class);
+		_classes.put(Advisor.class.getName(), Advisor.class);
+		_classes.put(SpringProxy.class.getName(), SpringProxy.class);
+		_classes.put(TargetSource.class.getName(), TargetSource.class);
+	}
 
 }

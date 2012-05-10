@@ -12,33 +12,35 @@
  * details.
  */
 
-package com.liferay.portal.spring.util;
+package com.liferay.portal.kernel.util;
 
-import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
- * @author Brian Wing Shun Chan
+ * @author Shuyang Zhou
  */
-public class FilterClassLoader extends ClassLoader {
+public class PreloadClassLoader extends ClassLoader {
 
-	public FilterClassLoader(ClassLoader classLoader) {
+	public PreloadClassLoader(
+		ClassLoader classLoader, Map<String, Class<?>> classes) {
+
 		super(classLoader);
+
+		_classes.putAll(classes);
 	}
 
 	@Override
 	public Class<?> loadClass(String name) throws ClassNotFoundException {
-		if (name.startsWith("net.sf.ehcache.") ||
-			name.startsWith("org.aopalliance.") ||
-			name.startsWith("org.hibernate.") ||
-			name.startsWith("org.springframework.")) {
+		Class<?> clazz = _classes.get(name);
 
-			ClassLoader portalClassLoader =
-				PortalClassLoaderUtil.getClassLoader();
-
-			return portalClassLoader.loadClass(name);
+		if (clazz != null) {
+			return clazz;
 		}
 
 		return super.loadClass(name);
 	}
+
+	private Map<String, Class<?>> _classes = new HashMap<String, Class<?>>();
 
 }

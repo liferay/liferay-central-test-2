@@ -12,33 +12,36 @@
  * details.
  */
 
-package com.liferay.portal.spring.util;
+package com.liferay.portal.kernel.spring.util;
 
-import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
+import java.util.Map;
 
 /**
  * @author Brian Wing Shun Chan
  */
-public class FilterClassLoader extends ClassLoader {
+public class SpringFactoryUtil {
 
-	public FilterClassLoader(ClassLoader classLoader) {
-		super(classLoader);
+	public static SpringFactory getSpringFactory() {
+		return _springFactory;
 	}
 
-	@Override
-	public Class<?> loadClass(String name) throws ClassNotFoundException {
-		if (name.startsWith("net.sf.ehcache.") ||
-			name.startsWith("org.aopalliance.") ||
-			name.startsWith("org.hibernate.") ||
-			name.startsWith("org.springframework.")) {
+	public static Object newBean(String className)
+		throws SpringFactoryException {
 
-			ClassLoader portalClassLoader =
-				PortalClassLoaderUtil.getClassLoader();
-
-			return portalClassLoader.loadClass(name);
-		}
-
-		return super.loadClass(name);
+		return getSpringFactory().newBean(className);
 	}
+
+	public static Object newBean(
+			String className, Map<String, Object> properties)
+		throws SpringFactoryException {
+
+		return getSpringFactory().newBean(className, properties);
+	}
+
+	public void setSpringFactory(SpringFactory springFactory) {
+		_springFactory = springFactory;
+	}
+
+	private static SpringFactory _springFactory;
 
 }
