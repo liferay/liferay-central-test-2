@@ -2281,6 +2281,25 @@
 		</exec>
 	</target>
 
+	<target name="merge-test-results">
+		<mkdir dir="test-results" />
+
+		<junitreport todir="test-results">
+			<fileset dir="portal-impl/test-results">
+				<include name="**/TEST-*.xml" />
+			</fileset>
+			<fileset dir="portal-service/test-results">
+				<include name="**/TEST-*.xml" />
+			</fileset>
+			<fileset dir="util-java/test-results">
+				<include name="**/TEST-*.xml" />
+			</fileset>
+			<report format="frames" todir="test-results/html" />
+		</junitreport>
+
+		<echo message="A report with all the test results can be found at test-results/html/index.html." />
+	</target>
+
 	<target name="prepare-common">
 		<antcall target="prepare-portal-properties" inheritAll="false" />
 
@@ -3817,24 +3836,6 @@ file.
 		<ant dir="portal-service" target="test-integration" inheritAll="false" />
 		<ant dir="portal-impl" target="test-integration" inheritAll="false" />
 		<ant dir="util-java" target="test-integration" inheritAll="false" />
-	</target>
-
-	<target name="test-report">
-		<junitreport todir="test-results">
-			<fileset dir="portal-impl/test-results">
-				<include name="**/TEST-*.xml"/>
-			</fileset>
-			<fileset dir="portal-service/test-results">
-				<include name="**/TEST-*.xml"/>
-			</fileset>
-			<fileset dir="util-java/test-results">
-				<include name="**/TEST-*.xml"/>
-			</fileset>
-
-			<report format="frames" todir="test-results/html"/>
-		</junitreport>
-
-		<echo message="A report with all the test results can be found at [test-results/html/index.html]" />
 	</target>
 
 	<target name="test-unit">
