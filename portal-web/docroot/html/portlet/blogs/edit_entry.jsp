@@ -344,9 +344,7 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 								}
 							},
 							start: function() {
-								if (publishButton) {
-									publishButton.attr('disabled', true);
-								}
+								Liferay.Util.toggleDisabled(publishButton, true);
 
 								if (saveStatus) {
 									saveStatus.set('className', 'save-status portlet-msg-info pending');
@@ -390,9 +388,7 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 									saveStatus.hide();
 								}
 
-								if (publishButton) {
-									publishButton.attr('disabled', false);
-								}
+								Liferay.Util.toggleDisabled(publishButton, false);
 							}
 						}
 					}
