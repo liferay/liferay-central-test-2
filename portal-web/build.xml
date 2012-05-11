@@ -121,9 +121,9 @@
 						/>
 					</path>
 					<sequential>
-						<basename property="dir.name" file="@{dir}"/>
+						<basename property="dir.name" file="@{dir}" />
 						<if>
-							<available file="docroot/html/js/aui/${dir.name}/assets/skins/sam/${dir.name}.css"/>
+							<available file="docroot/html/js/aui/${dir.name}/assets/skins/sam/${dir.name}.css" />
 							<then>
 								<concat append="true" destfile="docroot/html/ALLOY_ZIP/build/aui-skins/tmp/alloy.css">
 									<filelist
@@ -134,7 +134,7 @@
 							</then>
 						</if>
 						<if>
-							<available file="docroot/html/js/aui/${dir.name}/assets/skins/sam/"/>
+							<available file="docroot/html/js/aui/${dir.name}/assets/skins/sam/" />
 							<then>
 								<copy todir="docroot/html/themes/_unstyled/images/aui/">
 									<fileset dir="docroot/html/js/aui/${dir.name}/assets/skins/sam/" includes="**/*.png,**/*.jpg,**/*.gif" />
@@ -622,7 +622,7 @@ var defaultTypes = []]>
 				</replace>
 
 				<replace dir="docroot/html/js/editor/fckeditor/editor/filemanager/browser/liferay">
-					<include name="**/*.html"/>
+					<include name="**/*.html" />
 					<replacetoken><![CDATA[<html>]]></replacetoken>
 					<replacevalue><![CDATA[<html xmlns="http://www.w3.org/1999/xhtml">]]></replacevalue>
 				</replace>
