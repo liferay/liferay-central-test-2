@@ -180,7 +180,7 @@ public class ChannelImpl extends BaseChannelImpl {
 
 			for (String notificationEventUuid : notificationEventUuids) {
 				Map<String, NotificationEvent> unconfirmedNotificationEvents =
-						_getUnconfirmedNotificationEvents();
+					_getUnconfirmedNotificationEvents();
 
 				unconfirmedNotificationEvents.remove(notificationEventUuid);
 			}
