@@ -93,11 +93,11 @@
 	</antelope:stringutil>
 
 	<condition property="file.suffix.bat" value=".bat" else=".sh">
-		<contains string="${os.name}" substring="Windows" casesensitive="false"/>
+		<contains string="${os.name}" substring="Windows" casesensitive="false" />
 	</condition>
 
 	<condition property="file.suffix.exe" value=".exe" else="">
-		<contains string="${os.name}" substring="Windows" casesensitive="false"/>
+		<contains string="${os.name}" substring="Windows" casesensitive="false" />
 	</condition>
 
 	<property name="definitions.dir" value="${project.dir}/definitions" />

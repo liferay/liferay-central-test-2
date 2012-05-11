@@ -893,12 +893,12 @@ public class Creole10Parser]]></replacevalue>
 		</replace>
 
 		<replace file="${tstamp.value}/yuicompressor-2.4.2/build.xml">
-			<replacetoken><![CDATA[<unjar src="${lib.dir}/jargs-1.0.jar" dest="${build.dir}/jar"/>]]></replacetoken>
+			<replacetoken><![CDATA[<unjar src="${lib.dir}/jargs-1.0.jar" dest="${build.dir}/jar" />]]></replacetoken>
 			<replacevalue></replacevalue>
 		</replace>
 
 		<replace file="${tstamp.value}/yuicompressor-2.4.2/build.xml">
-			<replacetoken><![CDATA[<unjar src="${lib.dir}/rhino-1.6R7.jar" dest="${build.dir}/jar"/>]]></replacetoken>
+			<replacetoken><![CDATA[<unjar src="${lib.dir}/rhino-1.6R7.jar" dest="${build.dir}/jar" />]]></replacetoken>
 			<replacevalue></replacevalue>
 		</replace>
 

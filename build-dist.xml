@@ -824,7 +824,7 @@ release was successful.</echo>
 
 		<chmod perm="a+x">
 			<fileset dir="${app.server.geronimo.bin.dir}">
-				<include name="*.sh"/>
+				<include name="*.sh" />
 			</fileset>
 		</chmod>
 	</target>
@@ -863,7 +863,7 @@ release was successful.</echo>
 
 		<chmod perm="a+x">
 			<fileset dir="${app.server.glassfish.bin.dir}">
-				<exclude name="*.bat"/>
+				<exclude name="*.bat" />
 			</fileset>
 		</chmod>
 	</target>
@@ -899,7 +899,7 @@ release was successful.</echo>
 
 		<chmod perm="a+x">
 			<fileset dir="${app.server.jboss.bin.dir}">
-				<include name="*.sh"/>
+				<include name="*.sh" />
 			</fileset>
 		</chmod>
 
@@ -918,7 +918,7 @@ release was successful.</echo>
 			<replacevalue><![CDATA[<security-domains>
 				<security-domain name="PortalRealm">
 					<authentication>
-						<login-module code="com.liferay.portal.security.jaas.PortalLoginModule" flag="required"/>
+						<login-module code="com.liferay.portal.security.jaas.PortalLoginModule" flag="required" />
 					</authentication>
 				</security-domain>]]>
 			</replacevalue>
@@ -997,7 +997,7 @@ release was successful.</echo>
 
 		<chmod perm="a+x">
 			<fileset dir="${app.server.jonas.bin.dir}">
-				<exclude name="*.bat"/>
+				<exclude name="*.bat" />
 			</fileset>
 		</chmod>
 
@@ -1115,7 +1115,7 @@ release was successful.</echo>
 
 		<chmod perm="a+x">
 			<fileset dir="${app.server.tomcat.bin.dir}">
-				<include name="*.sh"/>
+				<include name="*.sh" />
 			</fileset>
 		</chmod>
 
