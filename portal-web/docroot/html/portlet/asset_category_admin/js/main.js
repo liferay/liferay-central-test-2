@@ -2121,7 +2121,7 @@ AUI.add(
 
 						var categoryPanelAdd = instance._categoryPanelAdd;
 
-						var categoryURL = instance._createURL(CATEGORY, action, LIFECYCLE_RENDER).toString();
+						var categoryURL = instance._createURL(CATEGORY, action, LIFECYCLE_RENDER);
 
 						if (!categoryPanelAdd) {
 							categoryPanelAdd = instance._createCategoryPanelAdd();
@@ -2130,14 +2130,14 @@ AUI.add(
 								A.Plugin.IO,
 								{
 									autoLoad: false,
-									uri: categoryURL
+									uri: categoryURL.toString()
 								}
 							);
 						}
 						else if (instance._currentCategoryPanelAddIOHandle) {
 							instance._currentCategoryPanelAddIOHandle.detach();
 
-							categoryPanelAdd.io.set(STR_URI, categoryURL);
+							categoryPanelAdd.io.set(STR_URI, categoryURL.toString());
 						}
 
 						categoryPanelAdd.show();
