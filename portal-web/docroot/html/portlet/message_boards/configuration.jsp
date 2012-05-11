@@ -304,7 +304,7 @@ else if (tabs2.equals("message-updated-email")) {
 						<liferay-ui:message key="the-site-name-associated-with-the-message-board" />
 					</dd>
 
-					<c:if test="<%= !PropsValues.MESSAGE_BOARDS_EMAIL_SEND_BULK %>">
+					<c:if test="<%= !PropsValues.MESSAGE_BOARDS_EMAIL_BULK %>">
 						<dt>
 							[$TO_ADDRESS$]
 						</dt>
@@ -318,7 +318,6 @@ else if (tabs2.equals("message-updated-email")) {
 							<liferay-ui:message key="the-name-of-the-email-recipient" />
 						</dd>
 					</c:if>
-
 				</dl>
 			</div>
 		</c:when>
