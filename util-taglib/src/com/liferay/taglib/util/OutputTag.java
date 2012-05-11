@@ -80,11 +80,10 @@ public class OutputTag extends PositionTagSupport {
 
 			return EVAL_BODY_INCLUDE;
 		}
-		else {
-			_output = true;
 
-			return EVAL_BODY_BUFFERED;
-		}
+		_output = true;
+
+		return EVAL_BODY_BUFFERED;
 	}
 
 	public void setOutputKey(String outputKey) {
