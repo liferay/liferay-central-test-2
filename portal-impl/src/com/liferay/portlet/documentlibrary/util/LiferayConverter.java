@@ -422,7 +422,9 @@ public abstract class LiferayConverter {
 			originalBitRate = AUDIO_BIT_RATE_DEFAULT;
 		}
 
-		if (outputICodec.getID().equals(ICodec.ID.CODEC_ID_VORBIS)) {
+		ICodec.ID iCodecID = outputICodec.getID();
+
+		if (iCodecID.equals(ICodec.ID.CODEC_ID_VORBIS)) {
 			if (originalBitRate < 64000) {
 				originalBitRate = 64000;
 			}
@@ -464,12 +466,12 @@ public abstract class LiferayConverter {
 	}
 
 	protected Format getAudioSampleFormat(
-		ICodec outputCodec, Format originalSampleFormat) {
+		ICodec outputICodec, Format originalSampleFormat) {
 
 		Format sampleFormat = null;
 
 		List<Format> supportedSampleFormats =
-			outputCodec.getSupportedAudioSampleFormats();
+			outputICodec.getSupportedAudioSampleFormats();
 
 		for (Format supportedSampleFormat : supportedSampleFormats) {
 			sampleFormat = supportedSampleFormat;
@@ -638,14 +640,12 @@ public abstract class LiferayConverter {
 		if ((iStreamCoder != null) &&
 			(iStreamCoder.getCodecType() != ICodec.Type.CODEC_TYPE_UNKNOWN)) {
 
-			// Some codecs require experimental mode
-
 			int result = iStreamCoder.setStandardsCompliance(
 				IStreamCoder.CodecStandardsCompliance.COMPLIANCE_EXPERIMENTAL);
 
 			if (result < 0) {
 				throw new RuntimeException(
-					"Could not set compliance mode to experimental");
+					"Unable to set compliance mode to experimental");
 			}
 
 			if (iStreamCoder.open(null, null) < 0) {
@@ -684,22 +684,6 @@ public abstract class LiferayConverter {
 
 		outputIStreamCoders[index] = outputIStreamCoder;
 
-		Format sampleFormat = inputIStreamCoder.getSampleFormat();
-
-		if (_log.isInfoEnabled()) {
-			_log.info(
-				"Original audio sample format " + sampleFormat.toString());
-		}
-
-		sampleFormat = getAudioSampleFormat(iCodec, sampleFormat);
-
-		if (_log.isInfoEnabled()) {
-			_log.info(
-				"Modified audio sample format " + sampleFormat.toString());
-		}
-
-		outputIStreamCoder.setSampleFormat(sampleFormat);
-
 		int bitRate = inputIStreamCoder.getBitRate();
 
 		if (_log.isInfoEnabled()) {
@@ -720,6 +704,23 @@ public abstract class LiferayConverter {
 		outputIStreamCoder.setChannels(channels);
 
 		outputIStreamCoder.setGlobalQuality(0);
+
+		Format sampleFormat = inputIStreamCoder.getSampleFormat();
+
+		if (_log.isInfoEnabled()) {
+			_log.info(
+				"Original audio sample format " + sampleFormat.toString());
+		}
+
+		sampleFormat = getAudioSampleFormat(iCodec, sampleFormat);
+
+		if (_log.isInfoEnabled()) {
+			_log.info(
+				"Modified audio sample format " + sampleFormat.toString());
+		}
+
+		outputIStreamCoder.setSampleFormat(sampleFormat);
+
 		outputIStreamCoder.setSampleRate(getAudioSampleRate());
 
 		iAudioResamplers[index] = createIAudioResampler(

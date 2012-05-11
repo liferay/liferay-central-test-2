@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.poller.BasePollerProcessor;
 import com.liferay.portal.kernel.poller.PollerRequest;
 import com.liferay.portal.kernel.poller.PollerResponse;
 import com.liferay.portal.kernel.xuggler.XugglerInstallStatus;
+import com.liferay.portal.util.WebKeys;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -34,7 +35,32 @@ public class AdminPollerProcessor extends BasePollerProcessor {
 		PollerRequest pollerRequest, PollerResponse pollerResponse)
 		throws Exception {
 
-		getStatus(pollerRequest, pollerResponse);
+		pollerResponse.setParameter(
+			PollerResponse.POLLER_HINT_HIGH_CONNECTIVITY,
+			Boolean.TRUE.toString());
+
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
+
+		String statusLabel = "unknown";
+
+		XugglerInstallStatus xugglerInstallStatus = getXugglerInstallStatus(
+			pollerRequest);
+
+		if (xugglerInstallStatus != null) {
+			statusLabel = xugglerInstallStatus.getStatusLabel();
+		}
+
+		jsonObject.put("status", statusLabel);
+
+		boolean success = false;
+
+		if (!statusLabel.equals("unknown")) {
+			success = true;
+		}
+
+		jsonObject.put("success", success);
+
+		pollerResponse.setParameter("status", jsonObject);
 	}
 
 	@Override
@@ -42,38 +68,15 @@ public class AdminPollerProcessor extends BasePollerProcessor {
 		return;
 	}
 
-	protected void getStatus(
-			PollerRequest pollerRequest, PollerResponse pollerResponse)
-		throws Exception {
+	protected XugglerInstallStatus getXugglerInstallStatus(
+		PollerRequest pollerRequest) {
 
-		HttpServletRequest originalRequest = pollerRequest.getOriginalRequest();
-		HttpSession session = originalRequest.getSession();
+		HttpServletRequest request = pollerRequest.getRequest();
 
-		XugglerInstallStatus xugglerInstallStatus =
-			(XugglerInstallStatus)session.getAttribute("xugglerInstallStatus");
+		HttpSession session = request.getSession();
 
-		String status = "unknown";
-
-		if (xugglerInstallStatus != null) {
-			status = xugglerInstallStatus.getCurrentStatus();
-		}
-
-		boolean success = false;
-
-		if (!status.equals("unknown")) {
-			success = true;
-		}
-
-		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
-
-		jsonObject.put("success", success);
-		jsonObject.put("status", status);
-
-		pollerResponse.setParameter("status", jsonObject);
-
-		pollerResponse.setParameter(
-			PollerResponse.POLLER_HINT_HIGH_CONNECTIVITY,
-			Boolean.TRUE.toString());
+		return (XugglerInstallStatus)session.getAttribute(
+			WebKeys.XUGGLER_INSTALL_STATUS);
 	}
 
 }

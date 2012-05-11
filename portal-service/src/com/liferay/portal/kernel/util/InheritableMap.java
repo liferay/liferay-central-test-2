@@ -96,23 +96,23 @@ public class InheritableMap<K, V> extends HashMap<K, V> {
 	}
 
 	public String toString() {
-		String mapString = super.toString();
+		String string = super.toString();
 
-		String parentMapString = "{}";
+		String parentString = "{}";
 
 		if (_parentMap != null) {
-			parentMapString = _parentMap.toString();
+			parentString = _parentMap.toString();
 		}
 
-		if (mapString.length() <= 2) {
-			return parentMapString;
+		if (string.length() <= 2) {
+			return parentString;
 		}
 
 		StringBundler sb = new StringBundler(3);
 
-		sb.append(mapString.substring(0, mapString.length() - 1));
+		sb.append(string.substring(0, string.length() - 1));
 		sb.append(StringPool.COMMA_AND_SPACE);
-		sb.append(parentMapString.substring(1));
+		sb.append(parentString.substring(1));
 
 		return sb.toString();
 	}

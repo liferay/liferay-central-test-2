@@ -582,7 +582,7 @@ serverURL.setParameter("tabs2", tabs2);
 
 									String bitmode = OSDetector.getBitmode();
 
-									String guess = "";
+									String guess = StringPool.BLANK;
 
 									if (Validator.isNotNull(bitmode) && (bitmode.equals("32") || bitmode.equals("64"))) {
 										if (OSDetector.isApple()) {
@@ -607,7 +607,7 @@ serverURL.setParameter("tabs2", tabs2);
 											}
 
 											if (!found) {
-												guess = "";
+												guess = StringPool.BLANK;
 											}
 										}
 									}

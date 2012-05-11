@@ -44,7 +44,7 @@ public class XugglerImpl implements Xuggler {
 				false, url, name, xugglerInstallStatus);
 		}
 		catch (Exception e) {
-			_log.error("Installation of jar " + name + " failed", e);
+			_log.error("Unable to install jar " + name, e);
 
 			throw e;
 		}
@@ -62,7 +62,9 @@ public class XugglerImpl implements Xuggler {
 				PropsKeys.XUGGLER_ENABLED, PropsValues.XUGGLER_ENABLED);
 		}
 		catch (Exception e) {
-			_log.warn(e, e);
+			if (_log.isWarnEnabled()) {
+				_log.warn(e, e);
+			}
 		}
 
 		if (!checkNativeLibraries) {
@@ -72,9 +74,8 @@ public class XugglerImpl implements Xuggler {
 		if (enabled) {
 			return isNativeLibraryInstalled();
 		}
-		else {
-			return false;
-		}
+
+		return false;
 	}
 
 	public boolean isNativeLibraryInstalled() {
@@ -108,25 +109,26 @@ public class XugglerImpl implements Xuggler {
 	}
 
 	protected void informAdministrator() {
-		if (!_informed) {
-			StringBundler sb = new StringBundler(5);
-
-			sb.append("Liferay does not have the Xuggler native libraries ");
-			sb.append("installed. In order to generate video and audio ");
-			sb.append("previews, please follow the instructions for Xuggler ");
-			sb.append("at: http://<server>/group/control_panel/manage/");
-			sb.append("-/server/external-services");
-
-			_log.error(sb.toString());
-
-			_informed = true;
+		if (!_informAdministrator) {
+			return;
 		}
+
+		_informAdministrator = false;
+
+		StringBundler sb = new StringBundler(5);
+
+		sb.append("Liferay does not have the Xuggler native libraries ");
+		sb.append("installed. In order to generate video and audio previews, ");
+		sb.append("please follow the instructions for Xuggler at: ");
+		sb.append("http://<server>/group/control_panel/manage/-/server/");
+		sb.append("external-services");
+
+		_log.error(sb.toString());
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(XugglerImpl.class);
 
-	private static boolean _informed;
-
+	private static boolean _informAdministrator = true;
 	private static boolean _nativeLibraryInstalled;
 
 }
