@@ -30,7 +30,9 @@ public class OSDetector {
 			}
 
 			if (Validator.isNull(_bitMode)) {
-				String arch = System.getProperty("os.arch").toLowerCase();
+				String arch = System.getProperty("os.arch");
+
+				arch = arch.toLowerCase();
 
 				if (arch.equals("amd64") || arch.equals("x86_64")) {
 					_bitMode = "64";
@@ -51,7 +53,9 @@ public class OSDetector {
 			return _aix.booleanValue();
 		}
 
-		String osName = System.getProperty("os.name").toLowerCase();
+		String osName = System.getProperty("os.name");
+
+		osName = osName.toLowerCase();
 
 		if (osName.equals("aix")) {
 			_aix = Boolean.TRUE;
@@ -68,9 +72,11 @@ public class OSDetector {
 			return _apple.booleanValue();
 		}
 
-		String osName = System.getProperty("os.name").toLowerCase();
+		String osName = System.getProperty("os.name");
 
-		if (osName.contains("mac") || osName.contains("darwin")) {
+		osName = osName.toLowerCase();
+
+		if (osName.contains("darwin") || osName.contains("mac")) {
 			_apple = Boolean.TRUE;
 		}
 		else {
@@ -85,7 +91,9 @@ public class OSDetector {
 			return _linux.booleanValue();
 		}
 
-		String osName = System.getProperty("os.name").toLowerCase();
+		String osName = System.getProperty("os.name");
+
+		osName = osName.toLowerCase();
 
 		if (osName.contains("linux")) {
 			_linux = Boolean.TRUE;

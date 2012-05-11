@@ -51,57 +51,6 @@ public class XugglerRawMetadataProcessor extends BaseRawMetadataProcessor {
 		return;
 	}
 
-	@Override
-	public Metadata extractMetadata(
-			String extension, String mimeType, File file)
-		throws SystemException {
-
-		Metadata metadata = null;
-
-		if (!isSupported(mimeType)) {
-			return metadata;
-		}
-
-		try {
-			metadata = extractMetadata(file);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
-
-		return metadata;
-	}
-
-	@Override
-	public Metadata extractMetadata(
-			String extension, String mimeType, InputStream inputStream)
-		throws SystemException {
-
-		Metadata metadata = null;
-
-		File file = null;
-
-		if (!isSupported(mimeType)) {
-			return metadata;
-		}
-
-		try {
-			file = FileUtil.createTempFile(extension);
-
-			FileUtil.write(file, inputStream);
-
-			metadata = extractMetadata(file);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
-		finally {
-			FileUtil.delete(file);
-		}
-
-		return metadata;
-	}
-
 	public void importGeneratedFiles(
 			PortletDataContext portletDataContext, FileEntry fileEntry,
 			FileEntry importedFileEntry, Element fileEntryElement)
@@ -158,7 +107,60 @@ public class XugglerRawMetadataProcessor extends BaseRawMetadataProcessor {
 		}
 	}
 
-	protected boolean isSupported(String mimeType) throws SystemException {
+	@Override
+	@SuppressWarnings("unused")
+	protected Metadata extractMetadata(
+			String extension, String mimeType, File file)
+		throws SystemException {
+
+		Metadata metadata = null;
+
+		if (!isSupported(mimeType)) {
+			return metadata;
+		}
+
+		try {
+			metadata = extractMetadata(file);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+
+		return metadata;
+	}
+
+	@Override
+	@SuppressWarnings("unused")
+	protected Metadata extractMetadata(
+			String extension, String mimeType, InputStream inputStream)
+		throws SystemException {
+
+		Metadata metadata = null;
+
+		File file = null;
+
+		if (!isSupported(mimeType)) {
+			return metadata;
+		}
+
+		try {
+			file = FileUtil.createTempFile(extension);
+
+			FileUtil.write(file, inputStream);
+
+			metadata = extractMetadata(file);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+		finally {
+			FileUtil.delete(file);
+		}
+
+		return metadata;
+	}
+
+	protected boolean isSupported(String mimeType) {
 		if (XugglerUtil.isEnabled()) {
 			if (AudioProcessorUtil.isAudioSupported(mimeType)) {
 				return true;

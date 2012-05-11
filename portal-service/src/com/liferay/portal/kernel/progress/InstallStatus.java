@@ -21,7 +21,9 @@ public interface InstallStatus {
 
 	public static final int UNKNOWN = -1;
 
-	public String getCurrentStatus();
+	public int getStatus();
+
+	public String getStatusLabel();
 
 	public void setStatus(int status);
 

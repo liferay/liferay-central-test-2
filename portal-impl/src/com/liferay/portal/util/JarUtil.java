@@ -159,7 +159,7 @@ public class JarUtil {
 		addJarFileToClassLoader(file);
 	}
 
-	private static void setInstallStatus(
+	protected static void setInstallStatus(
 		InstallStatus installStatus, int status) {
 
 		if (installStatus == null) {

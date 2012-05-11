@@ -164,6 +164,10 @@ public class EditServerAction extends PortletAction {
 		}
 		else if (cmd.equals("installXuggler")) {
 			installXuggler(actionRequest, actionResponse);
+
+			setForward(actionRequest, ActionConstants.COMMON_NULL);
+
+			return;
 		}
 		else if (cmd.equals("reindex")) {
 			reindex(actionRequest);
@@ -196,12 +200,7 @@ public class EditServerAction extends PortletAction {
 			verifyPluginTables();
 		}
 
-		if (cmd.equals("installXuggler")) {
-			setForward(actionRequest, ActionConstants.COMMON_NULL);
-		}
-		else {
-			sendRedirect(actionRequest, actionResponse, redirect);
-		}
+		sendRedirect(actionRequest, actionResponse, redirect);
 	}
 
 	protected void addLogLevel(ActionRequest actionRequest) throws Exception {
@@ -301,11 +300,13 @@ public class EditServerAction extends PortletAction {
 
 		HttpServletRequest request = PortalUtil.getHttpServletRequest(
 			actionRequest);
+
 		HttpSession session = request.getSession();
 
 		XugglerInstallStatus xugglerInstallStatus = new XugglerInstallStatus();
 
-		session.setAttribute("xugglerInstallStatus", xugglerInstallStatus);
+		session.setAttribute(
+			WebKeys.XUGGLER_INSTALL_STATUS, xugglerInstallStatus);
 
 		String jarName = ParamUtil.getString(actionRequest, "jarName");
 
@@ -321,13 +322,13 @@ public class EditServerAction extends PortletAction {
 		catch (Exception e) {
 			JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-			jsonObject.put("success", Boolean.FALSE);
 			jsonObject.put("exception", e.getMessage());
+			jsonObject.put("success", Boolean.FALSE);
 
 			writeJSON(actionRequest, actionResponse, jsonObject);
 		}
 		finally {
-			session.removeAttribute("xugglerInstallStatus");
+			session.removeAttribute(WebKeys.XUGGLER_INSTALL_STATUS);
 		}
 	}
 

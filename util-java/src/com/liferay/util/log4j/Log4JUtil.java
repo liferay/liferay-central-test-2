@@ -120,21 +120,21 @@ public class Log4JUtil {
 	}
 
 	public static String getOriginalLevel(String className) {
-		Level originalLevel = Level.ALL;
+		Level level = Level.ALL;
 
 		Enumeration<Logger> enu = LogManager.getCurrentLoggers();
 
 		while (enu.hasMoreElements()) {
-			Logger logger = (Logger)enu.nextElement();
+			Logger logger = enu.nextElement();
 
-			if (logger.getName().equals(className)) {
-				originalLevel = logger.getLevel();
+			if (className.equals(logger.getName())) {
+				level = logger.getLevel();
 
 				break;
 			}
 		}
 
-		return originalLevel.toString();
+		return level.toString();
 	}
 
 	public static void initLog4J(

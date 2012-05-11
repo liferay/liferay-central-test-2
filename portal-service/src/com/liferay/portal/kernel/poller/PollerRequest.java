@@ -28,25 +28,16 @@ import javax.servlet.http.HttpServletRequest;
 public class PollerRequest {
 
 	public PollerRequest(
-		PollerHeader pollerHeader, String portletId,
+		HttpServletRequest request, PollerHeader pollerHeader, String portletId,
 		Map<String, String> parameterMap, String chunkId,
 		boolean receiveRequest) {
 
+		_request = request;
 		_pollerHeader = pollerHeader;
 		_portletId = portletId;
 		_parameterMap = parameterMap;
 		_chunkId = chunkId;
 		_receiveRequest = receiveRequest;
-	}
-
-	public PollerRequest(
-		PollerHeader pollerHeader, String portletId,
-		Map<String, String> parameterMap, String chunkId,
-		boolean receiveRequest, HttpServletRequest originalRequest) {
-
-		this(pollerHeader, portletId, parameterMap, chunkId, receiveRequest);
-
-		_originalRequest = originalRequest;
 	}
 
 	@Override
@@ -80,10 +71,6 @@ public class PollerRequest {
 		return _pollerHeader.getCompanyId();
 	}
 
-	public HttpServletRequest getOriginalRequest() {
-		return _originalRequest;
-	}
-
 	public Map<String, String> getParameterMap() {
 		return _parameterMap;
 	}
@@ -98,6 +85,10 @@ public class PollerRequest {
 
 	public String[] getPortletIds() {
 		return _pollerHeader.getPortletIds();
+	}
+
+	public HttpServletRequest getRequest() {
+		return _request;
 	}
 
 	public long getTimestamp() {
@@ -150,10 +141,10 @@ public class PollerRequest {
 	}
 
 	private String _chunkId;
-	private HttpServletRequest _originalRequest;
 	private Map<String, String> _parameterMap = Collections.emptyMap();
 	private PollerHeader _pollerHeader;
 	private String _portletId;
 	private boolean _receiveRequest;
+	private HttpServletRequest _request;
 
 }

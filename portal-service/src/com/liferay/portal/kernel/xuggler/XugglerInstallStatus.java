@@ -15,6 +15,10 @@
 package com.liferay.portal.kernel.xuggler;
 
 import com.liferay.portal.kernel.progress.InstallStatus;
+
+/**
+ * @author Alexander Chow
+ */
 public class XugglerInstallStatus implements InstallStatus {
 
 	public static final int COMPLETED = 2;
@@ -23,29 +27,28 @@ public class XugglerInstallStatus implements InstallStatus {
 
 	public static final int DOWNLOADING = 0;
 
-	public String getCurrentStatus() {
-		int currentStatus = getStatus();
+	public int getStatus() {
+		return _status;
+	}
 
-		if (currentStatus == 0) {
+	public String getStatusLabel() {
+		int status = getStatus();
+
+		if (status == 0) {
 			return "downloading-xuggler";
 		}
-		else if (currentStatus == 1) {
+		else if (status == 1) {
 			return "copying-xuggler";
 		}
-		else if (currentStatus == 2) {
+		else if (status == 2) {
 			return "completed";
 		}
-		else {
-			return "unknown";
-		}
+
+		return "unknown";
 	}
 
 	public void setStatus(int status) {
 		_status = status;
-	}
-
-	private int getStatus() {
-		return _status;
 	}
 
 	private int _status = UNKNOWN;
