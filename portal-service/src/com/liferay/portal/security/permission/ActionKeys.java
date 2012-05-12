@@ -193,11 +193,10 @@ public class ActionKeys {
 
 	public static final String MANAGE_STAGING = "MANAGE_STAGING";
 
+	public static final String MANAGE_SUBGROUPS = "MANAGE_SUBGROUPS";
+
 	public static final String MANAGE_SUBORGANIZATIONS =
 		"MANAGE_SUBORGANIZATIONS";
-
-	public static final String MANAGE_SUBGROUPS =
-		"MANAGE_SUBGROUPS";
 
 	public static final String MANAGE_TEAMS = "MANAGE_TEAMS";
 

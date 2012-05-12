@@ -89,7 +89,8 @@ public class LayoutSetPrototypeLocalServiceImpl
 			"/template-" + layoutSetPrototype.getLayoutSetPrototypeId();
 
 		Group group = groupLocalService.addGroup(
-			userId, GroupConstants.DEFAULT_PARENT_GROUP_ID, LayoutSetPrototype.class.getName(),
+			userId, GroupConstants.DEFAULT_PARENT_GROUP_ID,
+			LayoutSetPrototype.class.getName(),
 			layoutSetPrototype.getLayoutSetPrototypeId(),
 			layoutSetPrototype.getName(LocaleUtil.getDefault()), null, 0,
 			friendlyURL, false, true, serviceContext);

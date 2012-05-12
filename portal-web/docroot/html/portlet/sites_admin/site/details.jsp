@@ -65,25 +65,7 @@ if (showPrototypes && (group != null)) {
 	catch (Exception e) {
 	}
 }
-
-long parentGroupId = ParamUtil.getLong(request, "parentGroupSearchContainerPrimaryKeys", (group != null) ? group.getParentGroupId() : GroupConstants.DEFAULT_PARENT_GROUP_ID);
-
-if (parentGroupId <= 0) {
-	parentGroupId = GroupConstants.DEFAULT_PARENT_GROUP_ID;
-
-	if (group != null) {
-		parentGroupId = liveGroup.getParentGroupId();
-	}
-}
 %>
-
-<liferay-util:buffer var="removeGroupIcon">
-	<liferay-ui:icon
-		image="unlink"
-		label="<%= true %>"
-		message="remove"
-	/>
-</liferay-util:buffer>
 
 <liferay-ui:error-marker key="errorSection" value="details" />
 
@@ -336,6 +318,16 @@ boolean hasUnlinkLayoutSetPrototypePermission = PortalPermissionUtil.contains(pe
 </aui:fieldset>
 
 <%
+long parentGroupId = ParamUtil.getLong(request, "parentGroupSearchContainerPrimaryKeys", (group != null) ? group.getParentGroupId() : GroupConstants.DEFAULT_PARENT_GROUP_ID);
+
+if (parentGroupId <= 0) {
+	parentGroupId = GroupConstants.DEFAULT_PARENT_GROUP_ID;
+
+	if (group != null) {
+		parentGroupId = liveGroup.getParentGroupId();
+	}
+}
+
 Group parentGroup = null;
 
 if ((group == null) && (parentGroupId == GroupConstants.DEFAULT_PARENT_GROUP_ID) && !permissionChecker.isCompanyAdmin()) {
@@ -348,7 +340,9 @@ if ((group == null) && (parentGroupId == GroupConstants.DEFAULT_PARENT_GROUP_ID)
 	}
 
 	if (manageableGroups.size() == 1) {
-		parentGroupId = manageableGroups.get(0).getGroupId();
+		Group manageableGroup = manageableGroups.get(0);
+
+		parentGroupId = manageableGroup.getGroupId();
 	}
 }
 
@@ -366,6 +360,14 @@ if (parentGroup != null) {
 	parentGroups.add(parentGroup);
 }
 %>
+
+<liferay-util:buffer var="removeGroupIcon">
+	<liferay-ui:icon
+		image="unlink"
+		label="<%= true %>"
+		message="remove"
+	/>
+</liferay-util:buffer>
 
 <h3><liferay-ui:message key="parent-site" /></h3>
 
@@ -433,6 +435,10 @@ if (parentGroup != null) {
 		groupWindow.focus();
 	}
 
+	function <portlet:namespace />testVisibility(currentValue, value) {
+		return currentValue != '';
+	}
+
 	Liferay.provide(
 		window,
 		'<portlet:namespace />selectGroup',
@@ -446,7 +452,6 @@ if (parentGroup != null) {
 			var href = "<portlet:renderURL><portlet:param name="struts_action" value="/sites_admin/edit_group" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>&<portlet:namespace />groupId=" + groupId;
 
 			rowColumns.push(<portlet:namespace />createURL(href, name));
-			//rowColumns.push(<portlet:namespace />createURL(href, type));
 			rowColumns.push('<a class="modify-link" data-rowId="' + groupId + '" href="javascript:;"><%= UnicodeFormatter.toString(removeGroupIcon) %></a>');
 
 			searchContainer.deleteRow(1, searchContainer.getData());
@@ -455,6 +460,9 @@ if (parentGroup != null) {
 		},
 		['liferay-search-container']
 	);
+
+	Liferay.Util.toggleSelectBox('<portlet:namespace />publicLayoutSetPrototypeId', <portlet:namespace />testVisibility, '<portlet:namespace />publicLayoutSetPrototypeIdOptions');
+	Liferay.Util.toggleSelectBox('<portlet:namespace />privateLayoutSetPrototypeId', <portlet:namespace />testVisibility, '<portlet:namespace />privateLayoutSetPrototypeIdOptions');
 </aui:script>
 
 <aui:script use="liferay-search-container">
@@ -464,20 +472,11 @@ if (parentGroup != null) {
 		'click',
 		function(event) {
 			var link = event.currentTarget;
+
 			var tr = link.ancestor('tr');
 
 			searchContainer.deleteRow(tr, link.getAttribute('data-rowId'));
 		},
 		'.modify-link'
 	);
-</aui:script>
-
-
-<aui:script>
-	function <portlet:namespace />testVisibility(currentValue, value) {
-		return currentValue != '';
-	}
-
-	Liferay.Util.toggleSelectBox('<portlet:namespace />publicLayoutSetPrototypeId', <portlet:namespace />testVisibility, '<portlet:namespace />publicLayoutSetPrototypeIdOptions');
-	Liferay.Util.toggleSelectBox('<portlet:namespace />privateLayoutSetPrototypeId', <portlet:namespace />testVisibility, '<portlet:namespace />privateLayoutSetPrototypeIdOptions');
 </aui:script>
