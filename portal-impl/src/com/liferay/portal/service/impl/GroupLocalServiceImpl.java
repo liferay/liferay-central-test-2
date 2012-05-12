@@ -1909,29 +1909,6 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 	}
 
 	/**
-	 * Updates the group's type settings.
-	 *
-	 * @param  groupId the primary key of the group
-	 * @param  typeSettings the group's new type settings (optionally
-	 *         <code>null</code>)
-	 * @return the group
-	 * @throws PortalException if a group with the primary key could not be
-	 *         found
-	 * @throws SystemException if a system exception occurred
-	 */
-	public Group updateGroup(long groupId, String typeSettings)
-		throws PortalException, SystemException {
-
-		Group group = groupPersistence.findByPrimaryKey(groupId);
-
-		group.setTypeSettings(typeSettings);
-
-		groupPersistence.update(group, false);
-
-		return group;
-	}
-
-	/**
 	 * Updates the group.
 	 *
 	 * @param  groupId the primary key of the group
@@ -2023,6 +2000,29 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 				user.getUserId(), group, serviceContext.getAssetCategoryIds(),
 				serviceContext.getAssetTagNames());
 		}
+
+		return group;
+	}
+
+	/**
+	 * Updates the group's type settings.
+	 *
+	 * @param  groupId the primary key of the group
+	 * @param  typeSettings the group's new type settings (optionally
+	 *         <code>null</code>)
+	 * @return the group
+	 * @throws PortalException if a group with the primary key could not be
+	 *         found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public Group updateGroup(long groupId, String typeSettings)
+		throws PortalException, SystemException {
+
+		Group group = groupPersistence.findByPrimaryKey(groupId);
+
+		group.setTypeSettings(typeSettings);
+
+		groupPersistence.update(group, false);
 
 		return group;
 	}

@@ -706,26 +706,6 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 	}
 
 	/**
-	 * Updates the group's type settings.
-	 *
-	 * @param  groupId the primary key of the group
-	 * @param  typeSettings the group's new type settings (optionally
-	 *         <code>null</code>)
-	 * @return the group
-	 * @throws PortalException if the user did not have permission to update the
-	 *         group or if a group with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	public Group updateGroup(long groupId, String typeSettings)
-		throws PortalException, SystemException {
-
-		GroupPermissionUtil.check(
-			getPermissionChecker(), groupId, ActionKeys.UPDATE);
-
-		return groupLocalService.updateGroup(groupId, typeSettings);
-	}
-
-	/**
 	 * Updates the group.
 	 *
 	 * @param  groupId the primary key of the group
@@ -759,6 +739,26 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 		return groupLocalService.updateGroup(
 			groupId, parentGroupId, name, description, type, friendlyURL,
 			active, serviceContext);
+	}
+
+	/**
+	 * Updates the group's type settings.
+	 *
+	 * @param  groupId the primary key of the group
+	 * @param  typeSettings the group's new type settings (optionally
+	 *         <code>null</code>)
+	 * @return the group
+	 * @throws PortalException if the user did not have permission to update the
+	 *         group or if a group with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public Group updateGroup(long groupId, String typeSettings)
+		throws PortalException, SystemException {
+
+		GroupPermissionUtil.check(
+			getPermissionChecker(), groupId, ActionKeys.UPDATE);
+
+		return groupLocalService.updateGroup(groupId, typeSettings);
 	}
 
 	protected List<Group> filterGroups(List<Group> groups)
