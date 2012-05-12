@@ -50,6 +50,7 @@ public class GroupServiceWrapper implements GroupService,
 	/**
 	* Adds a group.
 	*
+	* @param parentGroupId the primary key of the parent group
 	* @param liveGroupId the primary key of the live group
 	* @param name the entity's name
 	* @param description the group's description (optionally
@@ -83,6 +84,7 @@ public class GroupServiceWrapper implements GroupService,
 	/**
 	* Adds the group using the group default live group ID.
 	*
+	* @param parentGroupId the primary key of the parent group
 	* @param name the entity's name
 	* @param description the group's description (optionally
 	<code>null</code>)
@@ -501,27 +503,10 @@ public class GroupServiceWrapper implements GroupService,
 	}
 
 	/**
-	* Updates the group's type settings.
-	*
-	* @param groupId the primary key of the group
-	* @param typeSettings the group's new type settings (optionally
-	<code>null</code>)
-	* @return the group
-	* @throws PortalException if the user did not have permission to update the
-	group or if a group with the primary key could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public com.liferay.portal.model.Group updateGroup(long groupId,
-		java.lang.String typeSettings)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _groupService.updateGroup(groupId, typeSettings);
-	}
-
-	/**
 	* Updates the group.
 	*
 	* @param groupId the primary key of the group
+	* @param parentGroupId the primary key of the parent group
 	* @param name the group's new name
 	* @param description the group's new description (optionally
 	<code>null</code>)
@@ -547,6 +532,24 @@ public class GroupServiceWrapper implements GroupService,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _groupService.updateGroup(groupId, parentGroupId, name,
 			description, type, friendlyURL, active, serviceContext);
+	}
+
+	/**
+	* Updates the group's type settings.
+	*
+	* @param groupId the primary key of the group
+	* @param typeSettings the group's new type settings (optionally
+	<code>null</code>)
+	* @return the group
+	* @throws PortalException if the user did not have permission to update the
+	group or if a group with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.portal.model.Group updateGroup(long groupId,
+		java.lang.String typeSettings)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _groupService.updateGroup(groupId, typeSettings);
 	}
 
 	/**
