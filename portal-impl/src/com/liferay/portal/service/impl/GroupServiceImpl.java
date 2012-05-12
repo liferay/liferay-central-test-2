@@ -122,10 +122,9 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		if (!(parentGroupId != GroupConstants.DEFAULT_PARENT_GROUP_ID &&
-			GroupPermissionUtil.contains(
+		if (!GroupPermissionUtil.contains(
 				getPermissionChecker(), parentGroupId,
-				ActionKeys.MANAGE_SUBGROUPS)) &&
+				ActionKeys.MANAGE_SUBGROUPS) &&
 			!PortalPermissionUtil.contains(
 				getPermissionChecker(), ActionKeys.ADD_COMMUNITY)) {
 
