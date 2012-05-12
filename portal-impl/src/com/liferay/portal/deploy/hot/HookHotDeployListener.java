@@ -513,8 +513,7 @@ public class HookHotDeployListener
 		}
 
 		if (_log.isInfoEnabled()) {
-			_log.info(
-				"Registering extension environment for " + servletContextName);
+			_log.info("Registering hook for " + servletContextName);
 		}
 
 		_servletContextNames.add(servletContextName);
