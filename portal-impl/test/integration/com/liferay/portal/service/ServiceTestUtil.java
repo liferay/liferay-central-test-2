@@ -86,11 +86,7 @@ public class ServiceTestUtil {
 
 	public static final int THREAD_COUNT = 25;
 
-	public static Group addGroup(String name) throws Exception {
-		return addGroup(name, GroupConstants.DEFAULT_PARENT_GROUP_ID);
-	}
-
-	public static Group addGroup(String name, long parentGroupId)
+	public static Group addGroup(long parentGroupId, String name)
 		throws Exception {
 
 		Group group = GroupLocalServiceUtil.fetchGroup(
@@ -100,7 +96,7 @@ public class ServiceTestUtil {
 			return group;
 		}
 
-		String description ="This is a test group";
+		String description = "This is a test group.";
 		int type = GroupConstants.TYPE_SITE_OPEN;
 		String friendlyURL =
 			StringPool.SLASH + FriendlyURLNormalizerUtil.normalize(name);
@@ -110,6 +106,10 @@ public class ServiceTestUtil {
 		return GroupLocalServiceUtil.addGroup(
 			TestPropsValues.getUserId(), parentGroupId, null, 0, name,
 			description, type, friendlyURL, site, active, getServiceContext());
+	}
+
+	public static Group addGroup(String name) throws Exception {
+		return addGroup(GroupConstants.DEFAULT_PARENT_GROUP_ID, name);
 	}
 
 	public static Layout addLayout(long groupId, String name) throws Exception {
@@ -127,7 +127,7 @@ public class ServiceTestUtil {
 		catch (NoSuchLayoutException nsle) {
 		}
 
-		String description ="This is a test page";
+		String description = "This is a test page.";
 
 		return LayoutLocalServiceUtil.addLayout(
 			TestPropsValues.getUserId(), groupId, false,

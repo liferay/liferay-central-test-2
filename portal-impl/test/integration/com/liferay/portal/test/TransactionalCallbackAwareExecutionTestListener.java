@@ -15,6 +15,8 @@
 package com.liferay.portal.test;
 
 import com.liferay.portal.cache.transactional.TransactionalPortalCacheHelper;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.spring.transaction.TransactionCommitCallbackTestUtil;
 
 import java.util.List;
@@ -27,7 +29,7 @@ public class TransactionalCallbackAwareExecutionTestListener
 	extends TransactionalExecutionTestListener {
 
 	@Override
-	protected void _rollbackTransaction(TransactionContext transactionContext) {
+	protected void rollbackTransaction(TransactionContext transactionContext) {
 		TransactionalPortalCacheHelper.commit();
 
 		List<Callable<?>> callables =
@@ -38,20 +40,23 @@ public class TransactionalCallbackAwareExecutionTestListener
 				callable.call();
 			}
 			catch (Exception e) {
-				e.printStackTrace();
+				_log.error(e, e);
 			}
 		}
 
-		super._rollbackTransaction(transactionContext);
+		super.rollbackTransaction(transactionContext);
 	}
 
 	@Override
-	protected void _startNewTransaction(TransactionContext transactionContext) {
-		super._startNewTransaction(transactionContext);
+	protected void startNewTransaction(TransactionContext transactionContext) {
+		super.startNewTransaction(transactionContext);
 
 		TransactionalPortalCacheHelper.begin();
 
 		TransactionCommitCallbackTestUtil.pushCallbackList();
 	}
+
+	private static Log _log = LogFactoryUtil.getLog(
+		TransactionalCallbackAwareExecutionTestListener.class);
 
 }
