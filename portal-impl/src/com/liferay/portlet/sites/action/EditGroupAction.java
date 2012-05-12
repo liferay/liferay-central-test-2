@@ -319,12 +319,11 @@ public class EditGroupAction extends PortletAction {
 		long parentGroupId = ParamUtil.getLong(
 			actionRequest, "parentGroupSearchContainerPrimaryKeys",
 			GroupConstants.DEFAULT_PARENT_GROUP_ID);
-
-		boolean active;
-		String description = null;
-		String friendlyURL = null;
 		String name = null;
-		int type;
+		String description = null;
+		int type = 0;
+		String friendlyURL = null;
+		boolean active = false;
 
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			Group.class.getName(), actionRequest);

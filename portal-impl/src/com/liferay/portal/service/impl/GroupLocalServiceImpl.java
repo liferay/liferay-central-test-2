@@ -1989,12 +1989,12 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			group.getCompanyId(), group.getGroupId(), group.getClassNameId(),
 			group.getClassPK(), friendlyURL);
 
+		group.setParentGroupId(parentGroupId);
 		group.setName(name);
 		group.setDescription(description);
 		group.setType(type);
 		group.setFriendlyURL(friendlyURL);
 		group.setActive(active);
-		group.setParentGroupId(parentGroupId);
 
 		groupPersistence.update(group, false);
 
