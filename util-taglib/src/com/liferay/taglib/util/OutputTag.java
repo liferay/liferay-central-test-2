@@ -36,19 +36,6 @@ public class OutputTag extends PositionTagSupport {
 		return outputData.getMergedData(webKey);
 	}
 
-	private static OutputData _getOutputData(ServletRequest request) {
-		OutputData outputData = (OutputData)request.getAttribute(
-			WebKeys.OUTPUT_DATA);
-
-		if (outputData == null) {
-			outputData = new OutputData();
-
-			request.setAttribute(WebKeys.OUTPUT_DATA, outputData);
-		}
-
-		return outputData;
-	}
-
 	public OutputTag(String stringBundlerKey) {
 		_webKey = stringBundlerKey;
 	}
@@ -101,6 +88,19 @@ public class OutputTag extends PositionTagSupport {
 
 	public void setOutputKey(String outputKey) {
 		_outputKey = outputKey;
+	}
+
+	private static OutputData _getOutputData(ServletRequest request) {
+		OutputData outputData = (OutputData)request.getAttribute(
+			WebKeys.OUTPUT_DATA);
+
+		if (outputData == null) {
+			outputData = new OutputData();
+
+			request.setAttribute(WebKeys.OUTPUT_DATA, outputData);
+		}
+
+		return outputData;
 	}
 
 	private boolean _output;

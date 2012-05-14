@@ -14,9 +14,9 @@
 
 package com.liferay.portal.kernel.servlet.taglib.util;
 
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Mergeable;
 import com.liferay.portal.kernel.util.StringBundler;
-import com.liferay.portal.kernel.util.StringPool;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -42,7 +42,7 @@ public class OutputData implements Mergeable<OutputData> {
 	}
 
 	public boolean addOutputKey(String outputKey) {
-		return _outputKeySet.add(outputKey);
+		return _outputKeys.add(outputKey);
 	}
 
 	public StringBundler getMergedData(String webKey) {
@@ -65,36 +65,31 @@ public class OutputData implements Mergeable<OutputData> {
 	}
 
 	public OutputData merge(OutputData outputData) {
-		// Don't merge null or myself
-		if ((outputData != null) && (outputData != this)) {
+		if ((outputData == null) || (outputData == this)) {
+			return this;
+		}
 
-			// Iterate through given OutputData
-			for (Map.Entry<DataKey, StringBundler> entry :
+		for (Map.Entry<DataKey, StringBundler> entry :
 				outputData._dataMap.entrySet()) {
 
-				DataKey dataKey = entry.getKey();
-				String outputKey = dataKey._outputKey;
+			DataKey dataKey = entry.getKey();
 
-				StringBundler sb = entry.getValue();
+			String outputKey = dataKey._outputKey;
 
-				// Don't merge if outputKey exist in my unique key set.
-				if (!_outputKeySet.contains(outputKey)) {
+			StringBundler sb = entry.getValue();
 
-					// Merge data
-					StringBundler mergedSB = _dataMap.get(dataKey);
+			if (!_outputKeys.contains(outputKey)) {
+				StringBundler mergedSB = _dataMap.get(dataKey);
 
-					if (mergedSB == null) {
-						_dataMap.put(dataKey, sb);
-					}
-					else {
-						mergedSB.append(sb);
-					}
+				if (mergedSB == null) {
+					_dataMap.put(dataKey, sb);
+				}
+				else {
+					mergedSB.append(sb);
+				}
 
-					// If outputKey is unique for the given key set,
-					// we should honor it.
-					if (outputData._outputKeySet.contains(outputKey)) {
-						_outputKeySet.add(outputKey);
-					}
+				if (outputData._outputKeys.contains(outputKey)) {
+					_outputKeys.add(outputKey);
 				}
 			}
 		}
@@ -104,19 +99,12 @@ public class OutputData implements Mergeable<OutputData> {
 
 	private Map<DataKey, StringBundler> _dataMap =
 		new HashMap<DataKey, StringBundler>();
-
-	private Set<String> _outputKeySet = new HashSet<String>();
+	private Set<String> _outputKeys = new HashSet<String>();
 
 	private class DataKey {
 
 		public DataKey(String outputKey, String webKey) {
-			if (outputKey == null) {
-				_outputKey = StringPool.BLANK;
-			}
-			else {
-				_outputKey = outputKey;
-			}
-
+			_outputKey = GetterUtil.getString(outputKey);
 			_webKey = webKey;
 		}
 
