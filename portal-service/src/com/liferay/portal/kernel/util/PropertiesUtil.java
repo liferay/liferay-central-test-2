@@ -145,7 +145,7 @@ public class PropertiesUtil {
 	public static Properties load(InputStream is, String charsetName)
 		throws IOException {
 
-		if (JavaProps.isJDK6()) {
+		if (JavaDetector.isJDK6()) {
 			return loadJDK6(new InputStreamReader(is, charsetName));
 		}
 		else {
@@ -196,7 +196,7 @@ public class PropertiesUtil {
 	public static Properties load(String s, String charsetName)
 		throws IOException {
 
-		if (JavaProps.isJDK6()) {
+		if (JavaDetector.isJDK6()) {
 			return loadJDK6(new UnsyncStringReader(s));
 		}
 		else {
@@ -332,7 +332,7 @@ public class PropertiesUtil {
 	private static Method _jdk6LoadMethod;
 
 	static {
-		if (JavaProps.isJDK6()) {
+		if (JavaDetector.isJDK6()) {
 			try {
 				_jdk6LoadMethod = ReflectionUtil.getDeclaredMethod(
 					Properties.class, "load", Reader.class);
