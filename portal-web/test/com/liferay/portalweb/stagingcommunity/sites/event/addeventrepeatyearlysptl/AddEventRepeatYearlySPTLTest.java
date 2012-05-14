@@ -74,7 +74,7 @@ public class AddEventRepeatYearlySPTLTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isVisible("//div[2]/div[1]/a")) {
+						if (selenium.isVisible("//div[4]/div/a")) {
 							break;
 						}
 					}
@@ -93,7 +93,7 @@ public class AddEventRepeatYearlySPTLTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//div[3]/div[1]/a",
+				selenium.clickAt("//div[4]/div/a",
 					RuntimeVariables.replace("Plus"));
 
 			case 2:
