@@ -24,7 +24,7 @@ com.liferay.portlet.currencyconverter.model.Currency currency = CurrencyUtil.get
 
 double number = ParamUtil.getDouble(request, "number", 1.0);
 
-String chartId = HtmlUtil.escape(ParamUtil.getString(request, "chartId", "3m"));
+String chartId = ParamUtil.getString(request, "chartId", "3m");
 
 NumberFormat decimalFormat = NumberFormat.getNumberInstance(locale);
 
@@ -181,7 +181,7 @@ decimalFormat.setMinimumFractionDigits(2);
 		<table border="1" cellpadding="2" cellspacing="0">
 		<tr>
 			<td>
-				<img height="288" src="http://ichart.yahoo.com/z?s=<%= currency.getSymbol() %>=X&t=<%= chartId %>?" width="512" />
+				<img height="288" src="http://ichart.yahoo.com/z?s=<%= currency.getSymbol() %>=X&t=<%= HtmlUtil.escape(chartId) %>?" width="512" />
 			</td>
 		</tr>
 		</table>
