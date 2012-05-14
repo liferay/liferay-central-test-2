@@ -48,7 +48,6 @@ public class MBMessageAssetRenderer extends BaseAssetRenderer {
 		_message = message;
 	}
 
-	@Override
 	public String getAssetRendererFactoryClassName() {
 		return MBCategoryAssetRendererFactory.CLASS_NAME;
 	}

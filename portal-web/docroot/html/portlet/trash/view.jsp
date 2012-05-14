@@ -90,11 +90,11 @@ portletURL.setParameter("tabs1", tabs1);
 
 				viewContentURL.setParameter("struts_action", "/trash/view_content");
 				viewContentURL.setParameter("redirect", currentURL);
-				viewContentURL.setParameter("type", trashRenderer.getType());
 				viewContentURL.setParameter("entryId", String.valueOf(entry.getEntryId()));
-				viewContentURL.setParameter("showActions", String.valueOf(Boolean.FALSE));
-				viewContentURL.setParameter("showAssetMetadata", String.valueOf(Boolean.TRUE));
-				viewContentURL.setParameter("showEditURL", String.valueOf(Boolean.FALSE));
+				viewContentURL.setParameter("type", trashRenderer.getType());
+				viewContentURL.setParameter("showActions", Boolean.FALSE.toString());
+				viewContentURL.setParameter("showAssetMetadata", Boolean.TRUE.toString());
+				viewContentURL.setParameter("showEditURL", Boolean.FALSE.toString());
 
 				viewContentURLString = viewContentURL.toString();
 			}

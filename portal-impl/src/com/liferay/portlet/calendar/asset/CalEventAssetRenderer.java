@@ -45,7 +45,6 @@ public class CalEventAssetRenderer extends BaseAssetRenderer {
 		_event = event;
 	}
 
-	@Override
 	public String getAssetRendererFactoryClassName() {
 		return CalEventAssetRendererFactory.CLASS_NAME;
 	}

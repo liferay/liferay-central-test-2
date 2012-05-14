@@ -55,7 +55,6 @@ public class JournalArticleAssetRenderer extends BaseAssetRenderer {
 		return _article;
 	}
 
-	@Override
 	public String getAssetRendererFactoryClassName() {
 		return JournalArticleAssetRendererFactory.CLASS_NAME;
 	}

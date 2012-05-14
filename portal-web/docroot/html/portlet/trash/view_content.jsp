@@ -20,13 +20,14 @@
 
 	<%
 	String redirect = ParamUtil.getString(request, "redirect");
+
 	long entryId = ParamUtil.getLong(request, "entryId");
 
-	TrashEntry trashEntry = TrashEntryLocalServiceUtil.getEntry(entryId);
+	TrashEntry entry = TrashEntryLocalServiceUtil.getEntry(entryId);
 
-	TrashHandler trashHandler = TrashHandlerRegistryUtil.getTrashHandler(trashEntry.getClassName());
+	TrashHandler trashHandler = TrashHandlerRegistryUtil.getTrashHandler(entry.getClassName());
 
-	TrashRenderer trashRenderer = trashHandler.getTrashRenderer(trashEntry.getClassPK());
+	TrashRenderer trashRenderer = trashHandler.getTrashRenderer(entry.getClassPK());
 
 	String path = trashRenderer.render(renderRequest, renderResponse, AssetRenderer.TEMPLATE_FULL_CONTENT);
 	%>
@@ -57,18 +58,18 @@
 		<c:if test="<%= !assetRenderer.getAssetRendererFactoryClassName().equals(DLFileEntryAssetRendererFactory.CLASS_NAME) %>">
 			<div class="asset-ratings">
 				<liferay-ui:ratings
-					className="<%= trashEntry.getClassName() %>"
-					classPK="<%= trashEntry.getClassPK() %>"
+					className="<%= entry.getClassName() %>"
+					classPK="<%= entry.getClassPK() %>"
 				/>
 			</div>
 
 			<%
-			AssetEntry entry = AssetEntryLocalServiceUtil.getEntry(trashEntry.getClassName(), trashEntry.getClassPK());
+			AssetEntry assetEntry = AssetEntryLocalServiceUtil.getEntry(entry.getClassName(), entry.getClassPK());
 			%>
 
 			<div class="asset-related-assets">
 				<liferay-ui:asset-links
-					assetEntryId="<%= entry.getEntryId() %>"
+					assetEntryId="<%= assetEntry.getEntryId() %>"
 				/>
 			</div>
 
@@ -79,13 +80,13 @@
 
 				<div class="asset-discussion">
 					<liferay-ui:discussion
-						className="<%= trashEntry.getClassName() %>"
-						classPK="<%= trashEntry.getClassPK() %>"
+						className="<%= entry.getClassName() %>"
+						classPK="<%= entry.getClassPK() %>"
 						formAction="<%= discussionURL %>"
-						formName='<%= "fm" + trashEntry.getClassPK() %>'
+						formName='<%= "fm" + entry.getClassPK() %>'
 						redirect="<%= currentURL %>"
 						subject="<%= trashRenderer.getTitle(locale) %>"
-						userId="<%= trashEntry.getUserId() %>"
+						userId="<%= entry.getUserId() %>"
 					/>
 				</div>
 			</c:if>

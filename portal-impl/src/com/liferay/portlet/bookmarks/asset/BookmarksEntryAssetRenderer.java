@@ -44,7 +44,6 @@ public class BookmarksEntryAssetRenderer extends BaseAssetRenderer {
 		_entry = entry;
 	}
 
-	@Override
 	public String getAssetRendererFactoryClassName() {
 		return BookmarksEntryAssetRendererFactory.CLASS_NAME;
 	}

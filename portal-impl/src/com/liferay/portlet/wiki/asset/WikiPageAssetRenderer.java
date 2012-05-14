@@ -47,7 +47,6 @@ public class WikiPageAssetRenderer extends BaseAssetRenderer {
 		_page = page;
 	}
 
-	@Override
 	public String getAssetRendererFactoryClassName() {
 		return WikiPageAssetRendererFactory.CLASS_NAME;
 	}

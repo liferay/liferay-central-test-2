@@ -55,7 +55,6 @@ public class LayoutRevisionAssetRenderer extends BaseAssetRenderer {
 		}
 	}
 
-	@Override
 	public String getAssetRendererFactoryClassName() {
 		return LayoutRevisionAssetRendererFactory.CLASS_NAME;
 	}

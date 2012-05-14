@@ -1545,6 +1545,10 @@
 
 	<definition name="portlet.trash" extends="portlet" />
 
+	<definition name="portlet.trash.error" extends="portlet.trash">
+		<put name="portlet_content" value="/portlet/trash/error.jsp" />
+	</definition>
+
 	<definition name="portlet.trash.view" extends="portlet.trash">
 		<put name="portlet_content" value="/portlet/trash/view.jsp" />
 	</definition>

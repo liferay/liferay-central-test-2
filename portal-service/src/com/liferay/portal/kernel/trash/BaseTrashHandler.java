@@ -72,7 +72,7 @@ public abstract class BaseTrashHandler implements TrashHandler {
 
 	private AssetRendererFactory getAssetRendererFactory() {
 		return AssetRendererFactoryRegistryUtil.
-				getAssetRendererFactoryByClassName(getClassName());
+			getAssetRendererFactoryByClassName(getClassName());
 	}
 
 }

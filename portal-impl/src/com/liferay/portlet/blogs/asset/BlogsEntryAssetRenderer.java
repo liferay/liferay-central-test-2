@@ -24,6 +24,7 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.asset.model.AssetRendererFactory;
 import com.liferay.portlet.asset.model.BaseAssetRenderer;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.service.permission.BlogsEntryPermission;
@@ -42,8 +43,8 @@ import javax.portlet.WindowState;
  * @author Sergio González
  * @author Zsolt Berentey
  */
-public class BlogsEntryAssetRenderer extends BaseAssetRenderer
-	implements TrashRenderer {
+public class BlogsEntryAssetRenderer
+	extends BaseAssetRenderer implements TrashRenderer {
 
 	public BlogsEntryAssetRenderer(BlogsEntry entry) {
 		_entry = entry;
@@ -77,7 +78,9 @@ public class BlogsEntryAssetRenderer extends BaseAssetRenderer
 	}
 
 	public String getPortletId() {
-		return getAssetRendererFactory().getPortletId();
+		AssetRendererFactory assetRendererFactory = getAssetRendererFactory();
+
+		return assetRendererFactory.getPortletId();
 	}
 
 	public String getSummary(Locale locale) {

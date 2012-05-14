@@ -29,6 +29,7 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.asset.model.AssetRendererFactory;
 import com.liferay.portlet.asset.model.BaseAssetRenderer;
 import com.liferay.portlet.documentlibrary.model.DLFileEntryConstants;
 import com.liferay.portlet.documentlibrary.service.permission.DLFileEntryPermission;
@@ -47,8 +48,8 @@ import javax.portlet.RenderResponse;
  * @author Sergio González
  * @author Zsolt Berentey
  */
-public class DLFileEntryAssetRenderer extends BaseAssetRenderer
-	implements TrashRenderer {
+public class DLFileEntryAssetRenderer
+	extends BaseAssetRenderer implements TrashRenderer {
 
 	public DLFileEntryAssetRenderer(
 		FileEntry fileEntry, FileVersion fileVersion) {
@@ -94,7 +95,9 @@ public class DLFileEntryAssetRenderer extends BaseAssetRenderer
 	}
 
 	public String getPortletId() {
-		return getAssetRendererFactory().getPortletId();
+		AssetRendererFactory assetRendererFactory = getAssetRendererFactory();
+
+		return assetRendererFactory.getPortletId();
 	}
 
 	public String getSummary(Locale locale) {

@@ -42,7 +42,6 @@ public class UserAssetRenderer extends BaseAssetRenderer {
 		_user = user;
 	}
 
-	@Override
 	public String getAssetRendererFactoryClassName() {
 		return UserAssetRendererFactory.CLASS_NAME;
 	}

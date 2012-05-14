@@ -60,7 +60,6 @@ public class DDLRecordAssetRenderer extends BaseAssetRenderer {
 		}
 	}
 
-	@Override
 	public String getAssetRendererFactoryClassName() {
 		return DDLRecordAssetRendererFactory.CLASS_NAME;
 	}
