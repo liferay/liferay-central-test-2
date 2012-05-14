@@ -74,8 +74,8 @@ public class MBThreadServiceImpl extends MBThreadServiceBaseImpl {
 			return Collections.emptyList();
 		}
 
-		List<Long> threadIds = mbMessageFinder.filterFindByG_U_C_MD_S(
-			groupId, userId, categoryIds, modifiedDate, status, start, end);
+		List<Long> threadIds = mbMessageFinder.filterFindByG_U_MD_C_S(
+			groupId, userId, modifiedDate, categoryIds, status, start, end);
 
 		List<MBThread> threads = new ArrayList<MBThread>(threadIds.size());
 
@@ -168,8 +168,8 @@ public class MBThreadServiceImpl extends MBThreadServiceBaseImpl {
 			return 0;
 		}
 
-		return mbMessageFinder.filterCountByG_U_C_MD_S(
-			groupId, userId, categoryIds, modifiedDate, status);
+		return mbMessageFinder.filterCountByG_U_MD_C_S(
+			groupId, userId, modifiedDate, categoryIds, status);
 	}
 
 	public int getGroupThreadsCount(long groupId, long userId, int status)

@@ -417,7 +417,7 @@ request.setAttribute("view.jsp-viewCategory", Boolean.TRUE.toString());
 					<%
 					Calendar calendar = Calendar.getInstance();
 
-					int offset = Integer.parseInt(recentPostsDateOffset);
+					int offset = GetterUtil.getInteger(recentPostsDateOffset);
 
 					calendar.add(Calendar.DATE, -offset);
 

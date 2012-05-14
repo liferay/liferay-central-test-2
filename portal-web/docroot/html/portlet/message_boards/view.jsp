@@ -263,7 +263,7 @@ request.setAttribute("view.jsp-portletURL", portletURL);
 				else if (topLink.equals("recent-posts")) {
 					Calendar calendar = Calendar.getInstance();
 
-					int offset = Integer.parseInt(recentPostsDateOffset);
+					int offset = GetterUtil.getInteger(recentPostsDateOffset);
 
 					calendar.add(Calendar.DATE, -offset);
 
