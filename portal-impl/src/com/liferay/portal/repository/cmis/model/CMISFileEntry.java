@@ -428,22 +428,21 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 		Set<Action> allowableActionsSet =
 			allowableActions.getAllowableActions();
 
-		if (!allowableActionsSet.contains(Action.CAN_CHECK_IN)) {
-			List<CmisExtensionElement> allowableActionsExtensions =
-				allowableActions.getExtensions();
-
-			for (CmisExtensionElement cmisExtensionElement :
-				allowableActionsExtensions) {
-
-				String elementName = cmisExtensionElement.getName();
-
-				if (elementName.equals("canCheckInSpecified")) {
-					return Boolean.valueOf(cmisExtensionElement.getValue());
-				}
-			}
-		}
-		else {
+		if (allowableActionsSet.contains(Action.CAN_CHECK_IN)) {
 			return true;
+		}
+
+		List<CmisExtensionElement> cmisExtensionElements =
+			allowableActions.getExtensions();
+
+		for (CmisExtensionElement cmisExtensionElement :
+				cmisExtensionElements) {
+
+			String name = cmisExtensionElement.getName();
+
+			if (name.equals("canCheckInSpecified")) {
+				return GetterUtil.getBoolean(cmisExtensionElement.getValue());
+			}
 		}
 
 		return false;
