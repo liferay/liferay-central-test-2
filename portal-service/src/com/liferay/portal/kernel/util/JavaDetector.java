@@ -111,7 +111,7 @@ public class JavaDetector {
 		}
 	}
 
-	private JavaDetector() {
+	protected JavaDetector() {
 		_javaClassPath = System.getProperty("java.class.path");
 		_javaClassVersion = Double.parseDouble(System.getProperty(
 			"java.class.version"));
