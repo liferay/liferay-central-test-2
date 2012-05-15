@@ -1871,7 +1871,7 @@
 			</license>
 		</licenses>
 		<comments>
-			This includes public patches from LPS-13343 and LPS-19623.
+			This includes public patches from LPS-13343, LPS-19623, and LPS-27321.
 		</comments>
 	</library>
 	<library>
