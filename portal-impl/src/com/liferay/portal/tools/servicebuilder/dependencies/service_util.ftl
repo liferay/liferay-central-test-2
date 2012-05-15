@@ -97,7 +97,7 @@ public class ${entity.name}${sessionTypeName}ServiceUtil {
 
 	<#if pluginName != "">
 		public static void clearService() {
-			_service = service;
+			_service = null;
 
 			ReferenceRegistry.registerReference(${entity.name}${sessionTypeName}ServiceUtil.class, "_service");
 			MethodCache.remove(${entity.name}${sessionTypeName}Service.class);
