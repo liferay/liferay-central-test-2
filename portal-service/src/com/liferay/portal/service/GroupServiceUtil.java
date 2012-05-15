@@ -125,6 +125,21 @@ public class GroupServiceUtil {
 	}
 
 	/**
+	* @deprecated {@link #addGroup(long, String, String, int, String, boolean,
+	boolean, ServiceContext)}
+	*/
+	public static com.liferay.portal.model.Group addGroup(
+		java.lang.String name, java.lang.String description, int type,
+		java.lang.String friendlyURL, boolean site, boolean active,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .addGroup(name, description, type, friendlyURL, site,
+			active, serviceContext);
+	}
+
+	/**
 	* Adds the groups to the role.
 	*
 	* @param roleId the primary key of the role

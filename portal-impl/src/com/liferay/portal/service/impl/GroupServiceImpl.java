@@ -139,6 +139,20 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 	}
 
 	/**
+	 * @deprecated {@link #addGroup(long, String, String, int, String, boolean,
+	 *             boolean, ServiceContext)}
+	 */
+	public Group addGroup(
+			String name, String description, int type, String friendlyURL,
+			boolean site, boolean active, ServiceContext serviceContext)
+		throws PortalException, SystemException {
+		
+		return addGroup(
+			GroupConstants.DEFAULT_PARENT_GROUP_ID, name, description, type,
+			friendlyURL, site, active, serviceContext);
+	}
+
+	/**
 	 * Adds the groups to the role.
 	 *
 	 * @param  roleId the primary key of the role

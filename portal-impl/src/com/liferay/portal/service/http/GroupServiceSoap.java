@@ -151,6 +151,28 @@ public class GroupServiceSoap {
 	}
 
 	/**
+	* @deprecated {@link #addGroup(long, String, String, int, String, boolean,
+	boolean, ServiceContext)}
+	*/
+	public static com.liferay.portal.model.GroupSoap addGroup(
+		java.lang.String name, java.lang.String description, int type,
+		java.lang.String friendlyURL, boolean site, boolean active,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			com.liferay.portal.model.Group returnValue = GroupServiceUtil.addGroup(name,
+					description, type, friendlyURL, site, active, serviceContext);
+
+			return com.liferay.portal.model.GroupSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	/**
 	* Adds the groups to the role.
 	*
 	* @param roleId the primary key of the role
