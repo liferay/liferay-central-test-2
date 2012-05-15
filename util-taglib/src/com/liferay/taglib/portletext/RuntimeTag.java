@@ -94,18 +94,18 @@ public class RuntimeTag extends TagSupport {
 
 			PortletContainerUtil.render(request, response, portlet);
 
-			RuntimePortletIDs runtimePortletIds =
+			RuntimePortletIDs runtimePortletIDs =
 				(RuntimePortletIDs)request.getAttribute(
 					WebKeys.RUNTIME_PORTLET_IDS);
 
-			if (runtimePortletIds == null) {
-				runtimePortletIds = new RuntimePortletIDs();
+			if (runtimePortletIDs == null) {
+				runtimePortletIDs = new RuntimePortletIDs();
 
 				request.setAttribute(
-					WebKeys.RUNTIME_PORTLET_IDS, runtimePortletIds);
+					WebKeys.RUNTIME_PORTLET_IDS, runtimePortletIDs);
 			}
 
-			runtimePortletIds.addRuntimePortletID(portletName);
+			runtimePortletIDs.addRuntimePortletID(portletName);
 		}
 		finally {
 			restrictPortletServletRequest.mergeSharedAttributes();
@@ -115,15 +115,15 @@ public class RuntimeTag extends TagSupport {
 	public static Set<String> getRuntimePortletIDs(
 		ServletRequest servletRequest) {
 
-		RuntimePortletIDs runtimePortletIds =
+		RuntimePortletIDs runtimePortletIDs =
 			(RuntimePortletIDs)servletRequest.getAttribute(
 				WebKeys.RUNTIME_PORTLET_IDS);
 
-		if (runtimePortletIds != null) {
-			return runtimePortletIds.getRuntimePortletIDs();
+		if (runtimePortletIDs == null) {
+			return null;
 		}
 
-		return null;
+		return runtimePortletIDs.getRuntimePortletIDs();
 	}
 
 	@Override
