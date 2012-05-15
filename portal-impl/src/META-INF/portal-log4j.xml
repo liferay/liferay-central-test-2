@@ -487,11 +487,11 @@
 	</category>
 
 	<category name="com.liferay.portal.security.pacl.checker.FileChecker">
-		<priority value="DEBUG" />
+		<priority value="ERROR" />
 	</category>
 
 	<category name="com.liferay.portal.security.pacl.checker.NetChecker">
-		<priority value="DEBUG" />
+		<priority value="ERROR" />
 	</category>
 
 	<category name="com.liferay.portal.security.pacl.checker.PortalHookChecker">
@@ -507,6 +507,10 @@
 	</category>
 
 	<category name="com.liferay.portal.security.pacl.checker.PortalServiceChecker">
+		<priority value="ERROR" />
+	</category>
+
+	<category name="com.liferay.portal.security.pacl.checker.ReflectChecker">
 		<priority value="ERROR" />
 	</category>
 
