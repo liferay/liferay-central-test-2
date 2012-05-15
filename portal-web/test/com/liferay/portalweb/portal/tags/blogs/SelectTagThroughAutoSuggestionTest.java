@@ -117,9 +117,9 @@ public class SelectTagThroughAutoSuggestionTest extends BaseTestCase {
 
 			case 2:
 				selenium.type("//input[@class='lfr-tag-selector-input aui-field-input-text']",
-					RuntimeVariables.replace("selenium3"));
+					RuntimeVariables.replace(""));
 				selenium.typeKeys("//input[@class='lfr-tag-selector-input aui-field-input-text focus']",
-					RuntimeVariables.replace("selenium3"));
+					RuntimeVariables.replace("selenium3*"));
 
 				for (int second = 0;; second++) {
 					if (second >= 90) {

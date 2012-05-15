@@ -117,7 +117,7 @@ public class AssertAutoSuggestionDropDownTest extends BaseTestCase {
 
 			case 2:
 				selenium.type("//input[@class='lfr-tag-selector-input aui-field-input-text']",
-					RuntimeVariables.replace("selenium"));
+					RuntimeVariables.replace(""));
 				selenium.typeKeys("//input[@class='lfr-tag-selector-input aui-field-input-text focus']",
 					RuntimeVariables.replace("selenium"));
 
@@ -151,10 +151,8 @@ public class AssertAutoSuggestionDropDownTest extends BaseTestCase {
 				assertEquals(RuntimeVariables.replace("selenium4 liferay4"),
 					selenium.getText(
 						"xPath=(//li[@class='aui-autocomplete-list-item'])[3]"));
-				selenium.type("//input[@class='lfr-tag-selector-input aui-field-input-text focus']",
-					RuntimeVariables.replace("selenium2"));
 				selenium.typeKeys("//input[@class='lfr-tag-selector-input aui-field-input-text focus']",
-					RuntimeVariables.replace("selenium2"));
+					RuntimeVariables.replace("2*"));
 
 				for (int second = 0;; second++) {
 					if (second >= 90) {
