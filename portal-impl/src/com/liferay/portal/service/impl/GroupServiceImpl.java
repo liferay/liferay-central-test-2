@@ -146,7 +146,7 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 			String name, String description, int type, String friendlyURL,
 			boolean site, boolean active, ServiceContext serviceContext)
 		throws PortalException, SystemException {
-		
+
 		return addGroup(
 			GroupConstants.DEFAULT_PARENT_GROUP_ID, name, description, type,
 			friendlyURL, site, active, serviceContext);
