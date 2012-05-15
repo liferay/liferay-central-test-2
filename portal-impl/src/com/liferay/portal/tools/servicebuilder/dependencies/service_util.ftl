@@ -96,10 +96,11 @@ public class ${entity.name}${sessionTypeName}ServiceUtil {
 	</#list>
 
 	<#if pluginName != "">
-		/**
-		 * @deprecated
-		 */
 		public static void clearService() {
+			_service = service;
+
+			ReferenceRegistry.registerReference(${entity.name}${sessionTypeName}ServiceUtil.class, "_service");
+			MethodCache.remove(${entity.name}${sessionTypeName}Service.class);
 		}
 	</#if>
 
