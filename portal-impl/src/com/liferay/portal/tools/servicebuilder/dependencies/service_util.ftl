@@ -2,7 +2,6 @@ package ${packagePath}.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.bean.PortletBeanLocatorUtil;
-import com.liferay.portal.kernel.util.MethodCache;
 import com.liferay.portal.kernel.util.ReferenceRegistry;
 import com.liferay.portal.service.Invokable${sessionTypeName}Service;
 
@@ -98,9 +97,6 @@ public class ${entity.name}${sessionTypeName}ServiceUtil {
 	<#if pluginName != "">
 		public static void clearService() {
 			_service = null;
-
-			ReferenceRegistry.registerReference(${entity.name}${sessionTypeName}ServiceUtil.class, "_service");
-			MethodCache.remove(${entity.name}${sessionTypeName}Service.class);
 		}
 	</#if>
 
@@ -120,7 +116,6 @@ public class ${entity.name}${sessionTypeName}ServiceUtil {
 			</#if>
 
 			ReferenceRegistry.registerReference(${entity.name}${sessionTypeName}ServiceUtil.class, "_service");
-			MethodCache.remove(${entity.name}${sessionTypeName}Service.class);
 		}
 
 		return _service;
