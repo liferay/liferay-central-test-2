@@ -124,6 +124,7 @@ public class EditPageAttachmentAction extends EditFileEntryAction {
 			}
 			else if (e instanceof DuplicateFileException ||
 					 e instanceof FileNameException) {
+
 				SessionErrors.add(actionRequest, e.getClass().getName());
 
 				HttpServletResponse response =
