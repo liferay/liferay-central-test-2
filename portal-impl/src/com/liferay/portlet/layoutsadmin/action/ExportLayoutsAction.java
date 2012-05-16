@@ -190,7 +190,7 @@ public class ExportLayoutsAction extends PortletAction {
 		catch (Exception e) {
 			_log.error(e, e);
 
-			SessionErrors.add(actionRequest, e.getClass().getName());
+			SessionErrors.add(actionRequest, e.getClass());
 
 			String pagesRedirect = ParamUtil.getString(
 				actionRequest, "pagesRedirect");
@@ -215,7 +215,7 @@ public class ExportLayoutsAction extends PortletAction {
 			if (e instanceof NoSuchGroupException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(renderRequest, e.getClass().getName());
+				SessionErrors.add(renderRequest, e.getClass());
 
 				return mapping.findForward("portlet.layouts_admin.error");
 			}

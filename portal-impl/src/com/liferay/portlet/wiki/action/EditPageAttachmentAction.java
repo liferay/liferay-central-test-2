@@ -118,14 +118,14 @@ public class EditPageAttachmentAction extends EditFileEntryAction {
 				e instanceof NoSuchPageException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(actionRequest, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass());
 
 				setForward(actionRequest, "portlet.wiki.error");
 			}
 			else if (e instanceof DuplicateFileException ||
 					 e instanceof FileNameException) {
 
-				SessionErrors.add(actionRequest, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass());
 
 				HttpServletResponse response =
 					PortalUtil.getHttpServletResponse(actionResponse);
@@ -134,7 +134,7 @@ public class EditPageAttachmentAction extends EditFileEntryAction {
 					ServletResponseConstants.SC_FILE_NAME_EXCEPTION);
 			}
 			else if (e instanceof FileSizeException) {
-				SessionErrors.add(actionRequest, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass());
 			}
 			else {
 				throw e;
@@ -157,7 +157,7 @@ public class EditPageAttachmentAction extends EditFileEntryAction {
 				e instanceof NoSuchPageException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(renderRequest, e.getClass().getName());
+				SessionErrors.add(renderRequest, e.getClass());
 
 				return mapping.findForward("portlet.wiki.error");
 			}
