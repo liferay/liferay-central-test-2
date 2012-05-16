@@ -249,24 +249,25 @@ public class ExportLayoutsAction extends PortletAction {
 			long groupId, boolean privateLayout, String layoutIdsJSON)
 		throws Exception {
 
+		if (Validator.isNull(layoutIdsJSON)) {
+			return new long[0];
+		}
+
 		List<Long> layoutIds = new ArrayList<Long>();
 
-		if (Validator.isNotNull(layoutIdsJSON)) {
-			JSONArray jsonArray = JSONFactoryUtil.createJSONArray(
-				layoutIdsJSON);
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray(layoutIdsJSON);
 
-			for (int i = 0; i < jsonArray.length(); ++i) {
-				JSONObject jsonObject = jsonArray.getJSONObject(i);
+		for (int i = 0; i < jsonArray.length(); ++i) {
+			JSONObject jsonObject = jsonArray.getJSONObject(i);
 
-				long layoutId = jsonObject.getLong("layoutId");
+			long layoutId = jsonObject.getLong("layoutId");
 
-				if (layoutId > 0) {
-					layoutIds.add(layoutId);
-				}
+			if (layoutId > 0) {
+				layoutIds.add(layoutId);
+			}
 
-				if (jsonObject.getBoolean("includeChildren")) {
-					addLayoutIds(layoutIds, groupId, privateLayout, layoutId);
-				}
+			if (jsonObject.getBoolean("includeChildren")) {
+				addLayoutIds(layoutIds, groupId, privateLayout, layoutId);
 			}
 		}
 
