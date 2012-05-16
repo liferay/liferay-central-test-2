@@ -14,8 +14,7 @@
  */
 --%>
 
-<%@ include file="/html/taglib/init.jsp" %>
-<%@ page import="com.liferay.portal.kernel.util.ListMergeable" %>
+<%@ include file="/html/taglib/theme/meta_tags/init.jsp" %>
 
 <c:if test="<%= layout != null %>">
 
@@ -49,13 +48,13 @@
 		metaDescriptionLanguageId = w3cDefaultLanguageId;
 	}
 
-	ListMergeable<String> dynamicMetaDescription = (ListMergeable<String>)request.getAttribute(WebKeys.PAGE_DESCRIPTION);
+	ListMergeable<String> pageDescriptionListMergeable = (ListMergeable<String>)request.getAttribute(WebKeys.PAGE_DESCRIPTION);
 
-	if (Validator.isNotNull(dynamicMetaDescription)) {
+	if (pageDescriptionListMergeable != null) {
 		if (Validator.isNotNull(metaDescription)) {
 			StringBundler sb = new StringBundler(4);
 
-			sb.append(dynamicMetaDescription.mergeToString(StringPool.SPACE));
+			sb.append(pageDescriptionListMergeable.mergeToString(StringPool.SPACE));
 			sb.append(StringPool.PERIOD);
 			sb.append(StringPool.SPACE);
 			sb.append(metaDescription);
@@ -63,7 +62,7 @@
 			metaDescription = sb.toString();
 		}
 		else {
-			metaDescription = dynamicMetaDescription.mergeToString(StringPool.SPACE);
+			metaDescription = pageDescriptionListMergeable.mergeToString(StringPool.SPACE);
 		}
 	}
 	%>
@@ -81,13 +80,13 @@
 		metaKeywordsLanguageId = w3cDefaultLanguageId;
 	}
 
-	ListMergeable<String> dynamicMetaKeywords = (ListMergeable<String>)request.getAttribute(WebKeys.PAGE_KEYWORDS);
+	ListMergeable<String> pageKeywordsListMergeable = (ListMergeable<String>)request.getAttribute(WebKeys.PAGE_KEYWORDS);
 
-	if (dynamicMetaKeywords != null) {
+	if (pageKeywordsListMergeable != null) {
 		if (Validator.isNotNull(metaKeywords)) {
 			StringBundler sb = new StringBundler(4);
 
-			sb.append(dynamicMetaKeywords.mergeToString(StringPool.COMMA));
+			sb.append(pageKeywordsListMergeable.mergeToString(StringPool.COMMA));
 			sb.append(StringPool.COMMA);
 			sb.append(StringPool.SPACE);
 			sb.append(metaKeywords);
@@ -95,7 +94,7 @@
 			metaKeywords = sb.toString();
 		}
 		else {
-			metaKeywords = dynamicMetaKeywords.mergeToString(StringPool.COMMA);
+			metaKeywords = pageKeywordsListMergeable.mergeToString(StringPool.COMMA);
 		}
 
 	}
