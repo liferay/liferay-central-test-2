@@ -5178,7 +5178,7 @@ public class PortalImpl implements Portal {
 		else if (PropsValues.LAYOUT_SHOW_HTTP_STATUS) {
 			response.setStatus(status);
 
-			SessionErrors.add(request, e.getClass().getName(), e);
+			SessionErrors.add(request, e.getClass(), e);
 
 			RequestDispatcher requestDispatcher =
 				servletContext.getRequestDispatcher(redirect);

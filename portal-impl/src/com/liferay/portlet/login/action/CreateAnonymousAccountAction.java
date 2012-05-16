@@ -132,7 +132,7 @@ public class CreateAnonymousAccountAction extends PortletAction {
 					themeDisplay.getCompanyId(), emailAddress);
 
 				if (user.getStatus() != WorkflowConstants.STATUS_INCOMPLETE) {
-					SessionErrors.add(actionRequest, e.getClass().getName());
+					SessionErrors.add(actionRequest, e.getClass());
 				}
 				else {
 					sendRedirect(

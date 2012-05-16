@@ -99,7 +99,7 @@ public class EditStructureAction extends PortletAction {
 			if (e instanceof NoSuchStructureException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(actionRequest, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass());
 
 				setForward(actionRequest, "portlet.journal.error");
 			}
@@ -151,7 +151,7 @@ public class EditStructureAction extends PortletAction {
 			if (//e instanceof NoSuchStructureException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(renderRequest, e.getClass().getName());
+				SessionErrors.add(renderRequest, e.getClass());
 
 				return mapping.findForward("portlet.journal.error");
 			}

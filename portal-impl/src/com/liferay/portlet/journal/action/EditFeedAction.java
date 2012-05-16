@@ -73,7 +73,7 @@ public class EditFeedAction extends PortletAction {
 			if (e instanceof NoSuchFeedException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(actionRequest, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass());
 
 				setForward(actionRequest, "portlet.journal.error");
 			}
@@ -84,7 +84,7 @@ public class EditFeedAction extends PortletAction {
 					 e instanceof FeedTargetLayoutFriendlyUrlException ||
 					 e instanceof FeedTargetPortletIdException) {
 
-				SessionErrors.add(actionRequest, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass());
 			}
 			else {
 				throw e;
@@ -113,7 +113,7 @@ public class EditFeedAction extends PortletAction {
 		}
 		catch (Exception e) {
 			if (e instanceof PrincipalException) {
-				SessionErrors.add(renderRequest, e.getClass().getName());
+				SessionErrors.add(renderRequest, e.getClass());
 
 				return mapping.findForward("portlet.journal.error");
 			}

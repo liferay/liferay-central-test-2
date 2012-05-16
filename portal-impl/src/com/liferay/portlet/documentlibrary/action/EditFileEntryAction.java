@@ -190,7 +190,7 @@ public class EditFileEntryAction extends PortletAction {
 						actionRequest, dle.getClass().getName(), dle.getLock());
 				}
 				else {
-					SessionErrors.add(actionRequest, e.getClass().getName());
+					SessionErrors.add(actionRequest, e.getClass());
 				}
 
 				setForward(actionRequest, "portlet.document_library.error");
@@ -207,7 +207,7 @@ public class EditFileEntryAction extends PortletAction {
 				if (!cmd.equals(Constants.ADD_MULTIPLE) &&
 					!cmd.equals(Constants.ADD_TEMP)) {
 
-					SessionErrors.add(actionRequest, e.getClass().getName());
+					SessionErrors.add(actionRequest, e.getClass());
 
 					return;
 				}
@@ -241,7 +241,7 @@ public class EditFileEntryAction extends PortletAction {
 						ServletResponseConstants.SC_FILE_SIZE_EXCEPTION);
 				}
 
-				SessionErrors.add(actionRequest, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass());
 			}
 			else if (e instanceof AssetCategoryException ||
 					 e instanceof AssetTagException) {
@@ -268,7 +268,7 @@ public class EditFileEntryAction extends PortletAction {
 				e instanceof NoSuchFileVersionException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(renderRequest, e.getClass().getName());
+				SessionErrors.add(renderRequest, e.getClass());
 
 				return mapping.findForward("portlet.document_library.error");
 			}

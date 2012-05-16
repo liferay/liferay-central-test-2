@@ -107,10 +107,10 @@ public class EditEntryAction extends PortletAction {
 					DuplicateLockException dle = (DuplicateLockException)e;
 
 					SessionErrors.add(
-						actionRequest, dle.getClass().getName(), dle.getLock());
+						actionRequest, dle.getClass(), dle.getLock());
 				}
 				else {
-					SessionErrors.add(actionRequest, e.getClass().getName());
+					SessionErrors.add(actionRequest, e.getClass());
 				}
 
 				setForward(actionRequest, "portlet.document_library.error");
@@ -128,12 +128,12 @@ public class EditEntryAction extends PortletAction {
 						ServletResponseConstants.SC_DUPLICATE_FILE_EXCEPTION);
 				}
 
-				SessionErrors.add(actionRequest, e.getClass().getName());
+				SessionErrors.add(actionRequest, e.getClass());
 			}
 			else if (e instanceof AssetCategoryException ||
 					 e instanceof AssetTagException) {
 
-				SessionErrors.add(actionRequest, e.getClass().getName(), e);
+				SessionErrors.add(actionRequest, e.getClass(), e);
 			}
 			else {
 				throw e;
@@ -156,7 +156,7 @@ public class EditEntryAction extends PortletAction {
 			if (e instanceof NoSuchFileEntryException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(renderRequest, e.getClass().getName());
+				SessionErrors.add(renderRequest, e.getClass());
 
 				return mapping.findForward("portlet.document_library.error");
 			}
