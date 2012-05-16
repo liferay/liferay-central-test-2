@@ -15,7 +15,6 @@
 package com.liferay.portlet.dynamicdatamapping.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
-import com.liferay.portal.kernel.util.MethodCache;
 import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
@@ -532,7 +531,6 @@ public class DDMStructureLocalServiceUtil {
 
 			ReferenceRegistry.registerReference(DDMStructureLocalServiceUtil.class,
 				"_service");
-			MethodCache.remove(DDMStructureLocalService.class);
 		}
 
 		return _service;
