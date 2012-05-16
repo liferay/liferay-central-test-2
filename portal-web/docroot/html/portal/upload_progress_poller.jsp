@@ -50,7 +50,7 @@ if (percent.floatValue() >= 100) {
 	;(function() {
 		var progressId = parent['<%= HtmlUtil.escapeJS(uploadProgressId) %>'];
 
-		if (progressId && typeof progressId.updateBar == 'function') {
+		if (progressId && (typeof progressId.updateBar == 'function')) {
 			progressId.updateBar(<%= percent.intValue() %>, '<%= HtmlUtil.escapeJS(fileName) %>');
 		}
 
