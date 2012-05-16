@@ -12,12 +12,10 @@
  * details.
  */
 
-package com.liferay.portalweb.portlet.announcements.announcementsentry.markasreadannouncementsentrygeneral;
+package com.liferay.portalweb.portlet.announcements.portlet.addportletannouncements;
 
 import com.liferay.portalweb.portal.BaseTestSuite;
 import com.liferay.portalweb.portal.util.TearDownPageTest;
-import com.liferay.portalweb.portlet.announcements.portlet.addportletannouncements.AddPageAnnouncementsTest;
-import com.liferay.portalweb.portlet.announcements.portlet.addportletannouncements.AddPortletAnnouncementsTest;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -25,16 +23,11 @@ import junit.framework.TestSuite;
 /**
  * @author Brian Wing Shun Chan
  */
-public class MarkAsReadAnnouncementsEntryGeneralTests extends BaseTestSuite {
+public class AddPortletAnnouncementsTests extends BaseTestSuite {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
-		testSuite.addTestSuite(SelectTimeZonePacificStandardTimeCPMATest.class);
 		testSuite.addTestSuite(AddPageAnnouncementsTest.class);
 		testSuite.addTestSuite(AddPortletAnnouncementsTest.class);
-		testSuite.addTestSuite(AddAnnouncementsEntryGeneralTest.class);
-		testSuite.addTestSuite(MarkAsReadAnnouncementsEntryGeneralTest.class);
-		testSuite.addTestSuite(TearDownAnnouncementsEntryTest.class);
-		testSuite.addTestSuite(TearDownTimeZoneTest.class);
 		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
