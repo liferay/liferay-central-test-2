@@ -268,7 +268,6 @@ public class DDMPortletDataHandlerImpl extends BasePortletDataHandler {
 			"group-id", String.valueOf(portletDataContext.getScopeGroupId()));
 
 		Element structuresElement = rootElement.addElement("structures");
-		Element templatesElement = rootElement.addElement("templates");
 
 		List<DDMStructure> ddmStructures = DDMStructureUtil.findByGroupId(
 			portletDataContext.getScopeGroupId());
@@ -281,6 +280,8 @@ public class DDMPortletDataHandlerImpl extends BasePortletDataHandler {
 					portletDataContext, structuresElement, structure);
 			}
 		}
+
+		Element templatesElement = rootElement.addElement("templates");
 
 		if (portletDataContext.getBooleanParameter(_NAMESPACE, "templates")) {
 			List<DDMTemplate> templates = DDMTemplateUtil.findByGroupId(
