@@ -12,48 +12,28 @@
  * details.
  */
 
-package com.liferay.portal.jsonwebservice.dependencies;
+package com.liferay.portal.jsonwebservice;
+
+import com.liferay.portal.kernel.jsonwebservice.JSONWebService;
 
 /**
  * @author Igor Spasic
  */
-public class FooDataImpl implements FooData {
+public class CamelFooService {
 
-	public int getHeight() {
-		return _height;
+	@JSONWebService("cool-new-world")
+	public static void braveNewWorld() {
 	}
 
-	public int getId() {
-		return _id;
+	public static void hello() {
 	}
 
-	public String getName() {
-		return _name;
+	public static void helloWorld() {
 	}
 
-	public String getValue() {
-		return _value;
+	@JSONWebService(method = "POST")
+	public static String post(String value) {
+		return "post " + value;
 	}
-
-	public void setHeight(int height) {
-		_height = height;
-	}
-
-	public void setId(int id) {
-		_id = id;
-	}
-
-	public void setName(String name) {
-		_name = name;
-	}
-
-	public void setValue(String value) {
-		_value = value;
-	}
-
-	private int _height = 177;
-	private int _id = -1;
-	private String _name = "John Doe";
-	private String _value = "foo!";
 
 }

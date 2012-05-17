@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.jsonwebservice.dependencies;
+package com.liferay.portal.jsonwebservice;
 
 import com.liferay.portal.service.ServiceContext;
 
@@ -25,8 +25,8 @@ import java.util.Locale;
  */
 public class FooService {
 
-	public static FooDataImpl getFooData(int id) {
-		FooDataImpl fooData = new FooDataImpl();
+	public static FooData getFooData(int id) {
+		FooData fooData = new FooDataImpl();
 
 		fooData.setId(id);
 
@@ -69,7 +69,9 @@ public class FooService {
 	}
 
 	public static String srvcctx(ServiceContext serviceContext) {
-		return serviceContext.getClass().getName();
+		Class<?> clazz = serviceContext.getClass();
+
+		return clazz.getName();
 	}
 
 	public static String use1(FooDataImpl fooData) {

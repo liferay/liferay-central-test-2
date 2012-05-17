@@ -12,28 +12,19 @@
  * details.
  */
 
-package com.liferay.portal.jsonwebservice.dependencies;
+package com.liferay.portal.jsonwebservice;
 
-import com.liferay.portal.kernel.jsonwebservice.JSONWebService;
+import java.util.List;
 
 /**
  * @author Igor Spasic
  */
-public class CamelFooService {
+public class OpenService {
 
-	@JSONWebService("cool-new-world")
-	public static void braveNewWorld() {
+	public static void run1(List<Long> fooIds) {
 	}
 
-	public static void hello() {
-	}
-
-	public static void helloWorld() {
-	}
-
-	@JSONWebService(method = "POST")
-	public static String post(String value) {
-		return "post " + value;
+	public static void run2(byte[] bytes) {
 	}
 
 }

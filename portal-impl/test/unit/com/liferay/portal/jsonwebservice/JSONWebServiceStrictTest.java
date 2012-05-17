@@ -14,8 +14,8 @@
 
 package com.liferay.portal.jsonwebservice;
 
-import com.liferay.portal.jsonwebservice.dependencies.CamelFooService;
 import com.liferay.portal.kernel.jsonwebservice.JSONWebServiceAction;
+import com.liferay.portal.kernel.servlet.HttpMethods;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 
@@ -37,7 +37,7 @@ import static junit.framework.Assert.fail;
  */
 @PrepareForTest(PropsUtil.class)
 @RunWith(PowerMockRunner.class)
-public class JSONWebServiceStrictTest extends JSONWebServiceAbstractTest {
+public class JSONWebServiceStrictTest extends BaseJSONWebServiceTestCase {
 
 	@Before
 	public void setUp() throws Exception {
@@ -53,23 +53,24 @@ public class JSONWebServiceStrictTest extends JSONWebServiceAbstractTest {
 	@Test
 	public void testStrictHttpMethod() throws Exception {
 		initPortalServices();
+
 		registerActionClass(CamelFooService.class);
 
 		MockHttpServletRequest mockHttpServletRequest = createHttpRequest(
 			"/camelfoo/post/value/123");
 
 		try {
-			lookupAction(mockHttpServletRequest);
+			lookupJSONWebServiceAction(mockHttpServletRequest);
 
 			fail();
 		}
-		catch (RuntimeException ignore) {
+		catch (RuntimeException re) {
 		}
 
 		mockHttpServletRequest = createHttpRequest(
-			"/camelfoo/post/value/123", "POST");
+			"/camelfoo/post/value/123", HttpMethods.POST);
 
-		JSONWebServiceAction jsonWebServiceAction = lookupAction(
+		JSONWebServiceAction jsonWebServiceAction = lookupJSONWebServiceAction(
 			mockHttpServletRequest);
 
 		assertNotNull(jsonWebServiceAction);

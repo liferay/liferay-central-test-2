@@ -12,13 +12,48 @@
  * details.
  */
 
-package com.liferay.portal.jsonwebservice.dependencies;
+package com.liferay.portal.jsonwebservice;
 
 /**
  * @author Igor Spasic
  */
-public interface FooData {
+public class FooDataImpl implements FooData {
 
-	public String getValue();
+	public int getHeight() {
+		return _height;
+	}
+
+	public int getId() {
+		return _id;
+	}
+
+	public String getName() {
+		return _name;
+	}
+
+	public String getValue() {
+		return _value;
+	}
+
+	public void setHeight(int height) {
+		_height = height;
+	}
+
+	public void setId(int id) {
+		_id = id;
+	}
+
+	public void setName(String name) {
+		_name = name;
+	}
+
+	public void setValue(String value) {
+		_value = value;
+	}
+
+	private int _height = 177;
+	private int _id = -1;
+	private String _name = "John Doe";
+	private String _value = "foo!";
 
 }

@@ -14,7 +14,6 @@
 
 package com.liferay.portal.jsonwebservice;
 
-import com.liferay.portal.jsonwebservice.dependencies.OpenService;
 import com.liferay.portal.kernel.jsonwebservice.JSONWebServiceAction;
 import com.liferay.portal.kernel.util.StringBundler;
 
@@ -28,7 +27,7 @@ import org.springframework.mock.web.MockHttpServletRequest;
 /**
  * @author Igor Spasic
  */
-public class JSONWebServiceSecureTest extends JSONWebServiceAbstractTest {
+public class JSONWebServiceSecureTest extends BaseJSONWebServiceTestCase {
 
 	@BeforeClass
 	public static void init() throws Exception {
@@ -39,11 +38,10 @@ public class JSONWebServiceSecureTest extends JSONWebServiceAbstractTest {
 
 	@Test
 	public void testAttack1() throws Exception {
-
 		MockHttpServletRequest mockHttpServletRequest = createHttpRequest(
 			"/open/run1/foo-ids/[1,2,{\"class\":\"java.lang.Thread\"}]");
 
-		JSONWebServiceAction jsonWebServiceAction = lookupAction(
+		JSONWebServiceAction jsonWebServiceAction = lookupJSONWebServiceAction(
 			mockHttpServletRequest);
 
 		try {
@@ -51,13 +49,12 @@ public class JSONWebServiceSecureTest extends JSONWebServiceAbstractTest {
 
 			TestCase.fail();
 		}
-		catch (ClassCastException ignore) {
+		catch (ClassCastException cce) {
 		}
 	}
 
 	@Test
 	public void testAttack2() throws Exception {
-
 		MockHttpServletRequest mockHttpServletRequest = createHttpRequest(
 			"/open/run2");
 
@@ -87,7 +84,7 @@ public class JSONWebServiceSecureTest extends JSONWebServiceAbstractTest {
 
 		mockHttpServletRequest.setParameter("bytes", sb.toString());
 
-		JSONWebServiceAction jsonWebServiceAction = lookupAction(
+		JSONWebServiceAction jsonWebServiceAction = lookupJSONWebServiceAction(
 			mockHttpServletRequest);
 
 		try {
@@ -95,7 +92,7 @@ public class JSONWebServiceSecureTest extends JSONWebServiceAbstractTest {
 
 			TestCase.fail();
 		}
-		catch (ClassCastException ignore) {
+		catch (ClassCastException cce) {
 		}
 	}
 

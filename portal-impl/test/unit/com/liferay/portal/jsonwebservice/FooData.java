@@ -12,19 +12,15 @@
  * details.
  */
 
-package com.liferay.portal.jsonwebservice.dependencies;
-
-import java.util.List;
+package com.liferay.portal.jsonwebservice;
 
 /**
  * @author Igor Spasic
  */
-public class OpenService {
+public interface FooData {
 
-	public static void run1(List<Long> fooIds) {
-	}
+	public void setId(int id);
 
-	public static void run2(byte[] bytes) {
-	}
+	public String getValue();
 
 }
