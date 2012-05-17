@@ -28,7 +28,8 @@ public class AddWHEntryContent150CharacterTest extends BaseTestCase {
 			selenium.getText("//span[@class='portlet-title-default']"));
 		assertTrue(selenium.isElementPresent(
 				"//div[contains(@id,'_2_WAR_microblogsportlet_autocompleteContent')]"));
-		assertEquals(RuntimeVariables.replace("You have no microblogs entry."),
+		assertEquals(RuntimeVariables.replace(
+				"You do not have any microblog entries."),
 			selenium.getText("//div[@class='portlet-msg-info']"));
 		selenium.clickAt("//div[contains(@id,'_2_WAR_microblogsportlet_autocompleteContent')]",
 			RuntimeVariables.replace("Update your status..."));
