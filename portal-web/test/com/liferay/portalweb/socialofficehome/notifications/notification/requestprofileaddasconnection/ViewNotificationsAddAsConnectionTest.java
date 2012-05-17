@@ -67,30 +67,8 @@ public class ViewNotificationsAddAsConnectionTest extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace("Confirm"),
 			selenium.getText(
 				"//span[@class='lfr-user-action-item lfr-user-action-confirm']/a"));
-		selenium.clickAt("//span[@class='lfr-user-action-item lfr-user-action-confirm']/a",
-			RuntimeVariables.replace("Confirm"));
-		selenium.waitForPageToLoad("30000");
-		loadRequiredJavaScriptModules();
-
-		for (int second = 0;; second++) {
-			if (second >= 90) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isVisible("//span[@class='notification-count']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.clickAt("//span[@class='notification-count']",
-			RuntimeVariables.replace("Notification Count"));
-		assertFalse(selenium.isTextPresent(
-				"Social01 would like to add you as a connection."));
+		assertEquals(RuntimeVariables.replace("Ignore"),
+			selenium.getText(
+				"//span[@class='lfr-user-action-item lfr-user-action-ignore']/a"));
 	}
 }

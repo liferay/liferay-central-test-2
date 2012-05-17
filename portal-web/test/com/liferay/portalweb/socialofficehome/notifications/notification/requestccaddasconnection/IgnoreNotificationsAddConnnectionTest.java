@@ -64,11 +64,11 @@ public class IgnoreNotificationsAddConnnectionTest extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace(
 				"Social01 would like to add you as a connection."),
 			selenium.getText("//div[@class='title']"));
-		assertEquals(RuntimeVariables.replace("Confirm"),
+		assertEquals(RuntimeVariables.replace("Ignore"),
 			selenium.getText(
-				"//span[@class='lfr-user-action-item lfr-user-action-confirm']/a"));
-		selenium.clickAt("//span[@class='lfr-user-action-item lfr-user-action-confirm']/a",
-			RuntimeVariables.replace("Confirm"));
+				"//span[@class='lfr-user-action-item lfr-user-action-ignore']/a"));
+		selenium.clickAt("//span[@class='lfr-user-action-item lfr-user-action-ignore']/a",
+			RuntimeVariables.replace("Ignore"));
 		selenium.waitForPageToLoad("30000");
 		loadRequiredJavaScriptModules();
 
