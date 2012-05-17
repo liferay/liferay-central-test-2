@@ -306,8 +306,9 @@ public class DDMPortletDataHandlerImpl extends BasePortletDataHandler {
 		Element templatesElement = rootElement.addElement("templates");
 
 		if (portletDataContext.getBooleanParameter(_NAMESPACE, "templates")) {
-			List<DDMTemplate> templates = DDMTemplateUtil.findByGroupId(
-				portletDataContext.getScopeGroupId());
+			List<DDMTemplate> templates = DDMTemplateUtil.findByG_C(
+				portletDataContext.getScopeGroupId(),
+				PortalUtil.getClassNameId(DDMStructure.class));
 
 			for (DDMTemplate template : templates) {
 				if (portletDataContext.isWithinDateRange(
