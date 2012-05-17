@@ -50,7 +50,8 @@ public class ViewLinkMicroblogsTest extends BaseTestCase {
 			selenium.getText("//span[@class='portlet-title-default']"));
 		assertTrue(selenium.isElementPresent(
 				"//div[contains(@id,'_1_WAR_microblogsportlet_autocompleteContent')]"));
-		assertEquals(RuntimeVariables.replace("You have no microblogs entry."),
+		assertEquals(RuntimeVariables.replace(
+				"You do not have any microblog entries."),
 			selenium.getText("//div[@class='portlet-msg-info']"));
 		assertEquals(RuntimeVariables.replace("Sites"),
 			selenium.getText("//div[@id='so-sidebar']/h3"));

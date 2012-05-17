@@ -49,7 +49,8 @@ public class ViewLinkHomeTest extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace("Update your status..."),
 			selenium.getText(
 				"//div[contains(@id,'_2_WAR_microblogsportlet_autocompleteContent')]"));
-		assertEquals(RuntimeVariables.replace("You have no microblogs entry."),
+		assertEquals(RuntimeVariables.replace(
+				"You do not have any microblog entries."),
 			selenium.getText("xPath=(//div[@class='portlet-msg-info'])[1]"));
 		assertEquals(RuntimeVariables.replace("Activities"),
 			selenium.getText("xPath=(//h1[@class='portlet-title'])[2]"));
