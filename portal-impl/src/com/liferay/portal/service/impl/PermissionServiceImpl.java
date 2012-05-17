@@ -270,7 +270,7 @@ public class PermissionServiceImpl extends PermissionServiceBaseImpl {
 			if (resourceBlockLocalService.isSupported(name)) {
 				PermissionedModel permissionedModel =
 					resourceBlockLocalService.getPermissionedModel(
-						name, Long.valueOf(primKey));
+						name, GetterUtil.getLong(primKey));
 
 				if (permissionedModel instanceof GroupedModel) {
 					GroupedModel groupedModel = (GroupedModel)permissionedModel;
