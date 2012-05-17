@@ -71,7 +71,8 @@ public class SOUs_ViewDeleteRepostMicroblogsContentTest extends BaseTestCase {
 			RuntimeVariables.replace("Microblogs"));
 		selenium.waitForPageToLoad("30000");
 		loadRequiredJavaScriptModules();
-		assertEquals(RuntimeVariables.replace("You have no microblogs entry."),
+		assertEquals(RuntimeVariables.replace(
+				"You do not have any microblog entries."),
 			selenium.getText("//div[@class='portlet-msg-info']"));
 		assertFalse(selenium.isTextPresent(
 				"Social01 Office01 User01 Reposted From Joe Bloggs"));

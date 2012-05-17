@@ -63,7 +63,8 @@ public class DeleteMicroblogsContentTest extends BaseTestCase {
 			}
 
 			try {
-				if (RuntimeVariables.replace("You have no microblogs entry.")
+				if (RuntimeVariables.replace(
+							"You do not have any microblog entries.")
 										.equals(selenium.getText(
 								"//div[@class='portlet-msg-info']"))) {
 					break;
@@ -75,7 +76,8 @@ public class DeleteMicroblogsContentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertEquals(RuntimeVariables.replace("You have no microblogs entry."),
+		assertEquals(RuntimeVariables.replace(
+				"You do not have any microblog entries."),
 			selenium.getText("//div[@class='portlet-msg-info']"));
 		assertFalse(selenium.isTextPresent("Microblogs Post"));
 	}
