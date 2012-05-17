@@ -65,7 +65,7 @@ public class CMISFolder extends CMISModel implements Folder {
 
 		if (_cmisFolder.isRootFolder() &&
 			(actionId.equals(ActionKeys.DELETE) ||
-				actionId.equals(ActionKeys.UPDATE))) {
+			 actionId.equals(ActionKeys.UPDATE))) {
 
 			try {
 				Folder folder = DLAppLocalServiceUtil.getMountFolder(
