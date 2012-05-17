@@ -44,45 +44,28 @@ import org.junit.runner.RunWith;
 public class OrganizationLocalServiceTest {
 
 	@Test
-	public void testAddOrganizationWithIndirectAssociation() throws Exception {
-		User user = ServiceTestUtil.addUser(
-			"testAddOrganizationWithIndirectAssociation", false, null);
+	public void testAddOrganization() throws Exception {
+		User user = ServiceTestUtil.addUser("testAddOrganization", false, null);
 
 		Organization organization =
 			OrganizationLocalServiceUtil.addOrganization(
 				user.getUserId(),
 				OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID,
-				"testAddOrganizationWithIndirectAssociation",
+				"testAddOrganization",
 				OrganizationConstants.TYPE_REGULAR_ORGANIZATION, false, 0, 0,
 				ListTypeConstants.ORGANIZATION_STATUS_DEFAULT, StringPool.BLANK,
 				false, null);
 
-		try {
-			List<Organization> organizations = user.getOrganizations(true);
+		List<Organization> organizations = user.getOrganizations(true);
 
-			Assert.assertTrue(organizations.contains(organization));
-		}
-		finally {
-			OrganizationLocalServiceUtil.deleteOrganization(
-				organization.getOrganizationId());
-		}
-	}
-
-	@Test
-	@Transactional
-	public void testAddOrganizationWithoutDirectAssociation() throws Exception {
-		Organization organization =
-			OrganizationLocalServiceUtil.addOrganization(
-				TestPropsValues.getUserId(),
-				OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID,
-				"testAddOrganizationWithoutDirectAssociation",
-				OrganizationConstants.TYPE_REGULAR_ORGANIZATION, false, 0, 0,
-				ListTypeConstants.ORGANIZATION_STATUS_DEFAULT, StringPool.BLANK,
-				false, null);
+		Assert.assertTrue(organizations.contains(organization));
 
 		Assert.assertFalse(
 			OrganizationLocalServiceUtil.hasUserOrganization(
-				TestPropsValues.getUserId(), organization.getOrganizationId()));
+				user.getUserId(), organization.getOrganizationId()));
+
+		OrganizationLocalServiceUtil.deleteOrganization(
+			organization.getOrganizationId());
 	}
 
 }
