@@ -300,8 +300,10 @@ public abstract class PortalPreferencesLocalServiceBaseImpl
 	}
 
 	public DynamicQuery dynamicQuery() {
+		Class<?> clazz = getClass();
+
 		return DynamicQueryFactoryUtil.forClass(PortalPreferences.class,
-			getClassLoader());
+			clazz.getClassLoader());
 	}
 
 	/**

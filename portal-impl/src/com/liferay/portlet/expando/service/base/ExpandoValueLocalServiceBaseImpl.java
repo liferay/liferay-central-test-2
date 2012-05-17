@@ -131,8 +131,10 @@ public abstract class ExpandoValueLocalServiceBaseImpl
 	}
 
 	public DynamicQuery dynamicQuery() {
+		Class<?> clazz = getClass();
+
 		return DynamicQueryFactoryUtil.forClass(ExpandoValue.class,
-			getClassLoader());
+			clazz.getClassLoader());
 	}
 
 	/**

@@ -300,8 +300,10 @@ public abstract class PortletItemLocalServiceBaseImpl
 	}
 
 	public DynamicQuery dynamicQuery() {
+		Class<?> clazz = getClass();
+
 		return DynamicQueryFactoryUtil.forClass(PortletItem.class,
-			getClassLoader());
+			clazz.getClassLoader());
 	}
 
 	/**

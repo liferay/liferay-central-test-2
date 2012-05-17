@@ -138,8 +138,10 @@ public abstract class MDRRuleGroupLocalServiceBaseImpl
 	}
 
 	public DynamicQuery dynamicQuery() {
+		Class<?> clazz = getClass();
+
 		return DynamicQueryFactoryUtil.forClass(MDRRuleGroup.class,
-			getClassLoader());
+			clazz.getClassLoader());
 	}
 
 	/**

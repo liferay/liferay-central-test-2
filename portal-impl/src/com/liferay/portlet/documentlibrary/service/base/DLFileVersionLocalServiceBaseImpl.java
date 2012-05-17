@@ -152,8 +152,10 @@ public abstract class DLFileVersionLocalServiceBaseImpl
 	}
 
 	public DynamicQuery dynamicQuery() {
+		Class<?> clazz = getClass();
+
 		return DynamicQueryFactoryUtil.forClass(DLFileVersion.class,
-			getClassLoader());
+			clazz.getClassLoader());
 	}
 
 	/**

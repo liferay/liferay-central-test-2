@@ -150,8 +150,10 @@ public abstract class AssetTagStatsLocalServiceBaseImpl
 	}
 
 	public DynamicQuery dynamicQuery() {
+		Class<?> clazz = getClass();
+
 		return DynamicQueryFactoryUtil.forClass(AssetTagStats.class,
-			getClassLoader());
+			clazz.getClassLoader());
 	}
 
 	/**

@@ -144,8 +144,10 @@ public abstract class ShoppingCategoryLocalServiceBaseImpl
 	}
 
 	public DynamicQuery dynamicQuery() {
+		Class<?> clazz = getClass();
+
 		return DynamicQueryFactoryUtil.forClass(ShoppingCategory.class,
-			getClassLoader());
+			clazz.getClassLoader());
 	}
 
 	/**

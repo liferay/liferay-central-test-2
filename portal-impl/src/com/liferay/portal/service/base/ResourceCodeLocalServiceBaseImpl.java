@@ -300,8 +300,10 @@ public abstract class ResourceCodeLocalServiceBaseImpl
 	}
 
 	public DynamicQuery dynamicQuery() {
+		Class<?> clazz = getClass();
+
 		return DynamicQueryFactoryUtil.forClass(ResourceCode.class,
-			getClassLoader());
+			clazz.getClassLoader());
 	}
 
 	/**

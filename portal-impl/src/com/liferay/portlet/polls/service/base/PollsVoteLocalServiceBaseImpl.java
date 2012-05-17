@@ -130,8 +130,10 @@ public abstract class PollsVoteLocalServiceBaseImpl extends BaseLocalServiceImpl
 	}
 
 	public DynamicQuery dynamicQuery() {
+		Class<?> clazz = getClass();
+
 		return DynamicQueryFactoryUtil.forClass(PollsVote.class,
-			getClassLoader());
+			clazz.getClassLoader());
 	}
 
 	/**

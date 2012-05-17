@@ -304,8 +304,10 @@ public abstract class WorkflowDefinitionLinkLocalServiceBaseImpl
 	}
 
 	public DynamicQuery dynamicQuery() {
+		Class<?> clazz = getClass();
+
 		return DynamicQueryFactoryUtil.forClass(WorkflowDefinitionLink.class,
-			getClassLoader());
+			clazz.getClassLoader());
 	}
 
 	/**

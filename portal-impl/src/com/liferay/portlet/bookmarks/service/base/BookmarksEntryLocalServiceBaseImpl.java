@@ -144,8 +144,10 @@ public abstract class BookmarksEntryLocalServiceBaseImpl
 	}
 
 	public DynamicQuery dynamicQuery() {
+		Class<?> clazz = getClass();
+
 		return DynamicQueryFactoryUtil.forClass(BookmarksEntry.class,
-			getClassLoader());
+			clazz.getClassLoader());
 	}
 
 	/**

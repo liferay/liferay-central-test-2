@@ -300,8 +300,10 @@ public abstract class PluginSettingLocalServiceBaseImpl
 	}
 
 	public DynamicQuery dynamicQuery() {
+		Class<?> clazz = getClass();
+
 		return DynamicQueryFactoryUtil.forClass(PluginSetting.class,
-			getClassLoader());
+			clazz.getClassLoader());
 	}
 
 	/**

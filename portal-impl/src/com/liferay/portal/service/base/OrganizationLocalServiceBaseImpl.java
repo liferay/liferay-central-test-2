@@ -309,8 +309,10 @@ public abstract class OrganizationLocalServiceBaseImpl
 	}
 
 	public DynamicQuery dynamicQuery() {
+		Class<?> clazz = getClass();
+
 		return DynamicQueryFactoryUtil.forClass(Organization.class,
-			getClassLoader());
+			clazz.getClassLoader());
 	}
 
 	/**

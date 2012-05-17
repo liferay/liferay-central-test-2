@@ -153,8 +153,10 @@ public abstract class DLContentLocalServiceBaseImpl extends BaseLocalServiceImpl
 	}
 
 	public DynamicQuery dynamicQuery() {
+		Class<?> clazz = getClass();
+
 		return DynamicQueryFactoryUtil.forClass(DLContent.class,
-			getClassLoader());
+			clazz.getClassLoader());
 	}
 
 	/**

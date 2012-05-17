@@ -300,8 +300,10 @@ public abstract class PermissionLocalServiceBaseImpl
 	}
 
 	public DynamicQuery dynamicQuery() {
+		Class<?> clazz = getClass();
+
 		return DynamicQueryFactoryUtil.forClass(Permission.class,
-			getClassLoader());
+			clazz.getClassLoader());
 	}
 
 	/**

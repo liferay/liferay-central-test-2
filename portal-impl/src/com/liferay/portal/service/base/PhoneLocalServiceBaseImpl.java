@@ -297,7 +297,10 @@ public abstract class PhoneLocalServiceBaseImpl extends BaseLocalServiceImpl
 	}
 
 	public DynamicQuery dynamicQuery() {
-		return DynamicQueryFactoryUtil.forClass(Phone.class, getClassLoader());
+		Class<?> clazz = getClass();
+
+		return DynamicQueryFactoryUtil.forClass(Phone.class,
+			clazz.getClassLoader());
 	}
 
 	/**

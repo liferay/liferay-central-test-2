@@ -300,8 +300,10 @@ public abstract class LayoutBranchLocalServiceBaseImpl
 	}
 
 	public DynamicQuery dynamicQuery() {
+		Class<?> clazz = getClass();
+
 		return DynamicQueryFactoryUtil.forClass(LayoutBranch.class,
-			getClassLoader());
+			clazz.getClassLoader());
 	}
 
 	/**

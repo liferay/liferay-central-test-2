@@ -135,8 +135,10 @@ public abstract class BookmarksFolderLocalServiceBaseImpl
 	}
 
 	public DynamicQuery dynamicQuery() {
+		Class<?> clazz = getClass();
+
 		return DynamicQueryFactoryUtil.forClass(BookmarksFolder.class,
-			getClassLoader());
+			clazz.getClassLoader());
 	}
 
 	/**

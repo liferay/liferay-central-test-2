@@ -300,8 +300,10 @@ public abstract class ServiceComponentLocalServiceBaseImpl
 	}
 
 	public DynamicQuery dynamicQuery() {
+		Class<?> clazz = getClass();
+
 		return DynamicQueryFactoryUtil.forClass(ServiceComponent.class,
-			getClassLoader());
+			clazz.getClassLoader());
 	}
 
 	/**

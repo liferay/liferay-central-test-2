@@ -297,7 +297,10 @@ public abstract class ResourceLocalServiceBaseImpl extends BaseLocalServiceImpl
 	}
 
 	public DynamicQuery dynamicQuery() {
-		return DynamicQueryFactoryUtil.forClass(Resource.class, getClassLoader());
+		Class<?> clazz = getClass();
+
+		return DynamicQueryFactoryUtil.forClass(Resource.class,
+			clazz.getClassLoader());
 	}
 
 	/**

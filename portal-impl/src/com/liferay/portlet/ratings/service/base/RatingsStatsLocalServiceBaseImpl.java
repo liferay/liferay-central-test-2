@@ -128,8 +128,10 @@ public abstract class RatingsStatsLocalServiceBaseImpl
 	}
 
 	public DynamicQuery dynamicQuery() {
+		Class<?> clazz = getClass();
+
 		return DynamicQueryFactoryUtil.forClass(RatingsStats.class,
-			getClassLoader());
+			clazz.getClassLoader());
 	}
 
 	/**

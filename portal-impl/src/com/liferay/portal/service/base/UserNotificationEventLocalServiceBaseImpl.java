@@ -302,8 +302,10 @@ public abstract class UserNotificationEventLocalServiceBaseImpl
 	}
 
 	public DynamicQuery dynamicQuery() {
+		Class<?> clazz = getClass();
+
 		return DynamicQueryFactoryUtil.forClass(UserNotificationEvent.class,
-			getClassLoader());
+			clazz.getClassLoader());
 	}
 
 	/**

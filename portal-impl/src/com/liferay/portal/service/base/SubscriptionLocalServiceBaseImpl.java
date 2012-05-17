@@ -313,8 +313,10 @@ public abstract class SubscriptionLocalServiceBaseImpl
 	}
 
 	public DynamicQuery dynamicQuery() {
+		Class<?> clazz = getClass();
+
 		return DynamicQueryFactoryUtil.forClass(Subscription.class,
-			getClassLoader());
+			clazz.getClassLoader());
 	}
 
 	/**

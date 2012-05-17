@@ -160,8 +160,10 @@ public abstract class DLFileShortcutLocalServiceBaseImpl
 	}
 
 	public DynamicQuery dynamicQuery() {
+		Class<?> clazz = getClass();
+
 		return DynamicQueryFactoryUtil.forClass(DLFileShortcut.class,
-			getClassLoader());
+			clazz.getClassLoader());
 	}
 
 	/**

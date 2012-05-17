@@ -156,8 +156,10 @@ public abstract class DLFileRankLocalServiceBaseImpl
 	}
 
 	public DynamicQuery dynamicQuery() {
+		Class<?> clazz = getClass();
+
 		return DynamicQueryFactoryUtil.forClass(DLFileRank.class,
-			getClassLoader());
+			clazz.getClassLoader());
 	}
 
 	/**

@@ -300,8 +300,10 @@ public abstract class RepositoryEntryLocalServiceBaseImpl
 	}
 
 	public DynamicQuery dynamicQuery() {
+		Class<?> clazz = getClass();
+
 		return DynamicQueryFactoryUtil.forClass(RepositoryEntry.class,
-			getClassLoader());
+			clazz.getClassLoader());
 	}
 
 	/**

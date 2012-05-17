@@ -139,8 +139,10 @@ public abstract class DDMStructureLocalServiceBaseImpl
 	}
 
 	public DynamicQuery dynamicQuery() {
+		Class<?> clazz = getClass();
+
 		return DynamicQueryFactoryUtil.forClass(DDMStructure.class,
-			getClassLoader());
+			clazz.getClassLoader());
 	}
 
 	/**

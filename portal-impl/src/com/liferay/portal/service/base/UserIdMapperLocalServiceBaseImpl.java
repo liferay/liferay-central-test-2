@@ -300,8 +300,10 @@ public abstract class UserIdMapperLocalServiceBaseImpl
 	}
 
 	public DynamicQuery dynamicQuery() {
+		Class<?> clazz = getClass();
+
 		return DynamicQueryFactoryUtil.forClass(UserIdMapper.class,
-			getClassLoader());
+			clazz.getClassLoader());
 	}
 
 	/**

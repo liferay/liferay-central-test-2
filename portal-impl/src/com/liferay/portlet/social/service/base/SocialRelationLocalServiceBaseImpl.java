@@ -140,8 +140,10 @@ public abstract class SocialRelationLocalServiceBaseImpl
 	}
 
 	public DynamicQuery dynamicQuery() {
+		Class<?> clazz = getClass();
+
 		return DynamicQueryFactoryUtil.forClass(SocialRelation.class,
-			getClassLoader());
+			clazz.getClassLoader());
 	}
 
 	/**

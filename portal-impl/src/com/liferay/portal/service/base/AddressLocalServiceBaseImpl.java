@@ -297,7 +297,10 @@ public abstract class AddressLocalServiceBaseImpl extends BaseLocalServiceImpl
 	}
 
 	public DynamicQuery dynamicQuery() {
-		return DynamicQueryFactoryUtil.forClass(Address.class, getClassLoader());
+		Class<?> clazz = getClass();
+
+		return DynamicQueryFactoryUtil.forClass(Address.class,
+			clazz.getClassLoader());
 	}
 
 	/**

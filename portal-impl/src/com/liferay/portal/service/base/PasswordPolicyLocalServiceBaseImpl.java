@@ -301,8 +301,10 @@ public abstract class PasswordPolicyLocalServiceBaseImpl
 	}
 
 	public DynamicQuery dynamicQuery() {
+		Class<?> clazz = getClass();
+
 		return DynamicQueryFactoryUtil.forClass(PasswordPolicy.class,
-			getClassLoader());
+			clazz.getClassLoader());
 	}
 
 	/**

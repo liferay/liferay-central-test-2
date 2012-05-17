@@ -151,8 +151,10 @@ public abstract class SCProductEntryLocalServiceBaseImpl
 	}
 
 	public DynamicQuery dynamicQuery() {
+		Class<?> clazz = getClass();
+
 		return DynamicQueryFactoryUtil.forClass(SCProductEntry.class,
-			getClassLoader());
+			clazz.getClassLoader());
 	}
 
 	/**

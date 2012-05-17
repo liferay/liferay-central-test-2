@@ -152,8 +152,10 @@ public abstract class AssetCategoryPropertyLocalServiceBaseImpl
 	}
 
 	public DynamicQuery dynamicQuery() {
+		Class<?> clazz = getClass();
+
 		return DynamicQueryFactoryUtil.forClass(AssetCategoryProperty.class,
-			getClassLoader());
+			clazz.getClassLoader());
 	}
 
 	/**
