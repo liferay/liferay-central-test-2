@@ -149,7 +149,10 @@ public abstract class DLSyncLocalServiceBaseImpl extends BaseLocalServiceImpl
 	}
 
 	public DynamicQuery dynamicQuery() {
-		return DynamicQueryFactoryUtil.forClass(DLSync.class, getClassLoader());
+		Class<?> clazz = getClass();
+
+		return DynamicQueryFactoryUtil.forClass(DLSync.class,
+			clazz.getClassLoader());
 	}
 
 	/**

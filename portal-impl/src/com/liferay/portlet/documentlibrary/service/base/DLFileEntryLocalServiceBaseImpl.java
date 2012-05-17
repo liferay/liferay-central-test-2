@@ -181,8 +181,10 @@ public abstract class DLFileEntryLocalServiceBaseImpl
 	}
 
 	public DynamicQuery dynamicQuery() {
+		Class<?> clazz = getClass();
+
 		return DynamicQueryFactoryUtil.forClass(DLFileEntry.class,
-			getClassLoader());
+			clazz.getClassLoader());
 	}
 
 	/**
