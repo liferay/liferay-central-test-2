@@ -2148,7 +2148,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		return content;
 	}
 
-	public static void importFolder(
+	protected static void importFolder(
 			PortletDataContext portletDataContext, Element folderElement)
 		throws Exception {
 
@@ -2361,16 +2361,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		rootElement.addAttribute(
 			"group-id", String.valueOf(portletDataContext.getScopeGroupId()));
 
-		Element articlesElement = rootElement.addElement("articles");
-		Element dlFilesElement = rootElement.addElement("dl-file-entries");
-		Element dlFileEntryTypesElement = rootElement.addElement(
-			"dl-file-entry-types");
-		Element dlFileRanksElement = rootElement.addElement("dl-file-ranks");
-		Element dlFoldersElement = rootElement.addElement("dl-folders");
-		Element feedsElement = rootElement.addElement("feeds");
-		Element foldersElement = rootElement.addElement("folders");
 		Element structuresElement = rootElement.addElement("structures");
-		Element templatesElement = rootElement.addElement("templates");
 
 		List<JournalStructure> structures = JournalStructureUtil.findByGroupId(
 			portletDataContext.getScopeGroupId(), QueryUtil.ALL_POS,
@@ -2384,6 +2375,13 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 					portletDataContext, structuresElement, structure);
 			}
 		}
+
+		Element templatesElement = rootElement.addElement("templates");
+		Element dlFileEntryTypesElement = rootElement.addElement(
+			"dl-file-entry-types");
+		Element dlFoldersElement = rootElement.addElement("dl-folders");
+		Element dlFilesElement = rootElement.addElement("dl-file-entries");
+		Element dlFileRanksElement = rootElement.addElement("dl-file-ranks");
 
 		List<JournalTemplate> templates = JournalTemplateUtil.findByGroupId(
 			portletDataContext.getScopeGroupId());
@@ -2399,6 +2397,8 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 			}
 		}
 
+		Element feedsElement = rootElement.addElement("feeds");
+
 		List<JournalFeed> feeds = JournalFeedUtil.findByGroupId(
 			portletDataContext.getScopeGroupId());
 
@@ -2407,6 +2407,9 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 				exportFeed(portletDataContext, feedsElement, feed);
 			}
 		}
+
+		Element foldersElement = rootElement.addElement("folders");
+		Element articlesElement = rootElement.addElement("articles");
 
 		if (portletDataContext.getBooleanParameter(_NAMESPACE, "web-content")) {
 			List<JournalFolder> folders = JournalFolderUtil.findByGroupId(
