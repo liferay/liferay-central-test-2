@@ -73,8 +73,6 @@ public class DDMPortletDataHandlerImpl extends BasePortletDataHandler {
 		DDMStructure structure =
 			(DDMStructure)portletDataContext.getZipEntryAsObject(path);
 
-		long structureId = structure.getStructureId();
-
 		long userId = portletDataContext.getUserId(structure.getUserUuid());
 
 		Map<Long, Long> structureIds =
@@ -120,7 +118,8 @@ public class DDMPortletDataHandlerImpl extends BasePortletDataHandler {
 		portletDataContext.importClassedModel(
 			structure, importedStructure, _NAMESPACE);
 
-		structureIds.put(structureId, importedStructure.getStructureId());
+		structureIds.put(
+			structure.getStructureId(), importedStructure.getStructureId());
 	}
 
 	@Override
@@ -244,10 +243,9 @@ public class DDMPortletDataHandlerImpl extends BasePortletDataHandler {
 		else {
 			importedTemplate = DDMTemplateLocalServiceUtil.addTemplate(
 				userId, portletDataContext.getScopeGroupId(),
-				template.getClassNameId(), classPK,
-				template.getTemplateKey(), template.getNameMap(),
-				template.getDescriptionMap(), template.getType(),
-				template.getMode(), template.getLanguage(),
+				template.getClassNameId(), classPK, template.getTemplateKey(),
+				template.getNameMap(), template.getDescriptionMap(),
+				template.getType(), template.getMode(), template.getLanguage(),
 				template.getScript(), serviceContext);
 		}
 
