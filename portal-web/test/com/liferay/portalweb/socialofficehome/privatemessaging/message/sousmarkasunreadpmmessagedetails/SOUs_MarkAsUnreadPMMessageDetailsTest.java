@@ -23,7 +23,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class SOUs_MarkAsUnreadPMMessageDetailsTest extends BaseTestCase {
 	public void testSOUs_MarkAsUnreadPMMessageDetails()
 		throws Exception {
-		selenium.open("/user/socialoffice01/home");
+		selenium.open("/user/socialoffice01/so/dashboard");
 		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
@@ -74,7 +74,8 @@ public class SOUs_MarkAsUnreadPMMessageDetailsTest extends BaseTestCase {
 			selenium.getText(
 				"//div[@class='aui-layout-content thread-info-content ']"));
 		assertEquals(RuntimeVariables.replace("Joe Bloggs"),
-			selenium.getText("xPath=(//span[@class='name'])[2]"));
+			selenium.getText(
+				"xPath=(//span[@class='name'])[contains(.,'Joe Bloggs')]"));
 		assertTrue(selenium.isPartialText("//div[@class='body']", "Message Body"));
 		assertEquals("Mark as Unread",
 			selenium.getValue(

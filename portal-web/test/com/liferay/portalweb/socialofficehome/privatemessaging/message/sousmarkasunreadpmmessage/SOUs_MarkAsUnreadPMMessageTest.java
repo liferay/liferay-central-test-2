@@ -27,7 +27,7 @@ public class SOUs_MarkAsUnreadPMMessageTest extends BaseTestCase {
 		while (label >= 1) {
 			switch (label) {
 			case 1:
-				selenium.open("/user/socialoffice01/home");
+				selenium.open("/user/socialoffice01/so/dashboard");
 				loadRequiredJavaScriptModules();
 
 				for (int second = 0;; second++) {

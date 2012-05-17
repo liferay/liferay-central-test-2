@@ -22,7 +22,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class DeletePMMessageDetailsTest extends BaseTestCase {
 	public void testDeletePMMessageDetails() throws Exception {
-		selenium.open("/user/joebloggs/home/");
+		selenium.open("/user/joebloggs/so/dashboard/");
 		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
@@ -67,7 +67,8 @@ public class DeletePMMessageDetailsTest extends BaseTestCase {
 			selenium.getText(
 				"//div[@class='aui-layout-content thread-info-content ']"));
 		assertEquals(RuntimeVariables.replace("Joe Bloggs"),
-			selenium.getText("xPath=(//span[@class='name'])[2]"));
+			selenium.getText(
+				"xPath=(//span[@class='name'])[contains(.,'Joe Bloggs')]"));
 		assertTrue(selenium.isPartialText("//div[@class='body']", "Message Body"));
 		assertEquals("Delete",
 			selenium.getValue(

@@ -22,7 +22,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddPMMessage1Test extends BaseTestCase {
 	public void testAddPMMessage1() throws Exception {
-		selenium.open("/user/joebloggs/home/");
+		selenium.open("/user/joebloggs/so/dashboard/");
 		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
@@ -62,7 +62,8 @@ public class AddPMMessage1Test extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("//span[2]/span/button")) {
+				if (selenium.isVisible(
+							"//button[contains(@class,'autocomplete-button')]/span")) {
 					break;
 				}
 			}
@@ -72,7 +73,7 @@ public class AddPMMessage1Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//span[2]/span/button",
+		selenium.clickAt("//button[contains(@class,'autocomplete-button')]/span",
 			RuntimeVariables.replace("Dropdown"));
 		selenium.typeKeys("//input[@id='_1_WAR_privatemessagingportlet_to']",
 			RuntimeVariables.replace("Social01"));
@@ -84,8 +85,9 @@ public class AddPMMessage1Test extends BaseTestCase {
 			}
 
 			try {
-				if (RuntimeVariables.replace("Social01 Office01 User01")
-										.equals(selenium.getText("//li"))) {
+				if (selenium.isPartialText(
+							"//li[contains(@data-text,'Social01 Office01 User01')]",
+							"Social01 Office01 User01")) {
 					break;
 				}
 			}
@@ -95,9 +97,10 @@ public class AddPMMessage1Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertEquals(RuntimeVariables.replace("Social01 Office01 User01"),
-			selenium.getText("//li"));
-		selenium.clickAt("//li",
+		assertTrue(selenium.isPartialText(
+				"//li[contains(@data-text,'Social01 Office01 User01')]",
+				"Social01 Office01 User01"));
+		selenium.clickAt("//li[contains(@data-text,'Social01 Office01 User01')]",
 			RuntimeVariables.replace("Social01 Office01 User01"));
 		assertEquals("Social01 Office01 User01 <socialoffice01>,",
 			selenium.getValue(

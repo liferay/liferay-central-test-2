@@ -22,7 +22,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class DeletePMMessageTest extends BaseTestCase {
 	public void testDeletePMMessage() throws Exception {
-		selenium.open("/user/joebloggs/home/");
+		selenium.open("/user/joebloggs/so/dashboard/");
 		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {

@@ -22,7 +22,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class SOUs_ViewPMMessageAttachmentTest extends BaseTestCase {
 	public void testSOUs_ViewPMMessageAttachment() throws Exception {
-		selenium.open("/user/socialoffice01/home");
+		selenium.open("/user/socialoffice01/so/dashboard");
 		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
@@ -66,7 +66,8 @@ public class SOUs_ViewPMMessageAttachmentTest extends BaseTestCase {
 			selenium.getText(
 				"//div[@class='aui-layout-content thread-info-content ']"));
 		assertEquals(RuntimeVariables.replace("Joe Bloggs"),
-			selenium.getText("xPath=(//span[@class='name'])[2]"));
+			selenium.getText(
+				"xPath=(//span[@class='name'])[contains(.,'Joe Bloggs')]"));
 		assertTrue(selenium.isPartialText("//div[@class='body']", "Message Body"));
 		assertTrue(selenium.isVisible("//div[@class='image-thumbnail']/a/img"));
 		assertEquals(RuntimeVariables.replace("PM_Attachment.jpg"),

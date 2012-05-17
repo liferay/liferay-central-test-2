@@ -22,7 +22,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class SOUs_ViewPMMessageTest extends BaseTestCase {
 	public void testSOUs_ViewPMMessage() throws Exception {
-		selenium.open("/user/socialoffice01/home");
+		selenium.open("/user/socialoffice01/so/dashboard");
 		loadRequiredJavaScriptModules();
 
 		for (int second = 0;; second++) {
@@ -31,7 +31,8 @@ public class SOUs_ViewPMMessageTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("//span[@class='notification-count']")) {
+				if (selenium.isElementPresent(
+							"//li[@id='_145_notificationsMenu']")) {
 					break;
 				}
 			}
@@ -41,8 +42,9 @@ public class SOUs_ViewPMMessageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//span[@class='notification-count']",
-			RuntimeVariables.replace("Notification Count"));
+		assertEquals(RuntimeVariables.replace("1"),
+			selenium.getText("//span[@class='notification-count']"));
+		selenium.mouseOver("//li[@id='_145_notificationsMenu']");
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -75,7 +77,8 @@ public class SOUs_ViewPMMessageTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("//span[@class='notification-count']")) {
+				if (selenium.isElementPresent(
+							"//li[@id='_145_notificationsMenu']")) {
 					break;
 				}
 			}
@@ -85,8 +88,9 @@ public class SOUs_ViewPMMessageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.clickAt("//span[@class='notification-count']",
-			RuntimeVariables.replace("Notification Count"));
+		assertEquals(RuntimeVariables.replace("0"),
+			selenium.getText("//span[@class='notification-count']"));
+		selenium.mouseOver("//li[@id='_145_notificationsMenu']");
 		assertFalse(selenium.isTextPresent("Joe Bloggs sent you a message."));
 
 		for (int second = 0;; second++) {
@@ -130,7 +134,8 @@ public class SOUs_ViewPMMessageTest extends BaseTestCase {
 			selenium.getText(
 				"//div[@class='aui-layout-content thread-info-content ']"));
 		assertEquals(RuntimeVariables.replace("Joe Bloggs"),
-			selenium.getText("xPath=(//span[@class='name'])[2]"));
+			selenium.getText(
+				"xPath=(//span[@class='name'])[contains(.,'Joe Bloggs')]"));
 		assertTrue(selenium.isPartialText("//div[@class='body']", "Message Body"));
 	}
 }
