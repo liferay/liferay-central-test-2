@@ -342,17 +342,15 @@ public class UserNotificationEventModelImpl extends BaseModelImpl<UserNotificati
 
 	@Override
 	public ExpandoBridge getExpandoBridge() {
-		if (_expandoBridge == null) {
-			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
-					UserNotificationEvent.class.getName(), getPrimaryKey());
-		}
-
-		return _expandoBridge;
+		return ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
+			UserNotificationEvent.class.getName(), getPrimaryKey());
 	}
 
 	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
-		getExpandoBridge().setAttributes(serviceContext);
+		ExpandoBridge expandoBridge = getExpandoBridge();
+
+		expandoBridge.setAttributes(serviceContext);
 	}
 
 	@Override
@@ -581,7 +579,6 @@ public class UserNotificationEventModelImpl extends BaseModelImpl<UserNotificati
 	private boolean _archived;
 	private boolean _originalArchived;
 	private boolean _setOriginalArchived;
-	private transient ExpandoBridge _expandoBridge;
 	private long _columnBitmask;
 	private UserNotificationEvent _escapedModelProxy;
 }

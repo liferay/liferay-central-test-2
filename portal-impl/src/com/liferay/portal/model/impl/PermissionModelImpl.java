@@ -289,17 +289,15 @@ public class PermissionModelImpl extends BaseModelImpl<Permission>
 
 	@Override
 	public ExpandoBridge getExpandoBridge() {
-		if (_expandoBridge == null) {
-			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
-					Permission.class.getName(), getPrimaryKey());
-		}
-
-		return _expandoBridge;
+		return ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
+			Permission.class.getName(), getPrimaryKey());
 	}
 
 	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
-		getExpandoBridge().setAttributes(serviceContext);
+		ExpandoBridge expandoBridge = getExpandoBridge();
+
+		expandoBridge.setAttributes(serviceContext);
 	}
 
 	@Override
@@ -451,7 +449,6 @@ public class PermissionModelImpl extends BaseModelImpl<Permission>
 	private long _resourceId;
 	private long _originalResourceId;
 	private boolean _setOriginalResourceId;
-	private transient ExpandoBridge _expandoBridge;
 	private long _columnBitmask;
 	private Permission _escapedModelProxy;
 }

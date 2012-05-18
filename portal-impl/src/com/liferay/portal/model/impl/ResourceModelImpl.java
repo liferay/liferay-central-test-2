@@ -247,17 +247,15 @@ public class ResourceModelImpl extends BaseModelImpl<Resource>
 
 	@Override
 	public ExpandoBridge getExpandoBridge() {
-		if (_expandoBridge == null) {
-			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(0,
-					Resource.class.getName(), getPrimaryKey());
-		}
-
-		return _expandoBridge;
+		return ExpandoBridgeFactoryUtil.getExpandoBridge(0,
+			Resource.class.getName(), getPrimaryKey());
 	}
 
 	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
-		getExpandoBridge().setAttributes(serviceContext);
+		ExpandoBridge expandoBridge = getExpandoBridge();
+
+		expandoBridge.setAttributes(serviceContext);
 	}
 
 	@Override
@@ -399,7 +397,6 @@ public class ResourceModelImpl extends BaseModelImpl<Resource>
 	private boolean _setOriginalCodeId;
 	private String _primKey;
 	private String _originalPrimKey;
-	private transient ExpandoBridge _expandoBridge;
 	private long _columnBitmask;
 	private Resource _escapedModelProxy;
 }

@@ -235,17 +235,15 @@ public class ResourceCodeModelImpl extends BaseModelImpl<ResourceCode>
 
 	@Override
 	public ExpandoBridge getExpandoBridge() {
-		if (_expandoBridge == null) {
-			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
-					ResourceCode.class.getName(), getPrimaryKey());
-		}
-
-		return _expandoBridge;
+		return ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
+			ResourceCode.class.getName(), getPrimaryKey());
 	}
 
 	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
-		getExpandoBridge().setAttributes(serviceContext);
+		ExpandoBridge expandoBridge = getExpandoBridge();
+
+		expandoBridge.setAttributes(serviceContext);
 	}
 
 	@Override
@@ -403,7 +401,6 @@ public class ResourceCodeModelImpl extends BaseModelImpl<ResourceCode>
 	private int _scope;
 	private int _originalScope;
 	private boolean _setOriginalScope;
-	private transient ExpandoBridge _expandoBridge;
 	private long _columnBitmask;
 	private ResourceCode _escapedModelProxy;
 }

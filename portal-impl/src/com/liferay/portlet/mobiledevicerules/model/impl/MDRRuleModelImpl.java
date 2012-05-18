@@ -635,17 +635,15 @@ public class MDRRuleModelImpl extends BaseModelImpl<MDRRule>
 
 	@Override
 	public ExpandoBridge getExpandoBridge() {
-		if (_expandoBridge == null) {
-			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
-					MDRRule.class.getName(), getPrimaryKey());
-		}
-
-		return _expandoBridge;
+		return ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
+			MDRRule.class.getName(), getPrimaryKey());
 	}
 
 	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
-		getExpandoBridge().setAttributes(serviceContext);
+		ExpandoBridge expandoBridge = getExpandoBridge();
+
+		expandoBridge.setAttributes(serviceContext);
 	}
 
 	@Override
@@ -940,7 +938,6 @@ public class MDRRuleModelImpl extends BaseModelImpl<MDRRule>
 	private String _descriptionCurrentLanguageId;
 	private String _type;
 	private String _typeSettings;
-	private transient ExpandoBridge _expandoBridge;
 	private long _columnBitmask;
 	private MDRRule _escapedModelProxy;
 }

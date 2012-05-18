@@ -592,17 +592,15 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 
 	@Override
 	public ExpandoBridge getExpandoBridge() {
-		if (_expandoBridge == null) {
-			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
-					DLFolder.class.getName(), getPrimaryKey());
-		}
-
-		return _expandoBridge;
+		return ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
+			DLFolder.class.getName(), getPrimaryKey());
 	}
 
 	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
-		getExpandoBridge().setAttributes(serviceContext);
+		ExpandoBridge expandoBridge = getExpandoBridge();
+
+		expandoBridge.setAttributes(serviceContext);
 	}
 
 	@Override
@@ -954,7 +952,6 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 	private Date _lastPostDate;
 	private long _defaultFileEntryTypeId;
 	private boolean _overrideFileEntryTypes;
-	private transient ExpandoBridge _expandoBridge;
 	private long _columnBitmask;
 	private DLFolder _escapedModelProxy;
 }
