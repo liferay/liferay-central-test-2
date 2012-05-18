@@ -143,7 +143,7 @@ public class ViewPMMessageReplyTest extends BaseTestCase {
 			selenium.getText("xPath=(//div[@class='body'])[1]"));
 		assertEquals(RuntimeVariables.replace("Social01 Office01 User01"),
 			selenium.getText(
-				"xPath=(//span[@class='name'])[.,'Social01 Office01 User01']"));
+				"xPath=(//span[@class='name'])[contains(.,'Social01 Office01 User01')]"));
 		assertEquals(RuntimeVariables.replace("Message Subject Reply"),
 			selenium.getText("xPath=(//div[@class='body'])[2]"));
 	}
