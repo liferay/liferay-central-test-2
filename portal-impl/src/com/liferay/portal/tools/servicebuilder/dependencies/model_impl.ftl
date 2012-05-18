@@ -686,8 +686,7 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> imple
 	<#if (entity.PKClassName == "long") && !stringUtil.startsWith(entity.name, "Expando")>
 		@Override
 		public ExpandoBridge getExpandoBridge() {
-			if (_expandoBridge == null) {
-				_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(
+			return ExpandoBridgeFactoryUtil.getExpandoBridge(
 
 				<#if entity.hasColumn("companyId")>
 					getCompanyId(),
@@ -696,14 +695,13 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> imple
 				</#if>
 
 				${entity.name}.class.getName(), getPrimaryKey());
-			}
-
-			return _expandoBridge;
 		}
 
 		@Override
 		public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
-			getExpandoBridge().setAttributes(serviceContext);
+			ExpandoBridge expandoBridge = getExpandoBridge();
+
+			expandoBridge.setAttributes(serviceContext);
 		}
 	</#if>
 
@@ -972,10 +970,6 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> imple
 			</#if>
 		</#if>
 	</#list>
-
-	<#if (entity.PKClassName == "long") && !stringUtil.startsWith(entity.name, "Expando")>
-		private transient ExpandoBridge _expandoBridge;
-	</#if>
 
 	<#if columnBitmaskEnabled>
 		private long _columnBitmask;
