@@ -83,15 +83,12 @@ public class RESTProxyAction extends Action {
 			return false;
 		}
 
-		String[] allowedUrlPrefixes =
-			PropsValues.REST_PROXY_URL_PREFIXES_ALLOWED;
-
-		if (allowedUrlPrefixes.length == 0) {
+		if (PropsValues.REST_PROXY_URL_PREFIXES_ALLOWED.length == 0) {
 			return true;
 		}
 
-		for (String allowedUrlPrefix : allowedUrlPrefixes) {
-			if (StringUtil.startsWith(url, allowedUrlPrefix)) {
+		for (String urlPrefix : PropsValues.REST_PROXY_URL_PREFIXES_ALLOWED) {
+			if (StringUtil.startsWith(url, urlPrefix)) {
 				return true;
 			}
 		}
