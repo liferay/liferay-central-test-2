@@ -41,6 +41,8 @@ public class DeployManagerUtil {
 	}
 
 	public static DeployManager getDeployManager() {
+		PortalRuntimePermission.checkGetBeanProperty(DeployManagerUtil.class);
+
 		return _deployManager;
 	}
 

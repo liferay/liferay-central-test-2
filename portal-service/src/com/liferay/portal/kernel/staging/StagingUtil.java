@@ -202,6 +202,8 @@ public class StagingUtil {
 	}
 
 	public static Staging getStaging() {
+		PortalRuntimePermission.checkGetBeanProperty(StagingUtil.class);
+
 		return _staging;
 	}
 

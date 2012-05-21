@@ -39,6 +39,8 @@ public class DDMXMLUtil {
 	}
 
 	public static DDMXML getDDMXML() {
+		PortalRuntimePermission.checkGetBeanProperty(DDMXMLUtil.class);
+
 		return _ddmXML;
 	}
 

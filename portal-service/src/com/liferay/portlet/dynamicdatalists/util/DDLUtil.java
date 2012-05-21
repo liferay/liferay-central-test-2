@@ -45,6 +45,8 @@ public class DDLUtil {
 	}
 
 	public static DDL getDDL() {
+		PortalRuntimePermission.checkGetBeanProperty(DDLUtil.class);
+
 		return _ddl;
 	}
 

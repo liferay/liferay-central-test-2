@@ -208,6 +208,8 @@ public class ResourceActionsUtil {
 	}
 
 	public static ResourceActions getResourceActions() {
+		PortalRuntimePermission.checkGetBeanProperty(ResourceActionsUtil.class);
+
 		return _resourceActions;
 	}
 

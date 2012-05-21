@@ -42,6 +42,8 @@ public class CaptchaUtil {
 	}
 
 	public static Captcha getCaptcha() {
+		PortalRuntimePermission.checkGetBeanProperty(CaptchaUtil.class);
+
 		return _captcha;
 	}
 

@@ -156,6 +156,9 @@ public class ChannelHubManagerUtil {
 	}
 
 	public static ChannelHubManager getChannelHubManager() {
+		PortalRuntimePermission.checkGetBeanProperty(
+			ChannelHubManagerUtil.class);
+
 		return _channelHubManager;
 	}
 

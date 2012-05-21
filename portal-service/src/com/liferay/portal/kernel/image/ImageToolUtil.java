@@ -58,6 +58,8 @@ public class ImageToolUtil {
 	}
 
 	public static ImageTool getImageTool() {
+		PortalRuntimePermission.checkGetBeanProperty(ImageToolUtil.class);
+
 		return _imageTool;
 	}
 

@@ -64,6 +64,8 @@ public class VideoProcessorUtil {
 	}
 
 	public static VideoProcessor getVideoProcessor() {
+		PortalRuntimePermission.checkGetBeanProperty(VideoProcessorUtil.class);
+
 		return _videoProcessor;
 	}
 
