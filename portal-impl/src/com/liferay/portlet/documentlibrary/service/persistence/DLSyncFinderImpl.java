@@ -37,10 +37,10 @@ import java.util.List;
 public class DLSyncFinderImpl
 	extends BasePersistenceImpl<DLSync> implements DLSyncFinder {
 
-	public static final String FIND_S_BY_C_M_R_T =
-		DLSyncFinder.class.getName() + ".findS_ByC_M_R_T";
+	public static final String FIND_BY_C_M_R_T =
+		DLSyncFinder.class.getName() + ".findByC_M_R_T";
 
-	public List<DLSync> filterFindSByC_M_R(
+	public List<DLSync> filterFindByC_M_R(
 			long companyId, Date modifiedDate, long repositoryId)
 		throws SystemException {
 
@@ -49,7 +49,7 @@ public class DLSyncFinderImpl
 		try {
 			session = openSession();
 
-			String sql = CustomSQLUtil.get(FIND_S_BY_C_M_R_T);
+			String sql = CustomSQLUtil.get(FIND_BY_C_M_R_T);
 
 			sql = InlineSQLHelperUtil.replacePermissionCheck(
 				sql, DLFolder.class.getName(), "DLSync.fileId", repositoryId);
@@ -59,7 +59,7 @@ public class DLSyncFinderImpl
 			sb.append(sql);
 			sb.append(" UNION ALL ");
 
-			sql = CustomSQLUtil.get(FIND_S_BY_C_M_R_T);
+			sql = CustomSQLUtil.get(FIND_BY_C_M_R_T);
 
 			sql = InlineSQLHelperUtil.replacePermissionCheck(
 				sql, DLFileEntry.class.getName(), "DLSync.fileId",
@@ -84,9 +84,7 @@ public class DLSyncFinderImpl
 			qPos.add(repositoryId);
 			qPos.add(DLSyncConstants.TYPE_FILE);
 
-			List<DLSync> dlSyncs = q.list();
-
-			return dlSyncs;
+			return q.list();
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
