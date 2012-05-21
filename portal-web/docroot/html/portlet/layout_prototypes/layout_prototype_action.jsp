@@ -24,18 +24,14 @@ String redirect = searchContainer.getIteratorURL().toString();
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
 LayoutPrototype layoutPrototype = (LayoutPrototype)row.getObject();
-
-long layoutPrototypeId = layoutPrototype.getLayoutPrototypeId();
-
-Group layoutPrototypeGroup = layoutPrototype.getGroup();
 %>
 
 <liferay-ui:icon-menu>
-	<c:if test="<%= LayoutPrototypePermissionUtil.contains(permissionChecker, layoutPrototypeId, ActionKeys.UPDATE) %>">
+	<c:if test="<%= LayoutPrototypePermissionUtil.contains(permissionChecker, layoutPrototype.getLayoutPrototypeId(), ActionKeys.UPDATE) %>">
 		<portlet:renderURL var="editURL">
 			<portlet:param name="struts_action" value="/layout_prototypes/edit_layout_prototype" />
 			<portlet:param name="redirect" value="<%= redirect %>" />
-			<portlet:param name="layoutPrototypeId" value="<%= String.valueOf(layoutPrototypeId) %>" />
+			<portlet:param name="layoutPrototypeId" value="<%= String.valueOf(layoutPrototype.getLayoutPrototypeId()) %>" />
 		</portlet:renderURL>
 
 		<liferay-ui:icon
@@ -44,11 +40,11 @@ Group layoutPrototypeGroup = layoutPrototype.getGroup();
 		/>
 	</c:if>
 
-	<c:if test="<%= LayoutPrototypePermissionUtil.contains(permissionChecker, layoutPrototypeId, ActionKeys.PERMISSIONS) %>">
+	<c:if test="<%= LayoutPrototypePermissionUtil.contains(permissionChecker, layoutPrototype.getLayoutPrototypeId(), ActionKeys.PERMISSIONS) %>">
 		<liferay-security:permissionsURL
 			modelResource="<%= LayoutPrototype.class.getName() %>"
 			modelResourceDescription="<%= layoutPrototype.getName(locale) %>"
-			resourcePrimKey="<%= String.valueOf(layoutPrototypeId) %>"
+			resourcePrimKey="<%= String.valueOf(layoutPrototype.getLayoutPrototypeId()) %>"
 			var="permissionsURL"
 		/>
 
@@ -58,12 +54,12 @@ Group layoutPrototypeGroup = layoutPrototype.getGroup();
 		/>
 	</c:if>
 
-	<c:if test="<%= LayoutPrototypePermissionUtil.contains(permissionChecker, layoutPrototypeId, ActionKeys.DELETE) %>">
+	<c:if test="<%= LayoutPrototypePermissionUtil.contains(permissionChecker, layoutPrototype.getLayoutPrototypeId(), ActionKeys.DELETE) %>">
 		<portlet:actionURL var="deleteURL">
 			<portlet:param name="struts_action" value="/layout_prototypes/edit_layout_prototype" />
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 			<portlet:param name="redirect" value="<%= redirect %>" />
-			<portlet:param name="layoutPrototypeIds" value="<%= String.valueOf(layoutPrototypeId) %>" />
+			<portlet:param name="layoutPrototypeIds" value="<%= String.valueOf(layoutPrototype.getLayoutPrototypeId()) %>" />
 		</portlet:actionURL>
 
 		<liferay-ui:icon-delete
@@ -71,11 +67,11 @@ Group layoutPrototypeGroup = layoutPrototype.getGroup();
 		/>
 	</c:if>
 
-	<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, layoutPrototypeGroup.getGroupId(), ActionKeys.EXPORT_IMPORT_LAYOUTS) %>">
+	<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, layoutPrototype.getGroup(), ActionKeys.EXPORT_IMPORT_LAYOUTS) %>">
 		<portlet:renderURL var="exportURL" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
 			<portlet:param name="struts_action" value="/layout_prototypes/export_layouts" />
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.EXPORT %>" />
-			<portlet:param name="groupId" value="<%= String.valueOf(layoutPrototypeGroup.getGroupId()) %>" />
+			<portlet:param name="groupId" value="<%= String.valueOf(layoutPrototype.getGroupId()) %>" />
 			<portlet:param name="privateLayout" value="<%= Boolean.TRUE.toString() %>" />
 			<portlet:param name="rootNodeName" value="<%= layoutPrototype.getName(locale) %>" />
 		</portlet:renderURL>
@@ -88,11 +84,11 @@ Group layoutPrototypeGroup = layoutPrototype.getGroup();
 		/>
 	</c:if>
 
-	<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, layoutPrototypeGroup.getGroupId(), ActionKeys.EXPORT_IMPORT_LAYOUTS) %>">
+	<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, layoutPrototype.getGroup(), ActionKeys.EXPORT_IMPORT_LAYOUTS) %>">
 		<portlet:renderURL var="importURL" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
 			<portlet:param name="struts_action" value="/layout_prototypes/import_layouts" />
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.IMPORT %>" />
-			<portlet:param name="groupId" value="<%= String.valueOf(layoutPrototypeGroup.getGroupId()) %>" />
+			<portlet:param name="groupId" value="<%= String.valueOf(layoutPrototype.getGroupId()) %>" />
 			<portlet:param name="privateLayout" value="<%= Boolean.TRUE.toString() %>" />
 			<portlet:param name="rootNodeName" value="<%= layoutPrototype.getName(locale) %>" />
 		</portlet:renderURL>
