@@ -19,21 +19,21 @@ import com.liferay.portal.kernel.exception.PortalException;
 /**
  * @author Brian Wing Shun Chan
  */
-public class InvalidScoreException extends PortalException {
+public class EntryScoreException extends PortalException {
 
-	public InvalidScoreException() {
+	public EntryScoreException() {
 		super();
 	}
 
-	public InvalidScoreException(String msg) {
+	public EntryScoreException(String msg) {
 		super(msg);
 	}
 
-	public InvalidScoreException(String msg, Throwable cause) {
+	public EntryScoreException(String msg, Throwable cause) {
 		super(msg, cause);
 	}
 
-	public InvalidScoreException(Throwable cause) {
+	public EntryScoreException(Throwable cause) {
 		super(cause);
 	}
 
