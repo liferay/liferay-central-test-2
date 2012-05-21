@@ -361,7 +361,7 @@
 					(DLFileEntry.fileEntryId = DLFileVersion.fileEntryId)
 		]]>
 	</sql>
-	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLSyncFinder.findS_ByC_M_R_T">
+	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLSyncFinder.findByC_M_R_T">
 		<![CDATA[
 			SELECT
 				{DLSync.*}
