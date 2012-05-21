@@ -38,9 +38,9 @@ public class GetMethodImpl implements Method {
 
 		try {
 			WebDAVStorage storage = webDavRequest.getWebDAVStorage();
+			HttpServletRequest request = webDavRequest.getHttpServletRequest();
 			HttpServletResponse response =
 				webDavRequest.getHttpServletResponse();
-			HttpServletRequest request = webDavRequest.getHttpServletRequest();
 
 			Resource resource = storage.getResource(webDavRequest);
 
