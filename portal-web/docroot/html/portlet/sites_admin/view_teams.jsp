@@ -20,9 +20,7 @@
 String redirect = ParamUtil.getString(request, "redirect");
 String backURL = ParamUtil.getString(request, "backURL", redirect);
 
-ActionUtil.getGroup(request);
-
-Group group = (Group)request.getAttribute(WebKeys.GROUP);
+Group group = ActionUtil.getGroup(request);
 
 long groupId = group.getGroupId();
 
