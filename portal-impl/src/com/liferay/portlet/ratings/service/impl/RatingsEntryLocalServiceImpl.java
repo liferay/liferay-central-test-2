@@ -24,7 +24,7 @@ import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.asset.model.AssetEntry;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.model.BlogsStatsUser;
-import com.liferay.portlet.ratings.InvalidScoreException;
+import com.liferay.portlet.ratings.EntryScoreException;
 import com.liferay.portlet.ratings.model.RatingsEntry;
 import com.liferay.portlet.ratings.model.RatingsStats;
 import com.liferay.portlet.ratings.service.base.RatingsEntryLocalServiceBaseImpl;
@@ -248,11 +248,10 @@ public class RatingsEntryLocalServiceImpl
 	}
 
 	protected void validate(double score) throws PortalException {
-
 		if ((score < 0) ||
 			(score > PropsValues.RATINGS_DEFAULT_NUMBER_OF_STARS)) {
 
-			throw new InvalidScoreException();
+			throw new EntryScoreException();
 		}
 	}
 

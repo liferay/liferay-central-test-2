@@ -69,6 +69,6 @@
 		</finder>
 	</entity>
 	<exceptions>
-		<exception>InvalidScore</exception>
+		<exception>EntryScore</exception>
 	</exceptions>
 </service-builder>
