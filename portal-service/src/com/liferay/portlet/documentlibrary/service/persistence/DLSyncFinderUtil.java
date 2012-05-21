@@ -21,11 +21,11 @@ import com.liferay.portal.kernel.util.ReferenceRegistry;
  * @author Brian Wing Shun Chan
  */
 public class DLSyncFinderUtil {
-	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLSync> filterFindSByC_M_R(
+	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLSync> filterFindByC_M_R(
 		long companyId, java.util.Date modifiedDate, long repositoryId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder()
-				   .filterFindSByC_M_R(companyId, modifiedDate, repositoryId);
+				   .filterFindByC_M_R(companyId, modifiedDate, repositoryId);
 	}
 
 	public static DLSyncFinder getFinder() {

@@ -18,7 +18,7 @@ package com.liferay.portlet.documentlibrary.service.persistence;
  * @author Brian Wing Shun Chan
  */
 public interface DLSyncFinder {
-	public java.util.List<com.liferay.portlet.documentlibrary.model.DLSync> filterFindSByC_M_R(
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLSync> filterFindByC_M_R(
 		long companyId, java.util.Date modifiedDate, long repositoryId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 }
