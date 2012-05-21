@@ -558,19 +558,17 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		if (PortalUtil.isSystemGroup(group.getName())) {
-
 			throw new RequiredGroupException(
-				RequiredGroupException.SYSTEM_GROUP,
-				String.valueOf(group.getGroupId()));
+				String.valueOf(group.getGroupId()),
+				RequiredGroupException.SYSTEM_GROUP);
 		}
 
 		if (groupPersistence.countByC_P(
-				group.getCompanyId(),
-				group.getGroupId()) > 0) {
+				group.getCompanyId(), group.getGroupId()) > 0) {
 
 			throw new RequiredGroupException(
-				RequiredGroupException.HAS_SUBGROUPS,
-				String.valueOf(group.getGroupId()));
+				String.valueOf(group.getGroupId()),
+				RequiredGroupException.PARENT_GROUP);
 		}
 
 		// Layout set branches
@@ -1968,11 +1966,11 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		}
 
 		if (PortalUtil.isSystemGroup(group.getName()) &&
-			!group.getName().equals(name)) {
+			!name.equals(group.getName())) {
 
 			throw new RequiredGroupException(
-				RequiredGroupException.SYSTEM_GROUP,
-				String.valueOf(group.getGroupId()));
+				String.valueOf(group.getGroupId()),
+				RequiredGroupException.SYSTEM_GROUP);
 		}
 
 		validateFriendlyURL(

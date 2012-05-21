@@ -23,12 +23,12 @@ public class RequiredGroupException extends PortalException {
 
 	public static final int CURRENT_GROUP = 3;
 
-	public static final int HAS_SUBGROUPS = 2;
+	public static final int PARENT_GROUP = 2;
 
 	public static final int SYSTEM_GROUP = 1;
 
-	public RequiredGroupException(int type, String msg) {
-		super(msg);
+	public RequiredGroupException(String message, int type) {
+		super(message);
 
 		_type = type;
 	}

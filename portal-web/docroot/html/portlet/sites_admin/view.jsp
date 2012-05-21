@@ -86,7 +86,7 @@ pageContext.setAttribute("portletURL", portletURL);
 				<liferay-ui:message key="you-cannot-delete-this-site-because-you-are-currently-accessing-this-site" />
 			</c:if>
 
-			<c:if test="<%= rge.getType() == RequiredGroupException.HAS_SUBGROUPS %>">
+			<c:if test="<%=rge.getType() == RequiredGroupException.PARENT_GROUP%>">
 				<liferay-ui:message key="you-cannot-delete-sites-that-have-subsites" />
 			</c:if>
 
