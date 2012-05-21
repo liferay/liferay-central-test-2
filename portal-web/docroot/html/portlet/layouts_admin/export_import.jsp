@@ -39,8 +39,6 @@ boolean privateLayout = ParamUtil.getBoolean(request, "privateLayout");
 
 String rootNodeName = ParamUtil.getString(request, "rootNodeName");
 
-boolean isLayoutPrototype = group.isLayoutPrototype();
-
 List<Portlet> portletsList = new ArrayList<Portlet>();
 Set<String> portletIdsSet = new HashSet<String>();
 
@@ -168,7 +166,7 @@ portletsList = ListUtil.sort(portletsList, new PortletTitleComparator(applicatio
 
 			<c:choose>
 				<c:when test="<%= cmd.equals(Constants.EXPORT) %>">
-					<c:if test="<%= !isLayoutPrototype %>">
+					<c:if test="<%= !group.isLayoutPrototype() %>">
 						var layoutsExportTreeOutput = A.one('#<portlet:namespace />layoutsExportTreeOutput');
 
 						if (layoutsExportTreeOutput) {

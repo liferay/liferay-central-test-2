@@ -75,9 +75,9 @@ Group layoutPrototypeGroup = layoutPrototype.getGroup();
 		<portlet:renderURL var="exportURL" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
 			<portlet:param name="struts_action" value="/layout_prototypes/export_layouts" />
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.EXPORT %>" />
+			<portlet:param name="groupId" value="<%= String.valueOf(layoutPrototypeGroup.getGroupId()) %>" />
 			<portlet:param name="privateLayout" value="<%= Boolean.TRUE.toString() %>" />
 			<portlet:param name="rootNodeName" value="<%= layoutPrototype.getName(locale) %>" />
-			<portlet:param name="groupId" value="<%= String.valueOf(layoutPrototypeGroup.getGroupId()) %>" />
 		</portlet:renderURL>
 
 		<liferay-ui:icon
@@ -92,9 +92,9 @@ Group layoutPrototypeGroup = layoutPrototype.getGroup();
 		<portlet:renderURL var="importURL" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
 			<portlet:param name="struts_action" value="/layout_prototypes/import_layouts" />
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.IMPORT %>" />
+			<portlet:param name="groupId" value="<%= String.valueOf(layoutPrototypeGroup.getGroupId()) %>" />
 			<portlet:param name="privateLayout" value="<%= Boolean.TRUE.toString() %>" />
 			<portlet:param name="rootNodeName" value="<%= layoutPrototype.getName(locale) %>" />
-			<portlet:param name="groupId" value="<%= String.valueOf(layoutPrototypeGroup.getGroupId()) %>" />
 		</portlet:renderURL>
 
 		<liferay-ui:icon

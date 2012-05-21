@@ -316,7 +316,16 @@ public class LayoutExporter {
 
 		String type = "layout-set";
 
-		if (group.isLayoutSetPrototype()) {
+		if (group.isLayoutPrototype()) {
+			type = "layout-prototype";
+
+			LayoutPrototype layoutPrototype =
+				LayoutPrototypeLocalServiceUtil.getLayoutPrototype(
+					group.getClassPK());
+
+			headerElement.addAttribute("type-uuid", layoutPrototype.getUuid());
+		}
+		else if (group.isLayoutSetPrototype()) {
 			type ="layout-set-prototype";
 
 			LayoutSetPrototype layoutSetPrototype =
@@ -325,15 +334,6 @@ public class LayoutExporter {
 
 			headerElement.addAttribute(
 				"type-uuid", layoutSetPrototype.getUuid());
-		}
-		else if (group.isLayoutPrototype()) {
-			type = "layout-prototype";
-
-			LayoutPrototype layoutPrototype =
-				LayoutPrototypeLocalServiceUtil.getLayoutPrototype(
-					group.getClassPK());
-
-			headerElement.addAttribute("type-uuid", layoutPrototype.getUuid());
 		}
 
 		headerElement.addAttribute("type", type);
