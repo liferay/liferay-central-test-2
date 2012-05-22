@@ -25,6 +25,7 @@ import com.liferay.portal.kernel.cache.ThreadLocalCachable;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -90,6 +91,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 /**
@@ -921,6 +923,79 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		}
 
 		return groupLocalService.loadGetGroup(companyId, name);
+	}
+
+	public String getGroupDescriptiveName(Group group, Locale locale)
+		throws PortalException, SystemException {
+
+		String name = group.getName();
+
+		if (group.isCompany()) {
+			name = LanguageUtil.get(locale, "global");
+		}
+		else if (group.isLayout()) {
+			Layout layout = layoutLocalService.getLayout(group.getClassPK());
+
+			name = layout.getName(locale);
+		}
+		else if (group.isLayoutPrototype()) {
+			LayoutPrototype layoutPrototype =
+				layoutPrototypeLocalService.getLayoutPrototype(
+					group.getClassPK());
+
+			name = layoutPrototype.getName(locale);
+		}
+		else if (group.isLayoutSetPrototype()) {
+			LayoutSetPrototype layoutSetPrototype =
+				layoutSetPrototypePersistence.findByPrimaryKey(
+					group.getClassPK());
+
+			name = layoutSetPrototype.getName(locale);
+		}
+		else if (group.isOrganization()) {
+			long organizationId = group.getOrganizationId();
+
+			Organization organization =
+				organizationPersistence.findByPrimaryKey(organizationId);
+
+			name = organization.getName();
+		}
+		else if (group.isUser()) {
+			long userId = group.getClassPK();
+
+			User user = userPersistence.findByPrimaryKey(userId);
+
+			name = user.getFullName();
+		}
+		else if (group.isUserGroup()) {
+			long userGroupId = group.getClassPK();
+
+			UserGroup userGroup = userGroupPersistence.findByPrimaryKey(
+				userGroupId);
+
+			name = userGroup.getName();
+		}
+		else if (group.isUserPersonalSite()) {
+			name = LanguageUtil.get(locale, "user-personal-site");
+		}
+		else if (name.equals(GroupConstants.GUEST)) {
+			Company company = companyPersistence.findByPrimaryKey(
+				group.getCompanyId());
+
+			Account account = company.getAccount();
+
+			name = account.getName();
+		}
+
+		return name;
+	}
+
+	public String getGroupDescriptiveName(long groupId, Locale locale)
+		throws PortalException, SystemException {
+
+		Group group = groupPersistence.findByPrimaryKey(groupId);
+
+		return getGroupDescriptiveName(group, locale);
 	}
 
 	/**
