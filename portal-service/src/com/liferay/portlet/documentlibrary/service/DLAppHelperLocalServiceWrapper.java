@@ -179,13 +179,6 @@ public class DLAppHelperLocalServiceWrapper implements DLAppHelperLocalService,
 			fileVersion, assetCategoryIds, assetTagNames, assetLinkEntryIds);
 	}
 
-	public void updateChildrenStatuses(com.liferay.portal.model.User user,
-		java.util.List<java.lang.Object> children, int status)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		_dlAppHelperLocalService.updateChildrenStatuses(user, children, status);
-	}
-
 	public void updateFileEntry(long userId,
 		com.liferay.portal.kernel.repository.model.FileEntry fileEntry,
 		com.liferay.portal.kernel.repository.model.FileVersion fileVersion,
@@ -223,6 +216,14 @@ public class DLAppHelperLocalServiceWrapper implements DLAppHelperLocalService,
 			com.liferay.portal.kernel.exception.SystemException {
 		_dlAppHelperLocalService.updateStatus(userId, fileEntry,
 			latestFileVersion, oldStatus, newStatus, workflowContext);
+	}
+
+	public void updateStatuses(com.liferay.portal.model.User user,
+		java.util.List<java.lang.Object> dlFileEntriesAndDLFolders, int status)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_dlAppHelperLocalService.updateStatuses(user,
+			dlFileEntriesAndDLFolders, status);
 	}
 
 	/**
