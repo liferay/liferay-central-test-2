@@ -61,7 +61,7 @@ import org.junit.runner.RunWith;
  */
 @ExecutionTestListeners(listeners = {EnvironmentExecutionTestListener.class})
 @RunWith(LiferayIntegrationJUnitTestRunner.class)
-public class DLAppServiceTest extends BaseDLAppTest {
+public class DLAppServiceTest extends BaseDLAppTestCase {
 
 	@Before
 	@Override

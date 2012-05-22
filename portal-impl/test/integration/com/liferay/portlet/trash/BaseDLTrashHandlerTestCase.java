@@ -23,7 +23,7 @@ import com.liferay.portal.service.ServiceTestUtil;
 import com.liferay.portlet.asset.model.AssetEntry;
 import com.liferay.portlet.asset.service.AssetEntryLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.model.DLFileEntryConstants;
-import com.liferay.portlet.documentlibrary.service.BaseDLAppTest;
+import com.liferay.portlet.documentlibrary.service.BaseDLAppTestCase;
 import com.liferay.portlet.documentlibrary.service.DLAppServiceUtil;
 import com.liferay.portlet.documentlibrary.util.DLIndexer;
 import com.liferay.portlet.trash.service.TrashEntryServiceUtil;
@@ -31,7 +31,7 @@ import com.liferay.portlet.trash.service.TrashEntryServiceUtil;
 /**
  * @author Alexander Chow
  */
-public class BaseDLTrashHandlerTest extends BaseDLAppTest {
+public abstract class BaseDLTrashHandlerTestCase extends BaseDLAppTestCase {
 
 	protected AssetEntry fetchAssetEntry(long fileEntryId) throws Exception {
 		return AssetEntryLocalServiceUtil.fetchEntry(

@@ -30,7 +30,7 @@ import org.junit.Before;
 /**
  * @author Alexander Chow
  */
-public class BaseDLAppTest {
+public abstract class BaseDLAppTestCase {
 
 	@Before
 	public void setUp() throws Exception {

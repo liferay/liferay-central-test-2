@@ -31,7 +31,7 @@ import org.junit.runner.RunWith;
  */
 @ExecutionTestListeners(listeners = {EnvironmentExecutionTestListener.class})
 @RunWith(LiferayIntegrationJUnitTestRunner.class)
-public class DLFolderTrashHandlerTest extends BaseDLTrashHandlerTest {
+public class DLFolderTrashHandlerTest extends BaseDLTrashHandlerTestCase {
 
 	@Test
 	public void testTrashAndDelete() throws Exception {
@@ -73,13 +73,13 @@ public class DLFolderTrashHandlerTest extends BaseDLTrashHandlerTest {
 
 		Folder folder = addFolder(parentFolder.getFolderId(), "Test Folder");
 
-		Folder subFolder = addFolder(folder.getFolderId(), "Test Subfolder");
+		Folder subfolder = addFolder(folder.getFolderId(), "Test Subfolder");
 
 		long fileEntryId = 0;
 
 		if (file) {
 			FileEntry fileEntry = addFileEntry(
-				subFolder.getFolderId(), "Test File.txt");
+				subfolder.getFolderId(), "Test File.txt");
 
 			fileEntryId = fileEntry.getFileEntryId();
 
