@@ -46,8 +46,8 @@ public class DLFolderFinderImpl
 	public static final String COUNT_F_BY_G_M_F =
 		DLFolderFinder.class.getName() + ".countF_ByG_M_F";
 
-	public static final String COUNT_F_BY_G_M_F_S =
-		DLFolderFinder.class.getName() + ".countF_ByG_M_F_S";
+	public static final String COUNT_F_BY_G_M_S_F =
+		DLFolderFinder.class.getName() + ".countF_ByG_M_S_F";
 
 	public static final String COUNT_FE_BY_G_F =
 		DLFolderFinder.class.getName() + ".countFE_ByG_F";
@@ -61,8 +61,8 @@ public class DLFolderFinderImpl
 	public static final String FIND_F_BY_G_M_F =
 		DLFolderFinder.class.getName() + ".findF_ByG_M_F";
 
-	public static final String FIND_F_BY_G_M_F_S =
-		DLFolderFinder.class.getName() + ".findF_ByG_M_F_S";
+	public static final String FIND_F_BY_G_M_S_F =
+		DLFolderFinder.class.getName() + ".findF_ByG_M_S_F";
 
 	public static final String FIND_FE_BY_G_F =
 		DLFolderFinder.class.getName() + ".findFE_ByG_F";
@@ -177,7 +177,7 @@ public class DLFolderFinderImpl
 				sql = CustomSQLUtil.get(COUNT_F_BY_G_M_F);
 			}
 			else {
-				sql = CustomSQLUtil.get(COUNT_F_BY_G_M_F_S);
+				sql = CustomSQLUtil.get(COUNT_F_BY_G_M_S_F);
 
 				sql = replaceExcludeStatus(sql, queryDefinition, "DLFolder");
 			}
@@ -404,7 +404,7 @@ public class DLFolderFinderImpl
 				sql = CustomSQLUtil.get(FIND_F_BY_G_M_F);
 			}
 			else {
-				sql = CustomSQLUtil.get(FIND_F_BY_G_M_F_S);
+				sql = CustomSQLUtil.get(FIND_F_BY_G_M_S_F);
 
 				sql = replaceExcludeStatus(sql, queryDefinition, "DLFolder");
 			}

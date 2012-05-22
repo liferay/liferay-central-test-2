@@ -265,8 +265,8 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 			return dlFolderPersistence.findByG_P(groupId, parentFolderId);
 		}
 		else {
-			return dlFolderPersistence.findByG_P_M(
-				groupId, parentFolderId, false);
+			return dlFolderPersistence.findByG_M_P(
+				groupId, false, parentFolderId);
 		}
 	}
 
@@ -280,8 +280,8 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 				groupId, parentFolderId, start, end, obc);
 		}
 		else {
-			return dlFolderPersistence.findByG_P_M(
-				groupId, parentFolderId, false, start, end, obc);
+			return dlFolderPersistence.findByG_M_P(
+				groupId, false, parentFolderId, start, end, obc);
 		}
 	}
 
@@ -389,8 +389,8 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 			return dlFolderPersistence.countByG_P(groupId, parentFolderId);
 		}
 		else {
-			return dlFolderPersistence.countByG_P_M(
-				groupId, parentFolderId, false);
+			return dlFolderPersistence.countByG_M_P(
+				groupId, false, parentFolderId);
 		}
 	}
 
@@ -405,14 +405,14 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 			OrderByComparator obc)
 		throws SystemException {
 
-		return dlFolderPersistence.findByG_P_M(
-			groupId, parentFolderId, true, start, end, obc);
+		return dlFolderPersistence.findByG_M_P(
+			groupId, true, parentFolderId, start, end, obc);
 	}
 
 	public int getMountFoldersCount(long groupId, long parentFolderId)
 		throws SystemException {
 
-		return dlFolderPersistence.countByG_P_M(groupId, parentFolderId, true);
+		return dlFolderPersistence.countByG_M_P(groupId, true, parentFolderId);
 	}
 
 	public void getSubfolderIds(
@@ -590,16 +590,17 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 
 		dlFolderPersistence.update(dlFolder, false);
 
-		// Children
+		// Folders, file entries, and file shortcuts
 
 		QueryDefinition queryDefinition = new QueryDefinition(
 			WorkflowConstants.STATUS_ANY);
 
-		List<Object> children =
+		List<Object> foldersAndFileEntriesAndFileShortcuts =
 			getFoldersAndFileEntriesAndFileShortcuts(
 				dlFolder.getGroupId(), folderId, null, false, queryDefinition);
 
-		dlAppHelperLocalService.updateChildrenStatuses(user, children, status);
+		dlAppHelperLocalService.updateStatuses(
+			user, foldersAndFileEntriesAndFileShortcuts, status);
 
 		return dlFolder;
 	}

@@ -180,8 +180,8 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 				groupId, parentFolderId, status, start, end, obc);
 		}
 		else {
-			return dlFolderPersistence.filterFindByG_P_S_M(
-				groupId, parentFolderId, status, false, start, end, obc);
+			return dlFolderPersistence.filterFindByG_M_P_S(
+				groupId, false, parentFolderId, status, start, end, obc);
 		}
 	}
 
@@ -271,8 +271,8 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 				groupId, parentFolderId, status);
 		}
 		else {
-			return dlFolderPersistence.filterCountByG_P_S_M(
-				groupId, parentFolderId, status, false);
+			return dlFolderPersistence.filterCountByG_M_P_S(
+				groupId, false, parentFolderId, status);
 		}
 	}
 
@@ -281,15 +281,15 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 			OrderByComparator obc)
 		throws SystemException {
 
-		return dlFolderPersistence.filterFindByG_P_M(
-			groupId, parentFolderId, true, start, end, obc);
+		return dlFolderPersistence.filterFindByG_M_P(
+			groupId, true, parentFolderId, start, end, obc);
 	}
 
 	public int getMountFoldersCount(long groupId, long parentFolderId)
 		throws SystemException {
 
-		return dlFolderPersistence.filterCountByG_P_M(
-			groupId, parentFolderId, true);
+		return dlFolderPersistence.filterCountByG_M_P(
+			groupId, true, parentFolderId);
 	}
 
 	public void getSubfolderIds(
