@@ -421,23 +421,23 @@ public class JSONServiceAction extends JSONAction {
 			String[] parameterTypes)
 		throws Exception {
 
-		StringBundler keyStringBundler = new StringBundler(5);
+		StringBundler sb = new StringBundler(5);
 
-		keyStringBundler.append(clazz.getName());
-		keyStringBundler.append("_METHOD_NAME_");
-		keyStringBundler.append(methodName);
-		keyStringBundler.append("_PARAMETERS_");
+		sb.append(clazz.getName());
+		sb.append("_METHOD_NAME_");
+		sb.append(methodName);
+		sb.append("_PARAMETERS_");
 
 		String parameterTypesNames = StringUtil.merge(parameterTypes);
 
 		if (Validator.isNull(parameterTypesNames)) {
-			keyStringBundler.append(parameters.length);
+			sb.append(parameters.length);
 		}
 		else {
-			keyStringBundler.append(parameterTypesNames);
+			sb.append(parameterTypesNames);
 		}
 
-		String key = keyStringBundler.toString();
+		String key = sb.toString();
 
 		Object[] methodAndParameterTypes = _methodCache.get(key);
 
@@ -478,12 +478,12 @@ public class JSONServiceAction extends JSONAction {
 						}
 					}
 					else if (method != null) {
-						String parameterNames = StringUtil.merge(parameters);
+						String parametersString = StringUtil.merge(parameters);
 
 						_log.error(
 							"Obscure method name for class " + clazz +
 								", method " + methodName + ", and parameters " +
-									parameterNames);
+									parametersString);
 
 						return null;
 					}
@@ -505,11 +505,11 @@ public class JSONServiceAction extends JSONAction {
 			return methodAndParameterTypes;
 		}
 		else {
-			String parameterNames = StringUtil.merge(parameters);
+			String parametersString = StringUtil.merge(parameters);
 
 			_log.error(
 				"No method found for class " + clazz + ", method " +
-					methodName + ", and parameters " + parameterNames);
+					methodName + ", and parameters " + parametersString);
 
 			return null;
 		}
