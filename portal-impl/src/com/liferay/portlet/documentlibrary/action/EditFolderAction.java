@@ -126,8 +126,9 @@ public class EditFolderAction extends PortletAction {
 			ActionRequest actionRequest, boolean moveToTrash)
 		throws Exception {
 
-		long folderId = ParamUtil.getLong(actionRequest, "folderId");
 		long[] deleteFolderIds = null;
+
+		long folderId = ParamUtil.getLong(actionRequest, "folderId");
 
 		if (folderId > 0) {
 			deleteFolderIds = new long[] {folderId};
