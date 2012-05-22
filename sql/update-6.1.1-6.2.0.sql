@@ -230,6 +230,18 @@ update Country set name = 'yemen' where name = 'Yemen';
 update Country set name = 'zambia' where name = 'Zambia';
 update Country set name = 'zimbabwe' where name = 'Zimbabwe';
 
+alter table DLFolder add status INTEGER;
+alter table DLFolder add statusByUserId LONG;
+alter table DLFolder add statusByUserName VARCHAR(75) null;
+alter table DLFolder add statusDate DATE null;
+
+COMMIT_TRANSACTION;
+
+update DLFolder set status = 0;
+update DLFolder set statusByUserId = userId;
+update DLFolder set statusByUserName = userName;
+update DLFolder set statusDate = modifiedDate;
+
 drop table Groups_Permissions;
 
 alter table JournalArticle add folderId LONG;
@@ -257,18 +269,6 @@ drop table Resource_;
 drop table ResourceCode;
 
 drop table Roles_Permissions;
-
-alter table DLFolder add status INTEGER;
-alter table DLFolder add statusByUserId LONG;
-alter table DLFolder add statusByUserName VARCHAR(75) null;
-alter table DLFolder add statusDate DATE null;
-
-COMMIT_TRANSACTION;
-
-update DLFolder set status = 0;
-update DLFolder set statusByUserId = userId;
-update DLFolder set statusByUserName = userName;
-update DLFolder set statusDate = modifiedDate;
 
 alter table SocialActivityCounter add active_ BOOLEAN;
 
