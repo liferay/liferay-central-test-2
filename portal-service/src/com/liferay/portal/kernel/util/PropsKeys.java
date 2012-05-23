@@ -1037,7 +1037,7 @@ public interface PropsKeys {
 
 	public static final String JSP_WRITER_BUFFER_SIZE = "jsp.writer.buffer.size";
 
-	public static final String LAYOUT_AJAXABLE_RENDER_ENABLE = "layout.ajaxable.render.enable";
+	public static final String LAYOUT_AJAX_RENDER_ENABLE = "layout.ajax.render.enable";
 
 	public static final String LAYOUT_CLONE_IMPL = "layout.clone.impl";
 

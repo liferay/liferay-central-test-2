@@ -49,22 +49,8 @@ public class TemplateProcessor implements ColumnProcessor {
 			String portletId)
 		throws SystemException {
 
-		_ajaxableRenderEnable = GetterUtil.getBoolean(
-			request.getAttribute(WebKeys.PORTLET_AJAXABLE_RENDER));
-
 		_request = request;
 		_response = response;
-		_portletRenderersMap =
-			new TreeMap<Integer, List<PortletRenderer>>(
-				new Comparator<Integer>() {
-
-					public int compare(
-						Integer renderWeight1, Integer renderWeight2) {
-
-						return renderWeight2.compareTo(renderWeight1);
-					}
-
-				});
 
 		if (Validator.isNotNull(portletId)) {
 			ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
@@ -73,15 +59,28 @@ public class TemplateProcessor implements ColumnProcessor {
 			_portlet = PortletLocalServiceUtil.getPortletById(
 				themeDisplay.getCompanyId(), portletId);
 		}
+
+		_portletAjaxRender = GetterUtil.getBoolean(
+			request.getAttribute(WebKeys.PORTLET_AJAX_RENDER));
+
+		_portletRenderers = new TreeMap<Integer, List<PortletRenderer>>(
+			new Comparator<Integer>() {
+
+				public int compare(
+					Integer renderWeight1, Integer renderWeight2) {
+
+					return renderWeight2.compareTo(renderWeight1);
+				}
+
+			});
 	}
 
-	public Map<Integer, List<PortletRenderer>> getPortletRenderersMap() {
-
-		return _portletRenderersMap;
+	public Map<Integer, List<PortletRenderer>> getPortletRenderers() {
+		return _portletRenderers;
 	}
 
-	public boolean isAjaxableRenderEnable() {
-		return _ajaxableRenderEnable;
+	public boolean isPortletAjaxRender() {
+		return _portletAjaxRender;
 	}
 
 	public String processColumn(String columnId) throws Exception {
@@ -130,28 +129,28 @@ public class TemplateProcessor implements ColumnProcessor {
 		for (int i = 0; i < portlets.size(); i++) {
 			Portlet portlet = portlets.get(i);
 
-			Integer columnPos = new Integer(i);
 			Integer columnCount = new Integer(portlets.size());
+			Integer columnPos = new Integer(i);
 
-			Integer renderWeight = portlet.getRenderWeight();
+			PortletRenderer portletRenderer = new PortletRenderer(
+				portlet, columnId, columnCount, columnPos);
 
-			PortletRenderer portletRenderer =
-				new PortletRenderer(portlet, columnId, columnCount, columnPos);
-
-			if (_ajaxableRenderEnable && (portlet.getRenderWeight() < 1)) {
+			if (_portletAjaxRender && (portlet.getRenderWeight() < 1)) {
 				StringBundler renderResult = portletRenderer.renderAjax(
 					_request, _response);
 
 				sb.append(renderResult);
 			}
 			else {
-				List<PortletRenderer> portletRenderers =
-					_portletRenderersMap.get(renderWeight);
+				Integer renderWeight = portlet.getRenderWeight();
+
+				List<PortletRenderer> portletRenderers = _portletRenderers.get(
+					renderWeight);
 
 				if (portletRenderers == null) {
 					portletRenderers = new ArrayList<PortletRenderer>();
 
-					_portletRenderersMap.put(renderWeight, portletRenderers);
+					_portletRenderers.put(renderWeight, portletRenderers);
 				}
 
 				portletRenderers.add(portletRenderer);
@@ -194,9 +193,9 @@ public class TemplateProcessor implements ColumnProcessor {
 		}
 	}
 
-	private boolean _ajaxableRenderEnable;
 	private Portlet _portlet;
-	private Map<Integer, List<PortletRenderer>> _portletRenderersMap;
+	private boolean _portletAjaxRender;
+	private Map<Integer, List<PortletRenderer>> _portletRenderers;
 	private HttpServletRequest _request;
 	private HttpServletResponse _response;
 

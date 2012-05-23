@@ -68,11 +68,11 @@ public class ThemeDisplay
 	}
 
 	public Object clone() throws CloneNotSupportedException {
+		ThemeDisplay themeDisplay = (ThemeDisplay)super.clone();
+
 		PortletDisplay portletDisplay = new PortletDisplay();
 
 		_portletDisplay.copyTo(portletDisplay);
-
-		ThemeDisplay themeDisplay = (ThemeDisplay)super.clone();
 
 		themeDisplay._portletDisplay = portletDisplay;
 
@@ -716,8 +716,8 @@ public class ThemeDisplay
 			return this;
 		}
 
-		this._includePortletCssJs = themeDisplay._includePortletCssJs;
-		this._includeServiceJs = themeDisplay._includeServiceJs;
+		_includePortletCssJs = themeDisplay._includePortletCssJs;
+		_includeServiceJs = themeDisplay._includeServiceJs;
 
 		return this;
 	}

@@ -733,7 +733,7 @@ if ((invokerPortlet != null) && (invokerPortlet.isStrutsPortlet() || invokerPort
 
 // Render portlet
 
-boolean portletException = GetterUtil.getBoolean(request.getAttribute(WebKeys.PARALLEL_RENDERING_TIMEOUT_ERROR), false);
+boolean portletException = GetterUtil.getBoolean(request.getAttribute(WebKeys.PARALLEL_RENDERING_TIMEOUT_ERROR));
 Boolean portletVisibility = null;
 
 if (portlet.isActive() && portlet.isReady() && access && supportsMimeType && (invokerPortlet != null)) {
@@ -758,14 +758,16 @@ if (portlet.isActive() && portlet.isReady() && access && supportsMimeType && (in
 	catch (Exception e) {
 		portletException = true;
 
-		// Under parallel rendering context, interrupted means cancelled.
-		// Terminates render process on cancelling.
-		if (Thread.currentThread().isInterrupted()) {
+		// Under parallel rendering context. An interrupted state means the call
+		// was cancelled and so we should terminate the render process.
+
+		Thread currentThread = Thread.currentThread();
+
+		if (currentThread.isInterrupted()) {
 			return;
 		}
-		else {
-			LogUtil.log(_log, e);
-		}
+
+		LogUtil.log(_log, e);
 	}
 }
 

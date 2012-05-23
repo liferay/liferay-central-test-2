@@ -76,7 +76,7 @@ public class PortletRenderer {
 		throws PortletContainerException {
 
 		request = PortletContainerUtil.setupOptionalRenderParameters(
-			request, _ajaxRenderPath, null, null, null);
+			request, _RENDER_PATH, null, null, null);
 
 		return _render(request, response);
 	}
@@ -85,7 +85,8 @@ public class PortletRenderer {
 			HttpServletRequest request, HttpServletResponse response)
 		throws PortletContainerException {
 
-		request.setAttribute(WebKeys.PARALLEL_RENDERING_TIMEOUT_ERROR, true);
+		request.setAttribute(
+			WebKeys.PARALLEL_RENDERING_TIMEOUT_ERROR, Boolean.TRUE);
 
 		request = PortletContainerUtil.setupOptionalRenderParameters(
 			request, null, null, null, null);
@@ -112,7 +113,7 @@ public class PortletRenderer {
 		return unsyncStringWriter.getStringBundler();
 	}
 
-	private static String _ajaxRenderPath =
+	private static final String _RENDER_PATH =
 		"/html/portal/load_render_portlet.jsp";
 
 	private Integer _columnCount;
@@ -128,6 +129,7 @@ public class PortletRenderer {
 			HttpServletRequest request, HttpServletResponse response) {
 
 			super(false, true);
+
 			_request= request;
 			_response = response;
 		}
@@ -152,9 +154,14 @@ public class PortletRenderer {
 				return _render(request, _response);
 			}
 			catch (Exception e) {
-				// Under parallel rendering context, interrupted means cancelled
-				// Don't rethrow exception on cancelling
-				if (!Thread.currentThread().isInterrupted()) {
+
+				// Under parallel rendering context. An interrupted state means
+				// the call was cancelled and so we should not rethrow the
+				// exception.
+
+				Thread currentThread = Thread.currentThread();
+
+				if (!currentThread.isInterrupted()) {
 					throw e;
 				}
 

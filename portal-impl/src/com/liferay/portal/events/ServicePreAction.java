@@ -1915,22 +1915,22 @@ public class ServicePreAction extends Action {
 
 		// Ajaxable render
 
-		if (PropsValues.LAYOUT_AJAXABLE_RENDER_ENABLE) {
-			Boolean ajaxableRenderEnableObj = Boolean.valueOf(
-				ParamUtil.getBoolean(request, "p_p_ajaxable", true));
+		if (PropsValues.LAYOUT_AJAX_RENDER_ENABLE) {
+			boolean portletAjaxRender = ParamUtil.getBoolean(
+				request, "p_p_ajax", true);
 
 			request.setAttribute(
-				WebKeys.PORTLET_AJAXABLE_RENDER, ajaxableRenderEnableObj);
+				WebKeys.PORTLET_AJAX_RENDER, portletAjaxRender);
 		}
 
 		// Parallel render
 
 		if (PropsValues.LAYOUT_PARALLEL_RENDER_ENABLE) {
-			Boolean parallelRenderEnableObj = Boolean.valueOf(
-				ParamUtil.getBoolean(request, "p_p_parallel", true));
+			boolean portletParallelRender = ParamUtil.getBoolean(
+				request, "p_p_parallel", true);
 
 			request.setAttribute(
-				WebKeys.PORTLET_PARALLEL_RENDER, parallelRenderEnableObj);
+				WebKeys.PORTLET_PARALLEL_RENDER, portletParallelRender);
 		}
 
 		// Main Journal article

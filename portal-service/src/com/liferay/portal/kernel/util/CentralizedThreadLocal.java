@@ -163,6 +163,18 @@ public class CentralizedThreadLocal<T> extends ThreadLocal<T> {
 	private static final Set<Class<?>> _immutableTypes =
 		new HashSet<Class<?>>();
 
+	static {
+		_immutableTypes.add(Boolean.class);
+		_immutableTypes.add(Byte.class);
+		_immutableTypes.add(Character.class);
+		_immutableTypes.add(Short.class);
+		_immutableTypes.add(Integer.class);
+		_immutableTypes.add(Long.class);
+		_immutableTypes.add(Float.class);
+		_immutableTypes.add(Double.class);
+		_immutableTypes.add(String.class);
+	}
+
 	private static final AtomicInteger _longLivedNextHasCode =
 		new AtomicInteger();
 	private static final ThreadLocal<ThreadLocalMap> _longLivedThreadLocals =
@@ -316,18 +328,6 @@ public class CentralizedThreadLocal<T> extends ThreadLocal<T> {
 			return new ThreadLocalMap();
 		}
 
-	}
-
-	static {
-		_immutableTypes.add(Boolean.class);
-		_immutableTypes.add(Byte.class);
-		_immutableTypes.add(Character.class);
-		_immutableTypes.add(Short.class);
-		_immutableTypes.add(Integer.class);
-		_immutableTypes.add(Long.class);
-		_immutableTypes.add(Float.class);
-		_immutableTypes.add(Double.class);
-		_immutableTypes.add(String.class);
 	}
 
 }

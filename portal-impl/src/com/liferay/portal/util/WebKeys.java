@@ -318,7 +318,7 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 
 	public static final String PORTAL_REQUEST_DATA_SAMPLE = "PORTAL_REQUEST_DATA_SAMPLE";
 
-	public static final String PORTLET_AJAXABLE_RENDER = "PORTLET_AJAXABLE_RENDER";
+	public static final String PORTLET_AJAX_RENDER = "PORTLET_AJAX_RENDER";
 
 	public static final String PORTLET_BREADCRUMBS = "PORTLET_BREADCRUMBS";
 
