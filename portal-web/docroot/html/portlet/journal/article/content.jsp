@@ -907,6 +907,19 @@ private void _format(long groupId, Element contentParentElement, Element xsdPare
 				repeatablePrototype = (siblingIndex == 0);
 			}
 
+			request.setAttribute(WebKeys.JOURNAL_ARTICLE_GROUP_ID, String.valueOf(groupId));
+
+			request.setAttribute(WebKeys.JOURNAL_ARTICLE_CONTENT_EL, contentElement);
+			request.setAttribute(WebKeys.JOURNAL_STRUCTURE_EL, xsdElement);
+			request.setAttribute(WebKeys.JOURNAL_STRUCTURE_EL_CONTENT, elContent);
+			request.setAttribute(WebKeys.JOURNAL_STRUCTURE_EL_COUNT, count);
+			request.setAttribute(WebKeys.JOURNAL_STRUCTURE_EL_DEPTH, depth);
+			request.setAttribute(WebKeys.JOURNAL_STRUCTURE_EL_INSTANCE_ID, elInstanceId);
+			request.setAttribute(WebKeys.JOURNAL_STRUCTURE_EL_LANGUAGE_ID, elLanguageId);
+			request.setAttribute(WebKeys.JOURNAL_STRUCTURE_EL_META_DATA, elMetaData);
+			request.setAttribute(WebKeys.JOURNAL_STRUCTURE_EL_NAME, elName);
+			request.setAttribute(WebKeys.JOURNAL_STRUCTURE_EL_PARENT_ID, elParentStructureId);
+
 			if (elRepeatable || _hasRepeatedParent(contentElement)) {
 				Map <String, Integer> repeatCountMap = (Map<String, Integer>)request.getAttribute(WebKeys.JOURNAL_STRUCTURE_EL_REPEAT_COUNT_MAP);
 
@@ -927,18 +940,6 @@ private void _format(long groupId, Element contentParentElement, Element xsdPare
 				request.setAttribute(WebKeys.JOURNAL_STRUCTURE_EL_REPEAT_COUNT_MAP, repeatCountMap);
 			}
 
-			request.setAttribute(WebKeys.JOURNAL_ARTICLE_GROUP_ID, String.valueOf(groupId));
-
-			request.setAttribute(WebKeys.JOURNAL_ARTICLE_CONTENT_EL, contentElement);
-			request.setAttribute(WebKeys.JOURNAL_STRUCTURE_EL, xsdElement);
-			request.setAttribute(WebKeys.JOURNAL_STRUCTURE_EL_CONTENT, elContent);
-			request.setAttribute(WebKeys.JOURNAL_STRUCTURE_EL_COUNT, count);
-			request.setAttribute(WebKeys.JOURNAL_STRUCTURE_EL_DEPTH, depth);
-			request.setAttribute(WebKeys.JOURNAL_STRUCTURE_EL_INSTANCE_ID, elInstanceId);
-			request.setAttribute(WebKeys.JOURNAL_STRUCTURE_EL_LANGUAGE_ID, elLanguageId);
-			request.setAttribute(WebKeys.JOURNAL_STRUCTURE_EL_META_DATA, elMetaData);
-			request.setAttribute(WebKeys.JOURNAL_STRUCTURE_EL_NAME, elName);
-			request.setAttribute(WebKeys.JOURNAL_STRUCTURE_EL_PARENT_ID, elParentStructureId);
 			request.setAttribute(WebKeys.JOURNAL_STRUCTURE_EL_REPEATABLE, String.valueOf(elRepeatable));
 			request.setAttribute(WebKeys.JOURNAL_STRUCTURE_EL_REPEATABLE_PROTOTYPE, String.valueOf(repeatablePrototype));
 			request.setAttribute(WebKeys.JOURNAL_STRUCTURE_EL_TYPE, elType);

@@ -43,6 +43,19 @@ String elInstanceId = (String)request.getAttribute(WebKeys.JOURNAL_STRUCTURE_EL_
 String elName = (String)request.getAttribute(WebKeys.JOURNAL_STRUCTURE_EL_NAME);
 String elType = (String)request.getAttribute(WebKeys.JOURNAL_STRUCTURE_EL_TYPE);
 String elIndexType = (String)request.getAttribute(WebKeys.JOURNAL_STRUCTURE_EL_INDEX_TYPE);
+
+String elRepeatCount = StringPool.BLANK;
+
+Map <String, Integer> repeatCountMap = (Map<String, Integer>)request.getAttribute(WebKeys.JOURNAL_STRUCTURE_EL_REPEAT_COUNT_MAP);
+
+if (repeatCountMap != null) {
+	Integer repeatCount = repeatCountMap.get(elName);
+
+	if (repeatCount != null) {
+		elRepeatCount = StringPool.UNDERLINE + repeatCount;
+	}
+}
+
 boolean elRepeatable = GetterUtil.getBoolean((String)request.getAttribute(WebKeys.JOURNAL_STRUCTURE_EL_REPEATABLE));
 boolean elRepeatablePrototype = GetterUtil.getBoolean((String)request.getAttribute(WebKeys.JOURNAL_STRUCTURE_EL_REPEATABLE_PROTOTYPE));
 String elContent = (String)request.getAttribute(WebKeys.JOURNAL_STRUCTURE_EL_CONTENT);
@@ -91,18 +104,6 @@ if (Validator.isNull(elContent) && Validator.isNotNull(elPredefinedValue)) {
 }
 
 Element contentEl = (Element)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTENT_EL);
-
-String elRepeatCount = StringPool.BLANK;
-
-Map <String, Integer> repeatCountMap = (Map<String, Integer>)request.getAttribute(WebKeys.JOURNAL_STRUCTURE_EL_REPEAT_COUNT_MAP);
-
-if (repeatCountMap != null) {
-	Integer repeatCount = repeatCountMap.get(elName);
-
-	if (repeatCount != null) {
-		elRepeatCount = StringPool.UNDERLINE + repeatCount;
-	}
-}
 %>
 
 <li class="structure-field <%= css.trim() %>" <%= parentStructureData %> dataInstanceId='<%= elInstanceId %>' dataName='<%= elName %>' dataRepeatable='<%= elRepeatable %>' dataType='<%= elType %>' dataIndexType='<%= elIndexType %>' <%= metaData %>>
