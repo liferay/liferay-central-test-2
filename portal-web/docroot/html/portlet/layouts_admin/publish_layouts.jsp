@@ -269,7 +269,7 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 	<liferay-ui:error exception="<%= LayoutPrototypeException.class %>">
 
 		<%
-			LayoutPrototypeException lpe = (LayoutPrototypeException)errorException;
+		LayoutPrototypeException lpe = (LayoutPrototypeException)errorException;
 		%>
 
 		<liferay-ui:message key="the-pages-could-not-be-published-because-one-or-more-required-page-templates-could-not-be-found-on-the-remote-system.-please-import-the-following-templates-manually" />
@@ -277,12 +277,12 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 		<ul>
 
 			<%
-				List<Tuple> missingLayoutPrototypes = lpe.getMissingLayoutPrototypes();
+			List<Tuple> missingLayoutPrototypes = lpe.getMissingLayoutPrototypes();
 
-				for (Tuple missingLayoutPrototype : missingLayoutPrototypes) {
-					String layoutPrototypeClassName = (String)missingLayoutPrototype.getObject(0);
-					String layoutPrototypeUuid = (String)missingLayoutPrototype.getObject(1);
-					String layoutPrototypeName = (String)missingLayoutPrototype.getObject(2);
+			for (Tuple missingLayoutPrototype : missingLayoutPrototypes) {
+				String layoutPrototypeClassName = (String)missingLayoutPrototype.getObject(0);
+				String layoutPrototypeUuid = (String)missingLayoutPrototype.getObject(1);
+				String layoutPrototypeName = (String)missingLayoutPrototype.getObject(2);
 			%>
 
 			<li>
@@ -290,7 +290,7 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 			</li>
 
 			<%
-				}
+			}
 			%>
 
 		</ul>
