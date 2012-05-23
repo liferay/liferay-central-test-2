@@ -15,11 +15,11 @@
 package com.liferay.portalweb.portal;
 
 import com.liferay.portalweb.portal.login.LoginTests;
-import com.liferay.portalweb.stagingcommunity.assetpublisher.AssetPublisherTestPlan;
-import com.liferay.portalweb.stagingcommunity.blogs.BlogsTests;
-import com.liferay.portalweb.stagingcommunity.documentlibrary.DocumentLibraryTestPlan;
-import com.liferay.portalweb.stagingcommunity.sites.SitesTestPlan;
-import com.liferay.portalweb.stagingcommunity.webcontentdisplay.WebContentDisplayTestPlan;
+import com.liferay.portalweb.stagingsite.assetpublisher.AssetPublisherTestPlan;
+import com.liferay.portalweb.stagingsite.blogs.BlogsTests;
+import com.liferay.portalweb.stagingsite.documentlibrary.DocumentLibraryTestPlan;
+import com.liferay.portalweb.stagingsite.sites.SitesTestPlan;
+import com.liferay.portalweb.stagingsite.webcontentdisplay.WebContentDisplayTestPlan;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
