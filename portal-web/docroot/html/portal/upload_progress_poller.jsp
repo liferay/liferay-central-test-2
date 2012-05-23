@@ -19,7 +19,7 @@
 <%
 String uploadProgressId = ParamUtil.getString(request, "uploadProgressId");
 
-Integer updatePeriod = ParamUtil.getInteger(request, "updatePeriod", 1000);
+int updatePeriod = ParamUtil.getInteger(request, "updatePeriod", 1000);
 
 String fileName = GetterUtil.getString((String)session.getAttribute(LiferayFileUpload.FILE_NAME + uploadProgressId));
 
@@ -32,6 +32,7 @@ Integer percent = (Integer)session.getAttribute(LiferayFileUpload.PERCENT + uplo
 if (percent == null) {
 	percent = (Integer)session.getAttribute(LiferayFileUpload.PERCENT);
 }
+
 if (percent == null) {
 	percent = new Integer(100);
 }
