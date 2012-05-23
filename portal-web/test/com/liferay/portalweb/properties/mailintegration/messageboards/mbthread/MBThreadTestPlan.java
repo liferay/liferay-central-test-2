@@ -12,10 +12,10 @@
  * details.
  */
 
-package com.liferay.portalweb.properties.mailintegration.messageboards;
+package com.liferay.portalweb.properties.mailintegration.messageboards.mbthread;
 
 import com.liferay.portalweb.portal.BaseTestSuite;
-import com.liferay.portalweb.properties.mailintegration.messageboards.mbthread.MBThreadTestPlan;
+import com.liferay.portalweb.properties.mailintegration.messageboards.mbthread.gmailreplymbcategorythreadmessageemail.Gmail_ReplyMBCategoryThreadMessageEmailTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -23,12 +23,12 @@ import junit.framework.TestSuite;
 /**
  * @author Brian Wing Shun Chan
  */
-public class MessageBoardsTestPlan extends BaseTestSuite {
+public class MBThreadTestPlan extends BaseTestSuite {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(MBThreadTestPlan.suite());
+		testSuite.addTest(Gmail_ReplyMBCategoryThreadMessageEmailTests.suite());
 
 		return testSuite;
 	}

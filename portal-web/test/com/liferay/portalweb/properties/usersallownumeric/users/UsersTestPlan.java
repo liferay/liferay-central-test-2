@@ -12,10 +12,10 @@
  * details.
  */
 
-package com.liferay.portalweb.properties.mailintegration.messageboards;
+package com.liferay.portalweb.properties.usersallownumeric.users;
 
 import com.liferay.portalweb.portal.BaseTestSuite;
-import com.liferay.portalweb.properties.mailintegration.messageboards.mbthread.MBThreadTestPlan;
+import com.liferay.portalweb.properties.usersallownumeric.users.user.UserTestPlan;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -23,12 +23,12 @@ import junit.framework.TestSuite;
 /**
  * @author Brian Wing Shun Chan
  */
-public class MessageBoardsTestPlan extends BaseTestSuite {
+public class UsersTestPlan extends BaseTestSuite {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(MBThreadTestPlan.suite());
+		testSuite.addTest(UserTestPlan.suite());
 
 		return testSuite;
 	}

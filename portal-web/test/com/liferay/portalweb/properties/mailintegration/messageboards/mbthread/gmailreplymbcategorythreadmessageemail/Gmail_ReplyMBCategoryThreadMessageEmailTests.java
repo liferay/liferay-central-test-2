@@ -12,9 +12,10 @@
  * details.
  */
 
-package com.liferay.portalweb.properties.mailintegration.webcontent.wcwebcontent.gmailviewwcwebcontentaddedemail;
+package com.liferay.portalweb.properties.mailintegration.messageboards.mbthread.gmailreplymbcategorythreadmessageemail;
 
 import com.liferay.portalweb.portal.BaseTestSuite;
+import com.liferay.portalweb.portal.util.TearDownPageTest;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -22,7 +23,7 @@ import junit.framework.TestSuite;
 /**
  * @author Brian Wing Shun Chan
  */
-public class Gmail_ViewWCWebContentAddedEmailTests extends BaseTestSuite {
+public class Gmail_ReplyMBCategoryThreadMessageEmailTests extends BaseTestSuite {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 		testSuite.addTestSuite(ConfigureServerAdministrationMailTest.class);
@@ -30,28 +31,27 @@ public class Gmail_ViewWCWebContentAddedEmailTests extends BaseTestSuite {
 		testSuite.addTestSuite(AddUserGmailTest.class);
 		testSuite.addTestSuite(AddSiteTest.class);
 		testSuite.addTestSuite(AssignMembersSiteUserTest.class);
-		testSuite.addTestSuite(ConfigureWCPortletEmailFromGmailServerCPTest.class);
-		testSuite.addTestSuite(ConfigureWCPortletWebContentAddedEmailCPTest.class);
-		testSuite.addTestSuite(AddRoleWebContentEditorCPTest.class);
-		testSuite.addTestSuite(DefineRoleWebContentEditorCPTest.class);
-		testSuite.addTestSuite(AssignMembersRoleWebContentEditorUserActionsTest.class);
+		testSuite.addTestSuite(AddPageMBTest.class);
+		testSuite.addTestSuite(AddPortletMBTest.class);
+		testSuite.addTestSuite(ConfigureMBPortletEmailFromGmailServerTest.class);
+		testSuite.addTestSuite(AddMBCategoryTest.class);
 		testSuite.addTestSuite(SignOutTest.class);
 		testSuite.addTestSuite(Gmail_TearDownEmailTest.class);
 		testSuite.addTestSuite(GmailServer_TearDownEmailTest.class);
 		testSuite.addTestSuite(Gmail_SignInTest.class);
-		testSuite.addTestSuite(Gmail_SubscribeWCPortletCPTest.class);
+		testSuite.addTestSuite(Gmail_SubscribeMBCategoryTest.class);
 		testSuite.addTestSuite(SignOutTest.class);
 		testSuite.addTestSuite(SignInTest.class);
-		testSuite.addTestSuite(AddWCWebContentCPTest.class);
-		testSuite.addTestSuite(Gmail_ViewWCWebContentAddedEmailTest.class);
+		testSuite.addTestSuite(PostNewMBCategoryThreadMessageTest.class);
+		testSuite.addTestSuite(Gmail_ReplyMBCategoryThreadMessageEmailTest.class);
+		testSuite.addTestSuite(ViewMBCategoryThreadMessageEmailTest.class);
 		testSuite.addTestSuite(Gmail_TearDownEmailTest.class);
 		testSuite.addTestSuite(GmailServer_TearDownEmailTest.class);
-		testSuite.addTestSuite(TearDownRoleWebContentEditorTest.class);
-		testSuite.addTestSuite(TearDownWCWebContentCPTest.class);
-		testSuite.addTestSuite(TearDownUserTest.class);
+		testSuite.addTestSuite(TearDownMBCategoryTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 		testSuite.addTestSuite(TearDownSiteTest.class);
 		testSuite.addTestSuite(TearDownServerTest.class);
-		testSuite.addTestSuite(TearDownEmailConfigurationTest.class);
+		testSuite.addTestSuite(TearDownUserTest.class);
 
 		return testSuite;
 	}

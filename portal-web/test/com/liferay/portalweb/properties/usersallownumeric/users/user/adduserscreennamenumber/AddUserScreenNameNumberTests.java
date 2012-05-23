@@ -12,10 +12,9 @@
  * details.
  */
 
-package com.liferay.portalweb.properties.mailintegration.messageboards;
+package com.liferay.portalweb.properties.usersallownumeric.users.user.adduserscreennamenumber;
 
 import com.liferay.portalweb.portal.BaseTestSuite;
-import com.liferay.portalweb.properties.mailintegration.messageboards.mbthread.MBThreadTestPlan;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -23,14 +22,12 @@ import junit.framework.TestSuite;
 /**
  * @author Brian Wing Shun Chan
  */
-public class MessageBoardsTestPlan extends BaseTestSuite {
-
+public class AddUserScreenNameNumberTests extends BaseTestSuite {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
-
-		testSuite.addTest(MBThreadTestPlan.suite());
+		testSuite.addTestSuite(AddUserScreenNameNumberTest.class);
+		testSuite.addTestSuite(TearDownUserTest.class);
 
 		return testSuite;
 	}
-
 }

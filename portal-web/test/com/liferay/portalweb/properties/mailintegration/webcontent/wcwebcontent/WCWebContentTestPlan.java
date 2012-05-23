@@ -15,8 +15,8 @@
 package com.liferay.portalweb.properties.mailintegration.webcontent.wcwebcontent;
 
 import com.liferay.portalweb.portal.BaseTestSuite;
-import com.liferay.portalweb.properties.mailintegration.webcontent.wcwebcontent.gmailvieweditwcwebcontentupdatedemail.Gmail_ViewEditWCWebContentUpdatedEmailTests;
 import com.liferay.portalweb.properties.mailintegration.webcontent.wcwebcontent.gmailviewwcwebcontentaddedemail.Gmail_ViewWCWebContentAddedEmailTests;
+import com.liferay.portalweb.properties.mailintegration.webcontent.wcwebcontent.gmailviewwcwebcontentupdatedemail.Gmail_ViewWCWebContentUpdatedEmailTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -29,8 +29,8 @@ public class WCWebContentTestPlan extends BaseTestSuite {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(Gmail_ViewEditWCWebContentUpdatedEmailTests.suite());
 		testSuite.addTest(Gmail_ViewWCWebContentAddedEmailTests.suite());
+		testSuite.addTest(Gmail_ViewWCWebContentUpdatedEmailTests.suite());
 
 		return testSuite;
 	}
