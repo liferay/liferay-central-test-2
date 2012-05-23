@@ -46,11 +46,7 @@ for (int j = 0; j < metadataFields.length; j++) {
 		value = LanguageUtil.get(pageContext, "priority") + StringPool.COLON + StringPool.SPACE + assetEntry.getPriority();
 	}
 	else if (metadataFields[j].equals("author")) {
-		String userName = PortalUtil.getUserName(assetRenderer.getUserId(), StringPool.BLANK);
-
-		if (Validator.isNull(userName)) {
-			userName = assetRenderer.getUserName();
-		}
+		String userName = PortalUtil.getUserName(assetRenderer.getUserId(), assetRenderer.getUserName());
 
 		value = LanguageUtil.get(pageContext, "by") + StringPool.SPACE + HtmlUtil.escape(userName);
 	}
