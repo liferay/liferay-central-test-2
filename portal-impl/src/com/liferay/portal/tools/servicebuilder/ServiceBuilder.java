@@ -2175,10 +2175,10 @@ public class ServiceBuilder {
 		String superClassValue = superClass.getValue();
 
 		while (!superClassValue.endsWith("BaseModelImpl")) {
-			int lastPeriod = superClassValue.lastIndexOf(StringPool.PERIOD);
+			int pos = superClassValue.lastIndexOf(StringPool.PERIOD);
 
-			if (lastPeriod > 0) {
-				superClassValue = superClassValue.substring(lastPeriod + 1);
+			if (pos > 0) {
+				superClassValue = superClassValue.substring(pos + 1);
 			}
 
 			javaClass = _getJavaClass(
