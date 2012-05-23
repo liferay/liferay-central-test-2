@@ -14,17 +14,17 @@
 
 package com.liferay.portalweb.portal;
 
-import com.liferay.portalweb.plugins.kaleo.assetpublisher.AssetPublisherTestPlan;
-import com.liferay.portalweb.plugins.kaleo.blogs.BlogsTestPlan;
-import com.liferay.portalweb.plugins.kaleo.messageboards.MessageBoardsTestPlan;
-import com.liferay.portalweb.plugins.kaleo.mysubmissions.MySubmissionsTestPlan;
-import com.liferay.portalweb.plugins.kaleo.myworkflowtasks.MyWorkflowTasksTestPlan;
-import com.liferay.portalweb.plugins.kaleo.pagecomments.PageCommentsTestPlan;
-import com.liferay.portalweb.plugins.kaleo.webcontent.WebContentTestPlan;
-import com.liferay.portalweb.plugins.kaleo.webcontentdisplay.WebContentDisplayTestPlan;
-import com.liferay.portalweb.plugins.kaleo.wiki.WikiTestPlan;
-import com.liferay.portalweb.plugins.kaleo.workflow.WorkflowTestPlan;
-import com.liferay.portalweb.plugins.kaleo.workflowconfiguration.WorkflowConfigurationTestPlan;
+import com.liferay.portalweb.kaleo.assetpublisher.AssetPublisherTestPlan;
+import com.liferay.portalweb.kaleo.blogs.BlogsTestPlan;
+import com.liferay.portalweb.kaleo.messageboards.MessageBoardsTestPlan;
+import com.liferay.portalweb.kaleo.mysubmissions.MySubmissionsTestPlan;
+import com.liferay.portalweb.kaleo.myworkflowtasks.MyWorkflowTasksTestPlan;
+import com.liferay.portalweb.kaleo.pagecomments.PageCommentsTestPlan;
+import com.liferay.portalweb.kaleo.webcontent.WebContentTestPlan;
+import com.liferay.portalweb.kaleo.webcontentdisplay.WebContentDisplayTestPlan;
+import com.liferay.portalweb.kaleo.wiki.WikiTestPlan;
+import com.liferay.portalweb.kaleo.workflow.WorkflowTestPlan;
+import com.liferay.portalweb.kaleo.workflowconfiguration.WorkflowConfigurationTestPlan;
 import com.liferay.portalweb.portal.login.LoginTests;
 
 import junit.framework.Test;
