@@ -65,7 +65,8 @@ public class UploadProgressTag extends IncludeTag {
 		request.setAttribute("liferay-ui:upload-progress:height", _height);
 		request.setAttribute("liferay-ui:upload-progress:message", _message);
 		request.setAttribute("liferay-ui:upload-progress:redirect", _redirect);
-		request.setAttribute("liferay-ui:upload-progress:updatePeriod", _updatePeriod);
+		request.setAttribute(
+			"liferay-ui:upload-progress:updatePeriod", _updatePeriod);
 	}
 
 	private static final String _PAGE =
