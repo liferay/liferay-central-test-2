@@ -1390,7 +1390,7 @@ public class SourceFormatter {
 						}
 
 						if (_isInJavaTermTypeGroup(
-								javaTermType, _TYPE_VARIABLE_NOT_STATIC)) {
+								javaTermType, _TYPE_VARIABLE_NOT_FINAL)) {
 
 							char firstChar = javaTermName.charAt(0);
 
@@ -3482,7 +3482,7 @@ public class SourceFormatter {
 
 	private static final int _TYPE_METHOD_PUBLIC_STATIC = 3;
 
-	private static final int[] _TYPE_VARIABLE_NOT_STATIC = {
+	private static final int[] _TYPE_VARIABLE_NOT_FINAL = {
 		SourceFormatter._TYPE_VARIABLE_PRIVATE,
 		SourceFormatter._TYPE_VARIABLE_PRIVATE_STATIC,
 		SourceFormatter._TYPE_VARIABLE_PROTECTED,
