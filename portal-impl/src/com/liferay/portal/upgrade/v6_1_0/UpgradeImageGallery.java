@@ -23,11 +23,8 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.util.FileUtil;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.MimeTypesUtil;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
-import com.liferay.portal.kernel.util.PropsKeys;
-import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
@@ -285,7 +282,7 @@ public class UpgradeImageGallery extends UpgradeProcess {
 				if (supportsBatchUpdates) {
 					ps.addBatch();
 
-					if (count == _BATCH_SIZE) {
+					if (count == PropsValues.HIBERNATE_JDBC_BATCH_SIZE) {
 						ps.executeBatch();
 
 						count = 0;
@@ -730,9 +727,6 @@ public class UpgradeImageGallery extends UpgradeProcess {
 				DLFileEntry.class.getName() + "' where name = '" +
 					_IG_IMAGE_CLASS_NAME + "'");
 	}
-
-	private static final int _BATCH_SIZE = GetterUtil.getInteger(
-		PropsUtil.get(PropsKeys.HIBERNATE_JDBC_BATCH_SIZE), 20);
 
 	private static final String _IG_FOLDER_CLASS_NAME =
 		"com.liferay.portlet.imagegallery.model.IGFolder";
