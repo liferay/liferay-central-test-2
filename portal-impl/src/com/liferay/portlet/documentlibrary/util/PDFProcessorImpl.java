@@ -72,11 +72,11 @@ public class PDFProcessorImpl
 	}
 
 	public void generateImages(
-			FileVersion copyFromVersion, FileVersion fileVersion)
+			FileVersion sourceFileVersion, FileVersion destinationFileVersion)
 		throws Exception {
 
 		Initializer._initializedInstance._generateImages(
-				copyFromVersion, fileVersion);
+			sourceFileVersion, destinationFileVersion);
 	}
 
 	public InputStream getPreviewAsStream(FileVersion fileVersion, int index)
@@ -125,7 +125,7 @@ public class PDFProcessorImpl
 
 			if (!hasImages && isSupported(fileVersion)) {
 				Initializer._initializedInstance._queueGeneration(
-						null, fileVersion);
+					null, fileVersion);
 			}
 		}
 		catch (Exception e) {
@@ -194,36 +194,42 @@ public class PDFProcessorImpl
 		return false;
 	}
 
-	public void trigger(FileVersion copyFromVersion, FileVersion fileVersion) {
+	public void trigger(
+		FileVersion sourceFileVersion, FileVersion destinationFileVersion) {
+
 		Initializer._initializedInstance._queueGeneration(
-			copyFromVersion, fileVersion);
+			sourceFileVersion, destinationFileVersion);
 	}
 
 	@Override
 	protected void copyPreviews(
-		FileVersion srcVersion, FileVersion destVersion) {
+		FileVersion sourceFileVersion, FileVersion destinationFileVersion) {
 
-		if (PropsValues.DL_FILE_ENTRY_PREVIEW_ENABLED) {
-			try {
-				if (hasPreview(srcVersion) && !hasPreview(destVersion)) {
-					int total = getPreviewFileCount(srcVersion);
+		if (!PropsValues.DL_FILE_ENTRY_PREVIEW_ENABLED) {
+			return;
+		}
 
-					for (int i = 0; i < total; i++) {
-						String previewFilePath = getPreviewFilePath(
-							destVersion, i + 1);
+		try {
+			if (hasPreview(sourceFileVersion) &&
+				!hasPreview(destinationFileVersion)) {
 
-						InputStream is = doGetPreviewAsStream(
-							srcVersion, i + 1, PREVIEW_TYPE);
+				int count = getPreviewFileCount(sourceFileVersion);
 
-						addFileToStore(
-							destVersion.getCompanyId(), PREVIEW_PATH,
-							previewFilePath, is);
-					}
+				for (int i = 0; i < count; i++) {
+					String previewFilePath = getPreviewFilePath(
+						destinationFileVersion, i + 1);
+
+					InputStream is = doGetPreviewAsStream(
+						sourceFileVersion, i + 1, PREVIEW_TYPE);
+
+					addFileToStore(
+						destinationFileVersion.getCompanyId(), PREVIEW_PATH,
+						previewFilePath, is);
 				}
 			}
-			catch (Exception e) {
-				_log.error(e, e);
-			}
+		}
+		catch (Exception e) {
+			_log.error(e, e);
 		}
 	}
 
@@ -299,14 +305,8 @@ public class PDFProcessorImpl
 
 		String previewFilePath = getPreviewFilePath(fileVersion, 1);
 
-		if (DLStoreUtil.hasFile(
-				fileVersion.getCompanyId(), REPOSITORY_ID, previewFilePath)) {
-
-			return true;
-		}
-		else {
-			return false;
-		}
+		return DLStoreUtil.hasFile(
+			fileVersion.getCompanyId(), REPOSITORY_ID, previewFilePath);
 	}
 
 	protected void importPreviews(
@@ -351,33 +351,33 @@ public class PDFProcessorImpl
 	}
 
 	private void _generateImages(
-			FileVersion copyFromVersion, FileVersion fileVersion)
+			FileVersion sourceFileVersion, FileVersion destinationFileVersion)
 		throws Exception {
 
 		InputStream inputStream = null;
 
 		try {
-			if (copyFromVersion != null) {
-				copy(copyFromVersion, fileVersion);
+			if (sourceFileVersion != null) {
+				copy(sourceFileVersion, destinationFileVersion);
 
 				return;
 			}
 
-			if (_hasImages(fileVersion)) {
+			if (_hasImages(destinationFileVersion)) {
 				return;
 			}
 
-			String extension = fileVersion.getExtension();
+			String extension = destinationFileVersion.getExtension();
 
 			if (extension.equals("pdf")) {
-				if (fileVersion instanceof LiferayFileVersion) {
+				if (destinationFileVersion instanceof LiferayFileVersion) {
 					try {
 						LiferayFileVersion liferayFileVersion =
-							(LiferayFileVersion)fileVersion;
+							(LiferayFileVersion)destinationFileVersion;
 
 						File file = liferayFileVersion.getFile(false);
 
-						_generateImages(fileVersion, file);
+						_generateImages(destinationFileVersion, file);
 
 						return;
 					}
@@ -385,20 +385,21 @@ public class PDFProcessorImpl
 					}
 				}
 
-				inputStream = fileVersion.getContentStream(false);
+				inputStream = destinationFileVersion.getContentStream(false);
 
-				_generateImages(fileVersion, inputStream);
+				_generateImages(destinationFileVersion, inputStream);
 			}
 			else if (DocumentConversionUtil.isEnabled()) {
-				inputStream = fileVersion.getContentStream(false);
+				inputStream = destinationFileVersion.getContentStream(false);
 
 				String tempFileId = DLUtil.getTempFileId(
-					fileVersion.getFileEntryId(), fileVersion.getVersion());
+					destinationFileVersion.getFileEntryId(),
+					destinationFileVersion.getVersion());
 
 				File file = DocumentConversionUtil.convert(
 					tempFileId, inputStream, extension, "pdf");
 
-				_generateImages(fileVersion, file);
+				_generateImages(destinationFileVersion, file);
 			}
 		}
 		catch (NoSuchFileEntryException nsfee) {
@@ -406,7 +407,7 @@ public class PDFProcessorImpl
 		finally {
 			StreamUtil.cleanUp(inputStream);
 
-			_fileVersionIds.remove(fileVersion.getFileVersionId());
+			_fileVersionIds.remove(destinationFileVersion.getFileVersionId());
 		}
 	}
 
@@ -712,15 +713,17 @@ public class PDFProcessorImpl
 	}
 
 	private void _queueGeneration(
-		FileVersion copyFromVersion, FileVersion fileVersion) {
+		FileVersion sourceFileVersion, FileVersion destinationFileVersion) {
 
-		if (_fileVersionIds.contains(fileVersion.getFileVersionId())) {
+		if (_fileVersionIds.contains(
+				destinationFileVersion.getFileVersionId())) {
+
 			return;
 		}
 
 		boolean generateImages = false;
 
-		String extension = fileVersion.getExtension();
+		String extension = destinationFileVersion.getExtension();
 
 		if (extension.equals("pdf")) {
 			generateImages = true;
@@ -739,12 +742,12 @@ public class PDFProcessorImpl
 		}
 
 		if (generateImages) {
-			_fileVersionIds.add(fileVersion.getFileVersionId());
+			_fileVersionIds.add(destinationFileVersion.getFileVersionId());
 
 			sendGenerationMessage(
 				DestinationNames.DOCUMENT_LIBRARY_PDF_PROCESSOR,
 				PropsValues.DL_FILE_ENTRY_PROCESSORS_TRIGGER_SYNCHRONOUSLY,
-				copyFromVersion, fileVersion);
+				sourceFileVersion, destinationFileVersion);
 		}
 	}
 

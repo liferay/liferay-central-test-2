@@ -284,7 +284,7 @@ public interface DLAppService extends BaseService {
 	* @throws PortalException if the file entry could not be found
 	* @throws SystemException if a system exception occurred
 	* @see #checkInFileEntry(long, boolean, String, ServiceContext)
-	* @see #checkOutFileEntry(long)
+	* @see #checkOutFileEntry(long, ServiceContext)
 	*/
 	public void cancelCheckOut(long fileEntryId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -312,7 +312,7 @@ public interface DLAppService extends BaseService {
 	* @throws PortalException if the file entry could not be found
 	* @throws SystemException if a system exception occurred
 	* @see #cancelCheckOut(long)
-	* @see #checkOutFileEntry(long)
+	* @see #checkOutFileEntry(long, ServiceContext)
 	*/
 	public void checkInFileEntry(long fileEntryId, boolean majorVersion,
 		java.lang.String changeLog,
@@ -341,7 +341,7 @@ public interface DLAppService extends BaseService {
 	* @throws PortalException if the file entry could not be found
 	* @throws SystemException if a system exception occurred
 	* @see #cancelCheckOut(long)
-	* @see #checkOutFileEntry(long, String, long)
+	* @see #checkOutFileEntry(long, String, long, ServiceContext)
 	*/
 	public void checkInFileEntry(long fileEntryId, java.lang.String lockUuid)
 		throws com.liferay.portal.kernel.exception.PortalException,

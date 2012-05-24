@@ -23,10 +23,11 @@ import com.liferay.portlet.documentlibrary.util.PDFProcessorUtil;
 public class PDFProcessorMessageListener extends BaseProcessorMessageListener {
 
 	protected void generate(
-			FileVersion copyFromVersion, FileVersion fileVersion)
+			FileVersion sourceFileVersion, FileVersion destinationFileVersion)
 		throws Exception {
 
-		PDFProcessorUtil.generateImages(copyFromVersion, fileVersion);
+		PDFProcessorUtil.generateImages(
+			sourceFileVersion, destinationFileVersion);
 	}
 
 }

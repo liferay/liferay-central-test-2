@@ -26,10 +26,11 @@ import java.util.Set;
 public class VideoProcessorUtil {
 
 	public static void generateVideo(
-			FileVersion copyFromVersion, FileVersion fileVersion)
+			FileVersion sourceFileVersion, FileVersion destinationFileVersion)
 		throws Exception {
 
-		getVideoProcessor().generateVideo(copyFromVersion, fileVersion);
+		getVideoProcessor().generateVideo(
+			sourceFileVersion, destinationFileVersion);
 	}
 
 	public static InputStream getPreviewAsStream(
@@ -84,9 +85,9 @@ public class VideoProcessorUtil {
 	}
 
 	public static void trigger(
-		FileVersion copyFromVersion, FileVersion fileVersion) {
+		FileVersion sourceFileVersion, FileVersion destinationFileVersion) {
 
-		getVideoProcessor().trigger(copyFromVersion, fileVersion);
+		getVideoProcessor().trigger(sourceFileVersion, destinationFileVersion);
 	}
 
 	public void setVideoProcessor(VideoProcessor videoProcessor) {

@@ -25,10 +25,11 @@ public class AudioProcessorMessageListener
 	extends BaseProcessorMessageListener {
 
 	protected void generate(
-			FileVersion copyFromVersion, FileVersion fileVersion)
+			FileVersion sourceFileVersion, FileVersion destinationFileVersion)
 		throws Exception {
 
-		AudioProcessorUtil.generateAudio(copyFromVersion, fileVersion);
+		AudioProcessorUtil.generateAudio(
+			sourceFileVersion, destinationFileVersion);
 	}
 
 }

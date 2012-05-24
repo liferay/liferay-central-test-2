@@ -225,7 +225,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 					catch (Exception e) {
 						if (_log.isWarnEnabled()) {
 							_log.warn(
-								"Error trying to generate thumbnails for " +
+								"Unable to generate thumbnails for " +
 									fileVersion.getFileVersionId(),
 								e);
 						}

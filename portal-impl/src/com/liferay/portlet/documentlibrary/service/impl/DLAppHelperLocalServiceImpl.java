@@ -574,37 +574,39 @@ public class DLAppHelperLocalServiceImpl
 	}
 
 	public void updateFileEntry(
-			long userId, FileEntry fileEntry, FileVersion copyFromVersion,
-			FileVersion fileVersion, long assetClassPk)
+			long userId, FileEntry fileEntry, FileVersion sourceFileVersion,
+			FileVersion destinationFileVersion, long assetClassPk)
 		throws PortalException, SystemException {
 
 		boolean updateAsset = true;
 
 		if (fileEntry instanceof LiferayFileEntry &&
-			fileEntry.getVersion().equals(fileVersion.getVersion())) {
+			fileEntry.getVersion().equals(
+				destinationFileVersion.getVersion())) {
 
 			updateAsset = false;
 		}
 
 		if (updateAsset) {
-			updateAsset(userId, fileEntry, fileVersion, assetClassPk);
+			updateAsset(
+				userId, fileEntry, destinationFileVersion, assetClassPk);
 		}
 
-		registerDLProcessorCallback(fileEntry, copyFromVersion);
+		registerDLProcessorCallback(fileEntry, sourceFileVersion);
 	}
 
 	public void updateFileEntry(
-			long userId, FileEntry fileEntry, FileVersion copyFromVersion,
-			FileVersion fileVersion, ServiceContext serviceContext)
+			long userId, FileEntry fileEntry, FileVersion sourceFileVersion,
+			FileVersion destinationFileVersion, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		updateAsset(
-			userId, fileEntry, fileVersion,
+			userId, fileEntry, destinationFileVersion,
 			serviceContext.getAssetCategoryIds(),
 			serviceContext.getAssetTagNames(),
 			serviceContext.getAssetLinkEntryIds());
 
-		registerDLProcessorCallback(fileEntry, copyFromVersion);
+		registerDLProcessorCallback(fileEntry, sourceFileVersion);
 	}
 
 	public void updateFolder(Folder folder, ServiceContext serviceContext)
@@ -876,13 +878,13 @@ public class DLAppHelperLocalServiceImpl
 	}
 
 	protected void registerDLProcessorCallback(
-		final FileEntry fileEntry, final FileVersion copyFromVersion) {
+		final FileEntry fileEntry, final FileVersion fileVersion) {
 
 		TransactionCommitCallbackUtil.registerCallback(
 			new Callable<Void>() {
 
 				public Void call() throws Exception {
-					DLProcessorRegistryUtil.trigger(fileEntry, copyFromVersion);
+					DLProcessorRegistryUtil.trigger(fileEntry, fileVersion);
 
 					return null;
 				}

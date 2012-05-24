@@ -24,10 +24,11 @@ import java.io.InputStream;
 public class PDFProcessorUtil {
 
 	public static void generateImages(
-			FileVersion copyFromVersion, FileVersion fileVersion)
+			FileVersion sourceFileVersion, FileVersion destinationFileVersion)
 		throws Exception {
 
-		getPDFProcessor().generateImages(copyFromVersion, fileVersion);
+		getPDFProcessor().generateImages(
+			sourceFileVersion, destinationFileVersion);
 	}
 
 	public static PDFProcessor getPDFProcessor() {
@@ -81,9 +82,9 @@ public class PDFProcessorUtil {
 	}
 
 	public static void trigger(
-		FileVersion fileVersion, FileVersion copyFromVersion) {
+		FileVersion sourceFileVersion, FileVersion destinationFileVersion) {
 
-		getPDFProcessor().trigger(fileVersion, copyFromVersion);
+		getPDFProcessor().trigger(sourceFileVersion, destinationFileVersion);
 	}
 
 	public void setPDFProcessor(PDFProcessor pdfProcessor) {

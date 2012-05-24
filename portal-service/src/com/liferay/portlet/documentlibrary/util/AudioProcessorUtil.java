@@ -26,10 +26,11 @@ import java.util.Set;
 public class AudioProcessorUtil {
 
 	public static void generateAudio(
-			FileVersion copyFromVersion, FileVersion fileVersion)
+			FileVersion sourceFileVersion, FileVersion destinationFileVersion)
 		throws Exception {
 
-		getAudioProcessor().generateAudio(copyFromVersion, fileVersion);
+		getAudioProcessor().generateAudio(
+			sourceFileVersion, destinationFileVersion);
 	}
 
 	public static Set<String> getAudioMimeTypes() {
@@ -70,9 +71,9 @@ public class AudioProcessorUtil {
 	}
 
 	public static void trigger(
-		FileVersion copyFromVersion, FileVersion fileVersion) {
+		FileVersion sourceFileVersion, FileVersion destinationFileVersion) {
 
-		getAudioProcessor().trigger(copyFromVersion, fileVersion);
+		getAudioProcessor().trigger(sourceFileVersion, destinationFileVersion);
 	}
 
 	public void setAudioProcessor(AudioProcessor audioProcessor) {

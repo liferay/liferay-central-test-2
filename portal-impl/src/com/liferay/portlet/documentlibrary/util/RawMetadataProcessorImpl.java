@@ -67,7 +67,8 @@ public class RawMetadataProcessorImpl
 	public void cleanUp(FileVersion fileVersion) {
 	}
 
-	public void copy(FileVersion srcVersion, FileVersion destVersion) {
+	public void copy(
+		FileVersion sourceFileVersion, FileVersion destinationFileVersion) {
 	}
 
 	public void exportGeneratedFiles(
@@ -172,12 +173,14 @@ public class RawMetadataProcessorImpl
 		trigger(fileVersion, fileVersion);
 	}
 
-	public void trigger(FileVersion copyFromVersion, FileVersion fileVersion) {
+	public void trigger(
+		FileVersion sourceFileVersion, FileVersion destinationFileVersion) {
+
 		if (PropsValues.DL_FILE_ENTRY_PROCESSORS_TRIGGER_SYNCHRONOUSLY) {
 			try {
 				MessageBusUtil.sendSynchronousMessage(
 					DestinationNames.DOCUMENT_LIBRARY_RAW_METADATA_PROCESSOR,
-					fileVersion);
+					destinationFileVersion);
 			}
 			catch (MessageBusException mbe) {
 				if (_log.isWarnEnabled()) {
@@ -188,7 +191,7 @@ public class RawMetadataProcessorImpl
 		else {
 			MessageBusUtil.sendMessage(
 				DestinationNames.DOCUMENT_LIBRARY_RAW_METADATA_PROCESSOR,
-				fileVersion);
+				destinationFileVersion);
 		}
 	}
 

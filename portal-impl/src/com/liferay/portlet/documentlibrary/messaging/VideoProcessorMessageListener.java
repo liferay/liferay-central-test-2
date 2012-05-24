@@ -25,10 +25,11 @@ public class VideoProcessorMessageListener
 	extends BaseProcessorMessageListener {
 
 	protected void generate(
-			FileVersion copyFromVersion, FileVersion fileVersion)
+			FileVersion sourceFileVersion, FileVersion destinationFileVersion)
 		throws Exception {
 
-		VideoProcessorUtil.generateVideo(copyFromVersion, fileVersion);
+		VideoProcessorUtil.generateVideo(
+			sourceFileVersion, destinationFileVersion);
 	}
 
 }

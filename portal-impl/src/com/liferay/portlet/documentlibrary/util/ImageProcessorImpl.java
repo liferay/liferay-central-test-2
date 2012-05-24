@@ -70,10 +70,10 @@ public class ImageProcessorImpl
 	}
 
 	public void generateImages(
-			FileVersion copyFromVersion, FileVersion fileVersion)
+			FileVersion sourceFileVersion, FileVersion destinationFileVersion)
 		throws Exception {
 
-		_instance._generateImages(copyFromVersion, fileVersion);
+		_instance._generateImages(sourceFileVersion, destinationFileVersion);
 	}
 
 	public Set<String> getImageMimeTypes() {
@@ -178,8 +178,10 @@ public class ImageProcessorImpl
 			custom2ImageId, is, type);
 	}
 
-	public void trigger(FileVersion copyFromVersion, FileVersion fileVersion) {
-		_instance._queueGeneration(copyFromVersion, fileVersion);
+	public void trigger(
+		FileVersion sourceFileVersion, FileVersion destinationFileVersion) {
+
+		_instance._queueGeneration(sourceFileVersion, destinationFileVersion);
 	}
 
 	@Override
@@ -238,14 +240,14 @@ public class ImageProcessorImpl
 	}
 
 	private void _generateImages(
-			FileVersion copyFromVersion, FileVersion fileVersion)
+			FileVersion sourceFileVersion, FileVersion destinationFileVersion)
 		throws Exception {
 
 		InputStream inputStream = null;
 
 		try {
-			if (copyFromVersion != null) {
-				copy(copyFromVersion, fileVersion);
+			if (sourceFileVersion != null) {
+				copy(sourceFileVersion, destinationFileVersion);
 
 				return;
 			}
@@ -256,7 +258,7 @@ public class ImageProcessorImpl
 				return;
 			}
 
-			inputStream = fileVersion.getContentStream(false);
+			inputStream = destinationFileVersion.getContentStream(false);
 
 			byte[] bytes = FileUtil.getBytes(inputStream);
 
@@ -279,12 +281,12 @@ public class ImageProcessorImpl
 				}
 			}
 
-			if (!_hasPreview(fileVersion)) {
-				_storePreviewImage(fileVersion, renderedImage);
+			if (!_hasPreview(destinationFileVersion)) {
+				_storePreviewImage(destinationFileVersion, renderedImage);
 			}
 
-			if (!hasThumbnails(fileVersion)) {
-				storeThumbnailImages(fileVersion, renderedImage);
+			if (!hasThumbnails(destinationFileVersion)) {
+				storeThumbnailImages(destinationFileVersion, renderedImage);
 			}
 		}
 		catch (NoSuchFileEntryException nsfee) {
@@ -292,7 +294,7 @@ public class ImageProcessorImpl
 		finally {
 			StreamUtil.cleanUp(inputStream);
 
-			_fileVersionIds.remove(fileVersion.getFileVersionId());
+			_fileVersionIds.remove(destinationFileVersion.getFileVersionId());
 		}
 	}
 
@@ -348,20 +350,21 @@ public class ImageProcessorImpl
 	}
 
 	private void _queueGeneration(
-		FileVersion copyFromVersion, FileVersion fileVersion) {
+		FileVersion sourceFileVersion, FileVersion destinationFileVersion) {
 
-		if (_fileVersionIds.contains(fileVersion.getFileVersionId()) ||
-			!isSupported(fileVersion)) {
+		if (_fileVersionIds.contains(
+				destinationFileVersion.getFileVersionId()) ||
+			!isSupported(destinationFileVersion)) {
 
 			return;
 		}
 
-		_fileVersionIds.add(fileVersion.getFileVersionId());
+		_fileVersionIds.add(destinationFileVersion.getFileVersionId());
 
 		sendGenerationMessage(
 			DestinationNames.DOCUMENT_LIBRARY_IMAGE_PROCESSOR,
 			PropsValues.DL_FILE_ENTRY_PROCESSORS_TRIGGER_SYNCHRONOUSLY,
-			copyFromVersion, fileVersion);
+			sourceFileVersion, destinationFileVersion);
 	}
 
 	private void _storePreviewImage(

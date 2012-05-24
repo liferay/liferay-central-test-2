@@ -38,7 +38,8 @@ public interface DLProcessor {
 
 	public void cleanUp(FileVersion fileVersion);
 
-	public void copy(FileVersion srcVersion, FileVersion destVersion);
+	public void copy(
+		FileVersion sourceFileVersion, FileVersion destinationFileVersion);
 
 	public void exportGeneratedFiles(
 			PortletDataContext portletDataContext, FileEntry fileEntry,
@@ -57,10 +58,11 @@ public interface DLProcessor {
 	/**
 	 * Launches the processor's work with respect to the given file version.
 	 *
-	 * @param copyFromVersion the file version to copy previews and thumbnails
+	 * @param sourceFileVersion the file version to copy previews and thumbnails
 	 *        from (optionally <code>null</code>)
-	 * @param fileVersion the latest file version to process
+	 * @param destinationFileVersion the latest file version to process
 	 */
-	public void trigger(FileVersion copyFromVersion, FileVersion fileVersion);
+	public void trigger(
+		FileVersion sourceFileVersion, FileVersion destinationFileVersion);
 
 }

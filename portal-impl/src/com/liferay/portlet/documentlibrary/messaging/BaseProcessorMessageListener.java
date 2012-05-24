@@ -31,17 +31,17 @@ public abstract class BaseProcessorMessageListener extends BaseMessageListener {
 	protected void doReceive(Message message) throws Exception {
 		Object[] array = (Object[])message.getPayload();
 
-		FileVersion copyFromVersion = (FileVersion)array[0];
-		FileVersion fileVersion = (FileVersion)array[1];
+		FileVersion sourceFileVersion = (FileVersion)array[0];
+		FileVersion destinationFileVersion = (FileVersion)array[1];
 
 		try {
-			generate(copyFromVersion, fileVersion);
+			generate(sourceFileVersion, destinationFileVersion);
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
 					"Unable to process file version " +
-						fileVersion.getFileVersionId(),
+						destinationFileVersion.getFileVersionId(),
 					e);
 			}
 		}
@@ -53,7 +53,7 @@ public abstract class BaseProcessorMessageListener extends BaseMessageListener {
 	}
 
 	protected abstract void generate(
-			FileVersion copyFromVersion, FileVersion fileVersion)
+			FileVersion sourceFileVersion, FileVersion destinationFileVersion)
 		throws Exception;
 
 	private static Log _log = LogFactoryUtil.getLog(

@@ -35,10 +35,11 @@ public class ImageProcessorUtil {
 	}
 
 	public static void generateImages(
-			FileVersion copyFromVersion, FileVersion fileVersion)
+			FileVersion sourceFileVersion, FileVersion destinationFileVersion)
 		throws Exception {
 
-		getImageProcessor().generateImages(copyFromVersion, fileVersion);
+		getImageProcessor().generateImages(
+			sourceFileVersion, destinationFileVersion);
 	}
 
 	public static Set<String> getImageMimeTypes() {
@@ -110,9 +111,9 @@ public class ImageProcessorUtil {
 	}
 
 	public static void trigger(
-		FileVersion copyFromVersion, FileVersion fileVersion) {
+		FileVersion sourceFileVersion, FileVersion destinationFileVersion) {
 
-		getImageProcessor().trigger(copyFromVersion, fileVersion);
+		getImageProcessor().trigger(sourceFileVersion, destinationFileVersion);
 	}
 
 	public void setImageProcessor(ImageProcessor imageProcessor) {

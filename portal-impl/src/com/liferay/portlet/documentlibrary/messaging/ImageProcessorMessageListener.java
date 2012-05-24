@@ -24,10 +24,11 @@ public class ImageProcessorMessageListener
 	extends BaseProcessorMessageListener {
 
 	protected void generate(
-			FileVersion copyFromVersion, FileVersion fileVersion)
+			FileVersion sourceFileVersion, FileVersion destinationFileVersion)
 		throws Exception {
 
-		ImageProcessorUtil.generateImages(copyFromVersion, fileVersion);
+		ImageProcessorUtil.generateImages(
+			sourceFileVersion, destinationFileVersion);
 	}
 
 }

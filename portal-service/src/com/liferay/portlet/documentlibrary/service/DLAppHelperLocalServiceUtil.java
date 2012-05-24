@@ -185,25 +185,26 @@ public class DLAppHelperLocalServiceUtil {
 
 	public static void updateFileEntry(long userId,
 		com.liferay.portal.kernel.repository.model.FileEntry fileEntry,
-		com.liferay.portal.kernel.repository.model.FileVersion copyFromVersion,
-		com.liferay.portal.kernel.repository.model.FileVersion fileVersion,
+		com.liferay.portal.kernel.repository.model.FileVersion sourceFileVersion,
+		com.liferay.portal.kernel.repository.model.FileVersion destinationFileVersion,
 		long assetClassPk)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		getService().updateFileEntry(
-			userId, fileEntry, copyFromVersion, fileVersion, assetClassPk);
+		getService()
+			.updateFileEntry(userId, fileEntry, sourceFileVersion,
+			destinationFileVersion, assetClassPk);
 	}
 
 	public static void updateFileEntry(long userId,
 		com.liferay.portal.kernel.repository.model.FileEntry fileEntry,
-		com.liferay.portal.kernel.repository.model.FileVersion copyFromVersion,
-		com.liferay.portal.kernel.repository.model.FileVersion fileVersion,
+		com.liferay.portal.kernel.repository.model.FileVersion sourceFileVersion,
+		com.liferay.portal.kernel.repository.model.FileVersion destinationFileVersion,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService()
-			.updateFileEntry(userId, fileEntry, copyFromVersion, fileVersion,
-				serviceContext);
+			.updateFileEntry(userId, fileEntry, sourceFileVersion,
+			destinationFileVersion, serviceContext);
 	}
 
 	public static void updateFolder(

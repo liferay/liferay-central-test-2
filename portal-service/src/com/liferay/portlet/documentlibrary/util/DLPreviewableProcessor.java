@@ -115,13 +115,17 @@ public abstract class DLPreviewableProcessor implements DLProcessor {
 		deleteFiles(fileVersion, getThumbnailType());
 	}
 
-	public void copy(FileVersion srcVersion, FileVersion destVersion) {
-		if (srcVersion.getFileVersionId() == destVersion.getFileVersionId()) {
+	public void copy(
+		FileVersion sourceFileVersion, FileVersion destinationFileVersion) {
+
+		if (sourceFileVersion.getFileVersionId() ==
+				destinationFileVersion.getFileVersionId()) {
+
 			return;
 		}
 
-		copyPreviews(srcVersion, destVersion);
-		copyThumbnails(srcVersion, destVersion);
+		copyPreviews(sourceFileVersion, destinationFileVersion);
+		copyThumbnails(sourceFileVersion, destinationFileVersion);
 	}
 
 	public void exportGeneratedFiles(
@@ -243,23 +247,23 @@ public abstract class DLPreviewableProcessor implements DLProcessor {
 	}
 
 	protected void copyPreviews(
-		FileVersion srcVersion, FileVersion destVersion) {
+		FileVersion sourceFileVersion, FileVersion destinationFileVersion) {
 
 		try {
 			String[] previewTypes = getPreviewTypes();
 
 			for (String previewType : previewTypes) {
-				if (hasPreview(srcVersion, previewType) &&
-					!hasPreview(destVersion, previewType)) {
+				if (hasPreview(sourceFileVersion, previewType) &&
+					!hasPreview(destinationFileVersion, previewType)) {
 
 					String previewFilePath = getPreviewFilePath(
-						destVersion, previewType);
+						destinationFileVersion, previewType);
 
 					InputStream is = doGetPreviewAsStream(
-						srcVersion, previewType);
+						sourceFileVersion, previewType);
 
 					addFileToStore(
-						destVersion.getCompanyId(), PREVIEW_PATH,
+						destinationFileVersion.getCompanyId(), PREVIEW_PATH,
 						previewFilePath, is);
 				}
 			}
@@ -270,56 +274,62 @@ public abstract class DLPreviewableProcessor implements DLProcessor {
 	}
 
 	protected void copyThumbnails(
-		FileVersion srcVersion, FileVersion destVersion) {
+		FileVersion sourceFileVersion, FileVersion destinationFileVersion) {
 
 		try {
 			if (isThumbnailEnabled(THUMBNAIL_INDEX_DEFAULT)) {
-				if (hasThumbnail(srcVersion, THUMBNAIL_INDEX_DEFAULT) &&
-					!hasThumbnail(destVersion, THUMBNAIL_INDEX_DEFAULT)) {
+				if (hasThumbnail(sourceFileVersion, THUMBNAIL_INDEX_DEFAULT) &&
+					!hasThumbnail(
+						destinationFileVersion, THUMBNAIL_INDEX_DEFAULT)) {
 
 					InputStream is = doGetThumbnailAsStream(
-						srcVersion, THUMBNAIL_INDEX_DEFAULT);
+						sourceFileVersion, THUMBNAIL_INDEX_DEFAULT);
 
 					String thumbnailFilePath = getThumbnailFilePath(
-						destVersion, getThumbnailType(destVersion),
+						destinationFileVersion,
+						getThumbnailType(destinationFileVersion),
 						THUMBNAIL_INDEX_DEFAULT);
 
 					addFileToStore(
-						destVersion.getCompanyId(), THUMBNAIL_PATH,
+						destinationFileVersion.getCompanyId(), THUMBNAIL_PATH,
 						thumbnailFilePath, is);
 				}
 			}
 
 			if (isThumbnailEnabled(THUMBNAIL_INDEX_CUSTOM_1)) {
-				if (hasThumbnail(srcVersion, THUMBNAIL_INDEX_CUSTOM_1) &&
-					!hasThumbnail(destVersion, THUMBNAIL_INDEX_CUSTOM_1)) {
+				if (hasThumbnail(sourceFileVersion, THUMBNAIL_INDEX_CUSTOM_1) &&
+					!hasThumbnail(
+						destinationFileVersion, THUMBNAIL_INDEX_CUSTOM_1)) {
 
 					InputStream is = doGetThumbnailAsStream(
-						srcVersion, THUMBNAIL_INDEX_CUSTOM_1);
+						sourceFileVersion, THUMBNAIL_INDEX_CUSTOM_1);
 
 					String thumbnailFilePath = getThumbnailFilePath(
-						destVersion, getThumbnailType(destVersion),
+						destinationFileVersion,
+						getThumbnailType(destinationFileVersion),
 						THUMBNAIL_INDEX_CUSTOM_1);
 
 					addFileToStore(
-						destVersion.getCompanyId(), THUMBNAIL_PATH,
+						destinationFileVersion.getCompanyId(), THUMBNAIL_PATH,
 						thumbnailFilePath, is);
 				}
 			}
 
 			if (isThumbnailEnabled(THUMBNAIL_INDEX_CUSTOM_2)) {
-				if (hasThumbnail(srcVersion, THUMBNAIL_INDEX_CUSTOM_2) &&
-					!hasThumbnail(destVersion, THUMBNAIL_INDEX_CUSTOM_2)) {
+				if (hasThumbnail(sourceFileVersion, THUMBNAIL_INDEX_CUSTOM_2) &&
+					!hasThumbnail(
+						destinationFileVersion, THUMBNAIL_INDEX_CUSTOM_2)) {
 
 					InputStream is = doGetThumbnailAsStream(
-						srcVersion, THUMBNAIL_INDEX_CUSTOM_2);
+						sourceFileVersion, THUMBNAIL_INDEX_CUSTOM_2);
 
 					String thumbnailFilePath = getThumbnailFilePath(
-						destVersion, getThumbnailType(destVersion),
+						destinationFileVersion,
+						getThumbnailType(destinationFileVersion),
 						THUMBNAIL_INDEX_CUSTOM_2);
 
 					addFileToStore(
-						destVersion.getCompanyId(), THUMBNAIL_PATH,
+						destinationFileVersion.getCompanyId(), THUMBNAIL_PATH,
 						thumbnailFilePath, is);
 				}
 			}
@@ -1105,9 +1115,9 @@ public abstract class DLPreviewableProcessor implements DLProcessor {
 
 	protected void sendGenerationMessage(
 		String destinationName, boolean synchronous,
-		FileVersion copyFromVersion, FileVersion fileVersion) {
+		FileVersion sourceFileVersion, FileVersion destinationFileVersion) {
 
-		Object[] payload = new Object[] {copyFromVersion, fileVersion};
+		Object[] payload = {sourceFileVersion, destinationFileVersion};
 
 		if (synchronous) {
 			try {

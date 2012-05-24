@@ -68,10 +68,10 @@ public class AudioProcessorImpl
 	}
 
 	public void generateAudio(
-			FileVersion copyFromVersion, FileVersion fileVersion)
+			FileVersion sourceFileVersion, FileVersion destinationFileVersion)
 		throws Exception {
 
-		_instance._generateAudio(copyFromVersion, fileVersion);
+		_instance._generateAudio(sourceFileVersion, destinationFileVersion);
 	}
 
 	public Set<String> getAudioMimeTypes() {
@@ -131,8 +131,10 @@ public class AudioProcessorImpl
 		return false;
 	}
 
-	public void trigger(FileVersion copyFromVersion, FileVersion fileVersion) {
-		_instance._queueGeneration(copyFromVersion, fileVersion);
+	public void trigger(
+		FileVersion sourceFileVersion, FileVersion destinationFileVersion) {
+
+		_instance._queueGeneration(sourceFileVersion, destinationFileVersion);
 	}
 
 	@Override
@@ -245,11 +247,12 @@ public class AudioProcessorImpl
 	}
 
 	private void _generateAudio(
-			FileVersion copyFromVersion, FileVersion fileVersion)
+			FileVersion sourceFileVersion, FileVersion destinationFileVersion)
 		throws Exception {
 
 		String tempFileId = DLUtil.getTempFileId(
-			fileVersion.getFileEntryId(), fileVersion.getVersion());
+			destinationFileVersion.getFileEntryId(),
+			destinationFileVersion.getVersion());
 
 		File[] previewTempFiles = new File[_PREVIEW_TYPES.length];
 
@@ -263,25 +266,26 @@ public class AudioProcessorImpl
 		InputStream inputStream = null;
 
 		try {
-			if (copyFromVersion != null) {
-				copy(copyFromVersion, fileVersion);
+			if (sourceFileVersion != null) {
+				copy(sourceFileVersion, destinationFileVersion);
 
 				return;
 			}
 
-			if (!XugglerUtil.isEnabled() || _hasAudio(fileVersion)) {
+			if (!XugglerUtil.isEnabled() || _hasAudio(destinationFileVersion)) {
 				return;
 			}
 
-			audioTempFile = FileUtil.createTempFile(fileVersion.getExtension());
+			audioTempFile = FileUtil.createTempFile(
+				destinationFileVersion.getExtension());
 
-			if (!hasPreviews(fileVersion)) {
+			if (!hasPreviews(destinationFileVersion)) {
 				File file = null;
 
-				if (fileVersion instanceof LiferayFileVersion) {
+				if (destinationFileVersion instanceof LiferayFileVersion) {
 					try {
 						LiferayFileVersion liferayFileVersion =
-							(LiferayFileVersion)fileVersion;
+							(LiferayFileVersion)destinationFileVersion;
 
 						file = liferayFileVersion.getFile(false);
 					}
@@ -290,7 +294,8 @@ public class AudioProcessorImpl
 				}
 
 				if (file == null) {
-					inputStream = fileVersion.getContentStream(false);
+					inputStream = destinationFileVersion.getContentStream(
+						false);
 
 					FileUtil.write(audioTempFile, inputStream);
 
@@ -298,7 +303,8 @@ public class AudioProcessorImpl
 				}
 
 				try {
-					_generateAudioXuggler(fileVersion, file, previewTempFiles);
+					_generateAudioXuggler(
+						destinationFileVersion, file, previewTempFiles);
 				}
 				catch (Exception e) {
 					_log.error(e, e);
@@ -310,7 +316,7 @@ public class AudioProcessorImpl
 		finally {
 			StreamUtil.cleanUp(inputStream);
 
-			_fileVersionIds.remove(fileVersion.getFileVersionId());
+			_fileVersionIds.remove(destinationFileVersion.getFileVersionId());
 
 			for (int i = 0; i < previewTempFiles.length; i++) {
 				FileUtil.delete(previewTempFiles[i]);
@@ -403,20 +409,21 @@ public class AudioProcessorImpl
 	}
 
 	private void _queueGeneration(
-		FileVersion copyFromVersion, FileVersion fileVersion) {
+		FileVersion sourceFileVersion, FileVersion destinationFileVersion) {
 
-		if (_fileVersionIds.contains(fileVersion.getFileVersionId()) ||
-			!isSupported(fileVersion)) {
+		if (_fileVersionIds.contains(
+				destinationFileVersion.getFileVersionId()) ||
+			!isSupported(destinationFileVersion)) {
 
 			return;
 		}
 
-		_fileVersionIds.add(fileVersion.getFileVersionId());
+		_fileVersionIds.add(destinationFileVersion.getFileVersionId());
 
 		sendGenerationMessage(
 			DestinationNames.DOCUMENT_LIBRARY_AUDIO_PROCESSOR,
 			PropsValues.DL_FILE_ENTRY_PROCESSORS_TRIGGER_SYNCHRONOUSLY,
-			copyFromVersion, fileVersion);
+			sourceFileVersion, destinationFileVersion);
 	}
 
 	private static final String[] _PREVIEW_TYPES =
