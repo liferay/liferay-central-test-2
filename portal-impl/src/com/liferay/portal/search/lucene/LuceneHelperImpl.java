@@ -609,13 +609,10 @@ public class LuceneHelperImpl implements LuceneHelper {
 				if (isLoadIndexFromClusterEnabled()) {
 					indexAccessor = new SynchronizedIndexAccessorImpl(
 						indexAccessor);
-				}
 
-				if (isLoadIndexFromClusterEnabled()) {
 					try {
 						_loadIndexFromCluster(
-							indexAccessor,
-							IndexAccessor.DEFAULT_LAST_GENERATION);
+							indexAccessor, indexAccessor.getLastGeneration());
 					}
 					catch (Exception e) {
 						_log.error(
