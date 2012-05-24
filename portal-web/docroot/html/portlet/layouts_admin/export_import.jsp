@@ -144,7 +144,7 @@ portletsList = ListUtil.sort(portletsList, new PortletTitleComparator(applicatio
 						<portlet:param name="layoutIds" value="<%= StringUtil.merge(layoutIds) %>" />
 					</portlet:actionURL>
 
-					submitForm(form, '<%= exportPagesURL + "&etag=0" %>', false);
+					submitForm(form, '<%= exportPagesURL + "&strip=0&etag=0" %>', false);
 				</c:when>
 				<c:otherwise>
 					<portlet:actionURL var="importPagesURL">
