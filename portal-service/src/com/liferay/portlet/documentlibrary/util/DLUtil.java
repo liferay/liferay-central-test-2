@@ -399,8 +399,11 @@ public class DLUtil {
 
 		StringBundler sb = new StringBundler(15);
 
-		if (absoluteURL) {
-			sb.append(themeDisplay.getPortalURL());
+		if (themeDisplay != null) {
+			if (absoluteURL) {
+				sb.append(themeDisplay.getPortalURL());
+			}
+
 			sb.append(themeDisplay.getPathContext());
 		}
 
@@ -435,7 +438,7 @@ public class DLUtil {
 
 		String previewURL = sb.toString();
 
-		if ((themeDisplay != null) && (themeDisplay.isAddSessionIdToURL())) {
+		if ((themeDisplay != null) && themeDisplay.isAddSessionIdToURL()) {
 			return PortalUtil.getURLWithSessionId(
 				previewURL, themeDisplay.getSessionId());
 		}
