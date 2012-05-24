@@ -502,10 +502,9 @@ public class PortletDataContextImpl implements PortletDataContext {
 
 		}
 		else if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
-
 			Map<Long, Set<String>> roleIdsToActionIds = getActionIds_6(
 				_companyId, roleIds.getArray(), resourceName,
-				String.valueOf(resourcePK), actionIds);
+				resourcePK, actionIds);
 
 			for (Map.Entry<Long, String> entry : roleIdsToNames.entrySet()) {
 				long roleId = entry.getKey();
