@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portalweb.portal.controlpanel.usergroups.ugusergroup.assignmemberugusergroupuser;
+package com.liferay.portalweb.portal.controlpanel.usergroups.ugusergroup.assignmembersugusergroupuser;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
@@ -20,8 +20,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 /**
  * @author Brian Wing Shun Chan
  */
-public class ViewMemberUGUserGroupUserTest extends BaseTestCase {
-	public void testViewMemberUGUserGroupUser() throws Exception {
+public class AssignMembersUGUserGroupUserTest extends BaseTestCase {
+	public void testAssignMembersUGUserGroupUser() throws Exception {
 		selenium.open("/web/guest/home/");
 		loadRequiredJavaScriptModules();
 		selenium.clickAt("//div[@id='dockbar']",
@@ -73,8 +73,8 @@ public class ViewMemberUGUserGroupUserTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("Actions"),
-			selenium.getText("//td[4]/span/ul/li/strong/a"));
-		selenium.clickAt("//td[4]/span/ul/li/strong/a",
+			selenium.getText("//span[@title='Actions']/ul/li/strong/a/span"));
+		selenium.clickAt("//span[@title='Actions']/ul/li/strong/a/span",
 			RuntimeVariables.replace("Actions"));
 
 		for (int second = 0;; second++) {
@@ -84,7 +84,7 @@ public class ViewMemberUGUserGroupUserTest extends BaseTestCase {
 
 			try {
 				if (selenium.isVisible(
-							"//div[@class='lfr-component lfr-menu-list']/ul/li[5]/a")) {
+							"//div[@class='lfr-component lfr-menu-list']/ul/li[contains(.,'Assign Members')]/a")) {
 					break;
 				}
 			}
@@ -96,23 +96,52 @@ public class ViewMemberUGUserGroupUserTest extends BaseTestCase {
 
 		assertEquals(RuntimeVariables.replace("Assign Members"),
 			selenium.getText(
-				"//div[@class='lfr-component lfr-menu-list']/ul/li[5]/a"));
+				"//div[@class='lfr-component lfr-menu-list']/ul/li[contains(.,'Assign Members')]/a"));
 		selenium.click(RuntimeVariables.replace(
-				"//div[@class='lfr-component lfr-menu-list']/ul/li[5]/a"));
+				"//div[@class='lfr-component lfr-menu-list']/ul/li[contains(.,'Assign Members')]/a"));
 		selenium.waitForPageToLoad("30000");
 		loadRequiredJavaScriptModules();
-		selenium.type("//input[@name='_127_screenName']",
-			RuntimeVariables.replace("user"));
+		assertEquals(RuntimeVariables.replace("Available"),
+			selenium.getText("//ul[@class='aui-tabview-list']/li[2]/span/a"));
+		selenium.clickAt("//ul[@class='aui-tabview-list']/li[2]/span/a",
+			RuntimeVariables.replace("Available"));
+		selenium.waitForPageToLoad("30000");
+		loadRequiredJavaScriptModules();
 		selenium.type("//input[@name='_127_keywords']",
-			RuntimeVariables.replace("user"));
+			RuntimeVariables.replace("usersn"));
 		selenium.clickAt("//input[@value='Search']",
 			RuntimeVariables.replace("Search"));
 		selenium.waitForPageToLoad("30000");
 		loadRequiredJavaScriptModules();
-		assertTrue(selenium.isChecked("//input[@name='_127_allRowIds']"));
-		assertEquals(RuntimeVariables.replace("userfn userln"),
-			selenium.getText("//td[contains(@id,'col-name_row-usersn')]"));
-		assertEquals(RuntimeVariables.replace("usersn"),
-			selenium.getText("//td[contains(@id,'col-screen-name_row-usersn')]"));
+		assertFalse(selenium.isChecked("//input[@name='_127_rowIds']"));
+		selenium.clickAt("//input[@name='_127_rowIds']",
+			RuntimeVariables.replace("Entry Check Box"));
+		assertTrue(selenium.isChecked("//input[@name='_127_rowIds']"));
+
+		for (int second = 0;; second++) {
+			if (second >= 90) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible(
+							"//tr[@class='portlet-section-body results-row last selected']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("//input[@value='Update Associations']",
+			RuntimeVariables.replace("Update Associations"));
+		selenium.waitForPageToLoad("30000");
+		loadRequiredJavaScriptModules();
+		assertEquals(RuntimeVariables.replace(
+				"Your request completed successfully."),
+			selenium.getText("//div[@class='portlet-msg-success']"));
+		assertTrue(selenium.isChecked("//input[@name='_127_rowIds']"));
 	}
 }

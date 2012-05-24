@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portalweb.portal.controlpanel.usergroups.ugusergroup.addugusergroupnamenumber;
+package com.liferay.portalweb.portal.controlpanel.usergroups.ugusergroup.deleteugusergroupuser;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
@@ -20,8 +20,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 /**
  * @author Brian Wing Shun Chan
  */
-public class AddUGUserGroupNameNumberTest extends BaseTestCase {
-	public void testAddUGUserGroupNameNumber() throws Exception {
+public class ViewDeleteUGUserGroupUserTest extends BaseTestCase {
+	public void testViewDeleteUGUserGroupUser() throws Exception {
 		selenium.open("/web/guest/home/");
 		loadRequiredJavaScriptModules();
 		selenium.clickAt("//div[@id='dockbar']",
@@ -72,25 +72,44 @@ public class AddUGUserGroupNameNumberTest extends BaseTestCase {
 			RuntimeVariables.replace("User Groups"));
 		selenium.waitForPageToLoad("30000");
 		loadRequiredJavaScriptModules();
-		assertEquals(RuntimeVariables.replace("User Groups"),
-			selenium.getText("//h1[@class='header-title']/span"));
-		assertEquals(RuntimeVariables.replace("Add"),
-			selenium.getText("//span[contains(@class,'add-button')]/a"));
-		selenium.clickAt("//span[contains(@class,'add-button')]/a",
-			RuntimeVariables.replace("Add"));
+		assertEquals(RuntimeVariables.replace("UG UserGroup Name"),
+			selenium.getText("//tr[3]/td[2]/a"));
+		assertEquals(RuntimeVariables.replace("Actions"),
+			selenium.getText("//span[@title='Actions']/ul/li/strong/a/span"));
+		selenium.clickAt("//span[@title='Actions']/ul/li/strong/a/span",
+			RuntimeVariables.replace("Actions"));
+
+		for (int second = 0;; second++) {
+			if (second >= 90) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible(
+							"//div[@class='lfr-component lfr-menu-list']/ul/li[contains(.,'Assign Members')]/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		assertEquals(RuntimeVariables.replace("Assign Members"),
+			selenium.getText(
+				"//div[@class='lfr-component lfr-menu-list']/ul/li[contains(.,'Assign Members')]/a"));
+		selenium.click(RuntimeVariables.replace(
+				"//div[@class='lfr-component lfr-menu-list']/ul/li[contains(.,'Assign Members')]/a"));
 		selenium.waitForPageToLoad("30000");
 		loadRequiredJavaScriptModules();
-		assertEquals(RuntimeVariables.replace("New User Group"),
-			selenium.getText("//h1[@class='header-title']/span"));
-		selenium.type("//input[@id='_127_name']", RuntimeVariables.replace("1"));
-		selenium.clickAt("//input[@value='Save']",
-			RuntimeVariables.replace("Save"));
-		selenium.waitForPageToLoad("30000");
-		loadRequiredJavaScriptModules();
-		assertEquals(RuntimeVariables.replace(
-				"Your request failed to complete."),
-			selenium.getText("xPath=(//div[@class='portlet-msg-error'])[1]"));
-		assertEquals(RuntimeVariables.replace("Please enter a valid name."),
-			selenium.getText("xPath=(//div[@class='portlet-msg-error'])[2]"));
+		assertEquals(RuntimeVariables.replace("Current"),
+			selenium.getText("//ul[@class='aui-tabview-list']/li/span/a/strong"));
+		assertTrue(selenium.isChecked("//input[@name='_127_allRowIds']"));
+		assertTrue(selenium.isChecked("//input[@name='_127_rowIds']"));
+		assertEquals(RuntimeVariables.replace("userfn userln"),
+			selenium.getText("//tr[3]/td[2]"));
+		assertEquals(RuntimeVariables.replace("usersn"),
+			selenium.getText("//tr[3]/td[3]"));
 	}
 }

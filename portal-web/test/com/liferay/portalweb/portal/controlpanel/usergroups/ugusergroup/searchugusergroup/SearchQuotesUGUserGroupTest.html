@@ -1,12 +1,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>ViewPortletUGCPTest</title>
+<title>SearchQuotesUGUserGroupTest</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">ViewPortletUGCPTest</td></tr>
+<tr><td rowspan="1" colspan="3">SearchQuotesUGUserGroupTest</td></tr>
 </thead><tbody>
 <tr>
 	<td>open</td>
@@ -49,49 +49,34 @@
 	<td>User Groups</td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>//span[@class='portlet-title-text']</td>
-	<td>User Groups</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//div[@class='portlet-description aui-helpbox-content']</td>
-	<td>Or disable for all portlets <br /> User groups provide a way to group users independently of the organizations to which they belong. Administrators can define a user group and assign the user group as a member of a site to make all of its users members automatically.</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//div[@class='lfr-portlet-toolbar']/span[1]/a</td>
-	<td>View All</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//div[@class='lfr-portlet-toolbar']/span[2]/a</td>
-	<td>Add</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//h1[@class='header-title']/span</td>
-	<td>User Groups</td>
-</tr>
-<tr>
-	<td>assertVisible</td>
+	<td>type</td>
 	<td>//input[@id='_127_keywords']</td>
-	<td>Search Field</td>
+	<td>"UG UserGroup Name"</td>
 </tr>
 <tr>
-	<td>assertVisible</td>
+	<td>clickAtAndWait</td>
 	<td>//input[@value='Search']</td>
 	<td>Search</td>
 </tr>
 <tr>
-	<td>assertVisible</td>
-	<td>//input[@value='Delete']</td>
-	<td>Delete</td>
+	<td>assertText</td>
+	<td>//td[2]/a</td>
+	<td>UG UserGroup Name</td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>//div[@class='portlet-msg-info']</td>
-	<td>No user groups were found.</td>
+	<td>type</td>
+	<td>//input[@id='_127_keywords']</td>
+	<td>"UG1 UserGroup1 Name1"</td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>//input[@value='Search']</td>
+	<td>Search</td>
+</tr>
+<tr>
+	<td>assertTextNotPresent</td>
+	<td>UG UserGroup Name</td>
+	<td></td>
 </tr>
 </tbody></table>
 </body>

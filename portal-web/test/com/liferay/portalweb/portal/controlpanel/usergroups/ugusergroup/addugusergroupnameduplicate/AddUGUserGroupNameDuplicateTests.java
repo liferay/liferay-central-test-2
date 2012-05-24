@@ -15,7 +15,6 @@
 package com.liferay.portalweb.portal.controlpanel.usergroups.ugusergroup.addugusergroupnameduplicate;
 
 import com.liferay.portalweb.portal.BaseTestSuite;
-import com.liferay.portalweb.portal.controlpanel.usergroups.portlet.viewportletugcp.ViewPortletUGCPTest;
 import com.liferay.portalweb.portal.controlpanel.usergroups.ugusergroup.addugusergroup.AddUGUserGroupTest;
 import com.liferay.portalweb.portal.controlpanel.usergroups.ugusergroup.addugusergroup.TearDownUGUserGroupTest;
 
@@ -28,9 +27,9 @@ import junit.framework.TestSuite;
 public class AddUGUserGroupNameDuplicateTests extends BaseTestSuite {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
-		testSuite.addTestSuite(ViewPortletUGCPTest.class);
 		testSuite.addTestSuite(AddUGUserGroupTest.class);
 		testSuite.addTestSuite(AddUGUserGroupNameDuplicateTest.class);
+		testSuite.addTestSuite(ViewUGUserGroupNameDuplicateTest.class);
 		testSuite.addTestSuite(TearDownUGUserGroupTest.class);
 
 		return testSuite;

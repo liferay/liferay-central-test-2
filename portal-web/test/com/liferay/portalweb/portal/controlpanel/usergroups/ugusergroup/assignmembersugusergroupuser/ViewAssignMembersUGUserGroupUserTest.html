@@ -1,12 +1,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>RemoveMemberUGUserGroupUserTest</title>
+<title>ViewAssignMembersUGUserGroupUserTest</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">RemoveMemberUGUserGroupUserTest</td></tr>
+<tr><td rowspan="1" colspan="3">ViewAssignMembersUGUserGroupUserTest</td></tr>
 </thead><tbody>
 <tr>
 	<td>open</td>
@@ -50,28 +50,53 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//td[4]/span/ul/li/strong/a</td>
+	<td>//span[@title='Actions']/ul/li/strong/a/span</td>
 	<td>Actions</td>
 </tr>
 <tr>
 	<td>clickAt</td>
-	<td>//td[4]/span/ul/li/strong/a</td>
+	<td>//span[@title='Actions']/ul/li/strong/a/span</td>
 	<td>Actions</td>
 </tr>
 <tr>
 	<td>waitForVisible</td>
-	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[5]/a</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[contains(.,'Assign Members')]/a</td>
 	<td>Assign Members</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[5]/a</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[contains(.,'Assign Members')]/a</td>
 	<td>Assign Members</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[5]/a</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[contains(.,'Assign Members')]/a</td>
 	<td>Assign Members</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//ul[@class='aui-tabview-list']/li/span/a/strong</td>
+	<td>Current</td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>//input[@name='_127_allRowIds']</td>
+	<td>Select All</td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>//input[@name='_127_rowIds']</td>
+	<td>Entry Check Box</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[3]/td[2]</td>
+	<td>userfn userln</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[3]/td[3]</td>
+	<td>usersn</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -82,11 +107,6 @@
 	<td>clickAtAndWait</td>
 	<td>//ul[@class='aui-tabview-list']/li[2]/span/a</td>
 	<td>Available</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>//input[@name='_127_screenName']</td>
-	<td>user</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -99,24 +119,24 @@
 	<td>Search</td>
 </tr>
 <tr>
-	<td>clickAt</td>
+	<td>assertChecked</td>
 	<td>//input[@name='_127_allRowIds']</td>
-	<td></td>
+	<td>Select All</td>
 </tr>
 <tr>
-	<td>clickAtAndWait</td>
-	<td>//input[@value='Update Associations']</td>
-	<td>Update Associations</td>
+	<td>assertChecked</td>
+	<td>//input[@name='_127_rowIds']</td>
+	<td>Entry Check Box</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[@class='portlet-msg-success']</td>
-	<td>Your request completed successfully.</td>
+	<td>//tr[3]/td[2]</td>
+	<td>userfn userln</td>
 </tr>
 <tr>
-	<td>assertNotChecked</td>
-	<td>//input[@name='_127_allRowIds']</td>
-	<td></td>
+	<td>assertText</td>
+	<td>//tr[3]/td[3]</td>
+	<td>usersn</td>
 </tr>
 </tbody></table>
 </body>

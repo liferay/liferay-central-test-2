@@ -29,6 +29,7 @@ public class SearchUGUserGroupTests extends BaseTestSuite {
 		TestSuite testSuite = new TestSuite();
 		testSuite.addTestSuite(AddUGUserGroupTest.class);
 		testSuite.addTestSuite(SearchUGUserGroupTest.class);
+		testSuite.addTestSuite(SearchQuotesUGUserGroupTest.class);
 		testSuite.addTestSuite(TearDownUGUserGroupTest.class);
 
 		return testSuite;

@@ -12,15 +12,14 @@
  * details.
  */
 
-package com.liferay.portalweb.portal.controlpanel.usergroups.ugusergroup.removememberugusergroupuser;
+package com.liferay.portalweb.portal.controlpanel.usergroups.ugusergroup.assignmembersugusergroupuser;
 
 import com.liferay.portalweb.portal.BaseTestSuite;
 import com.liferay.portalweb.portal.controlpanel.usergroups.ugusergroup.addugusergroup.AddUGUserGroupTest;
 import com.liferay.portalweb.portal.controlpanel.usergroups.ugusergroup.addugusergroup.TearDownUGUserGroupTest;
-import com.liferay.portalweb.portal.controlpanel.usergroups.ugusergroup.assignmemberugusergroupuser.AssignMemberUGUserGroupUserTest;
-import com.liferay.portalweb.portal.controlpanel.usergroups.ugusergroup.assignmemberugusergroupuser.RemoveMemberUGUserGroupUserTest;
-import com.liferay.portalweb.portal.controlpanel.usergroups.ugusergroup.assignmemberugusergroupuser.TearDownUserTest;
+import com.liferay.portalweb.portal.controlpanel.usergroups.ugusergroup.removemembersugusergroupuser.RemoveMembersUGUserGroupUserTest;
 import com.liferay.portalweb.portal.controlpanel.users.user.adduser.AddUserTest;
+import com.liferay.portalweb.portal.controlpanel.users.user.adduser.TearDownUserTest;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -28,14 +27,14 @@ import junit.framework.TestSuite;
 /**
  * @author Brian Wing Shun Chan
  */
-public class RemoveMemberUGUserGroupUserTests extends BaseTestSuite {
+public class AssignMembersUGUserGroupUserTests extends BaseTestSuite {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 		testSuite.addTestSuite(AddUserTest.class);
 		testSuite.addTestSuite(AddUGUserGroupTest.class);
-		testSuite.addTestSuite(AssignMemberUGUserGroupUserTest.class);
-		testSuite.addTestSuite(RemoveMemberUGUserGroupUserTest.class);
-		testSuite.addTestSuite(ViewRemoveMemberUGUserGroupUserTest.class);
+		testSuite.addTestSuite(AssignMembersUGUserGroupUserTest.class);
+		testSuite.addTestSuite(ViewAssignMembersUGUserGroupUserTest.class);
+		testSuite.addTestSuite(RemoveMembersUGUserGroupUserTest.class);
 		testSuite.addTestSuite(TearDownUGUserGroupTest.class);
 		testSuite.addTestSuite(TearDownUserTest.class);
 

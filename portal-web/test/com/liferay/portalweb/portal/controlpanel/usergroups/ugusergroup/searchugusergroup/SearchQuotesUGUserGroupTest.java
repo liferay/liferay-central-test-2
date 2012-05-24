@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portalweb.portal.controlpanel.usergroups.ugusergroup.removememberugusergroupuser;
+package com.liferay.portalweb.portal.controlpanel.usergroups.ugusergroup.searchugusergroup;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
@@ -20,8 +20,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 /**
  * @author Brian Wing Shun Chan
  */
-public class ViewRemoveMemberUGUserGroupUserTest extends BaseTestCase {
-	public void testViewRemoveMemberUGUserGroupUser() throws Exception {
+public class SearchQuotesUGUserGroupTest extends BaseTestCase {
+	public void testSearchQuotesUGUserGroup() throws Exception {
 		selenium.open("/web/guest/home/");
 		loadRequiredJavaScriptModules();
 		selenium.clickAt("//div[@id='dockbar']",
@@ -72,52 +72,20 @@ public class ViewRemoveMemberUGUserGroupUserTest extends BaseTestCase {
 			RuntimeVariables.replace("User Groups"));
 		selenium.waitForPageToLoad("30000");
 		loadRequiredJavaScriptModules();
-		assertEquals(RuntimeVariables.replace("Actions"),
-			selenium.getText("//td[4]/span/ul/li/strong/a"));
-		selenium.clickAt("//td[4]/span/ul/li/strong/a",
-			RuntimeVariables.replace("Actions"));
-
-		for (int second = 0;; second++) {
-			if (second >= 90) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isVisible(
-							"//div[@class='lfr-component lfr-menu-list']/ul/li[5]/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		assertEquals(RuntimeVariables.replace("Assign Members"),
-			selenium.getText(
-				"//div[@class='lfr-component lfr-menu-list']/ul/li[5]/a"));
-		selenium.click(RuntimeVariables.replace(
-				"//div[@class='lfr-component lfr-menu-list']/ul/li[5]/a"));
-		selenium.waitForPageToLoad("30000");
-		loadRequiredJavaScriptModules();
-		assertEquals(RuntimeVariables.replace("Available"),
-			selenium.getText("link=Available"));
-		selenium.clickAt("link=Available", RuntimeVariables.replace("Available"));
-		selenium.waitForPageToLoad("30000");
-		loadRequiredJavaScriptModules();
-		selenium.type("//input[@name='_127_screenName']",
-			RuntimeVariables.replace("user"));
-		selenium.type("//input[@name='_127_keywords']",
-			RuntimeVariables.replace("user"));
+		selenium.type("//input[@id='_127_keywords']",
+			RuntimeVariables.replace("\"UG UserGroup Name\""));
 		selenium.clickAt("//input[@value='Search']",
 			RuntimeVariables.replace("Search"));
 		selenium.waitForPageToLoad("30000");
 		loadRequiredJavaScriptModules();
-		assertFalse(selenium.isChecked("//input[@name='_127_allRowIds']"));
-		assertEquals(RuntimeVariables.replace("userfn userln"),
-			selenium.getText("//td[contains(@id,'col-name_row-usersn')]"));
-		assertEquals(RuntimeVariables.replace("usersn"),
-			selenium.getText("//td[contains(@id,'col-screen-name_row-usersn')]"));
+		assertEquals(RuntimeVariables.replace("UG UserGroup Name"),
+			selenium.getText("//td[2]/a"));
+		selenium.type("//input[@id='_127_keywords']",
+			RuntimeVariables.replace("\"UG1 UserGroup1 Name1\""));
+		selenium.clickAt("//input[@value='Search']",
+			RuntimeVariables.replace("Search"));
+		selenium.waitForPageToLoad("30000");
+		loadRequiredJavaScriptModules();
+		assertFalse(selenium.isTextPresent("UG UserGroup Name"));
 	}
 }

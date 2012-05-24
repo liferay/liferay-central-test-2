@@ -27,8 +27,8 @@ import junit.framework.TestSuite;
 public class AddUGUserGroupNameNullTests extends BaseTestSuite {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
-		testSuite.addTestSuite(ViewPortletUGCPTest.class);
 		testSuite.addTestSuite(AddUGUserGroupNameNullTest.class);
+		testSuite.addTestSuite(ViewPortletUGCPTest.class);
 		testSuite.addTestSuite(TearDownUGUserGroupTest.class);
 
 		return testSuite;

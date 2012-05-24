@@ -72,25 +72,8 @@ public class SearchUGUserGroupTest extends BaseTestCase {
 			RuntimeVariables.replace("User Groups"));
 		selenium.waitForPageToLoad("30000");
 		loadRequiredJavaScriptModules();
-
-		for (int second = 0;; second++) {
-			if (second >= 90) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isVisible("//input[@id='_127_keywords']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.type("//input[@id='_127_keywords']",
-			RuntimeVariables.replace("UserGroup"));
+			RuntimeVariables.replace("UG UserGroup Name"));
 		selenium.clickAt("//input[@value='Search']",
 			RuntimeVariables.replace("Search"));
 		selenium.waitForPageToLoad("30000");
@@ -98,11 +81,11 @@ public class SearchUGUserGroupTest extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace("UG UserGroup Name"),
 			selenium.getText("//td[2]/a"));
 		selenium.type("//input[@id='_127_keywords']",
-			RuntimeVariables.replace("UserGroup1"));
+			RuntimeVariables.replace("UG1 UserGroup1 Name1"));
 		selenium.clickAt("//input[@value='Search']",
 			RuntimeVariables.replace("Search"));
 		selenium.waitForPageToLoad("30000");
 		loadRequiredJavaScriptModules();
-		assertFalse(selenium.isTextPresent("//td[2]/a"));
+		assertFalse(selenium.isTextPresent("UG UserGroup Name"));
 	}
 }

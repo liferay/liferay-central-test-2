@@ -1,12 +1,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>AddUGUserGroupNameAsteriskTest</title>
+<title>ViewUGUserGroupNameDuplicateTest</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">AddUGUserGroupNameAsteriskTest</td></tr>
+<tr><td rowspan="1" colspan="3">ViewUGUserGroupNameDuplicateTest</td></tr>
 </thead><tbody>
 <tr>
 	<td>open</td>
@@ -55,38 +55,13 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//span[contains(@class,'add-button')]/a</td>
-	<td>Add</td>
+	<td>//tr[3]/td[2]/a</td>
+	<td>UG UserGroup Name</td>
 </tr>
 <tr>
-	<td>clickAtAndWait</td>
-	<td>//span[contains(@class,'add-button')]/a</td>
-	<td>Add</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//h1[@class='header-title']/span</td>
-	<td>New User Group</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>//input[@id='_127_name']</td>
-	<td>UG UserGroup Name*</td>
-</tr>
-<tr>
-	<td>clickAtAndWait</td>
-	<td>//input[@value='Save']</td>
-	<td>Save</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>xPath=(//div[@class='portlet-msg-error'])[1]</td>
-	<td>Your request failed to complete.</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>xPath=(//div[@class='portlet-msg-error'])[2]</td>
-	<td>Please enter a valid name.</td>
+	<td>assertElementNotPresent</td>
+	<td>//tr[4]/td[2]/a</td>
+	<td>Duplicate Entry</td>
 </tr>
 </tbody></table>
 </body>

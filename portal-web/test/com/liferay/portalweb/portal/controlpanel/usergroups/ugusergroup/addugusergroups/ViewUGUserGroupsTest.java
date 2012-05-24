@@ -72,48 +72,225 @@ public class ViewUGUserGroupsTest extends BaseTestCase {
 			RuntimeVariables.replace("User Groups"));
 		selenium.waitForPageToLoad("30000");
 		loadRequiredJavaScriptModules();
-		assertEquals(RuntimeVariables.replace(
-				"User groups provide a way to group users independently of the organizations to which they belong. Administrators can define a user group and assign the user group as a member of a site to make all of its users members automatically. Or disable for all portlets."),
-			selenium.getText("//div[@id='show-portlet-description-127']/div"));
-		assertEquals(RuntimeVariables.replace("View All"),
-			selenium.getText("//span[contains(@class,'view-button')]/a"));
-		assertEquals(RuntimeVariables.replace("Add"),
-			selenium.getText("//span[contains(@class,'add-button')]/a"));
 		assertEquals(RuntimeVariables.replace("User Groups"),
 			selenium.getText("//h1[@class='header-title']/span"));
-		assertTrue(selenium.isElementPresent("//input[@id='_127_keywords']"));
-		assertTrue(selenium.isElementPresent("//input[@value='Search']"));
-		assertTrue(selenium.isElementPresent("//input[@value='Delete']"));
-		assertTrue(selenium.isElementPresent(
-				"//tr[@class='portlet-section-header results-header']/th/input"));
-		assertEquals(RuntimeVariables.replace("Name"),
-			selenium.getText(
-				"//tr[@class='portlet-section-header results-header']/th[2]/span/a"));
-		assertEquals(RuntimeVariables.replace("Description"),
-			selenium.getText(
-				"//tr[@class='portlet-section-header results-header']/th[3]/span/a"));
-		assertTrue(selenium.isElementPresent(
-				"//td[contains(@id,'col-rowChecker_row-1')]/input"));
-		assertEquals(RuntimeVariables.replace("UG UserGroup Name 1"),
-			selenium.getText("//td[contains(@id,'col-name_row-1')]/a"));
+		assertTrue(selenium.isVisible("//tr[3]/td[1]/input"));
+		assertEquals(RuntimeVariables.replace("UG UserGroup1 Name"),
+			selenium.getText("//tr[3]/td[2]/a"));
+		assertEquals(RuntimeVariables.replace(""),
+			selenium.getText("//tr[3]/td[3]"));
 		assertEquals(RuntimeVariables.replace("Actions"),
 			selenium.getText(
-				"//td[contains(@id,'col-4_row-1')]/span/ul/li/strong/a/span"));
-		assertTrue(selenium.isElementPresent(
-				"//td[contains(@id,'col-rowChecker_row-2')]/input"));
-		assertEquals(RuntimeVariables.replace("UG UserGroup Name 2"),
-			selenium.getText("//td[contains(@id,'col-name_row-2')]/a"));
+				"//tr[3]/td[4]/span[@title='Actions']/ul/li/strong/a/span"));
+		assertTrue(selenium.isVisible("//tr[4]/td[1]/input"));
+		assertEquals(RuntimeVariables.replace("UG UserGroup2 Name"),
+			selenium.getText("//tr[4]/td[2]/a"));
+		assertEquals(RuntimeVariables.replace(""),
+			selenium.getText("//tr[4]/td[3]"));
 		assertEquals(RuntimeVariables.replace("Actions"),
 			selenium.getText(
-				"//td[contains(@id,'col-4_row-2')]/span/ul/li/strong/a/span"));
-		assertTrue(selenium.isElementPresent(
-				"//td[contains(@id,'col-rowChecker_row-3')]/input"));
-		assertEquals(RuntimeVariables.replace("UG UserGroup Name 3"),
-			selenium.getText("//td[contains(@id,'col-name_row-3')]/a"));
+				"//tr[4]/td[4]/span[@title='Actions']/ul/li/strong/a/span"));
+		assertTrue(selenium.isVisible("//tr[5]/td[1]/input"));
+		assertEquals(RuntimeVariables.replace("UG UserGroup3 Name"),
+			selenium.getText("//tr[5]/td[2]/a"));
+		assertEquals(RuntimeVariables.replace(""),
+			selenium.getText("//tr[5]/td[3]"));
 		assertEquals(RuntimeVariables.replace("Actions"),
 			selenium.getText(
-				"//td[contains(@id,'col-4_row-3')]/span/ul/li/strong/a/span"));
+				"//tr[5]/td[4]/span[@title='Actions']/ul/li/strong/a/span"));
 		assertEquals(RuntimeVariables.replace("Showing 3 results."),
 			selenium.getText("//div[@class='search-results']"));
+		selenium.open("/web/guest/home/");
+		loadRequiredJavaScriptModules();
+		selenium.clickAt("//div[@id='dockbar']",
+			RuntimeVariables.replace("Dockbar"));
+
+		for (int second = 0;; second++) {
+			if (second >= 90) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent(
+							"//script[contains(@src,'/aui/aui-editable/aui-editable-min.js')]")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		assertEquals(RuntimeVariables.replace("Go to"),
+			selenium.getText("//li[@id='_145_mySites']/a/span"));
+		selenium.mouseOver("//li[@id='_145_mySites']/a/span");
+
+		for (int second = 0;; second++) {
+			if (second >= 90) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("link=Control Panel")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("link=Control Panel",
+			RuntimeVariables.replace("Control Panel"));
+		selenium.waitForPageToLoad("30000");
+		loadRequiredJavaScriptModules();
+		selenium.clickAt("link=User Groups",
+			RuntimeVariables.replace("User Groups"));
+		selenium.waitForPageToLoad("30000");
+		loadRequiredJavaScriptModules();
+		assertEquals(RuntimeVariables.replace("User Groups"),
+			selenium.getText("//h1[@class='header-title']/span"));
+		assertEquals(RuntimeVariables.replace("UG UserGroup1 Name"),
+			selenium.getText("//tr[3]/td[2]/a"));
+		selenium.clickAt("//tr[3]/td[2]/a",
+			RuntimeVariables.replace("UG UserGroup1 Name"));
+		selenium.waitForPageToLoad("30000");
+		loadRequiredJavaScriptModules();
+		assertEquals(RuntimeVariables.replace("UG UserGroup1 Name"),
+			selenium.getText("//h1[@class='header-title']/span"));
+		assertEquals(RuntimeVariables.replace("Old Name UG UserGroup1 Name"),
+			selenium.getText("//div[@class='aui-field-wrapper-content']"));
+		assertEquals("UG UserGroup1 Name",
+			selenium.getValue("//input[@id='_127_name']"));
+		selenium.open("/web/guest/home/");
+		loadRequiredJavaScriptModules();
+		selenium.clickAt("//div[@id='dockbar']",
+			RuntimeVariables.replace("Dockbar"));
+
+		for (int second = 0;; second++) {
+			if (second >= 90) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent(
+							"//script[contains(@src,'/aui/aui-editable/aui-editable-min.js')]")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		assertEquals(RuntimeVariables.replace("Go to"),
+			selenium.getText("//li[@id='_145_mySites']/a/span"));
+		selenium.mouseOver("//li[@id='_145_mySites']/a/span");
+
+		for (int second = 0;; second++) {
+			if (second >= 90) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("link=Control Panel")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("link=Control Panel",
+			RuntimeVariables.replace("Control Panel"));
+		selenium.waitForPageToLoad("30000");
+		loadRequiredJavaScriptModules();
+		selenium.clickAt("link=User Groups",
+			RuntimeVariables.replace("User Groups"));
+		selenium.waitForPageToLoad("30000");
+		loadRequiredJavaScriptModules();
+		assertEquals(RuntimeVariables.replace("User Groups"),
+			selenium.getText("//h1[@class='header-title']/span"));
+		assertEquals(RuntimeVariables.replace("UG UserGroup2 Name"),
+			selenium.getText("//tr[4]/td[2]/a"));
+		selenium.clickAt("//tr[4]/td[2]/a",
+			RuntimeVariables.replace("UG UserGroup2 Name"));
+		selenium.waitForPageToLoad("30000");
+		loadRequiredJavaScriptModules();
+		assertEquals(RuntimeVariables.replace("UG UserGroup2 Name"),
+			selenium.getText("//h1[@class='header-title']/span"));
+		assertEquals(RuntimeVariables.replace("Old Name UG UserGroup2 Name"),
+			selenium.getText("//div[@class='aui-field-wrapper-content']"));
+		assertEquals("UG UserGroup2 Name",
+			selenium.getValue("//input[@id='_127_name']"));
+		selenium.open("/web/guest/home/");
+		loadRequiredJavaScriptModules();
+		selenium.clickAt("//div[@id='dockbar']",
+			RuntimeVariables.replace("Dockbar"));
+
+		for (int second = 0;; second++) {
+			if (second >= 90) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent(
+							"//script[contains(@src,'/aui/aui-editable/aui-editable-min.js')]")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		assertEquals(RuntimeVariables.replace("Go to"),
+			selenium.getText("//li[@id='_145_mySites']/a/span"));
+		selenium.mouseOver("//li[@id='_145_mySites']/a/span");
+
+		for (int second = 0;; second++) {
+			if (second >= 90) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("link=Control Panel")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.clickAt("link=Control Panel",
+			RuntimeVariables.replace("Control Panel"));
+		selenium.waitForPageToLoad("30000");
+		loadRequiredJavaScriptModules();
+		selenium.clickAt("link=User Groups",
+			RuntimeVariables.replace("User Groups"));
+		selenium.waitForPageToLoad("30000");
+		loadRequiredJavaScriptModules();
+		assertEquals(RuntimeVariables.replace("User Groups"),
+			selenium.getText("//h1[@class='header-title']/span"));
+		assertEquals(RuntimeVariables.replace("UG UserGroup3 Name"),
+			selenium.getText("//tr[5]/td[2]/a"));
+		selenium.clickAt("//tr[5]/td[2]/a",
+			RuntimeVariables.replace("UG UserGroup3 Name"));
+		selenium.waitForPageToLoad("30000");
+		loadRequiredJavaScriptModules();
+		assertEquals(RuntimeVariables.replace("UG UserGroup3 Name"),
+			selenium.getText("//h1[@class='header-title']/span"));
+		assertEquals(RuntimeVariables.replace("Old Name UG UserGroup3 Name"),
+			selenium.getText("//div[@class='aui-field-wrapper-content']"));
+		assertEquals("UG UserGroup3 Name",
+			selenium.getValue("//input[@id='_127_name']"));
 	}
 }

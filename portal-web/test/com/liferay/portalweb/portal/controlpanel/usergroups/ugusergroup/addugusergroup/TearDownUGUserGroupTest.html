@@ -50,222 +50,42 @@
 </tr>
 <tr>
 	<td>storeElementPresent</td>
-	<td>//span[@title='Actions']/ul/li/strong/a</td>
-	<td>UserGroup1Present</td>
+	<td>//input[@name='_127_rowIds']</td>
+	<td>UserGroupPresent</td>
 </tr>
 <tr>
 	<td>gotoIf</td>
-	<td>!${UserGroup1Present}</td>
-	<td>UserGroup1NotPresent</td>
+	<td>!${UserGroupPresent}</td>
+	<td>UserGroupNotPresent</td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>//span[@title='Actions']/ul/li/strong/a</td>
-	<td>Actions</td>
+	<td>assertNotChecked</td>
+	<td>//input[@name='_127_allRowIds']</td>
+	<td>Select All</td>
 </tr>
 <tr>
 	<td>clickAt</td>
-	<td>//span[@title='Actions']/ul/li/strong/a</td>
-	<td>Actions</td>
+	<td>//input[@name='_127_allRowIds']</td>
+	<td>Select All</td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>//input[@name='_127_allRowIds']</td>
+	<td>Select All</td>
 </tr>
 <tr>
 	<td>waitForVisible</td>
-	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[6]/a</td>
-	<td>Delete</td>
+	<td>//tr[@class='portlet-section-body results-row last selected']</td>
+	<td>Entry Selected</td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[6]/a</td>
-	<td>Delete</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[6]/a</td>
+	<td>clickAtAndWait</td>
+	<td>//input[@value='Delete']</td>
 	<td>Delete</td>
 </tr>
 <tr>
 	<td>assertConfirmation</td>
-	<td>Are you sure you want to delete this? It will be deleted immediately.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//div[@class='portlet-msg-success']</td>
-	<td>Your request completed successfully.</td>
-</tr>
-<tr>
-	<td>storeElementPresent</td>
-	<td>//span[@title='Actions']/ul/li/strong/a</td>
-	<td>UserGroup2Present</td>
-</tr>
-<tr>
-	<td>gotoIf</td>
-	<td>!${UserGroup2Present}</td>
-	<td>UserGroup2NotPresent</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//span[@title='Actions']/ul/li/strong/a</td>
-	<td>Actions</td>
-</tr>
-<tr>
-	<td>clickAt</td>
-	<td>//span[@title='Actions']/ul/li/strong/a</td>
-	<td>Actions</td>
-</tr>
-<tr>
-	<td>waitForVisible</td>
-	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[6]/a</td>
-	<td>Delete</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[6]/a</td>
-	<td>Delete</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[6]/a</td>
-	<td>Delete</td>
-</tr>
-<tr>
-	<td>assertConfirmation</td>
-	<td>Are you sure you want to delete this? It will be deleted immediately.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//div[@class='portlet-msg-success']</td>
-	<td>Your request completed successfully.</td>
-</tr>
-<tr>
-	<td>storeElementPresent</td>
-	<td>//span[@title='Actions']/ul/li/strong/a</td>
-	<td>UserGroup3Present</td>
-</tr>
-<tr>
-	<td>gotoIf</td>
-	<td>!${UserGroup3Present}</td>
-	<td>UserGroup3NotPresent</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//span[@title='Actions']/ul/li/strong/a</td>
-	<td>Actions</td>
-</tr>
-<tr>
-	<td>clickAt</td>
-	<td>//span[@title='Actions']/ul/li/strong/a</td>
-	<td>Actions</td>
-</tr>
-<tr>
-	<td>waitForVisible</td>
-	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[6]/a</td>
-	<td>Delete</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[6]/a</td>
-	<td>Delete</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[6]/a</td>
-	<td>Delete</td>
-</tr>
-<tr>
-	<td>assertConfirmation</td>
-	<td>Are you sure you want to delete this? It will be deleted immediately.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//div[@class='portlet-msg-success']</td>
-	<td>Your request completed successfully.</td>
-</tr>
-<tr>
-	<td>storeElementPresent</td>
-	<td>//span[@title='Actions']/ul/li/strong/a</td>
-	<td>UserGroup4Present</td>
-</tr>
-<tr>
-	<td>gotoIf</td>
-	<td>!${UserGroup4Present}</td>
-	<td>UserGroup4NotPresent</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//span[@title='Actions']/ul/li/strong/a</td>
-	<td>Actions</td>
-</tr>
-<tr>
-	<td>clickAt</td>
-	<td>//span[@title='Actions']/ul/li/strong/a</td>
-	<td>Actions</td>
-</tr>
-<tr>
-	<td>waitForVisible</td>
-	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[6]/a</td>
-	<td>Delete</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[6]/a</td>
-	<td>Delete</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[6]/a</td>
-	<td>Delete</td>
-</tr>
-<tr>
-	<td>assertConfirmation</td>
-	<td>Are you sure you want to delete this? It will be deleted immediately.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//div[@class='portlet-msg-success']</td>
-	<td>Your request completed successfully.</td>
-</tr>
-<tr>
-	<td>storeElementPresent</td>
-	<td>//span[@title='Actions']/ul/li/strong/a</td>
-	<td>UserGroup5Present</td>
-</tr>
-<tr>
-	<td>gotoIf</td>
-	<td>!${UserGroup5Present}</td>
-	<td>UserGroup5NotPresent</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//span[@title='Actions']/ul/li/strong/a</td>
-	<td>Actions</td>
-</tr>
-<tr>
-	<td>clickAt</td>
-	<td>//span[@title='Actions']/ul/li/strong/a</td>
-	<td>Actions</td>
-</tr>
-<tr>
-	<td>waitForVisible</td>
-	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[6]/a</td>
-	<td>Delete</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[6]/a</td>
-	<td>Delete</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[6]/a</td>
-	<td>Delete</td>
-</tr>
-<tr>
-	<td>assertConfirmation</td>
-	<td>Are you sure you want to delete this? It will be deleted immediately.</td>
+	<td>Are you sure you want to delete this?</td>
 	<td></td>
 </tr>
 <tr>
@@ -275,27 +95,7 @@
 </tr>
 <tr>
 	<td>label</td>
-	<td>UserGroup1NotPresent</td>
-	<td></td>
-</tr>
-<tr>
-	<td>label</td>
-	<td>UserGroup2NotPresent</td>
-	<td></td>
-</tr>
-<tr>
-	<td>label</td>
-	<td>UserGroup3NotPresent</td>
-	<td></td>
-</tr>
-<tr>
-	<td>label</td>
-	<td>UserGroup4NotPresent</td>
-	<td></td>
-</tr>
-<tr>
-	<td>label</td>
-	<td>UserGroup5NotPresent</td>
+	<td>UserGroupNotPresent</td>
 	<td></td>
 </tr>
 <tr>

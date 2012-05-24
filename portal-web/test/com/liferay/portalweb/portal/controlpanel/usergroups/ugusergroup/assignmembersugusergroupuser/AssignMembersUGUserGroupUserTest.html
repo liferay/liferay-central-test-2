@@ -1,12 +1,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>ViewRemoveMemberUGUserGroupUserTest</title>
+<title>AssignMembersUGUserGroupUserTest</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">ViewRemoveMemberUGUserGroupUserTest</td></tr>
+<tr><td rowspan="1" colspan="3">AssignMembersUGUserGroupUserTest</td></tr>
 </thead><tbody>
 <tr>
 	<td>open</td>
@@ -50,48 +50,43 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//td[4]/span/ul/li/strong/a</td>
+	<td>//span[@title='Actions']/ul/li/strong/a/span</td>
 	<td>Actions</td>
 </tr>
 <tr>
 	<td>clickAt</td>
-	<td>//td[4]/span/ul/li/strong/a</td>
+	<td>//span[@title='Actions']/ul/li/strong/a/span</td>
 	<td>Actions</td>
 </tr>
 <tr>
 	<td>waitForVisible</td>
-	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[5]/a</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[contains(.,'Assign Members')]/a</td>
 	<td>Assign Members</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[5]/a</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[contains(.,'Assign Members')]/a</td>
 	<td>Assign Members</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[5]/a</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[contains(.,'Assign Members')]/a</td>
 	<td>Assign Members</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>link=Available</td>
+	<td>//ul[@class='aui-tabview-list']/li[2]/span/a</td>
 	<td>Available</td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>link=Available</td>
+	<td>//ul[@class='aui-tabview-list']/li[2]/span/a</td>
 	<td>Available</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>//input[@name='_127_screenName']</td>
-	<td>user</td>
-</tr>
-<tr>
-	<td>type</td>
 	<td>//input[@name='_127_keywords']</td>
-	<td>user</td>
+	<td>usersn</td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
@@ -100,18 +95,38 @@
 </tr>
 <tr>
 	<td>assertNotChecked</td>
-	<td>//input[@name='_127_allRowIds']</td>
-	<td></td>
+	<td>//input[@name='_127_rowIds']</td>
+	<td>Entry Check Box</td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>//input[@name='_127_rowIds']</td>
+	<td>Entry Check Box</td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>//input[@name='_127_rowIds']</td>
+	<td>Entry Check Box</td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>//tr[@class='portlet-section-body results-row last selected']</td>
+	<td>Entry Selected</td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>//input[@value='Update Associations']</td>
+	<td>Update Associations</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//td[contains(@id,'col-name_row-usersn')]</td>
-	<td>userfn userln</td>
+	<td>//div[@class='portlet-msg-success']</td>
+	<td>Your request completed successfully.</td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>//td[contains(@id,'col-screen-name_row-usersn')]</td>
-	<td>usersn</td>
+	<td>assertChecked</td>
+	<td>//input[@name='_127_rowIds']</td>
+	<td>Entry Check Box</td>
 </tr>
 </tbody></table>
 </body>

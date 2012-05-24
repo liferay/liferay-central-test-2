@@ -27,8 +27,8 @@ import junit.framework.TestSuite;
 public class AddUGUserGroupNameCommaTests extends BaseTestSuite {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
-		testSuite.addTestSuite(ViewPortletUGCPTest.class);
 		testSuite.addTestSuite(AddUGUserGroupNameCommaTest.class);
+		testSuite.addTestSuite(ViewPortletUGCPTest.class);
 		testSuite.addTestSuite(TearDownUGUserGroupTest.class);
 
 		return testSuite;

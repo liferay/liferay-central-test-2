@@ -1,12 +1,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>ViewPortletUGCPTest</title>
+<title>ViewDeleteUGUserGroupUserTest</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">ViewPortletUGCPTest</td></tr>
+<tr><td rowspan="1" colspan="3">ViewDeleteUGUserGroupUserTest</td></tr>
 </thead><tbody>
 <tr>
 	<td>open</td>
@@ -50,48 +50,58 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//span[@class='portlet-title-text']</td>
-	<td>User Groups</td>
+	<td>//tr[3]/td[2]/a</td>
+	<td>UG UserGroup Name</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[@class='portlet-description aui-helpbox-content']</td>
-	<td>Or disable for all portlets <br /> User groups provide a way to group users independently of the organizations to which they belong. Administrators can define a user group and assign the user group as a member of a site to make all of its users members automatically.</td>
+	<td>//span[@title='Actions']/ul/li/strong/a/span</td>
+	<td>Actions</td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>//span[@title='Actions']/ul/li/strong/a/span</td>
+	<td>Actions</td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[contains(.,'Assign Members')]/a</td>
+	<td>Assign Members</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[@class='lfr-portlet-toolbar']/span[1]/a</td>
-	<td>View All</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[contains(.,'Assign Members')]/a</td>
+	<td>Assign Members</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[contains(.,'Assign Members')]/a</td>
+	<td>Assign Members</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[@class='lfr-portlet-toolbar']/span[2]/a</td>
-	<td>Add</td>
+	<td>//ul[@class='aui-tabview-list']/li/span/a/strong</td>
+	<td>Current</td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>//input[@name='_127_allRowIds']</td>
+	<td>Select All</td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>//input[@name='_127_rowIds']</td>
+	<td>Entry Check Box</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//h1[@class='header-title']/span</td>
-	<td>User Groups</td>
-</tr>
-<tr>
-	<td>assertVisible</td>
-	<td>//input[@id='_127_keywords']</td>
-	<td>Search Field</td>
-</tr>
-<tr>
-	<td>assertVisible</td>
-	<td>//input[@value='Search']</td>
-	<td>Search</td>
-</tr>
-<tr>
-	<td>assertVisible</td>
-	<td>//input[@value='Delete']</td>
-	<td>Delete</td>
+	<td>//tr[3]/td[2]</td>
+	<td>userfn userln</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[@class='portlet-msg-info']</td>
-	<td>No user groups were found.</td>
+	<td>//tr[3]/td[3]</td>
+	<td>usersn</td>
 </tr>
 </tbody></table>
 </body>

@@ -22,9 +22,9 @@ import com.liferay.portalweb.portal.controlpanel.usergroups.ugusergroup.adduguse
 import com.liferay.portalweb.portal.controlpanel.usergroups.ugusergroup.addugusergroupnamenull.AddUGUserGroupNameNullTests;
 import com.liferay.portalweb.portal.controlpanel.usergroups.ugusergroup.addugusergroupnamenumber.AddUGUserGroupNameNumberTests;
 import com.liferay.portalweb.portal.controlpanel.usergroups.ugusergroup.addugusergroups.AddUGUserGroupsTests;
-import com.liferay.portalweb.portal.controlpanel.usergroups.ugusergroup.assignmemberugusergroupuser.AssignMemberUGUserGroupUserTests;
+import com.liferay.portalweb.portal.controlpanel.usergroups.ugusergroup.assignmembersugusergroupuser.AssignMembersUGUserGroupUserTests;
 import com.liferay.portalweb.portal.controlpanel.usergroups.ugusergroup.deleteugusergroupuser.DeleteUGUserGroupUserTests;
-import com.liferay.portalweb.portal.controlpanel.usergroups.ugusergroup.removememberugusergroupuser.RemoveMemberUGUserGroupUserTests;
+import com.liferay.portalweb.portal.controlpanel.usergroups.ugusergroup.removemembersugusergroupuser.RemoveMembersUGUserGroupUserTests;
 import com.liferay.portalweb.portal.controlpanel.usergroups.ugusergroup.searchugusergroup.SearchUGUserGroupTests;
 
 import junit.framework.Test;
@@ -45,9 +45,9 @@ public class UGUserGroupTestPlan extends BaseTestSuite {
 		testSuite.addTest(AddUGUserGroupNameNullTests.suite());
 		testSuite.addTest(AddUGUserGroupNameNumberTests.suite());
 		testSuite.addTest(AddUGUserGroupsTests.suite());
-		testSuite.addTest(AssignMemberUGUserGroupUserTests.suite());
+		testSuite.addTest(AssignMembersUGUserGroupUserTests.suite());
 		testSuite.addTest(DeleteUGUserGroupUserTests.suite());
-		testSuite.addTest(RemoveMemberUGUserGroupUserTests.suite());
+		testSuite.addTest(RemoveMembersUGUserGroupUserTests.suite());
 		testSuite.addTest(SearchUGUserGroupTests.suite());
 
 		return testSuite;

@@ -49,9 +49,24 @@
 	<td>User Groups</td>
 </tr>
 <tr>
+	<td>assertNotChecked</td>
+	<td>//input[@name='_127_rowIds']</td>
+	<td>Entry Check Box</td>
+</tr>
+<tr>
 	<td>clickAt</td>
-	<td>//input[@name='_127_allRowIds']</td>
-	<td></td>
+	<td>//input[@name='_127_rowIds']</td>
+	<td>Entry Check Box</td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>//input[@name='_127_rowIds']</td>
+	<td>Entry Check Box</td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>//tr[@class='portlet-section-body results-row last selected']</td>
+	<td>Entry Selected</td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
@@ -60,12 +75,12 @@
 </tr>
 <tr>
 	<td>assertConfirmation</td>
-	<td>Are you sure you want to delete this? It will be deleted immediately.</td>
+	<td>Are you sure you want to delete this?</td>
 	<td></td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[@class='portlet-msg-error']</td>
+	<td>xPath=(//div[@class='portlet-msg-error'])[1]</td>
 	<td>Your request failed to complete.</td>
 </tr>
 <tr>

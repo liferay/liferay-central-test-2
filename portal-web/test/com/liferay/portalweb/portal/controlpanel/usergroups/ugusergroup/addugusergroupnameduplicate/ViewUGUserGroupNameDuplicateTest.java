@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portalweb.portal.controlpanel.usergroups.ugusergroup.addugusergroupnamenumber;
+package com.liferay.portalweb.portal.controlpanel.usergroups.ugusergroup.addugusergroupnameduplicate;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
@@ -20,8 +20,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 /**
  * @author Brian Wing Shun Chan
  */
-public class AddUGUserGroupNameNumberTest extends BaseTestCase {
-	public void testAddUGUserGroupNameNumber() throws Exception {
+public class ViewUGUserGroupNameDuplicateTest extends BaseTestCase {
+	public void testViewUGUserGroupNameDuplicate() throws Exception {
 		selenium.open("/web/guest/home/");
 		loadRequiredJavaScriptModules();
 		selenium.clickAt("//div[@id='dockbar']",
@@ -74,23 +74,8 @@ public class AddUGUserGroupNameNumberTest extends BaseTestCase {
 		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("User Groups"),
 			selenium.getText("//h1[@class='header-title']/span"));
-		assertEquals(RuntimeVariables.replace("Add"),
-			selenium.getText("//span[contains(@class,'add-button')]/a"));
-		selenium.clickAt("//span[contains(@class,'add-button')]/a",
-			RuntimeVariables.replace("Add"));
-		selenium.waitForPageToLoad("30000");
-		loadRequiredJavaScriptModules();
-		assertEquals(RuntimeVariables.replace("New User Group"),
-			selenium.getText("//h1[@class='header-title']/span"));
-		selenium.type("//input[@id='_127_name']", RuntimeVariables.replace("1"));
-		selenium.clickAt("//input[@value='Save']",
-			RuntimeVariables.replace("Save"));
-		selenium.waitForPageToLoad("30000");
-		loadRequiredJavaScriptModules();
-		assertEquals(RuntimeVariables.replace(
-				"Your request failed to complete."),
-			selenium.getText("xPath=(//div[@class='portlet-msg-error'])[1]"));
-		assertEquals(RuntimeVariables.replace("Please enter a valid name."),
-			selenium.getText("xPath=(//div[@class='portlet-msg-error'])[2]"));
+		assertEquals(RuntimeVariables.replace("UG UserGroup Name"),
+			selenium.getText("//tr[3]/td[2]/a"));
+		assertFalse(selenium.isElementPresent("//tr[4]/td[2]/a"));
 	}
 }

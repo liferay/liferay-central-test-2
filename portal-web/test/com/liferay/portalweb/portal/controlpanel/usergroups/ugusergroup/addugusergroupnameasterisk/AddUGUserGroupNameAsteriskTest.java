@@ -82,25 +82,6 @@ public class AddUGUserGroupNameAsteriskTest extends BaseTestCase {
 		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("New User Group"),
 			selenium.getText("//h1[@class='header-title']/span"));
-		assertEquals(RuntimeVariables.replace("New User Group"),
-			selenium.getText("//h1[@class='header-title']/span"));
-
-		for (int second = 0;; second++) {
-			if (second >= 90) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isVisible("//input[@id='_127_name']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.type("//input[@id='_127_name']",
 			RuntimeVariables.replace("UG UserGroup Name*"));
 		selenium.clickAt("//input[@value='Save']",
@@ -109,7 +90,7 @@ public class AddUGUserGroupNameAsteriskTest extends BaseTestCase {
 		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace(
 				"Your request failed to complete."),
-			selenium.getText("//div[@class='portlet-msg-error']"));
+			selenium.getText("xPath=(//div[@class='portlet-msg-error'])[1]"));
 		assertEquals(RuntimeVariables.replace("Please enter a valid name."),
 			selenium.getText("xPath=(//div[@class='portlet-msg-error'])[2]"));
 	}

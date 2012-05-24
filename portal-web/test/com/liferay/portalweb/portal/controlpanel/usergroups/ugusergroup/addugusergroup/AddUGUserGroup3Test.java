@@ -83,7 +83,7 @@ public class AddUGUserGroup3Test extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace("New User Group"),
 			selenium.getText("//h1[@class='header-title']/span"));
 		selenium.type("//input[@id='_127_name']",
-			RuntimeVariables.replace("UG UserGroup Name 3"));
+			RuntimeVariables.replace("UG UserGroup3 Name"));
 		selenium.clickAt("//input[@value='Save']",
 			RuntimeVariables.replace("Save"));
 		selenium.waitForPageToLoad("30000");
@@ -91,5 +91,7 @@ public class AddUGUserGroup3Test extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace(
 				"Your request completed successfully."),
 			selenium.getText("//div[@class='portlet-msg-success']"));
+		assertEquals(RuntimeVariables.replace("UG UserGroup3 Name"),
+			selenium.getText("//tr[5]/td[2]/a"));
 	}
 }

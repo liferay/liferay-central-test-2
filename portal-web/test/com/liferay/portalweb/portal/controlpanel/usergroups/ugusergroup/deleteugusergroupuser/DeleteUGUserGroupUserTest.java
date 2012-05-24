@@ -72,17 +72,37 @@ public class DeleteUGUserGroupUserTest extends BaseTestCase {
 			RuntimeVariables.replace("User Groups"));
 		selenium.waitForPageToLoad("30000");
 		loadRequiredJavaScriptModules();
-		selenium.clickAt("//input[@name='_127_allRowIds']",
-			RuntimeVariables.replace(""));
+		assertFalse(selenium.isChecked("//input[@name='_127_rowIds']"));
+		selenium.clickAt("//input[@name='_127_rowIds']",
+			RuntimeVariables.replace("Entry Check Box"));
+		assertTrue(selenium.isChecked("//input[@name='_127_rowIds']"));
+
+		for (int second = 0;; second++) {
+			if (second >= 90) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible(
+							"//tr[@class='portlet-section-body results-row last selected']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.clickAt("//input[@value='Delete']",
 			RuntimeVariables.replace("Delete"));
 		selenium.waitForPageToLoad("30000");
 		loadRequiredJavaScriptModules();
 		assertTrue(selenium.getConfirmation()
-						   .matches("^Are you sure you want to delete this[\\s\\S] It will be deleted immediately.$"));
+						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 		assertEquals(RuntimeVariables.replace(
 				"Your request failed to complete."),
-			selenium.getText("//div[@class='portlet-msg-error']"));
+			selenium.getText("xPath=(//div[@class='portlet-msg-error'])[1]"));
 		assertEquals(RuntimeVariables.replace(
 				"You cannot delete user groups that have users."),
 			selenium.getText("xPath=(//div[@class='portlet-msg-error'])[2]"));
