@@ -468,7 +468,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 		List<String> actionIds = ResourceActionsUtil.getModelResourceActions(
 			resourceName);
 
-		Map<Long, Set<String>> roleIdsToActionIds = getActionIds_6(
+		Map<Long, Set<String>> roleIdsToActionIds = getActionIds(
 			_companyId, roleIds.getArray(), resourceName, resourcePK,
 			actionIds);
 
@@ -1317,7 +1317,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 		return serviceContext;
 	}
 
-	protected Map<Long, Set<String>> getActionIds_6(
+	protected Map<Long, Set<String>> getActionIds(
 			long companyId, long[] roleIds, String className, long primKey,
 			List<String> actionIds)
 		throws PortalException, SystemException {
