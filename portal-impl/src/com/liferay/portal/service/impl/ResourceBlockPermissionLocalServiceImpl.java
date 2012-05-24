@@ -71,13 +71,12 @@ public class ResourceBlockPermissionLocalServiceImpl
 			resourceBlockId);
 	}
 
-	public Map<Long, Set<String>> getAvailableResourcePermissionActionIds(
-			long[] roleIds, String className, long primKey,
-			List<String> actionIds)
+	public Map<Long, Set<String>> getAvailableResourceBlockPermissionActionIds(
+			long[] roleIds, String name, long primKey, List<String> actionIds)
 		throws PortalException, SystemException {
 
 		ResourceBlock resourceBlock =
-			resourceBlockLocalService.getResourceBlock(className, primKey);
+			resourceBlockLocalService.getResourceBlock(name, primKey);
 
 		Map<Long, Set<String>> roleIdsToActionIds =
 			new HashMap<Long, Set<String>>();
@@ -89,10 +88,10 @@ public class ResourceBlockPermissionLocalServiceImpl
 				continue;
 			}
 
-			List<String> resourceBlockActions =
+			List<String> resourceBlockActionIds =
 				resourceBlockLocalService.getPermissions(resourceBlock, roleId);
 
-			if (resourceBlockActions.isEmpty()) {
+			if (resourceBlockActionIds.isEmpty()) {
 				continue;
 			}
 
@@ -101,7 +100,7 @@ public class ResourceBlockPermissionLocalServiceImpl
 			roleIdsToActionIds.put(roleId, availableActionIds);
 
 			for (String actionId : actionIds) {
-				if (resourceBlockActions.contains(actionId)) {
+				if (resourceBlockActionIds.contains(actionId)) {
 					availableActionIds.add(actionId);
 				}
 			}

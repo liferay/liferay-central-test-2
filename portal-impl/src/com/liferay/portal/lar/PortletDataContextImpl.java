@@ -1324,7 +1324,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 
 		if (ResourceBlockLocalServiceUtil.isSupported(className)) {
 			return ResourceBlockPermissionLocalServiceUtil.
-				getAvailableResourcePermissionActionIds(
+				getAvailableResourceBlockPermissionActionIds(
 					roleIds, className, primKey, actionIds);
 		}
 		else {
