@@ -91,8 +91,7 @@ public class BlogsActivityInterpreter extends BaseSocialActivityInterpreter {
 			titlePattern += "-in";
 		}
 
-		String entryTitle = wrapLink(
-			link, HtmlUtil.escape(cleanContent(entry.getTitle())));
+		String entryTitle = wrapLink(link, HtmlUtil.escape(entry.getTitle()));
 
 		Object[] titleArguments = new Object[] {
 			groupName, creatorUserName, receiverUserName, entryTitle

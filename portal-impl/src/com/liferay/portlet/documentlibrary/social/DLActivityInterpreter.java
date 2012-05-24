@@ -93,7 +93,7 @@ public class DLActivityInterpreter extends BaseSocialActivityInterpreter {
 		}
 
 		String fileTitle = wrapLink(
-			link, HtmlUtil.escape(cleanContent(fileEntry.getTitle())));
+			link, HtmlUtil.escape(fileEntry.getTitle()));
 
 		Object[] titleArguments = new Object[] {
 			groupName, creatorUserName, fileTitle
