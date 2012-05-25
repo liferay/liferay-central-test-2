@@ -55,8 +55,8 @@ public class DLFolderFinderImpl
 	public static final String COUNT_FE_BY_G_F_S =
 		DLFolderFinder.class.getName() + ".countFE_ByG_F_S";
 
-	public static final String COUNT_FS_BY_G_F_S_A =
-		DLFolderFinder.class.getName() + ".countFS_ByG_F_S_A";
+	public static final String COUNT_FS_BY_G_F_A_S =
+		DLFolderFinder.class.getName() + ".countFS_ByG_F_A_S";
 
 	public static final String FIND_F_BY_G_M_F =
 		DLFolderFinder.class.getName() + ".findF_ByG_M_F";
@@ -70,8 +70,8 @@ public class DLFolderFinderImpl
 	public static final String FIND_FE_BY_G_F_S =
 		DLFolderFinder.class.getName() + ".findFE_ByG_F_S";
 
-	public static final String FIND_FS_BY_G_F_S_A =
-		DLFolderFinder.class.getName() + ".findFS_ByG_F_S_A";
+	public static final String FIND_FS_BY_G_F_A_S =
+		DLFolderFinder.class.getName() + ".findFS_ByG_F_A_S";
 
 	public static final String JOIN_FS_BY_DL_FILE_ENTRY =
 		DLFolderFinder.class.getName() + ".joinFS_ByDLFileEntry";
@@ -114,19 +114,19 @@ public class DLFolderFinderImpl
 			true);
 	}
 
+	public int filterCountFE_ByG_F(
+			long groupId, long folderId, QueryDefinition queryDefinition)
+		throws SystemException {
+
+		return doCountFE_ByG_F(groupId, folderId, queryDefinition, true);
+	}
+
 	public int filterCountFE_FS_ByG_F(
 			long groupId, long folderId, QueryDefinition queryDefinition)
 		throws SystemException {
 
 		return doCountFE_FS_ByG_F_M(
 			groupId, folderId, null, queryDefinition, true);
-	}
-
-	public int filterCountFE_ByG_F(
-			long groupId, long folderId, QueryDefinition queryDefinition)
-		throws SystemException {
-
-		return doCountFE_ByG_F(groupId, folderId, queryDefinition, true);
 	}
 
 	public int filterCountFE_FS_ByG_F_M(
@@ -246,6 +246,7 @@ public class DLFolderFinderImpl
 
 			qPos.add(folderId);
 			qPos.add(groupId);
+			qPos.add(true);
 
 			if (queryDefinition.getStatus() != WorkflowConstants.STATUS_ANY) {
 				qPos.add(queryDefinition.getStatus());
@@ -381,6 +382,7 @@ public class DLFolderFinderImpl
 
 			qPos.add(folderId);
 			qPos.add(groupId);
+			qPos.add(true);
 
 			if (queryDefinition.getStatus() != WorkflowConstants.STATUS_ANY) {
 				qPos.add(queryDefinition.getStatus());
@@ -484,7 +486,7 @@ public class DLFolderFinderImpl
 
 			sb.append(" UNION ALL ");
 
-			sql = CustomSQLUtil.get(FIND_FS_BY_G_F_S_A);
+			sql = CustomSQLUtil.get(FIND_FS_BY_G_F_A_S);
 
 			sql = replaceExcludeStatus(sql, queryDefinition);
 
@@ -563,6 +565,7 @@ public class DLFolderFinderImpl
 
 			qPos.add(folderId);
 			qPos.add(groupId);
+			qPos.add(true);
 
 			if (queryDefinition.getStatus() != WorkflowConstants.STATUS_ANY) {
 				qPos.add(queryDefinition.getStatus());
@@ -646,7 +649,7 @@ public class DLFolderFinderImpl
 			sb.append(sql);
 			sb.append(" UNION ALL ");
 
-			sql = CustomSQLUtil.get(FIND_FS_BY_G_F_S_A);
+			sql = CustomSQLUtil.get(FIND_FS_BY_G_F_A_S);
 
 			sql = replaceExcludeStatus(sql, queryDefinition);
 
@@ -685,6 +688,7 @@ public class DLFolderFinderImpl
 
 			qPos.add(folderId);
 			qPos.add(groupId);
+			qPos.add(true);
 
 			if (queryDefinition.getStatus() != WorkflowConstants.STATUS_ANY) {
 				qPos.add(queryDefinition.getStatus());
@@ -782,7 +786,7 @@ public class DLFolderFinderImpl
 		long groupId, String[] mimeTypes, QueryDefinition queryDefinition,
 		boolean inlineSQLHelper) {
 
-		String sql = CustomSQLUtil.get(COUNT_FS_BY_G_F_S_A);
+		String sql = CustomSQLUtil.get(COUNT_FS_BY_G_F_A_S);
 
 		sql = replaceExcludeStatus(sql, queryDefinition);
 
