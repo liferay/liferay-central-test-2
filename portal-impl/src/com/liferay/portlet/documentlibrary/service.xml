@@ -314,15 +314,15 @@
 			<finder-column name="groupId" />
 			<finder-column name="userId" />
 		</finder>
-		<finder name="C_U_F" return-type="DLFileRank" unique="true">
-			<finder-column name="companyId" />
-			<finder-column name="userId" />
-			<finder-column name="fileEntryId" />
-		</finder>
 		<finder name="G_U_A" return-type="Collection">
 			<finder-column name="groupId" />
 			<finder-column name="userId" />
 			<finder-column name="active" />
+		</finder>
+		<finder name="C_U_F" return-type="DLFileRank" unique="true">
+			<finder-column name="companyId" />
+			<finder-column name="userId" />
+			<finder-column name="fileEntryId" />
 		</finder>
 
 		<!-- References -->
@@ -352,11 +352,11 @@
 		<column name="repositoryId" type="long" />
 		<column name="folderId" type="long" />
 		<column name="toFileEntryId" type="long" />
+		<column name="active" type="boolean" />
 		<column name="status" type="int" />
 		<column name="statusByUserId" type="long" />
 		<column name="statusByUserName" type="String" />
 		<column name="statusDate" type="Date" />
-		<column name="active" type="boolean" />
 
 		<!-- Finder methods -->
 
@@ -368,11 +368,11 @@
 			<finder-column name="folderId" />
 			<finder-column name="active" />
 		</finder>
-		<finder name="G_F_S_A" return-type="Collection">
+		<finder name="G_F_A_S" return-type="Collection">
 			<finder-column name="groupId" />
 			<finder-column name="folderId" />
-			<finder-column name="status" />
 			<finder-column name="active" />
+			<finder-column name="status" />
 		</finder>
 
 		<!-- References -->
