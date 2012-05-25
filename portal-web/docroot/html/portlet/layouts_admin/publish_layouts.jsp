@@ -259,7 +259,7 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 	}
 </style>
 
-<aui:form action='<%= portletURL.toString() + "&etag=0" %>' method="post" name="exportPagesFm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "refreshDialog();" %>' >
+<aui:form action='<%= portletURL.toString() + "&etag=0&strip=0" %>' method="post" name="exportPagesFm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "refreshDialog();" %>' >
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= cmd %>" />
 	<aui:input name="tabs1" type="hidden" value="<%= tabs1 %>" />
 	<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
@@ -459,7 +459,7 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 				var dialog = A.DialogManager.findByChild('#<portlet:namespace />exportPagesFm');
 
 				if (dialog) {
-					dialog.io.set('uri', '<%= portletURL.toString() + "&etag=0" %>');
+					dialog.io.set('uri', '<%= portletURL.toString() + "&etag=0&strip=0" %>');
 
 					dialog.io.set(
 						'form',
