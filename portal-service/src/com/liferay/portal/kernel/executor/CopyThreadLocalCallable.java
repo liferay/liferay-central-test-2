@@ -70,7 +70,7 @@ public abstract class CopyThreadLocalCallable<T> implements Callable<T> {
 		finally {
 			if (_clearOnExit) {
 				if (_threadLocalBinder != null) {
-					_threadLocalBinder.cleanup();
+					_threadLocalBinder.cleanUp();
 				}
 
 				CentralizedThreadLocal.clearLongLivedThreadLocals();

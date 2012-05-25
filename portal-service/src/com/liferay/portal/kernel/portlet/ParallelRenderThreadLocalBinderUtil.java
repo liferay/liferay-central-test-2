@@ -25,8 +25,8 @@ public class ParallelRenderThreadLocalBinderUtil {
 		_threadLocalBinder.bind();
 	}
 
-	public static void cleanup() {
-		_threadLocalBinder.cleanup();
+	public static void cleanUp() {
+		_threadLocalBinder.cleanUp();
 	}
 
 	public static ThreadLocalBinder getThreadLocalBinder() {

@@ -31,29 +31,29 @@ import java.util.Set;
 public class DefaultThreadLocalBinder implements ThreadLocalBinder {
 
 	public void afterPropertiesSet() throws Exception {
-		if (_threadLocalSourceMap == null) {
-			throw new IllegalArgumentException("Missing ThreadLocalSourceMap");
+		if (_threadLocalSources == null) {
+			throw new IllegalArgumentException("Thread local sources is null");
 		}
 
 		init(getClassLoader());
 	}
 
 	public void bind() {
-		Map<ThreadLocal<?>, ?> threadLocalValueMap = _threadLocalValueMap.get();
+		Map<ThreadLocal<?>, ?> threadLocalValues = _threadLocalValues.get();
 
-		for (Map.Entry<ThreadLocal<?>, ?> threadLocalValueEntry :
-			threadLocalValueMap.entrySet()) {
+		for (Map.Entry<ThreadLocal<?>, ?> entry :
+				threadLocalValues.entrySet()) {
 
 			ThreadLocal<Object> threadLocal =
-				(ThreadLocal<Object>)threadLocalValueEntry.getKey();
-			Object value = threadLocalValueEntry.getValue();
+				(ThreadLocal<Object>)entry.getKey();
+			Object value = entry.getValue();
 
 			threadLocal.set(value);
 		}
 	}
 
-	public void cleanup() {
-		for (ThreadLocal<?> threadLocal : _threadLocalSet) {
+	public void cleanUp() {
+		for (ThreadLocal<?> threadLocal : _threadLocals) {
 			threadLocal.remove();
 		}
 	}
@@ -69,11 +69,9 @@ public class DefaultThreadLocalBinder implements ThreadLocalBinder {
 	}
 
 	public void init(ClassLoader classLoader) throws Exception {
-		for (Map.Entry<String, String> threadLocalSourceEntry :
-			_threadLocalSourceMap.entrySet()) {
-
-			String className = threadLocalSourceEntry.getKey();
-			String fieldName = threadLocalSourceEntry.getValue();
+		for (Map.Entry<String, String> entry : _threadLocalSources.entrySet()) {
+			String className = entry.getKey();
+			String fieldName = entry.getValue();
 
 			Class<?> clazz = classLoader.loadClass(className);
 
@@ -82,7 +80,7 @@ public class DefaultThreadLocalBinder implements ThreadLocalBinder {
 			if (!ThreadLocal.class.isAssignableFrom(field.getType())) {
 				if (_log.isWarnEnabled()) {
 					_log.warn(
-						field.toString() +
+						fieldName +
 							" is not type of ThreadLocal. Skip binding.");
 				}
 
@@ -92,7 +90,7 @@ public class DefaultThreadLocalBinder implements ThreadLocalBinder {
 			if (!Modifier.isStatic(field.getModifiers())) {
 				if (_log.isWarnEnabled()) {
 					_log.warn(
-						field.toString() +
+						fieldName +
 							" is not a static ThreadLocal. Skip binding.");
 				}
 
@@ -103,46 +101,42 @@ public class DefaultThreadLocalBinder implements ThreadLocalBinder {
 
 			if (threadLocal == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(
-						field.toString() +
-							" has not initialized yet. Skip binding.");
+					_log.warn(fieldName + " is not initialized. Skip binding.");
 				}
 
 				continue;
 			}
 
-			_threadLocalSet.add(threadLocal);
+			_threadLocals.add(threadLocal);
 		}
 
 	}
 
 	public void record() {
-		Map<ThreadLocal<?>, Object> threadLocalValueMap =
+		Map<ThreadLocal<?>, Object> threadLocalValues =
 			new HashMap<ThreadLocal<?>, Object>();
 
-		for (ThreadLocal<?> threadLocal : _threadLocalSet) {
+		for (ThreadLocal<?> threadLocal : _threadLocals) {
 			Object value = threadLocal.get();
 
-			threadLocalValueMap.put(threadLocal, value);
+			threadLocalValues.put(threadLocal, value);
 		}
 
-		_threadLocalValueMap.set(threadLocalValueMap);
+		_threadLocalValues.set(threadLocalValues);
 	}
 
 	public void setClassLoader(ClassLoader classLoader) {
 		_classLoader = classLoader;
 	}
 
-	public void setThreadLocalSourceMap(
-		Map<String, String> threadLocalSourceMap) {
-
-		_threadLocalSourceMap = threadLocalSourceMap;
+	public void setThreadLocalSources(Map<String, String> threadLocalSources) {
+		_threadLocalSources = threadLocalSources;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(
 		DefaultThreadLocalBinder.class);
 
-	private static ThreadLocal<Map<ThreadLocal<?>, ?>> _threadLocalValueMap =
+	private static ThreadLocal<Map<ThreadLocal<?>, ?>> _threadLocalValues =
 		new AutoResetThreadLocal<Map<ThreadLocal<?>, ?>>(
 			DefaultThreadLocalBinder.class + "._threadLocalValueMap") {
 
@@ -156,7 +150,7 @@ public class DefaultThreadLocalBinder implements ThreadLocalBinder {
 		};
 
 	private ClassLoader _classLoader;
-	private Set<ThreadLocal<?>> _threadLocalSet = new HashSet<ThreadLocal<?>>();
-	private Map<String, String> _threadLocalSourceMap;
+	private Set<ThreadLocal<?>> _threadLocals = new HashSet<ThreadLocal<?>>();
+	private Map<String, String> _threadLocalSources;
 
 }

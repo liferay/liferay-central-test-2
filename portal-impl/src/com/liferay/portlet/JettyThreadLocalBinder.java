@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portlet.parallelrender.appserver;
+package com.liferay.portlet;
 
 import com.liferay.portal.kernel.portlet.ParallelRenderThreadLocalBinderUtil;
 import com.liferay.portal.kernel.util.DefaultThreadLocalBinder;
@@ -21,22 +21,24 @@ import com.liferay.portal.kernel.util.ServerDetector;
 /**
  * @author Shuyang Zhou
  */
-public class JettyThreadLocalBinder extends DefaultThreadLocalBinder{
+public class JettyThreadLocalBinder extends DefaultThreadLocalBinder {
 
 	public void afterPropertiesSet() throws Exception {
-		if (ServerDetector.isJetty()) {
-
-			Thread currentThread = Thread.currentThread();
-
-			ClassLoader contextClassLoader =
-				currentThread.getContextClassLoader().getParent();
-
-			setClassLoader(contextClassLoader);
-
-			super.afterPropertiesSet();
-
-			ParallelRenderThreadLocalBinderUtil.setThreadLocalBinder(this);
+		if (!ServerDetector.isJetty()) {
+			return;
 		}
+
+		Thread currentThread = Thread.currentThread();
+
+		ClassLoader classLoader = currentThread.getContextClassLoader();
+
+		classLoader = classLoader.getParent();
+
+		setClassLoader(classLoader);
+
+		super.afterPropertiesSet();
+
+		ParallelRenderThreadLocalBinderUtil.setThreadLocalBinder(this);
 	}
 
 }

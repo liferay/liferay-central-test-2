@@ -21,7 +21,7 @@ public interface ThreadLocalBinder {
 
 	public void bind();
 
-	public void cleanup();
+	public void cleanUp();
 
 	public void record();
 
