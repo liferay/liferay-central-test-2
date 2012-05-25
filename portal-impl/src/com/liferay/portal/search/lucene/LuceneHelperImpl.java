@@ -633,15 +633,15 @@ public class LuceneHelperImpl implements LuceneHelper {
 				indexAccessor = new IndexAccessorImpl(companyId);
 
 				if (isLoadIndexFromClusterEnabled()) {
-					Boolean clusterForward =
-						(Boolean)MessageValuesThreadLocal.getValue(
-							ClusterLinkUtil.CLUSTER_FORWARD_MESSAGE);
+					boolean clusterForwardMessage = GetterUtil.getBoolean(
+						MessageValuesThreadLocal.getValue(
+							ClusterLinkUtil.CLUSTER_FORWARD_MESSAGE));
 
-					if (Boolean.TRUE.equals(clusterForward)) {
+					if (clusterForwardMessage) {
 						if (_log.isInfoEnabled()) {
 							_log.info(
-								"Skip Luncene index files cluster loading, " +
-									"as this is a manual reindex request.");
+								"Skip Luncene index files cluster loading " +
+									"since this is a manual reindex request");
 						}
 					}
 					else {

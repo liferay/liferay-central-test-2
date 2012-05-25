@@ -96,14 +96,13 @@ public class SerialDestination extends BaseAsyncDestination {
 							messagePrincipalPassword);
 					}
 
-					Boolean messageClusterForward =
-						(Boolean)message.get(
-							ClusterLinkUtil.CLUSTER_FORWARD_MESSAGE);
+					Boolean clusterForwardMessage = (Boolean)message.get(
+						ClusterLinkUtil.CLUSTER_FORWARD_MESSAGE);
 
-					if (messageClusterForward != null) {
+					if (clusterForwardMessage != null) {
 						MessageValuesThreadLocal.setValue(
 							ClusterLinkUtil.CLUSTER_FORWARD_MESSAGE,
-							messageClusterForward);
+							clusterForwardMessage);
 					}
 
 					for (MessageListener messageListener : messageListeners) {

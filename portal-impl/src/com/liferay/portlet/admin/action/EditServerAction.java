@@ -360,12 +360,12 @@ public class EditServerAction extends PortletAction {
 		if (Validator.isNull(portletId)) {
 			for (long companyId : companyIds) {
 				try {
-					LuceneIndexer indexer = new LuceneIndexer(companyId);
+					LuceneIndexer luceneIndexer = new LuceneIndexer(companyId);
 
-					indexer.reindex();
+					luceneIndexer.reindex();
 
 					usedSearchEngineIds.addAll(
-						indexer.getUsedSearchEngineIds());
+						luceneIndexer.getUsedSearchEngineIds());
 				}
 				catch (Exception e) {
 					_log.error(e, e);
@@ -415,12 +415,12 @@ public class EditServerAction extends PortletAction {
 			MessageBus messageBus = MessageBusUtil.getMessageBus();
 
 			for (String usedSearchEngineId : usedSearchEngineIds) {
-				String SeatchWriterDestinationName =
+				String searchWriterDestinationName =
 					SearchEngineUtil.getSearchWriterDestinationName(
 						usedSearchEngineId);
 
 				Destination destination = messageBus.getDestination(
-					SeatchWriterDestinationName);
+					searchWriterDestinationName);
 
 				if (destination instanceof BaseAsyncDestination) {
 					BaseAsyncDestination baseAsyncDestination =
@@ -430,7 +430,7 @@ public class EditServerAction extends PortletAction {
 				}
 			}
 
-			_submitClusterIndexLoadingSyncJob(
+			submitClusterIndexLoadingSyncJob(
 				searchWriterDestinations, companyIds);
 		}
 	}
@@ -487,6 +487,72 @@ public class EditServerAction extends PortletAction {
 		else {
 			ShutdownUtil.shutdown(minutes, message);
 		}
+	}
+
+	protected void submitClusterIndexLoadingSyncJob(
+			Set<BaseAsyncDestination> baseAsyncDestinations, long[] companyIds)
+		throws Exception {
+
+		if (_log.isInfoEnabled()) {
+			StringBundler sb = new StringBundler(
+				baseAsyncDestinations.size() + 1);
+
+			sb.append("[");
+
+			for (BaseAsyncDestination baseAsyncDestination :
+					baseAsyncDestinations) {
+
+				sb.append(baseAsyncDestination.getName());
+				sb.append(", ");
+			}
+
+			sb.setStringAt("]", sb.index() - 1);
+
+			_log.info(
+				"Synchronizecluster index loading for destinations " +
+					sb.toString());
+		}
+
+		int totalWorkersMaxSize = 0;
+
+		for (BaseAsyncDestination baseAsyncDestination :
+				baseAsyncDestinations) {
+
+			totalWorkersMaxSize += baseAsyncDestination.getWorkersMaxSize();
+		}
+
+		if (_log.isInfoEnabled()) {
+			_log.info(
+				"There are " + totalWorkersMaxSize +
+					" synchronization threads");
+		}
+
+		CountDownLatch countDownLatch = new CountDownLatch(
+			totalWorkersMaxSize + 1);
+
+		ClusterLoadingSyncJob slaveClusterLoadingSyncJob =
+			new ClusterLoadingSyncJob(companyIds, countDownLatch, false);
+
+		for (BaseAsyncDestination baseAsyncDestination :
+				baseAsyncDestinations) {
+
+			ThreadPoolExecutor threadPoolExecutor =
+				PortalExecutorManagerUtil.getPortalExecutor(
+					baseAsyncDestination.getName());
+
+			for (int i = 0; i < baseAsyncDestination.getWorkersMaxSize(); i++) {
+				threadPoolExecutor.execute(slaveClusterLoadingSyncJob);
+			}
+		}
+
+		ClusterLoadingSyncJob masterClusterLoadingSyncJob =
+			new ClusterLoadingSyncJob(companyIds, countDownLatch, true);
+
+		ThreadPoolExecutor threadPoolExecutor =
+			PortalExecutorManagerUtil.getPortalExecutor(
+				EditServerAction.class.getName());
+
+		threadPoolExecutor.execute(masterClusterLoadingSyncJob);
 	}
 
 	protected void threadDump() throws Exception {
@@ -777,70 +843,6 @@ public class EditServerAction extends PortletAction {
 		ServiceComponentLocalServiceUtil.verifyDB();
 	}
 
-	private void _submitClusterIndexLoadingSyncJob(
-			Set<BaseAsyncDestination> baseAsyncDestinations, long[] companyIds)
-		throws Exception {
-
-		if (_log.isInfoEnabled()) {
-			StringBundler sb = new StringBundler(
-				baseAsyncDestinations.size() + 1);
-
-			sb.append("[");
-
-			for (BaseAsyncDestination baseAsyncDestination :
-				baseAsyncDestinations) {
-
-				sb.append(baseAsyncDestination.getName());
-				sb.append(", ");
-			}
-
-			sb.setStringAt("]", sb.index() - 1);
-
-			_log.info(
-				"Synchronize cluster index loading for destinations : " +
-					sb.toString());
-		}
-
-		int workerThreadCount = 0;
-
-		for (BaseAsyncDestination baseAsyncDestination :
-			baseAsyncDestinations) {
-
-			workerThreadCount += baseAsyncDestination.getWorkersMaxSize();
-		}
-
-		if (_log.isInfoEnabled()) {
-			_log.info("Total synchronize thread count : " + workerThreadCount);
-		}
-
-		CountDownLatch countDownLatch = new CountDownLatch(
-			workerThreadCount + 1);
-
-		ClusterLoadingSyncJob slaveJob = new ClusterLoadingSyncJob(
-			companyIds, countDownLatch, false);
-
-		for (BaseAsyncDestination baseAsyncDestination :
-			baseAsyncDestinations) {
-
-			ThreadPoolExecutor threadPoolExecutor =
-				PortalExecutorManagerUtil.getPortalExecutor(
-					baseAsyncDestination.getName());
-
-			for (int i = 0; i < baseAsyncDestination.getWorkersMaxSize(); i++) {
-				threadPoolExecutor.execute(slaveJob);
-			}
-		}
-
-		ClusterLoadingSyncJob masterJob = new ClusterLoadingSyncJob(
-			companyIds, countDownLatch, true);
-
-		ThreadPoolExecutor threadPoolExecutor =
-			PortalExecutorManagerUtil.getPortalExecutor(
-				EditServerAction.class.getName());
-
-		threadPoolExecutor.execute(masterJob);
-	}
-
 	private static Log _log = LogFactoryUtil.getLog(EditServerAction.class);
 
 	private static MethodKey _loadIndexesFromClusterMethodKey = new MethodKey(
@@ -851,6 +853,7 @@ public class EditServerAction extends PortletAction {
 
 		public ClusterLoadingSyncJob(
 			long[] companyIds, CountDownLatch countDownLatch, boolean master) {
+
 			_companyIds = companyIds;
 			_countDownLatch = countDownLatch;
 			_master = master;
@@ -865,20 +868,20 @@ public class EditServerAction extends PortletAction {
 				Thread currentThread = Thread.currentThread();
 
 				if (_master) {
-					logPrefix = "Monitor thread name : " +
-						currentThread.getName() + " id : " +
-							currentThread.getId();
+					logPrefix =
+						"Monitor thread name " + currentThread.getName() +
+							" with thread ID " + currentThread.getId();
 				}
 				else {
-					logPrefix = "Thread name : " + currentThread.getName() +
-						" id : " + currentThread.getId();
+					logPrefix =
+						"Thread name " + currentThread.getName() +
+							" with thread ID " + currentThread.getId();
 				}
 			}
 
 			if (!_master && _log.isInfoEnabled()) {
 				_log.info(
-					logPrefix +
-						" synchronized on latch. Waiting for others...");
+					logPrefix + " synchronized on latch. Waiting for others.");
 			}
 
 			try {
@@ -889,33 +892,31 @@ public class EditServerAction extends PortletAction {
 				if (!result) {
 					if (_master) {
 						_log.error(
-							logPrefix + " timeout on latch waiting, skip " +
-								"cluster index loading notification.");
+							logPrefix + " timed out. Skip cluster index " +
+								"loading notification.");
 
 						return;
 					}
 					else {
 						_log.error(
-							logPrefix + " timeout on latch waiting the " +
-								"following cluster index loading maybe " +
-									"incomplete. You may need to re-trigger a "+
-										"reindex process.");
+							logPrefix + " timed out. You may need to " +
+								"re-trigger a reindex process.");
 					}
 				}
 			}
 			catch (InterruptedException ie) {
 				if (_master) {
 					_log.error(
-						logPrefix + " being interrupted, skip cluster index " +
-							"loading notification.", ie);
+						logPrefix + " was interrupted. Skip cluster index " +
+							"loading notification.",
+						ie);
 
 					return;
 				}
 				else {
 					_log.error(
-						logPrefix + " being interrupted, the following " +
-							"cluster index loading maybe incomplete. You may " +
-								"need to re-trigger a reindex process.",
+						logPrefix + " was interrupted. You may need to " +
+							"re-trigger a reindex process.",
 						ie);
 				}
 			}
@@ -936,14 +937,13 @@ public class EditServerAction extends PortletAction {
 				}
 				catch (SystemException se) {
 					_log.error(
-						"Failed to notify peers to start index loading", se);
+						"Unable to notify peers to start index loading", se);
 				}
 
 				if (_log.isInfoEnabled()) {
-
 					_log.info(
-						logPrefix + " unlocked latch. Notified peers to start" +
-							" index loading.");
+						logPrefix + " unlocked latch. Notified peers to " +
+							"start index loading.");
 				}
 			}
 		}

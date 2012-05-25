@@ -114,11 +114,10 @@ public abstract class BaseAsyncDestination extends BaseDestination {
 					getName(), threadPoolExecutor);
 
 			if (oldThreadPoolExecutor != null) {
-
 				if (_log.isWarnEnabled()) {
 					_log.warn(
-						"Abort creating new ThreadPool for Destination : " +
-							getName() + ", reuse previous one.");
+						"Abort creating a new thread pool for destination " +
+							getName() + " and reuse previous one");
 				}
 
 				threadPoolExecutor.shutdownNow();
