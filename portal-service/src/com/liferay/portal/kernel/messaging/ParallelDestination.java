@@ -102,14 +102,13 @@ public class ParallelDestination extends BaseAsyncDestination {
 								messagePrincipalPassword);
 						}
 
-						Boolean messageClusterForward =
-							(Boolean)message.get(
-								ClusterLinkUtil.CLUSTER_FORWARD_MESSAGE);
+						Boolean clusterForwardMessage = (Boolean)message.get(
+							ClusterLinkUtil.CLUSTER_FORWARD_MESSAGE);
 
-						if (messageClusterForward != null) {
+						if (clusterForwardMessage != null) {
 							MessageValuesThreadLocal.setValue(
 								ClusterLinkUtil.CLUSTER_FORWARD_MESSAGE,
-								messageClusterForward);
+								clusterForwardMessage);
 						}
 
 						messageListener.receive(message);

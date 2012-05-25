@@ -45,7 +45,7 @@ public class LuceneClusterUtil {
 
 		if (_log.isInfoEnabled()) {
 			_log.info(
-				"Start loading lucene index files from cluster node : " +
+				"Start loading Lucene index files from cluster node " +
 					bootupAddress);
 		}
 
