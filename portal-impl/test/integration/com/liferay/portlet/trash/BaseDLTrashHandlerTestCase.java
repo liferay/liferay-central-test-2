@@ -42,7 +42,7 @@ public abstract class BaseDLTrashHandlerTestCase extends BaseDLAppTestCase {
 		return AssetEntryLocalServiceUtil.fetchEntry(className, classPK);
 	}
 
-	protected int getActiveFileRankCount(long fileEntryId) throws Exception {
+	protected int getActiveFileRanksCount(long fileEntryId) throws Exception {
 		List<DLFileRank> dlFileRanks = DLFileRankLocalServiceUtil.getFileRanks(
 			parentFolder.getGroupId(), parentFolder.getUserId());
 

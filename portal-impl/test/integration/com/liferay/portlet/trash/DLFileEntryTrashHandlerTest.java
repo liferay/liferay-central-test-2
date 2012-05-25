@@ -117,7 +117,7 @@ public class DLFileEntryTrashHandlerTest extends BaseDLTrashHandlerTestCase {
 
 		if (fileRank) {
 			Assert.assertEquals(
-				initialFileRanksCount, getActiveFileRankCount(fileEntryId));
+				initialFileRanksCount, getActiveFileRanksCount(fileEntryId));
 		}
 
 		if (delete) {
@@ -144,7 +144,7 @@ public class DLFileEntryTrashHandlerTest extends BaseDLTrashHandlerTestCase {
 			if (fileRank) {
 				Assert.assertEquals(
 					initialFileRanksCount + 1,
-					getActiveFileRankCount(fileEntryId));
+					getActiveFileRanksCount(fileEntryId));
 			}
 		}
 

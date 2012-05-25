@@ -130,9 +130,7 @@ public class DLFileRankLocalServiceImpl extends DLFileRankLocalServiceBaseImpl {
 		}
 	}
 
-	public void disableFileRanks(long fileEntryId)
-		throws PortalException, SystemException {
-
+	public void disableFileRanks(long fileEntryId) throws SystemException {
 		List<DLFileRank> dlFileRanks = dlFileRankPersistence.findByFileEntryId(
 			fileEntryId);
 
@@ -143,17 +141,15 @@ public class DLFileRankLocalServiceImpl extends DLFileRankLocalServiceBaseImpl {
 		}
 	}
 
-	public void disableFileRanksByFolder(long folderId)
+	public void disableFileRanksByFolderId(long folderId)
 		throws PortalException, SystemException {
 
 		DLFolder dlFolder = dlFolderLocalService.getDLFolder(folderId);
 
-		updateFileRanksByFolder(dlFolder, false);
+		updateFileRanks(dlFolder, false);
 	}
 
-	public void enableFileRanks(long fileEntryId)
-		throws PortalException, SystemException {
-
+	public void enableFileRanks(long fileEntryId) throws SystemException {
 		List<DLFileRank> dlFileRanks = dlFileRankPersistence.findByFileEntryId(
 			fileEntryId);
 
@@ -164,12 +160,12 @@ public class DLFileRankLocalServiceImpl extends DLFileRankLocalServiceBaseImpl {
 		}
 	}
 
-	public void enableFileRanksByFolder(long folderId)
+	public void enableFileRanksByFolderId(long folderId)
 		throws PortalException, SystemException {
 
 		DLFolder dlFolder = dlFolderLocalService.getDLFolder(folderId);
 
-		updateFileRanksByFolder(dlFolder, true);
+		updateFileRanks(dlFolder, true);
 	}
 
 	public List<DLFileRank> getFileRanks(long groupId, long userId)
@@ -215,17 +211,17 @@ public class DLFileRankLocalServiceImpl extends DLFileRankLocalServiceBaseImpl {
 		return dlFileRank;
 	}
 
-	protected void updateFileRanksByFolder(DLFolder dlFolder, boolean active)
+	protected void updateFileRanks(DLFolder dlFolder, boolean active)
 		throws SystemException {
 
 		List<DLFolder> dlFolders = dlFolderPersistence.findByG_P(
 			dlFolder.getGroupId(), dlFolder.getFolderId());
 
 		for (DLFolder curDLFolder : dlFolders) {
-			updateFileRanksByFolder(curDLFolder, active);
+			updateFileRanks(curDLFolder, active);
 		}
 
-		List<DLFileRank> dlFileRanks = dlFileRankFinder.findByFolder(
+		List<DLFileRank> dlFileRanks = dlFileRankFinder.findByFolderId(
 			dlFolder.getFolderId());
 
 		for (DLFileRank dlFileRank : dlFileRanks) {

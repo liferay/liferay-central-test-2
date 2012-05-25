@@ -77,16 +77,12 @@ public class DLFileShortcutTrashRenderer extends BaseTrashRenderer {
 		return TYPE;
 	}
 
-	public boolean hasDeletePermission(PermissionChecker permissionChecker)
-		throws PortalException, SystemException {
-
+	public boolean hasDeletePermission(PermissionChecker permissionChecker) {
 		return DLFileShortcutPermission.contains(
 			permissionChecker, _fileShortcut, ActionKeys.DELETE);
 	}
 
-	public boolean hasViewPermission(PermissionChecker permissionChecker)
-		throws PortalException, SystemException {
-
+	public boolean hasViewPermission(PermissionChecker permissionChecker) {
 		return DLFileShortcutPermission.contains(
 			permissionChecker, _fileShortcut, ActionKeys.VIEW);
 	}
@@ -106,9 +102,8 @@ public class DLFileShortcutTrashRenderer extends BaseTrashRenderer {
 
 			return "/html/portlet/document_library/asset/" + template + ".jsp";
 		}
-		else {
-			return null;
-		}
+
+		return null;
 	}
 
 	private FileEntry _fileEntry;

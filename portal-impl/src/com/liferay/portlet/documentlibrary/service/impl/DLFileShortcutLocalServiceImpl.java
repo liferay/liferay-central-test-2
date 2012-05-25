@@ -63,11 +63,11 @@ public class DLFileShortcutLocalServiceImpl
 		fileShortcut.setModifiedDate(serviceContext.getModifiedDate(now));
 		fileShortcut.setFolderId(folderId);
 		fileShortcut.setToFileEntryId(toFileEntryId);
+		fileShortcut.setActive(true);
 		fileShortcut.setStatus(WorkflowConstants.STATUS_APPROVED);
 		fileShortcut.setStatusByUserId(userId);
 		fileShortcut.setStatusByUserName(user.getFullName());
 		fileShortcut.setStatusDate(now);
-		fileShortcut.setActive(true);
 
 		dlFileShortcutPersistence.update(fileShortcut, false);
 
@@ -203,7 +203,7 @@ public class DLFileShortcutLocalServiceImpl
 	}
 
 	public void disableFileShortcuts(long toFileEntryId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		List<DLFileShortcut> fileShortcuts =
 			dlFileShortcutPersistence.findByToFileEntryId(toFileEntryId);
@@ -215,9 +215,7 @@ public class DLFileShortcutLocalServiceImpl
 		}
 	}
 
-	public void enableFileShortcuts(long toFileEntryId)
-		throws PortalException, SystemException {
-
+	public void enableFileShortcuts(long toFileEntryId) throws SystemException {
 		List<DLFileShortcut> fileShortcuts =
 			dlFileShortcutPersistence.findByToFileEntryId(toFileEntryId);
 

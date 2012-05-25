@@ -48,14 +48,14 @@ public class DLFolderTrashRenderer extends BaseTrashRenderer {
 
 	@Override
 	public String getIconPath(ThemeDisplay themeDisplay) {
-		int fileEntriesCount = 0;
 		int foldersCount = 0;
+		int fileEntriesAndFileShortcutsCount = 0;
 
 		try {
 			foldersCount = DLAppServiceUtil.getFoldersCount(
 				_folder.getRepositoryId(), _folder.getFolderId());
 
-			fileEntriesCount =
+			fileEntriesAndFileShortcutsCount =
 				DLAppServiceUtil.getFileEntriesAndFileShortcutsCount(
 					_folder.getRepositoryId(), _folder.getFolderId(),
 					WorkflowConstants.STATUS_APPROVED);
@@ -63,16 +63,12 @@ public class DLFolderTrashRenderer extends BaseTrashRenderer {
 		catch (Exception e) {
 		}
 
-		int totalCount = fileEntriesCount + foldersCount;
-
-		if (totalCount > 0) {
+		if ((foldersCount + fileEntriesAndFileShortcutsCount) > 0) {
 			return themeDisplay.getPathThemeImages() +
 				"/common/folder_full_document.png";
 		}
-		else {
-			return themeDisplay.getPathThemeImages() +
-				"/common/folder_empty.png";
-		}
+
+		return themeDisplay.getPathThemeImages() + "/common/folder_empty.png";
 	}
 
 	public String getPortletId() {

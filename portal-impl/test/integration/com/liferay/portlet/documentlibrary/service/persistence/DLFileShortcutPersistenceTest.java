@@ -104,6 +104,8 @@ public class DLFileShortcutPersistenceTest {
 
 		newDLFileShortcut.setToFileEntryId(ServiceTestUtil.nextLong());
 
+		newDLFileShortcut.setActive(ServiceTestUtil.randomBoolean());
+
 		newDLFileShortcut.setStatus(ServiceTestUtil.nextInt());
 
 		newDLFileShortcut.setStatusByUserId(ServiceTestUtil.nextLong());
@@ -111,8 +113,6 @@ public class DLFileShortcutPersistenceTest {
 		newDLFileShortcut.setStatusByUserName(ServiceTestUtil.randomString());
 
 		newDLFileShortcut.setStatusDate(ServiceTestUtil.nextDate());
-
-		newDLFileShortcut.setActive(ServiceTestUtil.randomBoolean());
 
 		_persistence.update(newDLFileShortcut, false);
 
@@ -142,6 +142,8 @@ public class DLFileShortcutPersistenceTest {
 			newDLFileShortcut.getFolderId());
 		Assert.assertEquals(existingDLFileShortcut.getToFileEntryId(),
 			newDLFileShortcut.getToFileEntryId());
+		Assert.assertEquals(existingDLFileShortcut.getActive(),
+			newDLFileShortcut.getActive());
 		Assert.assertEquals(existingDLFileShortcut.getStatus(),
 			newDLFileShortcut.getStatus());
 		Assert.assertEquals(existingDLFileShortcut.getStatusByUserId(),
@@ -151,8 +153,6 @@ public class DLFileShortcutPersistenceTest {
 		Assert.assertEquals(Time.getShortTimestamp(
 				existingDLFileShortcut.getStatusDate()),
 			Time.getShortTimestamp(newDLFileShortcut.getStatusDate()));
-		Assert.assertEquals(existingDLFileShortcut.getActive(),
-			newDLFileShortcut.getActive());
 	}
 
 	@Test
@@ -314,6 +314,8 @@ public class DLFileShortcutPersistenceTest {
 
 		dlFileShortcut.setToFileEntryId(ServiceTestUtil.nextLong());
 
+		dlFileShortcut.setActive(ServiceTestUtil.randomBoolean());
+
 		dlFileShortcut.setStatus(ServiceTestUtil.nextInt());
 
 		dlFileShortcut.setStatusByUserId(ServiceTestUtil.nextLong());
@@ -321,8 +323,6 @@ public class DLFileShortcutPersistenceTest {
 		dlFileShortcut.setStatusByUserName(ServiceTestUtil.randomString());
 
 		dlFileShortcut.setStatusDate(ServiceTestUtil.nextDate());
-
-		dlFileShortcut.setActive(ServiceTestUtil.randomBoolean());
 
 		_persistence.update(dlFileShortcut, false);
 

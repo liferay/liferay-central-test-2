@@ -292,6 +292,14 @@ public class DLAppHelperLocalServiceImpl
 		}
 	}
 
+	public List<DLFileShortcut> getFileShortcuts(
+			long groupId, long folderId, boolean active, int status)
+		throws SystemException {
+
+		return dlFileShortcutPersistence.findByG_F_A_S(
+			groupId, folderId, active, status);
+	}
+
 	/**
 	 * @deprecated {@Link #getFileShortcuts(long, long, int, boolean)}
 	 */
@@ -299,15 +307,15 @@ public class DLAppHelperLocalServiceImpl
 			long groupId, long folderId, int status)
 		throws SystemException {
 
-		return getFileShortcuts(groupId, folderId, status, true);
+		return getFileShortcuts(groupId, folderId, true, status);
 	}
 
-	public List<DLFileShortcut> getFileShortcuts(
-			long groupId, long folderId, int status, boolean active)
+	public int getFileShortcutsCount(
+			long groupId, long folderId, boolean active, int status)
 		throws SystemException {
 
-		return dlFileShortcutPersistence.findByG_F_S_A(
-			groupId, folderId, status, active);
+		return dlFileShortcutPersistence.countByG_F_A_S(
+			groupId, folderId, active, status);
 	}
 
 	/**
@@ -316,15 +324,7 @@ public class DLAppHelperLocalServiceImpl
 	public int getFileShortcutsCount(long groupId, long folderId, int status)
 		throws SystemException {
 
-		return getFileShortcutsCount(groupId, folderId, status, true);
-	}
-
-	public int getFileShortcutsCount(
-			long groupId, long folderId, int status, boolean active)
-		throws SystemException {
-
-		return dlFileShortcutPersistence.countByG_F_S_A(
-			groupId, folderId, status, active);
+		return getFileShortcutsCount(groupId, folderId, true, status);
 	}
 
 	public List<FileEntry> getNoAssetFileEntries() {
@@ -475,7 +475,7 @@ public class DLAppHelperLocalServiceImpl
 
 		// File rank
 
-		dlFileRankLocalService.disableFileRanksByFolder(folder.getFolderId());
+		dlFileRankLocalService.disableFileRanksByFolderId(folder.getFolderId());
 
 		// Trash
 
@@ -592,7 +592,7 @@ public class DLAppHelperLocalServiceImpl
 
 		// File rank
 
-		dlFileRankLocalService.enableFileRanksByFolder(folder.getFolderId());
+		dlFileRankLocalService.enableFileRanksByFolderId(folder.getFolderId());
 
 		// Trash
 
