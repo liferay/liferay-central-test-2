@@ -561,56 +561,6 @@ public class DLFileRankUtil {
 	}
 
 	/**
-	* Returns the document library file rank where companyId = &#63; and userId = &#63; and fileEntryId = &#63; or throws a {@link com.liferay.portlet.documentlibrary.NoSuchFileRankException} if it could not be found.
-	*
-	* @param companyId the company ID
-	* @param userId the user ID
-	* @param fileEntryId the file entry ID
-	* @return the matching document library file rank
-	* @throws com.liferay.portlet.documentlibrary.NoSuchFileRankException if a matching document library file rank could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public static com.liferay.portlet.documentlibrary.model.DLFileRank findByC_U_F(
-		long companyId, long userId, long fileEntryId)
-		throws com.liferay.portal.kernel.exception.SystemException,
-			com.liferay.portlet.documentlibrary.NoSuchFileRankException {
-		return getPersistence().findByC_U_F(companyId, userId, fileEntryId);
-	}
-
-	/**
-	* Returns the document library file rank where companyId = &#63; and userId = &#63; and fileEntryId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
-	*
-	* @param companyId the company ID
-	* @param userId the user ID
-	* @param fileEntryId the file entry ID
-	* @return the matching document library file rank, or <code>null</code> if a matching document library file rank could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public static com.liferay.portlet.documentlibrary.model.DLFileRank fetchByC_U_F(
-		long companyId, long userId, long fileEntryId)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().fetchByC_U_F(companyId, userId, fileEntryId);
-	}
-
-	/**
-	* Returns the document library file rank where companyId = &#63; and userId = &#63; and fileEntryId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
-	*
-	* @param companyId the company ID
-	* @param userId the user ID
-	* @param fileEntryId the file entry ID
-	* @param retrieveFromCache whether to use the finder cache
-	* @return the matching document library file rank, or <code>null</code> if a matching document library file rank could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public static com.liferay.portlet.documentlibrary.model.DLFileRank fetchByC_U_F(
-		long companyId, long userId, long fileEntryId, boolean retrieveFromCache)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence()
-				   .fetchByC_U_F(companyId, userId, fileEntryId,
-			retrieveFromCache);
-	}
-
-	/**
 	* Returns all the document library file ranks where groupId = &#63; and userId = &#63; and active = &#63;.
 	*
 	* @param groupId the group ID
@@ -746,6 +696,56 @@ public class DLFileRankUtil {
 	}
 
 	/**
+	* Returns the document library file rank where companyId = &#63; and userId = &#63; and fileEntryId = &#63; or throws a {@link com.liferay.portlet.documentlibrary.NoSuchFileRankException} if it could not be found.
+	*
+	* @param companyId the company ID
+	* @param userId the user ID
+	* @param fileEntryId the file entry ID
+	* @return the matching document library file rank
+	* @throws com.liferay.portlet.documentlibrary.NoSuchFileRankException if a matching document library file rank could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.documentlibrary.model.DLFileRank findByC_U_F(
+		long companyId, long userId, long fileEntryId)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.documentlibrary.NoSuchFileRankException {
+		return getPersistence().findByC_U_F(companyId, userId, fileEntryId);
+	}
+
+	/**
+	* Returns the document library file rank where companyId = &#63; and userId = &#63; and fileEntryId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param companyId the company ID
+	* @param userId the user ID
+	* @param fileEntryId the file entry ID
+	* @return the matching document library file rank, or <code>null</code> if a matching document library file rank could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.documentlibrary.model.DLFileRank fetchByC_U_F(
+		long companyId, long userId, long fileEntryId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().fetchByC_U_F(companyId, userId, fileEntryId);
+	}
+
+	/**
+	* Returns the document library file rank where companyId = &#63; and userId = &#63; and fileEntryId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param companyId the company ID
+	* @param userId the user ID
+	* @param fileEntryId the file entry ID
+	* @param retrieveFromCache whether to use the finder cache
+	* @return the matching document library file rank, or <code>null</code> if a matching document library file rank could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.documentlibrary.model.DLFileRank fetchByC_U_F(
+		long companyId, long userId, long fileEntryId, boolean retrieveFromCache)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .fetchByC_U_F(companyId, userId, fileEntryId,
+			retrieveFromCache);
+	}
+
+	/**
 	* Returns all the document library file ranks.
 	*
 	* @return the document library file ranks
@@ -829,6 +829,19 @@ public class DLFileRankUtil {
 	}
 
 	/**
+	* Removes all the document library file ranks where groupId = &#63; and userId = &#63; and active = &#63; from the database.
+	*
+	* @param groupId the group ID
+	* @param userId the user ID
+	* @param active the active
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void removeByG_U_A(long groupId, long userId, boolean active)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getPersistence().removeByG_U_A(groupId, userId, active);
+	}
+
+	/**
 	* Removes the document library file rank where companyId = &#63; and userId = &#63; and fileEntryId = &#63; from the database.
 	*
 	* @param companyId the company ID
@@ -842,19 +855,6 @@ public class DLFileRankUtil {
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFileRankException {
 		return getPersistence().removeByC_U_F(companyId, userId, fileEntryId);
-	}
-
-	/**
-	* Removes all the document library file ranks where groupId = &#63; and userId = &#63; and active = &#63; from the database.
-	*
-	* @param groupId the group ID
-	* @param userId the user ID
-	* @param active the active
-	* @throws SystemException if a system exception occurred
-	*/
-	public static void removeByG_U_A(long groupId, long userId, boolean active)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		getPersistence().removeByG_U_A(groupId, userId, active);
 	}
 
 	/**
@@ -905,20 +905,6 @@ public class DLFileRankUtil {
 	}
 
 	/**
-	* Returns the number of document library file ranks where companyId = &#63; and userId = &#63; and fileEntryId = &#63;.
-	*
-	* @param companyId the company ID
-	* @param userId the user ID
-	* @param fileEntryId the file entry ID
-	* @return the number of matching document library file ranks
-	* @throws SystemException if a system exception occurred
-	*/
-	public static int countByC_U_F(long companyId, long userId, long fileEntryId)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().countByC_U_F(companyId, userId, fileEntryId);
-	}
-
-	/**
 	* Returns the number of document library file ranks where groupId = &#63; and userId = &#63; and active = &#63;.
 	*
 	* @param groupId the group ID
@@ -930,6 +916,20 @@ public class DLFileRankUtil {
 	public static int countByG_U_A(long groupId, long userId, boolean active)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByG_U_A(groupId, userId, active);
+	}
+
+	/**
+	* Returns the number of document library file ranks where companyId = &#63; and userId = &#63; and fileEntryId = &#63;.
+	*
+	* @param companyId the company ID
+	* @param userId the user ID
+	* @param fileEntryId the file entry ID
+	* @return the number of matching document library file ranks
+	* @throws SystemException if a system exception occurred
+	*/
+	public static int countByC_U_F(long companyId, long userId, long fileEntryId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().countByC_U_F(companyId, userId, fileEntryId);
 	}
 
 	/**

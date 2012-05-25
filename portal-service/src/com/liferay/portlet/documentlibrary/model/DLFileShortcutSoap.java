@@ -42,11 +42,11 @@ public class DLFileShortcutSoap implements Serializable {
 		soapModel.setRepositoryId(model.getRepositoryId());
 		soapModel.setFolderId(model.getFolderId());
 		soapModel.setToFileEntryId(model.getToFileEntryId());
+		soapModel.setActive(model.getActive());
 		soapModel.setStatus(model.getStatus());
 		soapModel.setStatusByUserId(model.getStatusByUserId());
 		soapModel.setStatusByUserName(model.getStatusByUserName());
 		soapModel.setStatusDate(model.getStatusDate());
-		soapModel.setActive(model.getActive());
 
 		return soapModel;
 	}
@@ -187,6 +187,18 @@ public class DLFileShortcutSoap implements Serializable {
 		_toFileEntryId = toFileEntryId;
 	}
 
+	public boolean getActive() {
+		return _active;
+	}
+
+	public boolean isActive() {
+		return _active;
+	}
+
+	public void setActive(boolean active) {
+		_active = active;
+	}
+
 	public int getStatus() {
 		return _status;
 	}
@@ -219,18 +231,6 @@ public class DLFileShortcutSoap implements Serializable {
 		_statusDate = statusDate;
 	}
 
-	public boolean getActive() {
-		return _active;
-	}
-
-	public boolean isActive() {
-		return _active;
-	}
-
-	public void setActive(boolean active) {
-		_active = active;
-	}
-
 	private String _uuid;
 	private long _fileShortcutId;
 	private long _groupId;
@@ -242,9 +242,9 @@ public class DLFileShortcutSoap implements Serializable {
 	private long _repositoryId;
 	private long _folderId;
 	private long _toFileEntryId;
+	private boolean _active;
 	private int _status;
 	private long _statusByUserId;
 	private String _statusByUserName;
 	private Date _statusDate;
-	private boolean _active;
 }

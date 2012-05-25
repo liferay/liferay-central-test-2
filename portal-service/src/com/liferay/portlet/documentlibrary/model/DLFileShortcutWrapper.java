@@ -57,11 +57,11 @@ public class DLFileShortcutWrapper implements DLFileShortcut,
 		attributes.put("repositoryId", getRepositoryId());
 		attributes.put("folderId", getFolderId());
 		attributes.put("toFileEntryId", getToFileEntryId());
+		attributes.put("active", getActive());
 		attributes.put("status", getStatus());
 		attributes.put("statusByUserId", getStatusByUserId());
 		attributes.put("statusByUserName", getStatusByUserName());
 		attributes.put("statusDate", getStatusDate());
-		attributes.put("active", getActive());
 
 		return attributes;
 	}
@@ -133,6 +133,12 @@ public class DLFileShortcutWrapper implements DLFileShortcut,
 			setToFileEntryId(toFileEntryId);
 		}
 
+		Boolean active = (Boolean)attributes.get("active");
+
+		if (active != null) {
+			setActive(active);
+		}
+
 		Integer status = (Integer)attributes.get("status");
 
 		if (status != null) {
@@ -155,12 +161,6 @@ public class DLFileShortcutWrapper implements DLFileShortcut,
 
 		if (statusDate != null) {
 			setStatusDate(statusDate);
-		}
-
-		Boolean active = (Boolean)attributes.get("active");
-
-		if (active != null) {
-			setActive(active);
 		}
 	}
 
@@ -401,6 +401,33 @@ public class DLFileShortcutWrapper implements DLFileShortcut,
 	}
 
 	/**
+	* Returns the active of this document library file shortcut.
+	*
+	* @return the active of this document library file shortcut
+	*/
+	public boolean getActive() {
+		return _dlFileShortcut.getActive();
+	}
+
+	/**
+	* Returns <code>true</code> if this document library file shortcut is active.
+	*
+	* @return <code>true</code> if this document library file shortcut is active; <code>false</code> otherwise
+	*/
+	public boolean isActive() {
+		return _dlFileShortcut.isActive();
+	}
+
+	/**
+	* Sets whether this document library file shortcut is active.
+	*
+	* @param active the active of this document library file shortcut
+	*/
+	public void setActive(boolean active) {
+		_dlFileShortcut.setActive(active);
+	}
+
+	/**
 	* Returns the status of this document library file shortcut.
 	*
 	* @return the status of this document library file shortcut
@@ -490,33 +517,6 @@ public class DLFileShortcutWrapper implements DLFileShortcut,
 	*/
 	public void setStatusDate(java.util.Date statusDate) {
 		_dlFileShortcut.setStatusDate(statusDate);
-	}
-
-	/**
-	* Returns the active of this document library file shortcut.
-	*
-	* @return the active of this document library file shortcut
-	*/
-	public boolean getActive() {
-		return _dlFileShortcut.getActive();
-	}
-
-	/**
-	* Returns <code>true</code> if this document library file shortcut is active.
-	*
-	* @return <code>true</code> if this document library file shortcut is active; <code>false</code> otherwise
-	*/
-	public boolean isActive() {
-		return _dlFileShortcut.isActive();
-	}
-
-	/**
-	* Sets whether this document library file shortcut is active.
-	*
-	* @param active the active of this document library file shortcut
-	*/
-	public void setActive(boolean active) {
-		_dlFileShortcut.setActive(active);
 	}
 
 	/**

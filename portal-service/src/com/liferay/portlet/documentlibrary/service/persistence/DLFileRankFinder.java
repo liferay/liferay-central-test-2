@@ -18,10 +18,10 @@ package com.liferay.portlet.documentlibrary.service.persistence;
  * @author Brian Wing Shun Chan
  */
 public interface DLFileRankFinder {
-	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileRank> findByFolder(
-		long folderId)
+	public java.util.List<java.lang.Object[]> findByStaleRanks(int count)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public java.util.List<java.lang.Object[]> findByStaleRanks(int count)
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileRank> findByFolderId(
+		long folderId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 }

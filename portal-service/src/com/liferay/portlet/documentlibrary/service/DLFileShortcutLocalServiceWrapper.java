@@ -344,14 +344,12 @@ public class DLFileShortcutLocalServiceWrapper
 	}
 
 	public void disableFileShortcuts(long toFileEntryId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		_dlFileShortcutLocalService.disableFileShortcuts(toFileEntryId);
 	}
 
 	public void enableFileShortcuts(long toFileEntryId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		_dlFileShortcutLocalService.enableFileShortcuts(toFileEntryId);
 	}
 

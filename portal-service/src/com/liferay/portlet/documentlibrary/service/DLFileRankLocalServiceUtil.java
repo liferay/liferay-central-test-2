@@ -304,27 +304,25 @@ public class DLFileRankLocalServiceUtil {
 	}
 
 	public static void disableFileRanks(long fileEntryId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getService().disableFileRanks(fileEntryId);
 	}
 
-	public static void disableFileRanksByFolder(long folderId)
+	public static void disableFileRanksByFolderId(long folderId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		getService().disableFileRanksByFolder(folderId);
+		getService().disableFileRanksByFolderId(folderId);
 	}
 
 	public static void enableFileRanks(long fileEntryId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getService().enableFileRanks(fileEntryId);
 	}
 
-	public static void enableFileRanksByFolder(long folderId)
+	public static void enableFileRanksByFolderId(long folderId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		getService().enableFileRanksByFolder(folderId);
+		getService().enableFileRanksByFolderId(folderId);
 	}
 
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileRank> getFileRanks(

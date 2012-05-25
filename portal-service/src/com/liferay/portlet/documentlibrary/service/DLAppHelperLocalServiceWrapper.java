@@ -98,6 +98,13 @@ public class DLAppHelperLocalServiceWrapper implements DLAppHelperLocalService,
 			incrementCounter);
 	}
 
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileShortcut> getFileShortcuts(
+		long groupId, long folderId, boolean active, int status)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _dlAppHelperLocalService.getFileShortcuts(groupId, folderId,
+			active, status);
+	}
+
 	/**
 	* @deprecated {@Link #getFileShortcuts(long, long, int, boolean)}
 	*/
@@ -108,11 +115,11 @@ public class DLAppHelperLocalServiceWrapper implements DLAppHelperLocalService,
 			status);
 	}
 
-	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileShortcut> getFileShortcuts(
-		long groupId, long folderId, int status, boolean active)
+	public int getFileShortcutsCount(long groupId, long folderId,
+		boolean active, int status)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return _dlAppHelperLocalService.getFileShortcuts(groupId, folderId,
-			status, active);
+		return _dlAppHelperLocalService.getFileShortcutsCount(groupId,
+			folderId, active, status);
 	}
 
 	/**
@@ -122,13 +129,6 @@ public class DLAppHelperLocalServiceWrapper implements DLAppHelperLocalService,
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _dlAppHelperLocalService.getFileShortcutsCount(groupId,
 			folderId, status);
-	}
-
-	public int getFileShortcutsCount(long groupId, long folderId, int status,
-		boolean active)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return _dlAppHelperLocalService.getFileShortcutsCount(groupId,
-			folderId, status, active);
 	}
 
 	public java.util.List<com.liferay.portal.kernel.repository.model.FileEntry> getNoAssetFileEntries() {
@@ -152,11 +152,11 @@ public class DLAppHelperLocalServiceWrapper implements DLAppHelperLocalService,
 
 	public com.liferay.portlet.documentlibrary.model.DLFileShortcut moveFileShortcutToTrash(
 		long userId,
-		com.liferay.portlet.documentlibrary.model.DLFileShortcut fileShortcut)
+		com.liferay.portlet.documentlibrary.model.DLFileShortcut dlFileShortcut)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _dlAppHelperLocalService.moveFileShortcutToTrash(userId,
-			fileShortcut);
+			dlFileShortcut);
 	}
 
 	public void moveFolder(
@@ -181,11 +181,11 @@ public class DLAppHelperLocalServiceWrapper implements DLAppHelperLocalService,
 	}
 
 	public void restoreFileShortcutFromTrash(long userId,
-		com.liferay.portlet.documentlibrary.model.DLFileShortcut fileShortcut)
+		com.liferay.portlet.documentlibrary.model.DLFileShortcut dlFileShortcut)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_dlAppHelperLocalService.restoreFileShortcutFromTrash(userId,
-			fileShortcut);
+			dlFileShortcut);
 	}
 
 	public void restoreFolderFromTrash(long userId,

@@ -611,11 +611,11 @@ create table DLFileShortcut (
 	repositoryId LONG,
 	folderId LONG,
 	toFileEntryId LONG,
+	active_ BOOLEAN,
 	status INTEGER,
 	statusByUserId LONG,
 	statusByUserName VARCHAR(75) null,
-	statusDate DATE null,
-	active_ BOOLEAN
+	statusDate DATE null
 );
 
 create table DLFileVersion (

@@ -92,6 +92,11 @@ public interface DLAppHelperLocalService extends BaseLocalService {
 		boolean incrementCounter)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileShortcut> getFileShortcuts(
+		long groupId, long folderId, boolean active, int status)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	/**
 	* @deprecated {@Link #getFileShortcuts(long, long, int, boolean)}
 	*/
@@ -101,8 +106,8 @@ public interface DLAppHelperLocalService extends BaseLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileShortcut> getFileShortcuts(
-		long groupId, long folderId, int status, boolean active)
+	public int getFileShortcutsCount(long groupId, long folderId,
+		boolean active, int status)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
@@ -110,11 +115,6 @@ public interface DLAppHelperLocalService extends BaseLocalService {
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getFileShortcutsCount(long groupId, long folderId, int status)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getFileShortcutsCount(long groupId, long folderId, int status,
-		boolean active)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -133,7 +133,7 @@ public interface DLAppHelperLocalService extends BaseLocalService {
 
 	public com.liferay.portlet.documentlibrary.model.DLFileShortcut moveFileShortcutToTrash(
 		long userId,
-		com.liferay.portlet.documentlibrary.model.DLFileShortcut fileShortcut)
+		com.liferay.portlet.documentlibrary.model.DLFileShortcut dlFileShortcut)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -153,7 +153,7 @@ public interface DLAppHelperLocalService extends BaseLocalService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public void restoreFileShortcutFromTrash(long userId,
-		com.liferay.portlet.documentlibrary.model.DLFileShortcut fileShortcut)
+		com.liferay.portlet.documentlibrary.model.DLFileShortcut dlFileShortcut)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 

@@ -51,18 +51,18 @@ public class DLFolderFinderUtil {
 			includeMountFolders, queryDefinition);
 	}
 
-	public static int filterCountFE_FS_ByG_F(long groupId, long folderId,
-		com.liferay.portal.kernel.dao.orm.QueryDefinition queryDefinition)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getFinder()
-				   .filterCountFE_FS_ByG_F(groupId, folderId, queryDefinition);
-	}
-
 	public static int filterCountFE_ByG_F(long groupId, long folderId,
 		com.liferay.portal.kernel.dao.orm.QueryDefinition queryDefinition)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder()
 				   .filterCountFE_ByG_F(groupId, folderId, queryDefinition);
+	}
+
+	public static int filterCountFE_FS_ByG_F(long groupId, long folderId,
+		com.liferay.portal.kernel.dao.orm.QueryDefinition queryDefinition)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getFinder()
+				   .filterCountFE_FS_ByG_F(groupId, folderId, queryDefinition);
 	}
 
 	public static int filterCountFE_FS_ByG_F_M(long groupId, long folderId,

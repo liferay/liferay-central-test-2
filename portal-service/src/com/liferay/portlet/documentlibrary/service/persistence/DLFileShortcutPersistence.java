@@ -653,21 +653,21 @@ public interface DLFileShortcutPersistence extends BasePersistence<DLFileShortcu
 			com.liferay.portlet.documentlibrary.NoSuchFileShortcutException;
 
 	/**
-	* Returns all the document library file shortcuts where groupId = &#63; and folderId = &#63; and status = &#63; and active = &#63;.
+	* Returns all the document library file shortcuts where groupId = &#63; and folderId = &#63; and active = &#63; and status = &#63;.
 	*
 	* @param groupId the group ID
 	* @param folderId the folder ID
-	* @param status the status
 	* @param active the active
+	* @param status the status
 	* @return the matching document library file shortcuts
 	* @throws SystemException if a system exception occurred
 	*/
-	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileShortcut> findByG_F_S_A(
-		long groupId, long folderId, int status, boolean active)
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileShortcut> findByG_F_A_S(
+		long groupId, long folderId, boolean active, int status)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Returns a range of all the document library file shortcuts where groupId = &#63; and folderId = &#63; and status = &#63; and active = &#63;.
+	* Returns a range of all the document library file shortcuts where groupId = &#63; and folderId = &#63; and active = &#63; and status = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
@@ -675,19 +675,19 @@ public interface DLFileShortcutPersistence extends BasePersistence<DLFileShortcu
 	*
 	* @param groupId the group ID
 	* @param folderId the folder ID
-	* @param status the status
 	* @param active the active
+	* @param status the status
 	* @param start the lower bound of the range of document library file shortcuts
 	* @param end the upper bound of the range of document library file shortcuts (not inclusive)
 	* @return the range of matching document library file shortcuts
 	* @throws SystemException if a system exception occurred
 	*/
-	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileShortcut> findByG_F_S_A(
-		long groupId, long folderId, int status, boolean active, int start,
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileShortcut> findByG_F_A_S(
+		long groupId, long folderId, boolean active, int status, int start,
 		int end) throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Returns an ordered range of all the document library file shortcuts where groupId = &#63; and folderId = &#63; and status = &#63; and active = &#63;.
+	* Returns an ordered range of all the document library file shortcuts where groupId = &#63; and folderId = &#63; and active = &#63; and status = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
@@ -695,22 +695,22 @@ public interface DLFileShortcutPersistence extends BasePersistence<DLFileShortcu
 	*
 	* @param groupId the group ID
 	* @param folderId the folder ID
-	* @param status the status
 	* @param active the active
+	* @param status the status
 	* @param start the lower bound of the range of document library file shortcuts
 	* @param end the upper bound of the range of document library file shortcuts (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching document library file shortcuts
 	* @throws SystemException if a system exception occurred
 	*/
-	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileShortcut> findByG_F_S_A(
-		long groupId, long folderId, int status, boolean active, int start,
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileShortcut> findByG_F_A_S(
+		long groupId, long folderId, boolean active, int status, int start,
 		int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Returns the first document library file shortcut in the ordered set where groupId = &#63; and folderId = &#63; and status = &#63; and active = &#63;.
+	* Returns the first document library file shortcut in the ordered set where groupId = &#63; and folderId = &#63; and active = &#63; and status = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
@@ -718,21 +718,21 @@ public interface DLFileShortcutPersistence extends BasePersistence<DLFileShortcu
 	*
 	* @param groupId the group ID
 	* @param folderId the folder ID
-	* @param status the status
 	* @param active the active
+	* @param status the status
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching document library file shortcut
 	* @throws com.liferay.portlet.documentlibrary.NoSuchFileShortcutException if a matching document library file shortcut could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public com.liferay.portlet.documentlibrary.model.DLFileShortcut findByG_F_S_A_First(
-		long groupId, long folderId, int status, boolean active,
+	public com.liferay.portlet.documentlibrary.model.DLFileShortcut findByG_F_A_S_First(
+		long groupId, long folderId, boolean active, int status,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFileShortcutException;
 
 	/**
-	* Returns the last document library file shortcut in the ordered set where groupId = &#63; and folderId = &#63; and status = &#63; and active = &#63;.
+	* Returns the last document library file shortcut in the ordered set where groupId = &#63; and folderId = &#63; and active = &#63; and status = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
@@ -740,21 +740,21 @@ public interface DLFileShortcutPersistence extends BasePersistence<DLFileShortcu
 	*
 	* @param groupId the group ID
 	* @param folderId the folder ID
-	* @param status the status
 	* @param active the active
+	* @param status the status
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching document library file shortcut
 	* @throws com.liferay.portlet.documentlibrary.NoSuchFileShortcutException if a matching document library file shortcut could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public com.liferay.portlet.documentlibrary.model.DLFileShortcut findByG_F_S_A_Last(
-		long groupId, long folderId, int status, boolean active,
+	public com.liferay.portlet.documentlibrary.model.DLFileShortcut findByG_F_A_S_Last(
+		long groupId, long folderId, boolean active, int status,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFileShortcutException;
 
 	/**
-	* Returns the document library file shortcuts before and after the current document library file shortcut in the ordered set where groupId = &#63; and folderId = &#63; and status = &#63; and active = &#63;.
+	* Returns the document library file shortcuts before and after the current document library file shortcut in the ordered set where groupId = &#63; and folderId = &#63; and active = &#63; and status = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
@@ -763,36 +763,36 @@ public interface DLFileShortcutPersistence extends BasePersistence<DLFileShortcu
 	* @param fileShortcutId the primary key of the current document library file shortcut
 	* @param groupId the group ID
 	* @param folderId the folder ID
-	* @param status the status
 	* @param active the active
+	* @param status the status
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next document library file shortcut
 	* @throws com.liferay.portlet.documentlibrary.NoSuchFileShortcutException if a document library file shortcut with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public com.liferay.portlet.documentlibrary.model.DLFileShortcut[] findByG_F_S_A_PrevAndNext(
-		long fileShortcutId, long groupId, long folderId, int status,
-		boolean active,
+	public com.liferay.portlet.documentlibrary.model.DLFileShortcut[] findByG_F_A_S_PrevAndNext(
+		long fileShortcutId, long groupId, long folderId, boolean active,
+		int status,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFileShortcutException;
 
 	/**
-	* Returns all the document library file shortcuts that the user has permission to view where groupId = &#63; and folderId = &#63; and status = &#63; and active = &#63;.
+	* Returns all the document library file shortcuts that the user has permission to view where groupId = &#63; and folderId = &#63; and active = &#63; and status = &#63;.
 	*
 	* @param groupId the group ID
 	* @param folderId the folder ID
-	* @param status the status
 	* @param active the active
+	* @param status the status
 	* @return the matching document library file shortcuts that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
-	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileShortcut> filterFindByG_F_S_A(
-		long groupId, long folderId, int status, boolean active)
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileShortcut> filterFindByG_F_A_S(
+		long groupId, long folderId, boolean active, int status)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Returns a range of all the document library file shortcuts that the user has permission to view where groupId = &#63; and folderId = &#63; and status = &#63; and active = &#63;.
+	* Returns a range of all the document library file shortcuts that the user has permission to view where groupId = &#63; and folderId = &#63; and active = &#63; and status = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
@@ -800,19 +800,19 @@ public interface DLFileShortcutPersistence extends BasePersistence<DLFileShortcu
 	*
 	* @param groupId the group ID
 	* @param folderId the folder ID
-	* @param status the status
 	* @param active the active
+	* @param status the status
 	* @param start the lower bound of the range of document library file shortcuts
 	* @param end the upper bound of the range of document library file shortcuts (not inclusive)
 	* @return the range of matching document library file shortcuts that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
-	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileShortcut> filterFindByG_F_S_A(
-		long groupId, long folderId, int status, boolean active, int start,
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileShortcut> filterFindByG_F_A_S(
+		long groupId, long folderId, boolean active, int status, int start,
 		int end) throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Returns an ordered range of all the document library file shortcuts that the user has permissions to view where groupId = &#63; and folderId = &#63; and status = &#63; and active = &#63;.
+	* Returns an ordered range of all the document library file shortcuts that the user has permissions to view where groupId = &#63; and folderId = &#63; and active = &#63; and status = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
@@ -820,36 +820,36 @@ public interface DLFileShortcutPersistence extends BasePersistence<DLFileShortcu
 	*
 	* @param groupId the group ID
 	* @param folderId the folder ID
-	* @param status the status
 	* @param active the active
+	* @param status the status
 	* @param start the lower bound of the range of document library file shortcuts
 	* @param end the upper bound of the range of document library file shortcuts (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching document library file shortcuts that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
-	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileShortcut> filterFindByG_F_S_A(
-		long groupId, long folderId, int status, boolean active, int start,
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileShortcut> filterFindByG_F_A_S(
+		long groupId, long folderId, boolean active, int status, int start,
 		int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Returns the document library file shortcuts before and after the current document library file shortcut in the ordered set of document library file shortcuts that the user has permission to view where groupId = &#63; and folderId = &#63; and status = &#63; and active = &#63;.
+	* Returns the document library file shortcuts before and after the current document library file shortcut in the ordered set of document library file shortcuts that the user has permission to view where groupId = &#63; and folderId = &#63; and active = &#63; and status = &#63;.
 	*
 	* @param fileShortcutId the primary key of the current document library file shortcut
 	* @param groupId the group ID
 	* @param folderId the folder ID
-	* @param status the status
 	* @param active the active
+	* @param status the status
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next document library file shortcut
 	* @throws com.liferay.portlet.documentlibrary.NoSuchFileShortcutException if a document library file shortcut with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public com.liferay.portlet.documentlibrary.model.DLFileShortcut[] filterFindByG_F_S_A_PrevAndNext(
-		long fileShortcutId, long groupId, long folderId, int status,
-		boolean active,
+	public com.liferay.portlet.documentlibrary.model.DLFileShortcut[] filterFindByG_F_A_S_PrevAndNext(
+		long fileShortcutId, long groupId, long folderId, boolean active,
+		int status,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFileShortcutException;
@@ -950,17 +950,16 @@ public interface DLFileShortcutPersistence extends BasePersistence<DLFileShortcu
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Removes all the document library file shortcuts where groupId = &#63; and folderId = &#63; and status = &#63; and active = &#63; from the database.
+	* Removes all the document library file shortcuts where groupId = &#63; and folderId = &#63; and active = &#63; and status = &#63; from the database.
 	*
 	* @param groupId the group ID
 	* @param folderId the folder ID
-	* @param status the status
 	* @param active the active
+	* @param status the status
 	* @throws SystemException if a system exception occurred
 	*/
-	public void removeByG_F_S_A(long groupId, long folderId, int status,
-		boolean active)
-		throws com.liferay.portal.kernel.exception.SystemException;
+	public void removeByG_F_A_S(long groupId, long folderId, boolean active,
+		int status) throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
 	* Removes all the document library file shortcuts from the database.
@@ -1037,31 +1036,30 @@ public interface DLFileShortcutPersistence extends BasePersistence<DLFileShortcu
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Returns the number of document library file shortcuts where groupId = &#63; and folderId = &#63; and status = &#63; and active = &#63;.
+	* Returns the number of document library file shortcuts where groupId = &#63; and folderId = &#63; and active = &#63; and status = &#63;.
 	*
 	* @param groupId the group ID
 	* @param folderId the folder ID
-	* @param status the status
 	* @param active the active
+	* @param status the status
 	* @return the number of matching document library file shortcuts
 	* @throws SystemException if a system exception occurred
 	*/
-	public int countByG_F_S_A(long groupId, long folderId, int status,
-		boolean active)
-		throws com.liferay.portal.kernel.exception.SystemException;
+	public int countByG_F_A_S(long groupId, long folderId, boolean active,
+		int status) throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Returns the number of document library file shortcuts that the user has permission to view where groupId = &#63; and folderId = &#63; and status = &#63; and active = &#63;.
+	* Returns the number of document library file shortcuts that the user has permission to view where groupId = &#63; and folderId = &#63; and active = &#63; and status = &#63;.
 	*
 	* @param groupId the group ID
 	* @param folderId the folder ID
-	* @param status the status
 	* @param active the active
+	* @param status the status
 	* @return the number of matching document library file shortcuts that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
-	public int filterCountByG_F_S_A(long groupId, long folderId, int status,
-		boolean active)
+	public int filterCountByG_F_A_S(long groupId, long folderId,
+		boolean active, int status)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
