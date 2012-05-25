@@ -67,6 +67,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
+import org.apache.commons.lang.time.StopWatch;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.document.Document;
@@ -465,23 +466,30 @@ public class LuceneHelperImpl implements LuceneHelper {
 		if (indexAccessor == null) {
 			if (_log.isInfoEnabled()) {
 				_log.info(
-					"Skip loading lucene index files for company : " +
-						companyId + ", as it is not needed yet. Will do a " +
-							"lazy loading on first usage.");
+					"Skip loading Lucene index files for company " + companyId +
+						" in favor of lazy loading");
 			}
 
 			return;
 		}
 
+		StopWatch stopWatch = null;
+
 		if (_log.isInfoEnabled()) {
 			_log.info(
-				"Start loading lucene index files for company : " + companyId);
+				"Start loading Lucene index files for company " + companyId);
+
+			stopWatch = new StopWatch();
+
+			stopWatch.start();
 		}
 
 		indexAccessor.loadIndex(inputStream);
 
 		if (_log.isInfoEnabled()) {
-			_log.info("Loaded index files for company : " + companyId);
+			_log.info(
+				"Finished loading index files for company " + companyId +
+					" in " + stopWatch.getTime() + " ms");
 		}
 	}
 
