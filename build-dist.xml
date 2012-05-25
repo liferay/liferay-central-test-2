@@ -1043,13 +1043,18 @@ release was successful.</echo>
 		<replace file="${app.server.parent.dir}/jonas-${app.server.jonas.version}/conf/jonas.properties">
 			<replacefilter token="HSQL1" value="" />
 			<replacefilter token="jtm,db,resource,ejb3,jaxws,web,ear,depmonitor" value="jtm,resource,ejb3,jaxws,web,ear,validation,depmonitor" />
-			<replacefilter token="jonas.development    true" value="jonas.development    false" />
+			<!--<replacefilter token="jonas.development    true" value="jonas.development    false" />-->
 		</replace>
 
 		<replace file="${app.server.parent.dir}/jonas-${app.server.jonas.version}/conf/tomcat6-server.xml">
 			<replacefilter token="9000" value="8080" />
 			<replacefilter token="9009" value="8009" />
 			<replacefilter token="9043" value="8443" />
+		</replace>
+
+		<replace file="${app.server.dir}/conf/tomcat6-server.xml">
+			<replacetoken><![CDATA[autoDeploy="false"]]></replacetoken>
+			<replacevalue><![CDATA[autoDeploy="true"]]></replacevalue>
 		</replace>
 
 		<replace file="${app.server.parent.dir}/jonas-${app.server.jonas.version}/conf/osgi/defaults.properties">
