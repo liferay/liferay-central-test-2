@@ -136,7 +136,7 @@ public class TaskQueueTest extends TestCase {
 		assertTrue(taskQueue.isEmpty());
 	}
 
-	public void testOffer() throws InterruptedException {
+	public void testOffer() {
 		TaskQueue<Object> taskQueue = new TaskQueue<Object>(10);
 
 		try {
