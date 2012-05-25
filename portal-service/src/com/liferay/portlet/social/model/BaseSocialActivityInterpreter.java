@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.GroupLocalServiceUtil;
@@ -42,6 +43,13 @@ public abstract class BaseSocialActivityInterpreter
 		}
 
 		return null;
+	}
+
+	/**
+	 * @deprecated
+	 */
+	protected String cleanContent(String content) {
+		return StringUtil.shorten(HtmlUtil.extractText(content), 200);
 	}
 
 	protected abstract SocialActivityFeedEntry doInterpret(
