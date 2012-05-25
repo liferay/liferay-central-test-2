@@ -12,9 +12,8 @@
  * details.
  */
 
-package com.liferay.portlet;
+package com.liferay.portlet.layoutconfiguration.util;
 
-import com.liferay.portal.kernel.portlet.ParallelRenderThreadLocalBinderUtil;
 import com.liferay.portal.kernel.util.DefaultThreadLocalBinder;
 import com.liferay.portal.kernel.util.ServerDetector;
 

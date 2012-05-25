@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.kernel.portlet;
+package com.liferay.portlet.layoutconfiguration.util;
 
 import com.liferay.portal.kernel.util.ThreadLocalBinder;
 

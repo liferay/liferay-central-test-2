@@ -629,13 +629,6 @@
 			</bean>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.JettyThreadLocalBinder" class="com.liferay.portlet.JettyThreadLocalBinder">
-		<property name="threadLocalSources">
-			<map>
-				<entry key="org.eclipse.jetty.server.AbstractHttpConnection" value="__currentConnection" />
-			</map>
-		</property>
-	</bean>
 	<bean id="com.liferay.portlet.asset.AssetRendererFactoryRegistryUtil" class="com.liferay.portlet.asset.AssetRendererFactoryRegistryUtil">
 		<property name="assetRendererFactoryRegistry">
 			<bean class="com.liferay.portal.asset.AssetRendererFactoryRegistryImpl" />
@@ -787,6 +780,13 @@
 	<bean id="com.liferay.portlet.journalcontent.util.JournalContent" class="com.liferay.portlet.journalcontent.util.JournalContentImpl" />
 	<bean id="com.liferay.portlet.journalcontent.util.JournalContentUtil" class="com.liferay.portlet.journalcontent.util.JournalContentUtil">
 		<property name="journalContent" ref="com.liferay.portlet.journalcontent.util.JournalContent" />
+	</bean>
+	<bean id="com.liferay.portlet.layoutconfiguration.util.JettyThreadLocalBinder" class="com.liferay.portlet.layoutconfiguration.util.JettyThreadLocalBinder">
+		<property name="threadLocalSources">
+			<map>
+				<entry key="org.eclipse.jetty.server.AbstractHttpConnection" value="__currentConnection" />
+			</map>
+		</property>
 	</bean>
 	<bean id="com.liferay.portlet.layoutconfiguration.util.RuntimePage" class="com.liferay.portlet.layoutconfiguration.util.RuntimePageImpl" />
 	<bean id="com.liferay.portlet.layoutconfiguration.util.RuntimePagetUtil" class="com.liferay.portlet.layoutconfiguration.util.RuntimePageUtil">
