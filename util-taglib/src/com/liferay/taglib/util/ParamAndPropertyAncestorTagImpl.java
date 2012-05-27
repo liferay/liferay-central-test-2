@@ -108,6 +108,7 @@ public class ParamAndPropertyAncestorTagImpl
 			params.clear();
 
 			request = (HttpServletRequest)_dynamicServletRequest.getRequest();
+
 			_dynamicServletRequest = null;
 		}
 
