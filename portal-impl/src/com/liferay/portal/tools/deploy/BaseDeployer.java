@@ -819,7 +819,8 @@ public class BaseDeployer implements Deployer {
 		if (appServerType.equals(ServerDetector.JBOSS_ID)) {
 			deployDir = jbossPrefix + deployDir;
 		}
-		else if (appServerType.equals(ServerDetector.GLASSFISH_ID) ||
+		else if (appServerType.equals(ServerDetector.GERONIMO_ID) ||
+				 appServerType.equals(ServerDetector.GLASSFISH_ID) ||
 				 appServerType.equals(ServerDetector.JETTY_ID) ||
 				 appServerType.equals(ServerDetector.JONAS_ID) ||
 				 appServerType.equals(ServerDetector.OC4J_ID) ||
