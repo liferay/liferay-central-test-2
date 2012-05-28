@@ -272,6 +272,9 @@ public interface MDRRuleGroupInstanceLocalService extends BaseLocalService,
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
+	public void deleteGroupRuleGroupInstances(long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public void deleteRuleGroupInstance(long ruleGroupInstanceId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
@@ -280,9 +283,6 @@ public interface MDRRuleGroupInstanceLocalService extends BaseLocalService,
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void deleteRuleGroupInstances(long ruleGroupId)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	public void deleteRuleGroupInstancesByGroupId(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)

@@ -478,15 +478,15 @@ public class MDRRuleGroupInstanceWrapper implements MDRRuleGroupInstance,
 		_mdrRuleGroupInstance.persist();
 	}
 
+	public java.util.List<com.liferay.portlet.mobiledevicerules.model.MDRAction> getActions()
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _mdrRuleGroupInstance.getActions();
+	}
+
 	public com.liferay.portlet.mobiledevicerules.model.MDRRuleGroup getRuleGroup()
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _mdrRuleGroupInstance.getRuleGroup();
-	}
-
-	public java.util.List<com.liferay.portlet.mobiledevicerules.model.MDRAction> getMDRActions()
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return _mdrRuleGroupInstance.getMDRActions();
 	}
 
 	/**

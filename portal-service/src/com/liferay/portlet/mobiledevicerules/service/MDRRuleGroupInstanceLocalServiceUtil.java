@@ -307,6 +307,11 @@ public class MDRRuleGroupInstanceLocalServiceUtil {
 			ruleGroupId, serviceContext);
 	}
 
+	public static void deleteGroupRuleGroupInstances(long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().deleteGroupRuleGroupInstances(groupId);
+	}
+
 	public static void deleteRuleGroupInstance(long ruleGroupInstanceId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteRuleGroupInstance(ruleGroupInstanceId);
@@ -321,11 +326,6 @@ public class MDRRuleGroupInstanceLocalServiceUtil {
 	public static void deleteRuleGroupInstances(long ruleGroupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteRuleGroupInstances(ruleGroupId);
-	}
-
-	public static void deleteRuleGroupInstancesByGroupId(long groupId)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		getService().deleteRuleGroupInstancesByGroupId(groupId);
 	}
 
 	public static com.liferay.portlet.mobiledevicerules.model.MDRRuleGroupInstance fetchRuleGroupInstance(
