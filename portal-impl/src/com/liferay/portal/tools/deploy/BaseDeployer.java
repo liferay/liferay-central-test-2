@@ -821,6 +821,7 @@ public class BaseDeployer implements Deployer {
 		}
 		else if (appServerType.equals(ServerDetector.GLASSFISH_ID) ||
 				 appServerType.equals(ServerDetector.JETTY_ID) ||
+				 appServerType.equals(ServerDetector.JONAS_ID) ||
 				 appServerType.equals(ServerDetector.OC4J_ID) ||
 				 appServerType.equals(ServerDetector.RESIN_ID) ||
 				 appServerType.equals(ServerDetector.TOMCAT_ID)) {
