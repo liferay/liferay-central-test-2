@@ -37,6 +37,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.InfrastructureUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
+import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.PortalLifecycleUtil;
@@ -102,9 +103,9 @@ import java.io.IOException;
 
 import java.lang.reflect.Field;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Set;
 
 import javax.portlet.PortletConfig;
@@ -958,11 +959,7 @@ public class MainServlet extends ActionServlet {
 	protected void initResourceCodes(List<Portlet> portlets) throws Exception {
 		long[] companyIds = PortalInstances.getCompanyIdsBySQL();
 
-		Iterator<Portlet> itr = portlets.iterator();
-
-		while (itr.hasNext()) {
-			Portlet portlet = itr.next();
-
+		for (Portlet portlet : portlets) {
 			List<String> modelNames =
 				ResourceActionsUtil.getPortletModelResources(
 					portlet.getPortletId());
@@ -980,12 +977,118 @@ public class MainServlet extends ActionServlet {
 	}
 
 	protected void initServerDetector() throws Exception {
-		if (ServerDetector.isJetty()) {
+		if (ServerDetector.isGlassfish()) {
+			initServerDetectorGlassfish();
+		}
+		else if (ServerDetector.isJetty()) {
 			initServerDetectorJetty();
 		}
 		else if (ServerDetector.isTomcat()) {
 			initServerDetectorTomcat();
 		}
+	}
+
+	protected void initServerDetectorGlassfish() throws Exception {
+
+		// org.apache.catalina.core.ApplicationContext
+
+		ServletContext servletContext = getServletContext();
+
+		Class<?> servletContextClass = servletContext.getClass();
+
+		Field contextField = servletContextClass.getDeclaredField("context");
+
+		contextField.setAccessible(true);
+
+		Object applicationContext = contextField.get(servletContext);
+
+		// com.sun.enterprise.web.WebModule
+
+		Class<?> applicationContextClass = applicationContext.getClass();
+
+		contextField = applicationContextClass.getDeclaredField("context");
+
+		contextField.setAccessible(true);
+
+		Object webModule = contextField.get(applicationContext);
+
+		// org.apache.catalina.core.ContainerBase
+
+		Class<?> containerBaseClass = webModule.getClass();
+
+		for (int i = 0; i < 3; i++) {
+			containerBaseClass = containerBaseClass.getSuperclass();
+		}
+
+		// com.sun.enterprise.web.VirtualServer
+
+		Field parentField = containerBaseClass.getDeclaredField("parent");
+
+		parentField.setAccessible(true);
+
+		Object virtualServer = parentField.get(webModule);
+
+		// com.sun.enterprise.web.WebContainer
+
+		Object webEngine = parentField.get(virtualServer);
+
+		Class<?> webEngineClass = webEngine.getClass();
+
+		Field webContainerField = webEngineClass.getDeclaredField(
+			"webContainer");
+
+		webContainerField.setAccessible(true);
+
+		Object webContainer = webContainerField.get(webEngine);
+
+		// org.glassfish.config.support.TranslatedConfigView
+
+		Class<?> webContainerClass = webContainer.getClass();
+
+		Field dasConfigField = webContainerClass.getDeclaredField("dasConfig");
+
+		dasConfigField.setAccessible(true);
+
+		Object dasConfigProxy = dasConfigField.get(webContainer);
+
+		Class<?> proxyClass = dasConfigProxy.getClass().getSuperclass();
+
+		Field hField = proxyClass.getDeclaredField("h");
+
+		hField.setAccessible(true);
+
+		Object translatedConfigView = hField.get(dasConfigProxy);
+
+		// org.glassfish.config.support.GlassFishConfigBean
+
+		Class<?> translatedConfigViewClass = translatedConfigView.getClass();
+
+		Field masterViewField = translatedConfigViewClass.getDeclaredField(
+			"masterView");
+
+		masterViewField.setAccessible(true);
+
+		Object masterView = masterViewField.get(translatedConfigView);
+
+		// org.jvnet.hk2.config.Dom
+
+		Class<?> domClass = masterView.getClass();
+
+		for (int i = 0; i < 2; i++) {
+			domClass = domClass.getSuperclass();
+		}
+
+		Field attributesField = domClass.getDeclaredField("attributes");
+
+		attributesField.setAccessible(true);
+
+		Map<String, String> attributes =
+			(Map<String, String>)attributesField.get(masterView);
+
+		boolean autoDeployEnabled = MapUtil.getBoolean(
+			attributes, "autodeploy-enabled", true);
+
+		ServerDetector.setSupportsHotDeploy(autoDeployEnabled);
 	}
 
 	protected void initServerDetectorJetty() throws Exception {
