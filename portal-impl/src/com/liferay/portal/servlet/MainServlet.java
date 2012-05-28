@@ -37,6 +37,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.InfrastructureUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
+import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.PortalLifecycleUtil;
@@ -100,9 +101,9 @@ import java.io.IOException;
 
 import java.lang.reflect.Field;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Set;
 
 import javax.portlet.PortletConfig;
@@ -1019,32 +1020,23 @@ public class MainServlet extends ActionServlet {
 
 		// org.jvnet.hk2.config.Dom
 
-		Class domClass = masterView.getClass();
+		Class<?> domClass = masterView.getClass();
 
 		for (int i = 0; i < 2; i++) {
 			domClass = domClass.getSuperclass();
 		}
 
-		// attributes
-
 		Field attributesField = domClass.getDeclaredField("attributes");
 
 		attributesField.setAccessible(true);
 
-		HashMap<String, String> attributes =
-			(HashMap<String, String>)attributesField.get(masterView);
+		Map<String, String> attributes =
+			(Map<String, String>)attributesField.get(masterView);
 
-		// getting value
+		boolean autoDeployEnabled = MapUtil.getBoolean(
+			attributes, "autodeploy-enabled", true);
 
-		String autoDeployEnabledValue = attributes.get("autodeploy-enabled");
-
-		if (autoDeployEnabledValue == null) {
-			autoDeployEnabledValue = "true";
-		}
-
-		boolean autoDeploy = GetterUtil.getBoolean(autoDeployEnabledValue);
-
-		ServerDetector.setSupportsHotDeploy(autoDeploy);
+		ServerDetector.setSupportsHotDeploy(autoDeployEnabled);
 	}
 
 	protected void initServerDetectorJetty() throws Exception {
