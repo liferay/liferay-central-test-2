@@ -1389,7 +1389,8 @@
 						doAsUserId: params.doAsUserId,
 						p_l_id: params.plid,
 						portletId: params.portletId,
-						title: params.title
+						title: params.title,
+						p_auth: Liferay.securityPAuthToken
 					}
 				}
 			);

@@ -496,7 +496,8 @@ for (String portletId : PropsValues.DOCKBAR_ADD_PORTLETS) {
 						{
 							data: {
 								cmd: 'toggle_customized_view',
-								customized_view: '<%= String.valueOf(!layoutTypePortlet.isCustomizedView()) %>'
+								customized_view: '<%= String.valueOf(!layoutTypePortlet.isCustomizedView()) %>',
+								p_auth: '<%= AuthTokenUtil.getToken(request) %>'
 							},
 							on: {
 								success: function(event, id, obj) {
