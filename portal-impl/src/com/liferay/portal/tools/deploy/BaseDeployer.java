@@ -825,7 +825,8 @@ public class BaseDeployer implements Deployer {
 				 appServerType.equals(ServerDetector.JONAS_ID) ||
 				 appServerType.equals(ServerDetector.OC4J_ID) ||
 				 appServerType.equals(ServerDetector.RESIN_ID) ||
-				 appServerType.equals(ServerDetector.TOMCAT_ID)) {
+				 appServerType.equals(ServerDetector.TOMCAT_ID) ||
+				 appServerType.equals(ServerDetector.WEBLOGIC_ID)) {
 
 			if (unpackWar) {
 				deployDir = deployDir.substring(0, deployDir.length() - 4);
