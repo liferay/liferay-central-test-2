@@ -1154,19 +1154,18 @@ release was successful.</echo>
 	</target>
 
 	<target name="unzip-weblogic">
+		<property name="app.server.weblogic.dir.abs" location="${app.server.weblogic.dir}" />
 
-		<property name="app.server.weblogic.dir.abs" location="${app.server.weblogic.dir}"/>
+		<property name="app.server.weblogic.instance.dir.abs" location="${app.server.weblogic.instance.dir}" />
 
-		<var name="wl.home" value="${app.server.weblogic.dir.abs}/wlserver" />
-
-		<pathconvert targetos="unix" property="wl.home.unix">
-			<path location="${wl.home}"/>
+		<pathconvert property="app.server.weblogic.instance.dir.unix" targetos="unix">
+			<path location="${app.server.weblogic.instance.dir.abs}" />
 		</pathconvert>
 
-		<property name="app.server.weblogic.instance.dir.abs" location="${app.server.weblogic.instance.dir}"/>
+		<var name="app.server.weblogic.wlserver.dir" value="${app.server.weblogic.dir.abs}/wlserver" />
 
-		<pathconvert targetos="unix" property="app.server.weblogic.instance.dir.abs.unix">
-			<path location="${app.server.weblogic.instance.dir.abs}"/>
+		<pathconvert property="app.server.weblogic.wlserver.dir.unix" targetos="unix">
+			<path location="${app.server.weblogic.wlserver.dir}" />
 		</pathconvert>
 
 		<delete dir="${app.server.weblogic.dir}" />
@@ -1195,7 +1194,7 @@ rerun this task.</echo>
 
 		<mkdir dir="${tstamp.value}" />
 
-		<echo file="${tstamp.value}/create-weblogic-domain.py">readTemplate('${wl.home.unix}/common/templates/domains/wls.jar')
+		<echo file="${tstamp.value}/create-weblogic-domain.py">readTemplate('${app.server.weblogic.wlserver.dir.unix}/common/templates/domains/wls.jar')
 
 set('Name', '${app.server.weblogic.instance.name}')
 
@@ -1208,7 +1207,7 @@ cd('/Servers/AdminServer')
 set('ListenAddress', '')
 set('ListenPort', 8080)
 
-writeDomain('${app.server.weblogic.instance.dir.abs.unix}')
+writeDomain('${app.server.weblogic.instance.dir.unix}')
 
 closeTemplate()</echo>
 
@@ -1227,7 +1226,7 @@ set "USER_MEM_ARGS=-Xmx1024m -XX:PermSize=256m"
 
 set "MW_HOME=${app.server.weblogic.dir.abs}"
 
-set "WL_HOME=${wl.home}"
+set "WL_HOME=${app.server.weblogic.wlserver.dir}"
 
 call %WL_HOME%/common/bin/commEnv.cmd
 
@@ -1260,7 +1259,7 @@ export USER_MEM_ARGS="-Xmx1024m -XX:PermSize=256m"
 
 export MW_HOME="${app.server.weblogic.dir}"
 
-export WL_HOME="${wl.home}"
+export WL_HOME="${app.server.weblogic.wlserver.dir}"
 
 source ${WL_HOME}/common/bin/commEnv.sh
 
