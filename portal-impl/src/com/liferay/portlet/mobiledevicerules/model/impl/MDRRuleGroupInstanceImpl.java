@@ -31,12 +31,12 @@ public class MDRRuleGroupInstanceImpl extends MDRRuleGroupInstanceBaseImpl {
 	public MDRRuleGroupInstanceImpl() {
 	}
 
-	public MDRRuleGroup getRuleGroup() throws PortalException, SystemException {
-		return MDRRuleGroupLocalServiceUtil.getRuleGroup(getRuleGroupId());
+	public List<MDRAction> getActions() throws SystemException {
+		return MDRActionLocalServiceUtil.getActions(getRuleGroupInstanceId());
 	}
 
-	public List<MDRAction> getMDRActions() throws SystemException {
-		return MDRActionLocalServiceUtil.getActions(getRuleGroupInstanceId());
+	public MDRRuleGroup getRuleGroup() throws PortalException, SystemException {
+		return MDRRuleGroupLocalServiceUtil.getRuleGroup(getRuleGroupId());
 	}
 
 }
