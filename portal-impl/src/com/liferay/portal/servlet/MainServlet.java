@@ -37,14 +37,11 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.InfrastructureUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
-import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.PortalLifecycleUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
-import com.liferay.portal.kernel.util.ReflectionUtil;
 import com.liferay.portal.kernel.util.ReleaseInfo;
-import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -67,6 +64,7 @@ import com.liferay.portal.security.auth.CompanyThreadLocal;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
+import com.liferay.portal.server.capabilities.ServerCapabilitiesUtil;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
@@ -101,11 +99,8 @@ import com.liferay.util.servlet.EncryptedServletRequest;
 
 import java.io.IOException;
 
-import java.lang.reflect.Field;
-
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 import java.util.Set;
 
 import javax.portlet.PortletConfig;
@@ -977,283 +972,7 @@ public class MainServlet extends ActionServlet {
 	}
 
 	protected void initServerDetector() throws Exception {
-		if (ServerDetector.isGlassfish()) {
-			initServerDetectorGlassfish();
-		}
-		else if (ServerDetector.isJetty()) {
-			initServerDetectorJetty();
-		}
-		else if (ServerDetector.isTomcat()) {
-			initServerDetectorTomcat();
-		}
-	}
-
-	protected void initServerDetectorGlassfish() throws Exception {
-
-		// org.apache.catalina.core.ApplicationContext
-
-		ServletContext servletContext = getServletContext();
-
-		Class<?> servletContextClass = servletContext.getClass();
-
-		Field contextField = servletContextClass.getDeclaredField("context");
-
-		contextField.setAccessible(true);
-
-		Object applicationContext = contextField.get(servletContext);
-
-		// com.sun.enterprise.web.WebModule
-
-		Class<?> applicationContextClass = applicationContext.getClass();
-
-		contextField = applicationContextClass.getDeclaredField("context");
-
-		contextField.setAccessible(true);
-
-		Object webModule = contextField.get(applicationContext);
-
-		// org.apache.catalina.core.ContainerBase
-
-		Class<?> containerBaseClass = webModule.getClass();
-
-		for (int i = 0; i < 3; i++) {
-			containerBaseClass = containerBaseClass.getSuperclass();
-		}
-
-		// com.sun.enterprise.web.VirtualServer
-
-		Field parentField = containerBaseClass.getDeclaredField("parent");
-
-		parentField.setAccessible(true);
-
-		Object virtualServer = parentField.get(webModule);
-
-		// com.sun.enterprise.web.WebContainer
-
-		Object webEngine = parentField.get(virtualServer);
-
-		Class<?> webEngineClass = webEngine.getClass();
-
-		Field webContainerField = webEngineClass.getDeclaredField(
-			"webContainer");
-
-		webContainerField.setAccessible(true);
-
-		Object webContainer = webContainerField.get(webEngine);
-
-		// org.glassfish.config.support.TranslatedConfigView
-
-		Class<?> webContainerClass = webContainer.getClass();
-
-		Field dasConfigField = webContainerClass.getDeclaredField("dasConfig");
-
-		dasConfigField.setAccessible(true);
-
-		Object dasConfigProxy = dasConfigField.get(webContainer);
-
-		Class<?> proxyClass = dasConfigProxy.getClass().getSuperclass();
-
-		Field hField = proxyClass.getDeclaredField("h");
-
-		hField.setAccessible(true);
-
-		Object translatedConfigView = hField.get(dasConfigProxy);
-
-		// org.glassfish.config.support.GlassFishConfigBean
-
-		Class<?> translatedConfigViewClass = translatedConfigView.getClass();
-
-		Field masterViewField = translatedConfigViewClass.getDeclaredField(
-			"masterView");
-
-		masterViewField.setAccessible(true);
-
-		Object masterView = masterViewField.get(translatedConfigView);
-
-		// org.jvnet.hk2.config.Dom
-
-		Class<?> domClass = masterView.getClass();
-
-		for (int i = 0; i < 2; i++) {
-			domClass = domClass.getSuperclass();
-		}
-
-		Field attributesField = domClass.getDeclaredField("attributes");
-
-		attributesField.setAccessible(true);
-
-		Map<String, String> attributes =
-			(Map<String, String>)attributesField.get(masterView);
-
-		boolean autoDeployEnabled = MapUtil.getBoolean(
-			attributes, "autodeploy-enabled", true);
-
-		ServerDetector.setSupportsHotDeploy(autoDeployEnabled);
-	}
-
-	protected void initServerDetectorJetty() throws Exception {
-
-		// org.eclipse.jetty.webapp.WebAppContext
-
-		ServletContext servletContext = getServletContext();
-
-		Class<?> servletContextClass = servletContext.getClass();
-
-		Field outerClassField = servletContextClass.getDeclaredField("this$0");
-
-		outerClassField.setAccessible(true);
-
-		Object webAppContext = outerClassField.get(servletContext);
-
-		// org.eclipse.jetty.server.handler.AbstractHandler
-
-		Class<?> abstractHandlerClass = webAppContext.getClass();
-
-		for (int i = 0; i < 6; i++) {
-			abstractHandlerClass = abstractHandlerClass.getSuperclass();
-		}
-
-		// org.eclipse.jetty.server.Server
-
-		Field serverField = abstractHandlerClass.getDeclaredField("_server");
-
-		serverField.setAccessible(true);
-
-		Object server = serverField.get(webAppContext);
-
-		// org.eclipse.jetty.util.component.AggregateLifeCycle
-
-		Class<?> aggregateLifeCycleClass = server.getClass();
-
-		for (int i = 0; i < 4; i++) {
-			aggregateLifeCycleClass = aggregateLifeCycleClass.getSuperclass();
-		}
-
-		// org.eclipse.jetty.deploy.DeploymentManager
-
-		Field beansField = aggregateLifeCycleClass.getDeclaredField("_beans");
-
-		beansField.setAccessible(true);
-
-		Object deploymentManager = null;
-
-		List<?> aggregateLifeCycleBeans = (List<?>)beansField.get(server);
-
-		for (Object aggregateLifeCycleBean : aggregateLifeCycleBeans) {
-
-			// org.eclipse.jetty.util.component.AggregateLifeCycle$Bean
-
-			Class<?> aggregateLifeCycleBeanClass =
-				aggregateLifeCycleBean.getClass();
-
-			Field beanField = aggregateLifeCycleBeanClass.getDeclaredField(
-				"_bean");
-
-			beanField.setAccessible(true);
-
-			Object bean = beanField.get(aggregateLifeCycleBean);
-
-			Class<?> beanClass = bean.getClass();
-
-			String beanClassName = beanClass.getName();
-
-			if (beanClassName.equals(
-					"org.eclipse.jetty.deploy.DeploymentManager")) {
-
-				deploymentManager = bean;
-
-				break;
-			}
-		}
-
-		if (deploymentManager == null) {
-			throw new Exception("DeploymentManager not found");
-		}
-
-		// org.eclipse.jetty.deploy.providers.ScanningAppProvider
-
-		Class<?> deploymentManagerClass = deploymentManager.getClass();
-
-		Field providersField = deploymentManagerClass.getDeclaredField(
-			"_providers");
-
-		providersField.setAccessible(true);
-
-		List<?> providers = (List<?>)providersField.get(deploymentManager);
-
-		boolean hotDeploySupported = false;
-
-		for (Object provider : providers) {
-			Class<?> providerClass = provider.getClass();
-
-			String providerClassName = providerClass.getName();
-
-			if (!providerClassName.equals(
-					"org.eclipse.jetty.deploy.providers.ContextProvider")) {
-
-				continue;
-			}
-
-			Class<?> scanningAppProviderClass = providerClass.getSuperclass();
-
-			Field scanIntervalField = scanningAppProviderClass.getDeclaredField(
-				"_scanInterval");
-
-			scanIntervalField.setAccessible(true);
-
-			Integer scanInterval = (Integer)scanIntervalField.get(provider);
-
-			if ((scanInterval != null) && (scanInterval.intValue() > 0)) {
-				hotDeploySupported = true;
-
-				break;
-			}
-		}
-
-		ServerDetector.setSupportsHotDeploy(hotDeploySupported);
-	}
-
-	protected void initServerDetectorTomcat() throws Exception {
-
-		// org.apache.catalina.core.ApplicationContextFacade
-
-		ServletContext servletContext = getServletContext();
-
-		Class<?> applicationContextFacadeClass = servletContext.getClass();
-
-		Field contextField1 = ReflectionUtil.getDeclaredField(
-			applicationContextFacadeClass, "context");
-
-		Object contextValue1 = contextField1.get(servletContext);
-
-		// org.apache.catalina.core.ApplicationContext
-
-		Class<?> applicationContextClass = contextField1.getType();
-
-		Field contextField2 = ReflectionUtil.getDeclaredField(
-			applicationContextClass, "context");
-
-		Object contextValue2 = contextField2.get(contextValue1);
-
-		// org.apache.catalina.core.StandardContext
-
-		Class<?> standardContextClass = contextField2.getType();
-
-		// org.apache.catalina.core.ContainerBase
-
-		Class<?> containerBaseClass = standardContextClass.getSuperclass();
-
-		Field parentField = ReflectionUtil.getDeclaredField(
-			containerBaseClass, "parent");
-
-		Object parentValue = parentField.get(contextValue2);
-
-		Field autoDeployField = ReflectionUtil.getDeclaredField(
-			parentValue.getClass(), "autoDeploy");
-
-		Boolean autoDeployValue = (Boolean)autoDeployField.get(parentValue);
-
-		ServerDetector.setSupportsHotDeploy(autoDeployValue);
+		ServerCapabilitiesUtil.determineServerCapabilities(getServletContext());
 	}
 
 	protected void initServletContextPool() throws Exception {
