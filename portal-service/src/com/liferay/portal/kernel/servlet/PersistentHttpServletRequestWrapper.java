@@ -30,69 +30,65 @@ public class PersistentHttpServletRequestWrapper
 	extends HttpServletRequestWrapper {
 
 	public PersistentHttpServletRequestWrapper(HttpServletRequest request) {
-
 		super(request);
 	}
 
 	public ServletRequest getRealRequest() {
-		if (_forwardCompatibleInvocationHandler == null) {
-			return super.getRequest();
+		if (_servlet30SupportInvocationHandler != null) {
+			return (ServletRequest)_servlet30SupportInvocationHandler._target;
 		}
-		else {
-			return (ServletRequest)_forwardCompatibleInvocationHandler._target;
-		}
+
+		return super.getRequest();
 	}
 
 	public ServletRequest getRequest() {
-		if (_forwardCompatibleInvocationHandler == null) {
-			// First get, insert proxy wrapper to prevent appserver
-			// trespass our request wrapper chain.
-
-			_forwardCompatibleInvocationHandler =
-				new ForwardCompatibleInvocationHandler(super.getRequest());
-
-			// Generate a proxy request that is only type of HttpServletRequest,
-			// not type of HttpServletRequestWrapper
-			ServletRequest proxyRequest =
-				(ServletRequest)ProxyUtil.newProxyInstance(
-					HttpServletRequest.class.getClassLoader(),
-					new Class[]{HttpServletRequest.class},
-					_forwardCompatibleInvocationHandler);
-
-			super.setRequest(proxyRequest);
-
-			return proxyRequest;
-		}
-		else {
+		if (_servlet30SupportInvocationHandler != null) {
 			return super.getRequest();
 		}
+
+		// Insert a proxy wrapper to prevent the application server from
+		// trespassing our request wrapper chain
+
+		_servlet30SupportInvocationHandler =
+			new Servlet30SupportInvocationHandler(super.getRequest());
+
+		// Generate a proxy request that is only type of HttpServletRequest and
+		// not of type HttpServletRequestWrapper
+
+		ServletRequest servletRequest =
+			(ServletRequest)ProxyUtil.newProxyInstance(
+				HttpServletRequest.class.getClassLoader(),
+				new Class[] {HttpServletRequest.class},
+				_servlet30SupportInvocationHandler);
+
+		super.setRequest(servletRequest);
+
+		return servletRequest;
 	}
 
-	public void setRealRequest(ServletRequest request) {
-		if (_forwardCompatibleInvocationHandler == null) {
-			super.setRequest(request);
+	public void setRealRequest(ServletRequest servletRequest) {
+		if (_servlet30SupportInvocationHandler != null) {
+			_servlet30SupportInvocationHandler.setTarget(servletRequest);
 		}
 		else {
-			_forwardCompatibleInvocationHandler.setTarget(request);
+			super.setRequest(servletRequest);
 		}
 	}
 
-	private ForwardCompatibleInvocationHandler
-		_forwardCompatibleInvocationHandler;
+	private Servlet30SupportInvocationHandler
+		_servlet30SupportInvocationHandler;
 
-	// This InvocationHandler is required to support Servlet 3.0 API without
-	// directly referring it.
-	private class ForwardCompatibleInvocationHandler
+	private class Servlet30SupportInvocationHandler
 		implements InvocationHandler {
 
-		public ForwardCompatibleInvocationHandler(Object target) {
+		public Servlet30SupportInvocationHandler(Object target) {
 			_target = target;
 		}
 
-		public Object invoke(Object proxy, Method method, Object[] args)
+		public Object invoke(Object proxy, Method method, Object[] arguments)
 			throws Throwable {
 
-			return method.invoke(_target, args);
+			return method.invoke(_target, arguments);
 		}
 
 		public void setTarget(Object target) {
