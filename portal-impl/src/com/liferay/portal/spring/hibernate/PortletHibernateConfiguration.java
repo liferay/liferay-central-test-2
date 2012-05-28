@@ -28,7 +28,8 @@ public class PortletHibernateConfiguration
 		ClassLoader classLoader = PortletClassLoaderUtil.getClassLoader();
 
 		if (classLoader == null) {
-			// Sharding enabled
+
+			// This should not be null except in cases where sharding is enabled
 
 			Thread currentThread = Thread.currentThread();
 
