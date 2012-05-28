@@ -112,14 +112,12 @@ public class TrashEntryLocalServiceImpl extends TrashEntryLocalServiceBaseImpl {
 	 *         be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	@Indexable(type = IndexableType.DELETE)
 	public TrashEntry deleteEntry(long entryId)
 		throws PortalException, SystemException {
 
-		TrashEntry trashEntry = trashEntryPersistence.fetchByPrimaryKey(
-			entryId);
+		TrashEntry entry = trashEntryPersistence.fetchByPrimaryKey(entryId);
 
-		return deleteEntry(trashEntry);
+		return deleteEntry(entry);
 	}
 
 	/**
@@ -131,16 +129,28 @@ public class TrashEntryLocalServiceImpl extends TrashEntryLocalServiceBaseImpl {
 	 *         be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	@Indexable(type = IndexableType.DELETE)
 	public TrashEntry deleteEntry(String className, long classPK)
 		throws PortalException, SystemException {
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		TrashEntry trashEntry = trashEntryPersistence.fetchByC_C(
+		TrashEntry entry = trashEntryPersistence.fetchByC_C(
 			classNameId, classPK);
 
-		return deleteEntry(trashEntry);
+		return deleteEntry(entry);
+	}
+
+	@Indexable(type = IndexableType.DELETE)
+	public TrashEntry deleteEntry(TrashEntry trashEntry)
+		throws SystemException {
+
+		if (trashEntry != null) {
+			trashVersionPersistence.removeByEntryId(trashEntry.getEntryId());
+
+			trashEntry = trashEntryPersistence.remove(trashEntry);
+		}
+
+		return trashEntry;
 	}
 
 	/**
@@ -286,19 +296,6 @@ public class TrashEntryLocalServiceImpl extends TrashEntryLocalServiceBaseImpl {
 		long classNameId = PortalUtil.getClassNameId(className);
 
 		return trashVersionPersistence.findByC_C(classNameId, classPK);
-	}
-
-	@Indexable(type = IndexableType.DELETE)
-	protected TrashEntry deleteEntry(TrashEntry trashEntry)
-		throws SystemException {
-
-		if (trashEntry != null) {
-			trashVersionPersistence.removeByEntryId(trashEntry.getEntryId());
-
-			trashEntry = trashEntryPersistence.remove(trashEntry);
-		}
-
-		return trashEntry;
 	}
 
 }
