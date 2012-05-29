@@ -748,7 +748,26 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 	public BlogsEntry moveEntryToTrash(long userId, BlogsEntry entry)
 		throws PortalException, SystemException {
 
+		// Entry
+
 		int oldStatus = entry.getStatus();
+
+		updateStatus(
+			userId, entry.getEntryId(), WorkflowConstants.STATUS_IN_TRASH,
+			new ServiceContext());
+
+		// Social
+
+		socialActivityLocalService.addActivity(
+			userId, entry.getGroupId(), BlogsEntry.class.getName(),
+			entry.getEntryId(), SocialActivityConstants.TYPE_MOVE_TO_TRASH,
+			StringPool.BLANK, 0);
+
+		// Trash
+
+		trashEntryLocalService.addTrashEntry(
+			userId, entry.getGroupId(), BlogsEntry.class.getName(),
+			entry.getEntryId(), oldStatus, null, null);
 
 		// Workflow
 
@@ -772,36 +791,15 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 			boolean update = ParamUtil.getBoolean(serviceContext, "update");
 
 			if (update) {
-				oldStatus = WorkflowConstants.STATUS_DRAFT_FROM_APPROVED;
+				entry.setStatus(WorkflowConstants.STATUS_DRAFT_FROM_APPROVED);
 			}
 			else {
-				oldStatus = WorkflowConstants.STATUS_DRAFT;
+				entry.setStatus(WorkflowConstants.STATUS_DRAFT);
 			}
 
-			entry.setStatus(oldStatus);
-
-			blogsEntryPersistence.update(entry, false);
-
 			workflowInstanceLinkLocalService.deleteWorkflowInstanceLink(
-				workflowInstanceLink.getWorkflowInstanceLinkId());
+				workflowInstanceLink.getWorkflowInstanceId());
 		}
-
-		updateStatus(
-			userId, entry.getEntryId(), WorkflowConstants.STATUS_IN_TRASH,
-			new ServiceContext());
-
-		// Social
-
-		socialActivityLocalService.addActivity(
-			userId, entry.getGroupId(), BlogsEntry.class.getName(),
-			entry.getEntryId(), SocialActivityConstants.TYPE_MOVE_TO_TRASH,
-			StringPool.BLANK, 0);
-
-		// Trash
-
-		trashEntryLocalService.addTrashEntry(
-			userId, entry.getGroupId(), BlogsEntry.class.getName(),
-			entry.getEntryId(), oldStatus, null, null);
 
 		return entry;
 	}
