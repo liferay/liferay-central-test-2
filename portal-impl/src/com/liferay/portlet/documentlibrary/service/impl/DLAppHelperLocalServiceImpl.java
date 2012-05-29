@@ -353,9 +353,8 @@ public class DLAppHelperLocalServiceImpl
 			dlFileVersionLocalService.getFileVersions(
 				fileEntry.getFileEntryId(), WorkflowConstants.STATUS_ANY);
 
-		dlFileVersions = ListUtil.copy(dlFileVersions);
-
-		Collections.sort(dlFileVersions, new FileVersionVersionComparator());
+		dlFileVersions = ListUtil.sort(
+			dlFileVersions, new FileVersionVersionComparator());
 
 		FileVersion fileVersion = new LiferayFileVersion(dlFileVersions.get(0));
 
