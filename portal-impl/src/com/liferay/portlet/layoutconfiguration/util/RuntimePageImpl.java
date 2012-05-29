@@ -215,16 +215,14 @@ public class RuntimePageImpl implements RuntimePage {
 				ObjectValuePair<HttpServletRequest, Closeable> objectValuePair =
 					ThreadLocalFacadeServletRequestWrapperUtil.inject(request);
 
-				HttpServletRequest threadSafeRequest = objectValuePair.getKey();
-
-				Closeable closeable = objectValuePair.getValue();
-
 				try {
 					parallelyRenderPortlets(
-						threadSafeRequest, response, processor, contentsMap,
-						portletRenderers);
+						objectValuePair.getKey(), response, processor,
+						contentsMap, portletRenderers);
 				}
 				finally {
+					Closeable closeable = objectValuePair.getValue();
+
 					closeable.close();
 				}
 

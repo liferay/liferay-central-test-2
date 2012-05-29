@@ -31,64 +31,63 @@ import javax.servlet.http.HttpServletRequest;
 public class ThreadLocalFacadeServletRequestWrapperUtil {
 
 	public static <T extends ServletRequest> ObjectValuePair<T, Closeable>
-		inject(T request) {
+		inject(T servletRequest) {
 
-		ServletRequestWrapper previousRequestWrapper = null;
-		ServletRequest currentRequest = request;
+		ServletRequestWrapper previousServletRequestWrapper = null;
+		ServletRequest currentServletRequest = servletRequest;
 
-		while (currentRequest != null) {
-			if (!(currentRequest instanceof ServletRequestWrapper)) {
+		while (currentServletRequest != null) {
+			if (!(currentServletRequest instanceof ServletRequestWrapper)) {
 				break;
 			}
 
-			String currentRequestClassName =
-				currentRequest.getClass().getName();
+			Class<?> clazz = currentServletRequest.getClass();
 
-			if (_injectStopperClassNames.contains(currentRequestClassName)) {
+			if (_stopperClassNames.contains(clazz.getName())) {
 				break;
 			}
 
-			previousRequestWrapper = (ServletRequestWrapper)currentRequest;
+			previousServletRequestWrapper =
+				(ServletRequestWrapper)currentServletRequest;
 
 			ServletRequestWrapper servletRequestWrapper =
-				(ServletRequestWrapper)currentRequest;
+				(ServletRequestWrapper)currentServletRequest;
 
-			currentRequest = servletRequestWrapper.getRequest();
+			currentServletRequest = servletRequestWrapper.getRequest();
 		}
 
 		ServletRequestWrapper servletRequestWrapper = null;
 
-		if (currentRequest instanceof HttpServletRequest) {
+		if (currentServletRequest instanceof HttpServletRequest) {
 			servletRequestWrapper =
 				new ThreadLocalFacadeHttpServletRequestWrapper(
-					previousRequestWrapper, (HttpServletRequest)currentRequest);
+					previousServletRequestWrapper,
+					(HttpServletRequest)currentServletRequest);
 		}
 		else {
 			servletRequestWrapper =
 				new ThreadLocalFacadeServletRequestWrapper(
-					previousRequestWrapper, currentRequest);
+					previousServletRequestWrapper, currentServletRequest);
 		}
 
-		if (previousRequestWrapper != null) {
-			previousRequestWrapper.setRequest(servletRequestWrapper);
+		if (previousServletRequestWrapper != null) {
+			previousServletRequestWrapper.setRequest(servletRequestWrapper);
 		}
 		else {
-			request = (T)servletRequestWrapper;
+			servletRequest = (T)servletRequestWrapper;
 		}
 
 		Closeable closeable = (Closeable)servletRequestWrapper;
 
-		return new ObjectValuePair<T, Closeable>(request, closeable);
+		return new ObjectValuePair<T, Closeable>(servletRequest, closeable);
 	}
 
-	public void setInjectStopperClassNames(
-		Set<String> injectStopperClassNames) {
+	public void setStopperClassNames(Set<String> stopperClassNames) {
+		_stopperClassNames.clear();
 
-		_injectStopperClassNames.clear();
-		_injectStopperClassNames.addAll(injectStopperClassNames);
+		_stopperClassNames.addAll(stopperClassNames);
 	}
 
-	private static final Set<String> _injectStopperClassNames =
-		new HashSet<String>();
+	private static Set<String> _stopperClassNames = new HashSet<String>();
 
 }

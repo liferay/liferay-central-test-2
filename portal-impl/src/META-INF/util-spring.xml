@@ -599,7 +599,7 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.servlet.ThreadLocalFacadeServletRequestWrapperUtil" class="com.liferay.portal.servlet.ThreadLocalFacadeServletRequestWrapperUtil">
-		<property name="injectStopperClassNames">
+		<property name="stopperClassNames">
 			<set>
 				<value>org.apache.catalina.connector.Request</value>
 				<value>org.apache.catalina.core.ApplicationHttpRequest</value>

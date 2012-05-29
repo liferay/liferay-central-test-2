@@ -30,64 +30,75 @@ public class ThreadLocalFacadeServletRequestWrapper
 	extends ServletRequestWrapper implements Closeable {
 
 	public ThreadLocalFacadeServletRequestWrapper(
-		ServletRequestWrapper superWrapper, ServletRequest nextRequest) {
+		ServletRequestWrapper servletRequestWrapper,
+		ServletRequest nextServletRequest) {
 
-		super(nextRequest);
+		super(nextServletRequest);
 
-		_nextRequestThreadLocal.set(nextRequest);
-		_superWrapper = superWrapper;
+		_servletRequestWrapper = servletRequestWrapper;
+
+		_nextServletRequestThreadLocal.set(nextServletRequest);
 	}
 
 	public void close() {
-		if (_superWrapper != null) {
-			ServletRequest nextRequest = _nextRequestThreadLocal.get();
+		if (_servletRequestWrapper != null) {
+			ServletRequest nextServletRequest =
+				_nextServletRequestThreadLocal.get();
 
-			_superWrapper.setRequest(nextRequest);
+			_servletRequestWrapper.setRequest(nextServletRequest);
 		}
 	}
 
 	@Override
 	public Object getAttribute(String name) {
-		return getRequest().getAttribute(name);
+		ServletRequest servletRequest = getRequest();
+
+		return servletRequest.getAttribute(name);
 	}
 
 	@Override
-	public Enumeration getAttributeNames() {
-		return getRequest().getAttributeNames();
+	public Enumeration<String> getAttributeNames() {
+		ServletRequest servletRequest = getRequest();
+
+		return servletRequest.getAttributeNames();
 	}
 
 	@Override
 	public ServletRequest getRequest() {
-		return _nextRequestThreadLocal.get();
+		return _nextServletRequestThreadLocal.get();
 	}
 
 	@Override
 	public void removeAttribute(String name) {
-		getRequest().removeAttribute(name);
+		ServletRequest servletRequest = getRequest();
+
+		servletRequest.removeAttribute(name);
 	}
 
 	@Override
 	public void setAttribute(String name, Object o) {
-		getRequest().setAttribute(name, o);
+		ServletRequest servletRequest = getRequest();
+
+		servletRequest.setAttribute(name, o);
 	}
 
 	@Override
-	public void setRequest(ServletRequest request) {
-		_nextRequestThreadLocal.set(request);
+	public void setRequest(ServletRequest servletRequest) {
+		_nextServletRequestThreadLocal.set(servletRequest);
 	}
 
-	private static ThreadLocal<ServletRequest> _nextRequestThreadLocal =
+	private static ThreadLocal<ServletRequest> _nextServletRequestThreadLocal =
 		new AutoResetThreadLocal<ServletRequest>(
 			ThreadLocalFacadeServletRequestWrapper.class +
-				"._nextRequestThreadLocal") {
+				"._nextServletRequestThreadLocal") {
 
 			@Override
-			protected ServletRequest copy(ServletRequest request) {
-				return request;
+			protected ServletRequest copy(ServletRequest servletRequest) {
+				return servletRequest;
 			}
 
 		};
 
-	private ServletRequestWrapper _superWrapper;
+	private ServletRequestWrapper _servletRequestWrapper;
 
 }

@@ -32,64 +32,78 @@ public class ThreadLocalFacadeHttpServletRequestWrapper
 	extends HttpServletRequestWrapper implements Closeable {
 
 	public ThreadLocalFacadeHttpServletRequestWrapper(
-		ServletRequestWrapper superWrapper, HttpServletRequest nextRequest) {
+		ServletRequestWrapper servletRequestWrapper,
+		HttpServletRequest httpServletRequest) {
 
-		super(nextRequest);
+		super(httpServletRequest);
 
-		_nextRequestThreadLocal.set(nextRequest);
-		_superWrapper = superWrapper;
+		_servletRequestWrapper = servletRequestWrapper;
+
+		_nextHttpServletRequestThreadLocal.set(httpServletRequest);
 	}
 
 	public void close() {
-		if (_superWrapper != null) {
-			HttpServletRequest nextRequest = _nextRequestThreadLocal.get();
+		if (_servletRequestWrapper != null) {
+			HttpServletRequest nextHttpServletRequest =
+				_nextHttpServletRequestThreadLocal.get();
 
-			_superWrapper.setRequest(nextRequest);
+			_servletRequestWrapper.setRequest(nextHttpServletRequest);
 		}
 	}
 
 	@Override
 	public Object getAttribute(String name) {
-		return getRequest().getAttribute(name);
+		ServletRequest servletRequest = getRequest();
+
+		return servletRequest.getAttribute(name);
 	}
 
 	@Override
-	public Enumeration getAttributeNames() {
-		return getRequest().getAttributeNames();
+	public Enumeration<String> getAttributeNames() {
+		ServletRequest servletRequest = getRequest();
+
+		return servletRequest.getAttributeNames();
 	}
 
 	@Override
 	public ServletRequest getRequest() {
-		return _nextRequestThreadLocal.get();
+		return _nextHttpServletRequestThreadLocal.get();
 	}
 
 	@Override
 	public void removeAttribute(String name) {
-		getRequest().removeAttribute(name);
+		ServletRequest servletRequest = getRequest();
+
+		servletRequest.removeAttribute(name);
 	}
 
 	@Override
 	public void setAttribute(String name, Object o) {
-		getRequest().setAttribute(name, o);
+		ServletRequest servletRequest = getRequest();
+
+		servletRequest.setAttribute(name, o);
 	}
 
 	@Override
 	public void setRequest(ServletRequest request) {
-		_nextRequestThreadLocal.set((HttpServletRequest)request);
+		_nextHttpServletRequestThreadLocal.set((HttpServletRequest)request);
 	}
 
-	private static ThreadLocal<HttpServletRequest> _nextRequestThreadLocal =
-		new AutoResetThreadLocal<HttpServletRequest>(
-			ThreadLocalFacadeHttpServletRequestWrapper.class +
-				"._nextRequestThreadLocal") {
+	private static ThreadLocal<HttpServletRequest>
+		_nextHttpServletRequestThreadLocal =
+			new AutoResetThreadLocal<HttpServletRequest>(
+				ThreadLocalFacadeHttpServletRequestWrapper.class +
+					"._nextHttpServletRequestThreadLocal") {
 
-			@Override
-			protected HttpServletRequest copy(HttpServletRequest request) {
-				return request;
-			}
+				@Override
+				protected HttpServletRequest copy(
+					HttpServletRequest httpServletRequest) {
 
-		};
+					return httpServletRequest;
+				}
 
-	private ServletRequestWrapper _superWrapper;
+			};
+
+	private ServletRequestWrapper _servletRequestWrapper;
 
 }
