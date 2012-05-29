@@ -1994,7 +1994,10 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			validateName(group.getGroupId(), group.getCompanyId(), name);
 		}
 		else if (className.equals(Organization.class.getName())) {
-			name = getOrgGroupName(classPK, name);
+			Organization organization =
+				organizationPersistence.findByPrimaryKey(classPK);
+
+			name = getOrgGroupName(classPK, organization.getName());
 		}
 		else if (!GroupConstants.USER_PERSONAL_SITE.equals(name)) {
 			name = String.valueOf(classPK);
