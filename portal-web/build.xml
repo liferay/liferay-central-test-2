@@ -841,8 +841,12 @@ var defaultTypes = []]>
 			</sequential>
 		</for>
 
-		<copy file="docroot/html/themes/_unstyled/images/favicon.ico" todir="docroot" overwrite="true" preservelastmodified="true"/>
-
+		<copy
+			file="docroot/html/themes/_unstyled/images/favicon.ico"
+			overwrite="true"
+			preservelastmodified="true"
+			todir="docroot"
+		/>
 	</target>
 
 	<target name="build-tinymce">
