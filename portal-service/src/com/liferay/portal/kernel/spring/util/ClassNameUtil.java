@@ -15,10 +15,6 @@
 package com.liferay.portal.kernel.spring.util;
 
 /**
- * Spring xml configuration helper class.
- * Use a type safe way to get class name.
- * This can prevent typo and refactor renaming bug.
- *
  * @author Shuyang Zhou
  */
 public class ClassNameUtil {

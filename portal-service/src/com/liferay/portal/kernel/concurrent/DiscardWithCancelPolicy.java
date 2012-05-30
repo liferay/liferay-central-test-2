@@ -27,8 +27,9 @@ public class DiscardWithCancelPolicy implements RejectedExecutionHandler {
 		if (runnable instanceof Future<?>) {
 			Future<?> future = (Future<?>)runnable;
 
-			// There is no point to try interrupt runner thread, as being
-			// rejected means has not been running yet.
+			// There is no point to try and interrupt the runner thread since
+			// being rejected means it is not yet running
+
 			future.cancel(false);
 		}
 	}

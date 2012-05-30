@@ -393,16 +393,18 @@ public class RuntimePageImpl implements RuntimePage {
 				future = executorService.submit(renderCallable);
 			}
 			catch (RejectedExecutionException ree) {
-				// This should only happen when user configuring
-				// AbortPolicy(or some other customized RejectedExecutionHandler
-				// that throws RejectedExecutionException) for this
+
+				// This should only happen when user configures an AbortPolicy
+				// (or some other customized RejectedExecutionHandler that
+				// throws RejectedExecutionException) for this
 				// ThreadPoolExecutor. AbortPolicy is not the recommended
 				// setting, but to be more robust, we take care of this by
-				// converting the rejection to be a fallback action.
+				// converting the rejection to a fallback action.
 
 				future = new FutureTask<StringBundler>(renderCallable);
 
 				// Cancel immediately
+
 				future.cancel(true);
 			}
 
@@ -470,14 +472,15 @@ public class RuntimePageImpl implements RuntimePage {
 				}
 				catch (CancellationException ce) {
 
-					// This should only happen on concurrent shutdown
-					// ThreadPool. Simply stops the render process.
+					// This should only happen on a concurrent shutdown of the
+					// thread pool. Simply stops the render process.
 
 					if (_log.isDebugEnabled()) {
 						_log.debug(
-							"Asynchronized cancellation detected, should " +
-								"only be caused by concurrent shutdown " +
-									"ThreadPool, otherwise could be a bug", ce);
+							"Asynchronized cancellation detected that should " +
+								"only be caused by a concurrent shutdown of " +
+									"the thread pool",
+							ce);
 					}
 
 					return;

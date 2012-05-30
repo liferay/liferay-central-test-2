@@ -44,7 +44,6 @@ public class DiscardWithCancelPolicyTest extends TestCase {
 		Future<?> future = threadPoolExecutor.submit(markerBlockingJob);
 
 		assertFalse(markerBlockingJob.isEnded());
-
 		assertTrue(future.isCancelled());
 	}
 
@@ -90,7 +89,6 @@ public class DiscardWithCancelPolicyTest extends TestCase {
 
 			assertTrue(future2.isDone());
 			assertFalse(future2.isCancelled());
-
 			assertEquals(0, threadPoolExecutor.getActiveCount());
 			assertEquals(0, threadPoolExecutor.getPendingTaskCount());
 		}
