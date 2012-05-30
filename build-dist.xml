@@ -1299,6 +1299,9 @@ sh startWebLogic.sh</echo>
 	</target>
 
 	<target name="unzip-websphere">
+		<property name="app.server.parent.dir.abs" location="${app.server.parent.dir}" />
+		<property name="app.server.websphere.dir.abs" location="${app.server.websphere.dir}" />
+
 		<if>
 			<or>
 				<not>
@@ -1331,8 +1334,6 @@ them in ${app.server.parent.dir}. Then rerun this task.
 
 		<delete dir="${app.server.websphere.dir}" />
 
-		<property name="app.server.websphere.dir.abs" location="${app.server.websphere.dir}" />
-
 		<tstamp>
 			<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
 		</tstamp>
@@ -1343,6 +1344,7 @@ them in ${app.server.parent.dir}. Then rerun this task.
 		/>
 
 		<echo file="${tstamp.value}/was/WAS/liferay-responsefile.txt">
+			-OPT disableOSPrereqChecking="true"
 			-OPT feature="noFeature"
 			-OPT installLocation="${app.server.websphere.dir.abs}"
 			-OPT installType="installNew"
@@ -1360,7 +1362,6 @@ them in ${app.server.parent.dir}. Then rerun this task.
 			-OPT PROF_winserviceCheck="false"
 			-OPT profileType="standAlone"
 			-OPT silentInstallLicenseAcceptance="true"
-			-OPT disableOSPrereqChecking="true"
 		</echo>
 
 		<echo file="${tstamp.value}/was/WAS/liferay-portdef.props">
@@ -1389,8 +1390,6 @@ them in ${app.server.parent.dir}. Then rerun this task.
 		<exec dir="${tstamp.value}/updi/UpdateInstaller" executable="cmd.exe">
 			<arg line="/c install.exe -options liferay-responsefile.txt -silent" />
 		</exec>
-
-		<property name="app.server.parent.dir.abs" location="${app.server.parent.dir}" />
 
 		<echo file="${app.server.websphere.dir.abs}/UpdateInstaller/liferay-responsefile.txt">
 			-W maintenance.package="${app.server.parent.dir.abs}\${app.server.websphere.fix.pack.jdk.name};${app.server.parent.dir.abs}\${app.server.websphere.fix.pack.was.name}"
