@@ -166,6 +166,8 @@ public class PropsValues {
 
 	public static final boolean BLOGS_ENTRY_COMMENTS_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.BLOGS_ENTRY_COMMENTS_ENABLED));
 
+	public static final int[] BLOGS_ENTRY_PAGE_DELTA_VALUES = GetterUtil.getIntegerValues(PropsUtil.getArray(PropsKeys.BLOGS_ENTRY_PAGE_DELTA_VALUES));
+
 	public static final boolean BLOGS_ENTRY_PREVIOUS_AND_NEXT_NAVIGATION_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.BLOGS_ENTRY_PREVIOUS_AND_NEXT_NAVIGATION_ENABLED));
 
 	public static final String BLOGS_ENTRY_URL_TITLE_REGEXP = PropsUtil.get(PropsKeys.BLOGS_ENTRY_URL_TITLE_REGEXP);
@@ -173,8 +175,6 @@ public class PropsValues {
 	public static final int BLOGS_LINKBACK_EXCERPT_LENGTH = GetterUtil.getInteger(PropsUtil.get(PropsKeys.BLOGS_LINKBACK_EXCERPT_LENGTH));
 
 	public static final int BLOGS_PAGE_ABSTRACT_LENGTH = GetterUtil.getInteger(PropsUtil.get(PropsKeys.BLOGS_PAGE_ABSTRACT_LENGTH));
-
-	public static final int[] BLOGS_PAGE_DELTA_VALUES = GetterUtil.getIntegerValues(PropsUtil.getArray(PropsKeys.BLOGS_PAGE_DELTA_VALUES));
 
 	public static final boolean BLOGS_PING_GOOGLE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.BLOGS_PING_GOOGLE_ENABLED));
 

@@ -278,7 +278,7 @@ String[] socialBookmarksTypesArray = StringUtil.split(preferences.getValue("soci
 				<aui:select label="maximum-items-to-display" name="preferences--pageDelta--">
 
 					<%
-					for (int pageDeltaValue : PropsValues.BLOGS_PAGE_DELTA_VALUES) {
+					for (int pageDeltaValue : PropsValues.BLOGS_ENTRY_PAGE_DELTA_VALUES) {
 					%>
 
 						<aui:option label="<%= pageDelta %>" selected="<%= pageDelta == pageDeltaValue %>" />
