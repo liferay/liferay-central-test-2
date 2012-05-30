@@ -1302,7 +1302,10 @@ sh startWebLogic.sh</echo>
 		<if>
 			<or>
 				<not>
-					<available file="${app.server.parent.dir}/${app.server.websphere.fix.pack.name}" />
+					<available file="${app.server.parent.dir}/${app.server.websphere.fix.pack.jdk.name}" />
+				</not>
+				<not>
+					<available file="${app.server.parent.dir}/${app.server.websphere.fix.pack.was.name}" />
 				</not>
 				<not>
 					<available file="${app.server.parent.dir}/${app.server.websphere.update.installer.zip.name}" />
@@ -1317,7 +1320,8 @@ sh startWebLogic.sh</echo>
 				<fail>
 .
 
-Please download ${app.server.websphere.fix.pack.name},
+Please download ${app.server.websphere.fix.jdk.name},
+${app.server.websphere.fix.pack.was.name},
 ${app.server.websphere.update.installer.zip.name}, and
 ${app.server.websphere.zip.name} from ${app.server.websphere.zip.url} and put
 them in ${app.server.parent.dir}. Then rerun this task.
@@ -1384,7 +1388,7 @@ them in ${app.server.parent.dir}. Then rerun this task.
 		</exec>
 
 		<echo file="${app.server.websphere.dir}/UpdateInstaller/liferay-responsefile.txt">
-			-W maintenance.package="${app.server.parent.dir}\${app.server.websphere.fix.pack.name}"
+			-W maintenance.package="${app.server.parent.dir}\${app.server.websphere.fix.pack.jdk.name};${app.server.parent.dir}\${app.server.websphere.fix.pack.was.name}"
 			-W product.location="${app.server.websphere.dir}"
 			-W update.type="install"
 		</echo>
