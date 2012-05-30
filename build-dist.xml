@@ -1383,7 +1383,7 @@ them in ${app.server.parent.dir}. Then rerun this task.
 		<echo>Installing fix pack.</echo>
 
 		<exec dir="${app.server.websphere.dir}/UpdateInstaller" executable="cmd.exe">
-			<arg line="/c update.exe -options liferay-responsefile.txt -silent" />
+			<arg line="/c update.bat -options liferay-responsefile.txt -silent" />
 		</exec>
 
 		<delete dir="${tstamp.value}" />
