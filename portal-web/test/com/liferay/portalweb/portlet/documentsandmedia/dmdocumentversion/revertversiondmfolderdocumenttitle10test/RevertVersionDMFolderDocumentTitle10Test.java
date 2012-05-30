@@ -64,19 +64,17 @@ public class RevertVersionDMFolderDocumentTitle10Test extends BaseTestCase {
 		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("DM Folder Document Title Edit"),
 			selenium.getText("//h2[@class='document-title']"));
-		assertEquals(RuntimeVariables.replace("DM Folder Document Description"),
-			selenium.getText("//span[@class='document-description']"));
 		assertEquals(RuntimeVariables.replace("Version 1.1"),
 			selenium.getText("//h3[contains(@class,'version')]"));
-		assertEquals(RuntimeVariables.replace("Download (0k)"),
+		assertEquals(RuntimeVariables.replace("Download (0.3k)"),
 			selenium.getText("//span[@class='download-document']/span/a/span"));
 		assertEquals(RuntimeVariables.replace("1.1"),
 			selenium.getText("//tr[3]/td[2]"));
-		assertEquals(RuntimeVariables.replace("0k"),
+		assertEquals(RuntimeVariables.replace("0.3k"),
 			selenium.getText("//tr[3]/td[4]"));
 		assertEquals(RuntimeVariables.replace("1.0"),
 			selenium.getText("//tr[4]/td[2]"));
-		assertEquals(RuntimeVariables.replace("0k"),
+		assertEquals(RuntimeVariables.replace("0.3k"),
 			selenium.getText("//tr[4]/td[4]"));
 		selenium.clickAt("//tr[4]/td[6]/span/ul[contains(@class,'lfr-component lfr-actions')]/li/strong/a",
 			RuntimeVariables.replace("Version 1.0 Drop Down"));
@@ -131,7 +129,7 @@ public class RevertVersionDMFolderDocumentTitle10Test extends BaseTestCase {
 			selenium.getText("//h2[@class='document-title']"));
 		assertEquals(RuntimeVariables.replace("Version 2.0"),
 			selenium.getText("//h3[contains(@class,'version')]"));
-		assertEquals(RuntimeVariables.replace("Download (0k)"),
+		assertEquals(RuntimeVariables.replace("Download (0.3k)"),
 			selenium.getText("//span[@class='download-document']/span/a/span"));
 	}
 }

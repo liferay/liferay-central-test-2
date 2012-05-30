@@ -119,7 +119,7 @@ public class ViewDMPortletHideDocumentColumnsTest extends BaseTestCase {
 			}
 
 			try {
-				if (RuntimeVariables.replace("0k")
+				if (RuntimeVariables.replace("0.3k")
 										.equals(selenium.getText(
 								"//tr[3]/td[2]"))) {
 					break;
@@ -131,7 +131,7 @@ public class ViewDMPortletHideDocumentColumnsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertEquals(RuntimeVariables.replace("0k"),
+		assertEquals(RuntimeVariables.replace("0.3k"),
 			selenium.getText("//tr[3]/td[2]"));
 		assertEquals(RuntimeVariables.replace("0"),
 			selenium.getText("//tr[3]/td[3]"));

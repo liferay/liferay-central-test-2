@@ -79,7 +79,7 @@ public class ViewMoveDMFolder1ImageToFolder2Test extends BaseTestCase {
 				if (RuntimeVariables.replace(
 							"There are no documents or media files in this folder.")
 										.equals(selenium.getText(
-								"//div[@class='entries-empty portlet-msg-info']"))) {
+								"//div[@class='portlet-msg-info']"))) {
 					break;
 				}
 			}
@@ -91,7 +91,7 @@ public class ViewMoveDMFolder1ImageToFolder2Test extends BaseTestCase {
 
 		assertEquals(RuntimeVariables.replace(
 				"There are no documents or media files in this folder."),
-			selenium.getText("//div[@class='entries-empty portlet-msg-info']"));
+			selenium.getText("//div[@class='portlet-msg-info']"));
 		assertFalse(selenium.isTextPresent("DM Folder1 Image Title"));
 		selenium.open("/web/guest/home/");
 		loadRequiredJavaScriptModules();

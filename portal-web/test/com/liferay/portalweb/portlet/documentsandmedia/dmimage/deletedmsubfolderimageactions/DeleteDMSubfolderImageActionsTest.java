@@ -108,7 +108,7 @@ public class DeleteDMSubfolderImageActionsTest extends BaseTestCase {
 
 			try {
 				if (selenium.isVisible(
-							"//div[@class='lfr-component lfr-menu-list']/ul/li[5]/a")) {
+							"//div[@class='lfr-component lfr-menu-list']/ul/li[contains(.,'Delete')]/a")) {
 					break;
 				}
 			}
@@ -118,15 +118,15 @@ public class DeleteDMSubfolderImageActionsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertEquals(RuntimeVariables.replace("Move to the Recycle Bin"),
+		assertEquals(RuntimeVariables.replace("Delete"),
 			selenium.getText(
-				"//div[@class='lfr-component lfr-menu-list']/ul/li[5]/a"));
+				"//div[@class='lfr-component lfr-menu-list']/ul/li[contains(.,'Delete')]/a"));
 		selenium.click(RuntimeVariables.replace(
-				"//div[@class='lfr-component lfr-menu-list']/ul/li[5]/a"));
+				"//div[@class='lfr-component lfr-menu-list']/ul/li[contains(.,'Delete')]/a"));
 		selenium.waitForPageToLoad("30000");
 		loadRequiredJavaScriptModules();
 		assertTrue(selenium.getConfirmation()
-						   .matches("^Are you sure you want to move the selected entries to the Recycle Bin[\\s\\S]$"));
+						   .matches("^Are you sure you want to delete the selected entries[\\s\\S]$"));
 		assertEquals(RuntimeVariables.replace(
 				"Your request completed successfully."),
 			selenium.getText("//div[@class='portlet-msg-success']"));
@@ -189,7 +189,7 @@ public class DeleteDMSubfolderImageActionsTest extends BaseTestCase {
 				if (RuntimeVariables.replace(
 							"There are no documents or media files in this folder.")
 										.equals(selenium.getText(
-								"//div[@class='entries-empty portlet-msg-info']"))) {
+								"//div[@class='portlet-msg-info']"))) {
 					break;
 				}
 			}
@@ -201,6 +201,6 @@ public class DeleteDMSubfolderImageActionsTest extends BaseTestCase {
 
 		assertEquals(RuntimeVariables.replace(
 				"There are no documents or media files in this folder."),
-			selenium.getText("//div[@class='entries-empty portlet-msg-info']"));
+			selenium.getText("//div[@class='portlet-msg-info']"));
 	}
 }

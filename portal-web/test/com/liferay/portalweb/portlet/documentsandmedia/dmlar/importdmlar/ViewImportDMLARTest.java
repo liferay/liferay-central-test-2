@@ -153,7 +153,7 @@ public class ViewImportDMLARTest extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace(
 				"DL Folder1 Subfolder Document Description Edit"),
 			selenium.getText("//span[@class='document-description']"));
-		assertEquals(RuntimeVariables.replace("Download (1k)"),
+		assertEquals(RuntimeVariables.replace("Download (0.5k)"),
 			selenium.getText("//span[@class='download-document']/span/a/span"));
 		selenium.open("/web/guest/home/");
 		loadRequiredJavaScriptModules();

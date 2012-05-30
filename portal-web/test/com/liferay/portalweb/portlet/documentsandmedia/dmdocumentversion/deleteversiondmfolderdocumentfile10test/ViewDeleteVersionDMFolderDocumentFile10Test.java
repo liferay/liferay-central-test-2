@@ -66,15 +66,13 @@ public class ViewDeleteVersionDMFolderDocumentFile10Test extends BaseTestCase {
 			selenium.getText("//h1[@class='header-title']/span"));
 		assertEquals(RuntimeVariables.replace("DM Folder Document Title"),
 			selenium.getText("//h2[@class='document-title']"));
-		assertEquals(RuntimeVariables.replace("DM Folder Document Description"),
-			selenium.getText("//span[@class='document-description']"));
 		assertEquals(RuntimeVariables.replace("Version 1.1"),
 			selenium.getText("//h3[contains(@class,'version')]"));
-		assertEquals(RuntimeVariables.replace("Download (1k)"),
+		assertEquals(RuntimeVariables.replace("Download (0.5k)"),
 			selenium.getText("//span[@class='download-document']/span/a/span"));
 		assertEquals(RuntimeVariables.replace("1.1"),
 			selenium.getText("//tr[3]/td[2]"));
-		assertEquals(RuntimeVariables.replace("1k"),
+		assertEquals(RuntimeVariables.replace("0.5k"),
 			selenium.getText("//tr[3]/td[4]"));
 		assertFalse(selenium.isTextPresent("1.0"));
 	}

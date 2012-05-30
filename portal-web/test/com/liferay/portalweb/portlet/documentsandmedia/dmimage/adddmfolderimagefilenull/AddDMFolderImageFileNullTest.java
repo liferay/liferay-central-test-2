@@ -165,7 +165,7 @@ public class AddDMFolderImageFileNullTest extends BaseTestCase {
 			selenium.getText("//span[@class='document-description']"));
 		assertEquals(RuntimeVariables.replace("Status: Approved"),
 			selenium.getText("//span[@class='workflow-status']"));
-		assertEquals(RuntimeVariables.replace("Download (0k)"),
+		assertEquals(RuntimeVariables.replace("Download (0.0k)"),
 			selenium.getText("//span[@class='download-document']"));
 	}
 }

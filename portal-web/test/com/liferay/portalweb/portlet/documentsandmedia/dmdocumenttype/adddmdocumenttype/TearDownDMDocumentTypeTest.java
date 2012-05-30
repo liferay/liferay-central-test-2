@@ -118,7 +118,8 @@ public class TearDownDMDocumentTypeTest extends BaseTestCase {
 					RuntimeVariables.replace("Name"));
 				selenium.clickAt("//input[@value='Search']",
 					RuntimeVariables.replace("Search"));
-				Thread.sleep(5000);
+				selenium.waitForPageToLoad("30000");
+				loadRequiredJavaScriptModules();
 
 				boolean documentType1Present = selenium.isElementPresent(
 						"//span[@title='Actions']/ul/li/strong/a/span");
@@ -129,6 +130,7 @@ public class TearDownDMDocumentTypeTest extends BaseTestCase {
 					continue;
 				}
 
+				Thread.sleep(5000);
 				assertEquals(RuntimeVariables.replace("Actions"),
 					selenium.getText(
 						"//span[@title='Actions']/ul/li/strong/a/span"));
@@ -160,7 +162,7 @@ public class TearDownDMDocumentTypeTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				loadRequiredJavaScriptModules();
 				assertTrue(selenium.getConfirmation()
-								   .matches("^Are you sure you want to delete this[\\s\\S] It will be deleted immediately.$"));
+								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 
 				boolean documentType2Present = selenium.isElementPresent(
 						"//span[@title='Actions']/ul/li/strong/a/span");
@@ -171,6 +173,7 @@ public class TearDownDMDocumentTypeTest extends BaseTestCase {
 					continue;
 				}
 
+				Thread.sleep(5000);
 				assertEquals(RuntimeVariables.replace("Actions"),
 					selenium.getText(
 						"//span[@title='Actions']/ul/li/strong/a/span"));
@@ -202,7 +205,7 @@ public class TearDownDMDocumentTypeTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				loadRequiredJavaScriptModules();
 				assertTrue(selenium.getConfirmation()
-								   .matches("^Are you sure you want to delete this[\\s\\S] It will be deleted immediately.$"));
+								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 
 				boolean documentType3Present = selenium.isElementPresent(
 						"//span[@title='Actions']/ul/li/strong/a/span");
@@ -213,6 +216,7 @@ public class TearDownDMDocumentTypeTest extends BaseTestCase {
 					continue;
 				}
 
+				Thread.sleep(5000);
 				assertEquals(RuntimeVariables.replace("Actions"),
 					selenium.getText(
 						"//span[@title='Actions']/ul/li/strong/a/span"));
@@ -244,7 +248,7 @@ public class TearDownDMDocumentTypeTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				loadRequiredJavaScriptModules();
 				assertTrue(selenium.getConfirmation()
-								   .matches("^Are you sure you want to delete this[\\s\\S] It will be deleted immediately.$"));
+								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 
 				boolean documentType4Present = selenium.isElementPresent(
 						"//span[@title='Actions']/ul/li/strong/a/span");
@@ -255,6 +259,7 @@ public class TearDownDMDocumentTypeTest extends BaseTestCase {
 					continue;
 				}
 
+				Thread.sleep(5000);
 				assertEquals(RuntimeVariables.replace("Actions"),
 					selenium.getText(
 						"//span[@title='Actions']/ul/li/strong/a/span"));
@@ -286,7 +291,7 @@ public class TearDownDMDocumentTypeTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				loadRequiredJavaScriptModules();
 				assertTrue(selenium.getConfirmation()
-								   .matches("^Are you sure you want to delete this[\\s\\S] It will be deleted immediately.$"));
+								   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 
 				boolean documentType5Present = selenium.isElementPresent(
 						"//span[@title='Actions']/ul/li/strong/a/span");
@@ -297,6 +302,7 @@ public class TearDownDMDocumentTypeTest extends BaseTestCase {
 					continue;
 				}
 
+				Thread.sleep(5000);
 				assertEquals(RuntimeVariables.replace("Actions"),
 					selenium.getText(
 						"//span[@title='Actions']/ul/li/strong/a/span"));

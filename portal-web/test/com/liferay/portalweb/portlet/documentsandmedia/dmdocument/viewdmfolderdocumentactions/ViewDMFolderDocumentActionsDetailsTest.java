@@ -124,7 +124,7 @@ public class ViewDMFolderDocumentActionsDetailsTest extends BaseTestCase {
 			selenium.getText("//span[@class='aui-toolbar-content']/button[4]"));
 		assertEquals(RuntimeVariables.replace("Permissions"),
 			selenium.getText("//span[@class='aui-toolbar-content']/button[5]"));
-		assertEquals(RuntimeVariables.replace("Move to the Recycle Bin"),
+		assertEquals(RuntimeVariables.replace("Delete"),
 			selenium.getText("//span[@class='aui-toolbar-content']/button[6]"));
 	}
 }

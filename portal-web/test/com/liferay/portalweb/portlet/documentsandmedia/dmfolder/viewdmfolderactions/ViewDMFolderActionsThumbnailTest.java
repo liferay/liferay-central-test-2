@@ -92,7 +92,7 @@ public class ViewDMFolderActionsThumbnailTest extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace("Permissions"),
 			selenium.getText(
 				"//div[@class='lfr-component lfr-menu-list']/ul/li[3]/a"));
-		assertEquals(RuntimeVariables.replace("Move to the Recycle Bin"),
+		assertEquals(RuntimeVariables.replace("Delete"),
 			selenium.getText(
 				"//div[@class='lfr-component lfr-menu-list']/ul/li[4]/a"));
 		assertEquals(RuntimeVariables.replace("Add Subfolder"),

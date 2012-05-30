@@ -98,7 +98,7 @@ public class EditDMFolderDocumentFileTest extends BaseTestCase {
 			selenium.getText("//div[@class='portlet-msg-success']"));
 		assertEquals(RuntimeVariables.replace("Version 1.1"),
 			selenium.getText("//h3[contains(@class,'version')]"));
-		assertEquals(RuntimeVariables.replace("Download (1k)"),
+		assertEquals(RuntimeVariables.replace("Download (0.5k)"),
 			selenium.getText("//span[@class='download-document']/span/a/span"));
 	}
 }

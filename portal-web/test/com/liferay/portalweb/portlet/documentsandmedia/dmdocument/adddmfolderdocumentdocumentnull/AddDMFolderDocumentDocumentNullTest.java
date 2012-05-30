@@ -142,7 +142,7 @@ public class AddDMFolderDocumentDocumentNullTest extends BaseTestCase {
 			selenium.getText("//h2[@class='document-title']"));
 		assertEquals(RuntimeVariables.replace("DM Folder Document Description"),
 			selenium.getText("//span[@class='document-description']"));
-		assertEquals(RuntimeVariables.replace("0k"),
+		assertEquals(RuntimeVariables.replace("0.0k"),
 			selenium.getText("//tr[3]/td[3]"));
 		assertEquals(RuntimeVariables.replace("Checkout"),
 			selenium.getText("//button[4]"));

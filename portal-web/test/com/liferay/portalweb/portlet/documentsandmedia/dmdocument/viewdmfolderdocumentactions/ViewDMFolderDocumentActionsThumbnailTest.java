@@ -112,7 +112,7 @@ public class ViewDMFolderDocumentActionsThumbnailTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertEquals(RuntimeVariables.replace("Download (0k)"),
+		assertEquals(RuntimeVariables.replace("Download (0.3k)"),
 			selenium.getText(
 				"//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a"));
 		assertEquals(RuntimeVariables.replace("Edit"),
@@ -127,7 +127,7 @@ public class ViewDMFolderDocumentActionsThumbnailTest extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace("Permissions"),
 			selenium.getText(
 				"//div[@class='lfr-component lfr-menu-list']/ul/li[5]/a"));
-		assertEquals(RuntimeVariables.replace("Move to the Recycle Bin"),
+		assertEquals(RuntimeVariables.replace("Delete"),
 			selenium.getText(
 				"//div[@class='lfr-component lfr-menu-list']/ul/li[6]/a"));
 	}

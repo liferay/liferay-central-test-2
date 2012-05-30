@@ -72,8 +72,8 @@ public class ImportDMLARTest extends BaseTestCase {
 		loadRequiredJavaScriptModules();
 		Thread.sleep(5000);
 		assertEquals(RuntimeVariables.replace("Options"),
-			selenium.getText("//a[@id='_20_bbln_menuButton']"));
-		selenium.clickAt("//a[@id='_20_bbln_menuButton']",
+			selenium.getText("//ul[@id='bbln_menu']/li/strong/a"));
+		selenium.clickAt("//ul[@id='bbln_menu']/li/strong/a",
 			RuntimeVariables.replace("Options"));
 		Thread.sleep(5000);
 
@@ -106,7 +106,7 @@ public class ImportDMLARTest extends BaseTestCase {
 		loadRequiredJavaScriptModules();
 		selenium.type("//input[@id='_86_importFileName']",
 			RuntimeVariables.replace(
-				"E:\\Public\\trunk-build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\documentsandmedia\\dmdependencies\\Document_Library-Selenium.portlet.lar"));
+				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\documentsandmedia\\dependencies\\Document_Library-Selenium.portlet.lar"));
 		selenium.check("//input[@id='_86_DELETE_PORTLET_DATACheckbox']");
 		selenium.check("//input[@id='_86_PORTLET_DATACheckbox']");
 		selenium.check("//input[@id='_86_PERMISSIONSCheckbox']");

@@ -134,7 +134,7 @@ public class ViewDMPortletShowDocumentColumnsTest extends BaseTestCase {
 
 		assertEquals(RuntimeVariables.replace("DM Folder Document Title"),
 			selenium.getText("//tr[3]/td[2]/span/a/span"));
-		assertEquals(RuntimeVariables.replace("0k"),
+		assertEquals(RuntimeVariables.replace("0.3k"),
 			selenium.getText("//tr[3]/td[3]"));
 		assertEquals(RuntimeVariables.replace("0"),
 			selenium.getText("//tr[3]/td[4]"));

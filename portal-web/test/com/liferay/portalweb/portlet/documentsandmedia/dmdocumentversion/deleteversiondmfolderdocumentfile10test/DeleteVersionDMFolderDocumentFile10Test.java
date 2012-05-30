@@ -64,19 +64,17 @@ public class DeleteVersionDMFolderDocumentFile10Test extends BaseTestCase {
 		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("DM Folder Document Title"),
 			selenium.getText("//h2[@class='document-title']"));
-		assertEquals(RuntimeVariables.replace("DM Folder Document Description"),
-			selenium.getText("//span[@class='document-description']"));
 		assertEquals(RuntimeVariables.replace("Version 1.1"),
 			selenium.getText("//h3[contains(@class,'version')]"));
-		assertEquals(RuntimeVariables.replace("Download (1k)"),
+		assertEquals(RuntimeVariables.replace("Download (0.5k)"),
 			selenium.getText("//span[@class='download-document']/span/a/span"));
 		assertEquals(RuntimeVariables.replace("1.1"),
 			selenium.getText("//tr[3]/td[2]"));
-		assertEquals(RuntimeVariables.replace("1k"),
+		assertEquals(RuntimeVariables.replace("0.5k"),
 			selenium.getText("//tr[3]/td[4]"));
 		assertEquals(RuntimeVariables.replace("1.0"),
 			selenium.getText("//tr[4]/td[2]"));
-		assertEquals(RuntimeVariables.replace("0k"),
+		assertEquals(RuntimeVariables.replace("0.3k"),
 			selenium.getText("//tr[4]/td[4]"));
 		selenium.clickAt("//tr[4]/td[6]/span/ul[contains(@class,'lfr-component lfr-actions')]/li/strong/a",
 			RuntimeVariables.replace("Version 1.0 Drop Down"));
@@ -106,7 +104,7 @@ public class DeleteVersionDMFolderDocumentFile10Test extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		loadRequiredJavaScriptModules();
 		assertTrue(selenium.getConfirmation()
-						   .matches("^Are you sure you want to delete this[\\s\\S] It will be deleted immediately.$"));
+						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -129,11 +127,11 @@ public class DeleteVersionDMFolderDocumentFile10Test extends BaseTestCase {
 			selenium.getText("//div[@class='portlet-msg-success']"));
 		assertEquals(RuntimeVariables.replace("Version 1.1"),
 			selenium.getText("//h3[contains(@class,'version')]"));
-		assertEquals(RuntimeVariables.replace("Download (1k)"),
+		assertEquals(RuntimeVariables.replace("Download (0.5k)"),
 			selenium.getText("//span[@class='download-document']/span/a/span"));
 		assertEquals(RuntimeVariables.replace("1.1"),
 			selenium.getText("//tr[3]/td[2]"));
-		assertEquals(RuntimeVariables.replace("1k"),
+		assertEquals(RuntimeVariables.replace("0.5k"),
 			selenium.getText("//tr[3]/td[4]"));
 	}
 }

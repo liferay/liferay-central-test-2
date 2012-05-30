@@ -149,7 +149,7 @@ public class AddDMDocumentTest extends BaseTestCase {
 			selenium.getText("//div[@class='document-info']/h2"));
 		assertEquals(RuntimeVariables.replace("DM Document Description"),
 			selenium.getText("//span[@class='document-description']"));
-		assertEquals(RuntimeVariables.replace("Download (0k)"),
+		assertEquals(RuntimeVariables.replace("Download (0.3k)"),
 			selenium.getText("//span[@class='download-document']/span/a/span"));
 	}
 }

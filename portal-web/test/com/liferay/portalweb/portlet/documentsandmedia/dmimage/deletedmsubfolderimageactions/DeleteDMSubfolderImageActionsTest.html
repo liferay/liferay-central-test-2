@@ -75,22 +75,22 @@
 </tr>
 <tr>
 	<td>waitForVisible</td>
-	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[5]/a</td>
-	<td>Move to the Recycle Bin</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[contains(.,'Delete')]/a</td>
+	<td>Delete</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[5]/a</td>
-	<td>Move to the Recycle Bin</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[contains(.,'Delete')]/a</td>
+	<td>Delete</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[5]/a</td>
-	<td>Move to the Recycle Bin</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li[contains(.,'Delete')]/a</td>
+	<td>Delete</td>
 </tr>
 <tr>
 	<td>assertConfirmation</td>
-	<td>Are you sure you want to move the selected entries to the Recycle Bin?</td>
+	<td>Are you sure you want to delete the selected entries?</td>
 	<td></td>
 </tr>
 <tr>
@@ -135,12 +135,12 @@
 </tr>
 <tr>
 	<td>waitForText</td>
-	<td>//div[@class='entries-empty portlet-msg-info']</td>
+	<td>//div[@class='portlet-msg-info']</td>
 	<td>There are no documents or media files in this folder.</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//div[@class='entries-empty portlet-msg-info']</td>
+	<td>//div[@class='portlet-msg-info']</td>
 	<td>There are no documents or media files in this folder.</td>
 </tr>
 </tbody></table>
