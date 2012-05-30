@@ -36,7 +36,7 @@ page import="com.liferay.portlet.announcements.util.AnnouncementsUtil" %>
 
 <%
 PortletPreferences preferences = renderRequest.getPreferences();
-		 
+
 String portletResource = ParamUtil.getString(request, "portletResource");
 
 if (Validator.isNotNull(portletResource)) {

@@ -32,31 +32,32 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 	<aui:fieldset>
 	    <aui:select label="maximum-items-to-display" name="preferences--pageDelta--">
-	    	<%
-	    	String[] pageDeltaValues = PropsValues.ANNOUNCEMENTS_PAGE_DELTA_VALUES;
 
-			for (int i = 0; i < pageDeltaValues.length; i++) {
+			<%
+			for (int pageDeltaValue : PropsValues.ANNOUNCEMENTS_ENTRY_PAGE_DELTA_VALUES) {
 			%>
 
-				<aui:option label="<%= pageDeltaValues[i] %>" selected="<%= pageDelta == GetterUtil.getInteger(pageDeltaValues[i]) %>" />
+				<aui:option label="<%= pageDelta %>" selected="<%= pageDelta == pageDeltaValue %>" />
 
 			<%
 			}
 			%>
+
 	    </aui:select>
 	</aui:fieldset>
+
 	<aui:button-row>
 		<aui:button type="submit" />
 	</aui:button-row>
 </aui:form>
 
 <aui:script>
-Liferay.provide(
-	window,
-	'<portlet:namespace />saveConfiguration',
-	function() {
-		submitForm(document.<portlet:namespace />fm);
-	},
-	['liferay-util-list-fields']
-);
+	Liferay.provide(
+		window,
+		'<portlet:namespace />saveConfiguration',
+		function() {
+			submitForm(document.<portlet:namespace />fm);
+		},
+		['liferay-util-list-fields']
+	);
 </aui:script>
