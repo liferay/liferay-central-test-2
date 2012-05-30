@@ -270,12 +270,10 @@ String editorContent = emailBody;
 				<aui:select label="maximum-items-to-display" name="preferences--pageDelta--">
 
 					<%
-					String[] pageDeltaValues = PropsUtil.getArray(PropsKeys.BLOGS_PAGE_DELTA_VALUES);
-
-					for (int i = 0; i < pageDeltaValues.length; i++) {
+					for (int pageDeltaValue : PropsValues.BLOGS_PAGE_DELTA_VALUES) {
 					%>
 
-						<aui:option label="<%= pageDeltaValues[i] %>" selected="<%= pageDelta == GetterUtil.getInteger(pageDeltaValues[i]) %>" />
+						<aui:option label="<%= pageDelta %>" selected="<%= pageDelta == pageDeltaValue %>" />
 
 					<%
 					}
