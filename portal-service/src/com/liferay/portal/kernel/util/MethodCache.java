@@ -16,8 +16,8 @@ package com.liferay.portal.kernel.util;
 
 import java.lang.reflect.Method;
 
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author Michael C. Han
