@@ -799,12 +799,6 @@ set JAVA_OPTS=-Dfile.encoding=UTF8 -Djava.net.preferIPv4Stack=true -Djonas.felix
 
 				<echo>Installing liferay-portal.war.</echo>
 
-				<property name="app.server.websphere.instance.dir.abs" location="${app.server.websphere.instance.dir}" />
-
-				<pathconvert property="app.server.websphere.instance.dir.unix" targetos="unix">
-					<path location="${app.server.websphere.instance.dir.abs}" />
-				</pathconvert>
-
 				<echo file="wsadmin.py">
 def uninstallApp(appName):
 	app = ''
