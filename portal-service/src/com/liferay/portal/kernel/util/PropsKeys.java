@@ -215,6 +215,8 @@ public interface PropsKeys {
 
 	public static final String BLOGS_ENTRY_COMMENTS_ENABLED = "blogs.entry.comments.enabled";
 
+	public static final String BLOGS_ENTRY_PAGE_DELTA_VALUES = "blogs.entry.page.delta.values";
+
 	public static final String BLOGS_ENTRY_PREVIOUS_AND_NEXT_NAVIGATION_ENABLED = "blogs.entry.previous.and.next.navigation.enabled";
 
 	public static final String BLOGS_IMAGE_EXTENSIONS = "blogs.image.extensions";
@@ -226,8 +228,6 @@ public interface PropsKeys {
 	public static final String BLOGS_LINKBACK_JOB_INTERVAL = "blogs.linkback.job.interval";
 
 	public static final String BLOGS_PAGE_ABSTRACT_LENGTH = "blogs.page.abstract.length";
-
-	public static final String BLOGS_PAGE_DELTA_VALUES = "blogs.page.delta.values";
 
 	public static final String BLOGS_PING_GOOGLE_ENABLED = "blogs.ping.google.enabled";
 
