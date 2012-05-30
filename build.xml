@@ -801,31 +801,34 @@ set JAVA_OPTS=-Dfile.encoding=UTF8 -Djava.net.preferIPv4Stack=true -Djonas.felix
 
 				<property name="app.server.websphere.instance.dir.abs" location="${app.server.websphere.instance.dir}" />
 
-				<pathconvert property="app.server.websphere.instance.dir.abs.unix" targetos="unix">
+				<pathconvert property="app.server.websphere.instance.dir.unix" targetos="unix">
 					<path location="${app.server.websphere.instance.dir.abs}" />
 				</pathconvert>
-
 
 				<echo file="wsadmin.py">
 def uninstallApp(appName):
 	app = ''
-	appList = AdminApp.list( )
+	appList = AdminApp.list()
+
 	if len(appList) > 0:
 		for item in appList.split('\n'):
 			item = item.rstrip()
+
 			if item.find(appName) >= 0:
 				app = item
+
 				break
 
 	if app != '':
 		print AdminApp.uninstall(appName)
+
 		print AdminConfig.save()
 
 print AdminApp.list()
 
 uninstallApp('DefaultApplication')
 
-print AdminApp.install('${app.server.websphere.instance.dir.abs.unix}/wsadmin-deploy/liferay-portal.war', '[-appname liferay-portal -contextroot /]')
+print AdminApp.install('${app.server.websphere.instance.dir.unix}/wsadmin-deploy/liferay-portal.war', '[-appname liferay-portal -contextroot /]')
 
 print AdminConfig.save()
 
