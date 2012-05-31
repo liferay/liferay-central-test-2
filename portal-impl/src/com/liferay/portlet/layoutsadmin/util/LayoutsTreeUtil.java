@@ -68,7 +68,6 @@ public class LayoutsTreeUtil {
 		boolean incomplete = ParamUtil.getBoolean(request, "incomplete", true);
 		int start = ParamUtil.getInteger(request, "start");
 		int end = start + PropsValues.LAYOUT_MANAGE_PAGES_INITIAL_CHILDREN;
-		String treeId = ParamUtil.getString(request, "treeId");
 
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
@@ -80,6 +79,8 @@ public class LayoutsTreeUtil {
 			Layout selLayout = LayoutLocalServiceUtil.getLayout(selPlid);
 
 			layoutAncestors = selLayout.getAncestors();
+
+			String treeId = ParamUtil.getString(request, "treeId");
 
 			String paginationJSON = SessionClicks.get(
 				request, treeId + "PaginationMap", StringPool.BLANK);
