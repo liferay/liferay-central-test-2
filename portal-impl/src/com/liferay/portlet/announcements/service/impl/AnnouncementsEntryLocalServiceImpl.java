@@ -457,9 +457,8 @@ public class AnnouncementsEntryLocalServiceImpl
 		subscriptionSender.setCompanyId(entry.getCompanyId());
 		subscriptionSender.setContextAttributes(
 			"[$ENTRY_CONTENT$]", HtmlUtil.extractText(entry.getContent()),
-			"[$ENTRY_ID$]", entry.getEntryId(),
-			"[$ENTRY_TITLE$]", entry.getTitle(),
-			"[$ENTRY_TYPE$]",
+			"[$ENTRY_ID$]", entry.getEntryId(), "[$ENTRY_TITLE$]",
+			entry.getTitle(), "[$ENTRY_TYPE$]",
 			LanguageUtil.get(company.getLocale(), entry.getType()),
 			"[$ENTRY_URL$]", entry.getUrl(), "[$PORTLET_NAME$]",
 			LanguageUtil.get(
