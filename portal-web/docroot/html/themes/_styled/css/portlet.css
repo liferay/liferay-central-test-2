@@ -104,8 +104,8 @@ body.portlet {
 	}
 
 	.portlet-title-default, .portlet-actions {
-		vertical-align: top;
 		min-height: 20px;
+		vertical-align: top;
 	}
 
 	.portlet-action-separator {
