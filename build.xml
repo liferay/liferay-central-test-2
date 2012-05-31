@@ -818,19 +818,13 @@ def uninstallApp(appName):
 
 		print AdminConfig.save()
 
-print AdminApp.list()
-
 uninstallApp('DefaultApplication')
 
 print AdminApp.install('${app.server.websphere.instance.dir.unix}/wsadmin-deploy/liferay-portal.war', '[-appname liferay-portal -contextroot /]')
 
 print AdminConfig.save()
 
-print AdminApp.list()
-
 appManager = AdminControl.queryNames('type=ApplicationManager,process=server1,*')
-
-print appManager
 
 print AdminControl.invoke(appManager, 'startApplication', 'liferay-portal')</echo>
 
