@@ -96,7 +96,8 @@ public class PortalRuntimeChecker extends BaseChecker {
 
 			if (!_threadPoolExecutorNames.contains(threadPoolExecutorName)) {
 				throwSecurityException(
-					_log, "Attempted to modify Thread pool executor " +
+					_log,
+					"Attempted to modify thread pool executor " +
 						threadPoolExecutorName);
 			}
 		}
@@ -198,7 +199,7 @@ public class PortalRuntimeChecker extends BaseChecker {
 
 			for (String threadPoolExecutorName : threadPoolExecutorNames) {
 				_log.debug(
-					"Allowing Thread pool executor " + threadPoolExecutorName);
+					"Allowing thread pool executor " + threadPoolExecutorName);
 			}
 		}
 	}
