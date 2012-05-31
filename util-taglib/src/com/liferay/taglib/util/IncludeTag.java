@@ -75,7 +75,7 @@ public class IncludeTag extends AttributesTagSupport {
 			callSetAttributes();
 
 			if (themeResourceExists(page)) {
-				_doIncludeTheme(page);
+				doIncludeTheme(page);
 
 				return EVAL_PAGE;
 			}
@@ -83,7 +83,7 @@ public class IncludeTag extends AttributesTagSupport {
 				return processEndTag();
 			}
 			else {
-				_doInclude(page);
+				doInclude(page);
 
 				return EVAL_PAGE;
 			}
@@ -117,7 +117,7 @@ public class IncludeTag extends AttributesTagSupport {
 			callSetAttributes();
 
 			if (themeResourceExists(page)) {
-				_doIncludeTheme(page);
+				doIncludeTheme(page);
 
 				return EVAL_BODY_INCLUDE;
 			}
@@ -125,7 +125,7 @@ public class IncludeTag extends AttributesTagSupport {
 				return processStartTag();
 			}
 			else {
-				_doInclude(page);
+				doInclude(page);
 
 				return EVAL_BODY_INCLUDE;
 			}
@@ -240,6 +240,39 @@ public class IncludeTag extends AttributesTagSupport {
 		}
 	}
 
+	protected void doInclude(String page) throws JspException {
+		try {
+			include(page);
+		}
+		catch (Exception e) {
+			HttpServletRequest request = getServletRequest();
+
+			String currentURL = (String)request.getAttribute(
+				WebKeys.CURRENT_URL);
+
+			_log.error(
+				"Current URL " + currentURL + " generates exception: " +
+					e.getMessage());
+
+			LogUtil.log(_log, e);
+
+			if (e instanceof JspException) {
+				throw (JspException)e;
+			}
+		}
+	}
+
+	protected void doIncludeTheme(String page) throws Exception {
+		ServletContext servletContext = getServletContext();
+		HttpServletRequest request = getServletRequest();
+		HttpServletResponse response = getServletResponse();
+
+		Theme theme = (Theme)request.getAttribute(WebKeys.THEME);
+
+		ThemeUtil.include(
+			servletContext, request, response, pageContext, page, theme);
+	}
+
 	protected String getCustomPage(
 		ServletContext servletContext, HttpServletRequest request) {
 
@@ -322,6 +355,10 @@ public class IncludeTag extends AttributesTagSupport {
 		return _TRIM_NEW_LINES;
 	}
 
+	protected boolean isUseCustomPage() {
+		return _useCustomPage;
+	}
+
 	protected int processEndTag() throws Exception {
 		return EVAL_PAGE;
 	}
@@ -361,39 +398,6 @@ public class IncludeTag extends AttributesTagSupport {
 		}
 
 		return exists;
-	}
-
-	private void _doInclude(String page) throws JspException {
-		try {
-			include(page);
-		}
-		catch (Exception e) {
-			HttpServletRequest request = getServletRequest();
-
-			String currentURL = (String)request.getAttribute(
-				WebKeys.CURRENT_URL);
-
-			_log.error(
-				"Current URL " + currentURL + " generates exception: " +
-					e.getMessage());
-
-			LogUtil.log(_log, e);
-
-			if (e instanceof JspException) {
-				throw (JspException)e;
-			}
-		}
-	}
-
-	private void _doIncludeTheme(String page) throws Exception {
-		ServletContext servletContext = getServletContext();
-		HttpServletRequest request = getServletRequest();
-		HttpServletResponse response = getServletResponse();
-
-		Theme theme = (Theme)request.getAttribute(WebKeys.THEME);
-
-		ThemeUtil.include(
-			servletContext, request, response, pageContext, page, theme);
 	}
 
 	private static final boolean _CLEAN_UP_SET_ATTRIBUTES = false;
