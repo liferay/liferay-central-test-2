@@ -35,21 +35,15 @@ public class MBeanChecker extends BaseChecker {
 		String actions = permission.getActions();
 
 		if ((permission instanceof MBeanPermission) &&
-			(actions.equals("isInstanceOf") ||
-			 actions.equals("registerMBean"))) {
-
-			// Explicitly allow these operations
+			(actions.equals(MBEAN_PERMISSION_IS_INSTANCE_OF) ||
+			 actions.equals(MBEAN_PERMISSION_REGISTER_MBEAN))) {
 		}
 		else if ((permission instanceof MBeanTrustPermission) &&
-				 (name.equals("register"))) {
-
-			// Explicitly allow these operations
+				 name.equals(MBEAN_TRUST_PERMISSION_REGISTER)) {
 		}
 		else {
-			// Disallow all other operations
-
 			throwSecurityException(
-				_log, "Attempted to perform mbean operation " + permission);
+				_log, "Attempted to perform MBean operation " + permission);
 		}
 	}
 
