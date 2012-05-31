@@ -861,6 +861,7 @@ if ((layout.isTypePanel() || layout.isTypeControlPanel()) && !portletDisplay.get
 		}
 
 		PortletRequestProcessor portletReqProcessor = (PortletRequestProcessor)portletCtx.getAttribute(WebKeys.PORTLET_STRUTS_PROCESSOR);
+
 		boolean addNotAjaxablePortlet = !portlet.isAjaxable() && cmd.equals("add");
 
 		if ((portletReqProcessor != null) && !addNotAjaxablePortlet) {
