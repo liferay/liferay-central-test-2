@@ -81,8 +81,7 @@ public class PortalRuntimeChecker extends BaseChecker {
 
 			if (!_searchEngineIds.contains(searchEngineId)) {
 				throwSecurityException(
-					_log, "Attempted to perform an operation on search " +
-						"engine " + searchEngineId);
+					_log, "Attempted to get search engine " + searchEngineId);
 			}
 		}
 		else if (name.equals(PORTAL_RUNTIME_PERMISSION_SET_BEAN_PROPERTY)) {
@@ -189,12 +188,10 @@ public class PortalRuntimeChecker extends BaseChecker {
 		_searchEngineIds = getPropertySet("security-manager-search-engine-ids");
 
 		if (_log.isDebugEnabled()) {
-			Set<String> searchEngineIds = new TreeSet<String>(
-				_searchEngineIds);
+			Set<String> searchEngineIds = new TreeSet<String>(_searchEngineIds);
 
 			for (String searchEngineId : searchEngineIds) {
-				_log.debug(
-					"Allowing operations on search engine " + searchEngineId);
+				_log.debug("Allowing search engine " + searchEngineId);
 			}
 		}
 	}

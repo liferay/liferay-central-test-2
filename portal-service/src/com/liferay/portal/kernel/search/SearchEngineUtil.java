@@ -267,13 +267,13 @@ public class SearchEngineUtil {
 		if (searchEngine == null) {
 			if (getDefaultSearchEngineId().equals(searchEngineId)) {
 				throw new IllegalStateException(
-					"There is no default search engine configured with name: " +
+					"There is no default search engine configured with ID " +
 						getDefaultSearchEngineId());
 			}
 
 			if (_log.isWarnEnabled()) {
 				_log.warn(
-					"There is no search engine configured with the name: " +
+					"There is no search engine configured with ID " +
 						searchEngineId);
 			}
 		}
@@ -281,17 +281,17 @@ public class SearchEngineUtil {
 		return searchEngine;
 	}
 
-	public static SearchEngine getSearchEngineQuiet(String searchEngineId) {
-		PortalRuntimePermission.checkSearchEngine(searchEngineId);
-
-		return _searchEngines.get(searchEngineId);
-	}
-
 	public static Set<String> getSearchEngineIds() {
 		PortalRuntimePermission.checkGetBeanProperty(
 			SearchEngineUtil.class, "searchEngineIds");
 
 		return _searchEngines.keySet();
+	}
+
+	public static SearchEngine getSearchEngineSilent(String searchEngineId) {
+		PortalRuntimePermission.checkSearchEngine(searchEngineId);
+
+		return _searchEngines.get(searchEngineId);
 	}
 
 	public static SearchPermissionChecker getSearchPermissionChecker() {

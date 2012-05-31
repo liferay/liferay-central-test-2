@@ -232,7 +232,7 @@ public abstract class AbstractSearchEngineConfigurator {
 		searchEngineRegistration.setSearchWriterDestinationName(searchEngineId);
 
 		SearchEngine originalSearchEngine =
-			SearchEngineUtil.getSearchEngineQuiet(searchEngineId);
+			SearchEngineUtil.getSearchEngineSilent(searchEngineId);
 
 		if (originalSearchEngine != null) {
 			searchEngineRegistration.setOverride(true);
