@@ -27,6 +27,13 @@ public interface PACLConstants {
 
 	public static final String FILE_PERMISSION_ACTION_WRITE = "write";
 
+	public static final String MBEAN_PERMISSION_IS_INSTANCE_OF = "isInstanceOf";
+
+	public static final String MBEAN_PERMISSION_REGISTER_MBEAN =
+		"registerMBean";
+
+	public static final String MBEAN_TRUST_PERMISSION_REGISTER = "register";
+
 	public static final String NET_PERMISSION_GET_PROXY_SELECTOR =
 		"getProxySelector";
 

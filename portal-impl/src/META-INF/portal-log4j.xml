@@ -494,6 +494,10 @@
 		<priority value="WARN" />
 	</category>
 
+	<category name="com.liferay.portal.security.pacl.checker.MBeanChecker">
+		<priority value="ERROR" />
+	</category>
+
 	<category name="com.liferay.portal.security.pacl.checker.NetChecker">
 		<priority value="ERROR" />
 	</category>
