@@ -150,15 +150,15 @@ public class PortalExecutorManagerImpl implements PortalExecutorManager {
 		for (Map.Entry<String, ThreadPoolExecutor> entry :
 				_threadPoolExecutors.entrySet()) {
 
-			String name = entry.getKey();
-			ThreadPoolExecutor threadPoolExecutor = entry.getValue();
-
 			try {
 				SecurityManager securityManager = System.getSecurityManager();
 
 				if (securityManager != null) {
+					String name = entry.getKey();
+
 					Permission permission = new PortalRuntimePermission(
-						PACLConstants.PORTAL_RUNTIME_PERMISSION_THREAD_POOL_EXECUTOR,
+						PACLConstants.
+							PORTAL_RUNTIME_PERMISSION_THREAD_POOL_EXECUTOR,
 						name);
 
 					securityManager.checkPermission(permission);
@@ -169,6 +169,8 @@ public class PortalExecutorManagerImpl implements PortalExecutorManager {
 
 				continue;
 			}
+
+			ThreadPoolExecutor threadPoolExecutor = entry.getValue();
 
 			if (interrupt) {
 				threadPoolExecutor.shutdownNow();
