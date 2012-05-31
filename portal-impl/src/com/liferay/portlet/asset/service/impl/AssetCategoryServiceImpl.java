@@ -151,7 +151,9 @@ public class AssetCategoryServiceImpl extends AssetCategoryServiceBaseImpl {
 					curCategory.getParentCategoryId());
 
 				names.add(parentCategory.getName());
-				names.add(StringPool.SLASH);
+				names.add(
+					StringPool.SPACE + StringPool.GREATER_THAN +
+						StringPool.SPACE);
 
 				curCategory = parentCategory;
 			}
@@ -161,9 +163,8 @@ public class AssetCategoryServiceImpl extends AssetCategoryServiceBaseImpl {
 			AssetVocabulary vocabulary = assetVocabularyService.getVocabulary(
 				category.getVocabularyId());
 
-			StringBundler sb = new StringBundler(2 + names.size());
+			StringBundler sb = new StringBundler(1 + names.size());
 
-			sb.append(" - ");
 			sb.append(vocabulary.getName());
 			sb.append(names.toArray(new String[names.size()]));
 
