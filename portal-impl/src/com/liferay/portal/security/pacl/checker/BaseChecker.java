@@ -201,6 +201,17 @@ public abstract class BaseChecker implements Checker, PACLConstants {
 						"/wlserver/server/lib/weblogic.jar!/");
 				}
 			}
+			else if (ServerDetector.isWebSphere()) {
+				if (callerClassName.equals(
+						_CLASS_NAME_JSP_EXTENSION_CLASS_LOADER) ||
+					callerClassName.equals(_ClASS_NAME_JSP_TRANSLATOR_UTIL)) {
+
+					String classLocation = PACLClassUtil.getClassLocation(
+						callerClass);
+
+					return classLocation.startsWith("bundleresource://");
+				}
+			}
 
 			if (allowed == null) {
 				continue;
@@ -269,11 +280,17 @@ public abstract class BaseChecker implements Checker, PACLConstants {
 	private static final String _ClASS_NAME_JSP_COMPILATION_CONTEXT =
 		"org.apache.jasper.JspCompilationContext";
 
+	private static final String _CLASS_NAME_JSP_EXTENSION_CLASS_LOADER =
+		"com.ibm.ws.jsp.webcontainerext.JSPExtensionClassLoader";
+
 	private static final String _ClASS_NAME_JSP_MANAGER =
 		"com.caucho.jsp.JspManager";
 
 	private static final String _CLASS_NAME_JSP_STUB =
 		"weblogic.servlet.jsp.JspStub";
+
+	private static final String _ClASS_NAME_JSP_TRANSLATOR_UTIL =
+		"com.ibm.ws.jsp.translator.utils.JspTranslatorUtil";
 
 	private static final String _ClASS_NAME_PAGE_MANAGER =
 		"com.caucho.jsp.PageManager";

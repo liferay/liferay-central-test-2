@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.lang.PortalSecurityManagerThreadLocal;
 import com.liferay.portal.security.pacl.PACLClassUtil;
 import com.liferay.portal.servlet.DirectServletRegistryImpl;
@@ -92,7 +93,8 @@ public class FileChecker extends BaseChecker {
 			"${org.apache.geronimo.home.dir}",
 			"${plugin.servlet.context.name}",
 			"${release.info.version}",
-			"${weblogic.domain.dir}"
+			"${weblogic.domain.dir}",
+			"${websphere.profile.dir}"
 		};
 
 		String installedDir = StringPool.BLANK;
@@ -114,7 +116,8 @@ public class FileChecker extends BaseChecker {
 			System.getProperty("jetty.home"), System.getProperty("jonas.base"),
 			_portalDir, System.getProperty("org.apache.geronimo.home.dir"),
 			System.getProperty("resin.home"), getServletContextName(),
-			ReleaseInfo.getVersion(), System.getenv("DOMAIN_HOME")
+			ReleaseInfo.getVersion(), System.getenv("DOMAIN_HOME"),
+			System.getenv("USER_INSTALL_ROOT")
 		};
 
 		if (_log.isDebugEnabled()) {
@@ -312,7 +315,9 @@ public class FileChecker extends BaseChecker {
 
 		// Shared libs
 
-		paths.add(_globalSharedLibDir + "-");
+		if (Validator.isNotNull(_globalSharedLibDir)) {
+			paths.add(_globalSharedLibDir + "-");
+		}
 
 		// Plugin
 
@@ -389,10 +394,17 @@ public class FileChecker extends BaseChecker {
 			}
 
 			if ((callerClass == DirectServletRegistryImpl.class) ||
-				(callerClass == FileAvailabilityUtil.class) ||
-				ClassLoader.class.isAssignableFrom(callerClass)) {
+				(callerClass == FileAvailabilityUtil.class)) {
 
 				return true;
+			}
+
+			if (ClassLoader.class.isAssignableFrom(callerClass)) {
+				String callerClassName = callerClass.getName();
+
+				if (!callerClassName.equals(_CLASS_NAME_METHOD_UTIL)) {
+					return true;
+				}
 			}
 
 			if (ServerDetector.isGlassfish()) {
@@ -449,6 +461,13 @@ public class FileChecker extends BaseChecker {
 				}
 			}
 		}
+		else if (ServerDetector.isWebSphere()) {
+			if (isJSPCompiler(
+					permission.getName(), FILE_PERMISSION_ACTION_WRITE)) {
+
+				return true;
+			}
+		}
 
 		return false;
 	}
@@ -466,6 +485,9 @@ public class FileChecker extends BaseChecker {
 
 	private static final String _CLASS_NAME_FILE_PATH =
 		"com.caucho.vfs.FilePath";
+
+	private static final String _CLASS_NAME_METHOD_UTIL =
+		"sun.reflect.misc.MethodUtil";
 
 	private static Log _log = LogFactoryUtil.getLog(FileChecker.class);
 
