@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.servlet.PortletServlet;
 import com.liferay.portal.kernel.servlet.SecurePluginContextListener;
 import com.liferay.portal.kernel.servlet.SecureServlet;
 import com.liferay.portal.kernel.servlet.filters.invoker.InvokerFilter;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
@@ -211,6 +212,10 @@ public class BaseDeployer implements Deployer {
 
 			throw new IllegalArgumentException(
 				appServerType + " is not a valid application server type");
+		}
+
+		if (appServerType.equals(ServerDetector.WEBSPHERE_ID)) {
+			unpackWar = false;
 		}
 
 		if (Validator.isNotNull(jbossPrefix) &&
@@ -623,7 +628,7 @@ public class BaseDeployer implements Deployer {
 			_log.debug("Excludes " + excludes);
 		}
 
-		if (!unpackWar || appServerType.equals(ServerDetector.WEBSPHERE_ID)) {
+		if (!unpackWar) {
 			File tempDir = new File(
 				SystemProperties.get(SystemProperties.TMP_DIR) +
 					File.separator + Time.getTimestamp());
@@ -878,15 +883,7 @@ public class BaseDeployer implements Deployer {
 					PluginPackageUtil.endPluginPackageInstallation(context);
 				}
 				else {
-					if (appServerType.equals(ServerDetector.GLASSFISH_ID)) {
-						FileUtil.delete(
-							destDir + "/.autodeploystatus/" + deployDir);
-					}
-					else if (appServerType.equals(ServerDetector.JBOSS_ID)) {
-						FileUtil.write(
-							destDir + "/" + deployDir + ".dodeploy",
-							StringPool.BLANK);
-					}
+					postDeploy(destDir, deployDir);
 				}
 			}
 		}
@@ -1370,6 +1367,118 @@ public class BaseDeployer implements Deployer {
 		}
 
 		CopyTask.copyDirectory(mergeDir, targetDir, null, null, true, false);
+	}
+
+	public void postDeploy(String destDir, String deployDir) throws Exception {
+		if (appServerType.equals(ServerDetector.GLASSFISH_ID)) {
+			postDeployGlassfish(destDir, deployDir);
+		}
+		else if (appServerType.equals(ServerDetector.JBOSS_ID)) {
+			postDeployJBoss(destDir, deployDir);
+		}
+		else if (appServerType.equals(ServerDetector.WEBSPHERE_ID)) {
+			postDeployWebSphere(destDir, deployDir);
+		}
+	}
+
+	public void postDeployGlassfish(String destDir, String deployDir)
+		throws Exception {
+
+		FileUtil.delete(destDir + "/.autodeploystatus/" + deployDir);
+	}
+
+	public void postDeployJBoss(String destDir, String deployDir)
+		throws Exception {
+
+		FileUtil.write(
+			destDir + "/" + deployDir + ".dodeploy", StringPool.BLANK);
+	}
+
+	public void postDeployWebSphere(String destDir, String deployDir)
+		throws Exception {
+
+		if (Validator.isNull(
+				PropsValues.AUTO_DEPLOY_WEBSPHERE_WSADMIN_APP_MANAGER_QUERY)) {
+
+			if (_log.isInfoEnabled()) {
+				StringBundler sb = new StringBundler();
+
+				sb.append("Do not install the plugin with wsadmin since the ");
+				sb.append("property \"");
+				sb.append(
+					PropsKeys.AUTO_DEPLOY_WEBSPHERE_WSADMIN_APP_MANAGER_QUERY);
+				sb.append("\"is not configured");
+
+				_log.info(sb.toString());
+			}
+
+			return;
+		}
+
+		String wsadminContent = FileUtil.read(
+			DeployUtil.getResourcePath("wsadmin.py"));
+
+		String pluginServletContextName = deployDir.substring(
+			0, deployDir.length() - 4);
+
+		wsadminContent = StringUtil.replace(
+			wsadminContent,
+			new String[] {
+				"${auto.deploy.dest.dir}",
+				"${auto.deploy.websphere.wsadmin.app.manager.query}",
+				"${plugin.servlet.context.name}"
+			},
+			new String[] {
+				destDir,
+				PropsValues.AUTO_DEPLOY_WEBSPHERE_WSADMIN_APP_MANAGER_QUERY,
+				pluginServletContextName
+			});
+
+		String wsadminFileName = FileUtil.createTempFileName("py");
+
+		FileUtil.write(wsadminFileName, wsadminContent);
+
+		String webSphereHome = System.getenv("WAS_HOME");
+
+		if (_log.isInfoEnabled()) {
+			_log.info(
+				"Installing plugin by executing " + webSphereHome +
+					"\\bin\\wsadmin.bat -f " + wsadminFileName);
+		}
+
+		ProcessBuilder processBuilder = new ProcessBuilder(
+			webSphereHome + "\\bin\\wsadmin.bat", "-f", wsadminFileName);
+
+		processBuilder.redirectErrorStream(true);
+
+		Process process = processBuilder.start();
+
+		if (_log.isInfoEnabled()) {
+			InputStream inputStream = process.getInputStream();
+
+			String output = StringUtil.read(inputStream);
+
+			for (String line : StringUtil.split(output, CharPool.NEW_LINE)) {
+				_log.info("Process output: " + line);
+			}
+
+			inputStream.close();
+
+			int exitValue = process.exitValue();
+
+			if (exitValue == 0) {
+				_log.info(
+					"Successfully executed command with an exit value of " +
+						exitValue);
+			}
+			else {
+				_log.info(
+					"Unsuccessfully executed command with an exit value of " +
+						exitValue);
+			}
+		}
+
+		FileUtil.delete(wsadminFileName);
 	}
 
 	public Map<String, String> processPluginPackageProperties(

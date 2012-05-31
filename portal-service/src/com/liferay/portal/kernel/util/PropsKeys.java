@@ -189,6 +189,8 @@ public interface PropsKeys {
 
 	public static final String AUTO_DEPLOY_UNPACK_WAR = "auto.deploy.unpack.war";
 
+	public static final String AUTO_DEPLOY_WEBSPHERE_WSADMIN_APP_MANAGER_QUERY = "auto.deploy.websphere.wsadmin.app.manager.query";
+
 	public static final String AUTO_LOGIN_HOOKS = "auto.login.hooks";
 
 	public static final String AUTO_LOGIN_IGNORE_HOSTS = "auto.login.ignore.hosts";
