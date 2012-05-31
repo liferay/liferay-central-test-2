@@ -104,6 +104,7 @@ request.setAttribute("view_folders.jsp-total", String.valueOf(total));
 
 						<%
 						String navigation = ParamUtil.getString(request, "navigation", "home");
+
 						String structureId = ParamUtil.getString(request, "structureId");
 						%>
 
@@ -140,22 +141,22 @@ request.setAttribute("view_folders.jsp-total", String.valueOf(total));
 						</li>
 
 						<%
-						List<JournalStructure> journalStructures = JournalStructureLocalServiceUtil.getStructures(scopeGroupId);
+						List<JournalStructure> structures = JournalStructureLocalServiceUtil.getStructures(scopeGroupId);
 
-						for (JournalStructure journalStructure : journalStructures) {
+						for (JournalStructure structure : structures) {
 						%>
 
 							<liferay-portlet:renderURL copyCurrentRenderParameters="<%= false %>" varImpl="viewJournalStructureArticlesURL">
 								<portlet:param name="struts_action" value="/journal/view" />
-								<portlet:param name="structureId" value="<%= journalStructure.getStructureId() %>" />
+								<portlet:param name="structureId" value="<%= structure.getStructureId() %>" />
 							</liferay-portlet:renderURL>
 
-							<li class="folder <%= structureId.equals(journalStructure.getStructureId()) ? "selected" : StringPool.BLANK %>">
+							<li class="folder <%= structureId.equals(structure.getStructureId()) ? "selected" : StringPool.BLANK %>">
 								<a class="browse-folder" href="<%= viewJournalStructureArticlesURL.toString() %>">
 									<liferay-ui:icon image="copy" message="" />
 
 									<span class="article-title">
-										<%= journalStructure.getName(locale) %>
+										<%= structure.getName(locale) %>
 									</span>
 								</a>
 							</li>
