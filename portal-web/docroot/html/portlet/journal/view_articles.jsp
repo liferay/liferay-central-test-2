@@ -93,7 +93,7 @@ int total = 0;
 			</c:otherwise>
 		</c:choose>
 	</c:when>
-	<c:when test="<%= displayTerms.getNavigation().equals("mine") %>">
+	<c:when test='<%= displayTerms.getNavigation().equals("mine") %>'>
 
 		<%
 		results = JournalArticleServiceUtil.getArticlesByUserId(scopeGroupId, themeDisplay.getUserId(), searchContainer.getStart(), searchContainer.getEnd(), null);

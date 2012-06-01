@@ -174,9 +174,9 @@ public class ArticleDisplayTerms extends DisplayTerms {
 	protected String description;
 	protected Date displayDateGT;
 	protected Date displayDateLT;
-	protected String navigation;
 	protected long folderId;
 	protected long groupId;
+	protected String navigation;
 	protected String status;
 	protected String structureId;
 	protected String templateId;
