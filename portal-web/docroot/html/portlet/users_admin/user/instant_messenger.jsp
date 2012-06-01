@@ -39,8 +39,6 @@ Contact selContact = (Contact)request.getAttribute("user.selContact");
 
 			<aui:input label="jabber" name="jabberSn" />
 
-			<aui:input label="windows-live-messenger" name="msnSn" />
-
 			<div class="instant-messenger">
 				<aui:input label="skype" name="skypeSn" />
 
@@ -48,6 +46,8 @@ Contact selContact = (Contact)request.getAttribute("user.selContact");
 					<a href="callto://<%= HtmlUtil.escapeAttribute(selContact.getSkypeSn()) %>"><img alt="<liferay-ui:message key="call-this-user" />" src="http://mystatus.skype.com/smallicon/<%= HtmlUtil.escapeAttribute(selContact.getSkypeSn()) %>" /></a>
 				</c:if>
 			</div>
+
+			<aui:input label="windows-live-messenger" name="msnSn" />
 
 			<div class="instant-messenger">
 				<aui:input label="yim" name="ymSn" />

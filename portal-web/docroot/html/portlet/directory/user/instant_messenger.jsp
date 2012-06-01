@@ -60,15 +60,6 @@ String ym = selContact.getYmSn();
 			</dd>
 		</c:if>
 
-		<c:if test="<%= Validator.isNotNull(msn) %>">
-			<dt>
-				<liferay-ui:message key="windows-live-messenger" />
-			</dt>
-			<dd>
-				<%= HtmlUtil.escape(msn) %>
-			</dd>
-		</c:if>
-
 		<c:if test="<%= Validator.isNotNull(skype) %>">
 			<dt>
 				<liferay-ui:message key="skype" />
@@ -76,6 +67,15 @@ String ym = selContact.getYmSn();
 			<dd>
 				<%= HtmlUtil.escape(skype) %>
 				<a href="callto://<%= HtmlUtil.escapeAttribute(skype) %>"><img alt="<liferay-ui:message key="call-this-user" />" class="instant-messenger-logo" src="http://mystatus.skype.com/smallicon/<%= HtmlUtil.escapeAttribute(skype) %>" /></a>
+			</dd>
+		</c:if>
+
+		<c:if test="<%= Validator.isNotNull(msn) %>">
+			<dt>
+				<liferay-ui:message key="windows-live-messenger" />
+			</dt>
+			<dd>
+				<%= HtmlUtil.escape(msn) %>
 			</dd>
 		</c:if>
 
