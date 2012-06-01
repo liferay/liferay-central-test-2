@@ -15,6 +15,7 @@
 package com.liferay.portalweb.portal.controlpanel.webcontent.wcwebcontent;
 
 import com.liferay.portalweb.portal.BaseTestSuite;
+import com.liferay.portalweb.portal.controlpanel.webcontent.wcwebcontent.addwcwebcontent.AddWCWebContentTests;
 import com.liferay.portalweb.portal.controlpanel.webcontent.wcwebcontent.addwebcontent.AddWebContentTests;
 import com.liferay.portalweb.portal.controlpanel.webcontent.wcwebcontent.addwebcontentapproved.AddWebContentApprovedTests;
 import com.liferay.portalweb.portal.controlpanel.webcontent.wcwebcontent.addwebcontentdraft.AddWebContentDraftTests;
@@ -32,6 +33,9 @@ import com.liferay.portalweb.portal.controlpanel.webcontent.wcwebcontent.assertd
 import com.liferay.portalweb.portal.controlpanel.webcontent.wcwebcontent.assertdisabledexpirebuttonwebcontentcp.AssertDisabledExpireButtonWebContentCPTests;
 import com.liferay.portalweb.portal.controlpanel.webcontent.wcwebcontent.deletewebcontentaction.DeleteWebContentActionTests;
 import com.liferay.portalweb.portal.controlpanel.webcontent.wcwebcontent.deletewebcontentnameescapecharacteraction.DeleteWebContentNameEscapeCharacterActionTests;
+import com.liferay.portalweb.portal.controlpanel.webcontent.wcwebcontent.editwcwebcontent.EditWCWebContentTests;
+import com.liferay.portalweb.portal.controlpanel.webcontent.wcwebcontent.expireeditwcwebcontentactions.ExpireEditWCWebContentActionsTests;
+import com.liferay.portalweb.portal.controlpanel.webcontent.wcwebcontent.expirewcwebcontentactions.ExpireWCWebContentActionsTests;
 import com.liferay.portalweb.portal.controlpanel.webcontent.wcwebcontent.expirewebcontentapproved.ExpireWebContentApprovedTests;
 import com.liferay.portalweb.portal.controlpanel.webcontent.wcwebcontent.incrementversionwebcontentapproved.IncrementVersionWebContentApprovedTests;
 import com.liferay.portalweb.portal.controlpanel.webcontent.wcwebcontent.searchwebcontent.SearchWebContentTests;
@@ -49,6 +53,7 @@ public class WCWebContentTestPlan extends BaseTestSuite {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
+		testSuite.addTest(AddWCWebContentTests.suite());
 		testSuite.addTest(AddWebContentTests.suite());
 		testSuite.addTest(AddWebContentApprovedTests.suite());
 		testSuite.addTest(AddWebContentDraftTests.suite());
@@ -67,6 +72,9 @@ public class WCWebContentTestPlan extends BaseTestSuite {
 		testSuite.addTest(DeleteWebContentActionTests.suite());
 		testSuite.addTest(
 			DeleteWebContentNameEscapeCharacterActionTests.suite());
+		testSuite.addTest(EditWCWebContentTests.suite());
+		testSuite.addTest(ExpireEditWCWebContentActionsTests.suite());
+		testSuite.addTest(ExpireWCWebContentActionsTests.suite());
 		testSuite.addTest(ExpireWebContentApprovedTests.suite());
 		testSuite.addTest(IncrementVersionWebContentApprovedTests.suite());
 		testSuite.addTest(SearchWebContentTests.suite());
