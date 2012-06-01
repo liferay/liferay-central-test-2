@@ -111,21 +111,19 @@ public class ProcessExecutor {
 					futureResponseProcessCallable = executorService.submit(
 						subprocessReactor);
 
-				// Only consider the newly created process has been managed
-				// after the SubprocessReactor is taken by the ThreadPool.
+				// Consider the newly created process as a managed process only
+				// after the subprocess reactor is taken by the thread pool
+
 				_managedProcesses.add(process);
 
 				return new ProcessExecutionFutureResult<T>(
 					futureResponseProcessCallable, process);
 			}
 			catch (RejectedExecutionException ree) {
-				// Concurrent destroy detected, cancel the current execution
-
 				process.destroy();
 
 				throw new ProcessException(
-					"Execution has been cancelled, because of a concurrent " +
-						"destroy.", ree);
+					"Cancelled execution because of a concurrent destroy", ree);
 			}
 		}
 		catch (IOException ioe) {
@@ -204,12 +202,13 @@ public class ProcessExecutor {
 			if (_executorService != null) {
 				_executorService.shutdownNow();
 
-				// At this point the ThreadPool will no longer take in any new
-				// SubprocessReactor, so we know the _managedProcesses is in a
-				// safe state.
-				// The worst case is this destroyer Thread and the ThreadPool
-				// Thread concurrently destroying the same Process, but this is
-				// JDK's job to ensure Process.destroy() thread safety.
+				// At this point, the thread pool will no longer take in any
+				// more subprocess reactors, so we know the list of managed
+				// processes is in a safe state. The worst case is that the
+				// destroyer thread and the thread pool thread concurrently
+				// destroy the same process, but this is JDK's job to ensure
+				// that processes are destroyed in a thread safe manner.
+
 				Iterator<Process> iterator = _managedProcesses.iterator();
 
 				while (iterator.hasNext()) {
@@ -220,9 +219,11 @@ public class ProcessExecutor {
 					iterator.remove();
 				}
 
-				// Because the current Thread has a more comprehensive view of
-				// _managedProcesses than any ThreadPool thread, after the
-				// previous iteration, we are safe to clear _managedProcesses.
+				// The current thread has a more comprehensive view of the list
+				// of managed processes than any thread pool thread. After the
+				// previous iteration, we are safe to clear the list of managed
+				// processes.
+
 				_managedProcesses.clear();
 
 				_executorService = null;
@@ -320,7 +321,6 @@ public class ProcessExecutor {
 	private static Log _log = LogFactoryUtil.getLog(ProcessExecutor.class);
 
 	private static volatile ExecutorService _executorService;
-
 	private static Set<Process> _managedProcesses =
 		new ConcurrentHashSet<Process>();
 
@@ -581,7 +581,9 @@ public class ProcessExecutor {
 				_managedProcesses.remove(_process);
 
 				if (resultProcessCallable != null) {
-					// Override previous ProcessException, if there is any.
+
+					// Override previous process exception if there was one
+
 					return resultProcessCallable;
 				}
 			}

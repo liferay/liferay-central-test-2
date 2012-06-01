@@ -76,9 +76,6 @@ public class ProcessExecutorTest extends BaseTestCase {
 	public void tearDown() throws Exception {
 		super.tearDown();
 
-		// Clean up ThreadPool after each test. This makes debug easier, because
-		// it prevents same name left over threads from previous tests.
-
 		ExecutorService executorService = _getExecutorService();
 
 		if (executorService != null) {
@@ -603,8 +600,6 @@ public class ProcessExecutorTest extends BaseTestCase {
 	public void testExecuteOnDestroy() throws Exception {
 		ExecutorService executorService = _invokeGetExecutorService();
 
-		// Directly shutdown internal ExecutorService
-
 		executorService.shutdownNow();
 
 		boolean result = executorService.awaitTermination(10, TimeUnit.SECONDS);
@@ -622,8 +617,8 @@ public class ProcessExecutorTest extends BaseTestCase {
 		catch (ProcessException pe) {
 			Throwable throwable = pe.getCause();
 
-			assertTrue(
-				throwable.getClass().equals(RejectedExecutionException.class));
+			assertEquals(
+				throwable.getClass(), RejectedExecutionException.class);
 		}
 	}
 
@@ -923,8 +918,6 @@ public class ProcessExecutorTest extends BaseTestCase {
 
 		Future<String> future = ProcessExecutor.execute(
 			_classPath, returnWithoutExitProcessCallable);
-
-		// Timeout wait for 10 times
 
 		for (int i = 0; i < 10; i++) {
 			try {
@@ -1515,11 +1508,12 @@ public class ProcessExecutorTest extends BaseTestCase {
 
 				System.out.flush();
 
-				// Forcibly restore System.out, this is a necessary protection
-				// for code coverage. Because cobertura's collector Thread will
-				// do output to System.out after sub-process's main Thread exit.
-				// Those info will also be captured by parent unit test process
-				// which will cause an assert failure.
+				// Forcibly restore System.out. This is a necessary protection
+				// for code coverage. Cobertura's collector thread will output
+				// to System.out after the subprocess's main thread has exited.
+				// That information will be captured by the parent unit test
+				// process which will cause an assert failure.
+
 				System.setOut(new PrintStream(fileOutputStream));
 			}
 			catch (Exception e) {
