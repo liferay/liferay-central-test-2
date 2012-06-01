@@ -26,7 +26,6 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.security.auth.AuthSettingsUtil;
 import com.liferay.portal.security.auth.AuthTokenUtil;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.util.PortalUtil;
@@ -135,7 +134,7 @@ public abstract class JSONAction extends Action {
 		if (PropsValues.AUTH_TOKEN_CHECK_ENABLED &&
 			PropsValues.JSON_SERVICE_AUTH_TOKEN_ENABLED) {
 
-			if (!AuthSettingsUtil.isAccessAllowed(request, _hostsAllowed)) {
+			if (!isAccessAllowed(request, _hostsAllowed)) {
 				AuthTokenUtil.check(request);
 			}
 		}
@@ -143,6 +142,30 @@ public abstract class JSONAction extends Action {
 
 	protected String getReroutePath() {
 		return null;
+	}
+
+	protected boolean isAccessAllowed(
+		HttpServletRequest request, Set<String> hostsAllowed) {
+
+		if (hostsAllowed.isEmpty()) {
+			return true;
+		}
+
+		String remoteAddr = request.getRemoteAddr();
+
+		if (hostsAllowed.contains(remoteAddr)) {
+			return true;
+		}
+
+		String computerAddress = PortalUtil.getComputerAddress();
+
+		if (computerAddress.equals(remoteAddr) &&
+			hostsAllowed.contains(_SERVER_IP)) {
+
+			return true;
+		}
+
+		return false;
 	}
 
 	protected boolean rerouteExecute(
@@ -193,6 +216,8 @@ public abstract class JSONAction extends Action {
 
 		return true;
 	}
+
+	private static final String _SERVER_IP = "SERVER_IP";
 
 	private static Log _log = LogFactoryUtil.getLog(JSONAction.class);
 
