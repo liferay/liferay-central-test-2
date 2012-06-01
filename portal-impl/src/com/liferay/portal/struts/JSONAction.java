@@ -23,6 +23,7 @@ import com.liferay.portal.kernel.servlet.ServletContextPool;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.auth.AuthSettingsUtil;
@@ -34,8 +35,6 @@ import com.liferay.portal.util.WebKeys;
 
 import java.io.OutputStream;
 
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.Set;
 
 import javax.servlet.RequestDispatcher;
@@ -50,6 +49,8 @@ import org.apache.struts.action.ActionMapping;
 
 /**
  * @author Ming-Gih Lam
+ * @author Brian Wing Shun Chan
+ * @author Tomas Polesovsky
  */
 public abstract class JSONAction extends Action {
 
@@ -80,9 +81,12 @@ public abstract class JSONAction extends Action {
 				json = "var " + instance + "=" + json + ";";
 			}
 		}
-		catch (PrincipalException e) {
-			_log.error(e);
-			json = JSONFactoryUtil.serializeException(e);
+		catch (PrincipalException pe) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(pe.getMessage());
+			}
+
+			json = JSONFactoryUtil.serializeException(pe);
 		}
 		catch (Exception e) {
 			PortalUtil.sendError(
@@ -131,13 +135,9 @@ public abstract class JSONAction extends Action {
 		if (PropsValues.AUTH_TOKEN_CHECK_ENABLED &&
 			PropsValues.JSON_SERVICE_AUTH_TOKEN_ENABLED) {
 
-			if ((_whiteList.size() > 0) &&
-				AuthSettingsUtil.isAccessAllowed(request, _whiteList)) {
-
-				return;
+			if (!AuthSettingsUtil.isAccessAllowed(request, _hostsAllowed)) {
+				AuthTokenUtil.check(request);
 			}
-
-			AuthTokenUtil.check(request);
 		}
 	}
 
@@ -194,11 +194,10 @@ public abstract class JSONAction extends Action {
 		return true;
 	}
 
-	private static final Set<String> _whiteList = new HashSet<String>(
-		Arrays.asList(PropsValues.JSON_SERVICE_AUTH_TOKEN_WHITELIST_HOSTS));
-
 	private static Log _log = LogFactoryUtil.getLog(JSONAction.class);
 
+	private Set<String> _hostsAllowed = SetUtil.fromArray(
+		PropsValues.JSON_SERVICE_AUTH_TOKEN_HOSTS_ALLOWED);
 	private ServletContext _servletContext;
 
 }
