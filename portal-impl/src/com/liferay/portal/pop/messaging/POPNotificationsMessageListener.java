@@ -143,9 +143,7 @@ public class POPNotificationsMessageListener
 		}
 	}
 
-	protected void notifyMessageListeners(Message[] messages)
-		throws Exception {
-
+	protected void notifyMessageListeners(Message[] messages) throws Exception {
 		if (_log.isDebugEnabled()) {
 			_log.debug("Messages " + messages.length);
 		}
