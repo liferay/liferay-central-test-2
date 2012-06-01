@@ -140,23 +140,11 @@
 
 			<!-- Override -->
 
-			<if>
-				<os family="windows" />
-				<then>
-					<propertycopy
-						from="dir.location.windows"
-						name="app.@{app.server.dir.property}.dir"
-						override="true"
-					/>
-				</then>
-				<else>
-					<propertycopy
-						from="dir.location.unix"
-						name="app.@{app.server.dir.property}.dir"
-						override="true"
-					/>
-				</else>
-			</if>
+			<propertycopy
+				from="dir.location.unix"
+				name="app.@{app.server.dir.property}.dir"
+				override="true"
+			/>
 
 			<!-- Reset -->
 
