@@ -19,13 +19,13 @@
 <liferay-ui:icon-menu align="left" cssClass="actions-button" direction="down" icon="" id="actionsButtonContainer" message="actions" showExpanded="<%= false %>" showWhenSingleIcon="<%= true %>">
 
 	<%
-	String taglibUrl = "javascript:" + renderResponse.getNamespace() + "openPermissionsView()";
+	String taglibURL = "javascript:" + renderResponse.getNamespace() + "openPermissionsView()";
 	%>
 
 	<liferay-ui:icon
 		image="permissions"
 		message="permissions"
-		url="<%= taglibUrl %>"
+		url="<%= taglibURL %>"
 	/>
 
 	<c:choose>
@@ -58,25 +58,25 @@
 	</c:choose>
 
 	<%
-	taglibUrl = "javascript:" + renderResponse.getNamespace() + "deleteArticles();";
+	taglibURL = "javascript:" + renderResponse.getNamespace() + "deleteArticles();";
 	%>
 
 	<liferay-ui:icon
 		cssClass="delete-articles-button"
 		image="delete"
 		message="delete"
-		url="<%= taglibUrl %>"
+		url="<%= taglibURL %>"
 	/>
 
 	<%
-	taglibUrl = "javascript:" + renderResponse.getNamespace() + "expireArticles();";
+	taglibURL = "javascript:" + renderResponse.getNamespace() + "expireArticles();";
 	%>
 
 	<liferay-ui:icon
 		cssClass="expire-articles-button"
 		image="time"
 		message="expire"
-		url="<%= taglibUrl %>"
+		url="<%= taglibURL %>"
 	/>
 </liferay-ui:icon-menu>
 
@@ -89,30 +89,30 @@
 		<liferay-ui:icon-menu align="left" direction="down" icon="" message="manage" showExpanded="<%= false %>" showWhenSingleIcon="<%= true %>">
 
 			<%
-			String taglibUrl = "javascript:" + renderResponse.getNamespace() + "openStructuresView()";
+			String taglibURL = "javascript:" + renderResponse.getNamespace() + "openStructuresView()";
 			%>
 
 			<liferay-ui:icon
 				message="structures"
-				url="<%= taglibUrl %>"
+				url="<%= taglibURL %>"
 			/>
 
 			<%
-			taglibUrl = "javascript:" + renderResponse.getNamespace() + "openTemplatesView()";
+			taglibURL = "javascript:" + renderResponse.getNamespace() + "openTemplatesView()";
 			%>
 
 			<liferay-ui:icon
 				message="templates"
-				url="<%= taglibUrl %>"
+				url="<%= taglibURL %>"
 			/>
 
 			<%
-			taglibUrl = "javascript:" + renderResponse.getNamespace() + "openFeedsView()";
+			taglibURL = "javascript:" + renderResponse.getNamespace() + "openFeedsView()";
 			%>
 
 			<liferay-ui:icon
 				message="feeds"
-				url="<%= taglibUrl %>"
+				url="<%= taglibURL %>"
 			/>
 		</liferay-ui:icon-menu>
 	</c:if>
@@ -123,7 +123,7 @@
 		Liferay.Util.openWindow(
 			{
 				dialog: {
-					width:820
+					width: 820
 				},
 				id: '<portlet:namespace />openFeedsView',
 				title: '<%= UnicodeLanguageUtil.get(pageContext, "feeds") %>',
@@ -136,7 +136,7 @@
 		Liferay.Util.openWindow(
 			{
 				dialog: {
-					width:820
+					width: 820
 				},
 				id: '<portlet:namespace />openPermissionsView',
 				title: '<%= UnicodeLanguageUtil.get(pageContext, "permissions") %>',
@@ -149,7 +149,7 @@
 		Liferay.Util.openWindow(
 			{
 				dialog: {
-					width:820
+					width: 820
 				},
 				id: '<portlet:namespace />openStructuresView',
 				title: '<%= UnicodeLanguageUtil.get(pageContext, "structures") %>',
@@ -162,7 +162,7 @@
 		Liferay.Util.openWindow(
 			{
 				dialog: {
-					width:820
+					width: 820
 				},
 				id: '<portlet:namespace />openTemplatesView',
 				title: '<%= UnicodeLanguageUtil.get(pageContext, "templates") %>',
@@ -182,7 +182,7 @@
 			resultsGrid.delegate(
 				'click',
 				function(event) {
-					if ((resultsGrid.one(':checked') == null)) {
+					if (resultsGrid.one(':checked') == null) {
 						buttons.hide();
 					}
 					else {
@@ -193,7 +193,7 @@
 			);
 		}
 
-		if ((resultsGrid.one(':checked') == null)) {
+		if (resultsGrid.one(':checked') == null) {
 			buttons.hide();
 		}
 	}
