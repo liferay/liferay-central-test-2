@@ -21,6 +21,7 @@ import com.liferay.portal.service.ServiceTestUtil;
 import com.liferay.portal.test.EnvironmentExecutionTestListener;
 import com.liferay.portal.test.ExecutionTestListeners;
 import com.liferay.portal.test.LiferayIntegrationJUnitTestRunner;
+import com.liferay.portal.test.TransactionalExecutionTestListener;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
@@ -34,7 +35,6 @@ import java.io.OutputStream;
 import java.util.Arrays;
 import java.util.Set;
 
-import com.liferay.portal.test.TransactionalExecutionTestListener;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
