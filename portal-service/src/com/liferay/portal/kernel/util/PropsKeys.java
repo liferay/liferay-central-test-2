@@ -1031,7 +1031,7 @@ public interface PropsKeys {
 
 	public static final String JSON_SERVICE_AUTH_TOKEN_ENABLED = "json.service.auth.token.enabled";
 
-	public static final String JSON_SERVICE_AUTH_TOKEN_WHITELIST_HOSTS = "json.service.auth.token.whitelist.hosts";
+	public static final String JSON_SERVICE_AUTH_TOKEN_HOSTS_ALLOWED = "json.service.auth.token.hosts.allowed";
 
 	public static final String JSON_SERVICE_INVALID_CLASS_NAMES = "json.service.invalid.class.names";
 

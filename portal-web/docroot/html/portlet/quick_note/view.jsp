@@ -59,9 +59,9 @@
 						{
 							data: {
 								color: bgColor,
+								p_auth: Liferay.authToken,
 								p_l_id: '<%= plid %>',
-								portletId: '<%= portletDisplay.getId() %>',
-								p_auth: Liferay.securityPAuthToken
+								portletId: '<%= portletDisplay.getId() %>'
 							}
 						}
 					);
@@ -87,9 +87,9 @@
 								{
 									data: {
 										data: newValue,
+										p_auth: '<%= AuthTokenUtil.getToken(request) %>',
 										p_l_id: '<%= plid %>',
-										portletId: '<%= portletDisplay.getId() %>',
-										p_auth: '<%= AuthTokenUtil.getToken(request) %>'
+										portletId: '<%= portletDisplay.getId() %>'
 									}
 								}
 							);

@@ -300,13 +300,14 @@
 			useBrowserConsole: false
 		};
 
+		Liferay.authToken = '<%= AuthTokenUtil.getToken(request) %>';
+
 		<%
 		String currentURL = PortalUtil.getCurrentURL(request);
 		%>
 
 		Liferay.currentURL = '<%= HtmlUtil.escapeJS(currentURL) %>';
 		Liferay.currentURLEncoded = '<%= HttpUtil.encodeURL(currentURL) %>';
-		Liferay.securityPAuthToken = '<%= AuthTokenUtil.getToken(request) %>';
 	// ]]>
 </script>
 

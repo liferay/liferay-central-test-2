@@ -626,6 +626,10 @@
 		<priority value="ERROR" />
 	</category>
 
+	<category name="com.liferay.portal.struts.JSONAction">
+		<priority value="ERROR" />
+	</category>
+
 	<category name="com.liferay.portal.struts.MultiMessageResources">
 		<priority value="ERROR" />
 	</category>
