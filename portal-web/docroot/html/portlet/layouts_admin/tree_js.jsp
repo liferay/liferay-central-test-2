@@ -222,7 +222,12 @@ if (!selectableTree) {
 			A.io.request(
 				updateURL,
 				{
-					data: data
+					data: A.mix(
+						data,
+						{
+							p_auth: Liferay.authToken
+						}
+					)
 				}
 			);
 		},
@@ -339,8 +344,9 @@ if (!selectableTree) {
 						return {
 							groupId: <%= groupId %>,
 							incomplete: <%= incomplete %>,
-							privateLayout: <%= privateLayout %>,
+							p_auth: Liferay.authToken,
 							parentLayoutId: parentLayoutId,
+							privateLayout: <%= privateLayout %>,
 							selPlid: '<%= selPlid %>'
 						};
 					},
