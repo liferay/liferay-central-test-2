@@ -448,7 +448,8 @@ public class ServicePreAction extends Action {
 			}
 
 			boolean viewableGroup = LayoutPermissionUtil.contains(
-				permissionChecker, layout, controlPanelCategory, true, ActionKeys.VIEW);
+				permissionChecker, layout, controlPanelCategory, true,
+				ActionKeys.VIEW);
 			boolean viewableStaging = GroupPermissionUtil.contains(
 				permissionChecker, group.getGroupId(), ActionKeys.VIEW_STAGING);
 
