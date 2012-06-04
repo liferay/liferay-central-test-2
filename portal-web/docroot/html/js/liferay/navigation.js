@@ -22,11 +22,11 @@ AUI.add(
 		var Navigation = A.Component.create(
 			{
 				ATTRS: {
-					hasPermission: {
+					hasAddLayoutPermission: {
 						value: false
 					},
 
-					hasAddLayoutPermission: {
+					hasPermission: {
 						value: false
 					},
 
@@ -34,8 +34,7 @@ AUI.add(
 						getter: function(value) {
 							var instance = this;
 
-							return instance.get('hasAddLayoutPermission') &&
-									instance.get('navBlock').hasClass('modify-pages');
+							return instance.get('hasAddLayoutPermission') && instance.get('navBlock').hasClass('modify-pages');
 						},
 						value: false
 					},
