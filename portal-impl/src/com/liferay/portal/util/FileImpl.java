@@ -142,7 +142,7 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 		}
 		else {
 			if ((destination.getParentFile() != null) &&
-				(!destination.getParentFile().exists())) {
+				!destination.getParentFile().exists()) {
 
 				destination.getParentFile().mkdirs();
 			}
