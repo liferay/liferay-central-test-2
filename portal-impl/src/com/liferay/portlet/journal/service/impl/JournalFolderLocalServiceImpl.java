@@ -132,7 +132,7 @@ public class JournalFolderLocalServiceImpl
 	}
 
 	public JournalFolder fetchFolder(long groupId, String name)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return journalFolderPersistence.fetchByG_N(groupId, name);
 	}
