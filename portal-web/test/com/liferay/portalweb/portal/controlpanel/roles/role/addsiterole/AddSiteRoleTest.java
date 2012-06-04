@@ -81,7 +81,7 @@ public class AddSiteRoleTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		loadRequiredJavaScriptModules();
 		selenium.type("//input[@id='_128_name']",
-			RuntimeVariables.replace("Siterole Name"));
+			RuntimeVariables.replace("Roles Siterole Name"));
 		selenium.clickAt("//input[@value='Save']",
 			RuntimeVariables.replace("Save"));
 		selenium.waitForPageToLoad("30000");

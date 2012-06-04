@@ -57,14 +57,14 @@ public class ViewRegRoleTest extends BaseTestCase {
 			RuntimeVariables.replace("Search"));
 		selenium.waitForPageToLoad("30000");
 		loadRequiredJavaScriptModules();
-		assertEquals(RuntimeVariables.replace("Regrole Name"),
-			selenium.getText("//tr[contains(.,'Regrole Name')]/td[1]"));
+		assertEquals(RuntimeVariables.replace("Roles Regrole Name"),
+			selenium.getText("//tr[contains(.,'Roles Regrole Name')]/td[1]"));
 		assertEquals(RuntimeVariables.replace("Regular"),
-			selenium.getText("//tr[contains(.,'Regrole Name')]/td[2]"));
+			selenium.getText("//tr[contains(.,'Roles Regrole Name')]/td[2]"));
 		assertEquals(RuntimeVariables.replace("Actions"),
 			selenium.getText(
-				"//tr[contains(.,'Regrole Name')]/td/span[@title='Actions']/ul/li/strong/a/span"));
-		selenium.clickAt("//tr[contains(.,'Regrole Name')]/td/span[@title='Actions']/ul/li/strong/a/span",
+				"//tr[contains(.,'Roles Regrole Name')]/td/span[@title='Actions']/ul/li/strong/a/span"));
+		selenium.clickAt("//tr[contains(.,'Roles Regrole Name')]/td/span[@title='Actions']/ul/li/strong/a/span",
 			RuntimeVariables.replace("Actions"));
 
 		for (int second = 0;; second++) {
@@ -91,7 +91,7 @@ public class ViewRegRoleTest extends BaseTestCase {
 			RuntimeVariables.replace("Edit"));
 		selenium.waitForPageToLoad("30000");
 		loadRequiredJavaScriptModules();
-		assertEquals(RuntimeVariables.replace("Regrole Name"),
+		assertEquals(RuntimeVariables.replace("Roles Regrole Name"),
 			selenium.getText("//h1[@class='header-title']"));
 		assertEquals(RuntimeVariables.replace("\u00ab Back"),
 			selenium.getText("//a[@id='_128_TabsBack']"));
@@ -106,7 +106,7 @@ public class ViewRegRoleTest extends BaseTestCase {
 		assertTrue(selenium.isPartialText("//fieldset/div/div/div", "Regular"));
 		assertEquals(RuntimeVariables.replace("New Name (Required)"),
 			selenium.getText("//span/label"));
-		assertEquals("Regrole Name",
+		assertEquals("Roles Regrole Name",
 			selenium.getValue("//input[@id='_128_name']"));
 		assertEquals(RuntimeVariables.replace("Title"),
 			selenium.getText("//span[2]/span/label"));

@@ -154,10 +154,12 @@ public class ViewRegRoleUserTest extends BaseTestCase {
 					selenium.getText("//a[@id='_125_TabsBack']"));
 				assertEquals(RuntimeVariables.replace("Regular Roles"),
 					selenium.getText("//div[@id='_125_roles']/h3"));
-				assertEquals(RuntimeVariables.replace("Regrole Name"),
-					selenium.getText("//tr[contains(.,'Regrole Name')]/td[1]"));
+				assertEquals(RuntimeVariables.replace("Roles Regrole Name"),
+					selenium.getText(
+						"//tr[contains(.,'Roles Regrole Name')]/td[1]"));
 				assertEquals(RuntimeVariables.replace("Remove"),
-					selenium.getText("//tr[contains(.,'Regrole Name')]/td[2]"));
+					selenium.getText(
+						"//tr[contains(.,'Roles Regrole Name')]/td[2]"));
 
 			case 100:
 				label = -1;

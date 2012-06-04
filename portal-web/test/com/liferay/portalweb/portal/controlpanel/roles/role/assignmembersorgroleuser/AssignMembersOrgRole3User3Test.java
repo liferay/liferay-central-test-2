@@ -96,14 +96,14 @@ public class AssignMembersOrgRole3User3Test extends BaseTestCase {
 		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("Organization Name"),
 			selenium.getText("//h1[@class='header-title']/span"));
-		assertEquals(RuntimeVariables.replace("Orgrole3 Name"),
+		assertEquals(RuntimeVariables.replace("Roles Orgrole3 Name"),
 			selenium.getText(
-				"//tr[contains(.,'Orgrole3 Name')]/td[@headers='_125_ocerSearchContainer_col-name']/a"));
+				"//tr[contains(.,'Roles Orgrole3 Name')]/td[@headers='_125_ocerSearchContainer_col-name']/a"));
 		assertEquals(RuntimeVariables.replace("Organization"),
 			selenium.getText(
 				"//tr[contains(.,'Organization')]/td[@headers='_125_ocerSearchContainer_col-type']/a"));
-		selenium.clickAt("//tr[contains(.,'Orgrole3 Name')]/td[@headers='_125_ocerSearchContainer_col-name']/a",
-			RuntimeVariables.replace("Orgrole3 Name"));
+		selenium.clickAt("//tr[contains(.,'Roles Orgrole3 Name')]/td[@headers='_125_ocerSearchContainer_col-name']/a",
+			RuntimeVariables.replace("Roles Orgrole3 Name"));
 		selenium.waitForPageToLoad("30000");
 		loadRequiredJavaScriptModules();
 		selenium.clickAt("link=Available", RuntimeVariables.replace("Available"));

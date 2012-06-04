@@ -57,14 +57,14 @@ public class ViewOrgRoleTest extends BaseTestCase {
 			RuntimeVariables.replace("Search"));
 		selenium.waitForPageToLoad("30000");
 		loadRequiredJavaScriptModules();
-		assertEquals(RuntimeVariables.replace("Orgrole Name"),
-			selenium.getText("//tr[contains(.,'Orgrole Name')]/td[1]"));
+		assertEquals(RuntimeVariables.replace("Roles Orgrole Name"),
+			selenium.getText("//tr[contains(.,'Roles Orgrole Name')]/td[1]"));
 		assertEquals(RuntimeVariables.replace("Organization"),
-			selenium.getText("//tr[contains(.,'Orgrole Name')]/td[2]"));
+			selenium.getText("//tr[contains(.,'Roles Orgrole Name')]/td[2]"));
 		assertEquals(RuntimeVariables.replace("Actions"),
 			selenium.getText(
-				"//tr[contains(.,'Orgrole Name')]/td/span[@title='Actions']/ul/li/strong/a/span"));
-		selenium.clickAt("//tr[contains(.,'Orgrole Name')]/td/span[@title='Actions']/ul/li/strong/a/span",
+				"//tr[contains(.,'Roles Orgrole Name')]/td/span[@title='Actions']/ul/li/strong/a/span"));
+		selenium.clickAt("//tr[contains(.,'Roles Orgrole Name')]/td/span[@title='Actions']/ul/li/strong/a/span",
 			RuntimeVariables.replace("Actions"));
 
 		for (int second = 0;; second++) {
@@ -91,7 +91,7 @@ public class ViewOrgRoleTest extends BaseTestCase {
 			RuntimeVariables.replace("Edit"));
 		selenium.waitForPageToLoad("30000");
 		loadRequiredJavaScriptModules();
-		assertEquals(RuntimeVariables.replace("Orgrole Name"),
+		assertEquals(RuntimeVariables.replace("Roles Orgrole Name"),
 			selenium.getText("//h1[@class='header-title']"));
 		assertEquals(RuntimeVariables.replace("\u00ab Back"),
 			selenium.getText("//a[@id='_128_TabsBack']"));
@@ -107,7 +107,7 @@ public class ViewOrgRoleTest extends BaseTestCase {
 				"Organization"));
 		assertEquals(RuntimeVariables.replace("New Name (Required)"),
 			selenium.getText("//span/label"));
-		assertEquals("Orgrole Name",
+		assertEquals("Roles Orgrole Name",
 			selenium.getValue("//input[@id='_128_name']"));
 		assertEquals(RuntimeVariables.replace("Title"),
 			selenium.getText("//span[2]/span/label"));

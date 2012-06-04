@@ -57,12 +57,12 @@ public class AssignMembersRegRoleUserTest extends BaseTestCase {
 			RuntimeVariables.replace("Search"));
 		selenium.waitForPageToLoad("30000");
 		loadRequiredJavaScriptModules();
-		assertEquals(RuntimeVariables.replace("Regrole Name"),
-			selenium.getText("//tr[contains(.,'Regrole Name')]/td[1]/a"));
+		assertEquals(RuntimeVariables.replace("Roles Regrole Name"),
+			selenium.getText("//tr[contains(.,'Roles Regrole Name')]/td[1]/a"));
 		assertEquals(RuntimeVariables.replace("Actions"),
 			selenium.getText(
-				"//tr[contains(.,'Regrole Name')]/td[4]/span[@title='Actions']/ul/li/strong/a/span"));
-		selenium.clickAt("//tr[contains(.,'Regrole Name')]/td[4]/span[@title='Actions']/ul/li/strong/a/span",
+				"//tr[contains(.,'Roles Regrole Name')]/td[4]/span[@title='Actions']/ul/li/strong/a/span"));
+		selenium.clickAt("//tr[contains(.,'Roles Regrole Name')]/td[4]/span[@title='Actions']/ul/li/strong/a/span",
 			RuntimeVariables.replace("Actions"));
 
 		for (int second = 0;; second++) {
@@ -89,7 +89,7 @@ public class AssignMembersRegRoleUserTest extends BaseTestCase {
 			RuntimeVariables.replace("Assign Members"));
 		selenium.waitForPageToLoad("30000");
 		loadRequiredJavaScriptModules();
-		assertEquals(RuntimeVariables.replace("Regrole Name"),
+		assertEquals(RuntimeVariables.replace("Roles Regrole Name"),
 			selenium.getText("//h1[@class='header-title']/span"));
 		selenium.clickAt("link=Available", RuntimeVariables.replace("Available"));
 		selenium.waitForPageToLoad("30000");

@@ -57,14 +57,14 @@ public class ViewSiteRoleTest extends BaseTestCase {
 			RuntimeVariables.replace("Search"));
 		selenium.waitForPageToLoad("30000");
 		loadRequiredJavaScriptModules();
-		assertEquals(RuntimeVariables.replace("Siterole Name"),
-			selenium.getText("//tr[contains(.,'Siterole Name')]/td[1]"));
+		assertEquals(RuntimeVariables.replace("Roles Siterole Name"),
+			selenium.getText("//tr[contains(.,'Roles Siterole Name')]/td[1]"));
 		assertEquals(RuntimeVariables.replace("Site"),
-			selenium.getText("//tr[contains(.,'Siterole Name')]/td[2]"));
+			selenium.getText("//tr[contains(.,'Roles Siterole Name')]/td[2]"));
 		assertEquals(RuntimeVariables.replace("Actions"),
 			selenium.getText(
-				"//tr[contains(.,'Siterole Name')]/td/span[@title='Actions']/ul/li/strong/a/span"));
-		selenium.clickAt("//tr[contains(.,'Siterole Name')]/td/span[@title='Actions']/ul/li/strong/a/span",
+				"//tr[contains(.,'Roles Siterole Name')]/td/span[@title='Actions']/ul/li/strong/a/span"));
+		selenium.clickAt("//tr[contains(.,'Roles Siterole Name')]/td/span[@title='Actions']/ul/li/strong/a/span",
 			RuntimeVariables.replace("Actions"));
 
 		for (int second = 0;; second++) {
@@ -91,7 +91,7 @@ public class ViewSiteRoleTest extends BaseTestCase {
 			RuntimeVariables.replace("Edit"));
 		selenium.waitForPageToLoad("30000");
 		loadRequiredJavaScriptModules();
-		assertEquals(RuntimeVariables.replace("Siterole Name"),
+		assertEquals(RuntimeVariables.replace("Roles Siterole Name"),
 			selenium.getText("//h1[@class='header-title']"));
 		assertEquals(RuntimeVariables.replace("\u00ab Back"),
 			selenium.getText("//a[@id='_128_TabsBack']"));
@@ -106,7 +106,7 @@ public class ViewSiteRoleTest extends BaseTestCase {
 		assertTrue(selenium.isPartialText("//fieldset/div/div/div", "Site"));
 		assertEquals(RuntimeVariables.replace("New Name (Required)"),
 			selenium.getText("//span/label"));
-		assertEquals("Siterole Name",
+		assertEquals("Roles Siterole Name",
 			selenium.getValue("//input[@id='_128_name']"));
 		assertEquals(RuntimeVariables.replace("Title"),
 			selenium.getText("//span[2]/span/label"));

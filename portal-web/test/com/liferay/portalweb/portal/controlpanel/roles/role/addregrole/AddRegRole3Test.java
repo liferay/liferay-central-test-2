@@ -81,7 +81,7 @@ public class AddRegRole3Test extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		loadRequiredJavaScriptModules();
 		selenium.type("//input[@id='_128_name']",
-			RuntimeVariables.replace("Regrole3 Name"));
+			RuntimeVariables.replace("Roles Regrole3 Name"));
 		selenium.clickAt("//input[@value='Save']",
 			RuntimeVariables.replace("Save"));
 		selenium.waitForPageToLoad("30000");

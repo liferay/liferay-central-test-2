@@ -154,15 +154,15 @@ public class ViewSiteRoleUserTest extends BaseTestCase {
 					selenium.getText("//a[@id='_125_TabsBack']"));
 				assertEquals(RuntimeVariables.replace("Site Roles"),
 					selenium.getText("//div[@id='_125_roles']/h3[4]"));
-				assertEquals(RuntimeVariables.replace("Siterole Name"),
+				assertEquals(RuntimeVariables.replace("Roles Siterole Name"),
 					selenium.getText(
-						"//table[@data-searchcontainerid='_125_communityRolesSearchContainer']//tr[contains(.,'Siterole Name')]/td[1]"));
+						"//table[@data-searchcontainerid='_125_communityRolesSearchContainer']//tr[contains(.,'Roles Siterole Name')]/td[1]"));
 				assertEquals(RuntimeVariables.replace("Site Name"),
 					selenium.getText(
-						"//table[@data-searchcontainerid='_125_communityRolesSearchContainer']//tr[contains(.,'Siterole Name')]/td[2]"));
+						"//table[@data-searchcontainerid='_125_communityRolesSearchContainer']//tr[contains(.,'Roles Siterole Name')]/td[2]"));
 				assertEquals(RuntimeVariables.replace("Remove"),
 					selenium.getText(
-						"//table[@data-searchcontainerid='_125_communityRolesSearchContainer']//tr[contains(.,'Siterole Name')]/td[3]"));
+						"//table[@data-searchcontainerid='_125_communityRolesSearchContainer']//tr[contains(.,'Roles Siterole Name')]/td[3]"));
 
 			case 100:
 				label = -1;
