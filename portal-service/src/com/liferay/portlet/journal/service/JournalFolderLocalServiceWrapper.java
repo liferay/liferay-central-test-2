@@ -312,8 +312,7 @@ public class JournalFolderLocalServiceWrapper
 
 	public com.liferay.portlet.journal.model.JournalFolder fetchFolder(
 		long groupId, java.lang.String name)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _journalFolderLocalService.fetchFolder(groupId, name);
 	}
 
