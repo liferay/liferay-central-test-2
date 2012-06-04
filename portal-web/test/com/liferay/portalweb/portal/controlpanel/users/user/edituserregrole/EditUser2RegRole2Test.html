@@ -55,27 +55,27 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//td[@id='_125_usersSearchContainer_col-first-name_row-usersn2']/a</td>
+	<td>//tr[contains(.,'usersn2')]/td[2]/a</td>
 	<td>userfn2</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//td[@id='_125_usersSearchContainer_col-last-name_row-usersn2']/a</td>
+	<td>//tr[contains(.,'usersn2')]/td[3]/a</td>
 	<td>userln2</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//td[@id='_125_usersSearchContainer_col-screen-name_row-usersn2']/a</td>
+	<td>//tr[contains(.,'usersn2')]/td[4]/a</td>
 	<td>usersn2</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//span[@title='Actions']/ul[@id='_125_usersSearchContainer_usersn2_menu']/li/strong/a</td>
+	<td>//tr[contains(.,'usersn2')]/td/span[@title='Actions']/ul/li/strong/a</td>
 	<td>Actions</td>
 </tr>
 <tr>
 	<td>clickAt</td>
-	<td>//span[@title='Actions']/ul[@id='_125_usersSearchContainer_usersn2_menu']/li/strong/a</td>
+	<td>//tr[contains(.,'usersn2')]/td/span[@title='Actions']/ul/li/strong/a</td>
 	<td>Actions</td>
 </tr>
 <tr>
@@ -135,18 +135,18 @@
 </tr>
 <tr>
 	<td>waitForVisible</td>
-	<td>//tr[contains(.,'Regrole2 Name')]/td[@headers='_125_rolesSearchContainer_col-title']/a</td>
-	<td>Regrole2 Name</td>
+	<td>//tr[contains(.,'Roles Regrole2 Name')]/td[1]/a</td>
+	<td>Roles Regrole2 Name</td>
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//tr[contains(.,'Regrole2 Name')]/td[@headers='_125_rolesSearchContainer_col-title']/a</td>
-	<td>Regrole2 Name</td>
+	<td>//tr[contains(.,'Roles Regrole2 Name')]/td[1]/a</td>
+	<td>Roles Regrole2 Name</td>
 </tr>
 <tr>
 	<td>clickAt</td>
-	<td>//tr[contains(.,'Regrole2 Name')]/td[@headers='_125_rolesSearchContainer_col-title']/a</td>
-	<td>Regrole2 Name</td>
+	<td>//tr[contains(.,'Roles Regrole2 Name')]/td[1]/a</td>
+	<td>Roles Regrole2 Name</td>
 </tr>
 <tr>
 	<td>selectWindow</td>
@@ -156,12 +156,12 @@
 <tr>
 	<td>waitForPartialText</td>
 	<td>//div[@id='_125_rolesSearchContainer']</td>
-	<td>Regrole2 Name</td>
+	<td>Roles Regrole2 Name</td>
 </tr>
 <tr>
 	<td>assertPartialText</td>
 	<td>//div[@id='_125_rolesSearchContainer']</td>
-	<td>Regrole2 Name</td>
+	<td>Roles Regrole2 Name</td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
@@ -175,8 +175,13 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//tr[contains(.,'Regrole2 Name')]/td[@headers='_125_rolesSearchContainer_col-title']</td>
-	<td>Regrole2 Name</td>
+	<td>//div[@id='_125_rolesSearchContainerSearchContainer']//tr[contains(.,'Roles Regrole2 Name')]/td[1]</td>
+	<td>Roles Regrole2 Name</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@id='_125_rolesSearchContainerSearchContainer']//tr[contains(.,'Roles Regrole2 Name')]/td[2]/a</td>
+	<td>Remove</td>
 </tr>
 </tbody></table>
 </body>

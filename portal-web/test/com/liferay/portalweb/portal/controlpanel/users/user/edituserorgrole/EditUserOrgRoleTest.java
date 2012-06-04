@@ -63,21 +63,17 @@ public class EditUserOrgRoleTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("userfn"),
-			selenium.getText(
-				"//td[@id='_125_usersSearchContainer_col-first-name_row-usersn']/a"));
+			selenium.getText("//tr[contains(.,'usersn')]/td[2]"));
 		assertEquals(RuntimeVariables.replace("userln"),
-			selenium.getText(
-				"//td[@id='_125_usersSearchContainer_col-last-name_row-usersn']/a"));
+			selenium.getText("//tr[contains(.,'usersn')]/td[3]"));
 		assertEquals(RuntimeVariables.replace("usersn"),
-			selenium.getText(
-				"//td[@id='_125_usersSearchContainer_col-screen-name_row-usersn']/a"));
+			selenium.getText("//tr[contains(.,'usersn')]/td[4]"));
 		assertEquals(RuntimeVariables.replace("Organization Name"),
-			selenium.getText(
-				"//td[@id='_125_usersSearchContainer_col-organizations_row-usersn']/a"));
+			selenium.getText("//tr[contains(.,'usersn')]/td[6]"));
 		assertEquals(RuntimeVariables.replace("Actions"),
 			selenium.getText(
-				"//span[@title='Actions']/ul[@id='_125_usersSearchContainer_usersn_menu']/li/strong/a"));
-		selenium.clickAt("//span[@title='Actions']/ul[@id='_125_usersSearchContainer_usersn_menu']/li/strong/a",
+				"//tr[contains(.,'usersn')]/td/span[@title='Actions']/ul/li/strong/a"));
+		selenium.clickAt("//tr[contains(.,'usersn')]/td/span[@title='Actions']/ul/li/strong/a",
 			RuntimeVariables.replace("Actions"));
 
 		for (int second = 0;; second++) {
@@ -141,7 +137,7 @@ public class EditUserOrgRoleTest extends BaseTestCase {
 
 			try {
 				if (selenium.isVisible(
-							"//tr[contains(.,'Orgrole Name')]/td[@headers='_125_rolesSearchContainer_col-title']/a")) {
+							"//tr[contains(.,'Roles Orgrole Name')]/td[1]/a")) {
 					break;
 				}
 			}
@@ -151,11 +147,10 @@ public class EditUserOrgRoleTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		assertEquals(RuntimeVariables.replace("Orgrole Name"),
-			selenium.getText(
-				"//tr[contains(.,'Orgrole Name')]/td[@headers='_125_rolesSearchContainer_col-title']/a"));
-		selenium.clickAt("//tr[contains(.,'Orgrole Name')]/td[@headers='_125_rolesSearchContainer_col-title']/a",
-			RuntimeVariables.replace("Orgrole Name"));
+		assertEquals(RuntimeVariables.replace("Roles Orgrole Name"),
+			selenium.getText("//tr[contains(.,'Roles Orgrole Name')]/td[1]/a"));
+		selenium.clickAt("//tr[contains(.,'Roles Orgrole Name')]/td[1]/a",
+			RuntimeVariables.replace("Roles Orgrole Name"));
 		selenium.selectWindow("null");
 
 		for (int second = 0;; second++) {
@@ -166,7 +161,7 @@ public class EditUserOrgRoleTest extends BaseTestCase {
 			try {
 				if (selenium.isPartialText(
 							"//div[@id='_125_organizationRolesSearchContainer']",
-							"Orgrole Name")) {
+							"Roles Orgrole Name")) {
 					break;
 				}
 			}
@@ -178,7 +173,7 @@ public class EditUserOrgRoleTest extends BaseTestCase {
 
 		assertTrue(selenium.isPartialText(
 				"//div[@id='_125_organizationRolesSearchContainer']",
-				"Orgrole Name"));
+				"Roles Orgrole Name"));
 		selenium.clickAt("//input[@value='Save']",
 			RuntimeVariables.replace("Save"));
 		selenium.waitForPageToLoad("30000");
@@ -186,11 +181,14 @@ public class EditUserOrgRoleTest extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace(
 				"Your request completed successfully."),
 			selenium.getText("//div[@class='portlet-msg-success']"));
-		assertEquals(RuntimeVariables.replace("Orgrole Name"),
+		assertEquals(RuntimeVariables.replace("Roles Orgrole Name"),
 			selenium.getText(
-				"//td[@id='_125_organizationRolesSearchContainer_col-title_row-1']"));
+				"//div[@id='_125_organizationRolesSearchContainerSearchContainer']//tr[contains(.,'Roles Orgrole Name')]/td[1]"));
 		assertEquals(RuntimeVariables.replace("Organization Name"),
 			selenium.getText(
-				"//td[@id='_125_organizationRolesSearchContainer_col-organization_row-1']"));
+				"//div[@id='_125_organizationRolesSearchContainerSearchContainer']//tr[contains(.,'Roles Orgrole Name')]/td[2]"));
+		assertEquals(RuntimeVariables.replace("Remove"),
+			selenium.getText(
+				"//div[@id='_125_organizationRolesSearchContainerSearchContainer']//tr[contains(.,'Roles Orgrole Name')]/td[3]/a"));
 	}
 }

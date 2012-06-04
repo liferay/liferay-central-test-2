@@ -135,17 +135,15 @@ public class AssignUsersOrganizationTest extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				loadRequiredJavaScriptModules();
 				assertEquals(RuntimeVariables.replace("userfn userln"),
-					selenium.getText(
-						"//td[@id='_125_usersSearchContainer_col-name_row-usersn']"));
+					selenium.getText("//tr[contains(.,'usersn')]/td[2]"));
 				assertEquals(RuntimeVariables.replace("usersn"),
-					selenium.getText(
-						"//td[@id='_125_usersSearchContainer_col-screen-name_row-usersn']"));
+					selenium.getText("//tr[contains(.,'usersn')]/td[3]"));
 				assertFalse(selenium.isChecked(
-						"//td[@id='_125_usersSearchContainer_col-rowChecker_row-usersn']/input"));
-				selenium.clickAt("//td[@id='_125_usersSearchContainer_col-rowChecker_row-usersn']/input",
+						"//tr[contains(.,'usersn')]/td[1]/input"));
+				selenium.clickAt("//tr[contains(.,'usersn')]/td[1]/input",
 					RuntimeVariables.replace("Check User"));
 				assertTrue(selenium.isChecked(
-						"//td[@id='_125_usersSearchContainer_col-rowChecker_row-usersn']/input"));
+						"//tr[contains(.,'usersn')]/td[1]/input"));
 				selenium.clickAt("//input[@value='Update Associations']",
 					RuntimeVariables.replace("Update Associations"));
 				selenium.waitForPageToLoad("30000");
@@ -154,7 +152,7 @@ public class AssignUsersOrganizationTest extends BaseTestCase {
 						"Your request completed successfully."),
 					selenium.getText("//div[@class='portlet-msg-success']"));
 				assertTrue(selenium.isChecked(
-						"//td[@id='_125_usersSearchContainer_col-rowChecker_row-usersn']/input"));
+						"//tr[contains(.,'usersn')]/td[1]/input"));
 
 			case 100:
 				label = -1;

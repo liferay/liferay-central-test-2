@@ -158,21 +158,15 @@ public class ViewUserOrgRoleTest extends BaseTestCase {
 					selenium.getText("//div[@id='_125_roles']/h3[2]"));
 				assertEquals(RuntimeVariables.replace("Organization Roles"),
 					selenium.getText("//div[@id='_125_roles']/h3[3]"));
-				assertEquals(RuntimeVariables.replace("Title"),
+				assertEquals(RuntimeVariables.replace("Roles Orgrole Name"),
 					selenium.getText(
-						"//th[@id='_125_organizationRolesSearchContainer_col-title']"));
-				assertEquals(RuntimeVariables.replace("Organization"),
-					selenium.getText(
-						"//th[@id='_125_organizationRolesSearchContainer_col-organization']"));
-				assertEquals(RuntimeVariables.replace("Orgrole Name"),
-					selenium.getText(
-						"//td[@id='_125_organizationRolesSearchContainer_col-title_row-1']"));
+						"//div[@id='_125_organizationRolesSearchContainerSearchContainer']//tr[contains(.,'Roles Orgrole Name')]/td[1]"));
 				assertEquals(RuntimeVariables.replace("Organization Name"),
 					selenium.getText(
-						"//td[@id='_125_organizationRolesSearchContainer_col-organization_row-1']"));
+						"//div[@id='_125_organizationRolesSearchContainerSearchContainer']//tr[contains(.,'Roles Orgrole Name')]/td[2]"));
 				assertEquals(RuntimeVariables.replace("Remove"),
 					selenium.getText(
-						"//td[@id='_125_organizationRolesSearchContainer_col-3_row-1']"));
+						"//div[@id='_125_organizationRolesSearchContainerSearchContainer']//tr[contains(.,'Roles Orgrole Name')]/td[3]/a"));
 				assertEquals(RuntimeVariables.replace("Site Roles"),
 					selenium.getText("//div[@id='_125_roles']/h3[4]"));
 
