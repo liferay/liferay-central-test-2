@@ -23,7 +23,6 @@ package com.liferay.portal.kernel.concurrent;
  */
 public interface RejectedExecutionHandler {
 
-
 	/**
 	 * @see java.util.concurrent.ThreadPoolExecutor.RejectedExecutionHandler#rejectedExecution(
 	 *      Runnable, java.util.concurrent.ThreadPoolExecutor)
