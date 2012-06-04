@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.RandomAccessInputStream;
 import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.StreamUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -79,10 +80,16 @@ public class ServletResponseUtil {
 		String[] rangeFields = StringUtil.split(rangeString.substring(6));
 
 		if (rangeFields.length > _MAX_RANGE_FIELDS) {
-			throw new IOException(
-				"Request of " + rangeFields.length + " range fields has " +
-					"exceeded maximum allowance as specified by " +
-						PropsKeys.WEB_SERVER_SERVLET_MAX_RANGE_FIELDS);
+			StringBundler sb = new StringBundler();
+
+			sb.append("Request of ");
+			sb.append(rangeFields.length);
+			sb.append(" range fields has exceeded maximum allowance as ");
+			sb.append("specified by the property \"");
+			sb.append(PropsKeys.WEB_SERVER_SERVLET_MAX_RANGE_FIELDS);
+			sb.append("\"");
+
+			throw new IOException(sb.toString());
 		}
 
 		for (String rangeField : rangeFields) {
@@ -671,9 +678,8 @@ public class ServletResponseUtil {
 	private static final String _CLIENT_ABORT_EXCEPTION =
 		"org.apache.catalina.connector.ClientAbortException";
 
-	private static final int _MAX_RANGE_FIELDS =
-		GetterUtil.getInteger(PropsUtil.get(
-			PropsKeys.WEB_SERVER_SERVLET_MAX_RANGE_FIELDS));
+	private static final int _MAX_RANGE_FIELDS = GetterUtil.getInteger(
+		PropsUtil.get(PropsKeys.WEB_SERVER_SERVLET_MAX_RANGE_FIELDS));
 
 	private static final String _RANGE_REGEX =
 		"^bytes=\\d*-\\d*(,\\s?\\d*-\\d*)*$";

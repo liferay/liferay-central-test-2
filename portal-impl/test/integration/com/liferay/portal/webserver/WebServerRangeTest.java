@@ -53,7 +53,7 @@ public class WebServerRangeTest extends BaseWebServerTestCase {
 
 	@Test
 	public void testMultipartRange() throws Exception {
-		String[] ranges = { "0-9", "25-25", "30-49", "70-79" };
+		String[] ranges = {"0-9", "25-25", "30-49", "70-79"};
 
 		String rangeHeader = "bytes=";
 
@@ -82,7 +82,6 @@ public class WebServerRangeTest extends BaseWebServerTestCase {
 		String[] responseBodies = StringUtil.split(responseBody, boundary);
 
 		Assert.assertEquals(ranges.length + 2, responseBodies.length);
-
 		Assert.assertEquals(StringPool.DOUBLE_DASH, responseBodies[0]);
 		Assert.assertEquals(
 			StringPool.DOUBLE_DASH, responseBodies[ranges.length + 1]);
@@ -146,7 +145,6 @@ public class WebServerRangeTest extends BaseWebServerTestCase {
 	protected HttpServlet getServlet() {
 		return new WebServerServlet() {
 
-			@Override
 			protected boolean isSupportsRangeHeader(String contentType) {
 				return true;
 			}
