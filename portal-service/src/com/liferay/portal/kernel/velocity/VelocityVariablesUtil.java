@@ -14,6 +14,8 @@
 
 package com.liferay.portal.kernel.velocity;
 
+import com.liferay.portal.kernel.security.pacl.permission.PortalRuntimePermission;
+
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -22,6 +24,9 @@ import javax.servlet.http.HttpServletRequest;
 public class VelocityVariablesUtil {
 
 	public static VelocityVariables getVelocityVariables() {
+		PortalRuntimePermission.checkGetBeanProperty(
+			VelocityVariablesUtil.class);
+
 		return _velocityVariables;
 	}
 
@@ -40,6 +45,8 @@ public class VelocityVariablesUtil {
 	}
 
 	public void setVelocityVariables(VelocityVariables velocityVariables) {
+		PortalRuntimePermission.checkSetBeanProperty(getClass());
+
 		_velocityVariables = velocityVariables;
 	}
 

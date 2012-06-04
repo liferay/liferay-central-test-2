@@ -14,6 +14,8 @@
 
 package com.liferay.portal.kernel.freemarker;
 
+import com.liferay.portal.kernel.security.pacl.permission.PortalRuntimePermission;
+
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -22,6 +24,9 @@ import javax.servlet.http.HttpServletRequest;
 public class FreeMarkerVariablesUtil {
 
 	public static FreeMarkerVariables getFreeMarkerVariables() {
+		PortalRuntimePermission.checkGetBeanProperty(
+			FreeMarkerVariablesUtil.class);
+
 		return _freeMarkerVariables;
 	}
 
@@ -41,6 +46,8 @@ public class FreeMarkerVariablesUtil {
 
 	public void setFreeMarkerVariables(
 		FreeMarkerVariables freeMarkerVariables) {
+
+		PortalRuntimePermission.checkSetBeanProperty(getClass());
 
 		_freeMarkerVariables = freeMarkerVariables;
 	}

@@ -14,6 +14,8 @@
 
 package com.liferay.portal.kernel.freemarker;
 
+import com.liferay.portal.kernel.security.pacl.permission.PortalRuntimePermission;
+
 import java.io.Writer;
 
 /**
@@ -26,6 +28,9 @@ public class FreeMarkerEngineUtil {
 	}
 
 	public static FreeMarkerEngine getFreeMarkerEngine() {
+		PortalRuntimePermission.checkGetBeanProperty(
+			FreeMarkerEngineUtil.class);
+
 		return _freeMarkerEngine;
 	}
 
@@ -65,6 +70,8 @@ public class FreeMarkerEngineUtil {
 	}
 
 	public void setFreeMarkerEngine(FreeMarkerEngine freeMarkerEngine) {
+		PortalRuntimePermission.checkSetBeanProperty(getClass());
+
 		_freeMarkerEngine = freeMarkerEngine;
 	}
 

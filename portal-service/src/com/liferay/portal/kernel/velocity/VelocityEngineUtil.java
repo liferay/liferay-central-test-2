@@ -14,6 +14,8 @@
 
 package com.liferay.portal.kernel.velocity;
 
+import com.liferay.portal.kernel.security.pacl.permission.PortalRuntimePermission;
+
 import java.io.Writer;
 
 /**
@@ -38,6 +40,8 @@ public class VelocityEngineUtil {
 	}
 
 	public static VelocityEngine getVelocityEngine() {
+		PortalRuntimePermission.checkGetBeanProperty(VelocityEngineUtil.class);
+
 		return _velocityEngine;
 	}
 
@@ -77,6 +81,8 @@ public class VelocityEngineUtil {
 	}
 
 	public void setVelocityEngine(VelocityEngine velocityEngine) {
+		PortalRuntimePermission.checkSetBeanProperty(getClass());
+
 		_velocityEngine = velocityEngine;
 	}
 

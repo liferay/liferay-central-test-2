@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.layoutconfiguration.util;
 
+import com.liferay.portal.kernel.security.pacl.permission.PortalRuntimePermission;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portlet.layoutconfiguration.util.xml.RuntimeLogic;
 
@@ -34,6 +35,8 @@ import javax.servlet.jsp.PageContext;
 public class RuntimePortletUtil {
 
 	public static RuntimePortlet getRuntimePortlet() {
+		PortalRuntimePermission.checkGetBeanProperty(RuntimePortletUtil.class);
+
 		return _runtimePortlet;
 	}
 
@@ -133,6 +136,8 @@ public class RuntimePortletUtil {
 	}
 
 	public void setRuntimePortlet(RuntimePortlet runtimePortlet) {
+		PortalRuntimePermission.checkSetBeanProperty(getClass());
+
 		_runtimePortlet = runtimePortlet;
 	}
 
