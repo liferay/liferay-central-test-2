@@ -4662,10 +4662,6 @@ public class PortalImpl implements Portal {
 			}
 		}
 
-		if (portletId.equals(PortletKeys.LAYOUTS_ADMIN)) {
-			return true;
-		}
-
 		return false;
 	}
 
