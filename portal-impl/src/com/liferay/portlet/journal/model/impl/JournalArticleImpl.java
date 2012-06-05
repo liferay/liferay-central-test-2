@@ -164,15 +164,6 @@ public class JournalArticleImpl extends JournalArticleBaseImpl {
 		return _smallImageType;
 	}
 
-	public boolean isTemplateDriven() {
-		if (Validator.isNull(getStructureId())) {
-			return false;
-		}
-		else {
-			return true;
-		}
-	}
-
 	public Map<Locale, String> getTitleMap() {
 		Locale defaultLocale = LocaleThreadLocal.getDefaultLocale();
 
@@ -186,6 +177,15 @@ public class JournalArticleImpl extends JournalArticleBaseImpl {
 		}
 		finally {
 			LocaleThreadLocal.setDefaultLocale(defaultLocale);
+		}
+	}
+
+	public boolean isTemplateDriven() {
+		if (Validator.isNull(getStructureId())) {
+			return false;
+		}
+		else {
+			return true;
 		}
 	}
 
