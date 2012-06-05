@@ -64,8 +64,8 @@ portletURL.setParameter("classPK", String.valueOf(classPK));
 
 <aui:form action="<%= portletURL.toString() %>" method="post" name="fm">
 	<aui:input name="<%= Constants.CMD %>" type="hidden" />
-	<aui:input name="deleteTemplateIds" type="hidden" />
 	<aui:input name="redirect" type="hidden" value="<%= portletURL.toString() %>" />
+	<aui:input name="deleteTemplateIds" type="hidden" />
 
 	<liferay-ui:search-container
 		rowChecker="<%= new RowChecker(renderResponse) %>"

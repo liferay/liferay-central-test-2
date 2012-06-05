@@ -35,8 +35,8 @@ portletURL.setParameter("tabs1", tabs1);
 
 <aui:form action="<%= portletURL.toString() %>" method="post" name="fm">
 	<aui:input name="<%= Constants.CMD %>" type="hidden" />
-	<aui:input name="deleteStructureIds" type="hidden" />
 	<aui:input name="redirect" type="hidden" value="<%= portletURL.toString() %>" />
+	<aui:input name="deleteStructureIds" type="hidden" />
 
 	<liferay-ui:search-container
 		rowChecker="<%= new RowChecker(renderResponse) %>"
