@@ -20,6 +20,8 @@ import com.liferay.portal.kernel.cache.ThreadLocalCacheManager;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.User;
@@ -66,7 +68,10 @@ public class AssetEntryServiceImpl extends AssetEntryServiceBaseImpl {
 					entries.add(entry);
 				}
 			}
-			catch (Exception e) {
+			catch (PortalException pe) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(pe, pe);
+				}
 			}
 		}
 
@@ -81,7 +86,8 @@ public class AssetEntryServiceImpl extends AssetEntryServiceBaseImpl {
 			long companyId, int start, int end, String languageId)
 		throws SystemException {
 
-		List<AssetEntryDisplay> entryDisplays = new ArrayList<AssetEntryDisplay>();
+		List<AssetEntryDisplay> entryDisplays =
+			new ArrayList<AssetEntryDisplay>();
 
 		AssetEntryDisplay[] companyEntryDisplays =
 			assetEntryLocalService.getCompanyEntryDisplays(
@@ -96,14 +102,15 @@ public class AssetEntryServiceImpl extends AssetEntryServiceBaseImpl {
 					entryDisplays.add(entryDisplay);
 				}
 			}
-			catch (Exception e) {
+			catch (PortalException pe) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(pe, pe);
+				}
 			}
 		}
 
-		return entryDisplays.toArray(new AssetEntryDisplay[entryDisplays.size()]);
-
-		/*return assetEntryLocalService.getCompanyEntryDisplays(
-			companyId, start, end, languageId);*/
+		return entryDisplays.toArray(
+			new AssetEntryDisplay[entryDisplays.size()]);
 	}
 
 	public List<AssetEntry> getEntries(AssetEntryQuery entryQuery)
@@ -427,5 +434,8 @@ public class AssetEntryServiceImpl extends AssetEntryServiceBaseImpl {
 
 		return false;
 	}
+
+	private static Log _log = LogFactoryUtil.getLog(
+		AssetEntryServiceImpl.class);
 
 }
