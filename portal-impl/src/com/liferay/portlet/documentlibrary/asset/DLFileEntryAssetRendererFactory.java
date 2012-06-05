@@ -60,13 +60,13 @@ public class DLFileEntryAssetRendererFactory extends BaseAssetRendererFactory {
 
 	public static final String TYPE = "document";
 
-	public AssetRenderer getAssetRenderer(long classPK, int typeLatest)
+	public AssetRenderer getAssetRenderer(long classPK, int type)
 		throws PortalException, SystemException {
 
 		FileEntry fileEntry = null;
 		FileVersion fileVersion = null;
 
-		if (typeLatest == TYPE_LATEST) {
+		if (type == TYPE_LATEST) {
 			fileVersion = DLAppLocalServiceUtil.getFileVersion(classPK);
 
 			fileEntry = fileVersion.getFileEntry();
@@ -77,7 +77,7 @@ public class DLFileEntryAssetRendererFactory extends BaseAssetRendererFactory {
 			fileVersion = fileEntry.getFileVersion();
 		}
 
-		return new DLFileEntryAssetRenderer(fileEntry, fileVersion, typeLatest);
+		return new DLFileEntryAssetRenderer(fileEntry, fileVersion, type);
 	}
 
 	public String getClassName() {

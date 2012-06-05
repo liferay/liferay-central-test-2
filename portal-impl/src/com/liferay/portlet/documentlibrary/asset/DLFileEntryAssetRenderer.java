@@ -52,11 +52,11 @@ public class DLFileEntryAssetRenderer
 	extends BaseAssetRenderer implements TrashRenderer {
 
 	public DLFileEntryAssetRenderer(
-		FileEntry fileEntry, FileVersion fileVersion, int typeLatest) {
+		FileEntry fileEntry, FileVersion fileVersion, int type) {
 
 		_fileEntry = fileEntry;
 		_fileVersion = fileVersion;
-		_typeLatest = typeLatest;
+		_type = type;
 	}
 
 	public String getAssetRendererFactoryClassName() {
@@ -222,7 +222,7 @@ public class DLFileEntryAssetRenderer
 			renderRequest.setAttribute(
 				WebKeys.DOCUMENT_LIBRARY_FILE_ENTRY, _fileEntry);
 
-			if (_typeLatest == AssetRendererFactory.TYPE_LATEST) {
+			if (_type == AssetRendererFactory.TYPE_LATEST) {
 				renderRequest.setAttribute(
 					WebKeys.DOCUMENT_LIBRARY_FILE_VERSION, _fileVersion);
 			}
@@ -236,6 +236,6 @@ public class DLFileEntryAssetRenderer
 
 	private FileEntry _fileEntry;
 	private FileVersion _fileVersion;
-	private int _typeLatest;
+	private int _type;
 
 }
