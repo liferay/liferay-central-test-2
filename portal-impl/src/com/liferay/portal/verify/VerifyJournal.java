@@ -159,10 +159,12 @@ public class VerifyJournal extends VerifyProcess {
 			_log.debug("Permissions and assets verified for articles");
 		}
 
-		verifyJournalContentSearch();
+		// Content searches
+
+		verifyContentSearch();
 	}
 
-	protected void verifyJournalContentSearch() throws Exception {
+	protected void verifyContentSearch() throws Exception {
 		List<JournalContentSearch> contentSearches =
 			JournalContentSearchLocalServiceUtil.getArticleContentSearches();
 
@@ -172,6 +174,20 @@ public class VerifyJournal extends VerifyProcess {
 			portletIds.add(contentSearch.getPortletId());
 		}
 
+		for (String portletId : portletIds) {
+			verifyContentSearch(portletId);
+		}
+	}
+
+	protected void verifyContentSearch(String portletId) throws Exception {
+		List<JournalContentSearch> contentSearches =
+			JournalContentSearchLocalServiceUtil.getPortletContentSearches(
+				portletId);
+
+		if (contentSearches.size() <= 1) {
+			return;
+		}
+
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -179,40 +195,29 @@ public class VerifyJournal extends VerifyProcess {
 		try {
 			con = DataAccess.getConnection();
 
-			for (String portletId : portletIds) {
-				contentSearches =
-					JournalContentSearchLocalServiceUtil.
-						getArticleContentSearchesByPortletId(portletId);
+			ps = con.prepareStatement(
+				"select preferences from PortletPreferences where portletId " +
+					"= ?");
 
-				if (contentSearches.size() <= 1) {
-					continue;
-				}
+			ps.setString(1, portletId);
 
-				ps = con.prepareStatement(
-					"select preferences from PortletPreferences where " +
-						"portletId = ?");
+			rs = ps.executeQuery();
 
-				ps.setString(1, portletId);
+			while (rs.next()) {
+				String xml = rs.getString("preferences");
 
-				rs = ps.executeQuery();
+				PortletPreferences portletPreferences =
+					PortletPreferencesFactoryUtil.fromDefaultXML(xml);
 
-				while (rs.next()) {
-					String xml = rs.getString("preferences");
+				String articleId = portletPreferences.getValue(
+					"articleId", null);
 
-					PortletPreferences portletPreferences =
-						PortletPreferencesFactoryUtil.fromDefaultXML(xml);
+				JournalContentSearch contentSearch = contentSearches.get(1);
 
-					String articleId = portletPreferences.getValue(
-						"articleId", null);
-
-					JournalContentSearch contentSearch = contentSearches.get(1);
-
-					JournalContentSearchLocalServiceUtil.updateContentSearch(
-						contentSearch.getGroupId(),
-						contentSearch.isPrivateLayout(),
-						contentSearch.getLayoutId(),
-						contentSearch.getPortletId(), articleId, true);
-				}
+				JournalContentSearchLocalServiceUtil.updateContentSearch(
+					contentSearch.getGroupId(), contentSearch.isPrivateLayout(),
+					contentSearch.getLayoutId(), contentSearch.getPortletId(),
+					articleId, true);
 			}
 		}
 		finally {
