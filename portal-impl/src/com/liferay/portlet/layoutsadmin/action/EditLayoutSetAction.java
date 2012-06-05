@@ -157,13 +157,14 @@ public class EditLayoutSetAction extends EditLayoutsAction {
 	}
 
 	@Override
-	protected void setThemeSettingProperties(ActionRequest actionRequest,
+	protected void setThemeSettingProperties(
+			ActionRequest actionRequest,
 			UnicodeProperties typeSettingsProperties, String device,
-			Map<String, ThemeSetting> configurableSettings)
+			Map<String, ThemeSetting> themeSettings)
 		throws PortalException, SystemException {
 
-		for (String key : configurableSettings.keySet()) {
-			ThemeSetting themeSetting = configurableSettings.get(key);
+		for (String key : themeSettings.keySet()) {
+			ThemeSetting themeSetting = themeSettings.get(key);
 
 			String type = GetterUtil.getString(themeSetting.getType(), "text");
 

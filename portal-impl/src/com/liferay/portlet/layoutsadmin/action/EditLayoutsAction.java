@@ -688,21 +688,21 @@ public class EditLayoutsAction extends PortletAction {
 	protected void setThemeSettingProperties(
 			ActionRequest actionRequest,
 			UnicodeProperties typeSettingsProperties, String device,
-			Map<String, ThemeSetting> configurableSettings)
+			Map<String, ThemeSetting> themeSettings)
 		throws PortalException, SystemException {
 
 		long groupId = ParamUtil.getLong(actionRequest, "groupId");
-		long layoutId = ParamUtil.getLong(actionRequest, "layoutId");
 		boolean privateLayout = ParamUtil.getBoolean(
 			actionRequest, "privateLayout");
+		long layoutId = ParamUtil.getLong(actionRequest, "layoutId");
 
 		Layout layout = LayoutLocalServiceUtil.getLayout(
 			groupId, privateLayout, layoutId);
 
 		LayoutSet layoutSet = layout.getLayoutSet();
 
-		for (String key : configurableSettings.keySet()) {
-			ThemeSetting themeSetting = configurableSettings.get(key);
+		for (String key : themeSettings.keySet()) {
+			ThemeSetting themeSetting = themeSettings.get(key);
 
 			String type = GetterUtil.getString(themeSetting.getType(), "text");
 
@@ -1089,16 +1089,15 @@ public class EditLayoutsAction extends PortletAction {
 
 		deleteThemeSettingsProperties(typeSettingsProperties, device);
 
-		Map<String, ThemeSetting> configurableSettings =
+		Map<String, ThemeSetting> themeSettings =
 			theme.getConfigurableSettings();
 
-		if (configurableSettings.isEmpty()) {
+		if (themeSettings.isEmpty()) {
 			return typeSettingsProperties;
 		}
 
 		setThemeSettingProperties(
-			actionRequest, typeSettingsProperties, device,
-			configurableSettings);
+			actionRequest, typeSettingsProperties, device, themeSettings);
 
 		return typeSettingsProperties;
 	}
