@@ -16,7 +16,6 @@ package com.liferay.portlet.layoutsadmin.action;
 
 import com.liferay.portal.ImageTypeException;
 import com.liferay.portal.NoSuchGroupException;
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.io.ByteArrayFileInputStream;
 import com.liferay.portal.kernel.servlet.SessionErrors;
@@ -158,10 +157,9 @@ public class EditLayoutSetAction extends EditLayoutsAction {
 
 	@Override
 	protected void setThemeSettingProperties(
-			ActionRequest actionRequest,
-			UnicodeProperties typeSettingsProperties, String device,
-			Map<String, ThemeSetting> themeSettings)
-		throws PortalException, SystemException {
+		ActionRequest actionRequest, UnicodeProperties typeSettingsProperties,
+		String device,
+		Map<String, ThemeSetting> themeSettings) {
 
 		for (String key : themeSettings.keySet()) {
 			ThemeSetting themeSetting = themeSettings.get(key);
