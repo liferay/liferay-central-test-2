@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portlet.journal;
+package com.liferay.portlet.journal.service;
 
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.transaction.Transactional;
@@ -29,8 +29,6 @@ import com.liferay.portal.test.TransactionalExecutionTestListener;
 import com.liferay.portal.util.TestPropsValues;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalFolder;
-import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
-import com.liferay.portlet.journal.service.JournalFolderLocalServiceUtil;
 
 import java.util.HashMap;
 import java.util.Locale;
@@ -50,7 +48,7 @@ import org.junit.runner.RunWith;
 		TransactionalExecutionTestListener.class
 	})
 @RunWith(LiferayIntegrationJUnitTestRunner.class)
-public class JournalFolderTest {
+public class JournalFolderServiceTest {
 
 	@Before
 	public void setUp() {
@@ -76,7 +74,6 @@ public class JournalFolderTest {
 	@Test
 	@Transactional
 	public void testSubfolders() throws Exception {
-
 		Group group = ServiceTestUtil.addGroup("Test Group");
 
 		JournalFolder folder1 = _addFolder(group.getGroupId(), 0, "Test 1");
@@ -100,12 +97,13 @@ public class JournalFolderTest {
 			long groupId, long folderId, String name, String content)
 		throws Exception {
 
+		Map<Locale, String> titleMap = new HashMap<Locale, String>();
+
 		Locale englishLocale = new Locale("en", "US");
 
-		Map<Locale, String> titleMap = new HashMap<Locale, String>();
-		Map<Locale, String> descriptionMap = new HashMap<Locale, String>();
-
 		titleMap.put(englishLocale, name);
+
+		Map<Locale, String> descriptionMap = new HashMap<Locale, String>();
 
 		ServiceContext serviceContext = ServiceTestUtil.getServiceContext();
 
@@ -137,13 +135,11 @@ public class JournalFolderTest {
 			return folder;
 		}
 
-		String description = "This is a test folder";
-
 		ServiceContext serviceContext = ServiceTestUtil.getServiceContext();
 
 		return JournalFolderLocalServiceUtil.addFolder(
 			TestPropsValues.getUserId(), groupId, parentFolderId, name,
-			description, serviceContext);
+			"This is a test folder.", serviceContext);
 	}
 
 }
