@@ -124,8 +124,10 @@ public class TaskQueue<E> {
 				_count.getAndIncrement();
 
 				if (count == 0) {
+
 					// Signal takers right after enqueue to increase the
-					// possibility of concurrent token
+					// possibility of a concurrent token
+
 					_takeLock.lock();
 
 					try {
