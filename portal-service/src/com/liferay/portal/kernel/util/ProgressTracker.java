@@ -32,12 +32,6 @@ public class ProgressTracker {
 	public static final String PERCENT =
 		ProgressTracker.class.getName() + "_PERCENT";
 
-	public static void addProgress(int status, int percent, String message) {
-		Tuple tuple = new Tuple(percent, message);
-
-		_progress.put(status, tuple);
-	}
-
 	public ProgressTracker(HttpServletRequest request, String progressId) {
 		this(request.getSession(), progressId);
 	}
@@ -49,11 +43,21 @@ public class ProgressTracker {
 	public ProgressTracker(HttpSession session, String progressId) {
 		_session = session;
 		_progressId = progressId;
+
+		addProgress(ProgressStatusConstants.PREPARED, 0, StringPool.BLANK);
 	}
 
 	public ProgressTracker(PortletSession portletSession, String progressId) {
 		_portletSession = portletSession;
 		_progressId = progressId;
+
+		addProgress(ProgressStatusConstants.PREPARED, 0, StringPool.BLANK);
+	}
+
+	public void addProgress(int status, int percent, String message) {
+		Tuple tuple = new Tuple(percent, message);
+
+		_progress.put(status, tuple);
 	}
 
 	public void finish() {
@@ -108,18 +112,11 @@ public class ProgressTracker {
 		setPercent(1);
 	}
 
-	private static Map<Integer, Tuple> _progress =
-		new HashMap<Integer, Tuple>();
-
-	private int _percent = 0;
+	private int _percent;
 	private PortletSession _portletSession;
+	private Map<Integer, Tuple> _progress = new HashMap<Integer, Tuple>();
 	private String _progressId;
 	private HttpSession _session;
-
 	private int _status = ProgressStatusConstants.PREPARED;
-
-	static {
-		addProgress(ProgressStatusConstants.PREPARED, 0, StringPool.BLANK);
-	}
 
 }
