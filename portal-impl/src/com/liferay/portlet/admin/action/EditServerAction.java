@@ -83,7 +83,6 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.upload.UploadServletRequestImpl;
 import com.liferay.portal.util.MaintenanceUtil;
 import com.liferay.portal.util.PortalInstances;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.ShutdownUtil;
@@ -111,9 +110,6 @@ import javax.portlet.PortletPreferences;
 import javax.portlet.PortletSession;
 import javax.portlet.PortletURL;
 import javax.portlet.WindowState;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Level;
 import org.apache.struts.action.ActionForm;
@@ -311,11 +307,6 @@ public class EditServerAction extends PortletAction {
 	protected void installXuggler(
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
-
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			actionRequest);
-
-		HttpSession session = request.getSession();
 
 		ProgressTracker progressTracker = new ProgressTracker(
 			actionRequest, WebKeys.XUGGLER_INSTALL_STATUS);

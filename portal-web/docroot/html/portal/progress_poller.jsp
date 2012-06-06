@@ -17,15 +17,8 @@
 <%@ include file="/html/portal/init.jsp" %>
 
 <%
-String progressId = ParamUtil.getString(request, "progressId");
-
-int updatePeriod = ParamUtil.getInteger(request, "updatePeriod", 1000);
-
 String sessionKey = ParamUtil.getString(request, "sessionKey");
-
-
-String message = StringPool.BLANK;
-Integer percent = null;
+String progressId = ParamUtil.getString(request, "progressId");
 
 ProgressTracker progressTracker = (ProgressTracker)session.getAttribute(sessionKey);
 
@@ -33,12 +26,12 @@ if (progressTracker == null) {
 	progressTracker = (ProgressTracker)session.getAttribute(sessionKey + progressId);
 }
 
+String message = StringPool.BLANK;
+Integer percent = 0;
+
 if (progressTracker != null) {
 	message = progressTracker.getMessage();
 	percent = progressTracker.getPercent();
-}
-else {
-	percent = 0;
 }
 %>
 
@@ -52,7 +45,6 @@ else {
 
 		if (progressId && (typeof progressId.set == 'function')) {
 			progressId.set('message', '<%= LanguageUtil.get(pageContext, message) %>');
-
 			progressId.set('value', <%= percent %>);
 		}
 	}());

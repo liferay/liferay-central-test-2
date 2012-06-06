@@ -201,6 +201,7 @@ public class DateUtilTest extends PowerMockito {
 		}
 
 		private String _pattern;
+
 	}
 
 }
