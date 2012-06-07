@@ -270,14 +270,14 @@ public class EditLayoutsAction extends PortletAction {
 						LayoutFriendlyURLException.class.getName(), e);
 				}
 				else {
-					SessionErrors.add(actionRequest, e.getClass().getName(), e);
+					SessionErrors.add(actionRequest, e.getClass(), e);
 				}
 			}
 			else if (e instanceof RemoteExportException ||
 					 e instanceof RemoteOptionsException ||
 					 e instanceof SystemException) {
 
-				SessionErrors.add(actionRequest, e.getClass().getName(), e);
+				SessionErrors.add(actionRequest, e.getClass(), e);
 
 				String redirect = ParamUtil.getString(
 					actionRequest, "pagesRedirect");

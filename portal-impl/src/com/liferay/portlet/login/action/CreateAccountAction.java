@@ -138,8 +138,7 @@ public class CreateAccountAction extends PortletAction {
 					if (user.getStatus() !=
 							WorkflowConstants.STATUS_INCOMPLETE) {
 
-						SessionErrors.add(
-							actionRequest, e.getClass().getName(), e);
+						SessionErrors.add(actionRequest, e.getClass(), e);
 					}
 					else {
 						setForward(
@@ -147,7 +146,7 @@ public class CreateAccountAction extends PortletAction {
 					}
 				}
 				catch (NoSuchUserException nsue) {
-					SessionErrors.add(actionRequest, e.getClass().getName(), e);
+					SessionErrors.add(actionRequest, e.getClass(), e);
 				}
 			}
 			else if (e instanceof AddressCityException ||
@@ -178,7 +177,7 @@ public class CreateAccountAction extends PortletAction {
 					 e instanceof UserSmsException ||
 					 e instanceof WebsiteURLException) {
 
-				SessionErrors.add(actionRequest, e.getClass().getName(), e);
+				SessionErrors.add(actionRequest, e.getClass(), e);
 			}
 			else {
 				throw e;
