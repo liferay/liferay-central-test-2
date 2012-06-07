@@ -356,8 +356,8 @@ public class InlineSQLHelperImpl implements InlineSQLHelper {
 			permissionWhere = StringUtil.replace(
 				permissionWhere,
 				new String[] {
-					"[$OWNER_RESOURCE_BLOCK_IDS$]", "[$USER_ID$]",
-					"[$USER_ID_FIELD$]", "[$USER_RESOURCE_BLOCK_IDS$]"
+					"[$OWNER_RESOURCE_BLOCK_ID$]", "[$USER_ID$]",
+					"[$USER_ID_FIELD$]", "[$USER_RESOURCE_BLOCK_ID$]"
 				},
 				new String[] {
 					StringUtil.merge(ownerResourceBlockIds),
@@ -370,7 +370,7 @@ public class InlineSQLHelperImpl implements InlineSQLHelper {
 				CustomSQLUtil.get(FILTER_BY_RESOURCE_BLOCK_ID));
 
 			permissionWhere = StringUtil.replace(
-				permissionWhere, "[$USER_RESOURCE_BLOCK_IDS$]",
+				permissionWhere, "[$USER_RESOURCE_BLOCK_ID$]",
 				StringUtil.merge(userResourceBlockIds));
 		}
 
