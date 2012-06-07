@@ -24,32 +24,15 @@ public class ViewDeleteDMDocumentTypeTest extends BaseTestCase {
 	public void testViewDeleteDMDocumentType() throws Exception {
 		selenium.open("/web/guest/home/");
 		loadRequiredJavaScriptModules();
-
-		for (int second = 0;; second++) {
-			if (second >= 90) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isVisible("link=Documents and Media Test Page")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.clickAt("link=Documents and Media Test Page",
 			RuntimeVariables.replace("Documents and Media Test Page"));
 		selenium.waitForPageToLoad("30000");
 		loadRequiredJavaScriptModules();
 		Thread.sleep(5000);
-		assertFalse(selenium.isElementPresent(
-				"//div[@class='lfr-component lfr-menu-list']/ul/li[10]/a"));
-		selenium.open("/web/guest/home/");
-		loadRequiredJavaScriptModules();
+		assertEquals(RuntimeVariables.replace("Add"),
+			selenium.getText("//span[@title='Add']/ul/li/strong/a/span"));
+		selenium.clickAt("//span[@title='Add']/ul/li/strong/a/span",
+			RuntimeVariables.replace("Add"));
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -57,7 +40,8 @@ public class ViewDeleteDMDocumentTypeTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("link=Documents and Media Test Page")) {
+				if (selenium.isVisible(
+							"//div[@class='lfr-component lfr-menu-list']")) {
 					break;
 				}
 			}
@@ -67,6 +51,10 @@ public class ViewDeleteDMDocumentTypeTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		assertFalse(selenium.isElementPresent(
+				"//div[@class='lfr-component lfr-menu-list']/ul/li/a[contains(.,'DM DocumentType Name')]"));
+		selenium.open("/web/guest/home/");
+		loadRequiredJavaScriptModules();
 		selenium.clickAt("link=Documents and Media Test Page",
 			RuntimeVariables.replace("Documents and Media Test Page"));
 		selenium.waitForPageToLoad("30000");
@@ -136,15 +124,14 @@ public class ViewDeleteDMDocumentTypeTest extends BaseTestCase {
 
 		selenium.type("//input[@title='Search Entries']",
 			RuntimeVariables.replace("Name"));
-		selenium.clickAt("//input[@class='aui-button-input aui-button-input-submit']",
+		selenium.clickAt("//input[@value='Search']",
 			RuntimeVariables.replace("Search"));
 		selenium.waitForPageToLoad("30000");
 		loadRequiredJavaScriptModules();
+		assertFalse(selenium.isTextPresent("DM DocumentType Name"));
 		assertEquals(RuntimeVariables.replace("There are no results."),
 			selenium.getText(
 				"//div[@class='portlet-body']/div[@class='portlet-msg-info']"));
-		assertFalse(selenium.isTextPresent(
-				"//tr[@class='portlet-section-body results-row last']/td"));
 		selenium.selectFrame("relative=top");
 	}
 }

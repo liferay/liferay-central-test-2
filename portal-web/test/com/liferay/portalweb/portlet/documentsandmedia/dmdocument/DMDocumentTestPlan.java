@@ -25,7 +25,13 @@ import com.liferay.portalweb.portlet.documentsandmedia.dmdocument.adddmfolderdoc
 import com.liferay.portalweb.portlet.documentsandmedia.dmdocument.adddmsubfolderdocument.AddDMSubfolderDocumentTests;
 import com.liferay.portalweb.portlet.documentsandmedia.dmdocument.comparedmfolderdocumentversion.CompareDMFolderDocumentVersionTests;
 import com.liferay.portalweb.portlet.documentsandmedia.dmdocument.deletedmfolderdocument.DeleteDMFolderDocumentTests;
+import com.liferay.portalweb.portlet.documentsandmedia.dmdocument.deleteversiondmfolderdocumentfile10test.DeleteVersionDMFolderDocumentFile10Tests;
+import com.liferay.portalweb.portlet.documentsandmedia.dmdocument.deleteversiondmfolderdocumentfile11test.DeleteVersionDMFolderDocumentFile11Tests;
+import com.liferay.portalweb.portlet.documentsandmedia.dmdocument.deleteversiondmfolderdocumenttitle10test.DeleteVersionDMFolderDocumentTitle10Tests;
+import com.liferay.portalweb.portlet.documentsandmedia.dmdocument.deleteversiondmfolderdocumenttitle11test.DeleteVersionDMFolderDocumentTitle11Tests;
 import com.liferay.portalweb.portlet.documentsandmedia.dmdocument.editdmfolderdocument.EditDMFolderDocumentTests;
+import com.liferay.portalweb.portlet.documentsandmedia.dmdocument.editdmfolderdocumentfile.EditDMFolderDocumentFileTests;
+import com.liferay.portalweb.portlet.documentsandmedia.dmdocument.editdmfolderdocumenttitle.EditDMFolderDocumentTitleTests;
 import com.liferay.portalweb.portlet.documentsandmedia.dmdocument.editdmfolderdocumenttitleapostrophe.EditDMFolderDocumentTitleApostropheTests;
 import com.liferay.portalweb.portlet.documentsandmedia.dmdocument.editdmfolderdocumenttitlebackslash.EditDMFolderDocumentTitleBackSlashTests;
 import com.liferay.portalweb.portlet.documentsandmedia.dmdocument.editdmfolderdocumenttitleclosebracket.EditDMFolderDocumentTitleCloseBracketTests;
@@ -42,11 +48,10 @@ import com.liferay.portalweb.portlet.documentsandmedia.dmdocument.guestviewdmdoc
 import com.liferay.portalweb.portlet.documentsandmedia.dmdocument.lockdmfolderdocument.LockDMFolderDocumentTests;
 import com.liferay.portalweb.portlet.documentsandmedia.dmdocument.movedmfolderdocumentduplicatetofolder.MoveDMFolderDocumentDuplicateToFolderTests;
 import com.liferay.portalweb.portlet.documentsandmedia.dmdocument.movedmfolderdocumenttofolder.MoveDMFolderDocumentToFolderTests;
+import com.liferay.portalweb.portlet.documentsandmedia.dmdocument.revertversiondmfolderdocumentfile10test.RevertVersionDMFolderDocumentFile10Tests;
+import com.liferay.portalweb.portlet.documentsandmedia.dmdocument.revertversiondmfolderdocumenttitle10test.RevertVersionDMFolderDocumentTitle10Tests;
 import com.liferay.portalweb.portlet.documentsandmedia.dmdocument.searchdmfolderdocument.SearchDMFolderDocumentTests;
 import com.liferay.portalweb.portlet.documentsandmedia.dmdocument.unlockdmfolderdocument.UnlockDMFolderDocumentTests;
-import com.liferay.portalweb.portlet.documentsandmedia.dmdocument.viewdmfolderdocumentactions.ViewDMFolderDocumentActionsTests;
-import com.liferay.portalweb.portlet.documentsandmedia.dmdocument.viewdmfolderdocumentmydocuments.ViewDMFolderDocumentMyDocumentsTests;
-import com.liferay.portalweb.portlet.documentsandmedia.dmdocument.viewdmfolderdocumentrecentdocuments.ViewDMFolderDocumentRecentDocumentsTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -69,6 +74,13 @@ public class DMDocumentTestPlan extends BaseTestSuite {
 		testSuite.addTest(AddDMSubfolderDocumentTests.suite());
 		testSuite.addTest(CompareDMFolderDocumentVersionTests.suite());
 		testSuite.addTest(DeleteDMFolderDocumentTests.suite());
+		testSuite.addTest(DeleteVersionDMFolderDocumentFile10Tests.suite());
+		testSuite.addTest(DeleteVersionDMFolderDocumentFile11Tests.suite());
+		testSuite.addTest(DeleteVersionDMFolderDocumentTitle10Tests.suite());
+		testSuite.addTest(DeleteVersionDMFolderDocumentTitle11Tests.suite());
+		testSuite.addTest(EditDMFolderDocumentTests.suite());
+		testSuite.addTest(EditDMFolderDocumentFileTests.suite());
+		testSuite.addTest(EditDMFolderDocumentTitleTests.suite());
 		testSuite.addTest(EditDMFolderDocumentTitleApostropheTests.suite());
 		testSuite.addTest(EditDMFolderDocumentTitleBackSlashTests.suite());
 		testSuite.addTest(EditDMFolderDocumentTitleCloseBracketTests.suite());
@@ -86,11 +98,10 @@ public class DMDocumentTestPlan extends BaseTestSuite {
 		testSuite.addTest(LockDMFolderDocumentTests.suite());
 		testSuite.addTest(MoveDMFolderDocumentDuplicateToFolderTests.suite());
 		testSuite.addTest(MoveDMFolderDocumentToFolderTests.suite());
+		testSuite.addTest(RevertVersionDMFolderDocumentFile10Tests.suite());
+		testSuite.addTest(RevertVersionDMFolderDocumentTitle10Tests.suite());
 		testSuite.addTest(SearchDMFolderDocumentTests.suite());
 		testSuite.addTest(UnlockDMFolderDocumentTests.suite());
-		testSuite.addTest(ViewDMFolderDocumentActionsTests.suite());
-		testSuite.addTest(ViewDMFolderDocumentMyDocumentsTests.suite());
-		testSuite.addTest(ViewDMFolderDocumentRecentDocumentsTests.suite());
 
 		return testSuite;
 	}

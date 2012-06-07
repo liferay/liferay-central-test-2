@@ -157,7 +157,7 @@ public class EditDMSubfolderImageDetailsTest extends BaseTestCase {
 			selenium.getText("//span[@class='document-description']"));
 		assertEquals(RuntimeVariables.replace("Status: Approved"),
 			selenium.getText("//span[@class='workflow-status']"));
-		assertEquals(RuntimeVariables.replace("Download (12.9k)"),
+		assertEquals(RuntimeVariables.replace("Download (16.1k)"),
 			selenium.getText("//span[@class='download-document']"));
 		assertEquals(RuntimeVariables.replace("Content Type image/jpeg"),
 			selenium.getText(

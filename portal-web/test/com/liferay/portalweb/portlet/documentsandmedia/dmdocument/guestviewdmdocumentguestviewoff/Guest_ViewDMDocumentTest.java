@@ -24,23 +24,6 @@ public class Guest_ViewDMDocumentTest extends BaseTestCase {
 	public void testGuest_ViewDMDocument() throws Exception {
 		selenium.open("/web/guest/home/");
 		loadRequiredJavaScriptModules();
-
-		for (int second = 0;; second++) {
-			if (second >= 90) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isVisible("link=Documents and Media Test Page")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.clickAt("link=Documents and Media Test Page",
 			RuntimeVariables.replace("Documents and Media Test Page"));
 		selenium.waitForPageToLoad("30000");
@@ -71,8 +54,6 @@ public class Guest_ViewDMDocumentTest extends BaseTestCase {
 
 		assertEquals(RuntimeVariables.replace("DM Document Title"),
 			selenium.getText("//div[@class='document-info']/h2"));
-		assertEquals(RuntimeVariables.replace("DM Document Description"),
-			selenium.getText("//span[@class='document-description']"));
 		assertEquals(RuntimeVariables.replace("Download (0.3k)"),
 			selenium.getText("//span[@class='download-document']/span/a/span"));
 	}
