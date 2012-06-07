@@ -1554,7 +1554,7 @@
 			FROM
 				User_
 			WHERE
-				(userId NOT IN(
+				(userId NOT IN (
 					SELECT
 						userId
 					FROM
@@ -1572,7 +1572,7 @@
 			FROM
 				User_
 			WHERE
-				(userId NOT IN(
+				(userId NOT IN (
 					SELECT
 						User_.userId
 					FROM
@@ -1590,7 +1590,7 @@
 			FROM
 				User_
 			WHERE
-				(userId NOT IN(
+				(userId NOT IN (
 					SELECT
 						User_.userId
 					FROM
@@ -1640,7 +1640,7 @@
 	<sql id="com.liferay.portal.service.persistence.UserFinder.joinByNoOrganizations">
 		<![CDATA[
 			WHERE
-				(User_.userId NOT IN(
+				(User_.userId NOT IN (
 					SELECT
 						userId
 					FROM
