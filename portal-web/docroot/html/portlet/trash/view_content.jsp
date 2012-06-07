@@ -22,6 +22,7 @@
 	String redirect = ParamUtil.getString(request, "redirect");
 
 	long entryId = ParamUtil.getLong(request, "entryId");
+
 	String className = ParamUtil.getString(request, "className");
 	long classPK = ParamUtil.getLong(request, "classPK");
 
