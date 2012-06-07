@@ -301,10 +301,10 @@ public class StringBundlerTest extends TestCase {
 
 		objectOutputStream.close();
 
-		byte[] data = unsyncByteArrayOutputStream.toByteArray();
+		byte[] bytes = unsyncByteArrayOutputStream.toByteArray();
 
 		UnsyncByteArrayInputStream unsyncByteArrayInputStream =
-			new UnsyncByteArrayInputStream(data);
+			new UnsyncByteArrayInputStream(bytes);
 
 		ObjectInputStream objectInputStream = new ObjectInputStream(
 			unsyncByteArrayInputStream);
