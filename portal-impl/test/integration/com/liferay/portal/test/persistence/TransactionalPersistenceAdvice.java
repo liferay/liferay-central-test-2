@@ -14,8 +14,6 @@
 
 package com.liferay.portal.test.persistence;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.service.persistence.BasePersistence;
 
@@ -28,49 +26,30 @@ import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 
 /**
- * This advices stores the references to all the entities created during
- * the execution of a persistence test.
- *
  * @author Miguel Pastor
  */
 public class TransactionalPersistenceAdvice implements MethodInterceptor {
 
-	public Map<Serializable, BasePersistence<?>> getPersistedEntities() {
-		return _persistedEntities;
+	public Map<Serializable, BasePersistence<?>> getBasePersistences() {
+		return _basePersistences;
 	}
 
 	public Object invoke(MethodInvocation methodInvocation) throws Throwable {
+		BaseModel<?> baseModel = (BaseModel<?>)methodInvocation.proceed();
 
-		BaseModel<?> entity = (BaseModel<?>) methodInvocation.proceed();
+		BasePersistence<?> basePersistence =
+			(BasePersistence<?>)methodInvocation.getThis();
 
-		BasePersistence<?> persistence =
-			(BasePersistence<?>) methodInvocation.getThis();
+		_basePersistences.put(baseModel.getPrimaryKeyObj(), basePersistence);
 
-		addEntity(entity, persistence);
-
-		return entity;
+		return baseModel;
 	}
 
 	public void reset() {
-		_persistedEntities.clear();
+		_basePersistences.clear();
 	}
 
-	protected void addEntity(
-		BaseModel<?> entity, BasePersistence<?> persistence) {
-
-		_persistedEntities.put(entity.getPrimaryKeyObj(), persistence);
-
-		if (_log.isDebugEnabled()) {
-			_log.debug(
-				"The entity " + entity +
-				" has been registered for further deletion");
-		}
-	}
-
-	private static Log _log = LogFactoryUtil.getLog(
-		TransactionalPersistenceAdvice.class);
-
-	private Map<Serializable, BasePersistence<?>> _persistedEntities =
+	private Map<Serializable, BasePersistence<?>> _basePersistences =
 		new HashMap<Serializable, BasePersistence<?>>();
 
 }

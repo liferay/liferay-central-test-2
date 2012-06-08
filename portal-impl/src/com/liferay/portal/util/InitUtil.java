@@ -151,7 +151,7 @@ public class InitUtil {
 	}
 
 	public synchronized static void initWithSpring(
-		boolean force, List<String> locations) {
+		boolean force, List<String> extraConfigLocations) {
 
 		if (force) {
 			_initialized = false;
@@ -170,13 +170,15 @@ public class InitUtil {
 
 		init();
 
-		SpringUtil.loadContext(locations);
+		SpringUtil.loadContext(extraConfigLocations);
 
 		_initialized = true;
 	}
 
-	public synchronized static void initWithSpring(List<String> locations) {
-		initWithSpring(false, locations);
+	public synchronized static void initWithSpring(
+		List<String> extraConfigLocations) {
+
+		initWithSpring(false, extraConfigLocations);
 	}
 
 	private static final boolean _PRINT_TIME = false;

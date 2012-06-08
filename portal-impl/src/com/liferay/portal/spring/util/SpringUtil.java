@@ -45,21 +45,21 @@ public class SpringUtil {
 		List<String> configLocations = ListUtil.fromArray(
 			PropsUtil.getArray(PropsKeys.SPRING_CONFIGS));
 
-		loadSpringContext(configLocations);
+		_loadContext(configLocations);
 	}
 
-	public static void loadContext(List<String> locations) {
+	public static void loadContext(List<String> extraConfigLocations) {
 		List<String> configLocations = ListUtil.fromArray(
 			PropsUtil.getArray(PropsKeys.SPRING_CONFIGS));
 
-		if (locations != null) {
-			configLocations.addAll(locations);
+		if (extraConfigLocations != null) {
+			configLocations.addAll(extraConfigLocations);
 		}
 
-		loadSpringContext(configLocations);
+		_loadContext(configLocations);
 	}
 
-	protected static void loadSpringContext(List<String> configLocations) {
+	private static void _loadContext(List<String> configLocations) {
 		if (PropsValues.PERSISTENCE_PROVIDER.equalsIgnoreCase("jpa")) {
 			configLocations.remove("META-INF/hibernate-spring.xml");
 		}

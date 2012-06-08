@@ -379,7 +379,7 @@ Please set the environment variable ANT_OPTS to the recommended value of
 
 				<copy todir="test-classes/${test.type}">
 					<fileset dir="test" includes="*.properties" />
-					<fileset dir="test/${test.type}" includes="**/*.properties, **/dependencies/**, META-INF/*.xml" />
+					<fileset dir="test/${test.type}" includes="**/*.properties,**/dependencies/**,META-INF/*.xml" />
 				</copy>
 
 				<javac
@@ -677,7 +677,7 @@ Please set the environment variable ANT_OPTS to the recommended value of
 							<exclude name="**/DLAppServiceSoapTest.class" />
 							<exclude name="**/UserServiceHttpTest.class" />
 							<exclude name="**/UserServiceSoapTest.class" />
-							<exclude name="**/${excluded.tests}.class" />
+							<exclude name="${test.excludes}" />
 						</fileset>
 					</batchtest>
 				</junit>
@@ -686,12 +686,11 @@ Please set the environment variable ANT_OPTS to the recommended value of
 	</target>
 
 	<target name="test-integration" depends="compile,instrument-test-coverage,compile-test-integration">
-
 		<var name="class" value="*Test" />
 
 		<ant target="test-cmd">
+			<property name="test.excludes" value="**/*PersistenceTest.class" />
 			<property name="test.type" value="integration" />
-			<property name="excluded.tests" value="*PersistenceTest" />
 		</ant>
 
 		<var name="class" value="*PersistenceTest" />

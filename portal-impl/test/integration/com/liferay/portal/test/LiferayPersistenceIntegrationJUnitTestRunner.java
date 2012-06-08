@@ -34,11 +34,11 @@ public class LiferayPersistenceIntegrationJUnitTestRunner
 	}
 
 	protected void loadSpringContext() {
-		List<String> configLocations = new ArrayList<String>(1);
+		List<String> extraConfigLocations = new ArrayList<String>(1);
 
-		configLocations.add("META-INF/test-persistence-spring.xml");
+		extraConfigLocations.add("META-INF/test-persistence-spring.xml");
 
-		InitUtil.initWithSpring(configLocations);
+		InitUtil.initWithSpring(extraConfigLocations);
 	}
 
 }

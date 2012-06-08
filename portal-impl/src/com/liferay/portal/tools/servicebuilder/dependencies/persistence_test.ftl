@@ -21,7 +21,6 @@ import ${packagePath}.model.${entity.name};
 import ${packagePath}.model.impl.${entity.name}ModelImpl;
 
 import ${beanLocatorUtil};
-import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.dao.jdbc.OutputBlob;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
@@ -30,13 +29,12 @@ import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.service.ServiceTestUtil;
 import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.service.persistence.PersistenceExecutionTestListener;
-import com.liferay.portal.service.ServiceTestUtil;
 import com.liferay.portal.test.AssertUtils;
 import com.liferay.portal.test.EnvironmentConfigTestListener;
 import com.liferay.portal.test.ExecutionTestListeners;
@@ -68,18 +66,20 @@ public class ${entity.name}PersistenceTest {
 
 	@After
 	public void tearDown() throws Exception {
-		Map<Serializable, BasePersistence<?>> persistedEntities = _transactionalPersistenceAdvice.getPersistedEntities();
+		Map<Serializable, BasePersistence<?>> basePersistences = _transactionalPersistenceAdvice.getBasePersistences();
 
-		Set<Serializable> entityKeys = persistedEntities.keySet();
+		Set<Serializable> primaryKeys = basePersistences.keySet();
 
-		for (Serializable entitiKey : entityKeys) {
-			BasePersistence<?> persistence = persistedEntities.get(entitiKey);
+		for (Serializable primaryKey : primaryKeys) {
+			BasePersistence<?> basePersistence = basePersistences.get(primaryKey);
 
 			try {
-				persistence.remove(entitiKey);
+				basePersistence.remove(primaryKey);
 			}
 			catch (Exception e) {
-				_log.debug("The entity " + entitiKey + " has been already deleted");
+				if (_log.isDebugEnabled()) {
+					_log.debug("The model with primary key " + primaryKey + " was already deleted");
+				}
 			}
 		}
 
@@ -821,7 +821,6 @@ public class ${entity.name}PersistenceTest {
 	private static Log _log = LogFactoryUtil.getLog(${entity.name}PersistenceTest.class);
 
 	private ${entity.name}Persistence _persistence = (${entity.name}Persistence)${beanLocatorUtilShortName}.locate(${entity.name}Persistence.class.getName());
-
-	private TransactionalPersistenceAdvice _transactionalPersistenceAdvice = (TransactionalPersistenceAdvice) ${beanLocatorUtilShortName}.locate(TransactionalPersistenceAdvice.class.getName());
+	private TransactionalPersistenceAdvice _transactionalPersistenceAdvice = (TransactionalPersistenceAdvice)${beanLocatorUtilShortName}.locate(TransactionalPersistenceAdvice.class.getName());
 
 }
