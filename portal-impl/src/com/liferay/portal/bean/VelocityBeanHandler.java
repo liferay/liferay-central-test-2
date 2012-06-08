@@ -14,32 +14,30 @@
 
 package com.liferay.portal.bean;
 
+import com.liferay.portal.security.pacl.PACLBeanHandler;
 import com.liferay.portal.security.pacl.PACLClassLoaderUtil;
 
 import java.lang.Object;
-import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 /**
  * @author Brian Wing Shun Chan
  */
-public class VelocityBeanHandler implements InvocationHandler {
+public class VelocityBeanHandler extends PACLBeanHandler {
 
 	public VelocityBeanHandler(Object bean, ClassLoader classLoader) {
-		_bean = bean;
-		_classLoader = classLoader;
-	}
+		super(bean);
 
-	public Object getBean() {
-		return _bean;
+		_classLoader = classLoader;
 	}
 
 	public ClassLoader getClassLoader() {
 		return _classLoader;
 	}
 
-	public Object invoke(Object proxy, Method method, Object[] args)
+	@Override
+	public Object invoke(Object proxy, Method method, Object[] arguments)
 		throws Throwable {
 
 		ClassLoader contextClassLoader =
@@ -47,26 +45,25 @@ public class VelocityBeanHandler implements InvocationHandler {
 
 		try {
 			if ((_classLoader != null) &&
-				(contextClassLoader != _classLoader)) {
+				(_classLoader != contextClassLoader)) {
 
 				PACLClassLoaderUtil.setContextClassLoader(_classLoader);
 			}
 
-			return method.invoke(_bean, args);
+			return super.invoke(proxy, method, arguments);
 		}
 		catch (InvocationTargetException ite) {
 			return null;
 		}
 		finally {
 			if ((_classLoader != null) &&
-				(contextClassLoader != _classLoader)) {
+				(_classLoader != contextClassLoader)) {
 
 				PACLClassLoaderUtil.setContextClassLoader(contextClassLoader);
 			}
 		}
 	}
 
-	private Object _bean;
 	private ClassLoader _classLoader;
 
 }
