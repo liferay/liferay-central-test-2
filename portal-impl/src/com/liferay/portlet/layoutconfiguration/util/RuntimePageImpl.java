@@ -19,27 +19,34 @@ import com.liferay.portal.kernel.io.unsync.UnsyncStringWriter;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.PipingServletResponse;
+import com.liferay.portal.kernel.servlet.PluginContextListener;
+import com.liferay.portal.kernel.servlet.ServletContextPool;
 import com.liferay.portal.kernel.template.Template;
 import com.liferay.portal.kernel.template.TemplateContextType;
 import com.liferay.portal.kernel.template.TemplateManager;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.MethodHandler;
-import com.liferay.portal.kernel.util.MethodKey;
 import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.LayoutTemplate;
+import com.liferay.portal.model.LayoutTemplateConstants;
 import com.liferay.portal.model.Portlet;
+import com.liferay.portal.security.pacl.PACLClassLoaderUtil;
+import com.liferay.portal.service.LayoutTemplateLocalServiceUtil;
 import com.liferay.portal.servlet.ThreadLocalFacadeServletRequestWrapperUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.layoutconfiguration.util.velocity.CustomizationSettingsProcessor;
 import com.liferay.portlet.layoutconfiguration.util.velocity.TemplateProcessor;
 import com.liferay.portlet.layoutconfiguration.util.xml.RuntimeLogic;
+import com.liferay.taglib.util.VelocityTaglib;
 
 import java.io.Closeable;
+
+import java.lang.reflect.Constructor;
 
 import java.util.HashMap;
 import java.util.List;
@@ -75,9 +82,101 @@ public class RuntimePageImpl implements RuntimePage {
 			String velocityTemplateContent)
 		throws Exception {
 
+		doDispatch(
+			pageContext, null, velocityTemplateId, velocityTemplateContent,
+			false);
+	}
+
+	public void processTemplate(
+			PageContext pageContext, String velocityTemplateId,
+			String velocityTemplateContent)
+		throws Exception {
+
+		processTemplate(
+			pageContext, null, velocityTemplateId, velocityTemplateContent);
+	}
+
+	protected Object buildVelocityTaglib(
+			HttpServletRequest request, HttpServletResponse response,
+			PageContext pageContext)
+		throws Exception {
+
+		// We have to load this class from the plugin class loader (context
+		// class loader) or we will throw a ClassCastException
+
+		Class<?> clazz = Class.forName(VelocityTaglib.class.getName());
+
+		Constructor<?> constructor = clazz.getConstructor(
+			ServletContext.class, HttpServletRequest.class,
+			HttpServletResponse.class, PageContext.class);
+
+		return constructor.newInstance(
+			pageContext.getServletContext(), request, response, pageContext);
+
+	}
+
+	protected void doDispatch(
+			PageContext pageContext, String portletId,
+			String velocityTemplateId, String velocityTemplateContent,
+			boolean processTemplate)
+		throws Exception {
+
 		if (Validator.isNull(velocityTemplateContent)) {
 			return;
 		}
+
+		LayoutTemplate layoutTemplate = getLayoutTemlpate(velocityTemplateId);
+
+		String pluginServletContextName = GetterUtil.getString(
+			layoutTemplate.getServletContextName());
+
+		ServletContext pluginServletContext = ServletContextPool.get(
+			pluginServletContextName);
+
+		ClassLoader pluginClassLoader =
+			(ClassLoader)pluginServletContext.getAttribute(
+				PluginContextListener.PLUGIN_CLASS_LOADER);
+
+		ClassLoader contextClassLoader =
+			PACLClassLoaderUtil.getContextClassLoader();
+
+		try {
+			TemplateContextType templateContextType =
+				TemplateContextType.STANDARD;
+
+			if ((pluginClassLoader != null) &&
+				(pluginClassLoader != contextClassLoader)) {
+
+				PACLClassLoaderUtil.setContextClassLoader(pluginClassLoader);
+
+				templateContextType = TemplateContextType.CLASS_LOADER;
+			}
+
+			if (processTemplate) {
+				doProcessTemplate(
+					pageContext, portletId, velocityTemplateId,
+					velocityTemplateContent, templateContextType);
+			}
+			else {
+				doProcessCustomizationSettings(
+					pageContext, velocityTemplateId, velocityTemplateContent,
+					templateContextType);
+			}
+		}
+		finally {
+			if ((pluginClassLoader != null) &&
+				(pluginClassLoader != contextClassLoader)) {
+
+				PACLClassLoaderUtil.setContextClassLoader(contextClassLoader);
+			}
+		}
+	}
+
+	protected void doProcessCustomizationSettings(
+			PageContext pageContext, String velocityTemplateId,
+			String velocityTemplateContent,
+			TemplateContextType templateContextType)
+		throws Exception {
 
 		HttpServletRequest request =
 			(HttpServletRequest)pageContext.getRequest();
@@ -89,7 +188,7 @@ public class RuntimePageImpl implements RuntimePage {
 
 		Template template = TemplateManagerUtil.getTemplate(
 			TemplateManager.VELOCITY, velocityTemplateId,
-			velocityTemplateContent, TemplateContextType.STANDARD);
+			velocityTemplateContent, templateContextType);
 
 		template.put("processor", processor);
 
@@ -99,11 +198,8 @@ public class RuntimePageImpl implements RuntimePage {
 
 		// liferay:include tag library
 
-		MethodHandler methodHandler = new MethodHandler(
-			_initMethodKey, pageContext.getServletContext(), request, response,
-			pageContext);
-
-		Object velocityTaglib = methodHandler.invoke(true);
+		Object velocityTaglib = buildVelocityTaglib(
+			request, response, pageContext);
 
 		template.put("taglibLiferay", velocityTaglib);
 		template.put("theme", velocityTaglib);
@@ -118,13 +214,32 @@ public class RuntimePageImpl implements RuntimePage {
 		}
 	}
 
-	public void processTemplate(
-			PageContext pageContext, String velocityTemplateId,
-			String velocityTemplateContent)
-		throws Exception {
+	protected LayoutTemplate getLayoutTemlpate(String velocityTemplateId) {
+		String separator = LayoutTemplateConstants.CUSTOM_SEPARATOR;
+		boolean standard = false;
 
-		processTemplate(
-			pageContext, null, velocityTemplateId, velocityTemplateContent);
+		if (velocityTemplateId.contains(
+				LayoutTemplateConstants.STANDARD_SEPARATOR)) {
+
+			separator = LayoutTemplateConstants.STANDARD_SEPARATOR;
+			standard = true;
+		}
+
+		String layoutTemplateId = null;
+
+		String themeId = null;
+
+		int pos = velocityTemplateId.indexOf(separator);
+
+		if (pos != -1) {
+			layoutTemplateId = velocityTemplateId.substring(
+				pos + separator.length());
+
+			themeId = velocityTemplateId.substring(0, pos);
+		}
+
+		return LayoutTemplateLocalServiceUtil.getLayoutTemplate(
+			layoutTemplateId, standard, themeId);
 	}
 
 	public void processTemplate(
@@ -132,9 +247,16 @@ public class RuntimePageImpl implements RuntimePage {
 			String velocityTemplateId, String velocityTemplateContent)
 		throws Exception {
 
-		if (Validator.isNull(velocityTemplateContent)) {
-			return;
-		}
+		doDispatch(
+			pageContext, portletId, velocityTemplateId, velocityTemplateContent,
+			true);
+	}
+
+	protected void doProcessTemplate(
+			PageContext pageContext, String portletId,
+			String velocityTemplateId, String velocityTemplateContent,
+			TemplateContextType templateContextType)
+		throws Exception {
 
 		HttpServletRequest request =
 			(HttpServletRequest)pageContext.getRequest();
@@ -146,7 +268,7 @@ public class RuntimePageImpl implements RuntimePage {
 
 		Template template = TemplateManagerUtil.getTemplate(
 			TemplateManager.VELOCITY, velocityTemplateId,
-			velocityTemplateContent, TemplateContextType.STANDARD);
+			velocityTemplateContent, templateContextType);
 
 		template.put("processor", processor);
 
@@ -158,12 +280,9 @@ public class RuntimePageImpl implements RuntimePage {
 
 		UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter();
 
-		MethodHandler methodHandler = new MethodHandler(
-			_initMethodKey, pageContext.getServletContext(), request,
-			new PipingServletResponse(response, unsyncStringWriter),
+		Object velocityTaglib = buildVelocityTaglib(
+			request, new PipingServletResponse(response, unsyncStringWriter),
 			pageContext);
-
-		Object velocityTaglib = methodHandler.invoke(true);
 
 		template.put("taglibLiferay", velocityTaglib);
 		template.put("theme", velocityTaglib);
@@ -528,10 +647,6 @@ public class RuntimePageImpl implements RuntimePage {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(RuntimePageImpl.class);
-
-	private static MethodKey _initMethodKey = new MethodKey(
-		"com.liferay.taglib.util.VelocityTaglib", "init", ServletContext.class,
-		HttpServletRequest.class, HttpServletResponse.class, PageContext.class);
 
 	private int _waitTime = Integer.MAX_VALUE;
 
