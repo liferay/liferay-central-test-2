@@ -204,7 +204,7 @@ public class DDMStructureImpl extends DDMStructureBaseImpl {
 		return getFieldProperty(fieldName, "type");
 	}
 
-	public List<DDMTemplate> getDDMTemplates() throws SystemException {
+	public List<DDMTemplate> getTemplates() throws SystemException {
 		return DDMTemplateLocalServiceUtil.getTemplates(getStructureId());
 	}
 

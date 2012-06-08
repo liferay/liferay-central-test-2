@@ -62,7 +62,6 @@ public class DDMPortletDataHandlerImpl extends BasePortletDataHandler {
 			structure.getCompanyId());
 
 		if (defaultUserId == structure.getUserId()) {
-
 			structureElement.addAttribute("preloaded", "true");
 		}
 
@@ -113,7 +112,7 @@ public class DDMPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		if (portletDataContext.isDataStrategyMirror()) {
 			boolean preloaded = GetterUtil.getBoolean(
-				structureElement.attributeValue("preloaded"), false);
+				structureElement.attributeValue("preloaded"));
 
 			DDMStructure existingStructure = null;
 

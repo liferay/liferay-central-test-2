@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
@@ -14,20 +14,28 @@
 
 package com.liferay.portlet.dynamicdatalists.lar;
 
+import com.liferay.portal.kernel.security.pacl.permission.PortalRuntimePermission;
+
 /**
  * @author Michael C. Han
  */
 public class DDLPortletDataHandlerUtil {
 
 	public static DDLPortletDataHandler getDDLPortletDataHandler() {
+		PortalRuntimePermission.checkGetBeanProperty(
+			DDLPortletDataHandlerUtil.class);
+
 		return _ddlPortletDataHandler;
 	}
 
 	public void setDDLPortletDataHandler(
 		DDLPortletDataHandler ddlPortletDataHandler) {
 
+		PortalRuntimePermission.checkSetBeanProperty(getClass());
+
 		_ddlPortletDataHandler = ddlPortletDataHandler;
 	}
 
 	private static DDLPortletDataHandler _ddlPortletDataHandler;
+
 }
