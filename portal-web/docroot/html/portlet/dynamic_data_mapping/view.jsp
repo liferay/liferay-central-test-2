@@ -139,8 +139,6 @@ OrderByComparator orderByComparator = DDMStructureUtil.getEntriesOrderByComparat
 					buffer="buffer"
 					href="<%= rowHREF %>"
 					name="type"
-					orderable="<%= true %>"
-					orderableProperty="modified-date"
 				>
 
 					<%
@@ -154,6 +152,8 @@ OrderByComparator orderByComparator = DDMStructureUtil.getEntriesOrderByComparat
 				buffer="buffer"
 				href="<%= rowHREF %>"
 				name="modified-date"
+				orderable="<%= true %>"
+				orderableProperty="modified-date"
 			>
 
 				<%
