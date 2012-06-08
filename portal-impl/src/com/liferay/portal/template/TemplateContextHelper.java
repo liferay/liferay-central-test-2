@@ -20,7 +20,6 @@ import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.language.UnicodeLanguageUtil;
 import com.liferay.portal.kernel.servlet.BrowserSnifferUtil;
-import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.templateparser.TemplateContext;
 import com.liferay.portal.kernel.util.ArrayUtil_IW;
 import com.liferay.portal.kernel.util.DateUtil_IW;
@@ -314,8 +313,7 @@ public class TemplateContextHelper {
 	}
 
 	public void prepare(
-			TemplateContext templateContext, HttpServletRequest request)
-		throws TemplateException {
+		TemplateContext templateContext, HttpServletRequest request) {
 
 		// Request
 
