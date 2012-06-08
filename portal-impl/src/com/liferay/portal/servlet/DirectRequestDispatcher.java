@@ -12,7 +12,9 @@
  * details.
  */
 
-package com.liferay.portal.kernel.servlet;
+package com.liferay.portal.servlet;
+
+import com.liferay.portal.kernel.servlet.DynamicServletRequest;
 
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.StringPool;
