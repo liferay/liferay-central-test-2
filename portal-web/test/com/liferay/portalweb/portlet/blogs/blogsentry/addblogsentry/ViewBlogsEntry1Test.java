@@ -39,8 +39,9 @@ public class ViewBlogsEntry1Test extends BaseTestCase {
 			selenium.getText("//td[contains(.,'Edit')]/span/a/span"));
 		assertEquals(RuntimeVariables.replace("Permissions"),
 			selenium.getText("//td[contains(.,'Permissions')]/span/a/span"));
-		assertEquals(RuntimeVariables.replace("Delete"),
-			selenium.getText("//td[contains(.,'Delete')]/span/a/span"));
+		assertEquals(RuntimeVariables.replace("Move to the Recycle Bin"),
+			selenium.getText(
+				"//td[contains(.,'Move to the Recycle Bin')]/span/a/span"));
 		assertEquals(RuntimeVariables.replace("Blogs Entry1 Content"),
 			selenium.getText("//div[@class='entry-body']/p"));
 		assertEquals(RuntimeVariables.replace("By Joe Bloggs"),
