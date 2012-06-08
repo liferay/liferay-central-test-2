@@ -152,7 +152,7 @@ public class WebDriverToSeleniumBridge
 		WebElement webElement = getWebElement(locator);
 
 		if (coordString.contains(",")) {
-			WrapsDriver wrapsDriver = (WrapsDriver) webElement;
+			WrapsDriver wrapsDriver = (WrapsDriver)webElement;
 
 			WebDriver webDriver = wrapsDriver.getWrappedDriver();
 
@@ -163,7 +163,8 @@ public class WebDriverToSeleniumBridge
 			int x = GetterUtil.getInteger(coords[0]);
 			int y = GetterUtil.getInteger(coords[1]);
 
-			actions.moveToElement(webElement, x, y).click();
+			actions.moveToElement(webElement, x, y);
+			actions.click();
 
 			Action action = actions.build();
 
@@ -214,7 +215,7 @@ public class WebDriverToSeleniumBridge
 	public void doubleClick(String locator) {
 		WebElement webElement = getWebElement(locator);
 
-		WrapsDriver wrapsDriver = (WrapsDriver) webElement;
+		WrapsDriver wrapsDriver = (WrapsDriver)webElement;
 
 		WebDriver webDriver = wrapsDriver.getWrappedDriver();
 
@@ -230,7 +231,7 @@ public class WebDriverToSeleniumBridge
 	public void doubleClickAt(String locator, String coordString) {
 		WebElement webElement = getWebElement(locator);
 
-		WrapsDriver wrapsDriver = (WrapsDriver) webElement;
+		WrapsDriver wrapsDriver = (WrapsDriver)webElement;
 
 		WebDriver webDriver = wrapsDriver.getWrappedDriver();
 
@@ -242,7 +243,9 @@ public class WebDriverToSeleniumBridge
 			int x = GetterUtil.getInteger(coords[0]);
 			int y = GetterUtil.getInteger(coords[1]);
 
-			actions.moveToElement(webElement, x, y).doubleClick();
+			actions.moveToElement(webElement, x, y);
+
+			actions.doubleClick();
 		}
 		else {
 			actions.doubleClick(webElement);
@@ -263,14 +266,15 @@ public class WebDriverToSeleniumBridge
 
 		WebElement objectToBeDraggedWebElement = getWebElement(
 			locatorOfObjectToBeDragged);
-		WebElement dragDestinationObjectWebElement = getWebElement(
-			locatorOfDragDestinationObject);
 
-		WrapsDriver wrapsDriver = (WrapsDriver) objectToBeDraggedWebElement;
+		WrapsDriver wrapsDriver = (WrapsDriver)objectToBeDraggedWebElement;
 
 		WebDriver webDriver = wrapsDriver.getWrappedDriver();
 
 		Actions actions = new Actions(webDriver);
+
+		WebElement dragDestinationObjectWebElement = getWebElement(
+			locatorOfDragDestinationObject);
 
 		actions.dragAndDrop(
 			objectToBeDraggedWebElement, dragDestinationObjectWebElement);
@@ -395,11 +399,13 @@ public class WebDriverToSeleniumBridge
 	public String getEval(String script) {
 		WebElement webElement = getWebElement("//body");
 
-		WrapsDriver wrapsDriver = (WrapsDriver) webElement;
+		WrapsDriver wrapsDriver = (WrapsDriver)webElement;
 
 		WebDriver webDriver = wrapsDriver.getWrappedDriver();
 
-		return (String) ((JavascriptExecutor) webDriver).executeScript(script);
+		JavascriptExecutor javascriptExecutor = (JavascriptExecutor)webDriver;
+
+		return (String)javascriptExecutor.executeScript(script);
 	}
 
 	public String getExpression(String expression) {
@@ -587,7 +593,7 @@ public class WebDriverToSeleniumBridge
 	public void keyDown(String locator, String keySequence) {
 		WebElement webElement = getWebElement(locator);
 
-		WrapsDriver wrapsDriver = (WrapsDriver) webElement;
+		WrapsDriver wrapsDriver = (WrapsDriver)webElement;
 
 		WebDriver webDriver = wrapsDriver.getWrappedDriver();
 
@@ -616,7 +622,7 @@ public class WebDriverToSeleniumBridge
 	public void keyPress(String locator, String keySequence) {
 		WebElement webElement = getWebElement(locator);
 
-		WrapsDriver wrapsDriver = (WrapsDriver) webElement;
+		WrapsDriver wrapsDriver = (WrapsDriver)webElement;
 
 		WebDriver webDriver = wrapsDriver.getWrappedDriver();
 
@@ -627,10 +633,12 @@ public class WebDriverToSeleniumBridge
 
 			if ((index >= 48) || (index <= 90)) {
 				webElement.sendKeys(StringPool.ASCII_TABLE[index]);
-			} else {
+			}
+			else {
 				Keys keys = _keysArray[index];
 
-				actions.keyDown(webElement, keys).keyUp(webElement, keys);
+				actions.keyDown(webElement, keys);
+				actions.keyUp(webElement, keys);
 
 				Action action = actions.build();
 
@@ -665,13 +673,14 @@ public class WebDriverToSeleniumBridge
 	public void mouseDown(String locator) {
 		WebElement webElement = getWebElement(locator);
 
-		WrapsDriver wrapsDriver = (WrapsDriver) webElement;
+		WrapsDriver wrapsDriver = (WrapsDriver)webElement;
 
 		WebDriver webDriver = wrapsDriver.getWrappedDriver();
 
 		Actions actions = new Actions(webDriver);
 
-		actions.moveToElement(webElement).clickAndHold(webElement);
+		actions.moveToElement(webElement);
+		actions.clickAndHold(webElement);
 
 		Action action = actions.build();
 
@@ -693,13 +702,14 @@ public class WebDriverToSeleniumBridge
 	public void mouseMove(String locator) {
 		WebElement webElement = getWebElement(locator);
 
-		WrapsDriver wrapsDriver = (WrapsDriver) webElement;
+		WrapsDriver wrapsDriver = (WrapsDriver)webElement;
 
 		WebDriver webDriver = wrapsDriver.getWrappedDriver();
 
 		Actions actions = new Actions(webDriver);
 
-		actions.moveToElement(webElement).clickAndHold(webElement);
+		actions.moveToElement(webElement);
+		actions.clickAndHold(webElement);
 
 		Action action = actions.build();
 
@@ -709,7 +719,7 @@ public class WebDriverToSeleniumBridge
 	public void mouseMoveAt(String locator, String coordString) {
 		WebElement webElement = getWebElement(locator);
 
-		WrapsDriver wrapsDriver = (WrapsDriver) webElement;
+		WrapsDriver wrapsDriver = (WrapsDriver)webElement;
 
 		WebDriver webDriver = wrapsDriver.getWrappedDriver();
 
@@ -721,11 +731,12 @@ public class WebDriverToSeleniumBridge
 			int x = GetterUtil.getInteger(coords[0]);
 			int y = GetterUtil.getInteger(coords[1]);
 
-			actions.moveToElement(webElement, x, y).clickAndHold(webElement);
+			actions.moveToElement(webElement, x, y);
+			actions.clickAndHold(webElement);
 		}
 		else {
-			actions.moveToElement(webElement)
-				.clickAndHold(webElement);
+			actions.moveToElement(webElement);
+			actions.clickAndHold(webElement);
 		}
 
 		Action action = actions.build();
@@ -736,13 +747,14 @@ public class WebDriverToSeleniumBridge
 	public void mouseOut(String locator) {
 		WebElement webElement = getWebElement(locator);
 
-		WrapsDriver wrapsDriver = (WrapsDriver) webElement;
+		WrapsDriver wrapsDriver = (WrapsDriver)webElement;
 
 		WebDriver webDriver = wrapsDriver.getWrappedDriver();
 
 		Actions actions = new Actions(webDriver);
 
-		actions.moveToElement(webElement).moveByOffset(10, 10);
+		actions.moveToElement(webElement);
+		actions.moveByOffset(10, 10);
 
 		Action action = actions.build();
 
@@ -752,7 +764,7 @@ public class WebDriverToSeleniumBridge
 	public void mouseOver(String locator) {
 		WebElement webElement = getWebElement(locator);
 
-		WrapsDriver wrapsDriver = (WrapsDriver) webElement;
+		WrapsDriver wrapsDriver = (WrapsDriver)webElement;
 
 		WebDriver webDriver = wrapsDriver.getWrappedDriver();
 
@@ -768,7 +780,7 @@ public class WebDriverToSeleniumBridge
 	public void mouseUp(String locator) {
 		WebElement webElement = getWebElement(locator);
 
-		WrapsDriver wrapsDriver = (WrapsDriver) webElement;
+		WrapsDriver wrapsDriver = (WrapsDriver)webElement;
 
 		WebDriver webDriver = wrapsDriver.getWrappedDriver();
 
