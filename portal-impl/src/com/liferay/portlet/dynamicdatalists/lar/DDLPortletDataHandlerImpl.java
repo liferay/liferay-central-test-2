@@ -16,8 +16,6 @@ package com.liferay.portlet.dynamicdatalists.lar;
 
 import com.liferay.portal.kernel.lar.BasePortletDataHandler;
 import com.liferay.portal.kernel.lar.PortletDataContext;
-import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
-import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.xml.Document;
@@ -40,8 +38,8 @@ import javax.portlet.PortletPreferences;
 /**
  * @author Michael C. Han
  */
-public class DDLPortletDataHandlerImpl extends BasePortletDataHandler
-	implements DDLPortletDataHandler {
+public class DDLPortletDataHandlerImpl
+	extends BasePortletDataHandler implements DDLPortletDataHandler {
 
 	public void exportRecordSet(
 			PortletDataContext portletDataContext, Element recordSetsElement,
@@ -59,22 +57,22 @@ public class DDLPortletDataHandlerImpl extends BasePortletDataHandler
 		portletDataContext.addClassedModel(
 			recordSetElement, path, recordSet, _NAMESPACE);
 
+		Element ddmStructuresElement = recordSetElement.addElement(
+			"ddm-structures");
+
 		DDMStructure ddmStructure = recordSet.getDDMStructure();
 
-		Element ddmStructureReferencesElement = recordSetElement.addElement(
-			"ddm-structure-references");
-
 		DDMPortletDataHandlerImpl.exportStructure(
-			portletDataContext, ddmStructureReferencesElement, ddmStructure);
+			portletDataContext, ddmStructuresElement, ddmStructure);
 
-		List<DDMTemplate> ddmTemplates = ddmStructure.getDDMTemplates();
+		Element ddmTemplatesElement = recordSetElement.addElement(
+			"ddm-templates");
 
-		Element ddmTemplateReferencesElement = recordSetElement.addElement(
-			"ddm-template-references");
+		List<DDMTemplate> ddmTemplates = ddmStructure.getTemplates();
 
 		for (DDMTemplate ddmTemplate : ddmTemplates) {
 			DDMPortletDataHandlerImpl.exportTemplate(
-				portletDataContext, ddmTemplateReferencesElement, ddmTemplate);
+				portletDataContext, ddmTemplatesElement, ddmTemplate);
 		}
 	}
 
@@ -82,20 +80,17 @@ public class DDLPortletDataHandlerImpl extends BasePortletDataHandler
 			PortletDataContext portletDataContext, Element recordSetElement)
 		throws Exception {
 
-		Element ddmStructureReferencesElement = recordSetElement.element(
-			"ddm-structure-references");
+		Element ddmStructuresElement = recordSetElement.element(
+			"ddm-structures");
 
-		if (ddmStructureReferencesElement != null) {
-			importStructureReferences(
-				portletDataContext, ddmStructureReferencesElement);
+		if (ddmStructuresElement != null) {
+			importDDMStructures(portletDataContext, ddmStructuresElement);
 		}
 
-		Element ddmTemplateReferencesElement = recordSetElement.element(
-			"ddm-template-references");
+		Element ddmTemplatesElement = recordSetElement.element("ddm-templates");
 
-		if (ddmTemplateReferencesElement != null) {
-			importTemplateReferences(
-				portletDataContext, ddmTemplateReferencesElement);
+		if (ddmTemplatesElement != null) {
+			importDDMTemplates(portletDataContext, ddmTemplatesElement);
 		}
 
 		String path = recordSetElement.attributeValue("path");
@@ -109,9 +104,6 @@ public class DDLPortletDataHandlerImpl extends BasePortletDataHandler
 
 		long userId = portletDataContext.getUserId(recordSet.getUserUuid());
 
-		ServiceContext serviceContext = portletDataContext.createServiceContext(
-			recordSetElement, recordSet, _NAMESPACE);
-
 		Map<Long, Long> structureIds =
 			(Map<Long, Long>)portletDataContext.getNewPrimaryKeysMap(
 				DDMStructure.class);
@@ -119,6 +111,9 @@ public class DDLPortletDataHandlerImpl extends BasePortletDataHandler
 		long structureId = MapUtil.getLong(
 			structureIds, recordSet.getDDMStructureId(),
 			recordSet.getDDMStructureId());
+
+		ServiceContext serviceContext = portletDataContext.createServiceContext(
+			recordSetElement, recordSet, _NAMESPACE);
 
 		DDLRecordSet importedRecordSet = null;
 
@@ -172,7 +167,7 @@ public class DDLPortletDataHandlerImpl extends BasePortletDataHandler
 				DDLPortletDataHandlerImpl.class, "deleteData")) {
 
 			DDLRecordSetLocalServiceUtil.deleteRecordSets(
-					portletDataContext.getScopeGroupId());
+				portletDataContext.getScopeGroupId());
 		}
 
 		return portletPreferences;
@@ -251,7 +246,7 @@ public class DDLPortletDataHandlerImpl extends BasePortletDataHandler
 		return sb.toString();
 	}
 
-	protected void importStructureReferences(
+	protected void importDDMStructures(
 			PortletDataContext portletDataContext,
 			Element ddmStructureReferencesElement)
 		throws Exception {
@@ -265,7 +260,7 @@ public class DDLPortletDataHandlerImpl extends BasePortletDataHandler
 		}
 	}
 
-	protected void importTemplateReferences(
+	protected void importDDMTemplates(
 			PortletDataContext portletDataContext,
 			Element ddmTemplateReferencesElement)
 		throws Exception {

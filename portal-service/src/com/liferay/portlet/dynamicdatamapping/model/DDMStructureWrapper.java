@@ -847,9 +847,9 @@ public class DDMStructureWrapper implements DDMStructure,
 		return _ddmStructure.getFieldType(fieldName);
 	}
 
-	public java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMTemplate> getDDMTemplates()
+	public java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMTemplate> getTemplates()
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return _ddmStructure.getDDMTemplates();
+		return _ddmStructure.getTemplates();
 	}
 
 	public boolean hasField(java.lang.String fieldName) {
