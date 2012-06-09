@@ -39,20 +39,6 @@ portletURL.setParameter("tabs1", tabs1);
 portletURL.setParameter("backURL", backURL);
 portletURL.setParameter("classNameId", String.valueOf(classNameId));
 portletURL.setParameter("classPK", String.valueOf(classPK));
-
-String orderByCol = ParamUtil.getString(request, "orderByCol");
-String orderByType = ParamUtil.getString(request, "orderByType");
-
-if (Validator.isNotNull(orderByCol) && Validator.isNotNull(orderByType)) {
-	portalPreferences.setValue(PortletKeys.DYNAMIC_DATA_MAPPING, "entries-order-by-col", orderByCol);
-	portalPreferences.setValue(PortletKeys.DYNAMIC_DATA_MAPPING, "entries-order-by-type", orderByType);
-}
-else {
-	orderByCol = portalPreferences.getValue(PortletKeys.DYNAMIC_DATA_MAPPING, "entries-order-by-col", "name");
-	orderByType = portalPreferences.getValue(PortletKeys.DYNAMIC_DATA_MAPPING, "entries-order-by-type", "asc");
-}
-
-OrderByComparator orderByComparator = DDMTemplateUtil.getEntriesOrderByComparator(orderByCol, orderByType);
 %>
 
 <c:choose>
@@ -81,6 +67,22 @@ OrderByComparator orderByComparator = DDMTemplateUtil.getEntriesOrderByComparato
 	<aui:input name="redirect" type="hidden" value="<%= portletURL.toString() %>" />
 	<aui:input name="deleteTemplateIds" type="hidden" />
 
+	<%
+	String orderByCol = ParamUtil.getString(request, "orderByCol");
+	String orderByType = ParamUtil.getString(request, "orderByType");
+
+	if (Validator.isNotNull(orderByCol) && Validator.isNotNull(orderByType)) {
+		portalPreferences.setValue(PortletKeys.DYNAMIC_DATA_MAPPING, "entries-order-by-col", orderByCol);
+		portalPreferences.setValue(PortletKeys.DYNAMIC_DATA_MAPPING, "entries-order-by-type", orderByType);
+	}
+	else {
+		orderByCol = portalPreferences.getValue(PortletKeys.DYNAMIC_DATA_MAPPING, "entries-order-by-col", "name");
+		orderByType = portalPreferences.getValue(PortletKeys.DYNAMIC_DATA_MAPPING, "entries-order-by-type", "asc");
+	}
+
+	OrderByComparator orderByComparator = DDMUtil.getTemplateOrderByComparator(orderByCol, orderByType);
+	%>
+
 	<liferay-ui:search-container
 		orderByCol="<%= orderByCol %>"
 		orderByComparator="<%= orderByComparator %>"
@@ -88,7 +90,6 @@ OrderByComparator orderByComparator = DDMTemplateUtil.getEntriesOrderByComparato
 		rowChecker="<%= new RowChecker(renderResponse) %>"
 		searchContainer="<%= new TemplateSearch(renderRequest, portletURL) %>"
 	>
-
 		<liferay-ui:search-form
 			page="/html/portlet/dynamic_data_mapping/template_search.jsp"
 		/>

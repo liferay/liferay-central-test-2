@@ -39,10 +39,16 @@ public class TemplateNameComparator extends OrderByComparator {
 	@Override
 	public int compare(Object obj1, Object obj2) {
 		DDMTemplate template1 = (DDMTemplate)obj1;
+
+		String templateName1 = template1.getName();
+
+		templateName1 = templateName1.toLowerCase();
+
 		DDMTemplate template2 = (DDMTemplate)obj2;
 
-		String templateName1 = template1.getName().toLowerCase();
-		String templateName2 = template2.getName().toLowerCase();
+		String templateName2 = template2.getName();
+
+		templateName2 = templateName2.toLowerCase();
 
 		int value = templateName1.compareTo(templateName2);
 
