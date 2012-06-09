@@ -24,10 +24,10 @@ import com.liferay.portal.kernel.util.Validator;
 
 import java.io.File;
 
+import java.lang.reflect.Method;
+
 import java.net.URI;
 import java.net.URL;
-
-import java.lang.reflect.Method;
 
 import java.util.Map;
 import java.util.jar.Attributes;
@@ -44,16 +44,16 @@ public class JasperVersionDetector {
 		return _instance._jasperVersion;
 	}
 
-	public static boolean getJspServletUsesDependantsMap() {
-		return _instance._jspServletUsesDependantsMap;
+	public static boolean hasJspServletDependantsMap() {
+		return _instance._jspServletDependantsMap;
 	}
 
 	private JasperVersionDetector() {
-		initializeJasperVersion();
-		initializeJspServletUsesDependantsMap();
+		_initializeJasperVersion();
+		_initializeJspServletDependantsMap();
 	}
 
-	private void initializeJasperVersion() {
+	private void _initializeJasperVersion() {
 		try {
 			Class<?> clazz = getClass();
 
@@ -119,7 +119,7 @@ public class JasperVersionDetector {
 		}
 	}
 
-	private void initializeJspServletUsesDependantsMap() {
+	private void _initializeJspServletDependantsMap() {
 		try {
 			Class<?> clazz = Class.forName(
 				"org.apache.jasper.servlet.JspServletWrapper");
@@ -129,8 +129,7 @@ public class JasperVersionDetector {
 
 			Class<?> returnType = method.getReturnType();
 
-			_jspServletUsesDependantsMap = Map.class.isAssignableFrom(
-				returnType);
+			_jspServletDependantsMap = Map.class.isAssignableFrom(returnType);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -155,6 +154,6 @@ public class JasperVersionDetector {
 		new JasperVersionDetector();
 
 	private String _jasperVersion = StringPool.BLANK;
-	private boolean _jspServletUsesDependantsMap = false;
+	private boolean _jspServletDependantsMap;
 
 }
