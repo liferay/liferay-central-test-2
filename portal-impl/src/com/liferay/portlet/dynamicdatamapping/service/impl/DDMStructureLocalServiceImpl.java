@@ -170,7 +170,8 @@ public class DDMStructureLocalServiceImpl
 		if (ddmStructureLinkPersistence.countByStructureId(
 				structure.getStructureId()) > 0) {
 
-			throw new RequiredStructureException();
+			throw new RequiredStructureException(
+				RequiredStructureException.REFERENCED_STRUCTURE_LINK);
 		}
 
 		long classNameId = PortalUtil.getClassNameId(DDMStructure.class);

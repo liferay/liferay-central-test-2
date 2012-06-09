@@ -29,7 +29,7 @@ portletURL.setParameter("tabs1", tabs1);
 	<liferay-ui:message key="required-structures-could-not-be-deleted" />
 
 	<%
-		RequiredStructureException rse = (RequiredStructureException)errorException;
+	RequiredStructureException rse = (RequiredStructureException)errorException;
 	%>
 
 	<c:if test="<%= rse.getType() == RequiredStructureException.REFERENCED_TEMPLATE %>">

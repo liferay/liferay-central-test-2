@@ -21,26 +21,12 @@ import com.liferay.portal.kernel.exception.PortalException;
  */
 public class RequiredStructureException extends PortalException {
 
-	public static final int REFERENCED_TEMPLATE = 1;
+	public static final int REFERENCED_STRUCTURE_LINK = 1;
 
-	public RequiredStructureException() {
-		super();
-	}
+	public static final int REFERENCED_TEMPLATE = 2;
 
 	public RequiredStructureException(int type) {
 		_type = type;
-	}
-
-	public RequiredStructureException(String msg) {
-		super(msg);
-	}
-
-	public RequiredStructureException(String msg, Throwable cause) {
-		super(msg, cause);
-	}
-
-	public RequiredStructureException(Throwable cause) {
-		super(cause);
 	}
 
 	public int getType() {
