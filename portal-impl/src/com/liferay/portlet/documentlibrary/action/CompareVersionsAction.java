@@ -64,7 +64,7 @@ public class CompareVersionsAction extends PortletAction {
 			if (e instanceof NoSuchFileEntryException ||
 				e instanceof PrincipalException) {
 
-				SessionErrors.add(renderRequest, e.getClass().getName());
+				SessionErrors.add(renderRequest, e.getClass());
 
 				setForward(renderRequest, "portlet.document_library.error");
 			}
@@ -97,10 +97,10 @@ public class CompareVersionsAction extends PortletAction {
 		if (sourceExtension.equals("htm") || sourceExtension.equals("html") ||
 			sourceExtension.equals("xml")) {
 
-			String escapedSource = HtmlUtil.escape(StringUtil.read(sourceIs));
+			String sourceContent = HtmlUtil.escape(StringUtil.read(sourceIs));
 
 			sourceIs = new UnsyncByteArrayInputStream(
-				escapedSource.getBytes(StringPool.UTF8));
+				sourceContent.getBytes(StringPool.UTF8));
 		}
 
 		FileVersion targetFileVersion = fileEntry.getFileVersion(targetVersion);
@@ -112,10 +112,10 @@ public class CompareVersionsAction extends PortletAction {
 		if (targetExtension.equals("htm") || targetExtension.equals("html") ||
 			targetExtension.equals("xml")) {
 
-			String escapedTarget = HtmlUtil.escape(StringUtil.read(targetIs));
+			String targetContent = HtmlUtil.escape(StringUtil.read(targetIs));
 
 			targetIs = new UnsyncByteArrayInputStream(
-				escapedTarget.getBytes(StringPool.UTF8));
+				targetContent.getBytes(StringPool.UTF8));
 		}
 
 		if (DocumentConversionUtil.isEnabled()) {
