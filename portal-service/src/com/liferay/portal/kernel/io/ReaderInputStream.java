@@ -48,9 +48,6 @@ public class ReaderInputStream extends InputStream {
 
 		_reader = reader;
 		_charsetName = charsetName;
-		_charsetEncoder = CharsetEncoderUtil.getCharsetEncoder(charsetName);
-
-		_maxBytesPerChar = (int)Math.ceil(_charsetEncoder.maxBytesPerChar());
 
 		if (inputBufferSize <= 0) {
 			throw new IllegalArgumentException(
@@ -58,28 +55,36 @@ public class ReaderInputStream extends InputStream {
 					" must be a positive number");
 		}
 
+		_inputBuffer = CharBuffer.allocate(inputBufferSize);
+
+		_charsetEncoder = CharsetEncoderUtil.getCharsetEncoder(charsetName);
+
+		_maxBytesPerChar = (int)Math.ceil(_charsetEncoder.maxBytesPerChar());
+
 		if (outputBufferSize < _maxBytesPerChar) {
 			throw new IllegalArgumentException(
 				"Output buffer size " + outputBufferSize + " is less than " +
 				_maxBytesPerChar);
 		}
 
-		_inputBuffer = CharBuffer.allocate(inputBufferSize);
 		_outputBuffer = ByteBuffer.allocate(outputBufferSize);
+
 		_outputBuffer.flip();
 	}
 
 	@Override
-	public int available() throws IOException {
+	public int available() {
 		return _outputBuffer.remaining() + _inputBuffer.position();
 	}
 
 	@Override
 	public void close() throws IOException {
 		_inputBuffer.clear();
-		_outputBuffer.clear();
 
 		_inputBuffer = null;
+
+		_outputBuffer.clear();
+
 		_outputBuffer = null;
 
 		_reader.close();
@@ -114,7 +119,7 @@ public class ReaderInputStream extends InputStream {
 			throw new NullPointerException();
 		}
 		else if ((offset < 0) || (length < 0) ||
-			(length > (bytes.length - offset))) {
+				 (length > (bytes.length - offset))) {
 
 			throw new IndexOutOfBoundsException();
 		}
@@ -233,6 +238,7 @@ public class ReaderInputStream extends InputStream {
 	}
 
 	private static final int _DEFAULT_INTPUT_BUFFER_SIZE = 128;
+
 	private static final int _DEFAULT_OUTPUT_BUFFER_SIZE = 1024;
 
 	private CharsetEncoder _charsetEncoder;
