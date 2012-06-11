@@ -440,7 +440,7 @@ public class LayoutTypePortletImpl
 			List<String> columns = new ArrayList<String>();
 
 			for (int i = 1; i <= 10; i++) {
-				columns.add("column-" + i);
+				columns.add(LayoutTypePortletConstants.COLUMN_PREFIX + i);
 			}
 
 			layoutTemplate.setColumns(columns);
@@ -1170,27 +1170,29 @@ public class LayoutTypePortletImpl
 		setTypeSettingsProperty(columnId, portletIds);
 
 		if (!columnId.startsWith(
-				LayoutTypePortletConstants.RUNTIME_PORTLET_NAMESPACE)) {
+				LayoutTypePortletConstants.RUNTIME_COLUMN_PREFIX)) {
 
 			return;
 		}
 
-		String runtimePortlets = getTypeSettingsProperty(
-			LayoutTypePortletConstants.RUNTIME_PORTLETS, StringPool.BLANK);
+		String runtimeColumnIds = getTypeSettingsProperty(
+			LayoutTypePortletConstants.RUNTIME_COLUMN_IDS, StringPool.BLANK);
 
-		int pos = runtimePortlets.indexOf(columnId);
+		int pos = runtimeColumnIds.indexOf(columnId);
 
 		if ((pos == -1) && Validator.isNotNull(portletIds)) {
-			runtimePortlets = StringUtil.add(runtimePortlets, columnId);
+			runtimeColumnIds = StringUtil.add(runtimeColumnIds, columnId);
 
 			setTypeSettingsProperty(
-				LayoutTypePortletConstants.RUNTIME_PORTLETS, runtimePortlets);
+				LayoutTypePortletConstants.RUNTIME_COLUMN_IDS,
+				runtimeColumnIds);
 		}
 		else if ((pos != -1) && Validator.isNull(portletIds)) {
-			runtimePortlets = StringUtil.remove(runtimePortlets, columnId);
+			runtimeColumnIds = StringUtil.remove(runtimeColumnIds, columnId);
 
 			setTypeSettingsProperty(
-				LayoutTypePortletConstants.RUNTIME_PORTLETS, runtimePortlets);
+				LayoutTypePortletConstants.RUNTIME_COLUMN_IDS,
+				runtimeColumnIds);
 		}
 	}
 
@@ -1299,7 +1301,7 @@ public class LayoutTypePortletImpl
 
 		columns.addAll(layoutTemplate.getColumns());
 		columns.addAll(getNestedColumns());
-		columns.addAll(getRuntimePortlets());
+		columns.addAll(getRuntimeColumns());
 
 		return columns;
 	}
@@ -1350,11 +1352,11 @@ public class LayoutTypePortletImpl
 		return layout.getPlid();
 	}
 
-	protected List<String> getRuntimePortlets() {
-		String runtimePortlets = getTypeSettingsProperty(
-			LayoutTypePortletConstants.RUNTIME_PORTLETS);
+	protected List<String> getRuntimeColumns() {
+		String runtimePortletIds = getTypeSettingsProperty(
+			LayoutTypePortletConstants.RUNTIME_COLUMN_IDS);
 
-		return ListUtil.fromArray(StringUtil.split(runtimePortlets));
+		return ListUtil.fromArray(StringUtil.split(runtimePortletIds));
 	}
 
 	protected String[] getStaticPortletIds(String position)
@@ -1664,7 +1666,6 @@ public class LayoutTypePortletImpl
 	private static Log _log = LogFactoryUtil.getLog(
 		LayoutTypePortletImpl.class);
 
-	private static String _journalContentNamespace;
 	private static String _nestedPortletsNamespace;
 
 	private boolean _customizedView;

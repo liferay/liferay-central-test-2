@@ -39,6 +39,7 @@ import com.liferay.portlet.layoutconfiguration.util.xml.PortletLogic;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
+import javax.portlet.PortletRequest;
 
 /**
  * @author Brian Wing Shun Chan
@@ -65,41 +66,15 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 		}
 	}
 
-	protected void updateContentSearch(ActionRequest actionRequest)
-		throws Exception {
+	protected String getArticleId(PortletRequest portletRequest) {
+		String articleId = getParameter(portletRequest, "articleId");
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
-		String articleId = getParameter(
-			actionRequest, "articleId").toUpperCase();
-
-		String portletResource = ParamUtil.getString(
-			actionRequest, "portletResource");
-
-		Layout layout = themeDisplay.getLayout();
-
-		JournalContentSearchLocalServiceUtil.updateContentSearch(
-			layout.getGroupId(), layout.isPrivateLayout(), layout.getLayoutId(),
-			portletResource, articleId, true);
+		return articleId.toUpperCase();
 	}
 
-	protected void updateLayout(ActionRequest actionRequest) throws Exception {
-		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
-		String articleId = getParameter(
-			actionRequest, "articleId").toUpperCase();
-
-		if (Validator.isNull(articleId)) {
-			return;
-		}
-
-		LayoutTypePortlet layoutTypePortlet =
-			themeDisplay.getLayoutTypePortlet();
-
-		String portletResource = ParamUtil.getString(
-			actionRequest, "portletResource");
+	protected String getRuntimePortletIds(
+			ThemeDisplay themeDisplay, String articleId)
+		throws Exception {
 
 		JournalArticle journalArticle = null;
 
@@ -121,19 +96,16 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 			journalArticle.getContent());
 
 		if (Validator.isNotNull(journalArticle.getTemplateId())) {
-			JournalTemplate journalTemplate;
+			JournalTemplate journalTemplate = null;
 
 			try {
-				journalTemplate =
-					JournalTemplateLocalServiceUtil.getTemplate(
-						themeDisplay.getScopeGroupId(),
-						journalArticle.getTemplateId());
+				journalTemplate = JournalTemplateLocalServiceUtil.getTemplate(
+					themeDisplay.getScopeGroupId(),
+					journalArticle.getTemplateId());
 			}
 			catch (NoSuchTemplateException nste) {
-				journalTemplate =
-					JournalTemplateLocalServiceUtil.getTemplate(
-						companyGroup.getGroupId(),
-						journalArticle.getTemplateId());
+				journalTemplate = JournalTemplateLocalServiceUtil.getTemplate(
+					companyGroup.getGroupId(), journalArticle.getTemplateId());
 			}
 
 			portletIds = StringUtil.add(
@@ -141,11 +113,51 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 				PortletLogic.getRuntimePortletIds(journalTemplate.getXsl()));
 		}
 
-		layoutTypePortlet.setPortletIds(
-			LayoutTypePortletConstants.RUNTIME_PORTLET_NAMESPACE +
-				portletResource, portletIds);
+		return portletIds;
+	}
+
+	protected void updateContentSearch(PortletRequest portletRequest)
+		throws Exception {
+
+		String articleId = getArticleId(portletRequest);
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		Layout layout = themeDisplay.getLayout();
+
+		String portletResource = ParamUtil.getString(
+			portletRequest, "portletResource");
+
+		JournalContentSearchLocalServiceUtil.updateContentSearch(
+			layout.getGroupId(), layout.isPrivateLayout(), layout.getLayoutId(),
+			portletResource, articleId, true);
+	}
+
+	protected void updateLayout(PortletRequest portletRequest)
+		throws Exception {
+
+		String articleId = getArticleId(portletRequest);
+
+		if (Validator.isNull(articleId)) {
+			return;
+		}
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		Layout layout = themeDisplay.getLayout();
+
+		LayoutTypePortlet layoutTypePortlet =
+			(LayoutTypePortlet)layout.getLayoutType();
+
+		String portletResource = ParamUtil.getString(
+			portletRequest, "portletResource");
+
+		layoutTypePortlet.setPortletIds(
+			LayoutTypePortletConstants.RUNTIME_COLUMN_PREFIX +
+				portletResource,
+			getRuntimePortletIds(themeDisplay, articleId));
 
 		LayoutLocalServiceUtil.updateLayout(
 			layout.getGroupId(), layout.isPrivateLayout(), layout.getLayoutId(),

@@ -75,7 +75,7 @@ public class PortletLogic extends RuntimeLogic {
 			}
 
 			sb.append(
-				getRuntimePortletId(content.substring(index, closeIndex)));
+				_getRuntimePortletId(content.substring(index, closeIndex)));
 
 			index = closeIndex;
 		}
@@ -137,7 +137,7 @@ public class PortletLogic extends RuntimeLogic {
 		return stringServletResponse.getString();
 	}
 
-	protected static String getRuntimePortletId(String xml) throws Exception {
+	private static String _getRuntimePortletId(String xml) throws Exception {
 		Document document = SAXReaderUtil.read(xml);
 
 		Element rootElement = document.getRootElement();

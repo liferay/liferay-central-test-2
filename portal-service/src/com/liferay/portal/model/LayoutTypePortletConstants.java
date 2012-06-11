@@ -20,6 +20,8 @@ package com.liferay.portal.model;
  */
 public class LayoutTypePortletConstants {
 
+	public static final String COLUMN_PREFIX = "column-";
+
 	public static final String DEFAULT_ASSET_PUBLISHER_PORTLET_ID =
 		"default-asset-publisher-portlet-id";
 
@@ -43,9 +45,9 @@ public class LayoutTypePortletConstants {
 
 	public static final String NESTED_COLUMN_IDS = "nested-column-ids";
 
-	public static final String RUNTIME_PORTLET_NAMESPACE = "_RUNTIME_";
+	public static final String RUNTIME_COLUMN_IDS = "runtime-column-ids";
 
-	public static final String RUNTIME_PORTLETS = "runtime-portlets";
+	public static final String RUNTIME_COLUMN_PREFIX = "runtime-column-";
 
 	public static final String STATE_MAX = "state-max";
 
