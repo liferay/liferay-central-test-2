@@ -179,7 +179,7 @@ public class AssetCategoryServiceImpl extends AssetCategoryServiceBaseImpl {
 
 		int page = 0;
 
-		if (end > 0 && start > 0) {
+		if ((end > 0) && (start > 0)) {
 			page = end / (end - start);
 		}
 
