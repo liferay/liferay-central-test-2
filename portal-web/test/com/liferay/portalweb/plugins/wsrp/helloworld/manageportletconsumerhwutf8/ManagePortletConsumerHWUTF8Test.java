@@ -54,6 +54,9 @@ public class ManagePortletConsumerHWUTF8Test extends BaseTestCase {
 		selenium.clickAt("link=Consumers", RuntimeVariables.replace("Consumers"));
 		selenium.waitForPageToLoad("30000");
 		loadRequiredJavaScriptModules();
+		Thread.sleep(5000);
+		assertEquals(RuntimeVariables.replace("Actions"),
+			selenium.getText("//span[@title='Actions']/ul/li/strong/a/span"));
 		selenium.clickAt("//span[@title='Actions']/ul/li/strong/a/span",
 			RuntimeVariables.replace("Actions"));
 
@@ -64,7 +67,7 @@ public class ManagePortletConsumerHWUTF8Test extends BaseTestCase {
 
 			try {
 				if (selenium.isVisible(
-							"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a")) {
+							"//div[@class='lfr-component lfr-menu-list']/ul/li/a[contains(.,'Manage Portlets')]")) {
 					break;
 				}
 			}
@@ -74,8 +77,11 @@ public class ManagePortletConsumerHWUTF8Test extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		assertEquals(RuntimeVariables.replace("Manage Portlets"),
+			selenium.getText(
+				"//div[@class='lfr-component lfr-menu-list']/ul/li/a[contains(.,'Manage Portlets')]"));
 		selenium.click(RuntimeVariables.replace(
-				"//div[@class='lfr-component lfr-menu-list']/ul/li[2]/a"));
+				"//div[@class='lfr-component lfr-menu-list']/ul/li/a[contains(.,'Manage Portlets')]"));
 		selenium.waitForPageToLoad("30000");
 		loadRequiredJavaScriptModules();
 		selenium.clickAt("//input[@value='Add Portlet']",
@@ -85,7 +91,7 @@ public class ManagePortletConsumerHWUTF8Test extends BaseTestCase {
 		selenium.type("//input[@id='_1_WAR_wsrpportlet_name']",
 			RuntimeVariables.replace("WSRP \u4e16\u754c\u60a8\u597d Portlet"));
 		selenium.select("//select[@name='_1_WAR_wsrpportlet_portletHandle']",
-			RuntimeVariables.replace("label=Hello World"));
+			RuntimeVariables.replace("Hello World"));
 		selenium.clickAt("//input[@value='Save']",
 			RuntimeVariables.replace("Save"));
 		selenium.waitForPageToLoad("30000");
