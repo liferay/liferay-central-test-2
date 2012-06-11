@@ -131,10 +131,10 @@ public abstract class JSONAction extends Action {
 	protected void checkAuthToken(HttpServletRequest request)
 		throws PortalException {
 
-		String authType = request.getAuthType();
+		String authType = GetterUtil.getString(request.getAuthType());
 
-		if ((authType == HttpServletRequest.BASIC_AUTH) ||
-			(authType == HttpServletRequest.DIGEST_AUTH)) {
+		if (authType.equals(HttpServletRequest.BASIC_AUTH) ||
+			authType.equals(HttpServletRequest.DIGEST_AUTH)) {
 
 			return;
 		}
