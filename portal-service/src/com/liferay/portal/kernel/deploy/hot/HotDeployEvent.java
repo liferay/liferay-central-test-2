@@ -50,11 +50,7 @@ public class HotDeployEvent {
 		_dependencyManagementEnabled = dependencyManagementEnabled;
 
 		try {
-
-			if (isDependencyManagementEnabled()) {
-				initDependentServletContextNames();
-			}
-
+			initDependentServletContextNames();
 		}
 		catch (IOException ioe) {
 			_log.error(ioe, ioe);
@@ -90,6 +86,10 @@ public class HotDeployEvent {
 	}
 
 	protected void initDependentServletContextNames() throws IOException {
+		if (!_dependencyManagementEnabled) {
+			return;
+		}
+
 		InputStream is = _servletContext.getResourceAsStream(
 			"/WEB-INF/liferay-plugin-package.properties");
 

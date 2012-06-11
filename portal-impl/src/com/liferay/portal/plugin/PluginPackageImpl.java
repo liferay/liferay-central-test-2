@@ -181,7 +181,7 @@ public class PluginPackageImpl
 		}
 	}
 
-	public List<String> getRequiredDeploymentContext() {
+	public List<String> getRequiredDeploymentContexts() {
 		return _requiredDeploymentContexts;
 	}
 
@@ -283,6 +283,7 @@ public class PluginPackageImpl
 
 	public void setRequiredDeploymentContexts(
 		List<String> requiredDeploymentContexts) {
+
 		_requiredDeploymentContexts = requiredDeploymentContexts;
 	}
 

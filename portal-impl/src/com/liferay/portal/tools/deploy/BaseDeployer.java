@@ -188,9 +188,9 @@ public class BaseDeployer implements AutoDeployer, Deployer {
 	public void autoDeploy(AutoDeploymentContext autoDeploymentContext)
 		throws AutoDeployException {
 
-		File file = autoDeploymentContext.getFileToDeploy();
-
 		List<String> wars = new ArrayList<String>();
+
+		File file = autoDeploymentContext.getFileToDeploy();
 
 		wars.add(file.getName());
 
@@ -525,8 +525,8 @@ public class BaseDeployer implements AutoDeployer, Deployer {
 					AutoDeploymentContext autoDeploymentContext =
 						new AutoDeploymentContext();
 
-					autoDeploymentContext.setFileToDeploy(srcFile);
 					autoDeploymentContext.setContext(context);
+					autoDeploymentContext.setFileToDeploy(srcFile);
 
 					deployFile(autoDeploymentContext);
 				}
@@ -789,15 +789,14 @@ public class BaseDeployer implements AutoDeployer, Deployer {
 
 		File srcFile = autoDeploymentContext.getFileToDeploy();
 
-		String specifiedContext = autoDeploymentContext.getContext();
-
 		PluginPackage pluginPackage = readPluginPackage(srcFile);
 
 		if (_log.isInfoEnabled()) {
 			_log.info("Deploying " + srcFile.getName());
 		}
 
-		String deployDir = null;
+		String specifiedContext = autoDeploymentContext.getContext();
+
 		String displayName = specifiedContext;
 		boolean overwrite = false;
 		String preliminaryContext = specifiedContext;
@@ -844,6 +843,8 @@ public class BaseDeployer implements AutoDeployer, Deployer {
 				preliminaryContext, pluginPackage);
 		}
 
+		String deployDir = null;
+
 		if (Validator.isNotNull(displayName)) {
 			deployDir = displayName + ".war";
 		}
@@ -869,13 +870,13 @@ public class BaseDeployer implements AutoDeployer, Deployer {
 			}
 		}
 
+		String destDir = this.destDir;
+
 		if (autoDeploymentContext.getDestDir() != null) {
 			destDir = autoDeploymentContext.getDestDir();
 		}
 
-		deployDir = destDir + "/" + deployDir;
-
-		File deployDirFile = new File(deployDir);
+		File deployDirFile = new File(destDir + "/" + deployDir);
 
 		try {
 			PluginPackage previousPluginPackage = readPluginPackage(
