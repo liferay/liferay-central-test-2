@@ -18,8 +18,6 @@ import com.liferay.portal.kernel.deploy.auto.context.AutoDeploymentContext;
 import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.security.pacl.permission.PortalRuntimePermission;
 
-import java.io.File;
-
 import java.util.List;
 import java.util.Properties;
 

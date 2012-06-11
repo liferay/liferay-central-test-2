@@ -17,9 +17,6 @@ package com.liferay.portal.kernel.deploy.auto.context;
 import java.io.File;
 
 /**
- * This artifact allows to share information among all the auto deployers in a
- * thread safe manner
- *
  * @author Miguel Pastor
  */
 public class AutoDeploymentContext {
@@ -28,16 +25,16 @@ public class AutoDeploymentContext {
 		return _context;
 	}
 
+	public File getDeployDir() {
+		return new File(_destDir, _context);
+	}
+
 	public String getDestDir() {
 		return _destDir;
 	}
 
 	public File getFileToDeploy() {
 		return _fileToDeploy;
-	}
-
-	public File getDeployDir() {
-		return new File(_destDir, _context);
 	}
 
 	public void setContext(String context) {

@@ -17,8 +17,6 @@ package com.liferay.portal.deploy.auto;
 import com.liferay.portal.kernel.deploy.auto.AutoDeployException;
 import com.liferay.portal.kernel.deploy.auto.context.AutoDeploymentContext;
 
-import java.io.File;
-
 /**
  * @author Ivica Cardic
  * @author Brian Wing Shun Chan

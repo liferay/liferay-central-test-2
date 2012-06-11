@@ -52,11 +52,11 @@ public class LiferayPackageAutoDeployer implements AutoDeployer {
 	public void autoDeploy(AutoDeploymentContext autoDeploymentContext)
 		throws AutoDeployException {
 
-		File file = autoDeploymentContext.getFileToDeploy();
-
 		ZipFile zipFile = null;
 
 		try {
+			File file = autoDeploymentContext.getFileToDeploy();
+
 			zipFile = new ZipFile(file);
 
 			Enumeration<? extends ZipEntry> enu = zipFile.entries();

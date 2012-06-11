@@ -17,8 +17,6 @@ package com.liferay.portal.kernel.deploy;
 import com.liferay.portal.kernel.deploy.auto.context.AutoDeploymentContext;
 import com.liferay.portal.kernel.plugin.PluginPackage;
 
-import java.io.File;
-
 import java.util.List;
 import java.util.Properties;
 
@@ -30,7 +28,7 @@ import java.util.Properties;
 public interface DeployManager {
 
 	public void deploy(AutoDeploymentContext autoDeploymentContext)
-		throws  Exception;
+		throws Exception;
 
 	public String getDeployDir() throws Exception;
 
