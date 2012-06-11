@@ -35,8 +35,7 @@ public class FileImplTest extends TestCase {
 	@Test
 	public void testGetPathForwardSlashBackSlash() {
 		Assert.assertEquals(
-			"aaa/bbb\\ccc/ddd",
-			_fileImpl.getPath("aaa/bbb\\ccc/ddd\\eee.fff"));
+			"aaa/bbb\\ccc/ddd", _fileImpl.getPath("aaa/bbb\\ccc/ddd\\eee.fff"));
 	}
 
 	@Test
