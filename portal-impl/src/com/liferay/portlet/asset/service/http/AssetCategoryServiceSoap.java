@@ -198,13 +198,13 @@ public class AssetCategoryServiceSoap {
 		}
 	}
 
-	public static java.lang.String getJSONVocabularyCategories(long groupId,
-		java.lang.String name, long vocabularyId, int start, int end,
+	public static java.lang.String getJSONVocabularyCategories(
+		long vocabularyId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws RemoteException {
 		try {
-			com.liferay.portal.kernel.json.JSONObject returnValue = AssetCategoryServiceUtil.getJSONVocabularyCategories(groupId,
-					name, vocabularyId, start, end, obc);
+			com.liferay.portal.kernel.json.JSONObject returnValue = AssetCategoryServiceUtil.getJSONVocabularyCategories(vocabularyId,
+					start, end, obc);
 
 			return returnValue.toString();
 		}
@@ -215,13 +215,13 @@ public class AssetCategoryServiceSoap {
 		}
 	}
 
-	public static java.lang.String getJSONVocabularyCategories(
-		long vocabularyId, int start, int end,
+	public static java.lang.String getJSONVocabularyCategories(long groupId,
+		java.lang.String name, long vocabularyId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws RemoteException {
 		try {
-			com.liferay.portal.kernel.json.JSONObject returnValue = AssetCategoryServiceUtil.getJSONVocabularyCategories(vocabularyId,
-					start, end, obc);
+			com.liferay.portal.kernel.json.JSONObject returnValue = AssetCategoryServiceUtil.getJSONVocabularyCategories(groupId,
+					name, vocabularyId, start, end, obc);
 
 			return returnValue.toString();
 		}

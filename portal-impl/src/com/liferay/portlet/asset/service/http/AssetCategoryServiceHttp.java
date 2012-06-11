@@ -350,8 +350,7 @@ public class AssetCategoryServiceHttp {
 	}
 
 	public static com.liferay.portal.kernel.json.JSONObject getJSONVocabularyCategories(
-		HttpPrincipal httpPrincipal, long groupId, java.lang.String name,
-		long vocabularyId, int start, int end,
+		HttpPrincipal httpPrincipal, long vocabularyId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -360,8 +359,8 @@ public class AssetCategoryServiceHttp {
 					"getJSONVocabularyCategories",
 					_getJSONVocabularyCategoriesParameterTypes8);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					name, vocabularyId, start, end, obc);
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					vocabularyId, start, end, obc);
 
 			Object returnObj = null;
 
@@ -390,7 +389,8 @@ public class AssetCategoryServiceHttp {
 	}
 
 	public static com.liferay.portal.kernel.json.JSONObject getJSONVocabularyCategories(
-		HttpPrincipal httpPrincipal, long vocabularyId, int start, int end,
+		HttpPrincipal httpPrincipal, long groupId, java.lang.String name,
+		long vocabularyId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -399,8 +399,8 @@ public class AssetCategoryServiceHttp {
 					"getJSONVocabularyCategories",
 					_getJSONVocabularyCategoriesParameterTypes9);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					vocabularyId, start, end, obc);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					name, vocabularyId, start, end, obc);
 
 			Object returnObj = null;
 
@@ -835,11 +835,11 @@ public class AssetCategoryServiceHttp {
 			int.class
 		};
 	private static final Class<?>[] _getJSONVocabularyCategoriesParameterTypes8 = new Class[] {
-			long.class, java.lang.String.class, long.class, int.class, int.class,
+			long.class, int.class, int.class,
 			com.liferay.portal.kernel.util.OrderByComparator.class
 		};
 	private static final Class<?>[] _getJSONVocabularyCategoriesParameterTypes9 = new Class[] {
-			long.class, int.class, int.class,
+			long.class, java.lang.String.class, long.class, int.class, int.class,
 			com.liferay.portal.kernel.util.OrderByComparator.class
 		};
 	private static final Class<?>[] _getVocabularyCategoriesParameterTypes10 = new Class[] {
