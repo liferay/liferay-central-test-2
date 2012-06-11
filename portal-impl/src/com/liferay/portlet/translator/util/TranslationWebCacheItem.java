@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.translator.util;
 
+import com.liferay.portal.kernel.microsofttranslator.MicrosoftTranslator;
 import com.liferay.portal.kernel.microsofttranslator.MicrosoftTranslatorFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Time;
@@ -36,16 +37,20 @@ public class TranslationWebCacheItem implements WebCacheItem {
 		Translation translation = new Translation(_translationId, _fromText);
 
 		try {
+			MicrosoftTranslator microsoftTranslator =
+				MicrosoftTranslatorFactoryUtil.getMicrosoftTranslator();
+
 			int x = _translationId.indexOf(StringPool.UNDERLINE);
 
 			if ((x == -1) || ((x + 1) == _translationId.length())) {
-				throw new WebCacheException("invalid translationId");
+				throw new WebCacheException(
+					"Invalid translation ID " + _translationId);
 			}
 
 			String fromLanguage = _translationId.substring(0, x);
 			String toLanguage = _translationId.substring(x + 1);
 
-			String toText = MicrosoftTranslatorFactoryUtil.translate(
+			String toText = microsoftTranslator.translate(
 				fromLanguage, toLanguage, _fromText);
 
 			translation.setToText(toText);

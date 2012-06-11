@@ -17,11 +17,10 @@ package com.liferay.portal.kernel.microsofttranslator;
 /**
  * @author Hugo Huijser
  */
-public interface MicrosoftTranslatorFactory {
+public interface MicrosoftTranslator {
 
-	public MicrosoftTranslator getMicrosoftTranslator();
-
-	public MicrosoftTranslator getMicrosoftTranslator(
-		String clientId, String clientSecret);
+	public String translate(
+			String fromLanguage, String toLanguage, String fromText)
+		throws MicrosoftTranslatorException;
 
 }

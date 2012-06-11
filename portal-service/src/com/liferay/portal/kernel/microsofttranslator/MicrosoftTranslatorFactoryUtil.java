@@ -21,19 +21,22 @@ import com.liferay.portal.kernel.security.pacl.permission.PortalRuntimePermissio
  */
 public class MicrosoftTranslatorFactoryUtil {
 
+	public static MicrosoftTranslator getMicrosoftTranslator() {
+		return getMicrosoftTranslatorFactory().getMicrosoftTranslator();
+	}
+
+	public static MicrosoftTranslator getMicrosoftTranslator(
+		String clientId, String clientSecret) {
+
+		return getMicrosoftTranslatorFactory().getMicrosoftTranslator(
+			clientId, clientSecret);
+	}
+
 	public static MicrosoftTranslatorFactory getMicrosoftTranslatorFactory() {
 		PortalRuntimePermission.checkGetBeanProperty(
 			MicrosoftTranslatorFactoryUtil.class);
 
 		return _microsoftTranslatorFactory;
-	}
-
-	public static String translate(
-			String fromLanguage, String toLanguage, String fromText)
-		throws Exception {
-
-		return getMicrosoftTranslatorFactory().translate(
-			fromLanguage, toLanguage, fromText);
 	}
 
 	public void setMicrosoftTranslatorFactory(

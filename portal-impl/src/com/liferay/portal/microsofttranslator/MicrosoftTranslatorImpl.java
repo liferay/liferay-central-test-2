@@ -14,6 +14,7 @@
 
 package com.liferay.portal.microsofttranslator;
 
+import com.liferay.portal.kernel.microsofttranslator.MicrosoftTranslator;
 import com.liferay.portal.kernel.microsofttranslator.MicrosoftTranslatorException;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.Http;
@@ -25,14 +26,14 @@ import com.liferay.portal.kernel.util.Validator;
 /**
  * @author Hugo Huijser
  */
-public class MicrosoftTranslator {
+public class MicrosoftTranslatorImpl implements MicrosoftTranslator {
 
-	public MicrosoftTranslator() {
+	public MicrosoftTranslatorImpl() {
 		_microsoftTranslatorAuthenticator =
 			new MicrosoftTranslatorAuthenticator();
 	}
 
-	public MicrosoftTranslator(String clientId, String clientSecret) {
+	public MicrosoftTranslatorImpl(String clientId, String clientSecret) {
 		_microsoftTranslatorAuthenticator =
 			new MicrosoftTranslatorAuthenticator(clientId, clientSecret);
 	}
@@ -44,6 +45,21 @@ public class MicrosoftTranslator {
 	}
 
 	public String translate(
+			String fromLanguage, String toLanguage, String fromText)
+		throws MicrosoftTranslatorException {
+
+		try {
+			return doTranslate(fromLanguage, toLanguage, fromText);
+		}
+		catch (MicrosoftTranslatorException mte) {
+			throw mte;
+		}
+		catch (Exception e) {
+			throw new MicrosoftTranslatorException(e);
+		}
+	}
+
+	protected String doTranslate(
 			String fromLanguage, String toLanguage, String fromText)
 		throws Exception {
 
@@ -86,7 +102,9 @@ public class MicrosoftTranslator {
 			throw new MicrosoftTranslatorException(text);
 		}
 
-		String toText = text.substring(x, y).trim();
+		String toText = text.substring(x, y);
+
+		toText = toText.trim();
 
 		return StringUtil.replace(toText, CharPool.NEW_LINE, CharPool.SPACE);
 	}
