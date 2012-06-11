@@ -14,6 +14,7 @@
 
 package com.liferay.portal.microsofttranslator;
 
+import com.liferay.portal.kernel.microsofttranslator.MicrosoftTranslator;
 import com.liferay.portal.kernel.microsofttranslator.MicrosoftTranslatorFactory;
 
 /**
@@ -22,26 +23,20 @@ import com.liferay.portal.kernel.microsofttranslator.MicrosoftTranslatorFactory;
 public class MicrosoftTranslatorFactoryImpl
 	implements MicrosoftTranslatorFactory {
 
-	public String translate(
-			String fromLanguage, String toLanguage, String fromText)
-		throws Exception {
-
-		MicrosoftTranslator microsoftTranslator = getMicrosoftTranslator();
-
-		return microsoftTranslator.translate(
-			fromLanguage, toLanguage, fromText);
-	}
-
-	protected MicrosoftTranslator getMicrosoftTranslator() {
-		MicrosoftTranslator microsoftTranslator = _microsoftTranslator;
-
+	public MicrosoftTranslator getMicrosoftTranslator() {
 		if (_microsoftTranslator == null) {
-			microsoftTranslator = new MicrosoftTranslator();
+			_microsoftTranslator = new MicrosoftTranslatorImpl();
 		}
 
-		return microsoftTranslator;
+		return _microsoftTranslator;
 	}
 
-	private static MicrosoftTranslator _microsoftTranslator;
+	public MicrosoftTranslator getMicrosoftTranslator(
+		String clientId, String clientSecret) {
+
+		return new MicrosoftTranslatorImpl(clientId, clientSecret);
+	}
+
+	private MicrosoftTranslator _microsoftTranslator;
 
 }

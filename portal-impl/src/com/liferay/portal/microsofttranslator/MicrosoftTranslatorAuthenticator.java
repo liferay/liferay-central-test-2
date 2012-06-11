@@ -82,7 +82,7 @@ public class MicrosoftTranslatorAuthenticator {
 				sb.toString(), ContentTypes.APPLICATION_X_WWW_FORM_URLENCODED,
 				StringPool.UTF8);
 
-			options.setLocation(_DATA_MARK_ACCESS_URI);
+			options.setLocation(_URL);
 
 			options.setPost(true);
 
@@ -94,7 +94,9 @@ public class MicrosoftTranslatorAuthenticator {
 			_error = jsonObject.getString("error_description");
 
 			if (_error != null) {
-				_log.info("Unable to initialize access token: " + _error);
+				if (_log.isInfoEnabled()) {
+					_log.info("Unable to initialize access token: " + _error);
+				}
 			}
 
 			_accessToken = jsonObject.getString("access_token");
@@ -106,13 +108,14 @@ public class MicrosoftTranslatorAuthenticator {
 			_initTime = System.currentTimeMillis();
 		}
 		catch (Exception e) {
-			_log.info(
-				"Unable to initialize authentication token: " + e.getMessage());
+			if (_log.isInfoEnabled()) {
+				_log.info("Unable to initialize authentication token", e);
+			}
 		}
 	}
 
 	protected boolean isStale() {
-		if ((_initTime + (10 * Time.MINUTE)) > System.currentTimeMillis()) {
+		if ((_initTime + _EXPIRE_TIME) > System.currentTimeMillis()) {
 			return false;
 		}
 		else {
@@ -120,7 +123,9 @@ public class MicrosoftTranslatorAuthenticator {
 		}
 	}
 
-	private static final String _DATA_MARK_ACCESS_URI =
+	private static final long _EXPIRE_TIME = 10 * Time.MINUTE;
+
+	private static final String _URL =
 		"https://datamarket.accesscontrol.windows.net/v2/OAuth2-13";
 
 	private static Log _log = LogFactoryUtil.getLog(
