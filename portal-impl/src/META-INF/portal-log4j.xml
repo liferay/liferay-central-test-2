@@ -926,6 +926,10 @@
 		<priority value="WARN" />
 	</category>
 
+	<category name="com.liferay.portlet.documentlibrary.sharepoint">
+		<priority value="WARN" />
+	</category>
+
 	<category name="com.liferay.portlet.documentlibrary.store.StoreFactory">
 		<priority value="WARN" />
 	</category>
@@ -936,10 +940,6 @@
 
 	<category name="com.liferay.portlet.documentlibrary.util.DLIndexer">
 		<priority value="ERROR" />
-	</category>
-
-	<category name="com.liferay.portlet.documentlibrary.sharepoint">
-		<priority value="WARN" />
 	</category>
 
 	<category name="com.liferay.portlet.documentlibrary.webdav">

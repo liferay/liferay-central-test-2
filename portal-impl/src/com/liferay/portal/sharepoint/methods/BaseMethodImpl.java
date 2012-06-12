@@ -17,6 +17,7 @@ package com.liferay.portal.sharepoint.methods;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.ServletResponseUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.sharepoint.Property;
 import com.liferay.portal.sharepoint.ResponseElement;
@@ -62,17 +63,17 @@ public abstract class BaseMethodImpl implements Method {
 			SharepointRequest sharepointRequest, boolean appendNewline)
 		throws Exception {
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler();
 
 		sb.append("<html><head><title>vermeer RPC packet</title></head>");
 		sb.append(StringPool.NEW_LINE);
 		sb.append("<body>");
 		sb.append(StringPool.NEW_LINE);
 
-		Property method = new Property(
+		Property property = new Property(
 			"method", getMethodName() + ":" + SharepointUtil.VERSION);
 
-		sb.append(method.parse());
+		sb.append(property.parse());
 
 		List<ResponseElement> elements = getElements(sharepointRequest);
 

@@ -102,8 +102,8 @@ public class SharepointServlet extends HttpServlet {
 
 				if (_log.isInfoEnabled()) {
 					_log.info(
-						request.getHeader(HttpHeaders.USER_AGENT) + " [" +
-							method.getMethodName() + "] " + uri + " " +
+						request.getHeader(HttpHeaders.USER_AGENT) + " " +
+							method.getMethodName() + " " + uri + " " +
 								rootPath);
 				}
 
