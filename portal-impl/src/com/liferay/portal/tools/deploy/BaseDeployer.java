@@ -190,7 +190,7 @@ public class BaseDeployer implements AutoDeployer, Deployer {
 
 		List<String> wars = new ArrayList<String>();
 
-		File file = autoDeploymentContext.getFileToDeploy();
+		File file = autoDeploymentContext.getFile();
 
 		wars.add(file.getName());
 
@@ -526,7 +526,7 @@ public class BaseDeployer implements AutoDeployer, Deployer {
 						new AutoDeploymentContext();
 
 					autoDeploymentContext.setContext(context);
-					autoDeploymentContext.setFileToDeploy(srcFile);
+					autoDeploymentContext.setFile(srcFile);
 
 					deployFile(autoDeploymentContext);
 				}
@@ -740,7 +740,7 @@ public class BaseDeployer implements AutoDeployer, Deployer {
 	public void deployFile(AutoDeploymentContext autoDeploymentContext)
 		throws Exception {
 
-		File srcFile = autoDeploymentContext.getFileToDeploy();
+		File srcFile = autoDeploymentContext.getFile();
 
 		PluginPackage pluginPackage = readPluginPackage(srcFile);
 
