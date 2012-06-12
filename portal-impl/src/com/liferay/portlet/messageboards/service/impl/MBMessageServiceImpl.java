@@ -596,8 +596,8 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 			serviceContext.getAttribute("preview"));
 
 		if (preview &&
-			MBMessagePermission.contains(getPermissionChecker(),
-				message, ActionKeys.UPDATE)) {
+			MBMessagePermission.contains(
+				getPermissionChecker(), message, ActionKeys.UPDATE)) {
 
 			checkReplyToPermission(
 				message.getGroupId(), message.getCategoryId(),
