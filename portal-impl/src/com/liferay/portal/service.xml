@@ -369,7 +369,7 @@
 		<finder name="LiveGroupId" return-type="Group">
 			<finder-column name="liveGroupId" />
 		</finder>
-		<finder name="ChildrenSites" return-type="Collection" where="site = [$TRUE$]">
+		<finder name="C_P" return-type="Collection">
 			<finder-column name="companyId" />
 			<finder-column name="parentGroupId" />
 		</finder>
@@ -389,6 +389,11 @@
 			<finder-column name="companyId" />
 			<finder-column name="classNameId" />
 			<finder-column name="classPK" />
+		</finder>
+		<finder name="C_P_S" return-type="Collection">
+			<finder-column name="companyId" />
+			<finder-column name="parentGroupId" />
+			<finder-column name="site" />
 		</finder>
 		<finder name="C_L_N" return-type="Group" unique="true">
 			<finder-column name="companyId" />
