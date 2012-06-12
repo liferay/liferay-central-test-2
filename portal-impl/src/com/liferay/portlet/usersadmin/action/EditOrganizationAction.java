@@ -52,7 +52,9 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
 import com.liferay.portal.struts.PortletAction;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.sites.util.SitesUtil;
 import com.liferay.portlet.usersadmin.util.UsersAdminUtil;
 
@@ -202,6 +204,9 @@ public class EditOrganizationAction extends PortletAction {
 	protected Organization updateOrganization(ActionRequest actionRequest)
 		throws Exception {
 
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
 		long organizationId = ParamUtil.getLong(
 			actionRequest, "organizationId");
 
@@ -270,12 +275,9 @@ public class EditOrganizationAction extends PortletAction {
 
 		Group organizationGroup = organization.getGroup();
 
-		PermissionChecker permissionChecker =
-			PermissionThreadLocal.getPermissionChecker();
-
 		if (GroupPermissionUtil.contains(
-				permissionChecker, organizationGroup.getGroupId(),
-				ActionKeys.UPDATE)) {
+				themeDisplay.getPermissionChecker(),
+				organizationGroup.getGroupId(), ActionKeys.UPDATE)) {
 
 			SitesUtil.updateLayoutSetPrototypesLinks(
 				organizationGroup, publicLayoutSetPrototypeId,
