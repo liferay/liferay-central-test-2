@@ -98,8 +98,7 @@ public class SharepointUtil {
 		}
 
 		if (_log.isInfoEnabled()) {
-			_log.info(
-				"Storage class is for path " + path + " is " + storageClass);
+			_log.info("Storage class for path " + path + " is " + storageClass);
 		}
 
 		return (SharepointStorage)InstancePool.get(storageClass);
