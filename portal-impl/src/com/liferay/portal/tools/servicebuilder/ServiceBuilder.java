@@ -85,7 +85,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -447,15 +446,14 @@ public class ServiceBuilder {
 		String remotingFileName, String sqlDir, String sqlFileName,
 		String sqlIndexesFileName, String sqlIndexesPropertiesFileName,
 		String sqlSequencesFileName, boolean autoNamespaceTables,
-		String beanLocatorUtil, String propsUtil,
-		String pluginName, String testDir, boolean build, long buildNumber,
+		String beanLocatorUtil, String propsUtil, String pluginName,
+		String testDir, boolean build, long buildNumber,
 		boolean buildNumberIncrement) {
 
 		_tplBadAliasNames = _getTplProperty(
 			"bad_alias_names", _tplBadAliasNames);
 		_tplBadColumnNames = _getTplProperty(
 			"bad_column_names", _tplBadColumnNames);
-		_tplBadJsonTypes = _getTplProperty("bad_json_types", _tplBadJsonTypes);
 		_tplBadTableNames = _getTplProperty(
 			"bad_table_names", _tplBadTableNames);
 		_tplBlobModel = _getTplProperty("blob_model", _tplBlobModel);
@@ -522,7 +520,6 @@ public class ServiceBuilder {
 			_badTableNames = _readLines(_tplBadTableNames);
 			_badAliasNames = _readLines(_tplBadAliasNames);
 			_badColumnNames = _readLines(_tplBadColumnNames);
-			_badJsonTypes = _readLines(_tplBadJsonTypes);
 			_hbmFileName = hbmFileName;
 			_ormFileName = ormFileName;
 			_modelHintsFileName = modelHintsFileName;
@@ -4876,7 +4873,6 @@ public class ServiceBuilder {
 	private boolean _autoNamespaceTables;
 	private Set<String> _badAliasNames;
 	private Set<String> _badColumnNames;
-	private Set<String> _badJsonTypes;
 	private Set<String> _badTableNames;
 	private String _beanLocatorUtil;
 	private String _beanLocatorUtilShortName;
@@ -4917,7 +4913,6 @@ public class ServiceBuilder {
 	private String _testOutputPath;
 	private String _tplBadAliasNames = _TPL_ROOT + "bad_alias_names.txt";
 	private String _tplBadColumnNames = _TPL_ROOT + "bad_column_names.txt";
-	private String _tplBadJsonTypes = _TPL_ROOT + "bad_json_types.txt";
 	private String _tplBadTableNames = _TPL_ROOT + "bad_table_names.txt";
 	private String _tplBlobModel = _TPL_ROOT + "blob_model.ftl";
 	private String _tplEjbPk = _TPL_ROOT + "ejb_pk.ftl";
