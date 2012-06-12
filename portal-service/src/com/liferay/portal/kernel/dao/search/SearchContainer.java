@@ -33,6 +33,7 @@ import java.util.Map;
 
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
+
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -159,7 +160,7 @@ public class SearchContainer<R> {
 		_emptyResultsMessage = emptyResultsMessage;
 
 		if (Validator.isNotNull(_id)) {
-			_id = PortalUtil.getUniqueId(portletRequest, _id);
+			_id = PortalUtil.getUniqueElementId(portletRequest, _id);
 		}
 	}
 
@@ -229,7 +230,7 @@ public class SearchContainer<R> {
 
 			_id = id.concat("SearchContainer");
 
-			return PortalUtil.getUniqueId(request, _id);
+			return PortalUtil.getUniqueElementId(request, _id);
 		}
 		else {
 			id = DeterminateKeyGenerator.generate("taglib_search_container");
