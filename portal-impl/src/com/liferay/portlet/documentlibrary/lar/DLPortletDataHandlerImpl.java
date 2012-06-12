@@ -552,13 +552,10 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		long userId = portletDataContext.getUserId(repository.getUserUuid());
 		long classNameId = PortalUtil.getClassNameId(
-			repositoryElement.attributeValue("repositoryClassName"));
-
-		String repositoryPath = getRepositoryPath(
-			portletDataContext, repository);
+			repositoryElement.attributeValue("class-name"));
 
 		ServiceContext serviceContext = portletDataContext.createServiceContext(
-			repositoryPath, repository, _NAMESPACE);
+			repositoryElement, repository, _NAMESPACE);
 
 		long importedRepositoryId = 0;
 
@@ -601,7 +598,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
 					"Unable to connect to repository {name=" +
-						repository.getName() + ",typeSettings=" +
+						repository.getName() + ", typeSettings=" +
 							repository.getTypeSettingsProperties() + "}",
 					e);
 			}
@@ -628,9 +625,6 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 		RepositoryEntry repositoryEntry =
 			(RepositoryEntry)portletDataContext.getZipEntryAsObject(path);
 
-		String repositoryEntryPath = getRepositoryEntryPath(
-				portletDataContext, repositoryEntry);
-
 		Map<Long, Long> repositoryIds =
 			(Map<Long, Long>)portletDataContext.getNewPrimaryKeysMap(
 				Repository.class);
@@ -640,7 +634,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 			repositoryEntry.getRepositoryId());
 
 		ServiceContext serviceContext = portletDataContext.createServiceContext(
-			repositoryEntryPath, repositoryEntry, _NAMESPACE);
+			repositoryEntryElement, repositoryEntry, _NAMESPACE);
 
 		RepositoryEntry importedRepositoryEntry = null;
 
@@ -833,8 +827,10 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 			return;
 		}
 		else if (!folder.isDefaultRepository()) {
-			//no need to export non-Liferay Repository items since they would
-			//be exported as part of repository export
+
+			// No need to export non-Liferay repository items since they would
+			// be exported as part of repository export
+
 			return;
 		}
 
@@ -1070,8 +1066,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 		Element repositoryElement = repositoriesElement.addElement(
 			"repository");
 
-		repositoryElement.addAttribute(
-			"repositoryClassName", repository.getClassName());
+		repositoryElement.addAttribute("class-name", repository.getClassName());
 
 		portletDataContext.addClassedModel(
 			repositoryElement, path, repository, _NAMESPACE);
@@ -1140,9 +1135,9 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 
 	/**
 	 * @see {@link PortletImporter#getAssetCategoryName(String, long, long,
-	 *      String, int)}
+	 *	  String, int)}
 	 * @see {@link PortletImporter#getAssetVocabularyName(String, long, String,
-	 *      int)}
+	 *	  int)}
 	 */
 	protected static String getFileEntryTypeName(
 			String uuid, long groupId, String name, int count)
@@ -1211,9 +1206,9 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 
 	/**
 	 * @see {@link PortletImporter#getAssetCategoryName(String, long, long,
-	 *      String, int)}
+	 *	  String, int)}
 	 * @see {@link PortletImporter#getAssetVocabularyName(String, long, String,
-	 *      int)}
+	 *	  int)}
 	 */
 	protected static String getFolderName(
 			String uuid, long groupId, long parentFolderId, String name,
@@ -1264,20 +1259,6 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 		return sb.toString();
 	}
 
-	protected static String getRepositoryPath(
-		PortletDataContext portletDataContext, Repository repository) {
-
-		StringBundler sb = new StringBundler(4);
-
-		sb.append(
-			portletDataContext.getPortletPath(PortletKeys.DOCUMENT_LIBRARY));
-		sb.append("/repositories/");
-		sb.append(repository.getRepositoryId());
-		sb.append(".xml");
-
-		return sb.toString();
-	}
-
 	protected static String getRepositoryEntryPath(
 		PortletDataContext portletDataContext,
 		RepositoryEntry repositoryEntry) {
@@ -1288,6 +1269,20 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 			portletDataContext.getPortletPath(PortletKeys.DOCUMENT_LIBRARY));
 		sb.append("/repository-entries/");
 		sb.append(repositoryEntry.getRepositoryEntryId());
+		sb.append(".xml");
+
+		return sb.toString();
+	}
+
+	protected static String getRepositoryPath(
+		PortletDataContext portletDataContext, Repository repository) {
+
+		StringBundler sb = new StringBundler(4);
+
+		sb.append(
+			portletDataContext.getPortletPath(PortletKeys.DOCUMENT_LIBRARY));
+		sb.append("/repositories/");
+		sb.append(repository.getRepositoryId());
 		sb.append(".xml");
 
 		return sb.toString();
@@ -1746,7 +1741,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 		Element fileRanksElement = rootElement.addElement("file-ranks");
 		Element repositoriesElement = rootElement.addElement("repositories");
 		Element repositoryEntriesElement = rootElement.addElement(
-	        "repository-entries");
+			"repository-entries");
 
 		List<DLFileEntryType> dlFileEntryTypes =
 			DLFileEntryTypeServiceUtil.getFileEntryTypes(

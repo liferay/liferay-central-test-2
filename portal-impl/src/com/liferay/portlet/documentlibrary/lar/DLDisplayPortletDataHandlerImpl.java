@@ -122,7 +122,7 @@ public class DLDisplayPortletDataHandlerImpl extends BasePortletDataHandler {
 		Element fileRanksElement = rootElement.addElement("file-ranks");
 		Element repositoriesElement = rootElement.addElement("repositories");
 		Element repositoryEntriesElement = rootElement.addElement(
-	        "repository-entries");
+			"repository-entries");
 
 		if (rootFolderId == DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
 			List<Folder> folders = FolderUtil.findByRepositoryId(
@@ -154,7 +154,7 @@ public class DLDisplayPortletDataHandlerImpl extends BasePortletDataHandler {
 				"root-folder-id", String.valueOf(folder.getFolderId()));
 			rootElement.addAttribute(
 				"default-repository",
-					String.valueOf(folder.isDefaultRepository()));
+				String.valueOf(folder.isDefaultRepository()));
 
 			DLPortletDataHandlerImpl.exportFolder(
 				portletDataContext, fileEntryTypesElement, foldersElement,

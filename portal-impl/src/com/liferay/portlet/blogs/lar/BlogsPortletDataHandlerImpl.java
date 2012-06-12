@@ -135,7 +135,7 @@ public class BlogsPortletDataHandlerImpl extends BasePortletDataHandler {
 		Element dlRepositoriesElement = entriesElement.addElement(
 			"dl-repositories");
 		Element dlRepositoryEntriesElement = entriesElement.addElement(
-	        "dl-repository-entries");
+			"dl-repository-entries");
 
 		List<BlogsEntry> entries = BlogsEntryUtil.findByGroupId(
 			portletDataContext.getScopeGroupId());

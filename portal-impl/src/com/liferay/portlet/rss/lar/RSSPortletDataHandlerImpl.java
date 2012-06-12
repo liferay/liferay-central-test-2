@@ -214,8 +214,8 @@ public class RSSPortletDataHandlerImpl extends JournalPortletDataHandlerImpl {
 		Element dlFileRanksElement = rootElement.addElement("dl-file-ranks");
 		Element dlRepositoriesElement = rootElement.addElement(
 			"dl-repositories");
-        Element dlRepositoryEntriesElement = rootElement.addElement(
-	        "dl-repository-entries");
+		Element dlRepositoryEntriesElement = rootElement.addElement(
+			"dl-repository-entries");
 
 		for (JournalArticle article : articles) {
 			String path = JournalPortletDataHandlerImpl.getArticlePath(

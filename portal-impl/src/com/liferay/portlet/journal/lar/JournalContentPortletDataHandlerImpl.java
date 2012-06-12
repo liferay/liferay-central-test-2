@@ -63,9 +63,9 @@ import javax.portlet.PortletPreferences;
  * @author Joel Kozikowski
  * @author Raymond Augé
  * @author Bruno Farache
- * @see    com.liferay.portal.kernel.lar.PortletDataHandler
- * @see    com.liferay.portlet.journal.lar.JournalCreationStrategy
- * @see    com.liferay.portlet.journal.lar.JournalPortletDataHandlerImpl
+ * @see	com.liferay.portal.kernel.lar.PortletDataHandler
+ * @see	com.liferay.portlet.journal.lar.JournalCreationStrategy
+ * @see	com.liferay.portlet.journal.lar.JournalPortletDataHandlerImpl
  */
 public class JournalContentPortletDataHandlerImpl
 	extends BasePortletDataHandler {
@@ -220,8 +220,8 @@ public class JournalContentPortletDataHandlerImpl
 		Element dlFileRanksElement = rootElement.addElement("dl-file-ranks");
 		Element dlRepositoriesElement = rootElement.addElement(
 			"dl-repositories");
-        Element dlRepositoryEntriesElement = rootElement.addElement(
-	        "dl-repository-entries");
+		Element dlRepositoryEntriesElement = rootElement.addElement(
+			"dl-repository-entries");
 
 		String preferenceTemplateId = portletPreferences.getValue(
 			"templateId", null);

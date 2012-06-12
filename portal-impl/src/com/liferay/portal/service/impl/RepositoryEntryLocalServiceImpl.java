@@ -30,7 +30,7 @@ public class RepositoryEntryLocalServiceImpl
 	public RepositoryEntry addRepositoryEntry(
 			long groupId, long repositoryId, String mappedId,
 			ServiceContext serviceContext)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		long repositoryEntryId = counterLocalService.increment();
 

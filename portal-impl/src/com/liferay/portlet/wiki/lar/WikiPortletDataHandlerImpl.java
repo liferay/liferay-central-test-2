@@ -86,7 +86,7 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 		Element dlRepositoriesElement = pagesElement.addElement(
 			"dl-repositories");
 		Element dlRepositoryEntriesElement = pagesElement.addElement(
-	        "dl-repository-entries");
+			"dl-repository-entries");
 
 		List<WikiPage> pages = WikiPageUtil.findByN_S(
 			node.getNodeId(), WorkflowConstants.STATUS_APPROVED,
