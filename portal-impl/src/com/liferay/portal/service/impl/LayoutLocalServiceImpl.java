@@ -276,8 +276,14 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 				SitesUtil.applyLayoutPrototype(
 					layoutPrototype, layout, layoutPrototypeLinkEnabled);
 			}
+			catch (PortalException pe) {
+				throw pe;
+			}
+			catch (SystemException se) {
+				throw se;
+			}
 			catch (Exception e) {
-				throw new SystemException(e.getMessage());
+				throw new SystemException(e);
 			}
 		}
 

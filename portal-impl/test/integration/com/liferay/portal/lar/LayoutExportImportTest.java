@@ -67,31 +67,31 @@ public class LayoutExportImportTest extends PowerMockito {
 	@Test
 	@Transactional
 	public void testLSPLinkDisabled() throws Exception {
-		_testLayoutSetPrototype(false, false, false, false, false);
+		testLayoutSetPrototype(false, false, false, false, false);
 	}
 
 	@Test
 	@Transactional
 	public void testLSPLinkDisabledWithPageAddition() throws Exception {
-		_testLayoutSetPrototype(false, false, true, false, false);
+		testLayoutSetPrototype(false, false, true, false, false);
 	}
 
 	@Test
 	@Transactional
 	public void testLSPLinkDisabledWithPageDeletion() throws Exception {
-		_testLayoutSetPrototype(false, false, true, true, false);
+		testLayoutSetPrototype(false, false, true, true, false);
 	}
 
 	@Test
 	@Transactional
 	public void testLSPLinkEnabled() throws Exception {
-		_testLayoutSetPrototype(true, false, false, false, false);
+		testLayoutSetPrototype(true, false, false, false, false);
 	}
 
 	@Test
 	@Transactional
 	public void testLSPLinkEnabledwithPageAddition() throws Exception {
-		_testLayoutSetPrototype(true, false, true, false, false);
+		testLayoutSetPrototype(true, false, true, false, false);
 	}
 
 	@Test
@@ -99,7 +99,7 @@ public class LayoutExportImportTest extends PowerMockito {
 	public void testLSPLinkEnabledwithPageAdditionFromLPLinkDisabled()
 		throws Exception {
 
-		_testLayoutSetPrototype(true, false, true, false, true);
+		testLayoutSetPrototype(true, false, true, false, true);
 	}
 
 	@Test
@@ -107,22 +107,22 @@ public class LayoutExportImportTest extends PowerMockito {
 	public void testLSPLinkEnabledwithPageAdditionFromLPLinkEnabled()
 		throws Exception {
 
-		_testLayoutSetPrototype(true, true, true, false, true);
+		testLayoutSetPrototype(true, true, true, false, true);
 	}
 
 	@Test
 	@Transactional
 	public void testLSPLinkEnabledwithPageDeletion() throws Exception {
-		_testLayoutSetPrototype(true, false, true, true, false);
+		testLayoutSetPrototype(true, false, true, true, false);
 	}
 
 	@Test
 	@Transactional
 	public void testLSPLinkEnabledwithPageDeletionFromLP() throws Exception {
-		_testLayoutSetPrototype(true, false, true, true, true);
+		testLayoutSetPrototype(true, false, true, true, true);
 	}
 
-	private Layout _addLayoutUsingLayoutPrototype(
+	protected Layout addLayout(
 			long groupId, String name, LayoutPrototype layoutPrototype,
 			boolean linkEnabled)
 		throws Exception {
@@ -155,7 +155,149 @@ public class LayoutExportImportTest extends PowerMockito {
 			LayoutConstants.TYPE_PORTLET, false, friendlyURL, serviceContext);
 	}
 
-	private Layout _changeLayoutTemplateId(
+	protected void propagateChanges(Group group) throws Exception {
+		LayoutLocalServiceUtil.getLayouts(
+			group.getGroupId(), false,
+			LayoutConstants.DEFAULT_PARENT_LAYOUT_ID);
+	}
+
+	protected void propagateChanges(Layout layout) throws Exception {
+		LayoutLocalServiceUtil.getLayout(layout.getPlid());
+	}
+
+	protected void testLayoutSetPrototype(
+			boolean layoutSetLinkEnabled, boolean layoutLinkEnabled,
+			boolean addPage, boolean deletePage, boolean useLayoutPrototype)
+		throws Exception {
+
+		LayoutSetPrototype layoutSetPrototype =
+			ServiceTestUtil.addLayoutSetPrototype(
+				ServiceTestUtil.randomString());
+
+		Group layoutSetPrototypeGroup = layoutSetPrototype.getGroup();
+
+		int layoutSetPrototypeLayoutsCount =
+			LayoutLocalServiceUtil.getLayoutsCount(
+				layoutSetPrototypeGroup, true);
+
+		ServiceTestUtil.addLayout(
+			layoutSetPrototypeGroup.getGroupId(),
+			ServiceTestUtil.randomString(), true);
+		ServiceTestUtil.addLayout(
+			layoutSetPrototypeGroup.getGroupId(),
+			ServiceTestUtil.randomString(), true);
+
+		Group group = ServiceTestUtil.addGroup(ServiceTestUtil.randomString());
+
+		SitesUtil.updateLayoutSetPrototypesLinks(
+			group, layoutSetPrototype.getLayoutSetPrototypeId(), 0,
+			layoutSetLinkEnabled, false);
+
+		propagateChanges(group);
+
+		int groupLayoutsCount = LayoutLocalServiceUtil.getLayoutsCount(
+			group, false);
+
+		Assert.assertEquals(
+			groupLayoutsCount, layoutSetPrototypeLayoutsCount + 2);
+
+		if (addPage) {
+			Layout layout = null;
+
+			if (useLayoutPrototype) {
+				LayoutPrototype layoutPrototype =
+					ServiceTestUtil.addLayoutPrototype(
+						ServiceTestUtil.randomString());
+
+				Layout layoutPrototypeLayout = layoutPrototype.getLayout();
+
+				updateLayoutTemplateId(layoutPrototypeLayout, "2_2_columns");
+
+				layout = addLayout(
+					group.getGroupId(), ServiceTestUtil.randomString(),
+					layoutPrototype, layoutLinkEnabled);
+
+				if (layoutLinkEnabled) {
+					propagateChanges(layout);
+				}
+
+				updateLayoutTemplateId(layoutPrototypeLayout, "1_column");
+
+				if (layoutLinkEnabled) {
+					Assert.assertEquals(
+						"2_2_columns",
+						layout.getTypeSettingsProperty(
+							LayoutTypePortletConstants.LAYOUT_TEMPLATE_ID));
+
+					propagateChanges(layout);
+				}
+			}
+			else {
+				layout = ServiceTestUtil.addLayout(
+					layoutSetPrototypeGroup.getGroupId(),
+					ServiceTestUtil.randomString(), true);
+			}
+
+			if (!useLayoutPrototype) {
+				groupLayoutsCount = LayoutLocalServiceUtil.getLayoutsCount(
+					group, false);
+
+				Assert.assertEquals(
+					groupLayoutsCount, layoutSetPrototypeLayoutsCount + 2);
+			}
+
+			propagateChanges(group);
+
+			groupLayoutsCount = LayoutLocalServiceUtil.getLayoutsCount(
+				group, false);
+
+			if (layoutSetLinkEnabled) {
+				Assert.assertEquals(
+					groupLayoutsCount, layoutSetPrototypeLayoutsCount + 3);
+
+				if (useLayoutPrototype) {
+					if (layoutLinkEnabled) {
+						Assert.assertEquals(
+							"1_column",
+							layout.getTypeSettingsProperty(
+								LayoutTypePortletConstants.LAYOUT_TEMPLATE_ID));
+					}
+					else {
+						Assert.assertEquals(
+							"2_2_columns",
+							layout.getTypeSettingsProperty(
+								LayoutTypePortletConstants.LAYOUT_TEMPLATE_ID));
+					}
+				}
+			}
+
+			if (deletePage) {
+				LayoutLocalServiceUtil.deleteLayout(
+					layout.getPlid(), ServiceTestUtil.getServiceContext());
+
+				groupLayoutsCount = LayoutLocalServiceUtil.getLayoutsCount(
+					group, false);
+
+				if (layoutSetLinkEnabled) {
+					if (!useLayoutPrototype) {
+						Assert.assertEquals(
+							groupLayoutsCount,
+							layoutSetPrototypeLayoutsCount + 3);
+
+						propagateChanges(group);
+					}
+
+					groupLayoutsCount = LayoutLocalServiceUtil.getLayoutsCount(
+						group, false);
+				}
+
+				Assert.assertEquals(
+					groupLayoutsCount, layoutSetPrototypeLayoutsCount + 2);
+			}
+		}
+	}
+
+	protected Layout updateLayoutTemplateId(
 		Layout layout, String layoutTemplateId) throws Exception {
 
 		LayoutTypePortlet layoutTypePortlet =
@@ -167,141 +309,6 @@ public class LayoutExportImportTest extends PowerMockito {
 		return LayoutServiceUtil.updateLayout(
 			layout.getGroupId(), layout.isPrivateLayout(), layout.getLayoutId(),
 			layout.getTypeSettings());
-	}
-
-	private void _propagateChanges(Group group) throws Exception {
-		LayoutLocalServiceUtil.getLayouts(
-			group.getGroupId(), false,
-			LayoutConstants.DEFAULT_PARENT_LAYOUT_ID);
-	}
-
-	private void _propagateChanges(Layout layout) throws Exception {
-		LayoutLocalServiceUtil.getLayout(layout.getPlid());
-	}
-
-	private void _testLayoutSetPrototype(
-			boolean layoutSetLinkEnabled, boolean layoutLinkEnabled,
-			boolean pageAddition, boolean pageDeletion,
-			boolean useLayoutPrototype)
-		throws Exception {
-
-		LayoutSetPrototype simple = ServiceTestUtil.addLayoutSetPrototype(
-			"simple");
-
-		Group layoutsetprototypegroup = simple.getGroup();
-
-		int layoutSetPrototypePagesCount =
-			LayoutLocalServiceUtil.getLayoutsCount(
-				layoutsetprototypegroup, true);
-
-		ServiceTestUtil.addLayout(
-			layoutsetprototypegroup.getGroupId(), "one", true);
-		ServiceTestUtil.addLayout(
-			layoutsetprototypegroup.getGroupId(), "two", true);
-
-		Group site = ServiceTestUtil.addGroup("group-one");
-
-		SitesUtil.updateLayoutSetPrototypesLinks(
-			site, simple.getLayoutSetPrototypeId(), 0, layoutSetLinkEnabled,
-			false);
-
-		_propagateChanges(site);
-
-		int sitePagesCount = LayoutLocalServiceUtil.getLayoutsCount(
-			site, false);
-
-		Assert.assertEquals(sitePagesCount, layoutSetPrototypePagesCount + 2);
-
-		if (pageAddition) {
-			Layout page = null;
-
-			if (useLayoutPrototype) {
-				LayoutPrototype simplePage = ServiceTestUtil.addLayoutPrototype(
-					"Simple Page");
-
-				Layout simplePageLayout = simplePage.getLayout();
-
-				_changeLayoutTemplateId(simplePageLayout, "2_2_columns");
-
-				page = _addLayoutUsingLayoutPrototype(
-					site.getGroupId(), "three", simplePage, layoutLinkEnabled);
-
-				if (layoutLinkEnabled) {
-					_propagateChanges(page);
-				}
-
-				_changeLayoutTemplateId(simplePageLayout, "1_column");
-
-				if (layoutLinkEnabled) {
-					Assert.assertEquals(
-						"2_2_columns",
-						page.getTypeSettingsProperty(
-							LayoutTypePortletConstants.LAYOUT_TEMPLATE_ID));
-
-					_propagateChanges(page);
-				}
-			}
-			else {
-				page = ServiceTestUtil.addLayout(
-					layoutsetprototypegroup.getGroupId(), "three", true);
-			}
-
-			if (!useLayoutPrototype) {
-				sitePagesCount = LayoutLocalServiceUtil.getLayoutsCount(
-					site, false);
-
-				Assert.assertEquals(
-					sitePagesCount, layoutSetPrototypePagesCount + 2);
-			}
-
-			_propagateChanges(site);
-
-			sitePagesCount = LayoutLocalServiceUtil.getLayoutsCount(
-				site, false);
-
-			if (layoutSetLinkEnabled) {
-				Assert.assertEquals(
-					sitePagesCount, layoutSetPrototypePagesCount + 3);
-
-				if (useLayoutPrototype) {
-					if (layoutLinkEnabled) {
-						Assert.assertEquals(
-							"1_column",
-							page.getTypeSettingsProperty(
-								LayoutTypePortletConstants.LAYOUT_TEMPLATE_ID));
-					}
-					else {
-						Assert.assertEquals(
-							"2_2_columns",
-							page.getTypeSettingsProperty(
-								LayoutTypePortletConstants.LAYOUT_TEMPLATE_ID));
-					}
-				}
-			}
-
-			if (pageDeletion) {
-				LayoutLocalServiceUtil.deleteLayout(
-					page.getPlid(), ServiceTestUtil.getServiceContext());
-
-				sitePagesCount = LayoutLocalServiceUtil.getLayoutsCount(
-					site, false);
-
-				if (layoutSetLinkEnabled) {
-					if (!useLayoutPrototype) {
-						Assert.assertEquals(
-							sitePagesCount, layoutSetPrototypePagesCount + 3);
-
-						_propagateChanges(site);
-					}
-
-					sitePagesCount = LayoutLocalServiceUtil.getLayoutsCount(
-						site, false);
-				}
-
-				Assert.assertEquals(
-					sitePagesCount, layoutSetPrototypePagesCount + 2);
-			}
-		}
 	}
 
 }
