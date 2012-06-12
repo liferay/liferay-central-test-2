@@ -296,6 +296,7 @@ public class DLSharepointStorageImpl extends BaseSharepointStorageImpl {
 		}
 		else if (folder != null) {
 			long folderId = folder.getFolderId();
+
 			String description = folder.getDescription();
 
 			if (newParentFolderId != folder.getParentFolderId()) {
