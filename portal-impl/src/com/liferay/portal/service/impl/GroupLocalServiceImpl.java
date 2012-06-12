@@ -36,7 +36,6 @@ import com.liferay.portal.kernel.spring.aop.Skip;
 import com.liferay.portal.kernel.staging.StagingUtil;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
-import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.FriendlyURLNormalizerUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -173,6 +172,8 @@ import java.util.Map;
  * @author Wesley Gong
  */
 public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
+
+	public static final String ORGANIZATION_NAME_SUFFIX = " LFR_ORGANIZATION";
 
 	/**
 	 * Constructs a group local service.
@@ -2346,7 +2347,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 	}
 
 	protected String getOrgGroupName(String name) {
-		return name + _ORGANIZATION_NAME_SUFFIX;
+		return name + ORGANIZATION_NAME_SUFFIX;
 	}
 
 	protected String getRealName(long companyId, String name)
@@ -2652,8 +2653,8 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		if (Validator.isNull(name) || Validator.isNumber(name) ||
-			(name.indexOf(CharPool.STAR) != -1) ||
-			(name.indexOf(_ORGANIZATION_NAME_SUFFIX) != -1)) {
+			name.contains(StringPool.STAR) ||
+			name.contains(ORGANIZATION_NAME_SUFFIX)) {
 
 			throw new GroupNameException();
 		}
@@ -2678,8 +2679,6 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 	}
 
 	protected File publicLARFile;
-
-	private static final String _ORGANIZATION_NAME_SUFFIX = " LFR_ORGANIZATION";
 
 	private static Log _log = LogFactoryUtil.getLog(
 		GroupLocalServiceImpl.class);
