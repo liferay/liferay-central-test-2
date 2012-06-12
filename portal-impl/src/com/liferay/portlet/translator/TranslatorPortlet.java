@@ -54,8 +54,10 @@ public class TranslatorPortlet extends MVCPortlet {
 			Throwable cause = wce.getCause();
 
 			if (cause instanceof MicrosoftTranslatorException) {
-				SessionErrors.add(
-					actionRequest, cause.getClass().getName(), cause);
+				SessionErrors.add(actionRequest, cause.getClass(), cause);
+			}
+			else {
+				throw new PortletException(wce);
 			}
 		}
 		catch (Exception e) {
