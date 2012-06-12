@@ -12,29 +12,10 @@
 			</not>
 			<then>
 				<ant antfile="build-dist.xml" target="unzip-weblogic" />
+
 				<ant target="all" />
 			</then>
 		</if>
-
-		<copy
-			file="${app.server.weblogic.bin.dir}/../run.bat"
-			tofile="${app.server.weblogic.bin.dir}/../shutdown.bat"
-		/>
-
-		<replace file="${app.server.weblogic.bin.dir}/../shutdown.bat">
-			<replacetoken>call startWebLogic.cmd</replacetoken>
-			<replacevalue>call stopWebLogic.cmd</replacevalue>
-		</replace>
-
-		<copy
-			file="${app.server.weblogic.bin.dir}/../startWebLogic.cmd"
-			tofile="${app.server.weblogic.bin.dir}/../stopWebLogic.cmd"
-		/>
-
-		<replace file="${app.server.weblogic.bin.dir}/../stopWebLogic.cmd">
-			<replacetoken>%DOMAIN_HOME%\bin\startWebLogic.cmd</replacetoken>
-			<replacevalue>%DOMAIN_HOME%\bin\stopWebLogic.cmd</replacevalue>
-		</replace>
 
 		<antcall target="revert-test-properties" />
 
