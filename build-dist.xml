@@ -1257,6 +1257,10 @@ ${env.JAVA_HOME}/bin/java weblogic.WLST create-weblogic-domain.py</echo>
 			</replacevalue>
 		</replace>
 
+		<replace file="${app.server.weblogic.instance.dir}/startWebLogic.cmd">
+			<replacefilter token="$${app.server.weblogic.dir.windows}" value="${app.server.weblogic.dir.windows}" />
+		</replace>
+
 		<replace file="${app.server.weblogic.instance.dir}/startWebLogic.sh">
 			<replacetoken><![CDATA[# Any changes to this script may be lost when adding extensions to this configuration.]]></replacetoken>
 			<replacevalue>
@@ -1268,6 +1272,10 @@ ${env.JAVA_HOME}/bin/java weblogic.WLST create-weblogic-domain.py</echo>
 					export MW_HOME="${app.server.weblogic.dir}"
 				]]>
 			</replacevalue>
+		</replace>
+
+		<replace file="${app.server.weblogic.instance.dir}/startWebLogic.sh">
+			<replacefilter token="$${app.server.weblogic.dir}" value="${app.server.weblogic.dir}" />
 		</replace>
 
 		<copy
