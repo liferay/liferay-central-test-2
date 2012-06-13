@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portalweb.portlet.assetpublisher.wcwebcontent.addwcwebcontent2displaypageap2;
+package com.liferay.portalweb.portal.controlpanel.webcontent.wcwebcontent.addwcwebcontent;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
@@ -20,8 +20,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 /**
  * @author Brian Wing Shun Chan
  */
-public class AddWCWebContent1DisplayPageAP1Test extends BaseTestCase {
-	public void testAddWCWebContent1DisplayPageAP1() throws Exception {
+public class AddWCWebContent1Test extends BaseTestCase {
+	public void testAddWCWebContent1() throws Exception {
 		selenium.open("/web/guest/home/");
 		loadRequiredJavaScriptModules();
 		selenium.clickAt("//div[@id='dockbar']",
@@ -196,154 +196,13 @@ public class AddWCWebContent1DisplayPageAP1Test extends BaseTestCase {
 		}
 
 		selenium.selectFrame("relative=top");
-
-		for (int second = 0;; second++) {
-			if (second >= 90) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isVisible("//a[@id='_15_displayPageLink']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		assertEquals(RuntimeVariables.replace("Display Page (Modified)"),
-			selenium.getText("//a[@id='_15_displayPageLink']"));
-		selenium.clickAt("//a[@id='_15_displayPageLink']",
-			RuntimeVariables.replace("Display Page (Modified)"));
-
-		for (int second = 0;; second++) {
-			if (second >= 90) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isVisible("//button[@id='_15_chooseDisplayPage']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		assertEquals(RuntimeVariables.replace("Select"),
-			selenium.getText("//button[@id='_15_chooseDisplayPage']"));
-		selenium.clickAt("//button[@id='_15_chooseDisplayPage']",
-			RuntimeVariables.replace("Select"));
-
-		for (int second = 0;; second++) {
-			if (second >= 90) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent(
-							"//script[contains(@src,'/liferay/history_manager.js')]")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		for (int second = 0;; second++) {
-			if (second >= 90) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isVisible(
-							"//ul[@class='aui-tree-container']/li[contains(.,'Asset Publisher Test Page1')]/div/div/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		assertEquals(RuntimeVariables.replace("Asset Publisher Test Page1"),
-			selenium.getText(
-				"//ul[@class='aui-tree-container']/li[contains(.,'Asset Publisher Test Page1')]/div/div/a"));
-		selenium.clickAt("//ul[@class='aui-tree-container']/li[contains(.,'Asset Publisher Test Page1')]/div/div/a",
-			RuntimeVariables.replace("Asset Publisher Test Page1"));
-
-		for (int second = 0;; second++) {
-			if (second >= 90) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isVisible("//div[@id='_15_selectedPageMessage']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		assertEquals(RuntimeVariables.replace(
-				"Public Pages > Asset Publisher Test Page1"),
-			selenium.getText("//div[@id='_15_selectedPageMessage']"));
-
-		for (int second = 0;; second++) {
-			if (second >= 90) {
-				fail("timeout");
-			}
-
-			try {
-				if (!selenium.isElementPresent(
-							"//div[3]/span/span/button[contains(@class,'aui-buttonitem-disabled')]")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		assertEquals(RuntimeVariables.replace("OK"),
-			selenium.getText("//div[3]/span/span/button"));
-		selenium.clickAt("//div[3]/span/span/button",
-			RuntimeVariables.replace("OK"));
-
-		for (int second = 0;; second++) {
-			if (second >= 90) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isVisible("//span[@id='_15_displayPageNameInput']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		assertEquals(RuntimeVariables.replace(
-				"Public Pages > Asset Publisher Test Page1"),
-			selenium.getText("//span[@id='_15_displayPageNameInput']"));
 		selenium.clickAt("//input[@value='Publish']",
 			RuntimeVariables.replace("Publish"));
 		selenium.waitForPageToLoad("30000");
 		loadRequiredJavaScriptModules();
+		assertEquals(RuntimeVariables.replace(
+				"Your request completed successfully."),
+			selenium.getText("//div[@class='portlet-msg-success']"));
 		assertEquals(RuntimeVariables.replace("WC WebContent1 Title"),
 			selenium.getText("//td[3]/a"));
 		assertEquals(RuntimeVariables.replace("Approved"),

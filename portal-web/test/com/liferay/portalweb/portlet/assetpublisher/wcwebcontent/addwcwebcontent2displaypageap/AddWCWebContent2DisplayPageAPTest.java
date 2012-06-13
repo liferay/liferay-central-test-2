@@ -263,7 +263,7 @@ public class AddWCWebContent2DisplayPageAPTest extends BaseTestCase {
 
 			try {
 				if (selenium.isVisible(
-							"//a[contains(@id,'PublicPages_layout_asset-publisher-test-page')]")) {
+							"//ul[@class='aui-tree-container']/li[contains(.,'Asset Publisher Test Page')]/div/div/a")) {
 					break;
 				}
 			}
@@ -275,8 +275,8 @@ public class AddWCWebContent2DisplayPageAPTest extends BaseTestCase {
 
 		assertEquals(RuntimeVariables.replace("Asset Publisher Test Page"),
 			selenium.getText(
-				"//a[contains(@id,'PublicPages_layout_asset-publisher-test-page')]"));
-		selenium.clickAt("//a[contains(@id,'PublicPages_layout_asset-publisher-test-page')]",
+				"//ul[@class='aui-tree-container']/li[contains(.,'Asset Publisher Test Page')]/div/div/a"));
+		selenium.clickAt("//ul[@class='aui-tree-container']/li[contains(.,'Asset Publisher Test Page')]/div/div/a",
 			RuntimeVariables.replace("Asset Publisher Test Page"));
 
 		for (int second = 0;; second++) {

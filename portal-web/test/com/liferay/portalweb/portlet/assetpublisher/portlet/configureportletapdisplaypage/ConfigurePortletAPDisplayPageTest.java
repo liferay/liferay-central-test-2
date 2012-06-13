@@ -113,7 +113,7 @@ public class ConfigurePortletAPDisplayPageTest extends BaseTestCase {
 				"//input[@id='_86_showOnlyLayoutAssetsCheckbox']"));
 		selenium.clickAt("//input[@id='_86_showOnlyLayoutAssetsCheckbox']",
 			RuntimeVariables.replace(
-				"Show only assets with Asset Publisher Test Page 1 as its display page. "));
+				"Show only assets with Asset Publisher Test Page as its display page. "));
 		assertTrue(selenium.isChecked(
 				"//input[@id='_86_showOnlyLayoutAssetsCheckbox']"));
 		selenium.clickAt("//input[@value='Save']",

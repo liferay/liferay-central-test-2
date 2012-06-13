@@ -1,12 +1,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>AddWCWebContent2DisplayPageAP2Test</title>
+<title>AddWCWebContent2Test</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">AddWCWebContent2DisplayPageAP2Test</td></tr>
+<tr><td rowspan="1" colspan="3">AddWCWebContent2Test</td></tr>
 </thead><tbody>
 <tr>
 	<td>open</td>
@@ -124,94 +124,14 @@
 	<td>top</td>
 </tr>
 <tr>
-	<td>waitForVisible</td>
-	<td>//a[@id='_15_displayPageLink']</td>
-	<td>Display Page (Modified)</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//a[@id='_15_displayPageLink']</td>
-	<td>Display Page (Modified)</td>
-</tr>
-<tr>
-	<td>clickAt</td>
-	<td>//a[@id='_15_displayPageLink']</td>
-	<td>Display Page (Modified)</td>
-</tr>
-<tr>
-	<td>waitForVisible</td>
-	<td>//button[@id='_15_chooseDisplayPage']</td>
-	<td>Select</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//button[@id='_15_chooseDisplayPage']</td>
-	<td>Select</td>
-</tr>
-<tr>
-	<td>clickAt</td>
-	<td>//button[@id='_15_chooseDisplayPage']</td>
-	<td>Select</td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//script[contains(@src,'/liferay/history_manager.js')]</td>
-	<td>History Manager</td>
-</tr>
-<tr>
-	<td>waitForVisible</td>
-	<td>//ul[@class='aui-tree-container']/li[contains(.,'Asset Publisher Test Page2')]/div/div/a</td>
-	<td>Asset Publisher Test Page2</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//ul[@class='aui-tree-container']/li[contains(.,'Asset Publisher Test Page2')]/div/div/a</td>
-	<td>Asset Publisher Test Page2</td>
-</tr>
-<tr>
-	<td>clickAt</td>
-	<td>//ul[@class='aui-tree-container']/li[contains(.,'Asset Publisher Test Page2')]/div/div/a</td>
-	<td>Asset Publisher Test Page2</td>
-</tr>
-<tr>
-	<td>waitForVisible</td>
-	<td>//div[@id='_15_selectedPageMessage']</td>
-	<td>Public Pages > Asset Publisher Test Page2</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//div[@id='_15_selectedPageMessage']</td>
-	<td>Public Pages > Asset Publisher Test Page2</td>
-</tr>
-<tr>
-	<td>waitForElementNotPresent</td>
-	<td>//div[3]/span/span/button[contains(@class,'aui-buttonitem-disabled')]</td>
-	<td>OK</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//div[3]/span/span/button</td>
-	<td>OK</td>
-</tr>
-<tr>
-	<td>clickAt</td>
-	<td>//div[3]/span/span/button</td>
-	<td>OK</td>
-</tr>
-<tr>
-	<td>waitForVisible</td>
-	<td>//span[@id='_15_displayPageNameInput']</td>
-	<td>Public Pages > Asset Publisher Test Page2</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//span[@id='_15_displayPageNameInput']</td>
-	<td>Public Pages > Asset Publisher Test Page2</td>
-</tr>
-<tr>
 	<td>clickAtAndWait</td>
 	<td>//input[@value='Publish']</td>
 	<td>Publish</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@class='portlet-msg-success']</td>
+	<td>Your request completed successfully.</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -223,7 +143,6 @@
 	<td>//tr[4]/td[4]/a</td>
 	<td>Approved</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 </body>
 </html>
