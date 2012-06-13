@@ -17,12 +17,18 @@ package com.liferay.portlet.journalcontent.action;
 import com.liferay.portal.kernel.portlet.DefaultConfigurationAction;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.xml.Document;
+import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.LayoutTypePortletConstants;
+import com.liferay.portal.model.PortletConstants;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -72,6 +78,64 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 		return articleId.toUpperCase();
 	}
 
+	protected String getRuntimePortletId(String xml) throws Exception {
+		Document document = SAXReaderUtil.read(xml);
+
+		Element rootElement = document.getRootElement();
+
+		String instanceId = rootElement.attributeValue("instance");
+		String portletId = rootElement.attributeValue("name");
+
+		if (Validator.isNotNull(instanceId)) {
+			portletId += PortletConstants.INSTANCE_SEPARATOR + instanceId;
+		}
+
+		return portletId;
+	}
+
+	protected String getRuntimePortletIds(String content) throws Exception {
+		StringBundler sb = new StringBundler();
+
+		for (int index = 0;;) {
+			index = content.indexOf(PortletLogic.OPEN_TAG, index);
+
+			if (index == -1) {
+				break;
+			}
+
+			int close1 = content.indexOf(PortletLogic.CLOSE_1_TAG, index);
+			int close2 = content.indexOf(PortletLogic.CLOSE_2_TAG, index);
+
+			int closeIndex = -1;
+
+			if ((close2 == -1) || ((close1 != -1) && (close1 < close2))) {
+				closeIndex = close1 + PortletLogic.CLOSE_1_TAG.length();
+			}
+			else {
+				closeIndex = close2 + PortletLogic.CLOSE_2_TAG.length();
+			}
+
+			if (closeIndex == -1) {
+				break;
+			}
+
+			if (sb.length() > 0) {
+				sb.append(StringPool.COMMA);
+			}
+
+			sb.append(
+				getRuntimePortletId(content.substring(index, closeIndex)));
+
+			index = closeIndex;
+		}
+
+		if (sb.length() == 0) {
+			return null;
+		}
+
+		return sb.toString();
+	}
+
 	protected String getRuntimePortletIds(
 			ThemeDisplay themeDisplay, String articleId)
 		throws Exception {
@@ -92,8 +156,7 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 					companyGroup.getGroupId(), articleId);
 		}
 
-		String portletIds = PortletLogic.getRuntimePortletIds(
-			journalArticle.getContent());
+		String portletIds = getRuntimePortletIds(journalArticle.getContent());
 
 		if (Validator.isNotNull(journalArticle.getTemplateId())) {
 			JournalTemplate journalTemplate = null;
@@ -109,8 +172,7 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 			}
 
 			portletIds = StringUtil.add(
-				portletIds,
-				PortletLogic.getRuntimePortletIds(journalTemplate.getXsl()));
+				portletIds, getRuntimePortletIds(journalTemplate.getXsl()));
 		}
 
 		return portletIds;
