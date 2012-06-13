@@ -1139,6 +1139,51 @@ release was successful.</echo>
 
 	<target name="unzip-weblogic">
 		<if>
+			<available file="${app.server.parent.dir}/${app.server.weblogic.custom.zip.name}" />
+			<then>
+				<antcall target="unzip-weblogic-custom" />
+			</then>
+			<else>
+				<antcall target="unzip-weblogic-original" />
+			</else>
+		</if>
+	</target>
+
+	<target name="unzip-weblogic-custom">
+		<delete dir="${app.server.weblogic.dir}" />
+
+		<unzip
+			dest="${app.server.weblogic.dir}"
+			src="${app.server.parent.dir}/${app.server.weblogic.custom.zip.name}"
+		/>
+
+		<propertyregex
+			input="${app.server.weblogic.dir.windows}"
+			property="app.server.weblogic.dir.windows.double.slash"
+			regexp="\\" 
+			replace="\\\\\\\\"
+		/>
+
+		<propertyregex
+			input="${app.server.weblogic.dir.windows.double.slash}"
+			property="app.server.weblogic.dir.windows.escaped"
+			regexp=":" 
+			replace="\\\\:"
+		/>
+
+		<replace
+			dir="${app.server.weblogic.dir}"
+			includes="**/*.cmd,**/*.domains,**/*.properties,**/*.sh,**/*.xml"
+		>
+			<replacefilter token="@app.server.weblogic.dir@" value="${app.server.weblogic.dir}" />
+			<replacefilter token="@app.server.weblogic.dir.windows@" value="${app.server.weblogic.dir.windows}" />
+			<replacefilter token="@app.server.weblogic.dir.windows.double.slash@" value="${app.server.weblogic.dir.windows.double.slash}" />
+			<replacefilter token="@app.server.weblogic.dir.windows.escaped@" value="${app.server.weblogic.dir.windows.escaped}" />
+		</replace>
+	</target>
+
+	<target name="unzip-weblogic-original">
+		<if>
 			<not>
 				<available file="${app.server.parent.dir}/${app.server.weblogic.zip.name}" />
 			</not>
@@ -1912,5 +1957,64 @@ them in ${app.server.parent.dir}. Then rerun this task.
 			<param name="zip.executable.file" value="liferay-portal-tomcat" />
 			<param name="zip.executable.dir" value="${app.server.tomcat.dir}" />
 		</antcall>
+	</target>
+
+	<target name="zip-weblogic-custom">
+		<delete>
+			<fileset dir="${app.server.weblogic.dir}" includes="logs/**" />
+		</delete>
+
+		<propertyregex
+			input="${app.server.parent.dir.windows}"
+			property="app.server.parent.dir.windows.double.slash"
+			regexp="\\" 
+			replace="\\\\\\\\"
+		/>
+
+		<propertyregex
+			input="${app.server.parent.dir.windows.double.slash}"
+			property="app.server.parent.dir.windows.escaped"
+			regexp=":" 
+			replace="\\\\:"
+		/>
+
+		<propertyregex
+			input="${app.server.weblogic.dir.windows}"
+			property="app.server.weblogic.dir.windows.double.slash"
+			regexp="\\" 
+			replace="\\\\\\\\"
+		/>
+
+		<propertyregex
+			input="${app.server.weblogic.dir.windows.double.slash}"
+			property="app.server.weblogic.dir.windows.escaped"
+			regexp=":" 
+			replace="\\\\:"
+		/>
+
+		<replace
+			dir="${app.server.weblogic.dir}"
+			includes="**/*.cmd,**/*.domains,**/*.properties,**/*.sh,**/*.xml"
+		>
+			<replacefilter token="${app.server.parent.dir}/WEBLOG~1.1" value="@app.server.weblogic.dir@" />
+			<replacefilter token="${app.server.parent.dir}/WEBLOG~1.6" value="@app.server.weblogic.dir@" />
+			<replacefilter token="${app.server.parent.dir.windows}\WEBLOG~1.1" value="@app.server.weblogic.dir.windows@" />
+			<replacefilter token="${app.server.parent.dir.windows}\WEBLOG~1.6" value="@app.server.weblogic.dir.windows@" />
+			<replacefilter token="${app.server.parent.dir.windows.double.slash}\\WEBLOG~1.1" value="@app.server.weblogic.dir.windows.double.slash@" />
+			<replacefilter token="${app.server.parent.dir.windows.double.slash}\\WEBLOG~1.6" value="@app.server.weblogic.dir.windows.double.slash@" />
+			<replacefilter token="${app.server.parent.dir.windows.escaped}\\WEBLOG~1.1" value="@app.server.weblogic.dir.windows.escaped@" />
+			<replacefilter token="${app.server.parent.dir.windows.escaped}\\WEBLOG~1.6" value="@app.server.weblogic.dir.windows.escaped@" />
+			<replacefilter token="${app.server.weblogic.dir}" value="@app.server.weblogic.dir@" />
+			<replacefilter token="${app.server.weblogic.dir.windows}" value="@app.server.weblogic.dir.windows@" />
+			<replacefilter token="${app.server.weblogic.dir.windows.escaped}" value="@app.server.weblogic.dir.windows.escaped@" />
+		</replace>
+
+		<zip
+			destfile="${app.server.parent.dir}/weblogic-${app.server.weblogic.version}.zip"
+		>
+			<zipfileset
+				dir="${app.server.weblogic.dir}"
+			/>
+		</zip>
 	</target>
 </project>
