@@ -1115,12 +1115,15 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 
 			return guestGroup.getGroupId();
 		}
-		catch(Exception e) {
+		catch (Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(e.getMessage());
+			}
 		}
 
 		// LPS-27795
 
-		guestGroupId = getGuestGroupIdFromDb(companyId);
+		guestGroupId = getGuestGroupIdBySQL(companyId);
 
 		if (guestGroupId > 0) {
 			return guestGroupId;
@@ -1137,19 +1140,17 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 		throw new NoSuchGroupException(sb.toString());
 	}
 
-	protected long getGuestGroupIdFromDb(long companyId) {
+	protected long getGuestGroupIdBySQL(long companyId) {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-
-		long guestGroupId = 0;
 
 		try {
 			con = DataAccess.getConnection();
 
 			StringBundler sb = new StringBundler(5);
 
-			sb.append("select groupId from group_ where companyId = ");
+			sb.append("select groupId from Group_ where companyId = ");
 			sb.append(companyId);
 			sb.append(" and name = '");
 			sb.append(GroupConstants.GUEST);
@@ -1160,16 +1161,17 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 			rs = ps.executeQuery();
 
 			if (rs.next()) {
-				guestGroupId = rs.getLong("groupId");
+				return rs.getLong("groupId");
 			}
 		}
-		catch (SQLException se) {
+		catch (SQLException sqle) {
+			_log.error(sqle, sqle);
 		}
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
 		}
 
-		return guestGroupId;
+		return 0;
 	}
 
 	protected PermissionedModel getPermissionedModel(
