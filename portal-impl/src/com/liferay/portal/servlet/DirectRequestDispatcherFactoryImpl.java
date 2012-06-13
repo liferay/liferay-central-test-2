@@ -59,7 +59,7 @@ public class DirectRequestDispatcherFactoryImpl
 		return getRequestDispatcher(servletContext, path);
 	}
 
-	private RequestDispatcher doGetRequestDispatcher(
+	protected RequestDispatcher doGetRequestDispatcher(
 		ServletContext servletContext, String path) {
 
 		if (!PropsValues.DIRECT_SERVLET_CONTEXT_ENABLED) {
