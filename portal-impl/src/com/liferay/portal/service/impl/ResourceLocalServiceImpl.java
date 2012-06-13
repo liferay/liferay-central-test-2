@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.util.ListUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.model.AuditedModel;
 import com.liferay.portal.model.ClassedModel;
 import com.liferay.portal.model.Group;
@@ -548,10 +549,6 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 		// Guest
 
 		long guestGroupId = getGuestGroupId(companyId);
-
-		if (guestGroupId < 0) {
-			throw new NoSuchGroupException("Could not find Guest group");
-		}
 
 		addResource(
 			companyId, name, ResourceConstants.SCOPE_GROUP,
@@ -1109,39 +1106,56 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 		return groupId;
 	}
 
-	protected long getGuestGroupId(long companyId) {
-		long guestGroupId = -1;
+	protected long getGuestGroupId(long companyId) throws NoSuchGroupException {
+		long guestGroupId = 0;
 
 		try {
 			Group guestGroup = groupLocalService.getGroup(
 				companyId, GroupConstants.GUEST);
 
-			guestGroupId = guestGroup.getGroupId();
+			return guestGroup.getGroupId();
 		}
 		catch(Exception e) {
-			// LPS-27795
-
-			guestGroupId = getGuestGroupIdBySQL(companyId);
 		}
 
-		return guestGroupId;
+		// LPS-27795
+
+		guestGroupId = getGuestGroupIdFromDb(companyId);
+
+		if (guestGroupId > 0) {
+			return guestGroupId;
+		}
+
+		StringBundler sb = new StringBundler(5);
+
+		sb.append("No Group exists with the key {companyId=");
+		sb.append(companyId);
+		sb.append(", name=");
+		sb.append(GroupConstants.GUEST);
+		sb.append("}");
+
+		throw new NoSuchGroupException(sb.toString());
 	}
 
-	protected long getGuestGroupIdBySQL(long companyId) {
+	protected long getGuestGroupIdFromDb(long companyId) {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 
-		long guestGroupId = -1;
+		long guestGroupId = 0;
 
 		try {
 			con = DataAccess.getConnection();
 
-			ps = con.prepareStatement(
-				"select groupId from group_ where companyId = ? and name = ?");
+			StringBundler sb = new StringBundler(5);
 
-			ps.setLong(1, companyId);
-			ps.setString(2, GroupConstants.GUEST);
+			sb.append("select groupId from group_ where companyId = ");
+			sb.append(companyId);
+			sb.append(" and name = '");
+			sb.append(GroupConstants.GUEST);
+			sb.append("'");
+
+			ps = con.prepareStatement(sb.toString());
 
 			rs = ps.executeQuery();
 
