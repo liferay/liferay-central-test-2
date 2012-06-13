@@ -14,8 +14,10 @@
 
 package com.liferay.portal.service.impl;
 
+import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.NoSuchResourceException;
 import com.liferay.portal.ResourceActionsException;
+import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
@@ -46,6 +48,11 @@ import com.liferay.portal.service.base.ResourceLocalServiceBaseImpl;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.ResourcePermissionsThreadLocal;
 import com.liferay.portal.util.comparator.ResourceComparator;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import java.util.Arrays;
 import java.util.Iterator;
@@ -540,16 +547,19 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 
 		// Guest
 
-		Group guestGroup = groupLocalService.getGroup(
-			companyId, GroupConstants.GUEST);
+		long guestGroupId = getGuestGroupId(companyId);
+
+		if (guestGroupId < 0) {
+			throw new NoSuchGroupException("Could not find Guest group");
+		}
 
 		addResource(
 			companyId, name, ResourceConstants.SCOPE_GROUP,
-			String.valueOf(guestGroup.getGroupId()));
+			String.valueOf(guestGroupId));
 
 		// Group
 
-		if ((groupId > 0) && (guestGroup.getGroupId() != groupId)) {
+		if ((groupId > 0) && (guestGroupId != groupId)) {
 			addResource(
 				companyId, name, ResourceConstants.SCOPE_GROUP,
 				String.valueOf(groupId));
@@ -1097,6 +1107,55 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 		}
 
 		return groupId;
+	}
+
+	protected long getGuestGroupId(long companyId) {
+		long guestGroupId = -1;
+
+		try {
+			Group guestGroup = groupLocalService.getGroup(
+				companyId, GroupConstants.GUEST);
+
+			guestGroupId = guestGroup.getGroupId();
+		}
+		catch(Exception e) {
+			// LPS-27795
+
+			guestGroupId = getGuestGroupIdBySQL(companyId);
+		}
+
+		return guestGroupId;
+	}
+
+	protected long getGuestGroupIdBySQL(long companyId) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		long guestGroupId = -1;
+
+		try {
+			con = DataAccess.getConnection();
+
+			ps = con.prepareStatement(
+				"select groupId from group_ where companyId = ? and name = ?");
+
+			ps.setLong(1, companyId);
+			ps.setString(2, GroupConstants.GUEST);
+
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
+				guestGroupId = rs.getLong("groupId");
+			}
+		}
+		catch (SQLException se) {
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
+
+		return guestGroupId;
 	}
 
 	protected PermissionedModel getPermissionedModel(
