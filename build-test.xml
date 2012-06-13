@@ -266,7 +266,7 @@
 	</target>
 
 	<target name="build-test-ant-scripts">
-		<property name="build-test-ant-scripts.version" value="9" />
+		<property name="build-test-ant-scripts.version" value="0" />
 
 		<if>
 			<available file="portal-web/test-ant-scripts/version" />
@@ -1393,12 +1393,6 @@
 		</antcall>
 
 		<antcall target="build-test-ant-script">
-			<param name="test.ant.script.command" value="portal-web-security" />
-			<param name="test.ant.script.suite" value="PortalWebSecurityTestSuite" />
-		</antcall>
-
-
-		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="portal-web-add-application" />
 			<param name="test.ant.script.suite" value="PortalWebAddApplicationTestSuite" />
 		</antcall>
@@ -1576,6 +1570,11 @@
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="portal-web-rss" />
 			<param name="test.ant.script.suite" value="PortalWebRSSTestSuite" />
+		</antcall>
+
+		<antcall target="build-test-ant-script">
+			<param name="test.ant.script.command" value="portal-web-security-json" />
+			<param name="test.ant.script.suite" value="PortalWebSecurityJsonTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
