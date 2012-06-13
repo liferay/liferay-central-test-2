@@ -14,7 +14,6 @@
 
 package com.liferay.portlet.mobiledevicerules.lar;
 
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.lar.BasePortletDataHandler;
 import com.liferay.portal.kernel.lar.PortletDataContext;
 import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
@@ -210,13 +209,16 @@ public class MDRPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		Element actionElement = actionsElement.addElement("action");
 
-		if (SiteRedirectActionHandler.class.getName().equals(
-			action.getType())) {
+		String type = action.getType();
+
+		if (type.equals(SiteRedirectActionHandler.class.getName())) {
+			UnicodeProperties typeSettingsProperties =
+				action.getTypeSettingsProperties();
+
+			long targetPlid = GetterUtil.getLong(
+				typeSettingsProperties.getProperty("plid"));
 
 			try {
-				long targetPlid = GetterUtil.getLong(
-					action.getTypeSettingsProperties().getProperty("plid"));
-
 				Layout targetLayout = LayoutLocalServiceUtil.getLayout(
 					targetPlid);
 
@@ -226,9 +228,9 @@ public class MDRPortletDataHandlerImpl extends BasePortletDataHandler {
 			catch (Exception e) {
 				if (_log.isWarnEnabled()) {
 					_log.warn(
-						"Unable to export uuid of target layout: " +
-						action + ", no layout uuid will be exported and site " +
-						"redirect may not match after import.",
+						"Unable to set the layout uuid of the target " +
+							targetPlid +
+								". Site redirect may not match after import.",
 						e);
 				}
 			}
@@ -307,9 +309,7 @@ public class MDRPortletDataHandlerImpl extends BasePortletDataHandler {
 		Element ruleGroupInstanceElement = ruleGroupInstancesElement.addElement(
 			"rule-group-instance");
 
-		String ruleGroupUuid = ruleGroupInstance.getRuleGroup().getUuid();
-
-		ruleGroupInstanceElement.addAttribute("rule-group-uuid", ruleGroupUuid);
+		MDRRuleGroup ruleGroup = ruleGroupInstance.getRuleGroup();
 
 		String className = ruleGroupInstance.getClassName();
 
@@ -320,6 +320,10 @@ public class MDRPortletDataHandlerImpl extends BasePortletDataHandler {
 			ruleGroupInstanceElement.addAttribute(
 				"layout-uuid", layout.getUuid());
 		}
+
+		String ruleGroupUuid = ruleGroup.getUuid();
+
+		ruleGroupInstanceElement.addAttribute("rule-group-uuid", ruleGroupUuid);
 
 		portletDataContext.addClassedModel(
 			ruleGroupInstanceElement, path, ruleGroupInstance, _NAMESPACE);
@@ -571,10 +575,10 @@ public class MDRPortletDataHandlerImpl extends BasePortletDataHandler {
 
 				ruleGroupId = ruleGroup.getRuleGroupId();
 			}
-			catch (SystemException e) {
+			catch (Exception e) {
 				if (_log.isErrorEnabled()) {
 					_log.warn(
-						"Unable to import rule group instance: " +
+						"Unable to import rule group instance " +
 							ruleGroupInstance,
 						e);
 				}
@@ -685,14 +689,17 @@ public class MDRPortletDataHandlerImpl extends BasePortletDataHandler {
 	protected void validateTargetLayoutPlid(
 		Element actionElement, MDRAction action) {
 
-		if (!SiteRedirectActionHandler.class.getName().equals(
-			action.getType())) {
+		String type = action.getType();
 
+		if (!type.equals(SiteRedirectActionHandler.class.getName())) {
 			return;
 		}
 
-		String targetLayoutUuid = actionElement.attributeValue(
-			"layout-uuid");
+		String targetLayoutUuid = actionElement.attributeValue("layout-uuid");
+
+		if (Validator.isNull(targetLayoutUuid)) {
+			return;
+		}
 
 		UnicodeProperties typeSettingsProperties =
 			action.getTypeSettingsProperties();
@@ -701,25 +708,19 @@ public class MDRPortletDataHandlerImpl extends BasePortletDataHandler {
 			typeSettingsProperties.getProperty("groupId"));
 
 		try {
-			if (Validator.isNotNull(targetLayoutUuid)) {
-				Layout targetLayout =
-					LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(
-						targetLayoutUuid, targetGroupId);
+			Layout targetLayout =
+				LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(
+					targetLayoutUuid, targetGroupId);
 
-				long newTargetLayoutPlid = targetLayout.getPlid();
-
-				typeSettingsProperties.setProperty(
-					"plid", String.valueOf(newTargetLayoutPlid));
-			}
+			typeSettingsProperties.setProperty(
+				"plid", String.valueOf(targetLayout.getPlid()));
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
-					"Unable to find desired SiteRedirect layout " +
-					"for uuid: " + targetLayoutUuid + " in group: " +
-					targetGroupId + ", plid will be left " +
-					"unchanged and may not match the wanted " +
-					"target Layout.",
+					"Unable to find target layout with uuid " +
+						targetLayoutUuid + " in group " + targetGroupId +
+							". Site redirect may not match target layout.",
 					e);
 			}
 		}

@@ -19,7 +19,6 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
-import com.liferay.portlet.mobiledevicerules.NoSuchRuleGroupInstanceException;
 import com.liferay.portlet.mobiledevicerules.model.MDRAction;
 import com.liferay.portlet.mobiledevicerules.model.MDRRuleGroupInstance;
 import com.liferay.portlet.mobiledevicerules.service.base.MDRActionLocalServiceBaseImpl;
@@ -69,6 +68,7 @@ public class MDRActionLocalServiceImpl extends MDRActionLocalServiceBaseImpl {
 		action = updateMDRAction(action, false);
 
 		ruleGroupInstance.setModifiedDate(now);
+
 		mdrRuleGroupInstancePersistence.update(ruleGroupInstance, false);
 
 		return action;
@@ -97,18 +97,14 @@ public class MDRActionLocalServiceImpl extends MDRActionLocalServiceBaseImpl {
 	public void deleteAction(MDRAction action) throws SystemException {
 		mdrActionPersistence.remove(action);
 
-		try {
-			Date now = new Date();
+		MDRRuleGroupInstance ruleGroupInstance =
+			mdrRuleGroupInstancePersistence.fetchByPrimaryKey(
+				action.getRuleGroupInstanceId());
 
-			MDRRuleGroupInstance ruleGroupInstance =
-				mdrRuleGroupInstancePersistence.findByPrimaryKey(
-					action.getRuleGroupInstanceId());
-
-			ruleGroupInstance.setModifiedDate(now);
+		if (ruleGroupInstance != null) {
+			ruleGroupInstance.setModifiedDate(new Date());
 
 			mdrRuleGroupInstancePersistence.update(ruleGroupInstance, false);
-		}
-		catch (NoSuchRuleGroupInstanceException e) {
 		}
 	}
 
