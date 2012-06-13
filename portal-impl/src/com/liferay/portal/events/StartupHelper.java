@@ -53,9 +53,8 @@ public class StartupHelper {
 		try {
 			DB db = DBFactoryUtil.getDB();
 
-			Thread currentThread = Thread.currentThread();
-
-			ClassLoader classLoader = currentThread.getContextClassLoader();
+			ClassLoader classLoader =
+				PACLClassLoaderUtil.getContextClassLoader();
 
 			String tablesSQL = StringUtil.read(
 				classLoader,
