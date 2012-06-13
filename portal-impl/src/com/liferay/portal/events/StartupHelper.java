@@ -44,9 +44,8 @@ public class StartupHelper {
 		DB db, Connection con, boolean dropIndexes) {
 
 		try {
-			Thread currentThread = Thread.currentThread();
-
-			ClassLoader classLoader = currentThread.getContextClassLoader();
+			ClassLoader classLoader =
+				PACLClassLoaderUtil.getContextClassLoader();
 
 			String tablesSQL = StringUtil.read(
 				classLoader,
