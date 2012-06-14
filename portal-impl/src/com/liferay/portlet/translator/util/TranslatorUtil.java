@@ -30,21 +30,21 @@ public class TranslatorUtil {
 		String translationId, String[] allLanguageIds) {
 
 		try {
-			int x = translationId.indexOf(StringPool.UNDERLINE);
+			int pos = translationId.indexOf(StringPool.UNDERLINE);
 
-			String fromLanguageId = translationId.substring(0, x);
+			String fromLanguageId = translationId.substring(0, pos);
 
 			if (!ArrayUtil.contains(allLanguageIds, fromLanguageId)) {
-				x = translationId.indexOf(StringPool.UNDERLINE, x + 1);
+				pos = translationId.indexOf(StringPool.UNDERLINE, pos + 1);
 
-				fromLanguageId = translationId.substring(0, x);
+				fromLanguageId = translationId.substring(0, pos);
 
 				if (!ArrayUtil.contains(allLanguageIds, fromLanguageId)) {
 					return null;
 				}
 			}
 
-			String toLanguageId = translationId.substring(x + 1);
+			String toLanguageId = translationId.substring(pos + 1);
 
 			if (!ArrayUtil.contains(allLanguageIds, toLanguageId)) {
 				return null;

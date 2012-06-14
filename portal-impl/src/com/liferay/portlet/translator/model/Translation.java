@@ -29,6 +29,7 @@ public class Translation implements Serializable {
 
 		_fromLanguageId = fromLanguageId;
 		_toLanguageId = toLanguageId;
+
 		setFromText(fromText);
 	}
 
@@ -38,6 +39,7 @@ public class Translation implements Serializable {
 
 		_fromLanguageId = fromLanguageId;
 		_toLanguageId = toLanguageId;
+
 		setFromText(fromText);
 		setToText(toText);
 	}
