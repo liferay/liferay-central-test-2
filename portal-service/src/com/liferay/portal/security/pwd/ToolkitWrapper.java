@@ -21,20 +21,42 @@ import com.liferay.portal.model.PasswordPolicy;
 /**
  * @author Brian Wing Shun Chan
  */
-public abstract class BasicToolkit {
+public class ToolkitWrapper implements Toolkit {
 
-	public abstract String generate(PasswordPolicy passwordPolicy);
+	public ToolkitWrapper(Toolkit toolkit) {
+		_originalToolkit = toolkit;
+		_toolkit = toolkit;
+	}
 
-	public abstract void validate(
+	public String generate(PasswordPolicy passwordPolicy) {
+		return _toolkit.generate(passwordPolicy);
+	}
+
+	public void setToolkit(Toolkit toolkit) {
+		if (toolkit == null) {
+			_toolkit = _originalToolkit;
+		}
+		else {
+			_toolkit = toolkit;
+		}
+	}
+
+	public void validate(
 			long userId, String password1, String password2,
 			PasswordPolicy passwordPolicy)
-		throws PortalException, SystemException;
+		throws PortalException, SystemException {
+
+		_toolkit.validate(userId, password1, password2, passwordPolicy);
+	}
 
 	public void validate(
 			String password1, String password2, PasswordPolicy passwordPolicy)
 		throws PortalException, SystemException {
 
-		validate(0, password1, password2, passwordPolicy);
+		_toolkit.validate(password1, password2, passwordPolicy);
 	}
+
+	private Toolkit _originalToolkit;
+	private Toolkit _toolkit;
 
 }
