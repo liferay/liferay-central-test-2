@@ -121,10 +121,10 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 			PortalLDAPImporterImpl.class.getName(), false,
 			PropsValues.LDAP_IMPORT_LOCK_EXPIRATION_TIME);
 
-		long curThreadCompanyId = CompanyThreadLocal.getCompanyId();
+		long threadLocalCompanyId = CompanyThreadLocal.getCompanyId();
 
 		try {
-			if (curThreadCompanyId == CompanyConstants.SYSTEM) {
+			if (threadLocalCompanyId == CompanyConstants.SYSTEM) {
 				CompanyThreadLocal.setCompanyId(companyId);
 			}
 
@@ -150,10 +150,10 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 			}
 		}
 		finally {
-			CompanyThreadLocal.setCompanyId(curThreadCompanyId);
-
 			LockLocalServiceUtil.unlock(
 				PortalLDAPImporterUtil.class.getName(), companyId);
+
+			CompanyThreadLocal.setCompanyId(threadLocalCompanyId);
 		}
 	}
 
