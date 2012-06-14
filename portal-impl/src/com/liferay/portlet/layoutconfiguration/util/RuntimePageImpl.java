@@ -96,6 +96,94 @@ public class RuntimePageImpl implements RuntimePage {
 			pageContext, null, velocityTemplateId, velocityTemplateContent);
 	}
 
+	public void processTemplate(
+			PageContext pageContext, String portletId,
+			String velocityTemplateId, String velocityTemplateContent)
+		throws Exception {
+
+		doDispatch(
+			pageContext, portletId, velocityTemplateId, velocityTemplateContent,
+			true);
+	}
+
+	public String processXML(
+			HttpServletRequest request, String content,
+			RuntimeLogic runtimeLogic)
+		throws Exception {
+
+		if (Validator.isNull(content)) {
+			return StringPool.BLANK;
+		}
+
+		int index = content.indexOf(runtimeLogic.getOpenTag());
+
+		if (index == -1) {
+			return content;
+		}
+
+		Portlet renderPortlet = (Portlet)request.getAttribute(
+			WebKeys.RENDER_PORTLET);
+
+		Boolean renderPortletResource = (Boolean)request.getAttribute(
+			WebKeys.RENDER_PORTLET_RESOURCE);
+
+		String outerPortletId = (String)request.getAttribute(
+			WebKeys.OUTER_PORTLET_ID);
+
+		if (outerPortletId == null) {
+			request.setAttribute(
+				WebKeys.OUTER_PORTLET_ID, renderPortlet.getPortletId());
+		}
+
+		try {
+			request.setAttribute(WebKeys.RENDER_PORTLET_RESOURCE, Boolean.TRUE);
+
+			StringBundler sb = new StringBundler();
+
+			int x = 0;
+			int y = index;
+
+			while (y != -1) {
+				sb.append(content.substring(x, y));
+
+				int close1 = content.indexOf(runtimeLogic.getClose1Tag(), y);
+				int close2 = content.indexOf(runtimeLogic.getClose2Tag(), y);
+
+				if ((close2 == -1) || ((close1 != -1) && (close1 < close2))) {
+					x = close1 + runtimeLogic.getClose1Tag().length();
+				}
+				else {
+					x = close2 + runtimeLogic.getClose2Tag().length();
+				}
+
+				sb.append(runtimeLogic.processXML(content.substring(y, x)));
+
+				y = content.indexOf(runtimeLogic.getOpenTag(), x);
+			}
+
+			if (y == -1) {
+				sb.append(content.substring(x));
+			}
+
+			return sb.toString();
+		}
+		finally {
+			if (outerPortletId == null) {
+				request.removeAttribute(WebKeys.OUTER_PORTLET_ID);
+			}
+
+			request.setAttribute(WebKeys.RENDER_PORTLET, renderPortlet);
+
+			if (renderPortletResource == null) {
+				request.removeAttribute(WebKeys.RENDER_PORTLET_RESOURCE);
+			}
+			else {
+				request.setAttribute(
+					WebKeys.RENDER_PORTLET_RESOURCE, renderPortletResource);
+			}
+		}
+	}
+
 	protected Object buildVelocityTaglib(
 			HttpServletRequest request, HttpServletResponse response,
 			PageContext pageContext)
@@ -212,44 +300,6 @@ public class RuntimePageImpl implements RuntimePage {
 
 			throw e;
 		}
-	}
-
-	protected LayoutTemplate getLayoutTemlpate(String velocityTemplateId) {
-		String separator = LayoutTemplateConstants.CUSTOM_SEPARATOR;
-		boolean standard = false;
-
-		if (velocityTemplateId.contains(
-				LayoutTemplateConstants.STANDARD_SEPARATOR)) {
-
-			separator = LayoutTemplateConstants.STANDARD_SEPARATOR;
-			standard = true;
-		}
-
-		String layoutTemplateId = null;
-
-		String themeId = null;
-
-		int pos = velocityTemplateId.indexOf(separator);
-
-		if (pos != -1) {
-			layoutTemplateId = velocityTemplateId.substring(
-				pos + separator.length());
-
-			themeId = velocityTemplateId.substring(0, pos);
-		}
-
-		return LayoutTemplateLocalServiceUtil.getLayoutTemplate(
-			layoutTemplateId, standard, themeId);
-	}
-
-	public void processTemplate(
-			PageContext pageContext, String portletId,
-			String velocityTemplateId, String velocityTemplateContent)
-		throws Exception {
-
-		doDispatch(
-			pageContext, portletId, velocityTemplateId, velocityTemplateContent,
-			true);
 	}
 
 	protected void doProcessTemplate(
@@ -402,82 +452,32 @@ public class RuntimePageImpl implements RuntimePage {
 		sb.writeTo(pageContext.getOut());
 	}
 
-	public String processXML(
-			HttpServletRequest request, String content,
-			RuntimeLogic runtimeLogic)
-		throws Exception {
+	protected LayoutTemplate getLayoutTemlpate(String velocityTemplateId) {
+		String separator = LayoutTemplateConstants.CUSTOM_SEPARATOR;
+		boolean standard = false;
 
-		if (Validator.isNull(content)) {
-			return StringPool.BLANK;
+		if (velocityTemplateId.contains(
+				LayoutTemplateConstants.STANDARD_SEPARATOR)) {
+
+			separator = LayoutTemplateConstants.STANDARD_SEPARATOR;
+			standard = true;
 		}
 
-		int index = content.indexOf(runtimeLogic.getOpenTag());
+		String layoutTemplateId = null;
 
-		if (index == -1) {
-			return content;
+		String themeId = null;
+
+		int pos = velocityTemplateId.indexOf(separator);
+
+		if (pos != -1) {
+			layoutTemplateId = velocityTemplateId.substring(
+				pos + separator.length());
+
+			themeId = velocityTemplateId.substring(0, pos);
 		}
 
-		Portlet renderPortlet = (Portlet)request.getAttribute(
-			WebKeys.RENDER_PORTLET);
-
-		Boolean renderPortletResource = (Boolean)request.getAttribute(
-			WebKeys.RENDER_PORTLET_RESOURCE);
-
-		String outerPortletId = (String)request.getAttribute(
-			WebKeys.OUTER_PORTLET_ID);
-
-		if (outerPortletId == null) {
-			request.setAttribute(
-				WebKeys.OUTER_PORTLET_ID, renderPortlet.getPortletId());
-		}
-
-		try {
-			request.setAttribute(WebKeys.RENDER_PORTLET_RESOURCE, Boolean.TRUE);
-
-			StringBundler sb = new StringBundler();
-
-			int x = 0;
-			int y = index;
-
-			while (y != -1) {
-				sb.append(content.substring(x, y));
-
-				int close1 = content.indexOf(runtimeLogic.getClose1Tag(), y);
-				int close2 = content.indexOf(runtimeLogic.getClose2Tag(), y);
-
-				if ((close2 == -1) || ((close1 != -1) && (close1 < close2))) {
-					x = close1 + runtimeLogic.getClose1Tag().length();
-				}
-				else {
-					x = close2 + runtimeLogic.getClose2Tag().length();
-				}
-
-				sb.append(runtimeLogic.processXML(content.substring(y, x)));
-
-				y = content.indexOf(runtimeLogic.getOpenTag(), x);
-			}
-
-			if (y == -1) {
-				sb.append(content.substring(x));
-			}
-
-			return sb.toString();
-		}
-		finally {
-			if (outerPortletId == null) {
-				request.removeAttribute(WebKeys.OUTER_PORTLET_ID);
-			}
-
-			request.setAttribute(WebKeys.RENDER_PORTLET, renderPortlet);
-
-			if (renderPortletResource == null) {
-				request.removeAttribute(WebKeys.RENDER_PORTLET_RESOURCE);
-			}
-			else {
-				request.setAttribute(
-					WebKeys.RENDER_PORTLET_RESOURCE, renderPortletResource);
-			}
-		}
+		return LayoutTemplateLocalServiceUtil.getLayoutTemplate(
+			layoutTemplateId, standard, themeId);
 	}
 
 	protected void parallelyRenderPortlets(
