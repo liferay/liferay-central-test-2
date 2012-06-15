@@ -113,7 +113,8 @@ public class MediaWikiToCreoleTranslatorTest {
 		String expected =
 			MediaWikiToCreoleTranslator.TABLE_OF_CONTENTS +
 				"== Header 1 ==\n=== Header 2 ===";
-		String actual = _translator.postProcess(_translate(content));
+		String actual = _mediaWikiToCreoleTranslator.postProcess(
+			_translate(content));
 
 		Assert.assertEquals(expected, actual);
 	}
@@ -124,7 +125,8 @@ public class MediaWikiToCreoleTranslatorTest {
 
 		String expected =
 			MediaWikiToCreoleTranslator.TABLE_OF_CONTENTS + content;
-		String actual = _translator.postProcess(_translate(content));
+		String actual = _mediaWikiToCreoleTranslator.postProcess(
+			_translate(content));
 
 		Assert.assertEquals(expected, actual);
 	}
@@ -162,7 +164,8 @@ public class MediaWikiToCreoleTranslatorTest {
 				"test1 {{SharedImages/sample1.png}} test2 " +
 					"{{SharedImages/sample2.png}} test3 " +
 						"{{SharedImages/sample3.png}} test4";
-		String actual = _translator.postProcess(_translate(content));
+		String actual = _mediaWikiToCreoleTranslator.postProcess(
+			_translate(content));
 
 		Assert.assertEquals(expected, actual);
 	}
@@ -204,7 +207,8 @@ public class MediaWikiToCreoleTranslatorTest {
 		String expected =
 			MediaWikiToCreoleTranslator.TABLE_OF_CONTENTS +
 				"[[Link With Underscores]]";
-		String actual = _translator.postProcess(_translate(content));
+		String actual = _mediaWikiToCreoleTranslator.postProcess(
+			_translate(content));
 
 		Assert.assertEquals(expected, actual);
 	}
@@ -292,7 +296,7 @@ public class MediaWikiToCreoleTranslatorTest {
 			MediaWikiToCreoleTranslator.TABLE_OF_CONTENTS +
 				"previous line\n{{{{\nmonospace\n''second'' line\n}}}}\nnext" +
 					" line";
-		String actual = _translator.translate(content);
+		String actual = _mediaWikiToCreoleTranslator.translate(content);
 
 		Assert.assertEquals(expected, actual);
 	}
@@ -354,7 +358,8 @@ public class MediaWikiToCreoleTranslatorTest {
 
 		String expected =
 			MediaWikiToCreoleTranslator.TABLE_OF_CONTENTS + "text\n\ntextx";
-		String actual = _translator.postProcess(_translate(content));
+		String actual = _mediaWikiToCreoleTranslator.postProcess(
+			_translate(content));
 
 		Assert.assertEquals(expected, actual);
 	}
@@ -430,10 +435,10 @@ public class MediaWikiToCreoleTranslatorTest {
 	}
 
 	private String _translate(String content) {
-		return _translator.runRegexps(content);
+		return _mediaWikiToCreoleTranslator.runRegexps(content);
 	}
 
-	private MediaWikiToCreoleTranslator _translator = 
+	private MediaWikiToCreoleTranslator _mediaWikiToCreoleTranslator =
 		new MediaWikiToCreoleTranslator();
 
 }

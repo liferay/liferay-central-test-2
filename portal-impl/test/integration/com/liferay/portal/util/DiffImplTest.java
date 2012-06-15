@@ -18,13 +18,12 @@ import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
 import com.liferay.portal.kernel.util.Diff;
 import com.liferay.portal.kernel.util.DiffResult;
 import com.liferay.portal.kernel.util.DiffUtil;
+import com.liferay.portal.test.LiferayIntegrationJUnitTestRunner;
 
 import java.io.Reader;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import com.liferay.portal.test.LiferayIntegrationJUnitTestRunner;
 
 import org.junit.Assert;
 import org.junit.Test;

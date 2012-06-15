@@ -27,7 +27,7 @@ import org.junit.runner.RunWith;
 public class ClassicToCreoleTranslatorTest {
 
 	public ClassicToCreoleTranslatorTest() {
-		_translator = new ClassicToCreoleTranslator();
+		_classicToCreoleTranslator = new ClassicToCreoleTranslator();
 	}
 
 	@Test
@@ -272,9 +272,9 @@ public class ClassicToCreoleTranslatorTest {
 	}
 
 	private String _translate(String content) {
-		return _translator.translate(content);
+		return _classicToCreoleTranslator.translate(content);
 	}
 
-	private ClassicToCreoleTranslator _translator;
+	private ClassicToCreoleTranslator _classicToCreoleTranslator;
 
 }
