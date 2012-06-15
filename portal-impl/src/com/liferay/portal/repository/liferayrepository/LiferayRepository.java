@@ -176,9 +176,8 @@ public class LiferayRepository
 		if (dlFileVersion != null) {
 			return new LiferayFileVersion(dlFileVersion);
 		}
-		else {
-			return null;
-		}
+
+		return null;
 	}
 
 	public void checkInFileEntry(
