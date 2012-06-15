@@ -122,8 +122,8 @@ public class DLAppHelperLocalServiceImpl
 
 	public void cancelCheckOut(
 			long userId, FileEntry fileEntry, FileVersion sourceFileVersion,
-			FileVersion destinationFileVersion, ServiceContext serviceContext,
-			FileVersion draftFileVersion)
+			FileVersion destinationFileVersion, FileVersion draftFileVersion,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		updateFileEntry(

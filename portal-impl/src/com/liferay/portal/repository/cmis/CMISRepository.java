@@ -243,9 +243,8 @@ public class CMISRepository extends BaseCmisRepository {
 		if (draftDocument != null) {
 			return toFileVersion(draftDocument);
 		}
-		else {
-			return null;
-		}
+
+		return null;
 	}
 
 	public void checkInFileEntry(

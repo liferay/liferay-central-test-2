@@ -402,7 +402,7 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 
 		dlAppHelperLocalService.cancelCheckOut(
 			getUserId(), fileEntry, null, fileEntry.getFileVersion(),
-			serviceContext, draftFileVersion);
+			draftFileVersion, serviceContext);
 	}
 
 	/**
