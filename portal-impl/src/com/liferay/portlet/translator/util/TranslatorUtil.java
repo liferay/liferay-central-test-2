@@ -27,7 +27,6 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
-import java.util.SortedMap;
 import java.util.TreeMap;
 
 /**
@@ -73,21 +72,20 @@ public class TranslatorUtil {
 
 		Map<String, String> languageIdsMap = new HashMap<String, String>();
 
-		String[] languageIds =
-			PrefsPropsUtil.getStringArray(
-				PropsKeys.TRANSLATOR_LANGUAGES, StringPool.COMMA);
+		String[] languageIds = PrefsPropsUtil.getStringArray(
+			PropsKeys.TRANSLATOR_LANGUAGES, StringPool.COMMA);
 
 		for (String languageId : languageIds) {
 			languageIdsMap.put(
 				languageId, LanguageUtil.get(locale, "language." + languageId));
 		}
 
-		SortedMap languageIdsSortedMap = new TreeMap<String, String>(
+		Map<String, String> sortedLanguageIdsMap = new TreeMap<String, String>(
 			new ValueComparator(languageIdsMap));
 
-		languageIdsSortedMap.putAll(languageIdsMap);
+		sortedLanguageIdsMap.putAll(languageIdsMap);
 
-		return languageIdsSortedMap;
+		return sortedLanguageIdsMap;
 	}
 
 	public static Translation getTranslation(
@@ -100,20 +98,20 @@ public class TranslatorUtil {
 		return (Translation)wci.convert("");
 	}
 
-	public static class ValueComparator implements Comparator<Object> {
+	private static class ValueComparator implements Comparator<Object> {
 
-		public ValueComparator(Map<String, String> data) {
-			_data = data;
+		public ValueComparator(Map<String, String> map) {
+			_map = map;
 		}
 
 		public int compare(Object obj1, Object obj2) {
-			String value1 = (String)_data.get(obj1);
-			String value2 = (String)_data.get(obj2);
+			String value1 = _map.get(obj1);
+			String value2 = _map.get(obj2);
 
 			return value1.compareTo(value2);
 		}
 
-		private Map<String, String> _data = null;
+		private Map<String, String> _map;
 
 	}
 

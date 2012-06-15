@@ -78,7 +78,7 @@ if (translation == null) {
 						String languageName = entry.getValue();
 					%>
 
-						<aui:option label='<%= languageName %>' selected="<%= translation.getFromLanguageId().equals(languageId) %>" value="<%= languageId %>" />
+						<aui:option label="<%= languageName %>" selected="<%= languageId.equals(translation.getFromLanguageId()) %>" value="<%= languageId %>" />
 
 					<%
 					}
@@ -94,7 +94,7 @@ if (translation == null) {
 						String languageName = entry.getValue();
 					%>
 
-						<aui:option label='<%= languageName %>' selected="<%= translation.getToLanguageId().equals(languageId) %>" value="<%= languageId %>" />
+						<aui:option label="<%= languageName %>" selected="<%= languageId.equals(translation.getToLanguageId()) %>" value="<%= languageId %>" />
 
 					<%
 					}
