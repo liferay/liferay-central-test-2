@@ -239,10 +239,6 @@ public class LayoutExporter {
 		LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
 			groupId, privateLayout);
 
-		Group group = layoutSet.getGroup();
-
-		boolean globalScopeExport = group.isCompany();
-
 		long companyId = layoutSet.getCompanyId();
 		long defaultUserId = UserLocalServiceUtil.getDefaultUserId(companyId);
 
@@ -318,6 +314,8 @@ public class LayoutExporter {
 		headerElement.addAttribute(
 			"private-layout", String.valueOf(privateLayout));
 
+		Group group = layoutSet.getGroup();
+
 		String type = "layout-set";
 
 		if (group.isLayoutPrototype()) {
@@ -391,8 +389,6 @@ public class LayoutExporter {
 		List<Portlet> portlets = getAlwaysExportablePortlets(companyId);
 
 		long plid = LayoutConstants.DEFAULT_PLID;
-
-		// Populate portletIds with always exportable portlets
 
 		if (!layouts.isEmpty()) {
 			Layout firstLayout = layouts.get(0);
@@ -480,21 +476,21 @@ public class LayoutExporter {
 			Layout layout = LayoutLocalServiceUtil.fetchLayout(plid);
 
 			if (layout == null) {
-				if (!globalScopeExport &&
+				if (!group.isCompany() &&
 					(plid <= LayoutConstants.DEFAULT_PLID)) {
 
 					continue;
 				}
 
 				if (_log.isWarnEnabled()) {
-					_log.warn("No Layout has been found, " +
-						"assuming global scope");
+					_log.warn(
+						"Assuming global scope because no layout was found");
 				}
 
 				layout = new LayoutImpl();
 
-				layout.setCompanyId(companyId);
 				layout.setGroupId(groupId);
+				layout.setCompanyId(companyId);
 			}
 
 			portletDataContext.setPlid(plid);
@@ -515,7 +511,7 @@ public class LayoutExporter {
 
 		portletDataContext.setScopeGroupId(previousScopeGroupId);
 
-		if (exportCategories || globalScopeExport) {
+		if (exportCategories || group.isCompany()) {
 			exportAssetCategories(portletDataContext);
 		}
 

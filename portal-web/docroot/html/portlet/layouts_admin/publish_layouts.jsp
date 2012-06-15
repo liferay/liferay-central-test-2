@@ -33,7 +33,11 @@ Group stagingGroup = null;
 
 int pagesCount = 0;
 
-if (selGroup.isStagingGroup()) {
+if (selGroup.isCompany()) {
+	stagingGroup = selGroup;
+	liveGroup = selGroup;
+}
+else if (selGroup.isStagingGroup()) {
 	liveGroup = selGroup.getLiveGroup();
 	stagingGroup = selGroup;
 }
@@ -46,10 +50,6 @@ else if (selGroup.isStaged()) {
 	else {
 		stagingGroup = selGroup.getStagingGroup();
 	}
-}
-else if (selGroup.isCompany()) {
-	stagingGroup = selGroup;
-	liveGroup = selGroup;
 }
 
 long selGroupId = selGroup.getGroupId();

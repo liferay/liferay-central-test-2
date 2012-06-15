@@ -35,7 +35,6 @@ import com.liferay.portal.kernel.staging.LayoutStagingUtil;
 import com.liferay.portal.kernel.staging.Staging;
 import com.liferay.portal.kernel.staging.StagingConstants;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
-import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.kernel.util.LocaleUtil;
@@ -1389,40 +1388,6 @@ public class StagingImpl implements Staging {
 		}
 	}
 
-	protected void checkGlobalRemoteStaging(
-			String remoteAddress, long remoteGroupId, int remotePort,
-			boolean secureConnection, Group group)
-		throws Exception {
-
-		UnicodeProperties newProperties = new UnicodeProperties(true);
-
-		StringBundler sb = new StringBundler();
-
-		sb.append("remoteAddress=" + remoteAddress + CharPool.NEW_LINE);
-		sb.append("remoteGroupId=" + remoteGroupId + CharPool.NEW_LINE);
-		sb.append("remotePort=" + remotePort + CharPool.NEW_LINE);
-		sb.append("secureConnection=" + secureConnection);
-
-		newProperties.fastLoad(sb.toString());
-
-		UnicodeProperties typeSettingsProperties =
-			group.getTypeSettingsProperties();
-
-		if (!typeSettingsProperties.equals(newProperties)) {
-			typeSettingsProperties.setProperty("remoteAddress", remoteAddress);
-			typeSettingsProperties.setProperty(
-				"remoteGroupId", String.valueOf(remoteGroupId));
-			typeSettingsProperties.setProperty(
-				"remotePort", String.valueOf(remotePort));
-			typeSettingsProperties.setProperty(
-				"secureConnection", String.valueOf(secureConnection));
-
-			group.setTypeSettingsProperties(typeSettingsProperties);
-
-			GroupLocalServiceUtil.updateGroup(group);
-		}
-	}
-
 	protected void deleteRecentLayoutRevisionId(
 		PortalPreferences portalPreferences, long layoutSetBranchId,
 		long plid) {
@@ -1883,9 +1848,9 @@ public class StagingImpl implements Staging {
 		validate(remoteAddress, remoteGroupId, remotePort, secureConnection);
 
 		if (group.isCompany()) {
-			checkGlobalRemoteStaging(
-				remoteAddress, remoteGroupId, remotePort, secureConnection,
-				group);
+			updateGroupTypeSettingsProperties(
+				group, remoteAddress, remoteGroupId, remotePort,
+				secureConnection);
 		}
 
 		String range = ParamUtil.getString(portletRequest, "range");
@@ -2080,6 +2045,27 @@ public class StagingImpl implements Staging {
 		}
 
 		return remoteAddress;
+	}
+
+	protected void updateGroupTypeSettingsProperties(
+			Group group, String remoteAddress, long remoteGroupId,
+			int remotePort, boolean secureConnection)
+		throws Exception {
+
+		UnicodeProperties typeSettingsProperties =
+			group.getTypeSettingsProperties();
+
+		typeSettingsProperties.setProperty("remoteAddress", remoteAddress);
+		typeSettingsProperties.setProperty(
+			"remoteGroupId", String.valueOf(remoteGroupId));
+		typeSettingsProperties.setProperty(
+			"remotePort", String.valueOf(remotePort));
+		typeSettingsProperties.setProperty(
+			"secureConnection", String.valueOf(secureConnection));
+
+		group.setTypeSettingsProperties(typeSettingsProperties);
+
+		GroupLocalServiceUtil.updateGroup(group);
 	}
 
 	protected void validate(

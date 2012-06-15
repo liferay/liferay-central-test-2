@@ -53,7 +53,10 @@ String publishScheduleDialogTitle = null;
 Group liveGroup = null;
 Group stagingGroup = null;
 
-if (group.isStagingGroup()) {
+if (group.isCompany()) {
+	stagingGroup = group;
+}
+else if (group.isStagingGroup()) {
 	liveGroup = group.getLiveGroup();
 	stagingGroup = group;
 }
@@ -65,9 +68,6 @@ else if (group.isStaged()) {
 		liveGroup = group;
 		stagingGroup = group.getStagingGroup();
 	}
-}
-else if (group.isCompany()) {
-	stagingGroup = group;
 }
 
 if (groupId <= 0) {
@@ -107,7 +107,7 @@ String publishNowMessage = LanguageUtil.get(pageContext, publishNowDialogTitle);
 String publishScheduleMessage = LanguageUtil.get(pageContext, publishScheduleDialogTitle);
 %>
 
-<liferay-portlet:renderURL plid="<%= plid %>" portletMode="<%= PortletMode.VIEW.toString() %>" portletName="<%= PortletKeys.LAYOUTS_ADMIN %>" varImpl="publishRenderUrl" windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>">
+<liferay-portlet:renderURL plid="<%= plid %>" portletMode="<%= PortletMode.VIEW.toString() %>" portletName="<%= PortletKeys.LAYOUTS_ADMIN %>" varImpl="publishRenderURL" windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>">
 	<liferay-portlet:param name="struts_action" value="/layouts_admin/publish_layouts" />
 	<liferay-portlet:param name="<%= Constants.CMD %>" value='<%= (group.isCompany()) ? "publish_to_remote" : "publish_to_live" %>' />
 	<liferay-portlet:param name="tabs1" value='<%= (privateLayout) ? "private-pages" : "public-pages" %>' />
@@ -121,13 +121,13 @@ String publishScheduleMessage = LanguageUtil.get(pageContext, publishScheduleDia
 		<liferay-ui:icon-menu align="auto" cssClass="<%= cssClass %>" direction="down" extended="<%= extended %>" icon='<%= extended ? icon : StringPool.BLANK %>' message='<%= extended ? message : StringPool.BLANK %>' showWhenSingleIcon="<%= true %>">
 			<c:choose>
 				<c:when test="<%= group.isCompany() && GroupPermissionUtil.contains(permissionChecker, group.getGroupId(), ActionKeys.PUBLISH_STAGING) %>">
-					<liferay-ui:icon id='<%= groupId + "publishGlobalNowLink" %>' image="maximize" message='<%= publishNowDialogTitle %>' url="<%= publishRenderUrl.toString() %>" />
+					<liferay-ui:icon id='<%= groupId + "publishGlobalNowLink" %>' image="maximize" message='<%= publishNowDialogTitle %>' url="<%= publishRenderURL.toString() %>" />
 
 					<%
-					publishRenderUrl.setParameter("schedule", String.valueOf(true));
+					publishRenderURL.setParameter("schedule", String.valueOf(true));
 					%>
 
-					<liferay-ui:icon id='<%= groupId + "publishGlobalScheduleLink" %>' image="time" message="<%= publishScheduleMessage %>" url="<%= publishRenderUrl.toString() %>" />
+					<liferay-ui:icon id='<%= groupId + "publishGlobalScheduleLink" %>' image="time" message="<%= publishScheduleMessage %>" url="<%= publishRenderURL.toString() %>" />
 
 					<aui:script use="aui-base">
 						var publishGlobalNowLink = A.one('#<portlet:namespace /><%= groupId + "publishGlobalNowLink" %>');
@@ -173,15 +173,15 @@ String publishScheduleMessage = LanguageUtil.get(pageContext, publishScheduleDia
 					</aui:script>
 				</c:when>
 				<c:otherwise>
-					<c:if test="<%= (stagingGroup.isStagedRemotely() || GroupPermissionUtil.contains(permissionChecker, liveGroup.getGroupId(), ActionKeys.PUBLISH_STAGING)) %>">
+					<c:if test="<%= stagingGroup.isStagedRemotely() || GroupPermissionUtil.contains(permissionChecker, liveGroup.getGroupId(), ActionKeys.PUBLISH_STAGING) %>">
 						<c:choose>
 							<c:when test="<%= (layoutSetBranchId > 0) && (layoutSetBranches.size() > 1) %>">
 
 								<%
 								layoutSetBranch = LayoutSetBranchLocalServiceUtil.getLayoutSetBranch(layoutSetBranchId);
 
-								publishRenderUrl.setParameter("layoutSetBranchId", String.valueOf(layoutSetBranchId));
-								publishRenderUrl.setParameter("layoutSetBranchName", layoutSetBranch.getName());
+								publishRenderURL.setParameter("layoutSetBranchId", String.valueOf(layoutSetBranchId));
+								publishRenderURL.setParameter("layoutSetBranchName", layoutSetBranch.getName());
 
 								publishNowMessage = LanguageUtil.format(pageContext, publishNowDialogTitle, layoutSetBranch.getName());
 								publishScheduleMessage = LanguageUtil.format(pageContext, publishScheduleDialogTitle, layoutSetBranch.getName());
@@ -194,20 +194,20 @@ String publishScheduleMessage = LanguageUtil.get(pageContext, publishScheduleDia
 									<%
 									layoutSetBranch = layoutSetBranches.get(0);
 
-									publishRenderUrl.setParameter("layoutSetBranchId", String.valueOf(layoutSetBranch.getLayoutSetBranchId()));
+									publishRenderURL.setParameter("layoutSetBranchId", String.valueOf(layoutSetBranch.getLayoutSetBranchId()));
 									%>
 
 								</c:if>
 							</c:otherwise>
 						</c:choose>
 
-						<liferay-ui:icon id='<%= layoutSetBranchId + "publishNowLink" %>' image="maximize" message="<%= publishNowMessage %>" url="<%= publishRenderUrl.toString() %>" />
+						<liferay-ui:icon id='<%= layoutSetBranchId + "publishNowLink" %>' image="maximize" message="<%= publishNowMessage %>" url="<%= publishRenderURL.toString() %>" />
 
 						<%
-						publishRenderUrl.setParameter("schedule", String.valueOf(true));
+						publishRenderURL.setParameter("schedule", String.valueOf(true));
 						%>
 
-						<liferay-ui:icon id='<%= layoutSetBranchId + "publishScheduleLink" %>' image="time" message="<%= publishScheduleMessage %>" url="<%= publishRenderUrl.toString() %>" />
+						<liferay-ui:icon id='<%= layoutSetBranchId + "publishScheduleLink" %>' image="time" message="<%= publishScheduleMessage %>" url="<%= publishRenderURL.toString() %>" />
 
 						<aui:script use="aui-base">
 							var publishNowLink = A.one('#<portlet:namespace /><%= layoutSetBranchId + "publishNowLink" %>');
