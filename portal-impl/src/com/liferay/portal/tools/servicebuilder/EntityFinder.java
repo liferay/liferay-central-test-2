@@ -107,7 +107,7 @@ public class EntityFinder {
 
 	public boolean hasCustomComparator() {
 		for (EntityColumn column : _columns) {
-			String comparator = column.getComparator(); 
+			String comparator = column.getComparator();
 
 			if (!comparator.equals(StringPool.EQUAL)) {
 				return true;
