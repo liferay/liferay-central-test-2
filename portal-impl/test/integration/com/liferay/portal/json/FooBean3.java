@@ -49,13 +49,14 @@ public class FooBean3 {
 
 	public String toString() {
 		StringBundler sb = new StringBundler(7);
-		sb.append("PrimitiveArrays object: ");
-		sb.append("integer array: ");
-		sb.append(Arrays.toString(_integerArray));
-		sb.append("long array: ");
-		sb.append(Arrays.toString(_longArray));
-		sb.append("double array: ");
+
+		sb.append("{doubleArray=");
 		sb.append(Arrays.toString(_doubleArray));
+		sb.append(", integerArray=");
+		sb.append(Arrays.toString(_integerArray));
+		sb.append(", longArray=");
+		sb.append(Arrays.toString(_longArray));
+		sb.append("}");
 
 		return sb.toString();
 	}

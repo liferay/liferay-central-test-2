@@ -30,24 +30,11 @@ import org.junit.runner.RunWith;
 @RunWith(LiferayIntegrationJUnitTestRunner.class)
 public class JSONFactoryImplTest {
 
-	public static final double[] DOUBLE_ARRAY = {1.2345, 2.3456, 5.6789};
-	public static final String DOUBLE_ARRAY_STRING = "[1.2345,2.3456,5.6789]";
-	public static final double DOUBLE_VALUE = 3.1425927;
-	public static final int[] INTEGER_ARRAY = {1, 2, 3, 4, 5};
-	public static final String INTEGER_ARRAY_STRING = "[1,2,3,4,5]";
-	public static final int INTEGER_VALUE = 5;
-	public static final long[] LONG_ARRAY =
-		{10000000000000L, 20000000000000L, 30000000000000L};
-	public static final String LONG_ARRAY_STRING =
-		"[10000000000000,20000000000000,30000000000000]";
-	public static final long LONG_VALUE = 50000000000000L;
-
 	@Test
 	public void testAnnotations() {
 		FooBean fooBean = new FooBean();
 
-		String json = _removeQuotationMarks(
-			JSONFactoryUtil.looseSerialize(fooBean));
+		String json = removeQuotes(JSONFactoryUtil.looseSerialize(fooBean));
 
 		Assert.assertEquals(
 			"{class:com.liferay.portal.json.FooBean,name:bar,value:173}",
@@ -58,8 +45,7 @@ public class JSONFactoryImplTest {
 	public void testCollection() {
 		FooBean1 fooBean1 = new FooBean1();
 
-		String json = _removeQuotationMarks(
-			JSONFactoryUtil.looseSerialize(fooBean1));
+		String json = removeQuotes(JSONFactoryUtil.looseSerialize(fooBean1));
 
 		Assert.assertEquals(
 			"{class:com.liferay.portal.json.FooBean1,collection:[element]," +
@@ -69,210 +55,228 @@ public class JSONFactoryImplTest {
 
 	@Test
 	public void testDeserializePrimitiveArrays() {
-		String json = buildPrimitiveArraysJson();
+		String json = buildPrimitiveArraysJSON();
 
-		Object primitiveArrays = JSONFactoryUtil.deserialize(json);
+		Object object = JSONFactoryUtil.deserialize(json);
 
-		Assert.assertTrue(primitiveArrays instanceof FooBean3);
+		Assert.assertTrue(object instanceof FooBean3);
 
-		checkPrimitiveArrays((FooBean3) primitiveArrays);
+		checkPrimitiveArrays((FooBean3)object);
 	}
 
 	@Test
 	public void testDeserializePrimitiveArraysSerializable() {
-		String json = buildPrimitiveArraysSerializableJson();
+		String json = buildPrimitiveArraysSerializableJSON();
 
-		Object primitiveArraysSerializable = JSONFactoryUtil.deserialize(json);
+		Object object = JSONFactoryUtil.deserialize(json);
 
-		Assert.assertTrue(primitiveArraysSerializable instanceof FooBean4);
+		Assert.assertTrue(object instanceof FooBean4);
 
-		checkPrimitiveArrays((FooBean4) primitiveArraysSerializable);
+		checkPrimitiveArrays((FooBean4)object);
 	}
 
 	@Test
 	public void testDeserializePrimitives() {
-		String json = buildPrimitivesJson();
+		String json = buildPrimitivesJSON();
 
-		Object primitives = JSONFactoryUtil.deserialize(json);
+		Object object = JSONFactoryUtil.deserialize(json);
 
-		Assert.assertTrue(primitives instanceof FooBean5);
+		Assert.assertTrue(object instanceof FooBean5);
 
-		checkPrimitives((FooBean5) primitives);
+		checkPrimitives((FooBean5)object);
 	}
 
 	@Test
 	public void testDeserializePrimitivesSerializable() {
-		String json = buildPrimitivesSerializableJson();
+		String json = buildPrimitivesSerializableJSON();
 
-		Object primitivesSerializable = JSONFactoryUtil.deserialize(json);
+		Object object = JSONFactoryUtil.deserialize(json);
 
-		Assert.assertTrue(primitivesSerializable instanceof FooBean6);
+		Assert.assertTrue(object instanceof FooBean6);
 
-		checkPrimitives((FooBean6)primitivesSerializable);
+		checkPrimitives((FooBean6)object);
 	}
 
 	@Test
 	public void testSerializePrimitiveArrays() {
-		String json = buildPrimitiveArraysJson();
+		String json = buildPrimitiveArraysJSON();
 
 		Assert.assertNotNull(json);
 
-		checkJsonPrimitiveArrays(json);
+		checkJSONPrimitiveArrays(json);
 	}
 
 	@Test
 	public void testSerializePrimitiveArraysSerializable() {
-		String json = buildPrimitiveArraysSerializableJson();
+		String json = buildPrimitiveArraysSerializableJSON();
 
 		Assert.assertNotNull(json);
 
-		checkJsonPrimitiveArrays(json);
-
-		checkJsonSerializableArgument(json);
+		checkJSONPrimitiveArrays(json);
+		checkJSONSerializableArgument(json);
 	}
 
 	@Test
 	public void testSerializePrimitives() {
-		String json = buildPrimitivesJson();
+		String json = buildPrimitivesJSON();
 
 		Assert.assertNotNull(json);
 
-		checkJsonPrimitives(json);
+		checkJSONPrimitives(json);
 	}
 
 	@Test
 	public void testSerializePrimitivesSerializable() {
-		String json = buildPrimitivesSerializableJson();
+		String json = buildPrimitivesSerializableJSON();
 
 		Assert.assertNotNull(json);
 
-		checkJsonPrimitives(json);
-
-		checkJsonSerializableArgument(json);
+		checkJSONPrimitives(json);
+		checkJSONSerializableArgument(json);
 	}
 
 	@Test
 	public void testStrictMode() {
 		FooBean2 fooBean2 = new FooBean2();
 
-		String json = _removeQuotationMarks(
-			JSONFactoryUtil.looseSerialize(fooBean2));
+		String json = removeQuotes(JSONFactoryUtil.looseSerialize(fooBean2));
 
 		Assert.assertEquals("{value:173}", json);
 	}
 
-	protected String buildPrimitiveArraysJson() {
-		FooBean3 primitiveArrays = new FooBean3();
+	protected String buildPrimitiveArraysJSON() {
+		FooBean3 fooBean3 = new FooBean3();
 
-		initializePrimitiveArrays(primitiveArrays);
+		initializePrimitiveArrays(fooBean3);
 
 		String json = null;
 
 		try {
-			json = JSONFactoryUtil.serialize(primitiveArrays);
-		} catch(IllegalArgumentException iae) {
-			Assert.fail("Cannot serialize " + primitiveArrays + " object");
+			json = JSONFactoryUtil.serialize(fooBean3);
+		}
+		catch (IllegalArgumentException iae) {
+			Assert.fail("Unable to serialize " + fooBean3);
 		}
 
 		return json;
 	}
 
-	protected String buildPrimitiveArraysSerializableJson() {
-		FooBean4 primitiveArraysSerializable = new FooBean4();
+	protected String buildPrimitiveArraysSerializableJSON() {
+		FooBean4 fooBean4 = new FooBean4();
 
-		initializePrimitiveArrays(primitiveArraysSerializable);
+		initializePrimitiveArrays(fooBean4);
 
 		String json = null;
 
 		try {
-			json = JSONFactoryUtil.serialize(primitiveArraysSerializable);
-		} catch(IllegalArgumentException iae) {
-			Assert.fail(
-				"Cannot serialize " + primitiveArraysSerializable + " object");
+			json = JSONFactoryUtil.serialize(fooBean4);
+		}
+		catch (IllegalArgumentException iae) {
+			Assert.fail("Unable to serialize " + fooBean4);
 		}
 
 		return json;
 	}
 
-	protected String buildPrimitivesJson() {
-		FooBean5 primitives = new FooBean5();
+	protected String buildPrimitivesJSON() {
+		FooBean5 fooBean5 = new FooBean5();
 
-		initializePrimitives(primitives);
+		initializePrimitives(fooBean5);
 
 		String json = null;
 
 		try {
-			json = JSONFactoryUtil.serialize(primitives);
-		} catch(IllegalArgumentException iae) {
-			Assert.fail("Cannot serialize " + primitives + " object");
+			json = JSONFactoryUtil.serialize(fooBean5);
+		}
+		catch (IllegalArgumentException iae) {
+			Assert.fail("Unable to serialize " + fooBean5);
 		}
 
 		return json;
 	}
 
-	protected String buildPrimitivesSerializableJson() {
-		FooBean6 primitivesSerializable = new FooBean6();
+	protected String buildPrimitivesSerializableJSON() {
+		FooBean6 fooBean6 = new FooBean6();
 
-		initializePrimitives(primitivesSerializable);
+		initializePrimitives(fooBean6);
 
 		String json = null;
 
 		try {
-			json = JSONFactoryUtil.serialize(primitivesSerializable);
-		} catch(IllegalArgumentException iae) {
-			Assert.fail(
-				"Cannot serialize " + primitivesSerializable + " object");
+			json = JSONFactoryUtil.serialize(fooBean6);
+		}
+		catch (IllegalArgumentException iae) {
+			Assert.fail("Unable to serialize " + fooBean6);
 		}
 
 		return json;
 	}
 
-	protected void checkJsonPrimitiveArrays(String json) {
-		Assert.assertTrue(json.contains(
-			"\"doubleArray\":" + DOUBLE_ARRAY_STRING));
-		Assert.assertTrue(json.contains("\"longArray\":" + LONG_ARRAY_STRING));
-		Assert.assertTrue(json.contains(
-			"\"integerArray\":" + INTEGER_ARRAY_STRING));
+	protected void checkJSONPrimitiveArrays(String json) {
+		Assert.assertTrue(
+			json.contains("\"doubleArray\":" + _DOUBLE_ARRAY_STRING));
+		Assert.assertTrue(json.contains("\"longArray\":" + _LONG_ARRAY_STRING));
+		Assert.assertTrue(
+			json.contains("\"integerArray\":" + _INTEGER_ARRAY_STRING));
 	}
 
-	protected void checkJsonPrimitives(String json) {
-		Assert.assertTrue(json.contains("\"longValue\":" + LONG_VALUE));
-		Assert.assertTrue(json.contains("\"integerValue\":" + INTEGER_VALUE));
-		Assert.assertTrue(json.contains("\"doubleValue\":" + DOUBLE_VALUE));
+	protected void checkJSONPrimitives(String json) {
+		Assert.assertTrue(json.contains("\"longValue\":" + _LONG_VALUE));
+		Assert.assertTrue(json.contains("\"integerValue\":" + _INTEGER_VALUE));
+		Assert.assertTrue(json.contains("\"doubleValue\":" + _DOUBLE_VALUE));
 	}
 
-	protected void checkJsonSerializableArgument(String json) {
+	protected void checkJSONSerializableArgument(String json) {
 		Assert.assertTrue(json.contains("serializable"));
 	}
 
-	protected void checkPrimitiveArrays(FooBean3 primitiveArrays) {
-		AssertUtils.assertArrayEquals(
-			DOUBLE_ARRAY, primitiveArrays.getDoubleArray());
-		Assert.assertArrayEquals(
-			INTEGER_ARRAY, primitiveArrays.getIntegerArray());
-		Assert.assertArrayEquals(LONG_ARRAY, primitiveArrays.getLongArray());
+	protected void checkPrimitiveArrays(FooBean3 fooBean3) {
+		AssertUtils.assertEquals(_DOUBLE_ARRAY, fooBean3.getDoubleArray());
+		Assert.assertArrayEquals(_INTEGER_ARRAY, fooBean3.getIntegerArray());
+		Assert.assertArrayEquals(_LONG_ARRAY, fooBean3.getLongArray());
 	}
 
-	protected void checkPrimitives(FooBean5 primitives) {
-		Assert.assertEquals(INTEGER_VALUE, primitives.getIntegerValue());
-		Assert.assertEquals(LONG_VALUE, primitives.getLongValue());
-		AssertUtils.assertEquals(DOUBLE_VALUE, primitives.getDoubleValue());
+	protected void checkPrimitives(FooBean5 fooBean5) {
+		Assert.assertEquals(_INTEGER_VALUE, fooBean5.getIntegerValue());
+		Assert.assertEquals(_LONG_VALUE, fooBean5.getLongValue());
+		AssertUtils.assertEquals(_DOUBLE_VALUE, fooBean5.getDoubleValue());
 	}
 
-	protected void initializePrimitiveArrays(FooBean3 primitiveArrays) {
-		primitiveArrays.setDoubleArray(DOUBLE_ARRAY);
-		primitiveArrays.setIntegerArray(INTEGER_ARRAY);
-		primitiveArrays.setLongArray(LONG_ARRAY);
+	protected void initializePrimitiveArrays(FooBean3 fooBean3) {
+		fooBean3.setDoubleArray(_DOUBLE_ARRAY);
+		fooBean3.setIntegerArray(_INTEGER_ARRAY);
+		fooBean3.setLongArray(_LONG_ARRAY);
 	}
 
-	protected void initializePrimitives(FooBean5 primitives) {
-		primitives.setDoubleValue(DOUBLE_VALUE);
-		primitives.setIntegerValue(INTEGER_VALUE);
-		primitives.setLongValue(LONG_VALUE);
+	protected void initializePrimitives(FooBean5 fooBean5) {
+		fooBean5.setDoubleValue(_DOUBLE_VALUE);
+		fooBean5.setIntegerValue(_INTEGER_VALUE);
+		fooBean5.setLongValue(_LONG_VALUE);
 	}
 
-	private String _removeQuotationMarks(String string) {
+	protected String removeQuotes(String string) {
 		return StringUtil.replace(string, StringPool.QUOTE, StringPool.BLANK);
 	}
+
+	private static final double[] _DOUBLE_ARRAY = {1.2345, 2.3456, 5.6789};
+
+	private static final String _DOUBLE_ARRAY_STRING = "[1.2345,2.3456,5.6789]";
+
+	private static final double _DOUBLE_VALUE = 3.1425927;
+
+	private static final int[] _INTEGER_ARRAY = {1, 2, 3, 4, 5};
+
+	private static final String _INTEGER_ARRAY_STRING = "[1,2,3,4,5]";
+
+	private static final int _INTEGER_VALUE = 5;
+
+	private static final long[] _LONG_ARRAY = {
+		10000000000000L, 20000000000000L, 30000000000000L
+	};
+
+	private static final String _LONG_ARRAY_STRING =
+		"[10000000000000,20000000000000,30000000000000]";
+
+	private static final long _LONG_VALUE = 50000000000000L;
 
 }

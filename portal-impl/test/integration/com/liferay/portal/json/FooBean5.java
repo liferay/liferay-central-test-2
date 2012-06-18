@@ -47,13 +47,14 @@ public class FooBean5 {
 
 	public String toString() {
 		StringBundler sb = new StringBundler(7);
-		sb.append("Primitives object: ");
-		sb.append("integer value: ");
-		sb.append(_integerValue);
-		sb.append("long value: ");
-		sb.append(_longValue);
-		sb.append("double value: ");
+
+		sb.append("{doubleValue=");
 		sb.append(_doubleValue);
+		sb.append(", integerValue=");
+		sb.append(_integerValue);
+		sb.append(", longValue=");
+		sb.append(_longValue);
+		sb.append("}");
 
 		return sb.toString();
 	}
