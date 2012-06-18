@@ -17,6 +17,7 @@ package com.liferay.portal.freemarker;
 import com.liferay.portal.security.pacl.PACLClassLoaderUtil;
 
 import freemarker.ext.beans.BeansWrapper;
+
 import freemarker.template.TemplateMethodModelEx;
 import freemarker.template.TemplateModelException;
 

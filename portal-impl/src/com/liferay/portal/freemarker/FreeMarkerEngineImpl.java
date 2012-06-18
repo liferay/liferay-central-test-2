@@ -28,6 +28,7 @@ import com.liferay.portal.util.PropsValues;
 import freemarker.cache.ClassTemplateLoader;
 import freemarker.cache.MultiTemplateLoader;
 import freemarker.cache.TemplateLoader;
+
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 
@@ -58,8 +59,9 @@ public class FreeMarkerEngineImpl implements FreeMarkerEngine {
 	}
 
 	public FreeMarkerContext getWrappedClassLoaderToolsContext() {
-		// This context will have all of its utilities initialized within
-		// the class loader of the current thread
+
+		// This context will have all of its utilities initialized within the
+		// class loader of the current thread
 
 		ClassLoader contextClassLoader =
 			PACLClassLoaderUtil.getContextClassLoader();

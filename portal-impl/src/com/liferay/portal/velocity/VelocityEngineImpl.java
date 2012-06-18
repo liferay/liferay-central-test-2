@@ -73,8 +73,9 @@ public class VelocityEngineImpl implements VelocityEngine {
 	}
 
 	public VelocityContext getWrappedClassLoaderToolsContext() {
-		// This context will have all of its utilities initialized within
-		// the class loader of the current thread
+
+		// This context will have all of its utilities initialized within the
+		// class loader of the current thread
 
 		ClassLoader contextClassLoader =
 			PACLClassLoaderUtil.getContextClassLoader();
@@ -249,9 +250,8 @@ public class VelocityEngineImpl implements VelocityEngine {
 
 	private static Log _log = LogFactoryUtil.getLog(VelocityEngineImpl.class);
 
-	private Map<ClassLoader, VelocityContextImpl>
-		_classLoaderVelocityContexts =
-			new ConcurrentHashMap<ClassLoader, VelocityContextImpl>();
+	private Map<ClassLoader, VelocityContextImpl> _classLoaderVelocityContexts =
+		new ConcurrentHashMap<ClassLoader, VelocityContextImpl>();
 	private VelocityContextImpl _restrictedToolsContext;
 	private VelocityContextImpl _standardToolsContext;
 	private org.apache.velocity.app.VelocityEngine _velocityEngine;

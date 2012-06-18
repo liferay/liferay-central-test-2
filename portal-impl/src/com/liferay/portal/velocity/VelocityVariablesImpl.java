@@ -161,7 +161,6 @@ public class VelocityVariablesImpl implements VelocityVariables {
 
 		velocityContext.put("escapeTool", new EscapeTool());
 
-
 		// Service locator
 
 		try {
@@ -352,7 +351,8 @@ public class VelocityVariablesImpl implements VelocityVariables {
 
 		try {
 			velocityContext.put(
-				"portletURLFactory", PortletURLFactoryUtil.getPortletURLFactory());
+				"portletURLFactory",
+				PortletURLFactoryUtil.getPortletURLFactory());
 		}
 		catch (SecurityException se) {
 			_log.error(se, se);
@@ -375,7 +375,8 @@ public class VelocityVariablesImpl implements VelocityVariables {
 			UtilLocator utilLocator = UtilLocator.getInstance();
 
 			insertHelperUtility(
-				velocityContext, restrictedVariables, "utilLocator", utilLocator);
+				velocityContext, restrictedVariables, "utilLocator",
+				utilLocator);
 
 			// SAX reader util
 
@@ -503,7 +504,8 @@ public class VelocityVariablesImpl implements VelocityVariables {
 
 		try {
 			velocityContext.put(
-				"portletPermission", PortletPermissionUtil.getPortletPermission());
+				"portletPermission",
+				PortletPermissionUtil.getPortletPermission());
 		}
 		catch (SecurityException se) {
 			_log.error(se, se);
