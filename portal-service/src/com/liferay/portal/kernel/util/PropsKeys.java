@@ -1455,17 +1455,17 @@ public interface PropsKeys {
 
 	public static final String MODEL_HINTS_CONFIGS = "model.hints.configs";
 
-	public static final String MODULE_FRAMEWORK_ENABLED = "module.framework.enabled";
-
 	public static final String MODULE_FRAMEWORK_BEGINNING_START_LEVEL = "module.framework.beginning.start.level";
 
-	public static final String MODULE_FRAMEWORK_RUNTIME_START_LEVEL = "module.framework.runtime.start.level";
+	public static final String MODULE_FRAMEWORK_ENABLED = "module.framework.enabled";
 
 	public static final String MODULE_FRAMEWORK_LIB_DIR = "module.framework.lib.dir";
 
-	public static final String MODULE_FRAMEWORK_STATE_DIR = "module.framework.state.dir";
-
 	public static final String MODULE_FRAMEWORK_REGISTER_LIFERAY_SERVICES = "module.framework.register.liferay.services";
+
+	public static final String MODULE_FRAMEWORK_RUNTIME_START_LEVEL = "module.framework.runtime.start.level";
+
+	public static final String MODULE_FRAMEWORK_STATE_DIR = "module.framework.state.dir";
 
 	public static final String MODULE_FRAMEWORK_SYSTEM_BUNDLE_EXPORT_PACKAGES = "module.framework.system.bundle.export.packages";
 
