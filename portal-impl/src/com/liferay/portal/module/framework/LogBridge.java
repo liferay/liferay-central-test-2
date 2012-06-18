@@ -31,89 +31,86 @@ import org.osgi.util.tracker.ServiceTracker;
 import org.osgi.util.tracker.ServiceTrackerCustomizer;
 
 /**
- * <a href="LogBridge.java.html"><b><i>View Source</i></b></a>
- *
  * @author Raymond Augé
  */
 public class LogBridge
 	implements BundleActivator, LogListener,
-		ServiceTrackerCustomizer<LogReaderService, LogReaderService> {
+			   ServiceTrackerCustomizer<LogReaderService, LogReaderService> {
 
 	public LogReaderService addingService(
-		ServiceReference<LogReaderService> reference) {
+		ServiceReference<LogReaderService> serviceReference) {
 
 		LogReaderService logReaderService = _bundleContext.getService(
-			reference);
+			serviceReference);
 
 		logReaderService.addLogListener(this);
 
 		return logReaderService;
 	}
 
-	public void modifiedService(
-		ServiceReference<LogReaderService> reference,
-		LogReaderService service) {
-	}
+	public void logged(LogEntry logEntry) {
+		int level = logEntry.getLevel();
 
-	public void logged(LogEntry entry) {
-		Bundle bundle = entry.getBundle();
-		int level = entry.getLevel();
-		ServiceReference<?> serviceReference = entry.getServiceReference();
+		Bundle bundle = logEntry.getBundle();
 
 		String symbolicName = StringUtil.replace(
 			bundle.getSymbolicName(), StringPool.PERIOD, StringPool.UNDERLINE);
 
 		Log log = LogFactoryUtil.getLog("osgi.logging." + symbolicName);
 
-		StringBuilder sb = new StringBuilder(3);
+		String message = logEntry.getMessage();
 
-		sb.append(entry.getMessage());
+		ServiceReference<?> serviceReference = logEntry.getServiceReference();
 
 		if (serviceReference != null) {
-			sb.append(" ");
-			sb.append(serviceReference.toString());
+			message += " " + serviceReference.toString();
 		}
 
 		if ((level == LogService.LOG_DEBUG) && log.isDebugEnabled()) {
-			log.debug(sb.toString(), entry.getException());
+			log.debug(message, logEntry.getException());
 		}
 		else if ((level == LogService.LOG_ERROR) && log.isErrorEnabled()) {
-			log.error(sb.toString(), entry.getException());
+			log.error(message, logEntry.getException());
 		}
 		else if ((level == LogService.LOG_INFO) && log.isInfoEnabled()) {
-			log.info(sb.toString(), entry.getException());
+			log.info(message, logEntry.getException());
 		}
 		else if ((level == LogService.LOG_WARNING) && log.isWarnEnabled()) {
-			log.warn(sb.toString(), entry.getException());
+			log.warn(message, logEntry.getException());
 		}
 	}
 
-	public void removedService(
-		ServiceReference<LogReaderService> reference,
-		LogReaderService service) {
+	public void modifiedService(
+		ServiceReference<LogReaderService> serviceReference,
+		LogReaderService logReaderService) {
+	}
 
-		service.removeLogListener(this);
+	public void removedService(
+		ServiceReference<LogReaderService> serviceReference,
+		LogReaderService logReaderService) {
+
+		logReaderService.removeLogListener(this);
 	}
 
 	public void start(BundleContext bundleContext) throws Exception {
 		_bundleContext = bundleContext;
 
-		_logReaderServiceTracker =
+		_serviceTracker =
 			new ServiceTracker<LogReaderService, LogReaderService>(
 				bundleContext, LogReaderService.class, this);
 
-		_logReaderServiceTracker.open();
+		_serviceTracker.open();
 	}
 
 	public void stop(BundleContext bundleContext) throws Exception {
-		_logReaderServiceTracker.close();
+		_serviceTracker.close();
 
-		_logReaderServiceTracker = null;
+		_serviceTracker = null;
+
 		_bundleContext = null;
 	}
 
 	private BundleContext _bundleContext;
-	private ServiceTracker<LogReaderService, LogReaderService>
-		_logReaderServiceTracker;
+	private ServiceTracker<LogReaderService, LogReaderService> _serviceTracker;
 
 }
