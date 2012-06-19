@@ -148,65 +148,6 @@ public class PortletImporter {
 		}
 	}
 
-	protected String checkPortletPreferences(
-			PortletDataContext portletDataContext, long companyId, long ownerId,
-			int ownerType, long plid, String portletId, String xml)
-		throws Exception {
-
-		String rootPotletId = PortletConstants.getRootPortletId(portletId);
-
-		if (!rootPotletId.equals(PortletKeys.ASSET_PUBLISHER)) {
-			return xml;
-		}
-
-		PortletPreferencesImpl portletPreferences =
-			(PortletPreferencesImpl)PortletPreferencesFactoryUtil.
-				fromXML(companyId, ownerId, ownerType, plid, portletId, xml);
-
-		Company company = CompanyLocalServiceUtil.getCompanyById(companyId);
-
-		Group globalScopeGroup = company.getGroup();
-		long globalScopeGroupId = globalScopeGroup.getGroupId();
-
-		Enumeration<String> enu = portletPreferences.getNames();
-
-		while (enu.hasMoreElements()) {
-			String name = enu.nextElement();
-
-			String value = GetterUtil.getString(
-				portletPreferences.getValue(name, StringPool.BLANK));
-
-			String prefix = "queryName";
-
-			if (value.equalsIgnoreCase("assetCategories") &&
-				name.startsWith(prefix)) {
-
-				String index = name.substring(prefix.length(), name.length());
-
-				String queryValuesName = "queryValues" + index;
-
-				replaceClassPKs(
-					queryValuesName, AssetCategory.class, globalScopeGroupId,
-					portletPreferences, portletDataContext);
-			}
-			else if (
-				name.equals("anyClassTypeJournalArticleAssetRendererFactory") ||
-				name.equals("classTypeIdsJournalArticleAssetRendererFactory") ||
-				name.equals("classTypeIds")) {
-
-				replaceClassPKs(
-					name, JournalStructure.class, globalScopeGroupId,
-					portletPreferences, portletDataContext);
-			}
-			else if (name.equals("scopeIds") || name.equals("defaultScope")) {
-				replaceGlobalScopeId(
-					name, portletPreferences, globalScopeGroupId);
-			}
-		}
-
-		return PortletPreferencesFactoryUtil.toXML(portletPreferences);
-	}
-
 	protected void deletePortletData(
 			PortletDataContext portletDataContext, String portletId, long plid)
 		throws Exception {
@@ -1206,9 +1147,14 @@ public class PortletImporter {
 					ownerId = defaultUserId;
 				}
 
-				xml = checkPortletPreferences(
-					portletDataContext, companyId, ownerId, ownerType, plid,
-					portletId, xml);
+				String rootPotletId = PortletConstants.getRootPortletId(
+					portletId);
+
+				if (rootPotletId.equals(PortletKeys.ASSET_PUBLISHER)) {
+					xml = updateAssetPublisherPortletPreferences(
+						portletDataContext, companyId, ownerId, ownerType, plid,
+						portletId, xml);
+				}
 
 				PortletPreferencesLocalServiceUtil.updatePreferences(
 					ownerId, ownerType, plid, portletId, xml);
@@ -1633,127 +1579,6 @@ public class PortletImporter {
 		}
 	}
 
-	protected void replaceClassPKs(
-			String preferenceName, Class<?> clazz, long globalGroupId,
-			PortletPreferencesImpl portletPreferences,
-			PortletDataContext portletDataContext)
-		throws Exception {
-
-		String[] oldValues = portletPreferences.getValues(preferenceName, null);
-
-		if (oldValues == null) {
-			return;
-		}
-
-		Map<Long, Long> primaryKeysMap =
-			(Map<Long, Long>)portletDataContext.getNewPrimaryKeysMap(clazz);
-
-		String[] newValues = new String[oldValues.length];
-
-		int i = 0;
-
-		for (String oldValue : oldValues) {
-
-			String newValue = oldValue;
-
-			String[] oldIdStrings = StringUtil.split(oldValue);
-
-			for (String oldIdString : oldIdStrings) {
-
-				Long newId = null;
-
-				try {
-					long oldId = Long.parseLong(oldIdString);
-
-					newId = MapUtil.getLong(primaryKeysMap, oldId, oldId);
-				}
-				catch (NumberFormatException e) {
-					newId = replacePrimaryKeyByUUID(
-						oldIdString, clazz, globalGroupId,
-						portletDataContext.getScopeGroupId());
-				}
-
-				if (newId != null) {
-					newValue = newValue.replaceAll(
-						oldIdString, newId.toString());
-				}
-			}
-
-			newValues[i++] = newValue;
-		}
-
-		portletPreferences.setValues(preferenceName, newValues);
-	}
-
-	protected void replaceGlobalScopeId(
-			String preferenceName, PortletPreferencesImpl portletPreferences,
-			long globalScopeId)
-		throws Exception {
-
-		String[] oldValues = portletPreferences.getValues(preferenceName, null);
-
-		if (oldValues == null) {
-			return;
-		}
-
-		String newValue = "Group_" + globalScopeId;
-
-		String[] newValues = new String[oldValues.length];
-
-		int i = 0;
-
-		for (String value : oldValues) {
-			newValues[i++] = StringUtil.replace(
-				value, "Group_Company", newValue);
-		}
-
-		portletPreferences.setValues(preferenceName, newValues);
-	}
-
-	protected Long replacePrimaryKeyByUUID(
-			String uuid, Class<?> clazz, long globalGroupId, long scopeGroupId)
-		throws SystemException {
-
-		String className = clazz.getName();
-
-		if (AssetCategory.class.getName().equals(className)) {
-
-			AssetCategory category = AssetCategoryUtil.fetchByUUID_G(
-				uuid, globalGroupId);
-
-			if (category == null) {
-				category = AssetCategoryUtil.fetchByUUID_G(uuid, scopeGroupId);
-			}
-
-			if (category != null) {
-				return category.getCategoryId();
-			}
-		}
-		else if (JournalStructure.class.getName().equals(className)) {
-
-			JournalStructure structure = JournalStructureUtil.fetchByUUID_G(
-				uuid, globalGroupId);
-
-			if (structure == null) {
-				structure = JournalStructureUtil.fetchByUUID_G(
-					uuid, scopeGroupId);
-			}
-
-			if (structure != null) {
-				return structure.getId();
-			}
-		}
-
-		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"Unable to find instance of " + className + " by uuid: " +
-				uuid + "in either global scope: " + globalGroupId +
-				" or site scope: " + scopeGroupId);
-		}
-
-		return null;
-	}
-
 	protected void resetPortletScope(
 		PortletDataContext portletDataContext, long groupId) {
 
@@ -1832,6 +1657,157 @@ public class PortletImporter {
 		catch (Exception e) {
 			_log.error(e, e);
 		}
+	}
+
+	protected void updateAssetPublisherClassPKs(
+			PortletDataContext portletDataContext,
+			javax.portlet.PortletPreferences jxPreferences, String key,
+			Class<?> clazz, long groupId)
+		throws Exception {
+
+		String[] oldValues = jxPreferences.getValues(key, null);
+
+		if (oldValues == null) {
+			return;
+		}
+
+		Map<Long, Long> primaryKeysMap =
+			(Map<Long, Long>)portletDataContext.getNewPrimaryKeysMap(clazz);
+
+		String[] newValues = new String[oldValues.length];
+
+		for (int i = 0; i < oldValues.length; i++) {
+			String oldValue = oldValues[i];
+
+			String newValue = oldValue;
+
+			String[] uuids = StringUtil.split(oldValue);
+
+			for (String uuid : uuids) {
+				Long newPrimaryKey = null;
+
+				if (Validator.isNumber(uuid)) {
+					long oldPrimaryKey = GetterUtil.getLong(uuid);
+
+					newPrimaryKey = MapUtil.getLong(
+						primaryKeysMap, oldPrimaryKey, oldPrimaryKey);
+				}
+				else {
+					String className = clazz.getName();
+
+					if (className.equals(AssetCategory.class.getName())) {
+						AssetCategory category =
+							AssetCategoryUtil.fetchByUUID_G(uuid, groupId);
+
+						if (category != null) {
+							newPrimaryKey = category.getCategoryId();
+						}
+					}
+					else if (className.equals(
+								JournalStructure.class.getName())) {
+
+						JournalStructure structure =
+							JournalStructureUtil.fetchByUUID_G(uuid, groupId);
+
+						if (structure != null) {
+							newPrimaryKey = structure.getId();
+						}
+					}
+				}
+
+				if (Validator.isNull(newPrimaryKey)) {
+					if (_log.isWarnEnabled()) {
+						_log.warn(
+							"Unable to get primary key for " + clazz +
+								" with UUID " + uuid + " in group " + groupId);
+					}
+				}
+				else {
+					newValue = StringUtil.replace(
+						newValue, uuid, newPrimaryKey.toString());
+				}
+			}
+
+			newValues[i] = newValue;
+		}
+
+		jxPreferences.setValues(key, newValues);
+	}
+
+	protected void updateAssetPublisherGlobalScopeId(
+			javax.portlet.PortletPreferences jxPreferences, String key,
+			long groupId)
+		throws Exception {
+
+		String[] oldValues = jxPreferences.getValues(key, null);
+
+		if (oldValues == null) {
+			return;
+		}
+
+		String newValue = "Group_" + groupId;
+
+		String[] newValues = new String[oldValues.length];
+
+		for (int i = 0; i < oldValues.length; i++) {
+			String oldValue = oldValues[i];
+
+			newValues[i] = StringUtil.replace(
+				oldValue, "Group_Company", newValue);
+		}
+
+		jxPreferences.setValues(key, newValues);
+	}
+
+	protected String updateAssetPublisherPortletPreferences(
+			PortletDataContext portletDataContext, long companyId, long ownerId,
+			int ownerType, long plid, String portletId, String xml)
+		throws Exception {
+
+		Company company = CompanyLocalServiceUtil.getCompanyById(companyId);
+
+		Group companyGroup = company.getGroup();
+
+		javax.portlet.PortletPreferences jxPreferences =
+			PortletPreferencesFactoryUtil.fromXML(
+				companyId, ownerId, ownerType, plid, portletId, xml);
+
+		Enumeration<String> enu = jxPreferences.getNames();
+
+		while (enu.hasMoreElements()) {
+			String name = enu.nextElement();
+
+			String value = GetterUtil.getString(
+				jxPreferences.getValue(name, null));
+
+			String prefix = "queryName";
+
+			if (value.equalsIgnoreCase("assetCategories") &&
+				name.startsWith(prefix)) {
+
+				String index = name.substring(prefix.length(), name.length());
+
+				updateAssetPublisherClassPKs(
+					portletDataContext, jxPreferences, "queryValues" + index,
+					AssetCategory.class, companyGroup.getGroupId());
+			}
+			else if (name.equals(
+							"anyClassTypeJournalArticleAssetRendererFactory") ||
+					 name.equals(
+						"classTypeIdsJournalArticleAssetRendererFactory") ||
+					 name.equals("classTypeIds")) {
+
+				updateAssetPublisherClassPKs(
+					portletDataContext, jxPreferences, name,
+					JournalStructure.class, companyGroup.getGroupId());
+			}
+			else if (name.equals("defaultScope") || name.equals("scopeIds")) {
+				updateAssetPublisherGlobalScopeId(
+					jxPreferences, name, companyGroup.getGroupId());
+			}
+		}
+
+		return PortletPreferencesFactoryUtil.toXML(jxPreferences);
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(PortletImporter.class);
