@@ -1620,11 +1620,11 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 				sb.replace(beginPos, endPos, dlReference);
 			}
 			catch (Exception e) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(e.getMessage());
-				}
-				else if (_log.isDebugEnabled()) {
+				if (_log.isDebugEnabled()) {
 					_log.debug(e, e);
+				}
+				else if (_log.isWarnEnabled()) {
+					_log.warn(e.getMessage());
 				}
 			}
 
@@ -1895,10 +1895,10 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 				newLinksToLayout.add(newLinkToLayout);
 			}
 			catch (Exception e) {
-				if (_log.isWarnEnabled() || _log.isDebugEnabled()) {
-					String message = "Unable to get layout with id " +
-						layoutId + " in group " +
-						portletDataContext.getScopeGroupId();
+				if (_log.isDebugEnabled() || _log.isWarnEnabled()) {
+					String message =
+						"Unable to get layout with ID " + layoutId +
+							" in group " + portletDataContext.getScopeGroupId();
 
 					if (_log.isWarnEnabled()) {
 						_log.warn(message);
@@ -2208,11 +2208,11 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 				}
 			}
 			catch (Exception e) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(e.getMessage());
-				}
-				else if (_log.isDebugEnabled()) {
+				if (_log.isDebugEnabled()) {
 					_log.debug(e, e);
+				}
+				else if (_log.isWarnEnabled()) {
+					_log.warn(e.getMessage());
 				}
 			}
 
@@ -2600,9 +2600,11 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 				}
 				catch (ArticleContentException ace) {
 					if (_log.isWarnEnabled()) {
-						_log.warn("Skipping article with path " +
-							articleElement.attributeValue("path") +
-							" due to improper content.");
+						String path = articleElement.attributeValue("path");
+
+						_log.warn(
+							"Skipping article with path " + path +
+								" because of invalid content");
 					}
 				}
 			}
