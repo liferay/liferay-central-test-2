@@ -35,9 +35,8 @@ public abstract class URLResourceParser implements TemplateResourceParser {
 			if (url == null) {
 				return null;
 			}
-			else {
-				return new URLTemplateResource(templateId, url);
-			}
+
+			return new URLTemplateResource(templateId, url);
 		}
 		catch (IOException ioe) {
 			throw new TemplateException(ioe);

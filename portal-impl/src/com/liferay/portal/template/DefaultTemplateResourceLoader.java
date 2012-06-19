@@ -40,7 +40,7 @@ public class DefaultTemplateResourceLoader implements TemplateResourceLoader {
 		_name = name;
 
 		for (String templateResourceParserClassName :
-			templateResourceParserClassNames) {
+				templateResourceParserClassNames) {
 
 			try {
 				TemplateResourceParser templateResourceParser =
@@ -50,10 +50,7 @@ public class DefaultTemplateResourceLoader implements TemplateResourceLoader {
 				_templateResourceParsers.add(templateResourceParser);
 			}
 			catch (Exception e) {
-				_log.error(
-					"Unable to instance TemplateResourceParser " +
-						templateResourceParserClassName,
-					e);
+				_log.error(e, e);
 			}
 		}
 
@@ -70,6 +67,7 @@ public class DefaultTemplateResourceLoader implements TemplateResourceLoader {
 
 	public void destroy() {
 		_portalCache.destroy();
+
 		_templateResourceParsers.clear();
 	}
 
@@ -77,9 +75,7 @@ public class DefaultTemplateResourceLoader implements TemplateResourceLoader {
 		return _name;
 	}
 
-	public TemplateResource getTemplateResource(String templateId)
-		throws TemplateException {
-
+	public TemplateResource getTemplateResource(String templateId) {
 		TemplateResource templateResource = null;
 
 		Object object = _portalCache.get(templateId);
@@ -103,10 +99,7 @@ public class DefaultTemplateResourceLoader implements TemplateResourceLoader {
 					_portalCache.remove(templateId);
 
 					if (_log.isDebugEnabled()) {
-						_log.debug(
-							"Cache result " + object + " for template id" +
-								templateId +
-									" is timeout, reload it from source.");
+						_log.debug("Reload stale template " + templateId);
 					}
 				}
 			}
@@ -115,23 +108,23 @@ public class DefaultTemplateResourceLoader implements TemplateResourceLoader {
 
 				if (_log.isWarnEnabled()) {
 					_log.warn(
-						"Corrupted cache result " + object +
-							" for templare id " + templateId + ". Not type of" +
-								" TemplateResource, automatically removed.");
+						"Remove template " + templateId +
+							" because it is not a template resource");
 				}
 			}
 		}
 
 		for (TemplateResourceParser templateResourceParser :
-			_templateResourceParsers) {
+				_templateResourceParsers) {
 
 			try {
 				templateResource = templateResourceParser.getTemplateResource(
 					templateId);
 
 				if (templateResource != null) {
-					if (!TemplateManager.VELOCITY.equals(
-							getName()) ||
+					String name = getName();
+
+					if (!name.equals(TemplateManager.VELOCITY) ||
 						!templateId.contains(SandboxHandler.SANDBOX_MARKER)) {
 
 						_portalCache.put(templateId, templateResource);
@@ -142,8 +135,9 @@ public class DefaultTemplateResourceLoader implements TemplateResourceLoader {
 			}
 			catch (TemplateException te) {
 				_log.warn(
-					"Failed to parser template id " + templateId +
-						" with parser " + templateResourceParser, te);
+					"Unable to parse template " + templateId + " with parser " +
+						templateResourceParser,
+					te);
 			}
 		}
 
@@ -151,15 +145,10 @@ public class DefaultTemplateResourceLoader implements TemplateResourceLoader {
 	}
 
 	public boolean hasTemplateResource(String templateId) {
-		try {
-			TemplateResource templateResource = getTemplateResource(templateId);
+		TemplateResource templateResource = getTemplateResource(templateId);
 
-			if (templateResource != null) {
-				return true;
-			}
-		}
-		catch (TemplateException te) {
-			_log.warn(te, te);
+		if (templateResource != null) {
+			return true;
 		}
 
 		return false;

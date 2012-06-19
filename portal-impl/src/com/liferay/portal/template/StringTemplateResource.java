@@ -17,7 +17,6 @@ package com.liferay.portal.template;
 import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
 import com.liferay.portal.kernel.template.TemplateResource;
 
-import java.io.IOException;
 import java.io.Reader;
 
 /**
@@ -27,16 +26,15 @@ public class StringTemplateResource implements TemplateResource {
 
 	public StringTemplateResource(String templateId, String templateContent) {
 		if (templateId == null) {
-			throw new IllegalArgumentException("Missing templateId");
+			throw new IllegalArgumentException("Template ID is null");
 		}
 
 		if (templateContent == null) {
-			throw new IllegalArgumentException("Missing templateContent");
+			throw new IllegalArgumentException("Template content is null");
 		}
 
 		_templateId = templateId;
 		_templateContent = templateContent;
-		_lastModified = System.currentTimeMillis();
 	}
 
 	public String getContent() {
@@ -47,7 +45,7 @@ public class StringTemplateResource implements TemplateResource {
 		return _lastModified;
 	}
 
-	public Reader getReader() throws IOException {
+	public Reader getReader() {
 		if (_templateContent == null) {
 			return null;
 		}
@@ -59,7 +57,7 @@ public class StringTemplateResource implements TemplateResource {
 		return _templateId;
 	}
 
-	private long _lastModified;
+	private long _lastModified = System.currentTimeMillis();
 	private String _templateContent;
 	private String _templateId;
 

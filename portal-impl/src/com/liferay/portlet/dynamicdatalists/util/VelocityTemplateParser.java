@@ -44,7 +44,6 @@ public class VelocityTemplateParser extends
 	protected TemplateContext getTemplateContext() throws Exception {
 		TemplateResource templateResource = new StringTemplateResource(
 			getTemplateId(), getScript());
-
 		TemplateResource errorTemplateResource = new StringTemplateResource(
 			getErrorTemplateId(), getErrorTemplateContent());
 

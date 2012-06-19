@@ -33,11 +33,11 @@ public class URLTemplateResource implements TemplateResource {
 
 	public URLTemplateResource(String templateId, URL templateURL) {
 		if (templateId == null) {
-			throw new IllegalArgumentException("Missing templateId");
+			throw new IllegalArgumentException("Template ID is null");
 		}
 
 		if (templateURL == null) {
-			throw new IllegalArgumentException("Missing templateURL");
+			throw new IllegalArgumentException("Template URL is null");
 		}
 
 		_templateId = templateId;

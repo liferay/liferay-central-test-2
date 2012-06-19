@@ -163,15 +163,13 @@ public class FreeMarkerTemplate implements Template {
 		}
 
 		for (Map.Entry<String, TemplateResource> entry :
-			_autoImportLibraries.entrySet()) {
+				_autoImportLibraries.entrySet()) {
 
 			String key = entry.getKey();
 			TemplateResource templateResource = entry.getValue();
 
 			if (templateResource == null) {
-				_log.error(
-					"Unable to find template resource " +
-						templateResource.getTemplateId());
+				_log.error("Unable to find template resource");
 
 				continue;
 			}
@@ -187,12 +185,12 @@ public class FreeMarkerTemplate implements Template {
 
 			readers.add(reader);
 
-			freemarker.template.Template importTemplate =
+			freemarker.template.Template template =
 				new freemarker.template.Template(
 					templateResource.getTemplateId(), reader, _configuration,
 					TemplateResource.DEFAUT_ENCODING);
 
-			environment.importLib(importTemplate, key);
+			environment.importLib(template, key);
 		}
 	}
 
@@ -204,17 +202,14 @@ public class FreeMarkerTemplate implements Template {
 
 		try {
 			if (templateResource == null) {
-				throw new Exception(
-					"Unable to find template resource with templateId " +
-						templateResource.getTemplateId());
+				throw new Exception("Unable to find template resource");
 			}
 
 			Reader reader = templateResource.getReader();
 
 			if (reader == null) {
 				throw new Exception(
-					"Unable to find template resource with templateId " +
-						templateResource.getTemplateId());
+					"Unable to find template resource " + templateResource);
 			}
 
 			readers.add(reader);

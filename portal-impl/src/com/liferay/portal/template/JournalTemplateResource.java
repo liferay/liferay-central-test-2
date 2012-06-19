@@ -18,8 +18,9 @@ import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
 import com.liferay.portal.kernel.template.TemplateResource;
 import com.liferay.portlet.journal.model.JournalTemplate;
 
-import java.io.IOException;
 import java.io.Reader;
+
+import java.util.Date;
 
 /**
  * @author Tina Tian
@@ -30,11 +31,11 @@ public class JournalTemplateResource implements TemplateResource {
 		String templateId, JournalTemplate journalTemplate) {
 
 		if (templateId == null) {
-			throw new IllegalArgumentException("Missing templateId");
+			throw new IllegalArgumentException("Template ID is null");
 		}
 
 		if (journalTemplate == null) {
-			throw new IllegalArgumentException("Missing journalTemplate");
+			throw new IllegalArgumentException("Journal template is null");
 		}
 
 		_templateId = templateId;
@@ -42,10 +43,12 @@ public class JournalTemplateResource implements TemplateResource {
 	}
 
 	public long getLastModified() {
-		return _journalTemplate.getModifiedDate().getTime();
+		Date modifiedDate = _journalTemplate.getModifiedDate();
+
+		return modifiedDate.getTime();
 	}
 
-	public Reader getReader() throws IOException {
+	public Reader getReader() {
 		if (_journalTemplate == null) {
 			return null;
 		}

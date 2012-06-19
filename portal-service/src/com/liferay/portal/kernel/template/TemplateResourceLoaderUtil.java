@@ -27,7 +27,7 @@ public class TemplateResourceLoaderUtil {
 
 	public static void clearCache() {
 		for (TemplateResourceLoader templateResourceLoader :
-			_templateResourceLoaders.values()) {
+				_templateResourceLoaders.values()) {
 
 			templateResourceLoader.clearCache();
 		}
@@ -54,7 +54,7 @@ public class TemplateResourceLoaderUtil {
 
 	public static void destroy() {
 		for (TemplateResourceLoader templateResourceLoader :
-			_templateResourceLoaders.values()) {
+				_templateResourceLoaders.values()) {
 
 			templateResourceLoader.destroy();
 		}
@@ -105,8 +105,7 @@ public class TemplateResourceLoaderUtil {
 	}
 
 	public static void registerTemplateResourceLoader(
-			TemplateResourceLoader templateResourceLoader)
-		throws TemplateException {
+		TemplateResourceLoader templateResourceLoader) {
 
 		_templateResourceLoaders.put(
 			templateResourceLoader.getName(), templateResourceLoader);

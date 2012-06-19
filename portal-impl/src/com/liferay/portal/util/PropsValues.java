@@ -612,7 +612,7 @@ public class PropsValues {
 
 	public static final String FREEMARKER_ENGINE_TEMPLATE_EXCEPTION_HANDLER = PropsUtil.get(PropsKeys.FREEMARKER_ENGINE_TEMPLATE_EXCEPTION_HANDLER);
 
-	public static final String[] FREEMARKER_ENGINE_TEMPLATE_PARSER_CLASSNAMES = PropsUtil.getArray(PropsKeys.FREEMARKER_ENGINE_TEMPLATE_PARSER_CLASSNAMES);
+	public static final String[] FREEMARKER_ENGINE_TEMPLATE_PARSERS = PropsUtil.getArray(PropsKeys.FREEMARKER_ENGINE_TEMPLATE_PARSERS);
 
 	public static final String[] GLOBAL_SHUTDOWN_EVENTS = PropsUtil.getArray(PropsKeys.GLOBAL_SHUTDOWN_EVENTS);
 
@@ -1646,7 +1646,7 @@ public class PropsValues {
 
 	public static final int VELOCITY_ENGINE_RESOURCE_MODIFICATION_CHECK_INTERVAL = GetterUtil.getInteger(PropsUtil.get(PropsKeys.VELOCITY_ENGINE_RESOURCE_MODIFICATION_CHECK_INTERVAL));
 
-	public static final String[] VELOCITY_ENGINE_RESOURCE_PARSER_CLASSNAMES = PropsUtil.getArray(PropsKeys.VELOCITY_ENGINE_RESOURCE_PARSER_CLASSNAMES);
+	public static final String[] VELOCITY_ENGINE_RESOURCE_PARSERS = PropsUtil.getArray(PropsKeys.VELOCITY_ENGINE_RESOURCE_PARSERS);
 
 	public static final String[] VELOCITY_ENGINE_RESTRICTED_CLASSES = PropsUtil.getArray(PropsKeys.VELOCITY_ENGINE_RESTRICTED_CLASSES);
 

@@ -140,17 +140,14 @@ public class VelocityTemplate implements Template {
 
 		try {
 			if (templateResource == null) {
-				throw new Exception(
-					"Unable to find template resource with templateId " +
-						templateResource.getTemplateId());
+				throw new Exception("Unable to find template resource");
 			}
 
 			reader = templateResource.getReader();
 
 			if (reader == null) {
 				throw new Exception(
-					"Unable to find template resource with templateId " +
-						templateResource.getTemplateId());
+					"Unable to find template resource " + templateResource);
 			}
 
 			return _velocityEngine.evaluate(

@@ -35,33 +35,33 @@ public class RuntimePageUtil {
 	}
 
 	public static void processCustomizationSettings(
-				PageContext pageContext, TemplateResource templateResource)
-			throws Exception {
+			PageContext pageContext, TemplateResource templateResource)
+		throws Exception {
 
 		getRuntimePage().processCustomizationSettings(
 			pageContext, templateResource);
 	}
 
 	public static void processTemplate(
-				PageContext pageContext, String portletId,
-				TemplateResource templateResource)
-			throws Exception {
+			PageContext pageContext, String portletId,
+			TemplateResource templateResource)
+		throws Exception {
 
-			getRuntimePage().processTemplate(
-				pageContext, portletId, templateResource);
+		getRuntimePage().processTemplate(
+			pageContext, portletId, templateResource);
 	}
 
 	public static void processTemplate(
-				PageContext pageContext, TemplateResource templateResource)
-			throws Exception {
+			PageContext pageContext, TemplateResource templateResource)
+		throws Exception {
 
 		getRuntimePage().processTemplate(pageContext, templateResource);
 	}
 
 	public static String processXML(
-				HttpServletRequest request, String content,
-				RuntimeLogic runtimeLogic)
-			throws Exception {
+			HttpServletRequest request, String content,
+			RuntimeLogic runtimeLogic)
+		throws Exception {
 
 		return getRuntimePage().processXML(request, content, runtimeLogic);
 	}

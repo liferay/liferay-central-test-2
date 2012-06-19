@@ -66,7 +66,7 @@ public class JournalTemplateResourceParser implements TemplateResourceParser {
 		}
 		catch (Exception e) {
 			throw new TemplateException(
-				"Template {" + templateId + "} not found", e);
+				"Unable to find template " + templateId, e);
 		}
 	}
 

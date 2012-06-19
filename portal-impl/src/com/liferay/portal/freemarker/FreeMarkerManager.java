@@ -46,6 +46,10 @@ public class FreeMarkerManager implements TemplateManager {
 			return;
 		}
 
+		_autoImportLibraries.clear();
+
+		_autoImportLibraries = null;
+
 		_classLoaderHelperUtilities.clear();
 
 		_classLoaderHelperUtilities = null;
@@ -65,10 +69,6 @@ public class FreeMarkerManager implements TemplateManager {
 		_standardHelperUtilities = null;
 
 		_templateContextHelper = null;
-
-		_autoImportLibraries.clear();
-
-		_autoImportLibraries = null;
 	}
 
 	public void destroy(ClassLoader classLoader) {
@@ -181,12 +181,17 @@ public class FreeMarkerManager implements TemplateManager {
 			_templateContextHelper.getRestrictedHelperUtilities();
 
 		for (String macroLibrary :
-			PropsValues.FREEMARKER_ENGINE_MACRO_LIBRARY) {
+				PropsValues.FREEMARKER_ENGINE_MACRO_LIBRARY) {
 
 			int index = macroLibrary.indexOf(StringPool.COLON);
 
-			String libraryFile = macroLibrary.substring(0, index).trim();
-			String libraryName = macroLibrary.substring(index + 1).trim();
+			String libraryFile = macroLibrary.substring(0, index);
+
+			libraryFile = libraryFile.trim();
+
+			String libraryName = macroLibrary.substring(index + 1);
+
+			libraryName = libraryName.trim();
 
 			_autoImportLibraries.put(
 				libraryName,
@@ -203,7 +208,6 @@ public class FreeMarkerManager implements TemplateManager {
 
 	private Map<String, TemplateResource> _autoImportLibraries =
 		new HashMap<String, TemplateResource>();
-
 	private Map<ClassLoader, Map<String, Object>> _classLoaderHelperUtilities =
 		new ConcurrentHashMap<ClassLoader, Map<String, Object>>();
 	private Configuration _configuration;

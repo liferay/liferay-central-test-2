@@ -312,7 +312,6 @@ public class VelocityTemplateTest extends TestCase {
 
 		public MockTemplateResource(String templateId) {
 			_templateId = templateId;
-			_lastModified = System.currentTimeMillis();
 		}
 
 		public long getLastModified() {
@@ -320,7 +319,7 @@ public class VelocityTemplateTest extends TestCase {
 		}
 
 		public Reader getReader() throws IOException {
-			if (_templateId == _TEMPLATE_FILE_NAME) {
+			if (_templateId.equals(_TEMPLATE_FILE_NAME)) {
 				return new StringReader(_TEST_TEMPLATE_CONTENT);
 			}
 
@@ -333,7 +332,7 @@ public class VelocityTemplateTest extends TestCase {
 			return _templateId;
 		}
 
-		private long _lastModified;
+		private long _lastModified = System.currentTimeMillis();
 		private String _templateId;
 
 	}

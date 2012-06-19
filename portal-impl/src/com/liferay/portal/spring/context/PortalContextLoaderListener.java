@@ -176,9 +176,9 @@ public class PortalContextLoaderListener extends ContextLoaderListener {
 		FinderCacheUtil.clearLocalCache();
 		EntityCacheUtil.clearCache();
 		EntityCacheUtil.clearLocalCache();
-		TemplateResourceLoaderUtil.clearCache();
 		PermissionCacheUtil.clearCache();
 		PermissionCacheUtil.clearLocalCache();
+		TemplateResourceLoaderUtil.clearCache();
 		WikiCacheUtil.clearCache(0);
 
 		ServletContextPool.clear();

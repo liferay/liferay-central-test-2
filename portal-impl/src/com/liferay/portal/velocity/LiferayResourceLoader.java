@@ -69,8 +69,7 @@ public class LiferayResourceLoader extends ResourceLoader {
 	@Override
 	public void init(ExtendedProperties props) {
 		setModificationCheckInterval(
-			PropsValues.
-				VELOCITY_ENGINE_RESOURCE_MODIFICATION_CHECK_INTERVAL);
+			PropsValues.VELOCITY_ENGINE_RESOURCE_MODIFICATION_CHECK_INTERVAL);
 	}
 
 	@Override
