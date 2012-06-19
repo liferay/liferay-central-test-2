@@ -34,10 +34,6 @@ import com.liferay.portal.kernel.velocity.VelocityEngineUtil;
 import com.liferay.portal.kernel.velocity.VelocityVariablesUtil;
 import com.liferay.portal.model.PortletConstants;
 import com.liferay.portal.model.Theme;
-import com.liferay.portal.security.lang.PortalSecurityManagerThreadLocal;
-import com.liferay.portal.security.pacl.PACLClassLoaderUtil;
-import com.liferay.portal.security.pacl.PACLPolicy;
-import com.liferay.portal.security.pacl.PACLPolicyManager;
 import com.liferay.portal.theme.PortletDisplay;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.util.freemarker.FreeMarkerTaglibFactoryUtil;
@@ -156,20 +152,14 @@ public class ThemeUtil {
 			(ClassLoader)pluginServletContext.getAttribute(
 				PluginContextListener.PLUGIN_CLASS_LOADER);
 
-		ClassLoader contextClassLoader =
-			PACLClassLoaderUtil.getContextClassLoader();
+		Thread currentThread = Thread.currentThread();
 
-		PACLPolicy contextClassLoaderPACLPolicy =
-			PACLPolicyManager.getPACLPolicy(contextClassLoader);
-		PACLPolicy pluginClassLoaderPACLPolicy =
-			PACLPolicyManager.getPACLPolicy(pluginClassLoader);
+		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
 
 		if ((pluginClassLoader != null) &&
 			(pluginClassLoader != contextClassLoader)) {
 
-			PACLClassLoaderUtil.setContextClassLoader(pluginClassLoader);
-			PortalSecurityManagerThreadLocal.setPACLPolicy(
-				pluginClassLoaderPACLPolicy);
+			currentThread.setContextClassLoader(pluginClassLoader);
 		}
 
 		try {
@@ -191,9 +181,7 @@ public class ThemeUtil {
 			if ((pluginClassLoader != null) &&
 				(pluginClassLoader != contextClassLoader)) {
 
-				PortalSecurityManagerThreadLocal.setPACLPolicy(
-					contextClassLoaderPACLPolicy);
-				PACLClassLoaderUtil.setContextClassLoader(contextClassLoader);
+				currentThread.setContextClassLoader(contextClassLoader);
 			}
 		}
 	}
