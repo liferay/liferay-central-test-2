@@ -1662,7 +1662,7 @@ public class PortletImporter {
 	protected void updateAssetPublisherClassPKs(
 			PortletDataContext portletDataContext,
 			javax.portlet.PortletPreferences jxPreferences, String key,
-			Class<?> clazz, long scopeGroupId, long globalGroupId)
+			Class<?> clazz, long companyGroupId)
 		throws Exception {
 
 		String[] oldValues = jxPreferences.getValues(key, null);
@@ -1697,12 +1697,13 @@ public class PortletImporter {
 
 					if (className.equals(AssetCategory.class.getName())) {
 						AssetCategory category =
-							AssetCategoryUtil.fetchByUUID_G(uuid, scopeGroupId);
+							AssetCategoryUtil.fetchByUUID_G(
+								uuid, portletDataContext.getScopeGroupId());
 
 						if (category == null) {
 							category =
 								AssetCategoryUtil.fetchByUUID_G(
-									uuid, globalGroupId);
+									uuid, companyGroupId);
 						}
 
 						if (category != null) {
@@ -1714,12 +1715,11 @@ public class PortletImporter {
 
 						JournalStructure structure =
 							JournalStructureUtil.fetchByUUID_G(
-								uuid, scopeGroupId);
+								uuid, portletDataContext.getScopeGroupId());
 
 						if (structure == null) {
-							structure =
-								JournalStructureUtil.fetchByUUID_G(
-									uuid, globalGroupId);
+							structure = JournalStructureUtil.fetchByUUID_G(
+								uuid, companyGroupId);
 						}
 
 						if (structure != null) {
@@ -1730,10 +1730,18 @@ public class PortletImporter {
 
 				if (Validator.isNull(newPrimaryKey)) {
 					if (_log.isWarnEnabled()) {
-						_log.warn(
-							"Unable to get primary key for " + clazz +
-							" with UUID " + uuid + "in either global scope: " +
-							globalGroupId + " or site scope: " + scopeGroupId);
+						StringBundler sb = new StringBundler(8);
+
+						sb.append("Unable to get primary key for ");
+						sb.append(clazz);
+						sb.append(" with UUID ");
+						sb.append(uuid);
+						sb.append(" in company group ");
+						sb.append(companyGroupId);
+						sb.append(" or in group ");
+						sb.append(portletDataContext.getScopeGroupId());
+
+						_log.warn(sb.toString());
 					}
 				}
 				else {
@@ -1803,8 +1811,7 @@ public class PortletImporter {
 
 				updateAssetPublisherClassPKs(
 					portletDataContext, jxPreferences, "queryValues" + index,
-					AssetCategory.class, portletDataContext.getScopeGroupId(),
-					companyGroup.getGroupId());
+					AssetCategory.class, companyGroup.getGroupId());
 			}
 			else if (name.equals(
 						"anyClassTypeJournalArticleAssetRendererFactory") ||
@@ -1814,9 +1821,7 @@ public class PortletImporter {
 
 				updateAssetPublisherClassPKs(
 					portletDataContext, jxPreferences, name,
-					JournalStructure.class,
-					portletDataContext.getScopeGroupId(),
-					companyGroup.getGroupId());
+					JournalStructure.class, companyGroup.getGroupId());
 			}
 			else if (name.equals("defaultScope") || name.equals("scopeIds")) {
 				updateAssetPublisherGlobalScopeId(
