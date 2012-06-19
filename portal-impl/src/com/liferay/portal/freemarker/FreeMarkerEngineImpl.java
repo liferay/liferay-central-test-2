@@ -44,7 +44,7 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class FreeMarkerEngineImpl implements FreeMarkerEngine {
 
-	public void destroy(ClassLoader classLoader) {
+	public void clearClassLoader(ClassLoader classLoader) {
 		_classLoaderFreeMarkerContexts.remove(classLoader);
 	}
 

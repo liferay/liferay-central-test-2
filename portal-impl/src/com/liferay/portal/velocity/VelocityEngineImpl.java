@@ -45,7 +45,7 @@ public class VelocityEngineImpl implements VelocityEngine {
 	public VelocityEngineImpl() {
 	}
 
-	public void destroy(ClassLoader classLoader) {
+	public void clearClassLoader(ClassLoader classLoader) {
 		_classLoaderVelocityContexts.remove(classLoader);
 	}
 

@@ -23,8 +23,8 @@ import java.io.Writer;
  */
 public class VelocityEngineUtil {
 
-	public static void destroy(ClassLoader classLoader) {
-		getVelocityEngine().destroy(classLoader);
+	public static void clearClassLoader(ClassLoader classLoader) {
+		getVelocityEngine().clearClassLoader(classLoader);
 	}
 
 	public static void flushTemplate(String velocityTemplateId) {

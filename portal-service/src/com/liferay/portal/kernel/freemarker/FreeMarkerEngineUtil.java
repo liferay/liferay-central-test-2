@@ -23,8 +23,8 @@ import java.io.Writer;
  */
 public class FreeMarkerEngineUtil {
 
-	public static void destroy(ClassLoader classLoader) {
-		getFreeMarkerEngine().destroy(classLoader);
+	public static void clearClassLoader(ClassLoader classLoader) {
+		getFreeMarkerEngine().clearClassLoader(classLoader);
 	}
 
 	public static void flushTemplate(String freeMarkerTemplateId) {

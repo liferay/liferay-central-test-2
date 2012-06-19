@@ -21,7 +21,7 @@ import java.io.Writer;
  */
 public interface VelocityEngine {
 
-	public void destroy(ClassLoader classLoader);
+	public void clearClassLoader(ClassLoader classLoader);
 
 	public void flushTemplate(String velocityTemplateId);
 

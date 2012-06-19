@@ -109,8 +109,8 @@ public class HotDeployImpl implements HotDeploy {
 
 		ClassLoader classLoader = hotDeployEvent.getContextClassLoader();
 
-		FreeMarkerEngineUtil.destroy(classLoader);
-		VelocityEngineUtil.destroy(classLoader);
+		FreeMarkerEngineUtil.clearClassLoader(classLoader);
+		VelocityEngineUtil.clearClassLoader(classLoader);
 
 		PACLPolicyManager.unregister(classLoader);
 	}
