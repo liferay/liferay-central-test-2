@@ -205,7 +205,7 @@ public class BeanLocatorImpl implements BeanLocator {
 		while (superClazz != null) {
 			getInterfaces(interfaceClasses, superClazz);
 
-			superClazz = clazz.getSuperclass();
+			superClazz = superClazz.getSuperclass();
 		}
 
 		return interfaceClasses.toArray(new Class<?>[interfaceClasses.size()]);
