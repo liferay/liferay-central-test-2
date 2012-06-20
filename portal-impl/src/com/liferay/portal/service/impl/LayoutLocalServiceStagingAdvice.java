@@ -210,12 +210,6 @@ public class LayoutLocalServiceStagingAdvice
 		originalLayout.setHidden(hidden);
 		originalLayout.setFriendlyURL(friendlyURL);
 
-		boolean layoutPrototypeLinkEnabled = ParamUtil.getBoolean(
-			serviceContext, "layoutPrototypeLinkEnabled", true);
-
-		originalLayout.setLayoutPrototypeLinkEnabled(
-			layoutPrototypeLinkEnabled);
-
 		if (iconImage != null) {
 			originalLayout.setIconImage(iconImage.booleanValue());
 
@@ -229,6 +223,12 @@ public class LayoutLocalServiceStagingAdvice
 				}
 			}
 		}
+
+		boolean layoutPrototypeLinkEnabled = ParamUtil.getBoolean(
+			serviceContext, "layoutPrototypeLinkEnabled", true);
+
+		originalLayout.setLayoutPrototypeLinkEnabled(
+			layoutPrototypeLinkEnabled);
 
 		layoutPersistence.update(originalLayout, false);
 
