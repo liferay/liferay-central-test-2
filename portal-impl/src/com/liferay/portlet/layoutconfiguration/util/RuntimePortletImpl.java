@@ -35,6 +35,7 @@ import com.liferay.portal.kernel.velocity.VelocityVariablesUtil;
 import com.liferay.portal.model.LayoutTemplate;
 import com.liferay.portal.model.LayoutTemplateConstants;
 import com.liferay.portal.model.Portlet;
+import com.liferay.portal.model.PortletConstants;
 import com.liferay.portal.security.lang.PortalSecurityManagerThreadLocal;
 import com.liferay.portal.security.pacl.PACLClassLoaderUtil;
 import com.liferay.portal.security.pacl.PACLPolicy;
@@ -518,6 +519,17 @@ public class RuntimePortletImpl implements RuntimePortlet {
 				pos + separator.length());
 
 			themeId = velocityTemplateId.substring(0, pos);
+		}
+
+		pos = layoutTemplateId.indexOf(PortletConstants.INSTANCE_SEPARATOR);
+
+		if (pos != -1) {
+			layoutTemplateId = layoutTemplateId.substring(
+				pos + PortletConstants.INSTANCE_SEPARATOR.length() + 1);
+
+			pos = layoutTemplateId.indexOf(StringPool.UNDERLINE);
+
+			layoutTemplateId = layoutTemplateId.substring(pos + 1);
 		}
 
 		return LayoutTemplateLocalServiceUtil.getLayoutTemplate(
