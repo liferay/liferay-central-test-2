@@ -296,9 +296,8 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 		if (selectionStyle.equals("manual") ||
 			selectionStyle.equals("view-count")) {
 
-			preferences.setValue("showQueryLogic", String.valueOf(false));
-
 			preferences.setValue("enableRss", String.valueOf(false));
+			preferences.setValue("showQueryLogic", Boolean.FALSE.toString());
 
 			preferences.reset("rssDelta");
 			preferences.reset("rssDisplayStyle");
