@@ -31,6 +31,7 @@ import com.liferay.portal.util.PropsValues;
 import freemarker.cache.ClassTemplateLoader;
 import freemarker.cache.MultiTemplateLoader;
 import freemarker.cache.TemplateLoader;
+
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 
