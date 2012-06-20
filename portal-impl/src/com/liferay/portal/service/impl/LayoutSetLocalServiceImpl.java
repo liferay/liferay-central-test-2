@@ -136,8 +136,6 @@ public class LayoutSetLocalServiceImpl extends LayoutSetLocalServiceBaseImpl {
 		List<Layout> layouts = layoutPersistence.findByG_P_P(
 			groupId, privateLayout, LayoutConstants.DEFAULT_PARENT_LAYOUT_ID);
 
-		// Iterate backwards. See LPS-27971.
-
 		for (int i = layouts.size() - 1; i >= 0; i--) {
 			Layout layout = layouts.get(i);
 
