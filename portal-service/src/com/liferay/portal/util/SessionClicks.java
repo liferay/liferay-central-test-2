@@ -102,8 +102,6 @@ public class SessionClicks {
 	private static final String _DEFAULT_NAMESPACE =
 		SessionClicks.class.getName();
 
-	private static Log _log = LogFactoryUtil.getLog(SessionClicks.class);
-
 	private static final int _SESSION_CLICKS_MAX_SIZE_TERMS =
 		GetterUtil.getInteger(
 			PropsUtil.get(
@@ -113,5 +111,7 @@ public class SessionClicks {
 		GetterUtil.getInteger(
 			PropsUtil.get(
 				PropsKeys.SESSION_CLICKS_MAX_ALLOWED_VALUES));
+
+	private static Log _log = LogFactoryUtil.getLog(SessionClicks.class);
 
 }
