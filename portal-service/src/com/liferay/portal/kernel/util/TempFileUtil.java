@@ -14,7 +14,6 @@
 
 package com.liferay.portal.kernel.util;
 
-import com.liferay.portal.InvalidFileNameException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.io.ByteArrayFileInputStream;
@@ -266,7 +265,7 @@ public class TempFileUtil {
 		throws PortalException {
 
 		if (!isValidFileName(fileName)) {
-			throw new InvalidFileNameException();
+			throw new TempFileNameException();
 		}
 
 		StringBundler sb = new StringBundler(4);
@@ -283,7 +282,7 @@ public class TempFileUtil {
 		throws PortalException {
 
 		if (!isValidFileName(fileName)) {
-			throw new InvalidFileNameException();
+			throw new TempFileNameException();
 		}
 
 		return fileName + _SUFFIX_TEMP_FILENAME;

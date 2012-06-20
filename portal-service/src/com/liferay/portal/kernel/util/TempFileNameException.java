@@ -12,28 +12,28 @@
  * details.
  */
 
-package com.liferay.portal;
+package com.liferay.portal.kernel.util;
 
 import com.liferay.portal.kernel.exception.PortalException;
 
 /**
  * @author Brian Wing Shun Chan
  */
-public class InvalidFileNameException extends PortalException {
+public class TempFileNameException extends PortalException {
 
-	public InvalidFileNameException() {
+	public TempFileNameException() {
 		super();
 	}
 
-	public InvalidFileNameException(String msg) {
+	public TempFileNameException(String msg) {
 		super(msg);
 	}
 
-	public InvalidFileNameException(String msg, Throwable cause) {
+	public TempFileNameException(String msg, Throwable cause) {
 		super(msg, cause);
 	}
 
-	public InvalidFileNameException(Throwable cause) {
+	public TempFileNameException(Throwable cause) {
 		super(cause);
 	}
 

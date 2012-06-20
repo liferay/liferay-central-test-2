@@ -2520,7 +2520,6 @@
 		<exception>EmailAddress</exception>
 		<exception>ExpiredLock</exception>
 		<exception>ImageType</exception>
-		<exception>InvalidFileName</exception>
 		<exception>InvalidLock</exception>
 		<exception>InvalidRepository</exception>
 		<exception>LARFile</exception>
