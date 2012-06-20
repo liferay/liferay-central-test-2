@@ -23,8 +23,8 @@ public class DefaultEmailAddressValidator implements EmailAddressValidator {
 
 	public boolean validate(long companyId, String emailAddress) {
 		if (!Validator.isEmailAddress(emailAddress) ||
-			emailAddress.startsWith("root@") ||
-			emailAddress.startsWith("postmaster@")) {
+			emailAddress.startsWith("postmaster@") ||
+			emailAddress.startsWith("root@")) {
 
 			return false;
 		}
