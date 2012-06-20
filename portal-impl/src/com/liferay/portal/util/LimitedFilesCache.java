@@ -24,22 +24,24 @@ import java.io.File;
 public class LimitedFilesCache<T> {
 
 	public LimitedFilesCache(int maxSize) {
-		_cache = new FileRemovingLFUCache<T>(maxSize);
+		_fileRemovingLFUCache = new FileRemovingLFUCache<T>(maxSize);
 	}
 
 	public File get(T key) {
-		return _cache.get(key);
+		return _fileRemovingLFUCache.get(key);
 	}
 
 	public void put(T key) {
-		_cache.put(key, null);
+		_fileRemovingLFUCache.put(key, null);
 	}
 
 	public void put(T key, File file) {
-		_cache.put(key, file);
+		_fileRemovingLFUCache.put(key, file);
 	}
 
-	public static class FileRemovingLFUCache<K> extends
+	private FileRemovingLFUCache<T> _fileRemovingLFUCache;
+
+	private class FileRemovingLFUCache<K> extends
 		ConcurrentLFUCache<K, File> {
 
 		public FileRemovingLFUCache(int maxSize) {
@@ -52,11 +54,12 @@ public class LimitedFilesCache<T> {
 				cachedFile.delete();
 			}
 			else {
-				new File(key.toString()).delete();
+				File file = new File(key.toString());
+
+				file.delete();
 			}
 		}
-	}
 
-	private FileRemovingLFUCache<T> _cache;
+	}
 
 }

@@ -132,7 +132,7 @@ public class ConcurrentLFUCacheTest extends TestCase {
 		assertNull(concurrentLFUCache.get("key"));
 	}
 
-	public void testLFU() {
+	public void testLFU1() {
 		ConcurrentLFUCache<String, String> concurrentLFUCache =
 			new ConcurrentLFUCache<String, String>(2, 0.5F);
 
