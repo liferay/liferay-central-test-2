@@ -280,14 +280,13 @@ public class JSONWebServiceInvokerAction implements JSONWebServiceAction {
 				String whitelistString = name.substring(
 					y + 1, name.length() - 1);
 
-				String[] whiteListStringArray = StringUtil.split(
-					whitelistString);
+				String[] whiteList = StringUtil.split(whitelistString);
 
-				for (int i = 0; i < whiteListStringArray.length; i++) {
-					whiteListStringArray[i] = whiteListStringArray[i].trim();
+				for (int i = 0; i < whiteList.length; i++) {
+					whiteList[i] = whiteList[i].trim();
 				}
 
-				statement.setWhitelist(whiteListStringArray);
+				statement.setWhitelist(whiteList);
 
 				name = name.substring(0, y);
 			}
@@ -408,9 +407,6 @@ public class JSONWebServiceInvokerAction implements JSONWebServiceAction {
 	private HttpServletRequest _request;
 	private List<Statement> _statements = new ArrayList<Statement>();
 
-	private static class Flag extends KeyValue<String, String> {
-	}
-
 	private class ActionResultJSONSerializable implements JSONSerializable {
 
 		public String toJSONString() {
@@ -420,13 +416,13 @@ public class JSONWebServiceInvokerAction implements JSONWebServiceAction {
 			jsonSerializer.exclude("*.class");
 
 			for (Statement statement : _statements) {
-				String statementName = statement.getName();
+				String name = statement.getName();
 
-				if (statementName == null) {
+				if (name == null) {
 					continue;
 				}
 
-				jsonSerializer.include(statementName.substring(1));
+				jsonSerializer.include(name.substring(1));
 			}
 
 			return jsonSerializer.serialize(_result);
@@ -437,6 +433,10 @@ public class JSONWebServiceInvokerAction implements JSONWebServiceAction {
 		}
 
 		private Object _result;
+
+	}
+
+	private class Flag extends KeyValue<String, String> {
 	}
 
 	private class Statement {
