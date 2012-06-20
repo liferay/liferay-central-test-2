@@ -932,6 +932,15 @@ release was successful.</echo>
 			</fileset>
 		</chmod>
 
+		<replace file="${app.server.jboss.dir}/modules/sun/jdk/main/module.xml">
+			<replacetoken><![CDATA[<paths>]]></replacetoken>
+			<replacevalue>
+				<![CDATA[<paths>
+					<path name="com/sun/script/javascript" />
+				]]>
+			</replacevalue>
+		</replace>
+
 		<replace file="${app.server.jboss.dir}/standalone/configuration/standalone.xml">
 			<replacetoken><![CDATA[enable-welcome-root="true"]]></replacetoken>
 			<replacevalue><![CDATA[enable-welcome-root="false"]]></replacevalue>
