@@ -64,11 +64,12 @@ public class SessionClicks {
 			if ((key.length() > PropsValues.SESSION_CLICKS_MAX_SIZE_TERMS) ||
 				(value.length() > PropsValues.SESSION_CLICKS_MAX_SIZE_TERMS)) {
 
-				_log.warn(
-					"Session clicks has attempted to exceed the maximum " +
-						"size allowed for keys and/or values. See the " +
-							"property session.clicks.max.size.terms. {key=" +
-								key + ", value=" + value + "}");
+				if (_log.isWarnEnabled()) {
+					_log.warn(
+						"Session clicks has attempted to exceed the maximum " +
+							"size allowed for keys or values with {key=" + key +
+								", value=" + value + "}");
+				}
 
 				return;
 			}
@@ -82,11 +83,12 @@ public class SessionClicks {
 				preferences.setValue(namespace, key, value);
 			}
 			else {
-				_log.warn(
-					"Session clicks has attempted to exceed the maximum " +
-						"number of allowed values. See the property " +
-							"session.clicks.max.allowed.values. {size=" +
-								size + "}");
+				if (_log.isWarnEnabled()) {
+					_log.warn(
+						"Session clicks has attempted to exceed the maximum " +
+							"number of allowed values with {key=" + key +
+								", value=" + value + "}");
+				}
 			}
 		}
 		catch (Exception e) {
