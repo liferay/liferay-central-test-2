@@ -234,7 +234,7 @@ public class DLFileEntryAssetRenderer
 			if ((_type == AssetRendererFactory.TYPE_LATEST) ||
 				Validator.isNotNull(version)) {
 
-				if (_fileEntry != null && Validator.isNotNull(version)) {
+				if ((_fileEntry != null) && Validator.isNotNull(version)) {
 					_fileVersion = _fileEntry.getFileVersion(version);
 				}
 
