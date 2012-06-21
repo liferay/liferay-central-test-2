@@ -141,7 +141,8 @@ public class NavItem implements Serializable {
 	public void icon() throws Exception {
 		Object velocityTaglib = _templateContext.get("theme");
 
-		Method method = (Method)_templateContext.get(_layoutIconMethodKey);
+		Method method = (Method)_templateContext.get(
+			"velocityTaglib#layoutIcon");
 
 		method.invoke(velocityTaglib, _layout);
 	}
@@ -156,9 +157,6 @@ public class NavItem implements Serializable {
 			_themeDisplay.isTilesSelectable(), _themeDisplay.getLayout(),
 			_themeDisplay.getLayout().getAncestorPlid());
 	}
-
-	private static final String _layoutIconMethodKey =
-		"com.liferay.taglib.util.VelocityTaglib#layoutIcon";
 
 	private List<NavItem> _children;
 	private Layout _layout;

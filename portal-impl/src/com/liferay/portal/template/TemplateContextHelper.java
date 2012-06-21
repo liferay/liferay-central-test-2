@@ -388,7 +388,7 @@ public class TemplateContextHelper {
 			Method method = clazz.getMethod(
 				"layoutIcon", new Class[] {Layout.class});
 
-			variables.put(_layoutIconMethodKey, method);
+			variables.put("velocityTaglib#layoutIcon", method);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -721,10 +721,6 @@ public class TemplateContextHelper {
 
 		templateContext.put("tilesSelectable", tilesSelectable);
 	}
-
-
-	private static final String _layoutIconMethodKey =
-		"com.liferay.taglib.util.VelocityTaglib#layoutIcon";
 
 	private static Log _log = LogFactoryUtil.getLog(
 		TemplateContextHelper.class);
