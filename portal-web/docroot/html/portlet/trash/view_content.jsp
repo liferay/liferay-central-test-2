@@ -35,7 +35,7 @@
 		entry = TrashEntryLocalServiceUtil.fetchEntry(className, classPK);
 	}
 
-	if (Validator.isNotNull(entry)) {
+	if (entry != null) {
 		className = entry.getClassName();
 		classPK = entry.getClassPK();
 	}

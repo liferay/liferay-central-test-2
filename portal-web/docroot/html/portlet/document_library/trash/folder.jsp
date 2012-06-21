@@ -17,6 +17,8 @@
 <%@ include file="/html/portlet/document_library_display/init.jsp" %>
 
 <%
+String redirect = ParamUtil.getString(request, "redirect");
+
 Folder folder = (Folder)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FOLDER);
 
 long folderId = folder.getFolderId();
@@ -25,12 +27,9 @@ long repositoryId = folder.getRepositoryId();
 
 int status = WorkflowConstants.STATUS_ANY;
 
-int foldersCount = DLAppServiceUtil.getFoldersCount(repositoryId, folderId);
-
-String redirect = ParamUtil.getString(request, "redirect");
-
 long assetCategoryId = ParamUtil.getLong(request, "categoryId");
 String assetTagName = ParamUtil.getString(request, "tag");
+
 boolean useAssetEntryQuery = (assetCategoryId > 0) || Validator.isNotNull(assetTagName);
 
 PortletURL portletURL = renderResponse.createRenderURL();
@@ -42,6 +41,11 @@ portletURL.setParameter("classPK", String.valueOf(folder.getPrimaryKey()));
 %>
 
 <liferay-ui:panel-container extended="<%= false %>" id="documentLibraryDisplayInfoPanelContainer" persistState="<%= true %>">
+
+	<%
+	int foldersCount = DLAppServiceUtil.getFoldersCount(repositoryId, folderId);
+	%>
+
 	<c:if test="<%= foldersCount > 0 %>">
 		<liferay-ui:panel collapsible="<%= true %>" cssClass="view-folders" extended="<%= true %>" id="documentLibraryDisplayFoldersListingPanel" persistState="<%= true %>" title='<%= (folder != null) ? "subfolders" : "folders" %>'>
 			<liferay-ui:search-container
