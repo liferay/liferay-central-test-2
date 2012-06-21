@@ -619,8 +619,8 @@ public class FreeMarkerVariablesImpl implements FreeMarkerVariables {
 
 			if (layout != null) {
 				RequestVars requestVars = new RequestVars(
-					request, themeDisplay, freeMarkerContext,
-					layout.getAncestorPlid(), layout.getAncestorLayoutId());
+					request, themeDisplay, layout.getAncestorPlid(),
+					layout.getAncestorLayoutId(), freeMarkerContext);
 
 				List<NavItem> navItems = NavItem.fromLayouts(
 					requestVars, layouts);

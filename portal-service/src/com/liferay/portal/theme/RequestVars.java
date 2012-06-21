@@ -25,14 +25,14 @@ public class RequestVars {
 
 	public RequestVars(
 		HttpServletRequest request, ThemeDisplay themeDisplay,
-		TemplateContext templateContext, long ancestorPlid,
-		long ancestorLayoutId) {
+		long ancestorPlid, long ancestorLayoutId,
+		TemplateContext templateContext) {
 
 		_request = request;
 		_themeDisplay = themeDisplay;
-		_templateContext = templateContext;
 		_ancestorPlid = ancestorPlid;
 		_ancestorLayoutId = ancestorLayoutId;
+		_templateContext = templateContext;
 	}
 
 	public long getAncestorLayoutId() {

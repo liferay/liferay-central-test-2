@@ -674,8 +674,8 @@ public class VelocityVariablesImpl implements VelocityVariables {
 
 			if (layout != null) {
 				RequestVars requestVars = new RequestVars(
-					request, themeDisplay, velocityContext,
-					layout.getAncestorPlid(), layout.getAncestorLayoutId());
+					request, themeDisplay, layout.getAncestorPlid(),
+					layout.getAncestorLayoutId(), velocityContext);
 
 				List<NavItem> navItems = NavItem.fromLayouts(
 					requestVars, layouts);
