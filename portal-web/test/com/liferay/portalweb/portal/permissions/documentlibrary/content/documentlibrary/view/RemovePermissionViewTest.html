@@ -54,13 +54,28 @@
 	<td>Define Permissions</td>
 </tr>
 <tr>
-	<td>selectAndWait</td>
+	<td>typeKeys</td>
 	<td>//select[@id='_128_add-permissions']</td>
-	<td>Documents and Media</td>
+	<td>ddddddd</td>
+</tr>
+<tr>
+	<td>keyPressAndWait</td>
+	<td>//select[@id='_128_add-permissions']</td>
+	<td>\13</td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>//input[@value='20VIEW']</td>
+	<td>View</td>
 </tr>
 <tr>
 	<td>uncheck</td>
-	<td>//input[@value='com.liferay.portlet.documentlibraryVIEW']</td>
+	<td>//input[@value='20VIEW']</td>
+	<td>View</td>
+</tr>
+<tr>
+	<td>assertNotChecked</td>
+	<td>//input[@value='20VIEW']</td>
 	<td>View</td>
 </tr>
 <tr>
@@ -73,7 +88,6 @@
 	<td>//div[@class='portlet-msg-success']</td>
 	<td>The role permissions were updated.</td>
 </tr>
-
 </tbody></table>
 </body>
 </html>

@@ -34,20 +34,11 @@ String structureName = StringPool.BLANK;
 
 if (Validator.isNotNull(structureId)) {
 	try {
-		structure = JournalStructureLocalServiceUtil.getStructure(groupId, structureId);
+		structure = JournalStructureLocalServiceUtil.getStructure(groupId, structureId, true);
 
 		structureName = structure.getName(locale);
 	}
-	catch (NoSuchStructureException nsse1) {
-		if (groupId != themeDisplay.getCompanyGroupId()) {
-			try {
-				structure = JournalStructureLocalServiceUtil.getStructure(themeDisplay.getCompanyGroupId(), structureId);
-
-				structureName = structure.getName(locale);
-			}
-			catch (NoSuchStructureException nsse2) {
-			}
-		}
+	catch (NoSuchStructureException nsse) {
 	}
 }
 
@@ -64,40 +55,22 @@ if ((structure == null) && Validator.isNotNull(templateId)) {
 	JournalTemplate template = null;
 
 	try {
-		template = JournalTemplateLocalServiceUtil.getTemplate(groupId, templateId);
+		template = JournalTemplateLocalServiceUtil.getTemplate(groupId, templateId, true);
 	}
-	catch (NoSuchTemplateException nste1) {
-		if (groupId != themeDisplay.getCompanyGroupId()) {
-			try {
-				template = JournalTemplateLocalServiceUtil.getTemplate(themeDisplay.getCompanyGroupId(), templateId);
-			}
-			catch (NoSuchTemplateException nste2) {
-			}
-		}
+	catch (NoSuchTemplateException nste) {
 	}
 
 	if (template != null) {
 		structureId = template.getStructureId();
 
 		try {
-			structure = JournalStructureLocalServiceUtil.getStructure(groupId, structureId);
+			structure = JournalStructureLocalServiceUtil.getStructure(groupId, structureId, true);
 
 			structureName = structure.getName(locale);
 
 			templates = JournalTemplateLocalServiceUtil.getStructureTemplates(groupId, structureId);
 		}
-		catch (NoSuchStructureException nsse1) {
-			if (groupId != themeDisplay.getCompanyGroupId()) {
-				try {
-					structure = JournalStructureLocalServiceUtil.getStructure(themeDisplay.getCompanyGroupId(), structureId);
-
-					structureName = structure.getName(locale);
-
-					templates = JournalTemplateLocalServiceUtil.getStructureTemplates(themeDisplay.getCompanyGroupId(), structureId);
-				}
-				catch (NoSuchStructureException nsse2) {
-				}
-			}
+		catch (NoSuchStructureException nsse) {
 		}
 	}
 }
@@ -134,7 +107,7 @@ if (feed != null) {
 
 <aui:form action="<%= editFeedURL %>" enctype="multipart/form-data" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveFeed();" %>' >
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="" />
-	<aui:input name="redirect" type="hidden" value="" />
+	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 	<aui:input name="groupId" type="hidden" value="<%= groupId %>" />
 	<aui:input name="feedId" type="hidden" value="<%= feedId %>" />
 	<aui:input name="rendererTemplateId" type="hidden" value="<%= rendererTemplateId %>" />
@@ -226,7 +199,7 @@ if (feed != null) {
 						<portlet:param name="parentStructureId" value="<%= structureId %>" />
 					</portlet:renderURL>
 
-					<aui:a href="<%= structureURL %>" label="<%= structureName %>" id="structureName" />
+					<aui:a href="<%= structureURL %>" id="structureName" label="<%= structureName %>" />
 
 					<aui:button name="selectStructureButton" onClick='<%= renderResponse.getNamespace() + "openStructureSelector();" %>' value="select" />
 
@@ -372,15 +345,29 @@ if (feed != null) {
 	</liferay-ui:panel-container>
 
 	<aui:button-row>
-		<aui:button type="submit" />
 
-		<c:if test="<%= feed != null %>">
+		<%
+		boolean hasSavePermission = false;
 
-			<%
-			String taglibPreviewButton = "Liferay.Util.openWindow({dialog: {align: Liferay.Util.Window.ALIGN_CENTER, height: 450}, title: '" + UnicodeLanguageUtil.get(pageContext, "feed") + "', uri: '" + feedURL + "'});";
-			%>
+		if (feed != null) {
+			hasSavePermission = JournalFeedPermission.contains(permissionChecker, feed, ActionKeys.UPDATE);
+		}
+		else {
+			hasSavePermission = JournalPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_FEED);
+		}
+		%>
 
-			<aui:button onClick="<%= taglibPreviewButton %>" value="preview" />
+		<c:if test="<%= hasSavePermission %>">
+			<aui:button type="submit" />
+
+			<c:if test="<%= feed != null %>">
+
+				<%
+				String taglibPreviewButton = "Liferay.Util.openWindow({dialog: {align: Liferay.Util.Window.ALIGN_CENTER, height: 450}, id:'" + renderResponse.getNamespace() + "preview', title: '" + UnicodeLanguageUtil.get(pageContext, "feed") + "', uri: '" + feedURL + "'});";
+				%>
+
+				<aui:button onClick="<%= taglibPreviewButton %>" value="preview" />
+			</c:if>
 		</c:if>
 
 		<aui:button href="<%= redirect %>" type="cancel" />
@@ -394,6 +381,7 @@ if (feed != null) {
 				dialog: {
 					width: 680
 				},
+				id: '<portlet:namespace />structureSelector',
 				title: '<%= UnicodeLanguageUtil.get(pageContext, "structure") %>',
 				uri: '<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/journal/select_structure" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /></portlet:renderURL>'
 			}
@@ -406,6 +394,7 @@ if (feed != null) {
 				dialog: {
 					width: 680
 				},
+				id: '<portlet:namespace />templateSelector',
 				title: '<%= UnicodeLanguageUtil.get(pageContext, "template") %>',
 				uri: '<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/journal/select_template" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /></portlet:renderURL>'
 			}
@@ -422,7 +411,6 @@ if (feed != null) {
 
 	function <portlet:namespace />saveFeed() {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= feed == null ? Constants.ADD : Constants.UPDATE %>";
-		document.<portlet:namespace />fm.<portlet:namespace />redirect.value = "<%= HtmlUtil.escapeURL(redirect) %>";
 
 		<c:if test="<%= feed == null %>">
 			document.<portlet:namespace />fm.<portlet:namespace />feedId.value = document.<portlet:namespace />fm.<portlet:namespace />newFeedId.value;
@@ -436,7 +424,7 @@ if (feed != null) {
 	}
 
 	function <portlet:namespace />selectStructure(structureId, structureName, dialog) {
-		if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "selecting-a-new-structure-will-change-the-available-templates-and-available-feed-item-content") %>') && document.<portlet:namespace />fm.<portlet:namespace />structureId.value != structureId) {
+		if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "selecting-a-new-structure-will-change-the-available-templates-and-available-feed-item-content") %>') && (document.<portlet:namespace />fm.<portlet:namespace />structureId.value != structureId)) {
 			document.<portlet:namespace />fm.<portlet:namespace />structureId.value = structureId;
 			document.<portlet:namespace />fm.<portlet:namespace />templateId.value = "";
 			document.<portlet:namespace />fm.<portlet:namespace />rendererTemplateId.value = "";

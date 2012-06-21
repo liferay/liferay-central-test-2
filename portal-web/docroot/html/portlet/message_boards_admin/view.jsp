@@ -71,7 +71,7 @@ request.setAttribute("view.jsp-viewCategory", Boolean.TRUE.toString());
 		<%
 		boolean showAddCategoryButton = MBCategoryPermission.contains(permissionChecker, scopeGroupId, categoryId, ActionKeys.ADD_CATEGORY);
 		boolean showAddMessageButton = MBCategoryPermission.contains(permissionChecker, scopeGroupId, categoryId, ActionKeys.ADD_MESSAGE);
-		boolean showPermissionsButton = GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.PERMISSIONS);
+		boolean showPermissionsButton = MBCategoryPermission.contains(permissionChecker, scopeGroupId, categoryId, ActionKeys.PERMISSIONS);
 
 		if (showAddMessageButton && !themeDisplay.isSignedIn()) {
 			if (!allowAnonymousPosting) {
@@ -407,16 +407,22 @@ request.setAttribute("view.jsp-viewCategory", Boolean.TRUE.toString());
 			<aui:input name="threadIds" type="hidden" />
 
 			<liferay-ui:search-container
+				emptyResultsMessage="there-are-no-recent-posts"
 				headerNames="thread,started-by,posts,views,last-post"
 				iteratorURL="<%= portletURL %>"
-				emptyResultsMessage="there-are-no-recent-posts"
 				rowChecker="<%= new RowChecker(renderResponse) %>"
 			>
 				<liferay-ui:search-container-results>
 
 					<%
-					results = MBThreadServiceUtil.getGroupThreads(scopeGroupId, groupThreadsUserId, WorkflowConstants.STATUS_APPROVED, false, false, searchContainer.getStart(), searchContainer.getEnd());
-					total = MBThreadServiceUtil.getGroupThreadsCount(scopeGroupId, groupThreadsUserId, WorkflowConstants.STATUS_APPROVED, false, false);
+					Calendar calendar = Calendar.getInstance();
+
+					int offset = GetterUtil.getInteger(recentPostsDateOffset);
+
+					calendar.add(Calendar.DATE, -offset);
+
+					results = MBThreadServiceUtil.getGroupThreads(scopeGroupId, groupThreadsUserId, calendar.getTime(), WorkflowConstants.STATUS_APPROVED, searchContainer.getStart(), searchContainer.getEnd());
+					total = MBThreadServiceUtil.getGroupThreadsCount(scopeGroupId, groupThreadsUserId, calendar.getTime(), WorkflowConstants.STATUS_APPROVED);
 
 					pageContext.setAttribute("results", results);
 					pageContext.setAttribute("total", total);

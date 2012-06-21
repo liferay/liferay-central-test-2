@@ -263,7 +263,7 @@ public class AddWCWebContent1DisplayPageAP1Test extends BaseTestCase {
 
 			try {
 				if (selenium.isVisible(
-							"//ul[@class='aui-tree-container']/li[contains(.,'Asset Publisher Test Page1')]/div/div/a")) {
+							"//a[contains(@id,'PublicPages_layout_asset-publisher-test-page1')]")) {
 					break;
 				}
 			}
@@ -275,8 +275,8 @@ public class AddWCWebContent1DisplayPageAP1Test extends BaseTestCase {
 
 		assertEquals(RuntimeVariables.replace("Asset Publisher Test Page1"),
 			selenium.getText(
-				"//ul[@class='aui-tree-container']/li[contains(.,'Asset Publisher Test Page1')]/div/div/a"));
-		selenium.clickAt("//ul[@class='aui-tree-container']/li[contains(.,'Asset Publisher Test Page1')]/div/div/a",
+				"//a[contains(@id,'PublicPages_layout_asset-publisher-test-page1')]"));
+		selenium.clickAt("//a[contains(@id,'PublicPages_layout_asset-publisher-test-page1')]",
 			RuntimeVariables.replace("Asset Publisher Test Page1"));
 
 		for (int second = 0;; second++) {

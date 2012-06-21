@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.sites.util;
 
+import com.liferay.portal.RequiredLayoutException;
 import com.liferay.portal.events.EventsProcessorUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -435,6 +436,11 @@ public class SitesUtil {
 
 		LayoutSet layoutSet = layout.getLayoutSet();
 
+		if (group.isGuest() && (layoutSet.getPageCount() == 1)) {
+			throw new RequiredLayoutException(
+				RequiredLayoutException.AT_LEAST_ONE);
+		}
+
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			request);
 
@@ -532,7 +538,7 @@ public class SitesUtil {
 			new String[] {Boolean.TRUE.toString()});
 		parameterMap.put(
 			PortletDataHandlerKeys.LAYOUT_SET_SETTINGS,
-			new String[] {Boolean.FALSE.toString()});
+			new String[] {Boolean.TRUE.toString()});
 		parameterMap.put(
 			PortletDataHandlerKeys.LAYOUTS_IMPORT_MODE,
 			new String[] {
@@ -541,7 +547,7 @@ public class SitesUtil {
 			});
 		parameterMap.put(
 			PortletDataHandlerKeys.LOGO,
-			new String[] {Boolean.FALSE.toString()});
+			new String[] {Boolean.TRUE.toString()});
 		parameterMap.put(
 			PortletDataHandlerKeys.PERFORM_DIRECT_BINARY_IMPORT,
 			new String[] {Boolean.TRUE.toString()});
@@ -806,8 +812,8 @@ public class SitesUtil {
 			if (!owner.equals(lock.getOwner())) {
 				Date createDate = lock.getCreateDate();
 
-				if (((System.currentTimeMillis() - createDate.getTime()) >=
-					PropsValues.LAYOUT_PROTOTYPE_MERGE_LOCK_MAX_TIME)) {
+				if ((System.currentTimeMillis() - createDate.getTime()) >=
+						PropsValues.LAYOUT_PROTOTYPE_MERGE_LOCK_MAX_TIME) {
 
 					// Acquire lock if the lock is older than the lock max time
 
@@ -1082,6 +1088,9 @@ public class SitesUtil {
 			PortletDataHandlerKeys.IGNORE_LAST_PUBLISH_DATE,
 			new String[] {Boolean.TRUE.toString()});
 		parameterMap.put(
+			PortletDataHandlerKeys.LAYOUT_SET_SETTINGS,
+			new String[] {Boolean.TRUE.toString()});
+		parameterMap.put(
 			PortletDataHandlerKeys.LAYOUT_SET_PROTOTYPE_LINK_ENABLED,
 			new String[] {Boolean.TRUE.toString()});
 		parameterMap.put(
@@ -1090,6 +1099,9 @@ public class SitesUtil {
 				PortletDataHandlerKeys.
 					LAYOUTS_IMPORT_MODE_CREATED_FROM_PROTOTYPE
 			});
+		parameterMap.put(
+			PortletDataHandlerKeys.LOGO,
+			new String[] {Boolean.TRUE.toString()});
 		parameterMap.put(
 			PortletDataHandlerKeys.PERMISSIONS,
 			new String[] {Boolean.TRUE.toString()});

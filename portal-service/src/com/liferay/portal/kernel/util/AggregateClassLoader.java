@@ -83,7 +83,7 @@ public class AggregateClassLoader extends ClassLoader {
 		}
 
 		if ((classLoader instanceof AggregateClassLoader) &&
-			(classLoader.getParent().equals(getParent()))) {
+			classLoader.getParent().equals(getParent())) {
 
 			AggregateClassLoader aggregateClassLoader =
 				(AggregateClassLoader)classLoader;
@@ -129,7 +129,7 @@ public class AggregateClassLoader extends ClassLoader {
 			(((getParent() == null) &&
 			  (aggregateClassLoader.getParent() == null)) ||
 			 ((getParent() != null) &&
-			  (getParent().equals(aggregateClassLoader.getParent()))))) {
+			  getParent().equals(aggregateClassLoader.getParent())))) {
 
 			return true;
 		}

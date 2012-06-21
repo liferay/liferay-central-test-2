@@ -60,9 +60,10 @@ public class ViewOrganizationTest extends BaseTestCase {
 		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("Organization Name"),
 			selenium.getText(
-				"//tr[contains(.,'Organization Name')]/td[2]/a/strong"));
+				"//tr[contains(.,'Organization Name')]/td[@headers='_125_organizationsSearchContainer_col-name']/a/strong"));
 		assertEquals(RuntimeVariables.replace("Regular Organization"),
-			selenium.getText("//tr[contains(.,'Organization Name')]/td[3]/a"));
+			selenium.getText(
+				"//tr[contains(.,'Regular Organization')]/td[@headers='_125_organizationsSearchContainer_col-type']/a"));
 		assertEquals(RuntimeVariables.replace("Actions"),
 			selenium.getText("//span[@title='Actions']/ul/li/strong/a/span"));
 		selenium.clickAt("//span[@title='Actions']/ul/li/strong/a/span",
@@ -97,7 +98,7 @@ public class ViewOrganizationTest extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace("Details"),
 			selenium.getText("//div[@id='_125_details']/h3"));
 		assertEquals(RuntimeVariables.replace("Name (Required)"),
-			selenium.getText("//label[@for='_125_name']"));
+			selenium.getText("//label[@for='_125_']"));
 		assertEquals("Organization Name",
 			selenium.getValue("//input[@id='_125_name']"));
 		assertEquals(RuntimeVariables.replace("Type"),

@@ -138,8 +138,9 @@ if (fileEntryTypeId >= 0) {
 
 	SearchContext searchContext = SearchContextFactory.getInstance(request);
 
-	searchContext.setEnd(searchContainer.getEnd());
-	searchContext.setStart(searchContainer.getStart());
+	searchContext.setAttribute("paginationType", "none");
+	searchContext.setEnd(entryEnd);
+	searchContext.setStart(entryStart);
 
 	Hits hits = indexer.search(searchContext);
 
@@ -166,7 +167,7 @@ if (fileEntryTypeId >= 0) {
 		results.add(fileEntry);
 	}
 
-	total = results.size();
+	total = hits.getLength();
 }
 else {
 	if (navigation.equals("home")) {
@@ -175,7 +176,9 @@ else {
 
 			AssetEntryQuery assetEntryQuery = new AssetEntryQuery(classNameIds, searchContainer);
 
+			assetEntryQuery.setEnd(entryEnd);
 			assetEntryQuery.setExcludeZeroViewCount(false);
+			assetEntryQuery.setStart(entryStart);
 
 			results = AssetEntryServiceUtil.getEntries(assetEntryQuery);
 			total = AssetEntryServiceUtil.getEntriesCount(assetEntryQuery);
@@ -203,20 +206,29 @@ searchContainer.setTotal(total);
 request.setAttribute("view_entries.jsp-total", String.valueOf(total));
 %>
 
-<c:choose>
-	<c:when test="<%= results.isEmpty() %>">
-		<div class="portlet-msg-info">
-			<liferay-ui:message key="there-are-no-documents-or-media-files-in-this-folder" />
-		</div>
-	</c:when>
-	<c:when test="<%= System.currentTimeMillis() > 1328126400000L %>">
-		<div class="portlet-msg-info sync-notification">
-			<a href="http://www.liferay.com/products/liferay-sync" target="_blank">
-				<liferay-ui:message key="access-these-files-offline-using-liferay-sync" />
-			</a>
-		</div>
-	</c:when>
-</c:choose>
+<c:if test="<%= results.isEmpty() %>">
+	<div class="portlet-msg-info">
+		<liferay-ui:message key="there-are-no-documents-or-media-files-in-this-folder" />
+	</div>
+</c:if>
+
+<%
+boolean showSyncMessage = GetterUtil.getBoolean(SessionClicks.get(request, liferayPortletResponse.getNamespace() + "show-sync-message", "true"));
+
+String cssClass = StringPool.BLANK;
+
+if (results.isEmpty() || !showSyncMessage || !PropsValues.DL_SHOW_LIFERAY_SYNC_MESSAGE) {
+	cssClass = "aui-helper-hidden";
+}
+%>
+
+<div class="<%= cssClass %>" id="<portlet:namespace />syncNotification">
+	<div class="lfr-message-info sync-notification" id="<portlet:namespace />syncNotificationContent">
+		<a href="http://www.liferay.com/products/liferay-sync" target="_blank">
+			<liferay-ui:message key="access-these-files-offline-using-liferay-sync" />
+		</a>
+	</div>
+</div>
 
 <%
 for (int i = 0; i < results.size(); i++) {
@@ -283,8 +295,8 @@ for (int i = 0; i < results.size(); i++) {
 							data="<%= data %>"
 							image='<%= "../file_system/small/" + DLUtil.getFileIcon(fileEntry.getExtension()) %>'
 							label="<%= true %>"
-							method="get"
 							message="<%= fileEntry.getTitle() %>"
+							method="get"
 							url="<%= rowURL.toString() %>"
 						/>
 
@@ -428,8 +440,8 @@ for (int i = 0; i < results.size(); i++) {
 							data="<%= data %>"
 							image="<%= folderImage %>"
 							label="<%= true %>"
-							method="get"
 							message="<%= curFolder.getName() %>"
+							method="get"
 							url="<%= rowURL.toString() %>"
 						/>
 					</liferay-util:buffer>

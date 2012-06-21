@@ -108,7 +108,7 @@ public class ConfigurePortletShowHeaderTextOffTest extends BaseTestCase {
 
 					try {
 						if (selenium.isVisible(
-									"//div[contains(@class,'aui-dialog-iframe-bd')]/iframe")) {
+									"//iframe[@id='_180_configurationIframeDialog']")) {
 							break;
 						}
 					}
@@ -119,7 +119,7 @@ public class ConfigurePortletShowHeaderTextOffTest extends BaseTestCase {
 				}
 
 				selenium.selectFrame(
-					"//div[contains(@class,'aui-dialog-iframe-bd')]/iframe");
+					"//iframe[@id='_180_configurationIframeDialog']");
 
 				for (int second = 0;; second++) {
 					if (second >= 90) {

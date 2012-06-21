@@ -30,6 +30,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author Brian Wing Shun Chan
+ * @author Douglas Wong
  */
 public class PortletLogic extends RuntimeLogic {
 

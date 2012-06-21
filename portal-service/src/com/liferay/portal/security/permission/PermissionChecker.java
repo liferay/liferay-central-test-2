@@ -163,11 +163,11 @@ public interface PermissionChecker extends Cloneable {
 	public void init(User user);
 
 	/**
-	 * Returns <code>true</code> if guest permissions will be used in
-	 * permission checks.
+	 * Returns <code>true</code> if guest permissions will be used in permission
+	 * checks.
 	 *
-	 * @return <code>true</code> if guest permissions will be used in
-	 *         permission checks; <code>false</code> otherwise
+	 * @return <code>true</code> if guest permissions will be used in permission
+	 *         checks; <code>false</code> otherwise
 	 */
 	public boolean isCheckGuest();
 
@@ -234,6 +234,16 @@ public interface PermissionChecker extends Cloneable {
 	 * @see    com.liferay.portlet.admin.util.OmniadminUtil
 	 */
 	public boolean isOmniadmin();
+
+	/**
+	 * Returns <code>true</code> if the user is an administrator of the
+	 * organization.
+	 *
+	 * @param  organizationId the primary key of the organization
+	 * @return <code>true</code> if the user is an administrator of the
+	 *         organization; <code>false</code> otherwise
+	 */
+	public boolean isOrganizationAdmin(long organizationId);
 
 	/**
 	 * Returns <code>true</code> if the user is signed in.

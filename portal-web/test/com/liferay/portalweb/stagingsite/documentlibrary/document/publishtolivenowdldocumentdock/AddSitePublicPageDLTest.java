@@ -59,8 +59,7 @@ public class AddSitePublicPageDLTest extends BaseTestCase {
 					RuntimeVariables.replace("Search"));
 				selenium.waitForPageToLoad("30000");
 				loadRequiredJavaScriptModules();
-				assertEquals(RuntimeVariables.replace("Site Name"),
-					selenium.getText("//td[1]/a"));
+				assertTrue(selenium.isPartialText("//td[1]/a", "Site Name"));
 				assertEquals(RuntimeVariables.replace("Actions"),
 					selenium.getText(
 						"//span[@title='Actions']/ul/li/strong/a/span"));
@@ -102,7 +101,8 @@ public class AddSitePublicPageDLTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isVisible("//input[@id='_156_name_en_US']")) {
+						if (selenium.isVisible(
+									"//input[@id='_156_addLayoutName_en_US']")) {
 							break;
 						}
 					}
@@ -112,7 +112,7 @@ public class AddSitePublicPageDLTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.type("//input[@id='_156_name_en_US']",
+				selenium.type("//input[@id='_156_addLayoutName_en_US']",
 					RuntimeVariables.replace("Document Library Test Page"));
 				selenium.clickAt("//input[@value='Add Page']",
 					RuntimeVariables.replace("Add Page"));

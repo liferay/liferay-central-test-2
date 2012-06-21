@@ -91,7 +91,7 @@ public class ManagePortletConsumerHWTest extends BaseTestCase {
 		selenium.type("//input[@id='_1_WAR_wsrpportlet_name']",
 			RuntimeVariables.replace("WSRP Hello World Portlet"));
 		selenium.select("//select[@name='_1_WAR_wsrpportlet_portletHandle']",
-			RuntimeVariables.replace("Hello World"));
+			RuntimeVariables.replace("label=Hello World"));
 		selenium.clickAt("//input[@value='Save']",
 			RuntimeVariables.replace("Save"));
 		selenium.waitForPageToLoad("30000");

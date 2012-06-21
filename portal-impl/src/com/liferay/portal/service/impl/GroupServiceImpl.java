@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.MapUtil;
+import com.liferay.portal.kernel.util.UniqueList;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.Organization;
@@ -38,7 +39,6 @@ import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.service.permission.RolePermissionUtil;
 import com.liferay.portal.service.permission.UserPermissionUtil;
 import com.liferay.portal.util.PropsValues;
-import com.liferay.util.UniqueList;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -244,6 +244,15 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 			userPersistence.getGroups(permissionChecker.getUserId(), 0, max));
 		groups.addAll(
 			getUserOrganizationsGroups(permissionChecker.getUserId(), 0, max));
+
+		List<UserGroup> userGroups = userPersistence.getUserGroups(
+			permissionChecker.getUserId(), 0, max);
+
+		for (UserGroup userGroup : userGroups) {
+			groups.addAll(
+				userGroupPersistence.getGroups(
+					userGroup.getUserGroupId(), 0, max));
+		}
 
 		Iterator<Group> itr = groups.iterator();
 

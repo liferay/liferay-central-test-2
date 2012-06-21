@@ -124,6 +124,8 @@ public class EditArticleAction extends PortletAction {
 
 					throw new PortalException(uploadException.getCause());
 				}
+
+				return;
 			}
 			else if (cmd.equals(Constants.ADD) ||
 					 cmd.equals(Constants.TRANSLATE) ||
@@ -152,79 +154,73 @@ public class EditArticleAction extends PortletAction {
 				unsubscribeArticles(actionRequest);
 			}
 
-			if (Validator.isNotNull(cmd)) {
-				String redirect = ParamUtil.getString(
-					actionRequest, "redirect");
+			String redirect = ParamUtil.getString(actionRequest, "redirect");
 
-				int workflowAction = ParamUtil.getInteger(
-					actionRequest, "workflowAction",
-					WorkflowConstants.ACTION_PUBLISH);
+			int workflowAction = ParamUtil.getInteger(
+				actionRequest, "workflowAction",
+				WorkflowConstants.ACTION_PUBLISH);
 
-				if ((article != null) &&
-					(workflowAction == WorkflowConstants.ACTION_SAVE_DRAFT)) {
+			if ((article != null) &&
+				(workflowAction == WorkflowConstants.ACTION_SAVE_DRAFT)) {
 
-					redirect = getSaveAndContinueRedirect(
-						portletConfig, actionRequest, article, redirect);
+				redirect = getSaveAndContinueRedirect(
+					portletConfig, actionRequest, article, redirect);
+			}
+
+			if (redirect.contains("/content/" + oldUrlTitle + "?")) {
+				int pos = redirect.indexOf("?");
+
+				if (pos == -1) {
+					pos = redirect.length();
 				}
 
-				if (redirect.contains("/content/" + oldUrlTitle + "?")) {
-					int pos = redirect.indexOf("?");
+				String newRedirect = redirect.substring(
+					0, pos - oldUrlTitle.length());
 
-					if (pos == -1) {
-						pos = redirect.length();
-					}
+				newRedirect += article.getUrlTitle();
 
-					String newRedirect = redirect.substring(
-						0, pos - oldUrlTitle.length());
-
-					newRedirect += article.getUrlTitle();
-
-					if (oldUrlTitle.contains("/maximized")) {
-						newRedirect += "/maximized";
-					}
-
-					if (pos < redirect.length()) {
-						newRedirect +=
-							"?" +
-								redirect.substring(pos + 1, redirect.length());
-					}
-
-					redirect = newRedirect;
+				if (oldUrlTitle.contains("/maximized")) {
+					newRedirect += "/maximized";
 				}
 
-				WindowState windowState = actionRequest.getWindowState();
-
-				ThemeDisplay themeDisplay =
-					(ThemeDisplay)actionRequest.getAttribute(
-						WebKeys.THEME_DISPLAY);
-
-				Layout layout = themeDisplay.getLayout();
-
-				if (cmd.equals(Constants.DELETE_VERSIONS) &&
-					hasArticle(actionRequest)) {
-
-					redirect = ParamUtil.getString(
-						actionRequest, "originalRedirect");
+				if (pos < redirect.length()) {
+					newRedirect += "?" + redirect.substring(pos + 1);
 				}
 
-				if (cmd.equals(Constants.DELETE_TRANSLATION) ||
-					cmd.equals(Constants.TRANSLATE)) {
+				redirect = newRedirect;
+			}
 
-					setForward(
-						actionRequest,
-						"portlet.journal.update_translation_redirect");
-				}
-				else if (!windowState.equals(LiferayWindowState.POP_UP) &&
-						 layout.isTypeControlPanel()) {
+			WindowState windowState = actionRequest.getWindowState();
 
-					sendRedirect(actionRequest, actionResponse, redirect);
-				}
-				else {
-					redirect = PortalUtil.escapeRedirect(redirect);
+			ThemeDisplay themeDisplay =
+				(ThemeDisplay)actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
 
-					if (Validator.isNotNull(redirect)) {
-						actionResponse.sendRedirect(redirect);
-					}
+			Layout layout = themeDisplay.getLayout();
+
+			if (cmd.equals(Constants.DELETE_VERSIONS) &&
+				hasArticle(actionRequest)) {
+
+				redirect = ParamUtil.getString(
+					actionRequest, "originalRedirect");
+			}
+
+			if (cmd.equals(Constants.DELETE_TRANSLATION) ||
+				cmd.equals(Constants.TRANSLATE)) {
+
+				setForward(
+					actionRequest,
+					"portlet.journal.update_translation_redirect");
+			}
+			else if (!windowState.equals(LiferayWindowState.POP_UP) &&
+					 layout.isTypeControlPanel()) {
+
+				sendRedirect(actionRequest, actionResponse, redirect);
+			}
+			else {
+				redirect = PortalUtil.escapeRedirect(redirect);
+
+				if (Validator.isNotNull(redirect)) {
+					actionResponse.sendRedirect(redirect);
 				}
 			}
 		}
@@ -272,7 +268,7 @@ public class EditArticleAction extends PortletAction {
 		try {
 			ActionUtil.getArticle(renderRequest);
 		}
-		catch (NoSuchArticleException nsse) {
+		catch (NoSuchArticleException nsae) {
 
 			// Let this slide because the user can manually input a article id
 			// for a new article that does not yet exist.
@@ -403,7 +399,7 @@ public class EditArticleAction extends PortletAction {
 				byte[] bytes = FileUtil.getBytes(file);
 
 				if ((bytes != null) && (bytes.length > 0)) {
-					name = name.substring(imagePrefix.length(), name.length());
+					name = name.substring(imagePrefix.length());
 
 					images.put(name, bytes);
 				}
@@ -509,9 +505,6 @@ public class EditArticleAction extends PortletAction {
 		UploadPortletRequest uploadPortletRequest =
 			PortalUtil.getUploadPortletRequest(actionRequest);
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
 		String cmd = ParamUtil.getString(uploadPortletRequest, Constants.CMD);
 
 		long groupId = ParamUtil.getLong(uploadPortletRequest, "groupId");
@@ -549,7 +542,7 @@ public class EditArticleAction extends PortletAction {
 			description = ParamUtil.getString(
 				uploadPortletRequest, "description_" + defaultLanguageId);
 		}
-		else{
+		else {
 			toLocale = LocaleUtil.fromLanguageId(toLanguageId);
 
 			title = ParamUtil.getString(
@@ -725,18 +718,9 @@ public class EditArticleAction extends PortletAction {
 			}
 			else {
 				if (curArticle.isTemplateDriven()) {
-					JournalStructure structure = null;
-
-					try {
-						structure =
-							JournalStructureLocalServiceUtil.getStructure(
-								groupId, structureId);
-					}
-					catch (NoSuchStructureException nsse) {
-						structure =
-							JournalStructureLocalServiceUtil.getStructure(
-								themeDisplay.getCompanyGroupId(), structureId);
-					}
+					JournalStructure structure =
+						JournalStructureLocalServiceUtil.getStructure(
+							groupId, structureId, true);
 
 					content = JournalUtil.mergeArticleContent(
 						curArticle.getContent(), content, true);
@@ -821,7 +805,7 @@ public class EditArticleAction extends PortletAction {
 
 		JournalContentSearchLocalServiceUtil.updateContentSearch(
 			layout.getGroupId(), layout.isPrivateLayout(), layout.getLayoutId(),
-			portletResource, articleId);
+			portletResource, articleId, true);
 	}
 
 }

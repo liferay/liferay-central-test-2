@@ -35,8 +35,8 @@
 </tr>
 <tr>
 	<td>waitForVisible</td>
-	<td>//div[@class='lfr-component lfr-menu-list']</td>
-	<td>Actions Menu</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li/a[contains(.,'DM DocumentType1 Name')]</td>
+	<td>DM DocumentType1 Name</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -95,12 +95,12 @@
 </tr>
 <tr>
 	<td>waitForVisible</td>
-	<td>//iframe</td>
+	<td>//iframe[@id='_20_openFileEntryTypeView']</td>
 	<td>Document Types</td>
 </tr>
 <tr>
 	<td>selectFrame</td>
-	<td>//iframe</td>
+	<td>//iframe[@id='_20_openFileEntryTypeView']</td>
 	<td>Document Types</td>
 </tr>
 <tr>
@@ -111,12 +111,17 @@
 <tr>
 	<td>type</td>
 	<td>//input[@title='Search Entries']</td>
-	<td>Type1</td>
+	<td>DocumentType1</td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>//input[@value='Search']</td>
+	<td>//input[@class='aui-button-input aui-button-input-submit']</td>
 	<td>Search</td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>//tr[contains(.,'DM DocumentType1 Name')]/td[1]</td>
+	<td>DM DocumentType1 Name</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -131,12 +136,17 @@
 <tr>
 	<td>type</td>
 	<td>//input[@title='Search Entries']</td>
-	<td>Type2</td>
+	<td>DocumentType2</td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>//input[@value='Search']</td>
+	<td>//input[@class='aui-button-input aui-button-input-submit']</td>
 	<td>Search</td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>//tr[contains(.,'DM DocumentType2 Name')]/td[1]</td>
+	<td>DM DocumentType2 Name</td>
 </tr>
 <tr>
 	<td>assertText</td>
@@ -151,12 +161,17 @@
 <tr>
 	<td>type</td>
 	<td>//input[@title='Search Entries']</td>
-	<td>Type3</td>
+	<td>DocumentType3</td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
-	<td>//input[@value='Search']</td>
+	<td>//input[@class='aui-button-input aui-button-input-submit']</td>
 	<td>Search</td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>//tr[contains(.,'DM DocumentType3 Name')]/td[1]</td>
+	<td>DM DocumentType3 Name</td>
 </tr>
 <tr>
 	<td>assertText</td>

@@ -39,6 +39,8 @@ public interface WebKeys {
 
 	public static final String CURRENT_URL = "CURRENT_URL";
 
+	public static final String EXTEND_SESSION = "EXTEND_SESSION";
+
 	public static final String FILE_ITEM_THRESHOLD_SIZE_EXCEEDED = "FILE_ITEM_THRESHOLD_SIZE_EXCEEDED";
 
 	public static final String FORGOT_PASSWORD_REMINDER_ATTEMPTS = "FORGOT_PASSWORD_REMINDER_ATTEMPTS";
@@ -128,6 +130,8 @@ public interface WebKeys {
 	public static final String THEME = "THEME";
 
 	public static final String THEME_DISPLAY = "THEME_DISPLAY";
+
+	public static final String UNIQUE_ELEMENT_IDS = "LIFERAY_SHARED_UNIQUE_ELEMENT_IDS";
 
 	public static final String UPLOAD_EXCEPTION = "UPLOAD_EXCEPTION";
 

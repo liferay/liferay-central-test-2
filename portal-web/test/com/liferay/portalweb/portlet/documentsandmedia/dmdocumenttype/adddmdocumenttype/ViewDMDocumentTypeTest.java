@@ -95,7 +95,8 @@ public class ViewDMDocumentTypeTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("//iframe")) {
+				if (selenium.isVisible(
+							"//iframe[@id='_20_openFileEntryTypeView']")) {
 					break;
 				}
 			}
@@ -105,7 +106,7 @@ public class ViewDMDocumentTypeTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.selectFrame("//iframe");
+		selenium.selectFrame("//iframe[@id='_20_openFileEntryTypeView']");
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -125,10 +126,28 @@ public class ViewDMDocumentTypeTest extends BaseTestCase {
 
 		selenium.type("//input[@title='Search Entries']",
 			RuntimeVariables.replace("Name"));
-		selenium.clickAt("//input[@class='aui-button-input aui-button-input-submit']",
+		selenium.clickAt("//input[@value='Search']",
 			RuntimeVariables.replace("Search"));
 		selenium.waitForPageToLoad("30000");
 		loadRequiredJavaScriptModules();
+
+		for (int second = 0;; second++) {
+			if (second >= 90) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible(
+							"//tr[contains(.,'DM DocumentType Name')]/td[1]")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		assertEquals(RuntimeVariables.replace("DM DocumentType Name"),
 			selenium.getText("//tr[contains(.,'DM DocumentType Name')]/td[1]"));
 		selenium.selectFrame("relative=top");

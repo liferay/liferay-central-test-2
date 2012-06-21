@@ -301,9 +301,9 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 
 							<aui:column cssClass="lfr-discussion-details">
 								<liferay-ui:user-display
+									displayStyle="<%= 2 %>"
 									userId="<%= message.getUserId() %>"
 									userName="<%= HtmlUtil.escape(message.getUserName()) %>"
-									displayStyle="<%= 2 %>"
 								/>
 							</aui:column>
 
@@ -412,7 +412,7 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 							</aui:column>
 
 							<aui:layout cssClass="lfr-discussion-form-container">
-								<div id="<%= randomNamespace %>postReplyForm<%= i %>" class="lfr-discussion-form lfr-discussion-form-reply" style="display: none;">
+								<div class="lfr-discussion-form lfr-discussion-form-reply" id="<%= randomNamespace %>postReplyForm<%= i %>" style="display: none;">
 
 									<liferay-ui:user-display
 										displayStyle="<%= 2 %>"
@@ -435,7 +435,7 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 
 								<c:if test="<%= !hideControls && MBDiscussionPermission.contains(permissionChecker, company.getCompanyId(), scopeGroupId, permissionClassName, permissionClassPK, message.getMessageId(), userId, ActionKeys.UPDATE_DISCUSSION) %>">
 									<div class="lfr-discussion-form lfr-discussion-form-edit" id="<%= randomNamespace %>editForm<%= i %>" style="display: none;">
-										<aui:input id='<%= randomNamespace + "editReplyBody" + i %>' label="" name='<%= "editReplyBody" + i %>' style='<%= "height: " + ModelHintsConstants.TEXTAREA_DISPLAY_HEIGHT + "px; width: " + ModelHintsConstants.TEXTAREA_DISPLAY_WIDTH + "px;" %>' value="<%= message.getBody() %>" type="textarea" wrap="soft" />
+										<aui:input id='<%= randomNamespace + "editReplyBody" + i %>' label="" name='<%= "editReplyBody" + i %>' style='<%= "height: " + ModelHintsConstants.TEXTAREA_DISPLAY_HEIGHT + "px; width: " + ModelHintsConstants.TEXTAREA_DISPLAY_WIDTH + "px;" %>' type="textarea" value="<%= message.getBody() %>" wrap="soft" />
 
 										<%
 										boolean pending = message.isPending();
@@ -456,7 +456,7 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 											<aui:button name='<%= randomNamespace + "editReplyButton" + i %>' onClick='<%= randomNamespace + "updateMessage(" + i + ");" %>' value="<%= publishButtonLabel %>" />
 
 											<%
-											String taglibCancel = "document.getElementById('" + randomNamespace + "editForm" + i + "').style.display = 'none'; document.getElementById('" + namespace + randomNamespace + "editReplyBody" + i + "').value = '" + message.getBody() + "'; void('');";
+											String taglibCancel = "document.getElementById('" + randomNamespace + "editForm" + i + "').style.display = 'none'; document.getElementById('" + namespace + randomNamespace + "editReplyBody" + i + "').value = '" + HtmlUtil.escapeJS(message.getBody()) + "'; void('');";
 											%>
 
 											<aui:button onClick="<%= taglibCancel %>" type="cancel" />
@@ -553,7 +553,7 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 							centered: true,
 							modal: true
 						},
-						id: '<%= namespace %>',
+						id: '<%= namespace %>signInDialog',
 						title: Liferay.Language.get('sign-in'),
 						uri: '<%= loginURL.toString() %>'
 					}
@@ -673,7 +673,7 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 					function(event) {
 						<portlet:namespace />showStatusMessage('success', '<%= UnicodeLanguageUtil.get(pageContext, "your-request-processed-successfully") %>');
 
-						location.hash = '#' + response.randomNamespace + 'messageScroll' + response.messageId;
+						location.hash = '#' + A.one("#<portlet:namespace />randomNamespace").val() + 'message_' + response.messageId;
 					}
 				);
 

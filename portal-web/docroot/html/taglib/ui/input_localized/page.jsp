@@ -22,10 +22,12 @@ String randomNamespace = PortalUtil.generateRandomKey(request, "taglib_ui_input_
 String cssClass = GetterUtil.getString((String)request.getAttribute("liferay-ui:input-localized:cssClass"));
 String defaultLanguageId = (String)request.getAttribute("liferay-ui:input-localized:defaultLanguageId");
 boolean disabled = GetterUtil.getBoolean((String) request.getAttribute("liferay-ui:input-localized:disabled"));
+String id = (String)request.getAttribute("liferay-ui:input-localized:id");
 Map<String, Object> dynamicAttributes = (Map<String, Object>)request.getAttribute("liferay-ui:input-localized:dynamicAttributes");
 String formName = (String)request.getAttribute("liferay-ui:input-localized:formName");
 boolean ignoreRequestValue = GetterUtil.getBoolean((String) request.getAttribute("liferay-ui:input-localized:ignoreRequestValue"));
 String languageId = (String)request.getAttribute("liferay-ui:input-localized:languageId");
+String maxLength = GetterUtil.getString((String)request.getAttribute("liferay-ui:input-localized:maxLength"));
 String name = (String)request.getAttribute("liferay-ui:input-localized:name");
 String xml = (String)request.getAttribute("liferay-ui:input-localized:xml");
 String type = (String)request.getAttribute("liferay-ui:input-localized:type");
@@ -62,12 +64,23 @@ if (Validator.isNull(mainLanguageValue)) {
 <span class="taglib-input-localized">
 	<c:choose>
 		<c:when test='<%= type.equals("input") %>'>
-			<input class="language-value <%= cssClass %>" <%= disabled ? "disabled=\"disabled\"" : "" %> id="<portlet:namespace /><%= name + StringPool.UNDERLINE + mainLanguageId %>" name="<portlet:namespace /><%= name + StringPool.UNDERLINE + mainLanguageId %>" type="text" value="<%= HtmlUtil.escape(mainLanguageValue) %>" <%= InlineUtil.buildDynamicAttributes(dynamicAttributes) %> />
+			<input class="language-value <%= cssClass %>" <%= disabled ? "disabled=\"disabled\"" : "" %> id="<portlet:namespace /><%= id + StringPool.UNDERLINE + mainLanguageId %>" name="<portlet:namespace /><%= name + StringPool.UNDERLINE + mainLanguageId %>" type="text" value="<%= HtmlUtil.escape(mainLanguageValue) %>" <%= InlineUtil.buildDynamicAttributes(dynamicAttributes) %> />
 		</c:when>
 		<c:when test='<%= type.equals("textarea") %>'>
-			<textarea class="language-value <%= cssClass %>" <%= disabled ? "disabled=\"disabled\"" : "" %> id="<portlet:namespace /><%= name + StringPool.UNDERLINE + mainLanguageId %>" name="<portlet:namespace /><%= name + StringPool.UNDERLINE + mainLanguageId %>" <%= InlineUtil.buildDynamicAttributes(dynamicAttributes) %>><%= HtmlUtil.escape(mainLanguageValue) %></textarea>
+			<textarea class="language-value <%= cssClass %>" <%= disabled ? "disabled=\"disabled\"" : "" %> id="<portlet:namespace /><%= id + StringPool.UNDERLINE + mainLanguageId %>" name="<portlet:namespace /><%= name + StringPool.UNDERLINE + mainLanguageId %>" <%= InlineUtil.buildDynamicAttributes(dynamicAttributes) %>><%= HtmlUtil.escape(mainLanguageValue) %></textarea>
 		</c:when>
 	</c:choose>
+
+	<c:if test="<%= Validator.isNotNull(maxLength) %>">
+		<aui:script use="aui-char-counter">
+			new A.CharCounter(
+				{
+					input: '#<portlet:namespace /><%= id + StringPool.UNDERLINE + mainLanguageId %>',
+					maxLength: <%= maxLength %>
+				}
+			);
+		</aui:script>
+	</c:if>
 
 	<c:if test="<%= Validator.isNull(languageId) %>">
 		<span class="flag-selector nobr">
@@ -85,7 +98,7 @@ if (Validator.isNull(mainLanguageValue)) {
 					String selLanguageId = LocaleUtil.toLanguageId(locales[i]);
 					String languageValue = LocalizationUtil.getLocalization(xml, selLanguageId, false);
 
-					if (Validator.isNotNull(languageValue) || ((!ignoreRequestValue) && (request.getParameter(name + StringPool.UNDERLINE + selLanguageId) != null))) {
+					if (Validator.isNotNull(languageValue) || (!ignoreRequestValue && (request.getParameter(name + StringPool.UNDERLINE + selLanguageId) != null))) {
 						languageIds.add(selLanguageId);
 					}
 				}
@@ -134,7 +147,7 @@ if (Validator.isNull(mainLanguageValue)) {
 										String selLanguageId = LocaleUtil.toLanguageId(curLocale);
 										String languageValue = LocalizationUtil.getLocalization(xml, selLanguageId, false);
 
-										if ((Validator.isNotNull(xml)) && Validator.isNotNull(languageValue)) {
+										if (Validator.isNotNull(xml) && Validator.isNotNull(languageValue)) {
 											optionStyle = "style=\"font-weight: bold\"";
 										}
 									%>
@@ -161,12 +174,23 @@ if (Validator.isNull(mainLanguageValue)) {
 
 								<c:choose>
 									<c:when test='<%= type.equals("input") %>'>
-										<input class="language-value" <%= disabled ? "disabled=\"disabled\"" : "" %> name="<portlet:namespace /><%= name + StringPool.UNDERLINE + curLanguageId %>" type="text" value="<%= HtmlUtil.escape(languageValue) %>" />
+										<input class="language-value" <%= disabled ? "disabled=\"disabled\"" : "" %> id="<portlet:namespace /><%= id + StringPool.UNDERLINE + curLanguageId %>" name="<portlet:namespace /><%= name + StringPool.UNDERLINE + curLanguageId %>" type="text" value="<%= HtmlUtil.escape(languageValue) %>" />
 									</c:when>
 									<c:when test='<%= type.equals("textarea") %>'>
-										<textarea class="language-value" <%= disabled ? "disabled=\"disabled\"" : "" %> name="<portlet:namespace /><%= name + StringPool.UNDERLINE + curLanguageId %>"><%= HtmlUtil.escape(languageValue) %></textarea>
+										<textarea class="language-value" <%= disabled ? "disabled=\"disabled\"" : "" %> id="<portlet:namespace /><%= id + StringPool.UNDERLINE + curLanguageId %>" name="<portlet:namespace /><%= name + StringPool.UNDERLINE + curLanguageId %>"><%= HtmlUtil.escape(languageValue) %></textarea>
 									</c:when>
 								</c:choose>
+
+								<c:if test="<%= Validator.isNotNull(maxLength) %>">
+									<aui:script use="aui-char-counter">
+										new A.CharCounter(
+											{
+												input: '#<portlet:namespace /><%= id + StringPool.UNDERLINE + curLanguageId %>',
+												maxLength: <%= maxLength %>
+											}
+										);
+									</aui:script>
+								</c:if>
 							</div>
 						</div>
 
@@ -188,6 +212,7 @@ if (Validator.isNull(mainLanguageValue)) {
 			var selectedValue = target.val();
 
 			var newName = '<portlet:namespace /><%= name %>_';
+			var newId = '<portlet:namespace /><%= id %>_';
 
 			var currentRow = target.ancestor('.lfr-form-row');
 
@@ -196,6 +221,7 @@ if (Validator.isNull(mainLanguageValue)) {
 
 			if (selectedValue) {
 				newName ='<portlet:namespace /><%= name %>_' + selectedValue;
+				newId ='<portlet:namespace /><%= id %>_' + selectedValue;
 
 				imgSrc = 'language/' + selectedValue;
 			}
@@ -204,7 +230,7 @@ if (Validator.isNull(mainLanguageValue)) {
 
 			if (inputField) {
 				inputField.attr('name', newName);
-				inputField.attr('id', newName);
+				inputField.attr('id', newId);
 			}
 
 			if (img) {

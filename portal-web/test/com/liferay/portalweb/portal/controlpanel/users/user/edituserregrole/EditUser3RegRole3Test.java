@@ -63,15 +63,18 @@ public class EditUser3RegRole3Test extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("userfn3"),
-			selenium.getText("//tr[contains(.,'usersn3')]/td[2]/a"));
+			selenium.getText(
+				"//td[@id='_125_usersSearchContainer_col-first-name_row-usersn3']/a"));
 		assertEquals(RuntimeVariables.replace("userln3"),
-			selenium.getText("//tr[contains(.,'usersn3')]/td[3]/a"));
+			selenium.getText(
+				"//td[@id='_125_usersSearchContainer_col-last-name_row-usersn3']/a"));
 		assertEquals(RuntimeVariables.replace("usersn3"),
-			selenium.getText("//tr[contains(.,'usersn3')]/td[4]/a"));
+			selenium.getText(
+				"//td[@id='_125_usersSearchContainer_col-screen-name_row-usersn3']/a"));
 		assertEquals(RuntimeVariables.replace("Actions"),
 			selenium.getText(
-				"//tr[contains(.,'usersn3')]/td/span[@title='Actions']/ul/li/strong/a"));
-		selenium.clickAt("//tr[contains(.,'usersn3')]/td/span[@title='Actions']/ul/li/strong/a",
+				"//span[@title='Actions']/ul[@id='_125_usersSearchContainer_usersn3_menu']/li/strong/a"));
+		selenium.clickAt("//span[@title='Actions']/ul[@id='_125_usersSearchContainer_usersn3_menu']/li/strong/a",
 			RuntimeVariables.replace("Actions"));
 
 		for (int second = 0;; second++) {
@@ -135,7 +138,7 @@ public class EditUser3RegRole3Test extends BaseTestCase {
 
 			try {
 				if (selenium.isVisible(
-							"//tr[contains(.,'Roles Regrole3 Name')]/td[1]/a")) {
+							"//tr[contains(.,'Roles Regrole3 Name')]/td[@headers='_125_rolesSearchContainer_col-title']/a")) {
 					break;
 				}
 			}
@@ -146,8 +149,9 @@ public class EditUser3RegRole3Test extends BaseTestCase {
 		}
 
 		assertEquals(RuntimeVariables.replace("Roles Regrole3 Name"),
-			selenium.getText("//tr[contains(.,'Roles Regrole3 Name')]/td[1]/a"));
-		selenium.clickAt("//tr[contains(.,'Roles Regrole3 Name')]/td[1]/a",
+			selenium.getText(
+				"//tr[contains(.,'Roles Regrole3 Name')]/td[@headers='_125_rolesSearchContainer_col-title']/a"));
+		selenium.clickAt("//tr[contains(.,'Roles Regrole3 Name')]/td[@headers='_125_rolesSearchContainer_col-title']/a",
 			RuntimeVariables.replace("Roles Regrole3 Name"));
 		selenium.selectWindow("null");
 
@@ -180,9 +184,6 @@ public class EditUser3RegRole3Test extends BaseTestCase {
 			selenium.getText("//div[@class='portlet-msg-success']"));
 		assertEquals(RuntimeVariables.replace("Roles Regrole3 Name"),
 			selenium.getText(
-				"//div[@id='_125_rolesSearchContainerSearchContainer']//tr[contains(.,'Roles Regrole3 Name')]/td[1]"));
-		assertEquals(RuntimeVariables.replace("Remove"),
-			selenium.getText(
-				"//div[@id='_125_rolesSearchContainerSearchContainer']//tr[contains(.,'Roles Regrole3 Name')]/td[2]/a"));
+				"//tr[contains(.,'Roles Regrole3 Name')]/td[@headers='_125_rolesSearchContainer_col-title']"));
 	}
 }

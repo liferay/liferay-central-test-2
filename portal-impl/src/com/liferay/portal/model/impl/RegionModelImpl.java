@@ -85,6 +85,7 @@ public class RegionModelImpl extends BaseModelImpl<Region>
 			true);
 	public static long ACTIVE_COLUMN_BITMASK = 1L;
 	public static long COUNTRYID_COLUMN_BITMASK = 2L;
+	public static long REGIONCODE_COLUMN_BITMASK = 4L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -237,7 +238,17 @@ public class RegionModelImpl extends BaseModelImpl<Region>
 	}
 
 	public void setRegionCode(String regionCode) {
+		_columnBitmask |= REGIONCODE_COLUMN_BITMASK;
+
+		if (_originalRegionCode == null) {
+			_originalRegionCode = _regionCode;
+		}
+
 		_regionCode = regionCode;
+	}
+
+	public String getOriginalRegionCode() {
+		return GetterUtil.getString(_originalRegionCode);
 	}
 
 	@JSON
@@ -374,6 +385,8 @@ public class RegionModelImpl extends BaseModelImpl<Region>
 
 		regionModelImpl._setOriginalCountryId = false;
 
+		regionModelImpl._originalRegionCode = regionModelImpl._regionCode;
+
 		regionModelImpl._originalActive = regionModelImpl._active;
 
 		regionModelImpl._setOriginalActive = false;
@@ -471,6 +484,7 @@ public class RegionModelImpl extends BaseModelImpl<Region>
 	private long _originalCountryId;
 	private boolean _setOriginalCountryId;
 	private String _regionCode;
+	private String _originalRegionCode;
 	private String _name;
 	private boolean _active;
 	private boolean _originalActive;

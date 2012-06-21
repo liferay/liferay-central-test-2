@@ -39,6 +39,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.servlet.filters.BasePortalFilter;
 import com.liferay.portal.servlet.filters.dynamiccss.DynamicCSSUtil;
 import com.liferay.portal.util.JavaScriptBundleUtil;
+import com.liferay.portal.util.LimitedFilesCache;
 import com.liferay.portal.util.MinifierUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
@@ -81,7 +82,7 @@ public class MinifierFilter extends BasePortalFilter {
 				_CSS_IMPORT_END, importX + _CSS_IMPORT_BEGIN.length());
 
 			if ((importX == -1) || (importY == -1)) {
-				sb.append(content.substring(pos, content.length()));
+				sb.append(content.substring(pos));
 
 				break;
 			}
@@ -139,8 +140,7 @@ public class MinifierFilter extends BasePortalFilter {
 				importContent = StringUtil.replace(
 					importContent,
 					new String[] {
-						"url('" + relativePath,
-						"url(\"" + relativePath,
+						"url('" + relativePath, "url(\"" + relativePath,
 						"url(" + relativePath
 					},
 					new String[] {
@@ -171,6 +171,16 @@ public class MinifierFilter extends BasePortalFilter {
 
 		if (Validator.isNull(_servletContextName)) {
 			_tempDir += "/portal";
+		}
+
+		if (PropsValues.MINIFIER_FILES_LIMIT > 0) {
+			_limitedFilesCache = new LimitedFilesCache<String>(
+				PropsValues.MINIFIER_FILES_LIMIT);
+
+			if (_log.isDebugEnabled()) {
+				_log.debug(
+					"Minifier files limit " + PropsValues.MINIFIER_FILES_LIMIT);
+			}
 		}
 	}
 
@@ -224,6 +234,10 @@ public class MinifierFilter extends BasePortalFilter {
 			minifierBundleId);
 
 		File cacheFile = new File(cacheFileName);
+
+		if (_limitedFilesCache != null) {
+			_limitedFilesCache.put(cacheFileName);
+		}
 
 		if (cacheFile.exists()) {
 			boolean staleCache = false;
@@ -326,7 +340,7 @@ public class MinifierFilter extends BasePortalFilter {
 			cacheCommonFileName + "_E_CONTENT_TYPE");
 		File cacheDataFile = new File(cacheCommonFileName + "_E_DATA");
 
-		if ((cacheDataFile.exists()) &&
+		if (cacheDataFile.exists() &&
 			(cacheDataFile.lastModified() >= file.lastModified())) {
 
 			if (cacheContentTypeFile.exists()) {
@@ -478,8 +492,7 @@ public class MinifierFilter extends BasePortalFilter {
 
 	protected String sterilizeQueryString(String queryString) {
 		return StringUtil.replace(
-			queryString,
-			new String[] {StringPool.SLASH, StringPool.BACK_SLASH},
+			queryString, new String[] {StringPool.SLASH, StringPool.BACK_SLASH},
 			new String[] {StringPool.UNDERLINE, StringPool.UNDERLINE});
 	}
 
@@ -505,6 +518,7 @@ public class MinifierFilter extends BasePortalFilter {
 	private static Pattern _pattern = Pattern.compile(
 		"^(\\.ie|\\.js\\.ie)([^}]*)}", Pattern.MULTILINE);
 
+	private LimitedFilesCache<String> _limitedFilesCache;
 	private ServletContext _servletContext;
 	private String _servletContextName;
 	private String _tempDir = _TEMP_DIR;

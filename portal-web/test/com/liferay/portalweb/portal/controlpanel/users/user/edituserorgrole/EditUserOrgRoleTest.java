@@ -63,17 +63,21 @@ public class EditUserOrgRoleTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("userfn"),
-			selenium.getText("//tr[contains(.,'usersn')]/td[2]"));
+			selenium.getText(
+				"//td[@id='_125_usersSearchContainer_col-first-name_row-usersn']/a"));
 		assertEquals(RuntimeVariables.replace("userln"),
-			selenium.getText("//tr[contains(.,'usersn')]/td[3]"));
+			selenium.getText(
+				"//td[@id='_125_usersSearchContainer_col-last-name_row-usersn']/a"));
 		assertEquals(RuntimeVariables.replace("usersn"),
-			selenium.getText("//tr[contains(.,'usersn')]/td[4]"));
+			selenium.getText(
+				"//td[@id='_125_usersSearchContainer_col-screen-name_row-usersn']/a"));
 		assertEquals(RuntimeVariables.replace("Organization Name"),
-			selenium.getText("//tr[contains(.,'usersn')]/td[6]"));
+			selenium.getText(
+				"//td[@id='_125_usersSearchContainer_col-organizations_row-usersn']/a"));
 		assertEquals(RuntimeVariables.replace("Actions"),
 			selenium.getText(
-				"//tr[contains(.,'usersn')]/td/span[@title='Actions']/ul/li/strong/a"));
-		selenium.clickAt("//tr[contains(.,'usersn')]/td/span[@title='Actions']/ul/li/strong/a",
+				"//span[@title='Actions']/ul[@id='_125_usersSearchContainer_usersn_menu']/li/strong/a"));
+		selenium.clickAt("//span[@title='Actions']/ul[@id='_125_usersSearchContainer_usersn_menu']/li/strong/a",
 			RuntimeVariables.replace("Actions"));
 
 		for (int second = 0;; second++) {
@@ -137,7 +141,7 @@ public class EditUserOrgRoleTest extends BaseTestCase {
 
 			try {
 				if (selenium.isVisible(
-							"//tr[contains(.,'Roles Orgrole Name')]/td[1]/a")) {
+							"//tr[contains(.,'Roles Orgrole Name')]/td[@headers='_125_rolesSearchContainer_col-title']/a")) {
 					break;
 				}
 			}
@@ -148,8 +152,9 @@ public class EditUserOrgRoleTest extends BaseTestCase {
 		}
 
 		assertEquals(RuntimeVariables.replace("Roles Orgrole Name"),
-			selenium.getText("//tr[contains(.,'Roles Orgrole Name')]/td[1]/a"));
-		selenium.clickAt("//tr[contains(.,'Roles Orgrole Name')]/td[1]/a",
+			selenium.getText(
+				"//tr[contains(.,'Roles Orgrole Name')]/td[@headers='_125_rolesSearchContainer_col-title']/a"));
+		selenium.clickAt("//tr[contains(.,'Roles Orgrole Name')]/td[@headers='_125_rolesSearchContainer_col-title']/a",
 			RuntimeVariables.replace("Roles Orgrole Name"));
 		selenium.selectWindow("null");
 
@@ -183,12 +188,9 @@ public class EditUserOrgRoleTest extends BaseTestCase {
 			selenium.getText("//div[@class='portlet-msg-success']"));
 		assertEquals(RuntimeVariables.replace("Roles Orgrole Name"),
 			selenium.getText(
-				"//div[@id='_125_organizationRolesSearchContainerSearchContainer']//tr[contains(.,'Roles Orgrole Name')]/td[1]"));
+				"//td[@id='_125_organizationRolesSearchContainer_col-title_row-1']"));
 		assertEquals(RuntimeVariables.replace("Organization Name"),
 			selenium.getText(
-				"//div[@id='_125_organizationRolesSearchContainerSearchContainer']//tr[contains(.,'Roles Orgrole Name')]/td[2]"));
-		assertEquals(RuntimeVariables.replace("Remove"),
-			selenium.getText(
-				"//div[@id='_125_organizationRolesSearchContainerSearchContainer']//tr[contains(.,'Roles Orgrole Name')]/td[3]/a"));
+				"//td[@id='_125_organizationRolesSearchContainer_col-organization_row-1']"));
 	}
 }

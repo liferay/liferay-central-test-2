@@ -14,7 +14,9 @@
 
 package com.liferay.portal.servlet.filters.strip;
 
-import com.liferay.portal.kernel.concurrent.ConcurrentLRUCache;
+import com.liferay.portal.kernel.cache.key.CacheKeyGenerator;
+import com.liferay.portal.kernel.cache.key.CacheKeyGeneratorUtil;
+import com.liferay.portal.kernel.concurrent.ConcurrentLFUCache;
 import com.liferay.portal.kernel.io.OutputStreamWriter;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
 import com.liferay.portal.kernel.log.Log;
@@ -61,7 +63,7 @@ public class StripFilter extends BasePortalFilter {
 
 	public StripFilter() {
 		if (PropsValues.MINIFIER_INLINE_CONTENT_CACHE_SIZE > 0) {
-			_minifierCache = new ConcurrentLRUCache<String, String>(
+			_minifierCache = new ConcurrentLFUCache<String, String>(
 				PropsValues.MINIFIER_INLINE_CONTENT_CACHE_SIZE);
 		}
 	}
@@ -232,7 +234,11 @@ public class StripFilter extends BasePortalFilter {
 		String minifiedContent = content;
 
 		if (PropsValues.MINIFIER_INLINE_CONTENT_CACHE_SIZE > 0) {
-			String key = String.valueOf(content.hashCode());
+			CacheKeyGenerator cacheKeyGenerator =
+				CacheKeyGeneratorUtil.getCacheKeyGenerator(
+					StripFilter.class.getName());
+
+			String key = String.valueOf(cacheKeyGenerator.getCacheKey(content));
 
 			minifiedContent = _minifierCache.get(key);
 
@@ -455,7 +461,11 @@ public class StripFilter extends BasePortalFilter {
 		String minifiedContent = content;
 
 		if (PropsValues.MINIFIER_INLINE_CONTENT_CACHE_SIZE > 0) {
-			String key = String.valueOf(content.hashCode());
+			CacheKeyGenerator cacheKeyGenerator =
+				CacheKeyGeneratorUtil.getCacheKeyGenerator(
+					StripFilter.class.getName());
+
+			String key = String.valueOf(cacheKeyGenerator.getCacheKey(content));
 
 			minifiedContent = _minifierCache.get(key);
 
@@ -674,6 +684,6 @@ public class StripFilter extends BasePortalFilter {
 	private static Log _log = LogFactoryUtil.getLog(StripFilter.class);
 
 	private Set<String> _ignorePaths = new HashSet<String>();
-	private ConcurrentLRUCache<String, String> _minifierCache;
+	private ConcurrentLFUCache<String, String> _minifierCache;
 
 }

@@ -50,6 +50,7 @@ public class ReleaseWrapper implements Release, ModelWrapper<Release> {
 		attributes.put("buildNumber", getBuildNumber());
 		attributes.put("buildDate", getBuildDate());
 		attributes.put("verified", getVerified());
+		attributes.put("state", getState());
 		attributes.put("testString", getTestString());
 
 		return attributes;
@@ -96,6 +97,12 @@ public class ReleaseWrapper implements Release, ModelWrapper<Release> {
 
 		if (verified != null) {
 			setVerified(verified);
+		}
+
+		Integer state = (Integer)attributes.get("state");
+
+		if (state != null) {
+			setState(state);
 		}
 
 		String testString = (String)attributes.get("testString");
@@ -256,6 +263,24 @@ public class ReleaseWrapper implements Release, ModelWrapper<Release> {
 	*/
 	public void setVerified(boolean verified) {
 		_release.setVerified(verified);
+	}
+
+	/**
+	* Returns the state of this release.
+	*
+	* @return the state of this release
+	*/
+	public int getState() {
+		return _release.getState();
+	}
+
+	/**
+	* Sets the state of this release.
+	*
+	* @param state the state of this release
+	*/
+	public void setState(int state) {
+		_release.setState(state);
 	}
 
 	/**

@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.security.pacl.permission.PortalRuntimePermissio
 
 /**
  * @author Brian Wing Shun Chan
+ * @since  6.1, replaced com.liferay.portal.kernel.servlet.ImageServletTokenUtil
  */
 public class WebServerServletTokenUtil {
 

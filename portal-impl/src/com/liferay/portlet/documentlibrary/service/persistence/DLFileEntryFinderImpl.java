@@ -64,6 +64,9 @@ public class DLFileEntryFinderImpl
 	public static final String FIND_BY_EXTRA_SETTINGS =
 		DLFileEntryFinder.class.getName() + ".findByExtraSettings";
 
+	public static final String FIND_BY_MISVERSIONED =
+		DLFileEntryFinder.class.getName() + ".findByMisversioned";
+
 	public static final String FIND_BY_NO_ASSETS =
 		DLFileEntryFinder.class.getName() + ".findByNoAssets";
 
@@ -291,6 +294,28 @@ public class DLFileEntryFinderImpl
 		}
 	}
 
+	public List<DLFileEntry> findByMisversioned() throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			String sql = CustomSQLUtil.get(FIND_BY_MISVERSIONED);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity("DLFileEntry", DLFileEntryImpl.class);
+
+			return q.list(true);
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public List<DLFileEntry> findByNoAssets() throws SystemException {
 		Session session = null;
 
@@ -440,7 +465,8 @@ public class DLFileEntryFinderImpl
 
 				if (inlineSQLHelper && InlineSQLHelperUtil.isEnabled()) {
 
-					sql = StringUtil.replace(sql, "[$JOIN$]",
+					sql = StringUtil.replace(
+						sql, "[$JOIN$]",
 						CustomSQLUtil.get(
 							DLFolderFinderImpl.JOIN_FV_BY_DL_FILE_ENTRY));
 				}

@@ -53,6 +53,7 @@ import com.liferay.portal.lar.PortletImporter;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
+import com.liferay.portal.model.LayoutPrototype;
 import com.liferay.portal.model.LayoutReference;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.LayoutSetPrototype;
@@ -67,6 +68,7 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.model.impl.PortletPreferencesImpl;
+import com.liferay.portal.security.pacl.PACLClassLoaderUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.base.LayoutLocalServiceBaseImpl;
 import com.liferay.portal.util.PortalUtil;
@@ -76,6 +78,7 @@ import com.liferay.portal.util.comparator.LayoutComparator;
 import com.liferay.portal.util.comparator.LayoutPriorityComparator;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.sites.util.SitesUtil;
 
 import java.io.File;
 import java.io.IOException;
@@ -103,6 +106,7 @@ import javax.portlet.PortletException;
  * @author Raymond Augé
  * @author Jorge Ferrer
  * @author Bruno Farache
+ * @author Vilmos Papp
  */
 public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
@@ -260,6 +264,28 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		}
 
 		layoutPersistence.update(layout, false);
+
+		if (Validator.isNotNull(layoutPrototypeUuid) &&
+			!layoutPrototypeLinkEnabled) {
+
+			LayoutPrototype layoutPrototype =
+				layoutPrototypeLocalService.getLayoutPrototypeByUuid(
+					layoutPrototypeUuid);
+
+			try {
+				SitesUtil.applyLayoutPrototype(
+					layoutPrototype, layout, layoutPrototypeLinkEnabled);
+			}
+			catch (PortalException pe) {
+				throw pe;
+			}
+			catch (SystemException se) {
+				throw se;
+			}
+			catch (Exception e) {
+				throw new SystemException(e);
+			}
+		}
 
 		// Resources
 
@@ -926,8 +952,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			groupId, privateLayout, friendlyURL);
 
 		if ((layout == null) &&
-			(friendlyURL.startsWith(StringPool.SLASH)) &&
-			(Validator.isNumber(friendlyURL.substring(1)))) {
+			friendlyURL.startsWith(StringPool.SLASH) &&
+			Validator.isNumber(friendlyURL.substring(1))) {
 
 			long layoutId = GetterUtil.getLong(friendlyURL.substring(1));
 
@@ -1109,6 +1135,13 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		return layoutReferences.toArray(
 			new LayoutReference[layoutReferences.size()]);
+	}
+
+	public int getLayoutsByLayoutPrototypeUuidCount(String layoutPrototypeUuid)
+		throws SystemException {
+
+		return layoutPersistence.countByLayoutPrototypeUuid(
+			layoutPrototypeUuid);
 	}
 
 	public int getLayoutsCount(Group group, boolean privateLayout)
@@ -1390,8 +1423,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 			importLayouts(userId, groupId, privateLayout, parameterMap, file);
 		}
-		catch (IOException e) {
-			throw new SystemException(e);
+		catch (IOException ioe) {
+			throw new SystemException(ioe);
 		}
 	}
 
@@ -1464,8 +1497,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			importPortletInfo(
 				userId, plid, groupId, portletId, parameterMap, file);
 		}
-		catch (IOException e) {
-			throw new SystemException(e);
+		catch (IOException ioe) {
+			throw new SystemException(ioe);
 		}
 	}
 
@@ -1693,8 +1726,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			}
 		}
 
-		boolean layoutUpdateable = GetterUtil.getBoolean(
-			serviceContext.getAttribute("layoutUpdateable"), true);
+		boolean layoutUpdateable = ParamUtil.getBoolean(
+			serviceContext, "layoutUpdateable", true);
 
 		UnicodeProperties typeSettingsProperties =
 			layout.getTypeSettingsProperties();
@@ -2134,12 +2167,14 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		DynamicQuery portletPreferencesDynamicQuery =
 			DynamicQueryFactoryUtil.forClass(
-				PortletPreferences.class, PortletPreferencesImpl.TABLE_NAME);
+				PortletPreferences.class, PortletPreferencesImpl.TABLE_NAME,
+				PACLClassLoaderUtil.getPortalClassLoader());
 
 		Property plidProperty = PropertyFactoryUtil.forName("plid");
 
 		DynamicQuery layoutDynamicQuery = DynamicQueryFactoryUtil.forClass(
-			Layout.class, LayoutImpl.TABLE_NAME);
+			Layout.class, LayoutImpl.TABLE_NAME,
+			PACLClassLoaderUtil.getPortalClassLoader());
 
 		Projection plidProjection = ProjectionFactoryUtil.property("plid");
 
@@ -2171,7 +2206,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 				junction.add(criterion);
 			}
-			else{
+			else {
 				Criterion criterion = RestrictionsFactoryUtil.eq(
 					"portletId", scopablePortlet.getPortletId());
 
@@ -2186,7 +2221,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 				portletPreferencesDynamicQuery);
 
 		for (PortletPreferences portletPreferences : portletPreferencesList) {
-			if ((portletPreferences.getPortletId() == null)) {
+			if (portletPreferences.getPortletId() == null) {
 				continue;
 			}
 

@@ -96,19 +96,20 @@ PollsQuestion question = (PollsQuestion)request.getAttribute(WebKeys.POLLS_QUEST
 </c:choose>
 
 <%
+boolean hasConfigurationPermission = PortletPermissionUtil.contains(permissionChecker, layout, portletDisplay.getId(), ActionKeys.CONFIGURATION);
+
 boolean hasViewPermission = true;
 
 if (question != null) {
 	hasViewPermission = PollsQuestionPermission.contains(permissionChecker, question, ActionKeys.VIEW);
 }
 
+boolean showAddPollIcon = hasConfigurationPermission && PollsPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_QUESTION);
 boolean showEditPollIcon = (question != null) && PollsQuestionPermission.contains(permissionChecker, question, ActionKeys.UPDATE);
-boolean showSelectPollIcon = PortletPermissionUtil.contains(permissionChecker, layout, portletDisplay.getId(), ActionKeys.CONFIGURATION);
-boolean showAddPollIcon = PortletPermissionUtil.contains(permissionChecker, layout, portletDisplay.getId(), ActionKeys.CONFIGURATION) && PollsPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_QUESTION);
-boolean showIconsActions = themeDisplay.isSignedIn() && (showEditPollIcon || showSelectPollIcon || showAddPollIcon);
+boolean showIconsActions = themeDisplay.isSignedIn() && (hasConfigurationPermission || showEditPollIcon || showAddPollIcon);
 %>
 
-<c:if test="<%= showIconsActions && hasViewPermission %>">
+<c:if test="<%= hasViewPermission && showIconsActions %>">
 
 	<%
 	Group controlPanelGroup = GroupLocalServiceUtil.getGroup(themeDisplay.getCompanyId(), GroupConstants.CONTROL_PANEL);
@@ -125,7 +126,7 @@ boolean showIconsActions = themeDisplay.isSignedIn() && (showEditPollIcon || sho
 	<div class="lfr-meta-actions icons-container">
 		<div class="icon-actions">
 			<c:if test="<%= showEditPollIcon %>">
-				<liferay-portlet:renderURL doAsGroupId="<%= scopeGroupId %>" plid="<%= controlPanelPlid %>" portletName="<%= PortletKeys.POLLS %>" refererPlid="<%= plid %>" windowState="<%= LiferayWindowState.POP_UP.toString() %>" var="editPollURL">
+				<liferay-portlet:renderURL doAsGroupId="<%= scopeGroupId %>" plid="<%= controlPanelPlid %>" portletName="<%= PortletKeys.POLLS %>" refererPlid="<%= plid %>" var="editPollURL" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
 					<liferay-portlet:param name="struts_action" value="/polls/edit_question" />
 					<liferay-portlet:param name="redirect" value="<%= redirectURL.toString() %>" />
 					<liferay-portlet:param name="referringPortletResource" value="<%= portletDisplay.getId() %>" />
@@ -133,7 +134,7 @@ boolean showIconsActions = themeDisplay.isSignedIn() && (showEditPollIcon || sho
 				</liferay-portlet:renderURL>
 
 				<%
-				String editQuestionURL = "javascript:Liferay.Util.openWindow({dialog: {width: 960}, id: '" + liferayPortletResponse.getNamespace() + "', title: '" + ResourceActionsUtil.getModelResource(locale, PollsQuestion.class.getName()) + "', uri:'" + HtmlUtil.escapeURL(editPollURL.toString()) + "'});";
+				String editQuestionURL = "javascript:Liferay.Util.openWindow({dialog: {width: 960}, id: '" + liferayPortletResponse.getNamespace() + "editQuestion', title: '" + ResourceActionsUtil.getModelResource(locale, PollsQuestion.class.getName()) + "', uri:'" + HtmlUtil.escapeURL(editPollURL.toString()) + "'});";
 				%>
 
 				<liferay-ui:icon
@@ -143,7 +144,7 @@ boolean showIconsActions = themeDisplay.isSignedIn() && (showEditPollIcon || sho
 				/>
 			</c:if>
 
-			<c:if test="<%= showSelectPollIcon %>">
+			<c:if test="<%= hasConfigurationPermission %>">
 				<liferay-ui:icon
 					cssClass="portlet-configuration"
 					image="configuration"
@@ -162,7 +163,7 @@ boolean showIconsActions = themeDisplay.isSignedIn() && (showEditPollIcon || sho
 				</liferay-portlet:renderURL>
 
 				<%
-				String addQuestionURL = "javascript:Liferay.Util.openWindow({dialog: {width: 960}, id: '" + liferayPortletResponse.getNamespace() + "', title: '" + ResourceActionsUtil.getModelResource(locale, PollsQuestion.class.getName()) + "', uri:'" + HtmlUtil.escapeURL(addPollURL.toString()) + "'});";
+				String addQuestionURL = "javascript:Liferay.Util.openWindow({dialog: {width: 960}, id: '" + liferayPortletResponse.getNamespace() + "editQuestion', title: '" + ResourceActionsUtil.getModelResource(locale, PollsQuestion.class.getName()) + "', uri:'" + HtmlUtil.escapeURL(addPollURL.toString()) + "'});";
 				%>
 
 				<liferay-ui:icon

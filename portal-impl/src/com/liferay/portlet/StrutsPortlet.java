@@ -30,8 +30,8 @@ import java.util.Map;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
+import javax.portlet.PortletContext;
 import javax.portlet.PortletException;
-import javax.portlet.PortletRequest;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 import javax.portlet.ResourceRequest;
@@ -206,8 +206,8 @@ public class StrutsPortlet extends LiferayPortlet {
 			// Call processAction of com.liferay.portal.struts.PortletAction
 
 			try {
-				PortletRequestProcessor processor = _getPortletRequestProcessor(
-					actionRequest);
+				PortletRequestProcessor processor =
+					_getPortletRequestProcessor();
 
 				processor.process(actionRequest, actionResponse, path);
 			}
@@ -235,8 +235,7 @@ public class StrutsPortlet extends LiferayPortlet {
 		// Call serveResource of com.liferay.portal.struts.PortletAction
 
 		try {
-			PortletRequestProcessor processor = _getPortletRequestProcessor(
-				resourceRequest);
+			PortletRequestProcessor processor = _getPortletRequestProcessor();
 
 			processor.process(resourceRequest, resourceResponse);
 		}
@@ -270,8 +269,7 @@ public class StrutsPortlet extends LiferayPortlet {
 		}
 
 		try {
-			PortletRequestProcessor processor = _getPortletRequestProcessor(
-				renderRequest);
+			PortletRequestProcessor processor = _getPortletRequestProcessor();
 
 			processor.process(renderRequest, renderResponse);
 		}
@@ -301,10 +299,10 @@ public class StrutsPortlet extends LiferayPortlet {
 	protected String templatePath;
 	protected String viewAction;
 
-	private PortletRequestProcessor _getPortletRequestProcessor(
-		PortletRequest portletRequest) {
+	private PortletRequestProcessor _getPortletRequestProcessor() {
+		PortletContext portletContext = getPortletContext();
 
-		return (PortletRequestProcessor)getPortletContext().getAttribute(
+		return (PortletRequestProcessor)portletContext.getAttribute(
 			WebKeys.PORTLET_STRUTS_PROCESSOR);
 	}
 

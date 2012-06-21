@@ -111,7 +111,7 @@ public class EditEntryAction extends PortletAction {
 				oldUrlTitle += "/maximized";
 			}
 
-			if ((entry != null) && (Validator.isNotNull(oldUrlTitle)) &&
+			if ((entry != null) && Validator.isNotNull(oldUrlTitle) &&
 				(redirect.endsWith("/blogs/" + oldUrlTitle) ||
 				 redirect.contains("/blogs/" + oldUrlTitle + "?") ||
 				 redirect.contains("/blog/" + oldUrlTitle + "?"))) {
@@ -132,8 +132,7 @@ public class EditEntryAction extends PortletAction {
 				}
 
 				if (pos < redirect.length()) {
-					newRedirect +=
-						"?" + redirect.substring(pos + 1, redirect.length());
+					newRedirect += "?" + redirect.substring(pos + 1);
 				}
 
 				redirect = newRedirect;

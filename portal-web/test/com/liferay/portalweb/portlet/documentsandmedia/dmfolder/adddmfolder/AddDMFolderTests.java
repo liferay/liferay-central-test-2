@@ -16,6 +16,7 @@ package com.liferay.portalweb.portlet.documentsandmedia.dmfolder.adddmfolder;
 
 import com.liferay.portalweb.portal.BaseTestSuite;
 import com.liferay.portalweb.portal.util.TearDownPageTest;
+import com.liferay.portalweb.portlet.documentsandmedia.dmfolder.adddmfolder.TearDownDMFolderTest;
 import com.liferay.portalweb.portlet.documentsandmedia.portlet.addportletdm.AddPageDMTest;
 import com.liferay.portalweb.portlet.documentsandmedia.portlet.addportletdm.AddPortletDMTest;
 
@@ -32,9 +33,9 @@ public class AddDMFolderTests extends BaseTestSuite {
 		testSuite.addTestSuite(AddPortletDMTest.class);
 		testSuite.addTestSuite(AddDMFolderTest.class);
 		testSuite.addTestSuite(ViewDMFolderTest.class);
-		testSuite.addTestSuite(ViewDMFolderBreadcrumbTest.class);
 		testSuite.addTestSuite(ViewDMFolderActionsNavigationTest.class);
 		testSuite.addTestSuite(ViewDMFolderActionsThumbnailTest.class);
+		testSuite.addTestSuite(ViewDMFolderBreadcrumbTest.class);
 		testSuite.addTestSuite(TearDownDMFolderTest.class);
 		testSuite.addTestSuite(TearDownPageTest.class);
 

@@ -303,7 +303,7 @@ public class PluginPackageUtil {
 
 		for (PluginPackage pluginPackage : pluginPackages) {
 			if ((latestPluginPackage == null) ||
-				(pluginPackage.isLaterVersionThan(latestPluginPackage))) {
+				pluginPackage.isLaterVersionThan(latestPluginPackage)) {
 
 				latestPluginPackage = pluginPackage;
 			}
@@ -424,8 +424,8 @@ public class PluginPackageUtil {
 
 				return repository.findPluginByArtifactURL(url);
 			}
-			catch (PluginPackageException pe) {
-				_log.error("Unable to load repository " + repositoryURL, pe);
+			catch (PluginPackageException ppe) {
+				_log.error("Unable to load repository " + repositoryURL, ppe);
 			}
 		}
 
@@ -716,11 +716,11 @@ public class PluginPackageUtil {
 				throw new PluginPackageException("Download returned 0 bytes");
 			}
 		}
-		catch (MalformedURLException mue) {
+		catch (MalformedURLException murle) {
 			_repositoryCache.remove(repositoryURL);
 
 			throw new PluginPackageException(
-				"Invalid URL " + pluginsXmlURL, mue);
+				"Invalid URL " + pluginsXmlURL, murle);
 		}
 		catch (IOException ioe) {
 			_repositoryCache.remove(repositoryURL);
@@ -1297,12 +1297,12 @@ public class PluginPackageUtil {
 
 				repositoryReport.addSuccess(repositoryURL);
 			}
-			catch (PluginPackageException pe) {
-				repositoryReport.addError(repositoryURL, pe);
+			catch (PluginPackageException ppe) {
+				repositoryReport.addError(repositoryURL, ppe);
 
 				_log.error(
 					"Unable to load repository " + repositoryURL + " " +
-						pe.toString());
+						ppe.toString());
 			}
 
 		}

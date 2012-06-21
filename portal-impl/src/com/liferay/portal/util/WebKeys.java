@@ -184,6 +184,8 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 
 	public static final String JOURNAL_STRUCTURE_EL_PARENT_ID = "JOURNAL_STRUCTURE_EL_PARENT_ID";
 
+	public static final String JOURNAL_STRUCTURE_EL_REPEAT_COUNT_MAP = "JOURNAL_STRUCTURE_EL_REPEAT_COUNT_MAP";
+
 	public static final String JOURNAL_STRUCTURE_EL_REPEATABLE = "JOURNAL_STRUCTURE_EL_REPEATABLE";
 
 	public static final String JOURNAL_STRUCTURE_EL_REPEATABLE_PROTOTYPE = "JOURNAL_STRUCTURE_EL_REPEATABLE_PROTOTYPE";
@@ -372,7 +374,7 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 
 	public static final String SETUP_WIZARD_PROPERTIES = "SETUP_WIZARD_PROPERTIES";
 
-	public static final String SETUP_WIZARD_PROPERTIES_UPDATED = "SETUP_WIZARD_PROPERTIES_UPDATED";
+	public static final String SETUP_WIZARD_PROPERTIES_FILE_CREATED = "SETUP_WIZARD_PROPERTIES_FILE_CREATED";
 
 	public static final String SHOPPING_CATEGORY = "SHOPPING_CATEGORY";
 

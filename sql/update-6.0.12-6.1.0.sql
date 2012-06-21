@@ -337,8 +337,6 @@ alter table LayoutSet add layoutSetPrototypeUuid VARCHAR(75) null;
 alter table LayoutSet add layoutSetPrototypeLinkEnabled BOOLEAN null;
 alter table LayoutSet drop column layoutSetPrototypeId;
 
-drop index IX_5ABC2905 on LayoutSet;
-
 COMMIT_TRANSACTION;
 
 update LayoutSet set createDate = CURRENT_TIMESTAMP;
@@ -576,6 +574,8 @@ alter table User_ drop column active_;
 alter table UserGroup add addedByLDAPImport BOOLEAN;
 
 alter table UserNotificationEvent add archived BOOLEAN;
+
+delete from VirtualHost where hostname = '';
 
 alter table WorkflowDefinitionLink add classPK LONG;
 alter table WorkflowDefinitionLink add typePK LONG;

@@ -183,10 +183,6 @@ public class PortletDataContextImpl implements PortletDataContext {
 			AssetCategoryLocalServiceUtil.getCategories(
 				clazz.getName(), classPK);
 
-		if (assetCategories.isEmpty()) {
-			return;
-		}
-
 		_assetCategoryUuidsMap.put(
 			getPrimaryKeyString(clazz, classPK),
 			StringUtil.split(
@@ -274,10 +270,6 @@ public class PortletDataContextImpl implements PortletDataContext {
 
 		String[] tagNames = AssetTagLocalServiceUtil.getTagNames(
 			clazz.getName(), classPK);
-
-		if (tagNames.length == 0) {
-			return;
-		}
 
 		_assetTagNamesMap.put(getPrimaryKeyString(clazz, classPK), tagNames);
 	}
@@ -503,8 +495,8 @@ public class PortletDataContextImpl implements PortletDataContext {
 		}
 		else if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
 			Map<Long, Set<String>> roleIdsToActionIds = getActionIds_6(
-				_companyId, roleIds.getArray(), resourceName,
-				resourcePK, actionIds);
+				_companyId, roleIds.getArray(), resourceName, resourcePK,
+				actionIds);
 
 			for (Map.Entry<Long, String> entry : roleIdsToNames.entrySet()) {
 				long roleId = entry.getKey();
@@ -1201,7 +1193,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 		}
 	}
 
-	public boolean isDataStrategyMirrorWithOverwritting() {
+	public boolean isDataStrategyMirrorWithOverwriting() {
 		if (_dataStrategy.equals(
 				PortletDataHandlerKeys.DATA_STRATEGY_MIRROR_OVERWRITE)) {
 
@@ -1230,7 +1222,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 			return true;
 		}
 		else if ((_startDate.compareTo(modifiedDate) <= 0) &&
-				 (_endDate.after(modifiedDate))) {
+				 _endDate.after(modifiedDate)) {
 
 			return true;
 		}
@@ -1433,7 +1425,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 		}
 
 		return path.substring(0, pos).concat("-expando").concat(
-			path.substring(pos, path.length()));
+			path.substring(pos));
 	}
 
 	protected String getPrimaryKeyString(Class<?> clazz, long classPK) {

@@ -398,6 +398,10 @@
 		<priority value="ERROR" />
 	</category>
 
+	<category name="com.liferay.portal.search.IndexerRegistryImpl">
+		<priority value="WARN" />
+	</category>
+
 	<category name="com.liferay.portal.search.lucene">
 		<priority value="INFO" />
 	</category>
@@ -1036,6 +1040,10 @@
 
 	<category name="com.liferay.portlet.wiki.importers">
 		<priority value="WARN" />
+	</category>
+
+	<category name="com.liferay.resourcesimporter">
+		<priority value="INFO" />
 	</category>
 
 	<category name="com.liferay.samplestruts">

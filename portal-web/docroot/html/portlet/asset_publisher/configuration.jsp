@@ -37,6 +37,7 @@ Group scopeGroup = themeDisplay.getScopeGroup();
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 	<aui:input name="tabs2" type="hidden" value="<%= tabs2 %>" />
 	<aui:input name="redirect" type="hidden" value="<%= configurationRenderURL.toString() %>" />
+	<aui:input name="groupId" type="hidden" />
 	<aui:input name="assetEntryType" type="hidden" value="<%= typeSelection %>" />
 	<aui:input name="typeSelection" type="hidden" />
 	<aui:input name="assetEntryId" type="hidden" />
@@ -93,7 +94,7 @@ Group scopeGroup = themeDisplay.getScopeGroup();
 			Arrays.sort(groupIds);
 			%>
 
-			<aui:select label="" name="preferences--defaultScope--">
+			<aui:select label="" name="preferences--defaultScope--" onChange='<%= renderResponse.getNamespace() + "selectScope();" %>'>
 				<aui:option label='<%= LanguageUtil.get(pageContext,"select-more-than-one") + "..." %>' selected="<%= groupIds.length > 1 %>" value="<%= false %>" />
 
 				<optgroup label="<liferay-ui:message key="scopes" />">
@@ -122,13 +123,13 @@ Group scopeGroup = themeDisplay.getScopeGroup();
 
 			<div class="<%= defaultScope ? "aui-helper-hidden" : "" %>" id="<portlet:namespace />scopesBoxes">
 				<liferay-ui:input-move-boxes
-					leftTitle="selected"
-					rightTitle="available"
 					leftBoxName="currentScopeIds"
-					rightBoxName="availableScopeIds"
-					leftReorder="true"
 					leftList="<%= scopesLeftList %>"
+					leftReorder="true"
+					leftTitle="selected"
+					rightBoxName="availableScopeIds"
 					rightList="<%= scopesRightList %>"
+					rightTitle="available"
 				/>
 			</div>
 		</liferay-util:buffer>
@@ -159,8 +160,8 @@ Group scopeGroup = themeDisplay.getScopeGroup();
 
 											<%
 											for (AssetRendererFactory curRendererFactory : AssetRendererFactoryRegistryUtil.getAssetRendererFactories()) {
-												if (curRendererFactory.isSelectable() && (IndexerRegistryUtil.getIndexer(curRendererFactory.getClassName()) != null)) {
-													String taglibURL = "javascript:" + renderResponse.getNamespace() + "selectionForType('" + curRendererFactory.getClassName() + "')";
+												if (curRendererFactory.isSelectable()) {
+													String taglibURL = "javascript:" + renderResponse.getNamespace() + "selectionForType('" + groupId + "', '" + curRendererFactory.getClassName() + "')";
 												%>
 
 													<liferay-ui:icon
@@ -302,6 +303,12 @@ Group scopeGroup = themeDisplay.getScopeGroup();
 							AssetPublisherUtil.removeAndStoreSelection(deletedAssets, preferences);
 							%>
 
+							<c:if test="<%= !deletedAssets.isEmpty() %>">
+								<div class="portlet-msg-info">
+									<liferay-ui:message key="the-selected-assets-have-been-removed-from-the-list-because-they-do-not-belong-in-the-scope-of-this-portlet" />
+								</div>
+							</c:if>
+
 							<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 						</aui:fieldset>
 					</liferay-ui:panel>
@@ -377,13 +384,13 @@ Group scopeGroup = themeDisplay.getScopeGroup();
 
 							<div class="<%= anyAssetType ? "aui-helper-hidden" : "" %>" id="<portlet:namespace />classNamesBoxes">
 								<liferay-ui:input-move-boxes
-									leftTitle="selected"
-									rightTitle="available"
 									leftBoxName="currentClassNameIds"
-									rightBoxName="availableClassNameIds"
-									leftReorder="true"
 									leftList="<%= typesLeftList %>"
+									leftReorder="true"
+									leftTitle="selected"
+									rightBoxName="availableClassNameIds"
 									rightList="<%= typesRightList %>"
+									rightTitle="available"
 								/>
 							</div>
 
@@ -450,13 +457,13 @@ Group scopeGroup = themeDisplay.getScopeGroup();
 
 								<div class="<%= assetSelectedClassTypeIds.length > 1 ? "" : "aui-helper-hidden" %>" id="<portlet:namespace /><%= className %>Boxes">
 									<liferay-ui:input-move-boxes
-										leftTitle="selected"
-										rightTitle="available"
 										leftBoxName='<%= className + "currentClassTypeIds" %>'
-										rightBoxName='<%= className + "availableClassTypeIds" %>'
-										leftReorder="true"
 										leftList="<%= subTypesLeftList %>"
+										leftReorder="true"
+										leftTitle="selected"
+										rightBoxName='<%= className + "availableClassTypeIds" %>'
 										rightList="<%= subTypesRightList %>"
+										rightTitle="available"
 									/>
 								</div>
 							</div>
@@ -528,7 +535,7 @@ Group scopeGroup = themeDisplay.getScopeGroup();
 							</aui:fieldset>
 						</div>
 
-						<aui:input label='<%= LanguageUtil.format(pageContext, "show-only-assets-with-x-as-its-display-page", layout.getName(locale), false) %>' name="preferences--showOnlyLayoutAssets--" type="checkbox" value="<%= showOnlyLayoutAssets %>" />
+						<aui:input label='<%= LanguageUtil.format(pageContext, "show-only-assets-with-x-as-its-display-page", HtmlUtil.escape(layout.getName(locale)), false) %>' name="preferences--showOnlyLayoutAssets--" type="checkbox" value="<%= showOnlyLayoutAssets %>" />
 
 						<aui:input label="include-tags-specified-in-the-url" name="preferences--mergeUrlTags--" type="checkbox" value="<%= mergeUrlTags %>" />
 
@@ -735,11 +742,20 @@ Group scopeGroup = themeDisplay.getScopeGroup();
 		submitForm(document.<portlet:namespace />fm);
 	}
 
-	function <portlet:namespace />selectionForType(type) {
+	function <portlet:namespace />selectionForType(groupId, type) {
+		document.<portlet:namespace />fm.<portlet:namespace />groupId.value = groupId;
 		document.<portlet:namespace />fm.<portlet:namespace />typeSelection.value = type;
 		document.<portlet:namespace />fm.<portlet:namespace />assetEntryOrder.value = -1;
 
 		submitForm(document.<portlet:namespace />fm, '<%= configurationRenderURL.toString() %>');
+	}
+
+	function <portlet:namespace />selectScope() {
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = 'select-scope';
+
+		if (document.<portlet:namespace />fm.<portlet:namespace />defaultScope.value != 'false') {
+			submitForm(document.<portlet:namespace />fm);
+		}
 	}
 
 	Liferay.provide(
@@ -774,11 +790,35 @@ Group scopeGroup = themeDisplay.getScopeGroup();
 		['liferay-util-list-fields']
 	);
 
+	Liferay.provide(
+		window,
+		'<portlet:namespace />selectScopes',
+		function() {
+			if (document.<portlet:namespace />fm.<portlet:namespace />scopeIds) {
+				document.<portlet:namespace />fm.<portlet:namespace />scopeIds.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />currentScopeIds);
+			}
+
+			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = 'select-scope';
+
+			submitForm(document.<portlet:namespace />fm);
+		},
+		['liferay-util-list-fields']
+	);
+
 	Liferay.Util.toggleSelectBox('<portlet:namespace />anyAssetType','false','<portlet:namespace />classNamesBoxes');
 	Liferay.Util.toggleSelectBox('<portlet:namespace />defaultScope','false','<portlet:namespace />scopesBoxes');
 	Liferay.Util.toggleBoxes('<portlet:namespace />enableRssCheckbox','<portlet:namespace />rssOptions');
 
 	Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />selectionStyle);
+
+	Liferay.after(
+		'inputmoveboxes:moveItem',
+		function(event) {
+			if ((event.fromBox.get('id') == '<portlet:namespace />currentScopeIds') || ( event.toBox.get('id') == '<portlet:namespace />currentScopeIds')) {
+				<portlet:namespace />selectScopes();
+			}
+		}
+	);
 </aui:script>
 
 <c:if test='<%= selectionStyle.equals("dynamic") %>'>
@@ -831,15 +871,15 @@ Group scopeGroup = themeDisplay.getScopeGroup();
 
 		assetSelector.on(
 			'change',
-			function(event){
+			function(event) {
 				<portlet:namespace />toggleSubclasses();
 			}
 		);
 
 		Liferay.after(
 			'inputmoveboxes:moveItem',
-			function(event){
-				if ((event.fromBox.get('id') == '<portlet:namespace />currentClassNameIds') || ( event.toBox.get('id') == '<portlet:namespace />currentClassNameIds')) {
+			function(event) {
+				if ((event.fromBox.get('id') == '<portlet:namespace />currentClassNameIds') || (event.toBox.get('id') == '<portlet:namespace />currentClassNameIds')) {
 					<portlet:namespace />toggleSubclasses();
 				}
 			}

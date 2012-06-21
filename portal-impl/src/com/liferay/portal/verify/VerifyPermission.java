@@ -15,18 +15,21 @@
 package com.liferay.portal.verify;
 
 import com.liferay.portal.NoSuchResourceException;
+import com.liferay.portal.NoSuchResourcePermissionException;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.Permission;
 import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.ResourceCode;
+import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.ResourcePermission;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.RoleConstants;
@@ -53,7 +56,8 @@ import java.util.List;
  * @author Matthew Kong
  * @author Raymond Augé
  */
-public class VerifyPermission extends VerifyProcess {
+public class VerifyPermission
+	extends VerifyProcess implements ResourceConstants {
 
 	protected void checkPermissions() throws Exception {
 		List<String> modelNames = ResourceActionsUtil.getModelNames();
@@ -181,7 +185,100 @@ public class VerifyPermission extends VerifyProcess {
 		}
 
 		checkPermissions();
+		fixLayoutRolePermissions();
 		fixOrganizationRolePermissions();
+	}
+
+	protected void fixLayoutRolePermissions() throws Exception {
+		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM != 6) {
+			return;
+		}
+
+		fixLayoutRolePermissions_6();
+
+		PermissionCacheUtil.clearCache();
+	}
+
+	/**
+	 * Fixes the case where layouts are missing the required owner role
+	 * permissions. This can happen when upgrading from permission algorithms 1,
+	 * 2, 3, and 4 to algorithm 6. This method will check for the presence of
+	 * the owner role's resource permission for all layouts. The resource
+	 * permission will be created if it does not exist. Both existing or newly
+	 * created resource permission default action IDs for owner role are
+	 * checked. If owner permissions for default action ID is missing, then the
+	 * permission is given to the owner. See LPS-26191.
+	 */
+	protected void fixLayoutRolePermissions_6() throws Exception {
+		List<String> actionIds = ResourceActionsUtil.getModelResourceActions(
+			Layout.class.getName());
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			ResourcePermission.class);
+
+		dynamicQuery.add(
+			RestrictionsFactoryUtil.eq("name", Layout.class.getName()));
+		dynamicQuery.add(RestrictionsFactoryUtil.ne("scope", SCOPE_INDIVIDUAL));
+
+		List<ResourcePermission> resourcePermissions =
+			ResourcePermissionLocalServiceUtil.dynamicQuery(dynamicQuery);
+
+		for (ResourcePermission resourcePermission : resourcePermissions) {
+			long companyId = resourcePermission.getCompanyId();
+			String primKey = resourcePermission.getPrimKey();
+
+			Role ownerRole = RoleLocalServiceUtil.getRole(
+				companyId, RoleConstants.OWNER);
+			long ownerRoleId = ownerRole.getRoleId();
+
+			try {
+				ResourcePermissionLocalServiceUtil.getResourcePermission(
+					companyId, Layout.class.getName(), SCOPE_INDIVIDUAL,
+					primKey, ownerRoleId);
+			}
+			catch (NoSuchResourcePermissionException nsrpe) {
+				ResourcePermissionLocalServiceUtil.setResourcePermissions(
+					companyId, Layout.class.getName(), SCOPE_INDIVIDUAL,
+					primKey, ownerRoleId,
+					ResourcePermissionLocalServiceImpl.EMPTY_ACTION_IDS);
+
+				ResourcePermissionLocalServiceUtil.getResourcePermission(
+					companyId, Layout.class.getName(), SCOPE_INDIVIDUAL,
+					primKey, ownerRoleId);
+			}
+
+			for (String actionId : actionIds) {
+				if (ResourcePermissionLocalServiceUtil.hasResourcePermission(
+						companyId, Layout.class.getName(), SCOPE_INDIVIDUAL,
+						primKey, ownerRoleId, actionId)) {
+
+					try {
+						ResourcePermissionLocalServiceUtil
+							.addResourcePermission(
+								companyId, Layout.class.getName(),
+								SCOPE_INDIVIDUAL, primKey, ownerRoleId,
+								actionId);
+					}
+					catch (Exception e) {
+						if (_log.isWarnEnabled()) {
+							StringBundler sb = new StringBundler(9);
+
+							sb.append("Cannot add resource permission on ");
+							sb.append("Layout for {actionId=");
+							sb.append(actionId);
+							sb.append(", companyId=");
+							sb.append(companyId);
+							sb.append(", role=Owner, scope=individual, ");
+							sb.append("primKey=");
+							sb.append(primKey);
+							sb.append("}");
+
+							_log.warn(sb);
+						}
+					}
+				}
+			}
+		}
 	}
 
 	protected void fixOrganizationRolePermissions() throws Exception {

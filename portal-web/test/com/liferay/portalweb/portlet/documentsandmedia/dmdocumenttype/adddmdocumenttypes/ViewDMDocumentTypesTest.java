@@ -41,7 +41,7 @@ public class ViewDMDocumentTypesTest extends BaseTestCase {
 
 			try {
 				if (selenium.isVisible(
-							"//div[@class='lfr-component lfr-menu-list']")) {
+							"//div[@class='lfr-component lfr-menu-list']/ul/li/a[contains(.,'DM DocumentType1 Name')]")) {
 					break;
 				}
 			}
@@ -101,7 +101,8 @@ public class ViewDMDocumentTypesTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("//iframe")) {
+				if (selenium.isVisible(
+							"//iframe[@id='_20_openFileEntryTypeView']")) {
 					break;
 				}
 			}
@@ -111,7 +112,7 @@ public class ViewDMDocumentTypesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.selectFrame("//iframe");
+		selenium.selectFrame("//iframe[@id='_20_openFileEntryTypeView']");
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -130,11 +131,29 @@ public class ViewDMDocumentTypesTest extends BaseTestCase {
 		}
 
 		selenium.type("//input[@title='Search Entries']",
-			RuntimeVariables.replace("Type1"));
-		selenium.clickAt("//input[@value='Search']",
+			RuntimeVariables.replace("DocumentType1"));
+		selenium.clickAt("//input[@class='aui-button-input aui-button-input-submit']",
 			RuntimeVariables.replace("Search"));
 		selenium.waitForPageToLoad("30000");
 		loadRequiredJavaScriptModules();
+
+		for (int second = 0;; second++) {
+			if (second >= 90) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible(
+							"//tr[contains(.,'DM DocumentType1 Name')]/td[1]")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		assertEquals(RuntimeVariables.replace("DM DocumentType1 Name"),
 			selenium.getText("//tr[contains(.,'DM DocumentType1 Name')]/td[1]"));
 
@@ -155,11 +174,29 @@ public class ViewDMDocumentTypesTest extends BaseTestCase {
 		}
 
 		selenium.type("//input[@title='Search Entries']",
-			RuntimeVariables.replace("Type2"));
-		selenium.clickAt("//input[@value='Search']",
+			RuntimeVariables.replace("DocumentType2"));
+		selenium.clickAt("//input[@class='aui-button-input aui-button-input-submit']",
 			RuntimeVariables.replace("Search"));
 		selenium.waitForPageToLoad("30000");
 		loadRequiredJavaScriptModules();
+
+		for (int second = 0;; second++) {
+			if (second >= 90) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible(
+							"//tr[contains(.,'DM DocumentType2 Name')]/td[1]")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		assertEquals(RuntimeVariables.replace("DM DocumentType2 Name"),
 			selenium.getText("//tr[contains(.,'DM DocumentType2 Name')]/td[1]"));
 
@@ -180,11 +217,29 @@ public class ViewDMDocumentTypesTest extends BaseTestCase {
 		}
 
 		selenium.type("//input[@title='Search Entries']",
-			RuntimeVariables.replace("Type3"));
-		selenium.clickAt("//input[@value='Search']",
+			RuntimeVariables.replace("DocumentType3"));
+		selenium.clickAt("//input[@class='aui-button-input aui-button-input-submit']",
 			RuntimeVariables.replace("Search"));
 		selenium.waitForPageToLoad("30000");
 		loadRequiredJavaScriptModules();
+
+		for (int second = 0;; second++) {
+			if (second >= 90) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible(
+							"//tr[contains(.,'DM DocumentType3 Name')]/td[1]")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		assertEquals(RuntimeVariables.replace("DM DocumentType3 Name"),
 			selenium.getText("//tr[contains(.,'DM DocumentType3 Name')]/td[1]"));
 		selenium.selectFrame("relative=top");

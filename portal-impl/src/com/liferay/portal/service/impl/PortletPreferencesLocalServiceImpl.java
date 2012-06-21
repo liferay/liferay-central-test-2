@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.spring.aop.Skip;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
@@ -106,6 +107,7 @@ public class PortletPreferencesLocalServiceImpl
 			ownerId, ownerType, plid, portletId);
 	}
 
+	@Skip
 	public javax.portlet.PortletPreferences getDefaultPreferences(
 			long companyId, String portletId)
 		throws SystemException {
@@ -307,17 +309,17 @@ public class PortletPreferencesLocalServiceImpl
 			String portletId, String defaultPreferences)
 		throws SystemException {
 
-		Portlet portlet = portletLocalService.getPortletById(
-			companyId, portletId);
-
 		PortletPreferences portletPreferences =
 			portletPreferencesPersistence.fetchByO_O_P_P(
 				ownerId, ownerType, plid, portletId);
 
 		if (portletPreferences == null) {
+			Portlet portlet = portletLocalService.getPortletById(
+				companyId, portletId);
+
 			if (PortletPreferencesThreadLocal.isStrict() &&
 				(Validator.isNull(defaultPreferences) ||
-					((portlet != null) && portlet.isUndeployedPortlet()))) {
+				 ((portlet != null) && portlet.isUndeployedPortlet()))) {
 
 				return new PortletPreferencesImpl();
 			}

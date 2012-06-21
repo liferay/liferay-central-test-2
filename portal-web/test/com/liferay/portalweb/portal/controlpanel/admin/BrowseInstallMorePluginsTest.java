@@ -31,7 +31,7 @@ public class BrowseInstallMorePluginsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("link=Control Panel")) {
+				if (selenium.isElementPresent("link=Control Panel")) {
 					break;
 				}
 			}
@@ -76,8 +76,8 @@ public class BrowseInstallMorePluginsTest extends BaseTestCase {
 			RuntimeVariables.replace("Hook Plugins"));
 		selenium.waitForPageToLoad("30000");
 		loadRequiredJavaScriptModules();
-		assertEquals(RuntimeVariables.replace("Hook Plugin"),
-			selenium.getText("//th/span/a"));
+		assertEquals(RuntimeVariables.replace("No hook plugins were found."),
+			selenium.getText("//div[@class='portlet-msg-info']"));
 		selenium.clickAt("link=Web Plugins",
 			RuntimeVariables.replace("Web Plugins"));
 		selenium.waitForPageToLoad("30000");

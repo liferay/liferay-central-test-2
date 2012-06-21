@@ -15,7 +15,11 @@
 package com.liferay.portalweb.portlet.webcontentdisplay.comment.addwcwebcontentcommentwcd;
 
 import com.liferay.portalweb.portal.BaseTestSuite;
+import com.liferay.portalweb.portal.controlpanel.webcontent.wcwebcontent.addwcwebcontent.TearDownWCWebContentTest;
 import com.liferay.portalweb.portal.util.TearDownPageTest;
+import com.liferay.portalweb.portlet.webcontentdisplay.portlet.addportletwcd.AddPageWCDTest;
+import com.liferay.portalweb.portlet.webcontentdisplay.portlet.addportletwcd.AddPortletWCDTest;
+import com.liferay.portalweb.portlet.webcontentdisplay.wcwebcontent.addwcwebcontentwcd.AddWCWebContentWCDTest;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -31,7 +35,7 @@ public class AddWCWebContentCommentWCDTests extends BaseTestSuite {
 		testSuite.addTestSuite(AddWCWebContentWCDTest.class);
 		testSuite.addTestSuite(ConfigurePortletEnableCommentsTest.class);
 		testSuite.addTestSuite(AddWCWebContentCommentWCDTest.class);
-		testSuite.addTestSuite(TearDownWebContentTest.class);
+		testSuite.addTestSuite(TearDownWCWebContentTest.class);
 		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;

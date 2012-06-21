@@ -64,17 +64,21 @@ public class AddOrganizationPublicPageTest extends BaseTestCase {
 				loadRequiredJavaScriptModules();
 				assertEquals(RuntimeVariables.replace(
 						"Organization Name\nBelongs to an organization of type Regular Organization."),
-					selenium.getText("//tr[3]/td"));
+					selenium.getText(
+						"//td[@id='_134_groupsSearchContainer_col-name_row--organization-name']/a"));
 				assertEquals(RuntimeVariables.replace("Private"),
-					selenium.getText("//td[2]/a"));
+					selenium.getText(
+						"//td[@id='_134_groupsSearchContainer_col-type_row--organization-name']/a"));
 				assertEquals(RuntimeVariables.replace("1 Organization"),
-					selenium.getText("//td[3]/div"));
+					selenium.getText(
+						"//td[@id='_134_groupsSearchContainer_col-members_row--organization-name']"));
 				assertEquals(RuntimeVariables.replace("Yes"),
-					selenium.getText("//tr[3]/td[4]"));
+					selenium.getText(
+						"//td[@id='_134_groupsSearchContainer_col-active_row--organization-name']"));
 				assertEquals(RuntimeVariables.replace("Actions"),
 					selenium.getText(
-						"//span[@title='Actions']/ul/li/strong/a/span"));
-				selenium.clickAt("//span[@title='Actions']/ul/li/strong/a/span",
+						"//span[@title='Actions']/ul[@id='_134_groupsSearchContainer_-organization-name_menu']/li/strong/a/span"));
+				selenium.clickAt("//span[@title='Actions']/ul[@id='_134_groupsSearchContainer_-organization-name_menu']/li/strong/a/span",
 					RuntimeVariables.replace("Actions"));
 
 				for (int second = 0;; second++) {
@@ -117,7 +121,8 @@ public class AddOrganizationPublicPageTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isVisible("//input[@id='_156_name_en_US']")) {
+						if (selenium.isVisible(
+									"//input[@id='_156_addLayoutName_en_US']")) {
 							break;
 						}
 					}
@@ -127,7 +132,7 @@ public class AddOrganizationPublicPageTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.type("//input[@id='_156_name_en_US']",
+				selenium.type("//input[@id='_156_addLayoutName_en_US']",
 					RuntimeVariables.replace("Public Page"));
 				selenium.clickAt("//input[@value='Add Page']",
 					RuntimeVariables.replace("Add Page"));
@@ -138,7 +143,7 @@ public class AddOrganizationPublicPageTest extends BaseTestCase {
 					selenium.getText("//div[@class='portlet-msg-success']"));
 
 				boolean pagePresent = selenium.isVisible(
-						"//li/ul/li/div/div[3]/a");
+						"//a[@id='layoutsTree_layout_public-page']");
 
 				if (pagePresent) {
 					label = 2;
@@ -159,7 +164,7 @@ public class AddOrganizationPublicPageTest extends BaseTestCase {
 					try {
 						if (RuntimeVariables.replace("Public Page")
 												.equals(selenium.getText(
-										"//li/ul/li/div/div[3]/a"))) {
+										"//a[@id='layoutsTree_layout_public-page']"))) {
 							break;
 						}
 					}
@@ -170,7 +175,8 @@ public class AddOrganizationPublicPageTest extends BaseTestCase {
 				}
 
 				assertEquals(RuntimeVariables.replace("Public Page"),
-					selenium.getText("//li/ul/li/div/div[3]/a"));
+					selenium.getText(
+						"//a[@id='layoutsTree_layout_public-page']"));
 
 			case 100:
 				label = -1;

@@ -57,9 +57,8 @@ public class SaveAndCheckinDMDocumentTxtTest extends BaseTestCase {
 		selenium.clickAt("//button[.='Edit']", RuntimeVariables.replace("Edit"));
 		selenium.waitForPageToLoad("30000");
 		loadRequiredJavaScriptModules();
-		selenium.type("//input[@id='_20_file']",
-			RuntimeVariables.replace(
-				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\demo\\media\\dependencies\\Document_2.txt"));
+		selenium.uploadCommonFile("//input[@id='_20_file']",
+			RuntimeVariables.replace("Document_2.txt"));
 		selenium.type("//input[@id='_20_title']",
 			RuntimeVariables.replace("DM Document Title Edit"));
 		selenium.clickAt("//input[@value='Save and Checkin']",

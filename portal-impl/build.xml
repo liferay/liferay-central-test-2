@@ -398,6 +398,157 @@ public class Creole10Parser]]></replacevalue>
 		<delete dir="${tstamp.value}" />
 	</target>
 
+	<target name="build-selenium-server-2">
+		<tstamp>
+			<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
+		</tstamp>
+
+		<unzip
+			dest="${tstamp.value}"
+			src="${project.dir}/lib/development/selenium-server-2.jar"
+		/>
+
+		<delete includeemptydirs="true">
+
+			<!-- bcprov.jar -->
+
+			<fileset
+				dir="${tstamp.value}"
+				includes="org/bouncycastle/**"
+			/>
+
+			<!-- bsh.jar -->
+
+			<fileset
+				dir="${tstamp.value}"
+				includes="bsh/**"
+			/>
+
+			<!-- commons-codec.jar -->
+
+			<fileset
+				dir="${tstamp.value}"
+				includes="org/apache/commons/codec/**"
+			/>
+
+			<!-- commons-collections.jar -->
+
+			<fileset
+				dir="${tstamp.value}"
+				includes="org/apache/commons/collections/**"
+			/>
+
+			<!-- commons-io.jar -->
+
+			<fileset
+				dir="${tstamp.value}"
+				includes="org/apache/commons/io/**"
+			/>
+
+			<!-- commons-lang.jar -->
+
+			<fileset
+				dir="${tstamp.value}"
+				includes="org/apache/commons/lang/**"
+			/>
+
+			<!-- commons-logging.jar -->
+
+			<fileset
+				dir="${tstamp.value}"
+				includes="org/apache/commons/logging/**"
+			/>
+
+			<!-- ecj.jar -->
+
+			<fileset
+				dir="${tstamp.value}"
+				includes="org/eclipse/jdt/**"
+			/>
+
+			<!-- hamcrest*.jar -->
+
+			<fileset
+				dir="${tstamp.value}"
+				includes="org/hamcrest/**"
+			/>
+
+			<!-- junit.jar -->
+
+			<fileset
+				dir="${tstamp.value}"
+				includes="junit/**,org/junit/**"
+			/>
+
+			<!-- jasper.jar -->
+
+			<fileset
+				dir="${tstamp.value}"
+				includes="org/apache/jasper/**"
+			/>
+
+			<!-- json-java.jar -->
+
+			<fileset
+				dir="${tstamp.value}"
+				includes="org/json/**"
+			/>
+
+			<!-- nekohtml.jar -->
+
+			<fileset
+				dir="${tstamp.value}"
+				includes="org/cyberneko/**"
+			/>
+
+			<!-- serializer.jar -->
+
+			<fileset
+				dir="${tstamp.value}"
+				includes="org/apache/xml/serializer/**"
+			/>
+
+			<!-- servlet-api.jar -->
+
+			<fileset
+				dir="${tstamp.value}"
+				includes="javax/servlet/**"
+			/>
+
+			<!-- slf4j-*.jar -->
+
+			<fileset
+				dir="${tstamp.value}"
+				includes="org/slf4j/**"
+			/>
+
+			<!-- xalan.jar -->
+
+			<fileset
+				dir="${tstamp.value}"
+				includes="java_cup/**,org/apache/bcel/**,org/apache/regexp/**,org/apache/xalan/**,org/apache/xml/**,org/apache/xpath/**,trax/**"
+			/>
+
+			<!-- xerces.jar -->
+
+			<fileset
+				dir="${tstamp.value}"
+				includes="org/apache/html/**,org/apache/wml/**,org/apache/xerces/**,org/apache/xml/serialize/**"
+			/>
+
+			<!-- xml-apis.jar -->
+
+			<fileset
+				dir="${tstamp.value}"
+				includes="javax/xml/**,org/apache/xmlcommons/**,org/xml/sax/**,org/w3c/dom/**"
+			/>
+		</delete>
+
+		<zip basedir="${tstamp.value}" destfile="${project.dir}/lib/development/selenium-server-2.jar.new" />
+
+		<delete dir="${tstamp.value}" />
+	</target>
+
 	<target name="build-service">
 		<java
 			classname="com.liferay.portal.tools.servicebuilder.ServiceBuilder"
@@ -428,6 +579,7 @@ public class Creole10Parser]]></replacevalue>
 			<arg value="service.bean.locator.util=com.liferay.portal.kernel.bean.PortalBeanLocatorUtil" />
 			<arg value="service.props.util=com.liferay.portal.util.PropsUtil" />
 			<arg value="service.target.entity.name=${service.target.entity.name}" />
+			<arg value="service.test.dir=${basedir}/test/integration" />
 		</java>
 
 		<delete file="ServiceBuilder.temp" />
@@ -864,60 +1016,11 @@ public class Creole10Parser]]></replacevalue>
 		<antcall target="build-wsdd-portlets" />
 	</target>
 
-	<target name="build-yui">
-		<tstamp>
-			<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
-		</tstamp>
-
-		<unzip src="${project.dir}/tools/rhino1_6R7.zip" dest="${tstamp.value}" />
-		<unzip src="${project.dir}/tools/yuicompressor-2.4.2.zip" dest="${tstamp.value}" />
-
-		<move todir="${tstamp.value}/rhino1_6R7/src/org">
-			<fileset dir="${tstamp.value}/yuicompressor-2.4.2/src/org" includes="**/*.java" />
-		</move>
-
-		<move file="${tstamp.value}/rhino1_6R7/deprecatedsrc/org/mozilla" todir="${tstamp.value}/rhino1_6R7/deprecatedsrc/com/liferay" />
-		<move file="${tstamp.value}/rhino1_6R7/src/org/mozilla" todir="${tstamp.value}/rhino1_6R7/src/com/liferay" />
-		<move file="${tstamp.value}/rhino1_6R7/toolsrc/org/mozilla" todir="${tstamp.value}/rhino1_6R7/toolsrc/com/liferay" />
-		<move file="${tstamp.value}/rhino1_6R7/xmlimplsrc/org/mozilla" todir="${tstamp.value}/rhino1_6R7/xmlimplsrc/com/liferay" />
-		<move file="${tstamp.value}/yuicompressor-2.4.2/src/com/yahoo" todir="${tstamp.value}/yuicompressor-2.4.2/src/com/liferay" />
-
-		<replace dir="${tstamp.value}" includes="**/build.xml,**/*.java,**/*.properties">
-			<replacefilter token="com.yahoo" value="com.liferay.yahoo" />
-			<replacefilter token="org.mozilla" value="com.liferay.mozilla" />
-			<replacefilter token="org/mozilla" value="com/liferay/mozilla" />
-		</replace>
-
-		<replace dir="${tstamp.value}/rhino1_6R7" includes="**/build.xml">
-			<replacetoken><![CDATA[includes="org/]]></replacetoken>
-			<replacevalue><![CDATA[includes="com/]]></replacevalue>
-		</replace>
-
-		<replace dir="${tstamp.value}/rhino1_6R7" includes="**/build.xml">
-			<replacetoken><![CDATA[excludes="org/]]></replacetoken>
-			<replacevalue><![CDATA[excludes="com/]]></replacevalue>
-		</replace>
-
-		<replace file="${tstamp.value}/yuicompressor-2.4.2/build.xml">
-			<replacetoken><![CDATA[<unjar src="${lib.dir}/jargs-1.0.jar" dest="${build.dir}/jar" />]]></replacetoken>
-			<replacevalue></replacevalue>
-		</replace>
-
-		<replace file="${tstamp.value}/yuicompressor-2.4.2/build.xml">
-			<replacetoken><![CDATA[<unjar src="${lib.dir}/rhino-1.6R7.jar" dest="${build.dir}/jar" />]]></replacetoken>
-			<replacevalue></replacevalue>
-		</replace>
-
-		<ant dir="${tstamp.value}/rhino1_6R7" target="jar" inheritAll="false" />
-
-		<copy file="${tstamp.value}/rhino1_6R7/build/rhino1_6R7/js.jar" tofile="${tstamp.value}/yuicompressor-2.4.2/lib/rhino-1.6R7.jar" />
-
-		<ant dir="${tstamp.value}/yuicompressor-2.4.2" target="build.jar" inheritAll="false" />
-
-		<move file="${tstamp.value}/rhino1_6R7/build/rhino1_6R7/js.jar" tofile="${project.dir}/lib/portal/liferay-rhino.jar.new" />
-		<move file="${tstamp.value}/yuicompressor-2.4.2/build/yuicompressor-2.4.2.jar" tofile="${project.dir}/lib/portal/liferay-yuicompressor.jar.new" />
-
-		<delete dir="${tstamp.value}" />
+	<target name="build-yui-compressor">
+		<jarjar jarfile="${project.dir}/lib/portal/liferay-yui-compressor.jar.new">
+			<rule pattern="org.mozilla.**" result="com.yahoo.platform.yui.mozilla.@1" />
+			<zipfileset src="${project.dir}/tools/yuicompressor-2.4.2.jar" />
+		</jarjar>
 	</target>
 
 	<target name="clean">
@@ -1014,7 +1117,7 @@ public class Creole10Parser]]></replacevalue>
 		</if>
 
 		<copy todir="${portal-impl.classes.dir}">
-			<fileset dir="src" excludes="**/*.java" />
+			<fileset dir="src" excludes="**/*.java,**/META-INF/javadocs-all*.xml" />
 		</copy>
 	</target>
 
@@ -1162,7 +1265,7 @@ public class Creole10Parser]]></replacevalue>
 			fork="true"
 			newenvironment="true"
 		>
-			<jvmarg value="-Dgit.plugins.dir=L:/projects/github/liferay-plugins-6.1.x" />
+			<jvmarg value="-Dgit.plugins.dir=L:/projects/github/liferay-plugins-ee-6.1.x" />
 			<jvmarg value="-Dsvn.plugins.dir=L:/projects/liferay.public/plugins/6.1.x" />
 			<jvmarg value="-Dsync.to=svn" />
 		</java>
@@ -1175,8 +1278,8 @@ public class Creole10Parser]]></replacevalue>
 			newenvironment="true"
 			fork="true"
 		>
-			<jvmarg value="-Dgit.plugins.dir=L:/projects/github/liferay-plugins" />
-			<jvmarg value="-Dsvn.plugins.dir=L:/projects/liferay.public/plugins/trunk" />
+			<jvmarg value="-Dgit.plugins.dir=L:/projects/github/liferay-plugins-ee-6.1.x" />
+			<jvmarg value="-Dsvn.plugins.dir=L:/projects/liferay.public/plugins/6.1.x" />
 			<jvmarg value="-Dsync.to=git" />
 		</java>
 	</target>

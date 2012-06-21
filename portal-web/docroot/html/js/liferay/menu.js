@@ -47,6 +47,8 @@ AUI.add(
 			up: STR_T
 		};
 
+		var MAP_LIVE_SEARCH = {};
+
 		var REGEX_DIRECTION = /\bdirection-(down|left|right|up)\b/;
 
 		var REGEX_MAX_DISPLAY_ITEMS = /max-display-items-(\d+)/;
@@ -163,7 +165,7 @@ AUI.add(
 				var menu = trigger.getData('menu');
 				var menuHeight = trigger.getData('menuHeight');
 
-				var liveSearch = menu && menu._liveSearch;
+				var liveSearch = menu && MAP_LIVE_SEARCH[menu.guid()];
 
 				if (liveSearch) {
 					liveSearch.search(STR_BLANK);
@@ -276,7 +278,11 @@ AUI.add(
 						trigger.addClass(CSS_STATE_ACTIVE);
 					}
 
-					overlay.bodyNode.focusManager.focus(0);
+					var focusManager = overlay.bodyNode.focusManager;
+
+					if (focusManager) {
+						focusManager.focus(0);
+					}
 				}
 			},
 
@@ -384,11 +390,13 @@ AUI.add(
 					bodyNode.on(
 						'key',
 						function(event) {
-							var anchor = instance._activeTrigger.one(SELECTOR_ANCHOR);
+							var activeTrigger = instance._activeTrigger;
 
-							instance._closeActiveMenu();
+							if (activeTrigger) {
+								var anchor = activeTrigger.one(SELECTOR_ANCHOR);
 
-							if (anchor) {
+								instance._closeActiveMenu();
+
 								anchor.focus();
 							}
 						},
@@ -433,7 +441,9 @@ AUI.add(
 			function(trigger, menu) {
 				var instance = Menu._INSTANCE;
 
-				var liveSearch = menu._liveSearch;
+				var id = menu.guid();
+
+				var liveSearch = MAP_LIVE_SEARCH[id];
 
 				if (!liveSearch) {
 					var searchId = A.guid();
@@ -472,12 +482,15 @@ AUI.add(
 					liveSearch.after(
 						'search',
 						function(event) {
-							bodyNode.focusManager.refresh();
-						},
-						instance
+							var focusManager = bodyNode.focusManager;
+
+							if (focusManager) {
+								focusManager.refresh();
+							}
+						}
 					);
 
-					menu._liveSearch = liveSearch;
+					MAP_LIVE_SEARCH[id] = liveSearch;
 				}
 			},
 			['aui-live-search'],
@@ -489,6 +502,8 @@ AUI.add(
 			'_registerMenu',
 			function(event) {
 				var instance = Menu._INSTANCE;
+
+				var handles = instance._handles;
 
 				var trigger = event.currentTarget;
 
@@ -504,12 +519,17 @@ AUI.add(
 					instance._activeMenu = menu;
 					instance._activeTrigger = trigger;
 
-					if (!instance._handles.length) {
-						instance._handles.push(
-							Liferay.on('portletDragStart', instance._closeActiveMenu, instance),
+					if (!handles.length) {
+						handles.push(
 							A.getWin().on('resize', A.debounce(instance._positionActiveMenu, 200, instance)),
 							A.getDoc().on(EVENT_CLICK, instance._closeActiveMenu, instance)
 						);
+
+						var DDM = A.DD && A.DD.DDM;
+
+						if (DDM) {
+							handles.push(DDM.on('ddm:start', instance._closeActiveMenu, instance));
+						}
 					}
 
 					instance._positionActiveMenu();

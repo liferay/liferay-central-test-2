@@ -111,7 +111,7 @@ public class AddOrganizationTest extends BaseTestCase {
 			RuntimeVariables.replace("11111"));
 		selenium.type("//input[@id='_125_addressCity0']",
 			RuntimeVariables.replace("Diamond Bar"));
-		selenium.clickAt("//input[@id='_125_addressPrimary0']",
+		selenium.clickAt("//input[@name='_125_addressPrimary']",
 			RuntimeVariables.replace("Primary"));
 
 		for (int second = 0;; second++) {

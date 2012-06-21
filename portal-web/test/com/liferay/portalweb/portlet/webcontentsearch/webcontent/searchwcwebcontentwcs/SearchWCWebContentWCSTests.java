@@ -15,11 +15,13 @@
 package com.liferay.portalweb.portlet.webcontentsearch.webcontent.searchwcwebcontentwcs;
 
 import com.liferay.portalweb.portal.BaseTestSuite;
+import com.liferay.portalweb.portal.controlpanel.webcontent.wcwebcontent.addwcwebcontent.AddWCWebContentTest;
+import com.liferay.portalweb.portal.controlpanel.webcontent.wcwebcontent.addwcwebcontent.TearDownWCWebContentTest;
 import com.liferay.portalweb.portal.util.TearDownPageTest;
-import com.liferay.portalweb.portlet.webcontentdisplay.comment.addwcwebcontentcommentwcd.AddPageWCDTest;
-import com.liferay.portalweb.portlet.webcontentdisplay.comment.addwcwebcontentcommentwcd.AddPortletWCDTest;
-import com.liferay.portalweb.portlet.webcontentsearch.portlet.addportlet.AddPageWCSTest;
-import com.liferay.portalweb.portlet.webcontentsearch.portlet.addportlet.AddPortletWCSTest;
+import com.liferay.portalweb.portlet.webcontentdisplay.portlet.addportletwcd.AddPageWCDTest;
+import com.liferay.portalweb.portlet.webcontentdisplay.portlet.addportletwcd.AddPortletWCDTest;
+import com.liferay.portalweb.portlet.webcontentsearch.portlet.addportletwcs.AddPageWCSTest;
+import com.liferay.portalweb.portlet.webcontentsearch.portlet.addportletwcs.AddPortletWCSTest;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -38,7 +40,7 @@ public class SearchWCWebContentWCSTests extends BaseTestSuite {
 		testSuite.addTestSuite(SelectWCWebContentWCDTest.class);
 		testSuite.addTestSuite(SearchWCWebContentWCSTest.class);
 		testSuite.addTestSuite(SearchWCWebContentQuotesWCSTest.class);
-		testSuite.addTestSuite(TearDownWebContentTest.class);
+		testSuite.addTestSuite(TearDownWCWebContentTest.class);
 		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;

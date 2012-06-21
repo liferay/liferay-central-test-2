@@ -19,9 +19,39 @@ addPortletURLs = getAddPortletURLs(liferayPortletRequest, liferayPortletResponse
 %>
 
 <c:if test="<%= !addPortletURLs.isEmpty() %>">
+
+	<%
+	String taglibId = "addNew";
+
+	if (groupIds.length > 1) {
+		taglibId = taglibId.concat("In");
+
+		if (themeDisplay.getCompanyGroupId() == groupId) {
+			taglibId = taglibId.concat("Global");
+		}
+		else {
+			Group group = GroupLocalServiceUtil.getGroup(groupId);
+
+			if (group.isLayout()) {
+				Layout scopeLayout = LayoutLocalServiceUtil.getLayout(group.getClassPK());
+
+				String friendlyURL = scopeLayout.getFriendlyURL();
+
+				taglibId = taglibId.concat(friendlyURL.substring(1));
+			}
+			else {
+				String friendlyURL = group.getFriendlyURL();
+
+				taglibId = taglibId.concat(friendlyURL.substring(1));
+			}
+		}
+	}
+	%>
+
 	<liferay-ui:icon-menu
 		align="left"
 		icon='<%= themeDisplay.getPathThemeImages() + "/common/add.png" %>'
+		id='<%= taglibId %>'
 		message='<%= LanguageUtil.format(pageContext, (groupIds.length == 1) ? "add-new" : "add-new-in-x", new Object[] {(GroupLocalServiceUtil.getGroup(groupId)).getDescriptiveName(locale)}) %>'
 		showWhenSingleIcon="<%= true %>"
 	>
@@ -47,7 +77,7 @@ addPortletURLs = getAddPortletURLs(liferayPortletRequest, liferayPortletResponse
 				int pos = className.indexOf(_CLASSNAME_SEPARATOR);
 
 				if (pos != -1) {
-					message = className.substring(pos + _CLASSNAME_SEPARATOR.length(), className.length());
+					message = className.substring(pos + _CLASSNAME_SEPARATOR.length());
 
 					className = className.substring(0, pos);
 				}
@@ -70,7 +100,7 @@ addPortletURLs = getAddPortletURLs(liferayPortletRequest, liferayPortletResponse
 				addPortletURLString = HttpUtil.addParameter(addPortletURLString, "layoutUuid", layout.getUuid());
 			}
 
-			String taglibEditURL = "javascript:Liferay.Util.openWindow({dialog: {width: 960}, id: '" + liferayPortletResponse.getNamespace() + "', title: '" + ResourceActionsUtil.getModelResource(locale, className) + "', uri:'" + HtmlUtil.escapeURL(addPortletURLString) + "'});";
+			String taglibEditURL = "javascript:Liferay.Util.openWindow({dialog: {width: 960}, id: '" + liferayPortletResponse.getNamespace() + "editAsset', title: '" + ResourceActionsUtil.getModelResource(locale, className) + "', uri:'" + HtmlUtil.escapeURL(addPortletURLString) + "'});";
 		%>
 
 			<liferay-ui:icon
@@ -151,21 +181,21 @@ public PortletURL getAddPortletURL(LiferayPortletRequest liferayPortletRequest, 
 		}
 
 		addPortletURL.setParameter("assetTagNames", StringUtil.merge(allAssetTagNames));
+	}
 
-		if (classTypeId > 0) {
-			addPortletURL.setParameter("classTypeId", String.valueOf(classTypeId));
+	if (classTypeId > 0) {
+		addPortletURL.setParameter("classTypeId", String.valueOf(classTypeId));
 
-			if (className.equals(DLFileEntry.class.getName())) {
-				addPortletURL.setParameter(Constants.CMD, Constants.ADD);
-				addPortletURL.setParameter("folderId", String.valueOf(DLFolderConstants.DEFAULT_PARENT_FOLDER_ID));
-				addPortletURL.setParameter("fileEntryTypeId", String.valueOf(classTypeId));
-			}
+		if (className.equals(DLFileEntry.class.getName())) {
+			addPortletURL.setParameter(Constants.CMD, Constants.ADD);
+			addPortletURL.setParameter("folderId", String.valueOf(DLFolderConstants.DEFAULT_PARENT_FOLDER_ID));
+			addPortletURL.setParameter("fileEntryTypeId", String.valueOf(classTypeId));
+		}
 
-			if (className.equals(JournalArticle.class.getName())) {
-				JournalStructure structure = JournalStructureLocalServiceUtil.getJournalStructure(classTypeId);
+		if (className.equals(JournalArticle.class.getName())) {
+			JournalStructure structure = JournalStructureLocalServiceUtil.getJournalStructure(classTypeId);
 
-				addPortletURL.setParameter("structureId", structure.getStructureId());
-			}
+			addPortletURL.setParameter("structureId", structure.getStructureId());
 		}
 	}
 

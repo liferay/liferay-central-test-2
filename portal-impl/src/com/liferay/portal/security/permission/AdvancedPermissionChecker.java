@@ -23,6 +23,7 @@ import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.SetUtil;
+import com.liferay.portal.kernel.util.UniqueList;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.GroupConstants;
@@ -52,7 +53,6 @@ import com.liferay.portal.service.TeamLocalServiceUtil;
 import com.liferay.portal.service.UserGroupLocalServiceUtil;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.util.PropsValues;
-import com.liferay.util.UniqueList;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -685,6 +685,17 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 		}
 	}
 
+	public boolean isOrganizationAdmin(long organizationId) {
+		try {
+			return isOrganizationAdminImpl(organizationId);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			return false;
+		}
+	}
+
 	protected void addTeamRoles(long userId, Group group, List<Role> roles)
 		throws Exception {
 
@@ -978,7 +989,7 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 		// Check if the layout manager has permission to do this action for the
 		// current portlet
 
-		if ((Validator.isNotNull(name)) && (Validator.isNotNull(primKey)) &&
+		if (Validator.isNotNull(name) && Validator.isNotNull(primKey) &&
 			(primKey.indexOf(PortletConstants.LAYOUT_SEPARATOR) != -1)) {
 
 			hasLayoutManagerPermission =
@@ -986,11 +997,21 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 					name, actionId);
 		}
 
-		if (checkAdmin &&
-			(isCompanyAdminImpl(companyId) ||
-			 (isGroupAdminImpl(groupId) && hasLayoutManagerPermission))) {
+		if (checkAdmin) {
+			if (isCompanyAdminImpl(companyId)) {
+				return true;
+			}
 
-			return true;
+			if (name.equals(Organization.class.getName())) {
+				long organizationId = GetterUtil.getInteger(primKey);
+
+				if (isOrganizationAdminImpl(organizationId)) {
+					return true;
+				}
+			}
+			else if (isGroupAdminImpl(groupId) && hasLayoutManagerPermission) {
+				return true;
+			}
 		}
 
 		logHasUserPermission(groupId, name, primKey, actionId, stopWatch, 1);
@@ -1142,6 +1163,47 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 		}
 
 		if (bag.isGroupOwner(this, group)) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	protected boolean isOrganizationAdminImpl(long organizationId)
+		throws Exception {
+
+		if (!signedIn) {
+			return false;
+		}
+
+		if (isOmniadmin()) {
+			return true;
+		}
+
+		if (organizationId <= 0) {
+			return false;
+		}
+
+		Organization organization =
+			OrganizationLocalServiceUtil.fetchOrganization(organizationId);
+
+		if (organization == null) {
+			return false;
+		}
+
+		if (isCompanyAdmin(organization.getCompanyId())) {
+			return true;
+		}
+
+		PermissionCheckerBag bag = getUserBag(
+			user.getUserId(), organization.getGroupId());
+
+		if (bag == null) {
+			_log.error("Bag should never be null");
+		}
+
+		if (bag.isOrganizationAdmin(this, organization)) {
 			return true;
 		}
 		else {

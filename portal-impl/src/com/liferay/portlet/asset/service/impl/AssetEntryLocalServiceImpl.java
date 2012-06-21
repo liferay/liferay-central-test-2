@@ -364,7 +364,7 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 		for (AssetEntry entry : entries) {
 			String className = PortalUtil.getClassName(entry.getClassNameId());
 
-			Indexer indexer = IndexerRegistryUtil.getIndexer(className);
+			Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(className);
 
 			indexer.reindex(className, entry.getClassPK());
 		}
@@ -390,6 +390,7 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 
 			searchContext.addFacet(scopeFacet);
 
+			searchContext.setAttribute("paginationType", "regular");
 			searchContext.setCompanyId(companyId);
 			searchContext.setEnd(end);
 			searchContext.setEntryClassNames(getClassNames(className));
@@ -429,6 +430,7 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 			attributes.put(Field.DESCRIPTION, description);
 			attributes.put(Field.TITLE, title);
 			attributes.put(Field.USER_NAME, userName);
+			attributes.put("paginationType", "regular");
 
 			SearchContext searchContext = new SearchContext();
 
@@ -590,7 +592,6 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 			entry.setClassNameId(classNameId);
 			entry.setClassPK(classPK);
 			entry.setClassUuid(classUuid);
-			entry.setClassTypeId(classTypeId);
 			entry.setVisible(visible);
 			entry.setPublishDate(publishDate);
 			entry.setExpirationDate(expirationDate);
@@ -604,6 +605,7 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 
 		entry.setGroupId(groupId);
 		entry.setModifiedDate(now);
+		entry.setClassTypeId(classTypeId);
 		entry.setVisible(visible);
 		entry.setStartDate(startDate);
 		entry.setEndDate(endDate);

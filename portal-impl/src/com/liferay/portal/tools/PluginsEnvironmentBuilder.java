@@ -18,10 +18,10 @@ import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.UniqueList;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.FileImpl;
 import com.liferay.portal.util.PropsValues;
-import com.liferay.util.UniqueList;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -266,10 +266,20 @@ public class PluginsEnvironmentBuilder {
 		sb.append("\t<classpathentry kind=\"con\" ");
 		sb.append("path=\"org.eclipse.jdt.launching.JRE_CONTAINER\" />\n");
 
-		if (_fileUtil.exists(projectDirName + "/test")) {
-			sb.append("\t<classpathentry excluding=\"**/.svn/**|.svn/\" ");
-			sb.append("kind=\"src\" path=\"test\" />\n");
+		boolean addJunitJars = false;
 
+		for (String testType :_TEST_TYPES) {
+			String testFolder = "test/" + testType;
+
+			if (_fileUtil.exists(projectDirName + "/" + testFolder)) {
+				addJunitJars = true;
+
+				sb.append("\t<classpathentry excluding=\"**/.svn/**|.svn/\" ");
+				sb.append("kind=\"src\" path=\""+ testFolder + "\" />\n");
+			}
+		}
+
+		if (addJunitJars) {
 			addClasspathEntry(sb, "/portal/lib/development/junit.jar");
 			addClasspathEntry(sb, "/portal/lib/portal/commons-io.jar");
 		}
@@ -458,6 +468,8 @@ public class PluginsEnvironmentBuilder {
 		"docroot/WEB-INF/ext-util-taglib/src", "docroot/WEB-INF/service",
 		"docroot/WEB-INF/src"
 	};
+
+	private static final String[] _TEST_TYPES = {"integration", "unit"};
 
 	private static FileImpl _fileUtil = FileImpl.getInstance();
 

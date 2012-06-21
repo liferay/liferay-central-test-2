@@ -24,6 +24,7 @@ import com.liferay.portal.ContactLastNameException;
 import com.liferay.portal.DuplicateUserEmailAddressException;
 import com.liferay.portal.DuplicateUserScreenNameException;
 import com.liferay.portal.EmailAddressException;
+import com.liferay.portal.GroupFriendlyURLException;
 import com.liferay.portal.NoSuchCountryException;
 import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.NoSuchListTypeException;
@@ -159,6 +160,7 @@ public class CreateAccountAction extends PortletAction {
 					 e instanceof ContactFullNameException ||
 					 e instanceof ContactLastNameException ||
 					 e instanceof EmailAddressException ||
+					 e instanceof GroupFriendlyURLException ||
 					 e instanceof NoSuchCountryException ||
 					 e instanceof NoSuchListTypeException ||
 					 e instanceof NoSuchOrganizationException ||
@@ -276,9 +278,8 @@ public class CreateAccountAction extends PortletAction {
 		Boolean openIdLoginPending = (Boolean)session.getAttribute(
 			WebKeys.OPEN_ID_LOGIN_PENDING);
 
-		if ((openIdLoginPending != null) &&
-			(openIdLoginPending.booleanValue()) &&
-			(Validator.isNotNull(openId))) {
+		if ((openIdLoginPending != null) && openIdLoginPending.booleanValue() &&
+			Validator.isNotNull(openId)) {
 
 			sendEmail = false;
 			openIdPending = true;

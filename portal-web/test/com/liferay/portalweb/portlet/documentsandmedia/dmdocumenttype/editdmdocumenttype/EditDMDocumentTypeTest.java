@@ -54,8 +54,7 @@ public class EditDMDocumentTypeTest extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace("Document Types"),
 			selenium.getText(
 				"//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a"));
-		selenium.clickAt("//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a",
-			RuntimeVariables.replace("Document Types"));
+		selenium.click("//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a");
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -63,7 +62,8 @@ public class EditDMDocumentTypeTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("//iframe")) {
+				if (selenium.isVisible(
+							"//iframe[@id='_20_openFileEntryTypeView']")) {
 					break;
 				}
 			}
@@ -73,7 +73,7 @@ public class EditDMDocumentTypeTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.selectFrame("//iframe");
+		selenium.selectFrame("//iframe[@id='_20_openFileEntryTypeView']");
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {

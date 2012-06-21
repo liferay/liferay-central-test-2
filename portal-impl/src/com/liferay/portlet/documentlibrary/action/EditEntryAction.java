@@ -173,15 +173,6 @@ public class EditEntryAction extends PortletAction {
 	protected void cancelCheckedOutEntries(ActionRequest actionRequest)
 		throws Exception {
 
-		long repositoryId = ParamUtil.getLong(actionRequest, "repositoryId");
-
-		long[] folderIds = StringUtil.split(
-			ParamUtil.getString(actionRequest, "folderIds"), 0L);
-
-		for (long folderId : folderIds) {
-			DLAppServiceUtil.lockFolder(repositoryId, folderId);
-		}
-
 		long[] fileEntryIds = StringUtil.split(
 			ParamUtil.getString(actionRequest, "fileEntryIds"), 0L);
 
@@ -192,15 +183,6 @@ public class EditEntryAction extends PortletAction {
 
 	protected void checkInEntries(ActionRequest actionRequest)
 		throws Exception {
-
-		long repositoryId = ParamUtil.getLong(actionRequest, "repositoryId");
-
-		long[] folderIds = StringUtil.split(
-			ParamUtil.getString(actionRequest, "folderIds"), 0L);
-
-		for (long folderId : folderIds) {
-			DLAppServiceUtil.unlockFolder(repositoryId, folderId, null);
-		}
 
 		long[] fileEntryIds = StringUtil.split(
 			ParamUtil.getString(actionRequest, "fileEntryIds"), 0L);
@@ -216,15 +198,6 @@ public class EditEntryAction extends PortletAction {
 
 	protected void checkOutEntries(ActionRequest actionRequest)
 		throws Exception {
-
-		long repositoryId = ParamUtil.getLong(actionRequest, "repositoryId");
-
-		long[] folderIds = StringUtil.split(
-			ParamUtil.getString(actionRequest, "folderIds"), 0L);
-
-		for (long folderId : folderIds) {
-			DLAppServiceUtil.lockFolder(repositoryId, folderId);
-		}
 
 		long[] fileEntryIds = StringUtil.split(
 			ParamUtil.getString(actionRequest, "fileEntryIds"), 0L);

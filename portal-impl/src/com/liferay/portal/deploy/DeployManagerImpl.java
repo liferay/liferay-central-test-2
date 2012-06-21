@@ -25,6 +25,7 @@ import com.liferay.portal.plugin.PluginPackageUtil;
 import java.io.File;
 
 import java.util.List;
+import java.util.Properties;
 
 /**
  * @author Jonathan Potter
@@ -69,6 +70,17 @@ public class DeployManagerImpl implements DeployManager {
 
 	public boolean isDeployed(String context) {
 		return PluginPackageUtil.isInstalled(context);
+	}
+
+	public PluginPackage readPluginPackageProperties(
+		String displayName, Properties properties) {
+
+		return PluginPackageUtil.readPluginPackageProperties(
+			displayName, properties);
+	}
+
+	public PluginPackage readPluginPackageXml(String xml) throws Exception {
+		return PluginPackageUtil.readPluginPackageXml(xml);
 	}
 
 	public void redeploy(String context) throws Exception {

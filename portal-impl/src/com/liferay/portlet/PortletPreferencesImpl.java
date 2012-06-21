@@ -44,14 +44,21 @@ public class PortletPreferencesImpl
 	implements Cloneable, PortletPreferences, Serializable {
 
 	public PortletPreferencesImpl() {
-		this(0, 0, 0, 0, null, Collections.<String, Preference>emptyMap());
+		this(
+			0, 0, 0, 0, null, null, Collections.<String, Preference>emptyMap());
+	}
+
+	public PortletPreferencesImpl(
+		String xml, Map<String, Preference> preferences) {
+
+		this(0, 0, 0, 0, null, xml, preferences);
 	}
 
 	public PortletPreferencesImpl(
 		long companyId, long ownerId, int ownerType, long plid,
-		String portletId, Map<String, Preference> preferences) {
+		String portletId, String xml, Map<String, Preference> preferences) {
 
-		super(companyId, ownerId, ownerType, preferences);
+		super(companyId, ownerId, ownerType, xml, preferences);
 
 		_plid = plid;
 		_portletId = portletId;
@@ -61,7 +68,7 @@ public class PortletPreferencesImpl
 	public Object clone() {
 		return new PortletPreferencesImpl(
 			getCompanyId(), getOwnerId(), getOwnerType(), _plid, _portletId,
-			getOriginalPreferences());
+			getOriginalXML(), getOriginalPreferences());
 	}
 
 	@Override
@@ -76,8 +83,8 @@ public class PortletPreferencesImpl
 			(getOwnerId() == portletPreferences.getOwnerId()) &&
 			(getOwnerType() == portletPreferences.getOwnerType()) &&
 			(getPlid() == portletPreferences.getPlid()) &&
-			(getPortletId().equals(portletPreferences.getPortletId())) &&
-			(getMap().equals(portletPreferences.getMap()))) {
+			getPortletId().equals(portletPreferences.getPortletId()) &&
+			getPreferences().equals(portletPreferences.getPreferences())) {
 
 			return true;
 		}
@@ -110,12 +117,10 @@ public class PortletPreferencesImpl
 			throw new ReadOnlyException(key);
 		}
 
-		if (_defaultPreferences == null) {
+		if ((_defaultPreferences == null) && (_portletId != null)) {
 			try {
-				if (_portletId != null) {
-					_defaultPreferences = PortletPreferencesLocalServiceUtil.
-						getDefaultPreferences(getCompanyId(), _portletId);
-				}
+				_defaultPreferences = PortletPreferencesLocalServiceUtil.
+					getDefaultPreferences(getCompanyId(), _portletId);
 			}
 			catch (Exception e) {
 				if (_log.isWarnEnabled()) {

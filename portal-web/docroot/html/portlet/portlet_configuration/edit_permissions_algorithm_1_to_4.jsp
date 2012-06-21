@@ -184,10 +184,10 @@ request.setAttribute("edit_permissions_algorithm_1_to_4.jsp-portletURL", portlet
 			</c:when>
 			<c:otherwise>
 				<liferay-ui:tabs
+					backURL="<%= redirect %>"
 					names="<%= tabs2Names %>"
 					param="tabs2"
 					url="<%= portletURL.toString() %>"
-					backURL="<%= redirect %>"
 				/>
 			</c:otherwise>
 		</c:choose>
@@ -244,12 +244,12 @@ request.setAttribute("edit_permissions_algorithm_1_to_4.jsp-portletURL", portlet
 
 				<div class="assign-permissions">
 					<liferay-ui:input-move-boxes
-						leftTitle="what-they-can-do"
-						rightTitle="what-they-cant-do"
 						leftBoxName="current_actions"
-						rightBoxName="available_actions"
 						leftList="<%= leftList %>"
+						leftTitle="what-they-can-do"
+						rightBoxName="available_actions"
 						rightList="<%= rightList %>"
+						rightTitle="what-they-cant-do"
 					/>
 
 					<aui:button-row>
@@ -303,12 +303,12 @@ request.setAttribute("edit_permissions_algorithm_1_to_4.jsp-portletURL", portlet
 
 				<div class="assign-permissions">
 					<liferay-ui:input-move-boxes
-						leftTitle="what-they-can-do"
-						rightTitle="what-they-cant-do"
 						leftBoxName="current_actions"
-						rightBoxName="available_actions"
 						leftList="<%= leftList %>"
+						leftTitle="what-they-can-do"
+						rightBoxName="available_actions"
 						rightList="<%= rightList %>"
+						rightTitle="what-they-cant-do"
 					/>
 
 					<aui:button-row>

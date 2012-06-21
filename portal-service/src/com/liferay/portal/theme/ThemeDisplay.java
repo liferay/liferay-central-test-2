@@ -861,7 +861,7 @@ public class ThemeDisplay implements Serializable {
 
 			String host = getCDNHost();
 
-			if (Validator.isNull(host) && isFacebook()) {
+			if (Validator.isNull(host)) {
 				host = getPortalURL();
 			}
 
@@ -871,7 +871,7 @@ public class ThemeDisplay implements Serializable {
 
 			String dynamicResourcesHost = getCDNDynamicResourcesHost();
 
-			if (Validator.isNull(dynamicResourcesHost) && isFacebook()) {
+			if (Validator.isNull(dynamicResourcesHost)) {
 				dynamicResourcesHost = getPortalURL();
 			}
 

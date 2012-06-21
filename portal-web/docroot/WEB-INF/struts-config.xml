@@ -3,12 +3,6 @@
 
 <struts-config>
 
-	<!-- Forms Beans -->
-
-	<form-beans>
-		<form-bean name="mapsMapsForm" type="com.liferay.portlet.maps.form.MapsForm" />
-	</form-beans>
-
 	<!-- Global Forwards -->
 
 	<global-forwards>
@@ -193,6 +187,8 @@
 		</action>
 
 		<action path="/admin_server/view" forward="portlet.admin.view" />
+
+		<action path="/admin_server/view_chart" type="com.liferay.portlet.admin.action.ViewChartAction" />
 
 		<!-- Alerts -->
 
@@ -599,6 +595,11 @@
 			<forward name="portlet.dynamic_data_lists.error" path="portlet.dynamic_data_lists.error" />
 		</action>
 
+		<action path="/dynamic_data_list_display/view_record_set" type="com.liferay.portlet.dynamicdatalists.action.EditRecordSetAction">
+			<forward name="portlet.dynamic_data_lists.edit_record_set" path="portlet.dynamic_data_lists.view_record_set" />
+			<forward name="portlet.dynamic_data_lists.error" path="portlet.dynamic_data_lists.error" />
+		</action>
+
 		<!-- Dynamic Data Lists -->
 
 		<action path="/dynamic_data_lists/edit_record" type="com.liferay.portlet.dynamicdatalists.action.EditRecordAction">
@@ -928,6 +929,17 @@
 			<forward name="portlet.layouts_admin.error" path="portlet.layout_prototypes.error" />
 		</action>
 
+		<action path="/layout_prototypes/export_layouts" type="com.liferay.portlet.layoutsadmin.action.ExportLayoutsAction">
+			<forward name="portlet.layouts_admin.error" path="portlet.layout_prototypes.error" />
+			<forward name="portlet.layouts_admin.export_layouts" path="portlet.layouts_admin.export_layouts" />
+		</action>
+
+		<action path="/layout_prototypes/import_layouts" type="com.liferay.portlet.layoutsadmin.action.ImportLayoutsAction">
+			<forward name="portlet.layouts_admin.edit_layouts" path="portlet.layouts_admin.edit_layouts" />
+			<forward name="portlet.layouts_admin.error" path="portlet.layouts_admin.error" />
+			<forward name="portlet.layouts_admin.export_layouts" path="portlet.layouts_admin.export_layouts" />
+		</action>
+
 		<action path="/layout_prototypes/view" forward="portlet.layout_prototypes.view" />
 
 		<!-- Layout Set Prototypes -->
@@ -1033,7 +1045,7 @@
 		</action>
 
 		<action path="/login/facebook_connect_oauth" type="com.liferay.portlet.login.action.FacebookConnectAction">
-			<forward name="portlet.login.error" path="portlet.login.login" />
+			<forward name="portlet.login.login" path="portlet.login.login" />
 		</action>
 
 		<action path="/login/forgot_password" type="com.liferay.portlet.login.action.ForgotPasswordAction">

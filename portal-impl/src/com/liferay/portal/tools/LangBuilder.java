@@ -197,6 +197,7 @@ public class LangBuilder {
 			new OutputStreamWriter(
 				new FileOutputStream(propertiesFile), StringPool.UTF8));
 
+		boolean firstLine = true;
 		int state = 0;
 
 		String line = null;
@@ -208,7 +209,7 @@ public class LangBuilder {
 
 			if (pos != -1) {
 				String key = line.substring(0, pos);
-				String value = line.substring(pos + 1, line.length());
+				String value = line.substring(pos + 1);
 
 				if (((state == 1) && !key.startsWith("lang.")) ||
 					((state == 2) && !key.startsWith("javax.portlet.")) ||
@@ -328,9 +329,15 @@ public class LangBuilder {
 
 					translatedText = _fixTranslation(translatedText);
 
+					if (firstLine) {
+						firstLine = false;
+					}
+					else {
+						unsyncBufferedWriter.newLine();
+					}
+
 					unsyncBufferedWriter.write(key + "=" + translatedText);
 
-					unsyncBufferedWriter.newLine();
 					unsyncBufferedWriter.flush();
 				}
 			}
@@ -387,9 +394,15 @@ public class LangBuilder {
 					state = 7;
 				}
 
+				if (firstLine) {
+					firstLine = false;
+				}
+				else {
+					unsyncBufferedWriter.newLine();
+				}
+
 				unsyncBufferedWriter.write(line);
 
-				unsyncBufferedWriter.newLine();
 				unsyncBufferedWriter.flush();
 			}
 		}
@@ -407,6 +420,9 @@ public class LangBuilder {
 			else {
 				value = StringUtil.replace(value, " this ", " This ");
 			}
+		}
+		else {
+			value = StringUtil.replace(value, " From ", " from ");
 		}
 
 		return value;
@@ -442,6 +458,7 @@ public class LangBuilder {
 		Set<String> messages = new TreeSet<String>();
 
 		boolean begin = false;
+		boolean firstLine = true;
 
 		String line = null;
 
@@ -451,8 +468,7 @@ public class LangBuilder {
 			if (pos != -1) {
 				String key = line.substring(0, pos);
 
-				String value = _fixTranslation(
-					line.substring(pos + 1, line.length()));
+				String value = _fixTranslation(line.substring(pos + 1));
 
 				value = _fixEnglishTranslation(key, value);
 
@@ -468,23 +484,29 @@ public class LangBuilder {
 				messages.add(key + "=" + value);
 			}
 			else {
-				if (begin == true && line.equals("")) {
-					_sortAndWrite(unsyncBufferedWriter, messages);
+				if (begin && line.equals("")) {
+					_sortAndWrite(unsyncBufferedWriter, messages, firstLine);
 				}
 
 				if (line.equals("")) {
 					begin = !begin;
 				}
 
+				if (firstLine) {
+					firstLine = false;
+				}
+				else {
+					unsyncBufferedWriter.newLine();
+				}
+
 				unsyncBufferedWriter.write(line);
-				unsyncBufferedWriter.newLine();
 			}
 
 			unsyncBufferedWriter.flush();
 		}
 
-		if (messages.size() > 0) {
-			_sortAndWrite(unsyncBufferedWriter, messages);
+		if (!messages.isEmpty()) {
+			_sortAndWrite(unsyncBufferedWriter, messages, firstLine);
 		}
 
 		unsyncBufferedReader.close();
@@ -494,14 +516,18 @@ public class LangBuilder {
 	}
 
 	private void _sortAndWrite(
-			UnsyncBufferedWriter unsyncBufferedWriter, Set<String> messages)
+			UnsyncBufferedWriter unsyncBufferedWriter, Set<String> messages,
+			boolean firstLine)
 		throws IOException {
 
 		String[] messagesArray = messages.toArray(new String[messages.size()]);
 
 		for (int i = 0; i < messagesArray.length; i++) {
+			if (!firstLine || (i != 0)) {
+				unsyncBufferedWriter.newLine();
+			}
+
 			unsyncBufferedWriter.write(messagesArray[i]);
-			unsyncBufferedWriter.newLine();
 		}
 
 		messages.clear();

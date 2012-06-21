@@ -14,6 +14,8 @@
 
 package com.liferay.portal.kernel.dao.search;
 
+import com.liferay.portal.kernel.util.DeterminateKeyGenerator;
+import com.liferay.portal.kernel.util.FriendlyURLNormalizerUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -21,6 +23,9 @@ import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.TextFormatter;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.util.PortalUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +33,8 @@ import java.util.Map;
 
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author Brian Wing Shun Chan
@@ -146,9 +153,19 @@ public class SearchContainer<R> {
 			_headerNames = new ArrayList<String>(headerNames.size());
 
 			_headerNames.addAll(headerNames);
+
+			_buildNormalizedHeaderNames(_headerNames);
 		}
 
 		_emptyResultsMessage = emptyResultsMessage;
+
+		if (Validator.isNotNull(_id)) {
+			_id = PortalUtil.getUniqueElementId(portletRequest, _id);
+		}
+	}
+
+	public String getClassName() {
+		return _className;
 	}
 
 	public int getCur() {
@@ -190,8 +207,38 @@ public class SearchContainer<R> {
 		return _headerNames;
 	}
 
-	public String getId() {
-		return _id;
+	public String getId(HttpServletRequest request) {
+		if (Validator.isNotNull(_id)) {
+			return _id;
+		}
+
+		String id = null;
+
+		if (Validator.isNotNull(_className)) {
+			String simpleClassName = _className;
+
+			int pos = simpleClassName.lastIndexOf(StringPool.PERIOD);
+
+			if (pos != -1) {
+				simpleClassName = simpleClassName.substring(pos + 1);
+			}
+
+			String variableCasingSimpleClassName = TextFormatter.format(
+				simpleClassName, TextFormatter.I);
+
+			id = TextFormatter.formatPlural(variableCasingSimpleClassName);
+
+			_id = id.concat("SearchContainer");
+
+			return PortalUtil.getUniqueElementId(request, _id);
+		}
+		else {
+			id = DeterminateKeyGenerator.generate("taglib_search_container");
+
+			_id = id.concat("SearchContainer");
+
+			return _id;
+		}
 	}
 
 	public PortletURL getIteratorURL() {
@@ -203,6 +250,10 @@ public class SearchContainer<R> {
 	 */
 	public int getMaxPages() {
 		return _maxPages;
+	}
+
+	public List<String> getNormalizedHeaderNames() {
+		return _normalizedHeaderNames;
 	}
 
 	public Map<String, String> getOrderableHeaders() {
@@ -273,6 +324,10 @@ public class SearchContainer<R> {
 		return _hover;
 	}
 
+	public void setClassName(String className) {
+		_className = className;
+	}
+
 	public void setDelta(int delta) {
 		if (delta <= 0) {
 			_delta = DEFAULT_DELTA;
@@ -301,6 +356,8 @@ public class SearchContainer<R> {
 
 	public void setHeaderNames(List<String> headerNames) {
 		_headerNames = headerNames;
+
+		_buildNormalizedHeaderNames(headerNames);
 	}
 
 	public void setHover(boolean hover) {
@@ -372,6 +429,19 @@ public class SearchContainer<R> {
 		_calculateStartAndEnd();
 	}
 
+	private void _buildNormalizedHeaderNames(List<String> headerNames) {
+		if (headerNames == null) {
+			return;
+		}
+
+		_normalizedHeaderNames = new ArrayList<String>(headerNames.size());
+
+		for (String headerName : headerNames) {
+			_normalizedHeaderNames.add(
+				FriendlyURLNormalizerUtil.normalize(headerName));
+		}
+	}
+
 	private void _calculateStartAndEnd() {
 		_start = (_cur - 1) * _delta;
 		_end = _start + _delta;
@@ -383,6 +453,7 @@ public class SearchContainer<R> {
 		}
 	}
 
+	private String _className;
 	private int _cur;
 	private String _curParam = DEFAULT_CUR_PARAM;
 	private int _delta = DEFAULT_DELTA;
@@ -401,6 +472,7 @@ public class SearchContainer<R> {
 	 */
 	private int _maxPages = DEFAULT_MAX_PAGES;
 
+	private List<String> _normalizedHeaderNames;
 	private Map<String, String> _orderableHeaders;
 	private String _orderByCol;
 	private String _orderByColParam = DEFAULT_ORDER_BY_COL_PARAM;

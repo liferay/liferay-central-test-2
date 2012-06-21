@@ -54,8 +54,8 @@ public class EditEventTest extends BaseTestCase {
 		assertTrue(selenium.isElementPresent("link=Test Event"));
 		assertEquals(RuntimeVariables.replace("Actions"),
 			selenium.getText(
-				"//tr[contains(.,'Test Event')]/td/span[@title='Actions']/ul/li/strong/a/span"));
-		selenium.clickAt("//tr[contains(.,'Test Event')]/td/span[@title='Actions']/ul/li/strong/a/span",
+				"xPath=(//span[@title='Actions']/ul/li/strong/a/span)[3]"));
+		selenium.clickAt("xPath=(//span[@title='Actions']/ul/li/strong/a/span)[3]",
 			RuntimeVariables.replace("Actions"));
 
 		for (int second = 0;; second++) {

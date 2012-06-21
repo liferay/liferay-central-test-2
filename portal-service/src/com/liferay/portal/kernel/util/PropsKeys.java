@@ -221,6 +221,8 @@ public interface PropsKeys {
 
 	public static final String BLOGS_ENTRY_PREVIOUS_AND_NEXT_NAVIGATION_ENABLED = "blogs.entry.previous.and.next.navigation.enabled";
 
+	public static final String BLOGS_ENTRY_URL_TITLE_REGEXP = "blogs.entry.url.title.regexp";
+
 	public static final String BLOGS_IMAGE_EXTENSIONS = "blogs.image.extensions";
 
 	public static final String BLOGS_IMAGE_SMALL_MAX_SIZE = "blogs.image.small.max.size";
@@ -423,9 +425,9 @@ public interface PropsKeys {
 
 	public static final String CUSTOM_SQL_FUNCTION_ISNULL = "custom.sql.function.isnull";
 
-	public static final String DATABASE_MYSQL_ENGINE = "database.mysql.engine";
+	public static final String DATABASE_INDEXES_UPDATE_ON_STARTUP = "database.indexes.update.on.startup";
 
-	public static final String DEFAULT_ADMIN_EMAIL_ADDRESS = "default.admin.email.address";
+	public static final String DATABASE_MYSQL_ENGINE = "database.mysql.engine";
 
 	public static final String DEFAULT_ADMIN_EMAIL_ADDRESS_PREFIX = "default.admin.email.address.prefix";
 
@@ -622,6 +624,8 @@ public interface PropsKeys {
 	public static final String DL_REPOSITORY_CMIS_DELETE_DEPTH = "dl.repository.cmis.delete.depth";
 
 	public static final String DL_REPOSITORY_IMPL = "dl.repository.impl";
+
+	public static final String DL_SHOW_LIFERAY_SYNC_MESSAGE = "dl.show.liferay.sync.message";
 
 	public static final String DL_STORE_ANTIVIRUS_ENABLED = "dl.store.antivirus.enabled";
 
@@ -853,6 +857,8 @@ public interface PropsKeys {
 
 	public static final String INVOKER_FILTER_CHAIN_SIZE = "invoker.filter.chain.cache.size";
 
+	public static final String JAVADOC_MANAGER_ENABLED = "javadoc.manager.enabled";
+
 	public static final String JAVASCRIPT_BAREBONE_ENABLED = "javascript.barebone.enabled";
 
 	public static final String JAVASCRIPT_BAREBONE_FILES = "javascript.barebone.files";
@@ -909,6 +915,8 @@ public interface PropsKeys {
 
 	public static final String JOURNAL_ARTICLE_CUSTOM_TOKENS = "journal.article.custom.tokens";
 
+	public static final String JOURNAL_ARTICLE_EXPIRE_ALL_VERSIONS = "journal.article.expire.all.versions";
+
 	public static final String JOURNAL_ARTICLE_FORCE_AUTOGENERATE_ID = "journal.article.force.autogenerate.id";
 
 	public static final String JOURNAL_ARTICLE_FORM_ADD = "journal.article.form.add";
@@ -920,6 +928,8 @@ public interface PropsKeys {
 	public static final String JOURNAL_ARTICLE_TOKEN_PAGE_BREAK = "journal.article.token.page.break";
 
 	public static final String JOURNAL_ARTICLE_TYPES = "journal.article.types";
+
+	public static final String JOURNAL_ARTICLE_URL_TITLE_REGEXP = "journal.article.url.title.regexp";
 
 	public static final String JOURNAL_ARTICLE_VIEW_PERMISSION_CHECK_ENABLED = "journal.article.view.permission.check.enabled";
 
@@ -1030,7 +1040,7 @@ public interface PropsKeys {
 	public static final String JSONWS_WEB_SERVICE_INVALID_HTTP_METHODS = "jsonws.web.service.invalid.http.methods";
 
 	public static final String JSONWS_WEB_SERVICE_PUBLIC_METHODS = "jsonws.web.service.public.methods";
-	
+
 	public static final String JSONWS_WEB_SERVICE_STRICT_HTTP_METHOD = "jsonws.web.service.strict.http.method";
 
 	public static final String JSP_WRITER_BUFFER_SIZE = "jsp.writer.buffer.size";
@@ -1183,6 +1193,8 @@ public interface PropsKeys {
 
 	public static final String LDAP_IMPORT_INTERVAL = "ldap.import.interval";
 
+	public static final String LDAP_IMPORT_LOCK_EXPIRATION_TIME = "ldap.import.lock.expiration.time";
+
 	public static final String LDAP_IMPORT_METHOD = "ldap.import.method";
 
 	public static final String LDAP_IMPORT_ON_STARTUP = "ldap.import.on.startup";
@@ -1285,6 +1297,8 @@ public interface PropsKeys {
 
 	public static final String MAIL_AUDIT_TRAIL = "mail.audit.trail";
 
+	public static final String MAIL_BATCH_SIZE = "mail.batch.size";
+
 	public static final String MAIL_HOOK_CYRUS_ADD_USER = "mail.hook.cyrus.add.user";
 
 	public static final String MAIL_HOOK_CYRUS_DELETE_USER = "mail.hook.cyrus.delete.user";
@@ -1353,6 +1367,8 @@ public interface PropsKeys {
 
 	public static final String MESSAGE_BOARDS_CATEGORY_DISPLAY_STYLES_DEFAULT = "message.boards.category.display.styles.default";
 
+	public static final String MESSAGE_BOARDS_EMAIL_BULK = "message.boards.email.bulk";
+
 	public static final String MESSAGE_BOARDS_EMAIL_FROM_ADDRESS = "message.boards.email.from.address";
 
 	public static final String MESSAGE_BOARDS_EMAIL_FROM_NAME = "message.boards.email.from.name";
@@ -1402,6 +1418,8 @@ public interface PropsKeys {
 	public static final String MICROSOFT_TRANSLATOR_CLIENT_SECRET = "microsoft.translator.client.secret";
 
 	public static final String MIME_TYPES_CONTENT_DISPOSITION_INLINE = "mime.types.content.disposition.inline";
+
+	public static final String MINIFIER_FILES_LIMIT = "minifier.files.limit";
 
 	public static final String MINIFIER_INLINE_CONTENT_CACHE_SIZE = "minifier.inline.content.cache.size";
 
@@ -1785,6 +1803,10 @@ public interface PropsKeys {
 
 	public static final String SERVLET_SESSION_DESTROY_EVENTS = "servlet.session.destroy.events";
 
+	public static final String SESSION_CLICKS_MAX_ALLOWED_VALUES = "session.clicks.max.allowed.values";
+
+	public static final String SESSION_CLICKS_MAX_SIZE_TERMS = "session.clicks.max.size.terms";
+
 	public static final String SESSION_COOKIE_DOMAIN = "session.cookie.domain";
 
 	public static final String SESSION_DISABLED = "session.disabled";
@@ -1907,13 +1929,21 @@ public interface PropsKeys {
 
 	public static final String SITES_FORM_ADD_MAIN = "sites.form.add.main";
 
+	public static final String SITES_FORM_ADD_MISCELLANEOUS = "sites.form.add.miscellaneous";
+
 	public static final String SITES_FORM_ADD_SEO = "sites.form.add.seo";
 
 	public static final String SITES_FORM_UPDATE_ADVANCED = "sites.form.update.advanced";
 
 	public static final String SITES_FORM_UPDATE_MAIN = "sites.form.update.main";
 
+	public static final String SITES_FORM_UPDATE_MISCELLANEOUS = "sites.form.update.miscellaneous";
+
 	public static final String SITES_FORM_UPDATE_SEO = "sites.form.update.seo";
+
+	public static final String SITES_SITEMAP_DEFAULT_CHANGE_FREQUENCY = "sites.sitemap.default.change.frequency";
+
+	public static final String SITES_SITEMAP_DEFAULT_PRIORITY = "sites.sitemap.default.priority";
 
 	public static final String SOCIAL_ACTIVITY_CONTRIBUTION_INCREMENTS = "social.activity.contribution.increments";
 
@@ -2167,7 +2197,15 @@ public interface PropsKeys {
 
 	public static final String WEB_SERVER_PROXY_LEGACY_MODE = "web.server.proxy.legacy.mode";
 
+	public static final String WEB_SERVER_SERVLET_ACCEPT_RANGES_MIME_TYPES = "web.server.servlet.accept.ranges.mime.types";
+
 	public static final String WEB_SERVER_SERVLET_DIRECTORY_INDEXING_ENABLED = "web.server.servlet.directory.indexing.enabled";
+
+	public static final String WEB_SERVER_SERVLET_HTTP_STATUS_CODE_STRICT = "web.server.servlet.http.status.code.strict";
+
+	public static final String WEB_SERVER_SERVLET_MAX_RANGE_FIELDS = "web.server.servlet.max.range.fields";
+
+	public static final String WEB_SERVER_SERVLET_VERSION_VERBOSITY = "web.server.servlet.version.verbosity";
 
 	public static final String WEBDAV_IGNORE = "webdav.ignore";
 

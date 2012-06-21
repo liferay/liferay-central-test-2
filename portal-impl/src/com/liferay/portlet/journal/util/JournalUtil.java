@@ -46,6 +46,7 @@ import com.liferay.portal.kernel.xml.XPath;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutSet;
+import com.liferay.portal.model.ModelHintsUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ImageLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
@@ -58,6 +59,7 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
 import com.liferay.portlet.dynamicdatamapping.util.DDMXMLUtil;
 import com.liferay.portlet.journal.NoSuchArticleException;
+import com.liferay.portlet.journal.StructureXsdException;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalStructure;
 import com.liferay.portlet.journal.model.JournalStructureConstants;
@@ -74,6 +76,7 @@ import com.liferay.portlet.journal.util.comparator.ArticleTitleComparator;
 import com.liferay.portlet.journal.util.comparator.ArticleVersionComparator;
 import com.liferay.util.ContentUtil;
 import com.liferay.util.FiniteUniqueStack;
+import com.liferay.util.JS;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -731,9 +734,8 @@ public class JournalUtil {
 				TransformerListener listener = null;
 
 				try {
-					listener =
-						(TransformerListener)Class.forName(
-							listeners[i]).newInstance();
+					listener = (TransformerListener)Class.forName(
+						listeners[i]).newInstance();
 
 					listener.setTemplateDriven(true);
 					listener.setLanguageId(languageId);
@@ -804,17 +806,24 @@ public class JournalUtil {
 	}
 
 	public static String getUrlTitle(long id, String title) {
+		if (title == null) {
+			return String.valueOf(id);
+		}
+
 		title = title.trim().toLowerCase();
 
 		if (Validator.isNull(title) || Validator.isNumber(title) ||
 			title.equals("rss")) {
 
-			return String.valueOf(id);
+			title = String.valueOf(id);
 		}
 		else {
-			return FriendlyURLNormalizerUtil.normalize(
+			title = FriendlyURLNormalizerUtil.normalize(
 				title, _URL_TITLE_REPLACE_CHARS);
 		}
+
+		return ModelHintsUtil.trimString(
+			JournalArticle.class.getName(), "urlTitle", title);
 	}
 
 	public static String mergeArticleContent(
@@ -849,6 +858,27 @@ public class JournalUtil {
 		}
 
 		return curContent;
+	}
+
+	public static String processXMLAttributes(String xsd)
+		throws PortalException {
+
+		try {
+			Document document = SAXReaderUtil.read(xsd);
+
+			Element rootElement = document.getRootElement();
+
+			List<Element> elements = new ArrayList<Element>();
+
+			elements.addAll(rootElement.elements());
+
+			_decodeXMLAttributes(elements);
+
+			return document.asXML();
+		}
+		catch (Exception e) {
+			throw new StructureXsdException();
+		}
 	}
 
 	public static void removeArticleLocale(Element element, String languageId)
@@ -1018,6 +1048,27 @@ public class JournalUtil {
 			curElementOption.addCDATA(newElementOption.getText());
 
 			curContentElement.add(curElementOption);
+		}
+	}
+
+	private static void _decodeXMLAttributes(List<Element> elements) {
+		for (Element element : elements) {
+			String elName = element.attributeValue("name", StringPool.BLANK);
+			String elType = element.attributeValue("type", StringPool.BLANK);
+
+			if (Validator.isNotNull(elName)) {
+				elName = JS.decodeURIComponent(elName);
+
+				element.addAttribute("name", elName);
+			}
+
+			if (Validator.isNotNull(elType)) {
+				elType = JS.decodeURIComponent(elType);
+
+				element.addAttribute("type", elType);
+			}
+
+			_decodeXMLAttributes(element.elements());
 		}
 	}
 

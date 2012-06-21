@@ -44,6 +44,7 @@ import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.service.base.DLAppServiceBaseImpl;
 import com.liferay.portlet.documentlibrary.service.permission.DLFolderPermission;
+import com.liferay.portlet.documentlibrary.util.DLAppUtil;
 import com.liferay.portlet.documentlibrary.util.DLProcessorRegistryUtil;
 import com.liferay.portlet.documentlibrary.util.comparator.RepositoryModelModifiedDateComparator;
 
@@ -187,6 +188,9 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 				description, changeLog, null, 0, serviceContext);
 		}
 
+		mimeType = DLAppUtil.getMimeType(
+			sourceFileName, mimeType, title, file, null);
+
 		Repository repository = getRepository(repositoryId);
 
 		FileEntry fileEntry = repository.addFileEntry(
@@ -243,6 +247,9 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 			is = new UnsyncByteArrayInputStream(new byte[0]);
 			size = 0;
 		}
+
+		mimeType = DLAppUtil.getMimeType(
+			sourceFileName, mimeType, title, null, is);
 
 		Repository repository = getRepository(repositoryId);
 
@@ -1941,6 +1948,14 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 		Repository fromRepository = getRepository(0, fileEntryId, 0);
 		Repository toRepository = getRepository(newFolderId, serviceContext);
 
+		if (newFolderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
+			Folder toFolder = toRepository.getFolder(newFolderId);
+
+			if (toFolder.isMountPoint()) {
+				toRepository = getRepository(toFolder.getRepositoryId());
+			}
+		}
+
 		if (fromRepository.getRepositoryId() ==
 				toRepository.getRepositoryId()) {
 
@@ -1975,6 +1990,14 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 
 		Repository fromRepository = getRepository(folderId, 0, 0);
 		Repository toRepository = getRepository(parentFolderId, serviceContext);
+
+		if (parentFolderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
+			Folder toFolder = toRepository.getFolder(parentFolderId);
+
+			if (toFolder.isMountPoint()) {
+				toRepository = getRepository(toFolder.getRepositoryId());
+			}
+		}
 
 		if (fromRepository.getRepositoryId() ==
 				toRepository.getRepositoryId()) {
@@ -2253,6 +2276,9 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 				changeLog, majorVersion, null, 0, serviceContext);
 		}
 
+		mimeType = DLAppUtil.getMimeType(
+			sourceFileName, mimeType, title, file, null);
+
 		Repository repository = getRepository(0, fileEntryId, 0);
 
 		FileEntry fileEntry = repository.updateFileEntry(
@@ -2309,6 +2335,9 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 			boolean majorVersion, InputStream is, long size,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
+
+		mimeType = DLAppUtil.getMimeType(
+			sourceFileName, mimeType, title, null, is);
 
 		Repository repository = getRepository(0, fileEntryId, 0);
 
@@ -2525,7 +2554,7 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 					destinationFileEntry.getMimeType(),
 					destinationFileEntry.getTitle(),
 					destinationFileEntry.getDescription(), StringPool.BLANK,
-					isMajorVersion(previousFileVersion, fileVersion),
+					DLAppUtil.isMajorVersion(previousFileVersion, fileVersion),
 					fileVersion.getContentStream(false), fileVersion.getSize(),
 					serviceContext);
 			}
@@ -2668,17 +2697,6 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 		}
 
 		return repository;
-	}
-
-	protected boolean isMajorVersion(
-		FileVersion previousFileVersion, FileVersion currentFileVersion) {
-
-		long currentVersion = GetterUtil.getLong(
-			currentFileVersion.getVersion());
-		long previousVersion = GetterUtil.getLong(
-			previousFileVersion.getVersion());
-
-		return (currentVersion - previousVersion) >= 1;
 	}
 
 	protected FileEntry moveFileEntries(

@@ -66,6 +66,7 @@ import com.liferay.portal.kernel.util.DigesterUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.KeyValuePair;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -133,6 +134,7 @@ import java.io.Serializable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -156,6 +158,76 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author Zsigmond Rab
  */
 public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
+
+	public User addDefaultAdminUser(
+			long companyId, String screenName, String emailAddress,
+			Locale locale, String firstName, String middleName, String lastName)
+		throws PortalException, SystemException {
+
+		long creatorUserId = 0;
+		boolean autoPassword = false;
+		String password1 = PropsValues.DEFAULT_ADMIN_PASSWORD;
+		String password2 = password1;
+		boolean autoScreenName = false;
+
+		screenName = getScreenName(screenName);
+
+		for (int i = 1;; i++) {
+			User screenNameUser = userPersistence.fetchByC_SN(
+				companyId, screenName);
+
+			if (screenNameUser == null) {
+				break;
+			}
+
+			screenName = screenName + i;
+		}
+
+		long facebookId = 0;
+		String openId = StringPool.BLANK;
+		int prefixId = 0;
+		int suffixId = 0;
+		boolean male = true;
+		int birthdayMonth = Calendar.JANUARY;
+		int birthdayDay = 1;
+		int birthdayYear = 1970;
+		String jobTitle = StringPool.BLANK;
+
+		Group guestGroup = groupLocalService.getGroup(
+			companyId, GroupConstants.GUEST);
+
+		long[] groupIds = {guestGroup.getGroupId()};
+
+		long[] organizationIds = null;
+
+		Role adminRole = roleLocalService.getRole(
+			companyId, RoleConstants.ADMINISTRATOR);
+
+		Role powerUserRole = roleLocalService.getRole(
+			companyId, RoleConstants.POWER_USER);
+
+		long[] roleIds = {adminRole.getRoleId(), powerUserRole.getRoleId()};
+
+		long[] userGroupIds = null;
+		boolean sendEmail = false;
+		ServiceContext serviceContext = new ServiceContext();
+
+		User defaultAdminUser = addUser(
+			creatorUserId, companyId, autoPassword, password1, password2,
+			autoScreenName, screenName, emailAddress, facebookId, openId,
+			locale, firstName, middleName, lastName, prefixId, suffixId, male,
+			birthdayMonth, birthdayDay, birthdayYear, jobTitle, groupIds,
+			organizationIds, roleIds, userGroupIds, sendEmail, serviceContext);
+
+		updateEmailAddressVerified(defaultAdminUser.getUserId(), true);
+
+		updateLastLogin(
+			defaultAdminUser.getUserId(), defaultAdminUser.getLoginIP());
+
+		updatePasswordReset(defaultAdminUser.getUserId(), false);
+
+		return defaultAdminUser;
+	}
 
 	/**
 	 * Adds the user to the default groups, unless the user is already in these
@@ -313,7 +385,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		groupPersistence.addUsers(groupId, userIds);
 
-		Indexer indexer = IndexerRegistryUtil.getIndexer(User.class);
+		Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(User.class);
 
 		indexer.reindex(userIds);
 
@@ -334,7 +406,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		organizationPersistence.addUsers(organizationId, userIds);
 
-		Indexer indexer = IndexerRegistryUtil.getIndexer(User.class);
+		Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(User.class);
 
 		indexer.reindex(userIds);
 
@@ -370,7 +442,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		rolePersistence.addUsers(roleId, userIds);
 
-		Indexer indexer = IndexerRegistryUtil.getIndexer(User.class);
+		Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(User.class);
 
 		indexer.reindex(userIds);
 
@@ -391,7 +463,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		teamPersistence.addUsers(teamId, userIds);
 
-		Indexer indexer = IndexerRegistryUtil.getIndexer(User.class);
+		Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(User.class);
 
 		indexer.reindex(userIds);
 
@@ -495,7 +567,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		userGroupPersistence.addUsers(userGroupId, userIds);
 
-		Indexer indexer = IndexerRegistryUtil.getIndexer(User.class);
+		Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(User.class);
 
 		indexer.reindex(userIds);
 
@@ -1370,20 +1442,12 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			}
 		}
 
-		// Check if warning message should be sent
-
-		if (isPasswordExpiringSoon(user)) {
-			user.setPasswordReset(true);
-
-			userPersistence.update(user, false);
-		}
-
 		// Check if user should be forced to change password on first login
 
 		if (passwordPolicy.isChangeable() &&
 			passwordPolicy.isChangeRequired()) {
 
-			if ((user.getLastLoginDate() == null)) {
+			if (user.getLastLoginDate() == null) {
 				user.setPasswordReset(true);
 
 				userPersistence.update(user, false);
@@ -1433,8 +1497,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			User user, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		boolean autoPassword = GetterUtil.getBoolean(
-			serviceContext.getAttribute("autoPassword"));
+		boolean autoPassword = ParamUtil.getBoolean(
+			serviceContext, "autoPassword");
 
 		String password = null;
 
@@ -1466,8 +1530,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 				user.getEmailAddress());
 		}
 
-		boolean sendEmail = GetterUtil.getBoolean(
-			serviceContext.getAttribute("sendEmail"));
+		boolean sendEmail = ParamUtil.getBoolean(serviceContext, "sendEmail");
 
 		if (sendEmail) {
 			sendEmail(user, password, serviceContext);
@@ -1573,7 +1636,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		rolePersistence.removeUser(roleId, userId);
 
-		Indexer indexer = IndexerRegistryUtil.getIndexer(User.class);
+		Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(User.class);
 
 		indexer.reindex(userId);
 
@@ -1737,7 +1800,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		userGroupPersistence.removeUser(userGroupId, userId);
 
-		Indexer indexer = IndexerRegistryUtil.getIndexer(User.class);
+		Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(User.class);
 
 		indexer.reindex(userId);
 
@@ -2304,8 +2367,9 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		params.put("socialRelation", new Long[] {userId});
 
-		return searchCount(user.getCompanyId(), null,
-			WorkflowConstants.STATUS_APPROVED, params);
+		return searchCount(
+			user.getCompanyId(), null, WorkflowConstants.STATUS_APPROVED,
+			params);
 	}
 
 	/**
@@ -2331,8 +2395,9 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		params.put("socialRelationType", new Long[] {userId, new Long(type)});
 
-		return searchCount(user.getCompanyId(), null,
-			WorkflowConstants.STATUS_APPROVED, params);
+		return searchCount(
+			user.getCompanyId(), null, WorkflowConstants.STATUS_APPROVED,
+			params);
 	}
 
 	/**
@@ -2355,8 +2420,9 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		params.put("socialMutualRelation", new Long[] {userId1, userId2});
 
-		return searchCount(user1.getCompanyId(), null,
-			WorkflowConstants.STATUS_APPROVED, params);
+		return searchCount(
+			user1.getCompanyId(), null, WorkflowConstants.STATUS_APPROVED,
+			params);
 	}
 
 	/**
@@ -2385,8 +2451,9 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			"socialMutualRelationType",
 			new Long[] {userId1, new Long(type), userId2, new Long(type)});
 
-		return searchCount(user1.getCompanyId(), null,
-			WorkflowConstants.STATUS_APPROVED, params);
+		return searchCount(
+			user1.getCompanyId(), null, WorkflowConstants.STATUS_APPROVED,
+			params);
 	}
 
 	/**
@@ -3158,9 +3225,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			"[$EMAIL_VERIFICATION_CODE$]", ticket.getKey(),
 			"[$EMAIL_VERIFICATION_URL$]", verifyEmailAddressURL,
 			"[$REMOTE_ADDRESS$]", serviceContext.getRemoteAddr(),
-			"[$REMOTE_HOST$]", serviceContext.getRemoteHost(), "[$USER_AGENT$]",
-			serviceContext.getUserAgent(), "[$USER_ID$]", user.getUserId(),
-			"[$USER_SCREENNAME$]", user.getScreenName());
+			"[$REMOTE_HOST$]", serviceContext.getRemoteHost(), "[$USER_ID$]",
+			user.getUserId(), "[$USER_SCREENNAME$]", user.getScreenName());
 		subscriptionSender.setFrom(fromAddress, fromName);
 		subscriptionSender.setHtmlFormat(true);
 		subscriptionSender.setMailId("user", user.getUserId());
@@ -3309,8 +3375,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		subscriptionSender.setContextAttributes(
 			"[$PASSWORD_RESET_URL$]", passwordResetURL, "[$REMOTE_ADDRESS$]",
 			serviceContext.getRemoteAddr(), "[$REMOTE_HOST$]",
-			serviceContext.getRemoteHost(), "[$USER_AGENT$]",
-			serviceContext.getUserAgent(), "[$USER_ID$]", user.getUserId(),
+			serviceContext.getRemoteHost(), "[$USER_ID$]", user.getUserId(),
 			"[$USER_PASSWORD$]", newPassword, "[$USER_SCREENNAME$]",
 			user.getScreenName());
 		subscriptionSender.setFrom(fromAddress, fromName);
@@ -3339,7 +3404,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		rolePersistence.setUsers(roleId, userIds);
 
-		Indexer indexer = IndexerRegistryUtil.getIndexer(User.class);
+		Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(User.class);
 
 		indexer.reindex(userIds);
 
@@ -3365,7 +3430,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		userGroupPersistence.setUsers(userGroupId, userIds);
 
-		Indexer indexer = IndexerRegistryUtil.getIndexer(User.class);
+		Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(User.class);
 
 		indexer.reindex(userIds);
 
@@ -3388,7 +3453,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		groupPersistence.removeUsers(groupId, userIds);
 
-		Indexer indexer = IndexerRegistryUtil.getIndexer(User.class);
+		Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(User.class);
 
 		indexer.reindex(userIds);
 
@@ -3417,7 +3482,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		organizationPersistence.removeUsers(organizationId, userIds);
 
-		Indexer indexer = IndexerRegistryUtil.getIndexer(User.class);
+		Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(User.class);
 
 		indexer.reindex(userIds);
 
@@ -3457,7 +3522,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		rolePersistence.removeUsers(roleId, users);
 
-		Indexer indexer = IndexerRegistryUtil.getIndexer(User.class);
+		Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(User.class);
 
 		indexer.reindex(users);
 
@@ -3483,7 +3548,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		rolePersistence.removeUsers(roleId, userIds);
 
-		Indexer indexer = IndexerRegistryUtil.getIndexer(User.class);
+		Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(User.class);
 
 		indexer.reindex(userIds);
 
@@ -3503,7 +3568,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		teamPersistence.removeUsers(teamId, userIds);
 
-		Indexer indexer = IndexerRegistryUtil.getIndexer(User.class);
+		Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(User.class);
 
 		indexer.reindex(userIds);
 
@@ -3523,7 +3588,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		userGroupPersistence.removeUsers(userGroupId, userIds);
 
-		Indexer indexer = IndexerRegistryUtil.getIndexer(User.class);
+		Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(User.class);
 
 		indexer.reindex(userIds);
 
@@ -3891,7 +3956,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 			// Indexer
 
-			Indexer indexer = IndexerRegistryUtil.getIndexer(User.class);
+			Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
+				User.class);
 
 			indexer.reindex(user);
 		}
@@ -4733,7 +4799,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		// Indexer
 
 		if ((serviceContext == null) || serviceContext.isIndexingEnabled()) {
-			Indexer indexer = IndexerRegistryUtil.getIndexer(User.class);
+			Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
+				User.class);
 
 			indexer.reindex(user);
 		}
@@ -5030,6 +5097,13 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 						parameterMap);
 				}
 
+				try {
+					user = userPersistence.findByPrimaryKey(user.getUserId());
+				}
+				catch (NoSuchUserException nsue) {
+					return Authenticator.DNE;
+				}
+
 				// Let LDAP handle max failure event
 
 				if (!LDAPSettingsUtil.isPasswordPolicyEnabled(
@@ -5090,7 +5164,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	}
 
 	protected void reindex(final User user) {
-		final Indexer indexer = IndexerRegistryUtil.getIndexer(User.class);
+		final Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
+			User.class);
 
 		Callable<Void> callable = new Callable<Void>() {
 
@@ -5159,7 +5234,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			searchContext.setSorts(new Sort[] {sort});
 			searchContext.setStart(start);
 
-			Indexer indexer = IndexerRegistryUtil.getIndexer(User.class);
+			Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
+				User.class);
 
 			return indexer.search(searchContext);
 		}
@@ -5290,7 +5366,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		}
 
 		if (indexingEnabled) {
-			Indexer indexer = IndexerRegistryUtil.getIndexer(User.class);
+			Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
+				User.class);
 
 			indexer.reindex(new long[] {userId});
 		}
@@ -5329,7 +5406,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		}
 
 		if (indexingEnabled) {
-			Indexer indexer = IndexerRegistryUtil.getIndexer(User.class);
+			Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
+				User.class);
 
 			indexer.reindex(new long[] {userId});
 		}
@@ -5504,6 +5582,14 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			throw new UserEmailAddressException();
 		}
 
+		String pop3User = PrefsPropsUtil.getString(
+			PropsKeys.MAIL_SESSION_MAIL_POP3_USER,
+			PropsValues.MAIL_SESSION_MAIL_POP3_USER);
+
+		if (emailAddress.equalsIgnoreCase(pop3User)) {
+			throw new ReservedUserEmailAddressException();
+		}
+
 		String[] reservedEmailAddresses = PrefsPropsUtil.getStringArray(
 			companyId, PropsKeys.ADMIN_RESERVED_EMAIL_ADDRESSES,
 			StringPool.NEW_LINE, PropsValues.ADMIN_RESERVED_EMAIL_ADDRESSES);
@@ -5629,7 +5715,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		}
 
 		for (char c : screenName.toCharArray()) {
-			if ((!Validator.isChar(c)) && (!Validator.isDigit(c)) &&
+			if (!Validator.isChar(c) && !Validator.isDigit(c) &&
 				(c != CharPool.DASH) && (c != CharPool.PERIOD) &&
 				(c != CharPool.UNDERLINE)) {
 

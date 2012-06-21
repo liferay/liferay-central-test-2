@@ -97,12 +97,15 @@ public class ViewUser2Test extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				loadRequiredJavaScriptModules();
 				assertEquals(RuntimeVariables.replace("userfn2"),
-					selenium.getText("//tr[contains(.,'userfn2')]/td[2]/a"));
+					selenium.getText(
+						"//tr[contains(.,'userfn2')]/td[@headers='_125_usersSearchContainer_col-first-name']/a"));
 				assertEquals(RuntimeVariables.replace("userln2"),
-					selenium.getText("//tr[contains(.,'userfn2')]/td[3]/a"));
+					selenium.getText(
+						"//tr[contains(.,'userln2')]/td[@headers='_125_usersSearchContainer_col-last-name']/a"));
 				assertEquals(RuntimeVariables.replace("usersn2"),
-					selenium.getText("//tr[contains(.,'userfn2')]/td[4]/a"));
-				selenium.clickAt("//tr[contains(.,'userfn2')]/td[2]/a",
+					selenium.getText(
+						"//tr[contains(.,'usersn2')]/td[@headers='_125_usersSearchContainer_col-screen-name']/a"));
+				selenium.clickAt("//tr[contains(.,'userfn2')]/td[@headers='_125_usersSearchContainer_col-first-name']/a",
 					RuntimeVariables.replace("userfn2"));
 				selenium.waitForPageToLoad("30000");
 				loadRequiredJavaScriptModules();

@@ -32,6 +32,7 @@ import com.liferay.portlet.messageboards.service.permission.MBMessagePermission;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -62,6 +63,37 @@ public class MBThreadServiceImpl extends MBThreadServiceBaseImpl {
 	}
 
 	public List<MBThread> getGroupThreads(
+			long groupId, long userId, Date modifiedDate, int status, int start,
+			int end)
+		throws PortalException, SystemException {
+
+		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
+			return mbThreadFinder.findByG_U_MD_S(
+				groupId, userId, modifiedDate, status, start, end);
+		}
+
+		long[] categoryIds = mbCategoryService.getCategoryIds(
+			groupId, MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID);
+
+		if (categoryIds.length == 0) {
+			return Collections.emptyList();
+		}
+
+		List<Long> threadIds = mbMessageFinder.filterFindByG_U_MD_C_S(
+			groupId, userId, modifiedDate, categoryIds, status, start, end);
+
+		List<MBThread> threads = new ArrayList<MBThread>(threadIds.size());
+
+		for (long threadId : threadIds) {
+			MBThread thread = mbThreadPersistence.findByPrimaryKey(threadId);
+
+			threads.add(thread);
+		}
+
+		return threads;
+	}
+
+	public List<MBThread> getGroupThreads(
 			long groupId, long userId, int status, boolean subscribed,
 			boolean includeAnonymous, int start, int end)
 		throws PortalException, SystemException {
@@ -79,15 +111,11 @@ public class MBThreadServiceImpl extends MBThreadServiceBaseImpl {
 			return Collections.emptyList();
 		}
 
+		List<Long> threadIds = null;
+
 		if (userId <= 0) {
-			if (status == WorkflowConstants.STATUS_ANY) {
-				return mbThreadPersistence.findByG_C(
-					groupId, categoryIds, start, end);
-			}
-			else {
-				return mbThreadPersistence.findByG_C_S(
-					groupId, categoryIds, status, start, end);
-			}
+			threadIds = mbMessageFinder.filterFindByG_U_C_S(
+				groupId, 0, categoryIds, status, start, end);
 		}
 		else {
 			if (subscribed) {
@@ -95,8 +123,6 @@ public class MBThreadServiceImpl extends MBThreadServiceBaseImpl {
 					groupId, userId, categoryIds, status, start, end);
 			}
 			else {
-				List<Long> threadIds = null;
-
 				if (includeAnonymous) {
 					threadIds = mbMessageFinder.filterFindByG_U_C_S(
 						groupId, userId, categoryIds, status, start, end);
@@ -106,20 +132,18 @@ public class MBThreadServiceImpl extends MBThreadServiceBaseImpl {
 						groupId, userId, categoryIds, false, status, start,
 						end);
 				}
-
-				List<MBThread> threads = new ArrayList<MBThread>(
-					threadIds.size());
-
-				for (long threadId : threadIds) {
-					MBThread thread = mbThreadPersistence.findByPrimaryKey(
-						threadId);
-
-					threads.add(thread);
-				}
-
-				return threads;
 			}
 		}
+
+		List<MBThread> threads = new ArrayList<MBThread>(threadIds.size());
+
+		for (long threadId : threadIds) {
+			MBThread thread = mbThreadPersistence.findByPrimaryKey(threadId);
+
+			threads.add(thread);
+		}
+
+		return threads;
 	}
 
 	public List<MBThread> getGroupThreads(
@@ -136,6 +160,26 @@ public class MBThreadServiceImpl extends MBThreadServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		return getGroupThreads(groupId, userId, status, false, start, end);
+	}
+
+	public int getGroupThreadsCount(
+			long groupId, long userId, Date modifiedDate, int status)
+		throws SystemException {
+
+		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
+			return mbThreadFinder.countByG_U_MD_S(
+				groupId, userId, modifiedDate, status);
+		}
+
+		long[] categoryIds = mbCategoryService.getCategoryIds(
+			groupId, MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID);
+
+		if (categoryIds.length == 0) {
+			return 0;
+		}
+
+		return mbMessageFinder.filterCountByG_U_MD_C_S(
+			groupId, userId, modifiedDate, categoryIds, status);
 	}
 
 	public int getGroupThreadsCount(long groupId, long userId, int status)
@@ -169,13 +213,8 @@ public class MBThreadServiceImpl extends MBThreadServiceBaseImpl {
 		}
 
 		if (userId <= 0) {
-			if (status == WorkflowConstants.STATUS_ANY) {
-				return mbThreadPersistence.countByG_C(groupId, categoryIds);
-			}
-			else {
-				return mbThreadPersistence.countByG_C_S(
-					groupId, categoryIds, status);
-			}
+			return mbMessageFinder.filterCountByG_U_C_S(
+				groupId, 0, categoryIds, status);
 		}
 		else {
 			if (subscribed) {

@@ -283,7 +283,8 @@ public interface LayoutSetBranchLocalService extends BaseLocalService,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* @deprecated {@link #getUserLayoutSetBranch(long, long, boolean, long, long)}
+	* @deprecated {@link #getUserLayoutSetBranch(long, long, boolean, long,
+	long)}
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.LayoutSetBranch getUserLayoutSetBranch(

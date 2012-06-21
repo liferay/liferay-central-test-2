@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -35,7 +36,6 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.kernel.workflow.WorkflowHandlerRegistryUtil;
 import com.liferay.portal.model.Group;
-import com.liferay.portal.model.ModelHintsUtil;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
@@ -70,6 +70,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.portlet.PortletPreferences;
 
@@ -133,7 +135,8 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		entry.setCreateDate(serviceContext.getCreateDate(now));
 		entry.setModifiedDate(serviceContext.getModifiedDate(now));
 		entry.setTitle(title);
-		entry.setUrlTitle(getUniqueUrlTitle(entryId, groupId, title));
+		entry.setUrlTitle(
+			getUniqueUrlTitle(entryId, title, null, serviceContext));
 		entry.setDescription(description);
 		entry.setContent(content);
 		entry.setDisplayDate(displayDate);
@@ -298,7 +301,8 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		// Indexer
 
-		Indexer indexer = IndexerRegistryUtil.getIndexer(BlogsEntry.class);
+		Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
+			BlogsEntry.class);
 
 		indexer.delete(entry);
 
@@ -623,7 +627,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		entry.setModifiedDate(serviceContext.getModifiedDate(null));
 		entry.setTitle(title);
 		entry.setUrlTitle(
-			getUniqueUrlTitle(entryId, entry.getGroupId(), title));
+			getUniqueUrlTitle(entryId, title, oldUrlTitle, serviceContext));
 		entry.setDescription(description);
 		entry.setContent(content);
 		entry.setDisplayDate(displayDate);
@@ -637,7 +641,12 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		entry.setSmallImageURL(smallImageURL);
 
-		if (!entry.isPending()) {
+		if (entry.isPending() || entry.isDraft()) {
+		}
+		else if (entry.isApproved()) {
+			entry.setStatus(WorkflowConstants.STATUS_DRAFT_FROM_APPROVED);
+		}
+		else {
 			entry.setStatus(WorkflowConstants.STATUS_DRAFT);
 		}
 
@@ -676,6 +685,10 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		serviceContext.setAttribute(
 			"pingOldTrackbacks", String.valueOf(pingOldTrackbacks));
+
+		if (entry.getStatus() != WorkflowConstants.STATUS_DRAFT) {
+			serviceContext.setAttribute("update", Boolean.TRUE.toString());
+		}
 
 		if (Validator.isNotNull(trackbacks)) {
 			serviceContext.setAttribute("trackbacks", trackbacks);
@@ -716,7 +729,6 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		BlogsEntry entry = blogsEntryPersistence.findByPrimaryKey(entryId);
 
 		int oldStatus = entry.getStatus();
-		long oldStatusByUserId = entry.getStatusByUserId();
 
 		entry.setModifiedDate(serviceContext.getModifiedDate(now));
 		entry.setStatus(status);
@@ -726,7 +738,8 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		blogsEntryPersistence.update(entry, false);
 
-		Indexer indexer = IndexerRegistryUtil.getIndexer(BlogsEntry.class);
+		Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
+			BlogsEntry.class);
 
 		if (status == WorkflowConstants.STATUS_APPROVED) {
 
@@ -744,17 +757,19 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 				// Social
 
-				if (oldStatusByUserId == 0) {
-					socialActivityLocalService.addUniqueActivity(
-						user.getUserId(), entry.getGroupId(),
-						BlogsEntry.class.getName(), entryId,
-						BlogsActivityKeys.ADD_ENTRY, StringPool.BLANK, 0);
-				}
-				else {
+				boolean update = ParamUtil.getBoolean(serviceContext, "update");
+
+				if (update) {
 					socialActivityLocalService.addActivity(
 						user.getUserId(), entry.getGroupId(),
 						BlogsEntry.class.getName(), entryId,
 						BlogsActivityKeys.UPDATE_ENTRY, StringPool.BLANK, 0);
+				}
+				else {
+					socialActivityLocalService.addUniqueActivity(
+						user.getUserId(), entry.getGroupId(),
+						BlogsEntry.class.getName(), entryId,
+						BlogsActivityKeys.ADD_ENTRY, StringPool.BLANK, 0);
 				}
 			}
 
@@ -798,31 +813,79 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		String urlTitle = BlogsUtil.getUrlTitle(entryId, title);
 
-		String newUrlTitle = ModelHintsUtil.trimString(
-			BlogsEntry.class.getName(), "urlTitle", urlTitle);
-
 		for (int i = 1;; i++) {
 			BlogsEntry entry = blogsEntryPersistence.fetchByG_UT(
-				groupId, newUrlTitle);
+				groupId, urlTitle);
 
-			if ((entry == null) || (entry.getEntryId() == entryId)) {
+			if ((entry == null) || (entryId == entry.getEntryId())) {
 				break;
 			}
 			else {
 				String suffix = StringPool.DASH + i;
 
-				String prefix = newUrlTitle;
+				String prefix = urlTitle;
 
-				if (newUrlTitle.length() > suffix.length()) {
-					prefix = newUrlTitle.substring(
-						0, newUrlTitle.length() - suffix.length());
+				if (urlTitle.length() > suffix.length()) {
+					prefix = urlTitle.substring(
+						0, urlTitle.length() - suffix.length());
 				}
 
-				newUrlTitle = prefix + suffix;
+				urlTitle = prefix + suffix;
 			}
 		}
 
-		return newUrlTitle;
+		return urlTitle;
+	}
+
+	protected String getUniqueUrlTitle(
+			long entryId, String title, String oldUrlTitle,
+			ServiceContext serviceContext)
+		throws SystemException {
+
+		String serviceContextUrlTitle = GetterUtil.getString(
+			serviceContext.getAttribute("urlTitle"));
+
+		String urlTitle = null;
+
+		if (isMatchesServiceContextUrlTitle(serviceContextUrlTitle)) {
+			urlTitle = BlogsUtil.getUrlTitle(entryId, serviceContextUrlTitle);
+
+			BlogsEntry urlTitleEntry = blogsEntryPersistence.fetchByG_UT(
+				serviceContext.getScopeGroupId(), urlTitle);
+
+			if ((urlTitleEntry != null) &&
+				(urlTitleEntry.getEntryId() != entryId)) {
+
+				urlTitle = getUniqueUrlTitle(
+					entryId, serviceContext.getScopeGroupId(), urlTitle);
+			}
+		}
+		else {
+			if (isMatchesServiceContextUrlTitle(oldUrlTitle)) {
+				urlTitle = oldUrlTitle;
+			}
+			else {
+				urlTitle = getUniqueUrlTitle(
+					entryId, serviceContext.getScopeGroupId(), title);
+			}
+		}
+
+		return urlTitle;
+	}
+
+	protected boolean isMatchesServiceContextUrlTitle(String urlTitle) {
+		if (Validator.isNotNull(urlTitle) &&
+			Validator.isNotNull(PropsValues.BLOGS_ENTRY_URL_TITLE_REGEXP)) {
+
+			Pattern pattern = Pattern.compile(
+				PropsValues.BLOGS_ENTRY_URL_TITLE_REGEXP);
+
+			Matcher matcher = pattern.matcher(urlTitle);
+
+			return matcher.matches();
+		}
+
+		return false;
 	}
 
 	protected void notifySubscribers(
@@ -892,6 +955,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		subscriptionSender.setCompanyId(entry.getCompanyId());
 		subscriptionSender.setContextAttributes(
+			"[$BLOGS_ENTRY_STATUS_BY_USER_NAME$]", entry.getStatusByUserName(),
 			"[$BLOGS_ENTRY_URL$]", entryURL);
 		subscriptionSender.setContextUserPrefix("BLOGS_ENTRY");
 		subscriptionSender.setFrom(fromAddress, fromName);

@@ -16,6 +16,8 @@ package com.liferay.portalweb.demo.fundamentals.announcements;
 
 import com.liferay.portalweb.portal.BaseTestSuite;
 import com.liferay.portalweb.portal.util.TearDownPageTest;
+import com.liferay.portalweb.portlet.announcements.portlet.addportletannouncements.AddPageAnnouncementsTest;
+import com.liferay.portalweb.portlet.announcements.portlet.addportletannouncements.AddPortletAnnouncementsTest;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;

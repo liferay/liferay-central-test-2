@@ -17,9 +17,9 @@ package com.liferay.portlet.messageboards.service.impl;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.parsers.bbcode.BBCodeTranslatorUtil;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.ObjectValuePair;
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
@@ -109,8 +109,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 			inputStreamOVPs = Collections.emptyList();
 		}
 
-		boolean preview = GetterUtil.getBoolean(
-			serviceContext.getAttribute("preview"));
+		boolean preview = ParamUtil.getBoolean(serviceContext, "preview");
 
 		int workFlowAction = serviceContext.getWorkflowAction();
 
@@ -592,8 +591,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 
 		MBMessage message = mbMessageLocalService.getMessage(messageId);
 
-		boolean preview = GetterUtil.getBoolean(
-			serviceContext.getAttribute("preview"));
+		boolean preview = ParamUtil.getBoolean(serviceContext, "preview");
 
 		if (preview &&
 			MBMessagePermission.contains(
@@ -709,9 +707,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 				value = StringUtil.replace(
 					value,
 					new String[] {
-						"@theme_images_path@",
-						"href=\"/",
-						"src=\"/"
+						"@theme_images_path@", "href=\"/", "src=\"/"
 					},
 					new String[] {
 						themeDisplay.getURLPortal() +

@@ -47,37 +47,7 @@ public class PerFieldAnalyzerWrapper
 		_analyzers.put(fieldName, analyzer);
 	}
 
-	@Override
-	public int getOffsetGap(Fieldable field) {
-		Analyzer analyzer = _getAnalyzer(field.name());
-
-		return analyzer.getOffsetGap(field);
-	}
-
-	@Override
-	public int getPositionIncrementGap(String fieldName) {
-		Analyzer analyzer = _getAnalyzer(fieldName);
-
-		return analyzer.getPositionIncrementGap(fieldName);
-	}
-
-	@Override
-	public TokenStream reusableTokenStream(String fieldName, Reader reader)
-		throws IOException {
-
-		Analyzer analyzer = _getAnalyzer(fieldName);
-
-		return analyzer.reusableTokenStream(fieldName, reader);
-	}
-
-	@Override
-	public TokenStream tokenStream(String fieldName, Reader reader) {
-		Analyzer analyzer = _getAnalyzer(fieldName);
-
-		return analyzer.tokenStream(fieldName, reader);
-	}
-
-	private Analyzer _getAnalyzer(String fieldName) {
+	public Analyzer getAnalyzer(String fieldName) {
 		Analyzer analyzer = _analyzers.get(fieldName);
 
 		if (analyzer != null) {
@@ -91,6 +61,36 @@ public class PerFieldAnalyzerWrapper
 		}
 
 		return _analyzer;
+	}
+
+	@Override
+	public int getOffsetGap(Fieldable field) {
+		Analyzer analyzer = getAnalyzer(field.name());
+
+		return analyzer.getOffsetGap(field);
+	}
+
+	@Override
+	public int getPositionIncrementGap(String fieldName) {
+		Analyzer analyzer = getAnalyzer(fieldName);
+
+		return analyzer.getPositionIncrementGap(fieldName);
+	}
+
+	@Override
+	public TokenStream reusableTokenStream(String fieldName, Reader reader)
+		throws IOException {
+
+		Analyzer analyzer = getAnalyzer(fieldName);
+
+		return analyzer.reusableTokenStream(fieldName, reader);
+	}
+
+	@Override
+	public TokenStream tokenStream(String fieldName, Reader reader) {
+		Analyzer analyzer = getAnalyzer(fieldName);
+
+		return analyzer.tokenStream(fieldName, reader);
 	}
 
 	private Analyzer _analyzer;

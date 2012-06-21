@@ -17,7 +17,6 @@ package com.liferay.portal.dao.db;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.dao.orm.common.SQLTransformer;
 import com.liferay.portal.kernel.dao.db.DB;
-import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.dao.db.Index;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -62,8 +61,51 @@ import javax.naming.NamingException;
  * @author Alexander Chow
  * @author Ganesh Ram
  * @author Brian Wing Shun Chan
+ * @author Daniel Kocsis
  */
 public abstract class BaseDB implements DB {
+
+	public void addIndexes(
+			Connection con, String indexesSQL, Set<String> validIndexNames)
+		throws IOException {
+
+		if (_log.isInfoEnabled()) {
+			_log.info("Adding indexes");
+		}
+
+		UnsyncBufferedReader bufferedReader = new UnsyncBufferedReader(
+			new UnsyncStringReader(indexesSQL));
+
+		String sql = null;
+
+		while ((sql = bufferedReader.readLine()) != null) {
+			if (Validator.isNull(sql)) {
+				continue;
+			}
+
+			int y = sql.indexOf(" on ");
+			int x = sql.lastIndexOf(" ", y - 1);
+
+			String indexName = sql.substring(x + 1, y);
+
+			if (validIndexNames.contains(indexName)) {
+				continue;
+			}
+
+			if (_log.isInfoEnabled()) {
+				_log.info(sql);
+			}
+
+			try {
+				runSQL(con, sql);
+			}
+			catch (Exception e) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(e.getMessage() + ": " + sql);
+				}
+			}
+		}
+	}
 
 	public void buildCreateFile(String sqlDir, String databaseName)
 		throws IOException {
@@ -135,7 +177,7 @@ public abstract class BaseDB implements DB {
 	}
 
 	@SuppressWarnings("unused")
-	public List<Index> getIndexes() throws SQLException {
+	public List<Index> getIndexes(Connection con) throws SQLException {
 		return Collections.emptyList();
 	}
 
@@ -340,7 +382,7 @@ public abstract class BaseDB implements DB {
 
 					runSQLTemplateString(include, false, true);
 				}
-				else{
+				else {
 					sb.append(line);
 
 					if (line.endsWith(";")) {
@@ -418,17 +460,17 @@ public abstract class BaseDB implements DB {
 	}
 
 	public void updateIndexes(
-			String tablesSQL, String indexesSQL, String indexesProperties,
-			boolean dropIndexes)
+			Connection con, String tablesSQL, String indexesSQL,
+			String indexesProperties, boolean dropIndexes)
 		throws IOException, SQLException {
 
-		List<Index> indexes = getIndexes();
+		List<Index> indexes = getIndexes(con);
 
 		Set<String> validIndexNames = null;
 
 		if (dropIndexes) {
 			validIndexNames = dropIndexes(
-				tablesSQL, indexesSQL, indexesProperties, indexes);
+				con, tablesSQL, indexesSQL, indexesProperties, indexes);
 		}
 		else {
 			validIndexNames = new HashSet<String>();
@@ -440,7 +482,7 @@ public abstract class BaseDB implements DB {
 			}
 		}
 
-		addIndexes(indexesSQL, validIndexNames);
+		addIndexes(con, indexesSQL, validIndexNames);
 	}
 
 	protected BaseDB(String type) {
@@ -453,58 +495,17 @@ public abstract class BaseDB implements DB {
 		}
 	}
 
-	protected void addIndexes(String indexesSQL, Set<String> validIndexNames)
-		throws IOException {
-
-		if (_log.isInfoEnabled()) {
-			_log.info("Adding indexes");
-		}
-
-		DB db = DBFactoryUtil.getDB();
-
-		UnsyncBufferedReader bufferedReader = new UnsyncBufferedReader(
-			new UnsyncStringReader(indexesSQL));
-
-		String sql = null;
-
-		while ((sql = bufferedReader.readLine()) != null) {
-			if (Validator.isNull(sql)) {
-				continue;
-			}
-
-			int y = sql.indexOf(" on ");
-			int x = sql.lastIndexOf(" ", y - 1);
-
-			String indexName = sql.substring(x + 1, y);
-
-			if (validIndexNames.contains(indexName)) {
-				continue;
-			}
-
-			if (_log.isInfoEnabled()) {
-				_log.info(sql);
-			}
-
-			try {
-				db.runSQL(sql);
-			}
-			catch (Exception e) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(e.getMessage() + ": " + sql);
-				}
-			}
-		}
-	}
-
 	protected String[] buildColumnNameTokens(String line) {
 		String[] words = StringUtil.split(line, ' ');
 
+		String nullable = "";
+
 		if (words.length == 7) {
-			words[5] = "not null;";
+			nullable = "not null;";
 		}
 
 		String[] template = {
-			words[1], words[2], words[3], words[4], words[5]
+			words[1], words[2], words[3], words[4], nullable
 		};
 
 		return template;
@@ -618,8 +619,8 @@ public abstract class BaseDB implements DB {
 	}
 
 	protected Set<String> dropIndexes(
-			String tablesSQL, String indexesSQL, String indexesProperties,
-			List<Index> indexes)
+			Connection con, String tablesSQL, String indexesSQL,
+			String indexesProperties, List<Index> indexes)
 		throws IOException, SQLException {
 
 		if (_log.isInfoEnabled()) {
@@ -631,8 +632,6 @@ public abstract class BaseDB implements DB {
 		if (indexes.isEmpty()) {
 			return validIndexNames;
 		}
-
-		DB db = DBFactoryUtil.getDB();
 
 		String tablesSQLLowerCase = tablesSQL.toLowerCase();
 		String indexesSQLLowerCase = indexesSQL.toLowerCase();
@@ -675,17 +674,22 @@ public abstract class BaseDB implements DB {
 					continue;
 				}
 			}
-			else {
-				if (!tablesSQLLowerCase.contains(
+			else if (!tablesSQLLowerCase.contains(
 						"create table " + tableNameLowerCase + " (")) {
 
-					continue;
-				}
+				continue;
 			}
 
 			validIndexNames.remove(indexNameUpperCase);
 
-			db.runSQL("drop index " + indexNameUpperCase + " on " + tableName);
+			String sql =
+				"drop index " + indexNameUpperCase + " on " + tableName;
+
+			if (_log.isInfoEnabled()) {
+				_log.info(sql);
+			}
+
+			runSQL(con, sql);
 		}
 
 		return validIndexNames;
@@ -774,9 +778,7 @@ public abstract class BaseDB implements DB {
 		while ((line = unsyncBufferedReader.readLine()) != null) {
 			if (!line.startsWith(comments)) {
 				line = StringUtil.replace(
-					line,
-					new String[] {"\n", "\t"},
-					new String[] {"", ""});
+					line, new String[] {"\n", "\t"}, new String[] {"", ""});
 
 				if (line.endsWith(";")) {
 					sb.append(line.substring(0, line.length() - 1));
@@ -1005,7 +1007,7 @@ public abstract class BaseDB implements DB {
 				sb.append("\\b");
 			}
 
-			if (i < TEMPLATE.length - 1) {
+			if (i < (TEMPLATE.length - 1)) {
 				sb.append(StringPool.PIPE);
 			}
 		}

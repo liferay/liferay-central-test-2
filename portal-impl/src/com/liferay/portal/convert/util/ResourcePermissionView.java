@@ -19,6 +19,8 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.upgrade.util.Table;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.Types;
 
 import java.util.ArrayList;
@@ -63,6 +65,19 @@ public class ResourcePermissionView extends Table {
 		setColumns(columns.toArray(new Object[0][]));
 
 		_name = name;
+	}
+
+	@Override
+	public PreparedStatement getSelectPreparedStatement(Connection con)
+		throws Exception {
+
+		String selectSQL = _SELECT_SQL + StringPool.QUESTION;
+
+		PreparedStatement ps = con.prepareStatement(selectSQL);
+
+		ps.setString(1, _name);
+
+		return ps;
 	}
 
 	@Override

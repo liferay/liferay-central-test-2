@@ -33,6 +33,12 @@ public class ReleaseInfo {
 
 	public static final int RELEASE_5_1_2_BUILD_NUMBER = 5102;
 
+	public static final int RELEASE_5_1_5_BUILD_NUMBER = 5105;
+
+	public static final int RELEASE_5_1_6_BUILD_NUMBER = 5106;
+
+	public static final int RELEASE_5_1_7_BUILD_NUMBER = 5107;
+
 	public static final int RELEASE_5_2_0_BUILD_NUMBER = 5200;
 
 	public static final int RELEASE_5_2_1_BUILD_NUMBER = 5201;
@@ -40,6 +46,12 @@ public class ReleaseInfo {
 	public static final int RELEASE_5_2_2_BUILD_NUMBER = 5202;
 
 	public static final int RELEASE_5_2_3_BUILD_NUMBER = 5203;
+
+	public static final int RELEASE_5_2_5_BUILD_NUMBER = 5205;
+
+	public static final int RELEASE_5_2_7_BUILD_NUMBER = 5207;
+
+	public static final int RELEASE_5_2_8_BUILD_NUMBER = 5208;
 
 	public static final int RELEASE_6_0_0_BUILD_NUMBER = 6000;
 
@@ -54,6 +66,10 @@ public class ReleaseInfo {
 	public static final int RELEASE_6_0_5_BUILD_NUMBER = 6005;
 
 	public static final int RELEASE_6_0_6_BUILD_NUMBER = 6006;
+
+	public static final int RELEASE_6_0_11_BUILD_NUMBER = 6011;
+
+	public static final int RELEASE_6_0_12_BUILD_NUMBER = 6012;
 
 	public static final int RELEASE_6_1_0_BUILD_NUMBER = 6100;
 
@@ -114,7 +130,7 @@ public class ReleaseInfo {
 
 	private static final String _CODE_NAME = "Paton";
 
-	private static final String _DATE = "April 9, 2012";
+	private static final String _DATE = "June 1, 2012";
 
 	private static final String _NAME = "Liferay Portal Community Edition";
 

@@ -24,6 +24,10 @@ boolean print = ParamUtil.getString(request, "viewMode").equals(Constants.PRINT)
 
 boolean hasViewPermission = true;
 
+if (article != null) {
+	hasViewPermission = JournalArticlePermission.contains(permissionChecker, article.getGroupId(), article.getArticleId(), ActionKeys.VIEW);
+}
+
 String title = StringPool.BLANK;
 boolean approved = false;
 boolean expired = true;
@@ -49,11 +53,14 @@ boolean expired = true;
 			</c:otherwise>
 		</c:choose>
 	</c:when>
+	<c:when test="<%= !hasViewPermission %>">
+		<div class="portlet-msg-error">
+			<%= LanguageUtil.get(pageContext, "you-do-not-have-the-required-permissions-to-access-this-content") %>
+		</div>
+	</c:when>
 	<c:otherwise>
 
 		<%
-		hasViewPermission = JournalArticlePermission.contains(permissionChecker, article.getGroupId(), article.getArticleId(), ActionKeys.VIEW);
-
 		title = article.getTitle(locale);
 		approved = article.isApproved();
 		expired = article.isExpired();
@@ -68,7 +75,7 @@ boolean expired = true;
 		%>
 
 		<c:choose>
-			<c:when test="<%= (articleDisplay != null) && !expired && hasViewPermission %>">
+			<c:when test="<%= (articleDisplay != null) && !expired %>">
 
 				<%
 				if (enableViewCountIncrement) {
@@ -167,8 +174,8 @@ boolean expired = true;
 											image='<%= "../file_system/small/" + extension %>'
 											label="<%= true %>"
 											message='<%= LanguageUtil.format(pageContext, "x-convert-x-to-x", new Object[] {"aui-helper-hidden-accessible", articleDisplay.getTitle(), extension.toUpperCase()}) %>'
-											url="<%= exportArticleURL.toString() %>"
 											method="get"
+											url="<%= exportArticleURL.toString() %>"
 										/>
 
 									<%
@@ -191,7 +198,7 @@ boolean expired = true;
 								</c:if>
 
 								<div class="locale-actions">
-									<liferay-ui:language languageIds="<%= availableLocales %>" displayStyle="<%= 0 %>" />
+									<liferay-ui:language displayStyle="<%= 0 %>" languageIds="<%= availableLocales %>" />
 								</div>
 							</c:if>
 						</c:if>
@@ -207,6 +214,7 @@ boolean expired = true;
 						cur="<%= articleDisplay.getCurrentPage() %>"
 						curParam='<%= "page" %>'
 						delta="<%= 1 %>"
+						id="articleDisplayPages"
 						maxPages="<%= 25 %>"
 						total="<%= articleDisplay.getNumberOfPages() %>"
 						type="article"
@@ -224,55 +232,53 @@ boolean expired = true;
 
 				<br />
 
-				<c:if test="<%= hasViewPermission %>">
-					<c:choose>
-						<c:when test="<%= Validator.isNull(articleId) %>">
-						</c:when>
-						<c:otherwise>
+				<c:choose>
+					<c:when test="<%= Validator.isNull(articleId) %>">
+					</c:when>
+					<c:otherwise>
 
-							<%
-							if (expired) {
-							%>
+						<%
+						if (expired) {
+						%>
 
-								<div class="portlet-msg-alert">
-									<%= LanguageUtil.format(pageContext, "x-is-expired", title) %>
-								</div>
+							<div class="portlet-msg-alert">
+								<%= LanguageUtil.format(pageContext, "x-is-expired", title) %>
+							</div>
 
-							<%
-							}
-							else if (!approved) {
-							%>
+						<%
+						}
+						else if (!approved) {
+						%>
 
-								<c:choose>
-									<c:when test="<%= JournalArticlePermission.contains(permissionChecker, article.getGroupId(), article.getArticleId(), ActionKeys.UPDATE) %>">
-										<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL" portletName="<%= PortletKeys.JOURNAL %>">
-											<portlet:param name="struts_action" value="/journal/edit_article" />
-											<portlet:param name="redirect" value="<%= currentURL %>" />
-											<portlet:param name="groupId" value="<%= String.valueOf(article.getGroupId()) %>" />
-											<portlet:param name="articleId" value="<%= article.getArticleId() %>" />
-											<portlet:param name="version" value="<%= String.valueOf(article.getVersion()) %>" />
-										</liferay-portlet:renderURL>
+							<c:choose>
+								<c:when test="<%= JournalArticlePermission.contains(permissionChecker, article.getGroupId(), article.getArticleId(), ActionKeys.UPDATE) %>">
+									<liferay-portlet:renderURL portletName="<%= PortletKeys.JOURNAL %>" var="editURL" windowState="<%= WindowState.MAXIMIZED.toString() %>">
+										<portlet:param name="struts_action" value="/journal/edit_article" />
+										<portlet:param name="redirect" value="<%= currentURL %>" />
+										<portlet:param name="groupId" value="<%= String.valueOf(article.getGroupId()) %>" />
+										<portlet:param name="articleId" value="<%= article.getArticleId() %>" />
+										<portlet:param name="version" value="<%= String.valueOf(article.getVersion()) %>" />
+									</liferay-portlet:renderURL>
 
-										<div class="portlet-msg-alert">
-											<a href="<%= editURL %>">
-												<%= LanguageUtil.format(pageContext, "x-is-not-approved", HtmlUtil.escape(title)) %>
-											</a>
-										</div>
-									</c:when>
-									<c:otherwise>
-										<div class="portlet-msg-alert">
+									<div class="portlet-msg-alert">
+										<a href="<%= editURL %>">
 											<%= LanguageUtil.format(pageContext, "x-is-not-approved", HtmlUtil.escape(title)) %>
-										</div>
-									</c:otherwise>
-								</c:choose>
+										</a>
+									</div>
+								</c:when>
+								<c:otherwise>
+									<div class="portlet-msg-alert">
+										<%= LanguageUtil.format(pageContext, "x-is-not-approved", HtmlUtil.escape(title)) %>
+									</div>
+								</c:otherwise>
+							</c:choose>
 
-							<%
-							}
-							%>
+						<%
+						}
+						%>
 
-						</c:otherwise>
-					</c:choose>
-				</c:if>
+					</c:otherwise>
+				</c:choose>
 			</c:otherwise>
 		</c:choose>
 	</c:otherwise>
@@ -292,12 +298,7 @@ catch (NoSuchArticleException nsae) {
 JournalTemplate template = null;
 
 if ((articleDisplay != null) && Validator.isNotNull(articleDisplay.getTemplateId())) {
-	try {
-		template = JournalTemplateLocalServiceUtil.getTemplate(articleDisplay.getGroupId(), articleDisplay.getTemplateId());
-	}
-	catch (NoSuchTemplateException nste) {
-		template = JournalTemplateLocalServiceUtil.getTemplate(themeDisplay.getCompanyGroupId(), articleDisplay.getTemplateId());
-	}
+	template = JournalTemplateLocalServiceUtil.getTemplate(articleDisplay.getGroupId(), articleDisplay.getTemplateId(), true);
 }
 
 boolean showEditArticleIcon = (latestArticle != null) && JournalArticlePermission.contains(permissionChecker, latestArticle.getGroupId(), latestArticle.getArticleId(), ActionKeys.UPDATE);
@@ -307,11 +308,11 @@ boolean showAddArticleIcon = showSelectArticleIcon && JournalPermission.contains
 boolean showIconsActions = themeDisplay.isSignedIn() && (showEditArticleIcon || showEditTemplateIcon || showSelectArticleIcon || showAddArticleIcon);
 %>
 
-<c:if test="<%= showIconsActions && !print && hasViewPermission %>">
+<c:if test="<%= showIconsActions && !print %>">
 	<div class="lfr-meta-actions icons-container">
 		<div class="icon-actions">
 			<c:if test="<%= showEditArticleIcon %>">
-				<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL" portletName="<%= PortletKeys.JOURNAL %>">
+				<liferay-portlet:renderURL portletName="<%= PortletKeys.JOURNAL %>" var="editURL" windowState="<%= WindowState.MAXIMIZED.toString() %>">
 					<portlet:param name="struts_action" value="/journal/edit_article" />
 					<portlet:param name="redirect" value="<%= currentURL %>" />
 					<portlet:param name="originalRedirect" value="<%= currentURL %>" />
@@ -328,7 +329,7 @@ boolean showIconsActions = themeDisplay.isSignedIn() && (showEditArticleIcon || 
 			</c:if>
 
 			<c:if test="<%= showEditTemplateIcon %>">
-				<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editTemplateURL" portletName="<%= PortletKeys.JOURNAL %>">
+				<liferay-portlet:renderURL portletName="<%= PortletKeys.JOURNAL %>" var="editTemplateURL" windowState="<%= WindowState.MAXIMIZED.toString() %>">
 					<portlet:param name="struts_action" value="/journal/edit_template" />
 					<portlet:param name="redirect" value="<%= currentURL %>" />
 					<portlet:param name="groupId" value="<%= String.valueOf(template.getGroupId()) %>" />
@@ -354,7 +355,7 @@ boolean showIconsActions = themeDisplay.isSignedIn() && (showEditArticleIcon || 
 			</c:if>
 
 			<c:if test="<%= showAddArticleIcon %>">
-				<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="addArticleURL" portletName="<%= PortletKeys.JOURNAL %>">
+				<liferay-portlet:renderURL portletName="<%= PortletKeys.JOURNAL %>" var="addArticleURL" windowState="<%= WindowState.MAXIMIZED.toString() %>">
 					<portlet:param name="struts_action" value="/journal/edit_article" />
 					<portlet:param name="redirect" value="<%= currentURL %>" />
 					<portlet:param name="portletResource" value="<%= portletDisplay.getId() %>" />
@@ -371,7 +372,7 @@ boolean showIconsActions = themeDisplay.isSignedIn() && (showEditArticleIcon || 
 	</div>
 </c:if>
 
-<c:if test="<%= (articleDisplay != null) && hasViewPermission %>">
+<c:if test="<%= articleDisplay != null %>">
 	<c:if test="<%= enableRelatedAssets %>">
 		<div class="entry-links">
 			<liferay-ui:asset-links

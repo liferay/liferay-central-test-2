@@ -75,6 +75,7 @@ userSearch.setEmptyResultsMessage(emptyResultsMessage);
 	LinkedHashMap userParams = new LinkedHashMap();
 
 	if (tabs1.equals("summary") || tabs2.equals("current")) {
+		userParams.put("inherit", true);
 		userParams.put("usersGroups", new Long(group.getGroupId()));
 	}
 	%>
@@ -88,6 +89,7 @@ userSearch.setEmptyResultsMessage(emptyResultsMessage);
 		escapedModel="<%= true %>"
 		keyProperty="userId"
 		modelVar="user2"
+		rowIdProperty="screenName"
 	>
 		<liferay-ui:search-container-row-parameter
 			name="group"
@@ -147,6 +149,11 @@ userSearch.setEmptyResultsMessage(emptyResultsMessage);
 				<aui:button-row>
 					<aui:button href="<%= viewUsersURL.toString() %>" value="assign-users" />
 				</aui:button-row>
+
+				<%
+				viewUsersURL.setParameter("tabs2", "current");
+				%>
+
 			</c:when>
 			<c:otherwise>
 

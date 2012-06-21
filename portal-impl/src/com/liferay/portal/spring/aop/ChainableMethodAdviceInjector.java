@@ -52,11 +52,13 @@ public class ChainableMethodAdviceInjector {
 
 	public void setNewChainableMethodAdvice(
 		ChainableMethodAdvice newChainableMethodAdvice) {
+
 		_newChainableMethodAdvice = newChainableMethodAdvice;
 	}
 
 	public void setParentChainableMethodAdvice(
 		ChainableMethodAdvice parentChainableMethodAdvice) {
+
 		_parentChainableMethodAdvice = parentChainableMethodAdvice;
 	}
 

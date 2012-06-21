@@ -112,7 +112,7 @@
 			FROM
 				Group_
 			WHERE
-				(Group_.type_ != 4) AND
+				(Group_.type_ != 4 OR Group_.type_ IS NULL) AND
 				(friendlyURL = '' OR friendlyURL IS NULL)
 		]]>
 	</sql>
@@ -1025,6 +1025,18 @@
 				(ResourceBlock.name = ?)
 		]]>
 	</sql>
+	<sql id="com.liferay.portal.service.persistence.ResourceFinder.findByContainerResource">
+		<![CDATA[
+			SELECT
+				{Resource_.*}
+			FROM
+				Resource_
+			INNER JOIN
+				Group_ ON
+					(Resource_.codeId = ?) AND
+					(Resource_.primKey = CAST_TEXT(Group_.groupId))
+		]]>
+	</sql>
 	<sql id="com.liferay.portal.service.persistence.ResourceFinder.findByName">
 		<![CDATA[
 			SELECT
@@ -1036,6 +1048,21 @@
 					(ResourceCode.codeId = Resource_.codeId)
 			WHERE
 				(ResourceCode.name = ?)
+		]]>
+	</sql>
+	<sql id="com.liferay.portal.service.persistence.ResourceFinder.findByNoActions">
+		<![CDATA[
+			SELECT
+				{Resource_.*}
+			FROM
+				Resource_
+			LEFT OUTER JOIN
+				Permission_ ON
+					(Permission_.resourceId = Resource_.resourceId) AND
+					(Permission_.actionId = ?)
+			WHERE
+				(Resource_.codeId = ?) AND
+				(Permission_.actionId IS NULL)
 		]]>
 	</sql>
 	<sql id="com.liferay.portal.service.persistence.ResourceFinder.findByC_P">
@@ -1550,7 +1577,7 @@
 	<sql id="com.liferay.portal.service.persistence.UserFinder.countByC_FN_MN_LN_SN_EA_S">
 		<![CDATA[
 			SELECT
-				COUNT(DISTINCT User_.userId) AS COUNT_VALUE
+				DISTINCT User_.userId AS userId
 			FROM
 				User_
 			[$JOIN$]
@@ -1627,7 +1654,7 @@
 	<sql id="com.liferay.portal.service.persistence.UserFinder.findByC_FN_MN_LN_SN_EA_S">
 		<![CDATA[
 			SELECT
-				DISTINCT {User_.*}
+				DISTINCT User_.userId AS userId, User_.screenName AS screenName, User_.emailAddress AS emailAddress, User_.firstName AS firstName, User_.middleName AS middleName, User_.lastName AS lastName, User_.jobTitle AS jobTitle, User_.loginDate AS loginDate
 			FROM
 				User_
 			[$JOIN$]
@@ -1642,10 +1669,6 @@
 					(lower(User_.screenName) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
 					(lower(User_.emailAddress) LIKE ? [$AND_OR_NULL_CHECK$])
 				) AND (User_.status = ?)
-			ORDER BY
-				User_.firstName ASC,
-				User_.middleName ASC,
-				User_.lastName ASC
 		]]>
 	</sql>
 	<sql id="com.liferay.portal.service.persistence.UserFinder.joinByContactTwitterSN">

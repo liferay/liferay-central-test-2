@@ -206,6 +206,15 @@ public class PortalUtil {
 		return getPortal().getAlternateLocales(request);
 	}
 
+	/**
+	 * @deprecated {@link #getAlternateURL(String, ThemeDisplay, Locale)}
+	 */
+	public static String getAlternateURL(
+		HttpServletRequest request, String canonicalURL, Locale locale) {
+
+		return getPortal().getAlternateURL(request, canonicalURL, locale);
+	}
+
 	public static String getAlternateURL(
 		String canonicalURL, ThemeDisplay themeDisplay, Locale locale) {
 
@@ -250,6 +259,16 @@ public class PortalUtil {
 		throws PortalException, SystemException {
 
 		return getPortal().getBasicAuthUserId(request, companyId);
+	}
+
+	/**
+	 * @deprecated {@link #getCanonicalURL(String, ThemeDisplay, Layout)}
+	 */
+	public static String getCanonicalURL(
+			String completeURL, ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
+
+		return getPortal().getCanonicalURL(completeURL, themeDisplay);
 	}
 
 	public static String getCanonicalURL(
@@ -1169,6 +1188,16 @@ public class PortalUtil {
 
 	public static String[] getSystemSiteRoles() {
 		return getPortal().getSystemSiteRoles();
+	}
+
+	public static String getUniqueElementId(
+		HttpServletRequest request, String id) {
+
+		return getPortal().getUniqueElementId(request, id);
+	}
+
+	public static String getUniqueElementId(PortletRequest request, String id) {
+		return getPortal().getUniqueElementId(request, id);
 	}
 
 	public static UploadPortletRequest getUploadPortletRequest(

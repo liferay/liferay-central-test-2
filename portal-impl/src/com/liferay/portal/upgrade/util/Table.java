@@ -175,13 +175,11 @@ public class Table {
 				"Starting backup of " + _tableName + " to " + tempFileName);
 		}
 
-		String selectSQL = getSelectSQL();
-
 		UnsyncBufferedWriter unsyncBufferedWriter = new UnsyncBufferedWriter(
 			new FileWriter(tempFileName));
 
 		try {
-			ps = con.prepareStatement(selectSQL);
+			ps = getSelectPreparedStatement(con);
 
 			rs = ps.executeQuery();
 
@@ -321,6 +319,12 @@ public class Table {
 		return _order;
 	}
 
+	public PreparedStatement getSelectPreparedStatement(Connection con)
+		throws Exception {
+
+		return con.prepareStatement(getSelectSQL());
+	}
+
 	public String getSelectSQL() throws Exception {
 		if (_selectSQL == null) {
 			/*String sql = "select ";
@@ -364,7 +368,7 @@ public class Table {
 			try {
 				value = GetterUtil.getLong(rs.getLong(name));
 			}
-			catch (SQLException e) {
+			catch (SQLException sqle) {
 				value = GetterUtil.getLong(rs.getString(name));
 			}
 		}
@@ -478,7 +482,7 @@ public class Table {
 
 				Object[][] columns = getColumns();
 
-				if ((values.length) != (columns.length)) {
+				if (values.length != columns.length) {
 					throw new UpgradeException(
 						"Column lengths differ between temp file and schema. " +
 							"Attempted to insert row " + line + ".");

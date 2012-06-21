@@ -58,6 +58,15 @@ public interface LayoutSetService extends BaseService {
 	public void setBeanIdentifier(java.lang.String beanIdentifier);
 
 	/**
+	* @deprecated {@link #updateLayoutSetPrototypeLinkEnabled(long, boolean,
+	boolean, String)}
+	*/
+	public void updateLayoutSetPrototypeLinkEnabled(long groupId,
+		boolean privateLayout, boolean layoutSetPrototypeLinkEnabled)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	/**
 	* Updates the state of the layout set prototype link.
 	*
 	* <p>

@@ -3,6 +3,23 @@
 
 <resource-action-mapping>
 	<portlet-resource>
+		<portlet-name>2</portlet-name>
+		<permissions>
+			<supports>
+				<action-key>ACCESS_IN_CONTROL_PANEL</action-key>
+				<action-key>CONFIGURATION</action-key>
+				<action-key>VIEW</action-key>
+			</supports>
+			<site-member-defaults />
+			<guest-defaults />
+			<guest-unsupported>
+				<action-key>ACCESS_IN_CONTROL_PANEL</action-key>
+				<action-key>CONFIGURATION</action-key>
+				<action-key>VIEW</action-key>
+			</guest-unsupported>
+		</permissions>
+	</portlet-resource>
+	<portlet-resource>
 		<portlet-name>11</portlet-name>
 		<permissions>
 			<supports>
@@ -33,6 +50,7 @@
 				<action-key>ADD_USER_GROUP</action-key>
 				<action-key>CONFIGURATION</action-key>
 				<action-key>EXPORT_USER</action-key>
+				<action-key>IMPERSONATE</action-key>
 				<action-key>UNLINK_LAYOUT_SET_PROTOTYPE</action-key>
 				<action-key>VIEW_CONTROL_PANEL</action-key>
 			</supports>
@@ -239,6 +257,23 @@
 			<guest-unsupported>
 				<action-key>ACCESS_IN_CONTROL_PANEL</action-key>
 				<action-key>CONFIGURATION</action-key>
+			</guest-unsupported>
+		</permissions>
+	</portlet-resource>
+	<portlet-resource>
+		<portlet-name>140</portlet-name>
+		<permissions>
+			<supports>
+				<action-key>ACCESS_IN_CONTROL_PANEL</action-key>
+				<action-key>CONFIGURATION</action-key>
+				<action-key>VIEW</action-key>
+			</supports>
+			<site-member-defaults />
+			<guest-defaults />
+			<guest-unsupported>
+				<action-key>ACCESS_IN_CONTROL_PANEL</action-key>
+				<action-key>CONFIGURATION</action-key>
+				<action-key>VIEW</action-key>
 			</guest-unsupported>
 		</permissions>
 	</portlet-resource>

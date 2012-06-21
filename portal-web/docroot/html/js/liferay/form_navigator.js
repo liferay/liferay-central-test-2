@@ -34,7 +34,7 @@ AUI.add(
 			}
 
 			if (options.modifiedSections) {
-				instance._modifiedSections = A.all('[name=' + options.modifiedSections+ ']');
+				instance._modifiedSections = A.all('[name=' + options.modifiedSections + ']');
 
 				if (!instance._modifiedSections) {
 					instance._modifiedSections = A.Node.create('<input name="' + options.modifiedSections + '" type="hidden" />');
@@ -82,7 +82,7 @@ AUI.add(
 			_addModifiedSection: function (section) {
 				var instance = this;
 
-				if (A.Array.indexOf(section, instance._modifiedSectionsArray) == -1) {
+				if (A.Array.indexOf(instance._modifiedSectionsArray, section) == -1) {
 					instance._modifiedSectionsArray.push(section);
 				}
 			},
@@ -160,13 +160,19 @@ AUI.add(
 				if (id) {
 					id = id.charAt(0) != '#' ? '#' + id : id;
 
-					var li = currentNavItem || instance._navigation.one('[href$=' + id + ']').get('parentNode');
+					if (!currentNavItem) {
+						var link = instance._navigation.one('[href$=' + id + ']');
+
+						if (link) {
+							currentNavItem = link.get('parentNode');
+						}
+					}
 
 					id = id.split('#');
 
 					var namespacedId = id[1];
 
-					if (namespacedId) {
+					if (currentNavItem && namespacedId) {
 						Liferay.fire('formNavigator:reveal' + namespacedId);
 
 						var section = A.one('#' + namespacedId);
@@ -176,7 +182,7 @@ AUI.add(
 							selected.removeClass(CSS_SELECTED);
 						}
 
-						li.addClass(CSS_SELECTED);
+						currentNavItem.addClass(CSS_SELECTED);
 
 						instance._sections.removeClass(CSS_SELECTED).addClass(CSS_HIDDEN);
 

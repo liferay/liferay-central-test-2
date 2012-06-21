@@ -59,14 +59,18 @@ public class ViewOrganizationSiteTest extends BaseTestCase {
 		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace(
 				"Organization Name\nBelongs to an organization of type Regular Organization."),
-			selenium.getText("//tr[3]/td"));
+			selenium.getText(
+				"//td[@id='_134_groupsSearchContainer_col-name_row--organization-name']/a"));
 		assertEquals(RuntimeVariables.replace("Private"),
-			selenium.getText("//td[2]/a"));
+			selenium.getText(
+				"//td[@id='_134_groupsSearchContainer_col-type_row--organization-name']/a"));
 		assertEquals(RuntimeVariables.replace("1 Organization"),
-			selenium.getText("//td[3]/div"));
+			selenium.getText(
+				"//td[@id='_134_groupsSearchContainer_col-members_row--organization-name']"));
 		assertEquals(RuntimeVariables.replace("Yes"),
-			selenium.getText("//tr[3]/td[4]"));
-		selenium.clickAt("//tr[3]/td/a",
+			selenium.getText(
+				"//td[@id='_134_groupsSearchContainer_col-active_row--organization-name']"));
+		selenium.clickAt("//td[@id='_134_groupsSearchContainer_col-name_row--organization-name']/a",
 			RuntimeVariables.replace(
 				"Organization Name\nBelongs to an organization of type Regular Organization."));
 		selenium.waitForPageToLoad("30000");

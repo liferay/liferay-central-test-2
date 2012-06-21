@@ -41,6 +41,7 @@ import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.MimeTypesUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.ReleaseInfo;
+import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -106,6 +107,7 @@ import java.text.Format;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -156,7 +158,7 @@ public class WebServerServlet extends HttpServlet {
 						folderId = folder.getFolderId();
 					}
 					catch (NoSuchFolderException nsfe) {
-						if (i != pathArray.length - 1) {
+						if (i != (pathArray.length - 1)) {
 							return false;
 						}
 
@@ -637,10 +639,22 @@ public class WebServerServlet extends HttpServlet {
 		return false;
 	}
 
+	protected boolean isSupportsRangeHeader(String contentType) {
+		return _acceptRangesMimeTypes.contains(contentType);
+	}
+
 	protected void processPrincipalException(
 			Throwable t, User user, HttpServletRequest request,
 			HttpServletResponse response)
 		throws IOException, ServletException {
+
+		if (!PropsValues.WEB_SERVER_SERVLET_HTTP_STATUS_CODE_STRICT) {
+			PortalUtil.sendError(
+				HttpServletResponse.SC_NOT_FOUND,
+				new NoSuchFileEntryException(t), request, response);
+
+			return;
+		}
 
 		if (!user.isDefaultUser()) {
 			PortalUtil.sendError(
@@ -717,7 +731,7 @@ public class WebServerServlet extends HttpServlet {
 				folderId = folder.getFolderId();
 			}
 			catch (NoSuchFolderException nsfe) {
-				if (i != pathArray.length - 1) {
+				if (i != (pathArray.length - 1)) {
 					throw nsfe;
 				}
 
@@ -790,9 +804,16 @@ public class WebServerServlet extends HttpServlet {
 
 		// Retrieve file details
 
-		FileEntry fileEntry = getFileEntry(pathArray);
+		FileEntry fileEntry = null;
 
-		if (fileEntry == null) {
+		try {
+			fileEntry = getFileEntry(pathArray);
+		}
+		catch (NoSuchFileEntryException nsfee) {
+			if (user.isDefaultUser()) {
+				throw new PrincipalException();
+			}
+
 			throw new NoSuchFileEntryException();
 		}
 
@@ -951,7 +972,50 @@ public class WebServerServlet extends HttpServlet {
 			contentType = fileVersion.getMimeType();
 		}
 
-		// Support range HTTP header
+		if (_log.isDebugEnabled()) {
+			_log.debug("Content type set to " + contentType);
+		}
+
+		// Send file
+
+		if (isSupportsRangeHeader(contentType)) {
+			sendFileWithRangeHeader(
+				request, response, fileName, inputStream, contentLength,
+				contentType);
+		}
+		else {
+			ServletResponseUtil.sendFile(
+				request, response, fileName, inputStream, contentLength,
+				contentType);
+		}
+	}
+
+	protected void sendFile(
+			HttpServletResponse response, User user, long groupId,
+			long folderId, String title)
+		throws Exception {
+
+		FileEntry fileEntry = DLAppServiceUtil.getFileEntry(
+			groupId, folderId, title);
+
+		String contentType = fileEntry.getMimeType();
+
+		response.setContentType(contentType);
+
+		InputStream inputStream = fileEntry.getContentStream();
+
+		ServletResponseUtil.write(response, inputStream);
+	}
+
+	protected void sendFileWithRangeHeader(
+			HttpServletRequest request, HttpServletResponse response,
+			String fileName, InputStream inputStream, long contentLength,
+			String contentType)
+		throws IOException {
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Accepting ranges for the file " + fileName);
+		}
 
 		response.setHeader(
 			HttpHeaders.ACCEPT_RANGES, HttpHeaders.ACCEPT_RANGES_BYTES_VALUE);
@@ -994,23 +1058,6 @@ public class WebServerServlet extends HttpServlet {
 		}
 	}
 
-	protected void sendFile(
-			HttpServletResponse response, User user, long groupId,
-			long folderId, String title)
-		throws Exception {
-
-		FileEntry fileEntry = DLAppServiceUtil.getFileEntry(
-			groupId, folderId, title);
-
-		String contentType = fileEntry.getMimeType();
-
-		response.setContentType(contentType);
-
-		InputStream inputStream = fileEntry.getContentStream();
-
-		ServletResponseUtil.write(response, inputStream);
-	}
-
 	protected void sendGroups(
 			HttpServletResponse response, User user, String path)
 		throws Exception {
@@ -1049,7 +1096,16 @@ public class WebServerServlet extends HttpServlet {
 		freeMarkerContext.put("dateFormat", _dateFormat);
 		freeMarkerContext.put("entries", webServerEntries);
 		freeMarkerContext.put("path", HttpUtil.encodePath(path));
-		freeMarkerContext.put("serverInfo", ReleaseInfo.getServerInfo());
+
+		if (_WEB_SERVER_SERVLET_VERSION_VERBOSITY_DEFAULT) {
+		}
+		else if (_WEB_SERVER_SERVLET_VERSION_VERBOSITY_PARTIAL) {
+			freeMarkerContext.put("releaseInfo", ReleaseInfo.getName());
+		}
+		else {
+			freeMarkerContext.put("releaseInfo", ReleaseInfo.getReleaseInfo());
+		}
+
 		freeMarkerContext.put("validator", Validator_IW.getInstance());
 
 		String html = FreeMarkerUtil.process(_TEMPLATE_FTL, freeMarkerContext);
@@ -1213,7 +1269,18 @@ public class WebServerServlet extends HttpServlet {
 	private static final String _TEMPLATE_FTL =
 		"com/liferay/portal/webserver/dependencies/template.ftl";
 
+	private static final boolean _WEB_SERVER_SERVLET_VERSION_VERBOSITY_DEFAULT =
+		PropsValues.WEB_SERVER_SERVLET_VERSION_VERBOSITY.equalsIgnoreCase(
+			ReleaseInfo.getName());
+
+	private static final boolean _WEB_SERVER_SERVLET_VERSION_VERBOSITY_PARTIAL =
+		PropsValues.WEB_SERVER_SERVLET_VERSION_VERBOSITY.equalsIgnoreCase(
+			"partial");
+
 	private static Log _log = LogFactoryUtil.getLog(WebServerServlet.class);
+
+	private static Set<String> _acceptRangesMimeTypes = SetUtil.fromArray(
+		PropsValues.WEB_SERVER_SERVLET_ACCEPT_RANGES_MIME_TYPES);
 
 	private static Format _dateFormat =
 		FastDateFormatFactoryUtil.getSimpleDateFormat(_DATE_FORMAT_PATTERN);

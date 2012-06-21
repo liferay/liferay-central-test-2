@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.ModelHintsUtil;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
@@ -62,7 +63,11 @@ public class AssetCategoryLocalServiceImpl
 
 		User user = userPersistence.findByPrimaryKey(userId);
 		long groupId = serviceContext.getScopeGroupId();
+
 		String name = titleMap.get(LocaleUtil.getDefault());
+
+		name = ModelHintsUtil.trimString(
+			AssetCategory.class.getName(), "name", name);
 
 		if (categoryProperties == null) {
 			categoryProperties = new String[0];
@@ -411,6 +416,9 @@ public class AssetCategoryLocalServiceImpl
 
 		String name = titleMap.get(LocaleUtil.getDefault());
 
+		name = ModelHintsUtil.trimString(
+			AssetCategory.class.getName(), "name", name);
+
 		if (categoryProperties == null) {
 			categoryProperties = new String[0];
 		}
@@ -428,6 +436,9 @@ public class AssetCategoryLocalServiceImpl
 
 		if (vocabularyId != category.getVocabularyId()) {
 			assetVocabularyPersistence.findByPrimaryKey(vocabularyId);
+
+			parentCategoryId =
+				AssetCategoryConstants.DEFAULT_PARENT_CATEGORY_ID;
 
 			category.setVocabularyId(vocabularyId);
 

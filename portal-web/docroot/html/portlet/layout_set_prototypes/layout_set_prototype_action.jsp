@@ -56,7 +56,7 @@ Group group = layoutSetPrototype.getGroup();
 		/>
 
 		<c:if test="<%= group.getPrivateLayoutsPageCount() > 0 %>">
-			<liferay-portlet:actionURL var="viewPagesURL" portletName="<%= PortletKeys.SITE_REDIRECTOR %>">
+			<liferay-portlet:actionURL portletName="<%= PortletKeys.SITE_REDIRECTOR %>" var="viewPagesURL">
 				<portlet:param name="struts_action" value="/my_sites/view" />
 				<portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
 				<portlet:param name="privateLayout" value="<%= Boolean.TRUE.toString() %>" />
@@ -95,6 +95,39 @@ Group group = layoutSetPrototype.getGroup();
 
 		<liferay-ui:icon-delete
 			url="<%= deleteURL %>"
+		/>
+	</c:if>
+
+	<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, group.getGroupId(), ActionKeys.EXPORT_IMPORT_LAYOUTS) %>">
+		<portlet:renderURL var="exportPagesURL" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
+			<portlet:param name="struts_action" value="/layouts_admin/export_layouts" />
+			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.EXPORT %>" />
+			<portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
+			<portlet:param name="privateLayout" value="<%= String.valueOf(Boolean.TRUE) %>" />
+			<portlet:param name="rootNodeName" value="<%= layoutSetPrototype.getName(locale) %>" />
+		</portlet:renderURL>
+
+		<liferay-ui:icon
+			cssClass="export-layoutset-prototype layoutset-prototype-action"
+			image="export"
+			method="get"
+			url="<%= exportPagesURL %>"
+		/>
+
+		<portlet:renderURL var="importPagesURL" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
+			<portlet:param name="struts_action" value="/layouts_admin/import_layouts" />
+			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.IMPORT %>" />
+			<portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
+			<portlet:param name="privateLayout" value="<%= String.valueOf(Boolean.TRUE) %>" />
+			<portlet:param name="rootNodeName" value="<%= layoutSetPrototype.getName(locale) %>" />
+		</portlet:renderURL>
+
+		<liferay-ui:icon
+			cssClass="import-layoutset-prototype layoutset-prototype-action"
+			image="../aui/arrowthick-1-t"
+			message="import"
+			method="get"
+			url="<%= importPagesURL %>"
 		/>
 	</c:if>
 </liferay-ui:icon-menu>

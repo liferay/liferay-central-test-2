@@ -40,6 +40,7 @@ import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.LocalizationUtil;
 import com.liferay.portal.kernel.util.MathUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -56,7 +57,6 @@ import com.liferay.portal.kernel.xml.XPath;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Image;
-import com.liferay.portal.model.ModelHintsUtil;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
@@ -117,6 +117,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.portlet.PortletPreferences;
 
@@ -203,8 +205,12 @@ public class JournalArticleLocalServiceImpl
 
 		Locale locale = LocaleUtil.getDefault();
 
-		String defaultLanguageId = GetterUtil.getString(
-			serviceContext.getAttribute("defaultLanguageId"));
+		String defaultLanguageId = ParamUtil.getString(
+			serviceContext, "defaultLanguageId");
+
+		if (Validator.isNull(defaultLanguageId)) {
+			defaultLanguageId = LocalizationUtil.getDefaultLocale(content);
+		}
 
 		if (Validator.isNotNull(defaultLanguageId)) {
 			locale = LocaleUtil.fromLanguageId(defaultLanguageId);
@@ -228,7 +234,8 @@ public class JournalArticleLocalServiceImpl
 		article.setArticleId(articleId);
 		article.setVersion(version);
 		article.setTitleMap(titleMap, locale);
-		article.setUrlTitle(getUniqueUrlTitle(id, groupId, articleId, title));
+		article.setUrlTitle(
+			getUniqueUrlTitle(id, articleId, title, null, serviceContext));
 		article.setDescriptionMap(descriptionMap, locale);
 		article.setContent(content);
 		article.setType(type);
@@ -316,7 +323,7 @@ public class JournalArticleLocalServiceImpl
 
 				// Indexer
 
-				Indexer indexer = IndexerRegistryUtil.getIndexer(
+				Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
 					JournalArticle.class);
 
 				indexer.reindex(article);
@@ -414,7 +421,7 @@ public class JournalArticleLocalServiceImpl
 			journalArticlePersistence.update(article, false);
 
 			if (article.isIndexable()) {
-				Indexer indexer = IndexerRegistryUtil.getIndexer(
+				Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
 					JournalArticle.class);
 
 				indexer.delete(article);
@@ -471,8 +478,7 @@ public class JournalArticleLocalServiceImpl
 
 		if (content.indexOf("\\n") != -1) {
 			content = StringUtil.replace(
-				content,
-				new String[] {"\\n", "\\r"},
+				content, new String[] {"\\n", "\\r"},
 				new String[] {"\n", "\r"});
 
 			article.setContent(content);
@@ -669,7 +675,7 @@ public class JournalArticleLocalServiceImpl
 			// Expando
 
 			expandoValueLocalService.deleteValues(
-				JournalArticle.class.getName(), article.getResourcePrimKey());
+				JournalArticle.class.getName(), article.getId());
 
 			// Resources
 
@@ -733,7 +739,7 @@ public class JournalArticleLocalServiceImpl
 		List<JournalArticle> articles = journalArticlePersistence.findByG_L(
 			groupId, layoutUuid);
 
-		for (JournalArticle article: articles) {
+		for (JournalArticle article : articles) {
 			article.setLayoutUuid(StringPool.BLANK);
 
 			journalArticlePersistence.update(article, false);
@@ -755,11 +761,21 @@ public class JournalArticleLocalServiceImpl
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		List<JournalArticle> articles = journalArticlePersistence.findByG_A(
-			groupId, articleId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
-			new ArticleVersionComparator(true));
+		if (PropsValues.JOURNAL_ARTICLE_EXPIRE_ALL_VERSIONS) {
+			List<JournalArticle> articles = journalArticlePersistence.findByG_A(
+				groupId, articleId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+				new ArticleVersionComparator(true));
 
-		for (JournalArticle article : articles) {
+			for (JournalArticle article : articles) {
+				expireArticle(
+					userId, groupId, article.getArticleId(),
+					article.getVersion(), articleURL, serviceContext);
+			}
+		}
+		else {
+			JournalArticle article = getLatestArticle(
+				groupId, articleId, WorkflowConstants.STATUS_APPROVED);
+
 			expireArticle(
 				userId, groupId, article.getArticleId(), article.getVersion(),
 				articleURL, serviceContext);
@@ -1695,8 +1711,8 @@ public class JournalArticleLocalServiceImpl
 			searchContext.setAttributes(attributes);
 
 			searchContext.setCompanyId(companyId);
-			searchContext.setGroupIds(new long[] {groupId});
 			searchContext.setEnd(end);
+			searchContext.setGroupIds(new long[] {groupId});
 
 			if (params != null) {
 				String keywords = (String)params.remove("keywords");
@@ -1716,7 +1732,7 @@ public class JournalArticleLocalServiceImpl
 			searchContext.setSorts(new Sort[] {sort});
 			searchContext.setStart(start);
 
-			Indexer indexer = IndexerRegistryUtil.getIndexer(
+			Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
 				JournalArticle.class);
 
 			return indexer.search(searchContext);
@@ -1948,8 +1964,7 @@ public class JournalArticleLocalServiceImpl
 
 		boolean incrementVersion = false;
 
-		boolean imported = GetterUtil.getBoolean(
-			serviceContext.getAttribute("imported"));
+		boolean imported = ParamUtil.getBoolean(serviceContext, "imported");
 
 		if (imported) {
 			oldArticle = getArticle(groupId, articleId, version);
@@ -2011,8 +2026,12 @@ public class JournalArticleLocalServiceImpl
 
 		Locale locale = LocaleUtil.getDefault();
 
-		String defaultLanguageId = GetterUtil.getString(
-			serviceContext.getAttribute("defaultLanguageId"));
+		String defaultLanguageId = ParamUtil.getString(
+			serviceContext, "defaultLanguageId");
+
+		if (Validator.isNull(defaultLanguageId)) {
+			defaultLanguageId = LocalizationUtil.getDefaultLocale(content);
+		}
 
 		if (Validator.isNotNull(defaultLanguageId)) {
 			locale = LocaleUtil.fromLanguageId(defaultLanguageId);
@@ -2027,7 +2046,9 @@ public class JournalArticleLocalServiceImpl
 		article.setModifiedDate(serviceContext.getModifiedDate(now));
 		article.setTitleMap(titleMap, locale);
 		article.setUrlTitle(
-			getUniqueUrlTitle(article.getId(), groupId, articleId, title));
+			getUniqueUrlTitle(
+				article.getId(), article.getArticleId(), title,
+				oldArticle.getUrlTitle(), serviceContext));
 		article.setDescriptionMap(descriptionMap, locale);
 		article.setContent(content);
 		article.setType(type);
@@ -2100,7 +2121,7 @@ public class JournalArticleLocalServiceImpl
 
 			// Indexer
 
-			Indexer indexer = IndexerRegistryUtil.getIndexer(
+			Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
 				JournalArticle.class);
 
 			indexer.reindex(article);
@@ -2184,7 +2205,9 @@ public class JournalArticleLocalServiceImpl
 			article.setVersion(newVersion);
 			article.setTitleMap(oldArticle.getTitleMap());
 			article.setUrlTitle(
-				getUniqueUrlTitle(article.getId(), groupId, articleId, title));
+				getUniqueUrlTitle(
+					id, articleId, title, oldArticle.getUrlTitle(),
+					serviceContext));
 			article.setDescriptionMap(oldArticle.getDescriptionMap());
 			article.setType(oldArticle.getType());
 			article.setStructureId(oldArticle.getStructureId());
@@ -2354,7 +2377,7 @@ public class JournalArticleLocalServiceImpl
 
 		journalArticlePersistence.update(article, false);
 
-		if (isLatestVersion(
+		if (hasModifiedLatestApprovedVersion (
 				article.getGroupId(), article.getArticleId(),
 				article.getVersion())) {
 
@@ -2445,7 +2468,7 @@ public class JournalArticleLocalServiceImpl
 
 				// Indexer
 
-				Indexer indexer = IndexerRegistryUtil.getIndexer(
+				Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
 					JournalArticle.class);
 
 				indexer.reindex(article);
@@ -2590,7 +2613,7 @@ public class JournalArticleLocalServiceImpl
 		Element elParent = el.getParent();
 
 		for (;;) {
-			if ((elParent == null) || (elParent.getName().equals("root"))) {
+			if ((elParent == null) || elParent.getName().equals("root")) {
 				break;
 			}
 
@@ -2715,7 +2738,9 @@ public class JournalArticleLocalServiceImpl
 							JournalArticle.class.getName(), 0,
 							ContentTypes.TEXT_HTML, dynamicContent);
 
-						dynamicContentElement.setText(dynamicContent);
+						dynamicContentElement.clearContent();
+
+						dynamicContentElement.addCDATA(dynamicContent);
 					}
 				}
 			}
@@ -2756,7 +2781,9 @@ public class JournalArticleLocalServiceImpl
 						JournalArticle.class.getName(), 0,
 						ContentTypes.TEXT_HTML, staticContent);
 
-					staticContentElement.setText(staticContent);
+					staticContentElement.clearContent();
+
+					staticContentElement.addCDATA(staticContent);
 				}
 			}
 
@@ -2841,7 +2868,7 @@ public class JournalArticleLocalServiceImpl
 			}
 
 			if ((version > JournalArticleConstants.VERSION_DEFAULT) &&
-				(incrementVersion)) {
+				incrementVersion) {
 
 				Image oldImage = null;
 
@@ -2998,36 +3025,113 @@ public class JournalArticleLocalServiceImpl
 
 		String urlTitle = JournalUtil.getUrlTitle(id, title);
 
-		String newUrlTitle = ModelHintsUtil.trimString(
-			JournalArticle.class.getName(), "urlTitle", urlTitle);
-
 		for (int i = 1;; i++) {
 			JournalArticle article = null;
 
 			try {
-				article = getArticleByUrlTitle(groupId, newUrlTitle);
+				article = getArticleByUrlTitle(groupId, urlTitle);
 			}
 			catch (NoSuchArticleException nsae) {
 			}
 
-			if ((article == null) || article.getArticleId().equals(articleId)) {
+			if ((article == null) || articleId.equals(article.getArticleId())) {
 				break;
 			}
 			else {
 				String suffix = StringPool.DASH + i;
 
-				String prefix = newUrlTitle;
+				String prefix = urlTitle;
 
-				if (newUrlTitle.length() > suffix.length()) {
-					prefix = newUrlTitle.substring(
-						0, newUrlTitle.length() - suffix.length());
+				if (urlTitle.length() > suffix.length()) {
+					prefix = urlTitle.substring(
+						0, urlTitle.length() - suffix.length());
 				}
 
-				newUrlTitle = prefix + suffix;
+				urlTitle = prefix + suffix;
 			}
 		}
 
-		return newUrlTitle;
+		return urlTitle;
+	}
+
+	protected String getUniqueUrlTitle(
+			long id, String articleId, String title, String oldUrlTitle,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		String serviceContextUrlTitle = ParamUtil.getString(
+			serviceContext, "urlTitle");
+
+		String urlTitle = null;
+
+		if (isMatchesServiceContextUrlTitle(serviceContextUrlTitle)) {
+			urlTitle = JournalUtil.getUrlTitle(id, serviceContextUrlTitle);
+
+			JournalArticle urlTitleArticle = null;
+
+			try {
+				urlTitleArticle = getArticleByUrlTitle(
+					serviceContext.getScopeGroupId(), urlTitle);
+			}
+			catch (NoSuchArticleException nsae) {
+			}
+
+			if ((urlTitleArticle != null) &&
+				!Validator.equals(
+					urlTitleArticle.getArticleId(), articleId)) {
+
+				urlTitle = getUniqueUrlTitle(
+					id, serviceContext.getScopeGroupId(), articleId, urlTitle);
+			}
+		}
+		else {
+			if (isMatchesServiceContextUrlTitle(oldUrlTitle)) {
+				urlTitle = oldUrlTitle;
+			}
+			else {
+				urlTitle = getUniqueUrlTitle(
+					id, serviceContext.getScopeGroupId(), articleId, title);
+			}
+		}
+
+		return urlTitle;
+	}
+
+	protected boolean hasModifiedLatestApprovedVersion(
+			long groupId, String articleId, double version)
+		throws PortalException, SystemException {
+
+		double latestApprovedVersion;
+
+		try {
+			latestApprovedVersion = getLatestVersion(
+				groupId, articleId, WorkflowConstants.STATUS_APPROVED);
+
+			if (version >= latestApprovedVersion) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+		catch (NoSuchArticleException nsae) {
+			return true;
+		}
+	}
+
+	protected boolean isMatchesServiceContextUrlTitle(String urlTitle) {
+		if (Validator.isNotNull(urlTitle) &&
+			Validator.isNotNull(PropsValues.JOURNAL_ARTICLE_URL_TITLE_REGEXP)) {
+
+			Pattern pattern = Pattern.compile(
+				PropsValues.JOURNAL_ARTICLE_URL_TITLE_REGEXP);
+
+			Matcher matcher = pattern.matcher(urlTitle);
+
+			return matcher.matches();
+		}
+
+		return false;
 	}
 
 	protected void notifySubscribers(
@@ -3244,7 +3348,7 @@ public class JournalArticleLocalServiceImpl
 			 (article.getStatus() == WorkflowConstants.STATUS_APPROVED))) {
 
 			if (article.isIndexable()) {
-				Indexer indexer = IndexerRegistryUtil.getIndexer(
+				Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
 					JournalArticle.class);
 
 				indexer.delete(article);
@@ -3262,7 +3366,7 @@ public class JournalArticleLocalServiceImpl
 			}
 
 			if (article.isIndexable()) {
-				Indexer indexer = IndexerRegistryUtil.getIndexer(
+				Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
 					JournalArticle.class);
 
 				indexer.reindex(previousApprovedArticle);
@@ -3399,7 +3503,7 @@ public class JournalArticleLocalServiceImpl
 	protected void validate(long groupId, String articleId)
 		throws PortalException, SystemException {
 
-		if ((Validator.isNull(articleId)) ||
+		if (Validator.isNull(articleId) ||
 			(articleId.indexOf(CharPool.SPACE) != -1)) {
 
 			throw new ArticleIdException();

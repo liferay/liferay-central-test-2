@@ -111,7 +111,7 @@ public class PortletItemLocalServiceImpl
 
 			portletItemPersistence.update(portletItem, false);
 		}
-		catch (NoSuchPortletItemException nsste) {
+		catch (NoSuchPortletItemException nspie) {
 			portletItem = addPortletItem(
 				userId, groupId, name, portletId,
 				PortletPreferences.class.getName());

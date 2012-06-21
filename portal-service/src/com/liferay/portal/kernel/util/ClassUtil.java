@@ -96,8 +96,8 @@ public class ClassUtil {
 					classes.add(st.sval);
 				}
 			}
-			else if (st.ttype != StreamTokenizer.TT_NUMBER &&
-					 st.ttype != StreamTokenizer.TT_EOL) {
+			else if ((st.ttype != StreamTokenizer.TT_NUMBER) &&
+					 (st.ttype != StreamTokenizer.TT_EOL)) {
 
 				if (Character.isUpperCase((char)st.ttype)) {
 					classes.add(String.valueOf((char)st.ttype));
@@ -158,7 +158,7 @@ public class ClassUtil {
 
 		if (ServerDetector.isJBoss()) {
 			if (path.startsWith("file:") && !path.startsWith("file:/")) {
-				path = path.substring(5, path.length());
+				path = path.substring(5);
 
 				path = "file:/".concat(path);
 
@@ -175,11 +175,11 @@ public class ClassUtil {
 		String parentPath = path.substring(0, pos);
 
 		if (parentPath.startsWith("jar:")) {
-			parentPath = parentPath.substring(4, parentPath.length());
+			parentPath = parentPath.substring(4);
 		}
 
 		if (parentPath.startsWith("file:/")) {
-			parentPath = parentPath.substring(6, parentPath.length());
+			parentPath = parentPath.substring(6);
 		}
 
 		if (_log.isDebugEnabled()) {
@@ -194,7 +194,7 @@ public class ClassUtil {
 			return true;
 		}
 
-		if (a == null || b == null) {
+		if ((a == null) || (b == null)) {
 			return false;
 		}
 
@@ -218,7 +218,7 @@ public class ClassUtil {
 	}
 
 	public static boolean isSubclass(Class<?> a, String s) {
-		if (a == null || s == null) {
+		if ((a == null) || (s == null)) {
 			return false;
 		}
 

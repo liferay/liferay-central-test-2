@@ -47,6 +47,8 @@ import com.liferay.portal.kernel.util.TimeZoneUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
+import com.liferay.portal.kernel.workflow.WorkflowTask;
+import com.liferay.portal.kernel.workflow.WorkflowTaskManagerUtil;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.lar.LayoutExporter;
 import com.liferay.portal.messaging.LayoutsLocalPublisherRequest;
@@ -60,6 +62,7 @@ import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.LayoutSetBranchConstants;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.User;
+import com.liferay.portal.model.WorkflowInstanceLink;
 import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
@@ -75,6 +78,7 @@ import com.liferay.portal.service.LayoutSetLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextThreadLocal;
 import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portal.service.WorkflowInstanceLinkLocalServiceUtil;
 import com.liferay.portal.service.http.GroupServiceHttp;
 import com.liferay.portal.service.http.LayoutServiceHttp;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
@@ -827,6 +831,45 @@ public class StagingImpl implements Staging {
 		return parameterMap;
 	}
 
+	public WorkflowTask getWorkflowTask(
+			long userId, LayoutRevision layoutRevision)
+		throws PortalException, SystemException {
+
+		WorkflowInstanceLink workflowInstanceLink =
+			WorkflowInstanceLinkLocalServiceUtil.fetchWorkflowInstanceLink(
+				layoutRevision.getCompanyId(), layoutRevision.getGroupId(),
+				LayoutRevision.class.getName(),
+				layoutRevision.getLayoutRevisionId());
+
+		if (workflowInstanceLink == null) {
+			return null;
+		}
+
+		List<WorkflowTask> workflowTasks =
+			WorkflowTaskManagerUtil.getWorkflowTasksByWorkflowInstance(
+				layoutRevision.getCompanyId(), userId,
+				workflowInstanceLink.getWorkflowInstanceId(), false, 0, 1,
+				null);
+
+		if (!workflowTasks.isEmpty()) {
+			return workflowTasks.get(0);
+		}
+
+		return null;
+	}
+
+	public boolean hasWorkflowTask(long userId, LayoutRevision layoutRevision)
+		throws PortalException, SystemException {
+
+		WorkflowTask workflowTask = getWorkflowTask(userId, layoutRevision);
+
+		if (workflowTask != null) {
+			return true;
+		}
+
+		return false;
+	}
+
 	public boolean isIncomplete(Layout layout, long layoutSetBranchId) {
 		LayoutRevision layoutRevision = LayoutStagingUtil.getLayoutRevision(
 			layout);
@@ -850,7 +893,7 @@ public class StagingImpl implements Staging {
 		catch (Exception e) {
 		}
 
-		if (layoutRevision == null ||
+		if ((layoutRevision == null) ||
 			(layoutRevision.getStatus() ==
 				WorkflowConstants.STATUS_INCOMPLETE)) {
 
@@ -1290,12 +1333,12 @@ public class StagingImpl implements Staging {
 			return;
 		}
 
-		int stagingType = ParamUtil.getInteger(portletRequest, "stagingType");
+		int stagingType = getStagingType(portletRequest, liveGroup);
 
-		boolean branchingPublic = ParamUtil.getBoolean(
-			portletRequest, "branchingPublic");
-		boolean branchingPrivate = ParamUtil.getBoolean(
-			portletRequest, "branchingPrivate");
+		boolean branchingPublic = getBoolean(
+			portletRequest, liveGroup, "branchingPublic");
+		boolean branchingPrivate = getBoolean(
+			portletRequest, liveGroup, "branchingPrivate");
 
 		ServiceContext serviceContext =
 			ServiceContextThreadLocal.getServiceContext();
@@ -1312,16 +1355,17 @@ public class StagingImpl implements Staging {
 				branchingPrivate, serviceContext);
 		}
 		else if (stagingType == StagingConstants.TYPE_REMOTE_STAGING) {
-			String remoteAddress = ParamUtil.getString(
-				portletRequest, "remoteAddress");
+			String remoteAddress = getString(
+				portletRequest, liveGroup, "remoteAddress");
 
 			remoteAddress = stripProtocolFromRemoteAddress(remoteAddress);
 
-			long remoteGroupId = ParamUtil.getLong(
-				portletRequest, "remoteGroupId");
-			int remotePort = ParamUtil.getInteger(portletRequest, "remotePort");
-			boolean secureConnection = ParamUtil.getBoolean(
-				portletRequest, "secureConnection");
+			long remoteGroupId = getLong(
+				portletRequest, liveGroup, "remoteGroupId");
+			int remotePort = getInteger(
+				portletRequest, liveGroup, "remotePort");
+			boolean secureConnection = getBoolean(
+				portletRequest, liveGroup, "secureConnection");
 
 			enableRemoteStaging(
 				userId, scopeGroup, liveGroup, branchingPublic,
@@ -1399,6 +1443,14 @@ public class StagingImpl implements Staging {
 			getRecentLayoutRevisionIdKey(layoutSetBranchId, plid), null);
 	}
 
+	protected boolean getBoolean(
+		PortletRequest portletRequest, Group group, String param) {
+
+		return ParamUtil.getBoolean(
+			portletRequest, param,
+			GetterUtil.getBoolean(group.getTypeSettingsProperty(param)));
+	}
+
 	protected Calendar getDate(
 			PortletRequest portletRequest, String paramPrefix,
 			boolean timeZoneSensitive)
@@ -1446,6 +1498,22 @@ public class StagingImpl implements Staging {
 		cal.set(Calendar.MILLISECOND, 0);
 
 		return cal;
+	}
+
+	protected int getInteger(
+		PortletRequest portletRequest, Group group, String param) {
+
+		return ParamUtil.getInteger(
+			portletRequest, param,
+			GetterUtil.getInteger(group.getTypeSettingsProperty(param)));
+	}
+
+	protected long getLong(
+		PortletRequest portletRequest, Group group, String param) {
+
+		return ParamUtil.getLong(
+			portletRequest, param,
+			GetterUtil.getLong(group.getTypeSettingsProperty(param)));
 	}
 
 	protected PortalPreferences getPortalPreferences(User user)
@@ -1504,7 +1572,7 @@ public class StagingImpl implements Staging {
 			try {
 				LayoutBranchLocalServiceUtil.getLayoutBranch(layoutBranchId);
 			}
-			catch (NoSuchLayoutBranchException nlbe) {
+			catch (NoSuchLayoutBranchException nslbe) {
 				LayoutBranch layoutBranch =
 					LayoutBranchLocalServiceUtil.getMasterLayoutBranch(
 						layoutSetBranchId, plid);
@@ -1547,6 +1615,34 @@ public class StagingImpl implements Staging {
 		return "layoutSetBranchId_" + layoutSetId;
 	}
 
+	protected int getStagingType(
+		PortletRequest portletRequest, Group liveGroup) {
+
+		String stagingType = portletRequest.getParameter("stagingType");
+
+		if (stagingType != null) {
+			return GetterUtil.getInteger(stagingType);
+		}
+
+		if (liveGroup.isStagedRemotely()) {
+			return StagingConstants.TYPE_REMOTE_STAGING;
+		}
+
+		if (liveGroup.hasStagingGroup()) {
+			return StagingConstants.TYPE_LOCAL_STAGING;
+		}
+
+		return StagingConstants.TYPE_NOT_STAGED;
+	}
+
+	protected String getString(
+		PortletRequest portletRequest, Group group, String param) {
+
+		return ParamUtil.getString(
+			portletRequest, param,
+			GetterUtil.getString(group.getTypeSettingsProperty(param)));
+	}
+
 	protected void publishLayouts(
 			PortletRequest portletRequest, long sourceGroupId,
 			long targetGroupId, Map<String, String[]> parameterMap,
@@ -1572,10 +1668,17 @@ public class StagingImpl implements Staging {
 			long[] rowIds = ParamUtil.getLongValues(portletRequest, "rowIds");
 
 			for (long selPlid : rowIds) {
+				boolean delete = ParamUtil.getBoolean(
+					portletRequest, "delete_" + selPlid);
 				boolean includeChildren = ParamUtil.getBoolean(
 					portletRequest, "includeChildren_" + selPlid);
 
-				layoutIdMap.put(selPlid, includeChildren);
+				if (!delete && includeChildren) {
+					layoutIdMap.put(selPlid, true);
+				}
+				else {
+					layoutIdMap.put(selPlid, false);
+				}
 			}
 		}
 
@@ -1729,10 +1832,17 @@ public class StagingImpl implements Staging {
 			long[] rowIds = ParamUtil.getLongValues(portletRequest, "rowIds");
 
 			for (long selPlid : rowIds) {
+				boolean delete = ParamUtil.getBoolean(
+					portletRequest, "delete_" + selPlid);
 				boolean includeChildren = ParamUtil.getBoolean(
 					portletRequest, "includeChildren_" + selPlid);
 
-				layoutIdMap.put(selPlid, includeChildren);
+				if (!delete && includeChildren) {
+					layoutIdMap.put(selPlid, true);
+				}
+				else {
+					layoutIdMap.put(selPlid, false);
+				}
 			}
 		}
 
@@ -1770,6 +1880,12 @@ public class StagingImpl implements Staging {
 				groupTypeSettingsProperties.getProperty("secureConnection")));
 
 		validate(remoteAddress, remoteGroupId, remotePort, secureConnection);
+
+		if (group.isCompany()) {
+			updateGroupTypeSettingsProperties(
+				group, remoteAddress, remoteGroupId, remotePort,
+				secureConnection);
+		}
 
 		String range = ParamUtil.getString(portletRequest, "range");
 
@@ -1892,11 +2008,11 @@ public class StagingImpl implements Staging {
 		Set<String> parameterNames = serviceContext.getAttributes().keySet();
 
 		for (String parameterName : parameterNames) {
-			boolean staged = ParamUtil.getBoolean(
-				serviceContext, parameterName);
-
 			if (parameterName.startsWith(StagingConstants.STAGED_PORTLET) &&
 				!parameterName.endsWith("Checkbox")) {
+
+				boolean staged = ParamUtil.getBoolean(
+					serviceContext, parameterName);
 
 				typeSettingsProperties.setProperty(
 					parameterName, String.valueOf(staged));
@@ -1963,6 +2079,27 @@ public class StagingImpl implements Staging {
 		}
 
 		return remoteAddress;
+	}
+
+	protected void updateGroupTypeSettingsProperties(
+			Group group, String remoteAddress, long remoteGroupId,
+			int remotePort, boolean secureConnection)
+		throws Exception {
+
+		UnicodeProperties typeSettingsProperties =
+			group.getTypeSettingsProperties();
+
+		typeSettingsProperties.setProperty("remoteAddress", remoteAddress);
+		typeSettingsProperties.setProperty(
+			"remoteGroupId", String.valueOf(remoteGroupId));
+		typeSettingsProperties.setProperty(
+			"remotePort", String.valueOf(remotePort));
+		typeSettingsProperties.setProperty(
+			"secureConnection", String.valueOf(secureConnection));
+
+		group.setTypeSettingsProperties(typeSettingsProperties);
+
+		GroupLocalServiceUtil.updateGroup(group);
 	}
 
 	protected void validate(

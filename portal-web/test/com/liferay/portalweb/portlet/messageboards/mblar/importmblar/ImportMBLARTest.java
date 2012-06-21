@@ -53,24 +53,6 @@ public class ImportMBLARTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("//iframe[@id='manageContentDialog']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.selectFrame("//iframe[@id='manageContentDialog']");
-
-		for (int second = 0;; second++) {
-			if (second >= 90) {
-				fail("timeout");
-			}
-
-			try {
 				if (selenium.isVisible(
 							"//ul[@class='category-portlets']/li[6]/a")) {
 					break;
@@ -89,8 +71,9 @@ public class ImportMBLARTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("Options"),
-			selenium.getText("//span[@title='Options']/ul/li/strong/a/span"));
-		selenium.clickAt("//span[@title='Options']/ul/li/strong/a/span",
+			selenium.getText(
+				"//a[contains(@id,'_162_') and contains(@id,'menuButton')]"));
+		selenium.clickAt("//a[contains(@id,'_162_') and contains(@id,'menuButton')]",
 			RuntimeVariables.replace("Options"));
 
 		for (int second = 0;; second++) {
@@ -141,6 +124,5 @@ public class ImportMBLARTest extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace(
 				"Your request completed successfully."),
 			selenium.getText("//div[@class='portlet-msg-success']"));
-		selenium.selectFrame("relative=top");
 	}
 }

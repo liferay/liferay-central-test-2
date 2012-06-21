@@ -18,12 +18,17 @@
 	<aui:input name="viewUsersRedirect" type="hidden" value="<%= viewUsersRedirect %>" />
 </c:if>
 
+<%
+SearchContainer userSearch = new UserSearch(renderRequest, "cur2", currentURLObj);
+
+userSearch.setRowChecker(new RowChecker(renderResponse));
+%>
+
 <liferay-ui:search-container
-	rowChecker="<%= new RowChecker(renderResponse) %>"
-	searchContainer="<%= new UserSearch(renderRequest, portletURL) %>"
+	searchContainer="<%= userSearch %>"
 >
 	<aui:input name="deleteUserIds" type="hidden" />
-	<aui:input disabled="<%= true %>" name="usersRedirect" type="hidden" value="<%= portletURL.toString() %>" />
+	<aui:input disabled="<%= true %>" name="usersRedirect" type="hidden" value="<%= currentURLObj.toString() %>" />
 
 	<%
 	UserDisplayTerms displayTerms = (UserDisplayTerms)searchContainer.getDisplayTerms();
@@ -40,7 +45,7 @@
 
 	Organization userOrganization = null;
 
-	if ((userOrganizationId > 0)) {
+	if (userOrganizationId > 0) {
 		try {
 			userOrganization = OrganizationLocalServiceUtil.getOrganization(userOrganizationId);
 
@@ -171,6 +176,7 @@
 		escapedModel="<%= true %>"
 		keyProperty="userId"
 		modelVar="user2"
+		rowIdProperty="screenName"
 	>
 		<liferay-portlet:renderURL varImpl="rowURL">
 			<portlet:param name="struts_action" value="/users_admin/edit_user" />

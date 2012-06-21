@@ -137,12 +137,8 @@ public class AddFolder2SubfolderImage4ViewableBySiteMemberTest
 					RuntimeVariables.replace("Basic Document"));
 				selenium.waitForPageToLoad("30000");
 				loadRequiredJavaScriptModules();
-				selenium.type("//input[@id='_20_file']",
-					RuntimeVariables.replace(
-						"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\demo\\media\\dependencies\\Document_4.jpg"));
-				selenium.type("//input[@id='_20_file']",
-					RuntimeVariables.replace(
-						"L:\\private\\6.1.x-portal\\portal-web\\test\\com\\liferay\\portalweb\\demo\\media\\dependencies\\Document_4.jpg"));
+				selenium.uploadCommonFile("//input[@id='_20_file']",
+					RuntimeVariables.replace("Document_4.jpg"));
 				selenium.type("//input[@id='_20_title']",
 					RuntimeVariables.replace(
 						"DL Folder 2 SubFolder Image 4 Title"));

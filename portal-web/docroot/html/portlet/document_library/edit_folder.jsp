@@ -86,7 +86,7 @@ if (workflowEnabled) {
 					parentFolderName = parentFolder.getName();
 				}
 			}
-			catch (NoSuchFolderException nscce) {
+			catch (NoSuchFolderException nsfe) {
 			}
 			%>
 
@@ -142,7 +142,7 @@ if (workflowEnabled) {
 			}
 			%>
 
-			<aui:field-wrapper label='<%= rootFolder ? "" : (workflowEnabled ? "document-type-restrictions-and-workflow" : "document-type-restrictions") %>' helpMessage='<%= rootFolder ? "" : "document-type-restrictions-help" %>'>
+			<aui:field-wrapper helpMessage='<%= rootFolder ? "" : "document-type-restrictions-help" %>' label='<%= rootFolder ? "" : (workflowEnabled ? "document-type-restrictions-and-workflow" : "document-type-restrictions") %>'>
 				<c:if test="<%= !rootFolder %>">
 					<aui:input checked="<%= !dlFolder.isOverrideFileEntryTypes() %>" id="useFileEntryTypes" label='<%= workflowEnabled ? "use-document-type-restrictions-and-workflow-of-the-parent-folder" : "use-document-type-restrictions-of-the-parent-folder" %>' name="overrideFileEntryTypes" type="radio" value="<%= false %>" />
 
@@ -168,7 +168,7 @@ if (workflowEnabled) {
 								for (WorkflowDefinition workflowDefinition : workflowDefinitions) {
 									boolean selected = false;
 
-									if ((workflowDefinitionLink != null) && (workflowDefinitionLink.getWorkflowDefinitionName().equals(workflowDefinition.getName())) && (workflowDefinitionLink.getWorkflowDefinitionVersion() == workflowDefinition.getVersion())) {
+									if ((workflowDefinitionLink != null) && workflowDefinitionLink.getWorkflowDefinitionName().equals(workflowDefinition.getName()) && (workflowDefinitionLink.getWorkflowDefinitionVersion() == workflowDefinition.getVersion())) {
 										selected = true;
 									}
 								%>
@@ -185,7 +185,6 @@ if (workflowEnabled) {
 
 					<c:if test="<%= !rootFolder %>">
 						<liferay-ui:search-container
-							id='<%= renderResponse.getNamespace() + "fileEntryTypeSearchContainer" %>'
 							headerNames="<%= headerNames %>"
 						>
 							<liferay-ui:search-container-results
@@ -222,7 +221,7 @@ if (workflowEnabled) {
 											for (WorkflowDefinition workflowDefinition : workflowDefinitions) {
 												boolean selected = false;
 
-												if ((workflowDefinitionLink != null) && (workflowDefinitionLink.getWorkflowDefinitionName().equals(workflowDefinition.getName())) && (workflowDefinitionLink.getWorkflowDefinitionVersion() == workflowDefinition.getVersion())) {
+												if ((workflowDefinitionLink != null) && workflowDefinitionLink.getWorkflowDefinitionName().equals(workflowDefinition.getName()) && (workflowDefinitionLink.getWorkflowDefinitionVersion() == workflowDefinition.getVersion())) {
 													selected = true;
 												}
 											%>
@@ -253,7 +252,7 @@ if (workflowEnabled) {
 							url='<%= "javascript:" + renderResponse.getNamespace() + "openFileEntryTypeSelector();" %>'
 						/>
 
-						<aui:select cssClass='<%= !fileEntryTypes.isEmpty() ? "default-document-type" : "default-document-type aui-helper-hidden" %>' label="default-document-type" helpMessage="default-document-type-help" name="defaultFileEntryTypeId">
+						<aui:select cssClass='<%= !fileEntryTypes.isEmpty() ? "default-document-type" : "default-document-type aui-helper-hidden" %>' helpMessage="default-document-type-help" label="default-document-type" name="defaultFileEntryTypeId">
 
 							<%
 							for (DLFileEntryType fileEntryType : fileEntryTypes) {
@@ -296,6 +295,7 @@ if (workflowEnabled) {
 				dialog: {
 					width: 680
 				},
+				id: '<portlet:namespace />fileEntryTypeSeclector',
 				title: '<%= UnicodeLanguageUtil.get(pageContext, "document-types") %>',
 				uri: '<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/document_library/select_file_entry_type" /><portlet:param name="groupId" value="<%= String.valueOf(scopeGroupId) %>" /><portlet:param name="includeBasicFileEntryType" value="1" /></portlet:renderURL>'
 			}
@@ -324,7 +324,7 @@ if (workflowEnabled) {
 		function(fileEntryTypeId, fileEntryTypeName, dialog) {
 			var A = AUI();
 
-			var searchContainer = Liferay.SearchContainer.get('<portlet:namespace />fileEntryTypeSearchContainer');
+			var searchContainer = Liferay.SearchContainer.get('<portlet:namespace />dlFileEntryTypesSearchContainer');
 
 			var fileEntryTypeLink = '<a class="modify-link" data-rowId="' + fileEntryTypeId + '" href="javascript:;"><%= UnicodeFormatter.toString(removeFileEntryTypeIcon) %></a>';
 
@@ -389,7 +389,7 @@ if (workflowEnabled) {
 </aui:script>
 
 <aui:script use="liferay-search-container">
-	var searchContainer = Liferay.SearchContainer.get('<portlet:namespace />fileEntryTypeSearchContainer');
+	var searchContainer = Liferay.SearchContainer.get('<portlet:namespace />dlFileEntryTypesSearchContainer');
 
 	searchContainer.get('contentBox').delegate(
 		'click',

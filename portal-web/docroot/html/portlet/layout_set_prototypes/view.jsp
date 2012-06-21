@@ -36,8 +36,8 @@ portletURL.setParameter("struts_action", "/layout_set_prototypes/view");
 	<aui:input name="redirect" type="hidden" value="<%= portletURL.toString() %>" />
 
 	<liferay-ui:search-container
-		searchContainer='<%= new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, null, LanguageUtil.get(pageContext, "no-site-templates-were-found")) %>'
 		headerNames="name"
+		searchContainer='<%= new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, null, LanguageUtil.get(pageContext, "no-site-templates-were-found")) %>'
 	>
 		<aui:input name="deleteLayoutSetPrototypesIds" type="hidden" />
 
@@ -63,7 +63,7 @@ portletURL.setParameter("struts_action", "/layout_set_prototypes/view");
 				href="<%= rowURL %>"
 				name="name"
 				orderable="<%= true %>"
-				value="<%= HtmlUtil.escape(layoutSetPrototype.getName(locale)) %>"
+				value="<%= layoutSetPrototype.getName(locale) %>"
 			/>
 
 			<liferay-ui:search-container-column-text
@@ -82,3 +82,31 @@ portletURL.setParameter("struts_action", "/layout_set_prototypes/view");
 		<liferay-ui:search-iterator />
 	</liferay-ui:search-container>
 </aui:form>
+
+<aui:script use="aui-base,aui-dialog">
+	A.getBody().delegate(
+		'click',
+		function(event){
+			event.preventDefault();
+
+			var link = event.currentTarget;
+			var title = link.get('text');
+
+			Liferay.Util.openWindow(
+				{
+					dialog:
+						{
+							centered: true,
+							constrain: true,
+							modal: true,
+							width: 600
+						},
+					id: '<portlet:namespace />' + title,
+					title: title,
+					uri: link.attr('href')
+				}
+			);
+		},
+		'.layoutset-prototype-action a'
+	);
+</aui:script>

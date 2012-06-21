@@ -107,9 +107,8 @@ public class AddFolder1Image1Test extends BaseTestCase {
 					RuntimeVariables.replace("Basic Document"));
 				selenium.waitForPageToLoad("30000");
 				loadRequiredJavaScriptModules();
-				selenium.type("//input[@id='_20_file']",
-					RuntimeVariables.replace(
-						"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\demo\\media\\dependencies\\Document_1.jpg"));
+				selenium.uploadCommonFile("//input[@id='_20_file']",
+					RuntimeVariables.replace("Document_1.jpg"));
 				selenium.type("//input[@id='_20_title']",
 					RuntimeVariables.replace("DL Folder 1 Image 1 Title"));
 				selenium.type("//textarea[@id='_20_description']",

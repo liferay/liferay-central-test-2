@@ -867,6 +867,9 @@
 				<temporal>TIMESTAMP</temporal>
 			</basic>
 			<basic name="verified" />
+			<basic name="state">
+				<column name="STATE_" />
+			</basic>
 			<basic name="testString" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
@@ -2252,7 +2255,6 @@
 			<transient name="descriptionCurrentLanguageId" />
 			<transient name="descriptionMap" />
 			<transient name="document" />
-			<transient name="fieldsMap" />
 			<transient name="modelAttributes" />
 			<transient name="nameCurrentLanguageId" />
 			<transient name="nameMap" />
@@ -4131,7 +4133,6 @@
 		<table name="DDMStructure" />
 		<attributes>
 			<transient name="document" />
-			<transient name="fieldsMap" />
 		</attributes>
 	</entity>
 	<entity class="com.liferay.portlet.dynamicdatamapping.model.impl.DDMStructureLinkImpl" name="DDMStructureLink">
@@ -4172,6 +4173,8 @@
 			<transient name="integerArray" />
 			<transient name="long" />
 			<transient name="longArray" />
+			<transient name="number" />
+			<transient name="numberArray" />
 			<transient name="short" />
 			<transient name="shortArray" />
 			<transient name="string" />

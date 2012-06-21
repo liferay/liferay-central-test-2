@@ -154,15 +154,21 @@ public class ViewSiteRoleUserTest extends BaseTestCase {
 					selenium.getText("//a[@id='_125_TabsBack']"));
 				assertEquals(RuntimeVariables.replace("Site Roles"),
 					selenium.getText("//div[@id='_125_roles']/h3[4]"));
+				assertEquals(RuntimeVariables.replace("Title"),
+					selenium.getText(
+						"//th[@id='_125_communityRolesSearchContainer_col-title']"));
+				assertEquals(RuntimeVariables.replace("Site"),
+					selenium.getText(
+						"//th[@id='_125_communityRolesSearchContainer_col-site']"));
 				assertEquals(RuntimeVariables.replace("Roles Siterole Name"),
 					selenium.getText(
-						"//table[@data-searchcontainerid='_125_communityRolesSearchContainer']//tr[contains(.,'Roles Siterole Name')]/td[1]"));
+						"//td[@id='_125_communityRolesSearchContainer_col-title_row-1']"));
 				assertEquals(RuntimeVariables.replace("Site Name"),
 					selenium.getText(
-						"//table[@data-searchcontainerid='_125_communityRolesSearchContainer']//tr[contains(.,'Roles Siterole Name')]/td[2]"));
+						"//td[@id='_125_communityRolesSearchContainer_col-site_row-1']"));
 				assertEquals(RuntimeVariables.replace("Remove"),
 					selenium.getText(
-						"//table[@data-searchcontainerid='_125_communityRolesSearchContainer']//tr[contains(.,'Roles Siterole Name')]/td[3]"));
+						"//td[@id='_125_communityRolesSearchContainer_col-3_row-1']/a"));
 
 			case 100:
 				label = -1;

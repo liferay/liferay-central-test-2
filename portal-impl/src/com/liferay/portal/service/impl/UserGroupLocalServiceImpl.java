@@ -503,7 +503,7 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 
 		userPersistence.setUserGroups(userId, userGroupIds);
 
-		Indexer indexer = IndexerRegistryUtil.getIndexer(User.class);
+		Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(User.class);
 
 		indexer.reindex(userId);
 
@@ -689,7 +689,7 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 	protected void validate(long userGroupId, long companyId, String name)
 		throws PortalException, SystemException {
 
-		if ((Validator.isNull(name)) ||
+		if (Validator.isNull(name) ||
 			(name.indexOf(CharPool.COMMA) != -1) ||
 			(name.indexOf(CharPool.STAR) != -1)) {
 

@@ -27,23 +27,23 @@ String hiddenInput = (String)request.getAttribute("liferay-ui:asset-categories-s
 String curCategoryIds = GetterUtil.getString((String)request.getAttribute("liferay-ui:asset-categories-selector:curCategoryIds"), "");
 String curCategoryNames = StringPool.BLANK;
 
+List<AssetVocabulary> vocabularies = new ArrayList<AssetVocabulary>();
+
+Group group = themeDisplay.getScopeGroup();
+
+if (group.isLayout()) {
+	vocabularies.addAll(AssetVocabularyLocalServiceUtil.getGroupVocabularies(group.getParentGroupId(), false));
+}
+else {
+	vocabularies.addAll(AssetVocabularyLocalServiceUtil.getGroupVocabularies(scopeGroupId, false));
+}
+
+if (scopeGroupId != themeDisplay.getCompanyGroupId()) {
+	vocabularies.addAll(AssetVocabularyLocalServiceUtil.getGroupVocabularies(themeDisplay.getCompanyGroupId(), false));
+}
+
 if (Validator.isNotNull(className)) {
 	long classNameId = PortalUtil.getClassNameId(className);
-
-	List<AssetVocabulary> vocabularies = new ArrayList<AssetVocabulary>();
-
-	Group group = themeDisplay.getScopeGroup();
-
-	if (group.isLayout()) {
-		vocabularies.addAll(AssetVocabularyLocalServiceUtil.getGroupVocabularies(group.getParentGroupId(), false));
-	}
-	else {
-		vocabularies.addAll(AssetVocabularyLocalServiceUtil.getGroupVocabularies(scopeGroupId, false));
-	}
-
-	if (scopeGroupId != themeDisplay.getCompanyGroupId()) {
-		vocabularies.addAll(AssetVocabularyLocalServiceUtil.getGroupVocabularies(themeDisplay.getCompanyGroupId(), false));
-	}
 
 	for (AssetVocabulary vocabulary : vocabularies) {
 		vocabulary = vocabulary.toEscapedModel();
@@ -109,8 +109,8 @@ if (Validator.isNotNull(className)) {
 					labelNode: '#<%= namespace %>assetCategoriesLabel_<%= vocabulary.getVocabularyId() %>',
 					portalModelResource: <%= Validator.isNotNull(className) && (ResourceActionsUtil.isPortalModelResource(className) || className.equals(Group.class.getName())) %>,
 					singleSelect: <%= !vocabulary.isMultiValued() %>,
-					vocabularyIds: '<%= String.valueOf(vocabulary.getVocabularyId()) %>',
-					vocabularyGroupIds: '<%= vocabulary.getGroupId() %>'
+					vocabularyGroupIds: '<%= vocabulary.getGroupId() %>',
+					vocabularyIds: '<%= String.valueOf(vocabulary.getVocabularyId()) %>'
 				}
 			).render();
 		</aui:script>
@@ -141,7 +141,9 @@ else {
 				curEntryIds: '<%= categoryIdsTitles[0] %>',
 				hiddenInput: '#<%= namespace + hiddenInput %>',
 				instanceVar: '<%= namespace + randomNamespace %>',
-				portalModelResource: <%= Validator.isNotNull(className) && (ResourceActionsUtil.isPortalModelResource(className) || className.equals(Group.class.getName())) %>
+				portalModelResource: <%= Validator.isNotNull(className) && (ResourceActionsUtil.isPortalModelResource(className) || className.equals(Group.class.getName())) %>,
+				vocabularyGroupIds: '<%= scopeGroupId %>',
+				vocabularyIds: '<%= ListUtil.toString(vocabularies, "vocabularyId") %>'
 			}
 		).render();
 	</aui:script>

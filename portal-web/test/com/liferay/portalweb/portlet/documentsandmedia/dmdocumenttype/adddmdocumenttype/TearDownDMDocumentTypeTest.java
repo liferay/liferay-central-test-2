@@ -68,7 +68,8 @@ public class TearDownDMDocumentTypeTest extends BaseTestCase {
 					}
 
 					try {
-						if (selenium.isVisible("//iframe")) {
+						if (selenium.isVisible(
+									"//iframe[@id='_20_openFileEntryTypeView']")) {
 							break;
 						}
 					}
@@ -78,7 +79,8 @@ public class TearDownDMDocumentTypeTest extends BaseTestCase {
 					Thread.sleep(1000);
 				}
 
-				selenium.selectFrame("//iframe");
+				selenium.selectFrame(
+					"//iframe[@id='_20_openFileEntryTypeView']");
 
 				for (int second = 0;; second++) {
 					if (second >= 90) {

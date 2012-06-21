@@ -11,6 +11,7 @@ _sass_cache_*.css
 /*.ipr
 /*.iws
 /*.patch
+/*.sublime-*
 /.checkstyle
 /.idea
 /.settings
@@ -23,6 +24,7 @@ _sass_cache_*.css
 /build.*.properties
 /dist
 /out
+/rebel.xml
 /release.*.properties
 /svn-revision
 /test.*.properties
@@ -92,6 +94,7 @@ _sass_cache_*.css
 /portal-web/test-results
 
 /portal-web/docroot/dtd
+/portal-web/docroot/favicon.ico
 /portal-web/docroot/wsrp
 
 /portal-web/docroot/html/ALLOY_ZIP
@@ -168,6 +171,8 @@ _sass_cache_*.css
 /support-tomcat/*.iws
 /support-tomcat/classes
 /support-tomcat/support-tomcat*.jar
+
+/test-results
 
 /tools/maven/*.asc
 

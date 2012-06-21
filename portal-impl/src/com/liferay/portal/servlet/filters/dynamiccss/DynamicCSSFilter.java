@@ -111,13 +111,17 @@ public class DynamicCSSFilter extends BasePortalFilter {
 
 		File file = new File(realPath);
 
+		if (!file.exists()) {
+			return null;
+		}
+
 		String cacheCommonFileName = getCacheFileName(request);
 
 		File cacheContentTypeFile = new File(
 			cacheCommonFileName + "_E_CONTENT_TYPE");
 		File cacheDataFile = new File(cacheCommonFileName + "_E_DATA");
 
-		if ((cacheDataFile.exists()) &&
+		if (cacheDataFile.exists() &&
 			(cacheDataFile.lastModified() >= file.lastModified())) {
 
 			if (cacheContentTypeFile.exists()) {
@@ -224,8 +228,7 @@ public class DynamicCSSFilter extends BasePortalFilter {
 
 	protected String sterilizeQueryString(String queryString) {
 		return StringUtil.replace(
-			queryString,
-			new String[] {StringPool.SLASH, StringPool.BACK_SLASH},
+			queryString, new String[] {StringPool.SLASH, StringPool.BACK_SLASH},
 			new String[] {StringPool.UNDERLINE, StringPool.UNDERLINE});
 	}
 

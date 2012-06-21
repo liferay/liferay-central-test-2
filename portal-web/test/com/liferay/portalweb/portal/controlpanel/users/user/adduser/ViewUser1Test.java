@@ -97,12 +97,15 @@ public class ViewUser1Test extends BaseTestCase {
 				selenium.waitForPageToLoad("30000");
 				loadRequiredJavaScriptModules();
 				assertEquals(RuntimeVariables.replace("userfn1"),
-					selenium.getText("//tr[contains(.,'userfn1')]/td[2]/a"));
+					selenium.getText(
+						"//tr[contains(.,'userfn1')]/td[@headers='_125_usersSearchContainer_col-first-name']/a"));
 				assertEquals(RuntimeVariables.replace("userln1"),
-					selenium.getText("//tr[contains(.,'userfn1')]/td[3]/a"));
+					selenium.getText(
+						"//tr[contains(.,'userfn1')]/td[@headers='_125_usersSearchContainer_col-last-name']/a"));
 				assertEquals(RuntimeVariables.replace("usersn1"),
-					selenium.getText("//tr[contains(.,'userfn1')]/td[4]/a"));
-				selenium.clickAt("//tr[contains(.,'userfn1')]/td[2]/a",
+					selenium.getText(
+						"//tr[contains(.,'userfn1')]/td[@headers='_125_usersSearchContainer_col-screen-name']/a"));
+				selenium.clickAt("//tr[contains(.,'userfn1')]/td[@headers='_125_usersSearchContainer_col-first-name']/a",
 					RuntimeVariables.replace("userfn1"));
 				selenium.waitForPageToLoad("30000");
 				loadRequiredJavaScriptModules();

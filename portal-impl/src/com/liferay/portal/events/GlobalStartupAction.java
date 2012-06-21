@@ -264,9 +264,10 @@ public class GlobalStartupAction extends SimpleAction {
 
 		// Javadoc
 
-		ClassLoader classLoader = PACLClassLoaderUtil.getContextClassLoader();
+		ClassLoader contextClassLoader =
+			PACLClassLoaderUtil.getContextClassLoader();
 
-		JavadocManagerUtil.load(StringPool.BLANK, classLoader);
+		JavadocManagerUtil.load(StringPool.BLANK, contextClassLoader);
 
 		// JCR
 

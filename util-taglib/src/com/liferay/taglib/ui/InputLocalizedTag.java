@@ -40,12 +40,20 @@ public class InputLocalizedTag extends IncludeTag {
 		_formName = formName;
 	}
 
+	public void setId(String id) {
+		_id = id;
+	}
+
 	public void setIgnoreRequestValue(boolean ignoreRequestValue) {
 		_ignoreRequestValue = ignoreRequestValue;
 	}
 
 	public void setLanguageId(String languageId) {
 		_languageId = languageId;
+	}
+
+	public void setMaxLength(String maxLength) {
+		_maxLength = maxLength;
 	}
 
 	public void setName(String name) {
@@ -65,8 +73,10 @@ public class InputLocalizedTag extends IncludeTag {
 		_cssClass = null;
 		_disabled = false;
 		_formName = null;
+		_id = null;
 		_ignoreRequestValue = false;
 		_languageId = null;
+		_maxLength = null;
 		_name = null;
 		_type = "input";
 		_xml = null;
@@ -85,6 +95,12 @@ public class InputLocalizedTag extends IncludeTag {
 			formName = "fm";
 		}
 
+		String id = _id;
+
+		if (Validator.isNull(id)) {
+			id = _name;
+		}
+
 		request.setAttribute("liferay-ui:input-localized:cssClass", _cssClass);
 		request.setAttribute(
 			"liferay-ui:input-localized:defaultLanguageId", _defaultLanguageId);
@@ -94,11 +110,14 @@ public class InputLocalizedTag extends IncludeTag {
 			"liferay-ui:input-localized:dynamicAttributes",
 			getDynamicAttributes());
 		request.setAttribute("liferay-ui:input-localized:formName", formName);
+		request.setAttribute("liferay-ui:input-localized:id", id);
 		request.setAttribute(
 			"liferay-ui:input-localized:ignoreRequestValue",
 			String.valueOf(_ignoreRequestValue));
 		request.setAttribute(
 			"liferay-ui:input-localized:languageId", _languageId);
+		request.setAttribute(
+			"liferay-ui:input-localized:maxLength", _maxLength);
 		request.setAttribute("liferay-ui:input-localized:name", _name);
 		request.setAttribute("liferay-ui:input-localized:type", _type);
 		request.setAttribute("liferay-ui:input-localized:xml", _xml);
@@ -111,8 +130,10 @@ public class InputLocalizedTag extends IncludeTag {
 	private String _defaultLanguageId;
 	private boolean _disabled;
 	private String _formName;
+	private String _id;
 	private boolean _ignoreRequestValue;
 	private String _languageId;
+	private String _maxLength;
 	private String _name;
 	private String _type = "input";
 	private String _xml;

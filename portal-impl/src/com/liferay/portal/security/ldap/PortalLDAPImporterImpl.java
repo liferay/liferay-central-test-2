@@ -32,7 +32,6 @@ import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.CompanyConstants;
@@ -42,6 +41,7 @@ import com.liferay.portal.model.Role;
 import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
+import com.liferay.portal.security.auth.CompanyThreadLocal;
 import com.liferay.portal.security.auth.ScreenNameGenerator;
 import com.liferay.portal.security.auth.ScreenNameGeneratorFactory;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
@@ -118,9 +118,16 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 
 		LockLocalServiceUtil.lock(
 			defaultUserId, PortalLDAPImporterUtil.class.getName(), companyId,
-			PortalLDAPImporterImpl.class.getName(), false, Time.DAY);
+			PortalLDAPImporterImpl.class.getName(), false,
+			PropsValues.LDAP_IMPORT_LOCK_EXPIRATION_TIME);
+
+		long threadLocalCompanyId = CompanyThreadLocal.getCompanyId();
 
 		try {
+			if (threadLocalCompanyId == CompanyConstants.SYSTEM) {
+				CompanyThreadLocal.setCompanyId(companyId);
+			}
+
 			long[] ldapServerIds = StringUtil.split(
 				PrefsPropsUtil.getString(companyId, "ldap.server.ids"), 0L);
 
@@ -145,6 +152,8 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 		finally {
 			LockLocalServiceUtil.unlock(
 				PortalLDAPImporterUtil.class.getName(), companyId);
+
+			CompanyThreadLocal.setCompanyId(threadLocalCompanyId);
 		}
 	}
 
@@ -237,6 +246,8 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 
 		LdapContext ldapContext = null;
 
+		NamingEnumeration<SearchResult> enu = null;
+
 		try {
 			String postfix = LDAPSettingsUtil.getPropertyPostfix(ldapServerId);
 
@@ -279,8 +290,7 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 				SearchControls.SUBTREE_SCOPE, 1, 0,
 				new String[] {userMappingsScreenName}, false, false);
 
-			NamingEnumeration<SearchResult> enu = ldapContext.search(
-				baseDN, filter, searchControls);
+			enu = ldapContext.search(baseDN, filter, searchControls);
 
 			if (enu.hasMoreElements()) {
 				if (_log.isDebugEnabled()) {
@@ -315,6 +325,10 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 				"Problem accessing LDAP server " + e.getMessage());
 		}
 		finally {
+			if (enu != null) {
+				enu.close();
+			}
+
 			if (ldapContext != null) {
 				ldapContext.close();
 			}

@@ -29,9 +29,11 @@ import com.liferay.portal.kernel.search.facet.MultiValueFacet;
 import com.liferay.portal.kernel.search.facet.ScopeFacet;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
+import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.SetUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.util.UnicodeProperties;
@@ -64,6 +66,7 @@ import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 import com.liferay.portlet.expando.util.ExpandoBridgeIndexerUtil;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -378,18 +381,18 @@ public abstract class BaseIndexer implements Indexer {
 			PermissionChecker permissionChecker =
 				PermissionThreadLocal.getPermissionChecker();
 
-			int start = searchContext.getStart();
 			int end = searchContext.getEnd();
+			int start = searchContext.getStart();
 
 			if (isFilterSearch() && (permissionChecker != null)) {
-				searchContext.setStart(0);
 				searchContext.setEnd(end + INDEX_FILTER_SEARCH_LIMIT);
+				searchContext.setStart(0);
 			}
 
 			Hits hits = SearchEngineUtil.search(searchContext, fullQuery);
 
-			searchContext.setStart(start);
 			searchContext.setEnd(end);
+			searchContext.setStart(start);
 
 			if (isFilterSearch() && (permissionChecker != null)) {
 				hits = filterSearch(hits, permissionChecker, searchContext);
@@ -544,6 +547,55 @@ public abstract class BaseIndexer implements Indexer {
 		multiValueFacet.setStatic(true);
 
 		searchContext.addFacet(multiValueFacet);
+	}
+
+	protected void addSearchAssetCategoryTitles(
+		Document document, String field, List<AssetCategory> assetCategories) {
+
+		Map<Locale, List<String>> assetCategoryTitles =
+			new HashMap<Locale, List<String>>();
+
+		Locale defaultLocale = LocaleUtil.getDefault();
+
+		for (AssetCategory assetCategory : assetCategories) {
+			Map<Locale, String> titleMap = assetCategory.getTitleMap();
+
+			for (Map.Entry<Locale, String> entry : titleMap.entrySet()) {
+				Locale locale = entry.getKey();
+				String title = entry.getValue();
+
+				if (Validator.isNull(title)) {
+					continue;
+				}
+
+				List<String> titles = assetCategoryTitles.get(locale);
+
+				if (titles == null) {
+					titles = new ArrayList<String>();
+
+					assetCategoryTitles.put(locale, titles);
+				}
+
+				titles.add(title);
+			}
+		}
+
+		for (Map.Entry<Locale, List<String>> entry :
+				assetCategoryTitles.entrySet()) {
+
+			Locale locale = entry.getKey();
+			List<String> titles = entry.getValue();
+
+			String[] titlesArray = titles.toArray(new String[0]);
+
+			if (locale.equals(defaultLocale)) {
+				document.addKeyword(field, titlesArray);
+			}
+
+			document.addKeyword(
+				field.concat(StringPool.UNDERLINE).concat(locale.toString()),
+				titlesArray);
+		}
 	}
 
 	protected void addSearchAssetTagNames(
@@ -923,10 +975,8 @@ public abstract class BaseIndexer implements Indexer {
 
 		document.addKeyword(Field.ASSET_CATEGORY_IDS, assetCategoryIds);
 
-		String[] assetCategoryNames = StringUtil.split(
-			ListUtil.toString(assetCategories, AssetCategory.NAME_ACCESSOR));
-
-		document.addText(Field.ASSET_CATEGORY_NAMES, assetCategoryNames);
+		addSearchAssetCategoryTitles(
+			document, Field.ASSET_CATEGORY_TITLES, assetCategories);
 
 		String[] assetTagNames = AssetTagLocalServiceUtil.getTagNames(
 			className, classPK);

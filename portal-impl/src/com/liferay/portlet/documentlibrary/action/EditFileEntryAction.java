@@ -123,8 +123,9 @@ public class EditFileEntryAction extends PortletAction {
 					throw new PortalException(uploadException.getCause());
 				}
 			}
-			else if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)
-				|| cmd.equals(Constants.UPDATE_AND_CHECKIN)) {
+			else if (cmd.equals(Constants.ADD) ||
+					 cmd.equals(Constants.UPDATE) ||
+					 cmd.equals(Constants.UPDATE_AND_CHECKIN)) {
 
 				updateFileEntry(portletConfig, actionRequest, actionResponse);
 			}

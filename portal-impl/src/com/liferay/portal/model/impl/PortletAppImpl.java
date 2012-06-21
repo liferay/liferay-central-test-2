@@ -16,6 +16,7 @@ package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.UniqueList;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.QName;
 import com.liferay.portal.model.EventDefinition;
@@ -25,7 +26,6 @@ import com.liferay.portal.model.PortletFilter;
 import com.liferay.portal.model.PortletURLListener;
 import com.liferay.portal.model.PublicRenderParameter;
 import com.liferay.portal.model.SpriteImage;
-import com.liferay.util.UniqueList;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -78,7 +78,6 @@ public class PortletAppImpl implements PortletApp {
 	public void addPublicRenderParameter(
 		PublicRenderParameter publicRenderParameter) {
 
-		_publicRenderParameters.add(publicRenderParameter);
 		_publicRenderParametersByIdentifier.put(
 			publicRenderParameter.getIdentifier(), publicRenderParameter);
 	}
@@ -203,8 +202,6 @@ public class PortletAppImpl implements PortletApp {
 	private Map<String, PortletURLListener>
 		_portletURLListenersByListenerClass =
 			new HashMap<String, PortletURLListener>();
-	private Set<PublicRenderParameter> _publicRenderParameters =
-		new LinkedHashSet<PublicRenderParameter>();
 	private Map<String, PublicRenderParameter>
 		_publicRenderParametersByIdentifier =
 			new HashMap<String, PublicRenderParameter>();

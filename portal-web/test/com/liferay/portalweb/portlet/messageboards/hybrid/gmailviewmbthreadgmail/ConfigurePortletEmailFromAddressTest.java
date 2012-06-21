@@ -64,7 +64,8 @@ public class ConfigurePortletEmailFromAddressTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("//iframe")) {
+				if (selenium.isVisible(
+							"//iframe[@id='_19_configurationIframeDialog']")) {
 					break;
 				}
 			}
@@ -74,7 +75,7 @@ public class ConfigurePortletEmailFromAddressTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.selectFrame("//iframe");
+		selenium.selectFrame("//iframe[@id='_19_configurationIframeDialog']");
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {

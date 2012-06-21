@@ -14,13 +14,19 @@
 
 package com.liferay.portlet.journal.util;
 
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.Projection;
+import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.ProjectionList;
+import com.liferay.portal.kernel.dao.orm.Property;
+import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.BaseIndexer;
 import com.liferay.portal.kernel.search.BooleanQuery;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Field;
-import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.Summary;
@@ -28,15 +34,16 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.LocalizationUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
+import com.liferay.portal.kernel.xml.DocumentException;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.Node;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
-import com.liferay.portal.model.Group;
-import com.liferay.portal.service.GroupLocalServiceUtil;
+import com.liferay.portal.security.pacl.PACLClassLoaderUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.journal.NoSuchStructureException;
 import com.liferay.portlet.journal.model.JournalArticle;
@@ -146,6 +153,28 @@ public class JournalIndexer extends BaseIndexer {
 		}
 	}
 
+	protected void addReindexCriteria(
+		DynamicQuery dynamicQuery, long companyId, double version, int status) {
+
+		addReindexCriteria(dynamicQuery, companyId, status);
+
+		Property property = PropertyFactoryUtil.forName("version");
+
+		dynamicQuery.add(property.eq(version));
+	}
+
+	protected void addReindexCriteria(
+		DynamicQuery dynamicQuery, long companyId, int status) {
+
+		Property companyIdProperty = PropertyFactoryUtil.forName("companyId");
+
+		dynamicQuery.add(companyIdProperty.eq(companyId));
+
+		Property statusProperty = PropertyFactoryUtil.forName("status");
+
+		dynamicQuery.add(statusProperty.eq(status));
+	}
+
 	@Override
 	protected void doDelete(Object obj) throws Exception {
 		JournalArticle article = (JournalArticle)obj;
@@ -166,16 +195,15 @@ public class JournalIndexer extends BaseIndexer {
 
 		Locale defaultLocale = LocaleUtil.getDefault();
 
-		String defaultLangaugeId = LocaleUtil.toLanguageId(defaultLocale);
+		String defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
 
 		String[] languageIds = getLanguageIds(
-			defaultLangaugeId, article.getContent());
+			defaultLanguageId, article.getContent());
 
 		for (String languageId : languageIds) {
-			String content = extractContent(
-				article.getContentByLocale(languageId));
+			String content = extractContent(article, languageId);
 
-			if (languageId.equals(defaultLangaugeId)) {
+			if (languageId.equals(defaultLanguageId)) {
 				document.addText(Field.CONTENT, content);
 			}
 
@@ -201,18 +229,9 @@ public class JournalIndexer extends BaseIndexer {
 		if (Validator.isNotNull(article.getStructureId())) {
 			try {
 				structure = JournalStructureLocalServiceUtil.getStructure(
-					article.getGroupId(), article.getStructureId());
+					article.getGroupId(), article.getStructureId(), true);
 			}
-			catch (NoSuchStructureException nsse1) {
-				Group group = GroupLocalServiceUtil.getCompanyGroup(
-					article.getCompanyId());
-
-				try {
-					structure = JournalStructureLocalServiceUtil.getStructure(
-						group.getGroupId(), article.getStructureId());
-				}
-				catch (NoSuchStructureException nsse2) {
-				}
+			catch (NoSuchStructureException nsse) {
 			}
 		}
 
@@ -308,25 +327,86 @@ public class JournalIndexer extends BaseIndexer {
 		return _FIELD_NAMESPACE.concat(StringPool.FORWARD_SLASH).concat(name);
 	}
 
-	protected String extractContent(String content) {
-		content = StringUtil.replace(content, "<![CDATA[", StringPool.BLANK);
-		content = StringUtil.replace(content, "]]>", StringPool.BLANK);
-		content = StringUtil.replace(content, "&amp;", "&");
-		content = StringUtil.replace(content, "&lt;", "<");
-		content = StringUtil.replace(content, "&gt;", ">");
+	protected String extractContent(JournalArticle article, String languageId) {
+		String content = article.getContentByLocale(languageId);
+
+		if (Validator.isNotNull(article.getStructureId())) {
+			content = extractDynamicContent(content);
+		}
+		else {
+			content = extractStaticContent(content);
+		}
 
 		content = HtmlUtil.extractText(content);
 
 		return content;
 	}
 
+	protected String extractDynamicContent(Element rootElement) {
+		StringBundler sb = new StringBundler();
+
+		List<Element> dynamicElementElements = rootElement.elements(
+			"dynamic-element");
+
+		for (Element dynamicElementElement : dynamicElementElements) {
+			String type = dynamicElementElement.attributeValue(
+				"type", StringPool.BLANK);
+
+			if (!type.equals("boolean") && !type.equals("document_library") &&
+				!type.equals("image") && !type.equals("list") &&
+				!type.equals("link_to_layout") && !type.equals("multi-list") &&
+				!type.equals("selection_break")) {
+
+				Element dynamicContentElement = dynamicElementElement.element(
+					"dynamic-content");
+
+				if (dynamicContentElement != null) {
+					String dynamicContent = dynamicContentElement.getText();
+
+					sb.append(dynamicContent);
+					sb.append(StringPool.SPACE);
+				}
+			}
+
+			sb.append(extractDynamicContent(dynamicElementElement));
+		}
+
+		return sb.toString();
+	}
+
+	protected String extractDynamicContent(String content) {
+		try {
+			com.liferay.portal.kernel.xml.Document document =
+				SAXReaderUtil.read(content);
+
+			Element rootElement = document.getRootElement();
+
+			return extractDynamicContent(rootElement);
+		}
+		catch (DocumentException de) {
+			_log.error(de);
+		}
+
+		return StringPool.BLANK;
+	}
+
+	protected String extractStaticContent(String content) {
+		content = StringUtil.replace(content, "<![CDATA[", StringPool.BLANK);
+		content = StringUtil.replace(content, "]]>", StringPool.BLANK);
+		content = StringUtil.replace(content, "&amp;", "&");
+		content = StringUtil.replace(content, "&lt;", "<");
+		content = StringUtil.replace(content, "&gt;", ">");
+
+		return content;
+	}
+
 	protected String[] getLanguageIds(
-		String defaultLangaugeId, String content) {
+		String defaultLanguageId, String content) {
 
 		String[] languageIds = LocalizationUtil.getAvailableLocales(content);
 
 		if (languageIds.length == 0) {
-			languageIds = new String[] {defaultLangaugeId};
+			languageIds = new String[] {defaultLanguageId};
 		}
 
 		return languageIds;
@@ -335,6 +415,43 @@ public class JournalIndexer extends BaseIndexer {
 	@Override
 	protected String getPortletId(SearchContext searchContext) {
 		return PORTLET_ID;
+	}
+
+	protected List<JournalArticle> getReindexApprovedArticles(
+			long companyId, long startId, long endId)
+		throws Exception {
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			JournalArticle.class, PACLClassLoaderUtil.getPortalClassLoader());
+
+		Property property = PropertyFactoryUtil.forName("id");
+
+		dynamicQuery.add(property.ge(startId));
+		dynamicQuery.add(property.lt(endId));
+
+		addReindexCriteria(
+			dynamicQuery, companyId, WorkflowConstants.STATUS_APPROVED);
+
+		return JournalArticleLocalServiceUtil.dynamicQuery(dynamicQuery);
+	}
+
+	protected List<JournalArticle> getReindexDraftArticles(
+			long companyId, long startId, long endId)
+		throws Exception {
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			JournalArticle.class, PACLClassLoaderUtil.getPortalClassLoader());
+
+		Property property = PropertyFactoryUtil.forName("id");
+
+		dynamicQuery.add(property.ge(startId));
+		dynamicQuery.add(property.lt(endId));
+
+		addReindexCriteria(
+			dynamicQuery, companyId, JournalArticleConstants.VERSION_DEFAULT,
+			WorkflowConstants.STATUS_APPROVED);
+
+		return JournalArticleLocalServiceUtil.dynamicQuery(dynamicQuery);
 	}
 
 	protected void indexField(
@@ -470,42 +587,59 @@ public class JournalIndexer extends BaseIndexer {
 	}
 
 	protected void reindexArticles(long companyId) throws Exception {
-		int count = JournalArticleLocalServiceUtil.getCompanyArticlesCount(
-			companyId, WorkflowConstants.STATUS_APPROVED);
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			JournalArticle.class, PACLClassLoaderUtil.getPortalClassLoader());
 
-		int pages = count / Indexer.DEFAULT_INTERVAL;
+		Projection minIdProjection = ProjectionFactoryUtil.min("id");
+		Projection maxIdProjection = ProjectionFactoryUtil.max("id");
 
-		for (int i = 0; i <= pages; i++) {
-			int start = (i * Indexer.DEFAULT_INTERVAL);
-			int end = start + Indexer.DEFAULT_INTERVAL;
+		ProjectionList projectionList = ProjectionFactoryUtil.projectionList();
 
-			reindexArticles(companyId, start, end);
+		projectionList.add(minIdProjection);
+		projectionList.add(maxIdProjection);
+
+		dynamicQuery.setProjection(projectionList);
+
+		addReindexCriteria(
+			dynamicQuery, companyId, WorkflowConstants.STATUS_APPROVED);
+
+		List<Object[]> results = JournalArticleLocalServiceUtil.dynamicQuery(
+			dynamicQuery);
+
+		Object[] minAndMaxIds = results.get(0);
+
+		if ((minAndMaxIds[0] == null) || (minAndMaxIds[1] == null)) {
+			return;
+		}
+
+		long minId = (Long)minAndMaxIds[0];
+		long maxId = (Long)minAndMaxIds[1];
+
+		long startId = minId;
+		long endId = startId + DEFAULT_INTERVAL;
+
+		while (startId <= maxId) {
+			reindexArticles(companyId, startId, endId);
+
+			startId = endId;
+			endId += DEFAULT_INTERVAL;
 		}
 	}
 
-	protected void reindexArticles(long companyId, int start, int end)
+	protected void reindexArticles(long companyId, long startId, long endId)
 		throws Exception {
 
 		List<JournalArticle> articles = new ArrayList<JournalArticle>();
 
-		List<JournalArticle> approvedArticles =
-			JournalArticleLocalServiceUtil.getCompanyArticles(
-				companyId, WorkflowConstants.STATUS_APPROVED, start, end);
-
-		articles.addAll(approvedArticles);
-
-		List<JournalArticle> draftArticles =
-			JournalArticleLocalServiceUtil.getCompanyArticles(
-				companyId, JournalArticleConstants.VERSION_DEFAULT,
-				WorkflowConstants.STATUS_DRAFT, start, end);
-
-		articles.addAll(draftArticles);
+		articles.addAll(getReindexApprovedArticles(companyId, startId, endId));
+		articles.addAll(getReindexDraftArticles(companyId, startId, endId));
 
 		if (articles.isEmpty()) {
 			return;
 		}
 
-		Collection<Document> documents = new ArrayList<Document>();
+		Collection<Document> documents = new ArrayList<Document>(
+			articles.size());
 
 		for (JournalArticle article : articles) {
 			if (!article.isIndexable()) {

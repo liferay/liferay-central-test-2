@@ -77,6 +77,8 @@ public interface AssetRenderer {
 
 	public long getUserId();
 
+	public String getUserName();
+
 	public String getUuid();
 
 	public String getViewInContextMessage();
@@ -92,6 +94,8 @@ public interface AssetRenderer {
 	public boolean isDisplayable();
 
 	public boolean isLocalizable();
+
+	public boolean isPreviewInContext();
 
 	public boolean isPrintable();
 

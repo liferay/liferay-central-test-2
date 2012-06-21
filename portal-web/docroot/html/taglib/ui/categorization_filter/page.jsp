@@ -64,11 +64,11 @@ if (assetCategoryId != 0) {
 <liferay-util:buffer var="removeTag">
 	<c:if test="<%= Validator.isNotNull(assetTagName) %>">
 		<span class="asset-entry">
-			<%= assetTagName %>
+			<%= HtmlUtil.escape(assetTagName) %>
 
-			<portlet:renderURL var="viewURLWithoutTag">
-				<portlet:param name="tag" value="" />
-			</portlet:renderURL>
+			<liferay-portlet:renderURL allowEmptyParam="<%= true %>" var="viewURLWithoutTag">
+				<liferay-portlet:param name="tag" value="" />
+			</liferay-portlet:renderURL>
 
 			<a href="<%= viewURLWithoutTag %>" title="<liferay-ui:message key="remove" />">
 				<span class="aui-icon aui-icon-close aui-textboxlistentry-close"></span>

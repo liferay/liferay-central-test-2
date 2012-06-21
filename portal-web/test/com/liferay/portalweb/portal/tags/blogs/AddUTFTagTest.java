@@ -117,8 +117,7 @@ public class AddUTFTagTest extends BaseTestCase {
 
 			case 2:
 				selenium.type("//input[@class='lfr-tag-selector-input aui-field-input-text']",
-					RuntimeVariables.replace(
-						"s\u00e9l\u00e9nium1 lif\u00e9ray1"));
+					RuntimeVariables.replace("\u78521 liferay1"));
 				selenium.clickAt("//input[@value='Publish']",
 					RuntimeVariables.replace("Publish"));
 				selenium.waitForPageToLoad("30000");
@@ -126,8 +125,25 @@ public class AddUTFTagTest extends BaseTestCase {
 				assertEquals(RuntimeVariables.replace(
 						"Your request completed successfully."),
 					selenium.getText("//div[@class='portlet-msg-success']"));
-				assertEquals(RuntimeVariables.replace(
-						"s\u00e9l\u00e9nium1 lif\u00e9ray1"),
+
+				for (int second = 0;; second++) {
+					if (second >= 90) {
+						fail("timeout");
+					}
+
+					try {
+						if (selenium.isVisible(
+									"//span[@class='taglib-asset-tags-summary']/a")) {
+							break;
+						}
+					}
+					catch (Exception e) {
+					}
+
+					Thread.sleep(1000);
+				}
+
+				assertEquals(RuntimeVariables.replace("\u78521 liferay1"),
 					selenium.getText(
 						"//span[@class='taglib-asset-tags-summary']/a"));
 

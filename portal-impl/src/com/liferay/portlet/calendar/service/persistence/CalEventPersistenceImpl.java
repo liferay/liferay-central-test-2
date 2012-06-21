@@ -62,6 +62,7 @@ import com.liferay.portlet.calendar.model.CalEvent;
 import com.liferay.portlet.calendar.model.impl.CalEventImpl;
 import com.liferay.portlet.calendar.model.impl.CalEventModelImpl;
 import com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence;
+import com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence;
 import com.liferay.portlet.social.service.persistence.SocialActivityPersistence;
 
 import java.io.Serializable;
@@ -5822,13 +5823,14 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 *
 	 * @param uuid the uuid
 	 * @param groupId the group ID
+	 * @return the cal event that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
-	public void removeByUUID_G(String uuid, long groupId)
+	public CalEvent removeByUUID_G(String uuid, long groupId)
 		throws NoSuchEventException, SystemException {
 		CalEvent calEvent = findByUUID_G(uuid, groupId);
 
-		remove(calEvent);
+		return remove(calEvent);
 	}
 
 	/**
@@ -7161,6 +7163,8 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	protected AssetTagPersistence assetTagPersistence;
 	@BeanReference(type = ExpandoValuePersistence.class)
 	protected ExpandoValuePersistence expandoValuePersistence;
+	@BeanReference(type = MBMessagePersistence.class)
+	protected MBMessagePersistence mbMessagePersistence;
 	@BeanReference(type = SocialActivityPersistence.class)
 	protected SocialActivityPersistence socialActivityPersistence;
 	private static final String _SQL_SELECT_CALEVENT = "SELECT calEvent FROM CalEvent calEvent";

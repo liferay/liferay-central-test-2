@@ -126,7 +126,8 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 
 		// Indexer
 
-		Indexer indexer = IndexerRegistryUtil.getIndexer(MBMessage.class);
+		Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
+			MBMessage.class);
 
 		indexer.delete(thread);
 
@@ -141,6 +142,12 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 		}
 		catch (NoSuchDirectoryException nsde) {
 		}
+
+		// Subscriptions
+
+		subscriptionLocalService.deleteSubscriptions(
+			thread.getCompanyId(), MBThread.class.getName(),
+			thread.getThreadId());
 
 		// Thread flags
 
@@ -508,7 +515,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 			// Indexer
 
 			if (!message.isDiscussion()) {
-				Indexer indexer = IndexerRegistryUtil.getIndexer(
+				Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
 					MBMessage.class);
 
 				indexer.reindex(message);
@@ -617,7 +624,8 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 		// Indexer
 
 		if (!message.isDiscussion()) {
-			Indexer indexer = IndexerRegistryUtil.getIndexer(MBMessage.class);
+			Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
+				MBMessage.class);
 
 			indexer.reindex(message);
 		}
@@ -789,7 +797,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 			moveAttachmentsFromOldThread(message, oldAttachmentsDir);
 
 			if (!message.isDiscussion()) {
-				Indexer indexer = IndexerRegistryUtil.getIndexer(
+				Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
 					MBMessage.class);
 
 				indexer.reindex(message);

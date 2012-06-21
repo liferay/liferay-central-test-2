@@ -59,7 +59,7 @@ if (layoutSetBranches.contains(layoutSetBranch)) {
 
 				<liferay-ui:search-container-column-text
 					name="branch"
-					property="name"
+					value="<%= LanguageUtil.get(pageContext, curLayoutSetBranch.getName()) %>"
 				/>
 
 				<liferay-ui:search-container-column-text
@@ -81,7 +81,7 @@ if (layoutSetBranches.contains(layoutSetBranch)) {
 				</liferay-ui:search-container-column-text>
 			</liferay-ui:search-container-row>
 
-			<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" paginate="<%= false %>" />
+			<liferay-ui:search-iterator paginate="<%= false %>" searchContainer="<%= searchContainer %>" />
 		</liferay-ui:search-container>
 	</aui:form>
 </div>

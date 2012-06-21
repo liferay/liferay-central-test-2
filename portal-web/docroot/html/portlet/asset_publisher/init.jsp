@@ -19,8 +19,6 @@
 <%@ page import="com.liferay.portal.NoSuchModelException" %><%@
 page import="com.liferay.portal.kernel.repository.model.FileEntry" %><%@
 page import="com.liferay.portal.kernel.search.Hits" %><%@
-page import="com.liferay.portal.kernel.search.Indexer" %><%@
-page import="com.liferay.portal.kernel.search.IndexerRegistryUtil" %><%@
 page import="com.liferay.portal.kernel.xml.Document" %><%@
 page import="com.liferay.portal.kernel.xml.Element" %><%@
 page import="com.liferay.portal.kernel.xml.SAXReaderUtil" %><%@
@@ -82,14 +80,13 @@ long[] availableClassNameIds = AssetRendererFactoryRegistryUtil.getClassNameIds(
 
 for (long classNameId : availableClassNameIds) {
 	AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(PortalUtil.getClassName(classNameId));
-	Indexer indexer = IndexerRegistryUtil.getIndexer(PortalUtil.getClassName(classNameId));
 
-	if (!assetRendererFactory.isSelectable() || (indexer == null)) {
+	if (!assetRendererFactory.isSelectable()) {
 		availableClassNameIds = ArrayUtil.remove(availableClassNameIds, classNameId);
 	}
 }
 
-boolean anyAssetType = GetterUtil.getBoolean(preferences.getValue("anyAssetType", Boolean.TRUE.toString()));
+boolean anyAssetType = GetterUtil.getBoolean(preferences.getValue("anyAssetType", null), true);
 
 long[] classNameIds = AssetPublisherUtil.getClassNameIds(preferences, availableClassNameIds);
 
@@ -185,7 +182,7 @@ String orderByColumn1 = GetterUtil.getString(preferences.getValue("orderByColumn
 String orderByColumn2 = GetterUtil.getString(preferences.getValue("orderByColumn2", "title"));
 String orderByType1 = GetterUtil.getString(preferences.getValue("orderByType1", "DESC"));
 String orderByType2 = GetterUtil.getString(preferences.getValue("orderByType2", "ASC"));
-boolean excludeZeroViewCount = GetterUtil.getBoolean(preferences.getValue("excludeZeroViewCount", "0"));
+boolean excludeZeroViewCount = GetterUtil.getBoolean(preferences.getValue("excludeZeroViewCount", null));
 int delta = GetterUtil.getInteger(preferences.getValue("delta", StringPool.BLANK), SearchContainer.DEFAULT_DELTA);
 String paginationType = GetterUtil.getString(preferences.getValue("paginationType", "none"));
 boolean showAvailableLocales = GetterUtil.getBoolean(preferences.getValue("showAvailableLocales", null));

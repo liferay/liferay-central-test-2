@@ -16,8 +16,11 @@ package com.liferay.portalweb.portlet.wiki.wikipage.revertchangeparentfrontpagec
 
 import com.liferay.portalweb.portal.BaseTestSuite;
 import com.liferay.portalweb.portal.util.TearDownPageTest;
-import com.liferay.portalweb.portlet.wiki.portlet.addportlet.AddPageWikiTest;
-import com.liferay.portalweb.portlet.wiki.portlet.addportlet.AddPortletWikiTest;
+import com.liferay.portalweb.portlet.wiki.portlet.addportletwiki.AddPageWikiTest;
+import com.liferay.portalweb.portlet.wiki.portlet.addportletwiki.AddPortletWikiTest;
+import com.liferay.portalweb.portlet.wiki.wikinode.addwikinode.TearDownWikiNodeTest;
+import com.liferay.portalweb.portlet.wiki.wikipage.addwikifrontpage.AddWikiFrontPageTest;
+import com.liferay.portalweb.portlet.wiki.wikipage.addwikipage.AddWikiPageTest;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -31,7 +34,7 @@ public class RevertChangeParentFrontPageChildPageToWikiPageTests
 		TestSuite testSuite = new TestSuite();
 		testSuite.addTestSuite(AddPageWikiTest.class);
 		testSuite.addTestSuite(AddPortletWikiTest.class);
-		testSuite.addTestSuite(AddFrontPageTest.class);
+		testSuite.addTestSuite(AddWikiFrontPageTest.class);
 		testSuite.addTestSuite(AddFrontPageChildPageTest.class);
 		testSuite.addTestSuite(AddWikiPageTest.class);
 		testSuite.addTestSuite(ChangeParentFrontPageChildPageToWikiPageTest.class);

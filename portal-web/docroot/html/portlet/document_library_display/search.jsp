@@ -191,14 +191,14 @@ int mountFoldersCount = DLAppServiceUtil.getMountFoldersCount(scopeGroupId, DLFo
 				sb.append(mountFolder.getName());
 				sb.append("</a>");
 
-				if ((i + 1) > mountFoldersCount) {
+				if ((i + 1) < mountFoldersCount) {
 					sb.append(", ");
 				}
 			}
 			%>
 
 			<span class="portlet-msg-info">
-				<liferay-ui:message key="results-from-the-local-repository-search-in-x" arguments="<%= sb.toString() %>" />
+				<liferay-ui:message arguments="<%= sb.toString() %>" key="results-from-the-local-repository-search-in-x" />
 			</span>
 		</c:if>
 

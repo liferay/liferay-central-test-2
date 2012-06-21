@@ -28,16 +28,16 @@ TemplateDisplayTerms displayTerms = (TemplateDisplayTerms)searchContainer.getDis
 %>
 
 <liferay-ui:search-toggle
-	id="toggle_id_journal_template_search"
-	displayTerms="<%= displayTerms %>"
 	buttonLabel="search"
+	displayTerms="<%= displayTerms %>"
+	id="toggle_id_journal_template_search"
 >
 	<aui:fieldset>
 		<aui:input label="id" name="<%= displayTerms.TEMPLATE_ID %>" size="20" type="text" value="<%= displayTerms.getTemplateId() %>" />
 
 		<aui:input name="<%= displayTerms.NAME %>" size="20" type="text" value="<%= displayTerms.getName() %>" />
 
-		<aui:input name="<%= displayTerms.DESCRIPTION %>" type="text" size="20" value="<%= displayTerms.getDescription() %>" />
+		<aui:input name="<%= displayTerms.DESCRIPTION %>" size="20" type="text" value="<%= displayTerms.getDescription() %>" />
 
 		<c:if test='<%= strutsAction.equalsIgnoreCase("/journal/select_template") %>'>
 			<aui:select label="my-sites" name="<%= displayTerms.GROUP_IDS %>">
@@ -67,7 +67,7 @@ TemplateDisplayTerms displayTerms = (TemplateDisplayTerms)searchContainer.getDis
 
 <%
 boolean showAddTemplateButton = JournalPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_TEMPLATE);
-boolean showPermissionsButton = GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.PERMISSIONS);
+boolean showPermissionsButton = JournalPermission.contains(permissionChecker, scopeGroupId, ActionKeys.PERMISSIONS);
 %>
 
 <c:if test="<%= showAddTemplateButton || showPermissionsButton %>">

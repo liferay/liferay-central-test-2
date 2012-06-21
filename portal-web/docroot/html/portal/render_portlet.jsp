@@ -388,6 +388,7 @@ portletDisplay.setModeEditGuest(modeEditGuest);
 portletDisplay.setModeHelp(modeHelp);
 portletDisplay.setModePreview(modePreview);
 portletDisplay.setModePrint(modePrint);
+portletDisplay.setModeView(portletMode.equals(PortletMode.VIEW));
 
 portletDisplay.setShowCloseIcon(showCloseIcon);
 portletDisplay.setShowConfigurationIcon(showConfigurationIcon);
@@ -607,7 +608,7 @@ if (lifecycle.equals(PortletRequest.RENDER_PHASE)) {
 
 		if (key.startsWith(portletNamespace) || publicRenderParameterNames.contains(key)) {
 			if (key.startsWith(portletNamespace)) {
-				key = key.substring(portletNamespace.length(), key.length());
+				key = key.substring(portletNamespace.length());
 			}
 
 			String[] values = (String[])entry.getValue();
@@ -770,6 +771,8 @@ if (portlet.isActive() && portlet.isReady() && access && supportsMimeType && (in
 		if (themeDisplay.isFacebook() || themeDisplay.isStateExclusive()) {
 			renderRequestImpl.setAttribute(WebKeys.STRING_SERVLET_RESPONSE, stringResponse);
 		}
+
+		renderResponseImpl.transferHeaders(stringResponse);
 	}
 	catch (UnavailableException ue) {
 		portletException = true;
@@ -853,7 +856,7 @@ if ((layout.isTypePanel() || layout.isTypeControlPanel()) && !portletDisplay.get
 	}
 	%>
 
-	<div id="p_p_id<%= HtmlUtil.escapeAttribute(renderResponseImpl.getNamespace()) %>" class="<%= cssClasses %>" <%= freeformStyles %>>
+	<div class="<%= cssClasses %>" id="p_p_id<%= HtmlUtil.escapeAttribute(renderResponseImpl.getNamespace()) %>" <%= freeformStyles %>>
 		<span id="p_<%= HtmlUtil.escapeAttribute(portletId) %>"></span>
 
 		<div class="portlet-body">
@@ -919,10 +922,16 @@ if ((layout.isTypePanel() || layout.isTypeControlPanel()) && !portletDisplay.get
 				if (definition != null) {
 					templatePath = StrutsUtil.TEXT_HTML_DIR + definition.getPath();
 				}
+
+				String portletContent = "/portal/portlet_error.jsp";
+
+				if (!access && !portletException) {
+					portletContent = "/portal/portlet_access_denied.jsp";
+				}
 		%>
 
 				<tiles:insert flush="false" template="<%= templatePath %>">
-					<tiles:put name="portlet_content" value="/portal/portlet_error.jsp" />
+					<tiles:put name="portlet_content" value="<%= portletContent %>" />
 				</tiles:insert>
 
 		<%
@@ -1065,8 +1074,12 @@ if (themeDisplay.isStatePopUp()) {
 		<aui:script use="aui-base">
 			var dialog = Liferay.Util.getWindow();
 
+			var hideDialogSignature = '<portlet:namespace />hideRefreshDialog|*';
+
+			dialog.detach(hideDialogSignature);
+
 			dialog.on(
-				'visibleChange',
+				'<portlet:namespace />hideRefreshDialog|visibleChange',
 				function(event) {
 					if (!event.newVal && event.src !== 'hideLink') {
 						var refreshWindow = dialog._refreshWindow || Liferay.Util.getTop();
@@ -1085,6 +1098,9 @@ if (themeDisplay.isStatePopUp()) {
 						);
 
 						refreshWindow.location.href = '<%= closeRedirect %>';
+					}
+					else {
+						dialog.detach(hideDialogSignature);
 					}
 				}
 			);

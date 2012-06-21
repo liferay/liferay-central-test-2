@@ -324,7 +324,8 @@ public class LayoutSetBranchLocalServiceWrapper
 	}
 
 	/**
-	* @deprecated {@link #getUserLayoutSetBranch(long, long, boolean, long, long)}
+	* @deprecated {@link #getUserLayoutSetBranch(long, long, boolean, long,
+	long)}
 	*/
 	public com.liferay.portal.model.LayoutSetBranch getUserLayoutSetBranch(
 		long userId, long groupId, boolean privateLayout, long layoutSetBranchId)

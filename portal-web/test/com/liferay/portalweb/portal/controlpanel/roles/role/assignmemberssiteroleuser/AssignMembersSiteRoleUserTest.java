@@ -58,11 +58,12 @@ public class AssignMembersSiteRoleUserTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("Site Name"),
-			selenium.getText("//tr[contains(.,'Site Name')]/td[1]/a"));
+			selenium.getText(
+				"//td[@id='_134_groupsSearchContainer_col-name_row--site-name']/a"));
 		assertEquals(RuntimeVariables.replace("Actions"),
 			selenium.getText(
-				"//tr[contains(.,'Site Name')]/td/span[@title='Actions']/ul/li/strong/a/span"));
-		selenium.clickAt("//tr[contains(.,'Site Name')]/td/span[@title='Actions']/ul/li/strong/a/span",
+				"//span[@title='Actions']/ul[@id='_134_groupsSearchContainer_-site-name_menu']/li/strong/a/span"));
+		selenium.clickAt("//span[@title='Actions']/ul[@id='_134_groupsSearchContainer_-site-name_menu']/li/strong/a/span",
 			RuntimeVariables.replace("Actions"));
 
 		for (int second = 0;; second++) {
@@ -128,10 +129,12 @@ public class AssignMembersSiteRoleUserTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("Roles Siterole Name"),
-			selenium.getText("//tr[contains(.,'Roles Siterole Name')]/td[1]/a"));
+			selenium.getText(
+				"//td[@id='_174_ocerSearchContainer_col-name_row-1']/a"));
 		assertEquals(RuntimeVariables.replace("Site"),
-			selenium.getText("//tr[contains(.,'Roles Siterole Name')]/td[2]/a"));
-		selenium.clickAt("//tr[contains(.,'Roles Siterole Name')]/td[1]/a",
+			selenium.getText(
+				"//td[@id='_174_ocerSearchContainer_col-type_row-1']/a"));
+		selenium.clickAt("//td[@id='_174_ocerSearchContainer_col-name_row-1']/a",
 			RuntimeVariables.replace("Roles Siterole Name"));
 		selenium.waitForPageToLoad("30000");
 		loadRequiredJavaScriptModules();
@@ -145,12 +148,17 @@ public class AssignMembersSiteRoleUserTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("userfn userln"),
-			selenium.getText("//tr[contains(.,'usersn')]/td[2]"));
+			selenium.getText(
+				"//td[@id='_174_usersSearchContainer_col-name_row-usersn']"));
 		assertEquals(RuntimeVariables.replace("usersn"),
-			selenium.getText("//tr[contains(.,'usersn')]/td[3]"));
-		assertFalse(selenium.isChecked("//tr[contains(.,'usersn')]/td[1]/input"));
-		selenium.check("//tr[contains(.,'usersn')]/td[1]/input");
-		assertTrue(selenium.isChecked("//tr[contains(.,'usersn')]/td[1]/input"));
+			selenium.getText(
+				"//td[@id='_174_usersSearchContainer_col-screen-name_row-usersn']"));
+		assertFalse(selenium.isChecked(
+				"//td[@id='_174_usersSearchContainer_col-rowChecker_row-usersn']/input"));
+		selenium.check(
+			"//td[@id='_174_usersSearchContainer_col-rowChecker_row-usersn']/input");
+		assertTrue(selenium.isChecked(
+				"//td[@id='_174_usersSearchContainer_col-rowChecker_row-usersn']/input"));
 		selenium.clickAt("//input[@value='Update Associations']",
 			RuntimeVariables.replace("Update Associations"));
 		selenium.waitForPageToLoad("30000");
@@ -158,6 +166,7 @@ public class AssignMembersSiteRoleUserTest extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace(
 				"Your request completed successfully."),
 			selenium.getText("//div[@class='portlet-msg-success']"));
-		assertTrue(selenium.isChecked("//tr[contains(.,'usersn')]/td[1]/input"));
+		assertTrue(selenium.isChecked(
+				"//td[@id='_174_usersSearchContainer_col-rowChecker_row-usersn']/input"));
 	}
 }

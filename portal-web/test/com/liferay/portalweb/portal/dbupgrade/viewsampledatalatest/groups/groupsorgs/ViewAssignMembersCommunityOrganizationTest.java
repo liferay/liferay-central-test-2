@@ -25,6 +25,9 @@ public class ViewAssignMembersCommunityOrganizationTest extends BaseTestCase {
 		throws Exception {
 		selenium.open("/web/guest/home/");
 		loadRequiredJavaScriptModules();
+		assertEquals(RuntimeVariables.replace("Go to"),
+			selenium.getText("//li[@id='_145_mySites']/a/span"));
+		selenium.mouseOver("//li[@id='_145_mySites']/a/span");
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -90,6 +93,12 @@ public class ViewAssignMembersCommunityOrganizationTest extends BaseTestCase {
 			selenium.getText("link=Organizations"));
 		selenium.clickAt("link=Organizations",
 			RuntimeVariables.replace("Organizations"));
+		selenium.waitForPageToLoad("30000");
+		loadRequiredJavaScriptModules();
+		selenium.type("//input[@name='_174_keywords']",
+			RuntimeVariables.replace("Groups Orgs"));
+		selenium.clickAt("//input[@value='Search']",
+			RuntimeVariables.replace("Search"));
 		selenium.waitForPageToLoad("30000");
 		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("Organization Groups Orgs"),

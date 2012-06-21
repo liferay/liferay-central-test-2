@@ -30,16 +30,6 @@
 </tr>
 <tr>
 	<td>waitForVisible</td>
-	<td>//iframe[@id='manageContentDialog']</td>
-	<td>Manage Site Content</td>
-</tr>
-<tr>
-	<td>selectFrame</td>
-	<td>//iframe[@id='manageContentDialog']</td>
-	<td>Manage Site Content</td>
-</tr>
-<tr>
-	<td>waitForVisible</td>
 	<td>//ul[@class='category-portlets']/li[6]/a</td>
 	<td>Message Boards</td>
 </tr>
@@ -55,12 +45,12 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//span[@title='Options']/ul/li/strong/a/span</td>
+	<td>//a[contains(@id,'_162_') and contains(@id,'menuButton')]</td>
 	<td>Options</td>
 </tr>
 <tr>
 	<td>clickAt</td>
-	<td>//span[@title='Options']/ul/li/strong/a/span</td>
+	<td>//a[contains(@id,'_162_') and contains(@id,'menuButton')]</td>
 	<td>Options</td>
 </tr>
 <tr>
@@ -127,11 +117,6 @@
 	<td>assertText</td>
 	<td>//div[@class='portlet-msg-success']</td>
 	<td>Your request completed successfully.</td>
-</tr>
-<tr>
-	<td>selectFrame</td>
-	<td>relative=top</td>
-	<td>top</td>
 </tr>
 </tbody></table>
 </body>

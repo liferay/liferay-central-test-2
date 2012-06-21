@@ -140,6 +140,8 @@ public class TearDownUserTest extends BaseTestCase {
 					selenium.getText("//div[@class='portlet-msg-success']"));
 
 			case 3:
+				assertEquals(RuntimeVariables.replace("No users were found."),
+					selenium.getText("//div[@class='portlet-msg-info']"));
 				selenium.open("/web/guest/home/");
 				loadRequiredJavaScriptModules();
 				assertEquals(RuntimeVariables.replace("Go to"),
@@ -243,6 +245,8 @@ public class TearDownUserTest extends BaseTestCase {
 					selenium.getText("//div[@class='portlet-msg-success']"));
 
 			case 4:
+				assertEquals(RuntimeVariables.replace("No users were found."),
+					selenium.getText("//div[@class='portlet-msg-info']"));
 				selenium.clickAt("link=\u00ab Basic",
 					RuntimeVariables.replace("Basic"));
 

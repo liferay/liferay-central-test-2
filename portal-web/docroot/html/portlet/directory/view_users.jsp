@@ -43,7 +43,7 @@ if (Validator.isNotNull(viewUsersRedirect)) {
 
 	Organization organization = null;
 
-	if ((organizationId > 0)) {
+	if (organizationId > 0) {
 		try {
 			organization = OrganizationLocalServiceUtil.getOrganization(organizationId);
 		}
@@ -106,6 +106,7 @@ if (Validator.isNotNull(viewUsersRedirect)) {
 		escapedModel="<%= true %>"
 		keyProperty="userId"
 		modelVar="user2"
+		rowIdProperty="screenName"
 	>
 		<liferay-portlet:renderURL varImpl="rowURL">
 			<portlet:param name="struts_action" value="/directory/view_user" />

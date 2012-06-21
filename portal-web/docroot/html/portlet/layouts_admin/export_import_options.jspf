@@ -24,20 +24,22 @@
 		</c:when>
 	</c:choose>
 
-	<liferay-ui:panel-container id="export-dialog-tree-panel-container" extended="<%= true %>" persistState="<%= true %>">
-		<liferay-ui:panel collapsible="<%= true %>" cssClass="export-group-panel" id="pagesPanel" persistState="<%= true %>" title="pages">
-			<ul class="lfr-tree lfr-component">
-				<li class="tree-item">
-					<aui:input disabled="<%= true %>" name="pages" type="checkbox" value="<%= true %>" />
-				</li>
-
-				<c:if test="<%= cmd.equals(Constants.IMPORT) %>">
+	<liferay-ui:panel-container extended="<%= true %>" id="export-dialog-tree-panel-container" persistState="<%= true %>">
+		<c:if test="<%= !group.isLayoutPrototype() %>">
+			<liferay-ui:panel collapsible="<%= true %>" cssClass="export-group-panel" id="pagesPanel" persistState="<%= true %>" title="pages">
+				<ul class="lfr-tree lfr-component">
 					<li class="tree-item">
-						<aui:input helpMessage="delete-missing-layouts-help" label="delete-missing-layouts" name="<%= PortletDataHandlerKeys.DELETE_MISSING_LAYOUTS %>" type="checkbox" value="<%= false %>" />
+						<aui:input disabled="<%= true %>" name="pages" type="checkbox" value="<%= true %>" />
 					</li>
-				</c:if>
-			</ul>
-		</liferay-ui:panel>
+
+					<c:if test="<%= cmd.equals(Constants.IMPORT) %>">
+						<li class="tree-item">
+							<aui:input helpMessage="delete-missing-layouts-help" label="delete-missing-layouts" name="<%= PortletDataHandlerKeys.DELETE_MISSING_LAYOUTS %>" type="checkbox" value="<%= false %>" />
+						</li>
+					</c:if>
+				</ul>
+			</liferay-ui:panel>
+		</c:if>
 
 		<liferay-ui:panel collapsible="<%= true %>" cssClass="export-group-panel" id="portletDataPanel" persistState="<%= true %>" title="applications">
 			<ul class="lfr-tree lfr-component">
@@ -52,7 +54,7 @@
 				</li>
 				<li class="tree-item">
 					<c:choose>
-						<c:when test="<%= cmd.equals(Constants.IMPORT) %>">
+						<c:when test="<%= cmd.equals(Constants.IMPORT) && !group.isLayoutPrototype() %>">
 							<aui:input name="<%= PortletDataHandlerKeys.PORTLET_DATA_CONTROL_DEFAULT %>" type="hidden" value="<%= true %>" />
 
 							<aui:input label="data" name="<%= PortletDataHandlerKeys.PORTLET_DATA %>" type="checkbox" value="<%= true %>" />
@@ -66,7 +68,7 @@
 									<aui:fieldset cssClass="portlet-data-section" label="data-strategy">
 										<aui:input checked="<%= true %>" helpMessage="import-data-strategy-mirror-help" label="mirror" name="<%= PortletDataHandlerKeys.DATA_STRATEGY %>" type="radio" value="<%= PortletDataHandlerKeys.DATA_STRATEGY_MIRROR %>" />
 
-										<aui:input helpMessage="import-data-strategy-mirror-with-overwritting-help" id="mirrorWithOverwriting" label="mirror-with-overwritting" name="<%= PortletDataHandlerKeys.DATA_STRATEGY %>" type="radio" value="<%= PortletDataHandlerKeys.DATA_STRATEGY_MIRROR_OVERWRITE %>" />
+										<aui:input helpMessage="import-data-strategy-mirror-with-overwriting-help" id="mirrorWithOverwriting" label="mirror-with-overwriting" name="<%= PortletDataHandlerKeys.DATA_STRATEGY %>" type="radio" value="<%= PortletDataHandlerKeys.DATA_STRATEGY_MIRROR_OVERWRITE %>" />
 
 										<aui:input helpMessage="import-data-strategy-copy-as-new-help" id="copyAsNew" label="copy-as-new" name="<%= PortletDataHandlerKeys.DATA_STRATEGY %>" type="radio" value="<%= PortletDataHandlerKeys.DATA_STRATEGY_COPY_AS_NEW %>" />
 									</aui:fieldset>
@@ -81,7 +83,7 @@
 								</li>
 							</ul>
 						</c:when>
-						<c:otherwise>
+						<c:when test="<%= cmd.equals(Constants.EXPORT) && !group.isLayoutPrototype() %>">
 							<aui:input name="<%= PortletDataHandlerKeys.PORTLET_DATA_CONTROL_DEFAULT %>" type="hidden" value="<%= false %>" />
 
 							<aui:input label="data" name="<%= PortletDataHandlerKeys.PORTLET_DATA %>" type="checkbox" value="<%= true %>" />
@@ -114,9 +116,9 @@
 														monthParam="startDateMonth"
 														monthValue="<%= yesterday.get(Calendar.MONTH) %>"
 														yearParam="startDateYear"
-														yearValue="<%= yesterday.get(Calendar.YEAR) %>"
-														yearRangeStart="<%= yesterday.get(Calendar.YEAR) - 100 %>"
 														yearRangeEnd="<%= yesterday.get(Calendar.YEAR) %>"
+														yearRangeStart="<%= yesterday.get(Calendar.YEAR) - 100 %>"
+														yearValue="<%= yesterday.get(Calendar.YEAR) %>"
 													/>
 
 													&nbsp;
@@ -127,9 +129,9 @@
 														disabled="<%= false %>"
 														hourParam='<%= "startDateHour" %>'
 														hourValue="<%= yesterday.get(Calendar.HOUR) %>"
+														minuteInterval="<%= 1 %>"
 														minuteParam='<%= "startDateMinute" %>'
 														minuteValue="<%= yesterday.get(Calendar.MINUTE) %>"
-														minuteInterval="<%= 1 %>"
 													/>
 												</aui:field-wrapper>
 											</li>
@@ -144,9 +146,9 @@
 														monthParam="endDateMonth"
 														monthValue="<%= today.get(Calendar.MONTH) %>"
 														yearParam="endDateYear"
-														yearValue="<%= today.get(Calendar.YEAR) %>"
-														yearRangeStart="<%= today.get(Calendar.YEAR) - 100 %>"
 														yearRangeEnd="<%= today.get(Calendar.YEAR) %>"
+														yearRangeStart="<%= today.get(Calendar.YEAR) - 100 %>"
+														yearValue="<%= today.get(Calendar.YEAR) %>"
 													/>
 
 													&nbsp;
@@ -157,9 +159,9 @@
 														disabled="<%= false %>"
 														hourParam='<%= "endDateHour" %>'
 														hourValue="<%= today.get(Calendar.HOUR) %>"
+														minuteInterval="<%= 1 %>"
 														minuteParam='<%= "endDateMinute" %>'
 														minuteValue="<%= today.get(Calendar.MINUTE) %>"
-														minuteInterval="<%= 1 %>"
 													/>
 												</aui:field-wrapper>
 											</li>
@@ -343,7 +345,7 @@
 									</aui:fieldset>
 								</li>
 							</ul>
-						</c:otherwise>
+						</c:when>
 					</c:choose>
 				</li>
 			</ul>

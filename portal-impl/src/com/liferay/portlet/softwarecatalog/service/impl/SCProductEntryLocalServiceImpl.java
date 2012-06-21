@@ -142,7 +142,8 @@ public class SCProductEntryLocalServiceImpl
 
 		// Indexer
 
-		Indexer indexer = IndexerRegistryUtil.getIndexer(SCProductEntry.class);
+		Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
+			SCProductEntry.class);
 
 		indexer.reindex(productEntry);
 
@@ -259,7 +260,8 @@ public class SCProductEntryLocalServiceImpl
 
 		// Indexer
 
-		Indexer indexer = IndexerRegistryUtil.getIndexer(SCProductEntry.class);
+		Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
+			SCProductEntry.class);
 
 		indexer.delete(productEntry);
 	}
@@ -377,7 +379,7 @@ public class SCProductEntryLocalServiceImpl
 				}
 
 				if ((oldestDate != null) &&
-					(oldestDate.after(productVersion.getModifiedDate()))) {
+					oldestDate.after(productVersion.getModifiedDate())) {
 
 					continue;
 				}
@@ -449,7 +451,8 @@ public class SCProductEntryLocalServiceImpl
 
 		// Indexer
 
-		Indexer indexer = IndexerRegistryUtil.getIndexer(SCProductEntry.class);
+		Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
+			SCProductEntry.class);
 
 		indexer.reindex(productEntry);
 

@@ -133,8 +133,6 @@ AUI.add(
 					'popupReady',
 					function(event) {
 						if (event.windowName == id) {
-							var dialogIframeNode = event.currentTarget.node;
-
 							event.dialog = dialog;
 							event.details[0].dialog = dialog;
 
@@ -147,6 +145,8 @@ AUI.add(
 
 								dialogUtil.Window._name = id;
 							}
+
+							dialog.iframe.node.focus();
 						}
 					}
 				);
@@ -154,11 +154,15 @@ AUI.add(
 				dialog.render();
 			}
 			else {
-				dialog.show();
+				if (!dialog.get('visible')) {
+					dialog.show();
+
+					dialog.iframe.node.focus();
+
+					dialog.iframe.set('uri', uri);
+				}
 
 				dialog._syncUIPosAlign();
-
-				dialog.iframe.set('uri', uri);
 			}
 
 			if (dialog.get('stack')) {

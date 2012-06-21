@@ -25,7 +25,9 @@ if (themeDisplay.isSignedIn()) {
 	tabs1Values += ",my_products";
 }
 
-if (PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_LICENSE)) {
+boolean hasAddLicensePermission = PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_LICENSE);
+
+if (hasAddLicensePermission) {
 	tabs1Values += ",licenses";
 }
 
@@ -49,8 +51,8 @@ portletURL.setParameter("tabs1", tabs1);
 
 <liferay-ui:tabs
 	names="<%= tabs1Names %>"
-	tabsValues="<%= tabs1Values %>"
 	portletURL="<%= portletURL %>"
+	tabsValues="<%= tabs1Values %>"
 />
 
 <c:choose>
@@ -241,7 +243,7 @@ portletURL.setParameter("tabs1", tabs1);
 		}
 
 		boolean showAddProductEntryButton = SCPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_PRODUCT_ENTRY);
-		boolean showPermissionsButton = GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.PERMISSIONS);
+		boolean showPermissionsButton = SCPermission.contains(permissionChecker, scopeGroupId, ActionKeys.PERMISSIONS);
 		%>
 
 		<div>
@@ -531,7 +533,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 		<%
 		boolean showAddFrameworkVersionButton = SCPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_FRAMEWORK_VERSION);
-		boolean showPermissionsButton = GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.PERMISSIONS);
+		boolean showPermissionsButton = SCPermission.contains(permissionChecker, scopeGroupId, ActionKeys.PERMISSIONS);
 		%>
 
 		<c:if test="<%= showAddFrameworkVersionButton || showPermissionsButton %>">
@@ -643,7 +645,7 @@ portletURL.setParameter("tabs1", tabs1);
 		}
 		%>
 
-		<c:if test="<%= PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_LICENSE) %>">
+		<c:if test="<%= hasAddLicensePermission %>">
 			<div>
 				<input type="button" value="<liferay-ui:message key="add-license" />" onClick="location.href = '<portlet:renderURL><portlet:param name="struts_action" value="/software_catalog/edit_license" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';" />
 			</div>

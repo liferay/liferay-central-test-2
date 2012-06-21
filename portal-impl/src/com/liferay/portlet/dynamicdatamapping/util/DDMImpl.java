@@ -22,7 +22,6 @@ import com.liferay.portal.kernel.servlet.ServletResponseUtil;
 import com.liferay.portal.kernel.upload.UploadRequest;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.MimeTypesUtil;
-import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StreamUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -108,8 +107,8 @@ public class DDMImpl implements DDM {
 
 			String fieldDataType = ddmStructure.getFieldDataType(fieldName);
 			String fieldType = ddmStructure.getFieldType(fieldName);
-			String fieldValue = ParamUtil.getString(
-				serviceContext, fieldNamespace + fieldName);
+			String fieldValue = (String)serviceContext.getAttribute(
+				fieldNamespace + fieldName);
 
 			if (fieldDataType.equals(FieldConstants.FILE_UPLOAD)) {
 				continue;
@@ -265,6 +264,8 @@ public class DDMImpl implements DDM {
 
 		InputStream inputStream = null;
 
+		Fields fields = StorageEngineUtil.getFields(storageId);
+
 		try {
 			inputStream = uploadRequest.getFileAsStream(
 				fieldNamespace + fieldName, true);
@@ -284,16 +285,16 @@ public class DDMImpl implements DDM {
 					"classPK", String.valueOf(baseModel.getPrimaryKeyObj()));
 
 				fieldValue = recordFileJSONObject.toString();
-
-				Fields fields = new Fields();
-
-				Field field = new Field(structureId, fieldName, fieldValue);
-
-				fields.put(field);
-
-				StorageEngineUtil.update(
-					storageId, fields, true, serviceContext);
 			}
+			else if (fields.contains(fieldName)) {
+				return StringPool.BLANK;
+			}
+
+			Field field = new Field(structureId, fieldName, fieldValue);
+
+			fields.put(field);
+
+			StorageEngineUtil.update(storageId, fields, true, serviceContext);
 		}
 		finally {
 			StreamUtil.cleanUp(inputStream);

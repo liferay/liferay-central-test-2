@@ -102,7 +102,7 @@ public class ConfigurePortletAddCounter1WikiPageUpdatesTest extends BaseTestCase
 
 			try {
 				if (selenium.isVisible(
-							"//div[contains(@class,'aui-dialog-iframe-bd')]/iframe")) {
+							"//iframe[@id='_180_configurationIframeDialog']")) {
 					break;
 				}
 			}
@@ -112,8 +112,7 @@ public class ConfigurePortletAddCounter1WikiPageUpdatesTest extends BaseTestCase
 			Thread.sleep(1000);
 		}
 
-		selenium.selectFrame(
-			"//div[contains(@class,'aui-dialog-iframe-bd')]/iframe");
+		selenium.selectFrame("//iframe[@id='_180_configurationIframeDialog']");
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {

@@ -63,15 +63,18 @@ public class EditUser2SiteRole2Test extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("userfn2"),
-			selenium.getText("//tr[contains(.,'usersn2')]/td[2]/a"));
+			selenium.getText(
+				"//td[@id='_125_usersSearchContainer_col-first-name_row-usersn2']/a"));
 		assertEquals(RuntimeVariables.replace("userln2"),
-			selenium.getText("//tr[contains(.,'usersn2')]/td[3]/a"));
+			selenium.getText(
+				"//td[@id='_125_usersSearchContainer_col-last-name_row-usersn2']/a"));
 		assertEquals(RuntimeVariables.replace("usersn2"),
-			selenium.getText("//tr[contains(.,'usersn2')]/td[4]/a"));
+			selenium.getText(
+				"//td[@id='_125_usersSearchContainer_col-screen-name_row-usersn2']/a"));
 		assertEquals(RuntimeVariables.replace("Actions"),
 			selenium.getText(
-				"//tr[contains(.,'usersn2')]/td/span[@title='Actions']/ul/li/strong/a"));
-		selenium.clickAt("//tr[contains(.,'usersn2')]/td/span[@title='Actions']/ul/li/strong/a",
+				"//span[@title='Actions']/ul[@id='_125_usersSearchContainer_usersn2_menu']/li/strong/a"));
+		selenium.clickAt("//span[@title='Actions']/ul[@id='_125_usersSearchContainer_usersn2_menu']/li/strong/a",
 			RuntimeVariables.replace("Actions"));
 
 		for (int second = 0;; second++) {
@@ -135,7 +138,7 @@ public class EditUser2SiteRole2Test extends BaseTestCase {
 
 			try {
 				if (selenium.isVisible(
-							"//tr[contains(.,'Roles Siterole2 Name')]/td[1]/a")) {
+							"//tr[contains(.,'Roles Siterole2 Name')]/td[@headers='_125_rolesSearchContainer_col-title']/a")) {
 					break;
 				}
 			}
@@ -146,8 +149,9 @@ public class EditUser2SiteRole2Test extends BaseTestCase {
 		}
 
 		assertEquals(RuntimeVariables.replace("Roles Siterole2 Name"),
-			selenium.getText("//tr[contains(.,'Roles Siterole2 Name')]/td[1]/a"));
-		selenium.clickAt("//tr[contains(.,'Roles Siterole2 Name')]/td[1]/a",
+			selenium.getText(
+				"//tr[contains(.,'Roles Siterole2 Name')]/td[@headers='_125_rolesSearchContainer_col-title']/a"));
+		selenium.clickAt("//tr[contains(.,'Roles Siterole2 Name')]/td[@headers='_125_rolesSearchContainer_col-title']/a",
 			RuntimeVariables.replace("Roles Siterole2 Name"));
 		selenium.selectWindow("null");
 
@@ -181,12 +185,9 @@ public class EditUser2SiteRole2Test extends BaseTestCase {
 			selenium.getText("//div[@class='portlet-msg-success']"));
 		assertEquals(RuntimeVariables.replace("Roles Siterole2 Name"),
 			selenium.getText(
-				"//div[@id='_125_communityRolesSearchContainerSearchContainer']//tr[contains(.,'Roles Siterole Name')]/td[1]"));
+				"//td[@id='_125_communityRolesSearchContainer_col-title_row-1']"));
 		assertEquals(RuntimeVariables.replace("Site Name"),
 			selenium.getText(
-				"//div[@id='_125_communityRolesSearchContainerSearchContainer']//tr[contains(.,'Roles Siterole Name')]/td[2]"));
-		assertEquals(RuntimeVariables.replace("Remove"),
-			selenium.getText(
-				"//div[@id='_125_communityRolesSearchContainerSearchContainer']//tr[contains(.,'Roles Siterole Name')]/td[3]/a"));
+				"//td[@id='_125_communityRolesSearchContainer_col-site_row-1']"));
 	}
 }

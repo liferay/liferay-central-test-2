@@ -25,9 +25,11 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ColorScheme;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.LayoutSet;
+import com.liferay.portal.model.LayoutSetPrototype;
 import com.liferay.portal.model.Theme;
 import com.liferay.portal.model.VirtualHost;
 import com.liferay.portal.service.GroupLocalServiceUtil;
+import com.liferay.portal.service.LayoutSetPrototypeLocalServiceUtil;
 import com.liferay.portal.service.ThemeLocalServiceUtil;
 import com.liferay.portal.service.VirtualHostLocalServiceUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
@@ -50,6 +52,22 @@ public class LayoutSetImpl extends LayoutSetBaseImpl {
 
 	public Group getGroup() throws PortalException, SystemException {
 		return GroupLocalServiceUtil.getGroup(getGroupId());
+	}
+
+	public long getLayoutSetPrototypeId()
+		throws PortalException, SystemException {
+
+		String layoutSetPrototypeUuid = getLayoutSetPrototypeUuid();
+
+		if (Validator.isNull(layoutSetPrototypeUuid)) {
+			return 0;
+		}
+
+		LayoutSetPrototype layoutSetPrototype =
+			LayoutSetPrototypeLocalServiceUtil.getLayoutSetPrototypeByUuid(
+				layoutSetPrototypeUuid);
+
+		return layoutSetPrototype.getLayoutSetPrototypeId();
 	}
 
 	public long getLiveLogoId() {
@@ -130,32 +148,7 @@ public class LayoutSetImpl extends LayoutSetBaseImpl {
 			return value;
 		}
 
-		Theme theme = null;
-
-		boolean controlPanel = false;
-
-		try {
-			Group group = getGroup();
-
-			controlPanel = group.isControlPanel();
-		}
-		catch (Exception e) {
-		}
-
-		if (controlPanel) {
-			String themeId = PrefsPropsUtil.getString(
-				getCompanyId(),
-				PropsKeys.CONTROL_PANEL_LAYOUT_REGULAR_THEME_ID);
-
-			theme = ThemeLocalServiceUtil.getTheme(
-				getCompanyId(), themeId, !device.equals("regular"));
-		}
-		else if (device.equals("regular")) {
-			theme = getTheme();
-		}
-		else {
-			theme = getWapTheme();
-		}
+		Theme theme = getTheme(device);
 
 		value = theme.getSetting(key);
 
@@ -212,6 +205,33 @@ public class LayoutSetImpl extends LayoutSetBaseImpl {
 		_settingsProperties = settingsProperties;
 
 		super.setSettings(_settingsProperties.toString());
+	}
+
+	protected Theme getTheme(String device) throws SystemException {
+		boolean controlPanel = false;
+
+		try {
+			Group group = getGroup();
+
+			controlPanel = group.isControlPanel();
+		}
+		catch (Exception e) {
+		}
+
+		if (controlPanel) {
+			String themeId = PrefsPropsUtil.getString(
+				getCompanyId(),
+				PropsKeys.CONTROL_PANEL_LAYOUT_REGULAR_THEME_ID);
+
+			return ThemeLocalServiceUtil.getTheme(
+				getCompanyId(), themeId, !device.equals("regular"));
+		}
+		else if (device.equals("regular")) {
+			return getTheme();
+		}
+		else {
+			return getWapTheme();
+		}
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(LayoutSetImpl.class);

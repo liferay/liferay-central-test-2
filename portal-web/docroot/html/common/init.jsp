@@ -83,6 +83,7 @@ page import="com.liferay.portal.kernel.portlet.LiferayWindowState" %><%@
 page import="com.liferay.portal.kernel.search.Field" %><%@
 page import="com.liferay.portal.kernel.servlet.BrowserSnifferUtil" %><%@
 page import="com.liferay.portal.kernel.servlet.DynamicServletRequest" %><%@
+page import="com.liferay.portal.kernel.servlet.ServletContextPool" %><%@
 page import="com.liferay.portal.kernel.servlet.ServletContextUtil" %><%@
 page import="com.liferay.portal.kernel.servlet.SessionErrors" %><%@
 page import="com.liferay.portal.kernel.servlet.SessionMessages" %><%@
@@ -134,6 +135,7 @@ page import="com.liferay.portal.kernel.util.TimeZoneUtil" %><%@
 page import="com.liferay.portal.kernel.util.Tuple" %><%@
 page import="com.liferay.portal.kernel.util.UnicodeFormatter" %><%@
 page import="com.liferay.portal.kernel.util.UnicodeProperties" %><%@
+page import="com.liferay.portal.kernel.util.UniqueList" %><%@
 page import="com.liferay.portal.kernel.util.Validator" %><%@
 page import="com.liferay.portal.kernel.workflow.WorkflowConstants" %><%@
 page import="com.liferay.portal.model.*" %><%@
@@ -193,14 +195,11 @@ page import="com.liferay.util.PKParser" %><%@
 page import="com.liferay.util.PwdGenerator" %><%@
 page import="com.liferay.util.State" %><%@
 page import="com.liferay.util.StateUtil" %><%@
-page import="com.liferay.util.UniqueList" %><%@
 page import="com.liferay.util.log4j.Levels" %><%@
 page import="com.liferay.util.portlet.PortletRequestUtil" %><%@
 page import="com.liferay.util.xml.XMLFormatter" %>
 
 <%@ page import="java.io.Serializable" %>
-
-<%@ page import="java.math.BigDecimal" %>
 
 <%@ page import="java.text.DateFormat" %><%@
 page import="java.text.DecimalFormat" %><%@
@@ -246,8 +245,6 @@ page import="javax.portlet.ResourceURL" %><%@
 page import="javax.portlet.UnavailableException" %><%@
 page import="javax.portlet.ValidatorException" %><%@
 page import="javax.portlet.WindowState" %>
-
-<%@ page import="org.apache.commons.math.util.MathUtils" %>
 
 <liferay-theme:defineObjects />
 

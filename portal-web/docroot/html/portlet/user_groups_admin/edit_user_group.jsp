@@ -113,6 +113,11 @@ long userGroupId = BeanParamUtil.getLong(userGroup, request, "userGroupId");
 		%>
 
 		<c:if test="<%= (userGroupGroup != null) || !layoutSetPrototypes.isEmpty() %>">
+
+			<%
+			boolean hasUnlinkLayoutSetPrototypePermission = PortalPermissionUtil.contains(permissionChecker, ActionKeys.UNLINK_LAYOUT_SET_PROTOTYPE);
+			%>
+
 			<c:choose>
 				<c:when test="<%= ((userGroupGroup == null) || (publicLayoutSetPrototype == null)) && !layoutSetPrototypes.isEmpty() %>">
 					<aui:select label="public-pages" name="publicLayoutSetPrototypeId">
@@ -122,7 +127,7 @@ long userGroupId = BeanParamUtil.getLong(userGroup, request, "userGroupId");
 						for (LayoutSetPrototype layoutSetPrototype : layoutSetPrototypes) {
 						%>
 
-							<aui:option value="<%= layoutSetPrototype.getLayoutSetPrototypeId() %>"><%= layoutSetPrototype.getName(user.getLanguageId()) %></aui:option>
+							<aui:option value="<%= layoutSetPrototype.getLayoutSetPrototypeId() %>"><%= HtmlUtil.escape(layoutSetPrototype.getName(user.getLanguageId())) %></aui:option>
 
 						<%
 						}
@@ -131,7 +136,7 @@ long userGroupId = BeanParamUtil.getLong(userGroup, request, "userGroupId");
 					</aui:select>
 
 					<c:choose>
-						<c:when test="<%= PortalPermissionUtil.contains(permissionChecker, ActionKeys.UNLINK_LAYOUT_SET_PROTOTYPE) %>">
+						<c:when test="<%= hasUnlinkLayoutSetPrototypePermission %>">
 							<div class="aui-helper-hidden" id="<portlet:namespace />publicLayoutSetPrototypeIdOptions">
 								<aui:input helpMessage="enable-propagation-of-changes-from-the-site-template-help" label="enable-propagation-of-changes-from-the-site-template" name="publicLayoutSetPrototypeLinkEnabled" type="checkbox" value="<%= publicLayoutSetPrototypeLinkEnabled %>" />
 							</div>
@@ -146,7 +151,7 @@ long userGroupId = BeanParamUtil.getLong(userGroup, request, "userGroupId");
 						<c:choose>
 							<c:when test="<%= userGroupGroup != null %>">
 
-								<liferay-portlet:actionURL var="publicPagesURL" portletName="<%= PortletKeys.SITE_REDIRECTOR %>">
+								<liferay-portlet:actionURL portletName="<%= PortletKeys.SITE_REDIRECTOR %>" var="publicPagesURL">
 									<portlet:param name="struts_action" value="/MY_SITES/view" />
 									<portlet:param name="groupId" value="<%= String.valueOf(userGroupGroup.getGroupId()) %>" />
 									<portlet:param name="publicLayout" value="<%= Boolean.TRUE.toString() %>" />
@@ -169,11 +174,11 @@ long userGroupId = BeanParamUtil.getLong(userGroup, request, "userGroupId");
 								</c:choose>
 
 								<c:choose>
-									<c:when test="<%= (publicLayoutSetPrototype != null) && PortalPermissionUtil.contains(permissionChecker, ActionKeys.UNLINK_LAYOUT_SET_PROTOTYPE) %>">
-										<aui:input label='<%= LanguageUtil.format(pageContext, "enable-propagation-of-changes-from-the-site-template-x", publicLayoutSetPrototype.getName(user.getLanguageId())) %>' name="publicLayoutSetPrototypeLinkEnabled" type="checkbox" value="<%= publicLayoutSetPrototypeLinkEnabled %>" />
+									<c:when test="<%= (publicLayoutSetPrototype != null) && hasUnlinkLayoutSetPrototypePermission %>">
+										<aui:input label='<%= LanguageUtil.format(pageContext, "enable-propagation-of-changes-from-the-site-template-x", HtmlUtil.escape(publicLayoutSetPrototype.getName(user.getLanguageId()))) %>' name="publicLayoutSetPrototypeLinkEnabled" type="checkbox" value="<%= publicLayoutSetPrototypeLinkEnabled %>" />
 									</c:when>
 									<c:when test="<%= publicLayoutSetPrototype != null %>">
-										<liferay-ui:message arguments="<%= new Object[] {publicLayoutSetPrototype.getName(locale)} %>" key="these-pages-are-linked-to-site-template-x" />
+										<liferay-ui:message arguments="<%= new Object[] {HtmlUtil.escape(publicLayoutSetPrototype.getName(locale))} %>" key="these-pages-are-linked-to-site-template-x" />
 
 										<aui:input name="layoutSetPrototypeLinkEnabled" type="hidden" value="<%= true %>" />
 									</c:when>
@@ -193,7 +198,7 @@ long userGroupId = BeanParamUtil.getLong(userGroup, request, "userGroupId");
 						for (LayoutSetPrototype layoutSetPrototype : layoutSetPrototypes) {
 						%>
 
-							<aui:option value="<%= layoutSetPrototype.getLayoutSetPrototypeId() %>"><%= layoutSetPrototype.getName(user.getLanguageId()) %></aui:option>
+							<aui:option value="<%= layoutSetPrototype.getLayoutSetPrototypeId() %>"><%= HtmlUtil.escape(layoutSetPrototype.getName(user.getLanguageId())) %></aui:option>
 
 						<%
 						}
@@ -202,7 +207,7 @@ long userGroupId = BeanParamUtil.getLong(userGroup, request, "userGroupId");
 					</aui:select>
 
 					<c:choose>
-						<c:when test="<%= PortalPermissionUtil.contains(permissionChecker, ActionKeys.UNLINK_LAYOUT_SET_PROTOTYPE) %>">
+						<c:when test="<%= hasUnlinkLayoutSetPrototypePermission %>">
 							<div class="aui-helper-hidden" id="<portlet:namespace />privateLayoutSetPrototypeIdOptions">
 								<aui:input helpMessage="enable-propagation-of-changes-from-the-site-template-help" label="enable-propagation-of-changes-from-the-site-template" name="privateLayoutSetPrototypeLinkEnabled" type="checkbox" value="<%= privateLayoutSetPrototypeLinkEnabled %>" />
 							</div>
@@ -216,7 +221,7 @@ long userGroupId = BeanParamUtil.getLong(userGroup, request, "userGroupId");
 					<aui:field-wrapper label="private-pages">
 						<c:choose>
 							<c:when test="<%= userGroupGroup != null %>">
-								<liferay-portlet:actionURL var="privatePagesURL" portletName="<%= PortletKeys.SITE_REDIRECTOR %>">
+								<liferay-portlet:actionURL portletName="<%= PortletKeys.SITE_REDIRECTOR %>" var="privatePagesURL">
 									<portlet:param name="struts_action" value="/MY_SITES/view" />
 									<portlet:param name="groupId" value="<%= String.valueOf(userGroupGroup.getGroupId()) %>" />
 									<portlet:param name="privateLayout" value="<%= Boolean.TRUE.toString() %>" />
@@ -239,11 +244,11 @@ long userGroupId = BeanParamUtil.getLong(userGroup, request, "userGroupId");
 								</c:choose>
 
 								<c:choose>
-									<c:when test="<%= (privateLayoutSetPrototype != null) && PortalPermissionUtil.contains(permissionChecker, ActionKeys.UNLINK_LAYOUT_SET_PROTOTYPE) %>">
-										<aui:input label='<%= LanguageUtil.format(pageContext, "enable-propagation-of-changes-from-the-site-template-x", privateLayoutSetPrototype.getName(user.getLanguageId())) %>' name="privateLayoutSetPrototypeLinkEnabled" type="checkbox" value="<%= privateLayoutSetPrototypeLinkEnabled %>" />
+									<c:when test="<%= (privateLayoutSetPrototype != null) && hasUnlinkLayoutSetPrototypePermission %>">
+										<aui:input label='<%= LanguageUtil.format(pageContext, "enable-propagation-of-changes-from-the-site-template-x", HtmlUtil.escape(privateLayoutSetPrototype.getName(user.getLanguageId()))) %>' name="privateLayoutSetPrototypeLinkEnabled" type="checkbox" value="<%= privateLayoutSetPrototypeLinkEnabled %>" />
 									</c:when>
 									<c:when test="<%= privateLayoutSetPrototype != null %>">
-										<liferay-ui:message arguments="<%= new Object[] {privateLayoutSetPrototype.getName(locale)} %>" key="these-pages-are-linked-to-site-template-x" />
+										<liferay-ui:message arguments="<%= new Object[] {HtmlUtil.escape(privateLayoutSetPrototype.getName(locale))} %>" key="these-pages-are-linked-to-site-template-x" />
 
 										<aui:input name="layoutSetPrototypeLinkEnabled" type="hidden" value="<%= true %>" />
 									</c:when>

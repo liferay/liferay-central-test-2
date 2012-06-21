@@ -47,6 +47,7 @@ import com.liferay.portal.kernel.util.TimeZoneUtil;
 import com.liferay.portal.kernel.util.UnmodifiableList;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.ModelHintsUtil;
@@ -240,6 +241,14 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 			serviceContext.getAssetTagNames(),
 			serviceContext.getAssetLinkEntryIds());
 
+		// Message boards
+
+		if (PropsValues.CALENDAR_EVENT_COMMENTS_ENABLED) {
+			mbMessageLocalService.addDiscussionMessage(
+				userId, event.getUserName(), groupId, CalEvent.class.getName(),
+				event.getEventId(), WorkflowConstants.ACTION_PUBLISH);
+		}
+
 		// Social
 
 		socialActivityLocalService.addActivity(
@@ -248,7 +257,8 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 		// Indexer
 
-		Indexer indexer = IndexerRegistryUtil.getIndexer(CalEvent.class);
+		Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
+			CalEvent.class);
 
 		indexer.reindex(event);
 
@@ -399,7 +409,8 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 		// Indexer
 
-		Indexer indexer = IndexerRegistryUtil.getIndexer(CalEvent.class);
+		Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
+			CalEvent.class);
 
 		indexer.delete(event);
 
@@ -829,7 +840,8 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 		// Indexer
 
-		Indexer indexer = IndexerRegistryUtil.getIndexer(CalEvent.class);
+		Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
+			CalEvent.class);
 
 		indexer.reindex(event);
 
@@ -1197,6 +1209,10 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 				portletPreferencesLocalService.getPreferences(
 					event.getCompanyId(), ownerId, ownerType, plid, portletId);
 
+			if (!CalUtil.getEmailEventReminderEnabled(preferences)) {
+				return;
+			}
+
 			Company company = companyPersistence.findByPrimaryKey(
 				user.getCompanyId());
 
@@ -1269,22 +1285,22 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 				mailService.sendEmail(message);
 			}
 			else if ((remindBy == CalEventConstants.REMIND_BY_AIM) &&
-					 (Validator.isNotNull(contact.getAimSn()))) {
+					 Validator.isNotNull(contact.getAimSn())) {
 
 				AIMConnector.send(contact.getAimSn(), body);
 			}
 			else if ((remindBy == CalEventConstants.REMIND_BY_ICQ) &&
-					 (Validator.isNotNull(contact.getIcqSn()))) {
+					 Validator.isNotNull(contact.getIcqSn())) {
 
 				ICQConnector.send(contact.getIcqSn(), body);
 			}
 			else if ((remindBy == CalEventConstants.REMIND_BY_MSN) &&
-					 (Validator.isNotNull(contact.getMsnSn()))) {
+					 Validator.isNotNull(contact.getMsnSn())) {
 
 				MSNConnector.send(contact.getMsnSn(), body);
 			}
 			else if ((remindBy == CalEventConstants.REMIND_BY_YM) &&
-					 (Validator.isNotNull(contact.getYmSn()))) {
+					 Validator.isNotNull(contact.getYmSn())) {
 
 				YMConnector.send(contact.getYmSn(), body);
 			}
@@ -1295,18 +1311,29 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 	}
 
 	protected void remindUser(
-		CalEvent event, User user, Calendar startDate, Calendar now) {
+		CalEvent event, User user, Calendar startCalendar,
+		Calendar nowCalendar) {
 
-		long diff =
-			(startDate.getTime().getTime() - now.getTime().getTime()) /
-				_CALENDAR_EVENT_CHECK_INTERVAL;
+		Date startDate = startCalendar.getTime();
+
+		long startTime = startDate.getTime();
+
+		Date nowDate = nowCalendar.getTime();
+
+		long nowTime = nowDate.getTime();
+
+		if (startTime < nowTime) {
+			return;
+		}
+
+		long diff = (startTime - nowTime) / _CALENDAR_EVENT_CHECK_INTERVAL;
 
 		if ((diff ==
 				(event.getFirstReminder() / _CALENDAR_EVENT_CHECK_INTERVAL)) ||
 			(diff ==
 				(event.getSecondReminder() / _CALENDAR_EVENT_CHECK_INTERVAL))) {
 
-			remindUser(event, user, startDate);
+			remindUser(event, user, startCalendar);
 		}
 	}
 
@@ -1728,7 +1755,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 			throw new EventEndDateException();
 		}
 
-		if (!allDay && durationHour <= 0 && durationMinute <= 0) {
+		if (!allDay && (durationHour <= 0) && (durationMinute <= 0)) {
 			throw new EventDurationException();
 		}
 

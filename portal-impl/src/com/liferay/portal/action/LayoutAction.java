@@ -41,7 +41,6 @@ import com.liferay.portal.kernel.util.Base64;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
-import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.ServerDetector;
@@ -167,7 +166,7 @@ public class LayoutAction extends Action {
 		Boolean layoutDefault = (Boolean)request.getAttribute(
 			WebKeys.LAYOUT_DEFAULT);
 
-		if ((layoutDefault != null) && (layoutDefault.booleanValue())) {
+		if ((layoutDefault != null) && layoutDefault.booleanValue()) {
 			Layout requestedLayout = (Layout)request.getAttribute(
 				WebKeys.REQUESTED_LAYOUT);
 
@@ -415,7 +414,7 @@ public class LayoutAction extends Action {
 		requestDispatcher.include(request, pipingServletResponse);
 
 		if (contentType != null) {
-			pipingServletResponse.setContentType(contentType);
+			response.setContentType(contentType);
 		}
 
 		request.setAttribute(
@@ -525,9 +524,8 @@ public class LayoutAction extends Action {
 					Map<String, String[]> renderParameterMap =
 						new HashMap<String, String[]>();
 
-					MapUtil.copy(
-						eventResponseImpl.getRenderParameterMap(),
-						renderParameterMap);
+					renderParameterMap.putAll(
+						eventResponseImpl.getRenderParameterMap());
 
 					RenderParametersPool.put(
 						request, layout.getPlid(), portletId,
@@ -763,7 +761,7 @@ public class LayoutAction extends Action {
 
 		if (layout.isTypeControlPanel() &&
 			((windowState == null) || windowState.equals(WindowState.NORMAL) ||
-			 (Validator.isNull(windowState.toString())))) {
+			 Validator.isNull(windowState.toString()))) {
 
 			windowState = WindowState.MAXIMIZED;
 		}
@@ -807,15 +805,14 @@ public class LayoutAction extends Action {
 
 			try {
 				if ((contentType != null) &&
-					(contentType.startsWith(
-						ContentTypes.MULTIPART_FORM_DATA))) {
+					contentType.startsWith(ContentTypes.MULTIPART_FORM_DATA)) {
 
 					PortletConfigImpl invokerPortletConfigImpl =
 						(PortletConfigImpl)invokerPortlet.getPortletConfig();
 
 					if (invokerPortlet.isStrutsPortlet() ||
 						((invokerPortletConfigImpl != null) &&
-						 (!invokerPortletConfigImpl.isWARFile()))) {
+						 !invokerPortletConfigImpl.isWARFile())) {
 
 						uploadServletRequest = new UploadServletRequestImpl(
 							request);
@@ -961,6 +958,8 @@ public class LayoutAction extends Action {
 				if (access) {
 					invokerPortlet.serveResource(
 						resourceRequestImpl, resourceResponseImpl);
+
+					resourceResponseImpl.transferHeaders(response);
 				}
 			}
 			finally {

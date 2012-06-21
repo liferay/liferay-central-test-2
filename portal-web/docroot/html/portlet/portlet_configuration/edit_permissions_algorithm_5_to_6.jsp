@@ -288,7 +288,7 @@ definePermissionsURL.setParameter(Constants.CMD, Constants.VIEW);
 		}
 		%>
 
-		<liferay-ui:search-container id="rolesSearchContainer">
+		<liferay-ui:search-container>
 			<liferay-ui:search-container-results
 				results="<%= roles %>"
 				total="<%= roles.size() %>"
@@ -318,7 +318,7 @@ definePermissionsURL.setParameter(Constants.CMD, Constants.VIEW);
 				<liferay-ui:search-container-column-text
 					href="<%= definePermissionsHREF %>"
 					name="role"
-					value="<%= HtmlUtil.escape(role.getTitle(locale)) %>"
+					value="<%= role.getTitle(locale) %>"
 				/>
 
 				<%
@@ -453,6 +453,19 @@ definePermissionsURL.setParameter(Constants.CMD, Constants.VIEW);
 							buffer.append("disabled ");
 						}
 
+						buffer.append("id=\"");
+						buffer.append(FriendlyURLNormalizerUtil.normalize(role.getName()));
+
+						if (Validator.isNotNull(preselectedMsg)) {
+							buffer.append("_PRESELECTED_");
+						}
+						else {
+							buffer.append("_ACTION_");
+						}
+
+						buffer.append(action);
+						buffer.append("\" ");
+
 						buffer.append("name=\"");
 						buffer.append(role.getRoleId());
 
@@ -468,7 +481,7 @@ definePermissionsURL.setParameter(Constants.CMD, Constants.VIEW);
 
 						if (Validator.isNotNull(preselectedMsg)) {
 							buffer.append("onclick=\"return false;\" onmouseover=\"Liferay.Portal.ToolTip.show(this, '");
-							buffer.append(UnicodeLanguageUtil.format(pageContext, preselectedMsg, new Object[] {HtmlUtil.escape(role.getTitle(locale)), ResourceActionsUtil.getAction(pageContext, action), Validator.isNull(modelResource) ? selResourceDescription : ResourceActionsUtil.getModelResource(locale, resource.getName()), HtmlUtil.escape(group.getDescriptiveName(locale))}));
+							buffer.append(UnicodeLanguageUtil.format(pageContext, preselectedMsg, new Object[] {role.getTitle(locale), ResourceActionsUtil.getAction(pageContext, action), Validator.isNull(modelResource) ? selResourceDescription : ResourceActionsUtil.getModelResource(locale, resource.getName()), HtmlUtil.escape(group.getDescriptiveName(locale))}));
 							buffer.append("'); return false;\" ");
 						}
 
@@ -482,7 +495,7 @@ definePermissionsURL.setParameter(Constants.CMD, Constants.VIEW);
 
 			</liferay-ui:search-container-row>
 
-			<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" paginate="<%= false %>" />
+			<liferay-ui:search-iterator paginate="<%= false %>" searchContainer="<%= searchContainer %>" />
 		</liferay-ui:search-container>
 
 		<br />

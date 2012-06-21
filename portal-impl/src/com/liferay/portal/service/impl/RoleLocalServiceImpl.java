@@ -39,6 +39,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.ResourceAction;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.ResourcePermission;
 import com.liferay.portal.model.Role;
@@ -160,7 +161,8 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 				false, false, false);
 
 			if (!ImportExportThreadLocal.isImportInProcess()) {
-				Indexer indexer = IndexerRegistryUtil.getIndexer(User.class);
+				Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
+					User.class);
 
 				indexer.reindex(userId);
 			}
@@ -185,7 +187,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 
 		userPersistence.addRoles(userId, roleIds);
 
-		Indexer indexer = IndexerRegistryUtil.getIndexer(User.class);
+		Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(User.class);
 
 		indexer.reindex(userId);
 
@@ -1115,7 +1117,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 
 		userPersistence.setRoles(userId, roleIds);
 
-		Indexer indexer = IndexerRegistryUtil.getIndexer(User.class);
+		Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(User.class);
 
 		indexer.reindex(userId);
 
@@ -1139,7 +1141,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 
 		userPersistence.removeRoles(userId, roleIds);
 
-		Indexer indexer = IndexerRegistryUtil.getIndexer(User.class);
+		Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(User.class);
 
 		indexer.reindex(userId);
 
@@ -1210,10 +1212,10 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		catch (NoSuchRoleException nsre) {
 			role = roleLocalService.addRole(
 				0, companyId, name, null, descriptionMap, type);
+		}
 
-			if (name.equals(RoleConstants.USER)) {
-				initPersonalControlPanelPortletsPermissions(role);
-			}
+		if (name.equals(RoleConstants.USER)) {
+			initPersonalControlPanelPortletsPermissions(role);
 		}
 
 		_systemRolesMap.put(key, role);
@@ -1221,7 +1223,8 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 
 	protected String[] getDefaultControlPanelPortlets() {
 		return new String[] {
-			PortletKeys.MY_WORKFLOW_TASKS, PortletKeys.MY_WORKFLOW_INSTANCES
+			PortletKeys.MY_ACCOUNT, PortletKeys.MY_PAGES,
+			PortletKeys.MY_WORKFLOW_INSTANCES, PortletKeys.MY_WORKFLOW_TASKS
 		};
 	}
 
@@ -1229,6 +1232,14 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		for (String portletId : getDefaultControlPanelPortlets()) {
+			ResourceAction resourceAction =
+				resourceActionLocalService.fetchResourceAction(
+					portletId, ActionKeys.ACCESS_IN_CONTROL_PANEL);
+
+			if (resourceAction == null) {
+				continue;
+			}
+
 			setRolePermissions(
 				role, portletId,
 				new String[] {
@@ -1288,7 +1299,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 				throw new DuplicateRoleException();
 			}
 		}
-		catch (NoSuchRoleException nsge) {
+		catch (NoSuchRoleException nsre) {
 		}
 	}
 

@@ -18,9 +18,11 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.lar.PortletDataContext;
 import com.liferay.portal.kernel.security.pacl.permission.PortalRuntimePermission;
+import com.liferay.portal.kernel.workflow.WorkflowTask;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.LayoutRevision;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
@@ -215,6 +217,20 @@ public class StagingUtil {
 		PortletRequest PortletRequest) {
 
 		return getStaging().getStagingParameters(PortletRequest);
+	}
+
+	public static WorkflowTask getWorkflowTask(
+			long userId, LayoutRevision layoutRevision)
+		throws PortalException, SystemException {
+
+		return getStaging().getWorkflowTask(userId, layoutRevision);
+	}
+
+	public static boolean hasWorkflowTask(
+			long userId, LayoutRevision layoutRevision)
+		throws PortalException, SystemException {
+
+		return getStaging().hasWorkflowTask(userId, layoutRevision);
 	}
 
 	public static boolean isIncomplete(Layout layout, long layoutSetBranchId) {

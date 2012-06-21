@@ -571,6 +571,16 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 		return filterLayouts(layouts);
 	}
 
+	public List<Layout> getLayouts(
+			long groupId, boolean privateLayout, long parentLayoutId)
+		throws PortalException, SystemException {
+
+		List<Layout> layouts = layoutLocalService.getLayouts(
+			groupId, privateLayout, parentLayoutId);
+
+		return filterLayouts(layouts);
+	}
+
 	/**
 	 * Imports the layouts from the byte array.
 	 *
@@ -808,12 +818,11 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 	 */
 	public void schedulePublishToRemote(
 			long sourceGroupId, boolean privateLayout,
-			Map<Long, Boolean> layoutIdMap,
-			Map<String, String[]> parameterMap, String remoteAddress,
-			int remotePort, boolean secureConnection, long remoteGroupId,
-			boolean remotePrivateLayout, Date startDate, Date endDate,
-			String groupName, String cronText, Date schedulerStartDate,
-			Date schedulerEndDate, String description)
+			Map<Long, Boolean> layoutIdMap, Map<String, String[]> parameterMap,
+			String remoteAddress, int remotePort, boolean secureConnection,
+			long remoteGroupId, boolean remotePrivateLayout, Date startDate,
+			Date endDate, String groupName, String cronText,
+			Date schedulerStartDate, Date schedulerEndDate, String description)
 		throws PortalException, SystemException {
 
 		GroupPermissionUtil.check(

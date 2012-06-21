@@ -112,10 +112,11 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 	public static long FILEENTRYTYPEID_COLUMN_BITMASK = 2L;
 	public static long FOLDERID_COLUMN_BITMASK = 4L;
 	public static long GROUPID_COLUMN_BITMASK = 8L;
-	public static long NAME_COLUMN_BITMASK = 16L;
-	public static long TITLE_COLUMN_BITMASK = 32L;
-	public static long USERID_COLUMN_BITMASK = 64L;
-	public static long UUID_COLUMN_BITMASK = 128L;
+	public static long MIMETYPE_COLUMN_BITMASK = 16L;
+	public static long NAME_COLUMN_BITMASK = 32L;
+	public static long TITLE_COLUMN_BITMASK = 64L;
+	public static long USERID_COLUMN_BITMASK = 128L;
+	public static long UUID_COLUMN_BITMASK = 256L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -640,7 +641,17 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 	}
 
 	public void setMimeType(String mimeType) {
+		_columnBitmask |= MIMETYPE_COLUMN_BITMASK;
+
+		if (_originalMimeType == null) {
+			_originalMimeType = _mimeType;
+		}
+
 		_mimeType = mimeType;
+	}
+
+	public String getOriginalMimeType() {
+		return GetterUtil.getString(_originalMimeType);
 	}
 
 	@JSON
@@ -927,6 +938,8 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 		dlFileEntryModelImpl._setOriginalFolderId = false;
 
 		dlFileEntryModelImpl._originalName = dlFileEntryModelImpl._name;
+
+		dlFileEntryModelImpl._originalMimeType = dlFileEntryModelImpl._mimeType;
 
 		dlFileEntryModelImpl._originalTitle = dlFileEntryModelImpl._title;
 
@@ -1279,6 +1292,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 	private String _originalName;
 	private String _extension;
 	private String _mimeType;
+	private String _originalMimeType;
 	private String _title;
 	private String _originalTitle;
 	private String _description;

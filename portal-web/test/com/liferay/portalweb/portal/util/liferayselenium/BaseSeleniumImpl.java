@@ -133,7 +133,7 @@ public abstract class BaseSeleniumImpl
 				 className.startsWith("com.liferay.portalweb.properties")) &&
 				className.endsWith("Test")) {
 
-				String dirName = className.substring(22, className.length());
+				String dirName = className.substring(22);
 
 				dirName = StringUtil.replace(dirName, ".", "/") + "/";
 

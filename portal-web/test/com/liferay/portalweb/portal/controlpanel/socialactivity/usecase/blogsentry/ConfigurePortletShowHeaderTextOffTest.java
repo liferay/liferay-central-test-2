@@ -108,7 +108,7 @@ public class ConfigurePortletShowHeaderTextOffTest extends BaseTestCase {
 
 					try {
 						if (selenium.isVisible(
-									"//div[contains(@class,'aui-dialog-iframe-bd')]/iframe")) {
+									"//iframe[@id='_180_configurationIframeDialog']")) {
 							break;
 						}
 					}
@@ -119,7 +119,7 @@ public class ConfigurePortletShowHeaderTextOffTest extends BaseTestCase {
 				}
 
 				selenium.selectFrame(
-					"//div[contains(@class,'aui-dialog-iframe-bd')]/iframe");
+					"//iframe[@id='_180_configurationIframeDialog']");
 
 				for (int second = 0;; second++) {
 					if (second >= 90) {
@@ -157,26 +157,6 @@ public class ConfigurePortletShowHeaderTextOffTest extends BaseTestCase {
 					RuntimeVariables.replace("Save"));
 				selenium.waitForPageToLoad("30000");
 				loadRequiredJavaScriptModules();
-
-				for (int second = 0;; second++) {
-					if (second >= 90) {
-						fail("timeout");
-					}
-
-					try {
-						if (RuntimeVariables.replace(
-									"You have successfully updated the setup.")
-												.equals(selenium.getText(
-										"//div[@class='portlet-msg-success']"))) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
 				assertEquals(RuntimeVariables.replace(
 						"You have successfully updated the setup."),
 					selenium.getText("//div[@class='portlet-msg-success']"));

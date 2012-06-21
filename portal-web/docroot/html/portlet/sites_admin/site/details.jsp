@@ -107,11 +107,15 @@ if (showPrototypes && (group != null)) {
 	</c:if>
 </aui:fieldset>
 
+<%
+boolean hasUnlinkLayoutSetPrototypePermission = PortalPermissionUtil.contains(permissionChecker, ActionKeys.UNLINK_LAYOUT_SET_PROTOTYPE);
+%>
+
 <aui:fieldset>
 	<c:choose>
 		<c:when test="<%= showPrototypes && ((group != null) || (!layoutSetPrototypes.isEmpty() && (layoutSetPrototype == null))) %>">
 			<liferay-ui:panel-container extended="<%= false %>">
-				<liferay-ui:panel defaultState='<%= ((group != null) && (group.getPublicLayoutsPageCount() > 0)) ? "open" : "closed" %>' collapsible="<%= true %>" title="public-pages">
+				<liferay-ui:panel collapsible="<%= true %>" defaultState='<%= ((group != null) && (group.getPublicLayoutsPageCount() > 0)) ? "open" : "closed" %>' title="public-pages">
 					<c:choose>
 						<c:when test="<%= ((group == null) || (publicLayoutSetPrototype == null)) && !layoutSetPrototypes.isEmpty() %>">
 							<aui:select helpMessage="site-templates-with-an-incompatible-application-adapter-are-disabled" label="site-template" name="publicLayoutSetPrototypeId">
@@ -133,7 +137,7 @@ if (showPrototypes && (group != null)) {
 							</aui:select>
 
 							<c:choose>
-								<c:when test="<%= PortalPermissionUtil.contains(permissionChecker, ActionKeys.UNLINK_LAYOUT_SET_PROTOTYPE) %>">
+								<c:when test="<%= hasUnlinkLayoutSetPrototypePermission %>">
 									<div class="aui-helper-hidden" id="<portlet:namespace />publicLayoutSetPrototypeIdOptions">
 										<aui:input helpMessage="enable-propagation-of-changes-from-the-site-template-help" label="enable-propagation-of-changes-from-the-site-template" name="publicLayoutSetPrototypeLinkEnabled" type="checkbox" value="<%= publicLayoutSetPrototypeLinkEnabled %>" />
 									</div>
@@ -146,7 +150,7 @@ if (showPrototypes && (group != null)) {
 						<c:otherwise>
 							<c:choose>
 								<c:when test="<%= group != null %>">
-									<liferay-portlet:actionURL var="publicPagesURL" portletName="<%= PortletKeys.SITE_REDIRECTOR %>">
+									<liferay-portlet:actionURL portletName="<%= PortletKeys.SITE_REDIRECTOR %>" var="publicPagesURL">
 										<portlet:param name="struts_action" value="/my_sites/view" />
 										<portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
 										<portlet:param name="privateLayout" value="<%= Boolean.FALSE.toString() %>" />
@@ -169,11 +173,11 @@ if (showPrototypes && (group != null)) {
 									</c:choose>
 
 									<c:choose>
-										<c:when test="<%= (publicLayoutSetPrototype != null) && !liveGroup.isStaged() && PortalPermissionUtil.contains(permissionChecker, ActionKeys.UNLINK_LAYOUT_SET_PROTOTYPE) %>">
-											<aui:input label='<%= LanguageUtil.format(pageContext, "enable-propagation-of-changes-from-the-site-template-x", publicLayoutSetPrototype.getName(user.getLanguageId())) %>' name="publicLayoutSetPrototypeLinkEnabled" type="checkbox" value="<%= publicLayoutSetPrototypeLinkEnabled %>" />
+										<c:when test="<%= (publicLayoutSetPrototype != null) && !liveGroup.isStaged() && hasUnlinkLayoutSetPrototypePermission %>">
+											<aui:input label='<%= LanguageUtil.format(pageContext, "enable-propagation-of-changes-from-the-site-template-x", HtmlUtil.escape(publicLayoutSetPrototype.getName(user.getLanguageId()))) %>' name="publicLayoutSetPrototypeLinkEnabled" type="checkbox" value="<%= publicLayoutSetPrototypeLinkEnabled %>" />
 										</c:when>
 										<c:when test="<%= publicLayoutSetPrototype != null %>">
-											<liferay-ui:message arguments="<%= new Object[] {publicLayoutSetPrototype.getName(locale)} %>" key="these-pages-are-linked-to-site-template-x" />
+											<liferay-ui:message arguments="<%= new Object[] {HtmlUtil.escape(publicLayoutSetPrototype.getName(locale))} %>" key="these-pages-are-linked-to-site-template-x" />
 
 											<aui:input name="publicLayoutSetPrototypeLinkEnabled" type="hidden" value="<%= publicLayoutSetPrototypeLinkEnabled %>" />
 										</c:when>
@@ -183,7 +187,7 @@ if (showPrototypes && (group != null)) {
 						</c:otherwise>
 					</c:choose>
 				</liferay-ui:panel>
-				<liferay-ui:panel defaultState='<%= ((group != null) && (group.getPrivateLayoutsPageCount() > 0)) ? "open" : "closed" %>' collapsible="<%= true %>" title="private-pages">
+				<liferay-ui:panel collapsible="<%= true %>" defaultState='<%= ((group != null) && (group.getPrivateLayoutsPageCount() > 0)) ? "open" : "closed" %>' title="private-pages">
 					<c:choose>
 						<c:when test="<%= ((group == null) || (privateLayoutSetPrototype == null)) && !layoutSetPrototypes.isEmpty() %>">
 							<aui:select helpMessage="site-templates-with-an-incompatible-application-adapter-are-disabled" label="site-template" name="privateLayoutSetPrototypeId">
@@ -205,7 +209,7 @@ if (showPrototypes && (group != null)) {
 							</aui:select>
 
 							<c:choose>
-								<c:when test="<%= PortalPermissionUtil.contains(permissionChecker, ActionKeys.UNLINK_LAYOUT_SET_PROTOTYPE) %>">
+								<c:when test="<%= hasUnlinkLayoutSetPrototypePermission %>">
 									<div class="aui-helper-hidden" id="<portlet:namespace />privateLayoutSetPrototypeIdOptions">
 										<aui:input helpMessage="enable-propagation-of-changes-from-the-site-template-help"  label="enable-propagation-of-changes-from-the-site-template" name="privateLayoutSetPrototypeLinkEnabled" type="checkbox" value="<%= privateLayoutSetPrototypeLinkEnabled %>" />
 									</div>
@@ -218,7 +222,7 @@ if (showPrototypes && (group != null)) {
 						<c:otherwise>
 							<c:choose>
 								<c:when test="<%= group != null %>">
-									<liferay-portlet:actionURL var="privatePagesURL" portletName="<%= PortletKeys.SITE_REDIRECTOR %>">
+									<liferay-portlet:actionURL portletName="<%= PortletKeys.SITE_REDIRECTOR %>" var="privatePagesURL">
 										<portlet:param name="struts_action" value="/my_sites/view" />
 										<portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
 										<portlet:param name="privateLayout" value="<%= Boolean.TRUE.toString() %>" />
@@ -241,11 +245,11 @@ if (showPrototypes && (group != null)) {
 									</c:choose>
 
 									<c:choose>
-										<c:when test="<%= (privateLayoutSetPrototype != null) && !liveGroup.isStaged() && PortalPermissionUtil.contains(permissionChecker, ActionKeys.UNLINK_LAYOUT_SET_PROTOTYPE) %>">
-											<aui:input label='<%= LanguageUtil.format(pageContext, "enable-propagation-of-changes-from-the-site-template-x", privateLayoutSetPrototype.getName(user.getLanguageId())) %>' name="privateLayoutSetPrototypeLinkEnabled" type="checkbox" value="<%= privateLayoutSetPrototypeLinkEnabled %>" />
+										<c:when test="<%= (privateLayoutSetPrototype != null) && !liveGroup.isStaged() && hasUnlinkLayoutSetPrototypePermission %>">
+											<aui:input label='<%= LanguageUtil.format(pageContext, "enable-propagation-of-changes-from-the-site-template-x", HtmlUtil.escape(privateLayoutSetPrototype.getName(user.getLanguageId()))) %>' name="privateLayoutSetPrototypeLinkEnabled" type="checkbox" value="<%= privateLayoutSetPrototypeLinkEnabled %>" />
 										</c:when>
 										<c:when test="<%= privateLayoutSetPrototype != null %>">
-											<liferay-ui:message arguments="<%= new Object[] {privateLayoutSetPrototype.getName(locale)} %>" key="these-pages-are-linked-to-site-template-x" />
+											<liferay-ui:message arguments="<%= new Object[] {HtmlUtil.escape(privateLayoutSetPrototype.getName(locale))} %>" key="these-pages-are-linked-to-site-template-x" />
 
 											<aui:input name="privateLayoutSetPrototypeLinkEnabled" type="hidden" value="<%= privateLayoutSetPrototypeLinkEnabled %>" />
 										</c:when>
@@ -296,12 +300,12 @@ if (showPrototypes && (group != null)) {
 				<aui:input name="layoutSetPrototypeId" type="hidden" value="<%= layoutSetPrototype.getLayoutSetPrototypeId() %>" />
 
 				<aui:field-wrapper label="copy-as">
-					<aui:input checked="<%= true %>" helpMessage='<%= LanguageUtil.format(pageContext, "select-this-to-copy-the-pages-of-the-site-template-x-as-public-pages-for-this-site", layoutSetPrototype.getName(user.getLanguageId())) %>' label="public-pages" name="layoutSetVisibility" type="radio" value="0" />
-					<aui:input helpMessage='<%= LanguageUtil.format(pageContext, "select-this-to-copy-the-pages-of-the-site-template-x-as-private-pages-for-this-site", layoutSetPrototype.getName(user.getLanguageId())) %>' label="private-pages" name="layoutSetVisibility" type="radio" value="1" />
+					<aui:input checked="<%= true %>" helpMessage='<%= LanguageUtil.format(pageContext, "select-this-to-copy-the-pages-of-the-site-template-x-as-public-pages-for-this-site", HtmlUtil.escape(layoutSetPrototype.getName(user.getLanguageId()))) %>' label="public-pages" name="layoutSetVisibility" type="radio" value="0" />
+					<aui:input helpMessage='<%= LanguageUtil.format(pageContext, "select-this-to-copy-the-pages-of-the-site-template-x-as-private-pages-for-this-site", HtmlUtil.escape(layoutSetPrototype.getName(user.getLanguageId()))) %>' label="private-pages" name="layoutSetVisibility" type="radio" value="1" />
 				</aui:field-wrapper>
 
 				<c:choose>
-					<c:when test="<%= PortalPermissionUtil.contains(permissionChecker, ActionKeys.UNLINK_LAYOUT_SET_PROTOTYPE) %>">
+					<c:when test="<%= hasUnlinkLayoutSetPrototypePermission %>">
 						<aui:input helpMessage="enable-propagation-of-changes-from-the-site-template-help" label="enable-propagation-of-changes-from-the-site-template" name="layoutSetPrototypeLinkEnabled" type="checkbox" value="<%= true %>" />
 					</c:when>
 					<c:otherwise>

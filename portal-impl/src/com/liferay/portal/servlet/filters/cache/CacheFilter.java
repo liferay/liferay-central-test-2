@@ -105,7 +105,27 @@ public class CacheFilter extends BasePortalFilter {
 		sb.append(request.getServletPath());
 		sb.append(request.getPathInfo());
 		sb.append(StringPool.QUESTION);
-		sb.append(request.getQueryString());
+
+		String queryString = request.getQueryString();
+
+		if (queryString == null) {
+			queryString = (String)request.getAttribute(
+				JavaConstants.JAVAX_SERVLET_FORWARD_QUERY_STRING);
+
+			if (queryString == null) {
+				String url = PortalUtil.getCurrentCompleteURL(request);
+
+				int pos = url.indexOf(StringPool.QUESTION);
+
+				if (pos > -1) {
+					queryString = url.substring(pos + 1);
+				}
+			}
+		}
+
+		if (queryString != null) {
+			sb.append(queryString);
+		}
 
 		// Language
 
@@ -158,10 +178,8 @@ public class CacheFilter extends BasePortalFilter {
 		if (pos != -1) {
 			friendlyURL = pathInfo.substring(0, pos);
 		}
-		else {
-			if (pathInfo.length() > 1) {
-				friendlyURL = pathInfo.substring(0, pathInfo.length());
-			}
+		else if (pathInfo.length() > 1) {
+			friendlyURL = pathInfo;
 		}
 
 		if (Validator.isNull(friendlyURL)) {
@@ -211,7 +229,7 @@ public class CacheFilter extends BasePortalFilter {
 		friendlyURL = null;
 
 		if ((pos != -1) && ((pos + 1) != pathInfo.length())) {
-			friendlyURL = pathInfo.substring(pos, pathInfo.length());
+			friendlyURL = pathInfo.substring(pos);
 		}
 
 		if (Validator.isNull(friendlyURL)) {
@@ -226,6 +244,9 @@ public class CacheFilter extends BasePortalFilter {
 
 				return 0;
 			}
+		}
+		else if (friendlyURL.endsWith(StringPool.FORWARD_SLASH)) {
+			friendlyURL = friendlyURL.substring(0, friendlyURL.length() - 1);
 		}
 
 		// If there is no layout path take the first from the group or user

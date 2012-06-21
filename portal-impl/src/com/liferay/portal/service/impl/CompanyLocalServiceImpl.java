@@ -51,12 +51,10 @@ import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.ContactConstants;
 import com.liferay.portal.model.Group;
-import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.VirtualHost;
-import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.base.CompanyLocalServiceBaseImpl;
 import com.liferay.portal.util.Portal;
 import com.liferay.portal.util.PortalInstances;
@@ -71,7 +69,6 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -116,8 +113,8 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 		virtualHostname = virtualHostname.trim().toLowerCase();
 
-		if ((Validator.isNull(webId)) ||
-			(webId.equals(PropsValues.COMPANY_DEFAULT_WEB_ID)) ||
+		if (Validator.isNull(webId) ||
+			webId.equals(PropsValues.COMPANY_DEFAULT_WEB_ID) ||
 			(companyPersistence.fetchByWebId(webId) != null)) {
 
 			throw new CompanyWebIdException();
@@ -185,13 +182,6 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 		Company company = companyPersistence.fetchByWebId(webId);
 
 		if (company == null) {
-			String virtualHostname = webId;
-
-			if (webId.equals(PropsValues.COMPANY_DEFAULT_WEB_ID)) {
-				virtualHostname = _DEFAULT_VIRTUAL_HOST;
-			}
-
-			String homeURL = null;
 			String name = webId;
 			String legalName = null;
 			String legalId = null;
@@ -224,16 +214,17 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			shardLocalService.addShard(
 				Company.class.getName(), companyId, shardName);
 
-			// Company
+			// Account
 
-			updateCompany(
-				companyId, virtualHostname, mx, homeURL, name, legalName,
-				legalId, legalType, sicCode, tickerSymbol, industry, type,
-				size);
+			updateAccount(
+				company, name, legalName, legalId, legalType, sicCode,
+				tickerSymbol, industry, type, size);
 
 			// Virtual host
 
-			updateVirtualHost(companyId, virtualHostname);
+			if (webId.equals(PropsValues.COMPANY_DEFAULT_WEB_ID)) {
+				updateVirtualHost(companyId, _DEFAULT_VIRTUAL_HOST);
+			}
 
 			// Demo settings
 
@@ -388,75 +379,14 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 		// Default admin
 
 		if (userPersistence.countByCompanyId(companyId) == 1) {
-			long creatorUserId = 0;
-			boolean autoPassword = false;
-			String password1 = PropsValues.DEFAULT_ADMIN_PASSWORD;
-			String password2 = password1;
-			boolean autoScreenName = false;
-			String screenName = PropsValues.DEFAULT_ADMIN_SCREEN_NAME;
+			String emailAddress =
+				PropsValues.DEFAULT_ADMIN_EMAIL_ADDRESS_PREFIX + "@" + mx;
 
-			String emailAddress = null;
-
-			if (companyPersistence.countAll() == 1) {
-				emailAddress = PropsValues.DEFAULT_ADMIN_EMAIL_ADDRESS;
-			}
-
-			if (Validator.isNull(emailAddress)) {
-				emailAddress =
-					PropsValues.DEFAULT_ADMIN_EMAIL_ADDRESS_PREFIX + "@" + mx;
-			}
-
-			long facebookId = 0;
-			String openId = StringPool.BLANK;
-			Locale locale = defaultUser.getLocale();
-			String firstName = PropsValues.DEFAULT_ADMIN_FIRST_NAME;
-			String middleName = PropsValues.DEFAULT_ADMIN_MIDDLE_NAME;
-			String lastName = PropsValues.DEFAULT_ADMIN_LAST_NAME;
-			int prefixId = 0;
-			int suffixId = 0;
-			boolean male = true;
-			int birthdayMonth = Calendar.JANUARY;
-			int birthdayDay = 1;
-			int birthdayYear = 1970;
-			String jobTitle = StringPool.BLANK;
-
-			Group guestGroup = groupLocalService.getGroup(
-				companyId, GroupConstants.GUEST);
-
-			long[] groupIds = new long[] {guestGroup.getGroupId()};
-
-			long[] organizationIds = null;
-
-			Role adminRole = roleLocalService.getRole(
-				companyId, RoleConstants.ADMINISTRATOR);
-
-			Role powerUserRole = roleLocalService.getRole(
-				companyId, RoleConstants.POWER_USER);
-
-			long[] roleIds = new long[] {
-				adminRole.getRoleId(), powerUserRole.getRoleId()
-			};
-
-			long[] userGroupIds = null;
-			boolean sendEmail = false;
-			ServiceContext serviceContext = new ServiceContext();
-
-			User defaultAdminUser = userLocalService.addUser(
-				creatorUserId, companyId, autoPassword, password1, password2,
-				autoScreenName, screenName, emailAddress, facebookId, openId,
-				locale, firstName, middleName, lastName, prefixId, suffixId,
-				male, birthdayMonth, birthdayDay, birthdayYear, jobTitle,
-				groupIds, organizationIds, roleIds, userGroupIds, sendEmail,
-				serviceContext);
-
-			userLocalService.updateEmailAddressVerified(
-				defaultAdminUser.getUserId(), true);
-
-			userLocalService.updateLastLogin(
-				defaultAdminUser.getUserId(), defaultAdminUser.getLoginIP());
-
-			userLocalService.updatePasswordReset(
-				defaultAdminUser.getUserId(), false);
+			userLocalService.addDefaultAdminUser(
+				companyId, PropsValues.DEFAULT_ADMIN_SCREEN_NAME, emailAddress,
+				defaultUser.getLocale(), PropsValues.DEFAULT_ADMIN_FIRST_NAME,
+				PropsValues.DEFAULT_ADMIN_MIDDLE_NAME,
+				PropsValues.DEFAULT_ADMIN_LAST_NAME);
 		}
 
 		// Portlets
@@ -480,7 +410,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 		Company company = companyPersistence.findByPrimaryKey(companyId);
 
-		if ((Validator.isNull(company.getKey())) &&
+		if (Validator.isNull(company.getKey()) &&
 			(company.getKeyObj() == null)) {
 
 			try {
@@ -927,12 +857,11 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 		// Company
 
 		virtualHostname = virtualHostname.trim().toLowerCase();
-		Date now = new Date();
 
 		Company company = companyPersistence.findByPrimaryKey(companyId);
 
 		validate(company.getWebId(), virtualHostname, mx);
-		validate(name);
+		validate(companyId, name);
 
 		if (PropsValues.MAIL_MX_UPDATE) {
 			company.setMx(mx);
@@ -944,36 +873,9 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 		// Account
 
-		Account account = accountPersistence.fetchByPrimaryKey(
-			company.getAccountId());
-
-		if (account == null) {
-			long accountId = counterLocalService.increment();
-
-			account = accountPersistence.create(accountId);
-
-			account.setCreateDate(now);
-			account.setCompanyId(companyId);
-			account.setUserId(0);
-			account.setUserName(StringPool.BLANK);
-
-			company.setAccountId(accountId);
-
-			companyPersistence.update(company, false);
-		}
-
-		account.setModifiedDate(now);
-		account.setName(name);
-		account.setLegalName(legalName);
-		account.setLegalId(legalId);
-		account.setLegalType(legalType);
-		account.setSicCode(sicCode);
-		account.setTickerSymbol(tickerSymbol);
-		account.setIndustry(industry);
-		account.setType(type);
-		account.setSize(size);
-
-		accountPersistence.update(account, false);
+		updateAccount(
+			company, name, legalName, legalId, legalType, sicCode, tickerSymbol,
+			industry, type, size);
 
 		// Virtual host
 
@@ -1209,6 +1111,46 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 		return company;
 	}
 
+	protected void updateAccount(
+			Company company, String name, String legalName, String legalId,
+			String legalType, String sicCode, String tickerSymbol,
+			String industry, String type, String size)
+		throws SystemException {
+
+		Date now = new Date();
+
+		Account account = accountPersistence.fetchByPrimaryKey(
+			company.getAccountId());
+
+		if (account == null) {
+			long accountId = counterLocalService.increment();
+
+			account = accountPersistence.create(accountId);
+
+			account.setCompanyId(company.getCompanyId());
+			account.setCreateDate(now);
+			account.setUserId(0);
+			account.setUserName(StringPool.BLANK);
+
+			company.setAccountId(accountId);
+
+			companyPersistence.update(company, false);
+		}
+
+		account.setModifiedDate(now);
+		account.setName(name);
+		account.setLegalName(legalName);
+		account.setLegalId(legalId);
+		account.setLegalType(legalType);
+		account.setSicCode(sicCode);
+		account.setTickerSymbol(tickerSymbol);
+		account.setIndustry(industry);
+		account.setType(type);
+		account.setSize(size);
+
+		accountPersistence.update(account, false);
+	}
+
 	protected void updateVirtualHost(long companyId, String virtualHostname)
 		throws CompanyVirtualHostException, SystemException {
 
@@ -1237,8 +1179,12 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 		}
 	}
 
-	protected void validate(String name) throws PortalException {
-		if (Validator.isNull(name)) {
+	protected void validate(long companyId, String name)
+		throws PortalException, SystemException {
+
+		Group group = groupLocalService.fetchGroup(companyId, name);
+
+		if ((group != null) || Validator.isNull(name)) {
 			throw new AccountNameException();
 		}
 	}

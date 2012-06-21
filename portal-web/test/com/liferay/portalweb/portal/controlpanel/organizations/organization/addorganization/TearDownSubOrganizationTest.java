@@ -65,7 +65,7 @@ public class TearDownSubOrganizationTest extends BaseTestCase {
 				loadRequiredJavaScriptModules();
 
 				boolean subOrganization1Present = selenium.isElementPresent(
-						"//input[@name='_125_rowIds']");
+						"//td[@id='_125_organizationsSearchContainer_col-name_row-1']/a/strong");
 
 				if (!subOrganization1Present) {
 					label = 11;
@@ -73,7 +73,7 @@ public class TearDownSubOrganizationTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//td[2]/a/strong",
+				selenium.clickAt("//td[@id='_125_organizationsSearchContainer_col-name_row-1']/a/strong",
 					RuntimeVariables.replace("Suborganization"));
 				selenium.waitForPageToLoad("30000");
 				loadRequiredJavaScriptModules();
@@ -175,7 +175,7 @@ public class TearDownSubOrganizationTest extends BaseTestCase {
 				loadRequiredJavaScriptModules();
 
 				boolean subOrganization2Present = selenium.isElementPresent(
-						"//input[@name='_125_rowIds']");
+						"//td[@id='_125_organizationsSearchContainer_col-name_row-1']/a/strong");
 
 				if (!subOrganization2Present) {
 					label = 10;
@@ -183,7 +183,7 @@ public class TearDownSubOrganizationTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//td[2]/a/strong",
+				selenium.clickAt("//td[@id='_125_organizationsSearchContainer_col-name_row-1']/a/strong",
 					RuntimeVariables.replace("Suborganization"));
 				selenium.waitForPageToLoad("30000");
 				loadRequiredJavaScriptModules();
@@ -285,7 +285,7 @@ public class TearDownSubOrganizationTest extends BaseTestCase {
 				loadRequiredJavaScriptModules();
 
 				boolean subOrganization3Present = selenium.isElementPresent(
-						"//input[@name='_125_rowIds']");
+						"//td[@id='_125_organizationsSearchContainer_col-name_row-1']/a/strong");
 
 				if (!subOrganization3Present) {
 					label = 9;
@@ -293,7 +293,7 @@ public class TearDownSubOrganizationTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//td[2]/a/strong",
+				selenium.clickAt("//td[@id='_125_organizationsSearchContainer_col-name_row-1']/a/strong",
 					RuntimeVariables.replace("Suborganization"));
 				selenium.waitForPageToLoad("30000");
 				loadRequiredJavaScriptModules();
@@ -395,7 +395,7 @@ public class TearDownSubOrganizationTest extends BaseTestCase {
 				loadRequiredJavaScriptModules();
 
 				boolean subOrganization4Present = selenium.isElementPresent(
-						"//input[@name='_125_rowIds']");
+						"//td[@id='_125_organizationsSearchContainer_col-name_row-1']/a/strong");
 
 				if (!subOrganization4Present) {
 					label = 8;
@@ -403,7 +403,7 @@ public class TearDownSubOrganizationTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//td[2]/a/strong",
+				selenium.clickAt("//td[@id='_125_organizationsSearchContainer_col-name_row-1']/a/strong",
 					RuntimeVariables.replace("Suborganization"));
 				selenium.waitForPageToLoad("30000");
 				loadRequiredJavaScriptModules();
@@ -505,7 +505,7 @@ public class TearDownSubOrganizationTest extends BaseTestCase {
 				loadRequiredJavaScriptModules();
 
 				boolean subOrganization5Present = selenium.isElementPresent(
-						"//input[@name='_125_rowIds']");
+						"//td[@id='_125_organizationsSearchContainer_col-name_row-1']/a/strong");
 
 				if (!subOrganization5Present) {
 					label = 7;
@@ -513,7 +513,7 @@ public class TearDownSubOrganizationTest extends BaseTestCase {
 					continue;
 				}
 
-				selenium.clickAt("//td[2]/a/strong",
+				selenium.clickAt("//td[@id='_125_organizationsSearchContainer_col-name_row-1']/a/strong",
 					RuntimeVariables.replace("Suborganization"));
 				selenium.waitForPageToLoad("30000");
 				loadRequiredJavaScriptModules();

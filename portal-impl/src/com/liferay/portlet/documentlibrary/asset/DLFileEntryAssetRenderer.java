@@ -54,8 +54,8 @@ public class DLFileEntryAssetRenderer extends BaseAssetRenderer {
 
 	public long getClassPK() {
 		if (!_fileVersion.isApproved() &&
-			(!_fileVersion.getVersion().equals(
-				DLFileEntryConstants.VERSION_DEFAULT))) {
+			!_fileVersion.getVersion().equals(
+				DLFileEntryConstants.VERSION_DEFAULT)) {
 
 			return _fileVersion.getFileVersionId();
 		}
@@ -135,6 +135,10 @@ public class DLFileEntryAssetRenderer extends BaseAssetRenderer {
 
 	public long getUserId() {
 		return _fileEntry.getUserId();
+	}
+
+	public String getUserName() {
+		return _fileEntry.getUserName();
 	}
 
 	public String getUuid() {

@@ -78,6 +78,24 @@
 				(DLFileEntry.custom2ImageId = ?)
 		]]>
 	</sql>
+	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder.findByMisversioned">
+		<![CDATA[
+			SELECT
+				{DLFileEntry.*}
+			FROM
+				DLFileEntry
+			WHERE
+				(fileEntryId NOT IN (
+					SELECT
+						DLFileVersion.fileEntryId
+					FROM
+						DLFileVersion
+					WHERE
+						(DLFileVersion.fileEntryId = DLFileEntry.fileEntryId) AND
+						(DLFileVersion.version = DLFileEntry.version)
+				))
+		]]>
+	</sql>
 	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder.findByNoAssets">
 		<![CDATA[
 			SELECT
@@ -128,7 +146,7 @@
 	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder.findByG_F">
 		<![CDATA[
 			SELECT
-				DISTINCT {DLFileEntry.*}
+				{DLFileEntry.*}
 			FROM
 				DLFileEntry
 			WHERE
@@ -139,43 +157,67 @@
 	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder.findByG_U_F">
 		<![CDATA[
 			SELECT
-				DISTINCT {DLFileEntry.*}
+				{DLFileEntry.*}
 			FROM
-				DLFileEntry, DLFileVersion
+				(
+					SELECT
+						DISTINCT DLFileVersion.fileEntryId AS tempFileEntryId
+					FROM
+						DLFileVersion
+					WHERE
+						(DLFileVersion.groupId = ?) AND
+						(DLFileVersion.userId = ?)
+				) TEMP_TABLE
+				INNER JOIN
+					DLFileEntry ON
+						(TEMP_TABLE.tempFileEntryId = DLFileEntry.fileEntryId)
 			WHERE
-				(DLFileVersion.groupId = ?) AND
-				(DLFileVersion.userId = ?) AND
-				(DLFileVersion.fileEntryId = DLFileEntry.fileEntryId) AND
 				[$FOLDER_ID$]
 		]]>
 	</sql>
 	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder.findByG_F_S">
 		<![CDATA[
 			SELECT
-				DISTINCT {DLFileEntry.*}
+				{DLFileEntry.*}
 			FROM
-				DLFileEntry
-			INNER JOIN
-				DLFileVersion ON
-					(DLFileVersion.fileEntryId = DLFileEntry.fileEntryId)
+				(
+					SELECT
+						DISTINCT DLFileVersion.fileEntryId AS tempFileEntryId
+					FROM
+						DLFileVersion
+					WHERE
+						(DLFileVersion.groupId = ?) AND
+						(DLFileVersion.status = ?) AND
+						[$FOLDER_ID$]
+				) TEMP_TABLE
+				INNER JOIN
+					DLFileEntry ON
+						(TEMP_TABLE.tempFileEntryId = DLFileEntry.fileEntryId)
 			WHERE
-				(DLFileEntry.groupId = ?) AND
-				(DLFileVersion.status = ?) AND
-				[$FOLDER_ID$]
+				[$MIME_TYPE$]
 		]]>
 	</sql>
 	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder.findByG_U_F_S">
 		<![CDATA[
 			SELECT
-				DISTINCT {DLFileEntry.*}
+				{DLFileEntry.*}
 			FROM
-				DLFileEntry, DLFileVersion
+				(
+					SELECT
+						DISTINCT DLFileVersion.fileEntryId AS tempFileEntryId
+					FROM
+						DLFileVersion
+					WHERE
+						(DLFileVersion.groupId = ?) AND
+						(DLFileVersion.userId = ?) AND
+						(DLFileVersion.status = ?) AND
+						[$FOLDER_ID$]
+				) TEMP_TABLE
+				INNER JOIN
+					DLFileEntry ON
+						(TEMP_TABLE.tempFileEntryId = DLFileEntry.fileEntryId)
 			WHERE
-				(DLFileVersion.groupId = ?) AND
-				(DLFileVersion.userId = ?) AND
-				(DLFileVersion.status = ?) AND
-				(DLFileVersion.fileEntryId = DLFileEntry.fileEntryId) AND
-				[$FOLDER_ID$]
+				[$MIME_TYPE$]
 		]]>
 	</sql>
 	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryTypeFinder.countByC_G_N_D_S">

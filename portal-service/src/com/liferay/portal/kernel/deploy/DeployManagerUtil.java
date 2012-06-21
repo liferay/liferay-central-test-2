@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.security.pacl.permission.PortalRuntimePermission;
 
 import java.util.List;
+import java.util.Properties;
 
 /**
  * @author Jonathan Potter
@@ -57,6 +58,19 @@ public class DeployManagerUtil {
 
 	public static boolean isDeployed(String context) {
 		return getDeployManager().isDeployed(context);
+	}
+
+	public static PluginPackage readPluginPackageProperties(
+		String displayName, Properties properties) {
+
+		return getDeployManager().readPluginPackageProperties(
+			displayName, properties);
+	}
+
+	public static PluginPackage readPluginPackageXml(String xml)
+		throws Exception {
+
+		return getDeployManager().readPluginPackageXml(xml);
 	}
 
 	public static void redeploy(String context) throws Exception {

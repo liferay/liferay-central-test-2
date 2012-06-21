@@ -25,7 +25,7 @@ String toolbarItem = ParamUtil.getString(request, "toolbarItem", "add");
 		</span>
 
 		<span class="lfr-toolbar-button view-structures">
-			<a href="javascript:;" id="<portlet:namespace />managePriorities"><liferay-ui:message key="manage-rule-groups-priorities" /></a>
+			<a href="javascript:;" id="<portlet:namespace />managePriorities"><liferay-ui:message key="manage-rule-group-priorities" /></a>
 		</span>
 	</c:if>
 </div>
@@ -126,6 +126,7 @@ String toolbarItem = ParamUtil.getString(request, "toolbarItem", "add");
 			function(event) {
 				config.dialog.title = '<%= UnicodeLanguageUtil.get(pageContext, "rule-groups") %>';
 
+				config.id = '<portlet:namespace />ruleGroups';
 				config.uri = '<%= selectRuleGroupURL %>';
 
 				Liferay.Util.openWindow(config);
@@ -139,9 +140,10 @@ String toolbarItem = ParamUtil.getString(request, "toolbarItem", "add");
 		managePriorities.on(
 			'click',
 			function(event) {
-				config.dialog.title = '<%= UnicodeLanguageUtil.get(pageContext, "rule-groups-priorities") %>';
+				config.dialog.title = '<%= UnicodeLanguageUtil.get(pageContext, "rule-group-priorities") %>';
 				config.dialog.width = 460;
 
+				config.id = '<portlet:namespace />ruleGroupsPriorities';
 				config.uri = '<%= managePrioritiesURL %>';
 
 				Liferay.Util.openWindow(config);

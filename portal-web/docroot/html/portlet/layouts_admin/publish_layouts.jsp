@@ -33,7 +33,11 @@ Group stagingGroup = null;
 
 int pagesCount = 0;
 
-if (selGroup.isStagingGroup()) {
+if (selGroup.isCompany()) {
+	stagingGroup = selGroup;
+	liveGroup = selGroup;
+}
+else if (selGroup.isStagingGroup()) {
 	liveGroup = selGroup.getLiveGroup();
 	stagingGroup = selGroup;
 }
@@ -50,7 +54,11 @@ else if (selGroup.isStaged()) {
 
 long selGroupId = selGroup.getGroupId();
 
-long liveGroupId = liveGroup.getGroupId();
+long liveGroupId = 0;
+
+if (liveGroup != null) {
+	liveGroupId = liveGroup.getGroupId();
+}
 
 long stagingGroupId = 0;
 
@@ -68,7 +76,7 @@ if (liveGroup.isStaged()) {
 		localPublishing = false;
 	}
 }
-else if (cmd.equals("publish_to_remote")) {
+else if (cmd.equals("publish_to_remote") || selGroup.isCompany()) {
 	localPublishing = false;
 }
 
@@ -90,7 +98,7 @@ String publishActionKey = "copy";
 if (liveGroup.isStaged()) {
 	publishActionKey = "publish";
 }
-else if (cmd.equals("publish_to_remote")) {
+else if (cmd.equals("publish_to_remote") || selGroup.isCompany()) {
 	publishActionKey = "publish";
 }
 
@@ -113,9 +121,6 @@ long[] selectedLayoutIds = new long[0];
 boolean privateLayout = ParamUtil.getBoolean(request, "privateLayout", tabs1.equals("private-pages"));
 
 if (selPlid > 0) {
-	selectedLayoutIds = new long[] {selLayout.getLayoutId()};
-}
-else {
 	treeKey = treeKey + privateLayout;
 
 	selectedLayoutIds = GetterUtil.getLongValues(StringUtil.split(SessionTreeJSClicks.getOpenNodes(request, treeKey + "SelectedNode"), ','));
@@ -175,7 +180,7 @@ if (selGroup.isStaged() && selGroup.isStagedRemotely()) {
 portletURL.setParameter("struts_action", "/layouts_admin/edit_layouts");
 portletURL.setParameter("pagesRedirect", currentURL);
 portletURL.setParameter("groupId", String.valueOf(liveGroupId));
-portletURL.setParameter("private", String.valueOf(privateLayout));
+portletURL.setParameter("privateLayout", String.valueOf(privateLayout));
 
 PortletURL selectURL = renderResponse.createRenderURL();
 
@@ -184,6 +189,7 @@ selectURL.setParameter("struts_action", "/layouts_admin/publish_layouts");
 selectURL.setParameter(Constants.CMD, cmd);
 selectURL.setParameter("pagesRedirect", pagesRedirect);
 selectURL.setParameter("groupId", String.valueOf(stagingGroupId));
+selectURL.setParameter("selPlid", String.valueOf(selPlid));
 selectURL.setParameter("privateLayout", String.valueOf(privateLayout));
 selectURL.setParameter("layoutSetBranchId", String.valueOf(layoutSetBranchId));
 selectURL.setParameter("selectPages", String.valueOf(!selectPages));
@@ -268,6 +274,36 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 	<aui:input name="lastImportUserName" type="hidden" value="<%= user.getFullName() %>" />
 	<aui:input name="lastImportUserUuid" type="hidden" value="<%= String.valueOf(user.getUserUuid()) %>" />
 
+	<liferay-ui:error exception="<%= LayoutPrototypeException.class %>">
+
+		<%
+		LayoutPrototypeException lpe = (LayoutPrototypeException)errorException;
+		%>
+
+		<liferay-ui:message key="the-pages-could-not-be-published-because-one-or-more-required-page-templates-could-not-be-found-on-the-remote-system.-please-import-the-following-templates-manually" />
+
+		<ul>
+
+			<%
+			List<Tuple> missingLayoutPrototypes = lpe.getMissingLayoutPrototypes();
+
+			for (Tuple missingLayoutPrototype : missingLayoutPrototypes) {
+				String layoutPrototypeClassName = (String)missingLayoutPrototype.getObject(0);
+				String layoutPrototypeUuid = (String)missingLayoutPrototype.getObject(1);
+				String layoutPrototypeName = (String)missingLayoutPrototype.getObject(2);
+			%>
+
+			<li>
+				<%= ResourceActionsUtil.getModelResource(locale, layoutPrototypeClassName) %>: <strong><%= layoutPrototypeName %></strong> (<%= layoutPrototypeUuid %>)
+			</li>
+
+			<%
+			}
+			%>
+
+		</ul>
+	</liferay-ui:error>
+
 	<liferay-ui:error exception="<%= RemoteExportException.class %>">
 
 		<%
@@ -330,6 +366,7 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 					<liferay-util:param name="selectableTree" value="1" />
 					<liferay-util:param name="treeId" value="<%= treeKey %>" />
 					<liferay-util:param name="incomplete" value="<%= String.valueOf(false) %>" />
+					<liferay-util:param name="tabs1" value='<%= (privateLayout) ? "private-pages" : "public-pages" %>' />
 				</liferay-util:include>
 			</div>
 
@@ -406,17 +443,21 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 				</c:choose>
 
 				<liferay-ui:panel-container cssClass="export-pages-panel-container" extended="<%= true %>" id="layoutsAdminExportPagesPanelContainer" persistState="<%= true %>">
-					<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="layoutsAdminExportPagesPagesPanel" persistState="<%= true %>" title="pages">
-						<%@ include file="/html/portlet/layouts_admin/publish_layouts_select_pages.jspf" %>
-					</liferay-ui:panel>
+					<c:if test="<%= !selGroup.isCompany() %>">
+						<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="layoutsAdminExportPagesPagesPanel" persistState="<%= true %>" title="pages">
+							<%@ include file="/html/portlet/layouts_admin/publish_layouts_select_pages.jspf" %>
+						</liferay-ui:panel>
+					</c:if>
 
 					<liferay-ui:panel collapsible="<%= true %>" defaultState="closed" extended="<%= true %>" id="layoutsAdminExportPagesPortletsPanel" persistState="<%= true %>" title="applications">
 						<%@ include file="/html/portlet/layouts_admin/publish_layouts_portlets.jspf" %>
 					</liferay-ui:panel>
 
-					<liferay-ui:panel collapsible="<%= true %>" defaultState="closed" extended="<%= true %>" id="layoutsAdminExportPagesOptionsPanel" persistState="<%= true %>" title="other">
-						<%@ include file="/html/portlet/layouts_admin/publish_layouts_other.jspf" %>
-					</liferay-ui:panel>
+					<c:if test="<%= !selGroup.isCompany() %>">
+						<liferay-ui:panel collapsible="<%= true %>" defaultState="closed" extended="<%= true %>" id="layoutsAdminExportPagesOptionsPanel" persistState="<%= true %>" title="other">
+							<%@ include file="/html/portlet/layouts_admin/publish_layouts_other.jspf" %>
+						</liferay-ui:panel>
+					</c:if>
 
 					<c:if test="<%= !localPublishing %>">
 						<liferay-ui:panel collapsible="<%= true %>" defaultState="closed" extended="<%= true %>" id="layoutsAdminExportPagesConnectionPanel" persistState="<%= true %>" title="remote-live-connection-settings">

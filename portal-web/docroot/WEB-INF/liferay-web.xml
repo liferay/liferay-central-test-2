@@ -352,6 +352,10 @@
 			<param-name>portal_property_prefix</param-name>
 			<param-value>tunnel.servlet.</param-value>
 		</init-param>
+		<init-param>
+			<param-name>use_permission_checker</param-name>
+			<param-value>true</param-value>
+		</init-param>
 	</filter>
 	<filter>
 		<filter-name>Secure WebDAV Servlet Filter</filter-name>
@@ -604,12 +608,6 @@
 	<filter-mapping>
 		<filter-name>Auto Login Filter</filter-name>
 		<url-pattern>/c/portal/fckeditor</url-pattern>
-		<dispatcher>FORWARD</dispatcher>
-		<dispatcher>REQUEST</dispatcher>
-	</filter-mapping>
-	<filter-mapping>
-		<filter-name>Auto Login Filter</filter-name>
-		<url-pattern>/c/portal/layout</url-pattern>
 		<dispatcher>FORWARD</dispatcher>
 		<dispatcher>REQUEST</dispatcher>
 	</filter-mapping>

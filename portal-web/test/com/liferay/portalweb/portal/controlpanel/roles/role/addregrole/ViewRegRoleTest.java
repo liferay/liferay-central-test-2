@@ -58,13 +58,15 @@ public class ViewRegRoleTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		loadRequiredJavaScriptModules();
 		assertEquals(RuntimeVariables.replace("Roles Regrole Name"),
-			selenium.getText("//tr[contains(.,'Roles Regrole Name')]/td[1]"));
+			selenium.getText(
+				"//td[@id='_128_ocerSearchContainer_col-name_row-1']"));
 		assertEquals(RuntimeVariables.replace("Regular"),
-			selenium.getText("//tr[contains(.,'Roles Regrole Name')]/td[2]"));
+			selenium.getText(
+				"//td[@id='_128_ocerSearchContainer_col-type_row-1']"));
 		assertEquals(RuntimeVariables.replace("Actions"),
 			selenium.getText(
-				"//tr[contains(.,'Roles Regrole Name')]/td/span[@title='Actions']/ul/li/strong/a/span"));
-		selenium.clickAt("//tr[contains(.,'Roles Regrole Name')]/td/span[@title='Actions']/ul/li/strong/a/span",
+				"//span[@title='Actions']/ul[@id='_128_ocerSearchContainer_1_menu']/li/strong/a/span"));
+		selenium.clickAt("//span[@title='Actions']/ul[@id='_128_ocerSearchContainer_1_menu']/li/strong/a/span",
 			RuntimeVariables.replace("Actions"));
 
 		for (int second = 0;; second++) {

@@ -26,8 +26,6 @@ import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.model.impl.VirtualLayout;
-import com.liferay.portal.security.permission.PermissionChecker;
-import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.LayoutSetLocalServiceUtil;
@@ -37,6 +35,7 @@ import com.liferay.portlet.sites.util.SitesUtil;
 
 import java.lang.reflect.Method;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -54,12 +53,7 @@ public class LayoutLocalServiceVirtualLayoutsAdvice
 	implements MethodInterceptor {
 
 	public Object invoke(MethodInvocation methodInvocation) throws Throwable {
-		PermissionChecker permissionChecker =
-			PermissionThreadLocal.getPermissionChecker();
-
-		if ((permissionChecker == null) ||
-			MergeLayoutPrototypesThreadLocal.isInProgress()) {
-
+		if (MergeLayoutPrototypesThreadLocal.isInProgress()) {
 			return methodInvocation.proceed();
 		}
 
@@ -130,17 +124,26 @@ public class LayoutLocalServiceVirtualLayoutsAdvice
 					WorkflowThreadLocal.setEnabled(workflowEnabled);
 				}
 
+				Object returnValue = methodInvocation.proceed();
+
 				if (!PropsValues.
 						USER_GROUPS_COPY_LAYOUTS_TO_USER_PERSONAL_SITE &&
-					group.isUser() &&
-					(parentLayoutId ==
-						LayoutConstants.DEFAULT_PARENT_LAYOUT_ID)) {
+					group.isUser()) {
 
-					Object returnValue = methodInvocation.proceed();
+					if (parentLayoutId ==
+							LayoutConstants.DEFAULT_PARENT_LAYOUT_ID) {
 
-					return addUserGroupLayouts(
-						group, layoutSet, (List<Layout>)returnValue);
+						return addUserGroupLayouts(
+							group, layoutSet, (List<Layout>)returnValue,
+							parentLayoutId);
+					}
+					else {
+						return addChildUserGroupLayouts(
+							group, (List<Layout>)returnValue);
+					}
 				}
+
+				return returnValue;
 			}
 			catch (Exception e) {
 				_log.error(e, e);
@@ -152,8 +155,32 @@ public class LayoutLocalServiceVirtualLayoutsAdvice
 		return methodInvocation.proceed();
 	}
 
+	protected List<Layout> addChildUserGroupLayouts(
+			Group group, List<Layout> layouts)
+		throws Exception {
+
+		layouts = ListUtil.copy(layouts);
+
+		List<Layout> childLayouts = new ArrayList<Layout>();
+
+		for (Layout layout : layouts) {
+			Layout childLayout = layout;
+
+			Group layoutGroup = layout.getGroup();
+
+			if (layoutGroup.isUserGroup()) {
+				childLayout = new VirtualLayout(layout, group);
+			}
+
+			childLayouts.add(childLayout);
+		}
+
+		return childLayouts;
+	}
+
 	protected List<Layout> addUserGroupLayouts(
-			Group group, LayoutSet layoutSet, List<Layout> layouts)
+			Group group, LayoutSet layoutSet, List<Layout> layouts,
+			long parentLayoutId)
 		throws Exception {
 
 		layouts = ListUtil.copy(layouts);
@@ -165,7 +192,8 @@ public class LayoutLocalServiceVirtualLayoutsAdvice
 			Group userGroupGroup = userGroup.getGroup();
 
 			List<Layout> userGroupLayouts = LayoutLocalServiceUtil.getLayouts(
-				userGroupGroup.getGroupId(), layoutSet.isPrivateLayout());
+				userGroupGroup.getGroupId(), layoutSet.isPrivateLayout(),
+				parentLayoutId);
 
 			for (Layout userGroupLayout : userGroupLayouts) {
 				Layout virtualLayout = new VirtualLayout(

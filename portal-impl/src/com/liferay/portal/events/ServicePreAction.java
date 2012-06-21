@@ -1183,7 +1183,7 @@ public class ServicePreAction extends Action {
 			themeDisplay.setURLMyAccount(myAccountURL);
 		}
 
-		if ((!user.isActive()) ||
+		if (!user.isActive() ||
 			(PrefsPropsUtil.getBoolean(
 				companyId, PropsKeys.TERMS_OF_USE_REQUIRED) &&
 			 !user.isAgreedToTermsOfUse())) {

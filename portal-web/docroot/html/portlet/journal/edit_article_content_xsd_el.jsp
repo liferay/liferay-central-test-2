@@ -43,6 +43,19 @@ String elInstanceId = (String)request.getAttribute(WebKeys.JOURNAL_STRUCTURE_EL_
 String elName = (String)request.getAttribute(WebKeys.JOURNAL_STRUCTURE_EL_NAME);
 String elType = (String)request.getAttribute(WebKeys.JOURNAL_STRUCTURE_EL_TYPE);
 String elIndexType = (String)request.getAttribute(WebKeys.JOURNAL_STRUCTURE_EL_INDEX_TYPE);
+
+String elRepeatCount = StringPool.BLANK;
+
+Map <String, Integer> repeatCountMap = (Map<String, Integer>)request.getAttribute(WebKeys.JOURNAL_STRUCTURE_EL_REPEAT_COUNT_MAP);
+
+if (repeatCountMap != null) {
+	Integer repeatCount = repeatCountMap.get(elName);
+
+	if (repeatCount != null) {
+		elRepeatCount = StringPool.UNDERLINE + repeatCount;
+	}
+}
+
 boolean elRepeatable = GetterUtil.getBoolean((String)request.getAttribute(WebKeys.JOURNAL_STRUCTURE_EL_REPEATABLE));
 boolean elRepeatablePrototype = GetterUtil.getBoolean((String)request.getAttribute(WebKeys.JOURNAL_STRUCTURE_EL_REPEATABLE_PROTOTYPE));
 String elContent = (String)request.getAttribute(WebKeys.JOURNAL_STRUCTURE_EL_CONTENT);
@@ -112,20 +125,47 @@ Element contentEl = (Element)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 
 			<div class="journal-article-component-container">
 				<c:if test='<%= elType.equals("text") %>'>
-					<aui:input cssClass="lfr-input-text-container" ignoreRequestValue="<%= true %>" label="" name="text" size="55" type="text" value="<%= elContent %>" />
+
+					<%
+					String textInputName = "text_" + elName + elRepeatCount;
+
+					if (Validator.isNull(elContent)) {
+						elContent = ParamUtil.getString(request, textInputName);
+					}
+					%>
+
+					<aui:input cssClass="lfr-input-text-container" ignoreRequestValue="<%= true %>" label="" name="<%= textInputName %>" size="55" type="text" value="<%= elContent %>" />
 				</c:if>
 
 				<c:if test='<%= elType.equals("text_box") %>'>
-					<aui:input cssClass="lfr-textarea-container" cols="60" ignoreRequestValue="<%= true %>" label="" name="textArea" rows="10" type="textarea" value="<%= elContent %>" />
+
+					<%
+					String textBoxInputName = "textBox_" + elName + elRepeatCount;
+
+					if (Validator.isNull(elContent)) {
+						elContent = ParamUtil.getString(request, textBoxInputName);
+					}
+					%>
+
+					<aui:input cols="60" cssClass="lfr-textarea-container" ignoreRequestValue="<%= true %>" label="" name="<%= textBoxInputName %>" rows="10" type="textarea" value="<%= elContent %>" />
 				</c:if>
 
 				<c:if test='<%= elType.equals("text_area") %>'>
+
+					<%
+					String textAreaInputName = "structure_el_" + elName + elRepeatCount + "_content";
+
+					if (Validator.isNull(elContent)) {
+						elContent = ParamUtil.getString(request, textAreaInputName);
+					}
+					%>
+
 					<liferay-ui:input-editor
-						name='<%= renderResponse.getNamespace() + "structure_el_" + elInstanceId + "_content" %>'
 						editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>"
-						toolbarSet="liferay-article"
-						initMethod='<%= "initEditor" + elInstanceId %>'
 						height="460"
+						initMethod='<%= "initEditor" + elInstanceId %>'
+						name="<%= textAreaInputName %>"
+						toolbarSet="liferay-article"
 						width="500"
 					/>
 
@@ -147,7 +187,12 @@ Element contentEl = (Element)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 						</span>
 
 						<div class="journal-image-preview aui-helper-hidden">
-							<aui:input name="journalImageContent" type="hidden" value="<%= elContent %>" />
+
+							<%
+							String journalImageContentInputName = "journalImageContent_" + elName + elRepeatCount;
+							%>
+
+							<aui:input name="<%= journalImageContentInputName %>" type="hidden" value="<%= elContent %>" />
 
 							<aui:input name="journalImageDelete" type="hidden" value="" />
 
@@ -163,7 +208,16 @@ Element contentEl = (Element)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 				</c:if>
 
 				<c:if test='<%= elType.equals("document_library") %>'>
-					<aui:input cssClass="lfr-input-text-container" inlineField="<%= true %>" label="" name="journalDocumentlibrary" size="55" type="text" value="<%= elContent %>" />
+
+					<%
+					String journalDocumentLibraryInputName = "journalDocumentLibrary_" + elName + elRepeatCount;
+
+					if (Validator.isNull(elContent)) {
+						elContent = ParamUtil.getString(request, journalDocumentLibraryInputName);
+					}
+					%>
+
+					<aui:input cssClass="lfr-input-text-container" inlineField="<%= true %>" label="" name="<%= journalDocumentLibraryInputName %>" size="55" type="text" value="<%= elContent %>" />
 
 					<%
 					long dlScopeGroupId = groupId;
@@ -173,7 +227,7 @@ Element contentEl = (Element)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 					}
 					%>
 
-					<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" var="selectDLURL">
+					<portlet:renderURL var="selectDLURL" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
 						<portlet:param name="struts_action" value="/journal/select_document_library" />
 						<portlet:param name="groupId" value="<%= String.valueOf(dlScopeGroupId) %>" />
 					</portlet:renderURL>
@@ -188,6 +242,13 @@ Element contentEl = (Element)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 				</c:if>
 
 				<c:if test='<%= elType.equals("boolean") %>'>
+
+					<%
+					if (Validator.isNull(elContent)) {
+						elContent = ParamUtil.getString(request, elName);
+					}
+					%>
+
 					<div class="journal-subfield">
 						<aui:input cssClass="journal-article-field-label" label="<%= elLabel %>" name="<%= elName %>" type="checkbox" value='<%= elContent.equals("true") %>' />
 					</div>
@@ -199,7 +260,16 @@ Element contentEl = (Element)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 
 				<c:if test='<%= elType.equals("list") %>'>
 					<div class="journal-list-subfield">
-						<aui:select label="" name="list">
+
+						<%
+						String listInputName = "listInputName_" + elName + elRepeatCount;
+
+						if (Validator.isNull(elContent)) {
+							elContent = ParamUtil.getString(request, listInputName);
+						}
+						%>
+
+						<aui:select label="" name="<%= listInputName %>">
 
 							<%
 							Iterator<Element> itr = el.elements().iterator();
@@ -207,8 +277,8 @@ Element contentEl = (Element)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 							while (itr.hasNext()) {
 								Element child = itr.next();
 
-								String listElName = JS.decodeURIComponent(child.attributeValue("name", StringPool.BLANK));
-								String listElValue = JS.decodeURIComponent(child.attributeValue("type", StringPool.BLANK));
+								String listElName = HtmlUtil.escape(JS.decodeURIComponent(child.attributeValue("name", StringPool.BLANK)));
+								String listElValue = HtmlUtil.escape(JS.decodeURIComponent(child.attributeValue("type", StringPool.BLANK)));
 
 								if (Validator.isNull(listElName) && Validator.isNull(listElValue)) {
 									continue;
@@ -247,7 +317,18 @@ Element contentEl = (Element)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 
 				<c:if test='<%= elType.equals("multi-list") %>'>
 					<div class="journal-list-subfield">
-						<aui:select label="" multiple="true" name="multiList">
+
+						<%
+						String multiListInputName = "multiListInputName_" + elName + elRepeatCount;
+
+						String[] selectedOptions = null;
+
+						if (Validator.isNull(elContent)) {
+							selectedOptions = ParamUtil.getParameterValues(request, multiListInputName);
+						}
+						%>
+
+						<aui:select ignoreRequestValue="<%= true %>" label="" multiple="<%= true %>" name="<%= multiListInputName %>">
 
 							<%
 							Iterator<Element> itr = el.elements().iterator();
@@ -263,13 +344,19 @@ Element contentEl = (Element)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 								Element dynConEl = contentEl.element("dynamic-content");
 
 								if (dynConEl != null) {
-									Iterator itr2 = dynConEl.elements("option").iterator();
+									List<Element> dynConElements = dynConEl.elements("option");
 
-									while (itr2.hasNext()) {
-										Element option = (Element)itr2.next();
-
+									for (Element option : dynConElements) {
 										if (listElValue.equals(option.getText())) {
 											contains = true;
+										}
+									}
+
+									if (dynConElements.isEmpty() && (selectedOptions != null)) {
+										for (String option : selectedOptions) {
+											if (listElValue.equals(option)) {
+												contains = true;
+											}
 										}
 									}
 								}
@@ -311,7 +398,16 @@ Element contentEl = (Element)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 				</c:if>
 
 				<c:if test='<%= elType.equals("link_to_layout") %>'>
-					<aui:select label="" name='<%= "structure_el" + count.getValue() + "_content" %>' showEmptyOption="<%= true %>">
+
+					<%
+					String linkSelectName = "structure_el" + elName + elRepeatCount + "_content";
+
+					if (Validator.isNull(elContent)) {
+						elContent = ParamUtil.getString(request, linkSelectName);
+					}
+					%>
+
+					<aui:select label="" name="<%= linkSelectName %>" showEmptyOption="<%= true %>">
 
 						<%
 						boolean privateLayout = false;

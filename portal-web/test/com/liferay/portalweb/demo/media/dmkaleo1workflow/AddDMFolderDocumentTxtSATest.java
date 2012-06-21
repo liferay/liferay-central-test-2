@@ -101,9 +101,8 @@ public class AddDMFolderDocumentTxtSATest extends BaseTestCase {
 				"//div[@class='lfr-component lfr-menu-list']/ul/li[contains(.,'Basic Document')]/a"));
 		selenium.waitForPageToLoad("30000");
 		loadRequiredJavaScriptModules();
-		selenium.type("//input[@id='_20_file']",
-			RuntimeVariables.replace(
-				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\demo\\media\\dependencies\\Document_1.txt"));
+		selenium.uploadCommonFile("//input[@id='_20_file']",
+			RuntimeVariables.replace("Document_1.txt"));
 		selenium.type("//input[@id='_20_title']",
 			RuntimeVariables.replace("DM Document Title"));
 		selenium.type("//textarea[@id='_20_description']",

@@ -129,7 +129,7 @@ public class AddPageUSSiteTest extends BaseTestCase {
 
 			try {
 				if (selenium.isVisible(
-							"//ul[@class='aui-tree-container']/li/div/div/a[contains(.,'User Statistics Test Page')]")) {
+							"//a[@id='layoutsTree_layout_user-statistics-test-page']")) {
 					break;
 				}
 			}
@@ -141,6 +141,6 @@ public class AddPageUSSiteTest extends BaseTestCase {
 
 		assertEquals(RuntimeVariables.replace("User Statistics Test Page"),
 			selenium.getText(
-				"//ul[@class='aui-tree-container']/li/div/div/a[contains(.,'User Statistics Test Page')]"));
+				"//a[@id='layoutsTree_layout_user-statistics-test-page']"));
 	}
 }

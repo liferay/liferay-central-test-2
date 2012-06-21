@@ -405,6 +405,7 @@
 		<reference package-path="com.liferay.portlet.messageboards" entity="MBBan" />
 		<reference package-path="com.liferay.portlet.messageboards" entity="MBCategory" />
 		<reference package-path="com.liferay.portlet.messageboards" entity="MBStatsUser" />
+		<reference package-path="com.liferay.portlet.messageboards" entity="MBThread" />
 		<reference package-path="com.liferay.portlet.polls" entity="PollsQuestion" />
 		<reference package-path="com.liferay.portlet.shopping" entity="ShoppingCart" />
 		<reference package-path="com.liferay.portlet.shopping" entity="ShoppingCategory" />
@@ -507,6 +508,9 @@
 		</finder>
 		<finder name="IconImageId" return-type="Layout">
 			<finder-column name="iconImageId" />
+		</finder>
+		<finder name="LayoutPrototypeUuid" return-type="Collection">
+			<finder-column name="layoutPrototypeUuid" />
 		</finder>
 		<finder name="G_P" return-type="Collection">
 			<finder-column name="groupId" />
@@ -1463,6 +1467,10 @@
 		<finder name="Active" return-type="Collection">
 			<finder-column name="active" />
 		</finder>
+		<finder name="C_R" return-type="Region" unique="true">
+			<finder-column name="countryId" />
+			<finder-column name="regionCode" />
+		</finder>
 		<finder name="C_A" return-type="Collection">
 			<finder-column name="countryId" />
 			<finder-column name="active" />
@@ -1485,6 +1493,7 @@
 		<column name="buildNumber" type="int" />
 		<column name="buildDate" type="Date" />
 		<column name="verified" type="boolean" />
+		<column name="state" type="int" />
 		<column name="testString" type="String" />
 
 		<!-- Finder methods -->
@@ -2602,6 +2611,7 @@
 		<exception>LayoutName</exception>
 		<exception>LayoutParentLayoutId</exception>
 		<exception>LayoutPermission</exception>
+		<exception>LayoutPrototype</exception>
 		<exception>LayoutRevisionMajor</exception>
 		<exception>LayoutSetVirtualHost</exception>
 		<exception>LayoutType</exception>
@@ -2623,6 +2633,7 @@
 		<exception>RemoteExport</exception>
 		<exception>RequiredGroup</exception>
 		<exception>RequiredLayout</exception>
+		<exception>RequiredLayoutPrototype</exception>
 		<exception>RequiredLayoutSetBranch</exception>
 		<exception>RequiredLayoutSetPrototype</exception>
 		<exception>RequiredOrganization</exception>

@@ -17,6 +17,7 @@ create index IX_9C7EB9F on AnnouncementsFlag (entryId);
 create unique index IX_4539A99C on AnnouncementsFlag (userId, entryId, value);
 
 create index IX_E639E2F6 on AssetCategory (groupId);
+create index IX_510B46AC on AssetCategory (groupId, parentCategoryId, name);
 create index IX_2008FACB on AssetCategory (groupId, vocabularyId);
 create index IX_D61ABE08 on AssetCategory (name, vocabularyId);
 create index IX_7BB1826B on AssetCategory (parentCategoryId);
@@ -364,6 +365,7 @@ create index IX_6DE88B06 on Layout (groupId, privateLayout, parentLayoutId);
 create index IX_8CE8C0D9 on Layout (groupId, privateLayout, sourcePrototypeLayoutUuid);
 create index IX_1A1B61D2 on Layout (groupId, privateLayout, type_);
 create index IX_23922F7D on Layout (iconImageId);
+create index IX_B529BFD3 on Layout (layoutPrototypeUuid);
 create index IX_D0822724 on Layout (uuid_);
 create unique index IX_CED31606 on Layout (uuid_, groupId);
 
@@ -484,6 +486,7 @@ create unique index IX_46665CC4 on MDRRuleGroup (uuid_, groupId);
 
 create index IX_C95A08D8 on MDRRuleGroupInstance (classNameId, classPK);
 create unique index IX_808A0036 on MDRRuleGroupInstance (classNameId, classPK, ruleGroupId);
+create index IX_AFF28547 on MDRRuleGroupInstance (groupId);
 create index IX_22DAB85C on MDRRuleGroupInstance (groupId, classNameId, classPK);
 create index IX_BF3E642B on MDRRuleGroupInstance (ruleGroupId);
 create index IX_B6A6BD91 on MDRRuleGroupInstance (uuid_);
@@ -566,6 +569,7 @@ create unique index IX_A6E99284 on RatingsStats (classNameId, classPK);
 create index IX_2D9A426F on Region (active_);
 create index IX_16D87CA7 on Region (countryId);
 create index IX_11FB3E42 on Region (countryId, active_);
+create unique index IX_A2635F5C on Region (countryId, regionCode);
 
 create index IX_8BD6BCA7 on Release_ (servletContextName);
 

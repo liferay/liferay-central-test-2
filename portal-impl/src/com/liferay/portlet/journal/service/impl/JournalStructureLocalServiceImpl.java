@@ -48,6 +48,7 @@ import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalStructure;
 import com.liferay.portlet.journal.model.JournalStructureConstants;
 import com.liferay.portlet.journal.service.base.JournalStructureLocalServiceBaseImpl;
+import com.liferay.portlet.journal.util.JournalUtil;
 import com.liferay.portlet.journal.util.comparator.StructurePKComparator;
 
 import java.util.ArrayList;
@@ -79,6 +80,7 @@ public class JournalStructureLocalServiceImpl
 		Date now = new Date();
 
 		try {
+			xsd = JournalUtil.processXMLAttributes(xsd);
 			xsd = DDMXMLUtil.formatXML(xsd);
 		}
 		catch (Exception e) {
@@ -191,9 +193,7 @@ public class JournalStructureLocalServiceImpl
 
 		if ((xsd != null) && (xsd.indexOf("\\n") != -1)) {
 			xsd = StringUtil.replace(
-				xsd,
-				new String[] {"\\n", "\\r"},
-				new String[] {"\n", "\r"});
+				xsd, new String[] {"\\n", "\\r"}, new String[] {"\n", "\r"});
 
 			structure.setXsd(xsd);
 
@@ -377,6 +377,13 @@ public class JournalStructureLocalServiceImpl
 	public JournalStructure getStructure(long groupId, String structureId)
 		throws PortalException, SystemException {
 
+		return getStructure(groupId, structureId, false);
+	}
+
+	public JournalStructure getStructure(
+			long groupId, String structureId, boolean includeGlobalStructures)
+		throws PortalException, SystemException {
+
 		structureId = structureId.trim().toUpperCase();
 
 		if (groupId == 0) {
@@ -388,18 +395,35 @@ public class JournalStructureLocalServiceImpl
 			List<JournalStructure> structures =
 				journalStructurePersistence.findByStructureId(structureId);
 
-			if (structures.size() == 0) {
-				throw new NoSuchStructureException(
-					"No JournalStructure exists with the structure id " +
-						structureId);
-			}
-			else {
+			if (!structures.isEmpty()) {
 				return structures.get(0);
 			}
+
+			throw new NoSuchStructureException(
+				"No JournalStructure exists with the structure id " +
+					structureId);
 		}
-		else {
-			return journalStructurePersistence.findByG_S(groupId, structureId);
+
+		JournalStructure structure = journalStructurePersistence.fetchByG_S(
+			groupId, structureId);
+
+		if (structure != null) {
+			return structure;
 		}
+
+		if (!includeGlobalStructures) {
+			throw new NoSuchStructureException(
+				"No JournalStructure exists with the structure id " +
+					structureId);
+		}
+
+		Group group = groupPersistence.findByPrimaryKey(groupId);
+
+		Group companyGroup = groupLocalService.getCompanyGroup(
+			group.getCompanyId());
+
+		return journalStructurePersistence.findByG_S(
+			companyGroup.getGroupId(), structureId);
 	}
 
 	public List<JournalStructure> getStructures() throws SystemException {
@@ -468,6 +492,7 @@ public class JournalStructureLocalServiceImpl
 		structureId = structureId.trim().toUpperCase();
 
 		try {
+			xsd = JournalUtil.processXMLAttributes(xsd);
 			xsd = DDMXMLUtil.formatXML(xsd);
 		}
 		catch (Exception e) {
@@ -559,17 +584,6 @@ public class JournalStructureLocalServiceImpl
 				throw new StructureXsdException();
 			}
 			else {
-				char[] c = elType.toCharArray();
-
-				for (int i = 0; i < c.length; i++) {
-					if ((!Validator.isChar(c[i])) &&
-						(!Validator.isDigit(c[i])) && (c[i] != CharPool.DASH) &&
-						(c[i] != CharPool.UNDERLINE)) {
-
-						throw new StructureXsdException();
-					}
-				}
-
 				String completePath = elName;
 
 				Element parentElement = element.getParent();
@@ -684,8 +698,8 @@ public class JournalStructureLocalServiceImpl
 
 		while (parentStructure != null) {
 			if ((parentStructure != null) &&
-				(parentStructure.getStructureId().equals(structureId)) ||
-				(parentStructure.getParentStructureId().equals(structureId))) {
+				(parentStructure.getStructureId().equals(structureId) ||
+				 parentStructure.getParentStructureId().equals(structureId))) {
 
 				throw new StructureInheritanceException();
 			}
@@ -703,8 +717,8 @@ public class JournalStructureLocalServiceImpl
 	protected void validateStructureId(String structureId)
 		throws PortalException {
 
-		if ((Validator.isNull(structureId)) ||
-			(Validator.isNumber(structureId)) ||
+		if (Validator.isNull(structureId) ||
+			Validator.isNumber(structureId) ||
 			(structureId.indexOf(CharPool.SPACE) != -1)) {
 
 			throw new StructureIdException();

@@ -402,10 +402,6 @@ public class IncludeTag extends AttributesTagSupport {
 
 	private static final boolean _CLEAN_UP_SET_ATTRIBUTES = false;
 
-	private static final boolean _DIRECT_SERVLET_CONTEXT_ENABLED =
-		GetterUtil.getBoolean(
-			PropsUtil.get(PropsKeys.DIRECT_SERVLET_CONTEXT_ENABLED));
-
 	private static final boolean _THEME_JSP_OVERRIDE_ENABLED =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.THEME_JSP_OVERRIDE_ENABLED));

@@ -17,6 +17,7 @@ package com.liferay.portalweb.portlet.documentsandmedia.dmdocument.revertversion
 import com.liferay.portalweb.portal.BaseTestSuite;
 import com.liferay.portalweb.portal.util.TearDownPageTest;
 import com.liferay.portalweb.portlet.documentsandmedia.dmdocument.adddmfolderdocument.AddDMFolderDocumentTest;
+import com.liferay.portalweb.portlet.documentsandmedia.dmdocument.editdmfolderdocumenttitle.EditDMFolderDocumentTitleTest;
 import com.liferay.portalweb.portlet.documentsandmedia.dmfolder.adddmfolder.AddDMFolderTest;
 import com.liferay.portalweb.portlet.documentsandmedia.dmfolder.adddmfolder.TearDownDMFolderTest;
 import com.liferay.portalweb.portlet.documentsandmedia.portlet.addportletdm.AddPageDMTest;

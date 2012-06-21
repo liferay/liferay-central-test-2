@@ -44,6 +44,7 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.UniqueList;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Account;
 import com.liferay.portal.model.Company;
@@ -81,7 +82,7 @@ import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.comparator.GroupNameComparator;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.journal.model.JournalArticle;
-import com.liferay.util.UniqueList;
+import com.liferay.portlet.messageboards.model.MBCategoryConstants;
 
 import java.io.File;
 
@@ -284,7 +285,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		}
 
 		if ((classNameId <= 0) || className.equals(Group.class.getName())) {
-			validateName(groupId, user.getCompanyId(), name);
+			validateName(groupId, user.getCompanyId(), name, site);
 		}
 
 		validateFriendlyURL(
@@ -304,6 +305,12 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		group.setFriendlyURL(friendlyURL);
 		group.setSite(site);
 		group.setActive(active);
+
+		if ((serviceContext != null) && (classNameId == groupClassNameId) &&
+			!user.isDefaultUser()) {
+
+			group.setExpandoBridgeAttributes(serviceContext);
+		}
 
 		groupPersistence.update(group, false);
 
@@ -610,7 +617,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			group.getCompanyId(), JournalArticle.class.getName(),
 			group.getGroupId());
 
-		/// Teams
+		// Teams
 
 		teamLocalService.deleteTeams(group.getGroupId());
 
@@ -659,8 +666,8 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 		// Document library
 
-		dlFileEntryTypeLocalService.deleteFileEntryTypes(group.getGroupId());
 		repositoryLocalService.deleteRepositories(group.getGroupId());
+		dlFileEntryTypeLocalService.deleteFileEntryTypes(group.getGroupId());
 
 		// Journal
 
@@ -673,6 +680,8 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		mbBanLocalService.deleteBansByGroupId(group.getGroupId());
 		mbCategoryLocalService.deleteCategories(group.getGroupId());
 		mbStatsUserLocalService.deleteStatsUsersByGroupId(group.getGroupId());
+		mbThreadLocalService.deleteThreads(
+			group.getGroupId(), MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID);
 
 		// Polls
 
@@ -717,7 +726,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		}
 
 		if (!group.isStagingGroup() &&
-			(group.isOrganization()) || group.isRegularSite()) {
+			(group.isOrganization() || group.isRegularSite())) {
 
 			resourceLocalService.deleteResource(
 				group.getCompanyId(), Group.class.getName(),
@@ -1992,7 +2001,8 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			StringPool.BLANK, friendlyURL);
 
 		if ((classNameId <= 0) || className.equals(Group.class.getName())) {
-			validateName(group.getGroupId(), group.getCompanyId(), name);
+			validateName(
+				group.getGroupId(), group.getCompanyId(), name, group.isSite());
 		}
 		else if (className.equals(Organization.class.getName())) {
 			Organization organization =
@@ -2019,6 +2029,10 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		group.setType(type);
 		group.setFriendlyURL(friendlyURL);
 		group.setActive(active);
+
+		if ((serviceContext != null) && group.isSite()) {
+			group.setExpandoBridgeAttributes(serviceContext);
+		}
 
 		groupPersistence.update(group, false);
 
@@ -2545,10 +2559,10 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			long groupClassNameId = PortalUtil.getClassNameId(Group.class);
 
 			if (((classNameId != groupClassNameId) &&
-				 (!groupIdFriendlyURL.equals(String.valueOf(classPK))) &&
-				 (!PropsValues.USERS_SCREEN_NAME_ALLOW_NUMERIC)) ||
+				 !groupIdFriendlyURL.equals(String.valueOf(classPK)) &&
+				 !PropsValues.USERS_SCREEN_NAME_ALLOW_NUMERIC) ||
 				((classNameId == groupClassNameId) &&
-				 (!groupIdFriendlyURL.equals(String.valueOf(groupId))))) {
+				 !groupIdFriendlyURL.equals(String.valueOf(groupId)))) {
 
 				GroupFriendlyURLException gfurle =
 					new GroupFriendlyURLException(
@@ -2582,7 +2596,8 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		}
 	}
 
-	protected void validateName(long groupId, long companyId, String name)
+	protected void validateName(
+			long groupId, long companyId, String name, boolean site)
 		throws PortalException, SystemException {
 
 		if (Validator.isNull(name) || Validator.isNumber(name) ||
@@ -2600,6 +2615,14 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			}
 		}
 		catch (NoSuchGroupException nsge) {
+		}
+
+		if (site) {
+			Company company = companyLocalService.getCompany(companyId);
+
+			if (name.equals(company.getName())) {
+				throw new DuplicateGroupException();
+			}
 		}
 	}
 

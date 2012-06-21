@@ -91,7 +91,7 @@ public class ManagePortletConsumerHWUTF8Test extends BaseTestCase {
 		selenium.type("//input[@id='_1_WAR_wsrpportlet_name']",
 			RuntimeVariables.replace("WSRP \u4e16\u754c\u60a8\u597d Portlet"));
 		selenium.select("//select[@name='_1_WAR_wsrpportlet_portletHandle']",
-			RuntimeVariables.replace("Hello World"));
+			RuntimeVariables.replace("label=Hello World"));
 		selenium.clickAt("//input[@value='Save']",
 			RuntimeVariables.replace("Save"));
 		selenium.waitForPageToLoad("30000");

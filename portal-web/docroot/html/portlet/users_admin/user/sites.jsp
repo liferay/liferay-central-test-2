@@ -33,7 +33,6 @@ List<Group> groups = (List<Group>)request.getAttribute("user.groups");
 <h3><liferay-ui:message key="sites" /></h3>
 
 <liferay-ui:search-container
-	id='<%= renderResponse.getNamespace() + "groupsSearchContainer" %>'
 	headerNames="name,roles,null"
 >
 	<liferay-ui:search-container-results
@@ -46,6 +45,7 @@ List<Group> groups = (List<Group>)request.getAttribute("user.groups");
 		escapedModel="<%= true %>"
 		keyProperty="groupId"
 		modelVar="group"
+		rowIdProperty="friendlyURL"
 	>
 		<liferay-ui:search-container-column-text
 			name="name"

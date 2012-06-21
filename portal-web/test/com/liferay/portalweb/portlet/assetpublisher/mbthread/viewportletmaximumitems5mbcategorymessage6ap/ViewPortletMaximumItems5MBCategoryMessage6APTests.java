@@ -18,6 +18,14 @@ import com.liferay.portalweb.portal.BaseTestSuite;
 import com.liferay.portalweb.portal.util.TearDownPageTest;
 import com.liferay.portalweb.portlet.assetpublisher.portlet.addportletap.AddPageAPTest;
 import com.liferay.portalweb.portlet.assetpublisher.portlet.addportletap.AddPortletAPTest;
+import com.liferay.portalweb.portlet.messageboards.mbcategory.addmbcategory.AddMBCategoryTest;
+import com.liferay.portalweb.portlet.messageboards.mbthread.postnewmbcategorythread.PostNewMBCategoryThread1Test;
+import com.liferay.portalweb.portlet.messageboards.mbthread.postnewmbcategorythread.PostNewMBCategoryThread2Test;
+import com.liferay.portalweb.portlet.messageboards.mbthread.postnewmbcategorythread.PostNewMBCategoryThread3Test;
+import com.liferay.portalweb.portlet.messageboards.mbthread.postnewmbcategorythread.PostNewMBCategoryThread4Test;
+import com.liferay.portalweb.portlet.messageboards.mbthread.postnewmbcategorythread.PostNewMBCategoryThread5Test;
+import com.liferay.portalweb.portlet.messageboards.mbthread.postnewmbcategorythread.PostNewMBCategoryThread6Test;
+import com.liferay.portalweb.portlet.messageboards.mbthread.postnewmbthread.TearDownMBThreadTest;
 import com.liferay.portalweb.portlet.messageboards.portlet.addportletmb.AddPageMBTest;
 import com.liferay.portalweb.portlet.messageboards.portlet.addportletmb.AddPortletMBTest;
 
@@ -36,16 +44,16 @@ public class ViewPortletMaximumItems5MBCategoryMessage6APTests
 		testSuite.addTestSuite(AddPageMBTest.class);
 		testSuite.addTestSuite(AddPortletMBTest.class);
 		testSuite.addTestSuite(AddMBCategoryTest.class);
-		testSuite.addTestSuite(PostNewMBCategoryThreadMessage1Test.class);
-		testSuite.addTestSuite(PostNewMBCategoryThreadMessage2Test.class);
-		testSuite.addTestSuite(PostNewMBCategoryThreadMessage3Test.class);
-		testSuite.addTestSuite(PostNewMBCategoryThreadMessage4Test.class);
-		testSuite.addTestSuite(PostNewMBCategoryThreadMessage5Test.class);
-		testSuite.addTestSuite(PostNewMBCategoryThreadMessage6Test.class);
+		testSuite.addTestSuite(PostNewMBCategoryThread1Test.class);
+		testSuite.addTestSuite(PostNewMBCategoryThread2Test.class);
+		testSuite.addTestSuite(PostNewMBCategoryThread3Test.class);
+		testSuite.addTestSuite(PostNewMBCategoryThread4Test.class);
+		testSuite.addTestSuite(PostNewMBCategoryThread5Test.class);
+		testSuite.addTestSuite(PostNewMBCategoryThread6Test.class);
 		testSuite.addTestSuite(ViewMBCategoryThreadMessage6APTest.class);
 		testSuite.addTestSuite(ConfigurePortletMaximumItemsToDisplay5Test.class);
 		testSuite.addTestSuite(ViewPortletMaximumItems5MBCategoryMessage6APTest.class);
-		testSuite.addTestSuite(TearDownMBMessageTest.class);
+		testSuite.addTestSuite(TearDownMBThreadTest.class);
 		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;

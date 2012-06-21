@@ -347,6 +347,7 @@ public class ReleasePersistenceImpl extends BasePersistenceImpl<Release>
 		releaseImpl.setBuildNumber(release.getBuildNumber());
 		releaseImpl.setBuildDate(release.getBuildDate());
 		releaseImpl.setVerified(release.isVerified());
+		releaseImpl.setState(release.getState());
 		releaseImpl.setTestString(release.getTestString());
 
 		return releaseImpl;
@@ -719,13 +720,14 @@ public class ReleasePersistenceImpl extends BasePersistenceImpl<Release>
 	 * Removes the release where servletContextName = &#63; from the database.
 	 *
 	 * @param servletContextName the servlet context name
+	 * @return the release that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
-	public void removeByServletContextName(String servletContextName)
+	public Release removeByServletContextName(String servletContextName)
 		throws NoSuchReleaseException, SystemException {
 		Release release = findByServletContextName(servletContextName);
 
-		remove(release);
+		return remove(release);
 	}
 
 	/**

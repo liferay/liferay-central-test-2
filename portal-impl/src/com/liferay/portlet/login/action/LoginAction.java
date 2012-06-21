@@ -151,9 +151,9 @@ public class LoginAction extends PortletAction {
 
 		String portalURL = null;
 
-		if ((PropsValues.COMPANY_SECURITY_AUTH_REQUIRES_HTTPS) &&
-			(!PropsValues.SESSION_ENABLE_PHISHING_PROTECTION) &&
-			(httpsInitial != null) && (!httpsInitial.booleanValue())) {
+		if (PropsValues.COMPANY_SECURITY_AUTH_REQUIRES_HTTPS &&
+			!PropsValues.SESSION_ENABLE_PHISHING_PROTECTION &&
+			(httpsInitial != null) && !httpsInitial.booleanValue()) {
 
 			portalURL = PortalUtil.getPortalURL(request, false);
 		}

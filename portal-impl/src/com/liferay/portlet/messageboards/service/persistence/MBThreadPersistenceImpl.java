@@ -43,6 +43,7 @@ import com.liferay.portal.security.permission.InlineSQLHelperUtil;
 import com.liferay.portal.service.persistence.BatchSessionUtil;
 import com.liferay.portal.service.persistence.LockPersistence;
 import com.liferay.portal.service.persistence.ResourcePersistence;
+import com.liferay.portal.service.persistence.SubscriptionPersistence;
 import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
@@ -7572,13 +7573,14 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 	 * Removes the message boards thread where rootMessageId = &#63; from the database.
 	 *
 	 * @param rootMessageId the root message ID
+	 * @return the message boards thread that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
-	public void removeByRootMessageId(long rootMessageId)
+	public MBThread removeByRootMessageId(long rootMessageId)
 		throws NoSuchThreadException, SystemException {
 		MBThread mbThread = findByRootMessageId(rootMessageId);
 
-		remove(mbThread);
+		return remove(mbThread);
 	}
 
 	/**
@@ -9160,6 +9162,8 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 	protected LockPersistence lockPersistence;
 	@BeanReference(type = ResourcePersistence.class)
 	protected ResourcePersistence resourcePersistence;
+	@BeanReference(type = SubscriptionPersistence.class)
+	protected SubscriptionPersistence subscriptionPersistence;
 	@BeanReference(type = UserPersistence.class)
 	protected UserPersistence userPersistence;
 	@BeanReference(type = WorkflowInstanceLinkPersistence.class)

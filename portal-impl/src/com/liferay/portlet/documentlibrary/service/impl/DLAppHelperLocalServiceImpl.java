@@ -85,7 +85,7 @@ public class DLAppHelperLocalServiceImpl
 
 			WorkflowHandlerRegistryUtil.startWorkflowInstance(
 				dlFileVersion.getCompanyId(), dlFileVersion.getGroupId(),
-				userId, DLFileEntry.class.getName(),
+				userId, DLFileEntryConstants.getClassName(),
 				dlFileVersion.getFileVersionId(), dlFileVersion, serviceContext,
 				workflowContext);
 		}
@@ -94,7 +94,7 @@ public class DLAppHelperLocalServiceImpl
 	}
 
 	public void addFolder(Folder folder, ServiceContext serviceContext)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		if (!isStagingGroup(folder.getGroupId())) {
 			dlSyncLocalService.addSync(
@@ -256,7 +256,7 @@ public class DLAppHelperLocalServiceImpl
 
 		// File rank
 
-		if (userId > 0 && incrementCounter) {
+		if ((userId > 0) && incrementCounter) {
 			dlFileRankLocalService.updateFileRank(
 				fileEntry.getGroupId(), fileEntry.getCompanyId(), userId,
 				fileEntry.getFileEntryId(), new ServiceContext());

@@ -94,7 +94,6 @@ String scopeAvailableFields = ParamUtil.getString(request, "scopeAvailableFields
 
 		<liferay-ui:panel collapsible="<%= true %>" extended="<%= false %>" id="additionalMetadataFields" persistState="<%= true %>" title="additional-metadata-fields">
 			<liferay-ui:search-container
-				id='<%= renderResponse.getNamespace() + "ddmStructuresSearchContainer" %>'
 				headerNames='<%= (fileEntryType == null) ? "name,null" : "name" %>'
 			>
 				<liferay-ui:search-container-results

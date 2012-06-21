@@ -183,7 +183,7 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 
 		int fileEntriesCount = 0;
 
-		if ((status == WorkflowConstants.STATUS_ANY)) {
+		if (status == WorkflowConstants.STATUS_ANY) {
 			fileEntriesCount = dlFileEntryPersistence.countByG_F(
 				groupId, folderId);
 		}
@@ -582,10 +582,6 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 			deleteFolder(curDLFolder);
 		}
 
-		// Folder
-
-		dlFolderPersistence.remove(dlFolder);
-
 		// Resources
 
 		resourceLocalService.deleteResource(
@@ -615,6 +611,10 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 		// App helper
 
 		dlAppHelperLocalService.deleteFolder(new LiferayFolder(dlFolder));
+
+		// Folder
+
+		dlFolderPersistence.remove(dlFolder);
 
 		// Directory
 

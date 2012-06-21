@@ -78,6 +78,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.util.UnicodeProperties;
+import com.liferay.portal.kernel.util.UniqueList;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.QName;
 import com.liferay.portal.model.BaseModel;
@@ -188,7 +189,6 @@ import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.util.Encryptor;
 import com.liferay.util.JS;
 import com.liferay.util.PwdGenerator;
-import com.liferay.util.UniqueList;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -873,6 +873,18 @@ public class PortalImpl implements Portal {
 		return availableLocales;
 	}
 
+	/**
+	 * @deprecated {@link #getAlternateURL(String, ThemeDisplay, Locale)}
+	 */
+	public String getAlternateURL(
+		HttpServletRequest request, String canonicalURL, Locale locale) {
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		return getAlternateURL(canonicalURL, themeDisplay, locale);
+	}
+
 	public String getAlternateURL(
 		String canonicalURL, ThemeDisplay themeDisplay, Locale locale) {
 
@@ -1028,7 +1040,7 @@ public class PortalImpl implements Portal {
 		String[] loginAndPassword = StringUtil.split(
 			credentials, CharPool.COLON);
 
-		String login = loginAndPassword[0].trim();
+		String login = HttpUtil.decodeURL(loginAndPassword[0].trim());
 
 		String password = null;
 
@@ -1057,6 +1069,17 @@ public class PortalImpl implements Portal {
 		}
 
 		return userId;
+	}
+
+	/**
+	 * @deprecated {@link #getCanonicalURL(String, ThemeDisplay, Layout)}
+	 */
+	public String getCanonicalURL(String completeURL, ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
+
+		Layout layout = themeDisplay.getLayout();
+
+		return getCanonicalURL(completeURL, themeDisplay, layout);
 	}
 
 	public String getCanonicalURL(
@@ -1175,7 +1198,7 @@ public class PortalImpl implements Portal {
 				companyId, PropsKeys.CDN_HOST_HTTPS,
 				PropsValues.CDN_HOST_HTTPS);
 		}
-		catch (SystemException e) {
+		catch (SystemException se) {
 		}
 
 		if ((cdnHostHttps == null) || cdnHostHttps.startsWith("${")) {
@@ -1434,7 +1457,7 @@ public class PortalImpl implements Portal {
 		if (Validator.isNull(currentURL)) {
 			currentURL = HttpUtil.getCompleteURL(request);
 
-			if ((Validator.isNotNull(currentURL)) &&
+			if (Validator.isNotNull(currentURL) &&
 				(currentURL.indexOf(_J_SECURITY_CHECK) == -1)) {
 
 				currentURL = currentURL.substring(
@@ -1527,7 +1550,7 @@ public class PortalImpl implements Portal {
 
 			Date date = cal.getTime();
 
-			/*if (timeZone != null &&
+			/*if ((timeZone != null) &&
 				cal.before(CalendarFactoryUtil.getCalendar(timeZone))) {
 
 				throw pe;
@@ -1821,6 +1844,20 @@ public class PortalImpl implements Portal {
 			}
 
 			value = GetterUtil.getLongValues(values);
+		}
+		else if (type == ExpandoColumnConstants.NUMBER) {
+			value = ParamUtil.getNumber(portletRequest, name);
+		}
+		else if (type == ExpandoColumnConstants.NUMBER_ARRAY) {
+			String[] values = portletRequest.getParameterValues(name);
+
+			if (displayType.equals(
+					ExpandoColumnConstants.PROPERTY_DISPLAY_TYPE_TEXT_BOX)) {
+
+				values = StringUtil.splitLines(values[0]);
+			}
+
+			value = GetterUtil.getNumberValues(values);
 		}
 		else if (type == ExpandoColumnConstants.SHORT) {
 			value = ParamUtil.getShort(portletRequest, name);
@@ -2329,9 +2366,9 @@ public class PortalImpl implements Portal {
 			String tempI18nLanguageId = null;
 			String tempI18nPath = null;
 
-			if (((I18nFilter.getLanguageIds().contains(locale.toString())) &&
+			if ((I18nFilter.getLanguageIds().contains(locale.toString()) &&
 				 ((PropsValues.LOCALE_PREPEND_FRIENDLY_URL_STYLE == 1) &&
-				  (!locale.equals(LocaleUtil.getDefault())))) ||
+				  !locale.equals(LocaleUtil.getDefault()))) ||
 				(PropsValues.LOCALE_PREPEND_FRIENDLY_URL_STYLE == 2)) {
 
 				tempI18nLanguageId = locale.toString();
@@ -2481,7 +2518,7 @@ public class PortalImpl implements Portal {
 				themeDisplay.getLayout().getLayoutSet().getLayoutSetId();
 
 			if ((layoutSet.getLayoutSetId() != curLayoutSetId) ||
-				(portalURL.startsWith(themeDisplay.getURLPortal()))) {
+				portalURL.startsWith(themeDisplay.getURLPortal())) {
 
 				String layoutSetFriendlyURL = StringPool.BLANK;
 
@@ -3748,9 +3785,7 @@ public class PortalImpl implements Portal {
 
 		// Browser id
 
-		if ((parameterMap == null) ||
-			(!parameterMap.containsKey("browserId"))) {
-
+		if ((parameterMap == null) || !parameterMap.containsKey("browserId")) {
 			sb.append("&browserId=");
 			sb.append(BrowserSnifferUtil.getBrowserId(request));
 		}
@@ -3775,7 +3810,7 @@ public class PortalImpl implements Portal {
 		// Minifier
 
 		if ((parameterMap == null) ||
-			(!parameterMap.containsKey("minifierType"))) {
+			!parameterMap.containsKey("minifierType")) {
 
 			String minifierType = StringPool.BLANK;
 
@@ -3870,6 +3905,37 @@ public class PortalImpl implements Portal {
 
 	public String[] getSystemSiteRoles() {
 		return _allSystemSiteRoles;
+	}
+
+	public String getUniqueElementId(
+		HttpServletRequest request, String elementId) {
+
+		String uniqueElementId = elementId;
+
+		Set<String> uniqueElementIds = (Set<String>)request.getAttribute(
+			WebKeys.UNIQUE_ELEMENT_IDS);
+
+		if (uniqueElementIds == null) {
+			uniqueElementIds = new HashSet<String>();
+
+			request.setAttribute(WebKeys.UNIQUE_ELEMENT_IDS, uniqueElementIds);
+		}
+		else {
+			int i = 1;
+
+			while (uniqueElementIds.contains(uniqueElementId)) {
+				uniqueElementId = elementId.concat(StringPool.UNDERLINE).concat(
+					String.valueOf(i));
+			}
+		}
+
+		uniqueElementIds.add(uniqueElementId);
+
+		return uniqueElementId;
+	}
+
+	public String getUniqueElementId(PortletRequest request, String elementId) {
+		return getUniqueElementId(getHttpServletRequest(request), elementId);
 	}
 
 	public UploadPortletRequest getUploadPortletRequest(
@@ -3980,7 +4046,7 @@ public class PortalImpl implements Portal {
 		if (x != -1) {
 			int y = url.lastIndexOf(CharPool.SLASH);
 
-			if (x + 1 == y) {
+			if ((x + 1) == y) {
 				sb.append(StringPool.SLASH);
 			}
 		}
@@ -4075,7 +4141,7 @@ public class PortalImpl implements Portal {
 
 		if ((!PropsValues.PORTAL_JAAS_ENABLE &&
 			 PropsValues.PORTAL_IMPERSONATION_ENABLE) ||
-			(alwaysAllowDoAsUser)) {
+			alwaysAllowDoAsUser) {
 
 			String doAsUserIdString = ParamUtil.getString(
 				request, "doAsUserId");
@@ -4273,8 +4339,7 @@ public class PortalImpl implements Portal {
 		String layoutFriendlyURL = null;
 
 		if ((pos != -1) && ((pos + 1) != friendlyURL.length())) {
-			layoutFriendlyURL = friendlyURL.substring(
-				pos, friendlyURL.length());
+			layoutFriendlyURL = friendlyURL.substring(pos);
 		}
 
 		if (Validator.isNull(layoutFriendlyURL)) {
@@ -4539,7 +4604,7 @@ public class PortalImpl implements Portal {
 				companyId, PropsKeys.CDN_DYNAMIC_RESOURCES_ENABLED,
 				PropsValues.CDN_DYNAMIC_RESOURCES_ENABLED);
 		}
-		catch (SystemException e) {
+		catch (SystemException se) {
 		}
 
 		return PropsValues.CDN_DYNAMIC_RESOURCES_ENABLED;
@@ -4796,9 +4861,9 @@ public class PortalImpl implements Portal {
 
 		boolean secure = false;
 
-		if ((PropsValues.COMPANY_SECURITY_AUTH_REQUIRES_HTTPS) &&
-			(!PropsValues.SESSION_ENABLE_PHISHING_PROTECTION) &&
-			(httpsInitial != null) && (!httpsInitial.booleanValue())) {
+		if (PropsValues.COMPANY_SECURITY_AUTH_REQUIRES_HTTPS &&
+			!PropsValues.SESSION_ENABLE_PHISHING_PROTECTION &&
+			(httpsInitial != null) && !httpsInitial.booleanValue()) {
 
 			secure = false;
 		}
@@ -5419,8 +5484,7 @@ public class PortalImpl implements Portal {
 			if (pos != -1) {
 				prefix += redirectPath.substring(0, pos);
 
-				String suffix = redirectPath.substring(
-					pos + oldPath.length(), redirectPath.length());
+				String suffix = redirectPath.substring(pos + oldPath.length());
 
 				redirect = prefix + newPath + suffix;
 			}
@@ -5443,9 +5507,7 @@ public class PortalImpl implements Portal {
 		LayoutTypePortlet layoutType =
 			(LayoutTypePortlet)layout.getLayoutType();
 
-		if ((windowState == null) ||
-			(Validator.isNull(windowState.toString()))) {
-
+		if ((windowState == null) || Validator.isNull(windowState.toString())) {
 			if (layoutType.hasStateMaxPortletId(portletId)) {
 				windowState = WindowState.MAXIMIZED;
 			}

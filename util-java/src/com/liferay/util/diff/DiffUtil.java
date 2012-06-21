@@ -195,7 +195,7 @@ public class DiffUtil {
 
 		List<String> changedLines = new ArrayList<String>();
 
-		if (margin == 0 || startPos == 0) {
+		if ((margin == 0) || (startPos == 0)) {
 			return changedLines;
 		}
 
@@ -345,7 +345,7 @@ public class DiffUtil {
 	private static int _checkOverlapping(
 		List<DiffResult> results, int startPos, int margin) {
 
-		if (results.size() == 0 || (startPos - margin) < 0) {
+		if ((results.size() == 0) || ((startPos - margin) < 0)) {
 			return margin;
 		}
 
@@ -361,7 +361,7 @@ public class DiffUtil {
 		int currentChangedLine = startPos - margin;
 
 		if ((lastDiff.getChangedLines().size() == 1) &&
-			(lastDiff.getChangedLines().get(0).equals(CONTEXT_LINE))) {
+			lastDiff.getChangedLines().get(0).equals(CONTEXT_LINE)) {
 
 			currentChangedLine = currentChangedLine + 1;
 		}

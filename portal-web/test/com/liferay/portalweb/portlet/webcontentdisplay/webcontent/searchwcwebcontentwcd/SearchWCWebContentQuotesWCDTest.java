@@ -48,15 +48,15 @@ public class SearchWCWebContentQuotesWCDTest extends BaseTestCase {
 		}
 
 		selenium.type("//input[@name='_86_keywords']",
-			RuntimeVariables.replace("\"WCD Web Content Title\""));
+			RuntimeVariables.replace("\"WC WebContent Title\""));
 		selenium.clickAt("//input[@value='Search']",
 			RuntimeVariables.replace("Search"));
 		selenium.waitForPageToLoad("30000");
 		loadRequiredJavaScriptModules();
-		assertEquals(RuntimeVariables.replace("WCD Web Content Title"),
-			selenium.getText("//td[contains(.,'WCD Web Content Title')]/a"));
+		assertEquals(RuntimeVariables.replace("WC WebContent Title"),
+			selenium.getText("//td[contains(.,'WC WebContent Title')]/a"));
 		selenium.type("//input[@name='_86_keywords']",
-			RuntimeVariables.replace("\"WCD1 Web1 Content1 Title1\""));
+			RuntimeVariables.replace("\"WC1 WebContent1 Title1\""));
 		selenium.clickAt("//input[@value='Search']",
 			RuntimeVariables.replace("Search"));
 		selenium.waitForPageToLoad("30000");
@@ -64,6 +64,6 @@ public class SearchWCWebContentQuotesWCDTest extends BaseTestCase {
 		assertEquals(RuntimeVariables.replace("No Web Content was found."),
 			selenium.getText("xPath=(//div[@class='portlet-msg-info'])[2]"));
 		assertFalse(selenium.isElementPresent(
-				"//td[contains(.,'WCD Web Content Test')]/a"));
+				"//td[contains(.,'WC WebContent Title')]/a"));
 	}
 }

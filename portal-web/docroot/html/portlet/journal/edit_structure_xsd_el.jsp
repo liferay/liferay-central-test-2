@@ -60,12 +60,12 @@ if (MathUtil.isEven(count.getValue())) {
 			</c:if>
 
 			<td>
-				<input id="<portlet:namespace />structure_el<%= count.getValue() %>_name" tabindex="<%= tabIndex.getValue() %>" type="text" size="20" value="<%= elName %>" />
+				<input id="<portlet:namespace />structure_el<%= count.getValue() %>_name" size="20" tabindex="<%= tabIndex.getValue() %>" type="text" value="<%= elName %>" />
 			</td>
 			<td>
 				<c:choose>
 					<c:when test='<%= parentElType.equals("list") || parentElType.equals("multi-list") %>'>
-						<input id="<portlet:namespace />structure_el<%= count.getValue() %>_type" tabindex="<%= tabIndex.getValue() %>" type="text" size="20" value="<%= elType %>" />
+						<input id="<portlet:namespace />structure_el<%= count.getValue() %>_type" size="20" tabindex="<%= tabIndex.getValue() %>" type="text" value="<%= elType %>" />
 					</c:when>
 					<c:otherwise>
 						<aui:column>
@@ -80,6 +80,7 @@ if (MathUtil.isEven(count.getValue())) {
 								<option <%= elType.equals("list") ? "selected" : "" %> value="list"><liferay-ui:message key="selection-list" /></option>
 								<option <%= elType.equals("multi-list") ? "selected" : "" %> value="multi-list"><liferay-ui:message key="multi-selection-list" /></option>
 								<option <%= elType.equals("link_to_layout") ? "selected" : "" %> value="link_to_layout"><liferay-ui:message key="link-to-layout" /></option>
+								<option <%= elType.equals("selection_break") ? "selected" : "" %> value="selection_break"><liferay-ui:message key="selection-break" /></option>
 							</select>
 						</aui:column>
 

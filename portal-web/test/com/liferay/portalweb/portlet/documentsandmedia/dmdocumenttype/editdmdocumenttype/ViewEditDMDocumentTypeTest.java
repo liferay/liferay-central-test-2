@@ -41,7 +41,7 @@ public class ViewEditDMDocumentTypeTest extends BaseTestCase {
 
 			try {
 				if (selenium.isVisible(
-							"//div[@class='lfr-component lfr-menu-list']")) {
+							"//div[@class='lfr-component lfr-menu-list']/ul/li/a[contains(.,'DM DocumentType Name')]")) {
 					break;
 				}
 			}
@@ -95,7 +95,8 @@ public class ViewEditDMDocumentTypeTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("//iframe")) {
+				if (selenium.isVisible(
+							"//iframe[@id='_20_openFileEntryTypeView']")) {
 					break;
 				}
 			}
@@ -105,7 +106,7 @@ public class ViewEditDMDocumentTypeTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.selectFrame("//iframe");
+		selenium.selectFrame("//iframe[@id='_20_openFileEntryTypeView']");
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -129,8 +130,27 @@ public class ViewEditDMDocumentTypeTest extends BaseTestCase {
 			RuntimeVariables.replace("Search"));
 		selenium.waitForPageToLoad("30000");
 		loadRequiredJavaScriptModules();
+
+		for (int second = 0;; second++) {
+			if (second >= 90) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible(
+							"//tr[contains(.,'DM DocumentType Name Edit')]/td[1]")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		assertEquals(RuntimeVariables.replace("DM DocumentType Name Edit"),
-			selenium.getText("//tr[contains(.,'DM DocumentType Name')]/td"));
+			selenium.getText(
+				"//tr[contains(.,'DM DocumentType Name Edit')]/td[1]"));
 		selenium.selectFrame("relative=top");
 	}
 }

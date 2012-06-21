@@ -6,6 +6,8 @@
 	var isArray = Lang.isArray;
 	var arrayIndexOf = AArray.indexOf;
 
+	var EVENT_CLICK = 'click';
+
 	var htmlEscapedValues = [];
 	var htmlUnescapedValues = [];
 
@@ -546,8 +548,6 @@
 			function(name) {
 				var buffer = [];
 
-				name = unescape(escape(name).replace(/%u/g, '\\u'));
-
 				for (var i = 0; i < name.length; i++) {
 					buffer[i] = name.charCodeAt(i);
 				}
@@ -674,35 +674,51 @@
 		Util,
 		'afterIframeLoaded',
 		function(event) {
-			var iframeBody = A.one(event.doc.body);
+			var iframeDocument = A.one(event.doc);
 
-			iframeBody.addClass('aui-dialog-iframe-popup');
-
-			var closeButton = iframeBody.one('.aui-button-input-cancel');
-			var hideLink = iframeBody.one('.lfr-hide-dialog');
+			var iframeBody = iframeDocument.one('body');
 
 			var dialog = event.dialog;
 
-			if (closeButton) {
-				closeButton.on('click', dialog.close, dialog);
-			}
+			iframeBody.addClass('aui-dialog-iframe-popup');
 
-			if (hideLink) {
-				hideLink.on(
-					'click',
-					function(){
-						dialog.set('visible', false, SRC_HIDE_LINK);
-					}
-				);
-			}
+			iframeBody.delegate(
+				EVENT_CLICK,
+				function() {
+					iframeDocument.purge(true);
+
+					dialog.close();
+				},
+				'.aui-button-input-cancel'
+			);
+
+			iframeBody.delegate(
+				'submit',
+				function(event) {
+					iframeDocument.purge(true);
+				},
+				'form'
+			);
+
+			iframeBody.delegate(
+				EVENT_CLICK,
+				function(){
+					dialog.set('visible', false, SRC_HIDE_LINK);
+
+					iframeDocument.purge(true);
+				},
+				'.lfr-hide-dialog'
+			);
 
 			var rolesSearchContainer = iframeBody.one('#rolesSearchContainerSearchContainer');
 
 			if (rolesSearchContainer) {
 				rolesSearchContainer.delegate(
-					'click',
+					EVENT_CLICK,
 					function(event){
 						event.preventDefault();
+
+						iframeDocument.purge(true);
 
 						submitForm(document.hrefFm, event.currentTarget.attr('href'));
 					},
@@ -925,7 +941,7 @@
 				}
 
 				checkBox.on(
-					'click',
+					EVENT_CLICK,
 					function() {
 						toggleBox.set('disabled', !toggleBox.get('disabled'));
 					}
@@ -959,7 +975,7 @@
 			var interacting = false;
 
 			var clickHandle = A.getDoc().on(
-				'click',
+				EVENT_CLICK,
 				function(event) {
 					interacting = true;
 
@@ -1031,7 +1047,7 @@
 					delete options.button;
 
 					editorButton.on(
-						'click',
+						EVENT_CLICK,
 						function(event) {
 							Util.openWindow(options);
 						}
@@ -1162,7 +1178,7 @@
 					title.setData('portletTitleEditOptions', options);
 
 					title.on(
-						'click',
+						EVENT_CLICK,
 						function(event) {
 							var editable = Util._getEditableInstance(title);
 
@@ -1518,7 +1534,7 @@
 				}
 
 				checkBox.on(
-					'click',
+					EVENT_CLICK,
 					function() {
 						toggleBox.toggle();
 					}
@@ -1550,7 +1566,7 @@
 				docBody.addClass(currentClass);
 
 				trigger.on(
-					'click',
+					EVENT_CLICK,
 					function(event) {
 						docBody.toggleClass(visibleClass).toggleClass(hiddenClass);
 

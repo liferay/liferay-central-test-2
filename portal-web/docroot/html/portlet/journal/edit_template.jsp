@@ -39,26 +39,20 @@ String newTemplateId = ParamUtil.getString(request, "newTemplateId");
 
 String structureId = BeanParamUtil.getString(template, request, "structureId");
 
+long structureGroupId = 0;
 String structureName = StringPool.BLANK;
 
 if (Validator.isNotNull(structureId)) {
 	JournalStructure structure = null;
 
 	try {
-		structure = JournalStructureLocalServiceUtil.getStructure(groupId, structureId);
+		structure = JournalStructureLocalServiceUtil.getStructure(groupId, structureId, true);
 	}
 	catch (NoSuchStructureException nsse) {
 	}
 
-	if ((structure == null) && (groupId != themeDisplay.getCompanyGroupId())) {
-		try {
-			structure = JournalStructureLocalServiceUtil.getStructure(themeDisplay.getCompanyGroupId(), structureId);
-		}
-		catch (NoSuchStructureException nsse) {
-		}
-	}
-
 	if (structure != null) {
+		structureGroupId = structure.getGroupId();
 		structureName = structure.getName(locale);
 	}
 }
@@ -150,7 +144,7 @@ if (template == null) {
 						<aui:input name="autoTemplateId" type="hidden" value="<%= true %>" />
 					</c:when>
 					<c:otherwise>
-						<aui:input cssClass="lfr-input-text-container" label="id" name="newTemplateId" field="templateId" fieldParam="newTemplateId" value="<%= newTemplateId %>" />
+						<aui:input cssClass="lfr-input-text-container" field="templateId" fieldParam="newTemplateId" label="id" name="newTemplateId" value="<%= newTemplateId %>" />
 
 						<aui:input label="autogenerate-id" name="autoTemplateId" type="checkbox" />
 					</c:otherwise>
@@ -189,11 +183,11 @@ if (template == null) {
 					<portlet:renderURL var="editStructureURL">
 						<portlet:param name="struts_action" value="/journal/edit_structure" />
 						<portlet:param name="redirect" value="<%= currentURL %>" />
-						<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
+						<portlet:param name="groupId" value="<%= String.valueOf(structureGroupId) %>" />
 						<portlet:param name="structureId" value="<%= structureId %>" />
 					</portlet:renderURL>
 
-					<aui:a href="<%= editStructureURL %>" label="<%= HtmlUtil.escape(structureName) %>" id="structureName" />
+					<aui:a href="<%= editStructureURL %>" id="structureName" label="<%= HtmlUtil.escape(structureName) %>" />
 				</c:when>
 				<c:otherwise>
 					<aui:a href="" id="structureName" />
@@ -251,9 +245,23 @@ if (template == null) {
 	</aui:fieldset>
 
 	<aui:button-row>
-		<aui:button type="submit" />
 
-		<aui:button onClick='<%= renderResponse.getNamespace() + "saveAndContinueTemplate();" %>' value="save-and-continue" />
+		<%
+		boolean hasSavePermission = false;
+
+		if (template != null) {
+			hasSavePermission = JournalTemplatePermission.contains(permissionChecker, template, ActionKeys.UPDATE);
+		}
+		else {
+			hasSavePermission = JournalPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_TEMPLATE);
+		}
+		%>
+
+		<c:if test="<%= hasSavePermission %>">
+			<aui:button type="submit" />
+
+			<aui:button onClick='<%= renderResponse.getNamespace() + "saveAndContinueTemplate();" %>' value="save-and-continue" />
+		</c:if>
 
 		<aui:button href="<%= redirect %>" type="cancel" />
 	</aui:button-row>
@@ -275,6 +283,7 @@ if (template == null) {
 				dialog: {
 					width: 680
 				},
+				id: '<portlet:namespace />structureSelector',
 				title: '<%= UnicodeLanguageUtil.get(pageContext, "structure") %>',
 				uri: '<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/journal/select_structure" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /></portlet:renderURL>'
 			}

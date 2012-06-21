@@ -47,31 +47,39 @@ String headerTitle = LanguageUtil.get(pageContext, workflowTask.getName());
 
 headerTitle = headerTitle.concat(StringPool.COLON + StringPool.SPACE + workflowHandler.getTitle(classPK, locale));
 
-PortletURL editPortletURL = workflowHandler.getURLEdit(classPK, liferayPortletRequest, liferayPortletResponse);
-
-PortletURL viewFullContentURL = renderResponse.createRenderURL();
-
-viewFullContentURL.setParameter("struts_action", "/workflow_tasks/view_content");
-viewFullContentURL.setParameter("redirect", currentURL);
-
-if (assetRendererFactory != null) {
-	viewFullContentURL.setParameter("type", assetRendererFactory.getType());
-}
-
-if (assetEntry != null) {
-	viewFullContentURL.setParameter("assetEntryId", String.valueOf(assetEntry.getEntryId()));
-	viewFullContentURL.setParameter("assetEntryVersionId", String.valueOf(classPK));
-}
-
 boolean showEditURL = false;
 
 if ((workflowTask.getAssigneeUserId() == user.getUserId()) && !workflowTask.isCompleted()) {
 	showEditURL = true;
 }
 
-viewFullContentURL.setParameter("showEditURL", String.valueOf(showEditURL));
+PortletURL editPortletURL = workflowHandler.getURLEdit(classPK, liferayPortletRequest, liferayPortletResponse);
 
-viewFullContentURL.setParameter("workflowAssetPreview", Boolean.TRUE.toString());
+String viewFullContentURLString = null;
+
+if (assetRenderer.isPreviewInContext()) {
+	viewFullContentURLString = assetRenderer.getURLViewInContext((LiferayPortletRequest)renderRequest, (LiferayPortletResponse)renderResponse, null);
+}
+else {
+	PortletURL viewFullContentURL = renderResponse.createRenderURL();
+
+	viewFullContentURL.setParameter("struts_action", "/workflow_tasks/view_content");
+	viewFullContentURL.setParameter("redirect", currentURL);
+
+	if (assetEntry != null) {
+		viewFullContentURL.setParameter("assetEntryId", String.valueOf(assetEntry.getEntryId()));
+		viewFullContentURL.setParameter("assetEntryVersionId", String.valueOf(classPK));
+	}
+
+	if (assetRendererFactory != null) {
+		viewFullContentURL.setParameter("type", assetRendererFactory.getType());
+	}
+
+	viewFullContentURL.setParameter("showEditURL", String.valueOf(showEditURL));
+	viewFullContentURL.setParameter("workflowAssetPreview", Boolean.TRUE.toString());
+
+	viewFullContentURLString = viewFullContentURL.toString();
+}
 
 request.setAttribute(WebKeys.WORKFLOW_ASSET_PREVIEW, Boolean.TRUE);
 %>
@@ -186,7 +194,7 @@ request.setAttribute(WebKeys.WORKFLOW_ASSET_PREVIEW, Boolean.TRUE);
 					<div class="task-content-actions">
 						<liferay-ui:icon-list>
 							<c:if test="<%= assetRenderer.hasViewPermission(permissionChecker) %>">
-								<liferay-ui:icon image="view" method="get" url="<%= viewFullContentURL.toString() %>" />
+								<liferay-ui:icon image="view" method="get" target='<%= assetRenderer.isPreviewInContext() ? "_blank" : StringPool.BLANK %>' url="<%= viewFullContentURLString %>" />
 							</c:if>
 
 							<c:if test="<%= editPortletURL != null %>">
@@ -207,7 +215,7 @@ request.setAttribute(WebKeys.WORKFLOW_ASSET_PREVIEW, Boolean.TRUE);
 									<c:when test="<%= assetRenderer.hasEditPermission(permissionChecker) && showEditURL %>">
 
 										<%
-										String taglibEditURL = "javascript:Liferay.Util.openWindow({dialog: {width: 960}, id: '" + renderResponse.getNamespace() + "', title: '" + LanguageUtil.format(pageContext, "edit-x", HtmlUtil.escape(assetRenderer.getTitle(locale))) + "', uri:'" + HtmlUtil.escapeURL(editPortletURLString) + "'});";
+										String taglibEditURL = "javascript:Liferay.Util.openWindow({dialog: {width: 960}, id: '" + renderResponse.getNamespace() + "editAsset', title: '" + LanguageUtil.format(pageContext, "edit-x", HtmlUtil.escape(assetRenderer.getTitle(locale))) + "', uri:'" + HtmlUtil.escapeURL(editPortletURLString) + "'});";
 										%>
 
 										<liferay-ui:icon image="edit" url="<%= taglibEditURL %>" />
@@ -221,7 +229,7 @@ request.setAttribute(WebKeys.WORKFLOW_ASSET_PREVIEW, Boolean.TRUE);
 					</div>
 
 					<h3 class="task-content-title">
-						<img src="<%= workflowHandler.getIconPath(liferayPortletRequest) %>" alt="" /> <%= HtmlUtil.escape(workflowHandler.getTitle(classPK, locale)) %>
+						<img alt="" src="<%= workflowHandler.getIconPath(liferayPortletRequest) %>" /> <%= HtmlUtil.escape(workflowHandler.getTitle(classPK, locale)) %>
 					</h3>
 
 					<%

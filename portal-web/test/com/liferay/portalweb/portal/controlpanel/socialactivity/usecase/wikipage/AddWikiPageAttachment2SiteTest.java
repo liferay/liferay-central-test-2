@@ -104,9 +104,8 @@ public class AddWikiPageAttachment2SiteTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.type("//input[@id='_36_file1']",
-			RuntimeVariables.replace(
-				"L:\\private\\6.1.x-portal\\portal-web\\test\\com\\liferay\\portalweb\\portal\\controlpanel\\socialactivity\\usecase\\wikipage\\dependencies\\Document_2.jpg"));
+		selenium.uploadCommonFile("//input[@id='_36_file1']",
+			RuntimeVariables.replace("Document_2.jpg"));
 		selenium.clickAt("//input[@value='Save']",
 			RuntimeVariables.replace("Save"));
 		selenium.waitForPageToLoad("30000");

@@ -72,8 +72,8 @@ public class ImportDMLARTest extends BaseTestCase {
 		loadRequiredJavaScriptModules();
 		Thread.sleep(5000);
 		assertEquals(RuntimeVariables.replace("Options"),
-			selenium.getText("//ul[@id='bbln_menu']/li/strong/a"));
-		selenium.clickAt("//ul[@id='bbln_menu']/li/strong/a",
+			selenium.getText("//a[@id='_20_bbln_menuButton']"));
+		selenium.clickAt("//a[@id='_20_bbln_menuButton']",
 			RuntimeVariables.replace("Options"));
 		Thread.sleep(5000);
 

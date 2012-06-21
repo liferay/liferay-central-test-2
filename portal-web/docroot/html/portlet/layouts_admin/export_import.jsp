@@ -23,9 +23,16 @@ String redirectWindowState = ParamUtil.getString(request, "redirectWindowState")
 
 String cmd = ParamUtil.getString(request, Constants.CMD, Constants.EXPORT);
 
-Group group = (Group)request.getAttribute(WebKeys.GROUP);
-
 long groupId = ParamUtil.getLong(request, "groupId");
+
+Group group = null;
+
+if (groupId > 0) {
+	group = GroupLocalServiceUtil.getGroup(groupId);
+}
+else {
+	group = (Group)request.getAttribute(WebKeys.GROUP);
+}
 
 Group liveGroup = group;
 
@@ -33,7 +40,7 @@ if (group.isStagingGroup()) {
 	liveGroup = group.getLiveGroup();
 }
 
-long liveGroupId = ParamUtil.getLong(request, "liveGroupId");
+long liveGroupId = ParamUtil.getLong(request, "liveGroupId", liveGroup.getGroupId());
 
 boolean privateLayout = ParamUtil.getBoolean(request, "privateLayout");
 long[] layoutIds = ParamUtil.getLongValues(request, "layoutIds");
@@ -94,6 +101,36 @@ portletsList = ListUtil.sort(portletsList, new PortletTitleComparator(applicatio
 			<liferay-ui:error exception="<%= LARTypeException.class %>" message="please-import-a-lar-file-of-the-correct-type" />
 			<liferay-ui:error exception="<%= LayoutImportException.class %>" message="an-unexpected-error-occurred-while-importing-your-file" />
 
+			<liferay-ui:error exception="<%= LayoutPrototypeException.class %>">
+
+				<%
+				LayoutPrototypeException lpe = (LayoutPrototypeException)errorException;
+				%>
+
+				<liferay-ui:message key="the-lar-file-could-not-be-imported-because-it-requires-page-templates-or-site-templates-that-could-not-be-found.-please-import-the-following-templates-manually" />
+
+				<ul>
+
+					<%
+					List<Tuple> missingLayoutPrototypes = lpe.getMissingLayoutPrototypes();
+
+					for (Tuple missingLayoutPrototype : missingLayoutPrototypes) {
+						String layoutPrototypeClassName = (String)missingLayoutPrototype.getObject(0);
+						String layoutPrototypeUuid = (String)missingLayoutPrototype.getObject(1);
+						String layoutPrototypeName = (String)missingLayoutPrototype.getObject(2);
+					%>
+
+						<li>
+							<%= ResourceActionsUtil.getModelResource(locale, layoutPrototypeClassName) %>: <strong><%= layoutPrototypeName %></strong> (<%= layoutPrototypeUuid %>)
+						</li>
+
+					<%
+					}
+					%>
+
+				</ul>
+			</liferay-ui:error>
+
 			<c:choose>
 				<c:when test="<%= (layout.getGroupId() != groupId) || (layout.isPrivateLayout() != privateLayout) %>">
 					<%@ include file="/html/portlet/layouts_admin/export_import_options.jspf" %>
@@ -142,6 +179,7 @@ portletsList = ListUtil.sort(portletsList, new PortletTitleComparator(applicatio
 						<portlet:param name="groupId" value="<%= String.valueOf(liveGroupId) %>" />
 						<portlet:param name="privateLayout" value="<%= String.valueOf(privateLayout) %>" />
 						<portlet:param name="layoutIds" value="<%= StringUtil.merge(layoutIds) %>" />
+						<portlet:param name="exportLAR" value="<%= Boolean.TRUE.toString() %>" />
 					</portlet:actionURL>
 
 					submitForm(form, '<%= exportPagesURL + "&etag=0&strip=0" %>', false);

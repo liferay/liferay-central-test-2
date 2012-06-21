@@ -31,8 +31,8 @@ public class OrganizationEmailAddressTestPlan extends BaseTestSuite {
 		TestSuite testSuite = new TestSuite();
 
 		testSuite.addTest(AddOrganizationEmailAddressTests.suite());
-		testSuite.addTest(AddOrganizationEmailAddressInvalidTests.suite());
 		testSuite.addTest(AddOrganizationEmailAddressesTests.suite());
+		testSuite.addTest(AddOrganizationEmailAddressInvalidTests.suite());
 
 		return testSuite;
 	}

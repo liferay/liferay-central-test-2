@@ -30,8 +30,8 @@ public class ViewDeleteDMDocumentTypeTest extends BaseTestCase {
 		loadRequiredJavaScriptModules();
 		Thread.sleep(5000);
 		assertEquals(RuntimeVariables.replace("Add"),
-			selenium.getText("//span[@title='Add']/ul/li/strong/a/span"));
-		selenium.clickAt("//span[@title='Add']/ul/li/strong/a/span",
+			selenium.getText("//span[@title='Add']/ul/li/strong/a"));
+		selenium.clickAt("//span[@title='Add']/ul/li/strong/a",
 			RuntimeVariables.replace("Add"));
 
 		for (int second = 0;; second++) {
@@ -94,7 +94,8 @@ public class ViewDeleteDMDocumentTypeTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isVisible("//iframe")) {
+				if (selenium.isVisible(
+							"//iframe[@id='_20_openFileEntryTypeView']")) {
 					break;
 				}
 			}
@@ -104,7 +105,7 @@ public class ViewDeleteDMDocumentTypeTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.selectFrame("//iframe");
+		selenium.selectFrame("//iframe[@id='_20_openFileEntryTypeView']");
 
 		for (int second = 0;; second++) {
 			if (second >= 90) {
@@ -130,8 +131,7 @@ public class ViewDeleteDMDocumentTypeTest extends BaseTestCase {
 		loadRequiredJavaScriptModules();
 		assertFalse(selenium.isTextPresent("DM DocumentType Name"));
 		assertEquals(RuntimeVariables.replace("There are no results."),
-			selenium.getText(
-				"//div[@class='portlet-body']/div[@class='portlet-msg-info']"));
+			selenium.getText("//div[@class='portlet-msg-info']"));
 		selenium.selectFrame("relative=top");
 	}
 }

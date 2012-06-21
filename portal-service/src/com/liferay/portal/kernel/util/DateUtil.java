@@ -122,19 +122,42 @@ public class DateUtil {
 		return dateFormat.format(date);
 	}
 
+	public static int getDaysBetween(Date date1, Date date2) {
+		return getDaysBetween(date1, date2, null);
+	}
+
 	public static int getDaysBetween(
-		Date startDate, Date endDate, TimeZone timeZone) {
+		Date date1, Date date2, TimeZone timeZone) {
 
-		int offset = timeZone.getRawOffset();
+		if (date1.after(date2)) {
+			Date tempDate = date1;
 
-		Calendar startCal = new GregorianCalendar(timeZone);
+			date1 = date2;
+			date2 = tempDate;
+		}
 
-		startCal.setTime(startDate);
+		Calendar startCal = null;
+		Calendar endCal = null;
+
+		int offset = 0;
+
+		if (timeZone == null) {
+			startCal = new GregorianCalendar();
+			endCal = new GregorianCalendar();
+		}
+		else {
+			startCal = new GregorianCalendar(timeZone);
+			endCal = new GregorianCalendar(timeZone);
+
+			offset = timeZone.getRawOffset();
+		}
+
+		startCal.setTime(date1);
+
 		startCal.add(Calendar.MILLISECOND, offset);
 
-		Calendar endCal = new GregorianCalendar(timeZone);
+		endCal.setTime(date2);
 
-		endCal.setTime(endDate);
 		endCal.add(Calendar.MILLISECOND, offset);
 
 		int daysBetween = 0;

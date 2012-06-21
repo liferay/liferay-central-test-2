@@ -249,8 +249,7 @@ public interface InlineSQLHelper {
 	 * @param  userIdField the name of the column containing  the resource
 	 *         owner's primary key (optionally <code>null</code>)
 	 * @param  groupIdField the name of the column containing the resource's
-	 *         groupId
-	 *         (optionally <code>null</code>)
+	 *         group ID (optionally <code>null</code>)
 	 * @param  groupIds the primary keys of the groups containing the resources
 	 *         (optionally <code>null</code>)
 	 * @param  bridgeJoin an additional join clause to insert before the

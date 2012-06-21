@@ -56,7 +56,7 @@ AssetEntry assetEntry = (AssetEntry)request.getAttribute("view_entry_content.jsp
 				</div>
 			</div>
 
-			<portlet:renderURL windowState="<%= WindowState.NORMAL.toString() %>" var="bookmarkURL">
+			<portlet:renderURL var="bookmarkURL" windowState="<%= WindowState.NORMAL.toString() %>">
 				<portlet:param name="struts_action" value="/blogs/view_entry" />
 				<portlet:param name="urlTitle" value="<%= entry.getUrlTitle() %>" />
 			</portlet:renderURL>
@@ -142,6 +142,9 @@ AssetEntry assetEntry = (AssetEntry)request.getAttribute("view_entry_content.jsp
 
 							if (Validator.isNotNull(entry.getSmallImageURL())) {
 								src = entry.getSmallImageURL();
+							}
+							else {
+								src = themeDisplay.getPathImage() + "/blogs/article?img_id=" + entry.getSmallImageId() + "&t=" + WebServerServletTokenUtil.getToken(entry.getSmallImageId());
 							}
 							%>
 

@@ -73,7 +73,7 @@ public class BookmarksEntryAssetRenderer extends BaseAssetRenderer {
 		portletURL.setParameter("struts_action", "/bookmarks/edit_entry");
 		portletURL.setParameter(
 			"folderId", String.valueOf(_entry.getFolderId()));
- 		portletURL.setParameter("entryId", String.valueOf(_entry.getEntryId()));
+		portletURL.setParameter("entryId", String.valueOf(_entry.getEntryId()));
 
 		return portletURL;
 	}
@@ -91,6 +91,10 @@ public class BookmarksEntryAssetRenderer extends BaseAssetRenderer {
 
 	public long getUserId() {
 		return _entry.getUserId();
+	}
+
+	public String getUserName() {
+		return _entry.getUserName();
 	}
 
 	public String getUuid() {

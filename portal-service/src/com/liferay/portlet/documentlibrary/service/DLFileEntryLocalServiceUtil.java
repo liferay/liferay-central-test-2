@@ -477,6 +477,12 @@ public class DLFileEntryLocalServiceUtil {
 		return getService().getFileEntries(groupId, folderId, start, end, obc);
 	}
 
+	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> getFileEntriesByMimeType(
+		java.lang.String mimeType)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getFileEntriesByMimeType(mimeType);
+	}
+
 	public static int getFileEntriesCount()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getFileEntriesCount();
@@ -549,6 +555,11 @@ public class DLFileEntryLocalServiceUtil {
 	public static int getGroupFileEntriesCount(long groupId, long userId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getGroupFileEntriesCount(groupId, userId);
+	}
+
+	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> getMisversionedFileEntries()
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getMisversionedFileEntries();
 	}
 
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> getNoAssetFileEntries()

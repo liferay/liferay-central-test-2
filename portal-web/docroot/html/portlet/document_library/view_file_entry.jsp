@@ -87,8 +87,6 @@ boolean hasImages = ImageProcessorUtil.hasImages(fileVersion);
 boolean hasPDFImages = PDFProcessorUtil.hasImages(fileVersion);
 boolean hasVideo = VideoProcessorUtil.hasVideo(fileVersion);
 
-User userDisplay = UserLocalServiceUtil.getUserById(fileEntry.getUserId());
-
 AssetEntry layoutAssetEntry = AssetEntryLocalServiceUtil.fetchEntry(DLFileEntryConstants.getClassName(), assetClassPK);
 
 request.setAttribute(WebKeys.LAYOUT_ASSET_ENTRY, layoutAssetEntry);
@@ -197,7 +195,18 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 					</span>
 
 					<span class="user-date">
-						<liferay-ui:icon image="../document_library/add_document" label="<%= true %>" message='<%= LanguageUtil.format(pageContext, "uploaded-by-x-x", new Object[] {userDisplay.getDisplayURL(themeDisplay), HtmlUtil.escape(fileEntry.getUserName()), dateFormatDateTime.format(fileEntry.getCreateDate())}) %>' />
+
+							<%
+							String displayURL = StringPool.BLANK;
+
+							User userDisplay = UserLocalServiceUtil.fetchUser(fileEntry.getUserId());
+
+							if (userDisplay != null) {
+								displayURL = userDisplay.getDisplayURL(themeDisplay);
+							}
+							%>
+
+						<liferay-ui:icon image="../document_library/add_document" label="<%= true %>" message='<%= LanguageUtil.format(pageContext, "uploaded-by-x-x", new Object[] {displayURL, HtmlUtil.escape(fileEntry.getUserName()), dateFormatDateTime.format(fileEntry.getCreateDate())}) %>' />
 					</span>
 
 					<c:if test="<%= fileEntry.isSupportsSocial() %>">
@@ -397,7 +406,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 				</c:if>
 
 				<c:if test="<%= PropsValues.DL_FILE_ENTRY_COMMENTS_ENABLED %>">
-					<liferay-ui:panel cssClass="lfr-document-library-comments" collapsible="<%= true %>" extended="<%= true %>" persistState="<%= true %>" title="comments">
+					<liferay-ui:panel collapsible="<%= true %>" cssClass="lfr-document-library-comments" extended="<%= true %>" persistState="<%= true %>" title="comments">
 						<portlet:actionURL var="discussionURL">
 							<portlet:param name="struts_action" value="/document_library/edit_file_entry_discussion" />
 						</portlet:actionURL>
@@ -702,7 +711,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 							}
 							%>
 
-							<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" paginate="<%= false %>" />
+							<liferay-ui:search-iterator paginate="<%= false %>" searchContainer="<%= searchContainer %>" />
 						</liferay-ui:panel>
 					</liferay-ui:panel-container>
 				</div>

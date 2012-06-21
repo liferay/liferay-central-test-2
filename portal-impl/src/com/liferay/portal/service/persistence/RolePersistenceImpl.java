@@ -4003,13 +4003,14 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 *
 	 * @param companyId the company ID
 	 * @param name the name
+	 * @return the role that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
-	public void removeByC_N(long companyId, String name)
+	public Role removeByC_N(long companyId, String name)
 		throws NoSuchRoleException, SystemException {
 		Role role = findByC_N(companyId, name);
 
-		remove(role);
+		return remove(role);
 	}
 
 	/**
@@ -4031,13 +4032,14 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * @param companyId the company ID
 	 * @param classNameId the class name ID
 	 * @param classPK the class p k
+	 * @return the role that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
-	public void removeByC_C_C(long companyId, long classNameId, long classPK)
+	public Role removeByC_C_C(long companyId, long classNameId, long classPK)
 		throws NoSuchRoleException, SystemException {
 		Role role = findByC_C_C(companyId, classNameId, classPK);
 
-		remove(role);
+		return remove(role);
 	}
 
 	/**

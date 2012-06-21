@@ -70,18 +70,11 @@ long structureGroupId = groupId;
 
 if (Validator.isNotNull(structureId)) {
 	try {
-		structure = JournalStructureLocalServiceUtil.getStructure(groupId, structureId);
-	}
-	catch (NoSuchStructureException nsse1) {
-		if (groupId != themeDisplay.getCompanyGroupId()) {
-			try {
-				structure = JournalStructureLocalServiceUtil.getStructure(themeDisplay.getCompanyGroupId(), structureId);
+		structure = JournalStructureLocalServiceUtil.getStructure(groupId, structureId, true);
 
-				structureGroupId = structure.getGroupId();
-			}
-			catch (NoSuchStructureException nsse2) {
-			}
-		}
+		structureGroupId = structure.getGroupId();
+	}
+	catch (NoSuchStructureException nsse) {
 	}
 }
 
@@ -270,7 +263,7 @@ request.setAttribute("edit_article.jsp-toLanguageId", toLanguageId);
 							String[] translations = article.getAvailableLocales();
 							%>
 
-							<aui:button name="removeArticleLocaleButton" onClick='<%= renderResponse.getNamespace() + "removeArticleLocale();" %>' value="remove-translation" disabled="<%= languageId.equals(defaultLanguageId) || !ArrayUtil.contains(translations, languageId) %>" />
+							<aui:button disabled="<%= languageId.equals(defaultLanguageId) || !ArrayUtil.contains(translations, languageId) %>" name="removeArticleLocaleButton" onClick='<%= renderResponse.getNamespace() + "removeArticleLocale();" %>' value="remove-translation" />
 						</c:otherwise>
 					</c:choose>
 					<aui:button href="<%= redirect %>" type="cancel" />
@@ -353,7 +346,7 @@ request.setAttribute("edit_article.jsp-toLanguageId", toLanguageId);
 	}
 
 	function <portlet:namespace />selectStructure(structureId, structureName, dialog) {
-		if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "selecting-a-new-structure-will-change-the-available-input-fields-and-available-templates") %>') && document.<portlet:namespace />fm1.<portlet:namespace />structureId.value != structureId) {
+		if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "selecting-a-new-structure-will-change-the-available-input-fields-and-available-templates") %>') && (document.<portlet:namespace />fm1.<portlet:namespace />structureId.value != structureId)) {
 			document.<portlet:namespace />fm1.<portlet:namespace />structureId.value = structureId;
 			document.<portlet:namespace />fm1.<portlet:namespace />templateId.value = "";
 

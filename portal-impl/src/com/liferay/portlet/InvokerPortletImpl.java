@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.PortletApp;
+import com.liferay.portal.model.PortletConstants;
 import com.liferay.portal.security.pacl.PACLClassLoaderUtil;
 import com.liferay.portal.tools.deploy.PortletDeployer;
 import com.liferay.portal.util.WebKeys;
@@ -179,31 +180,33 @@ public class InvokerPortletImpl implements InvokerPortlet {
 	}
 
 	public void destroy() {
-		if (_destroyable) {
-			ClassLoader contextClassLoader =
-				PACLClassLoaderUtil.getContextClassLoader();
-
-			ClassLoader portletClassLoader = getPortletClassLoader();
-
-			try {
-				if (portletClassLoader != null) {
-					PACLClassLoaderUtil.setContextClassLoader(
-						portletClassLoader);
-				}
-
-				removePortletFilters();
-
-				_portlet.destroy();
+		if (PortletConstants.hasInstanceId(_portletModel.getPortletId())) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("Destroying an instanced portlet is not allowed");
 			}
-			finally {
-				if (portletClassLoader != null) {
-					PACLClassLoaderUtil.setContextClassLoader(
-						contextClassLoader);
-				}
-			}
+
+			return;
 		}
 
-		_destroyable = false;
+		ClassLoader contextClassLoader =
+			PACLClassLoaderUtil.getContextClassLoader();
+
+		ClassLoader portletClassLoader = getPortletClassLoader();
+
+		try {
+			if (portletClassLoader != null) {
+				PACLClassLoaderUtil.setContextClassLoader(portletClassLoader);
+			}
+
+			removePortletFilters();
+
+			_portlet.destroy();
+		}
+		finally {
+			if (portletClassLoader != null) {
+				PACLClassLoaderUtil.setContextClassLoader(contextClassLoader);
+			}
+		}
 	}
 
 	public Integer getExpCache() {
@@ -257,16 +260,10 @@ public class InvokerPortletImpl implements InvokerPortlet {
 				PACLClassLoaderUtil.setContextClassLoader(contextClassLoader);
 			}
 		}
-
-		_destroyable = true;
 	}
 
 	public boolean isCheckAuthToken() {
 		return _checkAuthToken;
-	}
-
-	public boolean isDestroyable() {
-		return _destroyable;
 	}
 
 	public boolean isFacesPortlet() {
@@ -668,7 +665,6 @@ public class InvokerPortletImpl implements InvokerPortlet {
 
 	private List<ActionFilter> _actionFilters = new ArrayList<ActionFilter>();
 	private boolean _checkAuthToken;
-	private boolean _destroyable;
 	private List<EventFilter> _eventFilters = new ArrayList<EventFilter>();
 	private Integer _expCache;
 	private boolean _facesPortlet;

@@ -902,7 +902,7 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 		String messageListenerClassName = message.getString(
 			MESSAGE_LISTENER_CLASS_NAME);
 
-		if (messageListenerClassName == null) {
+		if (Validator.isNull(messageListenerClassName)) {
 			return;
 		}
 
@@ -977,7 +977,7 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 				scheduler.scheduleJob(jobDetail, trigger);
 			}
 		}
-		catch (ObjectAlreadyExistsException oare) {
+		catch (ObjectAlreadyExistsException oaee) {
 			if (_log.isInfoEnabled()) {
 				_log.info("Message is already scheduled");
 			}

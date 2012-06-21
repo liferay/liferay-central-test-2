@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Tuple;
+import com.liferay.portal.kernel.util.UniqueList;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Address;
 import com.liferay.portal.model.EmailAddress;
@@ -49,6 +50,7 @@ import com.liferay.portal.service.AddressLocalServiceUtil;
 import com.liferay.portal.service.AddressServiceUtil;
 import com.liferay.portal.service.EmailAddressLocalServiceUtil;
 import com.liferay.portal.service.EmailAddressServiceUtil;
+import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.OrgLaborLocalServiceUtil;
 import com.liferay.portal.service.OrgLaborServiceUtil;
 import com.liferay.portal.service.OrganizationLocalServiceUtil;
@@ -81,7 +83,6 @@ import com.liferay.portal.util.comparator.UserGroupNameComparator;
 import com.liferay.portal.util.comparator.UserJobTitleComparator;
 import com.liferay.portal.util.comparator.UserLastNameComparator;
 import com.liferay.portal.util.comparator.UserScreenNameComparator;
-import com.liferay.util.UniqueList;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -162,6 +163,19 @@ public class UsersAdminImpl implements UsersAdmin {
 			PermissionChecker permissionChecker, long groupId, List<Role> roles)
 		throws PortalException, SystemException {
 
+		Group group = GroupLocalServiceUtil.getGroup(groupId);
+
+		if (!permissionChecker.isCompanyAdmin() &&
+			!permissionChecker.isGroupOwner(groupId) &&
+			!GroupPermissionUtil.contains(
+				permissionChecker, groupId, ActionKeys.ASSIGN_USER_ROLES) &&
+			!OrganizationPermissionUtil.contains(
+				permissionChecker, group.getOrganizationId(),
+				ActionKeys.ASSIGN_USER_ROLES)) {
+
+			return Collections.emptyList();
+		}
+
 		List<Role> filteredGroupRoles = ListUtil.copy(roles);
 
 		Iterator<Role> itr = filteredGroupRoles.iterator();
@@ -195,9 +209,7 @@ public class UsersAdminImpl implements UsersAdmin {
 					RoleConstants.ORGANIZATION_ADMINISTRATOR) ||
 				groupRoleName.equals(RoleConstants.ORGANIZATION_OWNER) ||
 				groupRoleName.equals(RoleConstants.SITE_ADMINISTRATOR) ||
-				groupRoleName.equals(RoleConstants.SITE_OWNER) ||
-				!GroupPermissionUtil.contains(
-					permissionChecker, groupId, ActionKeys.ASSIGN_USER_ROLES)) {
+				groupRoleName.equals(RoleConstants.SITE_OWNER)) {
 
 				itr.remove();
 			}
@@ -371,10 +383,22 @@ public class UsersAdminImpl implements UsersAdmin {
 	}
 
 	public List<Address> getAddresses(ActionRequest actionRequest) {
+		return getAddresses(actionRequest, Collections.<Address>emptyList());
+	}
+
+	public List<Address> getAddresses(
+		ActionRequest actionRequest, List<Address> defaultAddresses) {
+
+		String addressesIndexesString = actionRequest.getParameter(
+			"addressesIndexes");
+
+		if (addressesIndexesString == null) {
+			return defaultAddresses;
+		}
+
 		List<Address> addresses = new ArrayList<Address>();
 
-		int[] addressesIndexes = StringUtil.split(
-			ParamUtil.getString(actionRequest, "addressesIndexes"), 0);
+		int[] addressesIndexes = StringUtil.split(addressesIndexesString, 0);
 
 		int addressPrimary = ParamUtil.getInteger(
 			actionRequest, "addressPrimary");
@@ -436,10 +460,24 @@ public class UsersAdminImpl implements UsersAdmin {
 	}
 
 	public List<EmailAddress> getEmailAddresses(ActionRequest actionRequest) {
+		return getEmailAddresses(
+			actionRequest, Collections.<EmailAddress>emptyList());
+	}
+
+	public List<EmailAddress> getEmailAddresses(
+		ActionRequest actionRequest, List<EmailAddress> defaultEmailAddresses) {
+
+		String emailAddressesIndexesString = actionRequest.getParameter(
+			"emailAddressesIndexes");
+
+		if (emailAddressesIndexesString == null) {
+			return defaultEmailAddresses;
+		}
+
 		List<EmailAddress> emailAddresses = new ArrayList<EmailAddress>();
 
 		int[] emailAddressesIndexes = StringUtil.split(
-			ParamUtil.getString(actionRequest, "emailAddressesIndexes"), 0);
+			emailAddressesIndexesString, 0);
 
 		int emailAddressPrimary = ParamUtil.getInteger(
 			actionRequest, "emailAddressPrimary");
@@ -648,10 +686,22 @@ public class UsersAdminImpl implements UsersAdmin {
 	}
 
 	public List<Phone> getPhones(ActionRequest actionRequest) {
+		return getPhones(actionRequest, Collections.<Phone>emptyList());
+	}
+
+	public List<Phone> getPhones(
+		ActionRequest actionRequest, List<Phone> defaultPhones) {
+
+		String phonesIndexesString = actionRequest.getParameter(
+			"phonesIndexes");
+
+		if (phonesIndexesString == null) {
+			return defaultPhones;
+		}
+
 		List<Phone> phones = new ArrayList<Phone>();
 
-		int[] phonesIndexes = StringUtil.split(
-			ParamUtil.getString(actionRequest, "phonesIndexes"), 0);
+		int[] phonesIndexes = StringUtil.split(phonesIndexesString, 0);
 
 		int phonePrimary = ParamUtil.getInteger(actionRequest, "phonePrimary");
 
@@ -844,10 +894,22 @@ public class UsersAdminImpl implements UsersAdmin {
 	}
 
 	public List<Website> getWebsites(ActionRequest actionRequest) {
+		return getWebsites(actionRequest, Collections.<Website>emptyList());
+	}
+
+	public List<Website> getWebsites(
+		ActionRequest actionRequest, List<Website> defaultWebsites) {
+
+		String websitesIndexesString = actionRequest.getParameter(
+			"websitesIndexes");
+
+		if (websitesIndexesString == null) {
+			return defaultWebsites;
+		}
+
 		List<Website> websites = new ArrayList<Website>();
 
-		int[] websitesIndexes = StringUtil.split(
-			ParamUtil.getString(actionRequest, "websitesIndexes"), 0);
+		int[] websitesIndexes = StringUtil.split(websitesIndexesString, 0);
 
 		int websitePrimary = ParamUtil.getInteger(
 			actionRequest, "websitePrimary");

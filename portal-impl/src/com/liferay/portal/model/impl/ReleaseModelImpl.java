@@ -64,9 +64,10 @@ public class ReleaseModelImpl extends BaseModelImpl<Release>
 			{ "buildNumber", Types.INTEGER },
 			{ "buildDate", Types.TIMESTAMP },
 			{ "verified", Types.BOOLEAN },
+			{ "state_", Types.INTEGER },
 			{ "testString", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table Release_ (releaseId LONG not null primary key,createDate DATE null,modifiedDate DATE null,servletContextName VARCHAR(75) null,buildNumber INTEGER,buildDate DATE null,verified BOOLEAN,testString VARCHAR(1024) null)";
+	public static final String TABLE_SQL_CREATE = "create table Release_ (releaseId LONG not null primary key,createDate DATE null,modifiedDate DATE null,servletContextName VARCHAR(75) null,buildNumber INTEGER,buildDate DATE null,verified BOOLEAN,state_ INTEGER,testString VARCHAR(1024) null)";
 	public static final String TABLE_SQL_DROP = "drop table Release_";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -122,6 +123,7 @@ public class ReleaseModelImpl extends BaseModelImpl<Release>
 		attributes.put("buildNumber", getBuildNumber());
 		attributes.put("buildDate", getBuildDate());
 		attributes.put("verified", getVerified());
+		attributes.put("state", getState());
 		attributes.put("testString", getTestString());
 
 		return attributes;
@@ -169,6 +171,12 @@ public class ReleaseModelImpl extends BaseModelImpl<Release>
 
 		if (verified != null) {
 			setVerified(verified);
+		}
+
+		Integer state = (Integer)attributes.get("state");
+
+		if (state != null) {
+			setState(state);
 		}
 
 		String testString = (String)attributes.get("testString");
@@ -253,6 +261,14 @@ public class ReleaseModelImpl extends BaseModelImpl<Release>
 		_verified = verified;
 	}
 
+	public int getState() {
+		return _state;
+	}
+
+	public void setState(int state) {
+		_state = state;
+	}
+
 	public String getTestString() {
 		if (_testString == null) {
 			return StringPool.BLANK;
@@ -305,6 +321,7 @@ public class ReleaseModelImpl extends BaseModelImpl<Release>
 		releaseImpl.setBuildNumber(getBuildNumber());
 		releaseImpl.setBuildDate(getBuildDate());
 		releaseImpl.setVerified(getVerified());
+		releaseImpl.setState(getState());
 		releaseImpl.setTestString(getTestString());
 
 		releaseImpl.resetOriginalValues();
@@ -410,6 +427,8 @@ public class ReleaseModelImpl extends BaseModelImpl<Release>
 
 		releaseCacheModel.verified = getVerified();
 
+		releaseCacheModel.state = getState();
+
 		releaseCacheModel.testString = getTestString();
 
 		String testString = releaseCacheModel.testString;
@@ -423,7 +442,7 @@ public class ReleaseModelImpl extends BaseModelImpl<Release>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(17);
+		StringBundler sb = new StringBundler(19);
 
 		sb.append("{releaseId=");
 		sb.append(getReleaseId());
@@ -439,6 +458,8 @@ public class ReleaseModelImpl extends BaseModelImpl<Release>
 		sb.append(getBuildDate());
 		sb.append(", verified=");
 		sb.append(getVerified());
+		sb.append(", state=");
+		sb.append(getState());
 		sb.append(", testString=");
 		sb.append(getTestString());
 		sb.append("}");
@@ -447,7 +468,7 @@ public class ReleaseModelImpl extends BaseModelImpl<Release>
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(28);
+		StringBundler sb = new StringBundler(31);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portal.model.Release");
@@ -482,6 +503,10 @@ public class ReleaseModelImpl extends BaseModelImpl<Release>
 		sb.append(getVerified());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>state</column-name><column-value><![CDATA[");
+		sb.append(getState());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>testString</column-name><column-value><![CDATA[");
 		sb.append(getTestString());
 		sb.append("]]></column-value></column>");
@@ -503,6 +528,7 @@ public class ReleaseModelImpl extends BaseModelImpl<Release>
 	private int _buildNumber;
 	private Date _buildDate;
 	private boolean _verified;
+	private int _state;
 	private String _testString;
 	private long _columnBitmask;
 	private Release _escapedModelProxy;

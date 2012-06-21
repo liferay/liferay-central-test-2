@@ -70,7 +70,7 @@ public class PortalManagerUtil {
 		clusterGroup.setClusterNodeIds(clusterNode.getClusterNodeId());
 
 		manage(clusterGroup, manageAction);
- 	}
+	}
 
 	public static <T> T manageSync(
 			ClusterNode clusterNode, ManageAction<T> manageAction)
