@@ -113,24 +113,19 @@ public class DDMImpl implements DDM {
 				fieldNamespace + fieldName);
 
 			if (fieldDataType.equals(FieldConstants.DATE)) {
-				int fieldValueMonth =  
-					GetterUtil.getInteger(
-						serviceContext.getAttribute(
-							fieldNamespace + fieldName + "Month"));
-
-				int fieldValueYear =
-					GetterUtil.getInteger(
-						serviceContext.getAttribute(
-							fieldNamespace + fieldName + "Year"));
-
-				int fieldValueDay =
-					GetterUtil.getInteger(
-						serviceContext.getAttribute(
-							fieldNamespace + fieldName + "Day"));
+				int fieldValueMonth = GetterUtil.getInteger(
+					serviceContext.getAttribute(
+						fieldNamespace + fieldName + "Month"));
+				int fieldValueYear = GetterUtil.getInteger(
+					serviceContext.getAttribute(
+						fieldNamespace + fieldName + "Year"));
+				int fieldValueDay = GetterUtil.getInteger(
+					serviceContext.getAttribute(
+						fieldNamespace + fieldName + "Day"));
 
 				Date fieldValueDate = PortalUtil.getDate(
 					fieldValueMonth, fieldValueDay, fieldValueYear);
-				
+
 				fieldValue = String.valueOf(fieldValueDate.getTime());
 			}
 
