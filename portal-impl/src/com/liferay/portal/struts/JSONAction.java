@@ -221,7 +221,8 @@ public abstract class JSONAction extends Action {
 			return false;
 		}
 
-		requestDispatcher.forward(new SharedSessionServletRequest(request, true), response);
+		requestDispatcher.forward(
+			new SharedSessionServletRequest(request, true), response);
 
 		return true;
 	}
