@@ -34,7 +34,7 @@ public class FooService {
 		return fooData;
 	}
 
-	public static List<FooData> getFooDataList() {
+	public static List<FooData> getFooDatas() {
 		List<FooData> fooDataList = new ArrayList<FooData>();
 
 		fooDataList.add(getFooData(1));

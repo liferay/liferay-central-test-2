@@ -145,7 +145,7 @@ public class JSONWebServiceInvokerTest extends BaseJSONWebServiceTestCase {
 
 		Map<String, Object> params = new LinkedHashMap<String, Object>();
 
-		map.put("$world[id] = /foo/get-foo-data-list", params);
+		map.put("$world[id] = /foo/get-foo-datas", params);
 
 		String json = toJSON(map);
 
